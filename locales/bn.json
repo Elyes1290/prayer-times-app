@@ -42,7 +42,13 @@
   "adhan_sounds": {
     "adhamalsharqawe": "আযান আল শরকাওয়ি",
     "adhanaljazaer": "আযান আলজেরিয়ান",
-    "ahmedelkourdi": "আহমেদ এল কৌর্দি"
+    "ahmedelkourdi": "আহমেদ এল কৌর্দি",
+    "misharyrachid": "মিশারি রাশিদ",
+    "ahmadnafees": "আহমাদ নাফিস",
+    "dubai": "দুবাই আজান",
+    "karljenkins": "কার্ল জেনকিন্স",
+    "mansourzahrani": "মানসুর জাহরানি",
+    "mustafaozcan": "মুস্তাফা ওজকান"
   },
   "hijri_calendar": "হিজরি ক্যালেন্ডার",
   "gregorian_date": "গ্রেগরিয়ান তারিখ",
@@ -92,5 +98,6 @@
   "qibla": "কিবলা",
   "quran": "কুরআন",
   "hadiths": "হাদিস",
-  "about": "সম্পর্কে"
+  "about": "সম্পর্কে",
+  "waiting_for_location": "অবস্থান জন্য অপেক্ষা করা হচ্ছে..."
 }

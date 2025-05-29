@@ -31,7 +31,7 @@ extensions.configure(com.facebook.react.ReactSettingsExtension) { ex ->
 }
 expoAutolinking.useExpoModules()
 
-rootProject.name = 'prayer-times-app'
+rootProject.name = 'MyAdhan Muslim Prayer App'
 
 expoAutolinking.useExpoVersionCatalog()
 

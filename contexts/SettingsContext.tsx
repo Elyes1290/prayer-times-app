@@ -4,7 +4,13 @@ import React, { createContext, useEffect, useState } from "react";
 export type AdhanSoundKey =
   | "adhamalsharqawe"
   | "adhanaljazaer"
-  | "ahmedelkourdi";
+  | "ahmadnafees"
+  | "ahmedelkourdi"
+  | "dubai"
+  | "karljenkins"
+  | "mansourzahrani"
+  | "misharyrachid"
+  | "mustafaozcan";
 
 export type CalcMethodKey =
   | "MuslimWorldLeague"

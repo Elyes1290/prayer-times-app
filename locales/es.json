@@ -40,9 +40,15 @@
   },
   "adhan_sound": "Elección de Adhan",
   "adhan_sounds": {
-    "adhamalsharqawe": "Adhan Al Sharqawe",
-    "adhanaljazaer": "Adhan argelino",
-    "ahmedelkourdi": "Ahmed El Kourdi"
+    "adhamalsharqawe": "Adhan Sharqaoui",
+    "adhanaljazaer": "Adhan Argelino",
+    "ahmadnafees": "Ahmad Nafees",
+    "ahmedelkourdi": "Ahmed El Kourdi",
+    "dubai": "Adhan de Dubái",
+    "karljenkins": "Karl Jenkins",
+    "mansourzahrani": "Mansour Zahrani",
+    "misharyrachid": "Mishary Rashid",
+    "mustafaozcan": "Mustafa Ozcan"
   },
   "hijri_calendar": "Calendario Hijri",
   "gregorian_date": "Fecha Gregoriana",
@@ -90,5 +96,6 @@
   "qibla": "Qibla",
   "quran": "Corán",
   "hadiths": "Hadices",
-  "about": "Acerca de"
+  "about": "Acerca de",
+  "waiting_for_location": "Esperando la localización..."
 }

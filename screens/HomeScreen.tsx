@@ -24,6 +24,7 @@ import { SettingsContext } from "../contexts/SettingsContext";
 import { useLocation } from "../hooks/useLocation";
 import { usePrayerTimes } from "../hooks/usePrayerTimes";
 import { useTranslation } from "react-i18next";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 // --- Types ---
 type PrayerTimes = { [key: string]: Date };
@@ -141,6 +142,15 @@ export default function HomeScreen() {
     }
     return city + ", " + country;
   }
+  const [selectedLang, setSelectedLang] = useState(i18n.language);
+  useEffect(() => {
+    AsyncStorage.getItem("appLanguage").then((savedLang) => {
+      if (savedLang && savedLang !== i18n.language) {
+        i18n.changeLanguage(savedLang);
+        setSelectedLang(savedLang);
+      }
+    });
+  }, []);
 
   // ==== Ville (affichage) ====
   useEffect(() => {
@@ -255,6 +265,9 @@ export default function HomeScreen() {
     return () => clearTimeout(timer);
   }, [currentDate]);
 
+  const isLocationLoading =
+    locationMode === "auto" && (!location || !location.coords);
+
   // ==== Blocage UX si pas de localisation ====
   const missingLocation =
     (locationMode === "manual" &&
@@ -262,6 +275,23 @@ export default function HomeScreen() {
     (locationMode === "auto" && (!location || !location.coords));
 
   if (missingLocation) {
+    // Cas où le mode auto est sélectionné mais que la localisation n'est pas prête
+    if (isLocationLoading) {
+      return (
+        <ImageBackground source={bgImage} style={styles.background}>
+          <View
+            style={[styles.container, { justifyContent: "center", flex: 1 }]}
+          >
+            <ActivityIndicator size="large" color={Colors.primary} />
+            <Text style={{ textAlign: "center", marginTop: 20 }}>
+              {t("waiting_for_location")}
+            </Text>
+          </View>
+        </ImageBackground>
+      );
+    }
+
+    // Cas normal : pas de config, affiche les boutons
     return (
       <ImageBackground source={bgImage} style={styles.background}>
         <View style={[styles.container, { justifyContent: "center", flex: 1 }]}>
@@ -330,20 +360,27 @@ export default function HomeScreen() {
             color: Colors.text,
           };
           return (
-            <View key={label} style={styles.card}>
-              <MaterialCommunityIcons
-                name={icon.name as any}
-                size={24}
-                color={icon.color}
-              />
-              <Text style={styles.cardLabel}>{label}</Text>
-              <Text style={styles.cardTime}>
-                {time.toLocaleTimeString([], {
-                  hour: "2-digit",
-                  minute: "2-digit",
-                })}
-              </Text>
-            </View>
+            <ImageBackground
+              key={label}
+              source={require("../assets/images/parchment_bg.jpg")}
+              style={styles.cardBG}
+              imageStyle={{ borderRadius: 18, resizeMode: "cover" }}
+            >
+              <View style={styles.cardContent}>
+                <MaterialCommunityIcons
+                  name={icon.name as any}
+                  size={24}
+                  color={icon.color}
+                />
+                <Text style={styles.cardLabel}>{label}</Text>
+                <Text style={styles.cardTime}>
+                  {time.toLocaleTimeString([], {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })}
+                </Text>
+              </View>
+            </ImageBackground>
           );
         })}
       </ScrollView>
@@ -412,5 +449,26 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 16,
     fontWeight: "bold",
+  },
+  cardBG: {
+    borderRadius: 18,
+    overflow: "hidden",
+    marginVertical: 8,
+    // largeur pour un beau rendu (tu peux adapter)
+    minHeight: 64,
+    justifyContent: "center",
+    // Si tu veux une ombre :
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.08,
+    shadowRadius: 4,
+    elevation: 2,
+  },
+  cardContent: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingVertical: 14,
+    paddingHorizontal: 20,
   },
 });

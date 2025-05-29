@@ -1,4 +1,4 @@
-import React, { useContext, useState, useRef } from "react";
+import React, { useContext, useState, useRef, useEffect } from "react";
 import { Picker } from "@react-native-picker/picker";
 import Slider from "@react-native-community/slider";
 import { Audio } from "expo-av";
@@ -14,6 +14,9 @@ import {
   TouchableOpacity,
   ActivityIndicator,
   StyleSheet,
+  AppState,
+  AppStateStatus,
+  Platform,
 } from "react-native";
 import { Colors } from "../constants/Colors";
 import bgImage from "../assets/images/prayer-bg.png";
@@ -24,6 +27,8 @@ import {
 } from "../contexts/SettingsContext";
 import { useCitySearch } from "../hooks/useCitySearch";
 import { useTranslation } from "react-i18next";
+import * as Notifications from "expo-notifications";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function SettingsScreen() {
   const { t, i18n } = useTranslation();
@@ -43,12 +48,19 @@ export default function SettingsScreen() {
     manualLocation,
     setManualLocation,
   } = useContext(SettingsContext);
-
-  // Sons & méthodes
+  const [notifPermissionGranted, setNotifPermissionGranted] = useState<
+    boolean | null
+  >(null);
   const sounds: AdhanSoundKey[] = [
     "adhamalsharqawe",
     "adhanaljazaer",
+    "ahmadnafees",
     "ahmedelkourdi",
+    "dubai",
+    "karljenkins",
+    "mansourzahrani",
+    "misharyrachid",
+    "mustafaozcan",
   ];
   const methods: CalcMethodKey[] = [
     "MuslimWorldLeague",
@@ -61,8 +73,6 @@ export default function SettingsScreen() {
     "Singapore",
     "Tehran",
   ];
-
-  // Langues disponibles
   const languages = [
     { code: "fr", label: "Français" },
     { code: "en", label: "English" },
@@ -77,23 +87,25 @@ export default function SettingsScreen() {
     { code: "ur", label: "اردو" },
     { code: "bn", label: "বাংলা" },
     { code: "fa", label: "فارسی" },
-    /*     { code: "id", label: "Bahasa Indonesia" },
-     */
   ];
-
   const [selectedLang, setSelectedLang] = useState(i18n.language);
   function onChangeLanguage(langCode: string) {
     i18n.changeLanguage(langCode);
     setSelectedLang(langCode);
+    AsyncStorage.setItem("appLanguage", langCode); // <--- Sauvegarde ici
   }
-
-  // Son Adhan - preview
   const [previewSound, setPreviewSound] = useState<Audio.Sound | null>(null);
   const [isPreviewing, setIsPreviewing] = useState(false);
   const soundMap: Record<AdhanSoundKey, number> = {
     adhamalsharqawe: require("../assets/sounds/adhamalsharqawe.wav"),
     adhanaljazaer: require("../assets/sounds/adhanaljazaer.wav"),
+    ahmadnafees: require("../assets/sounds/ahmadnafees.mp3"),
     ahmedelkourdi: require("../assets/sounds/ahmedelkourdi.wav"),
+    dubai: require("../assets/sounds/dubai.mp3"),
+    karljenkins: require("../assets/sounds/karljenkins.mp3"),
+    mansourzahrani: require("../assets/sounds/mansourzahrani.mp3"),
+    misharyrachid: require("../assets/sounds/misharyrachid.mp3"),
+    mustafaozcan: require("../assets/sounds/mustafaozcan.mp3"),
   };
   const playPreview = async () => {
     if (isPreviewing) return;
@@ -127,14 +139,10 @@ export default function SettingsScreen() {
       setPreviewSound(null);
     }
   };
-
-  // Ville autocomplete (pas de synchronisation automatique !)
   const [cityInput, setCityInput] = useState(manualLocation?.city || "");
   const [cityError, setCityError] = useState<string | null>(null);
   const { results, loading, searchCity, setResults } = useCitySearch();
   const lastManualSelection = useRef(false);
-
-  // Picker change = reset l'input & localisation si on repasse en auto
   function handleLocationModeChange(v: "auto" | "manual") {
     setLocationMode(v);
     if (v === "auto") {
@@ -143,7 +151,37 @@ export default function SettingsScreen() {
       setCityError(null);
     }
   }
-
+  async function checkNotifPermission() {
+    if (Platform.OS === "android" && Platform.Version >= 33) {
+      const { status } = await Notifications.getPermissionsAsync();
+      setNotifPermissionGranted(status === "granted");
+    } else if (Platform.OS === "ios") {
+      const { status } = await Notifications.getPermissionsAsync();
+      setNotifPermissionGranted(status === "granted");
+    } else {
+      setNotifPermissionGranted(true);
+    }
+  }
+  useEffect(() => {
+    function onAppStateChange(nextAppState: AppStateStatus) {
+      if (nextAppState === "active") {
+        checkNotifPermission();
+      }
+    }
+    const subscription = AppState.addEventListener("change", onAppStateChange);
+    return () => {
+      subscription.remove();
+    };
+  }, []);
+  useEffect(() => {
+    checkNotifPermission();
+  }, []);
+  useEffect(() => {
+    if (notifPermissionGranted === false && notificationsEnabled) {
+      setNotificationsEnabled(false);
+    }
+    // eslint-disable-next-line
+  }, [notifPermissionGranted]);
   return (
     <ImageBackground
       source={bgImage}
@@ -160,7 +198,6 @@ export default function SettingsScreen() {
               <Text style={[styles.header, { color: Colors.text }]}>
                 {t("settings")}
               </Text>
-              {/* Picker de localisation */}
               <View style={styles.row}>
                 <Text style={styles.label}>{t("location")}</Text>
                 <Picker
@@ -172,7 +209,6 @@ export default function SettingsScreen() {
                   <Picker.Item label={t("manual_city")} value="manual" />
                 </Picker>
               </View>
-              {/* Saisie ville + suggestions */}
               <TextInput
                 placeholder={t("city_placeholder")}
                 value={cityInput}
@@ -204,7 +240,6 @@ export default function SettingsScreen() {
                   item.address.county ||
                   item.display_name;
                 const rawCountry = item.address.country || "";
-
                 function sanitizeCountry(country: string) {
                   const parts = country.split("/");
                   const suisse = parts.find((p) =>
@@ -212,7 +247,6 @@ export default function SettingsScreen() {
                   );
                   return suisse ? suisse.trim() : parts[0].trim();
                 }
-
                 function removeTrailingCountry(city: string, country: string) {
                   const cityNorm = city.trim().toLowerCase();
                   const countryNorm = country.trim().toLowerCase();
@@ -232,13 +266,10 @@ export default function SettingsScreen() {
                   }
                   return city;
                 }
-
                 const country = sanitizeCountry(rawCountry);
                 const city = removeTrailingCountry(rawCity, country);
-
                 const displayCity =
                   city && country ? `${city}, ${country}` : city || country;
-
                 lastManualSelection.current = true;
                 setCityInput(displayCity);
                 setManualLocation({
@@ -273,6 +304,7 @@ export default function SettingsScreen() {
               selectedLang={selectedLang}
               onChangeLanguage={onChangeLanguage}
               languages={languages}
+              notifPermissionGranted={notifPermissionGranted}
             />
           }
           style={{ flex: 1, backgroundColor: "transparent" }}
@@ -286,7 +318,6 @@ export default function SettingsScreen() {
           <Text style={[styles.header, { color: Colors.text }]}>
             {t("settings")}
           </Text>
-          {/* Picker de localisation */}
           <View style={styles.row}>
             <Text style={styles.label}>{t("location")}</Text>
             <Picker
@@ -317,6 +348,7 @@ export default function SettingsScreen() {
             selectedLang={selectedLang}
             onChangeLanguage={onChangeLanguage}
             languages={languages}
+            notifPermissionGranted={notifPermissionGranted}
           />
         </ScrollView>
       )}
@@ -340,10 +372,10 @@ type FooterProps = {
   isPreviewing: boolean;
   playPreview: () => void;
   stopPreview: () => void;
-
   selectedLang: string;
   onChangeLanguage: (langCode: string) => void;
   languages: { code: string; label: string }[];
+  notifPermissionGranted: boolean | null;
 };
 
 function FooterSettings({
@@ -362,18 +394,27 @@ function FooterSettings({
   isPreviewing,
   playPreview,
   stopPreview,
-
   selectedLang,
   onChangeLanguage,
   languages,
+  notifPermissionGranted,
 }: FooterProps) {
   const { t } = useTranslation();
-
   return (
     <>
-      {/* Notifications */}
-      <View style={styles.row}>
-        <Text style={[styles.label, { color: Colors.text }]}>
+      <View
+        style={[
+          styles.row,
+          notifPermissionGranted === false && { opacity: 0.5 },
+        ]}
+      >
+        <Text
+          style={[
+            styles.label,
+            { color: Colors.text },
+            notifPermissionGranted === false && { color: "#aaa" },
+          ]}
+        >
           {t("notifications")}
         </Text>
         <Switch
@@ -381,9 +422,14 @@ function FooterSettings({
           thumbColor={notificationsEnabled ? Colors.accent : "#f4f3f4"}
           onValueChange={setNotificationsEnabled}
           value={notificationsEnabled}
+          disabled={notifPermissionGranted === false}
         />
       </View>
-      {/* Sélection de la langue */}
+      {notifPermissionGranted === false && (
+        <Text style={{ color: "red", fontSize: 13, marginTop: 4 }}>
+          {t("notifications_disabled_message")}
+        </Text>
+      )}
       <View style={styles.row}>
         <Text style={[styles.label, { color: Colors.text }]}>
           {t("language")}
@@ -398,7 +444,6 @@ function FooterSettings({
           ))}
         </Picker>
       </View>
-      {/* Méthode de calcul */}
       <View style={styles.row}>
         <Text style={[styles.label, { color: Colors.text }]}>
           {t("calculation_method")}
@@ -413,7 +458,6 @@ function FooterSettings({
           ))}
         </Picker>
       </View>
-      {/* Son de l'adhan */}
       <View style={styles.row}>
         <Text style={[styles.label, { color: Colors.text }]}>
           {t("adhan_sound")}
@@ -442,41 +486,42 @@ function FooterSettings({
           <Text style={styles.stopBtnText}>{t("stop")}</Text>
         </Pressable>
       )}
-      {/* Rappel avant la prière */}
-      <View style={{ marginVertical: 20 }}>
-        <Text style={{ fontWeight: "bold", fontSize: 16 }}>
-          {t("prayer_reminder")}
-        </Text>
-        <View style={{ flexDirection: "row", alignItems: "center" }}>
-          <Text>{t("enable_reminder")}</Text>
-          <Switch
-            value={remindersEnabled}
-            onValueChange={setRemindersEnabled}
-          />
-        </View>
-        {remindersEnabled && (
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              marginTop: 8,
-            }}
-          >
-            <Text>{t("minutes_before")}</Text>
-            <Slider
-              style={{ flex: 1, marginHorizontal: 8 }}
-              minimumValue={1}
-              maximumValue={30}
-              step={1}
-              value={reminderOffset}
-              onValueChange={setReminderOffset}
+      {notificationsEnabled && notifPermissionGranted !== false && (
+        <View style={{ marginVertical: 20 }}>
+          <Text style={{ fontWeight: "bold", fontSize: 16 }}>
+            {t("prayer_reminder")}
+          </Text>
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <Text>{t("enable_reminder")}</Text>
+            <Switch
+              value={remindersEnabled}
+              onValueChange={setRemindersEnabled}
             />
-            <Text>
-              {reminderOffset} {t("minutes")}
-            </Text>
           </View>
-        )}
-      </View>
+          {remindersEnabled && (
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                marginTop: 8,
+              }}
+            >
+              <Text>{t("minutes_before")}</Text>
+              <Slider
+                style={{ flex: 1, marginHorizontal: 8 }}
+                minimumValue={1}
+                maximumValue={30}
+                step={1}
+                value={reminderOffset}
+                onValueChange={setReminderOffset}
+              />
+              <Text>
+                {reminderOffset} {t("minutes")}
+              </Text>
+            </View>
+          )}
+        </View>
+      )}
     </>
   );
 }

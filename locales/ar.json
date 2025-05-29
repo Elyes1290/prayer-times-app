@@ -42,7 +42,13 @@
   "adhan_sounds": {
     "adhamalsharqawe": "أذان الشرقاوي",
     "adhanaljazaer": "الأذان الجزائري",
-    "ahmedelkourdi": "أحمد الكردي"
+    "ahmadnafees": "أحمد نفيس",
+    "ahmedelkourdi": "أحمد الكردي",
+    "dubai": "أذان دبي",
+    "karljenkins": "كارل جنكنز",
+    "mansourzahrani": "منصور الزهراني",
+    "misharyrachid": "مشاري راشد",
+    "mustafaozcan": "مصطفى أوزكان"
   },
   "hijri_calendar": "التقويم الهجري",
   "gregorian_date": "التاريخ الميلادي",
@@ -90,5 +96,6 @@
   "qibla": "القبلة",
   "quran": "القرآن",
   "hadiths": "الأحاديث",
-  "about": "حول"
+  "about": "حول",
+  "waiting_for_location": "موقعك قيد التحميل..."
 }

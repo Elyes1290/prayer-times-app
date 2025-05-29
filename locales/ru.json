@@ -42,7 +42,13 @@
   "adhan_sounds": {
     "adhamalsharqawe": "Азан Аль Шаркаве",
     "adhanaljazaer": "Алжирский азан",
-    "ahmedelkourdi": "Ахмед Эль Курди"
+    "ahmedelkourdi": "Ахмед Эль Курди",
+    "misharyrachid": "Мишари Рашид",
+    "ahmadnafees": "Ахмад Нафис",
+    "dubai": "Азан из Дубая",
+    "karljenkins": "Карл Дженкинс",
+    "mansourzahrani": "Мансур Захрани",
+    "mustafaozcan": "Мустафа Озджан"
   },
   "hijri_calendar": "Хиджра календарь",
   "gregorian_date": "Григорианская дата",
@@ -90,5 +96,6 @@
   "qibla": "Кибла",
   "quran": "Коран",
   "hadiths": "Хадисы",
-  "about": "О приложении"
+  "about": "О приложении",
+  "waiting_for_location": "Ожидание определения местоположения..."
 }

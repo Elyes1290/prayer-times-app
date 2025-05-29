@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "prayer-times-app",
-    "slug": "prayer-times-app",
+    "name": "MyAdhan: Muslim Prayer App",
+    "slug": "myadhan-prayer-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",

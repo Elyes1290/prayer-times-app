@@ -13,31 +13,20 @@ import ModalSelector from "react-native-modal-selector";
 import { useTranslation } from "react-i18next";
 
 type Book = { id: number; bookName: string; bookSlug: string };
-type LocalChapter = {
-  number: number;
-  english: string;
-  arabic: string;
-  from: number;
-  to: number;
+type Chapter = {
+  id: number;
+  chapterNumber: string;
+  chapterEnglish: string;
+  chapterArabic?: string;
+  bookSlug?: string;
 };
+
 type Hadith = {
   id: number;
   hadithNumber: string | number;
   hadithEnglish: string;
   hadithArabic?: string;
   [key: string]: any;
-};
-
-import * as hadithMappings from "../src/hadith-mapping";
-const chapterMappings: Record<string, LocalChapter[]> = {
-  "sahih-bukhari": hadithMappings.bukhariChapters,
-  "sahih-muslim": hadithMappings.muslimChapters,
-  "al-tirmidhi": hadithMappings.tirmidhiChapters,
-  "abu-dawood": hadithMappings.abudawoodChapters,
-  "sunan-nasai": hadithMappings.nasaiChapters,
-  "ibn-e-majah": hadithMappings.ibnmajahChapters,
-  mishkat: hadithMappings.mishkatChapters,
-  "musnad-ahmad": hadithMappings.musnadAhmadChapters,
 };
 
 const API_KEY = "$2y$10$doCdBLfM0jONj1evceyDyuFQYeUBzyQsh9NL2sRIuT9wt8GKsXaa";
@@ -48,7 +37,7 @@ export default function HadithScreen() {
 
   const [books, setBooks] = useState<Book[]>([]);
   const [selectedBook, setSelectedBook] = useState<string>("");
-  const [chapters, setChapters] = useState<LocalChapter[]>([]);
+  const [chapters, setChapters] = useState<Chapter[]>([]);
   const [selectedChapter, setSelectedChapter] = useState<string>("");
   const [hadiths, setHadiths] = useState<Hadith[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -86,23 +75,19 @@ export default function HadithScreen() {
 
     if (!selectedBook) return;
 
-    if (chapterMappings[selectedBook]) {
-      setChapters(chapterMappings[selectedBook]);
-    } else {
-      setLoadingChapters(true);
-      fetch(
-        `https://hadithapi.com/api/chapters?apiKey=${API_KEY}&book=${selectedBook}`
-      )
-        .then((res) => res.json())
-        .then((data) => {
-          setChapters((data.chapters && data.chapters.data) || []);
-          setLoadingChapters(false);
-        })
-        .catch(() => {
-          setChapters([]);
-          setLoadingChapters(false);
-        });
-    }
+    setLoadingChapters(true);
+    fetch(
+      `https://hadithapi.com/api/${selectedBook}/chapters?apiKey=${API_KEY}`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        setChapters(data.chapters || []);
+        setLoadingChapters(false);
+      })
+      .catch(() => {
+        setChapters([]);
+        setLoadingChapters(false);
+      });
   }, [selectedBook]);
 
   // Charger les hadiths du chapitre sélectionné
@@ -138,11 +123,14 @@ export default function HadithScreen() {
     const found = books.find((b) => b.bookSlug === selectedBook);
     return found ? found.bookName : t("select_book");
   }
+
   function getSelectedChapterLabel() {
     if (!selectedChapter) return t("select_chapter");
-    const found = chapters.find((c) => c.number.toString() === selectedChapter);
+    const found = chapters.find((c) => c.chapterNumber === selectedChapter);
     if (!found) return t("select_chapter");
-    return `${found.number}. ${found.english} ${found.arabic}`.trim();
+    return `${found.chapterNumber}. ${found.chapterEnglish || ""} ${
+      found.chapterArabic || ""
+    }`.trim();
   }
 
   if (!fontsLoaded) return null;
@@ -189,9 +177,10 @@ export default function HadithScreen() {
             ) : (
               <ModalSelector
                 data={chapters.map((chapter) => ({
-                  key: chapter.number.toString(),
-                  label:
-                    `${chapter.number}. ${chapter.english} ${chapter.arabic}`.trim(),
+                  key: chapter.chapterNumber,
+                  label: `${chapter.chapterNumber}. ${
+                    chapter.chapterEnglish || ""
+                  } ${chapter.chapterArabic || ""}`.trim(),
                 }))}
                 onChange={(option) => {
                   setSelectedChapter(option.key);
@@ -213,53 +202,55 @@ export default function HadithScreen() {
           </>
         )}
 
-        {/* Liste hadiths */}
-        {loadingHadiths ? (
-          <ActivityIndicator size="large" style={{ marginTop: 20 }} />
-        ) : hadiths.length === 0 ? (
-          <Text style={{ marginTop: 10 }}>{t("no_hadith_found")}</Text>
-        ) : (
-          <FlatList
-            data={hadiths}
-            keyExtractor={(item) => item.id.toString()}
-            renderItem={({ item }) => {
-              const isBigNumber = Number(item.hadithNumber) > 999;
-              return (
-                <View style={styles.ayahContainer}>
-                  <View style={styles.arabicRow}>
-                    <Text style={styles.arabic}>
-                      {item.hadithArabic || "—"}
-                    </Text>
-                    <View
-                      style={[
-                        styles.verseCircle,
-                        isBigNumber && {
-                          width: 40,
-                          height: 40,
-                          borderRadius: 20,
-                        },
-                      ]}
-                    >
-                      <Text style={styles.verseNumber}>
-                        {item.hadithNumber}
+        {/* Liste hadiths - n'afficher qu'après sélection d'un chapitre */}
+        {selectedChapter ? (
+          loadingHadiths ? (
+            <ActivityIndicator size="large" style={{ marginTop: 20 }} />
+          ) : hadiths.length === 0 ? (
+            <Text style={{ marginTop: 10 }}>{t("no_hadith_found")}</Text>
+          ) : (
+            <FlatList
+              data={hadiths}
+              keyExtractor={(item) => item.id.toString()}
+              renderItem={({ item }) => {
+                const isBigNumber = Number(item.hadithNumber) > 999;
+                return (
+                  <View style={styles.ayahContainer}>
+                    <View style={styles.arabicRow}>
+                      <Text style={styles.arabic}>
+                        {item.hadithArabic || "—"}
                       </Text>
+                      <View
+                        style={[
+                          styles.verseCircle,
+                          isBigNumber && {
+                            width: 40,
+                            height: 40,
+                            borderRadius: 20,
+                          },
+                        ]}
+                      >
+                        <Text style={styles.verseNumber}>
+                          {item.hadithNumber}
+                        </Text>
+                      </View>
                     </View>
+                    <Text style={styles.traduction}>
+                      {item.hadithEnglish && item.hadithEnglish.trim() !== ""
+                        ? item.hadithEnglish
+                        : t("translation_not_available")}
+                    </Text>
+                    <Image
+                      source={require("../assets/images/ayah_separator.png")}
+                      style={styles.ayahSeparator}
+                      resizeMode="contain"
+                    />
                   </View>
-                  <Text style={styles.traduction}>
-                    {item.hadithEnglish && item.hadithEnglish.trim() !== ""
-                      ? item.hadithEnglish
-                      : t("translation_not_available")}
-                  </Text>
-                  <Image
-                    source={require("../assets/images/ayah_separator.png")}
-                    style={styles.ayahSeparator}
-                    resizeMode="contain"
-                  />
-                </View>
-              );
-            }}
-          />
-        )}
+                );
+              }}
+            />
+          )
+        ) : null}
 
         {error && <Text style={{ color: "red", marginTop: 10 }}>{error}</Text>}
       </View>

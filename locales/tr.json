@@ -40,9 +40,15 @@
   },
   "adhan_sound": "Ezan Seçimi",
   "adhan_sounds": {
-    "adhamalsharqawe": "Şerkawe Ezanı",
-    "adhanaljazaer": "Cezayir Ezani",
-    "ahmedelkourdi": "Ahmed El Kurdi"
+    "adhamalsharqawe": "Adhan Sharqaoui",
+    "adhanaljazaer": "Cezayir Ezanı",
+    "ahmadnafees": "Ahmad Nafees",
+    "ahmedelkourdi": "Ahmed El Kourdi",
+    "dubai": "Dubai Ezanı",
+    "karljenkins": "Karl Jenkins",
+    "mansourzahrani": "Mansour Zahrani",
+    "misharyrachid": "Mishary Rashid",
+    "mustafaozcan": "Mustafa Özcan"
   },
   "hijri_calendar": "Hicri Takvim",
   "gregorian_date": "Miladi Tarih",
@@ -90,5 +96,6 @@
   "qibla": "Kıble",
   "quran": "Kur’an",
   "hadiths": "Hadisler",
-  "about": "Hakkında"
+  "about": "Hakkında",
+  "waiting_for_location": "Konum bekleniyor..."
 }
