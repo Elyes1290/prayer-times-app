@@ -1,0 +1,192 @@
+[
+  {
+    "category": "eveningDhikr",
+    "title": "Ayat al-Kursi",
+    "arabic": "ٱللَّهُ لَآ إِلَٰهَ إِلَّا هُوَ ٱلْحَىُّ ٱلْقَيُّومُ ۚ لَا تَأْخُذُهُۥ سِنَةٌ وَلَا نَوْمٌ ۚ لَّهُۥ مَا فِى ٱلسَّمَٰوَٰتِ وَمَا فِى ٱلْأَرْضِ ۗ مَن ذَا ٱلَّذِى يَشْفَعُ عِندَهُۥٓ إِلَّا بِإِذْنِهِۦ ۚ يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ ۖ وَلَا يُحِيطُونَ بِشَىْءٍ مِّنْ عِلْمِهِۦٓ إِلَّا بِمَا شَآءَ ۚ وَسِعَ كُرْسِيُّهُ ٱلسَّمَٰوَٰتِ وَٱلْأَرْضَ ۖ وَلَا يَـُٔودُهُۥ حِفْظُهُمَا ۚ وَهُوَ ٱلْعَلِىُّ ٱلْعَظِيمُ",
+    "latin": "Allāhu lā ilāha illā huw, al-ḥayyul-qayyūm, lā taʾkhudhuhu sinatun wa lā nawm, lahu mā fī as-samāwāti wa mā fī al-arḍ, man dhā alladhī yashfaʿu ʿindahu illā bi-idhnih, yaʿlamu mā bayna aydīhim wa mā khalfahum, wa lā yuḥīṭūna bishayʾin min ʿilmihi illā bimā shāʾ, wasiʿa kursiyyuhus-samāwāti wal-arḍ, wa lā yaʾūdhu ḥifẓuhumā, wa huwa al-ʿaliyyul-ʿaẓīm",
+    "translation": "Allah – non c’è dio all’infuori di Lui, il Vivente, il Sostenitore. Né sonno né torpore Lo colgono. A Lui appartiene ciò che è nei cieli e ciò che è sulla terra. Chi potrà intercedere presso di Lui senza il Suo permesso? Egli conosce ciò che è davanti a loro e ciò che è dietro di loro, mentre essi non comprendono nulla della Sua conoscenza, eccetto ciò che Egli vuole. Il Suo Trono si estende sui cieli e sulla terra e la loro protezione non Lo affatica. Egli è l’Altissimo, il Grandissimo.",
+    "notes": "Recita 1 volta",
+    "benefits": "Chiunque recita questo versetto al mattino sarà protetto fino alla sera, e chi lo recita la sera sarà protetto fino al mattino.",
+    "source": "HR. at-Tirmidhi n°2879"
+  },
+  {
+    "category": "eveningDhikr",
+    "title": "Sura al-Ikhlas",
+    "arabic": "قُلْ هُوَ ٱللَّهُ أَحَدٌ (1) ٱللَّهُ ٱلصَّمَدُ (2) لَمْ يَلِدْ وَلَمْ يُولَدْ (3) وَلَمْ يَكُن لَّهُۥ كُفُوًا أَحَدٌۢ (4)",
+    "latin": "qul huwa allahu ahad (1) allahu al-samad (2) lam yalid wa lam yūlad (3) wa lam yakun lahu kufuwan ahad (4)",
+    "translation": "Di': Egli è Allah, l’Unico. (1) Allah, l’Assoluto. (2) Non ha generato, né è stato generato. (3) E nessuno è pari a Lui. (4)",
+    "notes": "Recita 3 volte",
+    "benefits": "Il Profeta (pace su di lui) disse: ‘Recita Qul Huwa Allahu Ahad e le due Mu‘awwidhatayn (sura al-Falaq e al-Nas) tre volte al mattino e alla sera, ti proteggeranno da ogni cosa.’",
+    "source": "HR. Abu Dawud n°4241"
+  },
+  {
+    "category": "eveningDhikr",
+    "title": "Sura al-Falaq",
+    "arabic": "قُلْ أَعُوذُ بِرَبِّ ٱلْفَلَقِ (1) مِن شَرِّ مَا خَلَقَ (2) وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ (3) وَمِن شَرِّ ٱلنَّفَّٰثَٰتِ فِى ٱلْعُقَدِ (4) وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ (5)",
+    "latin": "qul aʿūdhu birabbil-falaq (1) min sharri mā khalaq (2) wa min sharri ghāsiqin idhā waqab (3) wa min sharri an-naffāthāti fil-ʿuqad (4) wa min sharri ḥāsidin idhā ḥasad (5)",
+    "translation": "Di': Mi rifugio nel Signore dell'alba (1) dal male di ciò che ha creato, (2) dal male dell’oscurità quando si intensifica, (3) dal male di coloro che soffiano sui nodi, (4) e dal male dell’invidioso quando invidia. (5)",
+    "notes": "Recita 3 volte",
+    "benefits": "Il Profeta (pace su di lui) disse: ‘Recita Qul Huwa Allahu Ahad e le due Mu‘awwidhatayn (sura al-Falaq e al-Nas) tre volte al mattino e alla sera, ti proteggeranno da ogni cosa.’",
+    "source": "HR. Abu Dawud n°4241"
+  },
+  {
+    "category": "eveningDhikr",
+    "title": "Sura al-Nas",
+    "arabic": "قُلْ أَعُوذُ بِرَبِّ ٱلنَّاسِ (1) مَلِكِ ٱلنَّاسِ (2) إِلَٰهِ ٱلنَّاسِ (3) مِن شَرِّ ٱلْوَسْوَاسِ ٱلْخَنَّاسِ (4) ٱلَّذِى يُوَسْوِسُ فِى صُدُورِ ٱلنَّاسِ (5) مِنَ ٱلْجِنَّةِ وَٱلنَّاسِ (6)",
+    "latin": "qul aʿūdhu birabbin-nās (1) malikin-nās (2) ilāhin-nās (3) min sharri l-waswāsil-khannās (4) alladhī yuwaswisu fī ṣudūrin-nās (5) minal-jinnati wan-nās (6)",
+    "translation": "Di': Mi rifugio nel Signore degli uomini, (1) Re degli uomini, (2) Dio degli uomini, (3) dal male del sussurratore occulto, (4) che sussurra nei cuori degli uomini, (5) tra jinn e uomini. (6)",
+    "notes": "Recita 3 volte",
+    "benefits": "Il Profeta (pace su di lui) disse: ‘Recita Qul Huwa Allahu Ahad e le due Mu‘awwidhatayn (sura al-Falaq e al-Nas) tre volte al mattino e alla sera, ti proteggeranno da ogni cosa.’",
+    "source": "HR. Abu Dawud n°4241"
+  },
+  {
+    "category": "eveningDhikr",
+    "title": "Entrare nella sera nel regno di Allah e chiedere la Sua protezione",
+    "arabic": "أَمْسَيْنَا وَأَمْسَى الْمُلْكُ للهِ، وَالْحَمْدُ للهِ، لَا إِلَهَ إِلاَّ اللهُ وَحْدَهُ لاَ شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ، وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ، رَبِّ أَسْأَلُكَ خَيْرَ مَا فِي هَذِهِ اللَّيْلَةِ وَخَيْرَ مَا بَعْدَهَا، وَأَعُوذُبِكَ مِنْ شَرِّ مَا فِي هَذِهِ اللَّيْلَةِ وَشَرِّ مَا بَعْدَهَا، رَبِّ أَعُوذُبِكَ مِنَ الْكَسَلِ وَسُوءِ الْكِبَرِ، رَبِّ أَعُوذُبِكَ مِنْ عَذَابٍ فِي النَّارِ وَعَذَابٍ فِي الْقَبْرِ",
+    "latin": "amsayna wa amsa al-mulku lillah wa al-hamdu lillah, la ilaha illa Allah wahdahu la sharika lah, lahu al-mulku walahu al-hamdu wa huwa ‘ala kulli shay’in qadir. Rabbi as’aluka khayra ma fi hadhihi al-layla wa khayra ma ba’daha, wa a’udhu bika min sharri ma fi hadhihi al-layla wa sharri ma ba’daha. Rabbi a’udhu bika minal kasali wa su’i al-kibar. Rabbi a’udhu bika min ‘adhabin fi al-nar wa ‘adhabin fi al-qabr.",
+    "translation": "Siamo entrati nella sera e la sovranità appartiene ad Allah, la lode appartiene ad Allah. Non c’è dio all’infuori di Allah, unico, senza associati. A Lui appartengono la sovranità e la lode, ed Egli è onnipotente su ogni cosa. O mio Signore, ti chiedo il bene di questa notte e il bene che verrà dopo di essa. E mi rifugio in Te dal male di questa notte e dal male che verrà dopo di essa. O mio Signore, mi rifugio in Te dalla pigrizia e dalla vecchiaia cattiva. O mio Signore, mi rifugio in Te dal castigo del fuoco e dal castigo della tomba.",
+    "notes": "Recita 1 volta",
+    "benefits": "Chiedere protezione dal male è prioritario, poiché prevenire il male viene prima di ottenere il bene.",
+    "source": "HR. Muslim n°2723 (75), Abu Dawud n°5071, e at-Tirmidhi n°3390, autentico da ‘Abdullah Ibn Mas’ud"
+  },
+  {
+    "category": "eveningDhikr",
+    "title": "Entrare nella sera con la grazia di Allah",
+    "arabic": "اللَّهُمَّ بِكَ أَمْسَيْنَا، وَبِكَ أَصْبَحْنَا، وَبِكَ نَحْيَا، وَبِكَ نَمُوتُ، وَإِلَيْكَ الْمَصِيرُ",
+    "latin": "allahumma bika amsayna wa bika asbahna wa bika nahya wa bika namut wa ilayka al-masir",
+    "translation": "O Allah! Con la Tua grazia siamo entrati nella sera, con la Tua grazia ci svegliamo al mattino, con la Tua grazia viviamo e moriamo, e a Te è il ritorno.",
+    "notes": "Recita 1 volta",
+    "benefits": "Dalla mattina alla sera, dalla vita alla morte, tutto ciò che facciamo è sotto il controllo di Allah, e a Lui ritorneremo.",
+    "source": "HR. al-Bukhari in al-Adab al-Mufrad n°1199 (testo integrale di al-Bukhari), at-Tirmidhi n°3391, Abu Dawud n°5068, Ahmad 11/354, Ibn Majah n°3868"
+  },
+  {
+    "category": "eveningDhikr",
+    "title": "Il miglior modo di chiedere perdono (Sayyid al-Istighfar)",
+    "arabic": "اَللَّهُمَّ أَنْتَ رَبِّيْ ، لَا إِلٰـهَ إِلاَّ أَنْتَ خَلَقْتَنِيْ وَأَنَا عَبْدُكَ ، وَأَنَا عَلَى عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ ، أَعُوْذُ بِكَ مِنْ شَرِّ مَا صَنَعْتُ ، أَبُوْءُ لَكَ بِنِعْمتِكَ عَلَيَّ ، وَأَبُوْءُ بِذَنْبِيْ فَاغْفِرْ لِيْ ، فَإِنَّهُ لَا يَغْفِرُ الذُّنُوبَ إِلاَّ أَنْتَ",
+    "latin": "allahumma anta rabbi la ilaha illa anta khalaqtani wa ana abduka wa ana ‘ala ‘ahdika wa wa’dika ma istata’tu, a’udhu bika min sharri ma sana’tu, abū’u laka bini’matika ‘alayya, wa abū’u bidhambi faghfir li fa innahu la yaghfiru al-dhunuba illa anta",
+    "translation": "O Allah! Tu sei il mio Signore, non c’è dio all’infuori di Te, mi hai creato e io sono Tuo servo. Sono fedele al patto e alla promessa verso di Te per quanto posso. Mi rifugio in Te dal male che ho fatto. Riconosco la Tua grazia su di me e riconosco i miei peccati. Perciò perdonami, poiché nessuno perdona i peccati se non Tu.",
+    "notes": "Recita 1 volta",
+    "benefits": "Chi la recita la sera con fede, poi muore, entrerà in Paradiso. Lo stesso se la recita al mattino.",
+    "source": "HR. al-Bukhari n°6306, 6323, Ahmad IV/122-125, an-Nasa'i VIII/279-280"
+  },
+  {
+    "category": "eveningDhikr",
+    "title": "Supplica per salute e sicurezza",
+    "arabic": "اَللَّهُمَّ عَافِنِيْ فِيْ بَدَنِيْ ، اَللَّهُمَّ عَافِنِيْ فِيْ سَمْعِيْ ، اَللَّهُمَّ عَافِنِيْ فِيْ بَصَرِيْ ، لَا إِلَـهَ إِلَّا أَنْتَ ، اَللَّهُمَّ إِنِّيْ أَعُوْذُ بِكَ مِنَ الْكُفْرِوَالْفَقْرِ ، وَأَعُوْذُ بِكَ مِنْ عَذَابِ الْقَبْرِ ، لَا إِلَـهَ إِلَّا أَنْتَ",
+    "latin": "allahumma ‘afini fi badani, allahumma ‘afini fi sam’i, allahumma ‘afini fi basari, la ilaha illa anta. allahumma inni a’udhu bika min al-kufri wa al-faqr, wa a’udhu bika min ‘adhab al-qabr, la ilaha illa anta",
+    "translation": "O Allah! Concedimi la salute nel mio corpo, O Allah! Concedimi la salute nel mio udito, O Allah! Concedimi la salute nella mia vista, non c’è dio all’infuori di Te. O Allah! Mi rifugio in Te dalla miscredenza e dalla povertà, e mi rifugio in Te dal castigo della tomba. Non c’è dio all’infuori di Te.",
+    "notes": "Recita 1 volta",
+    "benefits": "Chiediamo ad Allah la salute del corpo, dell’udito e della vista, e la protezione dalla miscredenza, dalla povertà e dal castigo della tomba.",
+    "source": "HR. al-Bukhari in al-Adab al-Mufrad n°701, Abu Dawud n°5090, Ahmad V/42, hasan"
+  },
+  {
+    "category": "eveningDhikr",
+    "title": "Supplica per la protezione in questa vita e nell'Aldilà",
+    "arabic": "اَللَّهُمَّ إِنِّيْ أَسْأَلُكَ الْعَفْوَ وَالْعَافِيَةَ فِي الدُّنْيَا وَاْلآخِرَةِ، اَللَّهُمَّ إِنِّيْ أَسْأَلُكَ الْعَفْوَ وَالْعَافِيَةَ فِي دِيْنِيْ وَدُنْيَايَ وَأَهْلِيْ وَمَالِيْ اللَّهُمَّ اسْتُرْ عَوْرَاتِى وَآمِنْ رَوْعَاتِى. اَللَّهُمَّ احْفَظْنِيْ مِنْ بَيْنِ يَدَيَّ، وَمِنْ خَلْفِيْ، وَعَنْ يَمِيْنِيْ وَعَنْ شِمَالِيْ، وَمِنْ فَوْقِيْ، وَأَعُوْذُ بِعَظَمَتِكَ أَنْ أُغْتَالَ مِنْ تَحْتِيْ",
+    "latin": "allahumma inni as’aluka al-‘afwa wa al-‘afiyah fi al-dunya wa al-akhirah. allahumma inni as’aluka al-‘afwa wa al-‘afiyah fi dini wa dunyaya wa ahli wa mali. allahumma astur ‘awraati wa amin raw’ati. allahumma ihfazni min bayni yadayya, wa min khalfī, wa ‘an yamīni, wa ‘an shimali, wa min fawqi, wa a’udhu bi ‘azamatika an ughtala min tahti.",
+    "translation": "O Allah! Ti chiedo il perdono e la salute in questa vita e nell’Aldilà. O Allah! Ti chiedo il perdono e la salute nella mia religione, nella mia vita, nella mia famiglia e nei miei beni. O Allah! Copri le mie debolezze e proteggimi dalle mie paure. O Allah! Proteggimi davanti a me, dietro di me, alla mia destra, alla mia sinistra e sopra di me. E mi rifugio nella Tua grandezza affinché non venga colpito da sotto di me.",
+    "notes": "Recita 1 volta",
+    "benefits": "Il Messaggero di Allah ﷺ non abbandonava mai questa supplica mattina e sera. Include la richiesta di protezione nella religione, nella vita, nella famiglia e nei beni.",
+    "source": "HR. al-Bukhari in al-Adab al-Mufrad n°1200, Abu Dawud n°5074, an-Nasa’i VII/282, Ibn Majah n°3871, al-Hakim 1/517-518 e altri da Ibn ‘Umar (ra)"
+  },
+  {
+    "category": "eveningDhikr",
+    "title": "Supplica per la protezione dai sussurri di Satana",
+    "arabic": "اَللَّهُمَّ عَالِمَ الْغَيْبِ وَالشَّهَادَةِ فَاطِرَ السَّمَاوَاتِ وَاْلأَرْضِ، رَبَّ كُلِّ شَيْءٍ وَمَلِيْكَهُ، أَشْهَدُ أَنْ لاَ إِلَـهَ إِلاَّ أَنْتَ، أَعُوْذُ بِكَ مِنْ شَرِّ نَفْسِيْ، وَمِنْ شَرِّ الشَّيْطَانِ وَشِرْكِهِ، وَأَنْ أَقْتَرِفَ عَلَى نَفْسِيْ سُوْءًا أَوْ أَجُرَّهُ إِلَى مُسْلِمٍ",
+    "latin": "allahumma ‘alima al-ghaybi wa al-shahada fatira al-samawati wa al-ard, rabba kulli shay’in wa malīkahu, ash-hadu an la ilaha illa anta, a‘udhu bika min sharri nafsi wa min sharri al-shayṭan wa shirkihi, wa an aqtarifa ‘ala nafsi su’an aw ajurrahu ila muslim",
+    "translation": "O Allah, conoscitore dell’invisibile e del visibile, creatore dei cieli e della terra, Signore e Sovrano di ogni cosa! Testimonio che non c’è altro dio all’infuori di Te. Mi rifugio in Te dal male della mia anima, dal male di Satana e dalla sua idolatria, e dal commettere ingiustizia verso me stesso o verso un altro musulmano.",
+    "notes": "Recita 1 volta",
+    "benefits": "Il Profeta ﷺ disse ad Abu Bakr: «Dilla ogni mattina, ogni sera e quando vai a dormire.»",
+    "source": "HR. al-Bukhari in al-Adab al-Mufrad n°1202, at-Tirmidhi n°3392, Abu Dawud n°5067"
+  },
+  {
+    "category": "eveningDhikr",
+    "title": "Dhikr per la protezione da ogni male",
+    "arabic": "بِسْمِ اللَّهِ الَّذِى لاَ يَضُرُّ مَعَ اسْمِهِ شَىْءٌ فِى الأَرْضِ وَلاَ فِى السَّمَاءِ وَهُوَ السَّمِيعُ الْعَلِيمُ",
+    "latin": "bismillahi alladhi la yadurru ma‘a ismihi shay’un fil-ard wa la fis-sama’ wa huwa al-sami‘ al-‘alim",
+    "translation": "Nel Nome di Allah, con il Cui Nome nulla può nuocere né sulla terra né nei cieli, Egli è l’Onnisciente, l’Onniveggente.",
+    "notes": "Recita 3 volte",
+    "benefits": "Chi recita questo dhikr tre volte al mattino e tre volte alla sera, nulla potrà fargli del male.",
+    "source": "HR. at-Tirmidhi n°3388, Abu Dawud n°5088, Ibn Majah n°3869, al-Hakim 1/514, Ahmad n°446 e 474"
+  },
+  {
+    "category": "eveningDhikr",
+    "title": "Soddisfazione per Allah, l’Islam e il Profeta ﷺ",
+    "arabic": "رَضِيْتُ بِاللهِ رَبًّا، وَبِاْلإِسْلاَمِ دِيْنًا، وَبِمُحَمَّدٍ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ نَبِيًّا",
+    "latin": "radītu billahi rabban wa bil-islami dinan wa bi-Muhammadin sallallahu ‘alayhi wa sallama nabiyyan",
+    "translation": "Sono soddisfatto di Allah come mio Signore, dell’Islam come mia religione e di Muhammad (pace su di lui) come mio Profeta.",
+    "notes": "Recita 3 volte",
+    "benefits": "Chi la recita tre volte al mattino e tre volte alla sera, Allah lo compiacerà nel Giorno del Giudizio.",
+    "source": "HR. Ahmad IV/337, Abu Dawud n°5072, at-Tirmidhi n°3389, Ibn Majah n°3870, an-Nasa’i in ‘Amal al-Yaum wa al-Laylah n°4, Ibnus Sunni n°68"
+  },
+  {
+    "category": "eveningDhikr",
+    "title": "Chiedere guida ad Allah",
+    "arabic": "يَا حَيُّ يَا قَيُّوْمُ بِرَحْمَتِكَ أَسْتَغِيْثُ، وَأَصْلِحْ لِيْ شَأْنِيْ كُلَّهُ وَلاَ تَكِلْنِيْ إِلَى نَفْسِيْ طَرْفَةَ عَيْنٍ أَبَدًا",
+    "latin": "ya hayyu ya qayyum, bi-rahmatika astaghith, wa aslih li sha’ni kullahu wa la takilni ila nafsi tarfata ‘aynin abadan",
+    "translation": "O Vivente, O Sostenitore! Chiedo aiuto nella Tua misericordia. Sistemo tutte le mie questioni, e non lasciarmi solo neanche per il batter d’occhio.",
+    "notes": "Recita 1 volta",
+    "benefits": "Con questa supplica si affida tutto ad Allah, riconoscendo il bisogno continuo di Lui.",
+    "source": "HR. an-Nasa’i in ‘Amal al-Yaum wa al-Laylah n°575, al-Hakim 1/545, vedi Sahih at-Targhib wat-Tarhib 1/417 n°661, al-Sahihah n°227, hasan"
+  },
+  {
+    "category": "eveningDhikr",
+    "title": "Celebrare la fitrah islamica la sera",
+    "arabic": "أَمْسَيْنَا عَلَى فِطْرَةِ اْلإِسْلاَمِ وَعَلَى كَلِمَةِ اْلإِخْلاَصِ، وَعَلَى دِيْنِ نَبِيِّنَا مُحَمَّدٍ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ، وَعَلَى مِلَّةِ أَبِيْنَا إِبْرَاهِيْمَ، حَنِيْفًا مُسْلِمًا وَمَا كَانَ مِنَ الْمُشْرِكِيْنَ",
+    "latin": "amsayna ‘ala fitrati al-islam wa ‘ala kalimati al-ikhlas, wa ‘ala dini nabiyyina Muhammad sallallahu ‘alayhi wa sallam, wa ‘ala millati abina Ibrahim hanifan musliman wa ma kana mina al-mushrikin",
+    "translation": "Siamo entrati nella sera nella fitrah dell’Islam, sulla parola della sincerità, sulla religione del nostro Profeta Muhammad (pace su di lui), e sulla religione del nostro padre Ibrahim, monoteista e sottomesso (musulmano), e non tra i politeisti.",
+    "notes": "Recita 1 volta",
+    "benefits": "La fitrah è il monoteismo e la sunnah; la parola della sincerità è la testimonianza di fede, e hanifan indica la rettitudine.",
+    "source": "HR. Ahmad III/406, 407, ad-Darimi II/292, Ibnus Sunni in ‘Amal al-Yaum wa al-Laylah n°34, Mishkat al-Masabih n°2415, Sahih al-Jami’ al-Saghir n°4674, sahih"
+  },
+  {
+    "category": "eveningDhikr",
+    "title": "Dhikr dell’Unicità di Allah",
+    "arabic": "لاَ إِلَـهَ إِلاَّ اللهُ وَحْدَهُ لاَ شَرِيْكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيْرُ",
+    "latin": "la ilaha illa Allah wahdahu la sharika lah, lahu al-mulku wa lahu al-hamdu wa huwa ‘ala kulli shay’in qadir",
+    "translation": "Non c’è altro dio all’infuori di Allah, unico senza soci. A Lui appartengono la sovranità e la lode, ed Egli è onnipotente su ogni cosa.",
+    "notes": "Recita 1 o 10 volte al mattino, 100 volte durante il giorno",
+    "benefits": "Chi la recita 100 volte al giorno riceve la ricompensa di liberare dieci schiavi, gli saranno scritti 100 buone azioni, cancellati 100 peccati e sarà protetto dal diavolo quel giorno.",
+    "source": "HR. al-Bukhari n°3293 e 6403, Muslim IV/2071 n°2691 (28), at-Tirmidhi n°3468, Ibn Majah n°3798"
+  },
+  {
+    "category": "eveningDhikr",
+    "title": "Lodare Allah e glorificarlo",
+    "arabic": "سُبْحَانَ اللهِ وَبِحَمْدِهِ عَدَدَ خَلْقَهِ وَرِضَى نَفْسِهِ وَزِنَةَ عَرْشِهِ وَمِدَادَ كَلِمَاتِهِ",
+    "latin": "subhanallahi wa bihamdihi ‘adada khalqihi wa rida nafsihi wa zinata ‘arshihi wa midada kalimatihi",
+    "translation": "Gloria ad Allah e lode a Lui secondo il numero delle Sue creature, la Sua soddisfazione, il peso del Suo trono e l’inchiostro delle Sue parole.",
+    "notes": "Recita 3 volte",
+    "benefits": "Il Profeta (pace su di lui) disse a Juwairiya: questo dhikr supera tutto ciò che hai detto dalla preghiera dell’alba fino al mattino.",
+    "source": "HR. Muslim n°2726. Sharh Muslim XVII/44. Da Juwairiya bint al-Harith (ra)"
+  },
+  {
+    "category": "eveningDhikr",
+    "title": "Taslīḥ (glorificazione) quotidiana e istighfar",
+    "arabic": "سُبْحَانَ اللَّهِ وَبِحَمْدِهِ",
+    "latin": "subhanallahi wa bihamdihi",
+    "translation": "Gloria ad Allah e lode a Lui.",
+    "notes": "Recita 100 volte",
+    "benefits": "Chi dice 'Subhanallahi wa bihamdihi' cento volte al mattino e alla sera, nessuno porterà qualcosa di meglio il Giorno del Giudizio, eccetto chi ne ha detto di più.",
+    "source": "HR. Muslim n°2691 e 2692, da Abu Huraira (ra) Sharh Muslim XVII/17-18, Sahih at-Targhib wat-Tarhib 1/413 n°653"
+  },
+  {
+    "category": "eveningDhikr",
+    "title": "Istighfar quotidiano cento volte",
+    "arabic": "أَسْتَغْفِرُ الله وَأَتُوْبُ إِلَيْهِ",
+    "latin": "astaghfirullah wa atubu ilayh",
+    "translation": "Chiedo perdono ad Allah e mi rivolgo a Lui pentito.",
+    "notes": "Recita 100 volte al giorno",
+    "benefits": "Ibn ‘Umar (ra) disse: il Messaggero di Allah ﷺ disse: 'O gente, pentitevi ad Allah, io mi pento a Lui cento volte al giorno.'",
+    "source": "HR. al-Bukhari/Fath al-Bari XI/101 e Muslim n°2702"
+  },
+  {
+    "category": "eveningDhikr",
+    "title": "Chiedere protezione nelle parole perfette di Allah",
+    "arabic": "أَعُوْذُ بِكَلِمَاتِ اللهِ التَّآمَّاتِ مِنْ شَرِّ مَا خَلَقَ",
+    "latin": "a‘udhu bi kalimatillahi al-tammati min sharri ma khalaq",
+    "translation": "Cerco rifugio nelle parole perfette di Allah contro il male di ciò che ha creato.",
+    "notes": "Recita 3 volte",
+    "benefits": "Chi la recita tre volte la sera, non sarà colpito da alcuna disgrazia improvvisa fino al mattino.",
+    "source": "HR. Ahmad 11/290, an-Nasa’i in ‘Amal al-Yaum wa al-Laylah n°596, Sahih at-Targhib wat-Tarhib 1/412 n°652, Sahih al-Jami’ al-Saghir n°6427"
+  }
+]

@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android" android:oneshot="false">
+    
+    <!-- Frame 1 - Étoiles visibles -->
+    <item android:duration="1800">
+        <layer-list>
+            <!-- Arrière-plan nuit étoilée -->
+            <item>
+                <shape>
+                    <gradient
+                        android:startColor="#FF1B2951"
+                        android:centerColor="#FF2D4A6B"
+                        android:endColor="#FF1A365D"
+                        android:angle="135"
+                        android:type="linear" />
+                    <corners android:radius="16dp" />
+                    <stroke
+                        android:width="1dp"
+                        android:color="#33FFFFFF" />
+                </shape>
+            </item>
+            
+            <!-- Lune GRANDE -->
+            <item android:top="3dp" android:right="4dp" android:width="42dp" android:height="42dp" android:gravity="top|right">
+                <shape android:shape="oval">
+                    <gradient
+                        android:startColor="#FFF8DC"
+                        android:endColor="#F0E68C"
+                        android:type="radial"
+                        android:gradientRadius="21dp" />
+                    <stroke android:width="2dp" android:color="#E6E6FA" />
+                </shape>
+            </item>
+            
+            <!-- Cratères de la lune -->
+            <item android:top="8dp" android:right="12dp" android:width="6dp" android:height="6dp" android:gravity="top|right">
+                <shape android:shape="oval">
+                    <solid android:color="#E6E6FA" />
+                </shape>
+            </item>
+            <item android:top="16dp" android:right="10dp" android:width="4dp" android:height="4dp" android:gravity="top|right">
+                <shape android:shape="oval">
+                    <solid android:color="#E6E6FA" />
+                </shape>
+            </item>
+            
+            <!-- Étoiles VISIBLES -->
+            <item android:top="8dp" android:left="12dp" android:width="4dp" android:height="4dp" android:gravity="top|left">
+                <shape android:shape="oval">
+                    <solid android:color="#FFFFFF" />
+                </shape>
+            </item>
+            <item android:top="18dp" android:left="25dp" android:width="3dp" android:height="3dp" android:gravity="top|left">
+                <shape android:shape="oval">
+                    <solid android:color="#FFFFFF" />
+                </shape>
+            </item>
+            <item android:top="12dp" android:left="40dp" android:width="3dp" android:height="3dp" android:gravity="top|left">
+                <shape android:shape="oval">
+                    <solid android:color="#FFFFFF" />
+                </shape>
+            </item>
+            <item android:top="25dp" android:left="8dp" android:width="3dp" android:height="3dp" android:gravity="top|left">
+                <shape android:shape="oval">
+                    <solid android:color="#FFFFFF" />
+                </shape>
+            </item>
+            <item android:top="15dp" android:left="55dp" android:width="4dp" android:height="4dp" android:gravity="top|left">
+                <shape android:shape="oval">
+                    <solid android:color="#FFFFFF" />
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+    
+    <!-- Frame 2 - Étoiles atténuées (scintillement) -->
+    <item android:duration="1200">
+        <layer-list>
+            <!-- Arrière-plan nuit étoilée -->
+            <item>
+                <shape>
+                    <gradient
+                        android:startColor="#FF1B2951"
+                        android:centerColor="#FF2D4A6B"
+                        android:endColor="#FF1A365D"
+                        android:angle="135"
+                        android:type="linear" />
+                    <corners android:radius="16dp" />
+                    <stroke
+                        android:width="1dp"
+                        android:color="#33FFFFFF" />
+                </shape>
+            </item>
+            
+            <!-- Lune PLUS GRANDE (pulsation) -->
+            <item android:top="2dp" android:right="3dp" android:width="45dp" android:height="45dp" android:gravity="top|right">
+                <shape android:shape="oval">
+                    <gradient
+                        android:startColor="#FFF8DC"
+                        android:endColor="#F0E68C"
+                        android:type="radial"
+                        android:gradientRadius="22dp" />
+                    <stroke android:width="3dp" android:color="#E6E6FA" />
+                </shape>
+            </item>
+            
+            <!-- Cratères de la lune -->
+            <item android:top="8dp" android:right="12dp" android:width="6dp" android:height="6dp" android:gravity="top|right">
+                <shape android:shape="oval">
+                    <solid android:color="#E6E6FA" />
+                </shape>
+            </item>
+            <item android:top="16dp" android:right="10dp" android:width="4dp" android:height="4dp" android:gravity="top|right">
+                <shape android:shape="oval">
+                    <solid android:color="#E6E6FA" />
+                </shape>
+            </item>
+            
+            <!-- Étoiles ATTÉNUÉES (scintillement) -->
+            <item android:top="8dp" android:left="12dp" android:width="3dp" android:height="3dp" android:gravity="top|left">
+                <shape android:shape="oval">
+                    <solid android:color="#CCFFFFFF" />
+                </shape>
+            </item>
+            <item android:top="18dp" android:left="25dp" android:width="2dp" android:height="2dp" android:gravity="top|left">
+                <shape android:shape="oval">
+                    <solid android:color="#CCFFFFFF" />
+                </shape>
+            </item>
+            <item android:top="12dp" android:left="40dp" android:width="2dp" android:height="2dp" android:gravity="top|left">
+                <shape android:shape="oval">
+                    <solid android:color="#CCFFFFFF" />
+                </shape>
+            </item>
+            <item android:top="25dp" android:left="8dp" android:width="2dp" android:height="2dp" android:gravity="top|left">
+                <shape android:shape="oval">
+                    <solid android:color="#CCFFFFFF" />
+                </shape>
+            </item>
+            <item android:top="15dp" android:left="55dp" android:width="3dp" android:height="3dp" android:gravity="top|left">
+                <shape android:shape="oval">
+                    <solid android:color="#CCFFFFFF" />
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+    
+</animation-list> 

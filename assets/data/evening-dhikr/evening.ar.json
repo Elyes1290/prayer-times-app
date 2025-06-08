@@ -1,0 +1,192 @@
+[
+  {
+    "category": "eveningDhikr",
+    "title": "آية الكرسي",
+    "arabic": "ٱللَّهُ لَآ إِلَٰهَ إِلَّا هُوَ ٱلْحَىُّ ٱلْقَيُّومُ ۚ لَا تَأْخُذُهُۥ سِنَةٌ وَلَا نَوْمٌ ۚ لَّهُۥ مَا فِى ٱلسَّمَٰوَٰتِ وَمَا فِى ٱلْأَرْضِ ۗ مَن ذَا ٱلَّذِى يَشْفَعُ عِندَهُۥٓ إِلَّا بِإِذْنِهِۦ ۚ يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ ۖ وَلَا يُحِيطُونَ بِشَىْءٍ مِّنْ عِلْمِهِۦٓ إِلَّا بِمَا شَآءَ ۚ وَسِعَ كُرْسِيُّهُ ٱلسَّمَٰوَٰتِ وَٱلْأَرْضَ ۖ وَلَا يَـُٔودُهُۥ حِفْظُهُمَا ۚ وَهُوَ ٱلْعَلِىُّ ٱلْعَظِيمُ",
+    "latin": "Allāhu lā ilāha illā huw, al-ḥayyul-qayyūm, lā taʾkhudhuhu sinatun wa lā nawm, lahu mā fī as-samāwāti wa mā fī al-arḍ, man dha alladhī yashfaʿu ʿindahu illā biʾidhnih, yaʿlamu mā bayna aydīhim wa mā khalfahum, wa lā yuḥīṭūna bishayʾin min ʿilmihi illā bimā shāʾ, wasiʿa kursiyyuhu as-samāwāti wa al-arḍ, wa lā yaʾūduhu ḥifẓuhumā, wa huwa al-ʿaliyyu al-ʿaẓīm",
+    "translation": "الله - لا إله إلا هو الحي القيوم. لا تأخذه سنة ولا نوم. له ما في السماوات وما في الأرض. من ذا الذي يشفع عنده إلا بإذنه. يعلم ما بين أيديهم وما خلفهم، ولا يحيطون بشيء من علمه إلا بما شاء. وسع كرسيه السماوات والأرض، ولا يؤوده حفظهما، وهو العلي العظيم.",
+    "notes": "يُقرأ مرة واحدة",
+    "benefits": "من قرأ هذه الآية في الصباح يكون في أمان حتى المساء، ومن قرأها في المساء يكون في أمان حتى الصباح.",
+    "source": "HR. at-Tirmidzi: 2879"
+  },
+  {
+    "category": "eveningDhikr",
+    "title": "سورة الإخلاص",
+    "arabic": "قُلْ هُوَ ٱللَّهُ أَحَدٌ (1) ٱللَّهُ ٱلصَّمَدُ (2) لَمْ يَلِدْ وَلَمْ يُولَدْ (3) وَلَمْ يَكُن لَّهُۥ كُفُوًا أَحَدٌۢ (4)",
+    "latin": "qul huwa Allahu ahad (1) Allahu al-samad (2) lam yalid wa lam yūlad (3) wa lam yakun lahu kufuwan ahad (4)",
+    "translation": "قل هو الله أحد (1) الله الصمد (2) لم يلد ولم يولد (3) ولم يكن له كفوا أحد (4)",
+    "notes": "تُقرأ ثلاث مرات",
+    "benefits": "قال رسول الله ﷺ: قل هو الله أحد والمعوذتين (الفلق والناس) اقرأهن ثلاث مرات صباحاً ومساءً تكفيك من كل شيء.",
+    "source": "HR. Abu Dawud No. 4241"
+  },
+  {
+    "category": "eveningDhikr",
+    "title": "سورة الفلق",
+    "arabic": "قُلْ أَعُوذُ بِرَبِّ ٱلْفَلَقِ (1) مِن شَرِّ مَا خَلَقَ (2) وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ (3) وَمِن شَرِّ ٱلنَّفَّٰثَٰتِ فِى ٱلْعُقَدِ (4) وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ (5)",
+    "latin": "qul a‘udhu birabbi al-falaq (1) min sharri ma khalaq (2) wa min sharri ghasiqin idha waqab (3) wa min sharri an-naffathati fi al-‘uqad (4) wa min sharri hasidin idha hasad (5)",
+    "translation": "قل أعوذ برب الفلق (1) من شر ما خلق (2) ومن شر غاسق إذا وقب (3) ومن شر النفاثات في العقد (4) ومن شر حاسد إذا حسد (5)",
+    "notes": "تُقرأ ثلاث مرات",
+    "benefits": "قال رسول الله ﷺ: قل هو الله أحد والمعوذتين (الفلق والناس) اقرأهن ثلاث مرات صباحاً ومساءً تكفيك من كل شيء.",
+    "source": "HR. Abu Dawud No. 4241"
+  },
+  {
+    "category": "eveningDhikr",
+    "title": "سورة الناس",
+    "arabic": "قُلْ أَعُوذُ بِرَبِّ ٱلنَّاسِ (1) مَلِكِ ٱلنَّاسِ (2) إِلَٰهِ ٱلنَّاسِ (3) مِن شَرِّ ٱلْوَسْوَاسِ ٱلْخَنَّاسِ (4) ٱلَّذِى يُوَسْوِسُ فِى صُدُورِ ٱلنَّاسِ (5) مِنَ ٱلْجِنَّةِ وَٱلنَّاسِ (6)",
+    "latin": "qul a‘udhu birabbi al-nas (1) maliki al-nas (2) ilahi al-nas (3) min sharri al-waswas al-khannas (4) alladhi yuwaswisu fi suduri al-nas (5) mina al-jinnati wa al-nas (6)",
+    "translation": "قل أعوذ برب الناس (1) ملك الناس (2) إله الناس (3) من شر الوسواس الخناس (4) الذي يوسوس في صدور الناس (5) من الجنة والناس (6)",
+    "notes": "تُقرأ ثلاث مرات",
+    "benefits": "قال رسول الله ﷺ: قل هو الله أحد والمعوذتين (الفلق والناس) اقرأهن ثلاث مرات صباحاً ومساءً تكفيك من كل شيء.",
+    "source": "HR. Abu Dawud No. 4241"
+  },
+  {
+    "category": "eveningDhikr",
+    "title": "الدخول في ملك الله وطلب الحماية منه عند المساء",
+    "arabic": "أَمْسَيْنَا وَأَمْسَى الْمُلْكُ للهِ، وَالْحَمْدُ للهِ، لَا إِلَهَ إِلاَّ اللهُ وَحْدَهُ لاَ شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ، وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ، رَبِّ أَسْأَلُكَ خَيْرَ مَا فِي هَذِهِ اللَّيْلَةِ وَخَيْرَ مَا بَعْدَهَا، وَأَعُوذُبِكَ مِنْ شَرِّ مَا فِي هَذِهِ اللَّيْلَةِ وَشَرِّ مَا بَعْدَهَا، رَبِّ أَعُوذُبِكَ مِنَ الْكَسَلِ وَسُوءِ الْكِبَرِ، رَبِّ أَعُوذُبِكَ مِنْ عَذَابٍ فِي النَّارِ وَعَذَابٍ فِي الْقَبْرِ",
+    "latin": "amsayna wa amsa al-mulku lillah walhamdulillah, la ilaha illa Allah wahdahu la sharika lahu, lahu al-mulku walahu al-hamdu wa huwa ‘ala kulli shay’in qadeer. Rabbi as’aluka khayra ma fi hadhihi al-layla wa khayra ma ba’daha, wa a’udhu bika min sharri ma fi hadhihi al-layla wa sharri ma ba’daha. Rabbi a’udhu bika minal kasali wa su’i al-kibar. Rabbi a’udhu bika min ‘adhabin fi al-nar wa ‘adhabin fi al-qabr.",
+    "translation": "دخلنا في المساء، والمُلك لله، والحمد لله، لا إله إلا الله وحده لا شريك له، له الملك وله الحمد وهو على كل شيء قدير. رب أسألك خير ما في هذه الليلة وخير ما بعدها، وأعوذ بك من شر ما في هذه الليلة وشر ما بعدها. رب أعوذ بك من الكسل وسوء الكبر. رب أعوذ بك من عذاب في النار وعذاب في القبر.",
+    "notes": "يُقرأ مرة واحدة",
+    "benefits": "طلب الحماية من الشر أولى، لأن دفع الشر مقدم على جلب الخير.",
+    "source": "HR. Muslim No. 2723 (75), Abu Dawud No. 5071, and at-Tirmidzi 3390, sahih from Abdullah Ibn Mas'ud"
+  },
+  {
+    "category": "eveningDhikr",
+    "title": "الدخول في المساء بفضل الله",
+    "arabic": "اللَّهُمَّ بِكَ أَمْسَيْنَا، وَبِكَ أَصْبَحْنَا، وَبِكَ نَحْيَا، وَبِكَ نَمُوتُ، وَإِلَيْكَ الْمَصِيرُ",
+    "latin": "allahumma bika amsayna wa bika asbahna wa bika nahya wa bika namutu wa ilayka al-masir",
+    "translation": "اللهم بك أمسينا وبك أصبحنا، وبك نحيا وبك نموت وإليك المصير.",
+    "notes": "يُقرأ مرة واحدة",
+    "benefits": "كل ما نقوم به في الصباح والمساء، وفي حياتنا وموتنا، هو بتقدير الله وإليه الرجوع.",
+    "source": "HR. al-Bukhari in al-Abadul Mufrad No. 1199, this wording is the wording of al-Bukhari at-Tirmidzi No. 3391, Abu Dawud No. 5068, Ahmad 11/354, Ibn Majah No. 3868"
+  },
+  {
+    "category": "eveningDhikr",
+    "title": "سيد الاستغفار",
+    "arabic": "اللهم أنت ربي، لا إله إلا أنت، خلقتني وأنا عبدك، وأنا على عهدك ووعدك ما استطعت، أعوذ بك من شر ما صنعت، أبوء لك بنعمتك علي، وأبوء بذنبي فاغفر لي، فإنه لا يغفر الذنوب إلا أنت.",
+    "latin": "allahumma anta rabbi la ilaha illa anta khalaqtani wa ana abduk wa ana 'ala ahdika wa wa'dika mastata'tu, a'udhu bika min sharri ma sanatu, abu'u laka bini'matika 'alayya, wa abu'u bidhanbi faghfir li, fa innahu la yaghfiru adhdhunuba illa anta",
+    "translation": "اللهم أنت ربي، لا إله إلا أنت، خلقتني وأنا عبدك، وأنا على عهدك ووعدك ما استطعت، أعوذ بك من شر ما صنعت، أبوء لك بنعمتك علي، وأبوء بذنبي فاغفر لي، فإنه لا يغفر الذنوب إلا أنت.",
+    "notes": "يُقرأ مرة واحدة",
+    "benefits": "من قرأه في المساء وهو موقن ومات دخل الجنة، وكذلك في الصباح.",
+    "source": "HR. al-Bukhari No. 6306, 6323, Ahmad IV/122-125, an-Nasa'i VIII/279-280"
+  },
+  {
+    "category": "eveningDhikr",
+    "title": "دعاء الصحة والسلامة",
+    "arabic": "اللهم عافني في بدني، اللهم عافني في سمعي، اللهم عافني في بصري، لا إله إلا أنت. اللهم إني أعوذ بك من الكفر والفقر، وأعوذ بك من عذاب القبر، لا إله إلا أنت.",
+    "latin": "allahumma 'afini fi badani, allahumma 'afini fi sam'i, allahumma 'afini fi basari, la ilaha illa anta. allahumma inni a'udhu bika min al-kufri wal-faqr, allahumma inni a'udhu bika min 'adhab al-qabr, la ilaha illa anta",
+    "translation": "اللهم عافني في بدني، اللهم عافني في سمعي، اللهم عافني في بصري، لا إله إلا أنت. اللهم إني أعوذ بك من الكفر والفقر، وأعوذ بك من عذاب القبر، لا إله إلا أنت.",
+    "notes": "يُقرأ مرة واحدة",
+    "benefits": "عندما نطلب الصحة من الله، فإننا نطلب الشفاء من جميع الأمراض البدنية والروحية.",
+    "source": "HR. al-Bukhari in Shahiib al-Adabil Mufrad No. 701, Abu Dawud No. 5090, Ahmad V/42, hasan"
+  },
+  {
+    "category": "eveningDhikr",
+    "title": "دعاء العفو والعافية في الدنيا والآخرة",
+    "arabic": "اللهم إني أسألك العفو والعافية في الدنيا والآخرة. اللهم إني أسألك العفو والعافية في ديني ودنياي وأهلي ومالي. اللهم استر عوراتي وآمن روعاتي. اللهم احفظني من بين يدي ومن خلفي وعن يميني وعن شمالي ومن فوقي وأعوذ بعظمتك أن أغتال من تحتي.",
+    "latin": "allahumma inni as'aluka al-'afwa wa al-'afiyah fi al-dunya wa al-akhirah. allahumma inni as'aluka al-'afwa wa al-'afiyah fi dini wa dunyaya wa ahli wa mali. allahumma astur 'awrati wa amin raw'ati. allahumma ihfazni min bayni yadayya wa min khalfī wa 'an yamini wa 'an shimali wa min fawqi wa a'udhu bi 'azamatika an ughtala min tahti",
+    "translation": "اللهم إني أسألك العفو والعافية في الدنيا والآخرة. اللهم إني أسألك العفو والعافية في ديني ودنياي وأهلي ومالي. اللهم استر عوراتي وآمن روعاتي. اللهم احفظني من بين يدي ومن خلفي وعن يميني وعن شمالي ومن فوقي، وأعوذ بعظمتك أن أغتال من تحتي.",
+    "notes": "يُقرأ مرة واحدة",
+    "benefits": "كان رسول الله ﷺ لا يترك هذا الدعاء صباحاً ومساءً. فيه طلب للعافية في الدين والدنيا والأهل والمال.",
+    "source": "HR. al-Bukhari in al-Abadul Mufrad No. 1200, Abu Dawud No. 5074, an-Nasa'i VII/282, Ibn Majah No. 3871, al-Hakim 1/517-518, and others from Ibn Umar radhiyallahu 'anhumaa"
+  },
+  {
+    "category": "eveningDhikr",
+    "title": "دعاء الوقاية من وساوس الشيطان",
+    "arabic": "اللهم عالم الغيب والشهادة فاطر السماوات والأرض، رب كل شيء ومالكه، أشهد أن لا إله إلا أنت، أعوذ بك من شر نفسي ومن شر الشيطان وشركه، وأن أقترف على نفسي سوءاً أو أجره إلى مسلم.",
+    "latin": "allahumma 'alim al-ghaybi wa al-shahada fatir al-samawat wa al-ard, rabba kulli shay'in wa malikah. ashhadu an la ilaha illa anta. a'udhu bika min sharri nafsi wa min sharri al-shaytan wa shirkihi, wa an aqtarifa 'ala nafsi su'an aw ajurruhu ila muslim",
+    "translation": "اللهم عالم الغيب والشهادة، فاطر السماوات والأرض، رب كل شيء ومالكه. أشهد أن لا إله إلا أنت. أعوذ بك من شر نفسي، ومن شر الشيطان وشركه، وأن أقترف على نفسي سوءاً أو أجره إلى مسلم.",
+    "notes": "يُقرأ مرة واحدة",
+    "benefits": "قال رسول الله ﷺ لأبي بكر: قلها صباحاً ومساءً وعند النوم.",
+    "source": "HR. al-Bukhari in al-Abadul Mufrad No. 1202, at-Tirmidzi No. 3392 and Abu Dawud No. 5067"
+  },
+  {
+    "category": "eveningDhikr",
+    "title": "ذكر الحماية من كل سوء",
+    "arabic": "بسم الله الذي لا يضر مع اسمه شيء في الأرض ولا في السماء وهو السميع العليم.",
+    "latin": "bismillah alladhi la yadurru ma'asmihi shay'un fil-ard wa la fi as-sama' wa huwa al-sami' al-'alim",
+    "translation": "بسم الله الذي لا يضر مع اسمه شيء في الأرض ولا في السماء وهو السميع العليم.",
+    "notes": "يُقرأ ثلاث مرات",
+    "benefits": "من قالها ثلاث مرات صباحاً ومساءً لم يصبه شيء.",
+    "source": "HR. at-Tirmidzi No. 3388, Abu Dawud No. 5088, Ibn Majah No. 3869, al-Hakim 1/514, and Ahmad No. 446 and 474"
+  },
+  {
+    "category": "eveningDhikr",
+    "title": "الإقرار برضا الله، والإسلام، والنبي ﷺ",
+    "arabic": "رضيت بالله رباً، وبالإسلام ديناً، وبمحمد ﷺ نبياً.",
+    "latin": "radiytu billahi rabban wa bil-islami dinan wa bi-muhammadin sallallahu 'alayhi wa sallama nabiyyan",
+    "translation": "رضيت بالله رباً، وبالإسلام ديناً، وبمحمد ﷺ نبياً.",
+    "notes": "تُقرأ ثلاث مرات",
+    "benefits": "من قالها ثلاث مرات صباحاً ومساءً، كان حقاً على الله أن يرضيه يوم القيامة.",
+    "source": "HR. Ahmad IV/337, Abu Dawud No. 5072, at-Tirmidzi No. 3389, Ibn Majah No. 3870, an-Nasa'i in 'Amalul Yaum wal Lailah No. 4 and Ibnus Sunni No. 68"
+  },
+  {
+    "category": "eveningDhikr",
+    "title": "طلب الهداية من الله",
+    "arabic": "يا حي يا قيوم برحمتك أستغيث، أصلح لي شأني كله ولا تكلني إلى نفسي طرفة عين أبداً.",
+    "latin": "ya hayyu ya qayyum birahmatika astaghith, aslih li sha'ni kullahu wa la takilni ila nafsi tarfata 'ayn abadan",
+    "translation": "يا حي يا قيوم برحمتك أستغيث، أصلح لي شأني كله ولا تكلني إلى نفسي طرفة عين أبداً.",
+    "notes": "يُقرأ مرة واحدة",
+    "benefits": "هذا الدعاء فيه تفويض الأمر كله لله والافتقار إليه.",
+    "source": "HR. an-Nasa'i in 'Amalul Yaum wal Lailah No. 575, and al-Hakim 1/545, see Shahiih at-Targhiib wat Tarhiib 1/417 No. 661, Ash-shahiihah No. 227, hasan"
+  },
+  {
+    "category": "eveningDhikr",
+    "title": "الاحتفال بالفطرة الإسلامية عند المساء",
+    "arabic": "أمسينا على فطرة الإسلام، وعلى كلمة الإخلاص، وعلى دين نبينا محمد ﷺ، وعلى ملة أبينا إبراهيم حنيفاً مسلماً وما كان من المشركين.",
+    "latin": "amsayna 'ala fitrat al-islam wa 'ala kalimat al-ikhlas wa 'ala din nabiyyina Muhammad ﷺ wa 'ala millat abina Ibrahim hanifan musliman wa ma kana min al-mushrikin",
+    "translation": "أمسينا على فطرة الإسلام، وعلى كلمة الإخلاص، وعلى دين نبينا محمد ﷺ، وعلى ملة أبينا إبراهيم حنيفاً مسلماً وما كان من المشركين.",
+    "notes": "يُقرأ مرة واحدة",
+    "benefits": "الفطرة تعني التوحيد والسنة، وكلمة الإخلاص هي الشهادة، وحنيفاً أي الاستقامة.",
+    "source": "HR. Ahmad III/406, 407, ad-Darimi II/292 and Ibnus Sunni in Amalul Yaum wal Lailah No. 34, Misykaatul Mashaabiih No. 2415, Shahiihal-Jaami'ish Shaghiir No. 4674, sahih"
+  },
+  {
+    "category": "eveningDhikr",
+    "title": "ذكر توحيد الله",
+    "arabic": "لا إله إلا الله وحده لا شريك له، له الملك وله الحمد وهو على كل شيء قدير.",
+    "latin": "la ilaha illa Allah wahdahu la sharika lahu, lahu al-mulku walahu al-hamdu wa huwa 'ala kulli shay'in qadeer",
+    "translation": "لا إله إلا الله وحده لا شريك له، له الملك وله الحمد وهو على كل شيء قدير.",
+    "notes": "يُقرأ مرة واحدة أو عشر مرات في الصباح، ومائة مرة في النهار",
+    "benefits": "من قالها مائة مرة في اليوم كان له كعتق عشرة رقاب وكتب له مائة حسنة ومحيت عنه مائة سيئة.",
+    "source": "HR al-Bukhari No. 3293 and 6403, Muslim IV/2071 No. 2691 (28), at-Tirmidzi No. 3468, Ibn Majah No. 3798"
+  },
+  {
+    "category": "eveningDhikr",
+    "title": "تسبيح الله وحمده",
+    "arabic": "سبحان الله وبحمده عدد خلقه ورضا نفسه وزنة عرشه ومداد كلماته.",
+    "latin": "subhanallahi wa bihamdihi 'adada khalqihi wa rida nafsihi wa zinata 'arshihi wa midada kalimatihi",
+    "translation": "سبحان الله وبحمده عدد خلقه ورضا نفسه وزنة عرشه ومداد كلماته.",
+    "notes": "تُقرأ ثلاث مرات",
+    "benefits": "قال ﷺ لجويرية: هذا الذكر فاق كل أذكارك من بعد الفجر حتى الضحى.",
+    "source": "HR. Muslim No. 2726. Syarah Muslim XVII/44. From Juwairiyah bint al-Harith radhiyallahu 'anha"
+  },
+  {
+    "category": "eveningDhikr",
+    "title": "التسبيح والاستغفار اليومي",
+    "arabic": "سبحان الله وبحمده",
+    "latin": "subhanallahi wa bihamdihi",
+    "translation": "سبحان الله وبحمده.",
+    "notes": "يُقرأ مائة مرة",
+    "benefits": "من قال سبحان الله وبحمده مائة مرة صباحًا ومساءً لم يأت أحد بأفضل مما جاء به إلا أحد قال أكثر.",
+    "source": "HR. Muslim No. 2691 and No. 2692, from Abu Hurairah radhiyallahu 'anhu Syarah Muslim XVII/17-18, Shahiih at-Targhiib wat Tarhiib 1/413 No. 653"
+  },
+  {
+    "category": "eveningDhikr",
+    "title": "الاستغفار اليومي مائة مرة",
+    "arabic": "أستغفر الله وأتوب إليه",
+    "latin": "astaghfirullah wa atubu ilayh",
+    "translation": "أستغفر الله وأتوب إليه.",
+    "notes": "يُقرأ مائة مرة يومياً",
+    "benefits": "قال رسول الله ﷺ: يا أيها الناس توبوا إلى الله فإني أتوب إليه في اليوم مائة مرة.",
+    "source": "HR. al-Bukhari/Fat-hul Baari XI/101 and Muslim No. 2702"
+  },
+  {
+    "category": "eveningDhikr",
+    "title": "الاستعاذة بكلمات الله التامات",
+    "arabic": "أعوذ بكلمات الله التامات من شر ما خلق.",
+    "latin": "a'udhu bikalimatillahi al-tammati min sharri ma khalaq",
+    "translation": "أعوذ بكلمات الله التامات من شر ما خلق.",
+    "notes": "تُقرأ ثلاث مرات",
+    "benefits": "من قالها ثلاث مرات مساءً لم تصبه فجأة بلاء حتى يصبح.",
+    "source": "HR. Ahmad 11/290, an-Nasa'i in 'Amalul Yaum wal Lailah No. 596, Shahiih at-Targhiib wat Tarhiib 1/412 No. 652, Shahiih al-Jaami 'ish Shaghiir No. 6427"
+  }
+]

@@ -3,14 +3,7 @@ import * as NavigationBar from "expo-navigation-bar";
 import { Drawer } from "expo-router/drawer";
 import { StatusBar } from "expo-status-bar";
 import { useEffect } from "react";
-import {
-  Platform,
-  Pressable,
-  Image,
-  View,
-  Text,
-  ImageBackground,
-} from "react-native";
+import { Platform, Pressable, Image, View, Text } from "react-native";
 import {
   DrawerContentScrollView,
   DrawerItemList,
@@ -19,11 +12,7 @@ import { SettingsProvider } from "../contexts/SettingsContext";
 import "../locales/i18n";
 import { useTranslation } from "react-i18next";
 import type { DrawerContentComponentProps } from "@react-navigation/drawer";
-import {
-  SafeAreaView,
-  useSafeAreaInsets,
-} from "react-native-safe-area-context";
-// (optionnel) pour charger la police sur TOUTES les pages
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import * as Font from "expo-font";
 
 function CustomDrawerContent(props: DrawerContentComponentProps) {
@@ -33,19 +22,18 @@ function CustomDrawerContent(props: DrawerContentComponentProps) {
   });
 
   return (
-    <ImageBackground
-      source={require("../assets/images/parchment_bg.jpg")}
-      style={{ flex: 1 }}
-      imageStyle={{ resizeMode: "cover" }}
-    >
-      <DrawerContentScrollView {...props}>
+    <View style={{ flex: 1, backgroundColor: "#191d2b" /* nuit profond */ }}>
+      <DrawerContentScrollView
+        {...props}
+        contentContainerStyle={{ paddingTop: 0 }}
+      >
         {/* Profil/Logo en haut du menu */}
         <View
           style={{
             alignItems: "center",
             paddingVertical: 32,
-            borderBottomWidth: 2,
-            borderColor: "#ba9c34",
+            borderBottomWidth: 1,
+            borderColor: "#314670", // Liseré bleu nuit
             marginBottom: 10,
           }}
         >
@@ -56,14 +44,14 @@ function CustomDrawerContent(props: DrawerContentComponentProps) {
               height: 72,
               borderRadius: 36,
               marginBottom: 10,
-              backgroundColor: "#fff",
+              backgroundColor: "#22304b",
               borderWidth: 2,
-              borderColor: "#ba9c34",
+              borderColor: "#fffbe8", // doré pâle ou blanc cassé
             }}
           />
           <Text
             style={{
-              color: "#7c6720",
+              color: "#fffbe8",
               fontWeight: "bold",
               fontFamily: "ScheherazadeNew",
               fontSize: 22,
@@ -78,14 +66,14 @@ function CustomDrawerContent(props: DrawerContentComponentProps) {
         <View style={{ paddingHorizontal: 6, paddingTop: 14 }}>
           <View
             style={{
-              backgroundColor: "#e7c86a",
+              backgroundColor: "#242942",
               borderRadius: 22,
-              borderWidth: 2,
-              borderColor: "#ba9c34",
+              borderWidth: 1.5,
+              borderColor: "#3c497e",
               paddingVertical: 10,
               paddingHorizontal: 22,
               alignItems: "center",
-              opacity: 0.5,
+              opacity: 0.65,
               flexDirection: "row",
               justifyContent: "center",
               marginVertical: 5,
@@ -94,12 +82,12 @@ function CustomDrawerContent(props: DrawerContentComponentProps) {
             <MaterialIcons
               name="star"
               size={24}
-              color="#ba9c34"
+              color="#ffd700"
               style={{ marginRight: 8 }}
             />
             <Text
               style={{
-                color: "#7c6720",
+                color: "#ffd700",
                 fontFamily: "ScheherazadeNew",
                 fontWeight: "bold",
                 fontSize: 18,
@@ -111,7 +99,7 @@ function CustomDrawerContent(props: DrawerContentComponentProps) {
           </View>
         </View>
       </DrawerContentScrollView>
-    </ImageBackground>
+    </View>
   );
 }
 
@@ -122,35 +110,30 @@ export default function DrawerLayout() {
 
   useEffect(() => {
     if (Platform.OS === "android") {
-      NavigationBar.setBackgroundColorAsync("transparent");
-      NavigationBar.setButtonStyleAsync("dark");
+      NavigationBar.setBackgroundColorAsync("#191d2b");
+      NavigationBar.setButtonStyleAsync("light");
       NavigationBar.setBehaviorAsync("overlay-swipe");
     }
   }, []);
 
   return (
     <SettingsProvider>
-      <StatusBar style="dark" translucent backgroundColor="transparent" />
+      <StatusBar style="light" translucent backgroundColor="transparent" />
       <Drawer
         drawerContent={(props) => <CustomDrawerContent {...props} />}
         screenOptions={{
           header: ({ navigation }) => (
-            <ImageBackground
-              source={require("../assets/images/parchment_bg.jpg")}
+            <View
               style={{
                 width: "100%",
                 height: headerHeight,
                 flexDirection: "row",
                 alignItems: "center",
                 justifyContent: "space-between",
-                paddingTop: insets.top, // Pour que le fond aille sous la status bar
-                position: "relative", // Important pour ImageBackground absolute
-
-                // Pas de paddingBottom ni alignItems: "flex-end"
-                // Ainsi les icônes sont bien centrées verticalement
-              }}
-              imageStyle={{
-                resizeMode: "cover",
+                paddingTop: insets.top,
+                backgroundColor: "rgba(25,29,43,0.96)",
+                borderBottomWidth: 1,
+                borderColor: "#2c3958",
               }}
             >
               {/* Menu à gauche */}
@@ -158,7 +141,7 @@ export default function DrawerLayout() {
                 onPress={() => navigation.toggleDrawer()}
                 style={{ width: 44, alignItems: "center" }}
               >
-                <MaterialIcons name="menu" size={28} color="#ba9c34" />
+                <MaterialIcons name="menu" size={28} color="#fffbe8" />
               </Pressable>
               {/* Logo centré */}
               <Image
@@ -167,21 +150,22 @@ export default function DrawerLayout() {
                   width: 38,
                   height: 38,
                   borderRadius: 19,
-                  backgroundColor: "#fff",
+                  backgroundColor: "#22304b",
                   borderWidth: 2,
-                  borderColor: "#ba9c34",
+                  borderColor: "#fffbe8",
                 }}
               />
               {/* Espace réservé à droite */}
               <View style={{ width: 44 }} />
-            </ImageBackground>
+            </View>
           ),
-          // Drawer menu style
           drawerStyle: {
             width: 260,
+            backgroundColor: "#191d2b",
+            borderRightWidth: 0,
           },
-          drawerActiveTintColor: "#997520",
-          drawerInactiveTintColor: "#7c6720",
+          drawerActiveTintColor: "#ffd700", // doré clair
+          drawerInactiveTintColor: "#fffbe8", // blanc cassé
           drawerLabelStyle: {
             fontSize: 18,
             fontFamily: "ScheherazadeNew",
@@ -196,6 +180,11 @@ export default function DrawerLayout() {
         <Drawer.Screen name="qibla" options={{ title: t("qibla") }} />
         <Drawer.Screen name="quran" options={{ title: t("quran") }} />
         <Drawer.Screen name="hadith" options={{ title: t("hadiths") }} />
+        <Drawer.Screen name="dhikr" options={{ title: t("dhikr_dua") }} />
+        <Drawer.Screen
+          name="asmaulhusna"
+          options={{ title: t("asmaulhusna") }}
+        />
         <Drawer.Screen name="about" options={{ title: t("about") }} />
       </Drawer>
     </SettingsProvider>

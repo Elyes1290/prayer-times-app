@@ -1,7 +1,7 @@
 // hooks/usePrayerTimes.ts
 import { CalculationMethod, Coordinates, PrayerTimes } from "adhan";
 import type { LocationObject } from "expo-location";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useMemo } from "react";
 import { SettingsContext } from "../contexts/SettingsContext";
 
 export function usePrayerTimes(
@@ -11,11 +11,22 @@ export function usePrayerTimes(
   const { calcMethod } = useContext(SettingsContext);
   const [times, setTimes] = useState<PrayerTimes | null>(null);
 
+  // Stabiliser les valeurs primitives pour éviter les boucles infinies
+  const latitude = location?.coords?.latitude;
+  const longitude = location?.coords?.longitude;
+  const dateKey = useMemo(() => {
+    return `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
+  }, [date.getFullYear(), date.getMonth(), date.getDate()]);
+
   useEffect(() => {
-    if (!location) return;
-    const { latitude, longitude } = location.coords;
+    if (!latitude || !longitude) {
+      setTimes(null);
+      return;
+    }
+
     const coords = new Coordinates(latitude, longitude);
-    // on détermine params directement ici
+
+    // Déterminer params directement ici
     let params;
     switch (calcMethod) {
       case "MuslimWorldLeague":
@@ -50,8 +61,10 @@ export function usePrayerTimes(
         params = CalculationMethod.MuslimWorldLeague();
         break;
     }
-    setTimes(new PrayerTimes(coords, date, params));
-  }, [location, date, calcMethod]);
+
+    const prayerTimes = new PrayerTimes(coords, date, params);
+    setTimes(prayerTimes);
+  }, [latitude, longitude, dateKey, calcMethod]);
 
   return times;
 }

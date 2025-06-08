@@ -92,7 +92,7 @@ android {
         applicationId 'com.drogbinho.prayertimesapp2'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 8
+        versionCode 14
         versionName "1.0.0"
     }
     signingConfigs {
@@ -180,4 +180,6 @@ dependencies {
     } else {
         implementation jscFlavor
     }
+    implementation "com.batoulapps.adhan:adhan:1.2.1"
+
 }

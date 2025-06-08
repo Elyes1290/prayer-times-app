@@ -92,5 +92,18 @@
   "qibla": "Kiblat",
   "quran": "Al-Quran",
   "hadiths": "Hadits",
-  "about": "Tentang"
+  "about": "Tentang",
+  "asmaulhusna": "Asmaul Husna",
+  "asmaulhusna_title": "99 Nama Allah",
+  "asmaulhusna_search_placeholder": "Cari berdasarkan nama, arti, atau transliterasi...",
+  "dhikr": {
+    "title": "Dzikir & Doa",
+    "search_placeholder": "Cari dzikir atau doa..."
+  },
+  "fajr": "Subuh",
+  "sunrise": "Matahari Terbit",
+  "dhuhr": "Zuhur",
+  "asr": "Ashar",
+  "maghrib": "Magrib",
+  "isha": "Isya"
 }

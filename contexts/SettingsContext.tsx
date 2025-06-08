@@ -1,5 +1,11 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useCallback, useEffect, useState } from "react";
+import { Platform, NativeModules } from "react-native";
+import * as Location from "expo-location";
+import i18n from "../locales/i18n";
+import { scheduleNotificationsFor2Days } from "../utils/sheduleAllNotificationsFor30Days";
+
+const { AdhanModule } = NativeModules;
 
 export type AdhanSoundKey =
   | "adhamalsharqawe"
@@ -21,215 +27,610 @@ export type CalcMethodKey =
   | "Kuwait"
   | "Qatar"
   | "Singapore"
-  | "Tehran";
+  | "Tehran"
+  | "Turkey";
 
-export type LocationMode = "auto" | "manual";
+export type LocationMode = "auto" | "manual" | null;
+
+export type Coords = {
+  lat: number;
+  lon: number;
+};
 
 export type ManualLocation = {
   city: string;
-  lat: number;
-  lon: number;
   country?: string;
-} | null;
+} & Coords;
 
 export interface SettingsContextType {
+  isLoading: boolean;
+  errorMsg: string | null;
+  locationMode: "auto" | "manual" | null;
+  manualLocation: { lat: number; lon: number; city: string } | null;
+  autoLocation: { lat: number; lon: number } | null;
+  isRefreshingLocation: boolean;
   notificationsEnabled: boolean;
-  setNotificationsEnabled: (value: boolean) => void;
-  calcMethod: CalcMethodKey;
-  setCalcMethod: (method: CalcMethodKey) => void;
-  soundEnabled: boolean;
-  setSoundEnabled: (value: boolean) => void;
-  adhanSound: AdhanSoundKey;
-  setAdhanSound: (s: AdhanSoundKey) => void;
   remindersEnabled: boolean;
-  setRemindersEnabled: (value: boolean) => void;
   reminderOffset: number;
-  setReminderOffset: (value: number) => void;
-  locationMode: LocationMode;
-  setLocationMode: (mode: LocationMode) => void;
-  manualLocation: ManualLocation;
-  setManualLocation: (loc: ManualLocation) => void;
-  language: string; // <-- ajouté ici
-  setLanguage: (lang: string) => void; // <-- ajouté ici
+  calcMethod: CalcMethodKey;
+  adhanSound: AdhanSoundKey;
+  adhanVolume: number;
+  dhikrSettings: {
+    enabledAfterSalah: boolean;
+    delayAfterSalah: number;
+    enabledMorningDhikr: boolean;
+    delayMorningDhikr: number;
+    enabledEveningDhikr: boolean;
+    delayEveningDhikr: number;
+    enabledSelectedDua: boolean;
+    delaySelectedDua: number;
+  };
+  currentLanguage: string;
+  setLocationMode: (mode: "auto" | "manual" | null) => void;
+  setManualLocation: (
+    location: { lat: number; lon: number; city: string } | null
+  ) => void;
+  refreshAutoLocation: () => Promise<void>;
+  setNotificationsEnabled: (enabled: boolean) => void;
+  setRemindersEnabled: (enabled: boolean) => void;
+  setReminderOffset: (offset: number) => void;
+  setCalcMethod: (method: CalcMethodKey) => void;
+  setAdhanSound: (sound: AdhanSoundKey) => void;
+  setAdhanVolume: (volume: number) => void;
+  setEnabledAfterSalah: (enabled: boolean) => void;
+  setEnabledMorningDhikr: (enabled: boolean) => void;
+  setEnabledEveningDhikr: (enabled: boolean) => void;
+  setDelayMorningDhikr: (delay: number) => void;
+  setDelayEveningDhikr: (delay: number) => void;
+  setEnabledSelectedDua: (enabled: boolean) => void;
+  setDelaySelectedDua: (delay: number) => void;
+  setCurrentLanguage: (language: string) => void;
+  saveAndReprogramAll: () => Promise<void>;
 }
 
-export const SettingsContext = createContext<SettingsContextType>({
-  notificationsEnabled: true,
-  setNotificationsEnabled: () => {},
-  calcMethod: "MuslimWorldLeague",
-  setCalcMethod: () => {},
-  soundEnabled: true,
-  setSoundEnabled: () => {},
-  adhanSound: "adhamalsharqawe",
-  setAdhanSound: () => {},
-  remindersEnabled: true,
-  setRemindersEnabled: () => {},
-  reminderOffset: 10,
-  setReminderOffset: () => {},
+const defaultSettings: SettingsContextType = {
+  isLoading: true,
+  errorMsg: null,
   locationMode: "auto",
-  setLocationMode: () => {},
   manualLocation: null,
+  autoLocation: null,
+  isRefreshingLocation: false,
+  notificationsEnabled: true,
+  remindersEnabled: true,
+  reminderOffset: 10,
+  calcMethod: "MuslimWorldLeague",
+  adhanSound: "misharyrachid",
+  adhanVolume: 1.0,
+  dhikrSettings: {
+    enabledAfterSalah: true,
+    delayAfterSalah: 5,
+    enabledMorningDhikr: true,
+    delayMorningDhikr: 10,
+    enabledEveningDhikr: true,
+    delayEveningDhikr: 10,
+    enabledSelectedDua: true,
+    delaySelectedDua: 15,
+  },
+  currentLanguage: "en",
+  setLocationMode: () => {},
   setManualLocation: () => {},
-  language: "fr", // valeur par défaut
-  setLanguage: () => {},
-});
+  refreshAutoLocation: async () => {},
+  setNotificationsEnabled: () => {},
+  setRemindersEnabled: () => {},
+  setReminderOffset: () => {},
+  setCalcMethod: () => {},
+  setAdhanSound: () => {},
+  setAdhanVolume: () => {},
+  setEnabledAfterSalah: () => {},
+  setEnabledMorningDhikr: () => {},
+  setEnabledEveningDhikr: () => {},
+  setDelayMorningDhikr: () => {},
+  setDelayEveningDhikr: () => {},
+  setEnabledSelectedDua: () => {},
+  setDelaySelectedDua: () => {},
+  setCurrentLanguage: () => {},
+  saveAndReprogramAll: async () => {},
+};
 
-export function SettingsProvider({ children }: { children: React.ReactNode }) {
-  const [notificationsEnabled, setNotificationsEnabled] =
-    useState<boolean>(true);
+export const SettingsContext =
+  createContext<SettingsContextType>(defaultSettings);
+
+export const SettingsProvider = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [isInitializing, setIsInitializing] = useState(true);
+  const [notificationsEnabled, setNotificationsEnabled] = useState(true);
   const [calcMethod, setCalcMethod] =
     useState<CalcMethodKey>("MuslimWorldLeague");
-  const [soundEnabled, setSoundEnabled] = useState<boolean>(true);
-  const [adhanSound, setAdhanSound] =
-    useState<AdhanSoundKey>("adhamalsharqawe");
-  const [remindersEnabled, setRemindersEnabled] = useState<boolean>(true);
-  const [reminderOffset, setReminderOffset] = useState<number>(10);
+  const [soundEnabled, setSoundEnabled] = useState(true);
+  const [adhanSound, setAdhanSound] = useState<AdhanSoundKey>("misharyrachid");
+  const [adhanVolume, setAdhanVolume] = useState(1.0);
+  const [remindersEnabled, setRemindersEnabled] = useState(true);
+  const [reminderOffset, setReminderOffset] = useState(10);
+  const [enabledAfterSalah, setEnabledAfterSalah] = useState(true);
+  const [enabledMorningDhikr, setEnabledMorningDhikr] = useState(true);
+  const [enabledEveningDhikr, setEnabledEveningDhikr] = useState(true);
+  const [delayMorningDhikr, setDelayMorningDhikr] = useState(10);
+  const [delayEveningDhikr, setDelayEveningDhikr] = useState(10);
+  const [enabledSelectedDua, setEnabledSelectedDua] = useState(true);
+  const [delaySelectedDua, setDelaySelectedDua] = useState(15);
+  const [locationMode, setLocationMode] = useState<LocationMode | null>(null);
+  const [manualLocation, setManualLocation] = useState<ManualLocation | null>(
+    null
+  );
+  const [currentLanguage, setCurrentLanguage] = useState<string>("en");
 
-  const [locationMode, setLocationMode] = useState<LocationMode>("manual");
-  const [manualLocation, setManualLocation] = useState<ManualLocation>(null);
+  // New state for auto location
+  const [autoLocation, setAutoLocation] = useState<Coords | null>(null);
+  const [locationError, setLocationError] = useState<string | null>(null);
+  const [isRefreshingLocation, setIsRefreshingLocation] = useState(false);
 
-  const [language, setLanguage] = useState<string>("fr"); // état pour la langue
+  const refreshAutoLocation = useCallback(async () => {
+    try {
+      setLocationError(null);
+      setIsRefreshingLocation(true);
 
-  // Chargement unique des settings depuis AsyncStorage au montage
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== "granted") {
+        const err = "La permission d'accès à la localisation a été refusée";
+        setLocationError(err);
+        setIsRefreshingLocation(false);
+        return;
+      }
+
+      const location = await Location.getCurrentPositionAsync({
+        accuracy: Location.Accuracy.Balanced,
+      });
+
+      const coords = {
+        lat: location.coords.latitude,
+        lon: location.coords.longitude,
+      };
+
+      setAutoLocation(coords);
+      setLocationError(null); // Clear any previous errors
+
+      if (Platform.OS === "android" && AdhanModule && AdhanModule.setLocation) {
+        try {
+          AdhanModule.setLocation(coords.lat, coords.lon);
+        } catch (error) {
+          console.error(
+            "Erreur lors de l'appel AdhanModule.setLocation:",
+            error
+          );
+          // Ne pas faire échouer le processus pour cette erreur
+        }
+      }
+    } catch (error) {
+      const err = `Erreur lors de la récupération de la position: ${error}`;
+      setLocationError(err);
+      setAutoLocation(null); // Clear location on error
+    } finally {
+      setIsRefreshingLocation(false);
+    }
+  }, []);
+
   useEffect(() => {
-    (async () => {
+    const loadSettings = async () => {
+      // Charger d'abord depuis AsyncStorage
       const [
         notificationsEnabledValue,
         calcMethodValue,
         soundEnabledValue,
         adhanSoundValue,
+        adhanVolumeValue,
         remindersEnabledValue,
         reminderOffsetValue,
         locationModeValue,
         manualLocationValue,
-        languageValue,
+        enabledAfterSalahValue,
+        enabledMorningDhikrValue,
+        delayMorningDhikrValue,
+        enabledEveningDhikrValue,
+        delayEveningDhikrValue,
+        enabledSelectedDuaValue,
+        delaySelectedDuaValue,
+        currentLanguageValue,
       ] = await Promise.all([
         AsyncStorage.getItem("notificationsEnabled"),
         AsyncStorage.getItem("calcMethod"),
         AsyncStorage.getItem("soundEnabled"),
         AsyncStorage.getItem("adhanSound"),
+        AsyncStorage.getItem("adhanVolume"),
         AsyncStorage.getItem("remindersEnabled"),
         AsyncStorage.getItem("reminderOffset"),
         AsyncStorage.getItem("locationMode"),
         AsyncStorage.getItem("manualLocation"),
-        AsyncStorage.getItem("language"), // chargement langue
+        AsyncStorage.getItem("enabledAfterSalah"),
+        AsyncStorage.getItem("enabledMorningDhikr"),
+        AsyncStorage.getItem("delayMorningDhikr"),
+        AsyncStorage.getItem("enabledEveningDhikr"),
+        AsyncStorage.getItem("delayEveningDhikr"),
+        AsyncStorage.getItem("enabledSelectedDua"),
+        AsyncStorage.getItem("delaySelectedDua"),
+        AsyncStorage.getItem("currentLanguage"),
       ]);
-      if (notificationsEnabledValue !== null)
-        setNotificationsEnabled(notificationsEnabledValue === "true");
+
+      // Si AsyncStorage est vide, essayer de charger depuis Android
+      let androidSettings = null;
       if (
-        calcMethodValue &&
-        [
-          "MuslimWorldLeague",
-          "Egyptian",
-          "Karachi",
-          "UmmAlQura",
-          "NorthAmerica",
-          "Kuwait",
-          "Qatar",
-          "Singapore",
-          "Tehran",
-        ].includes(calcMethodValue)
+        Platform.OS === "android" &&
+        AdhanModule &&
+        (notificationsEnabledValue === null ||
+          remindersEnabledValue === null ||
+          enabledAfterSalahValue === null)
       ) {
-        setCalcMethod(calcMethodValue as CalcMethodKey);
+        try {
+          // On pourrait ajouter une méthode getNotificationSettings côté Android
+          // Pour l'instant, on garde les valeurs par défaut mais on évite d'écraser Android
+        } catch (error) {}
       }
+
+      if (notificationsEnabledValue !== null) {
+        setNotificationsEnabled(notificationsEnabledValue === "true");
+      } else {
+        // NE PAS sauvegarder immédiatement côté Android pour éviter d'écraser
+      }
+      if (calcMethodValue) setCalcMethod(calcMethodValue as CalcMethodKey);
       if (soundEnabledValue !== null)
         setSoundEnabled(soundEnabledValue === "true");
       if (adhanSoundValue) setAdhanSound(adhanSoundValue as AdhanSoundKey);
-      if (remindersEnabledValue !== null)
+      if (adhanVolumeValue !== null) setAdhanVolume(Number(adhanVolumeValue));
+      if (remindersEnabledValue !== null) {
         setRemindersEnabled(remindersEnabledValue === "true");
+      } else {
+      }
       if (reminderOffsetValue !== null)
         setReminderOffset(Number(reminderOffsetValue));
-      if (locationModeValue === "manual" || locationModeValue === "auto")
-        setLocationMode(locationModeValue as LocationMode);
-      if (manualLocationValue) {
-        try {
-          const loc = JSON.parse(manualLocationValue);
-          if (
-            typeof loc.lat === "number" &&
-            typeof loc.lon === "number" &&
-            typeof loc.city === "string"
-          ) {
-            setManualLocation(loc);
-          }
-        } catch (e) {
-          setManualLocation(null);
-        }
+      const loadedLocationMode = locationModeValue as LocationMode | null;
+      if (loadedLocationMode) setLocationMode(loadedLocationMode);
+      if (manualLocationValue)
+        setManualLocation(JSON.parse(manualLocationValue));
+      if (enabledAfterSalahValue !== null) {
+        setEnabledAfterSalah(enabledAfterSalahValue === "true");
+      } else {
       }
-      if (languageValue) setLanguage(languageValue); // setter langue
-    })();
-  }, []);
+      if (enabledMorningDhikrValue !== null) {
+        setEnabledMorningDhikr(enabledMorningDhikrValue === "true");
+      } else {
+      }
+      if (delayMorningDhikrValue !== null)
+        setDelayMorningDhikr(Number(delayMorningDhikrValue));
+      if (enabledEveningDhikrValue !== null) {
+        setEnabledEveningDhikr(enabledEveningDhikrValue === "true");
+      } else {
+      }
+      if (delayEveningDhikrValue !== null)
+        setDelayEveningDhikr(Number(delayEveningDhikrValue));
+      if (enabledSelectedDuaValue !== null) {
+        setEnabledSelectedDua(enabledSelectedDuaValue === "true");
+      } else {
+      }
+      if (delaySelectedDuaValue !== null)
+        setDelaySelectedDua(Number(delaySelectedDuaValue));
 
-  // Persistance des settings
-  useEffect(() => {
-    AsyncStorage.setItem(
-      "notificationsEnabled",
-      notificationsEnabled ? "true" : "false"
-    );
-  }, [notificationsEnabled]);
+      // Gestion de la langue
+      if (currentLanguageValue) {
+        setCurrentLanguage(currentLanguageValue);
+        if (i18n.language !== currentLanguageValue) {
+          i18n.changeLanguage(currentLanguageValue);
+        }
+      } else {
+        // Si pas de langue sauvegardée, utiliser celle de i18n (défaut système ou anglais)
+        const defaultLang = i18n.language || "en";
 
-  useEffect(() => {
-    AsyncStorage.setItem("calcMethod", calcMethod);
-  }, [calcMethod]);
+        setCurrentLanguage(defaultLang);
+        AsyncStorage.setItem("currentLanguage", defaultLang);
+      }
 
-  useEffect(() => {
-    AsyncStorage.setItem("soundEnabled", soundEnabled ? "true" : "false");
-  }, [soundEnabled]);
+      // New logic for initial location load
+      if (loadedLocationMode === "auto") {
+        try {
+          const savedAuto = await AdhanModule.getSavedAutoLocation();
+          if (savedAuto && savedAuto.lat && savedAuto.lon) {
+            setAutoLocation(savedAuto);
+          } else {
+            // Pas de localisation sauvée, l'utilisateur devra refaire la demande
+            setLocationError("Aucune localisation automatique sauvée");
+          }
+        } catch (error) {
+          console.error(
+            "Erreur lors du chargement de la localisation sauvée:",
+            error
+          );
+          setLocationError("Erreur lors du chargement de la localisation");
+        }
+      } else if (loadedLocationMode === null) {
+        // First time user - don't set any default mode
+        // Let the HomeScreen handle the choice UI
+      }
 
-  useEffect(() => {
-    AsyncStorage.setItem("adhanSound", adhanSound);
-  }, [adhanSound]);
+      setIsLoaded(true);
+      setIsInitializing(false);
+    };
 
-  useEffect(() => {
-    AsyncStorage.setItem(
-      "remindersEnabled",
-      remindersEnabled ? "true" : "false"
-    );
-  }, [remindersEnabled]);
+    loadSettings();
+  }, []); // ✅ Suppression de refreshAutoLocation des dépendances
 
-  useEffect(() => {
-    AsyncStorage.setItem("reminderOffset", reminderOffset.toString());
-  }, [reminderOffset]);
+  const handleSetLocationMode = (mode: LocationMode) => {
+    setLocationMode(mode);
+    if (mode !== null) {
+      AsyncStorage.setItem("locationMode", mode);
+    } else {
+      AsyncStorage.removeItem("locationMode");
+    }
+  };
 
-  useEffect(() => {
-    AsyncStorage.setItem("locationMode", locationMode);
-  }, [locationMode]);
+  const handleSetManualLocation = (location: ManualLocation | null) => {
+    setManualLocation(location);
+    if (location) {
+      AsyncStorage.setItem("manualLocation", JSON.stringify(location));
+    } else {
+      AsyncStorage.removeItem("manualLocation");
+    }
+  };
 
-  useEffect(() => {
-    AsyncStorage.setItem(
-      "manualLocation",
-      JSON.stringify(manualLocation || {})
-    );
-  }, [manualLocation]);
+  // Fonction pour reprogrammer toutes les notifications
+  const saveAndReprogramAll = async () => {
+    if (!locationMode || (!autoLocation && !manualLocation)) {
+      return;
+    }
 
-  // Persistance de la langue
-  useEffect(() => {
-    AsyncStorage.setItem("language", language);
-  }, [language]);
+    try {
+      const userLocation =
+        locationMode === "auto" && autoLocation
+          ? { latitude: autoLocation.lat, longitude: autoLocation.lon }
+          : manualLocation
+          ? { latitude: manualLocation.lat, longitude: manualLocation.lon }
+          : null;
+
+      if (!userLocation) {
+        return;
+      }
+
+      await scheduleNotificationsFor2Days({
+        userLocation,
+        calcMethod,
+        settings: {
+          notificationsEnabled,
+          adhanEnabled: true, // Pour l'instant on suppose que l'adhan est toujours activé
+        },
+        adhanSound,
+        remindersEnabled,
+        reminderOffset,
+        dhikrSettings: {
+          enabledAfterSalah,
+          delayAfterSalah: 5,
+          enabledMorningDhikr,
+          delayMorningDhikr,
+          enabledEveningDhikr,
+          delayEveningDhikr,
+          enabledSelectedDua,
+          delaySelectedDua,
+        },
+      });
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  const value: SettingsContextType = {
+    isLoading: !isLoaded,
+    errorMsg: locationError,
+    locationMode,
+    manualLocation,
+    autoLocation,
+    isRefreshingLocation,
+    notificationsEnabled,
+    remindersEnabled,
+    reminderOffset,
+    calcMethod,
+    adhanSound,
+    adhanVolume,
+    dhikrSettings: {
+      enabledAfterSalah,
+      delayAfterSalah: 5,
+      enabledMorningDhikr,
+      delayMorningDhikr,
+      enabledEveningDhikr,
+      delayEveningDhikr,
+      enabledSelectedDua,
+      delaySelectedDua,
+    },
+    currentLanguage,
+    setLocationMode: handleSetLocationMode,
+    setManualLocation: handleSetManualLocation,
+    refreshAutoLocation,
+    setNotificationsEnabled: (v) => {
+      setNotificationsEnabled(v);
+      AsyncStorage.setItem("notificationsEnabled", String(v));
+
+      // Sauvegarder immédiatement côté Android pour que les Receivers aient les bonnes valeurs
+      // MAIS seulement si on n'est pas en train d'initialiser (pour éviter d'écraser)
+      if (!isInitializing && Platform.OS === "android" && AdhanModule) {
+        AdhanModule.saveNotificationSettings({
+          notificationsEnabled: v,
+        });
+      } else if (isInitializing) {
+      }
+    },
+    setRemindersEnabled: (v) => {
+      setRemindersEnabled(v);
+      AsyncStorage.setItem("remindersEnabled", String(v));
+
+      // Sauvegarder immédiatement côté Android
+      if (!isInitializing && Platform.OS === "android" && AdhanModule) {
+        AdhanModule.saveNotificationSettings({
+          remindersEnabled: v,
+        });
+      } else if (isInitializing) {
+      }
+    },
+    setReminderOffset: (v) => {
+      setReminderOffset(v);
+      AsyncStorage.setItem("reminderOffset", String(v));
+
+      // CRITIQUE: Sauvegarder immédiatement côté Android
+      if (!isInitializing && Platform.OS === "android" && AdhanModule) {
+        AdhanModule.saveNotificationSettings({
+          reminderOffset: v,
+        });
+      } else if (isInitializing) {
+      }
+    },
+    setCalcMethod: (v) => {
+      setCalcMethod(v);
+      AsyncStorage.setItem("calcMethod", v);
+    },
+    setAdhanSound: (v) => {
+      setAdhanSound(v);
+      AsyncStorage.setItem("adhanSound", v);
+
+      // IMPORTANT: Sauvegarder aussi côté Android
+      if (Platform.OS === "android" && AdhanModule) {
+        AdhanModule.setAdhanSound(v);
+      }
+
+      // Reprogrammer automatiquement les notifications pour utiliser le nouveau son
+      // MAIS d'abord annuler toutes les alarmes adhan existantes car elles gardent l'ancien son
+      if (!isInitializing) {
+        setTimeout(async () => {
+          try {
+            // CRITIQUE: Annuler d'abord toutes les alarmes adhan existantes
+            if (Platform.OS === "android" && AdhanModule) {
+              AdhanModule.cancelAllAdhanAlarms();
+            }
+
+            await saveAndReprogramAll();
+          } catch (error) {}
+        }, 100); // Petit délai pour laisser l'interface se mettre à jour d'abord
+      }
+    },
+    setAdhanVolume: (v) => {
+      setAdhanVolume(v);
+      AsyncStorage.setItem("adhanVolume", String(v));
+
+      // Sauvegarder côté Android
+      if (Platform.OS === "android" && AdhanModule) {
+        AdhanModule.setAdhanVolume(v);
+      }
+    },
+    setEnabledAfterSalah: (v) => {
+      setEnabledAfterSalah(v);
+      AsyncStorage.setItem("enabledAfterSalah", String(v));
+
+      // Sauvegarder immédiatement côté Android
+      if (!isInitializing && Platform.OS === "android" && AdhanModule) {
+        AdhanModule.saveNotificationSettings({
+          enabledAfterSalah: v,
+        });
+      } else if (isInitializing) {
+      }
+    },
+    setEnabledMorningDhikr: (v) => {
+      setEnabledMorningDhikr(v);
+      AsyncStorage.setItem("enabledMorningDhikr", String(v));
+
+      // Sauvegarder immédiatement côté Android
+      if (!isInitializing && Platform.OS === "android" && AdhanModule) {
+        AdhanModule.saveNotificationSettings({
+          enabledMorningDhikr: v,
+        });
+      } else if (isInitializing) {
+      }
+    },
+    setEnabledEveningDhikr: (v) => {
+      setEnabledEveningDhikr(v);
+      AsyncStorage.setItem("enabledEveningDhikr", String(v));
+
+      // Sauvegarder immédiatement côté Android
+      if (!isInitializing && Platform.OS === "android" && AdhanModule) {
+        AdhanModule.saveNotificationSettings({
+          enabledEveningDhikr: v,
+        });
+      } else if (isInitializing) {
+      }
+    },
+    setDelayMorningDhikr: (v) => {
+      setDelayMorningDhikr(v);
+      AsyncStorage.setItem("delayMorningDhikr", String(v));
+
+      // CRITIQUE: Sauvegarder immédiatement côté Android
+      if (!isInitializing && Platform.OS === "android" && AdhanModule) {
+        AdhanModule.saveNotificationSettings({
+          delayMorningDhikr: v,
+        });
+      } else if (isInitializing) {
+      }
+    },
+    setDelayEveningDhikr: (v) => {
+      setDelayEveningDhikr(v);
+      AsyncStorage.setItem("delayEveningDhikr", String(v));
+
+      // CRITIQUE: Sauvegarder immédiatement côté Android
+      if (!isInitializing && Platform.OS === "android" && AdhanModule) {
+        AdhanModule.saveNotificationSettings({
+          delayEveningDhikr: v,
+        });
+      } else if (isInitializing) {
+      }
+    },
+    setEnabledSelectedDua: (v) => {
+      setEnabledSelectedDua(v);
+      AsyncStorage.setItem("enabledSelectedDua", String(v));
+
+      // Sauvegarder immédiatement côté Android
+      if (!isInitializing && Platform.OS === "android" && AdhanModule) {
+        AdhanModule.saveNotificationSettings({
+          enabledSelectedDua: v,
+        });
+      } else if (isInitializing) {
+      }
+    },
+    setDelaySelectedDua: (v) => {
+      setDelaySelectedDua(v);
+      AsyncStorage.setItem("delaySelectedDua", String(v));
+
+      // CRITIQUE: Sauvegarder immédiatement côté Android
+      if (!isInitializing && Platform.OS === "android" && AdhanModule) {
+        AdhanModule.saveNotificationSettings({
+          delaySelectedDua: v,
+        });
+      } else if (isInitializing) {
+      }
+    },
+    setCurrentLanguage: (language) => {
+      setCurrentLanguage(language);
+      AsyncStorage.setItem("currentLanguage", language);
+
+      // Synchroniser avec i18n
+      i18n.changeLanguage(language);
+
+      // IMPORTANT: Transmettre immédiatement la langue côté Android
+      // pour les notifications ET le widget !
+      if (!isInitializing && Platform.OS === "android" && AdhanModule) {
+        AdhanModule.saveNotificationSettings({
+          currentLanguage: language,
+        });
+
+        // Sauvegarder aussi dans SharedPreferences pour le widget
+        try {
+          const AsyncStorage =
+            require("@react-native-async-storage/async-storage").default;
+          AsyncStorage.setItem("currentLanguage", language);
+        } catch (error) {}
+      } else if (isInitializing) {
+      }
+    },
+    saveAndReprogramAll,
+  };
 
   return (
-    <SettingsContext.Provider
-      value={{
-        notificationsEnabled,
-        setNotificationsEnabled,
-        calcMethod,
-        setCalcMethod,
-        soundEnabled,
-        setSoundEnabled,
-        adhanSound,
-        setAdhanSound,
-        remindersEnabled,
-        setRemindersEnabled,
-        reminderOffset,
-        setReminderOffset,
-        locationMode,
-        setLocationMode,
-        manualLocation,
-        setManualLocation,
-        language, // ajouté ici
-        setLanguage, // ajouté ici
-      }}
-    >
+    <SettingsContext.Provider value={value}>
       {children}
     </SettingsContext.Provider>
   );
-}
+};

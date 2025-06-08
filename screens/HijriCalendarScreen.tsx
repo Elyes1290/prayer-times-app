@@ -12,8 +12,8 @@ import { DateNavigator } from "../components/DateNavigator";
 import { Colors } from "../constants/Colors";
 import { getIslamicEventsForYear } from "../utils/islamicEvents";
 import { useTranslation } from "react-i18next";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-// Helper pour formater la date en YYYY-MM-DD locale
 function formatLocalDateString(date: Date) {
   const year = date.getFullYear();
   const month = date.getMonth() + 1;
@@ -26,8 +26,8 @@ export default function HijriCalendarScreen() {
   const { t } = useTranslation();
   const [selectedDate, setSelectedDate] = useState(new Date());
   const events = getIslamicEventsForYear(selectedDate.getFullYear());
+  const insets = useSafeAreaInsets();
 
-  // Format Hijri
   const hijriFormatter = new Intl.DateTimeFormat("fr-u-ca-islamic", {
     day: "numeric",
     month: "long",
@@ -57,11 +57,12 @@ export default function HijriCalendarScreen() {
     >
       <ScrollView
         style={styles.scroll}
-        contentContainerStyle={styles.container}
+        contentContainerStyle={[
+          styles.container,
+          { paddingBottom: insets.bottom + 10 },
+        ]}
       >
-        <Text style={[styles.header, { color: Colors.text }]}>
-          {t("hijri_calendar")}
-        </Text>
+        <Text style={styles.header}>{t("hijri_calendar")}</Text>
 
         <DateNavigator
           date={selectedDate}
@@ -79,20 +80,12 @@ export default function HijriCalendarScreen() {
         />
 
         <View style={styles.row}>
-          <Text style={[styles.label, { color: Colors.text }]}>
-            {t("gregorian_date")}
-          </Text>
-          <Text style={[styles.value, { color: Colors.text }]}>
-            {selectedDate.toLocaleDateString()}
-          </Text>
+          <Text style={styles.label}>{t("gregorian_date")}</Text>
+          <Text style={styles.value}>{selectedDate.toLocaleDateString()}</Text>
         </View>
         <View style={styles.row}>
-          <Text style={[styles.label, { color: Colors.text }]}>
-            {t("hijri_date")}
-          </Text>
-          <Text style={[styles.value, { color: Colors.text }]}>
-            {hijriDate}
-          </Text>
+          <Text style={styles.label}>{t("hijri_date")}</Text>
+          <Text style={styles.value}>{hijriDate}</Text>
         </View>
 
         <Calendar
@@ -110,14 +103,24 @@ export default function HijriCalendarScreen() {
           }}
           theme={{
             backgroundColor: "transparent",
-            calendarBackground: "transparent",
-            textSectionTitleColor: Colors.text,
+            calendarBackground: "rgba(34,40,58,0.32)",
+            textSectionTitleColor: "#fffbe8", // Noms des jours ("Lun", "Mar", etc.)
+            dayTextColor: "#fff", // Jours du mois
+            monthTextColor: "#FFD700", // Nom du mois (doré)
+            todayTextColor: "#00CFFF", // Couleur du "Aujourd'hui"
+            selectedDayTextColor: "#fffbe8",
             selectedDayBackgroundColor: Colors.primary,
-            selectedDayTextColor: Colors.background,
-            todayTextColor: Colors.accent,
-            dayTextColor: Colors.text,
-            textDisabledColor: Colors.textSub,
-            arrowColor: Colors.primary,
+            textDisabledColor: "#bbb", // Jours grisés
+            dotColor: "#FFD700", // Points d’évènements
+            selectedDotColor: "#FFD700",
+            arrowColor: "#FFD700", // Flèches navigation
+            indicatorColor: "#FFD700",
+            textDayFontWeight: "700",
+            textMonthFontWeight: "bold",
+            textDayHeaderFontWeight: "700",
+            textDayFontSize: 18,
+            textMonthFontSize: 20,
+            textDayHeaderFontSize: 16,
           }}
           style={styles.calendar}
         />
@@ -134,7 +137,7 @@ export default function HijriCalendarScreen() {
               {t("religious_events_today")}
             </Text>
             {eventsToday.map((event, idx) => (
-              <Text key={idx} style={{ fontSize: 16, color: "#ffffff" }}>
+              <Text key={idx} style={{ fontSize: 16, color: "#fffbe8" }}>
                 • {t(event.name)}
               </Text>
             ))}
@@ -153,21 +156,25 @@ const styles = StyleSheet.create({
     fontSize: 28,
     fontWeight: "bold",
     textAlign: "center",
-    marginTop: 70,
     marginBottom: 20,
+    color: "#fffbe8",
+    textShadowColor: "rgba(0,0,0,0.25)",
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 2,
   },
   row: {
     flexDirection: "row",
     justifyContent: "space-between",
     paddingVertical: 12,
     borderBottomWidth: 1,
-    borderBottomColor: Colors.border,
+    borderBottomColor: "#e7c86a", // Jaune doux
   },
-  label: { fontSize: 18 },
-  value: { fontSize: 18, fontWeight: "bold" },
+  label: { fontSize: 18, color: "#fffbe8", fontWeight: "600" },
+  value: { fontSize: 18, fontWeight: "bold", color: "#FFD700" },
   calendar: {
     borderRadius: 8,
     marginTop: 16,
-    backgroundColor: "rgba(255,255,255,0.2)",
+    backgroundColor: "rgba(34,40,58,0.32)", // Un fond très légèrement opaque
+    overflow: "hidden",
   },
 });

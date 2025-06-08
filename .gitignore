@@ -42,3 +42,6 @@ android/app/build/
 android/build/
 .gradle/
 .expo-shared/
+
+
+android/gradle.properties

@@ -55,12 +55,16 @@ export default function QiblaScreen() {
 
   const [direction, setDirection] = useState<number | null>(null);
   const [heading, setHeading] = useState<number | null>(null);
+  const [isPointingToQibla, setIsPointingToQibla] = useState(false);
 
   // Animation: valeur de rotation de la boussole
   const animatedHeading = useRef(new Animated.Value(0)).current;
   const lastHeading = useRef(0);
 
-  // Pour l’icône Kaaba
+  // Animation pour la couleur de l'aiguille
+  const needleColorAnimation = useRef(new Animated.Value(0)).current;
+
+  // Pour l'icône Kaaba
   const KAABA_RADIUS = COMPASS_SIZE / 2 - 30;
   let kaabaPos = { x: COMPASS_SIZE / 2, y: 30 };
   if (direction !== null) {
@@ -72,6 +76,21 @@ export default function QiblaScreen() {
       angleQibla
     );
   }
+
+  // Fonction pour calculer si l'utilisateur pointe vers la Qibla
+  const calculateQiblaAlignment = (
+    userHeading: number,
+    qiblaDirection: number
+  ) => {
+    // Calculer la différence angulaire
+    let diff = Math.abs(userHeading - qiblaDirection);
+    if (diff > 180) {
+      diff = 360 - diff;
+    }
+
+    // Tolérance de ±15 degrés
+    return diff <= 15;
+  };
 
   useEffect(() => {
     (async () => {
@@ -112,9 +131,33 @@ export default function QiblaScreen() {
     }
   }, [heading]);
 
+  // Nouveau useEffect pour vérifier l'alignement avec la Qibla
+  useEffect(() => {
+    if (heading !== null && direction !== null) {
+      const pointingToQibla = calculateQiblaAlignment(heading, direction);
+
+      if (pointingToQibla !== isPointingToQibla) {
+        setIsPointingToQibla(pointingToQibla);
+
+        // Animation de couleur
+        Animated.timing(needleColorAnimation, {
+          toValue: pointingToQibla ? 1 : 0,
+          duration: 300,
+          useNativeDriver: false,
+        }).start();
+      }
+    }
+  }, [heading, direction, isPointingToQibla]);
+
   const compassRotation = animatedHeading.interpolate({
     inputRange: [-360, 0],
     outputRange: ["-360deg", "0deg"],
+  });
+
+  // Interpolation de couleur pour l'aiguille
+  const needleColor = needleColorAnimation.interpolate({
+    inputRange: [0, 1],
+    outputRange: ["#204296", "#22C55E"], // Bleu vers vert
   });
 
   return (
@@ -159,11 +202,11 @@ export default function QiblaScreen() {
               },
             ]}
           >
-            <View
+            <Animated.View
               style={{
                 width: 4,
                 height: NEEDLE_HEIGHT,
-                backgroundColor: "#204296",
+                backgroundColor: needleColor,
                 borderRadius: 2,
               }}
             />
@@ -183,6 +226,11 @@ const styles = StyleSheet.create({
     fontSize: 28,
     fontWeight: "bold",
     marginBottom: 100,
+    color: "#fffbe8", // Blanc cassé
+    textShadowColor: "rgba(0,0,0,0.25)",
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 2,
+    textAlign: "center",
   },
   compassWrap: {
     width: COMPASS_SIZE,
@@ -190,6 +238,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     position: "relative",
+    backgroundColor: "rgba(34,40,58,0.30)", // Léger fond bleu nuit translucide
+    borderRadius: COMPASS_SIZE / 2,
+    borderWidth: 2,
+    borderColor: "#e7c86a", // Jaune doux
+    overflow: "hidden",
   },
   compassContainer: {
     position: "absolute",
@@ -225,11 +278,23 @@ const styles = StyleSheet.create({
     left: -10,
   },
   instructions: {
-    color: "#888",
+    color: "#FFD700", // Doré
     fontSize: 15,
+    fontWeight: "600",
     textAlign: "center",
     paddingHorizontal: 18,
-    lineHeight: 21,
-    marginBottom: 100,
+    paddingVertical: 14,
+    lineHeight: 22,
+    backgroundColor: "rgba(34,40,58,0.85)",
+    borderRadius: 16,
+    marginHorizontal: 28,
+    marginBottom: 55,
+    elevation: 3,
+    textShadowColor: "rgba(0,0,0,0.28)",
+    textShadowOffset: { width: 0, height: 1 },
+    textShadowRadius: 2,
+    overflow: "hidden",
+    borderWidth: 1.5,
+    borderColor: "#e7c86a", // Jaune doux
   },
 });
