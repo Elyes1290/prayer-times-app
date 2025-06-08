@@ -259,9 +259,9 @@ export default function HomeScreen() {
     }, [updateNotifications])
   );
 
-  // Timer pour vérifier périodiquement si on doit reprogrammer (après Isha)
+  // Timer pour vérifier périodiquement si on doit reprogrammer (après Isha) et mettre à jour le widget
   useEffect(() => {
-    const checkAndReschedule = () => {
+    const checkAndReschedule = async () => {
       if (!currentPrayerTimes) return;
 
       const now = new Date();
@@ -281,6 +281,18 @@ export default function HomeScreen() {
         if (today.toDateString() !== tomorrow.toDateString()) {
           console.log("[DEBUG] 📅 Passage automatique au lendemain");
           setToday(tomorrow);
+
+          // 📱 Forcer la mise à jour du widget pour le nouveau jour
+          if (Platform.OS === "android" && AdhanModule) {
+            try {
+              console.log(
+                "[DEBUG] 📱 Mise à jour du widget pour le nouveau jour"
+              );
+              await AdhanModule.updateWidget?.();
+            } catch (error) {
+              console.error("[DEBUG] ❌ Erreur mise à jour widget:", error);
+            }
+          }
         }
       }
     };
@@ -446,7 +458,7 @@ export default function HomeScreen() {
 
         {nextPrayer && (
           <View style={styles.nextPrayerContainer}>
-            <Text style={styles.nextPrayerTitle}>Prochaine prière</Text>
+            <Text style={styles.nextPrayerTitle}>{t("next_prayer")}</Text>
             <Text style={styles.nextPrayerName}>{nextPrayer}</Text>
             <Text style={styles.nextPrayerTime}>{timeUntilNext}</Text>
           </View>

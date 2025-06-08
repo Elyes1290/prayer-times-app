@@ -6,37 +6,39 @@
     android:gravity="center_vertical"
     android:padding="2dp">
 
-    <!-- Left TextView (Next Prayer, Emoji, Name, Time) -->
+    <!-- Left TextView (Next Prayer, Emoji, Name, Time) - AMÉLIORÉ -->
     <TextView
         android:id="@+id/widget_item_left"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="1"
+        android:layout_weight="1.2"
         android:layout_gravity="center_vertical"
         android:textColor="#FFFFFF"
-        android:textSize="18sp"
+        android:textSize="22sp"
+        android:textStyle="bold"
         android:gravity="center"
-        android:lineSpacingExtra="2dp"
-        android:paddingStart="0dp"
-        android:paddingEnd="8dp"
-        android:paddingTop="0dp"
-        android:paddingBottom="0dp"
+        android:lineSpacingExtra="4dp"
+        android:paddingStart="8dp"
+        android:paddingEnd="12dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:background="@drawable/widget_left_background"
         android:visibility="gone" />
 
-    <!-- Right TextView (All 5 Prayers) -->
+    <!-- Right TextView (All 6 Prayers) - AJUSTÉ -->
     <TextView
         android:id="@+id/widget_item_right"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_weight="0.8"
         android:textColor="#FFFFFF"
-        android:textSize="13sp"
+        android:textSize="12sp"
         android:gravity="left"
         android:lineSpacingExtra="2dp"
         android:paddingStart="8dp"
-        android:paddingEnd="0dp"
-        android:paddingTop="0dp"
-        android:paddingBottom="0dp"
+        android:paddingEnd="4dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
         android:visibility="gone" />
 
     <!-- Full width TextView (Titles, Dhikr content) -->

@@ -38,7 +38,7 @@
     "Singapore": "Singapore",
     "Tehran": "Teheran"
   },
-  "adhan_sound": "Scelta dell’Adhan",
+  "adhan_sound": "Scelta dell'Adhan",
   "adhan_sounds": {
     "adhamalsharqawe": "Adhan Al Sharqawe",
     "adhanaljazaer": "Adhan Algerino",
@@ -73,23 +73,75 @@
   "no_hadith_found": "Nessun hadith trovato per questo capitolo.",
   "book_unavailable": "Questo libro non è ancora disponibile.",
   "no_text": "Nessun testo disponibile per questo hadith.",
+  "isha": "Isha",
   "abouts": {
     "title": "Informazioni sull'app",
-    "welcome": "Benvenuto!",
-    "description": "Questa app gratuita ti accompagna ogni giorno nella tua pratica: orari di preghiera, direzione della Qibla, lettura del Corano e hadith, calendario islamico e molto altro.",
-    "version_info_1": "Stai usando la prima versione della nostra app. Stiamo lavorando attivamente per aggiungere più funzionalità nei prossimi aggiornamenti.",
-    "version_info_2": "Grazie per la tua pazienza e il tuo supporto!",
-    "contact_title": "Contatto e suggerimenti",
-    "contact_button": "Invia un messaggio",
-    "developer_title": "Sviluppatore",
-    "developer_name": "Sviluppato da: Elyes Nait-Liman",
-    "linkedin": "LinkedIn:",
-    "sources_title": "Fonti e crediti",
-    "source_quran": "Corano: api.quran.com",
-    "source_hadith": "Hadith: hadithapi.com",
-    "source_icons": "Icone e font: Google Fonts, Flaticon",
-    "version": "Versione 1.0.0",
-    "footer_thanks": "Grazie per usare la mia app! 🤲"
+    "subtitle": "Applicazione islamica completa",
+    "welcome": "Benvenuto nel tuo compagno spirituale!",
+    "description": "Questa app gratuita ti accompagna quotidianamente nella tua pratica religiosa: orari di preghiera precisi, direzione della Qibla, lettura del Corano, dhikr automatici, hadith autentici, calendario Hijri e molto altro.",
+    "blessing": "بارك الله فيكم - Che Allah vi benedica",
+
+    "features_title": "🌟 Funzioni complete",
+    "features_subtitle": "Tutto ciò di cui hai bisogno per la tua pratica islamica:",
+    "features": {
+      "prayer_times": "Orari di preghiera precisi",
+      "qibla_direction": "Direzione della Qibla",
+      "quran_reading": "Lettura del Corano",
+      "dhikr_automatic": "Dhikr automatici",
+      "asmaul_husna": "I 99 nomi di Allah",
+      "authentic_hadith": "Hadith autentici",
+      "hijri_calendar": "Calendario Hijri",
+      "smart_notifications": "Notifiche intelligenti"
+    },
+
+    "faq_title": "❓ Domande frequenti",
+    "faq_location_question": "Perché l'app ha bisogno della mia posizione?",
+    "faq_location_answer": "La posizione è necessaria per calcolare con precisione gli orari di preghiera in base alla tua posizione geografica. Puoi anche inserire la tua città manualmente.",
+    "faq_notifications_question": "Perché le mie notifiche non funzionano?",
+    "faq_notifications_answer": "Verifica che le notifiche siano abilitate nelle impostazioni del tuo telefono e che l'ottimizzazione della batteria sia disabilitata per l'applicazione.",
+    "faq_qibla_question": "Come posso migliorare la precisione della Qibla?",
+    "faq_qibla_answer": "Tieni il telefono piatto, lontano da oggetti metallici. Fai movimenti a forma di 8 per calibrare la bussola se è instabile.",
+    "faq_offline_question": "L'app funziona offline?",
+    "faq_offline_answer": "Sì, una volta configurata, l'app funziona offline per orari di preghiera, Qibla, dhikr e lettura del Corano.",
+
+    "support_title": "🤝 Supporto e comunità",
+    "send_suggestion": "Invia suggerimento",
+    "report_bug": "Segnala problema",
+    "rate_app": "Valuta l'app",
+    "contact_suggestion": "Suggerimento App Islamica",
+    "contact_bug": "Segnalazione Bug App Islamica",
+    "email_template": "Ciao Elyes,\n\nRiguardo {{subject}}:\n\n[Il tuo messaggio qui]\n\nGrazie per questa eccellente applicazione!\n\nCordiali saluti",
+
+    "developer_title": "👨‍💻 Sviluppatore",
+    "developer_name": "Sviluppato con ❤️ da Elyes Nait-Liman",
+    "developer_bio": "Sviluppatore appassionato, musulmano praticante, creatore di app utili per la comunità.",
+    "linkedin_profile": "Visualizza profilo LinkedIn",
+
+    "technical_title": "⚙️ Informazioni tecniche",
+    "tech_react_native": "• Sviluppato con React Native ed Expo",
+    "tech_adhan_lib": "• Calcoli basati sulla libreria Adhan",
+    "tech_expo": "• Interfaccia moderna e performante",
+    "tech_permissions": "• Permessi: Posizione, Notifiche, Sveglie",
+
+    "sources_title": "📚 Fonti e crediti",
+    "source_quran": "• Corano: Quran.com API",
+    "source_hadith": "• Hadith: HadithAPI.com",
+    "source_prayer_calculation": "• Calcoli di preghiera: Libreria Adhan",
+    "source_icons": "• Icone: Material Design e Flaticon",
+    "islamic_authenticity": "✅ Tutte le fonti religiose sono verificate e autentiche",
+
+    "legal_title": "⚖️ Informazioni legali",
+    "privacy_policy": "Politica sulla privacy",
+    "privacy_policy_content": "Questa app rispetta la tua privacy:\n\n• I tuoi dati rimangono sul tuo dispositivo\n• Nessuna raccolta di informazioni personali\n• La posizione è utilizzata solo per i calcoli\n• Nessuna pubblicità o tracciamento\n• App gratuita senza raccolta dati",
+    "terms_of_use": "Termini di utilizzo",
+    "terms_title": "Termini di utilizzo",
+    "terms_content": "Utilizzando questa app:\n\n• Accetti di utilizzarla in conformità ai valori islamici\n• L'app è fornita gratuitamente\n• Lo sviluppatore fa del suo meglio per garantire l'accuratezza\n• Verifica sempre con la tua moschea locale\n• L'uso è a tuo rischio",
+    "understand": "Ho capito",
+
+    "version": "Versione",
+    "build": "Build",
+    "footer_thanks": "Che Allah ti ricompensi per aver usato questa app! 🤲",
+    "closing_dua": "رَبَّنَا تَقَبَّلْ مِنَّا إِنَّكَ أَنتَ السَّمِيعُ الْعَلِيمُ"
   },
   "translation_not_available": "La traduzione in inglese non è disponibile per questo libro.",
   "home": "Home",
@@ -192,6 +244,5 @@
   "sunrise": "Alba",
   "dhuhr": "Dhuhr",
   "asr": "Asr",
-  "maghrib": "Maghrib",
-  "isha": "Isha"
+  "maghrib": "Maghrib"
 }

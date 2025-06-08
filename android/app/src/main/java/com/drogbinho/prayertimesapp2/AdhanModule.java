@@ -716,7 +716,7 @@ public class AdhanModule extends ReactContextBaseJavaModule {
         Log.d("AdhanModule", "✅ Paramètres de notification et localisation sauvegardés");
 
         // Mettre à jour le widget si les horaires ont changé
-        updateWidget();
+        updateWidgetInternal();
     }
 
     @ReactMethod
@@ -749,15 +749,20 @@ public class AdhanModule extends ReactContextBaseJavaModule {
             Log.d("AdhanModule", "💾 Horaires du jour sauvegardés pour le widget: " + json.toString());
 
             // Mettre à jour le widget
-            updateWidget();
+            updateWidgetInternal();
 
         } catch (Exception e) {
             Log.e("AdhanModule", "❌ Erreur lors de la sauvegarde des horaires", e);
         }
     }
 
+    @ReactMethod
+    public void updateWidget() {
+        updateWidgetInternal();
+    }
+
     // Méthode pour mettre à jour le widget
-    private void updateWidget() {
+    private void updateWidgetInternal() {
         try {
             Context context = getReactApplicationContext();
 

@@ -39,15 +39,16 @@ class WidgetRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory 
 
         Log.d(TAG, "🔄 onDataSetChanged - Préparation des données widget");
 
-        // TITRE avec date
+        // TITRE avec date (mise à jour en temps réel)
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMMM yyyy",
                 PrayerTimesWidget.getCurrentLanguage(context).equals("it") ? Locale.ITALIAN : Locale.ENGLISH);
         String todayDate = dateFormat.format(calendar.getTime());
 
         String titleTranslation = PrayerTimesWidget.getTranslation(context, "widget_title");
-        String fullTitle = titleTranslation + "\n" + todayDate;
+        String fullTitle = titleTranslation + "\n📅 " + todayDate;
 
+        Log.d(TAG, "📅 Widget mis à jour pour la date: " + todayDate);
         widgetItems.add(new WidgetItem(fullTitle, "", false, false, true, false));
 
         // LIGNE VIDE pour l'espacement
@@ -56,7 +57,7 @@ class WidgetRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory 
         // SECTION PROCHAINE PRIÈRE
         Map<String, String> prayerTimes = PrayerTimesWidget.getAllPrayerTimes(context);
         String nextPrayerName = PrayerTimesWidget.getNextPrayerName(context);
-        String nextTranslation = PrayerTimesWidget.getTranslation(context, "widget_next");
+        String nextPrayerLabel = PrayerTimesWidget.getTranslation(context, "next_prayer");
 
         if (!prayerTimes.isEmpty()) {
             String nextPrayerTime = prayerTimes.get(nextPrayerName);
@@ -66,7 +67,7 @@ class WidgetRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory 
             String emoji = getEmojiForPrayer(nextPrayerName);
 
             // Format weather widget: Left side (next prayer) + Right side (all prayers)
-            String leftPart = emoji + "\n" + nextPrayerTranslated + "\n"
+            String leftPart = nextPrayerLabel + "\n" + emoji + " " + nextPrayerTranslated + "\n"
                     + (nextPrayerTime != null ? nextPrayerTime : "--:--");
 
             // Right side: All 6 prayers avec séparateurs
@@ -200,11 +201,11 @@ class WidgetRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory 
             views.setTextViewText(R.id.widget_item_left, item.leftText);
             views.setTextViewText(R.id.widget_item_right, item.rightText);
 
-            // Green color for left side (next prayer)
+            // Couleur pour la prochaine prière (texte visible sur fond transparent)
             if (item.isHighlighted) {
-                views.setTextColor(R.id.widget_item_left, Color.parseColor("#4CAF50"));
+                views.setTextColor(R.id.widget_item_left, Color.WHITE); // Blanc élégant pour la prochaine prière
             } else {
-                views.setTextColor(R.id.widget_item_left, Color.WHITE);
+                views.setTextColor(R.id.widget_item_left, Color.WHITE); // Blanc pour les autres
             }
             views.setTextColor(R.id.widget_item_right, Color.WHITE);
 

@@ -1,14 +1,14 @@
 // utils/scheduleNotificationsFor2Days.ts
 
 import { NativeModules } from "react-native";
-import { computePrayerTimesForDate } from "./prayerTimes"; // Fonction qui retourne { Fajr, Dhuhr, Asr, Maghrib, Isha } pour la date donnée
+import { computePrayerTimesForDate } from "./prayerTimes"; // Fonction qui retourne { Fajr, Sunrise, Dhuhr, Asr, Maghrib, Isha } pour la date donnée
 import { schedulePrayerNotifications } from "./notifications";
 import { scheduleAllDhikrNotifications } from "./dhikrNotifications";
 import i18n from "../locales/i18n";
 
 // Types pour la fonction
 type Location = { latitude: number; longitude: number };
-type PrayerLabel = "Fajr" | "Dhuhr" | "Asr" | "Maghrib" | "Isha";
+type PrayerLabel = "Fajr" | "Sunrise" | "Dhuhr" | "Asr" | "Maghrib" | "Isha";
 type PrayerTimes = Record<PrayerLabel, Date>;
 
 type DhikrSettings = {

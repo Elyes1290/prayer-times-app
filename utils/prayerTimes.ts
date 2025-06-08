@@ -6,7 +6,7 @@ import {
   CalculationParameters,
 } from "adhan";
 
-type PrayerLabel = "Fajr" | "Dhuhr" | "Asr" | "Maghrib" | "Isha";
+type PrayerLabel = "Fajr" | "Sunrise" | "Dhuhr" | "Asr" | "Maghrib" | "Isha";
 type Location = { latitude: number; longitude: number };
 
 export function computePrayerTimesForDate(
@@ -55,6 +55,7 @@ export function computePrayerTimesForDate(
   // Utilise directement les objets Date retournés par adhan
   const result = {
     Fajr: times.fajr,
+    Sunrise: times.sunrise,
     Dhuhr: times.dhuhr,
     Asr: times.asr,
     Maghrib: times.maghrib,
