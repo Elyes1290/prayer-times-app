@@ -23,6 +23,7 @@ import java.util.HashMap;
 import android.util.Log;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
+import java.util.Calendar;
 
 public class AdhanModule extends ReactContextBaseJavaModule {
 
@@ -743,13 +744,43 @@ public class AdhanModule extends ReactContextBaseJavaModule {
                 }
             }
 
-            editor.putString("today_prayer_times", json.toString());
+            // 🆕 AMÉLIORATION: Sauvegarde multiple pour compatibilité anciennes versions
+            // Android
+            String jsonString = json.toString();
+
+            // Sauvegarde principale
+            editor.putString("today_prayer_times", jsonString);
+
+            // 🆕 NOUVEAU: Sauvegarde de backup avec un préfixe de date pour éviter les
+            // conflits
+            Calendar now = Calendar.getInstance();
+            String dateKey = String.format(Locale.getDefault(), "%04d-%02d-%02d",
+                    now.get(Calendar.YEAR),
+                    now.get(Calendar.MONTH) + 1,
+                    now.get(Calendar.DAY_OF_MONTH));
+            editor.putString("prayer_times_backup_" + dateKey, jsonString);
+
+            // 🆕 Sauvegarde individuelle pour chaque prière (fallback supplémentaire)
+            ReadableMapKeySetIterator iter2 = prayerTimes.keySetIterator();
+            while (iter2.hasNextKey()) {
+                String prayerName = iter2.nextKey();
+                if (prayerTimes.getType(prayerName) == ReadableType.String) {
+                    String timeString = prayerTimes.getString(prayerName);
+                    editor.putString("prayer_" + prayerName.toLowerCase() + "_time", timeString);
+                }
+            }
+
+            // 🆕 Sauvegarder la date de dernière mise à jour
+            editor.putLong("last_prayer_times_update", System.currentTimeMillis());
+            editor.putString("last_prayer_times_date", dateKey);
+
             editor.apply();
 
-            Log.d("AdhanModule", "💾 Horaires du jour sauvegardés pour le widget: " + json.toString());
+            Log.d("AdhanModule", "💾 Horaires du jour sauvegardés pour le widget (avec backups): " + jsonString);
 
-            // Mettre à jour le widget
-            updateWidgetInternal();
+            // Mettre à jour le widget avec un petit délai pour s'assurer que les
+            // préférences sont bien écrites
+            updateWidgetWithDelay();
 
         } catch (Exception e) {
             Log.e("AdhanModule", "❌ Erreur lors de la sauvegarde des horaires", e);
@@ -759,6 +790,26 @@ public class AdhanModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void updateWidget() {
         updateWidgetInternal();
+    }
+
+    // 🆕 NOUVEAU: Mise à jour du widget avec délai pour compatibilité
+    private void updateWidgetWithDelay() {
+        new android.os.Handler(android.os.Looper.getMainLooper()).postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                updateWidgetInternal();
+
+                // 🆕 Double mise à jour après un court délai pour s'assurer que les données
+                // sont bien lues
+                new android.os.Handler(android.os.Looper.getMainLooper()).postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        updateWidgetInternal();
+                        Log.d("AdhanModule", "🔄 Double mise à jour widget effectuée pour compatibilité");
+                    }
+                }, 1000); // 1 seconde de délai
+            }
+        }, 100); // 100ms de délai initial
     }
 
     // Méthode pour mettre à jour le widget

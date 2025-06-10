@@ -271,42 +271,299 @@ public class PrayerTimesWidget extends AppWidgetProvider {
                 }
             }
 
-            // Récupérer les horaires existants
-            String todayPrayerTimesJson = prefs.getString("today_prayer_times", null);
-            Log.d(TAG, "🔍 Données today_prayer_times: " + (todayPrayerTimesJson != null ? "présentes" : "absentes"));
+            // 🆕 AMÉLIORATION: Essayer plusieurs sources de données pour la compatibilité
+            Map<String, String> prayerTimes = tryGetPrayerTimesFromMultipleSources(context, prefs);
 
-            if (todayPrayerTimesJson != null) {
-                try {
-                    JSONObject prayerTimesObj = new JSONObject(todayPrayerTimesJson);
-                    Map<String, String> prayerTimes = new HashMap<>();
-
-                    if (prayerTimesObj.has("Fajr"))
-                        prayerTimes.put("Fajr", prayerTimesObj.getString("Fajr"));
-                    if (prayerTimesObj.has("Sunrise"))
-                        prayerTimes.put("Sunrise", prayerTimesObj.getString("Sunrise"));
-                    if (prayerTimesObj.has("Dhuhr"))
-                        prayerTimes.put("Dhuhr", prayerTimesObj.getString("Dhuhr"));
-                    if (prayerTimesObj.has("Asr"))
-                        prayerTimes.put("Asr", prayerTimesObj.getString("Asr"));
-                    if (prayerTimesObj.has("Maghrib"))
-                        prayerTimes.put("Maghrib", prayerTimesObj.getString("Maghrib"));
-                    if (prayerTimesObj.has("Isha"))
-                        prayerTimes.put("Isha", prayerTimesObj.getString("Isha"));
-
-                    Log.d(TAG, "📋 Horaires récupérés: " + prayerTimes.size() + " prières");
-                    return prayerTimes;
-
-                } catch (JSONException e) {
-                    Log.e(TAG, "❌ Erreur parsing JSON prayer times: " + e.getMessage());
-                }
+            if (!prayerTimes.isEmpty()) {
+                Log.d(TAG, "📋 Horaires récupérés: " + prayerTimes.size() + " prières");
+                return prayerTimes;
             }
 
+            Log.w(TAG, "⚠️ Aucun horaire trouvé dans toutes les sources");
             return new HashMap<>();
 
         } catch (Exception e) {
             Log.e(TAG, "❌ Erreur lecture horaires: " + e.getMessage());
             return new HashMap<>();
         }
+    }
+
+    /**
+     * 🆕 NOUVEAU: Méthode robuste pour récupérer les horaires depuis plusieurs
+     * sources
+     * Améliore la compatibilité avec les anciennes versions d'Android
+     */
+    private static Map<String, String> tryGetPrayerTimesFromMultipleSources(Context context, SharedPreferences prefs) {
+        Map<String, String> prayerTimes = new HashMap<>();
+
+        // SOURCE 1: today_prayer_times (source principale)
+        try {
+            String todayPrayerTimesJson = prefs.getString("today_prayer_times", null);
+            Log.d(TAG,
+                    "🔍 Source 1 - today_prayer_times: " + (todayPrayerTimesJson != null ? "présentes" : "absentes"));
+
+            if (todayPrayerTimesJson != null && !todayPrayerTimesJson.trim().isEmpty()) {
+                JSONObject prayerTimesObj = new JSONObject(todayPrayerTimesJson);
+
+                // Vérifier chaque prière
+                String[] prayers = { "Fajr", "Sunrise", "Dhuhr", "Asr", "Maghrib", "Isha" };
+                for (String prayer : prayers) {
+                    if (prayerTimesObj.has(prayer)) {
+                        String timeStr = prayerTimesObj.getString(prayer);
+                        if (timeStr != null && !timeStr.trim().isEmpty() && isValidTimeFormat(timeStr)) {
+                            prayerTimes.put(prayer, timeStr);
+                        }
+                    }
+                }
+
+                if (prayerTimes.size() >= 5) { // Au moins 5 prières (sans Sunrise)
+                    Log.d(TAG, "✅ Source 1 réussie - " + prayerTimes.size() + " horaires récupérés");
+                    return prayerTimes;
+                }
+            }
+        } catch (Exception e) {
+            Log.w(TAG, "⚠️ Erreur source 1: " + e.getMessage());
+        }
+
+        // SOURCE 2: Essayer depuis adhan_prefs (backup)
+        try {
+            SharedPreferences adhanPrefs = context.getSharedPreferences("adhan_prefs", Context.MODE_PRIVATE);
+            Log.d(TAG, "🔍 Source 2 - adhan_prefs comme backup");
+
+            // Vérifier si on a des coordonnées sauvegardées
+            if (adhanPrefs.contains("lat") && adhanPrefs.contains("lon")) {
+                double lat = adhanPrefs.getFloat("lat", 0.0f);
+                double lon = adhanPrefs.getFloat("lon", 0.0f);
+
+                if (lat != 0.0 && lon != 0.0) {
+                    Log.d(TAG, "📍 Coordonnées trouvées: " + lat + ", " + lon);
+                    Map<String, String> calculatedTimes = calculatePrayerTimesForCoordinates(lat, lon, adhanPrefs);
+
+                    if (!calculatedTimes.isEmpty()) {
+                        Log.d(TAG, "✅ Source 2 réussie - calcul direct avec " + calculatedTimes.size() + " horaires");
+
+                        // Sauvegarder dans la source principale pour la prochaine fois
+                        try {
+                            JSONObject jsonToSave = new JSONObject();
+                            for (Map.Entry<String, String> entry : calculatedTimes.entrySet()) {
+                                jsonToSave.put(entry.getKey(), entry.getValue());
+                            }
+                            prefs.edit().putString("today_prayer_times", jsonToSave.toString()).apply();
+                            Log.d(TAG, "💾 Horaires sauvegardés pour la prochaine fois");
+                        } catch (Exception e) {
+                            Log.w(TAG, "⚠️ Erreur sauvegarde backup: " + e.getMessage());
+                        }
+
+                        return calculatedTimes;
+                    }
+                }
+            }
+        } catch (Exception e) {
+            Log.w(TAG, "⚠️ Erreur source 2: " + e.getMessage());
+        }
+
+        // SOURCE 3: Essayer depuis prayer_times_settings (location manuelle)
+        try {
+            Log.d(TAG, "🔍 Source 3 - localisation manuelle");
+
+            if (prefs.contains("manual_latitude") && prefs.contains("manual_longitude")) {
+                float lat = prefs.getFloat("manual_latitude", 0.0f);
+                float lon = prefs.getFloat("manual_longitude", 0.0f);
+
+                if (lat != 0.0f && lon != 0.0f) {
+                    Log.d(TAG, "📍 Coordonnées manuelles trouvées: " + lat + ", " + lon);
+
+                    SharedPreferences adhanPrefs = context.getSharedPreferences("adhan_prefs", Context.MODE_PRIVATE);
+                    Map<String, String> calculatedTimes = calculatePrayerTimesForCoordinates(lat, lon, adhanPrefs);
+
+                    if (!calculatedTimes.isEmpty()) {
+                        Log.d(TAG, "✅ Source 3 réussie - calcul manuel avec " + calculatedTimes.size() + " horaires");
+
+                        // Sauvegarder dans la source principale
+                        try {
+                            JSONObject jsonToSave = new JSONObject();
+                            for (Map.Entry<String, String> entry : calculatedTimes.entrySet()) {
+                                jsonToSave.put(entry.getKey(), entry.getValue());
+                            }
+                            prefs.edit().putString("today_prayer_times", jsonToSave.toString()).apply();
+                        } catch (Exception e) {
+                            Log.w(TAG, "⚠️ Erreur sauvegarde source 3: " + e.getMessage());
+                        }
+
+                        return calculatedTimes;
+                    }
+                }
+            }
+        } catch (Exception e) {
+            Log.w(TAG, "⚠️ Erreur source 3: " + e.getMessage());
+        }
+
+        // SOURCE 4: 🆕 NOUVEAU - Horaires individuels de fallback (backup ultime)
+        try {
+            Log.d(TAG, "🔍 Source 4 - horaires individuels de fallback");
+
+            String[] prayers = { "Fajr", "Sunrise", "Dhuhr", "Asr", "Maghrib", "Isha" };
+            Map<String, String> individualTimes = new HashMap<>();
+
+            for (String prayer : prayers) {
+                String timeKey = "prayer_" + prayer.toLowerCase() + "_time";
+                if (prefs.contains(timeKey)) {
+                    String timeStr = prefs.getString(timeKey, null);
+                    if (timeStr != null && !timeStr.trim().isEmpty() && isValidTimeFormat(timeStr)) {
+                        individualTimes.put(prayer, timeStr);
+                        Log.d(TAG, "📋 " + prayer + " trouvé individuellement: " + timeStr);
+                    }
+                }
+            }
+
+            if (individualTimes.size() >= 5) { // Au moins 5 prières (sans Sunrise)
+                Log.d(TAG, "✅ Source 4 réussie - " + individualTimes.size() + " horaires individuels récupérés");
+
+                // Reconstituer et sauvegarder dans la source principale
+                try {
+                    JSONObject jsonToSave = new JSONObject();
+                    for (Map.Entry<String, String> entry : individualTimes.entrySet()) {
+                        jsonToSave.put(entry.getKey(), entry.getValue());
+                    }
+                    prefs.edit().putString("today_prayer_times", jsonToSave.toString()).apply();
+                    Log.d(TAG, "💾 Horaires individuels reconstitués et sauvegardés");
+                } catch (Exception e) {
+                    Log.w(TAG, "⚠️ Erreur reconstitution source 4: " + e.getMessage());
+                }
+
+                return individualTimes;
+            }
+        } catch (Exception e) {
+            Log.w(TAG, "⚠️ Erreur source 4: " + e.getMessage());
+        }
+
+        // SOURCE 5: 🆕 NOUVEAU - Backup avec date (tentative de récupération par date)
+        try {
+            Log.d(TAG, "🔍 Source 5 - backup avec date");
+
+            Calendar now = Calendar.getInstance();
+            String currentDateKey = String.format(Locale.getDefault(), "%04d-%02d-%02d",
+                    now.get(Calendar.YEAR),
+                    now.get(Calendar.MONTH) + 1,
+                    now.get(Calendar.DAY_OF_MONTH));
+
+            String backupKey = "prayer_times_backup_" + currentDateKey;
+            String backupJson = prefs.getString(backupKey, null);
+
+            if (backupJson != null && !backupJson.trim().isEmpty()) {
+                Log.d(TAG, "📋 Backup trouvé pour " + currentDateKey);
+
+                JSONObject backupObj = new JSONObject(backupJson);
+                Map<String, String> backupTimes = new HashMap<>();
+
+                String[] prayers = { "Fajr", "Sunrise", "Dhuhr", "Asr", "Maghrib", "Isha" };
+                for (String prayer : prayers) {
+                    if (backupObj.has(prayer)) {
+                        String timeStr = backupObj.getString(prayer);
+                        if (timeStr != null && !timeStr.trim().isEmpty() && isValidTimeFormat(timeStr)) {
+                            backupTimes.put(prayer, timeStr);
+                        }
+                    }
+                }
+
+                if (backupTimes.size() >= 5) {
+                    Log.d(TAG, "✅ Source 5 réussie - " + backupTimes.size() + " horaires de backup récupérés");
+
+                    // Restaurer dans la source principale
+                    prefs.edit().putString("today_prayer_times", backupJson).apply();
+
+                    return backupTimes;
+                }
+            }
+        } catch (Exception e) {
+            Log.w(TAG, "⚠️ Erreur source 5: " + e.getMessage());
+        }
+
+        Log.e(TAG, "❌ Aucune source n'a pu fournir d'horaires valides");
+        return new HashMap<>(); // Aucune source n'a fonctionné
+    }
+
+    /**
+     * 🆕 NOUVEAU: Valide le format d'heure (HH:MM)
+     */
+    private static boolean isValidTimeFormat(String timeStr) {
+        if (timeStr == null || timeStr.trim().isEmpty()) {
+            return false;
+        }
+
+        try {
+            String[] parts = timeStr.trim().split(":");
+            if (parts.length != 2) {
+                return false;
+            }
+
+            int hours = Integer.parseInt(parts[0]);
+            int minutes = Integer.parseInt(parts[1]);
+
+            return hours >= 0 && hours <= 23 && minutes >= 0 && minutes <= 59;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    /**
+     * 🆕 NOUVEAU: Calcule les horaires de prière pour des coordonnées données
+     */
+    private static Map<String, String> calculatePrayerTimesForCoordinates(double latitude, double longitude,
+            SharedPreferences adhanPrefs) {
+        Map<String, String> prayerTimes = new HashMap<>();
+
+        try {
+            Log.d(TAG, "🔄 Calcul horaires pour coordonnées: " + latitude + ", " + longitude);
+
+            // Obtenir la méthode de calcul
+            String calcMethod = adhanPrefs.getString("calc_method", "MuslimWorldLeague");
+
+            com.batoulapps.adhan.Coordinates coordinates = new com.batoulapps.adhan.Coordinates(latitude, longitude);
+            Calendar today = Calendar.getInstance();
+
+            com.batoulapps.adhan.CalculationParameters params;
+            switch (calcMethod) {
+                case "MuslimWorldLeague":
+                    params = com.batoulapps.adhan.CalculationMethod.MUSLIM_WORLD_LEAGUE.getParameters();
+                    break;
+                case "Kuwait":
+                    params = com.batoulapps.adhan.CalculationMethod.KUWAIT.getParameters();
+                    break;
+                case "Qatar":
+                    params = com.batoulapps.adhan.CalculationMethod.QATAR.getParameters();
+                    break;
+                case "Singapore":
+                    params = com.batoulapps.adhan.CalculationMethod.SINGAPORE.getParameters();
+                    break;
+                case "Tehran":
+                    params = com.batoulapps.adhan.CalculationMethod.KARACHI.getParameters(); // Fallback pour Tehran
+                    break;
+                default:
+                    params = com.batoulapps.adhan.CalculationMethod.MUSLIM_WORLD_LEAGUE.getParameters();
+            }
+
+            DateComponents todayComponents = DateComponents.from(today.getTime());
+            com.batoulapps.adhan.PrayerTimes adhanPrayerTimes = new com.batoulapps.adhan.PrayerTimes(coordinates,
+                    todayComponents, params);
+
+            // Formatter les horaires
+            SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
+
+            prayerTimes.put("Fajr", timeFormat.format(adhanPrayerTimes.fajr));
+            prayerTimes.put("Sunrise", timeFormat.format(adhanPrayerTimes.sunrise));
+            prayerTimes.put("Dhuhr", timeFormat.format(adhanPrayerTimes.dhuhr));
+            prayerTimes.put("Asr", timeFormat.format(adhanPrayerTimes.asr));
+            prayerTimes.put("Maghrib", timeFormat.format(adhanPrayerTimes.maghrib));
+            prayerTimes.put("Isha", timeFormat.format(adhanPrayerTimes.isha));
+
+            Log.d(TAG, "✅ Calcul réussi - " + prayerTimes.size() + " horaires calculés");
+
+        } catch (Exception e) {
+            Log.e(TAG, "❌ Erreur calcul horaires: " + e.getMessage());
+        }
+
+        return prayerTimes;
     }
 
     /**
@@ -463,6 +720,42 @@ public class PrayerTimesWidget extends AppWidgetProvider {
         }
     }
 
+    private static String getDailyDhikr_fallback(Context context, String fallbackLang) {
+        try {
+            String fileName = "dhikr." + fallbackLang + ".json";
+
+            InputStream inputStream = context.getAssets().open(fileName);
+            InputStreamReader reader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
+
+            StringBuilder jsonBuilder = new StringBuilder();
+            char[] buffer = new char[1024];
+            int length;
+            while ((length = reader.read(buffer)) != -1) {
+                jsonBuilder.append(buffer, 0, length);
+            }
+
+            JSONArray dhikrArray = new JSONArray(jsonBuilder.toString());
+
+            if (dhikrArray.length() > 0) {
+                Calendar today = Calendar.getInstance();
+                int dayOfYear = today.get(Calendar.DAY_OF_YEAR);
+                int year = today.get(Calendar.YEAR);
+                int seed = (dayOfYear + year) % dhikrArray.length();
+
+                JSONObject dhikr = dhikrArray.getJSONObject(seed);
+                String arabic = dhikr.getString("arabic");
+                String translation = dhikr.getString("translation");
+
+                return arabic + "\n\n" + translation;
+            }
+
+        } catch (Exception e) {
+            Log.e(TAG, "❌ Erreur fallback dhikr: " + e.getMessage());
+        }
+
+        return "";
+    }
+
     /**
      * ⚡ Recalcule les horaires de prière pour aujourd'hui quand le widget détecte
      * un nouveau jour
@@ -554,41 +847,5 @@ public class PrayerTimesWidget extends AppWidgetProvider {
         } catch (Exception e) {
             Log.e(TAG, "❌ Erreur lors du recalcul des horaires: " + e.getMessage());
         }
-    }
-
-    private static String getDailyDhikr_fallback(Context context, String fallbackLang) {
-        try {
-            String fileName = "dhikr." + fallbackLang + ".json";
-
-            InputStream inputStream = context.getAssets().open(fileName);
-            InputStreamReader reader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
-
-            StringBuilder jsonBuilder = new StringBuilder();
-            char[] buffer = new char[1024];
-            int length;
-            while ((length = reader.read(buffer)) != -1) {
-                jsonBuilder.append(buffer, 0, length);
-            }
-
-            JSONArray dhikrArray = new JSONArray(jsonBuilder.toString());
-
-            if (dhikrArray.length() > 0) {
-                Calendar today = Calendar.getInstance();
-                int dayOfYear = today.get(Calendar.DAY_OF_YEAR);
-                int year = today.get(Calendar.YEAR);
-                int seed = (dayOfYear + year) % dhikrArray.length();
-
-                JSONObject dhikr = dhikrArray.getJSONObject(seed);
-                String arabic = dhikr.getString("arabic");
-                String translation = dhikr.getString("translation");
-
-                return arabic + "\n\n" + translation;
-            }
-
-        } catch (Exception e) {
-            Log.e(TAG, "❌ Erreur fallback dhikr: " + e.getMessage());
-        }
-
-        return "";
     }
 }
