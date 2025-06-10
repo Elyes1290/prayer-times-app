@@ -1,17 +1,10 @@
-import React, {
-  useContext,
-  useState,
-  useRef,
-  useEffect,
-  useCallback,
-} from "react";
+import React, { useContext, useState, useRef, useEffect } from "react";
 import { Picker } from "@react-native-picker/picker";
 import Slider from "@react-native-community/slider";
 import { Audio } from "expo-av";
 import {
   ImageBackground,
   SectionList,
-  ScrollView,
   View,
   Text,
   Switch,
@@ -19,10 +12,7 @@ import {
   TouchableOpacity,
   ActivityIndicator,
   StyleSheet,
-  Platform,
-  NativeModules,
   Modal,
-  Dimensions,
 } from "react-native";
 import bgImage from "../assets/images/prayer-bg.png";
 import {
@@ -33,11 +23,7 @@ import {
 } from "../contexts/SettingsContext";
 import { useCitySearch, NominatimResult } from "../hooks/useCitySearch";
 import { useTranslation } from "react-i18next";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { scheduleNotificationsFor2Days } from "../utils/sheduleAllNotificationsFor30Days";
-
-const { AdhanModule } = NativeModules;
 
 const soundObjects: Record<AdhanSoundKey, any> = {
   adhamalsharqawe: require("../assets/sounds/adhamalsharqawe.wav"),
@@ -49,6 +35,8 @@ const soundObjects: Record<AdhanSoundKey, any> = {
   mansourzahrani: require("../assets/sounds/mansourzahrani.mp3"),
   misharyrachid: require("../assets/sounds/misharyrachid.mp3"),
   mustafaozcan: require("../assets/sounds/mustafaozcan.mp3"),
+  masjidquba: require("../assets/sounds/masjidquba.mp3"),
+  islamsobhi: require("../assets/sounds/islamsobhi.mp3"),
 };
 
 // Interface pour les props du composant SettingsSections
@@ -667,7 +655,7 @@ export default function SettingsScreen() {
     if (!settings) return;
     setIsApplyingChanges(true);
     await settings.saveAndReprogramAll();
-    
+
     setIsApplyingChanges(false);
     setShowSuccessModal(true);
   };
@@ -695,6 +683,8 @@ export default function SettingsScreen() {
     "mustafaozcan",
     "adhamalsharqawe",
     "adhanaljazaer",
+    "masjidquba",
+    "islamsobhi",
   ];
 
   const languages = [
@@ -722,11 +712,8 @@ export default function SettingsScreen() {
       // On le fait de manière asynchrone pour ne pas bloquer l'interface
       setTimeout(async () => {
         try {
-          
           await settings.saveAndReprogramAll();
-          
-        } catch (error) {
-        }
+        } catch (error) {}
       }, 100); // Petit délai pour laisser l'interface se mettre à jour d'abord
     }
   }
@@ -1207,6 +1194,7 @@ const styles = StyleSheet.create({
   actionsContainer: {
     marginVertical: 25,
     alignItems: "center",
+    justifyContent: "center",
     paddingHorizontal: 20,
   },
   applyButton: {
@@ -1230,6 +1218,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     letterSpacing: 1,
     textTransform: "uppercase",
+    textAlign: "center",
     textShadowColor: "rgba(0,0,0,0.8)",
     textShadowOffset: { width: 0, height: 2 },
     textShadowRadius: 4,

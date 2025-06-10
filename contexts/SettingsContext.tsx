@@ -16,7 +16,9 @@ export type AdhanSoundKey =
   | "karljenkins"
   | "mansourzahrani"
   | "misharyrachid"
-  | "mustafaozcan";
+  | "mustafaozcan"
+  | "masjidquba"
+  | "islamsobhi";
 
 export type CalcMethodKey =
   | "MuslimWorldLeague"
@@ -484,6 +486,28 @@ export const SettingsProvider = ({
     setCalcMethod: (v) => {
       setCalcMethod(v);
       AsyncStorage.setItem("calcMethod", v);
+
+      // IMPORTANT: Reprogrammer automatiquement les notifications pour utiliser les nouveaux horaires
+      // car les alarmes Adhan sont programmées avec les anciens horaires de prière
+      if (!isInitializing) {
+        setTimeout(async () => {
+          try {
+            // CRITIQUE: Annuler d'abord toutes les alarmes adhan existantes
+            if (Platform.OS === "android" && AdhanModule) {
+              AdhanModule.cancelAllAdhanAlarms();
+              AdhanModule.cancelAllPrayerReminders();
+              AdhanModule.cancelAllDhikrNotifications();
+            }
+
+            await saveAndReprogramAll();
+          } catch (error) {
+            console.error(
+              "[DEBUG] ❌ Erreur reprogrammation après changement méthode:",
+              error
+            );
+          }
+        }, 100); // Petit délai pour laisser l'interface se mettre à jour d'abord
+      }
     },
     setAdhanSound: (v) => {
       setAdhanSound(v);

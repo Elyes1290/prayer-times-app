@@ -60,7 +60,9 @@
     "karljenkins": "Karl Jenkins",
     "mansourzahrani": "Mansour Zahrani",
     "misharyrachid": "Mishary Rachid",
-    "mustafaozcan": "Mustafa Ozcan"
+    "mustafaozcan": "Mustafa Ozcan",
+    "masjidquba": "Masjid Al-Quba",
+    "islamsobhi": "Islam Sobhi"
   },
 
   "sound_adhamalsharqawe": "Adhan Sharqaoui",
@@ -72,6 +74,8 @@
   "sound_mansourzahrani": "Mansour Zahrani",
   "sound_misharyrachid": "Mishary Rachid",
   "sound_mustafaozcan": "Mustafa Ozcan",
+  "sound_masjidquba": "Masjid Al-Quba",
+  "sound_islamsobhi": "Islam Sobhi",
 
   "hijri_calendar": "Calendrier Hijri",
   "gregorian_date": "Date Grégorienne",

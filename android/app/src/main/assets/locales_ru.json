@@ -48,7 +48,9 @@
     "dubai": "Азан из Дубая",
     "karljenkins": "Карл Дженкинс",
     "mansourzahrani": "Мансур Захрани",
-    "mustafaozcan": "Мустафа Озджан"
+    "mustafaozcan": "Мустафа Озджан",
+    "masjidquba": "Масджид Аль-Куба",
+    "islamsobhi": "Ислам Собхи"
   },
   "hijri_calendar": "Хиджра календарь",
   "gregorian_date": "Григорианская дата",
@@ -153,6 +155,8 @@
   "sound_mansourzahrani": "Мансур Захрани",
   "sound_misharyrachid": "Мишари Рашид",
   "sound_mustafaozcan": "Мустафа Озджан",
+  "sound_masjidquba": "Масджид Аль-Куба",
+  "sound_islamsobhi": "Ислам Собхи",
   "dhikr_category_morning": "Утренний зикр",
   "dhikr_category_evening": "Вечерний зикр",
   "dhikr_category_afterSalah": "Зикр после намаза",

@@ -42,7 +42,7 @@ class WidgetRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory 
         // TITRE avec date (mise à jour en temps réel)
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMMM yyyy",
-                PrayerTimesWidget.getCurrentLanguage(context).equals("it") ? Locale.ITALIAN : Locale.ENGLISH);
+                getLocaleForLanguage(PrayerTimesWidget.getCurrentLanguage(context)));
         String todayDate = dateFormat.format(calendar.getTime());
 
         String titleTranslation = PrayerTimesWidget.getTranslation(context, "widget_title");
@@ -158,6 +158,38 @@ class WidgetRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory 
                 return "🌙";
             default:
                 return "🕌";
+        }
+    }
+
+    private Locale getLocaleForLanguage(String language) {
+        switch (language) {
+            case "fr":
+                return Locale.FRENCH;
+            case "it":
+                return Locale.ITALIAN;
+            case "de":
+                return Locale.GERMAN;
+            case "es":
+                return Locale.forLanguageTag("es");
+            case "pt":
+                return Locale.forLanguageTag("pt");
+            case "ru":
+                return Locale.forLanguageTag("ru");
+            case "tr":
+                return Locale.forLanguageTag("tr");
+            case "nl":
+                return Locale.forLanguageTag("nl");
+            case "ar":
+                return Locale.forLanguageTag("ar");
+            case "fa":
+                return Locale.forLanguageTag("fa");
+            case "ur":
+                return Locale.forLanguageTag("ur");
+            case "bn":
+                return Locale.forLanguageTag("bn");
+            case "en":
+            default:
+                return Locale.ENGLISH;
         }
     }
 

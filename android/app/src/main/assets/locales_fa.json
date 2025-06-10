@@ -48,7 +48,9 @@
     "dubai": "اذان دبی",
     "karljenkins": "کارل جنکینز",
     "mansourzahrani": "منصور زهرانی",
-    "mustafaozcan": "مصطفی اوزجان"
+    "mustafaozcan": "مصطفی اوزجان",
+    "masjidquba": "مسجد قباء",
+    "islamsobhi": "اسلام صبحی"
   },
   "hijri_calendar": "تقویم هجری",
   "gregorian_date": "تاریخ میلادی",
@@ -155,6 +157,8 @@
   "sound_mansourzahrani": "منصور زهرانی",
   "sound_misharyrachid": "مشاری راشد",
   "sound_mustafaozcan": "مصطفی اوزجان",
+  "sound_masjidquba": "مسجد قباء",
+  "sound_islamsobhi": "اسلام صبحی",
   "dhikr_category_morning": "ذکر صبحگاهی",
   "dhikr_category_evening": "ذکر شامگاهی",
   "dhikr_category_afterSalah": "ذکر پس از نماز",

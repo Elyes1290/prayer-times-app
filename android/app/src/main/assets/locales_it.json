@@ -48,7 +48,9 @@
     "dubai": "Adhan aus Dubai",
     "karljenkins": "Karl Jenkins",
     "mansourzahrani": "Mansour Zahrani",
-    "mustafaozcan": "Mustafa Ozcan"
+    "mustafaozcan": "Mustafa Ozcan",
+    "masjidquba": "Masjid Al-Quba",
+    "islamsobhi": "Islam Sobhi"
   },
   "hijri_calendar": "Calendario Hijri",
   "gregorian_date": "Data Gregoriana",
@@ -153,6 +155,8 @@
   "sound_mansourzahrani": "Mansour Zahrani",
   "sound_misharyrachid": "Mishary Rashid",
   "sound_mustafaozcan": "Mustafa Ozcan",
+  "sound_masjidquba": "Masjid Al-Quba",
+  "sound_islamsobhi": "Islam Sobhi",
   "dhikr_category_morning": "Dhikr del Mattino",
   "dhikr_category_evening": "Dhikr della Sera",
   "dhikr_category_afterSalah": "Dhikr dopo la Preghiera",

@@ -42,7 +42,15 @@
   "adhan_sounds": {
     "adhamalsharqawe": "Adzan Al Sharqawe",
     "adhanaljazaer": "Adzan Aljazair",
-    "ahmedelkourdi": "Ahmed El Kourdi"
+    "ahmedelkourdi": "Ahmed El Kourdi",
+    "ahmadnafees": "Ahmad Nafees",
+    "dubai": "Adzan Dubai",
+    "karljenkins": "Karl Jenkins",
+    "mansourzahrani": "Mansour Zahrani",
+    "misharyrachid": "Mishary Rashid",
+    "mustafaozcan": "Mustafa Ozcan",
+    "masjidquba": "Masjid Al-Quba",
+    "islamsobhi": "Islam Sobhi"
   },
   "hijri_calendar": "Kalender Hijriyah",
   "gregorian_date": "Tanggal Gregorian",

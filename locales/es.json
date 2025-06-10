@@ -48,7 +48,9 @@
     "karljenkins": "Karl Jenkins",
     "mansourzahrani": "Mansour Zahrani",
     "misharyrachid": "Mishary Rashid",
-    "mustafaozcan": "Mustafa Ozcan"
+    "mustafaozcan": "Mustafa Ozcan",
+    "masjidquba": "Masjid Al-Quba",
+    "islamsobhi": "Islam Sobhi"
   },
   "hijri_calendar": "Calendario Hijri",
   "gregorian_date": "Fecha Gregoriana",
@@ -206,6 +208,8 @@
   "sound_mansourzahrani": "Mansour Zahrani",
   "sound_misharyrachid": "Mishary Rashid",
   "sound_mustafaozcan": "Mustafa Ozcan",
+  "sound_masjidquba": "Masjid Al-Quba",
+  "sound_islamsobhi": "Islam Sobhi",
   "dhikr_category_morning": "Dhikr Matutino",
   "dhikr_category_evening": "Dhikr Vespertino",
   "dhikr_category_afterSalah": "Dhikr después de la Oración",

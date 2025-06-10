@@ -48,7 +48,9 @@
     "karljenkins": "Karl Jenkins",
     "mansourzahrani": "Mansour Zahrani",
     "misharyrachid": "Mishary Rashid",
-    "mustafaozcan": "Mustafa Özcan"
+    "mustafaozcan": "Mustafa Özcan",
+    "masjidquba": "Kuba Mescidi",
+    "islamsobhi": "İslam Sobhi"
   },
   "hijri_calendar": "Hicri Takvim",
   "gregorian_date": "Miladi Tarih",
@@ -153,6 +155,8 @@
   "sound_mansourzahrani": "Mansour Zahrani",
   "sound_misharyrachid": "Mişari Raşid",
   "sound_mustafaozcan": "Mustafa Özcan",
+  "sound_masjidquba": "Kuba Mescidi",
+  "sound_islamsobhi": "İslam Sobhi",
   "dhikr_category_morning": "Sabah Zikri",
   "dhikr_category_evening": "Akşam Zikri",
   "dhikr_category_afterSalah": "Namaz Sonrası Zikir",

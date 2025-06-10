@@ -62,7 +62,9 @@
     "karljenkins": "كَارْلُ جِنْكِينْزْ",
     "mansourzahrani": "مَنْصُورُ الزَّهْرَانِيُّ",
     "misharyrachid": "مِشَارِي رَاشِدٌ",
-    "mustafaozcan": "مُصْطَفَى أُوزْجَانْ"
+    "mustafaozcan": "مُصْطَفَى أُوزْجَانْ",
+    "masjidquba": "مَسْجِدُ قُبَاءَ",
+    "islamsobhi": "إِسْلَامُ صُبْحِي"
   },
 
   "sound_adhamalsharqawe": "أَذَانُ الشَّرْقَاوِيِّ",
@@ -74,6 +76,8 @@
   "sound_mansourzahrani": "مَنْصُورُ الزَّهْرَانِيُّ",
   "sound_misharyrachid": "مِشَارِي رَاشِدٌ",
   "sound_mustafaozcan": "مُصْطَفَى أُوزْجَانْ",
+  "sound_masjidquba": "مَسْجِدُ قُبَاءَ",
+  "sound_islamsobhi": "إِسْلَامُ صُبْحِي",
 
   "hijri_calendar": "التَّقْوِيمُ الهِجْرِيُّ",
   "gregorian_date": "التَّارِيخُ المِيلَادِيُّ",

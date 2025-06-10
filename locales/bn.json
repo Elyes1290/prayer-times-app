@@ -48,7 +48,9 @@
     "dubai": "দুবাই আজান",
     "karljenkins": "কার্ল জেনকিন্স",
     "mansourzahrani": "মানসুর জাহরানি",
-    "mustafaozcan": "মুস্তাফা ওজকান"
+    "mustafaozcan": "মুস্তাফা ওজকান",
+    "masjidquba": "মসজিদ আল-কুবা",
+    "islamsobhi": "ইসলাম সোবহি"
   },
   "hijri_calendar": "হিজরি ক্যালেন্ডার",
   "gregorian_date": "গ্রেগরিয়ান তারিখ",
@@ -208,6 +210,8 @@
   "sound_mansourzahrani": "মানসুর জাহরানি",
   "sound_misharyrachid": "মিশারি রাশিদ",
   "sound_mustafaozcan": "মুস্তাফা ওজকান",
+  "sound_masjidquba": "মসজিদ আল-কুবা",
+  "sound_islamsobhi": "ইসলাম সোবহি",
   "dhikr_category_morning": "সকালের জিকির",
   "dhikr_category_evening": "সন্ধ্যার জিকির",
   "dhikr_category_afterSalah": "নামাজের পর জিকির",

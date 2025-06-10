@@ -45,10 +45,12 @@
     "ahmedelkourdi": "Ahmed El Kourdi",
     "misharyrachid": "Mishary Rashid",
     "ahmadnafees": "Ahmad Nafees",
-    "dubai": "Adhan aus Dubai",
+    "dubai": "Adhan do Dubai",
     "karljenkins": "Karl Jenkins",
     "mansourzahrani": "Mansour Zahrani",
-    "mustafaozcan": "Mustafa Ozcan"
+    "mustafaozcan": "Mustafa Ozcan",
+    "masjidquba": "Masjid Al-Quba",
+    "islamsobhi": "Islam Sobhi"
   },
   "hijri_calendar": "Calendário Hijri",
   "gregorian_date": "Data Gregoriana",
@@ -208,6 +210,8 @@
   "sound_mansourzahrani": "Mansour Zahrani",
   "sound_misharyrachid": "Mishary Rashid",
   "sound_mustafaozcan": "Mustafa Ozcan",
+  "sound_masjidquba": "Masjid Al-Quba",
+  "sound_islamsobhi": "Islam Sobhi",
   "dhikr_category_morning": "Dhikr da Manhã",
   "dhikr_category_evening": "Dhikr da Noite",
   "dhikr_category_afterSalah": "Dhikr após a Oração",

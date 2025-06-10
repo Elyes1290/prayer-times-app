@@ -194,8 +194,8 @@ public class PrayerTimesWidget extends AppWidgetProvider {
             Log.e(TAG, "❌ Erreur récupération langue: " + e.getMessage());
         }
 
-        Log.d(TAG, "⚠️ Aucune langue trouvée, utilisation fallback: it");
-        return "it"; // Italian comme langue par défaut
+        Log.d(TAG, "⚠️ Aucune langue trouvée, utilisation fallback: en");
+        return "en"; // English comme langue par défaut
     }
 
     /**
