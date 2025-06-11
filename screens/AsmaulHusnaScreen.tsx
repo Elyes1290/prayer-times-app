@@ -2,16 +2,22 @@ import React, { useState } from "react";
 import {
   View,
   Text,
-  ImageBackground,
   StyleSheet,
   FlatList,
   TextInput,
+  TouchableOpacity,
+  Animated,
+  Dimensions,
+  ImageBackground,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useTranslation } from "react-i18next";
+import { LinearGradient } from "expo-linear-gradient";
+import { Ionicons } from "@expo/vector-icons";
 
 interface Nom {
   key: string;
+  number: number;
   arabic: string;
   translit: string;
   french: string;
@@ -26,23 +32,21 @@ interface Nom {
   citation?: string;
 }
 
-const HEADER_HEIGHT = 110;
+const { width } = Dimensions.get("window");
 
 function removeAccents(str: string) {
-  return (
-    str
-      // Pour le français/translit
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "")
-      // Pour l'arabe, enlève les harakat
-      .replace(/[\u064B-\u0652]/g, "")
-  );
+  return str
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[\u064B-\u0652]/g, "");
 }
 
 const AsmaulHusnaScreen = () => {
   const { t: tAsma } = useTranslation("asmaulhusna");
   const insets = useSafeAreaInsets();
   const [searchQuery, setSearchQuery] = useState("");
+  const [expandedId, setExpandedId] = useState<string | null>(null);
+  const [animations] = useState(new Map());
 
   const filteredNames = Array.from({ length: 99 }, (_, i) => {
     const num = i + 1;
@@ -63,108 +67,311 @@ const AsmaulHusnaScreen = () => {
       citation: tAsma(`name_${num}.citation`),
     };
   }).filter((item) => {
-    const searchLower = searchQuery.toLowerCase();
+    const searchLower = removeAccents(searchQuery.toLowerCase());
     return (
-      item.arabic.toLowerCase().includes(searchLower) ||
-      item.translit.toLowerCase().includes(searchLower) ||
-      item.french.toLowerCase().includes(searchLower) ||
-      item.meaning.toLowerCase().includes(searchLower)
+      removeAccents(item.arabic.toLowerCase()).includes(searchLower) ||
+      removeAccents(item.translit.toLowerCase()).includes(searchLower) ||
+      removeAccents(item.french.toLowerCase()).includes(searchLower) ||
+      removeAccents(item.meaning.toLowerCase()).includes(searchLower)
     );
   });
+
+  const toggleExpand = (id: string) => {
+    if (!animations.has(id)) {
+      animations.set(id, new Animated.Value(0));
+    }
+    const animation = animations.get(id);
+
+    if (expandedId === id) {
+      Animated.timing(animation, {
+        toValue: 0,
+        duration: 300,
+        useNativeDriver: false,
+      }).start(() => setExpandedId(null));
+    } else {
+      if (expandedId) {
+        const prevAnimation = animations.get(expandedId);
+        Animated.timing(prevAnimation, {
+          toValue: 0,
+          duration: 300,
+          useNativeDriver: false,
+        }).start();
+      }
+      setExpandedId(id);
+      Animated.timing(animation, {
+        toValue: 1,
+        duration: 300,
+        useNativeDriver: false,
+      }).start();
+    }
+  };
+
+  const renderNameCard = ({ item }: { item: Nom }) => {
+    const isExpanded = expandedId === item.key;
+    const animation = animations.get(item.key) || new Animated.Value(0);
+
+    const maxHeight = animation.interpolate({
+      inputRange: [0, 1],
+      outputRange: [0, 1000],
+    });
+
+    return (
+      <View style={styles.card}>
+        <LinearGradient
+          colors={["rgba(255,255,255,0.1)", "rgba(255,255,255,0.05)"]}
+          style={styles.cardGradient}
+        >
+          <TouchableOpacity
+            style={styles.cardHeader}
+            onPress={() => toggleExpand(item.key)}
+            activeOpacity={0.7}
+          >
+            <View style={styles.cardTopRow}>
+              <View style={styles.numberContainer}>
+                <Text style={styles.number}>{item.number}</Text>
+              </View>
+              <Ionicons
+                name={isExpanded ? "chevron-up" : "chevron-down"}
+                size={24}
+                color="#fff"
+                style={styles.expandIcon}
+              />
+            </View>
+            <View style={styles.arabicNameContainer}>
+              <Text style={styles.arabic}>{item.arabic}</Text>
+            </View>
+            <View style={styles.nameDetailsContainer}>
+              <Text style={styles.translit}>{item.translit}</Text>
+              <Text style={styles.french}>{item.french}</Text>
+            </View>
+          </TouchableOpacity>
+
+          <Animated.View style={[styles.cardDetails, { maxHeight }]}>
+            <View style={styles.section}>
+              <Text style={styles.sectionTitle}>Signification</Text>
+              <Text style={styles.sectionText}>{item.meaning}</Text>
+            </View>
+            {item.occurrences && (
+              <View style={styles.section}>
+                <Text style={styles.sectionTitle}>Occurrences</Text>
+                <Text style={styles.sectionText}>{item.occurrences}</Text>
+              </View>
+            )}
+            {item.benefits && (
+              <View style={styles.section}>
+                <Text style={styles.sectionTitle}>Bénéfices</Text>
+                <Text style={styles.sectionText}>{item.benefits}</Text>
+              </View>
+            )}
+            {item.usage && (
+              <View style={styles.section}>
+                <Text style={styles.sectionTitle}>Utilisation</Text>
+                <Text style={styles.sectionText}>{item.usage}</Text>
+              </View>
+            )}
+            {item.hadith && (
+              <View style={styles.section}>
+                <Text style={styles.sectionTitle}>Hadith</Text>
+                <Text style={styles.sectionText}>{item.hadith}</Text>
+              </View>
+            )}
+            {item.details && (
+              <View style={styles.section}>
+                <Text style={styles.sectionTitle}>Détails</Text>
+                <Text style={styles.sectionText}>{item.details}</Text>
+              </View>
+            )}
+            {item.reference && (
+              <View style={styles.section}>
+                <Text style={styles.sectionTitle}>Référence</Text>
+                <Text style={styles.sectionText}>{item.reference}</Text>
+              </View>
+            )}
+            {item.spiritual_effect && (
+              <View style={styles.section}>
+                <Text style={styles.sectionTitle}>Effet Spirituel</Text>
+                <Text style={styles.sectionText}>{item.spiritual_effect}</Text>
+              </View>
+            )}
+            {item.citation && (
+              <View style={styles.section}>
+                <Text style={styles.sectionTitle}>Citation</Text>
+                <Text style={styles.sectionText}>{item.citation}</Text>
+              </View>
+            )}
+          </Animated.View>
+        </LinearGradient>
+      </View>
+    );
+  };
 
   return (
     <ImageBackground
       source={require("../assets/images/prayer-bg.png")}
-      style={styles.background}
+      style={[styles.container, { paddingTop: insets.top }]}
+      resizeMode="cover"
     >
-      <View style={[styles.container, { paddingTop: insets.top }]}>
-        <View style={styles.searchContainer}>
-          <TextInput
-            style={styles.searchInput}
-            placeholder={tAsma("search_placeholder")}
-            placeholderTextColor="#666"
-            value={searchQuery}
-            onChangeText={setSearchQuery}
-          />
-        </View>
+      <View style={styles.overlay} />
+      <View style={styles.header}>
+        <Text style={styles.title}>{tAsma("title")}</Text>
+        <Text style={styles.subtitle}>{tAsma("subtitle")}</Text>
+      </View>
 
-        <FlatList
-          data={filteredNames}
-          renderItem={({ item }) => (
-            <ImageBackground
-              source={require("../assets/images/prayer-bg.png")}
-              style={styles.cardBG}
-              imageStyle={{ borderRadius: 18, resizeMode: "cover" }}
-            >
-              <View style={styles.cardContent}>
-                <View style={{ flex: 1 }}>
-                  <Text style={styles.arabic}>
-                    {item.number}. {item.arabic}
-                  </Text>
-                  <Text style={styles.translit}>
-                    {item.translit} — {item.french}
-                  </Text>
-                  <Text style={styles.meaning}>{item.meaning}</Text>
-                </View>
-              </View>
-            </ImageBackground>
-          )}
-          keyExtractor={(item) => item.key}
-          contentContainerStyle={styles.listContainer}
-          keyboardShouldPersistTaps="handled"
+      <View style={styles.searchContainer}>
+        <Ionicons
+          name="search"
+          size={20}
+          color="#666"
+          style={styles.searchIcon}
+        />
+        <TextInput
+          style={styles.searchInput}
+          placeholder={tAsma("search_placeholder")}
+          placeholderTextColor="#666"
+          value={searchQuery}
+          onChangeText={setSearchQuery}
         />
       </View>
+
+      <FlatList
+        data={filteredNames}
+        renderItem={renderNameCard}
+        keyExtractor={(item) => item.key}
+        contentContainerStyle={styles.listContainer}
+        showsVerticalScrollIndicator={false}
+      />
     </ImageBackground>
   );
 };
 
 const styles = StyleSheet.create({
-  background: {
-    flex: 1,
-    resizeMode: "cover",
-    backgroundColor: "#000",
-  },
   container: {
     flex: 1,
-    padding: 16,
+    backgroundColor: "#000",
+  },
+  overlay: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    backgroundColor: "rgba(0, 0, 0, 0.6)",
+  },
+  header: {
+    padding: 20,
+    paddingBottom: 10,
+    alignItems: "center",
+  },
+  title: {
+    fontSize: 28,
+    fontWeight: "bold",
+    color: "#fff",
+    marginBottom: 8,
+    textAlign: "center",
+  },
+  subtitle: {
+    fontSize: 16,
+    color: "#999",
+    marginBottom: 20,
+    textAlign: "center",
   },
   searchContainer: {
-    marginBottom: 16,
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "rgba(255,255,255,0.1)",
+    marginHorizontal: 20,
+    marginBottom: 20,
+    borderRadius: 12,
+    paddingHorizontal: 15,
+  },
+  searchIcon: {
+    marginRight: 10,
   },
   searchInput: {
-    backgroundColor: "rgba(255, 255, 255, 0.1)",
-    borderRadius: 8,
-    padding: 12,
+    flex: 1,
+    height: 50,
     color: "#fff",
     fontSize: 16,
   },
   listContainer: {
-    paddingBottom: 20,
+    padding: 20,
+    paddingTop: 0,
   },
-  cardBG: {
-    marginBottom: 12,
-    borderRadius: 18,
+  card: {
+    marginBottom: 15,
+    borderRadius: 16,
     overflow: "hidden",
   },
-  cardContent: {
-    padding: 16,
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
+  cardGradient: {
+    borderRadius: 16,
+  },
+  cardHeader: {
+    padding: 15,
+  },
+  cardTopRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 15,
+  },
+  numberContainer: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: "rgba(255,255,255,0.1)",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  number: {
+    color: "#fff",
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+  expandIcon: {
+    marginLeft: 10,
+  },
+  arabicNameContainer: {
+    alignItems: "center",
+    marginBottom: 15,
   },
   arabic: {
-    fontSize: 24,
+    fontSize: 40,
     color: "#fff",
-    marginBottom: 4,
-    textAlign: "right",
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  nameDetailsContainer: {
+    alignItems: "center",
   },
   translit: {
-    fontSize: 16,
+    fontSize: 18,
     color: "#fff",
     marginBottom: 4,
+    textAlign: "center",
   },
-  meaning: {
+  french: {
+    fontSize: 16,
+    color: "#999",
+    textAlign: "center",
+  },
+  cardDetails: {
+    overflow: "hidden",
+    paddingHorizontal: 15,
+    paddingBottom: 15,
+  },
+  section: {
+    marginBottom: 15,
+  },
+  sectionTitle: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "#fff",
+    marginBottom: 8,
+  },
+  sectionText: {
     fontSize: 14,
     color: "#ccc",
-    marginTop: 2,
+    lineHeight: 20,
   },
 });
 
