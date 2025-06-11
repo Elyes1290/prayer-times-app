@@ -250,5 +250,15 @@
   "dhuhr": "ظهر",
   "asr": "عصر",
   "maghrib": "مغرب",
-  "isha": "عشاء"
+  "isha": "عشاء",
+  "time_until_sunrise": "زمان تا طلوع آفتاب",
+  "fajr_to_sunrise_time": "زمان بین فجر و طلوع آفتاب",
+  "sunrise_to_zuhr_time": "زمان بین طلوع آفتاب و ظهر",
+  "zuhr_to_asr_time": "زمان بین ظهر و عصر",
+  "asr_to_maghrib_time": "زمان بین عصر و مغرب",
+  "maghrib_to_isha_time": "زمان بین مغرب و عشاء",
+  "sunrise_to_sunset": "زمان بین طلوع و غروب آفتاب",
+  "sunset_to_fajr": "زمان بین غروب آفتاب و فجر",
+  "day_length": "طول روز",
+  "night_length": "طول شب"
 }

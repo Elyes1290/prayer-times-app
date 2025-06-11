@@ -250,5 +250,15 @@
   "sunrise": "Zonsopgang",
   "dhuhr": "Dhohr",
   "asr": "Asr",
-  "maghrib": "Maghrib"
+  "maghrib": "Maghrib",
+  "time_until_sunrise": "Tijd tot zonsopgang",
+  "fajr_to_sunrise_time": "Tijd tussen Fajr en zonsopgang",
+  "sunrise_to_zuhr_time": "Tijd tussen zonsopgang en Dhuhr",
+  "zuhr_to_asr_time": "Tijd tussen Dhuhr en Asr",
+  "asr_to_maghrib_time": "Tijd tussen Asr en Maghrib",
+  "maghrib_to_isha_time": "Tijd tussen Maghrib en Isha",
+  "sunrise_to_sunset": "Tijd tussen zonsopgang en zonsondergang",
+  "sunset_to_fajr": "Tijd tussen zonsondergang en Fajr",
+  "day_length": "Lengte van de dag",
+  "night_length": "Lengte van de nacht"
 }

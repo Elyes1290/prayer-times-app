@@ -250,5 +250,15 @@
   "sunrise": "Nascer do Sol",
   "dhuhr": "Dhuhr",
   "asr": "Asr",
-  "maghrib": "Maghrib"
+  "maghrib": "Maghrib",
+  "time_until_sunrise": "Tempo até o nascer do sol",
+  "fajr_to_sunrise_time": "Tempo entre Fajr e o nascer do sol",
+  "sunrise_to_zuhr_time": "Tempo entre o nascer do sol e Dhuhr",
+  "zuhr_to_asr_time": "Tempo entre Dhuhr e Asr",
+  "asr_to_maghrib_time": "Tempo entre Asr e Maghrib",
+  "maghrib_to_isha_time": "Tempo entre Maghrib e Isha",
+  "sunrise_to_sunset": "Tempo entre o nascer e o pôr do sol",
+  "sunset_to_fajr": "Tempo entre o pôr do sol e Fajr",
+  "day_length": "Duração do dia",
+  "night_length": "Duração da noite"
 }
