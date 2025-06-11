@@ -186,6 +186,10 @@ export default function DrawerLayout() {
           options={{ title: t("asmaulhusna") }}
         />
         <Drawer.Screen name="about" options={{ title: t("about") }} />
+        <Drawer.Screen
+          name="prayerScreen"
+          options={{ title: t("prayer_times") }}
+        />
       </Drawer>
     </SettingsProvider>
   );

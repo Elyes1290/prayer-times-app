@@ -164,5 +164,15 @@
     "build": "Build",
     "footer_thanks": "Semoga Allah membalas Anda karena menggunakan aplikasi ini! 🤲",
     "closing_dua": "رَبَّنَا تَقَبَّلْ مِنَّا إِنَّكَ أَنتَ السَّمِيعُ الْعَلِيمُ"
-  }
+  },
+  "time_until_sunrise": "Waktu hingga matahari terbit",
+  "fajr_to_sunrise_time": "Waktu antara Fajr dan matahari terbit",
+  "sunrise_to_zuhr_time": "Waktu antara matahari terbit dan Dhuhr",
+  "zuhr_to_asr_time": "Waktu antara Dhuhr dan Asr",
+  "asr_to_maghrib_time": "Waktu antara Asr dan Maghrib",
+  "maghrib_to_isha_time": "Waktu antara Maghrib dan Isha",
+  "sunrise_to_sunset": "Waktu antara matahari terbit dan terbenam",
+  "sunset_to_fajr": "Waktu antara matahari terbenam dan Fajr",
+  "day_length": "Panjang hari",
+  "night_length": "Panjang malam"
 }

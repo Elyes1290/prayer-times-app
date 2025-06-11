@@ -248,5 +248,15 @@
   "sunrise": "Alba",
   "dhuhr": "Dhuhr",
   "asr": "Asr",
-  "maghrib": "Maghrib"
+  "maghrib": "Maghrib",
+  "time_until_sunrise": "Tempo fino all'alba",
+  "fajr_to_sunrise_time": "Tempo tra Fajr e alba",
+  "sunrise_to_zuhr_time": "Tempo tra alba e Dhuhr",
+  "zuhr_to_asr_time": "Tempo tra Dhuhr e Asr",
+  "asr_to_maghrib_time": "Tempo tra Asr e Maghrib",
+  "maghrib_to_isha_time": "Tempo tra Maghrib e Isha",
+  "sunrise_to_sunset": "Tempo tra alba e tramonto",
+  "sunset_to_fajr": "Tempo tra tramonto e Fajr",
+  "day_length": "Durata del giorno",
+  "night_length": "Durata della notte"
 }
