@@ -37,6 +37,8 @@ import { useLocation } from "../hooks/useLocation";
 import { usePrayerTimes } from "../hooks/usePrayerTimes";
 import { scheduleNotificationsFor2Days } from "../utils/sheduleAllNotificationsFor30Days";
 import { useFocusEffect } from "@react-navigation/native";
+import { getQuranVersesWithTranslations } from "../utils/quranApi";
+import { getRandomHadith } from "../utils/hadithApi";
 
 const { AdhanModule } = NativeModules;
 const { width: screenWidth, height: screenHeight } = Dimensions.get("window");
@@ -244,6 +246,7 @@ export default function HomeScreen() {
   const [randomDua, setRandomDua] = useState<any>(null);
   const [randomVerse, setRandomVerse] = useState<any>(null);
   const [randomName, setRandomName] = useState<any>(null);
+  const [randomHadith, setRandomHadith] = useState<any>(null);
 
   // Animations
   const [fadeAnim] = useState(new Animated.Value(0));
@@ -312,9 +315,10 @@ export default function HomeScreen() {
         }
       }
 
-      // Utiliser l'API Quran.com pour récupérer un verset aléatoire
+      // Utiliser l'API utilitaire pour récupérer un verset aléatoire et sa traduction
       try {
         // Récupérer la liste des sourates
+        const lang = i18n.language;
         const souratesRes = await fetch(
           `https://api.quran.com/api/v4/chapters?language=${lang}`
         );
@@ -325,67 +329,20 @@ export default function HomeScreen() {
           // Sélectionner une sourate aléatoire
           const randomSourate =
             sourates[Math.floor(Math.random() * sourates.length)];
-
-          // Récupérer les versets de la sourate
-          const arabicRes = await fetch(
-            `https://api.quran.com/api/v4/quran/verses/uthmani?chapter_number=${randomSourate.id}`
+          // Récupérer tous les versets + traductions de cette sourate
+          const versesWithTranslations = await getQuranVersesWithTranslations(
+            randomSourate.id,
+            lang
           );
-          const arabicJson = await arabicRes.json();
-          const verses = arabicJson.verses || [];
-
-          if (verses.length > 0) {
+          if (versesWithTranslations.length > 0) {
             // Sélectionner un verset aléatoire
             const randomVerse =
-              verses[Math.floor(Math.random() * verses.length)];
-
-            // Récupérer la traduction
-            const translationId = translationMap[lang] || 85; // fallback anglais
-            const translationRes = await fetch(
-              `https://api.quran.com/api/v4/quran/translations/${translationId}?chapter_number=${randomSourate.id}`
-            );
-            const translationJson = await translationRes.json();
-
-            let translation = "";
-            if (
-              translationJson.translations &&
-              translationJson.translations.length > 0
-            ) {
-              const verseTranslation = translationJson.translations.find(
-                (t: any) =>
-                  (t.verse_key && t.verse_key === randomVerse.verse_key) ||
-                  ((t.verse_number === randomVerse.verse_number ||
-                    t.verse_number == randomVerse.verse_key.split(":")[1]) &&
-                    (t.chapter_id === randomSourate.id ||
-                      t.chapter_number === randomSourate.id))
-              );
-              translation = verseTranslation?.text || "";
-            }
-
-            // Si pas de traduction trouvée, essayer en anglais
-            if (!translation && translationId !== 85) {
-              const fallbackRes = await fetch(
-                `https://api.quran.com/api/v4/quran/translations/85?chapter_number=${randomSourate.id}`
-              );
-              const fallbackJson = await fallbackRes.json();
-              if (
-                fallbackJson.translations &&
-                fallbackJson.translations.length > 0
-              ) {
-                const verseTranslation = fallbackJson.translations.find(
-                  (t: any) =>
-                    (t.verse_key && t.verse_key === randomVerse.verse_key) ||
-                    ((t.verse_number === randomVerse.verse_number ||
-                      t.verse_number == randomVerse.verse_key.split(":")[1]) &&
-                      (t.chapter_id === randomSourate.id ||
-                        t.chapter_number === randomSourate.id))
-                );
-                translation = verseTranslation?.text || "";
-              }
-            }
-
+              versesWithTranslations[
+                Math.floor(Math.random() * versesWithTranslations.length)
+              ];
             setRandomVerse({
               arabic: randomVerse.text_uthmani,
-              translation: translation,
+              translation: randomVerse.translation,
               reference: `${randomSourate.name_simple} – ${randomSourate.id}:${
                 randomVerse.verse_key.split(":")[1]
               }`,
@@ -394,6 +351,14 @@ export default function HomeScreen() {
         }
       } catch (error) {
         console.error("Erreur lors de la récupération du verset:", error);
+      }
+
+      // Hadith du jour
+      try {
+        const hadith = await getRandomHadith();
+        setRandomHadith(hadith);
+      } catch (error) {
+        setRandomHadith(null);
       }
     } catch (error) {
       console.error("Erreur lors du chargement du contenu aléatoire:", error);
@@ -1299,6 +1264,84 @@ export default function HomeScreen() {
                 </TouchableOpacity>
               </LinearGradient>
             </Animated.View>
+
+            {/* Carte Hadith */}
+            <Animated.View
+              style={[
+                styles.dashboardCard,
+                styles.hadithCard,
+                {
+                  opacity: fadeAnim,
+                  transform: [
+                    {
+                      translateY: slideAnim.interpolate({
+                        inputRange: [0, 30],
+                        outputRange: [30, 0],
+                      }),
+                    },
+                  ],
+                },
+              ]}
+            >
+              <LinearGradient
+                colors={[
+                  "rgba(255, 215, 0, 0.12)",
+                  "rgba(255, 179, 102, 0.10)",
+                ]}
+                style={styles.cardContent}
+              >
+                <View style={styles.cardHeader}>
+                  <View style={styles.cardIconContainer}>
+                    <MaterialCommunityIcons
+                      name="book"
+                      size={28}
+                      color="#FFD700"
+                    />
+                  </View>
+                  <Text style={styles.cardTitle}>{t("hadith_du_jour")}</Text>
+                </View>
+                <View style={styles.cardBody}>
+                  {randomHadith ? (
+                    <>
+                      {randomHadith.hadithArabic && (
+                        <Text style={styles.hadithArabic}>
+                          {randomHadith.hadithArabic}
+                        </Text>
+                      )}
+                      {randomHadith.hadithEnglish &&
+                      randomHadith.hadithEnglish.trim().length > 0 ? (
+                        <Text style={styles.hadithTranslation}>
+                          {randomHadith.hadithEnglish}
+                        </Text>
+                      ) : (
+                        <Text style={styles.hadithTranslation}>
+                          {t("translation_not_available")}
+                        </Text>
+                      )}
+                      <Text style={styles.versetReference}>
+                        {randomHadith.bookSlug} – {randomHadith.chapterNumber} –{" "}
+                        {randomHadith.hadithNumber}
+                      </Text>
+                    </>
+                  ) : (
+                    <Text style={styles.cardSubtitle}>
+                      {t("dashboard_hadith_fallback")}
+                    </Text>
+                  )}
+                </View>
+                <TouchableOpacity
+                  style={styles.cardAction}
+                  onPress={() => router.push("/hadith")}
+                >
+                  <Text style={styles.cardActionText}>{t("voir_plus")}</Text>
+                  <MaterialCommunityIcons
+                    name="arrow-right"
+                    size={20}
+                    color="#fffbe8"
+                  />
+                </TouchableOpacity>
+              </LinearGradient>
+            </Animated.View>
           </View>
 
           {/* 🎯 Section Actions Rapides - Style iOS moderne */}
@@ -1736,6 +1779,7 @@ const styles = StyleSheet.create({
     marginBottom: 12,
     fontFamily: "ScheherazadeNew",
     lineHeight: 36,
+    flexShrink: 1, // Permet au texte de se rétrécir si nécessaire
   },
   duaTranslation: {
     fontSize: 16,
@@ -1743,6 +1787,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginBottom: 8,
     lineHeight: 22,
+    flexShrink: 1, // Permet au texte de se rétrécir si nécessaire
   },
   duaBenefits: {
     fontSize: 14,
@@ -2336,6 +2381,29 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "rgba(255, 255, 255, 0.8)",
     textAlign: "center",
+    lineHeight: 22,
+  },
+
+  // Ajout de styles spécifiques pour la carte hadith
+  hadithCard: {
+    marginTop: 50, // Augmenté de 24 à 32
+    marginBottom: 32, // Augmenté de 24 à 32
+  },
+
+  hadithArabic: {
+    fontSize: 24,
+    color: "#fffbe8",
+    textAlign: "center",
+    marginBottom: 12,
+    fontFamily: "ScheherazadeNew",
+    lineHeight: 36,
+  },
+
+  hadithTranslation: {
+    fontSize: 16,
+    color: "rgba(255, 255, 255, 0.9)",
+    textAlign: "center",
+    marginBottom: 8,
     lineHeight: 22,
   },
 });

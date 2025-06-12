@@ -275,5 +275,7 @@
   "actions_rapides": "Быстрые действия",
   "dashboard_dua_fallback": "Откройте ежедневные молитвы",
   "dashboard_verset_fallback": "Изучайте Священный Коран",
-  "dashboard_names_fallback": "Асмауль Хусна"
+  "dashboard_names_fallback": "Асмауль Хусна",
+  "hadith_du_jour": "Хадис дня",
+  "voir_plus": "Подробнее"
 }

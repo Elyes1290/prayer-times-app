@@ -183,7 +183,7 @@ export default function DrawerLayout() {
         <Drawer.Screen name="dhikr" options={{ title: t("dhikr_dua") }} />
         <Drawer.Screen
           name="asmaulhusna"
-          options={{ title: t("asmaulhusna") }}
+          options={{ title: t("abouts.features.asmaul_husna") }}
         />
         <Drawer.Screen name="about" options={{ title: t("about") }} />
         <Drawer.Screen

@@ -297,5 +297,7 @@
   "actions_rapides": "Hızlı Eylemler",
   "dashboard_dua_fallback": "Günlük duaları keşfedin",
   "dashboard_verset_fallback": "Kutsal Kuran'ı inceleyin",
-  "dashboard_names_fallback": "Esmaül Hüsna"
+  "dashboard_names_fallback": "Esmaül Hüsna",
+  "hadith_du_jour": "Günün Hadisi",
+  "voir_plus": "Daha fazla"
 }

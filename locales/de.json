@@ -291,5 +291,7 @@
   "actions_rapides": "Schnelle Aktionen",
   "dashboard_dua_fallback": "Entdecke tägliche Anrufungen",
   "dashboard_verset_fallback": "Erkunde den Heiligen Quran",
-  "dashboard_names_fallback": "Asmaul Husna"
+  "dashboard_names_fallback": "Asmaul Husna",
+  "hadith_du_jour": "Hadith des Tages",
+  "voir_plus": "Mehr anzeigen"
 }

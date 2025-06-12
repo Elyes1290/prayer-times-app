@@ -276,5 +276,7 @@
   "actions_rapides": "Snelle Acties",
   "dashboard_dua_fallback": "Ontdek dagelijkse invocaties",
   "dashboard_verset_fallback": "Verken de Heilige Koran",
-  "dashboard_names_fallback": "Asmaul Husna"
+  "dashboard_names_fallback": "Asmaul Husna",
+  "hadith_du_jour": "Hadith van de dag",
+  "voir_plus": "Meer bekijken"
 }

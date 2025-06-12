@@ -276,5 +276,7 @@
   "actions_rapides": "Ações Rápidas",
   "dashboard_dua_fallback": "Descubra as invocações diárias",
   "dashboard_verset_fallback": "Explore o Santo Alcorão",
-  "dashboard_names_fallback": "Asmaul Husna"
+  "dashboard_names_fallback": "Asmaul Husna",
+  "hadith_du_jour": "Hadith do dia",
+  "voir_plus": "Ver mais"
 }

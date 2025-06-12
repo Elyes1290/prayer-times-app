@@ -276,5 +276,7 @@
   "actions_rapides": "اقدامات سریع",
   "dashboard_dua_fallback": "دعاهای روزانه را کشف کنید",
   "dashboard_verset_fallback": "قرآن مقدس را کاوش کنید",
-  "dashboard_names_fallback": "اسماء الحسنی"
+  "dashboard_names_fallback": "اسماء الحسنی",
+  "hadith_du_jour": "حدیث روز",
+  "voir_plus": "بیشتر ببینید"
 }

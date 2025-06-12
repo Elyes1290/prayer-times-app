@@ -300,5 +300,7 @@
   "actions_rapides": "Quick Actions",
   "dashboard_dua_fallback": "Discover daily invocations",
   "dashboard_verset_fallback": "Explore the Holy Quran",
-  "dashboard_names_fallback": "Asmaul Husna"
+  "dashboard_names_fallback": "Asmaul Husna",
+  "hadith_du_jour": "Hadith of the Day",
+  "voir_plus": "See more"
 }

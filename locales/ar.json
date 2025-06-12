@@ -308,5 +308,7 @@
   "actions_rapides": "إجراءات سريعة",
   "dashboard_dua_fallback": "اكتشف الأدعية اليومية",
   "dashboard_verset_fallback": "استكشف القرآن الكريم",
-  "dashboard_names_fallback": "أسماء الله الحسنى"
+  "dashboard_names_fallback": "أسماء الله الحسنى",
+  "hadith_du_jour": "حديث اليوم",
+  "voir_plus": "المزيد"
 }

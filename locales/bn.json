@@ -300,5 +300,7 @@
   "actions_rapides": "দ্রুত কার্যক্রম",
   "dashboard_dua_fallback": "দৈনন্দিন দোয়া আবিষ্কার করুন",
   "dashboard_verset_fallback": "পবিত্র কুরআন অন্বেষণ করুন",
-  "dashboard_names_fallback": "আসমাউল হুসনা"
+  "dashboard_names_fallback": "আসমাউল হুসনা",
+  "hadith_du_jour": "আজকের হাদিস",
+  "voir_plus": "আরও দেখুন"
 }
