@@ -65,7 +65,7 @@ export default function TabLayout() {
                   colors={
                     focused
                       ? ["#ffd700", "#ffb700"]
-                      : ["transparent", "transparent"]
+                      : ["rgba(255, 215, 0, 0.1)", "rgba(255, 183, 0, 0.1)"]
                   }
                   style={[
                     styles.tabIconGradient,
@@ -87,7 +87,7 @@ export default function TabLayout() {
                   colors={
                     focused
                       ? ["#ffd700", "#ffb700"]
-                      : ["transparent", "transparent"]
+                      : ["rgba(255, 215, 0, 0.1)", "rgba(255, 183, 0, 0.1)"]
                   }
                   style={[
                     styles.tabIconGradient,
@@ -113,7 +113,7 @@ export default function TabLayout() {
                   colors={
                     focused
                       ? ["#ffd700", "#ffb700"]
-                      : ["transparent", "transparent"]
+                      : ["rgba(255, 215, 0, 0.1)", "rgba(255, 183, 0, 0.1)"]
                   }
                   style={[
                     styles.tabIconGradient,
@@ -139,7 +139,7 @@ export default function TabLayout() {
                   colors={
                     focused
                       ? ["#ffd700", "#ffb700"]
-                      : ["transparent", "transparent"]
+                      : ["rgba(255, 215, 0, 0.1)", "rgba(255, 183, 0, 0.1)"]
                   }
                   style={[
                     styles.tabIconGradient,
@@ -165,7 +165,7 @@ export default function TabLayout() {
                   colors={
                     focused
                       ? ["#ffd700", "#ffb700"]
-                      : ["transparent", "transparent"]
+                      : ["rgba(255, 215, 0, 0.1)", "rgba(255, 183, 0, 0.1)"]
                   }
                   style={[
                     styles.tabIconGradient,
@@ -191,7 +191,7 @@ export default function TabLayout() {
                   colors={
                     focused
                       ? ["#ffd700", "#ffb700"]
-                      : ["transparent", "transparent"]
+                      : ["rgba(255, 215, 0, 0.1)", "rgba(255, 183, 0, 0.1)"]
                   }
                   style={[
                     styles.tabIconGradient,
@@ -217,7 +217,7 @@ export default function TabLayout() {
                   colors={
                     focused
                       ? ["#ffd700", "#ffb700"]
-                      : ["transparent", "transparent"]
+                      : ["rgba(255, 215, 0, 0.1)", "rgba(255, 183, 0, 0.1)"]
                   }
                   style={[
                     styles.tabIconGradient,
@@ -243,7 +243,7 @@ export default function TabLayout() {
                   colors={
                     focused
                       ? ["#ffd700", "#ffb700"]
-                      : ["transparent", "transparent"]
+                      : ["rgba(255, 215, 0, 0.1)", "rgba(255, 183, 0, 0.1)"]
                   }
                   style={[
                     styles.tabIconGradient,
@@ -269,7 +269,7 @@ export default function TabLayout() {
                   colors={
                     focused
                       ? ["#ffd700", "#ffb700"]
-                      : ["transparent", "transparent"]
+                      : ["rgba(255, 215, 0, 0.1)", "rgba(255, 183, 0, 0.1)"]
                   }
                   style={[
                     styles.tabIconGradient,
@@ -291,7 +291,7 @@ export default function TabLayout() {
                   colors={
                     focused
                       ? ["#ffd700", "#ffb700"]
-                      : ["transparent", "transparent"]
+                      : ["rgba(255, 215, 0, 0.1)", "rgba(255, 183, 0, 0.1)"]
                   }
                   style={[
                     styles.tabIconGradient,
@@ -315,29 +315,25 @@ export default function TabLayout() {
 
 const styles = StyleSheet.create({
   tabIconContainer: {
-    alignItems: "center",
-    justifyContent: "center",
     width: 50,
     height: 50,
+    justifyContent: "center",
+    alignItems: "center",
   },
   tabIconGradient: {
     width: 50,
     height: 50,
     borderRadius: 25,
-    alignItems: "center",
     justifyContent: "center",
-    borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.1)",
+    alignItems: "center",
   },
   tabIconGradientActive: {
-    borderColor: "#ffd700",
     shadowColor: "#ffd700",
     shadowOffset: {
       width: 0,
       height: 0,
     },
-    shadowOpacity: 0.3,
+    shadowOpacity: 0.5,
     shadowRadius: 10,
-    elevation: 5,
   },
 });
