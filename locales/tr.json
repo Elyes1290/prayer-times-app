@@ -282,6 +282,7 @@
   "sunset_to_fajr": "Güneş batışı ile imsak arasındaki süre",
   "day_length": "Gündüz süresi",
   "night_length": "Gece süresi",
+  "time_until_sunset": "Gün batımına kalan süre",
 
   "dashboard_welcome": "Esselamu Aleykum",
   "next_prayer_label": "Sonraki Namaz",

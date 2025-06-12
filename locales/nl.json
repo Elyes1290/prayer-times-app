@@ -261,6 +261,7 @@
   "sunset_to_fajr": "Tijd tussen zonsondergang en Fajr",
   "day_length": "Lengte van de dag",
   "night_length": "Lengte van de nacht",
+  "time_until_sunset": "Tijd tot zonsondergang",
 
   "dashboard_welcome": "Assalamu Alaykum",
   "next_prayer_label": "Volgend Gebed",

@@ -23,6 +23,7 @@ import {
   StatusBar,
   Dimensions,
   Pressable,
+  Share,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
@@ -880,7 +881,7 @@ export default function HomeScreen() {
       gradient: ["rgba(78,205,196,0.13)", "rgba(44,122,122,0.10)"] as const,
     },
     {
-      icon: "calendar-islamic",
+      icon: "calendar-heart",
       title: "Hijri",
       route: "/hijri",
       color: "#FFD700",
@@ -909,7 +910,7 @@ export default function HomeScreen() {
         <ScrollView
           style={styles.container}
           showsVerticalScrollIndicator={false}
-          contentContainerStyle={{ paddingBottom: 100 }}
+          contentContainerStyle={{ paddingBottom: 180 }}
         >
           {/* 🏛️ Header Dashboard Moderne */}
           <Animated.View
@@ -1099,6 +1100,26 @@ export default function HomeScreen() {
                     />
                   </View>
                   <Text style={styles.cardTitle}>{t("dua_du_jour")}</Text>
+                  <TouchableOpacity
+                    style={styles.shareButton}
+                    onPress={() => {
+                      if (randomDua) {
+                        Share.share({
+                          message: `${randomDua.arabic}\n\n${
+                            randomDua.translation
+                          }\n\n${
+                            randomDua.benefits || ""
+                          }\n\nPartagé depuis Prayer Times App`,
+                        });
+                      }
+                    }}
+                  >
+                    <MaterialCommunityIcons
+                      name="share-variant"
+                      size={24}
+                      color="#fffbe8"
+                    />
+                  </TouchableOpacity>
                 </View>
 
                 <View style={styles.cardBody}>
@@ -1165,6 +1186,22 @@ export default function HomeScreen() {
                     />
                   </View>
                   <Text style={styles.cardTitle}>{t("verset_du_jour")}</Text>
+                  <TouchableOpacity
+                    style={styles.shareButton}
+                    onPress={() => {
+                      if (randomVerse) {
+                        Share.share({
+                          message: `${randomVerse.arabic}\n\n${randomVerse.translation}\n\n${randomVerse.reference}\n\nPartagé depuis Prayer Times App`,
+                        });
+                      }
+                    }}
+                  >
+                    <MaterialCommunityIcons
+                      name="share-variant"
+                      size={24}
+                      color="#fffbe8"
+                    />
+                  </TouchableOpacity>
                 </View>
 
                 <View style={styles.cardBody}>
@@ -1231,6 +1268,22 @@ export default function HomeScreen() {
                     />
                   </View>
                   <Text style={styles.cardTitle}>{t("nom_allah_du_jour")}</Text>
+                  <TouchableOpacity
+                    style={styles.shareButton}
+                    onPress={() => {
+                      if (randomName) {
+                        Share.share({
+                          message: `${randomName.arabic}\n\n${randomName.translit}\n\n${randomName.meaning}\n\nPartagé depuis Prayer Times App`,
+                        });
+                      }
+                    }}
+                  >
+                    <MaterialCommunityIcons
+                      name="share-variant"
+                      size={24}
+                      color="#fffbe8"
+                    />
+                  </TouchableOpacity>
                 </View>
 
                 <View style={styles.cardBody}>
@@ -1299,6 +1352,29 @@ export default function HomeScreen() {
                     />
                   </View>
                   <Text style={styles.cardTitle}>{t("hadith_du_jour")}</Text>
+                  <TouchableOpacity
+                    style={styles.shareButton}
+                    onPress={() => {
+                      if (randomHadith) {
+                        Share.share({
+                          message: `${randomHadith.hadithArabic || ""}\n\n${
+                            randomHadith.hadithEnglish ||
+                            t("translation_not_available")
+                          }\n\n${randomHadith.bookSlug} – ${
+                            randomHadith.chapterNumber
+                          } – ${
+                            randomHadith.hadithNumber
+                          }\n\nPartagé depuis Prayer Times App`,
+                        });
+                      }
+                    }}
+                  >
+                    <MaterialCommunityIcons
+                      name="share-variant"
+                      size={24}
+                      color="#fffbe8"
+                    />
+                  </TouchableOpacity>
                 </View>
                 <View style={styles.cardBody}>
                   {randomHadith ? (
@@ -2405,5 +2481,12 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginBottom: 8,
     lineHeight: 22,
+  },
+
+  shareButton: {
+    marginLeft: "auto",
+    padding: 8,
+    borderRadius: 12,
+    backgroundColor: "rgba(255, 255, 255, 0.1)",
   },
 });

@@ -293,6 +293,7 @@
   "sunset_to_fajr": "الوقت بين غروب الشمس والفجر",
   "day_length": "طول النهار",
   "night_length": "طول الليل",
+  "time_until_sunset": "الوقت حتى غروب الشمس",
 
   "dashboard_welcome": "السلام عليكم",
   "next_prayer_label": "الصلاة القادمة",

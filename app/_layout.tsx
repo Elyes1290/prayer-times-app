@@ -1,111 +1,17 @@
-import { MaterialIcons } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import * as NavigationBar from "expo-navigation-bar";
-import { Drawer } from "expo-router/drawer";
+import { Tabs } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { useEffect } from "react";
-import { Platform, Pressable, Image, View, Text } from "react-native";
-import {
-  DrawerContentScrollView,
-  DrawerItemList,
-} from "@react-navigation/drawer";
+import { Platform, View, StyleSheet } from "react-native";
 import { SettingsProvider } from "../contexts/SettingsContext";
 import "../locales/i18n";
 import { useTranslation } from "react-i18next";
-import type { DrawerContentComponentProps } from "@react-navigation/drawer";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import * as Font from "expo-font";
+import { LinearGradient } from "expo-linear-gradient";
 
-function CustomDrawerContent(props: DrawerContentComponentProps) {
-  const { t } = useTranslation();
-  Font.useFonts({
-    ScheherazadeNew: require("../assets/fonts/ScheherazadeNew-Regular.ttf"),
-  });
-
-  return (
-    <View style={{ flex: 1, backgroundColor: "#191d2b" /* nuit profond */ }}>
-      <DrawerContentScrollView
-        {...props}
-        contentContainerStyle={{ paddingTop: 0 }}
-      >
-        {/* Profil/Logo en haut du menu */}
-        <View
-          style={{
-            alignItems: "center",
-            paddingVertical: 32,
-            borderBottomWidth: 1,
-            borderColor: "#314670", // Liseré bleu nuit
-            marginBottom: 10,
-          }}
-        >
-          <Image
-            source={require("../assets/images/icon.png")}
-            style={{
-              width: 72,
-              height: 72,
-              borderRadius: 36,
-              marginBottom: 10,
-              backgroundColor: "#22304b",
-              borderWidth: 2,
-              borderColor: "#fffbe8", // doré pâle ou blanc cassé
-            }}
-          />
-          <Text
-            style={{
-              color: "#fffbe8",
-              fontWeight: "bold",
-              fontFamily: "ScheherazadeNew",
-              fontSize: 22,
-              letterSpacing: 1,
-            }}
-          >
-            MyAdhan
-          </Text>
-        </View>
-        <DrawerItemList {...props} />
-        {/* Premium désactivé */}
-        <View style={{ paddingHorizontal: 6, paddingTop: 14 }}>
-          <View
-            style={{
-              backgroundColor: "#242942",
-              borderRadius: 22,
-              borderWidth: 1.5,
-              borderColor: "#3c497e",
-              paddingVertical: 10,
-              paddingHorizontal: 22,
-              alignItems: "center",
-              opacity: 0.65,
-              flexDirection: "row",
-              justifyContent: "center",
-              marginVertical: 5,
-            }}
-          >
-            <MaterialIcons
-              name="star"
-              size={24}
-              color="#ffd700"
-              style={{ marginRight: 8 }}
-            />
-            <Text
-              style={{
-                color: "#ffd700",
-                fontFamily: "ScheherazadeNew",
-                fontWeight: "bold",
-                fontSize: 18,
-                letterSpacing: 1,
-              }}
-            >
-              {t("premium_coming_soon") || "Devenir Premium"}
-            </Text>
-          </View>
-        </View>
-      </DrawerContentScrollView>
-    </View>
-  );
-}
-
-export default function DrawerLayout() {
+export default function TabLayout() {
   const insets = useSafeAreaInsets();
-  const headerHeight = (Platform.OS === "android" ? 56 : 44) + insets.top;
   const { t } = useTranslation();
 
   useEffect(() => {
@@ -119,78 +25,319 @@ export default function DrawerLayout() {
   return (
     <SettingsProvider>
       <StatusBar style="light" translucent backgroundColor="transparent" />
-      <Drawer
-        drawerContent={(props) => <CustomDrawerContent {...props} />}
+      <Tabs
         screenOptions={{
-          header: ({ navigation }) => (
-            <View
-              style={{
-                width: "100%",
-                height: headerHeight,
-                flexDirection: "row",
-                alignItems: "center",
-                justifyContent: "space-between",
-                paddingTop: insets.top,
-                backgroundColor: "rgba(25,29,43,0.96)",
-                borderBottomWidth: 1,
-                borderColor: "#2c3958",
-              }}
-            >
-              {/* Menu à gauche */}
-              <Pressable
-                onPress={() => navigation.toggleDrawer()}
-                style={{ width: 44, alignItems: "center" }}
-              >
-                <MaterialIcons name="menu" size={28} color="#fffbe8" />
-              </Pressable>
-              {/* Logo centré */}
-              <Image
-                source={require("../assets/images/icon.png")}
-                style={{
-                  width: 38,
-                  height: 38,
-                  borderRadius: 19,
-                  backgroundColor: "#22304b",
-                  borderWidth: 2,
-                  borderColor: "#fffbe8",
-                }}
-              />
-              {/* Espace réservé à droite */}
-              <View style={{ width: 44 }} />
-            </View>
-          ),
-          drawerStyle: {
-            width: 260,
-            backgroundColor: "#191d2b",
-            borderRightWidth: 0,
+          headerShown: false,
+          tabBarStyle: {
+            position: "absolute",
+            bottom: Math.max(insets.bottom, 20),
+            left: 20,
+            right: 20,
+            height: 70,
+            borderRadius: 35,
+            backgroundColor: "transparent",
+            borderTopWidth: 0,
+            elevation: 0,
+            shadowColor: "#000",
+            shadowOffset: {
+              width: 0,
+              height: 10,
+            },
+            shadowOpacity: 0.3,
+            shadowRadius: 20,
+            paddingBottom: 0,
           },
-          drawerActiveTintColor: "#ffd700", // doré clair
-          drawerInactiveTintColor: "#fffbe8", // blanc cassé
-          drawerLabelStyle: {
-            fontSize: 18,
-            fontFamily: "ScheherazadeNew",
-            fontWeight: "bold",
-            letterSpacing: 1,
+          tabBarItemStyle: {
+            height: 70,
+            padding: 0,
           },
+          tabBarActiveTintColor: "#ffd700",
+          tabBarInactiveTintColor: "rgba(255,255,255,0.6)",
+          tabBarShowLabel: false,
         }}
       >
-        <Drawer.Screen name="index" options={{ title: t("home") }} />
-        <Drawer.Screen name="settings" options={{ title: t("settings") }} />
-        <Drawer.Screen name="hijri" options={{ title: t("hijri_calendar") }} />
-        <Drawer.Screen name="qibla" options={{ title: t("qibla") }} />
-        <Drawer.Screen name="quran" options={{ title: t("quran") }} />
-        <Drawer.Screen name="hadith" options={{ title: t("hadiths") }} />
-        <Drawer.Screen name="dhikr" options={{ title: t("dhikr_dua") }} />
-        <Drawer.Screen
-          name="asmaulhusna"
-          options={{ title: t("abouts.features.asmaul_husna") }}
+        <Tabs.Screen
+          name="index"
+          options={{
+            tabBarIcon: ({ color, focused }) => (
+              <View style={styles.tabIconContainer}>
+                <LinearGradient
+                  colors={
+                    focused
+                      ? ["#ffd700", "#ffb700"]
+                      : ["transparent", "transparent"]
+                  }
+                  style={[
+                    styles.tabIconGradient,
+                    focused && styles.tabIconGradientActive,
+                  ]}
+                >
+                  <MaterialCommunityIcons name="home" size={28} color={color} />
+                </LinearGradient>
+              </View>
+            ),
+          }}
         />
-        <Drawer.Screen name="about" options={{ title: t("about") }} />
-        <Drawer.Screen
+        <Tabs.Screen
           name="prayerScreen"
-          options={{ title: t("prayer_times") }}
+          options={{
+            tabBarIcon: ({ color, focused }) => (
+              <View style={styles.tabIconContainer}>
+                <LinearGradient
+                  colors={
+                    focused
+                      ? ["#ffd700", "#ffb700"]
+                      : ["transparent", "transparent"]
+                  }
+                  style={[
+                    styles.tabIconGradient,
+                    focused && styles.tabIconGradientActive,
+                  ]}
+                >
+                  <MaterialCommunityIcons
+                    name="clock-time-four"
+                    size={28}
+                    color={color}
+                  />
+                </LinearGradient>
+              </View>
+            ),
+          }}
         />
-      </Drawer>
+        <Tabs.Screen
+          name="qibla"
+          options={{
+            tabBarIcon: ({ color, focused }) => (
+              <View style={styles.tabIconContainer}>
+                <LinearGradient
+                  colors={
+                    focused
+                      ? ["#ffd700", "#ffb700"]
+                      : ["transparent", "transparent"]
+                  }
+                  style={[
+                    styles.tabIconGradient,
+                    focused && styles.tabIconGradientActive,
+                  ]}
+                >
+                  <MaterialCommunityIcons
+                    name="compass"
+                    size={28}
+                    color={color}
+                  />
+                </LinearGradient>
+              </View>
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="quran"
+          options={{
+            tabBarIcon: ({ color, focused }) => (
+              <View style={styles.tabIconContainer}>
+                <LinearGradient
+                  colors={
+                    focused
+                      ? ["#ffd700", "#ffb700"]
+                      : ["transparent", "transparent"]
+                  }
+                  style={[
+                    styles.tabIconGradient,
+                    focused && styles.tabIconGradientActive,
+                  ]}
+                >
+                  <MaterialCommunityIcons
+                    name="book-open-variant"
+                    size={28}
+                    color={color}
+                  />
+                </LinearGradient>
+              </View>
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="hadith"
+          options={{
+            tabBarIcon: ({ color, focused }) => (
+              <View style={styles.tabIconContainer}>
+                <LinearGradient
+                  colors={
+                    focused
+                      ? ["#ffd700", "#ffb700"]
+                      : ["transparent", "transparent"]
+                  }
+                  style={[
+                    styles.tabIconGradient,
+                    focused && styles.tabIconGradientActive,
+                  ]}
+                >
+                  <MaterialCommunityIcons
+                    name="book-multiple"
+                    size={28}
+                    color={color}
+                  />
+                </LinearGradient>
+              </View>
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="dhikr"
+          options={{
+            tabBarIcon: ({ color, focused }) => (
+              <View style={styles.tabIconContainer}>
+                <LinearGradient
+                  colors={
+                    focused
+                      ? ["#ffd700", "#ffb700"]
+                      : ["transparent", "transparent"]
+                  }
+                  style={[
+                    styles.tabIconGradient,
+                    focused && styles.tabIconGradientActive,
+                  ]}
+                >
+                  <MaterialCommunityIcons
+                    name="hand-heart"
+                    size={28}
+                    color={color}
+                  />
+                </LinearGradient>
+              </View>
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="asmaulhusna"
+          options={{
+            tabBarIcon: ({ color, focused }) => (
+              <View style={styles.tabIconContainer}>
+                <LinearGradient
+                  colors={
+                    focused
+                      ? ["#ffd700", "#ffb700"]
+                      : ["transparent", "transparent"]
+                  }
+                  style={[
+                    styles.tabIconGradient,
+                    focused && styles.tabIconGradientActive,
+                  ]}
+                >
+                  <MaterialCommunityIcons
+                    name="star-circle"
+                    size={28}
+                    color={color}
+                  />
+                </LinearGradient>
+              </View>
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="hijri"
+          options={{
+            tabBarIcon: ({ color, focused }) => (
+              <View style={styles.tabIconContainer}>
+                <LinearGradient
+                  colors={
+                    focused
+                      ? ["#ffd700", "#ffb700"]
+                      : ["transparent", "transparent"]
+                  }
+                  style={[
+                    styles.tabIconGradient,
+                    focused && styles.tabIconGradientActive,
+                  ]}
+                >
+                  <MaterialCommunityIcons
+                    name="calendar"
+                    size={28}
+                    color={color}
+                  />
+                </LinearGradient>
+              </View>
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="settings"
+          options={{
+            tabBarIcon: ({ color, focused }) => (
+              <View style={styles.tabIconContainer}>
+                <LinearGradient
+                  colors={
+                    focused
+                      ? ["#ffd700", "#ffb700"]
+                      : ["transparent", "transparent"]
+                  }
+                  style={[
+                    styles.tabIconGradient,
+                    focused && styles.tabIconGradientActive,
+                  ]}
+                >
+                  <MaterialCommunityIcons name="cog" size={28} color={color} />
+                </LinearGradient>
+              </View>
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="about"
+          options={{
+            tabBarIcon: ({ color, focused }) => (
+              <View style={styles.tabIconContainer}>
+                <LinearGradient
+                  colors={
+                    focused
+                      ? ["#ffd700", "#ffb700"]
+                      : ["transparent", "transparent"]
+                  }
+                  style={[
+                    styles.tabIconGradient,
+                    focused && styles.tabIconGradientActive,
+                  ]}
+                >
+                  <MaterialCommunityIcons
+                    name="information"
+                    size={28}
+                    color={color}
+                  />
+                </LinearGradient>
+              </View>
+            ),
+          }}
+        />
+      </Tabs>
     </SettingsProvider>
   );
 }
+
+const styles = StyleSheet.create({
+  tabIconContainer: {
+    alignItems: "center",
+    justifyContent: "center",
+    width: 50,
+    height: 50,
+  },
+  tabIconGradient: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    alignItems: "center",
+    justifyContent: "center",
+    borderWidth: 1,
+    borderColor: "rgba(255,255,255,0.1)",
+  },
+  tabIconGradientActive: {
+    borderColor: "#ffd700",
+    shadowColor: "#ffd700",
+    shadowOffset: {
+      width: 0,
+      height: 0,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 10,
+    elevation: 5,
+  },
+});

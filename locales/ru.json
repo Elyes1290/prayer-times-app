@@ -260,6 +260,7 @@
   "sunset_to_fajr": "Время между закатом солнца и Фаджром",
   "day_length": "Продолжительность дня",
   "night_length": "Продолжительность ночи",
+  "time_until_sunset": "Время до заката",
 
   "dashboard_welcome": "Ассаляму алейкум",
   "next_prayer_label": "Следующая молитва",

@@ -278,5 +278,6 @@
   "dashboard_verset_fallback": "قرآن مقدس را کاوش کنید",
   "dashboard_names_fallback": "اسماء الحسنی",
   "hadith_du_jour": "حدیث روز",
-  "voir_plus": "بیشتر ببینید"
+  "voir_plus": "بیشتر ببینید",
+  "time_until_sunset": "زمان تا غروب آفتاب"
 }

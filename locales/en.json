@@ -285,6 +285,7 @@
   "sunset_to_fajr": "Time between sunset and Fajr",
   "day_length": "Day length",
   "night_length": "Night length",
+  "time_until_sunset": "Time until sunset",
 
   "dashboard_welcome": "Assalamu Alaykum",
   "next_prayer_label": "Next Prayer",

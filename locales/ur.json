@@ -299,5 +299,6 @@
   "dashboard_verset_fallback": "قرآن مجید کو دیکھیں",
   "dashboard_names_fallback": "اسماء الحسنیٰ",
   "hadith_du_jour": "آج کا حدیث",
-  "voir_plus": "مزید دیکھیں"
+  "voir_plus": "مزید دیکھیں",
+  "time_until_sunset": "غروب آفتاب تک کا وقت"
 }

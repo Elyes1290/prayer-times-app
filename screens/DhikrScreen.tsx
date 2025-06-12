@@ -78,7 +78,7 @@ export default function DhikrScreen() {
     );
   });
 
-  // Scroll quand la FlatList est prête ET si on n’a pas déjà scrollé
+  // Scroll quand la FlatList est prête ET si on n'a pas déjà scrollé
   useEffect(() => {
     if (
       dhikrIndexParam !== null &&
@@ -98,7 +98,7 @@ export default function DhikrScreen() {
         });
         setHasScrolled(true); // empêche de re-scroller sans cesse
       } catch (error) {
-        // En cas d’erreur, scroll vers index 0
+        // En cas d'erreur, scroll vers index 0
         flatListRef.current.scrollToOffset({ offset: 0, animated: true });
       }
     }
@@ -116,7 +116,7 @@ export default function DhikrScreen() {
     }
   }, [categoryParam]);
 
-  // Gestion du scrollToIndex fallback si l’index est hors écran
+  // Gestion du scrollToIndex fallback si l'index est hors écran
   const onScrollToIndexFailed = (info: {
     index: number;
     highestMeasuredFrameIndex: number;
@@ -192,7 +192,7 @@ export default function DhikrScreen() {
             </View>
           )}
           ListEmptyComponent={<Text style={styles.emptyText}>{noDhikr}</Text>}
-          contentContainerStyle={{ paddingBottom: 30 }}
+          contentContainerStyle={{ paddingBottom: 150 }}
           keyboardShouldPersistTaps="handled"
           initialNumToRender={10}
           onScrollToIndexFailed={onScrollToIndexFailed}

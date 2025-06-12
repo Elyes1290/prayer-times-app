@@ -302,5 +302,6 @@
   "dashboard_verset_fallback": "পবিত্র কুরআন অন্বেষণ করুন",
   "dashboard_names_fallback": "আসমাউল হুসনা",
   "hadith_du_jour": "আজকের হাদিস",
-  "voir_plus": "আরও দেখুন"
+  "voir_plus": "আরও দেখুন",
+  "time_until_sunset": "সূর্যাস্ত পর্যন্ত সময়"
 }

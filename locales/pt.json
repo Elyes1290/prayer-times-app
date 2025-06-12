@@ -261,6 +261,7 @@
   "sunset_to_fajr": "Tempo entre o pôr do sol e Fajr",
   "day_length": "Duração do dia",
   "night_length": "Duração da noite",
+  "time_until_sunset": "Tempo até o pôr do sol",
 
   "dashboard_welcome": "Assalamu Alaykum",
   "next_prayer_label": "Próxima Oração",

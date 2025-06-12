@@ -237,7 +237,7 @@ const AsmaulHusnaScreen = () => {
         data={filteredNames}
         renderItem={renderNameCard}
         keyExtractor={(item) => item.key}
-        contentContainerStyle={styles.listContainer}
+        contentContainerStyle={[styles.listContainer, { paddingBottom: 150 }]}
         showsVerticalScrollIndicator={false}
       />
     </ImageBackground>

@@ -276,6 +276,7 @@
   "sunrise_to_sunset": "Zeit zwischen Sonnenaufgang und Sonnenuntergang",
   "sunset_to_fajr": "Zeit zwischen Sonnenuntergang und Fajr",
   "night_length": "Nachtlänge",
+  "time_until_sunset": "Zeit bis zum Sonnenuntergang",
 
   "dashboard_welcome": "Assalamu Alaykum",
   "next_prayer_label": "Nächstes Gebet",
