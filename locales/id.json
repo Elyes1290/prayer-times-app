@@ -174,5 +174,21 @@
   "sunrise_to_sunset": "Waktu antara matahari terbit dan terbenam",
   "sunset_to_fajr": "Waktu antara matahari terbenam dan Fajr",
   "day_length": "Panjang hari",
-  "night_length": "Panjang malam"
+  "night_length": "Panjang malam",
+
+  "dashboard_welcome": "Assalamu Alaykum",
+  "next_prayer_label": "Shalat Berikutnya",
+  "countdown_in": "Dalam",
+  "dua_du_jour": "Doa Hari Ini",
+  "verset_du_jour": "Ayat Hari Ini",
+  "nom_allah_du_jour": "Nama Allah Hari Ini",
+  "mes_stats": "Statistik Saya",
+  "mes_stats_today": "Hari Ini",
+  "voir_plus_dua": "Lihat lebih banyak doa",
+  "lire_coran": "Baca Al-Quran",
+  "decouvrir_99_noms": "Temukan 99 nama",
+  "actions_rapides": "Aksi Cepat",
+  "dashboard_dua_fallback": "Temukan doa-doa harian",
+  "dashboard_verset_fallback": "Jelajahi Al-Quran yang suci",
+  "dashboard_names_fallback": "Asmaul Husna"
 }

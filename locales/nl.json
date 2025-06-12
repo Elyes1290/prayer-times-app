@@ -260,5 +260,21 @@
   "sunrise_to_sunset": "Tijd tussen zonsopgang en zonsondergang",
   "sunset_to_fajr": "Tijd tussen zonsondergang en Fajr",
   "day_length": "Lengte van de dag",
-  "night_length": "Lengte van de nacht"
+  "night_length": "Lengte van de nacht",
+
+  "dashboard_welcome": "Assalamu Alaykum",
+  "next_prayer_label": "Volgend Gebed",
+  "countdown_in": "Over",
+  "dua_du_jour": "Dua van de Dag",
+  "verset_du_jour": "Vers van de Dag",
+  "nom_allah_du_jour": "Naam van Allah van de Dag",
+  "mes_stats": "Mijn Statistieken",
+  "mes_stats_today": "Vandaag",
+  "voir_plus_dua": "Meer duas bekijken",
+  "lire_coran": "Koran lezen",
+  "decouvrir_99_noms": "99 namen ontdekken",
+  "actions_rapides": "Snelle Acties",
+  "dashboard_dua_fallback": "Ontdek dagelijkse invocaties",
+  "dashboard_verset_fallback": "Verken de Heilige Koran",
+  "dashboard_names_fallback": "Asmaul Husna"
 }

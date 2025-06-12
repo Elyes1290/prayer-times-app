@@ -278,6 +278,23 @@
   "sunrise_to_sunset": "Temps entre le lever et le coucher du soleil",
   "sunset_to_fajr": "Temps entre le coucher du soleil et Fajr",
   "night_length": "Durée de la nuit",
+
+  "dashboard_welcome": "Assalamu Alaykum",
+  "next_prayer_label": "Prochaine Prière",
+  "countdown_in": "Dans",
+  "dua_du_jour": "Dua du Jour",
+  "verset_du_jour": "Verset du Jour",
+  "nom_allah_du_jour": "Nom d'Allah du Jour",
+  "mes_stats": "Mes Stats",
+  "mes_stats_today": "Aujourd'hui",
+  "voir_plus_dua": "Voir plus de duas",
+  "lire_coran": "Lire le Coran",
+  "decouvrir_99_noms": "Découvrir les 99 noms",
+  "actions_rapides": "Actions Rapides",
+  "dashboard_dua_fallback": "Découvrez les invocations quotidiennes",
+  "dashboard_verset_fallback": "Explorez le Saint Coran",
+  "dashboard_names_fallback": "Asmaul Husna",
+
   "asmaulhusna": {
     "title": "Les 99 Noms d'Allah",
     "subtitle": "Découvrez les plus beaux noms d'Allah et leurs significations",

@@ -292,5 +292,21 @@
   "sunrise_to_sunset": "الوقت بين شروق الشمس وغروبها",
   "sunset_to_fajr": "الوقت بين غروب الشمس والفجر",
   "day_length": "طول النهار",
-  "night_length": "طول الليل"
+  "night_length": "طول الليل",
+
+  "dashboard_welcome": "السلام عليكم",
+  "next_prayer_label": "الصلاة القادمة",
+  "countdown_in": "خلال",
+  "dua_du_jour": "دعاء اليوم",
+  "verset_du_jour": "آية اليوم",
+  "nom_allah_du_jour": "اسم الله اليوم",
+  "mes_stats": "إحصائياتي",
+  "mes_stats_today": "اليوم",
+  "voir_plus_dua": "المزيد من الأدعية",
+  "lire_coran": "قراءة القرآن",
+  "decouvrir_99_noms": "اكتشف 99 اسماً",
+  "actions_rapides": "إجراءات سريعة",
+  "dashboard_dua_fallback": "اكتشف الأدعية اليومية",
+  "dashboard_verset_fallback": "استكشف القرآن الكريم",
+  "dashboard_names_fallback": "أسماء الله الحسنى"
 }

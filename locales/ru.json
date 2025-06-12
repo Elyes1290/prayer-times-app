@@ -259,5 +259,21 @@
   "sunrise_to_sunset": "Время между восходом и закатом солнца",
   "sunset_to_fajr": "Время между закатом солнца и Фаджром",
   "day_length": "Продолжительность дня",
-  "night_length": "Продолжительность ночи"
+  "night_length": "Продолжительность ночи",
+
+  "dashboard_welcome": "Ассаляму алейкум",
+  "next_prayer_label": "Следующая молитва",
+  "countdown_in": "Через",
+  "dua_du_jour": "Дуа дня",
+  "verset_du_jour": "Аят дня",
+  "nom_allah_du_jour": "Имя Аллаха дня",
+  "mes_stats": "Моя статистика",
+  "mes_stats_today": "Сегодня",
+  "voir_plus_dua": "Больше дуа",
+  "lire_coran": "Читать Коран",
+  "decouvrir_99_noms": "Узнать 99 имён",
+  "actions_rapides": "Быстрые действия",
+  "dashboard_dua_fallback": "Откройте ежедневные молитвы",
+  "dashboard_verset_fallback": "Изучайте Священный Коран",
+  "dashboard_names_fallback": "Асмауль Хусна"
 }

@@ -27,6 +27,7 @@ import {
 import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
 import bgImage from "../assets/images/prayer-bg.png";
+import PrayerTimes from "adhan/lib/types/PrayerTimes";
 
 import { Colors } from "../constants/Colors";
 import { SettingsContext } from "../contexts/SettingsContext";
@@ -52,24 +53,24 @@ const THEME = {
 
     // Gradients
     gradients: {
-      primary: ["#4ECDC4", "#44A08D"],
-      secondary: ["#FFD700", "#FF8008"],
-      accent: ["#F093FB", "#F441A5"],
-      danger: ["#FF6B6B", "#FF3838"],
-      dark: ["rgba(0,0,0,0.7)", "rgba(0,0,0,0.3)"],
-      glass: ["rgba(255,255,255,0.25)", "rgba(255,255,255,0.1)"],
+      primary: ["#4ECDC4", "#2C7A7A"] as const,
+      secondary: ["#FFD700", "#B8860B"] as const,
+      accent: ["#F093FB", "#9B4B9B"] as const,
+      danger: ["#FF6B6B", "#8B0000"] as const,
+      dark: ["rgba(0,0,0,0.7)", "rgba(0,0,0,0.3)"] as const,
+      glass: ["rgba(44,205,196,0.12)", "rgba(240,147,251,0.10)"] as const,
     },
 
     // Glass morphism
     glass: {
-      light: "rgba(255, 255, 255, 0.15)",
-      medium: "rgba(255, 255, 255, 0.25)",
+      light: "rgba(255, 255, 255, 0.10)",
+      medium: "rgba(44,205,196,0.18)",
       dark: "rgba(0, 0, 0, 0.25)",
     },
 
     text: {
       primary: "#FFFFFF",
-      secondary: "rgba(255, 255, 255, 0.9)",
+      secondary: "rgba(255, 255, 255, 0.95)",
       muted: "rgba(255, 255, 255, 0.7)",
       accent: "#4ECDC4",
     },
@@ -121,13 +122,123 @@ const ANIMATIONS = {
     friction: 8,
     useNativeDriver: true,
   },
+  fadeIn: {
+    duration: 600,
+    useNativeDriver: true,
+  },
+  slideUp: {
+    duration: 500,
+    useNativeDriver: true,
+  },
+  scale: {
+    duration: 400,
+    useNativeDriver: true,
+  },
 };
+
+// Mise à jour de l'interface PrayerTimes pour correspondre à celle d'adhan
+interface CustomPrayerTimes {
+  fajr: Date;
+  sunrise: Date;
+  dhuhr: Date;
+  asr: Date;
+  maghrib: Date;
+  isha: Date;
+  [key: string]: Date;
+}
+
+interface PrayerInfo {
+  name: string;
+  time: string;
+  countdown: string;
+  diff: number;
+}
 
 export default function HomeScreen() {
   const { t, i18n } = useTranslation();
   const router = useRouter();
   const [today, setToday] = useState(new Date());
   const [city, setCity] = useState<string | null>(null);
+
+  // Map langue => id traduction Quran.com
+  const translationMap: Record<string, number | null> = {
+    fr: 136,
+    en: 85,
+    ru: 45,
+    tr: 52,
+    de: 27,
+    ar: null,
+    es: 83,
+    it: 153,
+    pt: 43,
+    nl: 144,
+    ur: 97,
+    bn: 120,
+    fa: 135,
+  };
+
+  // Détecter la langue à utiliser pour l'API Quran.com
+  const lang = i18n.language.startsWith("fr")
+    ? "fr"
+    : i18n.language.startsWith("en")
+    ? "en"
+    : i18n.language.startsWith("ru")
+    ? "ru"
+    : i18n.language.startsWith("tr")
+    ? "tr"
+    : i18n.language.startsWith("de")
+    ? "de"
+    : i18n.language.startsWith("it")
+    ? "it"
+    : i18n.language.startsWith("es")
+    ? "es"
+    : i18n.language.startsWith("pt")
+    ? "pt"
+    : i18n.language.startsWith("ur")
+    ? "ur"
+    : i18n.language.startsWith("fa")
+    ? "fa"
+    : i18n.language.startsWith("ar")
+    ? "ar"
+    : i18n.language.startsWith("nl")
+    ? "nl"
+    : i18n.language.startsWith("bn")
+    ? "bn"
+    : "en";
+
+  // Fonction fetch avec fallback sur anglais (id 85)
+  async function fetchTranslation(chapterNumber: number, lang: string) {
+    const translationId = translationMap[lang] || 85; // fallback anglais
+
+    try {
+      const res = await fetch(
+        `https://api.quran.com/api/v4/quran/translations/${translationId}?chapter_number=${chapterNumber}`
+      );
+      const json = await res.json();
+
+      if (json.translations && json.translations.length > 0) {
+        return json.translations;
+      } else if (translationId !== 85) {
+        // fallback anglais si vide
+        const fallbackRes = await fetch(
+          `https://api.quran.com/api/v4/quran/translations/85?chapter_number=${chapterNumber}`
+        );
+        const fallbackJson = await fallbackRes.json();
+        return fallbackJson.translations || [];
+      }
+      return [];
+    } catch {
+      // fallback en cas d'erreur réseau
+      if (translationId !== 85) {
+        const fallbackRes = await fetch(
+          `https://api.quran.com/api/v4/quran/translations/85?chapter_number=${chapterNumber}`
+        );
+        const fallbackJson = await fallbackRes.json();
+        return fallbackJson.translations || [];
+      }
+      return [];
+    }
+  }
 
   // État pour le contenu aléatoire
   const [randomDua, setRandomDua] = useState<any>(null);
@@ -137,6 +248,8 @@ export default function HomeScreen() {
   // Animations
   const [fadeAnim] = useState(new Animated.Value(0));
   const [slideAnim] = useState(new Animated.Value(30));
+  const [scaleAnim] = useState(new Animated.Value(0.95));
+  const [rotateAnim] = useState(new Animated.Value(0));
 
   const settings = useContext(SettingsContext);
   const { location } = useLocation();
@@ -146,12 +259,21 @@ export default function HomeScreen() {
     Animated.parallel([
       Animated.timing(fadeAnim, {
         toValue: 1,
-        duration: 800,
+        duration: ANIMATIONS.fadeIn.duration,
         useNativeDriver: true,
       }),
       Animated.timing(slideAnim, {
         toValue: 0,
-        duration: 600,
+        duration: ANIMATIONS.slideUp.duration,
+        useNativeDriver: true,
+      }),
+      Animated.spring(scaleAnim, {
+        toValue: 1,
+        ...ANIMATIONS.spring,
+      }),
+      Animated.timing(rotateAnim, {
+        toValue: 1,
+        duration: 1000,
         useNativeDriver: true,
       }),
     ]).start();
@@ -165,7 +287,7 @@ export default function HomeScreen() {
     loadRandomContent();
   }, [i18n.language]);
 
-  const loadRandomContent = () => {
+  const loadRandomContent = async () => {
     try {
       // Utiliser le système i18n pour récupérer les dhikr selon la langue courante
       const dhikrData = i18n.getResourceBundle(i18n.language, "dhikr");
@@ -190,30 +312,89 @@ export default function HomeScreen() {
         }
       }
 
-      // Verset aléatoire (données statiques pour l'exemple)
-      const verses = [
-        {
-          arabic: "إِنَّا فَتَحْنَا لَكَ فَتْحًا مُّبِينًا",
-          translation:
-            "Truly We have opened up a path to clear triumph for you [Prophet],",
-          reference: "Al-Fath 48:17",
-        },
-        {
-          arabic: "وَاللَّهُ خَيْرٌ حَافِظًا وَهُوَ أَرْحَمُ الرَّاحِمِينَ",
-          translation:
-            "But Allah is the best guardian, and He is the most merciful of the merciful.",
-          reference: "Yusuf 12:64",
-        },
-        {
-          arabic:
-            "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ",
-          translation:
-            "Our Lord, give us good in this world and good in the hereafter, and save us from the punishment of the Fire.",
-          reference: "Al-Baqarah 2:201",
-        },
-      ];
-      const randomVerseIndex = Math.floor(Math.random() * verses.length);
-      setRandomVerse(verses[randomVerseIndex]);
+      // Utiliser l'API Quran.com pour récupérer un verset aléatoire
+      try {
+        // Récupérer la liste des sourates
+        const souratesRes = await fetch(
+          `https://api.quran.com/api/v4/chapters?language=${lang}`
+        );
+        const souratesJson = await souratesRes.json();
+        const sourates = souratesJson.chapters || [];
+
+        if (sourates.length > 0) {
+          // Sélectionner une sourate aléatoire
+          const randomSourate =
+            sourates[Math.floor(Math.random() * sourates.length)];
+
+          // Récupérer les versets de la sourate
+          const arabicRes = await fetch(
+            `https://api.quran.com/api/v4/quran/verses/uthmani?chapter_number=${randomSourate.id}`
+          );
+          const arabicJson = await arabicRes.json();
+          const verses = arabicJson.verses || [];
+
+          if (verses.length > 0) {
+            // Sélectionner un verset aléatoire
+            const randomVerse =
+              verses[Math.floor(Math.random() * verses.length)];
+
+            // Récupérer la traduction
+            const translationId = translationMap[lang] || 85; // fallback anglais
+            const translationRes = await fetch(
+              `https://api.quran.com/api/v4/quran/translations/${translationId}?chapter_number=${randomSourate.id}`
+            );
+            const translationJson = await translationRes.json();
+
+            let translation = "";
+            if (
+              translationJson.translations &&
+              translationJson.translations.length > 0
+            ) {
+              const verseTranslation = translationJson.translations.find(
+                (t: any) =>
+                  (t.verse_key && t.verse_key === randomVerse.verse_key) ||
+                  ((t.verse_number === randomVerse.verse_number ||
+                    t.verse_number == randomVerse.verse_key.split(":")[1]) &&
+                    (t.chapter_id === randomSourate.id ||
+                      t.chapter_number === randomSourate.id))
+              );
+              translation = verseTranslation?.text || "";
+            }
+
+            // Si pas de traduction trouvée, essayer en anglais
+            if (!translation && translationId !== 85) {
+              const fallbackRes = await fetch(
+                `https://api.quran.com/api/v4/quran/translations/85?chapter_number=${randomSourate.id}`
+              );
+              const fallbackJson = await fallbackRes.json();
+              if (
+                fallbackJson.translations &&
+                fallbackJson.translations.length > 0
+              ) {
+                const verseTranslation = fallbackJson.translations.find(
+                  (t: any) =>
+                    (t.verse_key && t.verse_key === randomVerse.verse_key) ||
+                    ((t.verse_number === randomVerse.verse_number ||
+                      t.verse_number == randomVerse.verse_key.split(":")[1]) &&
+                      (t.chapter_id === randomSourate.id ||
+                        t.chapter_number === randomSourate.id))
+                );
+                translation = verseTranslation?.text || "";
+              }
+            }
+
+            setRandomVerse({
+              arabic: randomVerse.text_uthmani,
+              translation: translation,
+              reference: `${randomSourate.name_simple} – ${randomSourate.id}:${
+                randomVerse.verse_key.split(":")[1]
+              }`,
+            });
+          }
+        }
+      } catch (error) {
+        console.error("Erreur lors de la récupération du verset:", error);
+      }
     } catch (error) {
       console.error("Erreur lors du chargement du contenu aléatoire:", error);
       // Fallback en cas d'erreur
@@ -637,437 +818,495 @@ export default function HomeScreen() {
     );
   }
 
-  return (
-    <ImageBackground source={bgImage} style={styles.background}>
-      <StatusBar
-        barStyle="light-content"
-        translucent
-        backgroundColor="transparent"
-      />
+  // Fonctions helper pour le dashboard
+  const getNextPrayerInfo = (
+    prayerTimes: PrayerTimes | null
+  ): PrayerInfo | null => {
+    if (!prayerTimes) return null;
 
-      <Animated.ScrollView
-        contentContainerStyle={styles.container}
-        style={{ opacity: fadeAnim, transform: [{ translateY: slideAnim }] }}
-        showsVerticalScrollIndicator={false}
-      >
-        {/* Header avec localisation seulement */}
-        <View style={styles.modernHeader}>
-          {city && (
+    // Conversion de PrayerTimes en CustomPrayerTimes
+    const customPrayerTimes: CustomPrayerTimes = {
+      fajr: prayerTimes.fajr,
+      sunrise: prayerTimes.sunrise,
+      dhuhr: prayerTimes.dhuhr,
+      asr: prayerTimes.asr,
+      maghrib: prayerTimes.maghrib,
+      isha: prayerTimes.isha,
+    };
+
+    const currentTime = new Date();
+    const prayers = ["Fajr", "Dhuhr", "Asr", "Maghrib", "Isha"];
+
+    for (const prayer of prayers) {
+      const prayerTime = customPrayerTimes[prayer.toLowerCase()];
+      if (prayerTime && currentTime < prayerTime) {
+        const diff = prayerTime.getTime() - currentTime.getTime();
+        const hours = Math.floor(diff / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+        const countdownText =
+          hours > 0
+            ? `${hours}h ${minutes}min`
+            : minutes > 0
+            ? `${minutes}min`
+            : `<1min`;
+
+        return {
+          name: prayer,
+          time: prayerTime.toLocaleTimeString("fr-FR", {
+            hour: "2-digit",
+            minute: "2-digit",
+          }),
+          countdown: countdownText,
+          diff: diff,
+        };
+      }
+    }
+    return null;
+  };
+
+  const getProgressPercentage = () => {
+    if (!currentPrayerTimes) return 0;
+
+    const currentTime = new Date();
+    const prayers = ["Fajr", "Dhuhr", "Asr", "Maghrib", "Isha"];
+    let nextPrayer = null;
+    let previousPrayer = null;
+
+    // Conversion de PrayerTimes en CustomPrayerTimes
+    const customPrayerTimes: CustomPrayerTimes = {
+      fajr: currentPrayerTimes.fajr,
+      sunrise: currentPrayerTimes.sunrise,
+      dhuhr: currentPrayerTimes.dhuhr,
+      asr: currentPrayerTimes.asr,
+      maghrib: currentPrayerTimes.maghrib,
+      isha: currentPrayerTimes.isha,
+    };
+
+    for (let i = 0; i < prayers.length; i++) {
+      const prayer = prayers[i];
+      const prayerTime = customPrayerTimes[prayer.toLowerCase()];
+
+      if (prayerTime && currentTime < prayerTime) {
+        nextPrayer = prayerTime;
+        previousPrayer =
+          i > 0 ? customPrayerTimes[prayers[i - 1].toLowerCase()] : null;
+        break;
+      }
+    }
+
+    if (nextPrayer && previousPrayer) {
+      const totalInterval = nextPrayer.getTime() - previousPrayer.getTime();
+      const elapsed = currentTime.getTime() - previousPrayer.getTime();
+      return Math.max(0, Math.min(100, (elapsed / totalInterval) * 100));
+    }
+
+    return 0;
+  };
+
+  // Mise à jour des actions rapides avec les types corrects pour les gradients
+  const quickActions = [
+    {
+      icon: "compass",
+      title: "Qibla",
+      route: "/qibla",
+      color: "#4ECDC4",
+      gradient: ["rgba(78,205,196,0.13)", "rgba(44,122,122,0.10)"] as const,
+    },
+    {
+      icon: "calendar-islamic",
+      title: "Hijri",
+      route: "/hijri",
+      color: "#FFD700",
+      gradient: ["rgba(255,215,0,0.12)", "rgba(255,179,102,0.10)"] as const,
+    },
+    {
+      icon: "book-multiple",
+      title: "Hadiths",
+      route: "/hadith",
+      color: "#F093FB",
+      gradient: ["rgba(240,147,251,0.13)", "rgba(155,75,155,0.10)"] as const,
+    },
+    {
+      icon: "mosque",
+      title: "Mosquées",
+      route: "/mosques",
+      color: "#B8860B",
+      gradient: ["rgba(184,134,11,0.13)", "rgba(255,215,0,0.10)"] as const,
+    },
+  ];
+
+  return (
+    <>
+      <StatusBar barStyle="light-content" />
+      <ImageBackground source={bgImage} style={styles.background}>
+        <ScrollView
+          style={styles.container}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{ paddingBottom: 100 }}
+        >
+          {/* 🏛️ Header Dashboard Moderne */}
+          <Animated.View
+            style={[
+              styles.dashboardHeader,
+              {
+                opacity: fadeAnim,
+                transform: [{ translateY: slideAnim }, { scale: scaleAnim }],
+              },
+            ]}
+          >
+            <View style={styles.welcomeSection}>
+              <Text style={styles.welcomeText}>{t("dashboard_welcome")}</Text>
+              <Text style={styles.dateText}>
+                {new Date().toLocaleDateString("fr-FR", {
+                  weekday: "long",
+                  day: "numeric",
+                  month: "long",
+                })}
+              </Text>
+              {city && (
+                <Animated.View
+                  style={[
+                    styles.locationRow,
+                    {
+                      opacity: fadeAnim,
+                      transform: [{ translateY: slideAnim }],
+                    },
+                  ]}
+                >
+                  <MaterialCommunityIcons
+                    name="map-marker-outline"
+                    size={16}
+                    color="#4ECDC4"
+                  />
+                  <Text style={styles.locationText}>
+                    {city}
+                    {settings.locationMode === "manual" && " (Manuel)"}
+                  </Text>
+                </Animated.View>
+              )}
+            </View>
+
+            <Animated.View
+              style={{
+                transform: [
+                  {
+                    rotate: rotateAnim.interpolate({
+                      inputRange: [0, 1],
+                      outputRange: ["0deg", "360deg"],
+                    }),
+                  },
+                ],
+              }}
+            >
+              <TouchableOpacity
+                style={styles.settingsButton}
+                onPress={() => router.push("/settings")}
+              >
+                <MaterialCommunityIcons
+                  name="cog-outline"
+                  size={24}
+                  color="rgba(255, 255, 255, 0.7)"
+                />
+              </TouchableOpacity>
+            </Animated.View>
+          </Animated.View>
+
+          {/* 🕌 Prochaine Prière - Hero Section */}
+          {(() => {
+            const nextPrayer = getNextPrayerInfo(currentPrayerTimes);
+            if (!nextPrayer) return null;
+
+            return (
+              <Animated.View
+                style={[
+                  styles.heroPrayerCard,
+                  {
+                    opacity: fadeAnim,
+                    transform: [
+                      { translateY: slideAnim },
+                      { scale: scaleAnim },
+                    ],
+                  },
+                ]}
+              >
+                <LinearGradient
+                  colors={[
+                    nextPrayer.name === "Fajr"
+                      ? "#FF6B6B"
+                      : nextPrayer.name === "Dhuhr"
+                      ? "#FFD700"
+                      : nextPrayer.name === "Asr"
+                      ? "#FF8C42"
+                      : nextPrayer.name === "Maghrib"
+                      ? "#9B59B6"
+                      : "#2C3E50",
+                    "rgba(0,0,0,0.3)",
+                  ]}
+                  style={styles.heroGradient}
+                  start={{ x: 0, y: 0 }}
+                  end={{ x: 1, y: 1 }}
+                >
+                  <View style={styles.heroContent}>
+                    <View style={styles.prayerInfoContainer}>
+                      <Text style={styles.nextPrayerLabelText}>
+                        {t("next_prayer_label")}
+                      </Text>
+                      <Text style={styles.prayerNameText}>
+                        {nextPrayer.name}
+                      </Text>
+                      <Text style={styles.prayerTimeText}>
+                        {nextPrayer.time}
+                      </Text>
+                    </View>
+
+                    <View style={styles.countdownSection}>
+                      <Text style={styles.countdownLabel}>
+                        {t("countdown_in")}
+                      </Text>
+                      <Text style={styles.countdownTime}>
+                        {nextPrayer.countdown}
+                      </Text>
+
+                      {/* Barre de progression circulaire améliorée */}
+                      <View style={styles.progressContainerMain}>
+                        <View style={styles.progressBarMain}>
+                          <Animated.View
+                            style={[
+                              styles.progressFillMain,
+                              {
+                                width: `${getProgressPercentage()}%`,
+                                backgroundColor:
+                                  nextPrayer.name === "Fajr"
+                                    ? "#FF6B6B"
+                                    : nextPrayer.name === "Dhuhr"
+                                    ? "#FFD700"
+                                    : nextPrayer.name === "Asr"
+                                    ? "#FF8C42"
+                                    : nextPrayer.name === "Maghrib"
+                                    ? "#9B59B6"
+                                    : "#2C3E50",
+                              },
+                            ]}
+                          />
+                        </View>
+                        <Text style={styles.progressTextMain}>
+                          {Math.round(getProgressPercentage())}%
+                        </Text>
+                      </View>
+                    </View>
+                  </View>
+                </LinearGradient>
+              </Animated.View>
+            );
+          })()}
+
+          {/* 📱 Dashboard Cards - Layout Vertical Moderne */}
+          <View style={styles.dashboardCards}>
+            {/* Carte Dua */}
             <Animated.View
               style={[
-                styles.locationBadge,
-                { transform: [{ scale: fadeAnim }] },
+                styles.dashboardCard,
+                {
+                  opacity: fadeAnim,
+                  transform: [
+                    {
+                      translateY: slideAnim.interpolate({
+                        inputRange: [0, 30],
+                        outputRange: [20, 0],
+                      }),
+                    },
+                  ],
+                },
               ]}
             >
               <LinearGradient
-                colors={["#4ECDC4", "#44A08D"]}
-                style={styles.badgeGradient}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 0 }}
+                colors={["rgba(255,215,0,0.12)", "rgba(255,179,102,0.10)"]}
+                style={styles.cardContent}
               >
-                <MaterialCommunityIcons
-                  name="map-marker"
-                  size={16}
-                  color="white"
-                />
-                <Text style={styles.locationText}>
-                  {city}
-                  {settings.locationMode === "manual" && " (Manuel)"}
-                </Text>
+                <View style={styles.cardHeader}>
+                  <View style={styles.cardIconContainer}>
+                    <MaterialCommunityIcons
+                      name="hand-heart"
+                      size={28}
+                      color="#fffbe8"
+                    />
+                  </View>
+                  <Text style={styles.cardTitle}>{t("dua_du_jour")}</Text>
+                </View>
+
+                <View style={styles.cardBody}>
+                  {randomDua ? (
+                    <>
+                      <Text style={styles.duaArabic}>{randomDua.arabic}</Text>
+                      <Text style={styles.duaTranslation}>
+                        {randomDua.translation}
+                      </Text>
+                      {randomDua.benefits && (
+                        <Text style={styles.duaBenefits}>
+                          {randomDua.benefits}
+                        </Text>
+                      )}
+                    </>
+                  ) : (
+                    <Text style={styles.cardSubtitle}>
+                      {t("dashboard_dua_fallback")}
+                    </Text>
+                  )}
+                </View>
+
+                <TouchableOpacity
+                  style={styles.cardAction}
+                  onPress={() => router.push("/dhikr")}
+                >
+                  <Text style={styles.cardActionText}>{t("voir_plus")}</Text>
+                  <MaterialCommunityIcons
+                    name="arrow-right"
+                    size={20}
+                    color="#fffbe8"
+                  />
+                </TouchableOpacity>
               </LinearGradient>
             </Animated.View>
-          )}
-        </View>
 
-        {/* Container prochaine prière */}
-        {currentPrayerTimes &&
-          (() => {
-            const currentTime = new Date();
-            const prayers = ["Fajr", "Dhuhr", "Asr", "Maghrib", "Isha"];
-            let nextPrayer = null;
-            let previousPrayer = null;
-            let timeUntilNext = "";
-            let progressPercentage = 0;
-
-            // Trouver la prière précédente et la prochaine prière
-            for (let i = 0; i < prayers.length; i++) {
-              const prayer = prayers[i];
-              const prayerTime =
-                (currentPrayerTimes as any)[prayer.toLowerCase()] ||
-                (currentPrayerTimes as any)[prayer];
-
-              if (prayerTime && currentTime < prayerTime) {
-                nextPrayer = prayer;
-                previousPrayer = i > 0 ? prayers[i - 1] : "Isha"; // Si c'est Fajr, la précédente est Isha de la veille
-
-                const diff = prayerTime.getTime() - currentTime.getTime();
-                const hours = Math.floor(diff / (1000 * 60 * 60));
-                const minutes = Math.floor(
-                  (diff % (1000 * 60 * 60)) / (1000 * 60)
-                );
-                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-                timeUntilNext =
-                  hours > 0
-                    ? `${hours}h ${minutes}min ${seconds}s`
-                    : minutes > 0
-                    ? `${minutes}min ${seconds}s`
-                    : `${seconds}s`;
-
-                // Calculer le pourcentage de progression
-                let prevTime;
-                if (previousPrayer === "Isha" && nextPrayer === "Fajr") {
-                  // Cas spécial: entre Isha d'hier et Fajr d'aujourd'hui
-                  const yesterday = new Date(currentTime);
-                  yesterday.setDate(yesterday.getDate() - 1);
-                  // Simuler Isha d'hier (approximatif)
-                  prevTime = new Date(yesterday);
-                  prevTime.setHours(19, 30, 0, 0); // Heure approximative
-                } else {
-                  prevTime =
-                    (currentPrayerTimes as any)[previousPrayer.toLowerCase()] ||
-                    (currentPrayerTimes as any)[previousPrayer];
-                }
-
-                if (prevTime) {
-                  const totalInterval =
-                    prayerTime.getTime() - prevTime.getTime();
-                  const elapsed = currentTime.getTime() - prevTime.getTime();
-                  progressPercentage = Math.max(
-                    0,
-                    Math.min(100, (elapsed / totalInterval) * 100)
-                  );
-                }
-
-                break;
-              }
-            }
-
-            const iconByPrayer: Record<
-              string,
-              { name: string; color: string }
-            > = {
-              Fajr: { name: "weather-sunset-up", color: "#FF6B6B" },
-              Dhuhr: { name: "white-balance-sunny", color: "#FFD700" },
-              Asr: { name: "weather-sunny", color: "#FFA500" },
-              Maghrib: { name: "weather-sunset-down", color: "#F093FB" },
-              Isha: { name: "weather-night", color: "#4C63D2" },
-            };
-
-            return nextPrayer ? (
-              <Animated.View
-                style={[
-                  styles.nextPrayerCardLarge,
-                  { opacity: fadeAnim, transform: [{ translateY: slideAnim }] },
-                ]}
+            {/* Carte Verset */}
+            <Animated.View
+              style={[
+                styles.dashboardCard,
+                {
+                  opacity: fadeAnim,
+                  transform: [
+                    {
+                      translateY: slideAnim.interpolate({
+                        inputRange: [0, 30],
+                        outputRange: [40, 0],
+                      }),
+                    },
+                  ],
+                },
+              ]}
+            >
+              <LinearGradient
+                colors={["rgba(78,205,196,0.13)", "rgba(44,122,122,0.10)"]}
+                style={styles.cardContent}
               >
-                <View style={styles.nextPrayerHeader}>
-                  <Text style={styles.nextPrayerLabel}>{t("next_prayer")}</Text>
-                  <View style={styles.urgencyIndicator}>
+                <View style={styles.cardHeader}>
+                  <View style={styles.cardIconContainer}>
                     <MaterialCommunityIcons
-                      name="clock"
-                      size={16}
-                      color="#4ECDC4"
+                      name="book-open-variant"
+                      size={28}
+                      color="#fffbe8"
                     />
-                    <Text style={styles.urgencyText}>À venir</Text>
                   </View>
+                  <Text style={styles.cardTitle}>{t("verset_du_jour")}</Text>
                 </View>
 
-                <View style={styles.nextPrayerContentLarge}>
-                  <View style={styles.nextPrayerMainInfo}>
-                    <View
-                      style={[
-                        styles.nextPrayerIconCircleLarge,
-                        {
-                          backgroundColor: `${iconByPrayer[nextPrayer]?.color}20`,
-                        },
-                      ]}
-                    >
-                      <MaterialCommunityIcons
-                        name={iconByPrayer[nextPrayer]?.name as any}
-                        size={48}
-                        color={iconByPrayer[nextPrayer]?.color}
-                      />
-                    </View>
-                    <View style={styles.nextPrayerTextInfo}>
-                      <Text style={styles.nextPrayerNameLarge}>
-                        {t(nextPrayer.toLowerCase()) || nextPrayer}
+                <View style={styles.cardBody}>
+                  {randomVerse ? (
+                    <>
+                      <Text style={styles.versetArabic}>
+                        {randomVerse.arabic}
                       </Text>
-                      <Text style={styles.nextPrayerCountdownLarge}>
-                        {timeUntilNext}
+                      <Text style={styles.versetTranslation}>
+                        {randomVerse.translation}
                       </Text>
-                    </View>
-                  </View>
-
-                  {/* Barre de progression */}
-                  <View style={styles.progressSection}>
-                    <View style={styles.progressContainer}>
-                      <View style={styles.progressBar}>
-                        <Animated.View
-                          style={[
-                            styles.progressFill,
-                            {
-                              width: `${progressPercentage}%`,
-                              backgroundColor: iconByPrayer[nextPrayer]?.color,
-                            },
-                          ]}
-                        />
-                      </View>
-                      <View style={styles.progressLabels}>
-                        <Text style={styles.progressLabelStart}>
-                          {previousPrayer}
-                        </Text>
-                        <Text style={styles.progressPercentage}>
-                          {Math.round(progressPercentage)}%
-                        </Text>
-                        <Text style={styles.progressLabelEnd}>
-                          {nextPrayer}
-                        </Text>
-                      </View>
-                    </View>
-                  </View>
+                      <Text style={styles.versetReference}>
+                        {randomVerse.reference}
+                      </Text>
+                    </>
+                  ) : (
+                    <Text style={styles.cardSubtitle}>
+                      {t("dashboard_verset_fallback")}
+                    </Text>
+                  )}
                 </View>
-              </Animated.View>
-            ) : null;
-          })()}
 
-        {/* Container DUA du jour - Version moderne */}
-        <Animated.View
-          style={[
-            styles.modernCard,
-            {
-              opacity: fadeAnim,
-              transform: [{ translateY: slideAnim }],
-            },
-          ]}
-        >
-          <LinearGradient
-            colors={["rgba(255, 215, 0, 0.25)", "rgba(255, 140, 0, 0.15)"]}
-            style={styles.cardGradient}
-          >
-            <View style={styles.cardHeader}>
-              <View style={styles.iconContainer}>
-                <MaterialCommunityIcons
-                  name="hand-heart"
-                  size={24}
-                  color="#FFD700"
-                />
-              </View>
-              <Text style={[styles.cardTitle, { color: "#FFD700" }]}>
-                {t("dua_du_jour") || "Dua du jour"}
-              </Text>
-            </View>
+                <TouchableOpacity
+                  style={styles.cardAction}
+                  onPress={() => router.push("/quran")}
+                >
+                  <Text style={styles.cardActionText}>{t("voir_plus")}</Text>
+                  <MaterialCommunityIcons
+                    name="arrow-right"
+                    size={20}
+                    color="#fffbe8"
+                  />
+                </TouchableOpacity>
+              </LinearGradient>
+            </Animated.View>
 
-            {randomDua ? (
-              <>
-                <Text style={styles.duaTitleText}>{randomDua.title}</Text>
-                <Text style={styles.duaArabic}>{randomDua.arabic}</Text>
-                <Text style={styles.duaTranslation}>
-                  {randomDua.translation}
-                </Text>
-                {randomDua.benefits && (
-                  <Text style={styles.duaBenefits}>{randomDua.benefits}</Text>
-                )}
-              </>
-            ) : (
-              <View style={styles.loadingContainer}>
-                <ActivityIndicator size="small" color="#FFD700" />
-                <Text style={styles.loadingText}>Chargement de la dua...</Text>
-              </View>
-            )}
-
-            <TouchableOpacity
+            {/* Carte Nom d'Allah */}
+            <Animated.View
               style={[
-                styles.modernButton,
-                { backgroundColor: "rgba(255, 215, 0, 0.3)" },
+                styles.dashboardCard,
+                {
+                  opacity: fadeAnim,
+                  transform: [
+                    {
+                      translateY: slideAnim.interpolate({
+                        inputRange: [0, 30],
+                        outputRange: [60, 0],
+                      }),
+                    },
+                  ],
+                },
               ]}
-              onPress={() => router.push("/dhikr")}
-              activeOpacity={0.8}
             >
-              <MaterialCommunityIcons
-                name="hand-heart"
-                size={16}
-                color="#FFD700"
-              />
-              <Text style={[styles.buttonText, { color: "#FFD700" }]}>
-                {t("voir_plus_dua") || "voir_plus_dua"}
-              </Text>
-            </TouchableOpacity>
-          </LinearGradient>
-        </Animated.View>
+              <LinearGradient
+                colors={["rgba(240,147,251,0.13)", "rgba(155,75,155,0.10)"]}
+                style={styles.cardContent}
+              >
+                <View style={styles.cardHeader}>
+                  <View style={styles.cardIconContainer}>
+                    <MaterialCommunityIcons
+                      name="star-circle"
+                      size={28}
+                      color="#fffbe8"
+                    />
+                  </View>
+                  <Text style={styles.cardTitle}>{t("nom_allah_du_jour")}</Text>
+                </View>
 
-        {/* Container Verset du jour - Version moderne */}
-        <Animated.View
-          style={[
-            styles.modernCard,
-            {
-              opacity: fadeAnim,
-              transform: [{ translateY: slideAnim }],
-            },
-          ]}
-        >
-          <LinearGradient
-            colors={["rgba(78, 205, 196, 0.25)", "rgba(68, 160, 141, 0.15)"]}
-            style={styles.cardGradient}
-          >
-            <View style={styles.cardHeader}>
-              <View style={styles.iconContainer}>
-                <MaterialCommunityIcons name="book" size={24} color="#4ECDC4" />
-              </View>
-              <Text style={[styles.cardTitle, { color: "#4ECDC4" }]}>
-                {t("verset_du_jour") || "Verset du jour"}
-              </Text>
-            </View>
+                <View style={styles.cardBody}>
+                  {randomName ? (
+                    <>
+                      <Text style={styles.nameArabic}>{randomName.arabic}</Text>
+                      <Text style={styles.nameTranslit}>
+                        {randomName.translit}
+                      </Text>
+                      <Text style={styles.nameMeaning}>
+                        {randomName.meaning}
+                      </Text>
+                    </>
+                  ) : (
+                    <Text style={styles.cardSubtitle}>
+                      {t("dashboard_names_fallback")}
+                    </Text>
+                  )}
+                </View>
 
-            {randomVerse ? (
-              <>
-                <Text style={styles.versetArabic}>{randomVerse.arabic}</Text>
-                <Text style={styles.versetTranslation}>
-                  {randomVerse.translation}
-                </Text>
-                <Text style={[styles.versetReference, { color: "#4ECDC4" }]}>
-                  — {randomVerse.reference}
-                </Text>
-              </>
-            ) : (
-              <View style={styles.loadingContainer}>
-                <ActivityIndicator size="small" color="#4ECDC4" />
-                <Text style={styles.loadingText}>Chargement...</Text>
-              </View>
-            )}
+                <TouchableOpacity
+                  style={styles.cardAction}
+                  onPress={() => router.push("/asmaulhusna")}
+                >
+                  <Text style={styles.cardActionText}>{t("voir_plus")}</Text>
+                  <MaterialCommunityIcons
+                    name="arrow-right"
+                    size={20}
+                    color="#fffbe8"
+                  />
+                </TouchableOpacity>
+              </LinearGradient>
+            </Animated.View>
+          </View>
 
-            <TouchableOpacity
-              style={[
-                styles.modernButton,
-                { backgroundColor: "rgba(78, 205, 196, 0.3)" },
-              ]}
-              onPress={() => router.push("/quran")}
-              activeOpacity={0.8}
-            >
-              <MaterialCommunityIcons
-                name="book-open-page-variant"
-                size={16}
-                color="#4ECDC4"
-              />
-              <Text style={[styles.buttonText, { color: "#4ECDC4" }]}>
-                {t("lire_coran") || "lire_coran"}
-              </Text>
-            </TouchableOpacity>
-          </LinearGradient>
-        </Animated.View>
+          {/* 🎯 Section Actions Rapides - Style iOS moderne */}
+          <View style={styles.quickActionsSection}>
+            <Text style={styles.sectionHeaderText}>{t("actions_rapides")}</Text>
 
-        {/* Container Nom d'Allah du jour - Version moderne */}
-        <Animated.View
-          style={[
-            styles.modernCard,
-            {
-              opacity: fadeAnim,
-              transform: [{ translateY: slideAnim }],
-            },
-          ]}
-        >
-          <LinearGradient
-            colors={["rgba(240, 147, 251, 0.25)", "rgba(244, 65, 165, 0.15)"]}
-            style={styles.cardGradient}
-          >
-            <View style={styles.cardHeader}>
-              <View style={styles.iconContainer}>
-                <MaterialCommunityIcons name="star" size={24} color="#F093FB" />
-              </View>
-              <Text style={[styles.cardTitle, { color: "#F093FB" }]}>
-                {t("nom_allah_du_jour") || "nom_allah_du_jour"}
-              </Text>
-            </View>
-
-            {randomName ? (
-              <>
-                <Text style={styles.allahnameArabic}>{randomName.arabic}</Text>
-                <Text style={[styles.allahnameTranslit, { color: "#F093FB" }]}>
-                  {randomName.translit}
-                </Text>
-                <Text style={styles.allahnameDescription}>
-                  {randomName.meaning}
-                </Text>
-              </>
-            ) : (
-              <View style={styles.loadingContainer}>
-                <ActivityIndicator size="small" color="#F093FB" />
-                <Text style={styles.loadingText}>
-                  Chargement du nom d&apos;Allah...
-                </Text>
-              </View>
-            )}
-
-            <TouchableOpacity
-              style={[
-                styles.modernButton,
-                { backgroundColor: "rgba(240, 147, 251, 0.3)" },
-              ]}
-              onPress={() => router.push("/asmaulhusna")}
-              activeOpacity={0.8}
-            >
-              <MaterialCommunityIcons
-                name="star-circle"
-                size={16}
-                color="#F093FB"
-              />
-              <Text style={[styles.buttonText, { color: "#F093FB" }]}>
-                {t("decouvrir_99_noms") || "decouvrir_99_noms"}
-              </Text>
-            </TouchableOpacity>
-          </LinearGradient>
-        </Animated.View>
-
-        {/* Actions rapides modernes */}
-        <View style={styles.actionsContainer}>
-          <Text style={styles.sectionTitle}>
-            <MaterialCommunityIcons name="flash" size={24} color="#FFD700" />{" "}
-            {t("actions_rapides") || "Actions Rapides"}
-          </Text>
-
-          <LinearGradient
-            colors={["rgba(0, 0, 0, 0.4)", "rgba(0, 0, 0, 0.2)"]}
-            style={styles.actionsWrapper}
-          >
-            <View style={styles.actionsGrid}>
-              {[
-                {
-                  icon: "hand-heart",
-                  title: "Dhikr & Dua",
-                  route: "/dhikr",
-                  color: "#4ECDC4",
-                },
-                {
-                  icon: "compass",
-                  title: "Qibla",
-                  route: "/qibla",
-                  color: "#4ECDC4",
-                },
-                {
-                  icon: "calendar",
-                  title: "Calendrier Hijri",
-                  route: "/hijri",
-                  color: "#4ECDC4",
-                },
-                {
-                  icon: "book-open-page-variant",
-                  title: "Saint Coran",
-                  route: "/quran",
-                  color: "#FFD700",
-                },
-                {
-                  icon: "book-multiple",
-                  title: "Hadiths",
-                  route: "/hadith",
-                  color: "#F093FB",
-                },
-                {
-                  icon: "star-circle",
-                  title: "99 Noms d'Allah",
-                  route: "/asmaulhusna",
-                  color: "#FF6B6B",
-                },
-              ].map((action, index) => (
+            <View style={styles.actionsContainer}>
+              {quickActions.map((action, index) => (
                 <Animated.View
                   key={action.route}
                   style={{
@@ -1076,46 +1315,55 @@ export default function HomeScreen() {
                       {
                         translateY: slideAnim.interpolate({
                           inputRange: [0, 30],
-                          outputRange: [index * 10, 0],
+                          outputRange: [20 + index * 5, 0],
                         }),
                       },
                     ],
                   }}
                 >
                   <TouchableOpacity
-                    style={[
-                      styles.actionCard,
-                      { borderColor: action.color + "40" },
-                    ]}
+                    style={styles.actionButton}
                     onPress={() => router.push(action.route as any)}
                     activeOpacity={0.7}
                   >
-                    <View
-                      style={[
-                        styles.actionIconBg,
-                        { backgroundColor: action.color + "20" },
-                      ]}
+                    <LinearGradient
+                      colors={action.gradient}
+                      style={styles.actionGradient}
+                      start={{ x: 0, y: 0 }}
+                      end={{ x: 1, y: 1 }}
                     >
+                      <View
+                        style={[
+                          styles.actionIconCircle,
+                          {
+                            borderColor: action.color,
+                            shadowColor: action.color,
+                          },
+                        ]}
+                      >
+                        <MaterialCommunityIcons
+                          name={action.icon as any}
+                          size={24}
+                          color="#fffbe8"
+                        />
+                      </View>
+                      <Text style={styles.actionButtonText}>
+                        {action.title}
+                      </Text>
                       <MaterialCommunityIcons
-                        name={action.icon as any}
-                        size={28}
-                        color={action.color}
+                        name="chevron-right"
+                        size={20}
+                        color="rgba(255, 255, 255, 0.7)"
                       />
-                    </View>
-                    <Text style={styles.actionTitle} numberOfLines={2}>
-                      {action.title}
-                    </Text>
+                    </LinearGradient>
                   </TouchableOpacity>
                 </Animated.View>
               ))}
             </View>
-          </LinearGradient>
-        </View>
-
-        {/* Espace de sécurité en bas */}
-        <View style={styles.bottomSpacer} />
-      </Animated.ScrollView>
-    </ImageBackground>
+          </View>
+        </ScrollView>
+      </ImageBackground>
+    </>
   );
 }
 
@@ -1163,9 +1411,27 @@ const styles = StyleSheet.create({
   },
   locationText: {
     fontSize: 14,
-    color: "#fffbe8",
+    color: "rgba(255, 255, 255, 0.8)",
     marginLeft: 6,
     fontWeight: "500",
+  },
+  locationRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: 8,
+    backgroundColor: "rgba(78, 205, 196, 0.1)",
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: "rgba(78, 205, 196, 0.2)",
+  },
+  settingsButton: {
+    padding: 12,
+    borderRadius: 16,
+    backgroundColor: "rgba(255, 255, 255, 0.1)",
+    borderWidth: 1,
+    borderColor: "rgba(255, 255, 255, 0.2)",
   },
   dateNavigationContainer: {
     marginBottom: 16,
@@ -1464,27 +1730,26 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   duaArabic: {
-    fontSize: 22,
+    fontSize: 24,
     color: "#fffbe8",
     textAlign: "center",
-    marginBottom: 10,
+    marginBottom: 12,
     fontFamily: "ScheherazadeNew",
-    lineHeight: 32,
+    lineHeight: 36,
   },
   duaTranslation: {
-    fontSize: 14,
+    fontSize: 16,
     color: "rgba(255, 255, 255, 0.9)",
     textAlign: "center",
     marginBottom: 8,
-    lineHeight: 20,
+    lineHeight: 22,
   },
   duaBenefits: {
-    fontSize: 12,
-    color: "rgba(255, 215, 0, 0.8)",
+    fontSize: 14,
+    color: "rgba(255, 255, 255, 0.7)",
     textAlign: "center",
-    marginBottom: 10,
     fontStyle: "italic",
-    lineHeight: 18,
+    lineHeight: 20,
   },
   duaButton: {
     flexDirection: "row",
@@ -1540,10 +1805,9 @@ const styles = StyleSheet.create({
   },
   versetReference: {
     fontSize: 14,
-    color: "#4ECDC4",
+    color: "rgba(255, 255, 255, 0.7)",
     textAlign: "center",
     fontStyle: "italic",
-    marginBottom: 12,
   },
   versetButton: {
     flexDirection: "row",
@@ -1669,148 +1933,132 @@ const styles = StyleSheet.create({
     lineHeight: 13,
   },
 
-  // Styles pour le container large de la prochaine prière
-  nextPrayerCardLarge: {
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
-    borderRadius: 20,
-    padding: 24,
+  // Styles pour la section prière
+  heroPrayerCard: {
     marginBottom: 20,
-    borderWidth: 1,
-    borderColor: "rgba(255, 255, 255, 0.15)",
+    borderRadius: 24,
+    overflow: "hidden",
     shadowColor: "#000",
-    shadowOffset: { width: 0, height: 6 },
+    shadowOffset: { width: 0, height: 8 },
     shadowOpacity: 0.4,
-    shadowRadius: 15,
-    elevation: 10,
-    minHeight: 180,
+    shadowRadius: 24,
+    elevation: 16,
+    borderWidth: 1,
+    borderColor: "rgba(255, 255, 255, 0.1)",
   },
-  nextPrayerContentLarge: {
-    gap: 16,
+
+  heroGradient: {
+    padding: 24,
+    borderRadius: 24,
   },
-  nextPrayerIconCircleLarge: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
-    justifyContent: "center",
+
+  heroContent: {
+    gap: 20,
+  },
+
+  prayerInfoContainer: {
+    flexDirection: "column",
     alignItems: "center",
-    marginRight: 16,
-    borderWidth: 2,
-    borderColor: "rgba(255, 255, 255, 0.2)",
   },
-  nextPrayerNameLarge: {
-    fontSize: 28,
-    fontWeight: "800",
+
+  nextPrayerLabelText: {
+    fontSize: 18,
+    fontWeight: "700",
     color: "#fffbe8",
-    marginBottom: 4,
-    textShadowColor: "rgba(0, 0, 0, 0.5)",
+    marginBottom: 8,
+    textShadowColor: "rgba(0, 0, 0, 0.3)",
     textShadowOffset: { width: 0, height: 2 },
     textShadowRadius: 4,
   },
-  nextPrayerCountdownLarge: {
-    fontSize: 18,
+
+  prayerNameText: {
+    fontSize: 32,
+    fontWeight: "800",
+    color: "#fffbe8",
+    marginBottom: 4,
+    textShadowColor: "rgba(0, 0, 0, 0.3)",
+    textShadowOffset: { width: 0, height: 2 },
+    textShadowRadius: 4,
+  },
+
+  prayerTimeText: {
+    fontSize: 24,
+    color: "#FFD700",
+    fontWeight: "700",
+    textShadowColor: "rgba(255, 215, 0, 0.3)",
+    textShadowOffset: { width: 0, height: 2 },
+    textShadowRadius: 4,
+  },
+
+  countdownSection: {
+    flexDirection: "column",
+    alignItems: "center",
+    gap: 12,
+  },
+
+  countdownLabel: {
+    fontSize: 16,
+    color: "rgba(255, 255, 255, 0.9)",
+    fontWeight: "600",
+    textShadowColor: "rgba(0, 0, 0, 0.2)",
+    textShadowOffset: { width: 0, height: 1 },
+    textShadowRadius: 2,
+  },
+
+  countdownTime: {
+    fontSize: 24,
     color: "#4ECDC4",
     fontWeight: "700",
-    letterSpacing: 1,
     textShadowColor: "rgba(78, 205, 196, 0.3)",
-    textShadowOffset: { width: 0, height: 1 },
-    textShadowRadius: 3,
+    textShadowOffset: { width: 0, height: 2 },
+    textShadowRadius: 4,
   },
-  progressSection: {
-    marginTop: 16,
-    paddingTop: 16,
-    borderTopWidth: 1,
-    borderTopColor: "rgba(255, 255, 255, 0.1)",
-  },
-  progressContainer: {
+
+  progressContainerMain: {
+    width: "100%",
     gap: 8,
+    marginTop: 8,
   },
-  progressBar: {
-    height: 8,
+
+  progressBarMain: {
+    height: 12,
     backgroundColor: "rgba(255, 255, 255, 0.2)",
-    borderRadius: 4,
+    borderRadius: 6,
     overflow: "hidden",
+    borderWidth: 1,
+    borderColor: "rgba(255, 255, 255, 0.1)",
   },
-  progressFill: {
+
+  progressFillMain: {
     height: "100%",
-    borderRadius: 4,
+    borderRadius: 6,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.3,
     shadowRadius: 4,
     elevation: 3,
   },
-  progressLabels: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-  progressLabelStart: {
-    fontSize: 12,
-    color: "rgba(255, 255, 255, 0.7)",
-    fontWeight: "600",
-  },
-  progressPercentage: {
-    fontSize: 14,
-    color: "#4ECDC4",
-    fontWeight: "700",
-    backgroundColor: "rgba(78, 205, 196, 0.2)",
-    paddingHorizontal: 8,
-    paddingVertical: 2,
-    borderRadius: 10,
-    overflow: "hidden",
-  },
-  progressLabelEnd: {
-    fontSize: 12,
-    color: "rgba(255, 255, 255, 0.7)",
-    fontWeight: "600",
-  },
-  cardHeader: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: THEME.spacing.md,
-  },
-  cardTitle: {
+
+  progressTextMain: {
     fontSize: 16,
+    color: "#fffbe8",
     fontWeight: "700",
-    marginLeft: THEME.spacing.sm,
-  },
-  loadingContent: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    paddingVertical: THEME.spacing.lg,
-    gap: THEME.spacing.sm,
-  },
-  loadingText: {
-    color: THEME.colors.text.secondary,
-    fontSize: 14,
-    fontStyle: "italic",
-  },
-  cardButton: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    padding: THEME.spacing.md,
-    borderRadius: THEME.borderRadius.md,
-    borderWidth: 1,
-    marginTop: THEME.spacing.sm,
-  },
-  cardButtonText: {
-    fontSize: 14,
-    fontWeight: "600",
-    marginLeft: THEME.spacing.xs,
-  },
-  sectionTitle: {
-    fontSize: 18,
-    color: THEME.colors.text.primary,
-    fontWeight: "700",
-    marginBottom: THEME.spacing.lg,
     textAlign: "center",
-    textShadowColor: "rgba(0, 0, 0, 0.3)",
+    textShadowColor: "rgba(0, 0, 0, 0.2)",
     textShadowOffset: { width: 0, height: 1 },
     textShadowRadius: 2,
   },
-  modernCard: {
+
+  // Styles pour la grille
+  dashboardGrid: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+    marginBottom: 20,
+  },
+
+  gridCard: {
+    width: "48%",
     marginBottom: 16,
     borderRadius: 20,
     overflow: "hidden",
@@ -1820,57 +2068,274 @@ const styles = StyleSheet.create({
     shadowRadius: 20,
     elevation: 12,
   },
-  cardGradient: {
+
+  gridCardContent: {
     padding: 20,
+    height: 200,
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "space-between",
     borderRadius: 20,
   },
-  iconContainer: {
+
+  cardIcon: {
     width: 50,
     height: 50,
     borderRadius: 25,
-    backgroundColor: "rgba(255, 255, 255, 0.1)",
+    backgroundColor: "rgba(255, 255, 255, 0.2)",
     justifyContent: "center",
     alignItems: "center",
-    marginRight: 12,
+    marginBottom: 12,
+    borderWidth: 1,
+    borderColor: "rgba(255, 255, 255, 0.3)",
   },
-  loadingContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    paddingVertical: 20,
-    gap: 10,
+
+  gridCardTitle: {
+    fontSize: 18,
+    fontWeight: "700",
+    color: "#fffbe8",
+    marginBottom: 4,
+    textShadowColor: "rgba(0, 0, 0, 0.3)",
+    textShadowOffset: { width: 0, height: 2 },
+    textShadowRadius: 4,
   },
-  modernButton: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    padding: 14,
-    borderRadius: 15,
-    marginTop: 12,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.2,
-    shadowRadius: 8,
-    elevation: 4,
-  },
-  buttonText: {
+
+  gridCardSubtitle: {
     fontSize: 14,
-    fontWeight: "600",
-    marginLeft: 8,
+    color: "rgba(255, 255, 255, 0.9)",
+    textAlign: "center",
+    marginTop: 4,
+    lineHeight: 18,
   },
-  actionIconBg: {
+
+  quickAction: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 8,
+    borderRadius: 12,
+    backgroundColor: "rgba(255, 255, 255, 0.2)",
+    borderWidth: 1,
+    borderColor: "rgba(255, 255, 255, 0.3)",
+    marginTop: 8,
+  },
+
+  // Styles pour les actions rapides
+  quickActionsSection: {
+    marginTop: 24,
+    marginBottom: 20,
+  },
+
+  sectionHeaderText: {
+    fontSize: 20,
+    color: "#fffbe8",
+    fontWeight: "700",
+    marginBottom: 16,
+    textAlign: "center",
+    textShadowColor: "rgba(0, 0, 0, 0.3)",
+    textShadowOffset: { width: 0, height: 2 },
+    textShadowRadius: 4,
+  },
+
+  actionButton: {
+    marginBottom: 12,
+    borderRadius: 16,
+    overflow: "hidden",
+    borderWidth: 1.5,
+    // La couleur de bordure sera dynamique selon l'action
+  },
+
+  actionGradient: {
+    flexDirection: "row",
+    alignItems: "center",
+    padding: 16,
+    borderRadius: 16,
+  },
+
+  actionIconCircle: {
     width: 40,
     height: 40,
     borderRadius: 20,
+    backgroundColor: "rgba(255,255,255,0.10)",
     justifyContent: "center",
     alignItems: "center",
-    marginBottom: 8,
+    marginRight: 12,
+    borderWidth: 1.5,
+    // La couleur de bordure sera dynamique selon l'action
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.5,
+    shadowRadius: 8,
   },
-  badgeGradient: {
+
+  actionButtonText: {
+    flex: 1,
+    fontSize: 16,
+    fontWeight: "600",
+    color: "#fff",
+    textShadowColor: "#000",
+    textShadowOffset: { width: 0, height: 1 },
+    textShadowRadius: 2,
+  },
+
+  // Styles pour le header
+  dashboardHeader: {
     flexDirection: "row",
     alignItems: "center",
-    paddingHorizontal: 12,
-    paddingVertical: 6,
+    justifyContent: "space-between",
+    padding: 16,
+    backgroundColor: "rgba(0, 0, 0, 0.3)",
     borderRadius: 20,
+    marginBottom: 20,
+    borderWidth: 1,
+    borderColor: "rgba(255, 255, 255, 0.1)",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 12,
+    elevation: 8,
+  },
+
+  welcomeSection: {
+    flexDirection: "column",
+    alignItems: "flex-start",
+  },
+
+  welcomeText: {
+    fontSize: 28,
+    fontWeight: "800",
+    color: "#fffbe8",
+    marginBottom: 4,
+    textShadowColor: "rgba(0, 0, 0, 0.3)",
+    textShadowOffset: { width: 0, height: 2 },
+    textShadowRadius: 4,
+  },
+
+  dateText: {
+    fontSize: 16,
+    color: "rgba(255, 255, 255, 0.9)",
+    fontWeight: "600",
+    textShadowColor: "rgba(0, 0, 0, 0.2)",
+    textShadowOffset: { width: 0, height: 1 },
+    textShadowRadius: 2,
+  },
+
+  loadingText: {
+    color: THEME.colors.text.secondary,
+    fontSize: 14,
+    fontStyle: "italic",
+  },
+
+  dashboardCards: {
+    marginBottom: 20,
+  },
+
+  dashboardCard: {
+    marginBottom: 16,
+    borderRadius: 20,
+    overflow: "hidden",
+    shadowColor: "#4ECDC4",
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.5,
+    shadowRadius: 18,
+    elevation: 12,
+    borderWidth: 1.5,
+    borderColor: "#4ECDC4",
+  },
+
+  cardContent: {
+    padding: 20,
+    borderRadius: 20,
+    backgroundColor: "rgba(44,205,196,0.10)",
+  },
+
+  cardHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 16,
+  },
+
+  cardIconContainer: {
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    backgroundColor: "rgba(240,147,251,0.10)",
+    justifyContent: "center",
+    alignItems: "center",
+    marginRight: 12,
+    borderWidth: 1.5,
+    borderColor: "#F093FB",
+    shadowColor: "#F093FB",
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.7,
+    shadowRadius: 8,
+  },
+
+  cardTitle: {
+    fontSize: 20,
+    fontWeight: "700",
+    color: "#4ECDC4",
+    textShadowColor: "#4ECDC4",
+    textShadowOffset: { width: 0, height: 0 },
+    textShadowRadius: 10,
+  },
+
+  cardBody: {
+    marginBottom: 16,
+  },
+
+  cardSubtitle: {
+    fontSize: 16,
+    color: "rgba(255, 255, 255, 0.8)",
+    textAlign: "center",
+    lineHeight: 22,
+  },
+
+  cardAction: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 12,
+    borderRadius: 12,
+    backgroundColor: "rgba(44,205,196,0.18)",
+    borderWidth: 1.5,
+    borderColor: "#4ECDC4",
+    shadowColor: "#4ECDC4",
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.5,
+    shadowRadius: 8,
+  },
+
+  cardActionText: {
+    fontSize: 16,
+    fontWeight: "600",
+    color: "#fff",
+    marginRight: 8,
+    textShadowColor: "#4ECDC4",
+    textShadowOffset: { width: 0, height: 0 },
+    textShadowRadius: 8,
+  },
+
+  // Styles spécifiques pour le contenu
+  nameArabic: {
+    fontSize: 32,
+    color: "#fffbe8",
+    textAlign: "center",
+    marginBottom: 8,
+    fontWeight: "700",
+  },
+
+  nameTranslit: {
+    fontSize: 20,
+    color: "rgba(255, 255, 255, 0.9)",
+    textAlign: "center",
+    marginBottom: 8,
+    fontStyle: "italic",
+  },
+
+  nameMeaning: {
+    fontSize: 16,
+    color: "rgba(255, 255, 255, 0.8)",
+    textAlign: "center",
+    lineHeight: 22,
   },
 });

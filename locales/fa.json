@@ -260,5 +260,21 @@
   "sunrise_to_sunset": "زمان بین طلوع و غروب آفتاب",
   "sunset_to_fajr": "زمان بین غروب آفتاب و فجر",
   "day_length": "طول روز",
-  "night_length": "طول شب"
+  "night_length": "طول شب",
+
+  "dashboard_welcome": "السلام علیکم",
+  "next_prayer_label": "نماز بعدی",
+  "countdown_in": "در",
+  "dua_du_jour": "دعای روز",
+  "verset_du_jour": "آیه روز",
+  "nom_allah_du_jour": "نام خدا روز",
+  "mes_stats": "آمار من",
+  "mes_stats_today": "امروز",
+  "voir_plus_dua": "دعاهای بیشتر",
+  "lire_coran": "قرآن بخوانید",
+  "decouvrir_99_noms": "۹۹ نام کشف کنید",
+  "actions_rapides": "اقدامات سریع",
+  "dashboard_dua_fallback": "دعاهای روزانه را کشف کنید",
+  "dashboard_verset_fallback": "قرآن مقدس را کاوش کنید",
+  "dashboard_names_fallback": "اسماء الحسنی"
 }

@@ -284,5 +284,21 @@
   "sunrise_to_sunset": "সূর্যোদয় থেকে সূর্যাস্ত পর্যন্ত সময়",
   "sunset_to_fajr": "সূর্যাস্ত থেকে ফজর পর্যন্ত সময়",
   "day_length": "দিনের দৈর্ঘ্য",
-  "night_length": "রাতের দৈর্ঘ্য"
+  "night_length": "রাতের দৈর্ঘ্য",
+
+  "dashboard_welcome": "আসসালামু আলাইকুম",
+  "next_prayer_label": "পরবর্তী নামাজ",
+  "countdown_in": "এর মধ্যে",
+  "dua_du_jour": "আজকের দোয়া",
+  "verset_du_jour": "আজকের আয়াত",
+  "nom_allah_du_jour": "আজকের আল্লাহর নাম",
+  "mes_stats": "আমার পরিসংখ্যান",
+  "mes_stats_today": "আজ",
+  "voir_plus_dua": "আরো দোয়া দেখুন",
+  "lire_coran": "কুরআন পড়ুন",
+  "decouvrir_99_noms": "৯৯টি নাম আবিষ্কার করুন",
+  "actions_rapides": "দ্রুত কার্যক্রম",
+  "dashboard_dua_fallback": "দৈনন্দিন দোয়া আবিষ্কার করুন",
+  "dashboard_verset_fallback": "পবিত্র কুরআন অন্বেষণ করুন",
+  "dashboard_names_fallback": "আসমাউল হুসনা"
 }

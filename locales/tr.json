@@ -281,5 +281,21 @@
   "sunrise_to_sunset": "Güneş doğuşu ile batışı arasındaki süre",
   "sunset_to_fajr": "Güneş batışı ile imsak arasındaki süre",
   "day_length": "Gündüz süresi",
-  "night_length": "Gece süresi"
+  "night_length": "Gece süresi",
+
+  "dashboard_welcome": "Esselamu Aleykum",
+  "next_prayer_label": "Sonraki Namaz",
+  "countdown_in": "İçinde",
+  "dua_du_jour": "Günün Duası",
+  "verset_du_jour": "Günün Ayeti",
+  "nom_allah_du_jour": "Günün Allah İsmi",
+  "mes_stats": "İstatistiklerim",
+  "mes_stats_today": "Bugün",
+  "voir_plus_dua": "Daha fazla dua gör",
+  "lire_coran": "Kuran oku",
+  "decouvrir_99_noms": "99 ismi keşfet",
+  "actions_rapides": "Hızlı Eylemler",
+  "dashboard_dua_fallback": "Günlük duaları keşfedin",
+  "dashboard_verset_fallback": "Kutsal Kuran'ı inceleyin",
+  "dashboard_names_fallback": "Esmaül Hüsna"
 }

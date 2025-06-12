@@ -284,5 +284,21 @@
   "sunrise_to_sunset": "Time between sunrise and sunset",
   "sunset_to_fajr": "Time between sunset and Fajr",
   "day_length": "Day length",
-  "night_length": "Night length"
+  "night_length": "Night length",
+
+  "dashboard_welcome": "Assalamu Alaykum",
+  "next_prayer_label": "Next Prayer",
+  "countdown_in": "In",
+  "dua_du_jour": "Dua of the Day",
+  "verset_du_jour": "Verse of the Day",
+  "nom_allah_du_jour": "Name of Allah of the Day",
+  "mes_stats": "My Stats",
+  "mes_stats_today": "Today",
+  "voir_plus_dua": "See more duas",
+  "lire_coran": "Read Quran",
+  "decouvrir_99_noms": "Discover 99 names",
+  "actions_rapides": "Quick Actions",
+  "dashboard_dua_fallback": "Discover daily invocations",
+  "dashboard_verset_fallback": "Explore the Holy Quran",
+  "dashboard_names_fallback": "Asmaul Husna"
 }

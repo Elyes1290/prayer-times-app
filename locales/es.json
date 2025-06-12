@@ -286,5 +286,21 @@
   "maghrib_to_isha_time": "Tiempo entre Maghrib e Isha",
   "sunrise_to_sunset": "Tiempo entre amanecer y atardecer",
   "sunset_to_fajr": "Tiempo entre atardecer y Fajr",
-  "night_length": "Duración de la noche"
+  "night_length": "Duración de la noche",
+
+  "dashboard_welcome": "Assalamu Alaykum",
+  "next_prayer_label": "Próxima Oración",
+  "countdown_in": "En",
+  "dua_du_jour": "Dua del Día",
+  "verset_du_jour": "Verso del Día",
+  "nom_allah_du_jour": "Nombre de Allah del Día",
+  "mes_stats": "Mis Estadísticas",
+  "mes_stats_today": "Hoy",
+  "voir_plus_dua": "Ver más duas",
+  "lire_coran": "Leer Corán",
+  "decouvrir_99_noms": "Descubrir 99 nombres",
+  "actions_rapides": "Acciones Rápidas",
+  "dashboard_dua_fallback": "Descubre las invocaciones diarias",
+  "dashboard_verset_fallback": "Explora el Santo Corán",
+  "dashboard_names_fallback": "Asmaul Husna"
 }
