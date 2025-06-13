@@ -1,6 +1,5 @@
-import ModalSelector from "react-native-modal-selector";
 import * as Font from "expo-font";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import {
   ActivityIndicator,
   FlatList,
@@ -9,11 +8,18 @@ import {
   StyleSheet,
   Text,
   View,
+  TouchableOpacity,
+  Modal,
+  SafeAreaView,
+  Dimensions,
 } from "react-native";
 import { useTranslation } from "react-i18next";
 
 export default function QuranScreen() {
   const { t, i18n } = useTranslation();
+  const [modalVisible, setModalVisible] = useState(false);
+  const flatListRef = useRef<FlatList>(null);
+  const windowHeight = Dimensions.get("window").height;
 
   // Map langue => id traduction Quran.com (ajoute d'autres langues si besoin)
   const translationMap: Record<string, number | null> = {
@@ -176,26 +182,86 @@ export default function QuranScreen() {
       : t("choose_sourate");
   }
 
+  const renderSourateItem = ({
+    item,
+  }: {
+    item: { key: number; label: string };
+  }) => (
+    <TouchableOpacity
+      style={[
+        styles.optionStyle,
+        selectedSourate === item.key && styles.selectedOptionStyle,
+      ]}
+      onPress={() => {
+        setSelectedSourate(item.key);
+        setModalVisible(false);
+      }}
+    >
+      <Text
+        style={[
+          styles.optionTextStyle,
+          selectedSourate === item.key && styles.selectedOptionTextStyle,
+        ]}
+      >
+        {item.label}
+      </Text>
+    </TouchableOpacity>
+  );
+
   return (
     <ImageBackground
       source={require("../assets/images/parchment_bg.jpg")}
       style={{ flex: 1 }}
     >
       <View style={styles.container}>
-        <ModalSelector
-          data={modalData}
-          onChange={(option) => setSelectedSourate(option.key)}
-          initValue={getSelectedSourateLabel()}
-          style={styles.modalSelector}
-          selectStyle={styles.selectStyle}
-          selectTextStyle={styles.selectTextStyle}
-          optionStyle={styles.optionStyle}
-          optionTextStyle={styles.optionTextStyle}
-          cancelStyle={styles.cancelStyle}
-          cancelTextStyle={styles.cancelTextStyle}
-          backdropPressToClose={true}
-          initValueTextStyle={styles.initValueTextStyle}
-        />
+        <TouchableOpacity
+          style={styles.selectStyle}
+          onPress={() => setModalVisible(true)}
+        >
+          <Text style={styles.selectTextStyle}>
+            {getSelectedSourateLabel()}
+          </Text>
+        </TouchableOpacity>
+
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => setModalVisible(false)}
+        >
+          <SafeAreaView style={styles.modalContainer}>
+            <View
+              style={[styles.modalContent, { maxHeight: windowHeight * 0.8 }]}
+            >
+              <View style={styles.modalHeader}>
+                <Text style={styles.modalTitle}>{t("choose_sourate")}</Text>
+                <TouchableOpacity
+                  style={styles.closeButton}
+                  onPress={() => setModalVisible(false)}
+                >
+                  <Text style={styles.closeButtonText}>✕</Text>
+                </TouchableOpacity>
+              </View>
+              <FlatList
+                ref={flatListRef}
+                data={modalData}
+                renderItem={renderSourateItem}
+                keyExtractor={(item) => item.key.toString()}
+                initialNumToRender={20}
+                maxToRenderPerBatch={20}
+                windowSize={10}
+                getItemLayout={(data, index) => ({
+                  length: 50,
+                  offset: 50 * index,
+                  index,
+                })}
+                contentContainerStyle={styles.listContent}
+                showsVerticalScrollIndicator={true}
+                bounces={true}
+              />
+            </View>
+          </SafeAreaView>
+        </Modal>
 
         {/* N'affiche pas Bismillah pour sourate 9 */}
         {selectedSourate !== 9 && (
@@ -240,11 +306,10 @@ export default function QuranScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 16 },
-  modalSelector: {
-    marginTop: 70,
-    marginBottom: 20,
-    width: "100%",
+  container: {
+    flex: 1,
+    padding: 16,
+    paddingTop: 60, // Ajout d'un padding en haut pour descendre le bouton
   },
   selectStyle: {
     backgroundColor: "#e7c86a",
@@ -263,42 +328,62 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginBottom: 18,
   },
-  initValueTextStyle: {
-    fontSize: 18,
-    color: "#fff",
-    fontFamily: "ScheherazadeNew",
-    textAlign: "left",
-  },
   selectTextStyle: {
     fontSize: 18,
     color: "#483C1C",
     fontFamily: "ScheherazadeNew",
     textAlign: "left",
   },
-  optionStyle: {
-    backgroundColor: "#fffbe6",
+  modalContainer: {
+    flex: 1,
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    justifyContent: "flex-end",
+  },
+  modalContent: {
+    backgroundColor: "#fff",
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    paddingBottom: 20,
+  },
+  modalHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: 16,
     borderBottomWidth: 1,
-    borderColor: "#e7c86a",
-    padding: 12,
+    borderBottomColor: "#e7c86a",
+  },
+  modalTitle: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "#483C1C",
+  },
+  closeButton: {
+    padding: 8,
+  },
+  closeButtonText: {
+    fontSize: 20,
+    color: "#483C1C",
+  },
+  listContent: {
+    paddingBottom: 20,
+  },
+  optionStyle: {
+    padding: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: "#f0f0f0",
+  },
+  selectedOptionStyle: {
+    backgroundColor: "#fffbe6",
   },
   optionTextStyle: {
     fontSize: 18,
     color: "#444",
     fontFamily: "ScheherazadeNew",
-    textAlign: "left",
   },
-  cancelStyle: {
-    backgroundColor: "#e7c86a",
-    borderRadius: 12,
-    marginTop: 10,
-    borderColor: "#ba9c34",
-    borderWidth: 2,
-  },
-  cancelTextStyle: {
-    color: "#7c6720",
-    fontSize: 17,
+  selectedOptionTextStyle: {
+    color: "#483C1C",
     fontWeight: "bold",
-    fontFamily: "ScheherazadeNew",
   },
   ayahContainer: {
     marginVertical: 12,

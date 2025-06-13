@@ -103,10 +103,10 @@ android {
         keyPassword 'android'
     }
     release {
-        storeFile file(MYAPP_RELEASE_STORE_FILE)
-        storePassword MYAPP_RELEASE_STORE_PASSWORD
-        keyAlias MYAPP_RELEASE_KEY_ALIAS
-        keyPassword MYAPP_RELEASE_KEY_PASSWORD
+        storeFile file('my-release-key.jks')
+        storePassword 'android123'
+        keyAlias 'my-key-alias'
+        keyPassword 'android123'
     }
     }
     buildTypes {

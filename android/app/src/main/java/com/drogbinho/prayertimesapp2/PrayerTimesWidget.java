@@ -21,9 +21,12 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Locale;
 import java.util.Map;
+import java.util.TimeZone;
 
 public class PrayerTimesWidget extends AppWidgetProvider {
 
@@ -241,50 +244,82 @@ public class PrayerTimesWidget extends AppWidgetProvider {
      * Recalcule automatiquement les horaires si on a passé minuit
      */
     public static Map<String, String> getAllPrayerTimes(Context context) {
+        SharedPreferences prefs = context.getSharedPreferences("prayer_times_settings", Context.MODE_PRIVATE);
+        Map<String, String> prayerTimes = new HashMap<>();
+
         try {
-            SharedPreferences prefs = context.getSharedPreferences("prayer_times_settings", Context.MODE_PRIVATE);
+            // Vérifier si c'est un nouveau jour ou si la méthode de calcul a changé
+            String currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+            String lastDate = prefs.getString("widget_last_date", "");
+            String currentCalcMethod = prefs.getString("calc_method", "MuslimWorldLeague");
+            String lastCalcMethod = prefs.getString("widget_last_calc_method", "");
 
-            // 📅 Vérifier si on a changé de jour
-            Calendar now = Calendar.getInstance();
-            String currentDateKey = String.format(Locale.getDefault(), "%04d-%02d-%02d",
-                    now.get(Calendar.YEAR),
-                    now.get(Calendar.MONTH) + 1,
-                    now.get(Calendar.DAY_OF_MONTH));
+            boolean isNewDay = !currentDate.equals(lastDate);
+            boolean isNewCalcMethod = !currentCalcMethod.equals(lastCalcMethod);
 
-            String lastWidgetDate = prefs.getString("widget_last_date", "");
-            boolean isNewDay = !currentDateKey.equals(lastWidgetDate);
+            if (isNewDay || isNewCalcMethod) {
+                Log.d(TAG, "🔄 Changement détecté - Date: " + isNewDay + ", Méthode: " + isNewCalcMethod);
+                Log.d(TAG, "📅 Date actuelle: " + currentDate + ", dernière date: " + lastDate);
+                Log.d(TAG, "📊 Méthode actuelle: " + currentCalcMethod + ", dernière méthode: " + lastCalcMethod);
 
-            Log.d(TAG, "📅 Date actuelle: " + currentDateKey + ", dernière: " + lastWidgetDate + ", nouveau jour: "
-                    + isNewDay);
+                // Mettre à jour les préférences
+                prefs.edit()
+                        .putString("widget_last_date", currentDate)
+                        .putString("widget_last_calc_method", currentCalcMethod)
+                        .apply();
 
-            // Si c'est un nouveau jour, enregistrer la nouvelle date et recalculer les
-            // horaires
-            if (isNewDay) {
-                Log.d(TAG, "🔄 Nouveau jour détecté - mise à jour de la date du widget et recalcul des horaires");
-                prefs.edit().putString("widget_last_date", currentDateKey).apply();
+                // Récupérer les coordonnées depuis prayer_times_settings
+                double lat = prefs.getFloat("latitude", 0.0f);
+                double lon = prefs.getFloat("longitude", 0.0f);
 
-                // 📅 NOUVEAU: Recalculer les horaires pour le nouveau jour
-                try {
-                    recalculatePrayerTimesForToday(context, prefs);
-                } catch (Exception e) {
-                    Log.e(TAG, "❌ Erreur recalcul horaires pour nouveau jour: " + e.getMessage());
+                if (lat != 0.0 && lon != 0.0) {
+                    Log.d(TAG, "📍 Recalcul avec coordonnées: " + lat + ", " + lon);
+                    Map<String, String> calculatedTimes = calculatePrayerTimesForCoordinates(lat, lon, prefs, context);
+
+                    if (!calculatedTimes.isEmpty()) {
+                        Log.d(TAG, "✅ Recalcul réussi avec " + calculatedTimes.size() + " horaires");
+
+                        // Sauvegarder dans today_prayer_times
+                        try {
+                            JSONObject jsonToSave = new JSONObject();
+                            for (Map.Entry<String, String> entry : calculatedTimes.entrySet()) {
+                                jsonToSave.put(entry.getKey(), entry.getValue());
+                            }
+                            prefs.edit().putString("today_prayer_times", jsonToSave.toString()).apply();
+                            Log.d(TAG, "💾 Horaires sauvegardés dans today_prayer_times");
+                        } catch (Exception e) {
+                            Log.w(TAG, "⚠️ Erreur sauvegarde: " + e.getMessage());
+                        }
+
+                        return calculatedTimes;
+                    }
                 }
             }
 
-            // 🆕 AMÉLIORATION: Essayer plusieurs sources de données pour la compatibilité
-            Map<String, String> prayerTimes = tryGetPrayerTimesFromMultipleSources(context, prefs);
-
-            if (!prayerTimes.isEmpty()) {
-                Log.d(TAG, "📋 Horaires récupérés: " + prayerTimes.size() + " prières");
-                return prayerTimes;
+            // Récupérer les horaires depuis today_prayer_times
+            String todayPrayerTimesJson = prefs.getString("today_prayer_times", null);
+            if (todayPrayerTimesJson != null) {
+                try {
+                    JSONObject json = new JSONObject(todayPrayerTimesJson);
+                    Iterator<String> keys = json.keys();
+                    while (keys.hasNext()) {
+                        String key = keys.next();
+                        prayerTimes.put(key, json.getString(key));
+                    }
+                    Log.d(TAG, "✅ Horaires récupérés depuis today_prayer_times");
+                    return prayerTimes;
+                } catch (Exception e) {
+                    Log.e(TAG, "❌ Erreur parsing JSON: " + e.getMessage());
+                }
             }
 
-            Log.w(TAG, "⚠️ Aucun horaire trouvé dans toutes les sources");
-            return new HashMap<>();
+            Log.w(TAG, "⚠️ Aucun horaire trouvé, retour map vide");
+            return prayerTimes;
 
         } catch (Exception e) {
-            Log.e(TAG, "❌ Erreur lecture horaires: " + e.getMessage());
-            return new HashMap<>();
+            Log.e(TAG, "❌ Erreur getAllPrayerTimes: " + e.getMessage());
+            e.printStackTrace();
+            return prayerTimes;
         }
     }
 
@@ -337,7 +372,8 @@ public class PrayerTimesWidget extends AppWidgetProvider {
 
                 if (lat != 0.0 && lon != 0.0) {
                     Log.d(TAG, "📍 Coordonnées trouvées: " + lat + ", " + lon);
-                    Map<String, String> calculatedTimes = calculatePrayerTimesForCoordinates(lat, lon, adhanPrefs);
+                    Map<String, String> calculatedTimes = calculatePrayerTimesForCoordinates(lat, lon, adhanPrefs,
+                            context);
 
                     if (!calculatedTimes.isEmpty()) {
                         Log.d(TAG, "✅ Source 2 réussie - calcul direct avec " + calculatedTimes.size() + " horaires");
@@ -374,7 +410,8 @@ public class PrayerTimesWidget extends AppWidgetProvider {
                     Log.d(TAG, "📍 Coordonnées manuelles trouvées: " + lat + ", " + lon);
 
                     SharedPreferences adhanPrefs = context.getSharedPreferences("adhan_prefs", Context.MODE_PRIVATE);
-                    Map<String, String> calculatedTimes = calculatePrayerTimesForCoordinates(lat, lon, adhanPrefs);
+                    Map<String, String> calculatedTimes = calculatePrayerTimesForCoordinates(lat, lon, adhanPrefs,
+                            context);
 
                     if (!calculatedTimes.isEmpty()) {
                         Log.d(TAG, "✅ Source 3 réussie - calcul manuel avec " + calculatedTimes.size() + " horaires");
@@ -510,22 +547,38 @@ public class PrayerTimesWidget extends AppWidgetProvider {
      * 🆕 NOUVEAU: Calcule les horaires de prière pour des coordonnées données
      */
     private static Map<String, String> calculatePrayerTimesForCoordinates(double latitude, double longitude,
-            SharedPreferences adhanPrefs) {
+            SharedPreferences adhanPrefs, Context context) {
         Map<String, String> prayerTimes = new HashMap<>();
 
         try {
             Log.d(TAG, "🔄 Calcul horaires pour coordonnées: " + latitude + ", " + longitude);
 
-            // Obtenir la méthode de calcul
-            String calcMethod = adhanPrefs.getString("calc_method", "MuslimWorldLeague");
+            // Obtenir la méthode de calcul depuis prayer_times_settings
+            SharedPreferences prefs = context.getSharedPreferences("prayer_times_settings", Context.MODE_PRIVATE);
+            String calcMethod = prefs.getString("calc_method", "MuslimWorldLeague");
+            Log.d(TAG, "📊 Méthode de calcul: " + calcMethod);
 
             com.batoulapps.adhan.Coordinates coordinates = new com.batoulapps.adhan.Coordinates(latitude, longitude);
             Calendar today = Calendar.getInstance();
+            DateComponents todayComponents = DateComponents.from(today.getTime());
 
             com.batoulapps.adhan.CalculationParameters params;
             switch (calcMethod) {
                 case "MuslimWorldLeague":
                     params = com.batoulapps.adhan.CalculationMethod.MUSLIM_WORLD_LEAGUE.getParameters();
+                    break;
+                case "Egyptian":
+                    params = com.batoulapps.adhan.CalculationMethod.EGYPTIAN.getParameters();
+                    break;
+                case "Karachi":
+                    params = com.batoulapps.adhan.CalculationMethod.KARACHI.getParameters();
+                    break;
+                case "UmmAlQura":
+                    params = com.batoulapps.adhan.CalculationMethod.UMM_AL_QURA.getParameters();
+                    Log.d(TAG, "📊 Utilisation de la méthode UMM_AL_QURA");
+                    break;
+                case "NorthAmerica":
+                    params = com.batoulapps.adhan.CalculationMethod.NORTH_AMERICA.getParameters();
                     break;
                 case "Kuwait":
                     params = com.batoulapps.adhan.CalculationMethod.KUWAIT.getParameters();
@@ -537,33 +590,44 @@ public class PrayerTimesWidget extends AppWidgetProvider {
                     params = com.batoulapps.adhan.CalculationMethod.SINGAPORE.getParameters();
                     break;
                 case "Tehran":
-                    params = com.batoulapps.adhan.CalculationMethod.KARACHI.getParameters(); // Fallback pour Tehran
+                    // Utiliser MUSLIM_WORLD_LEAGUE comme fallback pour Tehran
+                    Log.w(TAG, "Méthode 'Tehran' sélectionnée, utilisation de MUSLIM_WORLD_LEAGUE comme fallback");
+                    params = com.batoulapps.adhan.CalculationMethod.MUSLIM_WORLD_LEAGUE.getParameters();
+                    break;
+                case "Turkey":
+                    // Utiliser MUSLIM_WORLD_LEAGUE comme fallback pour Turkey
+                    Log.w(TAG, "Méthode 'Turkey' sélectionnée, utilisation de MUSLIM_WORLD_LEAGUE comme fallback");
+                    params = com.batoulapps.adhan.CalculationMethod.MUSLIM_WORLD_LEAGUE.getParameters();
                     break;
                 default:
+                    Log.w(TAG,
+                            "Méthode non reconnue: " + calcMethod + ", utilisation de MUSLIM_WORLD_LEAGUE par défaut");
                     params = com.batoulapps.adhan.CalculationMethod.MUSLIM_WORLD_LEAGUE.getParameters();
+                    break;
             }
 
-            DateComponents todayComponents = DateComponents.from(today.getTime());
-            com.batoulapps.adhan.PrayerTimes adhanPrayerTimes = new com.batoulapps.adhan.PrayerTimes(coordinates,
-                    todayComponents, params);
+            com.batoulapps.adhan.PrayerTimes times = new com.batoulapps.adhan.PrayerTimes(coordinates, todayComponents,
+                    params);
 
-            // Formatter les horaires
+            // Formater les horaires
             SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
+            timeFormat.setTimeZone(TimeZone.getDefault());
 
-            prayerTimes.put("Fajr", timeFormat.format(adhanPrayerTimes.fajr));
-            prayerTimes.put("Sunrise", timeFormat.format(adhanPrayerTimes.sunrise));
-            prayerTimes.put("Dhuhr", timeFormat.format(adhanPrayerTimes.dhuhr));
-            prayerTimes.put("Asr", timeFormat.format(adhanPrayerTimes.asr));
-            prayerTimes.put("Maghrib", timeFormat.format(adhanPrayerTimes.maghrib));
-            prayerTimes.put("Isha", timeFormat.format(adhanPrayerTimes.isha));
+            prayerTimes.put("Fajr", timeFormat.format(times.fajr));
+            prayerTimes.put("Sunrise", timeFormat.format(times.sunrise));
+            prayerTimes.put("Dhuhr", timeFormat.format(times.dhuhr));
+            prayerTimes.put("Asr", timeFormat.format(times.asr));
+            prayerTimes.put("Maghrib", timeFormat.format(times.maghrib));
+            prayerTimes.put("Isha", timeFormat.format(times.isha));
 
-            Log.d(TAG, "✅ Calcul réussi - " + prayerTimes.size() + " horaires calculés");
+            Log.d(TAG, "✅ Horaires calculés avec succès");
+            return prayerTimes;
 
         } catch (Exception e) {
-            Log.e(TAG, "❌ Erreur calcul horaires: " + e.getMessage());
+            Log.e(TAG, "❌ Erreur lors du calcul des horaires: " + e.getMessage());
+            e.printStackTrace();
+            return prayerTimes;
         }
-
-        return prayerTimes;
     }
 
     /**
@@ -760,92 +824,69 @@ public class PrayerTimesWidget extends AppWidgetProvider {
      * ⚡ Recalcule les horaires de prière pour aujourd'hui quand le widget détecte
      * un nouveau jour
      */
-    private static void recalculatePrayerTimesForToday(Context context, SharedPreferences prefs) {
+    private static void recalculatePrayerTimesForToday(Context context) {
         try {
-            Log.d(TAG, "🔄 Début recalcul des horaires pour le widget");
-
-            // Lire les paramètres de localisation et de calcul
-            String locationMode = prefs.getString("location_mode", null);
-
-            // Lire la méthode de calcul depuis adhan_prefs
             SharedPreferences adhanPrefs = context.getSharedPreferences("adhan_prefs", Context.MODE_PRIVATE);
-            String calcMethod = adhanPrefs.getString("calc_method", "MuslimWorldLeague");
+            double latitude = adhanPrefs.getFloat("latitude", 0);
+            double longitude = adhanPrefs.getFloat("longitude", 0);
 
-            if (locationMode == null) {
-                Log.w(TAG, "⚠️ Mode de localisation non défini - abandon du recalcul");
+            if (latitude == 0 && longitude == 0) {
+                Log.e(TAG, "❌ Coordonnées non disponibles");
                 return;
             }
 
-            double latitude, longitude;
-
-            if ("manual".equals(locationMode)) {
-                latitude = prefs.getFloat("manual_latitude", 0.0f);
-                longitude = prefs.getFloat("manual_longitude", 0.0f);
-                Log.d(TAG, "📍 Utilisation localisation manuelle: " + latitude + ", " + longitude);
-            } else if ("auto".equals(locationMode)) {
-                latitude = prefs.getFloat("auto_latitude", 0.0f);
-                longitude = prefs.getFloat("auto_longitude", 0.0f);
-                Log.d(TAG, "📍 Utilisation localisation auto: " + latitude + ", " + longitude);
-            } else {
-                Log.w(TAG, "⚠️ Mode de localisation invalide: " + locationMode);
-                return;
-            }
-
-            // Calculer les horaires pour aujourd'hui
-            com.batoulapps.adhan.Coordinates coordinates = new com.batoulapps.adhan.Coordinates(latitude, longitude);
-
-            Calendar today = Calendar.getInstance();
-
-            com.batoulapps.adhan.CalculationParameters params;
-            switch (calcMethod) {
-                case "MuslimWorldLeague":
-                    params = com.batoulapps.adhan.CalculationMethod.MUSLIM_WORLD_LEAGUE.getParameters();
-                    break;
-                case "Kuwait":
-                    params = com.batoulapps.adhan.CalculationMethod.KUWAIT.getParameters();
-                    break;
-                case "Qatar":
-                    params = com.batoulapps.adhan.CalculationMethod.QATAR.getParameters();
-                    break;
-                case "Singapore":
-                    params = com.batoulapps.adhan.CalculationMethod.SINGAPORE.getParameters();
-                    break;
-                case "Tehran":
-                    params = com.batoulapps.adhan.CalculationMethod.KARACHI.getParameters(); // Fallback pour Tehran
-                    break;
-                default:
-                    params = com.batoulapps.adhan.CalculationMethod.MUSLIM_WORLD_LEAGUE.getParameters();
-            }
-
-            DateComponents todayComponents = DateComponents.from(today.getTime());
-            com.batoulapps.adhan.PrayerTimes prayerTimes = new com.batoulapps.adhan.PrayerTimes(coordinates,
-                    todayComponents, params);
+            Map<String, String> prayerTimes = calculatePrayerTimesForCoordinates(latitude, longitude, adhanPrefs,
+                    context);
 
             // Formatter les horaires
-            java.text.SimpleDateFormat timeFormat = new java.text.SimpleDateFormat("HH:mm",
-                    java.util.Locale.getDefault());
+            SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
 
-            JSONObject newPrayerTimes = new JSONObject();
-            newPrayerTimes.put("Fajr", timeFormat.format(prayerTimes.fajr));
-            newPrayerTimes.put("Sunrise", timeFormat.format(prayerTimes.sunrise));
-            newPrayerTimes.put("Dhuhr", timeFormat.format(prayerTimes.dhuhr));
-            newPrayerTimes.put("Asr", timeFormat.format(prayerTimes.asr));
-            newPrayerTimes.put("Maghrib", timeFormat.format(prayerTimes.maghrib));
-            newPrayerTimes.put("Isha", timeFormat.format(prayerTimes.isha));
+            // Sauvegarder les horaires dans adhan_prefs
+            SharedPreferences.Editor editor = adhanPrefs.edit();
+            editor.putString("Fajr", timeFormat.format(prayerTimes.get("Fajr")));
+            editor.putString("Sunrise", timeFormat.format(prayerTimes.get("Sunrise")));
+            editor.putString("Dhuhr", timeFormat.format(prayerTimes.get("Dhuhr")));
+            editor.putString("Asr", timeFormat.format(prayerTimes.get("Asr")));
+            editor.putString("Maghrib", timeFormat.format(prayerTimes.get("Maghrib")));
+            editor.putString("Isha", timeFormat.format(prayerTimes.get("Isha")));
+            editor.apply();
 
-            // Sauvegarder les nouveaux horaires
-            prefs.edit().putString("today_prayer_times", newPrayerTimes.toString()).apply();
+            Log.d(TAG, "✅ Horaires recalculés et sauvegardés");
+            Log.d(TAG, "📅 Fajr: " + timeFormat.format(prayerTimes.get("Fajr")));
+            Log.d(TAG, "📅 Sunrise: " + timeFormat.format(prayerTimes.get("Sunrise")));
+            Log.d(TAG, "📅 Dhuhr: " + timeFormat.format(prayerTimes.get("Dhuhr")));
+            Log.d(TAG, "📅 Asr: " + timeFormat.format(prayerTimes.get("Asr")));
+            Log.d(TAG, "📅 Maghrib: " + timeFormat.format(prayerTimes.get("Maghrib")));
+            Log.d(TAG, "📅 Isha: " + timeFormat.format(prayerTimes.get("Isha")));
 
-            Log.d(TAG, "✅ Horaires recalculés et sauvegardés pour le nouveau jour:");
-            Log.d(TAG, "   Fajr: " + timeFormat.format(prayerTimes.fajr));
-            Log.d(TAG, "   Sunrise: " + timeFormat.format(prayerTimes.sunrise));
-            Log.d(TAG, "   Dhuhr: " + timeFormat.format(prayerTimes.dhuhr));
-            Log.d(TAG, "   Asr: " + timeFormat.format(prayerTimes.asr));
-            Log.d(TAG, "   Maghrib: " + timeFormat.format(prayerTimes.maghrib));
-            Log.d(TAG, "   Isha: " + timeFormat.format(prayerTimes.isha));
+            // Forcer la mise à jour immédiate du widget
+            forceUpdateWidgets(context);
 
         } catch (Exception e) {
             Log.e(TAG, "❌ Erreur lors du recalcul des horaires: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Force la mise à jour de tous les widgets
+     */
+    public static void forceUpdateWidgets(Context context) {
+        try {
+            AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+            ComponentName widgetComponent = new ComponentName(context, PrayerTimesWidget.class);
+            int[] appWidgetIds = appWidgetManager.getAppWidgetIds(widgetComponent);
+
+            if (appWidgetIds.length > 0) {
+                // Envoyer un broadcast pour forcer la mise à jour
+                Intent updateIntent = new Intent(context, PrayerTimesWidget.class);
+                updateIntent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+                updateIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, appWidgetIds);
+                context.sendBroadcast(updateIntent);
+                Log.d(TAG, "✅ Mise à jour forcée des widgets: " + appWidgetIds.length + " widgets");
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "❌ Erreur mise à jour forcée widgets: " + e.getMessage());
         }
     }
 }

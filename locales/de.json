@@ -275,5 +275,24 @@
   "time_until_sunrise": "Zeit bis zum Sonnenaufgang",
   "sunrise_to_sunset": "Zeit zwischen Sonnenaufgang und Sonnenuntergang",
   "sunset_to_fajr": "Zeit zwischen Sonnenuntergang und Fajr",
-  "night_length": "Nachtlänge"
+  "night_length": "Nachtlänge",
+  "time_until_sunset": "Zeit bis zum Sonnenuntergang",
+
+  "dashboard_welcome": "Assalamu Alaykum",
+  "next_prayer_label": "Nächstes Gebet",
+  "countdown_in": "In",
+  "dua_du_jour": "Dua des Tages",
+  "verset_du_jour": "Vers des Tages",
+  "nom_allah_du_jour": "Name Allahs des Tages",
+  "mes_stats": "Meine Statistiken",
+  "mes_stats_today": "Heute",
+  "voir_plus_dua": "Mehr Duas sehen",
+  "lire_coran": "Quran lesen",
+  "decouvrir_99_noms": "99 Namen entdecken",
+  "actions_rapides": "Schnelle Aktionen",
+  "dashboard_dua_fallback": "Entdecke tägliche Anrufungen",
+  "dashboard_verset_fallback": "Erkunde den Heiligen Quran",
+  "dashboard_names_fallback": "Asmaul Husna",
+  "hadith_du_jour": "Hadith des Tages",
+  "voir_plus": "Mehr anzeigen"
 }

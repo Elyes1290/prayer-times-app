@@ -386,7 +386,7 @@ export default function PrayerScreen() {
       />
 
       <Animated.ScrollView
-        contentContainerStyle={styles.container}
+        contentContainerStyle={[styles.container, { paddingBottom: 180 }]}
         style={{ opacity: fadeAnim, transform: [{ translateY: slideAnim }] }}
         showsVerticalScrollIndicator={false}
       >

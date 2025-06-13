@@ -96,7 +96,11 @@ export default function AboutScreen() {
       style={styles.background}
       resizeMode="cover"
     >
-      <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+      <ScrollView
+        style={styles.container}
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ paddingBottom: 150 }}
+      >
         <View style={styles.header}>
           <Image
             source={require("../assets/images/icon.png")}

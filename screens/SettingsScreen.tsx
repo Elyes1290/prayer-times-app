@@ -623,7 +623,7 @@ function SettingsSections({
       renderSectionHeader={({ section: { title } }) => (
         <Text style={styles.sectionHeader}>{title}</Text>
       )}
-      contentContainerStyle={styles.listContentContainer}
+      contentContainerStyle={{ paddingBottom: 150 }}
       stickySectionHeadersEnabled={false}
     />
   );

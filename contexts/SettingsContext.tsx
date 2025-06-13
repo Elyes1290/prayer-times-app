@@ -497,6 +497,8 @@ export const SettingsProvider = ({
               AdhanModule.cancelAllAdhanAlarms();
               AdhanModule.cancelAllPrayerReminders();
               AdhanModule.cancelAllDhikrNotifications();
+              // Forcer la mise à jour du widget
+              AdhanModule.forceUpdateWidgets();
             }
 
             await saveAndReprogramAll();

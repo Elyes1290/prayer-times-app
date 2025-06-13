@@ -288,7 +288,7 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(34,40,58,0.85)",
     borderRadius: 16,
     marginHorizontal: 28,
-    marginBottom: 55,
+    marginBottom: 150,
     elevation: 3,
     textShadowColor: "rgba(0,0,0,0.28)",
     textShadowOffset: { width: 0, height: 1 },
