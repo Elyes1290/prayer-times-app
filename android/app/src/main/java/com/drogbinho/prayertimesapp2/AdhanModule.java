@@ -840,4 +840,13 @@ public class AdhanModule extends ReactContextBaseJavaModule {
         }
     }
 
+    @ReactMethod
+    public void forceUpdateWidgets() {
+        try {
+            PrayerTimesWidget.forceUpdateWidgets(getReactApplicationContext());
+        } catch (Exception e) {
+            Log.e("AdhanModule", "❌ Erreur mise à jour forcée widgets: " + e.getMessage());
+        }
+    }
+
 }

@@ -1,5 +1,5 @@
 import * as Font from "expo-font";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import {
   ActivityIndicator,
   FlatList,
@@ -8,8 +8,11 @@ import {
   StyleSheet,
   Text,
   View,
+  TouchableOpacity,
+  Modal,
+  SafeAreaView,
+  Dimensions,
 } from "react-native";
-import ModalSelector from "react-native-modal-selector";
 import { useTranslation } from "react-i18next";
 
 type Book = { id: number; bookName: string; bookSlug: string };
@@ -34,6 +37,10 @@ const PAGE_SIZE = 10;
 
 export default function HadithScreen() {
   const { t } = useTranslation();
+  const [modalVisible, setModalVisible] = useState(false);
+  const [modalType, setModalType] = useState<"book" | "chapter">("book");
+  const windowHeight = Dimensions.get("window").height;
+  const flatListRef = useRef<FlatList>(null);
 
   const [books, setBooks] = useState<Book[]>([]);
   const [selectedBook, setSelectedBook] = useState<string>("");
@@ -133,6 +140,53 @@ export default function HadithScreen() {
     }`.trim();
   }
 
+  const renderBookItem = ({ item }: { item: Book }) => (
+    <TouchableOpacity
+      style={[
+        styles.optionStyle,
+        selectedBook === item.bookSlug && styles.selectedOptionStyle,
+      ]}
+      onPress={() => {
+        setSelectedBook(item.bookSlug);
+        setModalVisible(false);
+      }}
+    >
+      <Text
+        style={[
+          styles.optionTextStyle,
+          selectedBook === item.bookSlug && styles.selectedOptionTextStyle,
+        ]}
+      >
+        {item.bookName}
+      </Text>
+    </TouchableOpacity>
+  );
+
+  const renderChapterItem = ({ item }: { item: Chapter }) => (
+    <TouchableOpacity
+      style={[
+        styles.optionStyle,
+        selectedChapter === item.chapterNumber && styles.selectedOptionStyle,
+      ]}
+      onPress={() => {
+        setSelectedChapter(item.chapterNumber);
+        setModalVisible(false);
+      }}
+    >
+      <Text
+        style={[
+          styles.optionTextStyle,
+          selectedChapter === item.chapterNumber &&
+            styles.selectedOptionTextStyle,
+        ]}
+      >
+        {`${item.chapterNumber}. ${item.chapterEnglish || ""} ${
+          item.chapterArabic || ""
+        }`.trim()}
+      </Text>
+    </TouchableOpacity>
+  );
+
   if (!fontsLoaded) return null;
   if (loadingBooks)
     return <ActivityIndicator size="large" style={{ marginTop: 40 }} />;
@@ -144,26 +198,15 @@ export default function HadithScreen() {
     >
       <View style={styles.container}>
         {/* Sélecteur livre */}
-        <ModalSelector
-          data={books.map((book) => ({
-            key: book.bookSlug,
-            label: book.bookName,
-          }))}
-          onChange={(option) => {
-            setSelectedBook(option.key);
-            setError(null);
+        <TouchableOpacity
+          style={styles.selectStyle}
+          onPress={() => {
+            setModalType("book");
+            setModalVisible(true);
           }}
-          initValue={getSelectedBookLabel()}
-          style={styles.modalSelector}
-          selectStyle={styles.selectStyle}
-          selectTextStyle={styles.selectTextStyle}
-          initValueTextStyle={styles.selectTextStyle}
-          optionStyle={styles.optionStyle}
-          optionTextStyle={styles.optionTextStyle}
-          cancelStyle={styles.cancelStyle}
-          cancelTextStyle={styles.cancelTextStyle}
-          backdropPressToClose={true}
-        />
+        >
+          <Text style={styles.selectTextStyle}>{getSelectedBookLabel()}</Text>
+        </TouchableOpacity>
 
         {unavailableBooks.includes(selectedBook) && (
           <Text style={styles.unavailableMsg}>{t("book_unavailable")}</Text>
@@ -175,36 +218,85 @@ export default function HadithScreen() {
             {loadingChapters ? (
               <ActivityIndicator />
             ) : (
-              <ModalSelector
-                data={chapters.map((chapter) => ({
-                  key: chapter.chapterNumber,
-                  label: `${chapter.chapterNumber}. ${
-                    chapter.chapterEnglish || ""
-                  } ${chapter.chapterArabic || ""}`.trim(),
-                }))}
-                onChange={(option) => {
-                  setSelectedChapter(option.key);
-                  setCurrentPage(1);
-                  setError(null);
+              <TouchableOpacity
+                style={styles.selectStyle}
+                onPress={() => {
+                  setModalType("chapter");
+                  setModalVisible(true);
                 }}
-                initValue={getSelectedChapterLabel()}
-                style={styles.modalSelector}
-                selectStyle={styles.selectStyle}
-                selectTextStyle={styles.selectTextStyle}
-                initValueTextStyle={styles.selectTextStyle}
-                optionStyle={styles.optionStyle}
-                optionTextStyle={styles.optionTextStyle}
-                cancelStyle={styles.cancelStyle}
-                cancelTextStyle={styles.cancelTextStyle}
-                backdropPressToClose={true}
-              />
+              >
+                <Text style={styles.selectTextStyle}>
+                  {getSelectedChapterLabel()}
+                </Text>
+              </TouchableOpacity>
             )}
           </>
         )}
 
-        {/* Liste hadiths - n'afficher qu'après sélection d'un chapitre */}
-        {selectedChapter ? (
-          loadingHadiths ? (
+        {/* Modal pour la sélection */}
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => setModalVisible(false)}
+        >
+          <SafeAreaView style={styles.modalContainer}>
+            <View
+              style={[styles.modalContent, { maxHeight: windowHeight * 0.8 }]}
+            >
+              <View style={styles.modalHeader}>
+                <Text style={styles.modalTitle}>
+                  {modalType === "book"
+                    ? t("select_book")
+                    : t("select_chapter")}
+                </Text>
+                <TouchableOpacity
+                  style={styles.closeButton}
+                  onPress={() => setModalVisible(false)}
+                >
+                  <Text style={styles.closeButtonText}>✕</Text>
+                </TouchableOpacity>
+              </View>
+              {modalType === "book" ? (
+                <FlatList
+                  ref={flatListRef}
+                  data={books}
+                  renderItem={renderBookItem}
+                  keyExtractor={(item) => item.bookSlug}
+                  initialNumToRender={20}
+                  maxToRenderPerBatch={20}
+                  windowSize={10}
+                  getItemLayout={(data, index) => ({
+                    length: 50,
+                    offset: 50 * index,
+                    index,
+                  })}
+                />
+              ) : (
+                <FlatList
+                  ref={flatListRef}
+                  data={chapters}
+                  renderItem={renderChapterItem}
+                  keyExtractor={(item) => item.chapterNumber}
+                  initialNumToRender={20}
+                  maxToRenderPerBatch={20}
+                  windowSize={10}
+                  getItemLayout={(data, index) => ({
+                    length: 50,
+                    offset: 50 * index,
+                    index,
+                  })}
+                />
+              )}
+            </View>
+          </SafeAreaView>
+        </Modal>
+
+        {/* Liste hadiths */}
+        {selectedBook &&
+          selectedChapter &&
+          !unavailableBooks.includes(selectedBook) &&
+          (loadingHadiths ? (
             <ActivityIndicator size="large" style={{ marginTop: 20 }} />
           ) : hadiths.length === 0 ? (
             <Text style={{ marginTop: 10 }}>{t("no_hadith_found")}</Text>
@@ -249,21 +341,56 @@ export default function HadithScreen() {
                 );
               }}
             />
-          )
-        ) : null}
-
-        {error && <Text style={{ color: "red", marginTop: 10 }}>{error}</Text>}
+          ))}
       </View>
     </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { marginTop: 20, flex: 1, padding: 34 },
-  modalSelector: {
-    marginTop: 30,
-    marginBottom: 20,
-    width: "100%",
+  container: {
+    flex: 1,
+    padding: 16,
+    paddingTop: 60,
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+  },
+  modalContent: {
+    backgroundColor: "#fffbe6",
+    borderRadius: 20,
+    width: "90%",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  modalHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: 15,
+    borderBottomWidth: 1,
+    borderBottomColor: "#e7c86a",
+  },
+  modalTitle: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "#523f13",
+  },
+  closeButton: {
+    padding: 5,
+  },
+  closeButtonText: {
+    fontSize: 24,
+    color: "#523f13",
   },
   selectStyle: {
     backgroundColor: "#e7c86a",
@@ -288,18 +415,14 @@ const styles = StyleSheet.create({
     fontFamily: "ScheherazadeNew",
     textAlign: "left",
   },
-  initValueTextStyle: {
-    fontSize: 18,
-    color: "#fff",
-    fontFamily: "ScheherazadeNew",
-    textAlign: "left",
-  },
-
   optionStyle: {
     backgroundColor: "#fffbe6",
     borderBottomWidth: 1,
     borderColor: "#e7c86a",
     padding: 12,
+  },
+  selectedOptionStyle: {
+    backgroundColor: "#e7c86a",
   },
   optionTextStyle: {
     fontSize: 18,
@@ -307,19 +430,8 @@ const styles = StyleSheet.create({
     fontFamily: "ScheherazadeNew",
     textAlign: "left",
   },
-  cancelStyle: {
-    backgroundColor: "#e7c86a",
-    borderRadius: 12,
-    marginTop: 10,
-    borderColor: "#ba9c34",
-    borderWidth: 2,
-  },
-  cancelTextStyle: {
-    color: "#7c6720",
-    fontSize: 17,
-    fontWeight: "bold",
-    fontFamily: "ScheherazadeNew",
-    textAlign: "center",
+  selectedOptionTextStyle: {
+    color: "#fff",
   },
   ayahContainer: {
     marginVertical: 12,
