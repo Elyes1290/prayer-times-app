@@ -34,11 +34,17 @@ interface Nom {
 
 const { width } = Dimensions.get("window");
 
-function removeAccents(str: string) {
+function normalizeText(str: string) {
   return str
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/[\u064B-\u0652]/g, "");
+    .normalize("NFD") // Décompose les caractères accentués
+    .replace(/[\u0300-\u036f]/g, "") // Supprime les diacritiques latins
+    .replace(/[\u064B-\u0652]/g, "") // Supprime les diacritiques arabes (tashkeel)
+    .replace(/[\u0653-\u065F]/g, "") // Supprime autres diacritiques arabes
+    .replace(/[\u0670]/g, "") // Supprime alif khanjariyah
+    .replace(/[\u06D6-\u06ED]/g, "") // Supprime les marques de récitation
+    .replace(/[^\w\s\u0600-\u06FF\u0750-\u077F]/gi, "") // Garde seulement lettres, espaces et caractères arabes de base
+    .toLowerCase()
+    .trim();
 }
 
 const AsmaulHusnaScreen = () => {
@@ -67,12 +73,12 @@ const AsmaulHusnaScreen = () => {
       citation: tAsma(`name_${num}.citation`),
     };
   }).filter((item) => {
-    const searchLower = removeAccents(searchQuery.toLowerCase());
+    const normalizedSearch = normalizeText(searchQuery);
     return (
-      removeAccents(item.arabic.toLowerCase()).includes(searchLower) ||
-      removeAccents(item.translit.toLowerCase()).includes(searchLower) ||
-      removeAccents(item.french.toLowerCase()).includes(searchLower) ||
-      removeAccents(item.meaning.toLowerCase()).includes(searchLower)
+      normalizeText(item.arabic).includes(normalizedSearch) ||
+      normalizeText(item.translit).includes(normalizedSearch) ||
+      normalizeText(item.french).includes(normalizedSearch) ||
+      normalizeText(item.meaning).includes(normalizedSearch)
     );
   });
 

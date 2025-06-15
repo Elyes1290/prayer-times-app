@@ -166,6 +166,10 @@
   "dhikr": {
     "title": "ذکر و دعا",
     "search_placeholder": "جستجوی ذکر یا دعا...",
+    "quran_search_placeholder": "جستجو در سوره...",
+    "hadith_search_placeholder": "جستجو در فصل...",
+    "no_hadith_found_or_connection_error": "هیچ حدیثی یافت نشد یا خطای اتصال.",
+    "no_search_results": "هیچ حدیثی برای این جستجو یافت نشد",
     "categories": {
       "morning": "ذکر صبحگاهی",
       "evening": "ذکر شامگاهی",

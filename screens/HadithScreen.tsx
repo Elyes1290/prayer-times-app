@@ -1,5 +1,5 @@
 import * as Font from "expo-font";
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useMemo } from "react";
 import {
   ActivityIndicator,
   FlatList,
@@ -12,6 +12,7 @@ import {
   Modal,
   SafeAreaView,
   Dimensions,
+  TextInput,
 } from "react-native";
 import { useTranslation } from "react-i18next";
 
@@ -53,6 +54,7 @@ export default function HadithScreen() {
   const [loadingChapters, setLoadingChapters] = useState(false);
   const [loadingHadiths, setLoadingHadiths] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [searchQuery, setSearchQuery] = useState("");
   const unavailableBooks = ["musnad-ahmad", "al-silsila-sahiha"];
 
   const [fontsLoaded] = Font.useFonts({
@@ -79,6 +81,7 @@ export default function HadithScreen() {
     setCurrentPage(1);
     setTotalPages(1);
     setError(null);
+    setSearchQuery(""); // Réinitialiser la recherche
 
     if (!selectedBook) return;
 
@@ -123,6 +126,20 @@ export default function HadithScreen() {
         setError(t("no_hadith_found_or_connection_error"));
       });
   }, [selectedChapter, selectedBook, currentPage]);
+
+  // Fonction pour rechercher directement dans l'API
+  // Fonction pour normaliser le texte (supprimer accents et caractères spéciaux)
+  const normalizeText = (text: string): string => {
+    if (!text) return "";
+    return text
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "") // Supprimer les diacritiques latins
+      .replace(/[ًٌٍَُِّْ]/g, "") // Supprimer les diacritiques arabes
+      .replace(/[^\w\s]/g, " ") // Remplacer caractères spéciaux par espaces
+      .replace(/\s+/g, " ") // Normaliser les espaces multiples
+      .trim();
+  };
 
   // Labels traduits
   function getSelectedBookLabel() {
@@ -187,6 +204,36 @@ export default function HadithScreen() {
     </TouchableOpacity>
   );
 
+  // Filtrer les hadiths du chapitre sélectionné selon la recherche
+  const filteredHadiths = useMemo(() => {
+    if (!searchQuery.trim()) {
+      return hadiths;
+    }
+
+    const query = searchQuery.trim();
+
+    // Vérifier si la recherche est un numéro pur (que des chiffres)
+    const isNumberSearch = /^\d+$/.test(query);
+
+    return hadiths.filter((hadith) => {
+      if (isNumberSearch) {
+        // Recherche par numéro exact uniquement
+        const hadithNumber = hadith.hadithNumber?.toString() || "";
+        return hadithNumber === query;
+      } else {
+        // Recherche textuelle dans le contenu arabe et anglais
+        const normalizedQuery = normalizeText(query);
+        const arabicText = normalizeText(hadith.hadithArabic || "");
+        const englishText = normalizeText(hadith.hadithEnglish || "");
+
+        return (
+          arabicText.includes(normalizedQuery) ||
+          englishText.includes(normalizedQuery)
+        );
+      }
+    });
+  }, [hadiths, searchQuery]);
+
   if (!fontsLoaded) return null;
   if (loadingBooks)
     return <ActivityIndicator size="large" style={{ marginTop: 40 }} />;
@@ -231,6 +278,34 @@ export default function HadithScreen() {
               </TouchableOpacity>
             )}
           </>
+        )}
+
+        {/* Barre de recherche */}
+        {selectedBook &&
+          !unavailableBooks.includes(selectedBook) &&
+          selectedChapter && (
+            <View style={styles.searchContainer}>
+              <TextInput
+                style={styles.searchInput}
+                placeholder={
+                  t("hadith_search_placeholder") ||
+                  "Rechercher par texte ou numéro de hadith..."
+                }
+                placeholderTextColor="#ba9c34"
+                value={searchQuery}
+                onChangeText={setSearchQuery}
+                clearButtonMode="while-editing"
+              />
+            </View>
+          )}
+
+        {/* Indicateur de recherche */}
+        {searchQuery.trim() && (
+          <Text style={styles.searchInfo}>
+            🔍 Résultats pour &quot;{searchQuery}&quot; (
+            {filteredHadiths.length} résultat
+            {filteredHadiths.length > 1 ? "s" : ""})
+          </Text>
         )}
 
         {/* Modal pour la sélection */}
@@ -294,18 +369,23 @@ export default function HadithScreen() {
 
         {/* Liste hadiths */}
         {selectedBook &&
-          selectedChapter &&
           !unavailableBooks.includes(selectedBook) &&
+          selectedChapter &&
           (loadingHadiths ? (
             <ActivityIndicator size="large" style={{ marginTop: 20 }} />
-          ) : hadiths.length === 0 ? (
-            <Text style={{ marginTop: 10 }}>{t("no_hadith_found")}</Text>
+          ) : filteredHadiths.length === 0 ? (
+            <Text style={{ marginTop: 10 }}>
+              {searchQuery.trim()
+                ? t("no_search_results")
+                : t("no_hadith_found")}
+            </Text>
           ) : (
             <FlatList
-              data={hadiths}
+              data={filteredHadiths}
               keyExtractor={(item) => item.id.toString()}
               renderItem={({ item }) => {
                 const isBigNumber = Number(item.hadithNumber) > 999;
+
                 return (
                   <View style={styles.ayahContainer}>
                     <View style={styles.arabicRow}>
@@ -501,5 +581,73 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginVertical: 14,
     fontSize: 16,
+  },
+  searchContainer: {
+    marginBottom: 16,
+  },
+  searchInputContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  searchInput: {
+    backgroundColor: "#fffbe6",
+    borderRadius: 22,
+    paddingVertical: 16,
+    paddingHorizontal: 24,
+    borderColor: "#ba9c34",
+    borderWidth: 2,
+    fontSize: 18,
+    color: "#523f13",
+    shadowColor: "#b59d42",
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    shadowOffset: { width: 0, height: 2 },
+    elevation: 3,
+    minHeight: 50,
+    textAlignVertical: "center",
+  },
+  searchButton: {
+    backgroundColor: "#ba9c34",
+    borderRadius: 22,
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+    shadowColor: "#b59d42",
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    shadowOffset: { width: 0, height: 2 },
+    elevation: 3,
+    minWidth: 50,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  searchButtonText: {
+    fontSize: 18,
+    color: "#fff",
+  },
+  searchLoader: {
+    position: "absolute",
+    right: 15,
+    top: "50%",
+    marginTop: -10,
+  },
+  searchInfo: {
+    fontSize: 14,
+    color: "#ba9c34",
+    textAlign: "center",
+    marginBottom: 10,
+    fontStyle: "italic",
+  },
+  chapterHeader: {
+    backgroundColor: "#e7c86a",
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    borderRadius: 8,
+    marginBottom: 10,
+  },
+  chapterName: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "#523f13",
+    textAlign: "center",
   },
 });

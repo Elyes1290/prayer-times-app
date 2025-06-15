@@ -276,7 +276,26 @@ export const SettingsProvider = ({
       } else {
         // NE PAS sauvegarder immédiatement côté Android pour éviter d'écraser
       }
-      if (calcMethodValue) setCalcMethod(calcMethodValue as CalcMethodKey);
+      if (calcMethodValue) {
+        console.log(
+          `[DEBUG] 📋 Chargement méthode de calcul: ${calcMethodValue}`
+        );
+        setCalcMethod(calcMethodValue as CalcMethodKey);
+
+        // CRITIQUE: Synchroniser immédiatement la méthode de calcul côté Android
+        if (Platform.OS === "android" && AdhanModule) {
+          console.log(
+            `[DEBUG] 🔄 Synchronisation initiale Android - méthode: ${calcMethodValue}`
+          );
+          AdhanModule.setCalculationMethod(calcMethodValue);
+          AdhanModule.saveNotificationSettings({
+            calcMethod: calcMethodValue,
+          });
+          console.log(
+            `[DEBUG] ✅ Synchronisation initiale terminée pour ${calcMethodValue}`
+          );
+        }
+      }
       if (soundEnabledValue !== null)
         setSoundEnabled(soundEnabledValue === "true");
       if (adhanSoundValue) setAdhanSound(adhanSoundValue as AdhanSoundKey);
@@ -484,8 +503,28 @@ export const SettingsProvider = ({
       }
     },
     setCalcMethod: (v) => {
+      console.log(
+        `[DEBUG] 🔧 Changement méthode de calcul: ${calcMethod} → ${v}`
+      );
       setCalcMethod(v);
       AsyncStorage.setItem("calcMethod", v);
+
+      // CRITIQUE: Sauvegarder immédiatement la méthode de calcul côté Android pour le widget
+      if (!isInitializing && Platform.OS === "android" && AdhanModule) {
+        console.log(`[DEBUG] 📱 Synchronisation Android - méthode: ${v}`);
+
+        // Sauvegarder dans adhan_prefs (pour AdhanService)
+        AdhanModule.setCalculationMethod(v);
+
+        // Sauvegarder dans prayer_times_settings (pour le widget)
+        AdhanModule.saveNotificationSettings({
+          calcMethod: v,
+        });
+
+        console.log(
+          `[DEBUG] ✅ Méthode ${v} sauvegardée dans adhan_prefs et prayer_times_settings`
+        );
+      }
 
       // IMPORTANT: Reprogrammer automatiquement les notifications pour utiliser les nouveaux horaires
       // car les alarmes Adhan sont programmées avec les anciens horaires de prière
@@ -494,14 +533,78 @@ export const SettingsProvider = ({
           try {
             // CRITIQUE: Annuler d'abord toutes les alarmes adhan existantes
             if (Platform.OS === "android" && AdhanModule) {
+              console.log(
+                `[DEBUG] 🔄 Annulation des alarmes et reprogrammation pour méthode: ${v}`
+              );
               AdhanModule.cancelAllAdhanAlarms();
               AdhanModule.cancelAllPrayerReminders();
               AdhanModule.cancelAllDhikrNotifications();
               // Forcer la mise à jour du widget
+              console.log(
+                `[DEBUG] 🔄 Forçage mise à jour widget pour méthode: ${v}`
+              );
               AdhanModule.forceUpdateWidgets();
             }
 
             await saveAndReprogramAll();
+
+            // CRITIQUE: Forcer la mise à jour immédiate des horaires du widget avec la nouvelle méthode
+            try {
+              const userLocation =
+                locationMode === "auto" && autoLocation
+                  ? { latitude: autoLocation.lat, longitude: autoLocation.lon }
+                  : manualLocation
+                  ? {
+                      latitude: manualLocation.lat,
+                      longitude: manualLocation.lon,
+                    }
+                  : null;
+
+              if (userLocation) {
+                console.log(
+                  `[DEBUG] 🔄 Recalcul immédiat horaires widget pour méthode: ${v}`
+                );
+                const {
+                  computePrayerTimesForDate,
+                } = require("../utils/prayerTimes");
+                const todayTimes = computePrayerTimesForDate(
+                  new Date(),
+                  userLocation,
+                  v
+                );
+
+                // Convertir en format widget
+                const formattedTimes: Record<string, string> = {};
+                Object.entries(todayTimes).forEach(([prayer, date]) => {
+                  const hours = (date as Date)
+                    .getHours()
+                    .toString()
+                    .padStart(2, "0");
+                  const minutes = (date as Date)
+                    .getMinutes()
+                    .toString()
+                    .padStart(2, "0");
+                  formattedTimes[prayer] = `${hours}:${minutes}`;
+                });
+
+                console.log(
+                  `[DEBUG] 💾 Sauvegarde immédiate horaires widget:`,
+                  formattedTimes
+                );
+                await AdhanModule.saveTodayPrayerTimes(formattedTimes);
+
+                // CRITIQUE: Attendre un peu pour que la sauvegarde soit bien écrite
+                await new Promise((resolve) => setTimeout(resolve, 200));
+
+                // Forcer la mise à jour du widget après la sauvegarde SANS vider le cache
+                console.log(
+                  `[DEBUG] 🔄 Forçage final mise à jour widget avec délai (sans vider cache)`
+                );
+                AdhanModule.forceUpdateWidgetsWithoutClearingCache();
+              }
+            } catch (recalcError) {
+              console.error(`[DEBUG] ❌ Erreur recalcul widget:`, recalcError);
+            }
           } catch (error) {
             console.error(
               "[DEBUG] ❌ Erreur reprogrammation après changement méthode:",

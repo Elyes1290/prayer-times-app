@@ -201,6 +201,10 @@
     },
     "no_dhikr": "No dhikr found for this category."
   },
+  "quran_search_placeholder": "Search in the surah...",
+  "hadith_search_placeholder": "Search in chapter...",
+  "no_hadith_found_or_connection_error": "No hadith found or connection error.",
+  "no_search_results": "No hadith found for this search",
   "dhikr_dua": "Dhikr and Dua",
   "dhikr_category_morning": "Morning Dhikr",
   "dhikr_category_evening": "Evening Dhikr",

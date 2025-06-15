@@ -200,6 +200,10 @@
     },
     "no_dhikr": "لا توجد أذكار لهذه الفئة."
   },
+  "quran_search_placeholder": "البحث في السورة...",
+  "hadith_search_placeholder": "البحث في الفصل...",
+  "no_hadith_found_or_connection_error": "لم يتم العثور على أحاديث أو خطأ في الاتصال.",
+  "no_search_results": "لم يتم العثور على أحاديث لهذا البحث",
   "dhikr_dua": "الأذكار والأدعية",
   "dhikr_category_morning": "أَذْكَارُ الصَّبَاحِ",
   "dhikr_category_evening": "أَذْكَارُ المَسَاءِ",

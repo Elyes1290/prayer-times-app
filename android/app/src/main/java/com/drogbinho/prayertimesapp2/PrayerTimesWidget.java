@@ -257,10 +257,16 @@ public class PrayerTimesWidget extends AppWidgetProvider {
             boolean isNewDay = !currentDate.equals(lastDate);
             boolean isNewCalcMethod = !currentCalcMethod.equals(lastCalcMethod);
 
+            Log.d(TAG, "🔍 [WIDGET DEBUG] Vérification changements:");
+            Log.d(TAG, "📅 [WIDGET DEBUG] Date actuelle: " + currentDate + ", dernière: " + lastDate
+                    + " (nouveau jour: " + isNewDay + ")");
+            Log.d(TAG, "📊 [WIDGET DEBUG] Méthode actuelle: " + currentCalcMethod + ", dernière: " + lastCalcMethod
+                    + " (nouvelle méthode: " + isNewCalcMethod + ")");
+
             if (isNewDay || isNewCalcMethod) {
-                Log.d(TAG, "🔄 Changement détecté - Date: " + isNewDay + ", Méthode: " + isNewCalcMethod);
-                Log.d(TAG, "📅 Date actuelle: " + currentDate + ", dernière date: " + lastDate);
-                Log.d(TAG, "📊 Méthode actuelle: " + currentCalcMethod + ", dernière méthode: " + lastCalcMethod);
+                Log.d(TAG, "🔄 [WIDGET DEBUG] CHANGEMENT DÉTECTÉ - Recalcul nécessaire");
+                Log.d(TAG, "📅 [WIDGET DEBUG] Nouveau jour: " + isNewDay);
+                Log.d(TAG, "📊 [WIDGET DEBUG] Nouvelle méthode: " + isNewCalcMethod);
 
                 // Mettre à jour les préférences
                 prefs.edit()
@@ -307,6 +313,10 @@ public class PrayerTimesWidget extends AppWidgetProvider {
                         prayerTimes.put(key, json.getString(key));
                     }
                     Log.d(TAG, "✅ Horaires récupérés depuis today_prayer_times");
+                    Log.d(TAG, "🔍 [WIDGET DEBUG] Contenu exact du cache: " + todayPrayerTimesJson);
+                    for (Map.Entry<String, String> entry : prayerTimes.entrySet()) {
+                        Log.d(TAG, "🕐 [WIDGET DEBUG] " + entry.getKey() + ": " + entry.getValue());
+                    }
                     return prayerTimes;
                 } catch (Exception e) {
                     Log.e(TAG, "❌ Erreur parsing JSON: " + e.getMessage());
@@ -556,7 +566,20 @@ public class PrayerTimesWidget extends AppWidgetProvider {
             // Obtenir la méthode de calcul depuis prayer_times_settings
             SharedPreferences prefs = context.getSharedPreferences("prayer_times_settings", Context.MODE_PRIVATE);
             String calcMethod = prefs.getString("calc_method", "MuslimWorldLeague");
-            Log.d(TAG, "📊 Méthode de calcul: " + calcMethod);
+
+            // Logs détaillés pour diagnostiquer le problème
+            Log.d(TAG, "🔍 [WIDGET DEBUG] Lecture méthode de calcul depuis prayer_times_settings");
+            Log.d(TAG, "📊 [WIDGET DEBUG] Méthode trouvée: " + calcMethod);
+
+            // Vérifier aussi dans adhan_prefs pour comparaison
+            String adhanCalcMethod = adhanPrefs.getString("calc_method", "MuslimWorldLeague");
+            Log.d(TAG, "📊 [WIDGET DEBUG] Méthode dans adhan_prefs: " + adhanCalcMethod);
+
+            if (!calcMethod.equals(adhanCalcMethod)) {
+                Log.w(TAG, "⚠️ [WIDGET DEBUG] DÉSYNCHRONISATION DÉTECTÉE!");
+                Log.w(TAG, "   prayer_times_settings: " + calcMethod);
+                Log.w(TAG, "   adhan_prefs: " + adhanCalcMethod);
+            }
 
             com.batoulapps.adhan.Coordinates coordinates = new com.batoulapps.adhan.Coordinates(latitude, longitude);
             Calendar today = Calendar.getInstance();
@@ -620,7 +643,13 @@ public class PrayerTimesWidget extends AppWidgetProvider {
             prayerTimes.put("Maghrib", timeFormat.format(times.maghrib));
             prayerTimes.put("Isha", timeFormat.format(times.isha));
 
-            Log.d(TAG, "✅ Horaires calculés avec succès");
+            Log.d(TAG, "✅ [WIDGET DEBUG] Horaires calculés avec succès pour méthode: " + calcMethod);
+            Log.d(TAG, "🕌 [WIDGET DEBUG] Fajr: " + timeFormat.format(times.fajr));
+            Log.d(TAG, "🌅 [WIDGET DEBUG] Sunrise: " + timeFormat.format(times.sunrise));
+            Log.d(TAG, "☀️ [WIDGET DEBUG] Dhuhr: " + timeFormat.format(times.dhuhr));
+            Log.d(TAG, "🌤️ [WIDGET DEBUG] Asr: " + timeFormat.format(times.asr));
+            Log.d(TAG, "🌅 [WIDGET DEBUG] Maghrib: " + timeFormat.format(times.maghrib));
+            Log.d(TAG, "🌙 [WIDGET DEBUG] Isha: " + timeFormat.format(times.isha));
             return prayerTimes;
 
         } catch (Exception e) {

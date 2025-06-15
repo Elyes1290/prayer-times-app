@@ -167,6 +167,10 @@
   "dhikr": {
     "title": "যিকির ও দোয়া",
     "search_placeholder": "যিকির বা দোয়া খুঁজুন...",
+    "quran_search_placeholder": "সূরায় খুঁজুন...",
+    "hadith_search_placeholder": "অধ্যায়ে খুঁজুন...",
+    "no_hadith_found_or_connection_error": "কোনো হাদিস পাওয়া যায়নি বা সংযোগ ত্রুটি।",
+    "no_search_results": "এই অনুসন্ধানের জন্য কোনো হাদিস পাওয়া যায়নি",
     "categories": {
       "morning": "সকালবেলার জিকির",
       "evening": "সন্ধ্যাবেলার জিকির",

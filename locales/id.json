@@ -90,6 +90,10 @@
     "title": "Dzikir & Doa",
     "search_placeholder": "Cari dzikir atau doa..."
   },
+  "quran_search_placeholder": "Cari dalam surat...",
+  "hadith_search_placeholder": "Cari dalam bab...",
+  "no_hadith_found_or_connection_error": "Tidak ada hadis ditemukan atau kesalahan koneksi.",
+  "no_search_results": "Tidak ada hadis ditemukan untuk pencarian ini",
   "fajr": "Subuh",
   "sunrise": "Matahari Terbit",
   "dhuhr": "Zuhur",

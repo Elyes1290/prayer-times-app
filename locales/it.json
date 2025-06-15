@@ -165,6 +165,10 @@
   "dhikr": {
     "title": "Dhikr & Duʿa",
     "search_placeholder": "Cerca dhikr o dua...",
+    "quran_search_placeholder": "Cerca nella sura...",
+    "hadith_search_placeholder": "Cerca nel capitolo...",
+    "no_hadith_found_or_connection_error": "Nessun hadith trovato o errore di connessione.",
+    "no_search_results": "Nessun hadith trovato per questa ricerca",
     "categories": {
       "morning": "Dhikr del mattino",
       "evening": "Dhikr della sera",

@@ -173,6 +173,10 @@
     },
     "no_dhikr": "Für diese Kategorie wurden keine Dhikr gefunden."
   },
+  "quran_search_placeholder": "In der Sure suchen...",
+  "hadith_search_placeholder": "Im Kapitel suchen...",
+  "no_hadith_found_or_connection_error": "Keine Hadithe gefunden oder Verbindungsfehler.",
+  "no_search_results": "Keine Hadithe für diese Suche gefunden",
   "dhikr_dua": "Dhikr und Dua",
   "prayer_reminder_title": "⏰ Gebetserinnerung",
   "prayer_reminder_body": "Das {{prayer}}-Gebet ist in {{minutes}} Minuten.",

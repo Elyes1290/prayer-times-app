@@ -165,6 +165,10 @@
   "dhikr": {
     "title": "Зикр и дуа",
     "search_placeholder": "Поиск зикра или дуа...",
+    "quran_search_placeholder": "Поиск в суре...",
+    "hadith_search_placeholder": "Поиск в главе...",
+    "no_hadith_found_or_connection_error": "Хадисы не найдены или ошибка соединения.",
+    "no_search_results": "Хадисы не найдены для этого поиска",
     "categories": {
       "morning": "Утренний зикр",
       "evening": "Вечерний зикр",

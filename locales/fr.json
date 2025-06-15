@@ -184,6 +184,7 @@
     "Maghrib": "Maghreb",
     "Isha": "Icha"
   },
+  "asmaulhusna_search_placeholder": "Rechercher par nom, signification ou translittération...",
   "dhikr": {
     "title": "Adhkar & Douas",
     "search_placeholder": "Rechercher dhikr ou doua...",
@@ -196,6 +197,10 @@
     },
     "no_dhikr": "Aucun dhikr trouvé pour cette catégorie."
   },
+  "quran_search_placeholder": "Rechercher dans la sourate...",
+  "hadith_search_placeholder": "Rechercher dans le chapitre...",
+  "no_hadith_found_or_connection_error": "Aucun hadith trouvé ou erreur de connexion.",
+  "no_search_results": "Aucun hadith trouvé pour cette recherche",
   "dhikr_dua": "Dhikr et Doua",
   "dhikr_category_morning": "Dhikr du Matin",
   "dhikr_category_evening": "Dhikr du Soir",

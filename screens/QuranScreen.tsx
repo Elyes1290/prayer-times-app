@@ -1,5 +1,5 @@
 import * as Font from "expo-font";
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useMemo } from "react";
 import {
   ActivityIndicator,
   FlatList,
@@ -12,6 +12,7 @@ import {
   Modal,
   SafeAreaView,
   Dimensions,
+  TextInput,
 } from "react-native";
 import { useTranslation } from "react-i18next";
 
@@ -44,6 +45,7 @@ export default function QuranScreen() {
   const [phoneticArr, setPhoneticArr] = useState<any[]>([]);
   const [translationArr, setTranslationArr] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const [fontsLoaded] = Font.useFonts({
     ScheherazadeNew: require("../assets/fonts/ScheherazadeNew-Regular.ttf"),
@@ -166,6 +168,47 @@ export default function QuranScreen() {
       .trim();
   }
 
+  // Fonction pour normaliser le texte (supprimer accents et caractères spéciaux)
+  function normalizeText(text: string) {
+    return text
+      .normalize("NFD") // Décompose les caractères accentués
+      .replace(/[\u0300-\u036f]/g, "") // Supprime les diacritiques latins
+      .replace(/[\u064B-\u0652]/g, "") // Supprime les diacritiques arabes (tashkeel)
+      .replace(/[\u0653-\u065F]/g, "") // Supprime autres diacritiques arabes
+      .replace(/[\u0670]/g, "") // Supprime alif khanjariyah
+      .replace(/[\u06D6-\u06ED]/g, "") // Supprime les marques de récitation
+      .replace(/[^\w\s\u0600-\u06FF\u0750-\u077F]/gi, "") // Garde seulement lettres, espaces et caractères arabes de base
+      .toLowerCase()
+      .trim();
+  }
+
+  // Filtrer les versets selon la recherche dans la sourate sélectionnée
+  const filteredVerses = useMemo(() => {
+    if (!searchQuery.trim()) {
+      return arabicVerses;
+    }
+
+    // Rechercher uniquement dans la sourate sélectionnée avec normalisation
+    const normalizedSearch = normalizeText(searchQuery);
+    return arabicVerses.filter((verse, index) => {
+      const phonetic = phoneticArr[index]?.text || "";
+      const translation = translationArr[index]?.text || "";
+
+      // Normaliser tous les textes pour la comparaison
+      const normalizedArabic = normalizeText(verse.text_uthmani || "");
+      const normalizedPhonetic = normalizeText(phonetic);
+      const normalizedTranslation = normalizeText(stripHtml(translation));
+      const normalizedVerseKey = normalizeText(verse.verse_key);
+
+      return (
+        normalizedArabic.includes(normalizedSearch) ||
+        normalizedPhonetic.includes(normalizedSearch) ||
+        normalizedTranslation.includes(normalizedSearch) ||
+        normalizedVerseKey.includes(normalizedSearch)
+      );
+    });
+  }, [searchQuery, arabicVerses, phoneticArr, translationArr]);
+
   if (loading)
     return <ActivityIndicator size="large" style={{ marginTop: 40 }} />;
   if (!fontsLoaded) return null;
@@ -263,42 +306,63 @@ export default function QuranScreen() {
           </SafeAreaView>
         </Modal>
 
+        {/* Barre de recherche */}
+        <View style={styles.searchContainer}>
+          <TextInput
+            style={styles.searchInput}
+            placeholder={
+              t("quran_search_placeholder") || "Rechercher dans la sourate..."
+            }
+            placeholderTextColor="#ba9c34"
+            value={searchQuery}
+            onChangeText={setSearchQuery}
+            clearButtonMode="while-editing"
+          />
+        </View>
+
         {/* N'affiche pas Bismillah pour sourate 9 */}
         {selectedSourate !== 9 && (
           <Text style={styles.bismillah}>{t("bismillah")}</Text>
         )}
 
         <FlatList
-          data={arabicVerses}
+          data={filteredVerses}
           keyExtractor={(item) => item.id.toString()}
-          renderItem={({ item, index }) => (
-            <View style={styles.ayahContainer}>
-              <View style={styles.arabicRow}>
-                <Text style={styles.arabic}>{item.text_uthmani}</Text>
-                <View style={styles.verseCircle}>
-                  <Text style={styles.verseNumber}>
-                    {item.verse_key.split(":")[1]}
-                  </Text>
+          renderItem={({ item, index }) => {
+            // Affichage normal d'une sourate
+            const originalIndex = arabicVerses.findIndex(
+              (v) => v.id === item.id
+            );
+            const phoneticText = phoneticArr[originalIndex]?.text || "";
+            const translationText = translationArr[originalIndex]?.text || "";
+
+            return (
+              <View style={styles.ayahContainer}>
+                <View style={styles.arabicRow}>
+                  <Text style={styles.arabic}>{item.text_uthmani}</Text>
+                  <View style={styles.verseCircle}>
+                    <Text style={styles.verseNumber}>
+                      {item.verse_key.split(":")[1]}
+                    </Text>
+                  </View>
                 </View>
+
+                <Text style={styles.phonetic}>{phoneticText}</Text>
+
+                {lang !== "ar" && (
+                  <Text style={styles.traduction}>
+                    {stripHtml(translationText)}
+                  </Text>
+                )}
+
+                <Image
+                  source={require("../assets/images/ayah_separator.png")}
+                  style={styles.ayahSeparator}
+                  resizeMode="contain"
+                />
               </View>
-
-              <Text style={styles.phonetic}>
-                {phoneticArr[index]?.text || ""}
-              </Text>
-
-              {lang !== "ar" && (
-                <Text style={styles.traduction}>
-                  {stripHtml(translationArr[index]?.text || "")}
-                </Text>
-              )}
-
-              <Image
-                source={require("../assets/images/ayah_separator.png")}
-                style={styles.ayahSeparator}
-                resizeMode="contain"
-              />
-            </View>
-          )}
+            );
+          }}
         />
       </View>
     </ImageBackground>
@@ -452,5 +516,54 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 15,
     fontFamily: "ScheherazadeNew",
+  },
+  searchInput: {
+    backgroundColor: "#fffbe6",
+    borderRadius: 22,
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    paddingRight: 50, // Espace pour le loader
+    borderColor: "#ba9c34",
+    borderWidth: 2,
+    fontSize: 16,
+    color: "#523f13",
+    shadowColor: "#b59d42",
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    shadowOffset: { width: 0, height: 2 },
+    elevation: 3,
+  },
+  sourateHeader: {
+    backgroundColor: "rgba(231, 200, 106, 0.2)",
+    borderRadius: 12,
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    marginBottom: 12,
+    borderLeftWidth: 4,
+    borderLeftColor: "#e7c86a",
+  },
+  sourateName: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "#7c6720",
+    textAlign: "center",
+    fontFamily: "ScheherazadeNew",
+  },
+  searchContainer: {
+    position: "relative",
+    marginBottom: 16,
+  },
+  searchLoader: {
+    position: "absolute",
+    right: 15,
+    top: "50%",
+    marginTop: -10,
+  },
+  searchInfo: {
+    fontSize: 14,
+    color: "#7c6720",
+    textAlign: "center",
+    marginBottom: 12,
+    fontStyle: "italic",
   },
 });

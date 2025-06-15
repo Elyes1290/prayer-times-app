@@ -165,6 +165,10 @@
   "dhikr": {
     "title": "Zikir ve Dualar",
     "search_placeholder": "Zikir veya dua ara...",
+    "quran_search_placeholder": "Surede ara...",
+    "hadith_search_placeholder": "Bölümde ara...",
+    "no_hadith_found_or_connection_error": "Hadis bulunamadı veya bağlantı hatası.",
+    "no_search_results": "Bu arama için hadis bulunamadı",
     "categories": {
       "morning": "Sabah zikri",
       "evening": "Akşam zikri",

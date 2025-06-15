@@ -471,6 +471,7 @@ public class AdhanModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void setCalculationMethod(String method) {
+        Log.d("AdhanModule", "[DEBUG] 💾 Méthode de calcul sauvegardée dans adhan_prefs: " + method);
         getReactApplicationContext()
                 .getSharedPreferences("adhan_prefs", Context.MODE_PRIVATE)
                 .edit().putString("calc_method", method).apply();
@@ -664,6 +665,14 @@ public class AdhanModule extends ReactContextBaseJavaModule {
             editor.putInt("reminder_offset", settings.getInt("reminderOffset"));
         }
 
+        // CRITIQUE: Sauvegarde de la méthode de calcul pour le widget
+        if (settings.hasKey("calcMethod")) {
+            String newCalcMethod = settings.getString("calcMethod");
+            editor.putString("calc_method", newCalcMethod);
+            Log.d("AdhanModule",
+                    "[DEBUG] 💾 Méthode de calcul sauvegardée dans prayer_times_settings: " + newCalcMethod);
+        }
+
         // Sauvegarde des délais de dhikrs
         if (settings.hasKey("delayAfterSalah")) { // Sera toujours 5 depuis le JS maintenant
             editor.putInt("delay_after_salah", settings.getInt("delayAfterSalah"));
@@ -725,6 +734,14 @@ public class AdhanModule extends ReactContextBaseJavaModule {
         SharedPreferences prefs = getReactApplicationContext()
                 .getSharedPreferences("prayer_times_settings", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
+
+        // CRITIQUE: Marquer que cette sauvegarde vient d'un changement de méthode de
+        // calcul
+        boolean isFromMethodChange = prefs.getBoolean("pending_method_change", false);
+        if (isFromMethodChange) {
+            Log.d("AdhanModule", "[DEBUG] 🎯 Sauvegarde PRIORITAIRE depuis changement méthode");
+            editor.putBoolean("pending_method_change", false);
+        }
 
         try {
             // JavaScript envoie maintenant directement des strings au format "HH:MM"
@@ -842,8 +859,33 @@ public class AdhanModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void forceUpdateWidgets() {
+        forceUpdateWidgetsInternal(true); // Par défaut, vider le cache
+    }
+
+    @ReactMethod
+    public void forceUpdateWidgetsWithoutClearingCache() {
+        forceUpdateWidgetsInternal(false); // Ne pas vider le cache
+    }
+
+    private void forceUpdateWidgetsInternal(boolean clearCache) {
         try {
-            PrayerTimesWidget.forceUpdateWidgets(getReactApplicationContext());
+            Context context = getReactApplicationContext();
+
+            if (clearCache) {
+                // CRITIQUE: Forcer le recalcul en vidant le cache des horaires
+                SharedPreferences prefs = context.getSharedPreferences("prayer_times_settings", Context.MODE_PRIVATE);
+                prefs.edit()
+                        .remove("today_prayer_times")
+                        .remove("widget_last_date")
+                        .remove("widget_last_calc_method")
+                        .apply();
+
+                Log.d("AdhanModule", "[DEBUG] 🗑️ Cache widget vidé pour forcer recalcul");
+            } else {
+                Log.d("AdhanModule", "[DEBUG] 🔄 Mise à jour widget sans vider le cache");
+            }
+
+            PrayerTimesWidget.forceUpdateWidgets(context);
         } catch (Exception e) {
             Log.e("AdhanModule", "❌ Erreur mise à jour forcée widgets: " + e.getMessage());
         }
