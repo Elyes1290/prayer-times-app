@@ -283,5 +283,15 @@
   "dashboard_verset_fallback": "Verken de Heilige Koran",
   "dashboard_names_fallback": "Asmaul Husna",
   "hadith_du_jour": "Hadith van de dag",
-  "voir_plus": "Meer bekijken"
+  "voir_plus": "Meer bekijken",
+  "tasbih": {
+    "title": "Tasbih",
+    "dhikr": {
+      "subhanallah": "Glorie zij Allah",
+      "alhamdulillah": "Alle lof zij Allah",
+      "allahouakbar": "Allah is de Grootste",
+      "la_ilaha_illallah": "Er is geen god dan Allah"
+    },
+    "reset": "Resetten"
+  }
 }

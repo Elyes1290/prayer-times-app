@@ -307,5 +307,16 @@
   "dashboard_verset_fallback": "Explore the Holy Quran",
   "dashboard_names_fallback": "Asmaul Husna",
   "hadith_du_jour": "Hadith of the Day",
-  "voir_plus": "See more"
+  "voir_plus": "See more",
+
+  "tasbih": {
+    "title": "Tasbih",
+    "reset": "Reset",
+    "dhikr": {
+      "subhanallah": "Glory be to Allah",
+      "alhamdulillah": "Praise be to Allah",
+      "allahouakbar": "Allah is the Greatest",
+      "la_ilaha_illallah": "There is no god but Allah"
+    }
+  }
 }

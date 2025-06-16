@@ -315,5 +315,15 @@
   "dashboard_verset_fallback": "استكشف القرآن الكريم",
   "dashboard_names_fallback": "أسماء الله الحسنى",
   "hadith_du_jour": "حديث اليوم",
-  "voir_plus": "المزيد"
+  "voir_plus": "المزيد",
+  "tasbih": {
+    "title": "المسبحة",
+    "reset": "إعادة",
+    "dhikr": {
+      "subhanallah": "سبحان الله",
+      "alhamdulillah": "الحمد لله",
+      "allahouakbar": "الله أكبر",
+      "la_ilaha_illallah": "لا إله إلا الله"
+    }
+  }
 }

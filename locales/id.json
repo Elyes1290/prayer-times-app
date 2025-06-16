@@ -194,5 +194,15 @@
   "actions_rapides": "Aksi Cepat",
   "dashboard_dua_fallback": "Temukan doa-doa harian",
   "dashboard_verset_fallback": "Jelajahi Al-Quran yang suci",
-  "dashboard_names_fallback": "Asmaul Husna"
+  "dashboard_names_fallback": "Asmaul Husna",
+  "tasbih": {
+    "title": "Tasbih",
+    "dhikr": {
+      "subhanallah": "Maha Suci Allah",
+      "alhamdulillah": "Segala puji bagi Allah",
+      "allahouakbar": "Allah Maha Besar",
+      "la_ilaha_illallah": "Tiada Tuhan selain Allah"
+    },
+    "reset": "Reset"
+  }
 }

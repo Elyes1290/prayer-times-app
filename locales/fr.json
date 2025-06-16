@@ -308,5 +308,16 @@
     "title": "Les 99 Noms d'Allah",
     "subtitle": "Découvrez les plus beaux noms d'Allah et leurs significations",
     "search_placeholder": "Rechercher un nom..."
+  },
+
+  "tasbih": {
+    "title": "Tasbih",
+    "reset": "Réinitialiser",
+    "dhikr": {
+      "subhanallah": "Gloire à Allah",
+      "alhamdulillah": "Louange à Allah",
+      "allahouakbar": "Allah est le Plus Grand",
+      "la_ilaha_illallah": "Il n'y a de divinité qu'Allah"
+    }
   }
 }

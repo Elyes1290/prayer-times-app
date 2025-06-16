@@ -309,5 +309,15 @@
   "dashboard_verset_fallback": "Explora el Santo Corán",
   "dashboard_names_fallback": "Asmaul Husna",
   "hadith_du_jour": "Hadiz del día",
-  "voir_plus": "Ver más"
+  "voir_plus": "Ver más",
+  "tasbih": {
+    "title": "Tasbih",
+    "dhikr": {
+      "subhanallah": "Gloria a Allah",
+      "alhamdulillah": "Alabado sea Allah",
+      "allahouakbar": "Allah es el Más Grande",
+      "la_ilaha_illallah": "No hay más dios que Allah"
+    },
+    "reset": "Reiniciar"
+  }
 }

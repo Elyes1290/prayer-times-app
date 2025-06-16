@@ -574,6 +574,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 16,
     textAlign: "center",
+    marginTop: 40,
   },
   nextPrayerCard: {
     backgroundColor: "rgba(0, 0, 0, 0.5)",

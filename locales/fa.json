@@ -283,5 +283,15 @@
   "dashboard_names_fallback": "اسماء الحسنی",
   "hadith_du_jour": "حدیث روز",
   "voir_plus": "بیشتر ببینید",
-  "time_until_sunset": "زمان تا غروب آفتاب"
+  "time_until_sunset": "زمان تا غروب آفتاب",
+  "tasbih": {
+    "title": "تسبیح",
+    "dhikr": {
+      "subhanallah": "سبحان الله",
+      "alhamdulillah": "الحمد لله",
+      "allahouakbar": "الله اکبر",
+      "la_ilaha_illallah": "لا اله الا الله"
+    },
+    "reset": "بازنشانی"
+  }
 }

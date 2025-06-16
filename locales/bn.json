@@ -307,5 +307,15 @@
   "dashboard_names_fallback": "আসমাউল হুসনা",
   "hadith_du_jour": "আজকের হাদিস",
   "voir_plus": "আরও দেখুন",
-  "time_until_sunset": "সূর্যাস্ত পর্যন্ত সময়"
+  "time_until_sunset": "সূর্যাস্ত পর্যন্ত সময়",
+  "tasbih": {
+    "title": "তাসবীহ",
+    "dhikr": {
+      "subhanallah": "সুবহানাল্লাহ",
+      "alhamdulillah": "আলহামদুলিল্লাহ",
+      "allahouakbar": "আল্লাহু আকবার",
+      "la_ilaha_illallah": "লা ইলাহা ইল্লাল্লাহ"
+    },
+    "reset": "রিসেট"
+  }
 }

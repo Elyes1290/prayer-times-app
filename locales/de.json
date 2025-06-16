@@ -298,5 +298,15 @@
   "dashboard_verset_fallback": "Erkunde den Heiligen Quran",
   "dashboard_names_fallback": "Asmaul Husna",
   "hadith_du_jour": "Hadith des Tages",
-  "voir_plus": "Mehr anzeigen"
+  "voir_plus": "Mehr anzeigen",
+  "tasbih": {
+    "title": "Tasbih",
+    "dhikr": {
+      "subhanallah": "Gepriesen sei Allah",
+      "alhamdulillah": "Alles Lob gebührt Allah",
+      "allahouakbar": "Allah ist der Größte",
+      "la_ilaha_illallah": "Es gibt keinen Gott außer Allah"
+    },
+    "reset": "Zurücksetzen"
+  }
 }

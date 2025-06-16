@@ -8,5 +8,15 @@
   "sunrise_to_sunset": "Masa antara matahari terbit dan terbenam",
   "sunset_to_fajr": "Masa antara matahari terbenam dan Fajr",
   "day_length": "Panjang hari",
-  "night_length": "Panjang malam"
+  "night_length": "Panjang malam",
+  "tasbih": {
+    "title": "Tasbih",
+    "dhikr": {
+      "subhanallah": "Maha Suci Allah",
+      "alhamdulillah": "Segala puji bagi Allah",
+      "allahouakbar": "Allah Maha Besar",
+      "la_ilaha_illallah": "Tiada Tuhan melainkan Allah"
+    },
+    "reset": "Tetapkan semula"
+  }
 }

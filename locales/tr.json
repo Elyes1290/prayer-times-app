@@ -304,5 +304,15 @@
   "dashboard_verset_fallback": "Kutsal Kuran'ı inceleyin",
   "dashboard_names_fallback": "Esmaül Hüsna",
   "hadith_du_jour": "Günün Hadisi",
-  "voir_plus": "Daha fazla"
+  "voir_plus": "Daha fazla",
+  "tasbih": {
+    "title": "Tesbih",
+    "dhikr": {
+      "subhanallah": "Allah'ı tesbih ederim",
+      "alhamdulillah": "Allah'a hamd olsun",
+      "allahouakbar": "Allah en büyüktür",
+      "la_ilaha_illallah": "Allah'tan başka ilah yoktur"
+    },
+    "reset": "Sıfırla"
+  }
 }

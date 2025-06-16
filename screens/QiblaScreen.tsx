@@ -225,6 +225,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 28,
     fontWeight: "bold",
+    marginTop: 40,
     marginBottom: 100,
     color: "#fffbe8", // Blanc cassé
     textShadowColor: "rgba(0,0,0,0.25)",

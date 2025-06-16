@@ -282,5 +282,15 @@
   "dashboard_verset_fallback": "Изучайте Священный Коран",
   "dashboard_names_fallback": "Асмауль Хусна",
   "hadith_du_jour": "Хадис дня",
-  "voir_plus": "Подробнее"
+  "voir_plus": "Подробнее",
+  "tasbih": {
+    "title": "Тасбих",
+    "dhikr": {
+      "subhanallah": "Слава Аллаху",
+      "alhamdulillah": "Хвала Аллаху",
+      "allahouakbar": "Аллах Велик",
+      "la_ilaha_illallah": "Нет божества, кроме Аллаха"
+    },
+    "reset": "Сбросить"
+  }
 }

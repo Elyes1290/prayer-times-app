@@ -27,7 +27,7 @@ export default function AboutScreen() {
     { icon: "star-crescent", key: "dhikr_automatic" },
     { icon: "format-list-numbered", key: "asmaul_husna" },
     { icon: "book-outline", key: "authentic_hadith" },
-    { icon: "calendar-islamic", key: "hijri_calendar" },
+    { icon: "calendar-heart", key: "hijri_calendar" },
     { icon: "bell-outline", key: "smart_notifications" },
   ];
 

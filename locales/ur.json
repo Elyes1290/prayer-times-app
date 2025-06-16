@@ -304,5 +304,15 @@
   "dashboard_names_fallback": "اسماء الحسنیٰ",
   "hadith_du_jour": "آج کا حدیث",
   "voir_plus": "مزید دیکھیں",
-  "time_until_sunset": "غروب آفتاب تک کا وقت"
+  "time_until_sunset": "غروب آفتاب تک کا وقت",
+  "tasbih": {
+    "title": "تسبیح",
+    "dhikr": {
+      "subhanallah": "سبحان اللہ",
+      "alhamdulillah": "الحمد للہ",
+      "allahouakbar": "اللہ اکبر",
+      "la_ilaha_illallah": "لا الہ الا اللہ"
+    },
+    "reset": "ری سیٹ"
+  }
 }
