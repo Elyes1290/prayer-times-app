@@ -2,14 +2,13 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import * as NavigationBar from "expo-navigation-bar";
 import { Tabs } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { Platform, View, StyleSheet, Animated } from "react-native";
 import { SettingsProvider } from "../contexts/SettingsContext";
 import "../locales/i18n";
 import { useTranslation } from "react-i18next";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { LinearGradient } from "expo-linear-gradient";
-import React from "react";
 
 type IconName =
   | "home"
