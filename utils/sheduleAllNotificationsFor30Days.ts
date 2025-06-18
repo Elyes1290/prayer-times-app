@@ -46,6 +46,10 @@ export async function scheduleNotificationsFor2Days({
 }: Params) {
   try {
     console.log("[DEBUG] 🚀 Début de la planification des notifications");
+    console.log(`[DEBUG] 📊 Méthode de calcul: ${calcMethod}`);
+    console.log(
+      `[DEBUG] 📍 Location: ${userLocation.latitude}, ${userLocation.longitude}`
+    );
 
     // Si les notifications sont désactivées globalement, on annule tout et on s'arrête là
     if (!settings.notificationsEnabled) {
@@ -58,8 +62,11 @@ export async function scheduleNotificationsFor2Days({
 
     // 1. Annule tout d'abord toutes les alarmes et notifications existantes
     console.log("[DEBUG] 🗑️ Annulation des alarmes existantes");
+    console.log("[DEBUG] 🚫 Appel cancelAllAdhanAlarms...");
     await NativeModules.AdhanModule.cancelAllAdhanAlarms?.();
+    console.log("[DEBUG] 🚫 Appel cancelAllPrayerReminders...");
     await NativeModules.AdhanModule.cancelAllPrayerReminders();
+    console.log("[DEBUG] 🚫 Appel cancelAllDhikrNotifications...");
     await NativeModules.AdhanModule.cancelAllDhikrNotifications?.();
 
     // IMPORTANT: Sauvegarder tous les paramètres AVANT de programmer les notifications
@@ -117,6 +124,13 @@ export async function scheduleNotificationsFor2Days({
         date,
         userLocation,
         calcMethod
+      );
+
+      console.log(
+        `[DEBUG] 📅 Horaires calculés pour ${date.toDateString()} avec ${calcMethod}:`
+      );
+      console.log(
+        `[DEBUG] ⏰ Fajr: ${prayerTimes.Fajr.toLocaleTimeString()}, Dhuhr: ${prayerTimes.Dhuhr.toLocaleTimeString()}, Asr: ${prayerTimes.Asr.toLocaleTimeString()}, Maghrib: ${prayerTimes.Maghrib.toLocaleTimeString()}, Isha: ${prayerTimes.Isha.toLocaleTimeString()}`
       );
 
       // 💾 SAUVEGARDE POUR LE WIDGET : Sauvegarder les horaires d'aujourd'hui pour le widget

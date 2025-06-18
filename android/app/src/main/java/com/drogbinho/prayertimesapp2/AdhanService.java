@@ -54,7 +54,10 @@ public class AdhanService extends Service {
     public void onCreate() {
         super.onCreate();
         createNotificationChannel();
-        Log.d(TAG, "AdhanService onCreate");
+        Log.e(TAG, "======================================");
+        Log.e(TAG, "🚀 ADHAN SERVICE CRÉÉ - DEBUG ON");
+        Log.e(TAG, "======================================");
+        System.out.println("ADHAN_DEBUG: AdhanService onCreate");
     }
 
     private void createNotificationChannel() {
@@ -79,7 +82,10 @@ public class AdhanService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Log.d(TAG, "AdhanService onStartCommand received");
+        Log.e(TAG, "**************************************");
+        Log.e(TAG, "🔥 ADHAN SERVICE - COMMANDE REÇUE");
+        Log.e(TAG, "**************************************");
+        System.out.println("ADHAN_DEBUG: onStartCommand reçu");
 
         if (intent == null) {
             Log.w(TAG, "onStartCommand: Intent est null. Arrêt du service.");
@@ -259,6 +265,9 @@ public class AdhanService extends Service {
     private void handleAdhanCompletion(String completedPrayerLabel) {
         stopAdhan(); // Assure que le mediaplayer est libéré
 
+        // Créer une notification persistante pour informer que l'Adhan s'est produit
+        createCompletedAdhanNotification(completedPrayerLabel);
+
         // Envoyer un intent ACTION_STOP à soi-même pour centraliser la logique d'arrêt
         // et la reprogrammation post-Isha.
         Intent selfStopIntent = new Intent(this, AdhanService.class);
@@ -266,6 +275,53 @@ public class AdhanService extends Service {
         selfStopIntent.putExtra("PRAYER_LABEL", completedPrayerLabel); // Crucial pour la logique de reprogrammation
                                                                        // après Isha
         startService(selfStopIntent);
+    }
+
+    private void createCompletedAdhanNotification(String prayerLabel) {
+        // Récupère la langue actuelle des SharedPreferences
+        SharedPreferences settings = getSharedPreferences("prayer_times_settings", MODE_PRIVATE);
+        String currentLanguage = settings.getString("current_language", "en");
+
+        // Titre et corps de la notification selon la langue
+        String notifTitle = getLocalizedText(this, "adhan_completed_title", currentLanguage, "Adhan terminé");
+        String notifBody = getLocalizedText(this, "adhan_completed_body", currentLanguage,
+                "L'appel à la prière pour " + getPrayerDisplayNameForLocale(prayerLabel, currentLanguage)
+                        + " s'est déroulé");
+
+        // Intent pour fermer cette notification spécifique
+        Intent dismissIntent = new Intent(this, AdhanDismissReceiver.class);
+        dismissIntent.setAction("DISMISS_COMPLETED_ADHAN");
+        dismissIntent.putExtra("PRAYER_LABEL", prayerLabel);
+        dismissIntent.putExtra("NOTIFICATION_ID", prayerLabel.hashCode() + 1000); // ID unique pour cette notification
+
+        PendingIntent dismissPendingIntent = PendingIntent.getBroadcast(
+                this,
+                prayerLabel.hashCode() + 1000, // requestCode unique
+                dismissIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+
+        // Créer la notification persistante
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, CHANNEL_ID)
+                .setContentTitle(notifTitle)
+                .setContentText(notifBody)
+                .setSmallIcon(R.drawable.ic_adhan_notification)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT) // Moins prioritaire que pendant la lecture
+                .setSound(null) // Pas de son pour cette notification
+                .setOngoing(false) // Peut être fermée par l'utilisateur
+                .setAutoCancel(true) // Se ferme quand l'utilisateur tape dessus
+                .addAction(android.R.drawable.ic_menu_close_clear_cancel,
+                        getLocalizedText(this, "dismiss", currentLanguage, "Fermer"), dismissPendingIntent);
+
+        NotificationManager notificationManager = getSystemService(NotificationManager.class);
+        if (notificationManager != null) {
+            // Utilise un ID unique pour chaque prière pour éviter les conflits
+            int notificationId = prayerLabel.hashCode() + 1000;
+            notificationManager.notify(notificationId, notificationBuilder.build());
+            Log.d(TAG, "Notification persistante créée pour Adhan terminé: " + prayerLabel + " (ID: " + notificationId
+                    + ")");
+        } else {
+            Log.e(TAG, "NotificationManager est null, impossible de créer la notification persistante.");
+        }
     }
 
     private void stopAdhan() {

@@ -204,5 +204,11 @@
       "la_ilaha_illallah": "Tiada Tuhan selain Allah"
     },
     "reset": "Reset"
-  }
+  },
+  "adhan_notification_title": "🕌 Adzan",
+  "adhan_notification_body": "Waktunya sholat {{prayer}}! Semoga Allah menerima sholat Anda.",
+  "adhan_completed_title": "✅ Adzan selesai",
+  "adhan_completed_body": "Panggilan sholat telah berlangsung",
+  "dismiss": "Tutup",
+  "preparing_adhan": "Mempersiapkan Adzan..."
 }

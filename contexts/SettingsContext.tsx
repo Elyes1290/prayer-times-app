@@ -504,41 +504,28 @@ export const SettingsProvider = ({
     },
     setCalcMethod: (v) => {
       console.log(
-        `[DEBUG] 🔧 Changement méthode de calcul: ${calcMethod} → ${v}`
+        `[DEBUG] 🔄 CHANGEMENT MÉTHODE DE CALCUL: ${calcMethod} → ${v}`
       );
+      if (Platform.OS === "android" && AdhanModule) {
+        console.log(`[DEBUG] 🔄 Sauvegarde méthode Android: ${v}`);
+        AdhanModule.setCalculationMethod(v);
+      }
       setCalcMethod(v);
       AsyncStorage.setItem("calcMethod", v);
-
-      // CRITIQUE: Sauvegarder immédiatement la méthode de calcul côté Android pour le widget
-      if (!isInitializing && Platform.OS === "android" && AdhanModule) {
-        console.log(`[DEBUG] 📱 Synchronisation Android - méthode: ${v}`);
-
-        // Sauvegarder dans adhan_prefs (pour AdhanService)
-        AdhanModule.setCalculationMethod(v);
-
-        // Sauvegarder dans prayer_times_settings (pour le widget)
-        AdhanModule.saveNotificationSettings({
-          calcMethod: v,
-        });
-
-        console.log(
-          `[DEBUG] ✅ Méthode ${v} sauvegardée dans adhan_prefs et prayer_times_settings`
-        );
-      }
 
       // IMPORTANT: Reprogrammer automatiquement les notifications pour utiliser les nouveaux horaires
       // car les alarmes Adhan sont programmées avec les anciens horaires de prière
       if (!isInitializing) {
         setTimeout(async () => {
           try {
-            // CRITIQUE: Annuler d'abord toutes les alarmes adhan existantes
+            console.log(
+              `[DEBUG] 🔄 DÉBUT REPROGRAMMATION après changement: ${calcMethod} → ${v}`
+            );
+            // CRITIQUE: Les alarmes ont déjà été annulées par setCalculationMethod ci-dessus
             if (Platform.OS === "android" && AdhanModule) {
               console.log(
-                `[DEBUG] 🔄 Annulation des alarmes et reprogrammation pour méthode: ${v}`
+                `[DEBUG] 🔄 Reprogrammation pour méthode: ${v} (alarmes déjà annulées)`
               );
-              AdhanModule.cancelAllAdhanAlarms();
-              AdhanModule.cancelAllPrayerReminders();
-              AdhanModule.cancelAllDhikrNotifications();
               // Forcer la mise à jour du widget
               console.log(
                 `[DEBUG] 🔄 Forçage mise à jour widget pour méthode: ${v}`

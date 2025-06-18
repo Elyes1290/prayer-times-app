@@ -193,6 +193,10 @@
   "selected_dua_delay": "منتخب دعا کی تاخیر",
   "adhan_notification_title": "🕌 اذان",
   "adhan_notification_body": "{{prayer}} کی نماز کا وقت ہو گیا ہے! اللہ آپ کی نماز قبول فرمائے۔",
+  "adhan_completed_title": "✅ اذان مکمل",
+  "adhan_completed_body": "نماز کا اعلان ہو گیا",
+  "dismiss": "بند کریں",
+  "preparing_adhan": "اذان تیار ہو رہا ہے...",
   "method_MuslimWorldLeague": "مسلم ورلڈ لیگ",
   "method_Egyptian": "مصری عمومی سروے اتھارٹی",
   "method_Karachi": "جامعہ علوم اسلامیہ، کراچی",

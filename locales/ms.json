@@ -18,5 +18,11 @@
       "la_ilaha_illallah": "Tiada Tuhan melainkan Allah"
     },
     "reset": "Tetapkan semula"
-  }
+  },
+  "adhan_notification_title": "🕌 Azan",
+  "adhan_notification_body": "Masa untuk solat {{prayer}}! Semoga Allah terima solat anda.",
+  "adhan_completed_title": "✅ Azan selesai",
+  "adhan_completed_body": "Panggilan solat telah berlangsung",
+  "dismiss": "Tutup",
+  "preparing_adhan": "Menyediakan Azan..."
 }

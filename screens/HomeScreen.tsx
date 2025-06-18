@@ -37,7 +37,6 @@ import { reverseGeocodeAsync } from "expo-location";
 import { useLocation } from "../hooks/useLocation";
 import { usePrayerTimes } from "../hooks/usePrayerTimes";
 import { scheduleNotificationsFor2Days } from "../utils/sheduleAllNotificationsFor30Days";
-import { useFocusEffect } from "@react-navigation/native";
 import { getQuranVersesWithTranslations } from "../utils/quranApi";
 import { getRandomHadith } from "../utils/hadithApi";
 
@@ -578,12 +577,6 @@ export default function HomeScreen() {
     settings.calcMethod,
     stableDhikrSettings,
   ]);
-
-  useFocusEffect(
-    useCallback(() => {
-      updateNotifications();
-    }, [updateNotifications])
-  );
 
   // Timer pour vérifier périodiquement si on doit reprogrammer (après Isha) et mettre à jour le widget
   useEffect(() => {
