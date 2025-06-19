@@ -90,6 +90,10 @@
     "title": "Dzikir & Doa",
     "search_placeholder": "Cari dzikir atau doa..."
   },
+  "quran_search_placeholder": "Cari dalam surat...",
+  "hadith_search_placeholder": "Cari dalam bab...",
+  "no_hadith_found_or_connection_error": "Tidak ada hadis ditemukan atau kesalahan koneksi.",
+  "no_search_results": "Tidak ada hadis ditemukan untuk pencarian ini",
   "fajr": "Subuh",
   "sunrise": "Matahari Terbit",
   "dhuhr": "Zuhur",
@@ -190,5 +194,21 @@
   "actions_rapides": "Aksi Cepat",
   "dashboard_dua_fallback": "Temukan doa-doa harian",
   "dashboard_verset_fallback": "Jelajahi Al-Quran yang suci",
-  "dashboard_names_fallback": "Asmaul Husna"
+  "dashboard_names_fallback": "Asmaul Husna",
+  "tasbih": {
+    "title": "Tasbih",
+    "dhikr": {
+      "subhanallah": "Maha Suci Allah",
+      "alhamdulillah": "Segala puji bagi Allah",
+      "allahouakbar": "Allah Maha Besar",
+      "la_ilaha_illallah": "Tiada Tuhan selain Allah"
+    },
+    "reset": "Reset"
+  },
+  "adhan_notification_title": "🕌 Adzan",
+  "adhan_notification_body": "Waktunya sholat {{prayer}}! Semoga Allah menerima sholat Anda.",
+  "adhan_completed_title": "✅ Adzan selesai",
+  "adhan_completed_body": "Panggilan sholat telah berlangsung",
+  "dismiss": "Tutup",
+  "preparing_adhan": "Mempersiapkan Adzan..."
 }

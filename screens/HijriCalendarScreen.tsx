@@ -25,6 +25,7 @@ function formatLocalDateString(date: Date) {
 export default function HijriCalendarScreen() {
   const { t } = useTranslation();
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [displayDate, setDisplayDate] = useState(new Date());
   const events = getIslamicEventsForYear(selectedDate.getFullYear());
   const insets = useSafeAreaInsets();
 
@@ -36,6 +37,7 @@ export default function HijriCalendarScreen() {
   const hijriDate = hijriFormatter.format(selectedDate);
 
   const selectedDateString = formatLocalDateString(selectedDate);
+  const displayDateString = formatLocalDateString(displayDate);
   const eventsToday = events.filter(
     (event) => formatLocalDateString(event.date) === selectedDateString
   );
@@ -66,17 +68,29 @@ export default function HijriCalendarScreen() {
 
         <DateNavigator
           date={selectedDate}
-          onPrev={() =>
-            setSelectedDate(
-              (d) => new Date(d.getFullYear(), d.getMonth(), d.getDate() - 1)
-            )
-          }
-          onNext={() =>
-            setSelectedDate(
-              (d) => new Date(d.getFullYear(), d.getMonth(), d.getDate() + 1)
-            )
-          }
-          onReset={() => setSelectedDate(new Date())}
+          onPrev={() => {
+            const newDate = new Date(
+              selectedDate.getFullYear(),
+              selectedDate.getMonth(),
+              selectedDate.getDate() - 1
+            );
+            setSelectedDate(newDate);
+            setDisplayDate(newDate);
+          }}
+          onNext={() => {
+            const newDate = new Date(
+              selectedDate.getFullYear(),
+              selectedDate.getMonth(),
+              selectedDate.getDate() + 1
+            );
+            setSelectedDate(newDate);
+            setDisplayDate(newDate);
+          }}
+          onReset={() => {
+            const today = new Date();
+            setSelectedDate(today);
+            setDisplayDate(today);
+          }}
         />
 
         <View style={styles.row}>
@@ -89,10 +103,12 @@ export default function HijriCalendarScreen() {
         </View>
 
         <Calendar
-          current={selectedDateString}
+          initialDate={displayDateString}
           onDayPress={(day) => {
             const [year, month, dayNum] = day.dateString.split("-").map(Number);
-            setSelectedDate(new Date(year, month - 1, dayNum));
+            const newDate = new Date(year, month - 1, dayNum);
+            setSelectedDate(newDate);
+            setDisplayDate(newDate);
           }}
           markedDates={{
             ...markedDates,
@@ -111,7 +127,7 @@ export default function HijriCalendarScreen() {
             selectedDayTextColor: "#fffbe8",
             selectedDayBackgroundColor: Colors.primary,
             textDisabledColor: "#bbb", // Jours grisés
-            dotColor: "#FFD700", // Points d’évènements
+            dotColor: "#FFD700", // Points d'évènements
             selectedDotColor: "#FFD700",
             arrowColor: "#FFD700", // Flèches navigation
             indicatorColor: "#FFD700",
@@ -157,6 +173,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
     marginBottom: 20,
+    marginTop: 40,
     color: "#fffbe8",
     textShadowColor: "rgba(0,0,0,0.25)",
     textShadowOffset: { width: 1, height: 1 },

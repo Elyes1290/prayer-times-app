@@ -165,6 +165,10 @@
   "dhikr": {
     "title": "Dhikr y Dúas",
     "search_placeholder": "Buscar dhikr o dua...",
+    "quran_search_placeholder": "Buscar en la sura...",
+    "hadith_search_placeholder": "Buscar en el capítulo...",
+    "no_hadith_found_or_connection_error": "No se encontraron hadices o error de conexión.",
+    "no_search_results": "No se encontraron hadices para esta búsqueda",
     "categories": {
       "morning": "Dhikr de la mañana",
       "evening": "Dhikr de la tarde",
@@ -189,6 +193,10 @@
   "selected_dua_delay": "Retraso de la Dua seleccionada",
   "adhan_notification_title": "🕌 Adhan",
   "adhan_notification_body": "Es hora de rezar {{prayer}}! Que Allah acepte tu oración.",
+  "adhan_completed_title": "✅ Adhan completado",
+  "adhan_completed_body": "La llamada a la oración ha tenido lugar",
+  "dismiss": "Cerrar",
+  "preparing_adhan": "Preparando Adhan...",
   "method_MuslimWorldLeague": "Liga Mundial Musulmana",
   "method_Egyptian": "Autoridad General Egipcia",
   "method_Karachi": "Universidad de Ciencias Islámicas, Karachi",
@@ -305,5 +313,15 @@
   "dashboard_verset_fallback": "Explora el Santo Corán",
   "dashboard_names_fallback": "Asmaul Husna",
   "hadith_du_jour": "Hadiz del día",
-  "voir_plus": "Ver más"
+  "voir_plus": "Ver más",
+  "tasbih": {
+    "title": "Tasbih",
+    "dhikr": {
+      "subhanallah": "Gloria a Allah",
+      "alhamdulillah": "Alabado sea Allah",
+      "allahouakbar": "Allah es el Más Grande",
+      "la_ilaha_illallah": "No hay más dios que Allah"
+    },
+    "reset": "Reiniciar"
+  }
 }

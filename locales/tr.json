@@ -165,6 +165,10 @@
   "dhikr": {
     "title": "Zikir ve Dualar",
     "search_placeholder": "Zikir veya dua ara...",
+    "quran_search_placeholder": "Surede ara...",
+    "hadith_search_placeholder": "Bölümde ara...",
+    "no_hadith_found_or_connection_error": "Hadis bulunamadı veya bağlantı hatası.",
+    "no_search_results": "Bu arama için hadis bulunamadı",
     "categories": {
       "morning": "Sabah zikri",
       "evening": "Akşam zikri",
@@ -189,6 +193,10 @@
   "selected_dua_delay": "Seçilen dua gecikmesi",
   "adhan_notification_title": "🕌 Ezan",
   "adhan_notification_body": "{{prayer}} namazı vakti geldi! Allah namazınızı kabul etsin.",
+  "adhan_completed_title": "✅ Ezan tamamlandı",
+  "adhan_completed_body": "Namaz çağrısı gerçekleşti",
+  "dismiss": "Kapat",
+  "preparing_adhan": "Ezan hazırlanıyor...",
   "method_MuslimWorldLeague": "Müslüman Dünya Ligi",
   "method_Egyptian": "Mısır Genel Harita Dairesi",
   "method_Karachi": "Karaçi İslam Bilimleri Üniversitesi",
@@ -300,5 +308,15 @@
   "dashboard_verset_fallback": "Kutsal Kuran'ı inceleyin",
   "dashboard_names_fallback": "Esmaül Hüsna",
   "hadith_du_jour": "Günün Hadisi",
-  "voir_plus": "Daha fazla"
+  "voir_plus": "Daha fazla",
+  "tasbih": {
+    "title": "Tesbih",
+    "dhikr": {
+      "subhanallah": "Allah'ı tesbih ederim",
+      "alhamdulillah": "Allah'a hamd olsun",
+      "allahouakbar": "Allah en büyüktür",
+      "la_ilaha_illallah": "Allah'tan başka ilah yoktur"
+    },
+    "reset": "Sıfırla"
+  }
 }

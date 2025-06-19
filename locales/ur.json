@@ -167,6 +167,10 @@
   "dhikr": {
     "title": "ذکر اور دعا",
     "search_placeholder": "ذکر یا دعا تلاش کریں...",
+    "quran_search_placeholder": "سورہ میں تلاش کریں...",
+    "hadith_search_placeholder": "باب میں تلاش کریں...",
+    "no_hadith_found_or_connection_error": "کوئی حدیث نہیں ملی یا کنکشن کی خرابی۔",
+    "no_search_results": "اس تلاش کے لیے کوئی حدیث نہیں ملی",
     "categories": {
       "morning": "صبح کا ذکر",
       "evening": "شام کا ذکر",
@@ -189,6 +193,10 @@
   "selected_dua_delay": "منتخب دعا کی تاخیر",
   "adhan_notification_title": "🕌 اذان",
   "adhan_notification_body": "{{prayer}} کی نماز کا وقت ہو گیا ہے! اللہ آپ کی نماز قبول فرمائے۔",
+  "adhan_completed_title": "✅ اذان مکمل",
+  "adhan_completed_body": "نماز کا اعلان ہو گیا",
+  "dismiss": "بند کریں",
+  "preparing_adhan": "اذان تیار ہو رہا ہے...",
   "method_MuslimWorldLeague": "مسلم ورلڈ لیگ",
   "method_Egyptian": "مصری عمومی سروے اتھارٹی",
   "method_Karachi": "جامعہ علوم اسلامیہ، کراچی",
@@ -300,5 +308,15 @@
   "dashboard_names_fallback": "اسماء الحسنیٰ",
   "hadith_du_jour": "آج کا حدیث",
   "voir_plus": "مزید دیکھیں",
-  "time_until_sunset": "غروب آفتاب تک کا وقت"
+  "time_until_sunset": "غروب آفتاب تک کا وقت",
+  "tasbih": {
+    "title": "تسبیح",
+    "dhikr": {
+      "subhanallah": "سبحان اللہ",
+      "alhamdulillah": "الحمد للہ",
+      "allahouakbar": "اللہ اکبر",
+      "la_ilaha_illallah": "لا الہ الا اللہ"
+    },
+    "reset": "ری سیٹ"
+  }
 }

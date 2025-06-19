@@ -37,7 +37,6 @@ import { reverseGeocodeAsync } from "expo-location";
 import { useLocation } from "../hooks/useLocation";
 import { usePrayerTimes } from "../hooks/usePrayerTimes";
 import { scheduleNotificationsFor2Days } from "../utils/sheduleAllNotificationsFor30Days";
-import { useFocusEffect } from "@react-navigation/native";
 import { getQuranVersesWithTranslations } from "../utils/quranApi";
 import { getRandomHadith } from "../utils/hadithApi";
 
@@ -319,9 +318,9 @@ export default function HomeScreen() {
       // Utiliser l'API utilitaire pour récupérer un verset aléatoire et sa traduction
       try {
         // Récupérer la liste des sourates
-        const lang = i18n.language;
+        const apiLang = i18n.language;
         const souratesRes = await fetch(
-          `https://api.quran.com/api/v4/chapters?language=${lang}`
+          `https://api.quran.com/api/v4/chapters?language=${apiLang}`
         );
         const souratesJson = await souratesRes.json();
         const sourates = souratesJson.chapters || [];
@@ -331,6 +330,7 @@ export default function HomeScreen() {
           const randomSourate =
             sourates[Math.floor(Math.random() * sourates.length)];
           // Récupérer tous les versets + traductions de cette sourate
+          // UTILISER la variable lang normalisée plutôt que i18n.language directement
           const versesWithTranslations = await getQuranVersesWithTranslations(
             randomSourate.id,
             lang
@@ -578,12 +578,6 @@ export default function HomeScreen() {
     settings.calcMethod,
     stableDhikrSettings,
   ]);
-
-  useFocusEffect(
-    useCallback(() => {
-      updateNotifications();
-    }, [updateNotifications])
-  );
 
   // Timer pour vérifier périodiquement si on doit reprogrammer (après Isha) et mettre à jour le widget
   useEffect(() => {

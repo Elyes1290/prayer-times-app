@@ -33,6 +33,18 @@ export function computePrayerTimesForDate(
     case "MuslimWorldLeague":
       params = CalculationMethod.MuslimWorldLeague();
       break;
+    case "Egyptian":
+      params = CalculationMethod.Egyptian();
+      break;
+    case "Karachi":
+      params = CalculationMethod.Karachi();
+      break;
+    case "UmmAlQura":
+      params = CalculationMethod.UmmAlQura();
+      break;
+    case "NorthAmerica":
+      params = CalculationMethod.NorthAmerica();
+      break;
     case "Kuwait":
       params = CalculationMethod.Kuwait();
       break;

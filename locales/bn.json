@@ -167,6 +167,10 @@
   "dhikr": {
     "title": "যিকির ও দোয়া",
     "search_placeholder": "যিকির বা দোয়া খুঁজুন...",
+    "quran_search_placeholder": "সূরায় খুঁজুন...",
+    "hadith_search_placeholder": "অধ্যায়ে খুঁজুন...",
+    "no_hadith_found_or_connection_error": "কোনো হাদিস পাওয়া যায়নি বা সংযোগ ত্রুটি।",
+    "no_search_results": "এই অনুসন্ধানের জন্য কোনো হাদিস পাওয়া যায়নি",
     "categories": {
       "morning": "সকালবেলার জিকির",
       "evening": "সন্ধ্যাবেলার জিকির",
@@ -191,6 +195,10 @@
   "selected_dua_delay": "নির্বাচিত দোয়ার বিলম্ব",
   "adhan_notification_title": "🕌 আজান",
   "adhan_notification_body": "{{prayer}} নামাজের সময় হয়েছে! আল্লাহ্‌ আপনার নামাজ কবুল করুন।",
+  "adhan_completed_title": "✅ আজান সম্পন্ন",
+  "adhan_completed_body": "নামাজের আহ্বান হয়েছে",
+  "dismiss": "বন্ধ করুন",
+  "preparing_adhan": "আজান প্রস্তুত করা হচ্ছে...",
   "method_MuslimWorldLeague": "মুসলিম ওয়ার্ল্ড লীগ",
   "method_Egyptian": "মিশরীয় সাধারণ জরিপ কর্তৃপক্ষ",
   "method_Karachi": "ইসলামিক সায়েন্সেস বিশ্ববিদ্যালয়, করাচি",
@@ -303,5 +311,15 @@
   "dashboard_names_fallback": "আসমাউল হুসনা",
   "hadith_du_jour": "আজকের হাদিস",
   "voir_plus": "আরও দেখুন",
-  "time_until_sunset": "সূর্যাস্ত পর্যন্ত সময়"
+  "time_until_sunset": "সূর্যাস্ত পর্যন্ত সময়",
+  "tasbih": {
+    "title": "তাসবীহ",
+    "dhikr": {
+      "subhanallah": "সুবহানাল্লাহ",
+      "alhamdulillah": "আলহামদুলিল্লাহ",
+      "allahouakbar": "আল্লাহু আকবার",
+      "la_ilaha_illallah": "লা ইলাহা ইল্লাল্লাহ"
+    },
+    "reset": "রিসেট"
+  }
 }

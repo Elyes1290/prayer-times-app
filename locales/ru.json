@@ -165,6 +165,10 @@
   "dhikr": {
     "title": "Зикр и дуа",
     "search_placeholder": "Поиск зикра или дуа...",
+    "quran_search_placeholder": "Поиск в суре...",
+    "hadith_search_placeholder": "Поиск в главе...",
+    "no_hadith_found_or_connection_error": "Хадисы не найдены или ошибка соединения.",
+    "no_search_results": "Хадисы не найдены для этого поиска",
     "categories": {
       "morning": "Утренний зикр",
       "evening": "Вечерний зикр",
@@ -189,6 +193,10 @@
   "selected_dua_delay": "Задержка выбранной дуа",
   "adhan_notification_title": "🕌 Азан",
   "adhan_notification_body": "Время совершить молитву {{prayer}}! Пусть Аллах примет вашу молитву.",
+  "adhan_completed_title": "✅ Азан завершен",
+  "adhan_completed_body": "Призыв к молитве прозвучал",
+  "dismiss": "Закрыть",
+  "preparing_adhan": "Подготовка азана...",
   "method_MuslimWorldLeague": "Лига мусульманского мира",
   "method_Egyptian": "Египетское главное управление исследований",
   "method_Karachi": "Университет исламских наук, Карачи",
@@ -278,5 +286,15 @@
   "dashboard_verset_fallback": "Изучайте Священный Коран",
   "dashboard_names_fallback": "Асмауль Хусна",
   "hadith_du_jour": "Хадис дня",
-  "voir_plus": "Подробнее"
+  "voir_plus": "Подробнее",
+  "tasbih": {
+    "title": "Тасбих",
+    "dhikr": {
+      "subhanallah": "Слава Аллаху",
+      "alhamdulillah": "Хвала Аллаху",
+      "allahouakbar": "Аллах Велик",
+      "la_ilaha_illallah": "Нет божества, кроме Аллаха"
+    },
+    "reset": "Сбросить"
+  }
 }

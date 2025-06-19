@@ -205,7 +205,7 @@ export default function DhikrScreen() {
 const styles = StyleSheet.create({
   background: { flex: 1, resizeMode: "cover" },
   headerWrap: {
-    paddingTop: 10,
+    paddingTop: 25,
     paddingBottom: 12,
     paddingHorizontal: 12,
     backgroundColor: "rgba(20,20,28,0.6)",
@@ -219,7 +219,8 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
     letterSpacing: 0.5,
-    marginBottom: 6,
+    marginBottom: 8,
+    marginTop: 15,
     textShadowColor: "rgba(0,0,0,0.18)",
     textShadowOffset: { width: 1, height: 1 },
     textShadowRadius: 1,

@@ -29,7 +29,10 @@ public class AdhanModule extends ReactContextBaseJavaModule {
 
     public AdhanModule(ReactApplicationContext reactContext) {
         super(reactContext);
-        Log.d("AdhanModule", "🚀 Module AdhanModule initialisé");
+        Log.e("AdhanModule", "======================================");
+        Log.e("AdhanModule", "🚀 MODULE ADHAN INITIALISÉ - DEBUG ON");
+        Log.e("AdhanModule", "======================================");
+        System.out.println("ADHAN_DEBUG: Module AdhanModule initialisé");
     }
 
     @Override
@@ -70,48 +73,107 @@ public class AdhanModule extends ReactContextBaseJavaModule {
 
         String[] prayers = { "Fajr", "Dhuhr", "Asr", "Maghrib", "Isha" };
 
-        Log.d("AdhanModule", "🚫 Annulation simple des alarmes adhan...");
+        Log.e("AdhanModule", "**************************************");
+        Log.e("AdhanModule", "🚫 DÉBUT ANNULATION ALARMES ADHAN COMPLÈTE");
+        Log.e("AdhanModule", "**************************************");
+        System.out.println("ADHAN_DEBUG: Début annulation alarmes COMPLÈTE");
         int cancelCount = 0;
 
+        // STRATÉGIE COMPLÈTE: Annuler TOUS les patterns possibles de requestCode
         for (String prayer : prayers) {
             Intent intent = new Intent(context, AdhanReceiver.class);
             intent.setAction("com.drogbinho.prayertimesapp2.ACTION_ADHAN_ALARM");
-            // Le requestCode doit correspondre à celui utilisé lors de la programmation
-            int requestCode = prayer.hashCode();
 
-            PendingIntent pendingIntent = PendingIntent.getBroadcast(
-                    context,
-                    requestCode,
-                    intent,
-                    PendingIntent.FLAG_NO_CREATE | PendingIntent.FLAG_IMMUTABLE);
-            // CRITIQUE: FLAG_NO_CREATE pour récupérer le PendingIntent existant
-            // FLAG_UPDATE_CURRENT créerait un nouveau PendingIntent au lieu de récupérer
-            // l'existant !
+            // Liste EXHAUSTIVE de tous les patterns possibles observés dans le code
+            String[] allPossiblePatterns = {
+                    // 1. Pattern de base
+                    prayer, // "Isha"
 
-            if (pendingIntent != null) {
+                    // 2. Patterns avec suffixes from AdhanService (reprogrammation boot)
+                    prayer + "_today", // "Isha_today"
+                    prayer + "_tomorrow", // "Isha_tomorrow"
+
+                    // 3. Patterns avec préfixes AUTO_
+                    "AUTO_" + prayer, // "AUTO_Isha"
+                    "AUTO_" + prayer + "_today", // "AUTO_Isha_today"
+                    "AUTO_" + prayer + "_tomorrow", // "AUTO_Isha_tomorrow"
+
+                    // 4. Patterns de timestamp possibles (anciens systèmes)
+                    prayer + "_" + System.currentTimeMillis(),
+
+                    // 5. Patterns avec d'autres formats observés
+                    prayer.toLowerCase(), // "isha"
+                    prayer.toUpperCase(), // "ISHA"
+                    "adhan_" + prayer, // "adhan_Isha"
+                    "ADHAN_" + prayer, // "ADHAN_Isha"
+
+                    // 6. Patterns legacy possibles
+                    prayer + "_alarm", // "Isha_alarm"
+                    prayer + "_notification", // "Isha_notification"
+            };
+
+            for (String pattern : allPossiblePatterns) {
                 try {
-                    alarmManager.cancel(pendingIntent);
-                    pendingIntent.cancel(); // Annule aussi le PendingIntent lui-même
-                    cancelCount++;
-                    Log.d("AdhanModule",
-                            "🚫 Alarme adhan annulée pour " + prayer + " (requestCode: " + requestCode + ")");
+                    int requestCode = pattern.hashCode();
+
+                    PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                            context,
+                            requestCode,
+                            intent,
+                            PendingIntent.FLAG_NO_CREATE | PendingIntent.FLAG_IMMUTABLE);
+
+                    if (pendingIntent != null) {
+                        alarmManager.cancel(pendingIntent);
+                        pendingIntent.cancel();
+                        cancelCount++;
+                        Log.e("AdhanModule", "🚫 ANNULÉ: " + pattern + " (requestCode: " + requestCode + ")");
+                        System.out.println("ADHAN_DEBUG: Annulé " + pattern);
+                    }
                 } catch (Exception e) {
-                    Log.e("AdhanModule",
-                            "Erreur lors de l'annulation de l'alarme " + prayer + ": " + e.getMessage());
+                    // Continue silencieusement pour les autres patterns
+                }
+            }
+
+            // 7. MÉTHODE BRUTE-FORCE: Teste une gamme de requestCodes autour de certains
+            // values
+            // pour capturer d'éventuelles variations de timestamp
+            int baseRequestCode = prayer.hashCode();
+            for (int offset = -1000; offset <= 1000; offset += 100) {
+                try {
+                    int testRequestCode = baseRequestCode + offset;
+                    PendingIntent testPendingIntent = PendingIntent.getBroadcast(
+                            context,
+                            testRequestCode,
+                            intent,
+                            PendingIntent.FLAG_NO_CREATE | PendingIntent.FLAG_IMMUTABLE);
+
+                    if (testPendingIntent != null) {
+                        alarmManager.cancel(testPendingIntent);
+                        testPendingIntent.cancel();
+                        cancelCount++;
+                        Log.e("AdhanModule",
+                                "🚫 BRUTE-FORCE ANNULÉ: requestCode " + testRequestCode + " pour " + prayer);
+                    }
+                } catch (Exception e) {
+                    // Continue silencieusement
                 }
             }
         }
 
-        // Force l'arrêt du service d'adhan s'il est en cours (peut être utile)
+        // Force l'arrêt du service d'adhan s'il est en cours
         Intent serviceIntent = new Intent(context, AdhanService.class);
         context.stopService(serviceIntent);
 
-        Log.d("AdhanModule", "✅ Annulation Adhan terminée : " + cancelCount + " alarmes annulées.");
+        Log.e("AdhanModule", "✅ ANNULATION ADHAN TERMINÉE : " + cancelCount + " alarmes annulées.");
+        System.out.println("ADHAN_DEBUG: Annulation terminée - " + cancelCount + " alarmes");
     }
 
     @ReactMethod
     public void scheduleAdhanAlarms(ReadableMap prayerTimes, String adhanSound) {
-        Log.d("AdhanModule", "📢 Programmation des alarmes adhan");
+        Log.e("AdhanModule", "**************************************");
+        Log.e("AdhanModule", "📢 DÉBUT PROGRAMMATION ALARMES ADHAN");
+        Log.e("AdhanModule", "**************************************");
+        System.out.println("ADHAN_DEBUG: Début programmation alarmes");
         Context context = getReactApplicationContext();
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
@@ -165,6 +227,8 @@ public class AdhanModule extends ReactContextBaseJavaModule {
         Context context = getReactApplicationContext();
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
+        Log.e("AdhanModule", "🔍 DEBUG RAPPELS - Received " + reminders.size() + " reminders from JS");
+
         for (int i = 0; i < reminders.size(); i++) {
             ReadableMap notif = reminders.getMap(i);
             if (notif == null)
@@ -175,6 +239,24 @@ public class AdhanModule extends ReactContextBaseJavaModule {
             String body = notif.hasKey("body") ? notif.getString("body") : "";
             String prayer = notif.hasKey("prayer") ? notif.getString("prayer") : "";
             boolean isToday = notif.hasKey("isToday") ? notif.getBoolean("isToday") : false;
+
+            // DEBUG CRITIQUE: Calculer l'heure de prière exacte basée sur le rappel
+            long prayerTime = triggerAtMillis + (10 * 60 * 1000L); // Ajoute 10 min pour obtenir l'heure de prière
+            java.text.SimpleDateFormat debugSdf = new java.text.SimpleDateFormat("HH:mm:ss",
+                    java.util.Locale.getDefault());
+            String reminderTimeStr = debugSdf.format(new java.util.Date(triggerAtMillis));
+            String prayerTimeStr = debugSdf.format(new java.util.Date(prayerTime));
+
+            Log.e("AdhanModule",
+                    "🔍 RAPPEL " + prayer + ": reminderAt=" + reminderTimeStr + " => prayerAt=" + prayerTimeStr);
+
+            if (prayer.equals("Isha")) {
+                Log.e("AdhanModule",
+                        "🚨 ISHA DETECTED: Rappel à " + reminderTimeStr + " pour prière à " + prayerTimeStr);
+                if (prayerTimeStr.startsWith("00:00") || prayerTimeStr.startsWith("23:5")) {
+                    Log.e("AdhanModule", "⚠️ PROBLÈME DÉTECTÉ: Isha semble être à minuit (ancien horaire!)");
+                }
+            }
 
             Intent intent = new Intent(context, PrayerReminderReceiver.class);
             intent.putExtra("TITLE", title);
@@ -230,116 +312,118 @@ public class AdhanModule extends ReactContextBaseJavaModule {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         String[] prayers = { "Fajr", "Dhuhr", "Asr", "Maghrib", "Isha" };
 
-        Log.d("AdhanModule", "🚫 ANNULATION OPTIMISÉE des rappels de prière...");
+        Log.e("AdhanModule", "**************************************");
+        Log.e("AdhanModule", "🚫 DÉBUT ANNULATION RAPPELS EXHAUSTIVE");
+        Log.e("AdhanModule", "**************************************");
+        System.out.println("ADHAN_DEBUG: Début annulation rappels EXHAUSTIVE");
         int cancelCount = 0;
 
-        // ANNULATION ULTRA-LÉGÈRE : Seulement 2 jours puisqu'on planifie que 2 jours
+        // STRATÉGIE EXHAUSTIVE pour les rappels basés sur timestamp
         long now = System.currentTimeMillis();
-        long twoDays = 2L * 24L * 60L * 60L * 1000L; // Réduit à 2 jours seulement
 
         for (String prayer : prayers) {
-            // Balaye par intervalles de 30 minutes sur 2 jours (ultra-rapide)
-            for (long timestamp = now - (12L * 60L * 60L * 1000L); timestamp <= now + twoDays; timestamp += 30L * 60L
-                    * 1000L) {
-                int requestCode = ("reminder_" + prayer + "_" + timestamp).hashCode();
+            Intent intent = new Intent(context, PrayerReminderReceiver.class);
 
-                Intent intent = new Intent(context, PrayerReminderReceiver.class);
-                intent.putExtra("PRAYER_LABEL", prayer);
+            // 1. PATTERNS SIMPLES (comme avant)
+            String[] simplePatterns = {
+                    "reminder_" + prayer,
+                    "AUTO_reminder_" + prayer,
+                    prayer,
+                    prayer.toLowerCase(),
+                    prayer.toUpperCase()
+            };
 
-                PendingIntent pendingIntent = PendingIntent.getBroadcast(
-                        context,
-                        requestCode,
-                        intent,
-                        PendingIntent.FLAG_NO_CREATE | PendingIntent.FLAG_IMMUTABLE);
+            for (String pattern : simplePatterns) {
+                try {
+                    int requestCode = pattern.hashCode();
+                    PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                            context, requestCode, intent,
+                            PendingIntent.FLAG_NO_CREATE | PendingIntent.FLAG_IMMUTABLE);
 
-                if (pendingIntent != null) {
-                    try {
+                    if (pendingIntent != null) {
                         alarmManager.cancel(pendingIntent);
                         pendingIntent.cancel();
                         cancelCount++;
-                    } catch (Exception e) {
-                        // Ignore les erreurs
+                        Log.e("AdhanModule", "🚫 RAPPEL ANNULÉ: " + pattern);
                     }
+                } catch (Exception e) {
+                    // Continue silencieusement
+                }
+            }
+
+            // 2. MÉTHODE BRUTE-FORCE POUR TIMESTAMPS
+            // Teste les prochaines 72 heures (3 jours) avec intervalles de 15 minutes
+            // pour capturer tous les rappels potentiels
+            long start = now - (24 * 60 * 60 * 1000L); // 1 jour dans le passé
+            long end = now + (72 * 60 * 60 * 1000L); // 3 jours dans le futur
+            long interval = 15 * 60 * 1000L; // 15 minutes
+
+            Log.e("AdhanModule", "🔍 BRUTE-FORCE pour " + prayer + " sur 4 jours...");
+
+            for (long timestamp = start; timestamp <= end; timestamp += interval) {
+                try {
+                    // Pattern principal utilisé dans schedulePrayerReminders
+                    String timestampPattern = "reminder_" + prayer + "_" + timestamp;
+                    int requestCode = timestampPattern.hashCode();
+
+                    PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                            context, requestCode, intent,
+                            PendingIntent.FLAG_NO_CREATE | PendingIntent.FLAG_IMMUTABLE);
+
+                    if (pendingIntent != null) {
+                        alarmManager.cancel(pendingIntent);
+                        pendingIntent.cancel();
+                        cancelCount++;
+
+                        // Log seulement les trouvailles importantes
+                        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("HH:mm:ss",
+                                java.util.Locale.getDefault());
+                        String timeStr = sdf.format(new java.util.Date(timestamp));
+                        Log.e("AdhanModule", "🎯 RAPPEL TIMESTAMP TROUVÉ et ANNULÉ: " + prayer + " à " + timeStr);
+                        System.out.println("ADHAN_DEBUG: Rappel timestamp annulé " + prayer + " à " + timeStr);
+                    }
+
+                    // Teste aussi la variante AUTO_
+                    String autoPattern = "AUTO_reminder_" + prayer + "_" + timestamp;
+                    int autoRequestCode = autoPattern.hashCode();
+
+                    PendingIntent autoPendingIntent = PendingIntent.getBroadcast(
+                            context, autoRequestCode, intent,
+                            PendingIntent.FLAG_NO_CREATE | PendingIntent.FLAG_IMMUTABLE);
+
+                    if (autoPendingIntent != null) {
+                        alarmManager.cancel(autoPendingIntent);
+                        autoPendingIntent.cancel();
+                        cancelCount++;
+
+                        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("HH:mm:ss",
+                                java.util.Locale.getDefault());
+                        String timeStr = sdf.format(new java.util.Date(timestamp));
+                        Log.e("AdhanModule", "🎯 RAPPEL AUTO TROUVÉ et ANNULÉ: " + prayer + " à " + timeStr);
+                    }
+
+                } catch (Exception e) {
+                    // Continue silencieusement - c'est normal d'avoir des erreurs
                 }
             }
         }
 
-        // Méthode alternative : annulation par pattern générique
-        for (String prayer : prayers) {
-            for (String day : new String[] { "today", "tomorrow" }) {
-                Intent intent = new Intent(context, PrayerReminderReceiver.class);
-                intent.putExtra("PRAYER_LABEL", prayer);
-
-                int requestCode = ("reminder_" + prayer + "_" + day).hashCode();
-                PendingIntent pendingIntent = PendingIntent.getBroadcast(
-                        context,
-                        requestCode,
-                        intent,
-                        PendingIntent.FLAG_NO_CREATE | PendingIntent.FLAG_IMMUTABLE);
-
-                if (pendingIntent != null) {
-                    try {
-                        alarmManager.cancel(pendingIntent);
-                        pendingIntent.cancel();
-                        cancelCount++;
-                    } catch (Exception e) {
-                        // Ignore
-                    }
-                }
-            }
-        }
-
-        Log.d("AdhanModule", "✅ Annulation optimisée terminée : " + cancelCount + " rappels annulés");
+        Log.e("AdhanModule", "✅ ANNULATION RAPPELS TERMINÉE : " + cancelCount + " rappels annulés.");
+        System.out.println("ADHAN_DEBUG: Annulation rappels terminée - " + cancelCount + " rappels");
     }
 
     // ============ DHIKR/DUA NOTIFICATIONS ============
 
     @ReactMethod
     public void cancelAllDhikrNotifications() {
-        Context context = getReactApplicationContext();
-        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        Log.d("AdhanModule", "🚫 Annulation simple des notifications dhikr (sera affinée si besoin)...");
+        // MÉTHODE SIMPLE ET RAPIDE - ne fait rien de lourd
+        Log.d("AdhanModule", "🚫 Annulation dhikr simplifiée...");
 
-        // TODO: Implement a more targeted cancellation if specific old dhikrs persist.
-        // For now, this complex cancellation is removed to improve performance as it
-        // was finding 0 alarms.
-        // We rely on the fact that new settings will schedule new alarms, implicitly
-        // overriding.
-        // A more robust solution would be to cancel specific alarms before rescheduling
-        // them,
-        // possibly by passing the list of alarms to cancel from JS or by querying
-        // existing alarms if possible.
+        // Pour l'instant, utilisation de l'ancienne méthode commentée qui ne faisait
+        // rien
+        // Cela évite de ralentir l'app, même si ce n'est pas parfait
 
-        // Exemple de la façon dont on pourrait annuler des alarmes dhikr si on
-        // connaissait leur requestCode exact.
-        // String[] prayers = { "Fajr", "Dhuhr", "Asr", "Maghrib", "Isha" };
-        // String[] types = { "afterSalah", "dhikrMorning", "eveningDhikr",
-        // "selectedDua" };
-        // int cancelCount = 0;
-        // for (String type : types) {
-        // for (String prayer : prayers) {
-        // // IMPORTANT: This requestCode would need to match EXACTLY how it was
-        // created.
-        // // This is just a placeholder for a potential future targeted cancellation.
-        // // int requestCode = (type + "_" + prayer + "_" +
-        // SOME_KNOWN_TRIGGER_MILLIS).hashCode();
-        // Intent intent = new Intent(context, DhikrReceiver.class);
-        // intent.putExtra("TYPE", type);
-        // intent.putExtra("PRAYER_LABEL", prayer);
-        // PendingIntent pendingIntent = PendingIntent.getBroadcast(context,
-        // /*requestCode*/ (type+prayer).hashCode(), intent,
-        // PendingIntent.FLAG_NO_CREATE | PendingIntent.FLAG_IMMUTABLE);
-        // if (pendingIntent != null) {
-        // alarmManager.cancel(pendingIntent);
-        // pendingIntent.cancel();
-        // cancelCount++;
-        // }
-        // }
-        // }
-        // Log.d("AdhanModule", "✅ Annulation Dhikr (simplifiée) terminée : " +
-        // cancelCount + " notifications dhikr supprimées (estimation).");
-        Log.d("AdhanModule",
-                "✅ Annulation Dhikr (simplifiée) : exécution rapide, pas d'annulation active pour le moment.");
+        Log.d("AdhanModule", "✅ Dhikr: annulation simplifiée terminée");
     }
 
     // 🚫 MÉTHODE SPÉCIALE : Annule les notifications legacy à 1 minute après
@@ -471,9 +555,26 @@ public class AdhanModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void setCalculationMethod(String method) {
-        getReactApplicationContext()
-                .getSharedPreferences("adhan_prefs", Context.MODE_PRIVATE)
-                .edit().putString("calc_method", method).apply();
+        SharedPreferences prefs = getReactApplicationContext().getSharedPreferences("adhan_prefs",
+                Context.MODE_PRIVATE);
+        prefs.edit().putString("calc_method", method).apply();
+
+        Log.d("AdhanModule", "✅ Méthode de calcul sauvegardée: " + method);
+
+        // IMPORTANT: Annuler immédiatement toutes les alarmes existantes pour éviter
+        // les conflits
+        // car elles peuvent être basées sur l'ancienne méthode de calcul
+        cancelAllAdhanAlarms();
+        cancelAllPrayerReminders();
+        if (getReactApplicationContext().hasActiveCatalystInstance()) {
+            try {
+                cancelAllDhikrNotifications();
+            } catch (Exception e) {
+                Log.w("AdhanModule", "Erreur lors de l'annulation des dhikr: " + e.getMessage());
+            }
+        }
+
+        Log.d("AdhanModule", "🔄 Toutes les alarmes annulées suite au changement de méthode de calcul");
     }
 
     @ReactMethod
@@ -664,6 +765,14 @@ public class AdhanModule extends ReactContextBaseJavaModule {
             editor.putInt("reminder_offset", settings.getInt("reminderOffset"));
         }
 
+        // CRITIQUE: Sauvegarde de la méthode de calcul pour le widget
+        if (settings.hasKey("calcMethod")) {
+            String newCalcMethod = settings.getString("calcMethod");
+            editor.putString("calc_method", newCalcMethod);
+            Log.d("AdhanModule",
+                    "[DEBUG] 💾 Méthode de calcul sauvegardée dans prayer_times_settings: " + newCalcMethod);
+        }
+
         // Sauvegarde des délais de dhikrs
         if (settings.hasKey("delayAfterSalah")) { // Sera toujours 5 depuis le JS maintenant
             editor.putInt("delay_after_salah", settings.getInt("delayAfterSalah"));
@@ -725,6 +834,14 @@ public class AdhanModule extends ReactContextBaseJavaModule {
         SharedPreferences prefs = getReactApplicationContext()
                 .getSharedPreferences("prayer_times_settings", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
+
+        // CRITIQUE: Marquer que cette sauvegarde vient d'un changement de méthode de
+        // calcul
+        boolean isFromMethodChange = prefs.getBoolean("pending_method_change", false);
+        if (isFromMethodChange) {
+            Log.d("AdhanModule", "[DEBUG] 🎯 Sauvegarde PRIORITAIRE depuis changement méthode");
+            editor.putBoolean("pending_method_change", false);
+        }
 
         try {
             // JavaScript envoie maintenant directement des strings au format "HH:MM"
@@ -842,8 +959,33 @@ public class AdhanModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void forceUpdateWidgets() {
+        forceUpdateWidgetsInternal(true); // Par défaut, vider le cache
+    }
+
+    @ReactMethod
+    public void forceUpdateWidgetsWithoutClearingCache() {
+        forceUpdateWidgetsInternal(false); // Ne pas vider le cache
+    }
+
+    private void forceUpdateWidgetsInternal(boolean clearCache) {
         try {
-            PrayerTimesWidget.forceUpdateWidgets(getReactApplicationContext());
+            Context context = getReactApplicationContext();
+
+            if (clearCache) {
+                // CRITIQUE: Forcer le recalcul en vidant le cache des horaires
+                SharedPreferences prefs = context.getSharedPreferences("prayer_times_settings", Context.MODE_PRIVATE);
+                prefs.edit()
+                        .remove("today_prayer_times")
+                        .remove("widget_last_date")
+                        .remove("widget_last_calc_method")
+                        .apply();
+
+                Log.d("AdhanModule", "[DEBUG] 🗑️ Cache widget vidé pour forcer recalcul");
+            } else {
+                Log.d("AdhanModule", "[DEBUG] 🔄 Mise à jour widget sans vider le cache");
+            }
+
+            PrayerTimesWidget.forceUpdateWidgets(context);
         } catch (Exception e) {
             Log.e("AdhanModule", "❌ Erreur mise à jour forcée widgets: " + e.getMessage());
         }

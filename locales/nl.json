@@ -167,6 +167,10 @@
   "dhikr": {
     "title": "Dhikr & Duʿa",
     "search_placeholder": "Zoek dhikr of dua...",
+    "quran_search_placeholder": "Zoek in de sura...",
+    "hadith_search_placeholder": "Zoek in het hoofdstuk...",
+    "no_hadith_found_or_connection_error": "Geen hadith gevonden of verbindingsfout.",
+    "no_search_results": "Geen hadith gevonden voor deze zoekopdracht",
     "categories": {
       "morning": "Ochtend Dhikr",
       "evening": "Avond Dhikr",
@@ -191,6 +195,10 @@
   "selected_dua_delay": "Vertraging geselecteerde Dua",
   "adhan_notification_title": "🕌 Adhan",
   "adhan_notification_body": "Het is tijd om te bidden {{prayer}}! Moge Allah je gebed accepteren.",
+  "adhan_completed_title": "✅ Adhan voltooid",
+  "adhan_completed_body": "De oproep tot gebed heeft plaatsgevonden",
+  "dismiss": "Sluiten",
+  "preparing_adhan": "Adhan voorbereiden...",
   "method_MuslimWorldLeague": "Moslim Wereld Liga",
   "method_Egyptian": "Egyptische Algemene Survey Autoriteit",
   "method_Karachi": "Universiteit van Islamitische Wetenschappen, Karachi",
@@ -279,5 +287,15 @@
   "dashboard_verset_fallback": "Verken de Heilige Koran",
   "dashboard_names_fallback": "Asmaul Husna",
   "hadith_du_jour": "Hadith van de dag",
-  "voir_plus": "Meer bekijken"
+  "voir_plus": "Meer bekijken",
+  "tasbih": {
+    "title": "Tasbih",
+    "dhikr": {
+      "subhanallah": "Glorie zij Allah",
+      "alhamdulillah": "Alle lof zij Allah",
+      "allahouakbar": "Allah is de Grootste",
+      "la_ilaha_illallah": "Er is geen god dan Allah"
+    },
+    "reset": "Resetten"
+  }
 }

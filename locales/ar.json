@@ -200,6 +200,10 @@
     },
     "no_dhikr": "لا توجد أذكار لهذه الفئة."
   },
+  "quran_search_placeholder": "البحث في السورة...",
+  "hadith_search_placeholder": "البحث في الفصل...",
+  "no_hadith_found_or_connection_error": "لم يتم العثور على أحاديث أو خطأ في الاتصال.",
+  "no_search_results": "لم يتم العثور على أحاديث لهذا البحث",
   "dhikr_dua": "الأذكار والأدعية",
   "dhikr_category_morning": "أَذْكَارُ الصَّبَاحِ",
   "dhikr_category_evening": "أَذْكَارُ المَسَاءِ",
@@ -219,6 +223,10 @@
   "selected_dua_delay": "تأخير الدعاء المحدد",
   "adhan_notification_title": "🕌 الأذان",
   "adhan_notification_body": "حان وقت صلاة {{prayer}}! تقبل الله صلاتك.",
+  "adhan_completed_title": "✅ انتهى الأذان",
+  "adhan_completed_body": "لقد انتهى الأذان",
+  "dismiss": "إغلاق",
+  "preparing_adhan": "جاري تحضير الأذان...",
   "location_method": "طَرِيقَةُ تَحْدِيدِ المَوْقِعِ",
   "general_settings": "الإِعْدَادَاتُ العَامَّةُ",
   "enter_city": "أَدْخِلْ اسْمَ المَدِينَةِ",
@@ -311,5 +319,15 @@
   "dashboard_verset_fallback": "استكشف القرآن الكريم",
   "dashboard_names_fallback": "أسماء الله الحسنى",
   "hadith_du_jour": "حديث اليوم",
-  "voir_plus": "المزيد"
+  "voir_plus": "المزيد",
+  "tasbih": {
+    "title": "المسبحة",
+    "reset": "إعادة",
+    "dhikr": {
+      "subhanallah": "سبحان الله",
+      "alhamdulillah": "الحمد لله",
+      "allahouakbar": "الله أكبر",
+      "la_ilaha_illallah": "لا إله إلا الله"
+    }
+  }
 }
