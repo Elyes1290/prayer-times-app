@@ -1,4 +1,11 @@
-import React, { useState, useEffect, useContext, useMemo } from "react";
+import React, {
+  useState,
+  useEffect,
+  useContext,
+  useMemo,
+  useCallback,
+  useRef,
+} from "react";
 import {
   View,
   Text,
@@ -90,6 +97,9 @@ export default function MosqueScreen() {
   const [selectedMosque, setSelectedMosque] = useState<Mosque | null>(null);
   const [locationError, setLocationError] = useState<string | null>(null);
 
+  // Référence pour éviter les rechargements inutiles
+  const lastSearchLocation = useRef<{ lat: number; lon: number } | null>(null);
+
   // Utiliser les contextes comme dans PrayerScreen
   const settings = useContext(SettingsContext);
   const { location } = useLocation();
@@ -122,13 +132,76 @@ export default function MosqueScreen() {
     [settings.manualLocation?.lat, settings.manualLocation?.lon]
   );
 
-  // Obtenir la localisation selon le mode choisi
-  const locationToUse =
-    settings.locationMode === "manual" && manualLocationObj
-      ? manualLocationObj
-      : settings.locationMode === "auto"
-      ? location
-      : null;
+  // Obtenir la localisation selon le mode choisi (mémorisée pour éviter les re-renders)
+  const locationToUse = useMemo(() => {
+    if (settings.locationMode === "manual" && manualLocationObj) {
+      return manualLocationObj;
+    }
+    if (settings.locationMode === "auto" && location) {
+      return location;
+    }
+    return null;
+  }, [settings.locationMode, manualLocationObj, location]);
+
+  // Fonction mémorisée pour éviter les re-renders
+  const findNearbyMosques = useCallback(
+    async (latitude: number, longitude: number) => {
+      // Vérifier si on a déjà cherché à cette position
+      const currentLoc = { lat: latitude, lon: longitude };
+      if (
+        lastSearchLocation.current &&
+        Math.abs(lastSearchLocation.current.lat - currentLoc.lat) < 0.001 &&
+        Math.abs(lastSearchLocation.current.lon - currentLoc.lon) < 0.001
+      ) {
+        console.log("🔄 Position identique, pas de nouvelle recherche");
+        return;
+      }
+
+      lastSearchLocation.current = currentLoc;
+      setLoading(true);
+
+      try {
+        // Essai avec Google Places API d'abord
+        const realMosques = await searchMosquesWithGooglePlaces(
+          latitude,
+          longitude
+        );
+
+        if (realMosques.length > 0) {
+          setMosques(realMosques);
+          setLoading(false);
+          return;
+        }
+
+        // Fallback avec Overpass API (OpenStreetMap) - gratuit et mondial
+        const osmMosques = await searchMosquesWithOSM(latitude, longitude);
+
+        if (osmMosques.length > 0) {
+          setMosques(osmMosques);
+          setLoading(false);
+          return;
+        }
+
+        // Dernier fallback avec des données locales
+        const fallbackMosques = await searchFallbackMosques(
+          latitude,
+          longitude
+        );
+        setMosques(fallbackMosques);
+        setLoading(false);
+      } catch (error) {
+        console.error("Erreur recherche mosquées:", error);
+        // En cas d'erreur, utiliser le fallback
+        const fallbackMosques = await searchFallbackMosques(
+          latitude,
+          longitude
+        );
+        setMosques(fallbackMosques);
+        setLoading(false);
+      }
+    },
+    []
+  );
 
   useEffect(() => {
     if (locationToUse?.coords) {
@@ -146,7 +219,7 @@ export default function MosqueScreen() {
       setLocationError(t("no_city_selected"));
       setLoading(false);
     }
-  }, [locationToUse, settings.locationMode]);
+  }, [locationToUse, settings.locationMode, findNearbyMosques]);
 
   const getCurrentLocation = async () => {
     try {
@@ -171,11 +244,20 @@ export default function MosqueScreen() {
   };
 
   // Fonction pour forcer l'actualisation de la localisation
-  const refreshLocation = async () => {
+  const refreshLocation = useCallback(async () => {
+    lastSearchLocation.current = null; // Réinitialiser pour forcer la recherche
     setLoading(true);
     setLocationError(null);
-    await getCurrentLocation();
-  };
+
+    if (locationToUse?.coords) {
+      await findNearbyMosques(
+        locationToUse.coords.latitude,
+        locationToUse.coords.longitude
+      );
+    } else {
+      await getCurrentLocation();
+    }
+  }, [locationToUse, findNearbyMosques]);
 
   const calculateDistance = (
     lat1: number,
@@ -194,42 +276,6 @@ export default function MosqueScreen() {
         Math.sin(dLon / 2);
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     return R * c;
-  };
-
-  const findNearbyMosques = async (latitude: number, longitude: number) => {
-    try {
-      // Essai avec Google Places API d'abord
-      const realMosques = await searchMosquesWithGooglePlaces(
-        latitude,
-        longitude
-      );
-
-      if (realMosques.length > 0) {
-        setMosques(realMosques);
-        setLoading(false);
-        return;
-      }
-
-      // Fallback avec Overpass API (OpenStreetMap) - gratuit et mondial
-      const osmMosques = await searchMosquesWithOSM(latitude, longitude);
-
-      if (osmMosques.length > 0) {
-        setMosques(osmMosques);
-        setLoading(false);
-        return;
-      }
-
-      // Dernier fallback avec des données locales
-      const fallbackMosques = await searchFallbackMosques(latitude, longitude);
-      setMosques(fallbackMosques);
-      setLoading(false);
-    } catch (error) {
-      console.error("Erreur recherche mosquées:", error);
-      // En cas d'erreur, utiliser le fallback
-      const fallbackMosques = await searchFallbackMosques(latitude, longitude);
-      setMosques(fallbackMosques);
-      setLoading(false);
-    }
   };
 
   // API Google Places (New) - Version moderne
