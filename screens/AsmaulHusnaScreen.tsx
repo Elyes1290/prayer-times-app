@@ -48,7 +48,7 @@ function normalizeText(str: string) {
 }
 
 const AsmaulHusnaScreen = () => {
-  const { t: tAsma } = useTranslation("asmaulhusna");
+  const { t: tAsma, i18n } = useTranslation("asmaulhusna");
   const insets = useSafeAreaInsets();
   const [searchQuery, setSearchQuery] = useState("");
   const [expandedId, setExpandedId] = useState<string | null>(null);
@@ -146,62 +146,82 @@ const AsmaulHusnaScreen = () => {
             <View style={styles.arabicNameContainer}>
               <Text style={styles.arabic}>{item.arabic}</Text>
             </View>
-            <View style={styles.nameDetailsContainer}>
-              <Text style={styles.translit}>{item.translit}</Text>
-              <Text style={styles.french}>{item.french}</Text>
-            </View>
+            {!i18n.language.startsWith("ar") && (
+              <View style={styles.nameDetailsContainer}>
+                <Text style={styles.translit}>{item.translit}</Text>
+                <Text style={styles.french}>{item.french}</Text>
+              </View>
+            )}
           </TouchableOpacity>
 
           <Animated.View style={[styles.cardDetails, { maxHeight }]}>
             <View style={styles.section}>
-              <Text style={styles.sectionTitle}>Signification</Text>
+              <Text style={styles.sectionTitle}>
+                {tAsma("sections.meaning")}
+              </Text>
               <Text style={styles.sectionText}>{item.meaning}</Text>
             </View>
             {item.occurrences && (
               <View style={styles.section}>
-                <Text style={styles.sectionTitle}>Occurrences</Text>
+                <Text style={styles.sectionTitle}>
+                  {tAsma("sections.occurrences")}
+                </Text>
                 <Text style={styles.sectionText}>{item.occurrences}</Text>
               </View>
             )}
             {item.benefits && (
               <View style={styles.section}>
-                <Text style={styles.sectionTitle}>Bénéfices</Text>
+                <Text style={styles.sectionTitle}>
+                  {tAsma("sections.benefits")}
+                </Text>
                 <Text style={styles.sectionText}>{item.benefits}</Text>
               </View>
             )}
             {item.usage && (
               <View style={styles.section}>
-                <Text style={styles.sectionTitle}>Utilisation</Text>
+                <Text style={styles.sectionTitle}>
+                  {tAsma("sections.usage")}
+                </Text>
                 <Text style={styles.sectionText}>{item.usage}</Text>
               </View>
             )}
             {item.hadith && (
               <View style={styles.section}>
-                <Text style={styles.sectionTitle}>Hadith</Text>
+                <Text style={styles.sectionTitle}>
+                  {tAsma("sections.hadith")}
+                </Text>
                 <Text style={styles.sectionText}>{item.hadith}</Text>
               </View>
             )}
             {item.details && (
               <View style={styles.section}>
-                <Text style={styles.sectionTitle}>Détails</Text>
+                <Text style={styles.sectionTitle}>
+                  {tAsma("sections.details")}
+                </Text>
                 <Text style={styles.sectionText}>{item.details}</Text>
               </View>
             )}
             {item.reference && (
               <View style={styles.section}>
-                <Text style={styles.sectionTitle}>Référence</Text>
+                <Text style={styles.sectionTitle}>
+                  {tAsma("sections.reference")}
+                </Text>
                 <Text style={styles.sectionText}>{item.reference}</Text>
               </View>
             )}
             {item.spiritual_effect && (
               <View style={styles.section}>
-                <Text style={styles.sectionTitle}>Effet Spirituel</Text>
+                <Text style={styles.sectionTitle}>
+                  {tAsma("sections.spiritual_effect")}
+                </Text>
                 <Text style={styles.sectionText}>{item.spiritual_effect}</Text>
               </View>
             )}
             {item.citation && (
               <View style={styles.section}>
-                <Text style={styles.sectionTitle}>Citation</Text>
+                <Text style={styles.sectionTitle}>
+                  {tAsma("sections.citation")}
+                </Text>
                 <Text style={styles.sectionText}>{item.citation}</Text>
               </View>
             )}

@@ -2,6 +2,17 @@
   "title": "I 99 Nomi di Allah",
   "subtitle": "Scopri i più bei nomi di Allah e i loro significati",
   "search_placeholder": "Cerca un nome...",
+  "sections": {
+    "meaning": "Significato",
+    "occurrences": "Occorrenze",
+    "benefits": "Benefici",
+    "usage": "Utilizzo",
+    "hadith": "Hadith",
+    "details": "Dettagli",
+    "reference": "Riferimento",
+    "spiritual_effect": "Effetto Spirituale",
+    "citation": "Citazione"
+  },
   "name_1": {
     "arabic": "الله",
     "translit": "Allah",

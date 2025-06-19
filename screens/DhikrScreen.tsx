@@ -54,7 +54,7 @@ export default function DhikrScreen() {
   const selectedCat = CATEGORIES.find((c) => c.key === selectedKey)!;
   const namespace = selectedCat.namespace;
 
-  const { t } = useTranslation("");
+  const { t, i18n } = useTranslation("");
   const { meta, duas } = useDhikrData(namespace);
 
   const CATEGORY_LABELS: Record<CategoryKey, string> = {
@@ -179,16 +179,21 @@ export default function DhikrScreen() {
           renderItem={({ item }) => (
             <View style={styles.card}>
               <Text style={styles.arabic}>{item.arabic}</Text>
-              {item.latin && <Text style={styles.translit}>{item.latin}</Text>}
-              <Text style={styles.translation}>{item.translation}</Text>
+              {!i18n.language.startsWith("ar") && item.latin && (
+                <Text style={styles.translit}>{item.latin}</Text>
+              )}
+              {!i18n.language.startsWith("ar") && (
+                <Text style={styles.translation}>{item.translation}</Text>
+              )}
               {item.source && (
                 <Text style={styles.reference}>{item.source}</Text>
               )}
-              {(item.benefits || item.fawaid) && (
-                <Text style={styles.benefit}>
-                  {item.benefits ?? item.fawaid}
-                </Text>
-              )}
+              {!i18n.language.startsWith("ar") &&
+                (item.benefits || item.fawaid) && (
+                  <Text style={styles.benefit}>
+                    {item.benefits ?? item.fawaid}
+                  </Text>
+                )}
             </View>
           )}
           ListEmptyComponent={<Text style={styles.emptyText}>{noDhikr}</Text>}

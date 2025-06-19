@@ -21,7 +21,8 @@ type IconName =
   | "calendar"
   | "cog"
   | "information"
-  | "counter";
+  | "counter"
+  | "mosque";
 
 interface TabBarIconProps {
   icon: IconName;
@@ -160,6 +161,19 @@ export default function TabLayout() {
             tabBarIcon: ({ color, size, focused }) => (
               <TabBarIcon
                 icon="compass"
+                color={color}
+                size={size}
+                focused={focused}
+              />
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="mosques"
+          options={{
+            tabBarIcon: ({ color, size, focused }) => (
+              <TabBarIcon
+                icon="mosque"
                 color={color}
                 size={size}
                 focused={focused}

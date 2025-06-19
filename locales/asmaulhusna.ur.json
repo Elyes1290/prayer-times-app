@@ -2,6 +2,17 @@
   "title": "اللہ کے 99 نام",
   "subtitle": "اللہ تعالیٰ کے خوبصورت ناموں اور ان کے معانی کو دریافت کریں",
   "search_placeholder": "نام تلاش کریں...",
+  "sections": {
+    "meaning": "معنی",
+    "occurrences": "تعدد",
+    "benefits": "فوائد",
+    "usage": "استعمال",
+    "hadith": "حدیث",
+    "details": "تفصیلات",
+    "reference": "حوالہ",
+    "spiritual_effect": "روحانی اثر",
+    "citation": "اقتباس"
+  },
   "name_1": {
     "arabic": "الله",
     "translit": "Allah",

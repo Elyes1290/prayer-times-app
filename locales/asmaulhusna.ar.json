@@ -2,6 +2,17 @@
   "title": "أسماء الله الحسنى",
   "subtitle": "اكتشف أجمل أسماء الله ومعانيها",
   "search_placeholder": "ابحث عن اسم...",
+  "sections": {
+    "meaning": "المعنى",
+    "occurrences": "مرات الورود",
+    "benefits": "الفوائد",
+    "usage": "الاستخدام",
+    "hadith": "الحديث",
+    "details": "التفاصيل",
+    "reference": "المرجع",
+    "spiritual_effect": "الأثر الروحي",
+    "citation": "الاقتباس"
+  },
   "name_1": {
     "arabic": "الله",
     "translit": "Allah",
