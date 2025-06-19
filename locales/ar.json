@@ -328,6 +328,7 @@
   "location_permission_needed_for_mosques": "الموقع مطلوب للعثور على المساجد القريبة",
   "location_required_for_mosques": "الموقع مطلوب لعرض المساجد القريبة",
   "location_error": "خطأ في الموقع",
+  "configure_location_in_settings": "قم بتكوين موقعك في الإعدادات للعثور على المساجد القريبة.",
   "error": "خطأ",
   "retry": "إعادة المحاولة",
   "mosques_found": "مساجد موجودة",

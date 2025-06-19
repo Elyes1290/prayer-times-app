@@ -235,6 +235,7 @@
   "no_auto_location": "স্বয়ংক্রিয় অবস্থান উপলব্ধ নেই",
   "loading_settings": "সেটিংস লোড হচ্ছে...",
   "error_loading_settings": "সেটিংস লোড করতে ত্রুটি",
+  "configure_location_in_settings": "কাছাকাছি মসজিদ খুঁজে পেতে সেটিংসে আপনার অবস্থান কনফিগার করুন।",
   "settings_title": "সেটিংস",
   "apply_changes": "পরিবর্তন প্রয়োগ করুন",
   "notifications_reprogrammed": "নোটিফিকেশন পুনঃপ্রোগ্রাম করা হয়েছে",

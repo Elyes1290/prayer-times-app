@@ -234,6 +234,7 @@
   "no_auto_location": "موقعیت خودکار در دسترس نیست",
   "loading_settings": "در حال بارگیری تنظیمات...",
   "error_loading_settings": "خطا در بارگیری تنظیمات",
+  "configure_location_in_settings": "موقعیت خود را در تنظیمات پیکربندی کنید تا مساجد نزدیک را پیدا کنید.",
   "settings_title": "تنظیمات",
   "apply_changes": "اعمال تغییرات",
   "notifications_reprogrammed": "اعلان‌ها مجدداً برنامه‌ریزی شد",

@@ -233,6 +233,7 @@
   "no_auto_location": "Otomatik konum mevcut değil",
   "loading_settings": "Ayarlar yükleniyor...",
   "error_loading_settings": "Ayarlar yüklenirken hata",
+  "configure_location_in_settings": "Yakındaki camileri bulmak için ayarlarda konumunuzu yapılandırın.",
   "settings_title": "Ayarlar",
   "apply_changes": "Değişiklikleri Uygula",
   "notifications_reprogrammed": "Bildirimler Yeniden Programlandı",

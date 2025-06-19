@@ -356,6 +356,7 @@
   "location_permission_needed_for_mosques": "Location is needed to find nearby mosques",
   "location_required_for_mosques": "Location is required to display nearby mosques",
   "location_error": "Location error",
+  "configure_location_in_settings": "Configure your location in settings to find nearby mosques.",
   "error": "Error",
   "retry": "Retry",
   "mosques_found": "mosques found",

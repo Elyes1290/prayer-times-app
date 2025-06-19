@@ -233,6 +233,7 @@
   "no_auto_location": "Автоматическое местоположение недоступно",
   "loading_settings": "Загрузка настроек...",
   "error_loading_settings": "Ошибка загрузки настроек",
+  "configure_location_in_settings": "Настройте свое местоположение в настройках, чтобы найти ближайшие мечети.",
   "settings_title": "Настройки",
   "apply_changes": "Применить изменения",
   "notifications_reprogrammed": "Уведомления перепрограммированы",
