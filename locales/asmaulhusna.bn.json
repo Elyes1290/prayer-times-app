@@ -2,6 +2,17 @@
   "title": "আল্লাহর ৯৯টি নাম",
   "subtitle": "আল্লাহর সবচেয়ে সুন্দর নামগুলি এবং তাদের অর্থ আবিষ্কার করুন",
   "search_placeholder": "একটি নাম খুঁজুন...",
+  "sections": {
+    "meaning": "অর্থ",
+    "occurrences": "উপস্থিতি",
+    "benefits": "উপকারিতা",
+    "usage": "ব্যবহার",
+    "hadith": "হাদিস",
+    "details": "বিস্তারিত",
+    "reference": "রেফারেন্স",
+    "spiritual_effect": "আধ্যাত্মিক প্রভাব",
+    "citation": "উদ্ধৃতি"
+  },
   "name_1": {
     "arabic": "الله",
     "translit": "Allah",

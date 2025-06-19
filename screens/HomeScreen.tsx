@@ -869,28 +869,28 @@ export default function HomeScreen() {
   const quickActions = [
     {
       icon: "compass",
-      title: "Qibla",
+      title: t("qibla"),
       route: "/qibla",
       color: "#4ECDC4",
       gradient: ["rgba(78,205,196,0.13)", "rgba(44,122,122,0.10)"] as const,
     },
     {
       icon: "calendar-heart",
-      title: "Hijri",
+      title: t("hijri_calendar"),
       route: "/hijri",
       color: "#FFD700",
       gradient: ["rgba(255,215,0,0.12)", "rgba(255,179,102,0.10)"] as const,
     },
     {
       icon: "book-multiple",
-      title: "Hadiths",
+      title: t("hadiths"),
       route: "/hadith",
       color: "#F093FB",
       gradient: ["rgba(240,147,251,0.13)", "rgba(155,75,155,0.10)"] as const,
     },
     {
       icon: "mosque",
-      title: "Mosquées",
+      title: t("mosques"),
       route: "/mosques",
       color: "#B8860B",
       gradient: ["rgba(184,134,11,0.13)", "rgba(255,215,0,0.10)"] as const,
@@ -919,11 +919,40 @@ export default function HomeScreen() {
             <View style={styles.welcomeSection}>
               <Text style={styles.welcomeText}>{t("dashboard_welcome")}</Text>
               <Text style={styles.dateText}>
-                {new Date().toLocaleDateString("fr-FR", {
-                  weekday: "long",
-                  day: "numeric",
-                  month: "long",
-                })}
+                {new Date().toLocaleDateString(
+                  i18n.language.startsWith("ar")
+                    ? "ar"
+                    : i18n.language.startsWith("fr")
+                    ? "fr-FR"
+                    : i18n.language.startsWith("en")
+                    ? "en-US"
+                    : i18n.language.startsWith("es")
+                    ? "es-ES"
+                    : i18n.language.startsWith("de")
+                    ? "de-DE"
+                    : i18n.language.startsWith("it")
+                    ? "it-IT"
+                    : i18n.language.startsWith("pt")
+                    ? "pt-BR"
+                    : i18n.language.startsWith("ru")
+                    ? "ru-RU"
+                    : i18n.language.startsWith("tr")
+                    ? "tr-TR"
+                    : i18n.language.startsWith("nl")
+                    ? "nl-NL"
+                    : i18n.language.startsWith("bn")
+                    ? "bn-BD"
+                    : i18n.language.startsWith("ur")
+                    ? "ur-PK"
+                    : i18n.language.startsWith("fa")
+                    ? "fa-IR"
+                    : "en-US",
+                  {
+                    weekday: "long",
+                    day: "numeric",
+                    month: "long",
+                  }
+                )}
               </Text>
               {city && (
                 <Animated.View
@@ -1098,12 +1127,15 @@ export default function HomeScreen() {
                     style={styles.shareButton}
                     onPress={() => {
                       if (randomDua) {
+                        const message = i18n.language.startsWith("ar")
+                          ? `${randomDua.arabic}\n\nPartagé depuis Prayer Times App`
+                          : `${randomDua.arabic}\n\n${
+                              randomDua.translation
+                            }\n\n${
+                              randomDua.benefits || ""
+                            }\n\nPartagé depuis Prayer Times App`;
                         Share.share({
-                          message: `${randomDua.arabic}\n\n${
-                            randomDua.translation
-                          }\n\n${
-                            randomDua.benefits || ""
-                          }\n\nPartagé depuis Prayer Times App`,
+                          message: message,
                         });
                       }
                     }}
@@ -1120,14 +1152,17 @@ export default function HomeScreen() {
                   {randomDua ? (
                     <>
                       <Text style={styles.duaArabic}>{randomDua.arabic}</Text>
-                      <Text style={styles.duaTranslation}>
-                        {randomDua.translation}
-                      </Text>
-                      {randomDua.benefits && (
-                        <Text style={styles.duaBenefits}>
-                          {randomDua.benefits}
+                      {!i18n.language.startsWith("ar") && (
+                        <Text style={styles.duaTranslation}>
+                          {randomDua.translation}
                         </Text>
                       )}
+                      {randomDua.benefits &&
+                        !i18n.language.startsWith("ar") && (
+                          <Text style={styles.duaBenefits}>
+                            {randomDua.benefits}
+                          </Text>
+                        )}
                     </>
                   ) : (
                     <Text style={styles.cardSubtitle}>
@@ -1184,8 +1219,11 @@ export default function HomeScreen() {
                     style={styles.shareButton}
                     onPress={() => {
                       if (randomVerse) {
+                        const message = i18n.language.startsWith("ar")
+                          ? `${randomVerse.arabic}\n\n${randomVerse.reference}\n\nPartagé depuis Prayer Times App`
+                          : `${randomVerse.arabic}\n\n${randomVerse.translation}\n\n${randomVerse.reference}\n\nPartagé depuis Prayer Times App`;
                         Share.share({
-                          message: `${randomVerse.arabic}\n\n${randomVerse.translation}\n\n${randomVerse.reference}\n\nPartagé depuis Prayer Times App`,
+                          message: message,
                         });
                       }
                     }}
@@ -1204,9 +1242,11 @@ export default function HomeScreen() {
                       <Text style={styles.versetArabic}>
                         {randomVerse.arabic}
                       </Text>
-                      <Text style={styles.versetTranslation}>
-                        {randomVerse.translation}
-                      </Text>
+                      {!i18n.language.startsWith("ar") && (
+                        <Text style={styles.versetTranslation}>
+                          {randomVerse.translation}
+                        </Text>
+                      )}
                       <Text style={styles.versetReference}>
                         {randomVerse.reference}
                       </Text>
@@ -1266,8 +1306,11 @@ export default function HomeScreen() {
                     style={styles.shareButton}
                     onPress={() => {
                       if (randomName) {
+                        const message = i18n.language.startsWith("ar")
+                          ? `${randomName.arabic}\n\nPartagé depuis Prayer Times App`
+                          : `${randomName.arabic}\n\n${randomName.translit}\n\n${randomName.meaning}\n\nPartagé depuis Prayer Times App`;
                         Share.share({
-                          message: `${randomName.arabic}\n\n${randomName.translit}\n\n${randomName.meaning}\n\nPartagé depuis Prayer Times App`,
+                          message: message,
                         });
                       }
                     }}
@@ -1284,12 +1327,16 @@ export default function HomeScreen() {
                   {randomName ? (
                     <>
                       <Text style={styles.nameArabic}>{randomName.arabic}</Text>
-                      <Text style={styles.nameTranslit}>
-                        {randomName.translit}
-                      </Text>
-                      <Text style={styles.nameMeaning}>
-                        {randomName.meaning}
-                      </Text>
+                      {!i18n.language.startsWith("ar") && (
+                        <>
+                          <Text style={styles.nameTranslit}>
+                            {randomName.translit}
+                          </Text>
+                          <Text style={styles.nameMeaning}>
+                            {randomName.meaning}
+                          </Text>
+                        </>
+                      )}
                     </>
                   ) : (
                     <Text style={styles.cardSubtitle}>
@@ -1350,15 +1397,22 @@ export default function HomeScreen() {
                     style={styles.shareButton}
                     onPress={() => {
                       if (randomHadith) {
+                        const message = i18n.language.startsWith("ar")
+                          ? `${randomHadith.hadithArabic || ""}\n\n${
+                              randomHadith.bookSlug
+                            } – ${randomHadith.chapterNumber} – ${
+                              randomHadith.hadithNumber
+                            }\n\nPartagé depuis Prayer Times App`
+                          : `${randomHadith.hadithArabic || ""}\n\n${
+                              randomHadith.hadithEnglish ||
+                              t("translation_not_available")
+                            }\n\n${randomHadith.bookSlug} – ${
+                              randomHadith.chapterNumber
+                            } – ${
+                              randomHadith.hadithNumber
+                            }\n\nPartagé depuis Prayer Times App`;
                         Share.share({
-                          message: `${randomHadith.hadithArabic || ""}\n\n${
-                            randomHadith.hadithEnglish ||
-                            t("translation_not_available")
-                          }\n\n${randomHadith.bookSlug} – ${
-                            randomHadith.chapterNumber
-                          } – ${
-                            randomHadith.hadithNumber
-                          }\n\nPartagé depuis Prayer Times App`,
+                          message: message,
                         });
                       }
                     }}
@@ -1378,16 +1432,17 @@ export default function HomeScreen() {
                           {randomHadith.hadithArabic}
                         </Text>
                       )}
-                      {randomHadith.hadithEnglish &&
-                      randomHadith.hadithEnglish.trim().length > 0 ? (
-                        <Text style={styles.hadithTranslation}>
-                          {randomHadith.hadithEnglish}
-                        </Text>
-                      ) : (
-                        <Text style={styles.hadithTranslation}>
-                          {t("translation_not_available")}
-                        </Text>
-                      )}
+                      {!i18n.language.startsWith("ar") &&
+                        (randomHadith.hadithEnglish &&
+                        randomHadith.hadithEnglish.trim().length > 0 ? (
+                          <Text style={styles.hadithTranslation}>
+                            {randomHadith.hadithEnglish}
+                          </Text>
+                        ) : (
+                          <Text style={styles.hadithTranslation}>
+                            {t("translation_not_available")}
+                          </Text>
+                        ))}
                       <Text style={styles.versetReference}>
                         {randomHadith.bookSlug} – {randomHadith.chapterNumber} –{" "}
                         {randomHadith.hadithNumber}

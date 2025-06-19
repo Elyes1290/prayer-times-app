@@ -2,6 +2,7 @@
 import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   date: Date;
@@ -11,17 +12,36 @@ type Props = {
 };
 
 export function DateNavigator({ date, onPrev, onNext, onReset }: Props) {
+  const { t, i18n } = useTranslation();
+
+  const getLocale = () => {
+    if (i18n.language.startsWith("ar")) return "ar";
+    if (i18n.language.startsWith("fr")) return "fr-FR";
+    if (i18n.language.startsWith("en")) return "en-US";
+    if (i18n.language.startsWith("es")) return "es-ES";
+    if (i18n.language.startsWith("de")) return "de-DE";
+    if (i18n.language.startsWith("it")) return "it-IT";
+    if (i18n.language.startsWith("pt")) return "pt-BR";
+    if (i18n.language.startsWith("ru")) return "ru-RU";
+    if (i18n.language.startsWith("tr")) return "tr-TR";
+    if (i18n.language.startsWith("nl")) return "nl-NL";
+    if (i18n.language.startsWith("bn")) return "bn-BD";
+    if (i18n.language.startsWith("ur")) return "ur-PK";
+    if (i18n.language.startsWith("fa")) return "fa-IR";
+    return "en-US";
+  };
+
   return (
     <View style={styles.nav}>
       <TouchableOpacity onPress={onPrev} style={styles.arrowBtn}>
         <MaterialIcons name="chevron-left" size={28} color="#FFF" />
       </TouchableOpacity>
-      <Text style={styles.text}>{date.toLocaleDateString()}</Text>
+      <Text style={styles.text}>{date.toLocaleDateString(getLocale())}</Text>
       <TouchableOpacity onPress={onNext} style={styles.arrowBtn}>
         <MaterialIcons name="chevron-right" size={28} color="#FFF" />
       </TouchableOpacity>
       <TouchableOpacity onPress={onReset} style={styles.todayBtn}>
-        <Text style={styles.todayText}>Aujourd&#39;hui</Text>
+        <Text style={styles.todayText}>{t("today")}</Text>
       </TouchableOpacity>
     </View>
   );
