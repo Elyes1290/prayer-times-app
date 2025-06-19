@@ -20,6 +20,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import * as Location from "expo-location";
 import { useTranslation } from "react-i18next";
 import { useRouter } from "expo-router";
+import Constants from "expo-constants";
 import bgImage from "../assets/images/prayer-bg.png";
 import { Colors } from "../constants/Colors";
 
@@ -184,8 +185,12 @@ export default function MosqueScreen() {
     longitude: number
   ): Promise<Mosque[]> => {
     try {
-      // Remplacez par votre vraie clé API Google Places (New)
-      const GOOGLE_PLACES_API_KEY = "AIzaSyDUDBly4IpLneSJlVXUPVBaQrZIrMYImWU"; // À remplacer
+      // Clé API récupérée depuis plusieurs sources (ordre de priorité)
+      let GOOGLE_PLACES_API_KEY =
+        process.env.EXPO_PUBLIC_GOOGLE_PLACES_API_KEY || // 1. Variable d'environnement
+        Constants.expoConfig?.extra?.googlePlacesApiKey || // 2. app.config.js
+        (Constants.manifest as any)?.extra?.googlePlacesApiKey || // 3. Fallback manifest
+        "AIzaSyDUDBly4IpLneSJlVXUPVBaQrZIrMYImWU"; // 4. Clé temporaire pour debug
 
       if (!GOOGLE_PLACES_API_KEY || GOOGLE_PLACES_API_KEY.length < 10) {
         console.log(
@@ -193,8 +198,6 @@ export default function MosqueScreen() {
         );
         return []; // Passer au fallback si pas de clé
       }
-
-      console.log("🔍 Recherche avec Google Places API (New)...");
 
       // Essayons d'abord une recherche par texte qui est plus fiable
       const textSearchBody = {
@@ -227,7 +230,6 @@ export default function MosqueScreen() {
       );
 
       const textData = await textResponse.json();
-      console.log("🔍 Recherche textuelle résultats:", textData);
 
       if (textData.places && textData.places.length > 0) {
         const mosques: Mosque[] = textData.places
