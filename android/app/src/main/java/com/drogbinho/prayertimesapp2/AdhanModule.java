@@ -554,6 +554,30 @@ public class AdhanModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
+    public void updateMutedPrayers(ReadableArray mutedPrayersArray) {
+        try {
+            Context context = getReactApplicationContext();
+            SharedPreferences prefs = context.getSharedPreferences("muted_prayers", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = prefs.edit();
+
+            // Convertir l'array en Set<String> pour faciliter les vérifications
+            StringBuilder mutedPrayersString = new StringBuilder();
+            for (int i = 0; i < mutedPrayersArray.size(); i++) {
+                if (i > 0)
+                    mutedPrayersString.append(",");
+                mutedPrayersString.append(mutedPrayersArray.getString(i));
+            }
+
+            editor.putString("muted_prayers_list", mutedPrayersString.toString());
+            editor.apply();
+
+            Log.d("AdhanModule", "Prières muettes mises à jour: " + mutedPrayersString.toString());
+        } catch (Exception e) {
+            Log.e("AdhanModule", "Erreur lors de la mise à jour des prières muettes: " + e.getMessage());
+        }
+    }
+
+    @ReactMethod
     public void setCalculationMethod(String method) {
         SharedPreferences prefs = getReactApplicationContext().getSharedPreferences("adhan_prefs",
                 Context.MODE_PRIVATE);

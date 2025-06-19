@@ -38,6 +38,29 @@ public class AdhanService extends Service {
 
     private MediaPlayer mediaPlayer;
     private String lastPrayerLabel = null; // Utilisé pour savoir quelle prière arrêter et pour la reprog après Isha
+    private boolean isPlayingDuaAfterAdhan = false; // Indique si on joue le dua après l'adhan
+
+    // Méthode pour vérifier si une prière est muette
+    private boolean isPrayerMuted(String prayerLabel) {
+        try {
+            SharedPreferences prefs = getSharedPreferences("muted_prayers", MODE_PRIVATE);
+            String mutedPrayersList = prefs.getString("muted_prayers_list", "");
+            if (mutedPrayersList.isEmpty()) {
+                return false;
+            }
+
+            String[] mutedPrayers = mutedPrayersList.split(",");
+            for (String mutedPrayer : mutedPrayers) {
+                if (mutedPrayer.trim().equals(prayerLabel)) {
+                    return true;
+                }
+            }
+            return false;
+        } catch (Exception e) {
+            Log.e(TAG, "Erreur lors de la vérification des prières muettes: " + e.getMessage());
+            return false; // En cas d'erreur, ne pas rendre muet
+        }
+    }
 
     // Classe interne pour stocker le contenu d'un Dhikr
     private static class DhikrContent {
@@ -230,7 +253,14 @@ public class AdhanService extends Service {
 
         try {
             AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-            if (audioManager != null) {
+
+            // Vérifier si cette prière est muette par l'utilisateur
+            boolean isPrayerMutedByUser = isPrayerMuted(prayerLabelForCompletion);
+
+            if (isPrayerMutedByUser) {
+                Log.d(TAG, "Prière " + prayerLabelForCompletion + " est muette par l'utilisateur. Volume à 0.");
+                mediaPlayer.setVolume(0, 0);
+            } else if (audioManager != null) {
                 int ringerMode = audioManager.getRingerMode();
                 if (ringerMode == AudioManager.RINGER_MODE_SILENT || ringerMode == AudioManager.RINGER_MODE_VIBRATE) {
                     Log.d(TAG, "Mode silencieux/vibreur détecté. Adhan sera silencieux.");
@@ -263,7 +293,21 @@ public class AdhanService extends Service {
     }
 
     private void handleAdhanCompletion(String completedPrayerLabel) {
+        if (!isPlayingDuaAfterAdhan) {
+            // L'adhan principal vient de se terminer, maintenant jouer le dua après l'adhan
+            Log.d(TAG, "Adhan terminé pour " + completedPrayerLabel + ", démarrage du dua après adhan");
+            stopAdhan(); // Libère le MediaPlayer de l'adhan
+            playDuaAfterAdhan(completedPrayerLabel);
+        } else {
+            // Le dua après l'adhan vient de se terminer, maintenant vraiment terminer
+            Log.d(TAG, "Dua après adhan terminé pour " + completedPrayerLabel + ", terminaison complète");
+            handleFinalCompletion(completedPrayerLabel);
+        }
+    }
+
+    private void handleFinalCompletion(String completedPrayerLabel) {
         stopAdhan(); // Assure que le mediaplayer est libéré
+        isPlayingDuaAfterAdhan = false; // Reset du flag
 
         // Créer une notification persistante pour informer que l'Adhan s'est produit
         createCompletedAdhanNotification(completedPrayerLabel);
@@ -275,6 +319,70 @@ public class AdhanService extends Service {
         selfStopIntent.putExtra("PRAYER_LABEL", completedPrayerLabel); // Crucial pour la logique de reprogrammation
                                                                        // après Isha
         startService(selfStopIntent);
+    }
+
+    private void playDuaAfterAdhan(String prayerLabelForCompletion) {
+        SharedPreferences adhanPrefs = getSharedPreferences("adhan_prefs", MODE_PRIVATE);
+        float volume = adhanPrefs.getFloat("adhan_volume", 1.0f);
+
+        Log.d(TAG, "Tentative de lecture dua après adhan pour " + prayerLabelForCompletion + " avec volume " + volume);
+
+        int resId = getResources().getIdentifier("duaafteradhan", "raw", getPackageName());
+        if (resId == 0) {
+            Log.e(TAG, "Fichier audio duaafteradhan non trouvé. Passage à la terminaison finale.");
+            handleFinalCompletion(prayerLabelForCompletion);
+            return;
+        }
+
+        mediaPlayer = MediaPlayer.create(this, resId);
+        if (mediaPlayer == null) {
+            Log.e(TAG, "MediaPlayer.create a échoué pour duaafteradhan");
+            handleFinalCompletion(prayerLabelForCompletion);
+            return;
+        }
+
+        try {
+            AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+
+            // Vérifier si cette prière est muette par l'utilisateur
+            boolean isPrayerMutedByUser = isPrayerMuted(prayerLabelForCompletion);
+
+            if (isPrayerMutedByUser) {
+                Log.d(TAG, "Prière " + prayerLabelForCompletion
+                        + " est muette par l'utilisateur. Dua après adhan aussi à volume 0.");
+                mediaPlayer.setVolume(0, 0);
+            } else if (audioManager != null) {
+                int ringerMode = audioManager.getRingerMode();
+                if (ringerMode == AudioManager.RINGER_MODE_SILENT || ringerMode == AudioManager.RINGER_MODE_VIBRATE) {
+                    Log.d(TAG, "Mode silencieux/vibreur détecté. Dua après adhan sera silencieux.");
+                    mediaPlayer.setVolume(0, 0);
+                } else {
+                    mediaPlayer.setVolume(volume, volume);
+                }
+            } else {
+                mediaPlayer.setVolume(volume, volume); // Fallback si AudioManager n'est pas dispo
+            }
+
+            isPlayingDuaAfterAdhan = true; // Marquer qu'on joue maintenant le dua
+
+            mediaPlayer.setOnCompletionListener(mp -> {
+                Log.d(TAG, "Dua après adhan terminé pour: " + prayerLabelForCompletion);
+                handleAdhanCompletion(prayerLabelForCompletion); // Appellera handleFinalCompletion
+            });
+
+            mediaPlayer.setOnErrorListener((mp, what, extra) -> {
+                Log.e(TAG, "Erreur MediaPlayer dua après adhan: what=" + what + ", extra=" + extra);
+                handleFinalCompletion(prayerLabelForCompletion); // Traiter comme une complétion pour arrêter proprement
+                return true; // Indique que l'erreur a été gérée
+            });
+
+            mediaPlayer.start();
+            Log.d(TAG, "Dua après adhan démarré pour: " + prayerLabelForCompletion);
+
+        } catch (Exception e) {
+            Log.e(TAG, "Erreur lors du démarrage du MediaPlayer pour dua après adhan: " + e.getMessage(), e);
+            handleFinalCompletion(prayerLabelForCompletion);
+        }
     }
 
     private void createCompletedAdhanNotification(String prayerLabel) {
@@ -339,6 +447,7 @@ public class AdhanService extends Service {
                 mediaPlayer = null;
             }
         }
+        isPlayingDuaAfterAdhan = false; // Reset du flag à chaque arrêt
     }
 
     @Override
