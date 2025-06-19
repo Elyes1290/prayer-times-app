@@ -233,6 +233,7 @@
   "no_auto_location": "No hay ubicación automática disponible",
   "loading_settings": "Cargando configuración...",
   "error_loading_settings": "Error al cargar la configuración",
+  "configure_location_in_settings": "Configure su ubicación en los ajustes para encontrar mezquitas cercanas.",
   "settings_title": "Configuración",
   "apply_changes": "Aplicar cambios",
   "notifications_reprogrammed": "Notificaciones reprogramadas",

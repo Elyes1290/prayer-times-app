@@ -232,6 +232,7 @@
   "no_auto_location": "Keine automatische Standortbestimmung verfügbar",
   "loading_settings": "Einstellungen werden geladen...",
   "error_loading_settings": "Fehler beim Laden der Einstellungen",
+  "configure_location_in_settings": "Konfigurieren Sie Ihren Standort in den Einstellungen, um nahegelegene Moscheen zu finden.",
   "settings_title": "Einstellungen",
   "apply_changes": "Änderungen anwenden",
   "notifications_reprogrammed": "Benachrichtigungen neu programmiert",

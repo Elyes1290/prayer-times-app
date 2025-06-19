@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext, useMemo } from "react";
 import {
   View,
   Text,
@@ -23,6 +23,8 @@ import { useRouter } from "expo-router";
 import Constants from "expo-constants";
 import bgImage from "../assets/images/prayer-bg.png";
 import { Colors } from "../constants/Colors";
+import { SettingsContext } from "../contexts/SettingsContext";
+import { useLocation } from "../hooks/useLocation";
 
 const { width: screenWidth } = Dimensions.get("window");
 
@@ -83,45 +85,96 @@ interface Mosque {
 export default function MosqueScreen() {
   const { t } = useTranslation();
   const router = useRouter();
-  const [location, setLocation] = useState<Location.LocationObject | null>(
-    null
-  );
   const [mosques, setMosques] = useState<Mosque[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedMosque, setSelectedMosque] = useState<Mosque | null>(null);
+  const [locationError, setLocationError] = useState<string | null>(null);
+
+  // Utiliser les contextes comme dans PrayerScreen
+  const settings = useContext(SettingsContext);
+  const { location } = useLocation();
 
   // Animations
   const fadeAnim = new Animated.Value(1);
   const slideAnim = new Animated.Value(0);
   const scaleAnim = new Animated.Value(1);
 
+  // Créer l'objet de localisation comme dans PrayerScreen
+  const manualLocationObj = useMemo(
+    () =>
+      settings.manualLocation &&
+      settings.manualLocation.lat &&
+      settings.manualLocation.lon
+        ? {
+            coords: {
+              latitude: settings.manualLocation.lat,
+              longitude: settings.manualLocation.lon,
+              altitude: 0,
+              accuracy: 10,
+              altitudeAccuracy: 10,
+              heading: 0,
+              speed: 0,
+            },
+            timestamp: Date.now(),
+            mocked: true,
+          }
+        : null,
+    [settings.manualLocation?.lat, settings.manualLocation?.lon]
+  );
+
+  // Obtenir la localisation selon le mode choisi
+  const locationToUse =
+    settings.locationMode === "manual" && manualLocationObj
+      ? manualLocationObj
+      : settings.locationMode === "auto"
+      ? location
+      : null;
+
   useEffect(() => {
-    getCurrentLocation();
-  }, []);
+    if (locationToUse?.coords) {
+      // Utiliser la localisation disponible
+      setLocationError(null);
+      findNearbyMosques(
+        locationToUse.coords.latitude,
+        locationToUse.coords.longitude
+      );
+    } else if (settings.locationMode === "auto") {
+      // Si mode auto mais pas de localisation, demander
+      getCurrentLocation();
+    } else {
+      // Pas de localisation configurée
+      setLocationError(t("no_city_selected"));
+      setLoading(false);
+    }
+  }, [locationToUse, settings.locationMode]);
 
   const getCurrentLocation = async () => {
     try {
       const { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== "granted") {
-        Alert.alert(
-          t("location_permission_denied"),
-          t("location_permission_needed_for_mosques")
-        );
+        setLocationError(t("location_permission_denied"));
         setLoading(false);
         return;
       }
 
       const currentLocation = await Location.getCurrentPositionAsync({});
-      setLocation(currentLocation);
+      setLocationError(null);
       await findNearbyMosques(
         currentLocation.coords.latitude,
         currentLocation.coords.longitude
       );
     } catch (error) {
       console.error("Erreur de localisation:", error);
-      Alert.alert(t("error"), t("location_error"));
+      setLocationError(t("location_error"));
       setLoading(false);
     }
+  };
+
+  // Fonction pour forcer l'actualisation de la localisation
+  const refreshLocation = async () => {
+    setLoading(true);
+    setLocationError(null);
+    await getCurrentLocation();
   };
 
   const calculateDistance = (
@@ -792,7 +845,7 @@ export default function MosqueScreen() {
     );
   }
 
-  if (!location) {
+  if (locationError || (!locationToUse?.coords && !loading)) {
     return (
       <>
         <StatusBar barStyle="light-content" />
@@ -809,24 +862,49 @@ export default function MosqueScreen() {
                   color={THEME.colors.danger}
                 />
                 <Text style={styles.errorTitle}>
-                  {t("location_required_for_mosques")}
+                  {locationError || t("location_required_for_mosques")}
                 </Text>
-                <TouchableOpacity
-                  style={styles.retryButton}
-                  onPress={getCurrentLocation}
-                >
-                  <LinearGradient
-                    colors={THEME.colors.gradients.primary}
-                    style={styles.retryGradient}
+                <Text style={styles.errorDescription}>
+                  {t("configure_location_in_settings")}
+                </Text>
+                <View style={styles.errorActions}>
+                  <TouchableOpacity
+                    style={styles.retryButton}
+                    onPress={() => router.push("/settings")}
                   >
-                    <MaterialCommunityIcons
-                      name="refresh"
-                      size={20}
-                      color="#fff"
-                    />
-                    <Text style={styles.retryButtonText}>{t("retry")}</Text>
-                  </LinearGradient>
-                </TouchableOpacity>
+                    <LinearGradient
+                      colors={THEME.colors.gradients.secondary}
+                      style={styles.retryGradient}
+                    >
+                      <MaterialCommunityIcons
+                        name="cog"
+                        size={20}
+                        color="#fff"
+                      />
+                      <Text style={styles.retryButtonText}>
+                        {t("settings")}
+                      </Text>
+                    </LinearGradient>
+                  </TouchableOpacity>
+                  {settings.locationMode === "auto" && (
+                    <TouchableOpacity
+                      style={styles.retryButton}
+                      onPress={refreshLocation}
+                    >
+                      <LinearGradient
+                        colors={THEME.colors.gradients.primary}
+                        style={styles.retryGradient}
+                      >
+                        <MaterialCommunityIcons
+                          name="refresh"
+                          size={20}
+                          color="#fff"
+                        />
+                        <Text style={styles.retryButtonText}>{t("retry")}</Text>
+                      </LinearGradient>
+                    </TouchableOpacity>
+                  )}
+                </View>
               </LinearGradient>
             </View>
           </View>
@@ -874,7 +952,7 @@ export default function MosqueScreen() {
 
               <TouchableOpacity
                 style={styles.refreshIconButton}
-                onPress={getCurrentLocation}
+                onPress={refreshLocation}
               >
                 <MaterialCommunityIcons
                   name="refresh"
@@ -967,6 +1045,19 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginVertical: 16,
     lineHeight: 24,
+  },
+  errorDescription: {
+    fontSize: 14,
+    color: THEME.colors.text.muted,
+    textAlign: "center",
+    marginBottom: 16,
+    lineHeight: 20,
+  },
+  errorActions: {
+    flexDirection: "row",
+    gap: 12,
+    justifyContent: "center",
+    alignItems: "center",
   },
   retryButton: {
     borderRadius: THEME.borderRadius.md,

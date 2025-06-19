@@ -233,6 +233,7 @@
   "no_auto_location": "Posizione automatica non disponibile",
   "loading_settings": "Caricamento impostazioni...",
   "error_loading_settings": "Errore nel caricamento delle impostazioni",
+  "configure_location_in_settings": "Configura la tua posizione nelle impostazioni per trovare moschee vicine.",
   "settings_title": "Impostazioni",
   "apply_changes": "Applica Modifiche",
   "notifications_reprogrammed": "Notifiche Riprogrammate",

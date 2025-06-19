@@ -352,12 +352,13 @@
     "search_placeholder": "Rechercher un nom..."
   },
 
-  "nearby_mosques": "Mosquées à proximité",
-  "finding_nearby_mosques": "Recherche des mosquées à proximité...",
   "location_permission_denied": "Permission de localisation refusée",
   "location_permission_needed_for_mosques": "La localisation est nécessaire pour trouver les mosquées à proximité",
   "location_required_for_mosques": "La localisation est requise pour afficher les mosquées proches",
   "location_error": "Erreur de localisation",
+  "configure_location_in_settings": "Configurez votre localisation dans les paramètres pour trouver les mosquées à proximité.",
+  "finding_nearby_mosques": "Recherche des mosquées à proximité...",
+  "nearby_mosques": "Mosquées à proximité",
   "error": "Erreur",
   "retry": "Réessayer",
   "mosques_found": "mosquées trouvées",
