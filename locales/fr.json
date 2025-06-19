@@ -137,10 +137,10 @@
     "rate_app": "Noter l'application",
     "contact_suggestion": "Suggestion Application Musulmane",
     "contact_bug": "Bug Report Application Musulmane",
-    "email_template": "Bonjour Elyes,\n\nConcernant {{subject}} :\n\n[Votre message ici]\n\nMerci pour cette excellente application !\n\nCordialement",
+    "email_template": "Bonjour Drogbinho,\n\nConcernant {{subject}} :\n\n[Votre message ici]\n\nMerci pour cette excellente application !\n\nCordialement",
 
     "developer_title": "👨‍💻 Développeur",
-    "developer_name": "Développé avec ❤️ par Elyes Nait-Liman",
+    "developer_name": "Développé avec ❤️ par Drogbinho",
     "developer_bio": "Développeur passionné, musulman pratiquant, créateur d'applications utiles pour la communauté.",
     "linkedin_profile": "Voir le profil LinkedIn",
 
@@ -351,6 +351,20 @@
     "subtitle": "Découvrez les plus beaux noms d'Allah et leurs significations",
     "search_placeholder": "Rechercher un nom..."
   },
+
+  "nearby_mosques": "Mosquées à proximité",
+  "finding_nearby_mosques": "Recherche des mosquées à proximité...",
+  "location_permission_denied": "Permission de localisation refusée",
+  "location_permission_needed_for_mosques": "La localisation est nécessaire pour trouver les mosquées à proximité",
+  "location_required_for_mosques": "La localisation est requise pour afficher les mosquées proches",
+  "location_error": "Erreur de localisation",
+  "error": "Erreur",
+  "retry": "Réessayer",
+  "mosques_found": "mosquées trouvées",
+  "get_directions": "Itinéraire",
+  "directions": "Itinéraire",
+  "call": "Appeler",
+  "more_info": "Plus d'infos",
 
   "tasbih": {
     "title": "Tasbih",

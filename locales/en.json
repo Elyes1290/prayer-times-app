@@ -139,10 +139,10 @@
     "rate_app": "Rate the app",
     "contact_suggestion": "Islamic App Suggestion",
     "contact_bug": "Islamic App Bug Report",
-    "email_template": "Hello Elyes,\n\nRegarding {{subject}}:\n\n[Your message here]\n\nThank you for this excellent app!\n\nBest regards",
+    "email_template": "Hello Drogbinho,\n\nRegarding {{subject}}:\n\n[Your message here]\n\nThank you for this excellent app!\n\nBest regards",
 
     "developer_title": "👨‍💻 Developer",
-    "developer_name": "Developed with ❤️ by Elyes Nait-Liman",
+    "developer_name": "Developed with ❤️ by Drogbinho",
     "developer_bio": "Passionate developer, practicing Muslim, creator of useful apps for the community.",
     "linkedin_profile": "View LinkedIn profile",
 
@@ -350,6 +350,19 @@
   "sujud_dua_translation": "Glory be to my Lord, the Most High",
   "hadith_du_jour": "Hadith of the Day",
   "voir_plus": "See more",
+  "nearby_mosques": "Nearby Mosques",
+  "finding_nearby_mosques": "Finding nearby mosques...",
+  "location_permission_denied": "Location permission denied",
+  "location_permission_needed_for_mosques": "Location is needed to find nearby mosques",
+  "location_required_for_mosques": "Location is required to display nearby mosques",
+  "location_error": "Location error",
+  "error": "Error",
+  "retry": "Retry",
+  "mosques_found": "mosques found",
+  "get_directions": "Get Directions",
+  "directions": "Directions",
+  "call": "Call",
+  "more_info": "More Info",
 
   "tasbih": {
     "title": "Tasbih",

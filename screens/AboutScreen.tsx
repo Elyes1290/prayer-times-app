@@ -42,7 +42,7 @@ export default function AboutScreen() {
   ];
 
   const handleEmailContact = (subject: string) => {
-    const email = "elyes.naitliman@gmail.com";
+    const email = "myadhanpp@gmail.com";
     const body = t("abouts.email_template").replace("{{subject}}", subject);
     Linking.openURL(
       `mailto:${email}?subject=${subject}&body=${encodeURIComponent(body)}`
@@ -182,19 +182,6 @@ export default function AboutScreen() {
           <Text style={styles.sectionTitle}>{t("abouts.developer_title")}</Text>
           <Text style={styles.text}>{t("abouts.developer_name")}</Text>
           <Text style={styles.text}>{t("abouts.developer_bio")}</Text>
-          <TouchableOpacity
-            onPress={() =>
-              Linking.openURL(
-                "https://www.linkedin.com/in/elyes-nait-liman-bbb7b4189"
-              )
-            }
-            style={styles.linkedinButton}
-          >
-            <MaterialCommunityIcons name="linkedin" size={20} color="#0077b5" />
-            <Text style={styles.linkedinText}>
-              {t("abouts.linkedin_profile")}
-            </Text>
-          </TouchableOpacity>
         </View>
 
         {/* Technical Info Section */}
