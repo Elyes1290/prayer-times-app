@@ -42,8 +42,9 @@ export async function getQuranVersesWithTranslations(
   const arabicJson = await arabicRes.json();
   const verses = arabicJson.verses || [];
 
-  // 2. Récupérer la traduction
-  const translationId = translationMap[lang] || 85;
+  // 2. Récupérer la traduction - normaliser la langue au cas où
+  const normalizedLang = detectLang(lang);
+  const translationId = translationMap[normalizedLang] || 85;
   const translationRes = await fetch(
     `https://api.quran.com/api/v4/quran/translations/${translationId}?chapter_number=${chapterNumber}`
   );

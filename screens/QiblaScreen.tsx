@@ -1,7 +1,8 @@
 import * as Location from "expo-location";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import {
   Animated,
+  AppState,
   Image,
   ImageBackground,
   StyleSheet,
@@ -9,6 +10,7 @@ import {
   View,
 } from "react-native";
 import { useTranslation } from "react-i18next";
+import { useFocusEffect } from "@react-navigation/native";
 import compassImg from "../assets/images/compass.png";
 import kaabaImg from "../assets/images/kaaba.png";
 import bgImage from "../assets/images/prayer-bg.png";
@@ -56,6 +58,10 @@ export default function QiblaScreen() {
   const [direction, setDirection] = useState<number | null>(null);
   const [heading, setHeading] = useState<number | null>(null);
   const [isPointingToQibla, setIsPointingToQibla] = useState(false);
+  const [locationPermissionGranted, setLocationPermissionGranted] = useState<
+    boolean | null
+  >(null);
+  const [isInitializing, setIsInitializing] = useState(true);
 
   // Animation: valeur de rotation de la boussole
   const animatedHeading = useRef(new Animated.Value(0)).current;
@@ -63,6 +69,11 @@ export default function QiblaScreen() {
 
   // Animation pour la couleur de l'aiguille
   const needleColorAnimation = useRef(new Animated.Value(0)).current;
+
+  // Référence pour le subscription du heading
+  const headingSubscription = useRef<Location.LocationSubscription | null>(
+    null
+  );
 
   // Pour l'icône Kaaba
   const KAABA_RADIUS = COMPASS_SIZE / 2 - 30;
@@ -92,21 +103,93 @@ export default function QiblaScreen() {
     return diff <= 15;
   };
 
-  useEffect(() => {
-    (async () => {
+  // Fonction pour initialiser la localisation et la boussole
+  const initializeQibla = useCallback(async () => {
+    try {
+      setIsInitializing(true);
+
+      // Vérifier les permissions
       let { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== "granted") return;
-      let loc = await Location.getCurrentPositionAsync({});
+
+      if (status !== "granted") {
+        setLocationPermissionGranted(false);
+        setIsInitializing(false);
+        return;
+      }
+
+      setLocationPermissionGranted(true);
+
+      // Récupérer la position actuelle
+      const loc = await Location.getCurrentPositionAsync({
+        accuracy: Location.Accuracy.Balanced,
+      });
+
+      // Calculer la direction de la Qibla
       const angle = calculateQiblaDirection(
         loc.coords.latitude,
         loc.coords.longitude
       );
       setDirection(angle);
-      Location.watchHeadingAsync((data) => {
+
+      // Nettoyer l'ancien subscription s'il existe
+      if (headingSubscription.current) {
+        headingSubscription.current.remove();
+      }
+
+      // Démarrer l'écoute du heading
+      headingSubscription.current = await Location.watchHeadingAsync((data) => {
         setHeading(data.trueHeading);
       });
-    })();
+
+      setIsInitializing(false);
+    } catch (error) {
+      console.error("Erreur lors de l'initialisation de la Qibla:", error);
+      setLocationPermissionGranted(false);
+      setIsInitializing(false);
+    }
   }, []);
+
+  // useEffect pour l'initialisation au montage
+  useEffect(() => {
+    initializeQibla();
+
+    // Cleanup au démontage
+    return () => {
+      if (headingSubscription.current) {
+        headingSubscription.current.remove();
+      }
+    };
+  }, [initializeQibla]);
+
+  // useFocusEffect pour réessayer quand l'écran devient actif
+  useFocusEffect(
+    useCallback(() => {
+      // Si on n'a pas les permissions ou qu'on initialise encore, réessayer
+      if (locationPermissionGranted === false || isInitializing) {
+        initializeQibla();
+      }
+    }, [locationPermissionGranted, isInitializing, initializeQibla])
+  );
+
+  // Écouter les changements d'état de l'app (retour depuis les paramètres)
+  useEffect(() => {
+    const handleAppStateChange = (nextAppState: string) => {
+      if (nextAppState === "active" && locationPermissionGranted === false) {
+        // L'app devient active et on n'avait pas les permissions avant
+        // Réessayer d'initialiser la Qibla
+        initializeQibla();
+      }
+    };
+
+    const subscription = AppState.addEventListener(
+      "change",
+      handleAppStateChange
+    );
+
+    return () => {
+      subscription?.remove();
+    };
+  }, [locationPermissionGranted, initializeQibla]);
 
   useEffect(() => {
     if (heading !== null) {
@@ -164,6 +247,27 @@ export default function QiblaScreen() {
     <ImageBackground source={bgImage} style={styles.background}>
       <View style={styles.container}>
         <Text style={styles.title}>{t("qibla_direction")}</Text>
+
+        {/* Indicateur d'état */}
+        {isInitializing && (
+          <View style={styles.statusContainer}>
+            <Text style={styles.statusText}>
+              Initialisation de la boussole...
+            </Text>
+          </View>
+        )}
+
+        {locationPermissionGranted === false && !isInitializing && (
+          <View style={styles.statusContainer}>
+            <Text style={styles.statusTextError}>
+              Permission de localisation requise
+            </Text>
+            <Text style={styles.statusSubText}>
+              Appuyez sur &quot;Autoriser&quot; et revenez à l&apos;application
+            </Text>
+          </View>
+        )}
+
         <View style={styles.compassWrap}>
           {/* Boussole qui tourne */}
           <Animated.View
@@ -297,5 +401,34 @@ const styles = StyleSheet.create({
     overflow: "hidden",
     borderWidth: 1.5,
     borderColor: "#e7c86a", // Jaune doux
+  },
+  statusContainer: {
+    backgroundColor: "rgba(34,40,58,0.9)",
+    borderRadius: 12,
+    padding: 16,
+    marginHorizontal: 20,
+    marginBottom: 20,
+    alignItems: "center",
+    borderWidth: 1,
+    borderColor: "#e7c86a",
+  },
+  statusText: {
+    color: "#FFD700",
+    fontSize: 16,
+    fontWeight: "600",
+    textAlign: "center",
+  },
+  statusTextError: {
+    color: "#FF6B6B",
+    fontSize: 16,
+    fontWeight: "600",
+    textAlign: "center",
+    marginBottom: 8,
+  },
+  statusSubText: {
+    color: "#fffbe8",
+    fontSize: 14,
+    textAlign: "center",
+    opacity: 0.8,
   },
 });
