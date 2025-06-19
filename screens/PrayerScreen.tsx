@@ -9,6 +9,7 @@ import React, {
 import {
   ActivityIndicator,
   Alert,
+  Image,
   ImageBackground,
   PermissionsAndroid,
   Platform,
@@ -22,6 +23,7 @@ import {
   StatusBar,
   Dimensions,
 } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useRouter } from "expo-router";
 import bgImage from "../assets/images/prayer-bg.png";
 import { DateNavigator } from "../components/DateNavigator";
@@ -77,11 +79,453 @@ const iconByPrayer: Record<
   },
 };
 
+// Composant pour les sections d'apprentissage collapsibles
+const LearningSection = () => {
+  const { t } = useTranslation();
+  const [expandedSection, setExpandedSection] = useState<string | null>(null);
+
+  const toggleSection = (section: string) => {
+    setExpandedSection(expandedSection === section ? null : section);
+  };
+
+  const CollapsibleCard = ({
+    id,
+    title,
+    icon,
+    color,
+    children,
+  }: {
+    id: string;
+    title: string;
+    icon: string;
+    color: string;
+    children: React.ReactNode;
+  }) => {
+    const isExpanded = expandedSection === id;
+
+    return (
+      <View style={learningStyles.card}>
+        <TouchableOpacity
+          style={learningStyles.cardHeader}
+          onPress={() => toggleSection(id)}
+          activeOpacity={0.7}
+        >
+          <View style={learningStyles.cardHeaderLeft}>
+            <View
+              style={[learningStyles.iconContainer, { backgroundColor: color }]}
+            >
+              <MaterialCommunityIcons
+                name={icon as any}
+                size={24}
+                color="#fff"
+              />
+            </View>
+            <Text style={learningStyles.cardTitle}>{title}</Text>
+          </View>
+          <MaterialCommunityIcons
+            name={isExpanded ? "chevron-up" : "chevron-down"}
+            size={24}
+            color="#4ECDC4"
+          />
+        </TouchableOpacity>
+
+        {isExpanded && (
+          <Animated.View style={learningStyles.cardContent}>
+            {children}
+          </Animated.View>
+        )}
+      </View>
+    );
+  };
+
+  return (
+    <View style={learningStyles.container}>
+      <View style={learningStyles.sectionHeader}>
+        <MaterialCommunityIcons name="school" size={28} color="#FFD700" />
+        <Text style={learningStyles.sectionTitle}>{t("learn_to_pray")}</Text>
+      </View>
+
+      {/* Section Ablutions */}
+      <CollapsibleCard
+        id="wudu"
+        title={t("ablutions_wudu")}
+        icon="water"
+        color="rgba(78, 205, 196, 0.8)"
+      >
+        <View style={learningStyles.stepContainer}>
+          <Text style={learningStyles.stepTitle}>{t("wudu_steps")}:</Text>
+
+          <View style={learningStyles.step}>
+            <View style={learningStyles.stepContent}>
+              <Text style={learningStyles.stepNumber}>1.</Text>
+              <View style={learningStyles.stepTextContainer}>
+                <Text style={learningStyles.stepText}>{t("wudu_step_1")}</Text>
+                <View style={learningStyles.invocationContainer}>
+                  <Text style={learningStyles.invocationArabic}>
+                    {t("wudu_invocation_arabic")}
+                  </Text>
+                  <Text style={learningStyles.invocationPhonetic}>
+                    {t("wudu_invocation_phonetic")}
+                  </Text>
+                  <Text style={learningStyles.invocationTranslation}>
+                    {t("wudu_invocation_translation")}
+                  </Text>
+                </View>
+              </View>
+            </View>
+          </View>
+
+          <View style={learningStyles.step}>
+            <View style={learningStyles.stepContent}>
+              <Text style={learningStyles.stepNumber}>2.</Text>
+              <Text style={learningStyles.stepText}>{t("wudu_step_2")}</Text>
+            </View>
+            <Image
+              source={require("../assets/images/mains.jpg")}
+              style={learningStyles.stepImage}
+              resizeMode="cover"
+            />
+          </View>
+
+          <View style={learningStyles.step}>
+            <View style={learningStyles.stepContent}>
+              <Text style={learningStyles.stepNumber}>3.</Text>
+              <Text style={learningStyles.stepText}>{t("wudu_step_3")}</Text>
+            </View>
+            <Image
+              source={require("../assets/images/bouche.jpg")}
+              style={learningStyles.stepImage}
+              resizeMode="cover"
+            />
+          </View>
+
+          <View style={learningStyles.step}>
+            <View style={learningStyles.stepContent}>
+              <Text style={learningStyles.stepNumber}>4.</Text>
+              <Text style={learningStyles.stepText}>{t("wudu_step_4")}</Text>
+            </View>
+            <Image
+              source={require("../assets/images/nez.jpg")}
+              style={learningStyles.stepImage}
+              resizeMode="cover"
+            />
+          </View>
+
+          <View style={learningStyles.step}>
+            <View style={learningStyles.stepContent}>
+              <Text style={learningStyles.stepNumber}>5.</Text>
+              <Text style={learningStyles.stepText}>{t("wudu_step_5")}</Text>
+            </View>
+            <Image
+              source={require("../assets/images/visage.jpg")}
+              style={learningStyles.stepImage}
+              resizeMode="cover"
+            />
+          </View>
+
+          <View style={learningStyles.step}>
+            <View style={learningStyles.stepContent}>
+              <Text style={learningStyles.stepNumber}>6.</Text>
+              <Text style={learningStyles.stepText}>{t("wudu_step_6")}</Text>
+            </View>
+            <Image
+              source={require("../assets/images/bras.jpg")}
+              style={learningStyles.stepImage}
+              resizeMode="cover"
+            />
+          </View>
+
+          <View style={learningStyles.step}>
+            <View style={learningStyles.stepContent}>
+              <Text style={learningStyles.stepNumber}>7.</Text>
+              <Text style={learningStyles.stepText}>{t("wudu_step_7")}</Text>
+            </View>
+            <Image
+              source={require("../assets/images/tete.jpg")}
+              style={learningStyles.stepImage}
+              resizeMode="cover"
+            />
+          </View>
+
+          <View style={learningStyles.step}>
+            <View style={learningStyles.stepContent}>
+              <Text style={learningStyles.stepNumber}>8.</Text>
+              <Text style={learningStyles.stepText}>{t("wudu_step_8")}</Text>
+            </View>
+            <Image
+              source={require("../assets/images/oreilles.jpg")}
+              style={learningStyles.stepImage}
+              resizeMode="cover"
+            />
+          </View>
+
+          <View style={learningStyles.step}>
+            <View style={learningStyles.stepContent}>
+              <Text style={learningStyles.stepNumber}>9.</Text>
+              <Text style={learningStyles.stepText}>{t("wudu_step_9")}</Text>
+            </View>
+            <Image
+              source={require("../assets/images/pied.jpg")}
+              style={learningStyles.stepImage}
+              resizeMode="cover"
+            />
+          </View>
+        </View>
+      </CollapsibleCard>
+
+      {/* Section Prière */}
+      <CollapsibleCard
+        id="prayer"
+        title={t("prayer_positions")}
+        icon="human-handsup"
+        color="rgba(255, 215, 0, 0.8)"
+      >
+        <View style={learningStyles.stepContainer}>
+          <Text style={learningStyles.stepTitle}>{t("prayer_steps")}:</Text>
+
+          <View style={learningStyles.step}>
+            <View style={learningStyles.stepContent}>
+              <Text style={learningStyles.stepNumber}>1.</Text>
+              <View style={learningStyles.stepTextContainer}>
+                <Text style={learningStyles.stepText}>
+                  {t("prayer_step_1")}
+                </Text>
+                <Text style={learningStyles.stepDetailText}>
+                  {t("prayer_step_1_detail")}
+                </Text>
+              </View>
+            </View>
+            <Image
+              source={require("../assets/images/quyiam2.png")}
+              style={learningStyles.stepImage}
+              resizeMode="contain"
+            />
+          </View>
+
+          <View style={learningStyles.stepContainer}>
+            <View style={learningStyles.stepHeader}>
+              <View style={learningStyles.stepContent}>
+                <Text style={learningStyles.stepNumber}>2.</Text>
+                <View style={learningStyles.stepTextContainer}>
+                  <Text style={learningStyles.stepText}>
+                    {t("prayer_step_2")}
+                  </Text>
+                  <Text style={learningStyles.stepDetailText}>
+                    {t("prayer_step_2_detail")}
+                  </Text>
+                </View>
+              </View>
+              <Image
+                source={require("../assets/images/takbeer.png")}
+                style={learningStyles.stepImage}
+                resizeMode="contain"
+              />
+            </View>
+            <View style={learningStyles.invocationContainerFull}>
+              <Text style={learningStyles.invocationArabic}>
+                {t("takbir_dua")}
+              </Text>
+              <Text style={learningStyles.invocationPhonetic}>
+                {t("takbir_phonetic")}
+              </Text>
+              <Text style={learningStyles.invocationTranslation}>
+                {t("takbir_translation")}
+              </Text>
+            </View>
+          </View>
+
+          <View style={learningStyles.step}>
+            <View style={learningStyles.stepContent}>
+              <Text style={learningStyles.stepNumber}>3.</Text>
+              <View style={learningStyles.stepTextContainer}>
+                <Text style={learningStyles.stepText}>
+                  {t("prayer_step_recitation")}
+                </Text>
+                <Text style={learningStyles.stepDetailText}>
+                  Rester debout, mains croisées, réciter Al-Fatiha puis une
+                  autre sourate du Coran
+                </Text>
+              </View>
+            </View>
+            <Image
+              source={require("../assets/images/quiyam.png")}
+              style={learningStyles.stepImage}
+              resizeMode="contain"
+            />
+          </View>
+
+          <View style={learningStyles.stepContainer}>
+            <View style={learningStyles.stepHeader}>
+              <View style={learningStyles.stepContent}>
+                <Text style={learningStyles.stepNumber}>4.</Text>
+                <View style={learningStyles.stepTextContainer}>
+                  <Text style={learningStyles.stepText}>
+                    {t("prayer_step_3")}
+                  </Text>
+                  <Text style={learningStyles.stepDetailText}>
+                    Se pencher en avant (Ruku), mains sur les genoux, dire le
+                    tasbih du ruku au moins 3 fois
+                  </Text>
+                </View>
+              </View>
+              <Image
+                source={require("../assets/images/ruku.png")}
+                style={learningStyles.stepImage}
+                resizeMode="contain"
+              />
+            </View>
+            <View style={learningStyles.invocationContainerFull}>
+              <Text style={learningStyles.invocationArabic}>
+                سُبْحَانَ رَبِّيَ الْعَظِيمِ
+              </Text>
+              <Text style={learningStyles.invocationPhonetic}>
+                Subhana rabbiya al-azeem
+              </Text>
+              <Text style={learningStyles.invocationTranslation}>
+                {t("ruku_dua_translation")}
+              </Text>
+            </View>
+          </View>
+
+          <View style={learningStyles.stepContainer}>
+            <View style={learningStyles.stepHeader}>
+              <View style={learningStyles.stepContent}>
+                <Text style={learningStyles.stepNumber}>5.</Text>
+                <View style={learningStyles.stepTextContainer}>
+                  <Text style={learningStyles.stepText}>
+                    {t("prayer_step_5")}
+                  </Text>
+                  <Text style={learningStyles.stepDetailText}>
+                    {t("prayer_step_5_detail")}
+                  </Text>
+                </View>
+              </View>
+              <Image
+                source={require("../assets/images/soujoud.png")}
+                style={learningStyles.stepImage}
+                resizeMode="contain"
+              />
+            </View>
+            <View style={learningStyles.invocationContainerFull}>
+              <Text style={learningStyles.invocationArabic}>
+                سُبْحَانَ رَبِّيَ الأَعْلَى
+              </Text>
+              <Text style={learningStyles.invocationPhonetic}>
+                Subhana rabbiya al-a&apos;la
+              </Text>
+              <Text style={learningStyles.invocationTranslation}>
+                {t("sujud_dua_translation")}
+              </Text>
+            </View>
+          </View>
+
+          <View style={learningStyles.stepContainer}>
+            <View style={learningStyles.stepHeader}>
+              <View style={learningStyles.stepContent}>
+                <Text style={learningStyles.stepNumber}>6.</Text>
+                <View style={learningStyles.stepTextContainer}>
+                  <Text style={learningStyles.stepText}>
+                    {t("prayer_step_6_detail")}
+                  </Text>
+                </View>
+              </View>
+              <Image
+                source={require("../assets/images/tashahhud.png")}
+                style={learningStyles.stepImage}
+                resizeMode="contain"
+              />
+            </View>
+            <View style={learningStyles.invocationContainerFull}>
+              <Text style={learningStyles.invocationArabic}>
+                {t("tashahhud_dua")}
+              </Text>
+              <Text style={learningStyles.invocationPhonetic}>
+                {t("tashahhud_phonetic")}
+              </Text>
+              <Text style={learningStyles.invocationTranslation}>
+                {t("tashahhud_translation")}
+              </Text>
+            </View>
+          </View>
+
+          <View style={learningStyles.stepContainer}>
+            <View style={learningStyles.stepHeader}>
+              <View style={learningStyles.stepContent}>
+                <Text style={learningStyles.stepNumber}>7.</Text>
+                <View style={learningStyles.stepTextContainer}>
+                  <Text style={learningStyles.stepText}>
+                    {t("prayer_step_8")}
+                  </Text>
+                  <Text style={learningStyles.stepDetailText}>
+                    {t("prayer_step_8_detail")}
+                  </Text>
+                </View>
+              </View>
+              <Image
+                source={require("../assets/images/tashahhud.png")}
+                style={learningStyles.stepImage}
+                resizeMode="contain"
+              />
+            </View>
+            <View style={learningStyles.invocationContainerFull}>
+              <Text style={learningStyles.invocationArabic}>
+                {t("full_tashahhud_dua")}
+              </Text>
+              <Text style={learningStyles.invocationPhonetic}>
+                {t("full_tashahhud_phonetic")}
+              </Text>
+              <Text style={learningStyles.invocationTranslation}>
+                {t("full_tashahhud_translation")}
+              </Text>
+            </View>
+          </View>
+
+          <View style={learningStyles.stepContainer}>
+            <View style={learningStyles.stepHeader}>
+              <View style={learningStyles.stepContent}>
+                <Text style={learningStyles.stepNumber}>8.</Text>
+                <View style={learningStyles.stepTextContainer}>
+                  <Text style={learningStyles.stepText}>
+                    {t("prayer_step_7_detail")}
+                  </Text>
+                </View>
+              </View>
+              <Image
+                source={require("../assets/images/salam.png")}
+                style={learningStyles.stepImage}
+                resizeMode="contain"
+              />
+            </View>
+            <View style={learningStyles.invocationContainerFull}>
+              <Text style={learningStyles.invocationArabic}>
+                {t("salam_dua")}
+              </Text>
+              <Text style={learningStyles.invocationPhonetic}>
+                {t("salam_phonetic")}
+              </Text>
+              <Text style={learningStyles.invocationTranslation}>
+                {t("salam_translation")}
+              </Text>
+            </View>
+          </View>
+        </View>
+      </CollapsibleCard>
+
+      <View style={learningStyles.footer}>
+        <Text style={learningStyles.footerText}>{t("learning_footer")}</Text>
+      </View>
+    </View>
+  );
+};
+
 export default function PrayerScreen() {
   const { t, i18n } = useTranslation();
   const router = useRouter();
   const [today, setToday] = useState(new Date());
   const [city, setCity] = useState<string | null>(null);
+
+  // État pour gérer les prières muettes/non-muettes
+  const [mutedPrayers, setMutedPrayers] = useState<Set<string>>(new Set());
 
   // Animations
   const [fadeAnim] = useState(new Animated.Value(0));
@@ -90,6 +534,50 @@ export default function PrayerScreen() {
 
   const settings = useContext(SettingsContext);
   const { location } = useLocation();
+
+  // Fonction pour charger les préférences de son
+  const loadMutedPrayers = useCallback(async () => {
+    try {
+      const mutedPrayersJson = await AsyncStorage.getItem("muted_prayers");
+      if (mutedPrayersJson) {
+        const mutedArray = JSON.parse(mutedPrayersJson);
+        setMutedPrayers(new Set(mutedArray));
+      }
+    } catch (error) {
+      console.error("Erreur lors du chargement des prières muettes:", error);
+    }
+  }, []);
+
+  // Fonction pour sauvegarder les préférences de son
+  const saveMutedPrayers = useCallback(async (mutedSet: Set<string>) => {
+    try {
+      const mutedArray = Array.from(mutedSet);
+      await AsyncStorage.setItem("muted_prayers", JSON.stringify(mutedArray));
+      // Notifier le module natif du changement
+      if (AdhanModule && AdhanModule.updateMutedPrayers) {
+        AdhanModule.updateMutedPrayers(mutedArray);
+      }
+    } catch (error) {
+      console.error("Erreur lors de la sauvegarde des prières muettes:", error);
+    }
+  }, []);
+
+  // Fonction pour basculer le statut muet d'une prière
+  const togglePrayerMute = useCallback(
+    (prayer: string) => {
+      setMutedPrayers((prevMuted) => {
+        const newMuted = new Set(prevMuted);
+        if (newMuted.has(prayer)) {
+          newMuted.delete(prayer);
+        } else {
+          newMuted.add(prayer);
+        }
+        saveMutedPrayers(newMuted);
+        return newMuted;
+      });
+    },
+    [saveMutedPrayers]
+  );
 
   // Créer l'objet de localisation manuelle de manière stable
   const manualLocationObj = useMemo(
@@ -159,6 +647,11 @@ export default function PrayerScreen() {
 
     return () => pulseAnimation.stop();
   }, []);
+
+  // Charger les préférences de son au démarrage
+  useEffect(() => {
+    loadMutedPrayers();
+  }, [loadMutedPrayers]);
 
   // Calculer le temps jusqu'à la prochaine prière en minutes
   const getTimeUntilNextInMinutes = () => {
@@ -457,6 +950,12 @@ export default function PrayerScreen() {
                   const isPassed = time instanceof Date && new Date() > time;
                   const isNext = nextPrayer?.toLowerCase() === prayer;
 
+                  // Exclure "sunrise" car ce n'est pas une prière avec adhan
+                  const hasAdhan = prayer !== "sunrise";
+                  const prayerKey =
+                    prayer.charAt(0).toUpperCase() + prayer.slice(1);
+                  const isMuted = mutedPrayers.has(prayerKey);
+
                   return (
                     <View
                       key={prayer}
@@ -491,14 +990,30 @@ export default function PrayerScreen() {
                             : "--:--"}
                         </Text>
                       </View>
-                      {isPassed && !isNext && (
-                        <MaterialCommunityIcons
-                          name="check-circle"
-                          size={16}
-                          color="#4ECDC4"
-                          style={styles.prayerItemCheck}
-                        />
-                      )}
+
+                      <View style={styles.prayerItemActions}>
+                        {hasAdhan && (
+                          <TouchableOpacity
+                            onPress={() => togglePrayerMute(prayerKey)}
+                            style={styles.soundToggle}
+                          >
+                            <MaterialCommunityIcons
+                              name={isMuted ? "volume-off" : "volume-high"}
+                              size={20}
+                              color={isMuted ? "#ff6b6b" : "#4ECDC4"}
+                            />
+                          </TouchableOpacity>
+                        )}
+
+                        {isPassed && !isNext && (
+                          <MaterialCommunityIcons
+                            name="check-circle"
+                            size={16}
+                            color="#4ECDC4"
+                            style={styles.prayerItemCheck}
+                          />
+                        )}
+                      </View>
                     </View>
                   );
                 }
@@ -525,6 +1040,9 @@ export default function PrayerScreen() {
 
         {/* Statistiques des prières */}
         {prayerStats && <PrayerStats {...prayerStats} />}
+
+        {/* Section Apprentissage */}
+        <LearningSection />
       </Animated.ScrollView>
     </ImageBackground>
   );
@@ -688,6 +1206,16 @@ const styles = StyleSheet.create({
   prayerItemCheck: {
     marginLeft: 8,
   },
+  prayerItemActions: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginLeft: 8,
+  },
+  soundToggle: {
+    padding: 8,
+    borderRadius: 6,
+    marginRight: 4,
+  },
   centeredContainer: {
     flex: 1,
     justifyContent: "center",
@@ -801,5 +1329,199 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginBottom: 25,
     lineHeight: 22,
+  },
+});
+
+// Styles pour la section d'apprentissage
+const learningStyles = StyleSheet.create({
+  container: {
+    marginBottom: 30,
+  },
+  sectionHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 20,
+    justifyContent: "center",
+  },
+  sectionTitle: {
+    fontSize: 24,
+    fontWeight: "bold",
+    color: "#FFD700",
+    marginLeft: 12,
+    textAlign: "center",
+  },
+  card: {
+    backgroundColor: "rgba(0, 0, 0, 0.6)",
+    borderRadius: 16,
+    marginBottom: 16,
+    borderWidth: 1,
+    borderColor: "rgba(78, 205, 196, 0.3)",
+    overflow: "hidden",
+  },
+  cardHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    padding: 16,
+  },
+  cardHeaderLeft: {
+    flexDirection: "row",
+    alignItems: "center",
+    flex: 1,
+  },
+  iconContainer: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    alignItems: "center",
+    justifyContent: "center",
+    marginRight: 12,
+  },
+  cardTitle: {
+    fontSize: 18,
+    fontWeight: "600",
+    color: "#fffbe8",
+    flex: 1,
+  },
+  cardContent: {
+    paddingHorizontal: 16,
+    paddingBottom: 16,
+  },
+  stepContainer: {
+    marginTop: 8,
+    marginBottom: 16,
+    backgroundColor: "rgba(255, 255, 255, 0.05)",
+    borderRadius: 12,
+    padding: 12,
+    borderWidth: 1,
+    borderColor: "rgba(78, 205, 196, 0.2)",
+  },
+  stepHeader: {
+    flexDirection: "row",
+    alignItems: "flex-start",
+    justifyContent: "space-between",
+    marginBottom: 12,
+  },
+  stepTitle: {
+    fontSize: 16,
+    fontWeight: "600",
+    color: "#4ECDC4",
+    marginBottom: 12,
+  },
+  step: {
+    flexDirection: "row",
+    marginBottom: 16,
+    alignItems: "flex-start",
+    justifyContent: "space-between",
+    backgroundColor: "rgba(255, 255, 255, 0.05)",
+    borderRadius: 12,
+    padding: 12,
+    borderWidth: 1,
+    borderColor: "rgba(78, 205, 196, 0.2)",
+  },
+  stepContent: {
+    flexDirection: "row",
+    alignItems: "center",
+    flex: 1,
+    marginRight: 12,
+  },
+  stepNumber: {
+    fontSize: 16,
+    fontWeight: "600",
+    color: "#FFD700",
+    marginRight: 8,
+    minWidth: 20,
+  },
+  stepText: {
+    fontSize: 14,
+    color: "#fffbe8",
+    lineHeight: 20,
+    flex: 1,
+  },
+  stepTextContainer: {
+    flex: 1,
+  },
+  stepImage: {
+    width: 80,
+    height: 80,
+    borderRadius: 8,
+    borderWidth: 2,
+    borderColor: "rgba(78, 205, 196, 0.4)",
+  },
+  imagePlaceholder: {
+    backgroundColor: "rgba(78, 205, 196, 0.1)",
+    borderRadius: 12,
+    padding: 20,
+    alignItems: "center",
+    marginTop: 16,
+    borderWidth: 1,
+    borderColor: "rgba(78, 205, 196, 0.3)",
+    borderStyle: "dashed",
+  },
+  imagePlaceholderText: {
+    fontSize: 14,
+    color: "#4ECDC4",
+    marginTop: 8,
+    fontStyle: "italic",
+  },
+
+  footer: {
+    backgroundColor: "rgba(255, 215, 0, 0.1)",
+    borderRadius: 12,
+    padding: 16,
+    marginTop: 8,
+    borderWidth: 1,
+    borderColor: "rgba(255, 215, 0, 0.3)",
+  },
+  footerText: {
+    fontSize: 14,
+    color: "#FFD700",
+    textAlign: "center",
+    fontStyle: "italic",
+  },
+  invocationContainer: {
+    marginTop: 8,
+    backgroundColor: "rgba(76, 99, 210, 0.1)",
+    borderRadius: 8,
+    padding: 12,
+    borderWidth: 1,
+    borderColor: "rgba(76, 99, 210, 0.3)",
+  },
+  invocationArabic: {
+    fontSize: 20,
+    color: "#fffbe8",
+    textAlign: "center",
+    marginBottom: 4,
+    fontFamily: "ScheherazadeNew",
+    lineHeight: 28,
+  },
+  invocationPhonetic: {
+    fontSize: 16,
+    color: "#4ECDC4",
+    textAlign: "center",
+    marginBottom: 4,
+    fontStyle: "italic",
+    fontWeight: "600",
+  },
+  invocationTranslation: {
+    fontSize: 14,
+    color: "rgba(255, 255, 255, 0.8)",
+    textAlign: "center",
+    fontStyle: "italic",
+  },
+  stepDetailText: {
+    fontSize: 12,
+    color: "rgba(255, 255, 255, 0.7)",
+    lineHeight: 18,
+    marginTop: 4,
+    fontStyle: "italic",
+  },
+  invocationContainerFull: {
+    backgroundColor: "rgba(76, 99, 210, 0.1)",
+    borderRadius: 8,
+    padding: 12,
+    borderWidth: 1,
+    borderColor: "rgba(76, 99, 210, 0.3)",
+    width: "100%",
   },
 });
