@@ -7,11 +7,12 @@ import android.util.Log;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.os.Build;
+import static com.drogbinho.prayertimesapp2.ConditionalLogger.*;
 
 public class BootReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
-        Log.d("BootReceiver", "BOOT_COMPLETED reçu, programmation différée des alarmes adhan...");
+        debugLog("BootReceiver", "BOOT_COMPLETED reçu, programmation différée des alarmes adhan...");
 
         // Android 15+ : Ne pas lancer directement un service de premier plan depuis
         // BOOT_COMPLETED
@@ -40,7 +41,7 @@ public class BootReceiver extends BroadcastReceiver {
                 alarmManager.setExact(AlarmManager.RTC_WAKEUP, delayedTriggerTime, pendingIntent);
             }
 
-            Log.d("BootReceiver", "Alarme de reprogrammation différée programmée pour dans 30 secondes");
+            debugLog("BootReceiver", "Alarme de reprogrammation différée programmée pour dans 30 secondes");
 
             // 🔄 REDÉMARRER AUSSI LA MAINTENANCE QUOTIDIENNE après le boot
             // (dans 45 secondes pour que la reprogrammation principale soit terminée)
@@ -62,9 +63,9 @@ public class BootReceiver extends BroadcastReceiver {
                 alarmManager.setExact(AlarmManager.RTC_WAKEUP, maintenanceTriggerTime, maintenancePendingIntent);
             }
 
-            Log.d("BootReceiver", "Maintenance quotidienne redémarrée après boot (dans 45 secondes)");
+            debugLog("BootReceiver", "Maintenance quotidienne redémarrée après boot (dans 45 secondes)");
         } else {
-            Log.e("BootReceiver", "AlarmManager non disponible pour la reprogrammation différée");
+            errorLog("BootReceiver", "AlarmManager non disponible pour la reprogrammation différée");
         }
     }
 }

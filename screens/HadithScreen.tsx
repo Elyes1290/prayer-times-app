@@ -34,9 +34,7 @@ type Hadith = {
   [key: string]: any;
 };
 
-const API_KEY =
-  Constants.expoConfig?.extra?.hadithApiKey ||
-  "$2y$10$doCdBLfM0jONj1evceyDyuFQYeUBzyQsh9NL2sRIuT9wt8GKsXaa";
+const API_KEY = Constants.expoConfig?.extra?.hadithApiKey || "demo-key"; // Clé de démo pour développement local uniquement
 const PAGE_SIZE = 10;
 
 export default function HadithScreen() {

@@ -9,6 +9,8 @@ import android.app.PendingIntent;
 import android.os.Build;
 import java.util.Calendar;
 
+import static com.drogbinho.prayertimesapp2.ConditionalLogger.*;
+
 public class MaintenanceReceiver extends BroadcastReceiver {
     private static final String TAG = "MaintenanceReceiver";
     public static final String ACTION_DAILY_MAINTENANCE = "com.drogbinho.prayertimesapp2.ACTION_DAILY_MAINTENANCE";
@@ -18,7 +20,7 @@ public class MaintenanceReceiver extends BroadcastReceiver {
         String action = intent.getAction();
 
         if (ACTION_DAILY_MAINTENANCE.equals(action)) {
-            Log.d(TAG, "🔄 Maintenance quotidienne déclenchée - Reprogrammation pour demain");
+            debugLog(TAG, "🔄 Maintenance quotidienne déclenchée - Reprogrammation pour demain");
 
             // Démarrer le service AdhanService avec l'action de reprogrammation
             Intent serviceIntent = new Intent(context, AdhanService.class);
@@ -33,9 +35,9 @@ public class MaintenanceReceiver extends BroadcastReceiver {
                     context.startService(serviceIntent);
                 }
 
-                Log.d(TAG, "✅ Service de reprogrammation démarré avec succès");
+                debugLog(TAG, "✅ Service de reprogrammation démarré avec succès");
             } catch (Exception e) {
-                Log.e(TAG, "❌ Erreur lors du démarrage du service de reprogrammation: " + e.getMessage());
+                errorLog(TAG, "❌ Erreur lors du démarrage du service de reprogrammation: " + e.getMessage());
             }
 
             // Programmer la prochaine maintenance pour demain
@@ -51,7 +53,7 @@ public class MaintenanceReceiver extends BroadcastReceiver {
     public static void scheduleDailyMaintenance(Context context) {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         if (alarmManager == null) {
-            Log.e(TAG, "❌ AlarmManager non disponible pour la maintenance quotidienne");
+            errorLog(TAG, "❌ AlarmManager non disponible pour la maintenance quotidienne");
             return;
         }
 
@@ -79,9 +81,9 @@ public class MaintenanceReceiver extends BroadcastReceiver {
                     new AlarmManager.AlarmClockInfo(calendar.getTimeInMillis(), null),
                     pendingIntent);
 
-            Log.d(TAG, "📅 Prochaine maintenance programmée pour demain à 00:05 (" + calendar.getTime() + ")");
+            debugLog(TAG, "📅 Prochaine maintenance programmée pour demain à 00:05 (" + calendar.getTime() + ")");
         } catch (Exception e) {
-            Log.e(TAG, "❌ Erreur lors de la programmation de la maintenance: " + e.getMessage());
+            errorLog(TAG, "❌ Erreur lors de la programmation de la maintenance: " + e.getMessage());
         }
     }
 
@@ -106,7 +108,7 @@ public class MaintenanceReceiver extends BroadcastReceiver {
         if (pendingIntent != null) {
             alarmManager.cancel(pendingIntent);
             pendingIntent.cancel();
-            Log.d(TAG, "🚫 Maintenance quotidienne annulée");
+            debugLog(TAG, "🚫 Maintenance quotidienne annulée");
         }
     }
 }

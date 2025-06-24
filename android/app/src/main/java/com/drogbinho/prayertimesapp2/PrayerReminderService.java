@@ -10,6 +10,8 @@ import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 import java.util.Calendar;
 
+import static com.drogbinho.prayertimesapp2.ConditionalLogger.*;
+
 public class PrayerReminderService extends Service {
     private static final String CHANNEL_ID = "prayer_reminder_service";
     private static final int NOTIFICATION_ID = 2;
@@ -18,7 +20,7 @@ public class PrayerReminderService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        Log.d("PrayerReminderService", "-> onCreate()");
+        notificationDebugLog("PrayerReminderService", "-> onCreate()");
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel(
@@ -57,12 +59,13 @@ public class PrayerReminderService extends Service {
         String title = intent != null ? intent.getStringExtra("TITLE") : null;
         String body = intent != null ? intent.getStringExtra("BODY") : null;
 
-        Log.d("PrayerReminderService", "-> onStartCommand: action=" + action + " | prayer=" + prayerLabel);
+        notificationDebugLog("PrayerReminderService",
+                "-> onStartCommand: action=" + action + " | prayer=" + prayerLabel);
 
         // Récupère la langue actuelle
         SharedPreferences settings = getSharedPreferences("prayer_times_settings", MODE_PRIVATE);
         String currentLanguage = settings.getString("current_language", "en");
-        Log.d("PrayerReminderService", "📱 Langue actuelle : " + currentLanguage);
+        notificationDebugLog("PrayerReminderService", "📱 Langue actuelle : " + currentLanguage);
 
         // Vérifie si déjà notifié récemment (dans la dernière heure)
         // Cela évite les doublons tout en permettant les reminders pour différentes
@@ -76,7 +79,7 @@ public class PrayerReminderService extends Service {
 
             // Ne bloque que si le même reminder a été déclenché dans la dernière heure
             if (now - lastDone < oneHour) {
-                Log.d("PrayerReminderService",
+                notificationDebugLog("PrayerReminderService",
                         "⚠️ Déjà notifié récemment pour " + prayerLabel + " (il y a " +
                                 ((now - lastDone) / 60000) + " minutes), on ignore !");
                 stopSelf();
@@ -101,16 +104,17 @@ public class PrayerReminderService extends Service {
                 PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
         // Log les valeurs reçues pour déboguer
-        Log.d("PrayerReminderService", "📨 Valeurs reçues: title='" + title + "' | body='" + body + "'");
+        notificationDebugLog("PrayerReminderService", "📨 Valeurs reçues: title='" + title + "' | body='" + body + "'");
 
         // Récupère le délai sauvegardé pour vérifier
         int savedReminderOffset = settings.getInt("reminder_offset", 10);
-        Log.d("PrayerReminderService", "💾 ReminderOffset sauvegardé: " + savedReminderOffset);
+        notificationDebugLog("PrayerReminderService", "💾 ReminderOffset sauvegardé: " + savedReminderOffset);
 
         // 🕒 DIAGNOSTIC TEMPOREL PRÉCIS
         long now = System.currentTimeMillis();
         java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("HH:mm:ss.SSS", java.util.Locale.getDefault());
-        Log.d("PrayerReminderService", "🕒 Heure exacte déclenchement: " + sdf.format(new java.util.Date(now)));
+        notificationDebugLog("PrayerReminderService",
+                "🕒 Heure exacte déclenchement: " + sdf.format(new java.util.Date(now)));
 
         // Vérifie si le timing du reminder correspond au délai configuré
         if (body != null && body.contains(" minutes")) {
@@ -118,11 +122,11 @@ public class PrayerReminderService extends Service {
                 String minutesStr = body.replaceAll(".*?(\\d+) minutes.*", "$1");
                 int bodyMinutes = Integer.parseInt(minutesStr);
                 if (bodyMinutes != savedReminderOffset) {
-                    Log.w("PrayerReminderService", "⚠️ DÉSYNCHRONISATION: Body dit " + bodyMinutes
+                    notificationDebugLog("PrayerReminderService", "⚠️ DÉSYNCHRONISATION: Body dit " + bodyMinutes
                             + " min mais configuration = " + savedReminderOffset + " min");
                 }
             } catch (Exception e) {
-                Log.d("PrayerReminderService", "🔍 Impossible d'extraire minutes du body: " + body);
+                notificationDebugLog("PrayerReminderService", "🔍 Impossible d'extraire minutes du body: " + body);
             }
         }
 
@@ -136,13 +140,14 @@ public class PrayerReminderService extends Service {
 
         // FORCE la mise à jour du body même s'il est fourni mais contient "10"
         if (body != null && body.contains("10 minutes")) {
-            Log.d("PrayerReminderService",
+            notificationDebugLog("PrayerReminderService",
                     "🔧 CORRECTION: Body contenait '10 minutes', remplacement par " + savedReminderOffset);
             body = body.replace("10 minutes", savedReminderOffset + " minutes");
         }
 
         // Log final pour déboguer
-        Log.d("PrayerReminderService", "📝 Notification finale: title='" + title + "' | body='" + body + "'");
+        notificationDebugLog("PrayerReminderService",
+                "📝 Notification finale: title='" + title + "' | body='" + body + "'");
 
         // Crée la notification finale
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import android.content.SharedPreferences;
+import static com.drogbinho.prayertimesapp2.ConditionalLogger.*;
 
 public class AdhanReceiver extends BroadcastReceiver {
     @Override
@@ -14,7 +15,7 @@ public class AdhanReceiver extends BroadcastReceiver {
             String prayerLabel = intent.getStringExtra("PRAYER_LABEL");
             long now = System.currentTimeMillis();
 
-            Log.d("AdhanReceiver", "==> ALARME RECUE pour " + prayerLabel + " | Son: " + adhanSound
+            debugLog("AdhanReceiver", "==> ALARME RECUE pour " + prayerLabel + " | Son: " + adhanSound
                     + " | Heure réception: " + new java.util.Date(now).toString());
 
             SharedPreferences prefs = context.getSharedPreferences("adhan_prefs", Context.MODE_PRIVATE);
@@ -22,11 +23,11 @@ public class AdhanReceiver extends BroadcastReceiver {
             long lastDone = prefs.getLong(flagKey, 0);
 
             if (isSameDay(lastDone, now)) {
-                Log.d("AdhanReceiver", "⚠️ Déjà joué aujourd'hui pour " + prayerLabel + ", on ignore !");
+                debugLog("AdhanReceiver", "⚠️ Déjà joué aujourd'hui pour " + prayerLabel + ", on ignore !");
                 return;
             }
 
-            Log.d("AdhanReceiver", "Démarrage du service d'adhan pour: " + prayerLabel);
+            debugLog("AdhanReceiver", "Démarrage du service d'adhan pour: " + prayerLabel);
             prefs.edit().putLong(flagKey, now).apply();
 
             Intent serviceIntent = new Intent(context, AdhanService.class);
@@ -41,12 +42,12 @@ public class AdhanReceiver extends BroadcastReceiver {
             // 🔄 FORCER LA MISE À JOUR DU WIDGET après chaque adhan (pour Samsung)
             try {
                 PrayerTimesWidget.forceUpdateWidgets(context);
-                Log.d("AdhanReceiver", "✅ Widget forcé à se mettre à jour après Adhan " + prayerLabel);
+                debugLog("AdhanReceiver", "✅ Widget forcé à se mettre à jour après Adhan " + prayerLabel);
             } catch (Exception e) {
-                Log.w("AdhanReceiver", "⚠️ Erreur mise à jour widget: " + e.getMessage());
+                warnLog("AdhanReceiver", "⚠️ Erreur mise à jour widget: " + e.getMessage());
             }
         } catch (Exception e) {
-            Log.e("AdhanReceiver", "Erreur dans onReceive : " + e.getMessage(), e);
+            errorLog("AdhanReceiver", "Erreur dans onReceive : " + e.getMessage(), e);
         }
     }
 

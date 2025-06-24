@@ -14,6 +14,7 @@ import { useFocusEffect } from "@react-navigation/native";
 import compassImg from "../assets/images/compass.png";
 import kaabaImg from "../assets/images/kaaba.png";
 import bgImage from "../assets/images/prayer-bg.png";
+import { errorLog } from "../utils/logger";
 
 const KAABA_LAT = 21.4225;
 const KAABA_LNG = 39.8262;
@@ -143,7 +144,7 @@ export default function QiblaScreen() {
 
       setIsInitializing(false);
     } catch (error) {
-      console.error("Erreur lors de l'initialisation de la Qibla:", error);
+      errorLog("Erreur lors de l'initialisation de la Qibla:", error);
       setLocationPermissionGranted(false);
       setIsInitializing(false);
     }

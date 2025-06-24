@@ -26,10 +26,10 @@ import { useTranslation } from "react-i18next";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const soundObjects: Record<AdhanSoundKey, any> = {
-  adhamalsharqawe: require("../assets/sounds/adhamalsharqawe.wav"),
-  adhanaljazaer: require("../assets/sounds/adhanaljazaer.wav"),
+  adhamalsharqawe: require("../assets/sounds/adhamalsharqawe.mp3"),
+  adhanaljazaer: require("../assets/sounds/adhanaljazaer.mp3"),
   ahmadnafees: require("../assets/sounds/ahmadnafees.mp3"),
-  ahmedelkourdi: require("../assets/sounds/ahmedelkourdi.wav"),
+  ahmedelkourdi: require("../assets/sounds/ahmedelkourdi.mp3"),
   dubai: require("../assets/sounds/dubai.mp3"),
   karljenkins: require("../assets/sounds/karljenkins.mp3"),
   mansourzahrani: require("../assets/sounds/mansourzahrani.mp3"),

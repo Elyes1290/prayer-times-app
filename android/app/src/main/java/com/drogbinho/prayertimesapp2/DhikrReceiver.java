@@ -6,18 +6,20 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import static com.drogbinho.prayertimesapp2.ConditionalLogger.*;
+
 public class DhikrReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
                 try {
-                        Log.d("DhikrReceiver", "🔔 Dhikr reçu!");
+                        notificationDebugLog("DhikrReceiver", "🔔 Dhikr reçu!");
 
                         // Récupère le type de dhikr et la prière
                         String type = intent.getStringExtra("TYPE");
                         String prayerLabel = intent.getStringExtra("PRAYER_LABEL");
 
                         if (type == null) {
-                                Log.d("DhikrReceiver", "❌ Type manquant");
+                                notificationDebugLog("DhikrReceiver", "❌ Type manquant");
                                 return;
                         }
 
@@ -31,7 +33,7 @@ public class DhikrReceiver extends BroadcastReceiver {
 
                         // Si un dhikr similaire a été traité dans les 2 dernières secondes, ignorer
                         if (currentTime - lastDhikrTime < 2000) {
-                                Log.d("DhikrReceiver", "🚫 Dhikr en double détecté pour " + type + " (" + prayerLabel
+                                notificationDebugLog("DhikrReceiver", "🚫 Dhikr en double détecté pour " + type + " (" + prayerLabel
                                                 + "), ignoré");
                                 return;
                         }
@@ -43,7 +45,7 @@ public class DhikrReceiver extends BroadcastReceiver {
                         boolean notificationsEnabled = prefs.getBoolean("notifications_enabled", false);
 
                         if (!notificationsEnabled) {
-                                Log.d("DhikrReceiver", "❌ Notifications désactivées");
+                                notificationDebugLog("DhikrReceiver", "❌ Notifications désactivées");
                                 return;
                         }
 
@@ -65,11 +67,11 @@ public class DhikrReceiver extends BroadcastReceiver {
                         }
 
                         if (!isEnabled) {
-                                Log.d("DhikrReceiver", "❌ " + type + " désactivé");
+                                notificationDebugLog("DhikrReceiver", "❌ " + type + " désactivé");
                                 return;
                         }
 
-                        Log.d("DhikrReceiver",
+                        notificationDebugLog("DhikrReceiver",
                                         "✅ Dhikr validé pour " + type + " (" + prayerLabel + "), lancement service...");
                         Intent serviceIntent = new Intent(context, DhikrService.class);
                         serviceIntent.putExtras(intent);
@@ -80,7 +82,7 @@ public class DhikrReceiver extends BroadcastReceiver {
                                 context.startService(serviceIntent);
                         }
                 } catch (Exception e) {
-                        Log.e("DhikrReceiver", "❌ Erreur: " + e.getMessage());
+                        errorLog("DhikrReceiver", "❌ Erreur: " + e.getMessage());
                 }
         }
 }

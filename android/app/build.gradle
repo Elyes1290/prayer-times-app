@@ -92,7 +92,7 @@ android {
         applicationId 'com.drogbinho.prayertimesapp2'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 35
+        versionCode 37
         versionName "1.0.0"
     }
     signingConfigs {
@@ -117,10 +117,14 @@ android {
             // Caution! In production, you need to generate your own keystore file.
             // see https://reactnative.dev/docs/signed-apk-android.
             signingConfig signingConfigs.release
-            shrinkResources (findProperty('android.enableShrinkResourcesInReleaseBuilds')?.toBoolean() ?: false)
-            minifyEnabled enableProguardInReleaseBuilds
-            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
-            crunchPngs (findProperty('android.enablePngCrunchInReleaseBuilds')?.toBoolean() ?: true)
+            shrinkResources true  // OPTIMISATION: Supprime ressources inutilisées
+            minifyEnabled true    // OPTIMISATION: Minification activée
+            proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
+            crunchPngs true       // OPTIMISATION: Compression PNG
+            
+            // NOUVELLES OPTIMISATIONS
+            zipAlignEnabled true
+            debuggable false
         }
     }
     packagingOptions {

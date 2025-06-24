@@ -5,6 +5,7 @@ import { computePrayerTimesForDate } from "./prayerTimes"; // Fonction qui retou
 import { schedulePrayerNotifications } from "./notifications";
 import { scheduleAllDhikrNotifications } from "./dhikrNotifications";
 import i18n from "../locales/i18n";
+import { notificationDebugLog } from "./logger";
 
 // Types pour la fonction
 type Location = { latitude: number; longitude: number };
@@ -45,15 +46,15 @@ export async function scheduleNotificationsFor2Days({
   dhikrSettings,
 }: Params) {
   try {
-    console.log("[DEBUG] 🚀 Début de la planification des notifications");
-    console.log(`[DEBUG] 📊 Méthode de calcul: ${calcMethod}`);
-    console.log(
-      `[DEBUG] 📍 Location: ${userLocation.latitude}, ${userLocation.longitude}`
+    notificationDebugLog("🚀 Début de la planification des notifications");
+    notificationDebugLog(`📊 Méthode de calcul: ${calcMethod}`);
+    notificationDebugLog(
+      `📍 Location: ${userLocation.latitude}, ${userLocation.longitude}`
     );
 
     // Si les notifications sont désactivées globalement, on annule tout et on s'arrête là
     if (!settings.notificationsEnabled) {
-      console.log("[DEBUG] 🚫 Notifications désactivées, annulation de tout");
+      notificationDebugLog("🚫 Notifications désactivées, annulation de tout");
       await NativeModules.AdhanModule.cancelAllAdhanAlarms?.();
       await NativeModules.AdhanModule.cancelAllPrayerReminders();
       await NativeModules.AdhanModule.cancelAllDhikrNotifications?.();
@@ -65,12 +66,12 @@ export async function scheduleNotificationsFor2Days({
     }
 
     // 1. Annule tout d'abord toutes les alarmes et notifications existantes
-    console.log("[DEBUG] 🗑️ Annulation des alarmes existantes");
-    console.log("[DEBUG] 🚫 Appel cancelAllAdhanAlarms...");
+    notificationDebugLog("🗑️ Annulation des alarmes existantes");
+    notificationDebugLog("🚫 Appel cancelAllAdhanAlarms...");
     await NativeModules.AdhanModule.cancelAllAdhanAlarms?.();
-    console.log("[DEBUG] 🚫 Appel cancelAllPrayerReminders...");
+    notificationDebugLog("🚫 Appel cancelAllPrayerReminders...");
     await NativeModules.AdhanModule.cancelAllPrayerReminders();
-    console.log("[DEBUG] 🚫 Appel cancelAllDhikrNotifications...");
+    notificationDebugLog("🚫 Appel cancelAllDhikrNotifications...");
     await NativeModules.AdhanModule.cancelAllDhikrNotifications?.();
 
     // IMPORTANT: Sauvegarder tous les paramètres AVANT de programmer les notifications
@@ -120,15 +121,15 @@ export async function scheduleNotificationsFor2Days({
     dates.push(tomorrow);
     labels.push("tomorrow");
 
-    console.log(
-      `[DEBUG] 📅 Dates à traiter: ${dates.map((d) => d.toISOString())}`
+    notificationDebugLog(
+      `📅 Dates à traiter: ${dates.map((d) => d.toISOString())}`
     );
 
     for (let i = 0; i < dates.length; i++) {
       const date = dates[i];
       const label = labels[i];
 
-      console.log(`[DEBUG] 🔄 Traitement ${label} (${date.toDateString()})`);
+      notificationDebugLog(`🔄 Traitement ${label} (${date.toDateString()})`);
 
       const prayerTimes = computePrayerTimesForDate(
         date,
@@ -136,11 +137,11 @@ export async function scheduleNotificationsFor2Days({
         calcMethod
       );
 
-      console.log(
-        `[DEBUG] 📅 Horaires calculés pour ${date.toDateString()} avec ${calcMethod}:`
+      notificationDebugLog(
+        `📅 Horaires calculés pour ${date.toDateString()} avec ${calcMethod}:`
       );
-      console.log(
-        `[DEBUG] ⏰ Fajr: ${prayerTimes.Fajr.toLocaleTimeString()}, Dhuhr: ${prayerTimes.Dhuhr.toLocaleTimeString()}, Asr: ${prayerTimes.Asr.toLocaleTimeString()}, Maghrib: ${prayerTimes.Maghrib.toLocaleTimeString()}, Isha: ${prayerTimes.Isha.toLocaleTimeString()}`
+      notificationDebugLog(
+        `⏰ Fajr: ${prayerTimes.Fajr.toLocaleTimeString()}, Dhuhr: ${prayerTimes.Dhuhr.toLocaleTimeString()}, Asr: ${prayerTimes.Asr.toLocaleTimeString()}, Maghrib: ${prayerTimes.Maghrib.toLocaleTimeString()}, Isha: ${prayerTimes.Isha.toLocaleTimeString()}`
       );
 
       // 💾 SAUVEGARDE POUR LE WIDGET : Sauvegarder les horaires d'aujourd'hui pour le widget
@@ -156,7 +157,7 @@ export async function scheduleNotificationsFor2Days({
 
           await NativeModules.AdhanModule.saveTodayPrayerTimes(formattedTimes);
         } catch (error) {
-          console.warn("[DEBUG] ⚠️ Erreur sauvegarde widget:", error);
+          notificationDebugLog("⚠️ Erreur sauvegarde widget:", error);
         }
       }
 
@@ -182,8 +183,8 @@ export async function scheduleNotificationsFor2Days({
                 ? now.getTime() + minTimeGap
                 : timestamp;
 
-            console.log(
-              `[DEBUG] ✅ ${prayer}_${label} programmé dans ${minutesUntilPrayer} minutes (${new Date(
+            notificationDebugLog(
+              `✅ ${prayer}_${label} programmé dans ${minutesUntilPrayer} minutes (${new Date(
                 adjustedTimestamp
               ).toLocaleTimeString()})`
             );
@@ -196,8 +197,8 @@ export async function scheduleNotificationsFor2Days({
               isToday: label === "today",
             };
           } else {
-            console.log(
-              `[DEBUG] ⏭️ ${prayer}_${label} ignoré car ${
+            notificationDebugLog(
+              `⏭️ ${prayer}_${label} ignoré car ${
                 !shouldSchedule
                   ? "déjà passé"
                   : minutesUntilPrayer > 1440
@@ -223,8 +224,8 @@ export async function scheduleNotificationsFor2Days({
 
       // Programme l'adhan si activé
       if (settings.adhanEnabled && Object.keys(formattedTimes).length > 0) {
-        console.log(
-          `[DEBUG] 🔔 Programmation ${
+        notificationDebugLog(
+          `🔔 Programmation ${
             Object.keys(formattedTimes).length
           } alarmes adhan:`,
           Object.entries(formattedTimes).map(([key, value]) => ({
@@ -241,12 +242,12 @@ export async function scheduleNotificationsFor2Days({
           adhanSound
         );
       } else {
-        console.log("[DEBUG] 🔕 Aucune alarme adhan à programmer");
+        notificationDebugLog("🔕 Aucune alarme adhan à programmer");
       }
 
       // Programme les reminders si activés (utilise les timestamps synchronisés)
       if (remindersEnabled && Object.keys(synchronizedPrayerTimes).length > 0) {
-        console.log("[DEBUG] ⏰ Programmation des reminders");
+        notificationDebugLog("⏰ Programmation des reminders");
         await schedulePrayerNotifications(
           synchronizedPrayerTimes,
           adhanSound,
@@ -254,7 +255,7 @@ export async function scheduleNotificationsFor2Days({
           reminderOffset
         );
       } else {
-        console.log("[DEBUG] ⏰ Aucun reminder à programmer");
+        notificationDebugLog("⏰ Aucun reminder à programmer");
       }
 
       // Programme les dhikr si au moins un est activé (utilise les timestamps synchronisés)
@@ -263,18 +264,18 @@ export async function scheduleNotificationsFor2Days({
         .some(([_, value]) => value);
 
       if (anyDhikrEnabled && Object.keys(synchronizedPrayerTimes).length > 0) {
-        console.log("[DEBUG] 📿 Programmation des dhikr");
+        notificationDebugLog("📿 Programmation des dhikr");
         await scheduleAllDhikrNotifications(
           synchronizedPrayerTimes,
           dhikrSettings
         );
       } else {
-        console.log("[DEBUG] 📿 Aucun dhikr à programmer");
+        notificationDebugLog("📿 Aucun dhikr à programmer");
       }
     }
 
-    console.log("[DEBUG] ✨ Planification terminée avec succès");
+    notificationDebugLog("✨ Planification terminée avec succès");
   } catch (error) {
-    console.error("[DEBUG] ❌ Erreur lors de la planification:", error);
+    notificationDebugLog("❌ Erreur lors de la planification:", error);
   }
 }

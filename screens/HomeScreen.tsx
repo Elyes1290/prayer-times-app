@@ -39,6 +39,7 @@ import { usePrayerTimes } from "../hooks/usePrayerTimes";
 import { scheduleNotificationsFor2Days } from "../utils/sheduleAllNotificationsFor30Days";
 import { getQuranVersesWithTranslations } from "../utils/quranApi";
 import { getRandomHadith } from "../utils/hadithApi";
+import { debugLog, errorLog } from "../utils/logger";
 
 const { AdhanModule } = NativeModules;
 const { width: screenWidth, height: screenHeight } = Dimensions.get("window");
@@ -351,7 +352,7 @@ export default function HomeScreen() {
           }
         }
       } catch (error) {
-        console.error("Erreur lors de la récupération du verset:", error);
+        errorLog("Erreur lors de la récupération du verset:", error);
       }
 
       // Hadith du jour
@@ -362,7 +363,7 @@ export default function HomeScreen() {
         setRandomHadith(null);
       }
     } catch (error) {
-      console.error("Erreur lors du chargement du contenu aléatoire:", error);
+      errorLog("Erreur lors du chargement du contenu aléatoire:", error);
       // Fallback en cas d'erreur
       setRandomDua({
         title: "Invocation du matin",
@@ -380,9 +381,7 @@ export default function HomeScreen() {
   // Permission Android 13+
   useEffect(() => {
     async function askNotifPermission() {
-      console.log(
-        "[DEBUG] 🔐 Vérification permissions notifications Android 13+"
-      );
+      debugLog("🔐 Vérification permissions notifications Android 13+");
 
       if (Platform.OS === "android" && Platform.Version >= 33) {
         const granted = await PermissionsAndroid.request(
@@ -480,42 +479,36 @@ export default function HomeScreen() {
   // Planification des notifications (stabilisé)
   const updateNotifications = useCallback(async () => {
     if (!currentPrayerTimes || !stableCoords) {
-      console.log(
-        "[DEBUG] ⏸️ Notifications non mises à jour - données manquantes"
-      );
+      debugLog("⏸️ Notifications non mises à jour - données manquantes");
       return;
     }
 
     try {
-      console.log(
-        "[DEBUG] 🔄 Mise à jour notifications pour le",
-        today.toISOString(),
-        {
-          notificationsEnabled: settings.notificationsEnabled,
-          remindersEnabled: settings.remindersEnabled,
-          finalRemindersEnabled:
-            settings.notificationsEnabled && settings.remindersEnabled,
-          ...stableDhikrSettings,
-          finalDhikrAfterSalah:
-            settings.notificationsEnabled &&
-            stableDhikrSettings.enabledAfterSalah,
-          finalDhikrMorning:
-            settings.notificationsEnabled &&
-            stableDhikrSettings.enabledMorningDhikr,
-          finalDhikrEvening:
-            settings.notificationsEnabled &&
-            stableDhikrSettings.enabledEveningDhikr,
-          finalDhikrDua:
-            settings.notificationsEnabled &&
-            stableDhikrSettings.enabledSelectedDua,
-        }
-      );
+      debugLog("🔄 Mise à jour notifications pour le", today.toISOString(), {
+        notificationsEnabled: settings.notificationsEnabled,
+        remindersEnabled: settings.remindersEnabled,
+        finalRemindersEnabled:
+          settings.notificationsEnabled && settings.remindersEnabled,
+        ...stableDhikrSettings,
+        finalDhikrAfterSalah:
+          settings.notificationsEnabled &&
+          stableDhikrSettings.enabledAfterSalah,
+        finalDhikrMorning:
+          settings.notificationsEnabled &&
+          stableDhikrSettings.enabledMorningDhikr,
+        finalDhikrEvening:
+          settings.notificationsEnabled &&
+          stableDhikrSettings.enabledEveningDhikr,
+        finalDhikrDua:
+          settings.notificationsEnabled &&
+          stableDhikrSettings.enabledSelectedDua,
+      });
 
       if (Platform.OS === "android" && AdhanModule) {
         // Si les notifications sont désactivées globalement, on annule tout et ON S'ARRÊTE
         if (!settings.notificationsEnabled) {
-          console.log(
-            "[DEBUG] 🚫 Notifications désactivées globalement - annulation de tout"
+          debugLog(
+            "🚫 Notifications désactivées globalement - annulation de tout"
           );
           await AdhanModule.cancelAllAdhanAlarms();
           await AdhanModule.cancelAllPrayerReminders();
@@ -563,10 +556,7 @@ export default function HomeScreen() {
         });
       }
     } catch (error) {
-      console.error(
-        "[DEBUG] ❌ Erreur lors de la mise à jour des notifications:",
-        error
-      );
+      errorLog("❌ Erreur lors de la mise à jour des notifications:", error);
     }
   }, [
     currentPrayerTimes,
@@ -589,9 +579,7 @@ export default function HomeScreen() {
         currentPrayerTimes.isha || (currentPrayerTimes as any).Isha;
 
       if (ishaTime && now > ishaTime) {
-        console.log(
-          "[DEBUG] 🌙 Isha passé, vérification si reprogrammation nécessaire"
-        );
+        debugLog("🌙 Isha passé, vérification si reprogrammation nécessaire");
         // Mettre à jour automatiquement la date pour demain
         const tomorrow = new Date(now);
         tomorrow.setDate(tomorrow.getDate() + 1);
@@ -599,18 +587,16 @@ export default function HomeScreen() {
 
         // Si on n'est pas déjà sur demain, passer à demain
         if (today.toDateString() !== tomorrow.toDateString()) {
-          console.log("[DEBUG] 📅 Passage automatique au lendemain");
+          debugLog("📅 Passage automatique au lendemain");
           setToday(tomorrow);
 
           // 📱 Forcer la mise à jour du widget pour le nouveau jour
           if (Platform.OS === "android" && AdhanModule) {
             try {
-              console.log(
-                "[DEBUG] 📱 Mise à jour du widget pour le nouveau jour"
-              );
+              debugLog("📱 Mise à jour du widget pour le nouveau jour");
               await AdhanModule.updateWidget?.();
             } catch (error) {
-              console.error("[DEBUG] ❌ Erreur mise à jour widget:", error);
+              errorLog("❌ Erreur mise à jour widget:", error);
             }
           }
         }
@@ -648,7 +634,7 @@ export default function HomeScreen() {
             }
           }
         } catch (error) {
-          console.error("Erreur reverse geocoding:", error);
+          errorLog("Erreur reverse geocoding:", error);
           setCity("Erreur de localisation");
         }
       } else {
@@ -725,7 +711,7 @@ export default function HomeScreen() {
                 try {
                   await settings.refreshAutoLocation();
                 } catch (error) {
-                  console.error("Erreur refresh auto location:", error);
+                  errorLog("Erreur refresh auto location:", error);
                 }
               }}
             >
