@@ -57,6 +57,10 @@ export async function scheduleNotificationsFor2Days({
       await NativeModules.AdhanModule.cancelAllAdhanAlarms?.();
       await NativeModules.AdhanModule.cancelAllPrayerReminders();
       await NativeModules.AdhanModule.cancelAllDhikrNotifications?.();
+      // 🛑 Arrêter aussi la maintenance quotidienne automatique
+      await NativeModules.AdhanModule.stopDailyMaintenance?.();
+      // 🛑 Arrêter aussi le planificateur de widget
+      await NativeModules.AdhanModule.stopWidgetUpdateScheduler?.();
       return;
     }
 
@@ -82,6 +86,12 @@ export async function scheduleNotificationsFor2Days({
 
     // IMPORTANT: Sauvegarder aussi le son d'adhan choisi
     await NativeModules.AdhanModule.setAdhanSound(adhanSound);
+
+    // 🔄 DÉMARRE LA MAINTENANCE QUOTIDIENNE AUTOMATIQUE pour reprogrammer chaque jour
+    await NativeModules.AdhanModule.startDailyMaintenance();
+
+    // 📱 DÉMARRE LE PLANIFICATEUR DE WIDGET (pour Samsung/Android récents)
+    await NativeModules.AdhanModule.startWidgetUpdateScheduler();
 
     // 2. Programme les notifications pour aujourd'hui et demain seulement
     const now = new Date();

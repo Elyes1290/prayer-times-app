@@ -41,6 +41,28 @@ public class BootReceiver extends BroadcastReceiver {
             }
 
             Log.d("BootReceiver", "Alarme de reprogrammation différée programmée pour dans 30 secondes");
+
+            // 🔄 REDÉMARRER AUSSI LA MAINTENANCE QUOTIDIENNE après le boot
+            // (dans 45 secondes pour que la reprogrammation principale soit terminée)
+            long maintenanceTriggerTime = System.currentTimeMillis() + 45000; // 45 secondes
+
+            Intent maintenanceIntent = new Intent(context, MaintenanceReceiver.class);
+            maintenanceIntent.setAction("com.drogbinho.prayertimesapp2.ACTION_DAILY_MAINTENANCE");
+
+            PendingIntent maintenancePendingIntent = PendingIntent.getBroadcast(
+                    context,
+                    1002, // requestCode unique pour maintenance boot
+                    maintenanceIntent,
+                    PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, maintenanceTriggerTime,
+                        maintenancePendingIntent);
+            } else {
+                alarmManager.setExact(AlarmManager.RTC_WAKEUP, maintenanceTriggerTime, maintenancePendingIntent);
+            }
+
+            Log.d("BootReceiver", "Maintenance quotidienne redémarrée après boot (dans 45 secondes)");
         } else {
             Log.e("BootReceiver", "AlarmManager non disponible pour la reprogrammation différée");
         }

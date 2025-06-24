@@ -1015,4 +1015,102 @@ public class AdhanModule extends ReactContextBaseJavaModule {
         }
     }
 
+    // ============ MAINTENANCE QUOTIDIENNE AUTOMATIQUE ============
+
+    @ReactMethod
+    public void startDailyMaintenance() {
+        Log.d("AdhanModule", "🔄 Démarrage de la maintenance quotidienne automatique");
+        Context context = getReactApplicationContext();
+        MaintenanceReceiver.scheduleDailyMaintenance(context);
+    }
+
+    @ReactMethod
+    public void stopDailyMaintenance() {
+        Log.d("AdhanModule", "🛑 Arrêt de la maintenance quotidienne");
+        Context context = getReactApplicationContext();
+        MaintenanceReceiver.cancelDailyMaintenance(context);
+    }
+
+    // ============ WIDGET UPDATE SCHEDULER (pour Samsung) ============
+
+    @ReactMethod
+    public void startWidgetUpdateScheduler() {
+        Log.d("AdhanModule", "🔄 Démarrage du planificateur de mise à jour du widget");
+        Context context = getReactApplicationContext();
+        scheduleWidgetUpdates(context);
+    }
+
+    @ReactMethod
+    public void stopWidgetUpdateScheduler() {
+        Log.d("AdhanModule", "🛑 Arrêt du planificateur de widget");
+        Context context = getReactApplicationContext();
+        cancelWidgetUpdates(context);
+    }
+
+    private void scheduleWidgetUpdates(Context context) {
+        android.app.AlarmManager alarmManager = (android.app.AlarmManager) context
+                .getSystemService(Context.ALARM_SERVICE);
+        if (alarmManager == null)
+            return;
+
+        // 🎯 OPTIMISATION: Vérifier d'abord si un widget est réellement présent
+        android.appwidget.AppWidgetManager appWidgetManager = android.appwidget.AppWidgetManager.getInstance(context);
+        android.content.ComponentName widgetComponent = new android.content.ComponentName(context,
+                PrayerTimesWidget.class);
+        int[] appWidgetIds = appWidgetManager.getAppWidgetIds(widgetComponent);
+
+        if (appWidgetIds.length == 0) {
+            Log.d("AdhanModule", "📱 Aucun widget sur l'écran d'accueil, planificateur non nécessaire");
+            return;
+        }
+
+        Intent intent = new Intent(context, PrayerTimesWidget.class);
+        intent.setAction("SMART_UPDATE_WIDGET");
+
+        android.app.PendingIntent pendingIntent = android.app.PendingIntent.getBroadcast(
+                context,
+                9999, // ID unique pour le widget
+                intent,
+                android.app.PendingIntent.FLAG_UPDATE_CURRENT | android.app.PendingIntent.FLAG_IMMUTABLE);
+
+        // 🔋 ÉCONOMIE BATTERIE: 30 minutes au lieu de 5 (96 fois/jour au lieu de 288)
+        // + Les mises à jour immédiates après chaque prière restent
+        long intervalMillis = 30 * 60 * 1000; // 30 minutes
+        long firstTrigger = System.currentTimeMillis() + intervalMillis;
+
+        try {
+            alarmManager.setRepeating(
+                    android.app.AlarmManager.RTC_WAKEUP,
+                    firstTrigger,
+                    intervalMillis,
+                    pendingIntent);
+            Log.d("AdhanModule", "📱 Widget programmé pour mise à jour économique toutes les 30min ("
+                    + appWidgetIds.length + " widgets détectés)");
+        } catch (Exception e) {
+            Log.e("AdhanModule", "❌ Erreur programmation widget: " + e.getMessage());
+        }
+    }
+
+    private void cancelWidgetUpdates(Context context) {
+        android.app.AlarmManager alarmManager = (android.app.AlarmManager) context
+                .getSystemService(Context.ALARM_SERVICE);
+        if (alarmManager == null)
+            return;
+
+        Intent intent = new Intent(context, PrayerTimesWidget.class);
+        intent.setAction("SMART_UPDATE_WIDGET");
+
+        android.app.PendingIntent pendingIntent = android.app.PendingIntent.getBroadcast(
+                context,
+                9999,
+                intent,
+                android.app.PendingIntent.FLAG_NO_CREATE | android.app.PendingIntent.FLAG_IMMUTABLE);
+
+        if (pendingIntent != null) {
+            alarmManager.cancel(pendingIntent);
+            pendingIntent.cancel();
+            Log.d("AdhanModule", "🚫 Planificateur de widget annulé");
+        }
+    }
+
 }

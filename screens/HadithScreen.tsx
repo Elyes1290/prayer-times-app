@@ -1,4 +1,5 @@
 import * as Font from "expo-font";
+import Constants from "expo-constants";
 import React, { useEffect, useState, useRef, useMemo } from "react";
 import {
   ActivityIndicator,
@@ -33,7 +34,9 @@ type Hadith = {
   [key: string]: any;
 };
 
-const API_KEY = "$2y$10$doCdBLfM0jONj1evceyDyuFQYeUBzyQsh9NL2sRIuT9wt8GKsXaa";
+const API_KEY =
+  Constants.expoConfig?.extra?.hadithApiKey ||
+  "$2y$10$doCdBLfM0jONj1evceyDyuFQYeUBzyQsh9NL2sRIuT9wt8GKsXaa";
 const PAGE_SIZE = 10;
 
 export default function HadithScreen() {

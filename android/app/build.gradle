@@ -92,7 +92,7 @@ android {
         applicationId 'com.drogbinho.prayertimesapp2'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 34
+        versionCode 35
         versionName "1.0.0"
     }
     signingConfigs {
@@ -104,9 +104,9 @@ android {
     }
     release {
         storeFile file('my-release-key.jks')
-        storePassword 'android123'
+        storePassword project.hasProperty('MYAPP_RELEASE_STORE_PASSWORD') ? MYAPP_RELEASE_STORE_PASSWORD : 'android123'
         keyAlias 'my-key-alias'
-        keyPassword 'android123'
+        keyPassword project.hasProperty('MYAPP_RELEASE_KEY_PASSWORD') ? MYAPP_RELEASE_KEY_PASSWORD : 'android123'
     }
     }
     buildTypes {

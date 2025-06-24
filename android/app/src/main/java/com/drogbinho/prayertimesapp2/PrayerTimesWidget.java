@@ -46,7 +46,10 @@ public class PrayerTimesWidget extends AppWidgetProvider {
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);
 
-        if (ACTION_REFRESH_DUA.equals(intent.getAction())) {
+        String action = intent.getAction();
+        Log.d(TAG, "🔄 Widget onReceive action: " + action);
+
+        if (ACTION_REFRESH_DUA.equals(action)) {
             Log.d(TAG, "🔄 Action actualiser dua reçue");
 
             // Sauvegarder le flag pour forcer une nouvelle sélection aléatoire
@@ -64,6 +67,16 @@ public class PrayerTimesWidget extends AppWidgetProvider {
                 updateAppWidget(context, appWidgetManager, appWidgetId);
                 // Notifier que les données ont changé
                 appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId, R.id.widget_listview);
+            }
+        } else if ("FORCE_UPDATE_WIDGET".equals(action) || "SMART_UPDATE_WIDGET".equals(action)) {
+            Log.d(TAG, "🔄 " + action + " reçu (planificateur Samsung), mise à jour intelligente");
+
+            // 🎯 MISE À JOUR INTELLIGENTE: Ne fait la mise à jour que si nécessaire
+            if (shouldUpdateWidget(context)) {
+                forceUpdateWidgets(context);
+                Log.d(TAG, "✅ Widget mis à jour (changement détecté)");
+            } else {
+                Log.d(TAG, "⏭️ Widget non mis à jour (pas de changement)");
             }
         }
     }
@@ -894,6 +907,43 @@ public class PrayerTimesWidget extends AppWidgetProvider {
         } catch (Exception e) {
             Log.e(TAG, "❌ Erreur lors du recalcul des horaires: " + e.getMessage());
             e.printStackTrace();
+        }
+    }
+
+    /**
+     * 🎯 OPTIMISATION: Vérifie si le widget a vraiment besoin d'être mis à jour
+     */
+    private static boolean shouldUpdateWidget(Context context) {
+        try {
+            SharedPreferences prefs = context.getSharedPreferences("prayer_times_settings", Context.MODE_PRIVATE);
+
+            // Vérifier si c'est un nouveau jour
+            String currentDate = new java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault())
+                    .format(new java.util.Date());
+            String lastWidgetDate = prefs.getString("last_widget_update_date", "");
+
+            if (!currentDate.equals(lastWidgetDate)) {
+                Log.d(TAG, "🗓️ Nouveau jour détecté, mise à jour nécessaire");
+                prefs.edit().putString("last_widget_update_date", currentDate).apply();
+                return true;
+            }
+
+            // Vérifier si la prochaine prière a changé
+            String currentNextPrayer = getNextPrayerName(context);
+            String lastNextPrayer = prefs.getString("last_next_prayer", "");
+
+            if (!currentNextPrayer.equals(lastNextPrayer)) {
+                Log.d(TAG, "🔄 Prochaine prière changée: " + lastNextPrayer + " → " + currentNextPrayer);
+                prefs.edit().putString("last_next_prayer", currentNextPrayer).apply();
+                return true;
+            }
+
+            // Pas de changement significatif
+            return false;
+
+        } catch (Exception e) {
+            Log.w(TAG, "⚠️ Erreur shouldUpdateWidget, forçage mise à jour: " + e.getMessage());
+            return true; // En cas d'erreur, on met à jour par sécurité
         }
     }
 

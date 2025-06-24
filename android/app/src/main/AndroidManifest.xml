@@ -99,6 +99,14 @@
         <action android:name="android.intent.action.BOOT_COMPLETED" />
       </intent-filter>
     </receiver>
+    
+    <receiver
+      android:name=".MaintenanceReceiver"
+      android:exported="false">
+      <intent-filter>
+        <action android:name="com.drogbinho.prayertimesapp2.ACTION_DAILY_MAINTENANCE" />
+      </intent-filter>
+    </receiver>
 
     <!-- Widget de prières -->
     <receiver 

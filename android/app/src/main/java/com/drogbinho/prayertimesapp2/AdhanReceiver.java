@@ -37,6 +37,14 @@ public class AdhanReceiver extends BroadcastReceiver {
             } else {
                 context.startService(serviceIntent);
             }
+
+            // 🔄 FORCER LA MISE À JOUR DU WIDGET après chaque adhan (pour Samsung)
+            try {
+                PrayerTimesWidget.forceUpdateWidgets(context);
+                Log.d("AdhanReceiver", "✅ Widget forcé à se mettre à jour après Adhan " + prayerLabel);
+            } catch (Exception e) {
+                Log.w("AdhanReceiver", "⚠️ Erreur mise à jour widget: " + e.getMessage());
+            }
         } catch (Exception e) {
             Log.e("AdhanReceiver", "Erreur dans onReceive : " + e.getMessage(), e);
         }

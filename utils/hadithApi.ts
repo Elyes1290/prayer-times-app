@@ -1,4 +1,8 @@
-const API_KEY = "$2y$10$doCdBLfM0jONj1evceyDyuFQYeUBzyQsh9NL2sRIuT9wt8GKsXaa";
+import Constants from "expo-constants";
+
+const API_KEY =
+  Constants.expoConfig?.extra?.hadithApiKey ||
+  "$2y$10$doCdBLfM0jONj1evceyDyuFQYeUBzyQsh9NL2sRIuT9wt8GKsXaa";
 
 export type Hadith = {
   id: number;
