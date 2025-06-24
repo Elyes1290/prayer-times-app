@@ -41,6 +41,38 @@
 # Location services
 -keep class com.google.android.gms.location.** { *; }
 
+# CONSERVATION DES FICHIERS AUDIO RAW - CRITIQUE!
+-keepclassmembers class **.R$raw {
+    public static <fields>;
+}
+-keep class **.R$raw { *; }
+
+# PROTECTION ABSOLUE DES RESSOURCES RAW CONTRE LE SHRINKING
+-keep class **.R { *; }
+-keep class **.R$* { *; }
+
+# Empêcher la suppression de toutes les ressources raw
+-keepclassmembers class **.R$raw {
+    public static final int *;
+}
+
+# Règles spécifiques pour les fichiers audio Adhan
+-keep class com.drogbinho.prayertimesapp2.R$raw { *; }
+-keepclassmembers class com.drogbinho.prayertimesapp2.R$raw {
+    public static final int mustafaozcan;
+    public static final int adhamalsharqawe;
+    public static final int adhanaljazaer;
+    public static final int ahmadnafees;
+    public static final int ahmedelkourdi;
+    public static final int dubai;
+    public static final int karljenkins;
+    public static final int mansourzahrani;
+    public static final int misharyrachid;
+    public static final int masjidquba;
+    public static final int islamsobhi;
+    public static final int duaafteradhan;
+}
+
 # Optimizations
 -optimizations !code/simplification/arithmetic,!code/simplification/cast,!field/*,!class/merging/*
 -optimizationpasses 5

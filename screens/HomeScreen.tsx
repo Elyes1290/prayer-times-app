@@ -40,6 +40,7 @@ import { scheduleNotificationsFor2Days } from "../utils/sheduleAllNotificationsF
 import { getQuranVersesWithTranslations } from "../utils/quranApi";
 import { getRandomHadith } from "../utils/hadithApi";
 import { debugLog, errorLog } from "../utils/logger";
+import WelcomePersonalizationModal from "../components/WelcomePersonalizationModal";
 
 const { AdhanModule } = NativeModules;
 const { width: screenWidth, height: screenHeight } = Dimensions.get("window");
@@ -162,6 +163,8 @@ export default function HomeScreen() {
   const router = useRouter();
   const [today, setToday] = useState(new Date());
   const [city, setCity] = useState<string | null>(null);
+  const [showPersonalizationModal, setShowPersonalizationModal] =
+    useState(false);
 
   // Map langue => id traduction Quran.com
   const translationMap: Record<string, number | null> = {
@@ -650,6 +653,28 @@ export default function HomeScreen() {
     location?.coords?.longitude,
   ]);
 
+  // 🎯 Afficher la modal de personnalisation après configuration de la localisation
+  useEffect(() => {
+    // Vérifier si il faut afficher la modal de personnalisation
+    if (
+      settings.isFirstTime &&
+      settings.locationMode !== null &&
+      !settings.userFirstName &&
+      currentPrayerTimes // S'assurer que tout est bien configuré
+    ) {
+      const timer = setTimeout(() => {
+        setShowPersonalizationModal(true);
+      }, 1500); // Petit délai pour laisser l'interface se stabiliser
+
+      return () => clearTimeout(timer);
+    }
+  }, [
+    settings.isFirstTime,
+    settings.locationMode,
+    settings.userFirstName,
+    currentPrayerTimes,
+  ]);
+
   // Si c'est en cours de chargement
   if (settings.isLoading) {
     return (
@@ -903,8 +928,20 @@ export default function HomeScreen() {
             ]}
           >
             <View style={styles.welcomeSection}>
-              <Text style={styles.welcomeText}>{t("dashboard_welcome")}</Text>
-              <Text style={styles.dateText}>
+              <Text
+                style={styles.welcomeText}
+                numberOfLines={2}
+                ellipsizeMode="tail"
+              >
+                {settings.userFirstName
+                  ? `${t("dashboard_welcome")} ${settings.userFirstName}`
+                  : t("dashboard_welcome")}
+              </Text>
+              <Text
+                style={styles.dateText}
+                numberOfLines={1}
+                ellipsizeMode="tail"
+              >
                 {new Date().toLocaleDateString(
                   i18n.language.startsWith("ar")
                     ? "ar"
@@ -955,7 +992,11 @@ export default function HomeScreen() {
                     size={16}
                     color="#4ECDC4"
                   />
-                  <Text style={styles.locationText}>
+                  <Text
+                    style={styles.locationText}
+                    numberOfLines={1}
+                    ellipsizeMode="tail"
+                  >
                     {city}
                     {settings.locationMode === "manual" && " (Manuel)"}
                   </Text>
@@ -1517,6 +1558,20 @@ export default function HomeScreen() {
           </View>
         </ScrollView>
       </ImageBackground>
+
+      {/* 🎯 Modal de personnalisation */}
+      <WelcomePersonalizationModal
+        visible={showPersonalizationModal}
+        onConfirm={(firstName) => {
+          settings.setUserFirstName(firstName);
+          settings.setIsFirstTime(false);
+          setShowPersonalizationModal(false);
+        }}
+        onSkip={() => {
+          settings.setIsFirstTime(false);
+          setShowPersonalizationModal(false);
+        }}
+      />
     </>
   );
 }
@@ -1572,13 +1627,14 @@ const styles = StyleSheet.create({
   locationRow: {
     flexDirection: "row",
     alignItems: "center",
-    marginTop: 8,
+    marginTop: 6,
     backgroundColor: "rgba(78, 205, 196, 0.1)",
-    paddingHorizontal: 12,
-    paddingVertical: 6,
+    paddingHorizontal: 10,
+    paddingVertical: 4,
     borderRadius: 12,
     borderWidth: 1,
     borderColor: "rgba(78, 205, 196, 0.2)",
+    maxWidth: "90%",
   },
   settingsButton: {
     padding: 12,
@@ -1586,6 +1642,11 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(255, 255, 255, 0.1)",
     borderWidth: 1,
     borderColor: "rgba(255, 255, 255, 0.2)",
+    minWidth: 48,
+    minHeight: 48,
+    justifyContent: "center",
+    alignItems: "center",
+    flexShrink: 0,
   },
   dateNavigationContainer: {
     marginBottom: 16,
@@ -2336,7 +2397,7 @@ const styles = StyleSheet.create({
   // Styles pour le header
   dashboardHeader: {
     flexDirection: "row",
-    alignItems: "center",
+    alignItems: "flex-start",
     justifyContent: "space-between",
     padding: 16,
     backgroundColor: "rgba(0, 0, 0, 0.3)",
@@ -2349,25 +2410,32 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 12,
     elevation: 8,
+    minHeight: 80,
   },
 
   welcomeSection: {
+    flex: 1,
     flexDirection: "column",
     alignItems: "flex-start",
+    marginRight: 16,
+    maxWidth: "70%",
+    paddingRight: 8,
   },
 
   welcomeText: {
-    fontSize: 28,
+    fontSize: 20,
     fontWeight: "800",
     color: "#fffbe8",
     marginBottom: 4,
     textShadowColor: "rgba(0, 0, 0, 0.3)",
     textShadowOffset: { width: 0, height: 2 },
     textShadowRadius: 4,
+    flexWrap: "wrap",
+    lineHeight: 24,
   },
 
   dateText: {
-    fontSize: 16,
+    fontSize: 14,
     color: "rgba(255, 255, 255, 0.9)",
     fontWeight: "600",
     textShadowColor: "rgba(0, 0, 0, 0.2)",

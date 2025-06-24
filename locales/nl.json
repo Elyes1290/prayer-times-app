@@ -336,9 +336,9 @@
   "prayer_step_4_detail": "Voorover buigen (Ruku), handen op de knieën, Ruku Tasbih minstens 3 keer zeggen",
   "prayer_step_5_detail": "Prostaten (Sujud), voorhoofd op de grond, Sujud Tasbih minstens 3 keer zeggen",
   "prayer_step_6_detail": "Zittende positie (Tashahhud) voor de getuigenis van geloof",
-  "prayer_step_7_detail": "Afsluiten met Salam, hoofd naar rechts dan naar links draaien",
-  "prayer_step_8": "Laatste Tashahhud: gebeden voor de Profeet en smeekbeden",
-  "prayer_step_8_detail": "Tijdens de laatste Tashahhud, gebeden voor de Profeet (Salawat) dan het beschermingsgebed reciteren",
+  "prayer_step_7_detail": "Beëindigen met de Salam door het hoofd eerst naar rechts dan naar links te draaien",
+  "prayer_step_8": "Laatste Tashahhud: Gebeden voor de Profeet en smeekbeden",
+  "prayer_step_8_detail": "Tijdens de laatste tashahhud de gebeden voor de Profeet (Salawat) reciteren, dan het beschermingsgebed",
   "prayer_step_recitation": "Al-Fatiha en een sura reciteren",
   "salawat_dua": "اللَّهُمَّ صَلِّ عَلَىٰ مُحَمَّدٍ وَعَلَىٰ آلِ مُحَمَّدٍ، كَمَا صَلَّيْتَ عَلَىٰ إِبْرَاهِيمَ وَعَلَىٰ آلِ إِبْرَاهِيمَ، إِنَّكَ حَمِيدٌ مَجِيدٌ، اللَّهُمَّ بَارِكْ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ، كَمَا بَارَكْتَ عَلَى إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ، إِنَّكَ حَمِيدٌ مَجِيدٌ",
   "salawat_phonetic": "Allāhumma ṣalli 'alā Muḥammad, wa 'alā āli Muḥammad, kamā ṣallayta 'alā Ibrāhīm wa 'alā āli Ibrāhīm, innaka ḥamīdun majīd. Allāhumma bārik 'alā Muḥammad, wa 'alā āli muḥammad kamā bārakta 'alā ibrāhīm wa 'alā āli ibrāhīm innaka ḥamīdun majīd.",
@@ -357,5 +357,10 @@
   "salam_translation": "Vrede en barmhartigheid van Allah zij met u",
   "tashahhud_dua": "التَّحِيَّاتُ لِلَّهِ، وَالصَّلَوَاتُ وَالطَّيِّبَاتُ، السَّلاَمُ عَلَيْكَ أَيُّهَا النَّبِيُّ وَرَحْمَةُ اللهِ وَبَرَكَاتُهُ، السَّلاَمُ عَلَيْنَا وَعَلَى عِبَادِ اللهِ الصَّالِحِينَ، أَشْهَدُ أَنْ لاَ إِلَهَ إِلاَّ اللهُ، وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ",
   "tashahhud_phonetic": "At-taḥiyyātu lillāh, waṣ-ṣalawātu waṭ-ṭayyibāt. As-salāmu 'alayka ayyuhan-nabiyyu wa raḥmatullāhi wa barakātuh. As-salāmu 'alaynā wa 'alā 'ibādillāhiṣ-ṣāliḥīn. Ash-hadu allā ilāha illa Allāh, wa ash-hadu anna Muḥammadan 'abduhu wa rasūluh.",
-  "tashahhud_translation": "Alle begroetingen, gebeden en goede dingen behoren aan Allah. Vrede zij met u, o Profeet, en de barmhartigheid van Allah en Zijn zegeningen. Vrede zij met ons en met de rechtvaardige dienaren van Allah. Ik getuig dat er geen god is behalve Allah, en ik getuig dat Muhammad Zijn dienaar en boodschapper is."
+  "tashahhud_translation": "Alle begroetingen, gebeden en goede dingen behoren aan Allah. Vrede zij met u, o Profeet, en de barmhartigheid van Allah en Zijn zegeningen. Vrede zij met ons en met de rechtvaardige dienaren van Allah. Ik getuig dat er geen god is behalve Allah, en ik getuig dat Muhammad Zijn dienaar en boodschapper is.",
+  "welcome_personalization_title": "Welkom personalisatie",
+  "welcome_personalization_description": "Om u een meer persoonlijke ervaring te bieden, kunt u ons uw voornaam vertellen?",
+  "welcome_personalization_placeholder": "Uw voornaam (optioneel)",
+  "welcome_personalization_confirm": "Bevestigen",
+  "welcome_personalization_skip": "Overslaan"
 }

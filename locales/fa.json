@@ -337,9 +337,9 @@
   "prayer_step_4_detail": "خم شدن به جلو (رکوع)، گذاشتن دستان روی زانوها، حداقل ۳ بار تسبیح رکوع",
   "prayer_step_5_detail": "سجده کردن، پیشانی روی زمین، حداقل ۳ بار تسبیح سجده",
   "prayer_step_6_detail": "حالت نشسته (تشهد) برای شهادت ایمان",
-  "prayer_step_7_detail": "پایان با سلام، چرخاندن سر به راست سپس چپ",
-  "prayer_step_8": "تشهد آخر: درود بر پیامبر و دعاها",
-  "prayer_step_8_detail": "در تشهد آخر، درود بر پیامبر (صلوات) سپس دعای استعاذه",
+  "prayer_step_7_detail": "با سلام خاتمه دادن، سر را ابتدا به راست سپس به چپ برگرداندن",
+  "prayer_step_8": "تشهد آخر: دعا برای پیامبر و نیایش‌ها",
+  "prayer_step_8_detail": "در تشهد آخر، دعاهای پیامبر (صلوات) بخوانید سپس دعای محافظت",
   "prayer_step_recitation": "تلاوت الحمد و یک سوره",
   "salawat_dua": "اللَّهُمَّ صَلِّ عَلَىٰ مُحَمَّدٍ وَعَلَىٰ آلِ مُحَمَّدٍ، كَمَا صَلَّيْتَ عَلَىٰ إِبْرَاهِيمَ وَعَلَىٰ آلِ إِبْرَاهِيمَ، إِنَّكَ حَمِيدٌ مَجِيدٌ، اللَّهُمَّ بَارِكْ عَلَىٰ مُحَمَّدٍ وَعَلَىٰ آلِ مُحَمَّدٍ، كَمَا بَارَكْتَ عَلَىٰ إِبْرَاهِيمَ وَعَلَىٰ آلِ إِبْرَاهِيمَ، إِنَّكَ حَمِيدٌ مَجِيدٌ",
   "salawat_phonetic": "Allāhumma ṣalli 'alā Muḥammad, wa 'alā āli Muḥammad, kamā ṣallayta 'alā Ibrāhīm wa 'alā āli Ibrāhīm, innaka ḥamīdun majīd. Allāhumma bārik 'alā Muḥammad, wa 'alā āli Muḥammad kamā bārakta 'alā Ibrāhīm wa 'alā āli Ibrāhīm, innaka ḥamīdun majīd.",
@@ -358,5 +358,10 @@
   "salam_translation": "سلام و رحمت خدا بر شما باد",
   "tashahhud_dua": "التَّحِيَّاتُ لِلَّهِ، وَالصَّلَوَاتُ وَالطَّيِّبَاتُ، السَّلاَمُ عَلَيْكَ أَيُّهَا النَّبِيُّ وَرَحْمَةُ اللهِ وَبَرَكَاتُهُ، السَّلاَمُ عَلَيْنَا وَعَلَى عِبَادِ اللهِ الصَّالِحِينَ، أَشْهَدُ أَنْ لاَ إِلَهَ إِلاَّ اللهُ، وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ",
   "tashahhud_phonetic": "At-taḥiyyātu lillāh, waṣ-ṣalawātu waṭ-ṭayyibāt. As-salāmu 'alayka ayyuhan-nabiyyu wa raḥmatullāhi wa barakātuh. As-salāmu 'alaynā wa 'alā 'ibādillāhiṣ-ṣāliḥīn. Ash-hadu allā ilāha illa Allāh, wa ash-hadu anna Muḥammadan 'abduhu wa rasūluh.",
-  "tashahhud_translation": "همه احترامات، نمازها و چیزهای نیک مخصوص خداست. سلام بر تو ای پیامبر و رحمت خدا و برکاتش. سلام بر ما و بر بندگان صالح خدا. گواهی می‌دهم که هیچ معبودی جز الله نیست و گواهی می‌دهم که محمد بنده و رسول اوست."
+  "tashahhud_translation": "همه احترامات، نمازها و چیزهای نیک مخصوص خداست. سلام بر تو ای پیامبر و رحمت خدا و برکاتش. سلام بر ما و بر بندگان صالح خدا. گواهی می‌دهم که هیچ معبودی جز الله نیست و گواهی می‌دهم که محمد بنده و رسول اوست.",
+  "welcome_personalization_title": "شخصی‌سازی خوش‌آمدگویی",
+  "welcome_personalization_description": "برای ارائه تجربه‌ای شخصی‌تر، آیا می‌توانید نام خود را بگویید؟",
+  "welcome_personalization_placeholder": "نام شما (اختیاری)",
+  "welcome_personalization_confirm": "تأیید",
+  "welcome_personalization_skip": "رد کردن"
 }

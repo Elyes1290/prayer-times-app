@@ -69,6 +69,8 @@ export interface SettingsContextType {
     delaySelectedDua: number;
   };
   currentLanguage: string;
+  userFirstName: string | null;
+  isFirstTime: boolean;
   setLocationMode: (mode: "auto" | "manual" | null) => void;
   setManualLocation: (
     location: { lat: number; lon: number; city: string } | null
@@ -88,6 +90,8 @@ export interface SettingsContextType {
   setEnabledSelectedDua: (enabled: boolean) => void;
   setDelaySelectedDua: (delay: number) => void;
   setCurrentLanguage: (language: string) => void;
+  setUserFirstName: (firstName: string | null) => void;
+  setIsFirstTime: (isFirstTime: boolean) => void;
   saveAndReprogramAll: () => Promise<void>;
 }
 
@@ -115,6 +119,8 @@ const defaultSettings: SettingsContextType = {
     delaySelectedDua: 15,
   },
   currentLanguage: "en",
+  userFirstName: null,
+  isFirstTime: true,
   setLocationMode: () => {},
   setManualLocation: () => {},
   refreshAutoLocation: async () => {},
@@ -132,6 +138,8 @@ const defaultSettings: SettingsContextType = {
   setEnabledSelectedDua: () => {},
   setDelaySelectedDua: () => {},
   setCurrentLanguage: () => {},
+  setUserFirstName: () => {},
+  setIsFirstTime: () => {},
   saveAndReprogramAll: async () => {},
 };
 
@@ -165,6 +173,8 @@ export const SettingsProvider = ({
     null
   );
   const [currentLanguage, setCurrentLanguage] = useState<string>("en");
+  const [userFirstName, setUserFirstName] = useState<string | null>(null);
+  const [isFirstTime, setIsFirstTime] = useState<boolean>(true);
 
   // New state for auto location
   const [autoLocation, setAutoLocation] = useState<Coords | null>(null);
@@ -234,6 +244,8 @@ export const SettingsProvider = ({
         enabledSelectedDuaValue,
         delaySelectedDuaValue,
         currentLanguageValue,
+        userFirstNameValue,
+        isFirstTimeValue,
       ] = await Promise.all([
         AsyncStorage.getItem("notificationsEnabled"),
         AsyncStorage.getItem("calcMethod"),
@@ -252,6 +264,8 @@ export const SettingsProvider = ({
         AsyncStorage.getItem("enabledSelectedDua"),
         AsyncStorage.getItem("delaySelectedDua"),
         AsyncStorage.getItem("currentLanguage"),
+        AsyncStorage.getItem("userFirstName"),
+        AsyncStorage.getItem("isFirstTime"),
       ]);
 
       // Si AsyncStorage est vide, essayer de charger depuis Android
@@ -341,6 +355,14 @@ export const SettingsProvider = ({
 
         setCurrentLanguage(defaultLang);
         AsyncStorage.setItem("currentLanguage", defaultLang);
+      }
+
+      // Gestion du prénom et première fois
+      if (userFirstNameValue) {
+        setUserFirstName(userFirstNameValue);
+      }
+      if (isFirstTimeValue !== null) {
+        setIsFirstTime(isFirstTimeValue === "true");
       }
 
       // New logic for initial location load
@@ -458,6 +480,8 @@ export const SettingsProvider = ({
       delaySelectedDua,
     },
     currentLanguage,
+    userFirstName,
+    isFirstTime,
     setLocationMode: handleSetLocationMode,
     setManualLocation: handleSetManualLocation,
     refreshAutoLocation,
@@ -769,6 +793,14 @@ export const SettingsProvider = ({
         } catch (error) {}
       } else if (isInitializing) {
       }
+    },
+    setUserFirstName: (firstName) => {
+      setUserFirstName(firstName);
+      AsyncStorage.setItem("userFirstName", firstName || "");
+    },
+    setIsFirstTime: (isFirst) => {
+      setIsFirstTime(isFirst);
+      AsyncStorage.setItem("isFirstTime", String(isFirst));
     },
     saveAndReprogramAll,
   };

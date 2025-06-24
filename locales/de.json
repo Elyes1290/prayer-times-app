@@ -357,9 +357,9 @@
   "prayer_step_4_detail": "Sich nach vorne beugen (Ruku), Hände auf die Knie, das Ruku-Tasbih mindestens 3 Mal sagen",
   "prayer_step_5_detail": "Sich niederwerfen (Sujud), Stirn am Boden, das Sujud-Tasbih mindestens 3 Mal sagen",
   "prayer_step_6_detail": "Sitzposition (Tashahhud) für das Glaubenszeugnis",
-  "prayer_step_7_detail": "Mit dem Salam beenden, indem man den Kopf nach rechts dann nach links dreht",
+  "prayer_step_7_detail": "Das Gebet mit dem Salam beenden, zuerst nach rechts, dann nach links wenden",
   "prayer_step_8": "Letzter Tashahhud: Gebete für den Propheten und Bittgebete",
-  "prayer_step_8_detail": "Während des letzten Tashahhud die Gebete für den Propheten (Salawat) dann das Schutzgebet rezitieren",
+  "prayer_step_8_detail": "Beim letzten Tashahhud die Gebete für den Propheten (Salawat) und dann das Schutzgebet rezitieren",
   "prayer_step_recitation": "Al-Fatiha und eine Sure rezitieren",
   "salawat_dua": "اللَّهُمَّ صَلِّ عَلَىٰ مُحَمَّدٍ وَعَلَىٰ آلِ مُحَمَّدٍ، كَمَا صَلَّيْتَ عَلَىٰ إِبْرَاهِيمَ وَعَلَىٰ آلِ إِبْرَاهِيمَ، إِنَّكَ حَمِيدٌ مَجِيدٌ، اللَّهُمَّ بَارِكْ عَلَىٰ مُحَمَّدٍ وَعَلَىٰ آلِ مُحَمَّدٍ، كَمَا بَارَكْتَ عَلَىٰ إِبْرَاهِيمَ وَعَلَىٰ آلِ إِبْرَاهِيمَ، إِنَّكَ حَمِيدٌ مَجِيدٌ",
   "salawat_phonetic": "Allāhumma ṣalli 'alā Muḥammad, wa 'alā āli Muḥammad, kamā ṣallayta 'alā Ibrāhīm wa 'alā āli Ibrāhīm, innaka ḥamīdun majīd. Allāhumma bārik 'alā Muḥammad, wa 'alā āli Muḥammad kamā bārakta 'alā Ibrāhīm wa 'alā āli Ibrāhīm, innaka ḥamīdun majīd.",
@@ -378,5 +378,10 @@
   "salam_translation": "Friede und Barmherzigkeit Allahs seien mit euch",
   "tashahhud_dua": "التَّحِيَّاتُ لِلَّهِ، وَالصَّلَوَاتُ وَالطَّيِّبَاتُ، السَّلاَمُ عَلَيْكَ أَيُّهَا النَّبِيُّ وَرَحْمَةُ اللهِ وَبَرَكَاتُهُ، السَّلاَمُ عَلَيْنَا وَعَلَى عِبَادِ اللهِ الصَّالِحِينَ، أَشْهَدُ أَنْ لاَ إِلَهَ إِلاَّ اللهُ، وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ",
   "tashahhud_phonetic": "At-taḥiyyātu lillāh, waṣ-ṣalawātu waṭ-ṭayyibāt. As-salāmu 'alayka ayyuhan-nabiyyu wa raḥmatullāhi wa barakātuh. As-salāmu 'alaynā wa 'alā 'ibādillāhiṣ-ṣāliḥīn. Ash-hadu allā ilāha illa Allāh, wa ash-hadu anna Muḥammadan 'abduhu wa rasūluh.",
-  "tashahhud_translation": "Alle Grüße, Gebete und guten Taten gehören Allah. Friede sei auf dir, o Prophet, und die Barmherzigkeit Allahs und Seine Segnungen. Friede sei auf uns und auf den rechtschaffenen Dienern Allahs. Ich bezeuge, dass es keinen Gott gibt außer Allah, und ich bezeuge, dass Muhammad Sein Diener und Gesandter ist."
+  "tashahhud_translation": "Alle Grüße, Gebete und guten Taten gehören Allah. Friede sei auf dir, o Prophet, und die Barmherzigkeit Allahs und Seine Segnungen. Friede sei auf uns und auf den rechtschaffenen Dienern Allahs. Ich bezeuge, dass es keinen Gott gibt außer Allah, und ich bezeuge, dass Muhammad Sein Diener und Gesandter ist.",
+  "welcome_personalization_title": "Willkommen Personalisierung",
+  "welcome_personalization_description": "Um Ihnen eine persönlichere Erfahrung zu bieten, könnten Sie uns Ihren Vornamen mitteilen?",
+  "welcome_personalization_placeholder": "Ihr Vorname (optional)",
+  "welcome_personalization_confirm": "Bestätigen",
+  "welcome_personalization_skip": "Überspringen"
 }

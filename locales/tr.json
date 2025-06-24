@@ -363,7 +363,7 @@
   "prayer_step_4_detail": "Öne eğilmek (Rüku), elleri dizlere koymak, en az 3 kez Rüku Tesbihini söylemek",
   "prayer_step_5_detail": "Secde etmek (Secde), alın yerde, en az 3 kez Secde Tesbihini söylemek",
   "prayer_step_6_detail": "Oturma pozisyonu (Teşehhüd) iman şahitliği için",
-  "prayer_step_7_detail": "Selam ile bitirmek, başı sağa sonra sola çevirmek",
+  "prayer_step_7_detail": "Başı sağa sonra sola çevirerek selam ile bitirmek",
   "salam_dua": "السَّلاَمُ عَلَيْكُمْ وَرَحْمَةُ اللهِ",
   "salam_phonetic": "Assalamu alaykum wa rahmatullah",
   "salam_translation": "Size selam olsun ve Allah'ın rahmeti",
@@ -378,5 +378,14 @@
   "salam_translation": "Size selam olsun ve Allah'ın rahmeti",
   "tashahhud_dua": "التَّحِيَّاتُ لِلَّهِ، وَالصَّلَوَاتُ وَالطَّيِّبَاتُ، السَّلاَمُ عَلَيْكَ أَيُّهَا النَّبِيُّ وَرَحْمَةُ اللهِ وَبَرَكَاتُهُ، السَّلاَمُ عَلَيْنَا وَعَلَى عِبَادِ اللهِ الصَّالِحِينَ، أَشْهَدُ أَنْ لاَ إِلَهَ إِلاَّ اللهُ، وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ",
   "tashahhud_phonetic": "At-taḥiyyātu lillāh, waṣ-ṣalawātu waṭ-ṭayyibāt. As-salāmu 'alayka ayyuhan-nabiyyu wa raḥmatullāhi wa barakātuh. As-salāmu 'alaynā wa 'alā 'ibādillāhiṣ-ṣāliḥīn. Ash-hadu allā ilāha illa Allāh, wa ash-hadu anna Muḥammadan 'abduhu wa rasūluh.",
-  "tashahhud_translation": "Tüm selamlar, dualar ve güzel şeyler Allah'a aittir. Selam sana ey Peygamber, Allah'ın rahmeti ve bereketleri. Selam bize ve Allah'ın salih kullarına. Şahitlik ederim ki Allah'tan başka ilah yoktur ve şahitlik ederim ki Muhammed O'nun kulu ve elçisidir."
+  "tashahhud_translation": "Tüm selamlar, dualar ve güzel şeyler Allah'a aittir. Selam sana ey Peygamber, Allah'ın rahmeti ve bereketleri. Selam bize ve Allah'ın salih kullarına. Şahitlik ederim ki Allah'tan başka ilah yoktur ve şahitlik ederim ki Muhammed O'nun kulu ve elçisidir.",
+  "prayer_step_7_detail": "Başı sağa sonra sola çevirerek selam ile bitirmek",
+  "prayer_step_8": "Son Teşehhüd: Peygamber için dualar ve yakarışlar",
+  "prayer_step_8_detail": "Son teşehhüdde Peygamber için dualar (Salavat) daha sonra koruma duası okunur",
+
+  "welcome_personalization_title": "Hoş geldin kişiselleştirmesi",
+  "welcome_personalization_description": "Size daha kişisel bir deneyim sunmak için adınızı söyleyebilir misiniz?",
+  "welcome_personalization_placeholder": "Adınız (isteğe bağlı)",
+  "welcome_personalization_confirm": "Onayla",
+  "welcome_personalization_skip": "Geç"
 }

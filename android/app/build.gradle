@@ -117,10 +117,10 @@ android {
             // Caution! In production, you need to generate your own keystore file.
             // see https://reactnative.dev/docs/signed-apk-android.
             signingConfig signingConfigs.release
-            shrinkResources true  // OPTIMISATION: Supprime ressources inutilisées
-            minifyEnabled true    // OPTIMISATION: Minification activée
+            shrinkResources true   // ✅ RÉACTIVÉ avec protections complètes
+            minifyEnabled true     // OPTIMISATION: Minification activée
             proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
-            crunchPngs true       // OPTIMISATION: Compression PNG
+            crunchPngs false       // 🔧 DÉSACTIVÉ pour préserver les ressources audio
             
             // NOUVELLES OPTIMISATIONS
             zipAlignEnabled true
