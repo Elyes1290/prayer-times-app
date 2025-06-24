@@ -5,12 +5,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
+import static com.drogbinho.prayertimesapp2.ConditionalLogger.*;
 
 public class PrayerReminderReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
                 try {
-                        Log.d("PrayerReminderReceiver", "Rappel reçu, vérification des paramètres...");
+                        debugLog("PrayerReminderReceiver", "Rappel reçu, vérification des paramètres...");
 
                         // Protection anti-double: Vérifier si un rappel similaire a été traité
                         // récemment
@@ -25,7 +26,7 @@ public class PrayerReminderReceiver extends BroadcastReceiver {
                         // Si un rappel pour la même prière a été traité dans les 2 dernières secondes,
                         // ignorer
                         if (currentTime - lastReminderTime < 2000) {
-                                Log.d("PrayerReminderReceiver",
+                                debugLog("PrayerReminderReceiver",
                                                 "🚫 Rappel en double détecté pour " + prayerLabel + ", ignoré");
                                 return;
                         }
@@ -39,12 +40,12 @@ public class PrayerReminderReceiver extends BroadcastReceiver {
 
                         // Si les notifications ou les rappels sont désactivés, on ne fait rien
                         if (!notificationsEnabled || !remindersEnabled) {
-                                Log.d("PrayerReminderReceiver",
+                                debugLog("PrayerReminderReceiver",
                                                 "Notifications ou rappels désactivés, arrêt du traitement");
                                 return;
                         }
 
-                        Log.d("PrayerReminderReceiver",
+                        debugLog("PrayerReminderReceiver",
                                         "✅ Rappel validé pour " + prayerLabel + ", démarrage du service...");
 
                         // Crée un nouvel intent avec tous les extras
@@ -60,7 +61,7 @@ public class PrayerReminderReceiver extends BroadcastReceiver {
                                 context.startService(serviceIntent);
                         }
                 } catch (Exception e) {
-                        Log.e("PrayerReminderReceiver", "Erreur lors du démarrage du service: " + e.getMessage());
+                        errorLog("PrayerReminderReceiver", "Erreur lors du démarrage du service: " + e.getMessage());
                 }
         }
 }

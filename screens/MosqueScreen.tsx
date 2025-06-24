@@ -32,6 +32,7 @@ import bgImage from "../assets/images/prayer-bg.png";
 import { Colors } from "../constants/Colors";
 import { SettingsContext } from "../contexts/SettingsContext";
 import { useLocation } from "../hooks/useLocation";
+import { debugLog, errorLog } from "../utils/logger";
 
 const { width: screenWidth } = Dimensions.get("window");
 
@@ -153,7 +154,7 @@ export default function MosqueScreen() {
         Math.abs(lastSearchLocation.current.lat - currentLoc.lat) < 0.001 &&
         Math.abs(lastSearchLocation.current.lon - currentLoc.lon) < 0.001
       ) {
-        console.log("🔄 Position identique, pas de nouvelle recherche");
+        debugLog("🔄 Position identique, pas de nouvelle recherche");
         return;
       }
 
@@ -190,7 +191,7 @@ export default function MosqueScreen() {
         setMosques(fallbackMosques);
         setLoading(false);
       } catch (error) {
-        console.error("Erreur recherche mosquées:", error);
+        errorLog("Erreur recherche mosquées:", error);
         // En cas d'erreur, utiliser le fallback
         const fallbackMosques = await searchFallbackMosques(
           latitude,
@@ -237,7 +238,7 @@ export default function MosqueScreen() {
         currentLocation.coords.longitude
       );
     } catch (error) {
-      console.error("Erreur de localisation:", error);
+      errorLog("Erreur de localisation:", error);
       setLocationError(t("location_error"));
       setLoading(false);
     }
@@ -292,7 +293,7 @@ export default function MosqueScreen() {
         "AIzaSyDUDBly4IpLneSJlVXUPVBaQrZIrMYImWU"; // 4. Clé temporaire pour debug
 
       if (!GOOGLE_PLACES_API_KEY || GOOGLE_PLACES_API_KEY.length < 10) {
-        console.log(
+        debugLog(
           "🔑 Clé API manquante ou invalide, utilisation du fallback OSM"
         );
         return []; // Passer au fallback si pas de clé
@@ -389,7 +390,7 @@ export default function MosqueScreen() {
 
       const data = await response.json();
 
-      console.log("📡 Réponse Google Places API:", {
+      debugLog("📡 Réponse Google Places API:", {
         status: response.status,
         placesCount: data.places?.length || 0,
         errorMessage: data.error_message,
@@ -423,7 +424,7 @@ export default function MosqueScreen() {
 
       return [];
     } catch (error) {
-      console.error("Erreur Google Places (New):", error);
+      errorLog("Erreur Google Places (New):", error);
       return [];
     }
   };
@@ -434,7 +435,7 @@ export default function MosqueScreen() {
     longitude: number
   ): Promise<Mosque[]> => {
     try {
-      console.log("🗺️ Recherche avec OpenStreetMap API...");
+      debugLog("🗺️ Recherche avec OpenStreetMap API...");
       const radius = 10000; // 10km
       const query = `
         [out:json][timeout:25];
@@ -456,7 +457,7 @@ export default function MosqueScreen() {
 
       const data = await response.json();
 
-      console.log("📍 Réponse OSM:", {
+      debugLog("📍 Réponse OSM:", {
         elementsCount: data.elements?.length || 0,
         elements: data.elements?.slice(0, 3), // Premier 3 pour debug
       });
@@ -502,7 +503,7 @@ export default function MosqueScreen() {
 
       return [];
     } catch (error) {
-      console.error("Erreur Overpass API:", error);
+      errorLog("Erreur Overpass API:", error);
       return [];
     }
   };

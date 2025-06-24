@@ -5,10 +5,8 @@ import { StatusBar } from "expo-status-bar";
 import React, { useEffect } from "react";
 import { Platform, View, StyleSheet, Animated } from "react-native";
 import { SettingsProvider } from "../contexts/SettingsContext";
-import "../locales/i18n";
-import { useTranslation } from "react-i18next";
+import "../locales/i18n-optimized";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { LinearGradient } from "expo-linear-gradient";
 
 type IconName =
   | "home"
@@ -41,7 +39,7 @@ const TabBarIcon = ({ icon, color, size, focused }: TabBarIconProps) => {
       tension: 50,
       friction: 7,
     }).start();
-  }, [focused]);
+  }, [focused, scale]);
 
   return (
     <Animated.View
@@ -76,7 +74,6 @@ const TabBarIcon = ({ icon, color, size, focused }: TabBarIconProps) => {
 
 export default function TabLayout() {
   const insets = useSafeAreaInsets();
-  const { t } = useTranslation();
 
   useEffect(() => {
     if (Platform.OS === "android") {

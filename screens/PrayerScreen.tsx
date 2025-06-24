@@ -39,6 +39,7 @@ import { usePrayerTimes } from "../hooks/usePrayerTimes";
 import { useWeeklyPrayerTimes } from "../hooks/useWeeklyPrayerTimes";
 import { scheduleNotificationsFor2Days } from "../utils/sheduleAllNotificationsFor30Days";
 import { useFocusEffect } from "@react-navigation/native";
+import { errorLog } from "../utils/logger";
 
 const { AdhanModule } = NativeModules;
 const { width: screenWidth } = Dimensions.get("window");
@@ -544,7 +545,7 @@ export default function PrayerScreen() {
         setMutedPrayers(new Set(mutedArray));
       }
     } catch (error) {
-      console.error("Erreur lors du chargement des prières muettes:", error);
+      errorLog("Erreur lors du chargement des prières muettes:", error);
     }
   }, []);
 
@@ -558,7 +559,7 @@ export default function PrayerScreen() {
         AdhanModule.updateMutedPrayers(mutedArray);
       }
     } catch (error) {
-      console.error("Erreur lors de la sauvegarde des prières muettes:", error);
+      errorLog("Erreur lors de la sauvegarde des prières muettes:", error);
     }
   }, []);
 
@@ -788,7 +789,7 @@ export default function PrayerScreen() {
                 try {
                   await settings.refreshAutoLocation();
                 } catch (error) {
-                  console.error("Erreur refresh auto location:", error);
+                  errorLog("Erreur refresh auto location:", error);
                 }
               }}
             >

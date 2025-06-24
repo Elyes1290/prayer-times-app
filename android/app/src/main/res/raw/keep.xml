@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Empêcher le shrinking de TOUS les fichiers audio -->
+    <raw name="mustafaozcan" tools:keep="@raw/mustafaozcan" />
+    <raw name="adhamalsharqawe" tools:keep="@raw/adhamalsharqawe" />
+    <raw name="adhanaljazaer" tools:keep="@raw/adhanaljazaer" />
+    <raw name="ahmadnafees" tools:keep="@raw/ahmadnafees" />
+    <raw name="ahmedelkourdi" tools:keep="@raw/ahmedelkourdi" />
+    <raw name="dubai" tools:keep="@raw/dubai" />
+    <raw name="karljenkins" tools:keep="@raw/karljenkins" />
+    <raw name="mansourzahrani" tools:keep="@raw/mansourzahrani" />
+    <raw name="misharyrachid" tools:keep="@raw/misharyrachid" />
+    <raw name="masjidquba" tools:keep="@raw/masjidquba" />
+    <raw name="islamsobhi" tools:keep="@raw/islamsobhi" />
+    <raw name="duaafteradhan" tools:keep="@raw/duaafteradhan" />
+    
+    <!-- Règle générale pour garder TOUTES les ressources raw -->
+    <raw name="*" tools:keep="@raw/*" />
+</resources> 

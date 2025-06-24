@@ -2,8 +2,9 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { createContext, useCallback, useEffect, useState } from "react";
 import { Platform, NativeModules } from "react-native";
 import * as Location from "expo-location";
-import i18n from "../locales/i18n";
+import i18n, { changeLanguage } from "../locales/i18n-optimized";
 import { scheduleNotificationsFor2Days } from "../utils/sheduleAllNotificationsFor30Days";
+import { debugLog, errorLog } from "../utils/logger";
 
 const { AdhanModule } = NativeModules;
 
@@ -68,6 +69,8 @@ export interface SettingsContextType {
     delaySelectedDua: number;
   };
   currentLanguage: string;
+  userFirstName: string | null;
+  isFirstTime: boolean;
   setLocationMode: (mode: "auto" | "manual" | null) => void;
   setManualLocation: (
     location: { lat: number; lon: number; city: string } | null
@@ -87,6 +90,8 @@ export interface SettingsContextType {
   setEnabledSelectedDua: (enabled: boolean) => void;
   setDelaySelectedDua: (delay: number) => void;
   setCurrentLanguage: (language: string) => void;
+  setUserFirstName: (firstName: string | null) => void;
+  setIsFirstTime: (isFirstTime: boolean) => void;
   saveAndReprogramAll: () => Promise<void>;
 }
 
@@ -114,6 +119,8 @@ const defaultSettings: SettingsContextType = {
     delaySelectedDua: 15,
   },
   currentLanguage: "en",
+  userFirstName: null,
+  isFirstTime: true,
   setLocationMode: () => {},
   setManualLocation: () => {},
   refreshAutoLocation: async () => {},
@@ -131,6 +138,8 @@ const defaultSettings: SettingsContextType = {
   setEnabledSelectedDua: () => {},
   setDelaySelectedDua: () => {},
   setCurrentLanguage: () => {},
+  setUserFirstName: () => {},
+  setIsFirstTime: () => {},
   saveAndReprogramAll: async () => {},
 };
 
@@ -164,6 +173,8 @@ export const SettingsProvider = ({
     null
   );
   const [currentLanguage, setCurrentLanguage] = useState<string>("en");
+  const [userFirstName, setUserFirstName] = useState<string | null>(null);
+  const [isFirstTime, setIsFirstTime] = useState<boolean>(true);
 
   // New state for auto location
   const [autoLocation, setAutoLocation] = useState<Coords | null>(null);
@@ -199,10 +210,7 @@ export const SettingsProvider = ({
         try {
           AdhanModule.setLocation(coords.lat, coords.lon);
         } catch (error) {
-          console.error(
-            "Erreur lors de l'appel AdhanModule.setLocation:",
-            error
-          );
+          errorLog("Erreur lors de l'appel AdhanModule.setLocation:", error);
           // Ne pas faire échouer le processus pour cette erreur
         }
       }
@@ -236,6 +244,8 @@ export const SettingsProvider = ({
         enabledSelectedDuaValue,
         delaySelectedDuaValue,
         currentLanguageValue,
+        userFirstNameValue,
+        isFirstTimeValue,
       ] = await Promise.all([
         AsyncStorage.getItem("notificationsEnabled"),
         AsyncStorage.getItem("calcMethod"),
@@ -254,6 +264,8 @@ export const SettingsProvider = ({
         AsyncStorage.getItem("enabledSelectedDua"),
         AsyncStorage.getItem("delaySelectedDua"),
         AsyncStorage.getItem("currentLanguage"),
+        AsyncStorage.getItem("userFirstName"),
+        AsyncStorage.getItem("isFirstTime"),
       ]);
 
       // Si AsyncStorage est vide, essayer de charger depuis Android
@@ -277,22 +289,20 @@ export const SettingsProvider = ({
         // NE PAS sauvegarder immédiatement côté Android pour éviter d'écraser
       }
       if (calcMethodValue) {
-        console.log(
-          `[DEBUG] 📋 Chargement méthode de calcul: ${calcMethodValue}`
-        );
+        debugLog(`📋 Chargement méthode de calcul: ${calcMethodValue}`);
         setCalcMethod(calcMethodValue as CalcMethodKey);
 
         // CRITIQUE: Synchroniser immédiatement la méthode de calcul côté Android
         if (Platform.OS === "android" && AdhanModule) {
-          console.log(
-            `[DEBUG] 🔄 Synchronisation initiale Android - méthode: ${calcMethodValue}`
+          debugLog(
+            `🔄 Synchronisation initiale Android - méthode: ${calcMethodValue}`
           );
           AdhanModule.setCalculationMethod(calcMethodValue);
           AdhanModule.saveNotificationSettings({
             calcMethod: calcMethodValue,
           });
-          console.log(
-            `[DEBUG] ✅ Synchronisation initiale terminée pour ${calcMethodValue}`
+          debugLog(
+            `✅ Synchronisation initiale terminée pour ${calcMethodValue}`
           );
         }
       }
@@ -337,7 +347,7 @@ export const SettingsProvider = ({
       if (currentLanguageValue) {
         setCurrentLanguage(currentLanguageValue);
         if (i18n.language !== currentLanguageValue) {
-          i18n.changeLanguage(currentLanguageValue);
+          changeLanguage(currentLanguageValue);
         }
       } else {
         // Si pas de langue sauvegardée, utiliser celle de i18n (défaut système ou anglais)
@@ -345,6 +355,14 @@ export const SettingsProvider = ({
 
         setCurrentLanguage(defaultLang);
         AsyncStorage.setItem("currentLanguage", defaultLang);
+      }
+
+      // Gestion du prénom et première fois
+      if (userFirstNameValue) {
+        setUserFirstName(userFirstNameValue);
+      }
+      if (isFirstTimeValue !== null) {
+        setIsFirstTime(isFirstTimeValue === "true");
       }
 
       // New logic for initial location load
@@ -358,7 +376,7 @@ export const SettingsProvider = ({
             setLocationError("Aucune localisation automatique sauvée");
           }
         } catch (error) {
-          console.error(
+          errorLog(
             "Erreur lors du chargement de la localisation sauvée:",
             error
           );
@@ -462,6 +480,8 @@ export const SettingsProvider = ({
       delaySelectedDua,
     },
     currentLanguage,
+    userFirstName,
+    isFirstTime,
     setLocationMode: handleSetLocationMode,
     setManualLocation: handleSetManualLocation,
     refreshAutoLocation,
@@ -503,11 +523,9 @@ export const SettingsProvider = ({
       }
     },
     setCalcMethod: (v) => {
-      console.log(
-        `[DEBUG] 🔄 CHANGEMENT MÉTHODE DE CALCUL: ${calcMethod} → ${v}`
-      );
+      debugLog(`🔄 CHANGEMENT MÉTHODE DE CALCUL: ${calcMethod} → ${v}`);
       if (Platform.OS === "android" && AdhanModule) {
-        console.log(`[DEBUG] 🔄 Sauvegarde méthode Android: ${v}`);
+        debugLog(`🔄 Sauvegarde méthode Android: ${v}`);
         AdhanModule.setCalculationMethod(v);
       }
       setCalcMethod(v);
@@ -518,18 +536,16 @@ export const SettingsProvider = ({
       if (!isInitializing) {
         setTimeout(async () => {
           try {
-            console.log(
-              `[DEBUG] 🔄 DÉBUT REPROGRAMMATION après changement: ${calcMethod} → ${v}`
+            debugLog(
+              `🔄 DÉBUT REPROGRAMMATION après changement: ${calcMethod} → ${v}`
             );
             // CRITIQUE: Les alarmes ont déjà été annulées par setCalculationMethod ci-dessus
             if (Platform.OS === "android" && AdhanModule) {
-              console.log(
-                `[DEBUG] 🔄 Reprogrammation pour méthode: ${v} (alarmes déjà annulées)`
+              debugLog(
+                `🔄 Reprogrammation pour méthode: ${v} (alarmes déjà annulées)`
               );
               // Forcer la mise à jour du widget
-              console.log(
-                `[DEBUG] 🔄 Forçage mise à jour widget pour méthode: ${v}`
-              );
+              debugLog(`🔄 Forçage mise à jour widget pour méthode: ${v}`);
               AdhanModule.forceUpdateWidgets();
             }
 
@@ -548,8 +564,8 @@ export const SettingsProvider = ({
                   : null;
 
               if (userLocation) {
-                console.log(
-                  `[DEBUG] 🔄 Recalcul immédiat horaires widget pour méthode: ${v}`
+                debugLog(
+                  `🔄 Recalcul immédiat horaires widget pour méthode: ${v}`
                 );
                 const {
                   computePrayerTimesForDate,
@@ -574,8 +590,8 @@ export const SettingsProvider = ({
                   formattedTimes[prayer] = `${hours}:${minutes}`;
                 });
 
-                console.log(
-                  `[DEBUG] 💾 Sauvegarde immédiate horaires widget:`,
+                debugLog(
+                  `💾 Sauvegarde immédiate horaires widget:`,
                   formattedTimes
                 );
                 await AdhanModule.saveTodayPrayerTimes(formattedTimes);
@@ -584,17 +600,17 @@ export const SettingsProvider = ({
                 await new Promise((resolve) => setTimeout(resolve, 200));
 
                 // Forcer la mise à jour du widget après la sauvegarde SANS vider le cache
-                console.log(
-                  `[DEBUG] 🔄 Forçage final mise à jour widget avec délai (sans vider cache)`
+                debugLog(
+                  `🔄 Forçage final mise à jour widget avec délai (sans vider cache)`
                 );
                 AdhanModule.forceUpdateWidgetsWithoutClearingCache();
               }
             } catch (recalcError) {
-              console.error(`[DEBUG] ❌ Erreur recalcul widget:`, recalcError);
+              errorLog(`❌ Erreur recalcul widget:`, recalcError);
             }
           } catch (error) {
-            console.error(
-              "[DEBUG] ❌ Erreur reprogrammation après changement méthode:",
+            errorLog(
+              "❌ Erreur reprogrammation après changement méthode:",
               error
             );
           }
@@ -602,12 +618,24 @@ export const SettingsProvider = ({
       }
     },
     setAdhanSound: (v) => {
-      setAdhanSound(v);
+      debugLog("SettingsContext", `🔊 Changement son d'adhan vers: ${v}`);
+      setAdhanSound(v); // Cette ligne utilise le setter React useState
       AsyncStorage.setItem("adhanSound", v);
 
-      // IMPORTANT: Sauvegarder aussi côté Android
+      // IMPORTANT: Sauvegarder SYNCHRONE côté Android pour éviter les problèmes de timing
       if (Platform.OS === "android" && AdhanModule) {
-        AdhanModule.setAdhanSound(v);
+        try {
+          AdhanModule.setAdhanSound(v);
+          debugLog(
+            "SettingsContext",
+            `✅ Son d'adhan sauvegardé côté Android: ${v}`
+          );
+        } catch (error) {
+          errorLog(
+            "SettingsContext",
+            `❌ Erreur sauvegarde son Android: ${error}`
+          );
+        }
       }
 
       // Reprogrammer automatiquement les notifications pour utiliser le nouveau son
@@ -615,14 +643,39 @@ export const SettingsProvider = ({
       if (!isInitializing) {
         setTimeout(async () => {
           try {
+            debugLog(
+              "SettingsContext",
+              `🔄 Début reprogrammation après changement son vers: ${v}`
+            );
+
             // CRITIQUE: Annuler d'abord toutes les alarmes adhan existantes
             if (Platform.OS === "android" && AdhanModule) {
+              debugLog(
+                "SettingsContext",
+                "❌ Annulation alarmes adhan existantes..."
+              );
               AdhanModule.cancelAllAdhanAlarms();
+
+              // Petit délai pour s'assurer que l'annulation est bien prise en compte
+              await new Promise((resolve) => setTimeout(resolve, 100));
             }
 
+            debugLog(
+              "SettingsContext",
+              "🔄 Reprogrammation avec nouveau son..."
+            );
             await saveAndReprogramAll();
-          } catch (error) {}
-        }, 100); // Petit délai pour laisser l'interface se mettre à jour d'abord
+            debugLog(
+              "SettingsContext",
+              `✅ Reprogrammation terminée avec son: ${v}`
+            );
+          } catch (error) {
+            errorLog(
+              "SettingsContext",
+              `❌ Erreur reprogrammation son: ${error}`
+            );
+          }
+        }, 150); // Délai augmenté pour laisser temps à la sauvegarde Android
       }
     },
     setAdhanVolume: (v) => {
@@ -722,8 +775,8 @@ export const SettingsProvider = ({
       setCurrentLanguage(language);
       AsyncStorage.setItem("currentLanguage", language);
 
-      // Synchroniser avec i18n
-      i18n.changeLanguage(language);
+      // Synchroniser avec i18n optimisé
+      changeLanguage(language);
 
       // IMPORTANT: Transmettre immédiatement la langue côté Android
       // pour les notifications ET le widget !
@@ -740,6 +793,14 @@ export const SettingsProvider = ({
         } catch (error) {}
       } else if (isInitializing) {
       }
+    },
+    setUserFirstName: (firstName) => {
+      setUserFirstName(firstName);
+      AsyncStorage.setItem("userFirstName", firstName || "");
+    },
+    setIsFirstTime: (isFirst) => {
+      setIsFirstTime(isFirst);
+      AsyncStorage.setItem("isFirstTime", String(isFirst));
     },
     saveAndReprogramAll,
   };

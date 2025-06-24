@@ -292,6 +292,11 @@
   "time_until_sunset": "Temps jusqu'au coucher du soleil",
 
   "dashboard_welcome": "Assalamu Alaykum",
+  "welcome_personalization_title": "Personalisation de bienvenue",
+  "welcome_personalization_description": "Pour vous offrir une expérience plus personnelle, pouvez-vous nous dire votre prénom ?",
+  "welcome_personalization_placeholder": "Votre prénom (optionnel)",
+  "welcome_personalization_confirm": "Confirmer",
+  "welcome_personalization_skip": "Passer",
   "next_prayer_label": "Prochaine Prière",
   "countdown_in": "Dans",
   "dua_du_jour": "Dua du Jour",

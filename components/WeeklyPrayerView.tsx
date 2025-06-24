@@ -11,7 +11,7 @@ import { useTranslation } from "react-i18next";
 
 interface WeeklyPrayerViewProps {
   currentDate: Date;
-  weekPrayerTimes: Array<{
+  weekPrayerTimes: {
     date: Date;
     times: {
       fajr: Date;
@@ -21,7 +21,7 @@ interface WeeklyPrayerViewProps {
       maghrib: Date;
       isha: Date;
     };
-  }>;
+  }[];
   onDayPress: (date: Date) => void;
 }
 
@@ -85,7 +85,7 @@ export default function WeeklyPrayerView({
               <Text style={styles.headerText}>{t("prayer")}</Text>
             </View>
             {weekPrayerTimes.map((day) =>
-              day.date instanceof Date && !isNaN(day.date) ? (
+              day.date instanceof Date && !isNaN(day.date.getTime()) ? (
                 <TouchableOpacity
                   key={day.date.toISOString()}
                   style={[
@@ -125,7 +125,7 @@ export default function WeeklyPrayerView({
                   </Text>
                 </View>
                 {weekPrayerTimes.map((day) =>
-                  day.date instanceof Date && !isNaN(day.date) ? (
+                  day.date instanceof Date && !isNaN(day.date.getTime()) ? (
                     <View
                       key={`${day.date.toISOString()}-${prayer}`}
                       style={[

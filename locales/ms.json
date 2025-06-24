@@ -9,6 +9,7 @@
   "sunset_to_fajr": "Masa antara matahari terbenam dan Fajr",
   "day_length": "Panjang hari",
   "night_length": "Panjang malam",
+  "dashboard_welcome": "Assalamu Alaykum",
   "tasbih": {
     "title": "Tasbih",
     "dhikr": {
@@ -24,5 +25,11 @@
   "adhan_completed_title": "✅ Azan selesai",
   "adhan_completed_body": "Panggilan solat telah berlangsung",
   "dismiss": "Tutup",
-  "preparing_adhan": "Menyediakan Azan..."
+  "preparing_adhan": "Menyediakan Azan...",
+
+  "welcome_personalization_title": "Personalisasi selamat datang",
+  "welcome_personalization_description": "Untuk memberikan pengalaman yang lebih peribadi, bolehkah anda beritahu kami nama pertama anda?",
+  "welcome_personalization_placeholder": "Nama pertama anda (pilihan)",
+  "welcome_personalization_confirm": "Sahkan",
+  "welcome_personalization_skip": "Langkau"
 }

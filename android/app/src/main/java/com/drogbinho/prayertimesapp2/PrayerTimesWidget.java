@@ -28,6 +28,8 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
 
+import static com.drogbinho.prayertimesapp2.ConditionalLogger.*;
+
 public class PrayerTimesWidget extends AppWidgetProvider {
 
     private static final String TAG = "PrayerTimesWidget";
@@ -35,7 +37,7 @@ public class PrayerTimesWidget extends AppWidgetProvider {
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-        Log.d(TAG, "🔄 Widget onUpdate appelé pour " + appWidgetIds.length + " widgets");
+        widgetDebugLog(TAG, "🔄 Widget onUpdate appelé pour " + appWidgetIds.length + " widgets");
 
         for (int appWidgetId : appWidgetIds) {
             updateAppWidget(context, appWidgetManager, appWidgetId);
@@ -46,8 +48,11 @@ public class PrayerTimesWidget extends AppWidgetProvider {
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);
 
-        if (ACTION_REFRESH_DUA.equals(intent.getAction())) {
-            Log.d(TAG, "🔄 Action actualiser dua reçue");
+        String action = intent.getAction();
+        widgetDebugLog(TAG, "🔄 Widget onReceive action: " + action);
+
+        if (ACTION_REFRESH_DUA.equals(action)) {
+            widgetDebugLog(TAG, "🔄 Action actualiser dua reçue");
 
             // Sauvegarder le flag pour forcer une nouvelle sélection aléatoire
             SharedPreferences prefs = context.getSharedPreferences("widget_prefs", Context.MODE_PRIVATE);
@@ -57,13 +62,24 @@ public class PrayerTimesWidget extends AppWidgetProvider {
             ComponentName thisWidget = new ComponentName(context, PrayerTimesWidget.class);
             int[] appWidgetIds = appWidgetManager.getAppWidgetIds(thisWidget);
 
-            Log.d(TAG, "🔄 Actualisation de " + appWidgetIds.length + " widgets");
+            widgetDebugLog(TAG, "🔄 Actualisation de " + appWidgetIds.length + " widgets");
 
             // Actualiser tous les widgets
             for (int appWidgetId : appWidgetIds) {
                 updateAppWidget(context, appWidgetManager, appWidgetId);
                 // Notifier que les données ont changé
                 appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId, R.id.widget_listview);
+            }
+        } else if ("FORCE_UPDATE_WIDGET".equals(action) || "SMART_UPDATE_WIDGET".equals(action)) {
+            widgetDebugLog(TAG,
+                    "🔄 " + action + " reçu (planificateur Samsung), mise à jour intelligente");
+
+            // 🎯 MISE À JOUR INTELLIGENTE: Ne fait la mise à jour que si nécessaire
+            if (shouldUpdateWidget(context)) {
+                forceUpdateWidgets(context);
+                widgetDebugLog(TAG, "✅ Widget mis à jour (changement détecté)");
+            } else {
+                widgetDebugLog(TAG, "⏭️ Widget non mis à jour (pas de changement)");
             }
         }
     }
@@ -79,7 +95,7 @@ public class PrayerTimesWidget extends AppWidgetProvider {
     }
 
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
-        Log.d(TAG, "🔄 Mise à jour du widget " + appWidgetId);
+        widgetDebugLog(TAG, "🔄 Mise à jour du widget " + appWidgetId);
 
         try {
             // Configuration ListView avec service scrollable
@@ -90,7 +106,8 @@ public class PrayerTimesWidget extends AppWidgetProvider {
             int backgroundResource = getBackgroundForPrayer(nextPrayerName);
             views.setInt(R.id.widget_root, "setBackgroundResource", backgroundResource);
 
-            Log.d(TAG, "🎨 Arrière-plan sélectionné pour " + nextPrayerName + ": " + getBackgroundName(nextPrayerName));
+            widgetDebugLog(TAG,
+                    "🎨 Arrière-plan sélectionné pour " + nextPrayerName + ": " + getBackgroundName(nextPrayerName));
 
             // Configuration du service ListView
             Intent serviceIntent = new Intent(context, PrayerTimesWidgetService.class);
@@ -110,16 +127,16 @@ public class PrayerTimesWidget extends AppWidgetProvider {
                     PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
             views.setOnClickPendingIntent(R.id.widget_root, pendingIntent);
 
-            Log.d(TAG, "📋 ListView configurée pour le widget " + appWidgetId);
+            widgetDebugLog(TAG, "📋 ListView configurée pour le widget " + appWidgetId);
 
             // Mettre à jour le widget
             appWidgetManager.updateAppWidget(appWidgetId, views);
             appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId, R.id.widget_listview);
 
-            Log.d(TAG, "✅ Widget " + appWidgetId + " mis à jour avec ListView scrollable");
+            widgetDebugLog(TAG, "✅ Widget " + appWidgetId + " mis à jour avec ListView scrollable");
 
         } catch (Exception e) {
-            Log.e(TAG, "❌ Erreur mise à jour widget " + appWidgetId + ": " + e.getMessage());
+            errorLog(TAG, "❌ Erreur mise à jour widget " + appWidgetId + ": " + e.getMessage(), e);
         }
     }
 
@@ -169,7 +186,7 @@ public class PrayerTimesWidget extends AppWidgetProvider {
      * Récupère la langue courante avec fallback
      */
     public static String getCurrentLanguage(Context context) {
-        Log.d(TAG, "🌍 DEBUG: Début récupération langue courante");
+        widgetDebugLog(TAG, "🌍 DEBUG: Début récupération langue courante");
 
         try {
             SharedPreferences prefs = context.getSharedPreferences("prayer_times_settings", Context.MODE_PRIVATE);
@@ -180,24 +197,24 @@ public class PrayerTimesWidget extends AppWidgetProvider {
             for (String key : possibleKeys) {
                 String language = prefs.getString(key, null);
                 if (language != null && !language.isEmpty()) {
-                    Log.d(TAG, "✅ Langue trouvée avec clé '" + key + "': " + language);
+                    widgetDebugLog(TAG, "✅ Langue trouvée avec clé '" + key + "': " + language);
                     return language;
                 }
-                Log.d(TAG, "❌ Pas de langue pour clé: " + key);
+                widgetDebugLog(TAG, "❌ Pas de langue pour clé: " + key);
             }
 
             // Debug: afficher toutes les SharedPreferences
-            Log.d(TAG, "🔍 TOUTES les SharedPreferences:");
+            widgetDebugLog(TAG, "🔍 TOUTES les SharedPreferences:");
             Map<String, ?> allPrefs = prefs.getAll();
             for (Map.Entry<String, ?> entry : allPrefs.entrySet()) {
-                Log.d(TAG, "  - " + entry.getKey() + " = " + entry.getValue());
+                widgetDebugLog(TAG, "  - " + entry.getKey() + " = " + entry.getValue());
             }
 
         } catch (Exception e) {
-            Log.e(TAG, "❌ Erreur récupération langue: " + e.getMessage());
+            errorLog(TAG, "❌ Erreur récupération langue: " + e.getMessage(), e);
         }
 
-        Log.d(TAG, "⚠️ Aucune langue trouvée, utilisation fallback: en");
+        widgetDebugLog(TAG, "⚠️ Aucune langue trouvée, utilisation fallback: en");
         return "en"; // English comme langue par défaut
     }
 
@@ -206,7 +223,7 @@ public class PrayerTimesWidget extends AppWidgetProvider {
      */
     public static String getTranslation(Context context, String key) {
         String language = getCurrentLanguage(context);
-        Log.d(TAG, "🌍 Tentative lecture locales_" + language + ".json pour clé: " + key);
+        widgetDebugLog(TAG, "🌍 Tentative lecture locales_" + language + ".json pour clé: " + key);
 
         try {
             String fileName = "locales_" + language + ".json";
@@ -225,15 +242,16 @@ public class PrayerTimesWidget extends AppWidgetProvider {
 
             if (translations.has(key)) {
                 String translation = translations.getString(key);
-                Log.d(TAG, "✅ Traduction trouvée: " + key + " = " + translation);
+                widgetDebugLog(TAG, "✅ Traduction trouvée: " + key + " = " + translation);
                 return translation;
             } else {
-                Log.w(TAG, "⚠️ Clé '" + key + "' non trouvée dans " + fileName);
+                widgetDebugLog(TAG, "⚠️ Clé '" + key + "' non trouvée dans " + fileName);
                 return key; // Fallback vers la clé
             }
 
         } catch (Exception e) {
-            Log.e(TAG, "❌ Erreur lecture traduction " + language + " pour '" + key + "': " + e.getMessage());
+            errorLog(TAG,
+                    "❌ Erreur lecture traduction " + language + " pour '" + key + "': " + e.getMessage(), e);
             return key; // Fallback vers la clé
         }
     }
@@ -257,16 +275,18 @@ public class PrayerTimesWidget extends AppWidgetProvider {
             boolean isNewDay = !currentDate.equals(lastDate);
             boolean isNewCalcMethod = !currentCalcMethod.equals(lastCalcMethod);
 
-            Log.d(TAG, "🔍 [WIDGET DEBUG] Vérification changements:");
-            Log.d(TAG, "📅 [WIDGET DEBUG] Date actuelle: " + currentDate + ", dernière: " + lastDate
-                    + " (nouveau jour: " + isNewDay + ")");
-            Log.d(TAG, "📊 [WIDGET DEBUG] Méthode actuelle: " + currentCalcMethod + ", dernière: " + lastCalcMethod
-                    + " (nouvelle méthode: " + isNewCalcMethod + ")");
+            widgetDebugLog(TAG, "🔍 [WIDGET DEBUG] Vérification changements:");
+            widgetDebugLog(TAG,
+                    "📅 [WIDGET DEBUG] Date actuelle: " + currentDate + ", dernière: " + lastDate
+                            + " (nouveau jour: " + isNewDay + ")");
+            widgetDebugLog(TAG,
+                    "📊 [WIDGET DEBUG] Méthode actuelle: " + currentCalcMethod + ", dernière: " + lastCalcMethod
+                            + " (nouvelle méthode: " + isNewCalcMethod + ")");
 
             if (isNewDay || isNewCalcMethod) {
-                Log.d(TAG, "🔄 [WIDGET DEBUG] CHANGEMENT DÉTECTÉ - Recalcul nécessaire");
-                Log.d(TAG, "📅 [WIDGET DEBUG] Nouveau jour: " + isNewDay);
-                Log.d(TAG, "📊 [WIDGET DEBUG] Nouvelle méthode: " + isNewCalcMethod);
+                widgetDebugLog(TAG, "🔄 [WIDGET DEBUG] CHANGEMENT DÉTECTÉ - Recalcul nécessaire");
+                widgetDebugLog(TAG, "📅 [WIDGET DEBUG] Nouveau jour: " + isNewDay);
+                widgetDebugLog(TAG, "📊 [WIDGET DEBUG] Nouvelle méthode: " + isNewCalcMethod);
 
                 // Mettre à jour les préférences
                 prefs.edit()
@@ -279,11 +299,12 @@ public class PrayerTimesWidget extends AppWidgetProvider {
                 double lon = prefs.getFloat("longitude", 0.0f);
 
                 if (lat != 0.0 && lon != 0.0) {
-                    Log.d(TAG, "📍 Recalcul avec coordonnées: " + lat + ", " + lon);
+                    widgetDebugLog(TAG, "📍 Recalcul avec coordonnées: " + lat + ", " + lon);
                     Map<String, String> calculatedTimes = calculatePrayerTimesForCoordinates(lat, lon, prefs, context);
 
                     if (!calculatedTimes.isEmpty()) {
-                        Log.d(TAG, "✅ Recalcul réussi avec " + calculatedTimes.size() + " horaires");
+                        widgetDebugLog(TAG,
+                                "✅ Recalcul réussi avec " + calculatedTimes.size() + " horaires");
 
                         // Sauvegarder dans today_prayer_times
                         try {
@@ -292,9 +313,9 @@ public class PrayerTimesWidget extends AppWidgetProvider {
                                 jsonToSave.put(entry.getKey(), entry.getValue());
                             }
                             prefs.edit().putString("today_prayer_times", jsonToSave.toString()).apply();
-                            Log.d(TAG, "💾 Horaires sauvegardés dans today_prayer_times");
+                            widgetDebugLog(TAG, "💾 Horaires sauvegardés dans today_prayer_times");
                         } catch (Exception e) {
-                            Log.w(TAG, "⚠️ Erreur sauvegarde: " + e.getMessage());
+                            errorLog(TAG, "⚠️ Erreur sauvegarde: " + e.getMessage(), e);
                         }
 
                         return calculatedTimes;
@@ -312,22 +333,24 @@ public class PrayerTimesWidget extends AppWidgetProvider {
                         String key = keys.next();
                         prayerTimes.put(key, json.getString(key));
                     }
-                    Log.d(TAG, "✅ Horaires récupérés depuis today_prayer_times");
-                    Log.d(TAG, "🔍 [WIDGET DEBUG] Contenu exact du cache: " + todayPrayerTimesJson);
+                    widgetDebugLog(TAG, "✅ Horaires récupérés depuis today_prayer_times");
+                    widgetDebugLog(TAG,
+                            "🔍 [WIDGET DEBUG] Contenu exact du cache: " + todayPrayerTimesJson);
                     for (Map.Entry<String, String> entry : prayerTimes.entrySet()) {
-                        Log.d(TAG, "🕐 [WIDGET DEBUG] " + entry.getKey() + ": " + entry.getValue());
+                        widgetDebugLog(TAG,
+                                "🕐 [WIDGET DEBUG] " + entry.getKey() + ": " + entry.getValue());
                     }
                     return prayerTimes;
                 } catch (Exception e) {
-                    Log.e(TAG, "❌ Erreur parsing JSON: " + e.getMessage());
+                    errorLog(TAG, "❌ Erreur parsing JSON: " + e.getMessage(), e);
                 }
             }
 
-            Log.w(TAG, "⚠️ Aucun horaire trouvé, retour map vide");
+            widgetDebugLog(TAG, "⚠️ Aucun horaire trouvé, retour map vide");
             return prayerTimes;
 
         } catch (Exception e) {
-            Log.e(TAG, "❌ Erreur getAllPrayerTimes: " + e.getMessage());
+            errorLog(TAG, "❌ Erreur getAllPrayerTimes: " + e.getMessage(), e);
             e.printStackTrace();
             return prayerTimes;
         }
@@ -344,7 +367,7 @@ public class PrayerTimesWidget extends AppWidgetProvider {
         // SOURCE 1: today_prayer_times (source principale)
         try {
             String todayPrayerTimesJson = prefs.getString("today_prayer_times", null);
-            Log.d(TAG,
+            widgetDebugLog(TAG,
                     "🔍 Source 1 - today_prayer_times: " + (todayPrayerTimesJson != null ? "présentes" : "absentes"));
 
             if (todayPrayerTimesJson != null && !todayPrayerTimesJson.trim().isEmpty()) {
@@ -362,18 +385,19 @@ public class PrayerTimesWidget extends AppWidgetProvider {
                 }
 
                 if (prayerTimes.size() >= 5) { // Au moins 5 prières (sans Sunrise)
-                    Log.d(TAG, "✅ Source 1 réussie - " + prayerTimes.size() + " horaires récupérés");
+                    widgetDebugLog(TAG,
+                            "✅ Source 1 réussie - " + prayerTimes.size() + " horaires récupérés");
                     return prayerTimes;
                 }
             }
         } catch (Exception e) {
-            Log.w(TAG, "⚠️ Erreur source 1: " + e.getMessage());
+            errorLog(TAG, "⚠️ Erreur source 1: " + e.getMessage(), e);
         }
 
         // SOURCE 2: Essayer depuis adhan_prefs (backup)
         try {
             SharedPreferences adhanPrefs = context.getSharedPreferences("adhan_prefs", Context.MODE_PRIVATE);
-            Log.d(TAG, "🔍 Source 2 - adhan_prefs comme backup");
+            widgetDebugLog(TAG, "🔍 Source 2 - adhan_prefs comme backup");
 
             // Vérifier si on a des coordonnées sauvegardées
             if (adhanPrefs.contains("lat") && adhanPrefs.contains("lon")) {
@@ -381,12 +405,13 @@ public class PrayerTimesWidget extends AppWidgetProvider {
                 double lon = adhanPrefs.getFloat("lon", 0.0f);
 
                 if (lat != 0.0 && lon != 0.0) {
-                    Log.d(TAG, "📍 Coordonnées trouvées: " + lat + ", " + lon);
+                    widgetDebugLog(TAG, "📍 Coordonnées trouvées: " + lat + ", " + lon);
                     Map<String, String> calculatedTimes = calculatePrayerTimesForCoordinates(lat, lon, adhanPrefs,
                             context);
 
                     if (!calculatedTimes.isEmpty()) {
-                        Log.d(TAG, "✅ Source 2 réussie - calcul direct avec " + calculatedTimes.size() + " horaires");
+                        widgetDebugLog(TAG,
+                                "✅ Source 2 réussie - calcul direct avec " + calculatedTimes.size() + " horaires");
 
                         // Sauvegarder dans la source principale pour la prochaine fois
                         try {
@@ -395,9 +420,9 @@ public class PrayerTimesWidget extends AppWidgetProvider {
                                 jsonToSave.put(entry.getKey(), entry.getValue());
                             }
                             prefs.edit().putString("today_prayer_times", jsonToSave.toString()).apply();
-                            Log.d(TAG, "💾 Horaires sauvegardés pour la prochaine fois");
+                            widgetDebugLog(TAG, "💾 Horaires sauvegardés pour la prochaine fois");
                         } catch (Exception e) {
-                            Log.w(TAG, "⚠️ Erreur sauvegarde backup: " + e.getMessage());
+                            errorLog(TAG, "⚠️ Erreur sauvegarde backup: " + e.getMessage(), e);
                         }
 
                         return calculatedTimes;
@@ -405,26 +430,27 @@ public class PrayerTimesWidget extends AppWidgetProvider {
                 }
             }
         } catch (Exception e) {
-            Log.w(TAG, "⚠️ Erreur source 2: " + e.getMessage());
+            errorLog(TAG, "⚠️ Erreur source 2: " + e.getMessage(), e);
         }
 
         // SOURCE 3: Essayer depuis prayer_times_settings (location manuelle)
         try {
-            Log.d(TAG, "🔍 Source 3 - localisation manuelle");
+            widgetDebugLog(TAG, "🔍 Source 3 - localisation manuelle");
 
             if (prefs.contains("manual_latitude") && prefs.contains("manual_longitude")) {
                 float lat = prefs.getFloat("manual_latitude", 0.0f);
                 float lon = prefs.getFloat("manual_longitude", 0.0f);
 
                 if (lat != 0.0f && lon != 0.0f) {
-                    Log.d(TAG, "📍 Coordonnées manuelles trouvées: " + lat + ", " + lon);
+                    widgetDebugLog(TAG, "📍 Coordonnées manuelles trouvées: " + lat + ", " + lon);
 
                     SharedPreferences adhanPrefs = context.getSharedPreferences("adhan_prefs", Context.MODE_PRIVATE);
                     Map<String, String> calculatedTimes = calculatePrayerTimesForCoordinates(lat, lon, adhanPrefs,
                             context);
 
                     if (!calculatedTimes.isEmpty()) {
-                        Log.d(TAG, "✅ Source 3 réussie - calcul manuel avec " + calculatedTimes.size() + " horaires");
+                        widgetDebugLog(TAG,
+                                "✅ Source 3 réussie - calcul manuel avec " + calculatedTimes.size() + " horaires");
 
                         // Sauvegarder dans la source principale
                         try {
@@ -434,7 +460,7 @@ public class PrayerTimesWidget extends AppWidgetProvider {
                             }
                             prefs.edit().putString("today_prayer_times", jsonToSave.toString()).apply();
                         } catch (Exception e) {
-                            Log.w(TAG, "⚠️ Erreur sauvegarde source 3: " + e.getMessage());
+                            errorLog(TAG, "⚠️ Erreur sauvegarde source 3: " + e.getMessage(), e);
                         }
 
                         return calculatedTimes;
@@ -442,12 +468,12 @@ public class PrayerTimesWidget extends AppWidgetProvider {
                 }
             }
         } catch (Exception e) {
-            Log.w(TAG, "⚠️ Erreur source 3: " + e.getMessage());
+            errorLog(TAG, "⚠️ Erreur source 3: " + e.getMessage(), e);
         }
 
-        // SOURCE 4: 🆕 NOUVEAU - Horaires individuels de fallback (backup ultime)
+        // SOURCE 4: �� NOUVEAU - Horaires individuels de fallback (backup ultime)
         try {
-            Log.d(TAG, "🔍 Source 4 - horaires individuels de fallback");
+            widgetDebugLog(TAG, "🔍 Source 4 - horaires individuels de fallback");
 
             String[] prayers = { "Fajr", "Sunrise", "Dhuhr", "Asr", "Maghrib", "Isha" };
             Map<String, String> individualTimes = new HashMap<>();
@@ -458,13 +484,14 @@ public class PrayerTimesWidget extends AppWidgetProvider {
                     String timeStr = prefs.getString(timeKey, null);
                     if (timeStr != null && !timeStr.trim().isEmpty() && isValidTimeFormat(timeStr)) {
                         individualTimes.put(prayer, timeStr);
-                        Log.d(TAG, "📋 " + prayer + " trouvé individuellement: " + timeStr);
+                        widgetDebugLog(TAG, "📋 " + prayer + " trouvé individuellement: " + timeStr);
                     }
                 }
             }
 
             if (individualTimes.size() >= 5) { // Au moins 5 prières (sans Sunrise)
-                Log.d(TAG, "✅ Source 4 réussie - " + individualTimes.size() + " horaires individuels récupérés");
+                widgetDebugLog(TAG,
+                        "✅ Source 4 réussie - " + individualTimes.size() + " horaires individuels récupérés");
 
                 // Reconstituer et sauvegarder dans la source principale
                 try {
@@ -473,20 +500,20 @@ public class PrayerTimesWidget extends AppWidgetProvider {
                         jsonToSave.put(entry.getKey(), entry.getValue());
                     }
                     prefs.edit().putString("today_prayer_times", jsonToSave.toString()).apply();
-                    Log.d(TAG, "💾 Horaires individuels reconstitués et sauvegardés");
+                    widgetDebugLog(TAG, "💾 Horaires individuels reconstitués et sauvegardés");
                 } catch (Exception e) {
-                    Log.w(TAG, "⚠️ Erreur reconstitution source 4: " + e.getMessage());
+                    errorLog(TAG, "⚠️ Erreur reconstitution source 4: " + e.getMessage(), e);
                 }
 
                 return individualTimes;
             }
         } catch (Exception e) {
-            Log.w(TAG, "⚠️ Erreur source 4: " + e.getMessage());
+            errorLog(TAG, "⚠️ Erreur source 4: " + e.getMessage(), e);
         }
 
         // SOURCE 5: 🆕 NOUVEAU - Backup avec date (tentative de récupération par date)
         try {
-            Log.d(TAG, "🔍 Source 5 - backup avec date");
+            widgetDebugLog(TAG, "🔍 Source 5 - backup avec date");
 
             Calendar now = Calendar.getInstance();
             String currentDateKey = String.format(Locale.getDefault(), "%04d-%02d-%02d",
@@ -498,7 +525,7 @@ public class PrayerTimesWidget extends AppWidgetProvider {
             String backupJson = prefs.getString(backupKey, null);
 
             if (backupJson != null && !backupJson.trim().isEmpty()) {
-                Log.d(TAG, "📋 Backup trouvé pour " + currentDateKey);
+                widgetDebugLog(TAG, "📋 Backup trouvé pour " + currentDateKey);
 
                 JSONObject backupObj = new JSONObject(backupJson);
                 Map<String, String> backupTimes = new HashMap<>();
@@ -514,7 +541,8 @@ public class PrayerTimesWidget extends AppWidgetProvider {
                 }
 
                 if (backupTimes.size() >= 5) {
-                    Log.d(TAG, "✅ Source 5 réussie - " + backupTimes.size() + " horaires de backup récupérés");
+                    widgetDebugLog(TAG,
+                            "✅ Source 5 réussie - " + backupTimes.size() + " horaires de backup récupérés");
 
                     // Restaurer dans la source principale
                     prefs.edit().putString("today_prayer_times", backupJson).apply();
@@ -523,10 +551,10 @@ public class PrayerTimesWidget extends AppWidgetProvider {
                 }
             }
         } catch (Exception e) {
-            Log.w(TAG, "⚠️ Erreur source 5: " + e.getMessage());
+            errorLog(TAG, "⚠️ Erreur source 5: " + e.getMessage(), e);
         }
 
-        Log.e(TAG, "❌ Aucune source n'a pu fournir d'horaires valides");
+        errorLog(TAG, "❌ Aucune source n'a pu fournir d'horaires valides");
         return new HashMap<>(); // Aucune source n'a fonctionné
     }
 
@@ -561,24 +589,26 @@ public class PrayerTimesWidget extends AppWidgetProvider {
         Map<String, String> prayerTimes = new HashMap<>();
 
         try {
-            Log.d(TAG, "🔄 Calcul horaires pour coordonnées: " + latitude + ", " + longitude);
+            widgetDebugLog(TAG,
+                    "🔄 Calcul horaires pour coordonnées: " + latitude + ", " + longitude);
 
             // Obtenir la méthode de calcul depuis prayer_times_settings
             SharedPreferences prefs = context.getSharedPreferences("prayer_times_settings", Context.MODE_PRIVATE);
             String calcMethod = prefs.getString("calc_method", "MuslimWorldLeague");
 
             // Logs détaillés pour diagnostiquer le problème
-            Log.d(TAG, "🔍 [WIDGET DEBUG] Lecture méthode de calcul depuis prayer_times_settings");
-            Log.d(TAG, "📊 [WIDGET DEBUG] Méthode trouvée: " + calcMethod);
+            widgetDebugLog(TAG,
+                    "🔍 [WIDGET DEBUG] Lecture méthode de calcul depuis prayer_times_settings");
+            widgetDebugLog(TAG, "📊 [WIDGET DEBUG] Méthode trouvée: " + calcMethod);
 
             // Vérifier aussi dans adhan_prefs pour comparaison
             String adhanCalcMethod = adhanPrefs.getString("calc_method", "MuslimWorldLeague");
-            Log.d(TAG, "📊 [WIDGET DEBUG] Méthode dans adhan_prefs: " + adhanCalcMethod);
+            widgetDebugLog(TAG, "📊 [WIDGET DEBUG] Méthode dans adhan_prefs: " + adhanCalcMethod);
 
             if (!calcMethod.equals(adhanCalcMethod)) {
-                Log.w(TAG, "⚠️ [WIDGET DEBUG] DÉSYNCHRONISATION DÉTECTÉE!");
-                Log.w(TAG, "   prayer_times_settings: " + calcMethod);
-                Log.w(TAG, "   adhan_prefs: " + adhanCalcMethod);
+                widgetDebugLog(TAG, "⚠️ [WIDGET DEBUG] DÉSYNCHRONISATION DÉTECTÉE!");
+                widgetDebugLog(TAG, "   prayer_times_settings: " + calcMethod);
+                widgetDebugLog(TAG, "   adhan_prefs: " + adhanCalcMethod);
             }
 
             com.batoulapps.adhan.Coordinates coordinates = new com.batoulapps.adhan.Coordinates(latitude, longitude);
@@ -598,7 +628,7 @@ public class PrayerTimesWidget extends AppWidgetProvider {
                     break;
                 case "UmmAlQura":
                     params = com.batoulapps.adhan.CalculationMethod.UMM_AL_QURA.getParameters();
-                    Log.d(TAG, "📊 Utilisation de la méthode UMM_AL_QURA");
+                    widgetDebugLog(TAG, "📊 Utilisation de la méthode UMM_AL_QURA");
                     break;
                 case "NorthAmerica":
                     params = com.batoulapps.adhan.CalculationMethod.NORTH_AMERICA.getParameters();
@@ -614,16 +644,18 @@ public class PrayerTimesWidget extends AppWidgetProvider {
                     break;
                 case "Tehran":
                     // Utiliser MUSLIM_WORLD_LEAGUE comme fallback pour Tehran
-                    Log.w(TAG, "Méthode 'Tehran' sélectionnée, utilisation de MUSLIM_WORLD_LEAGUE comme fallback");
+                    widgetDebugLog(TAG,
+                            "Méthode 'Tehran' sélectionnée, utilisation de MUSLIM_WORLD_LEAGUE comme fallback");
                     params = com.batoulapps.adhan.CalculationMethod.MUSLIM_WORLD_LEAGUE.getParameters();
                     break;
                 case "Turkey":
                     // Utiliser MUSLIM_WORLD_LEAGUE comme fallback pour Turkey
-                    Log.w(TAG, "Méthode 'Turkey' sélectionnée, utilisation de MUSLIM_WORLD_LEAGUE comme fallback");
+                    widgetDebugLog(TAG,
+                            "Méthode 'Turkey' sélectionnée, utilisation de MUSLIM_WORLD_LEAGUE comme fallback");
                     params = com.batoulapps.adhan.CalculationMethod.MUSLIM_WORLD_LEAGUE.getParameters();
                     break;
                 default:
-                    Log.w(TAG,
+                    widgetDebugLog(TAG,
                             "Méthode non reconnue: " + calcMethod + ", utilisation de MUSLIM_WORLD_LEAGUE par défaut");
                     params = com.batoulapps.adhan.CalculationMethod.MUSLIM_WORLD_LEAGUE.getParameters();
                     break;
@@ -643,17 +675,18 @@ public class PrayerTimesWidget extends AppWidgetProvider {
             prayerTimes.put("Maghrib", timeFormat.format(times.maghrib));
             prayerTimes.put("Isha", timeFormat.format(times.isha));
 
-            Log.d(TAG, "✅ [WIDGET DEBUG] Horaires calculés avec succès pour méthode: " + calcMethod);
-            Log.d(TAG, "🕌 [WIDGET DEBUG] Fajr: " + timeFormat.format(times.fajr));
-            Log.d(TAG, "🌅 [WIDGET DEBUG] Sunrise: " + timeFormat.format(times.sunrise));
-            Log.d(TAG, "☀️ [WIDGET DEBUG] Dhuhr: " + timeFormat.format(times.dhuhr));
-            Log.d(TAG, "🌤️ [WIDGET DEBUG] Asr: " + timeFormat.format(times.asr));
-            Log.d(TAG, "🌅 [WIDGET DEBUG] Maghrib: " + timeFormat.format(times.maghrib));
-            Log.d(TAG, "🌙 [WIDGET DEBUG] Isha: " + timeFormat.format(times.isha));
+            widgetDebugLog(TAG,
+                    "✅ [WIDGET DEBUG] Horaires calculés avec succès pour méthode: " + calcMethod);
+            widgetDebugLog(TAG, "🕌 [WIDGET DEBUG] Fajr: " + timeFormat.format(times.fajr));
+            widgetDebugLog(TAG, "🌅 [WIDGET DEBUG] Sunrise: " + timeFormat.format(times.sunrise));
+            widgetDebugLog(TAG, "☀️ [WIDGET DEBUG] Dhuhr: " + timeFormat.format(times.dhuhr));
+            widgetDebugLog(TAG, "🌤️ [WIDGET DEBUG] Asr: " + timeFormat.format(times.asr));
+            widgetDebugLog(TAG, "🌅 [WIDGET DEBUG] Maghrib: " + timeFormat.format(times.maghrib));
+            widgetDebugLog(TAG, "🌙 [WIDGET DEBUG] Isha: " + timeFormat.format(times.isha));
             return prayerTimes;
 
         } catch (Exception e) {
-            Log.e(TAG, "❌ Erreur lors du calcul des horaires: " + e.getMessage());
+            errorLog(TAG, "❌ Erreur lors du calcul des horaires: " + e.getMessage(), e);
             e.printStackTrace();
             return prayerTimes;
         }
@@ -667,7 +700,7 @@ public class PrayerTimesWidget extends AppWidgetProvider {
         try {
             Map<String, String> prayerTimes = getAllPrayerTimes(context);
             if (prayerTimes.isEmpty()) {
-                Log.w(TAG, "⚠️ Aucun horaire disponible - retour Fajr par défaut");
+                widgetDebugLog(TAG, "⚠️ Aucun horaire disponible - retour Fajr par défaut");
                 return "Fajr";
             }
 
@@ -676,8 +709,9 @@ public class PrayerTimesWidget extends AppWidgetProvider {
             int currentMinute = now.get(Calendar.MINUTE);
             int currentTimeInMinutes = currentHour * 60 + currentMinute;
 
-            Log.d(TAG, "🔍 Heure actuelle: " + String.format("%02d:%02d", currentHour, currentMinute) + " ("
-                    + currentTimeInMinutes + " min)");
+            widgetDebugLog(TAG,
+                    "🔍 Heure actuelle: " + String.format("%02d:%02d", currentHour, currentMinute) + " ("
+                            + currentTimeInMinutes + " min)");
 
             String[] prayerOrder = { "Fajr", "Dhuhr", "Asr", "Maghrib", "Isha" };
 
@@ -691,26 +725,29 @@ public class PrayerTimesWidget extends AppWidgetProvider {
                             int prayerMinute = Integer.parseInt(parts[1]);
                             int prayerTimeInMinutes = prayerHour * 60 + prayerMinute;
 
-                            Log.d(TAG, "🕐 " + prayer + ": " + timeStr + " (" + prayerTimeInMinutes + " min)");
+                            widgetDebugLog(TAG,
+                                    "🕐 " + prayer + ": " + timeStr + " (" + prayerTimeInMinutes + " min)");
 
                             if (prayerTimeInMinutes > currentTimeInMinutes) {
-                                Log.d(TAG, "✅ Prochaine prière: " + prayer + " dans "
+                                widgetDebugLog(TAG, "✅ Prochaine prière: " + prayer + " dans "
                                         + (prayerTimeInMinutes - currentTimeInMinutes) + " minutes");
                                 return prayer;
                             }
                         }
                     } catch (NumberFormatException e) {
-                        Log.w(TAG, "⚠️ Format d'heure invalide pour " + prayer + ": " + timeStr);
+                        errorLog(TAG, "⚠️ Format d'heure invalide pour " + prayer + ": " + timeStr,
+                                e);
                     }
                 }
             }
 
             // Si toutes les prières sont passées, la prochaine est Fajr demain
-            Log.d(TAG, "🌙 Toutes les prières d'aujourd'hui sont passées - prochaine: Fajr demain");
+            widgetDebugLog(TAG,
+                    "�� Toutes les prières d'aujourd'hui sont passées - prochaine: Fajr demain");
             return "Fajr";
 
         } catch (Exception e) {
-            Log.e(TAG, "❌ Erreur calcul prochaine prière: " + e.getMessage());
+            errorLog(TAG, "❌ Erreur calcul prochaine prière: " + e.getMessage(), e);
             return "Fajr";
         }
     }
@@ -726,7 +763,7 @@ public class PrayerTimesWidget extends AppWidgetProvider {
         if (forceRandom) {
             // Réinitialiser le flag après utilisation
             prefs.edit().putBoolean("force_random_dua", false).apply();
-            Log.d(TAG, "🎲 Sélection aléatoire forcée pour nouvelle dua");
+            widgetDebugLog(TAG, "🎲 Sélection aléatoire forcée pour nouvelle dua");
         }
 
         return getDailyDhikr(context, forceRandom);
@@ -739,7 +776,8 @@ public class PrayerTimesWidget extends AppWidgetProvider {
      */
     public static String getDailyDhikr(Context context, boolean forceRandom) {
         String language = getCurrentLanguage(context);
-        Log.d(TAG, "🤲 Récupération dua pour langue: " + language + " (forceRandom: " + forceRandom + ")");
+        widgetDebugLog(TAG,
+                "🤲 Récupération dua pour langue: " + language + " (forceRandom: " + forceRandom + ")");
 
         try {
             // Lire le fichier dhikr (nom du fichier garde dhikr pour compatibilité)
@@ -756,7 +794,8 @@ public class PrayerTimesWidget extends AppWidgetProvider {
             }
 
             String jsonContent = jsonBuilder.toString();
-            Log.d(TAG, "📚 Fichier dua lu: " + fileName + " (" + jsonContent.length() + " chars)");
+            widgetDebugLog(TAG,
+                    "📚 Fichier dua lu: " + fileName + " (" + jsonContent.length() + " chars)");
 
             JSONArray duaArray = new JSONArray(jsonContent);
 
@@ -768,20 +807,22 @@ public class PrayerTimesWidget extends AppWidgetProvider {
             if (forceRandom) {
                 // Vraiment aléatoire pour le bouton actualiser
                 seed = (int) (Math.random() * duaArray.length());
-                Log.d(TAG, "🎲 Index dua ALÉATOIRE: " + seed + " (sur " + duaArray.length() + " disponibles)");
+                widgetDebugLog(TAG,
+                        "🎲 Index dua ALÉATOIRE: " + seed + " (sur " + duaArray.length() + " disponibles)");
             } else {
                 // Basé sur le jour pour cohérence quotidienne
                 Calendar today = Calendar.getInstance();
                 int dayOfYear = today.get(Calendar.DAY_OF_YEAR);
                 int year = today.get(Calendar.YEAR);
                 seed = (dayOfYear + year) % duaArray.length();
-                Log.d(TAG, "🎲 Index dua quotidien: " + seed + " (sur " + duaArray.length() + " disponibles)");
+                widgetDebugLog(TAG,
+                        "🎲 Index dua quotidien: " + seed + " (sur " + duaArray.length() + " disponibles)");
             }
 
             JSONObject dua = duaArray.getJSONObject(seed);
             String title = dua.getString("title");
 
-            Log.d(TAG, "🤲 Dua sélectionnée: " + title);
+            widgetDebugLog(TAG, "🤲 Dua sélectionnée: " + title);
 
             String arabic = dua.getString("arabic");
             String translation = dua.getString("translation");
@@ -794,18 +835,19 @@ public class PrayerTimesWidget extends AppWidgetProvider {
             result.append(translation);
 
             String formattedDua = result.toString();
-            Log.d(TAG, "✅ Dua formatée prête (" + formattedDua.length() + " chars)");
+            widgetDebugLog(TAG, "✅ Dua formatée prête (" + formattedDua.length() + " chars)");
             return formattedDua;
 
         } catch (Exception e) {
-            Log.e(TAG, "❌ Erreur lecture dua " + language + ": " + e.getMessage());
+            errorLog(TAG, "❌ Erreur lecture dua " + language + ": " + e.getMessage(), e);
 
             // Fallback vers l'anglais
             if (!language.equals("en")) {
                 try {
                     return getDailyDhikr_fallback(context, "en");
                 } catch (Exception fallbackError) {
-                    Log.e(TAG, "❌ Erreur fallback dua: " + fallbackError.getMessage());
+                    errorLog(TAG, "❌ Erreur fallback dua: " + fallbackError.getMessage(),
+                            fallbackError);
                 }
             }
 
@@ -843,7 +885,7 @@ public class PrayerTimesWidget extends AppWidgetProvider {
             }
 
         } catch (Exception e) {
-            Log.e(TAG, "❌ Erreur fallback dhikr: " + e.getMessage());
+            errorLog(TAG, "❌ Erreur fallback dhikr: " + e.getMessage(), e);
         }
 
         return "";
@@ -860,7 +902,7 @@ public class PrayerTimesWidget extends AppWidgetProvider {
             double longitude = adhanPrefs.getFloat("longitude", 0);
 
             if (latitude == 0 && longitude == 0) {
-                Log.e(TAG, "❌ Coordonnées non disponibles");
+                errorLog(TAG, "❌ Coordonnées non disponibles");
                 return;
             }
 
@@ -880,20 +922,58 @@ public class PrayerTimesWidget extends AppWidgetProvider {
             editor.putString("Isha", timeFormat.format(prayerTimes.get("Isha")));
             editor.apply();
 
-            Log.d(TAG, "✅ Horaires recalculés et sauvegardés");
-            Log.d(TAG, "📅 Fajr: " + timeFormat.format(prayerTimes.get("Fajr")));
-            Log.d(TAG, "📅 Sunrise: " + timeFormat.format(prayerTimes.get("Sunrise")));
-            Log.d(TAG, "📅 Dhuhr: " + timeFormat.format(prayerTimes.get("Dhuhr")));
-            Log.d(TAG, "📅 Asr: " + timeFormat.format(prayerTimes.get("Asr")));
-            Log.d(TAG, "📅 Maghrib: " + timeFormat.format(prayerTimes.get("Maghrib")));
-            Log.d(TAG, "📅 Isha: " + timeFormat.format(prayerTimes.get("Isha")));
+            widgetDebugLog(TAG, "✅ Horaires recalculés et sauvegardés");
+            widgetDebugLog(TAG, "📅 Fajr: " + timeFormat.format(prayerTimes.get("Fajr")));
+            widgetDebugLog(TAG, "📅 Sunrise: " + timeFormat.format(prayerTimes.get("Sunrise")));
+            widgetDebugLog(TAG, "📅 Dhuhr: " + timeFormat.format(prayerTimes.get("Dhuhr")));
+            widgetDebugLog(TAG, "📅 Asr: " + timeFormat.format(prayerTimes.get("Asr")));
+            widgetDebugLog(TAG, "📅 Maghrib: " + timeFormat.format(prayerTimes.get("Maghrib")));
+            widgetDebugLog(TAG, "📅 Isha: " + timeFormat.format(prayerTimes.get("Isha")));
 
             // Forcer la mise à jour immédiate du widget
             forceUpdateWidgets(context);
 
         } catch (Exception e) {
-            Log.e(TAG, "❌ Erreur lors du recalcul des horaires: " + e.getMessage());
+            errorLog(TAG, "❌ Erreur lors du recalcul des horaires: " + e.getMessage(), e);
             e.printStackTrace();
+        }
+    }
+
+    /**
+     * 🎯 OPTIMISATION: Vérifie si le widget a vraiment besoin d'être mis à jour
+     */
+    private static boolean shouldUpdateWidget(Context context) {
+        try {
+            SharedPreferences prefs = context.getSharedPreferences("prayer_times_settings", Context.MODE_PRIVATE);
+
+            // Vérifier si c'est un nouveau jour
+            String currentDate = new java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault())
+                    .format(new java.util.Date());
+            String lastWidgetDate = prefs.getString("last_widget_update_date", "");
+
+            if (!currentDate.equals(lastWidgetDate)) {
+                widgetDebugLog(TAG, "🗓️ Nouveau jour détecté, mise à jour nécessaire");
+                prefs.edit().putString("last_widget_update_date", currentDate).apply();
+                return true;
+            }
+
+            // Vérifier si la prochaine prière a changé
+            String currentNextPrayer = getNextPrayerName(context);
+            String lastNextPrayer = prefs.getString("last_next_prayer", "");
+
+            if (!currentNextPrayer.equals(lastNextPrayer)) {
+                widgetDebugLog(TAG,
+                        "🔄 Prochaine prière changée: " + lastNextPrayer + " → " + currentNextPrayer);
+                prefs.edit().putString("last_next_prayer", currentNextPrayer).apply();
+                return true;
+            }
+
+            // Pas de changement significatif
+            return false;
+
+        } catch (Exception e) {
+            errorLog(TAG, "⚠️ Erreur shouldUpdateWidget, forçage mise à jour: " + e.getMessage(), e);
+            return true; // En cas d'erreur, on met à jour par sécurité
         }
     }
 
@@ -912,10 +992,11 @@ public class PrayerTimesWidget extends AppWidgetProvider {
                 updateIntent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
                 updateIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, appWidgetIds);
                 context.sendBroadcast(updateIntent);
-                Log.d(TAG, "✅ Mise à jour forcée des widgets: " + appWidgetIds.length + " widgets");
+                widgetDebugLog(TAG,
+                        "✅ Mise à jour forcée des widgets: " + appWidgetIds.length + " widgets");
             }
         } catch (Exception e) {
-            Log.e(TAG, "❌ Erreur mise à jour forcée widgets: " + e.getMessage());
+            errorLog(TAG, "❌ Erreur mise à jour forcée widgets: " + e.getMessage(), e);
         }
     }
 }

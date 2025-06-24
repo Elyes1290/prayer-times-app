@@ -24,20 +24,21 @@ import android.util.Log;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 import java.util.Calendar;
+import static com.drogbinho.prayertimesapp2.ConditionalLogger.*;
 
 public class AdhanModule extends ReactContextBaseJavaModule {
 
     public AdhanModule(ReactApplicationContext reactContext) {
         super(reactContext);
-        Log.e("AdhanModule", "======================================");
-        Log.e("AdhanModule", "🚀 MODULE ADHAN INITIALISÉ - DEBUG ON");
-        Log.e("AdhanModule", "======================================");
-        System.out.println("ADHAN_DEBUG: Module AdhanModule initialisé");
+        debugLog("AdhanModule", "======================================");
+        debugLog("AdhanModule", "🚀 MODULE ADHAN INITIALISÉ - DEBUG ON");
+        debugLog("AdhanModule", "======================================");
+        systemOutLog("ADHAN_DEBUG: Module AdhanModule initialisé");
     }
 
     @Override
     public String getName() {
-        Log.d("AdhanModule", "📝 getName() appelé");
+        debugLog("AdhanModule", "📝 getName() appelé");
         return "AdhanModule";
     }
 
@@ -73,10 +74,10 @@ public class AdhanModule extends ReactContextBaseJavaModule {
 
         String[] prayers = { "Fajr", "Dhuhr", "Asr", "Maghrib", "Isha" };
 
-        Log.e("AdhanModule", "**************************************");
-        Log.e("AdhanModule", "🚫 DÉBUT ANNULATION ALARMES ADHAN COMPLÈTE");
-        Log.e("AdhanModule", "**************************************");
-        System.out.println("ADHAN_DEBUG: Début annulation alarmes COMPLÈTE");
+        notificationDebugLog("AdhanModule", "**************************************");
+        notificationDebugLog("AdhanModule", "🚫 DÉBUT ANNULATION ALARMES ADHAN COMPLÈTE");
+        notificationDebugLog("AdhanModule", "**************************************");
+        systemOutLog("ADHAN_DEBUG: Début annulation alarmes COMPLÈTE");
         int cancelCount = 0;
 
         // STRATÉGIE COMPLÈTE: Annuler TOUS les patterns possibles de requestCode
@@ -126,8 +127,9 @@ public class AdhanModule extends ReactContextBaseJavaModule {
                         alarmManager.cancel(pendingIntent);
                         pendingIntent.cancel();
                         cancelCount++;
-                        Log.e("AdhanModule", "🚫 ANNULÉ: " + pattern + " (requestCode: " + requestCode + ")");
-                        System.out.println("ADHAN_DEBUG: Annulé " + pattern);
+                        notificationDebugLog("AdhanModule",
+                                "🚫 ANNULÉ: " + pattern + " (requestCode: " + requestCode + ")");
+                        systemOutLog("ADHAN_DEBUG: Annulé " + pattern);
                     }
                 } catch (Exception e) {
                     // Continue silencieusement pour les autres patterns
@@ -151,7 +153,7 @@ public class AdhanModule extends ReactContextBaseJavaModule {
                         alarmManager.cancel(testPendingIntent);
                         testPendingIntent.cancel();
                         cancelCount++;
-                        Log.e("AdhanModule",
+                        errorLog("AdhanModule",
                                 "🚫 BRUTE-FORCE ANNULÉ: requestCode " + testRequestCode + " pour " + prayer);
                     }
                 } catch (Exception e) {
@@ -164,16 +166,16 @@ public class AdhanModule extends ReactContextBaseJavaModule {
         Intent serviceIntent = new Intent(context, AdhanService.class);
         context.stopService(serviceIntent);
 
-        Log.e("AdhanModule", "✅ ANNULATION ADHAN TERMINÉE : " + cancelCount + " alarmes annulées.");
-        System.out.println("ADHAN_DEBUG: Annulation terminée - " + cancelCount + " alarmes");
+        errorLog("AdhanModule", "✅ ANNULATION ADHAN TERMINÉE : " + cancelCount + " alarmes annulées.");
+        systemOutLog("ADHAN_DEBUG: Annulation terminée - " + cancelCount + " alarmes");
     }
 
     @ReactMethod
     public void scheduleAdhanAlarms(ReadableMap prayerTimes, String adhanSound) {
-        Log.e("AdhanModule", "**************************************");
-        Log.e("AdhanModule", "📢 DÉBUT PROGRAMMATION ALARMES ADHAN");
-        Log.e("AdhanModule", "**************************************");
-        System.out.println("ADHAN_DEBUG: Début programmation alarmes");
+        errorLog("AdhanModule", "**************************************");
+        errorLog("AdhanModule", "📢 DÉBUT PROGRAMMATION ALARMES ADHAN");
+        errorLog("AdhanModule", "**************************************");
+        systemOutLog("ADHAN_DEBUG: Début programmation alarmes");
         Context context = getReactApplicationContext();
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
@@ -208,13 +210,13 @@ public class AdhanModule extends ReactContextBaseJavaModule {
                     alarmManager.setAlarmClock(
                             new AlarmManager.AlarmClockInfo(triggerAtMillis, null),
                             pendingIntent);
-                    Log.d("AdhanModule", String.format(
+                    debugLog("AdhanModule", String.format(
                             "✅ Alarme adhan programmée pour %s à %d (dans %d minutes)",
                             displayLabel,
                             triggerAtMillis,
                             (triggerAtMillis - System.currentTimeMillis()) / 60000));
                 } catch (Exception e) {
-                    Log.e("AdhanModule", "❌ Erreur lors de la programmation de l'alarme adhan: " + e.getMessage());
+                    errorLog("AdhanModule", "❌ Erreur lors de la programmation de l'alarme adhan: " + e.getMessage());
                 }
             }
         }
@@ -227,7 +229,7 @@ public class AdhanModule extends ReactContextBaseJavaModule {
         Context context = getReactApplicationContext();
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
-        Log.e("AdhanModule", "🔍 DEBUG RAPPELS - Received " + reminders.size() + " reminders from JS");
+        errorLog("AdhanModule", "🔍 DEBUG RAPPELS - Received " + reminders.size() + " reminders from JS");
 
         for (int i = 0; i < reminders.size(); i++) {
             ReadableMap notif = reminders.getMap(i);
@@ -247,14 +249,14 @@ public class AdhanModule extends ReactContextBaseJavaModule {
             String reminderTimeStr = debugSdf.format(new java.util.Date(triggerAtMillis));
             String prayerTimeStr = debugSdf.format(new java.util.Date(prayerTime));
 
-            Log.e("AdhanModule",
+            errorLog("AdhanModule",
                     "🔍 RAPPEL " + prayer + ": reminderAt=" + reminderTimeStr + " => prayerAt=" + prayerTimeStr);
 
             if (prayer.equals("Isha")) {
-                Log.e("AdhanModule",
+                errorLog("AdhanModule",
                         "🚨 ISHA DETECTED: Rappel à " + reminderTimeStr + " pour prière à " + prayerTimeStr);
                 if (prayerTimeStr.startsWith("00:00") || prayerTimeStr.startsWith("23:5")) {
-                    Log.e("AdhanModule", "⚠️ PROBLÈME DÉTECTÉ: Isha semble être à minuit (ancien horaire!)");
+                    errorLog("AdhanModule", "⚠️ PROBLÈME DÉTECTÉ: Isha semble être à minuit (ancien horaire!)");
                 }
             }
 
@@ -292,7 +294,7 @@ public class AdhanModule extends ReactContextBaseJavaModule {
                 long minutesUntil = (triggerAtMillis - now) / 60000;
                 long secondsUntil = ((triggerAtMillis - now) % 60000) / 1000;
 
-                Log.d("AdhanModule", String.format(
+                debugLog("AdhanModule", String.format(
                         "✅ Rappel programmé pour %s | Maintenant: %s | Cible: %s | Écart: %d min %d sec | Méthode: %s",
                         prayer,
                         nowStr,
@@ -301,7 +303,7 @@ public class AdhanModule extends ReactContextBaseJavaModule {
                         secondsUntil,
                         isToday ? "setAlarmClock" : "setExactAndAllowWhileIdle"));
             } catch (Exception e) {
-                Log.e("AdhanModule", "❌ Erreur lors de la programmation du rappel: " + e.getMessage());
+                errorLog("AdhanModule", "❌ Erreur lors de la programmation du rappel: " + e.getMessage());
             }
         }
     }
@@ -312,10 +314,10 @@ public class AdhanModule extends ReactContextBaseJavaModule {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         String[] prayers = { "Fajr", "Dhuhr", "Asr", "Maghrib", "Isha" };
 
-        Log.e("AdhanModule", "**************************************");
-        Log.e("AdhanModule", "🚫 DÉBUT ANNULATION RAPPELS EXHAUSTIVE");
-        Log.e("AdhanModule", "**************************************");
-        System.out.println("ADHAN_DEBUG: Début annulation rappels EXHAUSTIVE");
+        errorLog("AdhanModule", "**************************************");
+        errorLog("AdhanModule", "🚫 DÉBUT ANNULATION RAPPELS EXHAUSTIVE");
+        errorLog("AdhanModule", "**************************************");
+        systemOutLog("ADHAN_DEBUG: Début annulation rappels EXHAUSTIVE");
         int cancelCount = 0;
 
         // STRATÉGIE EXHAUSTIVE pour les rappels basés sur timestamp
@@ -344,7 +346,7 @@ public class AdhanModule extends ReactContextBaseJavaModule {
                         alarmManager.cancel(pendingIntent);
                         pendingIntent.cancel();
                         cancelCount++;
-                        Log.e("AdhanModule", "🚫 RAPPEL ANNULÉ: " + pattern);
+                        errorLog("AdhanModule", "🚫 RAPPEL ANNULÉ: " + pattern);
                     }
                 } catch (Exception e) {
                     // Continue silencieusement
@@ -358,7 +360,7 @@ public class AdhanModule extends ReactContextBaseJavaModule {
             long end = now + (72 * 60 * 60 * 1000L); // 3 jours dans le futur
             long interval = 15 * 60 * 1000L; // 15 minutes
 
-            Log.e("AdhanModule", "🔍 BRUTE-FORCE pour " + prayer + " sur 4 jours...");
+            errorLog("AdhanModule", "🔍 BRUTE-FORCE pour " + prayer + " sur 4 jours...");
 
             for (long timestamp = start; timestamp <= end; timestamp += interval) {
                 try {
@@ -379,8 +381,8 @@ public class AdhanModule extends ReactContextBaseJavaModule {
                         java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("HH:mm:ss",
                                 java.util.Locale.getDefault());
                         String timeStr = sdf.format(new java.util.Date(timestamp));
-                        Log.e("AdhanModule", "🎯 RAPPEL TIMESTAMP TROUVÉ et ANNULÉ: " + prayer + " à " + timeStr);
-                        System.out.println("ADHAN_DEBUG: Rappel timestamp annulé " + prayer + " à " + timeStr);
+                        errorLog("AdhanModule", "🎯 RAPPEL TIMESTAMP TROUVÉ et ANNULÉ: " + prayer + " à " + timeStr);
+                        systemOutLog("ADHAN_DEBUG: Rappel timestamp annulé " + prayer + " à " + timeStr);
                     }
 
                     // Teste aussi la variante AUTO_
@@ -399,7 +401,7 @@ public class AdhanModule extends ReactContextBaseJavaModule {
                         java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("HH:mm:ss",
                                 java.util.Locale.getDefault());
                         String timeStr = sdf.format(new java.util.Date(timestamp));
-                        Log.e("AdhanModule", "🎯 RAPPEL AUTO TROUVÉ et ANNULÉ: " + prayer + " à " + timeStr);
+                        errorLog("AdhanModule", "🎯 RAPPEL AUTO TROUVÉ et ANNULÉ: " + prayer + " à " + timeStr);
                     }
 
                 } catch (Exception e) {
@@ -408,8 +410,8 @@ public class AdhanModule extends ReactContextBaseJavaModule {
             }
         }
 
-        Log.e("AdhanModule", "✅ ANNULATION RAPPELS TERMINÉE : " + cancelCount + " rappels annulés.");
-        System.out.println("ADHAN_DEBUG: Annulation rappels terminée - " + cancelCount + " rappels");
+        errorLog("AdhanModule", "✅ ANNULATION RAPPELS TERMINÉE : " + cancelCount + " rappels annulés.");
+        systemOutLog("ADHAN_DEBUG: Annulation rappels terminée - " + cancelCount + " rappels");
     }
 
     // ============ DHIKR/DUA NOTIFICATIONS ============
@@ -417,13 +419,13 @@ public class AdhanModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void cancelAllDhikrNotifications() {
         // MÉTHODE SIMPLE ET RAPIDE - ne fait rien de lourd
-        Log.d("AdhanModule", "🚫 Annulation dhikr simplifiée...");
+        debugLog("AdhanModule", "🚫 Annulation dhikr simplifiée...");
 
         // Pour l'instant, utilisation de l'ancienne méthode commentée qui ne faisait
         // rien
         // Cela évite de ralentir l'app, même si ce n'est pas parfait
 
-        Log.d("AdhanModule", "✅ Dhikr: annulation simplifiée terminée");
+        debugLog("AdhanModule", "✅ Dhikr: annulation simplifiée terminée");
     }
 
     // 🚫 MÉTHODE SPÉCIALE : Annule les notifications legacy à 1 minute après
@@ -433,7 +435,7 @@ public class AdhanModule extends ReactContextBaseJavaModule {
         Context context = getReactApplicationContext();
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
-        Log.d("AdhanModule", "🚫 ANNULATION LEGACY à 1 minute après maintenant...");
+        debugLog("AdhanModule", "🚫 ANNULATION LEGACY à 1 minute après maintenant...");
 
         String[] prayers = { "Fajr", "Dhuhr", "Asr", "Maghrib", "Isha" };
         int cancelCount = 0;
@@ -471,7 +473,7 @@ public class AdhanModule extends ReactContextBaseJavaModule {
                             alarmManager.cancel(pendingIntent);
                             pendingIntent.cancel();
                             cancelCount++;
-                            Log.d("AdhanModule", "🚫 Annulé legacy: " + pattern);
+                            debugLog("AdhanModule", "🚫 Annulé legacy: " + pattern);
                         }
                     } catch (Exception e) {
                         // Ignore silencieusement
@@ -480,12 +482,12 @@ public class AdhanModule extends ReactContextBaseJavaModule {
             }
         }
 
-        Log.d("AdhanModule", "✅ Annulation legacy terminée : " + cancelCount + " notifications legacy supprimées");
+        debugLog("AdhanModule", "✅ Annulation legacy terminée : " + cancelCount + " notifications legacy supprimées");
     }
 
     @ReactMethod
     public void scheduleDhikrNotifications(ReadableArray dhikrNotifications) {
-        Log.d("AdhanModule", "📩 Réception des notifications Dhikr depuis JS : " + dhikrNotifications.size());
+        debugLog("AdhanModule", "📩 Réception des notifications Dhikr depuis JS : " + dhikrNotifications.size());
         Context context = getReactApplicationContext();
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
@@ -500,7 +502,7 @@ public class AdhanModule extends ReactContextBaseJavaModule {
             String body = notif.getString("body");
             String prayer = notif.getString("prayer");
 
-            Log.d("AdhanModule", "🔍 Programmation dhikr: " + type + " - " + prayer + " dans " +
+            debugLog("AdhanModule", "🔍 Programmation dhikr: " + type + " - " + prayer + " dans " +
                     ((triggerMillis - System.currentTimeMillis()) / 60000) + " minutes");
 
             Intent intent = new Intent(context, DhikrReceiver.class);
@@ -521,9 +523,9 @@ public class AdhanModule extends ReactContextBaseJavaModule {
                 alarmManager.setAlarmClock(
                         new AlarmManager.AlarmClockInfo(triggerMillis, null),
                         pendingIntent);
-                Log.d("AdhanModule", "✅ Dhikr programmé: " + type + " - " + prayer);
+                debugLog("AdhanModule", "✅ Dhikr programmé: " + type + " - " + prayer);
             } catch (Exception e) {
-                Log.e("AdhanModule", "❌ Erreur programmation dhikr: " + e.getMessage());
+                errorLog("AdhanModule", "❌ Erreur programmation dhikr: " + e.getMessage());
             }
         }
     }
@@ -532,10 +534,22 @@ public class AdhanModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void setAdhanSound(String adhanSound) {
+        debugLog("AdhanModule", "🎵 setAdhanSound appelé avec: " + adhanSound);
         SharedPreferences prefs = getReactApplicationContext()
                 .getSharedPreferences("adhan_prefs",
                         Context.MODE_PRIVATE);
+
+        // Debug: vérifier la valeur avant
+        String oldValue = prefs.getString("ADHAN_SOUND", "null");
+        debugLog("AdhanModule", "  - Ancienne valeur: " + oldValue);
+
+        // Sauvegarder
         prefs.edit().putString("ADHAN_SOUND", adhanSound).apply();
+
+        // Debug: vérifier la valeur après
+        String newValue = prefs.getString("ADHAN_SOUND", "null");
+        debugLog("AdhanModule", "  - Nouvelle valeur: " + newValue);
+        debugLog("AdhanModule", "✅ Son d'adhan sauvegardé: " + adhanSound);
     }
 
     @ReactMethod
@@ -571,9 +585,9 @@ public class AdhanModule extends ReactContextBaseJavaModule {
             editor.putString("muted_prayers_list", mutedPrayersString.toString());
             editor.apply();
 
-            Log.d("AdhanModule", "Prières muettes mises à jour: " + mutedPrayersString.toString());
+            debugLog("AdhanModule", "Prières muettes mises à jour: " + mutedPrayersString.toString());
         } catch (Exception e) {
-            Log.e("AdhanModule", "Erreur lors de la mise à jour des prières muettes: " + e.getMessage());
+            errorLog("AdhanModule", "Erreur lors de la mise à jour des prières muettes: " + e.getMessage());
         }
     }
 
@@ -583,7 +597,7 @@ public class AdhanModule extends ReactContextBaseJavaModule {
                 Context.MODE_PRIVATE);
         prefs.edit().putString("calc_method", method).apply();
 
-        Log.d("AdhanModule", "✅ Méthode de calcul sauvegardée: " + method);
+        debugLog("AdhanModule", "✅ Méthode de calcul sauvegardée: " + method);
 
         // IMPORTANT: Annuler immédiatement toutes les alarmes existantes pour éviter
         // les conflits
@@ -594,11 +608,11 @@ public class AdhanModule extends ReactContextBaseJavaModule {
             try {
                 cancelAllDhikrNotifications();
             } catch (Exception e) {
-                Log.w("AdhanModule", "Erreur lors de l'annulation des dhikr: " + e.getMessage());
+                warningLog("AdhanModule", "Erreur lors de l'annulation des dhikr: " + e.getMessage());
             }
         }
 
-        Log.d("AdhanModule", "🔄 Toutes les alarmes annulées suite au changement de méthode de calcul");
+        debugLog("AdhanModule", "🔄 Toutes les alarmes annulées suite au changement de méthode de calcul");
     }
 
     @ReactMethod
@@ -617,7 +631,7 @@ public class AdhanModule extends ReactContextBaseJavaModule {
         // Protection contre les coordonnées (0,0) pour la sauvegarde persistante
         // destinée à la reprogrammation automatique.
         if (lat == 0.0 && lon == 0.0) {
-            Log.w("AdhanModule",
+            warningLog("AdhanModule",
                     "⚠️ setLocation appelée avec (0.0, 0.0). Ces coordonnées ne seront PAS sauvegardées dans prayer_times_settings pour auto_latitude/longitude afin d'éviter de perturber la reprogrammation. Les valeurs précédentes (si valides) seront conservées.");
             // Ne pas mettre à jour prayer_times_settings avec (0,0) pour
             // auto_latitude/longitude.
@@ -643,8 +657,10 @@ public class AdhanModule extends ReactContextBaseJavaModule {
         float V_savedLat = settingsPrefs.getFloat("auto_latitude", -999.0f); // Valeur par défaut unique pour le log
         float V_savedLon = settingsPrefs.getFloat("auto_longitude", -999.0f);
         String V_savedMode = settingsPrefs.getString("location_mode", "MODE_LECTURE_ERREUR");
-        Log.d("AdhanModule", "📍 Vérification setLocation (prayer_times_settings): Lat_lu=" + V_savedLat + ", Lon_lu="
-                + V_savedLon + ", Mode_lu=" + V_savedMode + " (Valeurs entrantes: lat=" + lat + ", lon=" + lon + ")");
+        debugLog("AdhanModule",
+                "📍 Vérification setLocation (prayer_times_settings): Lat_lu=" + V_savedLat + ", Lon_lu="
+                        + V_savedLon + ", Mode_lu=" + V_savedMode + " (Valeurs entrantes: lat=" + lat + ", lon=" + lon
+                        + ")");
     }
 
     @ReactMethod
@@ -658,18 +674,19 @@ public class AdhanModule extends ReactContextBaseJavaModule {
 
             // Check against the "not found" default value
             if (lat == -999.0f || lon == -999.0f) {
-                Log.d("AdhanModule", "📍 getSavedAutoLocation: Pas de coordonnées automatiques sauvegardées trouvées.");
+                debugLog("AdhanModule",
+                        "📍 getSavedAutoLocation: Pas de coordonnées automatiques sauvegardées trouvées.");
                 promise.resolve(null);
             } else {
                 WritableMap location = Arguments.createMap();
                 location.putDouble("lat", (double) lat);
                 location.putDouble("lon", (double) lon);
-                Log.d("AdhanModule",
+                debugLog("AdhanModule",
                         "📍 getSavedAutoLocation: Coordonnées automatiques récupérées: " + lat + ", " + lon);
                 promise.resolve(location);
             }
         } catch (Exception e) {
-            Log.e("AdhanModule", "❌ Erreur dans getSavedAutoLocation: " + e.getMessage());
+            errorLog("AdhanModule", "❌ Erreur dans getSavedAutoLocation: " + e.getMessage());
             promise.reject("GET_LOCATION_ERROR", e);
         }
     }
@@ -687,7 +704,7 @@ public class AdhanModule extends ReactContextBaseJavaModule {
                 Double millis = ((Number) value).doubleValue();
                 editor.putLong(label, millis.longValue());
             } else {
-                Log.w("AdhanModule", "Clé ignorée (pas un nombre) : " + label + " = " + value);
+                warningLog("AdhanModule", "Clé ignorée (pas un nombre) : " + label + " = " + value);
             }
         }
         editor.apply();
@@ -793,7 +810,7 @@ public class AdhanModule extends ReactContextBaseJavaModule {
         if (settings.hasKey("calcMethod")) {
             String newCalcMethod = settings.getString("calcMethod");
             editor.putString("calc_method", newCalcMethod);
-            Log.d("AdhanModule",
+            debugLog("AdhanModule",
                     "[DEBUG] 💾 Méthode de calcul sauvegardée dans prayer_times_settings: " + newCalcMethod);
         }
 
@@ -822,22 +839,22 @@ public class AdhanModule extends ReactContextBaseJavaModule {
         if (settings.hasKey("locationMode")) {
             String locationMode = settings.getString("locationMode");
             editor.putString("location_mode", locationMode);
-            Log.d("AdhanModule", "📍 Location mode sauvegardé: " + locationMode);
+            debugLog("AdhanModule", "📍 Location mode sauvegardé: " + locationMode);
 
             if ("manual".equals(locationMode) && settings.hasKey("manualLocation")) {
                 ReadableMap manualLocation = settings.getMap("manualLocation");
                 if (manualLocation != null) {
                     if (manualLocation.hasKey("lat")) {
                         editor.putFloat("manual_latitude", (float) manualLocation.getDouble("lat"));
-                        Log.d("AdhanModule", "📍 Manual Latitude sauvegardée: " + manualLocation.getDouble("lat"));
+                        debugLog("AdhanModule", "📍 Manual Latitude sauvegardée: " + manualLocation.getDouble("lat"));
                     }
                     if (manualLocation.hasKey("lon")) {
                         editor.putFloat("manual_longitude", (float) manualLocation.getDouble("lon"));
-                        Log.d("AdhanModule", "📍 Manual Longitude sauvegardée: " + manualLocation.getDouble("lon"));
+                        debugLog("AdhanModule", "📍 Manual Longitude sauvegardée: " + manualLocation.getDouble("lon"));
                     }
                     if (manualLocation.hasKey("city")) {
                         editor.putString("manual_city_name", manualLocation.getString("city"));
-                        Log.d("AdhanModule", "📍 Manual City sauvegardé: " + manualLocation.getString("city"));
+                        debugLog("AdhanModule", "📍 Manual City sauvegardé: " + manualLocation.getString("city"));
                     }
                 }
             }
@@ -847,7 +864,7 @@ public class AdhanModule extends ReactContextBaseJavaModule {
         // lat, lon. AdhanService les lit déjà.
 
         editor.apply();
-        Log.d("AdhanModule", "✅ Paramètres de notification et localisation sauvegardés");
+        debugLog("AdhanModule", "✅ Paramètres de notification et localisation sauvegardés");
 
         // Mettre à jour le widget si les horaires ont changé
         updateWidgetInternal();
@@ -863,7 +880,7 @@ public class AdhanModule extends ReactContextBaseJavaModule {
         // calcul
         boolean isFromMethodChange = prefs.getBoolean("pending_method_change", false);
         if (isFromMethodChange) {
-            Log.d("AdhanModule", "[DEBUG] 🎯 Sauvegarde PRIORITAIRE depuis changement méthode");
+            debugLog("AdhanModule", "[DEBUG] 🎯 Sauvegarde PRIORITAIRE depuis changement méthode");
             editor.putBoolean("pending_method_change", false);
         }
 
@@ -879,9 +896,10 @@ public class AdhanModule extends ReactContextBaseJavaModule {
                     // JavaScript envoie directement "HH:MM"
                     String timeString = prayerTimes.getString(prayerName);
                     json.put(prayerName, timeString);
-                    Log.d("AdhanModule", "✅ " + prayerName + ": " + timeString);
+                    debugLog("AdhanModule", "✅ " + prayerName + ": " + timeString);
                 } else {
-                    Log.w("AdhanModule", "⚠️ Type inattendu pour " + prayerName + ": " + type + " (attendu: String)");
+                    warningLog("AdhanModule",
+                            "⚠️ Type inattendu pour " + prayerName + ": " + type + " (attendu: String)");
                 }
             }
 
@@ -917,14 +935,14 @@ public class AdhanModule extends ReactContextBaseJavaModule {
 
             editor.apply();
 
-            Log.d("AdhanModule", "💾 Horaires du jour sauvegardés pour le widget (avec backups): " + jsonString);
+            debugLog("AdhanModule", "💾 Horaires du jour sauvegardés pour le widget (avec backups): " + jsonString);
 
             // Mettre à jour le widget avec un petit délai pour s'assurer que les
             // préférences sont bien écrites
             updateWidgetWithDelay();
 
         } catch (Exception e) {
-            Log.e("AdhanModule", "❌ Erreur lors de la sauvegarde des horaires", e);
+            errorLog("AdhanModule", "❌ Erreur lors de la sauvegarde des horaires", e);
         }
     }
 
@@ -946,7 +964,7 @@ public class AdhanModule extends ReactContextBaseJavaModule {
                     @Override
                     public void run() {
                         updateWidgetInternal();
-                        Log.d("AdhanModule", "🔄 Double mise à jour widget effectuée pour compatibilité");
+                        debugLog("AdhanModule", "🔄 Double mise à jour widget effectuée pour compatibilité");
                     }
                 }, 1000); // 1 seconde de délai
             }
@@ -966,18 +984,18 @@ public class AdhanModule extends ReactContextBaseJavaModule {
             int[] appWidgetIds = appWidgetManager.getAppWidgetIds(componentName);
 
             if (appWidgetIds.length > 0) {
-                Log.d("AdhanModule", "📱 Mise à jour forcée de " + appWidgetIds.length + " widget(s)");
+                debugLog("AdhanModule", "📱 Mise à jour forcée de " + appWidgetIds.length + " widget(s)");
 
                 // Appel direct à la méthode onUpdate du widget
                 PrayerTimesWidget widget = new PrayerTimesWidget();
                 widget.onUpdate(context, appWidgetManager, appWidgetIds);
             } else {
-                Log.d("AdhanModule", "📱 Aucun widget trouvé sur l'écran d'accueil");
+                debugLog("AdhanModule", "📱 Aucun widget trouvé sur l'écran d'accueil");
             }
 
-            Log.d("AdhanModule", "📱 Signal de mise à jour envoyé au widget");
+            debugLog("AdhanModule", "📱 Signal de mise à jour envoyé au widget");
         } catch (Exception e) {
-            Log.e("AdhanModule", "❌ Erreur lors de la mise à jour du widget", e);
+            errorLog("AdhanModule", "❌ Erreur lors de la mise à jour du widget", e);
         }
     }
 
@@ -1004,14 +1022,112 @@ public class AdhanModule extends ReactContextBaseJavaModule {
                         .remove("widget_last_calc_method")
                         .apply();
 
-                Log.d("AdhanModule", "[DEBUG] 🗑️ Cache widget vidé pour forcer recalcul");
+                debugLog("AdhanModule", "[DEBUG] 🗑️ Cache widget vidé pour forcer recalcul");
             } else {
-                Log.d("AdhanModule", "[DEBUG] 🔄 Mise à jour widget sans vider le cache");
+                debugLog("AdhanModule", "[DEBUG] 🔄 Mise à jour widget sans vider le cache");
             }
 
             PrayerTimesWidget.forceUpdateWidgets(context);
         } catch (Exception e) {
-            Log.e("AdhanModule", "❌ Erreur mise à jour forcée widgets: " + e.getMessage());
+            errorLog("AdhanModule", "❌ Erreur mise à jour forcée widgets: " + e.getMessage());
+        }
+    }
+
+    // ============ MAINTENANCE QUOTIDIENNE AUTOMATIQUE ============
+
+    @ReactMethod
+    public void startDailyMaintenance() {
+        debugLog("AdhanModule", "🔄 Démarrage de la maintenance quotidienne automatique");
+        Context context = getReactApplicationContext();
+        MaintenanceReceiver.scheduleDailyMaintenance(context);
+    }
+
+    @ReactMethod
+    public void stopDailyMaintenance() {
+        debugLog("AdhanModule", "🛑 Arrêt de la maintenance quotidienne");
+        Context context = getReactApplicationContext();
+        MaintenanceReceiver.cancelDailyMaintenance(context);
+    }
+
+    // ============ WIDGET UPDATE SCHEDULER (pour Samsung) ============
+
+    @ReactMethod
+    public void startWidgetUpdateScheduler() {
+        debugLog("AdhanModule", "🔄 Démarrage du planificateur de mise à jour du widget");
+        Context context = getReactApplicationContext();
+        scheduleWidgetUpdates(context);
+    }
+
+    @ReactMethod
+    public void stopWidgetUpdateScheduler() {
+        debugLog("AdhanModule", "🛑 Arrêt du planificateur de widget");
+        Context context = getReactApplicationContext();
+        cancelWidgetUpdates(context);
+    }
+
+    private void scheduleWidgetUpdates(Context context) {
+        android.app.AlarmManager alarmManager = (android.app.AlarmManager) context
+                .getSystemService(Context.ALARM_SERVICE);
+        if (alarmManager == null)
+            return;
+
+        // 🎯 OPTIMISATION: Vérifier d'abord si un widget est réellement présent
+        android.appwidget.AppWidgetManager appWidgetManager = android.appwidget.AppWidgetManager.getInstance(context);
+        android.content.ComponentName widgetComponent = new android.content.ComponentName(context,
+                PrayerTimesWidget.class);
+        int[] appWidgetIds = appWidgetManager.getAppWidgetIds(widgetComponent);
+
+        if (appWidgetIds.length == 0) {
+            debugLog("AdhanModule", "📱 Aucun widget sur l'écran d'accueil, planificateur non nécessaire");
+            return;
+        }
+
+        Intent intent = new Intent(context, PrayerTimesWidget.class);
+        intent.setAction("SMART_UPDATE_WIDGET");
+
+        android.app.PendingIntent pendingIntent = android.app.PendingIntent.getBroadcast(
+                context,
+                9999, // ID unique pour le widget
+                intent,
+                android.app.PendingIntent.FLAG_UPDATE_CURRENT | android.app.PendingIntent.FLAG_IMMUTABLE);
+
+        // 🔋 ÉCONOMIE BATTERIE: 30 minutes au lieu de 5 (96 fois/jour au lieu de 288)
+        // + Les mises à jour immédiates après chaque prière restent
+        long intervalMillis = 30 * 60 * 1000; // 30 minutes
+        long firstTrigger = System.currentTimeMillis() + intervalMillis;
+
+        try {
+            alarmManager.setRepeating(
+                    android.app.AlarmManager.RTC_WAKEUP,
+                    firstTrigger,
+                    intervalMillis,
+                    pendingIntent);
+            debugLog("AdhanModule", "📱 Widget programmé pour mise à jour économique toutes les 30min ("
+                    + appWidgetIds.length + " widgets détectés)");
+        } catch (Exception e) {
+            errorLog("AdhanModule", "❌ Erreur programmation widget: " + e.getMessage());
+        }
+    }
+
+    private void cancelWidgetUpdates(Context context) {
+        android.app.AlarmManager alarmManager = (android.app.AlarmManager) context
+                .getSystemService(Context.ALARM_SERVICE);
+        if (alarmManager == null)
+            return;
+
+        Intent intent = new Intent(context, PrayerTimesWidget.class);
+        intent.setAction("SMART_UPDATE_WIDGET");
+
+        android.app.PendingIntent pendingIntent = android.app.PendingIntent.getBroadcast(
+                context,
+                9999,
+                intent,
+                android.app.PendingIntent.FLAG_NO_CREATE | android.app.PendingIntent.FLAG_IMMUTABLE);
+
+        if (pendingIntent != null) {
+            alarmManager.cancel(pendingIntent);
+            pendingIntent.cancel();
+            debugLog("AdhanModule", "🚫 Planificateur de widget annulé");
         }
     }
 

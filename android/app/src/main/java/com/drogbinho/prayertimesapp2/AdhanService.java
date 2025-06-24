@@ -28,6 +28,8 @@ import org.json.JSONException;
 import java.io.IOException;
 // Random est déjà importé via java.util.*
 
+import static com.drogbinho.prayertimesapp2.ConditionalLogger.*;
+
 public class AdhanService extends Service {
     private static final String TAG = "AdhanService";
     public static final String ACTION_STOP = "com.drogbinho.prayertimesapp2.ACTION_STOP";
@@ -57,7 +59,7 @@ public class AdhanService extends Service {
             }
             return false;
         } catch (Exception e) {
-            Log.e(TAG, "Erreur lors de la vérification des prières muettes: " + e.getMessage());
+            errorLog(TAG, "Erreur lors de la vérification des prières muettes: " + e.getMessage());
             return false; // En cas d'erreur, ne pas rendre muet
         }
     }
@@ -77,10 +79,10 @@ public class AdhanService extends Service {
     public void onCreate() {
         super.onCreate();
         createNotificationChannel();
-        Log.e(TAG, "======================================");
-        Log.e(TAG, "🚀 ADHAN SERVICE CRÉÉ - DEBUG ON");
-        Log.e(TAG, "======================================");
-        System.out.println("ADHAN_DEBUG: AdhanService onCreate");
+        errorLog(TAG, "======================================");
+        errorLog(TAG, "🚀 ADHAN SERVICE CRÉÉ - DEBUG ON");
+        errorLog(TAG, "======================================");
+        systemOutLog("ADHAN_DEBUG: AdhanService onCreate");
     }
 
     private void createNotificationChannel() {
@@ -96,22 +98,22 @@ public class AdhanService extends Service {
             NotificationManager manager = getSystemService(NotificationManager.class);
             if (manager != null) {
                 manager.createNotificationChannel(serviceChannel);
-                Log.d(TAG, "Notification channel created: " + CHANNEL_ID);
+                debugLog(TAG, "Notification channel created: " + CHANNEL_ID);
             } else {
-                Log.e(TAG, "NotificationManager est null, impossible de créer le canal.");
+                errorLog(TAG, "NotificationManager est null, impossible de créer le canal.");
             }
         }
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Log.e(TAG, "**************************************");
-        Log.e(TAG, "🔥 ADHAN SERVICE - COMMANDE REÇUE");
-        Log.e(TAG, "**************************************");
-        System.out.println("ADHAN_DEBUG: onStartCommand reçu");
+        errorLog(TAG, "**************************************");
+        errorLog(TAG, "🔥 ADHAN SERVICE - COMMANDE REÇUE");
+        errorLog(TAG, "**************************************");
+        systemOutLog("ADHAN_DEBUG: onStartCommand reçu");
 
         if (intent == null) {
-            Log.w(TAG, "onStartCommand: Intent est null. Arrêt du service.");
+            warningLog(TAG, "onStartCommand: Intent est null. Arrêt du service.");
             stopSelf();
             return START_NOT_STICKY;
         }
@@ -127,14 +129,14 @@ public class AdhanService extends Service {
         if (ACTION_STOP.equals(action)) {
             String stopReason = prayerLabel != null ? prayerLabel
                     : (lastPrayerLabel != null ? lastPrayerLabel : "générique");
-            Log.d(TAG, "[ACTION_STOP] Demande d'arrêt pour Adhan: " + stopReason);
+            debugLog(TAG, "[ACTION_STOP] Demande d'arrêt pour Adhan: " + stopReason);
             stopAdhan(); // Arrête le MediaPlayer
 
             // Si c'est Isha qui est arrêté (par l'utilisateur ou fin de lecture), on
             // reprogramme.
             // lastPrayerLabel est mis à jour juste avant de jouer l'Adhan.
             if ("Isha".equals(prayerLabel) || ("Isha".equals(lastPrayerLabel) && prayerLabel == null)) {
-                Log.d(TAG, "[Arrêt Isha] Reprogrammation immédiate pour demain.");
+                debugLog(TAG, "[Arrêt Isha] Reprogrammation immédiate pour demain.");
                 reprogramAlarmsForTomorrow();
             }
             stopForeground(true); // Retire la notif de premier plan
@@ -143,14 +145,14 @@ public class AdhanService extends Service {
         }
 
         if (ACTION_REPROGRAM_ADHAN_ALARMS.equals(action)) {
-            Log.d(TAG, "[BOOT_COMPLETED] Reprogrammation après redémarrage du téléphone (ancienne méthode)");
+            debugLog(TAG, "[BOOT_COMPLETED] Reprogrammation après redémarrage du téléphone (ancienne méthode)");
             reprogramAlarmsAfterBoot();
             stopSelf(); // Arrête le service après reprogrammation
             return START_NOT_STICKY;
         }
 
         if (ACTION_REPROGRAM_ADHAN_ALARMS_DELAYED.equals(action)) {
-            Log.d(TAG,
+            debugLog(TAG,
                     "[BOOT_COMPLETED_DELAYED] Reprogrammation différée après redémarrage du téléphone (Android 15+ compatible)");
             // Cette action ne démarre PAS en service de premier plan pour être compatible
             // avec Android 15+
@@ -164,7 +166,7 @@ public class AdhanService extends Service {
         // reprogrammation.
         // C'est pour jouer un Adhan.
         if (prayerLabel == null) {
-            Log.e(TAG, "onStartCommand: PRAYER_LABEL est null pour une action de démarrage. Arrêt.");
+            errorLog(TAG, "onStartCommand: PRAYER_LABEL est null pour une action de démarrage. Arrêt.");
             stopSelf();
             return START_NOT_STICKY;
         }
@@ -212,7 +214,7 @@ public class AdhanService extends Service {
         } else {
             startForeground(FOREGROUND_SERVICE_NOTIFICATION_ID, notification);
         }
-        Log.d(TAG, "Service démarré en premier plan pour: " + prayerLabel);
+        debugLog(TAG, "Service démarré en premier plan pour: " + prayerLabel);
 
         playAdhanSound(intent.getStringExtra("ADHAN_SOUND"), prayerLabel, currentLanguage);
 
@@ -225,19 +227,28 @@ public class AdhanService extends Service {
         }
 
         SharedPreferences adhanPrefs = getSharedPreferences("adhan_prefs", MODE_PRIVATE);
-        String soundToPlay = (adhanSoundKey != null) ? adhanSoundKey
-                : adhanPrefs.getString("ADHAN_SOUND", "adhamalsharqawe");
+        String soundFromPrefs = adhanPrefs.getString("ADHAN_SOUND", "misharyrachid");
+        String soundToPlay = (adhanSoundKey != null) ? adhanSoundKey : soundFromPrefs;
         float volume = adhanPrefs.getFloat("adhan_volume", 1.0f);
 
-        Log.d(TAG, "Tentative de lecture Adhan: " + soundToPlay + " pour " + prayerLabelForCompletion + " avec volume "
-                + volume);
+        debugLog(TAG, "🔊 DEBUG SONS ADHAN:");
+        debugLog(TAG, "  - adhanSoundKey (Intent): " + adhanSoundKey);
+        debugLog(TAG, "  - soundFromPrefs (SharedPrefs): " + soundFromPrefs);
+        debugLog(TAG, "  - soundToPlay (Final): " + soundToPlay);
+        debugLog(TAG, "  - volume: " + volume);
+        debugLog(TAG, "📢 Tentative de lecture Adhan: " + soundToPlay + " pour " + prayerLabelForCompletion);
 
+        debugLog(TAG, "🔍 Recherche fichier audio: '" + soundToPlay + "' dans package: " + getPackageName());
         int resId = getResources().getIdentifier(soundToPlay, "raw", getPackageName());
+        debugLog(TAG, "🔍 Result resId: " + resId + " pour '" + soundToPlay + "'");
+
         if (resId == 0) {
-            Log.e(TAG, "Fichier audio Adhan non trouvé: " + soundToPlay + ". Utilisation fallback adhamalsharqawe.");
+            errorLog(TAG, "❌ Fichier audio Adhan non trouvé: '" + soundToPlay + "'. Tentative fallback...");
+            debugLog(TAG, "🔍 Recherche fallback: 'adhamalsharqawe'");
             resId = getResources().getIdentifier("adhamalsharqawe", "raw", getPackageName());
+            debugLog(TAG, "🔍 Fallback resId: " + resId);
             if (resId == 0) {
-                Log.e(TAG, "Fichier audio Adhan fallback non trouvé non plus. Arrêt Adhan.");
+                errorLog(TAG, "Fichier audio Adhan fallback non trouvé non plus. Arrêt Adhan.");
                 // Simule la fin pour déclencher la logique de stop/reprog
                 handleAdhanCompletion(prayerLabelForCompletion);
                 return;
@@ -246,7 +257,7 @@ public class AdhanService extends Service {
 
         mediaPlayer = MediaPlayer.create(this, resId);
         if (mediaPlayer == null) {
-            Log.e(TAG, "MediaPlayer.create a échoué pour resId: " + resId);
+            errorLog(TAG, "MediaPlayer.create a échoué pour resId: " + resId);
             handleAdhanCompletion(prayerLabelForCompletion);
             return;
         }
@@ -258,36 +269,31 @@ public class AdhanService extends Service {
             boolean isPrayerMutedByUser = isPrayerMuted(prayerLabelForCompletion);
 
             if (isPrayerMutedByUser) {
-                Log.d(TAG, "Prière " + prayerLabelForCompletion + " est muette par l'utilisateur. Volume à 0.");
+                debugLog(TAG, "Prière " + prayerLabelForCompletion + " est muette par l'utilisateur. Volume à 0.");
                 mediaPlayer.setVolume(0, 0);
-            } else if (audioManager != null) {
-                int ringerMode = audioManager.getRingerMode();
-                if (ringerMode == AudioManager.RINGER_MODE_SILENT || ringerMode == AudioManager.RINGER_MODE_VIBRATE) {
-                    Log.d(TAG, "Mode silencieux/vibreur détecté. Adhan sera silencieux.");
-                    mediaPlayer.setVolume(0, 0);
-                } else {
-                    mediaPlayer.setVolume(volume, volume);
-                }
             } else {
-                mediaPlayer.setVolume(volume, volume); // Fallback si AudioManager n'est pas dispo
+                // L'adhan joue toujours avec le volume configuré, indépendamment du mode
+                // téléphone
+                mediaPlayer.setVolume(volume, volume);
+                debugLog(TAG, "Adhan joué avec volume configuré: " + volume + " pour " + prayerLabelForCompletion);
             }
 
             mediaPlayer.setOnCompletionListener(mp -> {
-                Log.d(TAG, "Adhan terminé pour: " + prayerLabelForCompletion);
+                debugLog(TAG, "Adhan terminé pour: " + prayerLabelForCompletion);
                 handleAdhanCompletion(prayerLabelForCompletion);
             });
 
             mediaPlayer.setOnErrorListener((mp, what, extra) -> {
-                Log.e(TAG, "Erreur MediaPlayer: what=" + what + ", extra=" + extra);
+                errorLog(TAG, "Erreur MediaPlayer: what=" + what + ", extra=" + extra);
                 handleAdhanCompletion(prayerLabelForCompletion); // Traiter comme une complétion pour arrêter proprement
                 return true; // Indique que l'erreur a été gérée
             });
 
             mediaPlayer.start();
-            Log.d(TAG, "Adhan démarré pour: " + prayerLabelForCompletion);
+            debugLog(TAG, "Adhan démarré pour: " + prayerLabelForCompletion);
 
         } catch (Exception e) {
-            Log.e(TAG, "Erreur lors du démarrage du MediaPlayer: " + e.getMessage(), e);
+            errorLog(TAG, "Erreur lors du démarrage du MediaPlayer: " + e.getMessage(), e);
             handleAdhanCompletion(prayerLabelForCompletion);
         }
     }
@@ -295,12 +301,12 @@ public class AdhanService extends Service {
     private void handleAdhanCompletion(String completedPrayerLabel) {
         if (!isPlayingDuaAfterAdhan) {
             // L'adhan principal vient de se terminer, maintenant jouer le dua après l'adhan
-            Log.d(TAG, "Adhan terminé pour " + completedPrayerLabel + ", démarrage du dua après adhan");
+            debugLog(TAG, "Adhan terminé pour " + completedPrayerLabel + ", démarrage du dua après adhan");
             stopAdhan(); // Libère le MediaPlayer de l'adhan
             playDuaAfterAdhan(completedPrayerLabel);
         } else {
             // Le dua après l'adhan vient de se terminer, maintenant vraiment terminer
-            Log.d(TAG, "Dua après adhan terminé pour " + completedPrayerLabel + ", terminaison complète");
+            debugLog(TAG, "Dua après adhan terminé pour " + completedPrayerLabel + ", terminaison complète");
             handleFinalCompletion(completedPrayerLabel);
         }
     }
@@ -325,18 +331,19 @@ public class AdhanService extends Service {
         SharedPreferences adhanPrefs = getSharedPreferences("adhan_prefs", MODE_PRIVATE);
         float volume = adhanPrefs.getFloat("adhan_volume", 1.0f);
 
-        Log.d(TAG, "Tentative de lecture dua après adhan pour " + prayerLabelForCompletion + " avec volume " + volume);
+        debugLog(TAG,
+                "Tentative de lecture dua après adhan pour " + prayerLabelForCompletion + " avec volume " + volume);
 
         int resId = getResources().getIdentifier("duaafteradhan", "raw", getPackageName());
         if (resId == 0) {
-            Log.e(TAG, "Fichier audio duaafteradhan non trouvé. Passage à la terminaison finale.");
+            errorLog(TAG, "Fichier audio duaafteradhan non trouvé. Passage à la terminaison finale.");
             handleFinalCompletion(prayerLabelForCompletion);
             return;
         }
 
         mediaPlayer = MediaPlayer.create(this, resId);
         if (mediaPlayer == null) {
-            Log.e(TAG, "MediaPlayer.create a échoué pour duaafteradhan");
+            errorLog(TAG, "MediaPlayer.create a échoué pour duaafteradhan");
             handleFinalCompletion(prayerLabelForCompletion);
             return;
         }
@@ -348,39 +355,35 @@ public class AdhanService extends Service {
             boolean isPrayerMutedByUser = isPrayerMuted(prayerLabelForCompletion);
 
             if (isPrayerMutedByUser) {
-                Log.d(TAG, "Prière " + prayerLabelForCompletion
+                debugLog(TAG, "Prière " + prayerLabelForCompletion
                         + " est muette par l'utilisateur. Dua après adhan aussi à volume 0.");
                 mediaPlayer.setVolume(0, 0);
-            } else if (audioManager != null) {
-                int ringerMode = audioManager.getRingerMode();
-                if (ringerMode == AudioManager.RINGER_MODE_SILENT || ringerMode == AudioManager.RINGER_MODE_VIBRATE) {
-                    Log.d(TAG, "Mode silencieux/vibreur détecté. Dua après adhan sera silencieux.");
-                    mediaPlayer.setVolume(0, 0);
-                } else {
-                    mediaPlayer.setVolume(volume, volume);
-                }
             } else {
-                mediaPlayer.setVolume(volume, volume); // Fallback si AudioManager n'est pas dispo
+                // Le dua après adhan joue toujours avec le volume configuré, indépendamment du
+                // mode téléphone
+                mediaPlayer.setVolume(volume, volume);
+                debugLog(TAG,
+                        "Dua après adhan joué avec volume configuré: " + volume + " pour " + prayerLabelForCompletion);
             }
 
             isPlayingDuaAfterAdhan = true; // Marquer qu'on joue maintenant le dua
 
             mediaPlayer.setOnCompletionListener(mp -> {
-                Log.d(TAG, "Dua après adhan terminé pour: " + prayerLabelForCompletion);
+                debugLog(TAG, "Dua après adhan terminé pour: " + prayerLabelForCompletion);
                 handleAdhanCompletion(prayerLabelForCompletion); // Appellera handleFinalCompletion
             });
 
             mediaPlayer.setOnErrorListener((mp, what, extra) -> {
-                Log.e(TAG, "Erreur MediaPlayer dua après adhan: what=" + what + ", extra=" + extra);
+                errorLog(TAG, "Erreur MediaPlayer dua après adhan: what=" + what + ", extra=" + extra);
                 handleFinalCompletion(prayerLabelForCompletion); // Traiter comme une complétion pour arrêter proprement
                 return true; // Indique que l'erreur a été gérée
             });
 
             mediaPlayer.start();
-            Log.d(TAG, "Dua après adhan démarré pour: " + prayerLabelForCompletion);
+            debugLog(TAG, "Dua après adhan démarré pour: " + prayerLabelForCompletion);
 
         } catch (Exception e) {
-            Log.e(TAG, "Erreur lors du démarrage du MediaPlayer pour dua après adhan: " + e.getMessage(), e);
+            errorLog(TAG, "Erreur lors du démarrage du MediaPlayer pour dua après adhan: " + e.getMessage(), e);
             handleFinalCompletion(prayerLabelForCompletion);
         }
     }
@@ -425,10 +428,11 @@ public class AdhanService extends Service {
             // Utilise un ID unique pour chaque prière pour éviter les conflits
             int notificationId = prayerLabel.hashCode() + 1000;
             notificationManager.notify(notificationId, notificationBuilder.build());
-            Log.d(TAG, "Notification persistante créée pour Adhan terminé: " + prayerLabel + " (ID: " + notificationId
-                    + ")");
+            debugLog(TAG,
+                    "Notification persistante créée pour Adhan terminé: " + prayerLabel + " (ID: " + notificationId
+                            + ")");
         } else {
-            Log.e(TAG, "NotificationManager est null, impossible de créer la notification persistante.");
+            errorLog(TAG, "NotificationManager est null, impossible de créer la notification persistante.");
         }
     }
 
@@ -440,9 +444,9 @@ public class AdhanService extends Service {
                 }
                 mediaPlayer.reset(); // Important pour réutiliser ou libérer correctement
                 mediaPlayer.release();
-                Log.d(TAG, "MediaPlayer arrêté et libéré.");
+                debugLog(TAG, "MediaPlayer arrêté et libéré.");
             } catch (Exception e) {
-                Log.e(TAG, "Exception lors de l'arrêt/libération du MediaPlayer: " + e.getMessage());
+                errorLog(TAG, "Exception lors de l'arrêt/libération du MediaPlayer: " + e.getMessage());
             } finally {
                 mediaPlayer = null;
             }
@@ -454,7 +458,7 @@ public class AdhanService extends Service {
     public void onDestroy() {
         super.onDestroy();
         stopAdhan();
-        Log.d(TAG, "AdhanService onDestroy: Service détruit.");
+        debugLog(TAG, "AdhanService onDestroy: Service détruit.");
     }
 
     @Nullable
@@ -464,14 +468,14 @@ public class AdhanService extends Service {
     }
 
     private void reprogramAlarmsForTomorrow() {
-        Log.d(TAG, "====> REPROGRAMMATION COMPLÈTE POUR DEMAIN <====");
+        debugLog(TAG, "====> REPROGRAMMATION COMPLÈTE POUR DEMAIN <====");
         Context context = this;
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
         // 1. ANNULATION DES ALARMES EXISTANTES (Adhan uniquement pour l'instant)
         // Les autres (Rappels, Dhikrs) seront écrasées par FLAG_UPDATE_CURRENT.
         // Si des doublons persistent, une annulation plus ciblée sera nécessaire.
-        Log.d(TAG, "Réprogram: Annulation des alarmes Adhan existantes...");
+        debugLog(TAG, "Réprogram: Annulation des alarmes Adhan existantes...");
         cancelAllAdhanAlarmsOnly(context, alarmManager);
 
         // 2. LECTURE DE TOUS LES PARAMÈTRES NÉCESSAIRES
@@ -479,7 +483,7 @@ public class AdhanService extends Service {
         SharedPreferences settingsPrefs = getSharedPreferences("prayer_times_settings", MODE_PRIVATE);
 
         String language = settingsPrefs.getString("current_language", "en");
-        Log.d(TAG, "Réprogram: Langue pour notifications: " + language);
+        debugLog(TAG, "Réprogram: Langue pour notifications: " + language);
 
         // Paramètres de localisation
         String locationMode = settingsPrefs.getString("location_mode", "auto");
@@ -487,15 +491,15 @@ public class AdhanService extends Service {
         if ("manual".equals(locationMode)) {
             latitude = settingsPrefs.getFloat("manual_latitude", 0f);
             longitude = settingsPrefs.getFloat("manual_longitude", 0f);
-            Log.d(TAG, "Réprogram: Mode manuel, Lat: " + latitude + ", Lon: " + longitude);
+            debugLog(TAG, "Réprogram: Mode manuel, Lat: " + latitude + ", Lon: " + longitude);
         } else { // Mode "auto"
             latitude = settingsPrefs.getFloat("auto_latitude", 0f);
             longitude = settingsPrefs.getFloat("auto_longitude", 0f);
-            Log.d(TAG, "Réprogram: Mode auto, Lat: " + latitude + ", Lon: " + longitude);
+            debugLog(TAG, "Réprogram: Mode auto, Lat: " + latitude + ", Lon: " + longitude);
         }
 
         if (latitude == 0.0 && longitude == 0.0) {
-            Log.e(TAG, "Réprogram: Coordonnées (0.0, 0.0) détectées. Reprogrammation annulée pour éviter erreurs.");
+            errorLog(TAG, "Réprogram: Coordonnées (0.0, 0.0) détectées. Reprogrammation annulée pour éviter erreurs.");
             return;
         }
 
@@ -506,7 +510,7 @@ public class AdhanService extends Service {
         // Paramètres généraux de notification
         boolean notificationsEnabled = settingsPrefs.getBoolean("notifications_enabled", true);
         if (!notificationsEnabled) {
-            Log.d(TAG, "Réprogram: Notifications désactivées globalement. Arrêt de la reprogrammation.");
+            debugLog(TAG, "Réprogram: Notifications désactivées globalement. Arrêt de la reprogrammation.");
             return;
         }
 
@@ -533,12 +537,12 @@ public class AdhanService extends Service {
         Coordinates coordinates = new Coordinates(latitude, longitude);
         PrayerTimes prayerTimesTomorrow = new PrayerTimes(coordinates, dateComponents, calcParams);
 
-        Log.d(TAG, "Réprogram: Horaires pour demain (" + dateComponents.toString() + "): F:" +
+        debugLog(TAG, "Réprogram: Horaires pour demain (" + dateComponents.toString() + "): F:" +
                 prayerTimesTomorrow.fajr + ", D:" + prayerTimesTomorrow.dhuhr + ", A:" + prayerTimesTomorrow.asr +
                 ", M:" + prayerTimesTomorrow.maghrib + ", I:" + prayerTimesTomorrow.isha);
 
         // 4. REPROGRAMMATION DES ADHANS
-        Log.d(TAG, "Réprogram: Reprogrammation des Adhans...");
+        debugLog(TAG, "Réprogram: Reprogrammation des Adhans...");
         scheduleAdhanAlarmInternal(context, alarmManager, "Fajr", prayerTimesTomorrow.fajr.getTime(), adhanSound,
                 language);
         scheduleAdhanAlarmInternal(context, alarmManager, "Dhuhr", prayerTimesTomorrow.dhuhr.getTime(), adhanSound,
@@ -552,7 +556,7 @@ public class AdhanService extends Service {
 
         // 5. REPROGRAMMATION DES RAPPELS
         if (remindersEnabled) {
-            Log.d(TAG, "Réprogram: Reprogrammation des Rappels (offset: " + reminderOffset + " min)...");
+            debugLog(TAG, "Réprogram: Reprogrammation des Rappels (offset: " + reminderOffset + " min)...");
             scheduleReminderInternal(context, alarmManager, "Fajr", prayerTimesTomorrow.fajr.getTime(), reminderOffset,
                     language);
             scheduleReminderInternal(context, alarmManager, "Dhuhr", prayerTimesTomorrow.dhuhr.getTime(),
@@ -566,7 +570,7 @@ public class AdhanService extends Service {
         }
 
         // 6. REPROGRAMMATION DES DHIKRS
-        Log.d(TAG, "Réprogram: Reprogrammation des Dhikrs...");
+        debugLog(TAG, "Réprogram: Reprogrammation des Dhikrs...");
         Map<String, Date> prayerTimesMap = new HashMap<>();
         prayerTimesMap.put("Fajr", prayerTimesTomorrow.fajr);
         prayerTimesMap.put("Dhuhr", prayerTimesTomorrow.dhuhr);
@@ -603,11 +607,11 @@ public class AdhanService extends Service {
                 }
             }
         }
-        Log.d(TAG, "====> REPROGRAMMATION COMPLÈTE POUR DEMAIN TERMINÉE <====");
+        debugLog(TAG, "====> REPROGRAMMATION COMPLÈTE POUR DEMAIN TERMINÉE <====");
     }
 
     private void reprogramAlarmsAfterBoot() {
-        Log.d(TAG, "====> REPROGRAMMATION APRÈS REDÉMARRAGE <====");
+        debugLog(TAG, "====> REPROGRAMMATION APRÈS REDÉMARRAGE <====");
         Context context = this;
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
@@ -616,7 +620,7 @@ public class AdhanService extends Service {
         SharedPreferences settingsPrefs = getSharedPreferences("prayer_times_settings", MODE_PRIVATE);
 
         String language = settingsPrefs.getString("current_language", "en");
-        Log.d(TAG, "Boot Reprog: Langue: " + language);
+        debugLog(TAG, "Boot Reprog: Langue: " + language);
 
         // Paramètres de localisation
         String locationMode = settingsPrefs.getString("location_mode", "auto");
@@ -624,15 +628,15 @@ public class AdhanService extends Service {
         if ("manual".equals(locationMode)) {
             latitude = settingsPrefs.getFloat("manual_latitude", 0f);
             longitude = settingsPrefs.getFloat("manual_longitude", 0f);
-            Log.d(TAG, "Boot Reprog: Mode manuel, Lat: " + latitude + ", Lon: " + longitude);
+            debugLog(TAG, "Boot Reprog: Mode manuel, Lat: " + latitude + ", Lon: " + longitude);
         } else { // Mode "auto"
             latitude = settingsPrefs.getFloat("auto_latitude", 0f);
             longitude = settingsPrefs.getFloat("auto_longitude", 0f);
-            Log.d(TAG, "Boot Reprog: Mode auto, Lat: " + latitude + ", Lon: " + longitude);
+            debugLog(TAG, "Boot Reprog: Mode auto, Lat: " + latitude + ", Lon: " + longitude);
         }
 
         if (latitude == 0.0 && longitude == 0.0) {
-            Log.e(TAG, "Boot Reprog: Coordonnées (0.0, 0.0) détectées. Reprogrammation annulée.");
+            errorLog(TAG, "Boot Reprog: Coordonnées (0.0, 0.0) détectées. Reprogrammation annulée.");
             return;
         }
 
@@ -643,7 +647,7 @@ public class AdhanService extends Service {
         // Paramètres généraux de notification
         boolean notificationsEnabled = settingsPrefs.getBoolean("notifications_enabled", true);
         if (!notificationsEnabled) {
-            Log.d(TAG, "Boot Reprog: Notifications désactivées globalement. Arrêt.");
+            debugLog(TAG, "Boot Reprog: Notifications désactivées globalement. Arrêt.");
             return;
         }
 
@@ -676,11 +680,14 @@ public class AdhanService extends Service {
         DateComponents tomorrowDate = DateComponents.from(tomorrow.getTime());
         PrayerTimes prayerTimesTomorrow = new PrayerTimes(coordinates, tomorrowDate, calcParams);
 
-        Log.d(TAG, "Boot Reprog: Horaires aujourd'hui: F:" + prayerTimesToday.fajr + ", D:" + prayerTimesToday.dhuhr +
-                ", A:" + prayerTimesToday.asr + ", M:" + prayerTimesToday.maghrib + ", I:" + prayerTimesToday.isha);
-        Log.d(TAG, "Boot Reprog: Horaires demain: F:" + prayerTimesTomorrow.fajr + ", D:" + prayerTimesTomorrow.dhuhr +
-                ", A:" + prayerTimesTomorrow.asr + ", M:" + prayerTimesTomorrow.maghrib + ", I:"
-                + prayerTimesTomorrow.isha);
+        debugLog(TAG,
+                "Boot Reprog: Horaires aujourd'hui: F:" + prayerTimesToday.fajr + ", D:" + prayerTimesToday.dhuhr +
+                        ", A:" + prayerTimesToday.asr + ", M:" + prayerTimesToday.maghrib + ", I:"
+                        + prayerTimesToday.isha);
+        debugLog(TAG,
+                "Boot Reprog: Horaires demain: F:" + prayerTimesTomorrow.fajr + ", D:" + prayerTimesTomorrow.dhuhr +
+                        ", A:" + prayerTimesTomorrow.asr + ", M:" + prayerTimesTomorrow.maghrib + ", I:"
+                        + prayerTimesTomorrow.isha);
 
         // 3. REPROGRAMMATION INTELLIGENTE : aujourd'hui + demain selon l'heure actuelle
         long currentTimeMillis = System.currentTimeMillis();
@@ -692,7 +699,7 @@ public class AdhanService extends Service {
         Date[] tomorrowTimes = { prayerTimesTomorrow.fajr, prayerTimesTomorrow.dhuhr, prayerTimesTomorrow.asr,
                 prayerTimesTomorrow.maghrib, prayerTimesTomorrow.isha };
 
-        Log.d(TAG, "Boot Reprog: Reprogrammation des Adhans...");
+        debugLog(TAG, "Boot Reprog: Reprogrammation des Adhans...");
 
         // Adhans pour aujourd'hui (prières futures uniquement)
         for (int i = 0; i < prayers.length; i++) {
@@ -712,7 +719,7 @@ public class AdhanService extends Service {
 
         // 4. REPROGRAMMATION DES RAPPELS
         if (remindersEnabled) {
-            Log.d(TAG, "Boot Reprog: Reprogrammation des Rappels...");
+            debugLog(TAG, "Boot Reprog: Reprogrammation des Rappels...");
 
             // Rappels pour aujourd'hui (prières futures uniquement)
             for (int i = 0; i < prayers.length; i++) {
@@ -730,7 +737,7 @@ public class AdhanService extends Service {
         }
 
         // 5. REPROGRAMMATION DES DHIKRS
-        Log.d(TAG, "Boot Reprog: Reprogrammation des Dhikrs...");
+        debugLog(TAG, "Boot Reprog: Reprogrammation des Dhikrs...");
 
         // Dhikrs pour aujourd'hui (prières futures uniquement)
         for (int i = 0; i < prayers.length; i++) {
@@ -780,7 +787,7 @@ public class AdhanService extends Service {
             }
         }
 
-        Log.d(TAG, "====> REPROGRAMMATION APRÈS REDÉMARRAGE TERMINÉE <====");
+        debugLog(TAG, "====> REPROGRAMMATION APRÈS REDÉMARRAGE TERMINÉE <====");
     }
 
     private void cancelAllAdhanAlarmsOnly(Context context, AlarmManager alarmManager) {
@@ -804,11 +811,11 @@ public class AdhanService extends Service {
                     alarmManager.cancel(pendingIntent);
                     pendingIntent.cancel();
                     cancelCount++;
-                    Log.d(TAG, "Réprogram: Alarme Adhan annulée pour " + prayer + suffix);
+                    debugLog(TAG, "Réprogram: Alarme Adhan annulée pour " + prayer + suffix);
                 }
             }
         }
-        Log.d(TAG, "Réprogram: " + cancelCount + " alarmes Adhan annulées.");
+        debugLog(TAG, "Réprogram: " + cancelCount + " alarmes Adhan annulées.");
     }
 
     private CalculationParameters getCalculationParameters(String methodName) {
@@ -838,7 +845,7 @@ public class AdhanService extends Service {
                 params = CalculationMethod.SINGAPORE.getParameters();
                 break;
             case "Tehran":
-                Log.w(TAG,
+                warningLog(TAG,
                         "Méthode 'Tehran' sélectionnée, utilisation fallback MUSLIM_WORLD_LEAGUE car la constante exacte n'est pas trouvée.");
                 params = CalculationMethod.MUSLIM_WORLD_LEAGUE.getParameters(); // Fallback temporaire
                 break;
@@ -870,9 +877,9 @@ public class AdhanService extends Service {
                 PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
         try {
             alarmManager.setAlarmClock(new AlarmManager.AlarmClockInfo(triggerAtMillis, null), pendingIntent);
-            Log.d(TAG, "Réprogram: Adhan programmé pour " + prayerName + " à " + new Date(triggerAtMillis));
+            debugLog(TAG, "Réprogram: Adhan programmé pour " + prayerName + " à " + new Date(triggerAtMillis));
         } catch (Exception e) {
-            Log.e(TAG, "Réprogram: Erreur Adhan " + prayerName + ": " + e.getMessage());
+            errorLog(TAG, "Réprogram: Erreur Adhan " + prayerName + ": " + e.getMessage());
         }
     }
 
@@ -880,7 +887,7 @@ public class AdhanService extends Service {
             long prayerTimestamp, int offsetMinutes, String language) {
         long triggerAtMillis = prayerTimestamp - (offsetMinutes * 60 * 1000L);
         if (triggerAtMillis <= System.currentTimeMillis()) {
-            Log.d(TAG, "Réprogram: Rappel pour " + prayerName + " ignoré (dans le passé).");
+            debugLog(TAG, "Réprogram: Rappel pour " + prayerName + " ignoré (dans le passé).");
             return;
         }
 
@@ -901,9 +908,9 @@ public class AdhanService extends Service {
                 PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
         try {
             alarmManager.setAlarmClock(new AlarmManager.AlarmClockInfo(triggerAtMillis, null), pendingIntent);
-            Log.d(TAG, "Réprogram: Rappel programmé pour " + prayerName + " à " + new Date(triggerAtMillis));
+            debugLog(TAG, "Réprogram: Rappel programmé pour " + prayerName + " à " + new Date(triggerAtMillis));
         } catch (Exception e) {
-            Log.e(TAG, "Réprogram: Erreur Rappel " + prayerName + ": " + e.getMessage());
+            errorLog(TAG, "Réprogram: Erreur Rappel " + prayerName + ": " + e.getMessage());
         }
     }
 
@@ -917,9 +924,9 @@ public class AdhanService extends Service {
         if (dhikrContent != null) {
             title = dhikrContent.title;
             body = dhikrContent.body;
-            Log.d(TAG, "Dhikr trouvé pour " + dhikrType + ": " + title);
+            debugLog(TAG, "Dhikr trouvé pour " + dhikrType + ": " + title);
         } else {
-            Log.w(TAG, "Aucun contenu Dhikr trouvé pour Type=" + dhikrType + ", Langue=" + language
+            warningLog(TAG, "Aucun contenu Dhikr trouvé pour Type=" + dhikrType + ", Langue=" + language
                     + ". Utilisation de placeholders.");
             title = getLocalizedText(context, "dhikr_dua", language, "Dhikr & Dua");
             String categoryName = getDhikrCategoryDisplayTitle(dhikrType, language, false, "Dhikr");
@@ -935,7 +942,7 @@ public class AdhanService extends Service {
 
         long triggerMillis = prayerTimestamp + ((long) delayMinutes * 60 * 1000);
         if (triggerMillis <= System.currentTimeMillis()) {
-            Log.d(TAG, "Dhikr pour " + dhikrType + " (" + prayerName + ") ignoré (déclenchement dans le passé: "
+            debugLog(TAG, "Dhikr pour " + dhikrType + " (" + prayerName + ") ignoré (déclenchement dans le passé: "
                     + new Date(triggerMillis) + ")");
             return;
         }
@@ -947,9 +954,10 @@ public class AdhanService extends Service {
                 PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
         try {
             alarmManager.setAlarmClock(new AlarmManager.AlarmClockInfo(triggerMillis, null), pendingIntent);
-            Log.d(TAG, "✅ Dhikr reprogrammé: " + dhikrType + " pour " + prayerName + " à " + new Date(triggerMillis));
+            debugLog(TAG,
+                    "✅ Dhikr reprogrammé: " + dhikrType + " pour " + prayerName + " à " + new Date(triggerMillis));
         } catch (Exception e) {
-            Log.e(TAG, "❌ Erreur reprogrammation dhikr: " + e.getMessage());
+            errorLog(TAG, "❌ Erreur reprogrammation dhikr: " + e.getMessage());
         }
     }
 
@@ -961,7 +969,7 @@ public class AdhanService extends Service {
             is.read(buffer);
             json = new String(buffer, StandardCharsets.UTF_8);
         } catch (IOException ex) {
-            Log.e(TAG, "Erreur lecture JSON depuis assets: " + fileName, ex);
+            errorLog(TAG, "Erreur lecture JSON depuis assets: " + fileName, ex);
             return null;
         }
         return json;
@@ -988,7 +996,7 @@ public class AdhanService extends Service {
                 filePrefix = "selected";
                 break;
             default:
-                Log.w(TAG, "Type de Dhikr inconnu pour JSON Path: " + dhikrType);
+                warningLog(TAG, "Type de Dhikr inconnu pour JSON Path: " + dhikrType);
                 return null;
         }
         return "data/" + folder + "/" + filePrefix + "." + language + ".json";
@@ -1043,7 +1051,7 @@ public class AdhanService extends Service {
                 filePath = "selected." + language + ".json";
                 break;
             default:
-                Log.w(TAG, "Type de Dhikr inconnu: " + dhikrType);
+                warningLog(TAG, "Type de Dhikr inconnu: " + dhikrType);
                 return null;
         }
 
@@ -1051,12 +1059,13 @@ public class AdhanService extends Service {
 
         if (dhikrJsonString == null) {
             if (!"en".equals(language)) { // Fallback vers l'anglais
-                Log.w(TAG, "Fichier Dhikr non trouvé pour '" + language + "', fallback vers 'en' pour " + dhikrType);
+                warningLog(TAG,
+                        "Fichier Dhikr non trouvé pour '" + language + "', fallback vers 'en' pour " + dhikrType);
                 String fallbackPath = filePath.replace("." + language + ".", ".en.");
                 dhikrJsonString = loadJSONFromAsset(context, fallbackPath);
             }
             if (dhikrJsonString == null) { // Si toujours null après fallback
-                Log.e(TAG, "Fichier Dhikr non chargé (même en fallback) pour: " + dhikrType);
+                errorLog(TAG, "Fichier Dhikr non chargé (même en fallback) pour: " + dhikrType);
                 return null;
             }
         }
@@ -1064,14 +1073,14 @@ public class AdhanService extends Service {
         try {
             JSONArray dhikrArray = new JSONArray(dhikrJsonString);
             if (dhikrArray.length() == 0) {
-                Log.w(TAG, "Tableau Dhikr vide pour: " + filePath);
+                warningLog(TAG, "Tableau Dhikr vide pour: " + filePath);
                 return null;
             }
 
             // Les fichiers séparés n'ont pas besoin de filtrage par catégorie, tous les
             // dhikrs sont de la bonne catégorie
             JSONObject randomDhikrJson = dhikrArray.getJSONObject(new Random().nextInt(dhikrArray.length()));
-            Log.d(TAG, "Dhikr sélectionné pour " + dhikrType + ": " + randomDhikrJson.optString("title", ""));
+            debugLog(TAG, "Dhikr sélectionné pour " + dhikrType + ": " + randomDhikrJson.optString("title", ""));
 
             String itemSpecificTitle = randomDhikrJson.optString("title", "");
             String arabic = randomDhikrJson.optString("arabic", "");
@@ -1114,7 +1123,7 @@ public class AdhanService extends Service {
             return new DhikrContent(notificationTitle, bodyBuilder.toString());
 
         } catch (JSONException e) {
-            Log.e(TAG, "Erreur parsing JSON Dhikr: " + filePath, e);
+            errorLog(TAG, "Erreur parsing JSON Dhikr: " + filePath, e);
             return null;
         }
     }
@@ -1129,13 +1138,13 @@ public class AdhanService extends Service {
             int resourceId = res.getIdentifier(resourceKey, "string", context.getPackageName());
 
             if (resourceId == 0) {
-                Log.w(TAG, "Clé de ressource non trouvée: '" + resourceKey + "' pour lang '" + languageCode
+                warningLog(TAG, "Clé de ressource non trouvée: '" + resourceKey + "' pour lang '" + languageCode
                         + "'. Utilisation fallback: '" + fallbackText + "'");
                 return fallbackText;
             }
             return res.getString(resourceId);
         } catch (Exception e) {
-            Log.e(TAG, "Erreur getLocalizedText pour '" + resourceKey + "': " + e.getMessage()
+            errorLog(TAG, "Erreur getLocalizedText pour '" + resourceKey + "': " + e.getMessage()
                     + ". Utilisation fallback: '" + fallbackText + "'");
             return fallbackText;
         }
@@ -1180,9 +1189,10 @@ public class AdhanService extends Service {
                 PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
         try {
             alarmManager.setAlarmClock(new AlarmManager.AlarmClockInfo(triggerAtMillis, null), pendingIntent);
-            Log.d(TAG, "Boot Reprog: Adhan programmé pour " + prayerName + suffix + " à " + new Date(triggerAtMillis));
+            debugLog(TAG,
+                    "Boot Reprog: Adhan programmé pour " + prayerName + suffix + " à " + new Date(triggerAtMillis));
         } catch (Exception e) {
-            Log.e(TAG, "Boot Reprog: Erreur Adhan " + prayerName + suffix + ": " + e.getMessage());
+            errorLog(TAG, "Boot Reprog: Erreur Adhan " + prayerName + suffix + ": " + e.getMessage());
         }
     }
 }

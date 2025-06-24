@@ -92,7 +92,7 @@ android {
         applicationId 'com.drogbinho.prayertimesapp2'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 34
+        versionCode 37
         versionName "1.0.0"
     }
     signingConfigs {
@@ -104,9 +104,9 @@ android {
     }
     release {
         storeFile file('my-release-key.jks')
-        storePassword 'android123'
+        storePassword project.hasProperty('MYAPP_RELEASE_STORE_PASSWORD') ? MYAPP_RELEASE_STORE_PASSWORD : 'android123'
         keyAlias 'my-key-alias'
-        keyPassword 'android123'
+        keyPassword project.hasProperty('MYAPP_RELEASE_KEY_PASSWORD') ? MYAPP_RELEASE_KEY_PASSWORD : 'android123'
     }
     }
     buildTypes {
@@ -117,10 +117,14 @@ android {
             // Caution! In production, you need to generate your own keystore file.
             // see https://reactnative.dev/docs/signed-apk-android.
             signingConfig signingConfigs.release
-            shrinkResources (findProperty('android.enableShrinkResourcesInReleaseBuilds')?.toBoolean() ?: false)
-            minifyEnabled enableProguardInReleaseBuilds
-            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
-            crunchPngs (findProperty('android.enablePngCrunchInReleaseBuilds')?.toBoolean() ?: true)
+            shrinkResources true   // ✅ RÉACTIVÉ avec protections complètes
+            minifyEnabled true     // OPTIMISATION: Minification activée
+            proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
+            crunchPngs false       // 🔧 DÉSACTIVÉ pour préserver les ressources audio
+            
+            // NOUVELLES OPTIMISATIONS
+            zipAlignEnabled true
+            debuggable false
         }
     }
     packagingOptions {

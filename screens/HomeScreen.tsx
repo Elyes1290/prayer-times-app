@@ -39,6 +39,8 @@ import { usePrayerTimes } from "../hooks/usePrayerTimes";
 import { scheduleNotificationsFor2Days } from "../utils/sheduleAllNotificationsFor30Days";
 import { getQuranVersesWithTranslations } from "../utils/quranApi";
 import { getRandomHadith } from "../utils/hadithApi";
+import { debugLog, errorLog } from "../utils/logger";
+import WelcomePersonalizationModal from "../components/WelcomePersonalizationModal";
 
 const { AdhanModule } = NativeModules;
 const { width: screenWidth, height: screenHeight } = Dimensions.get("window");
@@ -161,6 +163,8 @@ export default function HomeScreen() {
   const router = useRouter();
   const [today, setToday] = useState(new Date());
   const [city, setCity] = useState<string | null>(null);
+  const [showPersonalizationModal, setShowPersonalizationModal] =
+    useState(false);
 
   // Map langue => id traduction Quran.com
   const translationMap: Record<string, number | null> = {
@@ -351,7 +355,7 @@ export default function HomeScreen() {
           }
         }
       } catch (error) {
-        console.error("Erreur lors de la récupération du verset:", error);
+        errorLog("Erreur lors de la récupération du verset:", error);
       }
 
       // Hadith du jour
@@ -362,7 +366,7 @@ export default function HomeScreen() {
         setRandomHadith(null);
       }
     } catch (error) {
-      console.error("Erreur lors du chargement du contenu aléatoire:", error);
+      errorLog("Erreur lors du chargement du contenu aléatoire:", error);
       // Fallback en cas d'erreur
       setRandomDua({
         title: "Invocation du matin",
@@ -380,9 +384,7 @@ export default function HomeScreen() {
   // Permission Android 13+
   useEffect(() => {
     async function askNotifPermission() {
-      console.log(
-        "[DEBUG] 🔐 Vérification permissions notifications Android 13+"
-      );
+      debugLog("🔐 Vérification permissions notifications Android 13+");
 
       if (Platform.OS === "android" && Platform.Version >= 33) {
         const granted = await PermissionsAndroid.request(
@@ -480,42 +482,36 @@ export default function HomeScreen() {
   // Planification des notifications (stabilisé)
   const updateNotifications = useCallback(async () => {
     if (!currentPrayerTimes || !stableCoords) {
-      console.log(
-        "[DEBUG] ⏸️ Notifications non mises à jour - données manquantes"
-      );
+      debugLog("⏸️ Notifications non mises à jour - données manquantes");
       return;
     }
 
     try {
-      console.log(
-        "[DEBUG] 🔄 Mise à jour notifications pour le",
-        today.toISOString(),
-        {
-          notificationsEnabled: settings.notificationsEnabled,
-          remindersEnabled: settings.remindersEnabled,
-          finalRemindersEnabled:
-            settings.notificationsEnabled && settings.remindersEnabled,
-          ...stableDhikrSettings,
-          finalDhikrAfterSalah:
-            settings.notificationsEnabled &&
-            stableDhikrSettings.enabledAfterSalah,
-          finalDhikrMorning:
-            settings.notificationsEnabled &&
-            stableDhikrSettings.enabledMorningDhikr,
-          finalDhikrEvening:
-            settings.notificationsEnabled &&
-            stableDhikrSettings.enabledEveningDhikr,
-          finalDhikrDua:
-            settings.notificationsEnabled &&
-            stableDhikrSettings.enabledSelectedDua,
-        }
-      );
+      debugLog("🔄 Mise à jour notifications pour le", today.toISOString(), {
+        notificationsEnabled: settings.notificationsEnabled,
+        remindersEnabled: settings.remindersEnabled,
+        finalRemindersEnabled:
+          settings.notificationsEnabled && settings.remindersEnabled,
+        ...stableDhikrSettings,
+        finalDhikrAfterSalah:
+          settings.notificationsEnabled &&
+          stableDhikrSettings.enabledAfterSalah,
+        finalDhikrMorning:
+          settings.notificationsEnabled &&
+          stableDhikrSettings.enabledMorningDhikr,
+        finalDhikrEvening:
+          settings.notificationsEnabled &&
+          stableDhikrSettings.enabledEveningDhikr,
+        finalDhikrDua:
+          settings.notificationsEnabled &&
+          stableDhikrSettings.enabledSelectedDua,
+      });
 
       if (Platform.OS === "android" && AdhanModule) {
         // Si les notifications sont désactivées globalement, on annule tout et ON S'ARRÊTE
         if (!settings.notificationsEnabled) {
-          console.log(
-            "[DEBUG] 🚫 Notifications désactivées globalement - annulation de tout"
+          debugLog(
+            "🚫 Notifications désactivées globalement - annulation de tout"
           );
           await AdhanModule.cancelAllAdhanAlarms();
           await AdhanModule.cancelAllPrayerReminders();
@@ -563,10 +559,7 @@ export default function HomeScreen() {
         });
       }
     } catch (error) {
-      console.error(
-        "[DEBUG] ❌ Erreur lors de la mise à jour des notifications:",
-        error
-      );
+      errorLog("❌ Erreur lors de la mise à jour des notifications:", error);
     }
   }, [
     currentPrayerTimes,
@@ -589,9 +582,7 @@ export default function HomeScreen() {
         currentPrayerTimes.isha || (currentPrayerTimes as any).Isha;
 
       if (ishaTime && now > ishaTime) {
-        console.log(
-          "[DEBUG] 🌙 Isha passé, vérification si reprogrammation nécessaire"
-        );
+        debugLog("🌙 Isha passé, vérification si reprogrammation nécessaire");
         // Mettre à jour automatiquement la date pour demain
         const tomorrow = new Date(now);
         tomorrow.setDate(tomorrow.getDate() + 1);
@@ -599,18 +590,16 @@ export default function HomeScreen() {
 
         // Si on n'est pas déjà sur demain, passer à demain
         if (today.toDateString() !== tomorrow.toDateString()) {
-          console.log("[DEBUG] 📅 Passage automatique au lendemain");
+          debugLog("📅 Passage automatique au lendemain");
           setToday(tomorrow);
 
           // 📱 Forcer la mise à jour du widget pour le nouveau jour
           if (Platform.OS === "android" && AdhanModule) {
             try {
-              console.log(
-                "[DEBUG] 📱 Mise à jour du widget pour le nouveau jour"
-              );
+              debugLog("📱 Mise à jour du widget pour le nouveau jour");
               await AdhanModule.updateWidget?.();
             } catch (error) {
-              console.error("[DEBUG] ❌ Erreur mise à jour widget:", error);
+              errorLog("❌ Erreur mise à jour widget:", error);
             }
           }
         }
@@ -648,7 +637,7 @@ export default function HomeScreen() {
             }
           }
         } catch (error) {
-          console.error("Erreur reverse geocoding:", error);
+          errorLog("Erreur reverse geocoding:", error);
           setCity("Erreur de localisation");
         }
       } else {
@@ -662,6 +651,28 @@ export default function HomeScreen() {
     settings.manualLocation?.city,
     location?.coords?.latitude,
     location?.coords?.longitude,
+  ]);
+
+  // 🎯 Afficher la modal de personnalisation après configuration de la localisation
+  useEffect(() => {
+    // Vérifier si il faut afficher la modal de personnalisation
+    if (
+      settings.isFirstTime &&
+      settings.locationMode !== null &&
+      !settings.userFirstName &&
+      currentPrayerTimes // S'assurer que tout est bien configuré
+    ) {
+      const timer = setTimeout(() => {
+        setShowPersonalizationModal(true);
+      }, 1500); // Petit délai pour laisser l'interface se stabiliser
+
+      return () => clearTimeout(timer);
+    }
+  }, [
+    settings.isFirstTime,
+    settings.locationMode,
+    settings.userFirstName,
+    currentPrayerTimes,
   ]);
 
   // Si c'est en cours de chargement
@@ -725,7 +736,7 @@ export default function HomeScreen() {
                 try {
                   await settings.refreshAutoLocation();
                 } catch (error) {
-                  console.error("Erreur refresh auto location:", error);
+                  errorLog("Erreur refresh auto location:", error);
                 }
               }}
             >
@@ -917,8 +928,20 @@ export default function HomeScreen() {
             ]}
           >
             <View style={styles.welcomeSection}>
-              <Text style={styles.welcomeText}>{t("dashboard_welcome")}</Text>
-              <Text style={styles.dateText}>
+              <Text
+                style={styles.welcomeText}
+                numberOfLines={2}
+                ellipsizeMode="tail"
+              >
+                {settings.userFirstName
+                  ? `${t("dashboard_welcome")} ${settings.userFirstName}`
+                  : t("dashboard_welcome")}
+              </Text>
+              <Text
+                style={styles.dateText}
+                numberOfLines={1}
+                ellipsizeMode="tail"
+              >
                 {new Date().toLocaleDateString(
                   i18n.language.startsWith("ar")
                     ? "ar"
@@ -969,7 +992,11 @@ export default function HomeScreen() {
                     size={16}
                     color="#4ECDC4"
                   />
-                  <Text style={styles.locationText}>
+                  <Text
+                    style={styles.locationText}
+                    numberOfLines={1}
+                    ellipsizeMode="tail"
+                  >
                     {city}
                     {settings.locationMode === "manual" && " (Manuel)"}
                   </Text>
@@ -1531,6 +1558,20 @@ export default function HomeScreen() {
           </View>
         </ScrollView>
       </ImageBackground>
+
+      {/* 🎯 Modal de personnalisation */}
+      <WelcomePersonalizationModal
+        visible={showPersonalizationModal}
+        onConfirm={(firstName) => {
+          settings.setUserFirstName(firstName);
+          settings.setIsFirstTime(false);
+          setShowPersonalizationModal(false);
+        }}
+        onSkip={() => {
+          settings.setIsFirstTime(false);
+          setShowPersonalizationModal(false);
+        }}
+      />
     </>
   );
 }
@@ -1586,13 +1627,14 @@ const styles = StyleSheet.create({
   locationRow: {
     flexDirection: "row",
     alignItems: "center",
-    marginTop: 8,
+    marginTop: 6,
     backgroundColor: "rgba(78, 205, 196, 0.1)",
-    paddingHorizontal: 12,
-    paddingVertical: 6,
+    paddingHorizontal: 10,
+    paddingVertical: 4,
     borderRadius: 12,
     borderWidth: 1,
     borderColor: "rgba(78, 205, 196, 0.2)",
+    maxWidth: "90%",
   },
   settingsButton: {
     padding: 12,
@@ -1600,6 +1642,11 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(255, 255, 255, 0.1)",
     borderWidth: 1,
     borderColor: "rgba(255, 255, 255, 0.2)",
+    minWidth: 48,
+    minHeight: 48,
+    justifyContent: "center",
+    alignItems: "center",
+    flexShrink: 0,
   },
   dateNavigationContainer: {
     marginBottom: 16,
@@ -2350,7 +2397,7 @@ const styles = StyleSheet.create({
   // Styles pour le header
   dashboardHeader: {
     flexDirection: "row",
-    alignItems: "center",
+    alignItems: "flex-start",
     justifyContent: "space-between",
     padding: 16,
     backgroundColor: "rgba(0, 0, 0, 0.3)",
@@ -2363,25 +2410,32 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 12,
     elevation: 8,
+    minHeight: 80,
   },
 
   welcomeSection: {
+    flex: 1,
     flexDirection: "column",
     alignItems: "flex-start",
+    marginRight: 16,
+    maxWidth: "70%",
+    paddingRight: 8,
   },
 
   welcomeText: {
-    fontSize: 28,
+    fontSize: 20,
     fontWeight: "800",
     color: "#fffbe8",
     marginBottom: 4,
     textShadowColor: "rgba(0, 0, 0, 0.3)",
     textShadowOffset: { width: 0, height: 2 },
     textShadowRadius: 4,
+    flexWrap: "wrap",
+    lineHeight: 24,
   },
 
   dateText: {
-    fontSize: 16,
+    fontSize: 14,
     color: "rgba(255, 255, 255, 0.9)",
     fontWeight: "600",
     textShadowColor: "rgba(0, 0, 0, 0.2)",

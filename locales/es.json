@@ -368,7 +368,9 @@
   "prayer_step_4_detail": "Inclinarse (Ruku), manos en las rodillas, glorificar a Allah",
   "prayer_step_5_detail": "Prosternarse (Sujud), frente en el suelo, glorificar a Allah",
   "prayer_step_6_detail": "Posición sentada (Tashahhud) para el testimonio de fe",
-  "prayer_step_7_detail": "Terminar con el Salam girando la cabeza a la derecha y luego a la izquierda",
+  "prayer_step_7_detail": "Finalizar la oración con el Salam girando la cabeza a la derecha y luego a la izquierda",
+  "prayer_step_8": "Último Tashahhud: Oraciones sobre el Profeta e invocaciones",
+  "prayer_step_8_detail": "En el último tashahhud, recitar las oraciones sobre el Profeta (Salawat) y luego la invocación de protección",
   "salam_dua": "السَّلاَمُ عَلَيْكُمْ وَرَحْمَةُ اللهِ",
   "salam_phonetic": "Assalamu alaykum wa rahmatullah",
   "salam_translation": "La paz y misericordia de Allah sean con vosotros",
@@ -380,5 +382,10 @@
   "full_tashahhud_translation": "Todas las salutaciones, oraciones y cosas buenas pertenecen a Allah. La paz sea contigo, oh Profeta, y la misericordia de Allah y Sus bendiciones. La paz sea con nosotros y con los siervos justos de Allah. Atestiguo que no hay más dios que Allah, y atestiguo que Muhammad es Su siervo y mensajero.\n\nOh Allah, envía Tus bendiciones sobre Muhammad y la familia de Muhammad, como enviaste Tus bendiciones sobre Ibrahim y la familia de Ibrahim, Tú eres verdaderamente Digno de alabanza y glorioso. Oh Allah, bendice a Muhammad y la familia de Muhammad, como bendijiste a Ibrahim y la familia de Ibrahim, Tú eres verdaderamente Digno de alabanza y glorioso.\n\nOh Allah, busco refugio en Ti del castigo del Infierno, del castigo de la tumba, de las pruebas de la vida y la muerte, y del mal de la prueba del falso Mesías (al-Masīḥ ad-Dajjāl).",
   "first_time_welcome": "¡Bienvenido! Elige tu método de ubicación:",
   "asmaulhusna": "Asmaul Husna",
-  "asmaulhusna_title": "Los 99 Nombres de Allah"
+  "asmaulhusna_title": "Los 99 Nombres de Allah",
+  "welcome_personalization_title": "Personalización de bienvenida",
+  "welcome_personalization_description": "Para ofrecerte una experiencia más personal, ¿podrías decirnos tu nombre?",
+  "welcome_personalization_placeholder": "Tu nombre (opcional)",
+  "welcome_personalization_confirm": "Confirmar",
+  "welcome_personalization_skip": "Omitir"
 }

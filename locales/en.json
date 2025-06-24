@@ -298,6 +298,11 @@
   "time_until_sunset": "Time until sunset",
 
   "dashboard_welcome": "Assalamu Alaykum",
+  "welcome_personalization_title": "Welcome personalization",
+  "welcome_personalization_description": "To offer you a more personal experience, could you tell us your first name?",
+  "welcome_personalization_placeholder": "Your first name (optional)",
+  "welcome_personalization_confirm": "Confirm",
+  "welcome_personalization_skip": "Skip",
   "next_prayer_label": "Next Prayer",
   "countdown_in": "In",
   "dua_du_jour": "Dua of the Day",

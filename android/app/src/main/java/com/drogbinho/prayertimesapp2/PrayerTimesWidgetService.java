@@ -10,6 +10,8 @@ import android.util.Log;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import static com.drogbinho.prayertimesapp2.ConditionalLogger.*;
+
 public class PrayerTimesWidgetService extends RemoteViewsService {
     @Override
     public RemoteViewsFactory onGetViewFactory(Intent intent) {
@@ -37,7 +39,7 @@ class WidgetRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory 
         // Préparer les données pour l'affichage
         widgetItems.clear();
 
-        Log.d(TAG, "🔄 onDataSetChanged - Préparation des données widget");
+        widgetDebugLog(TAG, "🔄 onDataSetChanged - Préparation des données widget");
 
         // TITRE avec date (mise à jour en temps réel)
         Calendar calendar = Calendar.getInstance();
@@ -48,7 +50,7 @@ class WidgetRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory 
         String titleTranslation = PrayerTimesWidget.getTranslation(context, "widget_title");
         String fullTitle = titleTranslation + "\n📅 " + todayDate;
 
-        Log.d(TAG, "📅 Widget mis à jour pour la date: " + todayDate);
+        widgetDebugLog(TAG, "📅 Widget mis à jour pour la date: " + todayDate);
         widgetItems.add(new WidgetItem(fullTitle, "", false, false, true, false));
 
         // LIGNE VIDE pour l'espacement
@@ -139,7 +141,7 @@ class WidgetRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory 
             }
         }
 
-        Log.d(TAG, "✅ Données préparées: " + widgetItems.size() + " éléments");
+        widgetDebugLog(TAG, "✅ Données préparées: " + widgetItems.size() + " éléments");
     }
 
     private String getEmojiForPrayer(String prayer) {

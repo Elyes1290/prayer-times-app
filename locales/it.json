@@ -340,14 +340,20 @@
   "prayer_step_4_detail": "Inclinarsi in avanti (Ruku), mani sulle ginocchia, dire il Tasbih del Ruku almeno 3 volte",
   "prayer_step_5_detail": "Prostrarsi (Sujud), fronte a terra, dire il Tasbih del Sujud almeno 3 volte",
   "prayer_step_6_detail": "Posizione seduta (Tashahhud) per la testimonianza di fede",
-  "prayer_step_7_detail": "Terminare con il Salam girando la testa a destra poi a sinistra",
-  "prayer_step_8": "Ultimo Tashahhud: preghiere per il Profeta e suppliche",
-  "prayer_step_8_detail": "Durante l'ultimo Tashahhud, recitare le preghiere per il Profeta (Salawat) poi la preghiera di protezione",
+  "prayer_step_7_detail": "Terminare con il Salam girando la testa a destra e poi a sinistra",
+  "prayer_step_8": "Ultimo Tashahhud: Preghiere sul Profeta e invocazioni",
+  "prayer_step_8_detail": "Nell'ultimo tashahhud, recitare le preghiere sul Profeta (Salawat) e poi l'invocazione di protezione",
   "prayer_step_recitation": "Recitare Al-Fatiha e una sura",
   "salam_dua": "السَّلاَمُ عَلَيْكُمْ وَرَحْمَةُ اللهِ",
   "salam_phonetic": "Assalamu alaykum wa rahmatullah",
   "salam_translation": "La pace e la misericordia di Allah siano con voi",
   "tashahhud_dua": "التَّحِيَّاتُ لِلَّهِ، وَالصَّلَوَاتُ وَالطَّيِّبَاتُ، السَّلاَمُ عَلَيْكَ أَيُّهَا النَّبِيُّ وَرَحْمَةُ اللهِ وَبَرَكَاتُهُ، السَّلاَمُ عَلَيْنَا وَعَلَى عِبَادِ اللهِ الصَّالِحِينَ، أَشْهَدُ أَنْ لاَ إِلَهَ إِلاَّ اللهُ، وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ",
   "tashahhud_phonetic": "At-taḥiyyātu lillāh, waṣ-ṣalawātu waṭ-ṭayyibāt. As-salāmu 'alayka ayyuhan-nabiyyu wa raḥmatullāhi wa barakātuh. As-salāmu 'alaynā wa 'alā 'ibādillāhiṣ-ṣāliḥīn. Ash-hadu allā ilāha illa Allāh, wa ash-hadu anna Muḥammadan 'abduhu wa rasūluh.",
-  "tashahhud_translation": "Tutti i saluti, le preghiere e le cose buone appartengono ad Allah. La pace sia su di te, o Profeta, e la misericordia di Allah e le Sue benedizioni. La pace sia su di noi e sui giusti servi di Allah. Testimonio che non c'è altro dio all'infuori di Allah, e testimonio che Muhammad è Suo servo e messaggero."
+  "tashahhud_translation": "Tutti i saluti, le preghiere e le cose buone appartengono ad Allah. La pace sia su di te, o Profeta, e la misericordia di Allah e le Sue benedizioni. La pace sia su di noi e sui giusti servi di Allah. Testimonio che non c'è altro dio all'infuori di Allah, e testimonio che Muhammad è Suo servo e messaggero.",
+
+  "welcome_personalization_title": "Personalizzazione di benvenuto",
+  "welcome_personalization_description": "Per offrirti un'esperienza più personale, potresti dirci il tuo nome?",
+  "welcome_personalization_placeholder": "Il tuo nome (opzionale)",
+  "welcome_personalization_confirm": "Conferma",
+  "welcome_personalization_skip": "Salta"
 }

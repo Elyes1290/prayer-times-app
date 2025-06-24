@@ -10,6 +10,8 @@ import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 import java.util.Calendar;
 
+import static com.drogbinho.prayertimesapp2.ConditionalLogger.*;
+
 public class DhikrService extends Service {
     private static final String CHANNEL_ID = "dhikr_service";
     private static final int NOTIFICATION_ID = 3;
@@ -17,8 +19,8 @@ public class DhikrService extends Service {
 
     @Override
     public void onCreate() {
-        Log.d("DhikrService", "🚀 DhikrService onCreate() DÉBUT");
         super.onCreate();
+        notificationDebugLog("DhikrService", "🚀 DhikrService onCreate() DÉBUT");
         try {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 NotificationChannel channel = new NotificationChannel(
@@ -33,20 +35,19 @@ public class DhikrService extends Service {
                 NotificationManager manager = getSystemService(NotificationManager.class);
                 if (manager != null)
                     manager.createNotificationChannel(channel);
-                Log.d("DhikrService", "✅ NotificationChannel créé/vérifié.");
+                notificationDebugLog("DhikrService", "✅ NotificationChannel créé/vérifié.");
             }
         } catch (Exception e) {
-            Log.e("DhikrService", "❌ ERREUR dans onCreate(): " + e.getMessage(), e);
+            notificationDebugLog("DhikrService", "❌ ERREUR dans onCreate(): " + e.getMessage(), e);
         }
-        Log.d("DhikrService", "🏁 DhikrService onCreate() FIN");
+        notificationDebugLog("DhikrService", "🏁 DhikrService onCreate() FIN");
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        // 🔥 LOG DE DÉMARRAGE IMMÉDIAT
-        Log.d("DhikrService", "🚀 SERVICE DÉMARRÉ! Intent: " + (intent != null ? intent.toString() : "null")
-                + ", Extras: "
-                + (intent != null && intent.getExtras() != null ? intent.getExtras().toString() : "null_extras"));
+        notificationDebugLog("DhikrService",
+                "🚀 SERVICE DÉMARRÉ! Intent: " + (intent != null ? intent.toString() : "null")
+                        + " | flags: " + flags + " | startId: " + startId);
 
         // ⚡ DÉMARRE EN FOREGROUND IMMÉDIATEMENT pour éviter le crash
         NotificationCompat.Builder tempBuilder = new NotificationCompat.Builder(this, CHANNEL_ID)
@@ -68,17 +69,18 @@ public class DhikrService extends Service {
         String title = intent != null ? intent.getStringExtra("TITLE") : null;
         String body = intent != null ? intent.getStringExtra("BODY") : null;
 
-        Log.d("DhikrService", "-> onStartCommand: action=" + action + " | type=" + type + " | prayer=" + prayerLabel);
+        notificationDebugLog("DhikrService",
+                "-> onStartCommand: action=" + action + " | type=" + type + " | prayer=" + prayerLabel);
 
         // Récupère la langue actuelle
         SharedPreferences settings = getSharedPreferences("prayer_times_settings", MODE_PRIVATE);
         String currentLanguage = settings.getString("current_language", "en");
-        Log.d("DhikrService", "📱 Langue actuelle : " + currentLanguage);
+        notificationDebugLog("DhikrService", "📱 Langue actuelle : " + currentLanguage);
 
         // 🕒 DIAGNOSTIC TEMPOREL PRÉCIS
         long now = System.currentTimeMillis();
         java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("HH:mm:ss.SSS", java.util.Locale.getDefault());
-        Log.d("DhikrService", "🕒 Heure exacte déclenchement: " + sdf.format(new java.util.Date(now)));
+        notificationDebugLog("DhikrService", "🕒 Heure exacte déclenchement: " + sdf.format(new java.util.Date(now)));
 
         // ✅ PATTERN IDENTIQUE à PrayerReminderService : vérification simple
         // anti-doublon
@@ -92,7 +94,7 @@ public class DhikrService extends Service {
 
             // Ne bloque que si le même dhikr a été déclenché dans la dernière heure
             if (now - lastDone < oneHour) {
-                Log.d("DhikrService",
+                notificationDebugLog("DhikrService",
                         "⚠️ Déjà notifié récemment pour " + type + " - " + prayerLabel + " (il y a " +
                                 ((now - lastDone) / 60000) + " minutes), on ignore !");
                 stopSelf();
@@ -117,7 +119,7 @@ public class DhikrService extends Service {
                 PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
         // Log les valeurs reçues pour déboguer
-        Log.d("DhikrService", "📨 Valeurs reçues: title='" + title + "' | body='" + body + "'");
+        notificationDebugLog("DhikrService", "📨 Valeurs reçues: title='" + title + "' | body='" + body + "'");
 
         // Crée la notification finale avec BigTextStyle pour afficher le texte complet
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
