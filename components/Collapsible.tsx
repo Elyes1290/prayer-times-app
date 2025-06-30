@@ -4,13 +4,14 @@ import { StyleSheet, TouchableOpacity } from "react-native";
 
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
-import { Colors } from "@/constants/Colors";
+import { useThemeColor } from "@/hooks/useThemeColor";
 
 export function Collapsible({
   children,
   title,
 }: PropsWithChildren & { title: string }) {
   const [isOpen, setIsOpen] = useState(false);
+  const iconColor = useThemeColor({}, "text");
 
   return (
     <ThemedView>
@@ -23,7 +24,7 @@ export function Collapsible({
           name={isOpen ? "chevron-down" : "chevron-forward-outline"}
           size={18}
           weight="medium"
-          color={Colors.text}
+          color={iconColor}
         />
         <ThemedText type="defaultSemiBold">{title}</ThemedText>
       </TouchableOpacity>

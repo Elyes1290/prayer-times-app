@@ -6,6 +6,12 @@
   "enter_city_name": "Entrer le nom de votre ville",
   "enable_auto_location": "Activer la localisation automatique (GPS)",
   "unknown_city": "Ville inconnue",
+
+  "appearance": "Apparence",
+  "theme_mode": "Mode d'affichage",
+  "theme_auto": "Auto",
+  "theme_light": "Jour",
+  "theme_dark": "Nuit",
   "notifications_disabled_title": "Notifications désactivées",
   "notifications_disabled_message": "Pour recevoir les notifications, active-les dans les paramètres.",
   "open_settings": "Ouvrir les paramètres",
@@ -105,7 +111,7 @@
     "title": "À propos de l'application",
     "subtitle": "Application islamique complète",
     "welcome": "Bienvenue dans votre compagnon spirituel !",
-    "description": "Cette application gratuite vous accompagne au quotidien dans votre pratique religieuse : horaires de prière précis, direction de la Qibla, lecture du Coran, dhikr automatiques, hadiths authentiques, calendrier Hijri et bien plus encore.",
+    "description": "Cette application gratuite (actuellement sans publicité) vous accompagne au quotidien dans votre pratique religieuse : horaires de prière précis, direction de la Qibla, lecture du Coran, dhikr automatiques, hadiths authentiques, calendrier Hijri et bien plus encore. Une version premium sans publicité avec des fonctionnalités exclusives sera bientôt disponible.",
     "blessing": "بارك الله فيكم - Qu'Allah vous bénisse",
 
     "features_title": "🌟 Fonctionnalités complètes",
@@ -159,10 +165,10 @@
 
     "legal_title": "⚖️ Mentions légales",
     "privacy_policy": "Politique de confidentialité",
-    "privacy_policy_content": "Cette application respecte votre vie privée :\n\n• Vos données restent sur votre appareil\n• Aucune collecte d'informations personnelles\n• Localisation utilisée uniquement pour les calculs\n• Aucune publicité ni tracking\n• Application gratuite et sans collecte de données",
+    "privacy_policy_content": "Cette application respecte votre vie privée :\n\n• Vos données restent sur votre appareil\n• Aucune collecte d'informations personnelles\n• Localisation utilisée uniquement pour les calculs\n• Aucune publicité actuellement\n• Application gratuite avec version premium à venir",
     "terms_of_use": "Conditions d'utilisation",
     "terms_title": "Conditions d'utilisation",
-    "terms_content": "En utilisant cette application :\n\n• Vous acceptez de l'utiliser conformément aux valeurs islamiques\n• L'application est fournie gratuitement\n• Le développeur fait de son mieux pour assurer la précision\n• Vérifiez toujours avec votre mosquée locale\n• L'utilisation est à vos propres risques",
+    "terms_content": "En utilisant cette application :\n\n• Vous acceptez de l'utiliser conformément aux valeurs islamiques\n• L'application propose une version gratuite et une version premium\n• Le développeur fait de son mieux pour assurer la précision\n• Vérifiez toujours avec votre mosquée locale\n• L'utilisation est à vos propres risques",
     "understand": "J'ai compris",
 
     "version": "Version",

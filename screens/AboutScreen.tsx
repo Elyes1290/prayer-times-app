@@ -12,10 +12,12 @@ import {
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useTranslation } from "react-i18next";
+import ThemedImageBackground from "../components/ThemedImageBackground";
 
 export default function AboutScreen() {
   const { t } = useTranslation();
   const [expandedFAQ, setExpandedFAQ] = useState<number | null>(null);
+  // Les couleurs sont maintenant gérées via le système de thème dans Colors.ts
 
   const appVersion = "1.0.0";
   const buildNumber = "14";
@@ -91,11 +93,7 @@ export default function AboutScreen() {
   );
 
   return (
-    <ImageBackground
-      source={require("../assets/images/prayer-bg.png")}
-      style={styles.background}
-      resizeMode="cover"
-    >
+    <ThemedImageBackground style={styles.background}>
       <ScrollView
         style={styles.container}
         showsVerticalScrollIndicator={false}
@@ -253,7 +251,7 @@ export default function AboutScreen() {
 
         <View style={{ height: 50 }} />
       </ScrollView>
-    </ImageBackground>
+    </ThemedImageBackground>
   );
 }
 
@@ -264,7 +262,7 @@ const styles = StyleSheet.create({
   logo: { width: 80, height: 80, borderRadius: 24, marginBottom: 12 },
   title: {
     fontSize: 28,
-    color: "#fff",
+    color: "#fffbe8",
     fontWeight: "bold",
     marginBottom: 4,
     fontFamily: "ScheherazadeNew",
@@ -460,7 +458,7 @@ const styles = StyleSheet.create({
   },
   dua: {
     marginTop: 8,
-    color: "#fff",
+    color: "#fffbe8",
     textAlign: "center",
     fontSize: 16,
     fontFamily: "ScheherazadeNew",

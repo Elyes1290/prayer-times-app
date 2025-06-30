@@ -80,7 +80,7 @@
     "title": "Acerca de la aplicación",
     "subtitle": "Aplicación islámica completa",
     "welcome": "¡Bienvenido a tu compañero espiritual!",
-    "description": "Esta aplicación gratuita te acompaña diariamente en tu práctica religiosa: horarios de oración precisos, dirección de la Qibla, lectura del Corán, dhikr automáticos, hadiths auténticos, calendario Hijri y mucho más.",
+    "description": "Esta aplicación gratuita (actualmente sin publicidad) te acompaña diariamente en tu práctica religiosa: horarios de oración precisos, dirección de la Qibla, lectura del Corán, dhikr automáticos, hadiths auténticos, calendario Hijri y mucho más. Pronto estará disponible una versión premium sin publicidad con funciones exclusivas.",
     "blessing": "بارك الله فيكم - Que Allah os bendiga",
 
     "features_title": "🌟 Funciones completas",
@@ -134,10 +134,10 @@
 
     "legal_title": "⚖️ Información legal",
     "privacy_policy": "Política de privacidad",
-    "privacy_policy_content": "Esta aplicación respeta tu privacidad:\n\n• Tus datos permanecen en tu dispositivo\n• No se recopila información personal\n• La ubicación se usa solo para cálculos\n• Sin publicidad ni seguimiento\n• Aplicación gratuita sin recopilación de datos",
+    "privacy_policy_content": "Esta aplicación respeta tu privacidad:\n\n• Tus datos permanecen en tu dispositivo\n• No se recopila información personal\n• La ubicación se usa solo para cálculos\n• Actualmente sin publicidad\n• Aplicación gratuita con versión premium próximamente",
     "terms_of_use": "Términos de uso",
     "terms_title": "Términos de uso",
-    "terms_content": "Al usar esta aplicación:\n\n• Aceptas usarla de acuerdo con los valores islámicos\n• La aplicación se proporciona gratuitamente\n• El desarrollador hace su mejor esfuerzo para garantizar la precisión\n• Siempre verifica con tu mezquita local\n• El uso es bajo tu propio riesgo",
+    "terms_content": "Al usar esta aplicación:\n\n• Aceptas usarla de acuerdo con los valores islámicos\n• La aplicación ofrece una versión gratuita y una versión premium\n• El desarrollador hace su mejor esfuerzo para garantizar la precisión\n• Siempre verifica con tu mezquita local\n• El uso es bajo tu propio riesgo",
     "understand": "Entiendo",
 
     "version": "Versión",
