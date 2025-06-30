@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Modal,
   View,
@@ -8,12 +8,15 @@ import {
   StyleSheet,
   Dimensions,
   StatusBar,
+  Keyboard,
+  Animated,
+  Platform,
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import { useTranslation } from "react-i18next";
 
-const { width: screenWidth } = Dimensions.get("window");
+const { width: screenWidth, height: screenHeight } = Dimensions.get("window");
 
 interface WelcomePersonalizationModalProps {
   visible: boolean;
@@ -28,9 +31,44 @@ export default function WelcomePersonalizationModal({
 }: WelcomePersonalizationModalProps) {
   const { t } = useTranslation();
   const [firstName, setFirstName] = useState("");
+  const [keyboardOffset] = useState(new Animated.Value(0));
+
+  useEffect(() => {
+    const showSubscription = Keyboard.addListener("keyboardDidShow", (e) => {
+      // Calculer le décalage nécessaire pour remonter le modal
+      const keyboardHeight = e.endCoordinates.height;
+      const offset =
+        Platform.OS === "ios" ? -keyboardHeight / 2 : -keyboardHeight / 3;
+
+      Animated.timing(keyboardOffset, {
+        toValue: offset,
+        duration: 250,
+        useNativeDriver: true,
+      }).start();
+    });
+
+    const hideSubscription = Keyboard.addListener("keyboardDidHide", () => {
+      Animated.timing(keyboardOffset, {
+        toValue: 0,
+        duration: 250,
+        useNativeDriver: true,
+      }).start();
+    });
+
+    return () => {
+      showSubscription?.remove();
+      hideSubscription?.remove();
+    };
+  }, [keyboardOffset]);
 
   const handleConfirm = () => {
+    Keyboard.dismiss();
     onConfirm(firstName.trim() || null);
+  };
+
+  const handleSkip = () => {
+    Keyboard.dismiss();
+    onSkip();
   };
 
   return (
@@ -42,7 +80,14 @@ export default function WelcomePersonalizationModal({
     >
       <StatusBar backgroundColor="rgba(0,0,0,0.7)" />
       <View style={styles.overlay}>
-        <View style={styles.modalContainer}>
+        <Animated.View
+          style={[
+            styles.modalContainer,
+            {
+              transform: [{ translateY: keyboardOffset }],
+            },
+          ]}
+        >
           <LinearGradient
             colors={["rgba(78,205,196,0.15)", "rgba(240,147,251,0.10)"]}
             style={styles.modalGradient}
@@ -96,6 +141,9 @@ export default function WelcomePersonalizationModal({
                   maxLength={20}
                   autoCapitalize="words"
                   autoCorrect={false}
+                  autoFocus={true}
+                  returnKeyType="done"
+                  onSubmitEditing={handleConfirm}
                 />
               </LinearGradient>
             </View>
@@ -105,7 +153,7 @@ export default function WelcomePersonalizationModal({
               {/* Bouton Passer */}
               <TouchableOpacity
                 style={styles.skipButton}
-                onPress={onSkip}
+                onPress={handleSkip}
                 activeOpacity={0.7}
               >
                 <Text style={styles.skipButtonText}>
@@ -138,7 +186,7 @@ export default function WelcomePersonalizationModal({
               </TouchableOpacity>
             </View>
           </LinearGradient>
-        </View>
+        </Animated.View>
       </View>
     </Modal>
   );

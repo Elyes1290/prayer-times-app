@@ -1,6 +1,12 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import React, { createContext, useCallback, useEffect, useState } from "react";
-import { Platform, NativeModules } from "react-native";
+import React, {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
+import { Platform, NativeModules, useColorScheme } from "react-native";
 import * as Location from "expo-location";
 import i18n, { changeLanguage } from "../locales/i18n-optimized";
 import { scheduleNotificationsFor2Days } from "../utils/sheduleAllNotificationsFor30Days";
@@ -71,6 +77,8 @@ export interface SettingsContextType {
   currentLanguage: string;
   userFirstName: string | null;
   isFirstTime: boolean;
+  themeMode: "auto" | "light" | "dark";
+  currentTheme: "light" | "dark";
   setLocationMode: (mode: "auto" | "manual" | null) => void;
   setManualLocation: (
     location: { lat: number; lon: number; city: string } | null
@@ -92,6 +100,7 @@ export interface SettingsContextType {
   setCurrentLanguage: (language: string) => void;
   setUserFirstName: (firstName: string | null) => void;
   setIsFirstTime: (isFirstTime: boolean) => void;
+  setThemeMode: (mode: "auto" | "light" | "dark") => void;
   saveAndReprogramAll: () => Promise<void>;
 }
 
@@ -121,6 +130,8 @@ const defaultSettings: SettingsContextType = {
   currentLanguage: "en",
   userFirstName: null,
   isFirstTime: true,
+  themeMode: "auto",
+  currentTheme: "light",
   setLocationMode: () => {},
   setManualLocation: () => {},
   refreshAutoLocation: async () => {},
@@ -140,6 +151,7 @@ const defaultSettings: SettingsContextType = {
   setCurrentLanguage: () => {},
   setUserFirstName: () => {},
   setIsFirstTime: () => {},
+  setThemeMode: () => {},
   saveAndReprogramAll: async () => {},
 };
 
@@ -180,6 +192,16 @@ export const SettingsProvider = ({
   const [autoLocation, setAutoLocation] = useState<Coords | null>(null);
   const [locationError, setLocationError] = useState<string | null>(null);
   const [isRefreshingLocation, setIsRefreshingLocation] = useState(false);
+
+  // Nouveau : État du thème
+  const [themeMode, setThemeModeState] = useState<"auto" | "light" | "dark">(
+    "auto"
+  );
+  const systemColorScheme = useColorScheme();
+
+  // Calculer le thème actuel basé sur le mode choisi
+  const currentTheme =
+    themeMode === "auto" ? systemColorScheme ?? "light" : themeMode;
 
   const refreshAutoLocation = useCallback(async () => {
     try {
@@ -394,6 +416,31 @@ export const SettingsProvider = ({
     loadSettings();
   }, []); // ✅ Suppression de refreshAutoLocation des dépendances
 
+  // Nouveau : Charger le thème sauvegardé
+  useEffect(() => {
+    const loadTheme = async () => {
+      try {
+        const savedTheme = await AsyncStorage.getItem("theme_mode");
+        if (savedTheme && ["auto", "light", "dark"].includes(savedTheme)) {
+          setThemeModeState(savedTheme as "auto" | "light" | "dark");
+        }
+      } catch (error) {
+        console.error("Erreur lors du chargement du thème:", error);
+      }
+    };
+    loadTheme();
+  }, []);
+
+  // Nouveau : Fonction pour changer le thème
+  const setThemeMode = async (mode: "auto" | "light" | "dark") => {
+    try {
+      setThemeModeState(mode);
+      await AsyncStorage.setItem("theme_mode", mode);
+    } catch (error) {
+      console.error("Erreur lors de la sauvegarde du thème:", error);
+    }
+  };
+
   const handleSetLocationMode = (mode: LocationMode) => {
     setLocationMode(mode);
     if (mode !== null) {
@@ -482,6 +529,8 @@ export const SettingsProvider = ({
     currentLanguage,
     userFirstName,
     isFirstTime,
+    themeMode,
+    currentTheme,
     setLocationMode: handleSetLocationMode,
     setManualLocation: handleSetManualLocation,
     refreshAutoLocation,
@@ -802,6 +851,7 @@ export const SettingsProvider = ({
       setIsFirstTime(isFirst);
       AsyncStorage.setItem("isFirstTime", String(isFirst));
     },
+    setThemeMode,
     saveAndReprogramAll,
   };
 
@@ -810,4 +860,13 @@ export const SettingsProvider = ({
       {children}
     </SettingsContext.Provider>
   );
+};
+
+// Hook pour utiliser le contexte des paramètres
+export const useSettings = () => {
+  const context = useContext(SettingsContext);
+  if (context === undefined) {
+    throw new Error("useSettings must be used within a SettingsProvider");
+  }
+  return context;
 };

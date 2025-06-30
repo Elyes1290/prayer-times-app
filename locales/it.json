@@ -80,7 +80,7 @@
     "title": "Informazioni sull'app",
     "subtitle": "Applicazione islamica completa",
     "welcome": "Benvenuto nel tuo compagno spirituale!",
-    "description": "Questa app gratuita ti accompagna quotidianamente nella tua pratica religiosa: orari di preghiera precisi, direzione della Qibla, lettura del Corano, dhikr automatici, hadith autentici, calendario Hijri e molto altro.",
+    "description": "Questa app gratuita (attualmente senza pubblicità) ti accompagna quotidianamente nella tua pratica religiosa: orari di preghiera precisi, direzione della Qibla, lettura del Corano, dhikr automatici, hadith autentici, calendario Hijri e molto altro. Presto sarà disponibile una versione premium senza pubblicità con funzionalità esclusive.",
     "blessing": "بارك الله فيكم - Che Allah vi benedica",
 
     "features_title": "🌟 Funzioni complete",
@@ -134,10 +134,10 @@
 
     "legal_title": "⚖️ Informazioni legali",
     "privacy_policy": "Politica sulla privacy",
-    "privacy_policy_content": "Questa app rispetta la tua privacy:\n\n• I tuoi dati rimangono sul tuo dispositivo\n• Nessuna raccolta di informazioni personali\n• La posizione è utilizzata solo per i calcoli\n• Nessuna pubblicità o tracciamento\n• App gratuita senza raccolta dati",
+    "privacy_policy_content": "Questa app rispetta la tua privacy:\n\n• I tuoi dati rimangono sul tuo dispositivo\n• Nessuna raccolta di informazioni personali\n• La posizione è utilizzata solo per i calcoli\n• Attualmente nessuna pubblicità\n• App gratuita con versione premium in arrivo",
     "terms_of_use": "Termini di utilizzo",
     "terms_title": "Termini di utilizzo",
-    "terms_content": "Utilizzando questa app:\n\n• Accetti di utilizzarla in conformità ai valori islamici\n• L'app è fornita gratuitamente\n• Lo sviluppatore fa del suo meglio per garantire l'accuratezza\n• Verifica sempre con la tua moschea locale\n• L'uso è a tuo rischio",
+    "terms_content": "Utilizzando questa app:\n\n• Accetti di utilizzarla in conformità ai valori islamici\n• L'app offre una versione gratuita e una versione premium\n• Lo sviluppatore fa del suo meglio per garantire l'accuratezza\n• Verifica sempre con la tua moschea locale\n• L'uso è a tuo rischio",
     "understand": "Ho capito",
 
     "version": "Versione",

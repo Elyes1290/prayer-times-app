@@ -13,14 +13,23 @@ import {
   ActivityIndicator,
   StyleSheet,
   Modal,
+  Alert,
+  Platform,
+  NativeModules,
 } from "react-native";
-import bgImage from "../assets/images/prayer-bg.png";
+import ThemedImageBackground from "../components/ThemedImageBackground";
 import {
   SettingsContext,
   AdhanSoundKey,
   CalcMethodKey,
   SettingsContextType,
 } from "../contexts/SettingsContext";
+import {
+  useThemeColors,
+  useOverlayTextColor,
+  useOverlayIconColor,
+  useCurrentTheme,
+} from "../hooks/useThemeColor";
 import { useCitySearch, NominatimResult } from "../hooks/useCitySearch";
 import { useTranslation } from "react-i18next";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -58,6 +67,7 @@ interface SettingsSectionsProps {
   citySearchResults: NominatimResult[];
   citySearchLoading: boolean;
   isApplyingChanges: boolean;
+  styles: any;
 }
 
 function SettingsSections({
@@ -78,6 +88,7 @@ function SettingsSections({
   citySearchResults,
   citySearchLoading,
   isApplyingChanges,
+  styles,
 }: SettingsSectionsProps) {
   const { t } = useTranslation();
   const {
@@ -583,6 +594,75 @@ function SettingsSections({
         : [],
     },
     {
+      key: "appearance",
+      title: t("appearance", "Apparence"),
+      data: [
+        {
+          key: "theme_mode",
+          component: (
+            <View style={styles.row}>
+              <Text style={styles.label}>
+                {t("theme_mode", "Mode d'affichage")}
+              </Text>
+              <View style={styles.locationToggle}>
+                <TouchableOpacity
+                  style={[
+                    styles.toggleButton,
+                    settings.themeMode === "auto" && styles.toggleButtonActive,
+                  ]}
+                  onPress={() => settings.setThemeMode("auto")}
+                >
+                  <Text
+                    style={[
+                      styles.toggleButtonText,
+                      settings.themeMode === "auto" &&
+                        styles.toggleButtonTextActive,
+                    ]}
+                  >
+                    {t("theme_auto", "Auto")}
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={[
+                    styles.toggleButton,
+                    settings.themeMode === "light" && styles.toggleButtonActive,
+                  ]}
+                  onPress={() => settings.setThemeMode("light")}
+                >
+                  <Text
+                    style={[
+                      styles.toggleButtonText,
+                      settings.themeMode === "light" &&
+                        styles.toggleButtonTextActive,
+                    ]}
+                  >
+                    {t("theme_light", "Jour")}
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={[
+                    styles.toggleButton,
+                    settings.themeMode === "dark" && styles.toggleButtonActive,
+                  ]}
+                  onPress={() => settings.setThemeMode("dark")}
+                >
+                  <Text
+                    style={[
+                      styles.toggleButtonText,
+                      settings.themeMode === "dark" &&
+                        styles.toggleButtonTextActive,
+                    ]}
+                  >
+                    {t("theme_dark", "Nuit")}
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          ),
+        },
+      ],
+    },
+    {
       key: "actions",
       title: t("actions", "Actions"),
       data: [
@@ -633,6 +713,12 @@ export default function SettingsScreen() {
   const settings = useContext(SettingsContext);
   const { t, i18n } = useTranslation();
   const [isPreviewing, setIsPreviewing] = useState(false);
+
+  // Utiliser les couleurs thématiques
+  const colors = useThemeColors();
+  const overlayTextColor = useOverlayTextColor();
+  const overlayIconColor = useOverlayIconColor();
+  const currentTheme = useCurrentTheme();
   const soundRef = useRef<Audio.Sound | null>(null);
   const [cityInput, setCityInput] = useState("");
   const {
@@ -643,6 +729,14 @@ export default function SettingsScreen() {
   } = useCitySearch();
   const [isApplyingChanges, setIsApplyingChanges] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
+
+  // Styles dynamiques basés sur le thème
+  const styles = getStyles(
+    colors,
+    overlayTextColor,
+    overlayIconColor,
+    currentTheme
+  );
 
   useEffect(() => {
     // Initialise le champ de recherche avec la ville manuelle sauvegardée
@@ -800,7 +894,7 @@ export default function SettingsScreen() {
   }
 
   return (
-    <ImageBackground source={bgImage} style={styles.container}>
+    <ThemedImageBackground style={styles.container}>
       <SafeAreaView style={{ flex: 1 }}>
         <Text style={styles.title}>{t("settings_title", "Paramètres")}</Text>
         <SettingsSections
@@ -821,6 +915,7 @@ export default function SettingsScreen() {
           citySearchResults={citySearchResults}
           citySearchLoading={citySearchLoading}
           isApplyingChanges={isApplyingChanges}
+          styles={styles}
         />
       </SafeAreaView>
 
@@ -832,492 +927,563 @@ export default function SettingsScreen() {
         onRequestClose={() => setShowSuccessModal(false)}
       >
         <View style={styles.modalOverlay}>
-          <ImageBackground
-            source={bgImage}
-            style={styles.modalImageBackground}
-            imageStyle={styles.modalImageStyle}
-          >
-            <View style={styles.modalContent}>
-              <View style={styles.modalIconContainer}>
-                <Text style={styles.modalIcon}>🌙</Text>
-              </View>
-              <Text style={styles.modalTitle}>
-                {t("notifications_reprogrammed", "Notifications reprogrammées")}
-              </Text>
-              <Text style={styles.modalMessage}>
-                {t(
-                  "changes_will_be_active",
-                  "Vos nouveaux paramètres seront pris en compte pour les prochaines notifications."
-                )}
-              </Text>
-              <TouchableOpacity
-                style={styles.modalButton}
-                onPress={() => setShowSuccessModal(false)}
-              >
-                <Text style={styles.modalButtonText}>✨ بارك الله فيك ✨</Text>
-              </TouchableOpacity>
+          <View style={styles.modalContent}>
+            <View style={styles.modalIconContainer}>
+              <Text style={styles.modalIcon}>🌙</Text>
             </View>
-          </ImageBackground>
+            <Text style={styles.modalTitle}>
+              {t("notifications_reprogrammed", "Notifications reprogrammées")}
+            </Text>
+            <Text style={styles.modalMessage}>
+              {t(
+                "changes_will_be_active",
+                "Vos nouveaux paramètres seront pris en compte pour les prochaines notifications."
+              )}
+            </Text>
+            <TouchableOpacity
+              style={styles.modalButton}
+              onPress={() => setShowSuccessModal(false)}
+            >
+              <Text style={styles.modalButtonText}>✨ بارك الله فيك ✨</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </Modal>
-    </ImageBackground>
+    </ThemedImageBackground>
   );
 }
 
-const styles = StyleSheet.create({
-  loadingContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  loadingText: {
-    marginTop: 15,
-    fontSize: 16,
-    color: "#F8FAFC",
-    fontWeight: "500",
-    textShadowColor: "rgba(0,0,0,0.8)",
-    textShadowOffset: { width: 0, height: 1 },
-    textShadowRadius: 4,
-  },
-  errorText: {
-    fontSize: 16,
-    color: "#FEF2F2",
-    textAlign: "center",
-    marginHorizontal: 20,
-    fontWeight: "500",
-    textShadowColor: "rgba(0,0,0,0.8)",
-    textShadowOffset: { width: 0, height: 1 },
-    textShadowRadius: 4,
-  },
-  container: {
-    flex: 1,
-  },
-  title: {
-    fontSize: 32,
-    fontWeight: "800",
-    color: "#FFFFFF",
-    marginBottom: 8,
-    marginTop: 16,
-    textAlign: "center",
-    letterSpacing: -0.5,
-    textShadowColor: "rgba(0,0,0,0.7)",
-    textShadowOffset: { width: 0, height: 2 },
-    textShadowRadius: 8,
-  },
-  sectionHeader: {
-    fontSize: 18,
-    fontWeight: "700",
-    color: "#D4AF37",
-    backgroundColor: "rgba(15, 23, 42, 0.85)",
-    paddingVertical: 16,
-    paddingHorizontal: 20,
-    marginVertical: 12,
-    marginHorizontal: 16,
-    borderRadius: 16,
-    shadowColor: "#D4AF37",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 12,
-    elevation: 8,
-    borderWidth: 1,
-    borderColor: "rgba(212, 175, 55, 0.3)",
-    overflow: "hidden",
-    textShadowColor: "rgba(0,0,0,0.8)",
-    textShadowOffset: { width: 0, height: 1 },
-    textShadowRadius: 4,
-  },
-  listContentContainer: {
-    padding: 16,
-    paddingBottom: 32,
-  },
-  row: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    paddingVertical: 20,
-    paddingHorizontal: 24,
-    marginVertical: 6,
-    backgroundColor: "rgba(15, 23, 42, 0.75)",
-    borderRadius: 16,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.4,
-    shadowRadius: 12,
-    elevation: 6,
-    borderWidth: 1,
-    borderColor: "rgba(148, 163, 184, 0.2)",
-    backdropFilter: "blur(10px)",
-  },
-  label: {
-    fontSize: 16,
-    color: "#F8FAFC",
-    flex: 1,
-    fontWeight: "600",
-    letterSpacing: -0.2,
-    textShadowColor: "rgba(0,0,0,0.8)",
-    textShadowOffset: { width: 0, height: 1 },
-    textShadowRadius: 2,
-  },
-  subLabel: {
-    fontSize: 15,
-    color: "#CBD5E1",
-    marginLeft: 16,
-    flex: 1,
-    fontWeight: "500",
-    textShadowColor: "rgba(0,0,0,0.6)",
-    textShadowOffset: { width: 0, height: 1 },
-    textShadowRadius: 2,
-  },
-  input: {
-    backgroundColor: "rgba(30, 41, 59, 0.9)",
-    color: "#F8FAFC",
-    padding: 16,
-    borderRadius: 12,
-    marginBottom: 12,
-    fontSize: 16,
-    borderWidth: 2,
-    borderColor: "rgba(148, 163, 184, 0.3)",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 8,
-    elevation: 4,
-  },
-  locationToggle: {
-    flexDirection: "row",
-    justifyContent: "center",
-    marginBottom: 24,
-    backgroundColor: "rgba(15, 23, 42, 0.8)",
-    borderRadius: 16,
-    padding: 6,
-    borderWidth: 1,
-    borderColor: "rgba(148, 163, 184, 0.3)",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 8,
-    elevation: 4,
-  },
-  toggleButton: {
-    paddingVertical: 14,
-    paddingHorizontal: 28,
-    borderRadius: 12,
-    marginHorizontal: 3,
-    minWidth: 110,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  toggleButtonActive: {
-    backgroundColor: "rgba(212, 175, 55, 0.9)",
-    shadowColor: "#D4AF37",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.5,
-    shadowRadius: 8,
-    elevation: 6,
-    borderWidth: 1,
-    borderColor: "rgba(212, 175, 55, 0.5)",
-  },
-  toggleButtonText: {
-    color: "#94A3B8",
-    fontSize: 15,
-    fontWeight: "600",
-    letterSpacing: -0.2,
-    textShadowColor: "rgba(0,0,0,0.6)",
-    textShadowOffset: { width: 0, height: 1 },
-    textShadowRadius: 2,
-  },
-  toggleButtonTextActive: {
-    color: "#FFFFFF",
-    textShadowColor: "rgba(0,0,0,0.8)",
-    textShadowOffset: { width: 0, height: 1 },
-    textShadowRadius: 2,
-  },
-  autoLocationSection: {
-    alignItems: "center",
-    padding: 24,
-    backgroundColor: "rgba(15, 23, 42, 0.8)",
-    borderRadius: 16,
-    borderWidth: 1,
-    borderColor: "rgba(148, 163, 184, 0.3)",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 12,
-    elevation: 6,
-    marginTop: 16,
-  },
-  refreshButton: {
-    backgroundColor: "rgba(212, 175, 55, 0.9)",
-    paddingVertical: 14,
-    paddingHorizontal: 28,
-    borderRadius: 12,
-    marginBottom: 16,
-    shadowColor: "#D4AF37",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.4,
-    shadowRadius: 8,
-    elevation: 6,
-    borderWidth: 1,
-    borderColor: "rgba(212, 175, 55, 0.5)",
-  },
-  refreshButtonText: {
-    color: "#FFFFFF",
-    fontSize: 15,
-    fontWeight: "600",
-    textAlign: "center",
-    letterSpacing: -0.2,
-    textShadowColor: "rgba(0,0,0,0.8)",
-    textShadowOffset: { width: 0, height: 1 },
-    textShadowRadius: 2,
-  },
-  locationText: {
-    color: "#CBD5E1",
-    fontSize: 14,
-    textAlign: "center",
-    lineHeight: 20,
-    fontWeight: "500",
-    textShadowColor: "rgba(0,0,0,0.6)",
-    textShadowOffset: { width: 0, height: 1 },
-    textShadowRadius: 2,
-  },
-  resultsList: {
-    backgroundColor: "rgba(30, 41, 59, 0.95)",
-    borderRadius: 12,
-    marginTop: 8,
-    borderWidth: 1,
-    borderColor: "rgba(148, 163, 184, 0.3)",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.4,
-    shadowRadius: 12,
-    elevation: 6,
-    overflow: "hidden",
-  },
-  resultItem: {
-    padding: 16,
-    borderBottomWidth: 1,
-    borderBottomColor: "rgba(148, 163, 184, 0.2)",
-  },
-  picker: {
-    color: "#F8FAFC",
-    backgroundColor: "rgba(30, 41, 59, 0.95)",
-    borderRadius: 8,
-    fontWeight: "500",
-    height: 50,
-    width: "100%",
-  },
-  pickerItem: {
-    fontSize: 16,
-    color: "#F8FAFC",
-    fontWeight: "500",
-    backgroundColor: "rgba(15, 23, 42, 0.98)",
-  },
-  pickerContainer: {
-    backgroundColor: "rgba(30, 41, 59, 0.95)",
-    borderRadius: 12,
-    borderWidth: 1,
-    borderColor: "rgba(212, 175, 55, 0.4)",
-    overflow: "hidden",
-    height: 50,
-    justifyContent: "center",
-    minWidth: 140,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.3,
-    shadowRadius: 4,
-    elevation: 4,
-  },
-  pickerContainerFull: {
-    backgroundColor: "rgba(30, 41, 59, 0.95)",
-    borderRadius: 12,
-    borderWidth: 1,
-    borderColor: "rgba(212, 175, 55, 0.4)",
-    overflow: "hidden",
-    flex: 1,
-    marginLeft: 16,
-    height: 50,
-    justifyContent: "center",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.3,
-    shadowRadius: 4,
-    elevation: 4,
-  },
-  previewButtonContainer: {
-    marginTop: 16,
-    alignItems: "center",
-  },
-  previewButtonFull: {
-    backgroundColor: "rgba(212, 175, 55, 0.9)",
-    paddingVertical: 14,
-    paddingHorizontal: 32,
-    borderRadius: 12,
-    shadowColor: "#D4AF37",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.4,
-    shadowRadius: 8,
-    elevation: 6,
-    borderWidth: 1,
-    borderColor: "rgba(212, 175, 55, 0.5)",
-  },
-  previewButtonText: {
-    color: "#FFFFFF",
-    fontSize: 15,
-    fontWeight: "700",
-    textAlign: "center",
-    letterSpacing: -0.2,
-    textShadowColor: "rgba(0,0,0,0.8)",
-    textShadowOffset: { width: 0, height: 1 },
-    textShadowRadius: 2,
-  },
-  sliderContainer: {
-    flex: 1,
-    marginLeft: 20,
-    alignItems: "center",
-  },
-  sliderValue: {
-    marginTop: 8,
-    fontSize: 14,
-    color: "#D4AF37",
-    fontWeight: "700",
-    textAlign: "center",
-    textShadowColor: "rgba(0,0,0,0.8)",
-    textShadowOffset: { width: 0, height: 1 },
-    textShadowRadius: 2,
-    backgroundColor: "rgba(15, 23, 42, 0.6)",
-    paddingHorizontal: 12,
-    paddingVertical: 6,
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: "rgba(212, 175, 55, 0.3)",
-  },
-  actionsContainer: {
-    marginVertical: 25,
-    alignItems: "center",
-    justifyContent: "center",
-    paddingHorizontal: 20,
-  },
-  applyButton: {
-    backgroundColor: "rgba(212, 175, 55, 0.9)",
-    paddingVertical: 16,
-    paddingHorizontal: 50,
-    borderRadius: 16,
-    elevation: 8,
-    shadowColor: "#D4AF37",
-    shadowOffset: { width: 0, height: 6 },
-    shadowOpacity: 0.5,
-    shadowRadius: 16,
-    borderWidth: 2,
-    borderColor: "rgba(212, 175, 55, 0.4)",
-    minWidth: 200,
-    alignItems: "center",
-  },
-  applyButtonText: {
-    color: "#FFFFFF",
-    fontSize: 17,
-    fontWeight: "bold",
-    letterSpacing: 1,
-    textTransform: "uppercase",
-    textAlign: "center",
-    textShadowColor: "rgba(0,0,0,0.8)",
-    textShadowOffset: { width: 0, height: 2 },
-    textShadowRadius: 4,
-  },
-  // Styles pour la modal mystique
-  modalOverlay: {
-    flex: 1,
-    backgroundColor: "rgba(0, 0, 0, 0.8)",
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 20,
-  },
-  modalImageBackground: {
-    width: "100%",
-    maxWidth: 350,
-    paddingHorizontal: 20,
-    paddingVertical: 30,
-    borderRadius: 24,
-    overflow: "hidden",
-  },
-  modalImageStyle: {
-    borderRadius: 24,
-    opacity: 0.3,
-  },
-  modalContent: {
-    backgroundColor: "rgba(15, 23, 42, 0.95)",
-    padding: 28,
-    borderRadius: 20,
-    alignItems: "center",
-    shadowColor: "#D4AF37",
-    shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 0.4,
-    shadowRadius: 16,
-    elevation: 10,
-    borderWidth: 2,
-    borderColor: "rgba(212, 175, 55, 0.3)",
-  },
-  modalIconContainer: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
-    backgroundColor: "rgba(212, 175, 55, 0.2)",
-    justifyContent: "center",
-    alignItems: "center",
-    marginBottom: 20,
-    shadowColor: "#D4AF37",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 8,
-    elevation: 6,
-  },
-  modalIcon: {
-    fontSize: 40,
-    textAlign: "center",
-  },
-  modalTitle: {
-    fontSize: 22,
-    fontWeight: "bold",
-    color: "#D4AF37",
-    textAlign: "center",
-    marginBottom: 16,
-    letterSpacing: 0.5,
-    textShadowColor: "rgba(0,0,0,0.8)",
-    textShadowOffset: { width: 0, height: 2 },
-    textShadowRadius: 4,
-  },
-  modalMessage: {
-    fontSize: 16,
-    color: "#F8FAFC",
-    textAlign: "center",
-    lineHeight: 24,
-    marginBottom: 24,
-    paddingHorizontal: 8,
-    textShadowColor: "rgba(0,0,0,0.6)",
-    textShadowOffset: { width: 0, height: 1 },
-    textShadowRadius: 2,
-  },
-  modalButton: {
-    backgroundColor: "rgba(212, 175, 55, 0.9)",
-    paddingVertical: 14,
-    paddingHorizontal: 32,
-    borderRadius: 16,
-    shadowColor: "#D4AF37",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.4,
-    shadowRadius: 8,
-    elevation: 6,
-    borderWidth: 1,
-    borderColor: "rgba(212, 175, 55, 0.5)",
-    minWidth: 180,
-  },
-  modalButtonText: {
-    color: "#FFFFFF",
-    fontSize: 16,
-    fontWeight: "bold",
-    textAlign: "center",
-    letterSpacing: 0.5,
-    textShadowColor: "rgba(0,0,0,0.8)",
-    textShadowOffset: { width: 0, height: 1 },
-    textShadowRadius: 2,
-  },
-});
+// Fonction pour créer les styles dynamiques
+const getStyles = (
+  colors: any,
+  overlayTextColor: string,
+  overlayIconColor: string,
+  currentTheme: "light" | "dark"
+) =>
+  StyleSheet.create({
+    loadingContainer: {
+      flex: 1,
+      justifyContent: "center",
+      alignItems: "center",
+    },
+    loadingText: {
+      marginTop: 15,
+      fontSize: 16,
+      color: overlayTextColor,
+      fontWeight: "500",
+      textShadowColor:
+        currentTheme === "light"
+          ? "rgba(255, 255, 255, 0.5)"
+          : "rgba(0,0,0,0.8)",
+      textShadowOffset: { width: 0, height: 1 },
+      textShadowRadius: 4,
+    },
+    errorText: {
+      fontSize: 16,
+      color: overlayTextColor,
+      textAlign: "center",
+      marginHorizontal: 20,
+      fontWeight: "500",
+      textShadowColor:
+        currentTheme === "light"
+          ? "rgba(255, 255, 255, 0.5)"
+          : "rgba(0,0,0,0.8)",
+      textShadowOffset: { width: 0, height: 1 },
+      textShadowRadius: 4,
+    },
+    container: {
+      flex: 1,
+    },
+    title: {
+      fontSize: 32,
+      fontWeight: "800",
+      color: overlayTextColor,
+      marginBottom: 8,
+      marginTop: 16,
+      textAlign: "center",
+      letterSpacing: -0.5,
+      textShadowColor:
+        currentTheme === "light"
+          ? "rgba(255, 255, 255, 0.5)"
+          : "rgba(0,0,0,0.7)",
+      textShadowOffset: { width: 0, height: 2 },
+      textShadowRadius: 8,
+    },
+    sectionHeader: {
+      fontSize: 18,
+      fontWeight: "700",
+      color: currentTheme === "light" ? colors.primary : "#D4AF37",
+      backgroundColor:
+        currentTheme === "light" ? colors.cardBG : "rgba(15, 23, 42, 0.85)",
+      paddingVertical: 16,
+      paddingHorizontal: 20,
+      marginVertical: 12,
+      marginHorizontal: 16,
+      borderRadius: 16,
+      shadowColor: currentTheme === "light" ? colors.shadow : "#D4AF37",
+      shadowOffset: { width: 0, height: 4 },
+      shadowOpacity: 0.3,
+      shadowRadius: 12,
+      elevation: 8,
+      borderWidth: 1,
+      borderColor:
+        currentTheme === "light" ? colors.border : "rgba(212, 175, 55, 0.3)",
+      overflow: "hidden",
+      textShadowColor:
+        currentTheme === "light"
+          ? "rgba(255, 255, 255, 0.5)"
+          : "rgba(0,0,0,0.8)",
+      textShadowOffset: { width: 0, height: 1 },
+      textShadowRadius: 4,
+    },
+    listContentContainer: {
+      padding: 16,
+      paddingBottom: 32,
+    },
+    row: {
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: "center",
+      paddingVertical: 20,
+      paddingHorizontal: 24,
+      marginVertical: 6,
+      backgroundColor:
+        currentTheme === "light" ? colors.surface : "rgba(15, 23, 42, 0.75)",
+      borderRadius: 16,
+      shadowColor: currentTheme === "light" ? colors.shadow : "#000",
+      shadowOffset: { width: 0, height: 4 },
+      shadowOpacity: 0.4,
+      shadowRadius: 12,
+      elevation: 6,
+      borderWidth: 1,
+      borderColor:
+        currentTheme === "light" ? colors.border : "rgba(148, 163, 184, 0.2)",
+      backdropFilter: "blur(10px)",
+    },
+    label: {
+      fontSize: 16,
+      color: currentTheme === "light" ? colors.text : "#F8FAFC",
+      flex: 1,
+      fontWeight: "600",
+      letterSpacing: -0.2,
+      textShadowColor:
+        currentTheme === "light"
+          ? "rgba(255, 255, 255, 0.5)"
+          : "rgba(0,0,0,0.8)",
+      textShadowOffset: { width: 0, height: 1 },
+      textShadowRadius: 2,
+    },
+    subLabel: {
+      fontSize: 15,
+      color: currentTheme === "light" ? colors.text : "#CBD5E1",
+      marginLeft: 16,
+      flex: 1,
+      fontWeight: "500",
+      textShadowColor:
+        currentTheme === "light"
+          ? "rgba(255, 255, 255, 0.5)"
+          : "rgba(0,0,0,0.6)",
+      textShadowOffset: { width: 0, height: 1 },
+      textShadowRadius: 2,
+    },
+    input: {
+      backgroundColor:
+        currentTheme === "light" ? colors.surface : "rgba(30, 41, 59, 0.9)",
+      color: currentTheme === "light" ? colors.text : "#F8FAFC",
+      padding: 16,
+      borderRadius: 12,
+      marginBottom: 12,
+      fontSize: 16,
+      borderWidth: 2,
+      borderColor:
+        currentTheme === "light" ? colors.border : "rgba(148, 163, 184, 0.3)",
+      shadowColor: currentTheme === "light" ? colors.shadow : "#000",
+      shadowOffset: { width: 0, height: 4 },
+      shadowOpacity: 0.3,
+      shadowRadius: 8,
+      elevation: 4,
+    },
+    locationToggle: {
+      flexDirection: "row",
+      justifyContent: "center",
+      marginBottom: 24,
+      backgroundColor:
+        currentTheme === "light" ? colors.surface : "rgba(15, 23, 42, 0.8)",
+      borderRadius: 16,
+      padding: 6,
+      borderWidth: 1,
+      borderColor:
+        currentTheme === "light" ? colors.border : "rgba(148, 163, 184, 0.3)",
+      shadowColor: currentTheme === "light" ? colors.shadow : "#000",
+      shadowOffset: { width: 0, height: 4 },
+      shadowOpacity: 0.3,
+      shadowRadius: 8,
+      elevation: 4,
+    },
+    toggleButton: {
+      paddingVertical: 14,
+      paddingHorizontal: 28,
+      borderRadius: 12,
+      marginHorizontal: 3,
+      minWidth: 110,
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    toggleButtonActive: {
+      backgroundColor:
+        currentTheme === "light" ? colors.primary : "rgba(212, 175, 55, 0.9)",
+      shadowColor: currentTheme === "light" ? colors.shadow : "#D4AF37",
+      shadowOffset: { width: 0, height: 4 },
+      shadowOpacity: 0.5,
+      shadowRadius: 8,
+      elevation: 6,
+      borderWidth: 1,
+      borderColor:
+        currentTheme === "light" ? colors.primary : "rgba(212, 175, 55, 0.5)",
+    },
+    toggleButtonText: {
+      color: currentTheme === "light" ? colors.textSecondary : "#94A3B8",
+      fontSize: 15,
+      fontWeight: "600",
+      letterSpacing: -0.2,
+      textShadowColor:
+        currentTheme === "light"
+          ? "rgba(255, 255, 255, 0.5)"
+          : "rgba(0,0,0,0.6)",
+      textShadowOffset: { width: 0, height: 1 },
+      textShadowRadius: 2,
+    },
+    toggleButtonTextActive: {
+      color: "#FFFFFF",
+      textShadowColor:
+        currentTheme === "light" ? "rgba(0, 0, 0, 0.3)" : "rgba(0,0,0,0.8)",
+      textShadowOffset: { width: 0, height: 1 },
+      textShadowRadius: 2,
+    },
+    autoLocationSection: {
+      alignItems: "center",
+      padding: 24,
+      backgroundColor:
+        currentTheme === "light" ? colors.surface : "rgba(15, 23, 42, 0.8)",
+      borderRadius: 16,
+      borderWidth: 1,
+      borderColor:
+        currentTheme === "light" ? colors.border : "rgba(148, 163, 184, 0.3)",
+      shadowColor: currentTheme === "light" ? colors.shadow : "#000",
+      shadowOffset: { width: 0, height: 4 },
+      shadowOpacity: 0.3,
+      shadowRadius: 12,
+      elevation: 6,
+      marginTop: 16,
+    },
+    refreshButton: {
+      backgroundColor:
+        currentTheme === "light" ? colors.primary : "rgba(212, 175, 55, 0.9)",
+      paddingVertical: 14,
+      paddingHorizontal: 28,
+      borderRadius: 12,
+      marginBottom: 16,
+      shadowColor: currentTheme === "light" ? colors.shadow : "#D4AF37",
+      shadowOffset: { width: 0, height: 4 },
+      shadowOpacity: 0.4,
+      shadowRadius: 8,
+      elevation: 6,
+      borderWidth: 1,
+      borderColor:
+        currentTheme === "light" ? colors.primary : "rgba(212, 175, 55, 0.5)",
+    },
+    refreshButtonText: {
+      color: "#FFFFFF",
+      fontSize: 15,
+      fontWeight: "600",
+      textAlign: "center",
+      letterSpacing: -0.2,
+      textShadowColor:
+        currentTheme === "light" ? "rgba(0, 0, 0, 0.3)" : "rgba(0,0,0,0.8)",
+      textShadowOffset: { width: 0, height: 1 },
+      textShadowRadius: 2,
+    },
+    locationText: {
+      color: currentTheme === "light" ? colors.textSecondary : "#CBD5E1",
+      fontSize: 14,
+      textAlign: "center",
+      lineHeight: 20,
+      fontWeight: "500",
+      textShadowColor:
+        currentTheme === "light"
+          ? "rgba(255, 255, 255, 0.5)"
+          : "rgba(0,0,0,0.6)",
+      textShadowOffset: { width: 0, height: 1 },
+      textShadowRadius: 2,
+    },
+    resultsList: {
+      backgroundColor:
+        currentTheme === "light" ? colors.surface : "rgba(30, 41, 59, 0.95)",
+      borderRadius: 12,
+      marginTop: 8,
+      borderWidth: 1,
+      borderColor:
+        currentTheme === "light" ? colors.border : "rgba(148, 163, 184, 0.3)",
+      shadowColor: currentTheme === "light" ? colors.shadow : "#000",
+      shadowOffset: { width: 0, height: 4 },
+      shadowOpacity: 0.4,
+      shadowRadius: 12,
+      elevation: 6,
+      overflow: "hidden",
+    },
+    resultItem: {
+      padding: 16,
+      borderBottomWidth: 1,
+      borderBottomColor:
+        currentTheme === "light" ? colors.border : "rgba(148, 163, 184, 0.2)",
+    },
+    picker: {
+      color: currentTheme === "light" ? colors.text : "#F8FAFC",
+      backgroundColor:
+        currentTheme === "light" ? colors.surface : "rgba(30, 41, 59, 0.95)",
+      borderRadius: 8,
+      fontWeight: "500",
+      height: 50,
+      width: "100%",
+    },
+    pickerItem: {
+      fontSize: 16,
+      color: currentTheme === "light" ? colors.text : "#F8FAFC",
+      fontWeight: "500",
+      backgroundColor:
+        currentTheme === "light" ? colors.surface : "rgba(15, 23, 42, 0.98)",
+    },
+    pickerContainer: {
+      backgroundColor:
+        currentTheme === "light" ? colors.surface : "rgba(30, 41, 59, 0.95)",
+      borderRadius: 12,
+      borderWidth: 1,
+      borderColor:
+        currentTheme === "light" ? colors.primary : "rgba(212, 175, 55, 0.4)",
+      overflow: "hidden",
+      height: 50,
+      justifyContent: "center",
+      minWidth: 140,
+      shadowColor: currentTheme === "light" ? colors.shadow : "#000",
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.3,
+      shadowRadius: 4,
+      elevation: 4,
+    },
+    pickerContainerFull: {
+      backgroundColor:
+        currentTheme === "light" ? colors.surface : "rgba(30, 41, 59, 0.95)",
+      borderRadius: 12,
+      borderWidth: 1,
+      borderColor:
+        currentTheme === "light" ? colors.primary : "rgba(212, 175, 55, 0.4)",
+      overflow: "hidden",
+      flex: 1,
+      marginLeft: 16,
+      height: 50,
+      justifyContent: "center",
+      shadowColor: currentTheme === "light" ? colors.shadow : "#000",
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.3,
+      shadowRadius: 4,
+      elevation: 4,
+    },
+    previewButtonContainer: {
+      marginTop: 16,
+      alignItems: "center",
+    },
+    previewButtonFull: {
+      backgroundColor:
+        currentTheme === "light" ? colors.primary : "rgba(212, 175, 55, 0.9)",
+      paddingVertical: 14,
+      paddingHorizontal: 32,
+      borderRadius: 12,
+      shadowColor: currentTheme === "light" ? colors.shadow : "#D4AF37",
+      shadowOffset: { width: 0, height: 4 },
+      shadowOpacity: 0.4,
+      shadowRadius: 8,
+      elevation: 6,
+      borderWidth: 1,
+      borderColor:
+        currentTheme === "light" ? colors.primary : "rgba(212, 175, 55, 0.5)",
+    },
+    previewButtonText: {
+      color: "#FFFFFF",
+      fontSize: 15,
+      fontWeight: "700",
+      textAlign: "center",
+      letterSpacing: -0.2,
+      textShadowColor:
+        currentTheme === "light" ? "rgba(0, 0, 0, 0.3)" : "rgba(0,0,0,0.8)",
+      textShadowOffset: { width: 0, height: 1 },
+      textShadowRadius: 2,
+    },
+    sliderContainer: {
+      flex: 1,
+      marginLeft: 20,
+      alignItems: "center",
+    },
+    sliderValue: {
+      marginTop: 8,
+      fontSize: 14,
+      color: currentTheme === "light" ? colors.primary : "#D4AF37",
+      fontWeight: "700",
+      textAlign: "center",
+      textShadowColor:
+        currentTheme === "light"
+          ? "rgba(255, 255, 255, 0.5)"
+          : "rgba(0,0,0,0.8)",
+      textShadowOffset: { width: 0, height: 1 },
+      textShadowRadius: 2,
+      backgroundColor:
+        currentTheme === "light" ? colors.surface : "rgba(15, 23, 42, 0.6)",
+      paddingHorizontal: 12,
+      paddingVertical: 6,
+      borderRadius: 8,
+      borderWidth: 1,
+      borderColor:
+        currentTheme === "light" ? colors.border : "rgba(212, 175, 55, 0.3)",
+    },
+    actionsContainer: {
+      marginVertical: 25,
+      alignItems: "center",
+      justifyContent: "center",
+      paddingHorizontal: 20,
+    },
+    applyButton: {
+      backgroundColor:
+        currentTheme === "light" ? colors.primary : "rgba(212, 175, 55, 0.9)",
+      paddingVertical: 16,
+      paddingHorizontal: 50,
+      borderRadius: 16,
+      elevation: 8,
+      shadowColor: currentTheme === "light" ? colors.shadow : "#D4AF37",
+      shadowOffset: { width: 0, height: 6 },
+      shadowOpacity: 0.5,
+      shadowRadius: 16,
+      borderWidth: 2,
+      borderColor:
+        currentTheme === "light" ? colors.primary : "rgba(212, 175, 55, 0.4)",
+      minWidth: 200,
+      alignItems: "center",
+    },
+    applyButtonText: {
+      color: "#FFFFFF",
+      fontSize: 17,
+      fontWeight: "bold",
+      letterSpacing: 1,
+      textTransform: "uppercase",
+      textAlign: "center",
+      textShadowColor:
+        currentTheme === "light" ? "rgba(0, 0, 0, 0.3)" : "rgba(0,0,0,0.8)",
+      textShadowOffset: { width: 0, height: 2 },
+      textShadowRadius: 4,
+    },
+    // Styles pour la modal mystique
+    modalOverlay: {
+      flex: 1,
+      backgroundColor:
+        currentTheme === "light" ? "rgba(0, 0, 0, 0.6)" : "rgba(0, 0, 0, 0.8)",
+      justifyContent: "center",
+      alignItems: "center",
+      padding: 20,
+    },
+    modalContent: {
+      backgroundColor:
+        currentTheme === "light"
+          ? "rgba(255, 255, 255, 0.98)"
+          : "rgba(15, 23, 42, 0.95)",
+      padding: 28,
+      borderRadius: 20,
+      alignItems: "center",
+      shadowColor: currentTheme === "light" ? colors.shadow : "#D4AF37",
+      shadowOffset: { width: 0, height: 8 },
+      shadowOpacity: 0.4,
+      shadowRadius: 16,
+      elevation: 10,
+      borderWidth: 2,
+      borderColor:
+        currentTheme === "light" ? colors.border : "rgba(212, 175, 55, 0.3)",
+      width: "90%",
+      maxWidth: 350,
+    },
+    modalIconContainer: {
+      width: 80,
+      height: 80,
+      borderRadius: 40,
+      backgroundColor:
+        currentTheme === "light"
+          ? "rgba(34, 139, 34, 0.15)"
+          : "rgba(212, 175, 55, 0.2)",
+      justifyContent: "center",
+      alignItems: "center",
+      marginBottom: 20,
+      shadowColor: currentTheme === "light" ? colors.shadow : "#D4AF37",
+      shadowOffset: { width: 0, height: 4 },
+      shadowOpacity: 0.3,
+      shadowRadius: 8,
+      elevation: 6,
+      borderWidth: 1,
+      borderColor:
+        currentTheme === "light" ? colors.primary : "rgba(212, 175, 55, 0.4)",
+    },
+    modalIcon: {
+      fontSize: 40,
+      textAlign: "center",
+    },
+    modalTitle: {
+      fontSize: 22,
+      fontWeight: "bold",
+      color: currentTheme === "light" ? colors.primary : "#D4AF37",
+      textAlign: "center",
+      marginBottom: 16,
+      letterSpacing: 0.5,
+      textShadowColor:
+        currentTheme === "light"
+          ? "rgba(255, 255, 255, 0.5)"
+          : "rgba(0,0,0,0.8)",
+      textShadowOffset: { width: 0, height: 2 },
+      textShadowRadius: 4,
+    },
+    modalMessage: {
+      fontSize: 16,
+      color: currentTheme === "light" ? colors.text : "#F8FAFC",
+      textAlign: "center",
+      lineHeight: 24,
+      marginBottom: 24,
+      paddingHorizontal: 8,
+      textShadowColor:
+        currentTheme === "light"
+          ? "rgba(255, 255, 255, 0.5)"
+          : "rgba(0,0,0,0.6)",
+      textShadowOffset: { width: 0, height: 1 },
+      textShadowRadius: 2,
+    },
+    modalButton: {
+      backgroundColor:
+        currentTheme === "light" ? colors.primary : "rgba(212, 175, 55, 0.9)",
+      paddingVertical: 14,
+      paddingHorizontal: 32,
+      borderRadius: 16,
+      shadowColor: currentTheme === "light" ? colors.shadow : "#D4AF37",
+      shadowOffset: { width: 0, height: 4 },
+      shadowOpacity: 0.4,
+      shadowRadius: 8,
+      elevation: 6,
+      borderWidth: 1,
+      borderColor:
+        currentTheme === "light" ? colors.primary : "rgba(212, 175, 55, 0.5)",
+      minWidth: 180,
+    },
+    modalButtonText: {
+      color: "#FFFFFF",
+      fontSize: 16,
+      fontWeight: "bold",
+      textAlign: "center",
+      letterSpacing: 0.5,
+      textShadowColor:
+        currentTheme === "light" ? "rgba(0, 0, 0, 0.3)" : "rgba(0,0,0,0.8)",
+      textShadowOffset: { width: 0, height: 1 },
+      textShadowRadius: 2,
+    },
+  });

@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import { useTranslation } from "react-i18next";
-import bgImage from "../assets/images/prayer-bg.png";
+import ThemedImageBackground from "../components/ThemedImageBackground";
 import { useLocalSearchParams } from "expo-router";
 
 const CATEGORIES = [
@@ -134,7 +134,7 @@ export default function DhikrScreen() {
   };
 
   return (
-    <ImageBackground source={bgImage} style={styles.background}>
+    <ThemedImageBackground style={styles.background}>
       <SafeAreaView style={{ flex: 1 }}>
         <View style={styles.headerWrap}>
           <Text style={styles.title}>{title}</Text>
@@ -203,7 +203,7 @@ export default function DhikrScreen() {
           onScrollToIndexFailed={onScrollToIndexFailed}
         />
       </SafeAreaView>
-    </ImageBackground>
+    </ThemedImageBackground>
   );
 }
 

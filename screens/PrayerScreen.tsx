@@ -25,13 +25,19 @@ import {
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useRouter } from "expo-router";
-import bgImage from "../assets/images/prayer-bg.png";
+import ThemedImageBackground from "../components/ThemedImageBackground";
 import { DateNavigator } from "../components/DateNavigator";
 import { SunInfo } from "../components/SunInfo";
 import WeeklyPrayerView from "../components/WeeklyPrayerView";
 import PrayerStats from "../components/PrayerStats";
 import { Colors } from "../constants/Colors";
 import { SettingsContext } from "../contexts/SettingsContext";
+import {
+  useThemeColors,
+  useOverlayTextColor,
+  useOverlayIconColor,
+  useCurrentTheme,
+} from "../hooks/useThemeColor";
 import { useTranslation } from "react-i18next";
 import { reverseGeocodeAsync } from "expo-location";
 import { useLocation } from "../hooks/useLocation";
@@ -42,7 +48,8 @@ import { useFocusEffect } from "@react-navigation/native";
 import { errorLog } from "../utils/logger";
 
 const { AdhanModule } = NativeModules;
-const { width: screenWidth } = Dimensions.get("window");
+const { width: screenWidth, height: screenHeight } = Dimensions.get("window");
+const isSmallScreen = screenHeight < 700 || screenWidth < 380;
 
 const iconByPrayer: Record<
   string,
@@ -81,9 +88,23 @@ const iconByPrayer: Record<
 };
 
 // Composant pour les sections d'apprentissage collapsibles
-const LearningSection = () => {
-  const { t } = useTranslation();
+const LearningSection = ({
+  colors,
+  overlayTextColor,
+  currentTheme,
+}: {
+  colors: any;
+  overlayTextColor: string;
+  currentTheme: "light" | "dark";
+}) => {
+  const { t, i18n } = useTranslation();
   const [expandedSection, setExpandedSection] = useState<string | null>(null);
+
+  const learningStyles = getLearningStyles(
+    colors,
+    overlayTextColor,
+    currentTheme
+  );
 
   const toggleSection = (section: string) => {
     setExpandedSection(expandedSection === section ? null : section);
@@ -126,7 +147,7 @@ const LearningSection = () => {
           <MaterialCommunityIcons
             name={isExpanded ? "chevron-up" : "chevron-down"}
             size={24}
-            color="#4ECDC4"
+            color={currentTheme === "light" ? colors.primary : "#4ECDC4"}
           />
         </TouchableOpacity>
 
@@ -142,7 +163,11 @@ const LearningSection = () => {
   return (
     <View style={learningStyles.container}>
       <View style={learningStyles.sectionHeader}>
-        <MaterialCommunityIcons name="school" size={28} color="#FFD700" />
+        <MaterialCommunityIcons
+          name="school"
+          size={28}
+          color={currentTheme === "light" ? colors.primary : "#FFD700"}
+        />
         <Text style={learningStyles.sectionTitle}>{t("learn_to_pray")}</Text>
       </View>
 
@@ -165,12 +190,16 @@ const LearningSection = () => {
                   <Text style={learningStyles.invocationArabic}>
                     {t("wudu_invocation_arabic")}
                   </Text>
-                  <Text style={learningStyles.invocationPhonetic}>
-                    {t("wudu_invocation_phonetic")}
-                  </Text>
-                  <Text style={learningStyles.invocationTranslation}>
-                    {t("wudu_invocation_translation")}
-                  </Text>
+                  {!i18n.language.startsWith("ar") && (
+                    <Text style={learningStyles.invocationPhonetic}>
+                      {t("wudu_invocation_phonetic")}
+                    </Text>
+                  )}
+                  {!i18n.language.startsWith("ar") && (
+                    <Text style={learningStyles.invocationTranslation}>
+                      {t("wudu_invocation_translation")}
+                    </Text>
+                  )}
                 </View>
               </View>
             </View>
@@ -326,12 +355,16 @@ const LearningSection = () => {
               <Text style={learningStyles.invocationArabic}>
                 {t("takbir_dua")}
               </Text>
-              <Text style={learningStyles.invocationPhonetic}>
-                {t("takbir_phonetic")}
-              </Text>
-              <Text style={learningStyles.invocationTranslation}>
-                {t("takbir_translation")}
-              </Text>
+              {!i18n.language.startsWith("ar") && (
+                <Text style={learningStyles.invocationPhonetic}>
+                  {t("takbir_phonetic")}
+                </Text>
+              )}
+              {!i18n.language.startsWith("ar") && (
+                <Text style={learningStyles.invocationTranslation}>
+                  {t("takbir_translation")}
+                </Text>
+              )}
             </View>
           </View>
 
@@ -379,12 +412,16 @@ const LearningSection = () => {
               <Text style={learningStyles.invocationArabic}>
                 سُبْحَانَ رَبِّيَ الْعَظِيمِ
               </Text>
-              <Text style={learningStyles.invocationPhonetic}>
-                Subhana rabbiya al-azeem
-              </Text>
-              <Text style={learningStyles.invocationTranslation}>
-                {t("ruku_dua_translation")}
-              </Text>
+              {!i18n.language.startsWith("ar") && (
+                <Text style={learningStyles.invocationPhonetic}>
+                  Subhana rabbiya al-azeem
+                </Text>
+              )}
+              {!i18n.language.startsWith("ar") && (
+                <Text style={learningStyles.invocationTranslation}>
+                  {t("ruku_dua_translation")}
+                </Text>
+              )}
             </View>
           </View>
 
@@ -411,12 +448,16 @@ const LearningSection = () => {
               <Text style={learningStyles.invocationArabic}>
                 سُبْحَانَ رَبِّيَ الأَعْلَى
               </Text>
-              <Text style={learningStyles.invocationPhonetic}>
-                Subhana rabbiya al-a&apos;la
-              </Text>
-              <Text style={learningStyles.invocationTranslation}>
-                {t("sujud_dua_translation")}
-              </Text>
+              {!i18n.language.startsWith("ar") && (
+                <Text style={learningStyles.invocationPhonetic}>
+                  Subhana rabbiya al-a&apos;la
+                </Text>
+              )}
+              {!i18n.language.startsWith("ar") && (
+                <Text style={learningStyles.invocationTranslation}>
+                  {t("sujud_dua_translation")}
+                </Text>
+              )}
             </View>
           </View>
 
@@ -440,12 +481,16 @@ const LearningSection = () => {
               <Text style={learningStyles.invocationArabic}>
                 {t("tashahhud_dua")}
               </Text>
-              <Text style={learningStyles.invocationPhonetic}>
-                {t("tashahhud_phonetic")}
-              </Text>
-              <Text style={learningStyles.invocationTranslation}>
-                {t("tashahhud_translation")}
-              </Text>
+              {!i18n.language.startsWith("ar") && (
+                <Text style={learningStyles.invocationPhonetic}>
+                  {t("tashahhud_phonetic")}
+                </Text>
+              )}
+              {!i18n.language.startsWith("ar") && (
+                <Text style={learningStyles.invocationTranslation}>
+                  {t("tashahhud_translation")}
+                </Text>
+              )}
             </View>
           </View>
 
@@ -472,12 +517,16 @@ const LearningSection = () => {
               <Text style={learningStyles.invocationArabic}>
                 {t("full_tashahhud_dua")}
               </Text>
-              <Text style={learningStyles.invocationPhonetic}>
-                {t("full_tashahhud_phonetic")}
-              </Text>
-              <Text style={learningStyles.invocationTranslation}>
-                {t("full_tashahhud_translation")}
-              </Text>
+              {!i18n.language.startsWith("ar") && (
+                <Text style={learningStyles.invocationPhonetic}>
+                  {t("full_tashahhud_phonetic")}
+                </Text>
+              )}
+              {!i18n.language.startsWith("ar") && (
+                <Text style={learningStyles.invocationTranslation}>
+                  {t("full_tashahhud_translation")}
+                </Text>
+              )}
             </View>
           </View>
 
@@ -501,12 +550,16 @@ const LearningSection = () => {
               <Text style={learningStyles.invocationArabic}>
                 {t("salam_dua")}
               </Text>
-              <Text style={learningStyles.invocationPhonetic}>
-                {t("salam_phonetic")}
-              </Text>
-              <Text style={learningStyles.invocationTranslation}>
-                {t("salam_translation")}
-              </Text>
+              {!i18n.language.startsWith("ar") && (
+                <Text style={learningStyles.invocationPhonetic}>
+                  {t("salam_phonetic")}
+                </Text>
+              )}
+              {!i18n.language.startsWith("ar") && (
+                <Text style={learningStyles.invocationTranslation}>
+                  {t("salam_translation")}
+                </Text>
+              )}
             </View>
           </View>
         </View>
@@ -524,6 +577,12 @@ export default function PrayerScreen() {
   const router = useRouter();
   const [today, setToday] = useState(new Date());
   const [city, setCity] = useState<string | null>(null);
+
+  // Utiliser les couleurs thématiques
+  const colors = useThemeColors();
+  const overlayTextColor = useOverlayTextColor();
+  const overlayIconColor = useOverlayIconColor();
+  const currentTheme = useCurrentTheme();
 
   // État pour gérer les prières muettes/non-muettes
   const [mutedPrayers, setMutedPrayers] = useState<Set<string>>(new Set());
@@ -728,10 +787,18 @@ export default function PrayerScreen() {
     };
   }, [currentPrayerTimes]);
 
+  // Styles dynamiques basés sur le thème
+  const styles = getStyles(
+    colors,
+    overlayTextColor,
+    overlayIconColor,
+    currentTheme
+  );
+
   // Si c'est en cours de chargement
   if (settings.isLoading) {
     return (
-      <ImageBackground source={bgImage} style={styles.background}>
+      <ThemedImageBackground style={styles.background}>
         <StatusBar
           barStyle="light-content"
           translucent
@@ -739,20 +806,20 @@ export default function PrayerScreen() {
         />
         <View style={styles.centeredContainer}>
           <View style={styles.loadingCard}>
-            <ActivityIndicator size="large" color={Colors.primary} />
+            <ActivityIndicator size="large" color={"#2E7D32"} />
             <Text style={styles.loadingText}>
               {t("loading_settings") || "Chargement..."}
             </Text>
           </View>
         </View>
-      </ImageBackground>
+      </ThemedImageBackground>
     );
   }
 
   // Si c'est la première utilisation (locationMode === null)
   if (settings.locationMode === null) {
     return (
-      <ImageBackground source={bgImage} style={styles.background}>
+      <ThemedImageBackground style={styles.background}>
         <StatusBar
           barStyle="light-content"
           translucent
@@ -763,7 +830,7 @@ export default function PrayerScreen() {
             <MaterialCommunityIcons
               name="map-marker-radius"
               size={70}
-              color={Colors.primary}
+              color={"#2E7D32"}
               style={styles.setupIcon}
             />
             <Text style={styles.setupTitle}>{t("prayer_times")}</Text>
@@ -796,7 +863,7 @@ export default function PrayerScreen() {
               <MaterialCommunityIcons
                 name="crosshairs-gps"
                 size={24}
-                color={Colors.primary}
+                color={"#2E7D32"}
               />
               <Text style={styles.secondaryButtonText}>
                 {t("automatic") || "Utiliser GPS automatique"}
@@ -804,14 +871,14 @@ export default function PrayerScreen() {
             </TouchableOpacity>
           </Animated.View>
         </View>
-      </ImageBackground>
+      </ThemedImageBackground>
     );
   }
 
   // Si on a une erreur de localisation
   if (settings.errorMsg) {
     return (
-      <ImageBackground source={bgImage} style={styles.background}>
+      <ThemedImageBackground style={styles.background}>
         <StatusBar
           barStyle="light-content"
           translucent
@@ -838,14 +905,14 @@ export default function PrayerScreen() {
             </TouchableOpacity>
           </View>
         </View>
-      </ImageBackground>
+      </ThemedImageBackground>
     );
   }
 
   // Si on n'a pas encore d'horaires de prières
   if (!currentPrayerTimes) {
     return (
-      <ImageBackground source={bgImage} style={styles.background}>
+      <ThemedImageBackground style={styles.background}>
         <StatusBar
           barStyle="light-content"
           translucent
@@ -853,13 +920,13 @@ export default function PrayerScreen() {
         />
         <View style={styles.centeredContainer}>
           <View style={styles.loadingCard}>
-            <ActivityIndicator size="large" color={Colors.primary} />
+            <ActivityIndicator size="large" color={"#2E7D32"} />
             <Text style={styles.loadingText}>
               {t("calculating_prayer_times") || "Calcul des horaires..."}
             </Text>
           </View>
         </View>
-      </ImageBackground>
+      </ThemedImageBackground>
     );
   }
 
@@ -872,7 +939,7 @@ export default function PrayerScreen() {
   const minutesUntilNext = getTimeUntilNextInMinutes();
 
   return (
-    <ImageBackground source={bgImage} style={styles.background}>
+    <ThemedImageBackground style={styles.background}>
       <StatusBar
         barStyle="light-content"
         translucent
@@ -1043,9 +1110,13 @@ export default function PrayerScreen() {
         {prayerStats && <PrayerStats {...prayerStats} />}
 
         {/* Section Apprentissage */}
-        <LearningSection />
+        <LearningSection
+          colors={colors}
+          overlayTextColor={overlayTextColor}
+          currentTheme={currentTheme}
+        />
       </Animated.ScrollView>
-    </ImageBackground>
+    </ThemedImageBackground>
   );
 }
 
@@ -1076,453 +1147,505 @@ function getNextPrayer(
   return { nextPrayer: null, timeUntilNext: "" };
 }
 
-const styles = StyleSheet.create({
-  background: {
-    flex: 1,
-  },
-  container: {
-    padding: 16,
-    paddingTop: StatusBar.currentHeight || 0,
-  },
-  header: {
-    marginBottom: 16,
-  },
-  mainTitle: {
-    fontSize: 28,
-    color: "#fff",
-    fontWeight: "bold",
-    marginBottom: 16,
-    textAlign: "center",
-    marginTop: 40,
-  },
-  nextPrayerCard: {
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
-    borderRadius: 16,
-    padding: 16,
-    marginBottom: 16,
-    borderWidth: 1,
-    borderColor: "rgba(78, 205, 196, 0.3)",
-    shadowColor: "#4ECDC4",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 10,
-    elevation: 6,
-  },
-  nextPrayerHeader: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 12,
-  },
-  nextPrayerTitle: {
-    fontSize: 18,
-    color: "#4ECDC4",
-    marginLeft: 8,
-    fontWeight: "600",
-  },
-  nextPrayerContent: {
-    alignItems: "center",
-  },
-  prayerName: {
-    fontSize: 24,
-    color: "#fff",
-    fontWeight: "bold",
-    marginBottom: 8,
-  },
-  timeUntil: {
-    fontSize: 36,
-    color: "#4ECDC4",
-    fontWeight: "bold",
-  },
-  todayPrayersCard: {
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
-    borderRadius: 16,
-    padding: 16,
-    marginBottom: 16,
-    borderWidth: 1,
-    borderColor: "rgba(78, 205, 196, 0.3)",
-    shadowColor: "#4ECDC4",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 10,
-    elevation: 6,
-  },
-  todayPrayersHeader: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 16,
-  },
-  todayPrayersTitle: {
-    fontSize: 18,
-    color: "#4ECDC4",
-    marginLeft: 8,
-    fontWeight: "600",
-  },
-  prayerGrid: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "space-between",
-    gap: 12,
-  },
-  prayerItem: {
-    backgroundColor: "rgba(78, 205, 196, 0.1)",
-    borderRadius: 12,
-    padding: 12,
-    width: "48%",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
-  prayerItemContent: {
-    flex: 1,
-  },
-  prayerItemPassed: {
-    backgroundColor: "rgba(78, 205, 196, 0.15)",
-    borderColor: "rgba(78, 205, 196, 0.3)",
-    borderWidth: 1,
-  },
-  nextPrayerItem: {
-    backgroundColor: "rgba(78, 205, 196, 0.2)",
-    borderWidth: 1,
-    borderColor: "rgba(78, 205, 196, 0.3)",
-  },
-  prayerItemName: {
-    fontSize: 14,
-    color: "#fffbe8",
-    marginBottom: 4,
-    fontWeight: "500",
-  },
-  prayerItemTime: {
-    fontSize: 16,
-    color: "#4ECDC4",
-    fontWeight: "600",
-  },
-  prayerItemTextPassed: {
-    color: "#4ECDC4",
-    opacity: 0.8,
-  },
-  nextPrayerItemText: {
-    color: "#4ECDC4",
-    fontWeight: "bold",
-  },
-  prayerItemCheck: {
-    marginLeft: 8,
-  },
-  prayerItemActions: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginLeft: 8,
-  },
-  soundToggle: {
-    padding: 8,
-    borderRadius: 6,
-    marginRight: 4,
-  },
-  centeredContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 20,
-  },
-  loadingCard: {
-    backgroundColor: "rgba(0, 0, 0, 0.6)",
-    padding: 30,
-    borderRadius: 20,
-    alignItems: "center",
-    borderWidth: 1,
-    borderColor: "rgba(255, 255, 255, 0.1)",
-  },
-  loadingText: {
-    color: "#fffbe8",
-    fontSize: 16,
-    fontWeight: "600",
-    marginTop: 15,
-  },
-  setupCard: {
-    backgroundColor: "rgba(0, 0, 0, 0.6)",
-    padding: 30,
-    borderRadius: 20,
-    alignItems: "center",
-    borderWidth: 1,
-    borderColor: "rgba(255, 255, 255, 0.1)",
-    width: "100%",
-    maxWidth: 320,
-  },
-  setupIcon: {
-    marginBottom: 20,
-  },
-  setupTitle: {
-    fontSize: 28,
-    fontWeight: "700",
-    color: "#fffbe8",
-    marginBottom: 12,
-    textAlign: "center",
-  },
-  setupSubtitle: {
-    fontSize: 16,
-    color: "rgba(255, 255, 255, 0.8)",
-    textAlign: "center",
-    marginBottom: 25,
-    lineHeight: 22,
-  },
-  primaryButton: {
-    backgroundColor: Colors.primary,
-    flexDirection: "row",
-    alignItems: "center",
-    paddingVertical: 15,
-    paddingHorizontal: 25,
-    borderRadius: 12,
-    marginBottom: 12,
-    width: "100%",
-    justifyContent: "center",
-    shadowColor: Colors.primary,
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 8,
-    elevation: 5,
-  },
-  primaryButtonText: {
-    color: "#fff",
-    fontSize: 16,
-    fontWeight: "600",
-    marginLeft: 8,
-  },
-  secondaryButton: {
-    backgroundColor: "transparent",
-    flexDirection: "row",
-    alignItems: "center",
-    paddingVertical: 15,
-    paddingHorizontal: 25,
-    borderRadius: 12,
-    borderWidth: 2,
-    borderColor: Colors.primary,
-    width: "100%",
-    justifyContent: "center",
-  },
-  secondaryButtonText: {
-    color: Colors.primary,
-    fontSize: 16,
-    fontWeight: "600",
-    marginLeft: 8,
-  },
-  errorCard: {
-    backgroundColor: "rgba(0, 0, 0, 0.6)",
-    padding: 30,
-    borderRadius: 20,
-    alignItems: "center",
-    borderWidth: 1,
-    borderColor: "rgba(255, 107, 107, 0.3)",
-    width: "100%",
-    maxWidth: 320,
-  },
-  errorIcon: {
-    marginBottom: 20,
-  },
-  errorTitle: {
-    fontSize: 24,
-    fontWeight: "700",
-    color: "#fffbe8",
-    marginBottom: 12,
-    textAlign: "center",
-  },
-  errorText: {
-    color: "rgba(255, 255, 255, 0.8)",
-    fontSize: 16,
-    textAlign: "center",
-    marginBottom: 25,
-    lineHeight: 22,
-  },
-});
+// Fonction pour créer les styles dynamiques
+const getStyles = (
+  colors: any,
+  overlayTextColor: string,
+  overlayIconColor: string,
+  currentTheme: "light" | "dark"
+) =>
+  StyleSheet.create({
+    background: {
+      flex: 1,
+    },
+    container: {
+      padding: 16,
+      paddingTop: StatusBar.currentHeight || 0,
+    },
+    header: {
+      marginBottom: 16,
+    },
+    mainTitle: {
+      fontSize: 28,
+      color: overlayTextColor,
+      fontWeight: "bold",
+      marginBottom: 16,
+      textAlign: "center",
+      marginTop: 40,
+    },
+    nextPrayerCard: {
+      backgroundColor:
+        currentTheme === "light" ? colors.cardBG : "rgba(0, 0, 0, 0.5)",
+      borderRadius: 16,
+      padding: 16,
+      marginBottom: 16,
+      borderWidth: 1,
+      borderColor:
+        currentTheme === "light" ? colors.border : "rgba(78, 205, 196, 0.3)",
+      shadowColor: currentTheme === "light" ? colors.shadow : "#4ECDC4",
+      shadowOffset: { width: 0, height: 4 },
+      shadowOpacity: 0.3,
+      shadowRadius: 10,
+      elevation: 6,
+    },
+    nextPrayerHeader: {
+      flexDirection: "row",
+      alignItems: "center",
+      marginBottom: 12,
+    },
+    nextPrayerTitle: {
+      fontSize: 18,
+      color: currentTheme === "light" ? colors.primary : "#4ECDC4",
+      marginLeft: 8,
+      fontWeight: "600",
+    },
+    nextPrayerContent: {
+      alignItems: "center",
+    },
+    prayerName: {
+      fontSize: 24,
+      color: overlayTextColor,
+      fontWeight: "bold",
+      marginBottom: 8,
+    },
+    timeUntil: {
+      fontSize: 36,
+      color: currentTheme === "light" ? colors.primary : "#4ECDC4",
+      fontWeight: "bold",
+    },
+    todayPrayersCard: {
+      backgroundColor:
+        currentTheme === "light" ? colors.cardBG : "rgba(0, 0, 0, 0.5)",
+      borderRadius: 16,
+      padding: 16,
+      marginBottom: 16,
+      borderWidth: 1,
+      borderColor:
+        currentTheme === "light" ? colors.border : "rgba(78, 205, 196, 0.3)",
+      shadowColor: currentTheme === "light" ? colors.shadow : "#4ECDC4",
+      shadowOffset: { width: 0, height: 4 },
+      shadowOpacity: 0.3,
+      shadowRadius: 10,
+      elevation: 6,
+    },
+    todayPrayersHeader: {
+      flexDirection: "row",
+      alignItems: "center",
+      marginBottom: 16,
+    },
+    todayPrayersTitle: {
+      fontSize: 18,
+      color: currentTheme === "light" ? colors.primary : "#4ECDC4",
+      marginLeft: 8,
+      fontWeight: "600",
+    },
+    prayerGrid: {
+      flexDirection: "row",
+      flexWrap: "wrap",
+      justifyContent: "space-between",
+      gap: isSmallScreen ? 8 : 12,
+    },
+    prayerItem: {
+      backgroundColor:
+        currentTheme === "light" ? colors.surface : "rgba(78, 205, 196, 0.1)",
+      borderRadius: 12,
+      padding: isSmallScreen ? 8 : 12,
+      flex: 1,
+      minWidth: "45%",
+      maxWidth: "48%",
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+    },
+    prayerItemContent: {
+      flex: 1,
+    },
+    prayerItemPassed: {
+      backgroundColor: "rgba(78, 205, 196, 0.15)",
+      borderColor: "rgba(78, 205, 196, 0.3)",
+      borderWidth: 1,
+    },
+    nextPrayerItem: {
+      backgroundColor: "rgba(78, 205, 196, 0.2)",
+      borderWidth: 1,
+      borderColor: "rgba(78, 205, 196, 0.3)",
+    },
+    prayerItemName: {
+      fontSize: isSmallScreen ? 12 : 14,
+      color: overlayTextColor,
+      marginBottom: 4,
+      fontWeight: "500",
+    },
+    prayerItemTime: {
+      fontSize: isSmallScreen ? 14 : 16,
+      color: currentTheme === "light" ? colors.primary : "#4ECDC4",
+      fontWeight: "600",
+    },
+    prayerItemTextPassed: {
+      color: currentTheme === "light" ? colors.primary : "#4ECDC4",
+      opacity: 0.8,
+    },
+    nextPrayerItemText: {
+      color: currentTheme === "light" ? colors.primary : "#4ECDC4",
+      fontWeight: "bold",
+    },
+    prayerItemCheck: {
+      marginLeft: 8,
+    },
+    prayerItemActions: {
+      flexDirection: "row",
+      alignItems: "center",
+      marginLeft: 8,
+    },
+    soundToggle: {
+      padding: 8,
+      borderRadius: 6,
+      marginRight: 4,
+    },
+    centeredContainer: {
+      flex: 1,
+      justifyContent: "center",
+      alignItems: "center",
+      padding: 20,
+    },
+    loadingCard: {
+      backgroundColor:
+        currentTheme === "light" ? colors.cardBG : "rgba(0, 0, 0, 0.6)",
+      padding: 30,
+      borderRadius: 20,
+      alignItems: "center",
+      borderWidth: 1,
+      borderColor:
+        currentTheme === "light" ? colors.border : "rgba(255, 255, 255, 0.1)",
+    },
+    loadingText: {
+      color: overlayTextColor,
+      fontSize: 16,
+      fontWeight: "600",
+      marginTop: 15,
+    },
+    setupCard: {
+      backgroundColor:
+        currentTheme === "light" ? colors.cardBG : "rgba(0, 0, 0, 0.6)",
+      padding: 30,
+      borderRadius: 20,
+      alignItems: "center",
+      borderWidth: 1,
+      borderColor:
+        currentTheme === "light" ? colors.border : "rgba(255, 255, 255, 0.1)",
+      width: "100%",
+      maxWidth: 320,
+    },
+    setupIcon: {
+      marginBottom: 20,
+    },
+    setupTitle: {
+      fontSize: 28,
+      fontWeight: "700",
+      color: overlayTextColor,
+      marginBottom: 12,
+      textAlign: "center",
+    },
+    setupSubtitle: {
+      fontSize: 16,
+      color:
+        currentTheme === "light"
+          ? colors.textSecondary
+          : "rgba(255, 255, 255, 0.8)",
+      textAlign: "center",
+      marginBottom: 25,
+      lineHeight: 22,
+    },
+    primaryButton: {
+      backgroundColor: "#2E7D32",
+      flexDirection: "row",
+      alignItems: "center",
+      paddingVertical: 15,
+      paddingHorizontal: 25,
+      borderRadius: 12,
+      marginBottom: 12,
+      width: "100%",
+      justifyContent: "center",
+      shadowColor: "#2E7D32",
+      shadowOffset: { width: 0, height: 4 },
+      shadowOpacity: 0.3,
+      shadowRadius: 8,
+      elevation: 5,
+    },
+    primaryButtonText: {
+      color: "#fff",
+      fontSize: 16,
+      fontWeight: "600",
+      marginLeft: 8,
+    },
+    secondaryButton: {
+      backgroundColor: "transparent",
+      flexDirection: "row",
+      alignItems: "center",
+      paddingVertical: 15,
+      paddingHorizontal: 25,
+      borderRadius: 12,
+      borderWidth: 2,
+      borderColor: "#2E7D32",
+      width: "100%",
+      justifyContent: "center",
+    },
+    secondaryButtonText: {
+      color: "#2E7D32",
+      fontSize: 16,
+      fontWeight: "600",
+      marginLeft: 8,
+    },
+    errorCard: {
+      backgroundColor: "rgba(0, 0, 0, 0.6)",
+      padding: 30,
+      borderRadius: 20,
+      alignItems: "center",
+      borderWidth: 1,
+      borderColor: "rgba(255, 107, 107, 0.3)",
+      width: "100%",
+      maxWidth: 320,
+    },
+    errorIcon: {
+      marginBottom: 20,
+    },
+    errorTitle: {
+      fontSize: 24,
+      fontWeight: "700",
+      color: "#fffbe8",
+      marginBottom: 12,
+      textAlign: "center",
+    },
+    errorText: {
+      color: "rgba(255, 255, 255, 0.8)",
+      fontSize: 16,
+      textAlign: "center",
+      marginBottom: 25,
+      lineHeight: 22,
+    },
+  });
 
-// Styles pour la section d'apprentissage
-const learningStyles = StyleSheet.create({
-  container: {
-    marginBottom: 30,
-  },
-  sectionHeader: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 20,
-    justifyContent: "center",
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: "bold",
-    color: "#FFD700",
-    marginLeft: 12,
-    textAlign: "center",
-  },
-  card: {
-    backgroundColor: "rgba(0, 0, 0, 0.6)",
-    borderRadius: 16,
-    marginBottom: 16,
-    borderWidth: 1,
-    borderColor: "rgba(78, 205, 196, 0.3)",
-    overflow: "hidden",
-  },
-  cardHeader: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    padding: 16,
-  },
-  cardHeaderLeft: {
-    flexDirection: "row",
-    alignItems: "center",
-    flex: 1,
-  },
-  iconContainer: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    alignItems: "center",
-    justifyContent: "center",
-    marginRight: 12,
-  },
-  cardTitle: {
-    fontSize: 18,
-    fontWeight: "600",
-    color: "#fffbe8",
-    flex: 1,
-  },
-  cardContent: {
-    paddingHorizontal: 16,
-    paddingBottom: 16,
-  },
-  stepContainer: {
-    marginTop: 8,
-    marginBottom: 16,
-    backgroundColor: "rgba(255, 255, 255, 0.05)",
-    borderRadius: 12,
-    padding: 12,
-    borderWidth: 1,
-    borderColor: "rgba(78, 205, 196, 0.2)",
-  },
-  stepHeader: {
-    flexDirection: "row",
-    alignItems: "flex-start",
-    justifyContent: "space-between",
-    marginBottom: 12,
-  },
-  stepTitle: {
-    fontSize: 16,
-    fontWeight: "600",
-    color: "#4ECDC4",
-    marginBottom: 12,
-  },
-  step: {
-    flexDirection: "row",
-    marginBottom: 16,
-    alignItems: "flex-start",
-    justifyContent: "space-between",
-    backgroundColor: "rgba(255, 255, 255, 0.05)",
-    borderRadius: 12,
-    padding: 12,
-    borderWidth: 1,
-    borderColor: "rgba(78, 205, 196, 0.2)",
-  },
-  stepContent: {
-    flexDirection: "row",
-    alignItems: "center",
-    flex: 1,
-    marginRight: 12,
-  },
-  stepNumber: {
-    fontSize: 16,
-    fontWeight: "600",
-    color: "#FFD700",
-    marginRight: 8,
-    minWidth: 20,
-  },
-  stepText: {
-    fontSize: 14,
-    color: "#fffbe8",
-    lineHeight: 20,
-    flex: 1,
-  },
-  stepTextContainer: {
-    flex: 1,
-  },
-  stepImage: {
-    width: 80,
-    height: 80,
-    borderRadius: 8,
-    borderWidth: 2,
-    borderColor: "rgba(78, 205, 196, 0.4)",
-  },
-  imagePlaceholder: {
-    backgroundColor: "rgba(78, 205, 196, 0.1)",
-    borderRadius: 12,
-    padding: 20,
-    alignItems: "center",
-    marginTop: 16,
-    borderWidth: 1,
-    borderColor: "rgba(78, 205, 196, 0.3)",
-    borderStyle: "dashed",
-  },
-  imagePlaceholderText: {
-    fontSize: 14,
-    color: "#4ECDC4",
-    marginTop: 8,
-    fontStyle: "italic",
-  },
+// Styles pour la section d'apprentissage (adaptatifs)
+const getLearningStyles = (
+  colors: any,
+  overlayTextColor: string,
+  currentTheme: "light" | "dark"
+) =>
+  StyleSheet.create({
+    container: {
+      marginBottom: 30,
+    },
+    sectionHeader: {
+      flexDirection: "row",
+      alignItems: "center",
+      marginBottom: 20,
+      justifyContent: "center",
+    },
+    sectionTitle: {
+      fontSize: 24,
+      fontWeight: "bold",
+      color: currentTheme === "light" ? colors.primary : "#FFD700",
+      marginLeft: 12,
+      textAlign: "center",
+    },
+    card: {
+      backgroundColor:
+        currentTheme === "light" ? colors.cardBG : "rgba(0, 0, 0, 0.6)",
+      borderRadius: 16,
+      marginBottom: 16,
+      borderWidth: 1,
+      borderColor:
+        currentTheme === "light" ? colors.border : "rgba(78, 205, 196, 0.3)",
+      shadowColor: currentTheme === "light" ? colors.shadow : "#4ECDC4",
+      shadowOffset: { width: 0, height: 4 },
+      shadowOpacity: 0.3,
+      shadowRadius: 10,
+      elevation: 6,
+      overflow: "hidden",
+    },
+    cardHeader: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+      padding: 16,
+    },
+    cardHeaderLeft: {
+      flexDirection: "row",
+      alignItems: "center",
+      flex: 1,
+    },
+    iconContainer: {
+      width: 40,
+      height: 40,
+      borderRadius: 20,
+      alignItems: "center",
+      justifyContent: "center",
+      marginRight: 12,
+    },
+    cardTitle: {
+      fontSize: 18,
+      fontWeight: "600",
+      color: overlayTextColor,
+      flex: 1,
+    },
+    cardContent: {
+      paddingHorizontal: 16,
+      paddingBottom: 16,
+    },
+    stepContainer: {
+      marginTop: 8,
+      marginBottom: 16,
+      backgroundColor:
+        currentTheme === "light" ? colors.surface : "rgba(255, 255, 255, 0.05)",
+      borderRadius: 12,
+      padding: 12,
+      borderWidth: 1,
+      borderColor:
+        currentTheme === "light" ? colors.border : "rgba(78, 205, 196, 0.2)",
+    },
+    stepHeader: {
+      flexDirection: "row",
+      alignItems: "flex-start",
+      justifyContent: "space-between",
+      marginBottom: 12,
+    },
+    stepTitle: {
+      fontSize: 16,
+      fontWeight: "600",
+      color: currentTheme === "light" ? colors.primary : "#4ECDC4",
+      marginBottom: 12,
+    },
+    step: {
+      flexDirection: "row",
+      marginBottom: 16,
+      alignItems: "flex-start",
+      justifyContent: "space-between",
+      backgroundColor:
+        currentTheme === "light" ? colors.surface : "rgba(255, 255, 255, 0.05)",
+      borderRadius: 12,
+      padding: 12,
+      borderWidth: 1,
+      borderColor:
+        currentTheme === "light" ? colors.border : "rgba(78, 205, 196, 0.2)",
+    },
+    stepContent: {
+      flexDirection: "row",
+      alignItems: "center",
+      flex: 1,
+      marginRight: 12,
+    },
+    stepNumber: {
+      fontSize: 16,
+      fontWeight: "600",
+      color: currentTheme === "light" ? colors.primary : "#FFD700",
+      marginRight: 8,
+      minWidth: 20,
+    },
+    stepText: {
+      fontSize: 14,
+      color: overlayTextColor,
+      lineHeight: 20,
+      flex: 1,
+    },
+    stepTextContainer: {
+      flex: 1,
+    },
+    stepImage: {
+      width: 80,
+      height: 80,
+      borderRadius: 8,
+      borderWidth: 2,
+      borderColor:
+        currentTheme === "light" ? colors.border : "rgba(78, 205, 196, 0.4)",
+    },
+    imagePlaceholder: {
+      backgroundColor:
+        currentTheme === "light" ? colors.surface : "rgba(78, 205, 196, 0.1)",
+      borderRadius: 12,
+      padding: 20,
+      alignItems: "center",
+      marginTop: 16,
+      borderWidth: 1,
+      borderColor:
+        currentTheme === "light" ? colors.border : "rgba(78, 205, 196, 0.3)",
+      borderStyle: "dashed",
+    },
+    imagePlaceholderText: {
+      fontSize: 14,
+      color: currentTheme === "light" ? colors.primary : "#4ECDC4",
+      marginTop: 8,
+      fontStyle: "italic",
+    },
 
-  footer: {
-    backgroundColor: "rgba(255, 215, 0, 0.1)",
-    borderRadius: 12,
-    padding: 16,
-    marginTop: 8,
-    borderWidth: 1,
-    borderColor: "rgba(255, 215, 0, 0.3)",
-  },
-  footerText: {
-    fontSize: 14,
-    color: "#FFD700",
-    textAlign: "center",
-    fontStyle: "italic",
-  },
-  invocationContainer: {
-    marginTop: 8,
-    backgroundColor: "rgba(76, 99, 210, 0.1)",
-    borderRadius: 8,
-    padding: 12,
-    borderWidth: 1,
-    borderColor: "rgba(76, 99, 210, 0.3)",
-  },
-  invocationArabic: {
-    fontSize: 20,
-    color: "#fffbe8",
-    textAlign: "center",
-    marginBottom: 4,
-    fontFamily: "ScheherazadeNew",
-    lineHeight: 28,
-  },
-  invocationPhonetic: {
-    fontSize: 16,
-    color: "#4ECDC4",
-    textAlign: "center",
-    marginBottom: 4,
-    fontStyle: "italic",
-    fontWeight: "600",
-  },
-  invocationTranslation: {
-    fontSize: 14,
-    color: "rgba(255, 255, 255, 0.8)",
-    textAlign: "center",
-    fontStyle: "italic",
-  },
-  stepDetailText: {
-    fontSize: 12,
-    color: "rgba(255, 255, 255, 0.7)",
-    lineHeight: 18,
-    marginTop: 4,
-    fontStyle: "italic",
-  },
-  invocationContainerFull: {
-    backgroundColor: "rgba(76, 99, 210, 0.1)",
-    borderRadius: 8,
-    padding: 12,
-    borderWidth: 1,
-    borderColor: "rgba(76, 99, 210, 0.3)",
-    width: "100%",
-  },
-});
+    footer: {
+      backgroundColor:
+        currentTheme === "light" ? colors.surface : "rgba(255, 215, 0, 0.1)",
+      borderRadius: 12,
+      padding: 16,
+      marginTop: 8,
+      borderWidth: 1,
+      borderColor:
+        currentTheme === "light" ? colors.border : "rgba(255, 215, 0, 0.3)",
+    },
+    footerText: {
+      fontSize: 14,
+      color: currentTheme === "light" ? colors.primary : "#FFD700",
+      textAlign: "center",
+      fontStyle: "italic",
+    },
+    invocationContainer: {
+      marginTop: 8,
+      backgroundColor:
+        currentTheme === "light" ? colors.surface : "rgba(76, 99, 210, 0.1)",
+      borderRadius: 8,
+      padding: 12,
+      borderWidth: 1,
+      borderColor:
+        currentTheme === "light" ? colors.border : "rgba(76, 99, 210, 0.3)",
+    },
+    invocationArabic: {
+      fontSize: 20,
+      color: overlayTextColor,
+      textAlign: "center",
+      marginBottom: 4,
+      fontFamily: "ScheherazadeNew",
+      lineHeight: 28,
+    },
+    invocationPhonetic: {
+      fontSize: 16,
+      color: currentTheme === "light" ? colors.primary : "#4ECDC4",
+      textAlign: "center",
+      marginBottom: 4,
+      fontStyle: "italic",
+      fontWeight: "600",
+    },
+    invocationTranslation: {
+      fontSize: 14,
+      color:
+        currentTheme === "light"
+          ? colors.textSecondary
+          : "rgba(255, 255, 255, 0.8)",
+      textAlign: "center",
+      fontStyle: "italic",
+    },
+    stepDetailText: {
+      fontSize: 12,
+      color:
+        currentTheme === "light"
+          ? colors.textSecondary
+          : "rgba(255, 255, 255, 0.7)",
+      lineHeight: 18,
+      marginTop: 4,
+      fontStyle: "italic",
+    },
+    invocationContainerFull: {
+      backgroundColor:
+        currentTheme === "light" ? colors.surface : "rgba(76, 99, 210, 0.1)",
+      borderRadius: 8,
+      padding: 12,
+      borderWidth: 1,
+      borderColor:
+        currentTheme === "light" ? colors.border : "rgba(76, 99, 210, 0.3)",
+      width: "100%",
+    },
+  });

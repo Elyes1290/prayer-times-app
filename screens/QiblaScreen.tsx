@@ -8,18 +8,28 @@ import {
   StyleSheet,
   Text,
   View,
+  Dimensions,
 } from "react-native";
 import { useTranslation } from "react-i18next";
 import { useFocusEffect } from "@react-navigation/native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import compassImg from "../assets/images/compass.png";
 import kaabaImg from "../assets/images/kaaba.png";
-import bgImage from "../assets/images/prayer-bg.png";
+import ThemedImageBackground from "../components/ThemedImageBackground";
 import { errorLog } from "../utils/logger";
+import {
+  useThemeColors,
+  useOverlayTextColor,
+  useCurrentTheme,
+} from "../hooks/useThemeColor";
 
 const KAABA_LAT = 21.4225;
 const KAABA_LNG = 39.8262;
-const NEEDLE_HEIGHT = 100;
-const COMPASS_SIZE = 300;
+
+const { width, height } = Dimensions.get("window");
+// Ajustement responsif selon la taille d'écran
+const COMPASS_SIZE = Math.min(width * 0.75, height * 0.35, 300);
+const NEEDLE_HEIGHT = COMPASS_SIZE * 0.33;
 
 function toRadians(degrees: number): number {
   return (degrees * Math.PI) / 180;
@@ -53,8 +63,147 @@ function getPointOnCircle(
   };
 }
 
+const getStyles = (
+  colors: any,
+  overlayTextColor: string,
+  currentTheme: "light" | "dark"
+) =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      alignItems: "center",
+      justifyContent: "space-between",
+    },
+    title: {
+      fontSize: 28,
+      fontWeight: "bold",
+      marginTop: 20,
+      marginBottom: 20,
+      color: overlayTextColor,
+      textShadowColor:
+        currentTheme === "light" ? colors.textShadow : "rgba(0,0,0,0.25)",
+      textShadowOffset: { width: 1, height: 1 },
+      textShadowRadius: 2,
+      textAlign: "center",
+    },
+    compassWrap: {
+      width: COMPASS_SIZE,
+      height: COMPASS_SIZE,
+      alignItems: "center",
+      justifyContent: "center",
+      position: "relative",
+      backgroundColor: "rgba(34,40,58,0.30)", // Toujours sombre pour la boussole blanche
+      borderRadius: COMPASS_SIZE / 2,
+      borderWidth: 2,
+      borderColor: currentTheme === "light" ? colors.primary : "#e7c86a",
+      overflow: "hidden",
+      shadowColor: currentTheme === "light" ? colors.shadow : "#000",
+      shadowOffset: { width: 0, height: 4 },
+      shadowOpacity: 0.3,
+      shadowRadius: 10,
+      elevation: 8,
+    },
+    compassContainer: {
+      position: "absolute",
+      left: 0,
+      top: 0,
+      width: COMPASS_SIZE,
+      height: COMPASS_SIZE,
+      alignItems: "center",
+      justifyContent: "center",
+      zIndex: 1,
+    },
+    compass: {
+      width: COMPASS_SIZE,
+      height: COMPASS_SIZE,
+      borderRadius: COMPASS_SIZE / 2,
+      opacity: currentTheme === "light" ? 0.9 : 1,
+    },
+    needle: {
+      position: "absolute",
+      width: 4,
+      height: NEEDLE_HEIGHT,
+      borderRadius: 2,
+    },
+    qiblaNeedle: {
+      backgroundColor: currentTheme === "light" ? colors.primary : "#204296",
+      zIndex: 2,
+    },
+    background: { flex: 1, resizeMode: "cover" },
+    kaabaIcon: {
+      width: 24,
+      height: 24,
+      position: "absolute",
+      top: -12,
+      left: -10,
+    },
+    instructionsContainer: {
+      alignItems: "center",
+      paddingHorizontal: 20,
+      paddingBottom: 20,
+    },
+    instructions: {
+      color: currentTheme === "light" ? colors.primary : "#FFD700",
+      fontSize: 15,
+      fontWeight: "600",
+      textAlign: "center",
+      paddingHorizontal: 18,
+      paddingVertical: 14,
+      lineHeight: 22,
+      backgroundColor:
+        currentTheme === "light" ? colors.surface : "rgba(34,40,58,0.85)",
+      borderRadius: 16,
+      elevation: 3,
+      textShadowColor:
+        currentTheme === "light" ? colors.textShadow : "rgba(0,0,0,0.28)",
+      textShadowOffset: { width: 0, height: 1 },
+      textShadowRadius: 2,
+      overflow: "hidden",
+      borderWidth: 1.5,
+      borderColor: currentTheme === "light" ? colors.border : "#e7c86a",
+    },
+    statusContainer: {
+      backgroundColor:
+        currentTheme === "light" ? colors.surface : "rgba(34,40,58,0.9)",
+      borderRadius: 12,
+      padding: 16,
+      marginHorizontal: 20,
+      marginBottom: 20,
+      alignItems: "center",
+      borderWidth: 1,
+      borderColor: currentTheme === "light" ? colors.border : "#e7c86a",
+    },
+    statusText: {
+      color: currentTheme === "light" ? colors.primary : "#FFD700",
+      fontSize: 16,
+      fontWeight: "600",
+      textAlign: "center",
+    },
+    statusTextError: {
+      color: currentTheme === "light" ? colors.accent : "#FF6B6B",
+      fontSize: 16,
+      fontWeight: "600",
+      textAlign: "center",
+      marginBottom: 8,
+    },
+    statusSubText: {
+      color: overlayTextColor,
+      fontSize: 14,
+      textAlign: "center",
+      opacity: 0.8,
+    },
+  });
+
 export default function QiblaScreen() {
   const { t } = useTranslation();
+  const insets = useSafeAreaInsets();
+
+  // Utiliser les couleurs thématiques
+  const colors = useThemeColors();
+  const overlayTextColor = useOverlayTextColor();
+  const currentTheme = useCurrentTheme();
+
+  const styles = getStyles(colors, overlayTextColor, currentTheme);
 
   const [direction, setDirection] = useState<number | null>(null);
   const [heading, setHeading] = useState<number | null>(null);
@@ -241,13 +390,23 @@ export default function QiblaScreen() {
   // Interpolation de couleur pour l'aiguille
   const needleColor = needleColorAnimation.interpolate({
     inputRange: [0, 1],
-    outputRange: ["#204296", "#22C55E"], // Bleu vers vert
+    outputRange:
+      currentTheme === "light"
+        ? [colors.primary, "#22C55E"]
+        : ["#204296", "#22C55E"],
   });
 
   return (
-    <ImageBackground source={bgImage} style={styles.background}>
-      <View style={styles.container}>
-        <Text style={styles.title}>{t("qibla_direction")}</Text>
+    <ThemedImageBackground style={styles.background}>
+      <View
+        style={[
+          styles.container,
+          { paddingTop: insets.top + 20, paddingBottom: insets.bottom + 100 },
+        ]}
+      >
+        <Text style={[styles.title, { fontSize: Math.min(width * 0.07, 28) }]}>
+          {t("qibla_direction")}
+        </Text>
 
         {/* Indicateur d'état */}
         {isInitializing && (
@@ -317,119 +476,18 @@ export default function QiblaScreen() {
             />
           </Animated.View>
         </View>
+
+        <View style={styles.instructionsContainer}>
+          <Text
+            style={[
+              styles.instructions,
+              { fontSize: Math.min(width * 0.035, 15) },
+            ]}
+          >
+            {t("qibla_instructions")}
+          </Text>
+        </View>
       </View>
-      <View style={{ marginTop: 40, alignItems: "center" }}>
-        <Text style={styles.instructions}>{t("qibla_instructions")}</Text>
-      </View>
-    </ImageBackground>
+    </ThemedImageBackground>
   );
 }
-
-const styles = StyleSheet.create({
-  container: { flex: 1, alignItems: "center", justifyContent: "center" },
-  title: {
-    fontSize: 28,
-    fontWeight: "bold",
-    marginTop: 40,
-    marginBottom: 100,
-    color: "#fffbe8", // Blanc cassé
-    textShadowColor: "rgba(0,0,0,0.25)",
-    textShadowOffset: { width: 1, height: 1 },
-    textShadowRadius: 2,
-    textAlign: "center",
-  },
-  compassWrap: {
-    width: COMPASS_SIZE,
-    height: COMPASS_SIZE,
-    alignItems: "center",
-    justifyContent: "center",
-    position: "relative",
-    backgroundColor: "rgba(34,40,58,0.30)", // Léger fond bleu nuit translucide
-    borderRadius: COMPASS_SIZE / 2,
-    borderWidth: 2,
-    borderColor: "#e7c86a", // Jaune doux
-    overflow: "hidden",
-  },
-  compassContainer: {
-    position: "absolute",
-    left: 0,
-    top: 0,
-    width: COMPASS_SIZE,
-    height: COMPASS_SIZE,
-    alignItems: "center",
-    justifyContent: "center",
-    zIndex: 1,
-  },
-  compass: {
-    width: COMPASS_SIZE,
-    height: COMPASS_SIZE,
-    borderRadius: COMPASS_SIZE / 2,
-  },
-  needle: {
-    position: "absolute",
-    width: 4,
-    height: NEEDLE_HEIGHT,
-    borderRadius: 2,
-  },
-  qiblaNeedle: {
-    backgroundColor: "#204296",
-    zIndex: 2,
-  },
-  background: { flex: 1, resizeMode: "cover" },
-  kaabaIcon: {
-    width: 24,
-    height: 24,
-    position: "absolute",
-    top: -12,
-    left: -10,
-  },
-  instructions: {
-    color: "#FFD700", // Doré
-    fontSize: 15,
-    fontWeight: "600",
-    textAlign: "center",
-    paddingHorizontal: 18,
-    paddingVertical: 14,
-    lineHeight: 22,
-    backgroundColor: "rgba(34,40,58,0.85)",
-    borderRadius: 16,
-    marginHorizontal: 28,
-    marginBottom: 150,
-    elevation: 3,
-    textShadowColor: "rgba(0,0,0,0.28)",
-    textShadowOffset: { width: 0, height: 1 },
-    textShadowRadius: 2,
-    overflow: "hidden",
-    borderWidth: 1.5,
-    borderColor: "#e7c86a", // Jaune doux
-  },
-  statusContainer: {
-    backgroundColor: "rgba(34,40,58,0.9)",
-    borderRadius: 12,
-    padding: 16,
-    marginHorizontal: 20,
-    marginBottom: 20,
-    alignItems: "center",
-    borderWidth: 1,
-    borderColor: "#e7c86a",
-  },
-  statusText: {
-    color: "#FFD700",
-    fontSize: 16,
-    fontWeight: "600",
-    textAlign: "center",
-  },
-  statusTextError: {
-    color: "#FF6B6B",
-    fontSize: 16,
-    fontWeight: "600",
-    textAlign: "center",
-    marginBottom: 8,
-  },
-  statusSubText: {
-    color: "#fffbe8",
-    fontSize: 14,
-    textAlign: "center",
-    opacity: 0.8,
-  },
-});

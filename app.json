@@ -1,8 +1,8 @@
 {
   "expo": {
     "name": "MyAdhan: Muslim Prayer App",
-    "slug": "myadhan-prayer-app",
-    "version": "1.0.0",
+    "slug": "prayer-times-app",
+    "version": "1.0.3",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "prayertimesapp",
@@ -18,7 +18,7 @@
       },
       "edgeToEdgeEnabled": true,
       "package": "com.drogbinho.prayertimesapp2",
-      "versionCode": 2
+      "versionCode": 48
     },
     "web": {
       "bundler": "metro",

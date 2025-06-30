@@ -6,6 +6,12 @@
   "enter_city_name": "Enter your city name",
   "enable_auto_location": "Enable automatic location (GPS)",
   "unknown_city": "Unknown city",
+
+  "appearance": "Appearance",
+  "theme_mode": "Display mode",
+  "theme_auto": "Auto",
+  "theme_light": "Light",
+  "theme_dark": "Dark",
   "first_time_welcome": "Welcome! Choose your location method:",
   "notifications_disabled_title": "Notifications Disabled",
   "notifications_disabled_message": "To receive notifications, please enable them in settings.",
@@ -107,7 +113,7 @@
     "title": "About the app",
     "subtitle": "Complete Islamic Application",
     "welcome": "Welcome to your spiritual companion!",
-    "description": "This free app supports you daily in your religious practice: accurate prayer times, Qibla direction, Quran reading, automatic dhikr, authentic hadiths, Hijri calendar, and much more.",
+    "description": "This free app (currently ad-free) supports you daily in your religious practice: accurate prayer times, Qibla direction, Quran reading, automatic dhikr, authentic hadiths, Hijri calendar, and much more. A premium ad-free version with exclusive features will be available soon.",
     "blessing": "بارك الله فيكم - May Allah bless you",
 
     "features_title": "🌟 Complete Features",
@@ -161,10 +167,10 @@
 
     "legal_title": "⚖️ Legal Information",
     "privacy_policy": "Privacy Policy",
-    "privacy_policy_content": "This app respects your privacy:\n\n• Your data stays on your device\n• No personal information collection\n• Location used only for calculations\n• No ads or tracking\n• Free app with no data collection",
+    "privacy_policy_content": "This app respects your privacy:\n\n• Your data stays on your device\n• No personal information collection\n• Location used only for calculations\n• Currently no ads\n• Free app with premium version coming",
     "terms_of_use": "Terms of Use",
     "terms_title": "Terms of Use",
-    "terms_content": "By using this app:\n\n• You agree to use it in accordance with Islamic values\n• The app is provided free of charge\n• Developer does their best to ensure accuracy\n• Always verify with your local mosque\n• Use at your own risk",
+    "terms_content": "By using this app:\n\n• You agree to use it in accordance with Islamic values\n• The app offers a free version and a premium version\n• Developer does their best to ensure accuracy\n• Always verify with your local mosque\n• Use at your own risk",
     "understand": "I understand",
 
     "version": "Version",

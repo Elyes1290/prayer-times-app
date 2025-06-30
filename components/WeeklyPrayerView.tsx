@@ -8,6 +8,11 @@ import {
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useTranslation } from "react-i18next";
+import {
+  useThemeColors,
+  useOverlayTextColor,
+  useCurrentTheme,
+} from "../hooks/useThemeColor";
 
 interface WeeklyPrayerViewProps {
   currentDate: Date;
@@ -25,12 +30,132 @@ interface WeeklyPrayerViewProps {
   onDayPress: (date: Date) => void;
 }
 
+const getStyles = (
+  colors: any,
+  overlayTextColor: string,
+  currentTheme: "light" | "dark"
+) =>
+  StyleSheet.create({
+    container: {
+      backgroundColor:
+        currentTheme === "light" ? colors.cardBG : "rgba(0, 0, 0, 0.5)",
+      borderRadius: 16,
+      padding: 16,
+      marginBottom: 16,
+      borderWidth: 1,
+      borderColor:
+        currentTheme === "light" ? colors.border : "rgba(78, 205, 196, 0.3)",
+      shadowColor: currentTheme === "light" ? colors.shadow : "#4ECDC4",
+      shadowOffset: { width: 0, height: 4 },
+      shadowOpacity: 0.3,
+      shadowRadius: 10,
+      elevation: 6,
+    },
+    header: {
+      flexDirection: "row",
+      alignItems: "center",
+      marginBottom: 16,
+    },
+    headerText: {
+      fontSize: 18,
+      color: currentTheme === "light" ? colors.primary : "#4ECDC4",
+      marginLeft: 8,
+      fontWeight: "600",
+    },
+    scrollContent: {
+      paddingBottom: 8,
+    },
+    tableContainer: {
+      minWidth: "100%",
+    },
+    headerRow: {
+      flexDirection: "row",
+      borderBottomWidth: 1,
+      borderBottomColor:
+        currentTheme === "light" ? colors.border : "rgba(78, 205, 196, 0.2)",
+      paddingBottom: 8,
+      marginBottom: 8,
+    },
+    dateCell: {
+      width: 60,
+      alignItems: "center",
+      justifyContent: "center",
+      paddingVertical: 4,
+      marginHorizontal: 2,
+      borderRadius: 8,
+    },
+    todayCell: {
+      backgroundColor:
+        currentTheme === "light" ? colors.surface : "rgba(78, 205, 196, 0.2)",
+    },
+    dateText: {
+      fontSize: 12,
+      color: overlayTextColor,
+      fontWeight: "500",
+      textTransform: "uppercase",
+    },
+    dateNumber: {
+      fontSize: 14,
+      color: overlayTextColor,
+      fontWeight: "700",
+      marginTop: 2,
+    },
+    todayText: {
+      color: currentTheme === "light" ? colors.primary : "#4ECDC4",
+    },
+    prayerRow: {
+      flexDirection: "row",
+      marginBottom: 8,
+    },
+    prayerNameCell: {
+      width: 60,
+      justifyContent: "center",
+      paddingLeft: 4,
+    },
+    prayerName: {
+      fontSize: 12,
+      color: overlayTextColor,
+      fontWeight: "600",
+    },
+    timeCell: {
+      width: 60,
+      alignItems: "center",
+      justifyContent: "center",
+      paddingVertical: 8,
+      marginHorizontal: 2,
+      borderRadius: 8,
+    },
+    todayTimeCell: {
+      backgroundColor:
+        currentTheme === "light" ? colors.surface : "rgba(78, 205, 196, 0.1)",
+    },
+    timeText: {
+      fontSize: 12,
+      color:
+        currentTheme === "light"
+          ? colors.textSecondary
+          : "rgba(255, 255, 255, 0.9)",
+      fontWeight: "500",
+    },
+    todayTimeText: {
+      color: currentTheme === "light" ? colors.primary : "#4ECDC4",
+      fontWeight: "600",
+    },
+  });
+
 export default function WeeklyPrayerView({
   currentDate,
   weekPrayerTimes,
   onDayPress,
 }: WeeklyPrayerViewProps) {
   const { t, i18n } = useTranslation();
+
+  // Utiliser les couleurs thématiques
+  const colors = useThemeColors();
+  const overlayTextColor = useOverlayTextColor();
+  const currentTheme = useCurrentTheme();
+
+  const styles = getStyles(colors, overlayTextColor, currentTheme);
 
   const formatDay = (date: Date) => {
     const days = {
@@ -68,7 +193,7 @@ export default function WeeklyPrayerView({
         <MaterialCommunityIcons
           name="calendar-week"
           size={24}
-          color="#4ECDC4"
+          color={currentTheme === "light" ? colors.primary : "#4ECDC4"}
         />
         <Text style={styles.headerText}>{t("weekly_view")}</Text>
       </View>
@@ -154,103 +279,3 @@ export default function WeeklyPrayerView({
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
-    borderRadius: 16,
-    padding: 16,
-    marginBottom: 16,
-    borderWidth: 1,
-    borderColor: "rgba(78, 205, 196, 0.3)",
-    shadowColor: "#4ECDC4",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 10,
-    elevation: 6,
-  },
-  header: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 16,
-  },
-  headerText: {
-    fontSize: 18,
-    color: "#4ECDC4",
-    marginLeft: 8,
-    fontWeight: "600",
-  },
-  scrollContent: {
-    paddingBottom: 8,
-  },
-  tableContainer: {
-    minWidth: "100%",
-  },
-  headerRow: {
-    flexDirection: "row",
-    borderBottomWidth: 1,
-    borderBottomColor: "rgba(78, 205, 196, 0.2)",
-    paddingBottom: 8,
-    marginBottom: 8,
-  },
-  dateCell: {
-    width: 60,
-    alignItems: "center",
-    justifyContent: "center",
-    paddingVertical: 4,
-    marginHorizontal: 2,
-    borderRadius: 8,
-  },
-  todayCell: {
-    backgroundColor: "rgba(78, 205, 196, 0.2)",
-  },
-  dateText: {
-    fontSize: 12,
-    color: "#fffbe8",
-    fontWeight: "500",
-    textTransform: "uppercase",
-  },
-  dateNumber: {
-    fontSize: 14,
-    color: "#fffbe8",
-    fontWeight: "700",
-    marginTop: 2,
-  },
-  todayText: {
-    color: "#4ECDC4",
-  },
-  prayerRow: {
-    flexDirection: "row",
-    marginBottom: 8,
-  },
-  prayerNameCell: {
-    width: 60,
-    justifyContent: "center",
-    paddingLeft: 4,
-  },
-  prayerName: {
-    fontSize: 12,
-    color: "#fffbe8",
-    fontWeight: "600",
-  },
-  timeCell: {
-    width: 60,
-    alignItems: "center",
-    justifyContent: "center",
-    paddingVertical: 8,
-    marginHorizontal: 2,
-    borderRadius: 8,
-  },
-  todayTimeCell: {
-    backgroundColor: "rgba(78, 205, 196, 0.1)",
-  },
-  timeText: {
-    fontSize: 12,
-    color: "rgba(255, 255, 255, 0.9)",
-    fontWeight: "500",
-  },
-  todayTimeText: {
-    color: "#4ECDC4",
-    fontWeight: "600",
-  },
-});

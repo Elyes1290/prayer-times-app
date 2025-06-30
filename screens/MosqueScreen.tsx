@@ -28,7 +28,13 @@ import * as Location from "expo-location";
 import { useTranslation } from "react-i18next";
 import { useRouter } from "expo-router";
 import Constants from "expo-constants";
-import bgImage from "../assets/images/prayer-bg.png";
+import ThemedImageBackground from "../components/ThemedImageBackground";
+import {
+  useThemeColors,
+  useOverlayTextColor,
+  useOverlayIconColor,
+  useCurrentTheme,
+} from "../hooks/useThemeColor";
 import { Colors } from "../constants/Colors";
 import { SettingsContext } from "../contexts/SettingsContext";
 import { useLocation } from "../hooks/useLocation";
@@ -97,6 +103,20 @@ export default function MosqueScreen() {
   const [loading, setLoading] = useState(true);
   const [selectedMosque, setSelectedMosque] = useState<Mosque | null>(null);
   const [locationError, setLocationError] = useState<string | null>(null);
+
+  // Utiliser les couleurs thématiques comme dans PrayerScreen
+  const colors = useThemeColors();
+  const overlayTextColor = useOverlayTextColor();
+  const overlayIconColor = useOverlayIconColor();
+  const currentTheme = useCurrentTheme();
+
+  // Créer les styles dynamiques
+  const styles = getStyles(
+    colors,
+    overlayTextColor,
+    overlayIconColor,
+    currentTheme
+  );
 
   // Référence pour éviter les rechargements inutiles
   const lastSearchLocation = useRef<{ lat: number; lon: number } | null>(null);
@@ -722,7 +742,11 @@ export default function MosqueScreen() {
   }) => (
     <View style={styles.mosqueCard}>
       <LinearGradient
-        colors={THEME.colors.gradients.card}
+        colors={
+          currentTheme === "light"
+            ? ["rgba(255,255,255,0.4)", "rgba(255,255,255,0.2)"]
+            : ["rgba(0,0,0,0.4)", "rgba(0,0,0,0.2)"]
+        }
         style={styles.cardGradient}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
@@ -740,7 +764,7 @@ export default function MosqueScreen() {
               <MaterialCommunityIcons
                 name="mosque"
                 size={24}
-                color={THEME.colors.secondary}
+                color={currentTheme === "light" ? colors.primary : "#FFD700"}
                 style={styles.mosqueIcon}
               />
               <Text style={styles.mosqueName}>{item.name}</Text>
@@ -749,7 +773,7 @@ export default function MosqueScreen() {
               <MaterialCommunityIcons
                 name="map-marker-distance"
                 size={16}
-                color={THEME.colors.accent}
+                color={currentTheme === "light" ? colors.primary : "#4ECDC4"}
               />
               <Text style={styles.distanceText}>
                 {item.distance?.toFixed(1)} km
@@ -767,7 +791,7 @@ export default function MosqueScreen() {
                 <MaterialCommunityIcons
                   name="star"
                   size={16}
-                  color={THEME.colors.secondary}
+                  color={currentTheme === "light" ? colors.accent : "#FFD700"}
                 />
                 <Text style={styles.ratingText}>{item.rating}/5</Text>
               </View>
@@ -777,7 +801,11 @@ export default function MosqueScreen() {
                 <MaterialCommunityIcons
                   name="clock-outline"
                   size={14}
-                  color={THEME.colors.text.muted}
+                  color={
+                    currentTheme === "light"
+                      ? colors.textTertiary
+                      : "rgba(255, 255, 255, 0.7)"
+                  }
                 />
                 <Text style={styles.hoursText}>{item.openingHours[0]}</Text>
               </View>
@@ -790,12 +818,19 @@ export default function MosqueScreen() {
               <TouchableOpacity
                 style={[
                   styles.actionButton,
-                  { borderColor: THEME.colors.primary },
+                  {
+                    borderColor:
+                      currentTheme === "light" ? colors.primary : "#4ECDC4",
+                  },
                 ]}
                 onPress={() => openDirections(item)}
               >
                 <LinearGradient
-                  colors={THEME.colors.gradients.primary}
+                  colors={
+                    currentTheme === "light"
+                      ? ["#2e7d32", "#1b5e20"]
+                      : ["#4ECDC4", "#2C7A7A"]
+                  }
                   style={styles.actionGradient}
                   start={{ x: 0, y: 0 }}
                   end={{ x: 1, y: 0 }}
@@ -813,12 +848,19 @@ export default function MosqueScreen() {
                 <TouchableOpacity
                   style={[
                     styles.actionButton,
-                    { borderColor: THEME.colors.accent },
+                    {
+                      borderColor:
+                        currentTheme === "light" ? colors.accent : "#F093FB",
+                    },
                   ]}
                   onPress={() => callMosque(item.phone)}
                 >
                   <LinearGradient
-                    colors={THEME.colors.gradients.accent}
+                    colors={
+                      currentTheme === "light"
+                        ? ["#2e7d32", "#1b5e20"]
+                        : ["#F093FB", "#9B4B9B"]
+                    }
                     style={styles.actionGradient}
                     start={{ x: 0, y: 0 }}
                     end={{ x: 1, y: 0 }}
@@ -836,14 +878,21 @@ export default function MosqueScreen() {
               <TouchableOpacity
                 style={[
                   styles.actionButton,
-                  { borderColor: THEME.colors.secondary },
+                  {
+                    borderColor:
+                      currentTheme === "light" ? colors.accent : "#FFD700",
+                  },
                 ]}
                 onPress={() => {
                   /* Fonction future pour plus d'infos */
                 }}
               >
                 <LinearGradient
-                  colors={THEME.colors.gradients.secondary}
+                  colors={
+                    currentTheme === "light"
+                      ? ["#2e7d32", "#1b5e20"]
+                      : ["#FFD700", "#B8860B"]
+                  }
                   style={styles.actionGradient}
                   start={{ x: 0, y: 0 }}
                   end={{ x: 1, y: 0 }}
@@ -867,27 +916,34 @@ export default function MosqueScreen() {
     return (
       <>
         <StatusBar barStyle="light-content" />
-        <ImageBackground source={bgImage} style={styles.background}>
+        <ThemedImageBackground style={styles.background}>
           <View style={styles.loadingContainer}>
             <View style={styles.loadingCard}>
               <LinearGradient
-                colors={THEME.colors.gradients.glass}
+                colors={
+                  currentTheme === "light"
+                    ? ["rgba(27,94,32,0.12)", "rgba(46,125,50,0.10)"]
+                    : ["rgba(44,205,196,0.12)", "rgba(240,147,251,0.10)"]
+                }
                 style={styles.loadingGradient}
               >
                 <MaterialCommunityIcons
                   name="mosque"
                   size={48}
-                  color={THEME.colors.primary}
+                  color={currentTheme === "light" ? colors.primary : "#4ECDC4"}
                   style={styles.loadingIcon}
                 />
-                <ActivityIndicator size="large" color={THEME.colors.primary} />
+                <ActivityIndicator
+                  size="large"
+                  color={currentTheme === "light" ? colors.primary : "#4ECDC4"}
+                />
                 <Text style={styles.loadingText}>
                   {t("finding_nearby_mosques")}
                 </Text>
               </LinearGradient>
             </View>
           </View>
-        </ImageBackground>
+        </ThemedImageBackground>
       </>
     );
   }
@@ -896,17 +952,21 @@ export default function MosqueScreen() {
     return (
       <>
         <StatusBar barStyle="light-content" />
-        <ImageBackground source={bgImage} style={styles.background}>
+        <ThemedImageBackground style={styles.background}>
           <View style={styles.errorContainer}>
             <View style={styles.errorCard}>
               <LinearGradient
-                colors={THEME.colors.gradients.card}
+                colors={
+                  currentTheme === "light"
+                    ? ["rgba(255,255,255,0.4)", "rgba(255,255,255,0.2)"]
+                    : ["rgba(0,0,0,0.4)", "rgba(0,0,0,0.2)"]
+                }
                 style={styles.errorGradient}
               >
                 <MaterialCommunityIcons
                   name="map-marker-off"
                   size={64}
-                  color={THEME.colors.danger}
+                  color="#FF6B6B"
                 />
                 <Text style={styles.errorTitle}>
                   {locationError || t("location_required_for_mosques")}
@@ -920,7 +980,11 @@ export default function MosqueScreen() {
                     onPress={() => router.push("/settings")}
                   >
                     <LinearGradient
-                      colors={THEME.colors.gradients.secondary}
+                      colors={
+                        currentTheme === "light"
+                          ? ["#2e7d32", "#1b5e20"]
+                          : ["#FFD700", "#B8860B"]
+                      }
                       style={styles.retryGradient}
                     >
                       <MaterialCommunityIcons
@@ -939,7 +1003,11 @@ export default function MosqueScreen() {
                       onPress={refreshLocation}
                     >
                       <LinearGradient
-                        colors={THEME.colors.gradients.primary}
+                        colors={
+                          currentTheme === "light"
+                            ? ["#2e7d32", "#1b5e20"]
+                            : ["#4ECDC4", "#2C7A7A"]
+                        }
                         style={styles.retryGradient}
                       >
                         <MaterialCommunityIcons
@@ -955,7 +1023,7 @@ export default function MosqueScreen() {
               </LinearGradient>
             </View>
           </View>
-        </ImageBackground>
+        </ThemedImageBackground>
       </>
     );
   }
@@ -963,7 +1031,7 @@ export default function MosqueScreen() {
   return (
     <>
       <StatusBar barStyle="light-content" />
-      <ImageBackground source={bgImage} style={styles.background}>
+      <ThemedImageBackground style={styles.background}>
         <ScrollView
           style={styles.container}
           showsVerticalScrollIndicator={false}
@@ -979,7 +1047,7 @@ export default function MosqueScreen() {
                 <MaterialCommunityIcons
                   name="arrow-left"
                   size={24}
-                  color={THEME.colors.text.primary}
+                  color={overlayIconColor}
                 />
               </TouchableOpacity>
 
@@ -989,7 +1057,9 @@ export default function MosqueScreen() {
                   <MaterialCommunityIcons
                     name="mosque"
                     size={16}
-                    color={THEME.colors.secondary}
+                    color={
+                      currentTheme === "light" ? colors.primary : "#FFD700"
+                    }
                   />
                   <Text style={styles.statsText}>
                     {mosques.length} {t("mosques_found")}
@@ -1004,7 +1074,7 @@ export default function MosqueScreen() {
                 <MaterialCommunityIcons
                   name="refresh"
                   size={24}
-                  color={THEME.colors.text.primary}
+                  color={overlayIconColor}
                 />
               </TouchableOpacity>
             </View>
@@ -1019,284 +1089,325 @@ export default function MosqueScreen() {
             showsVerticalScrollIndicator={false}
           />
         </ScrollView>
-      </ImageBackground>
+      </ThemedImageBackground>
     </>
   );
 }
 
-const styles = StyleSheet.create({
-  background: {
-    flex: 1,
-    resizeMode: "cover",
-  },
-  container: {
-    flex: 1,
-    paddingHorizontal: 16,
-  },
-  loadingContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 32,
-  },
-  loadingCard: {
-    borderRadius: THEME.borderRadius.xl,
-    overflow: "hidden",
-    borderWidth: 1.5,
-    borderColor: THEME.colors.primary,
-    shadowColor: THEME.colors.primary,
-    shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 0.5,
-    shadowRadius: 18,
-    elevation: 12,
-  },
-  loadingGradient: {
-    padding: 32,
-    alignItems: "center",
-  },
-  loadingIcon: {
-    marginBottom: 16,
-  },
-  loadingText: {
-    marginTop: 16,
-    fontSize: 16,
-    color: THEME.colors.text.primary,
-    fontWeight: "600",
-    textAlign: "center",
-  },
-  errorContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 32,
-  },
-  errorCard: {
-    borderRadius: THEME.borderRadius.xl,
-    overflow: "hidden",
-    borderWidth: 1.5,
-    borderColor: THEME.colors.danger,
-    shadowColor: THEME.colors.danger,
-    shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 0.5,
-    shadowRadius: 18,
-    elevation: 12,
-  },
-  errorGradient: {
-    padding: 32,
-    alignItems: "center",
-  },
-  errorTitle: {
-    fontSize: 18,
-    color: THEME.colors.text.primary,
-    fontWeight: "700",
-    textAlign: "center",
-    marginVertical: 16,
-    lineHeight: 24,
-  },
-  errorDescription: {
-    fontSize: 14,
-    color: THEME.colors.text.muted,
-    textAlign: "center",
-    marginBottom: 16,
-    lineHeight: 20,
-  },
-  errorActions: {
-    flexDirection: "row",
-    gap: 12,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  retryButton: {
-    borderRadius: THEME.borderRadius.md,
-    overflow: "hidden",
-    marginTop: 16,
-  },
-  retryGradient: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingHorizontal: 24,
-    paddingVertical: 12,
-  },
-  retryButtonText: {
-    color: "#fff",
-    fontSize: 16,
-    fontWeight: "bold",
-    marginLeft: 8,
-  },
-  dashboardHeader: {
-    backgroundColor: "rgba(0, 0, 0, 0.3)",
-    borderRadius: THEME.borderRadius.xl,
-    marginTop: 60,
-    marginBottom: 20,
-    borderWidth: 1,
-    borderColor: "rgba(255, 255, 255, 0.1)",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 12,
-    elevation: 8,
-  },
-  headerContent: {
-    flexDirection: "row",
-    alignItems: "center",
-    padding: 16,
-  },
-  backButton: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: THEME.colors.glass.light,
-    justifyContent: "center",
-    alignItems: "center",
-    marginRight: 12,
-  },
-  titleSection: {
-    flex: 1,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: "800",
-    color: THEME.colors.text.primary,
-    marginBottom: 4,
-    textShadowColor: "rgba(0, 0, 0, 0.3)",
-    textShadowOffset: { width: 0, height: 2 },
-    textShadowRadius: 4,
-  },
-  statsContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  statsText: {
-    color: THEME.colors.text.secondary,
-    fontSize: 14,
-    fontWeight: "600",
-    marginLeft: 6,
-  },
-  refreshIconButton: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: THEME.colors.glass.light,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  mosqueCard: {
-    marginBottom: 16,
-    borderRadius: THEME.borderRadius.xl,
-    overflow: "hidden",
-    shadowColor: THEME.colors.primary,
-    shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 0.3,
-    shadowRadius: 12,
-    elevation: 8,
-    borderWidth: 1.5,
-    borderColor: "rgba(255, 255, 255, 0.1)",
-  },
-  cardGradient: {
-    borderRadius: THEME.borderRadius.xl,
-  },
-  cardContent: {
-    padding: 20,
-  },
-  mosqueHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: 12,
-  },
-  nameSection: {
-    flexDirection: "row",
-    alignItems: "center",
-    flex: 1,
-  },
-  mosqueIcon: {
-    marginRight: 8,
-  },
-  mosqueName: {
-    fontSize: 18,
-    fontWeight: "bold",
-    color: THEME.colors.text.primary,
-    flex: 1,
-    textShadowColor: "rgba(0, 0, 0, 0.3)",
-    textShadowOffset: { width: 0, height: 1 },
-    textShadowRadius: 2,
-  },
-  distanceContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: THEME.colors.glass.light,
-    paddingHorizontal: 10,
-    paddingVertical: 6,
-    borderRadius: THEME.borderRadius.sm,
-    borderWidth: 1,
-    borderColor: THEME.colors.accent,
-  },
-  distanceText: {
-    marginLeft: 4,
-    color: THEME.colors.text.primary,
-    fontSize: 12,
-    fontWeight: "600",
-  },
-  mosqueAddress: {
-    color: THEME.colors.text.muted,
-    fontSize: 14,
-    marginBottom: 12,
-    lineHeight: 20,
-  },
-  infoRow: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: 8,
-  },
-  ratingContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  ratingText: {
-    marginLeft: 4,
-    fontSize: 14,
-    color: THEME.colors.text.secondary,
-    fontWeight: "600",
-  },
-  hoursContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    flex: 1,
-    marginLeft: 16,
-  },
-  hoursText: {
-    marginLeft: 6,
-    color: THEME.colors.text.muted,
-    fontSize: 12,
-    flex: 1,
-  },
-  expandedActions: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginTop: 16,
-    paddingTop: 16,
-    borderTopWidth: 1,
-    borderTopColor: "rgba(255, 255, 255, 0.1)",
-  },
-  actionButton: {
-    flex: 1,
-    marginHorizontal: 4,
-    borderRadius: THEME.borderRadius.md,
-    overflow: "hidden",
-    borderWidth: 1.5,
-  },
-  actionGradient: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    paddingVertical: 12,
-    paddingHorizontal: 8,
-  },
-  actionText: {
-    marginLeft: 6,
-    color: "#fff",
-    fontSize: 12,
-    fontWeight: "600",
-  },
-});
+// Fonction pour créer les styles dynamiques adaptés au thème
+const getStyles = (
+  colors: any,
+  overlayTextColor: string,
+  overlayIconColor: string,
+  currentTheme: "light" | "dark"
+) =>
+  StyleSheet.create({
+    background: {
+      flex: 1,
+      resizeMode: "cover",
+    },
+    container: {
+      flex: 1,
+      paddingHorizontal: 16,
+    },
+    loadingContainer: {
+      flex: 1,
+      justifyContent: "center",
+      alignItems: "center",
+      padding: 32,
+    },
+    loadingCard: {
+      borderRadius: 20,
+      overflow: "hidden",
+      borderWidth: 1.5,
+      borderColor: currentTheme === "light" ? colors.primary : "#4ECDC4",
+      backgroundColor:
+        currentTheme === "light" ? colors.cardBG : "rgba(0,0,0,0.6)",
+      shadowColor: currentTheme === "light" ? colors.shadow : "#4ECDC4",
+      shadowOffset: { width: 0, height: 0 },
+      shadowOpacity: 0.5,
+      shadowRadius: 18,
+      elevation: 12,
+    },
+    loadingGradient: {
+      padding: 32,
+      alignItems: "center",
+    },
+    loadingIcon: {
+      marginBottom: 16,
+    },
+    loadingText: {
+      marginTop: 16,
+      fontSize: 16,
+      color: overlayTextColor,
+      fontWeight: "600",
+      textAlign: "center",
+    },
+    errorContainer: {
+      flex: 1,
+      justifyContent: "center",
+      alignItems: "center",
+      padding: 32,
+    },
+    errorCard: {
+      borderRadius: 20,
+      overflow: "hidden",
+      borderWidth: 1.5,
+      borderColor: "#FF6B6B",
+      backgroundColor:
+        currentTheme === "light" ? colors.cardBG : "rgba(0,0,0,0.6)",
+      shadowColor: "#FF6B6B",
+      shadowOffset: { width: 0, height: 0 },
+      shadowOpacity: 0.5,
+      shadowRadius: 18,
+      elevation: 12,
+    },
+    errorGradient: {
+      padding: 32,
+      alignItems: "center",
+    },
+    errorTitle: {
+      fontSize: 18,
+      color: overlayTextColor,
+      fontWeight: "700",
+      textAlign: "center",
+      marginVertical: 16,
+      lineHeight: 24,
+    },
+    errorDescription: {
+      fontSize: 14,
+      color:
+        currentTheme === "light"
+          ? colors.textSecondary
+          : "rgba(255, 255, 255, 0.7)",
+      textAlign: "center",
+      marginBottom: 16,
+      lineHeight: 20,
+    },
+    errorActions: {
+      flexDirection: "row",
+      gap: 12,
+      justifyContent: "center",
+      alignItems: "center",
+    },
+    retryButton: {
+      borderRadius: 12,
+      overflow: "hidden",
+      marginTop: 16,
+    },
+    retryGradient: {
+      flexDirection: "row",
+      alignItems: "center",
+      paddingHorizontal: 24,
+      paddingVertical: 12,
+    },
+    retryButtonText: {
+      color: "#fff",
+      fontSize: 16,
+      fontWeight: "bold",
+      marginLeft: 8,
+    },
+    dashboardHeader: {
+      backgroundColor:
+        currentTheme === "light" ? colors.cardBG : "rgba(0, 0, 0, 0.3)",
+      borderRadius: 20,
+      marginTop: 60,
+      marginBottom: 20,
+      borderWidth: 1,
+      borderColor:
+        currentTheme === "light" ? colors.border : "rgba(255, 255, 255, 0.1)",
+      shadowColor: currentTheme === "light" ? colors.shadow : "#000",
+      shadowOffset: { width: 0, height: 4 },
+      shadowOpacity: 0.3,
+      shadowRadius: 12,
+      elevation: 8,
+    },
+    headerContent: {
+      flexDirection: "row",
+      alignItems: "center",
+      padding: 16,
+    },
+    backButton: {
+      width: 40,
+      height: 40,
+      borderRadius: 20,
+      backgroundColor:
+        currentTheme === "light" ? colors.surface : "rgba(255, 255, 255, 0.10)",
+      justifyContent: "center",
+      alignItems: "center",
+      marginRight: 12,
+    },
+    titleSection: {
+      flex: 1,
+    },
+    title: {
+      fontSize: 24,
+      fontWeight: "800",
+      color: overlayTextColor,
+      marginBottom: 4,
+      textShadowColor:
+        currentTheme === "light"
+          ? "rgba(255, 255, 255, 0.5)"
+          : "rgba(0, 0, 0, 0.3)",
+      textShadowOffset: { width: 0, height: 2 },
+      textShadowRadius: 4,
+    },
+    statsContainer: {
+      flexDirection: "row",
+      alignItems: "center",
+    },
+    statsText: {
+      color:
+        currentTheme === "light"
+          ? colors.textSecondary
+          : "rgba(255, 255, 255, 0.95)",
+      fontSize: 14,
+      fontWeight: "600",
+      marginLeft: 6,
+    },
+    refreshIconButton: {
+      width: 40,
+      height: 40,
+      borderRadius: 20,
+      backgroundColor:
+        currentTheme === "light" ? colors.surface : "rgba(255, 255, 255, 0.10)",
+      justifyContent: "center",
+      alignItems: "center",
+    },
+    mosqueCard: {
+      marginBottom: 16,
+      borderRadius: 20,
+      overflow: "hidden",
+      backgroundColor:
+        currentTheme === "light" ? colors.cardBG : "rgba(0,0,0,0.6)",
+      shadowColor: currentTheme === "light" ? colors.shadow : "#4ECDC4",
+      shadowOffset: { width: 0, height: 0 },
+      shadowOpacity: 0.3,
+      shadowRadius: 12,
+      elevation: 8,
+      borderWidth: 1.5,
+      borderColor:
+        currentTheme === "light" ? colors.border : "rgba(255, 255, 255, 0.1)",
+    },
+    cardGradient: {
+      borderRadius: 20,
+    },
+    cardContent: {
+      padding: 20,
+    },
+    mosqueHeader: {
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: "center",
+      marginBottom: 12,
+    },
+    nameSection: {
+      flexDirection: "row",
+      alignItems: "center",
+      flex: 1,
+    },
+    mosqueIcon: {
+      marginRight: 8,
+    },
+    mosqueName: {
+      fontSize: 18,
+      fontWeight: "bold",
+      color: overlayTextColor,
+      flex: 1,
+      textShadowColor:
+        currentTheme === "light"
+          ? "rgba(255, 255, 255, 0.3)"
+          : "rgba(0, 0, 0, 0.3)",
+      textShadowOffset: { width: 0, height: 1 },
+      textShadowRadius: 2,
+    },
+    distanceContainer: {
+      flexDirection: "row",
+      alignItems: "center",
+      backgroundColor:
+        currentTheme === "light" ? colors.surface : "rgba(255, 255, 255, 0.10)",
+      paddingHorizontal: 10,
+      paddingVertical: 6,
+      borderRadius: 8,
+      borderWidth: 1,
+      borderColor: currentTheme === "light" ? colors.primary : "#4ECDC4",
+    },
+    distanceText: {
+      marginLeft: 4,
+      color: overlayTextColor,
+      fontSize: 12,
+      fontWeight: "600",
+    },
+    mosqueAddress: {
+      color:
+        currentTheme === "light"
+          ? colors.textSecondary
+          : "rgba(255, 255, 255, 0.7)",
+      fontSize: 14,
+      marginBottom: 12,
+      lineHeight: 20,
+    },
+    infoRow: {
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: "center",
+      marginBottom: 8,
+    },
+    ratingContainer: {
+      flexDirection: "row",
+      alignItems: "center",
+    },
+    ratingText: {
+      marginLeft: 4,
+      fontSize: 14,
+      color:
+        currentTheme === "light"
+          ? colors.textSecondary
+          : "rgba(255, 255, 255, 0.95)",
+      fontWeight: "600",
+    },
+    hoursContainer: {
+      flexDirection: "row",
+      alignItems: "center",
+      flex: 1,
+      marginLeft: 16,
+    },
+    hoursText: {
+      marginLeft: 6,
+      color:
+        currentTheme === "light"
+          ? colors.textTertiary
+          : "rgba(255, 255, 255, 0.7)",
+      fontSize: 12,
+      flex: 1,
+    },
+    expandedActions: {
+      flexDirection: "row",
+      justifyContent: "space-between",
+      marginTop: 16,
+      paddingTop: 16,
+      borderTopWidth: 1,
+      borderTopColor:
+        currentTheme === "light" ? colors.border : "rgba(255, 255, 255, 0.1)",
+    },
+    actionButton: {
+      flex: 1,
+      marginHorizontal: 4,
+      borderRadius: 12,
+      overflow: "hidden",
+      borderWidth: 1.5,
+    },
+    actionGradient: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "center",
+      paddingVertical: 12,
+      paddingHorizontal: 8,
+    },
+    actionText: {
+      marginLeft: 6,
+      color: "#fff",
+      fontSize: 12,
+      fontWeight: "600",
+    },
+  });

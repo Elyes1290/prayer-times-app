@@ -14,6 +14,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useTranslation } from "react-i18next";
 import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons } from "@expo/vector-icons";
+import ThemedImageBackground from "../components/ThemedImageBackground";
 
 interface Nom {
   key: string;
@@ -232,10 +233,8 @@ const AsmaulHusnaScreen = () => {
   };
 
   return (
-    <ImageBackground
-      source={require("../assets/images/prayer-bg.png")}
+    <ThemedImageBackground
       style={[styles.container, { paddingTop: insets.top }]}
-      resizeMode="cover"
     >
       <View style={styles.overlay} />
       <View style={styles.header}>
@@ -266,7 +265,7 @@ const AsmaulHusnaScreen = () => {
         contentContainerStyle={[styles.listContainer, { paddingBottom: 150 }]}
         showsVerticalScrollIndicator={false}
       />
-    </ImageBackground>
+    </ThemedImageBackground>
   );
 };
 

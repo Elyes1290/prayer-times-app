@@ -81,6 +81,9 @@ def enableProguardInReleaseBuilds = (findProperty('android.enableProguardInRelea
  */
 def jscFlavor = 'io.github.react-native-community:jsc-android:2026004.+'
 
+// DÉFINITION GLOBALE DE HERMES - Accessible aux modules externes
+def hermesEnabled = (findProperty('hermesEnabled') ?: "true")
+
 android {
     ndkVersion rootProject.ext.ndkVersion
 
@@ -92,8 +95,8 @@ android {
         applicationId 'com.drogbinho.prayertimesapp2'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 37
-        versionName "1.0.0"
+        versionCode 51
+        versionName "1.0.3"
     }
     signingConfigs {
     debug {

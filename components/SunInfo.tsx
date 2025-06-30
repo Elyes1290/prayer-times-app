@@ -2,6 +2,11 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useTranslation } from "react-i18next";
+import {
+  useThemeColors,
+  useOverlayTextColor,
+  useCurrentTheme,
+} from "../hooks/useThemeColor";
 
 interface SunInfoProps {
   sunrise: Date | null;
@@ -9,8 +14,100 @@ interface SunInfoProps {
   currentTime: Date;
 }
 
+const getStyles = (
+  colors: any,
+  overlayTextColor: string,
+  currentTheme: "light" | "dark"
+) =>
+  StyleSheet.create({
+    container: {
+      backgroundColor:
+        currentTheme === "light" ? colors.cardBG : "rgba(0, 0, 0, 0.5)",
+      borderRadius: 16,
+      padding: 16,
+      marginBottom: 16,
+      borderWidth: 1,
+      borderColor:
+        currentTheme === "light" ? colors.border : "rgba(255, 217, 61, 0.3)",
+      shadowColor: currentTheme === "light" ? colors.shadow : "#FFD93D",
+      shadowOffset: { width: 0, height: 4 },
+      shadowOpacity: 0.3,
+      shadowRadius: 10,
+      elevation: 6,
+    },
+    header: {
+      flexDirection: "row",
+      alignItems: "center",
+      marginBottom: 16,
+    },
+    headerText: {
+      fontSize: 16,
+      color: overlayTextColor,
+      marginLeft: 8,
+      fontWeight: "600",
+    },
+    sunTracker: {
+      marginBottom: 16,
+    },
+    sunPath: {
+      height: 3,
+      backgroundColor:
+        currentTheme === "light" ? colors.border : "rgba(255, 217, 61, 0.2)",
+      borderRadius: 1.5,
+      marginBottom: 8,
+      position: "relative",
+    },
+    sunIndicator: {
+      position: "absolute",
+      width: 12,
+      height: 12,
+      backgroundColor: currentTheme === "light" ? colors.primary : "#FFD93D",
+      borderRadius: 6,
+      top: -4.5,
+      marginLeft: -6,
+      shadowColor: currentTheme === "light" ? colors.shadow : "#FFD93D",
+      shadowOffset: { width: 0, height: 0 },
+      shadowOpacity: 0.8,
+      shadowRadius: 4,
+      elevation: 4,
+    },
+    timeMarkers: {
+      flexDirection: "row",
+      justifyContent: "space-between",
+      paddingHorizontal: 4,
+    },
+    timeText: {
+      fontSize: 14,
+      color:
+        currentTheme === "light"
+          ? colors.textSecondary
+          : "rgba(255, 255, 255, 0.8)",
+    },
+    nextEvent: {
+      flexDirection: "row",
+      alignItems: "center",
+      backgroundColor:
+        currentTheme === "light" ? colors.surface : "rgba(255, 217, 61, 0.1)",
+      padding: 12,
+      borderRadius: 12,
+    },
+    nextEventText: {
+      fontSize: 14,
+      color: overlayTextColor,
+      marginLeft: 8,
+      fontWeight: "500",
+    },
+  });
+
 export function SunInfo({ sunrise, sunset, currentTime }: SunInfoProps) {
   const { t } = useTranslation();
+
+  // Utiliser les couleurs thématiques
+  const colors = useThemeColors();
+  const overlayTextColor = useOverlayTextColor();
+  const currentTheme = useCurrentTheme();
+
+  const styles = getStyles(colors, overlayTextColor, currentTheme);
 
   // Calculer la durée du jour
   const getDayDuration = () => {
@@ -91,7 +188,7 @@ export function SunInfo({ sunrise, sunset, currentTime }: SunInfoProps) {
         <MaterialCommunityIcons
           name="weather-sunny"
           size={24}
-          color="#FFD93D"
+          color={currentTheme === "light" ? colors.primary : "#FFD93D"}
         />
         <Text style={styles.headerText}>
           {t("day_duration") || "Durée du jour"}: {getDayDuration()}
@@ -128,7 +225,7 @@ export function SunInfo({ sunrise, sunset, currentTime }: SunInfoProps) {
               : "weather-sunset-down"
           }
           size={20}
-          color="#FFD93D"
+          color={currentTheme === "light" ? colors.primary : "#FFD93D"}
         />
         <Text style={styles.nextEventText}>
           {nextSunEvent.event === "sunrise"
@@ -140,76 +237,3 @@ export function SunInfo({ sunrise, sunset, currentTime }: SunInfoProps) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
-    borderRadius: 16,
-    padding: 16,
-    marginBottom: 16,
-    borderWidth: 1,
-    borderColor: "rgba(255, 217, 61, 0.3)",
-    shadowColor: "#FFD93D",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 10,
-    elevation: 6,
-  },
-  header: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 16,
-  },
-  headerText: {
-    fontSize: 16,
-    color: "#fffbe8",
-    marginLeft: 8,
-    fontWeight: "600",
-  },
-  sunTracker: {
-    marginBottom: 16,
-  },
-  sunPath: {
-    height: 3,
-    backgroundColor: "rgba(255, 217, 61, 0.2)",
-    borderRadius: 1.5,
-    marginBottom: 8,
-    position: "relative",
-  },
-  sunIndicator: {
-    position: "absolute",
-    width: 12,
-    height: 12,
-    backgroundColor: "#FFD93D",
-    borderRadius: 6,
-    top: -4.5,
-    marginLeft: -6,
-    shadowColor: "#FFD93D",
-    shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 0.8,
-    shadowRadius: 4,
-    elevation: 4,
-  },
-  timeMarkers: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    paddingHorizontal: 4,
-  },
-  timeText: {
-    fontSize: 14,
-    color: "rgba(255, 255, 255, 0.8)",
-  },
-  nextEvent: {
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: "rgba(255, 217, 61, 0.1)",
-    padding: 12,
-    borderRadius: 12,
-  },
-  nextEventText: {
-    fontSize: 14,
-    color: "#fffbe8",
-    marginLeft: 8,
-    fontWeight: "500",
-  },
-});

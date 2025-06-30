@@ -242,6 +242,43 @@ public class AdhanService extends Service {
         int resId = getResources().getIdentifier(soundToPlay, "raw", getPackageName());
         debugLog(TAG, "🔍 Result resId: " + resId + " pour '" + soundToPlay + "'");
 
+        // DIAGNOSTIC SPÉCIAL POUR MUSTAFAOZCAN
+        if (resId == 0 && "mustafaozcan".equals(soundToPlay)) {
+            errorLog(TAG, "❌ DIAGNOSTIC MUSTAFAOZCAN: Fichier non trouvé avec getIdentifier()");
+
+            // Essayer différentes variantes du nom
+            String[] alternatives = {
+                    "mustafaozcan",
+                    "mustafa_ozcan",
+                    "mustafa-ozcan",
+                    "MustafaOzcan",
+                    "mostafaozcan" // Au cas où il y aurait une typo
+            };
+
+            for (String alt : alternatives) {
+                int altResId = getResources().getIdentifier(alt, "raw", getPackageName());
+                debugLog(TAG, "🔍 Test alternative '" + alt + "': resId = " + altResId);
+                if (altResId != 0) {
+                    resId = altResId;
+                    errorLog(TAG, "✅ MUSTAFAOZCAN trouvé avec variante: '" + alt + "' (resId: " + resId + ")");
+                    break;
+                }
+            }
+
+            // Si toujours pas trouvé, essayer d'accéder directement au fichier R.raw
+            if (resId == 0) {
+                try {
+                    // Essayer d'accéder directement via réflexion
+                    Class<?> rawClass = Class.forName(getPackageName() + ".R$raw");
+                    java.lang.reflect.Field mustafaField = rawClass.getField("mustafaozcan");
+                    resId = mustafaField.getInt(null);
+                    errorLog(TAG, "✅ MUSTAFAOZCAN trouvé via réflexion R.raw: " + resId);
+                } catch (Exception e) {
+                    errorLog(TAG, "❌ Échec réflexion R.raw pour mustafaozcan: " + e.getMessage());
+                }
+            }
+        }
+
         if (resId == 0) {
             errorLog(TAG, "❌ Fichier audio Adhan non trouvé: '" + soundToPlay + "'. Tentative fallback...");
             debugLog(TAG, "🔍 Recherche fallback: 'adhamalsharqawe'");

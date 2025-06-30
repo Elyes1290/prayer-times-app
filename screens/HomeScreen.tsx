@@ -27,10 +27,15 @@ import {
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
-import bgImage from "../assets/images/prayer-bg.png";
+import ThemedImageBackground from "../components/ThemedImageBackground";
 import PrayerTimes from "adhan/lib/types/PrayerTimes";
 
-import { Colors } from "../constants/Colors";
+import { useThemeColors } from "../hooks/useThemeAssets";
+import {
+  useOverlayTextColor,
+  useOverlayIconColor,
+  useCurrentTheme,
+} from "../hooks/useThemeColor";
 import { SettingsContext } from "../contexts/SettingsContext";
 import { useTranslation } from "react-i18next";
 import { reverseGeocodeAsync } from "expo-location";
@@ -165,6 +170,20 @@ export default function HomeScreen() {
   const [city, setCity] = useState<string | null>(null);
   const [showPersonalizationModal, setShowPersonalizationModal] =
     useState(false);
+
+  // Utiliser les couleurs thématiques
+  const colors = useThemeColors();
+  const overlayTextColor = useOverlayTextColor();
+  const overlayIconColor = useOverlayIconColor();
+  const currentTheme = useCurrentTheme();
+
+  // Styles dynamiques basés sur le thème
+  const styles = getStyles(
+    colors,
+    overlayTextColor,
+    overlayIconColor,
+    currentTheme
+  );
 
   // Map langue => id traduction Quran.com
   const translationMap: Record<string, number | null> = {
@@ -678,7 +697,7 @@ export default function HomeScreen() {
   // Si c'est en cours de chargement
   if (settings.isLoading) {
     return (
-      <ImageBackground source={bgImage} style={styles.background}>
+      <ThemedImageBackground style={styles.background}>
         <StatusBar
           barStyle="light-content"
           translucent
@@ -686,20 +705,20 @@ export default function HomeScreen() {
         />
         <View style={styles.centeredContainer}>
           <View style={styles.loadingCard}>
-            <ActivityIndicator size="large" color={Colors.primary} />
+            <ActivityIndicator size="large" color={colors.primary} />
             <Text style={styles.loadingText}>
               {t("loading_settings") || "Chargement..."}
             </Text>
           </View>
         </View>
-      </ImageBackground>
+      </ThemedImageBackground>
     );
   }
 
   // Si c'est la première utilisation (locationMode === null)
   if (settings.locationMode === null) {
     return (
-      <ImageBackground source={bgImage} style={styles.background}>
+      <ThemedImageBackground style={styles.background}>
         <StatusBar
           barStyle="light-content"
           translucent
@@ -710,7 +729,7 @@ export default function HomeScreen() {
             <MaterialCommunityIcons
               name="map-marker-radius"
               size={70}
-              color={Colors.primary}
+              color={colors.primary}
               style={styles.setupIcon}
             />
             <Text style={styles.setupTitle}>{t("prayer_times")}</Text>
@@ -723,7 +742,11 @@ export default function HomeScreen() {
               style={styles.primaryButton}
               onPress={() => router.push("/settings")}
             >
-              <MaterialCommunityIcons name="city" size={24} color="#fff" />
+              <MaterialCommunityIcons
+                name="city"
+                size={24}
+                color={overlayIconColor}
+              />
               <Text style={styles.primaryButtonText}>
                 {t("enter_city") || "Entrer ville manuellement"}
               </Text>
@@ -743,7 +766,7 @@ export default function HomeScreen() {
               <MaterialCommunityIcons
                 name="crosshairs-gps"
                 size={24}
-                color={Colors.primary}
+                color={colors.primary}
               />
               <Text style={styles.secondaryButtonText}>
                 {t("automatic") || "Utiliser GPS automatique"}
@@ -751,14 +774,14 @@ export default function HomeScreen() {
             </TouchableOpacity>
           </Animated.View>
         </View>
-      </ImageBackground>
+      </ThemedImageBackground>
     );
   }
 
   // Si on a une erreur de localisation
   if (settings.errorMsg) {
     return (
-      <ImageBackground source={bgImage} style={styles.background}>
+      <ThemedImageBackground style={styles.background}>
         <StatusBar
           barStyle="light-content"
           translucent
@@ -778,14 +801,18 @@ export default function HomeScreen() {
               style={styles.primaryButton}
               onPress={() => router.push("/settings")}
             >
-              <MaterialCommunityIcons name="cog" size={20} color="#fff" />
+              <MaterialCommunityIcons
+                name="cog"
+                size={20}
+                color={overlayIconColor}
+              />
               <Text style={styles.primaryButtonText}>
                 {t("settings") || "Aller aux paramètres"}
               </Text>
             </TouchableOpacity>
           </View>
         </View>
-      </ImageBackground>
+      </ThemedImageBackground>
     );
   }
 
@@ -911,7 +938,7 @@ export default function HomeScreen() {
   return (
     <>
       <StatusBar barStyle="light-content" />
-      <ImageBackground source={bgImage} style={styles.background}>
+      <ThemedImageBackground style={styles.background}>
         <ScrollView
           style={styles.container}
           showsVerticalScrollIndicator={false}
@@ -928,15 +955,34 @@ export default function HomeScreen() {
             ]}
           >
             <View style={styles.welcomeSection}>
-              <Text
-                style={styles.welcomeText}
-                numberOfLines={2}
-                ellipsizeMode="tail"
-              >
-                {settings.userFirstName
-                  ? `${t("dashboard_welcome")} ${settings.userFirstName}`
-                  : t("dashboard_welcome")}
-              </Text>
+              <View style={styles.welcomeTextContainer}>
+                <Text
+                  style={styles.welcomeText}
+                  numberOfLines={2}
+                  ellipsizeMode="tail"
+                >
+                  {settings.userFirstName
+                    ? `${t("dashboard_welcome")} ${settings.userFirstName}`
+                    : t("dashboard_welcome")}
+                </Text>
+                {settings.userFirstName && (
+                  <TouchableOpacity
+                    style={styles.editNameButton}
+                    onPress={() => setShowPersonalizationModal(true)}
+                    hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+                  >
+                    <MaterialCommunityIcons
+                      name="pencil-outline"
+                      size={16}
+                      color={
+                        currentTheme === "light"
+                          ? colors.textSecondary
+                          : "rgba(255, 255, 255, 0.7)"
+                      }
+                    />
+                  </TouchableOpacity>
+                )}
+              </View>
               <Text
                 style={styles.dateText}
                 numberOfLines={1}
@@ -1023,7 +1069,11 @@ export default function HomeScreen() {
                 <MaterialCommunityIcons
                   name="cog-outline"
                   size={24}
-                  color="rgba(255, 255, 255, 0.7)"
+                  color={
+                    currentTheme === "light"
+                      ? colors.textSecondary
+                      : "rgba(255, 255, 255, 0.7)"
+                  }
                 />
               </TouchableOpacity>
             </Animated.View>
@@ -1539,7 +1589,9 @@ export default function HomeScreen() {
                         <MaterialCommunityIcons
                           name={action.icon as any}
                           size={24}
-                          color="#fffbe8"
+                          color={
+                            currentTheme === "light" ? colors.text : "#fffbe8"
+                          }
                         />
                       </View>
                       <Text style={styles.actionButtonText}>
@@ -1548,7 +1600,11 @@ export default function HomeScreen() {
                       <MaterialCommunityIcons
                         name="chevron-right"
                         size={20}
-                        color="rgba(255, 255, 255, 0.7)"
+                        color={
+                          currentTheme === "light"
+                            ? colors.textSecondary
+                            : "rgba(255, 255, 255, 0.7)"
+                        }
                       />
                     </LinearGradient>
                   </TouchableOpacity>
@@ -1557,7 +1613,7 @@ export default function HomeScreen() {
             </View>
           </View>
         </ScrollView>
-      </ImageBackground>
+      </ThemedImageBackground>
 
       {/* 🎯 Modal de personnalisation */}
       <WelcomePersonalizationModal
@@ -1576,1020 +1632,1099 @@ export default function HomeScreen() {
   );
 }
 
-const styles = StyleSheet.create({
-  background: {
-    flex: 1,
-    width: "100%",
-    height: "100%",
-  },
-  container: {
-    flexGrow: 1,
-    padding: 16,
-    paddingTop: 50,
-  },
-  centeredContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 20,
-  },
-  modernHeader: {
-    alignItems: "center",
-    marginBottom: 16,
-  },
-  mainTitle: {
-    fontSize: 26,
-    fontWeight: "800",
-    color: "#fffbe8",
-    textAlign: "center",
-    marginBottom: 8,
-    textShadowColor: "rgba(0, 0, 0, 0.8)",
-    textShadowOffset: { width: 0, height: 2 },
-    textShadowRadius: 8,
-    letterSpacing: 0.5,
-  },
-  locationBadge: {
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: "rgba(255, 255, 255, 0.15)",
-    paddingHorizontal: 12,
-    paddingVertical: 6,
-    borderRadius: 20,
-    borderWidth: 1,
-    borderColor: "rgba(255, 255, 255, 0.2)",
-  },
-  locationText: {
-    fontSize: 14,
-    color: "rgba(255, 255, 255, 0.8)",
-    marginLeft: 6,
-    fontWeight: "500",
-  },
-  locationRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginTop: 6,
-    backgroundColor: "rgba(78, 205, 196, 0.1)",
-    paddingHorizontal: 10,
-    paddingVertical: 4,
-    borderRadius: 12,
-    borderWidth: 1,
-    borderColor: "rgba(78, 205, 196, 0.2)",
-    maxWidth: "90%",
-  },
-  settingsButton: {
-    padding: 12,
-    borderRadius: 16,
-    backgroundColor: "rgba(255, 255, 255, 0.1)",
-    borderWidth: 1,
-    borderColor: "rgba(255, 255, 255, 0.2)",
-    minWidth: 48,
-    minHeight: 48,
-    justifyContent: "center",
-    alignItems: "center",
-    flexShrink: 0,
-  },
-  dateNavigationContainer: {
-    marginBottom: 16,
-  },
-  nextPrayerCard: {
-    backgroundColor: "rgba(0, 0, 0, 0.4)",
-    borderRadius: 16,
-    padding: 16,
-    marginBottom: 16,
-    borderWidth: 1,
-    borderColor: "rgba(255, 255, 255, 0.1)",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 12,
-    elevation: 8,
-  },
-  nextPrayerHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: 12,
-  },
-  nextPrayerLabel: {
-    fontSize: 16,
-    fontWeight: "700",
-    color: "#fffbe8",
-  },
-  urgencyIndicator: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  urgencyText: {
-    fontSize: 12,
-    fontWeight: "600",
-    marginLeft: 4,
-    textTransform: "uppercase",
-  },
-  nextPrayerContent: {
-    gap: 10,
-  },
-  nextPrayerMainInfo: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  nextPrayerIconCircle: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    justifyContent: "center",
-    alignItems: "center",
-    marginRight: 12,
-  },
-  nextPrayerTextInfo: {
-    flex: 1,
-  },
-  nextPrayerName: {
-    fontSize: 20,
-    fontWeight: "700",
-    color: "#fffbe8",
-    marginBottom: 2,
-  },
-  nextPrayerCountdown: {
-    fontSize: 14,
-    color: "#4ECDC4",
-    fontWeight: "600",
-  },
-  progressText: {
-    fontSize: 12,
-    color: "rgba(255, 255, 255, 0.7)",
-    textAlign: "center",
-  },
-  prayerGrid: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "space-between",
-    gap: 8,
-  },
-  prayerCard: {
-    backgroundColor: "rgba(255, 255, 255, 0.08)",
-    borderRadius: 12,
-    borderWidth: 1,
-    borderColor: "rgba(255, 255, 255, 0.1)",
-    overflow: "hidden",
-    width: "48%",
-    marginBottom: 8,
-  },
-  prayerCardActive: {
-    backgroundColor: "rgba(78, 205, 196, 0.15)",
-    borderColor: "#4ECDC4",
-    borderWidth: 2,
-    shadowColor: "#4ECDC4",
-    shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 0.3,
-    shadowRadius: 8,
-    elevation: 6,
-  },
-  prayerCardPassed: {
-    backgroundColor: "rgba(255, 255, 255, 0.04)",
-    opacity: 0.7,
-  },
-  prayerCardContent: {
-    flexDirection: "row",
-    alignItems: "center",
-    padding: 12,
-  },
-  prayerIconContainer: {
-    width: 36,
-    height: 36,
-    borderRadius: 18,
-    justifyContent: "center",
-    alignItems: "center",
-    marginRight: 10,
-  },
-  prayerIconContainerActive: {
-    borderWidth: 2,
-    borderColor: "#4ECDC4",
-  },
-  prayerInfo: {
-    flex: 1,
-  },
-  prayerLabel: {
-    fontSize: 14,
-    color: "#fffbe8",
-    fontWeight: "600",
-    marginBottom: 1,
-  },
-  prayerLabelActive: {
-    color: "#4ECDC4",
-    fontWeight: "700",
-  },
-  prayerLabelPassed: {
-    color: "rgba(255, 255, 255, 0.6)",
-  },
-  prayerTime: {
-    fontSize: 16,
-    color: "#FFD700",
-    fontWeight: "700",
-    textShadowColor: "rgba(255, 215, 0, 0.3)",
-    textShadowOffset: { width: 0, height: 1 },
-    textShadowRadius: 3,
-    letterSpacing: 0.5,
-  },
-  prayerTimeActive: {
-    color: "#4ECDC4",
-    fontSize: 18,
-  },
-  prayerTimePassed: {
-    color: "rgba(255, 215, 0, 0.5)",
-  },
-  currentBadge: {
-    backgroundColor: "#4ECDC4",
-    paddingHorizontal: 6,
-    paddingVertical: 3,
-    borderRadius: 10,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  currentBadgeText: {
-    color: "#fff",
-    fontSize: 10,
-    fontWeight: "700",
-    textTransform: "uppercase",
-  },
-  loadingCard: {
-    backgroundColor: "rgba(0, 0, 0, 0.6)",
-    padding: 30,
-    borderRadius: 20,
-    alignItems: "center",
-    borderWidth: 1,
-    borderColor: "rgba(255, 255, 255, 0.1)",
-  },
+// Fonction pour créer les styles dynamiques
+const getStyles = (
+  colors: any,
+  overlayTextColor: string,
+  overlayIconColor: string,
+  currentTheme: "light" | "dark"
+) =>
+  StyleSheet.create({
+    background: {
+      flex: 1,
+      width: "100%",
+      height: "100%",
+    },
+    container: {
+      flexGrow: 1,
+      padding: 16,
+      paddingTop: 50,
+    },
+    centeredContainer: {
+      flex: 1,
+      justifyContent: "center",
+      alignItems: "center",
+      padding: 20,
+    },
+    modernHeader: {
+      alignItems: "center",
+      marginBottom: 16,
+    },
+    mainTitle: {
+      fontSize: 26,
+      fontWeight: "800",
+      color: "#fffbe8",
+      textAlign: "center",
+      marginBottom: 8,
+      textShadowColor: "rgba(0, 0, 0, 0.8)",
+      textShadowOffset: { width: 0, height: 2 },
+      textShadowRadius: 8,
+      letterSpacing: 0.5,
+    },
+    locationBadge: {
+      flexDirection: "row",
+      alignItems: "center",
+      backgroundColor: "rgba(255, 255, 255, 0.15)",
+      paddingHorizontal: 12,
+      paddingVertical: 6,
+      borderRadius: 20,
+      borderWidth: 1,
+      borderColor: "rgba(255, 255, 255, 0.2)",
+    },
+    locationText: {
+      fontSize: 14,
+      color:
+        currentTheme === "light"
+          ? colors.textSecondary
+          : "rgba(255, 255, 255, 0.8)",
+      marginLeft: 6,
+      fontWeight: "500",
+    },
+    locationRow: {
+      flexDirection: "row",
+      alignItems: "center",
+      marginTop: 6,
+      backgroundColor: "rgba(78, 205, 196, 0.1)",
+      paddingHorizontal: 10,
+      paddingVertical: 4,
+      borderRadius: 12,
+      borderWidth: 1,
+      borderColor: "rgba(78, 205, 196, 0.2)",
+      maxWidth: "90%",
+    },
+    settingsButton: {
+      padding: 12,
+      borderRadius: 16,
+      backgroundColor:
+        currentTheme === "light" ? colors.surface : "rgba(255, 255, 255, 0.1)",
+      borderWidth: 1,
+      borderColor:
+        currentTheme === "light" ? colors.border : "rgba(255, 255, 255, 0.2)",
+      minWidth: 48,
+      minHeight: 48,
+      justifyContent: "center",
+      alignItems: "center",
+      flexShrink: 0,
+    },
+    dateNavigationContainer: {
+      marginBottom: 16,
+    },
+    nextPrayerCard: {
+      backgroundColor:
+        currentTheme === "light" ? colors.cardBG : "rgba(0, 0, 0, 0.4)",
+      borderRadius: 16,
+      padding: 16,
+      marginBottom: 16,
+      borderWidth: 1,
+      borderColor:
+        currentTheme === "light" ? colors.border : "rgba(255, 255, 255, 0.1)",
+      shadowColor: currentTheme === "light" ? colors.shadow : "#000",
+      shadowOffset: { width: 0, height: 4 },
+      shadowOpacity: 0.3,
+      shadowRadius: 12,
+      elevation: 8,
+    },
+    nextPrayerHeader: {
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: "center",
+      marginBottom: 12,
+    },
+    nextPrayerLabel: {
+      fontSize: 16,
+      fontWeight: "700",
+      color: overlayTextColor,
+    },
+    urgencyIndicator: {
+      flexDirection: "row",
+      alignItems: "center",
+    },
+    urgencyText: {
+      fontSize: 12,
+      fontWeight: "600",
+      marginLeft: 4,
+      textTransform: "uppercase",
+    },
+    nextPrayerContent: {
+      gap: 10,
+    },
+    nextPrayerMainInfo: {
+      flexDirection: "row",
+      alignItems: "center",
+    },
+    nextPrayerIconCircle: {
+      width: 50,
+      height: 50,
+      borderRadius: 25,
+      justifyContent: "center",
+      alignItems: "center",
+      marginRight: 12,
+    },
+    nextPrayerTextInfo: {
+      flex: 1,
+    },
+    nextPrayerName: {
+      fontSize: 20,
+      fontWeight: "700",
+      color: overlayTextColor,
+      marginBottom: 2,
+    },
+    nextPrayerCountdown: {
+      fontSize: 14,
+      color: "#4ECDC4",
+      fontWeight: "600",
+    },
+    progressText: {
+      fontSize: 12,
+      color:
+        currentTheme === "light"
+          ? colors.textTertiary
+          : "rgba(255, 255, 255, 0.7)",
+      textAlign: "center",
+    },
+    prayerGrid: {
+      flexDirection: "row",
+      flexWrap: "wrap",
+      justifyContent: "space-between",
+      gap: 8,
+    },
+    prayerCard: {
+      backgroundColor:
+        currentTheme === "light" ? colors.surface : "rgba(255, 255, 255, 0.08)",
+      borderRadius: 12,
+      borderWidth: 1,
+      borderColor:
+        currentTheme === "light" ? colors.border : "rgba(255, 255, 255, 0.1)",
+      overflow: "hidden",
+      width: "48%",
+      marginBottom: 8,
+    },
+    prayerCardActive: {
+      backgroundColor: "rgba(78, 205, 196, 0.15)",
+      borderColor: "#4ECDC4",
+      borderWidth: 2,
+      shadowColor: "#4ECDC4",
+      shadowOffset: { width: 0, height: 0 },
+      shadowOpacity: 0.3,
+      shadowRadius: 8,
+      elevation: 6,
+    },
+    prayerCardPassed: {
+      backgroundColor: "rgba(255, 255, 255, 0.04)",
+      opacity: 0.7,
+    },
+    prayerCardContent: {
+      flexDirection: "row",
+      alignItems: "center",
+      padding: 12,
+    },
+    prayerIconContainer: {
+      width: 36,
+      height: 36,
+      borderRadius: 18,
+      justifyContent: "center",
+      alignItems: "center",
+      marginRight: 10,
+    },
+    prayerIconContainerActive: {
+      borderWidth: 2,
+      borderColor: "#4ECDC4",
+    },
+    prayerInfo: {
+      flex: 1,
+    },
+    prayerLabel: {
+      fontSize: 14,
+      color: overlayTextColor,
+      fontWeight: "600",
+      marginBottom: 1,
+    },
+    prayerLabelActive: {
+      color: "#4ECDC4",
+      fontWeight: "700",
+    },
+    prayerLabelPassed: {
+      color: "rgba(255, 255, 255, 0.6)",
+    },
+    prayerTime: {
+      fontSize: 16,
+      color: "#FFD700",
+      fontWeight: "700",
+      textShadowColor: "rgba(255, 215, 0, 0.3)",
+      textShadowOffset: { width: 0, height: 1 },
+      textShadowRadius: 3,
+      letterSpacing: 0.5,
+    },
+    prayerTimeActive: {
+      color: "#4ECDC4",
+      fontSize: 18,
+    },
+    prayerTimePassed: {
+      color: "rgba(255, 215, 0, 0.5)",
+    },
+    currentBadge: {
+      backgroundColor: "#4ECDC4",
+      paddingHorizontal: 6,
+      paddingVertical: 3,
+      borderRadius: 10,
+      justifyContent: "center",
+      alignItems: "center",
+    },
+    currentBadgeText: {
+      color: overlayTextColor,
+      fontSize: 10,
+      fontWeight: "700",
+      textTransform: "uppercase",
+    },
+    loadingCard: {
+      backgroundColor:
+        currentTheme === "light" ? colors.cardBG : "rgba(0, 0, 0, 0.6)",
+      padding: 30,
+      borderRadius: 20,
+      alignItems: "center",
+      borderWidth: 1,
+      borderColor:
+        currentTheme === "light" ? colors.border : "rgba(255, 255, 255, 0.1)",
+    },
 
-  setupCard: {
-    backgroundColor: "rgba(0, 0, 0, 0.6)",
-    padding: 30,
-    borderRadius: 20,
-    alignItems: "center",
-    borderWidth: 1,
-    borderColor: "rgba(255, 255, 255, 0.1)",
-    width: "100%",
-    maxWidth: 320,
-  },
-  setupIcon: {
-    marginBottom: 20,
-  },
-  setupTitle: {
-    fontSize: 28,
-    fontWeight: "700",
-    color: "#fffbe8",
-    marginBottom: 12,
-    textAlign: "center",
-  },
-  setupSubtitle: {
-    fontSize: 16,
-    color: "rgba(255, 255, 255, 0.8)",
-    textAlign: "center",
-    marginBottom: 25,
-    lineHeight: 22,
-  },
-  primaryButton: {
-    backgroundColor: Colors.primary,
-    flexDirection: "row",
-    alignItems: "center",
-    paddingVertical: 15,
-    paddingHorizontal: 25,
-    borderRadius: 12,
-    marginBottom: 12,
-    width: "100%",
-    justifyContent: "center",
-    shadowColor: Colors.primary,
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 8,
-    elevation: 5,
-  },
-  primaryButtonText: {
-    color: "#fff",
-    fontSize: 16,
-    fontWeight: "600",
-    marginLeft: 8,
-  },
-  secondaryButton: {
-    backgroundColor: "transparent",
-    flexDirection: "row",
-    alignItems: "center",
-    paddingVertical: 15,
-    paddingHorizontal: 25,
-    borderRadius: 12,
-    borderWidth: 2,
-    borderColor: Colors.primary,
-    width: "100%",
-    justifyContent: "center",
-  },
-  secondaryButtonText: {
-    color: Colors.primary,
-    fontSize: 16,
-    fontWeight: "600",
-    marginLeft: 8,
-  },
-  errorCard: {
-    backgroundColor: "rgba(0, 0, 0, 0.6)",
-    padding: 30,
-    borderRadius: 20,
-    alignItems: "center",
-    borderWidth: 1,
-    borderColor: "rgba(255, 107, 107, 0.3)",
-    width: "100%",
-    maxWidth: 320,
-  },
-  errorIcon: {
-    marginBottom: 20,
-  },
-  errorTitle: {
-    fontSize: 24,
-    fontWeight: "700",
-    color: "#fffbe8",
-    marginBottom: 12,
-    textAlign: "center",
-  },
-  errorText: {
-    color: "rgba(255, 255, 255, 0.8)",
-    fontSize: 16,
-    textAlign: "center",
-    marginBottom: 25,
-    lineHeight: 22,
-  },
-  bottomSpacer: {
-    height: 20,
-  },
-  // Styles DUA
-  duaContainer: {
-    backgroundColor: "rgba(255, 215, 0, 0.2)",
-    borderRadius: 16,
-    padding: 16,
-    marginBottom: 16,
-    borderWidth: 1,
-    borderColor: "rgba(255, 215, 0, 0.3)",
-  },
-  duaHeader: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 12,
-  },
-  duaTitle: {
-    color: "#FFD700",
-    fontSize: 16,
-    fontWeight: "700",
-    marginLeft: 8,
-  },
-  duaTitleText: {
-    fontSize: 16,
-    color: "#fffbe8",
-    fontWeight: "600",
-    marginBottom: 8,
-    textAlign: "center",
-  },
-  duaArabic: {
-    fontSize: 24,
-    color: "#fffbe8",
-    textAlign: "center",
-    marginBottom: 12,
-    fontFamily: "ScheherazadeNew",
-    lineHeight: 36,
-    flexShrink: 1, // Permet au texte de se rétrécir si nécessaire
-  },
-  duaTranslation: {
-    fontSize: 16,
-    color: "rgba(255, 255, 255, 0.9)",
-    textAlign: "center",
-    marginBottom: 8,
-    lineHeight: 22,
-    flexShrink: 1, // Permet au texte de se rétrécir si nécessaire
-  },
-  duaBenefits: {
-    fontSize: 14,
-    color: "rgba(255, 255, 255, 0.7)",
-    textAlign: "center",
-    fontStyle: "italic",
-    lineHeight: 20,
-  },
-  duaButton: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "rgba(255, 215, 0, 0.3)",
-    borderRadius: 12,
-    padding: 10,
-    borderWidth: 1,
-    borderColor: "rgba(255, 215, 0, 0.4)",
-  },
-  duaButtonText: {
-    color: "#FFD700",
-    fontSize: 14,
-    fontWeight: "600",
-    marginLeft: 6,
-  },
+    setupCard: {
+      backgroundColor:
+        currentTheme === "light" ? colors.cardBG : "rgba(0, 0, 0, 0.6)",
+      padding: 30,
+      borderRadius: 20,
+      alignItems: "center",
+      borderWidth: 1,
+      borderColor:
+        currentTheme === "light" ? colors.border : "rgba(255, 255, 255, 0.1)",
+      width: "100%",
+      maxWidth: 320,
+    },
+    setupIcon: {
+      marginBottom: 20,
+    },
+    setupTitle: {
+      fontSize: 28,
+      fontWeight: "700",
+      color: overlayTextColor,
+      marginBottom: 12,
+      textAlign: "center",
+    },
+    setupSubtitle: {
+      fontSize: 16,
+      color:
+        currentTheme === "light"
+          ? colors.textSecondary
+          : "rgba(255, 255, 255, 0.8)",
+      textAlign: "center",
+      marginBottom: 25,
+      lineHeight: 22,
+    },
+    primaryButton: {
+      backgroundColor: "#2E7D32", // Vert islamique fixe
+      flexDirection: "row",
+      alignItems: "center",
+      paddingVertical: 15,
+      paddingHorizontal: 25,
+      borderRadius: 12,
+      marginBottom: 12,
+      width: "100%",
+      justifyContent: "center",
+      shadowColor: "#2E7D32", // Vert islamique fixe
+      shadowOffset: { width: 0, height: 4 },
+      shadowOpacity: 0.3,
+      shadowRadius: 8,
+      elevation: 5,
+    },
+    primaryButtonText: {
+      color: overlayTextColor,
+      fontSize: 16,
+      fontWeight: "600",
+      marginLeft: 8,
+    },
+    secondaryButton: {
+      backgroundColor: "transparent",
+      flexDirection: "row",
+      alignItems: "center",
+      paddingVertical: 15,
+      paddingHorizontal: 25,
+      borderRadius: 12,
+      borderWidth: 2,
+      borderColor: "#2E7D32", // Vert islamique fixe
+      width: "100%",
+      justifyContent: "center",
+    },
+    secondaryButtonText: {
+      color: "#2E7D32", // Vert islamique fixe
+      fontSize: 16,
+      fontWeight: "600",
+      marginLeft: 8,
+    },
+    errorCard: {
+      backgroundColor: "rgba(0, 0, 0, 0.6)",
+      padding: 30,
+      borderRadius: 20,
+      alignItems: "center",
+      borderWidth: 1,
+      borderColor: "rgba(255, 107, 107, 0.3)",
+      width: "100%",
+      maxWidth: 320,
+    },
+    errorIcon: {
+      marginBottom: 20,
+    },
+    errorTitle: {
+      fontSize: 24,
+      fontWeight: "700",
+      color: overlayTextColor,
+      marginBottom: 12,
+      textAlign: "center",
+    },
+    errorText: {
+      color:
+        currentTheme === "light"
+          ? colors.textSecondary
+          : "rgba(255, 255, 255, 0.8)",
+      fontSize: 16,
+      textAlign: "center",
+      marginBottom: 25,
+      lineHeight: 22,
+    },
+    bottomSpacer: {
+      height: 20,
+    },
+    // Styles DUA
+    duaContainer: {
+      backgroundColor: "rgba(255, 215, 0, 0.2)",
+      borderRadius: 16,
+      padding: 16,
+      marginBottom: 16,
+      borderWidth: 1,
+      borderColor: "rgba(255, 215, 0, 0.3)",
+    },
+    duaHeader: {
+      flexDirection: "row",
+      alignItems: "center",
+      marginBottom: 12,
+    },
+    duaTitle: {
+      color: "#FFD700",
+      fontSize: 16,
+      fontWeight: "700",
+      marginLeft: 8,
+    },
+    duaTitleText: {
+      fontSize: 16,
+      color: overlayTextColor,
+      fontWeight: "600",
+      marginBottom: 8,
+      textAlign: "center",
+    },
+    duaArabic: {
+      fontSize: 24,
+      color: overlayTextColor,
+      textAlign: "center",
+      marginBottom: 12,
+      fontFamily: "ScheherazadeNew",
+      lineHeight: 36,
+      flexShrink: 1, // Permet au texte de se rétrécir si nécessaire
+    },
+    duaTranslation: {
+      fontSize: 16,
+      color:
+        currentTheme === "light"
+          ? colors.textSecondary
+          : "rgba(255, 255, 255, 0.9)",
+      textAlign: "center",
+      marginBottom: 8,
+      lineHeight: 22,
+      flexShrink: 1, // Permet au texte de se rétrécir si nécessaire
+    },
+    duaBenefits: {
+      fontSize: 14,
+      color:
+        currentTheme === "light"
+          ? colors.textTertiary
+          : "rgba(255, 255, 255, 0.7)",
+      textAlign: "center",
+      fontStyle: "italic",
+      lineHeight: 20,
+    },
+    duaButton: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "center",
+      backgroundColor: "rgba(255, 215, 0, 0.3)",
+      borderRadius: 12,
+      padding: 10,
+      borderWidth: 1,
+      borderColor: "rgba(255, 215, 0, 0.4)",
+    },
+    duaButtonText: {
+      color: "#FFD700",
+      fontSize: 14,
+      fontWeight: "600",
+      marginLeft: 6,
+    },
 
-  // Styles Verset
-  versetContainer: {
-    backgroundColor: "rgba(0, 0, 0, 0.4)",
-    borderRadius: 16,
-    padding: 16,
-    marginBottom: 16,
-    borderWidth: 1,
-    borderColor: "rgba(78, 205, 196, 0.3)",
-  },
-  versetHeader: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 12,
-  },
-  versetTitle: {
-    color: "#4ECDC4",
-    fontSize: 16,
-    fontWeight: "700",
-    marginLeft: 8,
-  },
-  versetArabic: {
-    fontSize: 24,
-    color: "#fffbe8",
-    textAlign: "center",
-    marginBottom: 12,
-    fontFamily: "ScheherazadeNew",
-    lineHeight: 36,
-  },
-  versetTranslation: {
-    fontSize: 16,
-    color: "rgba(255, 255, 255, 0.9)",
-    textAlign: "center",
-    marginBottom: 8,
-    lineHeight: 22,
-  },
-  versetReference: {
-    fontSize: 14,
-    color: "rgba(255, 255, 255, 0.7)",
-    textAlign: "center",
-    fontStyle: "italic",
-  },
-  versetButton: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "rgba(78, 205, 196, 0.2)",
-    borderRadius: 12,
-    padding: 10,
-    borderWidth: 1,
-    borderColor: "rgba(78, 205, 196, 0.3)",
-  },
-  versetButtonText: {
-    color: "#4ECDC4",
-    fontSize: 14,
-    fontWeight: "600",
-    marginLeft: 6,
-  },
+    // Styles Verset
+    versetContainer: {
+      backgroundColor: "rgba(0, 0, 0, 0.4)",
+      borderRadius: 16,
+      padding: 16,
+      marginBottom: 16,
+      borderWidth: 1,
+      borderColor: "rgba(78, 205, 196, 0.3)",
+    },
+    versetHeader: {
+      flexDirection: "row",
+      alignItems: "center",
+      marginBottom: 12,
+    },
+    versetTitle: {
+      color: "#4ECDC4",
+      fontSize: 16,
+      fontWeight: "700",
+      marginLeft: 8,
+    },
+    versetArabic: {
+      fontSize: 24,
+      color: overlayTextColor,
+      textAlign: "center",
+      marginBottom: 12,
+      fontFamily: "ScheherazadeNew",
+      lineHeight: 36,
+    },
+    versetTranslation: {
+      fontSize: 16,
+      color:
+        currentTheme === "light"
+          ? colors.textSecondary
+          : "rgba(255, 255, 255, 0.9)",
+      textAlign: "center",
+      marginBottom: 8,
+      lineHeight: 22,
+    },
+    versetReference: {
+      fontSize: 14,
+      color:
+        currentTheme === "light"
+          ? colors.textTertiary
+          : "rgba(255, 255, 255, 0.7)",
+      textAlign: "center",
+      fontStyle: "italic",
+    },
+    versetButton: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "center",
+      backgroundColor: "rgba(78, 205, 196, 0.2)",
+      borderRadius: 12,
+      padding: 10,
+      borderWidth: 1,
+      borderColor: "rgba(78, 205, 196, 0.3)",
+    },
+    versetButtonText: {
+      color: "#4ECDC4",
+      fontSize: 14,
+      fontWeight: "600",
+      marginLeft: 6,
+    },
 
-  // Styles Nom d'Allah
-  allahnameContainer: {
-    backgroundColor: "rgba(240, 147, 251, 0.2)",
-    borderRadius: 16,
-    padding: 16,
-    marginBottom: 16,
-    borderWidth: 1,
-    borderColor: "rgba(240, 147, 251, 0.3)",
-  },
-  allahnameHeader: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 12,
-  },
-  allahnameTitle: {
-    color: "#F093FB",
-    fontSize: 16,
-    fontWeight: "700",
-    marginLeft: 8,
-  },
-  allahnameArabic: {
-    fontSize: 28,
-    color: "#fffbe8",
-    textAlign: "center",
-    marginBottom: 8,
-    fontWeight: "700",
-  },
-  allahnameTranslit: {
-    fontSize: 20,
-    color: "#F093FB",
-    textAlign: "center",
-    marginBottom: 8,
-    fontStyle: "italic",
-  },
-  allahnameDescription: {
-    fontSize: 14,
-    color: "rgba(255, 255, 255, 0.8)",
-    textAlign: "center",
-    marginBottom: 12,
-    lineHeight: 20,
-  },
-  allahnameButton: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "rgba(240, 147, 251, 0.3)",
-    borderRadius: 12,
-    padding: 10,
-    borderWidth: 1,
-    borderColor: "rgba(240, 147, 251, 0.4)",
-  },
-  allahnameButtonText: {
-    color: "#F093FB",
-    fontSize: 14,
-    fontWeight: "600",
-    marginLeft: 6,
-  },
+    // Styles Nom d'Allah
+    allahnameContainer: {
+      backgroundColor: "rgba(240, 147, 251, 0.2)",
+      borderRadius: 16,
+      padding: 16,
+      marginBottom: 16,
+      borderWidth: 1,
+      borderColor: "rgba(240, 147, 251, 0.3)",
+    },
+    allahnameHeader: {
+      flexDirection: "row",
+      alignItems: "center",
+      marginBottom: 12,
+    },
+    allahnameTitle: {
+      color: "#F093FB",
+      fontSize: 16,
+      fontWeight: "700",
+      marginLeft: 8,
+    },
+    allahnameArabic: {
+      fontSize: 28,
+      color: "#fffbe8",
+      textAlign: "center",
+      marginBottom: 8,
+      fontWeight: "700",
+    },
+    allahnameTranslit: {
+      fontSize: 20,
+      color: "#F093FB",
+      textAlign: "center",
+      marginBottom: 8,
+      fontStyle: "italic",
+    },
+    allahnameDescription: {
+      fontSize: 14,
+      color: "rgba(255, 255, 255, 0.8)",
+      textAlign: "center",
+      marginBottom: 12,
+      lineHeight: 20,
+    },
+    allahnameButton: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "center",
+      backgroundColor: "rgba(240, 147, 251, 0.3)",
+      borderRadius: 12,
+      padding: 10,
+      borderWidth: 1,
+      borderColor: "rgba(240, 147, 251, 0.4)",
+    },
+    allahnameButtonText: {
+      color: "#F093FB",
+      fontSize: 14,
+      fontWeight: "600",
+      marginLeft: 6,
+    },
 
-  // Styles Actions rapides
-  actionsContainer: {
-    marginBottom: 20,
-  },
-  actionsTitle: {
-    fontSize: 18,
-    color: "#fffbe8",
-    fontWeight: "700",
-    marginBottom: 16,
-    textAlign: "center",
-  },
-  actionsWrapper: {
-    borderRadius: 20,
-    padding: 20,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 6 },
-    shadowOpacity: 0.3,
-    shadowRadius: 15,
-    elevation: 8,
-  },
-  actionsGrid: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "space-between",
-    gap: 12,
-  },
-  actionCard: {
-    width: "30%",
-    backgroundColor: "rgba(255, 255, 255, 0.08)",
-    borderRadius: 16,
-    padding: 16,
-    alignItems: "center",
-    borderWidth: 2,
-    minHeight: 100,
-    justifyContent: "center",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.2,
-    shadowRadius: 8,
-    elevation: 4,
-  },
-  actionTitle: {
-    color: "#fffbe8",
-    fontSize: 11,
-    fontWeight: "600",
-    textAlign: "center",
-    lineHeight: 13,
-  },
+    // Styles Actions rapides
+    actionsContainer: {
+      marginBottom: 20,
+    },
+    actionsTitle: {
+      fontSize: 18,
+      color: "#fffbe8",
+      fontWeight: "700",
+      marginBottom: 16,
+      textAlign: "center",
+    },
+    actionsWrapper: {
+      borderRadius: 20,
+      padding: 20,
+      shadowColor: "#000",
+      shadowOffset: { width: 0, height: 6 },
+      shadowOpacity: 0.3,
+      shadowRadius: 15,
+      elevation: 8,
+    },
+    actionsGrid: {
+      flexDirection: "row",
+      flexWrap: "wrap",
+      justifyContent: "space-between",
+      gap: 12,
+    },
+    actionCard: {
+      width: "30%",
+      backgroundColor: "rgba(255, 255, 255, 0.08)",
+      borderRadius: 16,
+      padding: 16,
+      alignItems: "center",
+      borderWidth: 2,
+      minHeight: 100,
+      justifyContent: "center",
+      shadowColor: "#000",
+      shadowOffset: { width: 0, height: 4 },
+      shadowOpacity: 0.2,
+      shadowRadius: 8,
+      elevation: 4,
+    },
+    actionTitle: {
+      color: "#fffbe8",
+      fontSize: 11,
+      fontWeight: "600",
+      textAlign: "center",
+      lineHeight: 13,
+    },
 
-  // Styles pour la section prière
-  heroPrayerCard: {
-    marginBottom: 20,
-    borderRadius: 24,
-    overflow: "hidden",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 0.4,
-    shadowRadius: 24,
-    elevation: 16,
-    borderWidth: 1,
-    borderColor: "rgba(255, 255, 255, 0.1)",
-  },
+    // Styles pour la section prière
+    heroPrayerCard: {
+      marginBottom: 20,
+      borderRadius: 24,
+      overflow: "hidden",
+      shadowColor: "#000",
+      shadowOffset: { width: 0, height: 8 },
+      shadowOpacity: 0.4,
+      shadowRadius: 24,
+      elevation: 16,
+      borderWidth: 1,
+      borderColor: "rgba(255, 255, 255, 0.1)",
+    },
 
-  heroGradient: {
-    padding: 24,
-    borderRadius: 24,
-  },
+    heroGradient: {
+      padding: 24,
+      borderRadius: 24,
+    },
 
-  heroContent: {
-    gap: 20,
-  },
+    heroContent: {
+      gap: 20,
+    },
 
-  prayerInfoContainer: {
-    flexDirection: "column",
-    alignItems: "center",
-  },
+    prayerInfoContainer: {
+      flexDirection: "column",
+      alignItems: "center",
+    },
 
-  nextPrayerLabelText: {
-    fontSize: 18,
-    fontWeight: "700",
-    color: "#fffbe8",
-    marginBottom: 8,
-    textShadowColor: "rgba(0, 0, 0, 0.3)",
-    textShadowOffset: { width: 0, height: 2 },
-    textShadowRadius: 4,
-  },
+    nextPrayerLabelText: {
+      fontSize: 18,
+      fontWeight: "700",
+      color: "#fffbe8",
+      marginBottom: 8,
+      textShadowColor: "rgba(0, 0, 0, 0.3)",
+      textShadowOffset: { width: 0, height: 2 },
+      textShadowRadius: 4,
+    },
 
-  prayerNameText: {
-    fontSize: 32,
-    fontWeight: "800",
-    color: "#fffbe8",
-    marginBottom: 4,
-    textShadowColor: "rgba(0, 0, 0, 0.3)",
-    textShadowOffset: { width: 0, height: 2 },
-    textShadowRadius: 4,
-  },
+    prayerNameText: {
+      fontSize: 32,
+      fontWeight: "800",
+      color: "#fffbe8",
+      marginBottom: 4,
+      textShadowColor: "rgba(0, 0, 0, 0.3)",
+      textShadowOffset: { width: 0, height: 2 },
+      textShadowRadius: 4,
+    },
 
-  prayerTimeText: {
-    fontSize: 24,
-    color: "#FFD700",
-    fontWeight: "700",
-    textShadowColor: "rgba(255, 215, 0, 0.3)",
-    textShadowOffset: { width: 0, height: 2 },
-    textShadowRadius: 4,
-  },
+    prayerTimeText: {
+      fontSize: 24,
+      color: "#FFD700",
+      fontWeight: "700",
+      textShadowColor: "rgba(255, 215, 0, 0.3)",
+      textShadowOffset: { width: 0, height: 2 },
+      textShadowRadius: 4,
+    },
 
-  countdownSection: {
-    flexDirection: "column",
-    alignItems: "center",
-    gap: 12,
-  },
+    countdownSection: {
+      flexDirection: "column",
+      alignItems: "center",
+      gap: 12,
+    },
 
-  countdownLabel: {
-    fontSize: 16,
-    color: "rgba(255, 255, 255, 0.9)",
-    fontWeight: "600",
-    textShadowColor: "rgba(0, 0, 0, 0.2)",
-    textShadowOffset: { width: 0, height: 1 },
-    textShadowRadius: 2,
-  },
+    countdownLabel: {
+      fontSize: 16,
+      color: "rgba(255, 255, 255, 0.9)",
+      fontWeight: "600",
+      textShadowColor: "rgba(0, 0, 0, 0.2)",
+      textShadowOffset: { width: 0, height: 1 },
+      textShadowRadius: 2,
+    },
 
-  countdownTime: {
-    fontSize: 24,
-    color: "#4ECDC4",
-    fontWeight: "700",
-    textShadowColor: "rgba(78, 205, 196, 0.3)",
-    textShadowOffset: { width: 0, height: 2 },
-    textShadowRadius: 4,
-  },
+    countdownTime: {
+      fontSize: 24,
+      color: "#4ECDC4",
+      fontWeight: "700",
+      textShadowColor: "rgba(78, 205, 196, 0.3)",
+      textShadowOffset: { width: 0, height: 2 },
+      textShadowRadius: 4,
+    },
 
-  progressContainerMain: {
-    width: "100%",
-    gap: 8,
-    marginTop: 8,
-  },
+    progressContainerMain: {
+      width: "100%",
+      gap: 8,
+      marginTop: 8,
+    },
 
-  progressBarMain: {
-    height: 12,
-    backgroundColor: "rgba(255, 255, 255, 0.2)",
-    borderRadius: 6,
-    overflow: "hidden",
-    borderWidth: 1,
-    borderColor: "rgba(255, 255, 255, 0.1)",
-  },
+    progressBarMain: {
+      height: 12,
+      backgroundColor: "rgba(255, 255, 255, 0.2)",
+      borderRadius: 6,
+      overflow: "hidden",
+      borderWidth: 1,
+      borderColor: "rgba(255, 255, 255, 0.1)",
+    },
 
-  progressFillMain: {
-    height: "100%",
-    borderRadius: 6,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.3,
-    shadowRadius: 4,
-    elevation: 3,
-  },
+    progressFillMain: {
+      height: "100%",
+      borderRadius: 6,
+      shadowColor: "#000",
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.3,
+      shadowRadius: 4,
+      elevation: 3,
+    },
 
-  progressTextMain: {
-    fontSize: 16,
-    color: "#fffbe8",
-    fontWeight: "700",
-    textAlign: "center",
-    textShadowColor: "rgba(0, 0, 0, 0.2)",
-    textShadowOffset: { width: 0, height: 1 },
-    textShadowRadius: 2,
-  },
+    progressTextMain: {
+      fontSize: 16,
+      color: "#fffbe8",
+      fontWeight: "700",
+      textAlign: "center",
+      textShadowColor: "rgba(0, 0, 0, 0.2)",
+      textShadowOffset: { width: 0, height: 1 },
+      textShadowRadius: 2,
+    },
 
-  // Styles pour la grille
-  dashboardGrid: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "space-between",
-    marginBottom: 20,
-  },
+    // Styles pour la grille
+    dashboardGrid: {
+      flexDirection: "row",
+      flexWrap: "wrap",
+      justifyContent: "space-between",
+      marginBottom: 20,
+    },
 
-  gridCard: {
-    width: "48%",
-    marginBottom: 16,
-    borderRadius: 20,
-    overflow: "hidden",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 0.3,
-    shadowRadius: 20,
-    elevation: 12,
-  },
+    gridCard: {
+      width: "48%",
+      marginBottom: 16,
+      borderRadius: 20,
+      overflow: "hidden",
+      shadowColor: "#000",
+      shadowOffset: { width: 0, height: 8 },
+      shadowOpacity: 0.3,
+      shadowRadius: 20,
+      elevation: 12,
+    },
 
-  gridCardContent: {
-    padding: 20,
-    height: 200,
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "space-between",
-    borderRadius: 20,
-  },
+    gridCardContent: {
+      padding: 20,
+      height: 200,
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "space-between",
+      borderRadius: 20,
+    },
 
-  cardIcon: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    backgroundColor: "rgba(255, 255, 255, 0.2)",
-    justifyContent: "center",
-    alignItems: "center",
-    marginBottom: 12,
-    borderWidth: 1,
-    borderColor: "rgba(255, 255, 255, 0.3)",
-  },
+    cardIcon: {
+      width: 50,
+      height: 50,
+      borderRadius: 25,
+      backgroundColor: "rgba(255, 255, 255, 0.2)",
+      justifyContent: "center",
+      alignItems: "center",
+      marginBottom: 12,
+      borderWidth: 1,
+      borderColor: "rgba(255, 255, 255, 0.3)",
+    },
 
-  gridCardTitle: {
-    fontSize: 18,
-    fontWeight: "700",
-    color: "#fffbe8",
-    marginBottom: 4,
-    textShadowColor: "rgba(0, 0, 0, 0.3)",
-    textShadowOffset: { width: 0, height: 2 },
-    textShadowRadius: 4,
-  },
+    gridCardTitle: {
+      fontSize: 18,
+      fontWeight: "700",
+      color: "#fffbe8",
+      marginBottom: 4,
+      textShadowColor: "rgba(0, 0, 0, 0.3)",
+      textShadowOffset: { width: 0, height: 2 },
+      textShadowRadius: 4,
+    },
 
-  gridCardSubtitle: {
-    fontSize: 14,
-    color: "rgba(255, 255, 255, 0.9)",
-    textAlign: "center",
-    marginTop: 4,
-    lineHeight: 18,
-  },
+    gridCardSubtitle: {
+      fontSize: 14,
+      color: "rgba(255, 255, 255, 0.9)",
+      textAlign: "center",
+      marginTop: 4,
+      lineHeight: 18,
+    },
 
-  quickAction: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    padding: 8,
-    borderRadius: 12,
-    backgroundColor: "rgba(255, 255, 255, 0.2)",
-    borderWidth: 1,
-    borderColor: "rgba(255, 255, 255, 0.3)",
-    marginTop: 8,
-  },
+    quickAction: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "center",
+      padding: 8,
+      borderRadius: 12,
+      backgroundColor: "rgba(255, 255, 255, 0.2)",
+      borderWidth: 1,
+      borderColor: "rgba(255, 255, 255, 0.3)",
+      marginTop: 8,
+    },
 
-  // Styles pour les actions rapides
-  quickActionsSection: {
-    marginTop: 24,
-    marginBottom: 20,
-  },
+    // Styles pour les actions rapides
+    quickActionsSection: {
+      marginTop: 24,
+      marginBottom: 20,
+    },
 
-  sectionHeaderText: {
-    fontSize: 20,
-    color: "#fffbe8",
-    fontWeight: "700",
-    marginBottom: 16,
-    textAlign: "center",
-    textShadowColor: "rgba(0, 0, 0, 0.3)",
-    textShadowOffset: { width: 0, height: 2 },
-    textShadowRadius: 4,
-  },
+    sectionHeaderText: {
+      fontSize: 20,
+      color: overlayTextColor,
+      fontWeight: "700",
+      marginBottom: 16,
+      textAlign: "center",
+      textShadowColor:
+        currentTheme === "light"
+          ? "rgba(255, 255, 255, 0.5)"
+          : "rgba(0, 0, 0, 0.3)",
+      textShadowOffset: { width: 0, height: 2 },
+      textShadowRadius: 4,
+    },
 
-  actionButton: {
-    marginBottom: 12,
-    borderRadius: 16,
-    overflow: "hidden",
-    borderWidth: 1.5,
-    // La couleur de bordure sera dynamique selon l'action
-  },
+    actionButton: {
+      marginBottom: 12,
+      borderRadius: 16,
+      overflow: "hidden",
+      borderWidth: 1.5,
+      // La couleur de bordure sera dynamique selon l'action
+    },
 
-  actionGradient: {
-    flexDirection: "row",
-    alignItems: "center",
-    padding: 16,
-    borderRadius: 16,
-  },
+    actionGradient: {
+      flexDirection: "row",
+      alignItems: "center",
+      padding: 16,
+      borderRadius: 16,
+    },
 
-  actionIconCircle: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: "rgba(255,255,255,0.10)",
-    justifyContent: "center",
-    alignItems: "center",
-    marginRight: 12,
-    borderWidth: 1.5,
-    // La couleur de bordure sera dynamique selon l'action
-    shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 0.5,
-    shadowRadius: 8,
-  },
+    actionIconCircle: {
+      width: 40,
+      height: 40,
+      borderRadius: 20,
+      backgroundColor: "rgba(255,255,255,0.10)",
+      justifyContent: "center",
+      alignItems: "center",
+      marginRight: 12,
+      borderWidth: 1.5,
+      // La couleur de bordure sera dynamique selon l'action
+      shadowOffset: { width: 0, height: 0 },
+      shadowOpacity: 0.5,
+      shadowRadius: 8,
+    },
 
-  actionButtonText: {
-    flex: 1,
-    fontSize: 16,
-    fontWeight: "600",
-    color: "#fff",
-    textShadowColor: "#000",
-    textShadowOffset: { width: 0, height: 1 },
-    textShadowRadius: 2,
-  },
+    actionButtonText: {
+      flex: 1,
+      fontSize: 16,
+      fontWeight: "600",
+      color: overlayTextColor,
+      textShadowColor: "#000",
+      textShadowOffset: { width: 0, height: 1 },
+      textShadowRadius: 2,
+    },
 
-  // Styles pour le header
-  dashboardHeader: {
-    flexDirection: "row",
-    alignItems: "flex-start",
-    justifyContent: "space-between",
-    padding: 16,
-    backgroundColor: "rgba(0, 0, 0, 0.3)",
-    borderRadius: 20,
-    marginBottom: 20,
-    borderWidth: 1,
-    borderColor: "rgba(255, 255, 255, 0.1)",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 12,
-    elevation: 8,
-    minHeight: 80,
-  },
+    // Styles pour le header
+    dashboardHeader: {
+      flexDirection: "row",
+      alignItems: "flex-start",
+      justifyContent: "space-between",
+      padding: 16,
+      backgroundColor:
+        currentTheme === "light" ? colors.cardBG : "rgba(0, 0, 0, 0.3)",
+      borderRadius: 20,
+      marginBottom: 20,
+      borderWidth: 1,
+      borderColor:
+        currentTheme === "light" ? colors.border : "rgba(255, 255, 255, 0.1)",
+      shadowColor: currentTheme === "light" ? colors.shadow : "#000",
+      shadowOffset: { width: 0, height: 4 },
+      shadowOpacity: 0.3,
+      shadowRadius: 12,
+      elevation: 8,
+      minHeight: 80,
+    },
 
-  welcomeSection: {
-    flex: 1,
-    flexDirection: "column",
-    alignItems: "flex-start",
-    marginRight: 16,
-    maxWidth: "70%",
-    paddingRight: 8,
-  },
+    welcomeSection: {
+      flex: 1,
+      flexDirection: "column",
+      alignItems: "flex-start",
+      marginRight: 16,
+      maxWidth: "70%",
+      paddingRight: 8,
+    },
 
-  welcomeText: {
-    fontSize: 20,
-    fontWeight: "800",
-    color: "#fffbe8",
-    marginBottom: 4,
-    textShadowColor: "rgba(0, 0, 0, 0.3)",
-    textShadowOffset: { width: 0, height: 2 },
-    textShadowRadius: 4,
-    flexWrap: "wrap",
-    lineHeight: 24,
-  },
+    welcomeTextContainer: {
+      flexDirection: "row",
+      alignItems: "center",
+      marginBottom: 4,
+    },
 
-  dateText: {
-    fontSize: 14,
-    color: "rgba(255, 255, 255, 0.9)",
-    fontWeight: "600",
-    textShadowColor: "rgba(0, 0, 0, 0.2)",
-    textShadowOffset: { width: 0, height: 1 },
-    textShadowRadius: 2,
-  },
+    editNameButton: {
+      marginLeft: 8,
+      padding: 4,
+      borderRadius: 8,
+      backgroundColor:
+        currentTheme === "light" ? colors.surface : "rgba(255, 255, 255, 0.1)",
+      opacity: 0.8,
+    },
 
-  loadingText: {
-    color: THEME.colors.text.secondary,
-    fontSize: 14,
-    fontStyle: "italic",
-  },
+    welcomeText: {
+      fontSize: 20,
+      fontWeight: "800",
+      color: overlayTextColor,
+      marginBottom: 4,
+      textShadowColor:
+        currentTheme === "light"
+          ? "rgba(255, 255, 255, 0.5)"
+          : "rgba(0, 0, 0, 0.3)",
+      textShadowOffset: { width: 0, height: 2 },
+      textShadowRadius: 4,
+      flexWrap: "wrap",
+      lineHeight: 24,
+    },
 
-  dashboardCards: {
-    marginBottom: 20,
-  },
+    dateText: {
+      fontSize: 14,
+      color:
+        currentTheme === "light"
+          ? colors.textSecondary
+          : "rgba(255, 255, 255, 0.9)",
+      fontWeight: "600",
+      textShadowColor:
+        currentTheme === "light"
+          ? "rgba(255, 255, 255, 0.3)"
+          : "rgba(0, 0, 0, 0.2)",
+      textShadowOffset: { width: 0, height: 1 },
+      textShadowRadius: 2,
+    },
 
-  dashboardCard: {
-    marginBottom: 16,
-    borderRadius: 20,
-    overflow: "hidden",
-    shadowColor: "#4ECDC4",
-    shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 0.5,
-    shadowRadius: 18,
-    elevation: 12,
-    borderWidth: 1.5,
-    borderColor: "#4ECDC4",
-  },
+    loadingText: {
+      color: THEME.colors.text.secondary,
+      fontSize: 14,
+      fontStyle: "italic",
+    },
 
-  cardContent: {
-    padding: 20,
-    borderRadius: 20,
-    backgroundColor: "rgba(44,205,196,0.10)",
-  },
+    dashboardCards: {
+      marginBottom: 20,
+    },
 
-  cardHeader: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 16,
-  },
+    dashboardCard: {
+      marginBottom: 16,
+      borderRadius: 20,
+      overflow: "hidden",
+      shadowColor: "#4ECDC4",
+      shadowOffset: { width: 0, height: 0 },
+      shadowOpacity: 0.5,
+      shadowRadius: 18,
+      elevation: 12,
+      borderWidth: 1.5,
+      borderColor: "#4ECDC4",
+    },
 
-  cardIconContainer: {
-    width: 44,
-    height: 44,
-    borderRadius: 22,
-    backgroundColor: "rgba(240,147,251,0.10)",
-    justifyContent: "center",
-    alignItems: "center",
-    marginRight: 12,
-    borderWidth: 1.5,
-    borderColor: "#F093FB",
-    shadowColor: "#F093FB",
-    shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 0.7,
-    shadowRadius: 8,
-  },
+    cardContent: {
+      padding: 20,
+      borderRadius: 20,
+      backgroundColor: "rgba(44,205,196,0.10)",
+    },
 
-  cardTitle: {
-    fontSize: 20,
-    fontWeight: "700",
-    color: "#4ECDC4",
-    textShadowColor: "#4ECDC4",
-    textShadowOffset: { width: 0, height: 0 },
-    textShadowRadius: 10,
-  },
+    cardHeader: {
+      flexDirection: "row",
+      alignItems: "center",
+      marginBottom: 16,
+    },
 
-  cardBody: {
-    marginBottom: 16,
-  },
+    cardIconContainer: {
+      width: 44,
+      height: 44,
+      borderRadius: 22,
+      backgroundColor: "rgba(240,147,251,0.10)",
+      justifyContent: "center",
+      alignItems: "center",
+      marginRight: 12,
+      borderWidth: 1.5,
+      borderColor: "#F093FB",
+      shadowColor: "#F093FB",
+      shadowOffset: { width: 0, height: 0 },
+      shadowOpacity: 0.7,
+      shadowRadius: 8,
+    },
 
-  cardSubtitle: {
-    fontSize: 16,
-    color: "rgba(255, 255, 255, 0.8)",
-    textAlign: "center",
-    lineHeight: 22,
-  },
+    cardTitle: {
+      fontSize: 20,
+      fontWeight: "700",
+      color: "#4ECDC4",
+      textShadowColor: "#4ECDC4",
+      textShadowOffset: { width: 0, height: 0 },
+      textShadowRadius: 10,
+    },
 
-  cardAction: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    padding: 12,
-    borderRadius: 12,
-    backgroundColor: "rgba(44,205,196,0.18)",
-    borderWidth: 1.5,
-    borderColor: "#4ECDC4",
-    shadowColor: "#4ECDC4",
-    shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 0.5,
-    shadowRadius: 8,
-  },
+    cardBody: {
+      marginBottom: 16,
+    },
 
-  cardActionText: {
-    fontSize: 16,
-    fontWeight: "600",
-    color: "#fff",
-    marginRight: 8,
-    textShadowColor: "#4ECDC4",
-    textShadowOffset: { width: 0, height: 0 },
-    textShadowRadius: 8,
-  },
+    cardSubtitle: {
+      fontSize: 16,
+      color: "rgba(255, 255, 255, 0.8)",
+      textAlign: "center",
+      lineHeight: 22,
+    },
 
-  // Styles spécifiques pour le contenu
-  nameArabic: {
-    fontSize: 32,
-    color: "#fffbe8",
-    textAlign: "center",
-    marginBottom: 8,
-    fontWeight: "700",
-  },
+    cardAction: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "center",
+      padding: 12,
+      borderRadius: 12,
+      backgroundColor: "rgba(44,205,196,0.18)",
+      borderWidth: 1.5,
+      borderColor: "#4ECDC4",
+      shadowColor: "#4ECDC4",
+      shadowOffset: { width: 0, height: 0 },
+      shadowOpacity: 0.5,
+      shadowRadius: 8,
+    },
 
-  nameTranslit: {
-    fontSize: 20,
-    color: "rgba(255, 255, 255, 0.9)",
-    textAlign: "center",
-    marginBottom: 8,
-    fontStyle: "italic",
-  },
+    cardActionText: {
+      fontSize: 16,
+      fontWeight: "600",
+      color: overlayTextColor,
+      marginRight: 8,
+      textShadowColor: "#4ECDC4",
+      textShadowOffset: { width: 0, height: 0 },
+      textShadowRadius: 8,
+    },
 
-  nameMeaning: {
-    fontSize: 16,
-    color: "rgba(255, 255, 255, 0.8)",
-    textAlign: "center",
-    lineHeight: 22,
-  },
+    // Styles spécifiques pour le contenu
+    nameArabic: {
+      fontSize: 32,
+      color: overlayTextColor,
+      textAlign: "center",
+      marginBottom: 8,
+      fontWeight: "700",
+    },
 
-  // Ajout de styles spécifiques pour la carte hadith
-  hadithCard: {
-    marginTop: 50, // Augmenté de 24 à 32
-    marginBottom: 32, // Augmenté de 24 à 32
-  },
+    nameTranslit: {
+      fontSize: 20,
+      color:
+        currentTheme === "light"
+          ? colors.textSecondary
+          : "rgba(255, 255, 255, 0.9)",
+      textAlign: "center",
+      marginBottom: 8,
+      fontStyle: "italic",
+    },
 
-  hadithArabic: {
-    fontSize: 24,
-    color: "#fffbe8",
-    textAlign: "center",
-    marginBottom: 12,
-    fontFamily: "ScheherazadeNew",
-    lineHeight: 36,
-  },
+    nameMeaning: {
+      fontSize: 16,
+      color:
+        currentTheme === "light"
+          ? colors.textTertiary
+          : "rgba(255, 255, 255, 0.8)",
+      textAlign: "center",
+      lineHeight: 22,
+    },
 
-  hadithTranslation: {
-    fontSize: 16,
-    color: "rgba(255, 255, 255, 0.9)",
-    textAlign: "center",
-    marginBottom: 8,
-    lineHeight: 22,
-  },
+    // Ajout de styles spécifiques pour la carte hadith
+    hadithCard: {
+      marginTop: 50, // Augmenté de 24 à 32
+      marginBottom: 32, // Augmenté de 24 à 32
+    },
 
-  shareButton: {
-    marginLeft: "auto",
-    padding: 8,
-    borderRadius: 12,
-    backgroundColor: "rgba(255, 255, 255, 0.1)",
-  },
-});
+    hadithArabic: {
+      fontSize: 24,
+      color: overlayTextColor,
+      textAlign: "center",
+      marginBottom: 12,
+      fontFamily: "ScheherazadeNew",
+      lineHeight: 36,
+    },
+
+    hadithTranslation: {
+      fontSize: 16,
+      color:
+        currentTheme === "light"
+          ? colors.textSecondary
+          : "rgba(255, 255, 255, 0.9)",
+      textAlign: "center",
+      marginBottom: 8,
+      lineHeight: 22,
+    },
+
+    shareButton: {
+      marginLeft: "auto",
+      padding: 8,
+      borderRadius: 12,
+      backgroundColor: "rgba(255, 255, 255, 0.1)",
+    },
+  });
