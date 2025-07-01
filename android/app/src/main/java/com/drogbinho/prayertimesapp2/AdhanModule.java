@@ -1131,4 +1131,24 @@ public class AdhanModule extends ReactContextBaseJavaModule {
         }
     }
 
+    // ============ CONTENU PREMIUM ============
+
+    @ReactMethod
+    public void savePremiumContentData(String jsonData, Promise promise) {
+        try {
+            SharedPreferences premiumPrefs = getReactApplicationContext()
+                .getSharedPreferences("premium_content", Context.MODE_PRIVATE);
+            
+            premiumPrefs.edit()
+                .putString("downloaded_premium_content", jsonData)
+                .apply();
+            
+            debugLog("AdhanModule", "✅ Données premium sauvées dans SharedPreferences pour Android");
+            promise.resolve(true);
+        } catch (Exception e) {
+            errorLog("AdhanModule", "❌ Erreur sauvegarde données premium: " + e.getMessage());
+            promise.reject("SAVE_ERROR", e);
+        }
+    }
+
 }

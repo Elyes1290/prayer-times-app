@@ -25,7 +25,8 @@ export type AdhanSoundKey =
   | "misharyrachid"
   | "mustafaozcan"
   | "masjidquba"
-  | "islamsobhi";
+  | "islamsobhi"
+  | string; // Permettre n'importe quel string pour les sons premium dynamiques
 
 export type CalcMethodKey =
   | "MuslimWorldLeague"

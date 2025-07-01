@@ -231,12 +231,43 @@ public class AdhanService extends Service {
         String soundToPlay = (adhanSoundKey != null) ? adhanSoundKey : soundFromPrefs;
         float volume = adhanPrefs.getFloat("adhan_volume", 1.0f);
 
-        debugLog(TAG, "🔊 DEBUG SONS ADHAN:");
+        debugLog(TAG, "🔊 ============ DEBUG SONS ADHAN ============");
         debugLog(TAG, "  - adhanSoundKey (Intent): " + adhanSoundKey);
         debugLog(TAG, "  - soundFromPrefs (SharedPrefs): " + soundFromPrefs);
         debugLog(TAG, "  - soundToPlay (Final): " + soundToPlay);
         debugLog(TAG, "  - volume: " + volume);
+        debugLog(TAG, "  - prayerLabel: " + prayerLabelForCompletion);
         debugLog(TAG, "📢 Tentative de lecture Adhan: " + soundToPlay + " pour " + prayerLabelForCompletion);
+
+        // Vérifier d'abord si c'est un son premium téléchargé
+        if (isPremiumSound(soundToPlay)) {
+            debugLog(TAG, "🔍 SON PREMIUM DÉTECTÉ: " + soundToPlay);
+            debugLog(TAG, "🔍 Recherche du fichier premium...");
+            String premiumFilePath = getPremiumSoundPath(soundToPlay);
+            debugLog(TAG, "🔍 Chemin retourné par getPremiumSoundPath: " + premiumFilePath);
+            
+            if (premiumFilePath != null) {
+                java.io.File premiumFile = new java.io.File(premiumFilePath);
+                debugLog(TAG, "🔍 Vérification fichier: " + premiumFilePath);
+                debugLog(TAG, "🔍 Fichier existe: " + premiumFile.exists());
+                debugLog(TAG, "🔍 Fichier taille: " + (premiumFile.exists() ? premiumFile.length() + " bytes" : "N/A"));
+                
+                if (premiumFile.exists()) {
+                    debugLog(TAG, "✅ FICHIER PREMIUM TROUVÉ: " + premiumFilePath);
+                    debugLog(TAG, "🎵 LECTURE DU SON PREMIUM...");
+                    playPremiumAdhanSound(premiumFilePath, volume, prayerLabelForCompletion);
+                    return;
+                } else {
+                    errorLog(TAG, "❌ FICHIER PREMIUM MANQUANT: " + premiumFilePath);
+                }
+            } else {
+                errorLog(TAG, "❌ AUCUN CHEMIN PREMIUM TROUVÉ pour: " + soundToPlay);
+            }
+            
+            debugLog(TAG, "🔄 FALLBACK vers sons par défaut...");
+        } else {
+            debugLog(TAG, "ℹ️ Son standard détecté: " + soundToPlay);
+        }
 
         debugLog(TAG, "🔍 Recherche fichier audio: '" + soundToPlay + "' dans package: " + getPackageName());
         int resId = getResources().getIdentifier(soundToPlay, "raw", getPackageName());
@@ -331,6 +362,117 @@ public class AdhanService extends Service {
 
         } catch (Exception e) {
             errorLog(TAG, "Erreur lors du démarrage du MediaPlayer: " + e.getMessage(), e);
+            handleAdhanCompletion(prayerLabelForCompletion);
+        }
+    }
+
+    // Vérifier si c'est un son premium
+    private boolean isPremiumSound(String soundName) {
+        return soundName != null && soundName.startsWith("adhan_");
+    }
+
+    // Obtenir le chemin du fichier premium téléchargé
+    private String getPremiumSoundPath(String soundName) {
+        try {
+            debugLog(TAG, "🔍 Recherche du son premium: " + soundName);
+            
+            // Essayer plusieurs noms de bases de données AsyncStorage (pour compatibilité)
+            String[] possibleDbNames = {
+                "RCTAsyncLocalStorage_AsyncStorageDatabase",
+                "AsyncStorage",
+                "RCTAsyncLocalStorage"
+            };
+            
+            String downloadedContentJson = null;
+            
+            // Essayer chaque nom de base de données
+            for (String dbName : possibleDbNames) {
+                try {
+                    SharedPreferences prefs = getSharedPreferences(dbName, MODE_PRIVATE);
+                    downloadedContentJson = prefs.getString("downloaded_premium_content", null);
+                    if (downloadedContentJson != null) {
+                        debugLog(TAG, "✅ Données premium trouvées dans: " + dbName);
+                        break;
+                    } else {
+                        debugLog(TAG, "❌ Pas de données dans: " + dbName);
+                    }
+                } catch (Exception e) {
+                    debugLog(TAG, "❌ Erreur accès " + dbName + ": " + e.getMessage());
+                }
+            }
+            
+            // Si pas trouvé dans AsyncStorage, essayer dans les préférences dédiées
+            if (downloadedContentJson == null) {
+                SharedPreferences premiumPrefs = getSharedPreferences("premium_content", MODE_PRIVATE);
+                downloadedContentJson = premiumPrefs.getString("downloaded_premium_content", null);
+                if (downloadedContentJson != null) {
+                    debugLog(TAG, "✅ Données premium trouvées dans premium_content");
+                }
+            }
+            
+            if (downloadedContentJson != null) {
+                debugLog(TAG, "📦 Contenu téléchargé trouvé: " + downloadedContentJson);
+                
+                // Parser le JSON pour trouver le chemin du fichier
+                org.json.JSONObject downloadedContent = new org.json.JSONObject(downloadedContentJson);
+                if (downloadedContent.has(soundName)) {
+                    org.json.JSONObject contentInfo = downloadedContent.getJSONObject(soundName);
+                    String filePath = contentInfo.getString("downloadPath");
+                    
+                    // Vérifier que le fichier existe vraiment
+                    java.io.File file = new java.io.File(filePath);
+                    if (file.exists()) {
+                        debugLog(TAG, "✅ Fichier premium trouvé: " + filePath);
+                        return filePath;
+                    } else {
+                        errorLog(TAG, "❌ Fichier premium manquant: " + filePath);
+                    }
+                } else {
+                    debugLog(TAG, "❌ Son premium non trouvé dans les données: " + soundName);
+                }
+            } else {
+                debugLog(TAG, "❌ Aucune donnée de contenu premium trouvée");
+            }
+        } catch (Exception e) {
+            errorLog(TAG, "❌ Erreur récupération chemin premium: " + e.getMessage());
+        }
+        return null;
+    }
+
+    // Jouer un son premium depuis le système de fichiers
+    private void playPremiumAdhanSound(String filePath, float volume, String prayerLabelForCompletion) {
+        try {
+            mediaPlayer = new MediaPlayer();
+            mediaPlayer.setDataSource(filePath);
+            mediaPlayer.prepare();
+            
+            // Vérifier si cette prière est muette par l'utilisateur
+            boolean isPrayerMutedByUser = isPrayerMuted(prayerLabelForCompletion);
+
+            if (isPrayerMutedByUser) {
+                debugLog(TAG, "Prière " + prayerLabelForCompletion + " est muette par l'utilisateur. Volume à 0.");
+                mediaPlayer.setVolume(0, 0);
+            } else {
+                mediaPlayer.setVolume(volume, volume);
+                debugLog(TAG, "Adhan premium joué avec volume configuré: " + volume + " pour " + prayerLabelForCompletion);
+            }
+
+            mediaPlayer.setOnCompletionListener(mp -> {
+                debugLog(TAG, "Adhan premium terminé pour: " + prayerLabelForCompletion);
+                handleAdhanCompletion(prayerLabelForCompletion);
+            });
+
+            mediaPlayer.setOnErrorListener((mp, what, extra) -> {
+                errorLog(TAG, "Erreur MediaPlayer premium: what=" + what + ", extra=" + extra);
+                handleAdhanCompletion(prayerLabelForCompletion);
+                return true;
+            });
+
+            mediaPlayer.start();
+            debugLog(TAG, "Adhan premium démarré pour: " + prayerLabelForCompletion);
+
+        } catch (Exception e) {
+            errorLog(TAG, "❌ Erreur lecture fichier premium: " + e.getMessage(), e);
             handleAdhanCompletion(prayerLabelForCompletion);
         }
     }
