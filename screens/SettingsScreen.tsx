@@ -33,6 +33,9 @@ import {
 import { useCitySearch, NominatimResult } from "../hooks/useCitySearch";
 import { useTranslation } from "react-i18next";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useBackup } from "../contexts/BackupContext";
+import { usePremium } from "../contexts/PremiumContext";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const soundObjects: Record<AdhanSoundKey, any> = {
   adhamalsharqawe: require("../assets/sounds/adhamalsharqawe.mp3"),
@@ -91,6 +94,23 @@ function SettingsSections({
   styles,
 }: SettingsSectionsProps) {
   const { t } = useTranslation();
+
+  // Hooks pour la sauvegarde cloud premium
+  const { user, activatePremium } = usePremium();
+  const {
+    isSignedIn,
+    userEmail,
+    lastBackupTime,
+    isSyncing,
+    backupStatus,
+    signInAnonymously,
+    signOut,
+    backupData,
+    restoreData,
+    enableAutoBackup,
+    isAutoBackupEnabled,
+    hasCloudData,
+  } = useBackup();
   const {
     locationMode,
     setLocationMode,
@@ -662,6 +682,270 @@ function SettingsSections({
         },
       ],
     },
+    // Section Mode Test Premium (uniquement pour les utilisateurs non-premium)
+    ...(!user.isPremium
+      ? [
+          {
+            key: "premium_test",
+            title: "👑 " + t("premium_test", "Mode Test Premium"),
+            data: [
+              {
+                key: "premium_test_content",
+                component: (
+                  <View style={styles.premiumTestSection}>
+                    <View style={styles.premiumTestInfo}>
+                      <MaterialCommunityIcons
+                        name="crown"
+                        size={24}
+                        color="#FFD700"
+                      />
+                      <Text style={styles.premiumTestDescription}>
+                        {t(
+                          "premium_test_description",
+                          "Activez le mode Premium temporaire pour tester les fonctionnalités avancées comme la sauvegarde cloud."
+                        )}
+                      </Text>
+                    </View>
+
+                    <TouchableOpacity
+                      style={styles.premiumTestButton}
+                      onPress={async () => {
+                        try {
+                          await activatePremium("yearly", `test-${Date.now()}`);
+                          Alert.alert(
+                            "🎉 Premium activé !",
+                            "Mode Premium temporaire activé. Vous pouvez maintenant tester toutes les fonctionnalités premium !",
+                            [
+                              {
+                                text: "OK",
+                                onPress: () => {
+                                  // Forcer le rafraîchissement de l'écran
+                                  // L'UI se mettra à jour automatiquement grâce au context
+                                },
+                              },
+                            ]
+                          );
+                        } catch (error) {
+                          console.error("Erreur activation Premium:", error);
+                          Alert.alert(
+                            "Erreur",
+                            "Impossible d'activer le mode Premium test"
+                          );
+                        }
+                      }}
+                    >
+                      <MaterialCommunityIcons
+                        name="rocket-launch"
+                        size={20}
+                        color="#FFF"
+                      />
+                      <Text style={styles.premiumTestButtonText}>
+                        {t(
+                          "activate_premium_test",
+                          "Activer le Premium (Test)"
+                        )}
+                      </Text>
+                    </TouchableOpacity>
+
+                    <Text style={styles.premiumTestWarning}>
+                      {t(
+                        "premium_test_warning",
+                        "⚠️ Ceci est un mode de test. Dans l'app finale, Premium sera un abonnement payant."
+                      )}
+                    </Text>
+                  </View>
+                ),
+              },
+            ],
+          },
+        ]
+      : []),
+    // Section Sauvegarde Cloud Premium (uniquement pour les utilisateurs premium)
+    ...(user.isPremium
+      ? [
+          {
+            key: "cloud_backup",
+            title: "🔐 " + t("cloud_backup", "Sauvegarde Cloud Premium"),
+            data: [
+              {
+                key: "cloud_backup_content",
+                component: (
+                  <View style={styles.backupSection}>
+                    {/* État de connexion */}
+                    <View style={styles.backupRow}>
+                      <View style={styles.backupInfo}>
+                        <MaterialCommunityIcons
+                          name={
+                            isSignedIn
+                              ? "cloud-check-outline"
+                              : "cloud-off-outline"
+                          }
+                          size={24}
+                          color={isSignedIn ? "#4CAF50" : "#FF6B6B"}
+                        />
+                        <View style={styles.backupTextContainer}>
+                          <Text style={styles.backupLabel}>
+                            {t("backup_status", "État de la sauvegarde")}
+                          </Text>
+                          <Text style={styles.backupValue}>
+                            {isSignedIn
+                              ? `${t("connected", "Connecté")} - ${userEmail}`
+                              : t("disconnected", "Déconnecté")}
+                          </Text>
+                        </View>
+                      </View>
+                    </View>
+
+                    {/* Dernière sauvegarde */}
+                    {lastBackupTime && (
+                      <View style={styles.backupRow}>
+                        <MaterialCommunityIcons
+                          name="clock-outline"
+                          size={20}
+                          color="#666"
+                        />
+                        <Text style={styles.backupInfo}>
+                          {t("last_backup", "Dernière sauvegarde")}:{" "}
+                          {new Date(lastBackupTime).toLocaleString()}
+                        </Text>
+                      </View>
+                    )}
+
+                    {/* Actions de connexion */}
+                    {!isSignedIn && (
+                      <TouchableOpacity
+                        style={styles.backupButton}
+                        onPress={signInAnonymously}
+                        disabled={isSyncing}
+                      >
+                        <MaterialCommunityIcons
+                          name="cloud-upload-outline"
+                          size={20}
+                          color="#FFF"
+                        />
+                        <Text style={styles.backupButtonText}>
+                          {isSyncing
+                            ? t("connecting", "Connexion...")
+                            : t("connect_cloud", "Se connecter au cloud")}
+                        </Text>
+                      </TouchableOpacity>
+                    )}
+
+                    {/* Actions de sauvegarde */}
+                    {isSignedIn && (
+                      <View style={styles.backupActions}>
+                        <TouchableOpacity
+                          style={[
+                            styles.backupButton,
+                            styles.backupButtonSecondary,
+                          ]}
+                          onPress={backupData}
+                          disabled={isSyncing}
+                        >
+                          <MaterialCommunityIcons
+                            name="backup-restore"
+                            size={20}
+                            color="#2E7D32"
+                          />
+                          <Text
+                            style={[
+                              styles.backupButtonText,
+                              { color: "#2E7D32" },
+                            ]}
+                          >
+                            {isSyncing && backupStatus === "syncing"
+                              ? t("backing_up", "Sauvegarde...")
+                              : t("backup_now", "Sauvegarder maintenant")}
+                          </Text>
+                        </TouchableOpacity>
+
+                        {hasCloudData && (
+                          <TouchableOpacity
+                            style={[
+                              styles.backupButton,
+                              styles.backupButtonSecondary,
+                            ]}
+                            onPress={restoreData}
+                            disabled={isSyncing}
+                          >
+                            <MaterialCommunityIcons
+                              name="cloud-download-outline"
+                              size={20}
+                              color="#1976D2"
+                            />
+                            <Text
+                              style={[
+                                styles.backupButtonText,
+                                { color: "#1976D2" },
+                              ]}
+                            >
+                              {isSyncing && backupStatus === "syncing"
+                                ? t("restoring", "Restauration...")
+                                : t("restore_from_cloud", "Restaurer du cloud")}
+                            </Text>
+                          </TouchableOpacity>
+                        )}
+                      </View>
+                    )}
+
+                    {/* Sauvegarde automatique */}
+                    {isSignedIn && (
+                      <View style={styles.backupRow}>
+                        <Text style={styles.backupLabel}>
+                          {t("auto_backup", "Sauvegarde automatique")}
+                        </Text>
+                        <Switch
+                          value={isAutoBackupEnabled}
+                          onValueChange={enableAutoBackup}
+                          trackColor={{ false: "#767577", true: "#4CAF50" }}
+                          thumbColor={isAutoBackupEnabled ? "#FFF" : "#f4f3f4"}
+                        />
+                      </View>
+                    )}
+
+                    {/* Bouton de déconnexion */}
+                    {isSignedIn && (
+                      <TouchableOpacity
+                        style={[styles.backupButton, styles.backupButtonDanger]}
+                        onPress={signOut}
+                      >
+                        <MaterialCommunityIcons
+                          name="logout"
+                          size={20}
+                          color="#FF6B6B"
+                        />
+                        <Text
+                          style={[
+                            styles.backupButtonText,
+                            { color: "#FF6B6B" },
+                          ]}
+                        >
+                          {t("disconnect_cloud", "Se déconnecter du cloud")}
+                        </Text>
+                      </TouchableOpacity>
+                    )}
+
+                    {/* Info premium */}
+                    <View style={styles.premiumInfo}>
+                      <MaterialCommunityIcons
+                        name="crown"
+                        size={16}
+                        color="#FFD700"
+                      />
+                      <Text style={styles.premiumInfoText}>
+                        {t(
+                          "backup_premium_feature",
+                          "Fonctionnalité premium - Vos favoris et paramètres sont sauvegardés de façon sécurisée"
+                        )}
+                      </Text>
+                    </View>
+                  </View>
+                ),
+              },
+            ],
+          },
+        ]
+      : []),
     {
       key: "actions",
       title: t("actions", "Actions"),
@@ -1485,5 +1769,178 @@ const getStyles = (
         currentTheme === "light" ? "rgba(0, 0, 0, 0.3)" : "rgba(0,0,0,0.8)",
       textShadowOffset: { width: 0, height: 1 },
       textShadowRadius: 2,
+    },
+    // Styles pour la section sauvegarde cloud premium
+    backupSection: {
+      padding: 20,
+      backgroundColor:
+        currentTheme === "light" ? colors.surface : "rgba(15, 23, 42, 0.8)",
+      borderRadius: 16,
+      borderWidth: 1,
+      borderColor:
+        currentTheme === "light" ? colors.border : "rgba(148, 163, 184, 0.3)",
+      shadowColor: currentTheme === "light" ? colors.shadow : "#000",
+      shadowOffset: { width: 0, height: 4 },
+      shadowOpacity: 0.3,
+      shadowRadius: 12,
+      elevation: 6,
+    },
+    backupRow: {
+      flexDirection: "row",
+      alignItems: "center",
+      marginBottom: 16,
+      paddingVertical: 8,
+    },
+    backupInfo: {
+      flexDirection: "row",
+      alignItems: "center",
+      flex: 1,
+    },
+    backupTextContainer: {
+      marginLeft: 12,
+      flex: 1,
+    },
+    backupLabel: {
+      fontSize: 16,
+      color: currentTheme === "light" ? colors.text : "#F8FAFC",
+      fontWeight: "600",
+      marginBottom: 4,
+    },
+    backupValue: {
+      fontSize: 14,
+      color: currentTheme === "light" ? colors.textSecondary : "#CBD5E1",
+      fontWeight: "500",
+    },
+    backupButton: {
+      backgroundColor:
+        currentTheme === "light" ? colors.primary : "rgba(212, 175, 55, 0.9)",
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "center",
+      paddingVertical: 14,
+      paddingHorizontal: 20,
+      borderRadius: 12,
+      marginBottom: 12,
+      shadowColor: currentTheme === "light" ? colors.shadow : "#D4AF37",
+      shadowOffset: { width: 0, height: 4 },
+      shadowOpacity: 0.4,
+      shadowRadius: 8,
+      elevation: 6,
+      borderWidth: 1,
+      borderColor:
+        currentTheme === "light" ? colors.primary : "rgba(212, 175, 55, 0.5)",
+    },
+    backupButtonSecondary: {
+      backgroundColor: "transparent",
+      borderWidth: 2,
+      borderColor: currentTheme === "light" ? "#2E7D32" : "#4CAF50",
+    },
+    backupButtonDanger: {
+      backgroundColor: "transparent",
+      borderWidth: 2,
+      borderColor: "#FF6B6B",
+    },
+    backupButtonText: {
+      color: "#FFFFFF",
+      fontSize: 15,
+      fontWeight: "600",
+      marginLeft: 8,
+      textAlign: "center",
+    },
+    backupActions: {
+      gap: 12,
+      marginBottom: 16,
+    },
+    premiumInfo: {
+      flexDirection: "row",
+      alignItems: "center",
+      backgroundColor:
+        currentTheme === "light"
+          ? "rgba(255, 215, 0, 0.1)"
+          : "rgba(212, 175, 55, 0.2)",
+      padding: 12,
+      borderRadius: 8,
+      borderWidth: 1,
+      borderColor:
+        currentTheme === "light"
+          ? "rgba(255, 215, 0, 0.3)"
+          : "rgba(212, 175, 55, 0.4)",
+      marginTop: 16,
+    },
+    premiumInfoText: {
+      fontSize: 12,
+      color: currentTheme === "light" ? colors.textSecondary : "#CBD5E1",
+      marginLeft: 8,
+      flex: 1,
+      lineHeight: 16,
+      fontStyle: "italic",
+    },
+
+    // Styles pour la section test Premium
+    premiumTestSection: {
+      padding: 20,
+      borderRadius: 16,
+      backgroundColor:
+        currentTheme === "light"
+          ? "rgba(255, 215, 0, 0.08)"
+          : "rgba(212, 175, 55, 0.15)",
+      borderWidth: 2,
+      borderColor: "#FFD700",
+      borderStyle: "dashed",
+      shadowColor: "#FFD700",
+      shadowOffset: { width: 0, height: 4 },
+      shadowOpacity: 0.3,
+      shadowRadius: 8,
+      elevation: 6,
+    },
+
+    premiumTestInfo: {
+      flexDirection: "row",
+      alignItems: "flex-start",
+      marginBottom: 20,
+    },
+
+    premiumTestDescription: {
+      flex: 1,
+      fontSize: 15,
+      color: currentTheme === "light" ? colors.text : "#F8FAFC",
+      lineHeight: 22,
+      marginLeft: 12,
+      fontWeight: "500",
+    },
+
+    premiumTestButton: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "center",
+      backgroundColor: "#FFD700",
+      paddingVertical: 14,
+      paddingHorizontal: 20,
+      borderRadius: 12,
+      marginBottom: 16,
+      shadowColor: "#FFD700",
+      shadowOffset: { width: 0, height: 4 },
+      shadowOpacity: 0.4,
+      shadowRadius: 8,
+      elevation: 6,
+      borderWidth: 1,
+      borderColor: "#FFC107",
+    },
+
+    premiumTestButtonText: {
+      fontSize: 16,
+      fontWeight: "700",
+      color: "#1A1A1A",
+      marginLeft: 8,
+      letterSpacing: 0.5,
+    },
+
+    premiumTestWarning: {
+      fontSize: 13,
+      color: currentTheme === "light" ? colors.textTertiary : "#94A3B8",
+      textAlign: "center",
+      fontStyle: "italic",
+      lineHeight: 18,
+      opacity: 0.8,
     },
   });

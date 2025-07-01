@@ -1,13 +1,5 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
-ext {
-    buildToolsVersion = "35.0.0"        // <--- Mets à jour ici si possible
-    minSdkVersion = 24
-    compileSdkVersion = 35              // <--- Mets 35 ici
-    targetSdkVersion = 35               // <--- Mets 35 ici
-    ndkVersion = "29.0.13113456"        // <--- Laisse ta version NDK ici
-}
-
 buildscript {
   repositories {
     google()
@@ -17,7 +9,17 @@ buildscript {
     classpath('com.android.tools.build:gradle')
     classpath('com.facebook.react:react-native-gradle-plugin')
     classpath('org.jetbrains.kotlin:kotlin-gradle-plugin')
+    // Add the Google services Gradle plugin
+    classpath('com.google.gms:google-services:4.4.3')
   }
+}
+
+ext {
+    buildToolsVersion = "35.0.0"        // <--- Mets à jour ici si possible
+    minSdkVersion = 24
+    compileSdkVersion = 35              // <--- Mets 35 ici
+    targetSdkVersion = 35               // <--- Mets 35 ici
+    ndkVersion = "29.0.13113456"        // <--- Laisse ta version NDK ici
 }
 
 def reactNativeAndroidDir = new File(
