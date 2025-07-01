@@ -1,4 +1,10 @@
-import React, { useContext, useState, useRef, useEffect } from "react";
+import React, {
+  useContext,
+  useState,
+  useRef,
+  useEffect,
+  useCallback,
+} from "react";
 import { Picker } from "@react-native-picker/picker";
 import Slider from "@react-native-community/slider";
 import { Audio } from "expo-av";
@@ -33,9 +39,12 @@ import {
 import { useCitySearch, NominatimResult } from "../hooks/useCitySearch";
 import { useTranslation } from "react-i18next";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useFocusEffect } from "@react-navigation/native";
 import { useBackup } from "../contexts/BackupContext";
 import { usePremium } from "../contexts/PremiumContext";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useToast } from "../contexts/ToastContext";
+import PremiumContentManager, { PremiumContent } from "../utils/premiumContent";
 
 const soundObjects: Record<AdhanSoundKey, any> = {
   adhamalsharqawe: require("../assets/sounds/adhamalsharqawe.mp3"),
@@ -49,6 +58,7 @@ const soundObjects: Record<AdhanSoundKey, any> = {
   mustafaozcan: require("../assets/sounds/mustafaozcan.mp3"),
   masjidquba: require("../assets/sounds/masjidquba.mp3"),
   islamsobhi: require("../assets/sounds/islamsobhi.mp3"),
+  adhan_muhammad_hessen: require("../assets/sounds/ahmadnafees.mp3"), // Fallback temporaire
 };
 
 // Interface pour les props du composant SettingsSections
@@ -70,7 +80,23 @@ interface SettingsSectionsProps {
   citySearchResults: NominatimResult[];
   citySearchLoading: boolean;
   isApplyingChanges: boolean;
+  getSoundDisplayName: (soundId: string) => string;
   styles: any;
+  availableAdhanVoices: PremiumContent[];
+  downloadingAdhans: Set<string>;
+  downloadProgress: { [key: string]: number };
+  handleDownloadAdhan: (adhan: PremiumContent) => Promise<void>;
+  handleDeleteAdhan: (adhan: PremiumContent) => Promise<void>;
+
+  // Props pour la progression audio (uniquement pour le preview principal)
+  playbackPosition: number;
+  playbackDuration: number;
+  currentPlayingAdhan: string | null;
+  isLoadingPreview: boolean;
+  pausePreview: () => Promise<void>;
+  resumePreview: () => Promise<void>;
+  seekToPosition: (position: number) => Promise<void>;
+  formatTime: (milliseconds: number) => string;
 }
 
 function SettingsSections({
@@ -91,7 +117,23 @@ function SettingsSections({
   citySearchResults,
   citySearchLoading,
   isApplyingChanges,
+  getSoundDisplayName,
   styles,
+  availableAdhanVoices,
+  downloadingAdhans,
+  downloadProgress,
+  handleDownloadAdhan,
+  handleDeleteAdhan,
+
+  // Nouveaux paramètres pour la progression audio
+  playbackPosition,
+  playbackDuration,
+  currentPlayingAdhan,
+  isLoadingPreview,
+  pausePreview,
+  resumePreview,
+  seekToPosition,
+  formatTime,
 }: SettingsSectionsProps) {
   const { t } = useTranslation();
 
@@ -343,24 +385,97 @@ function SettingsSections({
                     {sounds.map((sound) => (
                       <Picker.Item
                         key={sound}
-                        label={t(`sound_${sound}`, sound)}
+                        label={getSoundDisplayName(sound)}
                         value={sound}
                       />
                     ))}
                   </Picker>
                 </View>
               </View>
-              <View style={styles.previewButtonContainer}>
-                <TouchableOpacity
-                  onPress={isPreviewing ? stopPreview : playPreview}
-                  style={styles.previewButtonFull}
-                >
-                  <Text style={styles.previewButtonText}>
-                    {isPreviewing
-                      ? t("stop_preview", "Arrêter")
-                      : t("play_preview", "Aperçu")}
-                  </Text>
-                </TouchableOpacity>
+              <View style={styles.previewControlsContainer}>
+                {/* Contrôles principaux */}
+                <View style={styles.previewControls}>
+                  <TouchableOpacity
+                    onPress={playPreview}
+                    style={styles.playButtonMain}
+                    disabled={isLoadingPreview}
+                  >
+                    {isLoadingPreview ? (
+                      <MaterialCommunityIcons
+                        name="loading"
+                        size={24}
+                        color="#fff"
+                      />
+                    ) : (
+                      <MaterialCommunityIcons
+                        name={
+                          isPreviewing && currentPlayingAdhan === "main_preview"
+                            ? "pause"
+                            : "play"
+                        }
+                        size={24}
+                        color="#fff"
+                      />
+                    )}
+                  </TouchableOpacity>
+
+                  <TouchableOpacity
+                    onPress={stopPreview}
+                    style={styles.stopButtonMain}
+                    disabled={
+                      !isPreviewing || currentPlayingAdhan !== "main_preview"
+                    }
+                  >
+                    <MaterialCommunityIcons
+                      name="stop"
+                      size={20}
+                      color="#fff"
+                    />
+                  </TouchableOpacity>
+                </View>
+
+                {/* Jauge de progression */}
+                {isPreviewing &&
+                  currentPlayingAdhan === "main_preview" &&
+                  playbackDuration > 0 && (
+                    <View style={styles.progressContainer}>
+                      <Text style={styles.timeText}>
+                        {formatTime(playbackPosition)}
+                      </Text>
+
+                      <TouchableOpacity
+                        style={styles.progressBarContainer}
+                        onPress={(event) => {
+                          const { locationX } = event.nativeEvent;
+                          const progressBarWidth = 200; // width fixe pour éviter les erreurs
+                          const newPosition =
+                            (locationX / progressBarWidth) * playbackDuration;
+                          seekToPosition(newPosition);
+                        }}
+                        activeOpacity={0.7}
+                      >
+                        <View style={styles.progressBar}>
+                          <View
+                            style={[
+                              styles.progressFill,
+                              {
+                                width: `${
+                                  playbackDuration > 0
+                                    ? (playbackPosition / playbackDuration) *
+                                      100
+                                    : 0
+                                }%`,
+                              },
+                            ]}
+                          />
+                        </View>
+                      </TouchableOpacity>
+
+                      <Text style={styles.timeText}>
+                        {formatTime(playbackDuration)}
+                      </Text>
+                    </View>
+                  )}
               </View>
             </View>
           ),
@@ -389,6 +504,92 @@ function SettingsSections({
               </View>
             </View>
           ),
+        },
+        // Section Adhans Premium (uniquement pour les utilisateurs premium)
+        {
+          key: "premium_adhans",
+          component:
+            user.isPremium && availableAdhanVoices.length > 0 ? (
+              <View style={styles.premiumSection}>
+                <Text style={styles.premiumSectionTitle}>
+                  Adhans Premium 👑
+                </Text>
+                {availableAdhanVoices.map((adhan) => {
+                  const isDownloading = downloadingAdhans.has(adhan.id);
+                  const progress = downloadProgress[adhan.id] || 0;
+
+                  return (
+                    <View key={adhan.id} style={styles.premiumAdhanItem}>
+                      <View style={styles.premiumAdhanInfo}>
+                        <Text style={styles.premiumAdhanTitle}>
+                          {adhan.title}
+                        </Text>
+                        <Text style={styles.premiumAdhanSize}>
+                          {adhan.fileSize
+                            ? `${adhan.fileSize} MB`
+                            : "Taille inconnue"}
+                        </Text>
+                      </View>
+
+                      <View style={styles.premiumAdhanActions}>
+                        {isDownloading ? (
+                          <View style={styles.downloadProgressContainer}>
+                            <View style={styles.progressBarPremium}>
+                              <View
+                                style={[
+                                  styles.progressFillPremium,
+                                  { width: `${progress}%` },
+                                ]}
+                              />
+                            </View>
+                            <Text style={styles.progressTextPremium}>
+                              {progress}%
+                            </Text>
+                          </View>
+                        ) : adhan.isDownloaded ? (
+                          <View style={styles.downloadedContainer}>
+                            <View style={styles.downloadedIndicator}>
+                              <MaterialCommunityIcons
+                                name="check-circle"
+                                size={20}
+                                color="#4ECDC4"
+                              />
+                              <Text style={styles.downloadedText}>
+                                Téléchargé
+                              </Text>
+                            </View>
+                            <TouchableOpacity
+                              style={styles.deleteButtonPremium}
+                              onPress={() => handleDeleteAdhan(adhan)}
+                            >
+                              <MaterialCommunityIcons
+                                name="delete"
+                                size={20}
+                                color="#FF6B6B"
+                              />
+                            </TouchableOpacity>
+                          </View>
+                        ) : (
+                          <TouchableOpacity
+                            style={styles.downloadButtonPremium}
+                            onPress={() => handleDownloadAdhan(adhan)}
+                          >
+                            <MaterialCommunityIcons
+                              name="download"
+                              size={20}
+                              color="#4ECDC4"
+                            />
+                            <Text style={styles.downloadButtonTextPremium}>
+                              Télécharger
+                            </Text>
+                          </TouchableOpacity>
+                        )}
+                      </View>
+                    </View>
+                  );
+                })}
+              </View>
+            ) : null,
         },
       ],
     },
@@ -996,7 +1197,16 @@ function SettingsSections({
 export default function SettingsScreen() {
   const settings = useContext(SettingsContext);
   const { t, i18n } = useTranslation();
+  const { user } = usePremium();
   const [isPreviewing, setIsPreviewing] = useState(false);
+
+  // États pour la progression audio
+  const [playbackPosition, setPlaybackPosition] = useState(0);
+  const [playbackDuration, setPlaybackDuration] = useState(0);
+  const [currentPlayingAdhan, setCurrentPlayingAdhan] = useState<string | null>(
+    null
+  );
+  const [isLoadingPreview, setIsLoadingPreview] = useState(false);
 
   // Utiliser les couleurs thématiques
   const colors = useThemeColors();
@@ -1051,7 +1261,7 @@ export default function SettingsScreen() {
     "Turkey",
   ];
 
-  const sounds: AdhanSoundKey[] = [
+  const [availableSounds, setAvailableSounds] = useState<AdhanSoundKey[]>([
     "ahmadnafees",
     "ahmedelkourdi",
     "dubai",
@@ -1063,7 +1273,224 @@ export default function SettingsScreen() {
     "adhanaljazaer",
     "masjidquba",
     "islamsobhi",
-  ];
+  ]);
+
+  // Map pour stocker les titres des sons premium
+  const [premiumSoundTitles, setPremiumSoundTitles] = useState<{
+    [key: string]: string;
+  }>({});
+
+  // États pour la gestion des adhans premium
+  const [availableAdhanVoices, setAvailableAdhanVoices] = useState<
+    PremiumContent[]
+  >([]);
+  const [downloadingAdhans, setDownloadingAdhans] = useState<Set<string>>(
+    new Set()
+  );
+  const [downloadProgress, setDownloadProgress] = useState<{
+    [key: string]: number;
+  }>({});
+  const premiumManager = PremiumContentManager.getInstance();
+  const { showToast } = useToast();
+
+  // Fonction pour obtenir le nom d'affichage d'un son
+  const getSoundDisplayName = useCallback(
+    (soundId: string): string => {
+      // D'abord essayer la traduction standard
+      const translationKey = `sound_${soundId}`;
+      const translatedName = t(translationKey, "");
+
+      // Si la traduction existe et n'est pas vide
+      if (translatedName && translatedName !== translationKey) {
+        return translatedName;
+      }
+
+      // Sinon utiliser le titre premium s'il existe
+      if (premiumSoundTitles[soundId]) {
+        let cleanTitle = premiumSoundTitles[soundId];
+
+        // Nettoyer les préfixes courants
+        const prefixesToRemove = [
+          /^Adhan\s*-\s*/i,
+          /^Adhan\s*:\s*/i,
+          /^Adhan\s+/i,
+          /^Son\s*-\s*/i,
+          /^Son\s*:\s*/i,
+          /^Son\s+/i,
+        ];
+
+        for (const regex of prefixesToRemove) {
+          cleanTitle = cleanTitle.replace(regex, "");
+        }
+
+        return cleanTitle.trim();
+      }
+
+      // Fallback: nom formaté à partir de l'ID
+      return soundId
+        .replace(/[_-]/g, " ")
+        .replace(/\b\w/g, (l) => l.toUpperCase());
+    },
+    [t, premiumSoundTitles]
+  );
+
+  // Fonction pour vérifier et mettre à jour la liste des sons disponibles
+  const updateAvailableSounds = useCallback(async () => {
+    try {
+      const PremiumContentManager = (await import("../utils/premiumContent"))
+        .default;
+      const manager = PremiumContentManager.getInstance();
+
+      // Sons de base toujours disponibles
+      const baseSounds: AdhanSoundKey[] = [
+        "ahmadnafees",
+        "ahmedelkourdi",
+        "dubai",
+        "karljenkins",
+        "mansourzahrani",
+        "misharyrachid",
+        "mustafaozcan",
+        "adhamalsharqawe",
+        "adhanaljazaer",
+        "masjidquba",
+        "islamsobhi",
+      ];
+
+      // 🔍 Récupérer TOUS les sons premium téléchargés dynamiquement
+      const catalog = await manager.getPremiumCatalog();
+      const downloadedPremiumSounds: AdhanSoundKey[] = [];
+      const premiumTitles: { [key: string]: string } = {};
+
+      if (catalog && catalog.adhanVoices) {
+        for (const adhanVoice of catalog.adhanVoices) {
+          if (adhanVoice.isDownloaded) {
+            downloadedPremiumSounds.push(adhanVoice.id as AdhanSoundKey);
+            // Stocker le titre lisible pour ce son premium
+            premiumTitles[adhanVoice.id] = adhanVoice.title;
+          }
+        }
+      }
+
+      // Combiner les sons de base + les sons premium téléchargés
+      const allAvailableSounds = [...baseSounds, ...downloadedPremiumSounds];
+
+      setAvailableSounds(allAvailableSounds);
+      setPremiumSoundTitles(premiumTitles);
+
+      // Charger également tous les adhans premium disponibles (téléchargés et non téléchargés)
+      if (catalog && catalog.adhanVoices) {
+        setAvailableAdhanVoices(catalog.adhanVoices);
+      }
+
+      console.log(
+        `✅ Sons disponibles mis à jour: ${baseSounds.length} gratuits + ${downloadedPremiumSounds.length} premium`
+      );
+    } catch (error) {
+      console.log("Erreur vérification sons premium:", error);
+      // En cas d'erreur, revenir aux sons de base
+      setAvailableSounds([
+        "ahmadnafees",
+        "ahmedelkourdi",
+        "dubai",
+        "karljenkins",
+        "mansourzahrani",
+        "misharyrachid",
+        "mustafaozcan",
+        "adhamalsharqawe",
+        "adhanaljazaer",
+        "masjidquba",
+        "islamsobhi",
+      ]);
+    }
+  }, []);
+
+  // Vérifier les sons disponibles au chargement et quand l'écran devient actif
+  useFocusEffect(
+    useCallback(() => {
+      updateAvailableSounds();
+    }, [updateAvailableSounds])
+  );
+
+  // Fonctions pour gérer les téléchargements d'adhans premium
+  const handleDownloadAdhan = async (adhan: PremiumContent) => {
+    if (!user.isPremium) {
+      showToast({
+        type: "error",
+        title: "Premium requis",
+        message: "Les adhans premium sont réservés aux utilisateurs premium",
+      });
+      return;
+    }
+
+    try {
+      setDownloadingAdhans((prev) => new Set(prev).add(adhan.id));
+
+      const success = await premiumManager.downloadPremiumContent(
+        adhan,
+        (progress) => {
+          setDownloadProgress((prev) => ({ ...prev, [adhan.id]: progress }));
+        }
+      );
+
+      if (success) {
+        showToast({
+          type: "success",
+          title: "Téléchargement terminé",
+          message: `${adhan.title} téléchargé`,
+        });
+        await updateAvailableSounds(); // Recharger pour mettre à jour les statuts
+      } else {
+        showToast({
+          type: "error",
+          title: "Échec du téléchargement",
+          message: `Impossible de télécharger ${adhan.title}`,
+        });
+      }
+    } catch (error) {
+      console.error("Erreur téléchargement adhan:", error);
+      showToast({
+        type: "error",
+        title: "Erreur",
+        message: "Erreur lors du téléchargement",
+      });
+    } finally {
+      setDownloadingAdhans((prev) => {
+        const newSet = new Set(prev);
+        newSet.delete(adhan.id);
+        return newSet;
+      });
+      setDownloadProgress((prev) => {
+        const newProgress = { ...prev };
+        delete newProgress[adhan.id];
+        return newProgress;
+      });
+    }
+  };
+
+  const handleDeleteAdhan = async (adhan: PremiumContent) => {
+    Alert.alert(
+      "Supprimer l'adhan",
+      `Voulez-vous supprimer "${adhan.title}" ?`,
+      [
+        { text: "Annuler", style: "cancel" },
+        {
+          text: "Supprimer",
+          style: "destructive",
+          onPress: async () => {
+            const success = await premiumManager.deletePremiumContent(adhan.id);
+            if (success) {
+              showToast({
+                type: "info",
+                title: "Adhan supprimé",
+                message: `${adhan.title} supprimé`,
+              });
+              await updateAvailableSounds();
+            }
+          },
+        },
+      ]
+    );
+  };
 
   const languages = [
     { code: "en", label: "English" },
@@ -1098,26 +1525,95 @@ export default function SettingsScreen() {
 
   const playPreview = async () => {
     if (!settings) return;
-    setIsPreviewing(true);
-    try {
-      if (soundRef.current) {
-        await soundRef.current.unloadAsync();
-      }
-      const { sound } = await Audio.Sound.createAsync(
-        soundObjects[settings.adhanSound]
-      );
-      soundRef.current = sound;
 
-      // Callback pour détecter quand le son se termine naturellement
+    try {
+      // Si on a déjà un son chargé, gérer pause/play
+      if (currentPlayingAdhan === "main_preview" && soundRef.current) {
+        const status = await soundRef.current.getStatusAsync();
+        if (status.isLoaded) {
+          if (isPreviewing) {
+            await pausePreview();
+          } else {
+            await resumePreview();
+          }
+          return;
+        }
+      }
+
+      // Arrêter l'audio actuel s'il y en a un différent
+      if (soundRef.current && currentPlayingAdhan !== "main_preview") {
+        await soundRef.current.unloadAsync();
+        setPlaybackPosition(0);
+        setPlaybackDuration(0);
+      }
+
+      setIsLoadingPreview(true);
+      setCurrentPlayingAdhan("main_preview");
+
+      let soundSource = soundObjects[settings.adhanSound];
+
+      // Si c'est un son premium (commence par "adhan_" ou pas dans soundObjects), essayer de charger le fichier téléchargé
+      if (
+        !soundObjects[settings.adhanSound] ||
+        settings.adhanSound.startsWith("adhan_")
+      ) {
+        try {
+          const PremiumContentManager = (
+            await import("../utils/premiumContent")
+          ).default;
+          const manager = PremiumContentManager.getInstance();
+          const downloadPath = await manager.isContentDownloaded(
+            settings.adhanSound
+          );
+          if (downloadPath) {
+            soundSource = { uri: "file://" + downloadPath };
+            console.log(
+              `✅ Son premium trouvé pour prévisualisation: ${settings.adhanSound}`
+            );
+          } else {
+            console.log(
+              `❌ Son premium non téléchargé: ${settings.adhanSound}`
+            );
+            setIsLoadingPreview(false);
+            setCurrentPlayingAdhan(null);
+            return;
+          }
+        } catch (error) {
+          console.log(
+            "Erreur chargement son premium, abandon de la prévisualisation"
+          );
+          setIsLoadingPreview(false);
+          setCurrentPlayingAdhan(null);
+          return;
+        }
+      }
+
+      const { sound } = await Audio.Sound.createAsync(soundSource);
+      soundRef.current = sound;
+      setIsPreviewing(true);
+      setIsLoadingPreview(false);
+
+      // Callback pour détecter quand le son se termine naturellement avec progression
       sound.setOnPlaybackStatusUpdate((status) => {
-        if (status.isLoaded && status.didJustFinish) {
-          setIsPreviewing(false);
+        if (status.isLoaded) {
+          setPlaybackPosition(status.positionMillis || 0);
+          setPlaybackDuration(status.durationMillis || 0);
+
+          if (status.didJustFinish) {
+            setIsPreviewing(false);
+            setCurrentPlayingAdhan(null);
+            setPlaybackPosition(0);
+            setPlaybackDuration(0);
+          }
         }
       });
 
       await sound.playAsync();
     } catch (error) {
-      setIsPreviewing(false); // Seulement en cas d'erreur
+      console.log("Erreur prévisualisation:", error);
+      setIsPreviewing(false);
+      setIsLoadingPreview(false);
+      setCurrentPlayingAdhan(null);
     }
   };
 
@@ -1126,6 +1622,50 @@ export default function SettingsScreen() {
       await soundRef.current.stopAsync();
     }
     setIsPreviewing(false);
+    setCurrentPlayingAdhan(null);
+    setPlaybackPosition(0);
+    setPlaybackDuration(0);
+  };
+
+  // Nouvelles fonctions pour les contrôles audio avancés
+  const pausePreview = async () => {
+    try {
+      if (soundRef.current) {
+        await soundRef.current.pauseAsync();
+        setIsPreviewing(false);
+      }
+    } catch (error) {
+      console.error("Erreur pause audio:", error);
+    }
+  };
+
+  const resumePreview = async () => {
+    try {
+      if (soundRef.current) {
+        await soundRef.current.playAsync();
+        setIsPreviewing(true);
+      }
+    } catch (error) {
+      console.error("Erreur reprise audio:", error);
+    }
+  };
+
+  const seekToPosition = async (positionMillis: number) => {
+    try {
+      if (soundRef.current) {
+        await soundRef.current.setPositionAsync(positionMillis);
+      }
+    } catch (error) {
+      console.error("Erreur navigation audio:", error);
+    }
+  };
+
+  // Fonction utilitaire pour formater le temps
+  const formatTime = (milliseconds: number): string => {
+    const totalSeconds = Math.floor(milliseconds / 1000);
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+    return `${minutes}:${seconds.toString().padStart(2, "0")}`;
   };
 
   const handleCityInputChange = (text: string) => {
@@ -1185,7 +1725,7 @@ export default function SettingsScreen() {
           settings={settings}
           dhikrSettings={settings.dhikrSettings}
           methods={methods}
-          sounds={sounds}
+          sounds={availableSounds}
           languages={languages}
           isPreviewing={isPreviewing}
           playPreview={playPreview}
@@ -1199,7 +1739,22 @@ export default function SettingsScreen() {
           citySearchResults={citySearchResults}
           citySearchLoading={citySearchLoading}
           isApplyingChanges={isApplyingChanges}
+          getSoundDisplayName={getSoundDisplayName}
           styles={styles}
+          availableAdhanVoices={availableAdhanVoices}
+          downloadingAdhans={downloadingAdhans}
+          downloadProgress={downloadProgress}
+          handleDownloadAdhan={handleDownloadAdhan}
+          handleDeleteAdhan={handleDeleteAdhan}
+          // Nouveaux props pour la progression audio
+          playbackPosition={playbackPosition}
+          playbackDuration={playbackDuration}
+          currentPlayingAdhan={currentPlayingAdhan}
+          isLoadingPreview={isLoadingPreview}
+          pausePreview={pausePreview}
+          resumePreview={resumePreview}
+          seekToPosition={seekToPosition}
+          formatTime={formatTime}
         />
       </SafeAreaView>
 
@@ -1942,5 +2497,208 @@ const getStyles = (
       fontStyle: "italic",
       lineHeight: 18,
       opacity: 0.8,
+    },
+
+    // Styles pour la section adhans premium
+    premiumSection: {
+      padding: 16,
+      backgroundColor:
+        currentTheme === "light"
+          ? "rgba(255, 215, 0, 0.08)"
+          : "rgba(212, 175, 55, 0.15)",
+      borderRadius: 16,
+      borderWidth: 1,
+      borderColor:
+        currentTheme === "light"
+          ? "rgba(255, 215, 0, 0.3)"
+          : "rgba(212, 175, 55, 0.4)",
+      marginVertical: 8,
+    },
+    premiumSectionTitle: {
+      fontSize: 18,
+      fontWeight: "700",
+      color: currentTheme === "light" ? colors.text : "#F8FAFC",
+      marginBottom: 16,
+      textAlign: "center",
+    },
+    premiumAdhanItem: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+      backgroundColor:
+        currentTheme === "light" ? colors.surface : "rgba(15, 23, 42, 0.7)",
+      borderRadius: 12,
+      padding: 16,
+      marginBottom: 12,
+      borderWidth: 1,
+      borderColor:
+        currentTheme === "light" ? colors.border : "rgba(148, 163, 184, 0.2)",
+    },
+    premiumAdhanInfo: {
+      flex: 1,
+      marginRight: 12,
+    },
+    premiumAdhanTitle: {
+      fontSize: 16,
+      fontWeight: "600",
+      color: currentTheme === "light" ? colors.text : "#F8FAFC",
+      marginBottom: 4,
+    },
+    premiumAdhanSize: {
+      fontSize: 14,
+      color: currentTheme === "light" ? colors.textSecondary : "#CBD5E1",
+    },
+    premiumAdhanActions: {
+      flexDirection: "row",
+      alignItems: "center",
+      gap: 8,
+    },
+    downloadProgressContainer: {
+      alignItems: "center",
+      minWidth: 80,
+    },
+    progressBarPremium: {
+      width: 80,
+      height: 6,
+      backgroundColor: "rgba(78, 205, 196, 0.2)",
+      borderRadius: 3,
+      overflow: "hidden",
+      marginBottom: 4,
+    },
+    progressFillPremium: {
+      height: "100%",
+      backgroundColor: "#4ECDC4",
+      borderRadius: 3,
+    },
+    progressTextPremium: {
+      fontSize: 12,
+      color: currentTheme === "light" ? colors.textSecondary : "#CBD5E1",
+      fontWeight: "600",
+    },
+    downloadButtonPremium: {
+      flexDirection: "row",
+      alignItems: "center",
+      backgroundColor: "rgba(78, 205, 196, 0.1)",
+      borderRadius: 8,
+      paddingVertical: 8,
+      paddingHorizontal: 12,
+      borderWidth: 1,
+      borderColor: "#4ECDC4",
+    },
+    downloadButtonTextPremium: {
+      marginLeft: 6,
+      fontSize: 14,
+      color: "#4ECDC4",
+      fontWeight: "600",
+    },
+    previewButtonPremium: {
+      backgroundColor: "rgba(78, 205, 196, 0.1)",
+      borderRadius: 20,
+      width: 40,
+      height: 40,
+      alignItems: "center",
+      justifyContent: "center",
+      borderWidth: 1,
+      borderColor: "#4ECDC4",
+    },
+    deleteButtonPremium: {
+      backgroundColor: "rgba(255, 107, 107, 0.1)",
+      borderRadius: 20,
+      width: 40,
+      height: 40,
+      alignItems: "center",
+      justifyContent: "center",
+      borderWidth: 1,
+      borderColor: "#FF6B6B",
+    },
+
+    // Nouveaux styles pour les contrôles audio avancés
+    previewControlsContainer: {
+      width: "100%",
+      gap: 12,
+      marginTop: 8,
+    },
+    previewControls: {
+      flexDirection: "row",
+      alignItems: "center",
+      gap: 12,
+      justifyContent: "center",
+    },
+    playButtonMain: {
+      backgroundColor: "#4ECDC4",
+      borderRadius: 25,
+      width: 50,
+      height: 50,
+      alignItems: "center",
+      justifyContent: "center",
+      shadowColor: "#4ECDC4",
+      shadowOpacity: 0.3,
+      shadowRadius: 8,
+      shadowOffset: { width: 0, height: 2 },
+      elevation: 4,
+    },
+    stopButtonMain: {
+      backgroundColor: "rgba(231, 200, 106, 0.8)",
+      borderRadius: 20,
+      width: 40,
+      height: 40,
+      alignItems: "center",
+      justifyContent: "center",
+      borderWidth: 1,
+      borderColor: "#e7c86a",
+    },
+    progressContainer: {
+      flexDirection: "row",
+      alignItems: "center",
+      gap: 8,
+      marginTop: 8,
+    },
+    timeText: {
+      fontSize: 12,
+      color: currentTheme === "light" ? colors.textSecondary : "#CBD5E1",
+      fontWeight: "600",
+      minWidth: 40,
+      textAlign: "center",
+    },
+    progressBarContainer: {
+      flex: 1,
+      height: 30,
+      justifyContent: "center",
+      paddingHorizontal: 8,
+    },
+    progressBar: {
+      height: 6,
+      backgroundColor: "rgba(148, 163, 184, 0.3)",
+      borderRadius: 3,
+      overflow: "hidden",
+    },
+    progressFill: {
+      height: "100%",
+      backgroundColor: "#4ECDC4",
+      borderRadius: 3,
+    },
+
+    // Styles pour l'indicateur "Téléchargé" simplifié
+    downloadedContainer: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+      gap: 12,
+    },
+    downloadedIndicator: {
+      flexDirection: "row",
+      alignItems: "center",
+      backgroundColor: "rgba(78, 205, 196, 0.1)",
+      borderRadius: 8,
+      paddingVertical: 6,
+      paddingHorizontal: 12,
+      borderWidth: 1,
+      borderColor: "rgba(78, 205, 196, 0.3)",
+    },
+    downloadedText: {
+      marginLeft: 6,
+      fontSize: 14,
+      color: "#4ECDC4",
+      fontWeight: "600",
     },
   });

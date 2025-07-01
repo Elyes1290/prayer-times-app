@@ -13,16 +13,45 @@ import {
   SafeAreaView,
   Dimensions,
   TextInput,
+  Alert,
 } from "react-native";
 import { useTranslation } from "react-i18next";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Audio } from "expo-av";
 import FavoriteButton from "../components/FavoriteButton";
 import { QuranVerseFavorite } from "../contexts/FavoritesContext";
+import { usePremium } from "../contexts/PremiumContext";
+import { useToast } from "../contexts/ToastContext";
+import PremiumContentManager, { PremiumContent } from "../utils/premiumContent";
 
 export default function QuranScreen() {
   const { t, i18n } = useTranslation();
+  const { user } = usePremium();
+  const { showToast } = useToast();
   const [modalVisible, setModalVisible] = useState(false);
+  const [reciterModalVisible, setReciterModalVisible] = useState(false);
   const flatListRef = useRef<FlatList>(null);
   const windowHeight = Dimensions.get("window").height;
+
+  // États pour les récitations premium
+  const [availableRecitations, setAvailableRecitations] = useState<
+    PremiumContent[]
+  >([]);
+  const [selectedReciter, setSelectedReciter] = useState<string | null>(null);
+  const [downloadingRecitations, setDownloadingRecitations] = useState<
+    Set<string>
+  >(new Set());
+  const [downloadProgress, setDownloadProgress] = useState<{
+    [key: string]: number;
+  }>({});
+  const [currentlyPlaying, setCurrentlyPlaying] = useState<string | null>(null);
+  const [sound, setSound] = useState<Audio.Sound | null>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [playbackPosition, setPlaybackPosition] = useState(0);
+  const [playbackDuration, setPlaybackDuration] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const premiumManager = PremiumContentManager.getInstance();
 
   // Map langue => id traduction Quran.com (ajoute d'autres langues si besoin)
   const translationMap: Record<string, number | null> = {
@@ -123,6 +152,277 @@ export default function QuranScreen() {
       .then((json) => setSourates(json.chapters))
       .catch(() => setSourates([]));
   }, [lang]);
+
+  // Charger les récitations premium disponibles
+  useEffect(() => {
+    loadAvailableRecitations();
+  }, []);
+
+  // Nettoyer l'audio à la fermeture
+  useEffect(() => {
+    return () => {
+      if (sound) {
+        sound.unloadAsync();
+      }
+    };
+  }, [sound]);
+
+  const loadAvailableRecitations = async () => {
+    try {
+      const catalog = await premiumManager.getPremiumCatalog();
+      if (catalog && catalog.quranRecitations) {
+        setAvailableRecitations(catalog.quranRecitations);
+
+        // Sélectionner automatiquement le premier récitateur s'il n'y en a pas
+        if (!selectedReciter && catalog.quranRecitations.length > 0) {
+          const firstReciter = catalog.quranRecitations[0].reciter;
+          if (firstReciter) {
+            setSelectedReciter(firstReciter);
+          }
+        }
+      }
+    } catch (error) {
+      console.error("Erreur chargement récitations:", error);
+    }
+  };
+
+  const getAvailableReciters = () => {
+    const reciters = new Set<string>();
+    availableRecitations.forEach((recitation) => {
+      if (recitation.reciter) {
+        reciters.add(recitation.reciter);
+      }
+    });
+    return Array.from(reciters).sort();
+  };
+
+  const getCurrentRecitation = (): PremiumContent | null => {
+    if (!selectedReciter) return null;
+
+    return (
+      availableRecitations.find(
+        (recitation) =>
+          recitation.reciter === selectedReciter &&
+          recitation.surahNumber === selectedSourate
+      ) || null
+    );
+  };
+
+  const handleDownloadRecitation = async (recitation: PremiumContent) => {
+    if (!user.isPremium) {
+      showToast({
+        type: "error",
+        title: "Premium requis",
+        message: "Les récitations sont réservées aux utilisateurs premium",
+      });
+      return;
+    }
+
+    try {
+      setDownloadingRecitations((prev) => new Set(prev).add(recitation.id));
+
+      const success = await premiumManager.downloadPremiumContent(
+        recitation,
+        (progress) => {
+          setDownloadProgress((prev) => ({
+            ...prev,
+            [recitation.id]: progress,
+          }));
+        }
+      );
+
+      if (success) {
+        showToast({
+          type: "success",
+          title: "Téléchargement terminé",
+          message: `${recitation.title} téléchargé`,
+        });
+        await loadAvailableRecitations(); // Recharger pour mettre à jour les statuts
+      } else {
+        showToast({
+          type: "error",
+          title: "Échec du téléchargement",
+          message: `Impossible de télécharger ${recitation.title}`,
+        });
+      }
+    } catch (error) {
+      console.error("Erreur téléchargement:", error);
+    } finally {
+      setDownloadingRecitations((prev) => {
+        const newSet = new Set(prev);
+        newSet.delete(recitation.id);
+        return newSet;
+      });
+      setDownloadProgress((prev) => {
+        const newProgress = { ...prev };
+        delete newProgress[recitation.id];
+        return newProgress;
+      });
+    }
+  };
+
+  const handleDeleteRecitation = async (recitation: PremiumContent) => {
+    Alert.alert(
+      "Supprimer la récitation",
+      `Voulez-vous supprimer "${recitation.title}" ?`,
+      [
+        { text: "Annuler", style: "cancel" },
+        {
+          text: "Supprimer",
+          style: "destructive",
+          onPress: async () => {
+            const success = await premiumManager.deletePremiumContent(
+              recitation.id
+            );
+            if (success) {
+              showToast({
+                type: "info",
+                title: "Récitation supprimée",
+                message: `${recitation.title} supprimé`,
+              });
+              await loadAvailableRecitations();
+              if (currentlyPlaying === recitation.id) {
+                await stopRecitation();
+              }
+            }
+          },
+        },
+      ]
+    );
+  };
+
+  const playRecitation = async (recitation: PremiumContent) => {
+    try {
+      if (!recitation.downloadPath) {
+        showToast({
+          type: "error",
+          title: "Récitation non disponible",
+          message: "Veuillez d'abord télécharger cette récitation",
+        });
+        return;
+      }
+
+      // Si c'est la même récitation, reprendre ou mettre en pause
+      if (currentlyPlaying === recitation.id && sound) {
+        const status = await sound.getStatusAsync();
+        if (status.isLoaded) {
+          if (isPlaying) {
+            await sound.pauseAsync();
+            setIsPlaying(false);
+          } else {
+            await sound.playAsync();
+            setIsPlaying(true);
+          }
+          return;
+        }
+      }
+
+      // Arrêter l'audio actuel s'il y en a un différent
+      if (sound && currentlyPlaying !== recitation.id) {
+        await sound.unloadAsync();
+        setSound(null);
+        setPlaybackPosition(0);
+        setPlaybackDuration(0);
+      }
+
+      setIsLoading(true);
+
+      // Créer et jouer le nouvel audio
+      const { sound: newSound } = await Audio.Sound.createAsync({
+        uri: `file://${recitation.downloadPath}`,
+      });
+
+      setSound(newSound);
+      setCurrentlyPlaying(recitation.id);
+      setIsPlaying(true);
+      setIsLoading(false);
+
+      await newSound.playAsync();
+
+      // Gérer les mises à jour de statut
+      newSound.setOnPlaybackStatusUpdate((status) => {
+        if (status.isLoaded) {
+          setPlaybackPosition(status.positionMillis || 0);
+          setPlaybackDuration(status.durationMillis || 0);
+
+          if (status.didJustFinish) {
+            setIsPlaying(false);
+            setCurrentlyPlaying(null);
+            setPlaybackPosition(0);
+            setPlaybackDuration(0);
+          }
+        }
+      });
+
+      showToast({
+        type: "success",
+        title: "Lecture en cours",
+        message: recitation.title,
+      });
+    } catch (error) {
+      console.error("Erreur lecture audio:", error);
+      setIsLoading(false);
+      showToast({
+        type: "error",
+        title: "Erreur de lecture",
+        message: "Impossible de lire cette récitation",
+      });
+    }
+  };
+
+  const pauseRecitation = async () => {
+    try {
+      if (sound) {
+        await sound.pauseAsync();
+        setIsPlaying(false);
+      }
+    } catch (error) {
+      console.error("Erreur pause audio:", error);
+    }
+  };
+
+  const resumeRecitation = async () => {
+    try {
+      if (sound) {
+        await sound.playAsync();
+        setIsPlaying(true);
+      }
+    } catch (error) {
+      console.error("Erreur reprise audio:", error);
+    }
+  };
+
+  const seekToPosition = async (positionMillis: number) => {
+    try {
+      if (sound) {
+        await sound.setPositionAsync(positionMillis);
+      }
+    } catch (error) {
+      console.error("Erreur navigation audio:", error);
+    }
+  };
+
+  // Fonction utilitaire pour formater le temps
+  const formatTime = (milliseconds: number): string => {
+    const totalSeconds = Math.floor(milliseconds / 1000);
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+    return `${minutes}:${seconds.toString().padStart(2, "0")}`;
+  };
+
+  const stopRecitation = async () => {
+    try {
+      if (sound) {
+        await sound.stopAsync();
+        await sound.unloadAsync();
+        setSound(null);
+      }
+      setIsPlaying(false);
+      setCurrentlyPlaying(null);
+    } catch (error) {
+      console.error("Erreur arrêt audio:", error);
+    }
+  };
 
   // Charger les versets, la translittération et la traduction selon la sourate et la langue
   useEffect(() => {
@@ -320,6 +620,240 @@ export default function QuranScreen() {
                 contentContainerStyle={styles.listContent}
                 showsVerticalScrollIndicator={true}
                 bounces={true}
+              />
+            </View>
+          </SafeAreaView>
+        </Modal>
+
+        {/* Section Récitateur Premium */}
+        {user.isPremium && getAvailableReciters().length > 0 && (
+          <View style={styles.reciterSection}>
+            <TouchableOpacity
+              style={styles.reciterSelector}
+              onPress={() => setReciterModalVisible(true)}
+            >
+              <MaterialCommunityIcons
+                name="account-music"
+                size={20}
+                color="#ba9c34"
+              />
+              <Text style={styles.reciterText}>
+                {selectedReciter || "Sélectionner un récitateur"}
+              </Text>
+              <MaterialCommunityIcons
+                name="chevron-down"
+                size={20}
+                color="#ba9c34"
+              />
+            </TouchableOpacity>
+
+            {/* Contrôles audio pour la sourate actuelle */}
+            {selectedReciter && (
+              <View style={styles.audioControls}>
+                {(() => {
+                  const currentRecitation = getCurrentRecitation();
+                  if (!currentRecitation) {
+                    return (
+                      <Text style={styles.noRecitationText}>
+                        Récitation non disponible pour cette sourate
+                      </Text>
+                    );
+                  }
+
+                  const isDownloading = downloadingRecitations.has(
+                    currentRecitation.id
+                  );
+                  const progress = downloadProgress[currentRecitation.id] || 0;
+                  const isCurrentlyPlaying =
+                    currentlyPlaying === currentRecitation.id && isPlaying;
+
+                  if (isDownloading) {
+                    return (
+                      <View style={styles.downloadProgress}>
+                        <View style={styles.progressBar}>
+                          <View
+                            style={[
+                              styles.progressFill,
+                              { width: `${progress}%` },
+                            ]}
+                          />
+                        </View>
+                        <Text style={styles.progressText}>{progress}%</Text>
+                      </View>
+                    );
+                  }
+
+                  if (!currentRecitation.isDownloaded) {
+                    return (
+                      <TouchableOpacity
+                        style={styles.downloadButton}
+                        onPress={() =>
+                          handleDownloadRecitation(currentRecitation)
+                        }
+                      >
+                        <MaterialCommunityIcons
+                          name="download"
+                          size={20}
+                          color="#4ECDC4"
+                        />
+                        <Text style={styles.downloadButtonText}>
+                          Télécharger
+                        </Text>
+                      </TouchableOpacity>
+                    );
+                  }
+
+                  return (
+                    <View style={styles.playbackControlsContainer}>
+                      {/* Contrôles principaux */}
+                      <View style={styles.playbackControls}>
+                        <TouchableOpacity
+                          style={styles.playButton}
+                          onPress={() => playRecitation(currentRecitation)}
+                          disabled={isLoading}
+                        >
+                          {isLoading ? (
+                            <MaterialCommunityIcons
+                              name="loading"
+                              size={24}
+                              color="#fff"
+                            />
+                          ) : (
+                            <MaterialCommunityIcons
+                              name={isCurrentlyPlaying ? "pause" : "play"}
+                              size={24}
+                              color="#fff"
+                            />
+                          )}
+                        </TouchableOpacity>
+
+                        <TouchableOpacity
+                          style={styles.stopButton}
+                          onPress={() => stopRecitation()}
+                          disabled={!isCurrentlyPlaying}
+                        >
+                          <MaterialCommunityIcons
+                            name="stop"
+                            size={20}
+                            color="#fff"
+                          />
+                        </TouchableOpacity>
+
+                        <TouchableOpacity
+                          style={styles.deleteButton}
+                          onPress={() =>
+                            handleDeleteRecitation(currentRecitation)
+                          }
+                        >
+                          <MaterialCommunityIcons
+                            name="delete"
+                            size={20}
+                            color="#FF6B6B"
+                          />
+                        </TouchableOpacity>
+                      </View>
+
+                      {/* Jauge de progression */}
+                      {isCurrentlyPlaying && playbackDuration > 0 && (
+                        <View style={styles.progressContainer}>
+                          <Text style={styles.timeText}>
+                            {formatTime(playbackPosition)}
+                          </Text>
+
+                          <TouchableOpacity
+                            style={styles.progressBarContainer}
+                            onPress={(event) => {
+                              const { locationX } = event.nativeEvent;
+                              const progressBarWidth = 200; // width fixe pour éviter les erreurs
+                              const newPosition =
+                                (locationX / progressBarWidth) *
+                                playbackDuration;
+                              seekToPosition(newPosition);
+                            }}
+                            activeOpacity={0.7}
+                          >
+                            <View style={styles.audioProgressBar}>
+                              <View
+                                style={[
+                                  styles.audioProgressFill,
+                                  {
+                                    width: `${
+                                      playbackDuration > 0
+                                        ? (playbackPosition /
+                                            playbackDuration) *
+                                          100
+                                        : 0
+                                    }%`,
+                                  },
+                                ]}
+                              />
+                            </View>
+                          </TouchableOpacity>
+
+                          <Text style={styles.timeText}>
+                            {formatTime(playbackDuration)}
+                          </Text>
+                        </View>
+                      )}
+                    </View>
+                  );
+                })()}
+              </View>
+            )}
+          </View>
+        )}
+
+        {/* Modal de sélection du récitateur */}
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={reciterModalVisible}
+          onRequestClose={() => setReciterModalVisible(false)}
+        >
+          <SafeAreaView style={styles.modalContainer}>
+            <View
+              style={[styles.modalContent, { maxHeight: windowHeight * 0.6 }]}
+            >
+              <View style={styles.modalHeader}>
+                <Text style={styles.modalTitle}>Choisir un récitateur</Text>
+                <TouchableOpacity
+                  style={styles.closeButton}
+                  onPress={() => setReciterModalVisible(false)}
+                >
+                  <Text style={styles.closeButtonText}>✕</Text>
+                </TouchableOpacity>
+              </View>
+              <FlatList
+                data={getAvailableReciters().map((reciter) => ({
+                  key: reciter,
+                  label: reciter,
+                }))}
+                renderItem={({ item }) => (
+                  <TouchableOpacity
+                    style={[
+                      styles.optionStyle,
+                      selectedReciter === item.key &&
+                        styles.selectedOptionStyle,
+                    ]}
+                    onPress={() => {
+                      setSelectedReciter(item.key);
+                      setReciterModalVisible(false);
+                    }}
+                  >
+                    <Text
+                      style={[
+                        styles.optionTextStyle,
+                        selectedReciter === item.key &&
+                          styles.selectedOptionTextStyle,
+                      ]}
+                    >
+                      {item.label}
+                    </Text>
+                  </TouchableOpacity>
+                )}
+                keyExtractor={(item) => item.key}
+                contentContainerStyle={styles.listContent}
+                showsVerticalScrollIndicator={true}
               />
             </View>
           </SafeAreaView>
@@ -621,5 +1155,158 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginBottom: 12,
     fontStyle: "italic",
+  },
+
+  // Styles pour la section récitateur premium
+  reciterSection: {
+    backgroundColor: "rgba(231, 200, 106, 0.15)",
+    borderRadius: 16,
+    padding: 12,
+    marginBottom: 16,
+    borderWidth: 1,
+    borderColor: "#e7c86a",
+  },
+  reciterSelector: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    backgroundColor: "#fffbe6",
+    borderRadius: 12,
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+    borderWidth: 1,
+    borderColor: "#ba9c34",
+  },
+  reciterText: {
+    flex: 1,
+    marginLeft: 12,
+    marginRight: 12,
+    fontSize: 16,
+    color: "#483C1C",
+    fontWeight: "500",
+  },
+  audioControls: {
+    marginTop: 12,
+    alignItems: "center",
+  },
+  noRecitationText: {
+    fontSize: 14,
+    color: "#7c6720",
+    fontStyle: "italic",
+    textAlign: "center",
+    padding: 8,
+  },
+  downloadProgress: {
+    width: "100%",
+    alignItems: "center",
+  },
+  progressBar: {
+    width: "100%",
+    height: 8,
+    backgroundColor: "rgba(186, 156, 52, 0.2)",
+    borderRadius: 4,
+    overflow: "hidden",
+    marginBottom: 8,
+  },
+  progressFill: {
+    height: "100%",
+    backgroundColor: "#4ECDC4",
+    borderRadius: 4,
+  },
+  progressText: {
+    fontSize: 12,
+    color: "#7c6720",
+    fontWeight: "bold",
+  },
+  downloadButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "rgba(78, 205, 196, 0.1)",
+    borderRadius: 12,
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    borderWidth: 1,
+    borderColor: "#4ECDC4",
+  },
+  downloadButtonText: {
+    marginLeft: 8,
+    fontSize: 14,
+    color: "#4ECDC4",
+    fontWeight: "600",
+  },
+  playbackControls: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 12,
+  },
+  playButton: {
+    backgroundColor: "#4ECDC4",
+    borderRadius: 25,
+    width: 50,
+    height: 50,
+    alignItems: "center",
+    justifyContent: "center",
+    shadowColor: "#4ECDC4",
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    shadowOffset: { width: 0, height: 2 },
+    elevation: 4,
+  },
+  deleteButton: {
+    backgroundColor: "rgba(255, 107, 107, 0.1)",
+    borderRadius: 20,
+    width: 40,
+    height: 40,
+    alignItems: "center",
+    justifyContent: "center",
+    borderWidth: 1,
+    borderColor: "#FF6B6B",
+  },
+
+  // Nouveaux styles pour les contrôles audio avancés
+  playbackControlsContainer: {
+    width: "100%",
+    gap: 12,
+  },
+  stopButton: {
+    backgroundColor: "rgba(231, 200, 106, 0.2)",
+    borderRadius: 20,
+    width: 40,
+    height: 40,
+    alignItems: "center",
+    justifyContent: "center",
+    borderWidth: 1,
+    borderColor: "#e7c86a",
+  },
+  progressContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
+    marginTop: 8,
+  },
+  timeText: {
+    fontSize: 12,
+    color: "#7c6720",
+    fontWeight: "600",
+    minWidth: 40,
+    textAlign: "center",
+  },
+  progressBarContainer: {
+    flex: 1,
+    height: 30,
+    justifyContent: "center",
+    paddingHorizontal: 8,
+  },
+  audioProgressBar: {
+    height: 6,
+    backgroundColor: "rgba(186, 156, 52, 0.3)",
+    borderRadius: 3,
+    overflow: "hidden",
+  },
+  audioProgressFill: {
+    height: "100%",
+    backgroundColor: "#4ECDC4",
+    borderRadius: 3,
   },
 });

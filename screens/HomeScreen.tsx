@@ -46,6 +46,7 @@ import { getQuranVersesWithTranslations } from "../utils/quranApi";
 import { getRandomHadith } from "../utils/hadithApi";
 import { debugLog, errorLog } from "../utils/logger";
 import WelcomePersonalizationModal from "../components/WelcomePersonalizationModal";
+import { usePremium } from "../contexts/PremiumContext";
 
 const { AdhanModule } = NativeModules;
 const { width: screenWidth, height: screenHeight } = Dimensions.get("window");
@@ -279,6 +280,7 @@ export default function HomeScreen() {
 
   const settings = useContext(SettingsContext);
   const { location } = useLocation();
+  const { user } = usePremium();
 
   // Animation d'entrée et chargement du contenu aléatoire
   useEffect(() => {
@@ -919,6 +921,7 @@ export default function HomeScreen() {
       color: "#FF6B6B",
       gradient: ["rgba(255,107,107,0.13)", "rgba(139,0,0,0.10)"] as const,
     },
+    // Note: Récitations premium intégrées dans la page Quran
     {
       icon: "calendar-heart",
       title: t("hijri_calendar"),
@@ -1601,9 +1604,17 @@ export default function HomeScreen() {
                           }
                         />
                       </View>
-                      <Text style={styles.actionButtonText}>
-                        {action.title}
-                      </Text>
+                      <View
+                        style={{
+                          flex: 1,
+                          flexDirection: "row",
+                          alignItems: "center",
+                        }}
+                      >
+                        <Text style={styles.actionButtonText}>
+                          {action.title}
+                        </Text>
+                      </View>
                       <MaterialCommunityIcons
                         name="chevron-right"
                         size={20}
