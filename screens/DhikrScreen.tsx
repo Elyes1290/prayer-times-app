@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import {
   FlatList,
   Text,
@@ -13,6 +13,8 @@ import { Picker } from "@react-native-picker/picker";
 import { useTranslation } from "react-i18next";
 import ThemedImageBackground from "../components/ThemedImageBackground";
 import { useLocalSearchParams } from "expo-router";
+import FavoriteButton from "../components/FavoriteButton";
+import { DhikrFavorite } from "../contexts/FavoritesContext";
 
 const CATEGORIES = [
   { key: "dailyDua", namespace: "dhikr" },
@@ -35,6 +37,22 @@ function useDhikrData(namespace: string) {
 
 export default function DhikrScreen() {
   const params = useLocalSearchParams();
+
+  // Fonction pour convertir un dhikr en format favori
+  const convertToFavorite = (
+    item: any,
+    category: CategoryKey
+  ): Omit<DhikrFavorite, "id" | "dateAdded"> => {
+    return {
+      type: "dhikr",
+      category: category,
+      arabicText: item.arabic || "",
+      translation: item.translation || "",
+      transliteration: item.latin || "",
+      source: item.source || "",
+      benefits: item.benefits || item.fawaid || "",
+    };
+  };
 
   const dhikrIndexParam = params.dhikrIndex
     ? parseInt(params.dhikrIndex as string, 10)
@@ -133,6 +151,44 @@ export default function DhikrScreen() {
     });
   };
 
+  // Composant mémorisé pour les éléments dhikr
+  const DhikrItem = React.memo(
+    ({ item, selectedKey }: { item: any; selectedKey: CategoryKey }) => (
+      <View style={styles.card}>
+        <View style={styles.cardHeader}>
+          <Text style={styles.arabic}>{item.arabic}</Text>
+          <FavoriteButton
+            favoriteData={convertToFavorite(item, selectedKey)}
+            size={22}
+            iconColor="#e4c678"
+            iconColorActive="#FFD700"
+            style={styles.favoriteButton}
+          />
+        </View>
+        {!i18n.language.startsWith("ar") && item.latin && (
+          <Text style={styles.translit}>{item.latin}</Text>
+        )}
+        {!i18n.language.startsWith("ar") && (
+          <Text style={styles.translation}>{item.translation}</Text>
+        )}
+        {item.source && <Text style={styles.reference}>{item.source}</Text>}
+        {!i18n.language.startsWith("ar") && (item.benefits || item.fawaid) && (
+          <Text style={styles.benefit}>{item.benefits ?? item.fawaid}</Text>
+        )}
+      </View>
+    )
+  );
+
+  DhikrItem.displayName = "DhikrItem";
+
+  // Fonction renderItem optimisée
+  const renderDhikrItem = useCallback(
+    ({ item }: { item: any }) => (
+      <DhikrItem item={item} selectedKey={selectedKey} />
+    ),
+    [selectedKey]
+  );
+
   return (
     <ThemedImageBackground style={styles.background}>
       <SafeAreaView style={{ flex: 1 }}>
@@ -176,30 +232,20 @@ export default function DhikrScreen() {
           ref={flatListRef}
           data={filteredDuas}
           keyExtractor={(_, idx) => idx.toString()}
-          renderItem={({ item }) => (
-            <View style={styles.card}>
-              <Text style={styles.arabic}>{item.arabic}</Text>
-              {!i18n.language.startsWith("ar") && item.latin && (
-                <Text style={styles.translit}>{item.latin}</Text>
-              )}
-              {!i18n.language.startsWith("ar") && (
-                <Text style={styles.translation}>{item.translation}</Text>
-              )}
-              {item.source && (
-                <Text style={styles.reference}>{item.source}</Text>
-              )}
-              {!i18n.language.startsWith("ar") &&
-                (item.benefits || item.fawaid) && (
-                  <Text style={styles.benefit}>
-                    {item.benefits ?? item.fawaid}
-                  </Text>
-                )}
-            </View>
-          )}
+          renderItem={renderDhikrItem}
           ListEmptyComponent={<Text style={styles.emptyText}>{noDhikr}</Text>}
           contentContainerStyle={{ paddingBottom: 150 }}
           keyboardShouldPersistTaps="handled"
           initialNumToRender={10}
+          maxToRenderPerBatch={10}
+          windowSize={10}
+          removeClippedSubviews={true}
+          updateCellsBatchingPeriod={100}
+          getItemLayout={(data, index) => ({
+            length: 150, // hauteur estimée d'une carte dhikr
+            offset: 150 * index,
+            index,
+          })}
           onScrollToIndexFailed={onScrollToIndexFailed}
         />
       </SafeAreaView>
@@ -264,13 +310,20 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 1 },
     elevation: 2,
   },
+  cardHeader: {
+    flexDirection: "row",
+    alignItems: "flex-start",
+    justifyContent: "space-between",
+    marginBottom: 10,
+  },
   arabic: {
     fontSize: 26,
     color: "#e4c678",
     fontWeight: "700",
     textAlign: "right",
-    marginBottom: 10,
     lineHeight: 34,
+    flex: 1,
+    marginRight: 8,
   },
   translit: {
     color: "#B5C9F0",
@@ -304,5 +357,9 @@ const styles = StyleSheet.create({
     color: "#fffbe8",
     textAlign: "center",
     marginTop: 40,
+  },
+  favoriteButton: {
+    padding: 2,
+    marginTop: 2,
   },
 });

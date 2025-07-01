@@ -913,6 +913,13 @@ export default function HomeScreen() {
       gradient: ["rgba(78,205,196,0.13)", "rgba(44,122,122,0.10)"] as const,
     },
     {
+      icon: "heart-multiple",
+      title: t("favorites") || "Favoris",
+      route: "/favorites",
+      color: "#FF6B6B",
+      gradient: ["rgba(255,107,107,0.13)", "rgba(139,0,0,0.10)"] as const,
+    },
+    {
       icon: "calendar-heart",
       title: t("hijri_calendar"),
       route: "/hijri",

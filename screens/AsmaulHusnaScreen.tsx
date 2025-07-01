@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback, useMemo } from "react";
 import {
   View,
   Text,
@@ -15,6 +15,8 @@ import { useTranslation } from "react-i18next";
 import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons } from "@expo/vector-icons";
 import ThemedImageBackground from "../components/ThemedImageBackground";
+import FavoriteButton from "../components/FavoriteButton";
+import { AsmaulHusnaFavorite } from "../contexts/FavoritesContext";
 
 interface Nom {
   key: string;
@@ -83,6 +85,19 @@ const AsmaulHusnaScreen = () => {
     );
   });
 
+  // Fonction pour convertir un Nom en AsmaulHusnaFavorite
+  const convertToFavorite = (
+    item: Nom
+  ): Omit<AsmaulHusnaFavorite, "id" | "dateAdded"> => ({
+    type: "asmaul_husna",
+    number: item.number,
+    arabicName: item.arabic,
+    transliteration: item.translit,
+    meaning: item.meaning,
+    benefits: item.benefits,
+    usage: item.usage,
+  });
+
   const toggleExpand = (id: string) => {
     if (!animations.has(id)) {
       animations.set(id, new Animated.Value(0));
@@ -90,9 +105,10 @@ const AsmaulHusnaScreen = () => {
     const animation = animations.get(id);
 
     if (expandedId === id) {
+      // Animation de fermeture plus rapide
       Animated.timing(animation, {
         toValue: 0,
-        duration: 300,
+        duration: 200, // Réduit de 300 à 200ms
         useNativeDriver: false,
       }).start(() => setExpandedId(null));
     } else {
@@ -100,26 +116,27 @@ const AsmaulHusnaScreen = () => {
         const prevAnimation = animations.get(expandedId);
         Animated.timing(prevAnimation, {
           toValue: 0,
-          duration: 300,
+          duration: 200, // Réduit de 300 à 200ms
           useNativeDriver: false,
         }).start();
       }
       setExpandedId(id);
       Animated.timing(animation, {
         toValue: 1,
-        duration: 300,
+        duration: 250, // Légèrement plus lent pour l'ouverture
         useNativeDriver: false,
       }).start();
     }
   };
 
+  // Fonction renderItem simple et efficace
   const renderNameCard = ({ item }: { item: Nom }) => {
     const isExpanded = expandedId === item.key;
     const animation = animations.get(item.key) || new Animated.Value(0);
 
     const maxHeight = animation.interpolate({
       inputRange: [0, 1],
-      outputRange: [0, 1000],
+      outputRange: [0, 600], // Réduit de 1000 à 600 pour une animation plus rapide
     });
 
     return (
@@ -137,12 +154,22 @@ const AsmaulHusnaScreen = () => {
               <View style={styles.numberContainer}>
                 <Text style={styles.number}>{item.number}</Text>
               </View>
-              <Ionicons
-                name={isExpanded ? "chevron-up" : "chevron-down"}
-                size={24}
-                color="#fff"
-                style={styles.expandIcon}
-              />
+
+              <View style={styles.cardActions}>
+                <FavoriteButton
+                  favoriteData={convertToFavorite(item)}
+                  size={22}
+                  iconColor="rgba(255, 255, 255, 0.7)"
+                  iconColorActive="#FFD700"
+                  style={styles.favoriteButton}
+                />
+                <Ionicons
+                  name={isExpanded ? "chevron-up" : "chevron-down"}
+                  size={24}
+                  color="#fff"
+                  style={styles.expandIcon}
+                />
+              </View>
             </View>
             <View style={styles.arabicNameContainer}>
               <Text style={styles.arabic}>{item.arabic}</Text>
@@ -264,6 +291,11 @@ const AsmaulHusnaScreen = () => {
         keyExtractor={(item) => item.key}
         contentContainerStyle={[styles.listContainer, { paddingBottom: 150 }]}
         showsVerticalScrollIndicator={false}
+        initialNumToRender={8}
+        maxToRenderPerBatch={8}
+        windowSize={8}
+        removeClippedSubviews={false}
+        updateCellsBatchingPeriod={150}
       />
     </ThemedImageBackground>
   );
@@ -351,6 +383,13 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 16,
     fontWeight: "bold",
+  },
+  cardActions: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  favoriteButton: {
+    marginRight: 8,
   },
   expandIcon: {
     marginLeft: 10,

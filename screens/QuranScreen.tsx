@@ -15,6 +15,8 @@ import {
   TextInput,
 } from "react-native";
 import { useTranslation } from "react-i18next";
+import FavoriteButton from "../components/FavoriteButton";
+import { QuranVerseFavorite } from "../contexts/FavoritesContext";
 
 export default function QuranScreen() {
   const { t, i18n } = useTranslation();
@@ -182,6 +184,23 @@ export default function QuranScreen() {
       .trim();
   }
 
+  // Fonction pour convertir un verset en format favori
+  const convertToFavorite = (
+    item: any,
+    translationText: string,
+    chapterName: string
+  ): Omit<QuranVerseFavorite, "id" | "dateAdded"> => {
+    return {
+      type: "quran_verse",
+      chapterNumber: selectedSourate,
+      chapterName: chapterName,
+      verseNumber: parseInt(item.verse_key.split(":")[1]),
+      arabicText: item.text_uthmani,
+      translation: stripHtml(translationText),
+      transliteration: "", // Peut être ajouté plus tard si disponible
+    };
+  };
+
   // Filtrer les versets selon la recherche dans la sourate sélectionnée
   const filteredVerses = useMemo(() => {
     if (!searchQuery.trim()) {
@@ -336,14 +355,35 @@ export default function QuranScreen() {
             const phoneticText = phoneticArr[originalIndex]?.text || "";
             const translationText = translationArr[originalIndex]?.text || "";
 
+            // Obtenir le nom de la sourate pour les favoris
+            const currentSourate = sourates.find(
+              (s) => s.id === selectedSourate
+            );
+            const chapterName = currentSourate
+              ? currentSourate.name_simple
+              : "Sourate inconnue";
+
             return (
               <View style={styles.ayahContainer}>
                 <View style={styles.arabicRow}>
                   <Text style={styles.arabic}>{item.text_uthmani}</Text>
-                  <View style={styles.verseCircle}>
-                    <Text style={styles.verseNumber}>
-                      {item.verse_key.split(":")[1]}
-                    </Text>
+                  <View style={styles.verseActions}>
+                    <View style={styles.verseCircle}>
+                      <Text style={styles.verseNumber}>
+                        {item.verse_key.split(":")[1]}
+                      </Text>
+                    </View>
+                    <FavoriteButton
+                      favoriteData={convertToFavorite(
+                        item,
+                        translationText,
+                        chapterName
+                      )}
+                      size={20}
+                      iconColor="#ba9c34"
+                      iconColorActive="#FFD700"
+                      style={styles.favoriteButtonCompact}
+                    />
                   </View>
                 </View>
 
@@ -363,6 +403,11 @@ export default function QuranScreen() {
               </View>
             );
           }}
+          initialNumToRender={5}
+          maxToRenderPerBatch={5}
+          windowSize={10}
+          removeClippedSubviews={true}
+          updateCellsBatchingPeriod={100}
         />
       </View>
     </ImageBackground>
@@ -494,7 +539,7 @@ const styles = StyleSheet.create({
   arabicRow: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "flex-end",
+    justifyContent: "space-between",
     marginBottom: 6,
   },
   verseCircle: {
@@ -516,6 +561,17 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 15,
     fontFamily: "ScheherazadeNew",
+  },
+  verseActions: {
+    flexDirection: "column",
+    alignItems: "center",
+    gap: 6,
+    marginLeft: 8,
+  },
+  favoriteButtonCompact: {
+    padding: 4,
+    borderRadius: 8,
+    backgroundColor: "rgba(186, 156, 52, 0.08)",
   },
   searchInput: {
     backgroundColor: "#fffbe6",

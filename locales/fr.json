@@ -192,6 +192,9 @@
     "Maghrib": "Maghreb",
     "Isha": "Icha"
   },
+  "favorites": "Favoris",
+  "favorite_added": "Ajouté aux favoris",
+  "favorite_removed": "Retiré des favoris",
   "asmaulhusna_search_placeholder": "Rechercher par nom, signification ou translittération...",
   "dhikr": {
     "title": "Adhkar & Douas",
