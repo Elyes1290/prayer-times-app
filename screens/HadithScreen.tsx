@@ -16,6 +16,8 @@ import {
   TextInput,
 } from "react-native";
 import { useTranslation } from "react-i18next";
+import FavoriteButton from "../components/FavoriteButton";
+import { HadithFavorite } from "../contexts/FavoritesContext";
 
 type Book = { id: number; bookName: string; bookSlug: string };
 type Chapter = {
@@ -39,6 +41,25 @@ const PAGE_SIZE = 10;
 
 export default function HadithScreen() {
   const { t } = useTranslation();
+
+  // Fonction pour convertir un hadith en format favori
+  const convertToFavorite = (
+    item: Hadith,
+    bookName: string,
+    bookSlug: string,
+    chapterNum: number
+  ): Omit<HadithFavorite, "id" | "dateAdded"> => {
+    return {
+      type: "hadith",
+      bookSlug: bookSlug,
+      bookName: bookName,
+      chapterNumber: chapterNum,
+      hadithNumber: item.hadithNumber,
+      arabicText: item.hadithArabic || "",
+      englishText: item.hadithEnglish,
+      narrator: item.narrator || "",
+    };
+  };
   const [modalVisible, setModalVisible] = useState(false);
   const [modalType, setModalType] = useState<"book" | "chapter">("book");
   const windowHeight = Dimensions.get("window").height;
@@ -384,8 +405,33 @@ export default function HadithScreen() {
             <FlatList
               data={filteredHadiths}
               keyExtractor={(item) => item.id.toString()}
+              initialNumToRender={5}
+              maxToRenderPerBatch={5}
+              windowSize={10}
+              removeClippedSubviews={true}
+              updateCellsBatchingPeriod={100}
+              getItemLayout={(data, index) => ({
+                length: 200, // hauteur estimée d'un hadith
+                offset: 200 * index,
+                index,
+              })}
               renderItem={({ item }) => {
                 const isBigNumber = Number(item.hadithNumber) > 999;
+
+                // Obtenir les informations nécessaires pour les favoris
+                const currentBook = books.find(
+                  (b) => b.bookSlug === selectedBook
+                );
+                const currentChapter = chapters.find(
+                  (c) => c.chapterNumber === selectedChapter
+                );
+                const bookName = currentBook
+                  ? currentBook.bookName
+                  : "Livre inconnu";
+                const bookSlug = currentBook ? currentBook.bookSlug : "unknown";
+                const chapterNumber = selectedChapter
+                  ? parseInt(selectedChapter, 10)
+                  : 1;
 
                 return (
                   <View style={styles.ayahContainer}>
@@ -393,19 +439,33 @@ export default function HadithScreen() {
                       <Text style={styles.arabic}>
                         {item.hadithArabic || "—"}
                       </Text>
-                      <View
-                        style={[
-                          styles.verseCircle,
-                          isBigNumber && {
-                            width: 40,
-                            height: 40,
-                            borderRadius: 20,
-                          },
-                        ]}
-                      >
-                        <Text style={styles.verseNumber}>
-                          {item.hadithNumber}
-                        </Text>
+                      <View style={styles.hadithActions}>
+                        <View
+                          style={[
+                            styles.verseCircle,
+                            isBigNumber && {
+                              width: 40,
+                              height: 40,
+                              borderRadius: 20,
+                            },
+                          ]}
+                        >
+                          <Text style={styles.verseNumber}>
+                            {item.hadithNumber}
+                          </Text>
+                        </View>
+                        <FavoriteButton
+                          favoriteData={convertToFavorite(
+                            item,
+                            bookName,
+                            bookSlug,
+                            chapterNumber
+                          )}
+                          size={20}
+                          iconColor="#ba9c34"
+                          iconColorActive="#FFD700"
+                          style={styles.favoriteButton}
+                        />
                       </View>
                     </View>
                     <Text style={styles.traduction}>
@@ -550,7 +610,7 @@ const styles = StyleSheet.create({
   arabicRow: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "flex-end",
+    justifyContent: "space-between",
     marginBottom: 2,
   },
   verseCircle: {
@@ -650,5 +710,16 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#523f13",
     textAlign: "center",
+  },
+  hadithActions: {
+    flexDirection: "column",
+    alignItems: "center",
+    gap: 6,
+    marginLeft: 8,
+  },
+  favoriteButton: {
+    padding: 4,
+    borderRadius: 8,
+    backgroundColor: "rgba(186, 156, 52, 0.08)",
   },
 });
