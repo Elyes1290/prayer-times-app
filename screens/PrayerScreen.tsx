@@ -1165,6 +1165,7 @@ const getStyles = (
     header: {
       marginBottom: 16,
     },
+
     mainTitle: {
       fontSize: 28,
       color: overlayTextColor,
