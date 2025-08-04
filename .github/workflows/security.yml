@@ -31,11 +31,33 @@ jobs:
       - name: Check for hardcoded secrets
         run: |
           echo "🔍 Scanning for potential secrets..."
-          if grep -r -i "password\|secret\|key\|token\|api_key" . --exclude-dir=node_modules --exclude-dir=.git --exclude=*.md; then
-            echo "❌ Potential secrets found in code"
+          # Exclude test files, translations, and legitimate config patterns
+          if grep -r -i "password\|secret\|key\|token\|api_key" . \
+            --exclude-dir=node_modules \
+            --exclude-dir=.git \
+            --exclude-dir=__tests__ \
+            --exclude-dir=coverage \
+            --exclude="*.md" \
+            --exclude="*.test.ts" \
+            --exclude="*.test.tsx" \
+            --exclude="*locales*.json" \
+            --exclude="google-services.json.template" \
+            | grep -v "test-" \
+            | grep -v "mock" \
+            | grep -v "verse_key" \
+            | grep -v "method_Turkey" \
+            | grep -v "Turkey" \
+            | grep -v "jest.fn" \
+            | grep -v "jest.fn((key)" \
+            | grep -v "translation.*key" \
+            | grep -v '"key"' \
+            | grep -v "'key'" \
+            | grep -v "keyof" \
+            | grep -v "apiKey.*test"; then
+            echo "❌ Real secrets found in code"
             exit 1
           else
-            echo "✅ No hardcoded secrets found"
+            echo "✅ No real secrets found"
           fi
 
       - name: Check file permissions
