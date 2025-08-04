@@ -1,0 +1,58 @@
+{
+  "expo": {
+    "name": "MyAdhan: Muslim Prayer App",
+    "slug": "prayer-times-app",
+    "version": "1.0.3",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "scheme": "prayertimesapp",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "edgeToEdgeEnabled": true,
+      "package": "com.drogbinho.prayertimesapp2",
+      "versionCode": 48
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "static",
+      "favicon": "./assets/images/favicon.png"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/images/splash-icon.png",
+          "imageWidth": 200,
+          "resizeMode": "contain",
+          "backgroundColor": "#ffffff"
+        }
+      ],
+      "expo-font"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    },
+    "developmentClient": true,
+    "assetBundlePatterns": ["assets/sounds*"],
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "14e34a3b-d846-4f78-8908-d80cdbc6d1d7"
+      },
+      "apiBaseUrl": "https://elyesnaitliman.ch/api",
+      "premiumContentBaseUrl": "https://elyesnaitliman.ch/premium",
+      "recitationsBaseUrl": "https://elyesnaitliman.ch/api/recitations",
+      "adhansBaseUrl": "https://elyesnaitliman.ch/api/adhans",
+      "hadithApiKey": "$2y$10$doCdBLfM0jONj1evceyDyuFQYeUBzyQsh9NL2sRIuT9wt8GKsXaa"
+    }
+  }
+}

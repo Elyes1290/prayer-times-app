@@ -1,0 +1,11 @@
+# ===============================================
+# TEMPLATE DE CONFIGURATION SÉCURISÉE
+# ===============================================
+# Copiez ce fichier vers gradle.properties et remplissez avec vos vraies valeurs
+# Ne commitez JAMAIS le fichier gradle.properties avec les vraies valeurs !
+
+# Mots de passe pour la signature de l'application
+MYAPP_RELEASE_STORE_PASSWORD=VOTRE_MOT_DE_PASSE_ICI
+MYAPP_RELEASE_KEY_PASSWORD=VOTRE_MOT_DE_PASSE_ICI
+
+# Note: Utilisez des mots de passe forts en production 

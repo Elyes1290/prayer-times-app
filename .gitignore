@@ -1,0 +1,194 @@
+# Learn more https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
+
+# dependencies
+node_modules/
+
+# Expo
+.expo/
+dist/
+web-build/
+expo-env.d.ts
+
+# Native
+.kotlin/
+*.orig.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+
+# Metro
+.metro-health-check*
+
+# debug
+npm-debug.*
+yarn-debug.*
+yarn-error.*
+
+# macOS
+.DS_Store
+*.pem
+
+# local env files
+.env*.local
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# API keys and configuration files
+config.json
+app.config.js
+app.config.ts
+api-keys.json
+secrets.json
+google-services.json
+GoogleService-Info.plist
+firebase-config.json
+firebase-config.js
+firebase-config.ts
+
+# Environment variables and secrets
+.env*
+*.env
+.env.local
+.env.development
+.env.test
+.env.production
+.env.staging
+
+# API Keys and Tokens
+**/api-keys.json
+**/secrets.json
+**/credentials.json
+**/service-account.json
+**/firebase-admin.json
+**/google-services.json
+**/GoogleService-Info.plist
+
+# Database credentials
+**/database.json
+**/db-config.json
+**/mysql-config.json
+**/postgres-config.json
+
+# Authentication files
+**/auth.json
+**/jwt-secret.json
+**/session-keys.json
+
+# Payment and billing
+**/stripe-keys.json
+**/paypal-config.json
+**/billing-config.json
+
+# Cloud services
+**/aws-credentials.json
+**/azure-config.json
+**/heroku-config.json
+**/vercel.json
+
+# Android specific secrets
+android/gradle.properties
+android/app/google-services.json
+android/app/src/main/res/values/secrets.xml
+android/app/src/main/assets/google-services.json
+android/app/src/debug/google-services.json
+android/app/src/release/google-services.json
+
+# iOS specific secrets
+ios/GoogleService-Info.plist
+ios/GoogleService-Info-Debug.plist
+ios/GoogleService-Info-Release.plist
+ios/Runner/GoogleService-Info.plist
+
+# Keystore and signing files
+*.keystore
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.pem
+*.pem.key
+*.pem.crt
+*.pem.csr
+*.pem.pass
+
+# Build and cache
+android/.gradle/
+android/app/build/
+android/build/
+.gradle/
+.expo-shared/
+.expo/
+dist/
+web-build/
+
+# Development files
+app-example/
+*.tsbuildinfo
+*.orig.*
+*.backup
+*.tmp
+*.temp
+
+# Logs and debugging
+*.log
+logs/
+debug/
+crash-reports/
+
+# IDE and editor files
+.vscode/settings.json
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+*.cache
+.cache/
+
+# Backup files
+*.bak
+*.backup
+*.old
+*.save
+
+# Test files with sensitive data
+**/test-secrets.json
+**/test-credentials.json
+**/mock-secrets.json
+
+# 🔐 SÉCURITÉ : Scripts de test et fichiers de diagnostic
+scripts/test-database-connection.php
+scripts/diagnostic-database.php
+scripts/test-*.php
+scripts/*-debug.php
+
+# 🔐 SÉCURITÉ : Fichiers de configuration avec mots de passe
+api/config.php.local
+api/config-local.php
+api/config-prod.php
+# Fichier de configuration securise
+.env
+
+# Fichier de configuration securise
+.env
+
+# Fichier de configuration securise
+.env

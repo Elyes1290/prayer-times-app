@@ -1,0 +1,35 @@
+{
+  "time_until_sunrise": "Masa sehingga matahari terbit",
+  "fajr_to_sunrise_time": "Masa antara Fajr dan matahari terbit",
+  "sunrise_to_zuhr_time": "Masa antara matahari terbit dan Dhuhr",
+  "zuhr_to_asr_time": "Masa antara Dhuhr dan Asr",
+  "asr_to_maghrib_time": "Masa antara Asr dan Maghrib",
+  "maghrib_to_isha_time": "Masa antara Maghrib dan Isha",
+  "sunrise_to_sunset": "Masa antara matahari terbit dan terbenam",
+  "sunset_to_fajr": "Masa antara matahari terbenam dan Fajr",
+  "day_length": "Panjang hari",
+  "night_length": "Panjang malam",
+  "dashboard_welcome": "Assalamu Alaykum",
+  "tasbih": {
+    "title": "Tasbih",
+    "dhikr": {
+      "subhanallah": "Maha Suci Allah",
+      "alhamdulillah": "Segala puji bagi Allah",
+      "allahouakbar": "Allah Maha Besar",
+      "la_ilaha_illallah": "Tiada Tuhan melainkan Allah"
+    },
+    "reset": "Tetapkan semula"
+  },
+  "adhan_notification_title": "🕌 Azan",
+  "adhan_notification_body": "Masa untuk solat {{prayer}}! Semoga Allah terima solat anda.",
+  "adhan_completed_title": "✅ Azan selesai",
+  "adhan_completed_body": "Panggilan solat telah berlangsung",
+  "dismiss": "Tutup",
+  "preparing_adhan": "Menyediakan Azan...",
+
+  "welcome_personalization_title": "Personalisasi selamat datang",
+  "welcome_personalization_description": "Untuk memberikan pengalaman yang lebih peribadi, bolehkah anda beritahu kami nama pertama anda?",
+  "welcome_personalization_placeholder": "Nama pertama anda (pilihan)",
+  "welcome_personalization_confirm": "Sahkan",
+  "welcome_personalization_skip": "Langkau"
+}

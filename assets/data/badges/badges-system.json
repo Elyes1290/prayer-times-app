@@ -1,0 +1,377 @@
+{
+  "categories": {
+    "prayer": {
+      "name": "Prières",
+      "icon": "pray",
+      "color": "#4ECE84"
+    },
+    "streak": {
+      "name": "Régularité",
+      "icon": "flame",
+      "color": "#3498DB"
+    },
+    "dhikr": {
+      "name": "Dhikr & Invocations",
+      "icon": "beads",
+      "color": "#FF6B35"
+    },
+    "quran": {
+      "name": "Lecture du Coran",
+      "icon": "book",
+      "color": "#9B59B6"
+    },
+    "hadith": {
+      "name": "Étude des Hadiths",
+      "icon": "scroll",
+      "color": "#8E44AD"
+    },
+    "social": {
+      "name": "Communauté",
+      "icon": "people",
+      "color": "#E67E22"
+    },
+    "premium": {
+      "name": "Premium",
+      "icon": "star",
+      "color": "#F1C40F"
+    }
+  },
+  "badges": [
+    {
+      "id": "first_prayer",
+      "code": "first_prayer",
+      "category": "prayer",
+      "name": {
+        "fr": "Première Prière",
+        "ar": "الصلاة الأولى",
+        "en": "First Prayer"
+      },
+      "description": {
+        "fr": "Accompli votre première prière",
+        "ar": "أتممت صلاتك الأولى",
+        "en": "Completed your first prayer"
+      },
+      "icon": "checkmark-circle",
+      "points": 10,
+      "requirement": {
+        "type": "count",
+        "value": 1
+      },
+      "is_hidden": false
+    },
+    {
+      "id": "early_bird",
+      "code": "early_bird",
+      "category": "prayer",
+      "name": {
+        "fr": "Lève-tôt",
+        "ar": "الطائر المبكر",
+        "en": "Early Bird"
+      },
+      "description": {
+        "fr": "Prière de Fajr accomplie 5 fois",
+        "ar": "صلاة الفجر ٥ مرات",
+        "en": "Fajr prayer completed 5 times"
+      },
+      "icon": "sunny",
+      "points": 30,
+      "requirement": {
+        "type": "count",
+        "value": 5
+      },
+      "is_hidden": false
+    },
+    {
+      "id": "faithful_worshipper",
+      "code": "faithful_worshipper",
+      "category": "prayer",
+      "name": {
+        "fr": "Fidèle adorateur",
+        "ar": "العابد المؤمن",
+        "en": "Faithful Worshipper"
+      },
+      "description": {
+        "fr": "Accompli 50 prières au total",
+        "ar": "أتم ٥٠ صلاة إجمالية",
+        "en": "Completed 50 total prayers"
+      },
+      "icon": "person",
+      "points": 100,
+      "requirement": {
+        "type": "count",
+        "value": 50
+      },
+      "is_hidden": false
+    },
+    {
+      "id": "prayer_master",
+      "code": "prayer_master",
+      "category": "prayer",
+      "name": {
+        "fr": "Maître des prières",
+        "ar": "سيد الصلوات",
+        "en": "Prayer Master"
+      },
+      "description": {
+        "fr": "Accompli 500 prières au total",
+        "ar": "أتم ٥٠٠ صلاة إجمالية",
+        "en": "Completed 500 total prayers"
+      },
+      "icon": "star",
+      "points": 500,
+      "requirement": {
+        "type": "count",
+        "value": 500
+      },
+      "is_hidden": false
+    },
+    {
+      "id": "prayer_streak_7",
+      "code": "prayer_streak_7",
+      "category": "streak",
+      "name": {
+        "fr": "Fidèle débutant",
+        "ar": "المؤمن المبتدئ",
+        "en": "Beginner Faithful"
+      },
+      "description": {
+        "fr": "7 jours consécutifs de prières",
+        "ar": "٧ أيام متتالية من الصلاة",
+        "en": "7 consecutive days of prayers"
+      },
+      "icon": "flame",
+      "points": 50,
+      "requirement": {
+        "type": "streak",
+        "value": 7
+      },
+      "is_hidden": false
+    },
+    {
+      "id": "prayer_streak_30",
+      "code": "prayer_streak_30",
+      "category": "streak",
+      "name": {
+        "fr": "Gardien du mois",
+        "ar": "حارس الشهر",
+        "en": "Month Guardian"
+      },
+      "description": {
+        "fr": "30 jours consécutifs de prières",
+        "ar": "٣٠ يوماً متتالياً من الصلاة",
+        "en": "30 consecutive days of prayers"
+      },
+      "icon": "shield-checkmark",
+      "points": 200,
+      "requirement": {
+        "type": "streak",
+        "value": 30
+      },
+      "is_hidden": false
+    },
+    {
+      "id": "prayer_streak_100",
+      "code": "prayer_streak_100",
+      "category": "streak",
+      "name": {
+        "fr": "Maître de la constance",
+        "ar": "سيد الثبات",
+        "en": "Master of Consistency"
+      },
+      "description": {
+        "fr": "100 jours consécutifs de prières",
+        "ar": "١٠٠ يوم متتالي من الصلاة",
+        "en": "100 consecutive days of prayers"
+      },
+      "icon": "trophy",
+      "points": 1000,
+      "requirement": {
+        "type": "streak",
+        "value": 100
+      },
+      "is_hidden": false
+    },
+    {
+      "id": "dhikr_beginner",
+      "code": "dhikr_beginner",
+      "category": "dhikr",
+      "name": {
+        "fr": "Débutant en Dhikr",
+        "ar": "مبتدئ في الذكر",
+        "en": "Dhikr Beginner"
+      },
+      "description": {
+        "fr": "10 sessions de dhikr accomplies",
+        "ar": "١٠ جلسات ذكر مكتملة",
+        "en": "10 dhikr sessions completed"
+      },
+      "icon": "radio-button-on",
+      "points": 25,
+      "requirement": {
+        "type": "count",
+        "value": 10
+      },
+      "is_hidden": false
+    },
+    {
+      "id": "dhikr_master",
+      "code": "dhikr_master",
+      "category": "dhikr",
+      "name": {
+        "fr": "Maître du Dhikr",
+        "ar": "سيد الذكر",
+        "en": "Dhikr Master"
+      },
+      "description": {
+        "fr": "100 sessions de dhikr accomplies",
+        "ar": "١٠٠ جلسة ذكر مكتملة",
+        "en": "100 dhikr sessions completed"
+      },
+      "icon": "medal",
+      "points": 150,
+      "requirement": {
+        "type": "count",
+        "value": 100
+      },
+      "is_hidden": false
+    },
+    {
+      "id": "quran_reader",
+      "code": "quran_reader",
+      "category": "quran",
+      "name": {
+        "fr": "Lecteur du Coran",
+        "ar": "قارئ القرآن",
+        "en": "Quran Reader"
+      },
+      "description": {
+        "fr": "10 sessions de lecture du Coran",
+        "ar": "١٠ جلسات قراءة القرآن",
+        "en": "10 Quran reading sessions"
+      },
+      "icon": "book",
+      "points": 80,
+      "requirement": {
+        "type": "count",
+        "value": 10
+      },
+      "is_hidden": false
+    },
+    {
+      "id": "quran_scholar",
+      "code": "quran_scholar",
+      "category": "quran",
+      "name": {
+        "fr": "Érudit du Coran",
+        "ar": "عالم القرآن",
+        "en": "Quran Scholar"
+      },
+      "description": {
+        "fr": "100 sessions de lecture du Coran",
+        "ar": "١٠٠ جلسة قراءة القرآن",
+        "en": "100 Quran reading sessions"
+      },
+      "icon": "library",
+      "points": 400,
+      "requirement": {
+        "type": "count",
+        "value": 100
+      },
+      "is_hidden": false
+    },
+    {
+      "id": "community_helper",
+      "code": "community_helper",
+      "category": "social",
+      "name": {
+        "fr": "Aide communautaire",
+        "ar": "مساعد المجتمع",
+        "en": "Community Helper"
+      },
+      "description": {
+        "fr": "Partagé 10 contenus spirituels",
+        "ar": "شارك ١٠ محتويات روحانية",
+        "en": "Shared 10 spiritual contents"
+      },
+      "icon": "share",
+      "points": 60,
+      "requirement": {
+        "type": "count",
+        "value": 10
+      },
+      "is_hidden": false
+    },
+    {
+      "id": "social_butterfly",
+      "code": "social_butterfly",
+      "category": "social",
+      "name": {
+        "fr": "Papillon social",
+        "ar": "الفراشة الاجتماعية",
+        "en": "Social Butterfly"
+      },
+      "description": {
+        "fr": "Partagé 50 contenus spirituels",
+        "ar": "شارك ٥٠ محتوى روحاني",
+        "en": "Shared 50 spiritual contents"
+      },
+      "icon": "people",
+      "points": 200,
+      "requirement": {
+        "type": "count",
+        "value": 50
+      },
+      "is_hidden": false
+    },
+    {
+      "id": "hadith_student",
+      "code": "hadith_student",
+      "category": "hadith",
+      "name": {
+        "fr": "Étudiant en Hadith",
+        "ar": "طالب الحديث",
+        "en": "Hadith Student"
+      },
+      "description": {
+        "fr": "Lu 25 hadiths",
+        "ar": "قرأ ٢٥ حديثاً",
+        "en": "Read 25 hadiths"
+      },
+      "icon": "document-text",
+      "points": 50,
+      "requirement": {
+        "type": "count",
+        "value": 25
+      },
+      "is_hidden": false
+    },
+    {
+      "id": "hadith_scholar",
+      "code": "hadith_scholar",
+      "category": "hadith",
+      "name": {
+        "fr": "Érudit en Hadith",
+        "ar": "عالم الحديث",
+        "en": "Hadith Scholar"
+      },
+      "description": {
+        "fr": "Lu 100 hadiths",
+        "ar": "قرأ ١٠٠ حديث",
+        "en": "Read 100 hadiths"
+      },
+      "icon": "school",
+      "points": 200,
+      "requirement": {
+        "type": "count",
+        "value": 100
+      },
+      "is_hidden": false
+    }
+  ],
+  "metadata": {
+    "version": "1.0.0",
+    "last_updated": "2024-01-20",
+    "total_badges": 15,
+    "supported_languages": ["fr", "ar", "en"]
+  }
+}

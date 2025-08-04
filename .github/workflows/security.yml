@@ -1,0 +1,100 @@
+name: Security Audit
+
+on:
+  schedule:
+    - cron: "0 2 * * 1" # Tous les lundis à 2h du matin
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  security-scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20.x"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run npm audit
+        run: npm audit --audit-level=moderate
+
+      - name: Check for hardcoded secrets
+        run: |
+          echo "🔍 Scanning for potential secrets..."
+          if grep -r -i "password\|secret\|key\|token\|api_key" . --exclude-dir=node_modules --exclude-dir=.git --exclude=*.md; then
+            echo "❌ Potential secrets found in code"
+            exit 1
+          else
+            echo "✅ No hardcoded secrets found"
+          fi
+
+      - name: Check file permissions
+        run: |
+          echo "🔍 Checking file permissions..."
+          find . -name "*.env*" -o -name "*.key" -o -name "*.pem" | while read file; do
+            if [ -f "$file" ]; then
+              perms=$(stat -c "%a" "$file")
+              if [ "$perms" != "600" ] && [ "$perms" != "400" ]; then
+                echo "⚠️  File $file has insecure permissions: $perms"
+              fi
+            fi
+          done
+
+      - name: Check for exposed API keys
+        run: |
+          echo "🔍 Checking for exposed API keys..."
+          if grep -r "sk_live\|pk_live\|AKIA\|ghp_" . --exclude-dir=node_modules --exclude-dir=.git; then
+            echo "❌ Live API keys found in code"
+            exit 1
+          else
+            echo "✅ No live API keys found"
+          fi
+
+  dependency-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20.x"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Check for outdated dependencies
+        run: npm outdated
+
+      - name: Check for vulnerable dependencies
+        run: npm audit --audit-level=high
+
+      - name: Generate dependency report
+        run: |
+          echo "📊 Dependency Report" > dependency-report.md
+          echo "===================" >> dependency-report.md
+          echo "" >> dependency-report.md
+          echo "## Outdated Dependencies" >> dependency-report.md
+          npm outdated --json >> dependency-report.md || echo "No outdated dependencies" >> dependency-report.md
+          echo "" >> dependency-report.md
+          echo "## Security Vulnerabilities" >> dependency-report.md
+          npm audit --json >> dependency-report.md || echo "No vulnerabilities found" >> dependency-report.md
+
+      - name: Upload dependency report
+        uses: actions/upload-artifact@v3
+        with:
+          name: dependency-report
+          path: dependency-report.md

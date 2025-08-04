@@ -1,0 +1,264 @@
+<en-US>
+🕌 New Features & Improvements:
+• Enhanced Prayer Times with accurate calculations for all locations
+• Audio controls for individual prayers - mute/unmute specific prayer times
+• Dua automatically plays after Adhan with synchronized audio
+• Complete Quran with audio recitation and translations
+• Daily Dhikr reminders with morning and evening supplications
+• Prayer statistics and tracking
+• Multiple Adhan sounds from renowned reciters
+• Multi-language support (13+ languages)
+</en-US>
+<ar>
+🕌 الميزات والتحسينات الجديدة:
+• تحسين أوقات الصلاة مع حسابات دقيقة لجميع المواقع
+• تحكم صوتي للصلوات الفردية - كتم/إلغاء كتم أوقات صلاة محددة
+• تشغيل الدعاء تلقائياً بعد الأذان مع صوت متزامن
+• القرآن الكريم كاملاً مع التلاوة الصوتية والترجمات
+• تذكيرات الأذكار اليومية مع أذكار الصباح والمساء
+• إحصائيات وتتبع الصلاة
+• أصوات أذان متعددة من قراء مشهورين
+• دعم متعدد اللغات (أكثر من 13 لغة)
+</ar>
+<bn-BD>
+🕌 নতুন বৈশিষ্ট্য ও উন্নতি:
+• সকল অবস্থানের জন্য নির্ভুল গণনা সহ উন্নত নামাজের সময়
+• পৃথক নামাজের জন্য অডিও নিয়ন্ত্রণ - নির্দিষ্ট নামাজের সময় নিঃশব্দ/শব্দ চালু
+• আজানের পর দোয়া স্বয়ংক্রিয়ভাবে সিঙ্ক্রোনাইজড অডিও সহ চালায়
+• অডিও তেলাওয়াত ও অনুবাদ সহ সম্পূর্ণ কুরআন
+• সকাল ও সন্ধ্যার দোয়া সহ দৈনিক জিকির রিমাইন্ডার
+• নামাজের পরিসংখ্যান ও ট্র্যাকিং
+• বিখ্যাত কারীদের একাধিক আজানের আওয়াজ
+• বহুভাষিক সাপোর্ট (১৩+ ভাষা)
+</bn-BD>
+<de-DE>
+🕌 Neue Funktionen & Verbesserungen:
+• Verbesserte Gebetszeiten mit genauen Berechnungen für alle Standorte
+• Audiosteuerung für einzelne Gebete - stumm schalten/aktivieren bestimmter Gebetszeiten
+• Dua wird automatisch nach dem Adhan mit synchronisiertem Audio abgespielt
+• Vollständiger Quran mit Audio-Rezitation und Übersetzungen
+• Tägliche Dhikr-Erinnerungen mit Morgen- und Abendsuplikationen
+• Gebetsstatistiken und -verfolgung
+• Mehrere Adhan-Klänge von renommierten Rezitatoren
+• Mehrsprachige Unterstützung (13+ Sprachen)
+</de-DE>
+<en-AU>
+🕌 New Features & Improvements:
+• Enhanced Prayer Times with accurate calculations for all locations
+• Audio controls for individual prayers - mute/unmute specific prayer times
+• Dua automatically plays after Adhan with synchronised audio
+• Complete Quran with audio recitation and translations
+• Daily Dhikr reminders with morning and evening supplications
+• Prayer statistics and tracking
+• Multiple Adhan sounds from renowned reciters
+• Multi-language support (13+ languages)
+</en-AU>
+<en-CA>
+🕌 New Features & Improvements:
+• Enhanced Prayer Times with accurate calculations for all locations
+• Audio controls for individual prayers - mute/unmute specific prayer times
+• Dua automatically plays after Adhan with synchronized audio
+• Complete Quran with audio recitation and translations
+• Daily Dhikr reminders with morning and evening supplications
+• Prayer statistics and tracking
+• Multiple Adhan sounds from renowned reciters
+• Multi-language support (13+ languages)
+</en-CA>
+<en-GB>
+🕌 New Features & Improvements:
+• Enhanced Prayer Times with accurate calculations for all locations
+• Audio controls for individual prayers - mute/unmute specific prayer times
+• Dua automatically plays after Adhan with synchronised audio
+• Complete Quran with audio recitation and translations
+• Daily Dhikr reminders with morning and evening supplications
+• Prayer statistics and tracking
+• Multiple Adhan sounds from renowned reciters
+• Multi-language support (13+ languages)
+</en-GB>
+<en-IN>
+🕌 New Features & Improvements:
+• Enhanced Prayer Times with accurate calculations for all locations
+• Audio controls for individual prayers - mute/unmute specific prayer times
+• Dua automatically plays after Adhan with synchronized audio
+• Complete Quran with audio recitation and translations
+• Daily Dhikr reminders with morning and evening supplications
+• Prayer statistics and tracking
+• Multiple Adhan sounds from renowned reciters
+• Multi-language support (13+ languages)
+</en-IN>
+<en-SG>
+🕌 New Features & Improvements:
+• Enhanced Prayer Times with accurate calculations for all locations
+• Audio controls for individual prayers - mute/unmute specific prayer times
+• Dua automatically plays after Adhan with synchronised audio
+• Complete Quran with audio recitation and translations
+• Daily Dhikr reminders with morning and evening supplications
+• Prayer statistics and tracking
+• Multiple Adhan sounds from renowned reciters
+• Multi-language support (13+ languages)
+</en-SG>
+<en-ZA>
+🕌 New Features & Improvements:
+• Enhanced Prayer Times with accurate calculations for all locations
+• Audio controls for individual prayers - mute/unmute specific prayer times
+• Dua automatically plays after Adhan with synchronised audio
+• Complete Quran with audio recitation and translations
+• Daily Dhikr reminders with morning and evening supplications
+• Prayer statistics and tracking
+• Multiple Adhan sounds from renowned reciters
+• Multi-language support (13+ languages)
+</en-ZA>
+<es-419>
+🕌 Nuevas Características y Mejoras:
+• Horarios de Oración mejorados con cálculos precisos para todas las ubicaciones
+• Controles de audio para oraciones individuales - silenciar/activar horarios específicos de oración
+• Dua se reproduce automáticamente después del Adhan con audio sincronizado
+• Corán completo con recitación de audio y traducciones
+• Recordatorios diarios de Dhikr con súplicas matutinas y vespertinas
+• Estadísticas y seguimiento de oraciones
+• Múltiples sonidos de Adhan de recitadores reconocidos
+• Soporte multiidioma (13+ idiomas)
+</es-419>
+<es-ES>
+🕌 Nuevas Características y Mejoras:
+• Horarios de Oración mejorados con cálculos precisos para todas las ubicaciones
+• Controles de audio para oraciones individuales - silenciar/activar horarios específicos de oración
+• Dua se reproduce automáticamente después del Adhan con audio sincronizado
+• Corán completo con recitación de audio y traducciones
+• Recordatorios diarios de Dhikr con súplicas matutinas y vespertinas
+• Estadísticas y seguimiento de oraciones
+• Múltiples sonidos de Adhan de recitadores reconocidos
+• Soporte multiidioma (13+ idiomas)
+</es-ES>
+<es-US>
+🕌 Nuevas Características y Mejoras:
+• Horarios de Oración mejorados con cálculos precisos para todas las ubicaciones
+• Controles de audio para oraciones individuales - silenciar/activar horarios específicos de oración
+• Dua se reproduce automáticamente después del Adhan con audio sincronizado
+• Corán completo con recitación de audio y traducciones
+• Recordatorios diarios de Dhikr con súplicas matutinas y vespertinas
+• Estadísticas y seguimiento de oraciones
+• Múltiples sonidos de Adhan de recitadores reconocidos
+• Soporte multiidioma (13+ idiomas)
+</es-US>
+<eu-ES>
+🕌 Ezaugarri eta Hobekuntza Berriak:
+• Otoitz-orduak hobetuta kokaleku guztietarako kalkulu zehatzekin
+• Audio-kontrolak banakako otoitzetarako - mututu/aktibatu otoitz-ordu zehatzak
+• Dua automatikoki erreproduzitzen da Adhanaren ondoren audio sinkronizatua duela
+• Korana osoa audio-errezitazioa eta itzulpenekin
+• Dhikr gogorarazpen egunerokoak goizeko eta arratsaldeko eskaerak dituela
+• Otoitz estatistikak eta jarraipena
+• Adhan soinu anitz errezitatzaile ezagunetatik
+• Hizkuntza anitzeko euskarria (13+ hizkuntza)
+</eu-ES>
+<fa>
+🕌 ویژگی‌ها و بهبودهای جدید:
+• اوقات نماز بهبود یافته با محاسبات دقیق برای همه مکان‌ها
+• کنترل صدا برای نمازهای جداگانه - قطع/روشن کردن صدا برای اوقات نماز خاص
+• دعا به طور خودکار پس از اذان با صدای همگام پخش می‌شود
+• قرآن کامل با تلاوت صوتی و ترجمه‌ها
+• یادآورهای روزانه ذکر با ادعیه صبح و شام
+• آمار و پیگیری نماز
+• صداهای متعدد اذان از قاریان مشهور
+• پشتیبانی چند زبانه (۱۳+ زبان)
+</fa>
+<fr-CA>
+🕌 Nouvelles Fonctionnalités et Améliorations :
+• Horaires de Prière améliorés avec des calculs précis pour tous les emplacements
+• Contrôles audio pour les prières individuelles - couper/activer le son pour des horaires de prière spécifiques
+• Dua joue automatiquement après l'Adhan avec audio synchronisé
+• Coran complet avec récitation audio et traductions
+• Rappels quotidiens de Dhikr avec supplications du matin et du soir
+• Statistiques et suivi des prières
+• Multiples sons d'Adhan de récitateurs renommés
+• Support multilingue (13+ langues)
+</fr-CA>
+<fr-FR>
+🕌 Nouvelles Fonctionnalités et Améliorations :
+• Horaires de Prière améliorés avec des calculs précis pour tous les emplacements
+• Contrôles audio pour les prières individuelles - couper/activer le son pour des horaires de prière spécifiques
+• Dua joue automatiquement après l'Adhan avec audio synchronisé
+• Coran complet avec récitation audio et traductions
+• Rappels quotidiens de Dhikr avec supplications du matin et du soir
+• Statistiques et suivi des prières
+• Multiples sons d'Adhan de récitateurs renommés
+• Support multilingue (13+ langues)
+</fr-FR>
+<it-IT>
+🕌 Nuove Funzionalità e Miglioramenti:
+• Orari di Preghiera migliorati con calcoli precisi per tutte le posizioni
+• Controlli audio per preghiere individuali - silenziare/attivare orari di preghiera specifici
+• Dua riprodotta automaticamente dopo l'Adhan con audio sincronizzato
+• Corano completo con recitazione audio e traduzioni
+• Promemoria quotidiani Dhikr con suppliche mattutine e serali
+• Statistiche e monitoraggio delle preghiere
+• Suoni Adhan multipli da recitatori rinomati
+• Supporto multilingue (13+ lingue)
+</it-IT>
+<nl-NL>
+🕌 Nieuwe Functies & Verbeteringen:
+• Verbeterde Gebetstijden met nauwkeurige berekeningen voor alle locaties
+• Audio-bediening voor individuele gebeden - dempen/activeren van specifieke gebetstijden
+• Dua speelt automatisch af na de Adhan met gesynchroniseerde audio
+• Volledige Koran met audio recitatie en vertalingen
+• Dagelijkse Dhikr herinneringen met ochtend- en avondgebeden
+• Gebed statistieken en tracking
+• Meerdere Adhan geluiden van gerenommeerde recitatoren
+• Meertalige ondersteuning (13+ talen)
+</nl-NL>
+<pt-BR>
+🕌 Novos Recursos e Melhorias:
+• Horários de Oração aprimorados com cálculos precisos para todas as localizações
+• Controles de áudio para orações individuais - silenciar/ativar horários específicos de oração
+• Dua toca automaticamente após o Adhan com áudio sincronizado
+• Alcorão completo com recitação em áudio e traduções
+• Lembretes diários de Dhikr com súplicas matinais e vespertinas
+• Estatísticas e acompanhamento de orações
+• Múltiplos sons de Adhan de recitadores renomados
+• Suporte multilíngue (13+ idiomas)
+</pt-BR>
+<pt-PT>
+🕌 Novos Recursos e Melhorias:
+• Horários de Oração aprimorados com cálculos precisos para todas as localizações
+• Controlos de áudio para orações individuais - silenciar/activar horários específicos de oração
+• Dua toca automaticamente após o Adhan com áudio sincronizado
+• Alcorão completo com recitação em áudio e traduções
+• Lembretes diários de Dhikr com súplicas matinais e vespertinas
+• Estatísticas e acompanhamento de orações
+• Múltiplos sons de Adhan de recitadores renomados
+• Suporte multilíngue (13+ idiomas)
+</pt-PT>
+<ru-RU>
+🕌 Новые Функции и Улучшения:
+• Улучшенное Время Молитв с точными расчётами для всех местоположений
+• Аудио управление для отдельных молитв - отключение/включение звука для конкретного времени молитв
+• Дуа автоматически воспроизводится после Азана с синхронизированным аудио
+• Полный Коран с аудио чтением и переводами
+• Ежедневные напоминания Зикр с утренними и вечерними мольбами
+• Статистика и отслеживание молитв
+• Множественные звуки Азана от известных чтецов
+• Многоязычная поддержка (13+ языков)
+</ru-RU>
+<tr-TR>
+🕌 Yeni Özellikler ve İyileştirmeler:
+• Tüm konumlar için doğru hesaplamalarla geliştirilmiş Namaz Vakitleri
+• Bireysel namazlar için ses kontrolleri - belirli namaz vakitlerini sessize alma/açma
+• Dua, Ezan'dan sonra senkronize ses ile otomatik olarak çalar
+• Ses tilaveti ve çevirilerle tam Kuran
+• Sabah ve akşam dualarıyla günlük Zikir hatırlatıcıları
+• Namaz istatistikleri ve takibi
+• Ünlü hafızlardan çoklu Ezan sesleri
+• Çok dilli destek (13+ dil)
+</tr-TR>
+<ur>
+🕌 نئی خصوصیات اور بہتریاں:
+• تمام مقامات کے لیے درست حسابات کے ساتھ بہتر نماز کے اوقات
+• انفرادی نمازوں کے لیے آڈیو کنٹرولز - مخصوص نماز کے اوقات کو خاموش/فعال کرنا
+• اذان کے بعد دعا خود بخود ہم آہنگ آڈیو کے ساتھ چلتی ہے
+• آڈیو تلاوت اور ترجموں کے ساتھ مکمل قرآن
+• صبح اور شام کی دعاؤں کے ساتھ روزانہ ذکر کی یاد دہانیاں
+• نماز کی رپورٹ اور ٹریکنگ
+• مشہور قاریوں سے متعدد اذان کی آوازیں
+• کثیر لسانی سپورٹ (13+ زبانیں)
+</ur> 

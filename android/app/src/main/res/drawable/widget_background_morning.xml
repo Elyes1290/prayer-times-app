@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android" android:oneshot="false">
+    
+    <!-- Frame 1 - Soleil normal -->
+    <item android:duration="2000">
+        <layer-list>
+            <!-- Arrière-plan ciel bleu jour -->
+            <item>
+                <shape>
+                    <gradient
+                        android:startColor="#FF2196F3"
+                        android:centerColor="#FF64B5F6"
+                        android:endColor="#FF90CAF9"
+                        android:angle="135"
+                        android:type="linear" />
+                    <corners android:radius="16dp" />
+                    <stroke
+                        android:width="1dp"
+                        android:color="#33FFFFFF" />
+                </shape>
+            </item>
+            
+            <!-- Soleil GRAND -->
+            <item android:top="3dp" android:right="5dp" android:width="50dp" android:height="50dp" android:gravity="top|right">
+                <shape android:shape="oval">
+                    <gradient
+                        android:startColor="#FFEB3B"
+                        android:endColor="#FFD700"
+                        android:type="radial"
+                        android:gradientRadius="25dp" />
+                    <stroke android:width="2dp" android:color="#FFC107" />
+                </shape>
+            </item>
+            
+            <!-- Nuages position 1 -->
+            <item android:top="25dp" android:left="5dp" android:width="20dp" android:height="10dp" android:gravity="top|left">
+                <shape android:shape="oval">
+                    <solid android:color="#E8F4FD" />
+                </shape>
+            </item>
+            <item android:top="23dp" android:left="15dp" android:width="15dp" android:height="8dp" android:gravity="top|left">
+                <shape android:shape="oval">
+                    <solid android:color="#E8F4FD" />
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+    
+    <!-- Frame 2 - Soleil plus grand (pulsation) -->
+    <item android:duration="2000">
+        <layer-list>
+            <!-- Arrière-plan ciel bleu jour -->
+            <item>
+                <shape>
+                    <gradient
+                        android:startColor="#FF2196F3"
+                        android:centerColor="#FF64B5F6"
+                        android:endColor="#FF90CAF9"
+                        android:angle="135"
+                        android:type="linear" />
+                    <corners android:radius="16dp" />
+                    <stroke
+                        android:width="1dp"
+                        android:color="#33FFFFFF" />
+                </shape>
+            </item>
+            
+            <!-- Soleil PLUS GRAND (pulsation) -->
+            <item android:top="2dp" android:right="4dp" android:width="55dp" android:height="55dp" android:gravity="top|right">
+                <shape android:shape="oval">
+                    <gradient
+                        android:startColor="#FFEB3B"
+                        android:endColor="#FFD700"
+                        android:type="radial"
+                        android:gradientRadius="27dp" />
+                    <stroke android:width="3dp" android:color="#FFC107" />
+                </shape>
+            </item>
+            
+            <!-- Nuages position 2 (décalés) -->
+            <item android:top="25dp" android:left="8dp" android:width="20dp" android:height="10dp" android:gravity="top|left">
+                <shape android:shape="oval">
+                    <solid android:color="#E8F4FD" />
+                </shape>
+            </item>
+            <item android:top="23dp" android:left="18dp" android:width="15dp" android:height="8dp" android:gravity="top|left">
+                <shape android:shape="oval">
+                    <solid android:color="#E8F4FD" />
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+    
+</animation-list> 
