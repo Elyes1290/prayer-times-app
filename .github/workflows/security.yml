@@ -32,7 +32,7 @@ jobs:
         run: |
           echo "🔍 Scanning for potential secrets..."
           # Exclude test files, translations, and legitimate config patterns
-          if grep -r -i "password\|secret\|key\|token\|api_key" . \
+          SCAN_RESULTS=$(grep -r -i "password\|secret\|key\|token\|api_key" . \
             --exclude-dir=node_modules \
             --exclude-dir=.git \
             --exclude-dir=__tests__ \
@@ -52,8 +52,14 @@ jobs:
             | grep -v '"key"' \
             | grep -v "'key'" \
             | grep -v "keyof" \
-            | grep -v "apiKey.*test"; then
-            echo "❌ Real secrets found in code"
+            | grep -v "apiKey.*test" || true)
+
+          if [ -n "$SCAN_RESULTS" ]; then
+            echo "❌ Real secrets found in code:"
+            echo "================================"
+            echo "$SCAN_RESULTS"
+            echo "================================"
+            echo "Please remove or move these secrets to environment variables"
             exit 1
           else
             echo "✅ No real secrets found"
