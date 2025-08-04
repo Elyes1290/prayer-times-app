@@ -77,3 +77,40 @@
 -optimizations !code/simplification/arithmetic,!code/simplification/cast,!field/*,!class/merging/*
 -optimizationpasses 5
 -allowaccessmodification
+
+# =====================================================
+# RÈGLES STRIPE - CRITIQUE POUR LE BUILD RELEASE
+# =====================================================
+
+# Stripe SDK - Classes principales
+-keep class com.stripe.android.** { *; }
+-keep class com.stripe.android.core.** { *; }
+-keep class com.stripe.android.model.** { *; }
+-keep class com.stripe.android.view.** { *; }
+
+# Stripe React Native SDK
+-keep class com.reactnativestripesdk.** { *; }
+-keep class com.reactnativestripesdk.pushprovisioning.** { *; }
+
+# Classes Stripe manquantes spécifiquement
+-keep class com.stripe.android.pushProvisioning.** { *; }
+-keep class com.stripe.android.pushProvisioning.PushProvisioningActivity { *; }
+-keep class com.stripe.android.pushProvisioning.PushProvisioningActivityStarter { *; }
+-keep class com.stripe.android.pushProvisioning.PushProvisioningEphemeralKeyProvider { *; }
+
+# Stripe Payment Methods
+-keep class com.stripe.android.model.PaymentMethod { *; }
+-keep class com.stripe.android.model.PaymentIntent { *; }
+-keep class com.stripe.android.model.SetupIntent { *; }
+
+# Stripe Customer et Subscription
+-keep class com.stripe.android.model.Customer { *; }
+-keep class com.stripe.android.model.Subscription { *; }
+
+# Stripe Configuration
+-keep class com.stripe.android.Stripe { *; }
+-keep class com.stripe.android.PaymentConfiguration { *; }
+
+# Empêcher l'obfuscation des classes Stripe
+-dontwarn com.stripe.android.**
+-dontwarn com.reactnativestripesdk.**

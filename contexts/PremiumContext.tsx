@@ -284,8 +284,45 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
   };
 
   const canUseFeature = (feature: string): boolean => {
-    // Pour l'instant, autoriser tout (mode gratuit avec limitations douces)
-    // Plus tard, on pourra ajouter des restrictions
+    // 🚀 NOUVEAU : Restrictions pour la version gratuite
+    if (user.isPremium) {
+      return true; // Utilisateur premium a accès à tout
+    }
+
+    // Restrictions pour la version gratuite
+    const freeLimits = {
+      favorites: {
+        quran_verse: 3,
+        hadith: 3,
+        dhikr: 3,
+        asmaul_husna: 3,
+      },
+      daily_prayers_tracking: 7, // 7 jours d'historique
+      dhikr_categories: 2, // Accès à seulement 2 catégories de dhikr
+    };
+
+    // Fonctionnalités complètement bloquées en version gratuite
+    const premiumOnlyFeatures = [
+      "prayer_analytics",
+      "custom_adhan_sounds",
+      "premium_themes",
+      "unlimited_bookmarks",
+      "monthly_stats",
+      "prayer_goals",
+      "premium_duas",
+      "audio_lessons",
+      "exclusive_hadiths",
+      "ad_free",
+      "priority_support",
+      "family_management",
+      "child_profiles",
+    ];
+
+    if (premiumOnlyFeatures.includes(feature)) {
+      return false; // Fonctionnalité premium uniquement
+    }
+
+    // Pour l'instant, autoriser les autres fonctionnalités (limitations douces)
     return true;
   };
 
