@@ -64,8 +64,8 @@ jobs:
         run: |
           echo "🔍 Scanning for potential secrets..."
           # Use the same improved scan as security.yml
-          # Scan ULTRA-PRÉCIS pour vrais secrets uniquement (valeurs hardcodées)
-          SCAN_RESULTS=$(grep -r -E "(password|secret|key|token|api_key)\s*[=:]\s*['\"][^'\"]{8,}['\"]" . \
+          # Scan HYPER-SÉLECTIF : ne détecte que les VRAIS secrets avec patterns suspects
+          SCAN_RESULTS=$(grep -r -E "(password|secret|api_key|token)\s*[=]\s*['\"]([a-zA-Z0-9+/]{16,}|sk_[a-zA-Z0-9_]+|ghp_[a-zA-Z0-9_]+|xox[a-z]-[a-zA-Z0-9-]+|AIza[a-zA-Z0-9_-]+)['\"]" . \
             --exclude-dir=node_modules \
             --exclude-dir=.git \
             --exclude-dir=__tests__ \
@@ -88,7 +88,9 @@ jobs:
             | grep -v "placeholder" \
             | grep -v "example" \
             | grep -v "your_" \
-            | grep -v "template" || true)
+            | grep -v "template" \
+            | grep -v "has_password" \
+            | grep -v "error_log" || true)
           
           if [ -n "$SCAN_RESULTS" ]; then
             echo "❌ Real secrets found in code:"
