@@ -41,7 +41,7 @@ jobs:
             --exclude="*.test.ts" \
             --exclude="*.test.tsx" \
             --exclude="*locales*.json" \
-            --exclude="google-services.json.template" \
+
             | grep -v "test-" \
             | grep -v "mock" \
             | grep -v "verse_key" \

@@ -73,7 +73,7 @@ jobs:
             --exclude="*.test.ts" \
             --exclude="*.test.tsx" \
             --exclude="*locales*.json" \
-            --exclude="google-services.json.template" \
+
             | grep -v "test-" \
             | grep -v "mock" \
             | grep -v "verse_key" \
@@ -116,30 +116,11 @@ jobs:
           expo-version: latest
           token: ${{ secrets.EXPO_TOKEN }}
 
-      - name: Check for google-services.json
-        run: |
-          if [ ! -f "android/app/google-services.json" ]; then
-            echo "⚠️ google-services.json not found, builds will be skipped"
-            echo "Please add google-services.json to configure mobile builds"
-          else
-            echo "✅ google-services.json found"
-          fi
+      - name: Build Android
+        run: eas build --platform android --non-interactive
 
-      - name: Build Android (if configured)
-        run: |
-          if [ -f "android/app/google-services.json" ]; then
-            eas build --platform android --non-interactive
-          else
-            echo "⏭️ Skipping Android build - google-services.json not configured"
-          fi
-
-      - name: Build iOS (if configured)  
-        run: |
-          if [ -f "ios/GoogleService-Info.plist" ] || [ "${{ secrets.EXPO_TOKEN }}" != "" ]; then
-            eas build --platform ios --non-interactive
-          else
-            echo "⏭️ Skipping iOS build - GoogleService-Info.plist or EXPO_TOKEN not configured"
-          fi
+      - name: Build iOS
+        run: eas build --platform ios --non-interactive
 
   deploy:
     needs: build
