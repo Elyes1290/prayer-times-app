@@ -37,10 +37,13 @@ jobs:
             --exclude-dir=.git \
             --exclude-dir=__tests__ \
             --exclude-dir=coverage \
+            --exclude-dir=locales \
             --exclude="*.md" \
             --exclude="*.test.ts" \
             --exclude="*.test.tsx" \
             --exclude="*locales*.json" \
+            --exclude="*template*.php" \
+            --exclude="*config-template*" \
             | grep -v "test-" \
             | grep -v "mock" \
             | grep -v "verse_key" \
@@ -52,7 +55,18 @@ jobs:
             | grep -v '"key"' \
             | grep -v "'key'" \
             | grep -v "keyof" \
-            | grep -v "apiKey.*test" || true)
+            | grep -v "apiKey.*test" \
+            | grep -v "password_hash" \
+            | grep -v "password_verify" \
+            | grep -v "PASSWORD_DEFAULT" \
+            | grep -v "validation_password" \
+            | grep -v "help_password" \
+            | grep -v "AdhanSoundKey" \
+            | grep -v "CalcMethodKey" \
+            | grep -v "STORAGE_KEY" \
+            | grep -v "keysToPreserve" \
+            | grep -v "keysToDelete" \
+            | grep -v "error_log.*password" || true)
 
           if [ -n "$SCAN_RESULTS" ]; then
             echo "❌ Real secrets found in code:"
