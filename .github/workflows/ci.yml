@@ -92,7 +92,7 @@ jobs:
             | grep -v "template" \
             | grep -v "has_password" \
             | grep -v "error_log" || true)
-          
+
           if [ -n "$SCAN_RESULTS" ]; then
             echo "❌ Real secrets found in code:"
             echo "================================"
@@ -104,47 +104,6 @@ jobs:
             echo "✅ No real secrets found"
           fi
 
-  build:
-    needs: [test, security]
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "20.x"
-          cache: "npm"
-
-      - name: Install dependencies
-        run: npm ci --legacy-peer-deps
-
-      - name: Setup Expo
-        uses: expo/expo-github-action@v8
-        with:
-          expo-version: latest
-          token: ${{ secrets.EXPO_TOKEN }}
-
-      - name: Build Android
-        run: eas build --platform android --non-interactive
-
-      - name: Build iOS
-        run: eas build --platform ios --non-interactive
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Deploy to server
-        run: |
-          echo "🚀 Deploying to production server..."
-          # Add your deployment script here
-          # Example: ./scripts/deploy.sh
+  # Note: Build job removed - you handle builds manually
+  # This CI pipeline now only runs tests and security checks
+  # You can add build jobs later when needed
