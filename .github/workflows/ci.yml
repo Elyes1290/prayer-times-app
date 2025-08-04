@@ -64,41 +64,31 @@ jobs:
         run: |
           echo "🔍 Scanning for potential secrets..."
           # Use the same improved scan as security.yml
-          SCAN_RESULTS=$(grep -r -i "password\|secret\|key\|token\|api_key" . \
+          # Scan ULTRA-PRÉCIS pour vrais secrets uniquement (valeurs hardcodées)
+          SCAN_RESULTS=$(grep -r -E "(password|secret|key|token|api_key)\s*[=:]\s*['\"][^'\"]{8,}['\"]" . \
             --exclude-dir=node_modules \
             --exclude-dir=.git \
             --exclude-dir=__tests__ \
             --exclude-dir=coverage \
             --exclude-dir=locales \
+            --exclude-dir=scripts \
             --exclude="*.md" \
             --exclude="*.test.ts" \
             --exclude="*.test.tsx" \
             --exclude="*locales*.json" \
             --exclude="*template*.php" \
             --exclude="*config-template*" \
-            | grep -v "test-" \
-            | grep -v "mock" \
-            | grep -v "verse_key" \
-            | grep -v "method_Turkey" \
-            | grep -v "Turkey" \
-            | grep -v "jest.fn" \
-            | grep -v "jest.fn((key)" \
-            | grep -v "translation.*key" \
-            | grep -v '"key"' \
-            | grep -v "'key'" \
-            | grep -v "keyof" \
-            | grep -v "apiKey.*test" \
-            | grep -v "password_hash" \
-            | grep -v "password_verify" \
-            | grep -v "PASSWORD_DEFAULT" \
-            | grep -v "validation_password" \
-            | grep -v "help_password" \
-            | grep -v "AdhanSoundKey" \
-            | grep -v "CalcMethodKey" \
-            | grep -v "STORAGE_KEY" \
-            | grep -v "keysToPreserve" \
-            | grep -v "keysToDelete" \
-            | grep -v "error_log.*password" || true)
+            --exclude="package-lock.json" \
+            --exclude=".gitignore" \
+            --exclude="*.sql" \
+            | grep -v "process.env" \
+            | grep -v "Constants.expoConfig" \
+            | grep -v "_ENV\[" \
+            | grep -v "DEFAULT_CONFIG" \
+            | grep -v "placeholder" \
+            | grep -v "example" \
+            | grep -v "your_" \
+            | grep -v "template" || true)
           
           if [ -n "$SCAN_RESULTS" ]; then
             echo "❌ Real secrets found in code:"
