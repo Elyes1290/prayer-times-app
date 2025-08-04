@@ -166,12 +166,15 @@ describe("PrayerScreen", () => {
       render(<PrayerScreen />);
 
       await waitFor(() => {
-        // Chercher les heures avec AM/PM car toLocaleTimeString les inclut
+        // Chercher les heures selon le format affiché (compatible 12h et 24h)
         expect(screen.getAllByText(/06:00/).length).toBeGreaterThan(0);
         expect(screen.getAllByText(/12:00/).length).toBeGreaterThan(0);
-        expect(screen.getAllByText(/03:00/).length).toBeGreaterThan(0); // 15:00 devient 03:00 PM
-        expect(screen.getAllByText(/06:00/).length).toBeGreaterThan(0); // 18:00 devient 06:00 PM
-        expect(screen.getAllByText(/07:30/).length).toBeGreaterThan(0); // 19:30 devient 07:30 PM
+        // 15:00 peut être affiché comme "15:00" (24h) ou "03:00 PM" (12h)
+        expect(screen.getAllByText(/15:00|03:00/).length).toBeGreaterThan(0);
+        // 18:00 peut être affiché comme "18:00" (24h) ou "06:00 PM" (12h)
+        expect(screen.getAllByText(/18:00|06:00/).length).toBeGreaterThan(0);
+        // 19:30 peut être affiché comme "19:30" (24h) ou "07:30 PM" (12h)
+        expect(screen.getAllByText(/19:30|07:30/).length).toBeGreaterThan(0);
       });
     });
   });
