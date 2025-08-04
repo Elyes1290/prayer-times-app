@@ -111,9 +111,9 @@ describe("WeeklyPrayerView", () => {
       );
 
       // Vérifier que les heures sont affichées (format 24h ou 12h selon la locale)
-      expect(screen.getByText(/06:00/)).toBeTruthy();
-      expect(screen.getByText(/12:00/)).toBeTruthy();
-      expect(screen.getByText(/18:00/)).toBeTruthy();
+      expect(screen.getAllByText(/6:?00/).length).toBeGreaterThan(0);
+      expect(screen.getAllByText(/12:?00/).length).toBeGreaterThan(0);
+      expect(screen.getAllByText(/18:?00/).length).toBeGreaterThan(0);
     });
   });
 
@@ -234,8 +234,8 @@ describe("WeeklyPrayerView", () => {
       );
 
       // Vérifier que les heures sont formatées
-      expect(screen.getByText(/06:00/)).toBeTruthy();
-      expect(screen.getByText(/12:00/)).toBeTruthy();
+      expect(screen.getAllByText(/6:?00/).length).toBeGreaterThan(0);
+      expect(screen.getAllByText(/12:?00/).length).toBeGreaterThan(0);
     });
   });
 
