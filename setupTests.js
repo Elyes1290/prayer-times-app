@@ -28,6 +28,113 @@ global.window = global;
 global.window.addEventListener = () => {};
 global.window.removeEventListener = () => {};
 
+// 🎯 NOUVEAU : Mock expo-constants (cause principale des échecs)
+jest.mock("expo-constants", () => ({
+  expoConfig: {
+    extra: {
+      hadithApiKey: "test-hadith-api-key",
+      apiBaseUrl: "https://test-api.com",
+      premiumUrl: "https://test-premium.com",
+    },
+  },
+  Constants: {
+    expoConfig: {
+      extra: {
+        hadithApiKey: "test-hadith-api-key",
+        apiBaseUrl: "https://test-api.com",
+        premiumUrl: "https://test-premium.com",
+      },
+    },
+  },
+}));
+
+// 🎯 NOUVEAU : Mock react-native-fs (cause des échecs QuranScreen)
+jest.mock("react-native-fs", () => ({
+  DocumentDirectoryPath: "/test/docs",
+  CachesDirectoryPath: "/test/cache",
+  downloadFile: jest.fn(() => Promise.resolve({ statusCode: 200 })),
+  exists: jest.fn(() => Promise.resolve(true)),
+  mkdir: jest.fn(() => Promise.resolve()),
+  readFile: jest.fn(() => Promise.resolve("test content")),
+  writeFile: jest.fn(() => Promise.resolve()),
+  unlink: jest.fn(() => Promise.resolve()),
+  stat: jest.fn(() => Promise.resolve({ size: 1024 })),
+  readDir: jest.fn(() => Promise.resolve([])),
+  copyFile: jest.fn(() => Promise.resolve()),
+  moveFile: jest.fn(() => Promise.resolve()),
+  appendFile: jest.fn(() => Promise.resolve()),
+  hash: jest.fn(() => Promise.resolve("test-hash")),
+  stopDownload: jest.fn(),
+  resumeDownload: jest.fn(),
+  isResumable: jest.fn(() => Promise.resolve(true)),
+  completeHandlerIOS: jest.fn(),
+  readDirAssets: jest.fn(() => Promise.resolve([])),
+  existsAssets: jest.fn(() => Promise.resolve(false)),
+  copyFileAssets: jest.fn(() => Promise.resolve()),
+  copyAssetsFileIOS: jest.fn(() => Promise.resolve()),
+  copyFileRes: jest.fn(() => Promise.resolve()),
+  copyResFileIOS: jest.fn(() => Promise.resolve()),
+  loadAssetsFileAsync: jest.fn(() => Promise.resolve("test content")),
+  loadResFileAsync: jest.fn(() => Promise.resolve("test content")),
+  getFSInfo: jest.fn(() =>
+    Promise.resolve({ freeSpace: 1000000, totalSpace: 2000000 })
+  ),
+  getAllExternalFilesDirs: jest.fn(() => Promise.resolve([])),
+  unlinkAssets: jest.fn(() => Promise.resolve()),
+  existsRes: jest.fn(() => Promise.resolve(false)),
+  copyResFile: jest.fn(() => Promise.resolve()),
+  downloadFileAssets: jest.fn(() => Promise.resolve({ statusCode: 200 })),
+  uploadFiles: jest.fn(() => Promise.resolve({ statusCode: 200 })),
+  uploadFile: jest.fn(() => Promise.resolve({ statusCode: 200 })),
+  touch: jest.fn(() => Promise.resolve()),
+  MainBundlePath: "/test/bundle",
+  LibraryDirectoryPath: "/test/library",
+  ExternalDirectoryPath: "/test/external",
+  ExternalCachesDirectoryPath: "/test/external-cache",
+  PicturesDirectoryPath: "/test/pictures",
+  TemporaryDirectoryPath: "/test/temp",
+  BundleDirectoryPath: "/test/bundle",
+  RoamingDirectoryPath: "/test/roaming",
+  DownloadDirectoryPath: "/test/downloads",
+  UploadDirectoryPath: "/test/uploads",
+  VideoDirectoryPath: "/test/videos",
+  AudioDirectoryPath: "/test/audio",
+  DCIMDirectoryPath: "/test/dcim",
+  SDCardDirectoryPath: "/test/sdcard",
+  SDCardApplicationDirectoryPath: "/test/sdcard-app",
+  MusicDirectoryPath: "/test/music",
+  PodcastsDirectoryPath: "/test/podcasts",
+  RingtonesDirectoryPath: "/test/ringtones",
+  MoviesDirectoryPath: "/test/movies",
+  DownloadsDirectoryPath: "/test/downloads",
+  NotificationsDirectoryPath: "/test/notifications",
+  ScreenshotsDirectoryPath: "/test/screenshots",
+  DocumentsDirectoryPath: "/test/documents",
+  SharedDirectoryPath: "/test/shared",
+  LegacyExternalDirectoryPath: "/test/legacy-external",
+  LegacyExternalCachesDirectoryPath: "/test/legacy-external-cache",
+  LegacyPicturesDirectoryPath: "/test/legacy-pictures",
+  LegacyTemporaryDirectoryPath: "/test/legacy-temp",
+  LegacyBundleDirectoryPath: "/test/legacy-bundle",
+  LegacyRoamingDirectoryPath: "/test/legacy-roaming",
+  LegacyDownloadDirectoryPath: "/test/legacy-downloads",
+  LegacyUploadDirectoryPath: "/test/legacy-uploads",
+  LegacyVideoDirectoryPath: "/test/legacy-videos",
+  LegacyAudioDirectoryPath: "/test/legacy-audio",
+  LegacyDCIMDirectoryPath: "/test/legacy-dcim",
+  LegacySDCardDirectoryPath: "/test/legacy-sdcard",
+  LegacySDCardApplicationDirectoryPath: "/test/legacy-sdcard-app",
+  LegacyMusicDirectoryPath: "/test/legacy-music",
+  LegacyPodcastsDirectoryPath: "/test/legacy-podcasts",
+  LegacyRingtonesDirectoryPath: "/test/legacy-ringtones",
+  LegacyMoviesDirectoryPath: "/test/legacy-movies",
+  LegacyDownloadsDirectoryPath: "/test/legacy-downloads",
+  LegacyNotificationsDirectoryPath: "/test/legacy-notifications",
+  LegacyScreenshotsDirectoryPath: "/test/legacy-screenshots",
+  LegacyDocumentsDirectoryPath: "/test/legacy-documents",
+  LegacySharedDirectoryPath: "/test/legacy-shared",
+}));
+
 // Mock des modules Expo
 jest.mock("expo-localization", () => ({
   getLocales: () => [{ languageCode: "en", countryCode: "US" }],
@@ -77,6 +184,21 @@ jest.mock("react-native/Libraries/Utilities/useColorScheme", () => ({
   __esModule: true,
   default: jest.fn(() => "light"),
 }));
+
+// 🎯 MOCK ciblé NativeModules.AdhanModule pour SettingsContext
+try {
+  const { NativeModules } = require("react-native");
+  NativeModules.AdhanModule = {
+    setCalculationMethod: jest.fn(),
+    setLanguage: jest.fn(),
+    setLocation: jest.fn(),
+    setNotificationsEnabled: jest.fn(),
+    setAdhanSound: jest.fn(),
+    setAdhanVolume: jest.fn(),
+  };
+} catch (e) {
+  // Ignore si react-native n'est pas dispo
+}
 
 // Supprimer les logs pendant les tests
 global.console = {
