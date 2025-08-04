@@ -145,8 +145,8 @@ describe("Audio Streaming Manager", () => {
         300
       );
 
-      // Attendre 1ms pour s'assurer d'un timestamp différent
-      await new Promise((resolve) => setTimeout(resolve, 1));
+      // Attendre 2ms pour s'assurer d'un timestamp différent
+      await new Promise((resolve) => setTimeout(resolve, 2));
 
       const sessionId2 = await streamingManager.createStreamingSession(
         audioId,

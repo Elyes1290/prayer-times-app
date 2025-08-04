@@ -169,9 +169,9 @@ describe("PrayerScreen", () => {
         // Chercher les heures avec AM/PM car toLocaleTimeString les inclut
         expect(screen.getAllByText(/06:00/).length).toBeGreaterThan(0);
         expect(screen.getAllByText(/12:00/).length).toBeGreaterThan(0);
-        expect(screen.getAllByText(/15:00/).length).toBeGreaterThan(0);
-        expect(screen.getAllByText(/18:00/).length).toBeGreaterThan(0);
-        expect(screen.getAllByText(/19:30/).length).toBeGreaterThan(0);
+        expect(screen.getAllByText(/03:00/).length).toBeGreaterThan(0); // 15:00 devient 03:00 PM
+        expect(screen.getAllByText(/06:00/).length).toBeGreaterThan(0); // 18:00 devient 06:00 PM
+        expect(screen.getAllByText(/07:30/).length).toBeGreaterThan(0); // 19:30 devient 07:30 PM
       });
     });
   });
