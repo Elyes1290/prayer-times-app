@@ -60,6 +60,31 @@ jest.mock("react-native-calendars", () => ({
   },
 }));
 
+jest.mock("../../hooks/useThemeColor", () => ({
+  useThemeColors: () => ({
+    primary: "#000",
+    background: "#fff",
+    text: "#000",
+    textSecondary: "#666",
+    surface: "#f5f5f5",
+    cardBG: "#fff",
+    border: "#ddd",
+  }),
+  useOverlayTextColor: () => "#000",
+  useCurrentTheme: () => "light",
+}));
+
+// Mock Intl.DateTimeFormat pour éviter les erreurs dans les tests
+Object.defineProperty(global, "Intl", {
+  value: {
+    ...global.Intl,
+    DateTimeFormat: jest.fn(() => ({
+      format: jest.fn(() => "15 Ramadan 1445"),
+    })),
+  },
+  writable: true,
+});
+
 describe.skip("HijriCalendarScreen", () => {
   const mockT = jest.fn((key) => {
     switch (key) {

@@ -225,22 +225,33 @@ const ThemedAlert: React.FC<ThemedAlertProps> = ({
       animationType="fade"
       onRequestClose={onClose}
     >
-      <View style={styles.overlay}>
-        <View style={styles.modal}>
-          <View style={styles.iconContainer}>
-            <View style={styles.icon}>
+      <View style={styles.overlay} testID="themed-alert-overlay">
+        <View style={styles.modal} testID="themed-alert-modal">
+          <View
+            style={styles.iconContainer}
+            testID="themed-alert-icon-container"
+          >
+            <View style={styles.icon} testID="themed-alert-icon">
               <MaterialCommunityIcons
                 name={getIcon()}
                 size={24}
                 color={getIconColor()}
+                testID="themed-alert-icon-element"
               />
             </View>
           </View>
 
-          <Text style={styles.title}>{title}</Text>
-          <Text style={styles.message}>{message}</Text>
+          <Text style={styles.title} testID="themed-alert-title">
+            {title}
+          </Text>
+          <Text style={styles.message} testID="themed-alert-message">
+            {message}
+          </Text>
 
-          <View style={styles.buttonContainer}>
+          <View
+            style={styles.buttonContainer}
+            testID="themed-alert-button-container"
+          >
             {buttons.map((button, index) => (
               <TouchableOpacity
                 key={index}
@@ -249,8 +260,12 @@ const ThemedAlert: React.FC<ThemedAlertProps> = ({
                   button.onPress();
                   onClose();
                 }}
+                testID={`themed-alert-button-${index}`}
               >
-                <Text style={getButtonTextStyle(button.style)}>
+                <Text
+                  style={getButtonTextStyle(button.style)}
+                  testID={`themed-alert-button-text-${index}`}
+                >
                   {button.text}
                 </Text>
               </TouchableOpacity>

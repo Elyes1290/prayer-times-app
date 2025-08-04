@@ -188,8 +188,8 @@ export default function WeeklyPrayerView({
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
+    <View style={styles.container} testID="weekly-prayer-container">
+      <View style={styles.header} testID="weekly-prayer-header">
         <MaterialCommunityIcons
           name="calendar-week"
           size={24}
@@ -218,6 +218,7 @@ export default function WeeklyPrayerView({
                     isToday(day.date) && styles.todayCell,
                   ]}
                   onPress={() => onDayPress(new Date(day.date))}
+                  testID={isToday(day.date) ? "today-cell" : "day-cell"}
                 >
                   <Text
                     style={[

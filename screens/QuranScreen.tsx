@@ -54,6 +54,7 @@ const ProgressBar = ({
           {t("download_progress")} {Math.round(progress * 100)}%
         </Text>
         <TouchableOpacity
+          testID="download-cancel-button"
           style={styles.downloadProgressCancelButton}
           onPress={onCancel}
         >
@@ -1444,6 +1445,7 @@ export default function QuranScreen() {
         {/* 🎨 NOUVEAU : Barre de recherche séparée */}
         <View style={styles.searchContainer}>
           <TextInput
+            testID="search-input"
             style={styles.searchInput}
             placeholder={
               t("quran_search_placeholder") || "Rechercher dans la sourate..."
@@ -1498,6 +1500,7 @@ export default function QuranScreen() {
         {/* 🎨 NOUVEAU : Bouton play flottant pour les récitations premium */}
         {user.isPremium && (
           <TouchableOpacity
+            testID="floating-play-button"
             style={[
               styles.floatingPlayButton,
               !selectedReciter && styles.floatingPlayButtonInactive,

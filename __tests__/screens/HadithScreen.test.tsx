@@ -28,9 +28,11 @@ jest.mock("expo-font", () => ({
 }));
 
 jest.mock("expo-constants", () => ({
-  expoConfig: {
-    extra: {
-      hadithApiKey: "test-key",
+  default: {
+    expoConfig: {
+      extra: {
+        hadithApiKey: "test-key",
+      },
     },
   },
 }));
@@ -38,7 +40,9 @@ jest.mock("expo-constants", () => ({
 // Mock fetch pour éviter les appels réseau
 beforeAll(() => {
   (global.fetch as any) = jest.fn((url: string) => {
-    if (url.includes("/books")) {
+    console.log("🔍 Mock fetch appelé avec URL:", url);
+
+    if (url.includes("hadithapi.com/api/books")) {
       return Promise.resolve({
         ok: true,
         json: () =>

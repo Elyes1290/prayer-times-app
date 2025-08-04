@@ -7,6 +7,20 @@ module.exports = {
   ],
   testTimeout: 30000,
   setupFilesAfterEnv: ["@testing-library/jest-native/extend-expect"],
+  collectCoverageFrom: [
+    "components/**/*.{ts,tsx}",
+    "screens/**/*.{ts,tsx}",
+    "contexts/**/*.{ts,tsx}",
+    "hooks/**/*.{ts,tsx}",
+    "utils/**/*.{ts,tsx}",
+    "!**/*.d.ts",
+    "!**/node_modules/**",
+    "!**/coverage/**",
+    "!**/__tests__/**",
+    "!**/__mocks__/**",
+  ],
+  coverageDirectory: "coverage",
+  coverageReporters: ["text", "lcov", "html"],
   moduleNameMapper: {
     "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$":
       "<rootDir>/__mocks__/fileMock.js",

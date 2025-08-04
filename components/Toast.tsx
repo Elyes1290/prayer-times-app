@@ -108,6 +108,7 @@ const Toast: React.FC<ToastProps> = ({ toast, onHide }) => {
           opacity,
         },
       ]}
+      testID="toast-container"
     >
       <TouchableOpacity activeOpacity={0.9} onPress={hideToast}>
         <LinearGradient
@@ -115,13 +116,15 @@ const Toast: React.FC<ToastProps> = ({ toast, onHide }) => {
           style={styles.toast}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 1 }}
+          testID="toast-gradient"
         >
-          <View style={styles.content}>
+          <View style={styles.content} testID="toast-content">
             <MaterialCommunityIcons
               name={config.icon}
               size={24}
               color={config.iconColor}
               style={styles.icon}
+              testID="toast-icon"
             />
             <View style={styles.textContainer}>
               <Text style={styles.title}>{toast.title}</Text>

@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">46.15% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/13</span>
+                <span class='fraction'>6/13</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">66.66% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/6</span>
+                <span class='fraction'>4/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">25% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/4</span>
+                <span class='fraction'>1/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">46.15% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/13</span>
+                <span class='fraction'>6/13</span>
             </div>
         
             
@@ -135,24 +135,24 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -196,24 +196,24 @@ import { Colors } from "@/constants/Colors";
 import { SettingsContext } from "@/contexts/SettingsContext";
 &nbsp;
 // Images de fond selon le thème
-const backgroundImages = <span class="cstat-no" title="statement not covered" >{</span>
+const backgroundImages = {
   light: require("../assets/images/prayer-bg-jour.png"),
   dark: require("../assets/images/prayer-bg.png"),
 };
 &nbsp;
-export function <span class="fstat-no" title="function not covered" >useThemeAssets(</span>) {
-  const systemTheme = <span class="cstat-no" title="statement not covered" >useColorScheme() ?? "light";</span>
-  const settingsContext = <span class="cstat-no" title="statement not covered" >useContext(SettingsContext);</span>
+export function useThemeAssets() {
+  const systemTheme = useColorScheme() ?? <span class="branch-1 cbranch-no" title="branch not covered" >"light";</span>
+  const settingsContext = useContext(SettingsContext);
 &nbsp;
   // Détermine le thème actuel
   let currentTheme: "light" | "dark";
-<span class="cstat-no" title="statement not covered" >  if (settingsContext &amp;&amp; settingsContext.currentTheme) {</span>
-<span class="cstat-no" title="statement not covered" >    currentTheme = settingsContext.currentTheme;</span>
-  } else {
+  if (settingsContext &amp;&amp; settingsContext.currentTheme) {
+    currentTheme = settingsContext.currentTheme;
+  } else <span class="missing-if-branch" title="else path not taken" >E</span>{
 <span class="cstat-no" title="statement not covered" >    currentTheme = systemTheme;</span>
   }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return {</span>
+  return {
     // Image de fond selon le thème
     backgroundImage: backgroundImages[currentTheme],
 &nbsp;
@@ -253,7 +253,7 @@ export function <span class="fstat-no" title="function not covered" >useCurrentT
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-07-08T16:14:17.102Z
+                at 2025-08-04T17:24:43.624Z
             </div>
         <script src="../prettify.js"></script>
         <script>

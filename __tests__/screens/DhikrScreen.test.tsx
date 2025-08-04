@@ -131,11 +131,12 @@ describe("DhikrScreen", () => {
     expect(screen.getByText("Aucun dhikr")).toBeTruthy();
   });
 
-  it.skip("supporte le scroll automatique avec dhikrIndex", () => {
-    jest.resetModules();
+  it("supporte le scroll automatique avec dhikrIndex", () => {
+    // Mock expo-router avec les paramètres attendus
     jest.doMock("expo-router", () => ({
       useLocalSearchParams: () => ({ dhikrIndex: "1" }),
     }));
+
     // Re-importer le composant pour appliquer le mock
     const DhikrScreenWithParam = require("../../screens/DhikrScreen").default;
     render(<DhikrScreenWithParam />);

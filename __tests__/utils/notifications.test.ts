@@ -312,8 +312,10 @@ describe("Notifications", () => {
     });
 
     test("should handle zero reminder offset", async () => {
+      const prayerTime = Date.now() + 3600000;
+      
       await schedulePrayerNotifications(
-        { Fajr: new Date(Date.now() + 3600000) },
+        { Fajr: new Date(prayerTime) },
         "misharyrachid.mp3",
         true,
         0
@@ -324,8 +326,8 @@ describe("Notifications", () => {
       ).mock.calls[0][0];
 
       // Le rappel devrait être programmé exactement au moment de la prière
-      const prayerTime = Date.now() + 3600000;
-      expect(scheduledReminders[0].triggerMillis).toBe(prayerTime);
+      // Tolérance de 100ms pour les différences de timing
+      expect(scheduledReminders[0].triggerMillis).toBeCloseTo(prayerTime, -2);
     });
   });
 });

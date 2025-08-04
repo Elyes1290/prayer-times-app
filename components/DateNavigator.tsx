@@ -101,15 +101,29 @@ export function DateNavigator({ date, onPrev, onNext, onReset }: Props) {
   const arrowColor = currentTheme === "light" ? colors.primary : "#FFF";
 
   return (
-    <View style={styles.nav}>
-      <TouchableOpacity onPress={onPrev} style={styles.arrowBtn}>
+    <View style={styles.nav} testID="date-navigator">
+      <TouchableOpacity
+        onPress={onPrev}
+        style={styles.arrowBtn}
+        testID="prev-button"
+      >
         <MaterialIcons name="chevron-left" size={28} color={arrowColor} />
       </TouchableOpacity>
-      <Text style={styles.text}>{date.toLocaleDateString(getLocale())}</Text>
-      <TouchableOpacity onPress={onNext} style={styles.arrowBtn}>
+      <Text style={styles.text} testID="date-text">
+        {date.toLocaleDateString(getLocale())}
+      </Text>
+      <TouchableOpacity
+        onPress={onNext}
+        style={styles.arrowBtn}
+        testID="next-button"
+      >
         <MaterialIcons name="chevron-right" size={28} color={arrowColor} />
       </TouchableOpacity>
-      <TouchableOpacity onPress={onReset} style={styles.todayBtn}>
+      <TouchableOpacity
+        onPress={onReset}
+        style={styles.todayBtn}
+        testID="reset-button"
+      >
         <Text style={styles.todayText}>{t("today")}</Text>
       </TouchableOpacity>
     </View>
