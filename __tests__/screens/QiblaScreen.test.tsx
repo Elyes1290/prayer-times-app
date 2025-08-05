@@ -15,6 +15,7 @@ jest.mock("expo-location", () => ({
   requestForegroundPermissionsAsync: jest.fn(),
   getCurrentPositionAsync: jest.fn(),
   watchHeadingAsync: jest.fn(),
+  hasServicesEnabledAsync: jest.fn(),
   Accuracy: { Balanced: 2 },
 }));
 
@@ -70,6 +71,9 @@ describe("QiblaScreen", () => {
       .spyOn(require("react-native").AppState, "addEventListener")
       .mockImplementation(() => ({ remove: jest.fn() }));
 
+    // Mock par défaut pour les services de localisation activés
+    (Location.hasServicesEnabledAsync as jest.Mock).mockResolvedValue(true);
+
     // Mock par défaut pour les permissions accordées
     (Location.requestForegroundPermissionsAsync as jest.Mock).mockResolvedValue(
       {
@@ -124,9 +128,7 @@ describe("QiblaScreen", () => {
       render(<QiblaScreen />);
 
       await waitFor(() => {
-        expect(
-          screen.getByText("Permission de localisation requise")
-        ).toBeTruthy();
+        expect(screen.getByText("Localisation désactivée")).toBeTruthy();
       });
     });
 
@@ -140,9 +142,7 @@ describe("QiblaScreen", () => {
       render(<QiblaScreen />);
 
       await waitFor(() => {
-        expect(
-          screen.getByText("Permission de localisation requise")
-        ).toBeTruthy();
+        expect(screen.getByText("Localisation désactivée")).toBeTruthy();
       });
     });
 
@@ -150,6 +150,7 @@ describe("QiblaScreen", () => {
       render(<QiblaScreen />);
 
       await waitFor(() => {
+        expect(Location.hasServicesEnabledAsync).toHaveBeenCalled();
         expect(Location.getCurrentPositionAsync).toHaveBeenCalledWith({
           accuracy: Location.Accuracy.Balanced,
         });
@@ -162,6 +163,7 @@ describe("QiblaScreen", () => {
       render(<QiblaScreen />);
 
       await waitFor(() => {
+        expect(Location.hasServicesEnabledAsync).toHaveBeenCalled();
         expect(Location.getCurrentPositionAsync).toHaveBeenCalled();
       });
     });
@@ -177,6 +179,7 @@ describe("QiblaScreen", () => {
       render(<QiblaScreen />);
 
       await waitFor(() => {
+        expect(Location.hasServicesEnabledAsync).toHaveBeenCalled();
         expect(Location.getCurrentPositionAsync).toHaveBeenCalled();
       });
     });
@@ -192,6 +195,7 @@ describe("QiblaScreen", () => {
       render(<QiblaScreen />);
 
       await waitFor(() => {
+        expect(Location.hasServicesEnabledAsync).toHaveBeenCalled();
         expect(Location.getCurrentPositionAsync).toHaveBeenCalled();
       });
     });
@@ -245,6 +249,34 @@ describe("QiblaScreen", () => {
         ).toBeTruthy();
       });
     });
+
+    test("devrait gérer les services de localisation désactivés", async () => {
+      (Location.hasServicesEnabledAsync as jest.Mock).mockResolvedValue(false);
+
+      render(<QiblaScreen />);
+
+      await waitFor(() => {
+        expect(
+          screen.getByText(
+            "Pour utiliser la boussole Qibla, activez la localisation dans les paramètres de votre téléphone."
+          )
+        ).toBeTruthy();
+      });
+    });
+
+    test("devrait gérer les permissions refusées", async () => {
+      (
+        Location.requestForegroundPermissionsAsync as jest.Mock
+      ).mockResolvedValue({
+        status: "denied",
+      });
+
+      render(<QiblaScreen />);
+
+      await waitFor(() => {
+        expect(screen.getByText("Localisation désactivée")).toBeTruthy();
+      });
+    });
   });
 
   describe("États d'initialisation", () => {
@@ -256,7 +288,7 @@ describe("QiblaScreen", () => {
 
       render(<QiblaScreen />);
 
-      // Pendant l'initialisation, on devrait voir le message
+      // Pendant l'initialisation, on devrait voir le message d'initialisation
       expect(screen.getByText("Initialisation de la boussole...")).toBeTruthy();
     });
   });
@@ -314,6 +346,7 @@ describe("QiblaScreen", () => {
       const { unmount } = render(<QiblaScreen />);
 
       await waitFor(() => {
+        expect(Location.hasServicesEnabledAsync).toHaveBeenCalled();
         expect(Location.watchHeadingAsync).toHaveBeenCalled();
       });
 
