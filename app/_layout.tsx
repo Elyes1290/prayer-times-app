@@ -338,6 +338,13 @@ export default function TabLayout() {
                     href: null, // Cache l'onglet de la navigation
                   }}
                 />
+                {/* Écran de paiement premium accessible par navigation (pas visible dans la tab bar) */}
+                <Tabs.Screen
+                  name="premium-payment"
+                  options={{
+                    href: null, // Cache l'onglet de la navigation
+                  }}
+                />
               </Tabs>
             </BackupProvider>
           </FavoritesProvider>

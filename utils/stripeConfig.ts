@@ -1,11 +1,12 @@
 // Configuration Stripe pour les abonnements premium
 export const STRIPE_CONFIG = {
-  // Clés Stripe (à remplacer par vos vraies clés)
-  publishableKey: "pk_test_your_publishable_key_here", // Clé publique de test
-  secretKey: "sk_test_your_secret_key_here", // Clé secrète de test (côté serveur)
+  // Clés Stripe (sécurisées via variables d'environnement)
+  publishableKey:
+    process.env.STRIPE_PUBLISHABLE_KEY || "pk_test_your_publishable_key_here",
+  secretKey: process.env.STRIPE_SECRET_KEY || "sk_test_your_secret_key_here",
 
   // URL de votre API backend pour les paiements
-  apiUrl: "https://your-api-domain.com/api/stripe",
+  apiUrl: "https://elyesnaitliman.ch/api/stripe",
 
   // Configuration des produits premium
   products: {

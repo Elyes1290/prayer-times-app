@@ -113,6 +113,11 @@ define('NOMINATIM_API_URL', $_ENV['NOMINATIM_API_URL'] ?? 'https://nominatim.ope
 define('ALADHAN_API_URL', $_ENV['ALADHAN_API_URL'] ?? 'http://api.aladhan.com/v1');
 define('HADITH_API_KEY', $_ENV['HADITH_API_KEY'] ?? '');
 
+// 💳 STRIPE : Configuration des paiements
+define('STRIPE_SECRET_KEY', $_ENV['STRIPE_SECRET_KEY'] ?? '');
+define('STRIPE_PUBLISHABLE_KEY', $_ENV['STRIPE_PUBLISHABLE_KEY'] ?? '');
+define('STRIPE_WEBHOOK_SECRET', $_ENV['STRIPE_WEBHOOK_SECRET'] ?? '');
+
 // 📊 MONITORING : Configuration des logs et du debug
 define('ENABLE_DEBUG_LOGS', isset($_ENV['ENABLE_DEBUG_LOGS']) && $_ENV['ENABLE_DEBUG_LOGS'] === 'true');
 define('LOG_API_REQUESTS', isset($_ENV['LOG_API_REQUESTS']) && $_ENV['LOG_API_REQUESTS'] === 'true');

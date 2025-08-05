@@ -1,3 +1,2 @@
-import PremiumPaymentScreen from "../screens/PremiumPaymentScreen";
-
-export default PremiumPaymentScreen;
+// app/premium-payment.tsx
+export { default } from "../screens/PremiumPaymentScreen";

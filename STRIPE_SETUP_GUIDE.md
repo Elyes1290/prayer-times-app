@@ -38,8 +38,8 @@
 
 1. Allez dans **Developers** → **API Keys**
 2. Copiez :
-   - **Publishable key** (commence par `pk_test_` ou `pk_live_`)
-   - **Secret key** (commence par `sk_test_` ou `sk_live_`)
+   - **Publishable key**
+   - **Secret key**
 
 #### **C. Configurer les webhooks**
 
@@ -150,8 +150,8 @@ Utilisez ces cartes pour tester :
 
 ### **A. Changer vers les clés live**
 
-1. Remplacez `pk_test_` par `pk_live_`
-2. Remplacez `sk_test_` par `sk_live_`
+1. Remplacez `passe test` par `passe live`
+2. Remplacez `passe test` par `pass live`
 3. Mettez à jour l'URL de l'API
 
 ### **B. Configuration HTTPS**

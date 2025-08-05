@@ -289,8 +289,8 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
           return;
         }
       } else {
-        // Inscription
-        if (!currentEmail && !currentPassword) {
+        // Inscription - Validation des champs
+        if (!currentEmail || !currentPassword || !currentFirstName) {
           Alert.alert(
             t("toasts.error"),
             t("toasts.validation_email_password_required")
@@ -298,58 +298,28 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
           return;
         }
 
-        if (!currentEmail && !currentFirstName) {
-          Alert.alert(
-            t("toasts.error"),
-            t("toasts.validation_email_firstname_required")
-          );
+        // Validation en temps réel des champs
+        const isEmailValid = validateEmail(currentEmail);
+        const isFirstNameValid = validateFirstName(currentFirstName);
+        const isPasswordValid = validatePassword(currentPassword);
+
+        if (!isEmailValid) {
+          Alert.alert(t("toasts.error"), t("toasts.validation_email_invalid"));
           return;
         }
 
-        if (!emailValid || !firstNameValid) {
-          Alert.alert(t("toasts.error"), t("toasts.validation_invalid_fields"));
-          return;
-        }
-
-        if (!passwordValid) {
-          Alert.alert(
-            t("toasts.error"),
-            t("toasts.validation_password_invalid")
-          );
-          return;
-        }
-        if (currentPassword.length < 6) {
-          Alert.alert(
-            t("toasts.error"),
-            t("toasts.validation_password_too_short")
-          );
-          return;
-        }
-        if (currentPassword.length > 50) {
-          Alert.alert(
-            t("toasts.error"),
-            t("toasts.validation_password_too_long")
-          );
-          return;
-        }
-        if (!currentFirstName) {
+        if (!isFirstNameValid) {
           Alert.alert(
             t("toasts.error"),
             t("toasts.validation_firstname_required")
           );
           return;
         }
-        if (currentFirstName.length < 2) {
+
+        if (!isPasswordValid) {
           Alert.alert(
             t("toasts.error"),
-            t("toasts.validation_firstname_too_short")
-          );
-          return;
-        }
-        if (currentFirstName.length > 30) {
-          Alert.alert(
-            t("toasts.error"),
-            t("toasts.validation_firstname_too_long")
+            t("toasts.validation_password_invalid")
           );
           return;
         }
@@ -360,371 +330,78 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
         let result;
 
         if (isLogin) {
-          // 🚀 ADAPTÉ : Connexion avec email et mot de passe obligatoire
+          // Connexion avec email et mot de passe
           result = await apiClient.loginWithCredentials({
             email: currentEmail,
             password: currentPassword,
           });
 
-          // 🚀 NOUVEAU : Vérifier si l'utilisateur connecté a besoin d'upgrader vers premium
           if (result.success && result.data) {
             const userData = result.data.user || result.data;
-            if (userData.premium_status === 0) {
-              // TODO: Décommenter pour activer l'upgrade premium lors de la connexion
-              /*
-            const upgradeChoice = await new Promise((resolve) => {
-              Alert.alert(
-                "Upgrade vers Premium",
-                "Voulez-vous passer au premium pour accéder à toutes les fonctionnalités ?",
-                [
-                  { text: "Plus tard", style: "cancel", onPress: () => resolve(null) },
-                  { text: "Voir les options", onPress: () => resolve("show_options") },
-                ]
-              );
+            setUserData(userData);
+            setIsConnected(true);
+
+            // Synchroniser les données utilisateur
+            await syncUserDataToLocal(userData);
+
+            showLocalToast({
+              type: "success",
+              title: t("toasts.success"),
+              message: t("toasts.login_success"),
             });
 
-            if (upgradeChoice === "show_options") {
-              // Afficher les options de paiement (même logique que pour l'inscription)
-              // TODO: Implémenter l'affichage des options de paiement
-              console.log("💳 Affichage options de paiement pour upgrade");
+            if (onLoginSuccess) {
+              onLoginSuccess(userData);
             }
-            */
-            }
+          } else {
+            showLocalToast({
+              type: "error",
+              title: t("toasts.error"),
+              message: result.message || t("toasts.login_failed"),
+            });
           }
         } else {
-          // 🚀 ADAPTÉ : Inscription avec mot de passe et paiement premium
-          const registrationData: any = {
-            email: currentEmail,
-            password: currentPassword, // 🚀 NOUVEAU : Mot de passe obligatoire
-            user_first_name: currentFirstName,
-            language: "fr",
-          };
-
-          // 🚀 NOUVEAU : Intégration du paiement au moment de l'inscription
-          // TODO: Décommenter pour activer le vrai paiement
-          /*
-        try {
-          // 1. Afficher les options de paiement
-          const paymentChoice = await new Promise((resolve) => {
-            Alert.alert(
-              "Choisir un abonnement Premium",
-              "Sélectionnez votre plan d'abonnement :",
-              [
-                { text: "Annuler", style: "cancel", onPress: () => resolve(null) },
-                { 
-                  text: "Mensuel - 4.99€/mois", 
-                  onPress: () => resolve({ type: "monthly", price: 4.99 }) 
-                },
-                { 
-                  text: "Annuel - 39.99€/an", 
-                  onPress: () => resolve({ type: "yearly", price: 39.99 }) 
-                },
-                { 
-                  text: "Famille - 59.99€/an", 
-                  onPress: () => resolve({ type: "family", price: 59.99 }) 
-                },
-              ]
+          // Inscription - Redirection vers le paiement
+          try {
+            // Stocker temporairement les données d'inscription
+            await AsyncStorage.setItem(
+              "pending_registration",
+              JSON.stringify({
+                email: currentEmail,
+                password: currentPassword,
+                user_first_name: currentFirstName,
+                language: "fr",
+              })
             );
-          });
 
-          if (!paymentChoice) {
+            // Rediriger vers la page de paiement
+            const { router } = await import("expo-router");
+            router.push("/premium-payment");
             setIsLoading(false);
-            return; // Utilisateur a annulé
-          }
-
-          // 2. Intégrer le système de paiement (Stripe, PayPal, etc.)
-          // TODO: Implémenter l'intégration avec votre système de paiement
-          console.log("💳 Paiement sélectionné:", paymentChoice);
-          
-          // 3. Simuler le paiement réussi (à remplacer par le vrai paiement)
-          const paymentSuccess = await new Promise((resolve) => {
-            Alert.alert(
-              "Paiement Premium",
-              `Confirmer le paiement de ${paymentChoice.price}€ pour l'abonnement ${paymentChoice.type} ?`,
-              [
-                { text: "Annuler", style: "cancel", onPress: () => resolve(false) },
-                { text: "Payer", onPress: () => resolve(true) },
-              ]
-            );
-          });
-
-          if (!paymentSuccess) {
+            return;
+          } catch (paymentError) {
+            console.error("❌ Erreur paiement:", paymentError);
+            showToast({
+              type: "error",
+              title: "Erreur de paiement",
+              message: "Impossible d'accéder à la page de paiement",
+            });
             setIsLoading(false);
             return;
           }
-
-          // 4. Configurer les données premium après paiement réussi
-          registrationData.premium_status = 1;
-          registrationData.subscription_type = paymentChoice.type;
-          registrationData.subscription_id = `premium_${paymentChoice.type}_${Date.now()}`;
-          
-          // Calculer la date d'expiration
-          const now = new Date();
-          let expiryDate: Date;
-          switch (paymentChoice.type) {
-            case "monthly":
-              expiryDate = new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000);
-              break;
-            case "yearly":
-            case "family":
-              expiryDate = new Date(now.getTime() + 365 * 24 * 60 * 60 * 1000);
-              break;
-            default:
-              expiryDate = new Date(now.getTime() + 365 * 24 * 60 * 60 * 1000);
-          }
-          registrationData.premium_expiry = expiryDate.toISOString();
-
-          // console.log("✅ Paiement réussi, inscription avec premium:", registrationData);
-          
-        } catch (paymentError) {
-          console.error("❌ Erreur paiement:", paymentError);
-          // 🚀 CORRECTION : Utiliser le toast global pour les erreurs de paiement
-          showToast({
-            type: "error",
-            title: "Erreur de paiement",
-            message: "Impossible de traiter le paiement",
-          });
-          setIsLoading(false);
-          return;
         }
-        */
-
-          // 🚀 TEMPORAIRE : Mode test - activer le premium automatiquement
-          // TODO: Supprimer ce bloc quand le vrai paiement sera activé
-          // console.log(
-          //  "🧪 Mode test: Premium activé automatiquement pour l'inscription"
-          //);
-          registrationData.premium_status = 1;
-          registrationData.subscription_type = "yearly";
-          registrationData.subscription_id = `test_premium_${Date.now()}`;
-          registrationData.premium_expiry = new Date(
-            Date.now() + 365 * 24 * 60 * 60 * 1000
-          ).toISOString();
-
-          // 🚀 NOUVEAU : Récupérer et transmettre les données de localisation depuis le contexte
-          try {
-            // Utiliser les données du contexte SettingsContext (comme les autres fonctionnalités)
-            if (settings.locationMode) {
-              registrationData.location_mode = settings.locationMode;
-              //console.log("📍 Mode de localisation:", settings.locationMode);
-
-              if (
-                settings.locationMode === "manual" &&
-                settings.manualLocation
-              ) {
-                registrationData.location_city = settings.manualLocation.city;
-                registrationData.location_country =
-                  (settings.manualLocation as any).country || null;
-                registrationData.location_lat = settings.manualLocation.lat;
-                registrationData.location_lon = settings.manualLocation.lon;
-
-                //console.log("📍 Données manuelles:", {
-                //  city: settings.manualLocation.city,
-                //  country: (settings.manualLocation as any).country,
-                //  lat: settings.manualLocation.lat,
-                //  lon: settings.manualLocation.lon,
-                //});
-              } else if (
-                settings.locationMode === "auto" &&
-                settings.autoLocation
-              ) {
-                registrationData.location_lat = settings.autoLocation.lat;
-                registrationData.location_lon = settings.autoLocation.lon;
-
-                //console.log("📍 Données GPS:", {
-                //  lat: settings.autoLocation.lat,
-                //  lon: settings.autoLocation.lon,
-                //});
-
-                // Essayer de récupérer la ville depuis les coordonnées GPS
-                try {
-                  const { reverseGeocodeAsync } = await import("expo-location");
-                  const geocodeResult = await reverseGeocodeAsync({
-                    latitude: settings.autoLocation.lat,
-                    longitude: settings.autoLocation.lon,
-                  });
-
-                  if (geocodeResult && geocodeResult.length > 0) {
-                    const firstResult = geocodeResult[0];
-                    registrationData.location_city =
-                      firstResult.city ||
-                      firstResult.district ||
-                      firstResult.region;
-                    registrationData.location_country = firstResult.country;
-
-                    //console.log("📍 Ville détectée par GPS:", {
-                    //  city: registrationData.location_city,
-                    //  country: registrationData.location_country,
-                    //});
-                  }
-                } catch (geocodeError) {
-                  // console.log("⚠️ Erreur reverse geocoding:", geocodeError);
-                }
-              }
-
-              // console.log("📍 Données de localisation finales transmises:", {
-              // location_mode: registrationData.location_mode,
-              // location_city: registrationData.location_city,
-              // location_country: registrationData.location_country,
-              // location_lat: registrationData.location_lat,
-              // location_lon: registrationData.location_lon,
-              //});
-            } else {
-              // console.log("⚠️ Aucun mode de localisation configuré");
-            }
-          } catch (error) {
-            console.log(
-              "⚠️ Erreur récupération données de localisation:",
-              error
-            );
-          }
-
-          // console.log("📤 Données d'inscription envoyées:", registrationData);
-          result = await apiClient.registerWithData(registrationData);
-        }
-
-        if (result.success && result.data) {
-          const userData = result.data.user || result.data;
-
-          // 🚀 NOUVEAU : Synchroniser les données utilisateur avec le stockage local
-          await syncUserDataToLocal(userData);
-
-          // 🚀 CORRECTION : Forcer l'activation premium si l'inscription était en mode premium
-          // Même si l'API retourne premium_status: 0, on force l'activation côté client
-          const wasPremiumRegistration =
-            !isLogin && userData.premium_status === 0;
-          if (wasPremiumRegistration || userData.premium_status === 1) {
-            // console.log("🚀 Activation forcée du premium après inscription");
-            await activatePremium(
-              userData.subscription_type || "yearly",
-              userData.subscription_id || `premium-${userData.id}`
-            );
-
-            // 🚀 CORRECTION : Forcer le statut premium dans les données utilisateur
-            userData.premium_status = 1;
-            userData.is_premium = true;
-            userData.premium_active = true;
-          } else {
-            // 🚀 NOUVEAU : Vérifier si l'utilisateur a acheté le premium localement
-            await activatePremiumAfterLogin();
-          }
-
-          // 🚀 NOUVEAU : Marquer comme connecté et sauvegarder les données
-          // console.log("🔐 Mise à jour des états de connexion...");
-          setIsConnected(true);
-          setUserData(userData);
-          // console.log(
-          //  "✅ États mis à jour - isConnected: true, userData:",
-          //  userData
-          //);
-
-          // 🚀 CORRECTION : Re-synchroniser les données utilisateur avec le statut premium corrigé
-          if (wasPremiumRegistration || userData.premium_status === 1) {
-            await syncUserDataToLocal(userData);
-          }
-
-          // 🚀 CORRECTION : Utiliser le toast global pour les succès de connexion
-          showToast({
-            type: "success",
-            title: isLogin ? "Connexion réussie" : "Inscription réussie",
-            message:
-              userData.premium_status === 1
-                ? "Compte Premium activé avec succès"
-                : "Compte créé avec succès",
-          });
-
-          // 🚀 CORRECTION : Synchroniser avec le contexte premium sans forcer le scroll
-          // Le composant se met à jour automatiquement avec setIsConnected(true)
-
-          // Optionnel : notifier le parent de manière asynchrone pour éviter le scroll forcé
-          if (onLoginSuccess) {
-            setTimeout(() => {
-              onLoginSuccess(userData);
-            }, 100);
-          }
-
-          // Reset du formulaire
-          setEmail("");
-          setPassword("");
-          setFirstName("");
-        } else {
-          // 🚀 CORRECTION : Gestion des erreurs spécifiques avec messages appropriés
-          if (result.message?.includes("non trouvé") && isLogin) {
-            showLocalToast({
-              type: "info",
-              title: t("toasts.info"),
-              message: t("toasts.login_error"),
-            });
-            setIsLogin(false); // Basculer vers l'inscription
-          } else {
-            // 🚀 CORRECTION : Afficher le message d'erreur spécifique au lieu de "error"
-            const errorMessage =
-              result.message ||
-              (isLogin
-                ? t("toasts.login_error")
-                : t("toasts.registration_error"));
-            showLocalToast({
-              type: "error",
-              title: isLogin
-                ? t("toasts.login_error")
-                : t("toasts.registration_error"),
-              message: errorMessage,
-            });
-
-            // 🚀 CORRECTION : Vider le champ mot de passe après une erreur
-            setPassword("");
-            setPasswordValid(false);
-
-            // 🚀 CORRECTION : Forcer le focus sur le champ mot de passe après une erreur
-            setTimeout(() => {
-              passwordRef.current?.focus();
-            }, 100);
-          }
-        }
-      } catch (error: any) {
-        console.error("Erreur authentification:", error);
-
-        // 🚀 CORRECTION : Extraire le message d'erreur spécifique de l'API
-        let errorMessage = t("toasts.network_error");
-        if (error.message) {
-          // Extraire le message après "HTTP 401: " ou "HTTP 400: "
-          const match = error.message.match(/HTTP \d+: (.+)/);
-          if (match) {
-            errorMessage = match[1];
-          } else {
-            errorMessage = error.message;
-          }
-        }
-
-        // 🚀 CORRECTION : Utiliser le toast global pour les erreurs de connexion
-        showToast({
+      } catch (error) {
+        console.error("❌ Erreur authentification:", error);
+        showLocalToast({
           type: "error",
-          title: isLogin ? "Erreur de connexion" : "Erreur d'inscription",
-          message: errorMessage,
+          title: t("toasts.error"),
+          message: t("toasts.network_error"),
         });
-
-        // 🚀 CORRECTION : Vider le champ mot de passe après une erreur
-        setPassword("");
-        setPasswordValid(false);
-
-        // 🚀 CORRECTION : Forcer le focus sur le champ mot de passe après une erreur
-        setTimeout(() => {
-          passwordRef.current?.focus();
-        }, 100);
       } finally {
         setIsLoading(false);
       }
     },
-    [
-      isLogin,
-      email,
-      firstName,
-      syncUserDataToLocal,
-      activatePremium,
-      showLocalToast,
-      onLoginSuccess,
-      activatePremiumAfterLogin,
-    ]
+    [isLogin, t, showLocalToast, showToast, onLoginSuccess]
   );
 
   // 🚀 NOUVEAU : Fonction de déconnexion optimisée

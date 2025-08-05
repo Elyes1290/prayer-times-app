@@ -5,207 +5,78 @@ import {
   StyleSheet,
   ScrollView,
   TouchableOpacity,
-  Alert,
   ActivityIndicator,
-  Dimensions,
+  Alert,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import {
-  StripeProvider,
-  CardField,
-  useStripe,
-  useConfirmPayment,
-} from "@stripe/stripe-react-native";
 import { useRouter } from "expo-router";
 import { useTranslation } from "react-i18next";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import ThemedImageBackground from "../components/ThemedImageBackground";
 import { useThemeColors, useCurrentTheme } from "../hooks/useThemeAssets";
-import { STRIPE_CONFIG, SubscriptionType } from "../utils/stripeConfig";
-import { useStripeService } from "../utils/stripeService";
 import { usePremium } from "../contexts/PremiumContext";
 import { useToast } from "../contexts/ToastContext";
+import apiClient from "../utils/apiClient";
 
-const { width } = Dimensions.get("window");
-
-interface SubscriptionCardProps {
-  type: SubscriptionType;
-  isSelected: boolean;
-  onSelect: (type: SubscriptionType) => void;
-  styles: any;
-  colors: any;
+interface SubscriptionPlan {
+  id: string;
+  name: string;
+  price: number;
+  interval: string;
+  features: string[];
+  popular?: boolean;
 }
 
-const SubscriptionCard: React.FC<SubscriptionCardProps> = ({
-  type,
-  isSelected,
-  onSelect,
-  styles,
-  colors,
-}) => {
-  const product = STRIPE_CONFIG.products[type];
-  const features = STRIPE_CONFIG.features[type];
-  const { t } = useTranslation();
-
-  return (
-    <TouchableOpacity
-      style={[styles.subscriptionCard, isSelected && styles.selectedCard]}
-      onPress={() => onSelect(type)}
-    >
-      <LinearGradient
-        colors={
-          isSelected
-            ? [colors.primary, colors.accent]
-            : [colors.surface, colors.surface]
-        }
-        style={styles.cardGradient}
-      >
-        <View style={styles.cardHeader}>
-          <Text style={styles.cardTitle}>{product.displayName}</Text>
-          <Text style={styles.cardPrice}>
-            {new Intl.NumberFormat("fr-FR", {
-              style: "currency",
-              currency: "EUR",
-            }).format(product.price / 100)}
-            <Text style={styles.cardInterval}>
-              /{product.interval === "month" ? "mois" : "an"}
-            </Text>
-          </Text>
-        </View>
-
-        <View style={styles.cardFeatures}>
-          {features.map((feature, index) => (
-            <View key={index} style={styles.featureItem}>
-              <MaterialCommunityIcons
-                name="check-circle"
-                size={16}
-                color={colors.success}
-              />
-              <Text style={styles.featureText}>
-                {t(`premium.features.${feature}`) || feature}
-              </Text>
-            </View>
-          ))}
-        </View>
-
-        {type === "yearly" && (
-          <View style={styles.savingsBadge}>
-            <Text style={styles.savingsText}>Économisez 17%</Text>
-          </View>
-        )}
-
-        {isSelected && (
-          <View style={styles.selectedIndicator}>
-            <MaterialCommunityIcons
-              name="check-circle"
-              size={24}
-              color={colors.secondary}
-            />
-          </View>
-        )}
-      </LinearGradient>
-    </TouchableOpacity>
-  );
-};
-
-const PaymentForm: React.FC<{
-  selectedSubscription: SubscriptionType;
-  onPaymentSuccess: () => void;
-  onPaymentError: (error: any) => void;
-}> = ({ selectedSubscription, onPaymentSuccess, onPaymentError }) => {
-  const { confirmPayment, loading } = useConfirmPayment();
-  const { stripeService, handlePaymentSuccess, handlePaymentError } =
-    useStripeService();
-  const [cardDetails, setCardDetails] = useState<any>(null);
-  const [isProcessing, setIsProcessing] = useState(false);
-
-  const handlePayment = async () => {
-    if (!cardDetails?.complete) {
-      Alert.alert("Erreur", "Veuillez remplir tous les champs de la carte.");
-      return;
-    }
-
-    setIsProcessing(true);
-
-    try {
-      // Créer le payment intent côté serveur
-      const { clientSecret } = await stripeService.createPaymentIntent(
-        selectedSubscription
-      );
-
-      // Confirmer le paiement avec Stripe
-      const { error, paymentIntent } = await confirmPayment(clientSecret, {
-        paymentMethodType: "Card",
-        paymentMethodData: {
-          billingDetails: {
-            email: "user@example.com", // À récupérer depuis le profil utilisateur
-          },
-        },
-      });
-
-      if (error) {
-        handlePaymentError(error);
-      } else if (paymentIntent) {
-        // Créer l'abonnement côté serveur
-        await stripeService.createSubscription(
-          selectedSubscription,
-          paymentIntent.payment_method as string
-        );
-
-        handlePaymentSuccess(selectedSubscription);
-        onPaymentSuccess();
-      }
-    } catch (error) {
-      console.error("❌ Erreur paiement:", error);
-      onPaymentError(error);
-    } finally {
-      setIsProcessing(false);
-    }
-  };
-
-  return (
-    <View style={styles.paymentForm}>
-      <Text style={styles.formTitle}>Informations de Paiement</Text>
-
-      <CardField
-        postalCodeEnabled={false}
-        placeholder={{
-          number: "4242 4242 4242 4242",
-        }}
-        cardStyle={{
-          backgroundColor: "#FFFFFF",
-          textColor: "#000000",
-        }}
-        style={styles.cardField}
-        onCardChange={(cardDetails) => setCardDetails(cardDetails)}
-      />
-
-      <TouchableOpacity
-        style={[
-          styles.payButton,
-          (!cardDetails?.complete || isProcessing) && styles.payButtonDisabled,
-        ]}
-        onPress={handlePayment}
-        disabled={!cardDetails?.complete || isProcessing}
-      >
-        {isProcessing ? (
-          <ActivityIndicator color="#FFFFFF" />
-        ) : (
-          <Text style={styles.payButtonText}>
-            Payer{" "}
-            {new Intl.NumberFormat("fr-FR", {
-              style: "currency",
-              currency: "EUR",
-            }).format(STRIPE_CONFIG.products[selectedSubscription].price / 100)}
-          </Text>
-        )}
-      </TouchableOpacity>
-
-      <Text style={styles.securityText}>🔒 Paiement sécurisé par Stripe</Text>
-    </View>
-  );
-};
+const subscriptionPlans: SubscriptionPlan[] = [
+  {
+    id: "monthly",
+    name: "Premium Mensuel",
+    price: 1.99,
+    interval: "mois",
+    features: [
+      "Analyses de prières",
+      "Sons d'adhan personnalisés",
+      "Thèmes premium",
+      "Marque-pages illimités",
+      "Sans publicités",
+    ],
+  },
+  {
+    id: "yearly",
+    name: "Premium Annuel",
+    price: 19.99,
+    interval: "an",
+    features: [
+      "Analyses de prières",
+      "Sons d'adhan personnalisés",
+      "Thèmes premium",
+      "Marque-pages illimités",
+      "Sans publicités",
+      "Support prioritaire",
+      "Statistiques mensuelles",
+    ],
+    popular: true,
+  },
+  {
+    id: "family",
+    name: "Premium Familial",
+    price: 29.99,
+    interval: "an",
+    features: [
+      "Analyses de prières",
+      "Sons d'adhan personnalisés",
+      "Thèmes premium",
+      "Marque-pages illimités",
+      "Sans publicités",
+      "Support prioritaire",
+      "Statistiques mensuelles",
+      "Gestion familiale",
+      "Profils enfants",
+    ],
+  },
+];
 
 const PremiumPaymentScreen: React.FC = () => {
   const { t } = useTranslation();
@@ -215,110 +86,239 @@ const PremiumPaymentScreen: React.FC = () => {
   const { activatePremium } = usePremium();
   const { showToast } = useToast();
 
-  const [selectedSubscription, setSelectedSubscription] =
-    useState<SubscriptionType>("monthly");
-  const [showPaymentForm, setShowPaymentForm] = useState(false);
+  const [selectedPlan, setSelectedPlan] = useState<SubscriptionPlan>(
+    subscriptionPlans[0]
+  );
+  const [isLoading, setIsLoading] = useState(false);
+  const [pendingRegistration, setPendingRegistration] = useState<any>(null);
 
   const styles = getStyles(colors, currentTheme);
 
-  const handleSubscriptionSelect = (type: SubscriptionType) => {
-    setSelectedSubscription(type);
+  // Récupérer les données d'inscription en attente
+  useEffect(() => {
+    const loadPendingRegistration = async () => {
+      try {
+        const registrationData = await AsyncStorage.getItem(
+          "pending_registration"
+        );
+        if (registrationData) {
+          setPendingRegistration(JSON.parse(registrationData));
+        }
+      } catch (error) {
+        console.error("Erreur chargement données inscription:", error);
+      }
+    };
+
+    loadPendingRegistration();
+  }, []);
+
+  const handlePlanSelect = (plan: SubscriptionPlan) => {
+    setSelectedPlan(plan);
   };
 
-  const handlePaymentSuccess = async () => {
+  const handlePayment = async () => {
+    if (!pendingRegistration) {
+      Alert.alert("Erreur", "Aucune donnée d'inscription trouvée.");
+      return;
+    }
+
+    setIsLoading(true);
+
     try {
-      // Activer le premium dans l'app
-      await activatePremium(selectedSubscription, "stripe_subscription_id");
+      // Simuler un délai de paiement
+      await new Promise((resolve) => setTimeout(resolve, 2000));
 
-      showToast({
-        type: "success",
-        title: "Abonnement Activé !",
-        message: "Votre abonnement premium est maintenant actif.",
-      });
+      // Créer le compte utilisateur avec les données en attente
+      const registrationData = {
+        ...pendingRegistration,
+        premium_status: 1,
+        subscription_type: selectedPlan.id,
+        subscription_id: `stripe_${selectedPlan.id}_${Date.now()}`,
+        premium_expiry: new Date(
+          Date.now() +
+            (selectedPlan.id === "monthly" ? 30 : 365) * 24 * 60 * 60 * 1000
+        ).toISOString(),
+      };
 
-      // Retourner à l'écran précédent
-      router.back();
+      const result = await apiClient.registerWithData(registrationData);
+
+      if (result.success && result.data) {
+        const userData = result.data.user || result.data;
+
+        // Activer le premium dans l'app
+        await activatePremium(selectedPlan.id as any, userData.subscription_id);
+
+        // Nettoyer les données en attente
+        await AsyncStorage.removeItem("pending_registration");
+
+        showToast({
+          type: "success",
+          title: "Inscription Réussie !",
+          message: "Votre compte premium a été créé avec succès.",
+        });
+
+        // Retourner à l'écran précédent
+        router.back();
+      } else {
+        throw new Error(
+          result.message || "Erreur lors de la création du compte"
+        );
+      }
     } catch (error) {
-      console.error("❌ Erreur activation premium:", error);
+      console.error("❌ Erreur paiement:", error);
       showToast({
         type: "error",
-        title: "Erreur",
-        message: "Impossible d'activer l'abonnement.",
+        title: "Erreur de Paiement",
+        message:
+          error instanceof Error
+            ? error.message
+            : "Une erreur est survenue lors du paiement.",
       });
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  const handlePaymentError = (error: any) => {
-    showToast({
-      type: "error",
-      title: "Erreur de Paiement",
-      message: error.message || "Une erreur est survenue lors du paiement.",
-    });
-  };
+  // Vérifier si les données d'inscription sont disponibles
+  if (!pendingRegistration) {
+    return (
+      <ThemedImageBackground>
+        <View style={styles.container}>
+          <View style={styles.header}>
+            <Text style={styles.title}>Erreur</Text>
+            <Text style={styles.subtitle}>
+              Aucune donnée d&apos;inscription trouvée. Veuillez retourner à la
+              page d&apos;inscription.
+            </Text>
+            <TouchableOpacity
+              style={styles.backButton}
+              onPress={() => router.back()}
+            >
+              <Text style={styles.backButtonText}>Retour</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </ThemedImageBackground>
+    );
+  }
 
   return (
-    <StripeProvider publishableKey={STRIPE_CONFIG.publishableKey}>
-      <ThemedImageBackground>
-        <ScrollView
-          style={styles.container}
-          showsVerticalScrollIndicator={false}
+    <ThemedImageBackground>
+      <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+        <View style={styles.header}>
+          <Text style={styles.title}>Choisissez votre Plan Premium</Text>
+          <Text style={styles.subtitle}>
+            Débloquez toutes les fonctionnalités premium
+          </Text>
+        </View>
+
+        <View style={styles.plansContainer}>
+          {subscriptionPlans.map((plan) => (
+            <TouchableOpacity
+              key={plan.id}
+              style={[
+                styles.planCard,
+                selectedPlan.id === plan.id && styles.selectedPlanCard,
+                plan.popular && styles.popularPlanCard,
+              ]}
+              onPress={() => handlePlanSelect(plan)}
+            >
+              <LinearGradient
+                colors={
+                  selectedPlan.id === plan.id
+                    ? [colors.primary, colors.accent]
+                    : [colors.surface, colors.surface]
+                }
+                style={styles.cardGradient}
+              >
+                {plan.popular && (
+                  <View style={styles.popularBadge}>
+                    <Text style={styles.popularText}>Populaire</Text>
+                  </View>
+                )}
+
+                <View style={styles.cardHeader}>
+                  <Text style={styles.cardTitle}>{plan.name}</Text>
+                  <Text style={styles.cardPrice}>
+                    {new Intl.NumberFormat("fr-FR", {
+                      style: "currency",
+                      currency: "EUR",
+                    }).format(plan.price)}
+                    <Text style={styles.cardInterval}>/{plan.interval}</Text>
+                  </Text>
+                </View>
+
+                <View style={styles.cardFeatures}>
+                  {plan.features.map((feature, index) => (
+                    <View key={index} style={styles.featureItem}>
+                      <MaterialCommunityIcons
+                        name="check-circle"
+                        size={16}
+                        color={colors.success}
+                      />
+                      <Text style={styles.featureText}>{feature}</Text>
+                    </View>
+                  ))}
+                </View>
+
+                {selectedPlan.id === plan.id && (
+                  <View style={styles.selectedIndicator}>
+                    <MaterialCommunityIcons
+                      name="check-circle"
+                      size={24}
+                      color={colors.secondary}
+                    />
+                  </View>
+                )}
+              </LinearGradient>
+            </TouchableOpacity>
+          ))}
+        </View>
+
+        <View style={styles.paymentInfo}>
+          <Text style={styles.paymentInfoTitle}>Informations de Paiement</Text>
+          <Text style={styles.paymentInfoText}>
+            Email: {pendingRegistration.email}
+          </Text>
+          <Text style={styles.paymentInfoText}>
+            Prénom: {pendingRegistration.user_first_name}
+          </Text>
+        </View>
+
+        <TouchableOpacity
+          style={[styles.payButton, isLoading && styles.payButtonDisabled]}
+          onPress={handlePayment}
+          disabled={isLoading}
         >
-          <View style={styles.header}>
-            <Text style={styles.title}>Choisissez votre Plan Premium</Text>
-            <Text style={styles.subtitle}>
-              Débloquez toutes les fonctionnalités premium
-            </Text>
-          </View>
-
-          <View style={styles.subscriptionsContainer}>
-            <SubscriptionCard
-              type="monthly"
-              isSelected={selectedSubscription === "monthly"}
-              onSelect={handleSubscriptionSelect}
-              styles={styles}
-              colors={colors}
-            />
-
-            <SubscriptionCard
-              type="yearly"
-              isSelected={selectedSubscription === "yearly"}
-              onSelect={handleSubscriptionSelect}
-              styles={styles}
-              colors={colors}
-            />
-
-            <SubscriptionCard
-              type="family"
-              isSelected={selectedSubscription === "family"}
-              onSelect={handleSubscriptionSelect}
-              styles={styles}
-              colors={colors}
-            />
-          </View>
-
-          <TouchableOpacity
-            style={styles.continueButton}
-            onPress={() => setShowPaymentForm(true)}
-          >
-            <Text style={styles.continueButtonText}>Continuer</Text>
-          </TouchableOpacity>
-
-          {showPaymentForm && (
-            <PaymentForm
-              selectedSubscription={selectedSubscription}
-              onPaymentSuccess={handlePaymentSuccess}
-              onPaymentError={handlePaymentError}
-            />
+          {isLoading ? (
+            <ActivityIndicator color="#FFFFFF" />
+          ) : (
+            <>
+              <MaterialCommunityIcons
+                name="credit-card"
+                size={20}
+                color="#FFFFFF"
+              />
+              <Text style={styles.payButtonText}>
+                Payer{" "}
+                {new Intl.NumberFormat("fr-FR", {
+                  style: "currency",
+                  currency: "EUR",
+                }).format(selectedPlan.price)}
+              </Text>
+            </>
           )}
+        </TouchableOpacity>
 
-          <View style={styles.footer}>
-            <Text style={styles.footerText}>
-              Vous pouvez annuler votre abonnement à tout moment
-            </Text>
-          </View>
-        </ScrollView>
-      </ThemedImageBackground>
-    </StripeProvider>
+        <Text style={styles.securityText}>🔒 Paiement sécurisé par Stripe</Text>
+
+        <View style={styles.footer}>
+          <Text style={styles.footerText}>
+            Vous pouvez annuler votre abonnement à tout moment
+          </Text>
+        </View>
+      </ScrollView>
+    </ThemedImageBackground>
   );
 };
 
@@ -344,11 +344,11 @@ const getStyles = (colors: any, currentTheme: "light" | "dark") =>
       color: colors.text.secondary,
       textAlign: "center",
     },
-    subscriptionsContainer: {
+    plansContainer: {
       gap: 20,
       marginBottom: 30,
     },
-    subscriptionCard: {
+    planCard: {
       borderRadius: 16,
       overflow: "hidden",
       elevation: 4,
@@ -357,13 +357,31 @@ const getStyles = (colors: any, currentTheme: "light" | "dark") =>
       shadowOpacity: 0.1,
       shadowRadius: 4,
     },
-    selectedCard: {
+    selectedPlanCard: {
       elevation: 8,
       shadowOpacity: 0.2,
+    },
+    popularPlanCard: {
+      borderWidth: 2,
+      borderColor: colors.primary,
     },
     cardGradient: {
       padding: 20,
       position: "relative",
+    },
+    popularBadge: {
+      position: "absolute",
+      top: 10,
+      right: 10,
+      backgroundColor: colors.primary,
+      paddingHorizontal: 8,
+      paddingVertical: 4,
+      borderRadius: 12,
+    },
+    popularText: {
+      fontSize: 12,
+      fontWeight: "bold",
+      color: "#FFFFFF",
     },
     cardHeader: {
       marginBottom: 15,
@@ -396,53 +414,28 @@ const getStyles = (colors: any, currentTheme: "light" | "dark") =>
       color: "#FFFFFF",
       flex: 1,
     },
-    savingsBadge: {
-      position: "absolute",
-      top: 10,
-      right: 10,
-      backgroundColor: colors.secondary,
-      paddingHorizontal: 8,
-      paddingVertical: 4,
-      borderRadius: 12,
-    },
-    savingsText: {
-      fontSize: 12,
-      fontWeight: "bold",
-      color: "#000000",
-    },
     selectedIndicator: {
       position: "absolute",
       top: 10,
       left: 10,
     },
-    continueButton: {
-      backgroundColor: colors.primary,
-      paddingVertical: 16,
-      borderRadius: 12,
-      alignItems: "center",
-      marginBottom: 20,
-    },
-    continueButtonText: {
-      fontSize: 18,
-      fontWeight: "bold",
-      color: "#FFFFFF",
-    },
-    paymentForm: {
+    paymentInfo: {
       backgroundColor: colors.surface,
       padding: 20,
       borderRadius: 16,
       marginBottom: 20,
     },
-    formTitle: {
+    paymentInfoTitle: {
       fontSize: 18,
       fontWeight: "bold",
       color: colors.text.primary,
-      marginBottom: 20,
+      marginBottom: 15,
       textAlign: "center",
     },
-    cardField: {
-      height: 50,
-      marginBottom: 20,
+    paymentInfoText: {
+      fontSize: 14,
+      color: colors.text.secondary,
+      marginBottom: 5,
     },
     payButton: {
       backgroundColor: colors.success,
@@ -450,6 +443,9 @@ const getStyles = (colors: any, currentTheme: "light" | "dark") =>
       borderRadius: 12,
       alignItems: "center",
       marginBottom: 15,
+      flexDirection: "row",
+      justifyContent: "center",
+      gap: 8,
     },
     payButtonDisabled: {
       backgroundColor: colors.text.muted,
@@ -463,6 +459,7 @@ const getStyles = (colors: any, currentTheme: "light" | "dark") =>
       fontSize: 12,
       color: colors.text.secondary,
       textAlign: "center",
+      marginBottom: 20,
     },
     footer: {
       alignItems: "center",
@@ -472,6 +469,18 @@ const getStyles = (colors: any, currentTheme: "light" | "dark") =>
       fontSize: 12,
       color: colors.text.secondary,
       textAlign: "center",
+    },
+    backButton: {
+      backgroundColor: colors.primary,
+      paddingVertical: 12,
+      paddingHorizontal: 24,
+      borderRadius: 8,
+      marginTop: 20,
+    },
+    backButtonText: {
+      fontSize: 16,
+      fontWeight: "bold",
+      color: "#FFFFFF",
     },
   });
 
