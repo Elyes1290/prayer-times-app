@@ -158,6 +158,49 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
     try {
       setLoading(true);
 
+      // 🔧 NOUVEAU : Synchroniser avec user_data en priorité
+      const userData = await AsyncStorage.getItem("user_data");
+      if (userData) {
+        const parsedUserData = JSON.parse(userData);
+
+        // Si l'utilisateur est premium dans user_data, créer/synchroniser @prayer_app_premium_user
+        if (parsedUserData.premium_status === 1) {
+          console.log(
+            "🔄 [SYNC] Synchronisation Premium Context depuis user_data"
+          );
+
+          const premiumUser = {
+            isPremium: true,
+            subscriptionType: parsedUserData.subscription_type || "yearly",
+            subscriptionId: parsedUserData.subscription_id,
+            expiryDate: parsedUserData.premium_expiry
+              ? new Date(parsedUserData.premium_expiry)
+              : new Date(Date.now() + 365 * 24 * 60 * 60 * 1000),
+            features: [
+              "prayer_analytics",
+              "custom_adhan_sounds",
+              "premium_themes",
+              "unlimited_bookmarks",
+              "ad_free",
+            ],
+            hasPurchasedPremium: true,
+            premiumActivatedAt: parsedUserData.premium_activated_at
+              ? new Date(parsedUserData.premium_activated_at)
+              : new Date(),
+          };
+
+          // Sauvegarder et utiliser ces données
+          await AsyncStorage.setItem(
+            STORAGE_KEYS.PREMIUM_USER,
+            JSON.stringify(premiumUser)
+          );
+          setUser(premiumUser);
+          console.log("✅ [SYNC] Premium Context synchronisé !");
+          setLoading(false);
+          return;
+        }
+      }
+
       const storedUser = await AsyncStorage.getItem(STORAGE_KEYS.PREMIUM_USER);
       if (storedUser) {
         const parsedUser = JSON.parse(storedUser);

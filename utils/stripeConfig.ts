@@ -6,12 +6,12 @@ export const STRIPE_CONFIG = {
   secretKey: process.env.STRIPE_SECRET_KEY || "sk_test_your_secret_key_here",
 
   // URL de votre API backend pour les paiements
-  apiUrl: "https://elyesnaitliman.ch/api/stripe",
+  apiUrl: "https://elyesnaitliman.ch/api/stripe.php",
 
   // Configuration des produits premium
   products: {
     monthly: {
-      id: "premium_monthly_1_99",
+      id: "monthly", // Correspond à la clé dans stripe.php
       price: 199, // 1.99 EUR en centimes
       currency: "eur",
       interval: "month",
@@ -19,7 +19,7 @@ export const STRIPE_CONFIG = {
       description: "Accès premium complet pendant 1 mois",
     },
     yearly: {
-      id: "premium_yearly_19_99",
+      id: "yearly", // Correspond à la clé dans stripe.php
       price: 1999, // 19.99 EUR en centimes
       currency: "eur",
       interval: "year",
@@ -27,7 +27,7 @@ export const STRIPE_CONFIG = {
       description: "Accès premium complet pendant 1 an (économisez 17%)",
     },
     family: {
-      id: "premium_family_29_99",
+      id: "family", // Correspond à la clé dans stripe.php
       price: 2999, // 29.99 EUR en centimes
       currency: "eur",
       interval: "year",

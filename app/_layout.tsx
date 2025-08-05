@@ -345,6 +345,19 @@ export default function TabLayout() {
                     href: null, // Cache l'onglet de la navigation
                   }}
                 />
+                {/* Pages de résultat de paiement accessibles par deep links (pas visible dans la tab bar) */}
+                <Tabs.Screen
+                  name="payment-success"
+                  options={{
+                    href: null, // Cache l'onglet de la navigation
+                  }}
+                />
+                <Tabs.Screen
+                  name="payment-cancel"
+                  options={{
+                    href: null, // Cache l'onglet de la navigation
+                  }}
+                />
               </Tabs>
             </BackupProvider>
           </FavoritesProvider>

@@ -7,11 +7,11 @@ import {
   Image,
   TouchableOpacity,
   ScrollView,
-  ImageBackground,
   Alert,
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useTranslation } from "react-i18next";
+import Constants from "expo-constants";
 import ThemedImageBackground from "../components/ThemedImageBackground";
 
 export default function AboutScreen() {
@@ -19,8 +19,22 @@ export default function AboutScreen() {
   const [expandedFAQ, setExpandedFAQ] = useState<number | null>(null);
   // Les couleurs sont maintenant gérées via le système de thème dans Colors.ts
 
-  const appVersion = "1.0.0";
-  const buildNumber = "14";
+  // 🚀 DYNAMIQUE : Version et build depuis app.json
+  const appVersion = Constants.expoConfig?.version || "1.0.0";
+  const buildNumber =
+    Constants.expoConfig?.android?.versionCode?.toString() || "1";
+
+  // 🗓️ DYNAMIQUE : Date de dernière mise à jour
+  // Cette date correspond à votre dernière publication sur Google Play
+  const getLastUpdateDate = () => {
+    // 🎯 Vous pouvez mettre à jour cette date à chaque release Google Play
+    const lastReleaseDate = "2025-08-05"; // Format YYYY-MM-DD
+    return new Date(lastReleaseDate).toLocaleDateString("fr-FR", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    });
+  };
 
   const features = [
     { icon: "clock-outline", key: "prayer_times" },
@@ -245,6 +259,9 @@ export default function AboutScreen() {
             {t("abouts.version")} {appVersion} ({t("abouts.build")}{" "}
             {buildNumber})
           </Text>
+          <Text style={styles.lastUpdate}>
+            {t("abouts.last_update")} {getLastUpdateDate()}
+          </Text>
           <Text style={styles.footer}>{t("abouts.footer_thanks")}</Text>
           <Text style={styles.dua}>{t("abouts.closing_dua")}</Text>
         </View>
@@ -447,6 +464,14 @@ const styles = StyleSheet.create({
     fontSize: 14,
     textAlign: "center",
     fontFamily: "ScheherazadeNew",
+  },
+  lastUpdate: {
+    color: "#b59d42",
+    fontSize: 12,
+    textAlign: "center",
+    fontFamily: "ScheherazadeNew",
+    marginTop: 4,
+    opacity: 0.8,
   },
   footer: {
     marginTop: 8,

@@ -11,14 +11,11 @@ import {
 import { LinearGradient } from "expo-linear-gradient";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import { useTranslation } from "react-i18next";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import ThemedImageBackground from "../components/ThemedImageBackground";
 import { useThemeColors, useCurrentTheme } from "../hooks/useThemeAssets";
-import { usePremium } from "../contexts/PremiumContext";
-import { useToast } from "../contexts/ToastContext";
-import apiClient from "../utils/apiClient";
+import { STRIPE_CONFIG } from "../utils/stripeConfig";
 
 interface SubscriptionPlan {
   id: string;
@@ -27,6 +24,7 @@ interface SubscriptionPlan {
   interval: string;
   features: string[];
   popular?: boolean;
+  comingSoon?: boolean;
 }
 
 const subscriptionPlans: SubscriptionPlan[] = [
@@ -75,16 +73,14 @@ const subscriptionPlans: SubscriptionPlan[] = [
       "Gestion familiale",
       "Profils enfants",
     ],
+    comingSoon: true,
   },
 ];
 
 const PremiumPaymentScreen: React.FC = () => {
-  const { t } = useTranslation();
   const colors = useThemeColors();
   const currentTheme = useCurrentTheme();
   const router = useRouter();
-  const { activatePremium } = usePremium();
-  const { showToast } = useToast();
 
   const [selectedPlan, setSelectedPlan] = useState<SubscriptionPlan>(
     subscriptionPlans[0]
@@ -101,11 +97,16 @@ const PremiumPaymentScreen: React.FC = () => {
         const registrationData = await AsyncStorage.getItem(
           "pending_registration"
         );
+        console.log("🔍 Données d'inscription trouvées:", registrationData);
         if (registrationData) {
-          setPendingRegistration(JSON.parse(registrationData));
+          const parsedData = JSON.parse(registrationData);
+          console.log("✅ Données parsées:", parsedData);
+          setPendingRegistration(parsedData);
+        } else {
+          console.log("❌ Aucune donnée d'inscription trouvée");
         }
-      } catch (error) {
-        console.error("Erreur chargement données inscription:", error);
+      } catch {
+        console.error("❌ Erreur chargement données inscription");
       }
     };
 
@@ -122,65 +123,86 @@ const PremiumPaymentScreen: React.FC = () => {
       return;
     }
 
+    if (selectedPlan.comingSoon) {
+      Alert.alert("Plan non disponible", "Ce plan sera bientôt disponible.");
+      return;
+    }
+
     setIsLoading(true);
 
     try {
-      // Simuler un délai de paiement
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+      // Préparer les données pour la session de paiement
 
-      // Créer le compte utilisateur avec les données en attente
-      const registrationData = {
-        ...pendingRegistration,
-        premium_status: 1,
-        subscription_type: selectedPlan.id,
-        subscription_id: `stripe_${selectedPlan.id}_${Date.now()}`,
-        premium_expiry: new Date(
-          Date.now() +
-            (selectedPlan.id === "monthly" ? 30 : 365) * 24 * 60 * 60 * 1000
-        ).toISOString(),
-      };
+      // Créer une session de paiement Stripe Checkout
+      const response = await fetch(
+        `${STRIPE_CONFIG.apiUrl}/create-checkout-session`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            subscriptionType: selectedPlan.id,
+            customerEmail: pendingRegistration.email,
+            customerName: pendingRegistration.user_first_name,
+            customerLanguage: pendingRegistration.language || "fr",
+            customerPassword: pendingRegistration.password, // 🔑 AJOUT du mot de passe
+            successUrl: "prayertimesapp://payment-success",
+            cancelUrl: "prayertimesapp://payment-cancel",
+          }),
+        }
+      );
 
-      const result = await apiClient.registerWithData(registrationData);
+      // Vérifier le statut de la réponse
 
-      if (result.success && result.data) {
-        const userData = result.data.user || result.data;
-
-        // Activer le premium dans l'app
-        await activatePremium(selectedPlan.id as any, userData.subscription_id);
-
-        // Nettoyer les données en attente
-        await AsyncStorage.removeItem("pending_registration");
-
-        showToast({
-          type: "success",
-          title: "Inscription Réussie !",
-          message: "Votre compte premium a été créé avec succès.",
-        });
-
-        // Retourner à l'écran précédent
-        router.back();
-      } else {
-        throw new Error(
-          result.message || "Erreur lors de la création du compte"
-        );
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`Erreur ${response.status}: ${errorText}`);
       }
-    } catch (error) {
-      console.error("❌ Erreur paiement:", error);
-      showToast({
-        type: "error",
-        title: "Erreur de Paiement",
-        message:
-          error instanceof Error
-            ? error.message
-            : "Une erreur est survenue lors du paiement.",
-      });
+
+      const responseText = await response.text();
+
+      let responseData;
+      try {
+        responseData = JSON.parse(responseText);
+      } catch {
+        throw new Error("Réponse invalide du serveur");
+      }
+
+      const { sessionUrl } = responseData;
+
+      // Stocker les données d'inscription pour la récupération après paiement
+      await AsyncStorage.setItem(
+        "pending_registration",
+        JSON.stringify({
+          ...pendingRegistration,
+          subscription_type: selectedPlan.id,
+          plan_price: selectedPlan.price,
+        })
+      );
+
+      // Ouvrir Stripe Checkout dans le navigateur
+      try {
+        const { Linking } = await import("react-native");
+        await Linking.openURL(sessionUrl);
+      } catch {
+        Alert.alert("Erreur", "Impossible d'ouvrir la page de paiement");
+      }
+    } catch {
+      Alert.alert(
+        "Erreur",
+        "Impossible d'initialiser le paiement. Veuillez réessayer."
+      );
     } finally {
       setIsLoading(false);
     }
   };
 
   // Vérifier si les données d'inscription sont disponibles
+  console.log("🔍 État pendingRegistration:", pendingRegistration);
+
   if (!pendingRegistration) {
+    console.log("❌ Affichage de l'erreur - pas de données d'inscription");
     return (
       <ThemedImageBackground>
         <View style={styles.container}>
@@ -202,8 +224,13 @@ const PremiumPaymentScreen: React.FC = () => {
     );
   }
 
+  console.log(
+    "✅ Affichage de la page de paiement avec données:",
+    pendingRegistration
+  );
+
   return (
-    <ThemedImageBackground>
+    <View style={[styles.container, { backgroundColor: colors.surface }]}>
       <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
         <View style={styles.header}>
           <Text style={styles.title}>Choisissez votre Plan Premium</Text>
@@ -220,13 +247,17 @@ const PremiumPaymentScreen: React.FC = () => {
                 styles.planCard,
                 selectedPlan.id === plan.id && styles.selectedPlanCard,
                 plan.popular && styles.popularPlanCard,
+                plan.comingSoon && styles.comingSoonCard,
               ]}
-              onPress={() => handlePlanSelect(plan)}
+              onPress={() => !plan.comingSoon && handlePlanSelect(plan)}
+              disabled={plan.comingSoon}
             >
               <LinearGradient
                 colors={
                   selectedPlan.id === plan.id
                     ? [colors.primary, colors.accent]
+                    : plan.comingSoon
+                    ? [colors.surfaceVariant, colors.surfaceVariant]
                     : [colors.surface, colors.surface]
                 }
                 style={styles.cardGradient}
@@ -236,10 +267,29 @@ const PremiumPaymentScreen: React.FC = () => {
                     <Text style={styles.popularText}>Populaire</Text>
                   </View>
                 )}
+                {plan.comingSoon && (
+                  <View style={styles.comingSoonBadge}>
+                    <Text style={styles.comingSoonText}>
+                      Bientôt disponible
+                    </Text>
+                  </View>
+                )}
 
                 <View style={styles.cardHeader}>
-                  <Text style={styles.cardTitle}>{plan.name}</Text>
-                  <Text style={styles.cardPrice}>
+                  <Text
+                    style={[
+                      styles.cardTitle,
+                      plan.comingSoon && styles.comingSoonText,
+                    ]}
+                  >
+                    {plan.name}
+                  </Text>
+                  <Text
+                    style={[
+                      styles.cardPrice,
+                      plan.comingSoon && styles.comingSoonText,
+                    ]}
+                  >
                     {new Intl.NumberFormat("fr-FR", {
                       style: "currency",
                       currency: "EUR",
@@ -254,14 +304,23 @@ const PremiumPaymentScreen: React.FC = () => {
                       <MaterialCommunityIcons
                         name="check-circle"
                         size={16}
-                        color={colors.success}
+                        color={
+                          plan.comingSoon ? colors.textTertiary : colors.success
+                        }
                       />
-                      <Text style={styles.featureText}>{feature}</Text>
+                      <Text
+                        style={[
+                          styles.featureText,
+                          plan.comingSoon && styles.comingSoonText,
+                        ]}
+                      >
+                        {feature}
+                      </Text>
                     </View>
                   ))}
                 </View>
 
-                {selectedPlan.id === plan.id && (
+                {selectedPlan.id === plan.id && !plan.comingSoon && (
                   <View style={styles.selectedIndicator}>
                     <MaterialCommunityIcons
                       name="check-circle"
@@ -291,13 +350,13 @@ const PremiumPaymentScreen: React.FC = () => {
           disabled={isLoading}
         >
           {isLoading ? (
-            <ActivityIndicator color="#FFFFFF" />
+            <ActivityIndicator color={colors.text} />
           ) : (
             <>
               <MaterialCommunityIcons
                 name="credit-card"
                 size={20}
-                color="#FFFFFF"
+                color={colors.text}
               />
               <Text style={styles.payButtonText}>
                 Payer{" "}
@@ -317,8 +376,11 @@ const PremiumPaymentScreen: React.FC = () => {
             Vous pouvez annuler votre abonnement à tout moment
           </Text>
         </View>
+
+        {/* Espace pour éviter que le bouton soit caché par le menu */}
+        <View style={styles.bottomSpacer} />
       </ScrollView>
-    </ThemedImageBackground>
+    </View>
   );
 };
 
@@ -327,6 +389,7 @@ const getStyles = (colors: any, currentTheme: "light" | "dark") =>
     container: {
       flex: 1,
       padding: 20,
+      paddingBottom: 100, // Espace pour éviter que le bouton soit caché par le menu
     },
     header: {
       alignItems: "center",
@@ -335,13 +398,13 @@ const getStyles = (colors: any, currentTheme: "light" | "dark") =>
     title: {
       fontSize: 28,
       fontWeight: "bold",
-      color: colors.text.primary,
+      color: colors.text,
       textAlign: "center",
       marginBottom: 10,
     },
     subtitle: {
       fontSize: 16,
-      color: colors.text.secondary,
+      color: colors.textSecondary,
       textAlign: "center",
     },
     plansContainer: {
@@ -365,6 +428,9 @@ const getStyles = (colors: any, currentTheme: "light" | "dark") =>
       borderWidth: 2,
       borderColor: colors.primary,
     },
+    comingSoonCard: {
+      opacity: 0.6,
+    },
     cardGradient: {
       padding: 20,
       position: "relative",
@@ -381,7 +447,21 @@ const getStyles = (colors: any, currentTheme: "light" | "dark") =>
     popularText: {
       fontSize: 12,
       fontWeight: "bold",
-      color: "#FFFFFF",
+      color: colors.text,
+    },
+    comingSoonBadge: {
+      position: "absolute",
+      top: 10,
+      right: 10,
+      backgroundColor: colors.warning,
+      paddingHorizontal: 8,
+      paddingVertical: 4,
+      borderRadius: 12,
+    },
+    comingSoonText: {
+      fontSize: 12,
+      fontWeight: "bold",
+      color: colors.text,
     },
     cardHeader: {
       marginBottom: 15,
@@ -389,13 +469,13 @@ const getStyles = (colors: any, currentTheme: "light" | "dark") =>
     cardTitle: {
       fontSize: 20,
       fontWeight: "bold",
-      color: "#FFFFFF",
+      color: colors.text,
       marginBottom: 5,
     },
     cardPrice: {
       fontSize: 24,
       fontWeight: "bold",
-      color: "#FFFFFF",
+      color: colors.text,
     },
     cardInterval: {
       fontSize: 16,
@@ -411,7 +491,7 @@ const getStyles = (colors: any, currentTheme: "light" | "dark") =>
     },
     featureText: {
       fontSize: 14,
-      color: "#FFFFFF",
+      color: colors.text,
       flex: 1,
     },
     selectedIndicator: {
@@ -428,13 +508,13 @@ const getStyles = (colors: any, currentTheme: "light" | "dark") =>
     paymentInfoTitle: {
       fontSize: 18,
       fontWeight: "bold",
-      color: colors.text.primary,
+      color: colors.text,
       marginBottom: 15,
       textAlign: "center",
     },
     paymentInfoText: {
       fontSize: 14,
-      color: colors.text.secondary,
+      color: colors.text,
       marginBottom: 5,
     },
     payButton: {
@@ -453,11 +533,11 @@ const getStyles = (colors: any, currentTheme: "light" | "dark") =>
     payButtonText: {
       fontSize: 18,
       fontWeight: "bold",
-      color: "#FFFFFF",
+      color: colors.text,
     },
     securityText: {
       fontSize: 12,
-      color: colors.text.secondary,
+      color: colors.text,
       textAlign: "center",
       marginBottom: 20,
     },
@@ -467,7 +547,7 @@ const getStyles = (colors: any, currentTheme: "light" | "dark") =>
     },
     footerText: {
       fontSize: 12,
-      color: colors.text.secondary,
+      color: colors.text,
       textAlign: "center",
     },
     backButton: {
@@ -480,7 +560,10 @@ const getStyles = (colors: any, currentTheme: "light" | "dark") =>
     backButtonText: {
       fontSize: 16,
       fontWeight: "bold",
-      color: "#FFFFFF",
+      color: colors.text,
+    },
+    bottomSpacer: {
+      height: 120, // Espace suffisant pour éviter que le bouton soit caché par le menu
     },
   });
 

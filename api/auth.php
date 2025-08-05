@@ -33,7 +33,12 @@ try {
             }
             break;
         case 'GET':
-            handleVerifyAuth();
+            $action = $_GET['action'] ?? '';
+            if ($action === 'check_email') {
+                handleCheckEmail();
+            } else {
+                handleVerifyAuth();
+            }
             break;
         default:
             handleError("Méthode non supportée", 405);
@@ -588,6 +593,30 @@ function formatUserData($user) {
         'premium_active' => (int)$user['premium_status'] === 1 && 
                            ($user['premium_expiry'] === null || strtotime($user['premium_expiry']) > time())
     ];
+}
+
+/**
+ * 🚀 NOUVEAU : Vérifier si un email existe déjà (sans créer l'utilisateur)
+ */
+function handleCheckEmail() {
+    $email = $_GET['email'] ?? null;
+    
+    if (!$email) {
+        handleError("Email requis", 400);
+    }
+    
+    $pdo = getDBConnection();
+    
+    // Vérifier si l'utilisateur existe déjà par email
+    $checkStmt = $pdo->prepare("SELECT id FROM users WHERE email = ?");
+    $checkStmt->execute([$email]);
+    $existingUser = $checkStmt->fetch();
+    
+    jsonResponse(true, [
+        'exists' => $existingUser !== false,
+        'email' => $email,
+        'message' => $existingUser ? 'Email existe déjà' : 'Email disponible'
+    ]);
 }
 
 /**

@@ -173,6 +173,7 @@
 
     "version": "Version",
     "build": "Build",
+    "last_update": "Dernière mise à jour :",
     "footer_thanks": "Qu'Allah vous récompense pour l'utilisation de cette app ! 🤲",
     "closing_dua": "رَبَّنَا تَقَبَّلْ مِنَّا إِنَّكَ أَنتَ السَّمِيعُ الْعَلِيمُ"
   },

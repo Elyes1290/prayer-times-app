@@ -38,6 +38,28 @@ export default function AccountManagementSection({
   const settings = useContext(SettingsContext);
 
   // 🚀 NOUVEAU : États pour les vraies données utilisateur
+  const [realUserData, setRealUserData] = useState<any>(null);
+
+  // 🔍 Charger les vraies données utilisateur depuis AsyncStorage
+  useEffect(() => {
+    const loadRealUserData = async () => {
+      try {
+        const userData = await AsyncStorage.getItem("user_data");
+        if (userData) {
+          const parsedData = JSON.parse(userData);
+          console.log("🔍 [DEBUG] Données utilisateur complètes:", parsedData);
+          setRealUserData(parsedData);
+        }
+      } catch (error) {
+        console.error("❌ Erreur chargement données utilisateur:", error);
+      }
+    };
+
+    loadRealUserData();
+  }, []);
+
+  // 🎯 Utiliser les vraies données si disponibles, sinon fallback sur user
+  const userData = realUserData || user;
   const [userFirstName, setUserFirstName] = useState("");
   const [userEmail, setUserEmail] = useState("");
   const [isLoadingUserData, setIsLoadingUserData] = useState(true);
@@ -293,12 +315,86 @@ export default function AccountManagementSection({
 
           <View style={styles.subscriptionRow}>
             <Text style={styles.subscriptionLabel}>Type</Text>
-            <Text style={styles.subscriptionValue}>Abonnement Mensuel</Text>
+            <Text style={styles.subscriptionValue}>
+              {userData?.subscription_type === "monthly"
+                ? "Abonnement Mensuel"
+                : userData?.subscription_type === "yearly"
+                ? "Abonnement Annuel"
+                : userData?.subscription_type === "family"
+                ? "Abonnement Familial"
+                : userData?.subscription_type || "Type non défini"}
+            </Text>
           </View>
 
           <View style={styles.subscriptionRow}>
             <Text style={styles.subscriptionLabel}>Prochaine facturation</Text>
-            <Text style={styles.subscriptionValue}>15 Août 2024</Text>
+            <Text style={styles.subscriptionValue}>
+              {(() => {
+                // 🔍 Debug des données disponibles
+                console.log("🔍 [DEBUG] userData pour facturation:", {
+                  premium_activated_at: userData?.premium_activated_at,
+                  subscription_type: userData?.subscription_type,
+                  premium_expiry: userData?.premium_expiry,
+                  created_at: userData?.created_at,
+                });
+
+                if (!userData?.subscription_type) {
+                  return `Non disponible (Manque: type abo)`;
+                }
+
+                // 🔧 Fallback si premium_activated_at manque
+                let activationDate = userData.premium_activated_at;
+                if (!activationDate) {
+                  // Utiliser created_at, updated_at, ou la date actuelle moins 1 mois comme fallback
+                  activationDate =
+                    userData.created_at ||
+                    userData.updated_at ||
+                    new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
+                  console.log(
+                    "⚠️ [FALLBACK] Utilisation date fallback pour activation:",
+                    activationDate
+                  );
+                } else {
+                  console.log(
+                    "✅ [OK] Utilisation premium_activated_at:",
+                    activationDate
+                  );
+                }
+
+                const activatedDate = new Date(activationDate);
+                console.log(
+                  "📅 [DEBUG] Date d'activation:",
+                  activatedDate.toLocaleDateString("fr-FR")
+                );
+
+                let nextBilling = new Date(activatedDate);
+
+                // Calculer la prochaine facturation selon le type
+                if (userData.subscription_type === "monthly") {
+                  nextBilling.setMonth(nextBilling.getMonth() + 1);
+                  console.log(
+                    "📅 [DEBUG] +1 mois = ",
+                    nextBilling.toLocaleDateString("fr-FR")
+                  );
+                } else if (
+                  userData.subscription_type === "yearly" ||
+                  userData.subscription_type === "family"
+                ) {
+                  nextBilling.setFullYear(nextBilling.getFullYear() + 1);
+                  console.log(
+                    "📅 [DEBUG] +1 an = ",
+                    nextBilling.toLocaleDateString("fr-FR")
+                  );
+                }
+
+                // Formatage en français
+                return nextBilling.toLocaleDateString("fr-FR", {
+                  day: "numeric",
+                  month: "long",
+                  year: "numeric",
+                });
+              })()}
+            </Text>
           </View>
         </View>
       </View>

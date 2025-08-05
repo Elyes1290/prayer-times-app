@@ -1,10 +1,4 @@
-import React, {
-  useState,
-  useEffect,
-  useCallback,
-  useContext,
-  useRef,
-} from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import {
   View,
   Text,
@@ -18,7 +12,6 @@ import {
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import apiClient from "../utils/apiClient";
-import { SettingsContext } from "../contexts/SettingsContext";
 import { usePremium } from "../contexts/PremiumContext";
 import { LinearGradient } from "expo-linear-gradient";
 
@@ -46,8 +39,7 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
   onLoginSuccess,
   currentTheme = "dark",
 }) => {
-  const settings = useContext(SettingsContext);
-  const { forceLogout, activatePremiumAfterLogin } = usePremium();
+  const { forceLogout, checkPremiumStatus } = usePremium();
   const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState(""); // 🚀 NOUVEAU : Champ mot de passe
@@ -60,9 +52,7 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
   const [emailValid, setEmailValid] = useState(false);
   const [passwordValid, setPasswordValid] = useState(false);
   const [firstNameValid, setFirstNameValid] = useState(false);
-  const [emailTouched, setEmailTouched] = useState(false);
-  const [passwordTouched, setPasswordTouched] = useState(false);
-  const [firstNameTouched, setFirstNameTouched] = useState(false);
+  // Variables d'état pour la validation (supprimées car non utilisées actuellement)
 
   // 🚀 NOUVEAU : Toast local pour la modal
   const [localToast, setLocalToast] = useState<{
@@ -110,6 +100,23 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
   const passwordRef = useRef<TextInput>(null);
   const firstNameRef = useRef<TextInput>(null);
 
+  const hideLocalToast = useCallback(() => {
+    Animated.parallel([
+      Animated.timing(toastTranslateY, {
+        toValue: -100,
+        duration: 250,
+        useNativeDriver: true,
+      }),
+      Animated.timing(toastOpacity, {
+        toValue: 0,
+        duration: 250,
+        useNativeDriver: true,
+      }),
+    ]).start(() => {
+      setLocalToast(null);
+    });
+  }, [toastTranslateY, toastOpacity]);
+
   // 🚀 NOUVEAU : Fonction locale pour afficher le toast (dans la modal)
   const showLocalToast = useCallback(
     (toast: {
@@ -141,25 +148,8 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
         hideLocalToast();
       }, 3000);
     },
-    [toastTranslateY, toastOpacity]
+    [toastTranslateY, toastOpacity, hideLocalToast]
   );
-
-  const hideLocalToast = useCallback(() => {
-    Animated.parallel([
-      Animated.timing(toastTranslateY, {
-        toValue: -100,
-        duration: 250,
-        useNativeDriver: true,
-      }),
-      Animated.timing(toastOpacity, {
-        toValue: 0,
-        duration: 250,
-        useNativeDriver: true,
-      }),
-    ]).start(() => {
-      setLocalToast(null);
-    });
-  }, [toastTranslateY, toastOpacity]);
 
   // 🚀 NOUVEAU : Vérifier si l'utilisateur est déjà connecté au démarrage
   useEffect(() => {
@@ -204,6 +194,58 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
     checkExistingUser();
   }, [hasCheckedUser, onLoginSuccess]);
 
+  // 🔄 NOUVEAU : Listener pour détecter les changements de connexion en temps réel
+  useEffect(() => {
+    let interval: ReturnType<typeof setInterval>;
+
+    const pollConnectionStatus = async () => {
+      try {
+        const explicitConnection = await AsyncStorage.getItem(
+          "explicit_connection"
+        );
+        const userDataString = await AsyncStorage.getItem("user_data");
+
+        const shouldBeConnected =
+          explicitConnection === "true" && userDataString;
+
+        // 🎯 Si le statut a changé, mettre à jour l'interface
+        if (shouldBeConnected && !isConnected) {
+          console.log(
+            "🔄 [LISTENER] Auto-connexion détectée - mise à jour de l'interface"
+          );
+          const userData = JSON.parse(userDataString);
+          setIsConnected(true);
+          setUserData(userData);
+
+          if (onLoginSuccess) {
+            onLoginSuccess(userData);
+          }
+        } else if (!shouldBeConnected && isConnected) {
+          console.log(
+            "🔄 [LISTENER] Déconnexion détectée - mise à jour de l'interface"
+          );
+          setIsConnected(false);
+          setUserData(null);
+
+          if (onLoginSuccess) {
+            onLoginSuccess(null);
+          }
+        }
+      } catch (error) {
+        console.error("Erreur polling connexion:", error);
+      }
+    };
+
+    // Vérifier toutes les 500ms (seulement quand la modal est visible)
+    interval = setInterval(pollConnectionStatus, 500);
+
+    return () => {
+      if (interval) {
+        clearInterval(interval);
+      }
+    };
+  }, [isConnected, onLoginSuccess]);
+
   // 🚀 NOUVEAU : Mode professionnel - pas de chargement automatique du prénom
   // L'utilisateur doit saisir son prénom manuellement à chaque fois
   useEffect(() => {
@@ -246,6 +288,7 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
         subscription_type: userData.subscription_type,
         subscription_id: userData.subscription_id,
         premium_expiry: userData.premium_expiry,
+        premium_activated_at: userData.premium_activated_at, // 🔑 AJOUT MANQUANT !
         language: userData.language,
         last_sync: new Date().toISOString(),
         device_id: userData.device_id,
@@ -344,6 +387,9 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
             // Synchroniser les données utilisateur
             await syncUserDataToLocal(userData);
 
+            // 🚀 NOUVEAU : Forcer la recharge du PremiumContext après login
+            await checkPremiumStatus();
+
             showLocalToast({
               type: "success",
               title: t("toasts.success"),
@@ -361,17 +407,55 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
             });
           }
         } else {
-          // Inscription - Redirection vers le paiement
+          // Inscription - Vérifier si l'email existe d'abord
           try {
+            // 🚀 NOUVEAU : Vérifier si l'email existe déjà sans créer l'utilisateur
+            console.log("🔍 Vérification existence email:", currentEmail);
+
+            const checkResponse = await fetch(
+              `https://elyesnaitliman.ch/api/auth.php?action=check_email&email=${encodeURIComponent(
+                currentEmail
+              )}`,
+              {
+                method: "GET",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+              }
+            );
+
+            const checkResult = await checkResponse.json();
+            console.log("🔍 Résultat vérification email:", checkResult);
+
+            if (checkResult.data && checkResult.data.exists === true) {
+              console.log("❌ Email existe déjà !");
+              showLocalToast({
+                type: "error",
+                title: t("toasts.error"),
+                message:
+                  "Un compte existe déjà avec cet email. Connectez-vous plutôt.",
+              });
+              setIsLoading(false);
+              return;
+            }
+
+            // Email libre - redirection vers paiement
+            console.log("✅ Email libre - redirection vers paiement");
+
             // Stocker temporairement les données d'inscription
+            const registrationData = {
+              email: currentEmail,
+              password: currentPassword,
+              user_first_name: currentFirstName,
+              language: "fr",
+            };
+            console.log(
+              "💾 Stockage des données d'inscription:",
+              registrationData
+            );
             await AsyncStorage.setItem(
               "pending_registration",
-              JSON.stringify({
-                email: currentEmail,
-                password: currentPassword,
-                user_first_name: currentFirstName,
-                language: "fr",
-              })
+              JSON.stringify(registrationData)
             );
 
             // Rediriger vers la page de paiement
@@ -379,12 +463,12 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
             router.push("/premium-payment");
             setIsLoading(false);
             return;
-          } catch (paymentError) {
-            console.error("❌ Erreur paiement:", paymentError);
-            showToast({
+          } catch (emailCheckError: any) {
+            console.error("❌ Erreur vérification email:", emailCheckError);
+            showLocalToast({
               type: "error",
-              title: "Erreur de paiement",
-              message: "Impossible d'accéder à la page de paiement",
+              title: t("toasts.error"),
+              message: t("toasts.network_error"),
             });
             setIsLoading(false);
             return;
@@ -401,7 +485,7 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
         setIsLoading(false);
       }
     },
-    [isLogin, t, showLocalToast, showToast, onLoginSuccess]
+    [isLogin, t, showLocalToast, showToast, onLoginSuccess, syncUserDataToLocal]
   );
 
   // 🚀 NOUVEAU : Fonction de déconnexion optimisée
@@ -538,7 +622,6 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
             setIsLogin(true);
             // Vider le champ prénom en mode connexion
             setFirstName("");
-            setFirstNameTouched(false);
           }}
         >
           <Text
@@ -615,10 +698,6 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
             value={firstName}
             onChangeText={(text) => {
               setFirstName(text);
-              setFirstNameTouched(true); // Toujours marquer comme touché
-            }}
-            onFocus={() => {
-              setFirstNameTouched(true); // Marquer comme touché au focus
             }}
             editable={!isLoading}
           />
@@ -664,10 +743,6 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
           value={email}
           onChangeText={(text) => {
             setEmail(text);
-            setEmailTouched(true); // Toujours marquer comme touché
-          }}
-          onFocus={() => {
-            setEmailTouched(true); // Marquer comme touché au focus
           }}
           keyboardType="email-address"
           autoCapitalize="none"
@@ -718,10 +793,6 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
           value={password}
           onChangeText={(text) => {
             setPassword(text);
-            setPasswordTouched(true); // Toujours marquer comme touché
-          }}
-          onFocus={() => {
-            setPasswordTouched(true); // Marquer comme touché au focus
           }}
           onBlur={() => {
             // Forcer la validation quand on quitte le champ

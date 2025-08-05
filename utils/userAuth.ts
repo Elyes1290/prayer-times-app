@@ -125,6 +125,16 @@ export const cleanupObsoleteUserData = async (): Promise<void> => {
       "explicit_connection"
     );
 
+    // 🚀 NOUVEAU : Vérifier s'il y a un processus de paiement en cours
+    const pendingRegistration = await AsyncStorage.getItem(
+      "pending_registration"
+    );
+
+    if (pendingRegistration) {
+      console.log("🔍 Processus de paiement en cours - pas de nettoyage");
+      return; // Ne pas nettoyer pendant le processus de paiement
+    }
+
     if (explicitConnection === "true") {
       console.log(
         "🔍 Connexion explicite détectée - nettoyage sélectif uniquement"
@@ -141,6 +151,7 @@ export const cleanupObsoleteUserData = async (): Promise<void> => {
         "lastBackupTime", // Métadonnées obsolètes
         "autoBackupEnabled", // Paramètres obsolètes
         "apiSyncEnabled", // Paramètres obsolètes
+        // 🚀 NOUVEAU : NE PAS supprimer pending_registration pendant le processus de paiement
       ];
 
       await AsyncStorage.multiRemove(keysToRemove);

@@ -5,8 +5,8 @@
 
 import { useContext } from "react";
 import { useColorScheme } from "react-native";
-import { Colors } from "@/constants/Colors";
-import { SettingsContext } from "@/contexts/SettingsContext";
+import { Colors } from "../constants/Colors";
+import { SettingsContext } from "../contexts/SettingsContext";
 
 // Images de fond selon le thème
 const backgroundImages = {

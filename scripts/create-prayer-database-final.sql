@@ -90,6 +90,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `sync_enabled` tinyint(1) DEFAULT 1,
   
   -- 📊 Métadonnées système
+  `created_from` enum('app_registration','stripe_payment','stripe_dashboard','admin_import') DEFAULT 'app_registration' COMMENT 'Source de création du compte',
   `created_at` timestamp DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `last_seen` timestamp NULL DEFAULT NULL,
@@ -250,7 +251,7 @@ CREATE TABLE IF NOT EXISTS `premium_purchases` (
   `purchase_date` datetime DEFAULT CURRENT_TIMESTAMP,
   `purchase_amount` decimal(10,2) DEFAULT NULL,
   `currency` varchar(3) DEFAULT 'EUR',
-  `payment_method` varchar(50) DEFAULT NULL,
+  `payment_method` varchar(50) DEFAULT 'stripe',
   `transaction_id` varchar(255) DEFAULT NULL,
   `store_receipt` text DEFAULT NULL COMMENT 'Reçu complet du store',
   `status` enum('active','cancelled','expired','refunded') DEFAULT 'active',
@@ -266,20 +267,99 @@ CREATE TABLE IF NOT EXISTS `premium_purchases` (
   KEY `status` (`status`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Historique des achats premium';
 
+-- ✅ Table des abonnements Stripe (gestion technique)
+CREATE TABLE IF NOT EXISTS `premium_subscriptions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `stripe_session_id` varchar(255) DEFAULT NULL COMMENT 'Session ID Stripe (temporaire)',
+  `stripe_subscription_id` varchar(255) DEFAULT NULL COMMENT 'ID abonnement Stripe réel',
+  `stripe_customer_id` varchar(255) DEFAULT NULL COMMENT 'ID customer Stripe',
+  `subscription_type` enum('monthly','yearly','family') NOT NULL,
+  `status` enum('active','canceled','past_due','unpaid','incomplete') DEFAULT 'active',
+  `start_date` datetime DEFAULT CURRENT_TIMESTAMP,
+  `end_date` datetime NOT NULL,
+  `created_at` timestamp DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `stripe_subscription_id` (`stripe_subscription_id`),
+  FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE,
+  KEY `user_id` (`user_id`),
+  KEY `stripe_session_id` (`stripe_session_id`),
+  KEY `stripe_customer_id` (`stripe_customer_id`),
+  KEY `status` (`status`),
+  KEY `end_date` (`end_date`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Abonnements Stripe (gestion technique)';
+
+-- ✅ Table des utilisateurs premium (statut actuel)
+CREATE TABLE IF NOT EXISTS `premium_users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `subscription_id` int(11) DEFAULT NULL COMMENT 'Référence vers premium_subscriptions',
+  `purchase_id` int(11) DEFAULT NULL COMMENT 'Référence vers premium_purchases',
+  `is_active` tinyint(1) DEFAULT 1,
+  `premium_features` json DEFAULT NULL COMMENT 'Liste des fonctionnalités actives',
+  `activated_at` timestamp DEFAULT CURRENT_TIMESTAMP,
+  `deactivated_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `user_id` (`user_id`),
+  FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE,
+  FOREIGN KEY (`subscription_id`) REFERENCES `premium_subscriptions`(`id`) ON DELETE SET NULL,
+  FOREIGN KEY (`purchase_id`) REFERENCES `premium_purchases`(`id`) ON DELETE SET NULL,
+  KEY `is_active` (`is_active`),
+  KEY `activated_at` (`activated_at`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Statut premium des utilisateurs';
+
+-- ✅ Table des paiements Stripe (détails techniques)
+CREATE TABLE IF NOT EXISTS `premium_payments` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `subscription_id` int(11) DEFAULT NULL,
+  `purchase_id` int(11) DEFAULT NULL,
+  `stripe_payment_intent_id` varchar(255) DEFAULT NULL,
+  `stripe_invoice_id` varchar(255) DEFAULT NULL,
+  `amount` int(11) NOT NULL COMMENT 'Montant en centimes',
+  `currency` varchar(3) DEFAULT 'EUR',
+  `status` enum('succeeded','failed','pending','canceled','requires_action') DEFAULT 'pending',
+  `payment_date` datetime DEFAULT CURRENT_TIMESTAMP,
+  `created_at` timestamp DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `stripe_payment_intent_id` (`stripe_payment_intent_id`),
+  FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE,
+  FOREIGN KEY (`subscription_id`) REFERENCES `premium_subscriptions`(`id`) ON DELETE SET NULL,
+  FOREIGN KEY (`purchase_id`) REFERENCES `premium_purchases`(`id`) ON DELETE SET NULL,
+  KEY `user_id` (`user_id`),
+  KEY `status` (`status`),
+  KEY `payment_date` (`payment_date`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Détails des paiements Stripe';
+
 -- ✅ Table des statistiques utilisateur (analytics)
 CREATE TABLE IF NOT EXISTS `user_stats` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
-  `stats_data` json NOT NULL COMMENT 'Données statistiques complètes en JSON',
-  `date` date DEFAULT CURRENT_DATE,
+  `date` date DEFAULT (CURRENT_DATE),
+  `prayers_completed` int(11) DEFAULT 0,
+  `dhikr_count` int(11) DEFAULT 0,
+  `quran_verses_read` int(11) DEFAULT 0,
+  `hadiths_read` int(11) DEFAULT 0,
+  `favorites_added` int(11) DEFAULT 0,
+  `content_downloaded` int(11) DEFAULT 0,
+  `app_usage_minutes` int(11) DEFAULT 0,
+  `streak_days` int(11) DEFAULT 0,
   `created_at` timestamp DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   
   PRIMARY KEY (`id`),
   UNIQUE KEY `user_date` (`user_id`, `date`),
   FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE,
-  KEY `date` (`date`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Statistiques utilisateur';
+  KEY `date` (`date`),
+  KEY `user_id` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Statistiques utilisateur avec colonnes dédiées';
 
 -- ✅ Table des logs de prière (suivi détaillé)
 CREATE TABLE IF NOT EXISTS `prayer_logs` (
@@ -460,6 +540,36 @@ SELECT
 FROM users 
 WHERE status = 'active';
 
+-- 🎯 Vue des utilisateurs premium (MANQUANTE !)
+CREATE OR REPLACE VIEW `v_premium_users` AS
+SELECT 
+  u.id,
+  u.email,
+  u.user_first_name,
+  u.premium_status,
+  u.subscription_type,
+  u.subscription_id,
+  u.premium_expiry,
+  u.premium_activated_at,
+  pu.is_active as premium_user_active,
+  pu.premium_features,
+  ps.status as stripe_status,
+  ps.stripe_subscription_id,
+  pp.purchase_amount,
+  pp.currency,
+  DATEDIFF(u.premium_expiry, NOW()) as days_remaining,
+  CASE 
+    WHEN u.premium_expiry < NOW() THEN 'expired'
+    WHEN DATEDIFF(u.premium_expiry, NOW()) <= 7 THEN 'expiring_soon'
+    ELSE 'active'
+  END as premium_health_status
+FROM users u
+LEFT JOIN premium_users pu ON u.id = pu.user_id
+LEFT JOIN premium_subscriptions ps ON u.id = ps.user_id AND ps.status = 'active'
+LEFT JOIN premium_purchases pp ON u.id = pp.user_id AND pp.status = 'active'
+WHERE u.premium_status = 1
+ORDER BY u.premium_activated_at DESC;
+
 -- ✅ Index supplémentaires pour optimiser les performances
 
 -- Index pour les recherches de contenu
@@ -587,3 +697,18 @@ SELECT
     'Points totaux' AS stat_name,
     SUM(points) AS stat_value
 FROM achievements;
+
+-- =================================================
+-- 🔧 CORRECTIONS POST-CRÉATION (DATA FIXES)
+-- =================================================
+
+-- Corriger les utilisateurs premium sans date d'activation
+-- 🎯 LOGIQUE : Si l'utilisateur est premium mais sans date d'activation,
+-- on considère qu'il s'est abonné il y a au moins quelques jours/semaines
+UPDATE users 
+SET premium_activated_at = COALESCE(
+    created_at,
+    DATE_SUB(NOW(), INTERVAL 2 WEEK)  -- Par défaut, abonné depuis 2 semaines
+)
+WHERE premium_status = 1 
+AND premium_activated_at IS NULL;

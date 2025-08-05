@@ -2,8 +2,12 @@
 -- Exécuter ce script dans votre base de données MySQL
 
 -- 1. Corriger les utilisateurs premium sans date d'activation
+-- 🎯 LOGIQUE : Abonné depuis au moins 2 semaines pour avoir une facturation réaliste
 UPDATE users 
-SET premium_activated_at = created_at 
+SET premium_activated_at = COALESCE(
+    created_at,
+    DATE_SUB(NOW(), INTERVAL 2 WEEK)
+)
 WHERE premium_status = 1 
 AND premium_activated_at IS NULL;
 

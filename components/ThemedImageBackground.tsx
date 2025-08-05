@@ -5,7 +5,7 @@
 
 import React from "react";
 import { ImageBackground, ImageBackgroundProps } from "react-native";
-import { useThemeAssets } from "@/hooks/useThemeAssets";
+import { useThemeAssets } from "../hooks/useThemeAssets";
 
 interface ThemedImageBackgroundProps
   extends Omit<ImageBackgroundProps, "source"> {

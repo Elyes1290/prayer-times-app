@@ -1,10 +1,10 @@
 import * as Location from "expo-location";
 import React, { useCallback, useEffect, useRef, useState } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
   Animated,
   AppState,
   Image,
-  ImageBackground,
   StyleSheet,
   Text,
   View,
@@ -212,6 +212,32 @@ export default function QiblaScreen() {
     boolean | null
   >(null);
   const [isInitializing, setIsInitializing] = useState(true);
+  const [userDeniedPermission, setUserDeniedPermission] = useState(false); // 🚀 NOUVEAU : Mémoriser le refus
+
+  // 🚀 NOUVEAU : Charger le statut de refus au démarrage
+  useEffect(() => {
+    const loadDeniedStatus = async () => {
+      try {
+        const denied = await AsyncStorage.getItem("@qibla_permission_denied");
+        console.log("🚧 [QIBLA DEBUG] Permission refusée sauvée:", denied);
+        if (denied === "true") {
+          console.log(
+            "🚧 [QIBLA DEBUG] Utilisateur a déjà refusé - arrêt total"
+          );
+          setUserDeniedPermission(true);
+          setLocationPermissionGranted(false);
+          setIsInitializing(false); // 🚀 Arrêter l'initialisation immédiatement
+        } else {
+          console.log(
+            "🚧 [QIBLA DEBUG] Pas de refus sauvé - initialisation possible"
+          );
+        }
+      } catch (error) {
+        console.error("Erreur chargement statut permission:", error);
+      }
+    };
+    loadDeniedStatus();
+  }, []);
 
   // Animation: valeur de rotation de la boussole
   const animatedHeading = useRef(new Animated.Value(0)).current;
@@ -256,18 +282,59 @@ export default function QiblaScreen() {
   // Fonction pour initialiser la localisation et la boussole
   const initializeQibla = useCallback(async () => {
     try {
+      console.log(
+        "🚧 [QIBLA DEBUG] DÉBUT initializeQibla() - userDeniedPermission:",
+        userDeniedPermission
+      );
+
+      // 🚀 NOUVELLE SÉCURITÉ : Double vérification avant tout
+      if (userDeniedPermission) {
+        console.log("🚧 [QIBLA DEBUG] ARRÊT - utilisateur a refusé");
+        return;
+      }
+
       setIsInitializing(true);
 
-      // Vérifier les permissions
+      // 🚀 NOUVEAU : Vérifier AVANT si la localisation est disponible au niveau système
+      const isLocationEnabled = await Location.hasServicesEnabledAsync();
+      console.log(
+        "🚧 [QIBLA DEBUG] Localisation système activée:",
+        isLocationEnabled
+      );
+
+      if (!isLocationEnabled) {
+        console.log("🚧 [QIBLA DEBUG] Localisation système DÉSACTIVÉE - arrêt");
+        setLocationPermissionGranted(false);
+        setUserDeniedPermission(true);
+        AsyncStorage.setItem("@qibla_permission_denied", "true").catch(
+          console.error
+        );
+        setIsInitializing(false);
+        return;
+      }
+
+      // Vérifier les permissions seulement si localisation système OK
       let { status } = await Location.requestForegroundPermissionsAsync();
+      console.log("🚧 [QIBLA DEBUG] Status permission:", status);
 
       if (status !== "granted") {
+        console.log(
+          "🚧 [QIBLA DEBUG] Permission REFUSÉE - sauvegarde du choix"
+        );
         setLocationPermissionGranted(false);
+        setUserDeniedPermission(true); // 🚀 NOUVEAU : Marquer que l'utilisateur a refusé
+        // 🚀 NOUVEAU : Persister le refus
+        AsyncStorage.setItem("@qibla_permission_denied", "true").catch(
+          console.error
+        );
         setIsInitializing(false);
         return;
       }
 
       setLocationPermissionGranted(true);
+      setUserDeniedPermission(false); // 🚀 NOUVEAU : Réinitialiser le refus si permission accordée
+      // 🚀 NOUVEAU : Supprimer le refus persisté
+      AsyncStorage.removeItem("@qibla_permission_denied").catch(console.error);
 
       // Récupérer la position actuelle
       const loc = await Location.getCurrentPositionAsync({
@@ -292,16 +359,44 @@ export default function QiblaScreen() {
       });
 
       setIsInitializing(false);
-    } catch (error) {
+    } catch (error: any) {
+      console.log("🚧 [QIBLA DEBUG] ERREUR CATCHÉE:", error?.message);
+
+      // 🚀 NOUVEAU : Si erreur = localisation désactivée système, traiter comme un refus permanent
+      if (
+        error?.message &&
+        error.message.includes("unsatisfied device settings")
+      ) {
+        console.log(
+          "🚧 [QIBLA DEBUG] Localisation système désactivée - traitement comme refus"
+        );
+        setUserDeniedPermission(true);
+        AsyncStorage.setItem("@qibla_permission_denied", "true").catch(
+          console.error
+        );
+      }
+
       errorLog("Erreur lors de l'initialisation de la Qibla:", error);
       setLocationPermissionGranted(false);
       setIsInitializing(false);
     }
-  }, []);
+  }, [userDeniedPermission]);
 
   // useEffect pour l'initialisation au montage
   useEffect(() => {
-    initializeQibla();
+    // 🚀 CORRECTION : Ne pas essayer si l'utilisateur a déjà refusé
+    console.log(
+      "🚧 [QIBLA DEBUG] useEffect principal - userDeniedPermission:",
+      userDeniedPermission
+    );
+    if (!userDeniedPermission) {
+      console.log("🚧 [QIBLA DEBUG] Démarrage initializeQibla()");
+      initializeQibla();
+    } else {
+      console.log(
+        "🚧 [QIBLA DEBUG] Utilisateur a refusé - PAS d'initialisation"
+      );
+    }
 
     // Cleanup au démontage
     return () => {
@@ -309,24 +404,39 @@ export default function QiblaScreen() {
         headingSubscription.current.remove();
       }
     };
-  }, [initializeQibla]);
+  }, [initializeQibla, userDeniedPermission]);
 
   // useFocusEffect pour réessayer quand l'écran devient actif
   useFocusEffect(
     useCallback(() => {
+      // 🚀 CORRECTION : Ne pas redemander si l'utilisateur a déjà refusé
+      if (userDeniedPermission) {
+        return; // Respecter le choix de l'utilisateur
+      }
+
       // Si on n'a pas les permissions ou qu'on initialise encore, réessayer
       if (locationPermissionGranted === false || isInitializing) {
         initializeQibla();
       }
-    }, [locationPermissionGranted, isInitializing, initializeQibla])
+    }, [
+      locationPermissionGranted,
+      isInitializing,
+      initializeQibla,
+      userDeniedPermission,
+    ])
   );
 
   // Écouter les changements d'état de l'app (retour depuis les paramètres)
   useEffect(() => {
     const handleAppStateChange = (nextAppState: string) => {
-      if (nextAppState === "active" && locationPermissionGranted === false) {
+      // 🚀 CORRECTION : Ne pas redemander si l'utilisateur a déjà refusé
+      if (
+        nextAppState === "active" &&
+        locationPermissionGranted === false &&
+        !userDeniedPermission
+      ) {
         // L'app devient active et on n'avait pas les permissions avant
-        // Réessayer d'initialiser la Qibla
+        // Réessayer d'initialiser la Qibla seulement si l'utilisateur n'a pas explicitement refusé
         initializeQibla();
       }
     };
@@ -339,7 +449,7 @@ export default function QiblaScreen() {
     return () => {
       subscription?.remove();
     };
-  }, [locationPermissionGranted, initializeQibla]);
+  }, [locationPermissionGranted, initializeQibla, userDeniedPermission]);
 
   useEffect(() => {
     if (heading !== null) {
@@ -362,7 +472,7 @@ export default function QiblaScreen() {
       }
       lastHeading.current = target; // 👈 important ! On mémorise la vraie position
     }
-  }, [heading]);
+  }, [heading, animatedHeading]);
 
   // Nouveau useEffect pour vérifier l'alignement avec la Qibla
   useEffect(() => {
@@ -380,7 +490,7 @@ export default function QiblaScreen() {
         }).start();
       }
     }
-  }, [heading, direction, isPointingToQibla]);
+  }, [heading, direction, isPointingToQibla, needleColorAnimation]);
 
   const compassRotation = animatedHeading.interpolate({
     inputRange: [-360, 0],
@@ -420,73 +530,83 @@ export default function QiblaScreen() {
         {locationPermissionGranted === false && !isInitializing && (
           <View style={styles.statusContainer}>
             <Text style={styles.statusTextError}>
-              Permission de localisation requise
+              {userDeniedPermission
+                ? "Localisation désactivée"
+                : "Permission de localisation requise"}
             </Text>
             <Text style={styles.statusSubText}>
-              Appuyez sur &quot;Autoriser&quot; et revenez à l&apos;application
+              {userDeniedPermission
+                ? "Pour utiliser la boussole Qibla, activez la localisation dans les paramètres de votre téléphone."
+                : 'Appuyez sur "Autoriser" et revenez à l\'application'}
             </Text>
           </View>
         )}
 
-        <View style={styles.compassWrap}>
-          {/* Boussole qui tourne */}
-          <Animated.View
-            style={[
-              styles.compassContainer,
-              { transform: [{ rotate: compassRotation }] },
-            ]}
-          >
-            <Image source={compassImg} style={styles.compass} />
-            {/* Kaaba sur le pourtour du cercle */}
-            <Image
-              source={kaabaImg}
+        {/* 🚀 NOUVEAU : Masquer la boussole si localisation désactivée */}
+        {!userDeniedPermission && (
+          <View style={styles.compassWrap}>
+            {/* Boussole qui tourne */}
+            <Animated.View
               style={[
-                styles.kaabaIcon,
+                styles.compassContainer,
+                { transform: [{ rotate: compassRotation }] },
+              ]}
+            >
+              <Image source={compassImg} style={styles.compass} />
+              {/* Kaaba sur le pourtour du cercle */}
+              <Image
+                source={kaabaImg}
+                style={[
+                  styles.kaabaIcon,
+                  {
+                    position: "absolute",
+                    width: COMPASS_SIZE / 8,
+                    height: COMPASS_SIZE / 8,
+                    left: kaabaPos.x - COMPASS_SIZE / 16,
+                    top: kaabaPos.y - COMPASS_SIZE / 16,
+                    zIndex: 5,
+                  },
+                ]}
+              />
+            </Animated.View>
+            {/* Aiguille bleue (toujours verticale) */}
+            <Animated.View
+              style={[
+                styles.needle,
+                styles.qiblaNeedle,
                 {
-                  position: "absolute",
-                  width: COMPASS_SIZE / 8,
-                  height: COMPASS_SIZE / 8,
-                  left: kaabaPos.x - COMPASS_SIZE / 16,
-                  top: kaabaPos.y - COMPASS_SIZE / 16,
-                  zIndex: 5,
+                  left: COMPASS_SIZE / 2 - 2,
+                  top: COMPASS_SIZE / 2 - NEEDLE_HEIGHT,
+                  alignItems: "center",
+                  justifyContent: "flex-start",
                 },
               ]}
-            />
-          </Animated.View>
-          {/* Aiguille bleue (toujours verticale) */}
-          <Animated.View
-            style={[
-              styles.needle,
-              styles.qiblaNeedle,
-              {
-                left: COMPASS_SIZE / 2 - 2,
-                top: COMPASS_SIZE / 2 - NEEDLE_HEIGHT,
-                alignItems: "center",
-                justifyContent: "flex-start",
-              },
-            ]}
-          >
-            <Animated.View
-              style={{
-                width: 4,
-                height: NEEDLE_HEIGHT,
-                backgroundColor: needleColor,
-                borderRadius: 2,
-              }}
-            />
-          </Animated.View>
-        </View>
+            >
+              <Animated.View
+                style={{
+                  width: 4,
+                  height: NEEDLE_HEIGHT,
+                  backgroundColor: needleColor,
+                  borderRadius: 2,
+                }}
+              />
+            </Animated.View>
+          </View>
+        )}
 
-        <View style={styles.instructionsContainer}>
-          <Text
-            style={[
-              styles.instructions,
-              { fontSize: Math.min(width * 0.035, 15) },
-            ]}
-          >
-            {t("qibla_instructions")}
-          </Text>
-        </View>
+        {/* 🚀 NOUVEAU : Masquer les instructions si localisation désactivée */}
+        {!userDeniedPermission && (
+          <View style={styles.instructionsContainer}>
+            <Text
+              style={[
+                styles.instructions,
+                { fontSize: Math.min(width * 0.035, 15) },
+              ]}
+            >
+              {t("qibla_instructions")}
+            </Text>
+          </View>
+        )}
       </View>
     </ThemedImageBackground>
   );
