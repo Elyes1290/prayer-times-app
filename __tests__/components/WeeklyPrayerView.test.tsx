@@ -32,6 +32,25 @@ jest.mock("../../hooks/useThemeColor", () => ({
   useCurrentTheme: jest.fn(),
 }));
 
+// Mock pour forcer le format 12h dans les tests
+const originalToLocaleTimeString = Date.prototype.toLocaleTimeString;
+beforeAll(() => {
+  Date.prototype.toLocaleTimeString = function (
+    locales?: string | string[],
+    options?: Intl.DateTimeFormatOptions
+  ) {
+    const hour = this.getHours();
+    const minute = this.getMinutes().toString().padStart(2, "0");
+    const period = hour >= 12 ? "PM" : "AM";
+    const displayHour = hour === 0 ? 12 : hour > 12 ? hour - 12 : hour;
+    return `${displayHour}:${minute} ${period}`;
+  };
+});
+
+afterAll(() => {
+  Date.prototype.toLocaleTimeString = originalToLocaleTimeString;
+});
+
 describe("WeeklyPrayerView", () => {
   const mockColors = {
     cardBG: "#ffffff",
@@ -110,7 +129,7 @@ describe("WeeklyPrayerView", () => {
         />
       );
 
-      // Vérifier que les heures sont affichées (format 24h ou 12h selon la locale)
+      // Vérifier que les heures sont affichées (format 12h pour cohérence CI/CD)
       expect(screen.getAllByText(/6:?00/).length).toBeGreaterThan(0);
       expect(screen.getAllByText(/12:?00/).length).toBeGreaterThan(0);
       expect(screen.getAllByText(/6:?00 PM/).length).toBeGreaterThan(0);
