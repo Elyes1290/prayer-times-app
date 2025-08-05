@@ -5,10 +5,12 @@ import {
   TouchableOpacity,
   TextInput,
   ActivityIndicator,
+  Linking,
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { SettingsContext } from "../../contexts/SettingsContext";
+import apiClient from "../../utils/apiClient";
 
 // 🚀 Interface pour les props du composant
 interface AccountManagementSectionProps {
@@ -23,6 +25,7 @@ interface AccountManagementSectionProps {
   forceLogout: () => Promise<void>;
   t: any;
   setActiveSection: (section: string | null) => void;
+  navigation?: any; // Navigation pour accéder aux écrans
 }
 
 // 🚀 Composant principal de gestion de compte
@@ -34,6 +37,7 @@ export default function AccountManagementSection({
   forceLogout,
   t,
   setActiveSection,
+  navigation,
 }: AccountManagementSectionProps) {
   const settings = useContext(SettingsContext);
 
@@ -174,6 +178,45 @@ export default function AccountManagementSection({
         title: "Erreur",
         message: "Erreur lors de la déconnexion",
       });
+    }
+  };
+
+  const handleManageSubscription = async () => {
+    try {
+      setIsLoading(true);
+
+      // Récupérer le customer ID depuis les données utilisateur
+      const customerId = userData?.subscription_id;
+
+      if (!customerId) {
+        showToast({
+          type: "error",
+          title: "Erreur",
+          message: "Aucun abonnement trouvé pour votre compte",
+        });
+        return;
+      }
+
+      // Créer une session pour le Customer Portal
+      const response = await apiClient.createPortalSession(customerId);
+
+      if (response.success && response.data?.url) {
+        // Ouvrir le lien dans le navigateur
+        await Linking.openURL(response.data.url);
+      } else {
+        throw new Error(
+          response.message || "Erreur lors de la création de la session"
+        );
+      }
+    } catch (error) {
+      console.error("Erreur gestion abonnement:", error);
+      showToast({
+        type: "error",
+        title: "Erreur",
+        message: "Impossible d'accéder à la gestion de votre abonnement",
+      });
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -457,6 +500,27 @@ export default function AccountManagementSection({
 
       {/* Section Actions */}
       <View style={[styles.accountSection, { marginTop: 16 }]}>
+        {/* Bouton Gestion Abonnement - seulement pour les utilisateurs premium */}
+        {userData?.premium_status === 1 && (
+          <TouchableOpacity
+            style={[
+              styles.logoutButton,
+              { backgroundColor: "#3B82F6", marginBottom: 12 },
+            ]}
+            onPress={handleManageSubscription}
+            disabled={isLoading}
+          >
+            {isLoading ? (
+              <ActivityIndicator size="small" color="#FFFFFF" />
+            ) : (
+              <MaterialCommunityIcons name="crown" size={20} color="#FFFFFF" />
+            )}
+            <Text style={[styles.logoutButtonText, { marginLeft: 8 }]}>
+              Gérer mon abonnement
+            </Text>
+          </TouchableOpacity>
+        )}
+
         <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
           <MaterialCommunityIcons name="logout" size={20} color="#FF6B6B" />
           <Text style={styles.logoutButtonText}>Se déconnecter</Text>
@@ -465,11 +529,16 @@ export default function AccountManagementSection({
         <TouchableOpacity
           style={styles.deleteAccountButton}
           onPress={() => {
-            showToast({
-              type: "info",
-              title: "Suppression de compte",
-              message: "Contactez le support pour supprimer votre compte",
-            });
+            // Navigation vers la page de suppression de données
+            if (typeof navigation !== "undefined") {
+              navigation.navigate("data-deletion");
+            } else {
+              showToast({
+                type: "info",
+                title: "Suppression de compte",
+                message: "Contactez le support pour supprimer votre compte",
+              });
+            }
           }}
         >
           <MaterialCommunityIcons

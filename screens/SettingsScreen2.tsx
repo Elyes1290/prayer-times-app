@@ -17,7 +17,7 @@ import {
   ScrollView,
 } from "react-native";
 import { Picker } from "@react-native-picker/picker";
-import { useFocusEffect } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import ThemedImageBackground from "../components/ThemedImageBackground";
 import {
   SettingsContext,
@@ -185,6 +185,9 @@ interface OptimizedSettingsSectionsProps {
   hasPendingChanges: boolean;
   markPendingChanges: () => void;
   applyAllChanges: () => void;
+
+  // 🔧 AJOUTÉ : Navigation pour les boutons
+  navigation: any;
 }
 
 // Le composant SettingsSections reste identique (sera copié de l'original)
@@ -262,6 +265,8 @@ function SettingsSections({
   hasPendingChanges,
   markPendingChanges,
   applyAllChanges,
+  // 🔧 AJOUTÉ : Navigation pour les boutons
+  navigation,
 }: OptimizedSettingsSectionsProps) {
   const { t } = useTranslation();
 
@@ -888,6 +893,7 @@ function SettingsSections({
           forceLogout={forceLogout}
           t={t}
           setActiveSection={setActiveSection}
+          navigation={navigation}
         />
       ),
       about: (
@@ -1200,6 +1206,7 @@ export default function SettingsScreenOptimized() {
   const { user, activatePremium, checkExistingPremium, forceLogout } =
     usePremium();
   const { showToast } = useToast();
+  const navigation = useNavigation();
 
   // 🚀 OPTIMISATION : Utiliser le hook centralisé au lieu de 26 useState
   const {
@@ -2950,6 +2957,7 @@ ${
           selectedLang={i18n.language}
           onChangeLanguage={onChangeLanguage}
           reprogrammateNotifications={reprogrammateNotifications}
+          navigation={navigation}
           // 🏙️ États recherche ville depuis hooks optimisés
           cityInput={citySearch.citySearchState.cityInput}
           citySearchResults={citySearch.citySearchState.citySearchResults}

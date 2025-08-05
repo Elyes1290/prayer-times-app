@@ -59,7 +59,7 @@ try {
                 $fileSizeMB = round($fileSize / (1024 * 1024), 2);
                 
                 // Générer l'URL de téléchargement
-                $downloadUrl = "https://elyesnaitliman.ch/private/premium/$folder/" . urlencode($item);
+                $downloadUrl = "https://myadhanapp.com/private/premium/$folder/" . urlencode($item);
                 
                 $files[] = [
                     'name' => $item,

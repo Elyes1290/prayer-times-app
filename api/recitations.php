@@ -162,8 +162,8 @@ function getSurahInfo($reciter, $surah) {
             'surah' => $surah,
             'fileSize' => $fileSize,
             'fileSizeMB' => $fileSizeMB,
-            'streamUrl' => "https://elyesnaitliman.ch/api/recitations.php?action=stream&reciter=" . urlencode($reciter) . "&surah=" . urlencode($surah),
-            'downloadUrl' => "https://elyesnaitliman.ch/api/recitations.php?action=download&reciter=" . urlencode($reciter) . "&surah=" . urlencode($surah)
+            'streamUrl' => "https://myadhanapp.com/api/recitations.php?action=stream&reciter=" . urlencode($reciter) . "&surah=" . urlencode($surah),
+            'downloadUrl' => "https://myadhanapp.com/api/recitations.php?action=download&reciter=" . urlencode($reciter) . "&surah=" . urlencode($surah)
         ]
     ];
 }

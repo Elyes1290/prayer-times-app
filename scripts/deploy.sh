@@ -8,7 +8,7 @@ set -e  # Arrêter en cas d'erreur
 echo "🚀 Début du déploiement..."
 
 # Configuration
-SERVER_HOST="elyesnaitliman.ch"
+SERVER_HOST="myadhanapp.com"
 SERVER_USER="prayer"
 DEPLOY_PATH="/var/www/prayer-times-app"
 BACKUP_PATH="/var/www/backups"

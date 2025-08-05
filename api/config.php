@@ -43,7 +43,7 @@ if (isset($_ENV['ENABLE_DEBUG_LOGS']) && $_ENV['ENABLE_DEBUG_LOGS'] === 'true') 
 }
 
 // 🔐 SÉCURITÉ : Configuration CORS sécurisée
-$allowedOrigins = $_ENV['CORS_ALLOWED_ORIGINS'] ?? 'https://elyesnaitliman.ch';
+$allowedOrigins = $_ENV['CORS_ALLOWED_ORIGINS'] ?? 'https://myadhanapp.com';
 $allowedOriginsArray = explode(',', $allowedOrigins);
 $origin = $_SERVER['HTTP_ORIGIN'] ?? '';
 
@@ -56,7 +56,7 @@ if (in_array($origin, $allowedOriginsArray)) {
     if ($bypassRateLimit && (strpos($origin, 'localhost') !== false || strpos($origin, '127.0.0.1') !== false)) {
         header("Access-Control-Allow-Origin: $origin");
     } else {
-        header("Access-Control-Allow-Origin: https://elyesnaitliman.ch");
+        header("Access-Control-Allow-Origin: https://myadhanapp.com");
     }
 }
 
@@ -94,7 +94,7 @@ define('DB_PORT', $_ENV['DB_PORT'] ?? 3306);
 // 🔐 SÉCURITÉ : Configuration sécurité - UTILISE LE SYSTÈME EXISTANT
 define('API_SECRET_KEY', $_ENV['API_SECRET_KEY'] ?? 'prayer_app_secret_2024_' . hash('sha256', DB_NAME . DB_USER . date('Y-m-d')));
 define('JWT_SECRET', $_ENV['JWT_SECRET'] ?? hash('sha256', API_SECRET_KEY . 'jwt_salt_' . date('Y-m-d')));
-define('API_BASE_URL', $_ENV['API_BASE_URL'] ?? 'https://elyesnaitliman.ch/api');
+define('API_BASE_URL', $_ENV['API_BASE_URL'] ?? 'https://myadhanapp.com/api');
 
 // 🔐 SÉCURITÉ AVANCÉE : Configuration de sécurité additionnelle
 define('BCRYPT_ROUNDS', (int)($_ENV['BCRYPT_ROUNDS'] ?? 12));

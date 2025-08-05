@@ -413,7 +413,7 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
             console.log("🔍 Vérification existence email:", currentEmail);
 
             const checkResponse = await fetch(
-              `https://elyesnaitliman.ch/api/auth.php?action=check_email&email=${encodeURIComponent(
+              `https://myadhanapp.com/api/auth.php?action=check_email&email=${encodeURIComponent(
                 currentEmail
               )}`,
               {

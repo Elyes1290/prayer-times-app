@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Demande de suppression de données - Prayer Times App</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+
+      .container {
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        padding: 40px;
+        max-width: 600px;
+        width: 100%;
+      }
+
+      .header {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .header h1 {
+        color: #333;
+        font-size: 28px;
+        margin-bottom: 10px;
+      }
+
+      .header p {
+        color: #666;
+        font-size: 16px;
+        line-height: 1.6;
+      }
+
+      .warning {
+        background: #fff3cd;
+        border: 1px solid #ffeaa7;
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 25px;
+      }
+
+      .warning h3 {
+        color: #856404;
+        margin-bottom: 10px;
+        font-size: 18px;
+      }
+
+      .warning p {
+        color: #856404;
+        font-size: 14px;
+        line-height: 1.5;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: #333;
+      }
+
+      input[type="email"],
+      textarea,
+      select {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid #e1e5e9;
+        border-radius: 8px;
+        font-size: 16px;
+        transition: border-color 0.3s;
+      }
+
+      input[type="email"]:focus,
+      textarea:focus,
+      select:focus {
+        outline: none;
+        border-color: #667eea;
+      }
+
+      textarea {
+        resize: vertical;
+        min-height: 100px;
+      }
+
+      .submit-btn {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        padding: 15px 30px;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        width: 100%;
+        transition: transform 0.2s;
+      }
+
+      .submit-btn:hover {
+        transform: translateY(-2px);
+      }
+
+      .submit-btn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      .success-message {
+        background: #d4edda;
+        border: 1px solid #c3e6cb;
+        border-radius: 8px;
+        padding: 15px;
+        margin-top: 20px;
+        color: #155724;
+        display: none;
+      }
+
+      .error-message {
+        background: #f8d7da;
+        border: 1px solid #f5c6cb;
+        border-radius: 8px;
+        padding: 15px;
+        margin-top: 20px;
+        color: #721c24;
+        display: none;
+      }
+
+      .loading {
+        display: none;
+        text-align: center;
+        margin-top: 20px;
+      }
+
+      .spinner {
+        border: 3px solid #f3f3f3;
+        border-top: 3px solid #667eea;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        animation: spin 1s linear infinite;
+        margin: 0 auto 10px;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      .footer {
+        text-align: center;
+        margin-top: 30px;
+        padding-top: 20px;
+        border-top: 1px solid #eee;
+        color: #666;
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>🗑️ Demande de suppression de données</h1>
+        <p>
+          Vous pouvez demander la suppression de vos données personnelles
+          collectées par l'application Prayer Times App.
+        </p>
+      </div>
+
+      <div class="warning">
+        <h3>⚠️ Attention</h3>
+        <p>
+          Cette action est irréversible. Une fois votre demande approuvée,
+          toutes vos données personnelles seront définitivement supprimées de
+          nos serveurs.
+        </p>
+      </div>
+
+      <form id="deletionForm">
+        <div class="form-group">
+          <label for="email">Adresse email *</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            placeholder="votre@email.com"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="reason">Raison de la suppression</label>
+          <select id="reason" name="reason">
+            <option value="">Sélectionnez une raison</option>
+            <option value="privacy">Préoccupations de confidentialité</option>
+            <option value="no_longer_using">
+              Je n'utilise plus l'application
+            </option>
+            <option value="duplicate_account">Compte en double</option>
+            <option value="other">Autre raison</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="message">Message (optionnel)</label>
+          <textarea
+            id="message"
+            name="message"
+            placeholder="Décrivez votre demande ou ajoutez des commentaires..."
+          ></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn" id="submitBtn">
+          Envoyer la demande de suppression
+        </button>
+      </form>
+
+      <div class="loading" id="loading">
+        <div class="spinner"></div>
+        <p>Traitement de votre demande...</p>
+      </div>
+
+      <div class="success-message" id="successMessage">
+        <h3>✅ Demande envoyée avec succès</h3>
+        <p>
+          Votre demande de suppression de données a été reçue. Vous recevrez un
+          email de confirmation dans les prochaines minutes. Notre équipe
+          traitera votre demande dans les 30 jours conformément au RGPD.
+        </p>
+      </div>
+
+      <div class="error-message" id="errorMessage">
+        <h3>❌ Erreur</h3>
+        <p id="errorText">Une erreur s'est produite. Veuillez réessayer.</p>
+      </div>
+
+      <div class="footer">
+        <p>
+          Cette page est conforme aux exigences du RGPD et Google Play Store.
+        </p>
+        <p>Prayer Times App - Protection de vos données personnelles</p>
+      </div>
+    </div>
+
+    <script>
+      document
+        .getElementById("deletionForm")
+        .addEventListener("submit", async function (e) {
+          e.preventDefault();
+
+          const submitBtn = document.getElementById("submitBtn");
+          const loading = document.getElementById("loading");
+          const successMessage = document.getElementById("successMessage");
+          const errorMessage = document.getElementById("errorMessage");
+
+          // Masquer les messages précédents
+          successMessage.style.display = "none";
+          errorMessage.style.display = "none";
+
+          // Afficher le loading
+          submitBtn.disabled = true;
+          loading.style.display = "block";
+
+          // Récupérer les données du formulaire
+          const formData = {
+            email: document.getElementById("email").value,
+            reason: document.getElementById("reason").value,
+            message: document.getElementById("message").value,
+          };
+
+          try {
+            const response = await fetch("/api/data-deletion.php", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(formData),
+            });
+
+            const result = await response.json();
+
+            if (response.ok && result.success) {
+              successMessage.style.display = "block";
+              document.getElementById("deletionForm").reset();
+            } else {
+              throw new Error(
+                result.message || "Erreur lors de l'envoi de la demande"
+              );
+            }
+          } catch (error) {
+            document.getElementById("errorText").textContent = error.message;
+            errorMessage.style.display = "block";
+          } finally {
+            submitBtn.disabled = false;
+            loading.style.display = "none";
+          }
+        });
+    </script>
+  </body>
+</html>

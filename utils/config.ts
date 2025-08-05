@@ -7,10 +7,10 @@ import Constants from "expo-constants";
 
 // Configuration par défaut (fallbacks)
 const DEFAULT_CONFIG = {
-  apiBaseUrl: "https://elyesnaitliman.ch/api",
-  premiumContentBaseUrl: "https://elyesnaitliman.ch/premium",
-  recitationsBaseUrl: "https://elyesnaitliman.ch/api/recitations",
-  adhansBaseUrl: "https://elyesnaitliman.ch/api/adhans",
+  apiBaseUrl: "https://myadhanapp.com/api",
+  premiumContentBaseUrl: "https://myadhanapp.com/private/premium",
+  recitationsBaseUrl: "https://myadhanapp.com/api/recitations",
+  adhansBaseUrl: "https://myadhanapp.com/api/adhans",
   hadithApiKey: "",
 };
 

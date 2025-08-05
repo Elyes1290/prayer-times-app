@@ -116,7 +116,7 @@ npm run web
 
 ## 📋 **APIs Disponibles**
 
-### **Base URL :** `https://elyesnaitliman.ch/api`
+### **Base URL :** `https://myadhanapp.com/api`
 
 | Endpoint           | Méthode         | Description          |
 | ------------------ | --------------- | -------------------- |
@@ -130,7 +130,7 @@ npm run web
 
 ```javascript
 // Créer un utilisateur
-const response = await fetch("https://elyesnaitliman.ch/api/users.php", {
+const response = await fetch("https://myadhanapp.com/api/users.php", {
   method: "POST",
   headers: { "Content-Type": "application/json" },
   body: JSON.stringify({
@@ -236,7 +236,7 @@ node scripts/cost-calculator.js
 3. **API non accessible :**
    ```bash
    # Tester la connectivité
-   curl https://elyesnaitliman.ch/api/test-api.php
+   curl https://myadhanapp.com/api/test-api.php
    ```
 
 ## 🤝 **Contribution**

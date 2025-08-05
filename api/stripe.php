@@ -504,6 +504,8 @@ else {
 // Fonction pour gérer la session de checkout complétée
 function handleCheckoutSessionCompleted($session) {
     try {
+        logError("🎯 Traitement session checkout complétée - ID: " . $session->id);
+        
         // Récupérer les métadonnées de la session
         $subscriptionType = $session->metadata->subscription_type ?? '';
         $customerEmail = $session->metadata->customer_email ?? $session->customer_details->email ?? '';
@@ -511,20 +513,26 @@ function handleCheckoutSessionCompleted($session) {
         $customerLanguage = $session->metadata->customer_language ?? 'fr';
         $customerPassword = $session->metadata->customer_password ?? null;
         
+        logError("📧 Email: $customerEmail, Nom: $customerName, Type: $subscriptionType");
+        
         // Si on n'a pas l'email depuis les métadonnées, essayer de le récupérer depuis le customer
         if (empty($customerEmail) && !empty($session->customer)) {
             try {
                 $customer = Customer::retrieve($session->customer);
                 $customerEmail = $customer->email;
                 $customerName = $customer->name ?? $customerName;
+                logError("🔍 Email récupéré depuis customer: $customerEmail");
             } catch (Exception $e) {
-                logError("Erreur récupération customer", $e);
+                logError("❌ Erreur récupération customer", $e);
             }
         }
         
         // Créer le compte utilisateur si les données sont disponibles
         if ($customerEmail && $subscriptionType) {
+            logError("✅ Données complètes - création utilisateur...");
             createUserViaExistingAPI($customerEmail, $customerName, $subscriptionType, $session->id, $customerLanguage, $customerPassword);
+        } else {
+            logError("❌ Données manquantes - Email: " . ($customerEmail ? 'OK' : 'MANQUANT') . ", Type: " . ($subscriptionType ? 'OK' : 'MANQUANT'));
         }
         
     } catch (Exception $e) {
@@ -535,6 +543,8 @@ function handleCheckoutSessionCompleted($session) {
 // Fonction pour créer un utilisateur via l'API existante qui fonctionne
 function createUserViaExistingAPI($email, $name, $subscriptionType, $sessionId, $language = 'fr', $originalPassword = null) {
     try {
+        logError("🚀 Début création utilisateur - Email: $email, Type: $subscriptionType");
+        
         // Vérifier d'abord si l'utilisateur existe
         $pdo = getDBConnection();
         $stmt = $pdo->prepare("SELECT id FROM users WHERE email = ?");
@@ -542,6 +552,7 @@ function createUserViaExistingAPI($email, $name, $subscriptionType, $sessionId, 
         $existingUser = $stmt->fetch();
         
         if ($existingUser) {
+            logError("👤 Utilisateur existe déjà - ID: " . $existingUser['id']);
             // Mettre à jour le statut premium
             updateUserPremiumStatus($existingUser['id'], $subscriptionType, $sessionId);
             return;
@@ -550,8 +561,10 @@ function createUserViaExistingAPI($email, $name, $subscriptionType, $sessionId, 
         // Utiliser le mot de passe original ou générer un temporaire
         if ($originalPassword) {
             $passwordToUse = $originalPassword;
+            logError("🔑 Utilisation mot de passe original");
         } else {
             $passwordToUse = generateTempPassword();
+            logError("🔑 Génération mot de passe temporaire: $passwordToUse");
         }
         
         // Créer l'utilisateur directement avec le même code que auth.php
@@ -630,11 +643,21 @@ function createUserViaExistingAPI($email, $name, $subscriptionType, $sessionId, 
         
         $userId = $pdo->lastInsertId();
         
+        logError("✅ Utilisateur créé avec succès - ID: $userId, Email: $email");
+        
         // Enregistrer l'abonnement premium dans la table dédiée
         insertPremiumSubscription($userId, $sessionId, $subscriptionType);
         
+        logError("✅ Abonnement premium enregistré pour l'utilisateur $userId");
+        
+        // 🚀 NOUVEAU : Envoyer un email de bienvenue
+        if ($originalPassword) {
+            sendWelcomeEmail($email, $name ?: 'Utilisateur', $originalPassword);
+        }
+        
     } catch (Exception $e) {
-        logError("Erreur création utilisateur via API existante", $e);
+        logError("❌ Erreur création utilisateur via API existante", $e);
+        throw $e; // Relancer l'erreur pour la gestion
     }
 }
 
@@ -1022,8 +1045,8 @@ function sendWelcomeEmail($email, $firstName, $tempPassword) {
         $headers = array(
             'MIME-Version' => '1.0',
             'Content-type' => 'text/html; charset=UTF-8',
-            'From' => 'noreply@elyesnaitliman.ch',
-            'Reply-To' => 'support@elyesnaitliman.ch',
+            'From' => 'noreply@myadhanapp.com',
+            'Reply-To' => 'support@myadhanapp.com',
             'X-Mailer' => 'PHP/' . phpversion()
         );
         

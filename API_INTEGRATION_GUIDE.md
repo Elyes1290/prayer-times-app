@@ -4,7 +4,7 @@
 
 **Migration Firebase → Base de données Infomaniak TERMINÉE !**
 
-Toutes les APIs sont opérationnelles sur `https://elyesnaitliman.ch/api/`
+Toutes les APIs sont opérationnelles sur `https://myadhanapp.com/api/`
 
 ## 📡 APIs Disponibles
 
@@ -173,7 +173,7 @@ Content-Type: application/json
 import storage from "@react-native-firebase/storage";
 
 // Utiliser les APIs
-const API_BASE = "https://elyesnaitliman.ch/api";
+const API_BASE = "https://myadhanapp.com/api";
 
 const uploadBackup = async (backupData: any) => {
   try {
@@ -277,7 +277,7 @@ const getFavorites = async () => {
 // utils/premiumContent.ts
 class PremiumContentManager {
   private static instance: PremiumContentManager;
-  private apiBase = "https://elyesnaitliman.ch/api";
+  private apiBase = "https://myadhanapp.com/api";
 
   async getPremiumCatalog(): Promise<PremiumCatalog | null> {
     try {
@@ -426,7 +426,7 @@ const migrateExistingUser = async () => {
 ### Phase 1: Préparation (1-2 jours)
 
 1. **✅ Infrastructure** : Base de données et APIs créées
-2. **🔄 Tests** : Lancer `https://elyesnaitliman.ch/api/test-api.php`
+2. **🔄 Tests** : Lancer `https://myadhanapp.com/api/test-api.php`
 3. **📝 Validation** : Vérifier toutes les APIs fonctionnent
 
 ### Phase 2: Intégration (3-5 jours)
@@ -483,22 +483,22 @@ const migrateExistingUser = async () => {
 
 ```bash
 # 1. Test complet
-curl https://elyesnaitliman.ch/api/test-api.php
+curl https://myadhanapp.com/api/test-api.php
 
 # 2. Test création utilisateur
-curl -X POST https://elyesnaitliman.ch/api/users.php \
+curl -X POST https://myadhanapp.com/api/users.php \
   -H "Content-Type: application/json" \
   -d '{"device_id":"test_device_123","language":"fr"}'
 
 # 3. Test favoris
-curl -X POST https://elyesnaitliman.ch/api/favorites.php \
+curl -X POST https://myadhanapp.com/api/favorites.php \
   -H "Content-Type: application/json" \
   -d '{"device_id":"test_device_123","type":"quran_verse","content":{"chapterNumber":1,"verseNumber":1}}'
 ```
 
 ## 📞 Support et Questions
 
-- **Tests automatisés** : https://elyesnaitliman.ch/api/test-api.php
+- **Tests automatisés** : https://myadhanapp.com/api/test-api.php
 - **Documentation API** : Voir exemples ci-dessus
 - **Base de données** : 7 tables créées, 100% fonctionnelle
 - **Infrastructure** : Hébergement Infomaniak stable et rapide

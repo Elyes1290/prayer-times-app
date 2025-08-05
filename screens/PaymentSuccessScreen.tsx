@@ -26,6 +26,9 @@ const PaymentSuccessScreen: React.FC = () => {
           const registrationData = JSON.parse(pendingRegistration);
           // 🚀 NOUVEAU : Auto-login après paiement
 
+          // ⏱️ Attendre un peu que le webhook soit traité
+          await new Promise((resolve) => setTimeout(resolve, 2000));
+
           try {
             const loginResult = await apiClient.loginWithCredentials({
               email: registrationData.email,

@@ -6,7 +6,7 @@ export const STRIPE_CONFIG = {
   secretKey: process.env.STRIPE_SECRET_KEY || "sk_test_your_secret_key_here",
 
   // URL de votre API backend pour les paiements
-  apiUrl: "https://elyesnaitliman.ch/api/stripe.php",
+  apiUrl: "https://myadhanapp.com/api/stripe.php",
 
   // Configuration des produits premium
   products: {

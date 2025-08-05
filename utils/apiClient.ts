@@ -481,6 +481,22 @@ class ApiClient {
   // 🚀 SUPPRIMÉ : Plus de création automatique d'utilisateur
   // Une app professionnelle ne crée pas automatiquement d'utilisateur
   // L'utilisateur doit s'inscrire ou se connecter explicitement
+
+  // Méthode pour les demandes de suppression de données
+  async submitDataDeletionRequest(data: {
+    email: string;
+    reason?: string;
+    message?: string;
+  }): Promise<ApiResponse> {
+    return this.makeRequest("/api/data-deletion.php", "POST", data);
+  }
+
+  async createPortalSession(customerId: string): Promise<ApiResponse> {
+    return this.makeRequest("/api/create-portal-session.php", "POST", {
+      customer_id: customerId,
+      return_url: "https://myadhanapp.com",
+    });
+  }
 }
 
 export default ApiClient.getInstance();

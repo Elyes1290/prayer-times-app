@@ -358,6 +358,13 @@ export default function TabLayout() {
                     href: null, // Cache l'onglet de la navigation
                   }}
                 />
+                {/* Écran de suppression de données accessible par navigation (pas visible dans la tab bar) */}
+                <Tabs.Screen
+                  name="data-deletion"
+                  options={{
+                    href: null, // Cache l'onglet de la navigation
+                  }}
+                />
               </Tabs>
             </BackupProvider>
           </FavoritesProvider>

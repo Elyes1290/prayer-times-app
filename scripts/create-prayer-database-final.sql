@@ -712,3 +712,35 @@ SET premium_activated_at = COALESCE(
 )
 WHERE premium_status = 1 
 AND premium_activated_at IS NULL;
+
+-- =================================================
+-- 🗑️ TABLE POUR LES DEMANDES DE SUPPRESSION DE DONNÉES
+-- Conforme aux exigences Google Play Store et RGPD
+-- =================================================
+
+CREATE TABLE IF NOT EXISTS data_deletion_requests (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    request_id VARCHAR(50) UNIQUE NOT NULL,
+    user_id INT NULL,
+    email VARCHAR(255) NOT NULL,
+    reason TEXT,
+    user_message TEXT,
+    status ENUM('pending', 'processing', 'completed', 'rejected') DEFAULT 'pending',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    processed_at TIMESTAMP NULL,
+    processed_by VARCHAR(100) NULL,
+    notes TEXT NULL,
+    INDEX idx_email (email),
+    INDEX idx_request_id (request_id),
+    INDEX idx_status (status),
+    INDEX idx_created_at (created_at),
+    INDEX idx_user_id (user_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Commentaires pour documentation
+ALTER TABLE data_deletion_requests 
+COMMENT = 'Table pour gérer les demandes de suppression de données utilisateur (RGPD/Google Play)';
+
+-- Index pour optimiser les requêtes de suivi
+CREATE INDEX idx_status_created ON data_deletion_requests(status, created_at);
+CREATE INDEX idx_email_status ON data_deletion_requests(email, status);

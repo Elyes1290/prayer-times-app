@@ -1670,7 +1670,12 @@ const PrayerStatsPremiumScreen: React.FC = () => {
             </TouchableOpacity>
           </View>
 
-          <ScrollView style={styles.modalContent}>
+          <ScrollView
+            style={styles.modalContent}
+            showsVerticalScrollIndicator={true}
+            contentContainerStyle={{ paddingBottom: 40 }}
+            bounces={true}
+          >
             {/* Analyse intelligente */}
             <View style={[styles.card, { backgroundColor: colors.cardBG }]}>
               <Text style={[styles.cardTitle, { color: colors.text }]}>
@@ -2395,6 +2400,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 16,
     paddingTop: 16,
+    paddingBottom: 20, // Ajoute de l'espace en bas pour éviter que le contenu soit coupé
   },
 
   // Insights

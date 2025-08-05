@@ -135,7 +135,7 @@ function handleDownload() {
                     
                     // 🚀 FIX: Utiliser une URL directe sans encodage pour éviter la corruption
                     // L'URL doit pointer vers le fichier réel sur le serveur
-                    $downloadUrl = "https://elyesnaitliman.ch/private/premium/adhan/" . $item;
+                    $downloadUrl = "https://myadhanapp.com/private/premium/adhan/" . $item;
                     
                     echo json_encode([
                         'success' => true,
