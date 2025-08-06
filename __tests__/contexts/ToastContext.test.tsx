@@ -1,4 +1,7 @@
-// Mocks globaux
+import React from "react";
+import { render, act, waitFor } from "@testing-library/react-native";
+import { ToastProvider, useToast } from "../../contexts/ToastContext";
+import type { ToastData } from "../../components/Toast"; // Mocks globaux
 jest.mock("expo-font", () => ({}));
 jest.mock("@expo/vector-icons", () => ({
   MaterialCommunityIcons: () => null,
@@ -6,7 +9,49 @@ jest.mock("@expo/vector-icons", () => ({
 jest.mock("expo-linear-gradient", () => ({
   LinearGradient: () => null,
 }));
-jest.mock("react-native", () => jest.requireActual("react-native"));
+jest.mock("react-native", () => ({
+  View: ({ children }: any) => children,
+  Text: ({ children, ...props }: any) => {
+    const React = require("react");
+    return React.createElement("Text", props, children);
+  },
+  TouchableOpacity: ({ children, onPress }: any) => {
+    const React = require("react");
+    return React.createElement("View", { onPress }, children);
+  },
+  ScrollView: ({ children }: any) => children,
+  StyleSheet: {
+    create: (styles: any) => styles,
+    flatten: (style: any) => style,
+  },
+  Alert: {
+    alert: jest.fn(),
+  },
+  Platform: {
+    OS: "android",
+  },
+  Dimensions: {
+    get: jest.fn(() => ({ width: 375, height: 667 })),
+  },
+  useColorScheme: jest.fn(() => "light"),
+  NativeModules: {
+    AdhanModule: {
+      setLocation: jest.fn(),
+      setCalculationMethod: jest.fn(),
+      saveNotificationSettings: jest.fn(),
+      getSavedAutoLocation: jest.fn(),
+      setAdhanVolume: jest.fn(),
+      forceUpdateWidgets: jest.fn(),
+      forceUpdateWidgetsWithoutClearingCache: jest.fn(),
+      saveTodayPrayerTimes: jest.fn(),
+      playAdhan: jest.fn(),
+      stopAdhan: jest.fn(),
+      setVolume: jest.fn(),
+      setAdhanSound: jest.fn(),
+      cancelAllAdhanAlarms: jest.fn(),
+    },
+  },
+}));
 
 // Mock du composant Toast pour éviter les animations et dépendances natives
 jest.mock("../../components/Toast", () => {
@@ -24,11 +69,6 @@ jest.mock("../../components/Toast", () => {
   };
   return MockToast;
 });
-
-import React from "react";
-import { render, act, waitFor } from "@testing-library/react-native";
-import { ToastProvider, useToast } from "../../contexts/ToastContext";
-import type { ToastData } from "../../components/Toast";
 
 // Composant de test pour accéder au contexte
 const ToastTestComponent = React.forwardRef((props, ref) => {

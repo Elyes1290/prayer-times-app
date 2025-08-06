@@ -21,10 +21,31 @@ jest.mock("react-native/Libraries/Utilities/useColorScheme", () => {
 
 // Mock de react-native avec Platform.OS configuré
 jest.mock("react-native", () => ({
+  View: ({ children }: any) => children,
+  Text: ({ children, ...props }: any) => {
+    const React = require("react");
+    return React.createElement("Text", props, children);
+  },
+  TouchableOpacity: ({ children, onPress }: any) => {
+    const React = require("react");
+    return React.createElement("View", { onPress }, children);
+  },
+  ScrollView: ({ children }: any) => children,
+  StyleSheet: {
+    create: (styles: any) => styles,
+    flatten: (style: any) => style,
+  },
+  Alert: {
+    alert: jest.fn(),
+  },
   Platform: {
     OS: "android",
-    select: jest.fn((x) => x.android || x.default),
+    select: jest.fn((obj: any) => obj.android || obj.default),
   },
+  Dimensions: {
+    get: jest.fn(() => ({ width: 375, height: 667 })),
+  },
+  useColorScheme: jest.fn(() => "light"),
   NativeModules: {
     AdhanModule: {
       setLocation: jest.fn(),
@@ -42,10 +63,6 @@ jest.mock("react-native", () => ({
       cancelAllAdhanAlarms: jest.fn(),
     },
   },
-  NativeEventEmitter: jest.fn(() => ({
-    addListener: jest.fn(),
-    removeListener: jest.fn(),
-  })),
 }));
 
 // 🚨 MOCK ASYNCSTORAGE FORCÉ - APPROCHE ROBUSTE

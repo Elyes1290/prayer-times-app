@@ -92,7 +92,11 @@ export default function TabLayout() {
   }, []);
 
   // 🚀 NOUVEAU : Nettoyer les données obsolètes une seule fois au démarrage
+  const initializationRef = React.useRef(false);
+
   useEffect(() => {
+    if (initializationRef.current) return; // Éviter les initialisations multiples
+
     const initializeApp = async () => {
       try {
         console.log("🧹 Nettoyage des données obsolètes au démarrage...");
@@ -103,13 +107,14 @@ export default function TabLayout() {
         console.log("🔄 Cache des statistiques supprimé pour force refresh");
 
         console.log("✅ Application initialisée en mode professionnel");
+        initializationRef.current = true;
       } catch (error) {
         console.error("❌ Erreur lors de l'initialisation:", error);
       }
     };
 
     initializeApp();
-  }, []);
+  }, []); // Dépendances vides = exécution unique au montage
 
   return (
     <SettingsProvider>

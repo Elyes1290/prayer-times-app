@@ -132,6 +132,9 @@ const PremiumPaymentScreen: React.FC = () => {
 
     try {
       // Préparer les données pour la session de paiement
+      console.log("🔍 Plan sélectionné:", selectedPlan);
+      console.log("🔍 ID du plan:", selectedPlan.id);
+      console.log("🔍 Données d'inscription:", pendingRegistration);
 
       // Créer une session de paiement Stripe Checkout
       const response = await fetch(
@@ -153,6 +156,23 @@ const PremiumPaymentScreen: React.FC = () => {
         }
       );
 
+      console.log("🔍 Données envoyées à l'API:", {
+        subscriptionType: selectedPlan.id,
+        customerEmail: pendingRegistration.email,
+        customerName: pendingRegistration.user_first_name,
+        customerLanguage: pendingRegistration.language || "fr",
+        customerPassword: "***HIDDEN***",
+        successUrl: "prayertimesapp://payment-success",
+        cancelUrl: "prayertimesapp://payment-cancel",
+      });
+
+      // 🚀 DEBUG : Mode de l'application
+      console.log("🔧 Mode debug:", __DEV__);
+      const { Platform } = await import("react-native");
+      console.log("🔧 Platform:", Platform.OS);
+
+      // Vérifier le statut de la réponse
+
       // Vérifier le statut de la réponse
 
       if (!response.ok) {
@@ -164,9 +184,54 @@ const PremiumPaymentScreen: React.FC = () => {
 
       let responseData;
       try {
+        // 🚀 DEBUG : Gestion des réponses multiples JSON
+        console.log("🔍 Réponse brute du serveur:", responseText);
+
+        // Essayer de parser la réponse complète
         responseData = JSON.parse(responseText);
-      } catch {
-        throw new Error("Réponse invalide du serveur");
+      } catch (parseError) {
+        console.log("❌ Erreur parsing JSON:", parseError);
+
+        // Essayer de trouver le dernier JSON valide dans la réponse
+        const jsonMatches = responseText.match(/\{[^{}]*"sessionUrl"[^{}]*\}/g);
+        if (jsonMatches && jsonMatches.length > 0) {
+          const lastJson = jsonMatches[jsonMatches.length - 1];
+          console.log("🔍 Dernier JSON trouvé:", lastJson);
+          try {
+            responseData = JSON.parse(lastJson);
+          } catch (secondError) {
+            console.log("❌ Erreur parsing dernier JSON:", secondError);
+            throw new Error(
+              "Réponse invalide du serveur - impossible de parser JSON"
+            );
+          }
+        } else {
+          // Essayer de trouver n'importe quel JSON avec sessionUrl
+          const allJsonMatches = responseText.match(/\{[^{}]*\}/g);
+          if (allJsonMatches) {
+            for (let i = allJsonMatches.length - 1; i >= 0; i--) {
+              try {
+                const testJson = JSON.parse(allJsonMatches[i]);
+                if (testJson.sessionUrl) {
+                  console.log(
+                    "🔍 JSON avec sessionUrl trouvé:",
+                    allJsonMatches[i]
+                  );
+                  responseData = testJson;
+                  break;
+                }
+              } catch (e) {
+                // Continuer avec le prochain JSON
+              }
+            }
+          }
+
+          if (!responseData) {
+            throw new Error(
+              "Réponse invalide du serveur - aucun JSON valide trouvé"
+            );
+          }
+        }
       }
 
       const { sessionUrl } = responseData;
@@ -184,14 +249,73 @@ const PremiumPaymentScreen: React.FC = () => {
       // Ouvrir Stripe Checkout dans le navigateur
       try {
         const { Linking } = await import("react-native");
+
+        // 🚀 DEBUG : Vérifier l'URL avant de l'ouvrir
+        console.log("🔗 URL Stripe à ouvrir:", sessionUrl);
+
+        // Vérifier si l'URL est valide
+        if (!sessionUrl || !sessionUrl.startsWith("https://")) {
+          throw new Error("URL de paiement invalide");
+        }
+
+        // Vérifier si l'app peut ouvrir l'URL
+        const canOpen = await Linking.canOpenURL(sessionUrl);
+        console.log("🔗 Peut ouvrir l'URL:", canOpen);
+
+        if (!canOpen) {
+          throw new Error("Impossible d'ouvrir l'URL de paiement");
+        }
+
         await Linking.openURL(sessionUrl);
-      } catch {
-        Alert.alert("Erreur", "Impossible d'ouvrir la page de paiement");
+        console.log("✅ URL ouverte avec succès");
+      } catch (error) {
+        console.error("❌ Erreur ouverture URL:", error);
+        // En mode debug, proposer de copier l'URL
+        if (__DEV__) {
+          Alert.alert(
+            "Mode Debug - Erreur ouverture URL",
+            `Impossible d'ouvrir la page de paiement: ${
+              error instanceof Error ? error.message : "Erreur inconnue"
+            }\n\nVoulez-vous copier l'URL dans le presse-papiers ?`,
+            [
+              {
+                text: "Annuler",
+                style: "cancel",
+              },
+              {
+                text: "Copier URL",
+                onPress: async () => {
+                  try {
+                    const { Clipboard } = await import("react-native");
+                    await Clipboard.setString(sessionUrl);
+                    Alert.alert("Succès", "URL copiée dans le presse-papiers");
+                  } catch (clipboardError) {
+                    console.error(
+                      "❌ Erreur copie presse-papiers:",
+                      clipboardError
+                    );
+                    Alert.alert("Erreur", "Impossible de copier l'URL");
+                  }
+                },
+              },
+            ]
+          );
+        } else {
+          Alert.alert(
+            "Erreur",
+            `Impossible d'ouvrir la page de paiement: ${
+              error instanceof Error ? error.message : "Erreur inconnue"
+            }`
+          );
+        }
       }
-    } catch {
+    } catch (error) {
+      console.error("❌ Erreur détaillée paiement:", error);
+      const errorMessage =
+        error instanceof Error ? error.message : "Erreur inconnue";
       Alert.alert(
         "Erreur",
-        "Impossible d'initialiser le paiement. Veuillez réessayer."
+        `Impossible d'initialiser le paiement: ${errorMessage}. Veuillez réessayer.`
       );
     } finally {
       setIsLoading(false);

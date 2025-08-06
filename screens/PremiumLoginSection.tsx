@@ -8,6 +8,7 @@ import {
   Alert,
   StyleSheet,
   Animated,
+  ScrollView,
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -74,9 +75,44 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
     return emailRegex.test(email.trim());
   };
 
+  // 🚀 AMÉLIORÉ : Validation détaillée du mot de passe (alignée avec le serveur)
   const validatePassword = (password: string) => {
-    // Mot de passe doit avoir au moins 6 caractères et au maximum 50
-    return password.trim().length >= 6 && password.trim().length <= 50;
+    const trimmedPassword = password.trim();
+    // Aligné avec les exigences du serveur : 8+ caractères, minuscule, majuscule, chiffre
+    return (
+      trimmedPassword.length >= 8 &&
+      /[a-z]/.test(trimmedPassword) &&
+      /[A-Z]/.test(trimmedPassword) &&
+      /\d/.test(trimmedPassword) &&
+      trimmedPassword.length <= 50
+    );
+  };
+
+  // 🚀 NOUVEAU : Validation visuelle pour l'affichage des indicateurs
+  const isPasswordVisuallyValid = (password: string) => {
+    const trimmedPassword = password.trim();
+    // Le mot de passe est visuellement valide seulement si TOUS les critères sont respectés
+    return (
+      trimmedPassword.length >= 8 &&
+      /[a-z]/.test(trimmedPassword) &&
+      /[A-Z]/.test(trimmedPassword) &&
+      /\d/.test(trimmedPassword) &&
+      trimmedPassword.length <= 50
+    );
+  };
+
+  // 🚀 NOUVEAU : Validation détaillée pour afficher les critères (alignée avec le serveur)
+  const getPasswordValidationDetails = (password: string) => {
+    const trimmedPassword = password.trim();
+    return {
+      length: trimmedPassword.length >= 8 && trimmedPassword.length <= 50,
+      hasLowercase: /[a-z]/.test(trimmedPassword),
+      hasUppercase: /[A-Z]/.test(trimmedPassword),
+      hasNumbers: /\d/.test(trimmedPassword),
+      hasSpecialChars: /[!@#$%^&*(),.?":{}|<>]/.test(trimmedPassword),
+      minLength: trimmedPassword.length >= 8,
+      maxLength: trimmedPassword.length <= 50,
+    };
   };
 
   const validateFirstName = (firstName: string) => {
@@ -611,104 +647,155 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
   // Interface login/inscription (inchangée)
   return (
     <View style={localStyles.container}>
-      {/* Toggle connexion/inscription */}
-      <View style={localStyles.toggleContainer}>
-        <TouchableOpacity
-          style={[
-            localStyles.toggleButton,
-            isLogin && localStyles.toggleButtonActive,
-          ]}
-          onPress={async () => {
-            setIsLogin(true);
-            // Vider le champ prénom en mode connexion
-            setFirstName("");
-          }}
-        >
-          <Text
+      <ScrollView
+        style={localStyles.scrollContainer}
+        showsVerticalScrollIndicator={false}
+        keyboardShouldPersistTaps="handled"
+        contentContainerStyle={localStyles.scrollContent}
+      >
+        {/* Toggle connexion/inscription */}
+        <View style={localStyles.toggleContainer}>
+          <TouchableOpacity
             style={[
-              localStyles.toggleText,
-              isLogin && localStyles.toggleTextActive,
+              localStyles.toggleButton,
+              isLogin && localStyles.toggleButtonActive,
             ]}
+            onPress={async () => {
+              setIsLogin(true);
+              // Vider le champ prénom en mode connexion
+              setFirstName("");
+            }}
           >
-            Connexion
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[
-            localStyles.toggleButton,
-            !isLogin && localStyles.toggleButtonActive,
-          ]}
-          onPress={async () => {
-            setIsLogin(false);
-            // Charger le prénom existant en mode inscription
-            try {
-              const existingFirstName = await AsyncStorage.getItem(
-                "userFirstName"
-              );
-              if (existingFirstName) {
-                setFirstName(existingFirstName);
-                setFirstNameValid(validateFirstName(existingFirstName));
-                // console.log(
-                //  "✅ Prénom existant chargé lors du basculement:",
-                //  existingFirstName
-                //);
-              } else {
+            <Text
+              style={[
+                localStyles.toggleText,
+                isLogin && localStyles.toggleTextActive,
+              ]}
+            >
+              Connexion
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[
+              localStyles.toggleButton,
+              !isLogin && localStyles.toggleButtonActive,
+            ]}
+            onPress={async () => {
+              setIsLogin(false);
+              // Charger le prénom existant en mode inscription
+              try {
+                const existingFirstName = await AsyncStorage.getItem(
+                  "userFirstName"
+                );
+                if (existingFirstName) {
+                  setFirstName(existingFirstName);
+                  setFirstNameValid(validateFirstName(existingFirstName));
+                  // console.log(
+                  //  "✅ Prénom existant chargé lors du basculement:",
+                  //  existingFirstName
+                  //);
+                } else {
+                  setFirstName("");
+                }
+              } catch (error) {
+                console.error(
+                  "Erreur chargement prénom existant lors du basculement:",
+                  error
+                );
                 setFirstName("");
               }
-            } catch (error) {
-              console.error(
-                "Erreur chargement prénom existant lors du basculement:",
-                error
-              );
-              setFirstName("");
-            }
-          }}
-        >
-          <Text
+            }}
+          >
+            <Text
+              style={[
+                localStyles.toggleText,
+                !isLogin && localStyles.toggleTextActive,
+              ]}
+            >
+              Inscription
+            </Text>
+          </TouchableOpacity>
+        </View>
+
+        {/* Champs de saisie */}
+        {!isLogin && (
+          <View
             style={[
-              localStyles.toggleText,
-              !isLogin && localStyles.toggleTextActive,
+              localStyles.inputContainer,
+              getInputStyle(firstName, firstNameValid),
             ]}
           >
-            Inscription
-          </Text>
-        </TouchableOpacity>
-      </View>
+            <MaterialCommunityIcons
+              name="account"
+              size={20}
+              color={getIconColor(firstName, firstNameValid)}
+              style={localStyles.inputIcon}
+            />
+            <TextInput
+              ref={firstNameRef}
+              style={localStyles.input}
+              placeholder={
+                firstName ? "Modifier le prénom pré-rempli" : "Prénom ou pseudo"
+              }
+              value={firstName}
+              onChangeText={(text) => {
+                setFirstName(text);
+              }}
+              editable={!isLoading}
+            />
+            <TouchableOpacity
+              style={localStyles.infoIcon}
+              onPress={() =>
+                Alert.alert(
+                  t("toasts.help_firstname_title"),
+                  firstName
+                    ? t("toasts.help_firstname_prefilled")
+                    : t("toasts.help_firstname_empty"),
+                  [
+                    {
+                      text: "OK",
+                      onPress: () => {},
+                    },
+                  ]
+                )
+              }
+            >
+              <MaterialCommunityIcons
+                name={firstName ? "account-check" : "information-outline"}
+                size={16}
+                color={firstName ? "#4CAF50" : "#666"}
+              />
+            </TouchableOpacity>
+          </View>
+        )}
 
-      {/* Champs de saisie */}
-      {!isLogin && (
         <View
-          style={[
-            localStyles.inputContainer,
-            getInputStyle(firstName, firstNameValid),
-          ]}
+          style={[localStyles.inputContainer, getInputStyle(email, emailValid)]}
         >
           <MaterialCommunityIcons
-            name="account"
+            name="email"
             size={20}
-            color={getIconColor(firstName, firstNameValid)}
+            color={getIconColor(email, emailValid)}
             style={localStyles.inputIcon}
           />
           <TextInput
-            ref={firstNameRef}
+            ref={emailRef}
             style={localStyles.input}
-            placeholder={
-              firstName ? "Modifier le prénom pré-rempli" : "Prénom ou pseudo"
-            }
-            value={firstName}
+            placeholder={isLogin ? "Email" : "Email"}
+            value={email}
             onChangeText={(text) => {
-              setFirstName(text);
+              setEmail(text);
             }}
+            keyboardType="email-address"
+            autoCapitalize="none"
             editable={!isLoading}
           />
           <TouchableOpacity
             style={localStyles.infoIcon}
             onPress={() =>
               Alert.alert(
-                t("toasts.help_firstname_title"),
-                firstName
-                  ? t("toasts.help_firstname_prefilled")
-                  : t("toasts.help_firstname_empty"),
+                t("toasts.help_email_title"),
+                t("toasts.help_email_content"),
                 [
                   {
                     text: "OK",
@@ -719,239 +806,327 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
             }
           >
             <MaterialCommunityIcons
-              name={firstName ? "account-check" : "information-outline"}
+              name="information-outline"
               size={16}
-              color={firstName ? "#4CAF50" : "#666"}
+              color="#666"
             />
           </TouchableOpacity>
         </View>
-      )}
 
-      <View
-        style={[localStyles.inputContainer, getInputStyle(email, emailValid)]}
-      >
-        <MaterialCommunityIcons
-          name="email"
-          size={20}
-          color={getIconColor(email, emailValid)}
-          style={localStyles.inputIcon}
-        />
-        <TextInput
-          ref={emailRef}
-          style={localStyles.input}
-          placeholder={isLogin ? "Email" : "Email"}
-          value={email}
-          onChangeText={(text) => {
-            setEmail(text);
-          }}
-          keyboardType="email-address"
-          autoCapitalize="none"
-          editable={!isLoading}
-        />
-        <TouchableOpacity
-          style={localStyles.infoIcon}
-          onPress={() =>
-            Alert.alert(
-              t("toasts.help_email_title"),
-              t("toasts.help_email_content"),
-              [
-                {
-                  text: "OK",
-                  onPress: () => {},
-                },
-              ]
-            )
-          }
-        >
-          <MaterialCommunityIcons
-            name="information-outline"
-            size={16}
-            color="#666"
-          />
-        </TouchableOpacity>
-      </View>
-
-      {/* 🚀 NOUVEAU : Champ mot de passe (après l'email) */}
-      <View
-        style={[
-          localStyles.inputContainer,
-          getInputStyle(password, passwordValid),
-        ]}
-      >
-        <MaterialCommunityIcons
-          name="lock"
-          size={20}
-          color={getIconColor(password, passwordValid)}
-          style={localStyles.inputIcon}
-        />
-        <TextInput
-          ref={passwordRef}
-          style={localStyles.input}
-          placeholder={
-            isLogin ? "Mot de passe" : "Mot de passe (6+ caractères)"
-          }
-          value={password}
-          onChangeText={(text) => {
-            setPassword(text);
-          }}
-          onBlur={() => {
-            // Forcer la validation quand on quitte le champ
-            setPasswordValid(validatePassword(password));
-          }}
-          onSubmitEditing={() => {
-            // Forcer la validation quand on appuie sur Entrée
-            setPasswordValid(validatePassword(password));
-            // Optionnel : passer au champ suivant ou soumettre
-            handleAuthenticationWithValues(
-              email.trim(),
-              password.trim(),
-              firstName.trim()
-            );
-          }}
-          secureTextEntry={!showPassword}
-          autoCapitalize="none"
-          editable={!isLoading}
-          returnKeyType="done"
-        />
-        <TouchableOpacity
-          style={localStyles.eyeIcon}
-          onPress={() => setShowPassword(!showPassword)}
-        >
-          <MaterialCommunityIcons
-            name={showPassword ? "eye" : "eye-off"}
-            size={20}
-            color={getIconColor(password, passwordValid)}
-          />
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={localStyles.infoIcon}
-          onPress={() =>
-            Alert.alert(
-              t("toasts.help_password_title"),
-              t("toasts.help_password_content"),
-              [
-                {
-                  text: "OK",
-                  onPress: () => {},
-                },
-              ]
-            )
-          }
-        >
-          <MaterialCommunityIcons
-            name="information-outline"
-            size={16}
-            color="#666"
-          />
-        </TouchableOpacity>
-      </View>
-
-      {/* Bouton principal */}
-      <TouchableOpacity
-        style={[
-          localStyles.authButton,
-          isLoading && localStyles.authButtonDisabled,
-        ]}
-        onPress={() => {
-          // Validation directe des valeurs actuelles, pas des états
-          const currentEmail = email.trim();
-          const currentPassword = password.trim();
-          const currentFirstName = firstName.trim();
-
-          // Mettre à jour les états de validation pour l'affichage
-          setEmailValid(validateEmail(currentEmail));
-          setPasswordValid(validatePassword(currentPassword));
-          setFirstNameValid(validateFirstName(currentFirstName));
-
-          // Appeler handleAuthentication avec les valeurs actuelles
-          handleAuthenticationWithValues(
-            currentEmail,
-            currentPassword,
-            currentFirstName
-          );
-        }}
-        disabled={isLoading}
-      >
-        {isLoading ? (
-          <ActivityIndicator size="small" color="#FFF" />
-        ) : (
-          <>
-            <MaterialCommunityIcons
-              name={isLogin ? "login" : "account-plus"}
-              size={20}
-              color="#FFF"
-            />
-            <Text style={localStyles.authButtonText}>
-              {isLogin ? "Se connecter" : "S'inscrire"}
-            </Text>
-          </>
-        )}
-      </TouchableOpacity>
-
-      {/* 🚀 SUPPRIMÉ : Bouton Mode Test Premium supprimé car il embrouille la logique */}
-
-      {/* Informations */}
-      <View style={localStyles.infoContainer}>
-        <MaterialCommunityIcons name="information" size={16} color="#666" />
-        <Text style={localStyles.infoText}>
-          {isLogin
-            ? "Connectez-vous avec votre email et mot de passe."
-            : "Cliquez sur les icônes ℹ️ pour voir les détails de chaque champ."}
-        </Text>
-      </View>
-
-      {/* 🚀 NOUVEAU : Toast local pour la modal */}
-      {localToast && (
-        <Animated.View
+        {/* 🚀 NOUVEAU : Champ mot de passe (après l'email) */}
+        <View
           style={[
-            localStyles.toastContainer,
-            {
-              transform: [{ translateY: toastTranslateY }],
-              opacity: toastOpacity,
-            },
+            localStyles.inputContainer,
+            getInputStyle(password, isPasswordVisuallyValid(password)),
           ]}
         >
-          <TouchableOpacity activeOpacity={0.9} onPress={hideLocalToast}>
-            <LinearGradient
-              colors={
-                localToast.type === "success"
-                  ? ["#4CAF50", "#2E7D32"]
-                  : localToast.type === "error"
-                  ? ["#f44336", "#c62828"]
-                  : ["#2196F3", "#1565C0"]
-              }
-              style={localStyles.toast}
-              start={{ x: 0, y: 0 }}
-              end={{ x: 1, y: 1 }}
-            >
-              <View style={localStyles.toastContent}>
-                <MaterialCommunityIcons
-                  name={
-                    localToast.type === "success"
-                      ? "check-circle"
-                      : localToast.type === "error"
-                      ? "alert-circle"
-                      : "information"
-                  }
-                  size={24}
-                  color="#fff"
-                  style={localStyles.toastIcon}
-                />
-                <View style={localStyles.toastTextContainer}>
-                  <Text style={localStyles.toastTitle}>{localToast.title}</Text>
-                  {localToast.message && (
-                    <Text style={localStyles.toastMessage}>
-                      {localToast.message}
-                    </Text>
-                  )}
-                </View>
-              </View>
-            </LinearGradient>
+          <MaterialCommunityIcons
+            name="lock"
+            size={20}
+            color={getIconColor(password, isPasswordVisuallyValid(password))}
+            style={localStyles.inputIcon}
+          />
+          <TextInput
+            ref={passwordRef}
+            style={localStyles.input}
+            placeholder={
+              isLogin ? "Mot de passe" : "Mot de passe (8+ caractères, Aa1)"
+            }
+            value={password}
+            onChangeText={(text) => {
+              setPassword(text);
+            }}
+            onBlur={() => {
+              // Forcer la validation quand on quitte le champ
+              setPasswordValid(validatePassword(password));
+            }}
+            onSubmitEditing={() => {
+              // Forcer la validation quand on appuie sur Entrée
+              setPasswordValid(validatePassword(password));
+              // Optionnel : passer au champ suivant ou soumettre
+              handleAuthenticationWithValues(
+                email.trim(),
+                password.trim(),
+                firstName.trim()
+              );
+            }}
+            secureTextEntry={!showPassword}
+            autoCapitalize="none"
+            editable={!isLoading}
+            returnKeyType="done"
+          />
+          <TouchableOpacity
+            style={localStyles.eyeIcon}
+            onPress={() => setShowPassword(!showPassword)}
+          >
+            <MaterialCommunityIcons
+              name={showPassword ? "eye" : "eye-off"}
+              size={20}
+              color={getIconColor(password, isPasswordVisuallyValid(password))}
+            />
           </TouchableOpacity>
-        </Animated.View>
-      )}
+          <TouchableOpacity
+            style={localStyles.infoIcon}
+            onPress={() =>
+              Alert.alert(
+                t("toasts.help_password_title"),
+                t("toasts.help_password_content"),
+                [
+                  {
+                    text: "OK",
+                    onPress: () => {},
+                  },
+                ]
+              )
+            }
+          >
+            <MaterialCommunityIcons
+              name="information-outline"
+              size={16}
+              color="#666"
+            />
+          </TouchableOpacity>
+        </View>
 
-      {/* 🚀 SUPPRIMÉ : Modal React Native ne fonctionne pas dans cet environnement */}
+        {/* 🚀 NOUVEAU : Indicateurs de validation du mot de passe (seulement en mode inscription) */}
+        {!isLogin && password.length > 0 && (
+          <View style={localStyles.passwordValidationContainer}>
+            <Text style={localStyles.passwordValidationTitle}>
+              Critères de sécurité :
+            </Text>
+            {(() => {
+              const validation = getPasswordValidationDetails(password);
+              return (
+                <>
+                  <View style={localStyles.validationItem}>
+                    <MaterialCommunityIcons
+                      name={
+                        validation.minLength ? "check-circle" : "circle-outline"
+                      }
+                      size={16}
+                      color={validation.minLength ? "#4CAF50" : "#666"}
+                    />
+                    <Text
+                      style={[
+                        localStyles.validationText,
+                        validation.minLength && localStyles.validationTextValid,
+                      ]}
+                    >
+                      Au moins 6 caractères
+                    </Text>
+                  </View>
+                  <View style={localStyles.validationItem}>
+                    <MaterialCommunityIcons
+                      name={
+                        validation.maxLength ? "check-circle" : "circle-outline"
+                      }
+                      size={16}
+                      color={validation.maxLength ? "#4CAF50" : "#666"}
+                    />
+                    <Text
+                      style={[
+                        localStyles.validationText,
+                        validation.maxLength && localStyles.validationTextValid,
+                      ]}
+                    >
+                      Maximum 50 caractères
+                    </Text>
+                  </View>
+                  <View style={localStyles.validationItem}>
+                    <MaterialCommunityIcons
+                      name={
+                        validation.hasLowercase
+                          ? "check-circle"
+                          : "circle-outline"
+                      }
+                      size={16}
+                      color={validation.hasLowercase ? "#4CAF50" : "#666"}
+                    />
+                    <Text
+                      style={[
+                        localStyles.validationText,
+                        validation.hasLowercase &&
+                          localStyles.validationTextValid,
+                      ]}
+                    >
+                      Contient une minuscule
+                    </Text>
+                  </View>
+                  <View style={localStyles.validationItem}>
+                    <MaterialCommunityIcons
+                      name={
+                        validation.hasUppercase
+                          ? "check-circle"
+                          : "circle-outline"
+                      }
+                      size={16}
+                      color={validation.hasUppercase ? "#4CAF50" : "#666"}
+                    />
+                    <Text
+                      style={[
+                        localStyles.validationText,
+                        validation.hasUppercase &&
+                          localStyles.validationTextValid,
+                      ]}
+                    >
+                      Contient une majuscule
+                    </Text>
+                  </View>
+                  <View style={localStyles.validationItem}>
+                    <MaterialCommunityIcons
+                      name={
+                        validation.hasNumbers
+                          ? "check-circle"
+                          : "circle-outline"
+                      }
+                      size={16}
+                      color={validation.hasNumbers ? "#4CAF50" : "#666"}
+                    />
+                    <Text
+                      style={[
+                        localStyles.validationText,
+                        validation.hasNumbers &&
+                          localStyles.validationTextValid,
+                      ]}
+                    >
+                      Contient des chiffres
+                    </Text>
+                  </View>
+                  <View style={localStyles.validationItem}>
+                    <MaterialCommunityIcons
+                      name={
+                        validation.hasSpecialChars
+                          ? "check-circle"
+                          : "circle-outline"
+                      }
+                      size={16}
+                      color={validation.hasSpecialChars ? "#4CAF50" : "#666"}
+                    />
+                    <Text
+                      style={[
+                        localStyles.validationText,
+                        validation.hasSpecialChars &&
+                          localStyles.validationTextValid,
+                      ]}
+                    >
+                      Contient des caractères spéciaux
+                    </Text>
+                  </View>
+                </>
+              );
+            })()}
+          </View>
+        )}
+
+        {/* Bouton principal */}
+        <TouchableOpacity
+          style={[
+            localStyles.authButton,
+            isLoading && localStyles.authButtonDisabled,
+          ]}
+          onPress={() => {
+            // Validation directe des valeurs actuelles, pas des états
+            const currentEmail = email.trim();
+            const currentPassword = password.trim();
+            const currentFirstName = firstName.trim();
+
+            // Mettre à jour les états de validation pour l'affichage
+            setEmailValid(validateEmail(currentEmail));
+            setPasswordValid(validatePassword(currentPassword));
+            setFirstNameValid(validateFirstName(currentFirstName));
+
+            // Appeler handleAuthentication avec les valeurs actuelles
+            handleAuthenticationWithValues(
+              currentEmail,
+              currentPassword,
+              currentFirstName
+            );
+          }}
+          disabled={isLoading}
+        >
+          {isLoading ? (
+            <ActivityIndicator size="small" color="#FFF" />
+          ) : (
+            <>
+              <MaterialCommunityIcons
+                name={isLogin ? "login" : "account-plus"}
+                size={20}
+                color="#FFF"
+              />
+              <Text style={localStyles.authButtonText}>
+                {isLogin ? "Se connecter" : "S'inscrire"}
+              </Text>
+            </>
+          )}
+        </TouchableOpacity>
+
+        {/* 🚀 SUPPRIMÉ : Bouton Mode Test Premium supprimé car il embrouille la logique */}
+
+        {/* Informations */}
+        <View style={localStyles.infoContainer}>
+          <MaterialCommunityIcons name="information" size={16} color="#666" />
+          <Text style={localStyles.infoText}>
+            {isLogin
+              ? "Connectez-vous avec votre email et mot de passe."
+              : "Cliquez sur les icônes ℹ️ pour voir les détails de chaque champ."}
+          </Text>
+        </View>
+
+        {/* 🚀 NOUVEAU : Toast local pour la modal */}
+        {localToast && (
+          <Animated.View
+            style={[
+              localStyles.toastContainer,
+              {
+                transform: [{ translateY: toastTranslateY }],
+                opacity: toastOpacity,
+              },
+            ]}
+          >
+            <TouchableOpacity activeOpacity={0.9} onPress={hideLocalToast}>
+              <LinearGradient
+                colors={
+                  localToast.type === "success"
+                    ? ["#4CAF50", "#2E7D32"]
+                    : localToast.type === "error"
+                    ? ["#f44336", "#c62828"]
+                    : ["#2196F3", "#1565C0"]
+                }
+                style={localStyles.toast}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 1 }}
+              >
+                <View style={localStyles.toastContent}>
+                  <MaterialCommunityIcons
+                    name={
+                      localToast.type === "success"
+                        ? "check-circle"
+                        : localToast.type === "error"
+                        ? "alert-circle"
+                        : "information"
+                    }
+                    size={24}
+                    color="#fff"
+                    style={localStyles.toastIcon}
+                  />
+                  <View style={localStyles.toastTextContainer}>
+                    <Text style={localStyles.toastTitle}>
+                      {localToast.title}
+                    </Text>
+                    {localToast.message && (
+                      <Text style={localStyles.toastMessage}>
+                        {localToast.message}
+                      </Text>
+                    )}
+                  </View>
+                </View>
+              </LinearGradient>
+            </TouchableOpacity>
+          </Animated.View>
+        )}
+
+        {/* 🚀 SUPPRIMÉ : Modal React Native ne fonctionne pas dans cet environnement */}
+      </ScrollView>
     </View>
   );
 };
@@ -1239,6 +1414,36 @@ const localStyles = StyleSheet.create({
   accountModalScrollableContent: {
     flex: 1,
     padding: 20,
+  },
+
+  // 🚀 NOUVEAU : Styles pour la validation du mot de passe
+  passwordValidationContainer: {
+    backgroundColor: "rgba(76, 175, 80, 0.1)",
+    borderRadius: 8,
+    padding: 12,
+    marginBottom: 12,
+    borderWidth: 1,
+    borderColor: "rgba(76, 175, 80, 0.3)",
+  },
+  passwordValidationTitle: {
+    fontSize: 14,
+    fontWeight: "600",
+    color: "#1A1A1A",
+    marginBottom: 8,
+  },
+  validationItem: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 4,
+  },
+  validationText: {
+    fontSize: 12,
+    color: "#666",
+    marginLeft: 6,
+  },
+  validationTextValid: {
+    color: "#4CAF50",
+    fontWeight: "500",
   },
 });
 

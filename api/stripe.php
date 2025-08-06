@@ -11,6 +11,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 }
 
 require_once 'config.php';
+
+// 🛡️ PHASE 1 : Rate Limiting et Monitoring
+require_once 'rate-limiter.php';
+require_once 'monitoring.php';
 require_once '../vendor/autoload.php';
 
 use Stripe\Stripe;
@@ -21,42 +25,252 @@ use Stripe\Checkout\Session;
 use Stripe\Exception\ApiErrorException;
 
 // Configuration Stripe
-// logError("🔑 DEBUG - STRIPE_SECRET_KEY définie: " . (STRIPE_SECRET_KEY ? 'OUI (' . substr(STRIPE_SECRET_KEY, 0, 7) . '...)' : 'NON'));
 Stripe::setApiKey(STRIPE_SECRET_KEY);
-
-// Configuration Stripe
 
 // Configuration des produits premium
 $PREMIUM_PRODUCTS = [
     'monthly' => [
-        // 'price_id' => 'price_1RskBqDJEhmyFnElZtadHqsG', // Premium Mensuel (TEST)
-        'price_id' => 'price_1RsTUJDYlp8PcvcNUQz2zTro', // Premium Mensuel (PROD)
+        'price_id' => 'price_1RskBqDJEhmyFnElZtadHqsG', // Premium Mensuel (TEST)
+        // 'price_id' => 'price_1RsTUJDYlp8PcvcNUQz2zTro', // Premium Mensuel (PROD)
         'amount' => 199,
         'currency' => 'eur',
         'interval' => 'month',
     ],
     'yearly' => [
-        // 'price_id' => 'price_1RskCEDJEhmyFnElkaEs0I8O', // Premium Annuel (TEST)
-        'price_id' => 'price_1RsTV3DYlp8PcvcNlOaFW2CW', // Premium Annuel (PROD)
+        'price_id' => 'price_1RskCEDJEhmyFnElkaEs0I8O', // Premium Annuel (TEST)
+        // 'price_id' => 'price_1RsTV3DYlp8PcvcNlOaFW2CW', // Premium Annuel (PROD)
         'amount' => 1999,
         'currency' => 'eur',
         'interval' => 'year',
     ],
     'family' => [
-        // 'price_id' => 'price_1RskCeDJEhmyFnElSE6iVxi8', // Premium Familial (TEST)
-        'price_id' => 'price_1RsTVXDYlp8PcvcNERdlWk9n', // Premium Familial (PROD)
+        'price_id' => 'price_1RskCeDJEhmyFnElSE6iVxi8', // Premium Familial (TEST)
+        // 'price_id' => 'price_1RsTVXDYlp8PcvcNERdlWk9n', // Premium Familial (PROD)
         'amount' => 2999,
         'currency' => 'eur',
         'interval' => 'year',
     ],
 ];
 
+// ✅ NOUVEAU : Fonction pour créer un token temporaire sécurisé
+function createTemporaryToken($email, $subscriptionType, $customerName = '', $customerLanguage = 'fr', $originalPassword = null) {
+    try {
+        logError("🔧 DEBUG createTemporaryToken - Début avec email: $email, type: $subscriptionType");
+        
+        $pdo = getDBConnection();
+        
+        // Générer un token sécurisé
+        $token = bin2hex(random_bytes(32));
+        $expiry = date('Y-m-d H:i:s', time() + 3600); // Expire dans 1 heure
+        
+        logError("🔧 DEBUG createTemporaryToken - Token généré: $token");
+        logError("🔧 DEBUG createTemporaryToken - Expiry: $expiry");
+        
+        // Chiffrer le mot de passe si fourni
+        $encryptedPassword = null;
+        if ($originalPassword) {
+            $encryptedPassword = openssl_encrypt(
+                $originalPassword,
+                'AES-256-CBC',
+                getenv('ENCRYPTION_KEY') ?: hash('sha256', STRIPE_SECRET_KEY),
+                0,
+                substr(hash('sha256', STRIPE_SECRET_KEY), 0, 16)
+            );
+            logError("🔧 DEBUG createTemporaryToken - Mot de passe chiffré: " . ($encryptedPassword ? 'OUI' : 'NON'));
+        }
+        
+        // Insérer le token temporaire
+        $stmt = $pdo->prepare("
+            INSERT INTO temp_payment_tokens (
+                token, email, subscription_type, customer_name, 
+                customer_language, encrypted_password, expires_at, created_at
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, NOW())
+        ");
+        
+        $result = $stmt->execute([
+            $token, $email, $subscriptionType, $customerName,
+            $customerLanguage, $encryptedPassword, $expiry
+        ]);
+        
+        logError("🔧 DEBUG createTemporaryToken - Insertion réussie: " . ($result ? 'OUI' : 'NON'));
+        logError("🔧 DEBUG createTemporaryToken - Token final: $token");
+        
+        return $token;
+        
+    } catch (Exception $e) {
+        logError("❌ Erreur création token temporaire", $e);
+        logError("❌ Détails erreur: " . $e->getMessage());
+        throw new Exception("Impossible de créer le token de paiement");
+    }
+}
+
+// ✅ NOUVEAU : Fonction pour récupérer et valider un token
+function retrieveAndValidateToken($token) {
+    try {
+        logError("🔧 DEBUG retrieveAndValidateToken - Début avec token: $token");
+        
+        $pdo = getDBConnection();
+        
+        // Récupérer le token
+        $stmt = $pdo->prepare("
+            SELECT * FROM temp_payment_tokens 
+            WHERE token = ? AND expires_at > NOW() AND used = 0
+        ");
+        $stmt->execute([$token]);
+        $tokenData = $stmt->fetch();
+        
+        logError("🔧 DEBUG retrieveAndValidateToken - Token trouvé: " . ($tokenData ? 'OUI' : 'NON'));
+        
+        if (!$tokenData) {
+            logError("❌ DEBUG retrieveAndValidateToken - Token invalide ou expiré");
+            throw new Exception("Token invalide ou expiré");
+        }
+        
+        logError("🔧 DEBUG retrieveAndValidateToken - Email: " . $tokenData['email'] . ", Type: " . $tokenData['subscription_type']);
+        
+        // Marquer le token comme utilisé
+        $stmt = $pdo->prepare("UPDATE temp_payment_tokens SET used = 1 WHERE token = ?");
+        $stmt->execute([$token]);
+        
+        logError("🔧 DEBUG retrieveAndValidateToken - Token marqué comme utilisé");
+        
+        // Déchiffrer le mot de passe si présent
+        $originalPassword = null;
+        if ($tokenData['encrypted_password']) {
+            $originalPassword = openssl_decrypt(
+                $tokenData['encrypted_password'],
+                'AES-256-CBC',
+                getenv('ENCRYPTION_KEY') ?: hash('sha256', STRIPE_SECRET_KEY),
+                0,
+                substr(hash('sha256', STRIPE_SECRET_KEY), 0, 16)
+            );
+            logError("🔧 DEBUG retrieveAndValidateToken - Mot de passe déchiffré: " . ($originalPassword ? 'OUI' : 'NON'));
+        }
+        
+        $result = [
+            'email' => $tokenData['email'],
+            'subscription_type' => $tokenData['subscription_type'],
+            'customer_name' => $tokenData['customer_name'],
+            'customer_language' => $tokenData['customer_language'],
+            'original_password' => $originalPassword
+        ];
+        
+        logError("🔧 DEBUG retrieveAndValidateToken - Résultat: " . json_encode($result));
+        
+        return $result;
+        
+    } catch (Exception $e) {
+        logError("❌ Erreur validation token", $e);
+        logError("❌ Détails erreur: " . $e->getMessage());
+        throw new Exception("Token invalide");
+    }
+}
+
+// ✅ NOUVEAU : Fonction de validation renforcée
+function validatePaymentRequest($input) {
+    global $PREMIUM_PRODUCTS;
+    $errors = [];
+    
+    // 🔍 DEBUG TEMPORAIRE : Logs pour diagnostiquer
+    error_log("🔍 DEBUG validatePaymentRequest - Input reçu: " . json_encode($input));
+    error_log("🔍 DEBUG validatePaymentRequest - PREMIUM_PRODUCTS: " . json_encode($PREMIUM_PRODUCTS));
+    error_log("🔍 DEBUG validatePaymentRequest - subscriptionType: " . ($input['subscriptionType'] ?? 'NULL'));
+    error_log("🔍 DEBUG validatePaymentRequest - Existe dans PREMIUM_PRODUCTS: " . (isset($PREMIUM_PRODUCTS[$input['subscriptionType']]) ? 'OUI' : 'NON'));
+    
+    // Validation du type d'abonnement
+    if (!isset($input['subscriptionType'])) {
+        $errors[] = 'Type d\'abonnement requis';
+    } elseif (!isset($PREMIUM_PRODUCTS[$input['subscriptionType']])) {
+        $errors[] = 'Type d\'abonnement invalide';
+    }
+    
+    // Validation de l'email
+    if (!isset($input['customerEmail']) || empty($input['customerEmail'])) {
+        $errors[] = 'Email requis';
+    } elseif (!filter_var($input['customerEmail'], FILTER_VALIDATE_EMAIL)) {
+        $errors[] = 'Format d\'email invalide';
+    }
+    
+    // Validation du nom (optionnel mais si fourni, doit être valide)
+    if (isset($input['customerName']) && !empty($input['customerName'])) {
+        if (strlen($input['customerName']) < 2 || strlen($input['customerName']) > 100) {
+            $errors[] = 'Le nom doit contenir entre 2 et 100 caractères';
+        }
+        if (!preg_match('/^[a-zA-ZÀ-ÿ\s\-\.]+$/', $input['customerName'])) {
+            $errors[] = 'Le nom contient des caractères non autorisés';
+        }
+    }
+    
+    // Validation de la langue
+    if (isset($input['customerLanguage'])) {
+        $allowedLanguages = ['fr', 'en', 'ar', 'bn', 'de'];
+        if (!in_array($input['customerLanguage'], $allowedLanguages)) {
+            $errors[] = 'Langue non supportée';
+        }
+    }
+    
+    // Validation du mot de passe (optionnel mais si fourni, doit être sécurisé)
+    if (isset($input['customerPassword']) && !empty($input['customerPassword'])) {
+        if (strlen($input['customerPassword']) < 8) {
+            $errors[] = 'Le mot de passe doit contenir au moins 8 caractères';
+        }
+        if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/', $input['customerPassword'])) {
+            $errors[] = 'Le mot de passe doit contenir au moins une minuscule, une majuscule et un chiffre';
+        }
+    }
+    
+    return $errors;
+}
+
+// ✅ NOUVEAU : Fonction de gestion d'erreur améliorée
+function handlePaymentError($error, $context = '') {
+    $errorCode = 500;
+    $errorMessage = 'Erreur interne du serveur';
+    $logMessage = "Erreur paiement [$context]: " . $error->getMessage();
+    
+    if ($error instanceof ApiErrorException) {
+        $errorCode = 400;
+        $errorMessage = 'Erreur de paiement: ' . $error->getMessage();
+        
+        // Logs détaillés pour Stripe
+        logError($logMessage, $error);
+    } elseif ($error instanceof PDOException) {
+        $errorCode = 500;
+        $errorMessage = 'Erreur de base de données';
+        logError($logMessage, $error);
+    } elseif ($error instanceof Exception) {
+        $errorCode = 400;
+        $errorMessage = $error->getMessage();
+        logError($logMessage, $error);
+    }
+    
+    http_response_code($errorCode);
+    echo json_encode([
+        'success' => false,
+        'error' => $errorMessage,
+        'timestamp' => date('Y-m-d H:i:s')
+    ]);
+    exit();
+}
+
 // Fonction pour logger les erreurs
 function logError($message, $error = null) {
-    error_log("Stripe API Error: " . $message);
+    $logData = [
+        'message' => $message,
+        'timestamp' => date('Y-m-d H:i:s'),
+        'ip' => $_SERVER['REMOTE_ADDR'] ?? 'unknown',
+        'user_agent' => $_SERVER['HTTP_USER_AGENT'] ?? 'unknown'
+    ];
+    
     if ($error) {
-        error_log("Stripe Error Details: " . json_encode($error));
+        $logData['error_type'] = get_class($error);
+        $logData['error_message'] = $error->getMessage();
+        $logData['error_code'] = $error->getCode();
+        $logData['error_file'] = $error->getFile();
+        $logData['error_line'] = $error->getLine();
     }
+    
+    error_log("Stripe API Error: " . json_encode($logData));
 }
 
 // Fonction pour générer un mot de passe temporaire
@@ -94,24 +308,93 @@ function createOrGetCustomer($email) {
 }
 
 // Route pour créer une session Stripe Checkout
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_SERVER['REQUEST_URI'] === '/api/stripe.php/create-checkout-session') {
+// ✅ SÉCURISÉ : Route pour créer une session de checkout
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_SERVER['HTTP_STRIPE_SIGNATURE']) === false && (
+    $_SERVER['REQUEST_URI'] === '/api/stripe.php/create-checkout-session' || 
+    $_SERVER['REQUEST_URI'] === '/api/stripe.php' || 
+    $_SERVER['REQUEST_URI'] === '/api/stripe.php/' ||
+    strpos($_SERVER['REQUEST_URI'], 'create-checkout-session') !== false
+)) {
     try {
+        $startTime = microtime(true);
         $input = json_decode(file_get_contents('php://input'), true);
         
-        if (!isset($input['subscriptionType']) || !isset($PREMIUM_PRODUCTS[$input['subscriptionType']])) {
-            http_response_code(400);
-            echo json_encode(['error' => 'Type d\'abonnement invalide']);
+        // 🛡️ PHASE 1 : Rate Limiting et Monitoring
+        $pdo = getDBConnection();
+        $rateLimiter = new RateLimiter($pdo);
+        $monitor = new PaymentMonitor($pdo);
+        
+        $ip = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
+        $rateLimitResult = $rateLimiter->checkRateLimit($ip, 'payment_attempt', 5, 3600);
+        
+        if (!$rateLimitResult['allowed']) {
+            $monitor->logPaymentEvent('payment_attempt', 'error', 'Rate limit exceeded', $rateLimitResult);
+            http_response_code(429);
+            echo json_encode([
+                'success' => false,
+                'error' => 'Trop de tentatives de paiement',
+                'details' => $rateLimitResult,
+                'timestamp' => date('Y-m-d H:i:s')
+            ]);
             exit();
+        }
+        
+        // ✅ NOUVEAU : Log du rate limit sans réponse JSON
+        logError("🔧 DEBUG Rate limit OK - IP: $ip, Tentatives: " . $rateLimitResult['attempts']);
+        
+        // ✅ NOUVEAU : Validation renforcée - Seulement si les données sont présentes ET pas un webhook
+        $isWebhook = !empty($_SERVER['HTTP_STRIPE_SIGNATURE']);
+        
+        if (!$isWebhook && !empty($input['subscriptionType']) && !empty($input['customerEmail'])) {
+            $validationErrors = validatePaymentRequest($input);
+            if (!empty($validationErrors)) {
+                $monitor->logPaymentEvent('payment_validation', 'error', 'Validation failed', $validationErrors);
+                http_response_code(400);
+                echo json_encode([
+                    'success' => false,
+                    'error' => 'Données invalides',
+                    'details' => $validationErrors,
+                    'timestamp' => date('Y-m-d H:i:s')
+                ]);
+                exit();
+            }
+        } else {
+            logError("🔧 DEBUG - Webhook ou données manquantes, validation ignorée");
         }
         
         $subscriptionType = $input['subscriptionType'];
         $product = $PREMIUM_PRODUCTS[$subscriptionType];
-        $customerEmail = $input['customerEmail'] ?? '';
+        $customerEmail = $input['customerEmail'];
         $customerName = $input['customerName'] ?? '';
         $customerLanguage = $input['customerLanguage'] ?? 'fr';
-        $customerPassword = $input['customerPassword'] ?? null; // 🔑 RÉCUPÉRATION du mot de passe
+        $originalPassword = $input['customerPassword'] ?? null;
         $successUrl = $input['successUrl'] ?? 'prayertimesapp://payment-success';
         $cancelUrl = $input['cancelUrl'] ?? 'prayertimesapp://payment-cancel';
+        
+        // ✅ NOUVEAU : Vérification que les données sont complètes - Seulement pour les requêtes normales
+        $isWebhook = !empty($_SERVER['HTTP_STRIPE_SIGNATURE']);
+        
+        if (!$isWebhook && (empty($customerEmail) || empty($subscriptionType))) {
+            logError("❌ Données manquantes - Email: " . ($customerEmail ? 'OK' : 'MANQUANT') . ", Type: " . ($subscriptionType ? 'OK' : 'MANQUANT'));
+            http_response_code(400);
+            echo json_encode([
+                'success' => false,
+                'error' => 'Données manquantes',
+                'timestamp' => date('Y-m-d H:i:s')
+            ]);
+            exit();
+        }
+        
+        // ✅ NOUVEAU : Créer un token temporaire sécurisé au lieu de stocker le mot de passe
+        logError("🔧 DEBUG Route - Avant création token - Email: $customerEmail, Type: $subscriptionType");
+        $temporaryToken = createTemporaryToken(
+            $customerEmail, 
+            $subscriptionType, 
+            $customerName, 
+            $customerLanguage, 
+            $originalPassword
+        );
+        logError("🔧 DEBUG Route - Token créé: $temporaryToken");
         
         // Créer ou récupérer le customer
         $customer = null;
@@ -119,7 +402,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_SERVER['REQUEST_URI'] === '/api/s
             $customer = createOrGetCustomer($customerEmail);
         }
         
-        // Créer la session de checkout
+        // ✅ SÉCURISÉ : Créer la session de checkout sans données sensibles
         $sessionData = [
             'payment_method_types' => ['card'],
             'mode' => 'subscription',
@@ -134,7 +417,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_SERVER['REQUEST_URI'] === '/api/s
                 'customer_email' => $customerEmail,
                 'customer_name' => $customerName,
                 'customer_language' => $customerLanguage,
-                'customer_password' => $customerPassword, // 🔑 ENREGISTREMENT du mot de passe
+                'payment_token' => $temporaryToken, // ✅ SÉCURISÉ : Token au lieu du mot de passe
                 'app' => 'prayer_times_app',
             ],
         ];
@@ -148,19 +431,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_SERVER['REQUEST_URI'] === '/api/s
         
         $session = Session::create($sessionData);
         
+        $responseTime = round((microtime(true) - $startTime) * 1000);
+        
+        // ✅ NOUVEAU : Log du monitoring sans réponse JSON
+        logError("🔧 DEBUG Monitoring - Session créée - ID: " . $session->id . ", Type: $subscriptionType, Email: $customerEmail, Temps: ${responseTime}ms");
+        
         echo json_encode([
+            'success' => true,
             'sessionUrl' => $session->url,
             'sessionId' => $session->id,
+            'timestamp' => date('Y-m-d H:i:s')
         ]);
         
     } catch (ApiErrorException $e) {
-        logError("Erreur création session checkout", $e);
-        http_response_code(400);
-        echo json_encode(['error' => $e->getMessage()]);
+        $responseTime = round((microtime(true) - $startTime) * 1000);
+        $monitor->logPaymentEvent('payment_session_error', 'error', 'Erreur Stripe API', [
+            'error' => $e->getMessage(),
+            'subscription_type' => $subscriptionType ?? 'unknown'
+        ], $responseTime);
+        handlePaymentError($e, 'création session checkout');
     } catch (Exception $e) {
-        logError("Erreur générale création session", $e);
-        http_response_code(500);
-        echo json_encode(['error' => 'Erreur interne du serveur']);
+        $responseTime = round((microtime(true) - $startTime) * 1000);
+        $monitor->logPaymentEvent('payment_session_error', 'error', 'Erreur générale', [
+            'error' => $e->getMessage(),
+            'subscription_type' => $subscriptionType ?? 'unknown'
+        ], $responseTime);
+        handlePaymentError($e, 'création session checkout');
     }
 }
 
@@ -268,19 +564,36 @@ elseif ($_SERVER['REQUEST_METHOD'] === 'POST' && $_SERVER['REQUEST_URI'] === '/a
 
 
 // Route pour créer un payment intent (ancienne approche)
+// ✅ SÉCURISÉ : Route pour créer un payment intent
 elseif ($_SERVER['REQUEST_METHOD'] === 'POST' && $_SERVER['REQUEST_URI'] === '/api/stripe/create-payment-intent') {
     try {
         $input = json_decode(file_get_contents('php://input'), true);
         
+        // ✅ NOUVEAU : Validation renforcée
         if (!isset($input['subscriptionType']) || !isset($PREMIUM_PRODUCTS[$input['subscriptionType']])) {
             http_response_code(400);
-            echo json_encode(['error' => 'Type d\'abonnement invalide']);
+            echo json_encode([
+                'success' => false,
+                'error' => 'Type d\'abonnement invalide',
+                'timestamp' => date('Y-m-d H:i:s')
+            ]);
+            exit();
+        }
+        
+        // ✅ NOUVEAU : Validation de l'email
+        if (!isset($input['email']) || !filter_var($input['email'], FILTER_VALIDATE_EMAIL)) {
+            http_response_code(400);
+            echo json_encode([
+                'success' => false,
+                'error' => 'Email invalide',
+                'timestamp' => date('Y-m-d H:i:s')
+            ]);
             exit();
         }
         
         $subscriptionType = $input['subscriptionType'];
         $product = $PREMIUM_PRODUCTS[$subscriptionType];
-        $email = $input['email'] ?? 'user@example.com';
+        $email = $input['email'];
         
         // Créer ou récupérer le customer
         $customer = createOrGetCustomer($email);
@@ -301,18 +614,16 @@ elseif ($_SERVER['REQUEST_METHOD'] === 'POST' && $_SERVER['REQUEST_URI'] === '/a
         ]);
         
         echo json_encode([
+            'success' => true,
             'clientSecret' => $paymentIntent->client_secret,
             'customerId' => $customer->id,
+            'timestamp' => date('Y-m-d H:i:s')
         ]);
         
     } catch (ApiErrorException $e) {
-        logError("Erreur création payment intent", $e);
-        http_response_code(400);
-        echo json_encode(['error' => $e->getMessage()]);
+        handlePaymentError($e, 'création payment intent');
     } catch (Exception $e) {
-        logError("Erreur générale", $e);
-        http_response_code(500);
-        echo json_encode(['error' => 'Erreur interne du serveur']);
+        handlePaymentError($e, 'création payment intent');
     }
 }
 
@@ -501,19 +812,19 @@ else {
 
 // ===== FONCTIONS WEBHOOK =====
 
-// Fonction pour gérer la session de checkout complétée
+// ✅ SÉCURISÉ : Fonction pour gérer la session de checkout complétée
 function handleCheckoutSessionCompleted($session) {
     try {
         logError("🎯 Traitement session checkout complétée - ID: " . $session->id);
         
-        // Récupérer les métadonnées de la session
+        // ✅ NOUVEAU : Récupérer les métadonnées de la session
         $subscriptionType = $session->metadata->subscription_type ?? '';
         $customerEmail = $session->metadata->customer_email ?? $session->customer_details->email ?? '';
         $customerName = $session->metadata->customer_name ?? $session->customer_details->name ?? '';
         $customerLanguage = $session->metadata->customer_language ?? 'fr';
-        $customerPassword = $session->metadata->customer_password ?? null;
+        $paymentToken = $session->metadata->payment_token ?? null; // ✅ SÉCURISÉ : Token au lieu du mot de passe
         
-        logError("📧 Email: $customerEmail, Nom: $customerName, Type: $subscriptionType");
+        logError("📧 Email: $customerEmail, Nom: $customerName, Type: $subscriptionType, Token: $paymentToken");
         
         // Si on n'a pas l'email depuis les métadonnées, essayer de le récupérer depuis le customer
         if (empty($customerEmail) && !empty($session->customer)) {
@@ -527,16 +838,47 @@ function handleCheckoutSessionCompleted($session) {
             }
         }
         
+        // ✅ NOUVEAU : Récupérer et valider le token de paiement
+        $tokenData = null;
+        if ($paymentToken) {
+            try {
+                logError("🔧 DEBUG handleCheckoutSessionCompleted - Avant retrieveAndValidateToken");
+                $tokenData = retrieveAndValidateToken($paymentToken);
+                logError("✅ Token validé avec succès");
+            } catch (Exception $e) {
+                logError("❌ Erreur validation token: " . $e->getMessage());
+                // Continuer sans les données du token
+            }
+        } else {
+            logError("❌ Pas de payment_token dans les métadonnées");
+        }
+        
         // Créer le compte utilisateur si les données sont disponibles
         if ($customerEmail && $subscriptionType) {
             logError("✅ Données complètes - création utilisateur...");
-            createUserViaExistingAPI($customerEmail, $customerName, $subscriptionType, $session->id, $customerLanguage, $customerPassword);
+            
+            // ✅ SÉCURISÉ : Utiliser les données du token si disponibles
+            $originalPassword = $tokenData['original_password'] ?? null;
+            $finalCustomerName = $tokenData['customer_name'] ?? $customerName;
+            $finalCustomerLanguage = $tokenData['customer_language'] ?? $customerLanguage;
+            
+            logError("🔧 DEBUG handleCheckoutSessionCompleted - Avant createUserViaExistingAPI");
+            createUserViaExistingAPI(
+                $customerEmail, 
+                $finalCustomerName, 
+                $subscriptionType, 
+                $session->id, 
+                $finalCustomerLanguage, 
+                $originalPassword
+            );
+            logError("✅ createUserViaExistingAPI terminé");
         } else {
             logError("❌ Données manquantes - Email: " . ($customerEmail ? 'OK' : 'MANQUANT') . ", Type: " . ($subscriptionType ? 'OK' : 'MANQUANT'));
         }
         
     } catch (Exception $e) {
         logError("❌ Erreur traitement session checkout", $e);
+        logError("❌ Détails erreur: " . $e->getMessage());
     }
 }
 
@@ -547,9 +889,13 @@ function createUserViaExistingAPI($email, $name, $subscriptionType, $sessionId, 
         
         // Vérifier d'abord si l'utilisateur existe
         $pdo = getDBConnection();
+        logError("🔧 DEBUG createUserViaExistingAPI - Connexion DB OK");
+        
         $stmt = $pdo->prepare("SELECT id FROM users WHERE email = ?");
         $stmt->execute([$email]);
         $existingUser = $stmt->fetch();
+        
+        logError("🔧 DEBUG createUserViaExistingAPI - Vérification utilisateur existant: " . ($existingUser ? 'EXISTE' : 'N\'EXISTE PAS'));
         
         if ($existingUser) {
             logError("👤 Utilisateur existe déjà - ID: " . $existingUser['id']);
@@ -567,8 +913,12 @@ function createUserViaExistingAPI($email, $name, $subscriptionType, $sessionId, 
             logError("🔑 Génération mot de passe temporaire: $passwordToUse");
         }
         
+        logError("🔧 DEBUG createUserViaExistingAPI - Avant hash du mot de passe");
+        
         // Créer l'utilisateur directement avec le même code que auth.php
         $password_hash = password_hash($passwordToUse, PASSWORD_DEFAULT);
+        
+        logError("🔧 DEBUG createUserViaExistingAPI - Mot de passe hashé, préparation requête INSERT");
         
         $insertStmt = $pdo->prepare("
             INSERT INTO users (
@@ -639,6 +989,7 @@ function createUserViaExistingAPI($email, $name, $subscriptionType, $sessionId, 
             0 // auto_backup_enabled
         ];
         
+        logError("🔧 DEBUG createUserViaExistingAPI - Avant exécution INSERT");
         $insertStmt->execute($params);
         
         $userId = $pdo->lastInsertId();
@@ -661,11 +1012,14 @@ function createUserViaExistingAPI($email, $name, $subscriptionType, $sessionId, 
     }
 }
 
-// Fonction pour enregistrer l'abonnement premium dans toutes les tables
+// ✅ SÉCURISÉ : Fonction pour enregistrer l'abonnement premium dans toutes les tables
 function insertPremiumSubscription($userId, $sessionId, $subscriptionType) {
+    $pdo = getDBConnection();
+    
+    // ✅ NOUVEAU : Démarrer une transaction pour garantir la cohérence
+    $pdo->beginTransaction();
+    
     try {
-        $pdo = getDBConnection();
-        
         // Calculer les données communes
         $expiryDate = match($subscriptionType) {
             'monthly' => date('Y-m-d H:i:s', strtotime('+1 month')),
@@ -680,6 +1034,11 @@ function insertPremiumSubscription($userId, $sessionId, $subscriptionType) {
             'family' => 2999, // 29.99€ en centimes
             default => 1999
         };
+        
+        // ✅ NOUVEAU : Validation des données avant insertion
+        if (!$userId || !$sessionId || !$subscriptionType) {
+            throw new Exception("Données manquantes pour l'insertion premium");
+        }
         
         // Insérer dans premium_subscriptions (gestion Stripe)
         $subscriptionStmt = $pdo->prepare("
@@ -740,8 +1099,16 @@ function insertPremiumSubscription($userId, $sessionId, $subscriptionType) {
         
         $paymentStmt->execute([$userId, $subscriptionId, $purchaseId, $amount]);
         
+        // ✅ NOUVEAU : Valider la transaction
+        $pdo->commit();
+        
+        logError("✅ Transaction premium réussie pour l'utilisateur $userId");
+        
     } catch (Exception $e) {
-        logError("Erreur insertion premium complète", $e);
+        // ✅ NOUVEAU : Rollback en cas d'erreur
+        $pdo->rollBack();
+        logError("❌ Erreur insertion premium - rollback effectué", $e);
+        throw $e; // Relancer l'erreur pour la gestion
     }
 }
 

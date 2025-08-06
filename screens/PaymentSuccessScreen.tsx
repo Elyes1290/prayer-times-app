@@ -134,8 +134,10 @@ const PaymentSuccessScreen: React.FC = () => {
   }, []);
 
   const handleContinue = () => {
-    // Rediriger vers l'onglet des paramètres
-    router.replace("/settings");
+    // Rediriger vers Settings de manière stable sans refresh
+    setTimeout(() => {
+      router.push("/settings");
+    }, 100);
   };
 
   return (

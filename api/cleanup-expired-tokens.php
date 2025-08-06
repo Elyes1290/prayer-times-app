@@ -1,0 +1,65 @@
+<?php
+header('Content-Type: application/json');
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: POST');
+header('Access-Control-Allow-Headers: Content-Type');
+
+require_once 'config.php';
+
+try {
+    $pdo = getDBConnection();
+    
+    // Démarrer une transaction
+    $pdo->beginTransaction();
+    
+    // 1. Supprimer les tokens expirés
+    $stmt = $pdo->prepare("
+        DELETE FROM temp_payment_tokens 
+        WHERE expires_at < NOW()
+    ");
+    $stmt->execute();
+    $expiredTokens = $stmt->rowCount();
+    
+    // 2. Marquer comme utilisés les tokens très anciens (plus de 24h)
+    $stmt = $pdo->prepare("
+        UPDATE temp_payment_tokens 
+        SET used = 1 
+        WHERE created_at < DATE_SUB(NOW(), INTERVAL 24 HOUR) 
+            AND used = 0
+    ");
+    $stmt->execute();
+    $oldTokens = $stmt->rowCount();
+    
+    // Valider la transaction
+    $pdo->commit();
+    
+    // Réponse de succès
+    echo json_encode([
+        'success' => true,
+        'message' => 'Nettoyage des tokens terminé avec succès',
+        'data' => [
+            'expired_tokens_deleted' => $expiredTokens,
+            'old_tokens_marked_used' => $oldTokens,
+            'timestamp' => date('Y-m-d H:i:s')
+        ]
+    ]);
+    
+} catch (PDOException $e) {
+    // Annuler la transaction en cas d'erreur
+    if ($pdo->inTransaction()) {
+        $pdo->rollBack();
+    }
+    
+    echo json_encode([
+        'success' => false,
+        'error' => 'Erreur de base de données',
+        'message' => $e->getMessage()
+    ]);
+} catch (Exception $e) {
+    echo json_encode([
+        'success' => false,
+        'error' => 'Erreur générale',
+        'message' => $e->getMessage()
+    ]);
+}
+?> 

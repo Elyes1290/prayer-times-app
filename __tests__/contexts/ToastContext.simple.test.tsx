@@ -1,3 +1,6 @@
+import React from "react";
+import { renderHook, act } from "@testing-library/react-native";
+import { ToastProvider, useToast } from "../../contexts/ToastContext";
 // Mock du composant Toast
 jest.mock("../../components/Toast", () => {
   return function MockToast() {
@@ -8,14 +11,39 @@ jest.mock("../../components/Toast", () => {
 // Mock de react-native
 jest.mock("react-native", () => ({
   View: ({ children }: any) => children,
+  Text: ({ children, ...props }: any) => {
+    const React = require("react");
+    return React.createElement("Text", props, children);
+  },
   StyleSheet: {
     create: (styles: any) => styles,
+    flatten: (style: any) => style,
+  },
+  Platform: {
+    OS: "android",
+  },
+  Dimensions: {
+    get: jest.fn(() => ({ width: 375, height: 667 })),
+  },
+  useColorScheme: jest.fn(() => "light"),
+  NativeModules: {
+    AdhanModule: {
+      setLocation: jest.fn(),
+      setCalculationMethod: jest.fn(),
+      saveNotificationSettings: jest.fn(),
+      getSavedAutoLocation: jest.fn(),
+      setAdhanVolume: jest.fn(),
+      forceUpdateWidgets: jest.fn(),
+      forceUpdateWidgetsWithoutClearingCache: jest.fn(),
+      saveTodayPrayerTimes: jest.fn(),
+      playAdhan: jest.fn(),
+      stopAdhan: jest.fn(),
+      setVolume: jest.fn(),
+      setAdhanSound: jest.fn(),
+      cancelAllAdhanAlarms: jest.fn(),
+    },
   },
 }));
-
-import React from "react";
-import { renderHook, act } from "@testing-library/react-native";
-import { ToastProvider, useToast } from "../../contexts/ToastContext";
 
 // Test helper pour wrapper le provider
 const TestWrapper = ({ children }: { children: React.ReactNode }) => (
