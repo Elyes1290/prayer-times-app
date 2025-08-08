@@ -510,6 +510,7 @@
     "network_error": "Network error",
     "server_error": "Server error",
     "connection_failed": "Connection failed",
+    "single_device_only": "Unauthorized. Please sign in on one device only.",
     "timeout_error": "Timeout error",
 
     "permission_denied": "Permission denied",

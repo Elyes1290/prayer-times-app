@@ -546,6 +546,7 @@
     "network_error": "خطأ في الشبكة",
     "server_error": "خطأ في الخادم",
     "connection_failed": "فشل الاتصال",
+    "single_device_only": "غير مصرح. يرجى تسجيل الدخول على جهاز واحد فقط.",
     "timeout_error": "خطأ انتهاء المهلة",
 
     "permission_denied": "تم رفض الإذن",

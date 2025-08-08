@@ -102,6 +102,11 @@ function handleGetUserStats() {
         return;
     }
     
+    // 🔐 Auth obligatoire
+    $auth = requireAuthStrict();
+    $authUserId = $auth['user_id'];
+
+    // On autorise en lecture seulement pour l'utilisateur authentifié
     $user_id = $_GET['user_id'] ?? null;
     $email = $_GET['email'] ?? null;
     
@@ -115,14 +120,14 @@ function handleGetUserStats() {
         return;
     }
     
-    // Récupérer l'utilisateur selon le paramètre fourni
-    if ($user_id) {
-        $stmt = $pdo->prepare("SELECT id, premium_status FROM users WHERE id = ? AND status = 'active'");
-        $stmt->execute([$user_id]);
-    } else {
-        $stmt = $pdo->prepare("SELECT id, premium_status FROM users WHERE email = ? AND status = 'active'");
-        $stmt->execute([$email]);
+    // Forcer l'utilisateur courant: on ignore un user_id/email d'un autre utilisateur
+    if ($user_id && (int)$user_id !== (int)$authUserId) {
+        handleError('Accès interdit aux stats d’un autre utilisateur', 403);
     }
+
+    // Récupérer l'utilisateur authentifié
+    $stmt = $pdo->prepare("SELECT id, premium_status FROM users WHERE id = ? AND status = 'active'");
+    $stmt->execute([$authUserId]);
     
     $user = $stmt->fetch();
     

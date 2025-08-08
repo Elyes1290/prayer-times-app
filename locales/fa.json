@@ -494,6 +494,7 @@
     "network_error": "خطای شبکه",
     "server_error": "خطای سرور",
     "connection_failed": "اتصال ناموفق",
+    "single_device_only": "غیرمجاز. لطفاً فقط روی یک دستگاه وارد شوید.",
     "timeout_error": "خطای زمان انتظار",
 
     "permission_denied": "اجازه رد شد",

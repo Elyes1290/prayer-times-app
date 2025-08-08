@@ -96,7 +96,7 @@ android {
         applicationId 'com.drogbinho.prayertimesapp2'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 58
+        versionCode 59
         versionName "1.0.3"
     }
     signingConfigs {
@@ -107,10 +107,28 @@ android {
         keyPassword 'android'
     }
     release {
-        storeFile file('my-release-key.jks')
-        storePassword project.hasProperty('MYAPP_RELEASE_STORE_PASSWORD') ? MYAPP_RELEASE_STORE_PASSWORD : 'android123'
-        keyAlias 'my-key-alias'
-        keyPassword project.hasProperty('MYAPP_RELEASE_KEY_PASSWORD') ? MYAPP_RELEASE_KEY_PASSWORD : 'android123'
+        // Utiliser des variables d'environnement injectées par le CI/environnement local
+        def storeFilePath = System.getenv('MYAPP_UPLOAD_STORE_FILE')
+        def storePasswordEnv = System.getenv('MYAPP_UPLOAD_STORE_PASSWORD')
+        def keyAliasEnv = System.getenv('MYAPP_UPLOAD_KEY_ALIAS')
+        def keyPasswordEnv = System.getenv('MYAPP_UPLOAD_KEY_PASSWORD')
+
+        def hasAllReleaseCreds = storeFilePath && storePasswordEnv && keyAliasEnv && keyPasswordEnv
+
+        if (hasAllReleaseCreds) {
+            storeFile file(storeFilePath)
+            storePassword storePasswordEnv
+            keyAlias keyAliasEnv
+            keyPassword keyPasswordEnv
+        } else {
+            // Fallback local: signer avec la debug.keystore pour éviter l'échec de build
+            // ATTENTION: à n'utiliser que pour des builds locaux de test.
+            println '⚠️  MYAPP_* variables non définies: fallback sur debug.keystore pour release locale.'
+            storeFile file('debug.keystore')
+            storePassword 'android'
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+        }
     }
     }
     buildTypes {

@@ -5,13 +5,15 @@ import { StatusBar } from "expo-status-bar";
 import React, { useEffect } from "react";
 import { Platform, View, StyleSheet, Animated } from "react-native";
 import { SettingsProvider } from "../contexts/SettingsContext";
-import { FavoritesProvider } from "../contexts/FavoritesContext";
-import { PremiumProvider } from "../contexts/PremiumContext";
-import { ToastProvider } from "../contexts/ToastContext";
+import { FavoritesProvider, useFavorites } from "../contexts/FavoritesContext";
+import { PremiumProvider, usePremium } from "../contexts/PremiumContext";
 import { BackupProvider } from "../contexts/BackupContext";
 import "../locales/i18n-optimized";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { cleanupObsoleteUserData } from "../utils/userAuth";
+import { showGlobalToast, ToastProvider } from "../contexts/ToastContext";
+import i18n from "../locales/i18n";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { clearUserStatsCache } from "../utils/clearAppData";
 
 type IconName =
@@ -82,6 +84,9 @@ const TabBarIcon = ({ icon, color, size, focused }: TabBarIconProps) => {
 
 export default function TabLayout() {
   const insets = useSafeAreaInsets();
+  const { forceLogout } = usePremium();
+  const { forceReset } = useFavorites();
+  const [forceRefresh, setForceRefresh] = React.useState(0);
 
   useEffect(() => {
     if (Platform.OS === "android") {
@@ -106,7 +111,57 @@ export default function TabLayout() {
         await clearUserStatsCache();
         console.log("🔄 Cache des statistiques supprimé pour force refresh");
 
-        console.log("✅ Application initialisée en mode professionnel");
+        // 🔐 Vérification anti-multi-appareils au démarrage
+        try {
+          const token = await AsyncStorage.getItem("auth_token");
+          if (token) {
+            const apiBase = "https://myadhanapp.com/api";
+            // Test avec user-stats.php qui est protégé et retourne 401 si token invalide
+            const ping = await fetch(`${apiBase}/user-stats.php`, {
+              method: "GET",
+              headers: {
+                Accept: "application/json",
+                Authorization: `Bearer ${token}`,
+              },
+            });
+            console.log("🔐 Vérification token au démarrage:", ping.status);
+            if (ping.status === 401) {
+              console.log("❌ Token invalide détecté, déconnexion...");
+              await AsyncStorage.multiRemove([
+                "auth_token",
+                "refresh_token",
+                "user_data",
+                "explicit_connection",
+                "@prayer_app_premium_user",
+                "user_stats_cache",
+              ]);
+              console.log("✅ Données utilisateur supprimées");
+
+              // Forcer la mise à jour des contextes React
+              await forceLogout();
+              await forceReset();
+
+              // Forcer un re-render de tous les composants
+              setForceRefresh((prev) => prev + 1);
+
+              showGlobalToast({
+                type: "error",
+                title:
+                  i18n.t("toasts.connection_interrupted") ||
+                  "Connexion interrompue",
+                message:
+                  i18n.t("toasts.single_device_only") ||
+                  "Non autorisé. Veuillez vous connecter sur un seul appareil.",
+              });
+            } else {
+              console.log("✅ Token valide au démarrage");
+            }
+          }
+        } catch (error) {
+          console.error("❌ Erreur vérification token:", error);
+        }
+
+        console.log("✅ Application initialisée");
         initializationRef.current = true;
       } catch (error) {
         console.error("❌ Erreur lors de l'initialisation:", error);
@@ -115,6 +170,14 @@ export default function TabLayout() {
 
     initializeApp();
   }, []); // Dépendances vides = exécution unique au montage
+
+  // 🔄 Forcer la mise à jour des contextes quand forceRefresh change
+  useEffect(() => {
+    if (forceRefresh > 0) {
+      console.log("🔄 Force refresh déclenché:", forceRefresh);
+      // Les contextes se mettront à jour automatiquement via leurs propres useEffect
+    }
+  }, [forceRefresh]);
 
   return (
     <SettingsProvider>

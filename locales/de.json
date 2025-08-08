@@ -529,6 +529,7 @@
     "network_error": "Netzwerkfehler",
     "server_error": "Serverfehler",
     "connection_failed": "Verbindung fehlgeschlagen",
+    "single_device_only": "Nicht autorisiert. Bitte melden Sie sich nur auf einem Gerät an.",
     "timeout_error": "Zeitüberschreitung",
 
     "permission_denied": "Berechtigung verweigert",

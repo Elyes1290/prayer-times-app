@@ -188,6 +188,8 @@ interface OptimizedSettingsSectionsProps {
 
   // 🔧 AJOUTÉ : Navigation pour les boutons
   navigation: any;
+  // 🔧 AJOUTÉ : Ouverture de la modale premium existante
+  openPremiumModal: () => void;
 }
 
 // Le composant SettingsSections reste identique (sera copié de l'original)
@@ -267,6 +269,7 @@ function SettingsSections({
   applyAllChanges,
   // 🔧 AJOUTÉ : Navigation pour les boutons
   navigation,
+  openPremiumModal,
 }: OptimizedSettingsSectionsProps) {
   const { t } = useTranslation();
 
@@ -880,6 +883,8 @@ function SettingsSections({
           t={t}
           onLoginSuccess={onLoginSuccess}
           currentTheme={currentTheme}
+          isInModal={false}
+          onOpenPremiumModal={openPremiumModal}
           // 🚀 SUPPRIMÉ : onManageAccount car gestion interne maintenant
         />
       ),
@@ -2958,6 +2963,7 @@ ${
           onChangeLanguage={onChangeLanguage}
           reprogrammateNotifications={reprogrammateNotifications}
           navigation={navigation}
+          openPremiumModal={() => uiManager.setShowPremiumModal(true)}
           // 🏙️ États recherche ville depuis hooks optimisés
           cityInput={citySearch.citySearchState.cityInput}
           citySearchResults={citySearch.citySearchState.citySearchResults}
@@ -3099,24 +3105,25 @@ ${
               </TouchableOpacity>
             </View>
 
-            <PremiumLoginSection
-              activatePremium={activatePremium}
-              styles={styles}
-              showToast={showToast}
-              t={t}
-              onLoginSuccess={(userData) => {
-                handleLoginSuccess(userData);
-                // 🚀 CORRECTION : Ne pas fermer automatiquement la modal
-                // L'utilisateur peut maintenant voir l'interface connecté
-                // et choisir de fermer la modal lui-même
-              }}
-              // 🚀 SUPPRIMÉ : onManageAccount car gestion interne maintenant
-            />
+            <ScrollView
+              keyboardShouldPersistTaps="handled"
+              showsVerticalScrollIndicator={false}
+              contentContainerStyle={{ paddingBottom: 16 }}
+            >
+              <PremiumLoginSection
+                activatePremium={activatePremium}
+                styles={styles}
+                showToast={showToast}
+                t={t}
+                onLoginSuccess={(userData) => {
+                  handleLoginSuccess(userData);
+                }}
+                isInModal={true}
+              />
 
-            {/* 🚀 NOUVEAU : Toast à l'intérieur de la modal pour qu'il soit visible */}
-            <View style={styles.modalToastContainer}>
-              {/* Le toast sera rendu ici par le ToastProvider */}
-            </View>
+              {/* 🚀 Toast dans la zone scrollable pour rester visible */}
+              <View style={styles.modalToastContainer} />
+            </ScrollView>
           </View>
         </View>
       </Modal>

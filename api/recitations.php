@@ -2,7 +2,13 @@
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
-header('Access-Control-Allow-Headers: Content-Type');
+header('Access-Control-Allow-Headers: Content-Type, Authorization');
+
+require_once 'config.php';
+
+// 🔐 Exiger auth pour toutes les actions premium (catalog/surah/stream/download)
+// Note: on autorise temporairement catalog/surah sans premium strict si besoin, mais on lit l’utilisateur
+$auth = requireAuthStrict();
 
 // Configuration
 $basePath = '../private/premium/quran/';
@@ -33,18 +39,35 @@ try {
             break;
             
         case 'stream':
+            // Vérifier premium
+            if (empty($auth['is_premium'])) {
+                http_response_code(403);
+                echo json_encode(['success' => false, 'message' => 'Abonnement Premium requis']);
+                exit;
+            }
             $reciter = $_GET['reciter'] ?? '';
             $surah = $_GET['surah'] ?? '';
             streamAudio($reciter, $surah);
             break;
             
         case 'download':
+            // Vérifier premium
+            if (empty($auth['is_premium'])) {
+                http_response_code(403);
+                echo json_encode(['success' => false, 'message' => 'Abonnement Premium requis']);
+                exit;
+            }
             $reciter = $_GET['reciter'] ?? '';
             $surah = $_GET['surah'] ?? '';
             downloadAudio($reciter, $surah);
             break;
 
         case 'sync_downloads':
+            if (empty($auth['is_premium'])) {
+                http_response_code(403);
+                echo json_encode(['success' => false, 'message' => 'Abonnement Premium requis']);
+                exit;
+            }
             // 🚀 NOUVEAU : Synchronisation des téléchargements
             $input = json_decode(file_get_contents('php://input'), true);
             

@@ -1,14 +1,16 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getCurrentUserId } from "./userAuth";
 import { AppConfig } from "./config";
+import i18n from "../locales/i18n";
+import { showGlobalToast } from "../contexts/ToastContext";
 
-// Import conditionnel pour DeviceInfo
-let DeviceInfo: any = null;
-try {
-  DeviceInfo = require("react-native-device-info");
-} catch (error) {
-  // console.log("DeviceInfo non disponible, utilisation du fallback");
-}
+// Import conditionnel pour DeviceInfo (désactivé car non utilisé)
+// let DeviceInfo: any = null;
+// try {
+//   DeviceInfo = require("react-native-device-info");
+// } catch {
+//   // noop
+// }
 
 // Configuration API
 const API_BASE = AppConfig.API_BASE_URL;
@@ -31,12 +33,31 @@ export interface ApiError {
 
 class ApiClient {
   private static instance: ApiClient;
+  private cachedDeviceId: string | null = null;
 
   static getInstance(): ApiClient {
     if (!ApiClient.instance) {
       ApiClient.instance = new ApiClient();
     }
     return ApiClient.instance;
+  }
+
+  // Génère/récupère un device_id applicatif (UUID-like), stocké de façon persistante
+  private async getOrCreateDeviceId(): Promise<string> {
+    if (this.cachedDeviceId) return this.cachedDeviceId;
+    let existing = await AsyncStorage.getItem("device_id");
+    if (!existing) {
+      // Générer un identifiant aléatoire (hex 32)
+      const randomBytes = Array.from({ length: 16 }, () =>
+        Math.floor(Math.random() * 256)
+      );
+      existing = randomBytes
+        .map((b) => b.toString(16).padStart(2, "0"))
+        .join("");
+      await AsyncStorage.setItem("device_id", existing);
+    }
+    this.cachedDeviceId = existing;
+    return existing;
   }
 
   // Faire une requête HTTP générique
@@ -61,11 +82,13 @@ class ApiClient {
         controller.abort();
       }, API_TIMEOUT);
 
+      const token = await AsyncStorage.getItem("auth_token");
       const config: RequestInit = {
         method,
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
         },
         signal: controller.signal,
       };
@@ -85,6 +108,51 @@ class ApiClient {
         clearTimeout(timeoutId);
 
         if (!response.ok) {
+          // Si 401, tenter un refresh token puis retry une fois
+          if (response.status === 401) {
+            const refreshed = await this.tryRefreshToken();
+            if (refreshed) {
+              // Rejouer la requête avec le nouveau token
+              const newToken = await AsyncStorage.getItem("auth_token");
+              const retriedConfig = {
+                ...config,
+                headers: {
+                  ...(config.headers as any),
+                  ...(newToken ? { Authorization: `Bearer ${newToken}` } : {}),
+                },
+              } as RequestInit;
+              const retryResponse = await fetch(url, retriedConfig);
+              const retryResult = await retryResponse.json();
+              if (!retryResponse.ok) {
+                // Afficher un toast global pour avertir l’utilisateur
+                showGlobalToast({
+                  type: "error",
+                  title:
+                    i18n.t("toasts.connection_interrupted") ||
+                    "Connexion interrompue",
+                  message:
+                    i18n.t("toasts.single_device_only") ||
+                    "Non autorisé. Veuillez vous connecter sur un seul appareil.",
+                });
+                throw new Error(
+                  `HTTP ${retryResponse.status}: ${
+                    retryResult.message || "Erreur API"
+                  }`
+                );
+              }
+              return retryResult;
+            }
+            // Refresh impossible → notifier également
+            showGlobalToast({
+              type: "error",
+              title:
+                i18n.t("toasts.connection_interrupted") ||
+                "Connexion interrompue",
+              message:
+                i18n.t("toasts.single_device_only") ||
+                "Non autorisé. Veuillez vous connecter sur un seul appareil.",
+            });
+          }
           throw new Error(
             `HTTP ${response.status}: ${result.message || "Erreur API"}`
           );
@@ -105,6 +173,44 @@ class ApiClient {
     } catch (error: any) {
       console.error(`❌ API Error: ${method} ${endpoint}`, error);
       throw error;
+    }
+  }
+
+  // Tenter de rafraîchir le token d'accès avec le refresh_token stocké
+  private async tryRefreshToken(): Promise<boolean> {
+    try {
+      const refreshToken = await AsyncStorage.getItem("refresh_token");
+      if (!refreshToken) return false;
+
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), API_TIMEOUT);
+
+      const response = await fetch(`${API_BASE}/auth.php`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          action: "refresh",
+          refresh_token: refreshToken,
+        }),
+        signal: controller.signal,
+      });
+      clearTimeout(timeoutId);
+
+      if (!response.ok) return false;
+      const result = await response.json();
+      if (result?.success && result?.data) {
+        const newToken = result.data.token || result.data.auth_token;
+        const newRefresh = result.data.refresh_token;
+        if (newToken) await AsyncStorage.setItem("auth_token", newToken);
+        if (newRefresh) await AsyncStorage.setItem("refresh_token", newRefresh);
+        return true;
+      }
+      return false;
+    } catch {
+      return false;
     }
   }
 
@@ -137,6 +243,16 @@ class ApiClient {
     // 🧪 TEMPORAIRE : Utiliser l'API de test
     return this.makeRequest("/users.php", "GET", null, {
       email: email,
+    });
+  }
+
+  // 🚀 NOUVEAU : Vérifier l'existence d'un email (sans erreur 404 côté client)
+  async checkEmailExists(
+    email: string
+  ): Promise<ApiResponse<{ exists: boolean; email: string }>> {
+    return this.makeRequest("/auth.php", "GET", null, {
+      action: "check_email",
+      email,
     });
   }
 
@@ -182,9 +298,11 @@ class ApiClient {
 
   // 🚀 NOUVEAU : Connexion avec email
   async loginWithEmail(email: string): Promise<ApiResponse> {
+    const device_id = await this.getOrCreateDeviceId();
     return this.makeRequest("/auth.php", "POST", {
       action: "login",
       email: email,
+      device_id,
     });
   }
 
@@ -193,9 +311,11 @@ class ApiClient {
     email: string;
     password: string;
   }): Promise<ApiResponse> {
+    const device_id = await this.getOrCreateDeviceId();
     return this.makeRequest("/auth.php", "POST", {
       action: "login",
       ...credentials,
+      device_id,
     });
   }
 
@@ -226,9 +346,11 @@ class ApiClient {
     location_lat?: number;
     location_lon?: number;
   }): Promise<ApiResponse> {
+    const device_id = await this.getOrCreateDeviceId();
     return this.makeRequest("/auth.php", "POST", {
       action: "register",
       ...userData,
+      device_id,
     });
   }
 
@@ -469,7 +591,7 @@ class ApiClient {
         });
         clearTimeout(timeoutId);
         return response.ok;
-      } catch (error) {
+      } catch {
         clearTimeout(timeoutId);
         return false;
       }
@@ -500,3 +622,19 @@ class ApiClient {
 }
 
 export default ApiClient.getInstance();
+
+// Vérifier rapidement la validité du token courant côté serveur
+export async function verifyAuth(): Promise<boolean> {
+  try {
+    const client = ApiClient.getInstance();
+    // Réutilise makeRequest via une méthode publique fictive
+    // On appelle un endpoint protégé minimal: GET /auth.php
+    const res: ApiResponse = await (client as any).makeRequest(
+      "/auth.php",
+      "GET"
+    );
+    return !!res?.success;
+  } catch (e) {
+    return false;
+  }
+}

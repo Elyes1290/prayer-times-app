@@ -467,6 +467,8 @@
     "load_completed": "Carregamento concluído",
     "connection_error": "Erro de conexão",
     "connection_success": "Conexão bem-sucedida",
+    "connection_failed": "Falha na conexão",
+    "single_device_only": "Não autorizado. Faça login apenas em um dispositivo.",
     "connection_lost": "Conexão perdida",
     "connection_restored": "Conexão restaurada",
     "network_error": "Erro de rede",

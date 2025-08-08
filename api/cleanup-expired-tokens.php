@@ -12,7 +12,7 @@ try {
     // Démarrer une transaction
     $pdo->beginTransaction();
     
-    // 1. Supprimer les tokens expirés
+    // 1. Supprimer les tokens temporaires expirés (paiement)
     $stmt = $pdo->prepare("
         DELETE FROM temp_payment_tokens 
         WHERE expires_at < NOW()
@@ -30,6 +30,11 @@ try {
     $stmt->execute();
     $oldTokens = $stmt->rowCount();
     
+    // 3. Supprimer les refresh tokens expirés ou révoqués depuis > 30 jours
+    $stmt = $pdo->prepare("\n        DELETE FROM refresh_tokens\n        WHERE expires_at < NOW()\n           OR (revoked_at IS NOT NULL AND revoked_at < DATE_SUB(NOW(), INTERVAL 30 DAY))\n    ");
+    $stmt->execute();
+    $expiredRefresh = $stmt->rowCount();
+
     // Valider la transaction
     $pdo->commit();
     
@@ -40,6 +45,7 @@ try {
         'data' => [
             'expired_tokens_deleted' => $expiredTokens,
             'old_tokens_marked_used' => $oldTokens,
+            'expired_refresh_deleted' => $expiredRefresh,
             'timestamp' => date('Y-m-d H:i:s')
         ]
     ]);

@@ -325,6 +325,7 @@
     "server_error": "Erreur serveur",
     "connection_failed": "Connexion échouée",
     "timeout_error": "Délai d'attente dépassé",
+    "single_device_only": "Non autorisé. Veuillez vous connecter sur un seul appareil.",
 
     "permission_denied": "Permission refusée",
     "storage_full": "Stockage plein",

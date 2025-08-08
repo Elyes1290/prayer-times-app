@@ -470,6 +470,8 @@
     "load_completed": "Загрузка завершена",
     "connection_error": "Ошибка соединения",
     "connection_success": "Соединение установлено",
+    "connection_failed": "Ошибка подключения",
+    "single_device_only": "Не авторизован. Пожалуйста, войдите только на одном устройстве.",
     "connection_lost": "Соединение потеряно",
     "connection_restored": "Соединение восстановлено",
     "network_error": "Ошибка сети",

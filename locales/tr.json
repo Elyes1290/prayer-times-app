@@ -534,6 +534,7 @@
     "network_error": "Ağ hatası",
     "server_error": "Sunucu hatası",
     "connection_failed": "Bağlantı başarısız",
+    "single_device_only": "Yetkisiz. Lütfen sadece bir cihazda giriş yapın.",
     "timeout_error": "Zaman aşımı hatası",
 
     "permission_denied": "İzin reddedildi",

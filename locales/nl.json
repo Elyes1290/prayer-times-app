@@ -470,6 +470,8 @@
     "load_completed": "Laden voltooid",
     "connection_error": "Verbindingsfout",
     "connection_success": "Verbinding succesvol",
+    "connection_failed": "Verbinding mislukt",
+    "single_device_only": "Niet geautoriseerd. Log alleen in op één apparaat.",
     "connection_lost": "Verbinding verloren",
     "connection_restored": "Verbinding hersteld",
     "network_error": "Netwerkfout",

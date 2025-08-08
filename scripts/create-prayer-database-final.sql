@@ -130,6 +130,29 @@ CREATE TABLE IF NOT EXISTS `user_sessions` (
   KEY `is_active` (`is_active`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Sessions utilisateur actives';
 
+-- ✅ Table des refresh tokens (auth sécurisée)
+CREATE TABLE IF NOT EXISTS `refresh_tokens` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `token_hash` char(64) NOT NULL COMMENT 'SHA-256 hex du refresh token',
+  `device_id` varchar(128) DEFAULT NULL,
+  `user_agent` varchar(255) DEFAULT NULL,
+  `ip_address` varchar(45) DEFAULT NULL,
+  `created_at` timestamp DEFAULT CURRENT_TIMESTAMP,
+  `expires_at` datetime NOT NULL,
+  `last_used_at` datetime DEFAULT NULL,
+  `revoked_at` datetime DEFAULT NULL,
+  `replaced_by` int(11) DEFAULT NULL,
+  
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `token_hash` (`token_hash`),
+  KEY `user_id` (`user_id`),
+  KEY `expires_at` (`expires_at`),
+  KEY `revoked_at` (`revoked_at`),
+  CONSTRAINT `fk_refresh_tokens_user` FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE,
+  CONSTRAINT `fk_refresh_tokens_replaced_by` FOREIGN KEY (`replaced_by`) REFERENCES `refresh_tokens`(`id`) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Refresh tokens (hashés) pour renouveler les access tokens';
+
 -- ✅ Table des logs d'utilisation (analytics)
 CREATE TABLE IF NOT EXISTS `usage_logs` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -608,6 +631,11 @@ CREATE INDEX IF NOT EXISTS `idx_premium_purchases_status` ON `premium_purchases`
 -- Index pour les sessions
 CREATE INDEX IF NOT EXISTS `idx_user_sessions_expires` ON `user_sessions` (`expires_at`);
 
+-- Index pour les refresh tokens
+CREATE INDEX IF NOT EXISTS `idx_refresh_tokens_user` ON `refresh_tokens` (`user_id`);
+CREATE INDEX IF NOT EXISTS `idx_refresh_tokens_expires` ON `refresh_tokens` (`expires_at`);
+CREATE INDEX IF NOT EXISTS `idx_refresh_tokens_revoked` ON `refresh_tokens` (`revoked_at`);
+
 -- ✅ Fin du script
 SELECT 'Base de données Prayer Times App créée avec succès !' AS message; 
 
@@ -914,39 +942,5 @@ ANALYZE TABLE users;
 ANALYZE TABLE premium_subscriptions;
 ANALYZE TABLE rate_limits;
 ANALYZE TABLE payment_monitoring;
+ANALYZE TABLE refresh_tokens;
 
--- =================================================
--- 🎯 RÉSUMÉ PHASE 1 - OPTIMISATIONS APPLIQUÉES
--- =================================================
-
-/*
-🚀 PHASE 1 TERMINÉE - SYSTÈME PROFESSIONNEL :
-
-✅ SÉCURITÉ RENFORCÉE :
-- Rate limiting (protection anti-spam)
-- Monitoring automatique des événements
-- Alertes en temps réel
-
-✅ PERFORMANCE OPTIMISÉE :
-- Index composite pour nettoyage automatique
-- Recherches par email ultra-rapides
-- Validation de tokens instantanée
-- Statistiques optimisées
-
-✅ MONITORING PROFESSIONNEL :
-- Surveillance de la santé du système
-- Tracking des performances
-- Alertes automatiques
-
-🎯 PERFORMANCE ATTENDUE :
-- Requêtes de nettoyage : 10x plus rapides
-- Vérifications email : 5x plus rapides  
-- Validation tokens : 3x plus rapides
-- Statistiques : 8x plus rapides
-- Rate limiting : 2x plus rapides
-
-📊 MAINTENANCE :
-- ANALYZE TABLE mensuel recommandé
-- Monitoring des index manquants
-- Optimisation continue selon usage
-*/

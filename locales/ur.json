@@ -515,6 +515,7 @@
     "network_error": "نیٹ ورک کی خرابی",
     "server_error": "سرور کی خرابی",
     "connection_failed": "کنکشن ناکام",
+    "single_device_only": "غیر مجاز۔ براہ کرم صرف ایک ڈیوائس پر لاگ ان کریں۔",
     "timeout_error": "ٹائم آؤٹ کی خرابی",
 
     "permission_denied": "اجازت مسترد",

@@ -111,6 +111,9 @@ interface FavoritesContextType {
   canAddFavorite: (type: FavoriteType) => { canAdd: boolean; reason?: string };
   syncWithCloud: () => Promise<boolean>;
   isCloudSyncEnabled: boolean;
+
+  // 🚀 NOUVEAU : Fonction pour forcer la réinitialisation des favoris
+  forceReset: () => Promise<void>;
 }
 
 // Valeurs par défaut
@@ -128,6 +131,7 @@ const defaultContext: FavoritesContextType = {
   canAddFavorite: () => ({ canAdd: false }),
   syncWithCloud: async () => false,
   isCloudSyncEnabled: false,
+  forceReset: async () => {},
 };
 
 // Contexte
@@ -536,6 +540,22 @@ export const FavoritesProvider: React.FC<FavoritesProviderProps> = ({
     return favorites.filter((fav) => fav.type === type).length;
   };
 
+  // 🚀 NOUVEAU : Fonction pour forcer la réinitialisation des favoris
+  const forceReset = async (): Promise<void> => {
+    try {
+      console.log("🔄 Réinitialisation forcée des favoris...");
+      setFavorites([]);
+      setLoading(false);
+      await AsyncStorage.removeItem(STORAGE_KEYS.LOCAL_FAVORITES);
+      console.log("✅ Favoris réinitialisés");
+    } catch (error) {
+      console.error(
+        "❌ Erreur lors de la réinitialisation des favoris:",
+        error
+      );
+    }
+  };
+
   const contextValue: FavoritesContextType = {
     favorites,
     loading,
@@ -550,6 +570,7 @@ export const FavoritesProvider: React.FC<FavoritesProviderProps> = ({
     canAddFavorite,
     syncWithCloud,
     isCloudSyncEnabled,
+    forceReset,
   };
 
   return (

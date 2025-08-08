@@ -58,7 +58,7 @@ export const AppConfig = {
 
   // Services externes
   NOMINATIM_API_URL: "https://nominatim.openstreetmap.org",
-  ALADHAN_API_URL: "http://api.aladhan.com/v1",
+  ALADHAN_API_URL: "https://api.aladhan.com/v1",
 };
 
 /**

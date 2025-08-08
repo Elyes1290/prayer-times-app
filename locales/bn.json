@@ -527,6 +527,7 @@
     "network_error": "নেটওয়ার্ক ত্রুটি",
     "server_error": "সার্ভার ত্রুটি",
     "connection_failed": "সংযোগ ব্যর্থ",
+    "single_device_only": "অননুমোদিত। অনুগ্রহ করে শুধুমাত্র একটি ডিভাইসে সাইন ইন করুন।",
     "timeout_error": "টাইমআউট ত্রুটি",
 
     "permission_denied": "অনুমতি প্রত্যাখ্যান",

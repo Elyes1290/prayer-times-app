@@ -30,6 +30,10 @@ interface PremiumLoginSectionProps {
   t: any;
   onLoginSuccess?: (userData: any) => void;
   currentTheme?: "light" | "dark";
+  // Nouveau: contrôle d'ouverture de la modale premium existante
+  onOpenPremiumModal?: () => void;
+  // Nouveau: indique si le composant est rendu DANS la modale
+  isInModal?: boolean;
 }
 
 const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
@@ -39,8 +43,14 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
   t,
   onLoginSuccess,
   currentTheme = "dark",
+  onOpenPremiumModal,
+  isInModal = false,
 }) => {
-  const { forceLogout, checkPremiumStatus } = usePremium();
+  // Couleurs dynamiques selon le thème
+  const isDarkTheme = currentTheme === "dark";
+  const textPrimaryColor = isDarkTheme ? "#F1F5F9" : "#1A1A1A"; // Slate-50 vs noir
+  const textSecondaryColor = isDarkTheme ? "#CBD5E1" : "#666666"; // Slate-300 vs gris
+  const { user: premiumUser, forceLogout, checkPremiumStatus } = usePremium();
   const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState(""); // 🚀 NOUVEAU : Champ mot de passe
@@ -51,7 +61,6 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
   const [hasCheckedUser, setHasCheckedUser] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [emailValid, setEmailValid] = useState(false);
-  const [passwordValid, setPasswordValid] = useState(false);
   const [firstNameValid, setFirstNameValid] = useState(false);
   // Variables d'état pour la validation (supprimées car non utilisées actuellement)
 
@@ -78,12 +87,13 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
   // 🚀 AMÉLIORÉ : Validation détaillée du mot de passe (alignée avec le serveur)
   const validatePassword = (password: string) => {
     const trimmedPassword = password.trim();
-    // Aligné avec les exigences du serveur : 8+ caractères, minuscule, majuscule, chiffre
+    // Exigences : 8-50 caractères, minuscule, majuscule, chiffre, caractère spécial
     return (
       trimmedPassword.length >= 8 &&
       /[a-z]/.test(trimmedPassword) &&
       /[A-Z]/.test(trimmedPassword) &&
       /\d/.test(trimmedPassword) &&
+      /[!@#$%^&*(),.?":{}|<>]/.test(trimmedPassword) &&
       trimmedPassword.length <= 50
     );
   };
@@ -97,6 +107,7 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
       /[a-z]/.test(trimmedPassword) &&
       /[A-Z]/.test(trimmedPassword) &&
       /\d/.test(trimmedPassword) &&
+      /[!@#$%^&*(),.?":{}|<>]/.test(trimmedPassword) &&
       trimmedPassword.length <= 50
     );
   };
@@ -201,7 +212,16 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
 
         if (explicitConnection === "true" && userDataString) {
           // Utilisateur connecté explicitement - charger les données
-          const userData = JSON.parse(userDataString);
+          let userData: any = null;
+          try {
+            userData = JSON.parse(userDataString);
+          } catch {
+            userData = null;
+          }
+          if (!userData) {
+            setHasCheckedUser(true);
+            return;
+          }
           console.log(
             "🔍 [DEBUG] Mode professionnel - connexion explicite détectée, chargement des données"
           );
@@ -232,7 +252,7 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
 
   // 🔄 NOUVEAU : Listener pour détecter les changements de connexion en temps réel
   useEffect(() => {
-    let interval: ReturnType<typeof setInterval>;
+    let interval: ReturnType<typeof setInterval> | undefined;
 
     const pollConnectionStatus = async () => {
       try {
@@ -249,7 +269,13 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
           console.log(
             "🔄 [LISTENER] Auto-connexion détectée - mise à jour de l'interface"
           );
-          const userData = JSON.parse(userDataString);
+          let userData: any = null;
+          try {
+            userData = JSON.parse(userDataString);
+          } catch {
+            userData = null;
+          }
+          if (!userData) return;
           setIsConnected(true);
           setUserData(userData);
 
@@ -272,8 +298,8 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
       }
     };
 
-    // Vérifier toutes les 500ms (seulement quand la modal est visible)
-    interval = setInterval(pollConnectionStatus, 500);
+    // Réduire la fréquence pour économiser la batterie
+    interval = setInterval(pollConnectionStatus, 5000);
 
     return () => {
       if (interval) {
@@ -296,13 +322,39 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
     setEmailValid(validateEmail(email));
   }, [email]);
 
-  useEffect(() => {
-    setPasswordValid(validatePassword(password));
-  }, [password]);
+  // Pas de state dédié pour le mot de passe: validation calculée à l'affichage
 
   useEffect(() => {
     setFirstNameValid(validateFirstName(firstName));
   }, [firstName]);
+
+  // Synchroniser l'UI avec l'état global Premium (pour que la section se mette à jour automatiquement)
+  useEffect(() => {
+    const syncFromContext = async () => {
+      try {
+        if (premiumUser?.isPremium) {
+          setIsConnected(true);
+          // Charger les infos utilisateur affichables
+          const userDataString = await AsyncStorage.getItem("user_data");
+          if (userDataString) {
+            try {
+              setUserData(JSON.parse(userDataString));
+            } catch {
+              setUserData(null);
+            }
+          }
+        } else {
+          setIsConnected(false);
+          setUserData(null);
+        }
+      } catch {
+        // noop
+      } finally {
+        setHasCheckedUser(true);
+      }
+    };
+    syncFromContext();
+  }, [premiumUser?.isPremium]);
 
   // 🚀 NOUVEAU : Mode professionnel - synchronisation EXPLICITE seulement
   // L'utilisateur doit être explicitement connecté pour synchroniser des données
@@ -417,6 +469,22 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
 
           if (result.success && result.data) {
             const userData = result.data.user || result.data;
+            // Stocker le token si présent pour Authorization
+            try {
+              const token =
+                (result as any)?.data?.token ||
+                (result as any)?.token ||
+                (userData as any)?.token;
+              if (token) {
+                await AsyncStorage.setItem("auth_token", token);
+              }
+              const refreshToken =
+                (result as any)?.data?.refresh_token ||
+                (result as any)?.refresh_token;
+              if (refreshToken) {
+                await AsyncStorage.setItem("refresh_token", refreshToken);
+              }
+            } catch {}
             setUserData(userData);
             setIsConnected(true);
 
@@ -426,7 +494,8 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
             // 🚀 NOUVEAU : Forcer la recharge du PremiumContext après login
             await checkPremiumStatus();
 
-            showLocalToast({
+            // Utiliser le toast global pour garantir l'affichage même après re-render en mode connecté
+            showToast({
               type: "success",
               title: t("toasts.success"),
               message: t("toasts.login_success"),
@@ -445,22 +514,8 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
         } else {
           // Inscription - Vérifier si l'email existe d'abord
           try {
-            // 🚀 NOUVEAU : Vérifier si l'email existe déjà sans créer l'utilisateur
             console.log("🔍 Vérification existence email:", currentEmail);
-
-            const checkResponse = await fetch(
-              `https://myadhanapp.com/api/auth.php?action=check_email&email=${encodeURIComponent(
-                currentEmail
-              )}`,
-              {
-                method: "GET",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-              }
-            );
-
-            const checkResult = await checkResponse.json();
+            const checkResult = await apiClient.checkEmailExists(currentEmail);
             console.log("🔍 Résultat vérification email:", checkResult);
 
             if (checkResult.data && checkResult.data.exists === true) {
@@ -501,13 +556,7 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
             return;
           } catch (emailCheckError: any) {
             console.error("❌ Erreur vérification email:", emailCheckError);
-            showLocalToast({
-              type: "error",
-              title: t("toasts.error"),
-              message: t("toasts.network_error"),
-            });
-            setIsLoading(false);
-            return;
+            // Ne pas bloquer l'inscription si le check échoue : laisser poursuivre
           }
         }
       } catch (error) {
@@ -521,7 +570,15 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
         setIsLoading(false);
       }
     },
-    [isLogin, t, showLocalToast, showToast, onLoginSuccess, syncUserDataToLocal]
+    [
+      isLogin,
+      t,
+      showLocalToast,
+      showToast,
+      onLoginSuccess,
+      syncUserDataToLocal,
+      checkPremiumStatus,
+    ]
   );
 
   // 🚀 NOUVEAU : Fonction de déconnexion optimisée
@@ -570,28 +627,34 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
   );
   if (isConnected && userData) {
     return (
-      <View style={localStyles.container}>
+      <View style={[localStyles.container, { minHeight: 300 }]}>
         <View style={localStyles.connectedHeader}>
           <MaterialCommunityIcons
             name="account-check"
             size={24}
             color="#4CAF50"
           />
-          <Text style={localStyles.connectedTitle}>Compte connecté</Text>
+          <Text
+            style={[localStyles.connectedTitle, { color: textPrimaryColor }]}
+          >
+            Compte connecté
+          </Text>
         </View>
 
         <View style={localStyles.userInfo}>
-          <Text style={localStyles.userName}>
+          <Text style={[localStyles.userName, { color: textPrimaryColor }]}>
             {userData.user_first_name || "Utilisateur"}
           </Text>
-          <Text style={localStyles.userEmail}>
+          <Text style={[localStyles.userEmail, { color: textSecondaryColor }]}>
             {userData.email || "Aucun email"}
           </Text>
-          <Text style={localStyles.userStatus}>Statut: Premium</Text>
+          <Text style={[localStyles.userStatus, { color: textSecondaryColor }]}>
+            Statut: Premium
+          </Text>
         </View>
 
         <TouchableOpacity
-          style={localStyles.logoutButton}
+          style={[localStyles.logoutButton, styles?.logoutButton]}
           onPress={handleLogout}
         >
           <MaterialCommunityIcons name="logout" size={20} color="#FF6B6B" />
@@ -599,7 +662,7 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
         </TouchableOpacity>
 
         <TouchableOpacity
-          style={localStyles.manageAccountButton}
+          style={[localStyles.manageAccountButton, styles?.manageAccountButton]}
           onPress={() => {
             // 🚀 TEST : D'abord essayer un simple Alert
             console.log("🔍 [DEBUG] Bouton 'Gérer le compte' cliqué");
@@ -644,9 +707,36 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
     );
   }
 
-  // Interface login/inscription (inchangée)
+  // Interface non connecté
+  if (!isInModal) {
+    // Mode section: afficher uniquement un bouton qui ouvre la modale premium existante
+    return (
+      <View style={localStyles.container}>
+        <View style={localStyles.ctaWrapper}>
+          <TouchableOpacity
+            style={localStyles.sectionCtaButton}
+            onPress={() => onOpenPremiumModal && onOpenPremiumModal()}
+            disabled={isLoading}
+          >
+            {isLoading ? (
+              <ActivityIndicator size="small" color="#FFF" />
+            ) : (
+              <>
+                <MaterialCommunityIcons name="account" size={20} color="#FFF" />
+                <Text style={localStyles.sectionCtaButtonText}>
+                  Ouvrir la connexion / inscription
+                </Text>
+              </>
+            )}
+          </TouchableOpacity>
+        </View>
+      </View>
+    );
+  }
+
+  // Mode modal: afficher le formulaire complet
   return (
-    <View style={localStyles.container}>
+    <View style={[localStyles.container, { minHeight: isLogin ? 400 : 630 }]}>
       <ScrollView
         style={localStyles.scrollContainer}
         showsVerticalScrollIndicator={false}
@@ -666,14 +756,16 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
               setFirstName("");
             }}
           >
-            <Text
-              style={[
-                localStyles.toggleText,
-                isLogin && localStyles.toggleTextActive,
-              ]}
-            >
-              Connexion
-            </Text>
+            <View style={localStyles.signupTabContent}>
+              <Text
+                style={[
+                  localStyles.toggleText,
+                  isLogin && localStyles.toggleTextActive,
+                ]}
+              >
+                {t("premium_ui.login_tab", "Connexion")}
+              </Text>
+            </View>
           </TouchableOpacity>
           <TouchableOpacity
             style={[
@@ -706,16 +798,44 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
               }
             }}
           >
-            <Text
-              style={[
-                localStyles.toggleText,
-                !isLogin && localStyles.toggleTextActive,
-              ]}
-            >
-              Inscription
-            </Text>
+            <View style={localStyles.signupTabContent}>
+              <View style={localStyles.premiumBadge}>
+                <Text style={localStyles.premiumBadgeText}>
+                  👑 {t("premium_ui.badge", "Premium")}
+                </Text>
+              </View>
+              <Text
+                style={[
+                  localStyles.toggleText,
+                  !isLogin && localStyles.toggleTextActive,
+                ]}
+              >
+                {t("premium_ui.signup_tab", "Créer un compte Premium")}
+              </Text>
+            </View>
           </TouchableOpacity>
         </View>
+
+        {/* Encart d'information (visible uniquement en mode inscription) */}
+        {!isLogin && (
+          <View style={localStyles.signupInfoCard}>
+            <MaterialCommunityIcons name="information" size={18} color="#0B5" />
+            <View style={{ flex: 1 }}>
+              <Text style={localStyles.signupInfoText}>
+                {t(
+                  "premium_ui.signup_info_line1",
+                  "La création de compte nécessite un abonnement Premium. Votre compte sera créé automatiquement après le paiement."
+                )}
+              </Text>
+              <Text style={localStyles.signupInfoTextSecondary}>
+                {t(
+                  "premium_ui.signup_info_line2",
+                  "Déjà abonné(e) ? Connectez‑vous avec le même email."
+                )}
+              </Text>
+            </View>
+          </View>
+        )}
 
         {/* Champs de saisie */}
         {!isLogin && (
@@ -829,20 +949,13 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
           <TextInput
             ref={passwordRef}
             style={localStyles.input}
-            placeholder={
-              isLogin ? "Mot de passe" : "Mot de passe (8+ caractères, Aa1)"
-            }
+            placeholder={isLogin ? "Mot de passe" : "Mot de passe"}
             value={password}
             onChangeText={(text) => {
               setPassword(text);
             }}
-            onBlur={() => {
-              // Forcer la validation quand on quitte le champ
-              setPasswordValid(validatePassword(password));
-            }}
+            onBlur={() => {}}
             onSubmitEditing={() => {
-              // Forcer la validation quand on appuie sur Entrée
-              setPasswordValid(validatePassword(password));
               // Optionnel : passer au champ suivant ou soumettre
               handleAuthenticationWithValues(
                 email.trim(),
@@ -1032,7 +1145,6 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
 
             // Mettre à jour les états de validation pour l'affichage
             setEmailValid(validateEmail(currentEmail));
-            setPasswordValid(validatePassword(currentPassword));
             setFirstNameValid(validateFirstName(currentFirstName));
 
             // Appeler handleAuthentication avec les valeurs actuelles
@@ -1136,9 +1248,13 @@ const localStyles = StyleSheet.create({
     padding: 16,
     backgroundColor: "rgba(231, 200, 106, 0.15)",
     borderRadius: 12,
-    margin: 8,
+    marginVertical: 8,
     borderWidth: 1,
     borderColor: "#e7c86a",
+    alignSelf: "stretch",
+    maxWidth: "100%",
+    overflow: "hidden",
+    minHeight: 600,
   },
   toggleContainer: {
     flexDirection: "row",
@@ -1153,6 +1269,8 @@ const localStyles = StyleSheet.create({
     paddingHorizontal: 16,
     borderRadius: 6,
     alignItems: "center",
+    justifyContent: "center",
+    minHeight: 48,
   },
   toggleButtonActive: {
     backgroundColor: "#e7c86a",
@@ -1165,6 +1283,44 @@ const localStyles = StyleSheet.create({
   toggleTextActive: {
     color: "#1A1A1A", // Noir pour fond clair (quand actif)
     fontWeight: "600",
+  },
+  signupTabContent: {
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 6,
+  },
+  premiumBadge: {
+    backgroundColor: "#FDE68A",
+    borderRadius: 12,
+    paddingHorizontal: 8,
+    paddingVertical: 2,
+  },
+  premiumBadgeText: {
+    fontSize: 12,
+    color: "#92400E",
+    fontWeight: "700",
+  },
+  signupInfoCard: {
+    flexDirection: "row",
+    alignItems: "flex-start",
+    gap: 10,
+    backgroundColor: "#ECFDF5",
+    borderColor: "#A7F3D0",
+    borderWidth: 1,
+    borderRadius: 10,
+    padding: 12,
+    marginBottom: 12,
+  },
+  signupInfoText: {
+    color: "#064E3B",
+    fontSize: 13,
+    lineHeight: 18,
+    marginBottom: 2,
+  },
+  signupInfoTextSecondary: {
+    color: "#065F46",
+    fontSize: 12,
   },
   inputContainer: {
     flexDirection: "row",
@@ -1210,6 +1366,34 @@ const localStyles = StyleSheet.create({
     marginBottom: 12,
     gap: 8,
   },
+  // Bouton CTA centré pour la section
+  ctaWrapper: {
+    alignItems: "center",
+    justifyContent: "center",
+    flex: 1,
+    paddingVertical: 8,
+  },
+  sectionCtaButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#e7c86a",
+    paddingVertical: 14,
+    paddingHorizontal: 28,
+    borderRadius: 24,
+    gap: 8,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 6 },
+    shadowOpacity: 0.25,
+    shadowRadius: 12,
+    elevation: 8,
+    minWidth: 260,
+  },
+  sectionCtaButtonText: {
+    color: "#1A1A1A",
+    fontSize: 16,
+    fontWeight: "700",
+  },
   authButtonDisabled: {
     backgroundColor: "#ccc",
   },
@@ -1251,12 +1435,14 @@ const localStyles = StyleSheet.create({
   connectedHeader: {
     flexDirection: "row",
     alignItems: "center",
+    flexWrap: "wrap",
     marginBottom: 16,
   },
   connectedTitle: {
     fontSize: 18,
     fontWeight: "bold",
     marginLeft: 8,
+    flexShrink: 1,
     color: "#1A1A1A", // Noir pour une meilleure visibilité sur fond clair
   },
   userInfo: {
@@ -1283,6 +1469,8 @@ const localStyles = StyleSheet.create({
     paddingVertical: 12,
     paddingHorizontal: 24,
     borderRadius: 8,
+    alignSelf: "stretch",
+    width: "100%",
   },
   logoutButtonText: {
     color: "#FFF",
@@ -1299,6 +1487,8 @@ const localStyles = StyleSheet.create({
     paddingHorizontal: 24,
     borderRadius: 8,
     marginTop: 8,
+    alignSelf: "stretch",
+    width: "100%",
   },
   manageAccountButtonText: {
     color: "#FFF",
@@ -1383,7 +1573,7 @@ const localStyles = StyleSheet.create({
     borderRadius: 20,
     width: "100%",
     maxWidth: 450,
-    maxHeight: "85%",
+    maxHeight: "92%",
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 8 },
     shadowOpacity: 0.5,
@@ -1444,6 +1634,18 @@ const localStyles = StyleSheet.create({
   validationTextValid: {
     color: "#4CAF50",
     fontWeight: "500",
+  },
+  scrollContainer: {
+    flex: 1,
+    padding: 16,
+    backgroundColor: "rgba(231, 200, 106, 0.15)",
+    borderRadius: 12,
+    margin: 8,
+    maxHeight: "92%",
+  },
+  scrollContent: {
+    flexGrow: 1,
+    paddingBottom: 20,
   },
 });
 

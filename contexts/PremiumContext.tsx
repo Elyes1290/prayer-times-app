@@ -203,7 +203,17 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
 
       const storedUser = await AsyncStorage.getItem(STORAGE_KEYS.PREMIUM_USER);
       if (storedUser) {
-        const parsedUser = JSON.parse(storedUser);
+        let parsedUser: any = null;
+        try {
+          parsedUser = JSON.parse(storedUser);
+        } catch {
+          parsedUser = null;
+        }
+        if (!parsedUser) {
+          setUser(defaultUser);
+          setLoading(false);
+          return;
+        }
 
         // 🚀 SIMPLIFICATION : Si on a des données premium, on est premium
         const isPremium =
@@ -308,8 +318,12 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
       const storedUser = await AsyncStorage.getItem(STORAGE_KEYS.PREMIUM_USER);
       let hasPurchasedPremium = false;
       if (storedUser) {
-        const parsedUser = JSON.parse(storedUser);
-        hasPurchasedPremium = !!parsedUser.hasPurchasedPremium;
+        try {
+          const parsedUser = JSON.parse(storedUser);
+          hasPurchasedPremium = !!parsedUser.hasPurchasedPremium;
+        } catch {
+          hasPurchasedPremium = false;
+        }
       }
       await AsyncStorage.setItem(
         STORAGE_KEYS.PREMIUM_USER,
@@ -495,7 +509,18 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
       // 1. Vérifier les données locales
       const storedUser = await AsyncStorage.getItem(STORAGE_KEYS.PREMIUM_USER);
       if (storedUser) {
-        const parsedUser = JSON.parse(storedUser);
+        let parsedUser: any = null;
+        try {
+          parsedUser = JSON.parse(storedUser);
+        } catch {
+          parsedUser = null;
+        }
+        if (!parsedUser) {
+          return {
+            hasActivePremium: false,
+            shouldRedirectToLogin: false,
+          };
+        }
         if (parsedUser.isPremium && parsedUser.expiryDate) {
           const expiryDate = new Date(parsedUser.expiryDate);
           const now = new Date();

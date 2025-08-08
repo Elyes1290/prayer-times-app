@@ -518,6 +518,7 @@
     "network_error": "Error de red",
     "server_error": "Error del servidor",
     "connection_failed": "Conexión fallida",
+    "single_device_only": "No autorizado. Por favor, inicie sesión solo en un dispositivo.",
     "timeout_error": "Error de tiempo de espera",
 
     "permission_denied": "Permiso denegado",

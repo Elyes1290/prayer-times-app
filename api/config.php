@@ -502,7 +502,7 @@ function validateAuthToken($token) {
             SELECT us.user_id, us.expires_at, u.email, u.premium_status, u.status
             FROM user_sessions us
             JOIN users u ON us.user_id = u.id
-            WHERE us.session_token = ? AND us.expires_at > NOW() AND u.status = 'active'
+            WHERE us.session_token = ? AND us.expires_at > NOW() AND us.is_active = 1 AND u.status = 'active'
         ");
         
         $stmt->execute([$token]);
@@ -531,6 +531,198 @@ function validateAuthToken($token) {
     } catch (Exception $e) {
         error_log("Erreur validation token: " . $e->getMessage());
         return ['success' => false, 'message' => 'Erreur lors de la validation'];
+    }
+}
+
+/**
+ * 🔐 Extraction du Bearer token depuis les headers (ou fallback via query param `token`)
+ */
+function getBearerToken() {
+    // Via header Authorization: Bearer xxx
+    $authHeader = getHeaderValue('Authorization');
+    if ($authHeader && preg_match('/Bearer\s+(.*)$/i', $authHeader, $matches)) {
+        return $matches[1];
+    }
+
+    // Fallback (utile pour les flux audio ou téléchargements): ?token=xxx
+    if (!empty($_GET['token'])) {
+        return $_GET['token'];
+    }
+    if (!empty($_REQUEST['token'])) {
+        return $_REQUEST['token'];
+    }
+
+    return null;
+}
+
+/**
+ * 🔐 Exiger une authentification stricte pour les endpoints protégés
+ * - Valide le token contre `user_sessions`
+ * - Retourne: [user_id, email, is_premium, status]
+ * - Répond 401 et termine la requête en cas d'échec
+ */
+function requireAuthStrict() {
+    $token = getBearerToken();
+    if (!$token) {
+        handleError('Non autorisé: token manquant', 401);
+    }
+
+    $result = validateAuthToken($token);
+    if (!$result || empty($result['success'])) {
+        handleError('Non autorisé: token invalide ou expiré', 401);
+    }
+
+    return $result;
+}
+
+/** Révoquer toutes les sessions d'accès (access tokens) d'un utilisateur */
+function revokeAllSessionsForUser($userId) {
+    try {
+        $pdo = getDBConnection();
+        // Supprimer toutes les sessions (plus sûr que de marquer inactif)
+        $stmt = $pdo->prepare("DELETE FROM user_sessions WHERE user_id = ?");
+        $stmt->execute([$userId]);
+    } catch (Exception $e) {
+        error_log('Erreur révocation sessions: ' . $e->getMessage());
+    }
+}
+
+/**
+ * =============================
+ * Refresh tokens (hashés en DB)
+ * =============================
+ */
+
+/** Obtenir les headers HTTP de manière compatible */
+function getRequestHeadersCompat() {
+    $headers = [];
+    if (function_exists('getallheaders')) {
+        $headers = getallheaders();
+    } else {
+        foreach ($_SERVER as $name => $value) {
+            if (substr($name, 0, 5) === 'HTTP_') {
+                $key = str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($name, 5)))));
+                $headers[$key] = $value;
+            }
+        }
+    }
+    return $headers;
+}
+
+function getHeaderValue($name) {
+    $headers = getRequestHeadersCompat();
+    foreach ($headers as $k => $v) {
+        if (strcasecmp($k, $name) === 0) {
+            return $v;
+        }
+    }
+    return null;
+}
+
+function getClientIp() {
+    return $_SERVER['REMOTE_ADDR'] ?? null;
+}
+
+function getUserAgent() {
+    return $_SERVER['HTTP_USER_AGENT'] ?? null;
+}
+
+function hashRefreshToken($token) {
+    return hash('sha256', $token);
+}
+
+/** Créer et stocker un refresh token (retourne le token clair) */
+function createRefreshToken($userId, $deviceId = null, $ttlDays = 30) {
+    $pdo = getDBConnection();
+
+    $token = bin2hex(random_bytes(32)); // 64 chars
+    $tokenHash = hashRefreshToken($token);
+    $expiresAt = (new DateTime("+{$ttlDays} days"))->format('Y-m-d H:i:s');
+
+    $stmt = $pdo->prepare("INSERT INTO refresh_tokens (user_id, token_hash, device_id, user_agent, ip_address, created_at, expires_at) VALUES (?, ?, ?, ?, ?, NOW(), ?)");
+    $stmt->execute([
+        $userId,
+        $tokenHash,
+        $deviceId,
+        getUserAgent(),
+        getClientIp(),
+        $expiresAt,
+    ]);
+
+    return $token;
+}
+
+/** Valider un refresh token clair (retourne l'enregistrement si valide) */
+function validateRefreshToken($token) {
+    if (!$token) return false;
+    $pdo = getDBConnection();
+    $hash = hashRefreshToken($token);
+
+    $stmt = $pdo->prepare("SELECT * FROM refresh_tokens WHERE token_hash = ? LIMIT 1");
+    $stmt->execute([$hash]);
+    $row = $stmt->fetch();
+    if (!$row) return false;
+
+    // Vérifier expiration/révocation
+    if (!empty($row['revoked_at'])) return false;
+    if (!empty($row['expires_at']) && strtotime($row['expires_at']) <= time()) return false;
+
+    return $row;
+}
+
+/** Rotation sécurisée: révoque l'ancien et crée un nouveau token */
+function rotateRefreshToken($oldToken, $deviceId = null, $ttlDays = 30) {
+    $pdo = getDBConnection();
+    $pdo->beginTransaction();
+    try {
+        $record = validateRefreshToken($oldToken);
+        if (!$record) {
+            $pdo->rollBack();
+            return false;
+        }
+
+        // Révoquer l'ancien
+        $revoke = $pdo->prepare("UPDATE refresh_tokens SET revoked_at = NOW(), last_used_at = NOW() WHERE id = ?");
+        $revoke->execute([$record['id']]);
+
+        // Créer le nouveau
+        $newToken = bin2hex(random_bytes(32));
+        $newHash = hashRefreshToken($newToken);
+        $expiresAt = (new DateTime("+{$ttlDays} days"))->format('Y-m-d H:i:s');
+
+        $insert = $pdo->prepare("INSERT INTO refresh_tokens (user_id, token_hash, device_id, user_agent, ip_address, created_at, expires_at) VALUES (?, ?, ?, ?, ?, NOW(), ?)");
+        $insert->execute([
+            $record['user_id'],
+            $newHash,
+            $deviceId ?? $record['device_id'],
+            getUserAgent(),
+            getClientIp(),
+            $expiresAt,
+        ]);
+        $newId = $pdo->lastInsertId();
+
+        // Lier replaced_by
+        $link = $pdo->prepare("UPDATE refresh_tokens SET replaced_by = ? WHERE id = ?");
+        $link->execute([$newId, $record['id']]);
+
+        $pdo->commit();
+        return $newToken;
+    } catch (Exception $e) {
+        $pdo->rollBack();
+        error_log('Erreur rotation refresh token: ' . $e->getMessage());
+        return false;
+    }
+}
+
+/** Révoquer tous les refresh tokens d'un utilisateur (ex: logout all) */
+function revokeAllRefreshTokensForUser($userId, $deviceId = null) {
+    $pdo = getDBConnection();
+    if ($deviceId) {
+        $stmt = $pdo->prepare("UPDATE refresh_tokens SET revoked_at = NOW() WHERE user_id = ? AND device_id = ? AND revoked_at IS NULL");
+        $stmt->execute([$userId, $deviceId]);
+    } else {
+        $stmt = $pdo->prepare("UPDATE refresh_tokens SET revoked_at = NOW() WHERE user_id = ? AND revoked_at IS NULL");
+        $stmt->execute([$userId]);
     }
 }
 

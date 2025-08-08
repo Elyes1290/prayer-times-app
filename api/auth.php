@@ -19,6 +19,9 @@ try {
                 case 'login':
                     handleLogin();
                     break;
+                case 'refresh':
+                    handleRefresh();
+                    break;
                 case 'register':
                     handleRegister();
                     break;
@@ -120,12 +123,22 @@ function handleLogin() {
         'has_password' => !empty($user['password_hash'])
     ]);
     
-    // Retourner les données utilisateur
+    // Retourner les données utilisateur + tokens
     $formattedUser = formatUserData($user);
+
+    // Access token (session existant) + refresh token (hashé en DB)
+    $accessToken = generateAuthToken($user['id']);
+    $deviceId = $data['device_id'] ?? null;
+    // Enforcer 1 appareil max: révoquer refresh tokens et sessions existantes
+    revokeAllRefreshTokensForUser($user['id']);
+    revokeAllSessionsForUser($user['id']);
+    $refreshToken = createRefreshToken($user['id'], $deviceId, 30);
     
     jsonResponse(true, [
         'user' => $formattedUser,
-        'auth_token' => generateAuthToken($user['id']),
+        'token' => $accessToken,
+        'auth_token' => $accessToken,
+        'refresh_token' => $refreshToken,
         'login_method' => 'email',
         'has_password' => !empty($user['password_hash'])
     ], "Connexion réussie");
@@ -349,9 +362,19 @@ function handleRegister() {
     file_put_contents(__DIR__ . '/debug_premium.log', $logMessage, FILE_APPEND);
     error_log("📤 Réponse finale - premium_status: " . $formattedUser['premium_status'] . ", subscription_type: " . $formattedUser['subscription_type'] . ", subscription_id: " . $formattedUser['subscription_id']);
     
+    // Générer tokens
+    $accessToken = generateAuthToken($user_id);
+    $deviceId = $data['device_id'] ?? null;
+    // Enforcer 1 appareil max à l'inscription également (refresh + sessions)
+    revokeAllRefreshTokensForUser($user_id);
+    revokeAllSessionsForUser($user_id);
+    $refreshToken = createRefreshToken($user_id, $deviceId, 30);
+
     jsonResponse(true, [
         'user' => $formattedUser,
-        'auth_token' => generateAuthToken($user_id),
+        'token' => $accessToken,
+        'auth_token' => $accessToken,
+        'refresh_token' => $refreshToken,
         'registration_method' => 'email',
         'has_password' => !empty($password_hash)
     ], "Inscription réussie");
@@ -425,30 +448,66 @@ function handleMigrateFirebase() {
  * GET /api/auth.php?token=xxx - Vérifier un token
  */
 function handleVerifyAuth() {
-    $token = $_GET['token'] ?? null;
-    
+    // 🔐 Nouveau: validation réelle via user_sessions
+    $token = getBearerToken();
     if (!$token) {
-        handleError("Token requis", 400);
+        handleError('Token requis', 400);
     }
-    
-    // Vérification simple du token (à améliorer avec JWT)
-    if ($token === 'dev_token_' . date('Y-m-d')) {
-        jsonResponse(true, [
-            'valid' => true,
-            'user_id' => 1,
-            'token_type' => 'development'
-        ], "Token valide");
+
+    $auth = validateAuthToken($token);
+    if (!$auth || empty($auth['success'])) {
+        jsonResponse(false, null, 'Token invalide ou expiré', 401);
     }
-    
-    // Ici implémenter la vraie validation JWT
-    if (strlen($token) >= 32) {
-        jsonResponse(true, [
-            'valid' => true,
-            'token_type' => 'production'
-        ], "Token valide");
+
+    jsonResponse(true, [
+        'valid' => true,
+        'user_id' => $auth['user_id'],
+        'email' => $auth['email'] ?? null,
+        'is_premium' => $auth['is_premium'] ?? false,
+        'token_type' => 'session_db'
+    ], 'Token valide');
+}
+
+/**
+ * POST /api/auth.php {"action":"refresh", "refresh_token":"..."}
+ * Retourne un nouveau access token et un nouveau refresh token (rotation)
+ */
+function handleRefresh() {
+    global $data;
+    $providedRefresh = $data['refresh_token'] ?? null;
+    if (!$providedRefresh) {
+        handleError('refresh_token requis', 400);
     }
-    
-    jsonResponse(false, null, "Token invalide", 401);
+
+    $record = validateRefreshToken($providedRefresh);
+    if (!$record) {
+        handleError('Refresh token invalide ou expiré', 401);
+    }
+
+    // Charger l'utilisateur pour s'assurer qu'il est actif
+    $pdo = getDBConnection();
+    $stmt = $pdo->prepare('SELECT * FROM users WHERE id = ? AND status = \"active\"');
+    $stmt->execute([$record['user_id']]);
+    $user = $stmt->fetch();
+    if (!$user) {
+        handleError('Utilisateur inactif ou inexistant', 403);
+    }
+
+    // Rotation du refresh token
+    $newRefresh = rotateRefreshToken($providedRefresh, $record['device_id'] ?? null, 30);
+    if (!$newRefresh) {
+        handleError('Impossible de renouveler le refresh token', 500);
+    }
+
+    // Nouveau access token
+    $newAccess = generateAuthToken($record['user_id']);
+
+    jsonResponse(true, [
+        'token' => $newAccess,
+        'auth_token' => $newAccess,
+        'refresh_token' => $newRefresh,
+        'user' => formatUserData($user)
+    ], 'Token rafraîchi');
 }
 
 /**

@@ -7,7 +7,7 @@
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
-header('Access-Control-Allow-Headers: Content-Type');
+header('Access-Control-Allow-Headers: Content-Type, Authorization');
 
 // Gérer les requêtes OPTIONS (CORS)
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
@@ -22,11 +22,24 @@ try {
         throw new Exception('Paramètre action requis');
     }
     
+    // 🔐 Exiger que l'utilisateur soit authentifié et premium pour toutes les actions adhans premium
+    require_once 'config.php';
+    $auth = requireAuthStrict();
+    $isPremium = !empty($auth['is_premium']);
+
     switch ($action) {
         case 'catalog':
+            if (!$isPremium) {
+                echo json_encode(['success' => false, 'message' => 'Abonnement Premium requis']);
+                return;
+            }
             handleCatalog();
             break;
         case 'download':
+            if (!$isPremium) {
+                echo json_encode(['success' => false, 'message' => 'Abonnement Premium requis']);
+                return;
+            }
             handleDownload();
             break;
         default:

@@ -3,6 +3,14 @@ import { View, StyleSheet } from "react-native";
 import Toast from "../components/Toast";
 import type { ToastData } from "../components/Toast";
 
+// ✅ Pont global facultatif pour déclencher un toast en dehors de React (ex: utils)
+let globalShowToast: ((toast: Omit<ToastData, "id">) => void) | null = null;
+export const showGlobalToast = (toast: Omit<ToastData, "id">) => {
+  try {
+    if (globalShowToast) globalShowToast(toast);
+  } catch {}
+};
+
 interface ToastContextType {
   showToast: (toast: Omit<ToastData, "id">) => void;
   hideToast: (id: string) => void;
@@ -30,6 +38,14 @@ export const ToastProvider: React.FC<ToastProviderProps> = ({ children }) => {
   const hideToast = (id: string) => {
     setToasts((prev) => prev.filter((toast) => toast.id !== id));
   };
+
+  // Rendre le showToast disponible globalement
+  React.useEffect(() => {
+    globalShowToast = showToast;
+    return () => {
+      globalShowToast = null;
+    };
+  }, []);
 
   return (
     <ToastContext.Provider value={{ showToast, hideToast }}>
