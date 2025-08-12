@@ -159,12 +159,18 @@ export const cleanupObsoleteUserData = async (): Promise<void> => {
         "✅ Nettoyage sélectif terminé (utilisateur connecté explicitement)"
       );
     } else {
-      console.log("🔍 Aucune connexion explicite - nettoyage complet");
+      console.log(
+        "🔍 Aucune connexion explicite - nettoyage sélectif sans toucher à l'onboarding"
+      );
 
-      // 🚀 NOUVEAU : Nettoyage complet pour utilisateurs non connectés
+      // 🚀 IMPORTANT : Préserver l'onboarding et la localisation choisie par l'utilisateur
+      // NE PAS supprimer :
+      // - "userFirstName" (prénom saisi)
+      // - "isFirstTime" (flag première ouverture)
+      // - "locationMode", "manualLocation", "autoLocation" (choix de localisation)
+
       const keysToRemove = [
         "user_data",
-        "userFirstName",
         "premium_user_data",
         "@prayer_app_premium_user",
         "premium_catalog_cache",
@@ -176,14 +182,11 @@ export const cleanupObsoleteUserData = async (): Promise<void> => {
         "lastBackupTime",
         "autoBackupEnabled",
         "apiSyncEnabled",
-        "isFirstTime", // 🚀 CRITIQUE : Force toujours première fois
-        "locationMode", // 🚀 NOUVEAU : Force le choix de localisation
-        "manualLocation", // 🚀 NOUVEAU : Pas de localisation pré-configurée
       ];
 
       await AsyncStorage.multiRemove(keysToRemove);
       console.log(
-        "✅ Toutes les données utilisateur obsolètes ont été supprimées"
+        "✅ Données obsolètes supprimées (onboarding et localisation préservés)"
       );
     }
 
