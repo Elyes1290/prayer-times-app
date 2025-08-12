@@ -1,9 +1,29 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as AsyncStorageModule from "@react-native-async-storage/async-storage";
+
 import { getCurrentUserId } from "./userAuth";
 import { AppConfig } from "./config";
 import i18n from "../locales/i18n";
 import { showGlobalToast } from "../contexts/ToastContext";
 
+// Compatibilité ESM/CJS pour les tests: certains mocks exposent default, d'autres nommés
+const AsyncStorage: any =
+  (AsyncStorageModule as any)?.default ?? (AsyncStorageModule as any);
+// Helpers sûrs pour l'environnement de test (où le mock peut être partiel)
+const safeGetItem = async (key: string): Promise<string | null> => {
+  try {
+    if (AsyncStorage && typeof AsyncStorage.getItem === "function") {
+      return await AsyncStorage.getItem(key);
+    }
+  } catch {}
+  return null;
+};
+const safeSetItem = async (key: string, value: string): Promise<void> => {
+  try {
+    if (AsyncStorage && typeof AsyncStorage.setItem === "function") {
+      await AsyncStorage.setItem(key, value);
+    }
+  } catch {}
+};
 // Import conditionnel pour DeviceInfo (désactivé car non utilisé)
 // let DeviceInfo: any = null;
 // try {
@@ -45,7 +65,7 @@ class ApiClient {
   // Génère/récupère un device_id applicatif (UUID-like), stocké de façon persistante
   private async getOrCreateDeviceId(): Promise<string> {
     if (this.cachedDeviceId) return this.cachedDeviceId;
-    let existing = await AsyncStorage.getItem("device_id");
+    let existing = await safeGetItem("device_id");
     if (!existing) {
       // Générer un identifiant aléatoire (hex 32)
       const randomBytes = Array.from({ length: 16 }, () =>
@@ -54,7 +74,7 @@ class ApiClient {
       existing = randomBytes
         .map((b) => b.toString(16).padStart(2, "0"))
         .join("");
-      await AsyncStorage.setItem("device_id", existing);
+      await safeSetItem("device_id", existing);
     }
     this.cachedDeviceId = existing;
     return existing;
@@ -82,7 +102,7 @@ class ApiClient {
         controller.abort();
       }, API_TIMEOUT);
 
-      const token = await AsyncStorage.getItem("auth_token");
+      const token = await safeGetItem("auth_token");
       const config: RequestInit = {
         method,
         headers: {
@@ -113,7 +133,7 @@ class ApiClient {
             const refreshed = await this.tryRefreshToken();
             if (refreshed) {
               // Rejouer la requête avec le nouveau token
-              const newToken = await AsyncStorage.getItem("auth_token");
+              const newToken = await safeGetItem("auth_token");
               const retriedConfig = {
                 ...config,
                 headers: {
@@ -179,7 +199,7 @@ class ApiClient {
   // Tenter de rafraîchir le token d'accès avec le refresh_token stocké
   private async tryRefreshToken(): Promise<boolean> {
     try {
-      const refreshToken = await AsyncStorage.getItem("refresh_token");
+      const refreshToken = await safeGetItem("refresh_token");
       if (!refreshToken) return false;
 
       const controller = new AbortController();
@@ -204,8 +224,8 @@ class ApiClient {
       if (result?.success && result?.data) {
         const newToken = result.data.token || result.data.auth_token;
         const newRefresh = result.data.refresh_token;
-        if (newToken) await AsyncStorage.setItem("auth_token", newToken);
-        if (newRefresh) await AsyncStorage.setItem("refresh_token", newRefresh);
+        if (newToken) await safeSetItem("auth_token", newToken);
+        if (newRefresh) await safeSetItem("refresh_token", newRefresh);
         return true;
       }
       return false;

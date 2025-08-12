@@ -21,7 +21,10 @@ const mockAsyncStorage = {
 };
 
 // Mock global d'AsyncStorage (doit être le premier)
-jest.mock("@react-native-async-storage/async-storage", () => mockAsyncStorage);
+jest.mock("@react-native-async-storage/async-storage", () => ({
+  __esModule: true,
+  default: mockAsyncStorage,
+}));
 
 // Mock de la fenêtre et du document pour React Native Web
 global.window = global;

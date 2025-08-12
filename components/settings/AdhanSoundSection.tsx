@@ -5,6 +5,8 @@ import {
   TouchableOpacity,
   ActivityIndicator,
   StyleSheet,
+  FlatList,
+  ListRenderItem,
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Slider from "@react-native-community/slider";
@@ -370,106 +372,118 @@ export default function AdhanSoundSection({
                     {t("settings_screen.no_premium_adhans")} (DEBUG)
                   </Text>
                 )}
-                {availableAdhanVoices.map((adhan) => {
-                  const nativeState = downloadState.get(adhan.id);
-                  const isDownloading =
-                    downloadingAdhans.has(adhan.id) ||
-                    nativeState?.isDownloading ||
-                    false;
-                  const progress = nativeState?.progress
-                    ? Math.round(nativeState.progress * 100)
-                    : downloadProgress[adhan.id] || 0;
+                {(() => {
+                  const renderAdhanItem: ListRenderItem<PremiumContent> = ({
+                    item,
+                  }) => {
+                    const nativeState = downloadState.get(item.id);
+                    const isDownloading =
+                      downloadingAdhans.has(item.id) ||
+                      nativeState?.isDownloading ||
+                      false;
+                    const progress = nativeState?.progress
+                      ? Math.round(nativeState.progress * 100)
+                      : downloadProgress[item.id] || 0;
 
-                  return (
-                    <View key={adhan.id} style={styles.premiumAdhanItem}>
-                      <View style={styles.premiumAdhanInfo}>
-                        <Text style={styles.premiumAdhanTitle}>
-                          {adhan.title}
-                        </Text>
-                        <Text style={styles.premiumAdhanSize}>
-                          {adhan.fileSize
-                            ? `${adhan.fileSize} MB`
-                            : t("settings_screen.unknown_size")}
-                        </Text>
-                      </View>
+                    return (
+                      <View style={styles.premiumAdhanItem}>
+                        <View style={styles.premiumAdhanInfo}>
+                          <Text style={styles.premiumAdhanTitle}>
+                            {item.title}
+                          </Text>
+                          <Text style={styles.premiumAdhanSize}>
+                            {item.fileSize
+                              ? `${item.fileSize} MB`
+                              : t("settings_screen.unknown_size")}
+                          </Text>
+                        </View>
 
-                      <View style={styles.premiumAdhanActions}>
-                        {isDownloading ? (
-                          <View style={styles.downloadProgressContainer}>
-                            <View style={styles.progressBarPremium}>
-                              <View
-                                style={[
-                                  styles.progressFillPremium,
-                                  { width: `${progress}%` },
-                                ]}
-                              />
+                        <View style={styles.premiumAdhanActions}>
+                          {isDownloading ? (
+                            <View style={styles.downloadProgressContainer}>
+                              <View style={styles.progressBarPremium}>
+                                <View
+                                  style={[
+                                    styles.progressFillPremium,
+                                    { width: `${progress}%` },
+                                  ]}
+                                />
+                              </View>
+                              <View style={styles.downloadProgressRow}>
+                                <Text style={styles.progressTextPremium}>
+                                  {progress}%
+                                </Text>
+                                <TouchableOpacity
+                                  style={styles.cancelDownloadButton}
+                                  onPress={() => handleCancelDownload(item.id)}
+                                  activeOpacity={0.7}
+                                >
+                                  <MaterialCommunityIcons
+                                    name="close-circle"
+                                    size={20}
+                                    color="#FF6B6B"
+                                  />
+                                </TouchableOpacity>
+                              </View>
                             </View>
-                            <View style={styles.downloadProgressRow}>
-                              <Text style={styles.progressTextPremium}>
-                                {progress}%
-                              </Text>
+                          ) : item.isDownloaded ? (
+                            <View style={styles.downloadedContainer}>
+                              <View style={styles.downloadedIndicator}>
+                                <MaterialCommunityIcons
+                                  name="check-circle"
+                                  size={20}
+                                  color="#4ECDC4"
+                                />
+                                <Text style={styles.downloadedText}>
+                                  {t("downloaded")}
+                                </Text>
+                              </View>
                               <TouchableOpacity
-                                style={styles.cancelDownloadButton}
-                                onPress={() => {
-                                  // console.log(
-                                  // "🛑 Tentative d'annulation pour:",
-                                  // adhan.id
-                                  // );
-                                  handleCancelDownload(adhan.id);
-                                }}
-                                activeOpacity={0.7}
+                                style={styles.deleteButtonPremium}
+                                onPress={() => handleDeleteAdhan(item)}
                               >
                                 <MaterialCommunityIcons
-                                  name="close-circle"
+                                  name="delete"
                                   size={20}
                                   color="#FF6B6B"
                                 />
                               </TouchableOpacity>
                             </View>
-                          </View>
-                        ) : adhan.isDownloaded ? (
-                          <View style={styles.downloadedContainer}>
-                            <View style={styles.downloadedIndicator}>
+                          ) : (
+                            <TouchableOpacity
+                              style={styles.downloadButtonPremium}
+                              onPress={() => handleDownloadAdhan(item)}
+                            >
                               <MaterialCommunityIcons
-                                name="check-circle"
+                                name="download"
                                 size={20}
                                 color="#4ECDC4"
                               />
-                              <Text style={styles.downloadedText}>
-                                {t("downloaded")}
+                              <Text style={styles.downloadButtonTextPremium}>
+                                {t("download")}
                               </Text>
-                            </View>
-
-                            <TouchableOpacity
-                              style={styles.deleteButtonPremium}
-                              onPress={() => handleDeleteAdhan(adhan)}
-                            >
-                              <MaterialCommunityIcons
-                                name="delete"
-                                size={20}
-                                color="#FF6B6B"
-                              />
                             </TouchableOpacity>
-                          </View>
-                        ) : (
-                          <TouchableOpacity
-                            style={styles.downloadButtonPremium}
-                            onPress={() => handleDownloadAdhan(adhan)}
-                          >
-                            <MaterialCommunityIcons
-                              name="download"
-                              size={20}
-                              color="#4ECDC4"
-                            />
-                            <Text style={styles.downloadButtonTextPremium}>
-                              {t("download")}
-                            </Text>
-                          </TouchableOpacity>
-                        )}
+                          )}
+                        </View>
                       </View>
-                    </View>
+                    );
+                  };
+
+                  return (
+                    <FlatList
+                      data={availableAdhanVoices}
+                      keyExtractor={(a) => a.id}
+                      renderItem={renderAdhanItem}
+                      initialNumToRender={8}
+                      maxToRenderPerBatch={8}
+                      windowSize={7}
+                      removeClippedSubviews
+                      nestedScrollEnabled
+                      scrollEnabled={false}
+                      showsVerticalScrollIndicator={false}
+                    />
                   );
-                })}
+                })()}
                 <View style={{ flexDirection: "row", gap: 8, marginTop: 8 }}>
                   <TouchableOpacity
                     style={{

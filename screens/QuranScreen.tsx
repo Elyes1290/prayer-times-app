@@ -20,19 +20,17 @@ import {
   Dimensions,
   TextInput,
   Alert,
-  Platform,
   ScrollView,
 } from "react-native";
 import { useTranslation } from "react-i18next";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { Audio } from "expo-av";
+import audioManager from "../utils/AudioManager";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import FavoriteButton from "../components/FavoriteButton";
 import { QuranVerseFavorite } from "../contexts/FavoritesContext";
 import { usePremium } from "../contexts/PremiumContext";
 import { useToast } from "../contexts/ToastContext";
 import PremiumContentManager, { PremiumContent } from "../utils/premiumContent";
-import { quranAudioAnalyzer, VerseTiming } from "../utils/audioAnalysis";
 import { useNativeDownload } from "../hooks/useNativeDownload";
 import { DownloadInfo } from "../utils/nativeDownloadManager";
 import { Image as ExpoImage } from "expo-image";
@@ -110,29 +108,18 @@ export default function QuranScreen() {
   const playlistItemsRef = useRef<PremiumContent[]>([]);
 
   // 🎨 NOUVEAU : État pour la section récitateur rétractable
-  const [reciterSectionCollapsed, setReciterSectionCollapsed] = useState(true);
+  // const [reciterSectionCollapsed, setReciterSectionCollapsed] = useState(true);
   // 🎨 NOUVEAU : État pour le modal des contrôles audio
   const [audioControlsModalVisible, setAudioControlsModalVisible] =
     useState(false);
   // 🎵 NOUVEAU : État pour forcer l'animation du GIF
   const [gifKey, setGifKey] = useState(0);
   const [currentlyPlaying, setCurrentlyPlaying] = useState<string | null>(null);
-  const [sound, setSound] = useState<Audio.Sound | null>(null);
+  const [sound, setSound] = useState<any | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [playbackPosition, setPlaybackPosition] = useState(0);
   const [playbackDuration, setPlaybackDuration] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
-  // 🎯 NOUVEAU : États pour la synchronisation de lecture avec analyse audio
-  // TODO: À implémenter plus tard
-  /*
-  const [currentVerseIndex, setCurrentVerseIndex] = useState<number | null>(
-    null
-  );
-  const [autoScrollEnabled, setAutoScrollEnabled] = useState(true);
-  const [verseTimings, setVerseTimings] = useState<VerseTiming[]>([]);
-  const [isAnalyzing, setIsAnalyzing] = useState(false);
-  const [analysisConfidence, setAnalysisConfidence] = useState<number>(0);
-  */
 
   const premiumManager = PremiumContentManager.getInstance();
 
@@ -492,11 +479,13 @@ export default function QuranScreen() {
     } finally {
       setLoadingOfflineRecitations(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Charger les récitations premium disponibles
   useEffect(() => {
     loadAvailableRecitations();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // 🌐 NOUVEAU : Charger les bonnes récitations selon le mode
@@ -516,6 +505,7 @@ export default function QuranScreen() {
       // Mode en ligne : charger les récitations du serveur
       loadAvailableRecitations();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [forceOfflineMode, isOnline, loadOfflineRecitationsData]);
 
   // Nettoyer l'audio à la fermeture
@@ -611,22 +601,21 @@ export default function QuranScreen() {
     return Array.from(reciters).sort();
   };
 
-  const getCurrentRecitation = (): PremiumContent | null => {
-    if (!selectedReciter) return null;
-
-    return (
-      availableRecitations.find(
-        (recitation) =>
-          recitation.reciter === selectedReciter &&
-          recitation.surahNumber === selectedSourate
-      ) || null
-    );
-  };
+  // const getCurrentRecitation = (): PremiumContent | null => {
+  //   if (!selectedReciter) return null;
+  //   return (
+  //     availableRecitations.find(
+  //       (recitation) =>
+  //         recitation.reciter === selectedReciter &&
+  //         recitation.surahNumber === selectedSourate
+  //     ) || null
+  //   );
+  // };
 
   // 🚀 NOUVEAU : Charger une récitation spécifique à la demande
   const [currentRecitation, setCurrentRecitation] =
     useState<PremiumContent | null>(null);
-  const [loadingRecitation, setLoadingRecitation] = useState(false);
+  // const [loadingRecitation, setLoadingRecitation] = useState(false);
 
   const loadSpecificRecitation = async (
     reciterName: string,
@@ -634,7 +623,7 @@ export default function QuranScreen() {
   ) => {
     if (!reciterName) return;
 
-    setLoadingRecitation(true);
+    // setLoadingRecitation(true);
     try {
       const recitation = await premiumManager.getSpecificRecitation(
         reciterName,
@@ -648,7 +637,7 @@ export default function QuranScreen() {
       console.error("Erreur chargement récitation spécifique:", error);
       setCurrentRecitation(null);
     } finally {
-      setLoadingRecitation(false);
+      // setLoadingRecitation(false);
     }
   };
 
@@ -657,51 +646,10 @@ export default function QuranScreen() {
     if (selectedReciter && selectedSourate) {
       loadSpecificRecitation(selectedReciter, selectedSourate);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedReciter, selectedSourate]);
 
   // 🚀 SUPPRIMÉ : Anciens événements de téléchargement non natifs
-
-  // 🚀 NOUVEAU : Rafraîchir le statut de téléchargement quand on revient sur la page
-  const refreshDownloadStatus = async (recitation: PremiumContent) => {
-    if (!recitation) return;
-
-    try {
-      const actualDownloadPath = await premiumManager.isContentDownloaded(
-        recitation.id
-      );
-      const isActuallyDownloaded = !!actualDownloadPath;
-
-      // Mettre à jour seulement si le statut a changé
-      if (
-        recitation.isDownloaded !== isActuallyDownloaded ||
-        recitation.downloadPath !== actualDownloadPath
-      ) {
-        setCurrentRecitation((prev) => {
-          if (!prev || prev.id !== recitation.id) return prev;
-
-          return {
-            ...prev,
-            isDownloaded: isActuallyDownloaded,
-            downloadPath: actualDownloadPath || undefined,
-          };
-        });
-        // console.log(
-        //  `🔄 Statut mis à jour: ${recitation.title} - ${
-        //    isActuallyDownloaded ? "Téléchargé" : "Non téléchargé"
-        //  }`
-        //);
-      }
-    } catch (error) {
-      console.error("Erreur rafraîchissement statut:", error);
-    }
-  };
-
-  // 🚀 SUPPRIMÉ : Ce useEffect causait une boucle infinie
-  // Le statut est maintenant mis à jour directement dans les événements natifs
-
-  // 🚀 SUPPRIMÉ : Ancienne fonction d'annulation remplacée par handleNativeCancelDownload
-
-  // 🚀 SUPPRIMÉ : Ancienne fonction de téléchargement remplacée par handleNativeDownloadRecitation
 
   const handleDeleteRecitation = async (recitation: PremiumContent) => {
     Alert.alert(
@@ -825,39 +773,55 @@ export default function QuranScreen() {
   };
 
   // 🚀 NOUVEAU : Gérer la complétion du téléchargement natif
-  const handleNativeDownloadCompleted = async (
-    contentId: string,
-    localUri: string
-  ) => {
-    // console.log(`[MyRecitation] ✅ Téléchargement natif terminé: ${contentId}`);
+  const handleNativeDownloadCompleted = useCallback(
+    async (contentId: string, localUri: string) => {
+      // console.log(`[MyRecitation] ✅ Téléchargement natif terminé: ${contentId}`);
 
-    try {
-      // 🚀 NOUVEAU : Migrer automatiquement le fichier vers le stockage interne
-      if (contentId.startsWith("quran_") || contentId.startsWith("reciter_")) {
-        // console.log(`🔄 Migration automatique du fichier Quran: ${contentId}`);
+      try {
+        // 🚀 NOUVEAU : Migrer automatiquement le fichier vers le stockage interne
+        if (
+          contentId.startsWith("quran_") ||
+          contentId.startsWith("reciter_")
+        ) {
+          // console.log(`🔄 Migration automatique du fichier Quran: ${contentId}`);
 
-        // Utiliser la fonction de migration du PremiumContentManager
-        const migratedPath = await premiumManager.migrateFileToInternal(
-          localUri.replace("file://", ""),
-          contentId
-        );
+          // Utiliser la fonction de migration du PremiumContentManager
+          const migratedPath = await premiumManager.migrateFileToInternal(
+            localUri.replace("file://", ""),
+            contentId
+          );
 
-        if (migratedPath) {
-          // console.log(`✅ Fichier migré avec succès: ${migratedPath}`);
-          // Utiliser le nouveau chemin migré
-          await premiumManager.markContentAsDownloaded(contentId, migratedPath);
+          if (migratedPath) {
+            // console.log(`✅ Fichier migré avec succès: ${migratedPath}`);
+            // Utiliser le nouveau chemin migré
+            await premiumManager.markContentAsDownloaded(
+              contentId,
+              migratedPath
+            );
 
-          // Mettre à jour l'état local avec le nouveau chemin
-          if (currentRecitation && currentRecitation.id === contentId) {
-            setCurrentRecitation({
-              ...currentRecitation,
-              isDownloaded: true,
-              downloadPath: migratedPath,
-            });
+            // Mettre à jour l'état local avec le nouveau chemin
+            if (currentRecitation && currentRecitation.id === contentId) {
+              setCurrentRecitation({
+                ...currentRecitation,
+                isDownloaded: true,
+                downloadPath: migratedPath,
+              });
+            }
+          } else {
+            // console.log(`⚠️ Échec migration, utilisation du chemin original`);
+            // Fallback vers le chemin original si la migration échoue
+            await premiumManager.markContentAsDownloaded(contentId, localUri);
+
+            if (currentRecitation && currentRecitation.id === contentId) {
+              setCurrentRecitation({
+                ...currentRecitation,
+                isDownloaded: true,
+                downloadPath: localUri.replace("file://", ""),
+              });
+            }
           }
         } else {
-          // console.log(`⚠️ Échec migration, utilisation du chemin original`);
-          // Fallback vers le chemin original si la migration échoue
+          // Pour les autres types de contenu (adhans), pas de migration nécessaire
           await premiumManager.markContentAsDownloaded(contentId, localUri);
 
           if (currentRecitation && currentRecitation.id === contentId) {
@@ -868,33 +832,23 @@ export default function QuranScreen() {
             });
           }
         }
-      } else {
-        // Pour les autres types de contenu (adhans), pas de migration nécessaire
-        await premiumManager.markContentAsDownloaded(contentId, localUri);
 
-        if (currentRecitation && currentRecitation.id === contentId) {
-          setCurrentRecitation({
-            ...currentRecitation,
-            isDownloaded: true,
-            downloadPath: localUri.replace("file://", ""),
-          });
-        }
+        showToast({
+          type: "success",
+          title: t("toasts.download_success"),
+          message: t("toasts.download_completed"),
+        });
+      } catch (error) {
+        console.error("❌ Erreur lors de la finalisation:", error);
+        showToast({
+          type: "error",
+          title: t("toasts.error"),
+          message: t("toasts.download_error"),
+        });
       }
-
-      showToast({
-        type: "success",
-        title: t("toasts.download_success"),
-        message: t("toasts.download_completed"),
-      });
-    } catch (error) {
-      console.error("❌ Erreur lors de la finalisation:", error);
-      showToast({
-        type: "error",
-        title: t("toasts.error"),
-        message: t("toasts.download_error"),
-      });
-    }
-  };
+    },
+    [currentRecitation, t, premiumManager, showToast]
+  );
 
   // 🚀 NOUVEAU : Gérer l'annulation du téléchargement natif
   const handleNativeCancelDownload = async (recitationId: string) => {
@@ -931,7 +885,7 @@ export default function QuranScreen() {
         downloadState.delete(contentId);
       }
     });
-  }, [downloadState]);
+  }, [downloadState, handleNativeDownloadCompleted]);
 
   const playRecitation = async (recitation: PremiumContent) => {
     try {
@@ -1014,15 +968,9 @@ export default function QuranScreen() {
       */
 
       // Créer et configurer l'objet audio (avec fallback streaming si local corrompu)
-      let createdSound: Audio.Sound | null = null;
+      let createdSound: any | null = null;
       try {
-        const created = await Audio.Sound.createAsync(audioSource, {
-          shouldPlay: true,
-          volume: 1.0,
-          rate: 1.0,
-          shouldCorrectPitch: true,
-        });
-        createdSound = created.sound;
+        createdSound = await audioManager.playSource(audioSource, 1.0);
       } catch (playError: any) {
         console.error("Erreur lecture locale, fallback streaming:", playError);
         // Fallback: tenter le streaming HTTP sécurisé
@@ -1033,16 +981,7 @@ export default function QuranScreen() {
             ""
           ).replace("action=download", "action=stream");
           if (!remoteUrl) throw new Error("URL streaming indisponible");
-          const created = await Audio.Sound.createAsync(
-            { uri: remoteUrl },
-            {
-              shouldPlay: true,
-              volume: 1.0,
-              rate: 1.0,
-              shouldCorrectPitch: true,
-            }
-          );
-          createdSound = created.sound;
+          createdSound = await audioManager.playSource({ uri: remoteUrl }, 1.0);
         } catch (fallbackError) {
           console.error("Erreur fallback streaming:", fallbackError);
           setIsPlaying(false);
@@ -1135,7 +1074,7 @@ export default function QuranScreen() {
   const pauseRecitation = async () => {
     try {
       if (sound) {
-        await sound.pauseAsync();
+        await audioManager.pause();
         setIsPlaying(false);
       }
     } catch (error) {
@@ -1146,7 +1085,7 @@ export default function QuranScreen() {
   const resumeRecitation = async () => {
     try {
       if (sound) {
-        await sound.playAsync();
+        await audioManager.resume();
         setIsPlaying(true);
       }
     } catch (error) {
@@ -1175,8 +1114,8 @@ export default function QuranScreen() {
   const stopRecitation = async () => {
     try {
       if (sound) {
-        await sound.stopAsync();
-        await sound.unloadAsync();
+        await audioManager.stop();
+        await audioManager.unload();
         setSound(null);
       }
       setIsPlaying(false);
@@ -1214,7 +1153,7 @@ export default function QuranScreen() {
         setArabicVerses(arabicJson.verses || []);
         setPhoneticArr(phoneticJson.translations || []);
         setTranslationArr(translationJson.translations || []);
-      } catch (error) {
+      } catch {
         setArabicVerses([]);
         setPhoneticArr([]);
         setTranslationArr([]);
@@ -1222,6 +1161,7 @@ export default function QuranScreen() {
       setLoading(false);
     }
     fetchQuranData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedSourate, lang]);
 
   function stripHtml(text: string | undefined) {
@@ -1331,30 +1271,6 @@ export default function QuranScreen() {
       </Text>
     </TouchableOpacity>
   );
-
-  // 🚀 TEMPORAIRE : Bouton pour vider le dossier Quran
-  const handleClearQuranDirectory = async () => {
-    try {
-      const result = await premiumManager.clearQuranDirectory();
-      // console.log("🧹 Nettoyage Quran terminé:", result);
-
-      showToast({
-        type: "success",
-        title: t("toasts.cleanup_success"),
-        message: t("toasts.cleanup_completed"),
-      });
-
-      // Recharger la liste
-      loadAvailableRecitations(true);
-    } catch (error) {
-      console.error("❌ Erreur nettoyage:", error);
-      showToast({
-        type: "error",
-        title: t("toasts.error"),
-        message: t("toasts.cleanup_error"),
-      });
-    }
-  };
 
   return (
     <ImageBackground
@@ -1772,14 +1688,15 @@ export default function QuranScreen() {
                               style={styles.audioProgressBar}
                               onPress={(event) => {
                                 const { locationX } = event.nativeEvent;
-                                const progressBarWidth = event.target.measure(
-                                  (x, y, width) => {
-                                    const progress = locationX / width;
-                                    const newPosition =
-                                      progress * playbackDuration;
-                                    seekToPosition(newPosition);
-                                  }
+                                const width =
+                                  (event.currentTarget as any)?.props?.style
+                                    ?.width || 1;
+                                const progress = Math.max(
+                                  0,
+                                  Math.min(1, locationX / width)
                                 );
+                                const newPosition = progress * playbackDuration;
+                                seekToPosition(newPosition);
                               }}
                               activeOpacity={0.8}
                             >
@@ -1817,7 +1734,7 @@ export default function QuranScreen() {
                           const isDownloading =
                             downloadingState?.isDownloading || false;
                           const progress = downloadingState?.progress || 0;
-                          const hasError = downloadingState?.error || false;
+                          // const hasError = downloadingState?.error || false;
 
                           if (isDownloading) {
                             // Téléchargement en cours - Afficher la jauge de progression
@@ -2087,8 +2004,7 @@ export default function QuranScreen() {
                   const isCurrentInPlaylist =
                     playlistMode &&
                     playlistItems[currentPlaylistIndex]?.id === item.id;
-                  const isPlayingThis =
-                    currentlyPlaying === item.id && isPlaying;
+                  // const isPlayingThis = currentlyPlaying === item.id && isPlaying;
 
                   return (
                     <View

@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, {
   useContext,
   useRef,
@@ -5,7 +7,7 @@ import React, {
   useCallback,
   useState,
 } from "react";
-import { Audio } from "expo-av";
+import audioManager from "../utils/AudioManager";
 import {
   SectionList,
   View,
@@ -1257,15 +1259,17 @@ export default function SettingsScreenOptimized() {
   const permanentlyProcessedRef = useRef<Set<string>>(new Set());
 
   // 🚀 NOUVEAU : État pour les modals ThemedAlert
+  type AlertButton = {
+    text: string;
+    onPress: () => void;
+    style?: "default" | "cancel" | "destructive";
+  };
+
   const [themedAlert, setThemedAlert] = useState<{
     visible: boolean;
     title: string;
     message: string;
-    buttons: Array<{
-      text: string;
-      onPress: () => void;
-      style?: "default" | "cancel" | "destructive";
-    }>;
+    buttons: AlertButton[];
   } | null>(null);
 
   // 🚀 NOUVEAU : État pour la section active (grille de boutons)
@@ -1279,11 +1283,7 @@ export default function SettingsScreenOptimized() {
     (alert: {
       title: string;
       message: string;
-      buttons: Array<{
-        text: string;
-        onPress: () => void;
-        style?: "default" | "cancel" | "destructive";
-      }>;
+      buttons: AlertButton[];
       iconType?:
         | "info"
         | "success"
@@ -1764,41 +1764,41 @@ export default function SettingsScreenOptimized() {
         }
       }
 
-      const { sound } = await Audio.Sound.createAsync(soundSource);
+      const volumeLevel = settings.adhanVolume || 0.8;
+      const sound = await audioManager.playSource(
+        soundSource,
+        volumeLevel,
+        (status: any) => {
+          if (status?.isLoaded) {
+            if (status.positionMillis && status.positionMillis >= 20000) {
+              console.log(
+                "⏰ Preview limitée à 20 secondes - arrêt automatique"
+              );
+              stopPreview().catch(console.error);
+              return;
+            }
+            if (status.didJustFinish) {
+              audioPlayer.setIsPreviewing(false);
+              audioPlayer.setIsAudioPlaying(false);
+              audioPlayer.setCurrentPlayingAdhan(null);
+              audioPlayer.setPlaybackPosition(0);
+              audioPlayer.setPlaybackDuration(0);
+            }
+          }
+        }
+      );
+
       audioPlayer.setSound(sound);
       audioPlayer.setIsPreviewing(true);
 
-      // 🔧 NOUVEAU : Appliquer le volume configuré pour la preview
-      const volumeLevel = settings.adhanVolume || 0.8;
-      await sound.setVolumeAsync(volumeLevel);
+      // Volume déjà appliqué via audioManager
       // 🔧 FIX: Log silencieux pour éviter les répétitions
       // console.log(`🔊 Volume appliqué à la preview: ${Math.round(volumeLevel * 100)}%`);
 
       // 🚀 FIX : Mettre à jour l'ID de l'adhan chargé (garder "main_preview" pour la jauge)
       audioPlayer.setCurrentPlayingAdhan("main_preview");
 
-      // 🚀 FIX TEMPORAIRE: Callback ultra-minimal pour tester si c'est la cause du blocage UI
-      sound.setOnPlaybackStatusUpdate((status) => {
-        if (status.isLoaded) {
-          // ✅ LIMITATION PREVIEW: Arrêter après 20 secondes maximum
-          if (status.positionMillis && status.positionMillis >= 20000) {
-            console.log("⏰ Preview limitée à 20 secondes - arrêt automatique");
-            stopPreview().catch(console.error);
-            return;
-          }
-
-          // ✅ SEULEMENT traiter la fin de lecture pour éviter tout blocage UI
-          if (status.didJustFinish) {
-            audioPlayer.setIsPreviewing(false);
-            audioPlayer.setIsAudioPlaying(false);
-            audioPlayer.setCurrentPlayingAdhan(null);
-            audioPlayer.setPlaybackPosition(0);
-            audioPlayer.setPlaybackDuration(0);
-          }
-        }
-      });
-
-      await sound.playAsync();
+      // playAsync déjà déclenché par playSource
       // 🚀 FIX: Mettre isLoadingPreview à false et isAudioPlaying à true APRÈS que l'audio ait commencé
       audioPlayer.setIsLoadingPreview(false);
       audioPlayer.setIsAudioPlaying(true);
@@ -1818,9 +1818,7 @@ export default function SettingsScreenOptimized() {
   };
 
   const stopPreview = async () => {
-    if (audioPlayer.audioState.sound) {
-      await audioPlayer.audioState.sound.stopAsync();
-    }
+    await audioManager.stop();
 
     audioPlayer.setIsPreviewing(false);
     audioPlayer.setIsAudioPlaying(false);
@@ -1834,7 +1832,7 @@ export default function SettingsScreenOptimized() {
   const pausePreview = useCallback(async () => {
     try {
       if (audioPlayer.audioState.sound) {
-        await audioPlayer.audioState.sound.pauseAsync();
+        await audioManager.pause();
         // 🚀 FIX : Mettre à jour manuellement l'état isAudioPlaying
         audioPlayer.setIsAudioPlaying(false);
         // 🚀 FIX : Garder isPreviewing=true pour que la jauge reste visible
@@ -1850,8 +1848,8 @@ export default function SettingsScreenOptimized() {
       if (audioPlayer.audioState.sound) {
         // 🔧 NOUVEAU : Appliquer le volume configuré lors de la reprise
         const volumeLevel = settings.adhanVolume || 0.8;
-        await audioPlayer.audioState.sound.setVolumeAsync(volumeLevel);
-        await audioPlayer.audioState.sound.playAsync();
+        await audioManager.setVolume(volumeLevel);
+        await audioManager.resume();
         // 🚀 FIX : Mettre à jour manuellement l'état isAudioPlaying
         audioPlayer.setIsAudioPlaying(true);
         // 🚀 FIX : isPreviewing est déjà true, pas besoin de le remettre
@@ -1866,7 +1864,10 @@ export default function SettingsScreenOptimized() {
     async (position: number) => {
       try {
         if (audioPlayer.audioState.sound) {
-          await audioPlayer.audioState.sound.setPositionAsync(position);
+          const sound = audioManager.getSound();
+          if (sound) {
+            await sound.setPositionAsync(position);
+          }
         }
       } catch (error) {
         console.error("Erreur navigation audio:", error);
@@ -1982,53 +1983,43 @@ export default function SettingsScreenOptimized() {
         // console.log(`🌐 Streaming: ${adhan.fileUrl}`);
       }
 
-      // Créer et configurer l'objet audio
+      // Créer et configurer l'objet audio via AudioManager (lecture auto)
       const volumeLevel = settings.adhanVolume || 0.8;
-      const { sound: newSound } = await Audio.Sound.createAsync(audioSource, {
-        shouldPlay: true,
-        volume: volumeLevel, // 🔧 NOUVEAU : Utiliser le volume configuré
-        rate: 1.0,
-        shouldCorrectPitch: true,
-      });
+      const newSound = await audioManager.playSource(
+        audioSource,
+        volumeLevel,
+        (status: any) => {
+          if (status?.isLoaded) {
+            if (status.positionMillis && status.positionMillis >= 20000) {
+              console.log(
+                "⏰ Preview premium limitée à 20 secondes - arrêt automatique"
+              );
+              stopPremiumAdhan().catch(console.error);
+              return;
+            }
+            // 🔧 OPTIMISÉ : Mise à jour silencieuse de la progression premium
+            audioPlayer.setPremiumAdhanPlaybackPosition(
+              status.positionMillis || 0
+            );
+            audioPlayer.setPremiumAdhanPlaybackDuration(
+              status.durationMillis || 0
+            );
+            if (status.didJustFinish) {
+              audioPlayer.setIsPlayingPremiumAdhan(false);
+              audioPlayer.setCurrentPlayingPremiumAdhan(null);
+              audioPlayer.setPremiumAdhanPlaybackPosition(0);
+              audioPlayer.setPremiumAdhanPlaybackDuration(0);
+            }
+          }
+        }
+      );
       // 🔧 FIX: Log silencieux pour éviter les répétitions
       // console.log(`🔊 Volume appliqué à l'adhan premium: ${Math.round(volumeLevel * 100)}%`);
 
       audioPlayer.setPremiumAdhanSound(newSound);
       audioPlayer.setIsPlayingPremiumAdhan(true);
 
-      // Configuration des callbacks de progression (optimisé sans logs)
-      newSound.setOnPlaybackStatusUpdate((status) => {
-        if (status.isLoaded) {
-          // ✅ LIMITATION PREVIEW: Arrêter après 20 secondes maximum
-          if (status.positionMillis && status.positionMillis >= 20000) {
-            console.log(
-              "⏰ Preview premium limitée à 20 secondes - arrêt automatique"
-            );
-            stopPremiumAdhan().catch(console.error);
-            return;
-          }
-
-          // 🔧 OPTIMISÉ : Mise à jour silencieuse de la progression premium
-          audioPlayer.setPremiumAdhanPlaybackPosition(
-            status.positionMillis || 0
-          );
-          audioPlayer.setPremiumAdhanPlaybackDuration(
-            status.durationMillis || 0
-          );
-
-          // ✅ UNIQUEMENT traiter la fin de lecture (sans log excessif)
-          if (status.didJustFinish) {
-            // console.log(`🎵 Adhan premium terminé: ${adhan.title}`);
-            audioPlayer.setIsPlayingPremiumAdhan(false);
-            audioPlayer.setCurrentPlayingPremiumAdhan(null);
-            audioPlayer.setPremiumAdhanPlaybackPosition(0);
-            audioPlayer.setPremiumAdhanPlaybackDuration(0);
-          }
-        } else if (status.error) {
-          // ⚠️ UNIQUEMENT logger les erreurs importantes
-          // console.log(`🎵 Erreur status adhan premium:`, status.error);
-        }
-      });
+      // Callbacks gérés via AudioManager
 
       showToast({
         type: "success",

@@ -3,9 +3,13 @@ const mockAsyncStorage = {
   getItem: jest.fn(),
   setItem: jest.fn(),
   removeItem: jest.fn(),
+  clear: jest.fn(),
 };
 
-jest.mock("@react-native-async-storage/async-storage", () => mockAsyncStorage);
+jest.mock("@react-native-async-storage/async-storage", () => ({
+  __esModule: true,
+  default: mockAsyncStorage,
+}));
 
 // 🎯 NOUVEAU : Mock getCurrentUserId pour éviter "Aucun utilisateur connecté"
 jest.mock("../../utils/userAuth", () => ({
