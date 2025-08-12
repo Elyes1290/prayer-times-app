@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getCurrentUserId } from "../utils/userAuth";
 import { AppConfig } from "../utils/config";
+import apiClient from "../utils/apiClient";
 
 export interface UserStats {
   user_id: number;
@@ -167,61 +168,40 @@ export const useUserStats = (): UseUserStatsReturn => {
         }
       }
 
-      // Appel API - utiliser fetch directement
-      // 🧪 RÉPARÉ : Utiliser l'URL corrigée
-      const apiUrl = `${AppConfig.USER_STATS_API}?user_id=${userId}`;
-      console.log("🔍 [DEBUG] Appel API user-stats:", apiUrl);
-
-      const response = await fetch(apiUrl, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      });
-
-      console.log("🔍 [DEBUG] Réponse API status:", response.status);
-
-      // Vérifier le type de contenu
-      const contentType = response.headers.get("content-type");
-      if (!contentType || !contentType.includes("application/json")) {
-        throw new Error(
-          "L'API a retourné du HTML au lieu de JSON. Vérifiez que l'endpoint existe."
-        );
-      }
-
-      const result = await response.json();
+      // Appel API centralisé (Authorization + refresh + retry)
+      const apiResponse = await apiClient.getUserStats();
       console.log(
         "🔍 [DEBUG] Réponse API JSON:",
-        JSON.stringify(result, null, 2)
+        JSON.stringify(apiResponse, null, 2)
       );
 
       // Vérifier si c'est une réponse premium
-      if (!result.success && result.premium_required) {
+      if (!apiResponse.success && (apiResponse as any).premium_required) {
         setPremiumRequired(true);
         setPremiumMessage(
-          result.premium_message ||
+          (apiResponse as any).premium_message ||
             "Devenez Premium pour accéder à vos statistiques"
         );
         setLoading(false);
         return;
       }
 
-      if (result.success && result.data) {
-        setStats(result.data);
+      if (apiResponse.success && apiResponse.data) {
+        setStats(apiResponse.data as any);
         setLastUpdated(new Date());
 
         // Mettre en cache
         await AsyncStorage.setItem(
           CACHE_KEY,
           JSON.stringify({
-            data: result.data,
+            data: apiResponse.data,
             timestamp: Date.now(),
           })
         );
       } else {
         throw new Error(
-          result.message || "Erreur lors de la récupération des statistiques"
+          apiResponse.message ||
+            "Erreur lors de la récupération des statistiques"
         );
       }
     } catch (err) {

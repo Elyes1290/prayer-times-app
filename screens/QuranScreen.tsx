@@ -1013,20 +1013,51 @@ export default function QuranScreen() {
       }
       */
 
-      // Créer et configurer l'objet audio
-      const { sound: newSound } = await Audio.Sound.createAsync(audioSource, {
-        shouldPlay: true,
-        volume: 1.0,
-        rate: 1.0,
-        shouldCorrectPitch: true,
-      });
+      // Créer et configurer l'objet audio (avec fallback streaming si local corrompu)
+      let createdSound: Audio.Sound | null = null;
+      try {
+        const created = await Audio.Sound.createAsync(audioSource, {
+          shouldPlay: true,
+          volume: 1.0,
+          rate: 1.0,
+          shouldCorrectPitch: true,
+        });
+        createdSound = created.sound;
+      } catch (playError: any) {
+        console.error("Erreur lecture locale, fallback streaming:", playError);
+        // Fallback: tenter le streaming HTTP sécurisé
+        try {
+          const remoteUrl = (
+            currentRecitation?.fileUrl ||
+            recitation.fileUrl ||
+            ""
+          ).replace("action=download", "action=stream");
+          if (!remoteUrl) throw new Error("URL streaming indisponible");
+          const created = await Audio.Sound.createAsync(
+            { uri: remoteUrl },
+            {
+              shouldPlay: true,
+              volume: 1.0,
+              rate: 1.0,
+              shouldCorrectPitch: true,
+            }
+          );
+          createdSound = created.sound;
+        } catch (fallbackError) {
+          console.error("Erreur fallback streaming:", fallbackError);
+          setIsPlaying(false);
+          setCurrentlyPlaying(null);
+          setIsLoading(false);
+          return;
+        }
+      }
 
-      setSound(newSound);
+      setSound(createdSound);
       setIsPlaying(true);
 
       // Configuration des callbacks de progression avec analyse audio
       // TODO: À implémenter plus tard
-      newSound.setOnPlaybackStatusUpdate((status) => {
+      createdSound?.setOnPlaybackStatusUpdate((status: any) => {
         if (status.isLoaded) {
           setPlaybackPosition(status.positionMillis || 0);
           setPlaybackDuration(status.durationMillis || 0);

@@ -15,6 +15,7 @@ import { showGlobalToast, ToastProvider } from "../contexts/ToastContext";
 import i18n from "../locales/i18n";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { clearUserStatsCache } from "../utils/clearAppData";
+import apiClient from "../utils/apiClient";
 
 type IconName =
   | "home"
@@ -111,21 +112,16 @@ export default function TabLayout() {
         await clearUserStatsCache();
         console.log("🔄 Cache des statistiques supprimé pour force refresh");
 
-        // 🔐 Vérification anti-multi-appareils au démarrage
+        // 🔐 Vérification anti-multi-appareils au démarrage (centralisée)
         try {
           const token = await AsyncStorage.getItem("auth_token");
           if (token) {
-            const apiBase = "https://myadhanapp.com/api";
-            // Test avec user-stats.php qui est protégé et retourne 401 si token invalide
-            const ping = await fetch(`${apiBase}/user-stats.php`, {
-              method: "GET",
-              headers: {
-                Accept: "application/json",
-                Authorization: `Bearer ${token}`,
-              },
-            });
-            console.log("🔐 Vérification token au démarrage:", ping.status);
-            if (ping.status === 401) {
+            const verify = await apiClient.verifyAuth();
+            console.log(
+              "🔐 Vérification token au démarrage (verifyAuth):",
+              verify?.success
+            );
+            if (!verify?.success) {
               console.log("❌ Token invalide détecté, déconnexion...");
               await AsyncStorage.multiRemove([
                 "auth_token",

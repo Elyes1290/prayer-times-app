@@ -106,10 +106,65 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
   const [loading, setLoading] = useState(true);
   const { showToast } = useToast();
 
+  // --- Actions disponibles pour les effets ---
+  const deactivatePremium = React.useCallback(async () => {
+    try {
+      // On ne supprime pas l'info d'achat premium, juste l'activation
+      const storedUser = await AsyncStorage.getItem(STORAGE_KEYS.PREMIUM_USER);
+      let hasPurchasedPremium = false;
+      if (storedUser) {
+        try {
+          const parsedUser = JSON.parse(storedUser);
+          hasPurchasedPremium = !!parsedUser.hasPurchasedPremium;
+        } catch {
+          hasPurchasedPremium = false;
+        }
+      }
+      await AsyncStorage.setItem(
+        STORAGE_KEYS.PREMIUM_USER,
+        JSON.stringify({ ...defaultUser, hasPurchasedPremium })
+      );
+      setUser({ ...defaultUser, hasPurchasedPremium });
+    } catch (error) {
+      // noop
+    }
+  }, []);
+
   // Charger les données premium au démarrage
   useEffect(() => {
     loadPremiumData();
   }, []);
+
+  // 🔐 Vérification périodique du token côté serveur (toutes les 6h)
+  useEffect(() => {
+    let interval: ReturnType<typeof setInterval> | undefined;
+    const verifyAuth = async () => {
+      try {
+        const token = await AsyncStorage.getItem("auth_token");
+        if (!token) return;
+        const result = await apiClient.verifyAuth();
+        if (!result?.success) {
+          // Token invalide: désactiver premium et nettoyer les tokens
+          await AsyncStorage.multiRemove(["auth_token", "refresh_token"]);
+          await deactivatePremium();
+          showToast?.({
+            type: "error",
+            title: "Session expirée",
+            message: "Veuillez vous reconnecter pour continuer",
+          });
+        }
+      } catch {
+        // Réseau ou 401/403: on ignore pour éviter des faux positifs bruyants
+      }
+    };
+
+    const timeout = setTimeout(verifyAuth, 5000);
+    interval = setInterval(verifyAuth, 6 * 60 * 60 * 1000);
+    return () => {
+      clearTimeout(timeout);
+      if (interval) clearInterval(interval);
+    };
+  }, [showToast, deactivatePremium]);
 
   // 🚀 NOUVEAU : Vérifier la connexion explicite et maintenir le premium si connecté
   useEffect(() => {
@@ -152,7 +207,7 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
     setTimeout(checkExplicitConnection, 1000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [deactivatePremium]);
 
   const loadPremiumData = async () => {
     try {
@@ -312,29 +367,7 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
     }
   };
 
-  const deactivatePremium = async () => {
-    try {
-      // On ne supprime pas l'info d'achat premium, juste l'activation
-      const storedUser = await AsyncStorage.getItem(STORAGE_KEYS.PREMIUM_USER);
-      let hasPurchasedPremium = false;
-      if (storedUser) {
-        try {
-          const parsedUser = JSON.parse(storedUser);
-          hasPurchasedPremium = !!parsedUser.hasPurchasedPremium;
-        } catch {
-          hasPurchasedPremium = false;
-        }
-      }
-      await AsyncStorage.setItem(
-        STORAGE_KEYS.PREMIUM_USER,
-        JSON.stringify({ ...defaultUser, hasPurchasedPremium })
-      );
-      setUser({ ...defaultUser, hasPurchasedPremium });
-      // console.log("🔓 Premium désactivé");
-    } catch (error) {
-      // console.error("❌ Erreur désactivation premium:", error);
-    }
-  };
+  // (déjà défini plus haut)
 
   const hasFeature = (feature: string): boolean => {
     return user.isPremium && user.features.includes(feature);

@@ -1603,6 +1603,23 @@ export default function SettingsScreenOptimized() {
   // 🎵 FONCTIONS AUDIO OPTIMISÉES - Remplaçant les anciens placeholders
 
   // 🎵 FONCTIONS AUDIO PRINCIPALES - Adaptées pour les hooks optimisés
+  const previewAdhanIdRef = React.useRef<string | null>(null);
+
+  // Réinitialiser la preview si l'utilisateur change d'adhan sélectionné
+  React.useEffect(() => {
+    const selectedId = settings?.adhanSound;
+    if (!selectedId) return;
+    if (
+      previewAdhanIdRef.current &&
+      previewAdhanIdRef.current !== selectedId &&
+      (audioPlayer.audioState.isPreviewing ||
+        audioPlayer.audioState.currentPlayingAdhan === "main_preview")
+    ) {
+      // Arrêter et nettoyer immédiatement l'ancienne preview
+      stopPreview().catch(() => {});
+    }
+  }, [settings?.adhanSound]);
+
   const playPreview = async () => {
     if (!settings) return;
 
@@ -1616,14 +1633,16 @@ export default function SettingsScreenOptimized() {
         await stopPremiumAdhan();
       }
 
-      // 🚀 NOUVEAU : Vérifier si l'adhan a changé
+      // 🚀 NOUVEAU : Réinitialiser si l'adhan de preview a changé
       const currentAdhanId = settings.adhanSound;
-      const hasAdhanChanged =
-        audioPlayer.audioState.currentPlayingAdhan !== currentAdhanId;
-
-      // 🚀 NOUVEAU : Si l'adhan a changé, forcer le rechargement
-      if (hasAdhanChanged && audioPlayer.audioState.sound) {
-        await audioPlayer.audioState.sound.unloadAsync();
+      if (
+        previewAdhanIdRef.current &&
+        previewAdhanIdRef.current !== currentAdhanId &&
+        audioPlayer.audioState.sound
+      ) {
+        try {
+          await audioPlayer.audioState.sound.unloadAsync();
+        } catch {}
         audioPlayer.setPlaybackPosition(0);
         audioPlayer.setPlaybackDuration(0);
       }
@@ -1639,6 +1658,7 @@ export default function SettingsScreenOptimized() {
       }
 
       audioPlayer.setIsLoadingPreview(true);
+      previewAdhanIdRef.current = currentAdhanId;
       audioPlayer.setCurrentPlayingAdhan("main_preview");
 
       let soundSource = soundObjects[settings.adhanSound];
@@ -1720,14 +1740,12 @@ export default function SettingsScreenOptimized() {
               // Erreur diagnostic fichier (silencieux)
             }
           } else {
-            // 🌐 Priorité 2: Streaming depuis Infomaniak
-            // Chercher l'adhan dans le catalogue premium
-            const catalog = await manager.getPremiumCatalog();
-            const premiumAdhan = catalog?.adhanVoices?.find(
-              (adhan) => adhan.id === settings.adhanSound
-            );
-
-            if (premiumAdhan && premiumAdhan.fileUrl) {
+            // 🌐 Priorité 2: Streaming via l'URL déjà présente dans l'état (évite un rechargement du catalogue)
+            const premiumAdhan =
+              premiumContent.premiumContentState.availableAdhanVoices.find(
+                (a) => a.id === settings.adhanSound
+              );
+            if (premiumAdhan?.fileUrl) {
               soundSource = { uri: premiumAdhan.fileUrl };
             } else {
               audioPlayer.setIsLoadingPreview(false);
@@ -1809,6 +1827,7 @@ export default function SettingsScreenOptimized() {
     audioPlayer.setCurrentPlayingAdhan(null);
     audioPlayer.setPlaybackPosition(0);
     audioPlayer.setPlaybackDuration(0);
+    previewAdhanIdRef.current = null;
   };
 
   // 🚀 FIX: Utiliser useCallback pour éviter les re-créations de fonctions

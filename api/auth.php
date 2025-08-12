@@ -126,12 +126,12 @@ function handleLogin() {
     // Retourner les données utilisateur + tokens
     $formattedUser = formatUserData($user);
 
-    // Access token (session existant) + refresh token (hashé en DB)
-    $accessToken = generateAuthToken($user['id']);
+    // Single-device: révoquer d'abord les anciennes sessions et refresh tokens,
+    // puis émettre de nouveaux tokens (évite d'invalider le token fraîchement créé)
     $deviceId = $data['device_id'] ?? null;
-    // Enforcer 1 appareil max: révoquer refresh tokens et sessions existantes
     revokeAllRefreshTokensForUser($user['id']);
     revokeAllSessionsForUser($user['id']);
+    $accessToken = generateAuthToken($user['id']);
     $refreshToken = createRefreshToken($user['id'], $deviceId, 30);
     
     jsonResponse(true, [
@@ -362,12 +362,11 @@ function handleRegister() {
     file_put_contents(__DIR__ . '/debug_premium.log', $logMessage, FILE_APPEND);
     error_log("📤 Réponse finale - premium_status: " . $formattedUser['premium_status'] . ", subscription_type: " . $formattedUser['subscription_type'] . ", subscription_id: " . $formattedUser['subscription_id']);
     
-    // Générer tokens
-    $accessToken = generateAuthToken($user_id);
+    // Générer tokens (ordre corrigé: révoquer puis émettre)
     $deviceId = $data['device_id'] ?? null;
-    // Enforcer 1 appareil max à l'inscription également (refresh + sessions)
     revokeAllRefreshTokensForUser($user_id);
     revokeAllSessionsForUser($user_id);
+    $accessToken = generateAuthToken($user_id);
     $refreshToken = createRefreshToken($user_id, $deviceId, 30);
 
     jsonResponse(true, [

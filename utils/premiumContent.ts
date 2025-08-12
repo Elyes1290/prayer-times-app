@@ -1,4 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import apiClient from "./apiClient";
 import SyncManager from "./syncManager";
 
 import RNFS from "react-native-fs";
@@ -432,12 +433,31 @@ class PremiumContentManager {
       debugLog("📋 Récupération du catalogue premium depuis Infomaniak...");
       // console.log("🔍 getPremiumCatalog() appelée");
 
-      // 🚀 NOUVEAU : Vérifier le cache d'abord
+      // 🚀 NOUVEAU : Vérifier le cache d'abord, mais recharger si on a un token et que le cache est vide côté Quran
       const cachedCatalog = await this.getCachedCatalog();
       if (cachedCatalog) {
-        debugLog("✅ Catalogue chargé depuis le cache");
-        // console.log("📋 Catalogue depuis cache:", cachedCatalog);
-        return cachedCatalog;
+        try {
+          const token = await AsyncStorage.getItem("auth_token");
+          const currentUserData = await AsyncStorage.getItem("user_data");
+          const cachedUser = await AsyncStorage.getItem("premium_catalog_user");
+          const hasEmptyQuran =
+            !cachedCatalog.quranRecitations ||
+            cachedCatalog.quranRecitations.length === 0;
+          const userChanged = !!(
+            currentUserData &&
+            cachedUser &&
+            currentUserData !== cachedUser
+          );
+          if (!(token && hasEmptyQuran) && !userChanged) {
+            debugLog("✅ Catalogue chargé depuis le cache");
+            return cachedCatalog;
+          }
+          debugLog(
+            userChanged
+              ? "🔄 Utilisateur changé → cache catalogue invalidé"
+              : "🔄 Cache ignoré: token présent et catalogue Quran vide → rechargement serveur"
+          );
+        } catch {}
       }
 
       const catalog: PremiumCatalog = {
@@ -517,6 +537,12 @@ class PremiumContentManager {
         "premium_catalog_cache",
         JSON.stringify(catalog)
       );
+      try {
+        const currentUserData = await AsyncStorage.getItem("user_data");
+        if (currentUserData) {
+          await AsyncStorage.setItem("premium_catalog_user", currentUserData);
+        }
+      } catch {}
       await AsyncStorage.setItem(
         "premium_catalog_timestamp",
         Date.now().toString()
@@ -1965,15 +1991,12 @@ class PremiumContentManager {
       const reciters: PremiumContent[] = [];
       const reciterNames = new Set<string>();
 
-      // 1. Scanner depuis Infomaniak
+      // 1. Scanner depuis Infomaniak (centralisé)
       try {
-        const response = await fetch(
-          `${AppConfig.RECITATIONS_API}?action=catalog`
-        );
-        const result = await response.json();
-
-        if (result.success) {
-          const availableReciters = result.data.availableReciters || [];
+        const response = await apiClient.getRecitationsCatalog();
+        if (response.success && response.data) {
+          const availableReciters =
+            (response.data as any).availableReciters || [];
           for (const reciterName of availableReciters) {
             reciterNames.add(reciterName);
             debugLog(`🌐 Récitateur Infomaniak: ${reciterName}`);
@@ -2040,17 +2063,17 @@ class PremiumContentManager {
         `💾 Téléchargements trouvés: ${downloadedContent.size} fichiers`
       );
 
-      // Scanner depuis Infomaniak
+      // Scanner depuis Infomaniak (centralisé)
       try {
-        const response = await fetch(`${AppConfig.ADHANS_API}?action=catalog`);
-        const result = await response.json();
-
-        if (result.success) {
-          const availableAdhans = result.data.availableAdhans || [];
+        const result = await apiClient.getAdhanCatalog();
+        if (result.success && result.data) {
+          const availableAdhans = (result.data as any).availableAdhans || [];
           debugLog(
             `🎵 ${availableAdhans.length} adhans trouvés sur Infomaniak`
           );
 
+          const token = await AsyncStorage.getItem("auth_token");
+          const tokenParam = token ? `&token=${encodeURIComponent(token)}` : "";
           // 🚀 OPTIMISATION : Traiter tous les adhans en parallèle (plus rapide)
           const adhanPromises = availableAdhans.map(
             async (adhanName: string) => {
@@ -2095,7 +2118,9 @@ class PremiumContentManager {
                 description: `Adhan premium: ${adhanName}`,
                 fileUrl: `${
                   AppConfig.ADHANS_API
-                }?action=download&adhan=${encodeURIComponent(adhanName)}`,
+                }?action=download&adhan=${encodeURIComponent(
+                  adhanName
+                )}${tokenParam}`,
                 fileSize: realFileSize,
                 version: "1.0",
                 isDownloaded: isDownloaded,
@@ -2240,10 +2265,17 @@ class PremiumContentManager {
       );
 
       // 🚀 NOUVEAU : Utiliser l'API Infomaniak pour récupérer les infos de la sourate
+      const token = await AsyncStorage.getItem("auth_token");
       const response = await fetch(
         `${AppConfig.RECITATIONS_API}?action=surah&reciter=${encodeURIComponent(
           reciterName
-        )}&surah=${surahNumber.toString().padStart(3, "0")}`
+        )}&surah=${surahNumber.toString().padStart(3, "0")}`,
+        {
+          headers: {
+            Accept: "application/json",
+            ...(token ? { Authorization: `Bearer ${token}` } : {}),
+          },
+        }
       );
       const result = await response.json();
 
@@ -3438,7 +3470,16 @@ class PremiumContentManager {
       result.details.push("📥 Début téléchargement avec fetch...");
 
       try {
-        const response = await fetch(content.fileUrl);
+        // Si l'URL pointe vers l'API sécurisée avec token, tenter d'abord le stream direct
+        let downloadUrl = content.fileUrl;
+        if (
+          downloadUrl.includes("/adhans.php") &&
+          downloadUrl.includes("action=download")
+        ) {
+          // Utiliser 'serve' côté API, déjà sécurisé
+          downloadUrl = downloadUrl.replace("action=download", "action=serve");
+        }
+        const response = await fetch(downloadUrl);
         if (!response.ok) {
           throw new Error(`HTTP ${response.status}: ${response.statusText}`);
         }

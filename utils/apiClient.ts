@@ -431,6 +431,7 @@ class ApiClient {
     }
 
     return this.makeRequest("/recitations.php", "GET", null, {
+      action: "surah",
       user_id: userId.toString(),
       reciter,
       surah: surah.toString(),
@@ -446,6 +447,18 @@ class ApiClient {
     return this.makeRequest("/recitations.php?action=download", "POST", {
       user_id: userId.toString(),
       recitation_id: recitationId,
+    });
+  }
+
+  // === API ADHANS (catalogue) ===
+  async getAdhanCatalog(): Promise<ApiResponse> {
+    const userId = await getCurrentUserId();
+    if (!userId) {
+      throw new Error("Aucun utilisateur connecté");
+    }
+    return this.makeRequest("/adhans.php", "GET", null, {
+      action: "catalog",
+      user_id: userId.toString(),
     });
   }
 
@@ -522,6 +535,22 @@ class ApiClient {
       action: "usage_stats",
       user_id: userId.toString(),
     });
+  }
+
+  // 🚀 NOUVEAU : Récupérer les statistiques de l'utilisateur (écran Stats)
+  async getUserStats(): Promise<ApiResponse> {
+    const userId = await getCurrentUserId();
+    if (!userId) {
+      throw new Error("Aucun utilisateur connecté");
+    }
+    return this.makeRequest("/user-stats.php", "GET", null, {
+      user_id: userId.toString(),
+    });
+  }
+
+  // 🚀 NOUVEAU : Vérifier l'auth (token valide ?) côté serveur
+  async verifyAuth(): Promise<ApiResponse> {
+    return this.makeRequest("/auth.php", "GET", null, { action: "verify" });
   }
 
   // 🚀 NOUVEAU : Vérifier les achats premium pour un user_id

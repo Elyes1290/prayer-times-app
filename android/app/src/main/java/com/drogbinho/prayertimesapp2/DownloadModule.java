@@ -192,6 +192,15 @@ public class DownloadModule extends ReactContextBaseJavaModule {
             request.setTitle(title);
             request.setDescription("Téléchargement en cours...");
             request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+            request.setVisibleInDownloadsUi(true);
+
+            // Déterminer le MIME type pour une meilleure compatibilité/progression
+            String lowerUrl = url.toLowerCase();
+            String mimeType = "audio/mpeg";
+            if (lowerUrl.contains(".m4a")) mimeType = "audio/mp4";
+            else if (lowerUrl.contains(".wav")) mimeType = "audio/wav";
+            else if (lowerUrl.contains(".ogg")) mimeType = "audio/ogg";
+            request.setMimeType(mimeType);
             request.setDestinationInExternalFilesDir(
                 getReactApplicationContext(),
                 Environment.DIRECTORY_DOWNLOADS,
@@ -322,7 +331,7 @@ public class DownloadModule extends ReactContextBaseJavaModule {
                         
                         // 🚀 OPTIMISATION : Envoyer la progression seulement si elle a changé significativement
                         // ou si c'est la première fois
-                        if (info.lastProgress == null || Math.abs(progress - info.lastProgress) >= 0.05) {
+                        if (info.lastProgress == null || Math.abs(progress - info.lastProgress) >= 0.01) {
                             sendDownloadEvent("downloadProgress", info.contentId, progress, null);
                             info.lastProgress = progress;
                         }

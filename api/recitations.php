@@ -1,5 +1,5 @@
 <?php
-header('Content-Type: application/json');
+// Content-Type sera défini par action (JSON pour catalog/surah, audio pour stream)
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type, Authorization');
@@ -29,10 +29,12 @@ if (!in_array($action, $allowedActions)) {
 try {
     switch ($action) {
         case 'catalog':
+            header('Content-Type: application/json');
             echo json_encode(getCatalog());
             break;
             
         case 'surah':
+            header('Content-Type: application/json');
             $reciter = $_GET['reciter'] ?? '';
             $surah = $_GET['surah'] ?? '';
             echo json_encode(getSurahInfo($reciter, $surah));
@@ -63,6 +65,7 @@ try {
             break;
 
         case 'sync_downloads':
+            header('Content-Type: application/json');
             if (empty($auth['is_premium'])) {
                 http_response_code(403);
                 echo json_encode(['success' => false, 'message' => 'Abonnement Premium requis']);
@@ -113,6 +116,7 @@ try {
             break;
     }
 } catch (Exception $e) {
+    header('Content-Type: application/json');
     http_response_code(500);
     echo json_encode([
         'success' => false,
@@ -178,6 +182,11 @@ function getSurahInfo($reciter, $surah) {
     $fileSize = filesize($surahFile);
     $fileSizeMB = round($fileSize / (1024 * 1024), 2);
     
+    // 🔐 Ajouter le token courant dans les URLs pour permettre aux clients audio
+    // d'accéder sans headers (expo-av ne permet pas toujours d'ajouter Authorization)
+    $token = getBearerToken();
+    $tokenParam = $token ? ("&token=" . urlencode($token)) : "";
+
     return [
         'success' => true,
         'data' => [
@@ -185,8 +194,8 @@ function getSurahInfo($reciter, $surah) {
             'surah' => $surah,
             'fileSize' => $fileSize,
             'fileSizeMB' => $fileSizeMB,
-            'streamUrl' => "https://myadhanapp.com/api/recitations.php?action=stream&reciter=" . urlencode($reciter) . "&surah=" . urlencode($surah),
-            'downloadUrl' => "https://myadhanapp.com/api/recitations.php?action=download&reciter=" . urlencode($reciter) . "&surah=" . urlencode($surah)
+            'streamUrl' => "https://myadhanapp.com/api/recitations.php?action=stream&reciter=" . urlencode($reciter) . "&surah=" . urlencode($surah) . $tokenParam,
+            'downloadUrl' => "https://myadhanapp.com/api/recitations.php?action=download&reciter=" . urlencode($reciter) . "&surah=" . urlencode($surah) . $tokenParam
         ]
     ];
 }
@@ -214,14 +223,46 @@ function streamAudio($reciter, $surah) {
         exit;
     }
     
-    // Headers pour streaming audio
-    header('Content-Type: audio/mpeg');
-    header('Content-Length: ' . filesize($filePath));
+    // Nettoyer tout buffer et définir les headers audio avec support des requêtes Range
+    while (ob_get_level()) { ob_end_clean(); }
+    header_remove('Content-Type');
+    $size = filesize($filePath);
+    $mime = 'audio/mpeg';
+    header("Content-Type: $mime");
     header('Accept-Ranges: bytes');
     header('Cache-Control: public, max-age=3600');
-    
-    // Lire et envoyer le fichier
-    readfile($filePath);
+
+    $start = 0;
+    $length = $size;
+    $end = $size - 1;
+
+    if (isset($_SERVER['HTTP_RANGE'])) {
+        if (preg_match('/bytes=([0-9]+)-([0-9]*)/i', $_SERVER['HTTP_RANGE'], $matches)) {
+            $start = intval($matches[1]);
+            if (!empty($matches[2])) {
+                $end = intval($matches[2]);
+            }
+            if ($end >= $size) { $end = $size - 1; }
+            $length = $end - $start + 1;
+            header('HTTP/1.1 206 Partial Content');
+            header("Content-Range: bytes $start-$end/$size");
+        }
+    }
+
+    header("Content-Length: $length");
+
+    $fp = fopen($filePath, 'rb');
+    if ($start > 0) { fseek($fp, $start); }
+    $bufferSize = 8192;
+    $bytesSent = 0;
+    while (!feof($fp) && $bytesSent < $length) {
+        $read = ($length - $bytesSent) > $bufferSize ? $bufferSize : ($length - $bytesSent);
+        $buffer = fread($fp, $read);
+        echo $buffer;
+        flush();
+        $bytesSent += strlen($buffer);
+    }
+    fclose($fp);
     exit;
 }
 
@@ -248,13 +289,13 @@ function downloadAudio($reciter, $surah) {
         exit;
     }
     
-    // Headers pour téléchargement
+    // Nettoyer buffer et envoyer le fichier en téléchargement
+    while (ob_get_level()) { ob_end_clean(); }
+    header_remove('Content-Type');
     header('Content-Type: application/octet-stream');
     header('Content-Disposition: attachment; filename="' . $reciter . '_' . $surah . '.mp3"');
     header('Content-Length: ' . filesize($filePath));
     header('Cache-Control: no-cache');
-    
-    // Lire et envoyer le fichier
     readfile($filePath);
     exit;
 }
