@@ -204,9 +204,12 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
     const interval = setInterval(checkExplicitConnection, 5 * 60 * 1000);
 
     // Vérifier après un délai pour laisser le temps au loadPremiumData de s'exécuter
-    setTimeout(checkExplicitConnection, 1000);
+    const timeout = setTimeout(checkExplicitConnection, 1000);
 
-    return () => clearInterval(interval);
+    return () => {
+      clearInterval(interval);
+      clearTimeout(timeout);
+    };
   }, [deactivatePremium]);
 
   const loadPremiumData = async () => {

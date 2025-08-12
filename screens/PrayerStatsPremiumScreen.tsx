@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   View,
   Text,
@@ -14,7 +14,10 @@ import {
   Share,
   Modal,
   Alert,
+  TextInput,
+  SafeAreaView,
 } from "react-native";
+// NB: gesture-handler non utilisé en tests (module natif manquant). On fallback sur ScrollView RN.
 import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons } from "@expo/vector-icons";
 import { useUserStats } from "../hooks/useUserStats";
@@ -22,6 +25,7 @@ import { useUpdateUserStats } from "../hooks/useUpdateUserStats";
 import ThemedImageBackground from "../components/ThemedImageBackground";
 import { useThemeColors, useCurrentTheme } from "../hooks/useThemeAssets";
 import { useTranslation } from "react-i18next";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const { width } = Dimensions.get("window");
 
@@ -46,7 +50,11 @@ const PrayerStatsPremiumScreen: React.FC = () => {
   const [refreshing, setRefreshing] = useState(false);
   const [isRecording, setIsRecording] = useState(false);
   const [showInsightsModal, setShowInsightsModal] = useState(false);
-  const [weeklyGoal] = useState(35); // 5 prières * 7 jours
+  const [weeklyGoal, setWeeklyGoal] = useState(35); // 5 prières * 7 jours
+  const [showGoalModal, setShowGoalModal] = useState(false);
+  const [tempGoal, setTempGoal] = useState("35");
+  const [timeframe, setTimeframe] = useState<7 | 30 | 90>(7);
+  const insightsScrollRef = useRef<ScrollView | null>(null);
 
   const { stats, loading, error, premiumRequired, refresh, lastUpdated } =
     useUserStats();
@@ -63,6 +71,37 @@ const PrayerStatsPremiumScreen: React.FC = () => {
     setRefreshing(true);
     await refresh();
     setRefreshing(false);
+  };
+
+  const openInsightsModal = () => {
+    setShowInsightsModal(true);
+  };
+
+  // Charger / sauvegarder l'objectif hebdo
+  useEffect(() => {
+    (async () => {
+      try {
+        const saved = await AsyncStorage.getItem("@stats_weekly_goal");
+        if (saved) {
+          const value = parseInt(saved, 10);
+          if (!Number.isNaN(value) && value > 0) {
+            setWeeklyGoal(value);
+            setTempGoal(String(value));
+          }
+        }
+      } catch {}
+    })();
+  }, []);
+
+  const saveWeeklyGoal = async () => {
+    const value = parseInt(tempGoal, 10);
+    if (Number.isNaN(value) || value <= 0) {
+      showToast(t("invalid_goal") || "Objectif invalide");
+      return;
+    }
+    setWeeklyGoal(value);
+    await AsyncStorage.setItem("@stats_weekly_goal", String(value));
+    setShowGoalModal(false);
   };
 
   const showToast = (msg: string) => {
@@ -153,9 +192,50 @@ const PrayerStatsPremiumScreen: React.FC = () => {
 
   const getWeekProgress = () => {
     if (!stats) return 0;
-    // Calcul basé sur les prières de la semaine courante
-    const weeklyPrayers = stats.stats.total_prayers;
+    // Calcul basé sur la fenêtre sélectionnée (approximation depuis l'historique)
+    const window = Math.min(timeframe, stats.history?.length || 0);
+    let sum = 0;
+    for (let i = 0; i < window; i++) {
+      const day: any = stats.history[i];
+      // Si pas de 'score', approximer par somme des activités
+      const dailyTotal = day
+        ? Number(day.prayers || 0) +
+          Number(day.dhikr || 0) +
+          Number(day.quran || 0) +
+          Number(day.hadiths || 0)
+        : 0;
+      sum += dailyTotal;
+    }
+    const weeklyPrayers = sum;
     return Math.min((weeklyPrayers / weeklyGoal) * 100, 100);
+  };
+
+  // Mini-graphe ASCII sparkline pour la consistance récente
+  const getDailyTotal = (day: any): number => {
+    if (!day) return 0;
+    return (
+      Number(day.prayers || 0) +
+      Number(day.dhikr || 0) +
+      Number(day.quran || 0) +
+      Number(day.hadiths || 0)
+    );
+  };
+
+  const buildSparkline = (values: number[]): string => {
+    if (!values.length) return "";
+    const blocks = ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"];
+    const min = Math.min(...values);
+    const max = Math.max(...values);
+    const range = Math.max(1, max - min);
+    return values
+      .map((v) => {
+        const idx = Math.min(
+          blocks.length - 1,
+          Math.floor(((v - min) / range) * (blocks.length - 1))
+        );
+        return blocks[idx];
+      })
+      .join("");
   };
 
   const shareAchievement = async () => {
@@ -201,8 +281,49 @@ const PrayerStatsPremiumScreen: React.FC = () => {
       [
         { text: t("cancel") || "Annuler", style: "cancel" },
         { text: t("share") || "Partager", onPress: shareAchievement },
+        {
+          text: t("export_csv") || "Exporter CSV",
+          onPress: () => exportCSV(),
+        },
       ]
     );
+  };
+
+  // Assurer le reset du scroll à chaque ouverture de la modale
+  useEffect(() => {
+    if (showInsightsModal && insightsScrollRef.current) {
+      const id = setTimeout(() => {
+        try {
+          insightsScrollRef.current?.scrollTo({ y: 0, animated: false });
+        } catch {}
+      }, 0);
+      return () => clearTimeout(id);
+    }
+  }, [showInsightsModal]);
+
+  const exportCSV = async () => {
+    if (!stats) return;
+    try {
+      const rows: string[] = [];
+      rows.push("day_index,prayers,dhikr,quran,hadiths,total");
+      const window = Math.min(timeframe, stats.history?.length || 0);
+      for (let i = 0; i < window; i++) {
+        const d: any = stats.history[i] || {};
+        const p = Number(d.prayers || 0);
+        const dh = Number(d.dhikr || 0);
+        const q = Number(d.quran || 0);
+        const h = Number(d.hadiths || 0);
+        const total = p + dh + q + h;
+        rows.push(`${i + 1},${p},${dh},${q},${h},${total}`);
+      }
+      const csv = rows.join("\n");
+      await Share.share({
+        message: csv,
+        title: t("spiritual_stats_csv") || "Statistiques spirituelles (CSV)",
+      });
+    } catch {
+      showToast(t("share_error") || "Erreur lors du partage");
+    }
   };
 
   const getCommunityComparison = () => {
@@ -692,6 +813,25 @@ const PrayerStatsPremiumScreen: React.FC = () => {
                     </View>
                   ))}
               </View>
+              {/* Sparkline ASCII */}
+              <View style={{ alignItems: "center", marginTop: 8 }}>
+                <Text
+                  style={{
+                    fontFamily: Platform.select({
+                      android: "monospace",
+                      ios: "Menlo",
+                    }),
+                    color: colors.textSecondary,
+                  }}
+                >
+                  {buildSparkline(
+                    stats.history
+                      .slice(0, 7)
+                      .reverse()
+                      .map((d) => getDailyTotal(d as any))
+                  )}
+                </Text>
+              </View>
               <View style={styles.consistencyLegend}>
                 <View style={styles.legendItem}>
                   <View
@@ -746,7 +886,7 @@ const PrayerStatsPremiumScreen: React.FC = () => {
                     styles.quickActionButton,
                     { backgroundColor: "rgba(102, 187, 106, 0.1)" },
                   ]}
-                  onPress={() => setShowInsightsModal(true)}
+                  onPress={openInsightsModal}
                 >
                   <Ionicons name="analytics" size={24} color={colors.primary} />
                   <Text
@@ -820,6 +960,62 @@ const PrayerStatsPremiumScreen: React.FC = () => {
       case "progress":
         return (
           <View style={styles.tabContent}>
+            {/* Objectifs multi-fenêtres */}
+            <View style={[styles.card, { backgroundColor: colors.cardBG }]}>
+              <Text style={[styles.cardTitle, { color: colors.text }]}>
+                {t("goals_overview") || "🎯 Objectifs"}
+              </Text>
+              {[7, 30, 90].map((win) => {
+                const values = (stats.history || [])
+                  .slice(0, win)
+                  .map((d: any) => getDailyTotal(d));
+                const total = values.reduce((a, b) => a + b, 0);
+                const target = weeklyGoal * (win / 7);
+                const pct = Math.min(100, Math.round((total / target) * 100));
+                const color =
+                  pct >= 100
+                    ? colors.success
+                    : pct >= 66
+                    ? colors.primary
+                    : pct >= 33
+                    ? colors.warning
+                    : colors.textSecondary;
+                return (
+                  <View key={win} style={{ marginBottom: 12 }}>
+                    <Text
+                      style={{ color: colors.textSecondary, marginBottom: 6 }}
+                    >
+                      {win} {t("days") || "jours"} — {total}/
+                      {Math.round(target)} ({pct}%)
+                    </Text>
+                    <View style={styles.goalBar}>
+                      <View
+                        style={[
+                          styles.goalBarFill,
+                          { width: `${pct}%`, backgroundColor: color },
+                        ]}
+                      />
+                    </View>
+                    <Text style={{ color, fontSize: 12, fontWeight: "600" }}>
+                      {buildSparkline(values.slice(-7))}
+                    </Text>
+                  </View>
+                );
+              })}
+              <View style={{ flexDirection: "row", gap: 8, marginTop: 8 }}>
+                <TouchableOpacity
+                  onPress={() => setShowGoalModal(true)}
+                  style={[styles.smallButton, { borderColor: colors.primary }]}
+                >
+                  <Ionicons name="create" size={16} color={colors.primary} />
+                  <Text
+                    style={[styles.smallButtonText, { color: colors.primary }]}
+                  >
+                    {t("edit_goal") || "Modifier l'objectif"}
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </View>
             {/* Conseils personnalisés */}
             {stats.advice.advice.length > 0 && (
               <View style={[styles.card, { backgroundColor: colors.cardBG }]}>
@@ -1560,7 +1756,7 @@ const PrayerStatsPremiumScreen: React.FC = () => {
                     styles.headerButton,
                     { backgroundColor: "rgba(102, 187, 106, 0.1)" },
                   ]}
-                  onPress={() => setShowInsightsModal(true)}
+                  onPress={openInsightsModal}
                 >
                   <Ionicons name="analytics" size={20} color={colors.primary} />
                 </TouchableOpacity>
@@ -1638,239 +1834,352 @@ const PrayerStatsPremiumScreen: React.FC = () => {
                 >
                   {t("last_updated")}: {lastUpdated.toLocaleTimeString()}
                 </Text>
+                <View style={{ flexDirection: "row", gap: 8, marginTop: 8 }}>
+                  <TouchableOpacity
+                    onPress={() => setShowGoalModal(true)}
+                    style={[
+                      styles.smallButton,
+                      { borderColor: colors.primary },
+                    ]}
+                  >
+                    <Ionicons name="create" size={16} color={colors.primary} />
+                    <Text
+                      style={[
+                        styles.smallButtonText,
+                        { color: colors.primary },
+                      ]}
+                    >
+                      {t("edit_goal") || "Modifier l'objectif"}
+                    </Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() =>
+                      setTimeframe(
+                        timeframe === 7 ? 30 : timeframe === 30 ? 90 : 7
+                      )
+                    }
+                    style={[styles.smallButton, { borderColor: colors.accent }]}
+                  >
+                    <Ionicons name="time" size={16} color={colors.accent} />
+                    <Text
+                      style={[styles.smallButtonText, { color: colors.accent }]}
+                    >
+                      {t("time_window") || "Fenêtre"}: {timeframe}j
+                    </Text>
+                  </TouchableOpacity>
+                </View>
               </View>
             )}
           </ScrollView>
         </View>
       </ThemedImageBackground>
 
-      {/* 🔍 Modal Insights Avancés */}
-      <Modal
-        visible={showInsightsModal}
-        animationType="slide"
-        presentationStyle="pageSheet"
-      >
+      {/* 🔍 Modal Insights Avancés - Vue conditionnelle au lieu de Modal */}
+      {showInsightsModal && (
         <View
           style={[
-            styles.modalContainer,
+            styles.insightsOverlay,
             { backgroundColor: colors.background },
           ]}
         >
-          <View
-            style={[styles.modalHeader, { backgroundColor: colors.cardBG }]}
-          >
-            <Text style={[styles.modalTitle, { color: colors.text }]}>
-              🧠 Insights Spirituels
-            </Text>
-            <TouchableOpacity
-              style={styles.modalCloseButton}
-              onPress={() => setShowInsightsModal(false)}
+          <SafeAreaView style={{ flex: 1 }}>
+            <View
+              style={[
+                styles.modalHeader,
+                { backgroundColor: colors.cardBG, paddingTop: 10 },
+              ]}
             >
-              <Ionicons name="close" size={24} color={colors.text} />
-            </TouchableOpacity>
-          </View>
-
-          <ScrollView
-            style={styles.modalContent}
-            showsVerticalScrollIndicator={true}
-            contentContainerStyle={{ paddingBottom: 40, flexGrow: 1 }}
-            bounces={true}
-            nestedScrollEnabled={true}
-          >
-            {/* Analyse intelligente */}
-            <View style={[styles.card, { backgroundColor: colors.cardBG }]}>
-              <Text style={[styles.cardTitle, { color: colors.text }]}>
-                📊 Analyse de vos habitudes
+              <Text style={[styles.modalTitle, { color: colors.text }]}>
+                🧠 Insights Spirituels
               </Text>
-              {generateInsights().map((insight, index) => (
-                <View key={index} style={styles.insightItem}>
-                  <View
-                    style={[
-                      styles.insightIcon,
-                      { backgroundColor: insight.color + "20" },
-                    ]}
-                  >
-                    <Ionicons
-                      name={insight.icon as any}
-                      size={20}
-                      color={insight.color}
-                    />
+              <TouchableOpacity
+                style={styles.modalCloseButton}
+                onPress={() => setShowInsightsModal(false)}
+              >
+                <Ionicons name="close" size={24} color={colors.text} />
+              </TouchableOpacity>
+            </View>
+
+            {/* Zone scrollable simplifiée */}
+            <ScrollView
+              style={styles.modalContent}
+              showsVerticalScrollIndicator={true}
+              bounces={true}
+              contentContainerStyle={{ paddingBottom: 110 }}
+              ref={insightsScrollRef}
+            >
+              {/* Analyse intelligente */}
+              <View style={[styles.card, { backgroundColor: colors.cardBG }]}>
+                <Text style={[styles.cardTitle, { color: colors.text }]}>
+                  📊 Analyse de vos habitudes
+                </Text>
+                {generateInsights().map((insight, index) => (
+                  <View key={index} style={styles.insightItem}>
+                    <View
+                      style={[
+                        styles.insightIcon,
+                        { backgroundColor: insight.color + "20" },
+                      ]}
+                    >
+                      <Ionicons
+                        name={insight.icon as any}
+                        size={20}
+                        color={insight.color}
+                      />
+                    </View>
+                    <View style={styles.insightContent}>
+                      <Text
+                        style={[styles.insightTitle, { color: colors.text }]}
+                      >
+                        {insight.title}
+                      </Text>
+                      <Text
+                        style={[
+                          styles.insightDescription,
+                          { color: colors.textSecondary },
+                        ]}
+                      >
+                        {insight.description}
+                      </Text>
+                    </View>
                   </View>
-                  <View style={styles.insightContent}>
-                    <Text style={[styles.insightTitle, { color: colors.text }]}>
-                      {insight.title}
+                ))}
+              </View>
+
+              {/* Comparaison communautaire */}
+              {(() => {
+                const comparison = getCommunityComparison();
+                if (!comparison) return null;
+
+                return (
+                  <View
+                    style={[styles.card, { backgroundColor: colors.cardBG }]}
+                  >
+                    <Text style={[styles.cardTitle, { color: colors.text }]}>
+                      🌍 Comparaison communautaire
                     </Text>
                     <Text
                       style={[
-                        styles.insightDescription,
+                        styles.cardSubtitle,
                         { color: colors.textSecondary },
                       ]}
                     >
-                      {insight.description}
+                      Votre position par rapport à la communauté (anonyme)
                     </Text>
-                  </View>
-                </View>
-              ))}
-            </View>
 
-            {/* Comparaison communautaire */}
-            {(() => {
-              const comparison = getCommunityComparison();
-              if (!comparison) return null;
-
-              return (
-                <View style={[styles.card, { backgroundColor: colors.cardBG }]}>
-                  <Text style={[styles.cardTitle, { color: colors.text }]}>
-                    🌍 Comparaison communautaire
-                  </Text>
-                  <Text
-                    style={[
-                      styles.cardSubtitle,
-                      { color: colors.textSecondary },
-                    ]}
-                  >
-                    Votre position par rapport à la communauté (anonyme)
-                  </Text>
-
-                  <View style={styles.comparisonGrid}>
-                    <View style={styles.comparisonItem}>
-                      <Text
-                        style={[
-                          styles.comparisonLabel,
-                          { color: colors.textSecondary },
-                        ]}
-                      >
-                        Taux de réussite
-                      </Text>
-                      <View style={styles.comparisonRow}>
+                    <View style={styles.comparisonGrid}>
+                      <View style={styles.comparisonItem}>
                         <Text
                           style={[
-                            styles.comparisonUserValue,
-                            { color: colors.text },
-                          ]}
-                        >
-                          {comparison.successRate.user}%
-                        </Text>
-                        <Text
-                          style={[
-                            styles.comparisonVs,
+                            styles.comparisonLabel,
                             { color: colors.textSecondary },
                           ]}
                         >
-                          vs {comparison.successRate.average}%
+                          Taux de réussite
                         </Text>
-                        <Ionicons
-                          name={
-                            comparison.successRate.position === "above"
-                              ? "trending-up"
-                              : "trending-down"
-                          }
-                          size={16}
-                          color={
-                            comparison.successRate.position === "above"
-                              ? colors.success
-                              : colors.warning
-                          }
-                        />
+                        <View style={styles.comparisonRow}>
+                          <Text
+                            style={[
+                              styles.comparisonUserValue,
+                              { color: colors.text },
+                            ]}
+                          >
+                            {comparison.successRate.user}%
+                          </Text>
+                          <Text
+                            style={[
+                              styles.comparisonVs,
+                              { color: colors.textSecondary },
+                            ]}
+                          >
+                            vs {comparison.successRate.average}%
+                          </Text>
+                          <Ionicons
+                            name={
+                              comparison.successRate.position === "above"
+                                ? "trending-up"
+                                : "trending-down"
+                            }
+                            size={16}
+                            color={
+                              comparison.successRate.position === "above"
+                                ? colors.success
+                                : colors.warning
+                            }
+                          />
+                        </View>
                       </View>
-                    </View>
 
-                    <View style={styles.comparisonItem}>
-                      <Text
-                        style={[
-                          styles.comparisonLabel,
-                          { color: colors.textSecondary },
-                        ]}
-                      >
-                        Série actuelle
-                      </Text>
-                      <View style={styles.comparisonRow}>
+                      <View style={styles.comparisonItem}>
                         <Text
                           style={[
-                            styles.comparisonUserValue,
-                            { color: colors.text },
-                          ]}
-                        >
-                          {comparison.streak.user} jours
-                        </Text>
-                        <Text
-                          style={[
-                            styles.comparisonVs,
+                            styles.comparisonLabel,
                             { color: colors.textSecondary },
                           ]}
                         >
-                          vs {comparison.streak.average} jours
+                          Série actuelle
                         </Text>
-                        <Ionicons
-                          name={
-                            comparison.streak.position === "above"
-                              ? "trending-up"
-                              : "trending-down"
-                          }
-                          size={16}
-                          color={
-                            comparison.streak.position === "above"
-                              ? colors.success
-                              : colors.warning
-                          }
-                        />
+                        <View style={styles.comparisonRow}>
+                          <Text
+                            style={[
+                              styles.comparisonUserValue,
+                              { color: colors.text },
+                            ]}
+                          >
+                            {comparison.streak.user} jours
+                          </Text>
+                          <Text
+                            style={[
+                              styles.comparisonVs,
+                              { color: colors.textSecondary },
+                            ]}
+                          >
+                            vs {comparison.streak.average} jours
+                          </Text>
+                          <Ionicons
+                            name={
+                              comparison.streak.position === "above"
+                                ? "trending-up"
+                                : "trending-down"
+                            }
+                            size={16}
+                            color={
+                              comparison.streak.position === "above"
+                                ? colors.success
+                                : colors.warning
+                            }
+                          />
+                        </View>
                       </View>
                     </View>
                   </View>
-                </View>
-              );
-            })()}
+                );
+              })()}
 
-            {/* Objectif de la semaine */}
-            <View style={[styles.card, { backgroundColor: colors.cardBG }]}>
-              <Text style={[styles.cardTitle, { color: colors.text }]}>
-                🎯 Objectif de la semaine
-              </Text>
-              <View style={styles.goalContainer}>
-                <View style={styles.goalProgress}>
-                  <Text
-                    style={[styles.goalLabel, { color: colors.textSecondary }]}
-                  >
-                    Prières cette semaine
-                  </Text>
-                  <Text style={[styles.goalValue, { color: colors.text }]}>
-                    {stats?.stats.total_prayers || 0} / {weeklyGoal}
-                  </Text>
-                  <View style={styles.goalBar}>
-                    <View
+              {/* Objectif de la semaine */}
+              <View style={[styles.card, { backgroundColor: colors.cardBG }]}>
+                <Text style={[styles.cardTitle, { color: colors.text }]}>
+                  🎯 Objectif de la semaine
+                </Text>
+                <View style={styles.goalContainer}>
+                  <View style={styles.goalProgress}>
+                    <Text
                       style={[
-                        styles.goalBarFill,
+                        styles.goalLabel,
+                        { color: colors.textSecondary },
+                      ]}
+                    >
+                      Prières cette semaine
+                    </Text>
+                    <Text style={[styles.goalValue, { color: colors.text }]}>
+                      {stats?.stats.total_prayers || 0} / {weeklyGoal}
+                    </Text>
+                    <View style={styles.goalBar}>
+                      <View
+                        style={[
+                          styles.goalBarFill,
+                          {
+                            width: `${getWeekProgress()}%`,
+                            backgroundColor:
+                              getWeekProgress() >= 100
+                                ? colors.success
+                                : getWeekProgress() >= 66
+                                ? colors.primary
+                                : getWeekProgress() >= 33
+                                ? colors.warning
+                                : colors.textSecondary,
+                          },
+                        ]}
+                      />
+                    </View>
+                    <Text
+                      style={[
+                        styles.goalPercentage,
                         {
-                          width: `${getWeekProgress()}%`,
-                          backgroundColor: colors.primary,
+                          color:
+                            getWeekProgress() >= 100
+                              ? colors.success
+                              : getWeekProgress() >= 66
+                              ? colors.primary
+                              : getWeekProgress() >= 33
+                              ? colors.warning
+                              : colors.textSecondary,
                         },
                       ]}
-                    />
+                    >
+                      {Math.round(getWeekProgress())}% complété
+                    </Text>
                   </View>
-                  <Text
-                    style={[styles.goalPercentage, { color: colors.primary }]}
+                  <TouchableOpacity
+                    style={[
+                      styles.goalButton,
+                      { backgroundColor: colors.primary },
+                    ]}
+                    onPress={() => {
+                      Alert.alert(
+                        "Modifier l'objectif",
+                        "Votre objectif sera bientôt personnalisable !",
+                        [{ text: "OK" }]
+                      );
+                    }}
                   >
-                    {Math.round(getWeekProgress())}% complété
-                  </Text>
+                    <Text style={styles.goalButtonText}>Modifier</Text>
+                  </TouchableOpacity>
                 </View>
-                <TouchableOpacity
-                  style={[
-                    styles.goalButton,
-                    { backgroundColor: colors.primary },
-                  ]}
-                  onPress={() => {
-                    Alert.alert(
-                      "Modifier l'objectif",
-                      "Votre objectif sera bientôt personnalisable !",
-                      [{ text: "OK" }]
-                    );
-                  }}
-                >
-                  <Text style={styles.goalButtonText}>Modifier</Text>
-                </TouchableOpacity>
               </View>
+            </ScrollView>
+          </SafeAreaView>
+        </View>
+      )}
+
+      {/* 🎯 Modal réglage de l'objectif hebdo */}
+      <Modal visible={showGoalModal} animationType="fade" transparent>
+        <View style={styles.goalModalBackdrop}>
+          <View style={[styles.goalModal, { backgroundColor: colors.cardBG }]}>
+            <Text style={[styles.goalTitle, { color: colors.text }]}>
+              {t("weekly_goal") || "Objectif hebdomadaire"}
+            </Text>
+            <Text
+              style={[styles.goalSubtitle, { color: colors.textSecondary }]}
+            >
+              {t("weekly_goal_desc") || "Nombre de prières visées par semaine"}
+            </Text>
+            <TextInput
+              value={tempGoal}
+              onChangeText={setTempGoal}
+              keyboardType="number-pad"
+              style={[
+                styles.goalInput,
+                { borderColor: colors.primary, color: colors.text },
+              ]}
+              placeholder="35"
+              placeholderTextColor={colors.textSecondary}
+            />
+            <View style={{ flexDirection: "row", gap: 12, marginTop: 12 }}>
+              <TouchableOpacity
+                onPress={() => setShowGoalModal(false)}
+                style={[styles.smallButton, { borderColor: colors.warning }]}
+              >
+                <Ionicons name="close" size={16} color={colors.warning} />
+                <Text
+                  style={[styles.smallButtonText, { color: colors.warning }]}
+                >
+                  {t("cancel") || "Annuler"}
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={saveWeeklyGoal}
+                style={[styles.smallButton, { borderColor: colors.success }]}
+              >
+                <Ionicons name="checkmark" size={16} color={colors.success} />
+                <Text
+                  style={[styles.smallButtonText, { color: colors.success }]}
+                >
+                  {t("save") || "Enregistrer"}
+                </Text>
+              </TouchableOpacity>
             </View>
-          </ScrollView>
+          </View>
         </View>
       </Modal>
     </>
@@ -2371,11 +2680,42 @@ const styles = StyleSheet.create({
     opacity: 0.8,
   },
 
+  // Petits boutons utilitaires
+  smallButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingVertical: 6,
+    paddingHorizontal: 10,
+    borderWidth: 1,
+    borderRadius: 8,
+  },
+  smallButtonText: {
+    marginLeft: 6,
+    fontSize: 12,
+    fontWeight: "600",
+  },
+
   // 🎯 Nouveaux styles pour les fonctionnalités avancées
   // Modal
+  insightsOverlay: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    zIndex: 1000,
+    flex: 1,
+    paddingTop: Platform.select({
+      android: StatusBar.currentHeight ? StatusBar.currentHeight + 8 : 60,
+      ios: 60,
+    }),
+  },
   modalContainer: {
     flex: 1,
-    paddingTop: 60,
+    paddingTop: Platform.select({
+      android: StatusBar.currentHeight ? StatusBar.currentHeight + 8 : 60,
+      ios: 60,
+    }),
   },
   modalHeader: {
     flexDirection: "row",
@@ -2403,6 +2743,36 @@ const styles = StyleSheet.create({
     paddingTop: 16,
     paddingBottom: 20, // Ajoute de l'espace en bas pour éviter que le contenu soit coupé
     minHeight: 0, // Important pour que flex: 1 fonctionne correctement avec ScrollView
+  },
+
+  // Modal objectif hebdo
+  goalModalBackdrop: {
+    flex: 1,
+    backgroundColor: "rgba(0,0,0,0.4)",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 24,
+  },
+  goalModal: {
+    width: "100%",
+    borderRadius: 16,
+    padding: 16,
+  },
+  goalTitle: {
+    fontSize: 18,
+    fontWeight: "700",
+  },
+  goalSubtitle: {
+    marginTop: 4,
+    fontSize: 12,
+  },
+  goalInput: {
+    marginTop: 12,
+    borderWidth: 1,
+    borderRadius: 10,
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    fontSize: 16,
   },
 
   // Insights

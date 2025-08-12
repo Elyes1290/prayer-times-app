@@ -126,9 +126,15 @@ class SyncManager {
     await this.fullSync();
 
     // Puis toutes les X minutes
-    setInterval(async () => {
+    const handle = setInterval(async () => {
       await this.fullSync();
     }, intervalMinutes * 60 * 1000);
+    // Dans l'app, on ne garde pas de référence globale; en tests, éviter les fuites
+    // @ts-ignore
+    if (typeof handle?.unref === "function") {
+      // @ts-ignore
+      handle.unref();
+    }
   }
 
   // 🚀 NOUVEAU : Obtenir le statut de synchronisation

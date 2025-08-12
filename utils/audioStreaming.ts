@@ -57,9 +57,14 @@ export class AudioStreamingManager {
     this.loadSegmentCache();
 
     // Optimisation : nettoyer les sessions inactives toutes les 5 minutes
-    setInterval(() => {
+    const handle = setInterval(() => {
       this.cleanupInactiveSessions();
     }, 5 * 60 * 1000);
+    // @ts-ignore
+    if (typeof (handle as any)?.unref === "function") {
+      // @ts-ignore
+      (handle as any).unref();
+    }
   }
 
   /**

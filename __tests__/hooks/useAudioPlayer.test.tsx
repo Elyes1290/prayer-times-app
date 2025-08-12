@@ -1,3 +1,141 @@
+function HookTest({
+  onValue,
+}: {
+  onValue: (api: ReturnType<typeof useAudioPlayer>) => void;
+}) {
+  const api = useAudioPlayer();
+  useEffect(() => {
+    onValue(api);
+  }, [api, onValue]);
+  return null;
+}
+
+describe("useAudioPlayer", () => {
+  let apiRef: ReturnType<typeof useAudioPlayer> | null = null;
+  let stateRef: any = null;
+
+  const onValue = (api: ReturnType<typeof useAudioPlayer>) => {
+    apiRef = api;
+    stateRef = api.audioState;
+  };
+
+  beforeEach(() => {
+    apiRef = null;
+    stateRef = null;
+  });
+
+  test("état initial correct", async () => {
+    render(<HookTest onValue={onValue} />);
+    expect(stateRef).toBeTruthy();
+    expect(stateRef.isPreviewing).toBe(false);
+    expect(stateRef.isAudioPlaying).toBe(false);
+    expect(stateRef.currentPlayingAdhan).toBeNull();
+    expect(stateRef.playbackPosition).toBe(0);
+    expect(stateRef.playbackDuration).toBe(0);
+    expect(stateRef.isLoadingPreview).toBe(false);
+    expect(stateRef.isPaused).toBe(false);
+    expect(stateRef.sound).toBeNull();
+    expect(stateRef.premiumAdhanSound).toBeNull();
+    expect(stateRef.isPlayingPremiumAdhan).toBe(false);
+    expect(stateRef.currentPlayingPremiumAdhan).toBeNull();
+    expect(stateRef.premiumAdhanPlaybackPosition).toBe(0);
+    expect(stateRef.premiumAdhanPlaybackDuration).toBe(0);
+    expect(stateRef.isLoadingPremiumAdhan).toBe(false);
+  });
+
+  test("setters principaux mettent à jour l'état", async () => {
+    render(<HookTest onValue={onValue} />);
+    expect(apiRef).toBeTruthy();
+
+    await act(async () => {
+      apiRef!.setIsPreviewing(true);
+      apiRef!.setIsAudioPlaying(true);
+      apiRef!.setCurrentPlayingAdhan("adhan_1");
+      apiRef!.setPlaybackPosition(1234);
+      apiRef!.setPlaybackDuration(5678);
+      apiRef!.setIsLoadingPreview(true);
+      apiRef!.setIsPaused(true);
+      apiRef!.updatePlaybackStatus(2345, 6789);
+    });
+
+    // Après les updates, stateRef a été rafraîchi via onValue
+    expect(stateRef.isPreviewing).toBe(true);
+    expect(stateRef.isAudioPlaying).toBe(true);
+    expect(stateRef.currentPlayingAdhan).toBe("adhan_1");
+    expect(stateRef.playbackPosition).toBe(2345);
+    expect(stateRef.playbackDuration).toBe(6789);
+    expect(stateRef.isLoadingPreview).toBe(true);
+    expect(stateRef.isPaused).toBe(true);
+  });
+
+  test("actions premium mettent à jour l'état premium", async () => {
+    render(<HookTest onValue={onValue} />);
+
+    await act(async () => {
+      apiRef!.setIsPlayingPremiumAdhan(true);
+      apiRef!.setCurrentPlayingPremiumAdhan("p_adhan_2");
+      apiRef!.setPremiumAdhanPlaybackPosition(1111);
+      apiRef!.setPremiumAdhanPlaybackDuration(2222);
+      apiRef!.setIsLoadingPremiumAdhan(true);
+      apiRef!.updatePremiumPlaybackStatus(3333, 4444);
+    });
+
+    expect(stateRef.isPlayingPremiumAdhan).toBe(true);
+    expect(stateRef.currentPlayingPremiumAdhan).toBe("p_adhan_2");
+    expect(stateRef.premiumAdhanPlaybackPosition).toBe(3333);
+    expect(stateRef.premiumAdhanPlaybackDuration).toBe(4444);
+    expect(stateRef.isLoadingPremiumAdhan).toBe(true);
+  });
+
+  test("resetters remettent à zéro", async () => {
+    render(<HookTest onValue={onValue} />);
+
+    await act(async () => {
+      // Mettre un état non vide
+      apiRef!.setIsPreviewing(true);
+      apiRef!.setIsAudioPlaying(true);
+      apiRef!.setCurrentPlayingAdhan("x");
+      apiRef!.setPlaybackPosition(9);
+      apiRef!.setPlaybackDuration(10);
+      apiRef!.setIsLoadingPreview(true);
+      apiRef!.setIsPaused(true);
+      // Reset principal
+      apiRef!.resetAudio();
+      // Marquer premium et reset premium
+      apiRef!.setIsPlayingPremiumAdhan(true);
+      apiRef!.setCurrentPlayingPremiumAdhan("y");
+      apiRef!.setPremiumAdhanPlaybackPosition(9);
+      apiRef!.setPremiumAdhanPlaybackDuration(10);
+      apiRef!.setIsLoadingPremiumAdhan(true);
+      apiRef!.resetPremiumAudio();
+    });
+
+    expect(stateRef.isPreviewing).toBe(false);
+    expect(stateRef.isAudioPlaying).toBe(false);
+    expect(stateRef.currentPlayingAdhan).toBeNull();
+    expect(stateRef.playbackPosition).toBe(0);
+    expect(stateRef.playbackDuration).toBe(0);
+    expect(stateRef.isLoadingPreview).toBe(false);
+    expect(stateRef.isPaused).toBe(false);
+    expect(stateRef.sound).toBeNull();
+
+    expect(stateRef.premiumAdhanSound).toBeNull();
+    expect(stateRef.isPlayingPremiumAdhan).toBe(false);
+    expect(stateRef.currentPlayingPremiumAdhan).toBeNull();
+    expect(stateRef.premiumAdhanPlaybackPosition).toBe(0);
+    expect(stateRef.premiumAdhanPlaybackDuration).toBe(0);
+    expect(stateRef.isLoadingPremiumAdhan).toBe(false);
+  });
+
+  test("formatTime formate correctement", () => {
+    render(<HookTest onValue={onValue} />);
+    const s = apiRef!.formatTime(90500); // 90.5s ~ 1:30
+    expect(s).toBe("1:30");
+    const s2 = apiRef!.formatTime(0);
+    expect(s2).toBe("0:00");
+  });
+});
+
 import React, { useEffect } from "react";
 import { render, waitFor, act } from "@testing-library/react-native";
 import { View } from "react-native";

@@ -43,7 +43,12 @@ class NativeDownloadManager {
 
   constructor() {
     if (Platform.OS === "android" && DownloadModule) {
-      this.eventEmitter = new NativeEventEmitter(DownloadModule);
+      const canPassModule =
+        typeof (DownloadModule as any)?.addListener === "function" &&
+        typeof (DownloadModule as any)?.removeListeners === "function";
+      this.eventEmitter = new NativeEventEmitter(
+        canPassModule ? (DownloadModule as any) : undefined
+      );
       this.setupEventListeners();
     }
   }
