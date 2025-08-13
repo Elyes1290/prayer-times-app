@@ -107,27 +107,47 @@ android {
         keyPassword 'android'
     }
     release {
-        // Utiliser des variables d'environnement injectées par le CI/environnement local
-        def storeFilePath = System.getenv('MYAPP_UPLOAD_STORE_FILE')
-        def storePasswordEnv = System.getenv('MYAPP_UPLOAD_STORE_PASSWORD')
-        def keyAliasEnv = System.getenv('MYAPP_UPLOAD_KEY_ALIAS')
-        def keyPasswordEnv = System.getenv('MYAPP_UPLOAD_KEY_PASSWORD')
+        // 🔐 PRIORITÉ 1: Tester keystore.properties
+        def keystorePropertiesFile = rootProject.file('keystore.properties')
+        def keystoreProperties = new Properties()
+        def hasKeystoreProperties = false
+        
+        if (keystorePropertiesFile.exists()) {
+            keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+            def requiredProps = ['storeFile', 'storePassword', 'keyAlias', 'keyPassword']
+            hasKeystoreProperties = requiredProps.every { prop ->
+                keystoreProperties[prop] != null && !keystoreProperties[prop].toString().trim().isEmpty()
+            }
+        }
 
-        def hasAllReleaseCreds = storeFilePath && storePasswordEnv && keyAliasEnv && keyPasswordEnv
-
-        if (hasAllReleaseCreds) {
-            storeFile file(storeFilePath)
-            storePassword storePasswordEnv
-            keyAlias keyAliasEnv
-            keyPassword keyPasswordEnv
+        if (hasKeystoreProperties) {
+            // ✅ Utiliser keystore.properties
+            storeFile file(keystoreProperties['storeFile'])
+            storePassword keystoreProperties['storePassword']
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
         } else {
-            // Fallback local: signer avec la debug.keystore pour éviter l'échec de build
-            // ATTENTION: à n'utiliser que pour des builds locaux de test.
-            println '⚠️  MYAPP_* variables non définies: fallback sur debug.keystore pour release locale.'
-            storeFile file('debug.keystore')
-            storePassword 'android'
-            keyAlias 'androiddebugkey'
-            keyPassword 'android'
+            // 🔐 PRIORITÉ 2: Variables d'environnement pour CI/CD
+            def storeFilePath = System.getenv('MYAPP_UPLOAD_STORE_FILE')
+            def storePasswordEnv = System.getenv('MYAPP_UPLOAD_STORE_PASSWORD')
+            def keyAliasEnv = System.getenv('MYAPP_UPLOAD_KEY_ALIAS')
+            def keyPasswordEnv = System.getenv('MYAPP_UPLOAD_KEY_PASSWORD')
+
+            def hasAllReleaseCreds = storeFilePath && storePasswordEnv && keyAliasEnv && keyPasswordEnv
+
+            if (hasAllReleaseCreds) {
+                storeFile file(storeFilePath)
+                storePassword storePasswordEnv
+                keyAlias keyAliasEnv
+                keyPassword keyPasswordEnv
+            } else {
+                // ⚠️ DERNIER RECOURS: debug keystore (NON RECOMMANDÉ pour production)
+                println '⚠️  Ni keystore.properties ni MYAPP_* variables: fallback debug.keystore.'
+                storeFile file('debug.keystore')
+                storePassword 'android'
+                keyAlias 'androiddebugkey'
+                keyPassword 'android'
+            }
         }
     }
     }
@@ -208,12 +228,9 @@ dependencies {
     }
     implementation "com.batoulapps.adhan:adhan:1.2.1"
 
-    // Import the Firebase BoM
-    implementation platform('com.google.firebase:firebase-bom:33.16.0')
-    
-    // Add the dependencies for Firebase products you want to use
-    // When using the BoM, don't specify versions in Firebase dependencies
-    implementation 'com.google.firebase:firebase-auth'
-    implementation 'com.google.firebase:firebase-firestore'
+    // 🚀 SUPPRIMÉ : Firebase dependencies (non utilisées)
+    // implementation platform('com.google.firebase:firebase-bom:33.16.0')
+    // implementation 'com.google.firebase:firebase-auth'
+    // implementation 'com.google.firebase:firebase-firestore'
 
 }

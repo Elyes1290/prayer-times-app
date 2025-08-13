@@ -120,76 +120,115 @@ class ApiClient {
 
       // console.log(`🌐 API Request: ${method} ${url}`);
 
-      try {
-        const response = await fetch(url, config);
-        const result = await response.json();
+      // Simple mécanisme de retry avec backoff
+      let attempt = 0;
+      const maxRetries = 2;
 
-        // Nettoyer le timeout
-        clearTimeout(timeoutId);
+      while (attempt <= maxRetries) {
+        try {
+          const response = await fetch(url, config);
 
-        if (!response.ok) {
-          // Si 401, tenter un refresh token puis retry une fois
-          if (response.status === 401) {
-            const refreshed = await this.tryRefreshToken();
-            if (refreshed) {
-              // Rejouer la requête avec le nouveau token
-              const newToken = await safeGetItem("auth_token");
-              const retriedConfig = {
-                ...config,
-                headers: {
-                  ...(config.headers as any),
-                  ...(newToken ? { Authorization: `Bearer ${newToken}` } : {}),
-                },
-              } as RequestInit;
-              const retryResponse = await fetch(url, retriedConfig);
-              const retryResult = await retryResponse.json();
-              if (!retryResponse.ok) {
-                // Afficher un toast global pour avertir l’utilisateur
-                showGlobalToast({
-                  type: "error",
-                  title:
-                    i18n.t("toasts.connection_interrupted") ||
-                    "Connexion interrompue",
-                  message:
-                    i18n.t("toasts.single_device_only") ||
-                    "Non autorisé. Veuillez vous connecter sur un seul appareil.",
-                });
-                throw new Error(
-                  `HTTP ${retryResponse.status}: ${
-                    retryResult.message || "Erreur API"
-                  }`
-                );
-              }
-              return retryResult;
+          // Gestion robuste des réponses non-JSON
+          let result: any = {};
+          try {
+            result = await response.json();
+          } catch {
+            // Réponse non-JSON (ex: 204 No Content, plain text)
+            if (response.status === 204) {
+              result = { success: true, message: "No Content" };
+            } else {
+              result = { success: false, message: "Invalid JSON response" };
             }
-            // Refresh impossible → notifier également
-            showGlobalToast({
-              type: "error",
-              title:
-                i18n.t("toasts.connection_interrupted") ||
-                "Connexion interrompue",
-              message:
-                i18n.t("toasts.single_device_only") ||
-                "Non autorisé. Veuillez vous connecter sur un seul appareil.",
-            });
           }
-          throw new Error(
-            `HTTP ${response.status}: ${result.message || "Erreur API"}`
-          );
+
+          // Nettoyer le timeout
+          clearTimeout(timeoutId);
+
+          if (!response.ok) {
+            // Si 401, tenter un refresh token puis retry une fois
+            if (response.status === 401) {
+              const refreshed = await this.tryRefreshToken();
+              if (refreshed) {
+                // Rejouer la requête avec le nouveau token
+                const newToken = await safeGetItem("auth_token");
+                const retriedConfig = {
+                  ...config,
+                  headers: {
+                    ...(config.headers as any),
+                    ...(newToken
+                      ? { Authorization: `Bearer ${newToken}` }
+                      : {}),
+                  },
+                } as RequestInit;
+                const retryResponse = await fetch(url, retriedConfig);
+                let retryResult: any = {};
+                try {
+                  retryResult = await retryResponse.json();
+                } catch {
+                  retryResult = {
+                    success: false,
+                    message: "Invalid JSON response on retry",
+                  };
+                }
+                if (!retryResponse.ok) {
+                  // Afficher un toast global pour avertir l’utilisateur
+                  showGlobalToast({
+                    type: "error",
+                    title:
+                      i18n.t("toasts.connection_interrupted") ||
+                      "Connexion interrompue",
+                    message:
+                      i18n.t("toasts.single_device_only") ||
+                      "Non autorisé. Veuillez vous connecter sur un seul appareil.",
+                  });
+                  throw new Error(
+                    `HTTP ${retryResponse.status}: ${
+                      retryResult.message || "Erreur API"
+                    }`
+                  );
+                }
+                return retryResult;
+              }
+              // Refresh impossible → notifier également
+              showGlobalToast({
+                type: "error",
+                title:
+                  i18n.t("toasts.connection_interrupted") ||
+                  "Connexion interrompue",
+                message:
+                  i18n.t("toasts.single_device_only") ||
+                  "Non autorisé. Veuillez vous connecter sur un seul appareil.",
+              });
+            }
+            throw new Error(
+              `HTTP ${response.status}: ${result.message || "Erreur API"}`
+            );
+          }
+
+          // console.log(`✅ API Success: ${method} ${endpoint}`);
+          return result;
+        } catch (fetchError: any) {
+          // Nettoyer le timeout en cas d'erreur
+          clearTimeout(timeoutId);
+
+          // Retry uniquement pour les erreurs réseau temporaires
+          if (
+            attempt < maxRetries &&
+            (fetchError.name === "AbortError" ||
+              fetchError.message?.includes("network"))
+          ) {
+            attempt++;
+            const backoffTime = Math.min(1000 * Math.pow(2, attempt), 5000); // Max 5s
+            await new Promise((resolve) => setTimeout(resolve, backoffTime));
+            continue; // Retry
+          }
+
+          // Pas de retry, on throw l'erreur
+          throw fetchError;
         }
-
-        // console.log(`✅ API Success: ${method} ${endpoint}`);
-        return result;
-      } catch (fetchError: any) {
-        // Nettoyer le timeout en cas d'erreur
-        clearTimeout(timeoutId);
-
-        if (fetchError.name === "AbortError") {
-          throw new Error("Timeout de la requête API");
-        }
-
-        throw fetchError;
       }
+      // Si on arrive ici, tous les retries ont échoué
+      throw new Error("Tous les retries ont échoué");
     } catch (error: any) {
       console.error(`❌ API Error: ${method} ${endpoint}`, error);
       throw error;
@@ -659,11 +698,11 @@ class ApiClient {
     reason?: string;
     message?: string;
   }): Promise<ApiResponse> {
-    return this.makeRequest("/api/data-deletion.php", "POST", data);
+    return this.makeRequest("/data-deletion.php", "POST", data);
   }
 
   async createPortalSession(customerId: string): Promise<ApiResponse> {
-    return this.makeRequest("/api/create-portal-session.php", "POST", {
+    return this.makeRequest("/create-portal-session.php", "POST", {
       customer_id: customerId,
       return_url: "https://myadhanapp.com",
     });

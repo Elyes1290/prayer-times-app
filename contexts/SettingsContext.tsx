@@ -632,11 +632,18 @@ export const SettingsProvider = ({
       }
 
       if (manualLocationValue) {
-        const manualLoc = JSON.parse(manualLocationValue);
-        console.log(
-          `✅ [DEBUG] Localisation manuelle chargée: ${manualLoc.city}`
-        );
-        setManualLocation(manualLoc);
+        try {
+          const manualLoc = JSON.parse(manualLocationValue);
+          console.log(
+            `✅ [DEBUG] Localisation manuelle chargée: ${manualLoc.city}`
+          );
+          setManualLocation(manualLoc);
+        } catch (error) {
+          console.log(
+            `⚠️ [DEBUG] Erreur parsing localisation manuelle, reset à null`
+          );
+          setManualLocation(null);
+        }
       } else {
         console.log(`⚠️ [DEBUG] Aucune localisation manuelle sauvegardée`);
       }

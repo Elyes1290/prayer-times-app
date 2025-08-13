@@ -156,7 +156,15 @@ export const useUserStats = (): UseUserStatsReturn => {
       if (!forceRefresh) {
         const cached = await AsyncStorage.getItem(CACHE_KEY);
         if (cached) {
-          const { data, timestamp } = JSON.parse(cached);
+          let parsedCache: any = null;
+          try {
+            parsedCache = JSON.parse(cached);
+          } catch {
+            // Cache corrompu, ignorer et refetch
+            await AsyncStorage.removeItem(CACHE_KEY);
+            return;
+          }
+          const { data, timestamp } = parsedCache;
           const age = Date.now() - timestamp;
 
           if (age < CACHE_DURATION) {

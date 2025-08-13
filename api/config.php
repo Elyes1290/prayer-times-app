@@ -37,8 +37,11 @@ function loadEnvFile($filePath) {
 // 🔐 SÉCURITÉ : Charger le fichier .env depuis le répertoire parent
 $envLoaded = loadEnvFile(__DIR__ . '/../.env');
 
-// 🚀 DEBUG : Log au début du fichier
-if (isset($_ENV['ENABLE_DEBUG_LOGS']) && $_ENV['ENABLE_DEBUG_LOGS'] === 'true') {
+// 🚀 DEBUG : Log au début du fichier (uniquement en développement)
+$isDebugEnabled = isset($_ENV['ENABLE_DEBUG_LOGS']) && $_ENV['ENABLE_DEBUG_LOGS'] === 'true';
+$isProduction = isset($_ENV['NODE_ENV']) && $_ENV['NODE_ENV'] === 'production';
+
+if ($isDebugEnabled && !$isProduction) {
     error_log("DEBUG: config.php chargé - " . date('Y-m-d H:i:s') . " - ENV loaded: " . ($envLoaded ? 'OUI' : 'NON'));
 }
 
@@ -131,14 +134,19 @@ function getDBConnection() {
     static $pdo = null;
     
     if ($pdo === null) {
-        // 🚀 DEBUG ÉTENDU : Vérifier toutes les variables
-        error_log("🔍 DEBUG DB CONNECTION:");
-        error_log("  - DB_HOST: " . DB_HOST);
-        error_log("  - DB_NAME: " . DB_NAME);
-        error_log("  - DB_USER: " . DB_USER);
-        error_log("  - DB_PASS: " . (DB_PASS ? "SET (length: " . strlen(DB_PASS) . ")" : "NULL/EMPTY"));
-        error_log("  - DB_PORT: " . DB_PORT);
-        error_log("  - ENV DB_PASSWORD: " . (isset($_ENV['DB_PASSWORD']) ? "SET" : "NOT SET"));
+        // 🚀 DEBUG ÉTENDU : Vérifier toutes les variables (uniquement en développement)
+        $isDebugEnabled = isset($_ENV['ENABLE_DEBUG_LOGS']) && $_ENV['ENABLE_DEBUG_LOGS'] === 'true';
+        $isProduction = isset($_ENV['NODE_ENV']) && $_ENV['NODE_ENV'] === 'production';
+        
+        if ($isDebugEnabled && !$isProduction) {
+            error_log("🔍 DEBUG DB CONNECTION:");
+            error_log("  - DB_HOST: " . DB_HOST);
+            error_log("  - DB_NAME: " . DB_NAME);
+            error_log("  - DB_USER: " . DB_USER);
+            error_log("  - DB_PASS: " . (DB_PASS ? "SET (length: " . strlen(DB_PASS) . ")" : "NULL/EMPTY"));
+            error_log("  - DB_PORT: " . DB_PORT);
+            error_log("  - ENV DB_PASSWORD: " . (isset($_ENV['DB_PASSWORD']) ? "SET" : "NOT SET"));
+        }
         
         // 🚀 VÉRIFICATION CRITIQUE : S'assurer que les variables critiques sont définies
         if (DB_PASS === null || DB_PASS === '') {
@@ -202,14 +210,20 @@ function jsonResponse($success, $data = null, $message = '', $code = 200) {
 function handleError($message, $code = 500, $details = null) {
     error_log("API Error: " . $message . ($details ? " - " . json_encode($details) : ""));
     
-    // 🚀 DEBUG TEMPORAIRE : Afficher le détail de l'erreur
     $response = [
         'success' => false,
         'message' => $message,
         'timestamp' => date('Y-m-d H:i:s'),
-        'debug_details' => $details, // 🚀 AJOUTÉ pour debug
         'error_code' => $code
     ];
+    
+    // 🔒 SÉCURITÉ : N'inclure debug_details qu'en développement
+    $isDebugEnabled = isset($_ENV['ENABLE_DEBUG_LOGS']) && $_ENV['ENABLE_DEBUG_LOGS'] === 'true';
+    $isProduction = isset($_ENV['NODE_ENV']) && $_ENV['NODE_ENV'] === 'production';
+    
+    if ($isDebugEnabled && !$isProduction && $details !== null) {
+        $response['debug_details'] = $details;
+    }
     
     http_response_code($code);
     echo json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
@@ -322,15 +336,22 @@ function getRequestData() {
     $input = file_get_contents('php://input');
     $data = json_decode($input, true);
     
-    // Debug pour voir ce qui est reçu
-    error_log("DEBUG getRequestData - Raw input: " . $input);
-    error_log("DEBUG getRequestData - JSON decode result: " . json_encode($data));
-    error_log("DEBUG getRequestData - POST data: " . json_encode($_POST));
+    // Debug pour voir ce qui est reçu (uniquement en développement)
+    $isDebugEnabled = isset($_ENV['ENABLE_DEBUG_LOGS']) && $_ENV['ENABLE_DEBUG_LOGS'] === 'true';
+    $isProduction = isset($_ENV['NODE_ENV']) && $_ENV['NODE_ENV'] === 'production';
+    
+    if ($isDebugEnabled && !$isProduction) {
+        error_log("DEBUG getRequestData - Raw input: " . $input);
+        error_log("DEBUG getRequestData - JSON decode result: " . json_encode($data));
+        error_log("DEBUG getRequestData - POST data: " . json_encode($_POST));
+    }
     
     if (json_last_error() !== JSON_ERROR_NONE) {
         // Si ce n'est pas du JSON valide, essayer les données POST
         $data = $_POST;
-        error_log("DEBUG getRequestData - Using POST data instead of JSON");
+        if ($isDebugEnabled && !$isProduction) {
+            error_log("DEBUG getRequestData - Using POST data instead of JSON");
+        }
     }
     
     return $data ?: [];

@@ -32,7 +32,13 @@ class SyncManager {
         return true;
       }
 
-      const favorites = JSON.parse(favoritesData);
+      let favorites: any[] = [];
+      try {
+        favorites = JSON.parse(favoritesData);
+      } catch {
+        console.log("⚠️ Erreur parsing favoris, reset à tableau vide");
+        favorites = [];
+      }
 
       // Synchroniser avec la base de données
       const result = await apiClient.syncFavorites(favorites);

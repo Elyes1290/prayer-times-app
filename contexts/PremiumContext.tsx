@@ -219,7 +219,13 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
       // 🔧 NOUVEAU : Synchroniser avec user_data en priorité
       const userData = await AsyncStorage.getItem("user_data");
       if (userData) {
-        const parsedUserData = JSON.parse(userData);
+        let parsedUserData: any = null;
+        try {
+          parsedUserData = JSON.parse(userData);
+        } catch {
+          parsedUserData = null;
+        }
+        if (!parsedUserData) return;
 
         // Si l'utilisateur est premium dans user_data, créer/synchroniser @prayer_app_premium_user
         if (parsedUserData.premium_status === 1) {

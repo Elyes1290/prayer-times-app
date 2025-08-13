@@ -36,7 +36,13 @@ export const getCurrentUserId = async (): Promise<number | null> => {
     // 🚀 NOUVEAU : Si connexion explicite, permettre la lecture des données
     const userData = await AsyncStorage.getItem("user_data");
     if (userData) {
-      const parsedData: UserData = JSON.parse(userData);
+      let parsedData: UserData | null = null;
+      try {
+        parsedData = JSON.parse(userData);
+      } catch {
+        parsedData = null;
+      }
+      if (!parsedData) return null;
       const userId = parsedData.user_id || parsedData.id;
       console.log(
         `✅ getCurrentUserId - Utilisateur connecté explicitement: ${userId}`
@@ -77,7 +83,14 @@ export const getCurrentUserData = async (): Promise<UserData | null> => {
       console.log(
         "✅ getCurrentUserData - Données utilisateur trouvées avec connexion explicite"
       );
-      return JSON.parse(userData);
+      try {
+        return JSON.parse(userData);
+      } catch {
+        console.log(
+          "⚠️ getCurrentUserData - Erreur parsing user_data, retour null"
+        );
+        return null;
+      }
     }
 
     console.log(
