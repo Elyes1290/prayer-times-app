@@ -47,12 +47,12 @@ const FavoritesScreen: React.FC = () => {
   const [selectedFilter, setSelectedFilter] = useState<FilterType>("all");
 
   // Configuration des filtres
-  const filterOptions: Array<{
+  const filterOptions: {
     key: FilterType;
     label: string;
     icon: string;
     count: number;
-  }> = [
+  }[] = [
     {
       key: "all",
       label: t("favorites_screen.all") || "Tous",

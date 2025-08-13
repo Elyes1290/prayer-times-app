@@ -755,5 +755,65 @@
   "badge_hadith_student_desc": "25 hadiths gelezen",
   "badge_hadith_scholar": "Hadith Geleerde",
   "badge_hadith_scholar_desc": "100 hadiths gelezen",
-  "last_updated": "Laatste bijgewerkt"
+  "last_updated": "Laatste bijgewerkt",
+
+  "errors": {
+    "unknown_error": "Er is een onbekende fout opgetreden",
+    "unexpected_error": "Er is een onverwachte fout opgetreden",
+
+    "authentication": {
+      "title": "Authenticatiefout",
+      "invalid_credentials": "Onjuist wachtwoord of e-mail",
+      "user_not_found": "Geen account gevonden met dit e-mailadres",
+      "session_expired": "Je sessie is verlopen, log opnieuw in",
+      "access_denied": "Toegang geweigerd"
+    },
+
+    "validation": {
+      "title": "Validatiefout",
+      "email_required": "E-mailadres is vereist",
+      "password_required": "Wachtwoord is vereist",
+      "invalid_email": "Ongeldig e-mailformaat",
+      "password_criteria": "Wachtwoord voldoet niet aan de veiligheidscriteria",
+      "first_name_required": "Voornaam is vereist",
+      "account_exists": "Er bestaat al een account met dit e-mailadres",
+      "invalid_data": "De verzonden gegevens zijn ongeldig",
+      "same_password": "Het nieuwe wachtwoord kan niet identiek zijn aan het oude"
+    },
+
+    "registration": {
+      "title": "Registratiefout",
+      "account_already_exists": "Er bestaat al een account met dit e-mailadres"
+    },
+
+    "network": {
+      "title": "Netwerkfout",
+      "connection_error": "Netwerkverbindingsfout, controleer je internetverbinding",
+      "timeout": "Aanvraagtimeout, probeer het opnieuw"
+    },
+
+    "server": {
+      "title": "Serverfout",
+      "server_error": "Serverfout, probeer het later opnieuw",
+      "service_unavailable": "Service is tijdelijk niet beschikbaar"
+    },
+
+    "technical": {
+      "title": "Technische fout",
+      "communication_error": "Communicatiefout met server",
+      "resource_not_found": "De gevraagde bron bestaat niet",
+      "device_id_error": "Apparaatidentificatiefout",
+      "subscription_error": "Fout bij het beheren van je abonnement",
+      "payment_error": "Fout bij het verwerken van betaling"
+    },
+
+    "http": {
+      "400": "De verzonden gegevens zijn ongeldig",
+      "401": "Onjuist wachtwoord of e-mail",
+      "403": "Je hebt niet de benodigde machtigingen",
+      "404": "De gevraagde bron bestaat niet",
+      "500": "Serverfout, probeer het later opnieuw",
+      "503": "Service is tijdelijk niet beschikbaar"
+    }
+  }
 }

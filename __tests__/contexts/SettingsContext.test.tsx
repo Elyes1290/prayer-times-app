@@ -1,6 +1,22 @@
 // === MOCKS DÉFINIS AVANT LES IMPORTS ===
 
 // Variables pour les mocks
+// === IMPORTS APRÈS LES MOCKS ===
+
+import React from "react";
+import { renderHook, act, waitFor } from "@testing-library/react-native";
+import type { ColorSchemeName } from "react-native";
+import { NativeModules } from "react-native";
+import {
+  SettingsProvider,
+  useSettings,
+  useApiSync,
+  type CalcMethodKey,
+} from "../../contexts/SettingsContext";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as Location from "expo-location";
+import * as i18nOptimized from "../../locales/i18n-optimized";
+
 let mockColorScheme: "light" | "dark" = "light";
 
 // Mock de notre wrapper useColorScheme personnalisé
@@ -238,22 +254,6 @@ jest.mock("react-i18next", () => ({
     i18n: mockI18n,
   }),
 }));
-
-// === IMPORTS APRÈS LES MOCKS ===
-
-import React from "react";
-import { renderHook, act, waitFor } from "@testing-library/react-native";
-import type { ColorSchemeName } from "react-native";
-import { NativeModules } from "react-native";
-import {
-  SettingsProvider,
-  useSettings,
-  useApiSync,
-  type CalcMethodKey,
-} from "../../contexts/SettingsContext";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import * as Location from "expo-location";
-import * as i18nOptimized from "../../locales/i18n-optimized";
 
 // Helper pour créer un wrapper de test
 const TestWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => (

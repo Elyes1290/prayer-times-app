@@ -947,5 +947,65 @@
   "download_recitations_first": "Téléchargez des récitations en mode connecté pour les écouter hors ligne",
   "back": "Retour",
   "play_all": "Tout lire",
-  "stop_playlist": "Arrêter"
+  "stop_playlist": "Arrêter",
+
+  "errors": {
+    "unknown_error": "Une erreur inconnue s'est produite",
+    "unexpected_error": "Une erreur inattendue s'est produite",
+
+    "authentication": {
+      "title": "Erreur d'authentification",
+      "invalid_credentials": "Mot de passe ou email incorrect",
+      "user_not_found": "Aucun compte trouvé avec cet email",
+      "session_expired": "Votre session a expiré, veuillez vous reconnecter",
+      "access_denied": "Accès refusé"
+    },
+
+    "validation": {
+      "title": "Erreur de validation",
+      "email_required": "L'adresse email est requise",
+      "password_required": "Le mot de passe est requis",
+      "invalid_email": "Format d'email invalide",
+      "password_criteria": "Le mot de passe ne respecte pas les critères de sécurité",
+      "first_name_required": "Le prénom est requis",
+      "account_exists": "Un compte existe déjà avec cet email",
+      "invalid_data": "Les données envoyées sont invalides",
+      "same_password": "Le nouveau mot de passe ne peut pas être identique à l'ancien"
+    },
+
+    "registration": {
+      "title": "Erreur d'inscription",
+      "account_already_exists": "Un compte existe déjà avec cet email"
+    },
+
+    "network": {
+      "title": "Erreur réseau",
+      "connection_error": "Erreur de connexion réseau, vérifiez votre connexion internet",
+      "timeout": "Délai d'attente dépassé, veuillez réessayer"
+    },
+
+    "server": {
+      "title": "Erreur serveur",
+      "server_error": "Erreur serveur, veuillez réessayer plus tard",
+      "service_unavailable": "Le service est temporairement indisponible"
+    },
+
+    "technical": {
+      "title": "Erreur technique",
+      "communication_error": "Erreur de communication avec le serveur",
+      "resource_not_found": "La ressource demandée n'existe pas",
+      "device_id_error": "Erreur d'identification de l'appareil",
+      "subscription_error": "Erreur lors de la gestion de votre abonnement",
+      "payment_error": "Erreur lors du traitement du paiement"
+    },
+
+    "http": {
+      "400": "Les données envoyées sont invalides",
+      "401": "Mot de passe ou email incorrect",
+      "403": "Vous n'avez pas les permissions nécessaires",
+      "404": "La ressource demandée n'existe pas",
+      "500": "Erreur serveur, veuillez réessayer plus tard",
+      "503": "Le service est temporairement indisponible"
+    }
+  }
 }

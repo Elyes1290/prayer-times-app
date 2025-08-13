@@ -823,5 +823,65 @@
   "dhikr_recording_error": "❌ Fehler beim Aufzeichnen",
   "quran_read_recorded_success": "✅ Koran gelesen!",
   "badges_collection": "🏅 Abzeichen-Sammlung",
-  "last_updated": "Zuletzt aktualisiert"
+  "last_updated": "Zuletzt aktualisiert",
+
+  "errors": {
+    "unknown_error": "Ein unbekannter Fehler ist aufgetreten",
+    "unexpected_error": "Ein unerwarteter Fehler ist aufgetreten",
+
+    "authentication": {
+      "title": "Authentifizierungsfehler",
+      "invalid_credentials": "Falsches Passwort oder E-Mail",
+      "user_not_found": "Kein Konto mit dieser E-Mail gefunden",
+      "session_expired": "Ihre Sitzung ist abgelaufen, bitte melden Sie sich erneut an",
+      "access_denied": "Zugriff verweigert"
+    },
+
+    "validation": {
+      "title": "Validierungsfehler",
+      "email_required": "E-Mail-Adresse ist erforderlich",
+      "password_required": "Passwort ist erforderlich",
+      "invalid_email": "Ungültiges E-Mail-Format",
+      "password_criteria": "Passwort erfüllt nicht die Sicherheitskriterien",
+      "first_name_required": "Vorname ist erforderlich",
+      "account_exists": "Ein Konto mit dieser E-Mail existiert bereits",
+      "invalid_data": "Die gesendeten Daten sind ungültig",
+      "same_password": "Das neue Passwort kann nicht identisch mit dem alten sein"
+    },
+
+    "registration": {
+      "title": "Registrierungsfehler",
+      "account_already_exists": "Ein Konto mit dieser E-Mail existiert bereits"
+    },
+
+    "network": {
+      "title": "Netzwerkfehler",
+      "connection_error": "Netzwerkverbindungsfehler, überprüfen Sie Ihre Internetverbindung",
+      "timeout": "Anfrage-Timeout, bitte versuchen Sie es erneut"
+    },
+
+    "server": {
+      "title": "Serverfehler",
+      "server_error": "Serverfehler, bitte versuchen Sie es später erneut",
+      "service_unavailable": "Dienst ist vorübergehend nicht verfügbar"
+    },
+
+    "technical": {
+      "title": "Technischer Fehler",
+      "communication_error": "Kommunikationsfehler mit dem Server",
+      "resource_not_found": "Die angeforderte Ressource existiert nicht",
+      "device_id_error": "Geräteidentifikationsfehler",
+      "subscription_error": "Fehler bei der Verwaltung Ihres Abonnements",
+      "payment_error": "Fehler bei der Zahlungsverarbeitung"
+    },
+
+    "http": {
+      "400": "Die gesendeten Daten sind ungültig",
+      "401": "Falsches Passwort oder E-Mail",
+      "403": "Sie haben nicht die erforderlichen Berechtigungen",
+      "404": "Die angeforderte Ressource existiert nicht",
+      "500": "Serverfehler, bitte versuchen Sie es später erneut",
+      "503": "Dienst ist vorübergehend nicht verfügbar"
+    }
+  }
 }

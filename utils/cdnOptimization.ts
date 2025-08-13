@@ -142,7 +142,7 @@ export class CDNOptimizer {
   private buildCDNUrls(
     fileId: string,
     originalUrl: string
-  ): Array<{ url: string; source: string }> {
+  ): { url: string; source: string }[] {
     const filename = this.extractFilename(originalUrl);
 
     return [

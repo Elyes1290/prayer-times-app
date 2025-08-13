@@ -950,5 +950,65 @@
   "download_recitations_first": "Download recitations while connected to listen offline",
   "back": "Back",
   "play_all": "Play All",
-  "stop_playlist": "Stop"
+  "stop_playlist": "Stop",
+
+  "errors": {
+    "unknown_error": "An unknown error occurred",
+    "unexpected_error": "An unexpected error occurred",
+
+    "authentication": {
+      "title": "Authentication Error",
+      "invalid_credentials": "Incorrect password or email",
+      "user_not_found": "No account found with this email",
+      "session_expired": "Your session has expired, please log in again",
+      "access_denied": "Access denied"
+    },
+
+    "validation": {
+      "title": "Validation Error",
+      "email_required": "Email address is required",
+      "password_required": "Password is required",
+      "invalid_email": "Invalid email format",
+      "password_criteria": "Password does not meet security criteria",
+      "first_name_required": "First name is required",
+      "account_exists": "An account already exists with this email",
+      "invalid_data": "The submitted data is invalid",
+      "same_password": "The new password cannot be identical to the old one"
+    },
+
+    "registration": {
+      "title": "Registration Error",
+      "account_already_exists": "An account already exists with this email"
+    },
+
+    "network": {
+      "title": "Network Error",
+      "connection_error": "Network connection error, check your internet connection",
+      "timeout": "Request timeout, please try again"
+    },
+
+    "server": {
+      "title": "Server Error",
+      "server_error": "Server error, please try again later",
+      "service_unavailable": "Service is temporarily unavailable"
+    },
+
+    "technical": {
+      "title": "Technical Error",
+      "communication_error": "Communication error with server",
+      "resource_not_found": "The requested resource does not exist",
+      "device_id_error": "Device identification error",
+      "subscription_error": "Error managing your subscription",
+      "payment_error": "Error processing payment"
+    },
+
+    "http": {
+      "400": "The submitted data is invalid",
+      "401": "Incorrect password or email",
+      "403": "You don't have the necessary permissions",
+      "404": "The requested resource does not exist",
+      "500": "Server error, please try again later",
+      "503": "Service is temporarily unavailable"
+    }
+  }
 }

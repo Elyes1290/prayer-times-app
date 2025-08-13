@@ -39,11 +39,11 @@ export default function BackupSection({ styles }: BackupSectionProps) {
     visible: boolean;
     title: string;
     message: string;
-    buttons: Array<{
+    buttons: {
       text: string;
       onPress: () => void;
       style?: "default" | "cancel" | "destructive";
-    }>;
+    }[];
   } | null>(null);
 
   const formatBackupTime = (timeString: string | null) => {
@@ -66,11 +66,11 @@ export default function BackupSection({ styles }: BackupSectionProps) {
   const showThemedAlert = (alert: {
     title: string;
     message: string;
-    buttons: Array<{
+    buttons: {
       text: string;
       onPress: () => void;
       style?: "default" | "cancel" | "destructive";
-    }>;
+    }[];
   }) => {
     setThemedAlert({
       visible: true,

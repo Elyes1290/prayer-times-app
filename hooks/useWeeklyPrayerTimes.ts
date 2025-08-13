@@ -1,7 +1,7 @@
-import { useMemo } from "react";
+import { useMemo , useContext } from "react";
 import { PrayerTimes, CalculationMethod, Coordinates } from "adhan";
 import type { LocationObject } from "expo-location";
-import { useContext } from "react";
+
 import { SettingsContext } from "../contexts/SettingsContext";
 
 // Type pour chaque jour de la semaine

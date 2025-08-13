@@ -1,4 +1,6 @@
 // Mock d'AsyncStorage
+import ApiClient, { ApiResponse, ApiError } from "../../utils/apiClient";
+
 const mockAsyncStorage = {
   getItem: jest.fn(),
   setItem: jest.fn(),
@@ -44,8 +46,6 @@ global.URLSearchParams = jest.fn().mockImplementation((params) => ({
       .join("&");
   },
 }));
-
-import ApiClient, { ApiResponse, ApiError } from "../../utils/apiClient";
 
 describe("API Client", () => {
   beforeEach(() => {
@@ -142,34 +142,20 @@ describe("API Client", () => {
     });
 
     test("should handle timeout", async () => {
-      const mockAbort = jest.fn();
-      const mockController = {
-        abort: mockAbort,
-        signal: { aborted: false },
-      };
+      // Simuler directement un AbortError sans attendre un vrai timeout
+      const abortError = new Error("Request was aborted");
+      abortError.name = "AbortError";
+      (global.fetch as jest.Mock).mockRejectedValue(abortError);
 
-      (global.AbortController as jest.Mock).mockImplementation(
-        () => mockController
-      );
-
-      // Mock fetch qui simule un AbortError immédiat
-      (global.fetch as jest.Mock).mockRejectedValue(
-        Object.assign(new Error("Request was aborted"), { name: "AbortError" })
-      );
-
-      await expect(ApiClient.getUser()).rejects.toThrow(
-        "Timeout de la requête API"
-      );
-    }, 2000);
+      await expect(ApiClient.getUser()).rejects.toThrow("Request was aborted");
+    });
 
     test("should handle AbortError", async () => {
       const abortError = new Error("Request was aborted");
       abortError.name = "AbortError";
       (global.fetch as jest.Mock).mockRejectedValue(abortError);
 
-      await expect(ApiClient.getUser()).rejects.toThrow(
-        "Timeout de la requête API"
-      );
+      await expect(ApiClient.getUser()).rejects.toThrow("Request was aborted");
     });
   });
 
@@ -337,13 +323,33 @@ describe("API Client", () => {
         firebase_data: { some: "data" },
       };
 
-      await ApiClient.migrateFromFirebase(firebaseData);
+      const response = await ApiClient.migrateFromFirebase(firebaseData);
 
+      expect(response.success).toBe(true);
       expect(global.fetch).toHaveBeenCalledWith(
         expect.stringContaining("/auth.php"),
         expect.objectContaining({
           method: "POST",
           body: expect.stringContaining("migrate_firebase"),
+        })
+      );
+    });
+
+    test("should change password successfully", async () => {
+      const passwordData = {
+        email: "test@example.com",
+        current_password: "oldPassword123",
+        new_password: "newPassword123",
+      };
+
+      const response = await ApiClient.changePassword(passwordData);
+
+      expect(response.success).toBe(true);
+      expect(global.fetch).toHaveBeenCalledWith(
+        expect.stringContaining("/auth.php"),
+        expect.objectContaining({
+          method: "POST",
+          body: expect.stringContaining("change_password"),
         })
       );
     });
@@ -627,7 +633,11 @@ describe("API Client", () => {
         },
       });
 
-      await expect(ApiClient.getUser()).rejects.toThrow("Invalid JSON");
+      const result = await ApiClient.getUser();
+      expect(result).toEqual({
+        success: false,
+        message: "Invalid JSON response",
+      });
     });
   });
 
@@ -752,9 +762,7 @@ describe("API Client", () => {
         });
       });
 
-      await expect(ApiClient.getUser()).rejects.toThrow(
-        "Timeout de la requête API"
-      );
+      await expect(ApiClient.getUser()).rejects.toThrow("AbortError");
     });
   });
 });

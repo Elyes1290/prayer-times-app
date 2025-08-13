@@ -111,8 +111,8 @@ export class CustomServerManager {
    */
   private buildAudioUrls(
     content: PremiumContent
-  ): Array<{ url: string; source: string }> {
-    const urls: Array<{ url: string; source: string }> = [];
+  ): { url: string; source: string }[] {
+    const urls: { url: string; source: string }[] = [];
 
     // 1. Serveur personnel (priorité maximale)
     if (content.reciter && content.surahNumber) {

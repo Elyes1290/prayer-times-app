@@ -15,6 +15,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import apiClient from "../utils/apiClient";
 import { usePremium } from "../contexts/PremiumContext";
 import { LinearGradient } from "expo-linear-gradient";
+import { useErrorHandler } from "../utils/errorHandler";
 
 interface PremiumLoginSectionProps {
   activatePremium: (
@@ -51,6 +52,7 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
   const textPrimaryColor = isDarkTheme ? "#F1F5F9" : "#1A1A1A"; // Slate-50 vs noir
   const textSecondaryColor = isDarkTheme ? "#CBD5E1" : "#666666"; // Slate-300 vs gris
   const { user: premiumUser, forceLogout, checkPremiumStatus } = usePremium();
+  const { getErrorTitle, getErrorMessage } = useErrorHandler();
   const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState(""); // 🚀 NOUVEAU : Champ mot de passe
@@ -559,12 +561,17 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
             // Ne pas bloquer l'inscription si le check échoue : laisser poursuivre
           }
         }
-      } catch (error) {
+      } catch (error: any) {
         console.error("❌ Erreur authentification:", error);
+
+        // 🚀 NOUVEAU : Utiliser le gestionnaire d'erreurs centralisé
+        const errorTitle = getErrorTitle(error);
+        const errorMessage = getErrorMessage(error);
+
         showLocalToast({
           type: "error",
-          title: t("toasts.error"),
-          message: t("toasts.network_error"),
+          title: errorTitle,
+          message: errorMessage,
         });
       } finally {
         setIsLoading(false);

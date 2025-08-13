@@ -34,15 +34,15 @@ export interface UserStats {
   };
   profile: "beginner" | "yoyo" | "regular" | "stopped";
   advice: {
-    advice: Array<{
+    advice: {
       key: string;
       params: Record<string, any>;
-    }>;
-    action_plan: Array<{
+    }[];
+    action_plan: {
       step_key: string;
       duration_key: string;
       reward_key: string;
-    }>;
+    }[];
   };
   points: number;
   level: {
@@ -50,7 +50,7 @@ export interface UserStats {
     title: string;
     progress: number;
   };
-  challenges: Array<{
+  challenges: {
     id: string;
     title: string;
     description: string;
@@ -58,23 +58,23 @@ export interface UserStats {
     progress: number;
     icon: string;
     color: string;
-  }>;
-  badges: Array<{
+  }[];
+  badges: {
     id: string;
     name: string;
     description: string;
     icon: string;
     unlocked: boolean;
     unlocked_at: string | null;
-  }>;
-  history: Array<{
+  }[];
+  history: {
     date: string;
     complete: boolean;
     prayers: number;
     dhikr: number;
     quran: number;
     hadiths: number;
-  }>;
+  }[];
   smart_notification: {
     key: string;
     params: Record<string, any>;

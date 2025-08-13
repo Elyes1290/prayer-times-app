@@ -16,10 +16,10 @@ import { Colors } from "../constants/Colors";
 interface ThemedPickerProps {
   visible: boolean;
   title: string;
-  items: Array<{
+  items: {
     label: string;
     value: string;
-  }>;
+  }[];
   selectedValue: string;
   onValueChange: (value: string) => void;
   onClose: () => void;

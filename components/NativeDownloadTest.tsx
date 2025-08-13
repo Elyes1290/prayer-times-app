@@ -21,12 +21,12 @@ export default function NativeDownloadTest() {
   } = useNativeDownload();
 
   const [testDownloads, setTestDownloads] = useState<
-    Array<{
+    {
       id: string;
       title: string;
       url: string;
       fileName: string;
-    }>
+    }[]
   >([
     {
       id: "test1",

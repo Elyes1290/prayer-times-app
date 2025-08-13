@@ -129,7 +129,7 @@ export const FREE_LIMITS = {
 
 // Fonction pour obtenir toutes les fonctionnalités premium sous forme de liste
 export const getAllPremiumFeatures = () => {
-  const allFeatures: Array<{ key: string; feature: any }> = [];
+  const allFeatures: { key: string; feature: any }[] = [];
 
   Object.values(PREMIUM_FEATURES).forEach((category) => {
     Object.entries(category).forEach(([key, feature]) => {

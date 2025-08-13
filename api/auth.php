@@ -28,6 +28,9 @@ try {
                 case 'add_password':
                     handleAddPassword();
                     break;
+                case 'change_password':
+                    handleChangePassword();
+                    break;
                 case 'migrate_firebase':
                     handleMigrateFirebase();
                     break;
@@ -165,8 +168,26 @@ function handleRegister() {
         handleError("Mot de passe requis pour l'inscription", 400);
     }
     
-    if (strlen($password) < 6) {
-        handleError("Le mot de passe doit contenir au moins 6 caractères", 400);
+    // 🚀 NOUVEAU : Critères de mot de passe stricts
+    if (strlen($password) < 8) {
+        handleError("Le mot de passe doit contenir au moins 8 caractères", 400);
+    }
+    
+    // Vérifier les critères de complexité
+    if (!preg_match('/[a-z]/', $password)) {
+        handleError("Le mot de passe doit contenir au moins une lettre minuscule", 400);
+    }
+    
+    if (!preg_match('/[A-Z]/', $password)) {
+        handleError("Le mot de passe doit contenir au moins une lettre majuscule", 400);
+    }
+    
+    if (!preg_match('/\d/', $password)) {
+        handleError("Le mot de passe doit contenir au moins un chiffre", 400);
+    }
+    
+    if (!preg_match('/[^a-zA-Z\d]/', $password)) {
+        handleError("Le mot de passe doit contenir au moins un caractère spécial", 400);
     }
     
     $pdo = getDBConnection();
@@ -527,8 +548,26 @@ function handleAddPassword() {
         handleError("Mot de passe requis", 400);
     }
     
-    if (strlen($password) < 6) {
-        handleError("Le mot de passe doit contenir au moins 6 caractères", 400);
+    // 🚀 NOUVEAU : Critères de mot de passe stricts
+    if (strlen($password) < 8) {
+        handleError("Le mot de passe doit contenir au moins 8 caractères", 400);
+    }
+    
+    // Vérifier les critères de complexité
+    if (!preg_match('/[a-z]/', $password)) {
+        handleError("Le mot de passe doit contenir au moins une lettre minuscule", 400);
+    }
+    
+    if (!preg_match('/[A-Z]/', $password)) {
+        handleError("Le mot de passe doit contenir au moins une lettre majuscule", 400);
+    }
+    
+    if (!preg_match('/\d/', $password)) {
+        handleError("Le mot de passe doit contenir au moins un chiffre", 400);
+    }
+    
+    if (!preg_match('/[^a-zA-Z\d]/', $password)) {
+        handleError("Le mot de passe doit contenir au moins un caractère spécial", 400);
     }
     
     $pdo = getDBConnection();
@@ -578,7 +617,108 @@ function handleAddPassword() {
 }
 
 /**
- * �� NOUVEAU : Fonction locale pour formater les données utilisateur
+ * 🚀 NOUVEAU : Changer le mot de passe
+ */
+function handleChangePassword() {
+    global $data;
+    
+    $email = $data['email'] ?? null;
+    $currentPassword = $data['current_password'] ?? null;
+    $newPassword = $data['new_password'] ?? null;
+    
+    if (!$email) {
+        handleError("Email requis", 400);
+    }
+    
+    if (!$currentPassword) {
+        handleError("Mot de passe actuel requis", 400);
+    }
+    
+    if (!$newPassword) {
+        handleError("Nouveau mot de passe requis", 400);
+    }
+    
+    // 🚀 NOUVEAU : Critères de mot de passe stricts (même que l'inscription)
+    if (strlen($newPassword) < 8) {
+        handleError("Le nouveau mot de passe doit contenir au moins 8 caractères", 400);
+    }
+    
+    // Vérifier les critères de complexité
+    if (!preg_match('/[a-z]/', $newPassword)) {
+        handleError("Le nouveau mot de passe doit contenir au moins une lettre minuscule", 400);
+    }
+    
+    if (!preg_match('/[A-Z]/', $newPassword)) {
+        handleError("Le nouveau mot de passe doit contenir au moins une lettre majuscule", 400);
+    }
+    
+    if (!preg_match('/\d/', $newPassword)) {
+        handleError("Le nouveau mot de passe doit contenir au moins un chiffre", 400);
+    }
+    
+    if (!preg_match('/[^a-zA-Z\d]/', $newPassword)) {
+        handleError("Le nouveau mot de passe doit contenir au moins un caractère spécial", 400);
+    }
+    
+    $pdo = getDBConnection();
+    
+    // Rechercher l'utilisateur par email
+    $stmt = $pdo->prepare("SELECT * FROM users WHERE email = ?");
+    $stmt->execute([$email]);
+    $user = $stmt->fetch();
+    
+    if (!$user) {
+        handleError("Utilisateur non trouvé", 404);
+    }
+    
+    // Vérifier si l'utilisateur a un mot de passe configuré
+    if (!$user['password_hash']) {
+        handleError("Ce compte n'a pas de mot de passe configuré", 400);
+    }
+    
+    // Vérifier le mot de passe actuel
+    if (!password_verify($currentPassword, $user['password_hash'])) {
+        handleError("Mot de passe actuel incorrect", 401);
+    }
+    
+    // 🚀 NOUVEAU : Vérifier que le nouveau mot de passe est différent de l'ancien
+    if ($currentPassword === $newPassword) {
+        handleError("Le nouveau mot de passe ne peut pas être identique à l'ancien", 400);
+    }
+    
+    // Hasher le nouveau mot de passe
+    $newPasswordHash = password_hash($newPassword, PASSWORD_DEFAULT);
+    
+    // Mettre à jour le mot de passe
+    $updateStmt = $pdo->prepare("
+        UPDATE users SET 
+            password_hash = ?,
+            updated_at = NOW()
+        WHERE id = ?
+    ");
+    $updateStmt->execute([$newPasswordHash, $user['id']]);
+    
+    // Logger l'action
+    logUserAction($user['id'], 'password_changed', null, null, [
+        'method' => 'email',
+        'changed_at' => date('Y-m-d H:i:s')
+    ]);
+    
+    // Récupérer l'utilisateur mis à jour
+    $stmt = $pdo->prepare("SELECT * FROM users WHERE id = ?");
+    $stmt->execute([$user['id']]);
+    $updatedUser = $stmt->fetch();
+    
+    $formattedUser = formatUserData($updatedUser);
+    
+    jsonResponse(true, [
+        'user' => $formattedUser,
+        'message' => 'Mot de passe modifié avec succès'
+    ], "Mot de passe modifié avec succès");
+}
+
+/**
+ *  NOUVEAU : Fonction locale pour formater les données utilisateur
  * Remplace la fonction de users.php pour éviter les conflits
  */
 function formatUserData($user) {

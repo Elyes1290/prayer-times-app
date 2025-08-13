@@ -1,4 +1,11 @@
 // Mock de React Native et modules natifs
+import {
+  initNotifications,
+  schedulePrayerNotifications,
+} from "../../utils/notifications";
+import { NativeModules } from "react-native";
+import i18n from "../../locales/i18n";
+
 jest.mock("react-native", () => ({
   NativeModules: {
     AdhanModule: {
@@ -21,13 +28,6 @@ jest.mock("../../locales/i18n", () => ({
     return key;
   }),
 }));
-
-import {
-  initNotifications,
-  schedulePrayerNotifications,
-} from "../../utils/notifications";
-import { NativeModules } from "react-native";
-import i18n from "../../locales/i18n";
 
 describe("Notifications", () => {
   beforeEach(() => {

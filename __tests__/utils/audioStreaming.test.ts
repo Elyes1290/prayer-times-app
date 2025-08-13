@@ -1,4 +1,10 @@
 // Mock d'expo-av pour éviter les erreurs natives
+import AudioStreamingManager, {
+  StreamingConfig,
+  AudioSegment,
+  StreamingSession,
+} from "../../utils/audioStreaming";
+
 const mockSound = {
   loadAsync: jest.fn().mockResolvedValue({}),
   playAsync: jest.fn().mockResolvedValue({}),
@@ -67,12 +73,6 @@ jest.mock("../../utils/cdnOptimization", () => {
     default: MockCDNOptimizer,
   };
 });
-
-import AudioStreamingManager, {
-  StreamingConfig,
-  AudioSegment,
-  StreamingSession,
-} from "../../utils/audioStreaming";
 
 describe("Audio Streaming Manager", () => {
   let streamingManager: AudioStreamingManager;

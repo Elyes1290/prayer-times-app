@@ -1,6 +1,12 @@
 import React, { useEffect } from "react";
 import { render, act } from "@testing-library/react-native";
 
+// Import the actual hook
+import { useFileManager } from "../../hooks/useFileManager";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import RNFS from "react-native-fs";
+import PremiumContentManager from "../../utils/premiumContent";
+
 // Global mocks
 jest.mock("@react-native-async-storage/async-storage", () => ({
   getItem: jest.fn(),
@@ -35,12 +41,6 @@ jest.mock("../../utils/premiumContent", () => ({
     getInstance: jest.fn(() => mockPremiumContentManager),
   },
 }));
-
-// Import the actual hook
-import { useFileManager } from "../../hooks/useFileManager";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import RNFS from "react-native-fs";
-import PremiumContentManager from "../../utils/premiumContent";
 
 describe("useFileManager", () => {
   const premiumContentMock = {

@@ -1,4 +1,6 @@
 // Mock d'expo-constants
+import { getRandomHadith } from "../../utils/hadithApi";
+
 jest.mock("expo-constants", () => ({
   default: {
     expoConfig: {
@@ -8,8 +10,6 @@ jest.mock("expo-constants", () => ({
     },
   },
 }));
-
-import { getRandomHadith } from "../../utils/hadithApi";
 
 // Mock de fetch global
 const mockFetch = jest.fn();

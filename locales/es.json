@@ -802,5 +802,65 @@
   "i_completed_dhikr": "Completé dhikr",
   "quran_read_recorded_success": "✅ ¡Lectura del Corán registrada!",
   "badges_collection": "🏅 Colección de insignias",
-  "last_updated": "Última actualización"
+  "last_updated": "Última actualización",
+
+  "errors": {
+    "unknown_error": "Se produjo un error desconocido",
+    "unexpected_error": "Se produjo un error inesperado",
+
+    "authentication": {
+      "title": "Error de autenticación",
+      "invalid_credentials": "Contraseña o correo electrónico incorrectos",
+      "user_not_found": "No se encontró ninguna cuenta con este correo electrónico",
+      "session_expired": "Tu sesión ha expirado, por favor inicia sesión nuevamente",
+      "access_denied": "Acceso denegado"
+    },
+
+    "validation": {
+      "title": "Error de validación",
+      "email_required": "Se requiere la dirección de correo electrónico",
+      "password_required": "Se requiere la contraseña",
+      "invalid_email": "Formato de correo electrónico inválido",
+      "password_criteria": "La contraseña no cumple con los criterios de seguridad",
+      "first_name_required": "Se requiere el nombre",
+      "account_exists": "Ya existe una cuenta con este correo electrónico",
+      "invalid_data": "Los datos enviados son inválidos",
+      "same_password": "La nueva contraseña no puede ser idéntica a la anterior"
+    },
+
+    "registration": {
+      "title": "Error de registro",
+      "account_already_exists": "Ya existe una cuenta con este correo electrónico"
+    },
+
+    "network": {
+      "title": "Error de red",
+      "connection_error": "Error de conexión de red, verifica tu conexión a internet",
+      "timeout": "Tiempo de espera agotado, por favor intenta de nuevo"
+    },
+
+    "server": {
+      "title": "Error del servidor",
+      "server_error": "Error del servidor, por favor intenta de nuevo más tarde",
+      "service_unavailable": "El servicio no está disponible temporalmente"
+    },
+
+    "technical": {
+      "title": "Error técnico",
+      "communication_error": "Error de comunicación con el servidor",
+      "resource_not_found": "El recurso solicitado no existe",
+      "device_id_error": "Error de identificación del dispositivo",
+      "subscription_error": "Error al gestionar tu suscripción",
+      "payment_error": "Error al procesar el pago"
+    },
+
+    "http": {
+      "400": "Los datos enviados son inválidos",
+      "401": "Contraseña o correo electrónico incorrectos",
+      "403": "No tienes los permisos necesarios",
+      "404": "El recurso solicitado no existe",
+      "500": "Error del servidor, por favor intenta de nuevo más tarde",
+      "503": "El servicio no está disponible temporalmente"
+    }
+  }
 }

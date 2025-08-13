@@ -770,5 +770,65 @@
   "badge_hadith_student_desc": "Leu 25 hadiths",
   "badge_hadith_scholar": "Erudito de Hadith",
   "badge_hadith_scholar_desc": "Leu 100 hadiths",
-  "last_updated": "Última atualização"
+  "last_updated": "Última atualização",
+
+  "errors": {
+    "unknown_error": "Ocorreu um erro desconhecido",
+    "unexpected_error": "Ocorreu um erro inesperado",
+
+    "authentication": {
+      "title": "Erro de autenticação",
+      "invalid_credentials": "Senha ou email incorretos",
+      "user_not_found": "Nenhuma conta encontrada com este email",
+      "session_expired": "Sua sessão expirou, faça login novamente",
+      "access_denied": "Acesso negado"
+    },
+
+    "validation": {
+      "title": "Erro de validação",
+      "email_required": "Endereço de email é obrigatório",
+      "password_required": "Senha é obrigatória",
+      "invalid_email": "Formato de email inválido",
+      "password_criteria": "Senha não atende aos critérios de segurança",
+      "first_name_required": "Nome é obrigatório",
+      "account_exists": "Uma conta já existe com este email",
+      "invalid_data": "Os dados enviados são inválidos",
+      "same_password": "A nova senha não pode ser idêntica à anterior"
+    },
+
+    "registration": {
+      "title": "Erro de registro",
+      "account_already_exists": "Uma conta já existe com este email"
+    },
+
+    "network": {
+      "title": "Erro de rede",
+      "connection_error": "Erro de conexão de rede, verifique sua conexão com a internet",
+      "timeout": "Tempo limite da solicitação, tente novamente"
+    },
+
+    "server": {
+      "title": "Erro do servidor",
+      "server_error": "Erro do servidor, tente novamente mais tarde",
+      "service_unavailable": "Serviço temporariamente indisponível"
+    },
+
+    "technical": {
+      "title": "Erro técnico",
+      "communication_error": "Erro de comunicação com o servidor",
+      "resource_not_found": "O recurso solicitado não existe",
+      "device_id_error": "Erro de identificação do dispositivo",
+      "subscription_error": "Erro ao gerenciar sua assinatura",
+      "payment_error": "Erro ao processar pagamento"
+    },
+
+    "http": {
+      "400": "Os dados enviados são inválidos",
+      "401": "Senha ou email incorretos",
+      "403": "Você não tem as permissões necessárias",
+      "404": "O recurso solicitado não existe",
+      "500": "Erro do servidor, tente novamente mais tarde",
+      "503": "Serviço temporariamente indisponível"
+    }
+  }
 }

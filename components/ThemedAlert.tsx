@@ -16,11 +16,11 @@ interface ThemedAlertProps {
   visible: boolean;
   title: string;
   message: string;
-  buttons: Array<{
+  buttons: {
     text: string;
     onPress: () => void;
     style?: "default" | "cancel" | "destructive";
-  }>;
+  }[];
   onClose: () => void;
   iconType?:
     | "info"

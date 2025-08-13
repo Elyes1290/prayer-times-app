@@ -1,3 +1,8 @@
+import React, { useEffect } from "react";
+import { render, waitFor, act } from "@testing-library/react-native";
+import { View } from "react-native";
+import { useAudioPlayer } from "../../hooks/useAudioPlayer";
+
 function HookTest({
   onValue,
 }: {
@@ -135,11 +140,6 @@ describe("useAudioPlayer", () => {
     expect(s2).toBe("0:00");
   });
 });
-
-import React, { useEffect } from "react";
-import { render, waitFor, act } from "@testing-library/react-native";
-import { View } from "react-native";
-import { useAudioPlayer } from "../../hooks/useAudioPlayer";
 
 // Mock natif expo-av
 jest.mock("expo-av", () => ({

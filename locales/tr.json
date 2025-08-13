@@ -745,5 +745,65 @@
   "badge_hadith_student_desc": "25 hadis okundu",
   "badge_hadith_scholar": "Hadis Bilgini",
   "badge_hadith_scholar_desc": "100 hadis okundu",
-  "last_updated": "Son güncelleme"
+  "last_updated": "Son güncelleme",
+
+  "errors": {
+    "unknown_error": "Bilinmeyen bir hata oluştu",
+    "unexpected_error": "Beklenmeyen bir hata oluştu",
+
+    "authentication": {
+      "title": "Kimlik doğrulama hatası",
+      "invalid_credentials": "Yanlış şifre veya e-posta",
+      "user_not_found": "Bu e-posta ile hesap bulunamadı",
+      "session_expired": "Oturumunuz sona erdi, lütfen tekrar giriş yapın",
+      "access_denied": "Erişim reddedildi"
+    },
+
+    "validation": {
+      "title": "Doğrulama hatası",
+      "email_required": "E-posta adresi gerekli",
+      "password_required": "Şifre gerekli",
+      "invalid_email": "Geçersiz e-posta formatı",
+      "password_criteria": "Şifre güvenlik kriterlerini karşılamıyor",
+      "first_name_required": "Ad gerekli",
+      "account_exists": "Bu e-posta ile zaten bir hesap var",
+      "invalid_data": "Gönderilen veriler geçersiz",
+      "same_password": "Yeni şifre eskisiyle aynı olamaz"
+    },
+
+    "registration": {
+      "title": "Kayıt hatası",
+      "account_already_exists": "Bu e-posta ile zaten bir hesap var"
+    },
+
+    "network": {
+      "title": "Ağ hatası",
+      "connection_error": "Ağ bağlantı hatası, internet bağlantınızı kontrol edin",
+      "timeout": "İstek zaman aşımı, lütfen tekrar deneyin"
+    },
+
+    "server": {
+      "title": "Sunucu hatası",
+      "server_error": "Sunucu hatası, lütfen daha sonra tekrar deneyin",
+      "service_unavailable": "Hizmet geçici olarak kullanılamıyor"
+    },
+
+    "technical": {
+      "title": "Teknik hata",
+      "communication_error": "Sunucu ile iletişim hatası",
+      "resource_not_found": "İstenen kaynak mevcut değil",
+      "device_id_error": "Cihaz kimlik doğrulama hatası",
+      "subscription_error": "Aboneliğinizi yönetirken hata",
+      "payment_error": "Ödeme işlenirken hata"
+    },
+
+    "http": {
+      "400": "Gönderilen veriler geçersiz",
+      "401": "Yanlış şifre veya e-posta",
+      "403": "Gerekli izinlere sahip değilsiniz",
+      "404": "İstenen kaynak mevcut değil",
+      "500": "Sunucu hatası, lütfen daha sonra tekrar deneyin",
+      "503": "Hizmet geçici olarak kullanılamıyor"
+    }
+  }
 }

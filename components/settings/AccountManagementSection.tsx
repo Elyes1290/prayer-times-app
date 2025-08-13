@@ -6,11 +6,14 @@ import {
   TextInput,
   ActivityIndicator,
   Linking,
+  Alert,
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { SettingsContext } from "../../contexts/SettingsContext";
 import apiClient from "../../utils/apiClient";
+import ChangePasswordModal from "./ChangePasswordModal";
+import { useErrorHandler } from "../../utils/errorHandler";
 
 // 🚀 Interface pour les props du composant
 interface AccountManagementSectionProps {
@@ -40,6 +43,7 @@ export default function AccountManagementSection({
   navigation,
 }: AccountManagementSectionProps) {
   const settings = useContext(SettingsContext);
+  const { getErrorTitle, getErrorMessage } = useErrorHandler();
 
   // 🚀 NOUVEAU : États pour les vraies données utilisateur
   const [realUserData, setRealUserData] = useState<any>(null);
@@ -72,6 +76,7 @@ export default function AccountManagementSection({
   const [editedFirstName, setEditedFirstName] = useState("");
   const [editedEmail, setEditedEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [showChangePasswordModal, setShowChangePasswordModal] = useState(false);
 
   // 🚀 NOUVEAU : Charger les vraies données utilisateur au montage
   useEffect(() => {
@@ -153,10 +158,14 @@ export default function AccountManagementSection({
 
       setIsEditing(false);
     } catch (error) {
+      // 🚀 NOUVEAU : Utiliser le gestionnaire d'erreurs centralisé
+      const errorTitle = getErrorTitle(error);
+      const errorMessage = getErrorMessage(error);
+
       showToast({
         type: "error",
-        title: "Erreur",
-        message: "Impossible de sauvegarder le profil",
+        title: errorTitle,
+        message: errorMessage,
       });
     } finally {
       setIsLoading(false);
@@ -173,10 +182,14 @@ export default function AccountManagementSection({
         message: "Vous avez été déconnecté avec succès",
       });
     } catch (error) {
+      // 🚀 NOUVEAU : Utiliser le gestionnaire d'erreurs centralisé
+      const errorTitle = getErrorTitle(error);
+      const errorMessage = getErrorMessage(error);
+
       showToast({
         type: "error",
-        title: "Erreur",
-        message: "Erreur lors de la déconnexion",
+        title: errorTitle,
+        message: errorMessage,
       });
     }
   };
@@ -210,10 +223,15 @@ export default function AccountManagementSection({
       }
     } catch (error) {
       console.error("Erreur gestion abonnement:", error);
+
+      // 🚀 NOUVEAU : Utiliser le gestionnaire d'erreurs centralisé
+      const errorTitle = getErrorTitle(error);
+      const errorMessage = getErrorMessage(error);
+
       showToast({
         type: "error",
-        title: "Erreur",
-        message: "Impossible d'accéder à la gestion de votre abonnement",
+        title: errorTitle,
+        message: errorMessage,
       });
     } finally {
       setIsLoading(false);
@@ -455,13 +473,7 @@ export default function AccountManagementSection({
 
         <TouchableOpacity
           style={styles.securityOption}
-          onPress={() => {
-            showToast({
-              type: "info",
-              title: "Changer le mot de passe",
-              message: "Fonctionnalité en cours de développement",
-            });
-          }}
+          onPress={() => setShowChangePasswordModal(true)}
         >
           <MaterialCommunityIcons name="key" size={20} color="#6C5CE7" />
           <Text style={styles.securityOptionText}>Changer le mot de passe</Text>
@@ -551,6 +563,12 @@ export default function AccountManagementSection({
           </Text>
         </TouchableOpacity>
       </View>
+
+      {/* Modal de changement de mot de passe */}
+      <ChangePasswordModal
+        visible={showChangePasswordModal}
+        onClose={() => setShowChangePasswordModal(false)}
+      />
     </View>
   );
 }

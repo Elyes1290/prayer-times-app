@@ -751,5 +751,65 @@
   "badge_hadith_student_desc": "Hai letto 25 aforismi",
   "badge_hadith_scholar": "Maestro di Hadith",
   "badge_hadith_scholar_desc": "Hai letto 100 aforismi",
-  "last_updated": "Ultimo aggiornamento"
+  "last_updated": "Ultimo aggiornamento",
+
+  "errors": {
+    "unknown_error": "Si è verificato un errore sconosciuto",
+    "unexpected_error": "Si è verificato un errore inaspettato",
+
+    "authentication": {
+      "title": "Errore di autenticazione",
+      "invalid_credentials": "Password o email non corretti",
+      "user_not_found": "Nessun account trovato con questa email",
+      "session_expired": "La tua sessione è scaduta, effettua nuovamente l'accesso",
+      "access_denied": "Accesso negato"
+    },
+
+    "validation": {
+      "title": "Errore di validazione",
+      "email_required": "L'indirizzo email è obbligatorio",
+      "password_required": "La password è obbligatoria",
+      "invalid_email": "Formato email non valido",
+      "password_criteria": "La password non soddisfa i criteri di sicurezza",
+      "first_name_required": "Il nome è obbligatorio",
+      "account_exists": "Un account esiste già con questa email",
+      "invalid_data": "I dati inviati non sono validi",
+      "same_password": "La nuova password non può essere identica alla precedente"
+    },
+
+    "registration": {
+      "title": "Errore di registrazione",
+      "account_already_exists": "Un account esiste già con questa email"
+    },
+
+    "network": {
+      "title": "Errore di rete",
+      "connection_error": "Errore di connessione di rete, verifica la tua connessione internet",
+      "timeout": "Timeout della richiesta, riprova"
+    },
+
+    "server": {
+      "title": "Errore del server",
+      "server_error": "Errore del server, riprova più tardi",
+      "service_unavailable": "Il servizio non è temporaneamente disponibile"
+    },
+
+    "technical": {
+      "title": "Errore tecnico",
+      "communication_error": "Errore di comunicazione con il server",
+      "resource_not_found": "La risorsa richiesta non esiste",
+      "device_id_error": "Errore di identificazione del dispositivo",
+      "subscription_error": "Errore nella gestione del tuo abbonamento",
+      "payment_error": "Errore nell'elaborazione del pagamento"
+    },
+
+    "http": {
+      "400": "I dati inviati non sono validi",
+      "401": "Password o email non corretti",
+      "403": "Non hai i permessi necessari",
+      "404": "La risorsa richiesta non esiste",
+      "500": "Errore del server, riprova più tardi",
+      "503": "Il servizio non è temporaneamente disponibile"
+    }
+  }
 }

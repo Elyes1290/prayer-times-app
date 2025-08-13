@@ -1570,16 +1570,14 @@ class PremiumContentManager {
       }
 
       const downloaded = JSON.parse(downloadedContent);
-      const migrations: Array<{
+      const migrations: {
         oldPath: string;
         newPath: string;
         contentId: string;
-      }> = [];
+      }[] = [];
 
       // Analyser chaque téléchargement existant
-      for (const [contentId, info] of Object.entries(downloaded) as Array<
-        [string, any]
-      >) {
+      for (const [contentId, info] of Object.entries(downloaded) as [string, any][]) {
         const currentPath = info.downloadPath;
 
         // Vérifier si le fichier existe et s'il suit l'ancien format
@@ -2377,7 +2375,7 @@ class PremiumContentManager {
   // 🔍 NOUVELLE FONCTION : Diagnostiquer les conflits de noms de fichiers
   async diagnoseFileNamingConflicts(): Promise<{
     hasConflicts: boolean;
-    conflicts: Array<{ fileName: string; contentIds: string[] }>;
+    conflicts: { fileName: string; contentIds: string[] }[];
     totalDownloaded: number;
     legacyFilesFound: number;
   }> {
@@ -2399,9 +2397,7 @@ class PremiumContentManager {
       let legacyFilesFound = 0;
 
       // Analyser tous les téléchargements
-      for (const [contentId, info] of Object.entries(downloaded) as Array<
-        [string, any]
-      >) {
+      for (const [contentId, info] of Object.entries(downloaded) as [string, any][]) {
         const filePath = info.downloadPath as string;
         const fileName = filePath.split("/").pop() || "";
 
@@ -3643,24 +3639,24 @@ class PremiumContentManager {
   // 🚀 NOUVEAU : Lister les fichiers Quran téléchargés (pour diagnostic)
   public async listQuranFiles(): Promise<{
     totalFiles: number;
-    files: Array<{
+    files: {
       reciterName: string;
       fileName: string;
       filePath: string;
       fileSize: number;
-    }>;
+    }[];
   }> {
     try {
       debugLog("📖 Liste des fichiers Quran téléchargés...");
 
       const result = {
         totalFiles: 0,
-        files: [] as Array<{
+        files: [] as {
           reciterName: string;
           fileName: string;
           filePath: string;
           fileSize: number;
-        }>,
+        }[],
       };
 
       // Scanner le dossier Quran

@@ -662,6 +662,20 @@ class ApiClient {
     });
   }
 
+  // 🚀 NOUVEAU : Changer le mot de passe
+  async changePassword(data: {
+    email: string;
+    current_password: string;
+    new_password: string;
+  }): Promise<ApiResponse> {
+    return this.makeRequest("/auth.php", "POST", {
+      action: "change_password",
+      email: data.email,
+      current_password: data.current_password,
+      new_password: data.new_password,
+    });
+  }
+
   // === UTILITAIRES ===
 
   // Vérifier la connectivité
