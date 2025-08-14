@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 require_once 'config.php';
 
 // 🛡️ PHASE 1 : Rate Limiting et Monitoring
-require_once 'rate-limiter.php';
+require_once 'rate-limiter-new.php';
 require_once 'monitoring.php';
 require_once '../vendor/autoload.php';
 
@@ -321,20 +321,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_SERVER['HTTP_STRIPE_SIGNAT
         
         // 🛡️ PHASE 1 : Rate Limiting et Monitoring
         $pdo = getDBConnection();
-        $rateLimiter = new RateLimiter($pdo);
+        require_once 'rate-limiter-new.php';
+        $rateLimiter = new RateLimiterNew($pdo);
         $monitor = new PaymentMonitor($pdo);
         
         $ip = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
-        $rateLimitResult = $rateLimiter->checkRateLimit($ip, 'payment_attempt', 5, 3600);
+        $userAgent = $_SERVER['HTTP_USER_AGENT'] ?? null;
+        $rateLimitResult = $rateLimiter->checkRateLimit($ip, 'payment_attempt', 5, 3600, $userAgent);
         
         if (!$rateLimitResult['allowed']) {
             $monitor->logPaymentEvent('payment_attempt', 'error', 'Rate limit exceeded', $rateLimitResult);
             http_response_code(429);
+            
+            // ✅ AMÉLIORÉ : Message d'erreur plus clair et utile
+            $remainingTime = '';
+            if (isset($rateLimitResult['remaining_seconds'])) {
+                $minutes = ceil($rateLimitResult['remaining_seconds'] / 60);
+                $remainingTime = " Vous pouvez réessayer dans $minutes minute" . ($minutes > 1 ? 's' : '') . ".";
+            }
+            
             echo json_encode([
                 'success' => false,
-                'error' => 'Trop de tentatives de paiement',
+                'error' => 'Limite de tentatives de paiement atteinte.' . $remainingTime . ' Pour des raisons de sécurité, veuillez attendre ou utiliser un autre appareil.',
                 'details' => $rateLimitResult,
-                'timestamp' => date('Y-m-d H:i:s')
+                'timestamp' => date('Y-m-d H:i:s'),
+                'user_friendly' => true
             ]);
             exit();
         }

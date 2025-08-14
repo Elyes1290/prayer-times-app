@@ -191,7 +191,7 @@ export function SunInfo({ sunrise, sunset, currentTime }: SunInfoProps) {
           color={currentTheme === "light" ? colors.primary : "#FFD93D"}
         />
         <Text style={styles.headerText}>
-          {t("day_duration") || "Durée du jour"}: {getDayDuration()}
+          {t("sun_info.day_duration", "Durée du jour")}: {getDayDuration()}
         </Text>
       </View>
 

@@ -165,8 +165,11 @@ export default function DhikrScreen() {
       const handleDhikrCompleted = async () => {
         if (!user.isPremium) {
           Alert.alert(
-            "🔒 Fonctionnalité Premium",
-            "Cette fonctionnalité est disponible uniquement pour les utilisateurs premium.",
+            t("premium.feature_locked", "🔒 Fonctionnalité Premium"),
+            t(
+              "premium.feature_premium_only",
+              "Cette fonctionnalité est disponible uniquement pour les utilisateurs premium."
+            ),
             [
               { text: "Annuler", style: "cancel" },
               {
@@ -184,8 +187,11 @@ export default function DhikrScreen() {
         try {
           await recordDhikr(1, selectedKey);
           Alert.alert(
-            "✅ Dhikr enregistré",
-            "Ce dhikr a été ajouté à vos statistiques personnelles.",
+            t("dhikr.recorded", "✅ Dhikr enregistré"),
+            t(
+              "dhikr.added_to_stats",
+              "Ce dhikr a été ajouté à vos statistiques personnelles."
+            ),
             [{ text: "OK" }]
           );
         } catch (error) {

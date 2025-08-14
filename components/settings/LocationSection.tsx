@@ -50,7 +50,7 @@ export default function LocationSection({
   return [
     {
       key: "location",
-      title: t("location_method", "Méthode de localisation"),
+      title: t("location.method", "Méthode de localisation"),
       data: [
         {
           key: "location_content",
@@ -103,13 +103,13 @@ export default function LocationSection({
                   >
                     <Text style={styles.refreshButtonText}>
                       {isRefreshingLocation
-                        ? t("updating_location", "Mise à jour...")
+                        ? t("location.updating", "Mise à jour...")
                         : t("refresh_location", "Actualiser la position")}
                     </Text>
                   </TouchableOpacity>
                   {autoLocation && (
                     <Text style={styles.locationText}>
-                      {t("location_detected", "Position détectée")}:{" "}
+                      {t("location.detected", "Position détectée")}:{" "}
                       {autoLocation.lat.toFixed(3)},{" "}
                       {autoLocation.lon.toFixed(3)}
                     </Text>

@@ -48,7 +48,10 @@ export default function DataDeletionScreen() {
 
     Alert.alert(
       "Confirmation de suppression",
-      "Êtes-vous sûr de vouloir demander la suppression de votre compte et de toutes vos données ? Cette action est irréversible.",
+      t(
+        "data_deletion.confirmation",
+        "Êtes-vous sûr de vouloir demander la suppression de votre compte et de toutes vos données ? Cette action est irréversible."
+      ),
       [
         {
           text: "Annuler",
@@ -75,8 +78,11 @@ export default function DataDeletionScreen() {
 
       if (response.success) {
         Alert.alert(
-          "Demande enregistrée",
-          "Votre demande de suppression a été enregistrée. Vous recevrez un email de confirmation dans les prochaines minutes. Nous traiterons votre demande dans un délai maximum de 30 jours.",
+          t("data_deletion.request_recorded", "Demande enregistrée"),
+          t(
+            "data_deletion.request_message",
+            "Votre demande de suppression a été enregistrée. Vous recevrez un email de confirmation dans les prochaines minutes. Nous traiterons votre demande dans un délai maximum de 30 jours."
+          ),
           [
             {
               text: "OK",
@@ -91,7 +97,10 @@ export default function DataDeletionScreen() {
       console.error("Erreur demande de suppression:", error);
       Alert.alert(
         "Erreur",
-        "Une erreur est survenue lors de l'envoi de votre demande. Veuillez réessayer ou nous contacter directement à myadhan@gmail.com"
+        t(
+          "data_deletion.error_message",
+          "Une erreur est survenue lors de l'envoi de votre demande. Veuillez réessayer ou nous contacter directement à myadhan@gmail.com"
+        )
       );
     } finally {
       setIsSubmitting(false);

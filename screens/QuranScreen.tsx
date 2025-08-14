@@ -226,7 +226,10 @@ export default function QuranScreen() {
                         id: contentId,
                         type: "quran",
                         title: `${reciterName} - Sourate ${surahNumber}`,
-                        description: "Récitation téléchargée (hors ligne)",
+                        description: t(
+                          "quran.offline_recitation",
+                          "Récitation téléchargée (hors ligne)"
+                        ),
                         fileUrl: "",
                         fileSize: 0,
                         version: "1.0",
@@ -268,7 +271,8 @@ export default function QuranScreen() {
     const groups: { [reciterName: string]: PremiumContent[] } = {};
 
     recitations.forEach((recitation) => {
-      const reciterName = recitation.reciter || "Récitateur inconnu";
+      const reciterName =
+        recitation.reciter || t("quran.unknown_reciter", "Récitateur inconnu");
       if (!groups[reciterName]) {
         groups[reciterName] = [];
       }
@@ -1307,7 +1311,7 @@ export default function QuranScreen() {
                 color="#ba9c34"
               />
               <Text style={styles.compactReciterText}>
-                {selectedReciter || "Récitateur"}
+                {selectedReciter || t("quran.reciter", "Récitateur")}
               </Text>
               <MaterialCommunityIcons
                 name="chevron-down"
@@ -1356,7 +1360,7 @@ export default function QuranScreen() {
             <View style={styles.connectivityIndicator}>
               <ActivityIndicator size="small" color="#ba9c34" />
               <Text style={styles.connectivityText}>
-                {t("checking_connection", "Vérification...")}
+                {t("quran.checking_connection", "Vérification...")}
               </Text>
             </View>
           )}

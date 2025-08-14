@@ -326,7 +326,10 @@ export default function HadithScreen() {
                 style={styles.searchInput}
                 placeholder={
                   t("hadith_search_placeholder") ||
-                  "Rechercher par texte ou numéro de hadith..."
+                  t(
+                    "hadith.search_placeholder",
+                    "Rechercher par texte ou numéro de hadith..."
+                  )
                 }
                 placeholderTextColor="#ba9c34"
                 value={searchQuery}

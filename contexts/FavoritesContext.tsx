@@ -311,6 +311,9 @@ export const FavoritesProvider: React.FC<FavoritesProviderProps> = ({
     });
     return false;
 
+    // TODO: Réactiver la synchronisation quand le mode professionnel sera désactivé
+    // Le code ci-dessous sera exécuté quand on supprimera le return false ci-dessus
+    /*
     try {
       const syncTime = new Date().toISOString();
 
@@ -326,8 +329,11 @@ export const FavoritesProvider: React.FC<FavoritesProviderProps> = ({
 
       showToast({
         type: "success",
-        title: "Synchronisation réussie",
-        message: "Vos favoris ont été synchronisés",
+        title: t("favorites.sync_success", "Synchronisation réussie"),
+        message: t(
+          "favorites.sync_message",
+          "Vos favoris ont été synchronisés"
+        ),
       });
 
       return true;
@@ -340,6 +346,7 @@ export const FavoritesProvider: React.FC<FavoritesProviderProps> = ({
       });
       return false;
     }
+    */
   };
 
   const canAddFavorite = (
@@ -518,8 +525,11 @@ export const FavoritesProvider: React.FC<FavoritesProviderProps> = ({
 
       showToast({
         type: "info",
-        title: "Favoris supprimés",
-        message: "Tous les favoris ont été supprimés",
+        title: t("favorites.deleted", "Favoris supprimés"),
+        message: t(
+          "favorites.all_deleted",
+          "Tous les favoris ont été supprimés"
+        ),
       });
 
       return true;

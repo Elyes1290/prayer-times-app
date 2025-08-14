@@ -15,7 +15,7 @@
   "notifications_disabled_title": "Notifications désactivées",
   "notifications_disabled_message": "Pour recevoir les notifications, active-les dans les paramètres.",
   "open_settings": "Ouvrir les paramètres",
-  "cancel": "Annuler",
+
   "settings": "Paramètres",
   "location": "Localisation",
   "automatic_gps": "Automatique (GPS)",
@@ -197,6 +197,45 @@
     "Isha": "Icha"
   },
   "favorites": "Favoris",
+  "favorites_section": {
+    "title": "Favoris",
+    "empty_title": "Aucun favori",
+    "empty_subtitle": "Appuyez sur ❤️ pour ajouter vos contenus préférés",
+    "added_on": "Ajouté le",
+    "remove": "Retirer",
+    "clear_all": "Tout supprimer",
+    "share": "Partager",
+    "no_favorites_in_category": "Aucun favori dans cette catégorie",
+    "press_heart_to_add": "Appuyez sur ❤️ pour ajouter vos contenus préférés"
+  },
+  "favorites": {
+    "sync_success": "Synchronisation réussie",
+    "sync_message": "Vos favoris ont été synchronisés",
+    "deleted": "Favoris supprimés",
+    "all_deleted": "Tous les favoris ont été supprimés"
+  },
+  "sun_info": {
+    "day_duration": "Durée du jour"
+  },
+  "quran": {
+    "offline_recitation": "Récitation téléchargée (hors ligne)",
+    "unknown_reciter": "Récitateur inconnu",
+    "reciter": "Récitateur",
+    "checking_connection": "Vérification..."
+  },
+  "hadith": {
+    "search_placeholder": "Rechercher par texte ou numéro de hadith..."
+  },
+  "dhikr": {
+    "recorded": "✅ Dhikr enregistré",
+    "added_to_stats": "Ce dhikr a été ajouté à vos statistiques personnelles."
+  },
+  "data_deletion": {
+    "confirmation": "Êtes-vous sûr de vouloir demander la suppression de votre compte et de toutes vos données ? Cette action est irréversible.",
+    "request_recorded": "Demande enregistrée",
+    "request_message": "Votre demande de suppression a été enregistrée. Vous recevrez un email de confirmation dans les prochaines minutes. Nous traiterons votre demande dans un délai maximum de 30 jours.",
+    "error_message": "Une erreur est survenue lors de l'envoi de votre demande. Veuillez réessayer ou nous contacter directement à myadhan@gmail.com"
+  },
   "toasts": {
     "error": "Erreur",
     "success": "Succès",
@@ -254,10 +293,6 @@
     "premium_sync_error_title": "Erreur de synchronisation",
     "premium_sync_error_message": "Erreur lors de la synchronisation premium",
     "warning": "Attention",
-    "adhan_deleted_title": "Adhan supprimé",
-    "adhan_deleted_message": "supprimé",
-    "delete_error_title": "Erreur",
-    "delete_error_message": "Impossible de supprimer l'adhan",
 
     "download_error": "Erreur de téléchargement",
     "download_failed": "Le téléchargement a échoué",
@@ -427,11 +462,8 @@
   "after_salah_enabled": "Après la prière activé",
   "after_salah_delay": "Délai après la prière",
   "morning_dhikr_enabled": "Dhikr du matin activé",
-  "morning_dhikr_delay": "Délai du Dhikr du matin",
   "evening_dhikr_enabled": "Dhikr du soir activé",
-  "evening_dhikr_delay": "Délai du Dhikr du soir",
   "selected_dua_enabled": "Dua sélectionnée activée",
-  "selected_dua_delay": "Délai de la Dua sélectionnée",
   "adhan_notification_title": "🕌 Adhan",
   "adhan_notification_body": "Il est l'heure de prier {{prayer}} ! Qu'Allah accepte ta prière.",
   "adhan_completed_title": "✅ Adhan terminé",
@@ -452,7 +484,6 @@
   "notifications_reprogrammed": "Notifications reprogrammées",
   "changes_will_be_active": "Vos nouveaux paramètres seront pris en compte pour les prochaines notifications.",
   "actions": "Actions",
-  "reminders": "Rappels",
   "reminder_offset": "Délai de rappel",
   "play_preview": "Aperçu",
   "stop_preview": "Arrêter",
@@ -693,7 +724,6 @@
   },
   "backup_cloud": "Sauvegarde Cloud",
   "backup_confirm_title": "Sauvegarde",
-  "backup": "Sauvegarder",
   "restore_confirm_title": "Restauration",
   "restore": "Restaurer",
   "last_backup": "Dernière sauvegarde",
@@ -949,6 +979,17 @@
   "play_all": "Tout lire",
   "stop_playlist": "Arrêter",
 
+  "success": "Succès",
+  "error": "Erreur",
+  "download": {
+    "completed": "Téléchargement terminé",
+    "failed": "Téléchargement échoué",
+    "cancelled": "Téléchargement annulé",
+    "added_to_list": "✅ Ajouté à la liste: {{title}}",
+    "item_downloaded": "✅ {{item}} téléchargé",
+    "failed_message": "Le téléchargement a échoué",
+    "cancelled_message": "Le téléchargement a été interrompu"
+  },
   "errors": {
     "unknown_error": "Une erreur inconnue s'est produite",
     "unexpected_error": "Une erreur inattendue s'est produite",
@@ -1007,5 +1048,225 @@
       "500": "Erreur serveur, veuillez réessayer plus tard",
       "503": "Le service est temporairement indisponible"
     }
+  },
+
+  "qibla": {
+    "initializing_compass": "Initialisation de la boussole...",
+    "location_disabled": "Localisation désactivée",
+    "location_permission_required": "Permission de localisation requise",
+    "location_enable_instructions": "Pour utiliser la boussole Qibla, activez la localisation dans les paramètres de votre téléphone.",
+    "location_allow_instructions": "Appuyez sur \"Autoriser\" et revenez à l'application"
+  },
+
+  "premium": {
+    "ui": {
+      "signup_tab": "Créer un compte Premium",
+      "login_tab": "Se connecter"
+    },
+    "account_creation_required": "La création de compte nécessite un abonnement Premium. Votre compte sera créé automatiquement après le paiement.",
+    "already_subscribed": "Déjà abonné(e) ? Connectez‑vous avec le même email.",
+    "manage_account": "Gérer le compte",
+    "account_management_redirect": "Allez dans À propos > Gérer le compte pour l'instant",
+    "first_name_or_username": "Prénom ou pseudo",
+    "modify_prefilled_name": "Modifier le prénom pré-rempli",
+    "field_details_instructions": "Cliquez sur les icônes ℹ️ pour voir les détails de chaque champ.",
+    "session_expired": "Session expirée",
+    "logout_success": "Vous avez été déconnecté avec succès",
+    "logout_error": "Erreur lors de la déconnexion",
+    "profile_updated": "Profil mis à jour",
+    "profile_update_success": "Vos informations ont été sauvegardées avec succès",
+    "no_subscription_found": "Aucun abonnement trouvé pour votre compte",
+    "session_creation_error": "Erreur lors de la création de la session",
+    "not_defined": "Non renseigné",
+    "subscription_type_undefined": "Type non défini",
+    "feature_development": "Fonctionnalité en cours de développement",
+    "no_account_associated": "Aucun compte premium n'est associé à cet appareil. Créez un compte ou achetez le premium.",
+    "feature_locked": "🔒 Fonctionnalité Premium",
+    "feature_premium_only": "Cette fonctionnalité est disponible uniquement pour les utilisateurs premium.",
+    "promotion": {
+      "feature_title": "Fonctionnalité Premium",
+      "unlock_feature": "Débloquez cette fonctionnalité avec Premium",
+      "upgrade": "Mettre à niveau",
+      "title": "Passez à Premium",
+      "message": "Débloquez toutes les fonctionnalités avancées",
+      "detailed_stats": "Statistiques détaillées",
+      "exclusive_themes": "Thèmes exclusifs",
+      "unlimited_favorites": "Favoris illimités"
+    }
+  },
+
+  "account": {
+    "first_name_placeholder": "Votre prénom",
+    "not_defined": "Non renseigné",
+    "subscription_type_undefined": "Type non défini"
+  },
+
+  "backup": {
+    "backup_confirm": "Voulez-vous sauvegarder vos données dans le cloud ?",
+    "restore_confirm": "Voulez-vous restaurer vos données depuis le cloud ? Cela remplacera vos données actuelles.",
+    "restart_required": "Redémarrage requis",
+    "restore_success_message": "Vos données ont été restaurées avec succès. Pour voir tous les changements, veuillez fermer complètement l'application puis la rouvrir.",
+    "not_connected": "Non connecté",
+    "last_backup": "Dernière sauvegarde",
+    "cloud_data": "Données dans le cloud",
+    "refresh_cloud_confirm": "Voulez-vous actualiser les données cloud ?",
+    "sync_success": "Synchronisation réussie"
+  },
+
+  "password": {
+    "change_modal": {
+      "password_criteria": "Le nouveau mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial",
+      "same_password_error": "Le nouveau mot de passe ne peut pas être identique à l'ancien",
+      "user_email_not_found": "Email utilisateur non trouvé",
+      "success_title": "Succès",
+      "success_message": "Mot de passe modifié avec succès",
+      "cancel_confirm": "Êtes-vous sûr de vouloir annuler ? Les modifications seront perdues."
+    },
+    "validation": {
+      "min_length": "Au moins 8 caractères",
+      "special_char": "Au moins un caractère spécial"
+    }
+  },
+
+  "settings": {
+    "screen": {
+      "download_adhan_title": "Télécharger l'adhan",
+      "download_adhan_message": "Voulez-vous télécharger",
+      "download_adhan_confirm": "Télécharger"
+    },
+    "title": "Paramètres",
+    "theme": "Thème",
+    "about": "À propos",
+    "developer": "Développeur",
+    "last_update": "Dernière mise à jour",
+    "app_description": "Cette application est développée avec amour pour la communauté musulmane.",
+    "faq_text": "Questions fréquemment posées",
+    "notifications_reprogrammed": "Notifications reprogrammées",
+    "notifications_new_settings": "Vos nouveaux paramètres seront pris en compte pour les prochaines notifications.",
+    "premium_access": "Accès Premium",
+    "success": "Succès",
+    "adhan_list_updated": "Liste des adhans actualisée",
+    "download_completed": "Téléchargement terminé",
+    "download_failed": "Téléchargement échoué",
+    "download_failed_message": "Le téléchargement a échoué",
+    "download_cancelled": "Téléchargement annulé",
+    "download_cancelled_message": "Le téléchargement a été interrompu",
+    "delete_all_adhans": "Suppression de tous les adhans téléchargés...",
+    "no_downloaded_files": "Aucun fichier téléchargé trouvé",
+    "cleanup_completed": "Nettoyage terminé",
+    "analyzing_files": "Analyse des fichiers téléchargés...",
+    "diagnostic_completed": "Diagnostic terminé"
+  },
+
+  "adhans": {
+    "preview_limited": "Preview limitée à 20 secondes",
+    "download_time_warning": "Le téléchargement peut prendre quelques minutes selon votre connexion.",
+    "url_not_found": "URL de téléchargement non trouvée",
+    "list_updated": "Liste des adhans actualisée",
+    "cannot_update_list": "Impossible d'actualiser la liste",
+    "download_title": "Télécharger l'adhan",
+    "download_message": "Voulez-vous télécharger"
+  },
+
+  "dhikr": {
+    "after_prayer": "Dhikr après la prière",
+    "morning_delay": "Délai après Fajr (min)",
+    "evening_delay": "Délai après Maghrib (min)",
+    "selected_dua": "Dua sélectionnée",
+    "selected_dua_delay": "Délai après Dhuhr (min)"
+  },
+
+  "general": {
+    "settings": "Réglages généraux",
+    "prayer_reminders_before": "Rappels avant la prière",
+    "reminder_offset_minutes": "Délai (minutes)"
+  },
+
+  "location": {
+    "method": "Méthode de localisation",
+    "updating": "Mise à jour...",
+    "detected": "Position détectée"
+  },
+
+  "home": {
+    "go_to_settings": "Aller aux paramètres",
+    "notifications_disabled_message": "Vous devez autoriser les notifications pour recevoir les rappels de prière et de dhikr."
+  },
+
+  "stats": {
+    "improvement_opportunity": "Opportunité d'amélioration",
+    "start_habit_advice": "Commencez par 1 prière par jour pour créer l'habitude.",
+    "spiritual_shape_continue": "Vous êtes en pleine forme spirituelle. Continuez !",
+    "spiritual_balance": "Équilibre spirituel",
+    "dhikr_complements_prayers": "Votre pratique du dhikr complète parfaitement vos prières.",
+    "my_spiritual_progress": "Mes progrès spirituels",
+    "prayers_completed": "prières accomplies",
+    "export_data": "Exporter les données",
+    "share_complete_stats": "Voulez-vous partager vos statistiques complètes ?",
+    "profile_regular": "Prieur Régulier",
+    "profile_beginner": "Débutant",
+    "profile_paused_desc": "Moment de réflexion",
+    "profile_user_desc": "Profil en développement",
+    "level_master": "Maître",
+    "calculating_detailed_stats": "Calcul des statistiques détaillées",
+    "unlock_complete_analysis": "Débloquez l'analyse complète de votre progression spirituelle",
+    "detailed_stats": "📈 Statistiques détaillées",
+    "personalized_tips": "💡 Conseils personnalisés",
+    "retry": "Réessayer",
+    "stats_appear_after_first_prayers": "Vos statistiques apparaîtront après vos premières prières",
+    "success_rate": "Réussite",
+    "current_streak": "Série actuelle",
+    "recent_consistency": "📅 Consistance récente",
+    "last_7_days_activity": "Vos 7 derniers jours d'activité spirituelle",
+    "complete_day": "Journée complète",
+    "no_activity": "Aucune activité",
+    "smart_reminders_coming_soon": "Les rappels personnalisés basés sur vos habitudes seront bientôt disponibles !",
+    "personalized_advice": "💡 Conseils personnalisés",
+    "recommended_action_plan": "🎯 Plan d'action recommandé",
+    "ongoing_challenges": "🏆 Défis en cours",
+    "new_badges_coming_soon": "De nouveaux badges apparaîtront bientôt !",
+    "prayer_recorded": "✅ Prière enregistrée !",
+    "prayer_completed": "Prière accomplie",
+    "i_completed_prayer": "J'ai accompli une prière",
+    "dhikr_recorded_success": "✅ Dhikr enregistré !",
+    "dhikr_completed": "Dhikr récité",
+    "quran_recorded": "✅ Lecture du Coran enregistrée !",
+    "hadith_recorded_success": "✅ Hadith enregistré !",
+    "hadith_studied": "Hadith étudié",
+    "total_prayers": "Total prières:",
+    "total_hadiths": "Hadiths étudiés:",
+    "reset_warning_irreversible": "Cette action est irréversible et supprimera toutes vos statistiques",
+    "reset_prayers_deleted": "• Toutes vos prières enregistrées seront supprimées",
+    "reset_dhikr_quran_zero": "• Vos dhikrs et lectures du Coran seront remis à zéro",
+    "reset_badges_deleted": "• Tous vos badges et achievements seront supprimés",
+    "reset_history_erased": "• Votre historique et séries seront effacés",
+    "reset_confirmation": "Êtes-vous absolument certain(e) de vouloir réinitialiser toutes vos statistiques ?\n\nCette action est DÉFINITIVE et ne peut pas être annulée.",
+    "confirm_reset": "Confirmer la réinitialisation",
+    "final_confirmation": "🚨 Dernière confirmation",
+    "final_warning": "ATTENTION : Vous allez perdre TOUTES vos données spirituelles.\n\nTapez 'RESET' ci-dessous pour confirmer :",
+    "reset_success": "✅ Statistiques réinitialisées avec succès",
+    "reset_error": "❌ Erreur lors de la réinitialisation",
+    "reset_all_stats": "Réinitialiser toutes les statistiques",
+    "spiritual_progress_detail": "Votre progression spirituelle en détail",
+    "tab_achievements": "Réalisations",
+    "time_window": "Fenêtre",
+    "goal_soon_customizable": "Votre objectif sera bientôt personnalisable !",
+    "weekly_goal_desc": "Nombre de prières visées par semaine"
+  },
+
+  "languages": {
+    "fr": "Français",
+    "en": "English",
+    "ar": "العربية",
+    "es": "Español",
+    "de": "Deutsch",
+    "it": "Italiano",
+    "pt": "Português",
+    "tr": "Türkçe",
+    "ru": "Русский",
+    "ur": "اردو",
+    "bn": "বাংলা",
+    "fa": "فارسی",
+    "nl": "Nederlands"
   }
 }

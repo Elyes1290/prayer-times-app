@@ -414,15 +414,18 @@ function SettingsSections({
       // console.log("✅ Actualisation adhans terminée");
       showToast({
         type: "success",
-        title: "Succès",
-        message: "Liste des adhans actualisée",
+        title: t("success", "Succès"),
+        message: t("adhans.list_updated", "Liste des adhans actualisée"),
       });
     } catch (error) {
       console.error("❌ Erreur actualisation adhans:", error);
       showToast({
         type: "error",
-        title: "Erreur",
-        message: "Impossible d'actualiser la liste",
+        title: t("error", "Erreur"),
+        message: t(
+          "adhans.cannot_update_list",
+          "Impossible d'actualiser la liste"
+        ),
       });
     } finally {
       setIsRefreshingAdhans(false);
@@ -441,8 +444,11 @@ function SettingsSections({
       console.error("❌ Erreur nettoyage:", error);
       showToast({
         type: "error",
-        title: "Erreur",
-        message: "Impossible de nettoyer les fichiers",
+        title: t("error", "Erreur"),
+        message: t(
+          "settings.cannot_clean_files",
+          "Impossible de nettoyer les fichiers"
+        ),
       });
     } finally {
       setIsCleaningFiles(false);
@@ -2473,8 +2479,12 @@ export default function SettingsScreenOptimized() {
           updatedAdhans.find((a) => a.id === contentId)?.title || contentId;
         showToast({
           type: "success",
-          title: "Téléchargement terminé",
-          message: `✅ Ajouté à la liste: ${adhanTitle}`,
+          title: t("download.completed", "Téléchargement terminé"),
+          message: t(
+            "download.added_to_list",
+            "✅ Ajouté à la liste: {{title}}",
+            { title: adhanTitle }
+          ),
         });
 
         // console.log(`✅ Synchronisation forcée terminée pour: ${contentId}`);
@@ -2494,8 +2504,10 @@ export default function SettingsScreenOptimized() {
 
         showToast({
           type: "success",
-          title: "Téléchargement terminé",
-          message: `✅ ${contentId} téléchargé`,
+          title: t("download.completed", "Téléchargement terminé"),
+          message: t("download.item_downloaded", "✅ {{item}} téléchargé", {
+            item: contentId,
+          }),
         });
       }
     };
@@ -2505,8 +2517,8 @@ export default function SettingsScreenOptimized() {
 
       showToast({
         type: "error",
-        title: "Téléchargement échoué",
-        message: "Le téléchargement a échoué",
+        title: t("download.failed", "Téléchargement échoué"),
+        message: t("download.failed_message", "Le téléchargement a échoué"),
       });
     };
 
@@ -2515,8 +2527,11 @@ export default function SettingsScreenOptimized() {
 
       showToast({
         type: "info",
-        title: "Téléchargement annulé",
-        message: "Le téléchargement a été interrompu",
+        title: t("download.cancelled", "Téléchargement annulé"),
+        message: t(
+          "download.cancelled_message",
+          "Le téléchargement a été interrompu"
+        ),
       });
     };
 

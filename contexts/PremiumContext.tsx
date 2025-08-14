@@ -11,6 +11,7 @@ import apiClient from "../utils/apiClient";
 // 🚀 NOUVEAU : Import du gestionnaire de synchronisation
 import SyncManager from "../utils/syncManager";
 import { useToast } from "../contexts/ToastContext";
+import { useTranslation } from "react-i18next";
 
 // Types de base
 export interface PremiumUser {
@@ -105,6 +106,7 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
   const [user, setUser] = useState<PremiumUser>(defaultUser);
   const [loading, setLoading] = useState(true);
   const { showToast } = useToast();
+  const { t } = useTranslation();
 
   // --- Actions disponibles pour les effets ---
   const deactivatePremium = React.useCallback(async () => {
@@ -149,7 +151,7 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
           await deactivatePremium();
           showToast?.({
             type: "error",
-            title: "Session expirée",
+            title: t("premium.session_expired", "Session expirée"),
             message: "Veuillez vous reconnecter pour continuer",
           });
         }
@@ -611,8 +613,10 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
             showToast({
               type: "info",
               title: "Aucun compte premium",
-              message:
-                "Aucun compte premium n'est associé à cet appareil. Créez un compte ou achetez le premium.",
+              message: t(
+                "premium.no_account_associated",
+                "Aucun compte premium n'est associé à cet appareil. Créez un compte ou achetez le premium."
+              ),
             });
           }
         } else {

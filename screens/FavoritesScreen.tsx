@@ -316,11 +316,17 @@ const FavoritesScreen: React.FC = () => {
         {selectedFilter === "all"
           ? t("favorites_screen.empty_all") || "Aucun favori"
           : t("favorites_screen.empty_filter") ||
-            "Aucun favori dans cette catégorie"}
+            t(
+              "favorites.no_favorites_in_category",
+              "Aucun favori dans cette catégorie"
+            )}
       </Text>
       <Text style={styles.emptySubtitle}>
         {t("favorites_screen.empty_subtitle") ||
-          "Appuyez sur ❤️ pour ajouter vos contenus préférés"}
+          t(
+            "favorites.press_heart_to_add",
+            "Appuyez sur ❤️ pour ajouter vos contenus préférés"
+          )}
       </Text>
     </View>
   );
