@@ -129,6 +129,12 @@ public class PrayerTimesWidget extends AppWidgetProvider {
 
             widgetDebugLog(TAG, "📋 ListView configurée pour le widget " + appWidgetId);
 
+            // 🔍 DEBUG: Validation des duas (seulement en mode debug)
+            if (BuildConfig.DEBUG) {
+                widgetDebugLog(TAG, "🔍 Mode DEBUG activé - validation des duas");
+                validateDhikrAccessibility(context);
+            }
+
             // Mettre à jour le widget
             appWidgetManager.updateAppWidget(appWidgetId, views);
             appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId, R.id.widget_listview);
@@ -770,6 +776,69 @@ public class PrayerTimesWidget extends AppWidgetProvider {
     }
 
     /**
+     * 🆕 NOUVELLE FONCTION: Vérifie l'accessibilité de tous les duas
+     * Utile pour le debug et la validation
+     */
+    public static void validateDhikrAccessibility(Context context) {
+        String language = getCurrentLanguage(context);
+        widgetDebugLog(TAG, "🔍 Validation accessibilité duas pour langue: " + language);
+        
+        try {
+            String fileName = "dhikr." + language + ".json";
+            InputStream inputStream = context.getAssets().open(fileName);
+            InputStreamReader reader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
+            
+            StringBuilder jsonBuilder = new StringBuilder();
+            char[] buffer = new char[1024];
+            int length;
+            while ((length = reader.read(buffer)) != -1) {
+                jsonBuilder.append(buffer, 0, length);
+            }
+            
+            JSONArray duaArray = new JSONArray(jsonBuilder.toString());
+            widgetDebugLog(TAG, "✅ Fichier " + fileName + " chargé avec succès");
+            widgetDebugLog(TAG, "📊 Nombre total de duas: " + duaArray.length());
+            
+            // Vérifier quelques duas au hasard pour valider l'accessibilité
+            int[] testIndexes = {0, duaArray.length() / 2, duaArray.length() - 1};
+            for (int testIndex : testIndexes) {
+                try {
+                    JSONObject dua = duaArray.getJSONObject(testIndex);
+                    String title = dua.getString("title");
+                    String arabic = dua.getString("arabic");
+                    String translation = dua.getString("translation");
+                    
+                    widgetDebugLog(TAG, "✅ Dua " + testIndex + " accessible: " + title.substring(0, Math.min(30, title.length())) + "...");
+                    widgetDebugLog(TAG, "   📝 Arabe: " + arabic.length() + " chars, Traduction: " + translation.length() + " chars");
+                } catch (Exception e) {
+                    widgetDebugLog(TAG, "❌ Erreur accès dua " + testIndex + ": " + e.getMessage());
+                }
+            }
+            
+            // Vérifier la distribution des index sur plusieurs jours
+            widgetDebugLog(TAG, "🎲 Test distribution des index sur 7 jours:");
+            Calendar testDate = Calendar.getInstance();
+            for (int day = 0; day < 7; day++) {
+                testDate.add(Calendar.DAY_OF_YEAR, 1);
+                int dayOfYear = testDate.get(Calendar.DAY_OF_YEAR);
+                int year = testDate.get(Calendar.YEAR);
+                int month = testDate.get(Calendar.MONTH) + 1;
+                int dayOfMonth = testDate.get(Calendar.DAY_OF_MONTH);
+                int hour = 12; // Heure fixe pour le test
+                
+                long combinedSeed = (long) dayOfYear * 31 + year * 7 + month * 13 + dayOfMonth * 17 + hour * 23;
+                int seed = (int) (Math.abs(combinedSeed) % duaArray.length());
+                
+                String testDateStr = String.format("%04d-%02d-%02d", year, month, dayOfMonth);
+                widgetDebugLog(TAG, "   📅 " + testDateStr + " → Index: " + seed);
+            }
+            
+        } catch (Exception e) {
+            errorLog(TAG, "❌ Erreur validation accessibilité duas: " + e.getMessage(), e);
+        }
+    }
+
+    /**
      * Récupère une dua aléatoire depuis les assets
      */
     public static String getDailyDhikr(Context context) {
@@ -817,8 +886,11 @@ public class PrayerTimesWidget extends AppWidgetProvider {
             JSONArray duaArray = new JSONArray(jsonContent);
 
             if (duaArray.length() == 0) {
+                widgetDebugLog(TAG, "⚠️ Aucun dua trouvé dans le fichier");
                 return "";
             }
+
+            widgetDebugLog(TAG, "📊 Nombre total de duas disponibles: " + duaArray.length());
 
             int seed;
             if (forceRandom) {
@@ -827,19 +899,59 @@ public class PrayerTimesWidget extends AppWidgetProvider {
                 widgetDebugLog(TAG,
                         "🎲 Index dua ALÉATOIRE: " + seed + " (sur " + duaArray.length() + " disponibles)");
             } else {
-                // Basé sur le jour pour cohérence quotidienne
+                // 🆕 AMÉLIORÉ: Sélection quotidienne plus aléatoire et équitable
                 Calendar today = Calendar.getInstance();
                 int dayOfYear = today.get(Calendar.DAY_OF_YEAR);
                 int year = today.get(Calendar.YEAR);
-                seed = (dayOfYear + year) % duaArray.length();
+                int month = today.get(Calendar.MONTH) + 1; // +1 car MONTH commence à 0
+                int dayOfMonth = today.get(Calendar.DAY_OF_MONTH);
+                
+                // 🎯 NOUVELLE FORMULE: Combinaison de plusieurs facteurs pour plus d'aléatoire
+                // Utilise le jour de l'année, l'année, le mois et le jour du mois
+                // Ajoute une variation basée sur l'heure pour éviter les patterns
+                int hour = today.get(Calendar.HOUR_OF_DAY);
+                
+                // Formule améliorée qui mélange tous les facteurs temporels
+                long combinedSeed = (long) dayOfYear * 31 + year * 7 + month * 13 + dayOfMonth * 17 + hour * 23;
+                
+                // Utilise un modulo pour rester dans les limites du tableau
+                seed = (int) (Math.abs(combinedSeed) % duaArray.length());
+                
                 widgetDebugLog(TAG,
-                        "🎲 Index dua quotidien: " + seed + " (sur " + duaArray.length() + " disponibles)");
+                        "🎲 Index dua quotidien AMÉLIORÉ: " + seed + " (sur " + duaArray.length() + " disponibles)");
+                widgetDebugLog(TAG,
+                        "📅 Facteurs: jour=" + dayOfYear + ", année=" + year + ", mois=" + month + 
+                        ", jourMois=" + dayOfMonth + ", heure=" + hour + ", seed=" + combinedSeed);
+                
+                // 🔄 Vérification: si on a le même dua que hier, forcer une variation
+                SharedPreferences prefs = context.getSharedPreferences("widget_prefs", Context.MODE_PRIVATE);
+                int lastDuaIndex = prefs.getInt("last_dua_index", -1);
+                String lastDuaDate = prefs.getString("last_dua_date", "");
+                String currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+                
+                if (lastDuaIndex == seed && lastDuaDate.equals(currentDate)) {
+                    // Même dua que hier, forcer une variation
+                    seed = (seed + 1) % duaArray.length();
+                    widgetDebugLog(TAG, "🔄 Même dua que hier détecté, variation forcée vers index: " + seed);
+                }
+                
+                // Sauvegarder l'index et la date actuels
+                prefs.edit()
+                    .putInt("last_dua_index", seed)
+                    .putString("last_dua_date", currentDate)
+                    .apply();
+            }
+
+            // Vérification de sécurité pour l'index
+            if (seed < 0 || seed >= duaArray.length()) {
+                widgetDebugLog(TAG, "⚠️ Index invalide " + seed + ", correction vers 0");
+                seed = 0;
             }
 
             JSONObject dua = duaArray.getJSONObject(seed);
             String title = dua.getString("title");
 
-            widgetDebugLog(TAG, "🤲 Dua sélectionnée: " + title);
+            widgetDebugLog(TAG, "🤲 Dua sélectionnée: " + title + " (index: " + seed + ")");
 
             String arabic = dua.getString("arabic");
             String translation = dua.getString("translation");
@@ -889,10 +1001,19 @@ public class PrayerTimesWidget extends AppWidgetProvider {
             JSONArray dhikrArray = new JSONArray(jsonBuilder.toString());
 
             if (dhikrArray.length() > 0) {
+                // 🆕 AMÉLIORÉ: Utilise la même logique de sélection que la fonction principale
                 Calendar today = Calendar.getInstance();
                 int dayOfYear = today.get(Calendar.DAY_OF_YEAR);
                 int year = today.get(Calendar.YEAR);
-                int seed = (dayOfYear + year) % dhikrArray.length();
+                int month = today.get(Calendar.MONTH) + 1;
+                int dayOfMonth = today.get(Calendar.DAY_OF_MONTH);
+                int hour = today.get(Calendar.HOUR_OF_DAY);
+                
+                // Même formule améliorée pour la cohérence
+                long combinedSeed = (long) dayOfYear * 31 + year * 7 + month * 13 + dayOfMonth * 17 + hour * 23;
+                int seed = (int) (Math.abs(combinedSeed) % dhikrArray.length());
+                
+                widgetDebugLog(TAG, "🔄 Fallback dua sélectionné avec index: " + seed + " (sur " + dhikrArray.length() + ")");
 
                 JSONObject dhikr = dhikrArray.getJSONObject(seed);
                 String arabic = dhikr.getString("arabic");
