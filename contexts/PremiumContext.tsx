@@ -142,8 +142,44 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
     let interval: ReturnType<typeof setInterval> | undefined;
     const verifyAuth = async () => {
       try {
+        // 🚨 CORRECTION : Éviter la vérification si l'utilisateur choisit un abonnement
+        const pendingRegistration = await AsyncStorage.getItem(
+          "pending_registration"
+        );
+        if (pendingRegistration) {
+          console.log(
+            "⏸️ Vérification token différée - processus d'abonnement en cours"
+          );
+          return; // Ne pas vérifier le token pendant la sélection d'abonnement
+        }
+
+        // 🚀 CORRECTION : Vérifier la connexion explicite ET user_data avant d'appeler l'API
+        const explicitConnection = await AsyncStorage.getItem(
+          "explicit_connection"
+        );
+        if (explicitConnection !== "true") {
+          console.log(
+            "🔍 [DEBUG] Pas de connexion explicite - pas de vérification API"
+          );
+          return; // Ne pas appeler l'API si l'utilisateur n'est pas connecté
+        }
+
+        // Vérifier aussi que user_data existe
+        const userData = await AsyncStorage.getItem("user_data");
+        if (!userData) {
+          console.log("🔍 [DEBUG] Pas de user_data - pas de vérification API");
+          return; // Ne pas appeler l'API si pas de données utilisateur
+        }
+
         const token = await AsyncStorage.getItem("auth_token");
-        if (!token) return;
+        if (!token) {
+          console.log("🔍 [DEBUG] Aucun token - pas de vérification API");
+          return;
+        }
+
+        console.log(
+          "🔐 Vérification périodique du token - utilisateur connecté"
+        );
         const result = await apiClient.verifyAuth();
         if (!result?.success) {
           // Token invalide: désactiver premium et nettoyer les tokens
@@ -155,8 +191,9 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
             message: "Veuillez vous reconnecter pour continuer",
           });
         }
-      } catch {
-        // Réseau ou 401/403: on ignore pour éviter des faux positifs bruyants
+      } catch (error) {
+        // 🚀 CORRECTION : Logger l'erreur pour debug mais ne pas spammer
+        console.log("⚠️ [DEBUG] Erreur vérification token périodique:", error);
       }
     };
 

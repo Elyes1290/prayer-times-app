@@ -226,10 +226,7 @@
   "hadith": {
     "search_placeholder": "Nach Text oder Hadith-Nummer suchen..."
   },
-  "dhikr": {
-    "recorded": "✅ Dhikr aufgezeichnet",
-    "added_to_stats": "Dieser Dhikr wurde zu Ihren persönlichen Statistiken hinzugefügt."
-  },
+
   "data_deletion": {
     "confirmation": "Sind Sie sicher, dass Sie die Löschung Ihres Kontos und aller Ihrer Daten beantragen möchten? Diese Aktion ist unumkehrbar.",
     "request_recorded": "Anfrage aufgezeichnet",
@@ -437,6 +434,13 @@
   "dhikr": {
     "title": "Dhikr und Dua",
     "search_placeholder": "Suchen Sie nach Dhikr oder Dua...",
+    "recorded": "✅ Dhikr aufgenommen",
+    "added_to_stats": "Dieses Dhikr wurde zu Ihren persönlichen Statistiken hinzugefügt.",
+    "after_prayer": "Dhikr nach dem Gebet",
+    "morning_delay": "Verzögerung nach Fajr (Min)",
+    "evening_delay": "Verzögerung nach Maghrib (Min)",
+    "selected_dua": "Ausgewählte Dua",
+    "selected_dua_delay": "Verzögerung nach Dhuhr (Min)",
     "categories": {
       "morning": "Morgen-Dhikr",
       "evening": "Abend-Dhikr",
@@ -1168,14 +1172,6 @@
     "download_message": "Möchten Sie herunterladen"
   },
 
-  "dhikr": {
-    "after_prayer": "Dhikr nach dem Gebet",
-    "morning_delay": "Verzögerung nach Fajr (Min)",
-    "evening_delay": "Verzögerung nach Maghrib (Min)",
-    "selected_dua": "Ausgewählte Dua",
-    "selected_dua_delay": "Verzögerung nach Dhuhr (Min)"
-  },
-
   "general": {
     "settings": "Allgemeine Einstellungen",
     "prayer_reminders_before": "Gebetserinnerungen vorher",
@@ -1253,6 +1249,44 @@
     "goal_soon_customizable": "Ihr Ziel wird bald anpassbar sein!",
     "weekly_goal_desc": "Anzahl der Gebete pro Woche als Ziel"
   },
+
+  "premium_ui": {
+    "badge": "Premium",
+    "signup_tab": "Premium-Konto erstellen",
+    "login_tab": "Anmelden",
+    "signup_info_line1": "Die Kontoerstellung erfordert ein Premium-Abonnement. Ihr Konto wird automatisch nach der Zahlung erstellt.",
+    "signup_info_line2": "Bereits abonniert? Melden Sie sich mit derselben E-Mail an."
+  },
+
+  "auth_modal": {
+    "title": "Premium-Konto",
+    "signup_tab": "Konto erstellen",
+    "login_tab": "Anmelden",
+    "email_placeholder": "E-Mail",
+    "password_placeholder": "Passwort",
+    "firstname_placeholder": "Vorname oder Spitzname",
+    "modify_prefilled_name": "Vorausgefüllten Vornamen ändern",
+    "login_button": "Anmelden",
+    "register_button": "Registrieren",
+    "info_text_login": "Melden Sie sich mit Ihrer E-Mail und Ihrem Passwort an.",
+    "info_text_register": "Klicken Sie auf die ℹ️-Symbole, um Details für jedes Feld zu sehen.",
+    "account_exists_message": "Ein Konto mit dieser E-Mail existiert bereits. Bitte melden Sie sich stattdessen an.",
+    "firstname_label": "Vorname oder Spitzname",
+    "email_label": "E-Mail",
+    "password_label": "Passwort",
+    "firstname_placeholder_empty": "Vorname oder Spitzname",
+    "firstname_placeholder_prefilled": "Vorausgefüllten Vornamen ändern",
+    "email_placeholder_text": "E-Mail",
+    "password_placeholder_text": "Passwort",
+    "password_criteria_title": "Sicherheitskriterien",
+    "password_min_length": "Mindestens 6 Zeichen"
+  },
+
+  "location": "Standort",
+  "backup": "Backup",
+  "download": "Download",
+  "qibla": "Qibla",
+  "favorites": "Favoriten",
 
   "languages": {
     "fr": "Français",

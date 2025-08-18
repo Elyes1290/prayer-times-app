@@ -2,7 +2,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import * as NavigationBar from "expo-navigation-bar";
 import { Tabs } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { Platform, View, StyleSheet, Animated } from "react-native";
 import { SettingsProvider } from "../contexts/SettingsContext";
 import { FavoritesProvider, useFavorites } from "../contexts/FavoritesContext";
@@ -11,11 +11,71 @@ import { BackupProvider } from "../contexts/BackupContext";
 import "../locales/i18n-optimized";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { cleanupObsoleteUserData } from "../utils/userAuth";
+import { clearUserStatsCache } from "../utils/clearAppData";
 import { showGlobalToast, ToastProvider } from "../contexts/ToastContext";
 import i18n from "../locales/i18n";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { clearUserStatsCache } from "../utils/clearAppData";
 import apiClient from "../utils/apiClient";
+
+// 🚨 NOUVEAU : Protection contre les reloads Expo en mode développement
+let isAbonnementProcessActive = false;
+let reloadProtectionTimeout: ReturnType<typeof setTimeout> | null = null;
+
+// Fonction pour activer la protection contre les reloads
+const activateReloadProtection = () => {
+  isAbonnementProcessActive = true;
+  console.log("🛡️ Protection contre les reloads Expo activée");
+
+  // Désactiver la protection après 5 minutes (temps max pour un abonnement)
+  if (reloadProtectionTimeout) {
+    clearTimeout(reloadProtectionTimeout);
+  }
+  reloadProtectionTimeout = setTimeout(() => {
+    isAbonnementProcessActive = false;
+    console.log("🛡️ Protection contre les reloads Expo désactivée (timeout)");
+  }, 5 * 60 * 1000); // 5 minutes
+};
+
+// Fonction pour désactiver la protection
+const deactivateReloadProtection = () => {
+  isAbonnementProcessActive = false;
+  if (reloadProtectionTimeout) {
+    clearTimeout(reloadProtectionTimeout);
+    reloadProtectionTimeout = null;
+  }
+  console.log("🛡️ Protection contre les reloads Expo désactivée");
+};
+
+// Vérifier périodiquement si la protection doit être activée
+setInterval(async () => {
+  try {
+    const pendingRegistration = await AsyncStorage.getItem(
+      "pending_registration"
+    );
+    if (pendingRegistration && !isAbonnementProcessActive) {
+      activateReloadProtection();
+    } else if (!pendingRegistration && isAbonnementProcessActive) {
+      deactivateReloadProtection();
+    }
+  } catch (error) {
+    console.error("❌ Erreur vérification protection reload:", error);
+  }
+}, 1000);
+
+// 🚨 NOUVEAU : Intercepter les reloads Expo en mode développement
+if (__DEV__) {
+  const originalReload = (global as any).reload;
+  if (originalReload) {
+    (global as any).reload = () => {
+      if (isAbonnementProcessActive) {
+        console.log("🛡️ Reload Expo bloqué - processus d'abonnement en cours");
+        return; // Bloquer le reload
+      }
+      console.log("🔄 Reload Expo autorisé");
+      originalReload();
+    };
+  }
+}
 
 type IconName =
   | "home"
@@ -108,14 +168,70 @@ export default function TabLayout() {
         console.log("🧹 Nettoyage des données obsolètes au démarrage...");
         await cleanupObsoleteUserData();
 
+        // 🚀 CORRECTION : Nettoyer les données incohérentes
+        const explicitConnection = await AsyncStorage.getItem(
+          "explicit_connection"
+        );
+        const userData = await AsyncStorage.getItem("user_data");
+
+        if (explicitConnection === "true" && !userData) {
+          console.log(
+            "🧹 Nettoyage des données incohérentes - explicit_connection=true mais pas de user_data"
+          );
+          await AsyncStorage.multiRemove([
+            "auth_token",
+            "refresh_token",
+            "user_data",
+            "explicit_connection",
+            "@prayer_app_premium_user",
+            "user_stats_cache",
+          ]);
+        }
+
         // 🧪 DEBUG: Forcer le rafraîchissement du cache des statistiques
         await clearUserStatsCache();
         console.log("🔄 Cache des statistiques supprimé pour force refresh");
 
         // 🔐 Vérification anti-multi-appareils au démarrage (centralisée)
+        // 🚨 CORRECTION : Éviter cette vérification si l'utilisateur est en train de choisir un abonnement
         try {
+          const pendingRegistration = await AsyncStorage.getItem(
+            "pending_registration"
+          );
+          if (pendingRegistration) {
+            console.log(
+              "⏸️ Initialisation différée - processus d'abonnement en cours"
+            );
+            return; // Ne pas vérifier le token si l'utilisateur choisit un abonnement
+          }
+
           const token = await AsyncStorage.getItem("auth_token");
-          if (token) {
+          const explicitConnection = await AsyncStorage.getItem(
+            "explicit_connection"
+          );
+
+          // 🚀 CORRECTION : Ne vérifier le token que si l'utilisateur est explicitement connecté ET a des données valides
+          if (token && explicitConnection === "true") {
+            // Vérifier aussi que user_data existe et est valide
+            const userData = await AsyncStorage.getItem("user_data");
+            if (!userData) {
+              console.log(
+                "🧹 Nettoyage - explicit_connection=true mais pas de user_data"
+              );
+              await AsyncStorage.multiRemove([
+                "auth_token",
+                "refresh_token",
+                "user_data",
+                "explicit_connection",
+                "@prayer_app_premium_user",
+                "user_stats_cache",
+              ]);
+              return;
+            }
+
+            console.log(
+              "🔐 Vérification token au démarrage - utilisateur connecté"
+            );
             const verify = await apiClient.verifyAuth();
             console.log(
               "🔐 Vérification token au démarrage (verifyAuth):",
@@ -152,6 +268,22 @@ export default function TabLayout() {
             } else {
               console.log("✅ Token valide au démarrage");
             }
+          } else if (token && explicitConnection !== "true") {
+            // 🚀 CORRECTION : Nettoyer les tokens orphelins (sans connexion explicite)
+            console.log(
+              "🧹 Nettoyage des tokens orphelins - pas de connexion explicite"
+            );
+            await AsyncStorage.multiRemove([
+              "auth_token",
+              "refresh_token",
+              "user_data",
+              "@prayer_app_premium_user",
+              "user_stats_cache",
+            ]);
+          } else {
+            console.log(
+              "🔍 Aucun token ou utilisateur non connecté - pas de vérification API"
+            );
           }
         } catch (error) {
           console.error("❌ Erreur vérification token:", error);

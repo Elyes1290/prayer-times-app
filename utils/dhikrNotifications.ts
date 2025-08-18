@@ -1,5 +1,5 @@
-import { NativeModules, Platform } from "react-native";
-import i18n from "../locales/i18n";
+import { NativeModules } from "react-native";
+import i18n from "../locales/i18n-optimized";
 
 type DhikrItem = {
   arabic: string;
@@ -7,8 +7,8 @@ type DhikrItem = {
   latin?: string;
 };
 
-type PrayerLabel = "Fajr" | "Dhuhr" | "Asr" | "Maghrib" | "Isha";
-type PrayerTimes = Record<PrayerLabel, Date>;
+// type PrayerLabel = "Fajr" | "Dhuhr" | "Asr" | "Maghrib" | "Isha"; // inutilisé
+// type PrayerTimes = Record<PrayerLabel, Date>; // inutilisé
 
 type DhikrSettings = {
   enabledAfterSalah: boolean;
@@ -34,11 +34,25 @@ function getRandomDhikrFromNamespace(
 }
 
 function buildDhikrNotifText(namespace: string, dhikr: DhikrItem): string {
+  // Résolution robuste des libellés pour éviter l'affichage des clés brutes
+  const resolveLabel = (key: string, fallbackKey?: string): string => {
+    const value = i18n.t(key);
+    if (value === key && fallbackKey) {
+      const fb = i18n.t(fallbackKey);
+      if (fb !== fallbackKey) return fb;
+    }
+    return value !== key ? value : "Dhikr";
+  };
+
   const labelMap: Record<string, string> = {
-    dhikrMorning: i18n.t("dhikr.categories.morning"),
-    eveningDhikr: i18n.t("dhikr.categories.evening"),
-    selectedDua: i18n.t("dhikr.categories.selectedDua"),
-    afterSalah: i18n.t("dhikr.categories.afterSalah"),
+    dhikrMorning: resolveLabel("dhikr.categories.morning"),
+    eveningDhikr: resolveLabel("dhikr.categories.evening"),
+    selectedDua: resolveLabel("dhikr.categories.selectedDua"),
+    // Fallback spécifique vers une autre clé existante si jamais la catégorie n'est pas chargée à temps
+    afterSalah: resolveLabel(
+      "dhikr.categories.afterSalah",
+      "dhikr.after_prayer"
+    ),
   };
   const notifLabel = `[${labelMap[namespace] || ""}]`;
   return (
@@ -146,13 +160,10 @@ export async function scheduleAllDhikrNotifications(
   );
 
   // Log détaillé des délais calculés
-  notifications.forEach((notif, index) => {
-    const now = new Date().getTime();
-    const delayMinutes = Math.round((notif.triggerMillis - now) / 60000);
-
-    // Pour afterSalah, log aussi le délai configuré vs calculé
+  notifications.forEach((notif) => {
+    // Logs allégés volontairement en production
     if (notif.type === "afterSalah") {
-      // Les logs ont été supprimés
+      // noop
     }
   });
 

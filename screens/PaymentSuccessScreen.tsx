@@ -2,164 +2,214 @@ import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Alert } from "react-native";
 import { useRouter } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import apiClient from "../utils/apiClient";
 import { usePremium } from "../contexts/PremiumContext";
+import {
+  syncUserAfterPayment,
+  checkUserSyncStatus,
+  retryUserSync,
+  PaymentSyncResult,
+} from "../utils/paymentSync";
 
 const PaymentSuccessScreen: React.FC = () => {
   const router = useRouter();
   const [isProcessing, setIsProcessing] = useState(false);
-  const [loginSuccess, setLoginSuccess] = useState(false);
+  const [syncResult, setSyncResult] = useState<PaymentSyncResult | null>(null);
   const { activatePremium, checkPremiumStatus } = usePremium();
 
-  // 🚀 NOUVEAU : Traitement du succès de paiement et nettoyage
+  // 🚀 CORRECTION : Traitement du succès de paiement sans boucle infinie
   useEffect(() => {
+    let isMounted = true;
+
     const processPaymentSuccess = async () => {
       try {
+        if (!isMounted) return;
         setIsProcessing(true);
+        console.log("🔄 Début traitement succès paiement...");
 
-        // Récupérer les données d'inscription en attente
-        const pendingRegistration = await AsyncStorage.getItem(
-          "pending_registration"
-        );
+        // Tentative de synchronisation automatique
+        const result = await syncUserAfterPayment();
+        if (!isMounted) return;
+        setSyncResult(result);
 
-        if (pendingRegistration) {
-          const registrationData = JSON.parse(pendingRegistration);
-          // 🚀 NOUVEAU : Auto-login après paiement
+        if (result.success && result.userData) {
+          console.log("✅ Synchronisation réussie !");
 
-          // ⏱️ Attendre un peu que le webhook soit traité
-          await new Promise((resolve) => setTimeout(resolve, 2000));
+          // 🔍 VÉRIFICATION APRÈS SYNCHRONISATION : Vérifier le statut actuel
+          const currentStatus = await checkUserSyncStatus();
+          if (!isMounted) return;
+          console.log(
+            "🔍 Statut de synchronisation APRÈS sync:",
+            currentStatus
+          );
 
+          // Activer le premium dans le contexte
           try {
-            const loginResult = await apiClient.loginWithCredentials({
-              email: registrationData.email,
-              password: registrationData.password,
-            });
+            const subscriptionType =
+              result.userData.subscription_type || "yearly";
+            console.log("🚀 Activation du premium:", subscriptionType);
 
-            if (loginResult.success && loginResult.data) {
-              setLoginSuccess(true);
+            await activatePremium(
+              subscriptionType as "monthly" | "yearly" | "family",
+              result.userData.subscription_id || `stripe-${result.userData.id}`
+            );
 
-              // Synchroniser les données utilisateur avec la même structure que le login normal
-              const userData = loginResult.data.user || loginResult.data;
-              const userDataToStore = {
-                id: userData.id,
-                user_id: userData.id,
-                email: userData.email,
-                user_first_name: userData.user_first_name,
-                premium_status: userData.premium_status,
-                subscription_type: userData.subscription_type,
-                subscription_id: userData.subscription_id,
-                premium_expiry: userData.premium_expiry,
-                premium_activated_at: userData.premium_activated_at, // 🔑 AJOUT MANQUANT !
-                language: userData.language,
-                last_sync: new Date().toISOString(),
-                device_id: userData.device_id,
-              };
+            if (!isMounted) return;
+            // Vérifier le statut premium
+            console.log("🔄 Vérification du statut premium...");
+            await checkPremiumStatus();
 
-              // Stocker les données utilisateur structurées
-              await AsyncStorage.setItem(
-                "user_data",
-                JSON.stringify(userDataToStore)
-              );
-              await AsyncStorage.setItem("is_logged_in", "true");
+            if (!isMounted) return;
+            // Délai pour la synchronisation des contextes
+            await new Promise((resolve) => setTimeout(resolve, 1000));
+            console.log("✅ Premium activé avec succès !");
 
-              // 🔑 CRITIQUE : Marquer comme connexion explicite pour que l'app reconnaisse l'utilisateur
-              await AsyncStorage.setItem("explicit_connection", "true");
+            if (!isMounted) return;
+            // 🚀 CORRECTION : Nettoyer les données d'inscription seulement après tout le processus
+            await AsyncStorage.removeItem("pending_registration");
+            console.log(
+              "🧹 Données d'inscription nettoyées après synchronisation complète"
+            );
 
-              // 🎯 CRITIQUE : Synchroniser avec le contexte Premium
-              const subscriptionType = userData.subscription_type || "yearly";
+            if (!isMounted) return;
+            // 🔍 VÉRIFICATION FINALE : Vérifier le statut après activation premium
+            const finalStatus = await checkUserSyncStatus();
+            console.log(
+              "🔍 Statut final après activation premium:",
+              finalStatus
+            );
+          } catch (premiumError) {
+            console.error(
+              "⚠️ Erreur lors de l'activation du premium:",
+              premiumError
+            );
+          }
+        } else {
+          console.log("⚠️ Synchronisation échouée:", result.message);
 
-              // Déterminer les features selon le type d'abonnement
-              let features = [
-                "prayer_analytics",
-                "custom_adhan_sounds",
-                "premium_themes",
-                "unlimited_bookmarks",
-                "ad_free",
-              ];
-              if (subscriptionType === "yearly") {
-                features.push("priority_support", "monthly_stats");
-              } else if (subscriptionType === "family") {
-                features.push(
-                  "priority_support",
-                  "monthly_stats",
-                  "family_management",
-                  "child_profiles"
-                );
-              }
+          // Tentative de retry si nécessaire
+          if (result.requiresManualLogin) {
+            console.log("🔄 Tentative de retry...");
+            const retryResult = await retryUserSync(2);
+            if (!isMounted) return;
+            if (retryResult.success) {
+              setSyncResult(retryResult);
+              console.log("✅ Retry réussi !");
 
-              const premiumUser = {
-                isPremium: true,
-                subscriptionType: subscriptionType,
-                subscriptionId: userData.subscription_id,
-                expiryDate: userData.premium_expiry
-                  ? new Date(userData.premium_expiry)
-                  : new Date(Date.now() + 365 * 24 * 60 * 60 * 1000),
-                features: features,
-                hasPurchasedPremium: true,
-                premiumActivatedAt: new Date(),
-              };
-
-              await AsyncStorage.setItem(
-                "@prayer_app_premium_user",
-                JSON.stringify(premiumUser)
-              );
-
-              // 🚀 CRITIQUE : Activer le premium dans le contexte (comme fait l'inscription normale)
-              await activatePremium(
-                subscriptionType as "monthly" | "yearly" | "family",
-                userData.subscription_id || `stripe-${userData.id}`
-              );
-
-              // 🔄 FORCER le refresh du contexte Premium pour que l'UI se mette à jour
-              await checkPremiumStatus();
-
-              // ⏱️ Petit délai pour laisser tous les contextes se synchroniser
-              await new Promise((resolve) => setTimeout(resolve, 500));
+              // 🔍 Vérifier le statut après retry réussi
+              const retryStatus = await checkUserSyncStatus();
+              console.log("🔍 Statut après retry réussi:", retryStatus);
             }
-          } catch (loginError) {
-            // En cas d'échec silencieux, l'utilisateur pourra se connecter manuellement
           }
         }
-
-        // Nettoyer les données d'inscription
-        await AsyncStorage.removeItem("pending_registration");
       } catch (error) {
-        // En cas d'erreur, continuer silencieusement
+        console.error(
+          "❌ Erreur lors du traitement du succès de paiement:",
+          error
+        );
+        if (isMounted) {
+          setSyncResult({
+            success: false,
+            message: "Erreur de traitement",
+            requiresManualLogin: true,
+          });
+        }
       } finally {
-        setIsProcessing(false);
+        if (isMounted) {
+          setIsProcessing(false);
+        }
       }
     };
 
     processPaymentSuccess();
-  }, []);
+
+    // 🚀 NOUVEAU : Cleanup pour éviter les fuites mémoire et les boucles
+    return () => {
+      isMounted = false;
+    };
+  }, []); // 🚀 CORRECTION : Dépendances vides pour éviter la boucle infinie
 
   const handleContinue = () => {
-    // Rediriger vers Settings de manière stable sans refresh
+    // Rediriger vers Settings de manière stable
     setTimeout(() => {
       router.push("/settings");
     }, 100);
+  };
+
+  const handleManualLogin = () => {
+    // Rediriger vers la section de connexion
+    router.push("/settings");
+  };
+
+  const getMessage = () => {
+    if (isProcessing) {
+      return "Création de votre compte en cours...";
+    }
+
+    if (syncResult?.success) {
+      return "Votre compte a été créé et vous êtes maintenant connecté !";
+    }
+
+    if (syncResult?.requiresManualLogin) {
+      return "Votre compte a été créé ! Veuillez vous connecter manuellement.";
+    }
+
+    return "Votre compte a été créé avec succès !";
+  };
+
+  const getButtonText = () => {
+    if (isProcessing) {
+      return "Traitement...";
+    }
+
+    if (syncResult?.success) {
+      return "Voir mon compte";
+    }
+
+    if (syncResult?.requiresManualLogin) {
+      return "Se connecter";
+    }
+
+    return "Continuer";
+  };
+
+  const handleButtonPress = () => {
+    if (isProcessing) return;
+
+    if (syncResult?.requiresManualLogin) {
+      handleManualLogin();
+    } else {
+      handleContinue();
+    }
   };
 
   return (
     <View style={styles.container}>
       <View style={styles.content}>
         <Text style={styles.title}>✅ Paiement Réussi !</Text>
-        <Text style={styles.message}>
-          {isProcessing
-            ? "Création de votre compte en cours..."
-            : loginSuccess
-            ? "Votre compte a été créé et vous êtes maintenant connecté !"
-            : "Votre compte a été créé avec succès !"}
-        </Text>
+        <Text style={styles.message}>{getMessage()}</Text>
+
+        {syncResult && !syncResult.success && (
+          <Text style={styles.errorMessage}>{syncResult.message}</Text>
+        )}
+
         <TouchableOpacity
           style={[styles.button, isProcessing && styles.buttonDisabled]}
-          onPress={handleContinue}
+          onPress={handleButtonPress}
           disabled={isProcessing}
         >
-          <Text style={styles.buttonText}>
-            {isProcessing ? "Traitement..." : "Voir mon compte"}
-          </Text>
+          <Text style={styles.buttonText}>{getButtonText()}</Text>
         </TouchableOpacity>
+
+        {syncResult?.requiresManualLogin && (
+          <TouchableOpacity
+            style={styles.secondaryButton}
+            onPress={handleContinue}
+          >
+            <Text style={styles.secondaryButtonText}>
+              Continuer sans connexion
+            </Text>
+          </TouchableOpacity>
+        )}
       </View>
     </View>
   );
@@ -206,6 +256,25 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 16,
+    fontWeight: "bold",
+    color: "#FFFFFF",
+  },
+  errorMessage: {
+    color: "#FF6B6B",
+    fontSize: 14,
+    textAlign: "center",
+    marginBottom: 20,
+  },
+  secondaryButton: {
+    backgroundColor: "#555555",
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: "#666666",
+  },
+  secondaryButtonText: {
+    fontSize: 14,
     fontWeight: "bold",
     color: "#FFFFFF",
   },

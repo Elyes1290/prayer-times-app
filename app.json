@@ -52,6 +52,11 @@
       "premiumContentBaseUrl": "https://myadhanapp.com/premium",
       "recitationsBaseUrl": "https://myadhanapp.com/api/recitations",
       "adhansBaseUrl": "https://myadhanapp.com/api/adhans"
+    },
+    "development": {
+      "hotReload": false,
+      "fastRefresh": false,
+      "liveReload": false
     }
   }
 }

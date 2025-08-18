@@ -226,10 +226,7 @@
   "hadith": {
     "search_placeholder": "Zoeken op tekst of hadith nummer..."
   },
-  "dhikr": {
-    "recorded": "✅ Dhikr geregistreerd",
-    "added_to_stats": "Deze dhikr is toegevoegd aan uw persoonlijke statistieken."
-  },
+
   "data_deletion": {
     "confirmation": "Weet u zeker dat u het verwijderen van uw account en al uw gegevens wilt aanvragen? Deze actie is onomkeerbaar.",
     "request_recorded": "Verzoek geregistreerd",
@@ -437,6 +434,13 @@
   "dhikr": {
     "title": "Adhkar & Duas",
     "search_placeholder": "Zoeken naar dhikr of dua...",
+    "recorded": "✅ Dhikr opgenomen",
+    "added_to_stats": "Dit dhikr is toegevoegd aan uw persoonlijke statistieken.",
+    "after_prayer": "Dhikr na gebed",
+    "morning_delay": "Vertraging na Fajr (min)",
+    "evening_delay": "Vertraging na Maghrib (min)",
+    "selected_dua": "Geselecteerde dua",
+    "selected_dua_delay": "Vertraging na Dhuhr (min)",
     "categories": {
       "morning": "Ochtend dhikr",
       "evening": "Avond dhikr",
@@ -1168,14 +1172,6 @@
     "download_message": "Wilt u downloaden"
   },
 
-  "dhikr": {
-    "after_prayer": "Dhikr na gebed",
-    "morning_delay": "Vertraging na Fajr (min)",
-    "evening_delay": "Vertraging na Maghrib (min)",
-    "selected_dua": "Geselecteerde dua",
-    "selected_dua_delay": "Vertraging na Dhuhr (min)"
-  },
-
   "general": {
     "settings": "Algemene instellingen",
     "prayer_reminders_before": "Gebedsherinneringen voor",
@@ -1253,6 +1249,44 @@
     "goal_soon_customizable": "Uw doel wordt binnenkort aanpasbaar!",
     "weekly_goal_desc": "Aantal gebeden gericht per week"
   },
+
+  "premium_ui": {
+    "badge": "Premium",
+    "signup_tab": "Premium-account maken",
+    "login_tab": "Inloggen",
+    "signup_info_line1": "Accountaanmaak vereist een Premium-abonnement. Uw account wordt automatisch aangemaakt na betaling.",
+    "signup_info_line2": "Al geabonneerd? Log in met hetzelfde e-mailadres."
+  },
+
+  "auth_modal": {
+    "title": "Premium-account",
+    "signup_tab": "Account maken",
+    "login_tab": "Inloggen",
+    "email_placeholder": "E-mail",
+    "password_placeholder": "Wachtwoord",
+    "firstname_placeholder": "Voornaam of bijnaam",
+    "modify_prefilled_name": "Vooraf ingevulde voornaam wijzigen",
+    "login_button": "Inloggen",
+    "register_button": "Registreren",
+    "info_text_login": "Log in met uw e-mail en wachtwoord.",
+    "info_text_register": "Klik op de ℹ️-icoontjes om details voor elk veld te zien.",
+    "account_exists_message": "Er bestaat al een account met dit e-mailadres. Log in plaats daarvan in.",
+    "firstname_label": "Voornaam of bijnaam",
+    "email_label": "E-mail",
+    "password_label": "Wachtwoord",
+    "firstname_placeholder_empty": "Voornaam of bijnaam",
+    "firstname_placeholder_prefilled": "Vooraf ingevulde voornaam wijzigen",
+    "email_placeholder_text": "E-mail",
+    "password_placeholder_text": "Wachtwoord",
+    "password_criteria_title": "Beveiligingscriteria",
+    "password_min_length": "Ten minste 6 tekens"
+  },
+
+  "location": "Locatie",
+  "backup": "Backup",
+  "download": "Downloaden",
+  "qibla": "Qibla",
+  "favorites": "Favorieten",
 
   "languages": {
     "fr": "Français",

@@ -226,10 +226,7 @@
   "hadith": {
     "search_placeholder": "Поиск по тексту или номеру хадиса..."
   },
-  "dhikr": {
-    "recorded": "✅ Зикр записан",
-    "added_to_stats": "Этот зикр добавлен в вашу личную статистику."
-  },
+
   "data_deletion": {
     "confirmation": "Вы уверены, что хотите запросить удаление вашей учетной записи и всех ваших данных? Это действие необратимо.",
     "request_recorded": "Запрос записан",
@@ -437,6 +434,13 @@
   "dhikr": {
     "title": "Азкары и Дуа",
     "search_placeholder": "Поиск зикра или дуа...",
+    "recorded": "✅ Зикр записан",
+    "added_to_stats": "Этот зикр был добавлен в ваши персональные статистики.",
+    "after_prayer": "Зикр после молитвы",
+    "morning_delay": "Задержка после Фаджр (мин)",
+    "evening_delay": "Задержка после Магриб (мин)",
+    "selected_dua": "Выбранная дуа",
+    "selected_dua_delay": "Задержка после Зухр (мин)",
     "categories": {
       "morning": "Утренний зикр",
       "evening": "Вечерний зикр",
@@ -1168,14 +1172,6 @@
     "download_message": "Хотите скачать"
   },
 
-  "dhikr": {
-    "after_prayer": "Зикр после молитвы",
-    "morning_delay": "Задержка после Фаджр (мин)",
-    "evening_delay": "Задержка после Магриб (мин)",
-    "selected_dua": "Выбранная дуа",
-    "selected_dua_delay": "Задержка после Зухр (мин)"
-  },
-
   "general": {
     "settings": "Общие настройки",
     "prayer_reminders_before": "Напоминания о молитве за",
@@ -1253,6 +1249,44 @@
     "goal_soon_customizable": "Ваша цель скоро будет настраиваемой!",
     "weekly_goal_desc": "Количество молитв, нацеленных на неделю"
   },
+
+  "premium_ui": {
+    "badge": "Премиум",
+    "signup_tab": "Создать премиум-аккаунт",
+    "login_tab": "Войти",
+    "signup_info_line1": "Создание аккаунта требует премиум-подписки. Ваш аккаунт будет создан автоматически после оплаты.",
+    "signup_info_line2": "Уже подписаны? Войдите с тем же email."
+  },
+
+  "auth_modal": {
+    "title": "Премиум-аккаунт",
+    "signup_tab": "Создать аккаунт",
+    "login_tab": "Войти",
+    "email_placeholder": "Email",
+    "password_placeholder": "Пароль",
+    "firstname_placeholder": "Имя или псевдоним",
+    "modify_prefilled_name": "Изменить предзаполненное имя",
+    "login_button": "Войти",
+    "register_button": "Зарегистрироваться",
+    "info_text_login": "Войдите с вашим email и паролем.",
+    "info_text_register": "Нажмите на иконки ℹ️, чтобы увидеть детали для каждого поля.",
+    "account_exists_message": "Аккаунт с этим email уже существует. Пожалуйста, войдите вместо этого.",
+    "firstname_label": "Имя или псевдоним",
+    "email_label": "Email",
+    "password_label": "Пароль",
+    "firstname_placeholder_empty": "Имя или псевдоним",
+    "firstname_placeholder_prefilled": "Изменить предзаполненное имя",
+    "email_placeholder_text": "Email",
+    "password_placeholder_text": "Пароль",
+    "password_criteria_title": "Критерии безопасности",
+    "password_min_length": "Не менее 6 символов"
+  },
+
+  "location": "Местоположение",
+  "backup": "Резервная копия",
+  "download": "Скачать",
+  "qibla": "Кибла",
+  "favorites": "Избранное",
 
   "languages": {
     "fr": "Français",

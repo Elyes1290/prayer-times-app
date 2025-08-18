@@ -8,6 +8,9 @@ require_once 'config.php';
 // 🚀 CORRECTION : Supprimer l'inclusion de users.php qui cause un conflit de routage
 // require_once 'users.php'; // ❌ SUPPRIMÉ - Cause un conflit de routage
 
+// 🛡️ NOUVEAU : Rate Limiting pour auth.php
+require_once 'rate-limiter-new.php';
+
 $method = $_SERVER['REQUEST_METHOD'];
 $data = getRequestData();
 
@@ -66,6 +69,24 @@ try {
  */
 function handleLogin() {
     global $data;
+    
+    // 🛡️ NOUVEAU : Rate Limiting pour login
+    $pdo = getDBConnection();
+    $rateLimiter = new RateLimiterNew($pdo);
+    $ip = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
+    $userAgent = $_SERVER['HTTP_USER_AGENT'] ?? null;
+    
+    $rateLimitResult = $rateLimiter->checkRateLimit($ip, 'auth_login', 10, 3600, $userAgent);
+    if (!$rateLimitResult['allowed']) {
+        http_response_code(429);
+        echo json_encode([
+            'success' => false,
+            'error' => 'Trop de tentatives de connexion - veuillez patienter',
+            'details' => $rateLimitResult,
+            'timestamp' => date('Y-m-d H:i:s')
+        ]);
+        exit();
+    }
     
     error_log("handleLogin() called with data: " . json_encode($data));
     
@@ -153,6 +174,24 @@ function handleLogin() {
  */
 function handleRegister() {
     global $data;
+    
+    // 🛡️ NOUVEAU : Rate Limiting pour register
+    $pdo = getDBConnection();
+    $rateLimiter = new RateLimiterNew($pdo);
+    $ip = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
+    $userAgent = $_SERVER['HTTP_USER_AGENT'] ?? null;
+    
+    $rateLimitResult = $rateLimiter->checkRateLimit($ip, 'auth_register', 5, 3600, $userAgent);
+    if (!$rateLimitResult['allowed']) {
+        http_response_code(429);
+        echo json_encode([
+            'success' => false,
+            'error' => 'Trop de tentatives d\'inscription - veuillez patienter',
+            'details' => $rateLimitResult,
+            'timestamp' => date('Y-m-d H:i:s')
+        ]);
+        exit();
+    }
     
     $email = $data['email'] ?? null;
     $password = $data['password'] ?? null;
@@ -468,6 +507,24 @@ function handleMigrateFirebase() {
  * GET /api/auth.php?token=xxx - Vérifier un token
  */
 function handleVerifyAuth() {
+    // 🛡️ NOUVEAU : Rate Limiting pour verifyAuth
+    $pdo = getDBConnection();
+    $rateLimiter = new RateLimiterNew($pdo);
+    $ip = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
+    $userAgent = $_SERVER['HTTP_USER_AGENT'] ?? null;
+    
+    $rateLimitResult = $rateLimiter->checkRateLimit($ip, 'auth_verify', 20, 3600, $userAgent);
+    if (!$rateLimitResult['allowed']) {
+        http_response_code(429);
+        echo json_encode([
+            'success' => false,
+            'error' => 'Trop de vérifications d\'authentification - veuillez patienter',
+            'details' => $rateLimitResult,
+            'timestamp' => date('Y-m-d H:i:s')
+        ]);
+        exit();
+    }
+    
     // 🔐 Nouveau: validation réelle via user_sessions
     $token = getBearerToken();
     if (!$token) {

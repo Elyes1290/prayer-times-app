@@ -226,10 +226,7 @@
   "hadith": {
     "search_placeholder": "متن یا حدیث نمبر سے تلاش کریں..."
   },
-  "dhikr": {
-    "recorded": "✅ ذکر ریکارڈ کیا گیا",
-    "added_to_stats": "یہ ذکر آپ کی ذاتی اعداد و شمار میں شامل کر دیا گیا ہے۔"
-  },
+
   "data_deletion": {
     "confirmation": "کیا آپ واقعی اپنے اکاؤنٹ اور تمام اپنے ڈیٹا کی حذف کی درخواست کرنا چاہتے ہیں؟ یہ عمل ناقابل واپسی ہے۔",
     "request_recorded": "درخواست ریکارڈ کی گئی",
@@ -437,6 +434,13 @@
   "dhikr": {
     "title": "ذکر اور دوا",
     "search_placeholder": "ذکر یا دوا کے ساتھ تلاش کریں...",
+    "recorded": "✅ ذکر ریکارڈ کر دیا گیا",
+    "added_to_stats": "اس ذکر کو آپ کی ذاتی اعداد و شمار میں شامل کر دیا گیا۔",
+    "after_prayer": "نماز کے بعد ذکر",
+    "morning_delay": "فجر کے بعد تاخیر (منٹ)",
+    "evening_delay": "مغرب کے بعد تاخیر (منٹ)",
+    "selected_dua": "منتخب دوا",
+    "selected_dua_delay": "ظہر کے بعد تاخیر (منٹ)",
     "categories": {
       "morning": "پہلے صبح کے ذکر",
       "evening": "مغرب کے ذکر",
@@ -1168,14 +1172,6 @@
     "download_message": "کیا آپ ڈاؤن لوڈ کرنا چاہتے ہیں"
   },
 
-  "dhikr": {
-    "after_prayer": "نماز کے بعد ذکر",
-    "morning_delay": "فجر کے بعد تاخیر (منٹ)",
-    "evening_delay": "مغرب کے بعد تاخیر (منٹ)",
-    "selected_dua": "منتخب دعا",
-    "selected_dua_delay": "ظہر کے بعد تاخیر (منٹ)"
-  },
-
   "general": {
     "settings": "عام ترتیبات",
     "prayer_reminders_before": "نماز سے پہلے یاد دہانیاں",
@@ -1253,6 +1249,44 @@
     "goal_soon_customizable": "آپ کا ہدف جلد قابل تخصیص ہوگا!",
     "weekly_goal_desc": "ہفتے میں ہدف شدہ نمازوں کی تعداد"
   },
+
+  "premium_ui": {
+    "badge": "پریمیم",
+    "signup_tab": "پریمیم اکاؤنٹ بنائیں",
+    "login_tab": "لاگ ان کریں",
+    "signup_info_line1": "اکاؤنٹ بنانے کے لیے پریمیم سبسکرپشن درکار ہے۔ آپ کا اکاؤنٹ ادائیگی کے بعد خود بخود بن جائے گا۔",
+    "signup_info_line2": "پہلے سے سبسکرائب ہیں؟ اسی ای میل سے لاگ ان کریں۔"
+  },
+
+  "auth_modal": {
+    "title": "پریمیم اکاؤنٹ",
+    "signup_tab": "اکاؤنٹ بنائیں",
+    "login_tab": "لاگ ان کریں",
+    "email_placeholder": "ای میل",
+    "password_placeholder": "پاس ورڈ",
+    "firstname_placeholder": "پہلا نام یا عرفیت",
+    "modify_prefilled_name": "پہلے سے بھرا ہوا نام تبدیل کریں",
+    "login_button": "لاگ ان کریں",
+    "register_button": "رجسٹر کریں",
+    "info_text_login": "اپنے ای میل اور پاس ورڈ سے لاگ ان کریں۔",
+    "info_text_register": "ہر فیلڈ کی تفصیلات دیکھنے کے لیے ℹ️ آئیکنز پر کلک کریں۔",
+    "account_exists_message": "اس ای میل کے ساتھ پہلے سے اکاؤنٹ موجود ہے۔ براہ کرم اس کی بجائے لاگ ان کریں۔",
+    "firstname_label": "پہلا نام یا عرفیت",
+    "email_label": "ای میل",
+    "password_label": "پاس ورڈ",
+    "firstname_placeholder_empty": "پہلا نام یا عرفیت",
+    "firstname_placeholder_prefilled": "پہلے سے بھرا ہوا نام تبدیل کریں",
+    "email_placeholder_text": "ای میل",
+    "password_placeholder_text": "پاس ورڈ",
+    "password_criteria_title": "سیکیورٹی کے معیارات",
+    "password_min_length": "کم از کم 6 حروف"
+  },
+
+  "location": "مقام",
+  "backup": "بیک اپ",
+  "download": "ڈاؤن لوڈ",
+  "qibla": "قبلہ",
+  "favorites": "پسندیدہ",
 
   "languages": {
     "fr": "Français",

@@ -862,7 +862,9 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
               ref={firstNameRef}
               style={localStyles.input}
               placeholder={
-                firstName ? "Modifier le prénom pré-rempli" : "Prénom ou pseudo"
+                firstName
+                  ? t("auth_modal.firstname_placeholder_prefilled")
+                  : t("auth_modal.firstname_placeholder_empty")
               }
               value={firstName}
               onChangeText={(text) => {
@@ -908,7 +910,7 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
           <TextInput
             ref={emailRef}
             style={localStyles.input}
-            placeholder={isLogin ? "Email" : "Email"}
+            placeholder={t("auth_modal.email_placeholder_text")}
             value={email}
             onChangeText={(text) => {
               setEmail(text);
@@ -956,7 +958,7 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
           <TextInput
             ref={passwordRef}
             style={localStyles.input}
-            placeholder={isLogin ? "Mot de passe" : "Mot de passe"}
+            placeholder={t("auth_modal.password_placeholder_text")}
             value={password}
             onChangeText={(text) => {
               setPassword(text);
@@ -1012,7 +1014,7 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
         {!isLogin && password.length > 0 && (
           <View style={localStyles.passwordValidationContainer}>
             <Text style={localStyles.passwordValidationTitle}>
-              Critères de sécurité :
+              {t("auth_modal.password_criteria_title")} :
             </Text>
             {(() => {
               const validation = getPasswordValidationDetails(password);
@@ -1032,7 +1034,7 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
                         validation.minLength && localStyles.validationTextValid,
                       ]}
                     >
-                      Au moins 6 caractères
+                      {t("auth_modal.password_min_length")}
                     </Text>
                   </View>
                   <View style={localStyles.validationItem}>

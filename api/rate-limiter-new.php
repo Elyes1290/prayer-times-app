@@ -117,14 +117,46 @@ class RateLimiterNew {
             '178.197.195.194',
             '2a02:1210:5818:9b00',
             '127.0.0.1',
-            '::1'
+            '::1',
+            // 🚀 NOUVEAU : Adresses IP de développement/test
+            '192.168.1.1',
+            '192.168.1.2',
+            '192.168.1.3',
+            '192.168.1.4',
+            '192.168.1.5',
+            '192.168.1.6',
+            '192.168.1.7',
+            '192.168.1.8',
+            '192.168.1.9',
+            '192.168.1.10',
+            '10.0.0.1',
+            '10.0.0.2',
+            '10.0.0.3',
+            '10.0.0.4',
+            '10.0.0.5',
+            '172.16.0.1',
+            '172.16.0.2',
+            '172.16.0.3',
+            '172.16.0.4',
+            '172.16.0.5'
         ];
+        
+        // 🚀 NOUVEAU : Autoriser toutes les adresses IP locales pour le développement
+        if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) === false) {
+            // IP privée/réservée (développement local)
+            return true;
+        }
         
         foreach ($whitelist as $allowed) {
             if ($ip === $allowed) {
                 return true;
             }
+            // 🚀 CORRECTION : Comparaison IPv6 plus robuste
             if (strpos($allowed, '2a02:1210:5818:9b00') === 0 && strpos($ip, '2a02:1210:5818:9b00') === 0) {
+                return true;
+            }
+            // 🚀 NOUVEAU : Autoriser toutes les adresses IPv6 de votre plage
+            if (strpos($ip, '2a02:1210:5818:9b00') === 0) {
                 return true;
             }
         }

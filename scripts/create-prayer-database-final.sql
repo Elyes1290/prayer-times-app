@@ -944,3 +944,47 @@ ANALYZE TABLE rate_limits;
 ANALYZE TABLE payment_monitoring;
 ANALYZE TABLE refresh_tokens;
 
+
+-- supprimer un users et toutes ses données
+
+-- ��️ COMMANDE SQL POUR SUPPRIMER UN UTILISATEUR ET TOUTES SES DONNÉES
+-- Remplacez 'USER_ID' par l'ID de l'utilisateur à supprimer
+-- Remplacez 'user@example.com' par l'email de l'utilisateur à supprimer
+
+-- Option 1: Suppression par ID utilisateur
+DELETE FROM users WHERE id = USER_ID;
+
+-- Option 2: Suppression par email utilisateur  
+DELETE FROM users WHERE email = 'user@example.com';
+
+-- �� VÉRIFICATION AVANT SUPPRESSION (recommandé)
+-- Exécutez d'abord ces requêtes pour voir ce qui sera supprimé :
+
+-- Voir les informations de l'utilisateur
+SELECT id, email, user_first_name, premium_status, created_at, last_seen 
+FROM users 
+WHERE id = USER_ID OR email = 'user@example.com';
+
+-- Compter les données associées qui seront supprimées automatiquement (CASCADE)
+SELECT 
+    (SELECT COUNT(*) FROM user_sessions WHERE user_id = u.id) as sessions_count,
+    (SELECT COUNT(*) FROM refresh_tokens WHERE user_id = u.id) as refresh_tokens_count,
+    (SELECT COUNT(*) FROM usage_logs WHERE user_id = u.id) as usage_logs_count,
+    (SELECT COUNT(*) FROM favorites WHERE user_id = u.id) as favorites_count,
+    (SELECT COUNT(*) FROM premium_purchases WHERE user_id = u.id) as premium_purchases_count,
+    (SELECT COUNT(*) FROM premium_subscriptions WHERE user_id = u.id) as premium_subscriptions_count,
+    (SELECT COUNT(*) FROM premium_users WHERE user_id = u.id) as premium_users_count,
+    (SELECT COUNT(*) FROM premium_payments WHERE user_id = u.id) as premium_payments_count,
+    (SELECT COUNT(*) FROM user_stats WHERE user_id = u.id) as user_stats_count,
+    (SELECT COUNT(*) FROM prayer_logs WHERE user_id = u.id) as prayer_logs_count,
+    (SELECT COUNT(*) FROM user_achievements WHERE user_id = u.id) as achievements_count,
+    (SELECT COUNT(*) FROM user_backups WHERE user_id = u.id) as backups_count,
+    (SELECT COUNT(*) FROM bug_reports WHERE user_id = u.id) as bug_reports_count
+FROM users u 
+WHERE u.id = USER_ID OR u.email = 'user@example.com';
+
+
+
+
+
+

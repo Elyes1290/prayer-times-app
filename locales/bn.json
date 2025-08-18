@@ -226,10 +226,7 @@
   "hadith": {
     "search_placeholder": "পাঠ বা হাদীস নম্বর দিয়ে খোঁজুন..."
   },
-  "dhikr": {
-    "recorded": "✅ জিকর রেকর্ড করা হয়েছে",
-    "added_to_stats": "এই জিকর আপনার ব্যক্তিগত পরিসংখ্যানে যোগ করা হয়েছে।"
-  },
+
   "data_deletion": {
     "confirmation": "আপনি কি নিশ্চিত যে আপনি আপনার অ্যাকাউন্ট এবং সমস্ত ডেটা মুছে ফেলার অনুরোধ করতে চান? এই কাজটি অপরিবর্তনীয়।",
     "request_recorded": "অনুরোধ রেকর্ড করা হয়েছে",
@@ -437,6 +434,13 @@
   "dhikr": {
     "title": "জিকর ও দোয়া",
     "search_placeholder": "জিকর বা দোয়া খোঁজুন...",
+    "recorded": "✅ জিকর রেকর্ড করা হয়েছে",
+    "added_to_stats": "এই জিকরটি আপনার ব্যক্তিগত পরিসংখ্যানে যোগ করা হয়েছে।",
+    "after_prayer": "নামাযের পর জিকর",
+    "morning_delay": "ফজরের পর বিলম্ব (মিনিট)",
+    "evening_delay": "মাগরিবের পর বিলম্ব (মিনিট)",
+    "selected_dua": "নির্বাচিত দোয়া",
+    "selected_dua_delay": "যোহরের পর বিলম্ব (মিনিট)",
     "categories": {
       "morning": "সকালের জিকর",
       "evening": "সন্ধ্যার জিকর",
@@ -1168,14 +1172,6 @@
     "download_message": "আপনি কি ডাউনলোড করতে চান"
   },
 
-  "dhikr": {
-    "after_prayer": "নামাযের পর জিকর",
-    "morning_delay": "ফজরের পর বিলম্ব (মিনিট)",
-    "evening_delay": "মাগরিবের পর বিলম্ব (মিনিট)",
-    "selected_dua": "নির্বাচিত দোয়া",
-    "selected_dua_delay": "যোহরের পর বিলম্ব (মিনিট)"
-  },
-
   "general": {
     "settings": "সাধারণ সেটিংস",
     "prayer_reminders_before": "নামাযের রিমাইন্ডার আগে",
@@ -1253,6 +1249,44 @@
     "goal_soon_customizable": "আপনার লক্ষ্য শীঘ্রই কাস্টমাইজযোগ্য হবে!",
     "weekly_goal_desc": "সপ্তাহে লক্ষ্য করা নামাযের সংখ্যা"
   },
+
+  "premium_ui": {
+    "badge": "প্রিমিয়াম",
+    "signup_tab": "প্রিমিয়াম অ্যাকাউন্ট তৈরি করুন",
+    "login_tab": "লগইন",
+    "signup_info_line1": "অ্যাকাউন্ট তৈরি করতে প্রিমিয়াম সাবস্ক্রিপশন প্রয়োজন। আপনার অ্যাকাউন্ট পেমেন্টের পর স্বয়ংক্রিয়ভাবে তৈরি হবে।",
+    "signup_info_line2": "ইতিমধ্যে সাবস্ক্রাইব করেছেন? একই ইমেইল দিয়ে লগইন করুন।"
+  },
+
+  "auth_modal": {
+    "title": "প্রিমিয়াম অ্যাকাউন্ট",
+    "signup_tab": "অ্যাকাউন্ট তৈরি করুন",
+    "login_tab": "লগইন",
+    "email_placeholder": "ইমেইল",
+    "password_placeholder": "পাসওয়ার্ড",
+    "firstname_placeholder": "নাম বা ডাকনাম",
+    "modify_prefilled_name": "পূর্ব-পূরণকৃত নাম পরিবর্তন করুন",
+    "login_button": "লগইন",
+    "register_button": "নিবন্ধন",
+    "info_text_login": "আপনার ইমেইল এবং পাসওয়ার্ড দিয়ে লগইন করুন।",
+    "info_text_register": "প্রতিটি ক্ষেত্রের বিবরণ দেখতে ℹ️ আইকনে ক্লিক করুন।",
+    "account_exists_message": "এই ইমেইল দিয়ে ইতিমধ্যে একটি অ্যাকাউন্ট বিদ্যমান। অনুগ্রহ করে লগইন করুন।",
+    "firstname_label": "নাম বা ডাকনাম",
+    "email_label": "ইমেইল",
+    "password_label": "পাসওয়ার্ড",
+    "firstname_placeholder_empty": "নাম বা ডাকনাম",
+    "firstname_placeholder_prefilled": "পূর্ব-পূরণকৃত নাম পরিবর্তন করুন",
+    "email_placeholder_text": "ইমেইল",
+    "password_placeholder_text": "পাসওয়ার্ড",
+    "password_criteria_title": "নিরাপত্তার মানদণ্ড",
+    "password_min_length": "কমপক্ষে ৬টি অক্ষর"
+  },
+
+  "location": "অবস্থান",
+  "backup": "ব্যাকআপ",
+  "download": "ডাউনলোড",
+  "qibla": "কিবলা",
+  "favorites": "প্রিয়",
 
   "languages": {
     "fr": "Français",

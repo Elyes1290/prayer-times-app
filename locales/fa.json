@@ -226,10 +226,7 @@
   "hadith": {
     "search_placeholder": "جستجو بر اساس متن یا شماره حدیث..."
   },
-  "dhikr": {
-    "recorded": "✅ ذکر ثبت شد",
-    "added_to_stats": "این ذکر به آمار شخصی شما اضافه شده است."
-  },
+
   "data_deletion": {
     "confirmation": "آیا مطمئن هستید که می‌خواهید حذف حساب کاربری و تمام داده‌های خود را درخواست کنید؟ این عمل غیرقابل بازگشت است.",
     "request_recorded": "درخواست ثبت شد",
@@ -437,6 +434,13 @@
   "dhikr": {
     "title": "اذکار و دعاها",
     "search_placeholder": "جستجوی ذکر یا دعا...",
+    "recorded": "✅ ذکر ثبت شد",
+    "added_to_stats": "این ذکر به آمار شخصی شما اضافه شده است.",
+    "after_prayer": "ذکر بعد از صلوات",
+    "morning_delay": "تأخیر بعد از فجر (دقیقه)",
+    "evening_delay": "تأخیر بعد از مغرب (دقیقه)",
+    "selected_dua": "دعای انتخاب شده",
+    "selected_dua_delay": "تأخیر بعد از ظهر (دقیقه)",
     "categories": {
       "morning": "ذکر صبحگاهی",
       "evening": "ذکر شامگاهی",
@@ -1168,14 +1172,6 @@
     "download_message": "آیا می‌خواهید دانلود کنید"
   },
 
-  "dhikr": {
-    "after_prayer": "ذکر بعد از صلوات",
-    "morning_delay": "تأخیر بعد از فجر (دقیقه)",
-    "evening_delay": "تأخیر بعد از مغرب (دقیقه)",
-    "selected_dua": "دعای انتخاب شده",
-    "selected_dua_delay": "تأخیر بعد از ظهر (دقیقه)"
-  },
-
   "general": {
     "settings": "تنظیمات عمومی",
     "prayer_reminders_before": "یادآوری‌های صلوات قبل از",
@@ -1253,6 +1249,44 @@
     "goal_soon_customizable": "هدف شما به زودی قابل تنظیم خواهد بود!",
     "weekly_goal_desc": "تعداد صلوات هدف شده در هفته"
   },
+
+  "premium_ui": {
+    "badge": "پریمیوم",
+    "signup_tab": "ایجاد حساب کاربری پریمیوم",
+    "login_tab": "ورود",
+    "signup_info_line1": "ایجاد حساب کاربری نیاز به اشتراک پریمیوم دارد. حساب کاربری شما پس از پرداخت به طور خودکار ایجاد خواهد شد.",
+    "signup_info_line2": "قبلاً مشترک شده‌اید؟ با همان ایمیل وارد شوید."
+  },
+
+  "auth_modal": {
+    "title": "حساب کاربری پریمیوم",
+    "signup_tab": "ایجاد حساب کاربری",
+    "login_tab": "ورود",
+    "email_placeholder": "ایمیل",
+    "password_placeholder": "رمز عبور",
+    "firstname_placeholder": "نام یا نام مستعار",
+    "modify_prefilled_name": "تغییر نام پیش‌فرض",
+    "login_button": "ورود",
+    "register_button": "ثبت نام",
+    "info_text_login": "با ایمیل و رمز عبور خود وارد شوید.",
+    "info_text_register": "برای دیدن جزئیات هر فیلد روی آیکون‌های ℹ️ کلیک کنید.",
+    "account_exists_message": "حساب کاربری با این ایمیل قبلاً وجود دارد. لطفاً وارد شوید.",
+    "firstname_label": "نام یا نام مستعار",
+    "email_label": "ایمیل",
+    "password_label": "رمز عبور",
+    "firstname_placeholder_empty": "نام یا نام مستعار",
+    "firstname_placeholder_prefilled": "تغییر نام پیش‌فرض",
+    "email_placeholder_text": "ایمیل",
+    "password_placeholder_text": "رمز عبور",
+    "password_criteria_title": "معیارهای امنیت",
+    "password_min_length": "حداقل ۶ کاراکتر"
+  },
+
+  "location": "موقعیت",
+  "backup": "پشتیبان‌گیری",
+  "download": "دانلود",
+  "qibla": "قبله",
+  "favorites": "مورد علاقه",
 
   "languages": {
     "fr": "فرانسه",

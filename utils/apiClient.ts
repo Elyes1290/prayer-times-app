@@ -1,13 +1,135 @@
-import * as AsyncStorageModule from "@react-native-async-storage/async-storage";
+import axios, { AxiosInstance, AxiosResponse, AxiosError } from "axios";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Platform } from "react-native";
 
-import { getCurrentUserId } from "./userAuth";
-import { AppConfig } from "./config";
-import i18n from "../locales/i18n";
-import { showGlobalToast } from "../contexts/ToastContext";
+// 🚨 NOUVEAU : Système de rate limiting intelligent
+class RateLimiter {
+  private requestCounts: Map<string, { count: number; resetTime: number }> =
+    new Map();
+  private readonly WINDOW_SIZE = 60000; // 1 minute
+  private readonly MAX_REQUESTS = 10; // Max 10 requêtes par minute par endpoint
 
-// Compatibilité ESM/CJS pour les tests: certains mocks exposent default, d'autres nommés
-const AsyncStorage: any =
-  (AsyncStorageModule as any)?.default ?? (AsyncStorageModule as any);
+  canMakeRequest(endpoint: string): boolean {
+    const now = Date.now();
+    const key = this.getRateLimitKey(endpoint);
+    const requestData = this.requestCounts.get(key);
+
+    if (!requestData || now > requestData.resetTime) {
+      // Nouvelle fenêtre de temps
+      this.requestCounts.set(key, {
+        count: 1,
+        resetTime: now + this.WINDOW_SIZE,
+      });
+      return true;
+    }
+
+    if (requestData.count >= this.MAX_REQUESTS) {
+      console.log(
+        `🚫 Rate limit atteint pour ${endpoint} - attente de ${Math.ceil(
+          (requestData.resetTime - now) / 1000
+        )}s`
+      );
+      return false;
+    }
+
+    requestData.count++;
+    return true;
+  }
+
+  private getRateLimitKey(endpoint: string): string {
+    // Grouper les endpoints d'authentification ensemble
+    if (endpoint.includes("auth.php")) {
+      return "auth_endpoints";
+    }
+    return endpoint;
+  }
+
+  getWaitTime(endpoint: string): number {
+    const key = this.getRateLimitKey(endpoint);
+    const requestData = this.requestCounts.get(key);
+    if (!requestData) return 0;
+
+    const now = Date.now();
+    return Math.max(0, requestData.resetTime - now);
+  }
+}
+
+const rateLimiter = new RateLimiter();
+
+// 🚨 NOUVEAU : Gestion intelligente des retry avec backoff exponentiel
+class RetryManager {
+  private retryCounts: Map<string, number> = new Map();
+  private readonly MAX_RETRIES = 3;
+  private readonly BASE_DELAY = 1000; // 1 seconde
+
+  async executeWithRetry<T>(
+    operation: () => Promise<T>,
+    endpoint: string,
+    context: string = "unknown"
+  ): Promise<T> {
+    let lastError: any;
+
+    for (let attempt = 0; attempt <= this.MAX_RETRIES; attempt++) {
+      try {
+        // Vérifier le rate limiting avant chaque tentative
+        if (!rateLimiter.canMakeRequest(endpoint)) {
+          const waitTime = rateLimiter.getWaitTime(endpoint);
+          console.log(
+            `⏳ Attente rate limit: ${Math.ceil(
+              waitTime / 1000
+            )}s pour ${endpoint}`
+          );
+          await new Promise((resolve) => setTimeout(resolve, waitTime));
+        }
+
+        const result = await operation();
+
+        // Réinitialiser le compteur de retry en cas de succès
+        this.retryCounts.delete(endpoint);
+        return result;
+      } catch (error: any) {
+        lastError = error;
+
+        // Ne pas retry sur les erreurs 429 (rate limit)
+        if (error?.response?.status === 429) {
+          console.log(`🚫 Rate limit détecté pour ${endpoint} - pas de retry`);
+          const waitTime = rateLimiter.getWaitTime(endpoint);
+          if (waitTime > 0) {
+            console.log(`⏳ Attente forcée: ${Math.ceil(waitTime / 1000)}s`);
+            await new Promise((resolve) => setTimeout(resolve, waitTime));
+          }
+          break;
+        }
+
+        // Ne pas retry sur les erreurs 401/403 (authentification)
+        if (
+          error?.response?.status === 401 ||
+          error?.response?.status === 403
+        ) {
+          console.log(
+            `🔐 Erreur d'authentification pour ${endpoint} - pas de retry`
+          );
+          break;
+        }
+
+        if (attempt < this.MAX_RETRIES) {
+          const delay = this.BASE_DELAY * Math.pow(2, attempt);
+          console.log(
+            `🔄 Tentative ${attempt + 1}/${
+              this.MAX_RETRIES
+            } échouée pour ${endpoint} - retry dans ${delay}ms`
+          );
+          await new Promise((resolve) => setTimeout(resolve, delay));
+        }
+      }
+    }
+
+    throw lastError;
+  }
+}
+
+const retryManager = new RetryManager();
+
 // Helpers sûrs pour l'environnement de test (où le mock peut être partiel)
 const safeGetItem = async (key: string): Promise<string | null> => {
   try {
@@ -24,6 +146,12 @@ const safeSetItem = async (key: string, value: string): Promise<void> => {
     }
   } catch {}
 };
+
+// Import des dépendances nécessaires
+import { getCurrentUserId } from "./userAuth";
+import { AppConfig } from "./config";
+import i18n from "../locales/i18n";
+import { showGlobalToast } from "../contexts/ToastContext";
 // Import conditionnel pour DeviceInfo (désactivé car non utilisé)
 // let DeviceInfo: any = null;
 // try {
