@@ -2,8 +2,8 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import * as NavigationBar from "expo-navigation-bar";
 import { Tabs } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import React, { useEffect, useRef } from "react";
-import { Platform, View, StyleSheet, Animated } from "react-native";
+import React, { useEffect } from "react";
+import { Platform, View, Animated } from "react-native";
 import { SettingsProvider } from "../contexts/SettingsContext";
 import { FavoritesProvider, useFavorites } from "../contexts/FavoritesContext";
 import { PremiumProvider, usePremium } from "../contexts/PremiumContext";
@@ -15,7 +15,7 @@ import { clearUserStatsCache } from "../utils/clearAppData";
 import { showGlobalToast, ToastProvider } from "../contexts/ToastContext";
 import i18n from "../locales/i18n";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import apiClient from "../utils/apiClient";
+import { verifyAuth } from "../utils/apiClient";
 
 // 🚨 NOUVEAU : Protection contre les reloads Expo en mode développement
 let isAbonnementProcessActive = false;
@@ -232,12 +232,12 @@ export default function TabLayout() {
             console.log(
               "🔐 Vérification token au démarrage - utilisateur connecté"
             );
-            const verify = await apiClient.verifyAuth();
+            const verify = await verifyAuth();
             console.log(
               "🔐 Vérification token au démarrage (verifyAuth):",
-              verify?.success
+              verify
             );
-            if (!verify?.success) {
+            if (!verify) {
               console.log("❌ Token invalide détecté, déconnexion...");
               await AsyncStorage.multiRemove([
                 "auth_token",
@@ -297,7 +297,7 @@ export default function TabLayout() {
     };
 
     initializeApp();
-  }, []); // Dépendances vides = exécution unique au montage
+  }, [forceLogout, forceReset]); // Inclure les dépendances manquantes
 
   // 🔄 Forcer la mise à jour des contextes quand forceRefresh change
   useEffect(() => {
@@ -569,31 +569,3 @@ export default function TabLayout() {
     </SettingsProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  tabIconContainer: {
-    width: 50,
-    height: 50,
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 25,
-  },
-  tabIconGradient: {
-    width: "100%",
-    height: "100%",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 25,
-  },
-  tabIconGradientActive: {
-    shadowColor: "#ffd700",
-    shadowOffset: {
-      width: 0,
-      height: 0,
-    },
-    shadowOpacity: 0.5,
-    shadowRadius: 10,
-  },
-});

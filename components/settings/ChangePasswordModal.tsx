@@ -9,12 +9,10 @@ import {
   Alert,
   KeyboardAvoidingView,
   Platform,
-  ViewStyle,
-  TextStyle,
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useSettings } from "../../contexts/SettingsContext";
-import { usePremium } from "../../contexts/PremiumContext";
+// import { usePremium } from "../../contexts/PremiumContext";
 import { useToast } from "../../contexts/ToastContext";
 import { useTranslation } from "react-i18next";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -33,7 +31,6 @@ export default function ChangePasswordModal({
   const { t } = useTranslation();
   const { showToast } = useToast();
   const { currentTheme } = useSettings();
-  const { user } = usePremium();
   const { getErrorTitle, getErrorMessage } = useErrorHandler();
 
   const [currentPassword, setCurrentPassword] = useState("");
@@ -91,18 +88,21 @@ export default function ChangePasswordModal({
   };
 
   const getPasswordStrengthText = (strength: number) => {
-    if (strength <= 2) return "Faible";
-    if (strength <= 3) return "Moyen";
-    if (strength <= 4) return "Bon";
-    return "Excellent";
+    if (strength <= 2) return t("password.password_strength_weak", "Faible");
+    if (strength <= 3) return t("password.password_strength_medium", "Moyen");
+    if (strength <= 4) return t("password.password_strength_good", "Bon");
+    return t("password.password_strength_excellent", "Excellent");
   };
 
   const handleChangePassword = async () => {
     if (!currentPassword.trim()) {
       showToast({
         type: "error",
-        title: "Erreur",
-        message: "Veuillez saisir votre mot de passe actuel",
+        title: t("password.error", "Erreur"),
+        message: t(
+          "validation_password_required",
+          "Veuillez saisir votre mot de passe"
+        ),
       });
       currentPasswordRef.current?.focus();
       return;
@@ -111,9 +111,11 @@ export default function ChangePasswordModal({
     if (!newPasswordValidation.isValid) {
       showToast({
         type: "error",
-        title: "Erreur",
-        message:
-          "Le nouveau mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial",
+        title: t("password.error", "Erreur"),
+        message: t(
+          "password.criteria",
+          "Le nouveau mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial"
+        ),
       });
       newPasswordRef.current?.focus();
       return;
@@ -122,8 +124,11 @@ export default function ChangePasswordModal({
     if (!confirmPasswordValidation) {
       showToast({
         type: "error",
-        title: "Erreur",
-        message: "Les mots de passe ne correspondent pas",
+        title: t("password.error", "Erreur"),
+        message: t(
+          "password_mismatch",
+          "Les mots de passe ne correspondent pas"
+        ),
       });
       confirmPasswordRef.current?.focus();
       return;
@@ -133,9 +138,11 @@ export default function ChangePasswordModal({
     if (currentPassword === newPassword) {
       showToast({
         type: "error",
-        title: "Erreur",
-        message:
-          "Le nouveau mot de passe ne peut pas être identique à l'ancien",
+        title: t("password.error", "Erreur"),
+        message: t(
+          "password.same_password_error",
+          "Le nouveau mot de passe ne peut pas être identique à l'ancien"
+        ),
       });
       newPasswordRef.current?.focus();
       return;
@@ -167,8 +174,11 @@ export default function ChangePasswordModal({
       if (response.success) {
         showToast({
           type: "success",
-          title: "Succès",
-          message: "Mot de passe modifié avec succès",
+          title: t("password.success", "Succès"),
+          message: t(
+            "password.password_changed_success",
+            "Mot de passe modifié avec succès"
+          ),
         });
 
         // Réinitialiser les champs
@@ -180,7 +190,11 @@ export default function ChangePasswordModal({
         onClose();
       } else {
         throw new Error(
-          response.message || "Erreur lors du changement de mot de passe"
+          response.message ||
+            t(
+              "password.password_change_error",
+              "Erreur lors du changement de mot de passe"
+            )
         );
       }
     } catch (error: any) {
@@ -204,12 +218,15 @@ export default function ChangePasswordModal({
     if (isLoading) return;
 
     Alert.alert(
-      "Annuler",
-      "Êtes-vous sûr de vouloir annuler ? Les modifications seront perdues.",
+      t("password.cancel", "Annuler"),
+      t(
+        "password.cancel_changes_message",
+        "Êtes-vous sûr de vouloir annuler ? Les modifications seront perdues."
+      ),
       [
-        { text: "Continuer", style: "cancel" },
+        { text: t("password.continue", "Continuer"), style: "cancel" },
         {
-          text: "Annuler",
+          text: t("password.cancel", "Annuler"),
           style: "destructive",
           onPress: () => {
             setCurrentPassword("");
@@ -365,7 +382,9 @@ export default function ChangePasswordModal({
       >
         <View style={styles.modalContent}>
           <View style={styles.modalHeader}>
-            <Text style={styles.modalTitle}>Changer le mot de passe</Text>
+            <Text style={styles.modalTitle}>
+              {t("password.change_password", "Changer le mot de passe")}
+            </Text>
             <TouchableOpacity
               style={styles.closeButton}
               onPress={handleClose}
@@ -381,7 +400,9 @@ export default function ChangePasswordModal({
 
           {/* Mot de passe actuel */}
           <View style={styles.inputContainer}>
-            <Text style={styles.inputLabel}>Mot de passe actuel</Text>
+            <Text style={styles.inputLabel}>
+              {t("password.current_password", "Mot de passe actuel")}
+            </Text>
             <View style={styles.inputWrapper}>
               <MaterialCommunityIcons
                 name="lock"
@@ -391,7 +412,10 @@ export default function ChangePasswordModal({
               <TextInput
                 ref={currentPasswordRef}
                 style={styles.input}
-                placeholder="Saisissez votre mot de passe actuel"
+                placeholder={t(
+                  "password.current_password_placeholder",
+                  "Saisissez votre mot de passe actuel"
+                )}
                 value={currentPassword}
                 onChangeText={setCurrentPassword}
                 secureTextEntry={!showCurrentPassword}
@@ -415,7 +439,9 @@ export default function ChangePasswordModal({
 
           {/* Nouveau mot de passe */}
           <View style={styles.inputContainer}>
-            <Text style={styles.inputLabel}>Nouveau mot de passe</Text>
+            <Text style={styles.inputLabel}>
+              {t("password.new_password", "Nouveau mot de passe")}
+            </Text>
             <View style={styles.inputWrapper}>
               <MaterialCommunityIcons
                 name="lock-plus"
@@ -425,7 +451,10 @@ export default function ChangePasswordModal({
               <TextInput
                 ref={newPasswordRef}
                 style={styles.input}
-                placeholder="Saisissez votre nouveau mot de passe"
+                placeholder={t(
+                  "password.new_password_placeholder",
+                  "Saisissez votre nouveau mot de passe"
+                )}
                 value={newPassword}
                 onChangeText={setNewPassword}
                 secureTextEntry={!showNewPassword}
@@ -445,7 +474,6 @@ export default function ChangePasswordModal({
                 />
               </TouchableOpacity>
             </View>
-
             {/* Indicateur de force du mot de passe */}
             {newPassword.length > 0 && (
               <View style={styles.passwordStrength}>
@@ -459,7 +487,7 @@ export default function ChangePasswordModal({
                     },
                   ]}
                 >
-                  Force :{" "}
+                  {t("password.password_strength", "Force")} :{" "}
                   {getPasswordStrengthText(newPasswordValidation.strength)}
                 </Text>
                 <View style={styles.strengthBar}>
@@ -477,7 +505,6 @@ export default function ChangePasswordModal({
                 </View>
               </View>
             )}
-
             {/* Exigences du mot de passe */}
             {newPassword.length > 0 && (
               <View style={styles.requirements}>
@@ -505,7 +532,10 @@ export default function ChangePasswordModal({
                       },
                     ]}
                   >
-                    Au moins 8 caractères
+                    {t(
+                      "password.password_min_length_8",
+                      "Au moins 8 caractères"
+                    )}
                   </Text>
                 </View>
                 <View style={styles.requirement}>
@@ -532,7 +562,7 @@ export default function ChangePasswordModal({
                       },
                     ]}
                   >
-                    Au moins une majuscule
+                    {t("password.password_uppercase", "Au moins une majuscule")}
                   </Text>
                 </View>
                 <View style={styles.requirement}>
@@ -559,7 +589,7 @@ export default function ChangePasswordModal({
                       },
                     ]}
                   >
-                    Au moins un chiffre
+                    {t("password.password_number", "Au moins un chiffre")}
                   </Text>
                 </View>
                 <View style={styles.requirement}>
@@ -588,7 +618,10 @@ export default function ChangePasswordModal({
                       },
                     ]}
                   >
-                    Au moins un caractère spécial
+                    {t(
+                      "password.password_special_char",
+                      "Au moins un caractère spécial"
+                    )}
                   </Text>
                 </View>
               </View>
@@ -597,7 +630,9 @@ export default function ChangePasswordModal({
 
           {/* Confirmation du mot de passe */}
           <View style={styles.inputContainer}>
-            <Text style={styles.inputLabel}>Confirmer le mot de passe</Text>
+            <Text style={styles.inputLabel}>
+              {t("password.confirm_password", "Confirmer le mot de passe")}
+            </Text>
             <View style={styles.inputWrapper}>
               <MaterialCommunityIcons
                 name="lock-check"
@@ -615,7 +650,10 @@ export default function ChangePasswordModal({
               <TextInput
                 ref={confirmPasswordRef}
                 style={styles.input}
-                placeholder="Confirmez votre nouveau mot de passe"
+                placeholder={t(
+                  "password.confirm_password_placeholder",
+                  "Confirmez votre nouveau mot de passe"
+                )}
                 value={confirmPassword}
                 onChangeText={setConfirmPassword}
                 secureTextEntry={!showConfirmPassword}
@@ -637,7 +675,10 @@ export default function ChangePasswordModal({
             </View>
             {confirmPassword.length > 0 && !confirmPasswordValidation && (
               <Text style={{ color: "#EF4444", fontSize: 12, marginTop: 4 }}>
-                Les mots de passe ne correspondent pas
+                {t(
+                  "password.password_mismatch",
+                  "Les mots de passe ne correspondent pas"
+                )}
               </Text>
             )}
           </View>
@@ -649,7 +690,9 @@ export default function ChangePasswordModal({
               onPress={handleClose}
               disabled={isLoading}
             >
-              <Text style={styles.cancelButtonText}>Annuler</Text>
+              <Text style={styles.cancelButtonText}>
+                {t("password.cancel", "Annuler")}
+              </Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.saveButton}
@@ -659,7 +702,9 @@ export default function ChangePasswordModal({
               {isLoading ? (
                 <ActivityIndicator size="small" color="#FFFFFF" />
               ) : (
-                <Text style={styles.saveButtonText}>Changer</Text>
+                <Text style={styles.saveButtonText}>
+                  {t("password.change", "Changer")}
+                </Text>
               )}
             </TouchableOpacity>
           </View>

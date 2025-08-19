@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  Dimensions,
-} from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
@@ -13,8 +7,6 @@ import { useTranslation } from "react-i18next";
 
 import { useThemeColors, useCurrentTheme } from "../hooks/useThemeAssets";
 import { usePremium } from "../contexts/PremiumContext";
-
-const { width } = Dimensions.get("window");
 
 interface PremiumPromotionProps {
   feature?: string;
@@ -35,10 +27,10 @@ const PremiumPromotion: React.FC<PremiumPromotionProps> = ({
   const colors = useThemeColors();
   const currentTheme = useCurrentTheme();
   const router = useRouter();
-  const { isPremium } = usePremium();
+  const { user } = usePremium();
 
   // Ne pas afficher si l'utilisateur est déjà premium
-  if (isPremium) {
+  if (user.isPremium) {
     return null;
   }
 

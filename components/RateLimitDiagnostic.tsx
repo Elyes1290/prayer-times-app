@@ -8,7 +8,7 @@ import {
   Alert,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import apiClient from "../utils/apiClient";
+import { verifyAuth } from "../utils/apiClient";
 
 interface RateLimitStatus {
   hasAuthToken: boolean;
@@ -57,22 +57,18 @@ const RateLimitDiagnostic: React.FC = () => {
     setIsTesting(true);
     try {
       // Test simple de connexion API
-      const result = await apiClient.verifyAuth();
+      const result = await verifyAuth();
       Alert.alert(
         "Test API",
         `Connexion API: ${
-          result?.success ? "✅ Réussie" : "❌ Échouée"
-        }\nMessage: ${result?.message || "Aucun message"}`,
+          result ? "✅ Réussie" : "❌ Échouée"
+        }\nMessage: Aucun message`,
         [{ text: "OK" }]
       );
-    } catch (error: any) {
-      Alert.alert(
-        "Erreur API",
-        `Erreur: ${error?.message || "Erreur inconnue"}\nStatus: ${
-          error?.response?.status || "N/A"
-        }`,
-        [{ text: "OK" }]
-      );
+    } catch {
+      Alert.alert("Erreur API", `Erreur: Erreur inconnue\nStatus: N/A`, [
+        { text: "OK" },
+      ]);
     } finally {
       setIsTesting(false);
     }
@@ -86,7 +82,7 @@ const RateLimitDiagnostic: React.FC = () => {
         { text: "OK" },
       ]);
       refreshStatus();
-    } catch (error) {
+    } catch {
       Alert.alert("Erreur", "Impossible de réinitialiser les compteurs", [
         { text: "OK" },
       ]);
@@ -112,7 +108,7 @@ const RateLimitDiagnostic: React.FC = () => {
       );
 
       refreshStatus();
-    } catch (error) {
+    } catch {
       Alert.alert("Erreur", "Impossible de forcer la déconnexion", [
         { text: "OK" },
       ]);
@@ -151,7 +147,6 @@ const RateLimitDiagnostic: React.FC = () => {
         </View>
 
         <View style={styles.statusRow}>
-          <Text style={styles.label}>Token de rafraîchissement:</Text>
           <Text style={styles.label}>Token de rafraîchissement:</Text>
           <Text
             style={[

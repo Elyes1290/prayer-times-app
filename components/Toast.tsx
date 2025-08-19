@@ -1,16 +1,13 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useMemo } from "react";
 import {
   View,
   Text,
   Animated,
   StyleSheet,
-  Dimensions,
   TouchableOpacity,
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
-
-const { width: screenWidth } = Dimensions.get("window");
 
 export interface ToastData {
   id: string;
@@ -30,20 +27,48 @@ const Toast: React.FC<ToastProps> = ({ toast, onHide }) => {
   const translateY = useRef(new Animated.Value(-100)).current;
   const opacity = useRef(new Animated.Value(0)).current;
 
+  // Créer les animations avec useMemo pour éviter les recréations
+  const animations = useMemo(
+    () => ({
+      enter: Animated.parallel([
+        Animated.timing(translateY, {
+          toValue: 0,
+          duration: 300,
+          useNativeDriver: true,
+        }),
+        Animated.timing(opacity, {
+          toValue: 1,
+          duration: 300,
+          useNativeDriver: true,
+        }),
+      ]),
+      exit: Animated.parallel([
+        Animated.timing(translateY, {
+          toValue: -100,
+          duration: 250,
+          useNativeDriver: true,
+        }),
+        Animated.timing(opacity, {
+          toValue: 0,
+          duration: 250,
+          useNativeDriver: true,
+        }),
+      ]),
+    }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  );
+
+  const hideToast = React.useCallback(() => {
+    animations.exit.start(() => {
+      setVisible(false);
+      onHide(toast.id);
+    });
+  }, [animations.exit, onHide, toast.id]);
+
   useEffect(() => {
     // Animation d'entrée
-    Animated.parallel([
-      Animated.timing(translateY, {
-        toValue: 0,
-        duration: 300,
-        useNativeDriver: true,
-      }),
-      Animated.timing(opacity, {
-        toValue: 1,
-        duration: 300,
-        useNativeDriver: true,
-      }),
-    ]).start();
+    animations.enter.start();
 
     // Auto-hide après la durée spécifiée
     const timer = setTimeout(() => {
@@ -51,25 +76,7 @@ const Toast: React.FC<ToastProps> = ({ toast, onHide }) => {
     }, toast.duration || 3000);
 
     return () => clearTimeout(timer);
-  }, []);
-
-  const hideToast = () => {
-    Animated.parallel([
-      Animated.timing(translateY, {
-        toValue: -100,
-        duration: 250,
-        useNativeDriver: true,
-      }),
-      Animated.timing(opacity, {
-        toValue: 0,
-        duration: 250,
-        useNativeDriver: true,
-      }),
-    ]).start(() => {
-      setVisible(false);
-      onHide(toast.id);
-    });
-  };
+  }, [toast.duration, hideToast, animations.enter]);
 
   const getToastConfig = () => {
     switch (toast.type) {

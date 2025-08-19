@@ -1,16 +1,7 @@
 import React from "react";
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  Modal,
-  StyleSheet,
-  Dimensions,
-} from "react-native";
+import { View, Text, TouchableOpacity, Modal, StyleSheet } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { useColorScheme } from "../hooks/useColorScheme";
 import { useThemeAssets } from "../hooks/useThemeAssets";
-import { Colors } from "../constants/Colors";
 
 interface ThemedAlertProps {
   visible: boolean;
@@ -40,7 +31,6 @@ const ThemedAlert: React.FC<ThemedAlertProps> = ({
   onClose,
   iconType = "info",
 }) => {
-  const colorScheme = useColorScheme();
   const themeAssets = useThemeAssets();
   const currentTheme = themeAssets.theme;
 

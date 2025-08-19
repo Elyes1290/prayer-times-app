@@ -1129,7 +1129,29 @@
     "validation": {
       "min_length": "کم از کم 8 حروف",
       "special_char": "کم از کم ایک خصوصی حرف"
-    }
+    },
+    "change_password": "پاس ورڈ تبدیل کریں",
+    "current_password": "موجودہ پاس ورڈ",
+    "new_password": "نیا پاس ورڈ",
+    "confirm_password": "پاس ورڈ تصدیق کریں",
+    "current_password_placeholder": "موجودہ پاس ورڈ درج کریں",
+    "new_password_placeholder": "نیا پاس ورڈ درج کریں",
+    "confirm_password_placeholder": "نیا پاس ورڈ تصدیق کریں",
+    "password_strength": "قوت",
+    "password_strength_weak": "ضعیف",
+    "password_strength_medium": "متوسط",
+    "password_strength_good": "اچھا",
+    "password_strength_excellent": "مثالی",
+    "password_min_length_8": "کم از کم 8 حروف",
+    "password_uppercase": "کم از کم ایک بڑا حرف",
+    "password_number": "کم از کم ایک عدد",
+    "password_special_char": "کم از کم ایک خصوصی حرف",
+    "password_mismatch": "پاس ورڈ یکسان نہیں ہیں",
+    "password_changed_success": "پاس ورڈ کامیابی سے تبدیل کر دیا گیا",
+    "password_change_error": "پاس ورڈ تبدیل کرنے میں خرابی",
+    "cancel_changes_message": "کیا آپ واقعی منسوخ کرنا چاہتے ہیں؟ تبدیلیاں کھو جائیں گی۔",
+    "continue": "جاری رکھیں",
+    "change": "تبدیل کریں"
   },
 
   "settings": {

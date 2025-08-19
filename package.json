@@ -13,7 +13,7 @@
     "test": "jest",
     "build:android": "eas build --platform android --clear-cache",
     "build:android:optimized": "eas build --platform android --clear-cache --minify",
-    "bundle:analyze": "npx expo export --dump-sourcemap",
+    "bundle:analyze": "npx expo export --platform android --dump-sourcemap",
     "bundle:size": "npm run bundle:analyze && node -e \"console.log('Bundle analysis complete. Check .expo folder for source maps.')\"",
     "optimize:clean": "expo r -c && npm run android"
   },

@@ -52,6 +52,7 @@ import LocationSection from "../components/settings/LocationSection";
 import GeneralSection from "../components/settings/GeneralSection";
 import BackupSection from "../components/settings/BackupSection";
 import AccountManagementSection from "../components/settings/AccountManagementSection";
+// import AudioCacheSection from "../components/settings/AudioCacheSection";
 import ThemedAlert from "../components/ThemedAlert";
 import { LocalStorageManager } from "../utils/localStorageManager";
 
@@ -502,13 +503,14 @@ function SettingsSections({
         iconColor: "#A8E6CF",
         onPress: () => handleSectionToggle("appearance"),
       },
-      {
-        id: "premium",
-        title: t("premium_access", "Premium"),
-        icon: "crown" as const,
-        iconColor: "#FFD700",
-        onPress: () => handleSectionToggle("premium"),
-      },
+      // {
+      //   id: "premium",
+      //   title: t("premium_access", "Premium"),
+      //   icon: "crown" as const,
+      //   iconColor: "#FFD700",
+      //   onPress: () => handleSectionToggle("premium"),
+      // },
+
       {
         id: "backup",
         title: t("backup", "Sauvegarde"),
@@ -876,20 +878,21 @@ function SettingsSections({
           </View>
         </View>
       ),
-      premium: (
-        <PremiumLoginSection
-          activatePremium={activatePremium}
-          styles={styles}
-          showToast={showToast}
-          t={t}
-          onLoginSuccess={onLoginSuccess}
-          currentTheme={currentTheme}
-          isInModal={false}
-          onOpenPremiumModal={openPremiumModal}
-          // 🚀 SUPPRIMÉ : onManageAccount car gestion interne maintenant
-        />
-      ),
+      // premium: (
+      //   <PremiumLoginSection
+      //     activatePremium={activatePremium}
+      //     styles={styles}
+      //     showToast={showToast}
+      //     t={t}
+      //     onLoginSuccess={onLoginSuccess}
+      //     currentTheme={currentTheme}
+      //     isInModal={false}
+      //     onOpenPremiumModal={openPremiumModal}
+      //     // 🚀 SUPPRIMÉ : onManageAccount car gestion interne maintenant
+      //   />
+      // ),
       backup: <BackupSectionWrapper />,
+      // audio_cache: <AudioCacheSection />,
       account_management: (
         <AccountManagementSection
           user={user}
@@ -1059,8 +1062,9 @@ function SettingsSections({
       { id: "notifications", title: t("notifications", "Notifications") },
       { id: "dhikr_dua", title: t("dhikr_dua", "Dhikr & Doua") },
       { id: "appearance", title: t("appearance", "Apparence") },
-      { id: "premium", title: t("premium_access", "Premium") },
+      // { id: "premium", title: t("premium_access", "Premium") },
       { id: "backup", title: t("backup", "Sauvegarde") },
+
       { id: "about", title: t("about", "À propos") },
       { id: "help", title: t("help", "Aide") },
     ];

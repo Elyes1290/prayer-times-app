@@ -6,7 +6,6 @@ import {
   TextInput,
   ActivityIndicator,
   Linking,
-  Alert,
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";

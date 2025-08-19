@@ -1129,7 +1129,29 @@
     "validation": {
       "min_length": "কমপক্ষে ৮টি অক্ষর",
       "special_char": "কমপক্ষে একটি বিশেষ অক্ষর"
-    }
+    },
+    "change_password": "পাসওয়ার্ড পরিবর্তন করুন",
+    "current_password": "বর্তমান পাসওয়ার্ড",
+    "new_password": "নতুন পাসওয়ার্ড",
+    "confirm_password": "পাসওয়ার্ড নিশ্চিত করুন",
+    "current_password_placeholder": "বর্তমান পাসওয়ার্ড দিন",
+    "new_password_placeholder": "নতুন পাসওয়ার্ড দিন",
+    "confirm_password_placeholder": "পাসওয়ার্ড নিশ্চিত করুন",
+    "password_strength": "শক্তি",
+    "password_strength_weak": "শক্তিশালী নয়",
+    "password_strength_medium": "মাঝারি শক্তিশালী",
+    "password_strength_good": "শক্তিশালী",
+    "password_strength_excellent": "অতি শক্তিশালী",
+    "password_min_length_8": "কমপক্ষে ৮টি অক্ষর",
+    "password_uppercase": "কমপক্ষে একটি বড় হাতের অক্ষর",
+    "password_number": "কমপক্ষে একটি সংখ্যা",
+    "password_special_char": "কমপক্ষে একটি বিশেষ অক্ষর",
+    "password_mismatch": "পাসওয়ার্ড মিলছে না",
+    "password_changed_success": "পাসওয়ার্ড সফলভাবে পরিবর্তন করা হয়েছে",
+    "password_change_error": "পাসওয়ার্ড পরিবর্তন করতে ত্রুটি",
+    "cancel_changes_message": "আপনি কি বাতিল করতে নিশ্চিত? পরিবর্তন হারিয়ে যাবে।",
+    "continue": "চালিয়ে যান",
+    "change": "পরিবর্তন করুন"
   },
 
   "settings": {

@@ -1129,7 +1129,29 @@
     "validation": {
       "min_length": "Minimaal 8 tekens",
       "special_char": "Minimaal één speciaal teken"
-    }
+    },
+    "change_password": "Wachtwoord wijzigen",
+    "current_password": "Huidig wachtwoord",
+    "new_password": "Nieuw wachtwoord",
+    "confirm_password": "Wachtwoord bevestigen",
+    "current_password_placeholder": "Voer uw huidig wachtwoord in",
+    "new_password_placeholder": "Voer uw nieuw wachtwoord in",
+    "confirm_password_placeholder": "Bevestig uw nieuw wachtwoord",
+    "password_strength": "Streke",
+    "password_strength_weak": "Zwak",
+    "password_strength_medium": "Gemiddeld",
+    "password_strength_good": "Goed",
+    "password_strength_excellent": "Uitstekend",
+    "password_min_length_8": "Minimaal 8 tekens",
+    "password_uppercase": "Minimaal één hoofdletter",
+    "password_number": "Minimaal één cijfer",
+    "password_special_char": "Minimaal één speciaal teken",
+    "password_mismatch": "Wachtwoorden komen niet overeen",
+    "password_changed_success": "Wachtwoord succesvol gewijzigd",
+    "password_change_error": "Fout bij wijzigen van wachtwoord",
+    "cancel_changes_message": "Weet u zeker dat u wilt annuleren? Wijzigingen gaan verloren.",
+    "continue": "Doorgaan",
+    "change": "Wijzigen"
   },
 
   "settings": {

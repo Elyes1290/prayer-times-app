@@ -1129,7 +1129,29 @@
     "validation": {
       "min_length": "Pelo menos 8 caracteres",
       "special_char": "Pelo menos um caractere especial"
-    }
+    },
+    "change_password": "Alterar senha",
+    "current_password": "Senha atual",
+    "new_password": "Nova senha",
+    "confirm_password": "Confirmar senha",
+    "current_password_placeholder": "Digite sua senha atual",
+    "new_password_placeholder": "Digite sua nova senha",
+    "confirm_password_placeholder": "Confirme sua nova senha",
+    "password_strength": "Força",
+    "password_strength_weak": "Fraca",
+    "password_strength_medium": "Média",
+    "password_strength_good": "Boa",
+    "password_strength_excellent": "Excelente",
+    "password_min_length_8": "Pelo menos 8 caracteres",
+    "password_uppercase": "Pelo menos uma letra maiúscula",
+    "password_number": "Pelo menos um número",
+    "password_special_char": "Pelo menos um caractere especial",
+    "password_mismatch": "As senhas não coincidem",
+    "password_changed_success": "Senha alterada com sucesso",
+    "password_change_error": "Erro ao alterar a senha",
+    "cancel_changes_message": "Tem certeza de que quer cancelar? As alterações serão perdidas.",
+    "continue": "Continuar",
+    "change": "Alterar"
   },
 
   "settings": {

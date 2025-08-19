@@ -1129,7 +1129,29 @@
     "validation": {
       "min_length": "En az 8 karakter",
       "special_char": "En az bir özel karakter"
-    }
+    },
+    "change_password": "Şifre değiştir",
+    "current_password": "Mevcut şifre",
+    "new_password": "Yeni şifre",
+    "confirm_password": "Şifre onayla",
+    "current_password_placeholder": "Mevcut şifrenizi girin",
+    "new_password_placeholder": "Yeni şifrenizi girin",
+    "confirm_password_placeholder": "Yeni şifrenizi onaylayın",
+    "password_strength": "Güç",
+    "password_strength_weak": "Zayıf",
+    "password_strength_medium": "Orta",
+    "password_strength_good": "İyi",
+    "password_strength_excellent": "Harika",
+    "password_min_length_8": "En az 8 karakter",
+    "password_uppercase": "En az bir büyük harf",
+    "password_number": "En az bir sayı",
+    "password_special_char": "En az bir özel karakter",
+    "password_mismatch": "Şifreler eşleşmiyor",
+    "password_changed_success": "Şifre başarıyla değiştirildi",
+    "password_change_error": "Şifre değiştirme hatası",
+    "cancel_changes_message": "İptal etmek istediğinizden emin misiniz? Değişiklikler kaybolacak.",
+    "continue": "Devam et",
+    "change": "Değiştir"
   },
 
   "settings": {

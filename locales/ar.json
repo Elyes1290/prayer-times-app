@@ -1129,7 +1129,29 @@
     "validation": {
       "min_length": "8 أحرف على الأقل",
       "special_char": "رمز خاص واحد على الأقل"
-    }
+    },
+    "change_password": "تغيير كلمة المرور",
+    "current_password": "كلمة المرور الحالية",
+    "new_password": "كلمة المرور الجديدة",
+    "confirm_password": "تأكيد كلمة المرور",
+    "current_password_placeholder": "أدخل كلمة المرور الحالية",
+    "new_password_placeholder": "أدخل كلمة المرور الجديدة",
+    "confirm_password_placeholder": "تأكيد كلمة المرور الجديدة",
+    "password_strength": "قوة",
+    "password_strength_weak": "ضعيف",
+    "password_strength_medium": "متوسط",
+    "password_strength_good": "جيد",
+    "password_strength_excellent": "ممتاز",
+    "password_min_length_8": "8 أحرف على الأقل",
+    "password_uppercase": "حرف كبير واحد على الأقل",
+    "password_number": "رقم واحد على الأقل",
+    "password_special_char": "رمز خاص واحد على الأقل",
+    "password_mismatch": "كلمتا المرور غير مطابقتين",
+    "password_changed_success": "تم تغيير كلمة المرور بنجاح",
+    "password_change_error": "خطأ في تغيير كلمة المرور",
+    "cancel_changes_message": "هل أنت متأكد من أنك تريد الإلغاء؟ ستضيع التغييرات.",
+    "continue": "استمرار",
+    "change": "تغيير"
   },
 
   "settings": {

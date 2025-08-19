@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   View,
   Text,
@@ -6,12 +6,9 @@ import {
   Modal,
   FlatList,
   StyleSheet,
-  Dimensions,
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { useColorScheme } from "../hooks/useColorScheme";
 import { useThemeAssets } from "../hooks/useThemeAssets";
-import { Colors } from "../constants/Colors";
 
 interface ThemedPickerProps {
   visible: boolean;
@@ -33,7 +30,6 @@ const ThemedPicker: React.FC<ThemedPickerProps> = ({
   onValueChange,
   onClose,
 }) => {
-  const colorScheme = useColorScheme();
   const themeAssets = useThemeAssets();
   const currentTheme = themeAssets.theme;
 

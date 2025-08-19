@@ -1128,7 +1128,29 @@
     "validation": {
       "min_length": "Al menos 8 caracteres",
       "special_char": "Al menos un carácter especial"
-    }
+    },
+    "change_password": "Cambiar contraseña",
+    "current_password": "Contraseña actual",
+    "new_password": "Nueva contraseña",
+    "confirm_password": "Confirmar contraseña",
+    "current_password_placeholder": "Ingresa tu contraseña actual",
+    "new_password_placeholder": "Ingresa tu nueva contraseña",
+    "confirm_password_placeholder": "Confirma tu nueva contraseña",
+    "password_strength": "Fuerza",
+    "password_strength_weak": "Débil",
+    "password_strength_medium": "Medio",
+    "password_strength_good": "Bueno",
+    "password_strength_excellent": "Excelente",
+    "password_min_length_8": "Al menos 8 caracteres",
+    "password_uppercase": "Al menos una letra mayúscula",
+    "password_number": "Al menos un número",
+    "password_special_char": "Al menos un carácter especial",
+    "password_mismatch": "Las contraseñas no coinciden",
+    "password_changed_success": "Contraseña cambiada exitosamente",
+    "password_change_error": "Error al cambiar la contraseña",
+    "cancel_changes_message": "¿Estás seguro de que quieres cancelar? Los cambios se perderán.",
+    "continue": "Continuar",
+    "change": "Cambiar"
   },
 
   "settings": {

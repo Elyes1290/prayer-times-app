@@ -1129,7 +1129,29 @@
     "validation": {
       "min_length": "حداقل ۸ کاراکتر",
       "special_char": "حداقل یک علامت ویژه"
-    }
+    },
+    "change_password": "تغییر رمز عبور",
+    "current_password": "رمز عبور فعلی",
+    "new_password": "رمز عبور جدید",
+    "confirm_password": "تایید رمز عبور",
+    "current_password_placeholder": "رمز عبور فعلی را وارد کنید",
+    "new_password_placeholder": "رمز عبور جدید را وارد کنید",
+    "confirm_password_placeholder": "رمز عبور جدید را تایید کنید",
+    "password_strength": "قدرت",
+    "password_strength_weak": "ضعیف",
+    "password_strength_medium": "متوسط",
+    "password_strength_good": "خوب",
+    "password_strength_excellent": "عالی",
+    "password_min_length_8": "حداقل ۸ کاراکتر",
+    "password_uppercase": "حداقل یک حرف بزرگ",
+    "password_number": "حداقل یک عدد",
+    "password_special_char": "حداقل یک علامت ویژه",
+    "password_mismatch": "رمز عبور های مطابقت ندارند",
+    "password_changed_success": "رمز عبور با موفقیت تغییر یافت",
+    "password_change_error": "خطا در تغییر رمز عبور",
+    "cancel_changes_message": "آیا مطمئن هستید که می‌خواهید این کار را لغو کنید؟ تغییرات از دست خواهد رفت.",
+    "continue": "ادامه",
+    "change": "تغییر"
   },
 
   "settings": {

@@ -131,7 +131,7 @@ const CollapsibleSection: React.FC<CollapsibleSectionProps> = ({
         style={{
           maxHeight: animation.interpolate({
             inputRange: [0, 1],
-            outputRange: [0, 2000],
+            outputRange: [0, 8000],
           }),
           opacity: animation,
         }}

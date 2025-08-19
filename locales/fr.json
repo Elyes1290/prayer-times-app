@@ -1128,7 +1128,29 @@
     "validation": {
       "min_length": "Au moins 8 caractères",
       "special_char": "Au moins un caractère spécial"
-    }
+    },
+    "change_password": "Changer le mot de passe",
+    "current_password": "Mot de passe actuel",
+    "new_password": "Nouveau mot de passe",
+    "confirm_password": "Confirmer le mot de passe",
+    "current_password_placeholder": "Saisissez votre mot de passe actuel",
+    "new_password_placeholder": "Saisissez votre nouveau mot de passe",
+    "confirm_password_placeholder": "Confirmez votre nouveau mot de passe",
+    "password_strength": "Force",
+    "password_strength_weak": "Faible",
+    "password_strength_medium": "Moyen",
+    "password_strength_good": "Bon",
+    "password_strength_excellent": "Excellent",
+    "password_min_length_8": "Au moins 8 caractères",
+    "password_uppercase": "Au moins une majuscule",
+    "password_number": "Au moins un chiffre",
+    "password_special_char": "Au moins un caractère spécial",
+    "password_mismatch": "Les mots de passe ne correspondent pas",
+    "password_changed_success": "Mot de passe modifié avec succès",
+    "password_change_error": "Erreur lors du changement de mot de passe",
+    "cancel_changes_message": "Êtes-vous sûr de vouloir annuler ? Les modifications seront perdues.",
+    "continue": "Continuer",
+    "change": "Changer"
   },
 
   "settings": {

@@ -1,11 +1,5 @@
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  ActivityIndicator,
-  Alert,
-} from "react-native";
+import { View, Text, TouchableOpacity, ActivityIndicator } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useBackup } from "../../contexts/BackupContext";
 import { useTranslation } from "react-i18next";
@@ -30,8 +24,6 @@ export default function BackupSection({ styles }: BackupSectionProps) {
     enableAutoBackup,
     isAutoBackupEnabled,
     hasCloudData,
-    showRestoreDialog,
-    dismissRestoreDialog,
   } = useBackup();
 
   // 🚀 NOUVEAU : État pour les modals ThemedAlert

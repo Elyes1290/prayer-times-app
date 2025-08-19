@@ -13,7 +13,6 @@ import Slider from "@react-native-community/slider";
 import { useTranslation } from "react-i18next";
 import { PremiumContent } from "../../utils/premiumContent";
 import ThemedPicker from "../ThemedPicker";
-import { useColorScheme } from "../../hooks/useColorScheme";
 import { useThemeAssets } from "../../hooks/useThemeAssets";
 
 interface AdhanSoundSectionProps {
@@ -145,7 +144,6 @@ export default function AdhanSoundSection({
   styles,
 }: AdhanSoundSectionProps) {
   const { t } = useTranslation();
-  const colorScheme = useColorScheme();
   const themeAssets = useThemeAssets();
 
   // 🚀 NOUVEAU : États pour les modals ThemedPicker

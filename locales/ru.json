@@ -1129,7 +1129,29 @@
     "validation": {
       "min_length": "Минимум 8 символов",
       "special_char": "Минимум один специальный символ"
-    }
+    },
+    "change_password": "Изменить пароль",
+    "current_password": "Текущий пароль",
+    "new_password": "Новый пароль",
+    "confirm_password": "Подтвердить пароль",
+    "current_password_placeholder": "Введите ваш текущий пароль",
+    "new_password_placeholder": "Введите ваш новый пароль",
+    "confirm_password_placeholder": "Подтвердите ваш новый пароль",
+    "password_strength": "Сила",
+    "password_strength_weak": "Слабый",
+    "password_strength_medium": "Средний",
+    "password_strength_good": "Хороший",
+    "password_strength_excellent": "Отличный",
+    "password_min_length_8": "Минимум 8 символов",
+    "password_uppercase": "Минимум одна заглавная буква",
+    "password_number": "Минимум одна цифра",
+    "password_special_char": "Минимум один специальный символ",
+    "password_mismatch": "Пароли не совпадают",
+    "password_changed_success": "Пароль успешно изменен",
+    "password_change_error": "Ошибка при изменении пароля",
+    "cancel_changes_message": "Вы уверены, что хотите отменить? Изменения будут потеряны.",
+    "continue": "Продолжить",
+    "change": "Изменить"
   },
 
   "settings": {
