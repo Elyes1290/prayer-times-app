@@ -331,7 +331,7 @@ function SettingsSections({
     lat: number;
     lon: number;
   } | null>(settings.autoLocation || null);
-  const [isRefreshingLocation, setIsRefreshingLocation] = useState(false);
+
   const [calcMethod, setCalcMethod] = useState<CalcMethodKey>(
     settings.calcMethod || "MuslimWorldLeague"
   );
@@ -357,15 +357,8 @@ function SettingsSections({
 
   // Fonction pour rafraîchir la localisation automatique
   const refreshAutoLocation = async () => {
-    setIsRefreshingLocation(true);
-    try {
-      // Logique de géolocalisation
-      setTimeout(() => {
-        setIsRefreshingLocation(false);
-      }, 2000);
-    } catch (error) {
-      setIsRefreshingLocation(false);
-    }
+    // 🔧 CORRECTION : Utiliser la vraie fonction du contexte
+    await settings.refreshAutoLocation();
   };
 
   // 🚀 NOUVEAU : Fonctions wrapper avec feedback visuel
@@ -615,7 +608,7 @@ function SettingsSections({
     const locationSections = LocationSection({
       locationMode: settings.locationMode,
       autoLocation: settings.autoLocation,
-      isRefreshingLocation: citySearchLoading,
+      isRefreshingLocation: settings.isRefreshingLocation,
       cityInput: cityInput,
       citySearchResults: citySearchResults,
       citySearchLoading: citySearchLoading,

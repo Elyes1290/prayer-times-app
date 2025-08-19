@@ -959,9 +959,16 @@ public class PrayerTimesWidget extends AppWidgetProvider {
             // Formatter pour le widget
             StringBuilder result = new StringBuilder();
 
-            // Le contenu complet sans troncature
-            result.append(arabic).append("\n\n");
-            result.append(translation);
+            // 🔧 CORRECTION : Si la langue est arabe, afficher seulement le texte arabe
+            if (language.equals("ar")) {
+                result.append(arabic);
+                widgetDebugLog(TAG, "🌍 Langue arabe détectée - affichage arabe uniquement");
+            } else {
+                // Pour les autres langues, afficher arabe + traduction
+                result.append(arabic).append("\n\n");
+                result.append(translation);
+                widgetDebugLog(TAG, "🌍 Langue non-arabe - affichage arabe + traduction");
+            }
 
             String formattedDua = result.toString();
             widgetDebugLog(TAG, "✅ Dua formatée prête (" + formattedDua.length() + " chars)");
@@ -1019,7 +1026,12 @@ public class PrayerTimesWidget extends AppWidgetProvider {
                 String arabic = dhikr.getString("arabic");
                 String translation = dhikr.getString("translation");
 
-                return arabic + "\n\n" + translation;
+                // 🔧 CORRECTION : Appliquer la même logique que la fonction principale
+                if (fallbackLang.equals("ar")) {
+                    return arabic;
+                } else {
+                    return arabic + "\n\n" + translation;
+                }
             }
 
         } catch (Exception e) {

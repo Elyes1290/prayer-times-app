@@ -6,6 +6,7 @@ import React, {
   ReactNode,
 } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { safeJsonParse } from "../utils/safeJson";
 // 🚀 NOUVEAU : Import apiClient pour vérifier la connexion Infomaniak
 import apiClient from "../utils/apiClient";
 // 🚀 NOUVEAU : Import du gestionnaire de synchronisation
@@ -306,12 +307,8 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
 
       const storedUser = await AsyncStorage.getItem(STORAGE_KEYS.PREMIUM_USER);
       if (storedUser) {
-        let parsedUser: any = null;
-        try {
-          parsedUser = JSON.parse(storedUser);
-        } catch {
-          parsedUser = null;
-        }
+        // 🔧 CORRECTION : Utiliser safeJsonParse
+        const parsedUser = safeJsonParse<any>(storedUser, null);
         if (!parsedUser) {
           setUser(defaultUser);
           setLoading(false);

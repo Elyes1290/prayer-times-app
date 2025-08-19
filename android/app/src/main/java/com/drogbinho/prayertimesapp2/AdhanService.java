@@ -1528,13 +1528,19 @@ public class AdhanService extends Service {
             }
             bodyBuilder.append("\n");
 
-            if (!arabic.isEmpty())
+            // 🔧 CORRECTION : Si la langue est arabe, afficher seulement le texte arabe
+            if (!arabic.isEmpty()) {
                 bodyBuilder.append(arabic);
-            if (!translation.isEmpty()) {
-                bodyBuilder.append(arabic.isEmpty() ? "\n" : "\n\n").append(translation);
             }
-            if (!latin.isEmpty()) {
-                bodyBuilder.append((arabic.isEmpty() && translation.isEmpty()) ? "\n" : "\n\n").append(latin);
+            
+            // Pour les langues non-arabes, afficher aussi la traduction et la translittération
+            if (!language.equals("ar")) {
+                if (!translation.isEmpty()) {
+                    bodyBuilder.append(arabic.isEmpty() ? "\n" : "\n\n").append(translation);
+                }
+                if (!latin.isEmpty()) {
+                    bodyBuilder.append((arabic.isEmpty() && translation.isEmpty()) ? "\n" : "\n\n").append(latin);
+                }
             }
 
             // Si le corps est vide (juste la catégorie), ajouter un message par défaut

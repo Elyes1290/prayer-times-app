@@ -1,4 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { safeJsonParse, safeStorageJsonParse } from "../utils/safeJson";
+import { safeStorage } from "../utils/safeStorage";
 import React, {
   createContext,
   useCallback,
@@ -632,15 +634,24 @@ export const SettingsProvider = ({
       }
 
       if (manualLocationValue) {
-        try {
-          const manualLoc = JSON.parse(manualLocationValue);
+        // 🔧 CORRECTION : Utiliser safeJsonParse avec typage
+        const manualLoc = safeJsonParse<ManualLocation | null>(
+          manualLocationValue,
+          null
+        );
+        if (
+          manualLoc &&
+          manualLoc.city &&
+          typeof manualLoc.lat === "number" &&
+          typeof manualLoc.lon === "number"
+        ) {
           console.log(
             `✅ [DEBUG] Localisation manuelle chargée: ${manualLoc.city}`
           );
           setManualLocation(manualLoc);
-        } catch (error) {
+        } else {
           console.log(
-            `⚠️ [DEBUG] Erreur parsing localisation manuelle, reset à null`
+            `⚠️ [DEBUG] Localisation manuelle invalide, reset à null`
           );
           setManualLocation(null);
         }

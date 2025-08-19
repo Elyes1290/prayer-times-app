@@ -1,4 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { safeJsonParse } from "./safeJson";
 
 export interface UserData {
   id: number;
@@ -83,14 +84,14 @@ export const getCurrentUserData = async (): Promise<UserData | null> => {
       console.log(
         "✅ getCurrentUserData - Données utilisateur trouvées avec connexion explicite"
       );
-      try {
-        return JSON.parse(userData);
-      } catch {
+      // 🔧 CORRECTION : Utiliser safeJsonParse
+      const parsedData = safeJsonParse<UserData | null>(userData, null);
+      if (!parsedData) {
         console.log(
           "⚠️ getCurrentUserData - Erreur parsing user_data, retour null"
         );
-        return null;
       }
+      return parsedData;
     }
 
     console.log(

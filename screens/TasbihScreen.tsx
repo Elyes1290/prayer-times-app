@@ -145,7 +145,7 @@ const getStyles = (
 
 const TasbihScreen = () => {
   const { colors } = useTheme();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const insets = useSafeAreaInsets();
 
   // Utiliser les couleurs thématiques
@@ -226,9 +226,11 @@ const TasbihScreen = () => {
 
           <View style={styles.dhikrContainer}>
             <Text style={styles.arabicText}>{dhikrList[currentDhikr]}</Text>
-            <Text style={styles.translationText}>
-              {dhikrTranslations[currentDhikr]}
-            </Text>
+            {!i18n.language.startsWith("ar") && (
+              <Text style={styles.translationText}>
+                {dhikrTranslations[currentDhikr]}
+              </Text>
+            )}
           </View>
 
           <Animated.View

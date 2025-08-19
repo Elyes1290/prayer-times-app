@@ -216,7 +216,11 @@ class ApiClient {
     queryParams?: Record<string, string>
   ): Promise<T> {
     try {
-      let url = `${API_BASE}${endpoint}`;
+      // 🔧 CORRECTION : Éviter le double préfixe /api
+      const cleanEndpoint = endpoint.startsWith("/")
+        ? endpoint
+        : `/${endpoint}`;
+      let url = `${API_BASE}${cleanEndpoint}`;
 
       // Ajouter les paramètres de requête pour GET
       if (queryParams && Object.keys(queryParams).length > 0) {

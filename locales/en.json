@@ -1250,28 +1250,6 @@
     "weekly_goal_desc": "Number of prayers targeted per week"
   },
 
-  "languages": {
-    "fr": "Français",
-    "en": "English",
-    "ar": "العربية",
-    "es": "Español",
-    "de": "Deutsch",
-    "it": "Italiano",
-    "pt": "Português",
-    "tr": "Türkçe",
-    "ru": "Русский",
-    "ur": "اردو",
-    "bn": "বাংলা",
-    "fa": "فارسی",
-    "nl": "Nederlands"
-  },
-
-  "location": "Location",
-  "backup": "Backup",
-  "download": "Download",
-  "qibla": "Qibla",
-  "favorites": "Favorites",
-
   "premium_ui": {
     "badge": "Premium",
     "signup_tab": "Create Premium Account",
@@ -1302,5 +1280,27 @@
     "password_placeholder_text": "Password",
     "password_criteria_title": "Security criteria",
     "password_min_length": "At least 6 characters"
+  },
+
+  "location": "Location",
+  "backup": "Backup",
+  "download": "Download",
+  "qibla": "Qibla",
+  "favorites": "Favorites",
+  "settings": "Settings",
+  "languages": {
+    "fr": "Français",
+    "en": "English",
+    "ar": "العربية",
+    "es": "Español",
+    "de": "Deutsch",
+    "it": "Italiano",
+    "pt": "Português",
+    "tr": "Türkçe",
+    "ru": "Русский",
+    "ur": "اردو",
+    "bn": "বাংলা",
+    "fa": "فارسی",
+    "nl": "Nederlands"
   }
 }
