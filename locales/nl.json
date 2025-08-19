@@ -111,7 +111,7 @@
     "title": "Over de app",
     "subtitle": "Volledige islamitische applicatie",
     "welcome": "Welkom bij uw spirituele metgezel!",
-    "description": "Deze gratis app (momenteel zonder advertenties) begeleidt u dagelijks in uw religieuze praktijk: nauwkeurige gebedstijden, Qibla-richting, Koran-lezen, automatische dhikr, authentieke hadiths, Hijri-kalender en nog veel meer. Een premium versie zonder advertenties met exclusieve functies zal binnenkort beschikbaar zijn.",
+    "description": "Deze gratis app (momenteel zonder advertenties) begeleidt u dagelijks in uw religieuze praktijk: nauwkeurige gebedstijden, Qibla-richting, Koran-lezen, automatische dhikr, authentieke hadiths, Hijri-kalender, gebedsstatistieken, badge-systeem, favorieten-systeem, geavanceerde audio en nog veel meer. Een premium versie zonder advertenties met exclusieve functies zal binnenkort beschikbaar zijn.",
     "blessing": "بارك الله فيكم - Moge Allah u zegenen",
 
     "features_title": "🌟 Volledige functies",
@@ -124,8 +124,30 @@
       "asmaul_husna": "99 Namen van Allah",
       "authentic_hadith": "Authentieke hadiths",
       "hijri_calendar": "Hijri-kalender",
-      "smart_notifications": "Slimme meldingen"
+      "smart_notifications": "Slimme meldingen",
+      "prayer_statistics": "Gebedsstatistieken",
+      "badges_system": "Badge-systeem",
+      "favorites_system": "Favorieten-systeem",
+      "advanced_audio": "Geavanceerde audio",
+      "premium_features": "Premium functies",
+      "themes_system": "Thema-systeem",
+      "sun_info": "Zon-informatie",
+      "weekly_view": "Wekelijkse weergave"
     },
+
+    "premium_title": "👑 Premium functies",
+    "premium_subtitle": "Verbeter uw spirituele reis:",
+    "premium_stats": "Gedetailleerde gebedsstatistieken",
+    "premium_badges": "Speciale badges en beloningen",
+    "premium_audio": "Hoogwaardige audiobestanden",
+    "premium_themes": "Speciale thema's en personalisatie",
+
+    "advanced_title": "🚀 Geavanceerde functies",
+    "advanced_subtitle": "Om uw ervaring te verbeteren:",
+    "advanced_favorites": "Favorieten-systeem en synchronisatie",
+    "advanced_weekly": "Wekelijkse gebedsweergave",
+    "advanced_sun": "Zon-informatie en tijd",
+    "advanced_personalization": "Personalisatie en instellingen",
 
     "faq_title": "❓ Veelgestelde vragen",
     "faq_location_question": "Waarom heeft de app mijn locatie nodig?",
@@ -155,6 +177,10 @@
     "tech_adhan_lib": "• Berekeningen gebaseerd op Adhan bibliotheek",
     "tech_expo": "• Moderne en performante interface",
     "tech_permissions": "• Toestemmingen: Locatie, Meldingen, Wakker",
+    "tech_theme_system": "• Dynamisch thema-systeem en personalisatie",
+    "tech_audio_optimization": "• Geavanceerde audio-optimalisatie en caching",
+    "tech_performance": "• Verbeterde prestaties met moderne React hooks",
+    "tech_security": "• Verbeterde beveiliging en gegevensbescherming",
 
     "sources_title": "📚 Bronnen & credits",
     "source_quran": "• Koran: Quran.com API",

@@ -111,7 +111,7 @@
     "title": "About the app",
     "subtitle": "Complete Islamic application",
     "welcome": "Welcome to your spiritual companion!",
-    "description": "This free app (currently ad-free) accompanies you daily in your religious practice: accurate prayer times, Qibla direction, Quran reading, automatic dhikr, authentic hadiths, Hijri calendar and much more. A premium ad-free version with exclusive features will be available soon.",
+    "description": "This free app (currently ad-free) accompanies you daily in your religious practice: accurate prayer times, Qibla direction, Quran reading, automatic dhikr, authentic hadiths, Hijri calendar and much more. New features include prayer statistics, badges system, favorites, advanced audio, themes, sun information, and weekly view. A premium version with exclusive features is now available.",
     "blessing": "بارك الله فيكم - May Allah bless you",
 
     "features_title": "🌟 Complete features",
@@ -124,8 +124,30 @@
       "asmaul_husna": "99 Names of Allah",
       "authentic_hadith": "Authentic hadiths",
       "hijri_calendar": "Hijri calendar",
-      "smart_notifications": "Smart notifications"
+      "smart_notifications": "Smart notifications",
+      "prayer_statistics": "Prayer statistics",
+      "badges_system": "Badges system",
+      "favorites_system": "Favorites system",
+      "advanced_audio": "Advanced audio",
+      "premium_features": "Premium features",
+      "themes_system": "Themes system",
+      "sun_info": "Sun information",
+      "weekly_view": "Weekly view"
     },
+
+    "premium_title": "👑 Premium Features",
+    "premium_subtitle": "Discover the exclusive features of the premium version:",
+    "premium_stats": "Detailed prayer statistics",
+    "premium_badges": "Badges and rewards system",
+    "premium_audio": "Advanced audio player and cache",
+    "premium_themes": "Advanced customizable themes",
+
+    "advanced_title": "🚀 Advanced Features",
+    "advanced_subtitle": "New features recently added:",
+    "advanced_favorites": "Smart favorites system",
+    "advanced_weekly": "Weekly prayer view",
+    "advanced_sun": "Detailed sun information",
+    "advanced_personalization": "Advanced interface customization",
 
     "faq_title": "❓ Frequently asked questions",
     "faq_location_question": "Why does the app need my location?",
@@ -155,6 +177,10 @@
     "tech_adhan_lib": "• Calculations based on Adhan library",
     "tech_expo": "• Modern and performant interface",
     "tech_permissions": "• Permissions: Location, Notifications, Wake",
+    "tech_theme_system": "• Dynamic theme system (day/night/auto)",
+    "tech_audio_optimization": "• Advanced audio optimization with smart cache",
+    "tech_performance": "• Optimized performance with advanced React hooks",
+    "tech_security": "• Enhanced security with robust error handling",
 
     "sources_title": "📚 Sources & credits",
     "source_quran": "• Quran: Quran.com API",

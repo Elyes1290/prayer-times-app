@@ -111,7 +111,7 @@
     "title": "Acerca de la aplicación",
     "subtitle": "Aplicación islámica completa",
     "welcome": "¡Bienvenido a tu compañero espiritual!",
-    "description": "Esta aplicación gratuita (actualmente sin anuncios) te acompaña diariamente en tu práctica religiosa: horarios precisos de oración, dirección de la Qibla, lectura del Corán, dhikr automático, hadices auténticos, calendario Hijri y mucho más. Una versión premium sin anuncios con funciones exclusivas estará disponible pronto.",
+    "description": "Esta aplicación gratuita (actualmente sin anuncios) te acompaña diariamente en tu práctica religiosa: horarios precisos de oración, dirección de la Qibla, lectura del Corán, dhikr automático, hadices auténticos, calendario Hijri y mucho más. Nuevas características incluyen estadísticas de oración, sistema de insignias, favoritos, audio avanzado, temas, información solar y vista semanal. Una versión premium con características exclusivas ya está disponible.",
     "blessing": "بارك الله فيكم - Que Allah te bendiga",
 
     "features_title": "🌟 Funciones completas",
@@ -124,8 +124,30 @@
       "asmaul_husna": "99 Nombres de Allah",
       "authentic_hadith": "Hadices auténticos",
       "hijri_calendar": "Calendario Hijri",
-      "smart_notifications": "Notificaciones inteligentes"
+      "smart_notifications": "Notificaciones inteligentes",
+      "prayer_statistics": "Estadísticas de oración",
+      "badges_system": "Sistema de insignias",
+      "favorites_system": "Sistema de favoritos",
+      "advanced_audio": "Audio avanzado",
+      "premium_features": "Características premium",
+      "themes_system": "Sistema de temas",
+      "sun_info": "Información solar",
+      "weekly_view": "Vista semanal"
     },
+
+    "premium_title": "👑 Características Premium",
+    "premium_subtitle": "Descubre las características exclusivas de la versión premium:",
+    "premium_stats": "Estadísticas detalladas de oración",
+    "premium_badges": "Sistema de insignias y recompensas",
+    "premium_audio": "Reproductor de audio avanzado y caché",
+    "premium_themes": "Temas personalizables avanzados",
+
+    "advanced_title": "🚀 Características Avanzadas",
+    "advanced_subtitle": "Nuevas características agregadas recientemente:",
+    "advanced_favorites": "Sistema de favoritos inteligente",
+    "advanced_weekly": "Vista semanal de oraciones",
+    "advanced_sun": "Información solar detallada",
+    "advanced_personalization": "Personalización avanzada de la interfaz",
 
     "faq_title": "❓ Preguntas frecuentes",
     "faq_location_question": "¿Por qué la aplicación necesita mi ubicación?",
@@ -155,6 +177,10 @@
     "tech_adhan_lib": "• Cálculos basados en la biblioteca Adhan",
     "tech_expo": "• Interfaz moderna y eficiente",
     "tech_permissions": "• Permisos: Ubicación, Notificaciones, Despertar",
+    "tech_theme_system": "• Sistema de temas dinámicos (día/noche/auto)",
+    "tech_audio_optimization": "• Optimización de audio avanzada con caché inteligente",
+    "tech_performance": "• Rendimiento optimizado con hooks React avanzados",
+    "tech_security": "• Seguridad mejorada con manejo robusto de errores",
 
     "sources_title": "📚 Fuentes y créditos",
     "source_quran": "• Corán: API de Quran.com",

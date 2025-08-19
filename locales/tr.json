@@ -111,7 +111,7 @@
     "title": "Uygulama hakkında",
     "subtitle": "Kapsamlı İslami uygulama",
     "welcome": "Ruhani arkadaşınıza hoş geldiniz!",
-    "description": "Bu ücretsiz uygulama (şu anda reklamsız) günlük dini pratiğinizde size eşlik eder: hassas namaz vakitleri, Kıble yönü, Kuran okuma, otomatik zikir, sahih hadisler, Hicri takvim ve daha fazlası. Yakında özel özelliklerle birlikte premium reklamsız sürüm mevcut olacaktır.",
+    "description": "Bu ücretsiz uygulama (şu anda reklamsız) günlük dini pratiğinizde size eşlik eder: hassas namaz vakitleri, Kıble yönü, Kuran okuma, otomatik zikir, sahih hadisler, Hicri takvim, namaz istatistikleri, rozet sistemi, favori sistemi, gelişmiş ses ve daha fazlası. Yakında özel özelliklerle birlikte premium reklamsız sürüm mevcut olacaktır.",
     "blessing": "بارك الله فيكم - Allah size bereket versin",
 
     "features_title": "🌟 Tam özellikler",
@@ -124,8 +124,30 @@
       "asmaul_husna": "Allah'ın 99 ismi",
       "authentic_hadith": "Sahih hadisler",
       "hijri_calendar": "Hicri takvim",
-      "smart_notifications": "Akıllı bildirimler"
+      "smart_notifications": "Akıllı bildirimler",
+      "prayer_statistics": "Namaz istatistikleri",
+      "badges_system": "Rozet sistemi",
+      "favorites_system": "Favori sistemi",
+      "advanced_audio": "Gelişmiş ses",
+      "premium_features": "Premium özellikler",
+      "themes_system": "Tema sistemi",
+      "sun_info": "Güneş bilgileri",
+      "weekly_view": "Haftalık görünüm"
     },
+
+    "premium_title": "👑 Premium özellikler",
+    "premium_subtitle": "Ruhani yolculuğunuzu geliştirin:",
+    "premium_stats": "Detaylı namaz istatistikleri",
+    "premium_badges": "Özel rozetler ve ödüller",
+    "premium_audio": "Yüksek kaliteli ses dosyaları",
+    "premium_themes": "Özel temalar ve kişiselleştirme",
+
+    "advanced_title": "🚀 Gelişmiş özellikler",
+    "advanced_subtitle": "Deneyiminizi geliştirmek için:",
+    "advanced_favorites": "Favori sistemi ve senkronizasyon",
+    "advanced_weekly": "Haftalık namaz görünümü",
+    "advanced_sun": "Güneş bilgileri ve zaman",
+    "advanced_personalization": "Kişiselleştirme ve ayarlar",
 
     "faq_title": "❓ Sık sorulan sorular",
     "faq_location_question": "Uygulama neden konumuma ihtiyaç duyuyor?",
@@ -155,6 +177,10 @@
     "tech_adhan_lib": "• Adhan kütüphanesine dayalı hesaplamalar",
     "tech_expo": "• Modern ve performanslı arayüz",
     "tech_permissions": "• İzinler: Konum, Bildirimler, Uyandırma",
+    "tech_theme_system": "• Dinamik tema sistemi ve kişiselleştirme",
+    "tech_audio_optimization": "• Gelişmiş ses optimizasyonu ve önbellek",
+    "tech_performance": "• Modern React hooks ile gelişmiş performans",
+    "tech_security": "• Gelişmiş güvenlik ve veri koruması",
 
     "sources_title": "📚 Kaynaklar ve teşekkürler",
     "source_quran": "• Kuran: Quran.com API",

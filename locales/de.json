@@ -111,7 +111,7 @@
     "title": "Über die App",
     "subtitle": "Vollständige islamische Anwendung",
     "welcome": "Willkommen zu Ihrem spirituellen Begleiter!",
-    "description": "Diese kostenlose App (derzeit werbefrei) hilft Ihnen bei Ihren täglichen religiösen Praktiken: Genaue Gebetszeiten, Qibla-Richtung, Quran-Lesung, automatisches Dhikr, authentische Hadithe, Hidschri-Kalender und vieles mehr. Bald wird eine Premium-Version ohne Werbung mit exklusiven Funktionen verfügbar sein.",
+    "description": "Diese kostenlose App (derzeit werbefrei) hilft Ihnen bei Ihren täglichen religiösen Praktiken: Genaue Gebetszeiten, Qibla-Richtung, Quran-Lesung, automatisches Dhikr, authentische Hadithe, Hidschri-Kalender und vieles mehr. Neue Funktionen umfassen Gebetsstatistiken, Badge-System, Favoriten, erweiterte Audio, Themen, Sonneninformationen und Wochenansicht. Eine Premium-Version mit exklusiven Funktionen ist jetzt verfügbar.",
     "blessing": "بارك الله فيكم - Möge Allah Sie segnen",
 
     "features_title": "🌟 Vollständige Funktionen",
@@ -124,8 +124,30 @@
       "asmaul_husna": "99 Namen Allahs",
       "authentic_hadith": "Authentische Hadithe",
       "hijri_calendar": "Hidschri-Kalender",
-      "smart_notifications": "Intelligente Benachrichtigungen"
+      "smart_notifications": "Intelligente Benachrichtigungen",
+      "prayer_statistics": "Gebetsstatistiken",
+      "badges_system": "Badge-System",
+      "favorites_system": "Favoriten-System",
+      "advanced_audio": "Erweiterte Audio",
+      "premium_features": "Premium-Funktionen",
+      "themes_system": "Themen-System",
+      "sun_info": "Sonneninformationen",
+      "weekly_view": "Wochenansicht"
     },
+
+    "premium_title": "👑 Premium-Funktionen",
+    "premium_subtitle": "Entdecken Sie die exklusiven Funktionen der Premium-Version:",
+    "premium_stats": "Detaillierte Gebetsstatistiken",
+    "premium_badges": "Badge- und Belohnungssystem",
+    "premium_audio": "Erweiterter Audio-Player und Cache",
+    "premium_themes": "Erweiterte anpassbare Themen",
+
+    "advanced_title": "🚀 Erweiterte Funktionen",
+    "advanced_subtitle": "Neue Funktionen kürzlich hinzugefügt:",
+    "advanced_favorites": "Intelligentes Favoriten-System",
+    "advanced_weekly": "Wochenansicht der Gebete",
+    "advanced_sun": "Detaillierte Sonneninformationen",
+    "advanced_personalization": "Erweiterte Interface-Anpassung",
 
     "faq_title": "❓ Häufig gestellte Fragen",
     "faq_location_question": "Warum benötigt die App meinen Standort?",
@@ -155,6 +177,10 @@
     "tech_adhan_lib": "• Berechnung basierend auf Adhan-Bibliothek",
     "tech_expo": "• Modernes und effizientes Interface",
     "tech_permissions": "• Berechtigungen: Standort, Benachrichtigungen, Aufwachen",
+    "tech_theme_system": "• Dynamisches Themen-System (Tag/Nacht/Auto)",
+    "tech_audio_optimization": "• Erweiterte Audio-Optimierung mit intelligentem Cache",
+    "tech_performance": "• Optimierte Leistung mit erweiterten React-Hooks",
+    "tech_security": "• Verbesserte Sicherheit mit robustem Fehlerhandling",
 
     "sources_title": "📚 Quellen und Credits",
     "source_quran": "• Quran: Quran.com API",

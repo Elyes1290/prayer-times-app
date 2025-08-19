@@ -28,7 +28,7 @@ export default function AboutScreen() {
   // Cette date correspond à votre dernière publication sur Google Play
   const getLastUpdateDate = () => {
     // 🎯 Vous pouvez mettre à jour cette date à chaque release Google Play
-    const lastReleaseDate = "2025-08-05"; // Format YYYY-MM-DD
+    const lastReleaseDate = "2025-08-19"; // Format YYYY-MM-DD
     return new Date(lastReleaseDate).toLocaleDateString("fr-FR", {
       day: "numeric",
       month: "long",
@@ -45,6 +45,14 @@ export default function AboutScreen() {
     { icon: "book-outline", key: "authentic_hadith" },
     { icon: "calendar-heart", key: "hijri_calendar" },
     { icon: "bell-outline", key: "smart_notifications" },
+    { icon: "chart-line", key: "prayer_statistics" },
+    { icon: "trophy", key: "badges_system" },
+    { icon: "heart", key: "favorites_system" },
+    { icon: "music", key: "advanced_audio" },
+    { icon: "crown", key: "premium_features" },
+    { icon: "palette", key: "themes_system" },
+    { icon: "sun", key: "sun_info" },
+    { icon: "calendar-week", key: "weekly_view" },
   ];
 
   const faqData = [
@@ -139,6 +147,48 @@ export default function AboutScreen() {
           </View>
         </View>
 
+        {/* Premium Features Section */}
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>{t("abouts.premium_title")}</Text>
+          <Text style={styles.sectionSubtitle}>
+            {t("abouts.premium_subtitle")}
+          </Text>
+          <View style={styles.premiumFeaturesGrid}>
+            <View style={styles.premiumFeatureItem}>
+              <MaterialCommunityIcons
+                name="chart-line"
+                size={24}
+                color="#b59d42"
+              />
+              <Text style={styles.premiumFeatureText}>
+                {t("abouts.premium_stats")}
+              </Text>
+            </View>
+            <View style={styles.premiumFeatureItem}>
+              <MaterialCommunityIcons name="trophy" size={24} color="#b59d42" />
+              <Text style={styles.premiumFeatureText}>
+                {t("abouts.premium_badges")}
+              </Text>
+            </View>
+            <View style={styles.premiumFeatureItem}>
+              <MaterialCommunityIcons name="music" size={24} color="#b59d42" />
+              <Text style={styles.premiumFeatureText}>
+                {t("abouts.premium_audio")}
+              </Text>
+            </View>
+            <View style={styles.premiumFeatureItem}>
+              <MaterialCommunityIcons
+                name="palette"
+                size={24}
+                color="#b59d42"
+              />
+              <Text style={styles.premiumFeatureText}>
+                {t("abouts.premium_themes")}
+              </Text>
+            </View>
+          </View>
+        </View>
+
         {/* FAQ Section */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>{t("abouts.faq_title")}</Text>
@@ -203,6 +253,56 @@ export default function AboutScreen() {
           <Text style={styles.text}>{t("abouts.tech_adhan_lib")}</Text>
           <Text style={styles.text}>{t("abouts.tech_expo")}</Text>
           <Text style={styles.text}>{t("abouts.tech_permissions")}</Text>
+          <Text style={styles.text}>{t("abouts.tech_theme_system")}</Text>
+          <Text style={styles.text}>{t("abouts.tech_audio_optimization")}</Text>
+          <Text style={styles.text}>{t("abouts.tech_performance")}</Text>
+          <Text style={styles.text}>{t("abouts.tech_security")}</Text>
+        </View>
+
+        {/* Advanced Features Section */}
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>{t("abouts.advanced_title")}</Text>
+          <Text style={styles.sectionSubtitle}>
+            {t("abouts.advanced_subtitle")}
+          </Text>
+          <View style={styles.advancedFeaturesList}>
+            <View style={styles.advancedFeatureItem}>
+              <MaterialCommunityIcons name="heart" size={20} color="#b59d42" />
+              <Text style={styles.advancedFeatureText}>
+                {t("abouts.advanced_favorites")}
+              </Text>
+            </View>
+            <View style={styles.advancedFeatureItem}>
+              <MaterialCommunityIcons
+                name="calendar-week"
+                size={20}
+                color="#b59d42"
+              />
+              <Text style={styles.advancedFeatureText}>
+                {t("abouts.advanced_weekly")}
+              </Text>
+            </View>
+            <View style={styles.advancedFeatureItem}>
+              <MaterialCommunityIcons
+                name="weather-sunny"
+                size={20}
+                color="#b59d42"
+              />
+              <Text style={styles.advancedFeatureText}>
+                {t("abouts.advanced_sun")}
+              </Text>
+            </View>
+            <View style={styles.advancedFeatureItem}>
+              <MaterialCommunityIcons
+                name="account-cog"
+                size={20}
+                color="#b59d42"
+              />
+              <Text style={styles.advancedFeatureText}>
+                {t("abouts.advanced_personalization")}
+              </Text>
+            </View>
+          </View>
         </View>
 
         {/* Sources Section */}
@@ -360,6 +460,47 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   featureText: {
+    fontSize: 14,
+    color: "#6c5d3b",
+    marginLeft: 8,
+    fontFamily: "ScheherazadeNew",
+    flex: 1,
+  },
+  premiumFeaturesGrid: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+    marginTop: 12,
+  },
+  premiumFeatureItem: {
+    flexDirection: "row",
+    alignItems: "center",
+    width: "48%",
+    marginBottom: 12,
+    backgroundColor: "rgba(181, 157, 66, 0.1)",
+    padding: 8,
+    borderRadius: 8,
+  },
+  premiumFeatureText: {
+    fontSize: 14,
+    color: "#b59d42",
+    marginLeft: 8,
+    fontFamily: "ScheherazadeNew",
+    flex: 1,
+    fontWeight: "bold",
+  },
+  advancedFeaturesList: {
+    marginTop: 12,
+  },
+  advancedFeatureItem: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 8,
+    backgroundColor: "rgba(255, 255, 255, 0.8)",
+    padding: 8,
+    borderRadius: 6,
+  },
+  advancedFeatureText: {
     fontSize: 14,
     color: "#6c5d3b",
     marginLeft: 8,

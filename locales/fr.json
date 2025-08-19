@@ -111,7 +111,7 @@
     "title": "À propos de l'application",
     "subtitle": "Application islamique complète",
     "welcome": "Bienvenue dans votre compagnon spirituel !",
-    "description": "Cette application gratuite (actuellement sans publicité) vous accompagne au quotidien dans votre pratique religieuse : horaires de prière précis, direction de la Qibla, lecture du Coran, dhikr automatiques, hadiths authentiques, calendrier Hijri et bien plus encore. Une version premium sans publicité avec des fonctionnalités exclusives sera bientôt disponible.",
+    "description": "Cette application gratuite (actuellement sans publicité) vous accompagne au quotidien dans votre pratique religieuse : horaires de prière précis, direction de la Qibla, lecture du Coran, dhikr automatiques, hadiths authentiques, calendrier Hijri, statistiques de prière, système de badges, favoris intelligents, thèmes personnalisables et bien plus encore. Une version premium sans publicité avec des fonctionnalités exclusives est maintenant disponible !",
     "blessing": "بارك الله فيكم - Qu'Allah vous bénisse",
 
     "features_title": "🌟 Fonctionnalités complètes",
@@ -124,7 +124,15 @@
       "asmaul_husna": "99 noms d'Allah",
       "authentic_hadith": "Hadiths authentiques",
       "hijri_calendar": "Calendrier Hijri",
-      "smart_notifications": "Notifications intelligentes"
+      "smart_notifications": "Notifications intelligentes",
+      "prayer_statistics": "Statistiques de prière",
+      "badges_system": "Système de badges",
+      "favorites_system": "Système de favoris",
+      "advanced_audio": "Audio avancé",
+      "premium_features": "Fonctionnalités premium",
+      "themes_system": "Système de thèmes",
+      "sun_info": "Informations solaires",
+      "weekly_view": "Vue hebdomadaire"
     },
 
     "faq_title": "❓ Questions fréquentes",
@@ -136,6 +144,20 @@
     "faq_qibla_answer": "Tenez votre téléphone à plat, éloigné des objets métalliques. Faites des mouvements en 8 pour calibrer la boussole si elle est instable.",
     "faq_offline_question": "L'app fonctionne-t-elle hors ligne ?",
     "faq_offline_answer": "Oui, une fois configurée, l'app fonctionne hors ligne pour les horaires de prière, Qibla, dhikr et lecture du Coran.",
+
+    "premium_title": "👑 Fonctionnalités Premium",
+    "premium_subtitle": "Découvrez les fonctionnalités exclusives de la version premium :",
+    "premium_stats": "Statistiques détaillées de vos prières",
+    "premium_badges": "Système de badges et récompenses",
+    "premium_audio": "Lecteur audio avancé et cache",
+    "premium_themes": "Thèmes personnalisables avancés",
+
+    "advanced_title": "🚀 Fonctionnalités Avancées",
+    "advanced_subtitle": "Nouvelles fonctionnalités ajoutées récemment :",
+    "advanced_favorites": "Système de favoris intelligent",
+    "advanced_weekly": "Vue hebdomadaire des prières",
+    "advanced_sun": "Informations solaires détaillées",
+    "advanced_personalization": "Personnalisation avancée de l'interface",
 
     "support_title": "🤝 Support et communauté",
     "send_suggestion": "Envoyer une suggestion",
@@ -155,6 +177,10 @@
     "tech_adhan_lib": "• Calculs basés sur la bibliothèque Adhan",
     "tech_expo": "• Interface moderne et performante",
     "tech_permissions": "• Permissions : Localisation, Notifications, Réveil",
+    "tech_theme_system": "• Système de thèmes dynamiques (jour/nuit/auto)",
+    "tech_audio_optimization": "• Optimisation audio avancée avec cache intelligent",
+    "tech_performance": "• Performance optimisée avec hooks React avancés",
+    "tech_security": "• Sécurité renforcée avec gestion des erreurs robuste",
 
     "sources_title": "📚 Sources & crédits",
     "source_quran": "• Coran : API Quran.com",

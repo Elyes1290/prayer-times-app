@@ -111,7 +111,7 @@
     "title": "Informazioni sull'app",
     "subtitle": "App islamica completa",
     "welcome": "Benvenuto nel tuo compagno spirituale!",
-    "description": "Questa app gratuita (attualmente senza pubblicità) ti accompagna quotidianamente nella tua pratica religiosa: orari precisi delle preghiere, direzione della Qibla, lettura del Corano, dhikr automatico, hadith autentici, calendario Hijri e molto altro. Una versione premium senza pubblicità con funzionalità esclusive sarà disponibile presto.",
+    "description": "Questa app gratuita (attualmente senza pubblicità) ti accompagna quotidianamente nella tua pratica religiosa: orari precisi delle preghiere, direzione della Qibla, lettura del Corano, dhikr automatico, hadith autentici, calendario Hijri, statistiche delle preghiere, sistema di badge, sistema dei preferiti, audio avanzato e molto altro. Una versione premium senza pubblicità con funzionalità esclusive sarà disponibile presto.",
     "blessing": "بارك الله فيكم - Che Allah ti benedica",
 
     "features_title": "🌟 Funzionalità complete",
@@ -124,8 +124,30 @@
       "asmaul_husna": "99 Nomi di Allah",
       "authentic_hadith": "Hadith autentici",
       "hijri_calendar": "Calendario Hijri",
-      "smart_notifications": "Notifiche intelligenti"
+      "smart_notifications": "Notifiche intelligenti",
+      "prayer_statistics": "Statistiche delle preghiere",
+      "badges_system": "Sistema di badge",
+      "favorites_system": "Sistema dei preferiti",
+      "advanced_audio": "Audio avanzato",
+      "premium_features": "Funzionalità premium",
+      "themes_system": "Sistema di temi",
+      "sun_info": "Informazioni sul sole",
+      "weekly_view": "Vista settimanale"
     },
+
+    "premium_title": "👑 Funzionalità premium",
+    "premium_subtitle": "Migliora il tuo viaggio spirituale:",
+    "premium_stats": "Statistiche dettagliate delle preghiere",
+    "premium_badges": "Badge speciali e ricompense",
+    "premium_audio": "File audio di alta qualità",
+    "premium_themes": "Temi speciali e personalizzazione",
+
+    "advanced_title": "🚀 Funzionalità avanzate",
+    "advanced_subtitle": "Per migliorare la tua esperienza:",
+    "advanced_favorites": "Sistema dei preferiti e sincronizzazione",
+    "advanced_weekly": "Vista settimanale delle preghiere",
+    "advanced_sun": "Informazioni sul sole e tempo",
+    "advanced_personalization": "Personalizzazione e impostazioni",
 
     "faq_title": "❓ Domande frequenti",
     "faq_location_question": "Perché l'app ha bisogno della mia posizione?",
@@ -155,6 +177,10 @@
     "tech_adhan_lib": "• Calcoli basati sulla libreria Adhan",
     "tech_expo": "• Interfaccia moderna ed efficiente",
     "tech_permissions": "• Permessi: Posizione, Notifiche, Sveglia",
+    "tech_theme_system": "• Sistema di temi dinamico e personalizzazione",
+    "tech_audio_optimization": "• Ottimizzazione audio avanzata e caching",
+    "tech_performance": "• Prestazioni migliorate con React hooks moderni",
+    "tech_security": "• Sicurezza migliorata e protezione dei dati",
 
     "sources_title": "📚 Fonti e crediti",
     "source_quran": "• Corano: API di Quran.com",
