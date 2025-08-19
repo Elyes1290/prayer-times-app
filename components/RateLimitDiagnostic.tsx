@@ -139,7 +139,7 @@ const RateLimitDiagnostic: React.FC = () => {
         <Text style={styles.sectionTitle}>📊 Statut Actuel</Text>
 
         <View style={styles.statusRow}>
-          <Text style={styles.label}>Token d'authentification:</Text>
+          <Text style={styles.label}>Token d&apos;authentification:</Text>
           <Text
             style={[
               styles.value,
@@ -151,6 +151,7 @@ const RateLimitDiagnostic: React.FC = () => {
         </View>
 
         <View style={styles.statusRow}>
+          <Text style={styles.label}>Token de rafraîchissement:</Text>
           <Text style={styles.label}>Token de rafraîchissement:</Text>
           <Text
             style={[
@@ -192,7 +193,7 @@ const RateLimitDiagnostic: React.FC = () => {
         </View>
 
         <View style={styles.statusRow}>
-          <Text style={styles.label}>Nombre d'erreurs API:</Text>
+          <Text style={styles.label}>Nombre d&apos;erreurs API:</Text>
           <Text
             style={[
               styles.value,
@@ -229,7 +230,7 @@ const RateLimitDiagnostic: React.FC = () => {
 
         <TouchableOpacity style={styles.button} onPress={clearApiErrors}>
           <Text style={styles.buttonText}>
-            🧹 Réinitialiser les compteurs d'erreur
+            🧹 Réinitialiser les compteurs d&apos;erreur
           </Text>
         </TouchableOpacity>
 
@@ -246,7 +247,7 @@ const RateLimitDiagnostic: React.FC = () => {
 
         {status.apiErrorCount > 10 && (
           <Text style={styles.recommendation}>
-            ⚠️ Trop d'erreurs API détectées. Essayez de vous reconnecter.
+            ⚠️ Trop d&apos;erreurs API détectées. Essayez de vous reconnecter.
           </Text>
         )}
 
@@ -259,7 +260,7 @@ const RateLimitDiagnostic: React.FC = () => {
 
         {!status.hasAuthToken && !status.pendingRegistration && (
           <Text style={styles.recommendation}>
-            ℹ️ Aucun token d'authentification. Connectez-vous normalement.
+            ℹ️ Aucun token d&apos;authentification. Connectez-vous normalement.
           </Text>
         )}
 
