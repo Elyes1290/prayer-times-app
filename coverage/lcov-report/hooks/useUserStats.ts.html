@@ -25,14 +25,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/94</span>
+                <span class='fraction'>0/92</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/31</span>
+                <span class='fraction'>0/27</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/92</span>
+                <span class='fraction'>0/90</span>
             </div>
         
             
@@ -355,19 +355,8 @@
 <a name='L290'></a><a href='#L290'>290</a>
 <a name='L291'></a><a href='#L291'>291</a>
 <a name='L292'></a><a href='#L292'>292</a>
-<a name='L293'></a><a href='#L293'>293</a>
-<a name='L294'></a><a href='#L294'>294</a>
-<a name='L295'></a><a href='#L295'>295</a>
-<a name='L296'></a><a href='#L296'>296</a>
-<a name='L297'></a><a href='#L297'>297</a>
-<a name='L298'></a><a href='#L298'>298</a>
-<a name='L299'></a><a href='#L299'>299</a>
-<a name='L300'></a><a href='#L300'>300</a>
-<a name='L301'></a><a href='#L301'>301</a>
-<a name='L302'></a><a href='#L302'>302</a>
-<a name='L303'></a><a href='#L303'>303</a>
-<a name='L304'></a><a href='#L304'>304</a>
-<a name='L305'></a><a href='#L305'>305</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L293'></a><a href='#L293'>293</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -526,35 +515,21 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -590,6 +565,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -675,6 +651,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getCurrentUserId } from "../utils/userAuth";
 import { AppConfig } from "../utils/config";
+import apiClient from "../utils/apiClient";
 &nbsp;
 export interface UserStats {
   user_id: number;
@@ -706,15 +683,15 @@ export interface UserStats {
   };
   profile: "beginner" | "yoyo" | "regular" | "stopped";
   advice: {
-    advice: Array&lt;{
+    advice: {
       key: string;
       params: Record&lt;string, any&gt;;
-    }&gt;;
-    action_plan: Array&lt;{
+    }[];
+    action_plan: {
       step_key: string;
       duration_key: string;
       reward_key: string;
-    }&gt;;
+    }[];
   };
   points: number;
   level: {
@@ -722,7 +699,7 @@ export interface UserStats {
     title: string;
     progress: number;
   };
-  challenges: Array&lt;{
+  challenges: {
     id: string;
     title: string;
     description: string;
@@ -730,23 +707,23 @@ export interface UserStats {
     progress: number;
     icon: string;
     color: string;
-  }&gt;;
-  badges: Array&lt;{
+  }[];
+  badges: {
     id: string;
     name: string;
     description: string;
     icon: string;
     unlocked: boolean;
     unlocked_at: string | null;
-  }&gt;;
-  history: Array&lt;{
+  }[];
+  history: {
     date: string;
     complete: boolean;
     prayers: number;
     dhikr: number;
     quran: number;
     hadiths: number;
-  }&gt;;
+  }[];
   smart_notification: {
     key: string;
     params: Record&lt;string, any&gt;;
@@ -828,7 +805,15 @@ export const useUserStats = <span class="cstat-no" title="statement not covered"
 <span class="cstat-no" title="statement not covered" >      if (!forceRefresh) {</span>
         const cached = <span class="cstat-no" title="statement not covered" >await AsyncStorage.getItem(CACHE_KEY);</span>
 <span class="cstat-no" title="statement not covered" >        if (cached) {</span>
-          const { data, timestamp } = <span class="cstat-no" title="statement not covered" >JSON.parse(cached);</span>
+          let parsedCache: any = <span class="cstat-no" title="statement not covered" >null;</span>
+<span class="cstat-no" title="statement not covered" >          try {</span>
+<span class="cstat-no" title="statement not covered" >            parsedCache = JSON.parse(cached);</span>
+          } catch {
+            // Cache corrompu, ignorer et refetch
+<span class="cstat-no" title="statement not covered" >            await AsyncStorage.removeItem(CACHE_KEY);</span>
+<span class="cstat-no" title="statement not covered" >            return;</span>
+          }
+          const { data, timestamp } = <span class="cstat-no" title="statement not covered" >parsedCache;</span>
           const age = <span class="cstat-no" title="statement not covered" >Date.now() - timestamp;</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >          if (age &lt; CACHE_DURATION) {</span>
@@ -840,61 +825,40 @@ export const useUserStats = <span class="cstat-no" title="statement not covered"
         }
       }
 &nbsp;
-      // Appel API - utiliser fetch directement
-      // 🧪 RÉPARÉ : Utiliser l'URL corrigée
-      const apiUrl = <span class="cstat-no" title="statement not covered" >`${AppConfig.USER_STATS_API}?user_id=${userId}`;</span>
-<span class="cstat-no" title="statement not covered" >      console.log("🔍 [DEBUG] Appel API user-stats:", apiUrl);</span>
-&nbsp;
-      const response = <span class="cstat-no" title="statement not covered" >await fetch(apiUrl, {</span>
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      });
-&nbsp;
-<span class="cstat-no" title="statement not covered" >      console.log("🔍 [DEBUG] Réponse API status:", response.status);</span>
-&nbsp;
-      // Vérifier le type de contenu
-      const contentType = <span class="cstat-no" title="statement not covered" >response.headers.get("content-type");</span>
-<span class="cstat-no" title="statement not covered" >      if (!contentType || !contentType.includes("application/json")) {</span>
-<span class="cstat-no" title="statement not covered" >        throw new Error(</span>
-          "L'API a retourné du HTML au lieu de JSON. Vérifiez que l'endpoint existe."
-        );
-      }
-&nbsp;
-      const result = <span class="cstat-no" title="statement not covered" >await response.json();</span>
+      // Appel API centralisé (Authorization + refresh + retry)
+      const apiResponse = <span class="cstat-no" title="statement not covered" >await apiClient.getUserStats();</span>
 <span class="cstat-no" title="statement not covered" >      console.log(</span>
         "🔍 [DEBUG] Réponse API JSON:",
-        JSON.stringify(result, null, 2)
+        JSON.stringify(apiResponse, null, 2)
       );
 &nbsp;
       // Vérifier si c'est une réponse premium
-<span class="cstat-no" title="statement not covered" >      if (!result.success &amp;&amp; result.premium_required) {</span>
+<span class="cstat-no" title="statement not covered" >      if (!apiResponse.success &amp;&amp; (apiResponse as any).premium_required) {</span>
 <span class="cstat-no" title="statement not covered" >        setPremiumRequired(true);</span>
 <span class="cstat-no" title="statement not covered" >        setPremiumMessage(</span>
-          result.premium_message ||
+          (apiResponse as any).premium_message ||
             "Devenez Premium pour accéder à vos statistiques"
         );
 <span class="cstat-no" title="statement not covered" >        setLoading(false);</span>
 <span class="cstat-no" title="statement not covered" >        return;</span>
       }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >      if (result.success &amp;&amp; result.data) {</span>
-<span class="cstat-no" title="statement not covered" >        setStats(result.data);</span>
+<span class="cstat-no" title="statement not covered" >      if (apiResponse.success &amp;&amp; apiResponse.data) {</span>
+<span class="cstat-no" title="statement not covered" >        setStats(apiResponse.data as any);</span>
 <span class="cstat-no" title="statement not covered" >        setLastUpdated(new Date());</span>
 &nbsp;
         // Mettre en cache
 <span class="cstat-no" title="statement not covered" >        await AsyncStorage.setItem(</span>
           CACHE_KEY,
           JSON.stringify({
-            data: result.data,
+            data: apiResponse.data,
             timestamp: Date.now(),
           })
         );
       } else {
 <span class="cstat-no" title="statement not covered" >        throw new Error(</span>
-          result.message || "Erreur lors de la récupération des statistiques"
+          apiResponse.message ||
+            "Erreur lors de la récupération des statistiques"
         );
       }
     } catch (err) {
@@ -982,7 +946,7 @@ export const useUpdateUserStats = <span class="cstat-no" title="statement not co
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-08-04T17:24:43.624Z
+                at 2025-08-20T15:38:48.167Z
             </div>
         <script src="../prettify.js"></script>
         <script>

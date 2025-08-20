@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/35</span>
+                <span class='fraction'>0/37</span>
             </div>
         
             
@@ -39,14 +39,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/16</span>
+                <span class='fraction'>0/18</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/35</span>
+                <span class='fraction'>0/37</span>
             </div>
         
             
@@ -605,7 +605,20 @@
 <a name='L540'></a><a href='#L540'>540</a>
 <a name='L541'></a><a href='#L541'>541</a>
 <a name='L542'></a><a href='#L542'>542</a>
-<a name='L543'></a><a href='#L543'>543</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L543'></a><a href='#L543'>543</a>
+<a name='L544'></a><a href='#L544'>544</a>
+<a name='L545'></a><a href='#L545'>545</a>
+<a name='L546'></a><a href='#L546'>546</a>
+<a name='L547'></a><a href='#L547'>547</a>
+<a name='L548'></a><a href='#L548'>548</a>
+<a name='L549'></a><a href='#L549'>549</a>
+<a name='L550'></a><a href='#L550'>550</a>
+<a name='L551'></a><a href='#L551'>551</a>
+<a name='L552'></a><a href='#L552'>552</a>
+<a name='L553'></a><a href='#L553'>553</a>
+<a name='L554'></a><a href='#L554'>554</a>
+<a name='L555'></a><a href='#L555'>555</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -751,7 +764,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -980,6 +992,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1017,14 +1032,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1066,6 +1074,22 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1154,13 +1178,14 @@ import {
   TouchableOpacity,
   ActivityIndicator,
   StyleSheet,
+  FlatList,
+  ListRenderItem,
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Slider from "@react-native-community/slider";
 import { useTranslation } from "react-i18next";
 import { PremiumContent } from "../../utils/premiumContent";
 import ThemedPicker from "../ThemedPicker";
-import { useColorScheme } from "../../hooks/useColorScheme";
 import { useThemeAssets } from "../../hooks/useThemeAssets";
 &nbsp;
 interface AdhanSoundSectionProps {
@@ -1292,7 +1317,6 @@ export default function <span class="fstat-no" title="function not covered" >Adh
   styles,
 }: AdhanSoundSectionProps) {
   const { t } = <span class="cstat-no" title="statement not covered" >useTranslation();</span>
-  const colorScheme = <span class="cstat-no" title="statement not covered" >useColorScheme();</span>
   const themeAssets = <span class="cstat-no" title="statement not covered" >useThemeAssets();</span>
 &nbsp;
   // 🚀 NOUVEAU : États pour les modals ThemedPicker
@@ -1519,106 +1543,118 @@ export default function <span class="fstat-no" title="function not covered" >Adh
                     {t("settings_screen.no_premium_adhans")} (DEBUG)
                   &lt;/Text&gt;
                 )}
-                {availableAdhanVoices.map(<span class="fstat-no" title="function not covered" >(a</span>dhan) =&gt; {
-                  const nativeState = <span class="cstat-no" title="statement not covered" >downloadState.get(adhan.id);</span>
-                  const isDownloading =
-<span class="cstat-no" title="statement not covered" >                    downloadingAdhans.has(adhan.id) ||</span>
-                    nativeState?.isDownloading ||
-                    false;
-                  const progress = <span class="cstat-no" title="statement not covered" >nativeState?.progress</span>
-                    ? Math.round(nativeState.progress * 100)
-                    : downloadProgress[adhan.id] || 0;
+                {(<span class="fstat-no" title="function not covered" >()</span> =&gt; {
+                  const renderAdhanItem: ListRenderItem&lt;PremiumContent&gt; = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >({</span></span>
+                    item,
+                  }) =&gt; {
+                    const nativeState = <span class="cstat-no" title="statement not covered" >downloadState.get(item.id);</span>
+                    const isDownloading =
+<span class="cstat-no" title="statement not covered" >                      downloadingAdhans.has(item.id) ||</span>
+                      nativeState?.isDownloading ||
+                      false;
+                    const progress = <span class="cstat-no" title="statement not covered" >nativeState?.progress</span>
+                      ? Math.round(nativeState.progress * 100)
+                      : downloadProgress[item.id] || 0;
 &nbsp;
-<span class="cstat-no" title="statement not covered" >                  return (</span>
-                    &lt;View key={adhan.id} style={styles.premiumAdhanItem}&gt;
-                      &lt;View style={styles.premiumAdhanInfo}&gt;
-                        &lt;Text style={styles.premiumAdhanTitle}&gt;
-                          {adhan.title}
-                        &lt;/Text&gt;
-                        &lt;Text style={styles.premiumAdhanSize}&gt;
-                          {adhan.fileSize
-                            ? `${adhan.fileSize} MB`
-                            : t("settings_screen.unknown_size")}
-                        &lt;/Text&gt;
-                      &lt;/View&gt;
+<span class="cstat-no" title="statement not covered" >                    return (</span>
+                      &lt;View style={styles.premiumAdhanItem}&gt;
+                        &lt;View style={styles.premiumAdhanInfo}&gt;
+                          &lt;Text style={styles.premiumAdhanTitle}&gt;
+                            {item.title}
+                          &lt;/Text&gt;
+                          &lt;Text style={styles.premiumAdhanSize}&gt;
+                            {item.fileSize
+                              ? `${item.fileSize} MB`
+                              : t("settings_screen.unknown_size")}
+                          &lt;/Text&gt;
+                        &lt;/View&gt;
 &nbsp;
-                      &lt;View style={styles.premiumAdhanActions}&gt;
-                        {isDownloading ? (
-                          &lt;View style={styles.downloadProgressContainer}&gt;
-                            &lt;View style={styles.progressBarPremium}&gt;
-                              &lt;View
-                                style={[
-                                  styles.progressFillPremium,
-                                  { width: `${progress}%` },
-                                ]}
-                              /&gt;
+                        &lt;View style={styles.premiumAdhanActions}&gt;
+                          {isDownloading ? (
+                            &lt;View style={styles.downloadProgressContainer}&gt;
+                              &lt;View style={styles.progressBarPremium}&gt;
+                                &lt;View
+                                  style={[
+                                    styles.progressFillPremium,
+                                    { width: `${progress}%` },
+                                  ]}
+                                /&gt;
+                              &lt;/View&gt;
+                              &lt;View style={styles.downloadProgressRow}&gt;
+                                &lt;Text style={styles.progressTextPremium}&gt;
+                                  {progress}%
+                                &lt;/Text&gt;
+                                &lt;TouchableOpacity
+                                  style={styles.cancelDownloadButton}
+                                  onPress={<span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >handleCancelDownload(item.id)}</span>
+                                  activeOpacity={0.7}
+                                &gt;
+                                  &lt;MaterialCommunityIcons
+                                    name="close-circle"
+                                    size={20}
+                                    color="#FF6B6B"
+                                  /&gt;
+                                &lt;/TouchableOpacity&gt;
+                              &lt;/View&gt;
                             &lt;/View&gt;
-                            &lt;View style={styles.downloadProgressRow}&gt;
-                              &lt;Text style={styles.progressTextPremium}&gt;
-                                {progress}%
-                              &lt;/Text&gt;
+                          ) : item.isDownloaded ? (
+                            &lt;View style={styles.downloadedContainer}&gt;
+                              &lt;View style={styles.downloadedIndicator}&gt;
+                                &lt;MaterialCommunityIcons
+                                  name="check-circle"
+                                  size={20}
+                                  color="#4ECDC4"
+                                /&gt;
+                                &lt;Text style={styles.downloadedText}&gt;
+                                  {t("downloaded")}
+                                &lt;/Text&gt;
+                              &lt;/View&gt;
                               &lt;TouchableOpacity
-                                style={styles.cancelDownloadButton}
-                                onPress={<span class="fstat-no" title="function not covered" >()</span> =&gt; {
-                                  // console.log(
-                                  // "🛑 Tentative d'annulation pour:",
-                                  // adhan.id
-                                  // );
-<span class="cstat-no" title="statement not covered" >                                  handleCancelDownload(adhan.id);</span>
-                                }}
-                                activeOpacity={0.7}
+                                style={styles.deleteButtonPremium}
+                                onPress={<span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >handleDeleteAdhan(item)}</span>
                               &gt;
                                 &lt;MaterialCommunityIcons
-                                  name="close-circle"
+                                  name="delete"
                                   size={20}
                                   color="#FF6B6B"
                                 /&gt;
                               &lt;/TouchableOpacity&gt;
                             &lt;/View&gt;
-                          &lt;/View&gt;
-                        ) : adhan.isDownloaded ? (
-                          &lt;View style={styles.downloadedContainer}&gt;
-                            &lt;View style={styles.downloadedIndicator}&gt;
+                          ) : (
+                            &lt;TouchableOpacity
+                              style={styles.downloadButtonPremium}
+                              onPress={<span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >handleDownloadAdhan(item)}</span>
+                            &gt;
                               &lt;MaterialCommunityIcons
-                                name="check-circle"
+                                name="download"
                                 size={20}
                                 color="#4ECDC4"
                               /&gt;
-                              &lt;Text style={styles.downloadedText}&gt;
-                                {t("downloaded")}
+                              &lt;Text style={styles.downloadButtonTextPremium}&gt;
+                                {t("download")}
                               &lt;/Text&gt;
-                            &lt;/View&gt;
-&nbsp;
-                            &lt;TouchableOpacity
-                              style={styles.deleteButtonPremium}
-                              onPress={<span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >handleDeleteAdhan(adhan)}</span>
-                            &gt;
-                              &lt;MaterialCommunityIcons
-                                name="delete"
-                                size={20}
-                                color="#FF6B6B"
-                              /&gt;
                             &lt;/TouchableOpacity&gt;
-                          &lt;/View&gt;
-                        ) : (
-                          &lt;TouchableOpacity
-                            style={styles.downloadButtonPremium}
-                            onPress={<span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >handleDownloadAdhan(adhan)}</span>
-                          &gt;
-                            &lt;MaterialCommunityIcons
-                              name="download"
-                              size={20}
-                              color="#4ECDC4"
-                            /&gt;
-                            &lt;Text style={styles.downloadButtonTextPremium}&gt;
-                              {t("download")}
-                            &lt;/Text&gt;
-                          &lt;/TouchableOpacity&gt;
-                        )}
+                          )}
+                        &lt;/View&gt;
                       &lt;/View&gt;
-                    &lt;/View&gt;
+                    );
+                  };
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                  return (</span>
+                    &lt;FlatList
+                      data={availableAdhanVoices}
+                      keyExtractor={<span class="fstat-no" title="function not covered" >(a</span>) =&gt; <span class="cstat-no" title="statement not covered" >a.id}</span>
+                      renderItem={renderAdhanItem}
+                      initialNumToRender={8}
+                      maxToRenderPerBatch={8}
+                      windowSize={7}
+                      removeClippedSubviews
+                      nestedScrollEnabled
+                      scrollEnabled={false}
+                      showsVerticalScrollIndicator={false}
+                    /&gt;
                   );
-                })}
+                })()}
                 &lt;View style={{ flexDirection: "row", gap: 8, marginTop: 8 }}&gt;
                   &lt;TouchableOpacity
                     style={{
@@ -1696,7 +1732,7 @@ export default function <span class="fstat-no" title="function not covered" >Adh
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-08-04T17:24:43.797Z
+                at 2025-08-20T15:38:48.371Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

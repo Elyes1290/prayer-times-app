@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/8</span>
+                <span class='fraction'>8/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/4</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/5</span>
+                <span class='fraction'>5/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/8</span>
+                <span class='fraction'>8/8</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -234,9 +234,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">11x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">11x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -264,12 +264,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">22x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -291,8 +291,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -314,8 +314,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -354,7 +354,7 @@ interface GeneralSectionProps {
   styles: any;
 }
 &nbsp;
-export default function <span class="fstat-no" title="function not covered" >GeneralSection(</span>{
+export default function GeneralSection({
   notificationsEnabled,
   remindersEnabled,
   reminderOffset,
@@ -367,9 +367,9 @@ export default function <span class="fstat-no" title="function not covered" >Gen
   setReminderOffset,
   styles,
 }: GeneralSectionProps) {
-  const { t } = <span class="cstat-no" title="statement not covered" >useTranslation();</span>
+  const { t } = useTranslation();
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return [</span>
+  return [
     {
       key: "general",
       title: t("general_settings", "Réglages généraux"),
@@ -397,12 +397,12 @@ export default function <span class="fstat-no" title="function not covered" >Gen
                 &lt;Picker
                   selectedValue={selectedLang}
                   style={styles.picker}
-                  onValueChange={<span class="fstat-no" title="function not covered" >(i</span>temValue) =&gt; <span class="cstat-no" title="statement not covered" >onChangeLanguage(itemValue)}</span>
+                  onValueChange={(itemValue) =&gt; onChangeLanguage(itemValue)}
                   itemStyle={styles.pickerItem}
                   mode="dropdown"
                 &gt;
-                  {languages.map(<span class="fstat-no" title="function not covered" >(l</span>ang) =&gt; (
-<span class="cstat-no" title="statement not covered" >                    &lt;Picker.Item</span>
+                  {languages.map((lang) =&gt; (
+                    &lt;Picker.Item
                       key={lang.code}
                       label={lang.label}
                       value={lang.code}
@@ -422,10 +422,10 @@ export default function <span class="fstat-no" title="function not covered" >Gen
               &lt;/Text&gt;
               &lt;Switch
                 value={remindersEnabled}
-                onValueChange={<span class="fstat-no" title="function not covered" >as</span>ync (value) =&gt; {
+                onValueChange={async (value) =&gt; {
                   // console.log(`🔔 Changement rappels: ${value}`);
-<span class="cstat-no" title="statement not covered" >                  setRemindersEnabled(value);</span>
-<span class="cstat-no" title="statement not covered" >                  markPendingChanges();</span>
+                  setRemindersEnabled(value);
+                  markPendingChanges();
                 }}
               /&gt;
             &lt;/View&gt;
@@ -445,10 +445,10 @@ export default function <span class="fstat-no" title="function not covered" >Gen
                   minimumValue={5}
                   maximumValue={30}
                   step={1}
-                  onSlidingComplete={<span class="fstat-no" title="function not covered" >as</span>ync (value) =&gt; {
+                  onSlidingComplete={async (value) =&gt; {
                     // console.log(`🔔 Changement délai rappel: ${value} min`);
-<span class="cstat-no" title="statement not covered" >                    setReminderOffset(value);</span>
-<span class="cstat-no" title="statement not covered" >                    markPendingChanges();</span>
+                    setReminderOffset(value);
+                    markPendingChanges();
                   }}
                   minimumTrackTintColor="#D4AF37"
                   maximumTrackTintColor="rgba(148, 163, 184, 0.4)"
@@ -469,7 +469,7 @@ export default function <span class="fstat-no" title="function not covered" >Gen
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-08-04T17:24:43.797Z
+                at 2025-08-20T15:38:48.371Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
