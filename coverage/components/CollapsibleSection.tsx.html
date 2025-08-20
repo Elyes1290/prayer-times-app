@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/10</span>
+                <span class='fraction'>10/10</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">68.42% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/19</span>
+                <span class='fraction'>13/19</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/10</span>
+                <span class='fraction'>10/10</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -227,29 +227,29 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">28x</span>
+<span class="cline-any cline-yes">28x</span>
+<span class="cline-any cline-yes">28x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">28x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">28x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -306,7 +306,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">28x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -372,29 +372,29 @@ interface CollapsibleSectionProps {
   initiallyExpanded?: boolean;
 }
 &nbsp;
-const CollapsibleSection: React.FC&lt;CollapsibleSectionProps&gt; = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >({</span></span>
+const CollapsibleSection: React.FC&lt;CollapsibleSectionProps&gt; = ({
   title,
   icon,
   iconColor,
   children,
-  initiallyExpanded = <span class="branch-0 cbranch-no" title="branch not covered" >false,</span>
+  initiallyExpanded = false,
 }) =&gt; {
-  const [isExpanded, setIsExpanded] = <span class="cstat-no" title="statement not covered" >useState(initiallyExpanded);</span>
-  const [animation] = <span class="cstat-no" title="statement not covered" >useState(new Animated.Value(initiallyExpanded ? 1 : 0));</span>
-  const themeAssets = <span class="cstat-no" title="statement not covered" >useThemeAssets();</span>
+  const [isExpanded, setIsExpanded] = useState(initiallyExpanded);
+  const [animation] = useState(new Animated.Value(initiallyExpanded ? 1 : 0));
+  const themeAssets = useThemeAssets();
 &nbsp;
-  const toggleSection = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
-    const toValue = <span class="cstat-no" title="statement not covered" >isExpanded ? 0 : 1;</span>
-<span class="cstat-no" title="statement not covered" >    setIsExpanded(!isExpanded);</span>
+  const toggleSection = () =&gt; {
+    const toValue = isExpanded ? 0 : 1;
+    setIsExpanded(!isExpanded);
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    Animated.timing(animation, {</span>
+    Animated.timing(animation, {
       toValue,
       duration: 300,
       useNativeDriver: false,
     }).start();
   };
 &nbsp;
-  const styles = <span class="cstat-no" title="statement not covered" >StyleSheet.create({</span>
+  const styles = StyleSheet.create({
     container: {
       marginBottom: 8,
       borderRadius: 12,
@@ -402,12 +402,12 @@ const CollapsibleSection: React.FC&lt;CollapsibleSectionProps&gt; = <span class=
       backgroundColor:
         themeAssets.theme === "light"
           ? themeAssets.colors.surface
-          : themeAssets.colors.surface,
+          : <span class="branch-1 cbranch-no" title="branch not covered" >themeAssets.colors.surface,</span>
       borderWidth: 1,
       borderColor:
         themeAssets.theme === "light"
           ? themeAssets.colors.border
-          : themeAssets.colors.border,
+          : <span class="branch-1 cbranch-no" title="branch not covered" >themeAssets.colors.border,</span>
     },
     header: {
       flexDirection: "row",
@@ -416,7 +416,7 @@ const CollapsibleSection: React.FC&lt;CollapsibleSectionProps&gt; = <span class=
       backgroundColor:
         themeAssets.theme === "light"
           ? themeAssets.colors.surface
-          : themeAssets.colors.surface,
+          : <span class="branch-1 cbranch-no" title="branch not covered" >themeAssets.colors.surface,</span>
     },
     iconContainer: {
       width: 40,
@@ -425,7 +425,7 @@ const CollapsibleSection: React.FC&lt;CollapsibleSectionProps&gt; = <span class=
       backgroundColor:
         themeAssets.theme === "light"
           ? "rgba(0, 0, 0, 0.05)"
-          : "rgba(255, 255, 255, 0.1)",
+          : <span class="branch-1 cbranch-no" title="branch not covered" >"rgba(255, 255, 255, 0.1)",</span>
       justifyContent: "center",
       alignItems: "center",
       marginRight: 12,
@@ -437,13 +437,13 @@ const CollapsibleSection: React.FC&lt;CollapsibleSectionProps&gt; = <span class=
       color:
         themeAssets.theme === "light"
           ? themeAssets.colors.text
-          : themeAssets.colors.text,
+          : <span class="branch-1 cbranch-no" title="branch not covered" >themeAssets.colors.text,</span>
     },
     chevron: {
       color:
         themeAssets.theme === "light"
           ? themeAssets.colors.textSecondary
-          : themeAssets.colors.textSecondary,
+          : <span class="branch-1 cbranch-no" title="branch not covered" >themeAssets.colors.textSecondary,</span>
     },
     content: {
       paddingHorizontal: 16,
@@ -451,7 +451,7 @@ const CollapsibleSection: React.FC&lt;CollapsibleSectionProps&gt; = <span class=
     },
   });
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return (</span>
+  return (
     &lt;View style={styles.container}&gt;
       &lt;TouchableOpacity style={styles.header} onPress={toggleSection}&gt;
         &lt;View style={styles.iconContainer}&gt;
@@ -505,7 +505,7 @@ export default CollapsibleSection;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-08-20T16:04:40.043Z
+                at 2025-08-20T16:28:56.280Z
             </div>
         <script src="../prettify.js"></script>
         <script>

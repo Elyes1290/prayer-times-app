@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">93.75% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/16</span>
+                <span class='fraction'>15/16</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">87.5% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/8</span>
+                <span class='fraction'>7/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">75% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/4</span>
+                <span class='fraction'>3/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">93.33% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/15</span>
+                <span class='fraction'>14/15</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -141,28 +141,26 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">16x</span>
+<span class="cline-any cline-yes">16x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">16x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">30x</span>
+<span class="cline-any cline-yes">29x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">29x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">26x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">26x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -174,55 +172,57 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">12x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">12x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">14x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { NativeModules, Platform } from "react-native";
 import i18n from "../locales/i18n";
 &nbsp;
-export async function <span class="fstat-no" title="function not covered" >initNotifications(</span>) {
+export async function initNotifications() {
   // Vide côté Android natif
 }
 function <span class="fstat-no" title="function not covered" >getBasePrayerLabel(</span>label: string): string {
 <span class="cstat-no" title="statement not covered" >  return label.replace(/_(today|tomorrow)$/, "");</span>
 }
 &nbsp;
-export async function <span class="fstat-no" title="function not covered" >schedulePrayerNotifications(</span>
+export async function schedulePrayerNotifications(
   prayerTimes: Record&lt;string, Date&gt;,
   adhanSound: string,
   remindersEnabled: boolean,
   reminderOffset: number
 ) {
-  const now = <span class="cstat-no" title="statement not covered" >new Date();</span>
-  const minTimeGap = <span class="cstat-no" title="statement not covered" >30 * 1000;</span> // 30 secondes en millisecondes
+  const now = new Date();
+  const minTimeGap = 30 * 1000; // 30 secondes en millisecondes
 &nbsp;
-  const reminders = <span class="cstat-no" title="statement not covered" >Object.entries(prayerTimes)</span>
-    .map(<span class="fstat-no" title="function not covered" >([</span>prayer, time]) =&gt; {
-      const timestamp = <span class="cstat-no" title="statement not covered" >time.getTime();</span>
-      const reminderTime = <span class="cstat-no" title="statement not covered" >timestamp - reminderOffset * 60 * 1000;</span>
+  const reminders = Object.entries(prayerTimes)
+    .map(([prayer, time]) =&gt; {
+      const timestamp = time.getTime();
+      const reminderTime = timestamp - reminderOffset * 60 * 1000;
 &nbsp;
       // Ne programme que les rappels futurs
-<span class="cstat-no" title="statement not covered" >      if (reminderTime &lt;= now.getTime()) {</span>
-<span class="cstat-no" title="statement not covered" >        return null;</span>
+      if (reminderTime &lt;= now.getTime()) {
+        return null;
       }
 &nbsp;
       // Si le rappel est trop proche, ajoute un délai minimum
       const adjustedReminderTime =
-<span class="cstat-no" title="statement not covered" >        reminderTime - now.getTime() &lt; minTimeGap</span>
-          ? now.getTime() + minTimeGap
+        reminderTime - now.getTime() &lt; minTimeGap
+          ? <span class="branch-0 cbranch-no" title="branch not covered" >now.getTime() + minTimeGap</span>
           : reminderTime;
 &nbsp;
-<span class="cstat-no" title="statement not covered" >      return {</span>
+      return {
         prayer,
         triggerMillis: adjustedReminderTime,
         title: i18n.t("prayer_reminder_title"),
@@ -236,18 +236,18 @@ export async function <span class="fstat-no" title="function not covered" >sched
     .filter(Boolean);
 &nbsp;
   // 2. Si remindersEnabled, on programme
-<span class="cstat-no" title="statement not covered" >  if (!remindersEnabled) <span class="cstat-no" title="statement not covered" >return;</span></span>
+  if (!remindersEnabled) return;
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  if (reminders.length &gt; 0) {</span>
+  if (reminders.length &gt; 0) {
     // IMPORTANT: Sauvegarde le reminderOffset avant de programmer
     // pour que PrayerReminderService puisse le lire correctement
-<span class="cstat-no" title="statement not covered" >    await NativeModules.AdhanModule.saveNotificationSettings({</span>
+    await NativeModules.AdhanModule.saveNotificationSettings({
       reminderOffset: reminderOffset,
     });
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    NativeModules.AdhanModule.schedulePrayerReminders(reminders);</span>
+    NativeModules.AdhanModule.schedulePrayerReminders(reminders);
   }
-<span class="cstat-no" title="statement not covered" >  return;</span>
+  return;
 }
 &nbsp;</pre></td></tr></table></pre>
 
@@ -256,7 +256,7 @@ export async function <span class="fstat-no" title="function not covered" >sched
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-08-20T16:04:40.043Z
+                at 2025-08-20T16:28:56.280Z
             </div>
         <script src="../prettify.js"></script>
         <script>

@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/12</span>
+                <span class='fraction'>12/12</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/26</span>
+                <span class='fraction'>13/26</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/3</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/12</span>
+                <span class='fraction'>12/12</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -310,12 +310,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">22x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -403,22 +403,22 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">22x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">22x</span>
+<span class="cline-any cline-yes">22x</span>
+<span class="cline-any cline-yes">22x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">22x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">22x</span>
+<span class="cline-any cline-yes">176x</span>
+<span class="cline-any cline-yes">176x</span>
+<span class="cline-any cline-yes">176x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">22x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -534,22 +534,22 @@ interface PrayerStatsProps {
   };
 }
 &nbsp;
-const getStyles = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(</span></span>
+const getStyles = (
   colors: any,
   overlayTextColor: string,
   currentTheme: "light" | "dark"
 ) =&gt;
-<span class="cstat-no" title="statement not covered" >  StyleSheet.create({</span>
+  StyleSheet.create({
     container: {
       backgroundColor:
-        currentTheme === "light" ? colors.cardBG : "rgba(0, 0, 0, 0.5)",
+        currentTheme === "light" ? colors.cardBG : <span class="branch-1 cbranch-no" title="branch not covered" >"rgba(0, 0, 0, 0.5)",</span>
       borderRadius: 16,
       padding: 16,
       marginBottom: 16,
       borderWidth: 1,
       borderColor:
-        currentTheme === "light" ? colors.border : "rgba(78, 205, 196, 0.3)",
-      shadowColor: currentTheme === "light" ? colors.shadow : "#4ECDC4",
+        currentTheme === "light" ? colors.border : <span class="branch-1 cbranch-no" title="branch not covered" >"rgba(78, 205, 196, 0.3)",</span>
+      shadowColor: currentTheme === "light" ? colors.shadow : <span class="branch-1 cbranch-no" title="branch not covered" >"#4ECDC4",</span>
       shadowOffset: { width: 0, height: 4 },
       shadowOpacity: 0.3,
       shadowRadius: 10,
@@ -562,7 +562,7 @@ const getStyles = <span class="cstat-no" title="statement not covered" ><span cl
     },
     headerText: {
       fontSize: 18,
-      color: currentTheme === "light" ? colors.primary : "#4ECDC4",
+      color: currentTheme === "light" ? colors.primary : <span class="branch-1 cbranch-no" title="branch not covered" >"#4ECDC4",</span>
       marginLeft: 8,
       fontWeight: "600",
     },
@@ -571,7 +571,7 @@ const getStyles = <span class="cstat-no" title="statement not covered" ><span cl
     },
     statItem: {
       backgroundColor:
-        currentTheme === "light" ? colors.surface : "rgba(78, 205, 196, 0.1)",
+        currentTheme === "light" ? colors.surface : <span class="branch-1 cbranch-no" title="branch not covered" >"rgba(78, 205, 196, 0.1)",</span>
       borderRadius: 12,
       padding: 12,
       flexDirection: "row",
@@ -585,18 +585,18 @@ const getStyles = <span class="cstat-no" title="statement not covered" ><span cl
       flex: 1,
     },
     statValue: {
-      color: currentTheme === "light" ? colors.primary : "#4ECDC4",
+      color: currentTheme === "light" ? colors.primary : <span class="branch-1 cbranch-no" title="branch not covered" >"#4ECDC4",</span>
       fontSize: 14,
       fontWeight: "600",
     },
     spacingContainer: {
       backgroundColor:
-        currentTheme === "light" ? colors.surface : "rgba(78, 205, 196, 0.1)",
+        currentTheme === "light" ? colors.surface : <span class="branch-1 cbranch-no" title="branch not covered" >"rgba(78, 205, 196, 0.1)",</span>
       borderRadius: 12,
       padding: 12,
     },
     spacingTitle: {
-      color: currentTheme === "light" ? colors.primary : "#4ECDC4",
+      color: currentTheme === "light" ? colors.primary : <span class="branch-1 cbranch-no" title="branch not covered" >"#4ECDC4",</span>
       fontSize: 16,
       fontWeight: "600",
       marginBottom: 12,
@@ -615,40 +615,40 @@ const getStyles = <span class="cstat-no" title="statement not covered" ><span cl
       fontWeight: "500",
     },
     spacingValue: {
-      color: currentTheme === "light" ? colors.primary : "#4ECDC4",
+      color: currentTheme === "light" ? colors.primary : <span class="branch-1 cbranch-no" title="branch not covered" >"#4ECDC4",</span>
       fontSize: 12,
       fontWeight: "600",
     },
   });
 &nbsp;
-export default function <span class="fstat-no" title="function not covered" >PrayerStats(</span>{
+export default function PrayerStats({
   dayLength,
   fajrToSunrise,
   sunsetToIsha,
   prayerSpacing,
 }: PrayerStatsProps) {
-  const { t } = <span class="cstat-no" title="statement not covered" >useTranslation();</span>
+  const { t } = useTranslation();
 &nbsp;
   // Utiliser les couleurs thématiques
-  const colors = <span class="cstat-no" title="statement not covered" >useThemeColors();</span>
-  const overlayTextColor = <span class="cstat-no" title="statement not covered" >useOverlayTextColor();</span>
-  const currentTheme = <span class="cstat-no" title="statement not covered" >useCurrentTheme();</span>
+  const colors = useThemeColors();
+  const overlayTextColor = useOverlayTextColor();
+  const currentTheme = useCurrentTheme();
 &nbsp;
-  const styles = <span class="cstat-no" title="statement not covered" >getStyles(colors, overlayTextColor, currentTheme);</span>
+  const styles = getStyles(colors, overlayTextColor, currentTheme);
 &nbsp;
-  const formatDuration = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(m</span>inutes: number) =&gt; {</span>
-    const hours = <span class="cstat-no" title="statement not covered" >Math.floor(minutes / 60);</span>
-    const mins = <span class="cstat-no" title="statement not covered" >Math.round(minutes % 60);</span>
-<span class="cstat-no" title="statement not covered" >    return `${hours}h ${mins}m`;</span>
+  const formatDuration = (minutes: number) =&gt; {
+    const hours = Math.floor(minutes / 60);
+    const mins = Math.round(minutes % 60);
+    return `${hours}h ${mins}m`;
   };
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return (</span>
+  return (
     &lt;View style={styles.container}&gt;
       &lt;View style={styles.header}&gt;
         &lt;MaterialCommunityIcons
           name="chart-timeline-variant"
           size={24}
-          color={currentTheme === "light" ? colors.primary : "#4ECDC4"}
+          color={currentTheme === "light" ? colors.primary : <span class="branch-1 cbranch-no" title="branch not covered" >"#4ECDC4"}</span>
         /&gt;
         &lt;Text style={styles.headerText}&gt;{t("prayer_stats")}&lt;/Text&gt;
       &lt;/View&gt;
@@ -659,7 +659,7 @@ export default function <span class="fstat-no" title="function not covered" >Pra
           &lt;MaterialCommunityIcons
             name="weather-sunny"
             size={20}
-            color={currentTheme === "light" ? colors.primary : "#4ECDC4"}
+            color={currentTheme === "light" ? colors.primary : <span class="branch-1 cbranch-no" title="branch not covered" >"#4ECDC4"}</span>
           /&gt;
           &lt;Text style={styles.statLabel}&gt;{t("day_length")}&lt;/Text&gt;
           &lt;Text style={styles.statValue}&gt;{formatDuration(dayLength)}&lt;/Text&gt;
@@ -670,7 +670,7 @@ export default function <span class="fstat-no" title="function not covered" >Pra
           &lt;MaterialCommunityIcons
             name="weather-sunset-up"
             size={20}
-            color={currentTheme === "light" ? colors.primary : "#4ECDC4"}
+            color={currentTheme === "light" ? colors.primary : <span class="branch-1 cbranch-no" title="branch not covered" >"#4ECDC4"}</span>
           /&gt;
           &lt;Text style={styles.statLabel}&gt;{t("fajr_to_sunrise")}&lt;/Text&gt;
           &lt;Text style={styles.statValue}&gt;{formatDuration(fajrToSunrise)}&lt;/Text&gt;
@@ -681,7 +681,7 @@ export default function <span class="fstat-no" title="function not covered" >Pra
           &lt;MaterialCommunityIcons
             name="weather-sunset-down"
             size={20}
-            color={currentTheme === "light" ? colors.primary : "#4ECDC4"}
+            color={currentTheme === "light" ? colors.primary : <span class="branch-1 cbranch-no" title="branch not covered" >"#4ECDC4"}</span>
           /&gt;
           &lt;Text style={styles.statLabel}&gt;{t("sunset_to_isha")}&lt;/Text&gt;
           &lt;Text style={styles.statValue}&gt;{formatDuration(sunsetToIsha)}&lt;/Text&gt;
@@ -742,7 +742,7 @@ export default function <span class="fstat-no" title="function not covered" >Pra
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-08-20T16:04:39.861Z
+                at 2025-08-20T16:28:56.100Z
             </div>
         <script src="../prettify.js"></script>
         <script>
