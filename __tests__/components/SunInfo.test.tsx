@@ -40,7 +40,8 @@ const formatTime = (hour: number, minute: number = 0) => {
   if (is12h) {
     const period = hour >= 12 ? "PM" : "AM";
     const displayHour = hour === 0 ? 12 : hour > 12 ? hour - 12 : hour;
-    return `${displayHour}:${minute.toString().padStart(2, "0")} ${period}`;
+    // Ajouter le zéro devant pour correspondre au format du composant
+    return `${displayHour.toString().padStart(2, "0")}:${minute.toString().padStart(2, "0")} ${period}`;
   } else {
     return `${hour.toString().padStart(2, "0")}:${minute
       .toString()
