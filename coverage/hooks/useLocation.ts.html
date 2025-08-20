@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">82.35% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>14/17</span>
+                <span class='fraction'>0/17</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">71.42% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>10/14</span>
+                <span class='fraction'>0/14</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">66.66% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/3</span>
+                <span class='fraction'>0/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">82.35% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>14/17</span>
+                <span class='fraction'>0/17</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -156,39 +156,39 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -214,7 +214,7 @@ function <span class="fstat-no" title="function not covered" >coordsToLocationOb
   };
 }
 &nbsp;
-export function useLocation() {
+export function <span class="fstat-no" title="function not covered" >useLocation(</span>) {
   const {
     locationMode,
     manualLocation,
@@ -222,39 +222,39 @@ export function useLocation() {
     errorMsg,
     isLoading,
     isRefreshingLocation,
-  } = useContext(SettingsContext);
+  } = <span class="cstat-no" title="statement not covered" >useContext(SettingsContext);</span>
 &nbsp;
-  let location: Location.LocationObject | null = null;
+  let location: Location.LocationObject | null = <span class="cstat-no" title="statement not covered" >null;</span>
 &nbsp;
-  <span class="missing-if-branch" title="if path not taken" >I</span>if (locationMode === "manual" &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >manualLocation)</span> {
+<span class="cstat-no" title="statement not covered" >  if (locationMode === "manual" &amp;&amp; manualLocation) {</span>
 <span class="cstat-no" title="statement not covered" >    location = coordsToLocationObject({</span>
       lat: manualLocation.lat,
       lon: manualLocation.lon,
     });
-  } else <span class="missing-if-branch" title="if path not taken" >I</span>if (locationMode === "auto" &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >autoLocation)</span> {
+  } else <span class="cstat-no" title="statement not covered" >if (locationMode === "auto" &amp;&amp; autoLocation) {</span>
 <span class="cstat-no" title="statement not covered" >    location = coordsToLocationObject(autoLocation);</span>
   }
 &nbsp;
-  async function reverseGeocode(coords: Location.LocationObjectCoords) {
-    try {
+  async function <span class="fstat-no" title="function not covered" >reverseGeocode(</span>coords: Location.LocationObjectCoords) {
+<span class="cstat-no" title="statement not covered" >    try {</span>
       // 🚀 NOUVEAU : Vérifier les permissions avant le géocodage
-      const { status } = await Location.getForegroundPermissionsAsync();
-      if (status !== "granted") {
-        console.log(
+      const { status } = <span class="cstat-no" title="statement not covered" >await Location.getForegroundPermissionsAsync();</span>
+<span class="cstat-no" title="statement not covered" >      if (status !== "granted") {</span>
+<span class="cstat-no" title="statement not covered" >        console.log(</span>
           "🔍 Permissions de localisation non accordées - géocodage impossible"
         );
-        return null;
+<span class="cstat-no" title="statement not covered" >        return null;</span>
       }
 &nbsp;
-      const results = await Location.reverseGeocodeAsync(coords);
-      return results.length &gt; 0 ? results[0] : null;
+      const results = <span class="cstat-no" title="statement not covered" >await Location.reverseGeocodeAsync(coords);</span>
+<span class="cstat-no" title="statement not covered" >      return results.length &gt; 0 ? results[0] : null;</span>
     } catch (error) {
-      console.log("❌ Erreur géocodage:", error);
-      return null;
+<span class="cstat-no" title="statement not covered" >      console.log("❌ Erreur géocodage:", error);</span>
+<span class="cstat-no" title="statement not covered" >      return null;</span>
     }
   }
 &nbsp;
-  return {
+<span class="cstat-no" title="statement not covered" >  return {</span>
     location,
     error: errorMsg,
     isLoading: isLoading || isRefreshingLocation,
@@ -268,7 +268,7 @@ export function useLocation() {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-08-20T15:38:48.371Z
+                at 2025-08-20T16:04:40.043Z
             </div>
         <script src="../prettify.js"></script>
         <script>

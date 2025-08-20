@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">31.42% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>11/35</span>
+                <span class='fraction'>0/35</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">40% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>16/40</span>
+                <span class='fraction'>0/40</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>0/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">45.45% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>10/22</span>
+                <span class='fraction'>0/22</span>
             </div>
         
             
@@ -213,16 +213,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">26x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">26x</span>
-<span class="cline-any cline-yes">26x</span>
-<span class="cline-any cline-yes">26x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">26x</span>
-<span class="cline-any cline-yes">26x</span>
-<span class="cline-any cline-yes">26x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -235,17 +232,13 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">26x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -294,9 +287,16 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">26x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">26x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -343,17 +343,17 @@ type Props = {
   onReset: () =&gt; void;
 };
 &nbsp;
-export function DateNavigator({ date, onPrev, onNext, onReset }: Props) {
-  const { t, i18n } = useTranslation();
+export function <span class="fstat-no" title="function not covered" >DateNavigator(</span>{ date, onPrev, onNext, onReset }: Props) {
+  const { t, i18n } = <span class="cstat-no" title="statement not covered" >useTranslation();</span>
 &nbsp;
   // Utiliser les couleurs thématiques
-  const colors = useThemeColors();
-  const overlayTextColor = useOverlayTextColor();
-  const currentTheme = useCurrentTheme();
+  const colors = <span class="cstat-no" title="statement not covered" >useThemeColors();</span>
+  const overlayTextColor = <span class="cstat-no" title="statement not covered" >useOverlayTextColor();</span>
+  const currentTheme = <span class="cstat-no" title="statement not covered" >useCurrentTheme();</span>
 &nbsp;
-  const getLocale = () =&gt; {
-    <span class="missing-if-branch" title="if path not taken" >I</span>if (i18n.language.startsWith("ar")) <span class="cstat-no" title="statement not covered" >return "ar";</span>
-    <span class="missing-if-branch" title="else path not taken" >E</span>if (i18n.language.startsWith("fr")) return "fr-FR";
+  const getLocale = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    if (i18n.language.startsWith("ar")) <span class="cstat-no" title="statement not covered" >return "ar";</span></span>
+<span class="cstat-no" title="statement not covered" >    if (i18n.language.startsWith("fr")) <span class="cstat-no" title="statement not covered" >return "fr-FR";</span></span>
 <span class="cstat-no" title="statement not covered" >    if (i18n.language.startsWith("en")) <span class="cstat-no" title="statement not covered" >return "en-US";</span></span>
 <span class="cstat-no" title="statement not covered" >    if (i18n.language.startsWith("es")) <span class="cstat-no" title="statement not covered" >return "es-ES";</span></span>
 <span class="cstat-no" title="statement not covered" >    if (i18n.language.startsWith("de")) <span class="cstat-no" title="statement not covered" >return "de-DE";</span></span>
@@ -369,7 +369,7 @@ export function DateNavigator({ date, onPrev, onNext, onReset }: Props) {
   };
 &nbsp;
   // Styles dynamiques basés sur le thème
-  const styles = StyleSheet.create({
+  const styles = <span class="cstat-no" title="statement not covered" >StyleSheet.create({</span>
     nav: {
       flexDirection: "row",
       alignItems: "center",
@@ -425,9 +425,9 @@ export function DateNavigator({ date, onPrev, onNext, onReset }: Props) {
     },
   });
 &nbsp;
-  const arrowColor = currentTheme === "light" ? colors.primary : "#FFF";
+  const arrowColor = <span class="cstat-no" title="statement not covered" >currentTheme === "light" ? colors.primary : "#FFF";</span>
 &nbsp;
-  return (
+<span class="cstat-no" title="statement not covered" >  return (</span>
     &lt;View style={styles.nav} testID="date-navigator"&gt;
       &lt;TouchableOpacity
         onPress={onPrev}
@@ -463,7 +463,7 @@ export function DateNavigator({ date, onPrev, onNext, onReset }: Props) {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-08-20T15:38:48.167Z
+                at 2025-08-20T16:04:39.861Z
             </div>
         <script src="../prettify.js"></script>
         <script>

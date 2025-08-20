@@ -16,7 +16,7 @@ const getDateFormat = () => {
 // Fonction pour formater la date selon l'environnement
 const formatDate = (date: Date) => {
   const isUS = getDateFormat() === "US";
-  
+
   if (isUS) {
     // Format américain: M/D/YYYY
     return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
@@ -306,9 +306,15 @@ describe("FavoritesScreen", () => {
 
     await waitFor(() => {
       // Vérifier que les dates sont affichées selon le format de l'environnement
-      expect(getByText(`favorites.added_on ${formatDate(new Date("2024-01-01"))}`)).toBeTruthy();
-      expect(getByText(`favorites.added_on ${formatDate(new Date("2024-01-02"))}`)).toBeTruthy();
-      expect(getByText(`favorites.added_on ${formatDate(new Date("2024-01-03"))}`)).toBeTruthy();
+      expect(
+        getByText(`favorites.added_on ${formatDate(new Date("2024-01-01"))}`)
+      ).toBeTruthy();
+      expect(
+        getByText(`favorites.added_on ${formatDate(new Date("2024-01-02"))}`)
+      ).toBeTruthy();
+      expect(
+        getByText(`favorites.added_on ${formatDate(new Date("2024-01-03"))}`)
+      ).toBeTruthy();
     });
   });
 });
