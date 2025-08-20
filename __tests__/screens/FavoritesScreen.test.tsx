@@ -3,6 +3,31 @@ import { render, fireEvent, waitFor } from "@testing-library/react-native";
 import { Alert, Share } from "react-native";
 import FavoritesScreen from "../../screens/FavoritesScreen";
 
+// Fonction pour détecter le format de date selon l'environnement
+const getDateFormat = () => {
+  // Sur GitHub (CI), utiliser le format américain
+  if (process.env.CI || process.env.GITHUB_ACTIONS) {
+    return "US";
+  }
+  // En local, utiliser le format européen
+  return "EU";
+};
+
+// Fonction pour formater la date selon l'environnement
+const formatDate = (date: Date) => {
+  const isUS = getDateFormat() === "US";
+  
+  if (isUS) {
+    // Format américain: M/D/YYYY
+    return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
+  } else {
+    // Format européen: DD.MM.YYYY
+    const day = date.getDate().toString().padStart(2, "0");
+    const month = (date.getMonth() + 1).toString().padStart(2, "0");
+    return `${day}.${month}.${date.getFullYear()}`;
+  }
+};
+
 // Mock des dépendances
 jest.mock("expo-router", () => ({
   useRouter: () => ({
@@ -280,10 +305,10 @@ describe("FavoritesScreen", () => {
     const { getByText } = renderFavoritesScreen();
 
     await waitFor(() => {
-      // Vérifier que les dates sont affichées (format localisé)
-      expect(getByText("favorites.added_on 01.01.2024")).toBeTruthy();
-      expect(getByText("favorites.added_on 02.01.2024")).toBeTruthy();
-      expect(getByText("favorites.added_on 03.01.2024")).toBeTruthy();
+      // Vérifier que les dates sont affichées selon le format de l'environnement
+      expect(getByText(`favorites.added_on ${formatDate(new Date("2024-01-01"))}`)).toBeTruthy();
+      expect(getByText(`favorites.added_on ${formatDate(new Date("2024-01-02"))}`)).toBeTruthy();
+      expect(getByText(`favorites.added_on ${formatDate(new Date("2024-01-03"))}`)).toBeTruthy();
     });
   });
 });
