@@ -23,6 +23,31 @@ jest.mock("../../hooks/useThemeColor", () => ({
   useCurrentTheme: () => "light",
 }));
 
+// Fonction pour détecter le format d'heure selon l'environnement
+const getTimeFormat = () => {
+  // Sur GitHub (CI), utiliser le format 12h
+  if (process.env.CI || process.env.GITHUB_ACTIONS) {
+    return "12h";
+  }
+  // En local, utiliser le format 24h
+  return "24h";
+};
+
+// Fonction pour formater l'heure selon l'environnement
+const formatTime = (hour: number, minute: number = 0) => {
+  const is12h = getTimeFormat() === "12h";
+
+  if (is12h) {
+    const period = hour >= 12 ? "PM" : "AM";
+    const displayHour = hour === 0 ? 12 : hour > 12 ? hour - 12 : hour;
+    return `${displayHour}:${minute.toString().padStart(2, "0")} ${period}`;
+  } else {
+    return `${hour.toString().padStart(2, "0")}:${minute
+      .toString()
+      .padStart(2, "0")}`;
+  }
+};
+
 const renderSunInfo = (props: {
   sunrise?: Date | null;
   sunset?: Date | null;
@@ -56,23 +81,24 @@ describe("SunInfo", () => {
     it("devrait afficher le composant avec les informations solaires", () => {
       renderSunInfo({});
 
-      expect(screen.getByText("06:00")).toBeTruthy();
-      expect(screen.getByText("18:00")).toBeTruthy();
+      // S'adapter au format d'heure selon l'environnement
+      expect(screen.getByText(formatTime(6))).toBeTruthy();
+      expect(screen.getByText(formatTime(18))).toBeTruthy();
     });
 
     it("devrait afficher la durée du jour correctement", () => {
       renderSunInfo({});
 
       // 12 heures entre 6h et 18h
-      expect(screen.getByText("06:00")).toBeTruthy();
+      expect(screen.getByText(formatTime(6))).toBeTruthy();
     });
 
     it("devrait afficher les heures de lever et coucher", () => {
       renderSunInfo({});
 
-      // Vérifier que les heures sont affichées
-      expect(screen.getByText("06:00")).toBeTruthy();
-      expect(screen.getByText("18:00")).toBeTruthy();
+      // Vérifier que les heures sont affichées selon le format de l'environnement
+      expect(screen.getByText(formatTime(6))).toBeTruthy();
+      expect(screen.getByText(formatTime(18))).toBeTruthy();
     });
   });
 
@@ -82,7 +108,7 @@ describe("SunInfo", () => {
         currentTime: new Date("2024-01-01T12:00:00"),
       });
 
-      expect(screen.getByText("06:00")).toBeTruthy();
+      expect(screen.getByText(formatTime(18))).toBeTruthy();
     });
 
     it("devrait calculer correctement le temps jusqu'au lever", () => {
@@ -90,7 +116,7 @@ describe("SunInfo", () => {
         currentTime: new Date("2024-01-01T04:00:00"),
       });
 
-      expect(screen.getByText("06:00")).toBeTruthy();
+      expect(screen.getByText(formatTime(6))).toBeTruthy();
     });
 
     it("devrait afficher le lever de demain après le coucher", () => {
@@ -98,7 +124,7 @@ describe("SunInfo", () => {
         currentTime: new Date("2024-01-01T20:00:00"),
       });
 
-      expect(screen.getByText("06:00")).toBeTruthy();
+      expect(screen.getByText(formatTime(6))).toBeTruthy();
     });
   });
 
@@ -138,7 +164,7 @@ describe("SunInfo", () => {
       });
 
       // Le composant devrait être rendu avec la position du soleil
-      expect(screen.getByText("06:00")).toBeTruthy();
+      expect(screen.getByText(formatTime(18))).toBeTruthy();
     });
 
     it("devrait afficher le soleil au début avant le lever", () => {
@@ -146,7 +172,7 @@ describe("SunInfo", () => {
         currentTime: new Date("2024-01-01T04:00:00"),
       });
 
-      expect(screen.getByText("06:00")).toBeTruthy();
+      expect(screen.getByText(formatTime(6))).toBeTruthy();
     });
 
     it("devrait afficher le soleil à la fin après le coucher", () => {
@@ -154,7 +180,7 @@ describe("SunInfo", () => {
         currentTime: new Date("2024-01-01T20:00:00"),
       });
 
-      expect(screen.getByText("06:00")).toBeTruthy();
+      expect(screen.getByText(formatTime(6))).toBeTruthy();
     });
   });
 
@@ -163,7 +189,7 @@ describe("SunInfo", () => {
       renderSunInfo({});
 
       // Vérifier que le composant est rendu (l'icône est un élément MaterialCommunityIcons)
-      expect(screen.getByText("06:00")).toBeTruthy();
+      expect(screen.getByText(formatTime(6))).toBeTruthy();
     });
 
     it("devrait afficher l'icône appropriée pour le lever", () => {
@@ -171,7 +197,7 @@ describe("SunInfo", () => {
         currentTime: new Date("2024-01-01T04:00:00"),
       });
 
-      expect(screen.getByText("06:00")).toBeTruthy();
+      expect(screen.getByText(formatTime(6))).toBeTruthy();
     });
 
     it("devrait afficher l'icône appropriée pour le coucher", () => {
@@ -179,19 +205,19 @@ describe("SunInfo", () => {
         currentTime: new Date("2024-01-01T12:00:00"),
       });
 
-      expect(screen.getByText("06:00")).toBeTruthy();
+      expect(screen.getByText(formatTime(18))).toBeTruthy();
     });
   });
 
   describe("Formatage des heures", () => {
-    it("devrait formater correctement les heures en format 24h", () => {
+    it("devrait formater correctement les heures selon l'environnement", () => {
       renderSunInfo({
         sunrise: new Date("2024-01-01T06:30:00"),
         sunset: new Date("2024-01-01T18:45:00"),
       });
 
-      expect(screen.getByText("06:30")).toBeTruthy();
-      expect(screen.getByText("18:45")).toBeTruthy();
+      expect(screen.getByText(formatTime(6, 30))).toBeTruthy();
+      expect(screen.getByText(formatTime(18, 45))).toBeTruthy();
     });
 
     it("devrait gérer les heures avec des minutes", () => {
@@ -200,8 +226,8 @@ describe("SunInfo", () => {
         sunset: new Date("2024-01-01T19:30:00"),
       });
 
-      expect(screen.getByText("05:15")).toBeTruthy();
-      expect(screen.getByText("19:30")).toBeTruthy();
+      expect(screen.getByText(formatTime(5, 15))).toBeTruthy();
+      expect(screen.getByText(formatTime(19, 30))).toBeTruthy();
     });
   });
 
@@ -223,7 +249,7 @@ describe("SunInfo", () => {
 
       renderSunInfo({});
 
-      expect(screen.getByText("06:00")).toBeTruthy();
+      expect(screen.getByText(formatTime(6))).toBeTruthy();
     });
   });
 });
