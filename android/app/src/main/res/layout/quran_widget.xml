@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/quran_widget_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/quran_widget_background"
+    android:padding="12dp"
+    android:gravity="center">
+
+    <!-- En-tête avec badge premium -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="8dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="📖 Coran Premium"
+            android:textColor="#FFD700"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:gravity="start" />
+
+        <ImageView
+            android:id="@+id/quran_premium_badge"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_premium_star"
+            android:contentDescription="Premium" />
+
+    </LinearLayout>
+
+    <!-- Titre de la sourate -->
+    <TextView
+        android:id="@+id/quran_surah_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Aucune lecture"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginBottom="4dp"
+        android:maxLines="1"
+        android:ellipsize="end" />
+
+    <!-- Nom du récitateur -->
+    <TextView
+        android:id="@+id/quran_reciter_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sélectionner un récitateur"
+        android:textColor="#CCCCCC"
+        android:textSize="12sp"
+        android:gravity="center"
+        android:layout_marginBottom="12dp"
+        android:maxLines="1"
+        android:ellipsize="end" />
+
+    <!-- Barre de progression -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="12dp">
+
+        <ProgressBar
+            android:id="@+id/quran_progress_bar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:progressTint="#4ECDC4"
+            android:progressBackgroundTint="#666666"
+            android:layout_marginBottom="4dp" />
+
+        <TextView
+            android:id="@+id/quran_progress_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="00:00 / 00:00"
+            android:textColor="#CCCCCC"
+            android:textSize="10sp"
+            android:gravity="center" />
+
+    </LinearLayout>
+
+    <!-- Contrôles audio -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="8dp">
+
+        <!-- Bouton Précédent -->
+        <ImageButton
+            android:id="@+id/quran_previous_button"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_previous"
+            android:background="@drawable/quran_button_background"
+            android:contentDescription="Précédent"
+            android:scaleType="centerInside"
+            android:layout_marginEnd="8dp" />
+
+        <!-- Bouton Play/Pause -->
+        <ImageButton
+            android:id="@+id/quran_play_pause_button"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_play"
+            android:background="@drawable/quran_play_button_background"
+            android:contentDescription="Play/Pause"
+            android:scaleType="centerInside"
+            android:layout_marginHorizontal="8dp" />
+
+        <!-- Bouton Suivant -->
+        <ImageButton
+            android:id="@+id/quran_next_button"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_next"
+            android:background="@drawable/quran_button_background"
+            android:contentDescription="Suivant"
+            android:scaleType="centerInside"
+            android:layout_marginStart="8dp" />
+
+    </LinearLayout>
+
+    <!-- Bouton Ouvrir App -->
+    <ImageButton
+        android:id="@+id/quran_open_app_button"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:src="@drawable/ic_open_app"
+        android:background="@drawable/quran_open_button_background"
+        android:contentDescription="Ouvrir l'application"
+        android:scaleType="centerInside" />
+
+</LinearLayout>

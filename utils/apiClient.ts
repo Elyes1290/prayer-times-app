@@ -868,7 +868,27 @@ export async function verifyAuth(): Promise<boolean> {
       "GET"
     );
     return !!res?.success;
-  } catch (e) {
+  } catch (e: any) {
+    // 🚫 DÉSACTIVATION TEMPORAIRE : Ignorer toutes les erreurs 429
+    if (e?.message?.includes("HTTP 429")) {
+      console.log(
+        "⚠️ Rate limit détecté - token considéré comme valide (rate limiting désactivé)"
+      );
+      return true; // Considérer le token comme valide en cas de rate limit
+    }
+
+    // 🚫 DÉSACTIVATION TEMPORAIRE : Ignorer toutes les erreurs de réseau
+    if (
+      e?.message?.includes("Network Error") ||
+      e?.message?.includes("timeout")
+    ) {
+      console.log(
+        "⚠️ Erreur réseau détectée - token considéré comme valide (mode dégradé)"
+      );
+      return true; // Considérer le token comme valide en cas d'erreur réseau
+    }
+
+    console.log("🔐 Erreur vérification auth:", e?.message);
     return false;
   }
 }

@@ -63,6 +63,11 @@
       android:permission="android.permission.BIND_REMOTEVIEWS"
       android:exported="false" />
 
+    <service
+      android:name=".QuranAudioService"
+      android:exported="false"
+      android:foregroundServiceType="mediaPlayback" />
+
     <activity
       android:name=".MainActivity"
       android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|uiMode"
@@ -129,6 +134,18 @@
       <meta-data 
         android:name="android.appwidget.provider"
         android:resource="@xml/prayer_times_widget_info" />
+    </receiver>
+
+    <!-- Widget Coran Premium -->
+    <receiver 
+      android:name=".QuranWidget"
+      android:exported="true">
+      <intent-filter>
+        <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+      </intent-filter>
+      <meta-data 
+        android:name="android.appwidget.provider"
+        android:resource="@xml/quran_widget_info" />
     </receiver>
 
   </application>

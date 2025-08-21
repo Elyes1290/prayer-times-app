@@ -35,6 +35,7 @@ import { useNativeDownload } from "../hooks/useNativeDownload";
 import { DownloadInfo } from "../utils/nativeDownloadManager";
 import { Image as ExpoImage } from "expo-image";
 import RNFS from "react-native-fs";
+import { useQuranWidget } from "../hooks/useQuranWidget";
 
 // 🚀 NOUVEAU : Composant de jauge de progression
 const ProgressBar = ({
@@ -126,6 +127,10 @@ export default function QuranScreen() {
   // Hook téléchargement natif
   const { downloadState, startDownload, cancelDownload, isNativeAvailable } =
     useNativeDownload();
+
+  // 🎯 NOUVEAU : Hook widget Coran
+  const { isWidgetAvailable, updateWidgetAudio, updateWidgetPlaybackState } =
+    useQuranWidget();
 
   // 🌐 NOUVEAU : Fonction pour tester la connectivité
   const checkConnectivity = async (): Promise<boolean> => {
@@ -998,12 +1003,32 @@ export default function QuranScreen() {
       setSound(createdSound);
       setIsPlaying(true);
 
+      // 🎯 NOUVEAU : Mettre à jour le widget Coran
+      if (isWidgetAvailable && user?.isPremium) {
+        const audioPath = actualDownloadPath || recitation.fileUrl;
+        updateWidgetAudio(
+          recitation.title,
+          recitation.reciter || "",
+          audioPath
+        );
+        updateWidgetPlaybackState(true, 0, 0);
+      }
+
       // Configuration des callbacks de progression avec analyse audio
       // TODO: À implémenter plus tard
       createdSound?.setOnPlaybackStatusUpdate((status: any) => {
         if (status.isLoaded) {
           setPlaybackPosition(status.positionMillis || 0);
           setPlaybackDuration(status.durationMillis || 0);
+
+          // 🎯 NOUVEAU : Mettre à jour le widget Coran avec la progression
+          if (isWidgetAvailable && user?.isPremium) {
+            updateWidgetPlaybackState(
+              isPlaying,
+              status.positionMillis || 0,
+              status.durationMillis || 0
+            );
+          }
 
           // 🎯 NOUVEAU : Utiliser l'analyse audio pour la synchronisation
           // TODO: À implémenter plus tard
@@ -1080,6 +1105,11 @@ export default function QuranScreen() {
       if (sound) {
         await audioManager.pause();
         setIsPlaying(false);
+
+        // 🎯 NOUVEAU : Mettre à jour le widget Coran
+        if (isWidgetAvailable && user?.isPremium) {
+          updateWidgetPlaybackState(false, playbackPosition, playbackDuration);
+        }
       }
     } catch (error) {
       console.error("Erreur pause audio:", error);
@@ -1091,6 +1121,11 @@ export default function QuranScreen() {
       if (sound) {
         await audioManager.resume();
         setIsPlaying(true);
+
+        // 🎯 NOUVEAU : Mettre à jour le widget Coran
+        if (isWidgetAvailable && user?.isPremium) {
+          updateWidgetPlaybackState(true, playbackPosition, playbackDuration);
+        }
       }
     } catch (error) {
       console.error("Erreur reprise audio:", error);

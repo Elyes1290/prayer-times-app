@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/quran_widget_background"
+    android:padding="16dp"
+    android:gravity="center">
+
+    <!-- Icône Premium -->
+    <ImageView
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/ic_premium_star"
+        android:contentDescription="Premium"
+        android:layout_marginBottom="12dp" />
+
+    <!-- Titre -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="📖 Widget Coran Premium"
+        android:textColor="#FFD700"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Description -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Contrôlez la lecture du Coran directement depuis votre écran d'accueil"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        android:gravity="center"
+        android:layout_marginBottom="16dp"
+        android:lineSpacingExtra="2dp" />
+
+    <!-- Fonctionnalités -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="16dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="✨ Lecture directe depuis le widget"
+            android:textColor="#CCCCCC"
+            android:textSize="12sp"
+            android:gravity="start"
+            android:layout_marginBottom="4dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="✨ Navigation entre sourates"
+            android:textColor="#CCCCCC"
+            android:textSize="12sp"
+            android:gravity="start"
+            android:layout_marginBottom="4dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="✨ Contrôles audio complets"
+            android:textColor="#CCCCCC"
+            android:textSize="12sp"
+            android:gravity="start"
+            android:layout_marginBottom="4dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="✨ Mode hors-ligne"
+            android:textColor="#CCCCCC"
+            android:textSize="12sp"
+            android:gravity="start" />
+
+    </LinearLayout>
+
+    <!-- Bouton S'abonner -->
+    <Button
+        android:id="@+id/quran_premium_required_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="S'abonner Premium"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:background="@drawable/quran_premium_button_background"
+        android:padding="12dp"
+        android:gravity="center" />
+
+</LinearLayout>

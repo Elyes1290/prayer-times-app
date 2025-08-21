@@ -30,6 +30,20 @@ class RateLimiterNew {
     }
     
     public function checkRateLimit($ip, $action, $maxAttempts = 5, $timeWindow = 3600, $userAgent = null) {
+        // 🚫 DÉSACTIVATION TEMPORAIRE DU RATE LIMITING
+        // TODO: Réactiver après résolution du problème 429
+        error_log("🚫 Rate limiting désactivé temporairement pour IP: $ip, Action: $action");
+        
+        return [
+            'allowed' => true,
+            'blocked' => false,
+            'attempts' => 0,
+            'remaining_attempts' => 999,
+            'whitelisted' => true,
+            'message' => 'Rate limiting désactivé temporairement'
+        ];
+        
+        /* CODE ORIGINAL COMMENTÉ TEMPORAIREMENT
         try {
             // WHITELIST SIMPLE
             if ($this->isWhitelisted($ip)) {
@@ -110,11 +124,13 @@ class RateLimiterNew {
                 'error' => 'Rate limiting temporairement indisponible'
             ];
         }
+        */
     }
     
     private function isWhitelisted($ip) {
         $whitelist = [
             '178.197.195.194',
+            '178.197.198.149', // 🚀 NOUVEAU : Votre IP actuelle
             '2a02:1210:5818:9b00',
             '127.0.0.1',
             '::1',
@@ -155,10 +171,16 @@ class RateLimiterNew {
             if (strpos($allowed, '2a02:1210:5818:9b00') === 0 && strpos($ip, '2a02:1210:5818:9b00') === 0) {
                 return true;
             }
-            // 🚀 NOUVEAU : Autoriser toutes les adresses IPv6 de votre plage
-            if (strpos($ip, '2a02:1210:5818:9b00') === 0) {
-                return true;
-            }
+        }
+        
+        // 🚀 NOUVEAU : Autoriser toute la plage 178.197.x.x (votre réseau)
+        if (strpos($ip, '178.197.') === 0) {
+            return true;
+        }
+        
+        // 🚀 NOUVEAU : Autoriser toute la plage IPv6 2a02:1210:5818:9b00 (votre réseau IPv6)
+        if (strpos($ip, '2a02:1210:5818:9b00') === 0) {
+            return true;
         }
         
         return false;

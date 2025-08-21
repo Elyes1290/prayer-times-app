@@ -1294,7 +1294,14 @@
     "tab_achievements": "Réalisations",
     "time_window": "Fenêtre",
     "goal_soon_customizable": "Votre objectif sera bientôt personnalisable !",
-    "weekly_goal_desc": "Nombre de prières visées par semaine"
+    "weekly_goal_desc": "Nombre de prières visées par semaine",
+
+    "quran_widget_available": "Widget disponible sur votre écran d'accueil",
+    "quran_widget_add": "Ajoutez le widget à votre écran d'accueil",
+    "quran_widget_active": "Actif",
+    "quran_widget_inactive": "Inactif",
+    "quran_widget_title": "Widget Coran Premium",
+    "quran_widget_description": "Contrôlez la lecture du Coran depuis votre écran d'accueil"
   },
 
   "premium_ui": {

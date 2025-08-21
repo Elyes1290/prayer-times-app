@@ -17,6 +17,7 @@ import expo.modules.ApplicationLifecycleDispatcher
 import expo.modules.ReactNativeHostWrapper
 import com.drogbinho.prayertimesapp2.AdhanPackage // Ajoute cette importation
 import com.drogbinho.prayertimesapp2.DownloadPackage // Ajoute cette importation
+import com.drogbinho.prayertimesapp2.QuranWidgetPackage // Ajoute cette importation
 
 
 class MainApplication : Application(), ReactApplication {
@@ -30,6 +31,7 @@ class MainApplication : Application(), ReactApplication {
             // packages.add(MyReactNativePackage())
                 packages.add(AdhanPackage()) // <--- AJOUTE TA LIGNE ICI
                 packages.add(DownloadPackage()) // <--- AJOUTE TA LIGNE ICI
+                packages.add(QuranWidgetPackage()) // <--- AJOUTE TA LIGNE ICI
             return packages
           }
 
