@@ -55,8 +55,6 @@ public class QuranWidget extends AppWidgetProvider {
     private static String currentAudioPath = "";
     private static boolean isPremiumUser = false;
     private static Context context;
-    
-    // Pas de BroadcastReceiver statique - on utilise onReceive pour les actions
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
@@ -129,6 +127,7 @@ public class QuranWidget extends AppWidgetProvider {
     @Override
     public void onDisabled(Context context) {
         widgetDebugLog(TAG, "❌ Widget Coran désactivé");
+        
         // Arrêter la lecture si le widget est supprimé
         stopAudioPlayback();
     }
@@ -204,6 +203,7 @@ public class QuranWidget extends AppWidgetProvider {
     private static void updateWidgetDisplay(Context context, RemoteViews views) {
         // Mettre à jour l'icône play/pause
         int playPauseIcon = isPlaying ? R.drawable.ic_pause : R.drawable.ic_play;
+        widgetDebugLog(TAG, "🎯 Mise à jour icône widget - isPlaying: " + isPlaying + " → icône: " + (isPlaying ? "PAUSE" : "PLAY"));
         views.setImageViewResource(R.id.quran_play_pause_button, playPauseIcon);
 
         // Mettre à jour le titre de la sourate
@@ -283,6 +283,11 @@ public class QuranWidget extends AppWidgetProvider {
         try {
             context.sendBroadcast(serviceIntent);
             widgetDebugLog(TAG, "🎵 Action Play/Pause envoyée au service via broadcast");
+            
+            // NOUVEAU : Mettre à jour immédiatement le widget après l'action
+            // pour montrer que l'action a été reçue
+            updateAllWidgets(context);
+            
         } catch (Exception e) {
             widgetDebugLog(TAG, "❌ Erreur envoi broadcast: " + e.getMessage());
         }
@@ -356,13 +361,39 @@ public class QuranWidget extends AppWidgetProvider {
         updateAllWidgets(context);
     }
 
-    private static void updateAllWidgets(Context context) {
-        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
-        ComponentName thisWidget = new ComponentName(context, QuranWidget.class);
-        int[] appWidgetIds = appWidgetManager.getAppWidgetIds(thisWidget);
+    public static void updateAllWidgets(Context context) {
+        try {
+            AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+            ComponentName thisWidget = new ComponentName(context, QuranWidget.class);
+            int[] appWidgetIds = appWidgetManager.getAppWidgetIds(thisWidget);
 
-        for (int appWidgetId : appWidgetIds) {
+            widgetDebugLog(TAG, "📱 Mise à jour de " + appWidgetIds.length + " widgets avec context: " + (context != null ? "OUI" : "NON"));
+
+            for (int appWidgetId : appWidgetIds) {
+                updateQuranWidget(context, appWidgetManager, appWidgetId);
+            }
+            
+            widgetDebugLog(TAG, "✅ Tous les widgets mis à jour");
+        } catch (Exception e) {
+            Log.e(TAG, "❌ Erreur mise à jour widgets: " + e.getMessage());
+        }
+    }
+    
+    // NOUVEAU : Méthode pour forcer la mise à jour immédiate d'un widget spécifique
+    public static void forceUpdateWidget(Context context, int appWidgetId) {
+        try {
+            AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+            widgetDebugLog(TAG, "🚀 Mise à jour forcée du widget " + appWidgetId);
+            
+            // Mettre à jour le widget
             updateQuranWidget(context, appWidgetManager, appWidgetId);
+            
+            // Forcer la mise à jour immédiate
+            appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId, R.id.quran_play_pause_button);
+            
+            widgetDebugLog(TAG, "✅ Widget " + appWidgetId + " mis à jour de force");
+        } catch (Exception e) {
+            Log.e(TAG, "❌ Erreur mise à jour forcée widget: " + e.getMessage());
         }
     }
 
@@ -423,6 +454,12 @@ public class QuranWidget extends AppWidgetProvider {
         currentPosition = position;
         totalDuration = duration;
         widgetDebugLog(TAG, "🎵 État lecture mis à jour: " + (playing ? "lecture" : "pause"));
+        
+        // NOUVEAU : Mettre à jour immédiatement tous les widgets
+        if (context != null) {
+            widgetDebugLog(TAG, "🚀 Mise à jour immédiate des widgets après changement d'état");
+            updateAllWidgets(context);
+        }
     }
 
     public static void setPremiumStatus(boolean premium) {
@@ -438,6 +475,8 @@ public class QuranWidget extends AppWidgetProvider {
      * Gérer les mises à jour d'état du service audio
      */
     private static void handleAudioStateChanged(Intent intent) {
+        boolean wasPlaying = isPlaying;
+        
         isPlaying = intent.getBooleanExtra("isPlaying", false);
         currentSurah = intent.getStringExtra("surah");
         currentReciter = intent.getStringExtra("reciter");
@@ -448,10 +487,18 @@ public class QuranWidget extends AppWidgetProvider {
         
         widgetDebugLog(TAG, "🎵 État audio mis à jour: " + (isPlaying ? "Lecture" : "Pause") + 
                       " - " + currentSurah + " - " + currentReciter);
+        widgetDebugLog(TAG, "🔄 Changement d'état: " + (wasPlaying ? "Lecture" : "Pause") + " → " + (isPlaying ? "Lecture" : "Pause"));
         
-        // Mettre à jour le widget
+        // NOUVEAU : Mettre à jour le widget même si context est null
+        // Le service appellera directement updateAllWidgets avec son context
+        widgetDebugLog(TAG, "📱 État mis à jour - isPlaying: " + isPlaying + ", icône devrait changer");
+        
+        // NOUVEAU : Mettre à jour immédiatement tous les widgets si on a un context
         if (context != null) {
+            widgetDebugLog(TAG, "🚀 Mise à jour immédiate des widgets après changement d'état");
             updateAllWidgets(context);
+        } else {
+            widgetDebugLog(TAG, "⚠️ Context null, mise à jour différée");
         }
     }
     

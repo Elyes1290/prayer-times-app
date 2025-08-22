@@ -36,6 +36,7 @@ import { DownloadInfo } from "../utils/nativeDownloadManager";
 import { Image as ExpoImage } from "expo-image";
 import RNFS from "react-native-fs";
 import { useQuranWidget } from "../hooks/useQuranWidget";
+import { useQuranAudioService } from "../hooks/useQuranAudioService";
 
 // 🚀 NOUVEAU : Composant de jauge de progression
 const ProgressBar = ({
@@ -131,6 +132,29 @@ export default function QuranScreen() {
   // 🎯 NOUVEAU : Hook widget Coran
   const { isWidgetAvailable, updateWidgetAudio, updateWidgetPlaybackState } =
     useQuranWidget();
+
+  // 🎵 NOUVEAU : Hook service audio natif
+  const {
+    audioState: serviceAudioState,
+    startService,
+    loadAudio: loadAudioInService,
+    playAudio: playAudioInService,
+    pauseAudio: pauseAudioInService,
+    stopAudio: stopAudioInService,
+    seekToPosition: seekToPositionInService,
+    updatePremiumStatus,
+    isServiceAvailable,
+  } = useQuranAudioService();
+
+  // 🎵 DEBUG : Vérifier l'état du hook
+  console.log(
+    "🎵 Hook useQuranAudioService - État initial:",
+    serviceAudioState
+  );
+  console.log(
+    "🎵 Hook useQuranAudioService - Service disponible:",
+    isServiceAvailable()
+  );
 
   // 🌐 NOUVEAU : Fonction pour tester la connectivité
   const checkConnectivity = async (): Promise<boolean> => {
@@ -525,6 +549,52 @@ export default function QuranScreen() {
       }
     };
   }, [sound]);
+
+  // 🎵 NOUVEAU : Écouter les événements du service audio natif
+  useEffect(() => {
+    if (isServiceAvailable() && user?.isPremium) {
+      console.log("🎵 Initialisation des écouteurs d'événements audio natifs");
+
+      // Écouter les changements d'état du service
+      // 🎵 SUPPRIMÉ : Plus de gestion directe des événements - utilisation uniquement du hook useQuranAudioService
+
+      // 🎵 SUPPRIMÉ : Plus d'écoute directe des événements - utilisation uniquement du hook useQuranAudioService
+      console.log(
+        "🎵 Écouteurs d'événements audio initialisés via useQuranAudioService"
+      );
+
+      // Nettoyer les écouteurs lors du démontage
+      return () => {
+        console.log("🎵 Nettoyage des écouteurs d'événements audio");
+      };
+    }
+  }, [isServiceAvailable, user?.isPremium]);
+
+  // 🎵 NOUVEAU : Écouter aussi les événements du hook useQuranAudioService
+  useEffect(() => {
+    if (isServiceAvailable() && user?.isPremium) {
+      console.log("🎵 Synchronisation avec useQuranAudioService");
+      console.log("🔍 État du service:", serviceAudioState);
+
+      // Mettre à jour l'état local avec l'état du service
+      const newPosition = serviceAudioState.position || 0;
+      const newDuration = serviceAudioState.duration || 0;
+      const newIsPlaying = serviceAudioState.isPlaying || false;
+
+      console.log(
+        "📊 Mise à jour état - position:",
+        newPosition,
+        "duration:",
+        newDuration,
+        "isPlaying:",
+        newIsPlaying
+      );
+
+      setPlaybackPosition(newPosition);
+      setPlaybackDuration(newDuration);
+      setIsPlaying(newIsPlaying);
+    }
+  }, [serviceAudioState, isServiceAvailable, user?.isPremium]);
 
   const loadAvailableRecitations = async (forceRefresh = false) => {
     try {
@@ -976,32 +1046,116 @@ export default function QuranScreen() {
       }
       */
 
-      // Créer et configurer l'objet audio (avec fallback streaming si local corrompu)
-      let createdSound: any | null = null;
-      try {
-        createdSound = await audioManager.playSource(audioSource, 1.0);
-      } catch (playError: any) {
-        console.error("Erreur lecture locale, fallback streaming:", playError);
-        // Fallback: tenter le streaming HTTP sécurisé
+      // 🎵 NOUVEAU : Utiliser le service audio natif si disponible
+      if (isServiceAvailable() && user?.isPremium) {
         try {
-          const remoteUrl = (
-            currentRecitation?.fileUrl ||
-            recitation.fileUrl ||
-            ""
-          ).replace("action=download", "action=stream");
-          if (!remoteUrl) throw new Error("URL streaming indisponible");
-          createdSound = await audioManager.playSource({ uri: remoteUrl }, 1.0);
-        } catch (fallbackError) {
-          console.error("Erreur fallback streaming:", fallbackError);
-          setIsPlaying(false);
-          setCurrentlyPlaying(null);
-          setIsLoading(false);
-          return;
+          console.log("🎵 Utilisation du service audio natif");
+
+          // Mettre à jour le statut premium dans le service
+          await updatePremiumStatus(true);
+
+          // Charger l'audio dans le service
+          const audioPath = actualDownloadPath || recitation.fileUrl;
+          await loadAudioInService(
+            audioPath,
+            recitation.title,
+            recitation.reciter || ""
+          );
+
+          // Lancer la lecture
+          await playAudioInService();
+
+          setIsPlaying(true);
+          setCurrentlyPlaying(recitation.id);
+
+          // 🎵 NOUVEAU : Créer un mock sound pour maintenir la compatibilité
+          const mockSound = {
+            setOnPlaybackStatusUpdate: (callback: any) => {
+              // Le callback sera géré par les événements du service natif
+              console.log("🎵 Mock sound configuré pour service natif");
+              // Stocker le callback pour l'utiliser plus tard si nécessaire
+              mockSound._callback = callback;
+            },
+            unloadAsync: async () => {
+              console.log("🎵 Mock sound unloadAsync appelé");
+              return Promise.resolve();
+            },
+            playAsync: async () => {
+              console.log("🎵 Mock sound playAsync appelé");
+              return Promise.resolve();
+            },
+            pauseAsync: async () => {
+              console.log("🎵 Mock sound pauseAsync appelé");
+              return Promise.resolve();
+            },
+            stopAsync: async () => {
+              console.log("🎵 Mock sound stopAsync appelé");
+              return Promise.resolve();
+            },
+            setPositionAsync: async (position: number) => {
+              console.log("🎵 Mock sound setPositionAsync appelé:", position);
+              return Promise.resolve();
+            },
+            getStatusAsync: async () => {
+              console.log("🎵 Mock sound getStatusAsync appelé");
+              // NOUVEAU : Utiliser les vraies valeurs du service natif
+              return Promise.resolve({
+                isLoaded: true,
+                isPlaying: isPlaying,
+                positionMillis: playbackPosition,
+                durationMillis: playbackDuration,
+              });
+            },
+            _callback: null as any, // Pour stocker le callback
+          };
+          setSound(mockSound);
+
+          console.log("✅ Lecture lancée via service natif");
+        } catch (serviceError) {
+          console.error("❌ Erreur service audio natif:", serviceError);
+          // Fallback vers l'ancien système
+          console.log("🔄 Fallback vers système audio Expo");
         }
       }
 
-      setSound(createdSound);
-      setIsPlaying(true);
+      // Fallback vers l'ancien système si service non disponible ou non premium
+      if (!isServiceAvailable() || !user?.isPremium) {
+        console.log("🎵 Utilisation du système audio Expo");
+
+        // Créer et configurer l'objet audio (avec fallback streaming si local corrompu)
+        let createdSound: any | null = null;
+        try {
+          createdSound = await audioManager.playSource(audioSource, 1.0);
+        } catch (playError: any) {
+          console.error(
+            "Erreur lecture locale, fallback streaming:",
+            playError
+          );
+          // Fallback: tenter le streaming HTTP sécurisé
+          try {
+            const remoteUrl = (
+              currentRecitation?.fileUrl ||
+              recitation.fileUrl ||
+              ""
+            ).replace("action=download", "action=stream");
+            if (!remoteUrl) throw new Error("URL streaming indisponible");
+            createdSound = await audioManager.playSource(
+              { uri: remoteUrl },
+              1.0
+            );
+          } catch (fallbackError) {
+            console.error("Erreur fallback streaming:", fallbackError);
+            setIsPlaying(false);
+            setCurrentlyPlaying(null);
+            setIsLoading(false);
+            return;
+          }
+        }
+
+        setSound(createdSound);
+        setIsPlaying(true);
+        setCurrentlyPlaying(recitation.id);
+      }
 
       // 🎯 NOUVEAU : Mettre à jour le widget Coran
       if (isWidgetAvailable && user?.isPremium) {
@@ -1016,68 +1170,70 @@ export default function QuranScreen() {
 
       // Configuration des callbacks de progression avec analyse audio
       // TODO: À implémenter plus tard
-      createdSound?.setOnPlaybackStatusUpdate((status: any) => {
-        if (status.isLoaded) {
-          setPlaybackPosition(status.positionMillis || 0);
-          setPlaybackDuration(status.durationMillis || 0);
+      if (sound) {
+        sound.setOnPlaybackStatusUpdate((status: any) => {
+          if (status.isLoaded) {
+            setPlaybackPosition(status.positionMillis || 0);
+            setPlaybackDuration(status.durationMillis || 0);
 
-          // 🎯 NOUVEAU : Mettre à jour le widget Coran avec la progression
-          if (isWidgetAvailable && user?.isPremium) {
-            updateWidgetPlaybackState(
-              isPlaying,
-              status.positionMillis || 0,
-              status.durationMillis || 0
-            );
-          }
+            // 🎯 NOUVEAU : Mettre à jour le widget Coran avec la progression
+            if (isWidgetAvailable && user?.isPremium) {
+              updateWidgetPlaybackState(
+                isPlaying,
+                status.positionMillis || 0,
+                status.durationMillis || 0
+              );
+            }
 
-          // 🎯 NOUVEAU : Utiliser l'analyse audio pour la synchronisation
-          // TODO: À implémenter plus tard
-          /*
-          if (status.positionMillis && verseTimings.length > 0) {
-            const currentTimeSeconds = status.positionMillis / 1000;
-            const currentVerse = quranAudioAnalyzer.getCurrentVerse(
-              verseTimings,
-              currentTimeSeconds
-            );
+            // 🎯 NOUVEAU : Utiliser l'analyse audio pour la synchronisation
+            // TODO: À implémenter plus tard
+            /*
+            if (status.positionMillis && verseTimings.length > 0) {
+              const currentTimeSeconds = status.positionMillis / 1000;
+              const currentVerse = quranAudioAnalyzer.getCurrentVerse(
+                verseTimings,
+                currentTimeSeconds
+              );
 
-            // console.log(
-            //   `🎵 Temps: ${currentTimeSeconds}s, Verset actuel: ${currentVerse}, Index précédent: ${currentVerseIndex}`
-            // );
+              // console.log(
+              //   `🎵 Temps: ${currentTimeSeconds}s, Verset actuel: ${currentVerse}, Index précédent: ${currentVerseIndex}`
+              // );
 
-            if (currentVerse !== currentVerseIndex) {
-              setCurrentVerseIndex(currentVerse);
-              //  console.log(`🎵 Nouveau verset détecté: ${currentVerse}`);
+              if (currentVerse !== currentVerseIndex) {
+                setCurrentVerseIndex(currentVerse);
+                //  console.log(`🎵 Nouveau verset détecté: ${currentVerse}`);
 
-              // 🎯 NOUVEAU : Scroll automatique vers le verset en cours
-              if (autoScrollEnabled && flatListRef.current) {
+                // 🎯 NOUVEAU : Scroll automatique vers le verset en cours
+                if (autoScrollEnabled && flatListRef.current) {
+                  setTimeout(() => {
+                    flatListRef.current?.scrollToIndex({
+                      index: currentVerse,
+                      animated: true,
+                      viewPosition: 0.3, // Positionne le verset à 30% du haut
+                    });
+                  }, 100);
+                }
+              }
+            }
+            */
+
+            if (status.didJustFinish) {
+              setIsPlaying(false);
+              setCurrentlyPlaying(null);
+              setPlaybackPosition(0);
+              setPlaybackDuration(0);
+              // TODO: setCurrentVerseIndex(null);
+
+              // 🎵 NOUVEAU : Mode playlist - passer automatiquement à la suivante
+              if (playlistModeRef.current) {
                 setTimeout(() => {
-                  flatListRef.current?.scrollToIndex({
-                    index: currentVerse,
-                    animated: true,
-                    viewPosition: 0.3, // Positionne le verset à 30% du haut
-                  });
-                }, 100);
+                  playNextInPlaylist();
+                }, 1000); // Petite pause entre les récitations
               }
             }
           }
-          */
-
-          if (status.didJustFinish) {
-            setIsPlaying(false);
-            setCurrentlyPlaying(null);
-            setPlaybackPosition(0);
-            setPlaybackDuration(0);
-            // TODO: setCurrentVerseIndex(null);
-
-            // 🎵 NOUVEAU : Mode playlist - passer automatiquement à la suivante
-            if (playlistModeRef.current) {
-              setTimeout(() => {
-                playNextInPlaylist();
-              }, 1000); // Petite pause entre les récitations
-            }
-          }
-        }
-      });
+        });
+      }
 
       showToast({
         type: "success",
@@ -1102,14 +1258,20 @@ export default function QuranScreen() {
 
   const pauseRecitation = async () => {
     try {
-      if (sound) {
+      // 🎵 NOUVEAU : Utiliser le service natif si disponible
+      if (isServiceAvailable() && user?.isPremium) {
+        await pauseAudioInService();
+        setIsPlaying(false);
+        console.log("✅ Pause via service natif");
+      } else if (sound) {
         await audioManager.pause();
         setIsPlaying(false);
+        console.log("✅ Pause via Expo-AV");
+      }
 
-        // 🎯 NOUVEAU : Mettre à jour le widget Coran
-        if (isWidgetAvailable && user?.isPremium) {
-          updateWidgetPlaybackState(false, playbackPosition, playbackDuration);
-        }
+      // 🎯 NOUVEAU : Mettre à jour le widget Coran
+      if (isWidgetAvailable && user?.isPremium) {
+        updateWidgetPlaybackState(false, playbackPosition, playbackDuration);
       }
     } catch (error) {
       console.error("Erreur pause audio:", error);
@@ -1118,14 +1280,20 @@ export default function QuranScreen() {
 
   const resumeRecitation = async () => {
     try {
-      if (sound) {
+      // 🎵 NOUVEAU : Utiliser le service natif si disponible
+      if (isServiceAvailable() && user?.isPremium) {
+        await playAudioInService();
+        setIsPlaying(true);
+        console.log("✅ Reprise via service natif");
+      } else if (sound) {
         await audioManager.resume();
         setIsPlaying(true);
+        console.log("✅ Reprise via Expo-AV");
+      }
 
-        // 🎯 NOUVEAU : Mettre à jour le widget Coran
-        if (isWidgetAvailable && user?.isPremium) {
-          updateWidgetPlaybackState(true, playbackPosition, playbackDuration);
-        }
+      // 🎯 NOUVEAU : Mettre à jour le widget Coran
+      if (isWidgetAvailable && user?.isPremium) {
+        updateWidgetPlaybackState(true, playbackPosition, playbackDuration);
       }
     } catch (error) {
       console.error("Erreur reprise audio:", error);
@@ -1134,8 +1302,13 @@ export default function QuranScreen() {
 
   const seekToPosition = async (positionMillis: number) => {
     try {
-      if (sound) {
+      // 🎵 NOUVEAU : Utiliser le service natif si disponible
+      if (isServiceAvailable() && user?.isPremium) {
+        await seekToPositionInService(positionMillis);
+        console.log("✅ Seek via service natif");
+      } else if (sound) {
         await sound.setPositionAsync(positionMillis);
+        console.log("✅ Seek via Expo-AV");
       }
     } catch (error) {
       console.error("Erreur navigation audio:", error);
@@ -1759,7 +1932,16 @@ export default function QuranScreen() {
                             </Text>
                           </>
                         ) : (
-                          <Text style={styles.audioTimeText}>--:--</Text>
+                          <>
+                            <Text style={styles.audioTimeText}>--:--</Text>
+                            {/* NOUVEAU : Debug info pour comprendre pourquoi la durée n'est pas affichée */}
+                            {__DEV__ && (
+                              <Text style={styles.debugText}>
+                                Debug: pos={playbackPosition}, dur=
+                                {playbackDuration}
+                              </Text>
+                            )}
+                          </>
                         )}
                       </View>
 

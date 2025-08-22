@@ -18,6 +18,7 @@ import expo.modules.ReactNativeHostWrapper
 import com.drogbinho.prayertimesapp2.AdhanPackage // Ajoute cette importation
 import com.drogbinho.prayertimesapp2.DownloadPackage // Ajoute cette importation
 import com.drogbinho.prayertimesapp2.QuranWidgetPackage // Ajoute cette importation
+import com.drogbinho.prayertimesapp2.QuranAudioServicePackage // Ajoute cette importation
 
 
 class MainApplication : Application(), ReactApplication {
@@ -29,9 +30,10 @@ class MainApplication : Application(), ReactApplication {
             val packages = PackageList(this).packages
             // Packages that cannot be autolinked yet can be added manually here, for example:
             // packages.add(MyReactNativePackage())
-                packages.add(AdhanPackage()) // <--- AJOUTE TA LIGNE ICI
-                packages.add(DownloadPackage()) // <--- AJOUTE TA LIGNE ICI
-                packages.add(QuranWidgetPackage()) // <--- AJOUTE TA LIGNE ICI
+                packages.add(AdhanPackage()) //
+                packages.add(DownloadPackage()) //
+                packages.add(QuranWidgetPackage()) //
+                packages.add(QuranAudioServicePackage()) //
             return packages
           }
 

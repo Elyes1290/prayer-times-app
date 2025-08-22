@@ -25,9 +25,31 @@ import androidx.core.app.NotificationCompat;
 import java.io.File;
 import java.io.IOException;
 import android.content.SharedPreferences;
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
 
 public class QuranAudioService extends Service {
     private static final String TAG = "QuranAudioService";
+    
+    // Interface pour les callbacks vers React Native
+    public interface AudioProgressCallback {
+        void onAudioProgress(int position, int duration, boolean isPlaying, String surah, String reciter);
+        void onAudioStateChanged(boolean isPlaying, String surah, String reciter, int position, int duration);
+    }
+    
+    // Callback statique pour React Native
+    private static AudioProgressCallback audioProgressCallback = null;
+    
+    // Méthodes statiques pour gérer le callback
+    public static void setAudioProgressCallback(AudioProgressCallback callback) {
+        Log.d(TAG, "🔗 Enregistrement du callback React Native");
+        audioProgressCallback = callback;
+    }
+    
+    public static void removeAudioProgressCallback() {
+        Log.d(TAG, "🔗 Suppression du callback React Native");
+        audioProgressCallback = null;
+    }
     private static final String CHANNEL_ID = "quran_audio_channel";
     private static final int NOTIFICATION_ID = 1001;
     
@@ -51,6 +73,9 @@ public class QuranAudioService extends Service {
     private int totalDuration = 0;
     private boolean isPremiumUser = false;
     
+    // NOUVEAU : Variable pour mémoriser l'état de lecture avant perte de focus
+    private boolean wasPlayingBeforeFocusLoss = false;
+    
     // Clés pour SharedPreferences
     private static final String PREFS_NAME = "QuranAudioServicePrefs";
     private static final String KEY_AUDIO_PATH = "currentAudioPath";
@@ -64,16 +89,17 @@ public class QuranAudioService extends Service {
     // Composants audio
     private MediaPlayer mediaPlayer;
     private AudioManager audioManager;
-    private AudioFocusRequest audioFocusRequest;
     private NotificationManager notificationManager;
+    private AudioFocusRequest audioFocusRequest;
+    private android.os.Handler progressHandler;
+    private Runnable progressRunnable;
     
-    // Broadcast receiver pour les actions du widget
-    private BroadcastReceiver widgetActionReceiver = new BroadcastReceiver() {
+    // BroadcastReceiver pour les actions du widget
+    private final BroadcastReceiver widgetActionReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-            Log.d(TAG, "📡 BroadcastReceiver reçoit action: " + action);
-            Log.d(TAG, "📡 BroadcastReceiver intent extras: " + (intent.getExtras() != null ? "OUI" : "null"));
+            Log.d(TAG, "🎵 BroadcastReceiver reçoit action: " + action);
             
             if (action == null) {
                 Log.w(TAG, "⚠️ Action null reçue dans BroadcastReceiver");
@@ -143,6 +169,7 @@ public class QuranAudioService extends Service {
         // Initialiser les composants
         audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
         notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        progressHandler = new android.os.Handler();
         
         // Créer le canal de notification
         createNotificationChannel();
@@ -174,20 +201,14 @@ public class QuranAudioService extends Service {
             filter.addAction(ACTION_STOP);
             filter.addAction("com.drogbinho.prayertimesapp2.LOAD_AUDIO");
             
-            // Enregistrer le receiver avec le bon flag d'export
+            // NOUVEAU : Ajouter le flag RECEIVER_NOT_EXPORTED pour la sécurité
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                 registerReceiver(widgetActionReceiver, filter, Context.RECEIVER_NOT_EXPORTED);
             } else {
                 registerReceiver(widgetActionReceiver, filter);
             }
             
-            Log.d(TAG, "✅ BroadcastReceiver enregistré pour les actions du widget");
-            
-            // Démarrer le service en mode foreground pour recevoir les broadcasts
-            if (!isForegroundService()) {
-                startForeground(NOTIFICATION_ID, createNotification());
-                Log.d(TAG, "🎵 Service démarré en mode foreground pour recevoir les broadcasts");
-            }
+            Log.d(TAG, "📡 BroadcastReceiver enregistré pour les actions du widget");
         } catch (Exception e) {
             Log.e(TAG, "❌ Erreur enregistrement BroadcastReceiver: " + e.getMessage());
         }
@@ -272,39 +293,43 @@ public class QuranAudioService extends Service {
     
     @Override
     public void onDestroy() {
-        super.onDestroy();
         Log.d(TAG, "🎵 Service audio Quran détruit");
         
-        // Nettoyer
-        if (widgetActionReceiver != null) {
-            unregisterReceiver(widgetActionReceiver);
-        }
-        
-        if (mediaPlayer != null) {
-            mediaPlayer.release();
-            mediaPlayer = null;
-        }
-        
-        // Abandonner le focus audio proprement
-        abandonAudioFocus();
-    }
-    
-    /**
-     * Abandonner le focus audio
-     */
-    private void abandonAudioFocus() {
         try {
+            // Arrêter la lecture
+            stopAudio();
+            
+            // Désenregistrer le BroadcastReceiver
+            if (widgetActionReceiver != null) {
+                unregisterReceiver(widgetActionReceiver);
+                Log.d(TAG, "📡 BroadcastReceiver désenregistré");
+            }
+            
+            // Arrêter le timer de progression
+            if (progressHandler != null && progressRunnable != null) {
+                progressHandler.removeCallbacks(progressRunnable);
+            }
+            
+            // Libérer le MediaPlayer
+            if (mediaPlayer != null) {
+                mediaPlayer.release();
+                mediaPlayer = null;
+            }
+            
+            // Abandonner le focus audio
             if (audioManager != null) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && audioFocusRequest != null) {
                     audioManager.abandonAudioFocusRequest(audioFocusRequest);
                 } else {
                     audioManager.abandonAudioFocus(null);
                 }
-                Log.d(TAG, "🔇 Focus audio abandonné");
             }
+            
         } catch (Exception e) {
-            Log.e(TAG, "❌ Erreur abandon focus audio: " + e.getMessage());
+            Log.e(TAG, "❌ Erreur destruction service: " + e.getMessage());
         }
+        
+        super.onDestroy();
     }
     
     /**
@@ -331,7 +356,18 @@ public class QuranAudioService extends Service {
             mediaPlayer.setOnPreparedListener(mp -> {
                 Log.d(TAG, "🎵 MediaPlayer prêt");
                 totalDuration = mp.getDuration();
+                currentPosition = 0;
+                Log.d(TAG, "🎵 Durée totale: " + totalDuration + "ms");
+                
+                // NOUVEAU : Logs de debug pour vérifier l'envoi des événements
+                Log.d(TAG, "🔍 Envoi événements après préparation - durée: " + totalDuration + "ms");
                 broadcastAudioStateChanged();
+                Log.d(TAG, "✅ Événement état audio envoyé");
+                broadcastAudioProgress();
+                Log.d(TAG, "✅ Événement progression audio envoyé");
+                
+                // NOUVEAU : Vérifier que les événements ont bien été envoyés
+                Log.d(TAG, "🔍 Vérification - totalDuration: " + totalDuration + ", currentPosition: " + currentPosition);
             });
             
             mediaPlayer.setOnCompletionListener(mp -> {
@@ -343,46 +379,37 @@ public class QuranAudioService extends Service {
             });
             
             mediaPlayer.setOnErrorListener((mp, what, extra) -> {
-                Log.e(TAG, "❌ Erreur MediaPlayer: " + what + ", " + extra);
+                Log.e(TAG, "❌ Erreur MediaPlayer: what=" + what + ", extra=" + extra);
                 
-                // Gérer les erreurs spécifiques
-                switch (what) {
-                    case MediaPlayer.MEDIA_ERROR_NOT_VALID_FOR_PROGRESSIVE_PLAYBACK:
-                        Log.e(TAG, "❌ Erreur: Fichier non valide pour lecture progressive");
-                        // Réinitialiser le MediaPlayer et recharger l'audio
-                        handleMediaPlayerError();
-                        break;
-                    case MediaPlayer.MEDIA_ERROR_SERVER_DIED:
-                        Log.e(TAG, "❌ Erreur: Serveur MediaPlayer mort");
-                        // Réinitialiser le MediaPlayer
-                        handleMediaPlayerError();
-                        break;
-                    case MediaPlayer.MEDIA_ERROR_IO:
-                        Log.e(TAG, "❌ Erreur: Problème I/O");
-                        handleMediaPlayerError();
-                        break;
-                    case MediaPlayer.MEDIA_ERROR_MALFORMED:
-                        Log.e(TAG, "❌ Erreur: Fichier malformé");
-                        handleMediaPlayerError();
-                        break;
-                    case MediaPlayer.MEDIA_ERROR_UNSUPPORTED:
-                        Log.e(TAG, "❌ Erreur: Format non supporté");
-                        handleMediaPlayerError();
-                        break;
-                    case MediaPlayer.MEDIA_ERROR_TIMED_OUT:
-                        Log.e(TAG, "❌ Erreur: Timeout");
-                        handleMediaPlayerError();
-                        break;
-                    default:
-                        Log.e(TAG, "❌ Erreur MediaPlayer inconnue: " + what);
-                        handleMediaPlayerError();
-                        break;
+                // Gérer spécifiquement l'erreur de streaming progressif
+                if (what == -38) { // MEDIA_ERROR_NOT_VALID_FOR_PROGRESSIVE_PLAYBACK
+                    Log.w(TAG, "⚠️ Erreur streaming progressif détectée, tentative de retry avec action=download");
+                    
+                    // Essayer de recharger avec action=download si c'était action=stream
+                    if (currentAudioPath != null && currentAudioPath.contains("action=stream")) {
+                        String retryUrl = currentAudioPath.replace("action=stream", "action=download");
+                        Log.d(TAG, "🔄 Retry avec URL: " + retryUrl);
+                        
+                        // Recharger l'audio avec la nouvelle URL
+                        loadAudio(retryUrl, currentSurah, currentReciter);
+                        return true; // Erreur gérée
+                    }
                 }
+                
+                isPlaying = false;
+                currentPosition = 0;
+                broadcastAudioStateChanged();
+                updateNotification();
+                
+                // Envoyer un événement d'erreur à React Native
+                Intent errorIntent = new Intent("QuranAudioError");
+                errorIntent.putExtra("error", "MediaPlayer error: " + what + ", " + extra);
+                sendBroadcast(errorIntent);
                 
                 return true; // Indique que l'erreur a été gérée
             });
             
-            // Gestionnaire de focus audio
+            // Configurer la requête de focus audio pour Android 8+
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 AudioAttributes audioAttributes = new AudioAttributes.Builder()
                     .setUsage(AudioAttributes.USAGE_MEDIA)
@@ -393,25 +420,35 @@ public class QuranAudioService extends Service {
                     .setOnAudioFocusChangeListener(focusChange -> {
                         switch (focusChange) {
                             case AudioManager.AUDIOFOCUS_LOSS:
-                                Log.d(TAG, "🔇 Perte focus audio - pause");
+                                Log.d(TAG, "🎵 Focus audio perdu - pause");
+                                // NOUVEAU : Mémoriser l'état avant la perte de focus
+                                wasPlayingBeforeFocusLoss = isPlaying;
                                 pauseAudio();
                                 break;
                             case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT:
-                                Log.d(TAG, "🔇 Perte focus audio temporaire - pause");
+                                Log.d(TAG, "🎵 Focus audio perdu temporairement - pause");
+                                // NOUVEAU : Mémoriser l'état avant la perte de focus
+                                wasPlayingBeforeFocusLoss = isPlaying;
                                 pauseAudio();
                                 break;
                             case AudioManager.AUDIOFOCUS_GAIN:
-                                Log.d(TAG, "🔊 Regain focus audio");
-                                // Ne pas relancer automatiquement pour éviter les conflits
+                                Log.d(TAG, "🎵 Focus audio regagné - reprise conditionnelle");
+                                // NOUVEAU : Ne relancer que si l'utilisateur était en train d'écouter
+                                if (wasPlayingBeforeFocusLoss) {
+                                    Log.d(TAG, "🎵 Relance automatique car l'utilisateur était en train d'écouter");
+                                    playAudio();
+                                } else {
+                                    Log.d(TAG, "🎵 Pas de relance automatique car l'utilisateur n'était pas en train d'écouter");
+                                }
                                 break;
                         }
                     })
                     .build();
             }
             
+            Log.d(TAG, "✅ MediaPlayer initialisé avec succès");
         } catch (Exception e) {
             Log.e(TAG, "❌ Erreur initialisation MediaPlayer: " + e.getMessage());
-            e.printStackTrace();
         }
     }
     
@@ -422,10 +459,10 @@ public class QuranAudioService extends Service {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel(
                 CHANNEL_ID,
-                "Lecture Quran",
+                "Lecture Coran",
                 NotificationManager.IMPORTANCE_LOW
             );
-            channel.setDescription("Contrôles audio pour la lecture du Quran");
+            channel.setDescription("Contrôles de lecture audio du Coran");
             channel.setShowBadge(false);
             notificationManager.createNotificationChannel(channel);
         }
@@ -436,54 +473,30 @@ public class QuranAudioService extends Service {
      */
     private Notification createNotification() {
         // Intent pour ouvrir l'app
-        Intent openAppIntent = new Intent(this, MainActivity.class);
-        openAppIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        PendingIntent openAppPendingIntent = PendingIntent.getActivity(
-            this, 0, openAppIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
-        );
+        Intent appIntent = new Intent(this, MainActivity.class);
+        appIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        PendingIntent appPendingIntent = PendingIntent.getActivity(this, 0, appIntent, 
+            PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
         
-        // Actions de la notification - envoyer directement au service
-        Intent playPauseIntent = new Intent(this, QuranAudioService.class);
-        playPauseIntent.setAction(ACTION_PLAY_PAUSE);
-        PendingIntent playPausePendingIntent = PendingIntent.getService(
-            this, 0, playPauseIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
-        );
+        // Intent pour play/pause
+        Intent playPauseIntent = new Intent(ACTION_PLAY_PAUSE);
+        PendingIntent playPausePendingIntent = PendingIntent.getBroadcast(this, 1, playPauseIntent,
+            PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
         
-        Intent previousIntent = new Intent(this, QuranAudioService.class);
-        previousIntent.setAction(ACTION_PREVIOUS);
-        PendingIntent previousPendingIntent = PendingIntent.getService(
-            this, 1, previousIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
-        );
+        // Intent pour stop
+        Intent stopIntent = new Intent(ACTION_STOP);
+        PendingIntent stopPendingIntent = PendingIntent.getBroadcast(this, 2, stopIntent,
+            PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
         
-        Intent nextIntent = new Intent(this, QuranAudioService.class);
-        nextIntent.setAction(ACTION_NEXT);
-        PendingIntent nextPendingIntent = PendingIntent.getService(
-            this, 2, nextIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
-        );
-        
-        Intent stopIntent = new Intent(this, QuranAudioService.class);
-        stopIntent.setAction(ACTION_STOP);
-        PendingIntent stopPendingIntent = PendingIntent.getService(
-            this, 3, stopIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
-        );
-        
-        // Construire la notification
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
-            .setContentTitle(currentSurah.isEmpty() ? "Quran" : currentSurah)
-            .setContentText(currentReciter.isEmpty() ? "Prêt" : currentReciter)
-            .setSmallIcon(R.drawable.ic_premium_star)
-            .setContentIntent(openAppPendingIntent)
+            .setContentTitle(isPlaying ? "▶️ Lecture en cours" : "⏸️ Lecture en pause")
+            .setContentText(currentSurah.isEmpty() ? "Aucune lecture" : currentSurah + " - " + currentReciter)
+            .setSmallIcon(R.drawable.ic_quran_notification)
+            .setContentIntent(appPendingIntent)
+            .addAction(R.drawable.ic_play_pause, isPlaying ? "Pause" : "Play", playPausePendingIntent)
+            .addAction(R.drawable.ic_stop, "Stop", stopPendingIntent)
             .setOngoing(true)
-            .setOnlyAlertOnce(true)
-            .setPriority(NotificationCompat.PRIORITY_LOW)
-            .addAction(R.drawable.ic_previous, "Précédent", previousPendingIntent)
-            .addAction(
-                isPlaying ? R.drawable.ic_pause : R.drawable.ic_play,
-                isPlaying ? "Pause" : "Play",
-                playPausePendingIntent
-            )
-            .addAction(R.drawable.ic_next, "Suivant", nextPendingIntent)
-            .addAction(R.drawable.ic_open_app, "Arrêter", stopPendingIntent);
+            .setSilent(true);
         
         return builder.build();
     }
@@ -492,7 +505,9 @@ public class QuranAudioService extends Service {
      * Mettre à jour la notification
      */
     private void updateNotification() {
-        notificationManager.notify(NOTIFICATION_ID, createNotification());
+        if (notificationManager != null) {
+            notificationManager.notify(NOTIFICATION_ID, createNotification());
+        }
     }
     
     /**
@@ -500,33 +515,224 @@ public class QuranAudioService extends Service {
      */
     private void checkPremiumStatus() {
         try {
-            // Lire depuis les SharedPreferences ReactNative (AsyncStorage)
-            SharedPreferences prefs = getSharedPreferences("RCTAsyncLocalStorage_V1", Context.MODE_PRIVATE);
-            String userData = prefs.getString("user_data", "");
-            
-            if (!userData.isEmpty()) {
-                Log.d(TAG, "📊 Données utilisateur trouvées: " + userData.substring(0, Math.min(100, userData.length())) + "...");
-                
-                // Vérifier si l'utilisateur est premium (premium_status = 1)
-                isPremiumUser = userData.contains("\"premium_status\":1") || userData.contains("\"isPremium\":true");
-                Log.d(TAG, "👑 Statut premium détecté: " + isPremiumUser);
-                
-                // Sauvegarder le statut premium
-                saveAudioState();
-            } else {
-                // Fallback: essayer depuis les anciens SharedPreferences
-                SharedPreferences fallbackPrefs = getSharedPreferences("premium_prefs", Context.MODE_PRIVATE);
-                isPremiumUser = fallbackPrefs.getBoolean("is_premium_user", false);
-                
-                if (isPremiumUser) {
-                    Log.d(TAG, "👑 Statut premium (fallback): " + isPremiumUser);
-                } else {
-                    Log.w(TAG, "⚠️ Aucune donnée utilisateur trouvée dans AsyncStorage");
-                }
-            }
+            SharedPreferences prefs = getSharedPreferences("premium_prefs", MODE_PRIVATE);
+            isPremiumUser = prefs.getBoolean("is_premium_user", false);
+            Log.d(TAG, "👑 Statut premium vérifié: " + isPremiumUser);
         } catch (Exception e) {
             Log.e(TAG, "❌ Erreur vérification statut premium: " + e.getMessage());
             isPremiumUser = false;
+        }
+    }
+    
+    /**
+     * Sauvegarder l'état audio
+     */
+    private void saveAudioState() {
+        try {
+            SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+            prefs.edit()
+                .putString(KEY_AUDIO_PATH, currentAudioPath)
+                .putString(KEY_SURAH, currentSurah)
+                .putString(KEY_RECITER, currentReciter)
+                .putInt(KEY_POSITION, currentPosition)
+                .putInt(KEY_DURATION, totalDuration)
+                .putBoolean(KEY_IS_PLAYING, isPlaying)
+                .putBoolean(KEY_IS_PREMIUM, isPremiumUser)
+                .apply();
+        } catch (Exception e) {
+            Log.e(TAG, "❌ Erreur sauvegarde état audio: " + e.getMessage());
+        }
+    }
+    
+    /**
+     * Restaurer l'état audio
+     */
+    private void restoreAudioState() {
+        try {
+            SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+            currentAudioPath = prefs.getString(KEY_AUDIO_PATH, "");
+            currentSurah = prefs.getString(KEY_SURAH, "");
+            currentReciter = prefs.getString(KEY_RECITER, "");
+            currentPosition = prefs.getInt(KEY_POSITION, 0);
+            totalDuration = prefs.getInt(KEY_DURATION, 0);
+            isPlaying = prefs.getBoolean(KEY_IS_PLAYING, false);
+            isPremiumUser = prefs.getBoolean(KEY_IS_PREMIUM, false);
+            
+            Log.d(TAG, "🔄 État audio restauré: " + currentSurah + " - " + currentReciter);
+        } catch (Exception e) {
+            Log.e(TAG, "❌ Erreur restauration état audio: " + e.getMessage());
+        }
+    }
+    
+    /**
+     * Diffuser l'état audio
+     */
+    private void broadcastAudioStateChanged() {
+        try {
+            Log.d(TAG, "📡 Diffusion état audio - isPlaying: " + isPlaying + ", surah: " + currentSurah);
+            
+            // NOUVEAU : Callback direct vers React Native
+            if (audioProgressCallback != null) {
+                Log.d(TAG, "🎯 Envoi callback état React Native - isPlaying: " + isPlaying + ", position: " + currentPosition + ", duration: " + totalDuration);
+                audioProgressCallback.onAudioStateChanged(isPlaying, currentSurah, currentReciter, currentPosition, totalDuration);
+                Log.d(TAG, "✅ Callback état React Native envoyé");
+            } else {
+                Log.w(TAG, "⚠️ Aucun callback état React Native enregistré");
+            }
+            
+            // ANCIEN : Envoyer un Intent global pour React Native (backup)
+            Intent reactNativeIntent = new Intent("com.drogbinho.prayertimesapp2.REACT_NATIVE_EVENT");
+            reactNativeIntent.putExtra("eventName", "QuranAudioStateChanged");
+            reactNativeIntent.putExtra("isPlaying", isPlaying);
+            reactNativeIntent.putExtra("surah", currentSurah);
+            reactNativeIntent.putExtra("reciter", currentReciter);
+            reactNativeIntent.putExtra("position", currentPosition);
+            reactNativeIntent.putExtra("duration", totalDuration);
+            reactNativeIntent.putExtra("isPremium", isPremiumUser);
+            sendBroadcast(reactNativeIntent);
+            
+            // Garder l'ancien broadcast pour le widget
+            Intent intent = new Intent(ACTION_AUDIO_STATE_CHANGED);
+            intent.putExtra("isPlaying", isPlaying);
+            intent.putExtra("surah", currentSurah);
+            intent.putExtra("reciter", currentReciter);
+            intent.putExtra("position", currentPosition);
+            intent.putExtra("duration", totalDuration);
+            intent.putExtra("isPremium", isPremiumUser);
+            
+            // NOUVEAU : S'assurer que le broadcast est envoyé avec le bon package
+            intent.setPackage(getPackageName());
+            Log.d(TAG, "📡 Envoi broadcast widget avec package: " + getPackageName());
+            
+            sendBroadcast(intent);
+            Log.d(TAG, "✅ Broadcast widget envoyé: " + intent.getAction());
+            
+            // Mettre à jour le widget
+            updateQuranWidget();
+        } catch (Exception e) {
+            Log.e(TAG, "❌ Erreur diffusion état audio: " + e.getMessage());
+        }
+    }
+    
+    /**
+     * Diffuser la progression audio
+     */
+    private void broadcastAudioProgress() {
+        try {
+            Log.d(TAG, "📡 Diffusion progression audio - position: " + currentPosition + ", duration: " + totalDuration);
+            
+            // NOUVEAU : Callback direct vers React Native
+            if (audioProgressCallback != null) {
+                Log.d(TAG, "🎯 Envoi callback direct React Native - position: " + currentPosition + ", duration: " + totalDuration);
+                audioProgressCallback.onAudioProgress(currentPosition, totalDuration, isPlaying, currentSurah, currentReciter);
+                Log.d(TAG, "✅ Callback direct React Native envoyé");
+            } else {
+                Log.w(TAG, "⚠️ Aucun callback React Native enregistré");
+            }
+            
+            // ANCIEN : Envoyer un Intent global pour React Native (backup)
+            Intent reactNativeIntent = new Intent("com.drogbinho.prayertimesapp2.REACT_NATIVE_EVENT");
+            reactNativeIntent.putExtra("eventName", "QuranAudioProgress");
+            reactNativeIntent.putExtra("position", currentPosition);
+            reactNativeIntent.putExtra("duration", totalDuration);
+            Log.d(TAG, "🔧 Envoi broadcast React Native - action: " + reactNativeIntent.getAction());
+            sendBroadcast(reactNativeIntent);
+            Log.d(TAG, "✅ Broadcast React Native envoyé");
+            
+            // Garder l'ancien broadcast pour le widget
+            Intent intent = new Intent(ACTION_AUDIO_PROGRESS);
+            intent.putExtra("position", currentPosition);
+            intent.putExtra("duration", totalDuration);
+            sendBroadcast(intent);
+            
+            Log.d(TAG, "✅ Événement progression audio diffusé");
+            
+            // NOUVEAU : Mettre à jour directement l'état du widget
+            Log.d(TAG, "🚀 Mise à jour directe de l'état du widget après progression");
+            QuranWidget.updatePlaybackState(isPlaying, currentPosition, totalDuration);
+            
+        } catch (Exception e) {
+            Log.e(TAG, "❌ Erreur diffusion progression audio: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+    
+    /**
+     * Mettre à jour le widget Coran
+     */
+    private void updateQuranWidget() {
+        try {
+            // NOUVEAU : Mettre à jour directement le widget avec le context du service
+            Log.d(TAG, "📱 Mise à jour directe du widget depuis le service");
+            QuranWidget.updateAllWidgets(this);
+            
+            // NOUVEAU : Forcer la mise à jour immédiate de tous les widgets
+            try {
+                AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
+                ComponentName thisWidget = new ComponentName(this, QuranWidget.class);
+                int[] appWidgetIds = appWidgetManager.getAppWidgetIds(thisWidget);
+                
+                Log.d(TAG, "🚀 Mise à jour forcée de " + appWidgetIds.length + " widgets depuis le service");
+                
+                for (int appWidgetId : appWidgetIds) {
+                    QuranWidget.forceUpdateWidget(this, appWidgetId);
+                }
+                
+                Log.d(TAG, "✅ Mise à jour forcée terminée depuis le service");
+            } catch (Exception e) {
+                Log.e(TAG, "❌ Erreur mise à jour forcée depuis le service: " + e.getMessage());
+            }
+            
+        } catch (Exception e) {
+            Log.e(TAG, "❌ Erreur mise à jour widget: " + e.getMessage());
+        }
+    }
+    
+    /**
+     * Démarrer le timer de progression
+     */
+    private void startProgressTimer() {
+        Log.d(TAG, "⏱️ Démarrage timer de progression");
+        if (progressRunnable != null) {
+            progressHandler.removeCallbacks(progressRunnable);
+        }
+        
+        progressRunnable = new Runnable() {
+            @Override
+            public void run() {
+                if (mediaPlayer != null && isPlaying) {
+                    try {
+                        currentPosition = mediaPlayer.getCurrentPosition();
+                        Log.d(TAG, "⏱️ Timer progression - position: " + currentPosition + ", duration: " + totalDuration);
+                        broadcastAudioProgress();
+                        
+                        // NOUVEAU : Mettre à jour directement l'état du widget plus fréquemment
+                        if (currentPosition % 5000 < 1000) { // Toutes les 5 secondes environ
+                            Log.d(TAG, "🚀 Mise à jour directe de l'état du widget depuis le timer");
+                            QuranWidget.updatePlaybackState(isPlaying, currentPosition, totalDuration);
+                        }
+                        
+                        // Programmer la prochaine mise à jour
+                        progressHandler.postDelayed(this, 1000);
+                    } catch (Exception e) {
+                        Log.e(TAG, "❌ Erreur timer progression: " + e.getMessage());
+                    }
+                } else {
+                    Log.d(TAG, "⏱️ Timer progression arrêté - mediaPlayer null: " + (mediaPlayer == null) + ", isPlaying: " + isPlaying);
+                }
+            }
+        };
+        
+        progressHandler.post(progressRunnable);
+        Log.d(TAG, "✅ Timer de progression démarré");
+    }
+    
+    /**
+     * Arrêter le timer de progression
+     */
+    private void stopProgressTimer() {
+        if (progressRunnable != null) {
+            progressHandler.removeCallbacks(progressRunnable);
         }
     }
     
@@ -553,6 +759,14 @@ public class QuranAudioService extends Service {
             Log.d(TAG, "🎵 Play audio");
             playAudio();
         }
+        
+        // NOUVEAU : Diffuser l'état audio pour mettre à jour le widget
+        Log.d(TAG, "📡 Diffusion état audio après Play/Pause pour le widget");
+        broadcastAudioStateChanged();
+        
+        // NOUVEAU : Mettre à jour immédiatement le widget
+        Log.d(TAG, "🚀 Mise à jour immédiate du widget après Play/Pause");
+        updateQuranWidget();
     }
     
     /**
@@ -564,6 +778,10 @@ public class QuranAudioService extends Service {
         Log.d(TAG, "⏮️ Précédent");
         // TODO: Implémenter la logique pour passer à la sourate précédente
         broadcastAudioStateChanged();
+        
+        // NOUVEAU : Mettre à jour directement l'état du widget
+        Log.d(TAG, "🚀 Mise à jour directe de l'état du widget après précédent");
+        QuranWidget.updatePlaybackState(isPlaying, currentPosition, totalDuration);
     }
     
     /**
@@ -575,18 +793,26 @@ public class QuranAudioService extends Service {
         Log.d(TAG, "⏭️ Suivant");
         // TODO: Implémenter la logique pour passer à la sourate suivante
         broadcastAudioStateChanged();
+        
+        // NOUVEAU : Mettre à jour directement l'état du widget
+        Log.d(TAG, "🚀 Mise à jour directe de l'état du widget après suivant");
+        QuranWidget.updatePlaybackState(isPlaying, currentPosition, totalDuration);
     }
     
     /**
      * Gérer le seek
      */
-    private void handleSeek(int position) {
+    public void handleSeek(int position) {
         if (!isPremiumUser || mediaPlayer == null) return;
         
         Log.d(TAG, "🎯 Seek vers: " + position);
         mediaPlayer.seekTo(position);
         currentPosition = position;
         broadcastAudioProgress();
+        
+        // NOUVEAU : Mettre à jour directement l'état du widget
+        Log.d(TAG, "🚀 Mise à jour directe de l'état du widget après seek");
+        QuranWidget.updatePlaybackState(isPlaying, currentPosition, totalDuration);
     }
     
     /**
@@ -602,41 +828,20 @@ public class QuranAudioService extends Service {
      * Lancer la lecture audio
      */
     public void playAudio() {
-        Log.d(TAG, "🎵 playAudio() - mediaPlayer null: " + (mediaPlayer == null) + ", isPlaying: " + isPlaying);
+        Log.d(TAG, "🎵 playAudio() appelé - isPremiumUser: " + isPremiumUser + ", mediaPlayer null: " + (mediaPlayer == null));
         
-        if (mediaPlayer == null) {
-            Log.w(TAG, "⚠️ MediaPlayer null, impossible de lancer la lecture");
+        if (!isPremiumUser) {
+            Log.w(TAG, "⚠️ Utilisateur non premium, lecture ignorée");
             return;
         }
         
-        try {
-            // Vérifier si le service Adhan est actif et attendre
-            waitForAdhanServiceToFinish();
-            
-            // Vérifier que l'audio est chargé et prêt
-            if (currentAudioPath.isEmpty()) {
-                Log.w(TAG, "⚠️ Aucun audio chargé, impossible de lancer la lecture");
-                return;
-            }
-            
-            // Vérifier si l'audio est déjà chargé dans le MediaPlayer
-            if (!mediaPlayer.isPlaying() && currentPosition == 0) {
-                // Recharger l'audio depuis SharedPreferences
-                Log.d(TAG, "🔄 Rechargement audio depuis SharedPreferences: " + currentSurah);
-                loadAudio(currentAudioPath, currentSurah, currentReciter);
-                
-                // Attendre que l'audio soit prêt avant de démarrer
-                new android.os.Handler().postDelayed(() -> {
-                    startPlayback();
-                }, 1000);
-                return;
-            }
-            
-            // Démarrer la lecture directement
+        if (mediaPlayer == null) {
+            Log.w(TAG, "⚠️ MediaPlayer null, réinitialisation...");
+            initializeMediaPlayer();
+        }
+        
+        if (mediaPlayer != null && !isPlaying) {
             startPlayback();
-            
-        } catch (Exception e) {
-            Log.e(TAG, "❌ Erreur lancement lecture: " + e.getMessage());
         }
     }
     
@@ -645,8 +850,17 @@ public class QuranAudioService extends Service {
      */
     private void startPlayback() {
         try {
-            // Vérifier l'état du MediaPlayer
+            Log.d(TAG, "🎵 startPlayback() - MediaPlayer null: " + (mediaPlayer == null));
+            
+            if (mediaPlayer == null) {
+                Log.e(TAG, "❌ MediaPlayer null, impossible de démarrer la lecture");
+                return;
+            }
+            
+            // NOUVEAU : Vérifier si le MediaPlayer est prêt
             if (!mediaPlayer.isPlaying()) {
+                Log.d(TAG, "🎵 MediaPlayer prêt, demande du focus audio...");
+                
                 // Demander le focus audio avec la nouvelle API
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && audioFocusRequest != null) {
                     int result = audioManager.requestAudioFocus(audioFocusRequest);
@@ -654,6 +868,7 @@ public class QuranAudioService extends Service {
                         Log.w(TAG, "⚠️ Focus audio refusé");
                         return;
                     }
+                    Log.d(TAG, "✅ Focus audio accordé (nouvelle API)");
                 } else {
                     // Ancienne API pour Android < 8
                     int result = audioManager.requestAudioFocus(
@@ -665,11 +880,24 @@ public class QuranAudioService extends Service {
                         Log.w(TAG, "⚠️ Focus audio refusé (ancienne API)");
                         return;
                     }
+                    Log.d(TAG, "✅ Focus audio accordé (ancienne API)");
+                }
+                
+                // NOUVEAU : Attendre un peu que le MediaPlayer soit complètement prêt
+                try {
+                    Thread.sleep(100); // Attendre 100ms
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
                 }
                 
                 // Démarrer la lecture
+                Log.d(TAG, "🎵 Démarrage de la lecture...");
                 mediaPlayer.start();
                 isPlaying = true;
+                currentPosition = 0;
+                
+                // NOUVEAU : Réinitialiser la variable de focus car l'utilisateur a cliqué manuellement
+                wasPlayingBeforeFocusLoss = false;
                 
                 // Sauvegarder l'état
                 saveAudioState();
@@ -681,9 +909,19 @@ public class QuranAudioService extends Service {
                 
                 // Diffuser l'état
                 broadcastAudioStateChanged();
+                updateNotification();
+                
+                // NOUVEAU : Mettre à jour directement l'état du widget
+                Log.d(TAG, "🚀 Mise à jour directe de l'état du widget après démarrage lecture");
+                QuranWidget.updatePlaybackState(isPlaying, currentPosition, totalDuration);
+                
+            } else {
+                Log.d(TAG, "🎵 MediaPlayer déjà en lecture");
             }
         } catch (Exception e) {
             Log.e(TAG, "❌ Erreur démarrage lecture: " + e.getMessage());
+            isPlaying = false;
+            broadcastAudioStateChanged();
         }
     }
     
@@ -696,17 +934,25 @@ public class QuranAudioService extends Service {
         try {
             mediaPlayer.pause();
             isPlaying = false;
-            currentPosition = mediaPlayer.getCurrentPosition();
-            Log.d(TAG, "⏸️ Lecture audio en pause");
+            
+            // NOUVEAU : Réinitialiser la variable de focus car l'utilisateur a cliqué manuellement
+            wasPlayingBeforeFocusLoss = false;
             
             // Sauvegarder l'état
             saveAudioState();
             
-            // Diffuser l'état
-            broadcastAudioStateChanged();
-            
             // Arrêter le timer de progression
             stopProgressTimer();
+            
+            Log.d(TAG, "⏸️ Audio mis en pause");
+            
+            // Diffuser l'état
+            broadcastAudioStateChanged();
+            updateNotification();
+            
+            // NOUVEAU : Mettre à jour directement l'état du widget
+            Log.d(TAG, "🚀 Mise à jour directe de l'état du widget après pause");
+            QuranWidget.updatePlaybackState(isPlaying, currentPosition, totalDuration);
             
         } catch (Exception e) {
             Log.e(TAG, "❌ Erreur pause audio: " + e.getMessage());
@@ -717,26 +963,34 @@ public class QuranAudioService extends Service {
      * Arrêter l'audio
      */
     public void stopAudio() {
-        if (mediaPlayer == null) return;
-        
         try {
-            mediaPlayer.stop();
-            mediaPlayer.reset();
+            if (mediaPlayer != null) {
+                if (mediaPlayer.isPlaying()) {
+                    mediaPlayer.stop();
+                }
+            }
+            
             isPlaying = false;
             currentPosition = 0;
-            Log.d(TAG, "⏹️ Lecture audio arrêtée");
+            
+            // NOUVEAU : Réinitialiser la variable de focus car l'utilisateur a cliqué manuellement
+            wasPlayingBeforeFocusLoss = false;
             
             // Sauvegarder l'état
             saveAudioState();
             
-            // Abandonner le focus audio
-            abandonAudioFocus();
+            // Arrêter le timer de progression
+            stopProgressTimer();
+            
+            Log.d(TAG, "⏹️ Audio arrêté");
             
             // Diffuser l'état
             broadcastAudioStateChanged();
+            updateNotification();
             
-            // Arrêter le timer de progression
-            stopProgressTimer();
+            // NOUVEAU : Mettre à jour directement l'état du widget
+            Log.d(TAG, "🚀 Mise à jour directe de l'état du widget après arrêt");
+            QuranWidget.updatePlaybackState(isPlaying, currentPosition, totalDuration);
             
         } catch (Exception e) {
             Log.e(TAG, "❌ Erreur arrêt audio: " + e.getMessage());
@@ -790,16 +1044,33 @@ public class QuranAudioService extends Service {
                     return;
                 }
                 
-                // Streaming - utiliser Uri.parse pour une meilleure compatibilité
+                // Streaming - améliorer la gestion des URLs
                 Log.d(TAG, "🎵 Chargement streaming: " + audioPath);
                 try {
-                    Uri audioUri = Uri.parse(audioPath);
+                    // NOUVEAU : Essayer d'abord l'URL originale
+                    Uri audioUri = Uri.parse(audioPath.trim());
+                    Log.d(TAG, "🎵 Tentative avec URL originale: " + audioPath);
+                    
+                    // Utiliser setDataSource avec le contexte pour une meilleure compatibilité
                     mediaPlayer.setDataSource(getApplicationContext(), audioUri);
+                    
                 } catch (Exception e) {
-                    Log.e(TAG, "❌ Erreur chargement streaming: " + e.getMessage());
-                    // Fallback vers setDataSource direct
+                    Log.e(TAG, "❌ Erreur chargement streaming original: " + e.getMessage());
+                    
+                    // Fallback : essayer avec action=stream si c'était action=download
                     try {
-                        mediaPlayer.setDataSource(audioPath);
+                        String cleanUrl = audioPath.trim();
+                        if (cleanUrl.contains("action=download")) {
+                            cleanUrl = cleanUrl.replace("action=download", "action=stream");
+                            Log.d(TAG, "🔄 Tentative fallback avec action=stream: " + cleanUrl);
+                            
+                            Uri audioUri = Uri.parse(cleanUrl);
+                            mediaPlayer.setDataSource(getApplicationContext(), audioUri);
+                        } else {
+                            // Fallback vers setDataSource direct
+                            Log.d(TAG, "🔄 Tentative fallback streaming direct");
+                            mediaPlayer.setDataSource(audioPath);
+                        }
                     } catch (Exception fallbackError) {
                         Log.e(TAG, "❌ Erreur fallback streaming: " + fallbackError.getMessage());
                         handleStreamingError(audioPath, surah, reciter);
@@ -828,359 +1099,91 @@ public class QuranAudioService extends Service {
             isPlaying = false;
             currentPosition = 0;
             
-            // Sauvegarder l'état audio
+            // Sauvegarder l'état
             saveAudioState();
             
             Log.d(TAG, "✅ Audio chargé avec succès: " + surah + " - " + reciter);
             
             // Diffuser l'état
             broadcastAudioStateChanged();
+            updateNotification();
             
-        } catch (IllegalArgumentException e) {
-            Log.e(TAG, "❌ Erreur argument MediaPlayer: " + e.getMessage());
-            // Le fichier pourrait être corrompu ou dans un format non supporté
-            if (audioPath.startsWith("http")) {
-                handleStreamingError(audioPath, surah, reciter);
-            }
-        } catch (SecurityException e) {
-            Log.e(TAG, "❌ Erreur permission MediaPlayer: " + e.getMessage());
-            // Problème de permissions
-        } catch (IOException e) {
-            Log.e(TAG, "❌ Erreur I/O MediaPlayer: " + e.getMessage());
-            // Problème de réseau ou de fichier
-            if (audioPath.startsWith("http")) {
-                handleStreamingError(audioPath, surah, reciter);
-            }
+            // NOUVEAU : Mettre à jour directement l'état du widget
+            Log.d(TAG, "🚀 Mise à jour directe de l'état du widget après chargement audio");
+            QuranWidget.updateCurrentAudio(this, surah, reciter, audioPath);
+            QuranWidget.updatePlaybackState(isPlaying, currentPosition, totalDuration);
+            
         } catch (Exception e) {
             Log.e(TAG, "❌ Erreur chargement audio: " + e.getMessage());
-            e.printStackTrace();
         }
-    }
-    
-    // Timer pour la progression
-    private android.os.Handler progressHandler = new android.os.Handler();
-    private Runnable progressRunnable;
-    
-    /**
-     * Démarrer le timer de progression
-     */
-    private void startProgressTimer() {
-        stopProgressTimer();
-        
-        progressRunnable = new Runnable() {
-            @Override
-            public void run() {
-                if (mediaPlayer != null && isPlaying) {
-                    currentPosition = mediaPlayer.getCurrentPosition();
-                    broadcastAudioProgress();
-                    progressHandler.postDelayed(this, 1000); // Mise à jour toutes les secondes
-                }
-            }
-        };
-        
-        progressHandler.post(progressRunnable);
-    }
-    
-    /**
-     * Arrêter le timer de progression
-     */
-    private void stopProgressTimer() {
-        if (progressRunnable != null) {
-            progressHandler.removeCallbacks(progressRunnable);
-            progressRunnable = null;
-        }
-    }
-    
-    /**
-     * Diffuser l'état audio
-     */
-    private void broadcastAudioStateChanged() {
-        Intent intent = new Intent(ACTION_AUDIO_STATE_CHANGED);
-        intent.putExtra("isPlaying", isPlaying);
-        intent.putExtra("surah", currentSurah);
-        intent.putExtra("reciter", currentReciter);
-        intent.putExtra("position", currentPosition);
-        intent.putExtra("duration", totalDuration);
-        intent.putExtra("audioPath", currentAudioPath);
-        intent.putExtra("isPremium", isPremiumUser);
-        sendBroadcast(intent);
-        
-        // Mettre à jour le widget
-        updateWidget();
-    }
-    
-    /**
-     * Diffuser la progression audio
-     */
-    private void broadcastAudioProgress() {
-        Intent intent = new Intent(ACTION_AUDIO_PROGRESS);
-        intent.putExtra("position", currentPosition);
-        intent.putExtra("duration", totalDuration);
-        sendBroadcast(intent);
-    }
-    
-    /**
-     * Mettre à jour le widget
-     */
-    private void updateWidget() {
-        try {
-            android.appwidget.AppWidgetManager appWidgetManager = android.appwidget.AppWidgetManager.getInstance(this);
-            android.content.ComponentName widgetComponent = new android.content.ComponentName(this, QuranWidget.class);
-            int[] appWidgetIds = appWidgetManager.getAppWidgetIds(widgetComponent);
-            
-            if (appWidgetIds.length > 0) {
-                Intent intent = new Intent(this, QuranWidget.class);
-                intent.setAction(android.appwidget.AppWidgetManager.ACTION_APPWIDGET_UPDATE);
-                intent.putExtra(android.appwidget.AppWidgetManager.EXTRA_APPWIDGET_IDS, appWidgetIds);
-                sendBroadcast(intent);
-                
-                Log.d(TAG, "🔄 Widget mis à jour pour " + appWidgetIds.length + " widgets");
-            }
-        } catch (Exception e) {
-            Log.e(TAG, "❌ Erreur mise à jour widget: " + e.getMessage());
-        }
-    }
-    
-    // Méthodes publiques pour l'interface
-    public boolean isPlaying() { return isPlaying; }
-    public String getCurrentSurah() { return currentSurah; }
-    public String getCurrentReciter() { return currentReciter; }
-    public int getCurrentPosition() { return currentPosition; }
-    public int getTotalDuration() { return totalDuration; }
-    public boolean isPremiumUser() { return isPremiumUser; }
-    
-    /**
-     * Mettre à jour le statut premium
-     */
-    public void setPremiumStatus(boolean premium) {
-        isPremiumUser = premium;
-        
-        // Sauvegarder dans le bon fichier SharedPreferences
-        android.content.SharedPreferences prefs = getSharedPreferences("premium_prefs", MODE_PRIVATE);
-        prefs.edit().putBoolean("is_premium_user", premium).apply();
-        
-        Log.d(TAG, "👑 Statut premium mis à jour: " + premium);
-        broadcastAudioStateChanged();
-    }
-
-    /**
-     * Sauvegarder l'état audio dans SharedPreferences
-     */
-    private void saveAudioState() {
-        try {
-            // Sauvegarder dans nos SharedPreferences custom
-            SharedPreferences prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = prefs.edit();
-            
-            editor.putString(KEY_AUDIO_PATH, currentAudioPath);
-            editor.putString(KEY_SURAH, currentSurah);
-            editor.putString(KEY_RECITER, currentReciter);
-            editor.putInt(KEY_POSITION, currentPosition);
-            editor.putInt(KEY_DURATION, totalDuration);
-            editor.putBoolean(KEY_IS_PLAYING, isPlaying);
-            editor.putBoolean(KEY_IS_PREMIUM, isPremiumUser);
-            
-            editor.apply();
-            
-            // Aussi sauvegarder dans AsyncStorage pour persistance entre les redémarrages
-            try {
-                SharedPreferences asyncPrefs = getSharedPreferences("RCTAsyncLocalStorage_V1", Context.MODE_PRIVATE);
-                SharedPreferences.Editor asyncEditor = asyncPrefs.edit();
-                
-                // Créer un JSON simple avec les données audio
-                String audioStateJson = "{" +
-                    "\"audioPath\":\"" + currentAudioPath + "\"," +
-                    "\"surah\":\"" + currentSurah + "\"," +
-                    "\"reciter\":\"" + currentReciter + "\"," +
-                    "\"position\":" + currentPosition + "," +
-                    "\"duration\":" + totalDuration + "," +
-                    "\"isPlaying\":" + isPlaying +
-                    "}";
-                
-                asyncEditor.putString("quran_audio_state", audioStateJson);
-                asyncEditor.apply();
-                
-                Log.d(TAG, "💾 État audio sauvegardé: " + currentSurah + " - " + currentReciter + " (persistance: OUI)");
-            } catch (Exception e) {
-                Log.w(TAG, "⚠️ Erreur sauvegarde AsyncStorage: " + e.getMessage());
-                Log.d(TAG, "💾 État audio sauvegardé: " + currentSurah + " - " + currentReciter + " (persistance: NON)");
-            }
-        } catch (Exception e) {
-            Log.e(TAG, "❌ Erreur sauvegarde état audio: " + e.getMessage());
-        }
-    }
-    
-    /**
-     * Restaurer l'état audio depuis SharedPreferences
-     */
-    private void restoreAudioState() {
-        try {
-            // Essayer de restaurer depuis nos SharedPreferences custom d'abord
-            SharedPreferences prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-            
-            currentAudioPath = prefs.getString(KEY_AUDIO_PATH, "");
-            currentSurah = prefs.getString(KEY_SURAH, "");
-            currentReciter = prefs.getString(KEY_RECITER, "");
-            currentPosition = prefs.getInt(KEY_POSITION, 0);
-            totalDuration = prefs.getInt(KEY_DURATION, 0);
-            isPlaying = prefs.getBoolean(KEY_IS_PLAYING, false);
-            isPremiumUser = prefs.getBoolean(KEY_IS_PREMIUM, false);
-            
-            // Si aucun audio trouvé, essayer de restaurer depuis AsyncStorage
-            if (currentAudioPath.isEmpty()) {
-                try {
-                    SharedPreferences asyncPrefs = getSharedPreferences("RCTAsyncLocalStorage_V1", Context.MODE_PRIVATE);
-                    String audioStateJson = asyncPrefs.getString("quran_audio_state", "");
-                    
-                    if (!audioStateJson.isEmpty()) {
-                        Log.d(TAG, "🔍 État audio trouvé dans AsyncStorage: " + audioStateJson.substring(0, Math.min(100, audioStateJson.length())) + "...");
-                        
-                        // Parser le JSON manuellement (simple)
-                        if (audioStateJson.contains("\"audioPath\":\"")) {
-                            currentAudioPath = extractJsonValue(audioStateJson, "audioPath");
-                            currentSurah = extractJsonValue(audioStateJson, "surah");
-                            currentReciter = extractJsonValue(audioStateJson, "reciter");
-                            
-                            // Remettre isPlaying à false au redémarrage
-                            isPlaying = false;
-                            currentPosition = 0;
-                            
-                            Log.d(TAG, "✅ État audio restauré depuis AsyncStorage: " + currentSurah + " - " + currentReciter);
-                        }
-                    }
-                } catch (Exception e) {
-                    Log.w(TAG, "⚠️ Erreur restauration AsyncStorage: " + e.getMessage());
-                }
-            }
-            
-            Log.d(TAG, "📂 État audio restauré: " + currentSurah + " - " + currentReciter + 
-                      " (audioPath: " + (!currentAudioPath.isEmpty() ? "OUI" : "NON") + ")");
-        } catch (Exception e) {
-            Log.e(TAG, "❌ Erreur restauration état audio: " + e.getMessage());
-        }
-    }
-    
-    /**
-     * Extraire une valeur depuis un JSON simple
-     */
-    private String extractJsonValue(String json, String key) {
-        try {
-            String searchKey = "\"" + key + "\":\"";
-            int startIndex = json.indexOf(searchKey);
-            if (startIndex != -1) {
-                startIndex += searchKey.length();
-                int endIndex = json.indexOf("\"", startIndex);
-                if (endIndex != -1) {
-                    return json.substring(startIndex, endIndex);
-                }
-            }
-        } catch (Exception e) {
-            Log.w(TAG, "⚠️ Erreur extraction JSON pour " + key + ": " + e.getMessage());
-        }
-        return "";
-    }
-
-    /**
-     * Vérifier si le service Adhan est actif
-     */
-    private boolean isAdhanServiceActive() {
-        try {
-            android.app.ActivityManager am = (android.app.ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
-            for (android.app.ActivityManager.RunningServiceInfo service : am.getRunningServices(Integer.MAX_VALUE)) {
-                if (AdhanService.class.getName().equals(service.service.getClassName())) {
-                    Log.d(TAG, "🔍 Service Adhan détecté comme actif");
-                    return true;
-                }
-            }
-        } catch (Exception e) {
-            Log.e(TAG, "❌ Erreur vérification service Adhan: " + e.getMessage());
-        }
-        return false;
     }
     
     /**
      * Attendre que le service Adhan se termine
      */
     private void waitForAdhanServiceToFinish() {
-        if (isAdhanServiceActive()) {
-            Log.d(TAG, "⏳ Service Adhan actif, attente de 3 secondes...");
-            try {
-                Thread.sleep(3000); // Attendre 3 secondes
-            } catch (InterruptedException e) {
-                Log.e(TAG, "❌ Interruption attente service Adhan: " + e.getMessage());
-            }
-        }
-    }
-
-    /**
-     * Gérer les erreurs de streaming
-     */
-    private void handleStreamingError(String audioPath, String surah, String reciter) {
-        Log.e(TAG, "❌ Erreur streaming détectée pour: " + surah + " - " + reciter);
-        
-        // Essayer de récupérer en réinitialisant le MediaPlayer
         try {
-            if (mediaPlayer != null) {
-                mediaPlayer.reset();
+            android.app.ActivityManager am = (android.app.ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+            for (android.app.ActivityManager.RunningServiceInfo service : am.getRunningServices(Integer.MAX_VALUE)) {
+                if (service.service.getClassName().contains("AdhanService")) {
+                    Log.d(TAG, "⏳ Service Adhan actif, attente...");
+                    try {
+                        Thread.sleep(1000); // Attendre 1 seconde
+                    } catch (InterruptedException e) {
+                        Thread.currentThread().interrupt();
+                    }
+                    break;
+                }
             }
-            
-            // Réessayer avec un délai
-            new android.os.Handler().postDelayed(() -> {
-                Log.d(TAG, "🔄 Nouvelle tentative de chargement: " + surah + " - " + reciter);
-                loadAudio(audioPath, surah, reciter);
-            }, 2000); // Attendre 2 secondes
-            
         } catch (Exception e) {
-            Log.e(TAG, "❌ Erreur lors de la récupération streaming: " + e.getMessage());
+            Log.w(TAG, "⚠️ Erreur vérification service Adhan: " + e.getMessage());
         }
     }
     
     /**
-     * Vérifier la connectivité réseau
+     * Vérifier la disponibilité réseau
      */
     private boolean isNetworkAvailable() {
         try {
-            android.net.ConnectivityManager connectivityManager = 
-                (android.net.ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-            
-            if (connectivityManager != null) {
-                android.net.NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-                return activeNetworkInfo != null && activeNetworkInfo.isConnected();
-            }
+            android.net.ConnectivityManager cm = (android.net.ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+            android.net.NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+            return activeNetwork != null && activeNetwork.isConnectedOrConnecting();
         } catch (Exception e) {
-            Log.e(TAG, "❌ Erreur vérification réseau: " + e.getMessage());
+            Log.w(TAG, "⚠️ Erreur vérification réseau: " + e.getMessage());
+            return true; // Supposer que le réseau est disponible en cas d'erreur
         }
-        return false;
     }
-
+    
     /**
-     * Gérer l'erreur du MediaPlayer
+     * Gérer les erreurs de streaming
      */
-    private void handleMediaPlayerError() {
-        Log.d(TAG, "🔄 Gestion erreur MediaPlayer - réinitialisation...");
-        
-        // Réinitialiser l'état
-        isPlaying = false;
-        currentPosition = 0;
-        
-        try {
-            // Réinitialiser le MediaPlayer
-            if (mediaPlayer != null) {
-                mediaPlayer.reset();
-            }
-            
-            // Recharger l'audio si disponible
-            if (!currentAudioPath.isEmpty()) {
-                Log.d(TAG, "🔄 Rechargement audio après erreur: " + currentSurah);
-                loadAudio(currentAudioPath, currentSurah, currentReciter);
-            }
-            
-            // Diffuser l'état
-            broadcastAudioStateChanged();
-            updateNotification();
-            
-        } catch (Exception e) {
-            Log.e(TAG, "❌ Erreur lors de la récupération MediaPlayer: " + e.getMessage());
-        }
+    private void handleStreamingError(String audioPath, String surah, String reciter) {
+        Log.e(TAG, "❌ Erreur streaming pour: " + surah + " - " + reciter);
+        // TODO: Implémenter la logique de fallback ou de retry
+    }
+    
+    // Méthodes publiques pour l'interface
+    public boolean isPlaying() {
+        return isPlaying;
+    }
+    
+    public String getCurrentSurah() {
+        return currentSurah;
+    }
+    
+    public String getCurrentReciter() {
+        return currentReciter;
+    }
+    
+    public int getCurrentPosition() {
+        return currentPosition;
+    }
+    
+    public int getTotalDuration() {
+        return totalDuration;
+    }
+    
+    public boolean isPremiumUser() {
+        return isPremiumUser;
     }
 }
