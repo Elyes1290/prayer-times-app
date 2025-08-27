@@ -37,6 +37,25 @@ jest.mock("@expo/vector-icons", () => ({
   MaterialCommunityIcons: "MaterialCommunityIcons",
 }));
 
+jest.mock("react-native-gesture-handler", () => ({
+  PanGestureHandler: "PanGestureHandler",
+  State: {
+    BEGAN: 1,
+    ACTIVE: 4,
+    END: 5,
+    CANCELLED: 3,
+    FAILED: 2,
+    UNDETERMINED: 0,
+  },
+  GestureHandlerRootView: ({ children }: any) => children,
+  Directions: {
+    RIGHT: 1,
+    LEFT: 2,
+    UP: 4,
+    DOWN: 8,
+  },
+}));
+
 jest.mock("expo-av", () => ({
   Audio: {
     Sound: jest.fn(),
