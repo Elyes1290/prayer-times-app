@@ -201,5 +201,15 @@
   "asr": "عصر",
   "maghrib": "مغرب",
   "isha": "عشاء",
-  "next_prayer": "نماز بعدی:"
+  "next_prayer": "نماز بعدی:",
+  "streaming": "پخش زنده",
+  "no_current_reading": "قرائت جاری نیست",
+  "select_reciter": "قاری انتخاب کنید",
+  "widget_quran_premium_title": "📖 ویجت قرآن پریمیوم",
+  "widget_premium_description": "قرائت قرآن را مستقیماً از صفحه اصلی کنترل کنید",
+  "widget_feature_direct_play": "✨ پخش مستقیم از ویجت",
+  "widget_feature_navigation": "✨ حرکت بین سوره‌ها",
+  "widget_feature_audio_controls": "✨ کنترل‌های صوتی کامل",
+  "widget_feature_offline": "✨ حالت آفلاین",
+  "subscribe_premium": "عضویت پریمیوم"
 }

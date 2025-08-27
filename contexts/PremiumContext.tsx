@@ -256,6 +256,34 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
     try {
       setLoading(true);
 
+      // 🔗 NOUVEAU : Synchroniser le token d'authentification vers les services natifs
+      try {
+        const token = await AsyncStorage.getItem("auth_token");
+        if (token) {
+          console.log(
+            "🔗 [PremiumContext] Synchronisation token vers services natifs:",
+            token.substring(0, 10) + "..."
+          );
+          // Importer le module natif dynamiquement pour éviter les erreurs
+          const { NativeModules } = await import("react-native");
+          if (NativeModules?.QuranAudioServiceModule?.syncAuthToken) {
+            NativeModules.QuranAudioServiceModule.syncAuthToken(token);
+            console.log("✅ [PremiumContext] Token synchronisé avec succès");
+          } else {
+            console.log(
+              "⚠️ [PremiumContext] Module QuranAudioServiceModule non disponible"
+            );
+          }
+        } else {
+          console.log("⚠️ [PremiumContext] Aucun token auth_token trouvé");
+        }
+      } catch (tokenError) {
+        console.error(
+          "❌ [PremiumContext] Erreur synchronisation token:",
+          tokenError
+        );
+      }
+
       // 🔧 NOUVEAU : Synchroniser avec user_data en priorité
       const userData = await AsyncStorage.getItem("user_data");
       if (userData) {

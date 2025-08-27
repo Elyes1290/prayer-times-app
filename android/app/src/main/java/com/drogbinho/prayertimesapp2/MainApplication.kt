@@ -19,6 +19,7 @@ import com.drogbinho.prayertimesapp2.AdhanPackage // Ajoute cette importation
 import com.drogbinho.prayertimesapp2.DownloadPackage // Ajoute cette importation
 import com.drogbinho.prayertimesapp2.QuranWidgetPackage // Ajoute cette importation
 import com.drogbinho.prayertimesapp2.QuranAudioServicePackage // Ajoute cette importation
+import com.drogbinho.prayertimesapp2.QuranSyncPackage // Ajoute cette importation
 
 
 class MainApplication : Application(), ReactApplication {
@@ -34,6 +35,7 @@ class MainApplication : Application(), ReactApplication {
                 packages.add(DownloadPackage()) //
                 packages.add(QuranWidgetPackage()) //
                 packages.add(QuranAudioServicePackage()) //
+                packages.add(QuranSyncPackage()) //
             return packages
           }
 

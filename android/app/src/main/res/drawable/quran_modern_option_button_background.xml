@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="#FFD700">
+    
+    <item>
+        <shape android:shape="oval">
+            <gradient
+                android:startColor="#44444444"
+                android:endColor="#22222222"
+                android:angle="45" />
+            <stroke
+                android:width="1dp"
+                android:color="#777777" />
+        </shape>
+    </item>
+    
+    <!-- Reflet subtil -->
+    <item android:bottom="1dp">
+        <shape android:shape="oval">
+            <gradient
+                android:startColor="#11FFFFFF"
+                android:endColor="#00FFFFFF"
+                android:angle="90" />
+        </shape>
+    </item>
+    
+</ripple>

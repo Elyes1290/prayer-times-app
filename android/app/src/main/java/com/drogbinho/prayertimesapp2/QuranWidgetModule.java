@@ -250,6 +250,28 @@ public class QuranWidgetModule extends ReactContextBaseJavaModule {
     }
     
     /**
+     * NOUVEAU : Lancer le diagnostic du widget
+     */
+    @ReactMethod
+    public void runDiagnostic(Promise promise) {
+        try {
+            Log.d(TAG, "🔍 Lancement diagnostic widget depuis React Native");
+            
+            // Lancer le diagnostic
+            QuranWidget.runDiagnostic(reactContext);
+            
+            // Mettre à jour le widget
+            updateWidget();
+            
+            Log.d(TAG, "✅ Diagnostic widget lancé avec succès");
+            promise.resolve(true);
+        } catch (Exception e) {
+            Log.e(TAG, "❌ Erreur diagnostic widget: " + e.getMessage());
+            promise.reject("DIAGNOSTIC_ERROR", e.getMessage());
+        }
+    }
+    
+    /**
      * Démarrer le service audio
      */
     @ReactMethod

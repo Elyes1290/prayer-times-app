@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="#4ECDC4">
+    
+    <item>
+        <shape android:shape="oval">
+            <gradient
+                android:startColor="#666666"
+                android:endColor="#444444"
+                android:angle="45" />
+            <stroke
+                android:width="2dp"
+                android:color="#888888" />
+        </shape>
+    </item>
+    
+    <!-- Effet de lustre -->
+    <item android:bottom="2dp">
+        <shape android:shape="oval">
+            <gradient
+                android:startColor="#33FFFFFF"
+                android:endColor="#00FFFFFF"
+                android:angle="90" />
+        </shape>
+    </item>
+    
+</ripple>

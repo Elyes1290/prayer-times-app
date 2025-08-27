@@ -227,6 +227,15 @@ dependencies {
         implementation jscFlavor
     }
     implementation "com.batoulapps.adhan:adhan:1.2.1"
+    
+    // 🎵 MediaSession pour les contrôles d'écran de verrouillage (comme Spotify)
+    implementation "androidx.media3:media3-session:1.3.1"
+    implementation "androidx.media3:media3-exoplayer:1.3.1"
+    implementation "androidx.media3:media3-ui:1.3.1"
+    implementation "androidx.media:media:1.7.0"
+    
+    // 🎯 DÉPENDANCE OBLIGATOIRE pour MediaSessionCompat et contrôles écran de verrouillage
+    implementation "androidx.media:media:1.7.0"
 
     // 🚀 SUPPRIMÉ : Firebase dependencies (non utilisées)
     // implementation platform('com.google.firebase:firebase-bom:33.16.0')

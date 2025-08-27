@@ -5,16 +5,19 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/quran_widget_background"
-    android:padding="12dp"
-    android:gravity="center">
+    android:padding="16dp"
+    android:gravity="center"
+    android:elevation="8dp">
 
-    <!-- En-tête avec badge premium -->
+    <!-- En-tête avec badge premium - Design moderne -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:layout_marginBottom="8dp">
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/quran_header_background"
+        android:padding="8dp">
 
         <TextView
             android:layout_width="0dp"
@@ -22,124 +25,187 @@
             android:layout_weight="1"
             android:text="📖 Coran Premium"
             android:textColor="#FFD700"
-            android:textSize="14sp"
+            android:textSize="13sp"
             android:textStyle="bold"
-            android:gravity="start" />
+            android:gravity="start"
+            android:letterSpacing="0.05"
+            android:shadowColor="#000000"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="2" />
 
         <ImageView
             android:id="@+id/quran_premium_badge"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
             android:src="@drawable/ic_premium_star"
             android:contentDescription="Premium" />
 
     </LinearLayout>
 
-    <!-- Titre de la sourate -->
+    <!-- Titre de la sourate - Style moderne -->
     <TextView
         android:id="@+id/quran_surah_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Aucune lecture"
         android:textColor="#FFFFFF"
-        android:textSize="16sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         android:gravity="center"
-        android:layout_marginBottom="4dp"
-        android:maxLines="1"
-        android:ellipsize="end" />
+        android:layout_marginBottom="6dp"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:letterSpacing="0.02"
+        android:shadowColor="#000000"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:shadowRadius="3"
+        android:background="@drawable/quran_title_background"
+        android:padding="8dp" />
 
-    <!-- Nom du récitateur -->
+    <!-- Nom du récitateur - Style amélioré -->
     <TextView
         android:id="@+id/quran_reciter_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Sélectionner un récitateur"
-        android:textColor="#CCCCCC"
-        android:textSize="12sp"
+        android:textColor="#E0E0E0"
+        android:textSize="13sp"
+        android:textStyle="italic"
         android:gravity="center"
-        android:layout_marginBottom="12dp"
+        android:layout_marginBottom="16dp"
         android:maxLines="1"
-        android:ellipsize="end" />
+        android:ellipsize="end"
+        android:letterSpacing="0.01" />
 
-    <!-- Barre de progression -->
+    <!-- Barre de progression - Design moderne -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginBottom="12dp">
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/quran_progress_container_background"
+        android:padding="12dp">
 
         <ProgressBar
             android:id="@+id/quran_progress_bar"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
-            android:layout_height="4dp"
+            android:layout_height="6dp"
             android:progressTint="#4ECDC4"
-            android:progressBackgroundTint="#666666"
-            android:layout_marginBottom="4dp" />
+            android:progressBackgroundTint="#444444"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/quran_progress_background" />
 
         <TextView
             android:id="@+id/quran_progress_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="00:00 / 00:00"
-            android:textColor="#CCCCCC"
-            android:textSize="10sp"
-            android:gravity="center" />
+            android:textColor="#E0E0E0"
+            android:textSize="11sp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:letterSpacing="0.05"
+            android:fontFamily="monospace" />
 
     </LinearLayout>
 
-    <!-- Contrôles audio -->
+    <!-- Contrôles audio - Design premium -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center"
-        android:layout_marginBottom="8dp">
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/quran_controls_container_background"
+        android:padding="16dp">
 
-        <!-- Bouton Précédent -->
+        <!-- Bouton Précédent - Style moderne -->
         <ImageButton
             android:id="@+id/quran_previous_button"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
             android:src="@drawable/ic_previous"
-            android:background="@drawable/quran_button_background"
+            android:background="@drawable/quran_secondary_button_background"
             android:contentDescription="Précédent"
             android:scaleType="centerInside"
-            android:layout_marginEnd="8dp" />
+            android:layout_marginEnd="12dp"
+            android:elevation="4dp" />
 
-        <!-- Bouton Play/Pause -->
+        <!-- Bouton Play/Pause - Style premium -->
         <ImageButton
             android:id="@+id/quran_play_pause_button"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:src="@drawable/ic_play"
-            android:background="@drawable/quran_play_button_background"
+            android:background="@drawable/quran_main_play_button_background"
             android:contentDescription="Play/Pause"
             android:scaleType="centerInside"
-            android:layout_marginHorizontal="8dp" />
+            android:layout_marginHorizontal="12dp"
+            android:elevation="6dp" />
 
-        <!-- Bouton Suivant -->
+        <!-- Bouton Suivant - Style moderne -->
         <ImageButton
             android:id="@+id/quran_next_button"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
             android:src="@drawable/ic_next"
-            android:background="@drawable/quran_button_background"
+            android:background="@drawable/quran_secondary_button_background"
             android:contentDescription="Suivant"
             android:scaleType="centerInside"
-            android:layout_marginStart="8dp" />
+            android:layout_marginStart="12dp"
+            android:elevation="4dp" />
 
     </LinearLayout>
 
-    <!-- Bouton Ouvrir App -->
+    <!-- Options de lecture - Style raffiné -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="16dp">
+
+        <!-- Bouton Auto-avancement - Design amélioré -->
+        <ImageButton
+            android:id="@+id/quran_auto_advance_button"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:src="@drawable/ic_auto_advance"
+            android:background="@drawable/quran_modern_option_button_background"
+            android:contentDescription="Auto-avancement"
+            android:scaleType="centerInside"
+            android:layout_marginEnd="12dp"
+            android:elevation="2dp" />
+
+        <!-- Bouton Boucle - Design amélioré -->
+        <ImageButton
+            android:id="@+id/quran_loop_button"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:src="@drawable/ic_loop"
+            android:background="@drawable/quran_modern_option_button_background"
+            android:contentDescription="Boucle"
+            android:scaleType="centerInside"
+            android:layout_marginStart="12dp"
+            android:elevation="2dp" />
+
+    </LinearLayout>
+
+
+
+    <!-- Bouton Ouvrir App - Style élégant -->
     <ImageButton
         android:id="@+id/quran_open_app_button"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
+        android:layout_width="38dp"
+        android:layout_height="38dp"
         android:src="@drawable/ic_open_app"
-        android:background="@drawable/quran_open_button_background"
+        android:background="@drawable/quran_modern_open_button_background"
         android:contentDescription="Ouvrir l'application"
-        android:scaleType="centerInside" />
+        android:scaleType="centerInside"
+        android:elevation="3dp"
+        android:layout_marginTop="4dp" />
 
 </LinearLayout>

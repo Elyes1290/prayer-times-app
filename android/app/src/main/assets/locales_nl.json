@@ -201,5 +201,15 @@
   "asr": "Asr",
   "maghrib": "Maghrib",
   "isha": "Isha",
-  "next_prayer": "Volgende gebed:"
+  "next_prayer": "Volgende gebed:",
+  "streaming": "Streaming",
+  "no_current_reading": "Geen huidige lezing",
+  "select_reciter": "Selecteer recitator",
+  "widget_quran_premium_title": "📖 Koran Widget Premium",
+  "widget_premium_description": "Bestuur Koran recitatie direct vanaf uw startscherm",
+  "widget_feature_direct_play": "✨ Directe afspelen vanuit widget",
+  "widget_feature_navigation": "✨ Navigeren tussen sura's",
+  "widget_feature_audio_controls": "✨ Volledige audiobediening",
+  "widget_feature_offline": "✨ Offline modus",
+  "subscribe_premium": "Abonneer Premium"
 }

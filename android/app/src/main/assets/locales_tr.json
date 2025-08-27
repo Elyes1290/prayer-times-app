@@ -199,5 +199,15 @@
   "asr": "İkindi",
   "maghrib": "Akşam",
   "isha": "Yatsı",
-  "next_prayer": "Sonraki namaz:"
+  "next_prayer": "Sonraki namaz:",
+  "streaming": "Canlı yayın",
+  "no_current_reading": "Mevcut okuma yok",
+  "select_reciter": "Hafız seçin",
+  "widget_quran_premium_title": "📖 Kur'an Widget Premium",
+  "widget_premium_description": "Ana ekrandan doğrudan Kur'an tilavetini kontrol edin",
+  "widget_feature_direct_play": "✨ Widget'tan doğrudan oynatma",
+  "widget_feature_navigation": "✨ Sureler arasında gezinme",
+  "widget_feature_audio_controls": "✨ Tam ses kontrolleri",
+  "widget_feature_offline": "✨ Çevrimdışı mod",
+  "subscribe_premium": "Premium Abone Ol"
 }

@@ -199,5 +199,15 @@
   "asr": "Asr",
   "maghrib": "Maghrib",
   "isha": "Isha",
-  "next_prayer": "Próxima oración:"
+  "next_prayer": "Próxima oración:",
+  "streaming": "Transmisión",
+  "no_current_reading": "Sin lectura actual",
+  "select_reciter": "Seleccionar recitador",
+  "widget_quran_premium_title": "📖 Widget Corán Premium",
+  "widget_premium_description": "Controle la recitación del Corán directamente desde su pantalla de inicio",
+  "widget_feature_direct_play": "✨ Reproducción directa desde el widget",
+  "widget_feature_navigation": "✨ Navegar entre suras",
+  "widget_feature_audio_controls": "✨ Controles de audio completos",
+  "widget_feature_offline": "✨ Modo sin conexión",
+  "subscribe_premium": "Suscribirse Premium"
 }

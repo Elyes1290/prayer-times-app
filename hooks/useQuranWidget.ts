@@ -209,6 +209,18 @@ export const useQuranWidget = () => {
     }
   }, [isWidgetAvailable, user]);
 
+  // NOUVEAU : Méthode pour lancer le diagnostic du widget
+  const runWidgetDiagnostic = useCallback(async (): Promise<void> => {
+    try {
+      console.log("🔍 Lancement diagnostic widget...");
+      await QuranWidgetModule.runDiagnostic();
+      console.log("✅ Diagnostic widget lancé");
+    } catch (error) {
+      console.error("❌ Erreur diagnostic widget:", error);
+      throw error;
+    }
+  }, []);
+
   return {
     isWidgetAvailable,
     widgetData,
@@ -216,5 +228,6 @@ export const useQuranWidget = () => {
     updateWidgetPlaybackState,
     updateWidgetPremiumStatus,
     checkWidgetAvailability,
+    runWidgetDiagnostic, // NOUVEAU
   };
 };

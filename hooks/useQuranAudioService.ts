@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { NativeModules, Platform, DeviceEventEmitter } from "react-native";
 
 // Vérifier si nous sommes en mode test
@@ -36,6 +36,20 @@ interface QuranAudioServiceInterface {
   stopAudio: () => Promise<void>;
   seekToPosition: (position: number) => Promise<void>;
 
+  // Navigation entre sourates
+  navigateToNextSurah: () => Promise<void>;
+  navigateToPreviousSurah: () => Promise<void>;
+
+  // Synchronisation avec le widget
+  getCurrentWidgetSurah: () => Promise<{
+    surahNumber: number;
+    surahName: string;
+    reciter: string;
+    timestamp: number;
+    hasData: boolean;
+  }>;
+  syncWithWidgetSurah: () => Promise<boolean>;
+
   // Gestion du statut premium
   updatePremiumStatus: (isPremium: boolean) => Promise<void>;
 
@@ -53,6 +67,17 @@ const createMockService = () => ({
   pauseAudio: () => Promise.resolve(true),
   stopAudio: () => Promise.resolve(true),
   seekToPosition: () => Promise.resolve(true),
+  navigateToNextSurah: () => Promise.resolve(true),
+  navigateToPreviousSurah: () => Promise.resolve(true),
+  getCurrentWidgetSurah: () =>
+    Promise.resolve({
+      surahNumber: 1,
+      surahName: "Al-Fatiha",
+      reciter: "AbdelBasset Abdelsamad",
+      timestamp: Date.now(),
+      hasData: true,
+    }),
+  syncWithWidgetSurah: () => Promise.resolve(true),
   updatePremiumStatus: () => Promise.resolve(true),
   getCurrentState: () =>
     Promise.resolve({
@@ -141,6 +166,9 @@ export const useQuranAudioService = (): QuranAudioServiceInterface => {
     try {
       console.log("🎵 Initialisation des écouteurs d'événements audio...");
 
+      // NOUVEAU : Synchronisation token déléguée au PremiumContext
+      // (Éviter la double synchronisation)
+
       // Écouter les changements d'état audio
       const audioStateSubscription = DeviceEventEmitter.addListener(
         "QuranAudioStateChanged",
@@ -205,6 +233,54 @@ export const useQuranAudioService = (): QuranAudioServiceInterface => {
         }
       );
 
+      // NOUVEAU : Écouter la fin de sourate
+      const surahCompletedSubscription = DeviceEventEmitter.addListener(
+        "QuranSurahCompleted",
+        (event) => {
+          console.log("🎵 Événement fin de sourate reçu:", event);
+          console.log(
+            "🎵 Détails - surah:",
+            event.surah,
+            "reciter:",
+            event.reciter,
+            "autoAdvance:",
+            event.autoAdvanceEnabled
+          );
+
+          // Émettre un événement personnalisé pour que QuranScreen puisse l'écouter
+          DeviceEventEmitter.emit("QuranSurahCompletedForPlaylist", {
+            surah: event.surah,
+            reciter: event.reciter,
+            autoAdvanceEnabled: event.autoAdvanceEnabled,
+          });
+        }
+      );
+
+      // 🛠️ NOUVEAU : Écouter les navigations depuis le widget
+      const widgetNavigationSubscription = DeviceEventEmitter.addListener(
+        "WidgetNavigateNext",
+        (event) => {
+          console.log("🎯 Navigation widget suivante reçue:", event);
+          DeviceEventEmitter.emit("WidgetNavigationNext", {
+            surahNumber: event.surahNumber,
+            surahName: event.surahName,
+            reciter: event.reciter,
+          });
+        }
+      );
+
+      const widgetNavigationPrevSubscription = DeviceEventEmitter.addListener(
+        "WidgetNavigatePrevious",
+        (event) => {
+          console.log("🎯 Navigation widget précédente reçue:", event);
+          DeviceEventEmitter.emit("WidgetNavigationPrevious", {
+            surahNumber: event.surahNumber,
+            surahName: event.surahName,
+            reciter: event.reciter,
+          });
+        }
+      );
+
       console.log("🎵 Écouteurs d'événements audio initialisés");
 
       // Nettoyer les écouteurs lors du démontage
@@ -212,6 +288,9 @@ export const useQuranAudioService = (): QuranAudioServiceInterface => {
         audioStateSubscription?.remove();
         audioProgressSubscription?.remove();
         serviceStatusSubscription?.remove();
+        surahCompletedSubscription?.remove();
+        widgetNavigationSubscription?.remove();
+        widgetNavigationPrevSubscription?.remove();
         console.log("🎵 Écouteurs d'événements audio nettoyés");
       };
     } catch (error) {
@@ -360,6 +439,56 @@ export const useQuranAudioService = (): QuranAudioServiceInterface => {
     []
   );
 
+  // Naviguer vers la sourate suivante
+  const navigateToNextSurah = useCallback(async (): Promise<void> => {
+    try {
+      console.log("⏭️ Navigation vers sourate suivante...");
+      await QuranAudioServiceModule.navigateToNextSurah();
+      console.log("✅ Navigation vers sourate suivante effectuée");
+    } catch (error) {
+      console.error("❌ Erreur navigation vers sourate suivante:", error);
+      throw error;
+    }
+  }, []);
+
+  // Naviguer vers la sourate précédente
+  const navigateToPreviousSurah = useCallback(async (): Promise<void> => {
+    try {
+      console.log("⏮️ Navigation vers sourate précédente...");
+      await QuranAudioServiceModule.navigateToPreviousSurah();
+      console.log("✅ Navigation vers sourate précédente effectuée");
+    } catch (error) {
+      console.error("❌ Erreur navigation vers sourate précédente:", error);
+      throw error;
+    }
+  }, []);
+
+  // Lire la sourate actuelle depuis le widget
+  const getCurrentWidgetSurah = useCallback(async () => {
+    try {
+      console.log("📖 Lecture sourate widget...");
+      const result = await QuranAudioServiceModule.getCurrentWidgetSurah();
+      console.log("📖 Sourate widget:", result);
+      return result;
+    } catch (error) {
+      console.error("❌ Erreur lecture sourate widget:", error);
+      throw error;
+    }
+  }, []);
+
+  // Synchroniser avec la sourate du widget
+  const syncWithWidgetSurah = useCallback(async (): Promise<boolean> => {
+    try {
+      console.log("🔄 Synchronisation avec widget...");
+      const result = await QuranAudioServiceModule.syncWithWidgetSurah();
+      console.log("🔄 Résultat synchronisation:", result);
+      return result;
+    } catch (error) {
+      console.error("❌ Erreur synchronisation widget:", error);
+      throw error;
+    }
+  }, []);
+
   // Mettre à jour le statut premium
   const updatePremiumStatus = useCallback(
     async (isPremium: boolean): Promise<void> => {
@@ -398,6 +527,10 @@ export const useQuranAudioService = (): QuranAudioServiceInterface => {
     pauseAudio,
     stopAudio,
     seekToPosition,
+    navigateToNextSurah,
+    navigateToPreviousSurah,
+    getCurrentWidgetSurah,
+    syncWithWidgetSurah,
     updatePremiumStatus,
     isServiceAvailable,
     getCurrentState,

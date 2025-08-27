@@ -21,9 +21,16 @@ import {
   TextInput,
   Alert,
   ScrollView,
+  DeviceEventEmitter,
+  Animated,
 } from "react-native";
 import { useTranslation } from "react-i18next";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import {
+  PanGestureHandler,
+  State,
+  GestureHandlerRootView,
+} from "react-native-gesture-handler";
 import audioManager from "../utils/AudioManager";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import FavoriteButton from "../components/FavoriteButton";
@@ -116,6 +123,29 @@ export default function QuranScreen() {
     useState(false);
   // 🎵 NOUVEAU : État pour forcer l'animation du GIF
   const [gifKey, setGifKey] = useState(0);
+
+  // 👆 NOUVEAU : État pour désactiver la synchronisation automatique (mode navigation app)
+  const [isAppNavigation, setIsAppNavigation] = useState(false);
+  // 🎯 NOUVEAU : Garder la trace de la dernière sourate du service pour détecter les changements widget
+  const [lastServiceSurah, setLastServiceSurah] = useState<string | null>(null);
+  // 📝 NOUVEAU : État pour afficher le tooltip navigation
+  const [showNavigationTooltip, setShowNavigationTooltip] = useState(false);
+
+  const slideAnim = useRef(new Animated.Value(0)).current;
+
+  // 🔧 Fonction pour réinitialiser l'animation si nécessaire
+  const resetSlideAnimation = useCallback(() => {
+    slideAnim.setValue(0);
+    console.log("🔧 Animation slide réinitialisée à 0");
+  }, [slideAnim]);
+
+  // 🔧 Réinitialiser l'animation quand la modal se ferme
+  useEffect(() => {
+    if (!audioControlsModalVisible) {
+      resetSlideAnimation();
+    }
+  }, [audioControlsModalVisible, resetSlideAnimation]);
+
   const [currentlyPlaying, setCurrentlyPlaying] = useState<string | null>(null);
   const [sound, setSound] = useState<any | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -130,8 +160,12 @@ export default function QuranScreen() {
     useNativeDownload();
 
   // 🎯 NOUVEAU : Hook widget Coran
-  const { isWidgetAvailable, updateWidgetAudio, updateWidgetPlaybackState } =
-    useQuranWidget();
+  const {
+    isWidgetAvailable,
+    updateWidgetAudio,
+    updateWidgetPlaybackState,
+    runWidgetDiagnostic,
+  } = useQuranWidget();
 
   // 🎵 NOUVEAU : Hook service audio natif
   const {
@@ -142,6 +176,8 @@ export default function QuranScreen() {
     pauseAudio: pauseAudioInService,
     stopAudio: stopAudioInService,
     seekToPosition: seekToPositionInService,
+    getCurrentWidgetSurah,
+    syncWithWidgetSurah,
     updatePremiumStatus,
     isServiceAvailable,
   } = useQuranAudioService();
@@ -333,8 +369,18 @@ export default function QuranScreen() {
 
   // 🎵 NOUVEAU : Démarrer la lecture en continu d'un récitateur
   const startPlaylistMode = (reciterRecitations: PremiumContent[]) => {
+    console.log(
+      `🎵 Démarrage playlist avec ${reciterRecitations.length} récitations`
+    );
+
     const sortedRecitations = [...reciterRecitations].sort(
       (a, b) => (a.surahNumber || 0) - (b.surahNumber || 0)
+    );
+
+    console.log(
+      `🎵 Récitations triées: ${sortedRecitations
+        .map((r) => r.title)
+        .join(", ")}`
     );
 
     setPlaylistItems(sortedRecitations);
@@ -348,23 +394,33 @@ export default function QuranScreen() {
 
     // Commencer par la première récitation
     if (sortedRecitations.length > 0) {
+      console.log(
+        `🎵 Démarrage de la première récitation: ${sortedRecitations[0].title}`
+      );
       playRecitation(sortedRecitations[0]);
     }
   };
 
   // 🎵 NOUVEAU : Passer à la récitation suivante dans la playlist
   const playNextInPlaylist = () => {
+    console.log(
+      `🎵 playNextInPlaylist - currentIndex: ${currentPlaylistIndexRef.current}, total: ${playlistItemsRef.current.length}`
+    );
+
     if (
       !playlistModeRef.current ||
       currentPlaylistIndexRef.current >= playlistItemsRef.current.length - 1
     ) {
       // Fin de playlist
+      console.log("🎵 Fin de playlist atteinte");
       setPlaylistMode(false);
       setCurrentPlaylistIndex(0);
       setPlaylistItems([]);
       playlistModeRef.current = false;
       currentPlaylistIndexRef.current = 0;
       playlistItemsRef.current = [];
+
+      // Arrêter la lecture actuelle
       stopRecitation();
       return;
     }
@@ -373,6 +429,9 @@ export default function QuranScreen() {
     const nextRecitation = playlistItemsRef.current[nextIndex];
 
     if (nextRecitation) {
+      console.log(
+        `🎵 Passage à la récitation suivante: ${nextRecitation.title} (index: ${nextIndex})`
+      );
       setCurrentPlaylistIndex(nextIndex);
       currentPlaylistIndexRef.current = nextIndex;
       playRecitation(nextRecitation);
@@ -381,13 +440,20 @@ export default function QuranScreen() {
 
   // 🎵 NOUVEAU : Arrêter la playlist
   const stopPlaylistMode = () => {
+    console.log("🎵 Arrêt de la playlist demandé");
+
+    // Arrêter d'abord la lecture actuelle
+    stopRecitation();
+
+    // Puis nettoyer l'état de la playlist
     setPlaylistMode(false);
     setCurrentPlaylistIndex(0);
     setPlaylistItems([]);
     playlistModeRef.current = false;
     currentPlaylistIndexRef.current = 0;
     playlistItemsRef.current = [];
-    stopRecitation();
+
+    console.log("🎵 Playlist arrêtée avec succès");
   };
 
   // 🎵 NOUVEAU : Forcer l'animation du GIF quand la modal s'ouvre
@@ -593,8 +659,111 @@ export default function QuranScreen() {
       setPlaybackPosition(newPosition);
       setPlaybackDuration(newDuration);
       setIsPlaying(newIsPlaying);
+
+      // 🎯 NOUVEAU : Synchroniser currentlyPlaying avec l'état du service
+      if (newIsPlaying && serviceAudioState.currentSurah) {
+        // Si le service joue quelque chose, s'assurer que currentlyPlaying correspond
+        if (currentRecitation && currentRecitation.id) {
+          setCurrentlyPlaying(currentRecitation.id);
+          console.log(
+            `🎯 Synchronisation currentlyPlaying: ${currentRecitation.id}`
+          );
+        }
+      } else if (!newIsPlaying) {
+        // Si le service ne joue rien, réinitialiser si nécessaire
+        console.log(
+          `🎯 Service en pause, currentlyPlaying conservé: ${currentlyPlaying}`
+        );
+      }
+
+      // 🎯 NOUVEAU : Détecter changements de sourate depuis le widget
+      if (
+        serviceAudioState.currentSurah &&
+        serviceAudioState.currentSurah !== lastServiceSurah
+      ) {
+        console.log(
+          `🎯 Changement sourate détecté: "${lastServiceSurah}" → "${serviceAudioState.currentSurah}"`
+        );
+        setLastServiceSurah(serviceAudioState.currentSurah);
+
+        // Si on était en mode navigation app, le réactiver
+        if (isAppNavigation) {
+          setIsAppNavigation(false);
+          console.log(
+            "🔄 Navigation widget détectée - Mode navigation app désactivé - Sync réactivée"
+          );
+        }
+      }
+
+      // 🎯 NOUVEAU : Synchroniser l'interface avec le changement de sourate du service
+      // ⚠️ Synchronisation DÉSACTIVÉE en mode navigation app
+      if (serviceAudioState.currentSurah && !isAppNavigation) {
+        console.log(
+          `🔍 Vérification sync: currentSurah="${serviceAudioState.currentSurah}" selectedSourate=${selectedSourate}`
+        );
+        // Extraire le numéro de sourate depuis le nom (format: "Al-Fatiha (001) - Récitateur")
+        const surahMatch = serviceAudioState.currentSurah.match(/\((\d{3})\)/);
+        if (surahMatch) {
+          const surahNumber = parseInt(surahMatch[1]);
+          console.log(
+            `🔍 Sourate extraite: ${surahNumber}, actuelle: ${selectedSourate}`
+          );
+          if (
+            surahNumber >= 1 &&
+            surahNumber <= 114 &&
+            surahNumber !== selectedSourate
+          ) {
+            console.log(
+              `🎯 Synchronisation interface: passage sourate ${selectedSourate} → ${surahNumber}`
+            );
+            setSelectedSourate(surahNumber);
+          } else {
+            console.log(`🔍 Pas de sync nécessaire (même sourate ou invalide)`);
+          }
+        } else {
+          console.log(
+            `🔍 Regex ne match pas: "${serviceAudioState.currentSurah}"`
+          );
+        }
+      } else if (isAppNavigation) {
+        console.log(
+          "🚫 Synchronisation désactivée - Mode navigation app actif"
+        );
+      }
     }
-  }, [serviceAudioState, isServiceAvailable, user?.isPremium]);
+  }, [
+    serviceAudioState,
+    isServiceAvailable,
+    user?.isPremium,
+    isAppNavigation,
+    lastServiceSurah,
+  ]);
+
+  // NOUVEAU : Écouter l'événement de fin de sourate pour la playlist
+  useEffect(() => {
+    const handleSurahCompleted = (event: any) => {
+      console.log("🎵 Événement fin de sourate reçu dans QuranScreen:", event);
+
+      if (playlistModeRef.current) {
+        console.log(
+          "🎵 Mode playlist actif - passage automatique à la suivante"
+        );
+        // Appeler directement playNextInPlaylist sans délai
+        playNextInPlaylist();
+      } else {
+        console.log("🎵 Mode playlist inactif - pas de passage automatique");
+      }
+    };
+
+    const subscription = DeviceEventEmitter.addListener(
+      "QuranSurahCompletedForPlaylist",
+      handleSurahCompleted
+    );
+
+    return () => {
+      subscription.remove();
+    };
+  }, []);
 
   const loadAvailableRecitations = async (forceRefresh = false) => {
     try {
@@ -966,43 +1135,60 @@ export default function QuranScreen() {
     });
   }, [downloadState, handleNativeDownloadCompleted]);
 
-  const playRecitation = async (recitation: PremiumContent) => {
-    try {
-      setIsLoading(true);
+  const playRecitation = useCallback(
+    async (recitation: PremiumContent) => {
+      try {
+        setIsLoading(true);
 
-      // Arrêter toute lecture précédente
-      if (sound) {
-        await sound.unloadAsync();
-        setSound(null);
-      }
+        // Arrêter toute lecture précédente
+        if (sound) {
+          await sound.unloadAsync();
+          setSound(null);
+        }
 
-      setCurrentlyPlaying(recitation.id);
+        setCurrentlyPlaying(recitation.id);
+        setCurrentRecitation(recitation);
 
-      let audioSource: any;
+        // 🎵 NOUVEAU : Mettre à jour la sourate sélectionnée pour la synchronisation UI
+        if (recitation.surahNumber) {
+          setSelectedSourate(recitation.surahNumber);
+        }
 
-      // 🎯 Priorité 1: Fichier local téléchargé (hors ligne)
-      // console.log(
-      //   `🔍 Debug lecture: isDownloaded=${recitation.isDownloaded}, downloadPath=${recitation.downloadPath}`
-      // );
+        let audioSource: any;
 
-      // Vérifier si le fichier est réellement téléchargé
-      const actualDownloadPath = await premiumManager.isContentDownloaded(
-        recitation.id
-      );
+        // 🎯 Priorité 1: Fichier local téléchargé (hors ligne)
+        // console.log(
+        //   `🔍 Debug lecture: isDownloaded=${recitation.isDownloaded}, downloadPath=${recitation.downloadPath}`
+        // );
 
-      if (actualDownloadPath) {
-        audioSource = { uri: "file://" + actualDownloadPath };
-        // console.log(`🎵 Lecture locale: ${recitation.title}`);
-      }
-      // 🌐 Priorité 2: Streaming depuis Infomaniak
-      else {
-        audioSource = { uri: recitation.fileUrl };
-        //  console.log(`🌐 Streaming Infomaniak: ${recitation.title}`);
-      }
+        // Vérifier si le fichier est réellement téléchargé
+        const actualDownloadPath = await premiumManager.isContentDownloaded(
+          recitation.id
+        );
 
-      // 🎯 NOUVEAU : Analyser l'audio pour la synchronisation
-      // TODO: À implémenter plus tard
-      /*
+        if (actualDownloadPath) {
+          audioSource = { uri: "file://" + actualDownloadPath };
+          // console.log(`🎵 Lecture locale: ${recitation.title}`);
+
+          // 🎵 NOUVEAU : Mettre à jour le récitateur sélectionné pour la synchronisation UI (mode hors ligne)
+          if (recitation.reciter) {
+            setSelectedOfflineReciter(recitation.reciter);
+          }
+        }
+        // 🌐 Priorité 2: Streaming depuis Infomaniak
+        else {
+          audioSource = { uri: recitation.fileUrl };
+          //  console.log(`🌐 Streaming Infomaniak: ${recitation.title}`);
+
+          // 🎵 NOUVEAU : Mettre à jour le récitateur sélectionné pour la synchronisation UI (mode streaming)
+          if (recitation.reciter) {
+            setSelectedReciter(recitation.reciter);
+          }
+        }
+
+        // 🎯 NOUVEAU : Analyser l'audio pour la synchronisation
+        // TODO: À implémenter plus tard
+        /*
       if (arabicVerses.length > 0) {
         setIsAnalyzing(true);
         try {
@@ -1046,148 +1232,148 @@ export default function QuranScreen() {
       }
       */
 
-      // 🎵 NOUVEAU : Utiliser le service audio natif si disponible
-      if (isServiceAvailable() && user?.isPremium) {
-        try {
-          console.log("🎵 Utilisation du service audio natif");
-
-          // Mettre à jour le statut premium dans le service
-          await updatePremiumStatus(true);
-
-          // Charger l'audio dans le service
-          const audioPath = actualDownloadPath || recitation.fileUrl;
-          await loadAudioInService(
-            audioPath,
-            recitation.title,
-            recitation.reciter || ""
-          );
-
-          // Lancer la lecture
-          await playAudioInService();
-
-          setIsPlaying(true);
-          setCurrentlyPlaying(recitation.id);
-
-          // 🎵 NOUVEAU : Créer un mock sound pour maintenir la compatibilité
-          const mockSound = {
-            setOnPlaybackStatusUpdate: (callback: any) => {
-              // Le callback sera géré par les événements du service natif
-              console.log("🎵 Mock sound configuré pour service natif");
-              // Stocker le callback pour l'utiliser plus tard si nécessaire
-              mockSound._callback = callback;
-            },
-            unloadAsync: async () => {
-              console.log("🎵 Mock sound unloadAsync appelé");
-              return Promise.resolve();
-            },
-            playAsync: async () => {
-              console.log("🎵 Mock sound playAsync appelé");
-              return Promise.resolve();
-            },
-            pauseAsync: async () => {
-              console.log("🎵 Mock sound pauseAsync appelé");
-              return Promise.resolve();
-            },
-            stopAsync: async () => {
-              console.log("🎵 Mock sound stopAsync appelé");
-              return Promise.resolve();
-            },
-            setPositionAsync: async (position: number) => {
-              console.log("🎵 Mock sound setPositionAsync appelé:", position);
-              return Promise.resolve();
-            },
-            getStatusAsync: async () => {
-              console.log("🎵 Mock sound getStatusAsync appelé");
-              // NOUVEAU : Utiliser les vraies valeurs du service natif
-              return Promise.resolve({
-                isLoaded: true,
-                isPlaying: isPlaying,
-                positionMillis: playbackPosition,
-                durationMillis: playbackDuration,
-              });
-            },
-            _callback: null as any, // Pour stocker le callback
-          };
-          setSound(mockSound);
-
-          console.log("✅ Lecture lancée via service natif");
-        } catch (serviceError) {
-          console.error("❌ Erreur service audio natif:", serviceError);
-          // Fallback vers l'ancien système
-          console.log("🔄 Fallback vers système audio Expo");
-        }
-      }
-
-      // Fallback vers l'ancien système si service non disponible ou non premium
-      if (!isServiceAvailable() || !user?.isPremium) {
-        console.log("🎵 Utilisation du système audio Expo");
-
-        // Créer et configurer l'objet audio (avec fallback streaming si local corrompu)
-        let createdSound: any | null = null;
-        try {
-          createdSound = await audioManager.playSource(audioSource, 1.0);
-        } catch (playError: any) {
-          console.error(
-            "Erreur lecture locale, fallback streaming:",
-            playError
-          );
-          // Fallback: tenter le streaming HTTP sécurisé
+        // 🎵 NOUVEAU : Utiliser le service audio natif si disponible
+        if (isServiceAvailable() && user?.isPremium) {
           try {
-            const remoteUrl = (
-              currentRecitation?.fileUrl ||
-              recitation.fileUrl ||
-              ""
-            ).replace("action=download", "action=stream");
-            if (!remoteUrl) throw new Error("URL streaming indisponible");
-            createdSound = await audioManager.playSource(
-              { uri: remoteUrl },
-              1.0
+            console.log("🎵 Utilisation du service audio natif");
+
+            // Mettre à jour le statut premium dans le service
+            await updatePremiumStatus(true);
+
+            // Charger l'audio dans le service
+            const audioPath = actualDownloadPath || recitation.fileUrl;
+            await loadAudioInService(
+              audioPath,
+              recitation.title,
+              recitation.reciter || ""
             );
-          } catch (fallbackError) {
-            console.error("Erreur fallback streaming:", fallbackError);
-            setIsPlaying(false);
-            setCurrentlyPlaying(null);
-            setIsLoading(false);
-            return;
+
+            // Lancer la lecture
+            await playAudioInService();
+
+            setIsPlaying(true);
+            setCurrentlyPlaying(recitation.id);
+
+            // 🎵 NOUVEAU : Créer un mock sound pour maintenir la compatibilité
+            const mockSound = {
+              setOnPlaybackStatusUpdate: (callback: any) => {
+                // Le callback sera géré par les événements du service natif
+                console.log("🎵 Mock sound configuré pour service natif");
+                // Stocker le callback pour l'utiliser plus tard si nécessaire
+                mockSound._callback = callback;
+              },
+              unloadAsync: async () => {
+                console.log("🎵 Mock sound unloadAsync appelé");
+                return Promise.resolve();
+              },
+              playAsync: async () => {
+                console.log("🎵 Mock sound playAsync appelé");
+                return Promise.resolve();
+              },
+              pauseAsync: async () => {
+                console.log("🎵 Mock sound pauseAsync appelé");
+                return Promise.resolve();
+              },
+              stopAsync: async () => {
+                console.log("🎵 Mock sound stopAsync appelé");
+                return Promise.resolve();
+              },
+              setPositionAsync: async (position: number) => {
+                console.log("🎵 Mock sound setPositionAsync appelé:", position);
+                return Promise.resolve();
+              },
+              getStatusAsync: async () => {
+                console.log("🎵 Mock sound getStatusAsync appelé");
+                // NOUVEAU : Utiliser les vraies valeurs du service natif
+                return Promise.resolve({
+                  isLoaded: true,
+                  isPlaying: isPlaying,
+                  positionMillis: playbackPosition,
+                  durationMillis: playbackDuration,
+                });
+              },
+              _callback: null as any, // Pour stocker le callback
+            };
+            setSound(mockSound);
+
+            console.log("✅ Lecture lancée via service natif");
+          } catch (serviceError) {
+            console.error("❌ Erreur service audio natif:", serviceError);
+            // Fallback vers l'ancien système
+            console.log("🔄 Fallback vers système audio Expo");
           }
         }
 
-        setSound(createdSound);
-        setIsPlaying(true);
-        setCurrentlyPlaying(recitation.id);
-      }
+        // Fallback vers l'ancien système si service non disponible ou non premium
+        if (!isServiceAvailable() || !user?.isPremium) {
+          console.log("🎵 Utilisation du système audio Expo");
 
-      // 🎯 NOUVEAU : Mettre à jour le widget Coran
-      if (isWidgetAvailable && user?.isPremium) {
-        const audioPath = actualDownloadPath || recitation.fileUrl;
-        updateWidgetAudio(
-          recitation.title,
-          recitation.reciter || "",
-          audioPath
-        );
-        updateWidgetPlaybackState(true, 0, 0);
-      }
-
-      // Configuration des callbacks de progression avec analyse audio
-      // TODO: À implémenter plus tard
-      if (sound) {
-        sound.setOnPlaybackStatusUpdate((status: any) => {
-          if (status.isLoaded) {
-            setPlaybackPosition(status.positionMillis || 0);
-            setPlaybackDuration(status.durationMillis || 0);
-
-            // 🎯 NOUVEAU : Mettre à jour le widget Coran avec la progression
-            if (isWidgetAvailable && user?.isPremium) {
-              updateWidgetPlaybackState(
-                isPlaying,
-                status.positionMillis || 0,
-                status.durationMillis || 0
+          // Créer et configurer l'objet audio (avec fallback streaming si local corrompu)
+          let createdSound: any | null = null;
+          try {
+            createdSound = await audioManager.playSource(audioSource, 1.0);
+          } catch (playError: any) {
+            console.error(
+              "Erreur lecture locale, fallback streaming:",
+              playError
+            );
+            // Fallback: tenter le streaming HTTP sécurisé
+            try {
+              const remoteUrl = (
+                currentRecitation?.fileUrl ||
+                recitation.fileUrl ||
+                ""
+              ).replace("action=download", "action=stream");
+              if (!remoteUrl) throw new Error("URL streaming indisponible");
+              createdSound = await audioManager.playSource(
+                { uri: remoteUrl },
+                1.0
               );
+            } catch (fallbackError) {
+              console.error("Erreur fallback streaming:", fallbackError);
+              setIsPlaying(false);
+              setCurrentlyPlaying(null);
+              setIsLoading(false);
+              return;
             }
+          }
 
-            // 🎯 NOUVEAU : Utiliser l'analyse audio pour la synchronisation
-            // TODO: À implémenter plus tard
-            /*
+          setSound(createdSound);
+          setIsPlaying(true);
+          setCurrentlyPlaying(recitation.id);
+        }
+
+        // 🎯 NOUVEAU : Mettre à jour le widget Coran
+        if (isWidgetAvailable && user?.isPremium) {
+          const audioPath = actualDownloadPath || recitation.fileUrl;
+          updateWidgetAudio(
+            recitation.title,
+            recitation.reciter || "",
+            audioPath
+          );
+          updateWidgetPlaybackState(true, 0, 0);
+        }
+
+        // Configuration des callbacks de progression avec analyse audio
+        // TODO: À implémenter plus tard
+        if (sound) {
+          sound.setOnPlaybackStatusUpdate((status: any) => {
+            if (status.isLoaded) {
+              setPlaybackPosition(status.positionMillis || 0);
+              setPlaybackDuration(status.durationMillis || 0);
+
+              // 🎯 NOUVEAU : Mettre à jour le widget Coran avec la progression
+              if (isWidgetAvailable && user?.isPremium) {
+                updateWidgetPlaybackState(
+                  isPlaying,
+                  status.positionMillis || 0,
+                  status.durationMillis || 0
+                );
+              }
+
+              // 🎯 NOUVEAU : Utiliser l'analyse audio pour la synchronisation
+              // TODO: À implémenter plus tard
+              /*
             if (status.positionMillis && verseTimings.length > 0) {
               const currentTimeSeconds = status.positionMillis / 1000;
               const currentVerse = quranAudioAnalyzer.getCurrentVerse(
@@ -1217,44 +1403,93 @@ export default function QuranScreen() {
             }
             */
 
-            if (status.didJustFinish) {
-              setIsPlaying(false);
-              setCurrentlyPlaying(null);
-              setPlaybackPosition(0);
-              setPlaybackDuration(0);
-              // TODO: setCurrentVerseIndex(null);
+              if (status.didJustFinish) {
+                console.log(
+                  "🎵 Audio terminé - didJustFinish détecté (Expo-AV uniquement)"
+                );
+                console.log("🎵 État playlist:", {
+                  playlistMode: playlistModeRef.current,
+                  currentIndex: currentPlaylistIndexRef.current,
+                  totalItems: playlistItemsRef.current.length,
+                });
 
-              // 🎵 NOUVEAU : Mode playlist - passer automatiquement à la suivante
-              if (playlistModeRef.current) {
-                setTimeout(() => {
-                  playNextInPlaylist();
-                }, 1000); // Petite pause entre les récitations
+                setIsPlaying(false);
+                setCurrentlyPlaying(null);
+                setPlaybackPosition(0);
+                setPlaybackDuration(0);
+                // TODO: setCurrentVerseIndex(null);
+
+                // 🎵 Mode playlist - passer automatiquement à la suivante (Expo-AV uniquement)
+                if (playlistModeRef.current) {
+                  console.log(
+                    "🎵 Mode playlist actif - passage automatique à la suivante (Expo-AV)"
+                  );
+                  setTimeout(() => {
+                    console.log(
+                      "🎵 Exécution de playNextInPlaylist après délai (Expo-AV)"
+                    );
+                    playNextInPlaylist();
+                  }, 1000); // Petite pause entre les récitations
+                } else {
+                  console.log("🎵 Mode playlist inactif - arrêt de la lecture");
+                }
               }
             }
-          }
-        });
-      }
+          });
 
-      showToast({
-        type: "success",
-        title: actualDownloadPath ? t("local_playback") : t("streaming"),
-        message: `${recitation.title} - ${
-          actualDownloadPath ? t("local_file") : t("streaming_status")
-        }`,
-      });
-    } catch (error) {
-      console.error("Erreur lecture récitation:", error);
-      showToast({
-        type: "error",
-        title: t("playback_error"),
-        message: t("playback_error_message"),
-      });
-      setCurrentlyPlaying(null);
-      setIsPlaying(false);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+          // 🎵 NOUVEAU : Configurer un timer pour simuler la fin de l'audio
+          // car le service natif ne déclenche pas automatiquement didJustFinish
+          if (
+            playlistModeRef.current &&
+            isServiceAvailable() &&
+            user?.isPremium
+          ) {
+            console.log(
+              "🎵 Mode playlist détecté - pas de timer nécessaire, utilisation de l'événement natif"
+            );
+          }
+        }
+
+        showToast({
+          type: "success",
+          title: actualDownloadPath ? t("local_playback") : t("streaming"),
+          message: `${recitation.title} - ${
+            actualDownloadPath ? t("local_file") : t("streaming_status")
+          }`,
+        });
+      } catch (error) {
+        console.error("Erreur lecture récitation:", error);
+        showToast({
+          type: "error",
+          title: t("playback_error"),
+          message: t("playback_error_message"),
+        });
+        setCurrentlyPlaying(null);
+        setIsPlaying(false);
+      } finally {
+        setIsLoading(false);
+      }
+    },
+    [
+      sound,
+      premiumManager,
+      isServiceAvailable,
+      user?.isPremium,
+      isWidgetAvailable,
+      showToast,
+      t,
+      updatePremiumStatus,
+      loadAudioInService,
+      playAudioInService,
+      isPlaying,
+      playbackPosition,
+      playbackDuration,
+      currentRecitation?.fileUrl,
+      updateWidgetAudio,
+      updateWidgetPlaybackState,
+      playNextInPlaylist,
+    ]
+  );
 
   const pauseRecitation = async () => {
     try {
@@ -1325,18 +1560,129 @@ export default function QuranScreen() {
 
   const stopRecitation = async () => {
     try {
-      if (sound) {
+      console.log("🎵 Arrêt de la récitation demandé");
+
+      // 🎵 NOUVEAU : Utiliser le service natif si disponible
+      if (isServiceAvailable() && user?.isPremium) {
+        await stopAudioInService();
+        console.log("✅ Arrêt via service natif");
+      } else if (sound) {
         await audioManager.stop();
         await audioManager.unload();
         setSound(null);
+        console.log("✅ Arrêt via Expo-AV");
       }
+
       setIsPlaying(false);
       setCurrentlyPlaying(null);
-      // TODO: setCurrentVerseIndex(null);
+      // 🔧 FIX : Ne pas vider currentRecitation pour éviter de fermer la modal
+      // setCurrentRecitation(null); ← Commenté pour garder la modal ouverte
+      setPlaybackPosition(0);
+      setPlaybackDuration(0);
+
+      // 🎯 NOUVEAU : Mettre à jour le widget Coran
+      if (isWidgetAvailable && user?.isPremium) {
+        updateWidgetPlaybackState(false, 0, 0);
+      }
+
+      console.log("🎵 Récitation arrêtée avec succès");
     } catch (error) {
-      console.error("Erreur arrêt audio:", error);
+      console.error("❌ Erreur arrêt audio:", error);
     }
   };
+
+  // 👆 NOUVEAU : Navigation par gestes de swipe (simple - juste changer la sourate affichée)
+  const handleSwipeNavigation = (direction: "next" | "previous") => {
+    const currentSurah = selectedSourate;
+    let targetSurah: number;
+
+    if (direction === "next") {
+      targetSurah = currentSurah >= 114 ? 1 : currentSurah + 1;
+      console.log(
+        `👆 Swipe SUIVANT: ${currentSurah} → ${targetSurah} (affichage seulement)`
+      );
+    } else {
+      targetSurah = currentSurah <= 1 ? 114 : currentSurah - 1;
+      console.log(
+        `👆 Swipe PRÉCÉDENT: ${currentSurah} → ${targetSurah} (affichage seulement)`
+      );
+    }
+
+    // 🔧 SOLUTION SIMPLIFIÉE : Animation sans changement d'état dans les callbacks
+    console.log(`🎬 Début animation slide ${direction}`);
+
+    // Activer le mode navigation app (désactive sync automatique) AVANT l'animation
+    setIsAppNavigation(true);
+    console.log("🎯 Mode navigation app activé - Sync automatique désactivée");
+
+    // Changer la sourate AVANT l'animation
+    setSelectedSourate(targetSurah);
+    if (selectedReciter) {
+      loadSpecificRecitation(selectedReciter, targetSurah);
+    }
+
+    // Animation slide simple avec Animated.sequence
+    const exitValue =
+      direction === "next"
+        ? -Dimensions.get("window").width
+        : Dimensions.get("window").width;
+
+    const enterValue = -exitValue; // Direction opposée
+
+    Animated.sequence([
+      // Sortie vers la direction opposée
+      Animated.timing(slideAnim, {
+        toValue: exitValue,
+        duration: 150,
+        useNativeDriver: true,
+      }),
+      // Entrée depuis l'autre côté
+      Animated.timing(slideAnim, {
+        toValue: 0,
+        duration: 150,
+        useNativeDriver: true,
+      }),
+    ]).start(() => {
+      console.log("🎬 Animation slide complète terminée - modal visible");
+    });
+
+    console.log(
+      `✅ Navigation par geste: sourate ${targetSurah} affichée (audio inchangé)`
+    );
+  };
+
+  // 👆 Handler pour les gestes Pan
+  const onGestureEvent = (event: any) => {
+    // On traite le geste seulement à la fin (State.END)
+  };
+
+  const onHandlerStateChange = (event: any) => {
+    if (event.nativeEvent.state === State.END) {
+      const { translationX, velocityX } = event.nativeEvent;
+
+      // Seuils pour déclencher la navigation
+      const SWIPE_THRESHOLD = 50; // Distance minimale
+      const VELOCITY_THRESHOLD = 300; // Vitesse minimale
+
+      if (
+        Math.abs(translationX) > SWIPE_THRESHOLD &&
+        Math.abs(velocityX) > VELOCITY_THRESHOLD
+      ) {
+        if (translationX > 0) {
+          // Swipe vers la droite = sourate précédente
+          handleSwipeNavigation("previous");
+        } else {
+          // Swipe vers la gauche = sourate suivante
+          handleSwipeNavigation("next");
+        }
+      }
+    }
+  };
+
+  // 🎯 NAVIGATION SUPPRIMÉE - Utiliser uniquement le widget pour naviguer
+  // Cela évite les conflits de double navigation qui causaient les sauts de sourates
+
+  // 🎯 NAVIGATION SUPPRIMÉE - Plus besoin d'écouteurs d'événements puisque l'app n'a plus de boutons de navigation
 
   // Charger les versets, la translittération et la traduction selon la sourate et la langue
   useEffect(() => {
@@ -1528,21 +1874,6 @@ export default function QuranScreen() {
               />
             </TouchableOpacity>
           )}
-
-          {/* 🚀 TEMPORAIRE : Bouton de nettoyage Quran - DÉCOMMENTÉ POUR UTILISATION */}
-          {/* 
-          <TouchableOpacity
-            style={styles.clearQuranButton}
-            onPress={handleClearQuranDirectory}
-          >
-            <MaterialCommunityIcons
-              name="delete-sweep"
-              size={16}
-              color="#FF6B6B"
-            />
-            <Text style={styles.clearQuranButtonText}>Vider Quran</Text>
-          </TouchableOpacity>
-          */}
         </View>
 
         {/* 🌐 NOUVEAU : Section contrôles hors ligne */}
@@ -1571,6 +1902,17 @@ export default function QuranScreen() {
                 {t("quran.checking_connection", "Vérification...")}
               </Text>
             </View>
+          )}
+
+          {/* 🔍 NOUVEAU : Bouton de diagnostic widget */}
+          {__DEV__ && (
+            <TouchableOpacity
+              style={styles.diagnosticButton}
+              onPress={runWidgetDiagnostic}
+            >
+              <MaterialCommunityIcons name="bug" size={16} color="#ffffff" />
+              <Text style={styles.diagnosticButtonText}>Diagnostic Widget</Text>
+            </TouchableOpacity>
           )}
 
           {/* Bouton basculer mode hors ligne (visible quand premium) */}
@@ -1696,349 +2038,332 @@ export default function QuranScreen() {
           visible={audioControlsModalVisible}
           onRequestClose={() => setAudioControlsModalVisible(false)}
         >
-          <SafeAreaView style={styles.audioModalContainer}>
-            <ScrollView
-              style={styles.audioModalScrollView}
-              contentContainerStyle={styles.audioModalScrollContent}
-              showsVerticalScrollIndicator={false}
-            >
-              <View style={styles.audioModalContent}>
-                {/* 🎵 GIF animé ou image statique selon l'état de lecture */}
-                <ExpoImage
-                  source={
-                    currentlyPlaying === currentRecitation?.id && isPlaying
-                      ? require("../assets/images/audio_wave3.gif")
-                      : require("../assets/images/audio_wave3_fix.png")
-                  }
-                  style={styles.audioModalGifBackground}
-                  contentFit="cover"
-                  onLoad={() => {
-                    // console.log("✅ Image background chargée avec expo-image")
-                  }}
-                  onError={() => {
-                    // console.log("❌ Erreur image background avec expo-image")
-                  }}
-                  key={`gif-${gifKey}-${
-                    currentlyPlaying === currentRecitation?.id && isPlaying
-                      ? "play"
-                      : "pause"
-                  }`}
-                />
-                <View style={styles.audioModalOverlay}>
-                  <View style={styles.audioModalHeader}>
-                    <TouchableOpacity
-                      style={styles.closeButton}
-                      onPress={() => setAudioControlsModalVisible(false)}
-                    >
-                      <MaterialCommunityIcons
-                        name="close"
-                        size={24}
-                        color="#483C1C"
-                      />
-                    </TouchableOpacity>
-                  </View>
-                  {currentRecitation && (
-                    <View style={styles.audioModalBody}>
-                      {/* 🎵 Indicateur de lecture - SIMPLE et STABLE */}
-                      <View style={styles.audioAnimationContainer}>
-                        <Text style={styles.audioAnimationText}>
-                          {currentlyPlaying === currentRecitation.id &&
-                          isPlaying
-                            ? `🎵 ${t("currently_playing")}`
-                            : `🎵 ${t("ready_to_listen")}`}
-                        </Text>
-                      </View>
-
-                      {/* Informations sur la récitation */}
-                      <View style={styles.audioInfoContainer}>
-                        <Text style={styles.audioReciterName}>
-                          {currentRecitation.reciter}
-                        </Text>
-                        <Text style={styles.audioSurahName}>
-                          {currentRecitation.surahName}
-                        </Text>
-                        {currentRecitation.isDownloaded && (
-                          <View style={styles.audioLocalBadge}>
-                            <MaterialCommunityIcons
-                              name="download"
-                              size={14}
-                              color="#4CAF50"
-                            />
-                            <Text style={styles.audioLocalText}>
-                              {t("offline")}
-                            </Text>
-                          </View>
-                        )}
-                      </View>
-
-                      {/* Contrôles de lecture principaux */}
-                      <View style={styles.audioMainControls}>
+          <GestureHandlerRootView style={{ flex: 1 }}>
+            <SafeAreaView style={styles.audioModalContainer}>
+              <PanGestureHandler
+                onGestureEvent={onGestureEvent}
+                onHandlerStateChange={onHandlerStateChange}
+                activeOffsetX={[-50, 50]}
+                failOffsetY={[-50, 50]}
+              >
+                <ScrollView
+                  style={styles.audioModalScrollView}
+                  contentContainerStyle={styles.audioModalScrollContent}
+                  showsVerticalScrollIndicator={false}
+                >
+                  <Animated.View
+                    style={[
+                      styles.audioModalContent,
+                      { transform: [{ translateX: slideAnim }] },
+                    ]}
+                  >
+                    {/* 🎵 GIF animé ou image statique selon l'état de lecture */}
+                    <ExpoImage
+                      source={
+                        currentlyPlaying === currentRecitation?.id && isPlaying
+                          ? require("../assets/images/audio_wave3.gif")
+                          : require("../assets/images/audio_wave3_fix.png")
+                      }
+                      style={styles.audioModalGifBackground}
+                      contentFit="cover"
+                      onLoad={() => {
+                        // console.log("✅ Image background chargée avec expo-image")
+                      }}
+                      onError={() => {
+                        // console.log("❌ Erreur image background avec expo-image")
+                      }}
+                      key={`gif-${gifKey}-${
+                        currentlyPlaying === currentRecitation?.id && isPlaying
+                          ? "play"
+                          : "pause"
+                      }`}
+                    />
+                    <View style={styles.audioModalOverlay}>
+                      <View style={styles.audioModalHeader}>
                         <TouchableOpacity
-                          style={[
-                            styles.audioPlayButton,
-                            currentlyPlaying === currentRecitation.id &&
-                              isPlaying &&
-                              styles.audioPlayButtonActive,
-                          ]}
-                          onPress={() => {
-                            if (
-                              currentlyPlaying === currentRecitation.id &&
-                              isPlaying
-                            ) {
-                              pauseRecitation();
-                            } else if (
-                              currentlyPlaying === currentRecitation.id
-                            ) {
-                              resumeRecitation();
-                            } else {
-                              playRecitation(currentRecitation);
-                            }
-                          }}
-                          disabled={isLoading}
+                          style={styles.closeButton}
+                          onPress={() => setAudioControlsModalVisible(false)}
                         >
                           <MaterialCommunityIcons
-                            name={
-                              isLoading
-                                ? "loading"
-                                : currentlyPlaying === currentRecitation.id &&
-                                  isPlaying
-                                ? "pause"
-                                : "play"
-                            }
-                            size={40}
-                            color="#fff"
+                            name="close"
+                            size={24}
+                            color="#483C1C"
                           />
                         </TouchableOpacity>
                       </View>
-
-                      {/* 🎯 NOUVEAU : Navigation entre sourates */}
-                      <View style={styles.audioNavigationContainer}>
-                        {/* Affichage de la sourate actuelle - AU-DESSUS */}
-                        <View style={styles.audioCurrentSurah}>
-                          <Text style={styles.audioCurrentSurahText}>
-                            {t("surah")} {selectedSourate}
-                          </Text>
-                          <Text style={styles.audioCurrentSurahName}>
-                            {getSelectedSourateLabel()}
-                          </Text>
-                        </View>
-
-                        {/* Boutons de navigation - EN DESSOUS */}
-                        <View style={styles.audioNavButtonsContainer}>
-                          <TouchableOpacity
-                            style={[
-                              styles.audioNavButton,
-                              selectedSourate <= 1 &&
-                                styles.audioNavButtonDisabled,
-                            ]}
-                            onPress={() => {
-                              if (selectedSourate > 1) {
-                                setSelectedSourate(selectedSourate - 1);
-                                // Arrêter la lecture actuelle si elle est en cours
-                                if (
-                                  currentlyPlaying === currentRecitation?.id &&
-                                  isPlaying
-                                ) {
-                                  stopRecitation();
-                                }
-                              }
-                            }}
-                            disabled={selectedSourate <= 1}
-                          >
-                            <MaterialCommunityIcons
-                              name="skip-previous"
-                              size={24}
-                              color={selectedSourate <= 1 ? "#666" : "#FFD700"}
-                            />
-                            <Text style={styles.audioNavButtonText}>
-                              {t("previous")}
+                      {currentRecitation && (
+                        <View style={styles.audioModalBody}>
+                          {/* 🎵 Indicateur de lecture - SIMPLE et STABLE */}
+                          <View style={styles.audioAnimationContainer}>
+                            <Text style={styles.audioAnimationText}>
+                              {currentlyPlaying === currentRecitation.id &&
+                              isPlaying
+                                ? `🎵 ${t("currently_playing")}`
+                                : `🎵 ${t("ready_to_listen")}`}
                             </Text>
-                          </TouchableOpacity>
+                          </View>
 
-                          <TouchableOpacity
-                            style={[
-                              styles.audioNavButton,
-                              selectedSourate >= 114 &&
-                                styles.audioNavButtonDisabled,
-                            ]}
-                            onPress={() => {
-                              if (selectedSourate < 114) {
-                                setSelectedSourate(selectedSourate + 1);
-                                // Arrêter la lecture actuelle si elle est en cours
-                                if (
-                                  currentlyPlaying === currentRecitation?.id &&
-                                  isPlaying
-                                ) {
-                                  stopRecitation();
-                                }
-                              }
-                            }}
-                            disabled={selectedSourate >= 114}
-                          >
-                            <Text style={styles.audioNavButtonText}>
-                              {t("next")}
+                          {/* Informations sur la récitation */}
+                          <View style={styles.audioInfoContainer}>
+                            <Text style={styles.audioReciterName}>
+                              {currentRecitation.reciter}
                             </Text>
-                            <MaterialCommunityIcons
-                              name="skip-next"
-                              size={24}
-                              color={
-                                selectedSourate >= 114 ? "#666" : "#FFD700"
-                              }
-                            />
-                          </TouchableOpacity>
-                        </View>
-                      </View>
-
-                      {/* Barre de progression - TOUJOURS présente pour éviter les changements de layout */}
-                      <View style={styles.audioProgressContainer}>
-                        {playbackDuration > 0 ? (
-                          <>
-                            <Text style={styles.audioTimeText}>
-                              {formatTime(playbackPosition)}
+                            <Text style={styles.audioSurahName}>
+                              {currentRecitation.surahName}
                             </Text>
-                            <TouchableOpacity
-                              style={styles.audioProgressBar}
-                              onPress={(event) => {
-                                const { locationX } = event.nativeEvent;
-                                const width =
-                                  (event.currentTarget as any)?.props?.style
-                                    ?.width || 1;
-                                const progress = Math.max(
-                                  0,
-                                  Math.min(1, locationX / width)
-                                );
-                                const newPosition = progress * playbackDuration;
-                                seekToPosition(newPosition);
-                              }}
-                              activeOpacity={0.8}
-                            >
-                              <View
-                                style={[
-                                  styles.audioProgressFill,
-                                  {
-                                    width: `${
-                                      playbackDuration > 0
-                                        ? (playbackPosition /
-                                            playbackDuration) *
-                                          100
-                                        : 0
-                                    }%`,
-                                  },
-                                ]}
-                              />
-                            </TouchableOpacity>
-                            <Text style={styles.audioTimeText}>
-                              {formatTime(playbackDuration)}
-                            </Text>
-                          </>
-                        ) : (
-                          <>
-                            <Text style={styles.audioTimeText}>--:--</Text>
-                            {/* NOUVEAU : Debug info pour comprendre pourquoi la durée n'est pas affichée */}
-                            {__DEV__ && (
-                              <Text style={styles.debugText}>
-                                Debug: pos={playbackPosition}, dur=
-                                {playbackDuration}
-                              </Text>
-                            )}
-                          </>
-                        )}
-                      </View>
-
-                      {/* Options de téléchargement/streaming */}
-                      <View style={styles.audioOptionsContainer}>
-                        {/* 🚀 NOUVEAU : Vérifier si téléchargement en cours */}
-                        {(() => {
-                          const downloadingState = downloadState.get(
-                            currentRecitation.id
-                          );
-                          const isDownloading =
-                            downloadingState?.isDownloading || false;
-                          const progress = downloadingState?.progress || 0;
-                          // const hasError = downloadingState?.error || false;
-
-                          if (isDownloading) {
-                            // Téléchargement en cours - Afficher la jauge de progression
-                            return (
-                              <ProgressBar
-                                progress={progress}
-                                onCancel={() =>
-                                  handleNativeCancelDownload(
-                                    currentRecitation.id
-                                  )
-                                }
-                              />
-                            );
-                          } else if (!currentRecitation.isDownloaded) {
-                            // Pas téléchargé - Afficher le bouton de téléchargement
-                            return (
-                              <TouchableOpacity
-                                style={styles.audioDownloadButton}
-                                onPress={() =>
-                                  handleNativeDownloadRecitation(
-                                    currentRecitation
-                                  )
-                                }
-                              >
+                            {currentRecitation.isDownloaded && (
+                              <View style={styles.audioLocalBadge}>
                                 <MaterialCommunityIcons
                                   name="download"
-                                  size={20}
-                                  color="#FFD700"
-                                />
-                                <Text style={styles.audioDownloadText}>
-                                  {t("download")} ({currentRecitation.fileSize}
-                                  MB)
-                                </Text>
-                              </TouchableOpacity>
-                            );
-                          } else {
-                            // Téléchargé - Afficher l'info et le bouton de suppression
-                            return (
-                              <View style={styles.downloadedInfoContainer}>
-                                <MaterialCommunityIcons
-                                  name="check-circle"
-                                  size={20}
+                                  size={14}
                                   color="#4CAF50"
                                 />
-                                <Text style={styles.downloadedInfoText}>
-                                  {t("downloaded_locally")}
+                                <Text style={styles.audioLocalText}>
+                                  {t("offline")}
+                                </Text>
+                              </View>
+                            )}
+                          </View>
+
+                          {/* Contrôles de lecture principaux */}
+                          <View style={styles.audioMainControls}>
+                            <TouchableOpacity
+                              style={[
+                                styles.audioPlayButton,
+                                currentlyPlaying === currentRecitation.id &&
+                                  isPlaying &&
+                                  styles.audioPlayButtonActive,
+                              ]}
+                              onPress={() => {
+                                if (
+                                  currentlyPlaying === currentRecitation.id &&
+                                  isPlaying
+                                ) {
+                                  pauseRecitation();
+                                } else if (
+                                  currentlyPlaying === currentRecitation.id
+                                ) {
+                                  resumeRecitation();
+                                } else {
+                                  playRecitation(currentRecitation);
+                                }
+                              }}
+                              disabled={isLoading}
+                            >
+                              <MaterialCommunityIcons
+                                name={
+                                  isLoading
+                                    ? "loading"
+                                    : currentlyPlaying ===
+                                        currentRecitation.id && isPlaying
+                                    ? "pause"
+                                    : "play"
+                                }
+                                size={40}
+                                color="#fff"
+                              />
+                            </TouchableOpacity>
+                          </View>
+
+                          {/* 🎯 NOUVEAU : Navigation entre sourates */}
+                          <View style={styles.audioNavigationContainer}>
+                            {/* Affichage de la sourate actuelle - AU-DESSUS */}
+                            <View style={styles.audioCurrentSurah}>
+                              <Text style={styles.audioCurrentSurahText}>
+                                {t("surah")} {selectedSourate}
+                              </Text>
+                              <Text style={styles.audioCurrentSurahName}>
+                                {getSelectedSourateLabel()}
+                              </Text>
+                            </View>
+
+                            {/* Info navigation discrète - EN DESSOUS */}
+                            <View style={styles.navigationInfoContainer}>
+                              <TouchableOpacity
+                                style={styles.navigationInfoButton}
+                                onPress={() => setShowNavigationTooltip(true)}
+                                activeOpacity={0.7}
+                              >
+                                <MaterialCommunityIcons
+                                  name="information-outline"
+                                  size={18}
+                                  color={
+                                    showNavigationTooltip
+                                      ? "#4ECDC4"
+                                      : "#B0B0B0"
+                                  }
+                                />
+                                <Text
+                                  style={[
+                                    styles.navigationInfoText,
+                                    showNavigationTooltip &&
+                                      styles.navigationInfoTextActive,
+                                  ]}
+                                >
+                                  Navigation
+                                </Text>
+                              </TouchableOpacity>
+                            </View>
+                          </View>
+
+                          {/* Barre de progression - TOUJOURS présente pour éviter les changements de layout */}
+                          <View style={styles.audioProgressContainer}>
+                            {playbackDuration > 0 ? (
+                              <>
+                                <Text style={styles.audioTimeText}>
+                                  {formatTime(playbackPosition)}
                                 </Text>
                                 <TouchableOpacity
-                                  style={styles.audioDeleteButton}
-                                  onPress={() =>
-                                    handleDeleteRecitation(currentRecitation)
-                                  }
+                                  style={styles.audioProgressBar}
+                                  onPress={(event) => {
+                                    const { locationX } = event.nativeEvent;
+                                    const width =
+                                      (event.currentTarget as any)?.props?.style
+                                        ?.width || 1;
+                                    const progress = Math.max(
+                                      0,
+                                      Math.min(1, locationX / width)
+                                    );
+                                    const newPosition =
+                                      progress * playbackDuration;
+                                    seekToPosition(newPosition);
+                                  }}
+                                  activeOpacity={0.8}
                                 >
-                                  <MaterialCommunityIcons
-                                    name="delete"
-                                    size={16}
-                                    color="#FF6B6B"
+                                  <View
+                                    style={[
+                                      styles.audioProgressFill,
+                                      {
+                                        width: `${
+                                          playbackDuration > 0
+                                            ? (playbackPosition /
+                                                playbackDuration) *
+                                              100
+                                            : 0
+                                        }%`,
+                                      },
+                                    ]}
                                   />
                                 </TouchableOpacity>
-                              </View>
-                            );
-                          }
-                        })()}
-                      </View>
+                                <Text style={styles.audioTimeText}>
+                                  {formatTime(playbackDuration)}
+                                </Text>
+                              </>
+                            ) : (
+                              <>
+                                <Text style={styles.audioTimeText}>--:--</Text>
+                                {/* NOUVEAU : Debug info pour comprendre pourquoi la durée n'est pas affichée */}
+                                {__DEV__ && (
+                                  <Text style={styles.debugText}>
+                                    Debug: pos={playbackPosition}, dur=
+                                    {playbackDuration}
+                                  </Text>
+                                )}
+                              </>
+                            )}
+                          </View>
 
-                      {/* Bouton stop */}
-                      <TouchableOpacity
-                        style={styles.audioStopButton}
-                        onPress={stopRecitation}
-                      >
-                        <MaterialCommunityIcons
-                          name="stop"
-                          size={24}
-                          color="#FF6B6B"
-                        />
-                        <Text style={styles.audioStopText}>{t("stop")}</Text>
-                      </TouchableOpacity>
+                          {/* Options de téléchargement/streaming */}
+                          <View style={styles.audioOptionsContainer}>
+                            {/* 🚀 NOUVEAU : Vérifier si téléchargement en cours */}
+                            {(() => {
+                              const downloadingState = downloadState.get(
+                                currentRecitation.id
+                              );
+                              const isDownloading =
+                                downloadingState?.isDownloading || false;
+                              const progress = downloadingState?.progress || 0;
+                              // const hasError = downloadingState?.error || false;
+
+                              if (isDownloading) {
+                                // Téléchargement en cours - Afficher la jauge de progression
+                                return (
+                                  <ProgressBar
+                                    progress={progress}
+                                    onCancel={() =>
+                                      handleNativeCancelDownload(
+                                        currentRecitation.id
+                                      )
+                                    }
+                                  />
+                                );
+                              } else if (!currentRecitation.isDownloaded) {
+                                // Pas téléchargé - Afficher le bouton de téléchargement
+                                return (
+                                  <TouchableOpacity
+                                    style={styles.audioDownloadButton}
+                                    onPress={() =>
+                                      handleNativeDownloadRecitation(
+                                        currentRecitation
+                                      )
+                                    }
+                                  >
+                                    <MaterialCommunityIcons
+                                      name="download"
+                                      size={20}
+                                      color="#FFD700"
+                                    />
+                                    <Text style={styles.audioDownloadText}>
+                                      {t("download")} (
+                                      {currentRecitation.fileSize}
+                                      MB)
+                                    </Text>
+                                  </TouchableOpacity>
+                                );
+                              } else {
+                                // Téléchargé - Afficher l'info et le bouton de suppression
+                                return (
+                                  <View style={styles.downloadedInfoContainer}>
+                                    <MaterialCommunityIcons
+                                      name="check-circle"
+                                      size={20}
+                                      color="#4CAF50"
+                                    />
+                                    <Text style={styles.downloadedInfoText}>
+                                      {t("downloaded_locally")}
+                                    </Text>
+                                    <TouchableOpacity
+                                      style={styles.audioDeleteButton}
+                                      onPress={() =>
+                                        handleDeleteRecitation(
+                                          currentRecitation
+                                        )
+                                      }
+                                    >
+                                      <MaterialCommunityIcons
+                                        name="delete"
+                                        size={16}
+                                        color="#FF6B6B"
+                                      />
+                                    </TouchableOpacity>
+                                  </View>
+                                );
+                              }
+                            })()}
+                          </View>
+
+                          {/* Bouton stop */}
+                          <TouchableOpacity
+                            style={styles.audioStopButton}
+                            onPress={stopRecitation}
+                          >
+                            <MaterialCommunityIcons
+                              name="stop"
+                              size={24}
+                              color="#FF6B6B"
+                            />
+                            <Text style={styles.audioStopText}>
+                              {t("stop")}
+                            </Text>
+                          </TouchableOpacity>
+                        </View>
+                      )}
                     </View>
-                  )}
-                </View>
-              </View>
-            </ScrollView>
-          </SafeAreaView>
+                  </Animated.View>
+                </ScrollView>
+              </PanGestureHandler>
+            </SafeAreaView>
+          </GestureHandlerRootView>
         </Modal>
 
         {/* Modal de sélection du récitateur */}
@@ -2475,6 +2800,60 @@ export default function QuranScreen() {
           </>
         )}
       </View>
+
+      {/* Modal d'information de navigation */}
+      <Modal
+        visible={showNavigationTooltip}
+        transparent={true}
+        animationType="fade"
+        onRequestClose={() => setShowNavigationTooltip(false)}
+      >
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalNavigationTooltip}>
+            <Text style={styles.modalNavigationTooltipTitle}>
+              {t("quran_navigation_modal.title")}
+            </Text>
+
+            <View style={styles.modalNavigationTooltipRow}>
+              <MaterialCommunityIcons
+                name="gesture-swipe-horizontal"
+                size={20}
+                color="#4ECDC4"
+              />
+              <Text style={styles.modalNavigationTooltipText}>
+                {t("quran_navigation_modal.swipe_instruction")}
+              </Text>
+            </View>
+
+            <View style={styles.modalNavigationTooltipRow}>
+              <MaterialCommunityIcons
+                name="widgets"
+                size={20}
+                color="#FFD700"
+              />
+              <Text style={styles.modalNavigationTooltipText}>
+                {t("quran_navigation_modal.widget_instruction")}
+              </Text>
+            </View>
+
+            <View style={styles.modalNavigationTooltipRow}>
+              <MaterialCommunityIcons name="play" size={20} color="#4CAF50" />
+              <Text style={styles.modalNavigationTooltipText}>
+                {t("quran_navigation_modal.play_instruction")}
+              </Text>
+            </View>
+
+            <TouchableOpacity
+              style={styles.modalCloseButton}
+              onPress={() => setShowNavigationTooltip(false)}
+            >
+              <Text style={styles.modalCloseButtonText}>
+                {t("quran_navigation_modal.close_button")}
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
     </ImageBackground>
   );
 }
@@ -2576,6 +2955,21 @@ const styles = StyleSheet.create({
     color: "#ba9c34",
     fontWeight: "500",
     marginLeft: 4,
+  },
+  diagnosticButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#ff6b6b",
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 4,
+    marginLeft: 8,
+  },
+  diagnosticButtonText: {
+    fontSize: 12,
+    color: "#ffffff",
+    marginLeft: 4,
+    fontWeight: "bold",
   },
   // 🌐 NOUVEAU : Styles pour le bouton de basculement mode hors ligne
   offlineManagerButton: {
@@ -3209,6 +3603,92 @@ const styles = StyleSheet.create({
     textShadowColor: "rgba(0,0,0,0.7)",
     textShadowOffset: { width: 0, height: 1 },
     textShadowRadius: 2,
+  },
+  // 🎯 NOUVEAU : Styles pour l'info navigation
+  navigationInfoContainer: {
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "100%",
+    paddingVertical: 8,
+    paddingHorizontal: 20,
+    marginTop: 8,
+    position: "relative",
+  },
+  navigationInfoButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingHorizontal: 10,
+    paddingVertical: 6,
+    borderRadius: 14,
+    backgroundColor: "rgba(255,255,255,0.08)",
+    borderWidth: 1,
+    borderColor: "rgba(255,255,255,0.1)",
+  },
+  navigationInfoText: {
+    color: "#B0B0B0",
+    fontSize: 12,
+    marginLeft: 4,
+    fontWeight: "600",
+  },
+  navigationInfoTextActive: {
+    color: "#4ECDC4",
+  },
+  // Styles de la Modal d'information de navigation
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: "rgba(0, 0, 0, 0.8)",
+    justifyContent: "center",
+    alignItems: "center",
+    paddingHorizontal: 20,
+  },
+  modalNavigationTooltip: {
+    backgroundColor: "rgba(20, 20, 20, 0.95)",
+    borderRadius: 16,
+    padding: 24,
+    width: "90%",
+    maxWidth: 350,
+    borderWidth: 2,
+    borderColor: "rgba(255, 255, 255, 0.2)",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 10 },
+    shadowOpacity: 0.5,
+    shadowRadius: 15,
+    elevation: 20,
+  },
+  modalNavigationTooltipTitle: {
+    color: "#FFD700",
+    fontSize: 18,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginBottom: 20,
+  },
+  modalNavigationTooltipRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 16,
+    paddingHorizontal: 8,
+  },
+  modalNavigationTooltipText: {
+    color: "#FFFFFF",
+    fontSize: 15,
+    marginLeft: 12,
+    flex: 1,
+    lineHeight: 20,
+  },
+  modalCloseButton: {
+    backgroundColor: "#4ECDC4",
+    borderRadius: 12,
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+    alignSelf: "center",
+    marginTop: 8,
+  },
+  modalCloseButtonText: {
+    color: "#FFFFFF",
+    fontSize: 16,
+    fontWeight: "600",
+    textAlign: "center",
   },
   audioCurrentSurah: {
     alignItems: "center",

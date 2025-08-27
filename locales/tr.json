@@ -1350,5 +1350,13 @@
     "bn": "বাংলা",
     "fa": "فارسی",
     "nl": "Nederlands"
+  },
+
+  "quran_navigation_modal": {
+    "title": "🎯 Navigasyon",
+    "swipe_instruction": "Görüntüyü değiştirmek için kaydırın",
+    "widget_instruction": "Ses ile navigasyon için widget",
+    "play_instruction": "Play gösterilen sesi başlatır",
+    "close_button": "Anlaşıldı!"
   }
 }

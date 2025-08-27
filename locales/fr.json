@@ -1356,5 +1356,13 @@
     "bn": "বাংলা",
     "fa": "فارسی",
     "nl": "Nederlands"
+  },
+
+  "quran_navigation_modal": {
+    "title": "🎯 Navigation",
+    "swipe_instruction": "Balayez pour changer l'affichage",
+    "widget_instruction": "Widget pour navigation avec audio",
+    "play_instruction": "Play lance l'audio affiché",
+    "close_button": "Compris !"
   }
 }

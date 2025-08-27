@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="#FFD700">
+    
+    <item>
+        <shape android:shape="oval">
+            <gradient
+                android:startColor="#4ECDC4"
+                android:endColor="#2C7A7A"
+                android:angle="45" />
+            <stroke
+                android:width="3dp"
+                android:color="#FFD700" />
+        </shape>
+    </item>
+    
+    <!-- Effet d'ombre interne -->
+    <item android:top="2dp">
+        <shape android:shape="oval">
+            <gradient
+                android:startColor="#1A000000"
+                android:endColor="#00000000"
+                android:angle="270" />
+        </shape>
+    </item>
+    
+</ripple>
