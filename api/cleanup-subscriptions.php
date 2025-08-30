@@ -7,6 +7,16 @@ header('Access-Control-Allow-Headers: Content-Type');
 // Charger les variables d'environnement
 require_once __DIR__ . '/../vendor/autoload.php';
 
+// 🔐 Vérifier le token cron pour sécuriser l'endpoint
+$cronToken = $_GET['cron_token'] ?? '';
+$expectedToken = $_ENV['CRON_TOKEN'] ?? 'prayer_app_cron_2024';
+
+if ($cronToken !== $expectedToken) {
+    http_response_code(401);
+    echo json_encode(['error' => 'Token cron invalide']);
+    exit();
+}
+
 // Configuration de la base de données
 $host = $_ENV['DB_HOST'] ?? 'localhost';
 $dbname = $_ENV['DB_NAME'] ?? 'ff42hr_MyAdhan';

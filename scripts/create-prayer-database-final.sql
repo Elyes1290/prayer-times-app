@@ -945,46 +945,294 @@ ANALYZE TABLE payment_monitoring;
 ANALYZE TABLE refresh_tokens;
 
 
--- supprimer un users et toutes ses données
 
--- ��️ COMMANDE SQL POUR SUPPRIMER UN UTILISATEUR ET TOUTES SES DONNÉES
--- Remplacez 'USER_ID' par l'ID de l'utilisateur à supprimer
--- Remplacez 'user@example.com' par l'email de l'utilisateur à supprimer
 
--- Option 1: Suppression par ID utilisateur
-DELETE FROM users WHERE id = USER_ID;
+-- =================================================
+-- 🎯 SYSTÈME VIP GRATUIT À VIE - AJOUT 2024
+-- =================================================
+-- Système pour offrir des abonnements premium gratuits
+-- à vos parents, famille et amis proches.
 
--- Option 2: Suppression par email utilisateur  
-DELETE FROM users WHERE email = 'user@example.com';
+-- 1. Ajouter les colonnes VIP à la table users
+ALTER TABLE users ADD COLUMN IF NOT EXISTS is_vip BOOLEAN DEFAULT FALSE COMMENT 'Utilisateur VIP avec premium gratuit à vie';
+ALTER TABLE users ADD COLUMN IF NOT EXISTS vip_granted_by VARCHAR(255) DEFAULT NULL COMMENT 'Qui a accordé le statut VIP (email de ladmin)';
+ALTER TABLE users ADD COLUMN IF NOT EXISTS vip_granted_at TIMESTAMP NULL DEFAULT NULL COMMENT 'Quand le statut VIP a été accordé';
+ALTER TABLE users ADD COLUMN IF NOT EXISTS vip_reason VARCHAR(500) DEFAULT NULL COMMENT 'Raison du statut VIP (ex: Parent, Ami proche, etc.)';
 
--- �� VÉRIFICATION AVANT SUPPRESSION (recommandé)
--- Exécutez d'abord ces requêtes pour voir ce qui sera supprimé :
+-- 2. Créer un index pour les requêtes VIP
+CREATE INDEX IF NOT EXISTS idx_users_vip_status ON users (is_vip);
 
--- Voir les informations de l'utilisateur
-SELECT id, email, user_first_name, premium_status, created_at, last_seen 
-FROM users 
-WHERE id = USER_ID OR email = 'user@example.com';
-
--- Compter les données associées qui seront supprimées automatiquement (CASCADE)
+-- 3. Vue pour lister tous les utilisateurs VIP et Premium
+CREATE OR REPLACE VIEW v_vip_users AS
 SELECT 
-    (SELECT COUNT(*) FROM user_sessions WHERE user_id = u.id) as sessions_count,
-    (SELECT COUNT(*) FROM refresh_tokens WHERE user_id = u.id) as refresh_tokens_count,
-    (SELECT COUNT(*) FROM usage_logs WHERE user_id = u.id) as usage_logs_count,
-    (SELECT COUNT(*) FROM favorites WHERE user_id = u.id) as favorites_count,
-    (SELECT COUNT(*) FROM premium_purchases WHERE user_id = u.id) as premium_purchases_count,
-    (SELECT COUNT(*) FROM premium_subscriptions WHERE user_id = u.id) as premium_subscriptions_count,
-    (SELECT COUNT(*) FROM premium_users WHERE user_id = u.id) as premium_users_count,
-    (SELECT COUNT(*) FROM premium_payments WHERE user_id = u.id) as premium_payments_count,
-    (SELECT COUNT(*) FROM user_stats WHERE user_id = u.id) as user_stats_count,
-    (SELECT COUNT(*) FROM prayer_logs WHERE user_id = u.id) as prayer_logs_count,
-    (SELECT COUNT(*) FROM user_achievements WHERE user_id = u.id) as achievements_count,
-    (SELECT COUNT(*) FROM user_backups WHERE user_id = u.id) as backups_count,
-    (SELECT COUNT(*) FROM bug_reports WHERE user_id = u.id) as bug_reports_count
-FROM users u 
-WHERE u.id = USER_ID OR u.email = 'user@example.com';
+    id,
+    email,
+    user_first_name,
+    is_vip,
+    vip_reason,
+    vip_granted_by,
+    vip_granted_at,
+    premium_status,
+    subscription_type,
+    premium_expiry,
+    created_at,
+    last_seen,
+    CASE 
+        WHEN is_vip = 1 THEN 'VIP Gratuit à Vie'
+        WHEN premium_status = 1 AND premium_expiry > NOW() THEN 'Premium Payant Actif'
+        WHEN premium_status = 1 AND premium_expiry <= NOW() THEN 'Premium Payant Expiré'
+        ELSE 'Gratuit'
+    END as account_type,
+    CASE 
+        WHEN is_vip = 1 THEN TRUE
+        WHEN premium_status = 1 AND premium_expiry > NOW() THEN TRUE
+        ELSE FALSE
+    END as has_premium_access
+FROM users 
+WHERE is_vip = 1 OR premium_status = 1
+ORDER BY vip_granted_at DESC, premium_activated_at DESC;
 
+-- 4. Vue pour les statistiques VIP
+CREATE OR REPLACE VIEW v_vip_stats AS
+SELECT 
+    COUNT(*) as total_vip_users,
+    COUNT(CASE WHEN last_seen > DATE_SUB(NOW(), INTERVAL 30 DAY) THEN 1 END) as active_vip_users,
+    COUNT(CASE WHEN vip_reason = 'Parent du développeur' THEN 1 END) as family_vip,
+    COUNT(CASE WHEN vip_reason = 'Ami proche' THEN 1 END) as friends_vip,
+    COUNT(CASE WHEN vip_reason = 'Bêta testeur' THEN 1 END) as beta_testers_vip,
+    COUNT(CASE WHEN vip_reason = 'Contributeur' THEN 1 END) as contributors_vip
+FROM users WHERE is_vip = 1;
 
+-- =================================================
+-- 🎯 EXEMPLES DE DONNÉES VIP (DÉCOMMENTEZ POUR UTILISER)
+-- =================================================
 
+-- Créer des comptes VIP pour vos parents (REMPLACEZ LES EMAILS !)
+-- INSERT INTO users (
+--     email, password_hash, user_first_name,
+--     is_vip, premium_status, premium_expiry,
+--     vip_reason, vip_granted_by, vip_granted_at,
+--     created_at, updated_at, status
+-- ) VALUES 
+-- ('papa@email.com', '$2y$12$dummy_hash_replace_with_real', 'Papa', TRUE, 1, '2099-12-31 23:59:59', 'Parent du développeur', 'admin@myadhanapp.com', NOW(), NOW(), NOW(), 'active'),
+-- ('maman@email.com', '$2y$12$dummy_hash_replace_with_real', 'Maman', TRUE, 1, '2099-12-31 23:59:59', 'Parent du développeur', 'admin@myadhanapp.com', NOW(), NOW(), NOW(), 'active');
 
+-- Transformer un utilisateur existant en VIP
+-- UPDATE users SET 
+--     is_vip = TRUE, 
+--     premium_status = 1,
+--     premium_expiry = '2099-12-31 23:59:59',
+--     vip_reason = 'Famille proche',
+--     vip_granted_by = 'admin@myadhanapp.com',
+--     vip_granted_at = NOW(),
+--     updated_at = NOW()
+-- WHERE email = 'ami@email.com';
+
+-- =================================================
+-- 🔍 REQUÊTES UTILES POUR GÉRER LES VIP
+-- =================================================
+
+-- Lister tous les VIP
+-- SELECT * FROM v_vip_users WHERE is_vip = 1;
+
+-- Statistiques VIP
+-- SELECT * FROM v_vip_stats;
+
+-- Compter les utilisateurs par type
+-- SELECT account_type, COUNT(*) as count FROM v_vip_users GROUP BY account_type;
+
+-- Voir les VIP actifs récemment
+-- SELECT email, user_first_name, vip_reason, last_seen 
+-- FROM users 
+-- WHERE is_vip = 1 AND last_seen > DATE_SUB(NOW(), INTERVAL 7 DAY)
+-- ORDER BY last_seen DESC;
+
+-- =================================================
+-- 🕐 SYSTÈME DE GESTION D'EXPIRATION AUTOMATIQUE
+-- =================================================
+-- Procédures et vues pour gérer automatiquement les abonnements expirés
+
+-- 1. Vue pour identifier les abonnements expirés
+CREATE OR REPLACE VIEW v_expired_subscriptions AS
+SELECT 
+    u.id as user_id,
+    u.email,
+    u.user_first_name,
+    u.premium_expiry,
+    u.subscription_type,
+    TIMESTAMPDIFF(DAY, u.premium_expiry, NOW()) as days_expired,
+    ps.stripe_subscription_id,
+    pp.id as purchase_id
+FROM users u
+LEFT JOIN premium_subscriptions ps ON u.id = ps.user_id
+LEFT JOIN premium_purchases pp ON u.id = pp.user_id AND pp.status = 'active'
+WHERE u.premium_status = 1 
+    AND u.is_vip = FALSE 
+    AND u.premium_expiry IS NOT NULL 
+    AND u.premium_expiry < NOW()
+ORDER BY u.premium_expiry ASC;
+
+-- 2. Vue pour les abonnements qui expirent bientôt (7 jours)
+CREATE OR REPLACE VIEW v_expiring_soon_subscriptions AS
+SELECT 
+    u.id as user_id,
+    u.email,
+    u.user_first_name,
+    u.premium_expiry,
+    u.subscription_type,
+    TIMESTAMPDIFF(DAY, NOW(), u.premium_expiry) as days_remaining,
+    ps.stripe_subscription_id
+FROM users u
+LEFT JOIN premium_subscriptions ps ON u.id = ps.user_id
+WHERE u.premium_status = 1 
+    AND u.is_vip = FALSE 
+    AND u.premium_expiry IS NOT NULL 
+    AND u.premium_expiry > NOW() 
+    AND u.premium_expiry < DATE_ADD(NOW(), INTERVAL 7 DAY)
+ORDER BY u.premium_expiry ASC;
+
+-- 3. Requêtes pour le nettoyage des abonnements expirés (sans procédure stockée)
+-- Ces requêtes peuvent être exécutées directement ou via le script PHP
+
+-- ⚠️ COMMANDES POUR NETTOYAGE MANUEL DES ABONNEMENTS EXPIRÉS
+-- Exécutez ces requêtes quand vous voulez nettoyer les abonnements expirés :
+
+-- Voir combien d'utilisateurs expirés avant nettoyage
+-- SELECT COUNT(*) as expired_users FROM v_expired_subscriptions;
+-- SELECT COUNT(*) as soon_expiring_users FROM v_expiring_soon_subscriptions;
+
+-- 1. Désactiver les utilisateurs premium expirés (sauf VIP)
+-- UPDATE users 
+-- SET premium_status = 0, updated_at = NOW()
+-- WHERE premium_status = 1 
+--     AND is_vip = FALSE 
+--     AND premium_expiry IS NOT NULL 
+--     AND premium_expiry < NOW();
+
+-- 2. Marquer les abonnements comme expirés
+-- UPDATE premium_subscriptions ps
+-- JOIN users u ON ps.user_id = u.id
+-- SET ps.status = 'expired', ps.updated_at = NOW()
+-- WHERE u.premium_expiry < NOW() 
+--     AND u.is_vip = FALSE
+--     AND ps.status = 'active';
+
+-- 3. Désactiver dans premium_users
+-- UPDATE premium_users pu
+-- JOIN users u ON pu.user_id = u.id
+-- SET pu.is_active = FALSE, pu.deactivated_at = NOW()
+-- WHERE u.premium_expiry < NOW() 
+--     AND u.is_vip = FALSE
+--     AND pu.is_active = TRUE;
+
+-- 4. Marquer les achats comme expirés
+-- UPDATE premium_purchases pp
+-- JOIN users u ON pp.user_id = u.id
+-- SET pp.status = 'expired'
+-- WHERE u.premium_expiry < NOW() 
+--     AND u.is_vip = FALSE
+--     AND pp.status = 'active';
+
+-- 5. Logger le nettoyage (optionnel)
+-- INSERT INTO maintenance_logs (operation, users_affected, details, executed_at)
+-- VALUES ('manual_cleanup_expired_subscriptions', 
+--         (SELECT COUNT(*) FROM users WHERE premium_status = 0 AND premium_expiry < NOW()), 
+--         CONCAT('Manual cleanup executed at: ', NOW()), 
+--         NOW());
+
+-- 4. Table pour les logs de maintenance (requis pour la procédure ci-dessus)
+CREATE TABLE IF NOT EXISTS maintenance_logs (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    operation VARCHAR(100) NOT NULL,
+    users_affected INT DEFAULT 0,
+    details TEXT,
+    executed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    INDEX idx_maintenance_operation (operation),
+    INDEX idx_maintenance_date (executed_at)
+);
+
+-- =================================================
+-- 🗑️ SUPPRESSION D'UTILISATEUR (RGPD / DEMANDES DE COMPTE)
+-- =================================================
+-- Section dédiée pour traiter les demandes de suppression de compte
+-- Conforme RGPD et réglementations de protection des données
+-- ⚠️ TOUTES LES COMMANDES SONT COMMENTÉES POUR ÉVITER LES SUPPRESSIONS ACCIDENTELLES
+
+-- 🔍 ÉTAPE 1: VÉRIFICATION AVANT SUPPRESSION (OBLIGATOIRE)
+-- Toujours vérifier les données avant suppression définitive
+
+-- Voir les informations complètes de l'utilisateur (REMPLACEZ L'EMAIL !)
+-- SELECT id, email, user_first_name, premium_status, is_vip, created_at, last_seen,
+--        subscription_type, premium_expiry, vip_reason
+-- FROM users 
+-- WHERE email = 'utilisateur@supprimer.com';
+
+-- Compter TOUTES les données associées qui seront supprimées (CASCADE)
+-- SELECT 
+--     u.id,
+--     u.email,
+--     u.user_first_name,
+--     CASE WHEN u.is_vip THEN 'VIP' WHEN u.premium_status THEN 'Premium' ELSE 'Gratuit' END as account_type,
+--     (SELECT COUNT(*) FROM user_sessions WHERE user_id = u.id) as sessions_count,
+--     (SELECT COUNT(*) FROM refresh_tokens WHERE user_id = u.id) as refresh_tokens_count,
+--     (SELECT COUNT(*) FROM usage_logs WHERE user_id = u.id) as usage_logs_count,
+--     (SELECT COUNT(*) FROM favorites WHERE user_id = u.id) as favorites_count,
+--     (SELECT COUNT(*) FROM premium_purchases WHERE user_id = u.id) as premium_purchases_count,
+--     (SELECT COUNT(*) FROM premium_subscriptions WHERE user_id = u.id) as premium_subscriptions_count,
+--     (SELECT COUNT(*) FROM premium_users WHERE user_id = u.id) as premium_users_count,
+--     (SELECT COUNT(*) FROM premium_payments WHERE user_id = u.id) as premium_payments_count,
+--     (SELECT COUNT(*) FROM user_stats WHERE user_id = u.id) as user_stats_count,
+--     (SELECT COUNT(*) FROM prayer_logs WHERE user_id = u.id) as prayer_logs_count,
+--     (SELECT COUNT(*) FROM user_achievements WHERE user_id = u.id) as achievements_count,
+--     (SELECT COUNT(*) FROM user_backups WHERE user_id = u.id) as backups_count,
+--     (SELECT COUNT(*) FROM bug_reports WHERE user_id = u.id) as bug_reports_count
+-- FROM users u 
+-- WHERE u.email = 'utilisateur@supprimer.com';
+
+-- 🗑️ ÉTAPE 2: SUPPRESSION DÉFINITIVE (DÉCOMMENTEZ ET ADAPTEZ)
+-- ⚠️ ATTENTION : Ces commandes suppriment DÉFINITIVEMENT toutes les données !
+-- ⚠️ SAUVEGARDEZ les données importantes avant suppression si nécessaire
+
+-- 📝 LOGS DE SUPPRESSION (Recommandé pour traçabilité RGPD)
+-- INSERT INTO maintenance_logs (operation, users_affected, details, executed_at)
+-- VALUES ('user_deletion_request', 1, 
+--         CONCAT('User deleted: Email=utilisateur@supprimer.com, Request_date=', NOW()),
+--         NOW());
+
+-- Suppression définitive par email (REMPLACEZ L'EMAIL !)
+-- DELETE FROM users WHERE email = 'utilisateur@supprimer.com';
+
+-- 🔍 ÉTAPE 3: VÉRIFICATION POST-SUPPRESSION
+-- Confirmer que l'utilisateur et toutes ses données ont été supprimés
+-- SELECT COUNT(*) as remaining_user_data FROM users WHERE email = 'utilisateur@supprimer.com';
+
+-- =================================================
+-- 💡 PROCÉDURE COMPLÈTE POUR DEMANDE RGPD
+-- =================================================
+-- Utilisation recommandée pour les demandes de suppression de compte
+
+-- EXEMPLE CONCRET D'UTILISATION :
+-- 1. Quelqu'un demande la suppression de son compte : support@exemple.com
+
+-- 2. D'abord IDENTIFIER l'utilisateur
+-- SELECT id, email, user_first_name, premium_status, is_vip, created_at
+-- FROM users WHERE email = 'support@exemple.com';
+
+-- 3. SAUVEGARDER (optionnel - si données importantes)
+-- CREATE TABLE user_deletion_backup_20241201 AS
+-- SELECT * FROM users WHERE email = 'support@exemple.com';
+
+-- 4. LOGGER la demande (pour traçabilité)
+-- INSERT INTO maintenance_logs (operation, users_affected, details, executed_at)
+-- VALUES ('gdpr_deletion_request', 1, 
+--         'RGPD deletion request for: support@exemple.com',
+--         NOW());
+
+-- 5. SUPPRIMER définitivement
+-- DELETE FROM users WHERE email = 'support@exemple.com';
+
+-- 6. CONFIRMER la suppression
+-- SELECT 'Suppression RGPD terminée avec succès' as status 
+-- WHERE NOT EXISTS (SELECT 1 FROM users WHERE email = 'support@exemple.com');
 
 

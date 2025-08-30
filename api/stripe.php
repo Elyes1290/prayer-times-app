@@ -27,24 +27,24 @@ use Stripe\Exception\ApiErrorException;
 // Configuration Stripe
 Stripe::setApiKey(STRIPE_SECRET_KEY);
 
-// Configuration des produits premium
+// Configuration des produits premium - MODE TEST TEMPORAIRE 🧪
 $PREMIUM_PRODUCTS = [
     'monthly' => [
-        'price_id' => 'price_1RskBqDJEhmyFnElZtadHqsG', // Premium Mensuel (TEST)
+        'price_id' => 'price_1RskBqDJEhmyFnElZtadHqsG', // Premium Mensuel (TEST) 🧪
         // 'price_id' => 'price_1RsTUJDYlp8PcvcNUQz2zTro', // Premium Mensuel (PROD)
         'amount' => 199,
         'currency' => 'eur',
         'interval' => 'month',
     ],
     'yearly' => [
-        'price_id' => 'price_1RskCEDJEhmyFnElkaEs0I8O', // Premium Annuel (TEST)
+        'price_id' => 'price_1RskCEDJEhmyFnElkaEs0I8O', // Premium Annuel (TEST) 🧪
         // 'price_id' => 'price_1RsTV3DYlp8PcvcNlOaFW2CW', // Premium Annuel (PROD)
         'amount' => 1999,
         'currency' => 'eur',
         'interval' => 'year',
     ],
     'family' => [
-        'price_id' => 'price_1RskCeDJEhmyFnElSE6iVxi8', // Premium Familial (TEST)
+        'price_id' => 'price_1RskCeDJEhmyFnElSE6iVxi8', // Premium Familial (TEST) 🧪
         // 'price_id' => 'price_1RsTVXDYlp8PcvcNERdlWk9n', // Premium Familial (PROD)
         'amount' => 2999,
         'currency' => 'eur',
@@ -1125,43 +1125,48 @@ function insertPremiumSubscription($userId, $sessionId, $subscriptionType) {
 
 // Ancienne fonction supprimée - on utilise maintenant createUserViaExistingAPI()
 
-// Fonction pour mettre à jour le statut premium d'un utilisateur existant
+// 🔄 FONCTION AMÉLIORÉE : Mise à jour premium pour utilisateurs existants (renouvellements)
 function updateUserPremiumStatus($userId, $subscriptionType, $sessionId) {
     try {
         $pdo = getDBConnection();
+        $pdo->beginTransaction();
         
-        // Mettre à jour l'utilisateur
+        // Calculer la nouvelle date d'expiration
+        $expiryDate = match($subscriptionType) {
+            'monthly' => date('Y-m-d H:i:s', strtotime('+1 month')),
+            'yearly' => date('Y-m-d H:i:s', strtotime('+1 year')),
+            'family' => date('Y-m-d H:i:s', strtotime('+1 year')),
+            default => date('Y-m-d H:i:s', strtotime('+1 year'))
+        };
+        
+        logError("🔄 Renouvellement premium - User ID: $userId, Type: $subscriptionType, Expiry: $expiryDate");
+        
+        // 1. Mettre à jour l'utilisateur avec la nouvelle structure
         $stmt = $pdo->prepare("
             UPDATE users 
-            SET is_premium = 1, 
-                premium_type = ?, 
-                premium_start_date = NOW(),
+            SET premium_status = 1, 
+                subscription_type = ?, 
+                subscription_id = ?,
+                premium_expiry = ?,
+                premium_activated_at = NOW(),
                 updated_at = NOW()
             WHERE id = ?
         ");
         
-        $stmt->execute([$subscriptionType, $userId]);
+        $stmt->execute([$subscriptionType, $sessionId, $expiryDate, $userId]);
         
-        // Enregistrer l'abonnement
-        $stmt = $pdo->prepare("
-            INSERT INTO premium_subscriptions (
-                user_id,
-                stripe_subscription_id,
-                subscription_type,
-                status,
-                created_at
-            ) VALUES (?, ?, ?, 'active', NOW())
-        ");
+        // 2. Enregistrer le nouvel abonnement
+        insertPremiumSubscription($userId, $sessionId, $subscriptionType);
         
-        $stmt->execute([
-            $userId,
-            $sessionId,
-            $subscriptionType
-        ]);
-        
+        $pdo->commit();
+        logError("✅ Renouvellement premium réussi pour l'utilisateur $userId");
         
     } catch (Exception $e) {
-        logError("Erreur mise à jour statut premium", $e);
+        if ($pdo->inTransaction()) {
+            $pdo->rollBack();
+        }
+        logError("❌ Erreur renouvellement premium", $e);
+        throw $e;
     }
 }
 

@@ -514,26 +514,79 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
             });
           }
         } else {
-          // Inscription - Vérifier si l'email existe d'abord
+          // 🔄 NOUVEAU : Inscription intelligente - Gérer les renouvellements
           try {
             console.log("🔍 Vérification existence email:", currentEmail);
             const checkResult = await apiClient.checkEmailExists(currentEmail);
             console.log("🔍 Résultat vérification email:", checkResult);
 
             if (checkResult.data && checkResult.data.exists === true) {
-              console.log("❌ Email existe déjà !");
-              showLocalToast({
-                type: "error",
-                title: t("toasts.error"),
-                message:
-                  "Un compte existe déjà avec cet email. Connectez-vous plutôt.",
-              });
-              setIsLoading(false);
-              return;
+              console.log(
+                "🔍 Email existe déjà - Vérifier le statut premium..."
+              );
+
+              // 🎯 Vérifier si l'utilisateur a un premium actif ou s'il peut renouveler
+              try {
+                const userResult = await apiClient.getUserByEmail(currentEmail);
+
+                if (userResult.success && userResult.data) {
+                  const userData = userResult.data;
+
+                  // 🚀 Si l'utilisateur est premium ET actif, bloquer
+                  if (userData.premium_active === true) {
+                    showLocalToast({
+                      type: "info",
+                      title: t("toasts.already_premium"),
+                      message:
+                        "Vous avez déjà un abonnement premium actif. Connectez-vous pour accéder à vos fonctionnalités.",
+                    });
+                    setIsLoading(false);
+                    return;
+                  }
+
+                  // 🔄 Si l'utilisateur existe mais premium expiré/inactif, permettre le renouvellement
+                  if (
+                    userData.premium_active === false ||
+                    userData.premium_status === 0
+                  ) {
+                    console.log(
+                      "✅ Utilisateur existant avec premium expiré - Permettre le renouvellement"
+                    );
+                    showLocalToast({
+                      type: "info",
+                      title: t("toasts.renewal_detected"),
+                      message:
+                        "Compte existant détecté. Votre abonnement sera renouvelé.",
+                    });
+                    // Continuer vers le paiement pour renouvellement
+                  } else {
+                    // 🔄 Cas par défaut - demander de se connecter
+                    showLocalToast({
+                      type: "info",
+                      title: t("toasts.account_exists"),
+                      message:
+                        "Un compte existe avec cet email. Connectez-vous pour gérer votre abonnement.",
+                    });
+                    setIsLoading(false);
+                    return;
+                  }
+                } else {
+                  // API ne trouve pas l'utilisateur, continuer normalement
+                  console.log(
+                    "🔍 Utilisateur non trouvé via API - Continuer l'inscription"
+                  );
+                }
+              } catch (userCheckError) {
+                // Erreur lors de la vérification utilisateur - continuer vers paiement
+                console.log(
+                  "⚠️ Erreur vérification utilisateur, permettre le renouvellement:",
+                  userCheckError
+                );
+              }
             }
 
-            // Email libre - redirection vers paiement
-            console.log("✅ Email libre - redirection vers paiement");
+            // Email libre OU renouvellement autorisé - redirection vers paiement
+            console.log("✅ Redirection vers paiement autorisée");
 
             // Stocker temporairement les données d'inscription
             const registrationData = {

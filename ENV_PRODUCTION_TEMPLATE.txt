@@ -1,0 +1,51 @@
+# 🚀 VARIABLES D'ENVIRONNEMENT DE PRODUCTION - MyAdhan Prayer App
+# ================================================================
+# ⚠️ COPIER CE CONTENU DANS UN FICHIER .env SUR VOTRE SERVEUR
+
+# 🔐 CONFIGURATION BASE DE DONNÉES
+DB_HOST=ff42hr.myd.infomaniak.com
+DB_NAME=ff42hr_MyAdhan
+DB_USER=ff42hr_prayer
+DB_PASSWORD=VOTRE_VRAI_MOT_DE_PASSE_BDD
+DB_PORT=3306
+
+# 💳 STRIPE - CLÉS DE PRODUCTION (OBLIGATOIRE)
+STRIPE_SECRET_KEY=sk_live_VOTRE_VRAIE_CLE_SECRETE
+STRIPE_PUBLISHABLE_KEY=pk_live_VOTRE_VRAIE_CLE_PUBLIQUE
+STRIPE_WEBHOOK_SECRET=whsec_VOTRE_VRAI_WEBHOOK_SECRET
+
+# 🔐 SÉCURITÉ API
+API_SECRET_KEY=votre_cle_api_securisee_32_caracteres_min
+JWT_SECRET=votre_secret_jwt_securise_32_caracteres_min
+SESSION_SECRET=votre_secret_session_securise_32_caracteres_min
+BCRYPT_ROUNDS=12
+
+# 🌐 URLs DE PRODUCTION
+API_BASE_URL=https://myadhanapp.com/api
+CORS_ALLOWED_ORIGINS=https://myadhanapp.com
+
+# 📊 MONITORING & LOGS (PRODUCTION)
+NODE_ENV=production
+ENABLE_DEBUG_LOGS=false
+LOG_API_REQUESTS=false
+
+# ⚡ PERFORMANCE & CACHE
+CACHE_TTL_PRAYER_TIMES=3600
+CACHE_TTL_USER_DATA=1800
+RATE_LIMIT_MAX_REQUESTS=100
+RATE_LIMIT_WINDOW_MS=900000
+
+# 🔑 API EXTERNES
+HADITH_API_KEY=VOTRE_VRAIE_CLE_HADITH_API
+
+# 🎯 SYSTÈME VIP (NOUVEAU)
+ADMIN_VIP_TOKEN=votre_token_admin_vip_ultra_securise_2024
+
+# 🔐 SÉCURITÉ SUPPLÉMENTAIRE
+ENCRYPTION_KEY=votre_cle_chiffrement_32_caracteres_min
+
+# 🚨 ATTENTION SÉCURITÉ
+# ⚠️ Ce fichier contient des informations sensibles
+# ⚠️ Permissions recommandées : chmod 600 .env
+# ⚠️ Ne JAMAIS commiter ce fichier dans Git
+# ⚠️ Faire des backups sécurisés de ce fichier

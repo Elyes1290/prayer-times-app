@@ -1,9 +1,8 @@
-// Configuration Stripe pour les abonnements premium
+// Configuration Stripe pour les abonnements premium - MODE PRODUCTION 🚀
 export const STRIPE_CONFIG = {
-  // Clés Stripe (sécurisées via variables d'environnement)
-  publishableKey:
-    process.env.STRIPE_PUBLISHABLE_KEY || "pk_test_your_publishable_key_here",
-  secretKey: process.env.STRIPE_SECRET_KEY || "sk_test_your_secret_key_here",
+  // Clés Stripe PRODUCTION (sécurisées via variables d'environnement uniquement)
+  publishableKey: process.env.STRIPE_PUBLISHABLE_KEY || "", // ⚠️ PRODUCTION: Pas de fallback test
+  secretKey: process.env.STRIPE_SECRET_KEY || "", // ⚠️ PRODUCTION: Pas de fallback test
 
   // URL de votre API backend pour les paiements
   apiUrl: "https://myadhanapp.com/api/stripe.php",

@@ -30,20 +30,23 @@ class RateLimiterNew {
     }
     
     public function checkRateLimit($ip, $action, $maxAttempts = 5, $timeWindow = 3600, $userAgent = null) {
-        // 🚫 DÉSACTIVATION TEMPORAIRE DU RATE LIMITING
-        // TODO: Réactiver après résolution du problème 429
-        error_log("🚫 Rate limiting désactivé temporairement pour IP: $ip, Action: $action");
+        // 🚀 PRODUCTION : Rate limiting intelligent basé sur l'environnement
+        $isProduction = isset($_ENV['NODE_ENV']) && $_ENV['NODE_ENV'] === 'production';
         
-        return [
-            'allowed' => true,
-            'blocked' => false,
-            'attempts' => 0,
-            'remaining_attempts' => 999,
-            'whitelisted' => true,
-            'message' => 'Rate limiting désactivé temporairement'
-        ];
+        if (!$isProduction) {
+            // Mode développement : Rate limiting désactivé pour les tests
+            error_log("🧪 Rate limiting désactivé en mode développement pour IP: $ip, Action: $action");
+            return [
+                'allowed' => true,
+                'blocked' => false,
+                'attempts' => 0,
+                'remaining_attempts' => 999,
+                'whitelisted' => true,
+                'message' => 'Rate limiting désactivé en développement'
+            ];
+        }
         
-        /* CODE ORIGINAL COMMENTÉ TEMPORAIREMENT
+        // 🔒 PRODUCTION : Rate limiting activé
         try {
             // WHITELIST SIMPLE
             if ($this->isWhitelisted($ip)) {
@@ -124,7 +127,6 @@ class RateLimiterNew {
                 'error' => 'Rate limiting temporairement indisponible'
             ];
         }
-        */
     }
     
     private function isWhitelisted($ip) {

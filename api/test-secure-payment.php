@@ -1,4 +1,16 @@
 <?php
+// 🚫 FICHIER DE TEST DÉSACTIVÉ EN PRODUCTION
+// Ce fichier est utilisé uniquement pour les tests de développement
+// Il DOIT être désactivé en production pour éviter l'exposition d'informations sensibles
+
+// ⚠️ VÉRIFICATION MODE PRODUCTION
+$isProduction = isset($_ENV['NODE_ENV']) && $_ENV['NODE_ENV'] === 'production';
+if ($isProduction) {
+    http_response_code(404);
+    echo json_encode(['error' => 'Endpoint non disponible en production']);
+    exit();
+}
+
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST, OPTIONS');

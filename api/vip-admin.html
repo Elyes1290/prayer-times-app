@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🎯 Administration VIP - MyAdhan Prayer App</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      .header {
+        text-align: center;
+        color: white;
+        margin-bottom: 30px;
+      }
+
+      .card {
+        background: white;
+        border-radius: 10px;
+        padding: 25px;
+        margin-bottom: 20px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .form-group {
+        margin-bottom: 15px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: #555;
+      }
+
+      input,
+      textarea,
+      select {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 14px;
+      }
+
+      textarea {
+        height: 80px;
+        resize: vertical;
+      }
+
+      .btn {
+        background: #4caf50;
+        color: white;
+        padding: 12px 25px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        margin-right: 10px;
+        margin-bottom: 10px;
+      }
+
+      .btn:hover {
+        background: #45a049;
+      }
+
+      .btn-danger {
+        background: #f44336;
+      }
+
+      .btn-danger:hover {
+        background: #da190b;
+      }
+
+      .btn-info {
+        background: #2196f3;
+      }
+
+      .btn-info:hover {
+        background: #1976d2;
+      }
+
+      .result {
+        margin-top: 15px;
+        padding: 10px;
+        border-radius: 5px;
+        display: none;
+      }
+
+      .success {
+        background: #dff0d8;
+        border: 1px solid #d6e9c6;
+        color: #3c763d;
+      }
+
+      .error {
+        background: #f2dede;
+        border: 1px solid #ebccd1;
+        color: #a94442;
+      }
+
+      .vip-list {
+        overflow-x: auto;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 15px;
+      }
+
+      th,
+      td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+      }
+
+      th {
+        background: #f8f9fa;
+        font-weight: bold;
+      }
+
+      .vip-badge {
+        background: #ff9800;
+        color: white;
+        padding: 3px 8px;
+        border-radius: 3px;
+        font-size: 12px;
+        font-weight: bold;
+      }
+
+      .premium-badge {
+        background: #4caf50;
+        color: white;
+        padding: 3px 8px;
+        border-radius: 3px;
+        font-size: 12px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>🎯 Administration VIP</h1>
+        <p>MyAdhan Prayer App - Gestion des comptes premium gratuits</p>
+      </div>
+
+      <!-- Authentification Admin -->
+      <div class="card">
+        <h2>🔐 Authentification Admin</h2>
+        <div class="form-group">
+          <label for="adminToken">Token Admin:</label>
+          <input
+            type="password"
+            id="adminToken"
+            placeholder="Entrez votre token admin..."
+          />
+        </div>
+        <button class="btn" onclick="authenticate()">Se connecter</button>
+        <div id="authResult" class="result"></div>
+      </div>
+
+      <!-- Panel Admin (caché initialement) -->
+      <div id="adminPanel" style="display: none">
+        <!-- Créer un utilisateur VIP -->
+        <div class="card">
+          <h2>➕ Créer un Utilisateur VIP</h2>
+          <div class="form-group">
+            <label for="newEmail">Email:</label>
+            <input type="email" id="newEmail" placeholder="parent@email.com" />
+          </div>
+          <div class="form-group">
+            <label for="newFirstName">Prénom:</label>
+            <input type="text" id="newFirstName" placeholder="Papa" />
+          </div>
+          <div class="form-group">
+            <label for="newPassword">Mot de passe:</label>
+            <input
+              type="text"
+              id="newPassword"
+              value="123456"
+              placeholder="123456"
+            />
+          </div>
+          <div class="form-group">
+            <label for="newReason">Raison VIP:</label>
+            <select id="newReason">
+              <option value="Parent du développeur">
+                Parent du développeur
+              </option>
+              <option value="Famille proche">Famille proche</option>
+              <option value="Ami proche">Ami proche</option>
+              <option value="Bêta testeur">Bêta testeur</option>
+              <option value="Contributeur">Contributeur</option>
+              <option value="Autre">Autre</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="newCustomReason"
+              >Raison personnalisée (optionnel):</label
+            >
+            <textarea
+              id="newCustomReason"
+              placeholder="Raison spécifique..."
+            ></textarea>
+          </div>
+          <button class="btn" onclick="createVipUser()">Créer VIP</button>
+          <div id="createResult" class="result"></div>
+        </div>
+
+        <!-- Accorder VIP à un utilisateur existant -->
+        <div class="card">
+          <h2>🎁 Accorder VIP à un Utilisateur Existant</h2>
+          <div class="form-group">
+            <label for="existingEmail">Email de l'utilisateur:</label>
+            <input
+              type="email"
+              id="existingEmail"
+              placeholder="utilisateur@email.com"
+            />
+          </div>
+          <div class="form-group">
+            <label for="existingReason">Raison VIP:</label>
+            <select id="existingReason">
+              <option value="Parent du développeur">
+                Parent du développeur
+              </option>
+              <option value="Famille proche">Famille proche</option>
+              <option value="Ami proche">Ami proche</option>
+              <option value="Bêta testeur">Bêta testeur</option>
+              <option value="Contributeur">Contributeur</option>
+              <option value="Autre">Autre</option>
+            </select>
+          </div>
+          <button class="btn" onclick="grantVipStatus()">Accorder VIP</button>
+          <div id="grantResult" class="result"></div>
+        </div>
+
+        <!-- Vérifier un utilisateur -->
+        <div class="card">
+          <h2>🔍 Vérifier un Utilisateur</h2>
+          <div class="form-group">
+            <label for="checkEmail">Email à vérifier:</label>
+            <input
+              type="email"
+              id="checkEmail"
+              placeholder="utilisateur@email.com"
+            />
+          </div>
+          <button class="btn btn-info" onclick="checkUser()">Vérifier</button>
+          <div id="checkResult" class="result"></div>
+        </div>
+
+        <!-- Liste des VIP -->
+        <div class="card">
+          <h2>👑 Utilisateurs VIP</h2>
+          <button class="btn btn-info" onclick="loadVipList()">
+            Actualiser la liste
+          </button>
+          <div id="vipListResult" class="result"></div>
+          <div class="vip-list">
+            <table id="vipTable" style="display: none">
+              <thead>
+                <tr>
+                  <th>Email</th>
+                  <th>Nom</th>
+                  <th>Type</th>
+                  <th>Raison</th>
+                  <th>Accordé par</th>
+                  <th>Date</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="vipTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Statistiques VIP -->
+        <div class="card">
+          <h2>📊 Statistiques VIP</h2>
+          <button class="btn btn-info" onclick="loadStats()">
+            Charger les stats
+          </button>
+          <div id="statsResult" class="result"></div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const API_BASE = "/api/vip-management.php";
+      let currentToken = "";
+
+      // Authentification admin
+      function authenticate() {
+        currentToken = document.getElementById("adminToken").value;
+
+        if (!currentToken) {
+          showResult("authResult", "Token requis", "error");
+          return;
+        }
+
+        // Test de connexion avec le token
+        checkUser()
+          .then(() => {
+            document.getElementById("adminPanel").style.display = "block";
+            showResult(
+              "authResult",
+              "✅ Authentification réussie !",
+              "success"
+            );
+            loadVipList();
+          })
+          .catch(() => {
+            showResult("authResult", "❌ Token invalide", "error");
+          });
+      }
+
+      // Créer un utilisateur VIP
+      async function createVipUser() {
+        const email = document.getElementById("newEmail").value;
+        const firstName = document.getElementById("newFirstName").value;
+        const password = document.getElementById("newPassword").value;
+        const reason = document.getElementById("newReason").value;
+        const customReason = document.getElementById("newCustomReason").value;
+
+        if (!email || !firstName) {
+          showResult("createResult", "Email et prénom requis", "error");
+          return;
+        }
+
+        const finalReason = reason === "Autre" ? customReason : reason;
+
+        try {
+          const response = await fetch(`${API_BASE}?action=create_vip_user`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${currentToken}`,
+            },
+            body: JSON.stringify({
+              email,
+              first_name: firstName,
+              password,
+              reason: finalReason,
+              granted_by: "admin@myadhanapp.com",
+            }),
+          });
+
+          const result = await response.json();
+
+          if (result.success) {
+            showResult(
+              "createResult",
+              `✅ ${result.message}<br>
+                         📧 Email: ${result.data.email}<br>
+                         🔑 Mot de passe: ${result.data.password}`,
+              "success"
+            );
+
+            // Reset form
+            document.getElementById("newEmail").value = "";
+            document.getElementById("newFirstName").value = "";
+            document.getElementById("newCustomReason").value = "";
+
+            // Refresh list
+            setTimeout(loadVipList, 1000);
+          } else {
+            showResult("createResult", `❌ ${result.message}`, "error");
+          }
+        } catch (error) {
+          showResult("createResult", `❌ Erreur: ${error.message}`, "error");
+        }
+      }
+
+      // Accorder VIP à un utilisateur existant
+      async function grantVipStatus() {
+        const email = document.getElementById("existingEmail").value;
+        const reason = document.getElementById("existingReason").value;
+
+        if (!email) {
+          showResult("grantResult", "Email requis", "error");
+          return;
+        }
+
+        try {
+          const response = await fetch(`${API_BASE}?action=grant_vip`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${currentToken}`,
+            },
+            body: JSON.stringify({
+              email,
+              reason,
+              granted_by: "admin@myadhanapp.com",
+            }),
+          });
+
+          const result = await response.json();
+
+          if (result.success) {
+            showResult("grantResult", `✅ ${result.message}`, "success");
+            document.getElementById("existingEmail").value = "";
+            setTimeout(loadVipList, 1000);
+          } else {
+            showResult("grantResult", `❌ ${result.message}`, "error");
+          }
+        } catch (error) {
+          showResult("grantResult", `❌ Erreur: ${error.message}`, "error");
+        }
+      }
+
+      // Vérifier un utilisateur
+      async function checkUser() {
+        const email = document.getElementById("checkEmail").value;
+
+        if (!email) {
+          showResult("checkResult", "Email requis", "error");
+          return;
+        }
+
+        try {
+          const response = await fetch(
+            `${API_BASE}?action=check_vip&email=${encodeURIComponent(email)}`,
+            {
+              headers: {
+                Authorization: `Bearer ${currentToken}`,
+              },
+            }
+          );
+
+          const result = await response.json();
+
+          if (result.success) {
+            const user = result.data;
+            const statusBadge = user.is_vip
+              ? '<span class="vip-badge">VIP</span>'
+              : user.premium_status
+              ? '<span class="premium-badge">Premium</span>'
+              : "Gratuit";
+
+            showResult(
+              "checkResult",
+              `✅ Utilisateur trouvé:<br>
+                         📧 Email: ${user.email}<br>
+                         👤 Nom: ${user.user_first_name}<br>
+                         🎯 Statut: ${statusBadge} ${user.premium_type}<br>
+                         💰 Premium: ${user.is_premium ? "Oui" : "Non"}<br>
+                         ${
+                           user.is_vip
+                             ? `🎁 Raison VIP: ${user.vip_reason}<br>`
+                             : ""
+                         }
+                         ${
+                           user.is_vip
+                             ? `👨‍💼 Accordé par: ${user.vip_granted_by}`
+                             : ""
+                         }`,
+              "success"
+            );
+          } else {
+            showResult("checkResult", `❌ ${result.message}`, "error");
+          }
+        } catch (error) {
+          showResult("checkResult", `❌ Erreur: ${error.message}`, "error");
+        }
+      }
+
+      // Charger la liste des VIP
+      async function loadVipList() {
+        try {
+          const response = await fetch(`${API_BASE}?action=list_vip`, {
+            headers: {
+              Authorization: `Bearer ${currentToken}`,
+            },
+          });
+
+          const result = await response.json();
+
+          if (result.success) {
+            const tbody = document.getElementById("vipTableBody");
+            tbody.innerHTML = "";
+
+            result.data.forEach((user) => {
+              const row = document.createElement("tr");
+              const badge = user.is_vip
+                ? '<span class="vip-badge">VIP</span>'
+                : '<span class="premium-badge">Premium</span>';
+
+              row.innerHTML = `
+                            <td>${user.email}</td>
+                            <td>${user.user_first_name || "N/A"}</td>
+                            <td>${badge}</td>
+                            <td>${user.vip_reason || "N/A"}</td>
+                            <td>${user.vip_granted_by || "N/A"}</td>
+                            <td>${
+                              user.vip_granted_at
+                                ? new Date(
+                                    user.vip_granted_at
+                                  ).toLocaleDateString()
+                                : "N/A"
+                            }</td>
+                            <td>
+                                ${
+                                  user.is_vip
+                                    ? `<button class="btn btn-danger" onclick="revokeVip(${user.id})">Révoquer</button>`
+                                    : ""
+                                }
+                            </td>
+                        `;
+              tbody.appendChild(row);
+            });
+
+            document.getElementById("vipTable").style.display = "table";
+            showResult(
+              "vipListResult",
+              `✅ ${result.data.length} utilisateur(s) VIP trouvé(s)`,
+              "success"
+            );
+          } else {
+            showResult("vipListResult", `❌ ${result.message}`, "error");
+          }
+        } catch (error) {
+          showResult("vipListResult", `❌ Erreur: ${error.message}`, "error");
+        }
+      }
+
+      // Charger les statistiques
+      async function loadStats() {
+        try {
+          const response = await fetch(`${API_BASE}?action=vip_stats`, {
+            headers: {
+              Authorization: `Bearer ${currentToken}`,
+            },
+          });
+
+          const result = await response.json();
+
+          if (result.success) {
+            const stats = result.data;
+            let reasonsHtml = "";
+
+            if (stats.by_reason && stats.by_reason.length > 0) {
+              reasonsHtml = "<br>📊 Répartition par raison:<br>";
+              stats.by_reason.forEach((item) => {
+                reasonsHtml += `• ${item.vip_reason}: ${item.count}<br>`;
+              });
+            }
+
+            showResult(
+              "statsResult",
+              `✅ Statistiques VIP:<br>
+                         👑 Total VIP: ${stats.total_vip}<br>
+                         ✅ VIP Actifs (30j): ${stats.active_vip}${reasonsHtml}`,
+              "success"
+            );
+          } else {
+            showResult("statsResult", `❌ ${result.message}`, "error");
+          }
+        } catch (error) {
+          showResult("statsResult", `❌ Erreur: ${error.message}`, "error");
+        }
+      }
+
+      // Révoquer le statut VIP
+      async function revokeVip(userId) {
+        if (!confirm("Êtes-vous sûr de vouloir révoquer le statut VIP ?")) {
+          return;
+        }
+
+        try {
+          const response = await fetch(`${API_BASE}?action=revoke_vip`, {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${currentToken}`,
+            },
+            body: JSON.stringify({ user_id: userId }),
+          });
+
+          const result = await response.json();
+
+          if (result.success) {
+            showResult("vipListResult", `✅ ${result.message}`, "success");
+            setTimeout(loadVipList, 1000);
+          } else {
+            showResult("vipListResult", `❌ ${result.message}`, "error");
+          }
+        } catch (error) {
+          showResult("vipListResult", `❌ Erreur: ${error.message}`, "error");
+        }
+      }
+
+      // Afficher un résultat
+      function showResult(elementId, message, type) {
+        const element = document.getElementById(elementId);
+        element.innerHTML = message;
+        element.className = `result ${type}`;
+        element.style.display = "block";
+      }
+    </script>
+  </body>
+</html>

@@ -6,6 +6,16 @@ header('Access-Control-Allow-Headers: Content-Type');
 
 require_once 'config.php';
 
+// 🔐 Vérifier le token cron pour sécuriser l'endpoint
+$cronToken = $_GET['cron_token'] ?? '';
+$expectedToken = $_ENV['CRON_TOKEN'] ?? 'prayer_app_cron_2024';
+
+if ($cronToken !== $expectedToken) {
+    http_response_code(401);
+    echo json_encode(['error' => 'Token cron invalide']);
+    exit();
+}
+
 try {
     $pdo = getDBConnection();
     

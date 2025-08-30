@@ -23,6 +23,12 @@ export interface PremiumUser {
   features: string[];
   hasPurchasedPremium?: boolean;
   premiumActivatedAt: Date | null;
+  // 🎯 VIP SYSTEM : Nouvelles propriétés VIP
+  isVip?: boolean;
+  vipReason?: string | null;
+  vipGrantedBy?: string | null;
+  vipGrantedAt?: Date | null;
+  premiumType?: string; // 'VIP Gratuit à Vie', 'Premium Payant', 'Gratuit'
 }
 
 export interface PremiumContextType {
@@ -109,6 +115,85 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
   const { showToast } = useToast();
   const { t } = useTranslation();
 
+  // 🕐 NOUVEAU : Vérifier l'expiration des abonnements localement
+  const checkLocalPremiumExpiration = React.useCallback(async () => {
+    try {
+      const storedUser = await AsyncStorage.getItem(STORAGE_KEYS.PREMIUM_USER);
+      if (!storedUser) return false;
+
+      const parsedUser = safeJsonParse<any>(storedUser, null);
+      if (!parsedUser) return false;
+
+      // Les VIP n'expirent jamais
+      if (parsedUser.isVip) {
+        console.log("👑 Utilisateur VIP - pas de vérification d'expiration");
+        return false;
+      }
+
+      // Vérifier l'expiration pour les premium payants
+      if (parsedUser.isPremium && parsedUser.expiryDate) {
+        const expiryDate = new Date(parsedUser.expiryDate);
+        const now = new Date();
+
+        if (expiryDate <= now) {
+          console.log(
+            "⏰ Abonnement premium expiré - désactivation automatique"
+          );
+
+          // Désactiver le premium localement
+          await AsyncStorage.setItem(
+            STORAGE_KEYS.PREMIUM_USER,
+            JSON.stringify({
+              ...defaultUser,
+              hasPurchasedPremium: parsedUser.hasPurchasedPremium || false,
+            })
+          );
+          setUser({
+            ...defaultUser,
+            hasPurchasedPremium: parsedUser.hasPurchasedPremium || false,
+          });
+
+          // Informer l'utilisateur
+          showToast?.({
+            type: "warning",
+            title: t("premium.expired_title", "Abonnement expiré"),
+            message: t(
+              "premium.expired_message",
+              "Votre abonnement premium a expiré. Renouvelez pour continuer à profiter des fonctionnalités premium."
+            ),
+          });
+
+          return true; // Expiration détectée
+        }
+
+        // Avertir si expiration dans moins de 7 jours
+        const daysRemaining = Math.ceil(
+          (expiryDate.getTime() - now.getTime()) / (1000 * 60 * 60 * 24)
+        );
+        if (daysRemaining <= 7 && daysRemaining > 0) {
+          console.log(`⚠️ Premium expire dans ${daysRemaining} jour(s)`);
+
+          showToast?.({
+            type: "warning",
+            title: t(
+              "premium.expiring_soon_title",
+              "Abonnement bientôt expiré"
+            ),
+            message: t(
+              "premium.expiring_soon_message",
+              `Votre abonnement expire dans ${daysRemaining} jour(s). Pensez à le renouveler !`
+            ),
+          });
+        }
+      }
+
+      return false; // Pas d'expiration
+    } catch (error) {
+      console.error("❌ Erreur vérification expiration locale:", error);
+      return false;
+    }
+  }, [showToast, t]); // Retirer deactivatePremium des deps pour éviter la circularité
+
   // --- Actions disponibles pour les effets ---
   const deactivatePremium = React.useCallback(async () => {
     try {
@@ -137,6 +222,24 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
   useEffect(() => {
     loadPremiumData();
   }, []);
+
+  // 🕐 NOUVEAU : Vérifier l'expiration toutes les heures quand l'app est active
+  useEffect(() => {
+    // Vérification initiale après 10 secondes
+    const initialCheck = setTimeout(() => {
+      checkLocalPremiumExpiration();
+    }, 10000);
+
+    // Vérification périodique toutes les heures
+    const hourlyCheck = setInterval(() => {
+      checkLocalPremiumExpiration();
+    }, 60 * 60 * 1000); // 1 heure
+
+    return () => {
+      clearTimeout(initialCheck);
+      clearInterval(hourlyCheck);
+    };
+  }, [checkLocalPremiumExpiration]);
 
   // 🔐 Vérification périodique du token côté serveur (toutes les 6h)
   useEffect(() => {
@@ -256,6 +359,9 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
     try {
       setLoading(true);
 
+      // 🕐 NOUVEAU : Vérifier l'expiration locale AVANT tout
+      await checkLocalPremiumExpiration();
+
       // 🔗 NOUVEAU : Synchroniser le token d'authentification vers les services natifs
       try {
         const token = await AsyncStorage.getItem("auth_token");
@@ -295,17 +401,30 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
         }
         if (!parsedUserData) return;
 
-        // Si l'utilisateur est premium dans user_data, créer/synchroniser @prayer_app_premium_user
-        if (parsedUserData.premium_status === 1) {
+        // 🎯 VIP SYSTEM : Si l'utilisateur est premium OU VIP dans user_data
+        if (
+          parsedUserData.premium_status === 1 ||
+          parsedUserData.is_vip === true
+        ) {
           console.log(
             "🔄 [SYNC] Synchronisation Premium Context depuis user_data"
           );
+
+          // 🎯 VIP SYSTEM : Déterminer le type de premium
+          const isVip = parsedUserData.is_vip === true;
+          const premiumType = isVip
+            ? "VIP Gratuit à Vie"
+            : parsedUserData.premium_status === 1
+            ? "Premium Payant"
+            : "Gratuit";
 
           const premiumUser = {
             isPremium: true,
             subscriptionType: parsedUserData.subscription_type || "yearly",
             subscriptionId: parsedUserData.subscription_id,
-            expiryDate: parsedUserData.premium_expiry
+            expiryDate: isVip
+              ? new Date(2099, 11, 31) // VIP = date très lointaine (2099)
+              : parsedUserData.premium_expiry
               ? new Date(parsedUserData.premium_expiry)
               : new Date(Date.now() + 365 * 24 * 60 * 60 * 1000),
             features: [
@@ -314,11 +433,20 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
               "premium_themes",
               "unlimited_bookmarks",
               "ad_free",
+              ...(isVip ? ["vip_exclusive", "lifetime_access"] : []),
             ],
             hasPurchasedPremium: true,
             premiumActivatedAt: parsedUserData.premium_activated_at
               ? new Date(parsedUserData.premium_activated_at)
               : new Date(),
+            // 🎯 VIP SYSTEM : Propriétés VIP
+            isVip: isVip,
+            vipReason: parsedUserData.vip_reason || null,
+            vipGrantedBy: parsedUserData.vip_granted_by || null,
+            vipGrantedAt: parsedUserData.vip_granted_at
+              ? new Date(parsedUserData.vip_granted_at)
+              : null,
+            premiumType: premiumType,
           };
 
           // Sauvegarder et utiliser ces données
@@ -327,7 +455,7 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
             JSON.stringify(premiumUser)
           );
           setUser(premiumUser);
-          console.log("✅ [SYNC] Premium Context synchronisé !");
+          console.log(`✅ [SYNC] ${premiumType} Context synchronisé !`);
           setLoading(false);
           return;
         }

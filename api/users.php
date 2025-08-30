@@ -243,12 +243,48 @@ function handleCreateUser() {
             return;
         }
         
-        // Vérifier si l'utilisateur existe déjà
+        // 🔄 NOUVEAU : Gérer intelligemment les utilisateurs existants pour les renouvellements
         if (!empty($data['email'])) {
-            $checkStmt = $pdo->prepare("SELECT id FROM users WHERE email = ? AND status = 'active'");
+            $checkStmt = $pdo->prepare("SELECT id, premium_status, premium_expiry FROM users WHERE email = ? AND status = 'active'");
             $checkStmt->execute([$data['email']]);
-            if ($checkStmt->fetch()) {
-                handleError("Un utilisateur avec cet email existe déjà", 409);
+            $existingUser = $checkStmt->fetch();
+            
+            if ($existingUser) {
+                // 🎯 Si c'est un renouvellement/upgrade premium, mettre à jour au lieu de bloquer
+                if (isset($data['premium_status']) && $data['premium_status'] == 1) {
+                    error_log("🔄 Utilisateur existant - Mise à jour premium pour: " . $data['email']);
+                    
+                    // Mettre à jour le statut premium de l'utilisateur existant
+                    $updateStmt = $pdo->prepare("
+                        UPDATE users SET 
+                            premium_status = ?, 
+                            subscription_type = ?, 
+                            subscription_id = ?, 
+                            premium_expiry = ?,
+                            premium_activated_at = NOW(),
+                            updated_at = NOW()
+                        WHERE id = ?
+                    ");
+                    
+                    $updateStmt->execute([
+                        $data['premium_status'],
+                        $data['subscription_type'] ?? null,
+                        $data['subscription_id'] ?? null,
+                        $data['premium_expiry'] ?? null,
+                        $existingUser['id']
+                    ]);
+                    
+                    // Retourner les données de l'utilisateur mis à jour
+                    $userStmt = $pdo->prepare("SELECT * FROM users WHERE id = ?");
+                    $userStmt->execute([$existingUser['id']]);
+                    $updatedUser = $userStmt->fetch();
+                    
+                    jsonResponse(true, formatUserData($updatedUser), "Abonnement premium renouvelé avec succès");
+                    return;
+                } else {
+                    // Blocage seulement pour les créations normales (non-premium)
+                    handleError("Un utilisateur avec cet email existe déjà", 409);
+                }
             }
         }
 
@@ -577,8 +613,20 @@ function formatUserData($user) {
     
     // 🚀 NOUVEAU : Ajouter des champs calculés avec vérification d'existence
     $formattedUser['has_password'] = !empty($user['password_hash'] ?? '');
-    $formattedUser['is_premium'] = (bool)($user['premium_status'] ?? 0);
+    
+    // 🎯 VIP SYSTEM : Vérifier le statut VIP pour le premium gratuit
+    $isVip = (bool)($user['is_vip'] ?? 0);
+    $hasPremiumStatus = (bool)($user['premium_status'] ?? 0);
+    
+    // Un utilisateur est premium s'il a un abonnement payant OU s'il est VIP
+    $formattedUser['is_premium'] = $hasPremiumStatus || $isVip;
     $formattedUser['premium_active'] = false;
+    
+    // 🎯 VIP SYSTEM : Ajouter les champs VIP
+    $formattedUser['is_vip'] = $isVip;
+    $formattedUser['vip_reason'] = $user['vip_reason'] ?? null;
+    $formattedUser['vip_granted_by'] = $user['vip_granted_by'] ?? null;
+    $formattedUser['vip_granted_at'] = $user['vip_granted_at'] ?? null;
     
     // 🚀 CORRECTION : S'assurer que les champs premium sont bien présents avec valeurs par défaut
     $formattedUser['premium_status'] = (int)($user['premium_status'] ?? 0);
@@ -587,16 +635,24 @@ function formatUserData($user) {
     $formattedUser['premium_expiry'] = $user['premium_expiry'] ?? null;
     $formattedUser['premium_activated_at'] = $user['premium_activated_at'] ?? null;
     
-    // Vérifier si le premium est encore actif (avec vérification d'existence)
-    if (($user['premium_status'] ?? 0) && ($user['premium_expiry'] ?? null)) {
+    // 🎯 VIP SYSTEM : Premium type pour l'affichage
+    if ($isVip) {
+        $formattedUser['premium_type'] = 'VIP Gratuit à Vie';
+        $formattedUser['premium_active'] = true; // VIP = toujours actif
+    } else if ($hasPremiumStatus && ($user['premium_expiry'] ?? null)) {
+        // Vérifier si le premium payant est encore actif
         try {
             $expiryDate = new DateTime($user['premium_expiry']);
             $now = new DateTime();
             $formattedUser['premium_active'] = $expiryDate > $now;
+            $formattedUser['premium_type'] = $formattedUser['premium_active'] ? 'Premium Payant' : 'Premium Expiré';
         } catch (Exception $e) {
             error_log("Warning: Erreur parsing date premium_expiry: " . $e->getMessage());
             $formattedUser['premium_active'] = false;
+            $formattedUser['premium_type'] = 'Premium Expiré';
         }
+    } else {
+        $formattedUser['premium_type'] = 'Gratuit';
     }
     
     // 🚀 DEBUG : Logger les données premium formatées
