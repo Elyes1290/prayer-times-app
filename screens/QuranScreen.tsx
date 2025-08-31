@@ -77,6 +77,116 @@ const ProgressBar = ({
   );
 };
 
+// 🎵 NOUVEAU : Composant AudioSeekBar amélioré avec contrôle tactile
+const AudioSeekBar = ({
+  currentPosition,
+  totalDuration,
+  onSeek,
+}: {
+  currentPosition: number;
+  totalDuration: number;
+  onSeek: (position: number) => void;
+}) => {
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragPosition, setDragPosition] = useState(0);
+  const [seekBarWidth, setSeekBarWidth] = useState(0);
+
+  const progress = totalDuration > 0 ? currentPosition / totalDuration : 0;
+  const displayPosition = isDragging ? dragPosition : currentPosition;
+  const displayProgress =
+    totalDuration > 0 ? displayPosition / totalDuration : 0;
+
+  const formatTime = (milliseconds: number): string => {
+    const totalSeconds = Math.floor(milliseconds / 1000);
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+    return `${minutes}:${seconds.toString().padStart(2, "0")}`;
+  };
+
+  const onGestureEvent = (event: any) => {
+    const { x } = event.nativeEvent;
+    if (isDragging && seekBarWidth > 0) {
+      const clampedX = Math.max(0, Math.min(x, seekBarWidth));
+      const newProgress = clampedX / seekBarWidth;
+      const newPosition = newProgress * totalDuration;
+      setDragPosition(newPosition);
+    }
+  };
+
+  const onHandlerStateChange = (event: any) => {
+    const { state, x } = event.nativeEvent;
+
+    if (state === State.BEGAN) {
+      setIsDragging(true);
+    } else if (state === State.END || state === State.CANCELLED) {
+      if (isDragging && seekBarWidth > 0) {
+        const clampedX = Math.max(0, Math.min(x, seekBarWidth));
+        const newProgress = clampedX / seekBarWidth;
+        const newPosition = newProgress * totalDuration;
+        onSeek(newPosition);
+      }
+      setIsDragging(false);
+    }
+  };
+
+  return (
+    <View style={styles.seekBarContainer}>
+      <Text
+        style={[styles.audioTimeText, isDragging && styles.audioTimeTextActive]}
+      >
+        {formatTime(displayPosition)}
+      </Text>
+
+      <View style={styles.seekBarWrapper}>
+        <PanGestureHandler
+          onGestureEvent={onGestureEvent}
+          onHandlerStateChange={onHandlerStateChange}
+          minDist={0}
+        >
+          <View
+            style={[
+              styles.audioProgressBar,
+              isDragging && styles.audioProgressBarActive,
+            ]}
+            onLayout={(event) =>
+              setSeekBarWidth(event.nativeEvent.layout.width)
+            }
+          >
+            <View
+              style={[
+                styles.audioProgressFill,
+                {
+                  width: `${Math.max(
+                    0,
+                    Math.min(100, displayProgress * 100)
+                  )}%`,
+                  backgroundColor: isDragging ? "#FF6B6B" : "#4ECDC4",
+                },
+              ]}
+            />
+          </View>
+        </PanGestureHandler>
+
+        {/* 🎯 Aperçu de temps pendant le glissement */}
+        {isDragging && (
+          <View
+            style={[
+              styles.seekPreview,
+              { left: `${Math.max(10, Math.min(75, displayProgress * 100))}%` }, // Ajusté sans curseur
+            ]}
+          >
+            <Text style={styles.seekPreviewText}>
+              {formatTime(displayPosition)}
+            </Text>
+          </View>
+        )}
+      </View>
+
+      <Text style={styles.audioTimeText}>{formatTime(totalDuration)}</Text>
+    </View>
+  );
+};
+
 export default function QuranScreen() {
   const { t, i18n } = useTranslation();
   const { user } = usePremium();
@@ -2209,46 +2319,11 @@ export default function QuranScreen() {
                           {/* Barre de progression - TOUJOURS présente pour éviter les changements de layout */}
                           <View style={styles.audioProgressContainer}>
                             {playbackDuration > 0 ? (
-                              <>
-                                <Text style={styles.audioTimeText}>
-                                  {formatTime(playbackPosition)}
-                                </Text>
-                                <TouchableOpacity
-                                  style={styles.audioProgressBar}
-                                  onPress={(event) => {
-                                    const { locationX } = event.nativeEvent;
-                                    const width =
-                                      (event.currentTarget as any)?.props?.style
-                                        ?.width || 1;
-                                    const progress = Math.max(
-                                      0,
-                                      Math.min(1, locationX / width)
-                                    );
-                                    const newPosition =
-                                      progress * playbackDuration;
-                                    seekToPosition(newPosition);
-                                  }}
-                                  activeOpacity={0.8}
-                                >
-                                  <View
-                                    style={[
-                                      styles.audioProgressFill,
-                                      {
-                                        width: `${
-                                          playbackDuration > 0
-                                            ? (playbackPosition /
-                                                playbackDuration) *
-                                              100
-                                            : 0
-                                        }%`,
-                                      },
-                                    ]}
-                                  />
-                                </TouchableOpacity>
-                                <Text style={styles.audioTimeText}>
-                                  {formatTime(playbackDuration)}
-                                </Text>
-                              </>
+                              <AudioSeekBar
+                                currentPosition={playbackPosition}
+                                totalDuration={playbackDuration}
+                                onSeek={seekToPosition}
+                              />
                             ) : (
                               <>
                                 <Text style={styles.audioTimeText}>--:--</Text>
@@ -3333,6 +3408,55 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: "rgba(78, 205, 196, 0.6)",
     minHeight: 50,
+  },
+
+  // 🎵 NOUVEAU : Styles pour la barre de progression améliorée
+  seekBarContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "100%",
+    marginBottom: 20,
+    gap: 10,
+  },
+
+  seekBarWrapper: {
+    flex: 1,
+    position: "relative",
+  },
+
+  audioProgressBarActive: {
+    height: 12, // Légèrement plus épais pendant le glissement
+    borderWidth: 2,
+    borderColor: "#FF6B6B",
+    borderRadius: 6, // Maintient les coins arrondis
+  },
+
+  audioTimeTextActive: {
+    color: "#FF6B6B",
+    fontWeight: "bold",
+  },
+
+  seekPreview: {
+    position: "absolute",
+    top: -40, // Ajusté pour le curseur de taille normale
+    backgroundColor: "rgba(0, 0, 0, 0.8)",
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 6,
+    transform: [{ translateX: -20 }], // Centrage pour curseur 16px
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 4,
+  },
+
+  seekPreviewText: {
+    color: "#FFF",
+    fontSize: 14, // Plus gros pour une meilleure lisibilité
+    fontWeight: "700", // Plus gras
+    textAlign: "center",
   },
 
   audioAnimationText: {

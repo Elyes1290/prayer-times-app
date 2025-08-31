@@ -20,6 +20,8 @@
   <!-- Permissions pour le téléchargement natif -->
   <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
   <uses-permission android:name="android.permission.WAKE_LOCK" />
+  <!-- Permission pour les contrôles média sur l'écran de verrouillage -->
+  <uses-permission android:name="android.permission.MEDIA_CONTENT_CONTROL" />
   <queries>
     <intent>
       <action android:name="android.intent.action.VIEW"/>

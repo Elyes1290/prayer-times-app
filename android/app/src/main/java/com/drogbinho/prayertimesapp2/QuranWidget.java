@@ -67,6 +67,11 @@ public class QuranWidget extends AppWidgetProvider {
     private static int totalDuration = 0;
     private static String currentAudioPath = "";
     private static boolean isPremiumUser = false;
+    
+    // 🎯 NOUVEAU : États des options de lecture
+    private static boolean autoAdvanceEnabled = true;
+    private static boolean loopEnabled = false;
+    
     private static Context context;
 
     @Override
@@ -128,6 +133,7 @@ public class QuranWidget extends AppWidgetProvider {
             case ACTION_TOGGLE_LOOP:
                 handleToggleLoop(context);
                 break;
+
 
             case ACTION_DIAGNOSTIC:
                 Log.d(TAG, "🔍 Widget traite ACTION_DIAGNOSTIC");
@@ -244,7 +250,7 @@ public class QuranWidget extends AppWidgetProvider {
         Intent autoAdvanceIntent = new Intent(context, QuranWidget.class);
         autoAdvanceIntent.setAction(ACTION_TOGGLE_AUTO_ADVANCE);
         PendingIntent autoAdvancePendingIntent = PendingIntent.getBroadcast(
-            context, 4, autoAdvanceIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
+            context, 10, autoAdvanceIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
         );
         views.setOnClickPendingIntent(R.id.quran_auto_advance_button, autoAdvancePendingIntent);
         
@@ -252,10 +258,10 @@ public class QuranWidget extends AppWidgetProvider {
         Intent loopIntent = new Intent(context, QuranWidget.class);
         loopIntent.setAction(ACTION_TOGGLE_LOOP);
         PendingIntent loopPendingIntent = PendingIntent.getBroadcast(
-            context, 5, loopIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
+            context, 11, loopIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
         );
         views.setOnClickPendingIntent(R.id.quran_loop_button, loopPendingIntent);
-        
+
 
     }
 
@@ -301,6 +307,42 @@ public class QuranWidget extends AppWidgetProvider {
         // Réactiver tous les boutons
         views.setInt(R.id.quran_previous_button, "setAlpha", 255);
         views.setInt(R.id.quran_next_button, "setAlpha", 255);
+        
+        // 🎯 NOUVEAU : Mettre à jour l'affichage des boutons auto-advance et loop
+        updateAutoAdvanceButton(views);
+        updateLoopButton(views);
+    }
+    
+    /**
+     * 🎯 NOUVEAU : Mettre à jour l'affichage du bouton auto-advance
+     */
+    private static void updateAutoAdvanceButton(RemoteViews views) {
+        if (autoAdvanceEnabled) {
+            // Bouton activé : couleur normale/opaque
+            views.setInt(R.id.quran_auto_advance_button, "setAlpha", 255);
+            views.setInt(R.id.quran_auto_advance_button, "setColorFilter", 0xFF4CAF50); // Vert
+        } else {
+            // Bouton désactivé : couleur atténuée
+            views.setInt(R.id.quran_auto_advance_button, "setAlpha", 128);
+            views.setInt(R.id.quran_auto_advance_button, "setColorFilter", 0xFF757575); // Gris
+        }
+        widgetDebugLog(TAG, "🎯 Bouton auto-advance mis à jour: " + (autoAdvanceEnabled ? "ACTIVÉ" : "DÉSACTIVÉ"));
+    }
+    
+    /**
+     * 🎯 NOUVEAU : Mettre à jour l'affichage du bouton loop
+     */
+    private static void updateLoopButton(RemoteViews views) {
+        if (loopEnabled) {
+            // Bouton activé : couleur normale/opaque
+            views.setInt(R.id.quran_loop_button, "setAlpha", 255);
+            views.setInt(R.id.quran_loop_button, "setColorFilter", 0xFF2196F3); // Bleu
+        } else {
+            // Bouton désactivé : couleur atténuée
+            views.setInt(R.id.quran_loop_button, "setAlpha", 128);
+            views.setInt(R.id.quran_loop_button, "setColorFilter", 0xFF757575); // Gris
+        }
+        widgetDebugLog(TAG, "🎯 Bouton loop mis à jour: " + (loopEnabled ? "ACTIVÉ" : "DÉSACTIVÉ"));
     }
 
     private static void showPremiumRequiredWidget(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
@@ -326,7 +368,7 @@ public class QuranWidget extends AppWidgetProvider {
         Intent openAppIntent = new Intent(context, QuranWidget.class);
         openAppIntent.setAction(ACTION_OPEN_APP);
         PendingIntent openAppPendingIntent = PendingIntent.getBroadcast(
-            context, 0, openAppIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
+            context, 30, openAppIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
         );
         views.setOnClickPendingIntent(R.id.quran_premium_required_button, openAppPendingIntent);
 
@@ -849,6 +891,21 @@ public class QuranWidget extends AppWidgetProvider {
     }
     
     /**
+     * 🎯 NOUVEAU : Mettre à jour les états des options de lecture
+     */
+    public static void updateReadingOptions(boolean autoAdvance, boolean loop) {
+        autoAdvanceEnabled = autoAdvance;
+        loopEnabled = loop;
+        widgetDebugLog(TAG, "🎯 Options de lecture mises à jour - Auto-advance: " + autoAdvance + ", Loop: " + loop);
+        
+        // Mettre à jour immédiatement tous les widgets
+        if (context != null) {
+            widgetDebugLog(TAG, "🚀 Mise à jour immédiate des widgets après changement d'options");
+            updateAllWidgets(context);
+        }
+    }
+    
+    /**
      * Gérer les mises à jour d'état du service audio
      */
     private static void handleAudioStateChanged(Intent intent) {
@@ -867,6 +924,17 @@ public class QuranWidget extends AppWidgetProvider {
         totalDuration = intent.getIntExtra("duration", 0);
         currentAudioPath = intent.getStringExtra("audioPath");
         isPremiumUser = intent.getBooleanExtra("isPremium", false);
+        
+        // 🎯 NOUVEAU : Récupérer les états des options de lecture
+        boolean newAutoAdvance = intent.getBooleanExtra("autoAdvanceEnabled", true);
+        boolean newLoop = intent.getBooleanExtra("loopEnabled", false);
+        
+        // 🎯 NOUVEAU : Ne mettre à jour que si les états ont changé (éviter mise à jour inutile)
+        if (autoAdvanceEnabled != newAutoAdvance || loopEnabled != newLoop) {
+            autoAdvanceEnabled = newAutoAdvance;
+            loopEnabled = newLoop;
+            widgetDebugLog(TAG, "🎯 Options mises à jour - Auto-advance: " + autoAdvanceEnabled + ", Loop: " + loopEnabled);
+        }
         
         // 🎯 NOUVEAU : Sauvegarder l'état corrigé
         updatePlaybackState(isPlaying, currentPosition, totalDuration);
@@ -917,6 +985,13 @@ public class QuranWidget extends AppWidgetProvider {
             return;
         }
         
+        // 🎯 NOUVEAU : Basculer immédiatement l'état local pour mise à jour visuelle rapide
+        autoAdvanceEnabled = !autoAdvanceEnabled;
+        widgetDebugLog(TAG, "🎯 Auto-advance basculé localement: " + autoAdvanceEnabled);
+        
+        // Mettre à jour immédiatement l'affichage du widget
+        updateAllWidgets(context);
+        
         // Envoyer l'action au service audio
         Intent serviceIntent = new Intent(QuranAudioService.ACTION_TOGGLE_AUTO_ADVANCE);
         serviceIntent.setPackage(context.getPackageName());
@@ -936,6 +1011,13 @@ public class QuranWidget extends AppWidgetProvider {
             return;
         }
         
+        // 🎯 NOUVEAU : Basculer immédiatement l'état local pour mise à jour visuelle rapide
+        loopEnabled = !loopEnabled;
+        widgetDebugLog(TAG, "🎯 Loop basculé localement: " + loopEnabled);
+        
+        // Mettre à jour immédiatement l'affichage du widget
+        updateAllWidgets(context);
+        
         // Envoyer l'action au service audio
         Intent serviceIntent = new Intent(QuranAudioService.ACTION_TOGGLE_LOOP);
         serviceIntent.setPackage(context.getPackageName());
@@ -944,6 +1026,7 @@ public class QuranWidget extends AppWidgetProvider {
         widgetDebugLog(TAG, "🔄 Action boucle envoyée au service");
     }
     
+
 
     
     /**

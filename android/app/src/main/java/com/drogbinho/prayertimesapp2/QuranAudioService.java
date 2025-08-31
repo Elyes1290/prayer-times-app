@@ -24,7 +24,7 @@ import android.widget.RemoteViews;
 
 import androidx.core.app.NotificationCompat;
 
-// 🎯 SUPPRIMÉ: import MediaSessionService
+// 🎯 IMPORTS ANDROIDX CORRIGÉS pour écran de verrouillage
 import android.support.v4.media.session.MediaSessionCompat;
 import android.support.v4.media.session.PlaybackStateCompat;
 import android.support.v4.media.MediaMetadataCompat;
@@ -336,7 +336,9 @@ public class QuranAudioService extends Service {
         initializeMediaPlayer();
         
         // 🎵 Initialiser MediaSession3 pour les contrôles d'écran de verrouillage
+        Log.d(TAG, "🔍 DEBUG - Démarrage initialisation MediaSession dans onCreate()");
         initializeMediaSession();
+        Log.d(TAG, "🔍 DEBUG - Fin initialisation MediaSession dans onCreate()");
     }
 
     @Override
@@ -522,6 +524,7 @@ public class QuranAudioService extends Service {
             
             Log.d(TAG, "🎯 MediaSessionCompat métadonnées et état mis à jour !");
             Log.d(TAG, "🎯 Titre: " + currentSurah + ", État: " + (isPlaying ? "PLAYING" : "PAUSED"));
+            Log.d(TAG, "🔍 DEBUG - Position: " + currentPosition + "ms, Durée: " + totalDuration + "ms");
             
         } catch (Exception e) {
             Log.e(TAG, "❌ Erreur updateMediaSessionCompatMetadata: " + e.getMessage());
@@ -569,6 +572,11 @@ public class QuranAudioService extends Service {
             mediaSessionCompat.setFlags(MediaSessionCompat.FLAG_HANDLES_MEDIA_BUTTONS |
                                       MediaSessionCompat.FLAG_HANDLES_TRANSPORT_CONTROLS);
             
+            // 🎯 CONFIGURER POUR CONTRÔLES ÉCRAN DE VERROUILLAGE
+            mediaSessionCompat.setSessionActivity(PendingIntent.getActivity(this, 0,
+                new Intent(this, MainActivity.class), 
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE));
+            
             // 🎯 AJOUTER CALLBACK POUR GÉRER LES BOUTONS ÉCRAN DE VERROUILLAGE
             mediaSessionCompat.setCallback(new MediaSessionCompat.Callback() {
                 @Override
@@ -609,13 +617,20 @@ public class QuranAudioService extends Service {
                         Log.d(TAG, "🎯 Écran verrouillage - État mis à jour après PREVIOUS");
                     }, 500); // Délai pour laisser le temps au chargement
                 }
+                
+
+
             });
             
             mediaSessionCompat.setActive(true);
             Log.d(TAG, "🎯 MediaSessionCompat créée et activée avec callbacks !");
+            Log.d(TAG, "🔍 DEBUG - Token de session: " + mediaSessionCompat.getSessionToken().toString());
             
             // 🎯 METTRE À JOUR LES MÉTADONNÉES MediaSessionCompat
             updateMediaSessionCompatMetadata();
+            
+            // 🔍 DEBUG - Vérifier si la MediaSession est active
+            Log.d(TAG, "🔍 DEBUG - MediaSession active: " + mediaSessionCompat.isActive());
             
             // 🎯 SUPPRIMÉ: ExoPlayer causait un double audio !
             // MediaSessionCompat suffit pour l'écran de verrouillage
@@ -773,13 +788,18 @@ public class QuranAudioService extends Service {
             .setShowWhen(false); // Ne pas afficher l'heure
             
         // 🎯 AJOUTER MediaStyle AVEC MediaSessionCompat - CLÉ POUR ÉCRAN DE VERROUILLAGE !
-        if (mediaSessionCompat != null) {
+        if (mediaSessionCompat != null && mediaSessionCompat.isActive()) {
             builder.setStyle(new MediaStyle()
                 .setMediaSession(mediaSessionCompat.getSessionToken())
                 .setShowActionsInCompactView(0, 1, 2));
             Log.d(TAG, "🎯 MediaStyle ajouté avec token MediaSessionCompat !");
+            Log.d(TAG, "🔍 DEBUG - Notification avec MediaSession active - Token: " + mediaSessionCompat.getSessionToken().toString());
         } else {
-            Log.e(TAG, "❌ MediaSessionCompat null - contrôles écran de verrouillage NON disponibles !");
+            Log.e(TAG, "❌ MediaSessionCompat null ou inactive - contrôles écran de verrouillage NON disponibles !");
+            Log.e(TAG, "🔍 DEBUG - MediaSessionCompat null: " + (mediaSessionCompat == null));
+            if (mediaSessionCompat != null) {
+                Log.e(TAG, "🔍 DEBUG - MediaSessionCompat inactive: " + !mediaSessionCompat.isActive());
+            }
         }
         
         return builder.build();
@@ -790,7 +810,12 @@ public class QuranAudioService extends Service {
      */
     private void updateNotification() {
         if (notificationManager != null) {
-            notificationManager.notify(NOTIFICATION_ID, createNotification());
+            Log.d(TAG, "🔍 DEBUG - Mise à jour de la notification");
+            Notification notification = createNotification();
+            notificationManager.notify(NOTIFICATION_ID, notification);
+            Log.d(TAG, "🔍 DEBUG - Notification mise à jour avec ID: " + NOTIFICATION_ID);
+        } else {
+            Log.e(TAG, "❌ NotificationManager null - impossible de mettre à jour la notification");
         }
     }
     
@@ -997,6 +1022,11 @@ public class QuranAudioService extends Service {
             intent.putExtra("duration", totalDuration);
             intent.putExtra("isPremium", isPremiumUser);
             
+            // 🎯 NOUVEAU : Ajouter les états des options de lecture
+            intent.putExtra("autoAdvanceEnabled", autoAdvanceEnabled);
+            intent.putExtra("loopEnabled", loopEnabled);
+            Log.d(TAG, "🎯 Broadcast incluant options - Auto-advance: " + autoAdvanceEnabled + ", Loop: " + loopEnabled);
+            
             // NOUVEAU : S'assurer que le broadcast est envoyé avec le bon package
             intent.setPackage(getPackageName());
             Log.d(TAG, "📡 Envoi broadcast widget avec package: " + getPackageName());
@@ -1116,6 +1146,11 @@ public class QuranAudioService extends Service {
                     }
                 } else {
                     Log.d(TAG, "⏱️ Timer progression arrêté - mediaPlayer null: " + (mediaPlayer == null) + ", isPlaying: " + isPlaying);
+                    // 🎯 NOUVEAU : Vérifier si on devrait redémarrer le timer
+                    if (mediaPlayer != null && isPlaying) {
+                        Log.d(TAG, "🔄 Redémarrage automatique du timer - média en lecture");
+                        progressHandler.postDelayed(this, 1000);
+                    }
                 }
             }
         };
@@ -1187,6 +1222,14 @@ public class QuranAudioService extends Service {
         // NOUVEAU : Mettre à jour immédiatement le widget
         Log.d(TAG, "🚀 Mise à jour immédiate du widget après Play/Pause");
         updateQuranWidget();
+        
+        // 🎯 NOUVEAU : S'assurer que le timer continue après Play/Pause depuis le widget
+        progressHandler.postDelayed(() -> {
+            if (isPlaying && mediaPlayer != null) {
+                Log.d(TAG, "🔄 Vérification et redémarrage timer après action widget");
+                startProgressTimer();
+            }
+        }, 500);
     }
     
     /**
@@ -1246,6 +1289,14 @@ public class QuranAudioService extends Service {
         if (previousSurahNumber != -1) {
             Log.d(TAG, "🔄 Navigation vers sourate précédente téléchargée: " + currentSurahNumber + " → " + previousSurahNumber);
             loadDownloadedSurahByNumber(previousSurahNumber);
+            
+            // 🎯 NOUVEAU : S'assurer que le timer continue après navigation précédente
+            progressHandler.postDelayed(() -> {
+                if (isPlaying && mediaPlayer != null) {
+                    startProgressTimer();
+                    Log.d(TAG, "✅ Timer redémarré après navigation précédente");
+                }
+            }, 1000);
         } else {
             Log.d(TAG, "⏹️ Pas de sourate précédente téléchargée");
         }
@@ -1332,6 +1383,17 @@ public class QuranAudioService extends Service {
             loadDownloadedSurahByNumber(nextSurahNumber);
         } else {
             Log.d(TAG, "⏹️ Pas de sourate suivante téléchargée - BLOCAGE 4");
+        }
+        
+        // 🎯 NOUVEAU : S'assurer que le timer continue après navigation suivante
+        if (isPlaying && mediaPlayer != null) {
+            Log.d(TAG, "🔄 Vérification timer après navigation suivante");
+            progressHandler.postDelayed(() -> {
+                if (isPlaying && mediaPlayer != null) {
+                    startProgressTimer();
+                    Log.d(TAG, "✅ Timer redémarré après navigation suivante");
+                }
+            }, 1000);
         }
         
         Log.d(TAG, "⏭️ handleNext() - FIN");
@@ -1655,6 +1717,9 @@ public class QuranAudioService extends Service {
         // NOUVEAU : Mettre à jour directement l'état du widget
         Log.d(TAG, "🚀 Mise à jour directe de l'état du widget après seek");
         QuranWidget.updatePlaybackState(isPlaying, currentPosition, totalDuration);
+        
+        // 🎯 NOUVEAU : Mettre à jour MediaSession pour écran de verrouillage
+        updateMediaSessionCompatMetadata();
     }
     
     /**
@@ -1687,6 +1752,9 @@ public class QuranAudioService extends Service {
         // Diffuser l'état pour mettre à jour le widget
         broadcastAudioStateChanged();
         updateQuranWidget();
+        
+        // 🎯 NOUVEAU : Mettre à jour directement les options du widget
+        QuranWidget.updateReadingOptions(autoAdvanceEnabled, loopEnabled);
     }
     
     /**
@@ -1703,6 +1771,9 @@ public class QuranAudioService extends Service {
         // Diffuser l'état pour mettre à jour le widget
         broadcastAudioStateChanged();
         updateQuranWidget();
+        
+        // 🎯 NOUVEAU : Mettre à jour directement les options du widget
+        QuranWidget.updateReadingOptions(autoAdvanceEnabled, loopEnabled);
     }
     
     /**
@@ -1775,7 +1846,10 @@ public class QuranAudioService extends Service {
                 Log.d(TAG, "🎵 Démarrage de la lecture...");
                 mediaPlayer.start();
                 isPlaying = true;
-                currentPosition = 0;
+                
+                // 🎯 CORRECTION: Obtenir la position actuelle du MediaPlayer (au lieu de forcer à 0)
+                currentPosition = mediaPlayer.getCurrentPosition();
+                Log.d(TAG, "🎯 Position actuelle récupérée: " + currentPosition + "ms");
                 
                 // NOUVEAU : Réinitialiser la variable de focus car l'utilisateur a cliqué manuellement
                 wasPlayingBeforeFocusLoss = false;
@@ -1796,8 +1870,8 @@ public class QuranAudioService extends Service {
                 Log.d(TAG, "🚀 Mise à jour directe de l'état du widget après démarrage lecture");
                 QuranWidget.updatePlaybackState(isPlaying, currentPosition, totalDuration);
                 
-                // 🎯 METTRE À JOUR MediaSessionCompat pour écran de verrouillage
-                Log.d(TAG, "🎯 Mise à jour métadonnées écran de verrouillage après PLAY");
+                // 🎯 METTRE À JOUR MediaSessionCompat pour écran de verrouillage avec la bonne position
+                Log.d(TAG, "🎯 Mise à jour métadonnées écran de verrouillage après PLAY - Position: " + currentPosition + "ms");
                 updateMediaSessionCompatMetadata();
                 
             } else {
@@ -1817,6 +1891,10 @@ public class QuranAudioService extends Service {
         if (mediaPlayer == null || !isPlaying) return;
         
         try {
+            // 🎯 SAUVEGARDER la position AVANT de faire pause
+            currentPosition = mediaPlayer.getCurrentPosition();
+            Log.d(TAG, "🎯 Position sauvegardée avant pause: " + currentPosition + "ms");
+            
             mediaPlayer.pause();
             isPlaying = false;
             
