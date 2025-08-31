@@ -146,43 +146,82 @@ function handleDeleteRequest($pdo, $action) {
 
 // Lister tous les utilisateurs VIP
 function listVipUsers($pdo) {
-    $stmt = $pdo->query("SELECT * FROM v_vip_users ORDER BY vip_granted_at DESC");
-    $vipUsers = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    
-    echo json_encode([
-        'success' => true,
-        'data' => $vipUsers,
-        'total' => count($vipUsers)
-    ]);
+    try {
+        // Utiliser directement la table users au lieu de la vue
+        $stmt = $pdo->query("
+            SELECT 
+                id,
+                email,
+                user_first_name,
+                is_vip,
+                vip_reason,
+                vip_granted_by,
+                vip_granted_at,
+                premium_status,
+                subscription_type,
+                premium_expiry,
+                created_at,
+                last_seen
+            FROM users 
+            WHERE is_vip = 1 OR premium_status = 1
+            ORDER BY vip_granted_at DESC, created_at DESC
+        ");
+        
+        $vipUsers = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        echo json_encode([
+            'success' => true,
+            'data' => $vipUsers,
+            'total' => count($vipUsers)
+        ]);
+    } catch (PDOException $e) {
+        error_log("Erreur SQL dans listVipUsers: " . $e->getMessage());
+        throw new Exception("Erreur lors de la récupération des utilisateurs VIP: " . $e->getMessage());
+    }
 }
 
 // Statistiques VIP
 function getVipStats($pdo) {
-    $stats = [];
-    
-    // Total VIP
-    $stmt = $pdo->query("SELECT COUNT(*) as total FROM users WHERE is_vip = 1");
-    $stats['total_vip'] = $stmt->fetchColumn();
-    
-    // VIP actifs (connectés dans les 30 derniers jours)
-    $stmt = $pdo->query("
-        SELECT COUNT(*) as active 
-        FROM users 
-        WHERE is_vip = 1 AND last_seen > DATE_SUB(NOW(), INTERVAL 30 DAY)
-    ");
-    $stats['active_vip'] = $stmt->fetchColumn();
-    
-    // VIP par raison
-    $stmt = $pdo->query("
-        SELECT vip_reason, COUNT(*) as count 
-        FROM users 
-        WHERE is_vip = 1 AND vip_reason IS NOT NULL
-        GROUP BY vip_reason
-        ORDER BY count DESC
-    ");
-    $stats['by_reason'] = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    
-    echo json_encode(['success' => true, 'data' => $stats]);
+    try {
+        $stats = [];
+        
+        // Total VIP
+        $stmt = $pdo->query("SELECT COUNT(*) as total FROM users WHERE is_vip = 1");
+        $stats['total_vip'] = $stmt->fetchColumn();
+        
+        // VIP actifs (connectés dans les 30 derniers jours) - vérifier si last_seen existe
+        try {
+            $stmt = $pdo->query("
+                SELECT COUNT(*) as active 
+                FROM users 
+                WHERE is_vip = 1 AND last_seen > DATE_SUB(NOW(), INTERVAL 30 DAY)
+            ");
+            $stats['active_vip'] = $stmt->fetchColumn();
+        } catch (PDOException $e) {
+            // Si last_seen n'existe pas, utiliser une valeur par défaut
+            $stats['active_vip'] = $stats['total_vip'];
+        }
+        
+        // VIP par raison
+        try {
+            $stmt = $pdo->query("
+                SELECT vip_reason, COUNT(*) as count 
+                FROM users 
+                WHERE is_vip = 1 AND vip_reason IS NOT NULL
+                GROUP BY vip_reason
+                ORDER BY count DESC
+            ");
+            $stats['by_reason'] = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            // Si vip_reason n'existe pas, utiliser un tableau vide
+            $stats['by_reason'] = [];
+        }
+        
+        echo json_encode(['success' => true, 'data' => $stats]);
+    } catch (PDOException $e) {
+        error_log("Erreur SQL dans getVipStats: " . $e->getMessage());
+        throw new Exception("Erreur lors de la récupération des statistiques VIP: " . $e->getMessage());
+    }
 }
 
 // Vérifier le statut VIP d'un utilisateur

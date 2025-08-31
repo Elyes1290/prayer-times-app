@@ -132,7 +132,19 @@
       "premium_features": "Premium functies",
       "themes_system": "Thema-systeem",
       "sun_info": "Zon-informatie",
-      "weekly_view": "Wekelijkse weergave"
+      "weekly_view": "Wekelijkse weergave",
+      "mosques_finder": "Slimme moskee-finder",
+      "native_downloads": "Native downloads",
+      "android_widgets": "Android widgets",
+      "lock_screen_player": "Vergrendelscherm-speler",
+      "tactile_controls": "Tactiele bediening",
+      "backup_restore": "Backup & herstel",
+      "data_deletion": "Gegevensverwijdering",
+      "stripe_payments": "Stripe betalingen",
+      "user_accounts": "Gebruikersaccounts",
+      "13_languages": "13 ondersteunde talen",
+      "offline_mode": "Offline modus",
+      "local_storage": "Lokale opslag"
     },
 
     "premium_title": "👑 Premium functies",
@@ -148,6 +160,15 @@
     "advanced_weekly": "Wekelijkse gebedsweergave",
     "advanced_sun": "Zon-informatie en tijd",
     "advanced_personalization": "Personalisatie en instellingen",
+
+    "new_features_title": "🆕 Nieuwe functies",
+    "new_features_subtitle": "Ontdek de nieuwste verbeteringen:",
+    "new_widgets": "Aanpasbare Android widgets",
+    "new_lock_screen": "Vergrendelscherm audio-speler",
+    "new_tactile": "Geavanceerde tactiele bediening",
+    "new_downloads": "Geoptimaliseerde native downloads",
+    "new_mosques": "Slimme moskee-finder",
+    "new_backup": "Volledig backup-systeem",
 
     "faq_title": "❓ Veelgestelde vragen",
     "faq_location_question": "Waarom heeft de app mijn locatie nodig?",
@@ -1358,5 +1379,26 @@
     "widget_instruction": "Widget voor navigatie met audio",
     "play_instruction": "Play start de weergegeven audio",
     "close_button": "Begrepen!"
-  }
+  },
+
+  "mosques_finder": "Slimme Moskee Finder",
+  "native_downloads": "Native Downloads",
+  "android_widgets": "Android Widgets",
+  "lock_screen_player": "Vergrendelscherm Speler",
+  "tactile_controls": "Tactiele Bediening",
+  "backup_restore": "Backup & Herstel",
+  "data_deletion": "Gegevensverwijdering",
+  "stripe_payments": "Stripe Betalingen",
+  "user_accounts": "Gebruikersaccounts",
+  "13_languages": "13 Ondersteunde Talen",
+  "offline_mode": "Offline Modus",
+  "local_storage": "Lokale Opslag",
+  "new_features_title": "Nieuwe Functies",
+  "new_features_subtitle": "Ontdek de nieuwste verbeteringen",
+  "customizable_widgets": "Aanpasbare Android widgets",
+  "lock_screen_audio": "Vergrendelscherm audio speler",
+  "advanced_tactile": "Geavanceerde tactiele bediening",
+  "optimized_downloads": "Geoptimaliseerde native downloads",
+  "smart_mosque_finder": "Slimme moskee finder",
+  "complete_backup_system": "Volledig backup systeem"
 }

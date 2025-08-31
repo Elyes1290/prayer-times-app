@@ -163,7 +163,7 @@
     "category": "dailyDua",
     "title": "Travel Supplication",
     "arabic": "الله أَكْبَرُ،الله أَكْبَرُ،الله أَكْبَرُ،سُبْحَانَ الَّذِى سَخَّرَ لَنَا هَذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ وَإِنَّا إِلَى رَبِّنَا لَمُنْقَلِبُونَ اللَّهُمَّ إِنَّا نَسْأَلُكَ فِى سَفَرِنَا هَذَا الْبِرَّ وَالتَّقْوَى وَمِنَ الْعَمَلِ مَا تَرْضَى اللَّهُمَّ هَوِّنْ عَلَيْنَا سَفَرَنَا هَذَا وَاطْوِ عَنَّا بُعْدَهُ اللَّهُمَّ أَنْتَ الصَّاحِبُ فِى السَّفَرِ وَالْخَلِيفَةُ فِى الأَهْلِ اللَّهُمَّ إِنِّى أَعُوذُ بِكَ مِنْ وَعْثَاءِ السَّفَرِ وَكَآبَةِ الْمَنْظَرِ وَسُوءِ الْمُنْقَلَبِ فِى الْمَالِ وَالأَهْلِ",
-    "latin": "allahu akbar, allahu akbar, allahu akbar. subhaanal ladzi sakh-khara lanaa haadza wa maa kunna lahuu muqriniin wa inna ilaa rabbina lamun qalibuun. allahumma inna nas aluka fii safarina hadzaa al-birra wat taqwa wa minal amali maa tardhaa. allahumma hawwin 'alaina safarana haadza wathwi 'anna bu'dahu. allahumma anta shaahibu fi safar. wal khaliifatu fil ahli. allahumma inni a'uudzubika min wa'tsaa-issafari wa ka-aabatil mandzari wa suuil munqalabi fil maali wal ahli",
+    "latin": "allahu akbar, allahu akbar, allahu akbar. subhaanal ladzi sakh-khara lanaa haadzaa wa maa kunna lahuu muqriniin wa inna ilaa rabbina lamun qalibuun. allahumma inna nas aluka fii safarina hadzaa al-birra wat taqwa wa minal amali maa tardhaa. allahumma hawwin 'alaina safarana haadza wathwi 'anna bu'dahu. allahumma anta shaahibu fi safar. wal khaliifatu fil ahli. allahumma inni a'uudzubika min wa'tsaa-issafari wa ka-aabatil mandzari wa suuil munqalabi fil maali wal ahli",
     "translation": "Allah is the Greatest, Allah is the Greatest, Allah is the Greatest. Glory be to Him who has provided this for us, though we could never have had it by our own efforts. Surely to our Lord we are returning. O Allah, we ask You for righteousness and piety in this journey of ours, and for deeds that please You. O Allah, lighten for us the hardship of this journey and quickly bring us to our destination. O Allah, You are our Companion on the journey and the Guardian of our families. O Allah, I seek refuge in You from the hardship of travel, from a bad return, and from seeing something unpleasant concerning our wealth, family, or children.",
     "notes": null,
     "benefits": "This supplication has two parts. The first is praise of Allah and the submission of the servant. The second is a request to Allah for ease in travel and in the affairs of what the servant has left at home.",
@@ -378,5 +378,205 @@
     "notes": null,
     "fawaid": "This is a prayer of Prophet Ibrahim (peace be upon him), teaching us to honor and love our parents, remember the Day of Judgment, and care for fellow believers. By making this prayer, we hope that Allah will forgive our sins and make us among the faithful.",
     "source": "QS. Ibrahim: 41"
+  },
+  {
+    "category": "dailyDua",
+    "title": "Du'a for Protection Against the Evil Eye",
+    "arabic": "أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ الَّتِي لَا يُجَاوِزُهُنَّ بَرٌّ وَلَا فَاجِرٌ",
+    "latin": "a'uudzu bi kalimaatillahit taammatil latii laa yujaawizuhunna barrun wa laa faajir",
+    "translation": "I seek refuge in the perfect words of Allah which neither the upright nor the corrupt can overcome.",
+    "notes": null,
+    "benefits": "This invocation protects against the evil eye, witchcraft and harm. The Prophet ﷺ taught it to his Companions for their protection.",
+    "source": "Narrated by Muslim, Abu Dawud"
+  },
+  {
+    "category": "dailyDua",
+    "title": "Du'a for Protection of the House",
+    "arabic": "أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ الَّتِي لَا يُجَاوِزُهُنَّ بَرٌّ وَلَا فَاجِرٌ",
+    "latin": "a'uudzu bi kalimaatillahit taammatil latii laa yujaawizuhunna barrun wa laa faajir",
+    "translation": "I seek refuge in the perfect words of Allah which neither the upright nor the corrupt can overcome.",
+    "notes": null,
+    "benefits": "This invocation protects the house against harm, jinn and negative influences. It creates a spiritual barrier around the home.",
+    "source": "Narrated by Abu Dawud, Tirmidhi"
+  },
+  {
+    "category": "dailyDua",
+    "title": "Du'a for Protection During Travel",
+    "arabic": "اللَّهُمَّ إِنَّا نَسْأَلُكَ فِي سَفَرِنَا هَذَا الْبِرَّ وَالتَّقْوَى وَمِنَ الْعَمَلِ مَا تَرْضَى",
+    "latin": "allahumma innaa nas'aluka fii safarinaa haadzaal birra wat taqwaa wa minal 'amali maa tardhaa",
+    "translation": "O Allah, we ask You in this journey for righteousness and piety, and for deeds that please You.",
+    "notes": null,
+    "benefits": "This invocation protects the traveler and ensures a blessed journey. It asks Allah to guide our actions during travel.",
+    "source": "Narrated by Muslim"
+  },
+  {
+    "category": "dailyDua",
+    "title": "Du'a Before Studying",
+    "arabic": "رَبِّ زِدْنِي عِلْمًا",
+    "latin": "rabbi zidnii 'ilmaa",
+    "translation": "My Lord, increase me in knowledge.",
+    "notes": null,
+    "benefits": "This invocation asks Allah to increase our knowledge. It is recommended before studying the Quran, science or any other subject.",
+    "source": "Quran, Surah Ta-Ha : 114"
+  },
+  {
+    "category": "dailyDua",
+    "title": "Du'a for Healing",
+    "arabic": "أَسْأَلُ اللَّهَ الْعَظِيمَ رَبَّ الْعَرْشِ الْعَظِيمِ أَنْ يَشْفِيَكَ",
+    "latin": "as'alullahaal 'adziim rabbal 'arsyil 'adziim an yashfiyak",
+    "translation": "I ask Allah, the Most Great, Lord of the Mighty Throne, to heal you.",
+    "notes": null,
+    "benefits": "This invocation is recited to ask for healing of a sick person. It invokes Allah by His most beautiful names to obtain healing.",
+    "source": "Narrated by Abu Dawud, Tirmidhi"
+  },
+  {
+    "category": "dailyDua",
+    "title": "Du'a for Rain",
+    "arabic": "اللَّهُمَّ صَيِّبًا نَافِعًا",
+    "latin": "allahumma sayyiban naafi'aa",
+    "translation": "O Allah, grant us beneficial rain.",
+    "notes": null,
+    "benefits": "This invocation is recited when it rains to ask Allah that the rain be beneficial and bring blessing to the earth and creatures.",
+    "source": "Narrated by Bukhari"
+  },
+  {
+    "category": "dailyDua",
+    "title": "Du'a of Prophet Ibrahim",
+    "arabic": "رَبَّنَا تَقَبَّلْ مِنَّا إِنَّكَ أَنْتَ السَّمِيعُ الْعَلِيمُ",
+    "latin": "rabbanaa taqabbal minnaa innaka antas samii'ul 'aliim",
+    "translation": "Our Lord, accept from us. You are the All-Hearing, the All-Knowing.",
+    "notes": null,
+    "benefits": "This invocation of Prophet Ibrahim is recited after performing an act of worship to ask Allah to accept our deeds.",
+    "source": "Quran, Surah Al-Baqarah : 127"
+  },
+  {
+    "category": "dailyDua",
+    "title": "Du'a of Prophet Musa",
+    "arabic": "رَبِّ اشْرَحْ لِي صَدْرِي وَيَسِّرْ لِي أَمْرِي",
+    "latin": "rabbi ishrah lii sadrii wa yassir lii amrii",
+    "translation": "My Lord, expand my chest and make my task easy for me.",
+    "notes": null,
+    "benefits": "This invocation of Prophet Musa asks Allah to expand the heart and facilitate affairs. It is useful for overcoming difficulties.",
+    "source": "Quran, Surah Ta-Ha : 25-26"
+  },
+  {
+    "category": "dailyDua",
+    "title": "Du'a of Thanks for Blessings",
+    "arabic": "اللَّهُمَّ لَكَ الْحَمْدُ حَتَّى تَرْضَى",
+    "latin": "allahumma lakal hamdu hattaa tardhaa",
+    "translation": "O Allah, to You is all praise until You are pleased.",
+    "notes": null,
+    "benefits": "This invocation expresses gratitude to Allah for His blessings. It is recited to thank Allah completely and sincerely.",
+    "source": "Narrated by Muslim"
+  },
+  {
+    "category": "dailyDua",
+    "title": "Du'a for Health and Safety",
+    "arabic": "اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَافِيَةَ فِي الدُّنْيَا وَالْآخِرَةِ",
+    "latin": "allahumma innii as'alukal 'aafiyata fid dunyaa wal aakhirah",
+    "translation": "O Allah, I ask You for health and safety in this world and in the hereafter.",
+    "notes": null,
+    "benefits": "This invocation asks Allah for physical and spiritual health, as well as safety in this world and the hereafter. It is a complete prayer.",
+    "source": "Narrated by Bukhari"
+  },
+  {
+    "category": "dailyDua",
+    "title": "Du'a of Prophet Yusuf",
+    "arabic": "رَبِّ قَدْ آتَيْتَنِي مِنَ الْمُلْكِ وَعَلَّمْتَنِي مِن تَأْوِيلِ الْأَحَادِيثِ فَاطِرَ السَّمَاوَاتِ وَالْأَرْضِ أَنتَ وَلِيِّي فِي الدُّنْيَا وَالْآخِرَةِ تَوَفَّنِي مُسْلِمًا وَأَلْحِقْنِي بِالصَّالِحِينَ",
+    "latin": "rabbi qad aataitanii minal mulki wa 'allamtanii min ta'wiilil ahaadiits. faatiras samaawaati wal ardhi anta waliyyii fid dunyaa wal aakhirah. tawaffanii musliman wa alhiqnii bissaalihiin",
+    "translation": "My Lord, You have given me authority and taught me the interpretation of dreams. Creator of the heavens and earth, You are my protector in this world and the hereafter. Make me die in submission and join me with the righteous.",
+    "notes": null,
+    "benefits": "This invocation of Prophet Yusuf expresses gratitude for Allah's blessings and asks for a pious end. It is recited to thank Allah and ask for a good end.",
+    "source": "Quran, Surah Yusuf : 101"
+  },
+  {
+    "category": "dailyDua",
+    "title": "Du'a of Prophet Nuh",
+    "arabic": "رَّبِّ إِنِّي أَعُوذُ بِكَ أَنْ أَسْأَلَكَ مَا لَيْسَ لِي بِهِ عِلْمٌ وَإِلَّا تَغْفِرْ لِي وَتَرْحَمْنِي أَكُن مِّنَ الْخَاسِرِينَ",
+    "latin": "rabbi innii a'uudzu bika an as'alaka maa laisa lii bihi 'ilm. wa illaa taghfir lii wa tarhamnii akum minal khaasiriin",
+    "translation": "My Lord, I seek refuge in You from asking You what I have no knowledge of. If You do not forgive me and have mercy on me, I will be among the losers.",
+    "notes": null,
+    "benefits": "This invocation of Prophet Nuh asks for Allah's forgiveness and mercy. It teaches us humility and recognition of our limitations in the face of Allah's knowledge.",
+    "source": "Quran, Surah Hud : 47"
+  },
+  {
+    "category": "dailyDua",
+    "title": "Du'a of Prophet Ayyub",
+    "arabic": "أَنِّي مَسَّنِيَ الضُّرُّ وَأَنتَ أَرْحَمُ الرَّاحِمِينَ",
+    "latin": "annii massaniyad durru wa anta arhamur raahimiin",
+    "translation": "Indeed, adversity has touched me, and You are the Most Merciful of the merciful.",
+    "notes": null,
+    "benefits": "This invocation of Prophet Ayyub is recited during trials and difficulties. It expresses trust in Allah's mercy and asks for His help.",
+    "source": "Quran, Surah Al-Anbiya : 83"
+  },
+  {
+    "category": "dailyDua",
+    "title": "Du'a of Prophet Sulayman",
+    "arabic": "رَبِّ أَوْزِعْنِي أَنْ أَشْكُرَ نِعْمَتَكَ الَّتِي أَنْعَمْتَ عَلَيَّ وَعَلَىٰ وَالِدَيَّ وَأَنْ أَعْمَلَ صَالِحًا تَرْضَاهُ وَأَدْخِلْنِي بِرَحْمَتِكَ فِي عِبَادِكَ الصَّالِحِينَ",
+    "latin": "rabbi awzi'nii an ashkura ni'matakal latii an'amta 'alayya wa 'alaa waalidayya wa an a'mala saalihan tardhaahu wa adkhilnii birahmatika fii 'ibaadikas saalihiin",
+    "translation": "My Lord, enable me to be grateful for Your favor which You have bestowed upon me and upon my parents, and to work righteousness of which You will approve, and admit me by Your mercy into [the ranks of] Your righteous servants.",
+    "notes": null,
+    "benefits": "This invocation of Prophet Sulayman asks Allah to inspire us with gratitude and good deeds. It is recited to ask for guidance toward good.",
+    "source": "Quran, Surah An-Naml : 19"
+  },
+  {
+    "category": "dailyDua",
+    "title": "Du'a of Prophet Zakariyya",
+    "arabic": "رَبِّ لَا تَذَرْنِي فَرْدًا وَأَنتَ خَيْرُ الْوَارِثِينَ",
+    "latin": "rabbi laa tadzarnii fardan wa anta khayrul waarithiin",
+    "translation": "My Lord, do not leave me alone, and You are the best of inheritors.",
+    "notes": null,
+    "benefits": "This invocation of Prophet Zakariyya asks Allah not to leave him alone. It is recited to ask for Allah's company and protection.",
+    "source": "Quran, Surah Al-Anbiya : 89"
+  },
+  {
+    "category": "dailyDua",
+    "title": "Du'a of Prophet Zakariyya for a Child",
+    "arabic": "رَبِّ هَبْ لِي مِن لَّدُنكَ ذُرِّيَّةً طَيِّبَةً إِنَّكَ سَمِيعُ الدُّعَاءِ",
+    "latin": "rabbi hab lii min ladunka dzurriyyatan tayyibah. innaka samii'ud du'aa",
+    "translation": "My Lord, grant me from Yourself a good offspring. Indeed, You are the Hearer of supplication.",
+    "notes": null,
+    "benefits": "This invocation of Prophet Zakariyya asks Allah to grant him a pious offspring. It is recited by those who wish to have children.",
+    "source": "Quran, Surah Al-Imran : 38"
+  },
+  {
+    "category": "dailyDua",
+    "title": "Du'a of Prophet Ibrahim for Security",
+    "arabic": "رَبِّ اجْعَلْ هَٰذَا الْبَلَدَ آمِنًا وَاجْنُبْنِي وَبَنِيَّ أَن نَّعْبُدَ الْأَصْنَامَ",
+    "latin": "rabbij 'al haadzal balada aaminan waj nubnii wa baniyya an na'budal asnaam",
+    "translation": "My Lord, make this city secure and keep me and my sons away from worshipping idols.",
+    "notes": null,
+    "benefits": "This invocation of Prophet Ibrahim asks for security and protection against idolatry. It is recited to ask for spiritual protection.",
+    "source": "Quran, Surah Ibrahim : 35"
+  },
+  {
+    "category": "dailyDua",
+    "title": "Du'a of Prophet Ibrahim for Guidance",
+    "arabic": "رَبِّ هَبْ لِي حُكْمًا وَأَلْحِقْنِي بِالصَّالِحِينَ",
+    "latin": "rabbi hab lii hukman wa alhiqnii bissaalihiin",
+    "translation": "My Lord, grant me wisdom and join me with the righteous.",
+    "notes": null,
+    "benefits": "This invocation of Prophet Ibrahim asks for wisdom and the company of the righteous. It is recited to ask for guidance and wisdom.",
+    "source": "Quran, Surah Ash-Shu'ara : 83"
+  },
+  {
+    "category": "dailyDua",
+    "title": "Du'a of Prophet Ibrahim for Offspring",
+    "arabic": "رَبِّ هَبْ لِي مِنَ الصَّالِحِينَ",
+    "latin": "rabbi hab lii minas saalihiin",
+    "translation": "My Lord, grant me [a child] from among the righteous.",
+    "notes": null,
+    "benefits": "This invocation of Prophet Ibrahim asks for a pious offspring. It is recited by those who wish to have righteous children.",
+    "source": "Quran, Surah As-Saffat : 100"
+  },
+  {
+    "category": "dailyDua",
+    "title": "Du'a of Prophet Ibrahim for Protection",
+    "arabic": "رَبِّ إِنَّهُنَّ أَضْلَلْنَ كَثِيرًا مِّنَ النَّاسِ فَمَن تَبِعَنِي فَإِنَّهُ مِنِّي وَمَنْ عَصَانِي فَإِنَّكَ غَفُورٌ رَّحِيمٌ",
+    "latin": "rabbi innahunna adlalna kathiiram minan naas. faman tabi'anii fa innahu minnii wa man 'asaanii fa innaka ghafuurur rahiim",
+    "translation": "My Lord, indeed they have led astray many among the people. So whoever follows me, then he is of me; and whoever disobeys me, then You are Forgiving and Merciful.",
+    "notes": null,
+    "benefits": "This invocation of Prophet Ibrahim expresses his concern for people's guidance. It is recited to ask for Allah's protection and guidance.",
+    "source": "Quran, Surah Ibrahim : 36"
   }
 ]

@@ -132,7 +132,19 @@
       "premium_features": "Premium özellikler",
       "themes_system": "Tema sistemi",
       "sun_info": "Güneş bilgileri",
-      "weekly_view": "Haftalık görünüm"
+      "weekly_view": "Haftalık görünüm",
+      "mosques_finder": "Akıllı cami bulucu",
+      "native_downloads": "Yerel indirmeler",
+      "android_widgets": "Android widget'ları",
+      "lock_screen_player": "Kilit ekranı oynatıcısı",
+      "tactile_controls": "Dokunsal kontroller",
+      "backup_restore": "Yedekleme ve geri yükleme",
+      "data_deletion": "Veri silme",
+      "stripe_payments": "Güvenli Stripe ödemeleri",
+      "user_accounts": "Kullanıcı hesapları",
+      "13_languages": "13 desteklenen dil",
+      "offline_mode": "Çevrimdışı mod",
+      "local_storage": "Güvenli yerel depolama"
     },
 
     "premium_title": "👑 Premium özellikler",
@@ -148,6 +160,15 @@
     "advanced_weekly": "Haftalık namaz görünümü",
     "advanced_sun": "Güneş bilgileri ve zaman",
     "advanced_personalization": "Kişiselleştirme ve ayarlar",
+
+    "new_features_title": "🆕 Yeni özellikler",
+    "new_features_subtitle": "Uygulamaya eklenen son iyileştirmeler:",
+    "new_widgets": "Özelleştirilebilir Android widget'ları",
+    "new_lock_screen": "Kilit ekranı ses oynatıcısı",
+    "new_tactile": "Gelişmiş dokunsal kontroller",
+    "new_downloads": "Optimize edilmiş yerel indirmeler",
+    "new_mosques": "Akıllı cami bulucu",
+    "new_backup": "Tam yedekleme sistemi",
 
     "faq_title": "❓ Sık sorulan sorular",
     "faq_location_question": "Uygulama neden konumuma ihtiyaç duyuyor?",
@@ -1358,5 +1379,26 @@
     "widget_instruction": "Ses ile navigasyon için widget",
     "play_instruction": "Play gösterilen sesi başlatır",
     "close_button": "Anlaşıldı!"
-  }
+  },
+
+  "mosques_finder": "Akıllı Cami Bulucu",
+  "native_downloads": "Yerel İndirmeler",
+  "android_widgets": "Android Widget'ları",
+  "lock_screen_player": "Kilit Ekranı Oynatıcı",
+  "tactile_controls": "Dokunsal Kontroller",
+  "backup_restore": "Yedekleme ve Geri Yükleme",
+  "data_deletion": "Veri Silme",
+  "stripe_payments": "Stripe Ödemeleri",
+  "user_accounts": "Kullanıcı Hesapları",
+  "13_languages": "13 Desteklenen Dil",
+  "offline_mode": "Çevrimdışı Mod",
+  "local_storage": "Yerel Depolama",
+  "new_features_title": "Yeni Özellikler",
+  "new_features_subtitle": "En son iyileştirmeleri keşfedin",
+  "customizable_widgets": "Özelleştirilebilir Android widget'ları",
+  "lock_screen_audio": "Kilit ekranı ses oynatıcı",
+  "advanced_tactile": "Gelişmiş dokunsal kontroller",
+  "optimized_downloads": "Optimize edilmiş yerel indirmeler",
+  "smart_mosque_finder": "Akıllı cami bulucu",
+  "complete_backup_system": "Tam yedekleme sistemi"
 }

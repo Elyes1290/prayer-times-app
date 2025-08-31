@@ -163,7 +163,7 @@
     "category": "dailyDua",
     "title": "دعاء السفر",
     "arabic": "الله أَكْبَرُ،الله أَكْبَرُ،الله أَكْبَرُ،سُبْحَانَ الَّذِى سَخَّرَ لَنَا هَذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ وَإِنَّا إِلَى رَبِّنَا لَمُنْقَلِبُونَ اللَّهُمَّ إِنَّا نَسْأَلُكَ فِى سَفَرِنَا هَذَا الْبِرَّ وَالتَّقْوَى وَمِنَ الْعَمَلِ مَا تَرْضَى اللَّهُمَّ هَوِّنْ عَلَيْنَا سَفَرَنَا هَذَا وَاطْوِ عَنَّا بُعْدَهُ اللَّهُمَّ أَنْتَ الصَّاحِبُ فِى السَّفَرِ وَالْخَلِيفَةُ فِى الأَهْلِ اللَّهُمَّ إِنِّى أَعُوذُ بِكَ مِنْ وَعْثَاءِ السَّفَرِ وَكَآبَةِ الْمَنْظَرِ وَسُوءِ الْمُنْقَلَبِ فِى الْمَالِ وَالأَهْلِ",
-    "latin": "allahu akbar, allahu akbar, allahu akbar. subhaanal ladzi sakh-khara lanaa haadza wa maa kunna lahuu muqriniin wa inna ilaa rabbina lamun qalibuun. allahumma inna nas aluka fii safarina hadzaa al-birra wat taqwa wa minal amali maa tardhaa. allahumma hawwin 'alaina safarana haadza wathwi 'anna bu'dahu. allahumma anta shaahibu fi safar. wal khaliifatu fil ahli. allahumma inni a'uudzubika min wa'tsaa-issafari wa ka-aabatil mandzari wa suuil munqalabi fil maali wal ahli",
+    "latin": "allahu akbar, allahu akbar, allahu akbar. subhaanal ladzi sakh-khara lanaa haadzaa wa maa kunnaa lahuu muqriniin. wa innaa ilaa rabbinaa lamun qalibuun. allahumma inna nas aluka fii safarina hadzaa al-birra wat taqwa wa minal amali maa tardhaa. allahumma hawwin 'alaina safarana haadza wathwi 'anna bu'dahu. allahumma anta shaahibu fi safar. wal khaliifatu fil ahli. allahumma inni a'uudzubika min wa'tsaa-issafari wa ka-aabatil mandzari wa suuil munqalabi fil maali wal ahli",
     "translation": "الله أكبر، الله أكبر، الله أكبر. سبحان الذي سخر لنا هذا وما كنا له مقرنين وإنا إلى ربنا لمنقلبون. اللهم إنا نسألك في سفرنا هذا البر والتقوى ومن العمل ما ترضى. اللهم هون علينا سفرنا هذا واطو عنا بعده. اللهم أنت الصاحب في السفر والخليفة في الأهل. اللهم إني أعوذ بك من وعثاء السفر وكآبة المنظر وسوء المنقلب في المال والأهل.",
     "notes": null,
     "benefits": "يتضمن هذا الدعاء مدح الله وطلب التيسير في السفر والحماية للأهل.",
@@ -213,7 +213,7 @@
     "category": "dailyDua",
     "title": "دعاء ركوب الدابة",
     "arabic": "بِسْمِ اللَّهِ، بِسْمِ اللَّهِ، بِسْمِ اللَّهِ، الحَمْدُ للِه، سُبْحَانَ الَّذِى سَخَّرَ لَنَا هَذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ وَإِنَّا إِلَى رَبِّنَا لَمُنْقَلِبُونَ، سُبْحَانَكَ إِنِّى قَدْ ظَلَمْتُ نَفْسِى فَاغْفِرْ لِى فَإِنَّهُ لاَ يَغْفِرُ الذُّنُوبَ إِلاَّ أَنْتَ",
-    "latin": "bismillah, bismillah, bismillah, alhamdulillah, subhaanalladzi sakh-khara lanaa haadzaa wa maa kunnaa lahuu muqriniin. wa innaa ilaa rabbinaa lamun qalibuun. subhaanaka inni qad dzalamtu nafsii, faghfirlii fa-innahuu laa yaghfirudz dzunuuba illaa anta",
+    "latin": "bismillah, bismillah, bismillah, alhamdulillah, subhaanalladzi sakh-khara lanaa haadzaa wa maa kunnaa lahuu muqriniin. wa innaa ilaa rabbinaa lamun qalibuun. subhaanaka inni qad dzalamtu nafsii, faghfirlii fa-innahuu laa yaghfirudz dzunuuba illa anta",
     "translation": "بسم الله، بسم الله، بسم الله. الحمد لله. سبحان الذي سخر لنا هذا وما كنا له مقرنين وإنا إلى ربنا لمنقلبون. سبحانك إني ظلمت نفسي فاغفر لي، فإنه لا يغفر الذنوب إلا أنت.",
     "notes": null,
     "benefits": "قراءة دعاء الركوب تجعل السفر في حماية الله ويزيد من الأجر والطمأنينة.",
@@ -352,7 +352,7 @@
   {
     "category": "dailyDua",
     "title": "دعاء الحماية من الشيطان",
-    "arabic": "رَبِّ أَعُوْذُ بِكَ مِنْ هَمَزَاتِ الشَّيَاطِيْنِ وَأَعُوْذُ بِكَ رَبِّ أَنْ يَحْضُرُوْنِ",
+    "arabic": "رَبِّ أَعُوْذُ بِكَ مِنْ هَمَزَاتِ الشَّيَاطِينِ وَأَعُوْذُ بِكَ رَبِّ أَنْ يَحْضُرُوْنِ",
     "latin": "rabbi a'uudzu bika min hamazaatisy-syayaathiin wa a'uudzu bika rabbi ay yahdhuruun",
     "translation": "ربي أعوذ بك من همزات الشياطين وأعوذ بك رب أن يحضرون.",
     "notes": null,
@@ -378,5 +378,205 @@
     "notes": null,
     "fawaid": "دعاء إبراهيم عليه السلام يعلمنا بر الوالدين وطلب المغفرة لنا ولهم ولجميع المؤمنين.",
     "source": "سورة إبراهيم: 41"
+  },
+  {
+    "category": "dailyDua",
+    "title": "دعاء الحماية من العين",
+    "arabic": "أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ الَّتِي لَا يُجَاوِزُهُنَّ بَرٌّ وَلَا فَاجِرٌ",
+    "latin": "a'uudzu bi kalimaatillahit taammatil latii laa yujaawizuhunna barrun wa laa faajir",
+    "translation": "أعوذ بكلمات الله التامات التي لا يجاوزهن بر ولا فاجر.",
+    "notes": null,
+    "benefits": "هذا الدعاء يحمي من العين والسحر والأذى. كان النبي ﷺ يعلمه لأصحابه للحماية.",
+    "source": "رواه مسلم وأبو داود"
+  },
+  {
+    "category": "dailyDua",
+    "title": "دعاء حماية البيت",
+    "arabic": "أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ الَّتِي لَا يُجَاوِزُهُنَّ بَرٌّ وَلَا فَاجِرٌ",
+    "latin": "a'uudzu bi kalimaatillahit taammatil latii laa yujaawizuhunna barrun wa laa faajir",
+    "translation": "أعوذ بكلمات الله التامات التي لا يجاوزهن بر ولا فاجر.",
+    "notes": null,
+    "benefits": "هذا الدعاء يحمي البيت من الأذى والجن والتأثيرات السلبية. يخلق حاجزًا روحيًا حول المنزل.",
+    "source": "رواه أبو داود والترمذي"
+  },
+  {
+    "category": "dailyDua",
+    "title": "دعاء الحماية في السفر",
+    "arabic": "اللَّهُمَّ إِنَّا نَسْأَلُكَ فِي سَفَرِنَا هَذَا الْبِرَّ وَالتَّقْوَى وَمِنَ الْعَمَلِ مَا تَرْضَى",
+    "latin": "allahumma innaa nas'aluka fii safarinaa haadzaal birra wat taqwaa wa minal 'amali maa tardhaa",
+    "translation": "اللهم إنا نسألك في سفرنا هذا البر والتقوى ومن العمل ما ترضى.",
+    "notes": null,
+    "benefits": "هذا الدعاء يحمي المسافر ويضمن له سفرًا مباركًا. يسأل الله أن يهدي أعمالنا أثناء السفر.",
+    "source": "رواه مسلم"
+  },
+  {
+    "category": "dailyDua",
+    "title": "دعاء قبل الدراسة",
+    "arabic": "رَبِّ زِدْنِي عِلْمًا",
+    "latin": "rabbi zidnii 'ilmaa",
+    "translation": "ربي زدني علمًا.",
+    "notes": null,
+    "benefits": "هذا الدعاء يسأل الله أن يزيد علمنا. مستحب قبل دراسة القرآن أو العلم أو أي مادة أخرى.",
+    "source": "القرآن، سورة طه: 114"
+  },
+  {
+    "category": "dailyDua",
+    "title": "دعاء الشفاء",
+    "arabic": "أَسْأَلُ اللَّهَ الْعَظِيمَ رَبَّ الْعَرْشِ الْعَظِيمِ أَنْ يَشْفِيَكَ",
+    "latin": "as'alullahaal 'adziim rabbal 'arsyil 'adziim an yashfiyak",
+    "translation": "أسأل الله العظيم رب العرش العظيم أن يشفيك.",
+    "notes": null,
+    "benefits": "هذا الدعاء يقرأ لطلب الشفاء من المريض. يستدعي الله بأسمائه الحسنى لنيل الشفاء.",
+    "source": "رواه أبو داود والترمذي"
+  },
+  {
+    "category": "dailyDua",
+    "title": "دعاء المطر",
+    "arabic": "اللَّهُمَّ صَيِّبًا نَافِعًا",
+    "latin": "allahumma sayyiban naafi'aa",
+    "translation": "اللهم صيبًا نافعًا.",
+    "notes": null,
+    "benefits": "هذا الدعاء يقرأ عند المطر لطلب الله أن يكون المطر نافعًا ويجلب البركة للأرض والمخلوقات.",
+    "source": "رواه البخاري"
+  },
+  {
+    "category": "dailyDua",
+    "title": "دعاء النبي إبراهيم",
+    "arabic": "رَبَّنَا تَقَبَّلْ مِنَّا إِنَّكَ أَنْتَ السَّمِيعُ الْعَلِيمُ",
+    "latin": "rabbanaa taqabbal minnaa innaka antas samii'ul 'aliim",
+    "translation": "ربنا تقبل منا إنك أنت السميع العليم.",
+    "notes": null,
+    "benefits": "هذا الدعاء من النبي إبراهيم يقرأ بعد أداء عبادة لطلب الله قبول أعمالنا.",
+    "source": "القرآن، سورة البقرة: 127"
+  },
+  {
+    "category": "dailyDua",
+    "title": "دعاء النبي موسى",
+    "arabic": "رَبِّ اشْرَحْ لِي صَدْرِي وَيَسِّرْ لِي أَمْرِي",
+    "latin": "rabbi ishrah lii sadrii wa yassir lii amrii",
+    "translation": "ربي اشرح لي صدري ويسر لي أمري.",
+    "notes": null,
+    "benefits": "هذا الدعاء من النبي موسى يسأل الله أن يشرح القلب ويسهل الأمور. مفيد لتجاوز الصعاب.",
+    "source": "القرآن، سورة طه: 25-26"
+  },
+  {
+    "category": "dailyDua",
+    "title": "دعاء الشكر للنعم",
+    "arabic": "اللَّهُمَّ لَكَ الْحَمْدُ حَتَّى تَرْضَى",
+    "latin": "allahumma lakal hamdu hattaa tardhaa",
+    "translation": "اللهم لك الحمد حتى ترضى.",
+    "notes": null,
+    "benefits": "هذا الدعاء يعبر عن الشكر لله على نعمه. يقرأ لشكر الله بشكل كامل ومخلص.",
+    "source": "رواه مسلم"
+  },
+  {
+    "category": "dailyDua",
+    "title": "دعاء الصحة والأمان",
+    "arabic": "اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَافِيَةَ فِي الدُّنْيَا وَالْآخِرَةِ",
+    "latin": "allahumma innii as'alukal 'aafiyata fid dunyaa wal aakhirah",
+    "translation": "اللهم إني أسألك العافية في الدنيا والآخرة.",
+    "notes": null,
+    "benefits": "هذا الدعاء يسأل الله الصحة الجسدية والروحية والأمان في الدنيا والآخرة. دعاء شامل.",
+    "source": "رواه البخاري"
+  },
+  {
+    "category": "dailyDua",
+    "title": "دعاء النبي يوسف",
+    "arabic": "رَبِّ قَدْ آتَيْتَنِي مِنَ الْمُلْكِ وَعَلَّمْتَنِي مِن تَأْوِيلِ الْأَحَادِيثِ فَاطِرَ السَّمَاوَاتِ وَالْأَرْضِ أَنتَ وَلِيِّي فِي الدُّنْيَا وَالْآخِرَةِ تَوَفَّنِي مُسْلِمًا وَأَلْحِقْنِي بِالصَّالِحِينَ",
+    "latin": "rabbi qad aataitanii minal mulki wa 'allamtanii min ta'wiilil ahaadiits. faatiras samaawaati wal ardhi anta waliyyii fid dunyaa wal aakhirah. tawaffanii musliman wa alhiqnii bissaalihiin",
+    "translation": "ربي قد آتيتني من الملك وعلمتني من تأويل الأحاديث فاطر السماوات والأرض أنت وليي في الدنيا والآخرة توفني مسلمًا وألحقني بالصالحين.",
+    "notes": null,
+    "benefits": "هذا الدعاء من النبي يوسف يعبر عن الشكر لنعم الله ويسأل خاتمة حسنة. يقرأ لشكر الله وطلب الخاتمة الحسنة.",
+    "source": "القرآن، سورة يوسف: 101"
+  },
+  {
+    "category": "dailyDua",
+    "title": "دعاء النبي نوح",
+    "arabic": "رَّبِّ إِنِّي أَعُوذُ بِكَ أَنْ أَسْأَلَكَ مَا لَيْسَ لِي بِهِ عِلْمٌ وَإِلَّا تَغْفِرْ لِي وَتَرْحَمْنِي أَكُن مِّنَ الْخَاسِرِينَ",
+    "latin": "rabbi innii a'uudzu bika an as'alaka maa laisa lii bihi 'ilm. wa illaa taghfir lii wa tarhamnii akum minal khaasiriin",
+    "translation": "ربي إني أعوذ بك أن أسألك ما ليس لي به علم وإلا تغفر لي وترحمني أكن من الخاسرين.",
+    "notes": null,
+    "benefits": "هذا الدعاء من النبي نوح يسأل مغفرة ورحمة الله. يعلمنا التواضع والاعتراف بحدودنا أمام علم الله.",
+    "source": "القرآن، سورة هود: 47"
+  },
+  {
+    "category": "dailyDua",
+    "title": "دعاء النبي أيوب",
+    "arabic": "أَنِّي مَسَّنِيَ الضُّرُّ وَأَنتَ أَرْحَمُ الرَّاحِمِينَ",
+    "latin": "annii massaniyad durru wa anta arhamur raahimiin",
+    "translation": "أني مسني الضر وأنت أرحم الراحمين.",
+    "notes": null,
+    "benefits": "هذا الدعاء من النبي أيوب يقرأ عند البلاء والصعاب. يعبر عن الثقة برحمة الله وطلب عونه.",
+    "source": "القرآن، سورة الأنبياء: 83"
+  },
+  {
+    "category": "dailyDua",
+    "title": "دعاء النبي سليمان",
+    "arabic": "رَبِّ أَوْزِعْنِي أَنْ أَشْكُرَ نِعْمَتَكَ الَّتِي أَنْعَمْتَ عَلَيَّ وَعَلَىٰ وَالِدَيَّ وَأَنْ أَعْمَلَ صَالِحًا تَرْضَاهُ وَأَدْخِلْنِي بِرَحْمَتِكَ فِي عِبَادِكَ الصَّالِحِينَ",
+    "latin": "rabbi awzi'nii an ashkura ni'matakal latii an'amta 'alayya wa 'alaa waalidayya wa an a'mala saalihan tardhaahu wa adkhilnii birahmatika fii 'ibaadikas saalihiin",
+    "translation": "ربي أوزعني أن أشكر نعمتك التي أنعمت علي وعلى والدي وأن أعمل صالحًا ترضاه وأدخلني برحمتك في عبادك الصالحين.",
+    "notes": null,
+    "benefits": "هذا الدعاء من النبي سليمان يسأل الله أن يلهمنا الشكر والأعمال الصالحة. يقرأ لطلب الهداية للخير.",
+    "source": "القرآن، سورة النمل: 19"
+  },
+  {
+    "category": "dailyDua",
+    "title": "دعاء النبي زكريا",
+    "arabic": "رَبِّ لَا تَذَرْنِي فَرْدًا وَأَنتَ خَيْرُ الْوَارِثِينَ",
+    "latin": "rabbi laa tadzarnii fardan wa anta khayrul waarithiin",
+    "translation": "ربي لا تذرني فردًا وأنت خير الوارثين.",
+    "notes": null,
+    "benefits": "هذا الدعاء من النبي زكريا يسأل الله ألا يتركه وحيدًا. يقرأ لطلب صحبة الله وحمايته.",
+    "source": "القرآن، سورة الأنبياء: 89"
+  },
+  {
+    "category": "dailyDua",
+    "title": "دعاء النبي زكريا للولد",
+    "arabic": "رَبِّ هَبْ لِي مِن لَّدُنكَ ذُرِّيَّةً طَيِّبَةً إِنَّكَ سَمِيعُ الدُّعَاءِ",
+    "latin": "rabbi hab lii min ladunka dzurriyyatan tayyibah. innaka samii'ud du'aa",
+    "translation": "ربي هب لي من لدنك ذرية طيبة إنك سميع الدعاء.",
+    "notes": null,
+    "benefits": "هذا الدعاء من النبي زكريا يسأل الله أن يهبه ذرية صالحة. يقرأ لمن يريد الأولاد.",
+    "source": "القرآن، سورة آل عمران: 38"
+  },
+  {
+    "category": "dailyDua",
+    "title": "دعاء النبي إبراهيم للأمان",
+    "arabic": "رَبِّ اجْعَلْ هَٰذَا الْبَلَدَ آمِنًا وَاجْنُبْنِي وَبَنِيَّ أَن نَّعْبُدَ الْأَصْنَامَ",
+    "latin": "rabbij 'al haadzal balada aaminan waj nubnii wa baniyya an na'budal asnaam",
+    "translation": "ربي اجعل هذا البلد آمنًا واجنبني وبني أن نعبد الأصنام.",
+    "notes": null,
+    "benefits": "هذا الدعاء من النبي إبراهيم يسأل الأمان والحماية من الشرك. يقرأ لطلب الحماية الروحية.",
+    "source": "القرآن، سورة إبراهيم: 35"
+  },
+  {
+    "category": "dailyDua",
+    "title": "دعاء النبي إبراهيم للهداية",
+    "arabic": "رَبِّ هَبْ لِي حُكْمًا وَأَلْحِقْنِي بِالصَّالِحِينَ",
+    "latin": "rabbi hab lii hukman wa alhiqnii bissaalihiin",
+    "translation": "ربي هب لي حكمًا وألحقني بالصالحين.",
+    "notes": null,
+    "benefits": "هذا الدعاء من النبي إبراهيم يسأل الحكمة وصحبة الصالحين. يقرأ لطلب الهداية والحكمة.",
+    "source": "القرآن، سورة الشعراء: 83"
+  },
+  {
+    "category": "dailyDua",
+    "title": "دعاء النبي إبراهيم للذرية",
+    "arabic": "رَبِّ هَبْ لِي مِنَ الصَّالِحِينَ",
+    "latin": "rabbi hab lii minas saalihiin",
+    "translation": "ربي هب لي من الصالحين.",
+    "notes": null,
+    "benefits": "هذا الدعاء من النبي إبراهيم يسأل ذرية صالحة. يقرأ لمن يريد أولادًا صالحين.",
+    "source": "القرآن، سورة الصافات: 100"
+  },
+  {
+    "category": "dailyDua",
+    "title": "دعاء النبي إبراهيم للحماية",
+    "arabic": "رَبِّ إِنَّهُنَّ أَضْلَلْنَ كَثِيرًا مِّنَ النَّاسِ فَمَن تَبِعَنِي فَإِنَّهُ مِنِّي وَمَنْ عَصَانِي فَإِنَّكَ غَفُورٌ رَّحِيمٌ",
+    "latin": "rabbi innahunna adlalna kathiiram minan naas. faman tabi'anii fa innahu minnii wa man 'asaanii fa innaka ghafuurur rahiim",
+    "translation": "ربي إنهن أضللن كثيرًا من الناس فمن تبعني فإنه مني ومن عصاني فإنك غفور رحيم.",
+    "notes": null,
+    "benefits": "هذا الدعاء من النبي إبراهيم يعبر عن قلقه على هداية الناس. يقرأ لطلب الحماية والهداية من الله.",
+    "source": "القرآن، سورة إبراهيم: 36"
   }
 ]

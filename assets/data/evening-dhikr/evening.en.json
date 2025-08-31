@@ -188,5 +188,95 @@
     "notes": "Read 3x",
     "benefits": "Whoever recites it three times in the evening, they will not be afflicted with fever that night.",
     "source": "HR. Ahmad 11/290, an-Nasa'i in 'Amalul Yaum wal Lailah No. 596, Shahiih at-Targhiib wat Tarhiib 1/412 No. 652, Shahiih al-Jaami 'ish Shaghiir No. 6427"
+  },
+  {
+    "category": "eveningDhikr",
+    "title": "Seeking Protection from Poverty and Humiliation",
+    "arabic": "اللهم إني أعوذ بك من الفقر والقلة والذلة، وأعوذ بك من أن أظلم أو أُظلم.",
+    "latin": "allahumma inni a'udhu bika min al-faqri wa al-qillati wa al-dhillati, wa a'udhu bika min an azlima aw uzlam",
+    "translation": "O Allah, I seek refuge in You from poverty, lack and humiliation, and I seek refuge in You from being unjust or being a victim of injustice.",
+    "notes": "Read 1x",
+    "benefits": "This supplication protects against material and spiritual difficulties, and asks for justice in our actions.",
+    "source": "HR. Abu Dawud No. 1544, an-Nasa'i VIII/282, Ibn Majah No. 3872, authenticated by al-Albani"
+  },
+  {
+    "category": "eveningDhikr",
+    "title": "Seeking Protection from Cowardice and Laziness",
+    "arabic": "اللهم إني أعوذ بك من العجز والكسل والجبن والبخل والهرم وعذاب القبر. اللهم آت نفسي تقواها، وزكها أنت خير من زكاها، أنت وليها ومولاها.",
+    "latin": "allahumma inni a'udhu bika min al-'ajzi wa al-kasali wa al-jubni wa al-bukhli wa al-harami wa 'adhabi al-qabr. allahumma ati nafsi taqwaha, wa zakkiha anta khayru man zakkaha, anta waliyyuha wa mawlaha",
+    "translation": "O Allah, I seek refuge in You from incapacity, laziness, cowardice, miserliness, old age and the punishment of the grave. O Allah, grant my soul its piety, purify it, You are the best of those who purify it, You are its Guardian and Lord.",
+    "notes": "Read 1x",
+    "benefits": "The Prophet ﷺ used to recite this supplication morning and evening to ask for protection against character flaws and purification of the soul.",
+    "source": "HR. Muslim No. 2722, Abu Dawud No. 5069, at-Tirmidhi No. 3393, Ibn Majah No. 3837"
+  },
+  {
+    "category": "eveningDhikr",
+    "title": "Seeking Protection from the Evils of Life",
+    "arabic": "اللهم إني أعوذ بك من شر سمعي، ومن شر بصري، ومن شر لساني، ومن شر قلبي، ومن شر منيي.",
+    "latin": "allahumma inni a'udhu bika min sharri sam'i, wa min sharri basari, wa min sharri lisani, wa min sharri qalbi, wa min sharri maniyyi",
+    "translation": "O Allah, I seek refuge in You from the evil of my hearing, from the evil of my sight, from the evil of my tongue, from the evil of my heart, and from the evil of my semen.",
+    "notes": "Read 1x",
+    "benefits": "This supplication protects all our senses and organs against evils and sins that may affect them.",
+    "source": "HR. Abu Dawud No. 1551, at-Tirmidhi No. 3392, Ibn Majah No. 3880, authenticated by al-Albani"
+  },
+  {
+    "category": "eveningDhikr",
+    "title": "Seeking Protection from the Trial of the Grave",
+    "arabic": "اللهم إني أعوذ بك من عذاب القبر، وأعوذ بك من فتنة المسيح الدجال، وأعوذ بك من فتنة المحيا والممات. اللهم إني أعوذ بك من المغرم والمأثم.",
+    "latin": "allahumma inni a'udhu bika min 'adhabi al-qabr, wa a'udhu bika min fitnati al-masihi ad-dajjal, wa a'udhu bika min fitnati al-mahya wa al-mamat. allahumma inni a'udhu bika min al-maghrami wa al-ma'tham",
+    "translation": "O Allah, I seek refuge in You from the punishment of the grave, from the trial of the Antichrist, and from the trial of life and death. O Allah, I seek refuge in You from debt and sin.",
+    "notes": "Read 1x",
+    "benefits": "The Prophet ﷺ used to recite this supplication morning and evening to protect himself against the great trials of life and the hereafter.",
+    "source": "HR. al-Bukhari No. 6367, Muslim No. 589, Abu Dawud No. 5074, at-Tirmidhi No. 3390"
+  },
+  {
+    "category": "eveningDhikr",
+    "title": "Seeking Protection from Disbelief and Poverty",
+    "arabic": "اللهم إني أعوذ بك من الكفر والفقر، وأعوذ بك من عذاب القبر، لا إله إلا أنت.",
+    "latin": "allahumma inni a'udhu bika min al-kufri wa al-faqr, wa a'udhu bika min 'adhabi al-qabr, la ilaha illa anta",
+    "translation": "O Allah, I seek refuge in You from disbelief and poverty, and from the punishment of the grave. None is worthy of worship except You.",
+    "notes": "Read 1x",
+    "benefits": "This supplication protects against the two greatest evils: losing faith and falling into poverty.",
+    "source": "HR. Abu Dawud No. 5090, an-Nasa'i VIII/282, Ibn Majah No. 3837, authenticated by al-Albani"
+  },
+  {
+    "category": "eveningDhikr",
+    "title": "Seeking Protection from Hidden Evils",
+    "arabic": "اللهم إني أعوذ بك من شر ما عملت، ومن شر ما لم أعمل.",
+    "latin": "allahumma inni a'udhu bika min sharri ma 'amiltu, wa min sharri ma lam a'mal",
+    "translation": "O Allah, I seek refuge in You from the evil of what I have done, and from the evil of what I have not done.",
+    "notes": "Read 1x",
+    "benefits": "This supplication asks for protection against the consequences of our actions and against sins of omission.",
+    "source": "HR. Muslim No. 2716, Abu Dawud No. 5074, at-Tirmidhi No. 3390, Ibn Majah No. 3837"
+  },
+  {
+    "category": "eveningDhikr",
+    "title": "Seeking Protection from Betrayal",
+    "arabic": "اللهم إني أعوذ بك من الخيانة، فإنها بئست البطانة، وأعوذ بك من سوء المنظر في الأهل والمال.",
+    "latin": "allahumma inni a'udhu bika min al-khiyanati, fa innaha bi'sat al-bitana, wa a'udhu bika min su'i al-manzari fi al-ahli wa al-mal",
+    "translation": "O Allah, I seek refuge in You from betrayal, for it is a bad advisor, and I seek refuge in You from bad omens concerning family and wealth.",
+    "notes": "Read 1x",
+    "benefits": "This supplication protects against betrayal and asks for blessing for family and wealth.",
+    "source": "HR. Abu Dawud No. 1544, an-Nasa'i VIII/282, Ibn Majah No. 3872, authenticated by al-Albani"
+  },
+  {
+    "category": "eveningDhikr",
+    "title": "Seeking Protection from the Loss of Blessings",
+    "arabic": "اللهم إني أعوذ بك من زوال نعمتك، وتحول عافيتك، وفجاءة نقمتك، وجميع سخطك.",
+    "latin": "allahumma inni a'udhu bika min zawali ni'matika, wa tahawwuli 'afiyatika, wa fuja'ati niqmatika, wa jami'i sakhitika",
+    "translation": "O Allah, I seek refuge in You from the disappearance of Your blessings, the change of Your protection, the suddenness of Your wrath, and all Your displeasure.",
+    "notes": "Read 1x",
+    "benefits": "This supplication asks for the preservation of Allah's blessings and protection against His wrath.",
+    "source": "HR. Muslim No. 2739, Abu Dawud No. 5074, at-Tirmidhi No. 3390, Ibn Majah No. 3837"
+  },
+  {
+    "category": "eveningDhikr",
+    "title": "Seeking Protection from the Evils of the Night",
+    "arabic": "اللهم إني أعوذ بك من شر الليل، وأعوذ بك من شر النهار، وأعوذ بك من شر طلوع الفجر، وأعوذ بك من شر دخول الليل.",
+    "latin": "allahumma inni a'udhu bika min sharri al-layli, wa a'udhu bika min sharri an-nahari, wa a'udhu bika min sharri tulu'i al-fajr, wa a'udhu bika min sharri dukhuli al-layl",
+    "translation": "O Allah, I seek refuge in You from the evil of the night, from the evil of the day, from the evil of the rising dawn, and from the evil of the entering of the night.",
+    "notes": "Read 1x",
+    "benefits": "This supplication protects against all evils that may occur at different times of the day and night.",
+    "source": "HR. Abu Dawud No. 5074, at-Tirmidhi No. 3390, Ibn Majah No. 3837, authenticated by al-Albani"
   }
 ]

@@ -188,5 +188,95 @@
     "notes": "Leer 3 veces",
     "benefits": "Quien lo recita tres veces por la tarde, no sufrirá fiebre ni ningún mal esa noche.",
     "source": "HR. Ahmad 11/290, an-Nasa'i en 'Amalul Yaum wal Lailah No. 596, Sahih at-Targhib wat Tarhib 1/412 No. 652, Sahih al-Yami' No. 6427"
+  },
+  {
+    "category": "eveningDhikr",
+    "title": "Petición de protección contra la pobreza y la humillación",
+    "arabic": "اللهم إني أعوذ بك من الفقر والقلة والذلة، وأعوذ بك من أن أظلم أو أُظلم.",
+    "latin": "allahumma inni a'udhu bika min al-faqri wa al-qillati wa al-dhillati, wa a'udhu bika min an azlima aw uzlam",
+    "translation": "Oh Allah, busco refugio en Ti contra la pobreza, la escasez y la humillación, y busco refugio en Ti contra ser injusto o ser víctima de injusticia.",
+    "notes": "Leer 1 vez",
+    "benefits": "Esta súplica protege contra las dificultades materiales y espirituales, y pide justicia en nuestras acciones.",
+    "source": "HR. Abu Dawud No. 1544, an-Nasa'i VIII/282, Ibn Majah No. 3872, autenticado por al-Albani"
+  },
+  {
+    "category": "eveningDhikr",
+    "title": "Petición de protección contra la cobardía y la pereza",
+    "arabic": "اللهم إني أعوذ بك من العجز والكسل والجبن والبخل والهرم وعذاب القبر. اللهم آت نفسي تقواها، وزكها أنت خير من زكاها، أنت وليها ومولاها.",
+    "latin": "allahumma inni a'udhu bika min al-'ajzi wa al-kasali wa al-jubni wa al-bukhli wa al-harami wa 'adhabi al-qabr. allahumma ati nafsi taqwaha, wa zakkiha anta khayru man zakkaha, anta waliyyuha wa mawlaha",
+    "translation": "Oh Allah, busco refugio en Ti contra la incapacidad, la pereza, la cobardía, la avaricia, la vejez y el castigo de la tumba. Oh Allah, concede a mi alma su piedad, purifícala, Tú eres el mejor de los que la purifican, Tú eres su Guardián y Señor.",
+    "notes": "Leer 1 vez",
+    "benefits": "El Profeta ﷺ recitaba esta súplica por la mañana y por la tarde para pedir protección contra los defectos del carácter y la purificación del alma.",
+    "source": "HR. Muslim No. 2722, Abu Dawud No. 5069, at-Tirmidhi No. 3393, Ibn Majah No. 3837"
+  },
+  {
+    "category": "eveningDhikr",
+    "title": "Petición de protección contra los males de la vida",
+    "arabic": "اللهم إني أعوذ بك من شر سمعي، ومن شر بصري، ومن شر لساني، ومن شر قلبي، ومن شر منيي.",
+    "latin": "allahumma inni a'udhu bika min sharri sam'i, wa min sharri basari, wa min sharri lisani, wa min sharri qalbi, wa min sharri maniyyi",
+    "translation": "Oh Allah, busco refugio en Ti contra el mal de mi oído, contra el mal de mi vista, contra el mal de mi lengua, contra el mal de mi corazón, y contra el mal de mi semen.",
+    "notes": "Leer 1 vez",
+    "benefits": "Esta súplica protege todos nuestros sentidos y órganos contra los males y pecados que pueden afectarlos.",
+    "source": "HR. Abu Dawud No. 1551, at-Tirmidhi No. 3392, Ibn Majah No. 3880, autenticado por al-Albani"
+  },
+  {
+    "category": "eveningDhikr",
+    "title": "Petición de protección contra la prueba de la tumba",
+    "arabic": "اللهم إني أعوذ بك من عذاب القبر، وأعوذ بك من فتنة المسيح الدجال، وأعوذ بك من فتنة المحيا والممات. اللهم إني أعوذ بك من المغرم والمأثم.",
+    "latin": "allahumma inni a'udhu bika min 'adhabi al-qabr, wa a'udhu bika min fitnati al-masihi ad-dajjal, wa a'udhu bika min fitnati al-mahya wa al-mamat. allahumma inni a'udhu bika min al-maghrami wa al-ma'tham",
+    "translation": "Oh Allah, busco refugio en Ti contra el castigo de la tumba, contra la prueba del Anticristo, y contra la prueba de la vida y la muerte. Oh Allah, busco refugio en Ti contra la deuda y el pecado.",
+    "notes": "Leer 1 vez",
+    "benefits": "El Profeta ﷺ recitaba esta súplica por la mañana y por la tarde para protegerse contra las grandes pruebas de la vida y del más allá.",
+    "source": "HR. al-Bukhari No. 6367, Muslim No. 589, Abu Dawud No. 5074, at-Tirmidhi No. 3390"
+  },
+  {
+    "category": "eveningDhikr",
+    "title": "Petición de protección contra la incredulidad y la pobreza",
+    "arabic": "اللهم إني أعوذ بك من الكفر والفقر، وأعوذ بك من عذاب القبر، لا إله إلا أنت.",
+    "latin": "allahumma inni a'udhu bika min al-kufri wa al-faqr, wa a'udhu bika min 'adhabi al-qabr, la ilaha illa anta",
+    "translation": "Oh Allah, busco refugio en Ti contra la incredulidad y la pobreza, y contra el castigo de la tumba. Ninguno es digno de adoración excepto Tú.",
+    "notes": "Leer 1 vez",
+    "benefits": "Esta súplica protege contra los dos mayores males: perder la fe y caer en la pobreza.",
+    "source": "HR. Abu Dawud No. 5090, an-Nasa'i VIII/282, Ibn Majah No. 3837, autenticado por al-Albani"
+  },
+  {
+    "category": "eveningDhikr",
+    "title": "Petición de protección contra los males ocultos",
+    "arabic": "اللهم إني أعوذ بك من شر ما عملت، ومن شر ما لم أعمل.",
+    "latin": "allahumma inni a'udhu bika min sharri ma 'amiltu, wa min sharri ma lam a'mal",
+    "translation": "Oh Allah, busco refugio en Ti contra el mal de lo que he hecho, y contra el mal de lo que no he hecho.",
+    "notes": "Leer 1 vez",
+    "benefits": "Esta súplica pide protección contra las consecuencias de nuestros actos y contra los pecados de omisión.",
+    "source": "HR. Muslim No. 2716, Abu Dawud No. 5074, at-Tirmidhi No. 3390, Ibn Majah No. 3837"
+  },
+  {
+    "category": "eveningDhikr",
+    "title": "Petición de protección contra la traición",
+    "arabic": "اللهم إني أعوذ بك من الخيانة، فإنها بئست البطانة، وأعوذ بك من سوء المنظر في الأهل والمال.",
+    "latin": "allahumma inni a'udhu bika min al-khiyanati, fa innaha bi'sat al-bitana, wa a'udhu bika min su'i al-manzari fi al-ahli wa al-mal",
+    "translation": "Oh Allah, busco refugio en Ti contra la traición, porque es un mal consejero, y busco refugio en Ti contra los malos presagios concernientes a la familia y la riqueza.",
+    "notes": "Leer 1 vez",
+    "benefits": "Esta súplica protege contra la traición y pide bendición para la familia y la riqueza.",
+    "source": "HR. Abu Dawud No. 1544, an-Nasa'i VIII/282, Ibn Majah No. 3872, autenticado por al-Albani"
+  },
+  {
+    "category": "eveningDhikr",
+    "title": "Petición de protección contra la pérdida de las bendiciones",
+    "arabic": "اللهم إني أعوذ بك من زوال نعمتك، وتحول عافيتك، وفجاءة نقمتك، وجميع سخطك.",
+    "latin": "allahumma inni a'udhu bika min zawali ni'matika, wa tahawwuli 'afiyatika, wa fuja'ati niqmatika, wa jami'i sakhitika",
+    "translation": "Oh Allah, busco refugio en Ti contra la desaparición de Tus bendiciones, el cambio de Tu protección, la súbita aparición de Tu ira, y todo Tu descontento.",
+    "notes": "Leer 1 vez",
+    "benefits": "Esta súplica pide la preservación de las bendiciones de Allah y protección contra Su ira.",
+    "source": "HR. Muslim No. 2739, Abu Dawud No. 5074, at-Tirmidhi No. 3390, Ibn Majah No. 3837"
+  },
+  {
+    "category": "eveningDhikr",
+    "title": "Petición de protección contra los males de la noche",
+    "arabic": "اللهم إني أعوذ بك من شر الليل، وأعوذ بك من شر النهار، وأعوذ بك من شر طلوع الفجر، وأعوذ بك من شر دخول الليل.",
+    "latin": "allahumma inni a'udhu bika min sharri al-layli, wa a'udhu bika min sharri an-nahari, wa a'udhu bika min sharri tulu'i al-fajr, wa a'udhu bika min sharri dukhuli al-layl",
+    "translation": "Oh Allah, busco refugio en Ti contra el mal de la noche, contra el mal del día, contra el mal del amanecer, y contra el mal de la entrada de la noche.",
+    "notes": "Leer 1 vez",
+    "benefits": "Esta súplica protege contra todos los males que pueden ocurrir en diferentes momentos del día y de la noche.",
+    "source": "HR. Abu Dawud No. 5074, at-Tirmidhi No. 3390, Ibn Majah No. 3837, autenticado por al-Albani"
   }
 ]

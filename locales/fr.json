@@ -132,7 +132,19 @@
       "premium_features": "Fonctionnalités premium",
       "themes_system": "Système de thèmes",
       "sun_info": "Informations solaires",
-      "weekly_view": "Vue hebdomadaire"
+      "weekly_view": "Vue hebdomadaire",
+      "mosques_finder": "Localisateur de mosquées",
+      "native_downloads": "Téléchargements natifs",
+      "android_widgets": "Widgets Android",
+      "lock_screen_player": "Lecteur écran de verrouillage",
+      "tactile_controls": "Contrôles tactiles",
+      "backup_restore": "Sauvegarde et restauration",
+      "data_deletion": "Suppression des données",
+      "stripe_payments": "Paiements Stripe sécurisés",
+      "user_accounts": "Comptes utilisateurs",
+      "13_languages": "13 langues supportées",
+      "offline_mode": "Mode hors ligne",
+      "local_storage": "Stockage local sécurisé"
     },
 
     "faq_title": "❓ Questions fréquentes",
@@ -158,6 +170,15 @@
     "advanced_weekly": "Vue hebdomadaire des prières",
     "advanced_sun": "Informations solaires détaillées",
     "advanced_personalization": "Personnalisation avancée de l'interface",
+
+    "new_features_title": "🆕 Nouvelles fonctionnalités",
+    "new_features_subtitle": "Dernières améliorations ajoutées à l'application :",
+    "new_widgets": "Widgets Android personnalisables",
+    "new_lock_screen": "Lecteur audio écran de verrouillage",
+    "new_tactile": "Contrôles tactiles avancés",
+    "new_downloads": "Téléchargements natifs optimisés",
+    "new_mosques": "Localisateur de mosquées intelligent",
+    "new_backup": "Système de sauvegarde complet",
 
     "support_title": "🤝 Support et communauté",
     "send_suggestion": "Envoyer une suggestion",
@@ -1364,5 +1385,26 @@
     "widget_instruction": "Widget pour navigation avec audio",
     "play_instruction": "Play lance l'audio affiché",
     "close_button": "Compris !"
-  }
+  },
+
+  "mosques_finder": "Recherche de Mosquées Intelligente",
+  "native_downloads": "Téléchargements Natifs",
+  "android_widgets": "Widgets Android",
+  "lock_screen_player": "Lecteur Écran de Verrouillage",
+  "tactile_controls": "Contrôles Tactiles",
+  "backup_restore": "Sauvegarde & Restauration",
+  "data_deletion": "Suppression de Données",
+  "stripe_payments": "Paiements Stripe",
+  "user_accounts": "Comptes Utilisateurs",
+  "13_languages": "13 Langues Supportées",
+  "offline_mode": "Mode Hors Ligne",
+  "local_storage": "Stockage Local",
+  "new_features_title": "Nouvelles Fonctionnalités",
+  "new_features_subtitle": "Découvrez les dernières améliorations",
+  "customizable_widgets": "Widgets Android personnalisables",
+  "lock_screen_audio": "Lecteur audio écran de verrouillage",
+  "advanced_tactile": "Contrôles tactiles avancés",
+  "optimized_downloads": "Téléchargements natifs optimisés",
+  "smart_mosque_finder": "Recherche de mosquées intelligente",
+  "complete_backup_system": "Système de sauvegarde complet"
 }

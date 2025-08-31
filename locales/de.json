@@ -132,7 +132,19 @@
       "premium_features": "Premium-Funktionen",
       "themes_system": "Themen-System",
       "sun_info": "Sonneninformationen",
-      "weekly_view": "Wochenansicht"
+      "weekly_view": "Wochenansicht",
+      "mosques_finder": "Intelligenter Moschee-Finder",
+      "native_downloads": "Native Downloads",
+      "android_widgets": "Android-Widgets",
+      "lock_screen_player": "Sperrbildschirm-Player",
+      "tactile_controls": "Taktile Steuerung",
+      "backup_restore": "Backup & Wiederherstellung",
+      "data_deletion": "Datenlöschung",
+      "stripe_payments": "Stripe-Zahlungen",
+      "user_accounts": "Benutzerkonten",
+      "13_languages": "13 unterstützte Sprachen",
+      "offline_mode": "Offline-Modus",
+      "local_storage": "Lokaler Speicher"
     },
 
     "premium_title": "👑 Premium-Funktionen",
@@ -148,6 +160,15 @@
     "advanced_weekly": "Wochenansicht der Gebete",
     "advanced_sun": "Detaillierte Sonneninformationen",
     "advanced_personalization": "Erweiterte Interface-Anpassung",
+
+    "new_features_title": "🆕 Neue Funktionen",
+    "new_features_subtitle": "Entdecken Sie die neuesten Verbesserungen:",
+    "new_widgets": "Anpassbare Android-Widgets",
+    "new_lock_screen": "Sperrbildschirm-Audio-Player",
+    "new_tactile": "Erweiterte taktile Steuerung",
+    "new_downloads": "Optimierte native Downloads",
+    "new_mosques": "Intelligenter Moschee-Finder",
+    "new_backup": "Vollständiges Backup-System",
 
     "faq_title": "❓ Häufig gestellte Fragen",
     "faq_location_question": "Warum benötigt die App meinen Standort?",
@@ -1358,5 +1379,26 @@
     "widget_instruction": "Widget für Navigation mit Audio",
     "play_instruction": "Play startet das angezeigte Audio",
     "close_button": "Verstanden!"
-  }
+  },
+
+  "mosques_finder": "Intelligenter Moschee-Finder",
+  "native_downloads": "Native Downloads",
+  "android_widgets": "Android-Widgets",
+  "lock_screen_player": "Sperrbildschirm-Player",
+  "tactile_controls": "Taktile Steuerung",
+  "backup_restore": "Backup & Wiederherstellung",
+  "data_deletion": "Datenlöschung",
+  "stripe_payments": "Stripe-Zahlungen",
+  "user_accounts": "Benutzerkonten",
+  "13_languages": "13 Unterstützte Sprachen",
+  "offline_mode": "Offline-Modus",
+  "local_storage": "Lokaler Speicher",
+  "new_features_title": "Neue Funktionen",
+  "new_features_subtitle": "Entdecken Sie die neuesten Verbesserungen",
+  "customizable_widgets": "Anpassbare Android-Widgets",
+  "lock_screen_audio": "Sperrbildschirm-Audio-Player",
+  "advanced_tactile": "Erweiterte taktile Steuerung",
+  "optimized_downloads": "Optimierte native Downloads",
+  "smart_mosque_finder": "Intelligenter Moschee-Finder",
+  "complete_backup_system": "Vollständiges Backup-System"
 }

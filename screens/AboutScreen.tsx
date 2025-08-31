@@ -28,7 +28,7 @@ export default function AboutScreen() {
   // Cette date correspond à votre dernière publication sur Google Play
   const getLastUpdateDate = () => {
     // 🎯 Vous pouvez mettre à jour cette date à chaque release Google Play
-    const lastReleaseDate = "2025-08-19"; // Format YYYY-MM-DD
+    const lastReleaseDate = "2025-01-31"; // Format YYYY-MM-DD
     return new Date(lastReleaseDate).toLocaleDateString("fr-FR", {
       day: "numeric",
       month: "long",
@@ -53,6 +53,18 @@ export default function AboutScreen() {
     { icon: "palette", key: "themes_system" },
     { icon: "sun", key: "sun_info" },
     { icon: "calendar-week", key: "weekly_view" },
+    { icon: "mosque", key: "mosques_finder" },
+    { icon: "download", key: "native_downloads" },
+    { icon: "widget", key: "android_widgets" },
+    { icon: "lock", key: "lock_screen_player" },
+    { icon: "gesture", key: "tactile_controls" },
+    { icon: "backup-restore", key: "backup_restore" },
+    { icon: "shield-check", key: "data_deletion" },
+    { icon: "credit-card", key: "stripe_payments" },
+    { icon: "account-multiple", key: "user_accounts" },
+    { icon: "translate", key: "13_languages" },
+    { icon: "wifi", key: "offline_mode" },
+    { icon: "database", key: "local_storage" },
   ];
 
   const faqData = [
@@ -305,6 +317,70 @@ export default function AboutScreen() {
           </View>
         </View>
 
+        {/* New Features Section */}
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>
+            {t("abouts.new_features_title")}
+          </Text>
+          <Text style={styles.sectionSubtitle}>
+            {t("abouts.new_features_subtitle")}
+          </Text>
+          <View style={styles.newFeaturesGrid}>
+            <View style={styles.newFeatureItem}>
+              <MaterialCommunityIcons
+                name="widgets"
+                size={24}
+                color="#b59d42"
+              />
+              <Text style={styles.newFeatureText}>
+                {t("abouts.new_widgets")}
+              </Text>
+            </View>
+            <View style={styles.newFeatureItem}>
+              <MaterialCommunityIcons name="lock" size={24} color="#b59d42" />
+              <Text style={styles.newFeatureText}>
+                {t("abouts.new_lock_screen")}
+              </Text>
+            </View>
+            <View style={styles.newFeatureItem}>
+              <MaterialCommunityIcons
+                name="gesture"
+                size={24}
+                color="#b59d42"
+              />
+              <Text style={styles.newFeatureText}>
+                {t("abouts.new_tactile")}
+              </Text>
+            </View>
+            <View style={styles.newFeatureItem}>
+              <MaterialCommunityIcons
+                name="download"
+                size={24}
+                color="#b59d42"
+              />
+              <Text style={styles.newFeatureText}>
+                {t("abouts.new_downloads")}
+              </Text>
+            </View>
+            <View style={styles.newFeatureItem}>
+              <MaterialCommunityIcons name="mosque" size={24} color="#b59d42" />
+              <Text style={styles.newFeatureText}>
+                {t("abouts.new_mosques")}
+              </Text>
+            </View>
+            <View style={styles.newFeatureItem}>
+              <MaterialCommunityIcons
+                name="backup-restore"
+                size={24}
+                color="#b59d42"
+              />
+              <Text style={styles.newFeatureText}>
+                {t("abouts.new_backup")}
+              </Text>
+            </View>
+          </View>
+        </View>
+
         {/* Sources Section */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>{t("abouts.sources_title")}</Text>
@@ -506,6 +582,31 @@ const styles = StyleSheet.create({
     marginLeft: 8,
     fontFamily: "ScheherazadeNew",
     flex: 1,
+  },
+  newFeaturesGrid: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+    marginTop: 12,
+  },
+  newFeatureItem: {
+    flexDirection: "row",
+    alignItems: "center",
+    width: "48%",
+    marginBottom: 12,
+    backgroundColor: "rgba(181, 157, 66, 0.15)",
+    padding: 8,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: "rgba(181, 157, 66, 0.3)",
+  },
+  newFeatureText: {
+    fontSize: 14,
+    color: "#b59d42",
+    marginLeft: 8,
+    fontFamily: "ScheherazadeNew",
+    flex: 1,
+    fontWeight: "600",
   },
   faqItem: {
     marginBottom: 12,

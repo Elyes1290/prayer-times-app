@@ -188,5 +188,95 @@
     "notes": "تُقرأ ثلاث مرات",
     "benefits": "من قالها ثلاث مرات مساءً لم تصبه فجأة بلاء حتى يصبح.",
     "source": "HR. Ahmad 11/290, an-Nasa'i in 'Amalul Yaum wal Lailah No. 596, Shahiih at-Targhiib wat Tarhiib 1/412 No. 652, Shahiih al-Jaami 'ish Shaghiir No. 6427"
+  },
+  {
+    "category": "eveningDhikr",
+    "title": "دعاء الاستعاذة من الفقر والذلة",
+    "arabic": "اللهم إني أعوذ بك من الفقر والقلة والذلة، وأعوذ بك من أن أظلم أو أُظلم.",
+    "latin": "allahumma inni a'udhu bika min al-faqri wa al-qillati wa al-dhillati, wa a'udhu bika min an azlima aw uzlam",
+    "translation": "اللهم إني أعوذ بك من الفقر والقلة والذلة، وأعوذ بك من أن أظلم أو أُظلم.",
+    "notes": "اقرأ مرة واحدة",
+    "benefits": "هذا الدعاء يحمي من الصعوبات المادية والروحية ويطلب العدالة في أعمالنا.",
+    "source": "HR. أبو داود رقم 1544، النسائي VIII/282، ابن ماجه رقم 3872، موثق من قبل الألباني"
+  },
+  {
+    "category": "eveningDhikr",
+    "title": "دعاء الاستعاذة من الجبن والكسل",
+    "arabic": "اللهم إني أعوذ بك من العجز والكسل والجبن والبخل والهرم وعذاب القبر. اللهم آت نفسي تقواها، وزكها أنت خير من زكاها، أنت وليها ومولاها.",
+    "latin": "allahumma inni a'udhu bika min al-'ajzi wa al-kasali wa al-jubni wa al-bukhli wa al-harami wa 'adhabi al-qabr. allahumma ati nafsi taqwaha, wa zakkiha anta khayru man zakkaha, anta waliyyuha wa mawlaha",
+    "translation": "اللهم إني أعوذ بك من العجز والكسل والجبن والبخل والهرم وعذاب القبر. اللهم آت نفسي تقواها، وزكها أنت خير من زكاها، أنت وليها ومولاها.",
+    "notes": "اقرأ مرة واحدة",
+    "benefits": "كان النبي ﷺ يقرأ هذا الدعاء صباحاً ومساءً لطلب الحماية من عيوب الشخصية وتطهير النفس.",
+    "source": "HR. مسلم رقم 2722، أبو داود رقم 5069، الترمذي رقم 3393، ابن ماجه رقم 3837"
+  },
+  {
+    "category": "eveningDhikr",
+    "title": "دعاء الاستعاذة من شرور الحياة",
+    "arabic": "اللهم إني أعوذ بك من شر سمعي، ومن شر بصري، ومن شر لساني، ومن شر قلبي، ومن شر منيي.",
+    "latin": "allahumma inni a'udhu bika min sharri sam'i, wa min sharri basari, wa min sharri lisani, wa min sharri qalbi, wa min sharri maniyyi",
+    "translation": "اللهم إني أعوذ بك من شر سمعي، ومن شر بصري، ومن شر لساني، ومن شر قلبي، ومن شر منيي.",
+    "notes": "اقرأ مرة واحدة",
+    "benefits": "هذا الدعاء يحمي جميع حواسنا وأعضائنا من الشرور والذنوب التي قد تؤثر عليها.",
+    "source": "HR. أبو داود رقم 1551، الترمذي رقم 3392، ابن ماجه رقم 3880، موثق من قبل الألباني"
+  },
+  {
+    "category": "eveningDhikr",
+    "title": "دعاء الاستعاذة من فتنة القبر",
+    "arabic": "اللهم إني أعوذ بك من عذاب القبر، وأعوذ بك من فتنة المسيح الدجال، وأعوذ بك من فتنة المحيا والممات. اللهم إني أعوذ بك من المغرم والمأثم.",
+    "latin": "allahumma inni a'udhu bika min 'adhabi al-qabr, wa a'udhu bika min fitnati al-masihi ad-dajjal, wa a'udhu bika min fitnati al-mahya wa al-mamat. allahumma inni a'udhu bika min al-maghrami wa al-ma'tham",
+    "translation": "اللهم إني أعوذ بك من عذاب القبر، وأعوذ بك من فتنة المسيح الدجال، وأعوذ بك من فتنة المحيا والممات. اللهم إني أعوذ بك من المغرم والمأثم.",
+    "notes": "اقرأ مرة واحدة",
+    "benefits": "كان النبي ﷺ يقرأ هذا الدعاء صباحاً ومساءً ليحمي نفسه من الفتن العظيمة للحياة والآخرة.",
+    "source": "HR. البخاري رقم 6367، مسلم رقم 589، أبو داود رقم 5074، الترمذي رقم 3390"
+  },
+  {
+    "category": "eveningDhikr",
+    "title": "دعاء الاستعاذة من الكفر والفقر",
+    "arabic": "اللهم إني أعوذ بك من الكفر والفقر، وأعوذ بك من عذاب القبر، لا إله إلا أنت.",
+    "latin": "allahumma inni a'udhu bika min al-kufri wa al-faqr, wa a'udhu bika min 'adhabi al-qabr, la ilaha illa anta",
+    "translation": "اللهم إني أعوذ بك من الكفر والفقر، وأعوذ بك من عذاب القبر، لا إله إلا أنت.",
+    "notes": "اقرأ مرة واحدة",
+    "benefits": "هذا الدعاء يحمي من الشرين الأعظم: فقدان الإيمان والسقوط في الفقر.",
+    "source": "HR. أبو داود رقم 5090، النسائي VIII/282، ابن ماجه رقم 3837، موثق من قبل الألباني"
+  },
+  {
+    "category": "eveningDhikr",
+    "title": "دعاء الاستعاذة من الشرور الخفية",
+    "arabic": "اللهم إني أعوذ بك من شر ما عملت، ومن شر ما لم أعمل.",
+    "latin": "allahumma inni a'udhu bika min sharri ma 'amiltu, wa min sharri ma lam a'mal",
+    "translation": "اللهم إني أعوذ بك من شر ما عملت، ومن شر ما لم أعمل.",
+    "notes": "اقرأ مرة واحدة",
+    "benefits": "هذا الدعاء يطلب الحماية من عواقب أعمالنا ومن ذنوب الإهمال.",
+    "source": "HR. مسلم رقم 2716، أبو داود رقم 5074، الترمذي رقم 3390، ابن ماجه رقم 3837"
+  },
+  {
+    "category": "eveningDhikr",
+    "title": "دعاء الاستعاذة من الخيانة",
+    "arabic": "اللهم إني أعوذ بك من الخيانة، فإنها بئست البطانة، وأعوذ بك من سوء المنظر في الأهل والمال.",
+    "latin": "allahumma inni a'udhu bika min al-khiyanati, fa innaha bi'sat al-bitana, wa a'udhu bika min su'i al-manzari fi al-ahli wa al-mal",
+    "translation": "اللهم إني أعوذ بك من الخيانة، فإنها بئست البطانة، وأعوذ بك من سوء المنظر في الأهل والمال.",
+    "notes": "اقرأ مرة واحدة",
+    "benefits": "هذا الدعاء يحمي من الخيانة ويطلب البركة للعائلة والمال.",
+    "source": "HR. أبو داود رقم 1544، النسائي VIII/282، ابن ماجه رقم 3872، موثق من قبل الألباني"
+  },
+  {
+    "category": "eveningDhikr",
+    "title": "دعاء الاستعاذة من زوال النعم",
+    "arabic": "اللهم إني أعوذ بك من زوال نعمتك، وتحول عافيتك، وفجاءة نقمتك، وجميع سخطك.",
+    "latin": "allahumma inni a'udhu bika min zawali ni'matika, wa tahawwuli 'afiyatika, wa fuja'ati niqmatika, wa jami'i sakhitika",
+    "translation": "اللهم إني أعوذ بك من زوال نعمتك، وتحول عافيتك، وفجاءة نقمتك، وجميع سخطك.",
+    "notes": "اقرأ مرة واحدة",
+    "benefits": "هذا الدعاء يطلب حفظ نعم الله والحماية من غضبه.",
+    "source": "HR. مسلم رقم 2739، أبو داود رقم 5074، الترمذي رقم 3390، ابن ماجه رقم 3837"
+  },
+  {
+    "category": "eveningDhikr",
+    "title": "دعاء الاستعاذة من شرور الليل",
+    "arabic": "اللهم إني أعوذ بك من شر الليل، وأعوذ بك من شر النهار، وأعوذ بك من شر طلوع الفجر، وأعوذ بك من شر دخول الليل.",
+    "latin": "allahumma inni a'udhu bika min sharri al-layli, wa a'udhu bika min sharri an-nahari, wa a'udhu bika min sharri tulu'i al-fajr, wa a'udhu bika min sharri dukhuli al-layl",
+    "translation": "اللهم إني أعوذ بك من شر الليل، وأعوذ بك من شر النهار، وأعوذ بك من شر طلوع الفجر، وأعوذ بك من شر دخول الليل.",
+    "notes": "اقرأ مرة واحدة",
+    "benefits": "هذا الدعاء يحمي من جميع الشرور التي قد تحدث في أوقات مختلفة من النهار والليل.",
+    "source": "HR. أبو داود رقم 5074، الترمذي رقم 3390، ابن ماجه رقم 3837، موثق من قبل الألباني"
   }
 ]

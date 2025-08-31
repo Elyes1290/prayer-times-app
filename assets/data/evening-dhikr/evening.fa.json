@@ -188,5 +188,95 @@
     "notes": "سه بار بخوانید",
     "benefits": "هر کس این دعا را سه بار عصر بخواند، آن شب هیچ بیماری یا آسیبی به او نمی‌رسد.",
     "source": "احمد ۱۱/۲۹۰، نسائی در عمل الیوم و اللیله ۵۹۶"
+  },
+  {
+    "category": "eveningDhikr",
+    "title": "دعای درخواست محافظت از فقر و ذلت",
+    "arabic": "اللهم إني أعوذ بك من الفقر والقلة والذلة، وأعوذ بك من أن أظلم أو أُظلم.",
+    "latin": "allahumma inni a'udhu bika min al-faqri wa al-qillati wa al-dhillati, wa a'udhu bika min an azlima aw uzlam",
+    "translation": "خدایا، من از تو در برابر فقر، کمبود و ذلت پناه می‌جویم، و از تو در برابر ظالم بودن یا مورد ظلم قرار گرفتن پناه می‌جویم.",
+    "notes": "۱ بار بخوانید",
+    "benefits": "این دعا از مشکلات مادی و معنوی محافظت می‌کند و در اعمال ما عدالت می‌طلبد.",
+    "source": "HR. Abu Dawud شماره 1544، an-Nasa'i VIII/282، Ibn Majah شماره 3872، تأیید شده توسط al-Albani"
+  },
+  {
+    "category": "eveningDhikr",
+    "title": "دعای درخواست محافظت از ترسو بودن و تنبلی",
+    "arabic": "اللهم إني أعوذ بك من العجز والكسل والجبن والبخل والهرم وعذاب القبر. اللهم آت نفسي تقواها، وزكها أنت خير من زكاها، أنت وليها ومولاها.",
+    "latin": "allahumma inni a'udhu bika min al-'ajzi wa al-kasali wa al-jubni wa al-bukhli wa al-harami wa 'adhabi al-qabr. allahumma ati nafsi taqwaha, wa zakkiha anta khayru man zakkaha, anta waliyyuha wa mawlaha",
+    "translation": "خدایا، من از تو در برابر ناتوانی، تنبلی، ترسو بودن، خساست، پیری و عذاب قبر پناه می‌جویم. خدایا، به نفس من تقوایش را بده، آن را پاک کن، تو بهترین کسی هستی که آن را پاک می‌کند، تو ولی و مولای آن هستی.",
+    "notes": "۱ بار بخوانید",
+    "benefits": "پیامبر ﷺ صبح و شب این دعا را می‌خواند تا از نقص‌های اخلاقی محافظت شود و نفس پاکیزه گردد.",
+    "source": "HR. Muslim شماره 2722، Abu Dawud شماره 5069، at-Tirmidhi شماره 3393، Ibn Majah شماره 3837"
+  },
+  {
+    "category": "eveningDhikr",
+    "title": "دعای درخواست محافظت از بدی‌های زندگی",
+    "arabic": "اللهم إني أعوذ بك من شر سمعي، ومن شر بصري، ومن شر لساني، ومن شر قلبي، ومن شر منيي.",
+    "latin": "allahumma inni a'udhu bika min sharri sam'i, wa min sharri basari, wa min sharri lisani, wa min sharri qalbi, wa min sharri maniyyi",
+    "translation": "خدایا، من از تو در برابر بدی شنوایی‌ام، بدی بینایی‌ام، بدی زبان‌ام، بدی قلب‌ام و بدی منی‌ام پناه می‌جویم.",
+    "notes": "۱ بار بخوانید",
+    "benefits": "این دعا تمام حواس و اعضای ما را از بدی‌ها و گناهانی که می‌توانند آن‌ها را تحت تأثیر قرار دهند محافظت می‌کند.",
+    "source": "HR. Abu Dawud شماره 1551، at-Tirmidhi شماره 3392، Ibn Majah شماره 3880، تأیید شده توسط al-Albani"
+  },
+  {
+    "category": "eveningDhikr",
+    "title": "دعای درخواست محافظت از فتنه قبر",
+    "arabic": "اللهم إني أعوذ بك من عذاب القبر، وأعوذ بك من فتنة المسيح الدجال، وأعوذ بك من فتنة المحيا والممات. اللهم إني أعوذ بك من المغرم والمأثم.",
+    "latin": "allahumma inni a'udhu bika min 'adhabi al-qabr, wa a'udhu bika min fitnati al-masihi ad-dajjal, wa a'udhu bika min fitnati al-mahya wa al-mamat. allahumma inni a'udhu bika min al-maghrami wa al-ma'tham",
+    "translation": "خدایا، من از تو در برابر عذاب قبر، فتنه دجال و فتنه زندگی و مرگ پناه می‌جویم. خدایا، من از تو در برابر بدهی و گناه پناه می‌جویم.",
+    "notes": "۱ بار بخوانید",
+    "benefits": "پیامبر ﷺ صبح و شب این دعا را می‌خواند تا از فتنه‌های بزرگ زندگی و آخرت محافظت شود.",
+    "source": "HR. al-Bukhari شماره 6367، Muslim شماره 589، Abu Dawud شماره 5074، at-Tirmidhi شماره 3390"
+  },
+  {
+    "category": "eveningDhikr",
+    "title": "دعای درخواست محافظت از کفر و فقر",
+    "arabic": "اللهم إني أعوذ بك من الكفر والفقر، وأعوذ بك من عذاب القبر، لا إله إلا أنت.",
+    "latin": "allahumma inni a'udhu bika min al-kufri wa al-faqr, wa a'udhu bika min 'adhabi al-qabr, la ilaha illa anta",
+    "translation": "خدایا، من از تو در برابر کفر و فقر پناه می‌جویم و از عذاب قبر پناه می‌جویم. معبودی جز تو نیست.",
+    "notes": "۱ بار بخوانید",
+    "benefits": "این دعا از دو بدی بزرگ محافظت می‌کند: از دست دادن ایمان و افتادن در فقر.",
+    "source": "HR. Abu Dawud شماره 5090، an-Nasa'i VIII/282، Ibn Majah شماره 3837، تأیید شده توسط al-Albani"
+  },
+  {
+    "category": "eveningDhikr",
+    "title": "دعای درخواست محافظت از بدی‌های پنهان",
+    "arabic": "اللهم إني أعوذ بك من شر ما عملت، ومن شر ما لم أعمل.",
+    "latin": "allahumma inni a'udhu bika min sharri ma 'amiltu, wa min sharri ma lam a'mal",
+    "translation": "خدایا، من از تو در برابر بدی آنچه انجام داده‌ام و بدی آنچه انجام نداده‌ام پناه می‌جویم.",
+    "notes": "۱ بار بخوانید",
+    "benefits": "این دعا از پیامدهای اعمال ما و گناهان ترک محافظت می‌طلبد.",
+    "source": "HR. Muslim شماره 2716، Abu Dawud شماره 5074، at-Tirmidhi شماره 3390، Ibn Majah شماره 3837"
+  },
+  {
+    "category": "eveningDhikr",
+    "title": "دعای درخواست محافظت از خیانت",
+    "arabic": "اللهم إني أعوذ بك من الخيانة، فإنها بئست البطانة، وأعوذ بك من سوء المنظر في الأهل والمال.",
+    "latin": "allahumma inni a'udhu bika min al-khiyanati, fa innaha bi'sat al-bitana, wa a'udhu bika min su'i al-manzari fi al-ahli wa al-mal",
+    "translation": "خدایا، من از تو در برابر خیانت پناه می‌جویم، زیرا آن مشاور بدی است، و از تو در برابر بدی نشانه در خانواده و مال پناه می‌جویم.",
+    "notes": "۱ بار بخوانید",
+    "benefits": "این دعا از خیانت محافظت می‌کند و برای خانواده و مال برکت می‌طلبد.",
+    "source": "HR. Abu Dawud شماره 1544، an-Nasa'i VIII/282، Ibn Majah شماره 3872، تأیید شده توسط al-Albani"
+  },
+  {
+    "category": "eveningDhikr",
+    "title": "دعای درخواست محافظت از از دست دادن نعمت‌ها",
+    "arabic": "اللهم إني أعوذ بك من زوال نعمتك، وتحول عافيتك، وفجاءة نقمتك، وجميع سخطك.",
+    "latin": "allahumma inni a'udhu bika min zawali ni'matika, wa tahawwuli 'afiyatika, wa fuja'ati niqmatika, wa jami'i sakhitika",
+    "translation": "خدایا، من از تو در برابر زوال نعمت‌هایت، تغییر عافیتت، ناگهانی بودن خشم‌ت و تمام نارضایتی‌ات پناه می‌جویم.",
+    "notes": "۱ بار بخوانید",
+    "benefits": "این دعا حفظ نعمت‌های خدا و محافظت از خشم او را می‌طلبد.",
+    "source": "HR. Muslim شماره 2739، Abu Dawud شماره 5074، at-Tirmidhi شماره 3390، Ibn Majah شماره 3837"
+  },
+  {
+    "category": "eveningDhikr",
+    "title": "دعای درخواست محافظت از بدی‌های شب",
+    "arabic": "اللهم إني أعوذ بك من شر الليل، وأعوذ بك من شر النهار، وأعوذ بك من شر طلوع الفجر، وأعوذ بك من شر دخول الليل.",
+    "latin": "allahumma inni a'udhu bika min sharri al-layli, wa a'udhu bika min sharri an-nahari, wa a'udhu bika min sharri tulu'i al-fajr, wa a'udhu bika min sharri dukhuli al-layl",
+    "translation": "خدایا، من از تو در برابر بدی شب، بدی روز، بدی طلوع فجر و بدی ورود شب پناه می‌جویم.",
+    "notes": "۱ بار بخوانید",
+    "benefits": "این دعا از تمام بدی‌هایی که می‌توانند در زمان‌های مختلف روز و شب رخ دهند محافظت می‌کند.",
+    "source": "HR. Abu Dawud شماره 5074، at-Tirmidhi شماره 3390، Ibn Majah شماره 3837، تأیید شده توسط al-Albani"
   }
 ]

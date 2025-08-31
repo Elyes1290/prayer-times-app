@@ -132,7 +132,19 @@
       "premium_features": "Características premium",
       "themes_system": "Sistema de temas",
       "sun_info": "Información solar",
-      "weekly_view": "Vista semanal"
+      "weekly_view": "Vista semanal",
+      "mosques_finder": "Localizador de mezquitas",
+      "native_downloads": "Descargas nativas",
+      "android_widgets": "Widgets de Android",
+      "lock_screen_player": "Reproductor de pantalla de bloqueo",
+      "tactile_controls": "Controles táctiles",
+      "backup_restore": "Respaldo y restauración",
+      "data_deletion": "Eliminación de datos",
+      "stripe_payments": "Pagos con Stripe seguros",
+      "user_accounts": "Cuentas de usuario",
+      "13_languages": "13 idiomas soportados",
+      "offline_mode": "Modo sin conexión",
+      "local_storage": "Almacenamiento local seguro"
     },
 
     "premium_title": "👑 Características Premium",
@@ -148,6 +160,15 @@
     "advanced_weekly": "Vista semanal de oraciones",
     "advanced_sun": "Información solar detallada",
     "advanced_personalization": "Personalización avanzada de la interfaz",
+
+    "new_features_title": "🆕 Nuevas funcionalidades",
+    "new_features_subtitle": "Últimas mejoras agregadas a la aplicación:",
+    "new_widgets": "Widgets de Android personalizables",
+    "new_lock_screen": "Reproductor de audio en pantalla de bloqueo",
+    "new_tactile": "Controles táctiles avanzados",
+    "new_downloads": "Descargas nativas optimizadas",
+    "new_mosques": "Localizador inteligente de mezquitas",
+    "new_backup": "Sistema completo de respaldo",
 
     "faq_title": "❓ Preguntas frecuentes",
     "faq_location_question": "¿Por qué la aplicación necesita mi ubicación?",
@@ -1357,5 +1378,26 @@
     "widget_instruction": "Widget para navegación con audio",
     "play_instruction": "Play inicia el audio mostrado",
     "close_button": "¡Entendido!"
-  }
+  },
+
+  "mosques_finder": "Buscador Inteligente de Mezquitas",
+  "native_downloads": "Descargas Nativas",
+  "android_widgets": "Widgets de Android",
+  "lock_screen_player": "Reproductor de Pantalla de Bloqueo",
+  "tactile_controls": "Controles Táctiles",
+  "backup_restore": "Respaldo y Restauración",
+  "data_deletion": "Eliminación de Datos",
+  "stripe_payments": "Pagos con Stripe",
+  "user_accounts": "Cuentas de Usuario",
+  "13_languages": "13 Idiomas Soportados",
+  "offline_mode": "Modo Sin Conexión",
+  "local_storage": "Almacenamiento Local",
+  "new_features_title": "Nuevas Funcionalidades",
+  "new_features_subtitle": "Descubre las últimas mejoras",
+  "customizable_widgets": "Widgets de Android personalizables",
+  "lock_screen_audio": "Reproductor de audio en pantalla de bloqueo",
+  "advanced_tactile": "Controles táctiles avanzados",
+  "optimized_downloads": "Descargas nativas optimizadas",
+  "smart_mosque_finder": "Buscador inteligente de mezquitas",
+  "complete_backup_system": "Sistema completo de respaldo"
 }

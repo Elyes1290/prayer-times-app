@@ -132,7 +132,19 @@
       "premium_features": "Funzionalità premium",
       "themes_system": "Sistema di temi",
       "sun_info": "Informazioni sul sole",
-      "weekly_view": "Vista settimanale"
+      "weekly_view": "Vista settimanale",
+      "mosques_finder": "Localizzatore di moschee",
+      "native_downloads": "Download nativi",
+      "android_widgets": "Widget Android",
+      "lock_screen_player": "Lettore schermo di blocco",
+      "tactile_controls": "Controlli tattili",
+      "backup_restore": "Backup e ripristino",
+      "data_deletion": "Eliminazione dati",
+      "stripe_payments": "Pagamenti Stripe sicuri",
+      "user_accounts": "Account utente",
+      "13_languages": "13 lingue supportate",
+      "offline_mode": "Modalità offline",
+      "local_storage": "Archiviazione locale sicura"
     },
 
     "premium_title": "👑 Funzionalità premium",
@@ -148,6 +160,15 @@
     "advanced_weekly": "Vista settimanale delle preghiere",
     "advanced_sun": "Informazioni sul sole e tempo",
     "advanced_personalization": "Personalizzazione e impostazioni",
+
+    "new_features_title": "🆕 Nuove funzionalità",
+    "new_features_subtitle": "Ultimi miglioramenti aggiunti all'app:",
+    "new_widgets": "Widget Android personalizzabili",
+    "new_lock_screen": "Lettore audio schermo di blocco",
+    "new_tactile": "Controlli tattili avanzati",
+    "new_downloads": "Download nativi ottimizzati",
+    "new_mosques": "Localizzatore intelligente di moschee",
+    "new_backup": "Sistema completo di backup",
 
     "faq_title": "❓ Domande frequenti",
     "faq_location_question": "Perché l'app ha bisogno della mia posizione?",
@@ -1358,5 +1379,26 @@
     "widget_instruction": "Widget per navigazione con audio",
     "play_instruction": "Play avvia l'audio visualizzato",
     "close_button": "Capito!"
-  }
+  },
+
+  "mosques_finder": "Cercatore Intelligente di Moschee",
+  "native_downloads": "Download Nativi",
+  "android_widgets": "Widget Android",
+  "lock_screen_player": "Lettore Schermo di Blocco",
+  "tactile_controls": "Controlli Tattili",
+  "backup_restore": "Backup e Ripristino",
+  "data_deletion": "Eliminazione Dati",
+  "stripe_payments": "Pagamenti Stripe",
+  "user_accounts": "Account Utente",
+  "13_languages": "13 Lingue Supportate",
+  "offline_mode": "Modalità Offline",
+  "local_storage": "Archiviazione Locale",
+  "new_features_title": "Nuove Funzionalità",
+  "new_features_subtitle": "Scopri gli ultimi miglioramenti",
+  "customizable_widgets": "Widget Android personalizzabili",
+  "lock_screen_audio": "Lettore audio schermo di blocco",
+  "advanced_tactile": "Controlli tattili avanzati",
+  "optimized_downloads": "Download nativi ottimizzati",
+  "smart_mosque_finder": "Cercatore intelligente di moschee",
+  "complete_backup_system": "Sistema completo di backup"
 }

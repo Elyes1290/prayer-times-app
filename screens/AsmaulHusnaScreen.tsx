@@ -9,6 +9,7 @@ import {
   Animated,
   Dimensions,
   ImageBackground,
+  LayoutChangeEvent,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useTranslation } from "react-i18next";
@@ -105,10 +106,10 @@ const AsmaulHusnaScreen = () => {
     const animation = animations.get(id);
 
     if (expandedId === id) {
-      // Animation de fermeture plus rapide
+      // Animation de fermeture
       Animated.timing(animation, {
         toValue: 0,
-        duration: 200, // Réduit de 300 à 200ms
+        duration: 200,
         useNativeDriver: false,
       }).start(() => setExpandedId(null));
     } else {
@@ -116,14 +117,14 @@ const AsmaulHusnaScreen = () => {
         const prevAnimation = animations.get(expandedId);
         Animated.timing(prevAnimation, {
           toValue: 0,
-          duration: 200, // Réduit de 300 à 200ms
+          duration: 200,
           useNativeDriver: false,
         }).start();
       }
       setExpandedId(id);
       Animated.timing(animation, {
         toValue: 1,
-        duration: 250, // Légèrement plus lent pour l'ouverture
+        duration: 300,
         useNativeDriver: false,
       }).start();
     }
@@ -134,9 +135,10 @@ const AsmaulHusnaScreen = () => {
     const isExpanded = expandedId === item.key;
     const animation = animations.get(item.key) || new Animated.Value(0);
 
+    // Utiliser une hauteur fixe suffisamment grande pour contenir tout le contenu
     const maxHeight = animation.interpolate({
       inputRange: [0, 1],
-      outputRange: [0, 600], // Réduit de 1000 à 600 pour une animation plus rapide
+      outputRange: [0, 1200], // Hauteur fixe suffisante pour tout le contenu
     });
 
     return (
@@ -183,76 +185,80 @@ const AsmaulHusnaScreen = () => {
           </TouchableOpacity>
 
           <Animated.View style={[styles.cardDetails, { maxHeight }]}>
-            <View style={styles.section}>
-              <Text style={styles.sectionTitle}>
-                {tAsma("sections.meaning")}
-              </Text>
-              <Text style={styles.sectionText}>{item.meaning}</Text>
+            <View style={styles.contentContainer}>
+              <View style={styles.section}>
+                <Text style={styles.sectionTitle}>
+                  {tAsma("sections.meaning")}
+                </Text>
+                <Text style={styles.sectionText}>{item.meaning}</Text>
+              </View>
+              {item.occurrences && (
+                <View style={styles.section}>
+                  <Text style={styles.sectionTitle}>
+                    {tAsma("sections.occurrences")}
+                  </Text>
+                  <Text style={styles.sectionText}>{item.occurrences}</Text>
+                </View>
+              )}
+              {item.benefits && (
+                <View style={styles.section}>
+                  <Text style={styles.sectionTitle}>
+                    {tAsma("sections.benefits")}
+                  </Text>
+                  <Text style={styles.sectionText}>{item.benefits}</Text>
+                </View>
+              )}
+              {item.usage && (
+                <View style={styles.section}>
+                  <Text style={styles.sectionTitle}>
+                    {tAsma("sections.usage")}
+                  </Text>
+                  <Text style={styles.sectionText}>{item.usage}</Text>
+                </View>
+              )}
+              {item.hadith && (
+                <View style={styles.section}>
+                  <Text style={styles.sectionTitle}>
+                    {tAsma("sections.hadith")}
+                  </Text>
+                  <Text style={styles.sectionText}>{item.hadith}</Text>
+                </View>
+              )}
+              {item.details && (
+                <View style={styles.section}>
+                  <Text style={styles.sectionTitle}>
+                    {tAsma("sections.details")}
+                  </Text>
+                  <Text style={styles.sectionText}>{item.details}</Text>
+                </View>
+              )}
+              {item.reference && (
+                <View style={styles.section}>
+                  <Text style={styles.sectionTitle}>
+                    {tAsma("sections.reference")}
+                  </Text>
+                  <Text style={styles.sectionText}>{item.reference}</Text>
+                </View>
+              )}
+              {item.spiritual_effect && (
+                <View style={styles.section}>
+                  <Text style={styles.sectionTitle}>
+                    {tAsma("sections.spiritual_effect")}
+                  </Text>
+                  <Text style={styles.sectionText}>
+                    {item.spiritual_effect}
+                  </Text>
+                </View>
+              )}
+              {item.citation && (
+                <View style={styles.section}>
+                  <Text style={styles.sectionTitle}>
+                    {tAsma("sections.citation")}
+                  </Text>
+                  <Text style={styles.sectionText}>{item.citation}</Text>
+                </View>
+              )}
             </View>
-            {item.occurrences && (
-              <View style={styles.section}>
-                <Text style={styles.sectionTitle}>
-                  {tAsma("sections.occurrences")}
-                </Text>
-                <Text style={styles.sectionText}>{item.occurrences}</Text>
-              </View>
-            )}
-            {item.benefits && (
-              <View style={styles.section}>
-                <Text style={styles.sectionTitle}>
-                  {tAsma("sections.benefits")}
-                </Text>
-                <Text style={styles.sectionText}>{item.benefits}</Text>
-              </View>
-            )}
-            {item.usage && (
-              <View style={styles.section}>
-                <Text style={styles.sectionTitle}>
-                  {tAsma("sections.usage")}
-                </Text>
-                <Text style={styles.sectionText}>{item.usage}</Text>
-              </View>
-            )}
-            {item.hadith && (
-              <View style={styles.section}>
-                <Text style={styles.sectionTitle}>
-                  {tAsma("sections.hadith")}
-                </Text>
-                <Text style={styles.sectionText}>{item.hadith}</Text>
-              </View>
-            )}
-            {item.details && (
-              <View style={styles.section}>
-                <Text style={styles.sectionTitle}>
-                  {tAsma("sections.details")}
-                </Text>
-                <Text style={styles.sectionText}>{item.details}</Text>
-              </View>
-            )}
-            {item.reference && (
-              <View style={styles.section}>
-                <Text style={styles.sectionTitle}>
-                  {tAsma("sections.reference")}
-                </Text>
-                <Text style={styles.sectionText}>{item.reference}</Text>
-              </View>
-            )}
-            {item.spiritual_effect && (
-              <View style={styles.section}>
-                <Text style={styles.sectionTitle}>
-                  {tAsma("sections.spiritual_effect")}
-                </Text>
-                <Text style={styles.sectionText}>{item.spiritual_effect}</Text>
-              </View>
-            )}
-            {item.citation && (
-              <View style={styles.section}>
-                <Text style={styles.sectionTitle}>
-                  {tAsma("sections.citation")}
-                </Text>
-                <Text style={styles.sectionText}>{item.citation}</Text>
-              </View>
-            )}
           </Animated.View>
         </LinearGradient>
       </View>
@@ -422,6 +428,9 @@ const styles = StyleSheet.create({
     overflow: "hidden",
     paddingHorizontal: 15,
     paddingBottom: 15,
+  },
+  contentContainer: {
+    paddingHorizontal: 0,
   },
   section: {
     marginBottom: 15,

@@ -50,7 +50,7 @@ describe("useQuranAudioService", () => {
   beforeEach(() => {
     jest.clearAllMocks();
     // Forcer NODE_ENV à "test" pour activer les mocks
-    process.env.NODE_ENV = "test";
+    Object.defineProperty(process.env, "NODE_ENV", { value: "test" });
   });
 
   afterEach(() => {

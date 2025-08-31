@@ -132,7 +132,19 @@
       "premium_features": "Premium features",
       "themes_system": "Themes system",
       "sun_info": "Sun information",
-      "weekly_view": "Weekly view"
+      "weekly_view": "Weekly view",
+      "mosques_finder": "Mosque finder",
+      "native_downloads": "Native downloads",
+      "android_widgets": "Android widgets",
+      "lock_screen_player": "Lock screen player",
+      "tactile_controls": "Tactile controls",
+      "backup_restore": "Backup and restore",
+      "data_deletion": "Data deletion",
+      "stripe_payments": "Secure Stripe payments",
+      "user_accounts": "User accounts",
+      "13_languages": "13 supported languages",
+      "offline_mode": "Offline mode",
+      "local_storage": "Secure local storage"
     },
 
     "premium_title": "👑 Premium Features",
@@ -148,6 +160,15 @@
     "advanced_weekly": "Weekly prayer view",
     "advanced_sun": "Detailed sun information",
     "advanced_personalization": "Advanced interface customization",
+
+    "new_features_title": "🆕 New features",
+    "new_features_subtitle": "Latest improvements added to the app:",
+    "new_widgets": "Customizable Android widgets",
+    "new_lock_screen": "Lock screen audio player",
+    "new_tactile": "Advanced tactile controls",
+    "new_downloads": "Optimized native downloads",
+    "new_mosques": "Smart mosque finder",
+    "new_backup": "Complete backup system",
 
     "faq_title": "❓ Frequently asked questions",
     "faq_location_question": "Why does the app need my location?",
@@ -1358,5 +1379,26 @@
     "widget_instruction": "Widget for navigation with audio",
     "play_instruction": "Play starts the displayed audio",
     "close_button": "Got it!"
-  }
+  },
+
+  "mosques_finder": "Smart Mosque Finder",
+  "native_downloads": "Native Downloads",
+  "android_widgets": "Android Widgets",
+  "lock_screen_player": "Lock Screen Player",
+  "tactile_controls": "Tactile Controls",
+  "backup_restore": "Backup & Restore",
+  "data_deletion": "Data Deletion",
+  "stripe_payments": "Stripe Payments",
+  "user_accounts": "User Accounts",
+  "13_languages": "13 Languages Supported",
+  "offline_mode": "Offline Mode",
+  "local_storage": "Local Storage",
+  "new_features_title": "New Features",
+  "new_features_subtitle": "Discover the latest improvements",
+  "customizable_widgets": "Customizable Android widgets",
+  "lock_screen_audio": "Lock screen audio player",
+  "advanced_tactile": "Advanced tactile controls",
+  "optimized_downloads": "Optimized native downloads",
+  "smart_mosque_finder": "Smart mosque finder",
+  "complete_backup_system": "Complete backup system"
 }
