@@ -19,13 +19,24 @@ require_once 'config.php';
 
 // 🔐 SÉCURITÉ : Seul l'admin peut gérer les VIP
 function requireAdminAuth() {
-    // Vérifier le token admin (à adapter selon votre système)
+    // Vérifier le token admin depuis les headers avec correspondance EXACTE
     $authHeader = $_SERVER['HTTP_AUTHORIZATION'] ?? '';
-    $adminToken = $_ENV['ADMIN_VIP_TOKEN'] ?? 'vip_admin_2024_secure_token';
+    $adminToken = ADMIN_VIP_TOKEN;
     
-    if (!$authHeader || !str_contains($authHeader, $adminToken)) {
+    // Extraire le token Bearer
+    if (!$authHeader || !preg_match('/^Bearer\s+(.+)$/i', $authHeader, $matches)) {
         http_response_code(401);
-        echo json_encode(['success' => false, 'message' => 'Accès non autorisé']);
+        echo json_encode(['success' => false, 'message' => 'Accès non autorisé - Header manquant']);
+        exit();
+    }
+    
+    $providedToken = trim($matches[1]);
+    
+    // Comparaison EXACTE et sécurisée du token
+    if (!hash_equals($adminToken, $providedToken)) {
+        error_log("Tentative d'accès VIP non autorisée avec token: " . substr($providedToken, 0, 10) . "...");
+        http_response_code(401);
+        echo json_encode(['success' => false, 'message' => 'Accès non autorisé - Token invalide']);
         exit();
     }
 }
@@ -79,6 +90,7 @@ function handleGetRequest($pdo, $action) {
             getVipStats($pdo);
             break;
         case 'check_vip':
+            requireAdminAuth();
             checkUserVipStatus($pdo);
             break;
         default:

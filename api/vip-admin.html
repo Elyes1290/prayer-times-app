@@ -172,8 +172,13 @@
           <input
             type="password"
             id="adminToken"
-            placeholder="Entrez votre token admin..."
+            placeholder="Entrez votre token d'administration..."
+            title="Token d'administration VIP"
           />
+          <small style="color: #666; font-size: 12px">
+            🔒 Token d'authentification requis pour accéder aux fonctionnalités
+            VIP
+          </small>
         </div>
         <button class="btn" onclick="authenticate()">Se connecter</button>
         <div id="authResult" class="result"></div>
@@ -311,7 +316,7 @@
       let currentToken = "";
 
       // Authentification admin
-      function authenticate() {
+      async function authenticate() {
         currentToken = document.getElementById("adminToken").value;
 
         if (!currentToken) {
@@ -319,20 +324,33 @@
           return;
         }
 
-        // Test de connexion avec le token
-        checkUser()
-          .then(() => {
-            document.getElementById("adminPanel").style.display = "block";
-            showResult(
-              "authResult",
-              "✅ Authentification réussie !",
-              "success"
-            );
-            loadVipList();
-          })
-          .catch(() => {
-            showResult("authResult", "❌ Token invalide", "error");
+        // Test de connexion avec le token en appelant une action qui nécessite l'auth admin
+        try {
+          const response = await fetch(`${API_BASE}?action=vip_stats`, {
+            headers: {
+              Authorization: `Bearer ${currentToken}`,
+            },
           });
+
+          if (response.ok) {
+            const result = await response.json();
+            if (result.success) {
+              document.getElementById("adminPanel").style.display = "block";
+              showResult(
+                "authResult",
+                "✅ Authentification réussie !",
+                "success"
+              );
+              loadVipList();
+            } else {
+              showResult("authResult", "❌ Token invalide", "error");
+            }
+          } else {
+            showResult("authResult", "❌ Token invalide", "error");
+          }
+        } catch (error) {
+          showResult("authResult", "❌ Erreur de connexion", "error");
+        }
       }
 
       // Créer un utilisateur VIP

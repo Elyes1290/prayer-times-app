@@ -121,6 +121,19 @@ define('STRIPE_SECRET_KEY', $_ENV['STRIPE_SECRET_KEY'] ?? '');
 define('STRIPE_PUBLISHABLE_KEY', $_ENV['STRIPE_PUBLISHABLE_KEY'] ?? '');
 define('STRIPE_WEBHOOK_SECRET', $_ENV['STRIPE_WEBHOOK_SECRET'] ?? '');
 
+// 👑 VIP ADMIN : Configuration du token d'administration VIP
+// 🔒 SÉCURITÉ : Token obligatoirement défini dans les variables d'environnement
+if (!isset($_ENV['ADMIN_VIP_TOKEN']) || empty($_ENV['ADMIN_VIP_TOKEN'])) {
+    // Token par défaut temporaire uniquement pour le développement
+    $defaultToken = 'dev_vip_' . hash('sha256', DB_HOST . DB_NAME . date('Y-m-d'));
+    define('ADMIN_VIP_TOKEN', $defaultToken);
+    if (!$isProduction) {
+        error_log("⚠️ AVERTISSEMENT: ADMIN_VIP_TOKEN non défini, utilisation d'un token temporaire");
+    }
+} else {
+    define('ADMIN_VIP_TOKEN', $_ENV['ADMIN_VIP_TOKEN']);
+}
+
 // 📊 MONITORING : Configuration des logs et du debug
 define('ENABLE_DEBUG_LOGS', isset($_ENV['ENABLE_DEBUG_LOGS']) && $_ENV['ENABLE_DEBUG_LOGS'] === 'true');
 define('LOG_API_REQUESTS', isset($_ENV['LOG_API_REQUESTS']) && $_ENV['LOG_API_REQUESTS'] === 'true');
