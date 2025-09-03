@@ -93,6 +93,18 @@ function handleGetRequest($pdo, $action) {
             requireAdminAuth();
             checkUserVipStatus($pdo);
             break;
+            
+        // 📚 NOUVELLES ACTIONS : Histoires du Prophète
+        case 'stories_list':
+            requireAdminAuth();
+            listStories($pdo);
+            break;
+            
+        case 'story_stats':
+            requireAdminAuth();
+            getStoryStats($pdo);
+            break;
+            
         default:
             throw new Exception('Action GET non reconnue');
     }
@@ -113,6 +125,13 @@ function handlePostRequest($pdo, $action) {
             requireAdminAuth();
             createVipUser($pdo);
             break;
+            
+        // 📚 NOUVELLE ACTION : Créer une histoire
+        case 'create_story':
+            requireAdminAuth();
+            createStoryAdmin($pdo);
+            break;
+            
         default:
             throw new Exception('Action POST non reconnue');
     }
@@ -145,6 +164,13 @@ function handleDeleteRequest($pdo, $action) {
             requireAdminAuth();
             revokeVipStatus($pdo);
             break;
+            
+        // 📚 NOUVELLE ACTION : Supprimer une histoire
+        case 'delete_story':
+            requireAdminAuth();
+            deleteStoryAdmin($pdo);
+            break;
+            
         default:
             throw new Exception('Action DELETE non reconnue');
     }
@@ -481,4 +507,175 @@ function revokeVipStatus($pdo) {
         'message' => "Statut VIP révoqué pour {$user['user_first_name']} ({$user['email']})"
     ]);
 }
+
+/**
+ * ===============================
+ * 📚 FONCTIONS HISTOIRES DU PROPHÈTE
+ * ===============================
+ */
+
+// Lister toutes les histoires
+function listStories($pdo) {
+    $stmt = $pdo->prepare("
+        SELECT id, title, title_arabic, category, difficulty, 
+               age_recommendation, reading_time, word_count,
+               is_premium, view_count, rating, created_at
+        FROM prophet_stories 
+        ORDER BY chronological_order ASC, created_at DESC
+    ");
+    $stmt->execute();
+    $stories = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+    echo json_encode([
+        'success' => true,
+        'data' => $stories,
+        'message' => count($stories) . ' histoire(s) trouvée(s)'
+    ]);
+}
+
+// Créer une nouvelle histoire
+function createStoryAdmin($pdo) {
+    $data = json_decode(file_get_contents('php://input'), true);
+    
+    $story = $data['story'] ?? [];
+    $chapters = $data['chapters'] ?? [];
+    
+    // Validation
+    if (empty($story['id']) || empty($story['title']) || empty($chapters)) {
+        throw new Exception('Données story, title et chapters requis');
+    }
+    
+    try {
+        $pdo->beginTransaction();
+        
+        // Insérer l'histoire principale
+        $stmt = $pdo->prepare("
+            INSERT INTO prophet_stories (
+                id, title, title_arabic, introduction, conclusion, moral_lesson,
+                category, difficulty, age_recommendation, reading_time, word_count,
+                chronological_order, historical_location, is_premium, created_at
+            ) VALUES (
+                ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW()
+            )
+        ");
+        
+        $stmt->execute([
+            $story['id'],
+            $story['title'],
+            $story['title_arabic'] ?? null,
+            $story['introduction'],
+            $story['conclusion'],
+            $story['moral_lesson'] ?? null,
+            $story['category'],
+            $story['difficulty'],
+            $story['age_recommendation'],
+            $story['reading_time'],
+            $story['word_count'],
+            $story['chronological_order'] ?? 1,
+            $story['historical_location'] ?? null,
+            $story['is_premium'] ? 1 : 0
+        ]);
+        
+        // Insérer les chapitres
+        foreach ($chapters as $chapter) {
+            $chapterId = $story['id'] . '_chapter_' . $chapter['order'];
+            $stmt = $pdo->prepare("
+                INSERT INTO prophet_story_chapters (
+                    id, story_id, title, content, chapter_order, reading_time
+                ) VALUES (?, ?, ?, ?, ?, ?)
+            ");
+            
+            $chapterReadingTime = max(1, floor($story['reading_time'] / count($chapters)));
+            
+            $stmt->execute([
+                $chapterId,
+                $story['id'],
+                $chapter['title'],
+                $chapter['content'],
+                $chapter['order'],
+                $chapterReadingTime
+            ]);
+        }
+        
+        $pdo->commit();
+        
+        echo json_encode([
+            'success' => true,
+            'message' => "Histoire '{$story['title']}' créée avec " . count($chapters) . " chapitre(s)"
+        ]);
+        
+    } catch (Exception $e) {
+        $pdo->rollBack();
+        throw new Exception('Erreur création histoire: ' . $e->getMessage());
+    }
+}
+
+// Supprimer une histoire
+function deleteStoryAdmin($pdo) {
+    $data = json_decode(file_get_contents('php://input'), true);
+    $storyId = $data['story_id'] ?? '';
+    
+    if (!$storyId) {
+        throw new Exception('story_id requis');
+    }
+    
+    try {
+        // Vérifier que l'histoire existe
+        $stmt = $pdo->prepare("SELECT title FROM prophet_stories WHERE id = ?");
+        $stmt->execute([$storyId]);
+        $story = $stmt->fetch();
+        
+        if (!$story) {
+            throw new Exception('Histoire non trouvée');
+        }
+        
+        // Supprimer l'histoire (CASCADE supprimera automatiquement les chapitres)
+        $stmt = $pdo->prepare("DELETE FROM prophet_stories WHERE id = ?");
+        $stmt->execute([$storyId]);
+        
+        echo json_encode([
+            'success' => true,
+            'message' => "Histoire '{$story['title']}' supprimée"
+        ]);
+        
+    } catch (Exception $e) {
+        throw new Exception('Erreur suppression: ' . $e->getMessage());
+    }
+}
+
+// Statistiques des histoires
+function getStoryStats($pdo) {
+    // Statistiques globales
+    $stmt = $pdo->prepare("
+        SELECT 
+            COUNT(*) as total_stories,
+            COUNT(CASE WHEN is_premium = 0 THEN 1 END) as free_stories,
+            COUNT(CASE WHEN is_premium = 1 THEN 1 END) as premium_stories,
+            AVG(reading_time) as avg_reading_time,
+            SUM(view_count) as total_views
+        FROM prophet_stories
+    ");
+    $stmt->execute();
+    $stats = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+    // Statistiques par catégorie
+    $stmt = $pdo->prepare("
+        SELECT category, COUNT(*) as count,
+               COUNT(CASE WHEN is_premium = 0 THEN 1 END) as free_count,
+               COUNT(CASE WHEN is_premium = 1 THEN 1 END) as premium_count
+        FROM prophet_stories 
+        GROUP BY category 
+        ORDER BY count DESC
+    ");
+    $stmt->execute();
+    $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+    $stats['categories'] = $categories;
+    
+    echo json_encode([
+        'success' => true,
+        'data' => $stats
+    ]);
+}
+
 ?>

@@ -30,22 +30,22 @@ Stripe::setApiKey(STRIPE_SECRET_KEY);
 // Configuration des produits premium - MODE TEST TEMPORAIRE 🧪
 $PREMIUM_PRODUCTS = [
     'monthly' => [
-        'price_id' => 'price_1RskBqDJEhmyFnElZtadHqsG', // Premium Mensuel (TEST) 🧪
-        // 'price_id' => 'price_1RsTUJDYlp8PcvcNUQz2zTro', // Premium Mensuel (PROD)
+        // 'price_id' => 'price_1RskBqDJEhmyFnElZtadHqsG', // Premium Mensuel (TEST) 🧪
+        'price_id' => 'price_1RsTUJDYlp8PcvcNUQz2zTro', // Premium Mensuel (PROD)
         'amount' => 199,
         'currency' => 'eur',
         'interval' => 'month',
     ],
     'yearly' => [
-        'price_id' => 'price_1RskCEDJEhmyFnElkaEs0I8O', // Premium Annuel (TEST) 🧪
-        // 'price_id' => 'price_1RsTV3DYlp8PcvcNlOaFW2CW', // Premium Annuel (PROD)
+        // 'price_id' => 'price_1RskCEDJEhmyFnElkaEs0I8O', // Premium Annuel (TEST) 🧪
+        'price_id' => 'price_1RsTV3DYlp8PcvcNlOaFW2CW', // Premium Annuel (PROD)
         'amount' => 1999,
         'currency' => 'eur',
         'interval' => 'year',
     ],
     'family' => [
-        'price_id' => 'price_1RskCeDJEhmyFnElSE6iVxi8', // Premium Familial (TEST) 🧪
-        // 'price_id' => 'price_1RsTVXDYlp8PcvcNERdlWk9n', // Premium Familial (PROD)
+        // 'price_id' => 'price_1RskCeDJEhmyFnElSE6iVxi8', // Premium Familial (TEST) 🧪
+        'price_id' => 'price_1RsTVXDYlp8PcvcNERdlWk9n', // Premium Familial (PROD)
         'amount' => 2999,
         'currency' => 'eur',
         'interval' => 'year',

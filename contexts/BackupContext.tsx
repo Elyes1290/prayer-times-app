@@ -12,6 +12,7 @@ import { useToast } from "./ToastContext";
 import apiClient from "../utils/apiClient";
 import { useTranslation } from "react-i18next";
 import { LocalStorageManager } from "../utils/localStorageManager";
+import { SettingsContext } from "./SettingsContext";
 
 // Types pour le système de backup
 interface UserBackupData {
@@ -74,6 +75,7 @@ export const BackupProvider: React.FC<BackupProviderProps> = ({ children }) => {
   const { user } = usePremium();
   const { showToast } = useToast();
   const { t } = useTranslation();
+  const settingsContext = useContext(SettingsContext);
 
   // États du backup
   const [isSignedIn, setIsSignedIn] = useState(false);
@@ -299,18 +301,50 @@ export const BackupProvider: React.FC<BackupProviderProps> = ({ children }) => {
         ),
       };
 
+      // 🚀 CORRECTION : Inclure TOUS les paramètres du SettingsContext
+      const allSettings = {
+        // Paramètres de base
+        userFirstName,
+        ...(customSettings && customSettings !== null
+          ? { customSettings: JSON.parse(customSettings) }
+          : {}),
+        ...(userSettings && userSettings !== null
+          ? { userSettings: JSON.parse(userSettings) }
+          : {}),
+
+        // 📊 NOUVEAUX : Paramètres complets du SettingsContext
+        calcMethod: settingsContext?.calcMethod,
+        adhanSound: settingsContext?.adhanSound,
+        adhanVolume: settingsContext?.adhanVolume,
+        locationMode: settingsContext?.locationMode,
+        manualLocation: settingsContext?.manualLocation,
+        notificationsEnabled: settingsContext?.notificationsEnabled,
+        remindersEnabled: settingsContext?.remindersEnabled,
+        reminderOffset: settingsContext?.reminderOffset,
+        themeMode: settingsContext?.themeMode,
+        currentLanguage: settingsContext?.currentLanguage,
+        audioQuality: settingsContext?.audioQuality,
+        downloadStrategy: settingsContext?.downloadStrategy,
+        enableDataSaving: settingsContext?.enableDataSaving,
+        maxCacheSize: settingsContext?.maxCacheSize,
+
+        // Paramètres Dhikr
+        dhikrSettings: {
+          enabledAfterSalah: settingsContext?.enabledAfterSalah,
+          delayAfterSalah: settingsContext?.delayAfterSalah,
+          enabledMorningDhikr: settingsContext?.enabledMorningDhikr,
+          delayMorningDhikr: settingsContext?.delayMorningDhikr,
+          enabledEveningDhikr: settingsContext?.enabledEveningDhikr,
+          delayEveningDhikr: settingsContext?.delayEveningDhikr,
+          enabledSelectedDua: settingsContext?.enabledSelectedDua,
+          delaySelectedDua: settingsContext?.delaySelectedDua,
+        },
+      };
+
       // Préparer les données de backup complètes
       const backupDataToSave = {
         favorites: favoritesByType,
-        settings: {
-          ...(userFirstName ? { userFirstName } : {}),
-          ...(customSettings && customSettings !== null
-            ? { customSettings: JSON.parse(customSettings) }
-            : {}),
-          ...(userSettings && userSettings !== null
-            ? { userSettings: JSON.parse(userSettings) }
-            : {}),
-        },
+        settings: allSettings,
         premiumData: {
           userProfile:
             premiumUser && typeof premiumUser === "string"
@@ -541,14 +575,207 @@ export const BackupProvider: React.FC<BackupProviderProps> = ({ children }) => {
         );
       }
 
-      // Restaurer les paramètres
+      // 🚀 CORRECTION : Restaurer TOUS les paramètres
       if (cloudData.settings) {
+        // Paramètres de base
         if (cloudData.settings.userFirstName) {
           await AsyncStorage.setItem(
             "userFirstName",
             cloudData.settings.userFirstName
           );
+          settingsContext?.setUserFirstName(cloudData.settings.userFirstName);
         }
+
+        // 📊 NOUVEAUX : Restaurer tous les paramètres SettingsContext
+        if (cloudData.settings.calcMethod) {
+          await AsyncStorage.setItem(
+            "calcMethod",
+            cloudData.settings.calcMethod
+          );
+          settingsContext?.setCalcMethod(cloudData.settings.calcMethod);
+        }
+
+        if (cloudData.settings.adhanSound) {
+          await AsyncStorage.setItem(
+            "adhanSound",
+            cloudData.settings.adhanSound
+          );
+          settingsContext?.setAdhanSound(cloudData.settings.adhanSound);
+        }
+
+        if (cloudData.settings.adhanVolume !== undefined) {
+          await AsyncStorage.setItem(
+            "adhanVolume",
+            cloudData.settings.adhanVolume.toString()
+          );
+          settingsContext?.setAdhanVolume(cloudData.settings.adhanVolume);
+        }
+
+        if (cloudData.settings.locationMode) {
+          await AsyncStorage.setItem(
+            "locationMode",
+            cloudData.settings.locationMode
+          );
+          settingsContext?.setLocationMode(cloudData.settings.locationMode);
+        }
+
+        if (cloudData.settings.manualLocation) {
+          await AsyncStorage.setItem(
+            "manualLocation",
+            JSON.stringify(cloudData.settings.manualLocation)
+          );
+          settingsContext?.setManualLocation(cloudData.settings.manualLocation);
+        }
+
+        if (cloudData.settings.notificationsEnabled !== undefined) {
+          await AsyncStorage.setItem(
+            "notificationsEnabled",
+            cloudData.settings.notificationsEnabled.toString()
+          );
+          settingsContext?.setNotificationsEnabled(
+            cloudData.settings.notificationsEnabled
+          );
+        }
+
+        if (cloudData.settings.remindersEnabled !== undefined) {
+          await AsyncStorage.setItem(
+            "remindersEnabled",
+            cloudData.settings.remindersEnabled.toString()
+          );
+          settingsContext?.setRemindersEnabled(
+            cloudData.settings.remindersEnabled
+          );
+        }
+
+        if (cloudData.settings.reminderOffset !== undefined) {
+          await AsyncStorage.setItem(
+            "reminderOffset",
+            cloudData.settings.reminderOffset.toString()
+          );
+          settingsContext?.setReminderOffset(cloudData.settings.reminderOffset);
+        }
+
+        if (cloudData.settings.themeMode) {
+          await AsyncStorage.setItem("themeMode", cloudData.settings.themeMode);
+          settingsContext?.setThemeMode(cloudData.settings.themeMode);
+        }
+
+        if (cloudData.settings.currentLanguage) {
+          await AsyncStorage.setItem(
+            "language",
+            cloudData.settings.currentLanguage
+          );
+          settingsContext?.setCurrentLanguage(
+            cloudData.settings.currentLanguage
+          );
+        }
+
+        if (cloudData.settings.audioQuality) {
+          await AsyncStorage.setItem(
+            "audioQuality",
+            cloudData.settings.audioQuality
+          );
+          settingsContext?.setAudioQuality(cloudData.settings.audioQuality);
+        }
+
+        if (cloudData.settings.downloadStrategy) {
+          await AsyncStorage.setItem(
+            "downloadStrategy",
+            cloudData.settings.downloadStrategy
+          );
+          settingsContext?.setDownloadStrategy(
+            cloudData.settings.downloadStrategy
+          );
+        }
+
+        if (cloudData.settings.enableDataSaving !== undefined) {
+          await AsyncStorage.setItem(
+            "enableDataSaving",
+            cloudData.settings.enableDataSaving.toString()
+          );
+          settingsContext?.setEnableDataSaving(
+            cloudData.settings.enableDataSaving
+          );
+        }
+
+        if (cloudData.settings.maxCacheSize !== undefined) {
+          await AsyncStorage.setItem(
+            "maxCacheSize",
+            cloudData.settings.maxCacheSize.toString()
+          );
+          settingsContext?.setMaxCacheSize(cloudData.settings.maxCacheSize);
+        }
+
+        // 🤲 Restaurer les paramètres Dhikr
+        if (cloudData.settings.dhikrSettings) {
+          const dhikr = cloudData.settings.dhikrSettings;
+
+          if (dhikr.enabledAfterSalah !== undefined) {
+            await AsyncStorage.setItem(
+              "enabledAfterSalah",
+              dhikr.enabledAfterSalah.toString()
+            );
+            settingsContext?.setEnabledAfterSalah(dhikr.enabledAfterSalah);
+          }
+
+          if (dhikr.delayAfterSalah !== undefined) {
+            await AsyncStorage.setItem(
+              "delayAfterSalah",
+              dhikr.delayAfterSalah.toString()
+            );
+            settingsContext?.setDelayAfterSalah(dhikr.delayAfterSalah);
+          }
+
+          if (dhikr.enabledMorningDhikr !== undefined) {
+            await AsyncStorage.setItem(
+              "enabledMorningDhikr",
+              dhikr.enabledMorningDhikr.toString()
+            );
+            settingsContext?.setEnabledMorningDhikr(dhikr.enabledMorningDhikr);
+          }
+
+          if (dhikr.delayMorningDhikr !== undefined) {
+            await AsyncStorage.setItem(
+              "delayMorningDhikr",
+              dhikr.delayMorningDhikr.toString()
+            );
+            settingsContext?.setDelayMorningDhikr(dhikr.delayMorningDhikr);
+          }
+
+          if (dhikr.enabledEveningDhikr !== undefined) {
+            await AsyncStorage.setItem(
+              "enabledEveningDhikr",
+              dhikr.enabledEveningDhikr.toString()
+            );
+            settingsContext?.setEnabledEveningDhikr(dhikr.enabledEveningDhikr);
+          }
+
+          if (dhikr.delayEveningDhikr !== undefined) {
+            await AsyncStorage.setItem(
+              "delayEveningDhikr",
+              dhikr.delayEveningDhikr.toString()
+            );
+            settingsContext?.setDelayEveningDhikr(dhikr.delayEveningDhikr);
+          }
+
+          if (dhikr.enabledSelectedDua !== undefined) {
+            await AsyncStorage.setItem(
+              "enabledSelectedDua",
+              dhikr.enabledSelectedDua.toString()
+            );
+            settingsContext?.setEnabledSelectedDua(dhikr.enabledSelectedDua);
+          }
+
+          if (dhikr.delaySelectedDua !== undefined) {
+            await AsyncStorage.setItem(
+              "delaySelectedDua",
+              dhikr.delaySelectedDua.toString()
+            );
+            settingsContext?.setDelaySelectedDua(dhikr.delaySelectedDua);
+          }
+        }
+
+        // Anciens paramètres (compatibilité)
         if (cloudData.settings.customSettings) {
           await AsyncStorage.setItem(
             "customSettings",

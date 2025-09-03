@@ -931,6 +931,14 @@ export default function HomeScreen() {
       color: "#FF6B6B",
       gradient: ["rgba(255,107,107,0.13)", "rgba(139,0,0,0.10)"] as const,
     },
+    // 📚 NOUVELLE FONCTIONNALITÉ : Histoires du Prophète (PBUH)
+    {
+      icon: "account-heart",
+      title: t("prophet_stories") || "Histoires du Prophète",
+      route: "/prophet-stories",
+      color: "#2E7D32",
+      gradient: ["rgba(46,125,50,0.13)", "rgba(27,94,32,0.10)"] as const,
+    },
     // Note: Récitations premium intégrées dans la page Quran
     {
       icon: "calendar-heart",

@@ -155,6 +155,111 @@
         font-size: 12px;
         font-weight: bold;
       }
+
+      /* 🎨 STYLES POUR LES ONGLETS */
+      .tabs {
+        display: flex;
+        margin-bottom: 20px;
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .tab-button {
+        flex: 1;
+        padding: 15px 20px;
+        border: none;
+        background: #f8f9fa;
+        color: #555;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border-right: 1px solid #e9ecef;
+      }
+
+      .tab-button:last-child {
+        border-right: none;
+      }
+
+      .tab-button.active {
+        background: #2e8b57;
+        color: white;
+        box-shadow: inset 0 -3px 0 #1b5e20;
+      }
+
+      .tab-button:hover:not(.active) {
+        background: #e9ecef;
+        color: #2e8b57;
+      }
+
+      .tab-content {
+        display: none;
+      }
+
+      .tab-content.active {
+        display: block;
+        animation: fadeIn 0.3s ease;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* 📝 STYLES POUR LES FORMULAIRES D'HISTOIRES */
+      .chapter-form {
+        border: 2px solid #e9ecef;
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 15px;
+        background: #f8f9fa;
+      }
+
+      .chapter-form h4 {
+        color: #2e8b57;
+        margin-bottom: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .remove-chapter {
+        background: #dc3545;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 12px;
+      }
+
+      .btn-secondary {
+        background-color: #6c757d;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .btn-secondary:hover {
+        background-color: #545b62;
+      }
+
+      small {
+        color: #666;
+        font-size: 12px;
+        display: block;
+        margin-top: 3px;
+      }
     </style>
   </head>
   <body>
@@ -311,6 +416,232 @@
       </div>
     </div>
 
+    <!-- 📚 NOUVELLE SECTION : Gestion des Histoires du Prophète (PBUH) -->
+    <div class="container" id="storiesAdminPanel" style="display: none">
+      <div class="header">
+        <h1>📚 Histoires du Prophète (ﷺ)</h1>
+        <p>Gestion du contenu éducatif premium</p>
+      </div>
+
+      <!-- Système d'onglets -->
+      <div class="tabs">
+        <button class="tab-button active" onclick="showTab('stories-list')">
+          📖 Liste des Histoires
+        </button>
+        <button class="tab-button" onclick="showTab('add-story')">
+          ➕ Ajouter une Histoire
+        </button>
+        <button class="tab-button" onclick="showTab('story-stats')">
+          📊 Statistiques
+        </button>
+      </div>
+
+      <!-- Onglet Liste des histoires -->
+      <div id="stories-list" class="tab-content active">
+        <div class="card">
+          <h2>📖 Liste des Histoires du Prophète (ﷺ)</h2>
+          <button class="btn btn-info" onclick="loadStories()">
+            🔄 Actualiser la liste
+          </button>
+          <div id="storiesListResult" class="result"></div>
+          <div class="stories-list">
+            <table id="storiesTable" style="display: none">
+              <thead>
+                <tr>
+                  <th>Titre</th>
+                  <th>Catégorie</th>
+                  <th>Difficulté</th>
+                  <th>Temps lecture</th>
+                  <th>Premium</th>
+                  <th>Vues</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="storiesTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Onglet Ajouter une histoire -->
+      <div id="add-story" class="tab-content">
+        <div class="card">
+          <h2>➕ Créer une Nouvelle Histoire</h2>
+
+          <div class="form-group">
+            <label for="storyId">ID unique de l'histoire:</label>
+            <input type="text" id="storyId" placeholder="ex: hijra_to_medina" />
+            <small>Utilisez des lettres, chiffres et tirets uniquement</small>
+          </div>
+
+          <div class="form-group">
+            <label for="storyTitle">Titre français:</label>
+            <input
+              type="text"
+              id="storyTitle"
+              placeholder="La Hijra vers Médine"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="storyTitleArabic">Titre arabe (optionnel):</label>
+            <input
+              type="text"
+              id="storyTitleArabic"
+              placeholder="الهجرة إلى المدينة"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="storyCategory">Catégorie:</label>
+            <select id="storyCategory">
+              <option value="childhood">Enfance</option>
+              <option value="revelation">Révélation</option>
+              <option value="meccan_period">Période Mecquoise</option>
+              <option value="hijra">Hijra</option>
+              <option value="medinian_period">Période Médinoise</option>
+              <option value="battles">Batailles</option>
+              <option value="companions">Compagnons</option>
+              <option value="family_life">Vie Familiale</option>
+              <option value="final_years">Dernières Années</option>
+              <option value="character_traits">Traits de Caractère</option>
+              <option value="miracles">Miracles</option>
+              <option value="daily_life">Vie Quotidienne</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="storyDifficulty">Difficulté:</label>
+            <select id="storyDifficulty">
+              <option value="beginner">Débutant</option>
+              <option value="intermediate">Intermédiaire</option>
+              <option value="advanced">Avancé</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="ageRecommendation">Âge recommandé:</label>
+            <input
+              type="number"
+              id="ageRecommendation"
+              min="5"
+              max="18"
+              value="12"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="readingTime">Temps de lecture (minutes):</label>
+            <input type="number" id="readingTime" min="1" max="60" value="5" />
+          </div>
+
+          <div class="form-group">
+            <label for="isPremium">Type d'accès:</label>
+            <select id="isPremium">
+              <option value="0">Gratuit</option>
+              <option value="1">Premium</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="storyIntroduction">Introduction:</label>
+            <textarea
+              id="storyIntroduction"
+              rows="4"
+              placeholder="Introduction de l'histoire qui capte l'attention..."
+            ></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="storyConclusion">Conclusion:</label>
+            <textarea
+              id="storyConclusion"
+              rows="4"
+              placeholder="Conclusion avec l'enseignement principal..."
+            ></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="moralLesson">Enseignement moral:</label>
+            <textarea
+              id="moralLesson"
+              rows="3"
+              placeholder="L'enseignement principal à retenir..."
+            ></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="historicalLocation">Lieu historique (optionnel):</label>
+            <input
+              type="text"
+              id="historicalLocation"
+              placeholder="La Mecque, Médine, etc."
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="chronologicalOrder">Ordre chronologique:</label>
+            <input type="number" id="chronologicalOrder" value="1" />
+          </div>
+
+          <h3 style="margin-top: 25px; margin-bottom: 15px; color: #2e8b57">
+            📝 Chapitres
+          </h3>
+          <div id="chaptersContainer">
+            <div class="chapter-form">
+              <h4>Chapitre 1</h4>
+              <div class="form-group">
+                <label>Titre du chapitre:</label>
+                <input
+                  type="text"
+                  class="chapter-title"
+                  placeholder="Titre du premier chapitre"
+                />
+              </div>
+              <div class="form-group">
+                <label>Contenu:</label>
+                <textarea
+                  class="chapter-content"
+                  rows="8"
+                  placeholder="Contenu détaillé du chapitre..."
+                ></textarea>
+              </div>
+            </div>
+          </div>
+
+          <button
+            type="button"
+            class="btn btn-secondary"
+            onclick="addChapter()"
+          >
+            ➕ Ajouter un chapitre
+          </button>
+
+          <button
+            type="button"
+            class="btn"
+            onclick="createStory()"
+            style="margin-left: 10px"
+          >
+            💾 Créer l'Histoire
+          </button>
+
+          <div id="createStoryResult" class="result"></div>
+        </div>
+      </div>
+
+      <!-- Onglet Statistiques histoires -->
+      <div id="story-stats" class="tab-content">
+        <div class="card">
+          <h2>📊 Statistiques des Histoires</h2>
+          <button class="btn btn-info" onclick="loadStoryStats()">
+            📈 Charger les statistiques
+          </button>
+          <div id="storyStatsResult" class="result"></div>
+        </div>
+      </div>
+    </div>
+
     <script>
       const API_BASE = "/api/vip-management.php";
       let currentToken = "";
@@ -336,9 +667,11 @@
             const result = await response.json();
             if (result.success) {
               document.getElementById("adminPanel").style.display = "block";
+              document.getElementById("storiesAdminPanel").style.display =
+                "block";
               showResult(
                 "authResult",
-                "✅ Authentification réussie !",
+                "✅ Authentification réussie ! Accès VIP et Histoires débloqué.",
                 "success"
               );
               loadVipList();
@@ -636,6 +969,497 @@
         element.className = `result ${type}`;
         element.style.display = "block";
       }
+
+      // ========================================
+      // 📚 FONCTIONS POUR LES HISTOIRES
+      // ========================================
+
+      let chapterCount = 1;
+
+      // Gestion des onglets
+      function showTab(tabName) {
+        // Cacher tous les onglets
+        document.querySelectorAll(".tab-content").forEach((tab) => {
+          tab.classList.remove("active");
+        });
+
+        // Désactiver tous les boutons d'onglets
+        document.querySelectorAll(".tab-button").forEach((btn) => {
+          btn.classList.remove("active");
+        });
+
+        // Afficher l'onglet sélectionné
+        document.getElementById(tabName).classList.add("active");
+
+        // Activer le bouton correspondant
+        event.target.classList.add("active");
+      }
+
+      // Ajouter un chapitre
+      function addChapter() {
+        chapterCount++;
+        const container = document.getElementById("chaptersContainer");
+        const chapterDiv = document.createElement("div");
+        chapterDiv.className = "chapter-form";
+        chapterDiv.innerHTML = `
+          <h4>
+            Chapitre ${chapterCount}
+            <button type="button" class="remove-chapter" onclick="removeChapter(this)">
+              🗑️ Supprimer
+            </button>
+          </h4>
+          <div class="form-group">
+            <label>Titre du chapitre:</label>
+            <input type="text" class="chapter-title" placeholder="Titre du chapitre ${chapterCount}" />
+          </div>
+          <div class="form-group">
+            <label>Contenu:</label>
+            <textarea class="chapter-content" rows="8" placeholder="Contenu détaillé du chapitre..."></textarea>
+          </div>
+        `;
+        container.appendChild(chapterDiv);
+      }
+
+      // Supprimer un chapitre
+      function removeChapter(button) {
+        const chapterForm = button.closest(".chapter-form");
+        chapterForm.remove();
+
+        // Renuméroter les chapitres
+        const chapters = document.querySelectorAll(".chapter-form h4");
+        chapters.forEach((chapter, index) => {
+          const chapterNumber = index + 1;
+          chapter.childNodes[0].textContent = `Chapitre ${chapterNumber} `;
+        });
+        chapterCount = chapters.length;
+      }
+
+      // Charger la liste des histoires
+      async function loadStories() {
+        if (!currentToken) {
+          showResult(
+            "storiesListResult",
+            "❌ Authentification requise",
+            "error"
+          );
+          return;
+        }
+
+        try {
+          const response = await fetch(`${API_BASE}?action=stories_list`, {
+            headers: {
+              Authorization: `Bearer ${currentToken}`,
+            },
+          });
+
+          const result = await response.json();
+
+          if (result.success && result.data) {
+            const stories = result.data;
+            let tableHTML = `
+              <table id="storiesTable">
+                <thead>
+                  <tr>
+                    <th>Titre</th>
+                    <th>Catégorie</th>
+                    <th>Difficulté</th>
+                    <th>Temps lecture</th>
+                    <th>Premium</th>
+                    <th>Vues</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+            `;
+
+            stories.forEach((story) => {
+              const categoryLabels = {
+                childhood: "Enfance",
+                revelation: "Révélation",
+                meccan_period: "Période Mecquoise",
+                hijra: "Hijra",
+                medinian_period: "Période Médinoise",
+                battles: "Batailles",
+                companions: "Compagnons",
+                family_life: "Vie Familiale",
+                final_years: "Dernières Années",
+                character_traits: "Traits de Caractère",
+                miracles: "Miracles",
+                daily_life: "Vie Quotidienne",
+              };
+
+              const difficultyLabels = {
+                beginner: "Débutant",
+                intermediate: "Intermédiaire",
+                advanced: "Avancé",
+              };
+
+              tableHTML += `
+                <tr>
+                  <td>
+                    <strong>${story.title}</strong>
+                    ${
+                      story.title_arabic
+                        ? `<br><em>${story.title_arabic}</em>`
+                        : ""
+                    }
+                  </td>
+                  <td>${categoryLabels[story.category] || story.category}</td>
+                  <td>
+                    <span class="difficulty-badge ${story.difficulty}">
+                      ${difficultyLabels[story.difficulty] || story.difficulty}
+                    </span>
+                  </td>
+                  <td>${story.reading_time} min</td>
+                  <td>
+                    ${
+                      story.is_premium
+                        ? '<span class="premium-badge">Premium</span>'
+                        : "Gratuit"
+                    }
+                  </td>
+                  <td>${story.view_count || 0}</td>
+                  <td>
+                    <button class="btn btn-sm" onclick="editStory('${
+                      story.id
+                    }')" title="Modifier">
+                      ✏️
+                    </button>
+                    <button class="btn btn-danger btn-sm" onclick="deleteStory('${
+                      story.id
+                    }')" title="Supprimer">
+                      🗑️
+                    </button>
+                  </td>
+                </tr>
+              `;
+            });
+
+            tableHTML += `</tbody></table>`;
+
+            showResult(
+              "storiesListResult",
+              `✅ ${stories.length} histoire(s) trouvée(s)`,
+              "success"
+            );
+            document.querySelector(".stories-list").innerHTML = tableHTML;
+            document.getElementById("storiesTable").style.display = "table";
+          } else {
+            showResult("storiesListResult", `❌ ${result.message}`, "error");
+          }
+        } catch (error) {
+          showResult(
+            "storiesListResult",
+            `❌ Erreur: ${error.message}`,
+            "error"
+          );
+        }
+      }
+
+      // Créer une nouvelle histoire
+      async function createStory() {
+        if (!currentToken) {
+          showResult(
+            "createStoryResult",
+            "❌ Authentification requise",
+            "error"
+          );
+          return;
+        }
+
+        // Récupérer les données du formulaire
+        const storyData = {
+          id: document.getElementById("storyId").value.trim(),
+          title: document.getElementById("storyTitle").value.trim(),
+          title_arabic: document
+            .getElementById("storyTitleArabic")
+            .value.trim(),
+          category: document.getElementById("storyCategory").value,
+          difficulty: document.getElementById("storyDifficulty").value,
+          age_recommendation: parseInt(
+            document.getElementById("ageRecommendation").value
+          ),
+          reading_time: parseInt(document.getElementById("readingTime").value),
+          is_premium: parseInt(document.getElementById("isPremium").value),
+          introduction: document
+            .getElementById("storyIntroduction")
+            .value.trim(),
+          conclusion: document.getElementById("storyConclusion").value.trim(),
+          moral_lesson: document.getElementById("moralLesson").value.trim(),
+          historical_location: document
+            .getElementById("historicalLocation")
+            .value.trim(),
+          chronological_order: parseInt(
+            document.getElementById("chronologicalOrder").value
+          ),
+        };
+
+        // Récupérer les chapitres
+        const chapters = [];
+        document.querySelectorAll(".chapter-form").forEach((form, index) => {
+          const title = form.querySelector(".chapter-title").value.trim();
+          const content = form.querySelector(".chapter-content").value.trim();
+
+          if (title && content) {
+            chapters.push({
+              title: title,
+              content: content,
+              order: index + 1,
+            });
+          }
+        });
+
+        // Validation
+        if (
+          !storyData.id ||
+          !storyData.title ||
+          !storyData.introduction ||
+          chapters.length === 0
+        ) {
+          showResult(
+            "createStoryResult",
+            "❌ Veuillez remplir tous les champs obligatoires et ajouter au moins un chapitre",
+            "error"
+          );
+          return;
+        }
+
+        // Calculer le nombre de mots approximatif
+        const totalWords = (
+          storyData.introduction +
+          storyData.conclusion +
+          chapters.map((c) => c.content).join(" ")
+        ).split(" ").length;
+        storyData.word_count = totalWords;
+
+        try {
+          const response = await fetch(`${API_BASE}?action=create_story`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${currentToken}`,
+            },
+            body: JSON.stringify({
+              story: storyData,
+              chapters: chapters,
+            }),
+          });
+
+          const result = await response.json();
+
+          if (result.success) {
+            showResult(
+              "createStoryResult",
+              `✅ Histoire "${storyData.title}" créée avec succès !`,
+              "success"
+            );
+
+            // Réinitialiser le formulaire
+            document.getElementById("storyId").value = "";
+            document.getElementById("storyTitle").value = "";
+            document.getElementById("storyTitleArabic").value = "";
+            document.getElementById("storyIntroduction").value = "";
+            document.getElementById("storyConclusion").value = "";
+            document.getElementById("moralLesson").value = "";
+            document.getElementById("historicalLocation").value = "";
+
+            // Réinitialiser les chapitres
+            const container = document.getElementById("chaptersContainer");
+            container.innerHTML = `
+              <div class="chapter-form">
+                <h4>Chapitre 1</h4>
+                <div class="form-group">
+                  <label>Titre du chapitre:</label>
+                  <input type="text" class="chapter-title" placeholder="Titre du premier chapitre" />
+                </div>
+                <div class="form-group">
+                  <label>Contenu:</label>
+                  <textarea class="chapter-content" rows="8" placeholder="Contenu détaillé du chapitre..."></textarea>
+                </div>
+              </div>
+            `;
+            chapterCount = 1;
+          } else {
+            showResult("createStoryResult", `❌ ${result.message}`, "error");
+          }
+        } catch (error) {
+          showResult(
+            "createStoryResult",
+            `❌ Erreur: ${error.message}`,
+            "error"
+          );
+        }
+      }
+
+      // Charger les statistiques des histoires
+      async function loadStoryStats() {
+        if (!currentToken) {
+          showResult(
+            "storyStatsResult",
+            "❌ Authentification requise",
+            "error"
+          );
+          return;
+        }
+
+        try {
+          const response = await fetch(`${API_BASE}?action=story_stats`, {
+            headers: {
+              Authorization: `Bearer ${currentToken}`,
+            },
+          });
+
+          const result = await response.json();
+
+          if (result.success) {
+            const stats = result.data;
+            let statsHTML = `
+              <div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 15px;">
+                <div class="stat-card" style="background: #e8f5e9; padding: 15px; border-radius: 8px; text-align: center;">
+                  <h3 style="color: #2E8B57; margin: 0;">${
+                    stats.total_stories || 0
+                  }</h3>
+                  <p style="margin: 5px 0 0;">Total histoires</p>
+                </div>
+                <div class="stat-card" style="background: #fff3e0; padding: 15px; border-radius: 8px; text-align: center;">
+                  <h3 style="color: #FF8F00; margin: 0;">${
+                    stats.free_stories || 0
+                  }</h3>
+                  <p style="margin: 5px 0 0;">Histoires gratuites</p>
+                </div>
+                <div class="stat-card" style="background: #fce4ec; padding: 15px; border-radius: 8px; text-align: center;">
+                  <h3 style="color: #C2185B; margin: 0;">${
+                    stats.premium_stories || 0
+                  }</h3>
+                  <p style="margin: 5px 0 0;">Histoires premium</p>
+                </div>
+                <div class="stat-card" style="background: #e3f2fd; padding: 15px; border-radius: 8px; text-align: center;">
+                  <h3 style="color: #1976D2; margin: 0;">${Math.round(
+                    stats.avg_reading_time || 0
+                  )}</h3>
+                  <p style="margin: 5px 0 0;">Temps moyen (min)</p>
+                </div>
+              </div>
+
+              <h3 style="margin-top: 25px; color: #2E8B57;">📊 Répartition par catégorie</h3>
+              <div class="categories-stats" style="margin-top: 15px;">
+            `;
+
+            if (stats.categories && stats.categories.length > 0) {
+              stats.categories.forEach((cat) => {
+                const categoryLabels = {
+                  childhood: "Enfance",
+                  revelation: "Révélation",
+                  meccan_period: "Période Mecquoise",
+                  hijra: "Hijra",
+                  medinian_period: "Période Médinoise",
+                  battles: "Batailles",
+                  companions: "Compagnons",
+                  family_life: "Vie Familiale",
+                  final_years: "Dernières Années",
+                  character_traits: "Traits de Caractère",
+                  miracles: "Miracles",
+                  daily_life: "Vie Quotidienne",
+                };
+
+                statsHTML += `
+                  <div style="display: flex; justify-content: space-between; padding: 8px; border-bottom: 1px solid #eee;">
+                    <span>${categoryLabels[cat.category] || cat.category}</span>
+                    <span><strong>${cat.count}</strong> (${
+                  cat.free_count
+                } gratuit${cat.free_count > 1 ? "s" : ""}, ${
+                  cat.premium_count
+                } premium)</span>
+                  </div>
+                `;
+              });
+            }
+
+            statsHTML += `</div>`;
+
+            showResult(
+              "storyStatsResult",
+              "✅ Statistiques chargées",
+              "success"
+            );
+            document.getElementById("storyStatsResult").innerHTML += statsHTML;
+          } else {
+            showResult("storyStatsResult", `❌ ${result.message}`, "error");
+          }
+        } catch (error) {
+          showResult(
+            "storyStatsResult",
+            `❌ Erreur: ${error.message}`,
+            "error"
+          );
+        }
+      }
+
+      // Supprimer une histoire
+      async function deleteStory(storyId) {
+        if (
+          !confirm(
+            `Êtes-vous sûr de vouloir supprimer cette histoire ? Cette action est irréversible.`
+          )
+        ) {
+          return;
+        }
+
+        try {
+          const response = await fetch(`${API_BASE}?action=delete_story`, {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${currentToken}`,
+            },
+            body: JSON.stringify({ story_id: storyId }),
+          });
+
+          const result = await response.json();
+
+          if (result.success) {
+            showResult("storiesListResult", `✅ Histoire supprimée`, "success");
+            setTimeout(loadStories, 1000);
+          } else {
+            showResult("storiesListResult", `❌ ${result.message}`, "error");
+          }
+        } catch (error) {
+          showResult(
+            "storiesListResult",
+            `❌ Erreur: ${error.message}`,
+            "error"
+          );
+        }
+      }
     </script>
+
+    <style>
+      /* 🏷️ BADGES POUR LES DIFFICULTÉS */
+      .difficulty-badge {
+        padding: 3px 8px;
+        border-radius: 12px;
+        font-size: 11px;
+        font-weight: bold;
+        color: white;
+      }
+
+      .difficulty-badge.beginner {
+        background: #4caf50;
+      }
+
+      .difficulty-badge.intermediate {
+        background: #ff9800;
+      }
+
+      .difficulty-badge.advanced {
+        background: #f44336;
+      }
+
+      .btn-sm {
+        padding: 5px 10px;
+        font-size: 12px;
+        margin: 0 2px;
+      }
+    </style>
   </body>
 </html>

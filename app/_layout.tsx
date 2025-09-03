@@ -91,7 +91,9 @@ type IconName =
   | "counter"
   | "mosque"
   | "heart-multiple"
-  | "chart-bar";
+  | "chart-bar"
+  | "account-heart"
+  | "calendar-heart";
 
 interface TabBarIconProps {
   icon: IconName;
@@ -557,6 +559,19 @@ export default function TabLayout() {
                 {/* Écran de suppression de données accessible par navigation (pas visible dans la tab bar) */}
                 <Tabs.Screen
                   name="data-deletion"
+                  options={{
+                    href: null, // Cache l'onglet de la navigation
+                  }}
+                />
+                {/* 📚 NOUVEAUX ÉCRANS : Histoires du Prophète (PBUH) */}
+                <Tabs.Screen
+                  name="prophet-stories"
+                  options={{
+                    href: null, // Cache l'onglet de la navigation
+                  }}
+                />
+                <Tabs.Screen
+                  name="story-reader"
                   options={{
                     href: null, // Cache l'onglet de la navigation
                   }}

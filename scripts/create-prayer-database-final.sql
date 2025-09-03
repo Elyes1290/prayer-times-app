@@ -790,6 +790,256 @@ CREATE TABLE IF NOT EXISTS data_deletion_requests (
 ALTER TABLE data_deletion_requests 
 COMMENT = 'Table pour gérer les demandes de suppression de données utilisateur (RGPD/Google Play)';
 
+-- ========================================
+-- 📚 TABLES POUR LES HISTOIRES DU PROPHÈTE (PBUH)
+-- ========================================
+
+-- Table principale des histoires
+CREATE TABLE IF NOT EXISTS `prophet_stories` (
+  `id` VARCHAR(50) PRIMARY KEY,
+  `title` VARCHAR(255) NOT NULL,
+  `title_arabic` VARCHAR(255),
+  `introduction` TEXT NOT NULL,
+  `conclusion` TEXT NOT NULL,
+  `moral_lesson` TEXT,
+  
+  -- Classification
+  `category` ENUM('childhood', 'revelation', 'meccan_period', 'hijra', 'medinian_period', 'battles', 'companions', 'family_life', 'final_years', 'character_traits', 'miracles', 'daily_life') NOT NULL,
+  `difficulty` ENUM('beginner', 'intermediate', 'advanced') DEFAULT 'beginner',
+  `age_recommendation` INT DEFAULT 12,
+  
+  -- Métadonnées de contenu
+  `reading_time` INT NOT NULL COMMENT 'Temps de lecture en minutes',
+  `word_count` INT DEFAULT 0,
+  `chronological_order` INT DEFAULT 0,
+  
+  -- Contexte historique
+  `historical_period_start` INT COMMENT 'Année hijrienne de début',
+  `historical_period_end` INT COMMENT 'Année hijrienne de fin',
+  `historical_location` VARCHAR(100),
+  `historical_context` TEXT,
+  
+  -- Statut premium
+  `is_premium` BOOLEAN DEFAULT FALSE,
+  `has_interactive_elements` BOOLEAN DEFAULT FALSE,
+  
+  -- Statistiques
+  `view_count` INT DEFAULT 0,
+  `rating` DECIMAL(3,2) DEFAULT 0.00,
+  `rating_count` INT DEFAULT 0,
+  
+  -- Index de recherche
+  FULLTEXT(`title`, `introduction`, `conclusion`),
+  
+  -- Timestamps
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  
+  KEY `idx_category` (`category`),
+  KEY `idx_difficulty` (`difficulty`),
+  KEY `idx_premium` (`is_premium`),
+  KEY `idx_chronological` (`chronological_order`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+COMMENT = 'Histoires du Prophète Mohammad (PBUH) - Contenu éducatif premium';
+
+-- Chapitres des histoires
+CREATE TABLE IF NOT EXISTS `prophet_story_chapters` (
+  `id` VARCHAR(50) PRIMARY KEY,
+  `story_id` VARCHAR(50) NOT NULL,
+  `title` VARCHAR(255) NOT NULL,
+  `content` LONGTEXT NOT NULL,
+  `chapter_order` INT NOT NULL,
+  `reading_time` INT DEFAULT 5 COMMENT 'Temps de lecture du chapitre en minutes',
+  
+  -- Index de recherche
+  FULLTEXT(`title`, `content`),
+  
+  -- Timestamps
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  
+  FOREIGN KEY (`story_id`) REFERENCES `prophet_stories`(`id`) ON DELETE CASCADE,
+  KEY `idx_story_order` (`story_id`, `chapter_order`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+COMMENT = 'Chapitres des histoires du Prophète';
+
+-- Références islamiques (Quran, Hadith, etc.)
+CREATE TABLE IF NOT EXISTS `prophet_story_references` (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `story_id` VARCHAR(50) NOT NULL,
+  `type` ENUM('quran', 'hadith', 'sira', 'historical') NOT NULL,
+  `source` VARCHAR(255) NOT NULL COMMENT 'Nom du livre/source',
+  `reference_text` VARCHAR(500) NOT NULL COMMENT 'Référence exacte (ex: Bukhari 123)',
+  `authenticity` ENUM('sahih', 'hasan', 'daif') DEFAULT 'sahih',
+  `content` TEXT COMMENT 'Texte de la référence',
+  `translation` TEXT COMMENT 'Traduction française',
+  `relevance` TEXT COMMENT 'Pertinence par rapport à l\'histoire',
+  `reference_order` INT DEFAULT 0,
+  
+  FOREIGN KEY (`story_id`) REFERENCES `prophet_stories`(`id`) ON DELETE CASCADE,
+  KEY `idx_story_type` (`story_id`, `type`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+COMMENT = 'Références islamiques des histoires';
+
+-- Glossaire des termes islamiques
+CREATE TABLE IF NOT EXISTS `prophet_story_glossary` (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `story_id` VARCHAR(50) NOT NULL,
+  `term` VARCHAR(100) NOT NULL,
+  `arabic_term` VARCHAR(100),
+  `definition` TEXT NOT NULL,
+  `pronunciation` VARCHAR(200),
+  `category` VARCHAR(50) COMMENT 'fiqh, aqida, etc.',
+  
+  FOREIGN KEY (`story_id`) REFERENCES `prophet_stories`(`id`) ON DELETE CASCADE,
+  KEY `idx_term` (`term`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+COMMENT = 'Glossaire des termes islamiques dans les histoires';
+
+-- ========================================
+-- 👤 TABLES UTILISATEUR POUR LES HISTOIRES
+-- ========================================
+
+-- Progrès de lecture des utilisateurs
+CREATE TABLE IF NOT EXISTS `user_story_progress` (
+  `user_id` INT NOT NULL,
+  `story_id` VARCHAR(50) NOT NULL,
+  `current_chapter` INT DEFAULT 0,
+  `current_position` INT DEFAULT 0 COMMENT 'Position dans le chapitre (en caractères)',
+  `completion_percentage` DECIMAL(5,2) DEFAULT 0.00,
+  `time_spent` INT DEFAULT 0 COMMENT 'Temps passé en secondes',
+  `last_read_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  
+  PRIMARY KEY (`user_id`, `story_id`),
+  FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE,
+  FOREIGN KEY (`story_id`) REFERENCES `prophet_stories`(`id`) ON DELETE CASCADE,
+  KEY `idx_last_read` (`last_read_at`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+COMMENT = 'Progrès de lecture des histoires par utilisateur';
+
+-- Notes personnelles des utilisateurs (Premium)
+CREATE TABLE IF NOT EXISTS `user_story_notes` (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `user_id` INT NOT NULL,
+  `story_id` VARCHAR(50) NOT NULL,
+  `chapter_id` VARCHAR(50),
+  `position` INT NOT NULL COMMENT 'Position dans le texte',
+  `note_text` TEXT NOT NULL,
+  `highlight_text` VARCHAR(500) COMMENT 'Texte surligné',
+  `note_type` ENUM('personal', 'bookmark', 'question', 'reflection') DEFAULT 'personal',
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  
+  FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE,
+  FOREIGN KEY (`story_id`) REFERENCES `prophet_stories`(`id`) ON DELETE CASCADE,
+  FOREIGN KEY (`chapter_id`) REFERENCES `prophet_story_chapters`(`id`) ON DELETE CASCADE,
+  KEY `idx_user_story` (`user_id`, `story_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+COMMENT = 'Notes personnelles des utilisateurs sur les histoires (Premium)';
+
+-- Favoris des histoires
+CREATE TABLE IF NOT EXISTS `user_story_favorites` (
+  `user_id` INT NOT NULL,
+  `story_id` VARCHAR(50) NOT NULL,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  
+  PRIMARY KEY (`user_id`, `story_id`),
+  FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE,
+  FOREIGN KEY (`story_id`) REFERENCES `prophet_stories`(`id`) ON DELETE CASCADE,
+  KEY `idx_created` (`created_at`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+COMMENT = 'Histoires favorites des utilisateurs';
+
+-- Évaluations des histoires
+CREATE TABLE IF NOT EXISTS `user_story_ratings` (
+  `user_id` INT NOT NULL,
+  `story_id` VARCHAR(50) NOT NULL,
+  `rating` TINYINT CHECK (`rating` >= 1 AND `rating` <= 5),
+  `review` TEXT,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  
+  PRIMARY KEY (`user_id`, `story_id`),
+  FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE,
+  FOREIGN KEY (`story_id`) REFERENCES `prophet_stories`(`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+COMMENT = 'Évaluations des histoires par les utilisateurs';
+
+-- Vues des histoires (pour statistiques)
+CREATE TABLE IF NOT EXISTS `user_story_views` (
+  `user_id` INT NOT NULL,
+  `story_id` VARCHAR(50) NOT NULL,
+  `viewed_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  
+  PRIMARY KEY (`user_id`, `story_id`),
+  FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE,
+  FOREIGN KEY (`story_id`) REFERENCES `prophet_stories`(`id`) ON DELETE CASCADE,
+  KEY `idx_viewed` (`viewed_at`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+COMMENT = 'Suivi des vues des histoires pour analytics';
+
+-- ========================================
+-- 📊 VUES ET TRIGGERS POUR LES STATISTIQUES
+-- ========================================
+
+-- Vue pour les statistiques globales des histoires
+CREATE VIEW `prophet_stories_stats` AS
+SELECT 
+    ps.id,
+    ps.title,
+    ps.category,
+    ps.view_count,
+    ps.rating,
+    ps.rating_count,
+    COUNT(DISTINCT usf.user_id) as favorite_count,
+    COUNT(DISTINCT usp.user_id) as readers_count,
+    AVG(usp.completion_percentage) as avg_completion
+FROM prophet_stories ps
+LEFT JOIN user_story_favorites usf ON ps.id = usf.story_id
+LEFT JOIN user_story_progress usp ON ps.id = usp.story_id
+GROUP BY ps.id;
+
+-- Trigger pour mettre à jour la note moyenne des histoires
+DELIMITER $$
+CREATE TRIGGER update_story_rating 
+AFTER INSERT ON user_story_ratings
+FOR EACH ROW
+BEGIN
+    UPDATE prophet_stories 
+    SET 
+        rating = (
+            SELECT AVG(rating) 
+            FROM user_story_ratings 
+            WHERE story_id = NEW.story_id
+        ),
+        rating_count = (
+            SELECT COUNT(*) 
+            FROM user_story_ratings 
+            WHERE story_id = NEW.story_id
+        )
+    WHERE id = NEW.story_id;
+END$$
+
+CREATE TRIGGER update_story_rating_on_update
+AFTER UPDATE ON user_story_ratings
+FOR EACH ROW
+BEGIN
+    UPDATE prophet_stories 
+    SET 
+        rating = (
+            SELECT AVG(rating) 
+            FROM user_story_ratings 
+            WHERE story_id = NEW.story_id
+        ),
+        rating_count = (
+            SELECT COUNT(*) 
+            FROM user_story_ratings 
+            WHERE story_id = NEW.story_id
+        )
+    WHERE id = NEW.story_id;
+END$$
+DELIMITER ;
+
 -- Index pour optimiser les requêtes de suivi
 CREATE INDEX idx_status_created ON data_deletion_requests(status, created_at);
 CREATE INDEX idx_email_status ON data_deletion_requests(email, status);

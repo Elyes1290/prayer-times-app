@@ -748,11 +748,137 @@ function handleSaveBackup() {
     
     $backup_id = $pdo->lastInsertId();
     
+    // 🚀 CORRECTION CRITIQUE : Synchroniser les paramètres importants avec la table users
+    $backupJson = json_decode($data['backup_data'], true);
+    
+    // 📝 DEBUG : Logger la structure complète pour comprendre le format
+    error_log("🔍 DEBUG BACKUP - Structure complète : " . json_encode($backupJson, JSON_PRETTY_PRINT));
+    
+    if ($backupJson && isset($backupJson['settings'])) {
+        $settingsRoot = $backupJson['settings'];
+        
+        // 🚀 CORRECTION : Utiliser directement les paramètres du niveau racine
+        $settings = $settingsRoot;
+        
+        error_log("🔍 DEBUG BACKUP - Paramètres extraits : " . json_encode($settings));
+        
+        // Préparer les champs à mettre à jour
+        $updateFields = [];
+        $updateValues = [];
+        
+        // Mapper les paramètres du backup vers les colonnes users
+        $settingsMapping = [
+            'calcMethod' => 'calc_method',
+            'adhanSound' => 'adhan_sound', 
+            'adhanVolume' => 'adhan_volume',
+            'locationMode' => 'location_mode',
+            'currentLanguage' => 'language',  // 🚀 CORRECTION : currentLanguage au lieu de language
+            'userFirstName' => 'user_first_name',
+            'notificationsEnabled' => 'notifications_enabled',
+            'remindersEnabled' => 'reminders_enabled',
+            'reminderOffset' => 'reminder_offset',
+            'themeMode' => 'theme_mode',
+            'audioQuality' => 'audio_quality',
+            'downloadStrategy' => 'download_strategy',
+            'enableDataSaving' => 'enable_data_saving',
+            'maxCacheSize' => 'max_cache_size'
+        ];
+        
+        // Ajouter les champs de localisation
+        if (isset($settings['manualLocation'])) {
+            $location = $settings['manualLocation'];
+            if (!empty($location['city'])) {
+                $updateFields[] = 'location_city = ?';
+                $updateValues[] = $location['city'];
+            }
+            if (!empty($location['country'])) {
+                $updateFields[] = 'location_country = ?';
+                $updateValues[] = $location['country'];
+            }
+            if (isset($location['lat'])) {
+                $updateFields[] = 'location_lat = ?';
+                $updateValues[] = floatval($location['lat']);
+            }
+            if (isset($location['lon'])) {
+                $updateFields[] = 'location_lon = ?';
+                $updateValues[] = floatval($location['lon']);
+            }
+        }
+        
+        // Mapper les paramètres du backup
+        foreach ($settingsMapping as $backupKey => $dbColumn) {
+            if (isset($settings[$backupKey]) && $settings[$backupKey] !== null) {
+                $updateFields[] = "$dbColumn = ?";
+                $updateValues[] = $settings[$backupKey];
+            }
+        }
+        
+        // 🚀 CORRECTION : Paramètres dhikr maintenant dans la structure dhikrSettings
+        if (isset($settings['dhikrSettings'])) {
+            $dhikr = $settings['dhikrSettings'];
+            $dhikrMapping = [
+                'enabledAfterSalah' => 'dhikr_after_salah_enabled',
+                'delayAfterSalah' => 'dhikr_after_salah_delay',
+                'enabledMorningDhikr' => 'dhikr_morning_enabled', 
+                'delayMorningDhikr' => 'dhikr_morning_delay',
+                'enabledEveningDhikr' => 'dhikr_evening_enabled',
+                'delayEveningDhikr' => 'dhikr_evening_delay',
+                'enabledSelectedDua' => 'dhikr_selected_dua_enabled',
+                'delaySelectedDua' => 'dhikr_selected_dua_delay'
+            ];
+            
+            foreach ($dhikrMapping as $dhikrKey => $dbColumn) {
+                if (isset($dhikr[$dhikrKey])) {
+                    $updateFields[] = "$dbColumn = ?";
+                    $updateValues[] = $dhikr[$dhikrKey] ? 1 : 0;
+                }
+            }
+        } else {
+            // 📊 FALLBACK : Paramètres dhikr directement dans settings (ancien système)
+            $dhikrMappingDirect = [
+                'enabledAfterSalah' => 'dhikr_after_salah_enabled',
+                'delayAfterSalah' => 'dhikr_after_salah_delay',
+                'enabledMorningDhikr' => 'dhikr_morning_enabled', 
+                'delayMorningDhikr' => 'dhikr_morning_delay',
+                'enabledEveningDhikr' => 'dhikr_evening_enabled',
+                'delayEveningDhikr' => 'dhikr_evening_delay',
+                'enabledSelectedDua' => 'dhikr_selected_dua_enabled',
+                'delaySelectedDua' => 'dhikr_selected_dua_delay'
+            ];
+            
+            foreach ($dhikrMappingDirect as $dhikrKey => $dbColumn) {
+                if (isset($settings[$dhikrKey])) {
+                    $updateFields[] = "$dbColumn = ?";
+                    $updateValues[] = $settings[$dhikrKey] ? 1 : 0;
+                }
+            }
+        }
+        
+        // Mettre à jour la table users si on a des champs à modifier
+        if (!empty($updateFields)) {
+            $updateFields[] = 'updated_at = NOW()';
+            $updateValues[] = $user_id;
+            
+            $updateSql = "UPDATE users SET " . implode(', ', $updateFields) . " WHERE id = ?";
+            $updateStmt = $pdo->prepare($updateSql);
+            $updateStmt->execute($updateValues);
+            
+            error_log("📦 CORRECTION: Paramètres utilisateur synchronisés - " . (count($updateFields) - 1) . " champs mis à jour");
+            error_log("📦 CORRECTION: SQL exécuté : " . $updateSql);
+            error_log("📦 CORRECTION: Valeurs : " . json_encode($updateValues));
+        } else {
+            error_log("⚠️ ATTENTION: Aucun champ à mettre à jour trouvé dans le backup !");
+        }
+    } else {
+        error_log("⚠️ ATTENTION: Pas de section 'settings' trouvée dans le backup JSON !");
+    }
+    
     // Logger l'action
     logUserAction($user_id, 'backup_saved', 'backup', $backup_id, [
         'backup_type' => $backup_type,
         'backup_size' => $backup_size,
-        'backup_name' => "Backup-" . date('Y-m-d')
+        'backup_name' => "Backup-" . date('Y-m-d'),
+        'fields_updated' => isset($updateFields) ? count($updateFields) : 0
     ]);
     
     jsonResponse(true, [
