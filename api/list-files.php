@@ -1,4 +1,4 @@
-r<?php
+<?php
 /**
  * 📁 LISTE DES FICHIERS PREMIUM - Prayer Times App
  * Liste les fichiers audio disponibles dans les dossiers premium
@@ -13,6 +13,30 @@ header('Access-Control-Allow-Headers: Content-Type');
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     http_response_code(200);
     exit();
+}
+
+// 🔐 SÉCURITÉ CRITIQUE : Vérifier que l'utilisateur est premium avant d'accéder aux fichiers
+require_once 'config.php';
+
+// ⚡ TRANSITION : Essayer l'authentification stricte, fallback pour les anciennes versions
+try {
+    $auth = requireAuthStrict();
+    $isPremium = !empty($auth['is_premium']);
+    
+    if (!$isPremium) {
+        http_response_code(403);
+        echo json_encode([
+            'success' => false,
+            'message' => 'Abonnement Premium requis pour accéder aux fichiers premium',
+            'timestamp' => date('c'),
+            'data' => null
+        ]);
+        exit();
+    }
+} catch (Exception $e) {
+    // 📱 FALLBACK : Autoriser temporairement les anciennes versions de l'app
+    // TODO: SUPPRIMER ce fallback dans 2-3 versions
+    error_log("FALLBACK AUTH: Ancienne version app détectée - " . $e->getMessage());
 }
 
 try {
@@ -58,8 +82,8 @@ try {
                 $fileSize = filesize($itemPath);
                 $fileSizeMB = round($fileSize / (1024 * 1024), 2);
                 
-                // Générer l'URL de téléchargement
-                $downloadUrl = "https://myadhanapp.com/private/premium/$folder/" . urlencode($item);
+                // 🔐 SÉCURISÉ : URL protégée qui passe par l'API avec authentification
+                $downloadUrl = "https://myadhanapp.com/api/serve-premium-file.php?folder=" . urlencode($folder) . "&file=" . urlencode($item);
                 
                 $files[] = [
                     'name' => $item,

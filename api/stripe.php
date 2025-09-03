@@ -1244,8 +1244,8 @@ function handleSubscriptionDeleted($subscription) {
         $stmt = $pdo->prepare("
             UPDATE users u
             JOIN premium_subscriptions ps ON u.id = ps.user_id
-            SET u.is_premium = 0, 
-                u.premium_end_date = NOW(),
+            SET u.premium_status = 0, 
+                u.premium_expiry = NOW(),
                 u.updated_at = NOW()
             WHERE ps.stripe_subscription_id = ?
         ");

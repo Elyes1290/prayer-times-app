@@ -1063,7 +1063,7 @@ SELECT
     TIMESTAMPDIFF(DAY, u.premium_expiry, NOW()) as days_expired,
     ps.stripe_subscription_id,
     pp.id as purchase_id
-FROM users u
+FROM users u 
 LEFT JOIN premium_subscriptions ps ON u.id = ps.user_id
 LEFT JOIN premium_purchases pp ON u.id = pp.user_id AND pp.status = 'active'
 WHERE u.premium_status = 1 

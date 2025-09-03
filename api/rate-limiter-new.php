@@ -15,15 +15,31 @@ class RateLimiterNew {
             `ip_address` varchar(45) NOT NULL,
             `action` varchar(50) NOT NULL,
             `attempts` int(11) DEFAULT 1,
-            `first_attempt` timestamp DEFAULT CURRENT_TIMESTAMP,
+            `first_attempt` timestamp NULL DEFAULT NULL,
             `last_attempt` timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
             `blocked_until` timestamp NULL DEFAULT NULL,
             PRIMARY KEY (`id`),
-            UNIQUE KEY `ip_action` (`ip_address`, `action`)
+            UNIQUE KEY `ip_action` (`ip_address`, `action`),
+            KEY `first_attempt` (`first_attempt`),
+            KEY `blocked_until` (`blocked_until`)
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
         
         try {
             $this->pdo->exec($sql);
+            
+            // ✅ CORRECTION : S'assurer que les colonnes existent avec le bon schéma
+            try {
+                $this->pdo->exec("ALTER TABLE `rate_limits` MODIFY `first_attempt` timestamp NULL DEFAULT NULL");
+            } catch (PDOException $e) {
+                // Ignorer si la colonne existe déjà avec le bon type
+            }
+            
+            try {
+                $this->pdo->exec("CREATE INDEX `idx_cleanup` ON `rate_limits` (`first_attempt`, `blocked_until`)");
+            } catch (PDOException $e) {
+                // Ignorer si l'index existe déjà
+            }
+            
         } catch (PDOException $e) {
             error_log("Erreur création table: " . $e->getMessage());
         }
@@ -48,6 +64,9 @@ class RateLimiterNew {
         
         // 🔒 PRODUCTION : Rate limiting activé
         try {
+            // 🧹 NOUVEAU : Nettoyage automatique des anciens records
+            $this->cleanupExpiredRecords();
+            
             // WHITELIST SIMPLE
             if ($this->isWhitelisted($ip)) {
                 error_log("IP whitelistée: $ip");
@@ -76,25 +95,66 @@ class RateLimiterNew {
             $record = $stmt->fetch();
             
             if ($record) {
+                // ✅ CORRECTION FAILLE #1 : Vérifier la fenêtre de temps
+                $timeDiff = time() - strtotime($record['first_attempt']);
+                
+                if ($timeDiff > $timeWindow) {
+                    // Fenêtre de temps dépassée : reset les tentatives
+                    error_log("🔄 Fenêtre de temps dépassée pour $identifier:$action - Reset tentatives");
+                    $stmt = $this->pdo->prepare("UPDATE rate_limits SET attempts = 1, first_attempt = NOW(), last_attempt = NOW(), blocked_until = NULL WHERE ip_address = ? AND action = ?");
+                    $stmt->execute([$identifier, $action]);
+                    
+                    return [
+                        'allowed' => true,
+                        'blocked' => false,
+                        'attempts' => 1,
+                        'remaining_attempts' => $maxAttempts - 1,
+                        'time_window_reset' => true
+                    ];
+                }
+                
                 // Vérifier si bloqué
                 if ($record['blocked_until'] && new DateTime($record['blocked_until']) > new DateTime()) {
+                    $remainingSeconds = (new DateTime($record['blocked_until']))->getTimestamp() - time();
                     return [
                         'allowed' => false,
                         'blocked' => true,
+                        'remaining_seconds' => $remainingSeconds,
                         'message' => "Trop de tentatives. Réessayez plus tard."
+                    ];
+                }
+                
+                // ✅ CORRECTION FAILLE #2 : Si bloqué mais timeout expiré, reset
+                if ($record['blocked_until'] && new DateTime($record['blocked_until']) <= new DateTime()) {
+                    error_log("🔓 Déblocage automatique pour $identifier:$action");
+                    $stmt = $this->pdo->prepare("UPDATE rate_limits SET attempts = 1, first_attempt = NOW(), last_attempt = NOW(), blocked_until = NULL WHERE ip_address = ? AND action = ?");
+                    $stmt->execute([$identifier, $action]);
+                    
+                    return [
+                        'allowed' => true,
+                        'blocked' => false,
+                        'attempts' => 1,
+                        'remaining_attempts' => $maxAttempts - 1,
+                        'unblocked' => true
                     ];
                 }
                 
                 // Incrémenter les tentatives
                 if ($record['attempts'] >= $maxAttempts) {
-                    $blockedUntil = (new DateTime())->add(new DateInterval('PT1H'));
-                    $stmt = $this->pdo->prepare("UPDATE rate_limits SET blocked_until = ? WHERE ip_address = ? AND action = ?");
+                    // ✅ AMÉLIORATION : Durée de blocage configurable selon l'action
+                    $blockDuration = $this->getBlockDuration($action);
+                    $blockedUntil = (new DateTime())->add(new DateInterval($blockDuration));
+                    
+                    $stmt = $this->pdo->prepare("UPDATE rate_limits SET blocked_until = ?, last_attempt = NOW() WHERE ip_address = ? AND action = ?");
                     $stmt->execute([$blockedUntil->format('Y-m-d H:i:s'), $identifier, $action]);
+                    
+                    $blockMinutes = $this->getBlockDurationInMinutes($blockDuration);
                     
                     return [
                         'allowed' => false,
                         'blocked' => true,
-                        'message' => "Trop de tentatives. Réessayez dans 1 heure."
+                        'remaining_seconds' => $this->getBlockDurationInSeconds($blockDuration),
+                        'message' => "Trop de tentatives. Réessayez dans $blockMinutes."
                     ];
                 } else {
                     $stmt = $this->pdo->prepare("UPDATE rate_limits SET attempts = attempts + 1, last_attempt = NOW() WHERE ip_address = ? AND action = ?");
@@ -109,7 +169,7 @@ class RateLimiterNew {
                 }
             } else {
                 // Première tentative
-                $stmt = $this->pdo->prepare("INSERT INTO rate_limits (ip_address, action, attempts) VALUES (?, ?, 1)");
+                $stmt = $this->pdo->prepare("INSERT INTO rate_limits (ip_address, action, attempts, first_attempt, last_attempt) VALUES (?, ?, 1, NOW(), NOW())");
                 $stmt->execute([$identifier, $action]);
                 
                 return [
@@ -196,6 +256,93 @@ class RateLimiterNew {
         } catch (Exception $e) {
             return [];
         }
+    }
+    
+    // ✅ CORRECTION FAILLE #3 : Nettoyage automatique intelligent des anciens records
+    private function cleanupExpiredRecords() {
+        try {
+            // ⚡ OPTIMISATION : Nettoyage seulement si nécessaire (max 1x par heure)
+            $cacheKey = 'rate_limit_last_cleanup';
+            $lastCleanup = $this->getLastCleanupTime();
+            
+            // Si nettoyé dans la dernière heure, skip
+            if ($lastCleanup && (time() - $lastCleanup) < 3600) {
+                return;
+            }
+            
+            // Supprimer les records vieux de plus de 24h sans blocage actif
+            $stmt = $this->pdo->prepare("
+                DELETE FROM rate_limits 
+                WHERE first_attempt < DATE_SUB(NOW(), INTERVAL 24 HOUR) 
+                AND (blocked_until IS NULL OR blocked_until < NOW())
+            ");
+            $stmt->execute();
+            
+            $deletedCount = $stmt->rowCount();
+            if ($deletedCount > 0) {
+                error_log("🧹 Nettoyage rate limiting: $deletedCount records supprimés");
+            }
+            
+            // Marquer le dernier nettoyage
+            $this->setLastCleanupTime(time());
+            
+        } catch (Exception $e) {
+            error_log("Erreur nettoyage rate limiting: " . $e->getMessage());
+        }
+    }
+    
+    // Helper pour éviter le nettoyage trop fréquent
+    private function getLastCleanupTime() {
+        try {
+            $stmt = $this->pdo->prepare("SELECT UNIX_TIMESTAMP(MAX(last_attempt)) as last_cleanup FROM rate_limits WHERE action = '_cleanup_marker'");
+            $stmt->execute();
+            $result = $stmt->fetch();
+            return $result ? $result['last_cleanup'] : null;
+        } catch (Exception $e) {
+            return null;
+        }
+    }
+    
+    private function setLastCleanupTime($timestamp) {
+        try {
+            $stmt = $this->pdo->prepare("INSERT INTO rate_limits (ip_address, action, attempts, first_attempt, last_attempt) VALUES ('system', '_cleanup_marker', 1, FROM_UNIXTIME(?), FROM_UNIXTIME(?)) ON DUPLICATE KEY UPDATE last_attempt = FROM_UNIXTIME(?)");
+            $stmt->execute([$timestamp, $timestamp, $timestamp]);
+        } catch (Exception $e) {
+            // Ignore errors
+        }
+    }
+    
+    // ✅ AMÉLIORATION : Durées de blocage configurables par action
+    private function getBlockDuration($action) {
+        return match($action) {
+            'payment_attempt' => 'PT2H',    // 2 heures pour paiements (plus sensible)
+            'auth_login' => 'PT30M',        // 30 minutes pour connexion
+            'auth_register' => 'PT1H',      // 1 heure pour inscription
+            'auth_verify' => 'PT15M',       // 15 minutes pour vérification
+            default => 'PT1H'               // 1 heure par défaut
+        };
+    }
+    
+    // Helper pour affichage utilisateur-friendly
+    private function getBlockDurationInMinutes($duration) {
+        return match($duration) {
+            'PT15M' => '15 minutes',
+            'PT30M' => '30 minutes', 
+            'PT1H' => '1 heure',
+            'PT2H' => '2 heures',
+            default => '1 heure'
+        };
+    }
+    
+    // Helper pour calculs de temps restant
+    private function getBlockDurationInSeconds($duration) {
+        return match($duration) {
+            'PT15M' => 15 * 60,
+            'PT30M' => 30 * 60,
+            'PT1H' => 60 * 60,
+            'PT2H' => 2 * 60 * 60,
+            default => 60 * 60
+        };
     }
 }
 ?>

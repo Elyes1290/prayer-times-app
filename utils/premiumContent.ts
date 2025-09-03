@@ -714,12 +714,10 @@ class PremiumContentManager {
   ): Promise<PremiumContent[]> {
     try {
       debugLog(`🔍 Scan du dossier: ${folderPath} (type: ${type})`);
-      // Appel à l'API PHP sur Infomaniak pour lister les fichiers
-      const apiUrl = `${
-        AppConfig.API_BASE_URL
-      }/list-files.php?folder=${encodeURIComponent(folderPath)}`;
-      const response = await fetch(apiUrl);
-      const data = await response.json();
+      // 🔐 CORRECTION : Utiliser apiClient pour inclure l'authentification
+      const apiUrl = `/list-files.php?folder=${encodeURIComponent(folderPath)}`;
+      const response = await apiClient.get(apiUrl);
+      const data = response;
       if (!data.success || !Array.isArray(data.data?.files)) {
         debugLog(`❌ Réponse API invalide:`, data);
         return [];
@@ -1577,7 +1575,10 @@ class PremiumContentManager {
       }[] = [];
 
       // Analyser chaque téléchargement existant
-      for (const [contentId, info] of Object.entries(downloaded) as [string, any][]) {
+      for (const [contentId, info] of Object.entries(downloaded) as [
+        string,
+        any
+      ][]) {
         const currentPath = info.downloadPath;
 
         // Vérifier si le fichier existe et s'il suit l'ancien format
@@ -2397,7 +2398,10 @@ class PremiumContentManager {
       let legacyFilesFound = 0;
 
       // Analyser tous les téléchargements
-      for (const [contentId, info] of Object.entries(downloaded) as [string, any][]) {
+      for (const [contentId, info] of Object.entries(downloaded) as [
+        string,
+        any
+      ][]) {
         const filePath = info.downloadPath as string;
         const fileName = filePath.split("/").pop() || "";
 
