@@ -14,6 +14,10 @@ jest.mock("../../contexts/ToastContext", () => ({
 }));
 jest.mock("react-i18next", () => ({
   useTranslation: () => ({ t: (_k: string, fb?: string) => fb || _k }),
+  initReactI18next: {
+    type: '3rdParty',
+    init: jest.fn(),
+  },
 }));
 jest.mock("../../utils/apiClient", () => ({
   __esModule: true,

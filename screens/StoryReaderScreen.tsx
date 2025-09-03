@@ -14,7 +14,7 @@ import {
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons } from "@expo/vector-icons";
-import { useRouter } from "expo-router";
+import { useRouter, useFocusEffect } from "expo-router";
 
 import { ThemedView } from "../components/ThemedView";
 import { ThemedText } from "../components/ThemedText";
@@ -121,14 +121,26 @@ export default function StoryReaderScreen() {
   const scrollPosition = useRef(0);
   const fadeAnim = useRef(new Animated.Value(0)).current;
 
-  // Récupérer l'ID de l'histoire depuis AsyncStorage
-  useEffect(() => {
-    const getStoredStoryId = async () => {
-      const storedId = await AsyncStorage.getItem("current_story_id");
-      setStoryId(storedId);
-    };
-    getStoredStoryId();
-  }, []);
+  // 🔄 Récupérer l'ID de l'histoire à chaque fois qu'on revient sur cette page
+  useFocusEffect(
+    useCallback(() => {
+      const getStoredStoryId = async () => {
+        const storedId = await AsyncStorage.getItem("current_story_id");
+        console.log("📖 [StoryReader] ID récupéré (focus):", storedId);
+
+        // 🚀 FORCER le rechargement si l'ID change
+        if (storedId && storedId !== storyId) {
+          console.log("📖 [StoryReader] Nouvel ID détecté, rechargement...");
+          setStoryId(storedId);
+          setStoryData(null); // Reset des données pour forcer le reload
+          setLoading(true);
+        } else if (storedId && !storyId) {
+          setStoryId(storedId);
+        }
+      };
+      getStoredStoryId();
+    }, [storyId])
+  );
 
   // Charger l'histoire
   useEffect(() => {
@@ -167,11 +179,13 @@ export default function StoryReaderScreen() {
           }).start();
         } else {
           Alert.alert("Erreur", responseData.message || "Histoire introuvable");
+          await AsyncStorage.removeItem("current_story_id");
           router.replace("/prophet-stories" as any);
         }
       } catch (error) {
         console.error("Erreur chargement histoire:", error);
         Alert.alert("Erreur", "Erreur de connexion");
+        await AsyncStorage.removeItem("current_story_id");
         router.replace("/prophet-stories" as any);
       } finally {
         setLoading(false);
@@ -180,6 +194,14 @@ export default function StoryReaderScreen() {
 
     loadStory();
   }, [storyId]);
+
+  // 🧹 Nettoyer l'AsyncStorage quand le composant se démonte
+  useEffect(() => {
+    return () => {
+      // Cleanup function qui s'exécute quand on quitte la page
+      AsyncStorage.removeItem("current_story_id");
+    };
+  }, []);
 
   // Sauvegarder le progrès de lecture
   const saveProgress = useCallback(async () => {
@@ -674,7 +696,10 @@ export default function StoryReaderScreen() {
         <View style={styles.errorContainer}>
           <ThemedText>Histoire introuvable</ThemedText>
           <TouchableOpacity
-            onPress={() => router.replace("/prophet-stories" as any)}
+            onPress={async () => {
+              await AsyncStorage.removeItem("current_story_id");
+              router.replace("/prophet-stories" as any);
+            }}
             style={styles.backButton}
           >
             <ThemedText>Retour</ThemedText>
@@ -702,7 +727,11 @@ export default function StoryReaderScreen() {
         style={styles.toolbar}
       >
         <TouchableOpacity
-          onPress={() => router.replace("/prophet-stories" as any)}
+          onPress={async () => {
+            // 🧹 Nettoyer l'ID stocké pour éviter les conflits
+            await AsyncStorage.removeItem("current_story_id");
+            router.replace("/prophet-stories" as any);
+          }}
           style={styles.toolbarButton}
         >
           <Ionicons
