@@ -76,6 +76,7 @@ function handleCatalog() {
             'timestamp' => date('c'),
             'data' => [
                 'availableAdhans' => [],
+                'adhanDetails' => [],
                 'total' => 0
             ]
         ]);
@@ -83,6 +84,7 @@ function handleCatalog() {
     }
     
     $availableAdhans = [];
+    $adhanDetails = []; // 🔧 NOUVEAU : Détails complets avec tailles
     $allowedExtensions = ['mp3', 'wav', 'ogg', 'm4a'];
     
     $items = scandir($adhanDirectory);
@@ -103,17 +105,38 @@ function handleCatalog() {
                 
                 if (!in_array($adhanName, $availableAdhans)) {
                     $availableAdhans[] = $adhanName;
+                    
+                    // 🔧 NOUVEAU : Calculer la vraie taille du fichier
+                    $fileSize = filesize($itemPath);
+                    $fileSizeMB = round($fileSize / (1024 * 1024), 2);
+                    
+                    // Ajouter les détails complets
+                    $adhanDetails[] = [
+                        'name' => $adhanName,
+                        'fileName' => $item,
+                        'size' => $fileSize,
+                        'sizeMB' => $fileSizeMB,
+                        'extension' => $extension,
+                        'modified' => date('Y-m-d H:i:s', filemtime($itemPath))
+                    ];
                 }
             }
         }
     }
     
+    // Trier par nom
+    sort($availableAdhans);
+    usort($adhanDetails, function($a, $b) {
+        return strnatcmp($a['name'], $b['name']);
+    });
+    
     echo json_encode([
         'success' => true,
-        'message' => 'Catalogue des adhans récupéré',
+        'message' => 'Catalogue des adhans récupéré avec tailles',
         'timestamp' => date('c'),
         'data' => [
-            'availableAdhans' => $availableAdhans,
+            'availableAdhans' => $availableAdhans, // 🔧 Maintenu pour compatibilité
+            'adhanDetails' => $adhanDetails,       // 🔧 NOUVEAU : Détails complets
             'total' => count($availableAdhans)
         ]
     ]);

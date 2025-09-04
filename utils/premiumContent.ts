@@ -2066,16 +2066,28 @@ class PremiumContentManager {
       try {
         const result = await apiClient.getAdhanCatalog();
         if (result.success && result.data) {
-          const availableAdhans = (result.data as any).availableAdhans || [];
+          // 🔧 NOUVEAU : Utiliser les détails complets avec vraies tailles depuis l'API
+          const adhanDetails = (result.data as any).adhanDetails || [];
+          const availableAdhans = (result.data as any).availableAdhans || []; // Fallback compatibilité
+
           debugLog(
-            `🎵 ${availableAdhans.length} adhans trouvés sur Infomaniak`
+            `🎵 ${
+              adhanDetails.length || availableAdhans.length
+            } adhans trouvés sur Infomaniak`
           );
 
           const token = await AsyncStorage.getItem("auth_token");
           const tokenParam = token ? `&token=${encodeURIComponent(token)}` : "";
-          // 🚀 OPTIMISATION : Traiter tous les adhans en parallèle (plus rapide)
-          const adhanPromises = availableAdhans.map(
-            async (adhanName: string) => {
+
+          // 🔧 NOUVEAU : Utiliser les détails complets si disponibles, sinon fallback sur ancienne méthode
+          let adhanPromises: Promise<PremiumContent>[];
+
+          if (adhanDetails.length > 0) {
+            // 🚀 NOUVEAU : Traiter les adhans avec vraies tailles depuis l'API
+            adhanPromises = adhanDetails.map(async (adhanDetail: any) => {
+              const adhanName = adhanDetail.name;
+              const realFileSize = adhanDetail.sizeMB; // 🔧 VRAIE taille depuis l'API !
+
               // 🔧 FIX: Éviter la duplication du préfixe "adhan_"
               const cleanName = adhanName.toLowerCase().replace(/\s+/g, "_");
               const adhanId = cleanName.startsWith("adhan_")
@@ -2086,7 +2098,45 @@ class PremiumContentManager {
               const downloadPath = downloadedContent.get(adhanId);
               const isDownloaded = !!downloadPath;
 
-              // 🔧 FIX : Récupérer la vraie taille du fichier
+              debugLog(
+                `📏 ${adhanName}: ${realFileSize} MB (taille réelle depuis API)`
+              );
+
+              const adhanEntry: PremiumContent = {
+                id: adhanId,
+                type: "adhan",
+                title: adhanName,
+                description: `Adhan premium: ${adhanName}`,
+                fileUrl: `${
+                  AppConfig.ADHANS_API
+                }?action=download&adhan=${encodeURIComponent(
+                  adhanName
+                )}${tokenParam}`,
+                fileSize: realFileSize, // 🔧 VRAIE taille depuis l'API !
+                version: "1.0",
+                isDownloaded: isDownloaded,
+                downloadPath: downloadPath || undefined,
+              };
+
+              return adhanEntry;
+            });
+          } else {
+            // 🔧 FALLBACK : Utiliser l'ancienne méthode si pas de détails disponibles
+            debugLog(
+              "⚠️ Pas de détails d'adhans dans l'API, utilisation de l'ancienne méthode"
+            );
+            adhanPromises = availableAdhans.map(async (adhanName: string) => {
+              // 🔧 FIX: Éviter la duplication du préfixe "adhan_"
+              const cleanName = adhanName.toLowerCase().replace(/\s+/g, "_");
+              const adhanId = cleanName.startsWith("adhan_")
+                ? cleanName
+                : `adhan_${cleanName}`;
+
+              // 🚀 Vérification rapide du téléchargement (depuis le cache)
+              const downloadPath = downloadedContent.get(adhanId);
+              const isDownloaded = !!downloadPath;
+
+              // 🔧 FIX : Récupérer la vraie taille du fichier téléchargé ou estimer
               let realFileSize = 0.6; // Valeur par défaut
 
               if (isDownloaded && downloadPath) {
@@ -2094,7 +2144,7 @@ class PremiumContentManager {
                   // Obtenir la vraie taille du fichier téléchargé
                   const fileStats = await RNFS.stat(downloadPath);
                   realFileSize =
-                    Math.round((fileStats.size / 1024 / 1024) * 100) / 100; // Convertir en MB avec 2 décimales
+                    Math.round((fileStats.size / 1024 / 1024) * 100) / 100;
                   debugLog(
                     `📏 Taille réelle de ${adhanName}: ${realFileSize} MB`
                   );
@@ -2127,8 +2177,8 @@ class PremiumContentManager {
               };
 
               return adhanEntry;
-            }
-          );
+            });
+          }
 
           // 🚀 Attendre tous les adhans en parallèle
           const adhanResults = await Promise.all(adhanPromises);
@@ -3795,6 +3845,84 @@ class PremiumContentManager {
         deletedFiles: 0,
         deletedFolders: 0,
         errors: [`Erreur générale: ${error}`],
+      };
+    }
+  }
+
+  // 🔧 FONCTION PUBLIQUE : Forcer le rechargement du catalogue avec vraies tailles
+  public async forceRefreshAdhanSizes(): Promise<{
+    success: boolean;
+    message: string;
+    details: {
+      cacheClearedItems: string[];
+      newAdhanCount: number;
+      adhanWithSizes: Array<{ name: string; size: number }>;
+    };
+  }> {
+    try {
+      debugLog("🔧 Début du refresh forcé des tailles d'adhans...");
+
+      const cacheClearedItems: string[] = [];
+
+      // 1. Invalider tous les caches liés aux adhans
+      const cacheKeys = [
+        "premium_adhans_cache",
+        "premium_catalog_cache",
+        "premium_catalog_timestamp",
+        "cached_adhans",
+        "cached_adhans_timestamp",
+      ];
+
+      for (const key of cacheKeys) {
+        try {
+          await AsyncStorage.removeItem(key);
+          cacheClearedItems.push(key);
+          debugLog(`✅ Cache ${key} supprimé`);
+        } catch (error) {
+          debugLog(`⚠️ Erreur suppression cache ${key}:`, error);
+        }
+      }
+
+      // 2. Forcer le rechargement du catalogue depuis le serveur
+      debugLog("🔄 Rechargement du catalogue depuis le serveur...");
+      const newCatalog = await this.getPremiumCatalog();
+
+      if (!newCatalog || !newCatalog.adhanVoices) {
+        throw new Error("Impossible de recharger le catalogue");
+      }
+
+      // 3. Extraire les informations de taille
+      const adhanWithSizes = newCatalog.adhanVoices.map((adhan) => ({
+        name: adhan.title,
+        size: adhan.fileSize,
+      }));
+
+      debugLog(
+        `✅ Catalogue rechargé: ${newCatalog.adhanVoices.length} adhans`
+      );
+      adhanWithSizes.forEach((adhan) => {
+        debugLog(`📏 ${adhan.name}: ${adhan.size} MB`);
+      });
+
+      return {
+        success: true,
+        message: `Refresh terminé avec succès ! ${newCatalog.adhanVoices.length} adhans rechargés avec les vraies tailles.`,
+        details: {
+          cacheClearedItems,
+          newAdhanCount: newCatalog.adhanVoices.length,
+          adhanWithSizes,
+        },
+      };
+    } catch (error) {
+      errorLog("❌ Erreur lors du refresh forcé des tailles:", error);
+      return {
+        success: false,
+        message: `Erreur: ${error}`,
+        details: {
+          cacheClearedItems: [],
+          newAdhanCount: 0,
+          adhanWithSizes: [],
+        },
       };
     }
   }
