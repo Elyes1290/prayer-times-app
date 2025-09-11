@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useCallback } from "react";
 import {
   View,
-  ScrollView,
   Text,
   StyleSheet,
   TouchableOpacity,
@@ -21,6 +20,11 @@ import { useCurrentTheme } from "../hooks/useThemeColor";
 import { usePremium } from "../contexts/PremiumContext";
 import { useTranslation } from "react-i18next";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useUniversalStyles } from "../hooks/useUniversalLayout";
+import {
+  useFavorites,
+  ProphetStoryFavorite,
+} from "../contexts/FavoritesContext";
 
 // Helper pour obtenir le token d'authentification
 const getAuthToken = async (): Promise<string> => {
@@ -52,13 +56,6 @@ interface StoryStats {
   avg_reading_time: number | string;
 }
 
-interface CategoryInfo {
-  category: string;
-  count: number | string;
-  free_count: number | string;
-  premium_count: number | string;
-}
-
 const CATEGORY_ICONS: Record<string, string> = {
   childhood: "person-outline",
   revelation: "flash-outline",
@@ -87,72 +84,89 @@ export default function ProphetStoriesScreen() {
   const { t } = useTranslation();
   const router = useRouter();
 
+  // 🚀 NOUVEAU : Hook pour les favoris avec limitations
+  const { favorites, addFavorite, removeFavorite, canAddFavorite } =
+    useFavorites();
+
+  // 🚀 SOLUTION UNIVERSELLE : Compatible avec tous les appareils Android (S22, S24, S25 Ultra, etc.)
+  const universalLayout = useUniversalStyles({
+    includeNavigationPadding: true, // Pour le padding bottom de la FlatList
+    safeMarginMultiplier: 1.2, // Marge légèrement augmentée pour les histoires
+  });
+
+  // 🛠️ DEBUG : Pour diagnostiquer les problèmes de layout, décommente ces lignes :
+  // import { useLayoutDebug } from "../hooks/useUniversalLayout";
+  // const { logLayoutInfo } = useLayoutDebug();
+  // React.useEffect(() => { logLayoutInfo(); }, [logLayoutInfo]);
+
+  // 🚀 Helper pour vérifier si une histoire est en favori
+  const isStoryFavorited = (storyId: string): boolean => {
+    return favorites.some(
+      (fav) =>
+        fav.type === "prophet_story" &&
+        (fav as ProphetStoryFavorite).storyId === storyId
+    );
+  };
+
   // État local
   const [stories, setStories] = useState<ProphetStory[]>([]);
-  const [categories, setCategories] = useState<CategoryInfo[]>([]);
   const [stats, setStats] = useState<StoryStats | null>(null);
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const [selectedDifficulty, setSelectedDifficulty] = useState<string | null>(
-    null
-  );
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
 
   // Charger les données
-  const loadStories = useCallback(
-    async (showLoader = true) => {
-      try {
-        if (showLoader) setLoading(true);
+  const loadStories = useCallback(async (showLoader = true) => {
+    try {
+      if (showLoader) setLoading(true);
 
-        const params = new URLSearchParams();
-        if (selectedCategory) params.append("category", selectedCategory);
-        if (selectedDifficulty) params.append("difficulty", selectedDifficulty);
+      const token = await getAuthToken();
+      const headers: any = {
+        "Content-Type": "application/json",
+      };
 
-        const token = await getAuthToken();
-        const headers: any = {
-          "Content-Type": "application/json",
-        };
-
-        // Ajouter le token seulement s'il existe
-        if (token) {
-          headers.Authorization = `Bearer ${token}`;
-        }
-
-        const response = await fetch(
-          `https://myadhanapp.com/api/prophet-stories.php?action=catalog&${params.toString()}`,
-          {
-            method: "GET",
-            headers: headers,
-          }
-        );
-        const responseData = await response.json();
-
-        if (responseData.success) {
-          setStories(responseData.data.stories || []);
-          setCategories(responseData.data.categories || []);
-          setStats(responseData.data.stats || null);
-        } else {
-          Alert.alert(
-            "Erreur",
-            responseData.message || "Impossible de charger les histoires"
-          );
-        }
-      } catch (error) {
-        console.error("Erreur chargement histoires:", error);
-        Alert.alert("Erreur", "Erreur de connexion");
-      } finally {
-        setLoading(false);
-        setRefreshing(false);
+      // Ajouter le token seulement s'il existe
+      if (token) {
+        headers.Authorization = `Bearer ${token}`;
       }
-    },
-    [selectedCategory, selectedDifficulty]
-  );
+
+      const response = await fetch(
+        `https://myadhanapp.com/api/prophet-stories.php?action=catalog`,
+        {
+          method: "GET",
+          headers: headers,
+        }
+      );
+      const responseData = await response.json();
+
+      if (responseData.success) {
+        setStories(responseData.data.stories || []);
+        setStats(responseData.data.stats || null);
+      } else {
+        Alert.alert(
+          "Erreur",
+          responseData.message || "Impossible de charger les histoires"
+        );
+      }
+    } catch (error) {
+      console.error("Erreur chargement histoires:", error);
+      Alert.alert("Erreur", "Erreur de connexion");
+    } finally {
+      setLoading(false);
+      setRefreshing(false);
+    }
+  }, []);
 
   useFocusEffect(
     useCallback(() => {
       loadStories();
     }, [loadStories])
   );
+
+  // 🚀 Synchroniser l'état des favoris quand les favoris changent
+  React.useEffect(() => {
+    // Forcer la mise à jour de l'affichage des favoris
+    setStories((prevStories) => [...prevStories]);
+  }, [favorites]);
 
   const onRefresh = () => {
     setRefreshing(true);
@@ -187,45 +201,82 @@ export default function ProphetStoriesScreen() {
 
   const toggleFavorite = async (storyId: string) => {
     try {
-      const token = await getAuthToken();
+      const story = stories.find((s) => s.id === storyId);
+      if (!story) return;
 
-      if (!token) {
-        Alert.alert(
-          "Connexion requise",
-          "Vous devez être connecté pour ajouter des favoris.",
-          [
-            { text: "Annuler", style: "cancel" },
-            { text: "Se connecter", onPress: () => router.push("/settings") },
-          ]
+      const isFavorited = isStoryFavorited(storyId);
+
+      if (isFavorited) {
+        // 🗑️ RETIRER DES FAVORIS
+        const favoriteToRemove = favorites.find(
+          (fav) =>
+            fav.type === "prophet_story" &&
+            (fav as ProphetStoryFavorite).storyId === storyId
         );
-        return;
-      }
 
-      await fetch(
-        "https://myadhanapp.com/api/prophet-stories.php?action=favorites",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({
-            story_id: storyId,
-            action: "toggle",
-          }),
+        if (favoriteToRemove) {
+          const success = await removeFavorite(favoriteToRemove.id);
+          if (success) {
+            // Mettre à jour l'état local des histoires
+            setStories((prev) =>
+              prev.map((s) =>
+                s.id === storyId ? { ...s, is_favorited: false } : s
+              )
+            );
+          }
         }
-      );
+      } else {
+        // ➕ AJOUTER AUX FAVORIS
+        // Vérifier d'abord si l'utilisateur peut ajouter un favori
+        const canAdd = canAddFavorite("prophet_story");
 
-      // Mettre à jour l'état local
-      setStories((prev) =>
-        prev.map((story) =>
-          story.id === storyId
-            ? { ...story, is_favorited: !story.is_favorited }
-            : story
-        )
-      );
+        if (!canAdd.canAdd) {
+          Alert.alert(
+            "Limite atteinte",
+            canAdd.reason || "Impossible d'ajouter ce favori",
+            [
+              { text: "Compris", style: "cancel" },
+              {
+                text: "Passer au Premium",
+                onPress: () => router.push("/premium-payment"),
+              },
+            ]
+          );
+          return;
+        }
+
+        // Créer l'objet favori
+        const newFavorite: Omit<ProphetStoryFavorite, "id" | "dateAdded"> = {
+          type: "prophet_story",
+          storyId: story.id,
+          title: story.title,
+          titleArabic: story.title_arabic || undefined,
+          category: story.category,
+          difficulty: story.difficulty as
+            | "beginner"
+            | "intermediate"
+            | "advanced",
+          readingTime: Number(story.reading_time) || 0,
+          isPremium: Boolean(
+            story.is_premium === true ||
+              story.is_premium === 1 ||
+              story.is_premium === "1"
+          ),
+        };
+
+        const success = await addFavorite(newFavorite);
+        if (success) {
+          // Mettre à jour l'état local des histoires
+          setStories((prev) =>
+            prev.map((s) =>
+              s.id === storyId ? { ...s, is_favorited: true } : s
+            )
+          );
+        }
+      }
     } catch (error) {
       console.error("Erreur toggle favorite:", error);
+      Alert.alert("Erreur", "Impossible de modifier les favoris");
     }
   };
 
@@ -247,139 +298,6 @@ export default function ProphetStoriesScreen() {
     return translations[category] || category;
   };
 
-  const renderCategoryFilter = () => (
-    <View style={styles.filtersContainer}>
-      <Text style={[styles.filterTitle, { color: colors.text }]}>
-        📂 Catégories
-      </Text>
-      <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        style={styles.categoriesScroll}
-      >
-        <TouchableOpacity
-          style={[
-            styles.categoryChip,
-            !selectedCategory && styles.categoryChipActive,
-            {
-              backgroundColor: !selectedCategory
-                ? colors.primary
-                : colors.cardBG,
-            },
-          ]}
-          onPress={() => setSelectedCategory(null)}
-        >
-          <Text
-            style={[
-              styles.categoryChipText,
-              { color: !selectedCategory ? "white" : colors.text },
-            ]}
-          >
-            Toutes
-          </Text>
-        </TouchableOpacity>
-
-        {(categories || []).map((cat) => {
-          // Protection contre les objets malformés
-          if (!cat || !cat.category) {
-            return null;
-          }
-
-          return (
-            <TouchableOpacity
-              key={cat.category}
-              style={[
-                styles.categoryChip,
-                selectedCategory === cat.category && styles.categoryChipActive,
-                {
-                  backgroundColor:
-                    selectedCategory === cat.category
-                      ? colors.primary
-                      : colors.cardBG,
-                },
-              ]}
-              onPress={() =>
-                setSelectedCategory(
-                  cat.category === selectedCategory ? null : cat.category
-                )
-              }
-            >
-              <Ionicons
-                name={(CATEGORY_ICONS[cat.category] || "folder-outline") as any}
-                size={16}
-                color={
-                  selectedCategory === cat.category ? "white" : colors.text
-                }
-                style={styles.categoryIcon}
-              />
-              <Text
-                style={[
-                  styles.categoryChipText,
-                  {
-                    color:
-                      selectedCategory === cat.category ? "white" : colors.text,
-                  },
-                ]}
-              >
-                {getCategoryDisplayName(cat.category)} (
-                {parseInt(cat.count?.toString() || "0")})
-              </Text>
-            </TouchableOpacity>
-          );
-        })}
-      </ScrollView>
-    </View>
-  );
-
-  const renderDifficultyFilter = () => (
-    <View style={styles.filtersContainer}>
-      <Text style={[styles.filterTitle, { color: colors.text }]}>
-        📊 Difficulté
-      </Text>
-      <View style={styles.difficultyContainer}>
-        {["beginner", "intermediate", "advanced"].map((diff) => (
-          <TouchableOpacity
-            key={diff}
-            style={[
-              styles.difficultyChip,
-              selectedDifficulty === diff && {
-                backgroundColor:
-                  DIFFICULTY_COLORS[diff as keyof typeof DIFFICULTY_COLORS],
-              },
-              {
-                borderColor:
-                  DIFFICULTY_COLORS[diff as keyof typeof DIFFICULTY_COLORS],
-              },
-            ]}
-            onPress={() =>
-              setSelectedDifficulty(diff === selectedDifficulty ? null : diff)
-            }
-          >
-            <Text
-              style={[
-                styles.difficultyText,
-                {
-                  color:
-                    selectedDifficulty === diff
-                      ? "white"
-                      : DIFFICULTY_COLORS[
-                          diff as keyof typeof DIFFICULTY_COLORS
-                        ],
-                },
-              ]}
-            >
-              {diff === "beginner"
-                ? "Débutant"
-                : diff === "intermediate"
-                ? "Intermédiaire"
-                : "Avancé"}
-            </Text>
-          </TouchableOpacity>
-        ))}
-      </View>
-    </View>
-  );
-
   const renderStoryCard = ({ item: story }: { item: ProphetStory }) => {
     // Protection contre les objets undefined/null
     if (!story || !story.id || !story.title) {
@@ -397,11 +315,7 @@ export default function ProphetStoriesScreen() {
       view_count: Number(story.view_count) || 0,
       rating: Number(story.rating) || 0,
       user_progress: Number(story.user_progress) || 0,
-      is_favorited: Boolean(
-        story.is_favorited === true ||
-          story.is_favorited === 1 ||
-          story.is_favorited === "1"
-      ),
+      is_favorited: isStoryFavorited(String(story.id)), // 🚀 UTILISER LE SYSTÈME LOCAL
       is_premium: Boolean(
         story.is_premium === true ||
           story.is_premium === 1 ||
@@ -414,7 +328,17 @@ export default function ProphetStoriesScreen() {
 
     return (
       <TouchableOpacity
-        style={[styles.storyCard, { backgroundColor: colors.cardBG }]}
+        style={[
+          styles.storyCard,
+          {
+            backgroundColor: colors.cardBG,
+            // 🚀 RESPONSIVE : Marges adaptatives selon la taille d'écran
+            marginHorizontal: Math.max(
+              universalLayout.contentPaddingHorizontal - 4,
+              12
+            ),
+          },
+        ]}
         onPress={() => handleStoryPress(story)}
         activeOpacity={0.8}
       >
@@ -576,7 +500,14 @@ export default function ProphetStoriesScreen() {
             ? ["#1a472a", "#2d5a3d"]
             : ["#E8F5E8", "#C8E6C9"]
         }
-        style={styles.headerGradient}
+        style={[
+          styles.headerGradient,
+          {
+            // 🚀 RESPONSIVE : Adapte le padding selon l'appareil (S22, S24, S25 Ultra)
+            paddingHorizontal: universalLayout.contentPaddingHorizontal,
+            paddingTop: Math.max(universalLayout.safeAreaTop + 20, 60),
+          },
+        ]}
       >
         <View style={styles.headerContent}>
           <View style={styles.headerTextContainer}>
@@ -651,20 +582,28 @@ export default function ProphetStoriesScreen() {
         translucent
       />
 
+      {/* 🚀 HEADER FIXE : Ne défile pas avec la liste */}
+      {renderHeader()}
+
+      {/* 📂 SECTION TITRE FIXE */}
+      <View
+        style={[
+          styles.filtersContainer,
+          {
+            paddingHorizontal: universalLayout.contentPaddingHorizontal,
+          },
+        ]}
+      >
+        <Text style={[styles.filterTitle, { color: colors.text }]}>
+          📂 Histoires disponibles
+        </Text>
+      </View>
+
+      {/* 📜 LISTE DÉFILABLE UNIQUEMENT */}
       <FlatList
         data={stories || []}
         renderItem={renderStoryCard}
         keyExtractor={(item) => item?.id || Math.random().toString()}
-        ListHeaderComponent={
-          <View>
-            {renderHeader()}
-            <View style={styles.filtersContainer}>
-              <Text style={[styles.filterTitle, { color: colors.text }]}>
-                📂 Histoires disponibles
-              </Text>
-            </View>
-          </View>
-        }
         refreshControl={
           <RefreshControl
             refreshing={refreshing}
@@ -673,7 +612,14 @@ export default function ProphetStoriesScreen() {
             tintColor={colors.primary}
           />
         }
-        contentContainerStyle={styles.listContent}
+        contentContainerStyle={[
+          styles.listContent,
+          {
+            // 🚀 PADDING BOTTOM : Seulement pour la navigation, pas le header
+            paddingBottom: universalLayout.contentPaddingBottom,
+          },
+        ]}
+        style={styles.flatListContainer}
         showsVerticalScrollIndicator={false}
         ListEmptyComponent={
           !loading ? (
@@ -703,7 +649,7 @@ const styles = StyleSheet.create({
   },
   headerGradient: {
     paddingTop: 60,
-    paddingHorizontal: 20,
+    paddingHorizontal: 16, // Sera remplacé par le padding universel
     paddingBottom: 20,
   },
   headerContent: {
@@ -747,55 +693,23 @@ const styles = StyleSheet.create({
     opacity: 0.7,
   },
   filtersContainer: {
-    padding: 15,
+    paddingVertical: 15,
     paddingBottom: 10,
+    // paddingHorizontal défini dynamiquement dans le composant
   },
   filterTitle: {
     fontSize: 16,
     fontWeight: "600",
     marginBottom: 10,
   },
-  categoriesScroll: {
-    marginLeft: -5,
-  },
-  categoryChip: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-    borderRadius: 20,
-    marginRight: 8,
-    elevation: 1,
-  },
-  categoryChipActive: {
-    elevation: 2,
-  },
-  categoryIcon: {
-    marginRight: 6,
-  },
-  categoryChipText: {
-    fontSize: 14,
-    fontWeight: "500",
-  },
-  difficultyContainer: {
-    flexDirection: "row",
-    gap: 10,
-  },
-  difficultyChip: {
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-    borderRadius: 15,
-    borderWidth: 1.5,
-  },
-  difficultyText: {
-    fontSize: 13,
-    fontWeight: "600",
+  flatListContainer: {
+    flex: 1, // 🚀 OCCUPER L'ESPACE RESTANT : Pour que la liste prenne tout l'espace disponible
   },
   listContent: {
-    paddingBottom: 20,
+    // paddingBottom calculé dynamiquement dans le composant pour éviter que le contenu soit masqué par la barre de navigation
   },
   storyCard: {
-    marginHorizontal: 15,
+    marginHorizontal: 12, // Sera remplacé par le responsive margin
     marginVertical: 8,
     borderRadius: 12,
     padding: 15,

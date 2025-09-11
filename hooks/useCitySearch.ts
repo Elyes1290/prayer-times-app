@@ -18,17 +18,27 @@ export function useCitySearch() {
   const [results, setResults] = useState<NominatimResult[]>([]);
   const [loading, setLoading] = useState(false);
   const debounceRef = useRef<number | null>(null);
+  const abortControllerRef = useRef<AbortController | null>(null);
   const language = RNLocalize.getLocales()[0]?.languageTag || "fr-FR";
 
   async function searchCity(query: string) {
+    // 🔧 CORRECTION : Annuler la requête précédente si elle existe
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort();
+    }
+
     if (debounceRef.current) clearTimeout(debounceRef.current);
     if (!query || query.length < 2) {
       setResults([]);
+      setLoading(false);
       return;
     }
     setLoading(true);
+
     debounceRef.current = setTimeout(async () => {
       try {
+        // 🔧 CORRECTION : Créer un nouveau AbortController pour cette requête
+        abortControllerRef.current = new AbortController();
         let q1 = query;
         let q2 = removeAccents(query);
         let q3 = "";
@@ -46,7 +56,13 @@ export function useCitySearch() {
             headers: {
               "User-Agent": "ZayrPrayerApp/1.0 (contact@example.com)",
             },
+            signal: abortControllerRef.current?.signal,
           });
+
+          if (!res.ok) {
+            throw new Error(`HTTP error! status: ${res.status}`);
+          }
+
           const data: NominatimResult[] = await res.json();
           allResults = [...allResults, ...data];
         }
@@ -57,6 +73,10 @@ export function useCitySearch() {
         );
         setResults(unique);
       } catch (e) {
+        // 🔧 CORRECTION : Ne pas traiter les erreurs d'annulation comme des erreurs
+        if (e instanceof Error && e.name !== "AbortError") {
+          console.log("🔍 Erreur recherche ville:", e.message);
+        }
         setResults([]);
       } finally {
         setLoading(false);
@@ -64,5 +84,15 @@ export function useCitySearch() {
     }, 500);
   }
 
-  return { results, loading, searchCity, setResults };
+  // 🔧 CORRECTION : Nettoyer les références lors du démontage
+  const cleanup = () => {
+    if (debounceRef.current) {
+      clearTimeout(debounceRef.current);
+    }
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort();
+    }
+  };
+
+  return { results, loading, searchCity, setResults, cleanup };
 }

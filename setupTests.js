@@ -188,6 +188,18 @@ jest.mock("react-native/Libraries/Utilities/useColorScheme", () => ({
   default: jest.fn(() => "light"),
 }));
 
+// 🚀 NOUVEAU : Mock react-native-safe-area-context pour useUniversalLayout
+jest.mock("react-native-safe-area-context", () => ({
+  useSafeAreaInsets: jest.fn(() => ({
+    top: 44,
+    bottom: 34,
+    left: 0,
+    right: 0,
+  })),
+  SafeAreaProvider: ({ children }) => children,
+  SafeAreaView: ({ children }) => children,
+}));
+
 // 🎯 MOCK ciblé NativeModules.AdhanModule pour SettingsContext
 try {
   const { NativeModules } = require("react-native");

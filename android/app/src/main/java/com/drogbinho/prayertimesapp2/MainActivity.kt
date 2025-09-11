@@ -8,6 +8,9 @@ import android.content.IntentFilter
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.ViewCompat
 
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate
@@ -29,11 +32,55 @@ class MainActivity : ReactActivity() {
     // @generated begin expo-splashscreen - expo prebuild (DO NOT MODIFY) sync-f3ff59a738c56c9a6119210cb55f0b613eb8b6af
     SplashScreenManager.registerOnActivity(this)
     // @generated end expo-splashscreen
+    
+    // 🔧 NOUVEAU : Configuration Edge-to-Edge pour Android 15+
+    configureEdgeToEdge()
+    
     super.onCreate(null)
     
     // NOUVEAU : Enregistrer le BroadcastReceiver global pour les événements audio
     registerAudioEventReceiver()
   }
+
+  /**
+   * 🔧 Configuration hybride pour Samsung - Barre visible + image étendue
+   */
+  private fun configureEdgeToEdge() {
+    try {
+      Log.d(TAG, "🔧 Configuration hybride pour Samsung - Android ${Build.VERSION.SDK_INT}")
+      
+      // Désactiver Edge-to-Edge pour garder la barre Samsung visible
+      WindowCompat.setDecorFitsSystemWindows(window, true)
+      
+      // Configuration des couleurs pour Samsung
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        window.statusBarColor = android.graphics.Color.parseColor("#FFFFFF")
+        window.navigationBarColor = android.graphics.Color.parseColor("#000000")
+        
+        // Forcer la couleur de fond de l'app
+        window.decorView.setBackgroundColor(android.graphics.Color.parseColor("#000000"))
+        
+        // Configuration des icônes de la barre de statut (sombres sur fond clair)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+          val flags = window.decorView.systemUiVisibility
+          window.decorView.systemUiVisibility = flags or 
+            android.view.View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+        }
+        
+        // Configuration pour Samsung
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+          window.isNavigationBarContrastEnforced = false
+        }
+      }
+      
+      Log.d(TAG, "✅ Configuration hybride - Barre Samsung visible")
+    } catch (e: Exception) {
+      Log.e(TAG, "❌ Erreur configuration hybride: ${e.message}")
+      e.printStackTrace()
+    }
+  }
+  
+
 
   /**
    * Enregistrer le BroadcastReceiver pour les événements audio
@@ -124,6 +171,21 @@ class MainActivity : ReactActivity() {
     } catch (e: Exception) {
       Log.e(TAG, "❌ Erreur enregistrement BroadcastReceiver: ${e.message}")
       e.printStackTrace()
+    }
+  }
+
+  override fun onResume() {
+    super.onResume()
+    
+    // Maintenir la barre Samsung visible
+    try {
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        window.statusBarColor = android.graphics.Color.parseColor("#FFFFFF")
+        window.navigationBarColor = android.graphics.Color.parseColor("#000000")
+        Log.d(TAG, "🔧 Barre Samsung maintenue onResume")
+      }
+    } catch (e: Exception) {
+      Log.e(TAG, "❌ Erreur barre Samsung onResume: ${e.message}")
     }
   }
 

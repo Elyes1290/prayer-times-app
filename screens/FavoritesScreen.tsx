@@ -14,12 +14,14 @@ import { LinearGradient } from "expo-linear-gradient";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useTranslation } from "react-i18next";
 import { useRouter } from "expo-router";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import ThemedImageBackground from "../components/ThemedImageBackground";
 import {
   useFavorites,
   Favorite,
   FavoriteType,
+  ProphetStoryFavorite,
 } from "../contexts/FavoritesContext";
 import { useThemeColors } from "../hooks/useThemeAssets";
 import { useOverlayTextColor, useCurrentTheme } from "../hooks/useThemeColor";
@@ -45,6 +47,26 @@ const FavoritesScreen: React.FC = () => {
   } = useFavorites();
 
   const [selectedFilter, setSelectedFilter] = useState<FilterType>("all");
+
+  // 🚀 Fonction pour rediriger vers la page de lecture d'une histoire du Prophète
+  const handleProphetStoryPress = useCallback(
+    async (storyId: string) => {
+      try {
+        // 📦 STOCKER L'ID dans AsyncStorage comme le fait ProphetStoriesScreen
+        await AsyncStorage.setItem("current_story_id", storyId);
+        // 📖 Naviguer vers la page de lecture
+        router.push("/story-reader" as any);
+      } catch (error) {
+        console.error("Erreur lors de la navigation vers l'histoire:", error);
+        // Fallback: navigation directe avec paramètres si AsyncStorage échoue
+        router.push({
+          pathname: "/story-reader",
+          params: { storyId },
+        });
+      }
+    },
+    [router]
+  );
 
   // Configuration des filtres
   const filterOptions: {
@@ -82,6 +104,12 @@ const FavoritesScreen: React.FC = () => {
       label: t("favorites_screen.names") || "Noms d'Allah",
       icon: "star-circle",
       count: getFavoritesCountByType("asmaul_husna"),
+    },
+    {
+      key: "prophet_story",
+      label: t("favorites_screen.prophet_stories") || "Histoires du Prophète",
+      icon: "book-open-page-variant",
+      count: getFavoritesCountByType("prophet_story"),
     },
   ];
 
@@ -299,6 +327,47 @@ const FavoritesScreen: React.FC = () => {
           </>
         );
 
+      case "prophet_story":
+        const prophetStory = item as ProphetStoryFavorite;
+        return (
+          <>
+            <TouchableOpacity
+              onPress={() => handleProphetStoryPress(prophetStory.storyId)}
+              style={styles.prophetStoryContainer}
+              activeOpacity={0.7}
+            >
+              <Text style={styles.prophetStoryTitle}>{prophetStory.title}</Text>
+              {prophetStory.titleArabic && (
+                <Text style={styles.prophetStoryTitleArabic}>
+                  {prophetStory.titleArabic}
+                </Text>
+              )}
+              <View style={styles.prophetStoryMeta}>
+                <Text style={styles.prophetStoryCategory}>
+                  📂 {prophetStory.category}
+                </Text>
+                <Text style={styles.prophetStoryDifficulty}>
+                  📊{" "}
+                  {prophetStory.difficulty === "beginner"
+                    ? "Débutant"
+                    : prophetStory.difficulty === "intermediate"
+                    ? "Intermédiaire"
+                    : "Avancé"}
+                </Text>
+                <Text style={styles.prophetStoryTime}>
+                  ⏱️ {prophetStory.readingTime} min
+                </Text>
+                {prophetStory.isPremium && (
+                  <Text style={styles.prophetStoryPremium}>👑 Premium</Text>
+                )}
+              </View>
+              <Text style={styles.prophetStoryAction}>
+                📖 Appuyer pour lire l'histoire complète
+              </Text>
+            </TouchableOpacity>
+          </>
+        );
+
       default:
         return null;
     }
@@ -468,6 +537,8 @@ const getGradientForType = (
         return ["rgba(240,147,251,0.15)", "rgba(240,147,251,0.05)"];
       case "asmaul_husna":
         return ["rgba(255,107,107,0.15)", "rgba(255,107,107,0.05)"];
+      case "prophet_story":
+        return ["rgba(34,139,34,0.15)", "rgba(34,139,34,0.05)"];
       default:
         return ["rgba(0,0,0,0.05)", "rgba(0,0,0,0.02)"];
     }
@@ -481,6 +552,8 @@ const getGradientForType = (
         return ["rgba(240,147,251,0.2)", "rgba(155,75,155,0.1)"];
       case "asmaul_husna":
         return ["rgba(255,107,107,0.2)", "rgba(139,0,0,0.1)"];
+      case "prophet_story":
+        return ["rgba(34,139,34,0.2)", "rgba(0,100,0,0.1)"];
       default:
         return ["rgba(255,255,255,0.1)", "rgba(255,255,255,0.05)"];
     }
@@ -497,6 +570,8 @@ const getIconForType = (type: FavoriteType): string => {
       return "hand-heart";
     case "asmaul_husna":
       return "star-circle";
+    case "prophet_story":
+      return "book-open-page-variant";
     default:
       return "heart";
   }
@@ -512,6 +587,8 @@ const getTypeLabel = (type: FavoriteType, t: any): string => {
       return t("favorites_screen.dhikr");
     case "asmaul_husna":
       return t("favorites_screen.names");
+    case "prophet_story":
+      return t("favorites_screen.prophet_stories");
     default:
       return "Favori";
   }
@@ -744,6 +821,67 @@ const getStyles = (
       textAlign: "center",
       lineHeight: 22,
       paddingHorizontal: 40,
+    },
+    // 🚀 NOUVEAUX STYLES : Pour les histoires du Prophète dans les favoris
+    prophetStoryContainer: {
+      width: "100%",
+    },
+    prophetStoryTitle: {
+      fontSize: 16,
+      fontWeight: "700",
+      color: currentTheme === "light" ? colors.text : "#fff",
+      marginBottom: 6,
+      lineHeight: 22,
+    },
+    prophetStoryTitleArabic: {
+      fontSize: 14,
+      fontWeight: "600",
+      color:
+        currentTheme === "light"
+          ? colors.textSecondary
+          : "rgba(255, 255, 255, 0.8)",
+      marginBottom: 8,
+      textAlign: "right",
+      fontFamily: "serif",
+    },
+    prophetStoryMeta: {
+      flexDirection: "row",
+      flexWrap: "wrap",
+      gap: 8,
+      marginBottom: 10,
+    },
+    prophetStoryCategory: {
+      fontSize: 12,
+      color: currentTheme === "light" ? "#2E8B57" : "#90EE90",
+      fontWeight: "600",
+    },
+    prophetStoryDifficulty: {
+      fontSize: 12,
+      color: currentTheme === "light" ? "#FF6B6B" : "#FFB6C1",
+      fontWeight: "600",
+    },
+    prophetStoryTime: {
+      fontSize: 12,
+      color: currentTheme === "light" ? "#4ECDC4" : "#AFEEEE",
+      fontWeight: "600",
+    },
+    prophetStoryPremium: {
+      fontSize: 12,
+      color: "#FFD700",
+      fontWeight: "700",
+    },
+    prophetStoryAction: {
+      fontSize: 13,
+      color: currentTheme === "light" ? "#007AFF" : "#40A9FF",
+      fontWeight: "600",
+      fontStyle: "italic",
+      textAlign: "center",
+      paddingTop: 8,
+      borderTopWidth: 1,
+      borderTopColor:
+        currentTheme === "light"
+          ? "rgba(0, 0, 0, 0.1)"
+          : "rgba(255, 255, 255, 0.2)",
     },
   });
 

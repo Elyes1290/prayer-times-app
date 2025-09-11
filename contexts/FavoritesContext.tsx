@@ -19,7 +19,12 @@ import SyncManager from "../utils/syncManager";
 import { LocalStorageManager } from "../utils/localStorageManager";
 
 // Types de favoris possibles
-export type FavoriteType = "quran_verse" | "hadith" | "dhikr" | "asmaul_husna";
+export type FavoriteType =
+  | "quran_verse"
+  | "hadith"
+  | "dhikr"
+  | "asmaul_husna"
+  | "prophet_story";
 
 // Interface de base pour tous les favoris
 interface BaseFavorite {
@@ -81,12 +86,25 @@ export interface AsmaulHusnaFavorite extends BaseFavorite {
   usage?: string;
 }
 
+// Histoire du Prophète (SAWS) favorite
+export interface ProphetStoryFavorite extends BaseFavorite {
+  type: "prophet_story";
+  storyId: string;
+  title: string;
+  titleArabic?: string;
+  category: string;
+  difficulty: "beginner" | "intermediate" | "advanced";
+  readingTime: number;
+  isPremium: boolean;
+}
+
 // Union type pour tous les favoris
 export type Favorite =
   | QuranVerseFavorite
   | HadithFavorite
   | DhikrFavorite
-  | AsmaulHusnaFavorite;
+  | AsmaulHusnaFavorite
+  | ProphetStoryFavorite;
 
 // Interface du contexte
 interface FavoritesContextType {
@@ -376,6 +394,7 @@ export const FavoritesProvider: React.FC<FavoritesProviderProps> = ({
         hadith: "hadiths",
         dhikr: "dhikr et duas",
         asmaul_husna: "noms d'Allah",
+        prophet_story: "histoires du Prophète", // 🚀 NOUVEAU : Support des histoires du Prophète
       };
 
       const reason = `Limite de ${limit} ${typeNames[type]} atteinte. Passez au Premium pour des favoris illimités !`;

@@ -46,10 +46,9 @@ import { useWeeklyPrayerTimes } from "../hooks/useWeeklyPrayerTimes";
 import { scheduleNotificationsFor2Days } from "../utils/sheduleAllNotificationsFor30Days";
 import { useFocusEffect } from "@react-navigation/native";
 import { errorLog } from "../utils/logger";
+import { useUniversalStyles } from "../hooks/useUniversalLayout";
 
 const { AdhanModule } = NativeModules;
-const { width: screenWidth, height: screenHeight } = Dimensions.get("window");
-const isSmallScreen = screenHeight < 700 || screenWidth < 380;
 
 const iconByPrayer: Record<
   string,
@@ -584,6 +583,12 @@ export default function PrayerScreen() {
   const overlayIconColor = useOverlayIconColor();
   const currentTheme = useCurrentTheme();
 
+  // 🚀 SOLUTION UNIVERSELLE : Compatible avec tous les appareils Samsung (S22, S24, S25 Ultra, etc.)
+  const universalLayout = useUniversalStyles({
+    includeNavigationPadding: false, // Pas de navigation bottom sur cette page
+    safeMarginMultiplier: 1.0,
+  });
+
   // État pour gérer les prières muettes/non-muettes
   const [mutedPrayers, setMutedPrayers] = useState<Set<string>>(new Set());
 
@@ -792,7 +797,8 @@ export default function PrayerScreen() {
     colors,
     overlayTextColor,
     overlayIconColor,
-    currentTheme
+    currentTheme,
+    universalLayout // 🚀 NOUVEAU : Layout universel pour la responsive
   );
 
   // Si c'est en cours de chargement
@@ -841,7 +847,9 @@ export default function PrayerScreen() {
 
             <TouchableOpacity
               style={styles.primaryButton}
-              onPress={() => router.push("/settings")}
+              onPress={() =>
+                router.push("/settings?openLocation=true&mode=manual")
+              }
             >
               <MaterialCommunityIcons name="city" size={24} color="#fff" />
               <Text style={styles.primaryButtonText}>
@@ -896,7 +904,9 @@ export default function PrayerScreen() {
             <Text style={styles.errorText}>{settings.errorMsg}</Text>
             <TouchableOpacity
               style={styles.primaryButton}
-              onPress={() => router.push("/settings")}
+              onPress={() =>
+                router.push("/settings?openLocation=true&mode=manual")
+              }
             >
               <MaterialCommunityIcons name="cog" size={20} color="#fff" />
               <Text style={styles.primaryButtonText}>
@@ -1152,15 +1162,27 @@ const getStyles = (
   colors: any,
   overlayTextColor: string,
   overlayIconColor: string,
-  currentTheme: "light" | "dark"
+  currentTheme: "light" | "dark",
+  universalLayout: any // 🚀 NOUVEAU : Layout universel pour tous les appareils Samsung
 ) =>
   StyleSheet.create({
     background: {
       flex: 1,
+      // 🔧 CORRECTION : Étendre l'image de fond jusqu'en bas pour masquer le fond blanc
+      position: "absolute",
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
     },
     container: {
-      padding: 16,
-      paddingTop: StatusBar.currentHeight || 0,
+      // 🚀 RESPONSIVE : Padding adaptatif selon la taille d'écran
+      paddingHorizontal: universalLayout.contentPaddingHorizontal,
+      paddingTop: Math.max(
+        universalLayout.safeAreaTop,
+        StatusBar.currentHeight || 0
+      ),
+      paddingBottom: universalLayout.contentPaddingVertical,
     },
     header: {
       marginBottom: 16,
@@ -1244,16 +1266,23 @@ const getStyles = (
       flexDirection: "row",
       flexWrap: "wrap",
       justifyContent: "space-between",
-      gap: isSmallScreen ? 8 : 12,
+      // 🚀 RESPONSIVE : Gap adaptatif selon la taille d'écran - corrige le problème sur S24/S25 Ultra
+      gap: universalLayout.isSmallScreen
+        ? Math.max(universalLayout.spacing.xs, 8)
+        : Math.max(universalLayout.spacing.sm, 12),
     },
     prayerItem: {
       backgroundColor:
         currentTheme === "light" ? colors.surface : "rgba(78, 205, 196, 0.1)",
       borderRadius: 12,
-      padding: isSmallScreen ? 8 : 12,
+      // 🚀 RESPONSIVE : Padding adaptatif pour tous les appareils Samsung
+      padding: universalLayout.isSmallScreen
+        ? Math.max(universalLayout.spacing.xs, 8)
+        : Math.max(universalLayout.spacing.sm, 12),
       flex: 1,
-      minWidth: "45%",
-      maxWidth: "48%",
+      // 🚀 RESPONSIVE : Largeurs adaptatives selon la densité d'écran
+      minWidth: universalLayout.isSmallScreen ? "44%" : "45%",
+      maxWidth: universalLayout.isSmallScreen ? "47%" : "48%",
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "space-between",
@@ -1272,13 +1301,19 @@ const getStyles = (
       borderColor: "rgba(78, 205, 196, 0.3)",
     },
     prayerItemName: {
-      fontSize: isSmallScreen ? 12 : 14,
+      // 🚀 RESPONSIVE : Taille de police adaptative pour tous les appareils Samsung
+      fontSize: universalLayout.isSmallScreen
+        ? Math.max(universalLayout.fontSize.xs, 12)
+        : Math.max(universalLayout.fontSize.sm, 14),
       color: overlayTextColor,
       marginBottom: 4,
       fontWeight: "500",
     },
     prayerItemTime: {
-      fontSize: isSmallScreen ? 14 : 16,
+      // 🚀 RESPONSIVE : Taille de police adaptative pour le temps de prière
+      fontSize: universalLayout.isSmallScreen
+        ? Math.max(universalLayout.fontSize.sm, 14)
+        : Math.max(universalLayout.fontSize.md, 16),
       color: currentTheme === "light" ? colors.primary : "#4ECDC4",
       fontWeight: "600",
     },

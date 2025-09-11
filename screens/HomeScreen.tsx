@@ -47,9 +47,9 @@ import { getRandomHadith } from "../utils/hadithApi";
 import { debugLog, errorLog } from "../utils/logger";
 import WelcomePersonalizationModal from "../components/WelcomePersonalizationModal";
 import { usePremium } from "../contexts/PremiumContext";
+import { useUniversalStyles } from "../hooks/useUniversalLayout";
 
 const { AdhanModule } = NativeModules;
-const { width: screenWidth, height: screenHeight } = Dimensions.get("window");
 
 // 🎨 Modern Design System
 const THEME = {
@@ -178,12 +178,19 @@ export default function HomeScreen() {
   const overlayIconColor = useOverlayIconColor();
   const currentTheme = useCurrentTheme();
 
-  // Styles dynamiques basés sur le thème
+  // 🚀 SOLUTION UNIVERSELLE : Compatible avec tous les appareils Samsung (S22, S24, S25 Ultra, etc.)
+  const universalLayout = useUniversalStyles({
+    includeNavigationPadding: false, // Pas de navigation bottom sur cette page
+    safeMarginMultiplier: 1.0,
+  });
+
+  // Styles dynamiques basés sur le thème ET responsive
   const styles = getStyles(
     colors,
     overlayTextColor,
     overlayIconColor,
-    currentTheme
+    currentTheme,
+    universalLayout // 🚀 NOUVEAU : Layout universel pour la responsive
   );
 
   // Map langue => id traduction Quran.com
@@ -727,6 +734,67 @@ export default function HomeScreen() {
     );
   }
 
+  // 🚀 Si localisation pas configurée - afficher l'interface de setup (comme PrayerScreen)
+  if (settings.locationMode === null) {
+    return (
+      <ThemedImageBackground style={styles.background}>
+        <StatusBar
+          barStyle="light-content"
+          translucent
+          backgroundColor="transparent"
+        />
+        <View style={styles.centeredContainer}>
+          <View style={styles.setupCard}>
+            <MaterialCommunityIcons
+              name="map-marker-radius"
+              size={70}
+              color={"#2E7D32"}
+              style={styles.setupIcon}
+            />
+            <Text style={styles.setupTitle}>{t("prayer_times")}</Text>
+            <Text style={styles.setupSubtitle}>
+              {t("first_time_welcome") ||
+                "Bienvenue ! Choisissez votre mode de localisation :"}
+            </Text>
+
+            <TouchableOpacity
+              style={styles.primaryButton}
+              onPress={() =>
+                router.push("/settings?openLocation=true&mode=manual")
+              }
+            >
+              <MaterialCommunityIcons name="city" size={24} color="#fff" />
+              <Text style={styles.primaryButtonText}>
+                {t("enter_city") || "Entrer ville manuellement"}
+              </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={styles.secondaryButton}
+              onPress={async () => {
+                settings.setLocationMode("auto");
+                try {
+                  await settings.refreshAutoLocation();
+                } catch (error) {
+                  console.log("Erreur refresh auto location:", error);
+                }
+              }}
+            >
+              <MaterialCommunityIcons
+                name="crosshairs-gps"
+                size={24}
+                color={"#2E7D32"}
+              />
+              <Text style={styles.secondaryButtonText}>
+                {t("automatic") || "Utiliser GPS automatique"}
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </ThemedImageBackground>
+    );
+  }
+
   // Si c'est la première utilisation (locationMode === null)
   if (settings.locationMode === null) {
     return (
@@ -752,7 +820,9 @@ export default function HomeScreen() {
 
             <TouchableOpacity
               style={styles.primaryButton}
-              onPress={() => router.push("/settings")}
+              onPress={() =>
+                router.push("/settings?openLocation=true&mode=manual")
+              }
             >
               <MaterialCommunityIcons
                 name="city"
@@ -811,7 +881,9 @@ export default function HomeScreen() {
             <Text style={styles.errorText}>{settings.errorMsg}</Text>
             <TouchableOpacity
               style={styles.primaryButton}
-              onPress={() => router.push("/settings")}
+              onPress={() =>
+                router.push("/settings?openLocation=true&mode=manual")
+              }
             >
               <MaterialCommunityIcons
                 name="cog"
@@ -1092,7 +1164,9 @@ export default function HomeScreen() {
             >
               <TouchableOpacity
                 style={styles.settingsButton}
-                onPress={() => router.push("/settings")}
+                onPress={() =>
+                  router.push("/settings?openLocation=true&mode=manual")
+                }
               >
                 <MaterialCommunityIcons
                   name="cog-outline"
@@ -1673,7 +1747,8 @@ const getStyles = (
   colors: any,
   overlayTextColor: string,
   overlayIconColor: string,
-  currentTheme: "light" | "dark"
+  currentTheme: "light" | "dark",
+  universalLayout: any // 🚀 NOUVEAU : Layout universel pour tous les appareils Samsung
 ) =>
   StyleSheet.create({
     background: {
@@ -1683,8 +1758,10 @@ const getStyles = (
     },
     container: {
       flexGrow: 1,
-      padding: 16,
-      paddingTop: 50,
+      // 🚀 RESPONSIVE : Padding adaptatif selon la taille d'écran
+      paddingHorizontal: universalLayout.contentPaddingHorizontal,
+      paddingTop: Math.max(universalLayout.safeAreaTop + 16, 50),
+      paddingBottom: universalLayout.contentPaddingVertical,
     },
     centeredContainer: {
       flex: 1,
@@ -2408,9 +2485,14 @@ const getStyles = (
     },
 
     gridCard: {
-      width: "48%",
-      marginBottom: 16,
-      borderRadius: 20,
+      // 🚀 RESPONSIVE : Largeur adaptative selon la taille d'écran - corrige le problème sur S24/S25 Ultra
+      width: universalLayout.isSmallScreen
+        ? "46%"
+        : universalLayout.isLargeScreen
+        ? "47%"
+        : "48%",
+      marginBottom: universalLayout.spacing.md,
+      borderRadius: universalLayout.borderRadius.lg,
       overflow: "hidden",
       shadowColor: "#000",
       shadowOffset: { width: 0, height: 8 },
@@ -2420,8 +2502,13 @@ const getStyles = (
     },
 
     gridCardContent: {
-      padding: 20,
-      height: 200,
+      // 🚀 RESPONSIVE : Padding et hauteur adaptatifs selon la densité d'écran
+      padding: universalLayout.isSmallScreen ? 16 : 20,
+      height: universalLayout.isSmallScreen
+        ? 180
+        : universalLayout.isLargeScreen
+        ? 220
+        : 200,
       flexDirection: "column",
       alignItems: "center",
       justifyContent: "space-between",

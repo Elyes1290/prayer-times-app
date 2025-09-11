@@ -122,6 +122,7 @@ export const FREE_LIMITS = {
     hadith: 3,
     dhikr: 3,
     asmaul_husna: 3,
+    prophet_story: 3, // 🚀 NOUVEAU : 3 histoires du Prophète en favori pour les utilisateurs gratuits
   },
   daily_prayers_tracking: 7, // 7 jours d'historique
   dhikr_categories: 2, // Accès à seulement 2 catégories de dhikr
@@ -353,7 +354,7 @@ export const getFeatureExplanation = (feature: string) => {
   > = {
     favorites: {
       title: "Système de favoris",
-      free: "3 favoris par catégorie, stockage local uniquement",
+      free: "3 favoris par catégorie (versets, hadiths, dhikr, noms d'Allah, histoires du Prophète), stockage local uniquement",
       premium: "Favoris illimités avec synchronisation cloud automatique",
     },
     backup: {

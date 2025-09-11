@@ -6,6 +6,7 @@ import React, {
   useEffect,
   useCallback,
   useState,
+  useMemo,
 } from "react";
 import audioManager from "../utils/AudioManager";
 import {
@@ -17,9 +18,12 @@ import {
   Modal,
   Alert,
   ScrollView,
+  KeyboardAvoidingView,
+  Platform,
 } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
+import { useLocalSearchParams } from "expo-router";
 import ThemedImageBackground from "../components/ThemedImageBackground";
 import {
   SettingsContext,
@@ -32,7 +36,7 @@ import {
   useOverlayIconColor,
   useCurrentTheme,
 } from "../hooks/useThemeColor";
-import { NominatimResult } from "../hooks/useCitySearch";
+import { NominatimResult, useCitySearch } from "../hooks/useCitySearch";
 import { useTranslation } from "react-i18next";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -193,6 +197,10 @@ interface OptimizedSettingsSectionsProps {
   navigation: any;
   // 🔧 AJOUTÉ : Ouverture de la modale premium existante
   openPremiumModal: () => void;
+
+  // 🚀 NOUVEAU : UI Mode location externe
+  locationUIMode: "auto" | "manual";
+  setLocationUIMode: (mode: "auto" | "manual") => void;
 }
 
 // Le composant SettingsSections reste identique (sera copié de l'original)
@@ -273,6 +281,9 @@ function SettingsSections({
   // 🔧 AJOUTÉ : Navigation pour les boutons
   navigation,
   openPremiumModal,
+  // 🚀 NOUVEAU : UI Mode location externe
+  locationUIMode,
+  setLocationUIMode,
 }: OptimizedSettingsSectionsProps) {
   const { t } = useTranslation();
 
@@ -356,11 +367,11 @@ function SettingsSections({
   const [isRefreshingAdhans, setIsRefreshingAdhans] = useState(false);
   const [isCleaningFiles, setIsCleaningFiles] = useState(false);
 
-  // Fonction pour rafraîchir la localisation automatique
-  const refreshAutoLocation = async () => {
+  // 🚀 FONCTION STABLE pour rafraîchir la localisation automatique
+  const refreshAutoLocation = useCallback(async () => {
     // 🔧 CORRECTION : Utiliser la vraie fonction du contexte
     await settings.refreshAutoLocation();
-  };
+  }, [settings.refreshAutoLocation]);
 
   // 🚀 NOUVEAU : Fonctions wrapper avec feedback visuel
   const handleRefreshAdhans = async () => {
@@ -605,22 +616,35 @@ function SettingsSections({
     setActiveSection(null);
   };
 
-  // 🚀 NOUVEAU : Composants wrapper stables pour éviter les erreurs de hooks
-  const LocationSectionWrapper = React.memo(function LocationSectionWrapper() {
-    const locationSections = LocationSection({
-      locationMode: settings.locationMode,
-      autoLocation: settings.autoLocation,
-      isRefreshingLocation: settings.isRefreshingLocation,
-      cityInput: cityInput,
-      citySearchResults: citySearchResults,
-      citySearchLoading: citySearchLoading,
-      setLocationMode: (mode) => settings.setLocationMode(mode),
-      refreshAutoLocation: refreshAutoLocation,
-      handleCityInputChange: handleCityInputChange,
-      selectCity: selectCity,
-      styles: styles,
-    });
+  // 🚀 STABLE LOCATION MODE SETTER - DOIT ÊTRE DÉFINI AVANT USEMEMO !
+  const stableSetLocationMode = useCallback(
+    (mode: "auto" | "manual") => settings.setLocationMode(mode),
+    [settings.setLocationMode]
+  );
 
+  // 🚀 TOUTES CES FONCTIONS EXISTENT DÉJÀ DANS LES PARAMÈTRES !
+
+  // 🚀 SUPPRESSION DU USEMEMO - APPEL DIRECT SANS OPTIMISATION
+  const locationSections = LocationSection({
+    locationMode: settings.locationMode,
+    autoLocation: settings.autoLocation,
+    isRefreshingLocation: settings.isRefreshingLocation,
+    cityInput: cityInput,
+    citySearchResults: citySearchResults,
+    citySearchLoading: citySearchLoading,
+    setLocationMode: stableSetLocationMode,
+    refreshAutoLocation: refreshAutoLocation,
+    handleCityInputChange: handleCityInputChange,
+    selectCity: selectCity,
+    styles: styles,
+    // ✅ AJOUT : Passer setActiveSection pour maintenir section ouverte
+    setActiveSection: setActiveSection,
+    // 🚀 NOUVEAU : États UI mode stables
+    uiMode: locationUIMode,
+    setUIMode: setLocationUIMode,
+  });
+
+  const LocationSectionWrapper = React.memo(function LocationSectionWrapper() {
     const locationComponent = locationSections[0]?.data[0]?.component;
     return (
       locationComponent || (
@@ -1218,6 +1242,9 @@ export default function SettingsScreenOptimized() {
   const { showToast } = useToast();
   const navigation = useNavigation();
 
+  // 🚀 NOUVEAU : Détecter les paramètres de navigation
+  const { openLocation, mode } = useLocalSearchParams();
+
   // 🚀 OPTIMISATION : Utiliser le hook centralisé au lieu de 26 useState
   const {
     audioPlayer,
@@ -1226,6 +1253,9 @@ export default function SettingsScreenOptimized() {
     uiManager,
     premiumContent,
   } = useSettingsOptimized();
+
+  // 🚀 NOUVEAU : Hook API pour les vraies recherches
+  const citySearchAPI = useCitySearch();
 
   // Références pour le scroll
   const premiumSectionRef = useRef<View>(null);
@@ -1277,6 +1307,32 @@ export default function SettingsScreenOptimized() {
 
   // 🚀 NOUVEAU : État pour la section active (grille de boutons)
   const [activeSection, setActiveSection] = useState<string | null>(null);
+
+  // 🚀 NOUVEAU : État pour l'interface mode location (stable)
+  const [locationUIMode, setLocationUIMode] = useState<"auto" | "manual">(
+    settings.locationMode || "auto"
+  );
+
+  // 🚀 SYNCHRONISATION : locationUIMode avec locationMode (quand mode réel change)
+  useEffect(() => {
+    if (settings.locationMode === "manual") {
+      setLocationUIMode("manual");
+    }
+  }, [settings.locationMode]);
+
+  // 🚀 NOUVEAU : Auto-ouverture de la section location si demandé
+  useEffect(() => {
+    if (openLocation === "true") {
+      console.log("🚀 Auto-ouverture section location demandée");
+      setActiveSection("location");
+
+      // Si mode=manual, pré-sélectionner manuel
+      if (mode === "manual") {
+        console.log("🚀 Pré-sélection mode manuel");
+        setLocationUIMode("manual");
+      }
+    }
+  }, [openLocation, mode]);
 
   // 🚀 NOUVEAU : État pour tracker les changements en attente
   const [hasPendingChanges, setHasPendingChanges] = useState(false);
@@ -1335,26 +1391,16 @@ export default function SettingsScreenOptimized() {
     { code: "nl", label: "Nederlands" },
   ];
 
-  // 🚀 OPTIMISATION : Fonctions utilisant les nouveaux hooks
-  const handleCityInputChange = (text: string) => {
-    citySearch.setCityInput(text);
-  };
-
-  const selectCity = (city: NominatimResult) => {
-    citySearch.setCityInput(city.display_name);
-    citySearch.clearSearchResults();
-  };
-
   const handleLoginSuccess = (userData: any) => {
     // Identique à l'original
   };
 
-  // useEffect pour initialiser la ville
+  // useEffect pour initialiser la ville - SANS citySearch dans les dépendances
   useEffect(() => {
     if (settings?.locationMode === "manual" && settings.manualLocation?.city) {
       citySearch.setCityInput(settings.manualLocation.city);
     }
-  }, [settings?.locationMode, settings?.manualLocation?.city, citySearch]);
+  }, [settings?.locationMode, settings?.manualLocation?.city]); // 🔥 RETIRÉ citySearch !
 
   // Nettoyage audio premium
   useEffect(() => {
@@ -2959,114 +3005,150 @@ ${
   return (
     <ThemedImageBackground style={styles.container}>
       <SafeAreaView style={{ flex: 1 }}>
-        {/* 🚀 NOUVEAU : Header avec titre et bouton premium */}
-        <View style={styles.headerContainer}>
-          <Text style={styles.title}>{t("settings_title", "Paramètres")}</Text>
-          <TouchableOpacity
-            style={styles.premiumButton}
-            onPress={() => uiManager.setShowPremiumModal(true)}
-          >
-            <MaterialCommunityIcons
-              name="account-circle"
-              size={28}
-              color={overlayTextColor}
-            />
-          </TouchableOpacity>
-        </View>
+        <KeyboardAvoidingView
+          style={{ flex: 1 }}
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
+          keyboardVerticalOffset={Platform.OS === "ios" ? 100 : 20}
+        >
+          {/* 🚀 NOUVEAU : Header avec titre et bouton premium */}
+          <View style={styles.headerContainer}>
+            <Text style={styles.title}>
+              {t("settings_title", "Paramètres")}
+            </Text>
+            <TouchableOpacity
+              style={styles.premiumButton}
+              onPress={() => uiManager.setShowPremiumModal(true)}
+            >
+              <MaterialCommunityIcons
+                name="account-circle"
+                size={28}
+                color={overlayTextColor}
+              />
+            </TouchableOpacity>
+          </View>
 
-        {/* 🚀 NOUVEAU : SettingsSections avec les hooks optimisés */}
-        <SettingsSections
-          settings={settings}
-          dhikrSettings={settings.dhikrSettings}
-          methods={methods}
-          sounds={premiumContent.premiumContentState.availableSounds}
-          languages={languages}
-          selectedLang={i18n.language}
-          onChangeLanguage={onChangeLanguage}
-          reprogrammateNotifications={reprogrammateNotifications}
-          navigation={navigation}
-          openPremiumModal={() => uiManager.setShowPremiumModal(true)}
-          // 🏙️ États recherche ville depuis hooks optimisés
-          cityInput={citySearch.citySearchState.cityInput}
-          citySearchResults={citySearch.citySearchState.citySearchResults}
-          citySearchLoading={citySearch.citySearchState.citySearchLoading}
-          // 🏙️ Fonctions ville via citySearch hook
-          handleCityInputChange={handleCityInputChange}
-          selectCity={selectCity}
-          // 🎵 États audio depuis hooks optimisés
-          isPreviewing={audioPlayer.audioState.isPreviewing}
-          isAudioPlaying={audioPlayer.audioState.isAudioPlaying}
-          currentPlayingAdhan={audioPlayer.audioState.currentPlayingAdhan}
-          isLoadingPreview={audioPlayer.audioState.isLoadingPreview}
-          // 🎵 Fonctions audio via audioPlayer hook
-          playPreview={playPreview}
-          stopPreview={stopPreview}
-          pausePreview={pausePreview}
-          resumePreview={resumePreview}
-          // 🎵 États premium audio depuis hooks optimisés
-          isPlayingPremiumAdhan={audioPlayer.audioState.isPlayingPremiumAdhan}
-          currentPlayingPremiumAdhan={
-            audioPlayer.audioState.currentPlayingPremiumAdhan
-          }
-          premiumAdhanPlaybackPosition={
-            audioPlayer.audioState.premiumAdhanPlaybackPosition
-          }
-          premiumAdhanPlaybackDuration={
-            audioPlayer.audioState.premiumAdhanPlaybackDuration
-          }
-          isLoadingPremiumAdhan={audioPlayer.audioState.isLoadingPremiumAdhan}
-          // 🎵 Fonctions premium audio via audioPlayer hook
-          playPremiumAdhan={playPremiumAdhan}
-          pausePremiumAdhan={pausePremiumAdhan}
-          resumePremiumAdhan={resumePremiumAdhan}
-          seekPremiumAdhanPosition={seekPremiumAdhanPosition}
-          stopPremiumAdhan={stopPremiumAdhan}
-          // 📥 États téléchargement depuis hooks optimisés
-          availableAdhanVoices={
-            premiumContent.premiumContentState.availableAdhanVoices
-          }
-          downloadingAdhans={downloadManager.downloadState.downloadingAdhans}
-          downloadProgress={downloadManager.downloadState.downloadProgress}
-          isApplyingChanges={uiManager.uiState.isApplyingChanges}
-          downloadState={downloadState} // 🔧 AJOUTÉ : État téléchargement natif
-          user={user} // 🔧 AJOUTÉ : User depuis usePremium
-          // 📥 Fonctions téléchargements via downloadManager hook
-          handleDownloadAdhan={handleDownloadAdhan}
-          handleDeleteAdhan={handleDeleteAdhan}
-          handleCancelDownload={handleCancelDownload}
-          loadAvailableAdhans={loadAvailableAdhans}
-          // 🔧 Fonctions utilitaires
-          getSoundDisplayName={getSoundDisplayName}
-          formatTime={formatTime}
-          // 🔧 Fonctions premium auth
-          activatePremium={activatePremium}
-          showToast={showToast}
-          handleBuyPremium={handleBuyPremium}
-          onLoginSuccess={handleLoginSuccess}
-          forceLogout={forceLogout}
-          // 🧹 Fonctions nettoyage
-          cleanupCorruptedFiles={cleanupCorruptedFiles}
-          diagnoseAndCleanFiles={diagnoseAndCleanFiles}
-          // 🔧 FIX: Fonction de mise à jour des sons
-          updateAvailableSounds={updateAvailableSounds}
-          // 🔧 FIX: Fonction de rafraîchissement des adhans du hook
-          forceRefreshAdhans={forceRefreshAdhans}
-          // 🎨 Référence
-          sectionListRef={sectionListRef}
-          // 🎨 Styles
-          styles={styles}
-          premiumContent={premiumContent}
-          // 🚀 NOUVEAU : Props pour la gestion des sections actives
-          activeSection={activeSection}
-          setActiveSection={setActiveSection}
-          // 🔧 AJOUTÉ : Props pour le thème
-          currentTheme={currentTheme}
-          setThemeMode={settings.setThemeMode}
-          // 🚀 NOUVEAU : Props pour la gestion des changements en attente
-          hasPendingChanges={hasPendingChanges}
-          markPendingChanges={markPendingChanges}
-          applyAllChanges={applyAllChanges}
-        />
+          {/* 🚀 NOUVEAU : SettingsSections avec les hooks optimisés */}
+          <SettingsSections
+            settings={settings}
+            dhikrSettings={settings.dhikrSettings}
+            methods={methods}
+            sounds={premiumContent.premiumContentState.availableSounds}
+            languages={languages}
+            selectedLang={i18n.language}
+            onChangeLanguage={onChangeLanguage}
+            reprogrammateNotifications={reprogrammateNotifications}
+            navigation={navigation}
+            openPremiumModal={() => uiManager.setShowPremiumModal(true)}
+            // 🚀 NOUVEAU : UI Mode location externe (stable)
+            locationUIMode={locationUIMode}
+            setLocationUIMode={setLocationUIMode}
+            // 🏙️ États recherche ville depuis hooks optimisés
+            cityInput={citySearch.citySearchState.cityInput}
+            citySearchResults={citySearchAPI.results} // ✅ Utiliser les résultats de l'API
+            citySearchLoading={citySearchAPI.loading} // ✅ Utiliser le loading de l'API
+            // 🏙️ Fonctions ville - RECHERCHE MANUELLE SEULEMENT
+            handleCityInputChange={(text: string) => {
+              // ✅ MAINTENIR la section location OUVERTE pendant la recherche !
+              if (activeSection !== "location") {
+                setActiveSection("location");
+              }
+
+              // ✅ Mettre à jour l'état local + déclencher la vraie recherche API
+              citySearch.setCityInput(text);
+              citySearchAPI.searchCity(text); // 🚀 Déclenche la recherche API
+            }}
+            selectCity={(city: any) => {
+              // ✅ MAINTENIR la section location OUVERTE après sélection !
+              if (activeSection !== "location") {
+                setActiveSection("location");
+              }
+
+              citySearch.setCityInput(city.display_name);
+              citySearch.clearSearchResults();
+              // Sauvegarder dans les paramètres
+              if (settings?.setManualLocation) {
+                settings.setManualLocation({
+                  lat: parseFloat(city.lat),
+                  lon: parseFloat(city.lon),
+                  city: city.display_name.split(",")[0].trim(),
+                });
+              }
+            }}
+            // 🎵 États audio depuis hooks optimisés
+            isPreviewing={audioPlayer.audioState.isPreviewing}
+            isAudioPlaying={audioPlayer.audioState.isAudioPlaying}
+            currentPlayingAdhan={audioPlayer.audioState.currentPlayingAdhan}
+            isLoadingPreview={audioPlayer.audioState.isLoadingPreview}
+            // 🎵 Fonctions audio via audioPlayer hook
+            playPreview={playPreview}
+            stopPreview={stopPreview}
+            pausePreview={pausePreview}
+            resumePreview={resumePreview}
+            // 🎵 États premium audio depuis hooks optimisés
+            isPlayingPremiumAdhan={audioPlayer.audioState.isPlayingPremiumAdhan}
+            currentPlayingPremiumAdhan={
+              audioPlayer.audioState.currentPlayingPremiumAdhan
+            }
+            premiumAdhanPlaybackPosition={
+              audioPlayer.audioState.premiumAdhanPlaybackPosition
+            }
+            premiumAdhanPlaybackDuration={
+              audioPlayer.audioState.premiumAdhanPlaybackDuration
+            }
+            isLoadingPremiumAdhan={audioPlayer.audioState.isLoadingPremiumAdhan}
+            // 🎵 Fonctions premium audio via audioPlayer hook
+            playPremiumAdhan={playPremiumAdhan}
+            pausePremiumAdhan={pausePremiumAdhan}
+            resumePremiumAdhan={resumePremiumAdhan}
+            seekPremiumAdhanPosition={seekPremiumAdhanPosition}
+            stopPremiumAdhan={stopPremiumAdhan}
+            // 📥 États téléchargement depuis hooks optimisés
+            availableAdhanVoices={
+              premiumContent.premiumContentState.availableAdhanVoices
+            }
+            downloadingAdhans={downloadManager.downloadState.downloadingAdhans}
+            downloadProgress={downloadManager.downloadState.downloadProgress}
+            isApplyingChanges={uiManager.uiState.isApplyingChanges}
+            downloadState={downloadState} // 🔧 AJOUTÉ : État téléchargement natif
+            user={user} // 🔧 AJOUTÉ : User depuis usePremium
+            // 📥 Fonctions téléchargements via downloadManager hook
+            handleDownloadAdhan={handleDownloadAdhan}
+            handleDeleteAdhan={handleDeleteAdhan}
+            handleCancelDownload={handleCancelDownload}
+            loadAvailableAdhans={loadAvailableAdhans}
+            // 🔧 Fonctions utilitaires
+            getSoundDisplayName={getSoundDisplayName}
+            formatTime={formatTime}
+            // 🔧 Fonctions premium auth
+            activatePremium={activatePremium}
+            showToast={showToast}
+            handleBuyPremium={handleBuyPremium}
+            onLoginSuccess={handleLoginSuccess}
+            forceLogout={forceLogout}
+            // 🧹 Fonctions nettoyage
+            cleanupCorruptedFiles={cleanupCorruptedFiles}
+            diagnoseAndCleanFiles={diagnoseAndCleanFiles}
+            // 🔧 FIX: Fonction de mise à jour des sons
+            updateAvailableSounds={updateAvailableSounds}
+            // 🔧 FIX: Fonction de rafraîchissement des adhans du hook
+            forceRefreshAdhans={forceRefreshAdhans}
+            // 🎨 Référence
+            sectionListRef={sectionListRef}
+            // 🎨 Styles
+            styles={styles}
+            premiumContent={premiumContent}
+            // 🚀 NOUVEAU : Props pour la gestion des sections actives
+            activeSection={activeSection}
+            setActiveSection={setActiveSection}
+            // 🔧 AJOUTÉ : Props pour le thème
+            currentTheme={currentTheme}
+            setThemeMode={settings.setThemeMode}
+            // 🚀 NOUVEAU : Props pour la gestion des changements en attente
+            hasPendingChanges={hasPendingChanges}
+            markPendingChanges={markPendingChanges}
+            applyAllChanges={applyAllChanges}
+          />
+        </KeyboardAvoidingView>
       </SafeAreaView>
 
       {/* 🌙 Modal de confirmation mystique */}
@@ -3526,6 +3608,42 @@ const getStyles = (
       shadowOpacity: 0.3,
       shadowRadius: 8,
       elevation: 4,
+      // 🔧 Assurer la visibilité au-dessus du clavier
+      zIndex: 10,
+    },
+
+    // 🚀 NOUVEAUX STYLES pour la recherche manuelle
+    searchContainer: {
+      flexDirection: "row",
+      alignItems: "center",
+      gap: 12,
+      marginBottom: 12,
+    },
+
+    searchInput: {
+      flex: 1,
+      marginBottom: 0, // Override du marginBottom de input
+    },
+
+    searchButton: {
+      backgroundColor: "#2E7D32",
+      paddingVertical: 16,
+      paddingHorizontal: 20,
+      borderRadius: 12,
+      shadowColor: "#000",
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.2,
+      shadowRadius: 4,
+      elevation: 3,
+      borderWidth: 1,
+      borderColor: "#1B5E20",
+    },
+
+    searchButtonText: {
+      color: "#FFFFFF",
+      fontSize: 14,
+      fontWeight: "600",
+      textAlign: "center",
     },
     resultsList: {
       backgroundColor:
@@ -3545,6 +3663,14 @@ const getStyles = (
       borderBottomWidth: 1,
       borderBottomColor:
         currentTheme === "light" ? colors.border : "rgba(148, 163, 184, 0.2)",
+    },
+
+    // 🚀 NOUVEAU : Style pour le texte des résultats adapté au thème
+    resultText: {
+      fontSize: 16,
+      lineHeight: 22,
+      color: currentTheme === "light" ? colors.text : "#F8FAFC", // ✅ Blanc sur thème sombre
+      fontWeight: "500",
     },
     // 🎵 Styles pour les contrôles audio
     row: {

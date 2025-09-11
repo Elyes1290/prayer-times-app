@@ -587,6 +587,7 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
         hadith: 3,
         dhikr: 3,
         asmaul_husna: 3,
+        prophet_story: 3, // 🚀 NOUVEAU : 3 histoires du Prophète en favori
       },
       daily_prayers_tracking: 7, // 7 jours d'historique
       dhikr_categories: 2, // Accès à seulement 2 catégories de dhikr
