@@ -1,16 +1,8 @@
 import { useState } from "react";
-import {
-  ImageBackground,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-  Dimensions,
-} from "react-native";
+import { ScrollView, StyleSheet, Text, View, Dimensions } from "react-native";
 import { Calendar } from "react-native-calendars";
 import ThemedImageBackground from "../components/ThemedImageBackground";
 import { DateNavigator } from "../components/DateNavigator";
-import { Colors } from "../constants/Colors";
 import { getIslamicEventsForYear } from "../utils/islamicEvents";
 import { useTranslation } from "react-i18next";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
