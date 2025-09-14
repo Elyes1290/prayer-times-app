@@ -22,6 +22,7 @@
   "manual_city": "يدوي (مدينة)",
   "city_placeholder": "المدينة",
   "notifications": "الإشعارات",
+  "dua_after_adhan": "دعاء بعد الأذان",
   "calculation_method": "طريقة الحساب",
   "preview": "معاينة (20 ثانية)",
   "preview_playing": "جاري التشغيل...",
@@ -337,6 +338,9 @@
     "premium_sync_success_message": "تمت مزامنة البيانات المميزة",
     "premium_sync_error_title": "خطأ في المزامنة",
     "premium_sync_error_message": "خطأ أثناء المزامنة المميزة",
+    "already_premium": "مميز بالفعل",
+    "renewal_detected": "تم اكتشاف تجديد",
+    "account_exists": "الحساب موجود",
     "warning": "تحذير",
 
     "download_error": "خطأ في التحميل",

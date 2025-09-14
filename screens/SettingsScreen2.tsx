@@ -42,6 +42,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import { usePremium } from "../contexts/PremiumContext";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import Constants from "expo-constants";
 import { useToast } from "../contexts/ToastContext";
 
 import PremiumContentManager, { PremiumContent } from "../utils/premiumContent";
@@ -52,8 +53,8 @@ import { useSettingsOptimized } from "../hooks/useSettingsOptimized";
 
 import AdhanSoundSection from "../components/settings/AdhanSoundSection";
 import DhikrSection from "../components/settings/DhikrSection";
-import LocationSection from "../components/settings/LocationSection";
 import GeneralSection from "../components/settings/GeneralSection";
+import LocationSection from "../components/settings/LocationSection";
 import BackupSection from "../components/settings/BackupSection";
 import AccountManagementSection from "../components/settings/AccountManagementSection";
 // import AudioCacheSection from "../components/settings/AudioCacheSection";
@@ -663,10 +664,12 @@ function SettingsSections({
       notificationsEnabled: settings.notificationsEnabled,
       remindersEnabled: settings.remindersEnabled,
       reminderOffset: settings.reminderOffset,
-      selectedLang: selectedLang,
-      languages: languages,
+      duaAfterAdhanEnabled: settings.duaAfterAdhanEnabled, // 🚀 NOUVEAU : Ajouter la dua après l'adhan
       handleNotificationsToggle: handleNotificationsToggle,
-      onChangeLanguage: onChangeLanguage,
+      setDuaAfterAdhanEnabled: (enabled) => {
+        settings.setDuaAfterAdhanEnabled(enabled);
+        markPendingChanges();
+      },
       markPendingChanges: markPendingChanges,
       setRemindersEnabled: (enabled) => {
         settings.setRemindersEnabled(enabled);
@@ -935,33 +938,44 @@ function SettingsSections({
           <View style={{ marginTop: 16, gap: 12 }}>
             <View style={styles.row}>
               <Text style={styles.label}>{t("version", "Version")}</Text>
-              <Text style={styles.settingValue}>1.0.0</Text>
+              <Text style={styles.settingValue}>
+                {Constants.expoConfig?.version || "1.0.3"} (Build{" "}
+                {Constants.expoConfig?.android?.versionCode || "48"})
+              </Text>
             </View>
             <View style={styles.row}>
               <Text style={styles.label}>{t("developer", "Développeur")}</Text>
-              <Text style={styles.settingValue}>React Native</Text>
+              <Text style={styles.settingValue}>Drogbinho</Text>
             </View>
             <View style={styles.row}>
               <Text style={styles.label}>
                 {t("last_update", "Dernière mise à jour")}
               </Text>
-              <Text style={styles.settingValue}>2024</Text>
+              <Text style={styles.settingValue}>14 septembre 2025</Text>
             </View>
 
             {/* 🚀 NOUVEAU : État de connexion */}
+            <View style={styles.row}>
+              <Text style={styles.label}>Statut</Text>
+              <View style={styles.premiumStatusContainer}>
+                <MaterialCommunityIcons
+                  name={user?.isPremium ? "crown" : "account"}
+                  size={16}
+                  color={user?.isPremium ? "#FFD700" : "#666"}
+                />
+                <Text
+                  style={[
+                    styles.premiumStatusText,
+                    { color: user?.isPremium ? "#FFD700" : "#666" },
+                  ]}
+                >
+                  {user?.isPremium ? "Premium" : "Gratuit"}
+                </Text>
+              </View>
+            </View>
+
             {user && (
               <>
-                <View style={styles.row}>
-                  <Text style={styles.label}>Statut</Text>
-                  <View style={styles.premiumStatusContainer}>
-                    <MaterialCommunityIcons
-                      name="crown"
-                      size={16}
-                      color="#FFD700"
-                    />
-                    <Text style={styles.premiumStatusText}>Premium</Text>
-                  </View>
-                </View>
                 <View style={styles.row}>
                   <Text style={styles.label}>Compte</Text>
                   <Text style={styles.settingValue}>

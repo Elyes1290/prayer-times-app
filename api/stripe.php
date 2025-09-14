@@ -477,10 +477,22 @@ elseif ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_SERVER['HTTP_STRIPE_SI
     $sigHeader = $_SERVER['HTTP_STRIPE_SIGNATURE'] ?? '';
     $endpointSecret = STRIPE_WEBHOOK_SECRET;
     
+    // 🔧 CORRECTION : Vérifier que le webhook secret est défini
+    if (empty($endpointSecret)) {
+        logError("❌ STRIPE_WEBHOOK_SECRET non défini dans les variables d'environnement");
+        http_response_code(500);
+        echo json_encode(['error' => 'Configuration webhook manquante']);
+        exit();
+    }
+    
     try {
         $event = \Stripe\Webhook::constructEvent($payload, $sigHeader, $endpointSecret);
+        logError("✅ Webhook Stripe validé avec succès - Type: " . $event->type);
     } catch (Exception $e) {
-        logError("Erreur webhook signature", $e);
+        logError("❌ Erreur webhook signature: " . $e->getMessage());
+        logError("❌ Payload reçu: " . substr($payload, 0, 200) . "...");
+        logError("❌ Signature header: " . $sigHeader);
+        logError("❌ Endpoint secret défini: " . (empty($endpointSecret) ? 'NON' : 'OUI'));
         http_response_code(400);
         echo json_encode(['error' => 'Signature invalide: ' . $e->getMessage()]);
         exit();
@@ -873,16 +885,50 @@ function handleCheckoutSessionCompleted($session) {
             $finalCustomerName = $tokenData['customer_name'] ?? $customerName;
             $finalCustomerLanguage = $tokenData['customer_language'] ?? $customerLanguage;
             
-            logError("🔧 DEBUG handleCheckoutSessionCompleted - Avant createUserViaExistingAPI");
-            createUserViaExistingAPI(
-                $customerEmail, 
-                $finalCustomerName, 
-                $subscriptionType, 
-                $session->id, 
-                $finalCustomerLanguage, 
-                $originalPassword
-            );
-            logError("✅ createUserViaExistingAPI terminé");
+            // 🔧 NOUVEAU : Vérifier si l'utilisateur existe déjà avec un premium actif
+            $pdo = getDBConnection();
+            $existingUserStmt = $pdo->prepare("SELECT id, premium_status, premium_expiry FROM users WHERE email = ?");
+            $existingUserStmt->execute([$customerEmail]);
+            $existingUser = $existingUserStmt->fetch();
+            
+            if ($existingUser) {
+                // Vérifier si le premium est encore actif
+                $isPremiumActive = false;
+                if ($existingUser['premium_status'] == 1 && $existingUser['premium_expiry']) {
+                    $expiryDate = new DateTime($existingUser['premium_expiry']);
+                    $isPremiumActive = $expiryDate > new DateTime();
+                }
+                
+                if ($isPremiumActive) {
+                    logError("⚠️ Utilisateur existe déjà avec premium actif - Renouvellement automatique");
+                    // Mettre à jour l'abonnement existant
+                    updateUserPremiumStatus($existingUser['id'], $subscriptionType, $session->id);
+                    logError("✅ Abonnement existant renouvelé");
+                } else {
+                    logError("🔄 Utilisateur existe avec premium expiré - Création d'un nouvel abonnement");
+                    // Continuer avec la création normale
+                    createUserViaExistingAPI(
+                        $customerEmail, 
+                        $finalCustomerName, 
+                        $subscriptionType, 
+                        $session->id, 
+                        $finalCustomerLanguage, 
+                        $originalPassword
+                    );
+                }
+            } else {
+                logError("🆕 Nouvel utilisateur - Création complète");
+                createUserViaExistingAPI(
+                    $customerEmail, 
+                    $finalCustomerName, 
+                    $subscriptionType, 
+                    $session->id, 
+                    $finalCustomerLanguage, 
+                    $originalPassword
+                );
+            }
+            
+            logError("✅ Processus utilisateur terminé");
         } else {
             logError("❌ Données manquantes - Email: " . ($customerEmail ? 'OK' : 'MANQUANT') . ", Type: " . ($subscriptionType ? 'OK' : 'MANQUANT'));
         }

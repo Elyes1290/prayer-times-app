@@ -22,6 +22,7 @@
   "manual_city": "Вручную (город)",
   "city_placeholder": "Город",
   "notifications": "Уведомления",
+  "dua_after_adhan": "Дуа после Азана",
   "calculation_method": "Метод расчета",
   "preview": "Предварительный просмотр (20с)",
   "preview_playing": "Воспроизводится...",
@@ -337,6 +338,9 @@
     "premium_sync_success_message": "Премиум данные синхронизированы",
     "premium_sync_error_title": "Ошибка синхронизации",
     "premium_sync_error_message": "Ошибка во время премиум синхронизации",
+    "already_premium": "Уже Премиум",
+    "renewal_detected": "Обнаружено продление",
+    "account_exists": "Аккаунт существует",
     "warning": "Предупреждение",
 
     "download_error": "Ошибка загрузки",

@@ -73,6 +73,7 @@ export interface SettingsContextType {
   notificationsEnabled: boolean;
   remindersEnabled: boolean;
   reminderOffset: number;
+  duaAfterAdhanEnabled: boolean; // 🚀 NOUVEAU : Option pour activer/désactiver la dua après l'adhan
   calcMethod: CalcMethodKey;
   adhanSound: AdhanSoundKey;
   adhanVolume: number;
@@ -103,6 +104,7 @@ export interface SettingsContextType {
   setNotificationsEnabled: (enabled: boolean) => void;
   setRemindersEnabled: (enabled: boolean) => void;
   setReminderOffset: (offset: number) => void;
+  setDuaAfterAdhanEnabled: (enabled: boolean) => void; // 🚀 NOUVEAU : Setter pour la dua après l'adhan
   setCalcMethod: (method: CalcMethodKey) => void;
   setAdhanSound: (sound: AdhanSoundKey) => void;
   setAdhanVolume: (volume: number) => void;
@@ -140,6 +142,7 @@ const defaultSettings: SettingsContextType = {
   notificationsEnabled: true,
   remindersEnabled: true,
   reminderOffset: 10,
+  duaAfterAdhanEnabled: false, // 🚀 NOUVEAU : Par défaut désactivé
   calcMethod: "MuslimWorldLeague",
   adhanSound: "misharyrachid",
   adhanVolume: 1.0,
@@ -168,6 +171,7 @@ const defaultSettings: SettingsContextType = {
   setNotificationsEnabled: () => {},
   setRemindersEnabled: () => {},
   setReminderOffset: () => {},
+  setDuaAfterAdhanEnabled: () => {}, // 🚀 NOUVEAU : Setter pour la dua après l'adhan
   setCalcMethod: () => {},
   setAdhanSound: () => {},
   setAdhanVolume: () => {},
@@ -211,6 +215,7 @@ export const SettingsProvider = ({
   const [adhanVolume, setAdhanVolume] = useState(1.0);
   const [remindersEnabled, setRemindersEnabled] = useState(true);
   const [reminderOffset, setReminderOffset] = useState(10);
+  const [duaAfterAdhanEnabled, setDuaAfterAdhanEnabled] = useState(false); // 🚀 NOUVEAU : État pour la dua après l'adhan
   const [enabledAfterSalah, setEnabledAfterSalah] = useState(true);
   const [enabledMorningDhikr, setEnabledMorningDhikr] = useState(true);
   const [enabledEveningDhikr, setEnabledEveningDhikr] = useState(true);
@@ -525,6 +530,7 @@ export const SettingsProvider = ({
         adhanVolumeValue,
         remindersEnabledValue,
         reminderOffsetValue,
+        duaAfterAdhanEnabledValue, // 🚀 NOUVEAU : Variable pour la dua après l'adhan
         locationModeValue,
         enabledAfterSalahValue,
         enabledMorningDhikrValue,
@@ -547,6 +553,7 @@ export const SettingsProvider = ({
         LocalStorageManager.getEssential("ADHAN_VOLUME"),
         LocalStorageManager.getEssential("REMINDERS_ENABLED"),
         LocalStorageManager.getEssential("REMINDER_OFFSET"),
+        AsyncStorage.getItem("DUA_AFTER_ADHAN_ENABLED"), // 🚀 NOUVEAU : Charger la dua après l'adhan
         LocalStorageManager.getEssential("LOCATION_MODE"),
         LocalStorageManager.getEssential("ENABLED_AFTER_SALAH"),
         LocalStorageManager.getEssential("ENABLED_MORNING_DHIKR"),
@@ -617,6 +624,9 @@ export const SettingsProvider = ({
       }
       if (reminderOffsetValue !== null)
         setReminderOffset(Number(reminderOffsetValue));
+      if (duaAfterAdhanEnabledValue !== null) {
+        setDuaAfterAdhanEnabled(duaAfterAdhanEnabledValue === "true");
+      }
       const loadedLocationMode = locationModeValue as LocationMode | null;
       console.log(
         `🔍 [DEBUG] Chargement localisation - locationModeValue: "${locationModeValue}", loadedLocationMode: "${loadedLocationMode}"`
@@ -969,6 +979,7 @@ export const SettingsProvider = ({
     notificationsEnabled,
     remindersEnabled,
     reminderOffset,
+    duaAfterAdhanEnabled, // 🚀 NOUVEAU : Ajouter la dua après l'adhan
     calcMethod,
     adhanSound,
     adhanVolume,
@@ -1032,6 +1043,18 @@ export const SettingsProvider = ({
           reminderOffset: v,
         });
       } else if (isInitializing) {
+      }
+    },
+    setDuaAfterAdhanEnabled: (v) => {
+      setDuaAfterAdhanEnabled(v);
+      // 🚀 NOUVEAU : Sauvegarder dans AsyncStorage
+      AsyncStorage.setItem("DUA_AFTER_ADHAN_ENABLED", String(v));
+
+      // Sauvegarder immédiatement côté Android
+      if (!isInitializing && Platform.OS === "android" && AdhanModule) {
+        AdhanModule.saveNotificationSettings({
+          duaAfterAdhanEnabled: v,
+        });
       }
     },
     setCalcMethod: async (v) => {

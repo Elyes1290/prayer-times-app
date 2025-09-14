@@ -22,6 +22,7 @@
   "manual_city": "Handmatig (stad)",
   "city_placeholder": "Stad",
   "notifications": "Meldingen",
+  "dua_after_adhan": "Dua na Adhan",
   "calculation_method": "Berekeningsmethode",
   "preview": "Voorvertoning (20s)",
   "preview_playing": "Afspelen...",
@@ -337,6 +338,9 @@
     "premium_sync_success_message": "Premium gegevens gesynchroniseerd",
     "premium_sync_error_title": "Synchronisatiefout",
     "premium_sync_error_message": "Fout tijdens premium synchronisatie",
+    "already_premium": "Al Premium",
+    "renewal_detected": "Vernieuwing gedetecteerd",
+    "account_exists": "Account bestaat",
     "warning": "Waarschuwing",
 
     "download_error": "Download fout",

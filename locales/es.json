@@ -22,6 +22,7 @@
   "manual_city": "Manual (ciudad)",
   "city_placeholder": "Ciudad",
   "notifications": "Notificaciones",
+  "dua_after_adhan": "Dua después del Adhan",
   "calculation_method": "Método de cálculo",
   "preview": "Vista previa (20s)",
   "preview_playing": "Reproduciendo...",
@@ -336,6 +337,9 @@
     "premium_sync_success_message": "Datos premium sincronizados",
     "premium_sync_error_title": "Error de sincronización",
     "premium_sync_error_message": "Error durante la sincronización premium",
+    "already_premium": "Ya Premium",
+    "renewal_detected": "Renovación detectada",
+    "account_exists": "La cuenta existe",
     "warning": "Advertencia",
 
     "download_error": "Error de descarga",

@@ -577,11 +577,33 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
                   );
                 }
               } catch (userCheckError) {
-                // Erreur lors de la vérification utilisateur - continuer vers paiement
+                // Erreur lors de la vérification utilisateur - demander confirmation
                 console.log(
-                  "⚠️ Erreur vérification utilisateur, permettre le renouvellement:",
+                  "⚠️ Erreur vérification utilisateur:",
                   userCheckError
                 );
+
+                // Demander confirmation à l'utilisateur
+                Alert.alert(
+                  "Vérification impossible",
+                  "Impossible de vérifier si un compte existe déjà avec cet email. Voulez-vous continuer quand même ? (Si vous avez déjà un compte, connectez-vous plutôt)",
+                  [
+                    {
+                      text: "Annuler",
+                      style: "cancel",
+                      onPress: () => setIsLoading(false),
+                    },
+                    {
+                      text: "Continuer",
+                      onPress: () => {
+                        // Continuer vers paiement
+                        console.log("✅ Utilisateur confirme la continuation");
+                      },
+                    },
+                  ]
+                );
+                setIsLoading(false);
+                return;
               }
             }
 

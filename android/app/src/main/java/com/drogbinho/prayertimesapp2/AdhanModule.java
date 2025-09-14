@@ -877,6 +877,9 @@ public class AdhanModule extends ReactContextBaseJavaModule {
         if (settings.hasKey("enabledSelectedDua")) {
             editor.putBoolean("enabled_selected_dua", settings.getBoolean("enabledSelectedDua"));
         }
+        if (settings.hasKey("duaAfterAdhanEnabled")) {
+            editor.putBoolean("dua_after_adhan_enabled", settings.getBoolean("duaAfterAdhanEnabled"));
+        }
 
         // Sauvegarde du reminderOffset
         if (settings.hasKey("reminderOffset")) {

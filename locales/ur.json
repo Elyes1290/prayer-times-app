@@ -22,6 +22,7 @@
   "manual_city": "دستی (شہر)",
   "city_placeholder": "شہر",
   "notifications": "نوٹیفیکیشنز",
+  "dua_after_adhan": "اذان کے بعد دعا",
   "calculation_method": "حساب کا طریقہ",
   "preview": "پیش نظارہ (20s)",
   "preview_playing": "چل رہا ہے...",
@@ -337,6 +338,9 @@
     "premium_sync_success_message": "پریمیم ڈیٹا مطابقت کر دیا گیا",
     "premium_sync_error_title": "مطابقت کی خرابی",
     "premium_sync_error_message": "پریمیم مطابقت کے دوران خرابی",
+    "already_premium": "پہلے سے پریمیم",
+    "renewal_detected": "تجدید کا پتہ چلا",
+    "account_exists": "اکاؤنٹ موجود ہے",
     "warning": "انتباہ",
 
     "download_error": "ڈاؤن لوڈ کی خرابی",

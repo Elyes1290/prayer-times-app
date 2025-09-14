@@ -22,6 +22,7 @@
   "manual_city": "Manuel (şehir)",
   "city_placeholder": "Şehir",
   "notifications": "Bildirimler",
+  "dua_after_adhan": "Ezan Sonrası Dua",
   "calculation_method": "Hesaplama yöntemi",
   "preview": "Önizleme (20s)",
   "preview_playing": "Çalıyor...",
@@ -337,6 +338,9 @@
     "premium_sync_success_message": "Premium veriler senkronize edildi",
     "premium_sync_error_title": "Senkronizasyon hatası",
     "premium_sync_error_message": "Premium senkronizasyon sırasında hata",
+    "already_premium": "Zaten Premium",
+    "renewal_detected": "Yenileme tespit edildi",
+    "account_exists": "Hesap mevcut",
     "warning": "Uyarı",
 
     "download_error": "İndirme hatası",

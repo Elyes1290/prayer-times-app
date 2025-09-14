@@ -1,6 +1,5 @@
 import React from "react";
 import { View, Text, Switch } from "react-native";
-import { Picker } from "@react-native-picker/picker";
 import Slider from "@react-native-community/slider";
 import { useTranslation } from "react-i18next";
 
@@ -9,12 +8,11 @@ interface GeneralSectionProps {
   notificationsEnabled: boolean;
   remindersEnabled: boolean;
   reminderOffset: number;
-  selectedLang: string;
-  languages: { code: string; label: string }[];
+  duaAfterAdhanEnabled: boolean; // 🚀 NOUVEAU : Option pour la dua après l'adhan
 
   // Fonctions général
   handleNotificationsToggle: (value: boolean) => Promise<void>;
-  onChangeLanguage: (langCode: string) => void;
+  setDuaAfterAdhanEnabled: (value: boolean) => void; // 🚀 NOUVEAU : Setter pour la dua après l'adhan
   markPendingChanges: () => void;
   setRemindersEnabled: (value: boolean) => void;
   setReminderOffset: (value: number) => void;
@@ -27,10 +25,9 @@ export default function GeneralSection({
   notificationsEnabled,
   remindersEnabled,
   reminderOffset,
-  selectedLang,
-  languages,
+  duaAfterAdhanEnabled, // 🚀 NOUVEAU : Paramètre pour la dua après l'adhan
   handleNotificationsToggle,
-  onChangeLanguage,
+  setDuaAfterAdhanEnabled, // 🚀 NOUVEAU : Setter pour la dua après l'adhan
   markPendingChanges,
   setRemindersEnabled,
   setReminderOffset,
@@ -54,32 +51,21 @@ export default function GeneralSection({
                   onValueChange={handleNotificationsToggle}
                 />
               </View>
+              {notificationsEnabled && (
+                <View style={styles.row}>
+                  <Text style={styles.label}>
+                    {t("dua_after_adhan", "Dua après l'adhan")}
+                  </Text>
+                  <Switch
+                    value={duaAfterAdhanEnabled}
+                    onValueChange={(value) => {
+                      setDuaAfterAdhanEnabled(value);
+                      markPendingChanges();
+                    }}
+                  />
+                </View>
+              )}
             </>
-          ),
-        },
-        {
-          key: "language_select",
-          component: (
-            <View style={styles.row}>
-              <Text style={styles.label}>{t("language", "Langue")}</Text>
-              <View style={styles.pickerContainer}>
-                <Picker
-                  selectedValue={selectedLang}
-                  style={styles.picker}
-                  onValueChange={(itemValue) => onChangeLanguage(itemValue)}
-                  itemStyle={styles.pickerItem}
-                  mode="dropdown"
-                >
-                  {languages.map((lang) => (
-                    <Picker.Item
-                      key={lang.code}
-                      label={lang.label}
-                      value={lang.code}
-                    />
-                  ))}
-                </Picker>
-              </View>
-            </View>
           ),
         },
         {

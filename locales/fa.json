@@ -22,6 +22,7 @@
   "manual_city": "دستی (شهر)",
   "city_placeholder": "شهر",
   "notifications": "اعلان‌ها",
+  "dua_after_adhan": "دعا بعد از اذان",
   "calculation_method": "روش محاسبه",
   "preview": "پیش‌نمایش (۲۰ ثانیه)",
   "preview_playing": "در حال پخش...",
@@ -337,6 +338,9 @@
     "premium_sync_success_message": "داده‌های پریمیوم همگام‌سازی شدند",
     "premium_sync_error_title": "خطای همگام‌سازی",
     "premium_sync_error_message": "خطا در طول همگام‌سازی پریمیوم",
+    "already_premium": "قبلاً پریمیوم",
+    "renewal_detected": "تمدید تشخیص داده شد",
+    "account_exists": "حساب موجود است",
     "warning": "هشدار",
 
     "download_error": "خطای دانلود",

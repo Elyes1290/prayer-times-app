@@ -22,6 +22,7 @@
   "manual_city": "Manuell (Stadt)",
   "city_placeholder": "Stadt",
   "notifications": "Benachrichtigungen",
+  "dua_after_adhan": "Dua nach Adhan",
   "calculation_method": "Berechnungsmethode",
   "preview": "Vorschau (20s)",
   "preview_playing": "Wird abgespielt...",
@@ -337,6 +338,9 @@
     "premium_sync_success_message": "Premium-Daten synchronisiert",
     "premium_sync_error_title": "Synchronisationsfehler",
     "premium_sync_error_message": "Fehler bei der Premium-Synchronisation",
+    "already_premium": "Bereits Premium",
+    "renewal_detected": "Verlängerung erkannt",
+    "account_exists": "Konto existiert",
     "warning": "Warnung",
 
     "download_error": "Download-Fehler",

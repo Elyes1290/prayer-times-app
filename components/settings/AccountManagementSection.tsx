@@ -56,14 +56,39 @@ export default function AccountManagementSection({
           const parsedData = JSON.parse(userData);
           console.log("🔍 [DEBUG] Données utilisateur complètes:", parsedData);
           setRealUserData(parsedData);
+        } else {
+          // Si pas de données, réinitialiser
+          setRealUserData(null);
         }
       } catch (error) {
         console.error("❌ Erreur chargement données utilisateur:", error);
+        setRealUserData(null);
       }
     };
 
     loadRealUserData();
-  }, []);
+  }, [user]); // 🔧 CORRECTION : Ajouter user comme dépendance pour se mettre à jour
+
+  // 🔧 CORRECTION : Recharger les données quand l'utilisateur change de statut
+  useEffect(() => {
+    if (user?.isPremium !== realUserData?.isPremium) {
+      console.log(
+        "🔄 [RELOAD] Statut utilisateur changé, rechargement des données..."
+      );
+      const reloadData = async () => {
+        try {
+          const userData = await AsyncStorage.getItem("user_data");
+          if (userData) {
+            const parsedData = JSON.parse(userData);
+            setRealUserData(parsedData);
+          }
+        } catch (error) {
+          console.error("❌ Erreur rechargement données:", error);
+        }
+      };
+      reloadData();
+    }
+  }, [user?.isPremium, realUserData?.isPremium]);
 
   // 🎯 Utiliser les vraies données si disponibles, sinon fallback sur user
   const userData = realUserData || user;
@@ -367,95 +392,121 @@ export default function AccountManagementSection({
         <View style={styles.subscriptionInfo}>
           <View style={styles.subscriptionRow}>
             <Text style={styles.subscriptionLabel}>Statut</Text>
-            <View style={styles.premiumBadge}>
-              <MaterialCommunityIcons name="crown" size={16} color="#FFD700" />
-              <Text style={styles.premiumBadgeText}>Premium Actif</Text>
+            <View
+              style={[
+                styles.premiumBadge,
+                {
+                  backgroundColor: user?.isPremium
+                    ? "rgba(255, 215, 0, 0.1)"
+                    : "rgba(107, 114, 128, 0.1)",
+                },
+              ]}
+            >
+              <MaterialCommunityIcons
+                name={user?.isPremium ? "crown" : "account"}
+                size={16}
+                color={user?.isPremium ? "#FFD700" : "#6B7280"}
+              />
+              <Text
+                style={[
+                  styles.premiumBadgeText,
+                  { color: user?.isPremium ? "#FFD700" : "#6B7280" },
+                ]}
+              >
+                {user?.isPremium ? "Premium Actif" : "Gratuit"}
+              </Text>
             </View>
           </View>
 
           <View style={styles.subscriptionRow}>
             <Text style={styles.subscriptionLabel}>Type</Text>
             <Text style={styles.subscriptionValue}>
-              {userData?.subscription_type === "monthly"
-                ? "Abonnement Mensuel"
-                : userData?.subscription_type === "yearly"
-                ? "Abonnement Annuel"
-                : userData?.subscription_type === "family"
-                ? "Abonnement Familial"
-                : userData?.subscription_type || "Type non défini"}
+              {user?.isPremium
+                ? userData?.subscription_type === "monthly"
+                  ? "Abonnement Mensuel"
+                  : userData?.subscription_type === "yearly"
+                  ? "Abonnement Annuel"
+                  : userData?.subscription_type === "family"
+                  ? "Abonnement Familial"
+                  : userData?.subscription_type || "Type non défini"
+                : "Version Gratuite"}
             </Text>
           </View>
 
-          <View style={styles.subscriptionRow}>
-            <Text style={styles.subscriptionLabel}>Prochaine facturation</Text>
-            <Text style={styles.subscriptionValue}>
-              {(() => {
-                // 🔍 Debug des données disponibles
-                console.log("🔍 [DEBUG] userData pour facturation:", {
-                  premium_activated_at: userData?.premium_activated_at,
-                  subscription_type: userData?.subscription_type,
-                  premium_expiry: userData?.premium_expiry,
-                  created_at: userData?.created_at,
-                });
+          {user?.isPremium && (
+            <View style={styles.subscriptionRow}>
+              <Text style={styles.subscriptionLabel}>
+                Prochaine facturation
+              </Text>
+              <Text style={styles.subscriptionValue}>
+                {(() => {
+                  // 🔍 Debug des données disponibles
+                  console.log("🔍 [DEBUG] userData pour facturation:", {
+                    premium_activated_at: userData?.premium_activated_at,
+                    subscription_type: userData?.subscription_type,
+                    premium_expiry: userData?.premium_expiry,
+                    created_at: userData?.created_at,
+                  });
 
-                if (!userData?.subscription_type) {
-                  return `Non disponible (Manque: type abo)`;
-                }
+                  if (!userData?.subscription_type) {
+                    return `Non disponible (Manque: type abo)`;
+                  }
 
-                // 🔧 Fallback si premium_activated_at manque
-                let activationDate = userData.premium_activated_at;
-                if (!activationDate) {
-                  // Utiliser created_at, updated_at, ou la date actuelle moins 1 mois comme fallback
-                  activationDate =
-                    userData.created_at ||
-                    userData.updated_at ||
-                    new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
+                  // 🔧 Fallback si premium_activated_at manque
+                  let activationDate = userData.premium_activated_at;
+                  if (!activationDate) {
+                    // Utiliser created_at, updated_at, ou la date actuelle moins 1 mois comme fallback
+                    activationDate =
+                      userData.created_at ||
+                      userData.updated_at ||
+                      new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
+                    console.log(
+                      "⚠️ [FALLBACK] Utilisation date fallback pour activation:",
+                      activationDate
+                    );
+                  } else {
+                    console.log(
+                      "✅ [OK] Utilisation premium_activated_at:",
+                      activationDate
+                    );
+                  }
+
+                  const activatedDate = new Date(activationDate);
                   console.log(
-                    "⚠️ [FALLBACK] Utilisation date fallback pour activation:",
-                    activationDate
+                    "📅 [DEBUG] Date d'activation:",
+                    activatedDate.toLocaleDateString("fr-FR")
                   );
-                } else {
-                  console.log(
-                    "✅ [OK] Utilisation premium_activated_at:",
-                    activationDate
-                  );
-                }
 
-                const activatedDate = new Date(activationDate);
-                console.log(
-                  "📅 [DEBUG] Date d'activation:",
-                  activatedDate.toLocaleDateString("fr-FR")
-                );
+                  let nextBilling = new Date(activatedDate);
 
-                let nextBilling = new Date(activatedDate);
+                  // Calculer la prochaine facturation selon le type
+                  if (userData.subscription_type === "monthly") {
+                    nextBilling.setMonth(nextBilling.getMonth() + 1);
+                    console.log(
+                      "📅 [DEBUG] +1 mois = ",
+                      nextBilling.toLocaleDateString("fr-FR")
+                    );
+                  } else if (
+                    userData.subscription_type === "yearly" ||
+                    userData.subscription_type === "family"
+                  ) {
+                    nextBilling.setFullYear(nextBilling.getFullYear() + 1);
+                    console.log(
+                      "📅 [DEBUG] +1 an = ",
+                      nextBilling.toLocaleDateString("fr-FR")
+                    );
+                  }
 
-                // Calculer la prochaine facturation selon le type
-                if (userData.subscription_type === "monthly") {
-                  nextBilling.setMonth(nextBilling.getMonth() + 1);
-                  console.log(
-                    "📅 [DEBUG] +1 mois = ",
-                    nextBilling.toLocaleDateString("fr-FR")
-                  );
-                } else if (
-                  userData.subscription_type === "yearly" ||
-                  userData.subscription_type === "family"
-                ) {
-                  nextBilling.setFullYear(nextBilling.getFullYear() + 1);
-                  console.log(
-                    "📅 [DEBUG] +1 an = ",
-                    nextBilling.toLocaleDateString("fr-FR")
-                  );
-                }
-
-                // Formatage en français
-                return nextBilling.toLocaleDateString("fr-FR", {
-                  day: "numeric",
-                  month: "long",
-                  year: "numeric",
-                });
-              })()}
-            </Text>
-          </View>
+                  // Formatage en français
+                  return nextBilling.toLocaleDateString("fr-FR", {
+                    day: "numeric",
+                    month: "long",
+                    year: "numeric",
+                  });
+                })()}
+              </Text>
+            </View>
+          )}
         </View>
       </View>
 

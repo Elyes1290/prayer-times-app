@@ -22,6 +22,7 @@
   "manual_city": "ম্যানুয়াল (শহর)",
   "city_placeholder": "শহর",
   "notifications": "বিজ্ঞপ্তি",
+  "dua_after_adhan": "আজানের পর দুয়া",
   "calculation_method": "গণনা পদ্ধতি",
   "preview": "পূর্বরূপ (২০ সেকেন্ড)",
   "preview_playing": "চলছে...",
@@ -337,6 +338,9 @@
     "premium_sync_success_message": "প্রিমিয়াম ডেটা সিঙ্ক্রোনাইজ করা হয়েছে",
     "premium_sync_error_title": "সিঙ্ক্রোনাইজেশন ত্রুটি",
     "premium_sync_error_message": "প্রিমিয়াম সিঙ্ক্রোনাইজেশনের সময় ত্রুটি",
+    "already_premium": "ইতিমধ্যে প্রিমিয়াম",
+    "renewal_detected": "নবায়ন সনাক্ত করা হয়েছে",
+    "account_exists": "অ্যাকাউন্ট বিদ্যমান",
     "warning": "সতর্কতা",
 
     "download_error": "ডাউনলোড ত্রুটি",

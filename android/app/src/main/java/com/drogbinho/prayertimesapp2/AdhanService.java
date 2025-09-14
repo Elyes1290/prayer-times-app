@@ -518,6 +518,16 @@ public class AdhanService extends Service {
     }
 
     private void playDuaAfterAdhan(String prayerLabelForCompletion) {
+        // 🚀 NOUVEAU : Vérifier si la dua après l'adhan est activée
+        SharedPreferences settingsPrefs = getSharedPreferences("prayer_times_settings", MODE_PRIVATE);
+        boolean duaAfterAdhanEnabled = settingsPrefs.getBoolean("dua_after_adhan_enabled", false); // Par défaut désactivé
+        
+        if (!duaAfterAdhanEnabled) {
+            debugLog(TAG, "Dua après adhan désactivée par l'utilisateur. Passage direct à la terminaison finale.");
+            handleFinalCompletion(prayerLabelForCompletion);
+            return;
+        }
+
         SharedPreferences adhanPrefs = getSharedPreferences("adhan_prefs", MODE_PRIVATE);
         float volume = adhanPrefs.getFloat("adhan_volume", 1.0f);
 
