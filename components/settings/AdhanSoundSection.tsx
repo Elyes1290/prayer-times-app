@@ -270,7 +270,7 @@ export default function AdhanSoundSection({
           </View>
           <View style={styles.previewControlsContainer}>
             <Text style={styles.previewInfo}>
-              {t("preview_limited", "Preview limitée à 20 secondes")}
+              {t("adhans.preview_limited", "Preview limitée à 20 secondes")}
             </Text>
             <View style={styles.previewControls}>
               <TouchableOpacity
@@ -433,7 +433,7 @@ export default function AdhanSoundSection({
                                   color="#4ECDC4"
                                 />
                                 <Text style={styles.downloadedText}>
-                                  {t("downloaded")}
+                                  {t("settings_screen.downloaded")}
                                 </Text>
                               </View>
                               <TouchableOpacity

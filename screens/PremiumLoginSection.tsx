@@ -537,8 +537,10 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
                     showLocalToast({
                       type: "info",
                       title: t("toasts.already_premium"),
-                      message:
-                        "Vous avez déjà un abonnement premium actif. Connectez-vous pour accéder à vos fonctionnalités.",
+                      message: t(
+                        "toasts.already_premium_message",
+                        "Vous avez déjà un abonnement premium actif. Connectez-vous pour accéder à vos fonctionnalités."
+                      ),
                     });
                     setIsLoading(false);
                     return;
@@ -555,8 +557,10 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
                     showLocalToast({
                       type: "info",
                       title: t("toasts.renewal_detected"),
-                      message:
-                        "Compte existant détecté. Votre abonnement sera renouvelé.",
+                      message: t(
+                        "toasts.renewal_detected_message",
+                        "Compte existant détecté. Votre abonnement sera renouvelé."
+                      ),
                     });
                     // Continuer vers le paiement pour renouvellement
                   } else {
@@ -564,8 +568,10 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
                     showLocalToast({
                       type: "info",
                       title: t("toasts.account_exists"),
-                      message:
-                        "Un compte existe avec cet email. Connectez-vous pour gérer votre abonnement.",
+                      message: t(
+                        "toasts.account_exists_message",
+                        "Un compte existe avec cet email. Connectez-vous pour gérer votre abonnement."
+                      ),
                     });
                     setIsLoading(false);
                     return;
@@ -1250,7 +1256,9 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
                 color="#FFF"
               />
               <Text style={localStyles.authButtonText}>
-                {isLogin ? "Se connecter" : "S'inscrire"}
+                {isLogin
+                  ? t("auth_modal.login_button")
+                  : t("auth_modal.register_button")}
               </Text>
             </>
           )}
@@ -1263,8 +1271,8 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
           <MaterialCommunityIcons name="information" size={16} color="#666" />
           <Text style={localStyles.infoText}>
             {isLogin
-              ? "Connectez-vous avec votre email et mot de passe."
-              : "Cliquez sur les icônes ℹ️ pour voir les détails de chaque champ."}
+              ? t("auth_modal.info_text_login")
+              : t("auth_modal.info_text_register")}
           </Text>
         </View>
 

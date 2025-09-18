@@ -956,7 +956,7 @@ function SettingsSections({
 
             {/* 🚀 NOUVEAU : État de connexion */}
             <View style={styles.row}>
-              <Text style={styles.label}>Statut</Text>
+              <Text style={styles.label}>{t("status", "Statut")}</Text>
               <View style={styles.premiumStatusContainer}>
                 <MaterialCommunityIcons
                   name={user?.isPremium ? "crown" : "account"}
@@ -969,7 +969,9 @@ function SettingsSections({
                     { color: user?.isPremium ? "#FFD700" : "#666" },
                   ]}
                 >
-                  {user?.isPremium ? "Premium" : "Gratuit"}
+                  {user?.isPremium
+                    ? t("premium", "Premium")
+                    : t("free", "Gratuit")}
                 </Text>
               </View>
             </View>
@@ -977,16 +979,22 @@ function SettingsSections({
             {user && (
               <>
                 <View style={styles.row}>
-                  <Text style={styles.label}>Compte</Text>
+                  <Text style={styles.label}>
+                    {t("account_label", "Compte")}
+                  </Text>
                   <Text style={styles.settingValue}>
-                    {user.user_first_name || user.email || "Utilisateur"}
+                    {user.user_first_name ||
+                      user.email ||
+                      t("user", "Utilisateur")}
                   </Text>
                 </View>
                 <TouchableOpacity
                   style={[styles.row, { marginTop: 8 }]}
                   onPress={() => setActiveSection("account_management")}
                 >
-                  <Text style={styles.label}>Gérer le compte</Text>
+                  <Text style={styles.label}>
+                    {t("manage_account", "Gérer le compte")}
+                  </Text>
                   <MaterialCommunityIcons
                     name="account-cog"
                     size={20}

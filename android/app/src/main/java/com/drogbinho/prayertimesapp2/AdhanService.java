@@ -240,6 +240,8 @@ public class AdhanService extends Service {
         SharedPreferences adhanPrefs = getSharedPreferences("adhan_prefs", MODE_PRIVATE);
         String soundFromPrefs = adhanPrefs.getString("ADHAN_SOUND", "misharyrachid");
         String soundToPlay = (adhanSoundKey != null) ? adhanSoundKey : soundFromPrefs;
+        
+        
         float volume = adhanPrefs.getFloat("adhan_volume", 1.0f);
 
         debugLog(TAG, "🔊 ============ DEBUG SONS ADHAN ============");
@@ -1609,6 +1611,7 @@ public class AdhanService extends Service {
         }
         return localizedName;
     }
+
 
     private void scheduleAdhanAlarmInternalWithSuffix(Context context, AlarmManager alarmManager, String prayerName,
             long triggerAtMillis, String adhanSound, String language, String suffix) {

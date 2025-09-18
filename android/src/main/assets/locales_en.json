@@ -54,8 +54,8 @@
 
   "adhan_sound": "Adhan choice",
   "adhan_sounds": {
-    "adhamalsharqawe": "Adhan Sharqaoui",
-    "adhanaljazaer": "Algerian Adhan",
+    "adhamalsharqawe": "Sharqawi Adhan",
+    "adhanaljazaer": "Adhan Al Jazaer",
     "ahmadnafees": "Ahmad Nafees",
     "ahmedelkourdi": "Ahmed El Kourdi",
     "dubai": "Dubai Adhan",
@@ -65,8 +65,8 @@
     "mustafaozcan": "Mustafa Ozcan"
   },
 
-  "sound_adhamalsharqawe": "Adhan Sharqaoui",
-  "sound_adhanaljazaer": "Algerian Adhan",
+  "sound_adhamalsharqawe": "Sharqawi Adhan",
+  "sound_adhanaljazaer": "Adhan Al Jazaer",
   "sound_ahmadnafees": "Ahmad Nafees",
   "sound_ahmedelkourdi": "Ahmed El Kourdi",
   "sound_dubai": "Dubai Adhan",

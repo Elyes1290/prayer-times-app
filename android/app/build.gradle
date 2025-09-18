@@ -96,7 +96,7 @@ android {
         applicationId 'com.drogbinho.prayertimesapp2'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 72
+        versionCode 74
         versionName "1.0.0"
     }
     signingConfigs {

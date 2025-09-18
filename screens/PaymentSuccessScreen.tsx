@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Alert } from "react-native";
 import { useRouter } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useTranslation } from "react-i18next";
 import { usePremium } from "../contexts/PremiumContext";
 import {
   syncUserAfterPayment,
@@ -12,6 +13,7 @@ import {
 
 const PaymentSuccessScreen: React.FC = () => {
   const router = useRouter();
+  const { t } = useTranslation();
   const [isProcessing, setIsProcessing] = useState(false);
   const [syncResult, setSyncResult] = useState<PaymentSyncResult | null>(null);
   const { activatePremium, checkPremiumStatus } = usePremium();
@@ -142,34 +144,37 @@ const PaymentSuccessScreen: React.FC = () => {
 
   const getMessage = () => {
     if (isProcessing) {
-      return "Création de votre compte en cours...";
+      return t("processing_payment", "Création de votre compte en cours...");
     }
 
     if (syncResult?.success) {
-      return "Votre compte a été créé et vous êtes maintenant connecté !";
+      return t(
+        "account_created_connected",
+        "Votre compte a été créé et vous êtes maintenant connecté !"
+      );
     }
 
     if (syncResult?.requiresManualLogin) {
-      return "Votre compte a été créé ! Veuillez vous connecter manuellement.";
+      return t("account_created_manual_login");
     }
 
-    return "Votre compte a été créé avec succès !";
+    return t("account_created_success");
   };
 
   const getButtonText = () => {
     if (isProcessing) {
-      return "Traitement...";
+      return t("processing");
     }
 
     if (syncResult?.success) {
-      return "Voir mon compte";
+      return t("view_my_account");
     }
 
     if (syncResult?.requiresManualLogin) {
-      return "Se connecter";
+      return t("auth_modal.login_button");
     }
 
-    return "Continuer";
+    return t("continue");
   };
 
   const handleButtonPress = () => {

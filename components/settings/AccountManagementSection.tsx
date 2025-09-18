@@ -264,7 +264,9 @@ export default function AccountManagementSection({
 
   return (
     <View style={{ padding: 16 }}>
-      <Text style={styles.sectionTitle}>👤 Gestion du compte</Text>
+      <Text style={styles.sectionTitle}>
+        👤 {t("manage_account", "Gestion du compte")}
+      </Text>
 
       {/* Section Profil */}
       <View style={[styles.accountSection, { marginTop: 20 }]}>
@@ -275,7 +277,7 @@ export default function AccountManagementSection({
             color="#4ECDC4"
           />
           <Text style={styles.accountSectionTitle}>
-            Informations personnelles
+            {t("personal_information", "Informations personnelles")}
           </Text>
           <TouchableOpacity
             style={styles.editButton}
@@ -295,13 +297,15 @@ export default function AccountManagementSection({
             <View style={{ alignItems: "center", padding: 20 }}>
               <ActivityIndicator size="small" color="#4ECDC4" />
               <Text style={[styles.inputLabel, { marginTop: 8 }]}>
-                Chargement des données...
+                {t("loading_data", "Chargement des données...")}
               </Text>
             </View>
           ) : (
             <>
               <View style={styles.inputGroup}>
-                <Text style={styles.inputLabel}>Prénom</Text>
+                <Text style={styles.inputLabel}>
+                  {t("first_name", "Prénom")}
+                </Text>
                 {isEditing ? (
                   <TextInput
                     style={styles.accountInput}
@@ -314,13 +318,15 @@ export default function AccountManagementSection({
                   />
                 ) : (
                   <Text style={styles.inputValue}>
-                    {userFirstName || "Non renseigné"}
+                    {userFirstName || t("not_provided", "Non renseigné")}
                   </Text>
                 )}
               </View>
 
               <View style={styles.inputGroup}>
-                <Text style={styles.inputLabel}>Email</Text>
+                <Text style={styles.inputLabel}>
+                  {t("email_address", "Email")}
+                </Text>
                 {isEditing ? (
                   <TextInput
                     style={styles.accountInput}
@@ -335,7 +341,7 @@ export default function AccountManagementSection({
                   />
                 ) : (
                   <Text style={styles.inputValue}>
-                    {userEmail || "Non renseigné"}
+                    {userEmail || t("not_provided", "Non renseigné")}
                   </Text>
                 )}
               </View>
@@ -351,7 +357,9 @@ export default function AccountManagementSection({
                     }}
                     disabled={isLoading}
                   >
-                    <Text style={styles.cancelButtonText}>Annuler</Text>
+                    <Text style={styles.cancelButtonText}>
+                      {t("cancel", "Annuler")}
+                    </Text>
                   </TouchableOpacity>
 
                   <TouchableOpacity
@@ -371,7 +379,9 @@ export default function AccountManagementSection({
                           size={20}
                           color="#FFFFFF"
                         />
-                        <Text style={styles.saveButtonText}>Sauvegarder</Text>
+                        <Text style={styles.saveButtonText}>
+                          {t("save", "Sauvegarder")}
+                        </Text>
                       </>
                     )}
                   </TouchableOpacity>
@@ -386,12 +396,16 @@ export default function AccountManagementSection({
       <View style={[styles.accountSection, { marginTop: 16 }]}>
         <View style={styles.accountSectionHeader}>
           <MaterialCommunityIcons name="crown" size={24} color="#FFD700" />
-          <Text style={styles.accountSectionTitle}>Abonnement Premium</Text>
+          <Text style={styles.accountSectionTitle}>
+            {t("premium_subscription", "Abonnement Premium")}
+          </Text>
         </View>
 
         <View style={styles.subscriptionInfo}>
           <View style={styles.subscriptionRow}>
-            <Text style={styles.subscriptionLabel}>Statut</Text>
+            <Text style={styles.subscriptionLabel}>
+              {t("status", "Statut")}
+            </Text>
             <View
               style={[
                 styles.premiumBadge,
@@ -413,30 +427,33 @@ export default function AccountManagementSection({
                   { color: user?.isPremium ? "#FFD700" : "#6B7280" },
                 ]}
               >
-                {user?.isPremium ? "Premium Actif" : "Gratuit"}
+                {user?.isPremium
+                  ? t("premium_active", "Premium Actif")
+                  : t("free", "Gratuit")}
               </Text>
             </View>
           </View>
 
           <View style={styles.subscriptionRow}>
-            <Text style={styles.subscriptionLabel}>Type</Text>
+            <Text style={styles.subscriptionLabel}>{t("type", "Type")}</Text>
             <Text style={styles.subscriptionValue}>
               {user?.isPremium
                 ? userData?.subscription_type === "monthly"
-                  ? "Abonnement Mensuel"
+                  ? t("monthly_subscription", "Abonnement Mensuel")
                   : userData?.subscription_type === "yearly"
-                  ? "Abonnement Annuel"
+                  ? t("yearly_subscription", "Abonnement Annuel")
                   : userData?.subscription_type === "family"
-                  ? "Abonnement Familial"
-                  : userData?.subscription_type || "Type non défini"
-                : "Version Gratuite"}
+                  ? t("family_subscription", "Abonnement Familial")
+                  : userData?.subscription_type ||
+                    t("type_undefined", "Type non défini")
+                : t("free_version", "Version Gratuite")}
             </Text>
           </View>
 
           {user?.isPremium && (
             <View style={styles.subscriptionRow}>
               <Text style={styles.subscriptionLabel}>
-                Prochaine facturation
+                {t("next_billing", "Prochaine facturation")}
               </Text>
               <Text style={styles.subscriptionValue}>
                 {(() => {
@@ -518,7 +535,9 @@ export default function AccountManagementSection({
             size={24}
             color="#6C5CE7"
           />
-          <Text style={styles.accountSectionTitle}>Sécurité</Text>
+          <Text style={styles.accountSectionTitle}>
+            {t("security", "Sécurité")}
+          </Text>
         </View>
 
         <TouchableOpacity
@@ -526,7 +545,9 @@ export default function AccountManagementSection({
           onPress={() => setShowChangePasswordModal(true)}
         >
           <MaterialCommunityIcons name="key" size={20} color="#6C5CE7" />
-          <Text style={styles.securityOptionText}>Changer le mot de passe</Text>
+          <Text style={styles.securityOptionText}>
+            {t("change_password", "Changer le mot de passe")}
+          </Text>
           <MaterialCommunityIcons
             name="chevron-right"
             size={20}
@@ -550,7 +571,7 @@ export default function AccountManagementSection({
             color="#6C5CE7"
           />
           <Text style={styles.securityOptionText}>
-            Authentification à deux facteurs
+            {t("two_factor_auth", "Authentification à deux facteurs")}
           </Text>
           <MaterialCommunityIcons
             name="chevron-right"
@@ -585,7 +606,9 @@ export default function AccountManagementSection({
 
         <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
           <MaterialCommunityIcons name="logout" size={20} color="#FF6B6B" />
-          <Text style={styles.logoutButtonText}>Se déconnecter</Text>
+          <Text style={styles.logoutButtonText}>
+            {t("logout", "Se déconnecter")}
+          </Text>
         </TouchableOpacity>
 
         <TouchableOpacity
@@ -609,7 +632,7 @@ export default function AccountManagementSection({
             color="#EF4444"
           />
           <Text style={styles.deleteAccountButtonText}>
-            Supprimer le compte
+            {t("delete_account", "Supprimer le compte")}
           </Text>
         </TouchableOpacity>
       </View>

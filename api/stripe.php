@@ -586,7 +586,7 @@ elseif ($_SERVER['REQUEST_METHOD'] === 'POST' && $_SERVER['REQUEST_URI'] === '/a
 
 
 
-// Route pour créer un payment intent (ancienne approche)
+// Route pour créer un payment intent
 // ✅ SÉCURISÉ : Route pour créer un payment intent
 elseif ($_SERVER['REQUEST_METHOD'] === 'POST' && $_SERVER['REQUEST_URI'] === '/api/stripe/create-payment-intent') {
     try {

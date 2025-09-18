@@ -40,7 +40,7 @@
   },
   "adhan_sound": "Elección de Adhan",
   "adhan_sounds": {
-    "adhamalsharqawe": "Adhan Sharqaoui",
+    "adhamalsharqawe": "Sharqawi Adhan",
     "adhanaljazaer": "Adhan Argelino",
     "ahmadnafees": "Ahmad Nafees",
     "ahmedelkourdi": "Ahmed El Kourdi",
@@ -144,7 +144,7 @@
   "method_Singapore": "Singapur",
   "method_Tehran": "Teherán",
   "method_Turkey": "Turquía",
-  "sound_adhamalsharqawe": "Adhan Sharqaoui",
+  "sound_adhamalsharqawe": "Sharqawi Adhan",
   "sound_adhanaljazaer": "Adhan Argelino",
   "sound_ahmadnafees": "Ahmad Nafees",
   "sound_ahmedelkourdi": "Ahmed El Kourdi",

@@ -59,30 +59,30 @@
 
   "adhan_sound": "اختيار الأذان",
   "adhan_sounds": {
-    "adhamalsharqawe": "أذان شرقاوي",
-    "adhanaljazaer": "أذان جزائري",
-    "ahmadnafees": "أحمد نافيس",
-    "ahmedelkourdi": "أحمد الكردي",
-    "dubai": "أذان دبي",
-    "karljenkins": "كارل جنكينز",
-    "mansourzahrani": "منصور زهراني",
-    "misharyrachid": "مشاري راشد",
-    "mustafaozcan": "مصطفى أوزكان",
-    "masjidquba": "مسجد قباء",
-    "islamsobhi": "إسلام صبحي"
+    "adhamalsharqawe": "Sharqawi Adhan",
+    "adhanaljazaer": "Adhan Al Jazaer",
+    "ahmadnafees": "Ahmad Nafees",
+    "ahmedelkourdi": "Ahmed El Kourdi",
+    "dubai": "Dubai Adhan",
+    "karljenkins": "Karl Jenkins",
+    "mansourzahrani": "Mansour Zahrani",
+    "misharyrachid": "Mishary Rashid",
+    "mustafaozcan": "Mustafa Ozcan",
+    "masjidquba": "Masjid Al-Quba",
+    "islamsobhi": "Islam Sobhi"
   },
 
-  "sound_adhamalsharqawe": "أذان شرقاوي",
-  "sound_adhanaljazaer": "أذان جزائري",
-  "sound_ahmadnafees": "أحمد نافيس",
-  "sound_ahmedelkourdi": "أحمد الكردي",
-  "sound_dubai": "أذان دبي",
-  "sound_karljenkins": "كارل جنكينز",
-  "sound_mansourzahrani": "منصور زهراني",
-  "sound_misharyrachid": "مشاري راشد",
-  "sound_mustafaozcan": "مصطفى أوزكان",
-  "sound_masjidquba": "مسجد قباء",
-  "sound_islamsobhi": "إسلام صبحي",
+  "sound_adhamalsharqawe": "Sharqawi Adhan",
+  "sound_adhanaljazaer": "Adhan Al Jazaer",
+  "sound_ahmadnafees": "Ahmad Nafees",
+  "sound_ahmedelkourdi": "Ahmed El Kourdi",
+  "sound_dubai": "Dubai Adhan",
+  "sound_karljenkins": "Karl Jenkins",
+  "sound_mansourzahrani": "Mansour Zahrani",
+  "sound_misharyrachid": "Mishary Rashid",
+  "sound_mustafaozcan": "Mustafa Ozcan",
+  "sound_masjidquba": "Masjid Al-Quba",
+  "sound_islamsobhi": "Islam Sobhi",
 
   "hijri_calendar": "التقويم الهجري",
   "gregorian_date": "التاريخ الميلادي",
@@ -108,6 +108,37 @@
   "book_unavailable": "هذا الكتاب غير متاح بعد.",
   "no_text": "لا يوجد نص لهذا الحديث.",
   "about": "حول",
+  "status": "الحالة",
+  "premium": "مميز",
+  "free": "مجاني",
+  "account_label": "الحساب",
+  "user": "مستخدم",
+  "manage_account": "إدارة الحساب",
+  "license": "الترخيص",
+  "license_text": "هذا التطبيق مطور بحب للمجتمع المسلم.",
+  "personal_information": "المعلومات الشخصية",
+  "first_name": "الاسم الأول",
+  "email_address": "البريد الإلكتروني",
+  "premium_subscription": "الاشتراك المميز",
+  "security": "الأمان",
+  "change_password": "تغيير كلمة المرور",
+  "two_factor_auth": "المصادقة الثنائية",
+  "logout": "تسجيل الخروج",
+  "delete_account": "حذف الحساب",
+  "save": "حفظ",
+  "cancel": "إلغاء",
+  "premium_active": "مميز نشط",
+  "monthly_subscription": "اشتراك شهري",
+  "yearly_subscription": "اشتراك سنوي",
+  "family_subscription": "اشتراك عائلي",
+  "type_undefined": "نوع غير محدد",
+  "free_version": "إصدار مجاني",
+  "not_provided": "غير مقدم",
+  "next_billing": "الفاتورة التالية",
+  "loading_data": "جاري تحميل البيانات...",
+  "version": "الإصدار",
+  "developer": "المطور",
+  "last_update": "آخر تحديث",
   "abouts": {
     "title": "حول التطبيق",
     "subtitle": "تطبيق إسلامي شامل",
@@ -222,6 +253,11 @@
     "version": "الإصدار",
     "build": "البناء",
     "last_update": "آخر تحديث:",
+    "status_title": "الحالة",
+    "premium_status": "مميز",
+    "free_status": "النسخة المجانية",
+    "active": "نشط",
+    "expires_on": "ينتهي في",
     "footer_thanks": "جزاك الله خيراً لاستخدام هذا التطبيق! 🤲",
     "closing_dua": "رَبَّنَا تَقَبَّلْ مِنَّا إِنَّكَ أَنتَ السَّمِيعُ الْعَلِيمُ"
   },
@@ -1218,6 +1254,7 @@
     "developer": "المطور",
     "last_update": "آخر تحديث",
     "app_description": "هذا التطبيق مطور بحب للمجتمع المسلم.",
+    "version": "الإصدار",
     "faq_text": "الأسئلة الشائعة",
     "notifications_reprogrammed": "تم إعادة برمجة الإشعارات",
     "notifications_new_settings": "سيتم أخذ إعداداتك الجديدة في الاعتبار للإشعارات القادمة.",
@@ -1321,7 +1358,14 @@
     "tab_achievements": "الإنجازات",
     "time_window": "النافذة الزمنية",
     "goal_soon_customizable": "هدفك سيكون قابل للتخصيص قريباً!",
-    "weekly_goal_desc": "عدد الصلوات المستهدفة أسبوعياً"
+    "weekly_goal_desc": "عدد الصلوات المستهدفة أسبوعياً",
+
+    "quran_widget_available": "الودجت متاح على الشاشة الرئيسية",
+    "quran_widget_add": "أضف الودجت إلى الشاشة الرئيسية",
+    "quran_widget_active": "نشط",
+    "quran_widget_inactive": "غير نشط",
+    "quran_widget_title": "ودجت القرآن الكريم المميز",
+    "quran_widget_description": "تحكم في تشغيل القرآن من الشاشة الرئيسية"
   },
 
   "premium_ui": {
@@ -1405,5 +1449,30 @@
   "advanced_tactile": "أدوات التحكم اللمسية المتقدمة",
   "optimized_downloads": "التحميلات الأصلية المحسنة",
   "smart_mosque_finder": "الباحث الذكي عن المساجد",
-  "complete_backup_system": "نظام النسخ الاحتياطي الكامل"
+  "complete_backup_system": "نظام النسخ الاحتياطي الكامل",
+  "apply_changes_title": "تطبيق التغييرات",
+  "apply_changes_message": "هل تريد تطبيق جميع التغييرات وإعادة جدولة الإشعارات؟",
+  "apply_and_reprogram": "تطبيق وإعادة برمجة",
+  "reprogram_notifications": "الإشعارات • الأذان • الذكر",
+  "apply": "تطبيق",
+  "help": "المساعدة",
+  "contact_support": "اتصل بالدعم",
+  "support_email": "myadhanapp@gmail.com",
+  "faq": "الأسئلة الشائعة",
+  "tutorial": "البرنامج التعليمي",
+  "tutorial_text": "دليل استخدام التطبيق",
+  "feedback": "التعليقات",
+  "feedback_text": "شارك رأيك حول التطبيق",
+  "processing": "جاري المعالجة...",
+  "view_my_account": "عرض حسابي",
+  "continue": "متابعة",
+  "account_created_manual_login": "تم إنشاء حسابك! يرجى تسجيل الدخول يدوياً.",
+  "account_created_success": "تم إنشاء حسابك بنجاح!",
+  "processing_payment": "جاري إنشاء حسابك...",
+  "account_created_connected": "تم إنشاء حسابك وأنت متصل الآن!",
+  "toasts": {
+    "already_premium_message": "لديك بالفعل اشتراك بريميوم نشط. سجل الدخول للوصول إلى ميزاتك.",
+    "renewal_detected_message": "تم اكتشاف حساب موجود. سيتم تجديد اشتراكك.",
+    "account_exists_message": "يوجد حساب بهذا البريد الإلكتروني. سجل الدخول لإدارة اشتراكك."
+  }
 }

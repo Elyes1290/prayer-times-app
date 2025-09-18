@@ -52,7 +52,7 @@
 
   "adhan_sound": "Choix de l'adhan",
   "adhan_sounds": {
-    "adhamalsharqawe": "Adhan Sharqaoui",
+    "adhamalsharqawe": "Sharqawi Adhan",
     "adhanaljazaer": "Adhan Algérien",
     "ahmadnafees": "Ahmad Nafees",
     "ahmedelkourdi": "Ahmed El Kourdi",
@@ -65,7 +65,7 @@
     "islamsobhi": "Islam Sobhi"
   },
 
-  "sound_adhamalsharqawe": "Adhan Sharqaoui",
+  "sound_adhamalsharqawe": "Sharqawi Adhan",
   "sound_adhanaljazaer": "Adhan Algérien",
   "sound_ahmadnafees": "Ahmad Nafees",
   "sound_ahmedelkourdi": "Ahmed El Kourdi",
