@@ -408,16 +408,16 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
         if (!currentEmail) {
           showLocalToast({
             type: "error",
-            title: t("toasts.error"),
-            message: t("toasts.validation_email_required"),
+            title: t("toast_error"),
+            message: t("toast_validation_email_required"),
           });
           return;
         }
         if (!currentPassword) {
           showLocalToast({
             type: "error",
-            title: t("toasts.error"),
-            message: t("toasts.validation_password_required"),
+            title: t("toast_error"),
+            message: t("toast_validation_password_required"),
           });
           return;
         }
@@ -425,8 +425,8 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
         // Inscription - Validation des champs
         if (!currentEmail || !currentPassword || !currentFirstName) {
           Alert.alert(
-            t("toasts.error"),
-            t("toasts.validation_email_password_required")
+            t("toast_error"),
+            t("toast_validation_email_password_required")
           );
           return;
         }
@@ -437,23 +437,20 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
         const isPasswordValid = validatePassword(currentPassword);
 
         if (!isEmailValid) {
-          Alert.alert(t("toasts.error"), t("toasts.validation_email_invalid"));
+          Alert.alert(t("toast_error"), t("toast_validation_email_invalid"));
           return;
         }
 
         if (!isFirstNameValid) {
           Alert.alert(
-            t("toasts.error"),
-            t("toasts.validation_firstname_required")
+            t("toast_error"),
+            t("toast_validation_firstname_required")
           );
           return;
         }
 
         if (!isPasswordValid) {
-          Alert.alert(
-            t("toasts.error"),
-            t("toasts.validation_password_invalid")
-          );
+          Alert.alert(t("toast_error"), t("toast_validation_password_invalid"));
           return;
         }
       }
@@ -499,8 +496,8 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
             // Utiliser le toast global pour garantir l'affichage même après re-render en mode connecté
             showToast({
               type: "success",
-              title: t("toasts.success"),
-              message: t("toasts.login_success"),
+              title: t("toast_success"),
+              message: t("toast_login_success"),
             });
 
             if (onLoginSuccess) {
@@ -509,8 +506,8 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
           } else {
             showLocalToast({
               type: "error",
-              title: t("toasts.error"),
-              message: result.message || t("toasts.login_failed"),
+              title: t("toast_error"),
+              message: result.message || t("toast_login_failed"),
             });
           }
         } else {
@@ -536,9 +533,9 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
                   if (userData.premium_active === true) {
                     showLocalToast({
                       type: "info",
-                      title: t("toasts.already_premium"),
+                      title: t("toast_already_premium"),
                       message: t(
-                        "toasts.already_premium_message",
+                        "toast_already_premium_message",
                         "Vous avez déjà un abonnement premium actif. Connectez-vous pour accéder à vos fonctionnalités."
                       ),
                     });
@@ -556,9 +553,9 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
                     );
                     showLocalToast({
                       type: "info",
-                      title: t("toasts.renewal_detected"),
+                      title: t("toast_renewal_detected"),
                       message: t(
-                        "toasts.renewal_detected_message",
+                        "toast_renewal_detected_message",
                         "Compte existant détecté. Votre abonnement sera renouvelé."
                       ),
                     });
@@ -567,9 +564,9 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
                     // 🔄 Cas par défaut - demander de se connecter
                     showLocalToast({
                       type: "info",
-                      title: t("toasts.account_exists"),
+                      title: t("toast_account_exists"),
                       message: t(
-                        "toasts.account_exists_message",
+                        "toast_account_exists_message",
                         "Un compte existe avec cet email. Connectez-vous pour gérer votre abonnement."
                       ),
                     });
@@ -957,10 +954,10 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
               style={localStyles.infoIcon}
               onPress={() =>
                 Alert.alert(
-                  t("toasts.help_firstname_title"),
+                  t("toast_help_firstname_title"),
                   firstName
-                    ? t("toasts.help_firstname_prefilled")
-                    : t("toasts.help_firstname_empty"),
+                    ? t("toast_help_firstname_prefilled")
+                    : t("toast_help_firstname_empty"),
                   [
                     {
                       text: "OK",
@@ -1004,8 +1001,8 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
             style={localStyles.infoIcon}
             onPress={() =>
               Alert.alert(
-                t("toasts.help_email_title"),
-                t("toasts.help_email_content"),
+                t("toast_help_email_title"),
+                t("toast_help_email_content"),
                 [
                   {
                     text: "OK",
@@ -1072,8 +1069,8 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
             style={localStyles.infoIcon}
             onPress={() =>
               Alert.alert(
-                t("toasts.help_password_title"),
-                t("toasts.help_password_content"),
+                t("toast_help_password_title"),
+                t("toast_help_password_content"),
                 [
                   {
                     text: "OK",

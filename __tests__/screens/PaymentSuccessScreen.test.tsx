@@ -64,7 +64,7 @@ describe("PaymentSuccessScreen", () => {
     const { getByText } = renderPaymentSuccessScreen();
 
     expect(getByText("Création de votre compte en cours...")).toBeTruthy();
-    expect(getByText("Traitement...")).toBeTruthy();
+    expect(getByText("processing")).toBeTruthy();
   });
 
   it("handles successful payment processing", async () => {
@@ -101,7 +101,7 @@ describe("PaymentSuccessScreen", () => {
   it("handles button press when processing", () => {
     const { getByText } = renderPaymentSuccessScreen();
 
-    const button = getByText("Traitement...");
+    const button = getByText("processing");
     fireEvent.press(button);
 
     // Le bouton ne doit pas naviguer quand en cours de traitement
@@ -113,7 +113,7 @@ describe("PaymentSuccessScreen", () => {
 
     await waitFor(
       () => {
-        const continueButton = getByText("Voir mon compte");
+        const continueButton = getByText("view_my_account");
         fireEvent.press(continueButton);
       },
       { timeout: 3000 }
@@ -253,12 +253,12 @@ describe("PaymentSuccessScreen", () => {
     const { getByText } = renderPaymentSuccessScreen();
 
     // État initial
-    expect(getByText("Traitement...")).toBeTruthy();
+    expect(getByText("processing")).toBeTruthy();
 
     // Après succès
     await waitFor(
       () => {
-        expect(getByText("Voir mon compte")).toBeTruthy();
+        expect(getByText("view_my_account")).toBeTruthy();
       },
       { timeout: 3000 }
     );
@@ -277,7 +277,7 @@ describe("PaymentSuccessScreen", () => {
   it("applies correct styling to buttons", async () => {
     const { getByText } = renderPaymentSuccessScreen();
 
-    const button = getByText("Traitement...");
+    const button = getByText("processing");
     expect(button).toBeTruthy();
 
     // Vérifier que le bouton existe

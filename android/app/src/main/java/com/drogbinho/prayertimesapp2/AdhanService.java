@@ -323,6 +323,234 @@ public class AdhanService extends Service {
             }
         }
 
+        // DIAGNOSTIC SPÉCIAL POUR MASJIDQUBA
+        if (resId == 0 && "masjidquba".equals(soundToPlay)) {
+            errorLog(TAG, "❌ DIAGNOSTIC MASJIDQUBA: Fichier non trouvé avec getIdentifier()");
+
+            // Essayer différentes variantes du nom
+            String[] alternatives = {
+                    "masjidquba",
+                    "masjid_quba",
+                    "masjid-quba",
+                    "MasjidQuba",
+                    "masjid_al_quba",
+                    "masjid-al-quba"
+            };
+
+            for (String alt : alternatives) {
+                int altResId = getResources().getIdentifier(alt, "raw", getPackageName());
+                debugLog(TAG, "🔍 Test alternative '" + alt + "': resId = " + altResId);
+                if (altResId != 0) {
+                    resId = altResId;
+                    errorLog(TAG, "✅ MASJIDQUBA trouvé avec variante: '" + alt + "' (resId: " + resId + ")");
+                    break;
+                }
+            }
+
+            // Si toujours pas trouvé, essayer d'accéder directement au fichier R.raw
+            if (resId == 0) {
+                try {
+                    // Essayer d'accéder directement via réflexion
+                    Class<?> rawClass = Class.forName(getPackageName() + ".R$raw");
+                    java.lang.reflect.Field masjidField = rawClass.getField("masjidquba");
+                    resId = masjidField.getInt(null);
+                    errorLog(TAG, "✅ MASJIDQUBA trouvé via réflexion R.raw: " + resId);
+                } catch (Exception e) {
+                    errorLog(TAG, "❌ Échec réflexion R.raw pour masjidquba: " + e.getMessage());
+                }
+            }
+        }
+
+        // DIAGNOSTIC SPÉCIAL POUR ADHANALJAZAER
+        if (resId == 0 && "adhanaljazaer".equals(soundToPlay)) {
+            errorLog(TAG, "❌ DIAGNOSTIC ADHANALJAZAER: Fichier non trouvé avec getIdentifier()");
+
+            // Essayer différentes variantes du nom
+            String[] alternatives = {
+                    "adhanaljazaer",
+                    "adhan_al_jazaer",
+                    "adhan-al-jazaer",
+                    "AdhanAlJazaer",
+                    "adhan_aljazaer",
+                    "adhan-aljazaer"
+            };
+
+            for (String alt : alternatives) {
+                int altResId = getResources().getIdentifier(alt, "raw", getPackageName());
+                debugLog(TAG, "🔍 Test alternative '" + alt + "': resId = " + altResId);
+                if (altResId != 0) {
+                    resId = altResId;
+                    errorLog(TAG, "✅ ADHANALJAZAER trouvé avec variante: '" + alt + "' (resId: " + resId + ")");
+                    break;
+                }
+            }
+
+            // Si toujours pas trouvé, essayer d'accéder directement au fichier R.raw
+            if (resId == 0) {
+                try {
+                    // Essayer d'accéder directement via réflexion
+                    Class<?> rawClass = Class.forName(getPackageName() + ".R$raw");
+                    java.lang.reflect.Field adhanField = rawClass.getField("adhanaljazaer");
+                    resId = adhanField.getInt(null);
+                    errorLog(TAG, "✅ ADHANALJAZAER trouvé via réflexion R.raw: " + resId);
+                } catch (Exception e) {
+                    errorLog(TAG, "❌ Échec réflexion R.raw pour adhanaljazaer: " + e.getMessage());
+                }
+            }
+        }
+
+        // DIAGNOSTIC SPÉCIAL POUR AHMADNAFEES
+        if (resId == 0 && "ahmadnafees".equals(soundToPlay)) {
+            errorLog(TAG, "❌ DIAGNOSTIC AHMADNAFEES: Fichier non trouvé avec getIdentifier()");
+
+            // Essayer différentes variantes du nom
+            String[] alternatives = {
+                    "ahmadnafees",
+                    "ahmad_nafees",
+                    "ahmad-nafees",
+                    "AhmadNafees",
+                    "ahmad_nafis",
+                    "ahmad-nafis"
+            };
+
+            for (String alt : alternatives) {
+                int altResId = getResources().getIdentifier(alt, "raw", getPackageName());
+                debugLog(TAG, "🔍 Test alternative '" + alt + "': resId = " + altResId);
+                if (altResId != 0) {
+                    resId = altResId;
+                    errorLog(TAG, "✅ AHMADNAFEES trouvé avec variante: '" + alt + "' (resId: " + resId + ")");
+                    break;
+                }
+            }
+
+            // Si toujours pas trouvé, essayer d'accéder directement au fichier R.raw
+            if (resId == 0) {
+                try {
+                    // Essayer d'accéder directement via réflexion
+                    Class<?> rawClass = Class.forName(getPackageName() + ".R$raw");
+                    java.lang.reflect.Field ahmadField = rawClass.getField("ahmadnafees");
+                    resId = ahmadField.getInt(null);
+                    errorLog(TAG, "✅ AHMADNAFEES trouvé via réflexion R.raw: " + resId);
+                } catch (Exception e) {
+                    errorLog(TAG, "❌ Échec réflexion R.raw pour ahmadnafees: " + e.getMessage());
+                }
+            }
+        }
+
+        // DIAGNOSTIC SPÉCIAL POUR AHMEDELKOURDI
+        if (resId == 0 && "ahmedelkourdi".equals(soundToPlay)) {
+            errorLog(TAG, "❌ DIAGNOSTIC AHMEDELKOURDI: Fichier non trouvé avec getIdentifier()");
+
+            // Essayer différentes variantes du nom
+            String[] alternatives = {
+                    "ahmedelkourdi",
+                    "ahmed_elkourdi",
+                    "ahmed-elkourdi",
+                    "AhmedElKourdi",
+                    "ahmed_el_kourdi",
+                    "ahmed-el-kourdi"
+            };
+
+            for (String alt : alternatives) {
+                int altResId = getResources().getIdentifier(alt, "raw", getPackageName());
+                debugLog(TAG, "🔍 Test alternative '" + alt + "': resId = " + altResId);
+                if (altResId != 0) {
+                    resId = altResId;
+                    errorLog(TAG, "✅ AHMEDELKOURDI trouvé avec variante: '" + alt + "' (resId: " + resId + ")");
+                    break;
+                }
+            }
+
+            // Si toujours pas trouvé, essayer d'accéder directement au fichier R.raw
+            if (resId == 0) {
+                try {
+                    // Essayer d'accéder directement via réflexion
+                    Class<?> rawClass = Class.forName(getPackageName() + ".R$raw");
+                    java.lang.reflect.Field ahmedField = rawClass.getField("ahmedelkourdi");
+                    resId = ahmedField.getInt(null);
+                    errorLog(TAG, "✅ AHMEDELKOURDI trouvé via réflexion R.raw: " + resId);
+                } catch (Exception e) {
+                    errorLog(TAG, "❌ Échec réflexion R.raw pour ahmedelkourdi: " + e.getMessage());
+                }
+            }
+        }
+
+        // DIAGNOSTIC SPÉCIAL POUR MANSOURZAHRANI
+        if (resId == 0 && "mansourzahrani".equals(soundToPlay)) {
+            errorLog(TAG, "❌ DIAGNOSTIC MANSOURZAHRANI: Fichier non trouvé avec getIdentifier()");
+
+            // Essayer différentes variantes du nom
+            String[] alternatives = {
+                    "mansourzahrani",
+                    "mansour_zahrani",
+                    "mansour-zahrani",
+                    "MansourZahrani",
+                    "mansour_zahrani",
+                    "mansour-zahrani"
+            };
+
+            for (String alt : alternatives) {
+                int altResId = getResources().getIdentifier(alt, "raw", getPackageName());
+                debugLog(TAG, "🔍 Test alternative '" + alt + "': resId = " + altResId);
+                if (altResId != 0) {
+                    resId = altResId;
+                    errorLog(TAG, "✅ MANSOURZAHRANI trouvé avec variante: '" + alt + "' (resId: " + resId + ")");
+                    break;
+                }
+            }
+
+            // Si toujours pas trouvé, essayer d'accéder directement au fichier R.raw
+            if (resId == 0) {
+                try {
+                    // Essayer d'accéder directement via réflexion
+                    Class<?> rawClass = Class.forName(getPackageName() + ".R$raw");
+                    java.lang.reflect.Field mansourField = rawClass.getField("mansourzahrani");
+                    resId = mansourField.getInt(null);
+                    errorLog(TAG, "✅ MANSOURZAHRANI trouvé via réflexion R.raw: " + resId);
+                } catch (Exception e) {
+                    errorLog(TAG, "❌ Échec réflexion R.raw pour mansourzahrani: " + e.getMessage());
+                }
+            }
+        }
+
+        // DIAGNOSTIC SPÉCIAL POUR ISLAMSOBHI
+        if (resId == 0 && "islamsobhi".equals(soundToPlay)) {
+            errorLog(TAG, "❌ DIAGNOSTIC ISLAMSOBHI: Fichier non trouvé avec getIdentifier()");
+
+            // Essayer différentes variantes du nom
+            String[] alternatives = {
+                    "islamsobhi",
+                    "islam_sobhi",
+                    "islam-sobhi",
+                    "IslamSobhi",
+                    "islam_sobhi",
+                    "islam-sobhi"
+            };
+
+            for (String alt : alternatives) {
+                int altResId = getResources().getIdentifier(alt, "raw", getPackageName());
+                debugLog(TAG, "🔍 Test alternative '" + alt + "': resId = " + altResId);
+                if (altResId != 0) {
+                    resId = altResId;
+                    errorLog(TAG, "✅ ISLAMSOBHI trouvé avec variante: '" + alt + "' (resId: " + resId + ")");
+                    break;
+                }
+            }
+
+            // Si toujours pas trouvé, essayer d'accéder directement au fichier R.raw
+            if (resId == 0) {
+                try {
+                    // Essayer d'accéder directement via réflexion
+                    Class<?> rawClass = Class.forName(getPackageName() + ".R$raw");
+                    java.lang.reflect.Field islamField = rawClass.getField("islamsobhi");
+                    resId = islamField.getInt(null);
+                    errorLog(TAG, "✅ ISLAMSOBHI trouvé via réflexion R.raw: " + resId);
+                } catch (Exception e) {
+                    errorLog(TAG, "❌ Échec réflexion R.raw pour islamsobhi: " + e.getMessage());
+                }
+            }
+        }
+
         if (resId == 0) {
             errorLog(TAG, "❌ Fichier audio Adhan non trouvé: '" + soundToPlay + "'. Tentative fallback...");
             debugLog(TAG, "🔍 Recherche fallback: 'adhamalsharqawe'");

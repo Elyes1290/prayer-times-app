@@ -307,10 +307,10 @@ class ApiClient {
                   showGlobalToast({
                     type: "error",
                     title:
-                      i18n.t("toasts.connection_interrupted") ||
+                      i18n.t("toast_connection_interrupted") ||
                       "Connexion interrompue",
                     message:
-                      i18n.t("toasts.single_device_only") ||
+                      i18n.t("toast_single_device_only") ||
                       "Non autorisé. Veuillez vous connecter sur un seul appareil.",
                   });
                   throw new Error(
@@ -325,10 +325,10 @@ class ApiClient {
               showGlobalToast({
                 type: "error",
                 title:
-                  i18n.t("toasts.connection_interrupted") ||
+                  i18n.t("toast_connection_interrupted") ||
                   "Connexion interrompue",
                 message:
-                  i18n.t("toasts.single_device_only") ||
+                  i18n.t("toast_single_device_only") ||
                   "Non autorisé. Veuillez vous connecter sur un seul appareil.",
               });
             }

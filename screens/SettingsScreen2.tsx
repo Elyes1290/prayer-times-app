@@ -1443,8 +1443,8 @@ export default function SettingsScreenOptimized() {
     if (!settings) {
       showToast({
         type: "error",
-        title: "Erreur",
-        message: "Configuration non disponible",
+        title: t("toast_error"),
+        message: t("toast_configuration_unavailable"),
       });
       return;
     }
@@ -1480,8 +1480,8 @@ export default function SettingsScreenOptimized() {
               console.log("❌ Erreur application des changements:", error);
               showToast({
                 type: "error",
-                title: "Erreur",
-                message: "Impossible d'appliquer les modifications",
+                title: t("toast_error"),
+                message: t("toast_apply_changes_error"),
               });
             } finally {
               uiManager.setIsApplyingChanges(false);
@@ -2094,7 +2094,9 @@ export default function SettingsScreenOptimized() {
 
       showToast({
         type: "success",
-        title: actualDownloadPath ? "Lecture locale" : "Streaming",
+        title: actualDownloadPath
+          ? t("toast_local_playback")
+          : t("toast_streaming"),
         message: `${adhan.title} - ${
           actualDownloadPath ? "Fichier local" : "En streaming"
         }`,
@@ -2103,8 +2105,8 @@ export default function SettingsScreenOptimized() {
       console.error("Erreur lecture adhan premium:", error);
       showToast({
         type: "error",
-        title: "Erreur de lecture",
-        message: "Impossible de lire cet adhan",
+        title: t("toast_playback_error_title"),
+        message: t("toast_playback_error_message"),
       });
       audioPlayer.setCurrentPlayingPremiumAdhan(null);
       audioPlayer.setIsPlayingPremiumAdhan(false);
@@ -2361,9 +2363,9 @@ export default function SettingsScreenOptimized() {
 
             showToast({
               type: "info",
-              title: t("toasts.download_started_title"),
+              title: t("toast_download_started_title"),
               message: `${adhan.title} - ${t(
-                "toasts.download_started_message"
+                "toast_download_started_message"
               )}`,
             });
 
@@ -2379,8 +2381,8 @@ export default function SettingsScreenOptimized() {
           console.error("❌ Erreur récupération URL:", urlError);
           showToast({
             type: "error",
-            title: t("toasts.download_url_error_title"),
-            message: t("toasts.download_url_error_message"),
+            title: t("toast_download_url_error_title"),
+            message: t("toast_download_url_error_message"),
           });
           return;
         }
@@ -2428,8 +2430,8 @@ export default function SettingsScreenOptimized() {
         if (success && !isCancelled) {
           showToast({
             type: "success",
-            title: t("toasts.download_completed_title"),
-            message: `${adhan.title} ${t("toasts.download_completed_message")}`,
+            title: t("toast_download_completed_title"),
+            message: `${adhan.title} ${t("toast_download_completed_message")}`,
           });
 
           // Mettre à jour la liste
@@ -2442,22 +2444,22 @@ export default function SettingsScreenOptimized() {
         } else if (isCancelled) {
           showToast({
             type: "info",
-            title: t("toasts.download_cancelled_title"),
-            message: t("toasts.download_cancelled_message"),
+            title: t("toast_download_cancelled_title"),
+            message: t("toast_download_cancelled_message"),
           });
         } else {
           showToast({
             type: "error",
-            title: t("toasts.download_failed_title"),
-            message: `${t("toasts.download_failed_message")} ${adhan.title}`,
+            title: t("toast_download_failed_title"),
+            message: `${t("toast_download_failed_message")} ${adhan.title}`,
           });
         }
       } catch (fallbackError) {
         console.error("Erreur téléchargement fallback:", fallbackError);
         showToast({
           type: "error",
-          title: t("toasts.download_error_title"),
-          message: t("toasts.download_error_message"),
+          title: t("toast_download_error_title"),
+          message: t("toast_download_error_message"),
         });
       } finally {
         downloadManager.removeDownloadingAdhan(adhan.id);
@@ -2468,8 +2470,8 @@ export default function SettingsScreenOptimized() {
       console.error("Erreur téléchargement adhan:", error);
       showToast({
         type: "error",
-        title: t("toasts.download_error_title"),
-        message: t("toasts.download_error_message"),
+        title: t("toast_download_error_title"),
+        message: t("toast_download_error_message"),
       });
     }
   };
@@ -2712,8 +2714,8 @@ export default function SettingsScreenOptimized() {
     setTimeout(() => {
       showToast({
         type: "info",
-        title: t("toasts.download_cancelled_title"),
-        message: t("toasts.download_cancelled_message"),
+        title: t("toast_download_cancelled_title"),
+        message: t("toast_download_cancelled_message"),
       });
     }, 50);
   };
@@ -2743,10 +2745,8 @@ export default function SettingsScreenOptimized() {
               if (success) {
                 showToast({
                   type: "info",
-                  title: t("toasts.adhan_deleted_title"),
-                  message: `${adhan.title} ${t(
-                    "toasts.adhan_deleted_message"
-                  )}`,
+                  title: t("toast_adhan_deleted_title"),
+                  message: `${adhan.title} ${t("toast_adhan_deleted_message")}`,
                 });
 
                 // 🚀 NOUVEAU : Invalider le cache adhans après suppression
@@ -2778,16 +2778,16 @@ export default function SettingsScreenOptimized() {
               } else {
                 showToast({
                   type: "error",
-                  title: t("toasts.delete_error_title"),
-                  message: t("toasts.delete_error_message"),
+                  title: t("toast_delete_error_title"),
+                  message: t("toast_delete_error_message"),
                 });
               }
             } catch (error) {
               console.error("Erreur suppression adhan:", error);
               showToast({
                 type: "error",
-                title: t("toasts.delete_error_title"),
-                message: t("toasts.delete_error_message"),
+                title: t("toast_delete_error_title"),
+                message: t("toast_delete_error_message"),
               });
             }
           },
@@ -2807,8 +2807,8 @@ export default function SettingsScreenOptimized() {
       console.error("❌ Erreur ouverture modal premium:", error);
       showToast({
         type: "error",
-        title: "Erreur",
-        message: "Impossible d'ouvrir la modal premium",
+        title: t("toast_error"),
+        message: t("toast_premium_modal_error"),
       });
     }
   };
@@ -2818,8 +2818,8 @@ export default function SettingsScreenOptimized() {
     try {
       showToast({
         type: "info",
-        title: "Nettoyage en cours",
-        message: "Suppression de tous les adhans téléchargés...",
+        title: t("toast_cleanup_started_title"),
+        message: t("toast_cleanup_started_message"),
       });
 
       const RNFS = await import("react-native-fs");
@@ -2835,8 +2835,8 @@ export default function SettingsScreenOptimized() {
       if (!downloadedContent) {
         showToast({
           type: "info",
-          title: "Aucun fichier",
-          message: "Aucun fichier téléchargé trouvé",
+          title: t("toast_cleanup_no_files_title"),
+          message: t("toast_cleanup_no_files_message"),
         });
         return;
       }
@@ -2847,8 +2847,8 @@ export default function SettingsScreenOptimized() {
       if (contentIds.length === 0) {
         showToast({
           type: "info",
-          title: "Aucun fichier",
-          message: t("no_files_to_clean"),
+          title: t("toast_cleanup_no_files_title"),
+          message: t("toast_cleanup_no_files_message"),
         });
         return;
       }
@@ -2860,8 +2860,8 @@ export default function SettingsScreenOptimized() {
       if (!firstFilePath) {
         showToast({
           type: "error",
-          title: "Erreur",
-          message: "Impossible de localiser le dossier",
+          title: t("toast_error"),
+          message: t("toast_cleanup_folder_error_message"),
         });
         return;
       }
@@ -2880,8 +2880,8 @@ export default function SettingsScreenOptimized() {
       if (!dirExists) {
         showToast({
           type: "info",
-          title: "Dossier vide",
-          message: t("no_files_to_clean"),
+          title: t("toast_cleanup_empty_folder_title"),
+          message: t("toast_cleanup_no_files_message"),
         });
         return;
       }
@@ -2928,8 +2928,11 @@ export default function SettingsScreenOptimized() {
 
       showToast({
         type: "success",
-        title: "Nettoyage terminé",
-        message: `${cleanedCount} fichiers supprimés (${sizeInMB} MB libérés)`,
+        title: t("toast_cleanup_completed_title"),
+        message: t("toast_cleanup_completed_detailed_message", {
+          count: cleanedCount,
+          size: sizeInMB,
+        }),
       });
 
       // console.log(
@@ -2939,8 +2942,8 @@ export default function SettingsScreenOptimized() {
       console.error("❌ Erreur nettoyage:", error);
       showToast({
         type: "error",
-        title: "Erreur nettoyage",
-        message: t("cleanup_error"),
+        title: t("toast_cleanup_error_title"),
+        message: t("toast_cleanup_error_message"),
       });
     }
   };
@@ -2949,8 +2952,8 @@ export default function SettingsScreenOptimized() {
     try {
       showToast({
         type: "info",
-        title: "Diagnostic en cours...",
-        message: "Analyse des fichiers téléchargés...",
+        title: t("toast_diagnostic_started_title"),
+        message: t("toast_diagnostic_started_message"),
       });
 
       const PremiumContentManager = (await import("../utils/premiumContent"))
@@ -2997,7 +3000,7 @@ ${
 
       showToast({
         type: syncResult.errors.length > 0 ? "error" : "success",
-        title: "Diagnostic terminé",
+        title: t("toast_diagnostic_completed_title"),
         message: message,
       });
 
@@ -3017,8 +3020,8 @@ ${
       console.error("Erreur diagnostic:", error);
       showToast({
         type: "error",
-        title: "Erreur diagnostic",
-        message: "Impossible de diagnostiquer les fichiers",
+        title: t("toast_diagnostic_error_title"),
+        message: t("toast_diagnostic_error_message"),
       });
     }
   };

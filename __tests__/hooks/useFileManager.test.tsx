@@ -305,8 +305,8 @@ describe("useFileManager", () => {
           [
             expect.objectContaining({
               type: "error",
-              title: "Erreur nettoyage",
-              message: t("cleanup_error"),
+              title: t("toast_cleanup_error_title"),
+              message: t("toast_cleanup_error_message"),
             }),
           ],
         ])
@@ -352,7 +352,7 @@ describe("useFileManager", () => {
       expect(showToast).toHaveBeenCalledWith(
         expect.objectContaining({
           type: "error",
-          title: "Erreur nettoyage",
+          title: t("toast_cleanup_error_title"),
         })
       );
     });
@@ -388,7 +388,7 @@ describe("useFileManager", () => {
       expect(showToast).toHaveBeenCalledWith(
         expect.objectContaining({
           type: "error",
-          title: "Erreur nettoyage",
+          title: t("toast_cleanup_error_title"),
         })
       );
     });
@@ -424,8 +424,8 @@ describe("useFileManager", () => {
           [
             expect.objectContaining({
               type: "error",
-              title: "Erreur nettoyage",
-              message: t("cleanup_error"),
+              title: t("toast_cleanup_error_title"),
+              message: t("toast_cleanup_error_message"),
             }),
           ],
         ])
@@ -468,8 +468,8 @@ describe("useFileManager", () => {
           [
             expect.objectContaining({
               type: "error",
-              title: "Erreur nettoyage",
-              message: t("cleanup_error"),
+              title: t("toast_cleanup_error_title"),
+              message: t("toast_cleanup_error_message"),
             }),
           ],
         ])
@@ -509,7 +509,7 @@ describe("useFileManager", () => {
       expect(showToast).toHaveBeenCalledWith(
         expect.objectContaining({
           type: "error",
-          title: "Erreur nettoyage",
+          title: t("toast_cleanup_error_title"),
         })
       );
     });
@@ -557,7 +557,7 @@ describe("useFileManager", () => {
       expect(showToast).toHaveBeenCalledWith(
         expect.objectContaining({
           type: "error",
-          title: "Erreur nettoyage",
+          title: t("toast_cleanup_error_title"),
         })
       );
     });
@@ -593,7 +593,7 @@ describe("useFileManager", () => {
       expect(showToast).toHaveBeenCalledWith(
         expect.objectContaining({
           type: "error",
-          title: "Erreur nettoyage",
+          title: t("toast_cleanup_error_title"),
         })
       );
     });
@@ -642,8 +642,8 @@ describe("useFileManager", () => {
           [
             expect.objectContaining({
               type: "error",
-              title: "Erreur diagnostic",
-              message: "Impossible de diagnostiquer les fichiers",
+              title: t("toast_diagnostic_error_title"),
+              message: t("toast_diagnostic_error_message"),
             }),
           ],
         ])
@@ -685,8 +685,8 @@ describe("useFileManager", () => {
           [
             expect.objectContaining({
               type: "error",
-              title: "Erreur diagnostic",
-              message: "Impossible de diagnostiquer les fichiers",
+              title: t("toast_diagnostic_error_title"),
+              message: t("toast_diagnostic_error_message"),
             }),
           ],
         ])
@@ -723,7 +723,7 @@ describe("useFileManager", () => {
       expect(showToast).toHaveBeenCalledWith(
         expect.objectContaining({
           type: "error",
-          title: "Erreur diagnostic",
+          title: t("toast_diagnostic_error_title"),
         })
       );
     });
@@ -758,7 +758,7 @@ describe("useFileManager", () => {
       expect(showToast).toHaveBeenCalledWith(
         expect.objectContaining({
           type: "error",
-          title: "Erreur diagnostic",
+          title: t("toast_diagnostic_error_title"),
         })
       );
     });

@@ -218,7 +218,7 @@ export const useNativeDownload = (
         newState.set(event.contentId, {
           isDownloading: false,
           progress: 0,
-          error: "Téléchargement échoué",
+          error: "Download failed",
         });
         return newState;
       });
@@ -275,7 +275,7 @@ export const useNativeDownload = (
   const startDownload = useCallback(
     async (downloadInfo: DownloadInfo) => {
       if (!isNativeAvailable) {
-        throw new Error("Module de téléchargement natif non disponible");
+        throw new Error("Native download module not available");
       }
 
       try {
@@ -283,7 +283,7 @@ export const useNativeDownload = (
           downloadInfo.contentId
         );
         if (isActive) {
-          throw new Error("Téléchargement déjà en cours");
+          throw new Error("Download already in progress");
         }
 
         await nativeDownloadManager.startDownload(downloadInfo);
@@ -294,7 +294,7 @@ export const useNativeDownload = (
           newState.set(downloadInfo.contentId, {
             isDownloading: false,
             progress: 0,
-            error: error instanceof Error ? error.message : "Erreur inconnue",
+            error: error instanceof Error ? error.message : "Unknown error",
           });
           return newState;
         });
@@ -307,7 +307,7 @@ export const useNativeDownload = (
   const cancelDownload = useCallback(
     async (contentId: string) => {
       if (!isNativeAvailable) {
-        throw new Error("Module de téléchargement natif non disponible");
+        throw new Error("Native download module not available");
       }
 
       try {

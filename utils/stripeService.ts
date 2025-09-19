@@ -1,6 +1,7 @@
 import { Alert } from "react-native";
 import { STRIPE_CONFIG, SubscriptionType, PaymentError } from "./stripeConfig";
 import { useToast } from "../contexts/ToastContext";
+import { useTranslation } from "react-i18next";
 
 // Service pour gérer les paiements Stripe
 export class StripeService {
@@ -166,12 +167,15 @@ export class StripeService {
 export const useStripeService = () => {
   const stripeService = StripeService.getInstance();
   const { showToast } = useToast();
+  const { t } = useTranslation();
 
   const handlePaymentSuccess = (subscriptionType: SubscriptionType) => {
     showToast({
       type: "success",
-      title: "Paiement Réussi !",
-      message: `Votre abonnement ${STRIPE_CONFIG.products[subscriptionType].displayName} est maintenant actif.`,
+      title: t("toast_payment_success_title"),
+      message: t("toast_payment_success_message", {
+        subscriptionName: STRIPE_CONFIG.products[subscriptionType].displayName,
+      }),
     });
   };
 

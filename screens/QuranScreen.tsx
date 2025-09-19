@@ -1032,8 +1032,8 @@ export default function QuranScreen() {
               if (success) {
                 showToast({
                   type: "success",
-                  title: t("toasts.delete_success"),
-                  message: t("toasts.delete_completed"),
+                  title: t("toast_delete_success"),
+                  message: t("toast_delete_completed"),
                 });
 
                 // 🚀 IMPORTANT : Mettre à jour l'état local pour refléter la suppression
@@ -1053,16 +1053,16 @@ export default function QuranScreen() {
               } else {
                 showToast({
                   type: "error",
-                  title: t("toasts.error"),
-                  message: t("toasts.delete_error"),
+                  title: t("toast_error"),
+                  message: t("toast_delete_error"),
                 });
               }
             } catch (error) {
               console.error("Erreur suppression récitation:", error);
               showToast({
                 type: "error",
-                title: t("toasts.error"),
-                message: t("toasts.delete_failed"),
+                title: t("toast_error"),
+                message: t("toast_delete_failed"),
               });
             }
           },
@@ -1076,8 +1076,8 @@ export default function QuranScreen() {
     if (!user.isPremium) {
       showToast({
         type: "error",
-        title: t("toasts.premium_required"),
-        message: t("toasts.premium_required"),
+        title: t("toast_premium_required"),
+        message: t("toast_premium_required"),
       });
       return;
     }
@@ -1085,8 +1085,8 @@ export default function QuranScreen() {
     if (!isNativeAvailable) {
       showToast({
         type: "error",
-        title: t("toasts.download_error"),
-        message: t("toasts.download_failed"),
+        title: t("toast_download_error"),
+        message: t("toast_download_failed"),
       });
       return;
     }
@@ -1117,15 +1117,15 @@ export default function QuranScreen() {
 
       showToast({
         type: "info",
-        title: t("toasts.download_success"),
-        message: t("toasts.recitation_loading"),
+        title: t("toast_download_success"),
+        message: t("toast_recitation_loading"),
       });
     } catch (error) {
       console.error("❌ Erreur téléchargement récitation:", error);
       showToast({
         type: "error",
-        title: t("toasts.download_error"),
-        message: t("toasts.download_failed"),
+        title: t("toast_download_error"),
+        message: t("toast_download_failed"),
       });
     }
   };
@@ -1193,15 +1193,15 @@ export default function QuranScreen() {
 
         showToast({
           type: "success",
-          title: t("toasts.download_success"),
-          message: t("toasts.download_completed"),
+          title: t("toast_success"),
+          message: t("toast_download_completed_title"),
         });
       } catch (error) {
         console.error("❌ Erreur lors de la finalisation:", error);
         showToast({
           type: "error",
-          title: t("toasts.error"),
-          message: t("toasts.download_error"),
+          title: t("toast_error"),
+          message: t("toast_download_error_message"),
         });
       }
     },
@@ -1214,15 +1214,15 @@ export default function QuranScreen() {
       await cancelDownload(recitationId);
       showToast({
         type: "info",
-        title: t("toasts.download_cancelled"),
-        message: t("toasts.operation_cancelled"),
+        title: t("toast_download_cancelled_title"),
+        message: t("toast_download_cancelled_message"),
       });
     } catch (error) {
       console.error("❌ Erreur annulation téléchargement:", error);
       showToast({
         type: "error",
-        title: t("toasts.download_error"),
-        message: t("toasts.download_failed"),
+        title: t("toast_download_error_title"),
+        message: t("toast_download_failed_message"),
       });
     }
   };

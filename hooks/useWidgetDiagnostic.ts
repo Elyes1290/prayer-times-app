@@ -37,8 +37,8 @@ export const useWidgetDiagnostic = () => {
     if (Platform.OS !== "android") {
       showToast?.({
         type: "warning",
-        title: "Widget Android uniquement",
-        message: "Le widget audio n'est disponible que sur Android",
+        title: t("toast_widget_android_only_title"),
+        message: t("toast_widget_android_only_message"),
       });
       return;
     }
@@ -78,8 +78,8 @@ export const useWidgetDiagnostic = () => {
 
       showToast?.({
         type: "error",
-        title: "Erreur diagnostic",
-        message: "Impossible d'exécuter le diagnostic",
+        title: t("toast_diagnostic_error_title"),
+        message: t("toast_diagnostic_error_message"),
       });
     }
   }, [showToast]);
@@ -155,8 +155,8 @@ export const useWidgetDiagnostic = () => {
       } else {
         showToast?.({
           type: "info",
-          title: "Aucune correction automatique",
-          message: "Le système semble déjà fonctionnel",
+          title: t("toast_no_auto_fix_title"),
+          message: t("toast_no_auto_fix_message"),
         });
       }
 
@@ -165,8 +165,8 @@ export const useWidgetDiagnostic = () => {
       console.error("❌ Erreur correction automatique:", error);
       showToast?.({
         type: "error",
-        title: "Erreur correction",
-        message: "Impossible d'appliquer les corrections automatiques",
+        title: t("toast_auto_fix_error_title"),
+        message: t("toast_auto_fix_error_message"),
       });
     }
   }, [showToast]);

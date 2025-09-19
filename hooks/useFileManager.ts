@@ -16,8 +16,8 @@ export function useFileManager() {
         try {
           showToast({
             type: "info",
-            title: "Nettoyage en cours",
-            message: "Suppression de tous les adhans téléchargés...",
+            title: t("toast_cleanup_started_title"),
+            message: t("toast_cleanup_started_message"),
           });
 
           const RNFS = await import("react-native-fs");
@@ -33,8 +33,8 @@ export function useFileManager() {
           if (!downloadedContent) {
             showToast({
               type: "info",
-              title: "Aucun fichier",
-              message: "Aucun fichier téléchargé trouvé",
+              title: t("toast_cleanup_no_files_title"),
+              message: t("toast_cleanup_no_files_message"),
             });
             return;
           }
@@ -45,8 +45,8 @@ export function useFileManager() {
           if (contentIds.length === 0) {
             showToast({
               type: "info",
-              title: "Aucun fichier",
-              message: t("no_files_to_clean"),
+              title: t("toast_cleanup_no_files_title"),
+              message: t("toast_cleanup_no_files_message"),
             });
             return;
           }
@@ -58,8 +58,8 @@ export function useFileManager() {
           if (!firstFilePath) {
             showToast({
               type: "error",
-              title: "Erreur",
-              message: "Impossible de localiser le dossier",
+              title: t("toast_error"),
+              message: t("toast_cleanup_folder_error_message"),
             });
             return;
           }
@@ -78,8 +78,8 @@ export function useFileManager() {
           if (!dirExists) {
             showToast({
               type: "info",
-              title: "Dossier vide",
-              message: t("no_files_to_clean"),
+              title: t("toast_cleanup_empty_folder_title"),
+              message: t("toast_cleanup_no_files_message"),
             });
             return;
           }
@@ -121,8 +121,8 @@ export function useFileManager() {
           // 📢 NOUVEAU : Notifier immédiatement la mise à jour
           showToast({
             type: "info",
-            title: "Mise à jour...",
-            message: "Actualisation de la liste en cours",
+            title: t("toast_cleanup_updating_title"),
+            message: t("toast_cleanup_updating_message"),
           });
 
           // 🔄 Laisser un délai pour que l'interface se mette à jour
@@ -135,8 +135,11 @@ export function useFileManager() {
 
           showToast({
             type: "success",
-            title: "Nettoyage terminé",
-            message: `${cleanedCount} fichiers supprimés (${sizeInMB} MB libérés)`,
+            title: t("toast_cleanup_completed_title"),
+            message: t("toast_cleanup_completed_detailed_message", {
+              count: cleanedCount,
+              size: sizeInMB,
+            }),
           });
 
           // console.log(
@@ -146,8 +149,8 @@ export function useFileManager() {
           console.error("❌ Erreur nettoyage:", error);
           showToast({
             type: "error",
-            title: "Erreur nettoyage",
-            message: t("cleanup_error"),
+            title: t("toast_cleanup_error_title"),
+            message: t("toast_cleanup_error_message"),
           });
         }
       };
@@ -166,8 +169,8 @@ export function useFileManager() {
         try {
           showToast({
             type: "info",
-            title: "Diagnostic en cours...",
-            message: "Analyse des fichiers téléchargés...",
+            title: t("toast_diagnostic_started_title"),
+            message: t("toast_diagnostic_started_message"),
           });
 
           const PremiumContentManager = (
@@ -215,7 +218,7 @@ ${
 
           showToast({
             type: syncResult.errors.length > 0 ? "error" : "success",
-            title: "Diagnostic terminé",
+            title: t("toast_diagnostic_completed_title"),
             message: message,
           });
 
@@ -225,8 +228,8 @@ ${
           console.error("Erreur diagnostic:", error);
           showToast({
             type: "error",
-            title: "Erreur diagnostic",
-            message: "Impossible de diagnostiquer les fichiers",
+            title: t("toast_diagnostic_error_title"),
+            message: t("toast_diagnostic_error_message"),
           });
         }
       };
