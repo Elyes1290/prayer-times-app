@@ -1,5 +1,4 @@
 import { useCallback } from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { LocalStorageManager } from "../utils/localStorageManager";
 
 // 🗂️ Hook pour la gestion des fichiers (nettoyage et diagnostic)
