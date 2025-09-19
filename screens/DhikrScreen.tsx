@@ -165,9 +165,9 @@ export default function DhikrScreen() {
       const handleDhikrCompleted = async () => {
         if (!user.isPremium) {
           Alert.alert(
-            t("premium.feature_locked", "🔒 Fonctionnalité Premium"),
+            t("premium_ui.feature_locked", "🔒 Fonctionnalité Premium"),
             t(
-              "premium.feature_premium_only",
+              "premium_ui.feature_premium_only",
               "Cette fonctionnalité est disponible uniquement pour les utilisateurs premium."
             ),
             [

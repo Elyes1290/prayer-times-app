@@ -155,7 +155,7 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
 
           // Informer l'utilisateur
           showToast?.({
-            type: "warning",
+            type: "error",
             title: t("premium.expired_title", "Abonnement expiré"),
             message: t(
               "premium.expired_message",
@@ -174,7 +174,7 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
           console.log(`⚠️ Premium expire dans ${daysRemaining} jour(s)`);
 
           showToast?.({
-            type: "warning",
+            type: "info",
             title: t(
               "premium.expiring_soon_title",
               "Abonnement bientôt expiré"

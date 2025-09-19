@@ -970,7 +970,7 @@ function SettingsSections({
                   ]}
                 >
                   {user?.isPremium
-                    ? t("premium", "Premium")
+                    ? t("premium_status", "Premium")
                     : t("free", "Gratuit")}
                 </Text>
               </View>
