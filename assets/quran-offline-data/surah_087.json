@@ -1,0 +1,386 @@
+{
+  "surah_number": 87,
+  "extracted_at": "2025-09-20T15:17:14.569Z",
+  "verses": [
+    {
+      "verse_number": 5949,
+      "verse_key": "87:1",
+      "arabic_text": " سَبِّحِ ٱسْمَ رَبِّكَ ٱلْأَعْلَى",
+      "phonetic_text": "Sabbihi isma rabbika al-aAAla",
+      "translations": {
+        "fr": "Rends gloire au nom de ton Seigneur, le Plus Haut !",
+        "en": "[Prophet], glorify the name of your Lord the Most High,",
+        "es": "Glorifica el nombre de tu Señor, el Altísimo,",
+        "it": "Glorifica il Nome del tuo Signore, l’Altissimo,",
+        "ru": "Славь имя Господа твоего Всевышнего,",
+        "tr": "Rabbinin yüce adını tesbih et.",
+        "de": "Preise den Namen deines höchsten Herrn,",
+        "pt": "Glorifica o nome do teu Senhor, o Altíssimo,",
+        "nl": "Prijs de naam van jouw Heer, de Hoogste.",
+        "ur": "(اے نبیؐ)اپنے ربِّ برتر کے نام کی تسبیح کرو <sup foot_note=\"188435\">1</sup>",
+        "bn": "তুমি তোমাৰ সুমহান প্ৰতিপালকৰ নামৰ পৱিত্ৰতা আৰু মহিমা ঘোষণা কৰা,",
+        "fa": "نام پروردگار بلند مرتبه‌ات را به پاکی یاد کن."
+      }
+    },
+    {
+      "verse_number": 5950,
+      "verse_key": "87:2",
+      "arabic_text": "ٱلَّذِى خَلَقَ فَسَوَّىٰ",
+      "phonetic_text": "Allathee khalaqa fasawwa",
+      "translations": {
+        "fr": "Celui Qui crée et façonne,",
+        "en": "who created [all things] in due proportion;",
+        "es": "Quien ha creado todas las cosas a la perfección",
+        "it": "Colui Che ha creato e dato forma armoniosa,",
+        "ru": "Который сотворил все сущее и всему придал соразмерность,",
+        "tr": "Yaratıp düzene koyan O'dur.",
+        "de": "Der erschafft und dann zurechtformt",
+        "pt": "Que criou e aperfeiçoou tudo;",
+        "nl": "Degene Die geschapen heeft en vervolmaakt.",
+        "ur": "جس نے پیدا کیا اور تناسُب قائم کیا، <sup foot_note=\"188436\">1</sup>",
+        "bn": "যিজনে সৃষ্টি কৰিছে, তাৰ পিছত সুঠাম কৰিছে।",
+        "fa": "[همان ذاتی] که [انسان را] آفرید و هماهنگ و متعادل ساخت."
+      }
+    },
+    {
+      "verse_number": 5951,
+      "verse_key": "87:3",
+      "arabic_text": "وَٱلَّذِى قَدَّرَ فَهَدَىٰ",
+      "phonetic_text": "Wallathee qaddara fahada",
+      "translations": {
+        "fr": "Celui Qui prédestine et guide,",
+        "en": "who determined their destinies and guided them;",
+        "es": "y ha decretado para cada ser su función;",
+        "it": "Colui Che ha decretato e guidato <a class=f><sup foot_note=160592>1</sup></a> ,",
+        "ru": "Который предопределил судьбу творений и указал путь,",
+        "tr": "Takdir edip hidayeti gösteren O'dur.",
+        "de": "und Der das Maß festsetzt und dann rechtleitet",
+        "pt": "Que tudo predestinou e encaminhou;",
+        "nl": "En Degene Die de maat bepaald heeft en Die geleid heeft.",
+        "ur": "جس نے تقدیر بنائی <sup foot_note=\"188437\">1</sup> پھر راہ دکھائی، <sup foot_note=\"188438\">2</sup>",
+        "bn": "আৰু যিজনে (ভাগ্য) নিৰ্ধাৰণ কৰিছে তাৰ পিছত সত্পথ প্ৰদৰ্শন কৰিছে,",
+        "fa": "و [همان] ذاتی‌ که اندازه‌گیری کرد و [به شایستگی آفرید] و سپس هدایت نمود."
+      }
+    },
+    {
+      "verse_number": 5952,
+      "verse_key": "87:4",
+      "arabic_text": "وَٱلَّذِىٓ أَخْرَجَ ٱلْمَرْعَىٰ",
+      "phonetic_text": "Wallathee akhraja almarAAa",
+      "translations": {
+        "fr": "Celui Qui fait pousser les pâturages,",
+        "en": "who brought out the green pasture",
+        "es": "Quien hace brotar la hierba,",
+        "it": "Colui Che fa germinare i pascoli,",
+        "ru": "Который взрастил пастбища,",
+        "tr": "Otlağı çıkaran,",
+        "de": "und Der die Weide hervorbringt",
+        "pt": "E que faz brotar o pasto,",
+        "nl": "Degene die het weidegras doet groeien.",
+        "ur": "جس نے نباتات اُگائیں <sup foot_note=\"188439\">1</sup>",
+        "bn": "আৰু যিজনে তৃণ-লতা উত্পন্ন কৰিছে,",
+        "fa": "و [آن] ذاتی‌ که چراگاه را [برای تغذیۀ جانداران] رویانید."
+      }
+    },
+    {
+      "verse_number": 5953,
+      "verse_key": "87:5",
+      "arabic_text": "فَجَعَلَهُۥ غُثَآءً أَحْوَىٰ",
+      "phonetic_text": "FajaAAalahu ghuthaan ahwa",
+      "translations": {
+        "fr": "pour en faire ensuite une herbe sombre et desséchée.",
+        "en": "then made it dark debris.",
+        "es": "y luego la convierte en heno seco.",
+        "it": "e ne fa poi fieno scuro.",
+        "ru": "а потом превратил их в темный сор.",
+        "tr": "Sonra da onu karamsı bir sel köpüğü haline getiren O'dur.",
+        "de": "und sie dann zu dunkelbrauner Spreu macht.",
+        "pt": "Que se converte em feno.",
+        "nl": "En het daarna dor (en) zwart maakt.",
+        "ur": "پھر اُن کو سیاہ کُوڑا کرکٹ بنا دیا۔ <sup foot_note=\"188440\">1</sup>",
+        "bn": "তাৰ পিছত সেইবোৰক ক'লা আবৰ্জনাত পৰিণত কৰিছে।",
+        "fa": "سپس آن را خشک و سیاه گردانید."
+      }
+    },
+    {
+      "verse_number": 5954,
+      "verse_key": "87:6",
+      "arabic_text": "سَنُقْرِئُكَ فَلَا تَنسَىٰٓ",
+      "phonetic_text": "Sanuqri-oka fala tansa",
+      "translations": {
+        "fr": "Nous te ferons lire (le Coran) dont tu n’oublieras rien,",
+        "en": "[Prophet], We shall teach you [the Quran] and you will not forget––",
+        "es": "[¡Oh, Muhámmad!] Haré que recites [el Corán] y no lo olvides.",
+        "it": "Ti faremo recitare [il Corano] e non dimenticherai",
+        "ru": "Мы позволим тебе прочесть Коран, и ты не забудешь ничего,",
+        "tr": "Bundan böyle sana Kur'ân'ı okutacağız da unutmayacaksın.",
+        "de": "Wir werden dich lesen lassen, und dann wirst du nichts vergessen,",
+        "pt": "Ensinar-te-emos a recitar (a Mensagem), para que não esqueças,",
+        "nl": "Wij zullen (de Koran) aan jou voordragen en jij zult (hem) niet vergeten.",
+        "ur": "ہم تمہیں پڑھوا دیں گے، پھر تم نہیں بھولو گے <sup foot_note=\"188441\">1</sup>",
+        "bn": "অনতিপলমে আমি তোমাক পাঠ কৰাম, ফলত তুমি নাপাহৰিবা,",
+        "fa": "ما به زودی [قرآن را] بر تو می‌خوانیم؛ پس تو هرگز [آن را] فراموش نخواهی کرد؛"
+      }
+    },
+    {
+      "verse_number": 5955,
+      "verse_key": "87:7",
+      "arabic_text": "إِلَّا مَا شَآءَ ٱللَّهُ ۚ إِنَّهُۥ يَعْلَمُ ٱلْجَهْرَ وَمَا يَخْفَىٰ",
+      "phonetic_text": "Illa ma shaa Allahuinnahu yaAAlamu aljahra wama yakhfa",
+      "translations": {
+        "fr": "sauf ce qu’Allah voudra (que tu oublies), car Il Sait ce qui se manifeste au grand jour et ce qui reste caché.",
+        "en": "unless God wishes; He knows both what is open and what is hidden––",
+        "es": "Salvo que Dios quiera, pues Él conoce lo manifiesto y lo oculto.",
+        "it": "se non ciò che Allah vuole. Egli conosce il palese e l’occulto.",
+        "ru": "кроме того, что пожелает Аллах. Он знает явное и то, что сокрыто.",
+        "tr": "Yalnız Allah'ın dilediği başkadır. Çünkü o açığı da bilir, gizliyi de.",
+        "de": "außer dem, was Allah will. Er weiß ja, was laut vernehmbar geäußert wird und was verborgen bleibt.",
+        "pt": "Senão o que Deus permitir, porque Ele bem conhece o que está manifesto e o que é secreto.",
+        "nl": "Behalve wat Allah wil. Voorwaar, Hij kent het openlijke en het verborgene.",
+        "ur": "سوائے اُس کے جو اللہ چاہے، <sup foot_note=\"188442\">1</sup> وہ ظاہر کو بھی جانتا ہے اور جوکچھ پوشیدہ ہے اُس کو بھی۔ <sup foot_note=\"188443\">2</sup>",
+        "bn": "কেৱল আল্লাহে যি বিচাৰে তাৰ বাহিৰে। নিশ্চয় তেওঁ প্ৰকাশ্য আৰু অপ্ৰকাশ্য সকলো জানে।",
+        "fa": "مگر آنچه را که الله بخواهد؛ همانا او آشکار و نهان را می‌داند."
+      }
+    },
+    {
+      "verse_number": 5956,
+      "verse_key": "87:8",
+      "arabic_text": "وَنُيَسِّرُكَ لِلْيُسْرَىٰ",
+      "phonetic_text": "Wanuyassiruka lilyusra",
+      "translations": {
+        "fr": "Nous te mettrons sur la voie la plus facile.",
+        "en": "We shall show you the easy way.",
+        "es": "Te dirigiré por el camino de la facilidad.",
+        "it": "Pre-Eg. n. Diversetti. Il nome della sura deriva dal vers. In nome di Allah, il Compassionevole, il Misericordioso. Ti faciliteremo la [via] più facile <a class=f><sup foot_note=160593>1</sup></a> .",
+        "ru": "Мы облегчим тебе путь к легчайшему.",
+        "tr": "Seni en kolay yola muvaffak kılacağız.",
+        "de": "Und Wir werden dir den Weg zum Leichteren leicht machen.",
+        "pt": "E te encaminharemos pela (senda) mais simples.",
+        "nl": "En Wij zullen het gemakkelijke voor jou gemakkelijk maken.",
+        "ur": "اور ہم تمہیں آسان طریقے کی سہولت دیتے ہیں",
+        "bn": "আৰু আমি তোমাৰ বাবে সহজ পথ সুগম কৰি দিম।",
+        "fa": "و آسان‌ترین [راه‌] را برایت فراهم مى‌گردانیم."
+      }
+    },
+    {
+      "verse_number": 5957,
+      "verse_key": "87:9",
+      "arabic_text": "فَذَكِّرْ إِن نَّفَعَتِ ٱلذِّكْرَىٰ",
+      "phonetic_text": "Fathakkir in nafaAAati aththikra",
+      "translations": {
+        "fr": "Rappelle donc ! Pour peu que le Rappel soit vraiment utile.",
+        "en": "So remind, if reminding will help.",
+        "es": "Exhorta [con el Corán], porque el recuerdo es beneficioso.",
+        "it": "Ricorda, ché il Ricordo <a class=f><sup foot_note=160594>1</sup></a> è utile:",
+        "ru": "Наставляй же людей, если напоминание принесет пользу.",
+        "tr": "Onun için öğüt ver, eğer öğüt fayda verirse.",
+        "de": "So ermahne -, wenn die Ermahnung nützt.",
+        "pt": "Admoesta, pois, porque a admoestação é proveitosa (para o atento)!",
+        "nl": "Vermaan daarom, als de Vermaning (hun) baat.",
+        "ur": "لہٰذا تم نصیحت کرو اگر نصیحت نافع ہو۔ <sup foot_note=\"188444\">1</sup>",
+        "bn": "এতেকে উপদেশ দিয়া, যদি উপদেশ ফলপ্ৰসূ হয়;",
+        "fa": "اگر پند مفید باشد، [مردم را با آیات قرآن] پند ده."
+      }
+    },
+    {
+      "verse_number": 5958,
+      "verse_key": "87:10",
+      "arabic_text": "سَيَذَّكَّرُ مَن يَخْشَىٰ",
+      "phonetic_text": "Sayaththakkaru man yakhsha",
+      "translations": {
+        "fr": "S’en souviendra sûrement celui qui craint (Allah).",
+        "en": "Those who stand in awe of God will heed the reminder,",
+        "es": "Quien tenga temor de Dios recapacitará [con tu exhortación],",
+        "it": "se ne ricorderà chi teme [Allah]",
+        "ru": "Воспримет его тот, кто страшится,",
+        "tr": "Saygısı olan öğüt alacaktır.",
+        "de": "Bedenken wird jemand, der gottesfürchtig ist.",
+        "pt": "Ela guiará aquele que é temente.",
+        "nl": "Wie (Allah) vreest zal zich laten vermanen.",
+        "ur": "جو شخص ڈرتا ہے وہ نصیحت قبول کر لے گا، <sup foot_note=\"188445\">1</sup>",
+        "bn": "উপদেশ সিয়েই গ্ৰহণ কৰিব যিয়ে ভয় কৰে।",
+        "fa": "به زودی کسی‌ که [از الله] می‌ترسد، پند می‌پذیرد."
+      }
+    },
+    {
+      "verse_number": 5959,
+      "verse_key": "87:11",
+      "arabic_text": "وَيَتَجَنَّبُهَا ٱلْأَشْقَى",
+      "phonetic_text": "Wayatajannabuha al-ashqa",
+      "translations": {
+        "fr": "Et le plus malheureux fera tout pour l’éviter,",
+        "en": "but it will be ignored by the most wicked,",
+        "es": "pero el negador de la verdad la rechazará",
+        "it": "e solo il malvagio se ne allontanerà:",
+        "ru": "и уклонится от него самый несчастный,",
+        "tr": "Pek bedbaht olan da ondan kaçınacaktır.",
+        "de": "Meiden aber wird es der Unseligste,",
+        "pt": "Porém, o desventurado a evitará;",
+        "nl": "Maar de ellendige zal het vermijden.",
+        "ur": "اور اس سے گریز کریگا وہ انتہائی بد بخت",
+        "bn": "আৰু যি হতভাগ্য সি ইয়াক অগ্ৰাহ্য কৰিব,",
+        "fa": "و بدبخت‌ترین [مردم،] از آن دوری می‌گزیند؛"
+      }
+    },
+    {
+      "verse_number": 5960,
+      "verse_key": "87:12",
+      "arabic_text": "ٱلَّذِى يَصْلَى ٱلنَّارَ ٱلْكُبْرَىٰ",
+      "phonetic_text": "Allathee yasla annaraalkubra",
+      "translations": {
+        "fr": "lui qui brûlera dans le Feu le plus grand,",
+        "en": "who will enter the Great Fire,",
+        "es": "y por eso será abrazado por un gran fuego,",
+        "it": "brucerà nel Fuoco più grande,",
+        "ru": "который войдет в Огонь величайший.",
+        "tr": "O ki, en büyük ateşe girecektir.",
+        "de": "der dem größten (Höllen)feuer ausgesetzt sein wird;",
+        "pt": "Entrará no fogo maior (o infernal),",
+        "nl": "Degene die het grote Vuur binnengaat.",
+        "ur": "جو بڑی آگ میں جائے گا",
+        "bn": "সি ভয়াৱহ জুইত প্ৰৱেশ কৰিব।",
+        "fa": "[همان] کسی‌ که در آتش بزرگ [جهنم] درخواهد آمد،"
+      }
+    },
+    {
+      "verse_number": 5961,
+      "verse_key": "87:13",
+      "arabic_text": "ثُمَّ لَا يَمُوتُ فِيهَا وَلَا يَحْيَىٰ",
+      "phonetic_text": "Thumma la yamootu feeha walayahya",
+      "translations": {
+        "fr": "puis n’y mourra point, pas plus qu’il n’y vivra.",
+        "en": "where they will neither die nor live.",
+        "es": "donde no podrá morir [para descansar del sufrimiento] ni vivir [sin dolor].",
+        "it": "in cui non morrà e non vivrà.",
+        "ru": "Не умрет он там и не будет жить.",
+        "tr": "Sonra ne ölecek onda, ne de hayat bulacaktır.",
+        "de": "darin wird er hierauf weder sterben noch leben.",
+        "pt": "Onde não morrerá, nem viverá.",
+        "nl": "Hij zal dan daarin niet sterven en niet leven.",
+        "ur": "  پھر نہ اس میں مرے گا اور نہ جیے گا۔ <sup foot_note=\"188446\">1</sup>",
+        "bn": "তাৰ পিছত সি তাত মৃত্যুবৰণো কৰিব নোৱাৰিব আৰু জীৱিতও থাকিব নোৱাৰিব।",
+        "fa": "و در آن [آتش] نه می‌میرد و نه زنده می‌مانَد."
+      }
+    },
+    {
+      "verse_number": 5962,
+      "verse_key": "87:14",
+      "arabic_text": "قَدْ أَفْلَحَ مَن تَزَكَّىٰ",
+      "phonetic_text": "Qad aflaha man tazakka",
+      "translations": {
+        "fr": "Aura la réussite celui qui s’est purifié,",
+        "en": "Prosperous are those who purify themselves,",
+        "es": "¡Será de los bienaventurados quien se purifique [de la idolatría y los pecados],",
+        "it": "Avrà successo chi si sarà purificato,",
+        "ru": "Преуспел тот, кто очистился,",
+        "tr": "Doğrusu felah buldu (günahtan) temizlenen.  ",
+        "de": "Wohl ergehen wird es ja jemandem, der sich läutert,",
+        "pt": "Bem-aventurado aquele que se purificar,",
+        "nl": "Hij die zich reinigt (van zijn zonden) zal waarlijk slagen.",
+        "ur": "فلاح پا گیا وہ جس نے پاکیزگی اختیار کی <sup foot_note=\"188447\">1</sup>",
+        "bn": "নিশ্চয় সফলতা লাভ কৰিব যিয়ে আত্মশুদ্ধি কৰিব।",
+        "fa": "یقیناً کسی ‌که خود را [از کفرو گناه] پاک کند، رستگار خواهد شد؛"
+      }
+    },
+    {
+      "verse_number": 5963,
+      "verse_key": "87:15",
+      "arabic_text": "وَذَكَرَ ٱسْمَ رَبِّهِۦ فَصَلَّىٰ",
+      "phonetic_text": "Wathakara isma rabbihi fasalla",
+      "translations": {
+        "fr": "a évoqué le nom de son Seigneur et a prié.",
+        "en": "remember the name of their Lord, and pray.",
+        "es": "recuerde el nombre de su Señor y cumpla con sus oraciones!",
+        "it": "e avrà ricordato il Nome di Allah e assolto all’orazione.",
+        "ru": "поминал имя своего Господа и совершал намаз.",
+        "tr": "Rabbinin adını anıp namaz kılan.",
+        "de": "und des Namens seines Herrn gedenkt; so betet er.",
+        "pt": "E mencionar o nome do seu Senhor e orar!",
+        "nl": "En (ook) die de Naam van zijn Heer gedenkt en de shalât verricht.",
+        "ur": "اور اپنے ربّ کا نام یاد کیا <sup foot_note=\"188448\">1</sup> پھر نماز پڑھی۔ <sup foot_note=\"188449\">2</sup>",
+        "bn": "আৰু তাৰ প্ৰতিপালকৰ নাম স্মৰণ কৰিব আৰু ছালাত আদায় কৰিব।",
+        "fa": "و [نیز کسی که] نام پروردگارش را یاد کند و نماز بگزارد."
+      }
+    },
+    {
+      "verse_number": 5964,
+      "verse_key": "87:16",
+      "arabic_text": "بَلْ تُؤْثِرُونَ ٱلْحَيَوٰةَ ٱلدُّنْيَا",
+      "phonetic_text": "Bal tu/thiroona alhayata addunya",
+      "translations": {
+        "fr": "Vous préférez plutôt la vie en ce bas monde,",
+        "en": "Yet you [people] prefer the life of this world,",
+        "es": "Pero [muchos] preferís la vida mundanal,",
+        "it": "Ma voi preferite la vita terrena,",
+        "ru": "Но нет! Вы отдаете предпочтение мирской жизни,",
+        "tr": "Fakat siz dünya hayatını tercih ediyorsunuz.",
+        "de": "Nein! Vielmehr zieht ihr das diesseitige Leben vor,",
+        "pt": "Entretanto, vós, (ó incrédulos) preferis a vida terrena,",
+        "nl": "Jullie geven immers voorrang aan het wereldse leven.",
+        "ur": "مگر تم لوگ دنیا کی زندگی کو ترجیح دیتے ہو، <sup foot_note=\"188450\">1</sup>",
+        "bn": "কিন্তু তোমালোকে পৃথিৱীৰ জীৱনক প্ৰাধান্য দিয়া,",
+        "fa": "ولی شما [مردم،] زندگی دنیا را [بر آخرت] ترجیح می‌دهید؛"
+      }
+    },
+    {
+      "verse_number": 5965,
+      "verse_key": "87:17",
+      "arabic_text": "وَٱلْـَٔاخِرَةُ خَيْرٌ وَأَبْقَىٰٓ",
+      "phonetic_text": "Wal-akhiratu khayrun waabqa",
+      "translations": {
+        "fr": "alors que l’autre monde est bien meilleur et autrement durable.",
+        "en": "even though the Hereafter is better and more lasting.",
+        "es": "aunque debéis saber que la vida del más allá es superior y eterna.",
+        "it": "mentre l’altra è migliore e più duratura.",
+        "ru": "хотя Последняя жизнь - лучше и дольше.",
+        "tr": "Oysa ahiret daha hayırlı ve daha kalıcıdır.",
+        "de": "während das Jenseits besser und beständiger ist.",
+        "pt": "Ainda que a outra seja preferível, e mais duradoura!",
+        "nl": "Terwijl het Hiernamaals beter en blijvender is.",
+        "ur": "حالانکہ آخرت بہتر ہے اور باقی رہنے والی ہے۔ <sup foot_note=\"188451\">1</sup>",
+        "bn": "অথচ আখিৰাত সৰ্বোত্তম আৰু স্থায়ী।",
+        "fa": "در حالی‌ که آخرت، بهتر و پاینده‌تر است."
+      }
+    },
+    {
+      "verse_number": 5966,
+      "verse_key": "87:18",
+      "arabic_text": "إِنَّ هَـٰذَا لَفِى ٱلصُّحُفِ ٱلْأُولَىٰ",
+      "phonetic_text": "Inna hatha lafee assuhufial-oola",
+      "translations": {
+        "fr": "Cela est (consigné) dans les anciens Feuillets,",
+        "en": "All this is in the earlier scriptures,",
+        "es": "Este Mensaje se encuentra mencionado en las primeras revelaciones,",
+        "it": "In verità ciò è nei Fogli antichi,",
+        "ru": "Воистину, это записано в первых свитках -",
+        "tr": "Kuşkusuz bu ilk sahifelerde vardır,",
+        "de": "Dies ist wahrlich in den früheren Blättern (enthalten),",
+        "pt": "Em verdade, isto se acha nos Livros primitivos,",
+        "nl": "Voorwaar, dit staat zeker in de vroegere bladen.",
+        "ur": "یہی بات پہلے آئے ہوئے صحیفوں میں بھی کہی گئی تھی",
+        "bn": "নিশ্চয় ইয়াৰ বৰ্ণনা আছে পূৰ্বৱৰ্তী ছহীফাসমূহত,",
+        "fa": "به راستی این [پندها] در کتاب‌های آسمانی پیشین [نیز] بود؛"
+      }
+    },
+    {
+      "verse_number": 5967,
+      "verse_key": "87:19",
+      "arabic_text": "صُحُفِ إِبْرَٰهِيمَ وَمُوسَىٰ",
+      "phonetic_text": "Suhufi ibraheema wamoosa",
+      "translations": {
+        "fr": "les Feuillets d’Abraham et de Moïse.",
+        "en": "the scriptures of Abraham and Moses.",
+        "es": "en las revelaciones recibidas por Abraham y Moisés.",
+        "it": "i Fogli di Abramo <a class=f><sup foot_note=160595>1</sup></a> e di Mosè. <a class=f><sup foot_note=160596>2</sup></a> «ha decretato e guidato»: Allah (gloria a Lui l’Altissimo) ha determinato il ruolo e la funzione di ognuna delle Sue creature, ha insegnato la sopravvivenza agli animali, ha mostrato agli uomini la via della salvezza eterna. <a class=f><sup foot_note=160597>3</sup></a> L’IsIàm, la via verso la salvezza, la memorizzazione del Corano, il trionfo sui miscredenti; queste alcune delle possibili spiegazioni de «la via più facile». <a class=f><sup foot_note=160598>4</sup></a> II Dhikr, il Ricordo [di Dio] è anche uno dei nomi del Corano. <a class=f><sup foot_note=160599>5</sup></a> La Rivelazione che Allah (gloria a Lui l’Altissimo) ha dato al nostro padre Abramo (pace su di lui) e di cui ci è pervenuta la notizia in grazia di questo versetto.",
+        "ru": "свитках Ибрахима (Авраама) и Мусы (Моисея).",
+        "tr": "İbrahim ve Musa'nın sahifelerinde.",
+        "de": "den Blättern Ibrahims und Musas.",
+        "pt": "Nos Livros de Abraão e de Moisés.",
+        "nl": "De bladen van Ibrâhîm en Môesa.",
+        "ur": "ابراہیمؑ  اور موسیٰؑ کے صحیفوں میں۔ <sup foot_note=\"188452\">1</sup>",
+        "bn": "ইব্ৰাহীম আৰু মূছাৰ ছহীফাসমূহত।",
+        "fa": "کتاب‌های ابراهیم و موسی."
+      }
+    }
+  ]
+}

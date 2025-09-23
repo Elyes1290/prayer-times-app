@@ -1,0 +1,386 @@
+{
+  "surah_number": 82,
+  "extracted_at": "2025-09-20T15:17:07.560Z",
+  "verses": [
+    {
+      "verse_number": 5830,
+      "verse_key": "82:1",
+      "arabic_text": " إِذَا ٱلسَّمَآءُ ٱنفَطَرَتْ",
+      "phonetic_text": "Itha assamao infatarat",
+      "translations": {
+        "fr": "Quand le ciel se brisera,",
+        "en": "When the sky is torn apart,",
+        "es": "Cuando el cielo se rompa,",
+        "it": "Quando il cielo si squarcerà",
+        "ru": "Когда небо расколется,",
+        "tr": "Gök çatladığı vakit,",
+        "de": "Wenn der Himmel zerbricht",
+        "pt": "Quando o céu se fender,",
+        "nl": "Wanneer de hemel gespleten wordt.",
+        "ur": "جب آسمان پھٹ جائے گا",
+        "bn": "যেতিয়া আকাশখন বিদীৰ্ণ হ’ব,",
+        "fa": "آنگاه ‌که آسمان شکافته شود،"
+      }
+    },
+    {
+      "verse_number": 5831,
+      "verse_key": "82:2",
+      "arabic_text": "وَإِذَا ٱلْكَوَاكِبُ ٱنتَثَرَتْ",
+      "phonetic_text": "Wa-itha alkawakibu intatharat",
+      "translations": {
+        "fr": "quand les astres choiront,",
+        "en": "when the stars are scattered,",
+        "es": "cuando los planetas salgan de sus órbitas,",
+        "it": "e saranno dispersi gli astri",
+        "ru": "когда тела небесные осыплются,",
+        "tr": "Yıldızlar döküldüğü vakit,",
+        "de": "und wenn die Sterne sich zerstreuen",
+        "pt": "Quando os planetas se dispersarem,",
+        "nl": "En wanneer de sterren vallen.",
+        "ur": "اور جب تارے بکھر جائیں گے",
+        "bn": "আৰু যেতিয়া নক্ষত্ৰসমূহ বিক্ষিপ্তভাৱে খহি পৰিব,",
+        "fa": "آنگاه ‌که ستارگان پراکنده شوند [و فرو ریزند]،"
+      }
+    },
+    {
+      "verse_number": 5832,
+      "verse_key": "82:3",
+      "arabic_text": "وَإِذَا ٱلْبِحَارُ فُجِّرَتْ",
+      "phonetic_text": "Wa-itha albiharu fujjirat",
+      "translations": {
+        "fr": "que les mers se confondront,",
+        "en": "when the seas burst forth,",
+        "es": "cuando los mares se desborden",
+        "it": "e confonderanno le loro acque i mari <a class=f><sup foot_note=160524>1</sup></a>",
+        "ru": "когда моря перельются и смешаются (или высохнут),",
+        "tr": "Denizler yarılıp akıtıldığı vakit,",
+        "de": "und wenn die Meere gesprengt werden",
+        "pt": "Quando os oceanos forem despejados,",
+        "nl": "En wanneer de zeeën overstromen.",
+        "ur": "اور جب سمندر پھاڑ دیے جائیں گے، <sup foot_note=\"188380\">1</sup>",
+        "bn": "আৰু যেতিয়া সাগৰসমূহক বিস্ফোৰিত কৰা হ’ব,",
+        "fa": "و آنگاه ‌که دریا‌ها [به هم آمیزند و لبریز و] روان گردند،"
+      }
+    },
+    {
+      "verse_number": 5833,
+      "verse_key": "82:4",
+      "arabic_text": "وَإِذَا ٱلْقُبُورُ بُعْثِرَتْ",
+      "phonetic_text": "Wa-itha alqubooru buAAthirat",
+      "translations": {
+        "fr": "que les tombes seront renversées,",
+        "en": "when graves turn inside out:",
+        "es": "y cuando las tumbas se abran.",
+        "it": "e saranno sconvolti i sepolcri,",
+        "ru": "когда могилы перевернутся,",
+        "tr": "Kabirlerin içi dışına getirildiği vakit,",
+        "de": "und wenn die Gräber durchwühlt werden,",
+        "pt": "E quando os sepulcros forem revirados,",
+        "nl": "En wanneer de graven worden omgekeerd.",
+        "ur": "اور جب قبریں کھول دی جائیں گی، <sup foot_note=\"188381\">1</sup>",
+        "bn": "আৰু যেতিয়া কবৰসমূহক উন্মোচিত কৰা হ’ব,",
+        "fa": "و آنگاه ‌که قبرها [برای براگیختن مردگان] زیر و رو شود،"
+      }
+    },
+    {
+      "verse_number": 5834,
+      "verse_key": "82:5",
+      "arabic_text": "عَلِمَتْ نَفْسٌ مَّا قَدَّمَتْ وَأَخَّرَتْ",
+      "phonetic_text": "AAalimat nafsun ma qaddamatwaakhkharat",
+      "translations": {
+        "fr": "chaque âme saura alors ce qu’elle a déjà fait et ce qu’elle a renvoyé à plus tard.",
+        "en": "each soul will know what it has done and what it has left undone.",
+        "es": "En ese momento sabrá cada alma lo que hizo de bien y de mal.",
+        "it": "ogni anima conoscerà quel che avrà fatto e quel che avrà trascurato!",
+        "ru": "тогда каждая душа узнает, что она совершила и что оставила после себя.",
+        "tr": "Herkes neyi önünden gönderdiğini ve neyi geri bıraktığını bilir.",
+        "de": "wird eine (jede) Seele erfahren, was sie vorausgeschickt und zurückgestellt hat.",
+        "pt": "Saberá cada alma o que fez e o que deixou de fazer.",
+        "nl": "Dan weet de ziel wat zij heeft verricht en wat zij nagelaten heeft.",
+        "ur": "اُس وقت ہر شخص کو اُس کا اگلا پچھلا سب کیا دھرا معلوم ہو جائے گا۔ <sup foot_note=\"188382\">1</sup>",
+        "bn": "তেতিয়া প্ৰত্যেকেই জানিব, সি কি আগলৈ পঠিয়াইছে আৰু পিছত কি ৰাখি আহিছে।",
+        "fa": "[در آن هنگام،] هر کس می‌داند چه چیزهایی را پیشاپیش فرستاده و چه چیزهایی را واپس نهاده [و بر جای گذاشته است]."
+      }
+    },
+    {
+      "verse_number": 5835,
+      "verse_key": "82:6",
+      "arabic_text": "يَـٰٓأَيُّهَا ٱلْإِنسَـٰنُ مَا غَرَّكَ بِرَبِّكَ ٱلْكَرِيمِ",
+      "phonetic_text": "Ya ayyuha al-insanu magharraka birabbika alkareem",
+      "translations": {
+        "fr": "Ô homme ! Qu’est-ce qui t’a donc leurré au sujet de ton Noble Seigneur",
+        "en": "Mankind, what has lured you away from God,",
+        "es": "¡Oh, seres humanos! ¿Qué fue lo que os engañó para que os apartarais de vuestro Señor Generoso?",
+        "it": "O uomo, cosa mai ti ha ingannato circa il tuo Nobile Signore",
+        "ru": "О человек! Что ввело тебя в заблуждение относительно твоего Великодушного Господа,",
+        "tr": "Ey insan! İhsanı bol Rabb'ine karşı seni aldatan nedir?",
+        "de": "O Mensch, was hat dich hinsichtlich deines edelmütigen Herrn getäuscht,",
+        "pt": "Ó humano, o que te fez negligente em relação ao teu Senhor, o Munificentíssimo,",
+        "nl": "O mens, wat heeft jou weggeleid van jouw Heer, de Edele?",
+        "ur": "اے انسان، کس چیز نے تجھے اپنے اُس رب کریم کی طرف سے دھوکے میں ڈال دیا",
+        "bn": "হে মানৱ! কিহে তোমাক তোমাৰ প্ৰতিপালক সম্পৰ্কে বিভ্ৰান্ত কৰিছে?",
+        "fa": "ای انسان، چه چیزی تو را [نسبت] به پروردگار بزرگوارت مغرور ساخته است؟"
+      }
+    },
+    {
+      "verse_number": 5836,
+      "verse_key": "82:7",
+      "arabic_text": "ٱلَّذِى خَلَقَكَ فَسَوَّىٰكَ فَعَدَلَكَ",
+      "phonetic_text": "Allathee khalaqaka fasawwakafaAAadalak",
+      "translations": {
+        "fr": "Qui t’a créé, t’a façonné et t’a donné des formes aussi proportionnées ?",
+        "en": "your generous Lord, who created you, shaped you, proportioned you,",
+        "es": "Quien os creó, os dio forma y una conformación armoniosa,",
+        "it": "Che ti ha creato, plasmato e t’ha dato armonia",
+        "ru": "Который сотворил тебя и сделал твой облик совершенным и соразмеренным?",
+        "tr": "O Allah ki seni yarattı, seni düzgün yapılı kılıp ölçülü bir biçim verdi.",
+        "de": "Der dich erschaffen und da(bei) zurechtgeformt und wohlgebildet gemacht hat,",
+        "pt": "Que te criou, te formou, te aperfeiçoou,",
+        "nl": "Degene Die jou geschapen heeft en daarna vervolmaakte en de juiste verhoudingen gaf?",
+        "ur": "جس نے تجھے پیدا کیا، تجھے نک سک سے درست کیا، تجھے متناسب بنایا",
+        "bn": "যিজনে তোমাক সৃষ্টি কৰিছে, তাৰ পিছত তোমাক সুঠাম কৰিছে আৰু সুসামঞ্জস্য কৰিছে,",
+        "fa": "آن [پروردگاری] که تو را آفرید، سپس به تو سر و سامان داد و آنگاه تو را متعادل و متناسب کرد."
+      }
+    },
+    {
+      "verse_number": 5837,
+      "verse_key": "82:8",
+      "arabic_text": "فِىٓ أَىِّ صُورَةٍ مَّا شَآءَ رَكَّبَكَ",
+      "phonetic_text": "Fee ayyi sooratin ma shaarakkabak",
+      "translations": {
+        "fr": "Il t’a constitué dans la forme qu’Il a voulue.",
+        "en": "in whatever form He chose?",
+        "es": "y os dio la más hermosa figura que quiso.",
+        "it": "e Che ti ha formato nel modo che ha voluto?",
+        "ru": "Он сложил тебя в том облике, в каком пожелал.",
+        "tr": "Seni dilediği her hangi bir şekilde parçalardan oluşturdu.",
+        "de": "und dich, in welcher Gestalt Er wollte, zusammengefügt hat?",
+        "pt": "E te modelou, na forma que Lhe aprouve?",
+        "nl": "In welke vorm Hij ook wilde heeft Hij jou samengesteld.",
+        "ur": "اور جس صورت میں چاہا تجھ کو جوڑ کر تیار کیا؟ <sup foot_note=\"188383\">1</sup>",
+        "bn": "আৰু যি আকৃতিত বিচাৰিছে, তেওঁ তোমাক (সেই আকৃতিতে) গঠন কৰিছে।",
+        "fa": "و به هر شکلی [و صورتی] که خواست، تو را ترکیب نمود."
+      }
+    },
+    {
+      "verse_number": 5838,
+      "verse_key": "82:9",
+      "arabic_text": "كَلَّا بَلْ تُكَذِّبُونَ بِٱلدِّينِ",
+      "phonetic_text": "Kalla bal tukaththiboona biddeen",
+      "translations": {
+        "fr": "Et pourtant, vous tenez la Rétribution pour imposture.",
+        "en": "Yet you still take the Judgement to be a lie!",
+        "es": "Pero aun así desmentís el Día del Juicio.",
+        "it": "No, voi tacciate di menzogna il Giudizio,",
+        "ru": "Но нет! Вы же считаете ложью воздаяние.",
+        "tr": "Hayır hayır, siz cezayı yalanlıyorsunuz.",
+        "de": "Keineswegs! Vielmehr erklärt ihr das Gericht für Lüge.",
+        "pt": "Qual! Apesar disso, desmentis o (Dia do) Juízo!",
+        "nl": "Nee, jullie loochenen zelfs de Dag des Oordeels.",
+        "ur": "ہر گز نہیں، <sup foot_note=\"188384\">1</sup> بلکہ (اصل بات یہ ہے کہ) تم لوگ جزا و سزا کو جھُٹلاتے ہو، <sup foot_note=\"188385\">2</sup>",
+        "bn": "কেতিয়াও নহয়, বৰং তোমালোকে প্ৰতিদান দিৱসক অস্বীকাৰ কৰা;",
+        "fa": "هرگز چنین نیست [که شما گمان می‌کنید]؛ بلکه شما [روز] جزا را تکذیب می‌کنید."
+      }
+    },
+    {
+      "verse_number": 5839,
+      "verse_key": "82:10",
+      "arabic_text": "وَإِنَّ عَلَيْكُمْ لَحَـٰفِظِينَ",
+      "phonetic_text": "Wa-inna AAalaykum lahafitheen",
+      "translations": {
+        "fr": "Des gardiens sont là à vous surveiller,",
+        "en": "Over you stand",
+        "es": "Hay ángeles que registran vuestras obras,",
+        "it": "nonostante [veglino] su di voi dei custodi,",
+        "ru": "Воистину, над вами есть хранители -",
+        "tr": "Oysa üzerinizde koruyucular var.",
+        "de": "Über euch sind wahrlich Hüter (eingesetzt),",
+        "pt": "Porém, certamente, sobre vós há anjos da guarda,",
+        "nl": "En voorwaar, er zijn zeker bewakers (Engelen) over jullie.",
+        "ur": "حالانکہ تم پر نگراں مقرر ہیں",
+        "bn": "আৰু নিশ্চয় তোমালোকৰ ওপৰত নিয়োজিত আছে সংৰক্ষকদল;",
+        "fa": "و بی‌گمان، نگهبانانی [از فرشتگان] بر شما گمارده شده‌اند."
+      }
+    },
+    {
+      "verse_number": 5840,
+      "verse_key": "82:11",
+      "arabic_text": "كِرَامًا كَـٰتِبِينَ",
+      "phonetic_text": "Kiraman katibeen",
+      "translations": {
+        "fr": "qui sont de nobles scripteurs,<sup foot_note=195225>1</sup>",
+        "en": "watchers, noble recorders",
+        "es": "nobles escribas",
+        "it": "nobili scribi <a class=f><sup foot_note=160525>1</sup></a> ,",
+        "ru": "благородные писцы,",
+        "tr": "Değerli yazıcılar",
+        "de": "edle, die (alles) aufschreiben",
+        "pt": "Generosos e anotadores,",
+        "nl": "Eervollen, schrijvenden.",
+        "ur": "ایسے معزز کاتب",
+        "bn": "সন্মানিত লেখক বৃন্দ;",
+        "fa": "که نویسندگانی بزرگوارند؛"
+      }
+    },
+    {
+      "verse_number": 5841,
+      "verse_key": "82:12",
+      "arabic_text": "يَعْلَمُونَ مَا تَفْعَلُونَ",
+      "phonetic_text": "YaAAlamoona ma tafAAaloon",
+      "translations": {
+        "fr": "sachant bien ce que vous faites.",
+        "en": "who know what you do:",
+        "es": "que saben lo que hacéis.",
+        "it": "ben consci di quello che fate.",
+        "ru": "которые знают о том, что вы совершаете.",
+        "tr": "Onlar, siz her ne yaparsanız bilirler",
+        "de": "und die wissen, was ihr tut.",
+        "pt": "Que sabem (tudo) o que fazeis.",
+        "nl": "Zij weten wat jullie doen.",
+        "ur": "جو تمہارے ہر فعل کو جانتے ہیں۔ <sup foot_note=\"188386\">1</sup>",
+        "bn": "তোমালোকে যি কৰা সেয়া তেওঁলোকে জানে।",
+        "fa": "آنچه را انجام می‌دهید، می‌دانند [و اعمال نیک و بد شما را ثبت می‌کنند]."
+      }
+    },
+    {
+      "verse_number": 5842,
+      "verse_key": "82:13",
+      "arabic_text": "إِنَّ ٱلْأَبْرَارَ لَفِى نَعِيمٍ",
+      "phonetic_text": "Inna al-abrara lafee naAAeem",
+      "translations": {
+        "fr": "Les vertueux auront droit au délice absolu.",
+        "en": "the good will live in bliss,",
+        "es": "Los piadosos disfrutarán delicias [en esta vida y en el Paraíso],",
+        "it": "In verità i giusti saranno nella Delizia <a class=f><sup foot_note=160526>1</sup></a> ,",
+        "ru": "Воистину, благочестивые окажутся в блаженстве.",
+        "tr": "Kuşkusuz iyiler nimet içindedirler.",
+        "de": "Die Frommen werden wahrlich in Wonne sein.",
+        "pt": "Sabei que os piedosos estarão em deleite;",
+        "nl": "Voorwaar, de deugdzamen verkeren zeker in gelukzaligheid.",
+        "ur": "یقیناً نیک لوگ مزے میں ہوں گے",
+        "bn": "নিশ্চয় সত্কৰ্মপৰায়ণসকল থাকিব পৰম সুখ-শান্তিত।",
+        "fa": "مسلماً نیکوکاران در نعمت[های بهشت] هستند."
+      }
+    },
+    {
+      "verse_number": 5843,
+      "verse_key": "82:14",
+      "arabic_text": "وَإِنَّ ٱلْفُجَّارَ لَفِى جَحِيمٍ",
+      "phonetic_text": "Wa-inna alfujjara lafee jaheem",
+      "translations": {
+        "fr": "Les scélérats seront en Enfer.",
+        "en": "and the wicked will burn in the Fire.",
+        "es": "mientras que los pecadores, en cambio, sufrirán tormento [en esta vida y en la otra],",
+        "it": "e in verità i peccatori nella Fornace <a class=f><sup foot_note=160527>1</sup></a>",
+        "ru": "Воистину, грешники окажутся в Аду,",
+        "tr": "Kötüler de cehennemdedirler.",
+        "de": "Und die Sittenlosen werden wahrlich in einem Höllenbrand sein,",
+        "pt": "Por outra, os ignóbeis, irão para a fogueira,",
+        "nl": "En voorwaar, de zondaren verkeren zeker in de Hel.",
+        "ur": "اور بے شک بدکار لوگ جہنم میں جائیں گے",
+        "bn": "আৰু নিশ্চয় পাপীসকল থাকিব জাহান্নামত।",
+        "fa": "و یقیناً بدکاران در [آتش] جهنمند."
+      }
+    },
+    {
+      "verse_number": 5844,
+      "verse_key": "82:15",
+      "arabic_text": "يَصْلَوْنَهَا يَوْمَ ٱلدِّينِ",
+      "phonetic_text": "Yaslawnaha yawma addeen",
+      "translations": {
+        "fr": "Ils y brûleront au Jour de la Rétribution,",
+        "en": "They will enter it on the Day of Judgement",
+        "es": "y arderán en el Infierno desde el Día del Juicio,",
+        "it": "in cui precipiteranno nel Giorno del Giudizio,",
+        "ru": "куда они войдут в День воздаяния.",
+        "tr": "Ceza günü ona girecekler.",
+        "de": "dem sie am Tag des Gerichts ausgesetzt werden",
+        "pt": "Em que entrarão, no Dia do Juízo,",
+        "nl": "Zij gaan erin op de Dag des Oordeels.",
+        "ur": "جزا کے دن وہ اس میں داخل ہوں گے",
+        "bn": "সিহঁতে প্ৰতিদান দিৱসত তাত প্ৰৱেশ কৰিব;",
+        "fa": "روز جزا به آن درمی‌آیند [و می‌سوزند]"
+      }
+    },
+    {
+      "verse_number": 5845,
+      "verse_key": "82:16",
+      "arabic_text": "وَمَا هُمْ عَنْهَا بِغَآئِبِينَ",
+      "phonetic_text": "Wama hum AAanha bigha-ibeen",
+      "translations": {
+        "fr": "et ne pourront s’y dérober.",
+        "en": "and they will find no escape.",
+        "es": "del que no podrán salir.",
+        "it": "senza potervi sfuggire.",
+        "ru": "Они не смогут избежать этого.",
+        "tr": "Onlar o cehennemin gözünden kaçamazlar.",
+        "de": "und dem sie nicht abwesend sein werden.",
+        "pt": "Da qual jamais poderão esquivar-se.",
+        "nl": "En zij zullen er nooit afwezig zijn.",
+        "ur": "اور اُس سے ہرگز غائب نہ ہو سکیں گے",
+        "bn": "আৰু সিহঁতে তাৰ পৰা অনুপস্থিত থাকিব নোৱাৰিব।",
+        "fa": "و هرگز آنان از آنجا به دور و [در امان] نباشند."
+      }
+    },
+    {
+      "verse_number": 5846,
+      "verse_key": "82:17",
+      "arabic_text": "وَمَآ أَدْرَىٰكَ مَا يَوْمُ ٱلدِّينِ",
+      "phonetic_text": "Wama adraka ma yawmu addeeni",
+      "translations": {
+        "fr": "Et qui te fera jamais savoir ce qu’est le Jour de la Rétribution ?",
+        "en": "What will explain to you what the Day of Judgement is?",
+        "es": "¿Qué te hará comprender todo lo que sucederá el Día de la Retribución?",
+        "it": "Chi mai ti farà comprendere cos’è il Giorno del Giudizio?",
+        "ru": "Откуда ты мог знать, что такое День воздаяния?",
+        "tr": "Ceza gününün ne olduğunu sen bilir misin?",
+        "de": "Und was läßt dich wissen, was der Tag des Gerichts ist?",
+        "pt": "E, o que te fará entender o que é o Dia do Juízo?",
+        "nl": "En wat doet jou weten wat de Dag des Oordeels is?",
+        "ur": "اور تم کیا جانتے ہو کہ وہ جزا کا دن کیا ہے؟",
+        "bn": "আৰু তোমাক কিহে জনাব যে, প্ৰতিদান দিৱস কি?",
+        "fa": "و تو چه ‌دانی که روز جزا چیست؟"
+      }
+    },
+    {
+      "verse_number": 5847,
+      "verse_key": "82:18",
+      "arabic_text": "ثُمَّ مَآ أَدْرَىٰكَ مَا يَوْمُ ٱلدِّينِ",
+      "phonetic_text": "Thumma ma adraka mayawmu addeen",
+      "translations": {
+        "fr": "Et puis, qui te fera jamais savoir ce qu’est le Jour de la Rétribution ?",
+        "en": "Yes! What will explain to you what the Day of Judgement is?",
+        "es": "[¡Reflexiona!] ¿Qué te hará comprender todo lo que sucederá el Día de la Retribución?",
+        "it": "E ancora, chi mai ti farà comprendere cos’è il Giorno del Giudizio?",
+        "ru": "Да, откуда ты мог знать, что такое День воздаяния?",
+        "tr": "Evet, bilir misin nedir acaba o ceza günü?",
+        "de": "Abermals: Was läßt dich wissen, was der Tag des Gerichts ist?",
+        "pt": "Novamente: o que te fará entender o que é o Dia do Juízo?",
+        "nl": "Nogmaals, wat doet jou weten wat de Dag des Oordeels is?",
+        "ur": "ہاں، تمہیں کیا خبر کہ وہ جزا کا دن کیا ہے؟",
+        "bn": "আকৌ কৈছো, কিহে তোমাক জনাব প্ৰতিদান দিৱস কি?",
+        "fa": "باز تو چه می‌دانی که روز جزا چیست؟"
+      }
+    },
+    {
+      "verse_number": 5848,
+      "verse_key": "82:19",
+      "arabic_text": "يَوْمَ لَا تَمْلِكُ نَفْسٌ لِّنَفْسٍ شَيْـًٔا ۖ وَٱلْأَمْرُ يَوْمَئِذٍ لِّلَّهِ",
+      "phonetic_text": "Yawma la tamliku nafsun linafsinshay-an wal-amru yawma-ithin lillah",
+      "translations": {
+        "fr": "C’est le jour où aucune âme ne pourra rien pour une autre âme. Et la décision, ce jour-là, reviendra entière à Allah.",
+        "en": "The Day when no soul will be able to do anything for another; on that Day, command will belong to God.",
+        "es": "Ese día nadie podrá hacer nada por nadie, porque será Dios Quien decida.",
+        "it": "Il Giorno in cui nessun’anima potrà giovare ad un’[altra] anima in alcunché. In quel Giorno [tutto] il potere apparterrà ad Allah <a class=f><sup foot_note=160528>1</sup></a> . <a class=f><sup foot_note=160529>2</sup></a> «confonderanno le loro acque»: il versetto sembra fare riferimento al venir meno di quelle barriere invisibili che impediscono di fatto il confondersi delle acque dei diversi mari (cfr. lv,9-e la nota). Un altro significato ammesso «traboccheranno, strariperanno i mari». <a class=f><sup foot_note=160530>3</sup></a> Come in molti altri brani, gli angeli che annotano le azioni degli uomini. <a class=f><sup foot_note=160531>4</sup></a> «la Delizia»: un luogo del Paradiso. <a class=f><sup foot_note=160532>5</sup></a> «la Fornace»: un luogo dell’Inferno. <a class=f><sup foot_note=160533>6</sup></a> «tutto il potere…»: va da sé che il potere appartiene sempre tutto ad Allah, ma in quel Giorno l’uomo non sarà neppure più padrone delle sue intenzioni.",
+        "ru": "В тот день ни одна душа не сможет ничем помочь другой, и власть в тот день будет принадлежать Аллаху.",
+        "tr": "O gün, hiç kimsenin başkası için hiçbir şeye sahip olamadığı gündür. O gün buyruk yalnız Allah'ındır.",
+        "de": "Am Tag, da keine Seele für eine (andere) Seele etwas (auszurichten) vermag; und der Befehl wird an jenem Tag Allah (allein) zustehen.",
+        "pt": "É o dia em que nenhuma alma poderá advogar por outra, porque o mando, nesse dia, só será de Deus.",
+        "nl": "Op die Dag is geen ziel bij machte iets voor een (andere) ziel te doen. En het bevel behoort op die Dag aan Allah.",
+        "ur": "یہ وہ دن ہے جب کسی شخص کے لیے کچھ کرنا کسی کے بس میں نہ ہوگا، <sup foot_note=\"188387\">1</sup> فیصلہ اُس دن بالکل اللہ کے اختیار میں ہوگا",
+        "bn": "সেইদিনা কোনেও কাৰো বাবে একো কৰাৰ ক্ষমতা নাৰাখিব; আৰু সেইদিনা সকলো বিষয়ৰ কৰ্তৃত্ব হ’ব আল্লাহৰ।",
+        "fa": "روزی‌که هیچ کس قادر به انجام کاری برای دیگری نیست؛ و در آن روز، حکم [و فرمان،] از آنِ الله است."
+      }
+    }
+  ]
+}

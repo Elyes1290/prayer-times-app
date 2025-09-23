@@ -1,0 +1,226 @@
+{
+  "surah_number": 101,
+  "extracted_at": "2025-09-20T15:17:34.393Z",
+  "verses": [
+    {
+      "verse_number": 6158,
+      "verse_key": "101:1",
+      "arabic_text": " ٱلْقَارِعَةُ",
+      "phonetic_text": "AlqariAAa",
+      "translations": {
+        "fr": "Le Fracas!",
+        "en": "The Crashing Blow!",
+        "es": "El evento repentino.",
+        "it": "La Percotente <a class=f><sup foot_note=160740>1</sup></a> ,",
+        "ru": "Великое бедствие (День воскресения)!",
+        "tr": "Kâria! (Çarpacak kıyamet) Nedir o kâria? Kârianın ne olduğunu sen bilir misin?",
+        "de": "Das Verhängnis!",
+        "pt": "A calamidade!",
+        "nl": "De Daverende (De Dag der Opstanding).",
+        "ur": "عظیم حادثہ! <sup foot_note=\"188585\">1</sup>",
+        "bn": "ভীতিপ্ৰদ মহা বিপদ।",
+        "fa": "[آن] فروکوبنده."
+      }
+    },
+    {
+      "verse_number": 6159,
+      "verse_key": "101:2",
+      "arabic_text": "مَا ٱلْقَارِعَةُ",
+      "phonetic_text": "Ma alqariAAa",
+      "translations": {
+        "fr": "Mais qu’est-ce donc que le Fracas ?",
+        "en": "What is the Crashing Blow?",
+        "es": "¿Qué es el evento repentino?",
+        "it": "cos’è mai la Percotente?",
+        "ru": "Что такое Великое бедствие (День воскресения)?",
+        "tr": "Kâria! (Çarpacak kıyamet) Nedir o kâria? Kârianın ne olduğunu sen bilir misin?",
+        "de": "Was ist das Verhängnis?",
+        "pt": "Que é a calamidade?",
+        "nl": "Wat is de Daverende?",
+        "ur": "کیا ہے وہ عظیم حادثہ؟",
+        "bn": "ভীতিপ্ৰদ মহা বিপদ কি?",
+        "fa": "[آن] فروکوبنده چیست؟"
+      }
+    },
+    {
+      "verse_number": 6160,
+      "verse_key": "101:3",
+      "arabic_text": "وَمَآ أَدْرَىٰكَ مَا ٱلْقَارِعَةُ",
+      "phonetic_text": "Wama adraka ma alqariAAa",
+      "translations": {
+        "fr": "Et qui te fera jamais savoir ce que c’est que le Fracas ?",
+        "en": "What will explain to you what the Crashing Blow is?",
+        "es": "¿Y qué te hará comprender la magnitud del evento repentino?",
+        "it": "E chi potrà farti comprendere cos’è la Percotente?",
+        "ru": "Откуда ты мог знать, что такое Великое бедствие (День воскресения)?",
+        "tr": "Kâria! (Çarpacak kıyamet) Nedir o kâria? Kârianın ne olduğunu sen bilir misin?",
+        "de": "Und was läßt dich wissen, was das Verhängnis ist?",
+        "pt": "E o que te fará entender o que é a calamidade?",
+        "nl": "En wat doet jou weten wat de Daverende is?",
+        "ur": "تم کیا جانو کہ وہ عظیم حادثہ کیا ہے؟",
+        "bn": "ভীতিপ্ৰদ মহা বিপদ সম্পৰ্কে তুমি কি জানা?",
+        "fa": "و تو چه ‌دانی که [آن] فروکوبنده چیست؟"
+      }
+    },
+    {
+      "verse_number": 6161,
+      "verse_key": "101:4",
+      "arabic_text": "يَوْمَ يَكُونُ ٱلنَّاسُ كَٱلْفَرَاشِ ٱلْمَبْثُوثِ",
+      "phonetic_text": "Yawma yakoonu annasu kalfarashialmabthooth",
+      "translations": {
+        "fr": "C’est le jour où les hommes seront tels des papillons dispersés,",
+        "en": "On a Day when people will be like scattered moths",
+        "es": "Ese día la gente parecerá mariposas dispersas,",
+        "it": "Il Giorno in cui gli uomini saranno come falene disperse,",
+        "ru": "В тот день люди будут подобны рассеянным мотылькам,",
+        "tr": "O gün insanlar yayılmış pervaneler gibi olurlar.",
+        "de": "Am Tag, da die Menschen wie flatternde Motten sein werden",
+        "pt": "(Acontecerá) no dia em que os homens estiverem como mariposas dispersas,",
+        "nl": "Op de Dag dat de mensen als verstrooide motten zijn.",
+        "ur": "وہ دن جب لوگ بکھرے ہوئے پروانوں کی طرح",
+        "bn": "সেইদিনা মানুহ হ’ব বিক্ষিপ্ত কীট-পতঙ্গৰ দৰে।",
+        "fa": "روزی‌ که مردم مانند پروانه‌های پراکنده [حیران و سرگردان] خواهند بود."
+      }
+    },
+    {
+      "verse_number": 6162,
+      "verse_key": "101:5",
+      "arabic_text": "وَتَكُونُ ٱلْجِبَالُ كَٱلْعِهْنِ ٱلْمَنفُوشِ",
+      "phonetic_text": "Watakoonu aljibalu kalAAihnialmanfoosh",
+      "translations": {
+        "fr": "où les montagnes seront comme de la laine démêlée en flocons.",
+        "en": "and the mountains like tufts of wool,",
+        "es": "y las montañas copos de lana cardada.",
+        "it": "e le montagne come fiocchi di lana cardata,",
+        "ru": "а горы будут подобны расчесанной шерсти.",
+        "tr": "Dağlar atılmış renkli yünler gibi olur.",
+        "de": "und die Berge wie zerflockte gefärbte Wolle sein werden.",
+        "pt": "E as montanhas como lã cardada!",
+        "nl": "En de bergen als vespreide wolvlokken.",
+        "ur": "اور پہاڑ رنگ برنگ کے دُھنکے ہوئے اُون کی طرح ہوں گے۔ <sup foot_note=\"188586\">1</sup>",
+        "bn": "আৰু পৰ্বতসমূহ হ’ব ধূনা ৰঙ্গিন ঊণৰ দৰে।",
+        "fa": "و کوه‌ها مانند پشم رنگینِ حلاجی‌شده خواهند شد."
+      }
+    },
+    {
+      "verse_number": 6163,
+      "verse_key": "101:6",
+      "arabic_text": "فَأَمَّا مَن ثَقُلَتْ مَوَٰزِينُهُۥ",
+      "phonetic_text": "Faamma man thaqulat mawazeenuh",
+      "translations": {
+        "fr": "Quant à celui dont les (œuvres) seront lourdes à la balance,",
+        "en": "the one whose good deeds are heavy on the scales",
+        "es": "Aquel cuyas obras buenas sean más pesadas en la balanza",
+        "it": "colui le cui bilance saranno pesanti <a class=f><sup foot_note=160741>1</sup></a>",
+        "ru": "Тогда тот, чья чаша Весов окажется тяжелой,",
+        "tr": "O gün kimin tartıları ağır basarsa o, hoşnut olacağı bir hayat içindedir.",
+        "de": "Was nun jemanden angeht, dessen Waagschalen schwer sind,",
+        "pt": "Porém, quanto àqueles cujas ações pesarem na balança,",
+        "nl": "Wat betreft degene van wie dan zijn weegschaal (met goede daden) zwaar weegt.",
+        "ur": "پھر <sup foot_note=\"188587\">1</sup> جس کے پلڑے بھاری ہوں گے",
+        "bn": "এতেকে যাৰ তৰ্জুসমূহ গধুৰ হ’ব,",
+        "fa": "و اما هر کس که [در آن روز،] کفّۀ میزانش سنگین باشد،"
+      }
+    },
+    {
+      "verse_number": 6164,
+      "verse_key": "101:7",
+      "arabic_text": "فَهُوَ فِى عِيشَةٍ رَّاضِيَةٍ",
+      "phonetic_text": "Fahuwa fee AAeeshatin radiya",
+      "translations": {
+        "fr": "il aura une vie agréable,<sup foot_note=195245>1</sup>",
+        "en": "will have a pleasant life,",
+        "es": "gozará de una vida placentera.",
+        "it": "avrà una vita felice <a class=f><sup foot_note=160742>1</sup></a> ;",
+        "ru": "обретет приятную жизнь.",
+        "tr": "O gün kimin tartıları ağır basarsa o, hoşnut olacağı bir hayat içindedir.",
+        "de": "so wird er in einem zufriedenen Leben sein.",
+        "pt": "Desfrutará de uma vida prazenteira.",
+        "nl": "Hij zal een behaaglijk leven leiden.",
+        "ur": "وہ دل پسند عیش میں ہوگا",
+        "bn": "তেওঁ থাকিব সন্তোষজনক জীৱনত;",
+        "fa": "[در بهشت،] در زندگی رضایت‌بخشی خواهد بود."
+      }
+    },
+    {
+      "verse_number": 6165,
+      "verse_key": "101:8",
+      "arabic_text": "وَأَمَّا مَنْ خَفَّتْ مَوَٰزِينُهُۥ",
+      "phonetic_text": "Waamma man khaffat mawazeenuh",
+      "translations": {
+        "fr": "et quant à celui dont les (œuvres) seront légères à la balance,",
+        "en": "but the one whose good deeds are light",
+        "es": "En cambio, aquel cuyas obras buenas sean más livianas en la balanza,",
+        "it": "colui che invece avrà bilance leggere,",
+        "ru": "Для того же, чья чаша Весов окажется легкой,",
+        "tr": "Kimin tartıları hafif gelirse, onun anası da (varacağı yer, sığınacağı durağı) hâviye (uçurum)dır.",
+        "de": "Was aber jemanden angeht, dessen Waagschalen leicht sind,",
+        "pt": "Em troca, aquele cujas ações forem leves na balança,",
+        "nl": "En wat betreft degene van wie zijn weegschaal licht weegt.",
+        "ur": "اور جس کے پلڑے ہلکے ہوں گے <sup foot_note=\"188588\">1</sup>",
+        "bn": "আৰু যাৰ তৰ্জুসমূহ পাতল হ’ব,",
+        "fa": "و اما هر کس که کفّۀ میزانش سبک باشد،"
+      }
+    },
+    {
+      "verse_number": 6166,
+      "verse_key": "101:9",
+      "arabic_text": "فَأُمُّهُۥ هَاوِيَةٌ",
+      "phonetic_text": "Faommuhu hawiya",
+      "translations": {
+        "fr": "sa destination sera l’abîme.",
+        "en": "will have the Bottomless Pit for his home––",
+        "es": "su morada estará en el abismo.",
+        "it": "avrà per dimora il Baratro <a class=f><sup foot_note=160743>1</sup></a> .",
+        "ru": "матерью станет Пропасть (грешники будут искать убежище в Аду, подобно тому, как ребенок ищет убежище у своей матери; или грешники будут падать в Адскую Пропасть вниз головой).",
+        "tr": "Kimin tartıları hafif gelirse, onun anası da (varacağı yer, sığınacağı durağı) hâviye (uçurum)dır.",
+        "de": "dessen Mutter wird ein Abgrund sein.",
+        "pt": "Terá como lar um (profundo) precipício.",
+        "nl": "Zijn verblijfplaats is dan Hawiyah* (de Hel).",
+        "ur": "اس کی جائے قرار گہری کھائی ہوگی۔ <sup foot_note=\"188589\">1</sup>",
+        "bn": "তাৰ ঠিকনা হ’ব ‘হা-ৱিয়াহ’।",
+        "fa": "[مسکن و] پناهگاهش «هاویه» است."
+      }
+    },
+    {
+      "verse_number": 6167,
+      "verse_key": "101:10",
+      "arabic_text": "وَمَآ أَدْرَىٰكَ مَا هِيَهْ",
+      "phonetic_text": "Wama adraka ma hiya",
+      "translations": {
+        "fr": "Et qui te fera jamais savoir ce que c’est (que l’abîme)?",
+        "en": "what will explain to you what that is?––",
+        "es": "¿Y qué te hará comprender qué es el abismo?",
+        "it": "E chi potrà farti comprendere cos’è?",
+        "ru": "Откуда ты мог знать, что это такое?",
+        "tr": "O uçurumun ne olduğunu sen nereden bileceksin?",
+        "de": "Und was läßt dich wissen, was das ist?",
+        "pt": "E o que é que te fará entender isso?",
+        "nl": "En wat doet jou weten wat zij is?",
+        "ur": "اور تمہیں کیا خبر کہ وہ کیا چیز ہے؟",
+        "bn": "আৰু তুমি কি জানা সেইটোনো কি?",
+        "fa": "و تو چه دانی که آن [هاویه] چیست؟"
+      }
+    },
+    {
+      "verse_number": 6168,
+      "verse_key": "101:11",
+      "arabic_text": "نَارٌ حَامِيَةٌۢ",
+      "phonetic_text": "Narun hamiya",
+      "translations": {
+        "fr": "Un Feu très ardent !",
+        "en": "a blazing fire.",
+        "es": "Es un fuego abrasador.",
+        "it": "E un Fuoco ardente. <a class=f><sup foot_note=160744>1</sup></a> «La Percotente»: uno dei nomi del Giorno della Resurrezione. <a class=f><sup foot_note=160745>2</sup></a> Verss. e «bilance pesanti… bilance leggere»: di opere meritorie. <a class=f><sup foot_note=160746>3</sup></a> «una vita felice»: nel Paradiso. <a class=f><sup foot_note=160747>4</sup></a> «avrà per dimora il Baratro »: lett. «sua madre sarà il Baratro». Nella lingua araba, i termini ‘Umm e Abû (madre e padre) vengono usati anche in senso lato, per indicare l’origine di qualcosa, la sua appartenenza assoluta, ecc. (vedi III, e la nota). In questo caso esprime il concetto che il dannato non avrà altra dimora che «al-Hâwiya» (il baratro, l’abisso).",
+        "ru": "Это - жаркий Огонь!",
+        "tr": "O, kızgın bir ateştir.",
+        "de": "Ein sehr heißes Feuer.",
+        "pt": "É o fogo ardente!",
+        "nl": "Een verbandende Hel.",
+        "ur": "بھڑکتی ہوئی آگ۔ <sup foot_note=\"188590\">1</sup>",
+        "bn": "ই এটা অত্যন্ত উত্তপ্ত অগ্নিকুণ্ড।",
+        "fa": "آتشی است سوزان [و شعله‌ور]."
+      }
+    }
+  ]
+}

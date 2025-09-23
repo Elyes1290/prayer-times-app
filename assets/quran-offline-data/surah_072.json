@@ -1,0 +1,566 @@
+{
+  "surah_number": 72,
+  "extracted_at": "2025-09-20T15:16:53.157Z",
+  "verses": [
+    {
+      "verse_number": 5448,
+      "verse_key": "72:1",
+      "arabic_text": " قُلْ أُوحِىَ إِلَىَّ أَنَّهُ ٱسْتَمَعَ نَفَرٌ مِّنَ ٱلْجِنِّ فَقَالُوٓا۟ إِنَّا سَمِعْنَا قُرْءَانًا عَجَبًا",
+      "phonetic_text": "Qul oohiya ilayya annahu istamaAAanafarun mina aljinni faqaloo inna samiAAnaqur-anan AAajaba",
+      "translations": {
+        "fr": "Dis : « Il m’a été révélé qu’un groupe de djinns, ayant prêté l’oreille, ont dit : “Nous avons certes entendu une Lecture (Qur’ân) merveilleuse,",
+        "en": "Say [Prophet], ‘It has been revealed to me that a group of jinn once listened in and said, “We have heard a wondrous Quran,",
+        "es": "[¡Oh, Muhámmad!] Di: “Me ha sido revelado que un grupo de los yinn dijeron al escuchar [la recitación del Corán]: ‘Hemos oído una recitación maravillosa",
+        "it": "Di’: «Mi è stato rivelato che un gruppo di dèmoni ascoltarono e dissero: “Invero abbiamo ascoltato una Lettura meravigliosa <a class=f><sup foot_note=160339>1</sup></a> ,",
+        "ru": "Скажи: «Мне было открыто, что несколько джиннов послушали чтение Корана и сказали: «Воистину, мы слышали удивительный Коран.",
+        "tr": "Deki: Hakikat bir takım cinnin Kur'ân dinleyip de şöyle dedikleri bana vahyedildi. Şüphesiz biz, hayret verici bir Kur'ân dinledik.",
+        "de": "Sag: Mir ist (als Offenbarung) eingegeben worden, daß eine kleinere Schar Ginn zuhörte. Sie sagten: Wir haben einen wunderbaren Qur’an gehört,",
+        "pt": "Dize: Foi-me revelado que um grupo de gênios escutou (a recitação do Alcorão). Disseram: Em verdade, ouvimos um Alcorão admirável,",
+        "nl": "Zeg (O Moehammad): \"Het is aan mij geopenbaard dat een aantal Djinn's heeft meegeluisterd, waarop zij zeiden: \"Voorwaar, Wij hebben een verbazingwekkende Koran gehoord.",
+        "ur": "اے نبیؐ ، کہو، میری طرف وحی بھیجی  گئی ہے کہ جِنّوں کے ایک گروہ نے غور سے سُنا <sup foot_note=\"188125\">1</sup> پھر (جا کر  اپنی قوم کے لوگوں سے) کہا:”ہم نے ایک بڑا ہی عجیب قرآن سُنا ہے <sup foot_note=\"188126\">2</sup>",
+        "bn": "কোৱা, মোৰ প্ৰতি অহী নাযিল হৈছে যে, নিশ্চয় জিনসকলৰ এটা দলে মনোযোগ সহকাৰে শুনিছে; তাৰ পিছত কৈছে, ‘নিশ্চয় আমি এক বিস্ময়কৰ কোৰআন শুনিছো,",
+        "fa": "[ای پیامبر،] بگو: «به من وحی شده است که گروهی از جنیان [به این قرآن] گوش فرا دادند، و [پس از بازگشت به میان قوم خویش، به آنان] گفتند: بی‌گمان ما قرآنی شگفت‌آور شنیدیم"
+      }
+    },
+    {
+      "verse_number": 5449,
+      "verse_key": "72:2",
+      "arabic_text": "يَهْدِىٓ إِلَى ٱلرُّشْدِ فَـَٔامَنَّا بِهِۦ ۖ وَلَن نُّشْرِكَ بِرَبِّنَآ أَحَدًا",
+      "phonetic_text": "Yahdee ila arrushdi faamannabihi walan nushrika birabbina ahada",
+      "translations": {
+        "fr": "qui conduit vers la juste voie, et nous y avons cru. Nous n’attribuerons donc aucun associé à notre Seigneur !",
+        "en": "that gives guidance to the right path, and we have come to believe it––We shall never set up partners with our Lord––",
+        "es": "que guía al sendero recto. Creemos en la recitación y no caeremos en la idolatría adorando a otro que Dios.",
+        "it": "che conduce sulla retta via; abbiamo creduto in essa e non assoceremo nessuno al nostro Signore.",
+        "ru": "Он наставляет на прямой путь, и мы уверовали в него и не будем приобщать сотоварищей к нашему Господу.",
+        "tr": "O Kur'ân hidayete erdiriyor, biz de ona iman ettik. Rabbimize hiçbir şeyi ortak koşmayacağız.",
+        "de": "der zur Besonnenheit leitet; so haben wir an ihn geglaubt, und wir werden unserem Herrn niemanden beigesellen.",
+        "pt": "Que guia à verdade, pelo que nele cremos, e jamais atribuiremos parceiro alguém ao nosso Senhor;",
+        "nl": "Hij (de Koran) leidt tot het juiste, toen geloofden wij erin, en wij zullen nooit één deelgenoot aan onze Heer toekennen.",
+        "ur": "راہِ راست کی طرف رہنمائی کرتا ہے اِس لیے ہم اُس پر ایمان لے آئے ہیں اور اب ہم ہرگز اپنے ربّ کے ساتھ کسی کو شریک نہیں کریں گے۔“ <sup foot_note=\"188127\">1</sup>",
+        "bn": "‘যিটো সত্যৰ পথ দেখুৱায়, সেয়ে আমি তাৰ ওপৰত ঈমান আনিছো। গতিকে আমি কেতিয়াও আমাৰ প্ৰতিপালকৰ লগত আন কাকো অংশী বুলি গণ্য নকৰিম,",
+        "fa": "که به راه راست هدایت می‌کند؛ پس ما به آن ایمان آوردیم و هرگز کسی را با پروردگارمان شریک قرار نمی‌دهیم؛"
+      }
+    },
+    {
+      "verse_number": 5450,
+      "verse_key": "72:3",
+      "arabic_text": "وَأَنَّهُۥ تَعَـٰلَىٰ جَدُّ رَبِّنَا مَا ٱتَّخَذَ صَـٰحِبَةً وَلَا وَلَدًا",
+      "phonetic_text": "Waannahu taAAala jaddu rabbinama ittakhatha sahibatan wala walada",
+      "translations": {
+        "fr": "Notre Seigneur Très Haut ne S’est donné ni compagne ni fils.",
+        "en": "and that He––exalted be the glory of our Lord!––has neither spouse nor child.",
+        "es": "Él, exaltada sea la grandeza de nuestro Señor, no ha tomado compañera ni hijo.",
+        "it": "In verità Egli – esaltata sia la Sua Maestà – non si è preso né compagna, né figlio.",
+        "ru": "Величие (или богатство) нашего Господа превысокое, и Он не взял Себе ни супруги, ни сына.",
+        "tr": "Doğrusu, Rabbimizin şanı çok yüksektir. Ne bir arkadaş edinmiştir, ne de bir çocuk.",
+        "de": "Und erhaben ist die Größe unseres Herrn. Er hat sich weder eine Gefährtin noch Kinder genommen.",
+        "pt": "Cremos em que - exaltada seja a Majestade do nosso Senhor - Ele jamais teve cônjuge ou prole,",
+        "nl": "En dat de Majesteit van onze Heer Verheven is, Hij heeft Zich geen echtgenote genomen en geen zoon.",
+        "ur": "اور یہ کہ”ہمارے ربّ کی شان بہت اعلیٰ و ارفع ہے ، اُس نے کسی کو بیوی یا بیٹا نہیں بنایا ہے۔“ <sup foot_note=\"188128\">1</sup>",
+        "bn": "‘আৰু নিশ্চয় আমাৰ প্ৰতিপালকৰ মৰ্যাদা সুউচ্চ’ তেওঁ কোনো সঙ্গিনী আৰু কোনো সন্তানো গ্ৰহণ কৰা নাই।",
+        "fa": "و اینکه شأن و عظمت پروردگارمان، بس [عظیم و] بلند است. او [هرگز برای خود] همسر و فرزندی انتخاب نکرده است؛"
+      }
+    },
+    {
+      "verse_number": 5451,
+      "verse_key": "72:4",
+      "arabic_text": "وَأَنَّهُۥ كَانَ يَقُولُ سَفِيهُنَا عَلَى ٱللَّهِ شَطَطًا",
+      "phonetic_text": "Waannahu kana yaqoolu safeehunaAAala Allahi shatata",
+      "translations": {
+        "fr": "Le plus ignorant d’entre nous proférait au sujet d’Allah les (pires) insanités.",
+        "en": "Outrageous things have been said about God by the foolish among us,",
+        "es": "No obstante, un malvado entre nosotros decía falsedades acerca de Dios.",
+        "it": "Uno stolto dei nostri <a class=f><sup foot_note=160340>1</sup></a> diceva menzogne contro Allah.",
+        "ru": "Глупец среди нас (Иблис) наговаривал на Аллаха чрезмерное.",
+        "tr": "Meğer bizim beyinsiz (İblis), Allah hakkında saçma şeyler söylüyormuş.",
+        "de": "Und es pflegte der Tor unter uns etwas Abwegiges gegen Allah zu sagen.",
+        "pt": "E o insensato, entre nós, proferiu extravagâncias a respeito de Deus.",
+        "nl": "En dat de dwazen onder ons plachten leugens te vertellen over Allah.",
+        "ur": "اور یہ کہ”ہمارےنادان لوگ <sup foot_note=\"188129\">1</sup> اللہ کے بارے میں بہت خلافِ حق باتیں کہتے رہے ہیں۔“",
+        "bn": "‘আৰু আমাৰ মাজৰ নিৰ্বোধসকলে আল্লাহৰ বিষয়ে অবাস্তৱ কথা-বতৰা কৈছিল’।",
+        "fa": "و اینکه سفیه [و نادانِ] ما [= شیطان] دربارۀ الله سخنان ناروایی می‌گفت؛"
+      }
+    },
+    {
+      "verse_number": 5452,
+      "verse_key": "72:5",
+      "arabic_text": "وَأَنَّا ظَنَنَّآ أَن لَّن تَقُولَ ٱلْإِنسُ وَٱلْجِنُّ عَلَى ٱللَّهِ كَذِبًا",
+      "phonetic_text": "Waanna thanannaan lan taqoola al-insu waljinnu AAala Allahikathiba",
+      "translations": {
+        "fr": "Nous supposions que ni les hommes ni les djinns n’oseraient débiter des mensonges sur le compte d’Allah.",
+        "en": "although we had thought that no man or jinn would [dare to] tell a lie about Him.",
+        "es": "Nosotros creíamos que ni los seres humanos ni los yinn dirían mentiras acerca de Dios,",
+        "it": "Pensavamo che né gli uomini né i dèmoni potessero proferire menzogne contro Allah.",
+        "ru": "Мы же думали, что ни люди, ни джинны не станут говорить об Аллахе ложь.",
+        "tr": "Doğrusu biz insanları ve cinleri Allah'a karşı asla yalan söylemez sanmışız.",
+        "de": "Und wir meinten, daß weder die Menschen noch die Ginn gegen Allah jemals eine Lüge sagen würden.",
+        "pt": "E jamais imaginamos que os humanos e ao gênios iriam urdir mentiras a respeito de Deus.",
+        "nl": "En dat wij dachten dat de mens en de Djinn's nooit leugens over Allah zouden vertellen.",
+        "ur": "اور یہ کہ ”ہم نے سمجھا تھا کہ انسان اور جِن کبھی خدا کے بارے میں جھوٹ نہیں بول سکتے۔“ <sup foot_note=\"188130\">1</sup>",
+        "bn": "‘অথচ আমি ধাৰণা কৰিছিলো যে, মানুহ আৰু জিন জাতিয়ে কেতিয়াও আল্লাহ সম্পৰ্কে মিছা আৰোপ নকৰিব।",
+        "fa": "و ما [چنین] گمان می‌کردیم که هرگز انس و جن بر الله دروغ نمی‌بندند؛"
+      }
+    },
+    {
+      "verse_number": 5453,
+      "verse_key": "72:6",
+      "arabic_text": "وَأَنَّهُۥ كَانَ رِجَالٌ مِّنَ ٱلْإِنسِ يَعُوذُونَ بِرِجَالٍ مِّنَ ٱلْجِنِّ فَزَادُوهُمْ رَهَقًا",
+      "phonetic_text": "Waannahu kana rijalun minaal-insi yaAAoothoona birijalin mina aljinni fazadoohumrahaqa",
+      "translations": {
+        "fr": "Mais il y avait ceux, parmi les humains, qui cherchaient refuge auprès des djinns. Or ceux-ci ne firent qu’ajouter à leur perdition.",
+        "en": "Men have sought refuge with the jinn in the past, but they only misguided them further.",
+        "es": "pero había seres humanos que solicitaban protección a los yinn, siendo que ellos solo acrecentaban su desvío.",
+        "it": "Invero c’erano degli uomini che si rifugiavano presso i dèmoni <a class=f><sup foot_note=160341>1</sup></a> , e questo non fece che aumentare la loro follia:",
+        "ru": "Мужи из числа людей искали покровительства мужей из числа джиннов, но они только увеличивали в них страх (или беззаконие).",
+        "tr": "Doğrusu insanlardan bazı erkekler, cinlerden bazı erkeklere sığınırlardı da onların şımarıklıklarını artırırlardı.",
+        "de": "Und (manche) Männer von den Menschen pflegten Zuflucht zu nehmen bei (einigen) Männern von den Ginn, doch mehrten sie so (bei) ihnen die Drangsal.",
+        "pt": "E, em verdade, algumas pessoas, dentre os humanos, invocaram a proteção de pessoas, dentre os gênios. Porém, estes só lhes aumentaram os desatinos.",
+        "nl": "En dat er mannen onder de mensen waren die hulp zochten bij mannen van de Djinn's, wat hun zondigheid vermeerderde.",
+        "ur": "اور یہ کہ”انسانوں میں سے کچھ لوگ جِنوں میں سے کچھ لوگوں کی پناہ مانگا کرتے تھے، اِس طرح اُنہوں نے جِنّوں کا غرور اور زیادہ بڑھا دیا۔“ <sup foot_note=\"188131\">1</sup>",
+        "bn": "‘আৰু নিশ্চয় কিছুমান মানুহে কিছুমান জিনৰ আশ্ৰয় লৈছিল, ফলত সিহঁতে জিনসকলৰ অহংকাৰ বৃদ্ধি কৰিছিল’।",
+        "fa": "و اینکه مردانی از آدمیان، به مردانی از جنّیان پناه می‌بردند و [این‌گونه] بر گمراهی و سرکشیِ‌ آنان می‌افزودند؛"
+      }
+    },
+    {
+      "verse_number": 5454,
+      "verse_key": "72:7",
+      "arabic_text": "وَأَنَّهُمْ ظَنُّوا۟ كَمَا ظَنَنتُمْ أَن لَّن يَبْعَثَ ٱللَّهُ أَحَدًا",
+      "phonetic_text": "Waannahum thannoo kama thanantuman lan yabAAatha Allahu ahada",
+      "translations": {
+        "fr": "Tout comme vous, ils pensaient qu’Allah n’enverrait nul (Messager)<sup foot_note=195211>1</sup>.",
+        "en": "They thought, as you did, that God would never raise anyone from the dead.",
+        "es": "Ellos pensaban, como pensáis vosotros, que Dios no iba a resucitar a nadie [de su tumba].",
+        "it": "anch’essi pensavano, come lo pensavate voi, che Allah non avrebbe resuscitato nessuno <a class=f><sup foot_note=160342>1</sup></a> .",
+        "ru": "Они думали так же, как и вы, что Аллах никого не воскресит.",
+        "tr": "Doğrusu onlar sizin zannettiğiniz gibi, zannetmişlerdi ki, Allah asla kimseyi Peygamber göndermeyecek.",
+        "de": "Und sie meinten -, wie (auch) ihr meint -, daß Allah niemanden mehr (als Gesandten) schicken würde.",
+        "pt": "E eles pensaram como pensastes: que Deus jamais ressuscitará alguém.",
+        "nl": "En dat zij dachten zoals jullie dachten: dat Allah nooit iemand zou doen opstaan.",
+        "ur": "اور یہ کہ”انسانوں نے بھی وہی گمان کیا جیسا تمھارا گمان تھا کہ اللہ کسی کو رسُول بنا کر نہ بھیجے گا۔“ <sup foot_note=\"188132\">1</sup>",
+        "bn": "‘আৰু নিশ্চয় সিহঁতেও ধাৰণা কৰিছিল যেনেকৈ তোমালোকে ধাৰণা কৰিছা যে, আল্লাহে কাকো কেতিয়াও পুনৰুত্থিত নকৰিব’।",
+        "fa": "و اینکه آنان [= کافران] گمان می‌کردند ـ همان ‌گونه که شما [جنیان] می‌پنداشتید ـ که الله هیچ کس را [دوباره] زنده نمی‌گردانَد؛"
+      }
+    },
+    {
+      "verse_number": 5455,
+      "verse_key": "72:8",
+      "arabic_text": "وَأَنَّا لَمَسْنَا ٱلسَّمَآءَ فَوَجَدْنَـٰهَا مُلِئَتْ حَرَسًا شَدِيدًا وَشُهُبًا",
+      "phonetic_text": "Waanna lamasna assamaafawajadnaha muli-at harasan shadeedanwashuhuba",
+      "translations": {
+        "fr": "Nous nous sommes rapprochés du ciel et nous l’avons trouvé rempli de gardiens féroces et de météores.",
+        "en": "We tried to reach heaven, but discovered it to be full of stern guards and shooting stars––",
+        "es": "Quisimos acceder al cosmos, pero lo encontramos lleno de guardianes severos y meteoritos<sup foot_note=169481>1</sup>",
+        "it": "Invero abbiamo sfiorato il cielo, ma lo abbiamo trovato munito di temibili guardiani e di bolidi fiammeggianti <a class=f><sup foot_note=160343>1</sup></a> .",
+        "ru": "Мы достигли неба, но обнаружили, что оно заполнено суровыми стражами и пылающими огнями.",
+        "tr": "(Cinler, dediler ki): \"Biz göğe dokunduk, onu kuvvetli bekçiler ve alevlerle dolu bulduk.\"",
+        "de": "Und wir haben den Himmel abgetastet, aber festgestellt, daß er mit strengen Wächtern und Leuchtkörpern gefüllt worden ist.",
+        "pt": "(Disseram os gênios): Quisemos inteirar-nos acerca do céu e o achamos pleno de severos guardiães e flamígeros meteoros.",
+        "nl": "En dat wij hebben gevraagd naar de hemel (te mogen gaan): toen vonden wij dat zij vol was met strenge bewakers en brandende vlammen.",
+        "ur": "اور یہ کہ \"ہم نے آسمان کو ٹٹولا تو دیکھا کہ وہ پہرے داروں سے پٹا پڑا ہے اور شہابوں کی بارش ہو رہی ہے\"",
+        "bn": "‘আৰু নিশ্চয় আমি আকাশৰ তথ্য সংগ্ৰহ কৰিব বিচাৰিছিলো, কিন্তু আমি দেখিলো যে, আকাশখন কঠোৰ প্ৰহৰী আৰু উল্কাপিণ্ডৰ দ্বাৰা পৰিপূৰ্ণ;",
+        "fa": "و اینکه ما آسمان را [در پی شنیدن خبرها] جستجو کردیم؛ و آن را پر از محافظان نیرومند و تیرهای شهاب یافتیم."
+      }
+    },
+    {
+      "verse_number": 5456,
+      "verse_key": "72:9",
+      "arabic_text": "وَأَنَّا كُنَّا نَقْعُدُ مِنْهَا مَقَـٰعِدَ لِلسَّمْعِ ۖ فَمَن يَسْتَمِعِ ٱلْـَٔانَ يَجِدْ لَهُۥ شِهَابًا رَّصَدًا",
+      "phonetic_text": "Waanna kunna naqAAudu minhamaqaAAida lissamAAi faman yastamiAAi al-anayajid lahu shihaban rasada",
+      "translations": {
+        "fr": "Nous pouvions nous y installer pour écouter (les secrets célestes), or quiconque prête l’oreille aujourd’hui verra fondre sur lui un météore à l’affût.",
+        "en": "we used to sit in places there, listening, but anyone trying to listen now will find a shooting star lying in wait for him––",
+        "es": "a pesar de que buscábamos posiciones apropiadas del cosmos para escuchar [la revelación], pero todo aquel que intenta ahora escuchar encuentra un meteoro que le acecha.",
+        "it": "Ci sedevamo [un tempo] in sedi appropriate, per ascoltare. Ma ora chi vuole origliare trova un bolide fiammeggiante in agguato <a class=f><sup foot_note=160344>1</sup></a> .",
+        "ru": "Прежде мы садились там на седалищах, чтобы подслушивать. Но тот, кто подслушает сейчас, обнаружит, что его подстерегает пылающий огонь.",
+        "tr": "\"Doğrusu biz göğün bazı mevkilerinde dinlemek için otururduk. Fakat şimdi her kim dinleyecek olursa kendini gözetleyen parlak bir alev buluyor.\"",
+        "de": "Und wir pflegten ja an Stellen von ihm Sitze zum Abhören einzunehmen; wer aber jetzt abhört, der findet einen auf ihn wartenden Leuchtkörper.",
+        "pt": "E usávamos nos sentar lá, em locais (ocultos), para ouvir; e quem se dispusesse a ouvir agora, defrontar-se- ia com um flamígero meteoro, de guarda.",
+        "nl": "En dat, wij vroeger (vóór de Koran) op geheime plaatsen zaten om mee te luisteren, maar wie nu wil meeluisteren treft een pijl van vuur aan die op hem loert.",
+        "ur": "اور یہ کہ”پہلے ہم سُن گُن لینے کے لیے آسمان میں بیٹھنے کی جگہ پالیتے تھے ، مگر اب جو چوری چھُپے سُننے کی کوشش کرتا ہے وہ اپنے لیے گھات میں ایک شہابِ ثاقب لگا ہوا پاتا ہے۔“ <sup foot_note=\"188133\">1</sup>",
+        "bn": "‘আৰু আমি আগতে আকাশৰ বিভিন্ন ঘাঁটিত সংবাদ শুনাৰ বাবে বহিছিলো কিন্তু এতিয়া কোনোবাই সংবাদ শুনিবলৈ বিচাৰিলে সি তাৰ ওপৰত নিক্ষেপৰ বাবে প্ৰস্তুত জলন্ত উল্কাপিণ্ডৰ সন্মুখীন হয়।",
+        "fa": "و اینکه در [گذشته] جاهایی [در آسمان‌] براى شنیدن، به كمین مى‌نشستیم؛ [اما] اكنون هر کس بخواهد گوش دهد، تیر شهابى در كمین خود مى‌یابد؛"
+      }
+    },
+    {
+      "verse_number": 5457,
+      "verse_key": "72:10",
+      "arabic_text": "وَأَنَّا لَا نَدْرِىٓ أَشَرٌّ أُرِيدَ بِمَن فِى ٱلْأَرْضِ أَمْ أَرَادَ بِهِمْ رَبُّهُمْ رَشَدًا",
+      "phonetic_text": "Waanna la nadree asharrunoreeda biman fee al-ardi am arada bihim rabbuhumrashada",
+      "translations": {
+        "fr": "Nous ne savons vraiment si un malheur est voulu à ceux qui sont sur terre, ou si leur Seigneur leur veut la voie de la droiture.",
+        "en": "[so now] we do not know whether those who live on earth are due for misfortune, or whether their Lord intends to guide them.",
+        "es": "Y [ahora sabemos que los seres creados] no podemos saber si se ha destinado algún mal para quienes están en la Tierra o si su Señor quiere guiarlos.",
+        "it": "Noi non sappiamo se sia stata decretata una sventura per coloro che stanno sulla terra, o se il loro Signore li voglia guidare [al bene].",
+        "ru": "Мы не знаем, зло ли задумано для тех, кто на земле, или Господь пожелал направить их на прямой путь.",
+        "tr": "\"Doğrusu biz bilmiyoruz, yeryüzündekilere kötülük mü murat edildi, yoksa Rableri onlara bir hayır mı diledi?\"",
+        "de": "Und wir wissen doch nicht, ob für diejenigen auf der Erde Schlechtes gewollt wird oder ob ihr Herr sie zur Besonnenheit (führen) will.",
+        "pt": "E nós não compreendemos se o mal era destinado àqueles que estão na terra ou se o Senhor tencionava encaminhá-los para a boa conduta.",
+        "nl": "En dat wij niet weten of er kwaad bedoeld wordt voor degenen die op de aarde zijn, of dat hun Heer hun rechte Leiding wil geven.",
+        "ur": "اور یہ کہ”ہماری سمجھ میں نہ آتا تھا کہ آیا زمین والوں کے ساتھ کوئی بُرا معاملہ کرنے کا ارادہ کیا گیا ہے یا اُن کا ربّ اُنہیں راہِ راست دکھانا چاہتا ہے۔“ <sup foot_note=\"188134\">1</sup>",
+        "bn": "‘আৰু নিশ্চয় আমি নাজানো যে, পৃথিৱীবাসীৰ বাবে অমঙ্গল বিচৰা হৈছে, নে সিহঁতৰ প্ৰতিপালকে সিহঁতৰ মঙ্গল বিচাৰিছে।",
+        "fa": "و اینکه ما نمی‌دانیم آیا برای اهل زمین شرّی اراده شده، یا پروردگارشان خیر و هدایتِ آنان را خواسته است؛"
+      }
+    },
+    {
+      "verse_number": 5458,
+      "verse_key": "72:11",
+      "arabic_text": "وَأَنَّا مِنَّا ٱلصَّـٰلِحُونَ وَمِنَّا دُونَ ذَٰلِكَ ۖ كُنَّا طَرَآئِقَ قِدَدًا",
+      "phonetic_text": "Waanna minna assalihoonawaminna doona thalika kunna tara-iqaqidada",
+      "translations": {
+        "fr": "Il en est parmi nous qui sont des gens de bien, et d’autres qui sont bien en deçà. C’est que nous sommes divisés en sectes différentes.",
+        "en": "Some of us are righteous and others less so: we follow different paths.",
+        "es": "Entre nosotros hay quienes son virtuosos [creyentes] y quienes no lo son. Seguimos caminos diferentes.",
+        "it": "Tra noi ci sono dei giusti e altri che non lo sono: siamo in diverse sette.",
+        "ru": "Среди нас есть праведные и те, которые ниже этого. Мы были разрозненными группами.",
+        "tr": "Doğrusu bizler; bizden iyi olanlar da var, olmayanlar da var. Biz çeşitli yollara ayrılmışız.",
+        "de": "Und unter uns gibt es Rechtschaffene, und unter uns gibt es solche, die weniger rechtschaffen sind; wir sind getrennte(n) Wege(n gefolgt).",
+        "pt": "E, entre nós (os gênios), há virtuosos e há também os que não o são, porque seguimos diferentes caminhos.",
+        "nl": "En dat er onder ons rechtschapenen zijn, en er onder ons zijn die dat niet zijn. Wij waren op verschillende wegen.",
+        "ur": "اور یہ کہ”ہم میں سے کچھ لوگ صالح ہیں اور کچھ اس سے فرو تر ہیں، ہم مختلف طریقوں میں بٹے ہوئے ہیں۔“ <sup foot_note=\"188135\">1</sup>",
+        "bn": "আৰু নিশ্চয় আমাৰ মাজৰ কিছুমান হৈছে সৎকৰ্মশীল আৰু কিছুমান ইয়াৰ ব্যতিক্ৰম, আমি আছিলো বিভিন্ন পথৰ অনুসাৰী;",
+        "fa": "و اینکه در میان ما افرادی صالح و افرادی نادرستند، ما گروه‌هایی متفاوت [و گوناگون] هستیم."
+      }
+    },
+    {
+      "verse_number": 5459,
+      "verse_key": "72:12",
+      "arabic_text": "وَأَنَّا ظَنَنَّآ أَن لَّن نُّعْجِزَ ٱللَّهَ فِى ٱلْأَرْضِ وَلَن نُّعْجِزَهُۥ هَرَبًا",
+      "phonetic_text": "Wanna thanannaan lan nuAAjiza Allaha fee al-ardi walan nuAAjizahuharaba",
+      "translations": {
+        "fr": "Nous savions pertinemment que nous ne saurions défier la puissance d’Allah sur terre, ni Le tenir en échec en prenant la fuite.",
+        "en": "We know we can never frustrate God on earth; we can never escape Him.",
+        "es": "Sabemos que no podremos escapar de Dios en la Tierra ni huir de Él.",
+        "it": "Pensavamo che mai avremmo potuto annullare [la potenza di] Allah sulla terra e che non avremmo mai potuto sfuggire [a Lui] <a class=f><sup foot_note=160345>1</sup></a> .",
+        "ru": "Мы знали, что не спасемся от Аллаха на земле и не спасемся от Него бегством.",
+        "tr": "\"Doğrusu biz anladık ki, Allah'ı yerde acze düşürmemize imkân yok. Kaçmakla da O'nu asla âciz bırakamayacağız.\"",
+        "de": "Und wir meinten, daß wir uns auf der Erde Allah niemals entziehen können und daß wir uns Ihm niemals durch Flucht entziehen können.",
+        "pt": "E achamos que jamais poderemos safar-nos de Deus na terra, nem tampouco iludi-Lo, fugindo (para outras paragens).",
+        "nl": "En dat wij overtuigd zijn dat wij op de aarde Allah nooit kunnen ontkomen en dat wij nooit van Hem kunnen wegvluchten.",
+        "ur": "اور یہ کہ”ہم سمجھتے تھے کہ نہ زمین میں ہم اللہ کو عاجز کر سکتے ہیں اور نہ بھاگ کر اُسے ہرا سکتے ہیں۔“ <sup foot_note=\"188136\">1</sup>",
+        "bn": "‘আৰু আমি বুজি পাইছো যে, আমি পৃথিৱীত কেতিয়াও আল্লাহক অপাৰগ কৰিব নোৱাৰিম আৰু পলায়ন কৰিও তেওঁক ব্যৰ্থ কৰিব নোৱাৰিম।",
+        "fa": "و اینکه ما یقین داریم که هرگز نمی‌توانیم در روی زمین، الله را عاجز و ناتوان کنیم؛ و هرگز با گریز نمی‌توانیم او را ناتوان سازیم [و راه فراری از عذابش نداریم]."
+      }
+    },
+    {
+      "verse_number": 5460,
+      "verse_key": "72:13",
+      "arabic_text": "وَأَنَّا لَمَّا سَمِعْنَا ٱلْهُدَىٰٓ ءَامَنَّا بِهِۦ ۖ فَمَن يُؤْمِنۢ بِرَبِّهِۦ فَلَا يَخَافُ بَخْسًا وَلَا رَهَقًا",
+      "phonetic_text": "Waanna lamma samiAAnaalhuda amanna bihi faman yu/min birabbihifala yakhafu bakhsan wala rahaqa",
+      "translations": {
+        "fr": "Lorsque nous avons entendu (le Livre) de la direction sûre (hudâ), nous y avons cru. Or, quiconque croit en son Seigneur n’aura à craindre nulle injustice et nul accablement.",
+        "en": "When we heard the guidance we came to believe: whoever believes in his Lord need fear no loss nor injustice.",
+        "es": "Pero cuando oímos la guía creímos, pues quien cree en su Señor no tendrá que temer que le mermen sus méritos ni que lo inculpen injustamente.",
+        "it": "Quando udimmo la Guida, credemmo; e chi crede nel suo Signore non teme danno né offesa.",
+        "ru": "Когда же мы услышали верное руководство, то уверовали в него. А тот, кто верует в своего Господа, не должен бояться ни обиды, ни притеснения.",
+        "tr": "\"Doğrusu biz o hidayet rehberini dinlediğimizde ona iman ettik. Kim Rabbine inanırsa, ne hakkının eksik verilmesinden korkar, ne de kendisine kötülük edilmesinden.\"",
+        "de": "Und als wir die Rechtleitung hörten, glaubten wir daran. Wer an seinen Herrn glaubt, der befürchtet keine (Lohn)schmälerung und keine Drangsal.",
+        "pt": "E quando escutamos a orientação, cremos nela; e quem quer que creia em seu Senhor, não há de temer fraude, nem desatino.",
+        "nl": "En dat, toen wij over de rechte Leiding hadden gehoord, wij erin geloofden. En wie in zijn Heer gelooft; hij zal geen vermindering (van beloning) en geen vermeerdering (van zondigheid) vrezen.",
+        "ur": "اور یہ کہ”ہم نے جب ہدایت کی تعلیم سُنی تو ہم اس پر ایمان لے آئے۔ اب جو کوئی بھی اپنے ربّ پر ایمان لے آئے گا اسے کسی حق تلفی یا ظلم کا خوف نہ ہوگا۔“ <sup foot_note=\"188137\">1</sup>",
+        "bn": "‘আৰু নিশ্চয় আমি যেতিয়া হিদায়তৰ বাণী শুনিলো, তেতিয়া তাৰ প্ৰতি ঈমান আনিলো। এতেকে যি ব্যক্তি তাৰ প্ৰতিপালকৰ প্ৰতি ঈমান আনিব, তাৰ কোনো ক্ষতি আৰু কোনো অন্যায়ৰ আশংকা নাথাকিব।",
+        "fa": "و اینکه ما هنگامی که [سخن] هدایت را شنیدیم، به آن ایمان آوردیم؛ پس هر کس که به پروردگارش ایمان آورَد، نه از نُقصان می‌هراسد و نه از ستم [بیم دارد]."
+      }
+    },
+    {
+      "verse_number": 5461,
+      "verse_key": "72:14",
+      "arabic_text": "وَأَنَّا مِنَّا ٱلْمُسْلِمُونَ وَمِنَّا ٱلْقَـٰسِطُونَ ۖ فَمَنْ أَسْلَمَ فَأُو۟لَـٰٓئِكَ تَحَرَّوْا۟ رَشَدًا",
+      "phonetic_text": "Waanna minna almuslimoonawaminna alqasitoona faman aslama faola-ikataharraw rashada",
+      "translations": {
+        "fr": "Certains d’entre nous sont Musulmans, tandis que d’autres sont injustes. Ceux qui ont embrassé l’islam, ceux-là ont choisi la voie la plus droite.",
+        "en": "Some of us submit to Him and others go the wrong way: those who submit to God have found wise guidance,",
+        "es": "Entre nosotros [los yinn] hay quienes aceptaron el Islam, pero también hay quienes se apartaron del sendero recto. Los que aceptaron el Islam son los que siguen la guía verdadera.",
+        "it": "[Ora] tra noi ci sono i musulmani <a class=f><sup foot_note=160346>1</sup></a> e i ribelli. I musulmani sono quelli che hanno scelto la Retta via.",
+        "ru": "Среди нас есть мусульмане и уклонившиеся. Те, которые стали мусульманами, последовали прямым путем.",
+        "tr": "\"Ve biz, bizlerden müslümanlar da var, hak yoldan sapanlar da var. Müslüman olanlar, işte onlar doğru yolu arayanlardır.\"",
+        "de": "Und unter uns sind Gottergebene; und unter uns sind (vom rechten Weg) Abschweifende. Was nun jemanden angeht, der sich (Allah) ergeben hat, so bemüht er sich um (mehr) Besonnenheit.",
+        "pt": "E, entre nós, há submissos, como os também há desencaminhados. Quanto àqueles que se submetem (à vontade de Deus), buscam a verdadeira conduta.",
+        "nl": "En dat er onder ons zijn die zich aan Allah hebben overgegeven, en er onder ons zijn die afwijken (van het rechte Pad). Wie zich heeft overgegeven: zij zijn degenen die de rechte Leiding gekozen hebben.",
+        "ur": "اور یہ کہ \"ہم میں سے کچھ مسلم (اللہ کے اطاعت گزار) ہیں اور کچھ حق سے منحرف تو جنہوں نے اسلام (اطاعت کا راستہ) اختیار کر لیا انہوں نے نجات کی راہ ڈھونڈ لی",
+        "bn": "‘আৰু নিশ্চয় আমাৰ মাজত আছে কিছু সংখ্যক আত্মসমৰ্পনকাৰী আৰু কিছু সংখ্যক আছে সীমালংঘনকাৰী; এতেকে যিসকলে ইছলাম গ্ৰহণ কৰিছে সিহঁতেই সঠিক পথ বাছি লৈছে।",
+        "fa": "و اینکه گروهی از ما، مسلمان، و گروهی، کافر [و ظالم] هستند؛ هر کس که اسلام آورده، آنانند که راه رستگاری را جستجو کرده [و برگزیده]اند."
+      }
+    },
+    {
+      "verse_number": 5462,
+      "verse_key": "72:15",
+      "arabic_text": "وَأَمَّا ٱلْقَـٰسِطُونَ فَكَانُوا۟ لِجَهَنَّمَ حَطَبًا",
+      "phonetic_text": "Waama alqasitoona fakanoolijahannama hataba",
+      "translations": {
+        "fr": "Quant aux injustes, ils seront le bois qui alimentera la Géhenne.” »",
+        "en": "but those who go wrong will be fuel for Hellfire.” ’",
+        "es": "Los que rechazaron el sendero recto, en cambio, serán combustible para el Infierno’”.",
+        "it": "I ribelli, invece, saranno combustibile dell’Inferno”.",
+        "ru": "Уклонившиеся же будут дровами для Геенны»».",
+        "tr": "Ama yoldan çıkanlar, işte onlar cehenneme odun olmuşlardır.",
+        "de": "Was aber die (vom rechten Weg) Abschweifenden angeht, so werden sie Brennholz für die Hölle sein.",
+        "pt": "Quanto aos desencaminhados, esses serão combustíveis do inferno.",
+        "nl": "Maar wat de afwijkenden betreft: zij zijn brandhout voor de Hel.\"",
+        "ur": "جو حق سے منحرف ہیں وہ جہنّم کا ایندھن بننے والے ہیں۔“ <sup foot_note=\"188138\">1</sup>",
+        "bn": "‘আৰু যিসকল সীমালংঘনকাৰী, সিহঁতেই হৈছে জাহান্নামৰ ইন্ধন’।",
+        "fa": "و اما کافران [و ستمکاران] هیزم [آتش] جهنم خواهند بود»."
+      }
+    },
+    {
+      "verse_number": 5463,
+      "verse_key": "72:16",
+      "arabic_text": "وَأَلَّوِ ٱسْتَقَـٰمُوا۟ عَلَى ٱلطَّرِيقَةِ لَأَسْقَيْنَـٰهُم مَّآءً غَدَقًا",
+      "phonetic_text": "Waallawi istaqamoo AAala attareeqatilaasqaynahum maan ghadaqa",
+      "translations": {
+        "fr": "Or, s’ils s’étaient engagés sur la voie droite, Nous les aurions certes abreuvés d’une eau généreuse,",
+        "en": "If they had taken to the right way, We would have given them abundant water to drink-",
+        "es": "Pero si hubieran seguido el sendero recto les habría dado de beber de la abundancia,",
+        "it": "Se si manterranno sulla Retta via, Noi li disseteremo di acqua abbondante",
+        "ru": "Если бы они устояли на прямом пути, то Мы напоили бы их водой вволю,",
+        "tr": "Onlar gerçekten o yol üzere dosdoğru gitselerdi, elbette kendilerine bol bir su verirdik.",
+        "de": "Und wenn sie sich auf dem Weg recht verhielten, würden Wir ihnen wahrlich Wasser im Überfluß zu trinken geben,",
+        "pt": "Mas, se tivessem sido firmes no (verdadeiro) caminho, tê-los-íamos agraciado com água abundante,",
+        "nl": "(En Allah zegt:) \"Als zij op het rechte Pad zouden zijn gebleven, dan zouden Wij hun overvloedig water te drinken gegeven hebben.",
+        "ur": "<sup foot_note=\"171610\">1</sup> اور (اے نبیؐ) کہو، مجھ پر یہ وحی بھی کی گئی ہے کہ) لوگ اگر راہِ راست پر ثابت قدمی سے چلتے تو ہم اُنہیں خوب سیراب کرتے، <sup foot_note=\"171611\">2</sup>",
+        "bn": "আৰু যদি সিহঁতে সঠিক পথত অবিচল থাকিলেহেঁতেন, তেনেহ’লে আমি নিশ্চয় সিহঁতক প্ৰচুৰ পৰিমাণে পানী পান কৰালোহেঁতেন,",
+        "fa": "و اینکه اگر آنها بر راه راست [اسلام]، پایداری کنند، البته با آبِ فراوان سیرابشان می‌کنیم"
+      }
+    },
+    {
+      "verse_number": 5464,
+      "verse_key": "72:17",
+      "arabic_text": "لِّنَفْتِنَهُمْ فِيهِ ۚ وَمَن يُعْرِضْ عَن ذِكْرِ رَبِّهِۦ يَسْلُكْهُ عَذَابًا صَعَدًا",
+      "phonetic_text": "Linaftinahum feehi waman yuAArid AAanthikri rabbihi yasluk-hu AAathaban saAAada",
+      "translations": {
+        "fr": "qui eût été pour eux une épreuve. Mais quiconque se détourne du rappel de son Seigneur, Celui-ci le fera conduire vers un supplice sans cesse augmentant.",
+        "en": "a test for them––but anyone who turns away from his Lord’s Revelation will be sent by Him to spiralling torment.",
+        "es": "para probarlos con ella. Porque quien se aparte del recuerdo de su Señor recibirá un castigo penoso.",
+        "it": "per metterli colà alla prova <a class=f><sup foot_note=160347>1</sup></a> . Allah condurrà ad un castigo incessantemente più severo chi avrà trascurato il monito del suo Signore.",
+        "ru": "чтобы этим подвергнуть их испытанию. А тех, кто отвращается от Напоминания своего Господа, Он ввергает в тяжкие мучения.",
+        "tr": "Ki onları onunla sınayalım. Kim Rabbini anmaktan yüz çevirirse, Rabbi onu gittikçe yükselen bir azaba sokar.",
+        "de": "damit Wir sie dadurch der Versuchung aussetzen. Und wer sich von der Ermahnung seines Herrn abwendet, den wird Er in überwältigende Strafe stecken.",
+        "pt": "Para prová-los, com ela. Em verdade, a quem se afastar da Mensagem do seu Senhor, Ele lhe infligirá um severo castigo.",
+        "nl": "Om hen daarmee te beproeven. En wie zich afwendt van de gedachtenis van zijn Heer, die voert Hij naar een zware bestraffing.\"",
+        "ur": "تاکہ اس نعمت سے ان کی آزمائش کریں۔ <sup foot_note=\"188139\">1</sup> اور جو اپنے ربّ کے ذکر سے منہ موڑے گا <sup foot_note=\"188140\">2</sup> اس کا ربّ اسے سخت عذاب میں مبتلا کر دے گا",
+        "bn": "যাতে আমি ইয়াৰ দ্বাৰা সিহঁতক পৰীক্ষা কৰিব পাৰো; আৰু যিয়ে নিজ প্ৰতিপালকৰ স্মৰণৰ পৰা মুখ ঘূৰাই লয়, তাক তেওঁ কঠিন শাস্তিত প্ৰৱেশ কৰাব।",
+        "fa": "تا آنها را با آن [نعمت‌ها] بیازماییم؛ و هر کس از یاد [و ذکر] پروردگارش روی برتابد، [الله] او را به عذابی سخت گرفتار می‌سازد؛"
+      }
+    },
+    {
+      "verse_number": 5465,
+      "verse_key": "72:18",
+      "arabic_text": "وَأَنَّ ٱلْمَسَـٰجِدَ لِلَّهِ فَلَا تَدْعُوا۟ مَعَ ٱللَّهِ أَحَدًا",
+      "phonetic_text": "Waanna almasajida lillahi falatadAAoo maAAa Allahi ahada",
+      "translations": {
+        "fr": "Les mosquées sont à Allah Seul ; n’y invoquez donc personne avec Lui.",
+        "en": "Places of worship are for God alone- so do not pray to anyone other than God-",
+        "es": "Los lugares de culto son para adorar solo a Dios, por lo que no deben invocar a nada ni a nadie junto con Dios<sup foot_note=169482>1</sup>.",
+        "it": "Le moschee appartengono ad Allah: non invocate nessuno insieme con Lui <a class=f><sup foot_note=160338>1</sup></a> .",
+        "ru": "Мечети принадлежат Аллаху. Не взывайте же ни к кому наряду с Аллахом.",
+        "tr": "Mescitler kuşkusuz Allah'ındır. O halde Allah ile birlikte kimseye yalvarmayın.",
+        "de": "Und die Gebetsstätten gehören doch Allah; so ruft neben Allah niemanden an.",
+        "pt": "Sabei que as mesquitas são (casas) de Deus; não invoqueis, pois, ninguém, juntamente com Deus.",
+        "nl": "En voorwaar, de moskeeën behoren aan Allah toe: roept dan naast Allah niet één aan.",
+        "ur": "اور یہ کہ مسجدیں اللہ کے لیے ہیں، لہٰذا اُن میں اللہ کے ساتھ کسی اور کو نہ پکارو۔ <sup foot_note=\"188141\">1</sup>",
+        "bn": "আৰু নিশ্চয় মছজিদসমূহ আল্লাহৰ বাবেই, গতিকে তোমালোকে আল্লাহৰ লগত আন কাকো নামাতিবা।",
+        "fa": "و اینکه مساجد از آنِ الله است؛ پس کسی را [در مساجد] با الله [به عبادت] نخوانید؛"
+      }
+    },
+    {
+      "verse_number": 5466,
+      "verse_key": "72:19",
+      "arabic_text": "وَأَنَّهُۥ لَمَّا قَامَ عَبْدُ ٱللَّهِ يَدْعُوهُ كَادُوا۟ يَكُونُونَ عَلَيْهِ لِبَدًا",
+      "phonetic_text": "Waannahu lamma qama AAabdu AllahiyadAAoohu kadoo yakoonoona AAalayhi libada",
+      "translations": {
+        "fr": "Et lorsque le serviteur d’Allah se fut levé pour L’invoquer, ils (les djinns) se bousculèrent vers lui.",
+        "en": "yet when God’s Servant stood up to pray to Him, they pressed in on him.",
+        "es": "Cuando el siervo de Dios [el profeta Muhámmad] se levantó para invocarlo, [los yinn] se agolparon a su alrededor [para oír la recitación].",
+        "it": "Quando il servo di Allah si levò per invocarLo, poco mancò che lo stringessero [fino a soffocarlo]!» <a class=f><sup foot_note=160348>1</sup></a> .",
+        "ru": "Когда раб Аллаха встал, обращаясь с мольбой к Нему, они столпились вокруг него (джинны столпились вокруг Пророка, чтобы послушать Коран, или неверующие ополчились против него, чтобы помешать ему).",
+        "tr": "Allah'ın kulu (Hz. Peygamber) kalkmış O'na dua ederken, neredeyse (cinler) onun etrafında keçe gibi birbirlerine geçeceklerdi.",
+        "de": "Und als Allahs Diener aufstand, um Ihn anzurufen, hätten sie ihn (alle) beinahe erdrückt.",
+        "pt": "E quando o servo de Deus se levantou para invocá-Lo (em oração), aglomeraram-se em tomo dele.",
+        "nl": "En voorwaar, wanneer de dienaar van Allah (Moehammed) in de shalât staat en Hem aanroept, dan bedelven zij (de Djinn's) hem bijna.",
+        "ur": "اور یہ کہ جب اللہ بندہ <sup foot_note=\"188142\">1</sup> اُس کو پکارنے کے لیے کھڑا ہوا تو لوگ اُس پر ٹُوٹ پڑنے کے لیے تیار ہوگئے",
+        "bn": "আৰু নিশ্চয় যেতিয়া আল্লাহৰ বান্দাই তেওঁক প্ৰাৰ্থনা কৰিবলৈ থিয় দিলে, তেতিয়া সিহঁতে তেওঁৰ ওচৰত আহি ভিৰ কৰিলে।",
+        "fa": "و اینکه هنگامی ‌که بندۀ الله [محمد صلی الله علیه وسلم به عبادت] برخاست تا او را بخوانَد، نزدیک بود که [از ازدحام بر گِرد او] بر سرِ هم فروریزند»."
+      }
+    },
+    {
+      "verse_number": 5467,
+      "verse_key": "72:20",
+      "arabic_text": "قُلْ إِنَّمَآ أَدْعُوا۟ رَبِّى وَلَآ أُشْرِكُ بِهِۦٓ أَحَدًا",
+      "phonetic_text": "Qul innama adAAoo rabbee walaoshriku bihi ahada",
+      "translations": {
+        "fr": "Dis : « Je ne fais que prier mon Seigneur, et je ne Lui prête aucun associé. »",
+        "en": "Say, ‘I pray to my Lord alone; I set up no partner with Him.’",
+        "es": "Diles [¡Oh, Muhámmad!]: “Solo invoco a mi Señor y no adoro a otro que Dios”.",
+        "it": "Di’: «Non invoco altri che il mio Signore e non Gli associo alcunché».",
+        "ru": "Скажи: «Я взываю только к своему Господу и никого не приобщаю в сотоварищи к Нему».",
+        "tr": "De ki: \"Ben ancak Rabbime dua eder ve O'na hiçbir şeyi ortak koşmam\"",
+        "de": "Sag: Ich rufe nur meinen Herrn an, und ich geselle Ihm niemanden bei.",
+        "pt": "Dize-lhes: Invoco tão somente o meu Senhor, a Quem não atribuo parceiro algum.",
+        "nl": "Zeg: \"Ik roep alleen mijn Heer aan en ik ken Hem in niets deelgenoten toe.\"",
+        "ur": "اے نبیؐ ، کہو کہ”میں تو اپنے ربّ کو پکارتا ہوں اور اس کے ساتھ کسی کو شریک نہیں کرتا۔“ <sup foot_note=\"188143\">1</sup>",
+        "bn": "কোৱা, ‘মই কেৱল মোৰ প্ৰতিপালককেই আহ্বান কৰো আৰু তেওঁৰ লগত আন কাকো আংশী নকৰো’।",
+        "fa": "[ای پیامبر، به آنها] بگو: «من تنها پروردگارم را می‌خوانم و کسی را با او شریک نمی‌سازم»."
+      }
+    },
+    {
+      "verse_number": 5468,
+      "verse_key": "72:21",
+      "arabic_text": "قُلْ إِنِّى لَآ أَمْلِكُ لَكُمْ ضَرًّا وَلَا رَشَدًا",
+      "phonetic_text": "Qul innee la amliku lakum darranwala rashada",
+      "translations": {
+        "fr": "Dis : « Je ne saurais ni vous nuire ni vous conduire vers le chemin de la droiture. »",
+        "en": "Say, ‘I have no control over any harm or good that may befall you.’",
+        "es": "Diles: “No tengo poder personal para desviarlos ni para guiarlos por el camino recto”.",
+        "it": "Di’: «In verità non posso né nuocervi, né giovarvi».",
+        "ru": "Скажи: «Не в моей власти навредить вам или наставить вас на прямой путь».",
+        "tr": "De ki, \"Haberiniz olsun, ben size kendiliğimden ne bir zarar verebilirim, ne de bir yol gösterebilirim.\"",
+        "de": "Sag: Ich vermag euch weder Schaden noch Besonnenheit (zu bringen).",
+        "pt": "Dize-lhes (mais): Em verdade, não posso livrar-vos do mal, nem trazer-vos para a conduta verdadeira.",
+        "nl": "Zeg: \"Ik heb geen macht om voor jullie schade te voorkomen en niet om Leiding te geven.\"",
+        "ur": "کہو، \"میں تم لوگوں کے لئے نہ کسی نقصان کا اختیار رکھتا ہوں نہ کسی بھلائی کا\"",
+        "bn": "কোৱা, ‘নিশ্চয় মই তোমালোকৰ কোনো ক্ষতি আৰু কল্যাণৰ মালিক নহয়’।",
+        "fa": "بگو: «بی‌گمان، من نه می‌توانم زیانی به شما برسانم و نه خیر و سودی»."
+      }
+    },
+    {
+      "verse_number": 5469,
+      "verse_key": "72:22",
+      "arabic_text": "قُلْ إِنِّى لَن يُجِيرَنِى مِنَ ٱللَّهِ أَحَدٌ وَلَنْ أَجِدَ مِن دُونِهِۦ مُلْتَحَدًا",
+      "phonetic_text": "Qul innee lan yujeeranee mina Allahiahadun walan ajida min doonihi multahada",
+      "translations": {
+        "fr": "Dis encore : « Nul ne saurait me protéger contre Allah, et je ne saurais (à mon tour) trouver refuge en dehors de Lui. ",
+        "en": "Say, ‘No one can protect me from God: I have no refuge except in Him.",
+        "es": "Diles: “Nadie puede protegerme de Dios y no tengo refugio fuera de Él,",
+        "it": "Di’: «In verità nessuno potrà proteggermi da Allah e mai troverò rifugio all’infuori di Lui,",
+        "ru": "Скажи: «Никто не защитит меня от Аллаха, и мне не найти помимо Него прибежища.",
+        "tr": "De ki, \"Allah'tan beni kimse kurtaramaz ve ben O'ndan başka bir sığınacak bulamam.\"",
+        "de": "Sag: Niemand kann mir gegen Allah Schutz gewähren, und ich werde außer (bei) Ihm keinen Ort der Sicherheit finden.",
+        "pt": "Dize-lhes (ainda): Em verdade, ninguém poderá livrar-me de Deus, nem tampouco acharei amparo algum fora d'Ele;",
+        "nl": "Zeg: \"Niemand zal mij ooit tegen Allah kunnen redden en ik zal nooit naast Hem een toevluchtsoord vinden.",
+        "ur": "کہو، \"مجھے اللہ کی گرفت سے کوئی نہیں بچا سکتا اور نہ میں اُس کے دامن کے سوا کوئی جائے پناہ پا سکتا ہوں",
+        "bn": "কোৱা, নিশ্চয় আল্লাহৰ পৰা কোনেও মোক ৰক্ষা কৰিব নোৱাৰিব আৰু তেওঁৰ বাহিৰে মই কেতিয়াও কোনো আশ্ৰয় নাপাম।",
+        "fa": "بگو: «[اگر من نیز بر خلاف فرمانش رفتار کنم] هیچ کس مرا در برابرِ او حمایت نمی‌کند و پناهگاهی جز او نمی‌یابم."
+      }
+    },
+    {
+      "verse_number": 5470,
+      "verse_key": "72:23",
+      "arabic_text": "إِلَّا بَلَـٰغًا مِّنَ ٱللَّهِ وَرِسَـٰلَـٰتِهِۦ ۚ وَمَن يَعْصِ ٱللَّهَ وَرَسُولَهُۥ فَإِنَّ لَهُۥ نَارَ جَهَنَّمَ خَـٰلِدِينَ فِيهَآ أَبَدًا",
+      "phonetic_text": "Illa balaghan mina Allahiwarisalatihi waman yaAAsi Allahawarasoolahu fa-inna lahu nara jahannama khalideenafeeha abada",
+      "translations": {
+        "fr": "(Seul est en mon pouvoir) de transmettre des informations de la part d’Allah et (de vous communiquer) Ses Messages. Et quiconque désobéit à Allah et à Son Messager aura la Géhenne pour y séjourner à tout jamais. »",
+        "en": "I only deliver [what I receive] from God- only His messages.’ Whoever disobeys God and His Messenger will have Hell’s Fire as his permanent home:",
+        "es": "solo debo difundir el Mensaje que me ha encargado transmitir”. Quien rechace a Dios y a Su Mensajero, sepa que le espera el fuego del Infierno, en el que permanecerá por toda la eternidad.",
+        "it": "se non comunicando, in Nome di Allah, i Suoi messaggi». Coloro che disobbediranno ad Allah e al Suo Messaggero, avranno il fuoco dell’Inferno e vi rimarranno in perpetuo per sempre.",
+        "ru": "Мне остается лишь доносить истину от Аллаха и Его послания. Кто же ослушается Аллаха и Его Посланника, тому уготован огонь Геенны, в котором они пребудут вечно».",
+        "tr": "\"Benim yapabileceğim, sadece Allah'tan size duyuru yapmak ve O'nun elçilik görevlerini yerine getirmektir.\" Artık kim Allah'a ve onun elçisine baş kaldırırsa, ona içinde ebedi kalacakları cehennem ateşi vardır.",
+        "de": "(Ich vermag) nur etwas zu übermitteln von Allah und Seinen Botschaften. Und wer sich Allah und Seinem Gesandten widersetzt, gewiß, für ihn wird es das Feuer der Hölle geben, ewig und auf immer darin zu bleiben.",
+        "pt": "Somente proclamo o que de Deus recebi, bem como a Sua mensagem. E aqueles que desobedecem a Deus e ao Seu Mensageiro, certamente terão o fogo infernal, onde morarão eternamente.",
+        "nl": "(Ik vind een toevluchtsoord) van Allah slechts door de verkondiging van Zijn Boodschappen.\" En wie opstaat tegen Allah en Zijn Boodschapper: voor hen is er het vuur van de Hel. Zij zijn daarin eeuwig levenden, voor altijd.",
+        "ur": "میرا کام اس کے سوا کچھ نہیں ہے کہ اللہ کی بات اور اس کے پیغامات پہنچا دوں۔ <sup foot_note=\"188144\">1</sup> اب جو بھی اللہ اور اس کے رسُول کی بات نہ مانے گا اس کے لیے جہنّم کی آگ ہے اور ویسے لوگ اس میں ہمیشہ رہیں گے۔“ <sup foot_note=\"188145\">2</sup>",
+        "bn": "‘কেৱল আল্লাহৰ তৰফৰ পৰা তেওঁৰ ৰিছালতৰ বাণী প্ৰচাৰ কৰাটোৱে মোৰ দায়িত্ব। আৰু যিয়ে আল্লাহ আৰু তেওঁৰ ৰাছুলক অমান্য কৰিব তাৰ বাবে আছে জাহান্নামৰ জুই, তাত সিহঁতে চিৰকাল থাকিব’।",
+        "fa": "[وظیفۀ من‌،] تنها ابلاغی از جانبِ الله و [رساندن‌] پیام‌های اوست. و هر کس از الله و پیامبرش نافرمانی کند، بی‌گمان، آتش جهنم از آنِ اوست؛ جاودانه در آن خواهد ماند»."
+      }
+    },
+    {
+      "verse_number": 5471,
+      "verse_key": "72:24",
+      "arabic_text": "حَتَّىٰٓ إِذَا رَأَوْا۟ مَا يُوعَدُونَ فَسَيَعْلَمُونَ مَنْ أَضْعَفُ نَاصِرًا وَأَقَلُّ عَدَدًا",
+      "phonetic_text": "Hatta itha raaw mayooAAadoona fasayaAAlamoona man adAAafu nasiranwaaqallu AAadada",
+      "translations": {
+        "fr": "Lorsqu’ils auront vu ce dont ils sont menacés, ils sauront qui sera plus faible en soutien et moins pourvu en nombre.",
+        "en": "when they are confronted by what they have been warned about, they will realize who has the weaker protector and the smaller number.",
+        "es": "Y cuando vean lo que se les había prometido sabrán quiénes están realmente desamparados y quiénes son los insignificantes.",
+        "it": "Quando poi vedranno quello che è stato promesso loro, allora sapranno chi avrà avuto l’alleato più debole e [chi sarà stato] numericamente esiguo!",
+        "ru": "Когда же они увидят то, что им было обещано, то узнают, чьи помощники слабее и малочисленнее.",
+        "tr": "Kendilerine vaad edilen şeyi gördükleri zaman, kimin yardımcısının en zayıf ve en az olduğunu bileceklerdir.",
+        "de": "Wenn sie dann sehen, was ihnen versprochen worden ist, da werden sie wissen, wer die schwächeren Helfer und die geringere Zahl hat.",
+        "pt": "(Eles duvidarão) até que, quando se depararem com o que lhes foi prometido, saberão quem tem menos socorredores e quem tem menor número (de aliados).",
+        "nl": "Wanneer zij dan zien wat hun is aangezegd, dan zullen zij weten wie de zwakste helpers heeft en het kleinst in aantal is.",
+        "ur": "(یہ لوگ اپنی اِس روش سے باز نہ آئیں گے) یہاں تک کہ جب اُس چیز کو دیکھ لیں گے جس کا اِن سے وعدہ کیا جا رہا ہے تو انہیں معلوم ہو جائے گا کہ کس کے مددگار کمزور ہیں اور کس کا جتھا تعداد میں کم ہے۔ <sup foot_note=\"188146\">1</sup>",
+        "bn": "অৱশেষত যেতিয়া সিহঁতে ইয়াক প্ৰত্যক্ষ কৰিব, যি বিষয়ে সিহঁতক সাৱধান কৰা হৈছিল। তেতিয়া সিহঁতে জানিবলৈ পাব যে, সহায়কাৰী হিচাপে কোন বেছি দুৰ্বল আৰু সংখ্যাত কোন আটাইতকৈ কম।",
+        "fa": "[کار کفار همچنان ادامه دارد] تا زمانی که آنچه را به آنها وعده داده شده، ببینند. آنگاه خواهند دانست که چه کسی یاورش ناتوان‌تر، و جمیعتش کمتر است."
+      }
+    },
+    {
+      "verse_number": 5472,
+      "verse_key": "72:25",
+      "arabic_text": "قُلْ إِنْ أَدْرِىٓ أَقَرِيبٌ مَّا تُوعَدُونَ أَمْ يَجْعَلُ لَهُۥ رَبِّىٓ أَمَدًا",
+      "phonetic_text": "Qul in adree aqareebun ma tooAAadoonaam yajAAalu lahu rabbee amada",
+      "translations": {
+        "fr": "Dis : « Je ne sais si ce dont vous êtes menacés est imminent, ou si mon Seigneur lui a fixé un terme différé.",
+        "en": "Say, ‘I do not know whether what you have been warned about is near, or whether a distant time has been appointed for it by my Lord.’",
+        "es": "Diles: “No sé si está cerca aquello con que se los ha advertido, o si mi Señor le ha fijado un plazo distante.",
+        "it": "Di’: «Io non so se quello che vi è stato promesso è imminente o se il mio Signore vorrà ritardarlo:",
+        "ru": "Скажи: «Я не знаю, скоро ли настанет обещанное вам, или же мой Господь отсрочил его».",
+        "tr": "De ki: \"Ben bilmem, o size vaad edilen şey yakın mı, yoksa Rabbim onun için uzun bir süre mi koyar..\"",
+        "de": "Sag: Ich weiß nicht, ob das, was euch versprochen worden ist, nahe ist, oder ob mein Herr ihm eine (längere) Frist setzt,",
+        "pt": "Dize-lhes: Ignoro se o que vos tem sido prometido é iminente, ou se o meu Senhor fixou-lhe um término remoto.",
+        "nl": "Zeg: \"Ik weet niet of het nabij is, wat jullie aangezegd is, of dat mijn Heer het nog lang uitstelt.\"",
+        "ur": "کہو”میں نہیں جانتا کہ جس چیز کا وعدہ تم سےکیا جارہا ہے وہ قریب ہے یا میرا ربّ اس کے لیے کوئی لمبی مدّت مقرر فرماتا ہے۔ <sup foot_note=\"188147\">1</sup>",
+        "bn": "কোৱা, ‘মই নাজানো তোমালোকক যিটোৰ প্ৰতিশ্ৰুতি দিয়া হৈছে, সেইটো নিকটৱৰ্তী নে মোৰ প্ৰতিপালকে ইয়াৰ বাবে কোনো দীৰ্ঘ ম্যাদ নিৰ্ধাৰণ কৰিব’।",
+        "fa": "[ای پیامبر،] بگو: «من نمی‌دانم آیا آنچه که به شما وعده داده شده نزدیک است یا پروردگارم زمانی [دور] برای آن قرار می‌دهد»."
+      }
+    },
+    {
+      "verse_number": 5473,
+      "verse_key": "72:26",
+      "arabic_text": "عَـٰلِمُ ٱلْغَيْبِ فَلَا يُظْهِرُ عَلَىٰ غَيْبِهِۦٓ أَحَدًا",
+      "phonetic_text": "AAalimu alghaybi fala yuthhiruAAala ghaybihi ahada",
+      "translations": {
+        "fr": "Car c’est Lui Qui Connaît l’Inconnaissable (ghayb), et Il ne dévoile Ses secrets à personne,",
+        "en": "He is the One who knows what is hidden.",
+        "es": "Él es Quien conoce lo oculto y no permite que nadie acceda a él.",
+        "it": "[Egli è] Colui Che conosce l’invisibile e non lo mostra a nessuno,",
+        "ru": "Он - Ведающий сокровенное, и Он не открывает Своего сокровенного никому,",
+        "tr": "O bütün gaybı bilir. Fakat gaybını hiç kimseye açmaz.",
+        "de": "(Er,) der Kenner des Verborgenen - Er enthüllt niemandem das, was bei Ihm verborgen ist,",
+        "pt": "Ele é Conhecedor do incognoscível e não revela os Seus mistérios a quem quer que seja,",
+        "nl": "De Kenner van het onwaarneembare, Hij maakt voor niemand het onwaarneembare dat bij Hem is zichtbaar.",
+        "ur": "وہ عالم الغیب ہے، اپنے غیب پر کسی کو مطلّع نہیں کرتا، <sup foot_note=\"188148\">1</sup>",
+        "bn": "তেওঁ অদৃশ্য বিষয়ৰ জ্ঞানী, আৰু তেওঁ নিজৰ অদৃশ্যৰ জ্ঞান কাৰো ওচৰত প্ৰকাশ নকৰে,",
+        "fa": "[الله] دانای غیب است و هیچ کس را بر [اسرارِ] غیبِ خود آگاه نمی‌سازد؛"
+      }
+    },
+    {
+      "verse_number": 5474,
+      "verse_key": "72:27",
+      "arabic_text": "إِلَّا مَنِ ٱرْتَضَىٰ مِن رَّسُولٍ فَإِنَّهُۥ يَسْلُكُ مِنۢ بَيْنِ يَدَيْهِ وَمِنْ خَلْفِهِۦ رَصَدًا",
+      "phonetic_text": "Illa mani irtada min rasoolinfa-innahu yasluku min bayni yadayhi wamin khalfihi rasada",
+      "translations": {
+        "fr": "excepté à ceux qu’il aura agréés comme Messagers, et qu’Il fait escorter, au-devant d’eux et derrière eux, par des gardiens aux aguets,",
+        "en": "He does not disclose it except to a messenger of His choosing. He sends watchers to go in front and behind",
+        "es": "Salvo aquel con quien Él se complace como Mensajero [y le revela asuntos de lo oculto]. Entonces, hace que lo escolten [ángeles] por delante y por detrás",
+        "it": "se non a un messaggero di cui Si compiace, che fa precedere e seguire da una guardia [angelica],",
+        "ru": "кроме тех посланников, которыми Он доволен и к которым Он приставляет спереди и сзади стражей,",
+        "tr": "Ancak seçtiği elçiye açar. Çünkü onun önünden ve ardından gözetleyiciler salar.",
+        "de": "außer dem Gesandten, den Er bewilligt; da läßt Er vor ihm und hinter ihm Wächter einhergehen,",
+        "pt": "Salvo a um mensageiro que tenta escolhido, e faz um grupo de guardas marcharem, na frente e por trás dele,",
+        "nl": "Behalve aan een Boodschapper die Hem welgevallig is, en voorwaar, dan laat Hij vóór hem en achter hem wachters (Engelen) gaan.",
+        "ur": "سوائے اُس رسُول کے جسے اُس نے (غیب کا کوئی علم دینے کے لیے) پسند کر لیا ہو، <sup foot_note=\"188149\">1</sup> تو اُس کے آگے اور پیچھے وہ محافظ لگا دیتا ہے۔ <sup foot_note=\"188150\">2</sup>",
+        "bn": "কিন্তু তেওঁৰ মনোনীত ৰাছুলৰ বাহিৰে। তেনে ক্ষেত্ৰত আল্লাহে তেওঁৰ ৰাছুলৰ সন্মুখত আৰু পিছত প্ৰহৰী নিযুক্ত কৰে,",
+        "fa": "مگر رسولانی که آنان را پسندیده [و برگزیده] است؛ که بی‌گمان، از پیش روی او و پشت سرش، نگهبانی [از فرشتگان برای محافظت از وی] می‌گمارد،"
+      }
+    },
+    {
+      "verse_number": 5475,
+      "verse_key": "72:28",
+      "arabic_text": "لِّيَعْلَمَ أَن قَدْ أَبْلَغُوا۟ رِسَـٰلَـٰتِ رَبِّهِمْ وَأَحَاطَ بِمَا لَدَيْهِمْ وَأَحْصَىٰ كُلَّ شَىْءٍ عَدَدًۢا",
+      "phonetic_text": "LiyaAAlama an qad ablaghoo risalatirabbihim waahata bima ladayhim waahsa kullashay-in AAadada",
+      "translations": {
+        "fr": "afin de savoir s’ils ont transmis les Messages de leur Seigneur. Il Cerne (de Sa Connaissance) tout ce qu’ils détiennent, et Dénombre Toute chose. »",
+        "en": "to ensure that each of His messengers delivers his Lord’s message: He knows all about them, and He takes account of everything.",
+        "es": "para cerciorarse que ha transmitido los Mensajes de su Señor. Él tiene completo conocimiento de todo cuanto les sucede y lleva la cuenta exacta de todo”.",
+        "it": "per sapere se [i profeti] hanno trasmesso i messaggi del loro Signore. Gli è ben noto tutto ciò che li concerne e tiene il conto di tutte le cose». <a class=f><sup foot_note=160349>1</sup></a> Gli esegeti propongono diverse versioni a proposito della rivelazione di questa sura. La più accreditata riferisce che di ritorno da Tà’if (vedi nota al titolo della sura xvii) l’Inviato di Allah (pace e benedizioni su di lui) recitò nella notte qualche parte del Santo Corano. La sua recitazione fu udita da un gruppo di dèmoni che toccati dall’intrinseca potenza di quelle parole, lo riconobbero come profeta e si convertirono all’IsIàm. Creature invisibili, i dèmoni vennero creati a partire dal fuoco e più esattamente dalla parte più pura di esso, la linguetta di energia che non emette fumo e che si trova sull’estremità della fiamma. Allah (gloria a Lui l’Altissimo) nel Corano li nomina ben trentuno volte. I dèmoni hanno volontà propria e libero arbitrio e vivono in un mondo contiguo ma separato da quello degli uomini, al quale hanno accesso attraverso meccanismi e varchi preclusi ai figli di Adamo. <a class=f><sup foot_note=160350>2</sup></a> «una Lettura»: lett. «un Corano». <a class=f><sup foot_note=160351>3</sup></a> «Uno stolto dei nostri»: Iblìs-Satana. <a class=f><sup foot_note=160352>4</sup></a> Riferisce Tabarì (xxix,08-che il versetto si riferisce alla superstizione degli arabi preislamici i quali pronunciavano una formula di richiesta di protezione attribuendo ai dèmoni uno speciale potere su particolari luoghi. <a class=f><sup foot_note=160353>5</sup></a> Tabarì predilige un’altra interpretazione del verbo «ba‘atha» che condurrebbe a questa traduzione: «…che Allah non avrebbe inviato alcunché». <a class=f><sup foot_note=160354>6</sup></a> Vedi nota a xxvi, 6-<a class=f><sup foot_note=160355>7</sup></a> Secondo la tradizione, i dèmoni un tempo potevano ascendere al cielo; questa possibilità fu loro preclusa alla nascita di Muhammad (pace e benedizioni su di lui). <a class=f><sup foot_note=160356>8</sup></a> Anche prima di aver ricevuto la rivelazione coranica, i dèmoni erano ben consci della potenza divina e della loro condizione di creature sottoposte comunque alla Sua volontà. <a class=f><sup foot_note=160357>9</sup></a> «musulmani»: cioè sottomessi alla volontà di Allah (gloria a Lui l’Altissimo). <a class=f><sup foot_note=160358>10</sup></a> L’acqua rappresenta sempre l’abbondanza alimentare e in generale il benessere; la Retta via è l’IsIàm e in questo percorso spirituale le creature saranno tentate e messe alla prova. <a class=f><sup foot_note=160359>11</sup></a> Secondo una tradizione, i dèmoni si recarono presso l’Inviato di Allah (pace e benedizioni su di lui) e gli dissero: «Come possiamo accedere alla tua moschea e prendere parte all’orazione dietro di te quando ci troviamo in un luogo remoto?». In conseguenza a ciò fu rivelato questo versetto il cui senso ha la sua chiave di lettura nel significato letterale del «masàgid»: luogo in cui si pratica il «sujùd», la prosternazione. Allah (gloria a Lui l’Altissimo) rispose ai dèmoni che ogni luogo in cui veniva assolto il culto all’Unico era da considerarsi moschea. <a class=f><sup foot_note=160360>12</sup></a> I dèmoni che si affollavano attorno all’Inviato di Allah per ascoltarlo come affermano alcuni esegeti o i pagani di Taif che gli furono materialmente ostili o ancora, e più in generale, uomini e jinn ostili e miscredenti che cercavano di impedirgli di assolvere alla sua missione? Allah ne sa di più.",
+        "ru": "чтобы знать, что они донесли послания своего Господа. Он объемлет знанием все, что с ними, и Он исчислил всякую вещь.",
+        "tr": "Bilsin diye ki, onlar Rablerinin elçiliklerini yerine getirmişlerdir. Allah onlarda bulunan her şeyi kuşatmış ve her şeyi bir bir saymıştır",
+        "de": "damit er weiß, ob sie wohl die Botschaften ihres Herrn ausgerichtet haben, und daß Er das, was bei ihnen ist, umfaßt, und Er die Zahl von allem erfaßt.",
+        "pt": "Para certificar-se de que transmitiu as mensagens do seu Senhor, o Qual abrange tudo quanto os humanos possuem, e que toma conta de tudo.",
+        "nl": "Om te doen weten dat zij de Boodschappen van hun Heer overbrachten. En Hij omvat wat er bij hen is en Hij somt alle zaken nauwkeurig op.",
+        "ur": "تاکہ وہ جان لے کہ انہوں نے اپنے ربّ کے پیغامات پہنچا دیے، <sup foot_note=\"188151\">1</sup> اور اُن کے پُورے ماحول کا احاطہ کیے ہوئے ہے اور ایک ایک چیز کو اس نے گِن رکھا ہے۔“ <sup foot_note=\"188152\">2</sup>",
+        "bn": "যাতে তেওঁ প্ৰকাশ কৰে যে, নিশ্চয় তেওঁলোকে তেওঁলোকৰ প্ৰতিপালকৰ ৰিছালত পৌঁচাই দিছে। আৰু তেওঁলোকৰ ওচৰত যি আছে সেয়া তেওঁ জ্ঞানৰ দ্বাৰা পৰিবেষ্টন কৰি ৰাখিছে আৰু তেওঁ প্ৰতিটো বস্তু গণনা কৰি হিচাপ কৰি ৰাখিছে।",
+        "fa": "تا [پیامبر] بداند که [پیامبران پیش از او نیز] رسالت‌های پروردگار‌شان را ابلاغ کرده‌اند؛ و [الله] به آنچه نزد آنهاست احاطه دارد؛ و هر چیزی را به عدد برشمرده است."
+      }
+    }
+  ]
+}

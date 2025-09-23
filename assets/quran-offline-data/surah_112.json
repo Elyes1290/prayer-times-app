@@ -1,0 +1,86 @@
+{
+  "surah_number": 112,
+  "extracted_at": "2025-09-20T15:17:49.812Z",
+  "verses": [
+    {
+      "verse_number": 6222,
+      "verse_key": "112:1",
+      "arabic_text": " قُلْ هُوَ ٱللَّهُ أَحَدٌ",
+      "phonetic_text": "Qul huwa Allahu ahad",
+      "translations": {
+        "fr": "Dis : « Il est Allah, l’Un.",
+        "en": "Say, ‘He is God the One,",
+        "es": "Di: “Él es Al-lah<sup foot_note=169516>1</sup>, Uno.",
+        "it": "Di’ : «Egli Allah è Unico,",
+        "ru": "Скажи: «Он - Аллах Единый,",
+        "tr": "De ki; O Allah bir tektir.",
+        "de": "Sag: Er ist Allah, Einer,",
+        "pt": "Dize: Ele é Deus, o Único!",
+        "nl": "Zeg: \"Hij is Allah, de Enige.",
+        "ur": "کہو، <sup foot_note=\"188646\">1</sup> وہ اللہ ہے، <sup foot_note=\"188647\">2</sup> یَکتا۔ <sup foot_note=\"188648\">3</sup>",
+        "bn": "কোৱা, ‘তেওঁ আল্লাহ, এক-অদ্বিতীয়,",
+        "fa": "[ای پیامبر] بگو: «او الله یکتا و یگانه است."
+      }
+    },
+    {
+      "verse_number": 6223,
+      "verse_key": "112:2",
+      "arabic_text": "ٱللَّهُ ٱلصَّمَدُ",
+      "phonetic_text": "Allahu assamad",
+      "translations": {
+        "fr": "Allah, le Primultime.<sup foot_note=195250>1</sup>",
+        "en": "God the eternal.",
+        "es": "Al-lah es el Absoluto<sup foot_note=169517>1</sup>.",
+        "it": "Allah è l’Assoluto <a class=f><sup foot_note=160794>1</sup></a> .",
+        "ru": "Аллах Самодостаточный.",
+        "tr": "Allah eksiksiz, sameddir (Bütün varlıklar O'na muhtaç, fakat O, hiç bir şeye muhtaç değildir",
+        "de": "Allah, der Überlegene.",
+        "pt": "Deus! O Absoluto!",
+        "nl": "Allah is de Enige van Wie al het geschapene afhankelijk is.",
+        "ur": "اللہ سب سے بے نیاز ہے اور سب اس کے محتاج ہیں۔ <sup foot_note=\"188649\">1</sup>",
+        "bn": "আল্লাহ হৈছে ছামাদ; (তেওঁ কাৰো মুখাপেক্ষী নহয়, সকলো তেওঁৰেই মুখাপেক্ষী)",
+        "fa": "الله بی‌نیاز است [و همه نیازمند او هستند]."
+      }
+    },
+    {
+      "verse_number": 6224,
+      "verse_key": "112:3",
+      "arabic_text": "لَمْ يَلِدْ وَلَمْ يُولَدْ",
+      "phonetic_text": "Lam yalid walam yoolad",
+      "translations": {
+        "fr": "Il n’a pas engendré ni n’a été engendré.",
+        "en": "He begot no one nor was He begotten.",
+        "es": "No engendró ni fue engendrado.",
+        "it": "Non ha generato, non è stato generato",
+        "ru": "Он не родил и не был рожден,",
+        "tr": "Doğurmadı ve doğurulmadı",
+        "de": "Er hat nicht gezeugt und ist nicht gezeugt worden,",
+        "pt": "Jamais gerou ou foi gerado!",
+        "nl": "Hij heeft niet verwekt en is niet verwekt.",
+        "ur": "نہ اس کی کوئی اولاد ہے اور نہ وہ کسی کی اولاد۔ <sup foot_note=\"188650\">1</sup>",
+        "bn": "তেওঁ কাকো জন্ম দিয়া নাই আৰু তেৱোঁ জন্ম লোৱা নাই,",
+        "fa": "نه [فرزندی] زاده و نه [از کسی] زاده شده است."
+      }
+    },
+    {
+      "verse_number": 6225,
+      "verse_key": "112:4",
+      "arabic_text": "وَلَمْ يَكُن لَّهُۥ كُفُوًا أَحَدٌۢ",
+      "phonetic_text": "Walam yakun lahu kufuwan ahad",
+      "translations": {
+        "fr": "Et nul n’est Son égal ! »",
+        "en": "No one is comparable to Him.’",
+        "es": "Y no hay nada ni nadie que sea semejante a Él”.",
+        "it": "e nessuno è uguale a Lui». <a class=f><sup foot_note=160795>1</sup></a> Una tradizione che risale all’Inviato di Allah (pace e benedizione su di lui) afferma che la recitazione di questa sura corrisponde al merito della recitazione di un terzo del Corano. Qualche commentatore l’ha definita «perfetta sintesi del tawhìd» (il monoteismo islamico). <a class=f><sup foot_note=160796>2</sup></a> Colui verso il Quale tendono tutte le creature, Colui Che è Unità assoluta, l’Impenetrabile, l’Eterno; questi alcuni dei significati di «as-Samad» che abbiamo tradotto con «l’Assoluto».",
+        "ru": "и нет никого равного Ему».",
+        "tr": "O 'na bir denk de olmadı.",
+        "de": "und niemand ist Ihm jemals gleich.",
+        "pt": "E ninguém é comparável a Ele!",
+        "nl": "En niet één is aan Hem gelijkwaardig.\"",
+        "ur": "اور کوئی اُس کا ہمسر نہیں ہے۔ <sup foot_note=\"188651\">1</sup>",
+        "bn": "আৰু তেওঁৰ সমতুল্য কোনো নাই’।",
+        "fa": "و هیچ کس همانند و همتای او نبوده و نیست»."
+      }
+    }
+  ]
+}

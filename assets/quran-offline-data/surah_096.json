@@ -1,0 +1,386 @@
+{
+  "surah_number": 96,
+  "extracted_at": "2025-09-20T15:17:27.339Z",
+  "verses": [
+    {
+      "verse_number": 6107,
+      "verse_key": "96:1",
+      "arabic_text": " ٱقْرَأْ بِٱسْمِ رَبِّكَ ٱلَّذِى خَلَقَ",
+      "phonetic_text": "Iqra/ bi-ismi rabbika allathee khalaq",
+      "translations": {
+        "fr": "Lis par le nom de ton Seigneur Qui a créé !",
+        "en": "Read! In the name of your Lord who created:",
+        "es": "¡Lee<sup foot_note=169508>1</sup>! [¡Oh, Muhámmad!] En el nombre de tu Señor, Quien creó todas las cosas.",
+        "it": "Leggi! In nome del tuo Signore che ha creato,",
+        "ru": "Читай во имя твоего Господа, Который сотворил все сущее,",
+        "tr": "Yaratan Rabbinin adıyla oku!",
+        "de": "Lies im Namen deines Herrn, Der erschaffen hat,",
+        "pt": "Lê, em nome do teu Senhor Que criou;",
+        "nl": "Lees voor! In de naam van jouw Heer, Die heeft geschapen.",
+        "ur": "پڑھو <sup foot_note=\"188537\">1</sup> (اے نبیؐ) اپنے ربّ کے نام کے ساتھ <sup foot_note=\"188538\">2</sup> جس نے پیدا کیا، <sup foot_note=\"188539\">3</sup>",
+        "bn": "পঢ়া তোমাৰ প্ৰতিপালকৰ নামত, যিজনে সৃষ্টি কৰিছে,",
+        "fa": "بخوان به نام پروردگارت که [هستی را] آفرید؛"
+      }
+    },
+    {
+      "verse_number": 6108,
+      "verse_key": "96:2",
+      "arabic_text": "خَلَقَ ٱلْإِنسَـٰنَ مِنْ عَلَقٍ",
+      "phonetic_text": "Khalaqa al-insana min AAalaq",
+      "translations": {
+        "fr": "Qui a créé l’homme d’un grumeau de sang.",
+        "en": "He created manfrom a clinging form.",
+        "es": "Creó al ser humano de una célula embrionaria.",
+        "it": "ha creato l’uomo da un’aderenza.",
+        "ru": "сотворил человека из сгустка крови.",
+        "tr": "O, insanı bir alekadan (embriyodan) yarattı.",
+        "de": "den Menschen erschaffen hat aus einem Anhängsel.",
+        "pt": "Criou o homem de algo que se agarra.",
+        "nl": "Hij heeft de mens geschapen van een bloedklomp.",
+        "ur": "جمے ہوئے خون کے ایک لوتھڑے سے انسان کی تخلیق کی۔ <sup foot_note=\"188540\">1</sup>",
+        "bn": "তেওঁ মানুহক আলাক্বৰ পৰা সৃষ্টি কৰিছে।",
+        "fa": "[همان پروردگاری که] انسان را از خونِ بسته آفرید."
+      }
+    },
+    {
+      "verse_number": 6109,
+      "verse_key": "96:3",
+      "arabic_text": "ٱقْرَأْ وَرَبُّكَ ٱلْأَكْرَمُ",
+      "phonetic_text": "Iqra/ warabbuka al-akram",
+      "translations": {
+        "fr": "Lis, car ton Seigneur est le Plus Noble",
+        "en": "Read! Your Lord is the Most Bountiful One",
+        "es": "¡Lee! Que tu Señor es el más Generoso.",
+        "it": "Leggi, che il tuo Signore è il Generosissimo,",
+        "ru": "Читай, ведь твой Господь - Самый великодушный.",
+        "tr": "Oku! Rabbin sonsuz kerem sahibidir.",
+        "de": "Lies, und dein Herr ist der Edelste,",
+        "pt": "Lê, que o teu Senhor é Generosíssimo,",
+        "nl": "Lees voor! En jouw Heer is de Meest Edele.",
+        "ur": "پڑھو، اور تمہارا رب بڑا کریم ہے",
+        "bn": "পঢ়া, কাৰণ তোমাৰ প্ৰতিপালক মহামহিম।",
+        "fa": "بخوان و پروردگارت [از همه] بزرگوار‌تر است."
+      }
+    },
+    {
+      "verse_number": 6110,
+      "verse_key": "96:4",
+      "arabic_text": "ٱلَّذِى عَلَّمَ بِٱلْقَلَمِ",
+      "phonetic_text": "Allathee AAallama bilqalam",
+      "translations": {
+        "fr": "Qui enseigna par le Calame.",
+        "en": "who taught by [means of] the pen,",
+        "es": "Enseñó la escritura con la pluma<sup foot_note=169509>1</sup>",
+        "it": "Colui Che ha insegnato mediante il calamo,",
+        "ru": "Он научил посредством письменной трости -",
+        "tr": "O Rab ki kalemle yazmayı öğretti.",
+        "de": "Der (das Schreiben) mit dem Schreibrohr gelehrt hat,",
+        "pt": "Que ensinou através do cálamo,",
+        "nl": "Degene Die onderwezen heeft met de pen.",
+        "ur": "جس نے قلم کے ذریعہ سے علم سکھایا، <sup foot_note=\"188541\">1</sup>",
+        "bn": "যিজনে কলমৰ সহায়ত শিক্ষা দিছে।",
+        "fa": "[همان] ذاتی ‌که به وسیلۀ قلم [نوشتن] آموخت."
+      }
+    },
+    {
+      "verse_number": 6111,
+      "verse_key": "96:5",
+      "arabic_text": "عَلَّمَ ٱلْإِنسَـٰنَ مَا لَمْ يَعْلَمْ",
+      "phonetic_text": "AAallama al-insana ma lamyaAAlam",
+      "translations": {
+        "fr": "Qui enseigna à l’homme ce qu’il ne savait pas.",
+        "en": "who taught man what he did not know.",
+        "es": "y le enseñó al ser humano lo que este no sabía.",
+        "it": "che ha insegnato all’uomo quello che non sapeva.",
+        "ru": "научил человека тому, чего тот не знал.",
+        "tr": "İnsana bilmediği şeyleri öğretti.",
+        "de": "den Menschen gelehrt hat, was er nicht wußte.",
+        "pt": "Ensinou ao homem o que este não sabia.",
+        "nl": "Hij heeft de mens onderwezen wat hij niet wist.",
+        "ur": "انسان کو وہ علم دیا جسے وہ نہ جانتا تھا۔ <sup foot_note=\"188542\">1</sup>",
+        "bn": "তেওঁ মানুহক এনে শিক্ষা দিছে, যিটো মানুহে জনা নাছিল।",
+        "fa": "به انسان آنچه را که نمی‌دانست [به تدریج] آموخت."
+      }
+    },
+    {
+      "verse_number": 6112,
+      "verse_key": "96:6",
+      "arabic_text": "كَلَّآ إِنَّ ٱلْإِنسَـٰنَ لَيَطْغَىٰٓ",
+      "phonetic_text": "Kalla inna al-insana layatgha",
+      "translations": {
+        "fr": "Mais non ! L’homme devient certes rebelle,",
+        "en": "But man exceeds all bounds",
+        "es": "No obstante, el ser humano se excede",
+        "it": "Invece no! Invero l’uomo si ribella,",
+        "ru": "Но нет! Человек преступает границы дозволенного,",
+        "tr": "Hayır! Doğrusu (kâfir) insan azgınlık eder.",
+        "de": "Keineswegs! Der Mensch lehnt sich wahrlich auf,",
+        "pt": "Qual! Em verdade, o homem transgride,",
+        "nl": "Nee, voorwaar, de mens is zeker in overtreding.",
+        "ur": "ہرگز نہیں، <sup foot_note=\"188543\">1</sup> انسان سرکشی کرتا ہے",
+        "bn": "বাস্তৱ এই যে, মানুহে সীমালঙ্ঘন কৰি থাকে।",
+        "fa": "چنین نیست [که شما می‌پندارید]؛ حقا که انسان طغیان [و سرکشی] می‌کند"
+      }
+    },
+    {
+      "verse_number": 6113,
+      "verse_key": "96:7",
+      "arabic_text": "أَن رَّءَاهُ ٱسْتَغْنَىٰٓ",
+      "phonetic_text": "An raahu istaghna",
+      "translations": {
+        "fr": "dès qu’il se voit gagner en richesses.",
+        "en": "when he thinks he is self-sufficient:",
+        "es": "cuando se cree autosuficiente.",
+        "it": "appena ritiene di bastare a se stesso.",
+        "ru": "когда ему кажется, что он ни в чем не нуждается.",
+        "tr": "Kendisinin muhtaç olmadığını zannettiği için.",
+        "de": "daß er von sich meint, unbedürftig zu sein.",
+        "pt": "Quando se vê rico.",
+        "nl": "Omdat hij zichzelf als behoefteloos beschouwt.",
+        "ur": "اِس بنا پر کہ وہ اپنے آپ کو بے نیاز دیکھتا ہے <sup foot_note=\"188544\">1</sup>",
+        "bn": "কাৰণ সি নিজকে স্বনিৰ্ভৰশীল বুলি ভাৱে।",
+        "fa": "[بعد] از اینکه خود را بی‌نیاز [و توانگر] ببیند."
+      }
+    },
+    {
+      "verse_number": 6114,
+      "verse_key": "96:8",
+      "arabic_text": "إِنَّ إِلَىٰ رَبِّكَ ٱلرُّجْعَىٰٓ",
+      "phonetic_text": "Inna ila rabbika arrujAAa",
+      "translations": {
+        "fr": "Vers ton Seigneur sera le retour.",
+        "en": "[Prophet], all will return to your Lord.",
+        "es": "Pero todos habrán de comparecer ante tu Señor.",
+        "it": "In verità il ritorno è verso il tuo Signore.",
+        "ru": "Но к твоему Господу предстоит возвращение.",
+        "tr": "Muhakkak ki dönüş mutlaka Rabbinedir.",
+        "de": "Gewiß, zu deinem Herrn wird die Rückkehr sein.",
+        "pt": "Sabe (ó Mensageiro) que o retorno de tudo será para o teu Senhor.",
+        "nl": "Voorwaar, tot jouw Heer is de terugkeer.",
+        "ur": "(حالانکہ) پلٹنا یقیناً تیرے ربّ ہی کی طرف ہے۔ <sup foot_note=\"188545\">1</sup>",
+        "bn": "নিশ্চয় তোমাৰ প্ৰতিপালকৰ ওচৰতেই প্ৰত্যাৱৰ্তন।",
+        "fa": "یقیناً بازگشت [همه] به سوی پروردگار توست."
+      }
+    },
+    {
+      "verse_number": 6115,
+      "verse_key": "96:9",
+      "arabic_text": "أَرَءَيْتَ ٱلَّذِى يَنْهَىٰ",
+      "phonetic_text": "Araayta allathee yanha",
+      "translations": {
+        "fr": "N’as-tu pas vu celui qui défend",
+        "en": "Have you seen the man who forbids",
+        "es": "¿Qué piensas de quien impide",
+        "it": "Hai visto colui <a class=f><sup foot_note=160684>1</sup></a> che proibisce",
+        "ru": "Что ты думаешь о том, кто мешает",
+        "tr": "Namaz kıldığı zaman, bir kulu engelleyeni gördün mü?",
+        "de": "Siehst du denjenigen, der abhält",
+        "pt": "Viste aquele que impede",
+        "nl": "Wat denk jij van hem die verbiedt?",
+        "ur": "تم نے دیکھا اُس شخص کو",
+        "bn": "তুমি তাক দেখা নাইনে? যিয়ে নিষেধ কৰে।",
+        "fa": "[ای پیامبر،] آیا دیده‌ای آن کسی [= ابوجهل] را که [از عبادت الله] باز می‌دارد"
+      }
+    },
+    {
+      "verse_number": 6116,
+      "verse_key": "96:10",
+      "arabic_text": "عَبْدًا إِذَا صَلَّىٰٓ",
+      "phonetic_text": "AAabdan itha salla",
+      "translations": {
+        "fr": "à un serviteur (d’Allah) de faire la prière ?",
+        "en": "[Our] servant to pray?",
+        "es": "a un siervo de Dios realizar sus oraciones?",
+        "it": "al servo di eseguire l’orazione?",
+        "ru": "рабу, когда тот молится?",
+        "tr": "Namaz kıldığı zaman, bir kulu engelleyeni gördün mü?",
+        "de": "einen Diener, wenn er betet?",
+        "pt": "O servo (de Deus) de orar?",
+        "nl": "Een dienaar wanneer hij de shalât verricht.",
+        "ur": "جو ایک بندے کو منع کرتا ہے جبکہ  وہ نماز پڑھتا ہو؟ <sup foot_note=\"188546\">1</sup>",
+        "bn": "এজন বান্দাক, যেতিয়া তেওঁ ছালাত আদায় কৰে।",
+        "fa": "بنده‌ای [= محمد] را هنگامی که [کنار کعبه] نماز می‌خواند."
+      }
+    },
+    {
+      "verse_number": 6117,
+      "verse_key": "96:11",
+      "arabic_text": "أَرَءَيْتَ إِن كَانَ عَلَى ٱلْهُدَىٰٓ",
+      "phonetic_text": "Araayta in kana AAala alhuda",
+      "translations": {
+        "fr": "Que penserais-tu si (ce dernier) était auparavant sur la bonne voie,",
+        "en": "Have you seen whether he is rightly guided,",
+        "es": "¿Acaso ha recapacitado que trae la guía",
+        "it": "Pensi che segua la guida,",
+        "ru": "Что ты думаешь, а если он был на правом пути",
+        "tr": "Gördün mü (ne dersin?), ya o (kul) doğru yolda olur,",
+        "de": "Siehst du! Obwohl er nach der Rechtleitung verfährt,",
+        "pt": "Viste se ele está na orientação?",
+        "nl": "Wat denk je, als hij (Mohammed) de leiding volgt?",
+        "ur": "تمہارا کیا خیال ہے اگر (وہ بندہ) راہ راست پر ہو",
+        "bn": "কোৱাচোন, যদিও তেওঁ হিদায়তৰ ওপৰত প্ৰতিষ্ঠিত,",
+        "fa": "به من خبر بده اگر این [بنده بازداشته‌شده] بر [راه] هدایت باشد"
+      }
+    },
+    {
+      "verse_number": 6118,
+      "verse_key": "96:12",
+      "arabic_text": "أَوْ أَمَرَ بِٱلتَّقْوَىٰٓ",
+      "phonetic_text": "Aw amara bittaqwa",
+      "translations": {
+        "fr": "et appelait à la piété ?",
+        "en": "or encourages true piety?",
+        "es": "y exhorta a la piedad?",
+        "it": "che comandi il timore [di Allah]?",
+        "ru": "или призывал к богобоязненности?",
+        "tr": "Veya kötülüklerden sakınmayı emrederse?",
+        "de": "oder die Gottesfurcht gebietet?",
+        "pt": "Ou recomenda a piedade?",
+        "nl": "Of hij tot Taqwa oproept?",
+        "ur": "یا پرہیزگاری کی تلقین کرتا ہو؟",
+        "bn": "অথবা তাক্বৱাৰ নিৰ্দেশ দিয়ে; (তথাপিও তেওঁক কেনেকৈ বাধা দিয়ে?)",
+        "fa": "یا [مردم را] به پرهیزگاری فرمان دهد، [سزای کسی‌ که چنین بنده‌ای را بیازارد چیست؟]"
+      }
+    },
+    {
+      "verse_number": 6119,
+      "verse_key": "96:13",
+      "arabic_text": "أَرَءَيْتَ إِن كَذَّبَ وَتَوَلَّىٰٓ",
+      "phonetic_text": "Araayta in kaththaba watawalla",
+      "translations": {
+        "fr": "Et que penserais-tu si (le premier) traitait de mensonge (le Message) et s’en détournait ?",
+        "en": "Have you seen whether he denies the truth and turns away from it?",
+        "es": "¿Acaso no ves cómo desmiente y rechaza?",
+        "it": "Non pensi piuttosto che rinneghi e volga le spalle <a class=f><sup foot_note=160685>1</sup></a> ?",
+        "ru": "Что ты думаешь, а если он счел ложью истину и отвернулся?",
+        "tr": "Gördün mü, ya bu (adam, hakkı) yalanlar, yüzçevirirse,",
+        "de": "Siehst du! Wie (wäre es) wenn er (die Botschaft) für Lüge erklärt und sich abkehrt?",
+        "pt": "Viste se ele nega (a verdade) e a desdenha?",
+        "nl": "Wat denk jij, als hij (Abôe Djahl) loochent en zich afwendt?",
+        "ur": "تمہارا کیا خیال ہے اگر (یہ منع کرنے والا شخص حق کو) جھٹلاتا اور منہ موڑتا ہو؟",
+        "bn": "কোৱাচোন যদি সি (নিষেধকাৰী) অস্বীকাৰ কৰে আৰু মুখ ঘূৰাই লয়,",
+        "fa": "به من خبر بده اگر این [شخص سرکش، حق را] تکذیب کند و رویگردان شود [آیا سزاوار عذاب نیست؟]."
+      }
+    },
+    {
+      "verse_number": 6120,
+      "verse_key": "96:14",
+      "arabic_text": "أَلَمْ يَعْلَم بِأَنَّ ٱللَّهَ يَرَىٰ",
+      "phonetic_text": "Alam yaAAlam bi-anna Allaha yara",
+      "translations": {
+        "fr": "Ne sait-il pas qu’Allah Voit Tout ?",
+        "en": "Does he not realize that God sees all?",
+        "es": "¿Acaso no sabe que Dios lo ve?",
+        "it": "Non sa che, invero, Allah vede <a class=f><sup foot_note=160686>1</sup></a> ?",
+        "ru": "Неужели он не знал, что Аллах видит его?",
+        "tr": "O adam, Allah'ın kendini gördüğünü hiç bilmiyor mu?",
+        "de": "Weiß er denn nicht, daß Allah sieht?",
+        "pt": "Ignora, acaso, que Deus o observa?",
+        "nl": "Weet hij dan niet dat Allah (hem) ziet?",
+        "ur": "کیا وہ نہیں جانتا کہ اللہ دیکھ رہا ہے؟ <sup foot_note=\"188547\">1</sup>",
+        "bn": "সি নাজানে নেকি, নিশ্চয় আল্লাহে দেখি আছে?",
+        "fa": "آیا نمی‌داند که بی‌تردید، الله [همه اعمالش را] می‌بیند؟"
+      }
+    },
+    {
+      "verse_number": 6121,
+      "verse_key": "96:15",
+      "arabic_text": "كَلَّا لَئِن لَّمْ يَنتَهِ لَنَسْفَعًۢا بِٱلنَّاصِيَةِ",
+      "phonetic_text": "Kalla la-in lam yantahi lanasfaAAanbinnasiya",
+      "translations": {
+        "fr": "Certes non ! S’il ne cesse pas, Nous le prendrons par le toupet,",
+        "en": "No! If he does not stop, We shall drag him by his forehead––",
+        "es": "Si no pone fin [a sus agresiones contra los creyentes] le arrastraré por su frente,",
+        "it": "Stia in guardia: se non smette, Noi lo afferreremo per il ciuffo,",
+        "ru": "Но нет, если он не перестанет, то Мы схватим его за хохол -",
+        "tr": "Hayır, hayır! Eğer o, bu davranışından vazgeçmezse, and olsun ki biz, onu perçeminden, o günahkâr ve yalancı perçeminden tutup cehenneme sürükleriz.",
+        "de": "Keineswegs! Wenn er nicht aufhört, werden Wir ihn ganz gewiß an der Stirnlocke packen und ziehen,",
+        "pt": "Qual! Em verdade, se não se contiver, agarrá-lo-emos pelo topete,",
+        "nl": "Nee, als hij niet ophoudt, dan zullen Wij hem bij zijn voorhoofdslok grijpen.",
+        "ur": "ہرگز نہیں، <sup foot_note=\"188548\">1</sup> اگر وہ باز نہ آیا تو ہم اس کی پیشانی کے بال پکڑ کر اُسے کھینچیں گے",
+        "bn": "কেতিয়াও নহয়, যদি সি বিৰত নাথাকে, তেন্তে নিশ্চয় আমি তাক আগচুলিত ধৰি টানি আনিম।",
+        "fa": "چنین نیست [که او گمان می‌کند]؛ اگر باز نیاید [و دست از شرارت برندارد،] قطعاً موی پیشانی [او] را به شدّت خواهیم گرفت [و به سوی دوزخ خواهیم کشاند]؛"
+      }
+    },
+    {
+      "verse_number": 6122,
+      "verse_key": "96:16",
+      "arabic_text": "نَاصِيَةٍ كَـٰذِبَةٍ خَاطِئَةٍ",
+      "phonetic_text": "Nasiyatin kathibatin khati-a",
+      "translations": {
+        "fr": "un toupet menteur et coupable.",
+        "en": "his lying, sinful forehead.",
+        "es": "esa frente mentirosa y perversa.",
+        "it": "il ciuffo mendace peccaminoso.",
+        "ru": "хохол лживый, грешный.",
+        "tr": "Hayır, hayır! Eğer o, bu davranışından vazgeçmezse, and olsun ki biz, onu perçeminden, o günahkâr ve yalancı perçeminden tutup cehenneme sürükleriz.",
+        "de": "einer Stirnlocke, einer lügnerischen, einer verfehlt handelnden.",
+        "pt": "Topete de mentiras e pecados.",
+        "nl": "Een leugenachtige, zondige voorhoofdslok.",
+        "ur": "اُس پیشانی کو جو جھُوٹی اور سخت خطاکار ہے۔ <sup foot_note=\"188549\">1</sup>",
+        "bn": "মিছলীয়া, পাপিষ্ঠৰ আগচুলি (কপাল)।",
+        "fa": "موی پیشانیِ [همان] دروغگوی خطاکار را."
+      }
+    },
+    {
+      "verse_number": 6123,
+      "verse_key": "96:17",
+      "arabic_text": "فَلْيَدْعُ نَادِيَهُۥ",
+      "phonetic_text": "FalyadAAu nadiyah",
+      "translations": {
+        "fr": "Qu’il appelle donc son clan (à son secours).",
+        "en": "Let him summon his comrades;",
+        "es": "Que pida auxilio a sus secuaces,<sup foot_note=169510>1</sup>",
+        "it": "Chiami pure il suo clan:",
+        "ru": "Пусть он зовет свое сборище.",
+        "tr": "O zaman o taraftarlarını yardıma çağırsın.",
+        "de": "So soll er doch seine Genossen rufen.",
+        "pt": "Que chamem, então, os seus conselheiros;",
+        "nl": "Laat hem dan zijn bondgenoten roepen.",
+        "ur": "وہ بُلالے اپنے حامیوں کی ٹولی کو، <sup foot_note=\"188550\">1</sup>",
+        "bn": "এতেকে সি নিজ পৰিষদক মাতি আনক।",
+        "fa": "پس باید هم‌مجلسانش را [به کمک] بخواند."
+      }
+    },
+    {
+      "verse_number": 6124,
+      "verse_key": "96:18",
+      "arabic_text": "سَنَدْعُ ٱلزَّبَانِيَةَ",
+      "phonetic_text": "SanadAAu azzabaniya",
+      "translations": {
+        "fr": "Nous ferons appel aux gardiens (de l’Enfer).",
+        "en": "We shall summon the guards of Hell.",
+        "es": "que llamaré a los ángeles guardianes del Infierno.",
+        "it": "Noi chiameremo i guardiani <a class=f><sup foot_note=160687>1</sup></a> .",
+        "ru": "Мы же позовем адских стражей!",
+        "tr": "Biz de Zebanileri çağıracağız.",
+        "de": "Wir werden die (Höllen)wache rufen.",
+        "pt": "Chamaremos os guardiões do inferno!",
+        "nl": "Wij zullen de Zabâniyah roepen.",
+        "ur": "ہم بھی عذاب کے فرشتوں کو بُلا لیں گے۔ <sup foot_note=\"188551\">1</sup>",
+        "bn": "অনতিপলমে আমি মাতি আনিম জাহান্নামৰ কঠোৰ প্ৰহৰীসকলক।",
+        "fa": "ما [نیز] آتشبانان [دوزخ] را فرا خواهیم ‌خواند."
+      }
+    },
+    {
+      "verse_number": 6125,
+      "verse_key": "96:19",
+      "arabic_text": "كَلَّا لَا تُطِعْهُ وَٱسْجُدْ وَٱقْتَرِب ۩",
+      "phonetic_text": "Kalla la tutiAAhu wasjudwaqtarib",
+      "translations": {
+        "fr": "Non ! Ne lui obéis pas ! Prosterne-toi et rapproche-toi (d’Allah) !<sup foot_note=195241>1</sup>",
+        "en": "No! Do not obey him [Prophet]: bow down in worship and draw close.",
+        "es": "¡No! No le obedezcas, sino que prostérnate [ante Dios] y busca Su proximidad.",
+        "it": "No, non gli obbedire <a class=f><sup foot_note=160688>1</sup></a> , ma prosternati e avvicinati <a class=f><sup foot_note=160689>2</sup></a> . <a class=f><sup foot_note=160690>3</sup></a> Coi primi cinque versetti di questa sura inizia la rivelazione del Corano. Era l’anno durante Ramadan, nono mese del calendario lunare, Muhammad ibn Abdallah ibn Abdalmuttalib, della tribù dei Quraysh della Mecca (pace e benedizioni su di lui) si era ritirato in meditazione, in una grotta del monte Hirà, nelle vicinanze della città. In una delle ultime notti del mese, all’improvviso gli apparve una figura umana che gli disse: «Leggi!». Muhammad rispose: «Non so leggere», allora quello lo strinse fortissimamente e insistette: «Leggi!». Dopo che questo fatto si ripetè ancora una volta la creatura recitò i primi cinque versetti di questa sura affinché, come disse poi l’Inviato di Allah, «le parole fossero scolpite nel mio cuore». Sconvolto ed impaurito Muhammad fuggì dalla grotta correndo giù dalla montagna ma una voce risuonò prodigiosamente nell’oscurità della notte: «O Muhammad tu sei il Messaggero di Allah e io sono Gabriele». Egli alzò gli occhi e vide la forma angelica riempire tutto l’orizzonte. Allah (gloria a Lui l’Altissimo) aveva scelto il Suo Messaggero e da quel giorno, nell’arco di ventitré anni, fece scendere su di lui la rivelazione coranica; Muhammad la comunicò ai suoi discepoli, la dettò ai suoi segretari e oggi, dopo quattordici secoli, per Volontà dell’Altissimo, un miliardo e mezzo di musulmani sono beneficiari di questa Misericordia. <a class=f><sup foot_note=160691>4</sup></a> Secondo la tradizione (Tabari xxx, 253-il versetto e quelli che seguono si riferiscono ad Abu Jahl, un potente coreiscita che aveva giurato di uccidere l’Inviato di Allah (pace e benedizioni su di lui) se avesse osato pregare nei pressi della Ka‘ba. <a class=f><sup foot_note=160692>5</sup></a> «… che rinneghi [i segni di Allah] e volga le spalle [al Suo Inviato].» <a class=f><sup foot_note=160693>6</sup></a> «Allah vede [tutto quello che fa]?» <a class=f><sup foot_note=160694>7</sup></a> «i guardiani»: gli angeli, custodi dell’Inferno. <a class=f><sup foot_note=160695>8</sup></a> «non gli obbedire»: non sottostare alle sue intimidazioni relativamente all’orazione (vedi nota 2). <a class=f><sup foot_note=160696>9</sup></a> «prosternati e avvicinati»: ad Allah. Questa è l’ultima «sajda» che si esegue nella recitazione del Corano. Vedi in Appendice l’elenco delle prosternazioni rituali.",
+        "ru": "Так нет! Не повинуйся ему, а пади ниц и приближайся к Аллаху.",
+        "tr": "Sakın onu dinleme de (Rabbine) secde et ve yaklaş.",
+        "de": "Keineswegs! Gehorche ihm nicht, sondern wirf dich nieder und sei (Allah) nah!",
+        "pt": "Qual! Não os escutes; porém, prostra-te e aproxima-te (de Deus)!",
+        "nl": "Nee, gehoorzaam hem niet, en kniel je neer en zoek toenadering (tot Allah).",
+        "ur": "ہرگزنہیں، اُس کی بات نہ مانو اور سجدہ کرو اور (اپنے ربّ کا) قرب حاصل کرو۔ <sup foot_note=\"188552\">1</sup>",
+        "bn": "কেতিয়াও নহয়, তুমি তাৰ অনুসৰণ নকৰিবা। আৰু তুমি (তোমাৰ প্ৰতিপালকক) ছাজদা কৰা আৰু নৈকট্য লাভ কৰা।",
+        "fa": "چنین نیست [که او می‌پندارد]؛ هرگز او را اطاعت مکن و سجده کن، و [به الله] تقرّب جوی."
+      }
+    }
+  ]
+}

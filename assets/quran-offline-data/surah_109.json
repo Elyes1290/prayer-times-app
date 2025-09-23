@@ -1,0 +1,126 @@
+{
+  "surah_number": 109,
+  "extracted_at": "2025-09-20T15:17:45.574Z",
+  "verses": [
+    {
+      "verse_number": 6208,
+      "verse_key": "109:1",
+      "arabic_text": " قُلْ يَـٰٓأَيُّهَا ٱلْكَـٰفِرُونَ",
+      "phonetic_text": "Qul ya ayyuha alkafiroon",
+      "translations": {
+        "fr": "Dis : « Ô vous les mécréants !",
+        "en": "Say [Prophet], ‘Disbelievers:",
+        "es": "Di: “¡Oh, incrédulos!",
+        "it": "Di’: «O miscredenti!",
+        "ru": "Скажи: «О неверующие!",
+        "tr": "De ki: Ey kâfirler",
+        "de": "Sag: O ihr Ungläubigen,",
+        "pt": "Dize: Ó incrédulos,",
+        "nl": "Zeg (O Mohammed): \"O ongelovigen.",
+        "ur": "کہہ دو کہ اے کافرو، <sup foot_note=\"188632\">1</sup>",
+        "bn": "কোৱা, ‘হে কাফিৰসকল !",
+        "fa": "[ای پیامبر،] بگو: «ای کافران،"
+      }
+    },
+    {
+      "verse_number": 6209,
+      "verse_key": "109:2",
+      "arabic_text": "لَآ أَعْبُدُ مَا تَعْبُدُونَ",
+      "phonetic_text": "La aAAbudu ma taAAbudoon",
+      "translations": {
+        "fr": "Je n’adore point ce que vous adorez.",
+        "en": "I do not worship what you worship,",
+        "es": "No adoro lo que adoráis.",
+        "it": "Io non adoro quel che voi adorate",
+        "ru": "Я не поклоняюсь тому, чему поклоняетесь вы,",
+        "tr": "Sizin taptıklarınıza ben tapmam.",
+        "de": "ich diene nicht dem, dem ihr dient,",
+        "pt": "Não adoro o que adorais,",
+        "nl": "Ik aanbid niet wat jullie aanbidden.",
+        "ur": "میں اُن کی عبادت نہیں کرتا جن کی عبادت تم کرتے ہو، <sup foot_note=\"188633\">1</sup>",
+        "bn": "তোমালোকে যাৰ ইবাদত কৰা, মই তাৰ ইবাদত নকৰোঁ,",
+        "fa": "آنچه را که شما عبادت می‌کنید، من عبادت نمی‌کنم،"
+      }
+    },
+    {
+      "verse_number": 6210,
+      "verse_key": "109:3",
+      "arabic_text": "وَلَآ أَنتُمْ عَـٰبِدُونَ مَآ أَعْبُدُ",
+      "phonetic_text": "Wala antum AAabidoona maaAAbud",
+      "translations": {
+        "fr": "Pas plus que vous n’allez adorer ce que<sup foot_note=195249>1</sup> j’adore.",
+        "en": "you do not worship what I worship,",
+        "es": "Ni vosotros adoráis a Quien yo adoro.",
+        "it": "e voi non siete adoratori di quel che io adoro.",
+        "ru": "а вы не поклоняетесь Тому, Кому поклоняюсь я.",
+        "tr": "Siz de benim taptığıma tapıcılar değilsiniz.",
+        "de": "und ihr dient nicht Dem, Dem ich diene.",
+        "pt": "Nem vós adorais o que adoro.",
+        "nl": "En jullie zijn geen aanbidders van wat ik aanbid.",
+        "ur": "اور نہ تم اُس کی عبادت کرنے والے ہو جس کی عبادت میں کرتا ہوں۔ <sup foot_note=\"188634\">1</sup>",
+        "bn": "আৰু মই যাৰ ইবাদত কৰোঁ, তোমালোকে তেওঁৰ ইবাদতকাৰী নহয়,",
+        "fa": "و [نیز] آنچه را که من عبادت می‌کنم شما عبادت نمی‌کنید."
+      }
+    },
+    {
+      "verse_number": 6211,
+      "verse_key": "109:4",
+      "arabic_text": "وَلَآ أَنَا۠ عَابِدٌ مَّا عَبَدتُّمْ",
+      "phonetic_text": "Wala ana AAabidun maAAabadtum",
+      "translations": {
+        "fr": "Ni moi je ne vais adorer ce que vous avez adoré.",
+        "en": "I will never worship what you worship,",
+        "es": "Y jamás adoraré lo que adoráis.",
+        "it": "Io non sono adoratore di quel che voi avete adorato",
+        "ru": "Я не поклоняюсь так, как поклоняетесь вы (или тому, чему поклоняетесь вы),",
+        "tr": "Ben asla sizin taptıklarınıza tapacak değilim.",
+        "de": "Und ich werde (auch) nicht dem dienen, dem ihr gedient habt,",
+        "pt": "E jamais adorarei o que adorais,",
+        "nl": "En ik zal nooit een aanbidder worden van wat jullie aanbidden.",
+        "ur": "اور نہ میں اُن کی عبادت کرنے والا ہوں جن کی عبادت تم نے کی ہے",
+        "bn": "আৰু মই তাৰ ইবাদতকাৰী নহয় যাৰ ইবাদত তোমালোকে কৰা।",
+        "fa": "و نه من عبادت‌کننده آنچه شما عبادت کرده‌اید خواهم بود؛"
+      }
+    },
+    {
+      "verse_number": 6212,
+      "verse_key": "109:5",
+      "arabic_text": "وَلَآ أَنتُمْ عَـٰبِدُونَ مَآ أَعْبُدُ",
+      "phonetic_text": "Wala antum AAabidoona maaAAbud",
+      "translations": {
+        "fr": "Pas plus que vous n’allez adorer ce que j’adore.",
+        "en": "you will never worship what I worship:",
+        "es": "Ni adoraréis vosotros a Quien yo adoro.",
+        "it": "e voi non siete adoratori di quel che io adoro:",
+        "ru": "а вы не поклоняетесь так, как поклоняюсь я (или Тому, Кому поклоняюсь я).",
+        "tr": "Siz de benim taptığıma tapacak değilsiniz.",
+        "de": "Und ihr werdet nicht Dem dienen, Dem ich diene.",
+        "pt": "Nem vós adorareis o que adoro.",
+        "nl": "En jullie zullen nooit aanbidders worden van wat ik aanbid.",
+        "ur": "اور نہ تم اُس کی عبادت کرنے والے ہو جس کی عبادت میں کرتا ہوں۔ <sup foot_note=\"188635\">1</sup>",
+        "bn": "আৰু মই যাৰ ইবাদত কৰোঁ, তোমালোকে তেওঁৰ ইবাদতকাৰী নহয়,",
+        "fa": "و نه شما عبادت‌کننده آنچه من عبادت می‌کنم خواهید بود."
+      }
+    },
+    {
+      "verse_number": 6213,
+      "verse_key": "109:6",
+      "arabic_text": "لَكُمْ دِينُكُمْ وَلِىَ دِينِ",
+      "phonetic_text": "Lakum deenukum waliya deen",
+      "translations": {
+        "fr": "Vous, vous avez votre religion et moi, j’ai la mienne. »",
+        "en": "you have your religion and I have mine.’",
+        "es": "Vosotros tenéis vuestra religión y yo la mía”.",
+        "it": "a voi la vostra religione, a me la mia». <a class=f><sup foot_note=160786>1</sup></a> I notabili meccani, nel tentativo di limitare i danni che paventavano all’economia e alla potenza Quraysh in conseguenza alla predicazione di Muhammad (pace e benedizioni su di lui) proposero un ridicolo compromesso all’Inviato di Allah: un anno tutti quanti avrebbero adorato il Dio Unico (gloria a Lui l’Altissimo) e un anno gli dèi. Il Profeto rifiutò nettamente la proposta e questa sura fu rivelata per ribadire l’assoluta impossibilità di mercanteggiare sui precetti dell’Altissimo (gloria a Lui), l’improponibilità di ogni sincretismo religioso, della conciliazione dottrinale tra le religioni e la conseguente specifità del rito che impedisce ogni concelebrazione interreligiosa.",
+        "ru": "У вас есть ваша религия, а у меня - моя!».",
+        "tr": "Sizin dininiz size, benim dinim banadır.",
+        "de": "Euch eure Religion und mir meine Religion.",
+        "pt": "Vós tendes a vossa religião e eu tenho a minha.",
+        "nl": "Daarom, voor jullie jullie godsdienst en voor mij mijn godsdienst.",
+        "ur": "تمہارے لیے تمہارا دین ہے اور میرے لیے میرا دین۔ <sup foot_note=\"188636\">1</sup>",
+        "bn": "তোমালোকৰ দ্বীন তোমালোকৰ বাবে, আৰু মোৰ দ্বীন মোৰ বাবে।",
+        "fa": "[بنابراین] آیین شما [که آن را برای خویش ساخته‌اید] برای خود‌تان باد و آیین من [که الله آن را بر من فرستاده است] برای خودم»."
+      }
+    }
+  ]
+}

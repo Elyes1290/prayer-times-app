@@ -1,0 +1,306 @@
+{
+  "surah_number": 91,
+  "extracted_at": "2025-09-20T15:17:20.166Z",
+  "verses": [
+    {
+      "verse_number": 6044,
+      "verse_key": "91:1",
+      "arabic_text": " وَٱلشَّمْسِ وَضُحَىٰهَا",
+      "phonetic_text": "Washshamsi waduhaha",
+      "translations": {
+        "fr": "Par le soleil et sa clarté !",
+        "en": "By the sun in its morning brightness",
+        "es": "Juro por el Sol cuando resplandece,",
+        "it": "Per il sole e il suo fulgore,",
+        "ru": "Клянусь солнцем и его утренним сиянием!",
+        "tr": "Güneş'e ve onun parıltısına,",
+        "de": "Bei der Sonne und ihrer Morgenhelle",
+        "pt": "Pelo sol e pelo seu esplendor (matinal),",
+        "nl": "Bij de zon en haar ochtendlicht.",
+        "ur": "سُورج اور اُس کی دُھوپ <sup foot_note=\"188494\">1</sup> کی قسم",
+        "bn": "শপত সূৰ্যৰ আৰু তাৰ পোহৰৰ,",
+        "fa": "سوگند به خورشید و روشنیِ آن [به هنگام بامداد]،"
+      }
+    },
+    {
+      "verse_number": 6045,
+      "verse_key": "91:2",
+      "arabic_text": "وَٱلْقَمَرِ إِذَا تَلَىٰهَا",
+      "phonetic_text": "Walqamari itha talaha",
+      "translations": {
+        "fr": "Par la lune quand elle le suit !",
+        "en": "and by the moon as it follows it,",
+        "es": "por la Luna cuando lo refleja,",
+        "it": "per la luna quando lo segue,",
+        "ru": "Клянусь луной, когда она следует за ним!",
+        "tr": "Güneş'in ardından gelen Ay'a,",
+        "de": "und dem Mond, wenn er ihr folgt,",
+        "pt": "Pela lua, que o segue,",
+        "nl": "Bij de maan wanneer zij haar (de zon) volgt.",
+        "ur": "اور چاند کی قسم جبکہ وہ اُس کے پیچھے آتا ہے",
+        "bn": "শপত চন্দ্ৰৰ, যেতিয়া ই সূৰ্যৰ পিছত আবিৰ্ভাৱ হয়,",
+        "fa": "و سوگند به ماه، هنگامی که بعد از آن [= خورشید] در‌آید،"
+      }
+    },
+    {
+      "verse_number": 6046,
+      "verse_key": "91:3",
+      "arabic_text": "وَٱلنَّهَارِ إِذَا جَلَّىٰهَا",
+      "phonetic_text": "Wannahari itha jallaha",
+      "translations": {
+        "fr": "Par le jour quand il en montre tout l’éclat !",
+        "en": "by the day as it displays the sun’s glory",
+        "es": "por el día cuando fulgura,",
+        "it": "per il giorno quando rischiara [la terra],",
+        "ru": "Клянусь днем, когда он делает его (солнце) ясным!",
+        "tr": "Güneş'i açıp ortaya çıkaran gündüze,",
+        "de": "und dem Tag, wenn er sie erscheinen läßt,",
+        "pt": "Pelo dia, que o revela,",
+        "nl": "Bij de dag wanneer hij het (duister) verdrijft.",
+        "ur": "اور دن کی قسم جبکہ وہ (سورج کو) نمایاں کر دیتا ہے",
+        "bn": "আৰু দিনৰ শপত, যেতিয়া সূৰ্যক প্ৰকাশ কৰে,",
+        "fa": "و سوگند به روز، هنگامی‌ که آن [= خورشید] را روشن [و جلوه‌گر] کند،"
+      }
+    },
+    {
+      "verse_number": 6047,
+      "verse_key": "91:4",
+      "arabic_text": "وَٱلَّيْلِ إِذَا يَغْشَىٰهَا",
+      "phonetic_text": "Wallayli itha yaghshaha",
+      "translations": {
+        "fr": "Par la nuit quand elle le voile !",
+        "en": "and by the night as it conceals it,",
+        "es": "por la noche cuando cubre con su oscuridad,",
+        "it": "per la notte quando la copre,",
+        "ru": "Клянусь ночью, когда она скрывает его (солнце)!",
+        "tr": "Onu örten geceye,",
+        "de": "und der Nacht, wenn sie sie überdeckt,",
+        "pt": "Pela noite, que o encobre.",
+        "nl": "Bij de nacht wanneer hij haar (de aarde) bedekt.",
+        "ur": "اور رات کی قسم جبکہ وہ (سُورج کو) ڈھانک لیتی ہے، <sup foot_note=\"188495\">1</sup>",
+        "bn": "ৰাতিৰ শপত যেতিয়া ই সূৰ্যক আচ্ছাদিত কৰে,",
+        "fa": "و سوگند به شب، هنگامی که آن را بپوشانَد،"
+      }
+    },
+    {
+      "verse_number": 6048,
+      "verse_key": "91:5",
+      "arabic_text": "وَٱلسَّمَآءِ وَمَا بَنَىٰهَا",
+      "phonetic_text": "Wassama-i wama banaha",
+      "translations": {
+        "fr": "Par le ciel et ce qui<sup foot_note=195236>1</sup> l’a bâti !",
+        "en": "by the sky and how He built it",
+        "es": "por el cosmos y la creación maravillosa que hay en él,",
+        "it": "per il cielo e Ciò Che lo ha edificato,",
+        "ru": "Клянусь небом и Тем, Кто его воздвиг (или тем, как Он воздвиг его)!",
+        "tr": "Göğe ve onu bina edene,",
+        "de": "und dem Himmel und Dem, Der ihn aufgebaut hat,",
+        "pt": "Pelo firmamento e por Quem o construiu,",
+        "nl": "Bij de hemel en Wie haar gebouwd heeft.",
+        "ur": "اور آسمان کی اور اُس ذات کی قسم جس نے اُسے قائم کیا، <sup foot_note=\"188496\">1</sup>",
+        "bn": "শপত আকাশৰ আৰু সেই সত্তাৰ যিজনে ইয়াক নিৰ্মাণ কৰিছে,",
+        "fa": "و سوگند به آسمان و به ذاتی که آن را بنا کرد،"
+      }
+    },
+    {
+      "verse_number": 6049,
+      "verse_key": "91:6",
+      "arabic_text": "وَٱلْأَرْضِ وَمَا طَحَىٰهَا",
+      "phonetic_text": "Wal-ardi wama tahaha",
+      "translations": {
+        "fr": "Par la terre et ce qui l’a étendue !",
+        "en": "and by the earth and how He spread it,",
+        "es": "por la Tierra y su vasta extensión,",
+        "it": "per la terra e Ciò Che l’ha distesa,",
+        "ru": "Клянусь землей и Тем, Кто ее распростер (или тем, как Он распростер ее)!",
+        "tr": "Yere ve onu döşeyene,",
+        "de": "und der Erde und Dem, Der sie ausgebreitet hat,",
+        "pt": "Pela terra e por Quem a dilatou,",
+        "nl": "Bij de aarde en Wie haar uitgespreid heeft.",
+        "ur": "اور زمین کی اور اُس ذات کی قسم جس نے اُسے بچھایا",
+        "bn": "পৃথিৱীৰ শপত আৰু যিজনে ইয়াক বিস্তৃত কৰিছে,",
+        "fa": "و سوگند به زمین و به ذاتی که آن را گسترانید،"
+      }
+    },
+    {
+      "verse_number": 6050,
+      "verse_key": "91:7",
+      "arabic_text": "وَنَفْسٍ وَمَا سَوَّىٰهَا",
+      "phonetic_text": "Wanafsin wama sawwaha",
+      "translations": {
+        "fr": "Par l’âme et ce qui l’a si harmonieusement formée,",
+        "en": "by the soul and how He formed it",
+        "es": "por el alma y su armonía,",
+        "it": "per l’anima e Ciò Che l’ha formata armoniosamente",
+        "ru": "Клянусь душой и Тем, Кто придал ей совершенный облик (или тем, как Он сделал ее облик совершенным)",
+        "tr": "Nefse ve onu biçimlendirene,",
+        "de": "und einer (jeden) Seele und Dem, Der sie zurechtgeformt hat",
+        "pt": "Pela alma e por Quem aperfeiçoou,",
+        "nl": "Bij de ziel en Wie haar vervolmaakt heeft.",
+        "ur": "اور نفسِ انسانی کی اور اُس ذات کی قسم جس نے اُسے ہموار کیا <sup foot_note=\"188497\">1</sup>",
+        "bn": "শপত প্ৰাণৰ আৰু যিজনে ইয়াক সুবিন্যস্ত কৰিছে,",
+        "fa": "و سوگند به جانِ [انسان] و ذاتی که آن را [آفرید و] نیکو گردانید،"
+      }
+    },
+    {
+      "verse_number": 6051,
+      "verse_key": "91:8",
+      "arabic_text": "فَأَلْهَمَهَا فُجُورَهَا وَتَقْوَىٰهَا",
+      "phonetic_text": "Faalhamaha fujooraha wataqwaha",
+      "translations": {
+        "fr": "lui suggérant sa perversion ou sa piété !",
+        "en": "and inspired it [to know] its own rebellion and piety!",
+        "es": "[Dios] le enseñó [al ser humano] a distinguir entre el pecado y la conciencia de Dios.",
+        "it": "ispirandole empietà e devozione <a class=f><sup foot_note=160638>1</sup></a> .",
+        "ru": "и внушил ей порочность ее и богобоязненность!",
+        "tr": "Sonra da ona kötülük ve takva kabiliyetini verene yemin olsun ki,",
+        "de": "und ihr dann ihre Sittenlosigkeit und ihre Gottesfurcht eingegeben hat!",
+        "pt": "E lhe imprimiu o discernimento entre o que é certo e o que é errado,",
+        "nl": "Hij Die haar haar zondigheid en haar vrees (voor Hem) bijgebracht heeft.",
+        "ur": "پھر اُس کی بدی اوراُس کی پرہیزگاری اس پر الہام کر دی، <sup foot_note=\"188498\">1</sup>",
+        "bn": "তাৰ পিছত ইয়াক তাৰ সত্কৰ্মৰ আৰু অসত্কৰ্মৰ জ্ঞান দান কৰিছে,",
+        "fa": "سپس نافرمانی و پرهیزگاری‌اش را [به او] الهام کرد."
+      }
+    },
+    {
+      "verse_number": 6052,
+      "verse_key": "91:9",
+      "arabic_text": "قَدْ أَفْلَحَ مَن زَكَّىٰهَا",
+      "phonetic_text": "Qad aflaha man zakkaha",
+      "translations": {
+        "fr": "Heureux sera, assurément, celui qui la purifie,",
+        "en": "The one who purifies his soul succeeds",
+        "es": "¡Será bienaventurado quien purifique su alma [apartándola de los pecados],",
+        "it": "Ha successo invero chi la purifica,",
+        "ru": "Преуспел тот, кто очистил ее,",
+        "tr": "Elbette nefsini temizleyip parlatan kurtulmuştur.",
+        "de": "Wohl ergehen wird es ja jemandem, der sie läutert,",
+        "pt": "Que será venturoso quem a purificar (a alma),",
+        "nl": "Voorwaar, hij die haar (de ziel) loutert, zal welslagen.",
+        "ur": "یقیناً فلاح پا گیا وہ جس نے نفس کا تزکیہ کیا",
+        "bn": "নিসন্দেহে সিয়েই সফল হৈছে যিয়ে নিজকে পৱিত্ৰ কৰিছে।",
+        "fa": "بی‌تردید، هر کس نفس خود را [از گناهان] پاک کند، رستگار می‌شود."
+      }
+    },
+    {
+      "verse_number": 6053,
+      "verse_key": "91:10",
+      "arabic_text": "وَقَدْ خَابَ مَن دَسَّىٰهَا",
+      "phonetic_text": "Waqad khaba man dassaha",
+      "translations": {
+        "fr": "et perdu sera celui qui la souille.",
+        "en": "and the one who corrupts it fails.",
+        "es": "pero será un desventurado quien la abandone a sus pasiones!",
+        "it": "è perduto chi la corrompe.",
+        "ru": "и понес урон тот, кто скрыл ее (опорочил, облек в несправедливость).",
+        "tr": "Onu kirletip gömen de ziyan etmiştir.",
+        "de": "und enttäuscht sein wird ja, wer sie verkümmern läßt.",
+        "pt": "E desventurado quem a corromper.",
+        "nl": "En waarlijk verliest hij die haar bederft.",
+        "ur": "اور نامراد ہوا وہ جس نے اُس کو دبا دیا۔ <sup foot_note=\"188499\">1</sup>",
+        "bn": "আৰু সিয়েই ব্যৰ্থ হৈছে, যিয়ে নিজকে কলুষিত কৰিছে।",
+        "fa": "و هر کس آن را [با گناه] آلوده سازد، یقیناً زیانکار می‌شود."
+      }
+    },
+    {
+      "verse_number": 6054,
+      "verse_key": "91:11",
+      "arabic_text": "كَذَّبَتْ ثَمُودُ بِطَغْوَىٰهَآ",
+      "phonetic_text": "Kaththabat thamoodu bitaghwaha",
+      "translations": {
+        "fr": "Les Thamûd ont crié au mensonge, emportés par leur transgression,",
+        "en": "In their arrogant cruelty, the people of Thamud called [their messenger] a liar,",
+        "es": "El pueblo de Zamud rechazó el Mensaje por soberbia.",
+        "it": "I Thamùd, per arroganza, tacciarono di menzogna,",
+        "ru": "Самудяне сочли лжецом пророка Салиха из-за своего беззакония,",
+        "tr": "Semud, azgınlığıyla Hakk'ı yalanladı,",
+        "de": "Die Tamud erklärten in ihrer Auflehnung (die Botschaft) für Lüge,",
+        "pt": "A tribo de Tamud, por suas transgressões, desmentiu o seu mensageiro.",
+        "nl": "De Tsamoed loochenden in hun buitensporigheid.",
+        "ur": "<sup foot_note=\"171636\">1</sup> ثمُود نے اپنی سرکشی کی بنا پر جھُٹلایا۔ <sup foot_note=\"171637\">2</sup>",
+        "bn": "ছামূদ সম্প্ৰদায়ে অবাধ্যতাবশত অস্বীকাৰ কৰিছিল।",
+        "fa": "[قوم] ثمود از روی سرکشی، [پیامبر‌شان را] تکذیب کردند،"
+      }
+    },
+    {
+      "verse_number": 6055,
+      "verse_key": "91:12",
+      "arabic_text": "إِذِ ٱنۢبَعَثَ أَشْقَىٰهَا",
+      "phonetic_text": "Ithi inbaAAatha ashqaha",
+      "translations": {
+        "fr": "lorsque (pour tuer la chamelle) surgit le plus maudit d’entre eux.",
+        "en": "when the most wicked man among them rose [against him].",
+        "es": "Cuando el más opresor de ellos se prestó para matar a la camella.",
+        "it": "quando si alzò il più miserabile <a class=f><sup foot_note=160639>1</sup></a> di loro.",
+        "ru": "и тогда самый несчастный из них вызвался убить верблюдицу.",
+        "tr": "En azgınları ileri atılınca,",
+        "de": "als der Unseligste von ihnen sich erhob.",
+        "pt": "E o mais perverso deles se incumbiu (de matar a camela).",
+        "nl": "Toen de ellendigste onder hen opstond.",
+        "ur": "جب اُس قوم کا سب سے زیادہ شقی آدمی بپھر کر اٹھا",
+        "bn": "যেতিয়া সিহঁতৰ মাজৰ হতভাগ্য ব্যক্তিজন তত্পৰ হৈ উঠিল,",
+        "fa": "آنگاه که بدکار‌ترین آنان [برای اقدام به جنایت] برخاست."
+      }
+    },
+    {
+      "verse_number": 6056,
+      "verse_key": "91:13",
+      "arabic_text": "فَقَالَ لَهُمْ رَسُولُ ٱللَّهِ نَاقَةَ ٱللَّهِ وَسُقْيَـٰهَا",
+      "phonetic_text": "Faqala lahum rasoolu Allahi naqataAllahi wasuqyaha",
+      "translations": {
+        "fr": "Le Messager d’Allah leur avait dit : « C’est la chamelle d’Allah, laissez-la donc s’abreuver! »",
+        "en": "The messenger of God said to them, ‘[Leave] God’s camel to drink,’",
+        "es": "El Mensajero de Dios [Sálih] los previno: “No maten a la camella de Dios [enviada como milagro] y déjenla abrevar libremente”.",
+        "it": "Il Messaggero di Allah aveva detto loro: «[Questa] è la cammella di Allah, [abbia] il suo turno per bere» <a class=f><sup foot_note=160640>1</sup></a> .",
+        "ru": "Посланник Аллаха (Салих) сказал им: «Берегите верблюдицу и питье ее!».",
+        "tr": "Allah'ın Rasulü (Salih peygamber) onlara: \"Allah'ın devesini ve onun su nöbetini gözetin.\" demişti.",
+        "de": "Allahs Gesandter sagte zu ihnen: (Achtet auf) Allahs Kamelstute und ihre Trinkzeit.",
+        "pt": "Porém, o mensageiro de Deus lhes disse: É a camela de Deus! Não a priveis da sua bebida!",
+        "nl": "Daarop zei de Boodschapper van Allah (Shâlih) tot hen: \"(Sla acht op) de vrouwtjeskameel van Allah en haar drinktijden.\"",
+        "ur": "تو اللہ کے رسُول نے اُن لوگوں سے کہا کہ خبردار، اللہ کی اُونٹنی کو (ہاتھ نہ لگانا) اور اُس کے پانی پینے (میں مانع نہ ہونا)۔ <sup foot_note=\"188500\">1</sup>",
+        "bn": "তেতিয়া আল্লাহৰ ৰাছুলে সিহঁতক ক'লে, 'আল্লাহৰ উটজনীক আৰু তাইৰ পানী খোৱা সম্পৰ্কে সাৱধান হোৱা'।",
+        "fa": "پیامبر الله [= صالح] به آنان گفت: «ماده‌شترِ الله و [نوبت‌] آب‌خوردنش را [حرمت نهید]»."
+      }
+    },
+    {
+      "verse_number": 6057,
+      "verse_key": "91:14",
+      "arabic_text": "فَكَذَّبُوهُ فَعَقَرُوهَا فَدَمْدَمَ عَلَيْهِمْ رَبُّهُم بِذَنۢبِهِمْ فَسَوَّىٰهَا",
+      "phonetic_text": "Fakaththaboohu faAAaqaroohafadamdama AAalayhim rabbuhum bithanbihim fasawwaha",
+      "translations": {
+        "fr": "Mais ils le traitèrent de menteur et la tuèrent. Leur Seigneur sévit contre eux (les punissant) de leur péché et Il les châtia tous d’un égal supplice.",
+        "en": "but they called him a liar and hamstrung her. Their Lord destroyed them for their crime and levelled them.",
+        "es": "Pero desmintieron al Mensajero y mataron a la camella. Entonces, su Señor los destruyó a todos, por lo que cometieron, con un castigo arrasador,",
+        "it": "Lo tacciarono di impostura e le tagliarono i garretti: li annientò il loro Signore per il loro peccato,",
+        "ru": "Они сочли его лжецом и подрезали ей поджилки, и за этот грех Господь их подверг их наказанию, которое было одинаковым для всех (или сровнял над ними землю).",
+        "tr": "Fakat onlar peygamberi yalanlayıp deveyi kestiler. Rableri de günahlarını başlarına geçiriverdi de orayı dümdüz etti.",
+        "de": "Sie aber bezichtigten ihn der Lüge, und so schnitten sie ihr die Sehnen durch. Da schmetterte ihr Herr sie für ihre Sünde nieder, und so ebnete Er über ihnen die Erde ein.",
+        "pt": "Porém, desmentiram-no e a esquartejaram, pelo que o seu Senhor os exterminou, pelos seus pecados, a todos por igual.",
+        "nl": "Maar zij loochenden hem en slachtten haar. Toen vernietigde hun Heer hen wegens hun zonden en maakte hen met de grond gelijk.",
+        "ur": "مگر انہوں نے اُس کی بات کو جھُوٹا قرار دیا ااور اُونٹنی کو مار ڈالا۔ <sup foot_note=\"188501\">1</sup> آخر کار اُن کے گناہ کی پاداش میں ان کے ربّ نے ان پر ایسی آفت توڑی کہ ایک ساتھ سب کو پیوندِ خاک کر دیا",
+        "bn": "কিন্তু সিহঁতে অস্বীকাৰ কৰিলে আৰু উটজনীক বধ কৰিলে। ফলত সিহঁতৰ পাপৰ বাবে সিহঁতৰ প্ৰতিপালকে সিহঁতক সমূলে ধ্বংস কৰি একাকাৰ কৰি দিলে।",
+        "fa": "[ولی آنان] او را تکذیب کردند و آن [ماده‌شتر] را کشتند؛ پس پروردگار آنان به سبب گناهانشان بر سر‌شان عذاب آورد و همگی آنان را با خاک یکسان کرد."
+      }
+    },
+    {
+      "verse_number": 6058,
+      "verse_key": "91:15",
+      "arabic_text": "وَلَا يَخَافُ عُقْبَـٰهَا",
+      "phonetic_text": "Wala yakhafu AAuqbaha",
+      "translations": {
+        "fr": "Et Il n’en craint pas les conséquences.",
+        "en": "He did not hesitate to punish them.",
+        "es": "sin temor por la magnitud de Su castigo.",
+        "it": "senza temere [di ciò] alcuna conseguenza. <a class=f><sup foot_note=160641>1</sup></a> Mostrandole il modo di distinguere la via del bene da quella del male. <a class=f><sup foot_note=160642>2</sup></a> Il loro capo, che secondo la tradizione si chiamava Qudàr ibn Salif, si offrì di uccidere la cammella (Tabarì xxx, 214). <a class=f><sup foot_note=160643>3</sup></a> Il profeta Şâlih aveva stabilito che la cammella che Allah (gloria a Lui l’Altissimo) aveva miracolosamente tratto da una roccia avesse diritto di bere un giorno su due all’unica fonte di cui disponevano i Thamùd. In seguito, però, quelli rinnegarono il patto e uccisero la cammella, suscitando la collera e il castigo di Allah. Vedi anche XI, e la nota.",
+        "ru": "И не опасался Он последствий этого.",
+        "tr": "Öyle ya, Allah bu işin sonundan korkacak değil ya.",
+        "de": "Und Er (Allah) fürchtet nicht die Folge davon.",
+        "pt": "E Ele não teme as conseqüências.",
+        "nl": "En Hij vreesde de gevolgen daarvan niet.",
+        "ur": "اور اسے (اپنے اس فعل کے) کسی بُرے نتیجے کا کوئی خوف نہیں ہے۔ <sup foot_note=\"188502\">1</sup>",
+        "bn": "আৰু তেওঁ ইয়াৰ পৰিণামক ভয় নকৰে।",
+        "fa": "و [الله] از سرانجام آن [کار،] بیم ندارد."
+      }
+    }
+  ]
+}

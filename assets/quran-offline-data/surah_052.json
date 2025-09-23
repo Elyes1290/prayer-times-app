@@ -1,0 +1,986 @@
+{
+  "surah_number": 52,
+  "extracted_at": "2025-09-20T15:16:24.482Z",
+  "verses": [
+    {
+      "verse_number": 4736,
+      "verse_key": "52:1",
+      "arabic_text": " وَٱلطُّورِ",
+      "phonetic_text": "Wattoor",
+      "translations": {
+        "fr": "Par le Mont !",
+        "en": "By the mountain,",
+        "es": "[Juro] por el monte<sup foot_note=169337>1</sup>,",
+        "it": "Per il Monte <a class=f><sup foot_note=159967>1</sup></a> ,",
+        "ru": "Клянусь горой!",
+        "tr": "Andolsun Tûr'a,",
+        "de": "Bei dem Berg;",
+        "pt": "Pelo monte (Sinai).",
+        "nl": "Bij de berg (Sinaï).",
+        "ur": "قسم ہے ُطور کی، <sup foot_note=\"187490\">1</sup>",
+        "bn": "শপত তুৰ পৰ্বতৰ,",
+        "fa": "سوگند به کوه طور"
+      }
+    },
+    {
+      "verse_number": 4737,
+      "verse_key": "52:2",
+      "arabic_text": "وَكِتَـٰبٍ مَّسْطُورٍ",
+      "phonetic_text": "Wakitabin mastoor",
+      "translations": {
+        "fr": "Par un Livre écrit ",
+        "en": "by a Scripture inscribed",
+        "es": "por el Libro escrito",
+        "it": "per un Libro scritto",
+        "ru": "Клянусь Писанием, начертанным",
+        "tr": "Yayılmış ince deri üzerine, satır satır yazılmış kitaba,",
+        "de": "und bei einem Buch, das in Zeilen niedergeschrieben ist",
+        "pt": "Pelo Livro escrito,",
+        "nl": "Bij een geschreven Boek.",
+        "ur": "اور ایک ایسی کھلی کتاب کی",
+        "bn": "শপত কিতাবৰ যিখন লিপিবদ্ধ আছে,",
+        "fa": "و سوگند به کتاب نوشته‌شده"
+      }
+    },
+    {
+      "verse_number": 4738,
+      "verse_key": "52:3",
+      "arabic_text": "فِى رَقٍّ مَّنشُورٍ",
+      "phonetic_text": "Fee raqqin manshoor",
+      "translations": {
+        "fr": "sur un parchemin que l’on déplie !",
+        "en": "in unrolled parch-ment,",
+        "es": "en un pergamino desplegado<sup foot_note=169338>1</sup>,",
+        "it": "su pergamena distesa,",
+        "ru": "на развернутой нежной коже!",
+        "tr": "Yayılmış ince deri üzerine, satır satır yazılmış kitaba,",
+        "de": "auf ausgebreiteter Tierhaut;",
+        "pt": "Em um pergaminho desenrolado.",
+        "nl": "In een opengerold perkament.",
+        "ur": "جو رقیق جِلد میں لکھی ہوئی ہے، <sup foot_note=\"187491\">1</sup>",
+        "bn": "উন্মুক্ত পাতত।",
+        "fa": "در صحیفه‌ای گشوده"
+      }
+    },
+    {
+      "verse_number": 4739,
+      "verse_key": "52:4",
+      "arabic_text": "وَٱلْبَيْتِ ٱلْمَعْمُورِ",
+      "phonetic_text": "Walbayti almaAAmoor",
+      "translations": {
+        "fr": "Par la Maison emplie (d’adorateurs) !",
+        "en": "by the much-visited House,",
+        "es": "por la casa frecuentada<sup foot_note=169339>1</sup>,",
+        "it": "per la Casa visitata <a class=f><sup foot_note=159968>1</sup></a> ,",
+        "ru": "Клянусь домом наполненным (храмом на седьмом небе)!",
+        "tr": "Ma'mur eve,",
+        "de": "bei dem vielbesuchten (Gottes)haus",
+        "pt": "Pelo templo freqüentado.",
+        "nl": "Bij het veel bezochte Huis (de Ka'bah).",
+        "ur": "اور آباد گھر کی، <sup foot_note=\"187492\">1</sup>",
+        "bn": "শপত আবাদ গৃহৰ,",
+        "fa": "و سوگند به «بیت المَعمور» [که فرشتگان در آن، به عبادت پروردگار مشغولند]"
+      }
+    },
+    {
+      "verse_number": 4740,
+      "verse_key": "52:5",
+      "arabic_text": "وَٱلسَّقْفِ ٱلْمَرْفُوعِ",
+      "phonetic_text": "Wassaqfi almarfooAA",
+      "translations": {
+        "fr": "Par la Voûte bien haute !<sup foot_note=195154>1</sup>",
+        "en": "by the raised canopy,",
+        "es": "por la bóveda elevada,",
+        "it": "per la volta elevata <a class=f><sup foot_note=159969>1</sup></a> ,",
+        "ru": "Клянусь кровлей возведенной!",
+        "tr": "Yükseltilmiş tavana,",
+        "de": "und bei dem erhöhten Dach",
+        "pt": "Pelo céu elevado.",
+        "nl": "En het opgeheven gewelf (de hemel).",
+        "ur": "اور اُونچی چھت کی، <sup foot_note=\"187493\">1</sup>",
+        "bn": "শপত সুউচ্চ চাদৰ,",
+        "fa": "و سوگند به [آسمان بلند، همان] سقف برافراشته [بر زمین]"
+      }
+    },
+    {
+      "verse_number": 4741,
+      "verse_key": "52:6",
+      "arabic_text": "وَٱلْبَحْرِ ٱلْمَسْجُورِ",
+      "phonetic_text": "Walbahri almasjoor",
+      "translations": {
+        "fr": "Et par la mer embrasée !",
+        "en": "by the ocean ever filled,",
+        "es": "por el mar que se desborda,",
+        "it": "per il mare ribollente.",
+        "ru": "Клянусь морем разожженным (или переполненным; или опустевшим; или перемешанным; или удерживаемым)!",
+        "tr": "Kaynatılmış denize, (andolsun ki)",
+        "de": "und bei dem angefüllten Meer!",
+        "pt": "E pelos oceanos transbordantes.",
+        "nl": "En de kolkende zee.",
+        "ur": "اور مَوجْزَن سمندر کی،<sup foot_note=\"187494\">1</sup>",
+        "bn": "শপত তৰঙ্গ-বিক্ষুব্ধ উত্তাল সাগৰৰ--",
+        "fa": "و سوگند به دریای آکنده [از آب]"
+      }
+    },
+    {
+      "verse_number": 4742,
+      "verse_key": "52:7",
+      "arabic_text": "إِنَّ عَذَابَ رَبِّكَ لَوَٰقِعٌ",
+      "phonetic_text": "Inna AAathaba rabbika lawaqiAA",
+      "translations": {
+        "fr": "Le supplice de ton Seigneur s’accomplira sans nul doute.",
+        "en": "[Prophet], your Lord’s punishment is coming––",
+        "es": "que el castigo de tu Señor es inevitable",
+        "it": "Il castigo del tuo Signore avverrà inevitabilmente,",
+        "ru": "Наказание твоего Господа непременно наступит,",
+        "tr": "Rabbinin azabı mutlaka vuku bulacaktır.",
+        "de": "Die Strafe deines Herrn wird gewiß hereinbrechen.",
+        "pt": "Que o castigo do teu Senhor está iminente.",
+        "nl": "Voorwaar, de bestraffing van jouw Heer zal zeker plaatsvinden.",
+        "ur": "کہ تیرے رب کا عذاب ضرور واقع ہونے والا ہے",
+        "bn": "নিশ্চয় তোমাৰ প্ৰতিপালকৰ শাস্তি অৱশ্যম্ভাৱী,",
+        "fa": "که بی‌تردید، عذاب پروردگارت به وقوع خواهد پیوست؛"
+      }
+    },
+    {
+      "verse_number": 4743,
+      "verse_key": "52:8",
+      "arabic_text": "مَّا لَهُۥ مِن دَافِعٍ",
+      "phonetic_text": "Ma lahu min dafiAA",
+      "translations": {
+        "fr": "Rien ne pourra le repousser.",
+        "en": "it cannot be put off––",
+        "es": "y no hay quién lo pueda impedir.",
+        "it": "nessuno potrà impedirlo.",
+        "ru": "и ничто не отвратит его.",
+        "tr": "Ona engel olacak (hiçbir şey de) yoktur.",
+        "de": "Es gibt niemanden, der sie abwehren könnte.",
+        "pt": "Ninguém pode evitá-lo.",
+        "nl": "Niemand kan hem tegenhouden.",
+        "ur": "جسے کوئی دفع کرنے والا نہیں۔ <sup foot_note=\"187495\">1</sup>",
+        "bn": "ইয়াৰ প্ৰতিৰোধকাৰী কোনো নাই।",
+        "fa": "و هیچ بازدارنده‌اى ندارد."
+      }
+    },
+    {
+      "verse_number": 4744,
+      "verse_key": "52:9",
+      "arabic_text": "يَوْمَ تَمُورُ ٱلسَّمَآءُ مَوْرًا",
+      "phonetic_text": "Yawma tamooru assamao mawra",
+      "translations": {
+        "fr": "Le jour où le ciel se mettra à tournoyer intensément,",
+        "en": "on the Day when the sky sways back and forth",
+        "es": "El día que el cielo se agite intensamente",
+        "it": "Il Giorno in cui il cielo tremante tremerà <a class=f><sup foot_note=159970>1</sup></a>",
+        "ru": "В тот день небо содрогнется от колебаний,",
+        "tr": "O gün gök, bir çalkanış çalkalanır",
+        "de": "Am Tag, da der Himmel sich heftig hin und her bewegen",
+        "pt": "(Será) o dia em que o firmamento oscilará energicamente.",
+        "nl": "Op de Dag waarop de hemel heftig beeft.",
+        "ur": "وہ اُس روز واقع ہو گا جب آسمان بُری طرح ڈگمگائے گا<sup foot_note=\"187496\">1</sup>",
+        "bn": "যিদিনা প্ৰবলভাৱে আকাশখন প্ৰকম্পিত হ’ব,",
+        "fa": "روزى كه آسمان به سختى در جنبش و اضطراب افتد"
+      }
+    },
+    {
+      "verse_number": 4745,
+      "verse_key": "52:10",
+      "arabic_text": "وَتَسِيرُ ٱلْجِبَالُ سَيْرًا",
+      "phonetic_text": "Wataseeru aljibalu sayra",
+      "translations": {
+        "fr": "et les montagnes se mettront réellement en mouvement,",
+        "en": "and the mountains float away.",
+        "es": "y las montañas se muevan,",
+        "it": "e le montagne si metteranno in marcia,",
+        "ru": "а горы придут в движение.",
+        "tr": "Dağlar da bir yürüyüş yürür.",
+        "de": "und die Berge sich in der Tat bewegen werden,",
+        "pt": "E as montanhas mover-se-ão rapidamente.",
+        "nl": "En de bergen zich verplaatsen.",
+        "ur": "اور پہاڑ اُڑے  اُڑے پھریں گے۔ <sup foot_note=\"187497\">1</sup>",
+        "bn": "আৰু পৰ্বতসমূহ দ্ৰুতগতিত পৰিভ্ৰমণ কৰিব;",
+        "fa": "و کوه‌ها با حركتى شدید روان شوند."
+      }
+    },
+    {
+      "verse_number": 4746,
+      "verse_key": "52:11",
+      "arabic_text": "فَوَيْلٌ يَوْمَئِذٍ لِّلْمُكَذِّبِينَ",
+      "phonetic_text": "Fawaylun yawma-ithin lilmukaththibeen",
+      "translations": {
+        "fr": "malheur, ce jour-là, aux négateurs obstinés,",
+        "en": "Woe on that Day to those who deny the Truth,",
+        "es": "¡Cuán desdichados serán ese día los que rechazaron la verdad!,",
+        "it": "guai in quel Giorno, a coloro che tacciano di menzogna,",
+        "ru": "Горе в тот день тем, кто считает истину ложью,",
+        "tr": "Vay haline o gün yalanlayanların!",
+        "de": "wehe an jenem Tag den Leugnern (der Botschaft),",
+        "pt": "Ai, nesse dia, dos desmentidores.",
+        "nl": "Wee op die Dag de loochenaars.",
+        "ur": "تباہی ہے اُس روز اُن جھٹلانے والوں کے لیے",
+        "bn": "এতেকে সৰ্বনাশ সেইদিনা অস্বীকাৰকাৰীসকলৰ বাবে,",
+        "fa": "در آن روز، واى به حال تكذیب‌كنندگان!"
+      }
+    },
+    {
+      "verse_number": 4747,
+      "verse_key": "52:12",
+      "arabic_text": "ٱلَّذِينَ هُمْ فِى خَوْضٍ يَلْعَبُونَ",
+      "phonetic_text": "Allatheena hum fee khawdinyalAAaboon",
+      "translations": {
+        "fr": "qui se complaisent dans de vaines paroles.",
+        "en": "who amuse themselves with idle chatter:",
+        "es": "aquellos que en su ignorancia se burlaban.",
+        "it": "a coloro che si dilettano nella vanità!",
+        "ru": "кто забавляется, предаваясь празднословию.",
+        "tr": "Ki onlar, daldıkları bir batak (bâtıl)da oynayıp duruyorlar.",
+        "de": "die in schweifenden Gesprächen ihr Spiel treiben!",
+        "pt": "Que se houverem dado a veleidades.",
+        "nl": "Degenen die zich vermaken met ijdelheden.",
+        "ur": "جو آج کھیل کے طور پر اپنی حجّت بازیوں میں لگے ہوئے ہیں۔ <sup foot_note=\"187498\">1</sup>",
+        "bn": "যিসকলে খেল-ধেমালিৰ ছলনাৰে অসাৰ কৰ্মত লিপ্ত থাকে।",
+        "fa": "همان کسانی كه در بیهوده‌گویى، سرگرم بازى‌اند."
+      }
+    },
+    {
+      "verse_number": 4748,
+      "verse_key": "52:13",
+      "arabic_text": "يَوْمَ يُدَعُّونَ إِلَىٰ نَارِ جَهَنَّمَ دَعًّا",
+      "phonetic_text": "Yawma yudaAAAAoona ila narijahannama daAAAAa",
+      "translations": {
+        "fr": "Ce jour-là, ils seront précipités dans le Feu de la Géhenne.",
+        "en": "on that Day they will be thrust into the Fire of Hell.",
+        "es": "El día que sean empujados al fuego del Infierno,",
+        "it": "Il Giorno in cui saranno spinti brutalmente nel fuoco dell’Infer- no,",
+        "ru": "В тот день они будут нещадно ввергнуты в огонь Геенны.",
+        "tr": "O gün onlar cehennem ateşine itilip kakılacaklar.",
+        "de": "Am Tag, da sie gewaltsam zum Feuer der Hölle gestoßen werden:",
+        "pt": "Será o dia em que se verão violentamente impulsionados para o fogo infernal.",
+        "nl": "Op die Dag zullen zij met geweld naar de Hel worden geduwd.",
+        "ur": "جس دن انہیں دھکے مار مار کر نار جہنم کی طرف لے چلا جائے گا",
+        "bn": "সেইদিনা সিহঁতক জাহান্নামৰ জুইৰ ফালে ঠেলি-হেচি লৈ যোৱা হ’ব,",
+        "fa": "روزى كه با خشونت به سوى آتش دوزخ رانده مى‌شوند."
+      }
+    },
+    {
+      "verse_number": 4749,
+      "verse_key": "52:14",
+      "arabic_text": "هَـٰذِهِ ٱلنَّارُ ٱلَّتِى كُنتُم بِهَا تُكَذِّبُونَ",
+      "phonetic_text": "Hathihi annaru allateekuntum biha tukaththiboon",
+      "translations": {
+        "fr": "« Voici le Feu que vous teniez pour un mensonge.",
+        "en": "‘This is the Fire you used to deny.",
+        "es": "[se les dirá:] “Este es el Fuego que desmentíais",
+        "it": "[sarà detto loro]: «Ecco il fuoco che tacciavate di menzogna!",
+        "ru": "Это - тот самый Огонь, который вы считали ложью.",
+        "tr": "(Onlara): \"İşte yalanlayıp durduğunuz ateş budur\" (denilecek).",
+        "de": "Das ist das Feuer, das ihr für Lüge zu erklären pflegtet.",
+        "pt": "(Ser-lhes-á dito): Eis aqui o fogo, que negastes!",
+        "nl": "(En er zal gezegd worden:) \"Dit is de Hel die jullie plachten te loochenen.",
+        "ur": "اُس وقت اُن سے کہا جائے گا کہ \"یہ وہی آگ ہے جسے تم جھٹلایا کرتے تھے",
+        "bn": "‘এইটোৱে সেই জাহান্নাম যাক তোমালোকে অস্বীকাৰ কৰিছিলা’।",
+        "fa": "[به آنان گفته می‌شود:] «این [همان] آتشی است که آن را دروغ می‌پنداشتید."
+      }
+    },
+    {
+      "verse_number": 4750,
+      "verse_key": "52:15",
+      "arabic_text": "أَفَسِحْرٌ هَـٰذَآ أَمْ أَنتُمْ لَا تُبْصِرُونَ",
+      "phonetic_text": "Afasihrun hatha am antum latubsiroon",
+      "translations": {
+        "fr": "Est-ce donc de la magie, ou ne voyez-vous pas clair ?",
+        "en": "So is this sorcery? Do you still not see it?",
+        "es": "¿Acaso os parece esto una hechicería, o es que no veis?",
+        "it": "E magia questa? O siete voi che non vedete?",
+        "ru": "Неужели это колдовство? Или же вы не видите?",
+        "tr": "\"Bu da mı bir sihir? Yoksa siz görmüyor musunuz?",
+        "de": "Ist dies (nun) etwa Zauberei, oder könnt ihr nicht sehen?",
+        "pt": "É isto, acaso, magia, ou não vedes ainda?",
+        "nl": "Is dit dan toverij? Of kunnen jullie niet zien?",
+        "ur": "اب بتاؤیہ جادُو ہے یا تمھیں سُوجھ نہیں رہا ہے؟ <sup foot_note=\"187499\">1</sup>",
+        "bn": "এইটো যাদু নেকি? নে তোমালোকে দেখা নোপোৱা!",
+        "fa": "آیا این [آتش و عذاب] جادوست یا [هنوز هم آن را] نمی‌بینید؟"
+      }
+    },
+    {
+      "verse_number": 4751,
+      "verse_key": "52:16",
+      "arabic_text": "ٱصْلَوْهَا فَٱصْبِرُوٓا۟ أَوْ لَا تَصْبِرُوا۟ سَوَآءٌ عَلَيْكُمْ ۖ إِنَّمَا تُجْزَوْنَ مَا كُنتُمْ تَعْمَلُونَ",
+      "phonetic_text": "Islawha fasbirooaw la tasbiroo sawaon AAalaykum innamatujzawna ma kuntum taAAmaloon",
+      "translations": {
+        "fr": "Entrez-y et brûlez! Que vous le supportiez ou que vous ne le supportiez pas, la chose sera pour vous égale. Vous n’êtes rétribués que pour ce que vous faisiez. »",
+        "en": "Burn in it––it makes no difference whether you bear it patiently or not–– you are only being repaid for what you have done.’",
+        "es": "Entrad en él, lo soportéis o no, será igual. Solo se os castiga por lo que obrasteis”.",
+        "it": "Entrateci! Che lo sopportiate oppure no, sarà per voi la stessa cosa. Sarete compensati solo di quello che avrete fatto».",
+        "ru": "Горите в нем! Вам все равно, будете вы терпеть или не станете проявлять терпения. Вам воздается только за то, что вы совершали.",
+        "tr": "Girin oraya, ister sabredin ister etmeyin artık sizin için birdir. Siz hep yaptıklarınıza göre cezalandırılacaksınız\" (denilecek).",
+        "de": "Seid ihm ausgesetzt und ertragt es dann standhaft oder nicht, gleich ist es in Bezug auf euch; euch wird nur das vergolten, was ihr zu tun pflegtet.",
+        "pt": "Entrai aí, porque redundará no mesmo, que o suporteis, quer não. Sabei que sempre sereis recompensados pelo quehouverdes feito.",
+        "nl": "Gaat haar binnen en weest geduldig of weest ongeduldig; het zal voor jullie niets uitmaken. Voorwaar, jullie worden slechts vergolden naar wat jullie plachten te verrichtten.\"",
+        "ur": "جاؤ اب جھلسو اِس کے اندر، تم خواہ صبر کرو یا نہ کرو، تمہارے لیے یکساں ہے، تمہیں ویسا ہی بدلہ دیا جا رہا ہے جیسے تم عمل کر رہے تھے",
+        "bn": "তোমালোকে জুইত প্ৰৱেশ কৰা, তাৰ পিছত তোমালোকে ধৈৰ্য্য ধাৰণ কৰা বা নকৰা উভয়েই তোমালোকৰ বাবে সমান। তোমালোকে যি কৰিছিলা তাৰেই প্ৰতিফল তোমালোকক দিয়া হৈছে।",
+        "fa": "به آتش درآیید [و بسوزید] كه شکیبایی و ناشکیباییِ شما [در برابر شعله‌های سوزانش] برایتان یكسان است؛ تنها در برابر آنچه كرده‌اید، مجازات مى‌شوید»."
+      }
+    },
+    {
+      "verse_number": 4752,
+      "verse_key": "52:17",
+      "arabic_text": "إِنَّ ٱلْمُتَّقِينَ فِى جَنَّـٰتٍ وَنَعِيمٍ",
+      "phonetic_text": "Inna almuttaqeena fee jannatinwanaAAeem",
+      "translations": {
+        "fr": "Les gens pieux seront dans des jardins, (au milieu) des délices,",
+        "en": "Those who were mindful of God are in Gardens and in bliss,",
+        "es": "En cambio, los piadosos morarán en jardines y deleite.",
+        "it": "In verità i timorati saranno nei Giardini, nelle delizie,",
+        "ru": "Воистину, богобоязненные пребудут в Райских садах и блаженстве.",
+        "tr": "Şüphesiz (günahlardan) korunanlar da cennetlerde, nimetler içindedirler.",
+        "de": "Die Gottesfürchtigen aber werden in Gärten und Wonne sein.",
+        "pt": "Quanto aos tementes (a Deus), viverão em jardins e em felicidade.",
+        "nl": "Voorwaar, de Moettaqôen bevinden zich in Tuinen (het Paradijs) en in genietingen.",
+        "ur": "متقی لوگ <sup foot_note=\"185891\">1</sup> وہاں باغوں اور نعمتوں  میں ہوں گے",
+        "bn": "নিশ্চয় মুত্তাক্বীসকল থাকিব জান্নাতত আৰু প্ৰাচুৰ্যসমূহৰ ভিতৰত।",
+        "fa": "به راستی که پرهیزگاران در باغ‌های بهشت در ناز و نعمتند؛"
+      }
+    },
+    {
+      "verse_number": 4753,
+      "verse_key": "52:18",
+      "arabic_text": "فَـٰكِهِينَ بِمَآ ءَاتَىٰهُمْ رَبُّهُمْ وَوَقَىٰهُمْ رَبُّهُمْ عَذَابَ ٱلْجَحِيمِ",
+      "phonetic_text": "Fakiheena bima atahumrabbuhum wawaqahum rabbuhum AAathaba aljaheem",
+      "translations": {
+        "fr": "y jouissant de ce que leur Seigneur leur aura accordé, et (heureux) que leur Seigneur les ait préservés du supplice de la Fournaise.",
+        "en": "rejoicing in their Lord’s gifts: He has saved them from the torment of the Blaze,",
+        "es": "Disfrutando lo que su Señor les conceda. Su Señor les salvó del castigo del Infierno.",
+        "it": "a godersi quello che il loro Signore avrà dato loro. Il loro Signore li avrà preservati dal castigo della Fornace <a class=f><sup foot_note=159971>1</sup></a> .",
+        "ru": "Они будут радоваться тому, чем их одарит их Господь. Господь их уберег их от мучений в Аду.",
+        "tr": "Rablerinin kendilerine verdiği ile zevk ü sefâ sürerler. Rableri onları, cehennem azabından korumuştur.",
+        "de": "Sie lassen es sich wohl sein an dem, was ihnen ihr Herr gibt. Und ihr Herr bewahrt sie vor der Strafe des Höllenbrandes.",
+        "pt": "Gozando daquilo com que o seu Senhor os houver agraciado; e o seu Senhor os preservará do suplício infernal.",
+        "nl": "Zich verheugend over wat hun Heer hun heeft gegeven. En hun Heer heeft hen behoed voor de straf van de Hel.",
+        "ur": "لُطف لے رہے ہوں گے اُن چیزوں سے جو اُن کا رب انہیں دے گا، اور اُن کا رب اُنہیں دوزخ کے عذاب سے بچالے گا۔ <sup foot_note=\"187500\">1</sup>",
+        "bn": "তেওঁলোকৰ প্ৰতিপালকে তেওঁলোকক যি প্ৰদান কৰিছে সেয়া তেওঁলোকে উপভোগ কৰিব আৰু তেওঁলোকৰ প্ৰতিপালকে তেওঁলোকক ৰক্ষা কৰিব জ্বলন্ত অগ্নিৰ শাস্তিৰ পৰা,",
+        "fa": "و از بخشش‌های [بی‌دریغِ] پروردگارشان و از اینكه از عذاب دوزخ نگاهشان داشته است شادمانند."
+      }
+    },
+    {
+      "verse_number": 4754,
+      "verse_key": "52:19",
+      "arabic_text": "كُلُوا۟ وَٱشْرَبُوا۟ هَنِيٓـًٔۢا بِمَا كُنتُمْ تَعْمَلُونَ",
+      "phonetic_text": "Kuloo washraboo hanee-an bimakuntum taAAmaloon",
+      "translations": {
+        "fr": "« Mangez et buvez en paix, c’est là le prix de vos œuvres ! »",
+        "en": "‘Eat and drink with healthy enjoyment as a reward for what you have done.’",
+        "es": "“Comed y bebed para satisfaceros, como recompensa por vuestras obras”.",
+        "it": "[Sarà detto loro]: «Mangiate e bevete in serenità, [ricompensa questa] per quel che avete fatto!».",
+        "ru": "Ешьте и пейте во здравие за то, что вы совершали!",
+        "tr": "(Onlara): \"Yaptıklarınıza karşılık afiyetle yeyin, için\" (denilir.)",
+        "de": "Eßt und trinkt als wohlbekömmlich für das, was ihr zu tun pflegtet.",
+        "pt": "(Ser-lhes-á dito): Comei e bebei, com proveito, pelo que (de bom) fizestes!",
+        "nl": "(Er wordt gezegd:) \"Eet en drinkt smakelijk wegens wat jullie plachten te verrichten.\"",
+        "ur": "(ان سے کہا جائے گا) کھاؤ اور پیو مزے سے <sup foot_note=\"187501\">1</sup> اپنے ان اعمال کےصلے میں جو تم کرتے رہے ہو",
+        "bn": "(তেওঁলোকক কোৱা হ'ব) তোমালোকে যি আমল কৰিছিলা তাৰ প্ৰতিদানস্বৰূপে তৃপ্তিৰ সৈতে পানাহাৰ কৰা;",
+        "fa": "[به آنان گفته می‌شود:] «به پاداشِ کردارتان [در دنیا، اینک] گوارا بخورید و بیاشامید»."
+      }
+    },
+    {
+      "verse_number": 4755,
+      "verse_key": "52:20",
+      "arabic_text": "مُتَّكِـِٔينَ عَلَىٰ سُرُرٍ مَّصْفُوفَةٍ ۖ وَزَوَّجْنَـٰهُم بِحُورٍ عِينٍ",
+      "phonetic_text": "Muttaki-eena AAala sururin masfoofatinwazawwajnahum bihoorin AAeen",
+      "translations": {
+        "fr": "Ils seront accoudés sur des lits bien disposés, et Nous leur donnerons comme épouses des houris aux grands yeux noirs.",
+        "en": "They are comfortably seated on couches arranged in rows; We pair them with beautiful-eyed maidens;",
+        "es": "Estarán recostados sobre sofás distribuidos en líneas, y los desposaremos con huríes de grandes ojos.",
+        "it": "[Staranno] appoggiati su divani disposti in ranghi e daremo loro in spose le fanciulle dai grandi occhi neri.",
+        "ru": "Они будут, прислонившись, возлежать на ложах, выстроенных в ряд, и Мы сочетаем их с черноокими, большеглазыми гуриями.",
+        "tr": "Sıra sıra dizilmiş koltuklara yaslanırlar. Ayrıca biz onları ceylan gözlü hûrilerle evlendirdik.",
+        "de": "indem ihr euch auf (voreinander)gereihten Liegen lehnt. Und Wir geben ihnen als Gattinnen Huris mit schönen, großen Augen.",
+        "pt": "Estarão recostados sobre leitos enfileirados e os casarmos com huris, de olhos maravilhosos.",
+        "nl": "Leunend op rustbanken, tegenover elkaar. En Wij zullen hen huwen met schone maagden.",
+        "ur": "وہ آمنے سامنے بچھے ہوئےتختوں پر تکیے لگائے بیٹھے ہوں گے اور ہم خوبصورت آنکھوں والی حوریں اُن سے بیاہ دیں گے۔ <sup foot_note=\"187502\">1</sup>",
+        "bn": "তেওঁলোকে শ্ৰেণীবদ্ধভাৱে সুসজ্জিত আসনত আউজী বহিব; আৰু আমি তেওঁলোকৰ মিলন ঘটাম মৃগনয়নী ডাঙৰ চকু বিশিষ্টা হুৰৰ লগত;",
+        "fa": "در حالى كه بر تخت‌هایى ردیف‌شده تكیه زده‌اند و حور العین را به همسریِ آنان درمی‌آوریم."
+      }
+    },
+    {
+      "verse_number": 4756,
+      "verse_key": "52:21",
+      "arabic_text": "وَٱلَّذِينَ ءَامَنُوا۟ وَٱتَّبَعَتْهُمْ ذُرِّيَّتُهُم بِإِيمَـٰنٍ أَلْحَقْنَا بِهِمْ ذُرِّيَّتَهُمْ وَمَآ أَلَتْنَـٰهُم مِّنْ عَمَلِهِم مِّن شَىْءٍ ۚ كُلُّ ٱمْرِئٍۭ بِمَا كَسَبَ رَهِينٌ",
+      "phonetic_text": "Wallatheena amanoo wattabaAAat-humthurriyyatuhum bi-eemanin alhaqnabihim thurriyyatahum wama alatnahum minAAamalihim min shay-in kullu imri-in bima kasaba raheen",
+      "translations": {
+        "fr": "Ceux qui ont cru puis ont été suivis dans la foi par leur progéniture, Nous les ferons rejoindre par leur descendance sans rien diminuer du mérite de leurs œuvres, chaque individu devant répondre de ce qu’il aura accompli.",
+        "en": "We unite the believers with their offspring who followed them in faith–– We do not deny them any of the rewards for their deeds: each person is in pledge for his own deeds––",
+        "es": "Los creyentes y sus descendientes que los hayan seguido en la fe serán reunidos, sin que se pierda ninguna de sus obras. Toda persona es responsable de sus propias acciones.",
+        "it": "Coloro che avranno creduto e che saranno stati seguiti nella fede dalla loro progenie, Noi li riuniremo ai loro figli. Non diminuiremo in nulla il merito delle loro azioni, poiché ognuno è pegno di quello che si sarà guadagnato.",
+        "ru": "Мы воссоединим верующих с их потомками, которые последовали за ними в вере, и нисколько не умалим их деяний. Каждый человек является заложником того, что он приобрел.",
+        "tr": "İman edip zürriyetleri de iman ile kendilerine tâbi olanlar (yok mu?); işte biz, onların nesillerini de kendilerine kattık. Kendilerinin amellerinden birşey de eksiltmedik. Herkes kendi kazandığına bağlıdır.",
+        "de": "Und denjenigen, die glauben und denen ihre Nachkommenschaft im Glauben nachfolgt, lassen Wir ihre Nachkommenschaft sich (ihnen) anschließen. Und Wir verringern ihnen gar nichts von ihren Werken. Jedermann ist an das, was er erworben hat, gebunden.",
+        "pt": "E aqueles que creram, bem como as sua proles, que os seguirem na fé, reuni-los-emos às suas famílias, e não osprivaremos de nada, quanto à sua recompensa merecida. Todo o indivíduo será responsável pelos seus atos!",
+        "nl": "En degenen die geloven en die in het geloof gevolgd worden door hun nakomelingen: Wij voegen hun nakomelingen bij hen en Wij verminderen (de beloning voor) hun daden niet. Ieder mens staat borg voor wat hij verrichtte.",
+        "ur": "جو لوگ ایمان لائے ہیں اور ان کی اولاد بھی کسی درجہٴ  ایمان میں ان کے نقشِ قدم پر چلی ہے ان کی اُس اولاد کو بھی ہم (جنت میں) اُن کے ساتھ ملادیں گے اور اُن کے عمل میں کوئی  گھاٹا ان کو نہ دیں گے۔ <sup foot_note=\"187503\">1</sup> ہر شخص اپنے کسب کے عوض رہن ہے۔ <sup foot_note=\"187504\">2</sup>",
+        "bn": "আৰু যিসকলে ঈমান আনিছে আৰু তেওঁলোকৰ সন্তান-সন্ততিও ঈমানৰ ক্ষেত্ৰত তেওঁলোকৰ অনুগামী হৈছে, আমি তেওঁলোকৰ লগত তেওঁলোকৰ সন্তান-সন্ততিক একত্ৰিত কৰিম, আৰু তেওঁলোকৰ কৰ্মফল আমি অলপো হ্ৰাস নকৰিম; প্ৰত্যেক ব্যক্তিয়েই নিজ কৃতকৰ্মৰ বাবে দায়ী।",
+        "fa": "مؤمنانى كه فرزندانشان در ایمان پیرو آنان بودند، فرزندانشان را [نیز در بهشت] به آنان ملحق خواهیم كرد و از [پاداش] عملشان ذره‌اى نمى‌كاهیم؛ چرا که [سرنوشتِ] هر كس در گرو دستاورد خودِ اوست [و گناه دیگری را به دوش نمی‌کشد]."
+      }
+    },
+    {
+      "verse_number": 4757,
+      "verse_key": "52:22",
+      "arabic_text": "وَأَمْدَدْنَـٰهُم بِفَـٰكِهَةٍ وَلَحْمٍ مِّمَّا يَشْتَهُونَ",
+      "phonetic_text": "Waamdadnahum bifakihatin walahminmimma yashtahoon",
+      "translations": {
+        "fr": "Nous leur donnerons à profusion les fruits et les viandes dont ils auront envie.",
+        "en": "We provide them with any fruit or meat they desire.",
+        "es": "Les agraciaremos con tanta fruta y carne como la que deseen.",
+        "it": "Provvederemo loro i frutti e le carni che desidereranno.",
+        "ru": "Мы наделим их фруктами и мясом таким, какое они пожелают.",
+        "tr": "Onlara canlarının istediği meyvalar ve etlerden bol bol verdik.",
+        "de": "Und Wir versorgen sie reichlich mit Früchten und Fleisch von dem, was sie begehren.",
+        "pt": "E os proveremos de frutas e carnes, bem como do que lhes apetecer.",
+        "nl": "En Wij geven hun vruchten en vlees, van welke soort zij wensen.",
+        "ur": "ہم اُن کو ہر طرح کے پھل اور گوشت، <sup foot_note=\"187505\">1</sup> جس چیز کو بھی ان کا جی چاہےگا، خوب دیے چلے جائیں گے",
+        "bn": "আৰু আমি তেওঁলোকক অতিৰিক্ত প্ৰদান কৰিম ফল-মূল আৰু মাংস যিটো তেওঁলোকে কামনা কৰিব।",
+        "fa": "[در بهشت، از] هر نوع میوه و گوشتى كه بخواهند، پى‌درپى در دسترسشان قرار مى‌دهیم."
+      }
+    },
+    {
+      "verse_number": 4758,
+      "verse_key": "52:23",
+      "arabic_text": "يَتَنَـٰزَعُونَ فِيهَا كَأْسًا لَّا لَغْوٌ فِيهَا وَلَا تَأْثِيمٌ",
+      "phonetic_text": "YatanazaAAoona feeha ka/san lalaghwun feeha wala ta/theem",
+      "translations": {
+        "fr": "Ils y feront tourner entre eux une coupe (de vin) qui n’est la cause ni de propos futiles ni n’induit au péché.",
+        "en": "They pass around a cup which does not lead to any idle talk or sin.",
+        "es": "Se pasarán unos a otros una copa que no incitará a frivolidades ni pecados.",
+        "it": "Si scambieranno un calice immune da vanità o peccato.",
+        "ru": "Они будут передавать друг другу чашу с вином, которое не принесет ни празднословия, ни греха.",
+        "tr": "Orada bir kadeh kapışırlar ki, onda ne bir saçmalama vardır, ne de günaha sokma.",
+        "de": "Sie greifen darin miteinander nach einem Becher, in dem nichts darin ist, was zu unbedachter Rede verleitet und zu keiner Versündigung.",
+        "pt": "Aí bridarão de uma taça, cuja bebida não os levará à frivolidade, nem os induzirá ao pecado.",
+        "nl": "Zij reiken daar elkaar een beker aan waarbij geen onzin en geen zondigheid is.",
+        "ur": "وہ ایک دوسرے سے جامِ شراب لپک لپک کر لے رہے ہوں گے جس میں نہ یادہ گوئی ہوگی نہ بدکرداری۔ <sup foot_note=\"187506\">1</sup>",
+        "bn": "তাত তেওঁলোকে পৰস্পৰে পানপাত্ৰ আদান-প্ৰদান কৰিব, তাত কোনো নিৰৰ্থক কথা-বতৰা নাথাকিব আৰু কোনো পাপ কামও নাথাকিব।",
+        "fa": "در آنجا جام‌های شرابى از دست یکدیگر مى‌گیرند كه نه موجب بیهوده‌گویى است و نه گناه؛"
+      }
+    },
+    {
+      "verse_number": 4759,
+      "verse_key": "52:24",
+      "arabic_text": "۞ وَيَطُوفُ عَلَيْهِمْ غِلْمَانٌ لَّهُمْ كَأَنَّهُمْ لُؤْلُؤٌ مَّكْنُونٌ",
+      "phonetic_text": "Wayatoofu AAalayhim ghilmanunlahum kaannahum lu/luon maknoon",
+      "translations": {
+        "fr": "De  jeunes serviteurs à leurs ordres circuleront entre eux, tels des perles soigneusement conservées (dans leur coquillage).",
+        "en": "Devoted youths like hidden pearls wait on them.",
+        "es": "Serán rodeados por sirvientes, bellos como perlas guardadas.",
+        "it": "E per servirli circoleranno tra loro giovanetti simili a perle nascoste.",
+        "ru": "Их будут обходить их юные слуги, подобные сокрытому жемчугу.",
+        "tr": "Kendilerine ait bir takım hizmetçiler de onların etrafında dönerler. Bu gençler sanki sedefleri içine gizlenmiş inci gibidirler.",
+        "de": "Und unter ihnen gehen Jünglinge umher, die zu ihnen gehören, als wären sie wohlverwahrte Perlen.",
+        "pt": "E serão servidos por mancebos, formosos como se fossem pérolas em suas conchas.",
+        "nl": "En onder hen gaan jongelingen rond die lijken op welbewaarde parels.",
+        "ur": "اور اُن کی خدمت میں وہ لڑکے دوڑتے پھر رہے ہوں گے جو انہی کیلیے مخصوص ہوں گے، <sup foot_note=\"187507\">1</sup> ایسے خوبصورت جیسے چھپا کر رکھے ہوئے موتی",
+        "bn": "আৰু তাত তেওঁলোকৰ সেৱাত চাৰিওফালে ঘুৰি থাকিব কিশোৰসকলৰ দল; সিহঁত দেখাত যেন সুৰক্ষিত মুকুতা।",
+        "fa": "و نوجوانانى [که براى خدمت] پیرامونشان در رفت و آمدند، گویی [از زیبایی و سپیدرویی] همچون مرواریدى پنهان [در صدف] هستند."
+      }
+    },
+    {
+      "verse_number": 4760,
+      "verse_key": "52:25",
+      "arabic_text": "وَأَقْبَلَ بَعْضُهُمْ عَلَىٰ بَعْضٍ يَتَسَآءَلُونَ",
+      "phonetic_text": "Waaqbala baAAduhum AAala baAAdinyatasaaloon",
+      "translations": {
+        "fr": "Ils s’élanceront les uns vers les autres, en s’interrogeant :",
+        "en": "They turn to one another and say,",
+        "es": "Y [los bienaventurados] se preguntarán unos a otros<sup foot_note=169340>1</sup>.",
+        "it": "Si andranno vicendevolmente incontro, interpellandosi.",
+        "ru": "Они будут расспрашивать друг друга.",
+        "tr": "Birbirlerine yönelip soruyorlar.",
+        "de": "Und sie wenden sich einander zu und fragen sich gegenseitig.",
+        "pt": "E acercar-se-ão em tertúlias.",
+        "nl": "Zij zullen zich tot elkaar wenden en elkaar vragen stellen.",
+        "ur": "یہ لوگ آپس میں ایک دوسرے سے (دنیا میں گزرے ہوئے) حالات پوچھیں گے",
+        "bn": "আৰু তেওঁলোকে ইজনে সিজনৰ ফালে চাই সুধিব,",
+        "fa": "[بهشتیان] به یکدیگر روی می‌آورند [و] از [دنیا و احوال گذشتۀ] خود سؤال می‌کنند."
+      }
+    },
+    {
+      "verse_number": 4761,
+      "verse_key": "52:26",
+      "arabic_text": "قَالُوٓا۟ إِنَّا كُنَّا قَبْلُ فِىٓ أَهْلِنَا مُشْفِقِينَ",
+      "phonetic_text": "Qaloo inna kunna qablufee ahlina mushfiqeen",
+      "translations": {
+        "fr": "« Quand nous étions autrefois parmi les nôtres, nous redoutions (le châtiment d’Allah).",
+        "en": "‘When we were still with our families [on earth] we used to live in fear––",
+        "es": "Dirán: “Cuando estábamos viviendo junto a nuestra familia, teníamos temor<sup foot_note=169341>1</sup>,",
+        "it": "Diranno: «Vivevamo tra la nostra gente nel timore [di Allah]",
+        "ru": "Они скажут: «Прежде, находясь в кругу своих семей, мы трепетали от страха.",
+        "tr": "Ve diyorlar ki: \"Gerçekte biz daha önce (dünya hayatında) âilemiz içinde (âkibetimizden) korkardık\".",
+        "de": "Sie sagen: Gewiß, früher waren wir inmitten unserer Angehörigen besorgt.",
+        "pt": "Dirão: Em verdade, antes estávamos temerosos pelos nossos familiares.",
+        "nl": "Zij zeggen: \"Voorwaar, wij waren vroeger temidden van onze verwanten bevreesd (voor Allah).",
+        "ur": "یہ کہیں گے کہ ہم پہلے اپنے گھروالوں میں ڈرتے ہوئے زندگی بسر کرتے تھے، <sup foot_note=\"187508\">1</sup>",
+        "bn": "তেওঁলোকে ক’ব, ‘নিশ্চয় আমি ইতি পূৰ্বে আমাৰ পৰিয়াল বৰ্গৰ মাজত শঙ্কিত অৱস্থাত আছিলোঁ’।",
+        "fa": "می‌گویند: «ما در دنیا، در خانوادۀ خود [از عذاب الهی] می‌ترسیدیم."
+      }
+    },
+    {
+      "verse_number": 4762,
+      "verse_key": "52:27",
+      "arabic_text": "فَمَنَّ ٱللَّهُ عَلَيْنَا وَوَقَىٰنَا عَذَابَ ٱلسَّمُومِ",
+      "phonetic_text": "Famanna Allahu AAalayna wawaqanaAAathaba assamoom",
+      "translations": {
+        "fr": "Allah nous a donc fait grâce en nous épargnant le tourment de As-Samûm.<sup foot_note=195155>1</sup>",
+        "en": "God has been gracious to us and saved us from the torment of intense heat-",
+        "es": "pero Dios nos agració y nos preservó del tormento del Fuego.",
+        "it": "ma Allah ci ha favorito e ci ha protetti dal castigo del Soffio Infuocato <a class=f><sup foot_note=159972>1</sup></a> .",
+        "ru": "Аллах же оказал нам милость и уберег нас от мучений знойного ветра (или мучений в Аду).",
+        "tr": "\"Allah bize lutfetti de bizi (vücûdun) içine işleyen (kavurucu) azabdan korudu.\"",
+        "de": "Da erwies Allah uns eine Wohltat und bewahrte uns vor der Strafe des Glutwindes.",
+        "pt": "Portanto, Deus nos agraciou e nos preservou do tormento do vento abrasador.",
+        "nl": "Allah begenadigde ons toen en Hij behoedde ons voor de bestraffing van de verschroeiende wind.",
+        "ur": "آخر کار اللہ نے ہم پر فضل فرمایا اور ہمیں جھلسادینے والی ہوا <sup foot_note=\"187509\">1</sup> کے عذاب سے بچالیا",
+        "bn": "তাৰ পিছত আল্লাহে আমাৰ প্ৰতি অনুগ্ৰহ কৰিছে আৰু আমাক জুইৰ শাস্তিৰ পৰা ৰক্ষা কৰিছে।",
+        "fa": "الله [با نعمت اسلام] بر ما منت نهاد و ما را از عذاب سوزان [دوزخ] محافظت کرد."
+      }
+    },
+    {
+      "verse_number": 4763,
+      "verse_key": "52:28",
+      "arabic_text": "إِنَّا كُنَّا مِن قَبْلُ نَدْعُوهُ ۖ إِنَّهُۥ هُوَ ٱلْبَرُّ ٱلرَّحِيمُ",
+      "phonetic_text": "Inna kunna min qablu nadAAoohuinnahu huwa albarru arraheem",
+      "translations": {
+        "fr": "C’est Lui que Nous invoquions autrefois, car c’est Lui le Bienfaiteur, le Tout Miséricordieux.",
+        "en": "We used to pray to Him: He is the Good, the Merciful One.’",
+        "es": "A Él le suplicábamos, pues Él es el Bondadoso, el Misericordioso”.",
+        "it": "Già noi Lo invocavamo. Egli è veramente il Caritatevole, il Misericordioso».",
+        "ru": "Мы взывали к Нему прежде. Воистину, Он - Добродетельный, Милосердный».",
+        "tr": "\"Gerçekten biz bundan önce O'na yalvarıyorduk. Çünkü iyilik eden, esirgeyen ancak O'dur.\"",
+        "de": "Gewiß, früher pflegten wir Ihn anzurufen. Gewiß, Er ist ja der Gütige und Barmherzige.",
+        "pt": "Porque antes O invocávamos, por ser Ele o Beneficente, o Misericordiosíssimo!",
+        "nl": "Voorwaar, Wij plachten Hem vroeger aan te roepen: voorwaar, Hij is de Weldoener, de Meest Barmhartige.\"",
+        "ur": "ہم پچھلی زندگی میں اُسی سے دعائیں مانگتے تھے، وہ واقعی بڑا ہی محسن اور رحیم ہے",
+        "bn": "নিশ্চয় আমি আগতেও তেওঁকেই আহ্বান কৰিছিলোঁ; নিশ্চয় তেওঁ কৃপাময়, পৰম দয়ালু।",
+        "fa": "ما در زندگی دنیا، همواره او را [عبادت می‌کردیم و به ربوبیت] می‌خواندیم. بی‌تردید، او نیکوکار مهربان است»."
+      }
+    },
+    {
+      "verse_number": 4764,
+      "verse_key": "52:29",
+      "arabic_text": "فَذَكِّرْ فَمَآ أَنتَ بِنِعْمَتِ رَبِّكَ بِكَاهِنٍ وَلَا مَجْنُونٍ",
+      "phonetic_text": "Fathakkir fama anta biniAAmatirabbika bikahin wala majnoon",
+      "translations": {
+        "fr": "Adresse-leur donc un rappel car, par la grâce de ton Seigneur, tu n’es ni devin ni fou.",
+        "en": "So [Prophet] remind [people]. By the grace of your Lord [Prophet], you are neither oracle nor madman.",
+        "es": "Llama al Mensaje [¡Oh, Muhámmad!], tú no eres, por la gracia de tu Señor, un adivino ni un loco<sup foot_note=169342>1</sup>.",
+        "it": "Ammonisci dunque, poiché per grazia del tuo Signore non sei né un indovino né un folle.",
+        "ru": "Напоминай же! По милости своего Господа ты не являешься ни прорицателем, ни одержимым.",
+        "tr": "(Ey Muhammed!) sen hatırlat, öğüt ver. Rabbinin nimeti sayesinde sen ne kâhinsin, ne de mecnûn.",
+        "de": "So ermahne (nur); du bist ja durch die Gunst deines Herrn weder ein Wahrsager noch ein Besessener.",
+        "pt": "Predica-lhes, pois, que, mercê do teu Senhor, não és um adivinho, nem um energúmeno.",
+        "nl": "Vermaan daarom, jij bent door de Genade van jouw Heer geen waarzegger en geen bezetene.",
+        "ur": "پس اے نبیؐ، تم نصیحت کیے جاؤ، اپنے رب کے فضل سے نہ تم کاہن ہو اور نہ مجنون",
+        "bn": "এতেকে তুমি উপদেশ দি থাকা, কাৰণ তোমাৰ প্ৰতিপালকৰ অনুগ্ৰহত তুমি গণকো নহয় আৰু উন্মাদো নহয়।",
+        "fa": "[ای پیامبر، با آیات قرآن به مردم] اندرز بده که به لطف پروردگارت [تو برخلاف ادعای کافران،] نه كاهنى و نه مجنون."
+      }
+    },
+    {
+      "verse_number": 4765,
+      "verse_key": "52:30",
+      "arabic_text": "أَمْ يَقُولُونَ شَاعِرٌ نَّتَرَبَّصُ بِهِۦ رَيْبَ ٱلْمَنُونِ",
+      "phonetic_text": "Am yaqooloona shaAAirun natarabbasubihi rayba almanoon",
+      "translations": {
+        "fr": "Or s’ils disent : « C’est un poète. Attendons que la mort vienne l’emporter (lui et son Message). »",
+        "en": "If they say, ‘He is only a poet: we shall await his fate,’",
+        "es": "O te acusan diciendo: “Es un poeta, esperemos a que le llegue la muerte”<sup foot_note=169343>1</sup>.",
+        "it": "Diranno: «È un poeta, aspettiamo che subisca qualche vicissitudine mortale» <a class=f><sup foot_note=159973>1</sup></a> .",
+        "ru": "Или же они говорят: «Он - поэт! Давайте же подождем, пока время не разберется с ним».",
+        "tr": "Yoksa onlar (senin için): \"Bir şâirdir, zamanın felaketlerine çarpılmasını gözetliyoruz.\" mu diyorlar?",
+        "de": "Oder sagen sie etwa: Ein Dichter, gegen den wir die (Unglücks)fälle der Zeit abwarten?",
+        "pt": "Ou dirão: É um poeta. Aguardamos que lhe chegue a calamidade, (produzida) pelo tempo!",
+        "nl": "Of zeggen zij: \"Een dichter, wij wachten af of het noodlot hem met ongeluk zal treffen.\"",
+        "ur": "کیا <sup foot_note=\"187510\">1</sup> یہ لوگ کہتے ہیں کہ یہ شخص شاعر ہے جس کےحق میں گردشِ ایّام کا انتظار کر رہے ہیں؟ <sup foot_note=\"187511\">2</sup>",
+        "bn": "সিহঁতে কয় নেকি যে, এওঁ (মুহাম্মদ) এজন কবি? আমি তাৰ মৃত্যুৰ প্ৰতীক্ষা কৰিছোঁ।",
+        "fa": "آیا می‌گویند: «محمد شاعری است که منتظریم تا مرگش فرارسد [و از سخنانش رهایی یابیم]؟»"
+      }
+    },
+    {
+      "verse_number": 4766,
+      "verse_key": "52:31",
+      "arabic_text": "قُلْ تَرَبَّصُوا۟ فَإِنِّى مَعَكُم مِّنَ ٱلْمُتَرَبِّصِينَ",
+      "phonetic_text": "Qul tarabbasoo fa-innee maAAakum minaalmutarabbiseen",
+      "translations": {
+        "fr": "Réponds-leur : « Attendez donc ! Je serai avec vous à attendre. »",
+        "en": "say, ‘Wait if you wish; I too am waiting’-",
+        "es": "Diles: “Seguid esperando, que yo esperaré junto a vosotros”.",
+        "it": "Di’: «Aspettate, ché anch’io aspetterò con voi».",
+        "ru": "Скажи: «Ждите, и я подожду вместе с вами».",
+        "tr": "De ki: Bekleyin, çünkü ben de sizinle beraber bekleyenlerdenim.",
+        "de": "Sag: Wartet ab! Gewiß, ich gehöre mit euch zu denjenigen, die abwarten.",
+        "pt": "Dize-lhes: Aguardai, que eu também sou um dos que aguardam convosco!",
+        "nl": "Zeg (O Moehammad): \"Wacht maar af: voorwaar, Ik behoor met jullie tot de afwachtenden.\"",
+        "ur": "ان سے کہو اچھا انتظار کرو، میں بھی تمہارے ساتھ انتظار کرتا ہوں۔ <sup foot_note=\"187512\">1</sup>",
+        "bn": "কোৱা, ‘তোমালোকে অপেক্ষা কৰা, ময়ো তোমালোকৰ লগত প্ৰতীক্ষাকাৰীসকলৰ অন্তৰ্ভুক্ত হ’লো’।",
+        "fa": "بگو: «منتظر [مرگِ من] باشید؛ من [نیز] با شما منتظر خواهم ماند [تا عذابتان را به چشم ببینم]»."
+      }
+    },
+    {
+      "verse_number": 4767,
+      "verse_key": "52:32",
+      "arabic_text": "أَمْ تَأْمُرُهُمْ أَحْلَـٰمُهُم بِهَـٰذَآ ۚ أَمْ هُمْ قَوْمٌ طَاغُونَ",
+      "phonetic_text": "Am ta/muruhum ahlamuhum bihathaam hum qawmun taghoon",
+      "translations": {
+        "fr": "Serait-ce leur raison qui leur ordonne (de telles allégations) ? Ou bien sont-ils des gens enclins à la démesure ?",
+        "en": "does their reason really tell them to do this, or are they simply insolent people?",
+        "es": "¿Son sus mentes las que les llevan a decir esto o son gente que transgrede los límites?",
+        "it": "E la loro ragione che li induce a ciò, o sono un popolo di superbi?",
+        "ru": "Неужели умы повелевают им такое? Или же они являются людьми преступными?",
+        "tr": "Onların akılları mı bunu emreder yoksa onlar azgın bir topluluk mudur?",
+        "de": "Oder befiehlt ihnen etwa ihr Verstand dies, oder sind sie (vielmehr) Leute, die das Maß (an Frevel) überschreiten?",
+        "pt": "São, acaso, suas faculdades mentais que os induzem a isso, ou é que são um povo de transgressores?",
+        "nl": "Of beveelt hun verstand hun dit, of zijn zij een overtredend volk?",
+        "ur": "کیا ان کی عقلیں انہیں ایسی ہی  باتیں کرنے کے لیے کہتی ہیں؟ یا درحقیقت یہ عناد میں حد سے گزرے ہوئے لوگ ہیں؟ <sup foot_note=\"187513\">1</sup>",
+        "bn": "সিহঁতৰ বিবেক-বুদ্ধিয়ে সিহঁতক এই আদেশ দিয়ে নেকি? নে সিহঁত সীমালঙ্ঘনকাৰী সম্প্ৰদায়?",
+        "fa": "آیا عقل‌هایشان به [بیان] این [سخنان باطل] حُكم مى‌كند یا [اساساً] مردمی سرکش هستند؟"
+      }
+    },
+    {
+      "verse_number": 4768,
+      "verse_key": "52:33",
+      "arabic_text": "أَمْ يَقُولُونَ تَقَوَّلَهُۥ ۚ بَل لَّا يُؤْمِنُونَ",
+      "phonetic_text": "Am yaqooloona taqawwalahu bal layu/minoon",
+      "translations": {
+        "fr": "Ou alors diront-ils : « C’est lui qui l’a inventé. »<sup foot_note=195156>1</sup> Or ce sont eux qui n’y croient pas.",
+        "en": "If they say, ‘He has made it up himself’- they certainly do not believe-",
+        "es": "También dicen: “Él lo ha inventado”<sup foot_note=169344>1</sup>. Pero la verdad es que no creen.",
+        "it": "Diranno: «Lo ha inventato lui stesso». Piuttosto [sono loro che] non vogliono credere.",
+        "ru": "Или же они говорят: «Он выдумал его!». О нет! Просто они не веруют.",
+        "tr": "Yoksa \"Onu uydurdu\" mu diyorlar? Hayır onlar inanmıyorlar.",
+        "de": "Oder sagen sie etwa: Er hat ihn sich selbst ausgedacht’? Nein! Vielmehr glauben sie nicht.",
+        "pt": "Dirão ainda: Porventura, ele o tem forjado (o Alcorão)? Qual! Não crêem!",
+        "nl": "Of zeggen zij: \"Hij heeft hem (de Koran) verzonnen\"? Nee, zij geloven niet.",
+        "ur": "کیا یہ کہتے ہیں کہ اس شخص نے یہ قرآن خود گھڑ لیا ہے؟ اصل بات یہ ہے کہ یہ ایمان نہیں لانا چاہتے۔ <sup foot_note=\"187514\">1</sup>",
+        "bn": "নে সিহঁতে কয়, ‘এই কোৰআন এওঁ নিজেই ৰচনা কৰিছে’? বৰং সিহঁত ঈমান নানিব।",
+        "fa": "آیا می‌گویند: «[محمد] قرآن را جعل کرده است؟» [هرگز چنین نیست؛] بلکه [غرق در تکبرند که] ایمان نمی‌آورند."
+      }
+    },
+    {
+      "verse_number": 4769,
+      "verse_key": "52:34",
+      "arabic_text": "فَلْيَأْتُوا۟ بِحَدِيثٍ مِّثْلِهِۦٓ إِن كَانُوا۟ صَـٰدِقِينَ",
+      "phonetic_text": "Falya/too bihadeethin mithlihi in kanoosadiqeena",
+      "translations": {
+        "fr": "Qu’ils apportent donc un discours qui lui soit semblable, si ce qu’ils disent est vrai.",
+        "en": "let them produce one like it, if what they say is true.",
+        "es": "¡Que presenten ellos un libro semejante, si es verdad lo que dicen!",
+        "it": "Producano dunque un discorso simile a questo, se sono sinceri.",
+        "ru": "Пусть приведут подобное ему (Корану) повествование, если они говорят правду.",
+        "tr": "Eğer doğru iseler onun benzeri bir söz meydana getirsinler.",
+        "de": "So sollen sie doch eine Aussage gleicher Art beibringen, wenn sie wahrhaftig sind.",
+        "pt": "Que apresentem, pois, uma mensagem semelhante, se estivermos certos.",
+        "nl": "Laten zij dan een bericht brengen dat daaraan gelijk is, als zij waarachtigen zijn.",
+        "ur": "اگر یہ اپنے اس قول میں سچے ہیں تو اسی شان کا ایک کلام بنا لائیں۔ <sup foot_note=\"187515\">1</sup>",
+        "bn": "তেন্তে সিহঁত যদি সত্যবাদী, তেতিয়াহ’লে সিহঁতে ইয়াৰ দৰে কোনো বাণী লৈ আহকচোন!",
+        "fa": "اگر راست مى‌گویند، سخنى مانند آن بیاورند."
+      }
+    },
+    {
+      "verse_number": 4770,
+      "verse_key": "52:35",
+      "arabic_text": "أَمْ خُلِقُوا۟ مِنْ غَيْرِ شَىْءٍ أَمْ هُمُ ٱلْخَـٰلِقُونَ",
+      "phonetic_text": "Am khuliqoo min ghayri shay-in am humu alkhaliqoon",
+      "translations": {
+        "fr": "Ont-ils été créés de rien ou sont-ils leurs propres créateurs ?",
+        "en": "Were they created without any agent? Were they the creators?",
+        "es": "¿Acaso surgieron de la nada<sup foot_note=169345>1</sup> o son ellos sus propios creadores?",
+        "it": "Sono stati forse creati dal nulla oppure sono essi stessi i creatori?",
+        "ru": "Неужели они были сотворены сами по себе (или просто так)? Или же они сами являются творцами?",
+        "tr": "Yoksa onlar, hiçbir şey olmadan (yani yaratıcısız) mı yaratıldılar? Yoksa kendileri yaratıcı mıdırlar?",
+        "de": "Oder sind sie etwa aus dem Nichts erschaffen worden, oder sind sie (gar) selbst die Schöpfer?",
+        "pt": "Porventura, não foram eles criados do nada, ou são eles os criadores?",
+        "nl": "Of zijn zij uit niets geschapen, of zijn zij (zelf) de scheppers?",
+        "ur": "کیا یہ کسی خالق کے بغیر خود پیدا ہو گئے ہیں؟ یا یہ خود اپنے خالق ہیں؟",
+        "bn": "সিহঁতে স্ৰষ্টাবিহীন সৃষ্টি হৈছে নেকি, নে সিহঁত নিজেই স্ৰষ্টা?",
+        "fa": "آیا آنان از هیچ آفریده شده‌اند یا خود آفرینندۀ خویشند؟"
+      }
+    },
+    {
+      "verse_number": 4771,
+      "verse_key": "52:36",
+      "arabic_text": "أَمْ خَلَقُوا۟ ٱلسَّمَـٰوَٰتِ وَٱلْأَرْضَ ۚ بَل لَّا يُوقِنُونَ",
+      "phonetic_text": "Am khalaqoo assamawatiwal-arda bal la yooqinoon",
+      "translations": {
+        "fr": "Ou ont-ils (eux-mêmes) créé les cieux et la terre ? Non, ils n’ont aucune certitude.",
+        "en": "Did they create the heavens and the earth? No! They do not have faith.",
+        "es": "¿O crearon los cielos y la Tierra? No tienen certeza de nada.",
+        "it": "O hanno creato i cieli e la terra? In realtà non sono affatto convinti <a class=f><sup foot_note=159974>1</sup></a> .",
+        "ru": "Или же это они сотворили небеса и землю? О нет! Просто они лишены убежденности.",
+        "tr": "Yoksa gökleri ve yeri onlar mı yarattılar? Hayır, onlar düşünüp hakikati anlamazlar.",
+        "de": "Oder haben sie (etwa) die Himmel und die Erde erschaffen? Nein! Vielmehr sind sie nicht überzeugt.",
+        "pt": "Ou criaram, acaso, os céus e a terra? Qual! Não se persuadirão!",
+        "nl": "Of hebben zij de hemelen en de aarde geschapen? Zelfs zij zijn er niet van overtuigd.",
+        "ur": "یا زمین اور آسمانوں کو انہوں نے پیدا کیا ہے؟ اصل بات یہ ہے کہ یہ یقین نہیں رکھتے۔ <sup foot_note=\"187516\">1</sup>",
+        "bn": "নে সিহঁতে আকাশমণ্ডল আৰু পৃথিৱী সৃষ্টি কৰিছে? বৰং সিহঁতে দৃঢ় বিশ্বাস নকৰে।",
+        "fa": "آیا آنان آسمان‌ها و زمین را آفریده‌اند؟ [نه،] بلکه آنان یقین ندارند [که الله آفرینندۀ مطلق است]."
+      }
+    },
+    {
+      "verse_number": 4772,
+      "verse_key": "52:37",
+      "arabic_text": "أَمْ عِندَهُمْ خَزَآئِنُ رَبِّكَ أَمْ هُمُ ٱلْمُصَۣيْطِرُونَ",
+      "phonetic_text": "Am AAindahum khaza-inu rabbika amhumu almusaytiroon",
+      "translations": {
+        "fr": "Détiendraient-ils les trésors de ton Seigneur ? Seraient-ils, eux, les maîtres dominateurs ?",
+        "en": "Do they possess your Lord’s treasures or have control over them?",
+        "es": "¿Acaso poseen los tesoros de tu Señor o tienen autoridad absoluta?",
+        "it": "Hanno presso di loro i tesori del tuo Signore o sono loro i dominatori?",
+        "ru": "Неужели у них находятся сокровищницы твоего Господа? Или же они сами являются владыками?",
+        "tr": "Yoksa Rabbinin hazineleri onların yanında mıdır? Yahut hâkim (her şeyin yöneticisi) kendileri midir?",
+        "de": "Oder besitzen sie (etwa) die Schatzkammern deines Herrn, oder sind sie es, die die Oberherrschaft ausüben?",
+        "pt": "Possuem, porventura, os tesouros do teu Senhor, ou são eles os dominadores?",
+        "nl": "Of bevinden zich bij hen de schaften van jouw Heer, of hebben zij de heerschappij?",
+        "ur": "کیا تیرے رب کے خزانے ان کے قبضے میں ہیں؟ یا ان پرانہی کا حکم چلتا ہے؟ <sup foot_note=\"187517\">1</sup>",
+        "bn": "অথবা সিহঁতৰ ওচৰত তোমাৰ প্ৰতিপালকৰ গোপন ভাণ্ডাৰ আছে নেকি, নে সিহঁতেই সকলো বস্তুৰ নিয়ন্ত্ৰণকাৰী?",
+        "fa": "آیا گنجینه‌های [نعمت و هدایت] پروردگارت نزد آنان است؟ آیا [بر همه چیز] تسلط دارند؟"
+      }
+    },
+    {
+      "verse_number": 4773,
+      "verse_key": "52:38",
+      "arabic_text": "أَمْ لَهُمْ سُلَّمٌ يَسْتَمِعُونَ فِيهِ ۖ فَلْيَأْتِ مُسْتَمِعُهُم بِسُلْطَـٰنٍ مُّبِينٍ",
+      "phonetic_text": "Am lahum sullamun yastamiAAoona feehifalya/ti mustamiAAuhum bisultanin mubeen",
+      "translations": {
+        "fr": "Auraient-ils une échelle depuis laquelle ils écouteraient (les entretiens célestes) ? Que celui qui, parmi eux, est là à écouter apporte donc une évidente preuve d’autorité !",
+        "en": "Do they have a ladder to climb, in order to eavesdrop [on Heaven’s secrets]? Let their eavesdropper produce clear proof.",
+        "es": "¿O tienen una escalera para escuchar los designios de Dios? Quien de ellos logre escuchar, que traiga una prueba clara.",
+        "it": "Hanno forse una scala per ascoltare <a class=f><sup foot_note=159975>1</sup></a> ? Chi ascolta per conto loro, lo provi irrefutabilmente.",
+        "ru": "Или же у них есть лестница, на которой они подслушивают разговоры ангелов? Пусть тот из них, кто подслушивал, приведет ясное доказательство.",
+        "tr": "Yoksa kendilerine mahsus (üzerine çıkıp sırları) dinleyecekleri bir merdivenleri mi var? Öyleyse dinleyenleri, açık bir delil getirsin.",
+        "de": "Oder haben sie eine Leiter, mit der sie (den Himmel) abhören (können)? Dann soll doch ihr Abhörer eine deutliche Ermächtigung beibringen.",
+        "pt": "Ou possuem alguma escada, para escalar o céu, a fim de detectar ali, os segredos? Que os espreitadores apresentem umaautoridade evidente!",
+        "nl": "Of beschikken zij over een ladder (die tot in de hemel reikt) waarop zij kunnen afluisteren? Laat dan de afluisteraar onder hen met een duidelijk bewijs komen.",
+        "ur": "کیا اِن کے پاس کوئی سیڑھی ہے جس پر چڑھ کر یہ عالم بالا کی سن گن لیتے ہیں؟ اِن میں سے جس نے سن گن لی ہو وہ لائے کوئی کھلی دلیل",
+        "bn": "নে সিহঁতৰ ওচৰত জখলা আছে, য’ত আৰোহণ কৰি সিহঁতে (উৰ্দ্ধজগতৰ কথা) শুনিবলৈ পায়? তেন্তে সিহঁতে শুনা সেই স্পষ্ট প্ৰমাণটো লৈ আহকচোন!",
+        "fa": "آیا نردبانى دارند كه [گفتار فرشتگان وحى را] به وسیلۀ آن مى‌شنوند؟ هر کس شنیده است، باید دلیلى روشن بیاورد."
+      }
+    },
+    {
+      "verse_number": 4774,
+      "verse_key": "52:39",
+      "arabic_text": "أَمْ لَهُ ٱلْبَنَـٰتُ وَلَكُمُ ٱلْبَنُونَ",
+      "phonetic_text": "Am lahu albanatu walakumu albanoon",
+      "translations": {
+        "fr": "(Allah) aurait donc les filles, alors que vous les fils ?",
+        "en": "Does God have daughters while you have sons?",
+        "es": "¿Acaso a Dios Le pertenecen las hijas mujeres<sup foot_note=169346>1</sup> y a ellos los hijos varones?",
+        "it": "[Allah] avrebbe forse figlie e voi figli <a class=f><sup foot_note=159976>1</sup></a> ?",
+        "ru": "Неужели у Него - дочери, а у вас - сыновья?",
+        "tr": "Demek kızlar O'na, oğullar size öyle mi?",
+        "de": "Oder hat Er (für Sich selbst) die Töchter und habt ihr (für euch selbst) die Söhne (bestimmt)?",
+        "pt": "Ou pertencem a Ele as filhas e a vós os filhos?",
+        "nl": "Of zijn voor Hem de dochters en voor jullie de zonen?",
+        "ur": "کیا اللہ کے لیے تو ہیں بیٹیاں اور تم لوگوں کے لیے یہ ہیں بیٹے؟<sup foot_note=\"187518\">1</sup>",
+        "bn": "নে কন্যা সন্তান তেওঁৰ বাবে; আৰু পুত্ৰ সন্তান তোমালোকৰ বাবে?",
+        "fa": "آیا الله فرزندان دختر دارد و شما پسر؟"
+      }
+    },
+    {
+      "verse_number": 4775,
+      "verse_key": "52:40",
+      "arabic_text": "أَمْ تَسْـَٔلُهُمْ أَجْرًا فَهُم مِّن مَّغْرَمٍ مُّثْقَلُونَ",
+      "phonetic_text": "Am tas-aluhum ajran fahum min maghraminmuthqaloon",
+      "translations": {
+        "fr": "Leur réclamerais- tu une récompense dont ils seraient lourdement obérés ?",
+        "en": "Do you [Prophet] demand a payment from them that would burden them with debt?",
+        "es": "¿O acaso tú [¡Oh, Muhámmad!] les pides una retribución<sup foot_note=169347>1</sup> que hace que se vean abrumados por las deudas<sup foot_note=169348>2</sup>?",
+        "it": "Forse chiedi loro un compenso, [tale] che si sentano gravati da un peso insopportabile <a class=f><sup foot_note=159977>1</sup></a> ?",
+        "ru": "Или же ты просишь у них вознаграждения, и они обременены обязательствами?",
+        "tr": "Yoksa sen kendilerinden bir ücret istiyorsun da, bu yüzden onlar ağır bir borç altında mı kalıyorlar?",
+        "de": "Oder verlangst du (etwa) von ihnen einen Lohn, so daß sie mit Schulden belastet wären?",
+        "pt": "Ou lhes exiges, porventura, alguma recompensa, e por isso ficam sobrecarregados de dívidas?",
+        "nl": "Of vraag jij van hen een beloning, zodat zij belast zijn met een schuld?",
+        "ur": "کیا تم ان سے کوئی اجر مانگتے ہو کہ یہ زبر دستی پڑی ہوئی چٹّی کے بوجھ تلے دبے جاتے ہیں؟ <sup foot_note=\"187519\">1</sup>",
+        "bn": "তুমি সিহঁতৰ ওচৰত পাৰিশ্ৰমিক (বিনিময়) দাবী কৰিছা নেকি, যাৰ ফলত সিহঁতে ঋণৰ কাৰণে ভাৰাক্ৰান্ত হৈ পৰিছে?",
+        "fa": "[ای پیامبر،] آیا پاداشی از آنان درخواست می‌کنی که [که از پرداخت آن در رنجند و هزینه‌اش] برایشان [گران و] سنگین است؟"
+      }
+    },
+    {
+      "verse_number": 4776,
+      "verse_key": "52:41",
+      "arabic_text": "أَمْ عِندَهُمُ ٱلْغَيْبُ فَهُمْ يَكْتُبُونَ",
+      "phonetic_text": "Am AAindahumu alghaybu fahum yaktuboon",
+      "translations": {
+        "fr": "Disposeraient-ils des clefs de l’Inconnaissable (ghayb) dont ils pourraient consigner par écrit (les secrets) ?",
+        "en": "Do they have [access to] the unseen? Could they write it down?",
+        "es": "¿O tienen el conocimiento de lo oculto y lo han registrado?",
+        "it": "Possiedono l’invisibile in modo tale da descriverlo?",
+        "ru": "Или же они владеют сокровенным и записывают его?",
+        "tr": "Yoksa gayb kendilerinin yanında da onlar mı yazıyorlar?",
+        "de": "Oder besitzen sie (das Wissen über) das Verborgene, so daß sie (es) aufschreiben (können)?",
+        "pt": "Ou pensam estar de posse do incognoscível donde copiam o que dizem?",
+        "nl": "Of is bij hen het onwaarneembare, zodat zij het kunnen opschrijven?",
+        "ur": "کیا  ان کے پاس غیب کے حقائق کا علم ہے کہ اس کی بناء پر یہ لکھ رہے ہوں؟ <sup foot_note=\"187520\">1</sup>",
+        "bn": "নে সিহঁতৰ ওচৰত গায়েবৰ জ্ঞান আছে, যিটো সিহঁতে লিখি ৰাখে!",
+        "fa": "آیا از عالم غیب آگاهند و [خبرهاى نهان را] می‌نویسند؟"
+      }
+    },
+    {
+      "verse_number": 4777,
+      "verse_key": "52:42",
+      "arabic_text": "أَمْ يُرِيدُونَ كَيْدًا ۖ فَٱلَّذِينَ كَفَرُوا۟ هُمُ ٱلْمَكِيدُونَ",
+      "phonetic_text": "Am yureedoona kaydan fallatheenakafaroo humu almakeedoon",
+      "translations": {
+        "fr": "Ou chercheraient-ils à tramer des intrigues ? Les mécréants seront alors les victimes de leurs propres intrigues.",
+        "en": "Do they think they can ensnare you? It is the disbelievers who have been ensnared.",
+        "es": "¿O es que quieren tenderte una trampa? Los que se niegan a creer son quienes han caído en una trampa.",
+        "it": "Vogliono tramare un’insidia? Saranno piuttosto i miscredenti ad essere ingannati.",
+        "ru": "Или же они желают замыслить козни? Но ведь неверующие сами станут жертвой козней.",
+        "tr": "Yoksa bir tuzak mı kurmak istiyorlar? Fakat o küfredenlerin kendileri tuzağa düşeceklerdir.",
+        "de": "Oder wollen sie eine List anwenden? Aber diejenigen, die ungläubig sind, sind es, die der List erliegen.",
+        "pt": "Ou (nem suma), intentam conspirar (contra ti)? Qual! Saibam os incrédulos que serão envolvidos na conspiração!",
+        "nl": "Of willen zij een list beramen? Degenen die niet geloven zijn degenen die in een list versrikt raken.",
+        "ur": "کیا یہ کوئی چال چلنا چاہتے ہیں؟ <sup foot_note=\"187521\">1</sup> (اگر یہ بات ہے) تو کفر کرنے والوں پر ان کی چال الٹی ہی پڑے گی۔ <sup foot_note=\"187522\">2</sup>",
+        "bn": "নে সিহঁতে কোনো ষড়যন্ত্ৰ কৰিব বিচাৰিছে? এতেকে যিহঁতে কুফৰী কৰে সিহঁতেই হ’ব ষড়যন্ত্ৰৰ চিকাৰ।",
+        "fa": "آیا قصد نیرنگ [و نقشۀ پلیدی برایت] دارند؟ ولى کافران خود گرفتار نیرنگ [و تدبیر الهی] هستند."
+      }
+    },
+    {
+      "verse_number": 4778,
+      "verse_key": "52:43",
+      "arabic_text": "أَمْ لَهُمْ إِلَـٰهٌ غَيْرُ ٱللَّهِ ۚ سُبْحَـٰنَ ٱللَّهِ عَمَّا يُشْرِكُونَ",
+      "phonetic_text": "Am lahum ilahun ghayru Allahisubhana Allahi AAamma yushrikoon",
+      "translations": {
+        "fr": "Auraient-ils une divinité autre qu’Allah ? Gloire soit rendue à Allah, (Il est bien plus Haut) que tout ce qu’ils Lui associent !",
+        "en": "Do they really have another god besides God? God is far above anything they set alongside Him.",
+        "es": "¿O acaso tienen otra divinidad además de Dios? ¡Glorificado sea Dios de cuanto Le asocian!",
+        "it": "Oppure hanno un altro dio all’infuori di Allah? Gloria a Lui, Egli è ben al di sopra di quanto [Gli] associano.",
+        "ru": "Или же у них есть другой бог наряду с Аллахом? Аллах пречист и далек от тех, кого они приобщают в сотоварищи!",
+        "tr": "Yoksa onların Allah'tan başka bir ilâhı mı var? Allah, onların ortak koştukları şeylerden uzaktır.",
+        "de": "Oder haben sie einen anderen Gott als Allah? Preis sei Allah! (und Erhaben ist Er) über das, was sie (Ihm) beigesellen.",
+        "pt": "Ou, por fim, têm outra divindade, além de Deus? Glorificado seja Deus, de tudo quanto Lhe associam!",
+        "nl": "Of hebben zij een andere god dan Allah? Heilig is Allah, boven de deelgenoten die zij (Hem) toekennen.",
+        "ur": "کیا اللہ کے سوا یہ کوئی اور معبود رکھتے ہیں؟ اللہ پاک ہے اس شرک سے جو یہ لوگ کر رہے ہیں۔ <sup foot_note=\"187523\">1</sup>",
+        "bn": "নে আল্লাহৰ বাহিৰে সিহঁতৰ কোনো ইলাহ আছে? সিহঁতে যি শ্বিৰ্ক কৰে তাৰ পৰা আল্লাহ পৱিত্ৰ।",
+        "fa": "آیا آنان معبودی غیر از الله دارند؟ الله از چیزهایی که [با او] شریک قرار می‌دهند پاک و منزه است."
+      }
+    },
+    {
+      "verse_number": 4779,
+      "verse_key": "52:44",
+      "arabic_text": "وَإِن يَرَوْا۟ كِسْفًا مِّنَ ٱلسَّمَآءِ سَاقِطًا يَقُولُوا۟ سَحَابٌ مَّرْكُومٌ",
+      "phonetic_text": "Wa-in yaraw kisfan mina assama-isaqitan yaqooloo sahabun markoom",
+      "translations": {
+        "fr": "Quand bien même ils verraient choir des pans du ciel, ils diraient : « Ce ne sont là que nuages amoncelés. »",
+        "en": "Even if they saw a piece of heaven falling down on them, they would say, ‘Just a heap of clouds,’",
+        "es": "Si vieran caer parte del cielo dirían: “Son solo nubes acumuladas”.",
+        "it": "Se vedessero cadere un pezzo di cielo, direbbero: «E un cumulo di nuvole».",
+        "ru": "Даже если они увидят куски неба падающими, они скажут: «Это скопились облака!».",
+        "tr": "Gökten bir parçanın düştüğünü görseler, \"Üst üste yığılmış bulutlardır.\" derler.",
+        "de": "Und wenn sie ein Stück vom Himmel herabfallen sähen, würden sie sagen: Aufgeschichtete Wolken.",
+        "pt": "E se vissem desabar um fragmento do céu, diriam: São nuvens saturadas!",
+        "nl": "En als zij een stuk uit de hemel (zouden) zien neerstorten, dan zeggen zij: \"Stapelwolken.\"",
+        "ur": "یہ لوگ آسمان کے ٹکڑے بھی گرتے ہوئے دیکھ لیں تو کہیں گے یہ بادل ہیں جو اُمڈے چلے آرہے ہیں <sup foot_note=\"187524\">1</sup>",
+        "bn": "আৰু আকাশৰ কোনো টুকুৰা ভাঙি পৰা দেখিলেও সিহঁতে ক’ব, ‘এইটো এটা পুঞ্জিভূত মেঘ’।",
+        "fa": "[این کافران، حتی] اگر پاره‌هاى از آسمان را نیز در حال سقوط ببینند، [باز هم ایمان نمى‌آورند و] مى‌گویند: «ابرى متراكم است»."
+      }
+    },
+    {
+      "verse_number": 4780,
+      "verse_key": "52:45",
+      "arabic_text": "فَذَرْهُمْ حَتَّىٰ يُلَـٰقُوا۟ يَوْمَهُمُ ٱلَّذِى فِيهِ يُصْعَقُونَ",
+      "phonetic_text": "Fatharhum hatta yulaqooyawmahumu allathee feehi yusAAaqoon",
+      "translations": {
+        "fr": "Laisse-les donc attendre leur jour, où ils seront foudroyés.",
+        "en": "so leave them, Prophet, until they face the Day when they will be thunderstruck,",
+        "es": "Déjalos, que ya les llegará el día en que quedarán paralizados de terror.",
+        "it": "Lasciali [stare] dunque, finché non incontreranno quel loro Giorno <a class=f><sup foot_note=159978>1</sup></a> in cui saranno folgorati,",
+        "ru": "Оставь же их, пока они не встретят тот день их, когда их постигнет погибель.",
+        "tr": "Artık çarpılacakları günlerine kavuşuncaya kadar onları (kendi hallerine) bırak.",
+        "de": "Lasse sie nur, bis sie ihrem Tag begegnen, an dem sie wie vom Donnerschlag getroffen zusammenbrechen werden,",
+        "pt": "Deixa-os, pois, até que se deparem com o seu dia, em que serão fulminados!",
+        "nl": "Laat hen maar, totdat zij hun Dag ontmoeten waarop zij door de bliksemslag getroffen zullen worden.",
+        "ur": "پس اے نبیؐ، اِنہیں اِن کے حال پر چھوڑ دو یہاں تک کہ یہ اپنے اُس دن کو پہنچ جائیں جس میں یہ مار گرائے جائیں گے",
+        "bn": "এতেকে সিহঁতক এৰি দিয়া সেইদিন পৰ্যন্ত, যিদিনা সিহঁত বজ্ৰাঘাতত আক্ৰান্ত হ’ব।",
+        "fa": "پس آنان را [به حال خود] رها كن تا با روزِ موعودشان كه [با نخستین دمیدنِ صور] مدهوش مرگ می‌گردند، مواجه شوند."
+      }
+    },
+    {
+      "verse_number": 4781,
+      "verse_key": "52:46",
+      "arabic_text": "يَوْمَ لَا يُغْنِى عَنْهُمْ كَيْدُهُمْ شَيْـًٔا وَلَا هُمْ يُنصَرُونَ",
+      "phonetic_text": "Yawma la yughnee AAanhum kayduhumshay-an wala hum yunsaroon",
+      "translations": {
+        "fr": "Le jour où leurs intrigues ne leur seront utiles en rien, et où ils n’auront aucun secours.",
+        "en": "the Day when their snares will be of no use to them, when they will get no help.",
+        "es": "Ese día no les beneficiarán en nada sus argucias y nadie les auxiliará.",
+        "it": "il Giorno in cui la loro astuzia non gioverà loro in alcunché e non saranno aiutati.",
+        "ru": "В тот день их козни не принесут им никакой пользы, и никто не поможет им.",
+        "tr": "O gün hiçbir tedbirlerinin kendilerine zerre kadar faydası olmayacak ve hiçbir şekilde yardım da görmeyeceklerdir.",
+        "de": "dem Tag, da ihre List ihnen nichts nützen und ihnen keine Hilfe zuteil werden wird.",
+        "pt": "Dia esse em que de nada lhes servirão as suas conspirações, nem serão socorridos.",
+        "nl": "Op die Dag zal hun list niets baten, en zij zullen niet worden geholpen.",
+        "ur": "جس دن نہ اِن کی اپنی کوئی چال اِن کے کسی کام آئے گی نہ کوئی اِن کی مدد کو آئے گا",
+        "bn": "সেইদিনা সিহঁতৰ ষড়যন্ত্ৰ কোনো কামত নাহিব আৰু সিহঁতক সহায়ও কৰা নহ’ব।",
+        "fa": "روزى كه نیرنگشان سودمند نخواهد بود و [از هیچ سو] یارى نمی‌شوند."
+      }
+    },
+    {
+      "verse_number": 4782,
+      "verse_key": "52:47",
+      "arabic_text": "وَإِنَّ لِلَّذِينَ ظَلَمُوا۟ عَذَابًا دُونَ ذَٰلِكَ وَلَـٰكِنَّ أَكْثَرَهُمْ لَا يَعْلَمُونَ",
+      "phonetic_text": "Wa-inna lillatheena thalamooAAathaban doona thalika walakinna aktharahumla yaAAlamoon",
+      "translations": {
+        "fr": "Ceux qui auront commis des injustices auront (à subir) un supplice avancé,<sup foot_note=195157>1</sup> mais la plupart d’entre eux ne le savent pas.",
+        "en": "Another punishment awaits the evildoers, though most of them do not realize it.",
+        "es": "Los injustos sufrirán, además de este, otros castigos, pero la mayoría no lo sabe.",
+        "it": "In verità gli ingiusti saranno puniti già prima di quello. Ma la maggior parte di loro non lo sa.",
+        "ru": "Воистину, беззаконникам уготованы мучения и перед этим, но большинство их не знает этого.",
+        "tr": "Şüphesiz o zulmedenlere ondan başka da azab vardır. Fakat çokları bilmezler.",
+        "de": "Gewiß, für diejenigen, die Unrecht tun, wird es eine Strafe außer dieser geben, aber die meisten von ihnen wissen nicht.",
+        "pt": "Em verdade, os iníquos, além desse, sofrerão outros castigos; porém, a maioria o ignora.",
+        "nl": "En voorwaar, voor degenen die onrecht pleegden is er daarnaast nog een bestraffing, maar de meesten van hen weten het niet.",
+        "ur": "اور اس وقت کے آنے سے پہلے بھی ظالموں کے لیے ایک عذاب ہے ،مگر ان میں سے اکثر جانتے نہیں ہیں۔ <sup foot_note=\"187525\">1</sup>",
+        "bn": "আৰু নিশ্চয় যিসকলে অন্যায় কৰিছে সিহঁতৰ বাবে আছে ইয়াৰ বাহিৰেও আৰু শাস্তি। কিন্তু সিহঁতৰ অধিকাংশই এই কথা নাজানে।",
+        "fa": "ستمکاران [در دنیا نیز به دست مؤمنان] به عذاب دیگرى گرفتار خواهند شد؛ ولى بیشتر آنان نمى‌دانند."
+      }
+    },
+    {
+      "verse_number": 4783,
+      "verse_key": "52:48",
+      "arabic_text": "وَٱصْبِرْ لِحُكْمِ رَبِّكَ فَإِنَّكَ بِأَعْيُنِنَا ۖ وَسَبِّحْ بِحَمْدِ رَبِّكَ حِينَ تَقُومُ",
+      "phonetic_text": "Wasbir lihukmi rabbikafa-innaka bi-aAAyunina wasabbih bihamdirabbika heena taqoom",
+      "translations": {
+        "fr": "Prends donc en patience le Jugement de ton Seigneur ! Car Nous t’avons sous Nos Yeux. Rends gloire à ton Seigneur et célèbre Ses louanges en te levant.",
+        "en": "Wait patiently [Prophet] for your Lord’s judgement: you are under Our watchful eye. Celebrate the praise of your Lord when you rise.",
+        "es": "Ten paciencia con los designios de tu Señor, y sabe que te encuentras bajo Mis ojos. Glorifica con alabanzas a tu Señor cuando te levantes [a orar],",
+        "it": "Sopporta con pazienza il decreto del tuo Signore <a class=f><sup foot_note=159979>1</sup></a> , poiché in verità sei sotto i Nostri occhi. Glorifica e loda il tuo Signore quando ti alzi,",
+        "ru": "Потерпи же до решения твоего Господа, ведь ты - у Нас на Глазах. Прославляй хвалой своего Господа, когда поднимаешься ото сна.",
+        "tr": "Rabbinin hükmüne sabret. Çünkü sen gözlerimizin önündesin. Kalktığın zaman Rabbini hamd ile tesbih et.",
+        "de": "Sei standhaft gegenüber dem Urteil deines Herrn. Gewiß, du bist ja vor Unseren Augen. Und lobpreise deinen Herrn, wenn du aufstehst,",
+        "pt": "E tu (ó Mensageiro), aguarda até ao Dia do Juízo do teu Senhor, porque estás ante Nossos olhos. E glorifica os louvoresdo teu Senhor, quando te levantares,",
+        "nl": "Wees geduldig met de beschikking van jouw Heer. Voorwaar, jij bent in Onze Ogen. En prijs de Glorie van jouw Heer wanneer jij staat.",
+        "ur": "اے نبیؐ، اپنے رب کا فیصلہ آنے تک صبر کرو، <sup foot_note=\"187526\">1</sup> تم ہماری  نگاہ میں ہو۔ <sup foot_note=\"187527\">2</sup> تم جب اٹھو تو اپنے رب کی حمد کے ساتھ اس کی تسبیح کرو،<sup foot_note=\"187528\">3</sup>",
+        "bn": "আৰু তুমি তোমাৰ প্ৰতিপালকৰ সিদ্ধান্তৰ ওপৰত ধৈৰ্য্য ধাৰণ কৰা; কাৰণ তুমি আমাৰ চুকুৰ সন্মুখতে আছা। তুমি তোমাৰ প্ৰতিপালকৰ প্ৰশংসাৰ সৈতে পৱিত্ৰতা আৰু মহিমা ঘোষণা কৰা যেতিয়া তুমি থিয় হোৱা।",
+        "fa": "[ای پیامبر،] در برابر حکم پروردگارت شکیبا باش؛ زیرا تو تحت نظر و حفاظت مایی؛ و هنگامی که [از خواب یا به قصد عبادت] برمی‌خیزی، پروردگارت را به پاکی ستایش کن."
+      }
+    },
+    {
+      "verse_number": 4784,
+      "verse_key": "52:49",
+      "arabic_text": "وَمِنَ ٱلَّيْلِ فَسَبِّحْهُ وَإِدْبَـٰرَ ٱلنُّجُومِ",
+      "phonetic_text": "Wamina allayli fasabbihhu wa-idbaraannujoom",
+      "translations": {
+        "fr": "Et glorifie-Le durant une (bonne) partie de la nuit et quand déclinent les étoiles.",
+        "en": "Glorify Him at night and at the fading of the stars.",
+        "es": "por la noche y al ocultarse las estrellas.",
+        "it": "e glorificaLo durante la notte e al declinare delle stelle. <a class=f><sup foot_note=159980>1</sup></a> Il Sinai, il monte per antonomasia, sul quale Mosè ricevette le Tavole della Legge. <a class=f><sup foot_note=159981>2</sup></a> La celeste dimora popolata dagli angeli simmetria celeste della Ka‘ba frequentata dai pellegrini ventiquattro ore su ventiquattro. <a class=f><sup foot_note=159982>3</sup></a> Il cielo. <a class=f><sup foot_note=159983>4</sup></a> Tremante per il timor di Allah, tremerà nello sconvolgimento del Giorno del Giudizio. <a class=f><sup foot_note=159984>5</sup></a> «la Fornace»: uno dei nomi dell’Inferno. <a class=f><sup foot_note=159985>6</sup></a> «il Soffio Infuocato»: una delle pene dell’Inferno. <a class=f><sup foot_note=159986>7</sup></a> Un giorno che i Quraysh si erano riuniti per discutere i provvedimenti da prendere contro l’Inviato di Allah (pace e benedizioni su di lui), uno di loro se ne sortì con la proposta di imprigionarlo e lasciarlo morire di stenti. <a class=f><sup foot_note=159987>8</sup></a> «non sono affatto convinti»: del castigo che li attende nell’altra vita. <a class=f><sup foot_note=159988>9</sup></a> «una scala per ascoltare»: quello che avviene in cielo. <a class=f><sup foot_note=159989>10</sup></a> A proposito delle «figlie» che i pagani attribuivano ad Allah, vedi nota a xvi, <a class=f><sup foot_note=159990>11</sup></a> Se Muhammad (pace e benedizioni su di lui) avesse chiesto un compenso per trasmettere agli uomini il Sublime Corano, per retribuire un così immenso servigio certamente gli uomini avrebbero dovuto indebitarsi pesantemente. <a class=f><sup foot_note=159991>12</sup></a> «Subiranno le conseguenze del loro comportamento prima che giunga il Giorno del Giudizio finale, la loro vita terrena sarà gravata da angoscia e disperazione. <a class=f><sup foot_note=159992>13</sup></a> Allah (gloria a Lui l’Altissimo) invita il Suo Profeta (pace e benedizioni su di lui) a sopportare virilmente le molestie e gli scherni dei miscredenti e lo rassicura del fatto che Egli veglia su di lui.",
+        "ru": "Среди ночи восхваляй Его и при исчезновении звезд.",
+        "tr": "Gecenin bir kısmında ve yıldızların batışında da O'nu tesbih et",
+        "de": "und (in einem Teil) von der Nacht, da preise Ihn, und beim Schwinden der Sterne.",
+        "pt": "E numa parte da noite, e glorifica-O ao retirarem-se as estrelas.",
+        "nl": "En in de nacht, prijst Zijn Glorie, en (ook) bij het vervagen van de sterren (in de vroege ochtend).",
+        "ur": "رات کو بھی اس کی تسبیح کیا کرو <sup foot_note=\"187529\">1</sup> اور ستارے جب پلٹتے ہیں اس وقت بھی۔<sup foot_note=\"187530\">2</sup>",
+        "bn": "আৰু তেওঁৰ পৱিত্ৰতা ঘোষণা কৰা নিশাৰ ভাগত আৰু তৰাবোৰ অস্তমিত হোৱাৰ পিছত।",
+        "fa": "و [نیز در پاسى] از شب او را تسبیح بگوی [و نماز بگزار] و به هنگام افول ستارگان [در سپیده‌دم نیز نماز صبح بگزار]."
+      }
+    }
+  ]
+}

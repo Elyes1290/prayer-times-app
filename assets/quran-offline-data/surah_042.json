@@ -1,0 +1,1066 @@
+{
+  "surah_number": 42,
+  "extracted_at": "2025-09-20T15:16:10.274Z",
+  "verses": [
+    {
+      "verse_number": 4273,
+      "verse_key": "42:1",
+      "arabic_text": " حمٓ",
+      "phonetic_text": "Ha-meem",
+      "translations": {
+        "fr": "Hâ, Mîm.",
+        "en": "Ha Mim",
+        "es": "Ha’. Mim.",
+        "it": "Hâ’,Mîm",
+        "ru": "Ха. Мим.",
+        "tr": "Hâ, mîm, ayn, sîn, kaf.",
+        "de": "Ha-Mim.",
+        "pt": "Ha, Mim.",
+        "nl": "Ha Mîm.",
+        "ur": "ح م",
+        "bn": "হা-মীম।",
+        "fa": "حم [حا. میم]."
+      }
+    },
+    {
+      "verse_number": 4274,
+      "verse_key": "42:2",
+      "arabic_text": "عٓسٓقٓ",
+      "phonetic_text": "AAayn-seen-qaf",
+      "translations": {
+        "fr": "‘Aïn, Sîn, Qâf.",
+        "en": "Ayn Sin Qaf",
+        "es": "‘Ain. Sin. Qaf.",
+        "it": "Aìn, Sin, Qàf <a class=f><sup foot_note=159611>1</sup></a> .",
+        "ru": "Айн. Син. Каф.",
+        "tr": "Hâ, mîm, ayn, sîn, kaf.",
+        "de": "Ayn-Sin-Qaf.",
+        "pt": "Ain, Sin, Caf.",
+        "nl": "'Aîn Sîn Qâf.",
+        "ur": "ع س ق",
+        "bn": "আঈন-ছীন-ক্বাফ।",
+        "fa": "عسق [عین. سین. قاف]."
+      }
+    },
+    {
+      "verse_number": 4275,
+      "verse_key": "42:3",
+      "arabic_text": "كَذَٰلِكَ يُوحِىٓ إِلَيْكَ وَإِلَى ٱلَّذِينَ مِن قَبْلِكَ ٱللَّهُ ٱلْعَزِيزُ ٱلْحَكِيمُ",
+      "phonetic_text": "Kathalika yoohee ilayka wa-ilaallatheena min qablika Allahu alAAazeezu alhakeem",
+      "translations": {
+        "fr": "C’est ainsi que t’envoie Ses révélations, comme à ceux qui t’ont précédé, Allah le Tout-Puissant, le Sage.",
+        "en": "This is how God, the Mighty, the Wise, sends revelation to you [Prophet] as He did to those before you.",
+        "es": "[¡Oh, Muhámmad!] Dios te ha descendido la revelación, así como también a los [Mensajeros] que te precedieron. Dios es el Poderoso, el Sabio.",
+        "it": "Ciò in quanto Allah, l’Eccelso, il Saggio rivela a te e a coloro che ti precedettero <a class=f><sup foot_note=159612>1</sup></a> .",
+        "ru": "Так внушает откровение тебе и твоим предшественникам Аллах Могущественный, Мудрый.",
+        "tr": "Ey Muhammed! Çok güçlü hüküm ve hikmet sahibi olan Allah sana da senden öncekilere de böylece vahyeder.",
+        "de": "So gibt dir Allah (als Offenbarung) ein und (hat auch zuvor) denjenigen, die vor dir waren, (als Offenbarungen eingegeben), (Er), der Allmächtige und Allweise.",
+        "pt": "Assim te revela, como (o fez) àqueles que te precederam, Deus, o Poderoso, o Prudentíssimo.",
+        "nl": "Zó openbaart Allah aan jou en aan degenen vóór jou; Allah is de Almachtige, de Alwijze.",
+        "ur": "اِسی طرح اللہ غالب و حکیم تمہاری طرف اور تم سے پہلے گزرے ہوئے (رسُولوں)کی طرف وحی کرتا رہا ہے۔ <sup foot_note=\"186995\">1</sup>",
+        "bn": "এইদৰেই তোমাৰ প্ৰতি আৰু তোমাৰ পূৰ্বৱৰ্তীসকলৰ প্ৰতি অহী কৰিছে মহাপৰাক্ৰমশালী, প্ৰজ্ঞাময় আল্লাহে।",
+        "fa": "الله شکست‌ناپذیر حکیم، بر تو و پیامبران پیش از تو چنین وحى مى‌فرستد."
+      }
+    },
+    {
+      "verse_number": 4276,
+      "verse_key": "42:4",
+      "arabic_text": "لَهُۥ مَا فِى ٱلسَّمَـٰوَٰتِ وَمَا فِى ٱلْأَرْضِ ۖ وَهُوَ ٱلْعَلِىُّ ٱلْعَظِيمُ",
+      "phonetic_text": "Lahu ma fee assamawatiwama fee al-ardi wahuwa alAAaliyyu alAAatheem",
+      "translations": {
+        "fr": "À Lui appartient ce qui est dans les cieux et sur terre. Il est le Très Haut, le Très Grand.",
+        "en": "All that is in the heavens and earth belongs to Him: He is the Exalted, the Almighty.",
+        "es": "A Él pertenece cuanto hay en los cielos y en la Tierra. Él es el Sublime, el Grandioso.",
+        "it": "[Appartiene] a Lui tutto quello che è nei cieli e tutto quello che è sulla terra. Egli è l’Altissimo, il Sublime.",
+        "ru": "Ему принадлежит то, что на небесах, и то, что на земле. Он - Возвышенный, Великий.",
+        "tr": "Göklerde ve yerde ne varsa, hepsi O'nundur. O çok yücedir, çok büyüktür.",
+        "de": "Ihm gehört, was in den Himmeln und was auf der Erde ist, und Er ist der Erhabene und Allgewaltige.",
+        "pt": "Seu é tudo quanto existe nos céus e na terra, porque é o Ingente, o Altíssimo.",
+        "nl": "Aan Hem behoort alles wat in de hemelen en op de aarde is, en Hij is de Verhevene, de Geweldige.",
+        "ur": "آسمانوں اور زمین میں  جو کچھ بھی ہے اُسی کا ہے، وہ برتر اور عظیم ہے۔ <sup foot_note=\"186996\">1</sup>",
+        "bn": "আকাশসমূহত যি আছে আৰু পৃথিৱীত যি আছে সেই সকলোবোৰ তেওঁৰেই। তেওঁ সুউচ্চ, সুমহান।",
+        "fa": "هرچه در آسمان‌ها و زمین است متعلق به اوست؛ و او بلندمرتبه و بزرگ است."
+      }
+    },
+    {
+      "verse_number": 4277,
+      "verse_key": "42:5",
+      "arabic_text": "تَكَادُ ٱلسَّمَـٰوَٰتُ يَتَفَطَّرْنَ مِن فَوْقِهِنَّ ۚ وَٱلْمَلَـٰٓئِكَةُ يُسَبِّحُونَ بِحَمْدِ رَبِّهِمْ وَيَسْتَغْفِرُونَ لِمَن فِى ٱلْأَرْضِ ۗ أَلَآ إِنَّ ٱللَّهَ هُوَ ٱلْغَفُورُ ٱلرَّحِيمُ",
+      "phonetic_text": "Takadu assamawatuyatafattarna min fawqihinna walmala-ikatuyusabbihoona bihamdi rabbihim wayastaghfiroonaliman fee al-ardi ala inna Allaha huwaalghafooru arraheem",
+      "translations": {
+        "fr": "Les cieux manquent de se fendre depuis leur voûte, lorsque les Anges Lui rendent gloire, célèbrent Ses louanges, et implorent le pardon pour ceux qui peuplent la terre. Il est, certes, l’Absoluteur, le Tout Miséricordieux.",
+        "en": "The heavens are almost broken apart from above as the angels proclaim the praises of their Lord and ask forgiveness for those on earth. God is indeed the Most Forgiving, the Most Merciful.",
+        "es": "Los cielos están casi por hendirse desde arriba [por la grandiosidad de Dios] y los ángeles glorifican con alabanzas a su Señor y piden perdón por quienes están en la Tierra. ¿Acaso no es Dios el Absolvedor, el Misericordioso?",
+        "it": "Quasi sprofondano i cieli <a class=f><sup foot_note=159613>1</sup></a> , gli uni sugli altri, quando gli angeli glorificano il loro Signore, Lo lodano e implorano perdono per coloro che sono sulla terra. In verità Allah è il Perdonatore, il Misericordioso.",
+        "ru": "Небеса готовы разверзнуться сверху (от величия Аллаха; или от многочисленных ангелов; или от слов многобожников). Ангелы прославляют хвалой своего Господа и просят прощения для тех, кто на земле. Воистину, Аллах - Прощающий, Милосердный.",
+        "tr": "Nerde ise gökler O'nun azametinden tâ üstlerinden çatlayacak gibi titreşiyorlar. Melekler Rablerini hamd ile tesbih ediyorlar ve yeryüzünde bulunan kimseler için mağfiret diliyorlar. İyi bilin ki Allah çok bağışlayıcıdır, çok merhamet edicidir.",
+        "de": "Beinahe brechen die Himmel auseinander von oben her. Und die Engel lobpreisen ihren Herrn und bitten (Ihn) um Vergebung für diejenigen, die auf der Erde sind. Ja sicherlich, Allah ist der Allvergebende und Barmherzige.",
+        "pt": "É possível que os céus se fendam para a Sua glória; e os anjos celebram os louvores do seu Senhor e imploram perdãopara aqueles, que estão na terra.",
+        "nl": "Bijna scheuren de bovenkanten van de hemelen, en de Engelen prijzen de Glorie van hun Heer met Zijn lofprijzing en vragen om vergeving voor degenen die op de aarde zijn. Weet: voorvaar, Allah is de Vergevensgezinde, de Meest Barmhartige.",
+        "ur": "قریب ہے کہ آسمان اُوپر سے پھٹ پڑیں۔ <sup foot_note=\"186997\">1</sup> فرشتے اپنے ربّ کی حمد کے ساتھ اُس کی تسبیح کر رہے ہیں اور زمین والوں کے حق میں  در گزر کی درخواستیں کیے جاتے ہیں۔ <sup foot_note=\"186998\">2</sup> آگاہ رہو، حقیقت میں اللہ غفور و رحیم ہی ہے۔ <sup foot_note=\"186999\">3</sup>",
+        "bn": "আকাশসমূহ ওপৰৰ পৰা ভাঙি পৰাৰ উপক্ৰম হয়, আৰু ফিৰিস্তাসকলে নিজ প্ৰতিপালকৰ প্ৰশংসাৰ সৈতে পৱিত্ৰতা আৰু মহিমা ঘোষণা কৰে আৰু পৃথিৱীবাসীসকলৰ বাবে ক্ষমা প্ৰাৰ্থনা কৰে। জানি থোৱা, নিশ্চয় আল্লাহ, তেৱেঁই ক্ষমাশীল, পৰম দয়ালু।",
+        "fa": "نزدیک است آسمان‌ها [از شکوه و عظمت الهی] از فراز یکدیگر بشكافند، و فرشتگان، پروردگارشان را با ستایش تقدیس مى‌كنند و براى ساكنان زمین [كه توبه كرده‌اند] آمرزش مى‌طلبند. آگاه باشید كه الله آمرزندۀ مهربان است."
+      }
+    },
+    {
+      "verse_number": 4278,
+      "verse_key": "42:6",
+      "arabic_text": "وَٱلَّذِينَ ٱتَّخَذُوا۟ مِن دُونِهِۦٓ أَوْلِيَآءَ ٱللَّهُ حَفِيظٌ عَلَيْهِمْ وَمَآ أَنتَ عَلَيْهِم بِوَكِيلٍ",
+      "phonetic_text": "Wallatheena ittakhathoomin doonihi awliyaa Allahu hafeethunAAalayhim wama anta AAalayhim biwakeel",
+      "translations": {
+        "fr": "(Quant à) ceux qui ont pris des protecteurs en dehors de Lui, Allah est le Gardien (Qui les surveille) et tu n’es point leur garant.",
+        "en": "As for those who take protectors other than Him, God is watching them; you are not responsible for them.",
+        "es": "Quienes han tomado a otros [como divinidades y objeto de adoración] en lugar de Dios, deben saber que Dios tiene registradas todas sus obras; pero tú [¡Oh, Muhámmad!] no eres responsable de lo que ellos hagan.",
+        "it": "Allah osserva coloro che si sono presi patroni all’infuori di Lui. Tu non sei <a class=f><sup foot_note=159601>1</sup></a> responsabile di loro.",
+        "ru": "Аллах является Хранителем для тех, которые взяли себе иных покровителей и помощников помимо Него (сохраняет их злодеяния для того, чтобы они получили воздаяние), и ты не являешься их попечителем и хранителем.",
+        "tr": "Allah'tan başka dostlar edinenlere gelince, Allah onların üzerinde devamlı bir gözetleyicidir. Ama sen onların üzerinde bir vekil değilsin.",
+        "de": "Über diejenigen, die sich anstatt Seiner Schutzherren nehmen, ist Allah Hüter, und du bist nicht ihr Sachwalter.",
+        "pt": "Quanto àqueles que adotam guardiães, em vez de Deus, saibam que ele é o seu Protetor e tu não és, de maneira alguma, seu guardião",
+        "nl": "En degenen die naast Allah beschermen nemen: Allah is de Waker over hen en jij (O Moehammad) bent over hen geen verantwoordelijke.",
+        "ur": "جن لوگوں نے اُس کو چھوڑ کر اپنے کچھ دُوسرے سرپرست <sup foot_note=\"187000\">1</sup> بنا رکھے ہیں، اللہ ہی اُن پر نگراں ہے، تم ان کے حوالہ دار نہیں ہو",
+        "bn": "আৰু যিসকলে আল্লাহৰ পৰিবৰ্তে আনক অভিভাৱকৰূপে গ্ৰহণ কৰে, আল্লাহে সিহঁতৰ প্ৰতি সম্যক দৃষ্টিদাতা। আৰু তুমি সিহঁতৰ ওপৰত কৰ্মবিধায়ক নহয়।",
+        "fa": "[ای پیامبر،] الله خود مراقبِ [رفتارِ] كسانى است كه غیر او را [دوست و] کارسازِ خود برگزیده‌اند و تو كارگزار [و مسئول رفتار] آنان نیستى."
+      }
+    },
+    {
+      "verse_number": 4279,
+      "verse_key": "42:7",
+      "arabic_text": "وَكَذَٰلِكَ أَوْحَيْنَآ إِلَيْكَ قُرْءَانًا عَرَبِيًّا لِّتُنذِرَ أُمَّ ٱلْقُرَىٰ وَمَنْ حَوْلَهَا وَتُنذِرَ يَوْمَ ٱلْجَمْعِ لَا رَيْبَ فِيهِ ۚ فَرِيقٌ فِى ٱلْجَنَّةِ وَفَرِيقٌ فِى ٱلسَّعِيرِ",
+      "phonetic_text": "Wakathalika awhaynailayka qur-anan AAarabiyyan litunthira omma alqurawaman hawlaha watunthira yawma aljamAAi larayba feehi fareequn fee aljannati wafareequn fee assaAAeer",
+      "translations": {
+        "fr": "Ainsi t’avons-Nous révélé un Coran (en langue) arabe pour que tu avertisses la Mère des cités<sup foot_note=195100>1</sup> et ceux qui l’entourent ; et pour prévenir du Jour du Rassemblement à propos duquel il n’y a nul doute. Il y aura alors un groupe au Paradis, et un (autre) groupe dans la Fournaise.",
+        "en": "So We have revealed an Arabic Quran to you, in order that you may warn the capital city and all who live nearby. And warn [especially] about the Day of Gathering, of which there is no doubt, when some shall be in the Garden and some in the blazing Flame.",
+        "es": "Te he revelado el Corán en idioma árabe para que amonestes a la madre de las ciudades<sup foot_note=169168>1</sup> y a todos los que habitan en sus alrededores<sup foot_note=169169>2</sup>. Para que adviertas acerca del día de la reunión [para el Juicio Final], sobre el cual no existe duda alguna. [Después del Juicio,] un grupo irá al Paraíso y otro al Infierno.",
+        "it": "In tal modo Ti abbiamo rivelato un Corano arabo, affinché tu ammonisca la Madre delle città <a class=f><sup foot_note=159602>1</sup></a> e coloro che [le abitano] attorno, e affinché tu avverta del Giorno della Riunione <a class=f><sup foot_note=159603>2</sup></a> , sul quale non c’è dubbio alcuno: una parte [di loro] sarà nel Giardino, un’altra parte nella Fiamma <a class=f><sup foot_note=159604>3</sup></a> .",
+        "ru": "Так Мы внушили тебе в откровении Коран на арабском языке, чтобы ты предостерегал Мать селений (жителей Мекки) и тех, кто вокруг нее, и предостерегал от Дня собрания, в котором нет сомнения. Одна часть людей окажется в Раю, а другая часть окажется в Пламени.",
+        "tr": "Böylece biz sana Arapça bir Kur'ân indirdik ki, şehirlerin anası (olan Mekke) halkını ve etrafındakileri uyarasın ve hakkında hiç şüphe olmayan kıyamet gününün dehşetinden onları korkutasın. Bir grup cennettedir, bir grup da cehennemdedir.",
+        "de": "Und so haben Wir dir einen arabischen Qur’an (als Offenbarung) eingegeben, damit du die Mutter der Städte und diejenigen rings umher warnst, und damit du vor dem Tag der Versammlung warnst, an dem es keinen Zweifel gibt. Eine Gruppe wird im (Paradies)garten sein und eine Gruppe in der Feuerglut.",
+        "pt": "E assim te revelamos um Alcorão árabe para que admoestes a Mãe das Metrópoles e tudo ao seu redor, admoesta-os, portanto, quanto ao dia indubitável do comparecimento, em que uma parte (da humanidade) estará no Paraíso e outra notártaro.",
+        "nl": "Zó hebben Wij aan jou een Arabische Koran geopenbaard, om de bewoners van Oommoelqoerâ (Mekkah) en degenen die in de omgeving ervan wonen te waarshuwen. En om te waarschuwen voor de Dag der verzameling, waaraan geen twijfel is; een deel gaat naar het Paradijs en een deel gaat naar de Hel.",
+        "ur": "ہاں، اِسی طرح اے نبیؐ ، یہ قرآنِ عربی ہم نے تمہاری طرف وحی کیا ہے <sup foot_note=\"187001\">1</sup> تاکہ تم بستیوں کے مرکز (شہرِ مکّہ)اور اُس کے گرد و پیش رہنے والوں کو خبر دار کردو، <sup foot_note=\"187002\">2</sup> اور جمع ہونے کے دن سے ڈرا دو <sup foot_note=\"187003\">3</sup> جس کے آنے میں کوئی شک نہیں۔ ایک گروہ کو جنّت میں جانا ہے اور دوسرے گروہ کو دوزخ میں",
+        "bn": "আৰু এইদৰেই আমি তোমাৰ প্ৰতি কোৰআন অৱতীৰ্ণ কৰিছোঁ আৰবী ভাষাত, যাতে তুমি মক্কা আৰু ইয়াৰ চাৰিওফালৰ জনগণক সতৰ্ক কৰিব পাৰা, লগতে যাতে সতৰ্ক কৰিব পাৰা কিয়ামতৰ দিন সম্পৰ্কে, যাৰ (সংঘটিত হোৱাত) কোনো সন্দেহ নাই। এদল থাকিব জান্নাতত আৰু এদল জ্বলন্ত অগ্নিত।",
+        "fa": "ما قرآن را این گونه به زبان عربی بر تو وحى كردیم تا اهل مکه و ساكنان اطرافش را بیم دهى و در مورد روز محشر ـ که تردیدی در وقوعش نیست ـ به آنان هشدار دهى. [آن روز،] گروهى بهشتى‌اند و گروهى در آتش سوزان."
+      }
+    },
+    {
+      "verse_number": 4280,
+      "verse_key": "42:8",
+      "arabic_text": "وَلَوْ شَآءَ ٱللَّهُ لَجَعَلَهُمْ أُمَّةً وَٰحِدَةً وَلَـٰكِن يُدْخِلُ مَن يَشَآءُ فِى رَحْمَتِهِۦ ۚ وَٱلظَّـٰلِمُونَ مَا لَهُم مِّن وَلِىٍّ وَلَا نَصِيرٍ",
+      "phonetic_text": "Walaw shaa Allahu lajaAAalahumommatan wahidatan walakin yudkhilu man yashaofee rahmatihi waththalimoonama lahum min waliyyin wala naseer",
+      "translations": {
+        "fr": "Si Allah l’avait voulu, Il en aurait fait une communauté unique. Mais Il accueille qui Il veut dans Sa miséricorde et les injustes n’ont ni protecteur ni allié.",
+        "en": "If God had so pleased, He could have made them a single community, but He admits to His mercy whoever He will; the evildoers will have no one to protect or help them.",
+        "es": "Si Dios quisiera habría decretado que todos formaran una sola nación [con un credo único]<sup foot_note=169170>1</sup>, pero agracia a quien quiere con Su misericordia, mientras que los opresores no tendrán protector alguno ni socorredor.",
+        "it": "Se Allah avesse voluto, avrebbe fatto [degli uomini] un’unica comunità. Ma Egli lascia entrare chi vuole nella Sua misericordia <a class=f><sup foot_note=159605>1</sup></a> . Gli ingiusti non avranno né patrono né alleato.",
+        "ru": "Если бы Аллах пожелал, то сделал бы их одной общиной верующих. Однако Он вводит в Свою милость того, кого пожелает. А у беззаконников не будет ни покровителя, ни помощника.",
+        "tr": "Eğer Allah dileseydi bütün insanları bir tek ümmet yapardı. Fakat O yalnız dilediğini rahmetinin içine almaktadır. Zalimler için ne bir dost vardır, ne de bir yardımcı.",
+        "de": "Und wenn Allah gewollt hätte, hätte Er sie wahrlich zu einer einzigen Gemeinschaft gemacht. Aber Er läßt, wen Er will, in Seine Barmherzigkeit eingehen. Und die Ungerechten haben weder Schutzherrn noch Helfer.",
+        "pt": "Se Deus quisesse, tê-los-ia (os humanos) constituído em uma só nação, porque acolhe em Sua misericórdia quem Lhesapraz. Quando aos iníquos, não terão protetor, nem socorredor.",
+        "nl": "Als Allah het had gewild, dan had Hij hen (als behorend) tot één godsdienst (Oemmah) gemaakt, maar Allah laat tot Zijn Barmhartigheid toe wie Hij wil. En voor de onrechtvaardigen is er geen beschermer en geen helper.",
+        "ur": "اگر اللہ چاہتا تو اِن سب کو ایک ہی اُمّت بنا دیتا، مگر وہ جسے چاہتا ہے اپنی رحمت میں داخل کرتا ہے، اور ظالموں کا نہ کوئی ولی ہے اور نہ مددگار۔ <sup foot_note=\"187004\">1</sup>",
+        "bn": "আৰু আল্লাহে ইচ্ছা কৰিলে সিহঁতক এটাই উম্মত কৰিব পাৰিলেহেঁতেন, কিন্তু তেওঁ যাক ইচ্ছা কৰে কেৱল তাকহে নিজ অনুগ্ৰহত প্ৰৱেশ কৰায়। আৰু যালিমসকল, সিহঁতৰ কোনো অভিভাৱক নাই আৰু কোনো সহায়কাৰীও নাই।",
+        "fa": "اگر الله مى‌خواست، همۀ مردم را امتی واحد [که الله را به یگانگی عبادت کنند] قرار مى‌داد؛ ولى [به انسان اختیار داد؛ او تعالی] هر کس را بخواهد، به رحمت خویش درمی‌آورد؛ و مشرکان هیچ کارساز و یاورى نخواهند داشت."
+      }
+    },
+    {
+      "verse_number": 4281,
+      "verse_key": "42:9",
+      "arabic_text": "أَمِ ٱتَّخَذُوا۟ مِن دُونِهِۦٓ أَوْلِيَآءَ ۖ فَٱللَّهُ هُوَ ٱلْوَلِىُّ وَهُوَ يُحْىِ ٱلْمَوْتَىٰ وَهُوَ عَلَىٰ كُلِّ شَىْءٍ قَدِيرٌ",
+      "phonetic_text": "Ami ittakhathoo min doonihi awliyaafallahu huwa alwaliyyu wahuwa yuhyee almawtawahuwa AAala kulli shay-in qadeer",
+      "translations": {
+        "fr": "Ou alors se sont-ils donnés en dehors de Lui des protecteurs ? Or c’est Allah Qui est le Protecteur, et c’est Lui Qui fait revivre les morts, et c’est Lui Qui est de Toute chose Infiniment Capable.",
+        "en": "How can they take protectors other than Him? God alone is the Protector; He gives life to the dead; He has power over all things.",
+        "es": "¿Acaso toman a los ídolos como protectores en lugar de Dios? Dios es el Protector, Él resucitará a los muertos, porque tiene poder sobre todas las cosas [y por eso es que solo Él es Quien merece ser adorado].",
+        "it": "Prenderanno forse patroni all’infuori di Lui? Allah, Egli è il solo patrono. Colui Che ridà la vita ai morti, Egli è l’Onnipotente.",
+        "ru": "Неужели они взяли себе покровителей и помощников вместо Него? Аллах является Покровителем. Он оживляет мертвых, и Он способен на всякую вещь.",
+        "tr": "Yoksa onlar Allah'tan başka dostlar mı edindiler? Oysa asıl dost Allah'tır. Ölüleri diriltecek olan da O'dur. O'nun her şeye gücü yeter.",
+        "de": "Oder haben sie sich anstatt Seiner Schutzherren genommen? Allah (allein) ist doch der Schutzherr. Er macht die Toten wieder lebendig, und Er hat zu allem die Macht.",
+        "pt": "Como! Adotem protetores, em vez d'Ele? Pois, saibam que Deus é o Protetor e é Quem ressuscita os mortos, porque éOnipotente.",
+        "nl": "Nemen jullie naast Allah beschermers? En Allah is de Beschermer. En Hij doet het dode leven, en Hij is Almachtig over alle zaken,",
+        "ur": "کیا یہ (ایسے نادان ہیں کہ)اِنہوں نے اُسے چھوڑ کر دُوسرے ولی بنا رکھے ہیں؟ ولی تو اللہ ہی ہے، وہی مُردوں کو زندہ کرتا ہے ، اور وہ ہر چیز پر قادر ہے۔ <sup foot_note=\"187005\">1</sup>",
+        "bn": "সিহঁতে আল্লাহৰ পৰিবৰ্তে আনক অভিভাৱকৰূপে গ্ৰহণ কৰিছে নেকি, কিন্তু আল্লাহ, কেৱল তেওঁহে প্ৰকৃত অভিভাৱক, আৰু কেৱল তেৱেঁই মৃতক জীৱিত কৰে। তেওঁ সকলো বস্তুৰ ওপৰত ক্ষমতাৱান।",
+        "fa": "آیا آنان به جای او کسی [دیگر را به عنوان دوست و] کارساز برگزیده‌اند؟ حال آنكه كارساز [جهانیان] الله است و اوست كه مردگان را زنده مى‌كند و بر هر كارى تواناست."
+      }
+    },
+    {
+      "verse_number": 4282,
+      "verse_key": "42:10",
+      "arabic_text": "وَمَا ٱخْتَلَفْتُمْ فِيهِ مِن شَىْءٍ فَحُكْمُهُۥٓ إِلَى ٱللَّهِ ۚ ذَٰلِكُمُ ٱللَّهُ رَبِّى عَلَيْهِ تَوَكَّلْتُ وَإِلَيْهِ أُنِيبُ",
+      "phonetic_text": "Wama ikhtalaftum feehi min shay-in fahukmuhuila Allahi thalikumu Allahu rabbeeAAalayhi tawakkaltu wa-ilayhi oneeb",
+      "translations": {
+        "fr": "Quels que soient vos différends, c’est Allah Qui en détient le jugement. Tel est Allah, mon Seigneur ; à Lui je m’en remets, et vers Lui je reviens, repentant.",
+        "en": "Whatever you may differ about is for God to judge. [Say], ‘Such is God, my Lord. In Him I trust and to Him I turn,",
+        "es": "En aquello en que disputéis, su juicio debe remitirse a Dios<sup foot_note=169171>1</sup>. Dios es mi Señor, a Él me encomiendo y a Él me vuelvo arrepentido.",
+        "it": "Su tutte le vostre controversie, il giudizio [appartiene] ad Allah <a class=f><sup foot_note=159606>1</sup></a> . Questi è Allah, il mio Signore: a Lui mi affido e a Lui mi volgo pentito.",
+        "ru": "Решение всего, в чем вы расходитесь во мнениях, остается за Аллахом. Скажи: «Таков Аллах, мой Господь! Я уповаю только на Него и к Нему обращаюсь».",
+        "tr": "Hakkında ihtilafa düştüğünüz herhangi bir şeyin hükmü Allah'a aittir. İşte benim Rabbim olan Allah budur. Ben yalnız O'na güvendim ve yalnız O'na yöneliyorum.",
+        "de": "Und worüber ihr auch immer uneinig seid, das Urteil darüber steht Allah (allein) zu. Dies ist doch Allah, mein Herr. Auf Ihn verlasse ich mich, und Ihm wende ich mich reuig zu.",
+        "pt": "E seja qual for a causa da vossa divergência, a decisão só a Deus compete. Tal é Deus, meu Senhor! A Ele meencomendo e a Ele retornarei contrito.",
+        "nl": "En waar jullie ook van mening over verschillen: de beslissing daarover is aan Allah. (Zeg:) \"Dat is Allah, mijn Heer, op Hem vertrouw ik en tot Hem keer ik weer.\"",
+        "ur": "<sup foot_note=\"171535\">1</sup> تمہارے درمیان جس معاملہ میں بھی اختلاف ہو ، اُس کا فیصلہ کرنا اللہ کا کام ہے۔ <sup foot_note=\"171536\">2</sup> وہی اللہ میرا <sup foot_note=\"171537\">3</sup> ربّ ہے ، اُسی پر میں نے بھروسہ کیا ، اور اُسی کی طرف میں رجوع کرتا ہوں۔ <sup foot_note=\"171538\">4</sup>",
+        "bn": "আৰু তোমালোকে যি বিষয়তে মতভেদ নকৰা কিয়, তাৰ মীমাংসা আছে কেৱল আল্লাহৰেই ওচৰত। তেৱেঁই আল্লাহ, মোৰ প্ৰতিপালক; তেওঁৰ ওপৰতেই মই নিৰ্ভৰ কৰিছোঁ আৰু মই তেওঁৰেই অভিমুখী হওঁ।",
+        "fa": "[بگو: «ای مردم،] هر اختلافى بین شماست، داورى‌اش با الله است. این است الله، پروردگار من؛ بر او توکل كرده‌ام و به پیشگاهش بازمی‌آیم»."
+      }
+    },
+    {
+      "verse_number": 4283,
+      "verse_key": "42:11",
+      "arabic_text": "فَاطِرُ ٱلسَّمَـٰوَٰتِ وَٱلْأَرْضِ ۚ جَعَلَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَٰجًا وَمِنَ ٱلْأَنْعَـٰمِ أَزْوَٰجًا ۖ يَذْرَؤُكُمْ فِيهِ ۚ لَيْسَ كَمِثْلِهِۦ شَىْءٌ ۖ وَهُوَ ٱلسَّمِيعُ ٱلْبَصِيرُ",
+      "phonetic_text": "Fatiru assamawatiwal-ardi jaAAala lakum min anfusikum azwajanwamina al-anAAami azwajan yathraokum feehilaysa kamithlihi shay-on wahuwa assameeAAu albaseer",
+      "translations": {
+        "fr": "Créateur Premier des cieux et de la terre, Il vous a donné des épouses issues de vous-mêmes ; et à partir des bestiaux, des couples. Ainsi vous dissémine-t-Il (sur terre). Il est à nul autre semblable, Il Entend Tout et Il Voit Tout.",
+        "en": "the Creator of the heavens and earth.’ He made mates for you from among yourselves––and for the animals too––so that you may multiply. There is nothing like Him: He is the All Hearing, the All Seeing.",
+        "es": "Es el Originador de los cielos y de la Tierra. Ha creado cónyuges de entre vosotros mismos [para que encontréis sosiego], y a los rebaños también los ha creado en parejas, y así es como os multiplicáis. No hay nada ni nadie semejante a Dios, y Él todo lo oye, todo lo ve.",
+        "it": "È il Creatore dei cieli e della terra. Da voi stessi ha tratto le vostre spose, e [vi ha dato] il bestiame a coppie. Così vi moltiplica. Niente è simile a Lui <a class=f><sup foot_note=159607>1</sup></a> . Egli è l’Audiente, Colui Che tutto osserva.",
+        "ru": "Творец небес и земли! Он создал для вас супруг из вас самих, а также скот парами. Так Он размножает вас. Нет никого подобного Ему, и Он - Слышащий, Видящий.",
+        "tr": "O göklerin ve yerin yaratıcısıdır. O sizin için kendi nefsinizden eşler ve hayvanlardan da çiftler yaratmıştır. O, sizi bu düzen içerisinde üretip çoğaltıyor. O'nun benzeri olan hiçbir şey yoktur. O, her şeyi işitir ve görür.",
+        "de": "(Er ist) der Erschaffer der Himmel und der Erde. Er hat euch aus euch selbst Gattinnen gemacht, und auch aus dem Vieh Paare, wodurch Er euch vermehrt. Nichts ist Ihm gleich; und Er ist der Allhörende und Allsehende.",
+        "pt": "É o Originador dos céus e da terra, (foi) Quem vos criou esposas, de vossas espécies, assim como pares de todos osanimais. Por esse meio vos multiplica. Nada se assemelha a Ele, e é o Oniouvinte, o Onividente.",
+        "nl": "De Schepper van de hemelen en de aarde, Hij heeft voor jullie van julliezelf en van de dieren paren geschapen. Hij vermenigvuldigt jullie, niets is aan Hem gelijk. En Hij is de Alhorende, de Alziende.",
+        "ur": "آسمانوں اور زمین کا بنانے والا ، جس نے تمہاری اپنی جنس سے تمہارے لیے جوڑے پیدا کیے، اور اسی طرح جانوروں میں بھی (اُنہی کے ہم جنس)جوڑے بنائے، اور اِس طریقہ سے وہ تمہاری نسلیں پھیلاتا ہے۔ کائنات کی کوئی چیز اس کے مشابہ نہیں، <sup foot_note=\"187006\">1</sup> وہ سب کچھ سُننے اور دیکھنے والا ہے، <sup foot_note=\"187007\">2</sup>",
+        "bn": "তেৱেঁই আকাশসমূহ আৰু পৃথিৱীৰ সৃষ্টিকৰ্তা, তেৱেঁই তোমালোকৰ মাজৰ পৰা তোমালোকৰ যোৰা সৃষ্টি কৰিছে আৰু চতুষ্পদ জন্তুৰ মাজতো যোৰা সৃষ্টি কৰিছে। এইদৰেই তেওঁ তোমালোকৰ বংশ বিস্তাৰ কৰে; একোৱেই তেওঁৰ সদৃশ নহয়, তেওঁ সৰ্বশ্ৰোতা, সৰ্বদ্ৰষ্টা।",
+        "fa": "او آفرینندۀ آسمان‌ها و زمین است؛ همسرانى از [جنسِ] خود شما برایتان قرار داد و از چهارپایان نیز جفت آفرید؛ به این صورت، تعداد شما را افزایش مى‌دهد. هیچ چیز همانند الله نیست و همو شنوا و بیناست."
+      }
+    },
+    {
+      "verse_number": 4284,
+      "verse_key": "42:12",
+      "arabic_text": "لَهُۥ مَقَالِيدُ ٱلسَّمَـٰوَٰتِ وَٱلْأَرْضِ ۖ يَبْسُطُ ٱلرِّزْقَ لِمَن يَشَآءُ وَيَقْدِرُ ۚ إِنَّهُۥ بِكُلِّ شَىْءٍ عَلِيمٌ",
+      "phonetic_text": "Lahu maqaleedu assamawatiwal-ardi yabsutu arrizqa liman yashaowayaqdiru innahu bikulli shay-in AAaleem",
+      "translations": {
+        "fr": "Il détient les clefs des cieux et de la terre, et dispense Ses bienfaits à qui Il veut, avec générosité ou parcimonie. Il est de Toute chose Savant.",
+        "en": "The keys of the heavens and the earth are His; He provides abundantly or sparingly for whoever He will; He has full knowledge of all things.",
+        "es": "Suyas son las llaves de los cielos y de la Tierra, concede Su sustento a quien Él quiere con abundancia o se lo restringe a quien quiere. Él lo sabe todo.",
+        "it": "[Appartengono] a Lui le chiavi dei cieli e della terra. Elargisce generosamente a chi vuole e a chi vuole lesina. In verità Egli è onnisciente.",
+        "ru": "Ему принадлежат ключи небес и земли. Он увеличивает или ограничивает удел, кому пожелает. Он знает о всякой вещи.",
+        "tr": "Göklerin ve yerin kilitleri O'na aittir. O dilediğine rızkı genişletir ve daraltır. Şüphesiz ki O, her şeyi hakkıyla bilir.",
+        "de": "Ihm gehören die Schlüssel der Himmel und der Erde. Er gewährt die Versorgung großzügig, wem Er will, und bemißt auch. Gewiß, Er weiß über alles Bescheid.",
+        "pt": "Suas são as chaves dos céus e da terra; prodigaliza e restringe a Sua graça a quem Lhe apraz, porque é Onisciente.",
+        "nl": "Aan Hem behoren de sleutels van de hemelen en de aarde, Hij verruimt de voorzieningen voor wie Hij wil en Hij beperkt. Voorwaar, Hij is Alwetend over alle zaken.",
+        "ur": "آسمانوں اور زمین کی خزانوں کی کُنجیاں اُسی کے پاس ہیں، جسے چاہتا ہے کھُلا رزق دیتا ہے اور جسے چاہتا ہے نَپا تُلا دیتا ہے، اُسے ہر چیز کا علم ہے۔ <sup foot_note=\"187008\">1</sup>",
+        "bn": "আকাশসমূহ আৰু পৃথিৱীৰ চাবি-কাঠি তেওঁৰেই ওচৰত। তেওঁ যাৰ বাবে ইচ্ছা কৰে তাৰ জীৱিকা বৃদ্ধি কৰি দিয়ে আৰু সংকুচিতও কৰে। নিশ্চয় তেওঁ সকলো বস্তু সম্পৰ্কে সৰ্বজ্ঞ।",
+        "fa": "کلید‌ [گنجینه‌های] آسمان‌ها و زمین از آنِ اوست؛ [نعمت و] روزی را بر هر کس که بخواهد، گسترده می‌دارد و یا تنگ می‌گرداند. به راستی که او بر هر چیزی داناست."
+      }
+    },
+    {
+      "verse_number": 4285,
+      "verse_key": "42:13",
+      "arabic_text": "۞ شَرَعَ لَكُم مِّنَ ٱلدِّينِ مَا وَصَّىٰ بِهِۦ نُوحًا وَٱلَّذِىٓ أَوْحَيْنَآ إِلَيْكَ وَمَا وَصَّيْنَا بِهِۦٓ إِبْرَٰهِيمَ وَمُوسَىٰ وَعِيسَىٰٓ ۖ أَنْ أَقِيمُوا۟ ٱلدِّينَ وَلَا تَتَفَرَّقُوا۟ فِيهِ ۚ كَبُرَ عَلَى ٱلْمُشْرِكِينَ مَا تَدْعُوهُمْ إِلَيْهِ ۚ ٱللَّهُ يَجْتَبِىٓ إِلَيْهِ مَن يَشَآءُ وَيَهْدِىٓ إِلَيْهِ مَن يُنِيبُ",
+      "phonetic_text": "SharaAAa lakum mina addeeni mawassa bihi noohan wallathee awhaynailayka wama wassayna bihi ibraheemawamoosa waAAeesa an aqeemoo addeena walatatafarraqoo feehi kabura AAala almushrikeena matadAAoohum ilayhi Allahu yajtabee ilayhi man yashaowayahdee ilayhi man yuneeb",
+      "translations": {
+        "fr": "Il a prescrit pour vous, dans la religion, ce qu’Il a prescrit à Noé et ce que Nous t’avons révélé.<sup foot_note=195101>1</sup> C’est ce que Nous avons aussi prescrit à Abraham, à Moïse et à Jésus : « Observez la religion, et qu’elle ne vous soit pas un prétexte de scission. » Ce à quoi tu invites les associâtres leur est lourd à porter. Allah choisit ceux qu’Il veut pour faire d’eux Ses préférés, et Il guide vers Lui quiconque se repent.",
+        "en": "In matters of faith, He has laid down for you [people] the same commandment that He gave Noah, which We have revealed to you [Muhammad] and which We enjoined on Abraham and Moses and Jesus: ‘Uphold the faith and do not divide into factions within it’- what you [Prophet] call upon the idolaters to do is hard for them; God chooses whoever He pleases for Himself and guides towards Himself those who turn to Him.",
+        "es": "Os he legislado la misma religión [monoteísta] que le había encomendado a Noé, y que te he revelado a ti [en el Corán] y que le encomendé a Abraham, a Moisés y a Jesús, para que seáis firmes en la práctica de la religión, y no creéis divisiones. Pero a los idólatras les parece difícil aquello a lo que tú les invitas. Dios elige [para que acepte la fe] a quien quiere, y guía hacia Él a quien se arrepiente.",
+        "it": "[Egli] ha stabilito per voi, nella religione, la stessa via che aveva raccomandato a Noè, quella che riveliamo a te, [o Muhammad,] e che imponemmo ad Abramo, a Mosè e a Gesù: «Assolvete al culto e non fatene motivo di divisione». Ciò a cui li inviti è invero gravoso per gli associatori: Allah sceglie e avvicina a Sé chi vuole e a Sé guida chi Gli Si rivolge [pentito],",
+        "ru": "Он узаконил для вас в религии то, что заповедал Нуху (Ною), и то, что Мы внушили тебе в откровении, и то, что Мы заповедали Ибрахиму (Аврааму), Мусе (Моисею) и Исе (Иисусу): «Исповедуйте религию и не расходитесь во мнениях относительно нее». Тяжко для многобожников то, к чему ты их призываешь. Аллах избирает для Себя того, кого пожелает, и направляет к Себе того, кто обращается к Нему.",
+        "tr": "Allah dinden Nuh'a tavsiye buyurduğu şeyi sizin için de bir kanun yaptı ve (Ey Muhammed!) sana vahyettiğimizi, İbrahim'e, Musa'ya ve İsa'ya tavsiye buyurduğumuzu da şeriat kıldı. Şöyle ki: Dini doğru tutun ve onda ayrılığa düşmeyin. Fakat senin kendilerini davet ettiğin şey, müşriklere ağır geldi. Allah dilediğini kendine seçer ve kendisine yöneleni de doğru yola iletir.",
+        "de": "Er hat euch von der Religion festgelegt, was Er Nuh anbefahl und was Wir dir (als Offenbarung) eingegeben haben und was Wir Ibrahim, Musa und ’Isa anbefahlen: Haltet die (Vorschriften der) Religion ein und spaltet euch nicht darin (in Gruppen). Den Götzendienern setzt das schwer zu, wozu du sie aufrufst. Allah erwählt dazu, wen Er will, und leitet dazu, wer sich (Ihm) reuig zuwendet.",
+        "pt": "Prescreveu-vos a mesma religião que havia instituído para Noé, a qual te revelamos, a qual havíamos recomendado aAbraão, a Moisés e a Jesus, (dizendo-lhes): Observai a religião e não discrepeis acerca disso; em verdade, os idólatras seressentiram daquilo a que os convocaste, Deus elege quem Lhe apraz e encaminha para Si o contrito.",
+        "nl": "Hij heeft jullie de godsdienst uitgelegd: wat Hij heeft opgedragen aan Nôeh, en hetgeen Wij aan jou geopenbaard hebben en wat Wij aan Ibrâhîm en Môesa en 'Isa hebben opgedragen: dat jullie de godsdienst onderhouden en dat jullie daarover niet verdeeld raken. Het is een zware zaak voor de veelgodenaanbidders, waartoe jullie hen oproepen. Allah kiest voor Zich wie Hij wil en Hij leidt naar Zich wie terugkeert.",
+        "ur": "اُس نےتمہارے لیے دین کا وہی طریقہ مقرر کیا ہے جس کا حکم اُس نے نُوحؑ کو دیا تھا، اور جسے (اے محمدؐ)اب تمہاری طرف ہم نے وحی کے ذریعہ سے بھیجا ہے، اور جس کی ہدایت ہم ابراہیمؑ  اور موسیٰؑ اور عیسیٰؑ کو دے چکے ہیں، اِس تاکید کے ساتھ کہ قائم کرو اِس دین کو اور اُس میں متفرق نہ ہوجاوٴ۔ <sup foot_note=\"187009\">1</sup> یہی بات  اِن مشرکین کو سخت ناگوار ہوئی ہے جس کی طرف (اے محمدؐ)تم انہیں دعوت دے رہے ہو۔ اللہ جسے چاہتا ہے اپنا کر لیتا ہے، اور وہ اپنی طرف آنے کا راستہ اُسی کو دکھاتا ہے جو اُس کی طرف رجوع کرے۔ <sup foot_note=\"187010\">2</sup>",
+        "bn": "তেৱেঁই তোমালোকৰ বাবে দ্বীন বিধিবদ্ধ কৰিছে, যাৰ নিৰ্দেশ তেওঁ নূহক প্ৰদান কৰিছিল; আৰু আমি তোমাৰ প্ৰতি ইয়াৰেই অহী প্ৰেৰণ কৰিছোঁ লগতে ইব্ৰাহীম, মুছা আৰু ঈছাকো ইয়াৰ নিৰ্দেশ দিছিলোঁ যে, তোমালোকে দ্বীনক প্ৰতিষ্ঠিত কৰা আৰু ইয়াৰ মাজত বিভেদ সৃষ্টি নকৰিবা। তুমি মুশ্বৰিকসকলক যিটোৰ ফালে আহ্বান কৰি আছা সেয়া সিহঁতৰ ওচৰত কঠিন বুলিহে ধাৰণা হয়। আল্লাহে যাক ইচ্ছা কৰে তাকহে তেওঁৰ দ্বীনৰ প্ৰতি আকৃষ্ট কৰে আৰু যিয়ে তেওঁৰ অভিমুখী হয় তাক তেওঁৰ দ্বীনৰ প্ৰতি হিদায়ত দান কৰে।",
+        "fa": "از دین همان را براى شما مقرر كرد كه به نوح امر كرده بود؛ و نیز آنچه به تو وحى كردیم و آنچه به ابراهیم و موسى و عیسى امر كردیم؛ اینكه: «دین را برپا نگاه دارید و در مورد آن فرقه‌فرقه نشوید [و اختلاف نورزید]». [پذیرشِ] دعوت تو بر مشركان گران آمده است. الله است كه هر كس را بخواهد [توفیقِ عبادت می‌دهد و] به سوى خویش برمى‌گزیند؛ و هر کس را [که توبه کند و به درگاهش] بازآید، به سوى خویش هدایت خواهد كرد."
+      }
+    },
+    {
+      "verse_number": 4286,
+      "verse_key": "42:14",
+      "arabic_text": "وَمَا تَفَرَّقُوٓا۟ إِلَّا مِنۢ بَعْدِ مَا جَآءَهُمُ ٱلْعِلْمُ بَغْيًۢا بَيْنَهُمْ ۚ وَلَوْلَا كَلِمَةٌ سَبَقَتْ مِن رَّبِّكَ إِلَىٰٓ أَجَلٍ مُّسَمًّى لَّقُضِىَ بَيْنَهُمْ ۚ وَإِنَّ ٱلَّذِينَ أُورِثُوا۟ ٱلْكِتَـٰبَ مِنۢ بَعْدِهِمْ لَفِى شَكٍّ مِّنْهُ مُرِيبٍ",
+      "phonetic_text": "Wama tafarraqoo illa minbaAAdi ma jaahumu alAAilmu baghyan baynahum walawlakalimatun sabaqat min rabbika ila ajalin musamman laqudiyabaynahum wa-inna allatheena oorithoo alkitaba minbaAAdihim lafee shakkin minhu mureeb",
+      "translations": {
+        "fr": "Ils ne se sont divisés qu’après que la science leur fut parvenue (et ce par) hostilité des uns envers les autres. N’eût été le verdict de ton Seigneur déjà prononcé pour un terme nommé, ils auraient été départagés. Mais ceux qui, après eux, ont hérité du Livre, sont dans le doute le plus troublant (au sujet de leur religion).",
+        "en": "They divided, out of rivalry, only after knowledge had come to them, and, if it had not been for a decree already passed by your Lord to reprieve them until an appointed time, they would already have been judged. Those after them, who inherited the Scripture, are in disquieting doubt about it.",
+        "es": "No se dividieron<sup foot_note=169172>1</sup> sino después de haberles llegado el conocimiento, por codicia entre ellos [acerca del liderazgo]. Si no fuese por una palabra previa de tu Señor que decidió un plazo prefijado [para el fin del mundo], todo habría sido decidido entre ellos. Quienes heredaron el Libro<sup foot_note=169173>2</sup> tienen dudas.",
+        "it": "Non si divisero <a class=f><sup foot_note=159608>1</sup></a> , opponendosi gli uni agli altri, se non dopo che giunse loro la conoscenza [della Verità]. Se non fosse per una precedente Parola del tuo Signore <a class=f><sup foot_note=159609>2</sup></a> , già sarebbe stato deciso tra loro. In verità coloro che ricevettero la Scrittura dopo di loro, sono immersi nel dubbio in proposito <a class=f><sup foot_note=159610>3</sup></a> .",
+        "ru": "Они распались только после того, как к ним явилось знание, по причине зависти и несправедливого отношения друг к другу. И если бы не было прежде Слова от твоего Господа об отсрочке до назначенного срока, то их спор был бы решен. Воистину, те, которые унаследовали Писание после них, испытывают к нему смутные сомнения.",
+        "tr": "Onlar kendilerine bilgi geldikten sonra, ancak aralarındaki, çekememezlik yüzünden ayrılığa düştüler. Eğer Rabbin tarafından azabın ertelendiğine dair bir söz geçmemiş olsaydı aralarında mutlaka hüküm verilirdi. Kendilerinden sonra Kitab'a vâris kılınan kitap ehli de Kur'ân hakkında bir şüphe ve tereddüt içindedirler.",
+        "de": "Und sie spalteten sich erst, nachdem das Wissen zu ihnen gekommen war - aus Mißgunst untereinander. Und wenn es nicht ein früher ergangenes Wort von deinem Herrn auf eine festgesetzte Frist gäbe, so wäre wahrlich zwischen ihnen entschieden worden. Gewiß, diejenigen, denen die Schrift nach ihnen zum Erbe gegeben wurde, sind darüber in starkem Zweifel.",
+        "pt": "Mas não se dividiram senão por inveja, depois de lhes ter chegada a ciência. E se não tivesse sido por uma palavraproferida por teu Senhor, para tolerá-los até um término prefixado, já os teria julgado. Em verdade, aqueles que, depoisdeles, herdaram o Livro, estão em uma inquietante dúvida, acerca do mesmo.",
+        "nl": "Zij raakten pas verdeeld toen de kennis tot hen kwam, elkaar onrecht aandoend. En als er niet een Woord (bevel) van jouw Heer was uitgegaan, tot een bepaalde tijd, den zouden zij al bestraft zijn. En voorwaar, degenen die de Schrift na hen erfden (de Joden en de Christenen), verkeren daarover zeker in vergaande twijfel.",
+        "ur": "لوگو ں میں جو تفرقہ رُونما ہوا وہ اِس کے بعد ہوا کہ اُن کے پاس علم آچکا تھا، <sup foot_note=\"187011\">1</sup> اور اس بنا پر ہوا کہ وہ آپس میں ایک دُوسرے پر زیادتی کرنا چاہتے تھے۔ <sup foot_note=\"187012\">2</sup> اگر تیرا ربّ پہلے ہی یہ نہ فرما چکا ہوتا کہ ایک وقتِ مقرر تک فیصلہ ملتوی رکھا جائے گا تو ان کا قضیہ چُکا دیا گیا ہوتا۔ <sup foot_note=\"187013\">3</sup> اور حقیقت یہ ہے کہ اَگلوں کے بعد جو لوگ کتاب کے وارث بنائے گئے  وہ اُس کی طرف سے بڑے اضطراب انگیز شک میں پڑے ہوئے ہیں۔ <sup foot_note=\"187014\">4</sup>",
+        "bn": "আৰু সিহঁতৰ ওচৰত জ্ঞান অহাৰ পিছতো কেৱল পাৰস্পৰিক বিদ্বেষবশত সিহঁতে নিজৰ মাজত মতভেদ ঘটায়। এটা নিৰ্ধাৰিত সময়লৈকে অৱকাশ দিয়া হ'ব বুলি তোমাৰ প্ৰতিপালকৰ পূৰ্ব সিদ্ধান্ত নাথাকিলে সিহঁতৰ বিষয়ে চূড়ান্ত ফয়চালা হৈ গ’লহেঁতেন। সিহঁতৰ পিছত যিসকলে কিতাবৰ উত্তৰাধিকাৰী হৈছে, নিশ্চয় সিহঁতে সেই বিষয়ে বিভ্ৰান্তিকৰ সন্দেহত পতিত হৈছে।",
+        "fa": "هنگامی که دلایل محکمِ نبوتِ پیامبر بر کافران عرضه شد، آنان از روی برترى‌خواهى [و حسادتی] كه بینشان بود، راه تفرقه پیمودند؛ و اگر فرمان پروردگارت [در موردِ مهلت و تأخیرِ عذاب] تا زمانى معین، از پیش مقرر نشده بود، [بی‌درنگ] میانشان داورى مى‌شد؛ و اما پس از کافران [و به دلیل انكار و اختلاف آنان] وارثان كتاب [تورات و انجیل نیز] در مورد قرآن، سخت در تردید و بدگمانى‌ هستند."
+      }
+    },
+    {
+      "verse_number": 4287,
+      "verse_key": "42:15",
+      "arabic_text": "فَلِذَٰلِكَ فَٱدْعُ ۖ وَٱسْتَقِمْ كَمَآ أُمِرْتَ ۖ وَلَا تَتَّبِعْ أَهْوَآءَهُمْ ۖ وَقُلْ ءَامَنتُ بِمَآ أَنزَلَ ٱللَّهُ مِن كِتَـٰبٍ ۖ وَأُمِرْتُ لِأَعْدِلَ بَيْنَكُمُ ۖ ٱللَّهُ رَبُّنَا وَرَبُّكُمْ ۖ لَنَآ أَعْمَـٰلُنَا وَلَكُمْ أَعْمَـٰلُكُمْ ۖ لَا حُجَّةَ بَيْنَنَا وَبَيْنَكُمُ ۖ ٱللَّهُ يَجْمَعُ بَيْنَنَا ۖ وَإِلَيْهِ ٱلْمَصِيرُ",
+      "phonetic_text": "Falithalika fadAAu wastaqimkama omirta wala tattabiAA ahwaahum waqul amantubima anzala Allahu min kitabin waomirtuli-aAAdila baynakum Allahu rabbuna warabbukum lanaaAAmaluna walakum aAAmalukum la hujjatabaynana wabaynakumu Allahu yajmaAAu baynanawa-ilayhi almaseer",
+      "translations": {
+        "fr": "Convie donc (les hommes à cette foi) ! Suis (la voie) de la droiture comme il t’a été ordonné ! Ne te laisse pas aller à suivre leurs penchants, et dis : « Je crois à tout Livre qu’Allah a fait descendre (en révélation), et ordre m’a été donné de juger entre vous équitablement. Allah est notre Seigneur et le vôtre. Nous avons nos propres œuvres et vous avez les vôtres. Il n’est aucun argument (de dispute) entre nous (désormais) : Allah nous réunira tous et c’est vers Lui que sera le devenir. »",
+        "en": "So [Prophet] call people to that faith and follow the straight path as you have been commanded. Do not go by what they desire, but say, ‘I believe in whatever Scripture God has sent down. I am commanded to bring justice between you. God is our Lord and your Lord- to us our deeds and to you yours, so let there be no argument between us and you- God will gather us together, and to Him we shall return.’",
+        "es": "Por esto [¡Oh, Muhámmad!], invita [a aceptar el Islam] y obra rectamente como te fue ordenado, no sigas sus deseos<sup foot_note=169174>1</sup> y diles: “Creo en los Libros que Dios reveló [en su forma original], y me fue ordenado establecer justicia entre vosotros. Dios es nuestro Señor y también el vuestro, nosotros seremos juzgados por nuestras obras y vosotros por las vuestras. No hay necesidad de disputas entre nosotros y vosotros<sup foot_note=169175>2</sup>. Dios nos reunirá a todos cuando regresemos a Él para ser juzgados”.",
+        "it": "Invitali dunque [alla fede], procedi con rettitudine come ti è stato ordinato e non seguire le loro passioni. Di’: «Credo in tutta la Scrittura che Allah ha rivelato. Mi è stato ordinato di giudicare con equità tra voi. Allah è il nostro Signore e il vostro Signore. A noi le nostre azioni, a voi le vostre. Nessuna polemica tra noi e voi. Ci riunirà Allah e verso Lui è la meta [ultima]» <a class=f><sup foot_note=159614>1</sup></a> .",
+        "ru": "Посему проповедуй и следуй прямым путем, как тебе было велено. Не потакай их желаниям и говори: «Я уверовал в то, что Аллах ниспослал из Писания, и мне велено относиться к вам справедливо. Аллах - наш Господь и ваш Господь. Нам достанутся наши деяния, а вам - ваши деяния. Нет места доводам (дальнейшим спорам) между нами и вами. Аллах соберет всех нас, и к Нему предстоит прибытие».",
+        "tr": "Ey Muhammed! İşte bunun için insanları tevhide davet et ve sana emredildiği gibi dosdoğru ol. Onların keyiflerine uyma ve de ki: \"Ben Allah'ın kitaptan indirdiğine inandım ve bana aranızda adaleti gerçekleştirmem emredildi. Allah bizim de rabbimiz sizin de Rabbinizdir. Bizim yaptıklarımız bize, sizin yaptıklarınız da size aittir. Sizinle bizim aramızda hiçbir tartışmaya yer yoktur. Allah hepimizi biraraya toplayacaktır. Dönüş yalnız O'nadır.",
+        "de": "Darum rufe du auf und verhalte dich recht, wie dir befohlen wurde. Und folge nicht ihren Neigungen und sag: Ich glaube an das, was Allah an Büchern herabgesandt hat, und mir ist befohlen worden, unter euch gerecht zu handeln. Allah ist unser Herr und euer Herr. Uns unsere Werke und euch eure Werke. Es gibt keine (gemeinsame) Beweisgrundlage zwischen uns und euch. Allah wird uns zusammenbringen. Und zu Ihm ist der Ausgang.",
+        "pt": "Por isso, convoca-os e persevera, tal como te tem sido ordenado, e não te entregues à sua concupiscência, e dize-lhes: Creio em todos os Livros que Deus revelou! E tem-me sido ordenado julgar-vos eqüitativamente. Deus é nosso Senhor evosso. Nós somos responsáveis por nossas ações e vós pelas vossas! Que não haja dissenções entre vós e nós. Deus noscongregará, e a Ele será o retorno.",
+        "nl": "Roep daarom (op tot de Islam), en wees standvastig zoals jou is bevelen, en volg hun begeerten niet, en zeg: \"Ik geloof in wat Allah van het Boek heeft neergezonden en ik ben bevolen om onder jullie rechtvaardig te oordelen. Allah is onze Heer en jullie Heer, voor ons zijn onze daden en voor julle zijn jullie daden. Er is geen reden tot twist tussen ons en jullie. Allah zal ons verzamelen. En tot Hem is de terugkeer.\"",
+        "ur": "چونکہ یہ حالت پیدا ہو چکی ہے اس لیے اے محمدؐ ، اب تم اُسی دین کی طرف دعوت دو، اور جس طرح تمہیں حکم دیا گیا ہے اُس پر مضبوطی کے ساتھ قائم ہو جاوٴ، اور اِن لوگوں کی خواہشات کا اتباع نہ کرو، <sup foot_note=\"187015\">1</sup> اور اِن سے کہہ دو کہ”اللہ نے جو کتاب بھی نازل کی ہے میں اُس پر ایمان لایا۔ <sup foot_note=\"187016\">2</sup> مجھے حکم دیا گیا ہے کہ میں تمہارے درمیان انصاف کروں۔ <sup foot_note=\"187017\">3</sup> اللہ ہی ہمارا ربّ بھی ہے اور تمہارا ربّ بھی۔ ہمارے اعمال ہمارے لیے ہیں اور تمہارے اعمال تمہارے لیے۔ <sup foot_note=\"187018\">4</sup> ہمارے اور تمہارے درمیان کوئی جھگڑا نہیں۔ <sup foot_note=\"187019\">5</sup> اللہ ایک روز ہم سب کو جمع کرے گا اور اُسی کی طرف سب کو جانا ہے۔“",
+        "bn": "এতেকে তুমি আহ্বান কৰা আৰু দৃঢ়ভাৱে অটল থাকা, যিদৰে তোমাক আদেশ কৰা হৈছে। তুমি কেতিয়াও সিহঁতৰ প্ৰবৃত্তিৰ অনুসৰণ নকৰিবা; আৰু কোৱা, ‘আল্লাহে যিখন কিতাব অৱতীৰ্ণ কৰিছে মই তাত ঈমান আনিছোঁ আৰু তোমালোকৰ মাজত ন্যায় বিচাৰ কৰিবলৈ মোক আদেশ কৰা হৈছে। আল্লাহেই আমাৰ প্ৰতিপালক আৰু তোমালোকৰো প্ৰতিপালক। আমাৰ আমল আমাৰ বাবে আৰু তোমালোকৰ আমল তোমালোকৰ বাবে; আমাৰ আৰু তোমালোকৰ মাজত কোনো বিবাদ-বিসম্বাদ নাই। আল্লাহেই আমাক একত্ৰিত কৰিব আৰু তেওঁৰ ওচৰতেই আমাৰ প্ৰত্যাৱৰ্তন’।",
+        "fa": "[ای پیامبر، مردم را] به سوی این [آیین الهی] دعوت کن و چنان كه فرمان یافته‌اى پایداری كن و از هوس‌های آنان پیروى نكن و بگو: «به همۀ کتاب‌هایی كه الله نازل كرده است ایمان دارم و فرمان یافته‌ام كه در برابر شما به عدالت رفتار كنم. الله پروردگار ما و شماست. [نتیجۀ] اعمال ما براى ماست و [نتیجۀ] اعمال شما براى شما؛ هیچ [دشمنی و] جدالی بین ما و شما نیست. الله همۀ ما را [در قیامت] جمع خواهد كرد و بازگشت [همه] به سوی اوست»."
+      }
+    },
+    {
+      "verse_number": 4288,
+      "verse_key": "42:16",
+      "arabic_text": "وَٱلَّذِينَ يُحَآجُّونَ فِى ٱللَّهِ مِنۢ بَعْدِ مَا ٱسْتُجِيبَ لَهُۥ حُجَّتُهُمْ دَاحِضَةٌ عِندَ رَبِّهِمْ وَعَلَيْهِمْ غَضَبٌ وَلَهُمْ عَذَابٌ شَدِيدٌ",
+      "phonetic_text": "Wallatheena yuhajjoonafee Allahi min baAAdi ma istujeeba lahu hujjatuhumdahidatun AAinda rabbihim waAAalayhim ghadabunwalahum AAathabun shadeed",
+      "translations": {
+        "fr": "Ceux qui disputent (à coup d’arguments) au sujet d’Allah, après qu’il a été répondu à Son appel, leur argument n’a nulle valeur auprès de leur Seigneur. Sa colère s’abattra sur eux et ils auront un terrible supplice.",
+        "en": "As for those who argue about God after He has been acknowledged, their argument has no weight with their Lord: anger will fall upon them and agonizing torment awaits them.",
+        "es": "Aquellos que argumentan sobre Dios, después de que la gente creyera [en el Islam], sabes que sus argumentos carecen de validez ante vuestro Señor. Sobre ellos recaerá la ira [de Dios] y recibirán un castigo severo.",
+        "it": "Coloro che polemizzano a proposito di Allah dopo che già è stato risposto <a class=f><sup foot_note=159615>1</sup></a> al Suo appello, hanno argomenti che non hanno alcun valore presso Allah. Su di loro [si abbatterà] la [Sua] collera e avranno un severo castigo.",
+        "ru": "Доводы тех, которые препираются относительно Аллаха после того, как Ему ответили верующие, бесполезны перед их Господом. На них падет гнев, и им уготованы тяжкие мучения.",
+        "tr": "Allah'ın davetine uyulduktan sonra, hâlâ O'nun dini hakkında mücadele edenlerin, getirdikleri deliller Rableri yanında batıldır. Onların üzerinde bir gazab ve kendileri için şiddetli bir azab vardır.",
+        "de": "Diejenigen, die über Allah streiten, nachdem auf Ihn gehört worden ist, deren Beweisgrundlage wird bei ihrem Herrn widerlegt; auf ihnen liegt Zorn, und für sie wird es strenge Strafe geben.",
+        "pt": "Quanto àqueles que argumentam acerca de Deus, depois de Ele Ter sido aceito, seus argumentos serão refutados ante oseu Senhor, Cuja abominação pesará sobre eles, e sofrerão um severo castigo.",
+        "nl": "En degenen die over Allah redetwisten nadat de (godsdienst van Allah) aanvaard is, hun verweer is nietig bij hun Heer. En op hen rust een grote toorn en voor hen is er een harde bestraffing.",
+        "ur": "اللہ کی دعوت پر لبّیک کہے جانے کےبعد جو لوگ (لبّیک کہنے والوں سے)اللہ کے دین کے معاملہ میں جھگڑے کرتے ہیں، <sup foot_note=\"187020\">1</sup> اُن کی حجّت بازی اُن کے ربّ کے نزدیک باطل ہے، اور اُن پر اس کا غضب ہے اور اُن کے لیے سخت عذاب ہے",
+        "bn": "আল্লাহৰ আহ্বানত সঁহাৰি দিয়াৰ পিছতো যিসকলে আল্লাহ সম্পৰ্কে বিতৰ্ক কৰে, সিহঁতৰ যুক্তি-তৰ্ক সিহঁতৰ প্ৰতিপালকৰ দৃষ্টিত অসাৰ আৰু সিহঁতৰ ওপৰত আছে তেওঁৰ ক্ৰোধ, আৰু আছে সিহঁতৰ বাবে কঠিন শাস্তি।",
+        "fa": "كسانى كه دربارۀ الله [و دین او] پس از آن كه [دعوت او از سوی مردم منصف] پذيرفته شد، به مجادله مى‌پردازند، حجّتشان نزد پروردگارشان [باطل و] بى‌پایه است؛ خشم [الهی] گریبانگیرشان مى‌شود و عذابى سخت [در پیش] دارند."
+      }
+    },
+    {
+      "verse_number": 4289,
+      "verse_key": "42:17",
+      "arabic_text": "ٱللَّهُ ٱلَّذِىٓ أَنزَلَ ٱلْكِتَـٰبَ بِٱلْحَقِّ وَٱلْمِيزَانَ ۗ وَمَا يُدْرِيكَ لَعَلَّ ٱلسَّاعَةَ قَرِيبٌ",
+      "phonetic_text": "Allahu allathee anzala alkitababilhaqqi walmeezani wamayudreeka laAAalla assaAAata qareeb",
+      "translations": {
+        "fr": "C’est Allah Qui a fait descendre (en révélation) le Livre en toute vérité, et (a établi) la balance (de la justice). Qu’en sais-tu ? Peut-être que l’Heure est toute proche.",
+        "en": "It is God who has sent down the Scripture with Truth and the Balance. How can you tell? The Last Hour may well be near:",
+        "es": "Dios es Quien reveló el Libro<sup foot_note=169176>1</sup> con la verdad y la justicia. ¿Y quién sabe? Quizá la Hora esté cercana.",
+        "it": "Allah è Colui che ha rivelato secondo verità il Libro e la Bilancia. Chi ti potrà rendere edotto <a class=f><sup foot_note=159616>1</sup></a> ? Forse l’Ora è vicina.",
+        "ru": "Аллах - Тот, Кто ниспослал Писание с истиной и Весы. Откуда тебе знать, возможно, Час близок!",
+        "tr": "Bu kitabı ve ölçüyü hakla indiren Allah'tır. Ne bilirsin, belki de kıyamet saati yakındır!",
+        "de": "Allah ist es, Der das Buch mit der Wahrheit herabgesandt hat, und (auch) die Waage. Was läßt dich wissen? Vielleicht ist die Stunde nahe.",
+        "pt": "Deus foi Quem, em verdade, revelou o Livro e a balança. E quem te fará compreender, se a hora estiver próxima?",
+        "nl": "Allah is het Degene Die het Boek (de Koran) in Waarheid en met de weegschaal heeft neergezonden. En hoe kan jij dat weten? Misschien is het Uur al nabij.",
+        "ur": "وہ اللہ ہی ہے جس نے حق کے ساتھ یہ کتاب اور میزان نازل کی ہے۔ <sup foot_note=\"187021\">1</sup> اور تمہیں کیا خبر، شاید کہ فیصلے کی گھڑی قریب ہی آلگی ہو۔ <sup foot_note=\"187022\">2</sup>",
+        "bn": "তেৱেঁই আল্লাহ, যিজনে সত্য সহকাৰে কিতাব আৰু মীজান অৱতীৰ্ণ কৰিছে। কিহে তোমাক জনাব যে, সম্ভৱতঃ কিয়ামত অতি নিকটৱৰ্তী?",
+        "fa": "الله است که قرآن و مقیاس عدالت را به‌حق نازل كرده است؛ و تو چه می‌دانی؟ شاید قیامت نزدیک باشد."
+      }
+    },
+    {
+      "verse_number": 4290,
+      "verse_key": "42:18",
+      "arabic_text": "يَسْتَعْجِلُ بِهَا ٱلَّذِينَ لَا يُؤْمِنُونَ بِهَا ۖ وَٱلَّذِينَ ءَامَنُوا۟ مُشْفِقُونَ مِنْهَا وَيَعْلَمُونَ أَنَّهَا ٱلْحَقُّ ۗ أَلَآ إِنَّ ٱلَّذِينَ يُمَارُونَ فِى ٱلسَّاعَةِ لَفِى ضَلَـٰلٍۭ بَعِيدٍ",
+      "phonetic_text": "YastaAAjilu biha allatheena layu/minoona biha wallatheena amanoomushfiqoona minha wayaAAlamoona annaha alhaqquala inna allatheena yumaroona fee assaAAatilafee dalalin baAAeed",
+      "translations": {
+        "fr": "Ceux qui n’y croient pas voudraient en hâter (la venue) et ceux qui (y) croient en redoutent l’arrivée. Ils savent, (quant à eux) qu’elle est pure vérité. Ceux qui doutent de l’Heure vont loin dans l’égarement.",
+        "en": "those who do not believe in it seek to hasten it, but the believers stand in awe of it. They know it to be the Truth; those who argue about the Hour are far, far astray.",
+        "es": "Quienes no creen en ella exigen que se adelante. Pero, en cambio, los creyentes sienten temor de ella y saben que es una verdad. ¿No es evidente que quienes discuten sobre cuándo será la Hora [del Juicio] están en un error profundo?",
+        "it": "Vogliono affrettarne la venuta coloro che non credono in essa, mentre i credenti sono intimoriti, sapendo che è verità. Coloro che polemizzano sull’Ora sono in evidente errore.",
+        "ru": "Торопят с ним те, которые не веруют в него. А верующие трепещут перед ним и знают, что он является истиной. Воистину, те, которые препираются по поводу Часа, находятся в далеком заблуждении.",
+        "tr": "O'na inanmayanlar kıyametin çabuk gelmesini istiyorlar. İnananlar ise O'ndan korkarlar ve O'nun hak olduğunu bilirler. İyi bilin ki, kıyamet saati hakkında tartışanlar derin bir sapıklık içindedirler.",
+        "de": "Diejenigen, die nicht an sie glauben, wünschen, sie zu beschleunigen. Diejenigen aber, die glauben, sind besorgt wegen ihr und wissen, daß sie Wirklichkeit ist. Doch eben diejenigen, die über die Stunde streiten, befinden sich wahrlich in tiefem Irrtum.",
+        "pt": "Os que não crêem nela querem apressá-la; por outra, os fiéis são reverentes, por temor a ela, e sabem que é a verdade. Não é, acaso, certo, que aqueles que disputam sobre a Hora estão em um profundo erro?",
+        "nl": "Degenen die er niet in geloven vragen om het (Uur) te bespoedigen. En degenen die geloven zijn er bevreesd voor, en zij weten dat het de Waarheid is. Weet: voorwaar, degenen die over het Uur redetwisten verkeren in vergaande dwaling.",
+        "ur": "جو لوگ اس کے آنے پر ایمان نہیں رکھتے وہ تو اس کے لیے جلدی مچاتے ہیں، مگر جو اس پر ایمان رکھتے ہیں وہ اس سے ڈرتے ہیں اور جانتے ہیں کہ یقیناً وہ آنے والی ہے خوب سن لو، جو لوگ اُس گھڑی کے آنے میں شک ڈالنے والی بحثیں کرتے ہیں وہ گمراہی میں بہت دور نکل گئے ہیں",
+        "bn": "যিহঁতে ইয়াৰ প্ৰতি ঈমান পোষণ নকৰে সিহঁতেই ইয়াক ত্বৰান্বিত কৰিব বিচাৰে। আৰু যিসকলে ঈমান আনিছে তেওঁলোকে ইয়াৰ পৰা ভীত হৈ থাকে আৰু তেওঁলোকে জানে যে, এয়া নিশ্চিতভাৱে সত্য। জানি থোৱা, নিশ্চয় কিয়ামত সম্পৰ্কে যিসকলে বাক-বিতণ্ডা কৰে সিহঁতে ঘোৰ বিভ্ৰান্তিত নিপতিত।",
+        "fa": "كسانى كه قیامت را باور ندارند، [با تمسخر و] به شتاب آن را مى‌خواهند؛ و كسانى كه [به روزِ جزا] باور دارند و مى‌دانند كه حق است، از آن هراسانند. آگاه باشید! کسانی كه در مورد قیامت، جدل و انكار مى‌كنند، در گمراهىِ بى‌پایانى قرار دارند."
+      }
+    },
+    {
+      "verse_number": 4291,
+      "verse_key": "42:19",
+      "arabic_text": "ٱللَّهُ لَطِيفٌۢ بِعِبَادِهِۦ يَرْزُقُ مَن يَشَآءُ ۖ وَهُوَ ٱلْقَوِىُّ ٱلْعَزِيزُ",
+      "phonetic_text": "Allahu lateefun biAAibadihiyarzuqu man yashao wahuwa alqawiyyu alAAazeez",
+      "translations": {
+        "fr": "Allah est Subtil envers Ses serviteurs. Il dispense Ses bienfaits à qui Il veut et Il est le Fort, le Tout-Puissant.",
+        "en": "God is most subtle towards His creatures; He provides [bounti-fully] for whoever He will; He is the Powerful, the Almighty.",
+        "es": "Dios es Bondadoso con Sus siervos, sustenta a quien quiere. Él es el Fuerte, el Poderoso.",
+        "it": "Allah è dolce con i Suoi servi e concede a chi vuole. Egli è il Forte, l’Eccelso.",
+        "ru": "Аллах добр к Своим рабам и наделяет уделом, кого пожелает. Он - Всесильный, Могущественный.",
+        "tr": "Allah kullarına çok lütufkârdır. Dilediğine rızık verir. O çok kuvvetlidir, çok güçlüdür.",
+        "de": "Allah ist Feinfühlig zu Seinen Dienern. Er versorgt, wen Er will. Und Er ist der Starke und Allmächtige.",
+        "pt": "Deus é Amabilíssimo para com os Seus servos. Agracia quem Lhe apraz, porque é o Poderoso, o Fortíssimo.",
+        "nl": "Allah is Zachtmoedig voor Zijn dienaren, Hij voorziet wie Hij wil, en Hij is de Sterke, de Almachtige.",
+        "ur": "اللہ اپنے بندوں پر بہت مہربان ہے۔ <sup foot_note=\"187023\">1</sup> جسے جو کچھ چاہتا ہے دیتا ہے، <sup foot_note=\"187024\">2</sup> اور وہ بڑی قوت والا اور زبردست ہے۔ <sup foot_note=\"187025\">3</sup>",
+        "bn": "আল্লাহ তেওঁৰ বান্দাসকলৰ প্ৰতি অত্যন্ত কোমল; তেওঁ যাক ইচ্ছা কৰে জীৱিকা দান কৰে। তেওঁ সৰ্বশক্তিমান. প্ৰবল পৰাক্ৰমশালী।",
+        "fa": "الله نسبت به بندگانش باریک‌بین [و مهربان] است؛ به هر کس بخواهد، روزی می‌بخشد؛ و او توانای شکست‌ناپذیر است."
+      }
+    },
+    {
+      "verse_number": 4292,
+      "verse_key": "42:20",
+      "arabic_text": "مَن كَانَ يُرِيدُ حَرْثَ ٱلْـَٔاخِرَةِ نَزِدْ لَهُۥ فِى حَرْثِهِۦ ۖ وَمَن كَانَ يُرِيدُ حَرْثَ ٱلدُّنْيَا نُؤْتِهِۦ مِنْهَا وَمَا لَهُۥ فِى ٱلْـَٔاخِرَةِ مِن نَّصِيبٍ",
+      "phonetic_text": "Man kana yureedu hartha al-akhiratinazid lahu fee harthihi waman kana yureedu harthaaddunya nu/tihi minha wama lahu feeal-akhirati min naseeb",
+      "translations": {
+        "fr": "Quiconque veut récolter<sup foot_note=195102>1</sup> (la moisson) de l’autre monde, Nous accroîtrons pour lui sa récolte ; et quiconque veut récolter (la moisson) de ce bas monde, Nous lui donnerons (de ce qu’il désire), mais il n’aura (droit à) aucune part de l’autre monde.",
+        "en": "If anyone desires a harvest in the life to come, We shall increase it for him; if anyone desires a harvest in this world, We shall give him a share of it, but in the Hereafter he will have no share.",
+        "es": "A aquel que busque obtener la recompensa de la otra vida [a través de obras buenas], se la multiplicaré. Pero a quien solo pretenda obtener bienes materiales en este mundo<sup foot_note=169177>1</sup>, se los concederé<sup foot_note=169178>2</sup>, pero no obtendrá recompensa alguna en la otra vida.",
+        "it": "A chi avrà voluto arare [il campo del]l’altra vita, accresceremo la sua aratura mentre a chi avrà voluto arare [il campo di] questa vita, concederemo una parte [dei frutti], ma non avrà parte alcuna dell’altra vita <a class=f><sup foot_note=159617>1</sup></a> .",
+        "ru": "Тому, кто пожелал нивы Последней жизни, Мы увеличим его ниву. Тому же, кто пожелал нивы мирской жизни, Мы дадим из нее, но ему не будет доли в жизни Последней.",
+        "tr": "Her kim ahiret kazancını isterse, biz onun kazancını artırırız, her kim de dünya kazancını isterse ona da ondan veririz, ama onun ahirette hiçbir nasibi yoktur.",
+        "de": "Wer immer die (Ernte) des Saatfeldes für das Jenseits haben will, dem mehren Wir noch (die Ernte) in seinem Saatfeld. Und wer die (Ernte) des Saatfeldes für das Diesseits haben will, dem lassen Wir etwas davon zukommen, für den wird es aber im Jenseits keinen Anteil geben.",
+        "pt": "Quem anelar a recompensa de outra vida tê-la-á aumentada; em troca, a quem preferir a recompensa da vida terrena, também lhe concederemos algo dela; porém, não participara (da bem-aventurança) da outra vida.",
+        "nl": "Wie de beloning van het Hiernamaals wenst, voor hem vermeerderen Wij zijn beloning; en wie de beloning van het wereldse leven wenst, am hem geven Wij daarvan, maar voor hem is er in het Hiernamaals geen aandeel.",
+        "ur": "جو کوئی آخرت کی کھیتی چاہتا ہے اُس کی کھیتی کو ہم بڑھاتے ہیں ، اور جو دنیا کی کھیتی چاہتا ہے اُسے دنیا ہی میں سے دیتے ہیں مگر آخرت میں اُس کا کوئی حصّہ نہیں ہے۔ <sup foot_note=\"187026\">1</sup>",
+        "bn": "যিয়ে আখিৰাতৰ ফচল কামনা কৰে তাৰ বাবে আমি তাৰ ফচল বৃদ্ধি কৰি দিওঁ আৰু যিয়ে পৃথিৱীৰ ফচল কামনা কৰে আমি তাক তাৰ পৰা অকণমান দিওঁ। কিন্তু আখিৰাতত তাৰ বাবে একো নাথাকিব।",
+        "fa": "کسی كه كِشت آخرت را بخواهد، به كِشته‌اش بركت مى‌بخشیم؛ و هر کس [تنها] كِشت دنیا را بخواهد، در اختیار او قرار مى‌دهیم؛ و[لى] در آخرت بهره‌اى نخواهد داشت."
+      }
+    },
+    {
+      "verse_number": 4293,
+      "verse_key": "42:21",
+      "arabic_text": "أَمْ لَهُمْ شُرَكَـٰٓؤُا۟ شَرَعُوا۟ لَهُم مِّنَ ٱلدِّينِ مَا لَمْ يَأْذَنۢ بِهِ ٱللَّهُ ۚ وَلَوْلَا كَلِمَةُ ٱلْفَصْلِ لَقُضِىَ بَيْنَهُمْ ۗ وَإِنَّ ٱلظَّـٰلِمِينَ لَهُمْ عَذَابٌ أَلِيمٌ",
+      "phonetic_text": "Am lahum shurakao sharaAAoo lahummina addeeni ma lam ya/than bihi Allahuwalawla kalimatu alfasli laqudiya baynahumwa-inna aththalimeena lahum AAathabunaleem",
+      "translations": {
+        "fr": "Ou alors ont-ils des associés qui ont prescrit pour eux, dans la religion, ce qu’Allah n’a pas permis ? Si le verdict tranchant n’avait pas été prononcé, ils auraient été départagés. Les injustes auront, certes, un supplice très douloureux.",
+        "en": "How can they believe in others who ordain for them things which God has not sanctioned in the practice of their faith? If it were not for God’s decree concerning the final Decision, judgement would already have been made between them. The evildoers will have a grievous punishment-",
+        "es": "¿Acaso [los idólatras] tienen divinidades que les han establecido preceptos religiosos que Dios no ha prescrito? Si no fuese porque Dios ha decretado cuándo será el Día del Juicio, ya se los habría juzgado. Los injustos opresores sufrirán un castigo doloroso.",
+        "it": "Hanno forse associati che, a proposito della religione, abbiano stabilito per loro una via che Allah non ha consentito? Se non fosse stata presa la Decisione finale, già sarebbe stato giudicato tra loro! Gli ingiusti avranno doloroso castigo.",
+        "ru": "Или же у них есть сотоварищи, которые узаконили для них в религии то, чего не дозволил Аллах? Если бы не решающее Слово, то их спор был бы уже решен. Воистину, беззаконникам уготованы мучительные страдания.",
+        "tr": "Yoksa onların, Allah'ın dinde izin vermediği şeyi kendilerine meşru kılacak ortakları mı vardır? Eğer azabın ertelenmesine dair kesin yargı sözü olmasaydı, aralarında hemen hüküm verilir, işleri bitirilirdi. Gerçekten zalimler için acı bir azab vardır.",
+        "de": "Oder haben sie (etwa) Teilhaber, die ihnen als Religion festgelegt haben, was Allah nicht erlaubt hat? Wenn es nicht das (bereits ergangene) Wort der Entscheidung (des Aufschubs bis zum Jüngsten Gericht) gäbe, wäre zwischen ihnen wahrlich (schon jetzt) entschieden worden. Und gewiß, für die Ungerechten wird es schmerzhafte Strafe geben.",
+        "pt": "Quê! Há, acaso, (seres) parceiros (de Deus) que lhes tenham instituído algo a respeito da religião, sem a autorização deDeus? Porém, se não houvesse sido pelo decreto do juízo, já os teria julgado. Certamente, os iníquos sofrerão um dolorosocastigo.",
+        "nl": "Hebben zij deelgenoten die hun in de godsdienst dat voorschrijven waartoe Allah geen toestemming heeft gegeven? En als er niet een beslissend Woord (van Allah) was, dan zouden zij reeds bestraft zijn. Voorwaar, voor de onrechtvaardigen is er een pijnlijke bestraffing.",
+        "ur": "کیا یہ لوگ کچھ ایسے شریکِ خدا رکھتے ہیں جنہوں نے اِن کے لیے دین کی نوعیّت رکھنے والا ایک ایسا طریقہ مقرر کر دیا ہے جس کا اللہ نے اِذن نہیں دیا؟ <sup foot_note=\"187027\">1</sup> اگر فیصلے کی بات پہلے طے نہ ہوگئی ہوتی تو ان کا قضّیہ چکا دیا گیا ہوتا۔ <sup foot_note=\"187028\">2</sup> یقیناً اِن ظالموں کے لیے دردناک عذاب ہے",
+        "bn": "অথবা সিহঁতৰ এনে কিছুমান অংশী আছে নেকি, যিবিলাকে সিহঁতৰ বাবে দ্বীনৰ পৰা চৰীয়ত প্ৰৱৰ্তন কৰিছে, যাৰ অনুমতি আল্লাহে দিয়া নাই? আৰু মীমাংসাৰ ঘোষণা নাথাকিলে অৱশ্যে সিহঁতৰ মাজত সিদ্ধান্ত হৈ গ’লহেঁতেন। নিশ্চয় যালিমসকলৰ বাবে আছে যন্ত্ৰণাদায়ক শাস্তি।",
+        "fa": "آیا [مشرکان] معبودانى دارند كه بدون اجازۀ الله، [قوانین] دینى برایشان مقرر كرده‌اند؟ اگر حُكمِ قطعى [براى مهلت دادن به گناهکاران] در میان نبود، [بى‌درنگ] میانشان داورى مى‌شد؛ و ستمکاران عذابی دردناک [در پیش] دارند."
+      }
+    },
+    {
+      "verse_number": 4294,
+      "verse_key": "42:22",
+      "arabic_text": "تَرَى ٱلظَّـٰلِمِينَ مُشْفِقِينَ مِمَّا كَسَبُوا۟ وَهُوَ وَاقِعٌۢ بِهِمْ ۗ وَٱلَّذِينَ ءَامَنُوا۟ وَعَمِلُوا۟ ٱلصَّـٰلِحَـٰتِ فِى رَوْضَاتِ ٱلْجَنَّاتِ ۖ لَهُم مَّا يَشَآءُونَ عِندَ رَبِّهِمْ ۚ ذَٰلِكَ هُوَ ٱلْفَضْلُ ٱلْكَبِيرُ",
+      "phonetic_text": "Tara aththalimeenamushfiqeena mimma kasaboo wahuwa waqiAAun bihim wallatheenaamanoo waAAamiloo assalihati fee rawdatialjannati lahum ma yashaoona AAinda rabbihimthalika huwa alfadlu alkabeer",
+      "translations": {
+        "fr": "Tu verras les injustes redoutant les actions qu’ils ont commises. (Le supplice) fondra sur eux inexorablement. Ceux qui auront cru et auront accompli les bonnes œuvres seront, eux, dans des jardins verdoyants. Auprès de leur Seigneur, tous leurs désirs seront satisfaits. Telle est la faveur suprême !",
+        "en": "you will see them fearful because of what they have done: punishment is bound to fall on them- but those who believe and do good deeds will be in the flowering meadows of the Gardens. They will have whatever they wish from their Lord: this is the great bounty;",
+        "es": "Verás [el Día del Juicio a los opresores] aterrorizados [de ser juzgados] por lo que cometieron, pero no podrán evitarlo. En cambio, quienes creyeron y obraron rectamente estarán en jardines del Paraíso junto a su Señor, donde se les concederá lo que deseen; este es el favor inmenso.",
+        "it": "Vedrai gli ingiusti impauriti di ciò che avranno meritato e che ricadrà su di loro. Coloro che credono e compiono il bene, saranno nei prati del Giardino e avranno tutto ciò che vorranno presso il loro Signore. Questa è la grazia grande!",
+        "ru": "Ты увидишь, как беззаконники будут трепетать от того, что они приобрели, когда это падет на них. А те, которые уверовали и совершали праведные деяния, пребудут в Райских садах. Им уготовано у их Господа все, что они пожелают. Это и есть великая милость.",
+        "tr": "Sen kıyamet günü kazandıkları şeyin cezası başlarına gelirken zalimlerin korkudan titrediklerini görürsün. İman edip salih amel işleyenler ise cennet bahçelerindedirler. Rablerinin yanında onlar için istedikleri her şey vardır. İşte büyük lütuf budur.",
+        "de": "Du wirst (dann) die Ungerechten besorgt sehen wegen dessen, was sie verdient haben, und es wird über sie hereinbrechen. Diejenigen aber, die glauben und rechtschaffene Werke tun, werden sich auf den Auen des (Paradies)gartens befinden. Sie haben, was sie wollen, bei ihrem Herrn; das ist die große Huld.",
+        "pt": "Verás os iníquos, atemorizados pelo que tiverem cometido, quando (o castigo) lhes estiver iminente. Por outra, os fiéis, que praticarem o bem, morarão nos viçosos prados; terão tudo quanto lhes aprouver junto ao seu Senhor. Tal será amagnífica graça!",
+        "nl": "Jij ziet de onrechtvaardigen bevreesd zijn voor wat zij hebben verricht en hij (de bestraffing) treft hen. Maar degenen die geloven en goede werken verrichten, zij verkeren in de Tuinen van het Paradijs. Voor hen is er bij hun Heer wat zij maar wensen. Dat is de grote gunst.",
+        "ur": "تم دیکھو گے کہ یہ ظالم اُس وقت اپنے کیے کے انجام سے ڈر رہے ہوں گے اور وہ اِن پر آ کر رہے گا بخلاف اِس کے جو لوگ ایمان لے آئے ہیں اور جنہوں نے نیک عمل کیے ہیں وہ جنت کے گلستانوں میں ہوں گے، جو کچھ بھی وہ چاہیں گے اپنے رب کے ہاں پائیں گے، یہی بڑا فضل ہے",
+        "bn": "তুমি যালিমসকলক সিহঁতৰ কৃতকৰ্মৰ বাবে ভীত-সন্ত্ৰস্ত দেখিবলৈ পাবা। অথচ সেয়া আপতিত হ’ব সিহঁতৰেই ওপৰত। যিসকলে ঈমান আনিছে আৰু সৎকৰ্ম কৰিছে তেওঁলোকে থাকিব জান্নাতৰ উদ্যানসমূহত। তেওঁলোকে যিটোৱেই বিচাৰিব সেইটোৱেই তেওঁলোকৰ প্ৰতিপালকৰ ওচৰত পাব। এইটোৱেই মহা অনুগ্ৰহ।",
+        "fa": "[در روز قیامت،] ستمکاران را از دستاوردشان هراسان مى‌بینى و [خواهی دید که كیفر آن کارها] دامنگیرشان است؛ ولى مؤمنان نیكوكار در باغ‌های بهشتند؛ هر چه بخواهند، نزد پروردگارشان دارند؛ فضل [و بخششِ] بزرگ همین است."
+      }
+    },
+    {
+      "verse_number": 4295,
+      "verse_key": "42:23",
+      "arabic_text": "ذَٰلِكَ ٱلَّذِى يُبَشِّرُ ٱللَّهُ عِبَادَهُ ٱلَّذِينَ ءَامَنُوا۟ وَعَمِلُوا۟ ٱلصَّـٰلِحَـٰتِ ۗ قُل لَّآ أَسْـَٔلُكُمْ عَلَيْهِ أَجْرًا إِلَّا ٱلْمَوَدَّةَ فِى ٱلْقُرْبَىٰ ۗ وَمَن يَقْتَرِفْ حَسَنَةً نَّزِدْ لَهُۥ فِيهَا حُسْنًا ۚ إِنَّ ٱللَّهَ غَفُورٌ شَكُورٌ",
+      "phonetic_text": "Thalika allathee yubashshiruAllahu AAibadahu allatheena amanoowaAAamiloo assalihati qul laas-alukum AAalayhi ajran illa almawaddata fee alqurbawaman yaqtarif hasanatan nazid lahu feeha husnaninna Allaha ghafoorun shakoor",
+      "translations": {
+        "fr": "Telle est l’heureuse nouvelle qu’Allah annonce à Ses serviteurs qui croient et accomplissent les bonnes œuvres. Dis : « Je ne vous réclame pour cela aucune récompense, hors l’affection due aux proches. » Quiconque accomplit une bonne action Nous la lui rendrons encore meilleure. Allah est Absoluteur et si Reconnaissant !",
+        "en": "it is of this that God gives good news to His servants who believe and do good deeds. Say [Prophet], ‘I ask no reward from you for this, only the affection due to kin.’ If anyone does good, We shall increase it for him; God is most forgiving and most appreciative.",
+        "es": "Esta [es la recompensa] con la que Dios albricia a Sus siervos que creen y obran rectamente. Diles [¡Oh, Muhámmad!]: “No os pido ninguna remuneración<sup foot_note=169179>1</sup>, solo que me améis por el parentesco que nos une<sup foot_note=169180>2</sup>”. A quien realice una buena obra le aumentaré con un bien mayor. Dios es Absolvedor, Agradecido.",
+        "it": "Questa è la [buona] novella che Allah dà ai Suoi servi che credono e compiono il bene. Di’: «Non vi chiedo alcuna ricompensa, oltre all’amore per i parenti» <a class=f><sup foot_note=159618>1</sup></a> . A chi compie una buona azione, Noi daremo qualcosa di migliore. In verità Allah è perdonatore, riconoscente.",
+        "ru": "Это - то, чем Аллах радует Своих рабов, которые уверовали и совершали праведные деяния. Скажи: «Я не прошу у вас за это никакой награды, кроме любви ради близости (ради моей близости к вам, или ради вашей близости к Аллаху, или любви к моим близким родственникам)». Тому, кто приобретет добро, Мы увеличим его. Воистину, Аллах - Прощающий, Благодарный.",
+        "tr": "İşte Allah iman edip salih amel işleyen kullarını bununla müjdeler. Ey Muhammed! De ki: \"Ben bu tebliğime karşı sizden akrabalıkta sevgiden başka hiçbir ücret istemiyorum.\" Her kim bir iyilik yaparsa biz onun iyiliğini artırırız. Şüphesiz ki Allah çok bağışlayıcıdır, şükrün karşılığını verir.",
+        "de": "Das ist die frohe Botschaft, die Allah Seinen Dienern, die glauben und rechtschaffene Werke tun, verkündet. Sag: Ich verlange von euch keinen Lohn dafür, es sei denn die Liebe wie zu den Verwandten’. Und wer ein gutes Werk tut, dem schenken Wir dafür noch mehr Gutes. Gewiß, Allah ist Allvergebend und stets zu Dank bereit.",
+        "pt": "Isto é o que Deus anuncia ao Seus servos fiéis, que praticam o bem. Dize-lhes: Não vos exijo recompensa alguma poristo, senão o amor aos vossos parentes. E a quem quer que seja que conseguir uma boa ação, multiplicar-lhe-emos; sabei queDeus é Compensador, Indulgentíssimo.",
+        "nl": "Dat is wat Allah als verheugende tijding aan zijn dienaren verkondigt, degenen die geloven en goede werken verrichten. Zeg (O Moehammad): \"Ik vraag van jullie geen beloning, alleen liefde voor de naaste verwanten. En voor wie m goede daad verricht vermenigvuldigen Wij het goede. Voorwaar, Allah is de Vergevensgezinde, de Waarderende.",
+        "ur": "یہ ہے وہ چیز جس کی خوشخبری اللہ اپنے اُن بندوں کو دیتا ہے جنہوں نے مان لیا اور نیک عمل کیے۔ اے نبیؐ ، اِن لوگوں سے کہہ دو کہ میں اِس کام پر تم سے کسی اجر کا طالب نہیں ہوں، <sup foot_note=\"187030\">1</sup> البتہ قرابت کی محبّت ضرور چاہتا ہوں۔ <sup foot_note=\"187031\">2</sup> جو کوئی بھلائی کمائے گا ہم اس کے لیے اس بھلائی میں خوبی کا اضافہ کر دیں گے۔ بے شک اللہ بڑا درگزر کرنے والا اور قدر دان ہے۔ <sup foot_note=\"187032\">3</sup>",
+        "bn": "এইটোৱেই সেই সুসংবাদ, যিটো আল্লাহে তেওঁৰ বান্দাসকলক দিছে, যিসকলে ঈমান আনিছে আৰু সৎকৰ্ম কৰিছে। কোৱা, ‘মই ইয়াৰ বিনিময়ত তোমালোকৰ পৰা কেৱল আত্মীয়তাৰ সৌহাৰ্দ্যৰ বাহিৰে আন একো প্ৰতিদান নিবিচাৰোঁ’। যিয়ে উত্তম কাম কৰে আমি তাৰ বাবে ইয়াত কল্যাণ বৃদ্ধি কৰি দিওঁ। নিশ্চয় আল্লাহ অত্যন্ত ক্ষমাশীল, গুণগ্ৰাহী।",
+        "fa": "این همان [فضیلتی] است كه الله به بندگان مؤمن و نیكوكارش بشارت مى‌دهد. [ای پیامبر،] بگو: «در برابر این رسالت، پاداشى از شما نمى‌خواهم؛ جز [رعایتِ دوستی و] محبتِ خویشاوندى؛ و هر کس [در این راستا] اقدام نیكویى كند، بر پاداشش در آن [مورد] مى‌افزاییم. به راستی كه الله آمرزگارى قدرشناس است."
+      }
+    },
+    {
+      "verse_number": 4296,
+      "verse_key": "42:24",
+      "arabic_text": "أَمْ يَقُولُونَ ٱفْتَرَىٰ عَلَى ٱللَّهِ كَذِبًا ۖ فَإِن يَشَإِ ٱللَّهُ يَخْتِمْ عَلَىٰ قَلْبِكَ ۗ وَيَمْحُ ٱللَّهُ ٱلْبَـٰطِلَ وَيُحِقُّ ٱلْحَقَّ بِكَلِمَـٰتِهِۦٓ ۚ إِنَّهُۥ عَلِيمٌۢ بِذَاتِ ٱلصُّدُورِ",
+      "phonetic_text": "Am yaqooloona iftara AAala Allahikathiban fa-in yasha-i Allahu yakhtim AAalaqalbika wayamhu Allahu albatila wayuhiqqualhaqqa bikalimatihi innahu AAaleemun bithatiassudoor",
+      "translations": {
+        "fr": "Ou alors disent-ils : « Il débite des mensonges sur le compte d’Allah » ? Mais si Allah voulait, Il imprimerait un sceau sur ton cœur. Allah, par Ses paroles, efface l’erreur et établit la vérité. Car Il Sait parfaitement ce qu’il y a au fond des cœurs.",
+        "en": "How can they say, ‘He has invented a lie about God’? If God so willed, He could seal your heart and blot out lies: God confirms the Truth with His words. He has full knowledge of what is in the heart-",
+        "es": "Algunos dicen: “[Muhámmad] ha inventado mentiras acerca de Dios”, pero si fuera así Dios habría sellado su corazón. Dios hace que se desvanezca lo falso y que prevalezca la Verdad por Su palabra. Él conoce cuanto encierran los pechos.",
+        "it": "Diranno invece: «Ha inventato menzogne contro Allah». Se Allah volesse, sigillerebbe il tuo cuore <a class=f><sup foot_note=159619>1</sup></a> . Con le Sue parole Allah cancella il falso e realizza la verità. Egli conosce quello che nascondono i petti.",
+        "ru": "Или же они говорят, что он возвел навет на Аллаха? Если бы Аллах пожелал, то наложил бы печать на твое сердце. Своими Словами Аллах стирает ложь и утверждает истину. Воистину, Он знает о том, что в груди.",
+        "tr": "Yoksa onlar, senin hakkında: \"Allah'a karşı yalan uydurdu.\" mu diyorlar? Eğer Allah dilerse senin de kalbini mühürler; batılı yok eder ve sözleriyle hakkı gerçekleştirir. Şüphesiz ki O kalplerde bulunan şeyleri hakkıyla bilir.",
+        "de": "Oder sagen sie etwa: Er hat eine Lüge gegen Allah ersonnen? Wenn nun Allah will, kann Er dir das Herz versiegeln. Und Allah löscht das Falsche aus und setzt die Wahrheit mit Seinen Worten durch. Er weiß über das innere Geheimnis Bescheid.",
+        "pt": "Ou dizem: Ele forjou uma mentira acerca de Deus! Porém, se Deus quisesse, sigilaria o teu coração. Deus anula afalsidade e confirma a verdade, mediante as Suas palavras, porque é Conhecedor do que há nos corações.",
+        "nl": "Of zeggen zij dat hij (Moehammad) een leugen over Allah verzonnen heeft? Als Allah het wil, dan verzegek Hij jouw hart. Allah wist de valsheid uit en Hij bevestigt de Waarheid met Zijn Woorden. Voorwaar, Hij is Alwetend over wat zich in de harten bevindt.",
+        "ur": "کیا یہ لوگ کہتے ہیں کہ اِس شخص نے اللہ پر جھُوٹا بُہتان گھڑ لیا ہے؟ <sup foot_note=\"187033\">1</sup> اگر اللہ چاہے تو تمہارے دل پر مُہر کر دے۔ <sup foot_note=\"187034\">2</sup> وہ باطل کو مٹا دیتا ہے اور حق کو اپنے فرمانوں سے حق کر دکھاتا ہے۔ <sup foot_note=\"187035\">3</sup> وہ سینوں کے چھُپے ہوئے راز جانتا ہے۔ <sup foot_note=\"187036\">4</sup>",
+        "bn": "অথবা সিহঁতে এই কথা কয় নেকি যে, তেওঁ আল্লাহ সম্পৰ্কে মিছা উদ্ভাৱন কৰিছে, যদি সেইটোৱেই হ’লহেঁতেন তেন্তে আল্লাহে ইচ্ছা কৰিলে তোমাৰ হৃদয়ত মোহৰ মাৰি দিলেহেঁতেন। আল্লাহে বাতিলক মচি দিয়ে আৰু নিজ বাণীৰ দ্বাৰা সত্যক প্ৰতিষ্ঠিত কৰে। নিশ্চয় অন্তৰসমূহত যি আছে সেই বিষয়ে তেওঁ সবিশেষ অৱগত।",
+        "fa": "آیا مشرکان مى‌گویند: «[محمد] به الله دروغ نسبت داده است؟» اگر الله بخواهد، بر دل تو مُهر مى‌نهد؛ و[لى] الله باطل را محو مى‌كند و حق را با سخنان [و تمهیداتِ] خویش به كرسى مى‌نشانَد؛ كه او به راز دل‌ها داناست."
+      }
+    },
+    {
+      "verse_number": 4297,
+      "verse_key": "42:25",
+      "arabic_text": "وَهُوَ ٱلَّذِى يَقْبَلُ ٱلتَّوْبَةَ عَنْ عِبَادِهِۦ وَيَعْفُوا۟ عَنِ ٱلسَّيِّـَٔاتِ وَيَعْلَمُ مَا تَفْعَلُونَ",
+      "phonetic_text": "Wahuwa allathee yaqbalu attawbataAAan AAibadihi wayaAAfoo AAani assayyi-atiwayaAAlamu ma tafAAaloon",
+      "translations": {
+        "fr": "C’est Lui Qui accepte le repentir de Ses serviteurs, Qui pardonne les mauvaises actions et Sait ce que vous faites.",
+        "en": "it is He who accepts repentance from His servants and pardons bad deeds- He knows everything you do.",
+        "es": "Él es Quien acepta el arrepentimiento de Sus siervos, perdona sus pecados y está bien enterado de cuanto hacen.",
+        "it": "Egli è Colui che accoglie il pentimento dei Suoi servi, perdona i loro peccati e conosce quello che fate.",
+        "ru": "Он - Тот, Кто принимает покаяния Своих рабов, прощает злодеяния и знает то, что вы совершаете.",
+        "tr": "Kullarının tevbesini kabul eden, kötülükleri affeden ve sizin yaptıklarınızı bilen O'dur.",
+        "de": "Er ist es, Der die Reue von Seinen Dienern annimmt und die Missetaten verzeiht. Und Er weiß, was ihr tut.",
+        "pt": "E é Ele Que aceita o arrependimento dos Seus servos, absolve-lhes as faltas, bem como está sempre ciente de tudoquanto fazem.",
+        "nl": "En Hij is Degene Die het berouw van Zijn dienaren aanvaardt. En Hij vergeeft de slechte daden en Hij weet wat jullie doen.",
+        "ur": "وہی ہے جو اپنے بندوں سے توبہ قبول کرتا ہے اور بُرائیوں سے درگزر کرتا ہے، حالانکہ تم لوگوں کے سب افعال کا اُسے علم ہے۔ <sup foot_note=\"187037\">1</sup>",
+        "bn": "আৰু তেৱেঁই নিজ বান্দাসকলৰ তাওবা কবুল কৰে আৰু পাপসমূহ মোচন কৰে আৰু তোমালোকে যি কৰা সেয়া তেওঁ জানে।",
+        "fa": "اوست که توبۀ بندگانش را می‌پذیرد و از بدی‌ها درمى‌گذرد و آنچه مى‌كنید مى‌داند."
+      }
+    },
+    {
+      "verse_number": 4298,
+      "verse_key": "42:26",
+      "arabic_text": "وَيَسْتَجِيبُ ٱلَّذِينَ ءَامَنُوا۟ وَعَمِلُوا۟ ٱلصَّـٰلِحَـٰتِ وَيَزِيدُهُم مِّن فَضْلِهِۦ ۚ وَٱلْكَـٰفِرُونَ لَهُمْ عَذَابٌ شَدِيدٌ",
+      "phonetic_text": "Wayastajeebu allatheena amanoowaAAamiloo assalihati wayazeeduhum min fadlihiwalkafiroona lahum AAathabun shadeed",
+      "translations": {
+        "fr": "Il exauce ceux qui ont cru et ont accompli les bonnes œuvres, et leur ajoute de Ses faveurs. Quant aux mécréants, ils sont voués à un terrible supplice.",
+        "en": "He responds to those who believe and do good deeds, and gives them more of His bounty; agonizing torment awaits the disbelievers.",
+        "es": "Él responde [las súplicas] a quienes creen y obran rectamente, y les aumenta su favor. En cambio, los que se niegan a creer tendrán un castigo severo.",
+        "it": "Esaudisce coloro che credono e compiono il bene e li accresce della Sua grazia. I miscredenti avranno severo castigo.",
+        "ru": "Он отвечает тем, которые уверовали и совершают праведные деяния, и приумножает им из Своей милости. А неверующим уготованы тяжкие мучения.",
+        "tr": "Allah iman edip, salih amel işleyenlerin tevbesini kabul eder, onlara lütfundan daha fazlasını verir. Kâfirler için ise şiddetli bir azap vardır.",
+        "de": "Und Er erhört diejenigen, die glauben und rechtschaffene Werke tun, und Er gibt ihnen noch mehr von Seiner Huld. Für die Ungläubigen aber wird es strenge Strafe geben.",
+        "pt": "E atende (às súplicas) dos fiéis, que praticam o bem, e os aumenta de Sua graça; porém, os incrédulos sofrerão umsevero castigo.",
+        "nl": "Hij verhoort degenen die geloven en goede werken verrichten en vemenigvuldigt voor hen van Zijn gunst, maar voor de ongelovigen is er een harde bestraffing.",
+        "ur": "وہ ایمان لانے والوں اور نیک عمل کرنے والوں کی دعا قبول کرتا ہے اور اپنے فضل سے ان کو اور زیادہ دیتا ہے رہے انکار کرنے والے، تو ان کے لیے دردناک سزا ہے",
+        "bn": "আৰু যিসকলে ঈমান আনিছে আৰু সৎকৰ্ম কৰিছে তেওঁলোকৰ আহ্বানত তেওঁ সঁহাৰি দিয়ে আৰু তেওঁলোকৰ প্ৰতি তেওঁৰ অনুগ্ৰহ বৃদ্ধি কৰি দিয়ে; আৰু কাফিৰসকলৰ বাবে আছে কঠিন শাস্তি।",
+        "fa": "او [درخواستِ] مؤمنانِ نیكوكار را مى‌پذیرد و از فضلِ خویش بر [پاداش] آنان مى‌افزاید؛ و کافران عذابى سخت [در پیش] دارند."
+      }
+    },
+    {
+      "verse_number": 4299,
+      "verse_key": "42:27",
+      "arabic_text": "۞ وَلَوْ بَسَطَ ٱللَّهُ ٱلرِّزْقَ لِعِبَادِهِۦ لَبَغَوْا۟ فِى ٱلْأَرْضِ وَلَـٰكِن يُنَزِّلُ بِقَدَرٍ مَّا يَشَآءُ ۚ إِنَّهُۥ بِعِبَادِهِۦ خَبِيرٌۢ بَصِيرٌ",
+      "phonetic_text": "Walaw basata Allahu arrizqaliAAibadihi labaghaw fee al-ardi walakinyunazzilu biqadarin ma yashao innahu biAAibadihikhabeerun baseer",
+      "translations": {
+        "fr": "Si Allah dispensait trop largement les bienfaits à Ses serviteurs, ceux-ci se livreraient aux abus sur terre, mais Il leur envoie avec mesure ce qu’il Lui plaît (d’envoyer). Il est certes parfaitement Informé de Ses serviteurs, et Il est, à leur sujet, infiniment Lucide.",
+        "en": "If God were to grant His plentiful provision to [all] His creatures, they would act insolently on earth, but He sends down in due measure whatever He will, for He is well aware of His servants and watchful over them:",
+        "es": "Si Dios les hubiera dado a Sus siervos un sustento sin límites, se habrían extralimitado en la Tierra; pero les concede [el sustento] en la justa medida [para cada uno]<sup foot_note=169181>1</sup>. Él lo sabe todo y lo ve todo.",
+        "it": "Se Allah avesse dato abbondanza di ricchezze ai Suoi servi, si sarebbero ribellati sulla terra. Elargisce invece ciò che vuole, con misura. Egli è ben informato sui Suoi servi e li osserva.",
+        "ru": "Если бы Аллах увеличил удел Своим рабам, они стали бы бесчинствовать на земле. Однако Он ниспосылает его в меру, как пожелает. Воистину, Он ведает о Своих рабах и видит их.",
+        "tr": "Eğer Allah rızkı kullarına bol bol verseydi, mutlaka yeryüzünde azgınlık ederlerdi. Fakat O dilediğini belli bir ölçüye göre indiriyor. Şüphesiz ki O, kullarından haberdardır, onları hakkıyla görür.",
+        "de": "Und würde Allah Seinen Dienern die Versorgung großzügig zuteilen, würden sie auf der Erde Ungerechtigkeit verüben. Aber Allah läßt im richtigen Maß herabkommen, was Er will. Er hat Kenntnis von Seinen Dienern und sieht sie wohl.",
+        "pt": "E se Deus prodigalizasse a Sua graça a todos os Seus servos, eles se excederiam na terra; porém, agraciaproporcionalmente, porque está bem inteirado, e é Observador dos Seus servos.",
+        "nl": "En als Allah de voorzieningen aan Zijn dienaren had verruimd, dan zouden zij zeker buitensporig hebben gehandeld op de aarde, maar Hij zendt volgens een bepaalde maat neer wat Hij wil. Voorwaar, Hij is Alwetend over Zijn dienaren, Alziend.",
+        "ur": "اگر اللہ اپنے سب بندوں کو کھُلا رزق دے دیتا تو وہ زمین میں سرکشی کا طوفان برپا کر دیتے، مگر وہ ایک حساب سے جتنا چاہتا ہے نازل کر تا ہے، یقیناً وہ اپنے بندوں سے باخبر ہے اور اُن پر نگاہ رکھتا ہے۔ <sup foot_note=\"187038\">1</sup>",
+        "bn": "আৰু যদি আল্লাহে তেওঁৰ বান্দাসকলৰ জীৱিকা প্ৰশস্ত কৰি দিলেহেঁতেন, তেন্তে সিহঁতে পৃথিৱীত অৱশ্যে সীমালংঘন কৰিলেহেঁতেন; কিন্তু তেওঁ নিজৰ ইচ্ছামতে নিৰ্দিষ্ট পৰিমাণে (জীৱিকা) অৱতীৰ্ণ কৰে। নিশ্চয় তেওঁ নিজ বান্দাসকলৰ বিষয়ে সম্যক অৱহিত আৰু সৰ্বদ্ৰষ্টা।",
+        "fa": "اگر الله روزىِ [برخى از] بندگانش را گشایش مى‌داد، در زمین ستم و سركشى مى‌كردند؛ ولى به ‌اندازه‌اى كه بخواهد مقرر مى‌دارد؛ زیرا او قطعاً به [حال] بندگانش آگاه و بیناست."
+      }
+    },
+    {
+      "verse_number": 4300,
+      "verse_key": "42:28",
+      "arabic_text": "وَهُوَ ٱلَّذِى يُنَزِّلُ ٱلْغَيْثَ مِنۢ بَعْدِ مَا قَنَطُوا۟ وَيَنشُرُ رَحْمَتَهُۥ ۚ وَهُوَ ٱلْوَلِىُّ ٱلْحَمِيدُ",
+      "phonetic_text": "Wahuwa allathee yunazzilu alghaythamin baAAdi ma qanatoo wayanshuru rahmatahuwahuwa alwaliyyu alhameed",
+      "translations": {
+        "fr": "C’est Lui Qui fait descendre la pluie bénéfique après que (les hommes) en désespèrent, et répand Sa grâce, Lui le Protecteur, le Digne de Toute Louange.",
+        "en": "it is He who sends relief through rain after they have lost hope, and spreads His mercy far and wide. He is the Protector, Worthy of All Praise.",
+        "es": "Él es Quien hizo descender la lluvia beneficiosa cuando habían caído en la desesperación<sup foot_note=169182>1</sup>, esparciendo Su misericordia. Él es el Protector, el Digno de alabanza.",
+        "it": "Egli è Colui che fa scendere la pioggia, quando già se ne dispera; così diffonde la Sua misericordia. E il Patrono, il Degno di lode.",
+        "ru": "Он - Тот, Кто ниспосылает дождь после того, как они отчаиваются, и распространяет Свою милость. Он - Достохвальный Покровитель.",
+        "tr": "İnsanlar ümitlerini kestikten sonra yağmuru indiren ve rahmetini her tarafa yayan O'dur. Övülmeye layık olan gerçek dost O'dur.",
+        "de": "Und Er ist es, Der den Regen herabkommen läßt, nachdem sie die Hoffnung aufgegeben haben, und Der Seine Barmherzigkeit ausbreitet. Und Er ist der Schutzherr und Lobenswürdige.",
+        "pt": "Ele é Que lhes faz descer a chuva, após o desespero (da seca), e dispensa a Sua misericórdia (a quem Lhe apraz), porque é o Protetor, o Laudabilíssimo.",
+        "nl": "En Hij is Degene Die de regen neerzendt nadat zij wanhoopten, en Hij verspreidt Zijn Barmhartigheid, en Hij is de Beschermheer, de Geprezene.",
+        "ur": "وہی ہے جو لوگوں کے مایوس ہو جانے کے بعد مینّہ برساتا ہے اور اپنی رحمت پھیلادیتا ہے، اور وہی قابلِ تعریف ولی ہے۔ <sup foot_note=\"187039\">1</sup>",
+        "bn": "আৰু সিহঁত নিৰাশ হোৱাৰ পিছত তেৱেঁই বৰষুণ অৱতীৰ্ণ কৰে আৰু তেওঁৰ ৰহমত বিস্তাৰ কৰে। তেৱেঁই অভিভাৱক, অত্যন্ত প্ৰশংসিত।",
+        "fa": "او ذاتی است كه باران را پس از نومیدى [مردم] مى‌فرستد و رحمت خویش را مى‌گسترد؛ و او تعالی كارساز و ستوده است."
+      }
+    },
+    {
+      "verse_number": 4301,
+      "verse_key": "42:29",
+      "arabic_text": "وَمِنْ ءَايَـٰتِهِۦ خَلْقُ ٱلسَّمَـٰوَٰتِ وَٱلْأَرْضِ وَمَا بَثَّ فِيهِمَا مِن دَآبَّةٍ ۚ وَهُوَ عَلَىٰ جَمْعِهِمْ إِذَا يَشَآءُ قَدِيرٌ",
+      "phonetic_text": "Wamin ayatihi khalqu assamawatiwal-ardi wama baththa feehima min dabbatinwahuwa AAala jamAAihim itha yashao qadeer",
+      "translations": {
+        "fr": "L’un de Ses Signes est la création des cieux, de la terre et de tous les êtres vivants qui y sont dispersés. Or, Il est Infiniment Capable de les réunir quand Il le voudra.",
+        "en": "Among His signs is the creation of the heavens and earth and all the living creatures He has scattered throughout them: He has the power to gather them all together whenever He will.",
+        "es": "Entre Sus signos está la creación de los cielos, de la Tierra y de todas las criaturas que diseminó en ella. Él tiene poder para congregarlos a todos cuando quiera.",
+        "it": "Fra i Suoi segni vi è la creazione dei cieli e della terra e degli esseri viventi che vi ha sparso; Egli è in grado di riunire tutti quando Lo vorrà <a class=f><sup foot_note=159620>1</sup></a> .",
+        "ru": "Среди Его знамений - создание небес и земли, а также тех живых существ (или те живые существа), которых Он расселил на них. Он способен собрать их, когда пожелает.",
+        "tr": "Gökleri yeri ve her ikisinde yaydığı canlıları yaratması da Allah'ın kudretinin delillerindendir. O'nun dilediği zaman onları biraraya toplamaya da gücü yeter.",
+        "de": "Und zu Seinen Zeichen gehört die Erschaffung der Himmel und der Erde und das, was Er an Tieren in ihnen beiden sich ausbreiten läßt. Und Er hat die Macht, sie zu versammeln, wenn Er will.",
+        "pt": "E entre os Seus sinais está o da criação dos céus e da terra, e de todos os seres que aí disseminou, e poderá congregá-losquando Lhe aprouver.",
+        "nl": "En tot Zijn Tekenen behoort de schepping van de hemelen en de aarde en de levende wezens die daarop rondlopen. En Hij is in stad om hen te verzamelen, wanneer Hij wil.",
+        "ur": "اُس کی نشانیوں میں سے ہے یہ زمین اور آسمانوں کی پیدائش ، اور یہ جاندار مخلوقات جو اُس نے دونوں جگہ پھیلا رکھی ہیں۔ <sup foot_note=\"187040\">1</sup> وہ جب چاہے انہیں اکٹھا کر سکتا ہے۔ <sup foot_note=\"187041\">2</sup>",
+        "bn": "আৰু তেওঁৰ অন্যতম নিদৰ্শন হৈছে আকাশসমূহ আৰু পৃথিৱীৰ সৃষ্টি আৰু এই দুয়োৰে মাজত তেওঁ যিবোৰ জীৱ-জন্তু বিস্তাৰ কৰিছে সেইবোৰো (তেওঁৰ নিদৰ্শন); আৰু তেওঁ যেতিয়াই ইচ্ছা তেতিয়াই সেইবোৰক সমবেত কৰিবলৈ সক্ষম।",
+        "fa": "از نشانه‌هاى [توان و تدبیر] او، آفرینش آسمان‌ها و زمین و موجودات زنده‌اى است كه در آنها پراكنده كرده است؛ و هر گاه اراده كند، بر جمع‌آورى آنها نیز تواناست."
+      }
+    },
+    {
+      "verse_number": 4302,
+      "verse_key": "42:30",
+      "arabic_text": "وَمَآ أَصَـٰبَكُم مِّن مُّصِيبَةٍ فَبِمَا كَسَبَتْ أَيْدِيكُمْ وَيَعْفُوا۟ عَن كَثِيرٍ",
+      "phonetic_text": "Wama asabakum min museebatinfabima kasabat aydeekum wayaAAfoo AAan katheer",
+      "translations": {
+        "fr": "Aucun malheur ne vous frappe qui ne soit dû aux œuvres commises de vos propres mains. Et Il (vous en) pardonne beaucoup.",
+        "en": "Whatever misfortune befalls you [people], it is because of what your own hands have done- God forgives much-",
+        "es": "Si os aflige una desgracia, es consecuencia de [los pecados] que vuestras propias manos han cometido, a pesar de que Dios os perdona muchas faltas [por Su gracia].",
+        "it": "Qualunque sventura vi colpisca, sarà conseguenza di quello che avranno fatto le vostre mani <a class=f><sup foot_note=159621>1</sup></a> , ma [Allah] molto perdona.",
+        "ru": "Любое бедствие постигает вас лишь за то, что приобрели ваши руки, и Он прощает вам многое.",
+        "tr": "Başınıza gelen herhangi bir musibet kendi ellerinizle kazandıklarınız yüzündendir. Bununla beraber Allah yine de çoğunu affeder.",
+        "de": "Und was immer euch an Unglück trifft, es ist für das, was eure Hände erworben haben. Und Er verzeiht vieles.",
+        "pt": "E todo o infortúnio que vos aflige é por causa do que cometeram vossas mãos, muito embora ele perdoe muitas coisas.",
+        "nl": "En er treft jullie geen ramp, of het is vanwege wat jullie handen hebben verricht, maar Hij vergeeft veel.",
+        "ur": "تم پر جو مصیبت بھی آئی ہے، تمہارے اپنے ہاتھوں کی کمائی  سے آئی ہے، اور بہت سے قصُوروں سے وہ ویسے ہی درگزر کر جاتا ہے۔ <sup foot_note=\"187042\">1</sup>",
+        "bn": "আৰু তোমালোকৰ প্ৰতি যি বিপদ-আপদ আপতিত হয় সেয়া তোমালোকৰেই কৃতকৰ্মৰ পৰিণাম আৰু বহুতো অপৰাধ তেওঁ ক্ষমা কৰি দিয়ে।",
+        "fa": "هر مصیبتی که به شما رسد، به خاطر کارهایی است که انجام داده‌اید؛ و [الله] از بسیاری [از گناهانتان] گذشت می‌کند."
+      }
+    },
+    {
+      "verse_number": 4303,
+      "verse_key": "42:31",
+      "arabic_text": "وَمَآ أَنتُم بِمُعْجِزِينَ فِى ٱلْأَرْضِ ۖ وَمَا لَكُم مِّن دُونِ ٱللَّهِ مِن وَلِىٍّ وَلَا نَصِيرٍ",
+      "phonetic_text": "Wama antum bimuAAjizeena fee al-ardiwama lakum min dooni Allahi min waliyyin walanaseer",
+      "translations": {
+        "fr": "Vous ne pourrez mettre au défi Sa puissance sur terre, et vous n’avez, en dehors d’Allah, ni protecteur ni allié.",
+        "en": "you cannot escape Him anywhere on earth: you have no protector or helper other than God.",
+        "es": "No hay lugar en la Tierra en el que podáis escapar de Dios. No tenéis protector ni socorredor fuera de Dios.",
+        "it": "Non potrete opporvi [alla Sua potenza] sulla terra e, all’infuori di Allah, non avrete né patrono né alleato.",
+        "ru": "Вы не спасетесь бегством на земле, и нет у вас, помимо Аллаха, ни покровителя, ни помощника.",
+        "tr": "Siz yeryüzünde (O'nu) aciz bırakamazsınız. Sizin Allah'tan başka bir dostunuz ve yardımcınız da yoktur.",
+        "de": "Ihr könnt euch (Ihm) auf der Erde nicht entziehen; und ihr habt außer Allah weder Schutzherrn noch Helfer.",
+        "pt": "E não podereis frustrar (a Ele) na terra; e além de Deus, não tereis outro protetor, nem socorredor.",
+        "nl": "En jullie zullen op de aarde nooit kunnen ontkomen. En er is voor jullie naast Allah geen beschermer en geen helper.",
+        "ur": "تم زمین میں اپنے خدا کو عاجز کر دینے والے نہیں ہو، اور اللہ کے مقابلے میں تم کوئی حامی و ناصر نہیں رکھتے",
+        "bn": "আৰু তোমালোকে পৃথিৱীত (আল্লাহৰ কৰ্ম পৰিকল্পনাক) ব্যৰ্থ কৰিব নোৱাৰিবা। আল্লাহৰ বাহিৰে তোমালোকৰ আন কোনো অভিভাৱক নাই আৰু কোনো সহায়কাৰীও নাই।",
+        "fa": "شما هرگز در زمین [و آسمان، الله را] به تنگ نمى‌آورید؛ و در برابر الله هیچ كارساز و یاورى نخواهید داشت."
+      }
+    },
+    {
+      "verse_number": 4304,
+      "verse_key": "42:32",
+      "arabic_text": "وَمِنْ ءَايَـٰتِهِ ٱلْجَوَارِ فِى ٱلْبَحْرِ كَٱلْأَعْلَـٰمِ",
+      "phonetic_text": "Wamin ayatihi aljawarifee albahri kal-aAAlam",
+      "translations": {
+        "fr": "Parmi Ses Signes, sont les vaisseaux (voguant) en mer, (hauts) comme des montagnes.",
+        "en": "Among His signs are the ships, sailing like floating mountains:",
+        "es": "Entre los signos [de Su misericordia] están los barcos que navegan en el mar, grandes como montañas.",
+        "it": "Fra i Suoi segni vi sono le navi, [salde] come montagne sul mare.",
+        "ru": "Среди Его знамений - плывущие по морю корабли, подобные горам.",
+        "tr": "Denizlerde yüce dağlar gibi gemilerin yürümesi de O'nun kudretinin delillerindendir.",
+        "de": "Und zu Seinen Zeichen gehören die auf dem Meer fahrenden (Schiffe), wie die Berge.",
+        "pt": "E entre os Seus sinais está o dos navios que se elevam como montanhas nos oceanos.",
+        "nl": "En tot Zijn Tekenen behoren de schepen zo groot als bergen die op de zee varen.",
+        "ur": "اُس کی نشانیوں میں سے ہیں یہ جہاز جو سمندر میں پہاڑوں کی طرح نظر آتے ہیں",
+        "bn": "তেওঁৰ নিদৰ্শনাৱলীৰ মাজত আছে সাগৰত চলাচল কৰা পৰ্বতসদৃশ নৌযানসমূহ।",
+        "fa": "از نشانه‌های [توان و تدبیرِ] الهی، کشتی‌های کوه‌پیکری است که در دریاها در حرکتند."
+      }
+    },
+    {
+      "verse_number": 4305,
+      "verse_key": "42:33",
+      "arabic_text": "إِن يَشَأْ يُسْكِنِ ٱلرِّيحَ فَيَظْلَلْنَ رَوَاكِدَ عَلَىٰ ظَهْرِهِۦٓ ۚ إِنَّ فِى ذَٰلِكَ لَـَٔايَـٰتٍ لِّكُلِّ صَبَّارٍ شَكُورٍ",
+      "phonetic_text": "In yasha/ yuskini arreehafayathlalna rawakida AAala thahrihiinna fee thalika laayatin likulli sabbarinshakoor",
+      "translations": {
+        "fr": "S’Il veut, Il calme les vents, (et les vaisseaux) restent alors immobiles à la surface (de la mer). Il y a certes là des Signes pour qui est persévérant et reconnaissant.",
+        "en": "if He willed, He could bring the wind to a standstill and they would lie motionless on the surface of the sea- there truly are signs in this for anyone who is steadfast and thankful-",
+        "es": "Pero cuando quiere, calma el viento y permanecen inmóviles en la superficie. En esto hay signos para todo perseverante, agradecido [con Dios].",
+        "it": "Se vuole, calma i venti ed ecco che stanno immobili sulla superficie [marina]. In verità in ciò vi sono segni per tutti i pazienti e i riconoscenti.",
+        "ru": "Если Он пожелает, то успокоит ветер, и тогда они останутся неподвижными на его (моря) поверхности. Воистину, в этом - знамения для каждого терпеливого, благодарного.",
+        "tr": "Eğer O dilerse rüzgarı durdurur da yelkenle giden gemiler denizin üzerinde duruverirler. Şüphesiz ki bunda sabırlı olan ve çok şükreden kimseler için nice ibretler vardır.",
+        "de": "Wenn Er will, läßt Er den Wind sich legen, dann bleiben sie bewegungslos auf seiner Oberfläche stehen. Darin sind wahrlich Zeichen für jeden sehr Standhaften und sehr Dankbaren;",
+        "pt": "E quando Lhe apraz, acalma o vento, fazendo com que permaneçam imóveis na superfície. Sabei que nisto há sinais paratodo o perseverante, agradecido.",
+        "nl": "En als Hij wil, dan laat Hij de wind liggen, zodat de schepen stil komen te liggen op haar oppervlak. Voorwaar, daarin zijn zeker tekenen vooir iedere geduldige en dankbare.",
+        "ur": "اللہ جب چاہے ہوا کو ساکن کر دے اور یہ سمندر کی پیٹھ پر کھڑے کے کھڑے رہ جائیں۔۔۔۔ اِس میں بڑی نشانیاں ہیں ہر اُس شخص کے لیے جو کمال درجہ صبر و شکر کرنے والا ہو <sup foot_note=\"187043\">1</sup>",
+        "bn": "তেওঁ ইচ্ছা কৰিলে বায়ুক স্তব্ধ কৰি দিব পাৰে, ফলত নৌযানসমূহ গতিহীন হৈ পৰিব সমুদ্ৰপৃষ্ঠত। নিশ্চয় ইয়াত বহুতো নিদৰ্শন আছে, প্ৰত্যেক চৰম ধৈৰ্যশীল আৰু একান্ত কৃতজ্ঞ ব্যক্তিৰ বাবে।",
+        "fa": "اگر الله بخواهد، باد را ساكن مى‌گردانَد تا [کشتی‌ها] بر پهنۀ دریا بى‌حركت بمانند. به راستى در این [امر،] براى هر شكیباى سپاسگزاری، نشانه‌هایى است."
+      }
+    },
+    {
+      "verse_number": 4306,
+      "verse_key": "42:34",
+      "arabic_text": "أَوْ يُوبِقْهُنَّ بِمَا كَسَبُوا۟ وَيَعْفُ عَن كَثِيرٍ",
+      "phonetic_text": "Aw yoobiqhunna bima kasaboo wayaAAfuAAan katheer",
+      "translations": {
+        "fr": "Ou bien (s’Il le voulait), Il ferait couler (ces vaisseaux) en punition de ce que (les hommes) ont commis (comme péchés). Mais Il (en) pardonne beaucoup !",
+        "en": "or He could cause them to be wrecked on account of what their passengers have done- God pardons much-",
+        "es": "O podría hacerles naufragar a causa de sus pecados, pero Dios perdona muchas de las faltas.",
+        "it": "Oppure le annienta per quel che si meritarono <a class=f><sup foot_note=159622>1</sup></a> ; ma Egli molto perdona.",
+        "ru": "Он может погубить их (корабли) за то, что они (люди) приобрели, но Он прощает многих.",
+        "tr": "Yahut da Allah kazandıkları günahlar yüzünden onları helâk eder ve birçoğunu da bağışlar.",
+        "de": "oder Er läßt sie untergehen für das, was sie verdient haben. Und Er verzeiht vieles.",
+        "pt": "Contudo, aniquila alguns, por tudo quanto tiverem cometido, e perdoa muitos.",
+        "nl": "Of Hij vernietigt deze (schepen) wegens wat zij verichtten, maar Hij vergeeft veel.",
+        "ur": "یا (اُن پر سوار ہونے والوں کے) بہت سے گناہوں سے در گزر کرتے ہوئے ان کے چند ہی کرتوتوں کی پاداش میں انہیں ڈبو دے",
+        "bn": "অথবা সিহঁতৰ কৃতকৰ্মৰ বাবে সেইবোৰক তেওঁ ধ্বংস কৰি দিব পাৰে; আৰু বহুতো (অপৰাধক) তেওঁ ক্ষমাও কৰে।",
+        "fa": "یا [اگر بخواهد، سرنشینانِ] آن کشتی‌ها را به کیفر اعمالشان نابود می‌سازد؛ در حالی که او از بسیاری [از گناهان] ‌گذشت می‌کند."
+      }
+    },
+    {
+      "verse_number": 4307,
+      "verse_key": "42:35",
+      "arabic_text": "وَيَعْلَمَ ٱلَّذِينَ يُجَـٰدِلُونَ فِىٓ ءَايَـٰتِنَا مَا لَهُم مِّن مَّحِيصٍ",
+      "phonetic_text": "WayaAAlama allatheena yujadiloonafee ayatina ma lahum min mahees",
+      "translations": {
+        "fr": "(Afin que) ceux qui disputent au sujet de Nos Signes sachent bien qu’ils n’ont aucune issue (pour se sauver).",
+        "en": "to let those who argue about Our messages know that there is no escape for them.",
+        "es": "Ya sabrán quienes disputan sobre Mis signos que no tendrán escapatoria<sup foot_note=169183>1</sup>.",
+        "it": "Coloro che polemizzano sui Nostri segni, sappiano di non avere nessuna via d’uscita.",
+        "ru": "Те, которые препираются относительно Наших знамений, знают, что они не смогут сбежать.",
+        "tr": "Âyetlerimiz hakkında mücadele edenler bilsinler ki kendileri için kaçacak bir yer yoktur.",
+        "de": "Und diejenigen, die über Unsere Zeichen streiten, sollen wissen, daß es für sie kein Entrinnen gibt.",
+        "pt": "E saibam aqueles, que disputam acerca dos nossos versículos, que não terão escapatória.",
+        "nl": "En opdat zij die over Onze Tekenen redetwisten weten dat er voor hen geen uitweg is.",
+        "ur": "اور اُس وقت ہماری آیات میں جھگڑے کرنے والوں کو پتہ چل جائے کہ ان کے لیے کوئی جائے پناہ نہیں ہے۔ <sup foot_note=\"187044\">1</sup>",
+        "bn": "আৰু যিসকলে আমাৰ নিদৰ্শন সম্পৰ্কে বিতৰ্ক কৰে, সিহঁতে যাতে জানিবলৈ পায় যে, সিহঁতৰ কোনো আশ্ৰয়স্থল নাই।",
+        "fa": "[تا موجب عبرت باشد] و كسانى كه در مورد آیات ما به مجادله برمى‌خیزند، بدانند كه [اگر عذاب الهی فرارسد،] راه گریزى نخواهند داشت."
+      }
+    },
+    {
+      "verse_number": 4308,
+      "verse_key": "42:36",
+      "arabic_text": "فَمَآ أُوتِيتُم مِّن شَىْءٍ فَمَتَـٰعُ ٱلْحَيَوٰةِ ٱلدُّنْيَا ۖ وَمَا عِندَ ٱللَّهِ خَيْرٌ وَأَبْقَىٰ لِلَّذِينَ ءَامَنُوا۟ وَعَلَىٰ رَبِّهِمْ يَتَوَكَّلُونَ",
+      "phonetic_text": "Fama ooteetum min shay-in famataAAualhayati addunya wama AAindaAllahi khayrun waabqa lillatheena amanoowaAAala rabbihim yatawakkaloon",
+      "translations": {
+        "fr": "Rien ne vous a été donné qui ne soit jouissance éphémère de ce bas monde. Ce qu’il y a auprès d’Allah est bien meilleur et plus durable pour ceux qui ont cru<sup foot_note=195103>1</sup> et qui s’en remettent à leur Seigneur,",
+        "en": "What you have been given is only the fleeting enjoyment of this world. Far better and more lasting is what God will give to those who believe and trust in their Lord;",
+        "es": "Lo que se les ha concedido [de bienes materiales] es parte de los placeres transitorios de esta vida mundanal. Pero la recompensa que Dios tiene reservada [en el Paraíso] será mejor y más duradera, para quienes crean y se encomienden a su Señor,",
+        "it": "Tutto ciò che vi è stato concesso non è che godimento effimero di questa vita, mentre quel che è presso Allah è migliore e duraturo; [lo avranno] coloro che credono e confidano nel loro Signore,",
+        "ru": "Все, что даровано вам, является преходящим благом мирской жизни. А то, что есть у Аллаха, будет лучше и долговечнее для тех, которые уверовали и уповают на своего Господа,",
+        "tr": "Size verilen herhangi bir şey sadece dünya hayatının geçici bir menfaatidir. Allah katında bulunanlar ise iman edip sadece Rablerine güvenen kimseler için daha hayırlı ve daha kalıcıdır.",
+        "de": "Was immer euch gegeben worden ist, ist Nießbrauch des diesseitigen Lebens. Was aber bei Allah ist, ist besser und beständiger für diejenigen, die glauben und sich auf ihren Herrn verlassen,",
+        "pt": "Tudo quanto vos foi concedido (até agora) é o efêmero gozo da vida terrena; no entanto, o que está junto a Deus épreferível e mais perdurável, para os fiéis que se encomendam a seu Senhor.",
+        "nl": "En wat jullie gegeven is, is slechts een vergankelijke genieting van het wereldse leven. Maar wat zich bij Allah bevindt is beter en blijvender voor hen die geloven en die op hun Heer vertrouwen.",
+        "ur": "جو کچھ بھی تم لوگوں کو دیا گیا ہے وہ محض دنیا کی چند روزہ زندگی کا سروسامان ہے، <sup foot_note=\"187045\">1</sup> اور جو کچھ اللہ کے ہاں ہے وہ بہتر بھی ہے اور پائیدار بھی۔ <sup foot_note=\"187046\">2</sup> وہ اُن لوگوں کے لیے ہے جو ایمان لائے ہیں اور اپنے ربّ پر بھروسہ کرتے ہیں، <sup foot_note=\"187047\">3</sup>",
+        "bn": "এতেকে তোমালোকক যি দিয়া হৈছে সেয়া কেৱল পাৰ্থিৱ জীৱনৰ ভোগ-সামগ্ৰীহে। আৰু আল্লাহৰ ওচৰত যি আছে সেয়া উত্তম আৰু স্থায়ী, তেওঁলোকৰ বাবে যিসকলে ঈমান আনিছে আৰু তেওঁলোকে নিজ প্ৰতিপালকৰ ওপৰত তাৱাক্কুল কৰে,",
+        "fa": "[ای مردم،] آنچه به شما داده شده است، نعمت‌های [گذراىِ] زندگى دنیاست؛ و آنچه نزد الله است، براى مؤمنانى كه بر پروردگارشان توکل مى‌كنند، بهتر و پاینده‌تر است."
+      }
+    },
+    {
+      "verse_number": 4309,
+      "verse_key": "42:37",
+      "arabic_text": "وَٱلَّذِينَ يَجْتَنِبُونَ كَبَـٰٓئِرَ ٱلْإِثْمِ وَٱلْفَوَٰحِشَ وَإِذَا مَا غَضِبُوا۟ هُمْ يَغْفِرُونَ",
+      "phonetic_text": "Wallatheena yajtaniboona kaba-iraal-ithmi walfawahisha wa-itha ma ghadiboohum yaghfiroon",
+      "translations": {
+        "fr": "ceux qui évitent les péchés majeurs et les turpitudes, et qui, (même) sous l’emprise de la colère, pardonnent volontiers ;",
+        "en": "who shun great sins and gross indecencies; who forgive when they are angry;",
+        "es": "para quienes evitan los pecados graves y las obscenidades, y cuando se enojan saben perdonar;",
+        "it": "coloro che evitano i peccati più gravi e le turpitudini e che perdonano quando si adirano,",
+        "ru": "которые избегают великих грехов и мерзостей и прощают, когда гневаются,",
+        "tr": "O iman edenler, büyük günahlardan ve hayasızlıktan kaçınırlar. Onlar öfkelendikleri zaman da kusurları bağışlarlar.",
+        "de": "und diejenigen, die schwerwiegende Sünden und Abscheulichkeiten meiden und, wenn sie zornig sind, (doch) vergeben,",
+        "pt": "São aqueles que as abstêm dos pecados graves e das obscenidades e que, embora zangados, sabem perdoar,",
+        "nl": "En (zij zijn) degenen die de grote zonden en de verdorvenheid mijden. En als zij boos zijn, dan vergeven zij.",
+        "ur": "جو بڑے بڑے گناہوں اور بے حیائی کے کاموں سے پرہیز کرتے ہیں <sup foot_note=\"187048\">1</sup> اور اگر غصّہ آجائے تو درگزر کر جاتے ہیں، <sup foot_note=\"187049\">2</sup>",
+        "bn": "তেওঁলোকে কাবীৰা গুনাহ আৰু অশ্লীল কৰ্মৰ পৰা আঁতৰত থাকে আৰু যেতিয়া খং উঠে তেতিয়া ক্ষমা কৰি দিয়ে।",
+        "fa": "و [نیز براى] کسانی كه از گناهان بزرگ و بی‌حیایی‌ها اجتناب می‌ورزند و آنگاه كه خشمگین می‌شوند، گذشت مى‌كنند."
+      }
+    },
+    {
+      "verse_number": 4310,
+      "verse_key": "42:38",
+      "arabic_text": "وَٱلَّذِينَ ٱسْتَجَابُوا۟ لِرَبِّهِمْ وَأَقَامُوا۟ ٱلصَّلَوٰةَ وَأَمْرُهُمْ شُورَىٰ بَيْنَهُمْ وَمِمَّا رَزَقْنَـٰهُمْ يُنفِقُونَ",
+      "phonetic_text": "Wallatheena istajaboolirabbihim waaqamoo assalatawaamruhum shoora baynahum wamimma razaqnahumyunfiqoon",
+      "translations": {
+        "fr": "et ceux qui répondent (à l’appel) de leur Seigneur, accomplissent la Çalât et dont les affaires sont, entre eux, sujet de concertation ; ceux qui dépensent (en aumône) des biens que Nous leur dispensons,",
+        "en": "respond to their Lord; keep up the prayer; conduct their affairs by mutual consultation; give to others out of what We have provided for them;",
+        "es": "para quienes responden a su Señor, cumplen con la oración prescrita, se consultan para resolver sus asuntos y con lo que les he concedido hacen caridades,",
+        "it": "coloro che rispondono al loro Signore, assolvono all’orazione, si consultano vicendevolmente su quel che li concerne <a class=f><sup foot_note=159623>1</sup></a> e sono generosi di ciò che Noi abbiamo concesso loro;",
+        "ru": "которые отвечают своему Господу, совершают намаз, совещаются между собой о делах и расходуют из того, чем Мы их наделили,",
+        "tr": "Onlar, Rablerinin davetini kabul ederler ve namazı dosdoğru kılarlar. Onların işleri de kendi aralarında bir istişare iledir. Kendilerine verdiğimiz rızıktan onlar Allah yolunda harcarlar.",
+        "de": "und diejenigen, die auf ihren Herrn hören und das Gebet verrichten, ihre Angelegenheit(en) durch Beratung untereinander (regeln) und von dem ausgeben, womit Wir sie versorgt haben,",
+        "pt": "Que atendem ao seu Senhor, observam a oração, resolvem os seus assuntos em consulta e fazem caridade daquilo comque os agraciamos;",
+        "nl": "En (zij zijn) degenen die gehoor geven aan hun Heer en de shalât onderhouden, en hun zaken in onderling overleg (Sjôera) beslissen, en zij geven uit van waar Wij hun mee voorzien hebben.",
+        "ur": "جو اپنے ربّ کا حکم مانتے ہیں، <sup foot_note=\"187050\">1</sup> نماز قائم کرتے ہیں، اپنے معاملات آپس کے مشورے سے چلاتے ہیں، <sup foot_note=\"187051\">2</sup> ہم نے جو کچھ بھی رزق انہیں دیا ہے اُس میں سے خرچ کرتے ہیں، <sup foot_note=\"187052\">3</sup>",
+        "bn": "আৰু তেওঁলোকে নিজ প্ৰতিপালকৰ আহ্বানত সঁহাৰি দিয়ে, ছালাত কায়েম কৰে আৰু তেওঁলোকৰ কাৰ্যাৱলী পৰস্পৰ পৰামৰ্শৰ মাধ্যমত সম্পাদিত হয়। আৰু তেওঁলোকক আমি যি জীৱিকা দান কৰিছোঁ তাৰ পৰা ব্যয় কৰে।",
+        "fa": "و کسانی كه [دعوت] پروردگارشان را پذیرا مى‌شوند و نماز برپا مى‌دارند و كارشان در ميانشان [بر پايه‌] مشورت است و از آنچه روزى‌شان كرده‌ایم، انفاق مى‌كنند."
+      }
+    },
+    {
+      "verse_number": 4311,
+      "verse_key": "42:39",
+      "arabic_text": "وَٱلَّذِينَ إِذَآ أَصَابَهُمُ ٱلْبَغْىُ هُمْ يَنتَصِرُونَ",
+      "phonetic_text": "Wallatheena itha asabahumualbaghyu hum yantasiroon",
+      "translations": {
+        "fr": "et ceux qui, lorsqu’ils sont injustement agressés, se défendent.",
+        "en": "and defend themselves when they are oppressed.",
+        "es": "y cuando son víctimas de una injusticia son solidarios unos con otros [para restablecer la justicia].",
+        "it": "coloro che si difendono quando sono vittime dell’ingiustizia <a class=f><sup foot_note=159624>1</sup></a> .",
+        "ru": "которые мстят, когда против них поступают несправедливо.",
+        "tr": "Onlar, bir zulüm ve saldırıya uğradıkları zaman birbirleriyle yardımlaşırlar.",
+        "de": "und diejenigen, die, wenn Gewalttätigkeit gegen sie verübt wird, sich selbst helfen.",
+        "pt": "E que, quando são afligidos por um erro opressivo, sabem defender-se.",
+        "nl": "En (zij zijn) degenen die, als onrecht hen treft, zich verdedigen.",
+        "ur": "اور جب ان پر زیادتی کی جاتی ہے تو اس کا مقابلہ کرتے ہیں <sup foot_note=\"186970\">1</sup>",
+        "bn": "আৰু তেওঁলোকৰ ওপৰত অতিৰিক্ত অন্যায়-অবিচাৰ কৰা হ’লে তেওঁলোকে ইয়াৰ প্ৰতিবিধান কৰে।",
+        "fa": "و کسانی که هر گاه ستمی به آنان برسد، [به دفاع و] انتقام برمی‌خیزند."
+      }
+    },
+    {
+      "verse_number": 4312,
+      "verse_key": "42:40",
+      "arabic_text": "وَجَزَٰٓؤُا۟ سَيِّئَةٍ سَيِّئَةٌ مِّثْلُهَا ۖ فَمَنْ عَفَا وَأَصْلَحَ فَأَجْرُهُۥ عَلَى ٱللَّهِ ۚ إِنَّهُۥ لَا يُحِبُّ ٱلظَّـٰلِمِينَ",
+      "phonetic_text": "Wajazao sayyi-atin sayyi-atun mithluhafaman AAafa waaslaha faajruhu AAalaAllahi innahu la yuhibbu aththalimeen",
+      "translations": {
+        "fr": "À tout tort subi une sanction égale. Celui qui pardonne, cependant, et cherche réconciliation, trouvera sa récompense auprès d’Allah, Qui, Lui, n’aime pas les injustes.",
+        "en": "Let harm be requited by an equal harm, though anyone who forgives and puts things right will have his reward from God Himself––He does not like those who do wrong.",
+        "es": "La ofensa debe ser retribuida por una pena equivalente<sup foot_note=169184>1</sup>, pero quienes sepan perdonar y acepten conciliar serán recompensados por Dios. Él no ama a los injustos.",
+        "it": "La sanzione di un torto è un male corrispondente, ma chi perdona e si riconcilia, avrà in Allah il suo compenso <a class=f><sup foot_note=159625>1</sup></a> . In verità Egli non ama gli ingiusti.",
+        "ru": "Воздаянием за зло является равноценное зло. Но если кто простит и установит мир, то его награда будет за Аллахом. Воистину, Он не любит беззаконников.",
+        "tr": "Bir kötülüğün cezası yine onun gibi bir kötülüktür, ama kim affeder, bağışlarsa onun mükafatı Allah'a aittir. Şüphesiz ki Allah, zalimleri sevmez.",
+        "de": "Die Vergeltung für eine böse Tat ist etwas gleich Böses. Wer aber verzeiht und Besserung bringt, dessen Lohn obliegt Allah. Er liebt ja nicht die Ungerechten.",
+        "pt": "E o delito será expiado com o talião; mas, quanto àquele que indultar (possíveis ofensas dos inimigos) e se emendar, saiba que a sua recompensa pertencerá a Deus, porque Ele não estima os agressores.",
+        "nl": "En de vergelding voor een slechte daad is dezelfde slechte daad, maar voor wie vergeeft en verzoent: zijn beloning is bij Allah. Voorwaar, Hij houdt niet van de onrechtplegers.",
+        "ur": "<sup foot_note=\"171539\">1</sup> بُرائی کا بدلہ ویسی ہی بُرائی ہے <sup foot_note=\"171540\">2</sup> ، پھر جو کوئی معاف کردے اور اصلاح کرے اُس کا اجر اللہ کے ذمّہ ہے، <sup foot_note=\"171541\">3</sup> اللہ ظالموں کو پسند نہیں کرتا۔ <sup foot_note=\"171542\">4</sup>",
+        "bn": "আৰু বেয়াৰ প্ৰতিফল সেই অনুপাতেই বেয়া। এতেকে যিয়ে ক্ষমা কৰি দিয়ে আৰু আপোচ-নিষ্পত্তি কৰে তাৰ বাবে আছে আল্লাহৰ ওচৰত পুৰস্কাৰ। নিশ্চয় তেওঁ অন্যায়কাৰী বিলাকক পছন্দ নকৰে।",
+        "fa": "و جزای هر بدی، کیفری همانند آن بدی است [نه بیشتر]؛ اما هر کس گذشت کند و کار را به اصلاح [و آشتی] آورَد، پاداشش بر عهدۀ الله است. بی‌گمان، او ستمکاران را دوست ندارد."
+      }
+    },
+    {
+      "verse_number": 4313,
+      "verse_key": "42:41",
+      "arabic_text": "وَلَمَنِ ٱنتَصَرَ بَعْدَ ظُلْمِهِۦ فَأُو۟لَـٰٓئِكَ مَا عَلَيْهِم مِّن سَبِيلٍ",
+      "phonetic_text": "Walamani intasara baAAda thulmihifaola-ika ma AAalayhim min sabeel",
+      "translations": {
+        "fr": "Ceux qui se défendent contre une injustice, ceux-là ne sont sujets à aucune poursuite (légale).",
+        "en": "There is no cause to act against anyone who defends himself after being wronged,",
+        "es": "Quien se defiende cuando es oprimido, no debe ser reprochado.",
+        "it": "Chi si difende per aver subito un torto non incorre in nessuna sanzione.",
+        "ru": "Нет укора тем, которые мстят после того, как с ними поступили несправедливо.",
+        "tr": "Zulme uğradıktan sonra hakkını alan kimseye gelince, işte onların aleyhinde ceza vermek için herhangi bir yol yoktur.",
+        "de": "Und wer immer sich selbst hilft, nachdem ihm Unrecht zugefügt wurde, gegen jene gibt es keine Möglichkeit (, sie zu belangen).",
+        "pt": "Contudo, aqueles que se vingarem, quando houverem sido vituperados, não serão incriminados.",
+        "nl": "En wie zich verdedigt nadat hem onrecht is aangedaan: zij zijn degenen tegen wie er geen weg (tot bestraffing) is.",
+        "ur": "اور جو لوگ ظلم ہونے کے بعد بدلہ لیں اُن کو ملامت نہیں کی جا سکتی",
+        "bn": "কিন্তু অত্যাচাৰিত হোৱাৰ পিছত যিসকলে প্ৰতিবিধান কৰে, তেওঁলোকৰ বিৰুদ্ধে কোনো ব্যৱস্থা গ্ৰহণ কৰা নহ’ব,",
+        "fa": "البته کسانی كه پس از ستمى كه دیده‌اند، انتقام می‌گیرند، هیچ [بازخواست و] سرزنشی بر آنان نیست."
+      }
+    },
+    {
+      "verse_number": 4314,
+      "verse_key": "42:42",
+      "arabic_text": "إِنَّمَا ٱلسَّبِيلُ عَلَى ٱلَّذِينَ يَظْلِمُونَ ٱلنَّاسَ وَيَبْغُونَ فِى ٱلْأَرْضِ بِغَيْرِ ٱلْحَقِّ ۚ أُو۟لَـٰٓئِكَ لَهُمْ عَذَابٌ أَلِيمٌ",
+      "phonetic_text": "Innama assabeelu AAalaallatheena yathlimoona annasawayabghoona fee al-ardi bighayri alhaqqi ola-ikalahum AAathabun aleem",
+      "translations": {
+        "fr": "Il n’y aura de poursuite que contre ceux qui commettent des injustices envers les autres, qui se livrent, sans juste raison, aux abus sur terre : ceux-là subiront un supplice très douloureux.",
+        "en": "but there is cause to act against those who oppress people and transgress in the land against all justice- they will have an agonizing torment-",
+        "es": "Los que deben ser reprochados son quienes oprimen a la gente y se comportan con soberbia en la Tierra sin derecho alguno. Esos sufrirán un castigo doloroso.",
+        "it": "Non c’è sanzione se non contro coloro che sono ingiusti con gli uomini e, senza ragione, spargono la corruzione sulla terra: essi avranno doloroso castigo.",
+        "ru": "Укора заслуживают только те, которые поступают несправедливо с людьми и бесчинствуют на земле без всякого права. Им уготованы мучительные страдания.",
+        "tr": "Yol ancak insanlara zulmedenler ve yeryüzünde haksız yere taşkınlık edenler aleyhinedir. İşte onlar için acı bir azap vardır.",
+        "de": "Eine Möglichkeit (zu belangen) gibt es nur gegen diejenigen, die den Menschen Unrecht zufügen und auf der Erde ohne Recht Gewalttätigkeiten begehen. Für sie wird es schmerzhafte Strafe geben.",
+        "pt": "Só serão incriminados aqueles que injustamente vituperarem e oprimirem os humanos, na terra; esses sofrerão umdoloroso castigo.",
+        "nl": "Er is wel een weg (tot bestraffing) tegen degenen die de mensen onrecht aandeden en die zonder recht buitensporig op aarde handelden. Zij zijn degenen voor wie er een pijnlijke bestraffing is.",
+        "ur": "ملامت کے مستحق تو وہ ہیں جو دوسروں پر ظلم کرتے ہیں اور زمین میں ناحق زیادتیاں کرتے ہیں ایسے لوگوں کے لیے دردناک عذاب ہے",
+        "bn": "কেৱল সিহঁতৰ বিৰুদ্ধে ব্যৱস্থা গ্ৰহণ কৰা হ’ব যিসকলে মানুহৰ ওপৰত অন্যায় কৰে আৰু পৃথিৱীত অন্যায়ভাৱে বিদ্ৰোহাচৰণ কৰি ফুৰে। সিহঁতৰে বাবে আছে যন্ত্ৰণাদায়ক শাস্তি।",
+        "fa": "راه [بازخواست و] سرزنش، تنها بر ستمکارانى گشوده است كه به ناحق در زمین برترى‌جویی مى‌كنند. آنان عذابى دردناک [در پیش] دارند."
+      }
+    },
+    {
+      "verse_number": 4315,
+      "verse_key": "42:43",
+      "arabic_text": "وَلَمَن صَبَرَ وَغَفَرَ إِنَّ ذَٰلِكَ لَمِنْ عَزْمِ ٱلْأُمُورِ",
+      "phonetic_text": "Walaman sabara waghafara inna thalikalamin AAazmi al-omoor",
+      "translations": {
+        "fr": "Endurer et pardonner, voilà bien la meilleure résolution (à prendre).",
+        "en": "though if a person is patient and forgives, this is one of the greatest things.",
+        "es": "Pero tener paciencia [ante las injusticias] y perdonar, es algo que requiere de gran determinación.",
+        "it": "Quanto invece a chi è paziente e indulgente, questa è davvero la miglior disposizione.",
+        "ru": "А если кто проявит терпение и простит, то ведь в этих делах надлежит проявлять решимость.",
+        "tr": "Her kim de sabreder ve kusuru bağışlarsa, işte bu elbette azmedilecek işlerdendir.",
+        "de": "Wahrlich, wenn einer standhaft erträgt und vergibt, so gehört dies zur Entschlossenheit (in der Handhabe) der Angelegenheiten.",
+        "pt": "Ao contrário, quem perseverar e perdoar, saberá que isso é um fator determinante em todos os assuntos.",
+        "nl": "Maar wie geduldig was en vergaf voorwaar, dat behoort zeker tot de aanbevolen daden.",
+        "ur": "البتہ جو شخص صبر سے کام لے اور درگزر کرے ، تو یہ بڑی اُولو العزمی  کے کاموں میں سے ہے۔ <sup foot_note=\"187029\">1</sup>",
+        "bn": "অৱশ্যে যিয়ে ধৈৰ্য্য ধাৰণ কৰে আৰু ক্ষমা কৰি দিয়ে, নিশ্চয় সেয়া দৃঢ় সংকল্পৰেই কাম।",
+        "fa": "اما هر کس شكیبایى و گذشت كند، نشان از قدرت ارادۀ [او] دارد."
+      }
+    },
+    {
+      "verse_number": 4316,
+      "verse_key": "42:44",
+      "arabic_text": "وَمَن يُضْلِلِ ٱللَّهُ فَمَا لَهُۥ مِن وَلِىٍّ مِّنۢ بَعْدِهِۦ ۗ وَتَرَى ٱلظَّـٰلِمِينَ لَمَّا رَأَوُا۟ ٱلْعَذَابَ يَقُولُونَ هَلْ إِلَىٰ مَرَدٍّ مِّن سَبِيلٍ",
+      "phonetic_text": "Waman yudlili Allahu famalahu min waliyyin min baAAdihi watara aththalimeenalamma raawoo alAAathaba yaqooloona hal ilamaraddin min sabeel",
+      "translations": {
+        "fr": "Celui qu’Allah égare n’aura point d’autre protecteur. Et tu verras les injustes dire, en voyant le supplice : « Est-il encore possible de revenir (sur terre) ? »",
+        "en": "Anyone God allows to stray will have no one else to protect him: you [Prophet] will see the wrongdoers, when they face the punishment, exclaiming, ‘Is there any way of going back?’",
+        "es": "Para quien Dios haya decretado el desvío, no tendrá protector alguno fuera de Él. Cuando los opresores contemplen el castigo los verás decir: “¿Hay alguna forma de volver [a la vida mundanal y corregir nuestras elecciones]?”",
+        "it": "Colui che Allah svia, non avrà oltre a Lui patrono alcuno. Vedrai gli ingiusti che, alla vista del castigo, grideranno: «C’è un modo per ritornare <a class=f><sup foot_note=159626>1</sup></a> ?».",
+        "ru": "У того, кого Аллах ввел в заблуждение, после этого не будет покровителя. Ты увидишь, как беззаконники, увидев мучения, скажут: «Нет ли пути для возвращения?».",
+        "tr": "Allah kimi saptırırsa artık bundan sonra onun için hiçbir dost yoktur. Sen, azabı gördüklerinde zalimlerin: \"Acaba dönecek bir yol var mıdır?\" dediklerini görürsün.",
+        "de": "Wen Allah in die Irre gehen läßt, der hat keinen Schutzherrn nach Ihm. Und du siehst, wie die Ungerechten, wenn sie die Strafe sehen, sagen: Gibt es denn einen Weg zur Rückkehr?",
+        "pt": "E aquele que Deus desviar não achará protetor, além d'Ele. E então observarás que os iníquos, quando virem o castigo, dirão: Haverá algum meio de retornarmos (ao mundo terreno)?",
+        "nl": "En wie door Allah tot dwaling gebracht wordt: voor hem is er daarna geen helper. En jij zult zien dat wanneer de onrechtplegers de straf zien, zij zullen zeggen: \"Is er voor ons nog een weg om (naar de aarde) terug, te keren?\"",
+        "ur": "جس کو اللہ ہی گمراہی میں پھینک دے اُس کا کوئی سنبھالنے والا اللہ کے بعد نہیں ہے۔ <sup foot_note=\"187053\">1</sup> تم دیکھو گے کہ یہ ظالم جب عذاب دیکھیں گے تو کہیں گے کہ اب پلٹنے کی بھی کوئی سبیل ہے؟ <sup foot_note=\"187054\">2</sup>",
+        "bn": "আৰু আল্লাহে যাক পথভ্ৰষ্ট কৰে, ইয়াৰ পিছত তাৰ বাবে আন কোনো অভিভাৱক নাই। আৰু যালিমসকলে যেতিয়া শাস্তি দেখিব তেতিয়া তুমি সিহঁতক কওঁতে শুনিবা যে, ‘উভতি যোৱাৰ কোনো উপায় আছে নেকি’?",
+        "fa": "هر کس که الله او را گمراه كند، پس از الله هیچ [یاور و] كارسازى نخواهد داشت؛ و [در روز قیامت،] ستمکاران را مى‌بینى كه چون عذاب را مشاهده كنند، مى‌گویند: «آیا راه بازگشتى [به دنیا] هست؟»"
+      }
+    },
+    {
+      "verse_number": 4317,
+      "verse_key": "42:45",
+      "arabic_text": "وَتَرَىٰهُمْ يُعْرَضُونَ عَلَيْهَا خَـٰشِعِينَ مِنَ ٱلذُّلِّ يَنظُرُونَ مِن طَرْفٍ خَفِىٍّ ۗ وَقَالَ ٱلَّذِينَ ءَامَنُوٓا۟ إِنَّ ٱلْخَـٰسِرِينَ ٱلَّذِينَ خَسِرُوٓا۟ أَنفُسَهُمْ وَأَهْلِيهِمْ يَوْمَ ٱلْقِيَـٰمَةِ ۗ أَلَآ إِنَّ ٱلظَّـٰلِمِينَ فِى عَذَابٍ مُّقِيمٍ",
+      "phonetic_text": "Watarahum yuAAradoona AAalayhakhashiAAeena mina aththulli yanthuroonamin tarfin khafiyyin waqala allatheena amanooinna alkhasireena allatheena khasiroo anfusahumwaahleehim yawma alqiyamati ala inna aththalimeenafee AAathabin muqeem",
+      "translations": {
+        "fr": "Tu les verras qui comparaîtront au-devant (de l’Enfer), la tête baissée d’humiliation et regardant de biais. Ceux qui ont cru diront : « Les vrais perdants sont ceux qui, au Jour de la Résurrection se seront perdus eux-mêmes et (auront perdu) leurs familles. » Les injustes seront certes voués à un supplice sans fin.",
+        "en": "You will see them exposed to the Fire, abject in humiliation, glancing furtively, while those who believed exclaim, ‘The losers are the ones who have lost themselves and their people on the Day of Resurrection.’ Truly the evildoers will remain in lasting torment;",
+        "es": "Podrás verles expuestos al castigo, sumisos y humillados, mirando con temor [al Infierno]; entonces dirán los creyentes: “Los perdedores serán quienes se malogren a sí mismos y a sus familias el Día de la Resurrección”. ¿Acaso los opresores no recibirán un castigo eterno?",
+        "it": "Li vedrai, ad esso esposti, umiliati e impotenti, lanciarsi sguardi furtivi, mentre i credenti diranno: «In verità, coloro che avranno causato la loro rovina e quella delle loro famiglie, nel Giorno della Resurrezione saranno i perdenti». In verità gli ingiusti avranno duraturo castigo.",
+        "ru": "Ты увидишь, как их представят ему (Аду) смиренными от унижения и поглядывающими на него искоса. Те же, которые уверовали, скажут: «Воистину, потерпевшими убыток являются те, которые потеряли самих себя и свои семьи в День воскресения». Воистину, беззаконники пребудут в вечных мучениях.",
+        "tr": "Sen, onların aşağılıktan dolayı başları öne eğilmiş, göz ucuyla gizli gizli etrafa bakarlarken ateşe sunulduklarını görürsün, iman edenler de: \"Gerçekten zarara uğrayanlar hem kendilerine hem de ailelerine kıyamet günü yazık etmiş olan kimselerdir.\"diyeceklerdir. İyi bilin ki zalimler devamlı bir azap içerisindedirler.",
+        "de": "Und du siehst, wie sie ihm vorgeführt werden, demütig vor Unterwürfigkeit und mit verborgenen Blicken schauend. Und diejenigen, die glauben, sagen: Die (wahren) Verlierer sind diejenigen, die sich selbst und ihre Angehörigen am Tag der Auferstehung verlieren. Ja gewiß, die Ungerechten befinden sich in beständiger Strafe.",
+        "pt": "E quando forem colocados perante o fogo, haverás de vê-los humildes, devido à ignomínia, olhando furtivamente. Masos fiéis dirão: Em verdade, os desventurados serão aqueles que se perderem, juntamente com os seus, no Dia daRessurreição. Não é, acaso, certo, que os iníquos sofrerão um castigo eterno?",
+        "nl": "En jij zult zien hoe zij naar haar (de Hel) worden gesleept, vrezend door de vernedering. Zij kijken met een zwakke blik. En degenen die geloven zeggen: \"Voorwaar, de verliezers zijn degenen die zichzelf en hun families verlies hebben toegebracht op de Dag der Opstanding.\" Weet dat de onrechtvaardigen in een eeuwige bestraffing zullen verken.\"",
+        "ur": "اور تم دیکھوں گے کہ یہ جہنّم کے سامنے جب لائے جائیں گے  تو ذلّت کے مارے جُھکے جا رہے ہوں گے اور اُس کو نظر بچا بچا کر کن اَنکھیوں سے دیکھیں گے۔ <sup foot_note=\"187055\">1</sup> اُس وقت وہ لوگ جو ایمان لائے تھے کہیں گے کہ واقعی اصل زیاں کار وہی ہیں جنہوں نے آج قیامت کے دن اپنے آپ کو اور اپنے متعلّقین کو خسارے میں ڈال دیا ہے۔ خبر دار رہو، ظالم لوگ مستقل عذاب میں ہوں  گے",
+        "bn": "আৰু তুমি সিহঁতক দেখিবলৈ পাবা যে, সিহঁতক জাহান্নামৰ সন্মুখত উপস্থিত কৰা হৈছে; সিহঁতে অপমানত অৱনত অৱস্থাত চুৰকৈ চাই থাকিব; আৰু যিসকলে ঈমান আনিছে তেওঁলোকে কিয়ামতৰ দিনা ক’ব, ‘নিশ্চয় সিহঁত ক্ষতিগ্ৰস্ত, যিহঁতে নিজৰ আৰু নিজ পৰিয়ালবৰ্গৰ ক্ষতি সাধন কৰিছে’। সাৱধান! নিশ্চয় যালিমসকল স্থায়ী শাস্তিত নিপতিত থাকিব।",
+        "fa": "[در آن روز،] ستمگران را مشاهده خواهى كرد كه بر آتش عرضه مى‌شوند؛ و در حالى كه از [شدت] خواری، فروتن شده‌اند، زیرچشمى مى‌نگرند؛ و [در آن حال] مؤمنان مى‌گویند: «زیانكاران [واقعى] كسانى هستند كه [به طمع دنیا] خود و خانواده‌شان را در قیامت به زیان‌انداخته‌اند». آگاه باشید! ستمکاران، گرفتارِ عذابى پایدارند."
+      }
+    },
+    {
+      "verse_number": 4318,
+      "verse_key": "42:46",
+      "arabic_text": "وَمَا كَانَ لَهُم مِّنْ أَوْلِيَآءَ يَنصُرُونَهُم مِّن دُونِ ٱللَّهِ ۗ وَمَن يُضْلِلِ ٱللَّهُ فَمَا لَهُۥ مِن سَبِيلٍ",
+      "phonetic_text": "Wama kana lahum min awliyaayansuroonahum min dooni Allahi waman yudliliAllahu fama lahu min sabeel",
+      "translations": {
+        "fr": "En dehors d’Allah, ils n’auront pas de protecteurs qui viendront à leur secours. Celui qu’Allah entend égarer ne retrouvera plus (son) chemin.",
+        "en": "they will have no allies to help them against God. There is no way [forward] for those God allows to stray.",
+        "es": "Tampoco tendrán protectores fuera de Dios que los defiendan. Para quien Dios haya decretado el extravío, no podrá encaminarse jamás.",
+        "it": "Non avranno patroni che li aiuteranno contro Allah. Colui che Allah svia non ha nessuna via [di salvezza].",
+        "ru": "У них не будет покровителей и помощников, которые бы помогли им вместо Аллаха. Нет пути тому, кого Аллах ввел в заблуждение.",
+        "tr": "Onların Allah'tan başka kendilerine yardım edecek hiçbir dostları yoktur. Allah kimi saptırırsa, artık onun için çıkar bir yol yoktur.",
+        "de": "Und sie werden keine Schutzherren haben, die ihnen anstatt Allahs helfen (könnten). Wen Allah in die Irre gehen läßt, für den gibt es keinen (Aus)weg.",
+        "pt": "E não terão protetores que os socorram, a não ser Deus. Mas a quem Deus desviar, não será encaminhado.",
+        "nl": "En er is voor hen naast Allah geen beschermer die hen kan helpen. En wie door Allah tot dwaling gebracht wordt, voor hem is er geen weg (om nog Leiding te vinden).",
+        "ur": "اور ان کے کوئی حامی و سرپرست نہ ہوں گے جو اللہ کے مقابلے میں ان کی مدد کو آئیں جسے اللہ گمراہی میں پھینک دے اس کے لیے بچاؤ کی کوئی سبیل نہیں",
+        "bn": "আল্লাহৰ বাহিৰে সিহঁতক সহায় কৰাৰ বাবে সিহঁতৰ আন কোনো অভিভাৱক নাথাকিব। এতেকে আল্লাহে যাক পথভ্ৰষ্ট কৰে তাৰ বাবে আন কোনো পথ নাই।",
+        "fa": "و آنان در برابر الله، كارسازى نخواهند داشت كه یارى‌شان كند؛ و هر کس كه الله او را گمراه كند، راهى [براى نجات] نخواهد داشت."
+      }
+    },
+    {
+      "verse_number": 4319,
+      "verse_key": "42:47",
+      "arabic_text": "ٱسْتَجِيبُوا۟ لِرَبِّكُم مِّن قَبْلِ أَن يَأْتِىَ يَوْمٌ لَّا مَرَدَّ لَهُۥ مِنَ ٱللَّهِ ۚ مَا لَكُم مِّن مَّلْجَإٍ يَوْمَئِذٍ وَمَا لَكُم مِّن نَّكِيرٍ",
+      "phonetic_text": "Istajeeboo lirabbikum min qabli an ya/tiyayawmun la maradda lahu mina Allahi ma lakummin malja-in yawma-ithin wama lakum min nakeer",
+      "translations": {
+        "fr": "Répondez donc à l’appel de votre Seigneur avant que n’arrive un jour qu’Allah ne différera pas. Ce jour-là, vous n’aurez point de refuge, ni d’endroit où vous dissimuler.",
+        "en": "So [people] respond to your Lord before there comes a Day that cannot, against God’s will, be averted- you will have no refuge on that Day, and no possibility of denying [your sins].",
+        "es": "Obedeced a vuestro Señor antes de que llegue el día en que no podáis evitar [recibir el castigo] de Dios, porque ese día no tendréis refugio alguno ni podréis negar lo que hicisteis.",
+        "it": "Rispondete al vostro Signore, prima che venga un Giorno il cui termine Allah non differirà. In quel Giorno non avrete rifugio e non potrete negare alcunché.",
+        "ru": "Ответьте вашему Господу прежде, чем наступит день от Аллаха, который невозможно отвратить (или день, который Аллах не отвратит). В тот день не будет для вас убежища, и вы не сможете отрицать свои грехи.",
+        "tr": "Allah tarafından, geri çevrilemeyecek kıyamet günü gelmeden önce, Rabbinizin davetine uyun, çünkü o gün, sizin için sığınacak bir yer yoktur ve siz inkâr da edemezsiniz.",
+        "de": "Hört auf euren Herrn, bevor von Allah ein Tag kommt, der nicht zurückgewiesen wird. Keinen Zufluchtsort werdet ihr an jenem Tag haben und keine Möglichkeit, (etwas) zu mißbilligen’.",
+        "pt": "Atendei ao vosso Senhor, antes que chegue o dia irremissível de Deus! Nesse dia não tereis escapatória, nem podereisnegar (os vossos pecados)!",
+        "nl": "Geeft gehoor aan jullie Heer, voordat er een Dag komt van Allah die onafwendbaar is. Er zal voor jullie geen toevluchtsoord zijn en er is geen ontkenning voor jullie (van jullie zonden).",
+        "ur": "مان لو اپنے ربّ کی بات قبل اس کے کہ وہ دن آئے جس کے ٹلنے کی کوئی صُورت اللہ کی طرف سے نہیں ہے۔ <sup foot_note=\"187056\">1</sup> اُس دن تمہارے لیے کوئی جائے پناہ نہ ہو گی اور نہ کوئی تمہارے حال کو بدلنے کی کوشش کرنے والا ہوگا۔ <sup foot_note=\"187057\">2</sup>",
+        "bn": "আল্লাহৰ তৰফৰ পৰা সেই অপ্ৰতিৰোধ্য দিনটো অহাৰ পূৰ্বেই তোমালোকে নিজ প্ৰতিপালকৰ আহ্বানত সঁহাৰি দিয়া। যিদিনা তোমালোকৰ কোনো আশ্ৰয়স্থল নাথাকিব আৰু তোমালোকৰ বাবে প্ৰতিৰোধকাৰীও নাথাকিব।",
+        "fa": "[ای مردم،] پیش از آنكه روزى فرارسد كه بازگشتى از جانب الله ندارد، دعوت پروردگارتان را بپذیرید. در آن روز، نه پناهگاهى خواهید داشت، نه [فرصتی برای] انكار."
+      }
+    },
+    {
+      "verse_number": 4320,
+      "verse_key": "42:48",
+      "arabic_text": "فَإِنْ أَعْرَضُوا۟ فَمَآ أَرْسَلْنَـٰكَ عَلَيْهِمْ حَفِيظًا ۖ إِنْ عَلَيْكَ إِلَّا ٱلْبَلَـٰغُ ۗ وَإِنَّآ إِذَآ أَذَقْنَا ٱلْإِنسَـٰنَ مِنَّا رَحْمَةً فَرِحَ بِهَا ۖ وَإِن تُصِبْهُمْ سَيِّئَةٌۢ بِمَا قَدَّمَتْ أَيْدِيهِمْ فَإِنَّ ٱلْإِنسَـٰنَ كَفُورٌ",
+      "phonetic_text": "Fa-in aAAradoo fama arsalnakaAAalayhim hafeethan in AAalayka illaalbalaghu wa-inna itha athaqnaal-insana minna rahmatan fariha bihawa-in tusibhum sayyi-atun bima qaddamat aydeehimfa-inna al-insana kafoor",
+      "translations": {
+        "fr": "S’ils se détournent, (sache que) Nous ne t’avons pas envoyé pour être leur gardien : il ne t’incombe que de transmettre (Notre Message). Lorsque Nous faisons goûter (aux hommes) une grâce de Notre part, ils s’en réjouissent, mais dès qu’un malheur les frappe pour prix de ce qu’ils ont commis de leurs propres mains, voilà que l’homme se montre outrageusement ingrat !",
+        "en": "If they still turn away [remember that], We have not sent you [Prophet] to be their guardian: your only duty is to deliver the message. When We give man a taste of Our mercy, he rejoices in it, but if some harm befalls him on account of what he has done with his own hands, then he is ungrateful.",
+        "es": "Si se niegan a obedecer, sabe [¡Oh, Muhámmad!] que no te he enviado para hacerte responsable de sus obras. Tú solo debes divulgar [el Mensaje]. Cuando agracio a una persona con Mi misericordia, esta se alegra, pero si le alcanza una desgracia como consecuencia de lo que hizo con sus propias manos, entonces la persona se muestra desagradecida.",
+        "it": "Se volgono le spalle, [sappi] che non ti inviammo loro affinché li custodissi: tu devi solo trasmettere [il messaggio]. Quando facciamo gustare all’uomo una misericordia che proviene da Noi, egli se ne rallegra; se lo coglie invece una sventura, per ciò che le sue mani hanno commesso, subito l’uomo diventa ingrato.",
+        "ru": "Если же они отвернутся, то ведь Мы не посылали тебя их хранителем. На тебя возложена только передача откровения. Когда Мы даем человеку вкусить Нашу милость, он радуется ей. Когда же его поражает зло за то, что приготовили его руки, то человек становится неблагодарен.",
+        "tr": "Ey Muhammed! Eğer onlar yüz çevirirlerse bilsinler ki, biz seni onların üzerine bir bekçi olarak göndermedik. Sana düşen sadece tebliğdir. Gerçekten biz insana tarafımızdan bir rahmet tattırırsak ona sevinir, ama elleriyle yaptıkları yüzünden kendilerine bir kötülük isabet ederse, o zaman görürsün ki insan çok nankördür.",
+        "de": "Wenn sie sich nun abwenden, so haben Wir dich nicht als Hüter über sie gesandt. Dir obliegt nur die Übermittelung (der Botschaft). Und siehe, wenn Wir den Menschen von Uns Barmherzigkeit kosten lassen, ist er froh darüber. Wenn sie aber etwas Böses trifft für das, was ihre Hände vorausgeschickt haben, gewiß, dann ist der Mensch sehr undankbar.",
+        "pt": "Porém, se desdenharem, fica sabendo que não te enviamos para seu guardião, uma vez que tão-somente te incumbe aproclamação (da mensagem). Certamente, se fizemos o homem provar a Nossa misericórdia, regozijar-se-á com ela; poroutra, se o açoitar o infortúnio, por causa do que suas mãos cometeram, eis que se tornará ingrato!",
+        "nl": "En als zij zich dan afwenden: Wij hebben jou niet als waker over hen gezonden, jij bent niets dan een verkondiger. En voorwaar, wanneer Wij de mens een genieting van Ons laten proeven, dan is hij er blij meer. Maar als een tegenslag hem treft wegens wat zijn handen hebben voortgebracht: voorwaar, de mens is zeer ondankbaar.",
+        "ur": "اب اگر یہ لوگ مُنہ موڑتے ہیں تو اے نبیؐ ، ہم نے تم کو ان پر نگہبان بنا کر تو نہیں بھیجا ہے۔ <sup foot_note=\"187058\">1</sup> تم پر تو صرف بات پہنچا دینے کی ذمّہ داری ہے۔ انسان کا حال یہ ہے کہ جب ہم اسے اپنی رحمت کا مزا چکھاتے ہیں تو اُس پر پھُول جاتا ہے، اور اگر اس کے اپنے ہاتھوں کا کیا دھرا کسی مصیبت کی شکل میں اُس پر اُلٹ پڑتا ہے تو سخت ناشکرا بن جاتا ہے۔ <sup foot_note=\"187059\">2</sup>",
+        "bn": "তথাপিও যদি সিহঁতে মুখ ঘূৰাই লয়, তেন্তে (জানি থোৱা) আমি তোমাক সিহঁতৰ ৰক্ষক হিচাপে প্ৰেৰণ কৰা নাই। তোমাৰ দায়িত্ব হৈছে কেৱল বাণী পৌঁচাই দিয়া। আমি যেতিয়া আমাৰ তৰফৰ পৰা মানুহক কোনো ৰহমত আস্বাদন কৰাওঁ তেতিয়া সি উৎফুল্লিত হয় কিন্তু যেতিয়া সিহঁতৰ কৃতকৰ্মৰ বাবে সিহঁতৰ বিপদ-আপদ ঘটে, তেতিয়া মানুহ অতি অকৃতজ্ঞ হৈ পৰে।",
+        "fa": "[ای پیامبر] اگر [مشرکان از دعوتِ تو] روى می‌گردانند، [توفیق را از خود سلب می‌كنند]. ما تو را نگهبان آنان نفرستادیم و تو وظیفه‌اى جز رساندن [وحی] نداری؛ و چون رحمتى از جانب خود به انسان بچشانیم، به آن سرمست مى‌شود؛ و اگر به سزاى رفتار گذشتۀ خود دچار مصیبتى شود، [به جاى بیدارى، ناسپاسی مى‌کند]. به راستی که انسان بسیار ناسپاس است."
+      }
+    },
+    {
+      "verse_number": 4321,
+      "verse_key": "42:49",
+      "arabic_text": "لِّلَّهِ مُلْكُ ٱلسَّمَـٰوَٰتِ وَٱلْأَرْضِ ۚ يَخْلُقُ مَا يَشَآءُ ۚ يَهَبُ لِمَن يَشَآءُ إِنَـٰثًا وَيَهَبُ لِمَن يَشَآءُ ٱلذُّكُورَ",
+      "phonetic_text": "Lillahi mulku assamawatiwal-ardi yakhluqu ma yashao yahabuliman yashao inathan wayahabu liman yashao aththukoor",
+      "translations": {
+        "fr": "C’est à Allah que revient la royauté des cieux et de la terre. Il crée ce qu’Il veut. Il donne à qui Il veut des filles et donne à qui Il veut des garçons,",
+        "en": "God has control of the heavens and the earth; He creates whatever He will- He grants female offspring to whoever He will, male to whoever He will,",
+        "es": "A Dios pertenece el reino de los cielos y de la Tierra, Él crea lo que quiere, agracia a quien quiere con hijas mujeres y a quien quiere con hijos varones,",
+        "it": "Appartiene ad Allah la sovranità dei cieli e della terra. Egli crea quello che vuole. Concede femmine a chi vuole e, a chi vuole, maschi;",
+        "ru": "Аллаху принадлежит власть над небесами и землей. Он творит, что пожелает. Он одаряет, кого пожелает, потомством женского пола, а кого пожелает - мужского.",
+        "tr": "Göklerin ve yerin hükümranlığı yalnız Allah'a aittir. O dilediğini yaratır, dilediğine kız çocuk, dilediğine de erkek çocuk bahşeder.",
+        "de": "Allah gehört die Herrschaft der Himmel und der Erde. Er erschafft, was Er will. Er schenkt, wem Er will, (nur) weibliche, und Er schenkt, wem Er will, (nur) männliche (Nachkommen).",
+        "pt": "A Deus pertence o reino dos céus e da terra. Ele cria a que Lhe apraz; concede filhas a quem quer e concede varões aquem Lhe apraz.",
+        "nl": "Aan Allah behoort de heerschappij van de hemelen en de aarde. Hij schept wat Hij wil en hij schenkt meisjes aan wie Hij wil en Hij schenkt jongens aan wie Hij wil.",
+        "ur": "اللہ زمین اور آسمانوں کی بادشاہی کا مالک ہے <sup foot_note=\"187060\">1</sup> ، جو کچھ چاہتا ہے پیدا کرتا ہے ، جسے چاہتا ہے لڑکیاں دیتا ہے ، جسے چاہتا ہے لڑکے دیتا ہے",
+        "bn": "আকাশসমূহ আৰু পৃথিৱীৰ আধিপত্য কেৱল আল্লাহৰেই। তেওঁ যি ইচ্ছা সেইটোৱেই সৃষ্টি কৰে। তেওঁ যাক ইচ্ছা কন্যা সন্তান দান কৰে আৰু যাক ইচ্ছা পুত্ৰ সন্তান দান কৰে,",
+        "fa": "فرمانروایى آسمان‌ها و زمین، از آنِ الله است. او هر چه بخواهد، مى‌آفریند؛ به هر کس که بخواهد، [فرزندِ] دختر مى‌بخشد و به هر کس كه بخواهد، [فرزندِ] پسر."
+      }
+    },
+    {
+      "verse_number": 4322,
+      "verse_key": "42:50",
+      "arabic_text": "أَوْ يُزَوِّجُهُمْ ذُكْرَانًا وَإِنَـٰثًا ۖ وَيَجْعَلُ مَن يَشَآءُ عَقِيمًا ۚ إِنَّهُۥ عَلِيمٌ قَدِيرٌ",
+      "phonetic_text": "Aw yuzawwijuhum thukrananwa-inathan wayajAAalu man yashao AAaqeeman innahuAAaleemun qadeer",
+      "translations": {
+        "fr": "ou mêle à la fois garçons et filles ; et Il fait stérile qui Il veut : Il est Omniscient et Omnipotent !",
+        "en": "Or both male and female, and He makes whoever He will barren: He is all knowing and all powerful.",
+        "es": "o les concede hijos varones y mujeres, o los hace estériles. Él lo sabe todo, es sobre toda cosa Poderoso.",
+        "it": "oppure concede maschi e femmine insieme e rende sterile chi vuole. In verità Egli è il Sapiente, il Potente.",
+        "ru": "Или же Он сочетает потомство мужского и женского полов, а того, кого пожелает, Он делает бесплодным. Воистину, Он - Знающий, Всемогущий.",
+        "tr": "Yahut Allah onları erkek ve kız olmak üzere çift verir, dilediğini de kısır yapar. Şüphesiz ki O her şeyi bilir. O'nun her şeye gücü yeter.",
+        "de": "Oder (Er schenkt) beides zusammen, männliche und weibliche (Nachkommen). Und Er macht, wen Er will, unfruchtbar. Gewiß, Er ist Allwissend und Allmächtig.",
+        "pt": "Ainda propicia igualmente mulheres varões, e faz estéril quem Lhe apraz, porque é Poderoso, Sapientíssimo.",
+        "nl": "Of Hij schenkt hun jongens en meisjes. En Hij maakt onvruchtbaar wie Hij wil. Voorwaar, Hij is Alwetend, Almachtig.",
+        "ur": "جسے چاہتا ہے لڑکے اور لڑکیاں مِلا جُلا کر دیتا ہے، اور جسے چاہتا ہے بانجھ کر دیتا ہے۔ وہ سب کچھ جانتا اور ہر چیز پر قادر ہے۔ <sup foot_note=\"187061\">1</sup>",
+        "bn": "নাইবা সিহঁতক পুত্ৰ আৰু কন্যা উভয়কে দান কৰে আৰু যাক ইচ্ছা কৰে বন্ধ্যা কৰি দিয়ে। নিশ্চয় তেওঁ সৰ্বজ্ঞ, মহা ক্ষমতাৱান।",
+        "fa": "یا پسر و دختر را ـ هر دو ـ با هم می‌دهد؛ و هر کس را که بخواهد، نازا مى‌گرداند كه او دانای تواناست."
+      }
+    },
+    {
+      "verse_number": 4323,
+      "verse_key": "42:51",
+      "arabic_text": "۞ وَمَا كَانَ لِبَشَرٍ أَن يُكَلِّمَهُ ٱللَّهُ إِلَّا وَحْيًا أَوْ مِن وَرَآئِ حِجَابٍ أَوْ يُرْسِلَ رَسُولًا فَيُوحِىَ بِإِذْنِهِۦ مَا يَشَآءُ ۚ إِنَّهُۥ عَلِىٌّ حَكِيمٌ",
+      "phonetic_text": "Wama kana libasharin anyukallimahu Allahu illa wahyan aw min wara-ihijabin aw yursila rasoolan fayoohiya bi-ithnihima yashao innahu AAaliyyun hakeem",
+      "translations": {
+        "fr": "Un humain ne peut espérer qu’Allah lui parle si ce n’est par révélation, de derrière un voile ou par l’envoi d’un émissaire<sup foot_note=195104>1</sup> qui révèle, par Sa permission, ce que Lui veut. Il est certes Très Haut et Sage.",
+        "en": "It is not granted to any mortal that God should speak to him except through revelation or from behind a veil, or by sending a messenger to reveal by His command what He will: He is exalted and wise.",
+        "es": "Dios no habla a las personas excepto por inspiración o tras un velo o enviando un Mensajero [el ángel Gabriel] para transmitirle por Su voluntad lo que Él quiera de la revelación. Él es Sublime, Sabio.",
+        "it": "Non è dato all’uomo che Allah gli parli, se non per ispirazione o da dietro un velo, o inviando un messaggero che gli riveli, con il Suo permesso, quel che Egli vuole <a class=f><sup foot_note=159627>1</sup></a> . Egli è altissimo, saggio.",
+        "ru": "Человек не достоин того, чтобы Аллах разговаривал с ним иначе, как посредством откровения или через завесу. Или же Он отправляет посланца, который с Его позволения внушает посредством откровения то, что Он желает. Воистину, Он - Возвышенный, Мудрый.",
+        "tr": "Allah bir insanla ancak vahiy yoluyla veya perde arkasından konuşur. Yahut da bir elçi gönderir de izniyle ona dilediğini vahyeder. Şüphesiz ki O çok yücedir, hüküm ve hikmet sahibidir.",
+        "de": "Und es steht keinem menschlichen Wesen zu, daß Allah zu ihm spricht, außer durch Eingeben (von Offenbarung) oder hinter einem Vorhang, oder indem Er einen Boten sendet, der (ihm) dann mit Seiner Erlaubnis (als Offenbarung) eingibt, was Er will. Gewiß, Er ist Erhaben und Allweise.",
+        "pt": "É inconcebível que Deus fale diretamente ao homem, a não ser por revelações, ou veladamente, ou por meio de ummensageiro, mediante o qual revela, com o Seu beneplácito, o que Lhe apraz; sabei que Ele é Prudente, Altíssimo.",
+        "nl": "Het past de mens niet dat Allah tot hem spreekt, behalve door middel van een openbaring of van achter een scherm of door het zenden van een gezant (Djibrîl), die het dan openbaart met Zijn toestemming, zoals Hij wil. Voorwaar, Hij is Verheven, Alwijs.",
+        "ur": "<sup foot_note=\"171543\">1</sup> کسی بشر کا یہ مقام نہیں ہے کہ اللہ اُس سے رُوبرُو بات کرے۔ اُس کی بات یا تو وحی (اشارے)کے طور پر ہوتی ہے <sup foot_note=\"171544\">2</sup> ، یا پردے کے پیچھے سے <sup foot_note=\"171545\">3</sup> ، یا پھر وہ کوئی پیغام بر (فرشتہ)بھیجتا ہے اور وہ اُس کے حکم سے جو کچھ وہ چاہتا ہے، وحی کرتا ہے، <sup foot_note=\"171546\">4</sup> وہ برتر اور حکیم ہے۔ <sup foot_note=\"171547\">5</sup>",
+        "bn": "কোনো মানুহৰেই এনেকুৱা মৰ্যাদা নাই, যিয়ে আল্লাহৰ লগত পোনপটীয়াকৈ কথা ক'ব অহীৰ মাধ্যমৰ বাহিৰে অথবা পৰ্দাৰ আঁৰত নাইবা এনেকুৱা কোনো বাৰ্তাবাহক প্ৰেৰণ কৰাৰ বাহিৰে, যি বাৰ্তাবাহকে কেৱল তেওঁৰ অনুমতিক্ৰমে তেওঁ যিটো বিচাৰে কেৱল সেইটোহে অহী কৰে, তেওঁ সৰ্বোচ্চ, প্ৰজ্ঞাময়।",
+        "fa": "درخورِ هیچ بشرى نیست كه الله با او سخن بگوید؛ مگر با وحى یا از فراسویِ حجابى یا [اینکه الله] فرشته‌اى بفرستد كه به فرمانش هر چه بخواهد، وحى كند. بی‌تردید، او تعالی بلندمرتبۀ حکیم است."
+      }
+    },
+    {
+      "verse_number": 4324,
+      "verse_key": "42:52",
+      "arabic_text": "وَكَذَٰلِكَ أَوْحَيْنَآ إِلَيْكَ رُوحًا مِّنْ أَمْرِنَا ۚ مَا كُنتَ تَدْرِى مَا ٱلْكِتَـٰبُ وَلَا ٱلْإِيمَـٰنُ وَلَـٰكِن جَعَلْنَـٰهُ نُورًا نَّهْدِى بِهِۦ مَن نَّشَآءُ مِنْ عِبَادِنَا ۚ وَإِنَّكَ لَتَهْدِىٓ إِلَىٰ صِرَٰطٍ مُّسْتَقِيمٍ",
+      "phonetic_text": "Wakathalika awhaynailayka roohan min amrina ma kunta tadree maalkitabu wala al-eemanu walakinjaAAalnahu nooran nahdee bihi man nashao min AAibadinawa-innaka latahdee ila siratin mustaqeem",
+      "translations": {
+        "fr": "C’est ainsi que Nous t’avons révélé un Esprit émanant de Notre ordre. Tu ne savais pas ce qu’est le Livre, pas plus que tu ne savais ce qu’est la foi. Mais Nous en avons fait la lumière dont Nous guidons qui Nous voulons parmi Nos serviteurs. Tu ne guides en vérité que vers une voie droite,",
+        "en": "So We have revealed a spirit to you [Prophet] by Our command: you knew neither the Scripture nor the faith, but We made it a light, guiding with it whoever We will of Our servants. You give guidance to the straight path,",
+        "es": "Te he revelado [¡Oh, Muhámmad!] una inspiración Mía [el Corán]. Tú no conocías el Libro [revelado anteriormente] ni la fe [en sus detalles]. Entonces hice que fuera una luz<sup foot_note=169185>1</sup> con la que guío a quienes quiero, y tú [¡Oh, Muhámmad!] guías al sendero recto,",
+        "it": "Ed è così che ti abbiamo rivelato uno spirito <a class=f><sup foot_note=159628>1</sup></a> [che procede] dal Nostro ordine. Tu non conoscevi né la Scrittura né la fede. Ne abbiamo fatto una luce per mezzo della quale guidiamo chi vogliamo, tra i Nostri servi. In verità tu guiderai sulla retta via,",
+        "ru": "Таким же образом Мы внушили тебе в откровении дух (Коран) из Нашего повеления. Ты не знал, что такое Писание и что такое вера. Но Мы сделали его светом, посредством которого Мы ведем прямым путем того из Наших рабов, кого пожелаем. Воистину, ты указываешь на прямой путь -",
+        "tr": "İşte biz böylece sana da emrimizden Kur'ân'ı vahyettik. Yoksa sen kitap nedir? İman nedir? bilmiyordun. Fakat biz onu bir nur kıldık. Onunla kullarımızdan dilediğimizi doğru yola iletiyoruz. Şüphesiz ki sen de insanları doğru bir yola götürüyorsun.",
+        "de": "Und ebenso haben Wir dir Geist von Unserem Befehl (als Offenbarung) eingegeben. Du wußtest (vorher) weder, was das Buch noch was der Glaube ist; doch haben Wir es zu einem Licht gemacht, mit dem Wir rechtleiten, wen Wir wollen von Unseren Dienern. Und du leitest ja wahrlich zu einem geraden Weg,",
+        "pt": "E também te inspiramos com um Espírito, por ordem nossa, antes do que não conhecias o que era o Livro, nem a fé; porém, fizemos dele uma Luz, mediante a qual guiamos quem Nos apraz dentre os Nossos servos. E tu certamente te orientaspara uma senda reta.",
+        "nl": "Zó hebben Wij aan jou een openbaring neergezonden, een zaak van Ons. Jij wist toen niet wat het Boek (de Koran) was en wat het geloof was, maar Wij hebben hem tot een licht gemaakt waarmee Wij van Onze dienaren leiden wie Wij willen. En voorwaar, jij leidt zeker naar een recht Pad.",
+        "ur": "اور اِسی طرح (اے محمدؐ)ہم نے اپنے حکم سے ایک روح تمہاری طرف وحی کی ہے۔ <sup foot_note=\"187062\">1</sup> تمہیں کچھ پتہ نہ تھا کہ کتاب کیا ہوتی ہے اور ایمان کیا ہوتا ہے، <sup foot_note=\"187063\">2</sup> مگر اُس رُوح کو ہم نے ایک روشنی بنا دیا جس سے ہم راہ دکھاتے ہیں اپنے بندوں میں سے جسے چاہتے ہیں۔ یقیناً تم سیدھے راستے کی طرف رہنمائی کر رہے ہو",
+        "bn": "অনুৰূপভাৱে (উপৰোক্ত তিনিটা পদ্ধতিত) আমি তোমাৰ প্ৰতি আমাৰ নিৰ্দেশৰ পৰা ৰূহক অহী কৰিছোঁ। তুমি জনা নাছিলা কিতাব কি আৰু ঈমান কি! কিন্তু আমি ইয়াক নূৰ বনাইছোঁ, যাৰ দ্বাৰা আমি আমাৰ বান্দাসকলৰ মাজৰ পৰা যাক ইচ্ছা হিদায়ত দান কৰোঁ। নিশ্চয় তুমি সৰল পথৰ পিনে দিক নিৰ্দেশনা দিয়া,",
+        "fa": "[ای پیامبر] این‌گونه، قرآن را [توسط جبرئیل و] به فرمان خویش بر تو وحى كردیم. [پیش از آن] تو آگاهى نداشتى كه كتاب و ایمان چیست؛ ولى ما آن را نورى ساختیم كه هر یک از بندگان خویش را كه بخواهیم، به آن هدایت كنیم؛ و مسلّماً تو به راهى راست [= اسلام] هدایت مى‌كنى."
+      }
+    },
+    {
+      "verse_number": 4325,
+      "verse_key": "42:53",
+      "arabic_text": "صِرَٰطِ ٱللَّهِ ٱلَّذِى لَهُۥ مَا فِى ٱلسَّمَـٰوَٰتِ وَمَا فِى ٱلْأَرْضِ ۗ أَلَآ إِلَى ٱللَّهِ تَصِيرُ ٱلْأُمُورُ",
+      "phonetic_text": "Sirati Allahi allatheelahu ma fee assamawati wamafee al-ardi ala ila Allahi taseerual-omoor",
+      "translations": {
+        "fr": "la voie d’Allah à Qui appartient ce qu’il y a dans les cieux et sur terre. Certes c’est vers Allah qu’ira le devenir de Toute chose !",
+        "en": "the path of God, to whom belongs all that is in the heavens and earth: truly everything will return to God.",
+        "es": "el sendero de Dios, a Quien pertenece cuanto hay en los cielos y en la Tierra. ¿Acaso no retornan a Dios todos los asuntos?",
+        "it": "la via di Allah, Cui appartiene tutto quel che è nei cieli e sulla terra. Sì, ritornano ad Allah tutte le cose. <a class=f><sup foot_note=159629>1</sup></a> Il vers. da cui trae il suo nome questa sura recita: «coloro che… si consultano vicendevolmente»: è il principio della «shûrâ»: la consultazione, la partecipazione alle decisioni che riguardano la comunità. Questo è il fondamento coranico di quella che potrebbe essere definita una «democrazia teocentrica». L’umma islamica è comunità terrena di individui che devono tendere alla realizzazione della visione di Allah nell’altra vita. Per far questo sono necessari: fede e abbandono ad Allah (cfr. vers. 36), controllo delle passioni, purezza di intenti, amore per i propri simili (cfr. vers. 37), disponibilità totale nei confronti di Allah, pratica religiosa, «shûrâ», generosità (cfr. vers. 38), capacità di difendere i propri diritti con decisione e moderazione (vedi vers. e al contempo misericordia verso i colpevoli. Vivere questa vita in previsione dell’Altra, guadagnarsi l’Altra vita vivendo nel migliore dei modi il passaggio terreno: questa è la tensione morale che anima i musulmani. <a class=f><sup foot_note=159630>2</sup></a> Vedi Appendice <a class=f><sup foot_note=159631>3</sup></a> «a te Muhammad e ai messaggeri che ti precedettero.» <a class=f><sup foot_note=159632>4</sup></a> «sprofondano i cieli»: intimiditi dalla potenza e dalla maestà di Allah (gloria a Lui l’Altissimo). <a class=f><sup foot_note=159633>5</sup></a> «Tu non sei»: o Muhammad. <a class=f><sup foot_note=159634>6</sup></a> «la Madre delle città»: La Mecca. In questo caso «Madre» indica l’eccellenza che Allah ha conferito a questa città. (Sul significato esteso che la lingua araba attribuisce ai termini «padre e madre» vedi nota a III, 7.) La Mecca si trova nel luogo che, secondo la tradizione, fu il primo da cui si ritirarono le acque dopo il diluvio, luogo in cui Allah (gloria a Lui l’Altissimo) volle che fosse innalzata la Sua Casa su questa terra, la Santa Ka‘ba, facendone l’orientazione dell’orazione rituale dei musulmani e la meta del pellegrinaggio. Al tempo dell’Egira, l’Inviato di Allah (pace e benedizioni su di lui) rivolse lo sguardo alla sua città che era stato costretto ad abbandonare e disse: «Giuro che sei la migliore delle terre di Allah e la più amata, e se non fosse la mia gente ad esiliarmi da te non ti avrei mai lasciato». La dottrina islamica afferma che La Mecca costituisce il cuore del mondo e pertanto l’espressione coranica «… affinché tu ammonisca la Madre delle città e coloro che [le abitano] attorno», equivale a indicare “tutto il mondo”, come nell’espressione latina “urbi et orbi” (che si riferisce a Roma e all’intero pianeta). <a class=f><sup foot_note=159635>7</sup></a> «Giorno della Riunione»: uno dei nomi appellativi del Giorno del Giudizio. <a class=f><sup foot_note=159636>8</sup></a> «la Fiamma», uno dei nomi dell’Inferno. <a class=f><sup foot_note=159637>9</sup></a> Allah (gloria a Lui l’Altissimo) ci dice che le divisioni religiose tra gli uomini derivano dalla Sua volontà e che solo la Sua misericordia può far sì che l’individuo venga a far parte di quella comunità che Egli Stesso ha definito «equilibrata, ottimale» (vedi II, e la nota), cioè quella islamica. <a class=f><sup foot_note=159638>10</sup></a> II versetto ribadisce l’assoluta priorità della parola di Allah (gloria a Lui l’Altissimo) come criterio di valutazione di ogni situazione ed equivale nella sostanza al vers. IV, (vedi anche la nota). <a class=f><sup foot_note=159639>11</sup></a> «Niente è simile a Lui» recita questo versetto, «Nessuno è uguale a Lui» dice la sura CXII. Allah (gloria a Lui l’Altissimo) è assolutamente diverso dalle Sue creature, e questa diversità è di natura qualitativa. Allah (gloria a Lui l’Altissimo) non è solo il Più Grande, Egli è la grandezza, non è solo il Più Forte, Egli è la forza. Le espressioni antropomorfe riferite a Lui che troviamo sul Corano hanno il solo scopo di facilitarci la comprensione della Sua Natura. <a class=f><sup foot_note=159640>12</sup></a> «si divisero»: soggetto del verbo sono gli ebrei che si divisero in molte sette. <a class=f><sup foot_note=159641>13</sup></a> «Se non fosse per…»: la decisione di Allah di regolare i conti con la maggior parte degli uomini solo nel Giorno del Giudizio. <a class=f><sup foot_note=159642>14</sup></a> «Coloro che…»: i cristiani, anche loro divisi in moltissime sette già ai tempi della rivelazione coranica (e oggi ancora di più). <a class=f><sup foot_note=159643>15</sup></a> Nonostante che questo versetto venga considerato meccano, il problema che affronta e le soluzioni che indica sembrano da inserire in ambiente medinese, in cui il rapporto con i cristiani e gli ebrei poneva ai musulmani alcuni problemi dottrinali e di convivenza. Messaggio esplicito, condotta cristallina, fortezza d’animo, queste le caratteristiche che Allah (gloria a Lui l’Altissimo) raccomanda al Suo Inviato (pace e benedizioni su di lui) e, di riflesso, a tutti i musulmani. <a class=f><sup foot_note=159644>16</sup></a> «dopo che già Gli è stato risposto»: dopo che i credenti hanno accettato il messaggio recato da Muhammad (pace e benedizioni su di lui) e hanno dato prova di lealtà nei confronti di Allah (gloria a Lui l’Altissimo) e del Suo Inviato. <a class=f><sup foot_note=159645>17</sup></a> «Chi ti potrà rendere edotto», all’infuori di Allah. <a class=f><sup foot_note=159646>18</sup></a> Come in altri brani, la metafora agricola serve a rappresentare la possibilità di scelta di vita che si pone all’uomo: investire per il contingente o investire per l’assoluto, usare tempo ed energia per ottenere materia finita e caduca, o breve effimero successo, oppure cercare di guadagnare il premio infinito e perfetto. La scelta dell’uomo di intelletto dovrebbe essere scontata. Invece non è solo questione di intelletto se è vero, come è vero, che siamo circondati da individui che gettano al vento la loro intelligenza e le loro capacità investendole totalmente nelle realizzazioni di questa vita terrena. La verità è che più ancora dell’intelligenza è necessaria la fede ma Allah la dà solo a chi la desidera nel più profondo di sé. <a class=f><sup foot_note=159647>19</sup></a> In molti altri brani Allah (gloria a Lui l’Altissimo) ordina al Suo Invitato (pace e benedizioni su di lui) di non richiedere nessuna ricompensa per il suo apostolato e di affermare che questa ricompensa è presso Allah. In questo versetto gli ordina di chiedere amore per i parenti, ma di quali parenti si tratta? Tabarì propone alcune interpretazioni, ma conclude dando la preferenza a questa: l’invito è rivolto fondamentalmente ai Quraysh e coloro da amare sono Muhammad stesso e la sua famiglia che (secondo Ibn ‘Abbàs) erano legati da un legame di parentela con ognuno dei clan coreisciti. Alcuni esegeti hanno ritenuto che fosse un invito all’affezione per Abù Bakr (che Allah sia soddisfatto di lui) amico fedele e suocero di Muhammad. Considerando che il versetto (insieme ai due successivi) fa parte dell’aggiunta medinese ad una sura meccana, si potrebbe leggervi un invito all’amore tra emigranti e ausiliari che, nella fase immediatamente successiva all’Egira, costituiva la base di solidarietà tra credenti su cui si sarebbe costruita la comunità islamica di Medina. <a class=f><sup foot_note=159648>20</sup></a> «sigillerebbe il tuo cuore»: fino a farti dimenticare il Corano che ti ha rivelato (Tabarì xxv, 27). <a class=f><sup foot_note=159649>21</sup></a> II versetto può essere interpretato come una possibile indicazione che esistano (oltre ai terrestri) altri esseri viventi sparsi nel creato. <a class=f><sup foot_note=159650>22</sup></a> «… di quello che avranno fatto le vostre mani»: avrete il raccolto corrispondente a quello che avrete seminato. <a class=f><sup foot_note=159651>23</sup></a> Distrugge le navi con una tempesta per punire dei loro peccati gli uomini che vi stanno a bordo. <a class=f><sup foot_note=159652>24</sup></a> «si consultano vicendevolmente»: vedi nota al titolo della sura. <a class=f><sup foot_note=159653>25</sup></a> Secondo un hadith dell’Inviato di Allah (pace e benedizioni su di lui) ci sono tre cose che sono sacre al musulmano e che autorizzano la sua reazione contro chiunque le offenda: il sangue (la sua integrità fisica), l’onore (la sua rispettabilità e quella della sua famiglia), i beni (quello che onestamente possiede). Anche la società islamica ha diritti che devono essere tutelati e difesi; se questo non avviene è inevitabile la diffusione della «fitna» (lo scandalo, il disordine, la corruzione, cfr. nota a II, 191). L’azione, la parola e l’intenzione sono, in ordine di importanza, gli strumenti atti alla difesa del bene e alla condanna del male. Si potrà usare la parola solo quando non sarà possibile usare l’azione, e l’intenzione (o intima riprovazione) sarà lecita solo quando gli altri due strumenti non saranno utilizzabili. <a class=f><sup foot_note=159654>26</sup></a> La legge del contrappasso è quanto di più severo possa applicare l’uomo per difendere se stesso e la comunità. Travalicare questi limiti fissati da Allah sarebbe ancor più grave del male stesso che si vuole punire. In tutto quello che riguarda i reati contro la persona, specie quelli colposi e preterintenzionali, viene inoltre raccomandato il perdono e la riconciliazione con il colpevole. <a class=f><sup foot_note=159655>27</sup></a> «… per ritornare»: sulla terra. Come in altri brani il Corano ci tratteggia l’atteggiamento dei dannati alla vista dell’Inferno. Vorrebbero tornare sulla terra per guadagnarsi la benevolenza di Allah, ma è troppo tardi, hanno avuto la loro prova e non l’hanno superata. <a class=f><sup foot_note=159656>28</sup></a> In questo versetto vengono indicati tre modi con cui Allah (gloria a Lui l’Altissimo) comunica con gli uomini che ha innalzato alla dignità di Suoi profeti o messaggeri. In primo luogo «l’ispirazione» che comunica direttamente allo spirito dell’uomo e alla sua mente senza altro fenomeno sensibile, poi «da dietro un velo» (la stessa espressione che abbiamo tradotto «da dietro una cortina», cfr. XXXIII, ed è ad esempio il caso della prima rivelazione di Allah a Mosè (vedi sura xxvii, XXIX, o «inviando un messaggero», cioè un Angelo, come avvenne per la rivelazione fatta scendere su Muhammad nella grotta di Hira e in molti altri casi (gli Angeli inviati ad Abramo e poi a Lot, ecc.). <a class=f><sup foot_note=159657>29</sup></a> « uno spirito »:secondo l’esegesi classica (Tabarî XXV, si riferisce al Corano.",
+        "ru": "путь Аллаха, Которому принадлежит то, что на небесах, и то, что на земле. Воистину, к Аллаху возвращаются дела.",
+        "tr": "Göklerde ve yerde bulunanların sahibi olan Allah'ın yoluna götürüyorsun. İyi bilin ki bütün işler sonunda yalnız Allah'a dönecektir.",
+        "de": "Allahs Weg, Dem gehört, was in den Himmeln und was auf der Erde ist. Sicherlich, zu Allah nehmen die Angelegenheiten ihren Ausgang.",
+        "pt": "A senda de Deus, a Quem pertence tudo quanto existe nos céus e na terra. Acaso, não retornarão a Deus todas as coisas?",
+        "nl": "Het is het Pad van Allah, Degene aan Wie alles wat in de hemelen en op de aarde is toebehoort. Weet: alle zaken keren tot Allah terug.",
+        "ur": "اُس خدا کے راستے کی طرف جو زمین اور آسمانوں کی ہر چیز کا مالک ہے۔ خبردار رہو، سارے معاملات اللہ ہی کی طرف رجُوع کرتے ہیں۔ <sup foot_note=\"187064\">1</sup>",
+        "bn": "সেই আল্লাহৰ পথ, যিজন আকাশসমূহ আৰু পৃথিৱীত যি আছে সেই সকলোৰে গৰাকী। জানি থোৱা! সকলো বিষয় আল্লাহৰেই ফালে উভতি যাব।",
+        "fa": "راه الله که آنچه در آسمان‌ها و زمین است از آنِ اوست. آگاه باشید! [همۀ] امور به سوی الله بازمی‌گردد."
+      }
+    }
+  ]
+}

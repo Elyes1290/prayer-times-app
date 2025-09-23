@@ -1,0 +1,166 @@
+{
+  "surah_number": 102,
+  "extracted_at": "2025-09-20T15:17:35.775Z",
+  "verses": [
+    {
+      "verse_number": 6169,
+      "verse_key": "102:1",
+      "arabic_text": " أَلْهَىٰكُمُ ٱلتَّكَاثُرُ",
+      "phonetic_text": "Alhakumu attakathur",
+      "translations": {
+        "fr": "La ruée vers les richesses vous distrait,",
+        "en": "Striving for more distracts you",
+        "es": "El afán de tener más y más os domina",
+        "it": "Il rivaleggiare <a class=f><sup foot_note=160749>1</sup></a> vi distrarrà,",
+        "ru": "Страсть к приумножению (похвальба богатством и детьми) увлекает вас",
+        "tr": "Çoklukla övünmek, sizi kabirlere varıncaya kadar oyaladı.",
+        "de": "Die Vermehrung lenkt euch ab,",
+        "pt": "A cobiça vos entreterá,",
+        "nl": "Jullie gaan op in de wedijver om meer.",
+        "ur": "تم لوگوں کو زیادہ سے زیادہ اور ایک دُوسرے سے بڑھ کر دنیا حاصل کرنے کی دُھن نے غفلت میں ڈال رکھا ہے <sup foot_note=\"188591\">1</sup>",
+        "bn": "প্ৰাচুৰ্যৰ প্ৰতিযোগিতায় তোমালোকক অমনোযোগী কৰি ৰাখিছে।",
+        "fa": "زیاده‌خواهی، شما را به خود مشغول [و از یادِ پروردگار غافل] ساخت"
+      }
+    },
+    {
+      "verse_number": 6170,
+      "verse_key": "102:2",
+      "arabic_text": "حَتَّىٰ زُرْتُمُ ٱلْمَقَابِرَ",
+      "phonetic_text": "Hatta zurtumu almaqabir",
+      "translations": {
+        "fr": "jusqu’au bord de vos tombes.",
+        "en": "until you go into your graves.",
+        "es": "hasta que la muerte os sorprenda y entréis en la tumba.",
+        "it": "finché visiterete le tombe <a class=f><sup foot_note=160750>1</sup></a> .",
+        "ru": "настолько, что вы посещаете кладбища, чтобы бахвалиться своими покойниками (или пока вы сами не посетите могилы).",
+        "tr": "Çoklukla övünmek, sizi kabirlere varıncaya kadar oyaladı.",
+        "de": "bis ihr die Friedhöfe besucht.",
+        "pt": "Até que desçais aos sepulcros.",
+        "nl": "Totdat jullie in de graven terechtkomen.",
+        "ur": "یہاں تک کہ (اِسی فکر میں) تم لبِ گور تک پہنچ جاتے ہو۔ <sup foot_note=\"188592\">1</sup>",
+        "bn": "যেতিয়ালৈকে তোমালোকে কবৰত উপনীত নোহোৱা।",
+        "fa": "تا [پایانِ] كارتان به گورستان رسید."
+      }
+    },
+    {
+      "verse_number": 6171,
+      "verse_key": "102:3",
+      "arabic_text": "كَلَّا سَوْفَ تَعْلَمُونَ",
+      "phonetic_text": "Kalla sawfa taAAlamoon",
+      "translations": {
+        "fr": "Mais vous allez bientôt savoir.",
+        "en": "No indeed! You will come to know.",
+        "es": "¡No deberíais comportaros así! Ya os vais a enterar [que obrar para la otra vida es superior].",
+        "it": "Invece no! Ben presto saprete.",
+        "ru": "Но нет! Скоро вы узнаете!",
+        "tr": "Hayır! Yakında bileceksiniz.",
+        "de": "Keineswegs! Ihr werdet (es noch) erfahren.",
+        "pt": "Qual! Logo o sabereis!",
+        "nl": "Nee, jullie zullen het weten.",
+        "ur": "ہرگز نہیں، عنقریب تم کو معلوم ہو جائے گا۔ <sup foot_note=\"188593\">1</sup>",
+        "bn": "কেতিয়াও নহয়, অতি সোনকালে তোমালোকে জানিবলৈ পাবা।",
+        "fa": "هرگز چنین نیست [که شما می‌پندارید]؛ به زودی خواهید دانست."
+      }
+    },
+    {
+      "verse_number": 6172,
+      "verse_key": "102:4",
+      "arabic_text": "ثُمَّ كَلَّا سَوْفَ تَعْلَمُونَ",
+      "phonetic_text": "Thumma kalla sawfa taAAlamoon",
+      "translations": {
+        "fr": "Oui, vous allez bientôt savoir.",
+        "en": "No indeed! In the end you will come to know.",
+        "es": "Una vez más: ¡No deberíais comportaros así! Ya os vais a enterar [que obrar para la otra vida es superior].",
+        "it": "E ancora no! Ben presto saprete.",
+        "ru": "Еще раз нет! Скоро вы узнаете!",
+        "tr": "Yine hayır! Yakında bileceksiniz (hatanızı).",
+        "de": "Abermals: Keineswegs! Ihr werdet (es noch) erfahren.",
+        "pt": "Novamente, qual! Logo o sabereis!",
+        "nl": "Nogmaals, nee! Jullie zullen het weten.",
+        "ur": "پھر (سن لو کہ) ہرگز نہیں، عنقریب تم کو معلوم ہو جائے گا",
+        "bn": "আকৌ কেতিয়াও নহয়, অতি সোনকালে তোমালোকে জানিবলৈ পাবা।",
+        "fa": "باز [هم] چنین نیست؛ به زودی خواهید دانست."
+      }
+    },
+    {
+      "verse_number": 6173,
+      "verse_key": "102:5",
+      "arabic_text": "كَلَّا لَوْ تَعْلَمُونَ عِلْمَ ٱلْيَقِينِ",
+      "phonetic_text": "Kalla law taAAlamoona AAilma alyaqeen",
+      "translations": {
+        "fr": "Si seulement vous pouviez savoir avec certitude,",
+        "en": "No indeed! If only you knew for certain.",
+        "es": "Si hubierais sabido con certeza [el castigo de quienes consumen su vida en el afán de tener más y más, habríais cambiado el rumbo de vuestras vidas].",
+        "it": "No! Se solo sapeste con certezza…",
+        "ru": "Но нет! Если бы вы только обладали убедительным знанием!",
+        "tr": "Hayır! Eğer kesin bilgi ile bilseniz, elbette cehennemi görürsünüz.",
+        "de": "Keineswegs! Wenn ihr es nur mit dem Wissen der Gewißheit wüßtet!",
+        "pt": "Qual! Se soubésseis da ciência certa!",
+        "nl": "Nee! Als jullie het maar met zekere kennis zouden weten!",
+        "ur": "ہرگز نہیں، اگر تم یقینی علم کی حیثیت سے (اِس روش کے انجام کو) جانتے ہوتے (تو تمہارا یہ طرز عمل نہ ہوتا)",
+        "bn": "কেতিয়াও নহয়, যদি তোমালোকে নিশ্চিতভাৱে জানিলাহেঁতেন।",
+        "fa": "چنین نیست [که شما گمان می‌کنید]؛ اگر به دانشِ یقینی [و تردیدناپذیر، حقیقتِ قیامت را] می‌دانستید، [از زیاده‌خواهی و افتخار به اموال و فرزندانتان دست برمی‌داشتید]."
+      }
+    },
+    {
+      "verse_number": 6174,
+      "verse_key": "102:6",
+      "arabic_text": "لَتَرَوُنَّ ٱلْجَحِيمَ",
+      "phonetic_text": "Latarawunna aljaheem",
+      "translations": {
+        "fr": "Vous verriez alors l’Enfer !",
+        "en": "You will most definitely see Hellfire,",
+        "es": "Habréis de ver el fuego del Infierno,",
+        "it": "Pre-Eg. n.Di versetti. Il nome della sura deriva dal vers. In nome di Allah, il Compassionevole, il Misericordioso. Vedrete certamente la Fornace <a class=f><sup foot_note=160748>1</sup></a> .",
+        "ru": "А ведь вы непременно увидите Ад.",
+        "tr": "Hayır! Eğer kesin bilgi ile bilseniz, elbette cehennemi görürsünüz.",
+        "de": "Ihr werdet ganz gewiß den Höllenbrand sehen.",
+        "pt": "Verdadeiramente, então, havíeis de ver a fogueira do inferno!",
+        "nl": "Jullie zullen zeker de Hel zien.",
+        "ur": "تم دوزخ دیکھ کر رہو گے",
+        "bn": "নিশ্চয় তোমালোকে জাহীম (জাহান্নাম) দেখিবা।",
+        "fa": "سوگند که دوزخ را خواهید دید."
+      }
+    },
+    {
+      "verse_number": 6175,
+      "verse_key": "102:7",
+      "arabic_text": "ثُمَّ لَتَرَوُنَّهَا عَيْنَ ٱلْيَقِينِ",
+      "phonetic_text": "Thumma latarawunnaha AAayna alyaqeen",
+      "translations": {
+        "fr": "Puis vous le verriez, de vos yeux le verriez,",
+        "en": "you will see it with the eye of certainty.",
+        "es": "y lo veréis con los ojos de la certeza.",
+        "it": "Lo vedrete con l’occhio della certezza,",
+        "ru": "Вы увидите его глазами убежденными.",
+        "tr": "Sonra, yemin olsun ki, cehennemi yakin gözüyle göreceksiniz.",
+        "de": "Abermals: Ihr werdet ihn mit dem Auge der Gewißheit sehen.",
+        "pt": "Logo a vereis claramente.",
+        "nl": "Nogmaals, jullie zullen haar met een zeker oog zien.",
+        "ur": "پھر (سن لو کہ) تم بالکل یقین کے ساتھ اُسے دیکھ لو گے",
+        "bn": "আকৌ, নিশ্চয় তোমালোকে ইয়াক পতিয়ন যোৱাকৈ দেখিবা।",
+        "fa": "باز هم سوگند که آن را با چشم یقین خواهید دید؛"
+      }
+    },
+    {
+      "verse_number": 6176,
+      "verse_key": "102:8",
+      "arabic_text": "ثُمَّ لَتُسْـَٔلُنَّ يَوْمَئِذٍ عَنِ ٱلنَّعِيمِ",
+      "phonetic_text": "Thumma latus-alunna yawma-ithin AAaniannaAAeem",
+      "translations": {
+        "fr": "Puis, ce jour-là, vous serez certes interrogés au sujet des plaisirs.",
+        "en": "On that Day, you will be asked about your pleasures.",
+        "es": "Luego, ese día [del Juicio] se os preguntará por cada bendición que habéis recibido [durante la vida mundanal].",
+        "it": "quindi in quel Giorno, sarete interrogati sui piaceri [che vi sono stati concessi] <a class=f><sup foot_note=160751>1</sup></a> . <a class=f><sup foot_note=160752>2</sup></a> «Il rivaleggiare»: abbiamo tradotto così «at-takàthur», è la lotta per aumentare le ricchezze, il prestigio, la fama. Oltre il suo significato relativamente alle circostanze della rivelazione la sura stigmatizza con durezza e con enfasi la corsa spasmodica dell’uomo all’acquisizione di tutto ciò che è materia o apparenza, trascurando la sua realtà spirituale. <a class=f><sup foot_note=160753>3</sup></a> Secondo l’esegesi classica (Ibn Khatîr IV, 544-e altri) la sura si riferisce ad un episodio che vide due clan medinesi rivaleggiare al limite dello scontro fisico a proposito dei loro rispettivi fasti. Vantando il loro passato e i loro eroi, si recarono al cimitero per enumerarli e stava quasi per risuonare il suono sinistro delle armi quando intervenne l’Inviato di Allah (pace e benedizioni su di lui) che recitò loro questa sura e li ricondusse alla ragione. <a class=f><sup foot_note=160754>4</sup></a> «la Fornace»: uno dei nomi dell’Inferno. <a class=f><sup foot_note=160755>5</sup></a> «sulla delizia»: effimera che avrete goduto sulla terra.",
+        "ru": "В тот день вы будете спрошены о благах.",
+        "tr": "Sonra, yemin olsun ki, o gün (size verilen) her nimetten sorulacaksınız",
+        "de": "Hierauf werdet ihr an jenem Tag ganz gewiß nach der Wonne gefragt werden.",
+        "pt": "Então, sereis interrogados, nesse dia, a respeito dos prazeres (mundanos).",
+        "nl": "Dan zullen jullie op die Dag ondervraagd worden over de genietingen.",
+        "ur": "پھر ضرور اُس روز تم سے اِن نعمتوں کے بارے میں جواب طلبی کی جائے گی۔ <sup foot_note=\"188594\">1</sup>",
+        "bn": "তাৰ পিছত সেইদিনা অৱশ্যই তোমালোকক নিয়ামত সম্পৰ্কে প্ৰশ্ন কৰা হ’ব।",
+        "fa": "آنگاه قطعاً در آن روز، از [تمام] نعمت‌ها بازخواست خواهید شد."
+      }
+    }
+  ]
+}
