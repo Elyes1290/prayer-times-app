@@ -461,7 +461,11 @@ export default function HomeScreen() {
       ? location
       : null;
 
-  const currentPrayerTimes = usePrayerTimes(locationToUse, today);
+  const currentPrayerTimes = usePrayerTimes(
+    locationToUse,
+    today,
+    user?.isPremium || false
+  );
 
   // Stabiliser les dhikr settings
   const stableDhikrSettings = useMemo(
