@@ -19,7 +19,6 @@ import {
   SafeAreaView,
   Dimensions,
   TextInput,
-  Alert,
   KeyboardAvoidingView,
   Platform,
 } from "react-native";
@@ -28,6 +27,8 @@ import { usePremium } from "../contexts/PremiumContext";
 import FavoriteButton from "../components/FavoriteButton";
 import { HadithFavorite } from "../contexts/FavoritesContext";
 import { HadithOfflineService } from "../utils/hadithOfflineService";
+import { OfflineMessage } from "../components/OfflineMessage";
+import { useNetworkStatus, useOfflineAccess } from "../hooks/useNetworkStatus";
 
 type Book = {
   id: number;
@@ -95,38 +96,22 @@ export default function HadithScreen() {
   const [loadingChapters, setLoadingChapters] = useState(false);
   const [loadingHadiths, setLoadingHadiths] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  const [canAccessOffline, setCanAccessOffline] = useState(false);
-
   const [fontsLoaded] = Font.useFonts({
     ScheherazadeNew: require("../assets/fonts/ScheherazadeNew-Regular.ttf"),
   });
 
-  // Vérifier la connectivité et les permissions
-  useEffect(() => {
-    const checkAccess = async () => {
-      // Vérifier si l'utilisateur peut accéder offline
-      const canAccess = await HadithOfflineService.canAccessOffline(
-        user?.isPremium || false
-      );
-      setCanAccessOffline(canAccess);
+  // Utiliser les hooks de réseau pour une logique plus simple
+  const offlineAccess = useOfflineAccess(!!user?.isPremium);
 
-      // Si pas premium et pas de connexion, bloquer l'accès
-      if (!canAccess) {
-        Alert.alert(
-          t("connection_required"),
-          t("hadith_offline_premium_only"),
-          [{ text: t("ok") }]
-        );
-        return;
-      }
-    };
-
-    checkAccess();
-  }, [user?.isPremium, t]);
+  // Fonction pour réessayer la connexion
+  const handleRetry = () => {
+    // En React Native, on peut juste déclencher un re-render
+    // Les hooks de réseau se mettront à jour automatiquement
+  };
 
   // Charger la liste des livres
   useEffect(() => {
-    if (!canAccessOffline) return;
+    if (!offlineAccess.canAccessOffline) return;
 
     setLoadingBooks(true);
 
@@ -162,7 +147,7 @@ export default function HadithScreen() {
       console.error("❌ Erreur chargement livres:", error);
       setLoadingBooks(false);
     }
-  }, [canAccessOffline, t]);
+  }, [offlineAccess.canAccessOffline, t]);
 
   // Charger les chapitres du livre sélectionné
   useEffect(() => {
@@ -172,7 +157,7 @@ export default function HadithScreen() {
     setCurrentPage(1);
     setSearchQuery(""); // Réinitialiser la recherche
 
-    if (!selectedBook || !canAccessOffline) return;
+    if (!selectedBook || !offlineAccess.canAccessOffline) return;
 
     setLoadingChapters(true);
 
@@ -193,12 +178,16 @@ export default function HadithScreen() {
         setChapters([]);
         setLoadingChapters(false);
       });
-  }, [selectedBook, canAccessOffline, t]);
+  }, [selectedBook, offlineAccess.canAccessOffline, t]);
 
   // Fonction pour charger les hadiths
   const loadHadiths = useCallback(
     async (page: number) => {
-      if (!selectedBook || selectedChapter === null || !canAccessOffline)
+      if (
+        !selectedBook ||
+        selectedChapter === null ||
+        !offlineAccess.canAccessOffline
+      )
         return;
 
       setLoadingHadiths(true);
@@ -228,7 +217,7 @@ export default function HadithScreen() {
         setLoadingHadiths(false);
       }
     },
-    [selectedBook, selectedChapter, canAccessOffline]
+    [selectedBook, selectedChapter, offlineAccess.canAccessOffline]
   );
 
   // Charger les hadiths quand on change de livre ou chapitre
@@ -236,14 +225,20 @@ export default function HadithScreen() {
     setHadiths([]);
     setCurrentPage(1);
     loadHadiths(1);
-  }, [selectedChapter, selectedBook, canAccessOffline, t, loadHadiths]);
+  }, [
+    selectedChapter,
+    selectedBook,
+    offlineAccess.canAccessOffline,
+    t,
+    loadHadiths,
+  ]);
 
   // Charger les hadiths quand on change de page
   useEffect(() => {
     if (
       selectedBook &&
       selectedChapter !== null &&
-      canAccessOffline &&
+      offlineAccess.canAccessOffline &&
       currentPage > 1
     ) {
       loadHadiths(currentPage);
@@ -252,7 +247,7 @@ export default function HadithScreen() {
     currentPage,
     selectedBook,
     selectedChapter,
-    canAccessOffline,
+    offlineAccess.canAccessOffline,
     loadHadiths,
   ]);
 
@@ -373,6 +368,16 @@ export default function HadithScreen() {
   if (!fontsLoaded) return null;
   if (loadingBooks)
     return <ActivityIndicator size="large" style={{ marginTop: 40 }} />;
+
+  // Afficher le message offline si nécessaire
+  if (offlineAccess.shouldShowOfflineMessage) {
+    return (
+      <OfflineMessage
+        onRetry={handleRetry}
+        customMessage={t("hadith_offline_premium_only")}
+      />
+    );
+  }
 
   return (
     <View style={{ flex: 1 }}>

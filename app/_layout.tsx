@@ -16,6 +16,7 @@ import { showGlobalToast, ToastProvider } from "../contexts/ToastContext";
 import i18n from "../locales/i18n";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { verifyAuth } from "../utils/apiClient";
+import { isOfflineMode } from "../utils/networkUtils";
 
 // 🚨 NOUVEAU : Protection contre les reloads Expo en mode développement
 let isAbonnementProcessActive = false;
@@ -231,44 +232,53 @@ export default function TabLayout() {
               return;
             }
 
-            console.log(
-              "🔐 Vérification token au démarrage - utilisateur connecté"
-            );
-            const verify = await verifyAuth();
-            console.log(
-              "🔐 Vérification token au démarrage (verifyAuth):",
-              verify
-            );
-            if (!verify) {
-              console.log("❌ Token invalide détecté, déconnexion...");
-              await AsyncStorage.multiRemove([
-                "auth_token",
-                "refresh_token",
-                "user_data",
-                "explicit_connection",
-                "@prayer_app_premium_user",
-                "user_stats_cache",
-              ]);
-              console.log("✅ Données utilisateur supprimées");
-
-              // Forcer la mise à jour des contextes React
-              await forceLogout();
-              await forceReset();
-
-              // Forcer un re-render de tous les composants
-              setForceRefresh((prev) => prev + 1);
-
-              showGlobalToast({
-                type: "error",
-                title:
-                  i18n.t("toast_connection_interrupted") ||
-                  "Connexion interrompue",
-                message:
-                  i18n.t("toast_single_device_only") ||
-                  "Non autorisé. Veuillez vous connecter sur un seul appareil.",
-              });
+            // 🌐 NOUVEAU : Vérifier la connectivité avant d'appeler l'API
+            const isOffline = await isOfflineMode();
+            if (isOffline) {
+              console.log(
+                "🌐 [OFFLINE] Mode offline détecté - token considéré comme valide"
+              );
+              console.log("✅ Token valide au démarrage (mode offline)");
             } else {
-              console.log("✅ Token valide au démarrage");
+              console.log(
+                "🔐 Vérification token au démarrage - utilisateur connecté"
+              );
+              const verify = await verifyAuth();
+              console.log(
+                "🔐 Vérification token au démarrage (verifyAuth):",
+                verify
+              );
+              if (!verify) {
+                console.log("❌ Token invalide détecté, déconnexion...");
+                await AsyncStorage.multiRemove([
+                  "auth_token",
+                  "refresh_token",
+                  "user_data",
+                  "explicit_connection",
+                  "@prayer_app_premium_user",
+                  "user_stats_cache",
+                ]);
+                console.log("✅ Données utilisateur supprimées");
+
+                // Forcer la mise à jour des contextes React
+                await forceLogout();
+                await forceReset();
+
+                // Forcer un re-render de tous les composants
+                setForceRefresh((prev) => prev + 1);
+
+                showGlobalToast({
+                  type: "error",
+                  title:
+                    i18n.t("toast_connection_interrupted") ||
+                    "Connexion interrompue",
+                  message:
+                    i18n.t("toast_single_device_only") ||
+                    "Non autorisé. Veuillez vous connecter sur un seul appareil.",
+                });
+              } else {
+                console.log("✅ Token valide au démarrage");
+              }
             }
           } else if (token && explicitConnection !== "true") {
             // 🚀 CORRECTION : Nettoyer les tokens orphelins (sans connexion explicite)

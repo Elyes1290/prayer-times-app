@@ -245,14 +245,10 @@ public class QuranAudioService extends Service {
         // Vérifier le statut premium AVANT de démarrer en foreground
         checkPremiumStatus();
         
-        // Démarrer le service en mode foreground SEULEMENT si l'utilisateur est premium
-        // et qu'il y a une lecture audio active
-        if (isPremiumUser && (isPlaying || !currentAudioPath.isEmpty())) {
-            startForeground(NOTIFICATION_ID, createNotification());
-            Log.d(TAG, "🎵 Service démarré en mode foreground (utilisateur premium avec audio actif)");
-        } else {
-            Log.d(TAG, "🎵 Service démarré en mode background (utilisateur non premium ou pas d'audio actif)");
-        }
+        // TOUJOURS démarrer en foreground si le service a été démarré avec startForegroundService()
+        // Android exige que startForeground() soit appelé dans les 5 secondes
+        startForeground(NOTIFICATION_ID, createNotification());
+        Log.d(TAG, "🎵 Service démarré en mode foreground (requis par Android)");
         
         // Enregistrer le BroadcastReceiver pour les actions du widget
         // NOUVEAU : Enregistrer immédiatement dans onCreate() pour s'assurer qu'il est disponible
@@ -355,20 +351,10 @@ public class QuranAudioService extends Service {
         // Le BroadcastReceiver est déjà enregistré dans onCreate()
         Log.d(TAG, "📡 BroadcastReceiver déjà enregistré dans onCreate()");
 
-        // Démarrer en mode foreground SEULEMENT si l'utilisateur est premium
-        // et qu'il y a une lecture audio active ou qu'on va charger un audio
-        boolean shouldStartForeground = isPremiumUser && (
-            isPlaying || 
-            !currentAudioPath.isEmpty() || 
-            (intent != null && "com.drogbinho.prayertimesapp2.LOAD_AUDIO".equals(intent.getAction()))
-        );
-        
-        if (shouldStartForeground) {
-            startForeground(NOTIFICATION_ID, createNotification());
-            Log.d(TAG, "🎵 Service démarré en mode foreground (utilisateur premium avec audio actif)");
-        } else {
-            Log.d(TAG, "🎵 Service en mode background (utilisateur non premium ou pas d'audio actif)");
-        }
+        // Le service est déjà en foreground depuis onCreate()
+        // Juste mettre à jour la notification si nécessaire
+        updateNotification();
+        Log.d(TAG, "🎵 Notification mise à jour dans onStartCommand");
 
         // Traiter l'action si elle existe
         if (intent != null && intent.getAction() != null) {
@@ -1982,12 +1968,10 @@ public class QuranAudioService extends Service {
             return;
         }
         
-        // Démarrer le service en mode foreground pour l'utilisateur premium
-        // qui charge effectivement un audio
-        if (!isForegroundService()) {
-            startForeground(NOTIFICATION_ID, createNotification());
-            Log.d(TAG, "🎵 Service démarré en mode foreground pour chargement audio premium");
-        }
+        // Le service est déjà en mode foreground depuis onCreate()
+        // Juste mettre à jour la notification
+        updateNotification();
+        Log.d(TAG, "🎵 Notification mise à jour pour chargement audio premium");
         
         // Vérifier si le service Adhan est actif et attendre
         waitForAdhanServiceToFinish();
@@ -2140,12 +2124,10 @@ public class QuranAudioService extends Service {
             return;
         }
         
-        // Démarrer le service en mode foreground pour l'utilisateur premium
-        // qui charge effectivement un audio
-        if (!isForegroundService()) {
-            startForeground(NOTIFICATION_ID, createNotification());
-            Log.d(TAG, "🎵 Service démarré en mode foreground pour chargement audio premium");
-        }
+        // Le service est déjà en mode foreground depuis onCreate()
+        // Juste mettre à jour la notification
+        updateNotification();
+        Log.d(TAG, "🎵 Notification mise à jour pour chargement audio premium");
         
         // Vérifier si le service Adhan est actif et attendre
         waitForAdhanServiceToFinish();

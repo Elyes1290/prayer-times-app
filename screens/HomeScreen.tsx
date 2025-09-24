@@ -48,6 +48,7 @@ import { debugLog, errorLog } from "../utils/logger";
 import WelcomePersonalizationModal from "../components/WelcomePersonalizationModal";
 import { usePremium } from "../contexts/PremiumContext";
 import { useUniversalStyles } from "../hooks/useUniversalLayout";
+import { useNetworkStatus, useOfflineAccess } from "../hooks/useNetworkStatus";
 
 const { AdhanModule } = NativeModules;
 
@@ -192,6 +193,11 @@ export default function HomeScreen() {
     currentTheme,
     universalLayout // 🚀 NOUVEAU : Layout universel pour la responsive
   );
+
+  // 🌐 NOUVEAU : Détection réseau pour masquer les raccourcis offline
+  const networkStatus = useNetworkStatus();
+  const { user: premiumUser } = usePremium();
+  const offlineAccess = useOfflineAccess(!!premiumUser?.isPremium);
 
   // Map langue => id traduction Quran.com
   const translationMap: Record<string, number | null> = {
@@ -992,7 +998,7 @@ export default function HomeScreen() {
   };
 
   // Mise à jour des actions rapides avec les types corrects pour les gradients
-  const quickActions = [
+  const allQuickActions = [
     {
       icon: "compass",
       title: t("qibla"),
@@ -1038,6 +1044,16 @@ export default function HomeScreen() {
       gradient: ["rgba(184,134,11,0.13)", "rgba(255,215,0,0.10)"] as const,
     },
   ];
+
+  // 🌐 NOUVEAU : Filtrer les raccourcis selon le statut réseau et premium
+  const quickActions = allQuickActions.filter((action) => {
+    // Masquer "Histoires du Prophète" si l'utilisateur est hors ligne et non-premium
+    if (action.route === "/prophet-stories") {
+      return offlineAccess.canAccessOffline || networkStatus.isConnected;
+    }
+    // Tous les autres raccourcis restent visibles
+    return true;
+  });
 
   return (
     <>

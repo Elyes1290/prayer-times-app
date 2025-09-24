@@ -7,6 +7,7 @@ import React, {
 } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { safeJsonParse } from "../utils/safeJson";
+import { useNetworkStatus } from "../hooks/useNetworkStatus";
 // 🚀 NOUVEAU : Import apiClient pour vérifier la connexion Infomaniak
 import apiClient from "../utils/apiClient";
 // 🚀 NOUVEAU : Import du gestionnaire de synchronisation
@@ -114,6 +115,9 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
   const [loading, setLoading] = useState(true);
   const { showToast } = useToast();
   const { t } = useTranslation();
+
+  // 🌐 NOUVEAU : Hook pour vérifier la connectivité réseau
+  const networkStatus = useNetworkStatus();
 
   // 🕐 NOUVEAU : Vérifier l'expiration des abonnements localement
   const checkLocalPremiumExpiration = React.useCallback(async () => {
@@ -281,6 +285,14 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
           return;
         }
 
+        // 🌐 NOUVEAU : Vérifier la connectivité avant d'appeler l'API
+        if (!networkStatus.isConnected || !networkStatus.isInternetReachable) {
+          console.log(
+            "🌐 [OFFLINE] Pas de connexion réseau - token considéré comme valide en mode offline"
+          );
+          return; // Ne pas vérifier le token en mode offline
+        }
+
         console.log(
           "🔐 Vérification périodique du token - utilisateur connecté"
         );
@@ -307,7 +319,12 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
       clearTimeout(timeout);
       if (interval) clearInterval(interval);
     };
-  }, [showToast, deactivatePremium]);
+  }, [
+    showToast,
+    deactivatePremium,
+    networkStatus.isConnected,
+    networkStatus.isInternetReachable,
+  ]);
 
   // 🚀 NOUVEAU : Vérifier la connexion explicite et maintenir le premium si connecté
   useEffect(() => {
