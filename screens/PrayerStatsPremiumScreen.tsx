@@ -1452,6 +1452,7 @@ const PrayerStatsPremiumScreen: React.FC = () => {
                         t("prayer_recorded_success") ||
                           "✅ Prière enregistrée !"
                       );
+                      // ✅ NOUVEAU : Rafraîchir immédiatement après l'action
                       await refresh();
                     } else {
                       showToast(

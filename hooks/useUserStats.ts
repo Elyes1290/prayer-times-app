@@ -145,6 +145,10 @@ export const useUserStats = (): UseUserStatsReturn => {
   const fetchStats = useCallback(
     async (forceRefresh = false) => {
       try {
+        console.log(
+          "🔄 [DEBUG] fetchStats appelé, forceRefresh:",
+          forceRefresh
+        );
         setLoading(true);
         setError(null);
         setPremiumRequired(false);
@@ -158,12 +162,15 @@ export const useUserStats = (): UseUserStatsReturn => {
         // 🌐 NOUVEAU : Utiliser le gestionnaire offline
         const offlineManager = OfflineStatsManager.getInstance();
         const result = await offlineManager.getStats();
+        console.log("📊 [DEBUG] Résultat getStats:", result);
 
         // Ajouter challenges et badges aux stats
         if (result.stats) {
           result.stats.challenges = result.challenges || [];
           result.stats.badges = result.badges || [];
         }
+
+        console.log("📈 [DEBUG] Stats finales à afficher:", result.stats);
         setStats(result.stats);
         setIsOffline(result.isOffline);
         setLastUpdated(result.lastSync);
@@ -186,12 +193,12 @@ export const useUserStats = (): UseUserStatsReturn => {
         }
 
         console.log(
-          `📊 Stats chargées: ${
+          `📊 [DEBUG] Stats chargées: ${
             result.isOffline ? "offline" : "online"
           }, ${pendingCount} actions en attente`
         );
       } catch (err) {
-        console.error("Erreur useUserStats:", err);
+        console.error("❌ [DEBUG] Erreur useUserStats:", err);
         setError(err instanceof Error ? err.message : "Erreur inconnue");
         // Ne pas afficher le message premium si l'utilisateur est premium
         if (!user?.isPremium) {

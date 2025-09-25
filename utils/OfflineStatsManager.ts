@@ -152,25 +152,50 @@ class OfflineStatsManager {
     lastSync: Date | null;
   }> {
     try {
+      console.log("🔄 [DEBUG] fetchAndCacheStats appelé");
       const userId = await getCurrentUserId();
       if (!userId) {
         throw new Error("Aucun utilisateur connecté");
+      }
+
+      console.log(
+        `🌐 [DEBUG] Récupération stats depuis API: ${AppConfig.USER_STATS_API}?user_id=${userId}`
+      );
+
+      // ✅ NOUVEAU : Récupérer le token d'authentification
+      const authToken = await AsyncStorage.getItem("auth_token");
+      console.log(
+        `🔑 [DEBUG] Token auth pour stats:`,
+        authToken ? `${authToken.substring(0, 10)}...` : "MANQUANT"
+      );
+
+      const headers: Record<string, string> = {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      };
+
+      if (authToken) {
+        headers["Authorization"] = `Bearer ${authToken}`;
       }
 
       const response = await fetch(
         `${AppConfig.USER_STATS_API}?user_id=${userId}`,
         {
           method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-          },
+          headers,
         }
       );
 
+      console.log(
+        `📡 [DEBUG] Réponse API stats:`,
+        response.status,
+        response.statusText
+      );
       const result = await response.json();
+      console.log(`📊 [DEBUG] Données stats reçues:`, result);
 
       if (result.success && result.data) {
+        console.log(`📈 [DEBUG] Stats reçues:`, result.data);
         // Mettre en cache avec challenges et badges
         const offlineData: OfflineStatsData = {
           stats: result.data,
@@ -190,7 +215,7 @@ class OfflineStatsManager {
         await this.saveOfflineData(offlineData);
 
         console.log(
-          `✅ Données mises en cache: ${offlineData.challenges.length} challenges, ${offlineData.badges.length} badges`
+          `✅ [DEBUG] Données mises en cache: ${offlineData.challenges.length} challenges, ${offlineData.badges.length} badges`
         );
 
         return {
@@ -201,10 +226,11 @@ class OfflineStatsManager {
           lastSync: new Date(),
         };
       } else {
+        console.log(`❌ [DEBUG] Erreur API stats:`, result.message);
         throw new Error(result.message || "Erreur API");
       }
     } catch (error) {
-      console.error("❌ Erreur fetchAndCacheStats:", error);
+      console.error("❌ [DEBUG] Erreur fetchAndCacheStats:", error);
       // En cas d'erreur, vérifier si on est vraiment offline
       const isReallyOffline = await isOfflineMode();
       if (isReallyOffline) {
@@ -242,6 +268,12 @@ class OfflineStatsManager {
         // En mode online, essayer de synchroniser directement
         const syncResult = await this.syncSingleAction(action, actionData);
         if (syncResult.success) {
+          // ✅ NOUVEAU : Mettre à jour le cache local après sync réussie
+          console.log(
+            "🔄 [DEBUG] Mise à jour du cache local après action synchronisée"
+          );
+          const cacheResult = await this.fetchAndCacheStats();
+          console.log("📊 [DEBUG] Cache mis à jour:", cacheResult);
           return { success: true, isOffline: false, pendingCount: 0 };
         }
         // ✅ CORRIGÉ : Si sync échoue en ligne, on retourne quand même success: true, isOffline: false
@@ -299,17 +331,38 @@ class OfflineStatsManager {
     actionData: Record<string, any>
   ): Promise<{ success: boolean; error?: string }> {
     try {
+      console.log(`🔄 [DEBUG] syncSingleAction appelé avec:`, {
+        action,
+        actionData,
+      });
+
       const userId = await getCurrentUserId();
       if (!userId) {
+        console.log("❌ [DEBUG] Aucun utilisateur connecté");
         return { success: false, error: "Aucun utilisateur connecté" };
+      }
+
+      console.log(`🌐 [DEBUG] Envoi à l'API: ${AppConfig.USER_STATS_API}`);
+
+      // ✅ NOUVEAU : Récupérer le token d'authentification
+      const authToken = await AsyncStorage.getItem("auth_token");
+      console.log(
+        `🔑 [DEBUG] Token auth:`,
+        authToken ? `${authToken.substring(0, 10)}...` : "MANQUANT"
+      );
+
+      const headers: Record<string, string> = {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      };
+
+      if (authToken) {
+        headers["Authorization"] = `Bearer ${authToken}`;
       }
 
       const response = await fetch(AppConfig.USER_STATS_API, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
+        headers,
         body: JSON.stringify({
           user_id: userId,
           action,
@@ -317,16 +370,23 @@ class OfflineStatsManager {
         }),
       });
 
+      console.log(
+        `📡 [DEBUG] Réponse API reçue:`,
+        response.status,
+        response.statusText
+      );
       const result = await response.json();
+      console.log(`📊 [DEBUG] Résultat API:`, result);
 
       if (result.success) {
-        console.log(`✅ Action synchronisée: ${action}`);
+        console.log(`✅ [DEBUG] Action synchronisée avec succès: ${action}`);
         return { success: true };
       } else {
+        console.log(`❌ [DEBUG] Erreur API:`, result.message);
         return { success: false, error: result.message || "Erreur API" };
       }
     } catch (error) {
-      console.error("❌ Erreur syncSingleAction:", error);
+      console.error("❌ [DEBUG] Erreur syncSingleAction:", error);
       return { success: false, error: "Erreur réseau" };
     }
   }
@@ -374,6 +434,14 @@ class OfflineStatsManager {
       offlineData.last_update = Date.now();
 
       await this.saveOfflineData(offlineData);
+
+      // ✅ NOUVEAU : Si des actions ont été synchronisées avec succès, mettre à jour le cache
+      if (syncedCount > 0) {
+        console.log(
+          "🔄 Mise à jour du cache après synchronisation des actions en attente"
+        );
+        await this.fetchAndCacheStats();
+      }
 
       console.log(
         `✅ Synchronisation terminée: ${syncedCount} succès, ${failedActions.length} échecs`
