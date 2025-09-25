@@ -2298,6 +2298,17 @@ export default function QuranScreen() {
                                   : "1"}
                               </Text>
                             </View>
+                            <FavoriteButton
+                              favoriteData={convertToFavorite(
+                                item,
+                                translationText,
+                                getSelectedSourateLabel()
+                              )}
+                              size={20}
+                              iconColor="#ba9c34"
+                              iconColorActive="#FFD700"
+                              style={styles.favoriteButtonCompact}
+                            />
                           </View>
                         </View>
                         {phoneticText ? (

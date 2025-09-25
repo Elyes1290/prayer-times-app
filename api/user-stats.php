@@ -688,12 +688,16 @@ function getActiveChallenges($user_id) {
         $stmt = $pdo->prepare("
             SELECT 
                 a.code as id,
-                a.title,
-                a.description,
+                a.title as title_key,
+                a.description as description_key,
                 CONCAT(a.points, ' points') as reward,
                 COALESCE(ua.progress, 0) as progress,
                 a.icon,
-                '#FF6B6B' as color
+                '#FF6B6B' as color,
+                a.points,
+                a.requirement_type,
+                a.requirement_value,
+                a.category
             FROM achievements a
             LEFT JOIN user_achievements ua ON a.id = ua.achievement_id AND ua.user_id = ?
             WHERE a.is_hidden = 0
@@ -703,7 +707,24 @@ function getActiveChallenges($user_id) {
         $stmt->execute([$user_id]);
         $challenges = $stmt->fetchAll();
         
-        return $challenges ?: [
+        // Transformer les résultats pour utiliser les clés de traduction
+        $formattedChallenges = array_map(function($challenge) {
+            return [
+                'id' => $challenge['id'],
+                'title' => $challenge['title_key'], // Clé de traduction
+                'description' => $challenge['description_key'], // Clé de traduction
+                'reward' => $challenge['reward'],
+                'progress' => (float)$challenge['progress'],
+                'icon' => $challenge['icon'],
+                'color' => $challenge['color'],
+                'points' => (int)$challenge['points'],
+                'requirement_type' => $challenge['requirement_type'],
+                'requirement_value' => (int)$challenge['requirement_value'],
+                'category' => $challenge['category']
+            ];
+        }, $challenges);
+        
+        return $formattedChallenges ?: [
             [
                 'id' => 'prayer_streak',
                 'title' => 'Série de Prières',
@@ -758,9 +779,11 @@ function getUserBadges($user_id) {
         $stmt = $pdo->prepare("
             SELECT 
                 a.code as id,
-                a.title as name,
-                a.description,
+                a.title as name_key,
+                a.description as description_key,
                 a.icon,
+                a.points,
+                a.category,
                 CASE WHEN ua.unlocked_at IS NOT NULL THEN 1 ELSE 0 END as unlocked,
                 ua.unlocked_at
             FROM achievements a
@@ -771,9 +794,23 @@ function getUserBadges($user_id) {
         $stmt->execute([$user_id]);
         $badges = $stmt->fetchAll();
         
+        // Transformer les résultats pour utiliser les clés de traduction
+        $formattedBadges = array_map(function($badge) {
+            return [
+                'id' => $badge['id'],
+                'name' => $badge['name_key'], // Clé de traduction
+                'description' => $badge['description_key'], // Clé de traduction
+                'icon' => $badge['icon'],
+                'points' => (int)$badge['points'],
+                'category' => $badge['category'],
+                'unlocked' => (bool)$badge['unlocked'],
+                'unlocked_at' => $badge['unlocked_at']
+            ];
+        }, $badges);
+        
         // Si aucun badge n'est défini dans la table achievements, retourner un tableau vide
         // au lieu d'un badge fictif par défaut
-        return $badges ?: [];
+        return $formattedBadges ?: [];
     } catch (Exception $e) {
         error_log("Erreur getUserBadges: " . $e->getMessage());
         // En cas d'erreur, retourner un tableau vide au lieu d'un badge fictif
