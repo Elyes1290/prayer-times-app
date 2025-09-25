@@ -1854,7 +1854,7 @@ const PrayerStatsPremiumScreen: React.FC = () => {
           <View style={[styles.header, { backgroundColor: colors.cardBG }]}>
             <View style={styles.headerTop}>
               <Text style={[styles.headerTitle, { color: colors.text }]}>
-                📊 Statistiques Premium
+                {t("premium_stat") || "📊 Statistiques Premium"}
               </Text>
               <View style={styles.headerActions}>
                 <TouchableOpacity
@@ -2052,7 +2052,7 @@ const PrayerStatsPremiumScreen: React.FC = () => {
               ]}
             >
               <Text style={[styles.modalTitle, { color: colors.text }]}>
-                🧠 Insights Spirituels
+                {t("insights_spirituels") || "🧠 Insights Spirituels"}
               </Text>
               <TouchableOpacity
                 style={styles.modalCloseButton}
