@@ -1,0 +1,446 @@
+{
+  "surah_number": 85,
+  "extracted_at": "2025-09-20T15:17:11.745Z",
+  "verses": [
+    {
+      "verse_number": 5910,
+      "verse_key": "85:1",
+      "arabic_text": " وَٱلسَّمَآءِ ذَاتِ ٱلْبُرُوجِ",
+      "phonetic_text": "Wassama-i thatialburooj",
+      "translations": {
+        "fr": "Par le ciel et ses constellations !",
+        "en": "By the sky with its towering constellations,",
+        "es": "Juro por el cosmos y sus constelaciones,",
+        "it": "Per il cielo dalle costellazioni <a class=f><sup foot_note=160562>1</sup></a> ,",
+        "ru": "Клянусь небом с созвездиями Зодиака!",
+        "tr": "Burçlar sahibi gökyüzüne,",
+        "de": "Beim Himmel mit den Türmen",
+        "pt": "Pelo céu, possuidor das constelações",
+        "nl": "Bij de hemel en zijn sterrenstelsels.",
+        "ur": "قسم ہے مضبُوط قلعوں والے آسمان کی، <sup foot_note=\"188416\">1</sup>",
+        "bn": "শপত বুৰূজবিশিষ্ট আকাশৰ,",
+        "fa": "سوگند به آسمان که دارندۀ بُرج‌هاست،"
+      }
+    },
+    {
+      "verse_number": 5911,
+      "verse_key": "85:2",
+      "arabic_text": "وَٱلْيَوْمِ ٱلْمَوْعُودِ",
+      "phonetic_text": "Walyawmi almawAAood",
+      "translations": {
+        "fr": "Par le jour promis !",
+        "en": "by the promised Day,",
+        "es": "por el día prometido [el Día del Juicio Final],",
+        "it": "per il Giorno promesso,",
+        "ru": "Клянусь днем обещанным!",
+        "tr": "Vaad olunan o güne,",
+        "de": "und dem versprochenen Tag",
+        "pt": "E pelo dia prometido;",
+        "nl": "Bij de aangezegde Dag.",
+        "ur": "اور اُس دن کی جس کا وعدہ کیا گیا ہے، <sup foot_note=\"188417\">1</sup>",
+        "bn": "শপত প্ৰতিশ্ৰুতিকৃত দিনৰ,",
+        "fa": "و سوگند به روز موعود [قیامت]،"
+      }
+    },
+    {
+      "verse_number": 5912,
+      "verse_key": "85:3",
+      "arabic_text": "وَشَاهِدٍ وَمَشْهُودٍ",
+      "phonetic_text": "Washahidin wamashhood",
+      "translations": {
+        "fr": "Par le témoin et son témoignage !",
+        "en": "by the Witness and that which is witnessed,",
+        "es": "y por el testigo y lo atestiguado,",
+        "it": "per il testimone e la [sua] testimonianza <a class=f><sup foot_note=160563>1</sup></a> !",
+        "ru": "Клянусь свидетельствующим и засвидетельствованным!",
+        "tr": "Şahitlik edene ve edilene andolsun ki,",
+        "de": "und dem Zeugen und dem Bezeugten!",
+        "pt": "E pela testemunha e por aquilo de que presta testemunho",
+        "nl": "Bij de getuige en waarvan getuigd wordt.",
+        "ur": "اور دیکھنے  والے کی اور دیکھی جانے والی چیز کی <sup foot_note=\"188418\">1</sup>",
+        "bn": "শপত দ্ৰষ্টা আৰু দৃষ্টৰ,",
+        "fa": "و سوگند به هر کس که گواهی دهد و به هر کس که مورد گواهی قرار گیرد."
+      }
+    },
+    {
+      "verse_number": 5913,
+      "verse_key": "85:4",
+      "arabic_text": "قُتِلَ أَصْحَـٰبُ ٱلْأُخْدُودِ",
+      "phonetic_text": "Qutila as-habu alukhdood",
+      "translations": {
+        "fr": "Mort aux gens de la tranchée très longue (Al-Ukhdûd) !<sup foot_note=195229>1</sup>",
+        "en": "damned were the makers of the trench,",
+        "es": "que los que arrojaron a los creyentes al foso del fuego fueron maldecidos<sup foot_note=169499>1</sup>.",
+        "it": "Sia maledetta la gente del Fossato <a class=f><sup foot_note=160564>1</sup></a>",
+        "ru": "Да сгинут собравшиеся у рва -",
+        "tr": "Kahroldu o hendeğin sahipleri,",
+        "de": "Tod (sei) geweiht den Leuten des Grabens,",
+        "pt": "Destruíram-se a si mesmos os donos do fosso (do fogo),",
+        "nl": "Verdoemd zijn de gravers van de kuil.",
+        "ur": "کہ مارے گئے گڑھے والے",
+        "bn": "অভিশপ্ত হৈছিল অগ্নিকুণ্ডৰ অধিপতিসকল,",
+        "fa": "مرگ بر آدم‌سوزان خندق!"
+      }
+    },
+    {
+      "verse_number": 5914,
+      "verse_key": "85:5",
+      "arabic_text": "ٱلنَّارِ ذَاتِ ٱلْوَقُودِ",
+      "phonetic_text": "Annari thati alwaqood",
+      "translations": {
+        "fr": "Au bord d’un feu rugissant,",
+        "en": "the makers of the fuel-stoked fire!",
+        "es": "En el foso encendieron un fuego ardiente,",
+        "it": "dal fuoco incessantemente attizzato,",
+        "ru": "огненного, поддерживаемого растопкой!",
+        "tr": "O çıralı ateşin,",
+        "de": "des Feuers mit dem (vielen) Brennstoff,",
+        "pt": "Do fogo, com (abundante) combustível).",
+        "nl": "Van het vuur met zijn brandhout.",
+        "ur": "(اُس گڑھے والے) جس میں خوب بھڑکتے ہوئے ایندھن کی آگ تھی",
+        "bn": "য’ত আছিল ইন্ধনপূৰ্ণ জুই।",
+        "fa": "[همان آتشِ] افروخته از هیزم‌های بسیار [که مؤمنان را در آن می‌سوزاندند]؛"
+      }
+    },
+    {
+      "verse_number": 5915,
+      "verse_key": "85:6",
+      "arabic_text": "إِذْ هُمْ عَلَيْهَا قُعُودٌ",
+      "phonetic_text": "Ith hum AAalayha quAAood",
+      "translations": {
+        "fr": "(les mécréants) étaient assis,",
+        "en": "They sat down",
+        "es": "y se sentaron en sus bordes",
+        "it": "quando se ne stavano seduti accanto,",
+        "ru": "Вот они уселись возле него,",
+        "tr": "Hani o ateşin başına oturmuşlar,",
+        "de": "als sie daran saßen",
+        "pt": "Estando eles sentados ao seu redor,",
+        "nl": "Toen zij er omheen zaten.",
+        "ur": "جبکہ وہ اُس گڑھے کے کنارے بیٹھے ہوئے تھے",
+        "bn": "যেতিয়া সিহঁত ইয়াৰ কাষত উপবিষ্ট আছিল;",
+        "fa": "هنگامی ‌که بر [کنارۀ] آن نشسته بودند"
+      }
+    },
+    {
+      "verse_number": 5916,
+      "verse_key": "85:7",
+      "arabic_text": "وَهُمْ عَلَىٰ مَا يَفْعَلُونَ بِٱلْمُؤْمِنِينَ شُهُودٌ",
+      "phonetic_text": "Wahum AAala ma yafAAaloona bilmu/mineenashuhood",
+      "translations": {
+        "fr": "et regardaient en témoins ce qu’ils faisaient subir aux croyants.",
+        "en": "to watch what they were doing to the believers.",
+        "es": "para presenciar lo que cometían contra los creyentes,",
+        "it": "testimoni di quel che facevano ai credenti.",
+        "ru": "будучи свидетелями того, что творят с верующими.",
+        "tr": "Müminlere yaptıklarını seyrediyorlardı.",
+        "de": "und Zeugen dessen waren, was sie den Gläubigen antaten.",
+        "pt": "Presenciando o que fizeram com os fiéis,",
+        "nl": "En zij getuige waren van wat zij de gelovigen aandeden.",
+        "ur": "اور جو کچھ وہ ایمان لانے والوں کے ساتھ کر رہے تھے اُسے دیکھ رہے تھے۔ <sup foot_note=\"188419\">1</sup>",
+        "bn": "আৰু সিহঁতে মুমিনসকলৰ লগত যি কৰিছিল সেয়া প্ৰত্যক্ষ কৰিছিল।",
+        "fa": "و آنچه را با مؤمنان انجام می‌دادند، تماشا می‌کردند؛"
+      }
+    },
+    {
+      "verse_number": 5917,
+      "verse_key": "85:8",
+      "arabic_text": "وَمَا نَقَمُوا۟ مِنْهُمْ إِلَّآ أَن يُؤْمِنُوا۟ بِٱللَّهِ ٱلْعَزِيزِ ٱلْحَمِيدِ",
+      "phonetic_text": "Wama naqamoo minhum illa anyu/minoo billahi alAAazeezi alhameed",
+      "translations": {
+        "fr": "Ils ne leur en voulaient que parce qu’ils croyaient en Allah, le Tout- Puissant, le Digne de Toute Louange,",
+        "en": "Their only grievance against them was their faith in God, the Mighty, the Praiseworthy,",
+        "es": "cuya única culpa para merecer ese castigo era creer en Dios, el Poderoso, el Loable,",
+        "it": "E non li tormentavano che per aver creduto in Allah, il Potente, il Degno di lode,",
+        "ru": "Они вымещали им только за то, что те уверовали в Аллаха Могущественного, Достохвального,",
+        "tr": "Müminlere kızmalarının sebebi de, onların yalnız çok güçlü ve övgüye lâyık olan Allah'a iman etmeleri idi.",
+        "de": "Und sie grollten ihnen nur, daß sie an Allah glaubten, den Allmächtigen und Lobenswürdigen,",
+        "pt": "Os quais deles se vingaram, porque acreditavam em Deus, o Poderoso, o Laudábilíssimo.",
+        "nl": "En zij wreekten zich alleen op hen omdat zij geloofden in Allah, de Geweldige, de Geprezene.",
+        "ur": "اور اُن اہل ایمان سے اُن کی دشمنی اِس کے سوا کسی وجہ سے نہ تھی کہ وہ اُس خدا پر ایمان لے آئے تھے جو زبردست اور اپنی ذات میں آپ محمود ہے",
+        "bn": "আৰু সিহঁতে তেওঁলোকক নিৰ্যাতন কৰিছিল কেৱল এই কাৰণে যে, তেওঁলোকে ঈমান আনিছিল পৰাক্ৰমশালী আৰু প্ৰশংসাৰ যোগ্য আল্লাহৰ ওপৰত,",
+        "fa": "و هیچ ایرادی از آنان [=مؤمنان] نگرفتند، جز اینکه به الله پیروزمندِ ستوده ایمان آورده بودند."
+      }
+    },
+    {
+      "verse_number": 5918,
+      "verse_key": "85:9",
+      "arabic_text": "ٱلَّذِى لَهُۥ مُلْكُ ٱلسَّمَـٰوَٰتِ وَٱلْأَرْضِ ۚ وَٱللَّهُ عَلَىٰ كُلِّ شَىْءٍ شَهِيدٌ",
+      "phonetic_text": "Allathee lahu mulku assamawatiwal-ardi wallahu AAala kullishay-in shaheed",
+      "translations": {
+        "fr": "Celui à Qui appartient la royauté des cieux et de la terre, Allah, Qui de Toute chose est le Témoin.",
+        "en": "to whom all control over the heavens and earth belongs: God is witness over all things.",
+        "es": "a Quien pertenece el reino de los cielos y de la tierra. Dios es testigo de todo.",
+        "it": "Colui al Quale appartiene la sovranità dei cieli e della terra. Allah è Testimone di ogni cosa.",
+        "ru": "Которому принадлежит власть над небесами и землей. Аллах же - Свидетель всякой вещи!",
+        "tr": "O Allah ki, göklerin ve yerin hükümranlığı O'nundur ve Allah her şeye şahittir.",
+        "de": "Dem die Herrschaft der Himmel und der Erde gehört. Und Allah ist über alles Zeuge.",
+        "pt": "Ao Qual pertence o reino dos céus e da terra; e Deus é, de tudo, Testemunha.",
+        "nl": "Degene Die de heerschappij over de hemelen en de aarde heeft. En Allah is Getuige over alle zaken.",
+        "ur": "جو آسمانوں اور زمین کی سلطنت کا مالک ہے، اور وہ خدا سب کچھ دیکھ  رہا ہے۔ <sup foot_note=\"188420\">1</sup>",
+        "bn": "যাৰ অধিকাৰত আছে আকাশ আৰু পৃথিৱীৰ সাৰ্বভৌম কৰ্তৃত্ব; আৰু আল্লাহ সকলো বস্তুৰ প্ৰত্যক্ষদৰ্শী।",
+        "fa": "[همان] ذاتی که فرمانروایی آسمان‌ها و زمین از آنِ اوست؛ و الله بر همه چیز گواه است."
+      }
+    },
+    {
+      "verse_number": 5919,
+      "verse_key": "85:10",
+      "arabic_text": "إِنَّ ٱلَّذِينَ فَتَنُوا۟ ٱلْمُؤْمِنِينَ وَٱلْمُؤْمِنَـٰتِ ثُمَّ لَمْ يَتُوبُوا۟ فَلَهُمْ عَذَابُ جَهَنَّمَ وَلَهُمْ عَذَابُ ٱلْحَرِيقِ",
+      "phonetic_text": "Inna allatheena fatanoo almu/mineenawalmu/minati thumma lam yatooboo falahum AAathabujahannama walahum AAathabu alhareeq",
+      "translations": {
+        "fr": "Ceux qui ont infligé les pires épreuves aux croyants et aux croyantes, puis qui ne s’en sont pas repentis, auront le supplice de la Géhenne et le supplice du Brasier infernal.",
+        "en": "For those who persecute believing men and women, and do not repent afterwards, there will be the torment of Hell and burning.",
+        "es": "Quienes persigan a los creyentes y a las creyentes y no se arrepientan [antes de morir], sufrirán en el Infierno un castigo abrasador.",
+        "it": "In verità coloro che perseguitano i credenti e le credenti e poi non se ne pentono, avranno il castigo dell’Inferno e il castigo dell’Incendio <a class=f><sup foot_note=160565>1</sup></a> .",
+        "ru": "Тем, которые подвергли искушению (или сожгли в огне) верующих мужчин и женщин и не раскаялись, уготованы мучения в Геенне, мучения от обжигающего Огня.",
+        "tr": "İnanan erkek ve kadınlara işkence yapıp sonra da tevbe etmeyenlere cehennem azabı ve yangın azabı vardır.",
+        "de": "Gewiß, diejenigen, die die gläubigen Männer und die gläubigen Frauen in Versuchung bringen und hierauf nicht in Reue umkehren, für sie wird es die Strafe der Hölle geben, und für sie wird es die Strafe des Brennens geben.",
+        "pt": "Sabei que aqueles que perseguem os fiéis e as fiéis e não se arrependem, sofrerão a pena do inferno, assim como o castigo do fogo.",
+        "nl": "Voorwaar, degenen die de gelovige mannen en vrouwen bestraften en daarna geen berouw toonden, voor hen is de bestraffing van de Hel en voor hen is de verbrandende bestraffing.",
+        "ur": "جن لوگوں نے مومن مردوں اور عورتوں پر ظلم و ستم توڑا اور پھر اس سے تائب نہ ہوئے، یقیناً اُن کے لیے جہنّم کا عذاب ہے اور ان کے لیے جَلائے جانے کی سزا ہے۔ <sup foot_note=\"188421\">1</sup>",
+        "bn": "নিশ্চয় যিহঁতে মুমিন পুৰুষ আৰু মুমিনা নাৰীক বিপদাপন্ন কৰিছে তাৰ পিছত তাওবা কৰা নাই, সিহঁতৰ বাবে আছে জাহান্নামৰ শাস্তি, আৰু সিহঁতৰ বাবে আছে দহন যন্ত্ৰণা।",
+        "fa": "به راستی کسانی که مردان و زنان مؤمن را شکنجه [و آزار] دادند و پس [از انجام آن کار،] توبه نکردند، عذاب جهنم برایشان [مهیّا] است و عذاب آتش [در پیش دارند]."
+      }
+    },
+    {
+      "verse_number": 5920,
+      "verse_key": "85:11",
+      "arabic_text": "إِنَّ ٱلَّذِينَ ءَامَنُوا۟ وَعَمِلُوا۟ ٱلصَّـٰلِحَـٰتِ لَهُمْ جَنَّـٰتٌ تَجْرِى مِن تَحْتِهَا ٱلْأَنْهَـٰرُ ۚ ذَٰلِكَ ٱلْفَوْزُ ٱلْكَبِيرُ",
+      "phonetic_text": "Inna allatheena amanoowaAAamiloo assalihati lahum jannatuntajree min tahtiha al-anharu thalikaalfawzu alkabeer",
+      "translations": {
+        "fr": "Ceux qui ont cru et ont accompli les bonnes œuvres auront des jardins sous lesquels coulent les rivières. Tel est le succès suprême !",
+        "en": "But for those who believe and do good deeds there will be Gardens graced with flowing streams: that is the great triumph.",
+        "es": "En cambio, quienes hayan creído y obrado correctamente serán recompensados con jardines por donde corren los ríos. Ese es el triunfo grandioso.",
+        "it": "In verità coloro che credono e compiono il bene avranno i Giardini dove scorrono i ruscelli. Questo è il grande successo.",
+        "ru": "Тем же, которые уверовали и совершали праведные деяния, уготованы Райские сады, в которых текут реки. Это - великое преуспеяние!",
+        "tr": "İnanan ve iyi amel yapanlar için de altından ırmaklar akan cennetler vardır. İşte büyük kurtuluş odur.",
+        "de": "Gewiß, diejenigen, die glauben und rechtschaffene Werke tun, für sie wird es Gärten geben, durcheilt von Bächen; das ist der große Erfolg.",
+        "pt": "Por outra, os fiéis, que praticam o bem, obterão jardins, abaixo dos quais correm rios; tal será o grande benefício!",
+        "nl": "Voorwaar, degenen die geloven en goede daden verrichten, voor hen is het Paradijs waar de rivieren onder door stromen. Dat is de grote overwinning.",
+        "ur": "جو لوگ ایمان لائے اور جنہوں نے نیک عمل کیے، یقیناً اُن کے لیے جنت کے باغ ہیں جن کے نیچے نہریں بہتی ہوں گی، یہ ہے بڑی کامیابی",
+        "bn": "নিশ্চয় যিসকলে ঈমান আনিছে আৰু সত্কৰ্ম কৰিছে তেওঁলোকৰ বাবে আছে জান্নাত, যাৰ তলত নদী প্ৰবাহিত; এইটোৱে মহাসাফল্য।",
+        "fa": "همانا برای کسانی ‌که ایمان آوردند و کار‌های شایسته کردند، باغ‌هایی [از بهشت] است که جویبارها زیر [درختان] آن جاری است؛ و این است کامیابی بزرگ."
+      }
+    },
+    {
+      "verse_number": 5921,
+      "verse_key": "85:12",
+      "arabic_text": "إِنَّ بَطْشَ رَبِّكَ لَشَدِيدٌ",
+      "phonetic_text": "Inna batsha rabbika lashadeed",
+      "translations": {
+        "fr": "Les représailles de ton Seigneur seront très dures.",
+        "en": "[Prophet], your Lord’s punishment is truly stern––",
+        "es": "¡Pero el castigo de tu Señor es severo!",
+        "it": "La risposta del tuo Signore è severa.",
+        "ru": "Воистину, Хватка твоего Господа сурова!",
+        "tr": "Kuşkusuz Rabbinin yakalaması serttir.",
+        "de": "Das Zupacken deines Herrn ist wahrlich hart.",
+        "pt": "Em verdade, a punição do teu Senhor será severíssima,",
+        "nl": "Voorwaar, de greep ven jouw Heer is zeker hard.",
+        "ur": "درحقیقت تمہارے رب کی پکڑ بڑی سخت ہے",
+        "bn": "নিশ্চয় তোমাৰ প্ৰতিপালকৰ গ্ৰেপ্তাৰী অতি কঠোৰ।",
+        "fa": "بی‌گمان، [مجازات و] سختگیریِ پروردگارت بسیار شدید است."
+      }
+    },
+    {
+      "verse_number": 5922,
+      "verse_key": "85:13",
+      "arabic_text": "إِنَّهُۥ هُوَ يُبْدِئُ وَيُعِيدُ",
+      "phonetic_text": "Innahu huwa yubdi-o wayuAAeed",
+      "translations": {
+        "fr": "C’est Lui Qui initie (la création) puis la recommence.",
+        "en": "it is He who brings people to life, and will restore them to life again––",
+        "es": "Él da origen y reproduce.",
+        "it": "Invero Egli è Colui Che inizia e reitera <a class=f><sup foot_note=160566>1</sup></a> .",
+        "ru": "Воистину, Он начинает и повторяет (создает творение в первый раз и воссоздает его или начинает наказывать в этом мире и возобновляет наказание в Последней жизни).",
+        "tr": "Yoktan o yaratır ve tekrar o diriltir.",
+        "de": "Gewiß, Er macht den Anfang und läßt wiederkehren.",
+        "pt": "Porque ele origina (a criação) e logo a reproduz.",
+        "nl": "Voorwaar, Hij is het die schept en doet herleven.",
+        "ur": "وہی پہلی بار پیدا کرتا ہے اور وہی دوبارہ پیدا کرے گا",
+        "bn": "তেৱেঁই অস্তিত্ব প্ৰদান কৰে আৰু তেৱেঁই পুনৰাৱৰ্তন ঘটায়,",
+        "fa": "در حقیقت، اوست که [آفرینش را] آغاز می‌کند و دوباره [بعد از مرگ] بازمی‌گرداند؛"
+      }
+    },
+    {
+      "verse_number": 5923,
+      "verse_key": "85:14",
+      "arabic_text": "وَهُوَ ٱلْغَفُورُ ٱلْوَدُودُ",
+      "phonetic_text": "Wahuwa alghafooru alwadood",
+      "translations": {
+        "fr": "C’est Lui l’Absoluteur, plein de Dilection,<sup foot_note=195230>1</sup>",
+        "en": "and He is the Most Forgiving, the Most Loving.",
+        "es": "Él es el Absolvedor, el Afectuoso.",
+        "it": "Egli è il Perdonatore, l’Amorevole,",
+        "ru": "Он - Прощающий, Любящий (или Любимый),",
+        "tr": "Bununla beraber çok bağışlayandır, çok sevendir.",
+        "de": "Und Er ist der Allvergebende und Liebevolle,",
+        "pt": "É o Remissório, o Amabilíssimo,",
+        "nl": "Hij is de Vergevensgezinde, de Liefdevolle.",
+        "ur": "اور وہ بخشنے والا ہے، محبت کرنے والا ہے",
+        "bn": "নিশ্চয় তেওঁ ক্ষমাশীল, অতিস্নেহশীল।",
+        "fa": "و همو آمرزنده [و] دوستدار [مؤمنان] است."
+      }
+    },
+    {
+      "verse_number": 5924,
+      "verse_key": "85:15",
+      "arabic_text": "ذُو ٱلْعَرْشِ ٱلْمَجِيدُ",
+      "phonetic_text": "Thoo alAAarshi almajeed",
+      "translations": {
+        "fr": "Le Détenteur du Trône, le Glorieux,",
+        "en": "The Glorious Lord of the Throne,",
+        "es": "Señor del Trono, el Majestuoso.",
+        "it": "il Signore del Trono glorioso,",
+        "ru": "Владыка Трона, Славный (или Владыка Трона славного).",
+        "tr": "Arş'ın sahibidir, yücedir.",
+        "de": "der Herr des Thrones, der Ruhmvolle.",
+        "pt": "O Senhor do Trono Glorioso.",
+        "nl": "Bezitter van de Troon, de Meest Vrijgevige.",
+        "ur": "عرش کا مالک ہے، بزرگ و برتر ہے",
+        "bn": "আৰছৰ অধিপতি, সন্মানিত।",
+        "fa": "[الله] صاحب‌عرش [و] بلندمرتبه [و شکوهمند] است"
+      }
+    },
+    {
+      "verse_number": 5925,
+      "verse_key": "85:16",
+      "arabic_text": "فَعَّالٌ لِّمَا يُرِيدُ",
+      "phonetic_text": "FaAAAAalun lima yureed",
+      "translations": {
+        "fr": "Qui fait toujours ce qu’Il veut !",
+        "en": "He does whatever He will.",
+        "es": "Hacedor de Su voluntad.",
+        "it": "Colui che fa [tutto] ciò che vuole.",
+        "ru": "Он вершит то, что пожелает.",
+        "tr": "Dilediğini yapandır.",
+        "de": "(Er) tut alles, was Er will.",
+        "pt": "Executante de tudo quanto Lhe apraz.",
+        "nl": "Uitvoerder van wat Hij wil.",
+        "ur": "اور جو کچھ  چاہے کر ڈالنے والا ہے۔ <sup foot_note=\"188422\">1</sup>",
+        "bn": "তেওঁ যি বিচাৰে সেইটোৱে কৰে।",
+        "fa": "[و] آنچه را بخواهد، انجام می‌دهد."
+      }
+    },
+    {
+      "verse_number": 5926,
+      "verse_key": "85:17",
+      "arabic_text": "هَلْ أَتَىٰكَ حَدِيثُ ٱلْجُنُودِ",
+      "phonetic_text": "Hal ataka hadeethu aljunood",
+      "translations": {
+        "fr": "T’est-il parvenu le récit des armées ?",
+        "en": "Have you [not] heard the stories of the forces",
+        "es": "¿Has escuchado la historia de los ejércitos [criminales]",
+        "it": "Non ti è giunta la storia delle armate",
+        "ru": "Дошел ли до тебя рассказ о воинствах,",
+        "tr": "O orduların kıssası sana geldi mi?",
+        "de": "Ist zu dir die Geschichte der Heerscharen gekommen,",
+        "pt": "Reparaste, acaso, na história dos exércitos",
+        "nl": "Heeft het bericht van de legers jou bereikt?",
+        "ur": "کیا تمہیں لشکروں کی خبر پہنچی ہے؟",
+        "bn": "তোমাৰ ওচৰত সৈন্যবাহিনীৰ বৃত্তান্ত আহি পাইছেনে?",
+        "fa": "[ای پیامبر،] آیا داستان لشکر‌یان [حق‌ستیز] به تو رسیده است؟"
+      }
+    },
+    {
+      "verse_number": 5927,
+      "verse_key": "85:18",
+      "arabic_text": "فِرْعَوْنَ وَثَمُودَ",
+      "phonetic_text": "FirAAawna wathamood",
+      "translations": {
+        "fr": "Celles de Pharaon et des Thamûd ?",
+        "en": "of Pharaoh and Thamud?",
+        "es": "del Faraón y del pueblo de Zamud [que desmintieron a los Mensajeros y los destruí]?",
+        "it": "di Faraone e dei Thamùd?",
+        "ru": "о Фараоне и самудянах?",
+        "tr": "Yani Firavun ve Semud'un?",
+        "de": "Fir’auns und der Tamud?",
+        "pt": "Do Faraó e do povo de Samud?",
+        "nl": "Van Fir'aun en de Tsamôed?",
+        "ur": "فرعون اور ثمود (کے لشکروں)کی؟ <sup foot_note=\"188423\">1</sup>",
+        "bn": "ফিৰআউনৰ আৰু ছামূদৰ।",
+        "fa": "[لشکر] فرعون و [قوم] ثمود."
+      }
+    },
+    {
+      "verse_number": 5928,
+      "verse_key": "85:19",
+      "arabic_text": "بَلِ ٱلَّذِينَ كَفَرُوا۟ فِى تَكْذِيبٍ",
+      "phonetic_text": "Bali allatheena kafaroo fee taktheeb",
+      "translations": {
+        "fr": "Et pourtant, ceux qui ont mécru crient toujours au mensonge.",
+        "en": "Yet still the disbelievers persist in denial.",
+        "es": "Sin embargo, los que niegan la verdad continúan desmintiendo.",
+        "it": "I miscredenti continuano invece a tacciare di menzogna <a class=f><sup foot_note=160567>1</sup></a> ,",
+        "ru": "Но неверующие считают это ложью,",
+        "tr": "Fakat o inkarcılar hâlâ bir yalanlama içinde.",
+        "de": "Aber nein! Diejenigen, die ungläubig sind, sind dem Leugnen (der Botschaft) verhaftet.",
+        "pt": "Sem dúvida, os incrédulos persistem em desmentir-te;",
+        "nl": "Degenen die niet geloven gaan zelfs door met loochenen.",
+        "ur": "مگر جنہوں نے کفر کیا ہے وہ جھٹلانے میں لگے ہوئے ہیں",
+        "bn": "তথাপিও কাফিৰসকল মিথ্যাৰোপ কৰাত লিপ্ত;",
+        "fa": "بلکه کسانی ‌که کافر شدند، پیوسته در تکذیب [حق] هستند،"
+      }
+    },
+    {
+      "verse_number": 5929,
+      "verse_key": "85:20",
+      "arabic_text": "وَٱللَّهُ مِن وَرَآئِهِم مُّحِيطٌۢ",
+      "phonetic_text": "Wallahu min wara-ihimmuheet",
+      "translations": {
+        "fr": "Allah, derrière eux, les Cerne de partout.",
+        "en": "God surrounds them all.",
+        "es": "Pero Dios los domina sin que lo sepan.",
+        "it": "nonostante che Allah sia dietro di loro e li circondi <a class=f><sup foot_note=160568>1</sup></a> .",
+        "ru": "Аллах же окружает их сзади.",
+        "tr": "Oysa Allah onları arkalarından kuşatmıştır.",
+        "de": "Doch Allah ist hinter ihnen her, (sie) umfassend.",
+        "pt": "Porém, Deus abrange-os, por trás.",
+        "nl": "En Allah omsingelt hen van achteren.",
+        "ur": "حالانکہ اللہ نے ان کو گھیرے میں لے رکھا ہے",
+        "bn": "আৰু আল্লাহে সিহঁতক কেউফালৰ পৰা পৰিবেষ্টন কৰি আছে।",
+        "fa": "و الله از هر سو بر آنان احاطه دارد."
+      }
+    },
+    {
+      "verse_number": 5930,
+      "verse_key": "85:21",
+      "arabic_text": "بَلْ هُوَ قُرْءَانٌ مَّجِيدٌ",
+      "phonetic_text": "Bal huwa qur-anun majeed",
+      "translations": {
+        "fr": "C’est en vérité un Coran glorieux,",
+        "en": "This is truly a glorious Quran",
+        "es": "Este es un Corán glorioso",
+        "it": "Questo è invece un Corano glorioso,",
+        "ru": "Да, это - славный Коран",
+        "tr": "Hayır o şerefli bir Kur'ân'dır.",
+        "de": "Nein! Vielmehr ist es ein ruhmvoller Qur’an",
+        "pt": "Sim, este é um Alcorão Glorioso,",
+        "nl": "Het is zelfs een glorierijke Koran.",
+        "ur": "(اُن کے جھٹلانے سے اِس قرآن کا کچھ نہیں بگڑتا) بلکہ یہ قرآن بلند پایہ ہے",
+        "bn": "প্ৰকৃততে ই সন্মানিত কোৰআন,",
+        "fa": "آری، این [آیات، شعر و سحر نیست؛ بلکه] قرآن شکوهمند است."
+      }
+    },
+    {
+      "verse_number": 5931,
+      "verse_key": "85:22",
+      "arabic_text": "فِى لَوْحٍ مَّحْفُوظٍۭ",
+      "phonetic_text": "Fee lawhin mahfooth",
+      "translations": {
+        "fr": "(écrit) sur une Table (soigneusement) conservée.",
+        "en": "[written] on a preserved Tablet.",
+        "es": "que está registrado en la Tabla Protegida.",
+        "it": "[impresso] su di una Tavola protetta <a class=f><sup foot_note=160569>1</sup></a> . <a class=f><sup foot_note=160570>2</sup></a> Nel senso di «Segni zodiacali». Il sole, nel suo moto apparente, si sposta in una posizione, si sposta in una porzione del cielo in cui si provano le dodici costellazioni dello zodiaco: Ariete, Toro, Gemelli, Cancro, Leone, Vergine, Bilancia, Scorpione, Sagittario, Capricorno, Acquario e Pesci. <a class=f><sup foot_note=160571>3</sup></a> Secondo l’esegesi classica (Tabarì xxx,il versetto ha una valenza generale e non è riferito a nessun particolare testimone o testimonianza. <a class=f><sup foot_note=160572>4</sup></a> «gente del Fossato»: il versetto allude alla vicenda che vide protagonista un re israelita di Najràn, nel nord dello Yemen, Dhu Nuwàs, il quale perseguitò i cristiani e sottopose al martirio del fuoco un gran numero di loro. Secondo alcune tradizioni furono circa ventitremila i cristiani che perirono arsi vivi in un grande braciere acceso in un fossato, appositamente scavato. La storia ci dice che tanta ferocia non rimase impunita: un’armata di settantamila uomini venne inviata contro di lui dal Negus dell’Etiopia, il suo esercito fu sbaragliato, egli morì suicida e la sua gente venne sottoposta alla decimazione. Per vendicare i cristiani uccisi vennero passati a fil di spada un terzo degli uomini di Najrân e un sesto delle donne furono ridotte in schiavitù. <a class=f><sup foot_note=160573>5</sup></a> «L’Incendio»; uno dei nomi dell’Inferno. <a class=f><sup foot_note=160574>6</sup></a> Allah (gloria a Lui l’Altissimo) inizia la creazione, la reitera nei cicli della natura e infine nella Resurrezione dei morti. <a class=f><sup foot_note=160575>7</sup></a> Anche «I miscredenti continuano a vivere nella menzogna». <a class=f><sup foot_note=160576>8</sup></a> Con questa espressione il Corano intende l’assoluta impossibilità per i miscredenti di sottrarsi alla volontà di Allah e al Suo castigo. <a class=f><sup foot_note=160577>9</sup></a> La Tavola celeste che contiene l’archetipo immutabile della Rivelazione divina. Secondo una tradizione questa Tavola è posta alla destra del Trono di Dio. Tabarì riferì che l’Inviato di Allah (pace e benedizioni su di lui) disse: «Allah ha creato la Tavola protetta dalla perla bianca, le sue pagine dal rubino rosso, il suo calamo dalla luce e la sua Scrittura dalla luce».",
+        "ru": "в Хранимой скрижали.",
+        "tr": "Levhi Mahfuz'dadır.",
+        "de": "auf einer wohlbehüteten Tafel.",
+        "pt": "Inscrito em uma Tábua Preservada.",
+        "nl": "In de Lauhoelmahfôezh.",
+        "ur": "اُس لوح میں (نقش ہے) جو محفوظ ہے۔ <sup foot_note=\"188424\">1</sup>",
+        "bn": "সুৰক্ষিত ফলকত লিপিবদ্ধ।",
+        "fa": "در لوح محفوظ [از هر گونه تحریف و تبدیل، در امان] است."
+      }
+    }
+  ]
+}

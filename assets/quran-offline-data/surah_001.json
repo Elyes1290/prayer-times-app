@@ -1,0 +1,146 @@
+{
+  "surah_number": 1,
+  "extracted_at": "2025-09-20T15:15:11.803Z",
+  "verses": [
+    {
+      "verse_number": 1,
+      "verse_key": "1:1",
+      "arabic_text": "بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ",
+      "phonetic_text": "Bismi Allahi arrahmani arraheem",
+      "translations": {
+        "fr": "Au nom d’Allah, le Tout Clément, le Tout Miséricordieux.<sup foot_note=194642>1</sup>",
+        "en": "In the name of God, the Lord of Mercy, the Giver of Mercy!",
+        "es": "En el nombre de Dios<sup foot_note=168371>1</sup>, el Compasivo con toda la creación, el Misericordioso con los creyentes<sup foot_note=168372>2</sup>.",
+        "it": "In nome di Allah, il Compassionevole, il Misericordioso <a class=f><sup foot_note=155998>1</sup></a>.",
+        "ru": "Во имя Аллаха, Милостивого, Милосердного!",
+        "tr": "Rahmân ve Rahîm olan Allah'ın ismiyle.",
+        "de": "Im Namen Allahs, des Allerbarmers, des Barmherzigen.",
+        "pt": "Em nome de Deus, o Clemente, o Misericordioso.",
+        "nl": "In de naam van Allah, de Erbarmer, de Meest Barmhartige.",
+        "ur": "اللہ کےنام سے جو رحمان و رحیم ہے<sup foot_note=\"182954\">1</sup>",
+        "bn": "(আৰম্ভ কৰিছো) পৰম কৰুণাময় পৰম দয়ালু আল্লাহৰ নামত।",
+        "fa": "به نام الله بخشندۀ مهربان"
+      }
+    },
+    {
+      "verse_number": 2,
+      "verse_key": "1:2",
+      "arabic_text": "ٱلْحَمْدُ لِلَّهِ رَبِّ ٱلْعَـٰلَمِينَ",
+      "phonetic_text": "Alhamdu lillahi rabbi alAAalameen",
+      "translations": {
+        "fr": "Louange à Allah, Seigneur de l’Univers.",
+        "en": "Praise belongs to God, Lord of the Worlds,",
+        "es": "Todas las alabanzas son para Dios, Señor<sup foot_note=168373>1</sup> de todo cuanto existe,",
+        "it": "La lode [appartiene] ad Allah <a class=f><sup foot_note=155999>1</sup></a>, Signore dei mondi <a class=f><sup foot_note=156000>2</sup></a>,",
+        "ru": "Хвала Аллаху, Господу миров,",
+        "tr": "Hamd o âlemlerin Rabbi,",
+        "de": "(Alles) Lob gehört Allah, dem Herrn der Welten,",
+        "pt": "Louvado seja Deus, Senhor do Universo,",
+        "nl": "Alle lof zij Allah, de Heer der Werelden.",
+        "ur": "تعریف اللہ ہی کے لیے ہے <sup foot_note=\"182955\">1</sup> جو تمام کائنات کا رب <sup foot_note=\"182956\">2</sup> ہے",
+        "bn": "সকলো ধৰণৰ হামদ (প্ৰশংসা) বিশ্বজগতৰ ৰব আল্লাহৰ বাবে।",
+        "fa": "تمام ستایش‌ها [و سپاس‌ها] از آنِ الله ـ پروردگار جهانیان‌ ـ است؛"
+      }
+    },
+    {
+      "verse_number": 3,
+      "verse_key": "1:3",
+      "arabic_text": "ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ",
+      "phonetic_text": "Arrahmani arraheem",
+      "translations": {
+        "fr": "Le Tout Clément, le Tout Miséricordieux.",
+        "en": "the Lord of Mercy, the Giver of Mercy,",
+        "es": "el Compasivo, el Misericordioso.",
+        "it": "il Compassionevole, il Misericordioso,",
+        "ru": "Милостивому, Милосердному,",
+        "tr": "O Rahmân ve Rahim,",
+        "de": "dem Allerbarmer, dem Barmherzigen,",
+        "pt": "Clemente, o Misericordioso,",
+        "nl": "De Erbarmer, de Meest Barmhartige.",
+        "ur": "رحمان اور رحیم ہے <sup foot_note=\"182957\">1</sup>",
+        "bn": "যিজন পৰম কৰুণাময়, পৰম দয়ালু।",
+        "fa": "بخشندۀ مهربان است؛"
+      }
+    },
+    {
+      "verse_number": 4,
+      "verse_key": "1:4",
+      "arabic_text": "مَـٰلِكِ يَوْمِ ٱلدِّينِ",
+      "phonetic_text": "Maliki yawmi addeen",
+      "translations": {
+        "fr": "Souverain<sup foot_note=194643>1</sup> du Jour de la Rétribution.",
+        "en": "Master of the Day of Judgement.",
+        "es": "Soberano absoluto del Día del Juicio Final,",
+        "it": "Re del Giorno del Giudizio <a class=f><sup foot_note=156001>1</sup></a>.",
+        "ru": "Властелину Дня воздаяния!",
+        "tr": "O, din gününün maliki Allah'ın.",
+        "de": "dem Herrscher am Tag des Gerichts.",
+        "pt": "Soberano do Dia do Juízo.",
+        "nl": "De Heerser op de Dag des Oordeels.",
+        "ur": "روزِ جزا کا مالک <sup foot_note=\"182958\">1</sup>ہے",
+        "bn": "বিচাৰ দিৱসৰ মালিক।",
+        "fa": "مالک روزِ جزاست."
+      }
+    },
+    {
+      "verse_number": 5,
+      "verse_key": "1:5",
+      "arabic_text": "إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ",
+      "phonetic_text": "Iyyaka naAAbudu wa-iyyaka nastaAAeen",
+      "translations": {
+        "fr": "C’est Toi (Seul) Que nous adorons, et c’est Toi (Seul) Dont nous cherchons l’assistance.",
+        "en": "It is You we worship; it is You we ask for help.",
+        "es": "solo a Ti te adoramos y solo de Ti imploramos ayuda.",
+        "it": "Te noi adoriamo e a Te chiediamo aiuto <a class=f><sup foot_note=156002>1</sup></a>.",
+        "ru": "Тебе одному мы поклоняемся и Тебя одного молим о помощи.",
+        "tr": "Ancak sana ederiz kulluğu, ibadeti ve ancak senden dileriz yardımı, inayeti. (Ya Rab!).",
+        "de": "Dir allein dienen wir, und zu Dir allein flehen wir um Hilfe.",
+        "pt": "Só a Ti adoramos e só de Ti imploramos ajuda!",
+        "nl": "U alleen aanbidden wij en U alleen vragen wij om hulp.",
+        "ur": "ہم تیری ہی عبادت<sup foot_note=\"182959\">1</sup> کرتے ہیں اور تجھی سے مدد مانگتے ہیں <sup foot_note=\"182960\">2</sup>",
+        "bn": "আমি কেৱল তোমাৰেই ইবাদত কৰোঁ, আৰু তোমাৰ ওচৰতেই সাহায্য প্ৰাৰ্থনা কৰোঁ।",
+        "fa": "[پروردگارا] تنها تو را عبادت می‌کنیم و تنها از تو یاری [و مدد] می‌جوییم."
+      }
+    },
+    {
+      "verse_number": 6,
+      "verse_key": "1:6",
+      "arabic_text": "ٱهْدِنَا ٱلصِّرَٰطَ ٱلْمُسْتَقِيمَ",
+      "phonetic_text": "Ihdina assirata almustaqeem",
+      "translations": {
+        "fr": "Guide-nous sur la voie droite,",
+        "en": "Guide us to the straight path:",
+        "es": "¡Guíanos por el camino recto!",
+        "it": "Guidaci sulla retta via <a class=f><sup foot_note=156003>1</sup></a>,",
+        "ru": "Веди нас прямым путем,",
+        "tr": "Hidayet eyle bizi doğru yola,",
+        "de": "Leite uns den geraden Weg,",
+        "pt": "Guia-nos à senda reta,",
+        "nl": "Leid ons op het rechte Pad.",
+        "ur": "ہمیں سیدھا راستہ دکھا <sup foot_note=\"182961\">1</sup>",
+        "bn": "আমাক সৰল পথৰ হিদায়ত দিয়া।",
+        "fa": "ما را به راه راست هدایت فرما [و همواره در این راه، ثابت‌قدم بدار]؛"
+      }
+    },
+    {
+      "verse_number": 7,
+      "verse_key": "1:7",
+      "arabic_text": "صِرَٰطَ ٱلَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ ٱلْمَغْضُوبِ عَلَيْهِمْ وَلَا ٱلضَّآلِّينَ",
+      "phonetic_text": "Sirata allatheena anAAamta AAalayhim ghayri almaghdoobi AAalayhim wala addalleen",
+      "translations": {
+        "fr": "voie de ceux que Tu as comblés de Tes grâces, non celle des réprouvés,<sup foot_note=194644>1</sup> ni celle des égarés.",
+        "en": "the path of those You have blessed, those who incur no anger and who have not gone astray.",
+        "es": "El camino de los que has colmado con Tus favores, no el de los que han caído en Tu ira, ni el de los que se extraviaron.",
+        "it": "la via di coloro che hai colmato di grazia <a class=f><sup foot_note=156004>1</sup></a>, non di coloro che [sono incorsi] nella [Tua] ira <a class=f><sup foot_note=156005>2</sup></a>, né degli sviati <a class=f><sup foot_note=156006>3</sup></a>. Nella recitazione liturgica si aggiunge: «Amin».",
+        "ru": "путем тех, кого Ты облагодетельствовал, не тех, на кого пал гнев, и не заблудших.",
+        "tr": "O kendilerine nimet verdiğin mutlu kimselerin yoluna; o gazaba uğramışların ve o sapmışların yoluna değil.",
+        "de": "den Weg derjenigen, denen Du Gunst erwiesen hast, nicht derjenigen, die (Deinen) Zorn erregt haben, und nicht der Irregehenden!",
+        "pt": "À senda dos que agraciaste, não à dos abominados, nem à dos extraviados.",
+        "nl": "Het Pad van degenen aan wie U gunsten hebt geschonken, niet van degenen op wie de toorn rust en niet dat van de dwalenden.",
+        "ur": "ان لوگوں کاراستہ جن پر تو نے انعام فرمایا <sup foot_note=\"182962\">1</sup> ، جو معتوب نہیں ہوئے، جو بھٹکے ہوئے نہیں ہیں <sup foot_note=\"182963\">2</sup>",
+        "bn": "তেওঁলোকৰ পথ, যিসকলক তুমি নিয়ামত (অনুগ্ৰহ) প্ৰদান কৰিছা, সিহঁতৰ নহয়, যিসকলৰ ওপৰত তোমাৰ ক্ৰোধ আপতিত হৈছে আৰু সিহঁতৰো নহয় যিসকল পথভ্ৰষ্ট হৈছে।",
+        "fa": "راه کسانی [همچون پیامبران، شهیدان، راستگویان و نیکوکاران] ‌که به آنان نعمت داده‌ای، نه [راه] کسانی که بر آنان خشم گرفته شده است [= یهود] و نه [راه] گمراهان [= نصاری]."
+      }
+    }
+  ]
+}

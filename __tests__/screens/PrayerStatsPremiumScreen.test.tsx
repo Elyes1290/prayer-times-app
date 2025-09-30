@@ -3,7 +3,16 @@ import { render, fireEvent, waitFor } from "@testing-library/react-native";
 
 // Mocks basiques
 jest.mock("react-i18next", () => ({
-  useTranslation: () => ({ t: (k: string, fb?: string) => fb || k }),
+  useTranslation: () => ({
+    t: (k: string, params?: any) => {
+      // Si params est un objet (interpolation), retourner la clé
+      if (params && typeof params === "object" && !Array.isArray(params)) {
+        return k;
+      }
+      // Sinon, params est un fallback string
+      return params || k;
+    },
+  }),
 }));
 jest.mock("../../hooks/useThemeAssets", () => ({
   useThemeColors: () => ({
@@ -36,7 +45,7 @@ jest.mock("../../components/ThemedImageBackground", () => ({
 // Mock des hooks de stats
 const mockStats = {
   profile: { name: "User", consistency: "medium" },
-  smart_notification: { key: "smart_tip", params: {} },
+  smart_notification: { key: "smart_tip", params: [] },
   level: { level: 1, title: "Novice", progress: 0.25 },
   points: 10,
   stats: {
@@ -123,8 +132,9 @@ describe("PrayerStatsPremiumScreen", () => {
       });
 
     const { getByText } = render(<PrayerStatsPremiumScreen />);
-    // Le titre vide utilise la clé i18n (fallback non pris car t retourne la clé)
-    expect(getByText("start_spiritual_journey")).toBeTruthy();
+    // Quand stats est null, le composant utilise defaultStats avec profile_user
+    expect(getByText("profile_user")).toBeTruthy();
+    expect(getByText("stats_overview")).toBeTruthy();
   });
 
   test("bouton Réessayer appelle refresh() en cas d'erreur", () => {

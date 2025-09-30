@@ -1,0 +1,66 @@
+{
+  "surah_number": 103,
+  "extracted_at": "2025-09-20T15:17:37.186Z",
+  "verses": [
+    {
+      "verse_number": 6177,
+      "verse_key": "103:1",
+      "arabic_text": " وَٱلْعَصْرِ",
+      "phonetic_text": "WalAAasr",
+      "translations": {
+        "fr": "Par le Temps!",
+        "en": "By the declining day,",
+        "es": "Juro por el tiempo<sup foot_note=169511>1</sup>",
+        "it": "Per il Tempo!",
+        "ru": "Клянусь предвечерним временем (или временем)!",
+        "tr": "Asra yemin olsun ki,",
+        "de": "Beim Zeitalter!",
+        "pt": "Pela era,",
+        "nl": "Bij de tijd.",
+        "ur": "زمانے کی قسم",
+        "bn": "সময়ৰ শপত,",
+        "fa": "سوگند به عصر"
+      }
+    },
+    {
+      "verse_number": 6178,
+      "verse_key": "103:2",
+      "arabic_text": "إِنَّ ٱلْإِنسَـٰنَ لَفِى خُسْرٍ",
+      "phonetic_text": "Inna al-insana lafee khusr",
+      "translations": {
+        "fr": "L’homme, en vérité, est en perdition,",
+        "en": "man is [deep] in loss,",
+        "es": "que los seres humanos están en la perdición,",
+        "it": "Invero l’uomo è in perdita,",
+        "ru": "Воистину, каждый человек в убытке,",
+        "tr": "İnsan mutlaka ziyandadır.",
+        "de": "Der Mensch befindet sich wahrlich in Verlust,",
+        "pt": "Que o homem está na perdição,",
+        "nl": "Voorwaar, de mens lijdt zeker verlies.",
+        "ur": "انسان درحقیقت بڑے خسارے میں ہے",
+        "bn": "নিশ্চয় মানুহ ক্ষতিগ্ৰস্থতাত নিপতিত,",
+        "fa": "که انسان در زیان است."
+      }
+    },
+    {
+      "verse_number": 6179,
+      "verse_key": "103:3",
+      "arabic_text": "إِلَّا ٱلَّذِينَ ءَامَنُوا۟ وَعَمِلُوا۟ ٱلصَّـٰلِحَـٰتِ وَتَوَاصَوْا۟ بِٱلْحَقِّ وَتَوَاصَوْا۟ بِٱلصَّبْرِ",
+      "phonetic_text": "Illa allatheena amanoowaAAamiloo assalihati watawasaw bilhaqqiwatawasaw bissabr",
+      "translations": {
+        "fr": "à l’exception de ceux qui ont cru, ont accompli les bonnes œuvres, se sont recommandé la vérité, et se sont recommandé la patience.",
+        "en": "except for those who believe, do good deeds, urge one another to the truth, and urge one another to steadfastness.",
+        "es": "excepto aquellos que crean, obren rectamente, y se aconsejen mutuamente con la verdad y con la paciencia [ante las adversidades].",
+        "it": "Pre-Eg. n.Di versetti. Il nome della sura deriva dal vers. In nome di Allah, il Compassionevole, il Misericordioso. eccetto coloro che credono e compiono il bene, vicendevolmente si raccomandano la verità e vicendevolmente si raccomandano la pazienza.",
+        "ru": "кроме тех, которые уверовали, совершали праведные деяния, заповедали друг другу истину и заповедали друг другу терпение!",
+        "tr": "Ancak iman edenler, salih amel (iyi işler) işleyenler, birbirlerine hakkı tavsiye eden ve sabrı tavsiye edenler bunun dışındadır",
+        "de": "außer denjenigen, die glauben und rechtschaffene Werke tun und einander die Wahrheit eindringlich empfehlen und einander die Standhaftigkeit eindringlich empfehlen.",
+        "pt": "Salvo os fiéis, que praticam o bem, aconselham-se na verdade e recomendam-se, uns aos outros, a paciência e a perseverança!",
+        "nl": "Behalve degenen die geloven en goede daden verrichten en elkaar aansporen tot de Waarheid en elkaar aansporen tot geduld.",
+        "ur": "سوائے اُن لوگوں کے جو ایمان لائے، اور نیک اعمال کرتے رہے، اور ایک دوسرے کو حق کی نصیحت اور صبر کی تلقین کرتے رہے۔ <sup foot_note=\"188595\">1</sup>",
+        "bn": "কিন্তু তেওঁলোকৰ বাহিৰে, যিসকলে ঈমান আনিছে আৰু সত্কাম কৰিছে লগতে (যিসকলে) পৰস্পৰক সত্যৰ উপদেশ দিয়ে আৰু ধৈৰ্য ধাৰণ কৰিবলৈ উত্সাহ দিয়ে।",
+        "fa": "مگر مؤمنان نیکوکاری که یکدیگر را به حق سفارش نموده‌اند و به شکیبایی توصیه کرده‌اند."
+      }
+    }
+  ]
+}

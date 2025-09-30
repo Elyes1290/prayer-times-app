@@ -1,0 +1,846 @@
+{
+  "surah_number": 80,
+  "extracted_at": "2025-09-20T15:17:04.672Z",
+  "verses": [
+    {
+      "verse_number": 5759,
+      "verse_key": "80:1",
+      "arabic_text": " عَبَسَ وَتَوَلَّىٰٓ",
+      "phonetic_text": "AAabasa watawalla",
+      "translations": {
+        "fr": "Il a froncé les sourcils et s’est détourné,",
+        "en": "He frowned and turned away",
+        "es": "[¡Oh, Muhámmad!] Frunciste el ceño y le diste la espalda",
+        "it": "Si accigliò e voltò le spalle <a class=f><sup foot_note=160480>1</sup></a>",
+        "ru": "Он нахмурился и отвернулся,",
+        "tr": "(Peygamber) Yüzünü ekşitti ve döndü.",
+        "de": "Er blickte düster und kehrte sich ab,",
+        "pt": "Tornou-se austero e voltou as costas,",
+        "nl": "Hij (Moehammad) fronste en wendde zich af.",
+        "ur": "ترش رو ہوا، اور بے رخی برتی",
+        "bn": "তেওঁ বিৰক্ত প্ৰকাশ কৰিলে আৰু মুখ ঘুৰাই ল’লে,",
+        "fa": "[پیامبر] چهره در هم کشید و روی برگردانْد"
+      }
+    },
+    {
+      "verse_number": 5760,
+      "verse_key": "80:2",
+      "arabic_text": "أَن جَآءَهُ ٱلْأَعْمَىٰ",
+      "phonetic_text": "An jaahu al-aAAma",
+      "translations": {
+        "fr": "parce que l’aveugle est venu vers lui (lui parler).<sup foot_note=195219>1</sup>",
+        "en": "when the blind man came to him––",
+        "es": "al ciego cuando se presentó ante ti<sup foot_note=169493>1</sup>.",
+        "it": "quando il cieco venne da lui.",
+        "ru": "потому что к нему подошел слепой.",
+        "tr": "Kendisine âmâ geldi, diye.",
+        "de": "weil der Blinde zu ihm kam.",
+        "pt": "Quando o cego foi ter com ele.",
+        "nl": "Omdat de blinde tot hem kwam.",
+        "ur": "اِس با ت پر کہ وہ اندھا اُس کے پاس آگیا۔<sup foot_note=\"188334\">1</sup>",
+        "bn": "তেওঁৰ ওচৰত অন্ধ ব্যক্তিজন অহাৰ কাৰণে।",
+        "fa": "از اینکه آن نابینا [= عبدالله بن اُمّ مَکتوم] نزدش آمد."
+      }
+    },
+    {
+      "verse_number": 5761,
+      "verse_key": "80:3",
+      "arabic_text": "وَمَا يُدْرِيكَ لَعَلَّهُۥ يَزَّكَّىٰٓ",
+      "phonetic_text": "Wama yudreeka laAAallahu yazzakka",
+      "translations": {
+        "fr": "Qui te dit qu’il n’allait pas se purifier ?<sup foot_note=195220>1</sup>",
+        "en": "for all you know, he might have grown in spirit,",
+        "es": "¿Cómo sabes que no quería purificarse [aprendiendo de ti el conocimiento],",
+        "it": "Cosa ne puoi sapere? Forse voleva purificarsi",
+        "ru": "Откуда тебе знать? Возможно, он бы очистился",
+        "tr": "Ne bilirsin, belki o temizlenecek?",
+        "de": "Was läßt dich wissen, vielleicht läutert er sich",
+        "pt": "E quem te assegura que não poderia vir a ser agraciado,",
+        "nl": "En wat doet jou het weten, misschien wilde hij zich reinigen (van zonden).",
+        "ur": "تمہیں کیا خبر، شاید وہ سدھر جائے",
+        "bn": "কিহে তোমাক জনাব যে, হয়তো সি পৰিশুদ্ধ হ’ব,",
+        "fa": "و [ای پیامبر،] تو چه می‌دانی؟ چه بسا او [از گناهانش] پاک ‌شود،"
+      }
+    },
+    {
+      "verse_number": 5762,
+      "verse_key": "80:4",
+      "arabic_text": "أَوْ يَذَّكَّرُ فَتَنفَعَهُ ٱلذِّكْرَىٰٓ",
+      "phonetic_text": "Aw yaththakkaru fatanfaAAahu aththikra",
+      "translations": {
+        "fr": "Ou que, rappelé, il n’allait pas profiter du rappel ?",
+        "en": "or taken note of something useful to him.",
+        "es": "o beneficiarse con tus enseñanzas?",
+        "it": "o riflettere, affinché il Monito gli fosse utile.",
+        "ru": "или помянул бы наставление, и поминание принесло бы ему пользу.",
+        "tr": "Veya öğüt belleyecek de öğüt ona fayda verecek.",
+        "de": "oder bedenkt, so daß ihm die Ermahnung nützt.",
+        "pt": "Ou receba (admoestação) e, a lição lhe será proveitosa?",
+        "nl": "Of zich laten onderrichten en zou het onderricht hem baten.",
+        "ur": "یا نصیحت پر دھیان دے، اور نصیحت کرنا اس کے لیے نافع ہو؟",
+        "bn": "অথবা উপদেশ গ্ৰহণ কৰিব আৰু সেই উপদেশ তাৰ বাবে লাভজনক হ’ব।",
+        "fa": "یا پند گیرد و این پند به سودش باشد."
+      }
+    },
+    {
+      "verse_number": 5763,
+      "verse_key": "80:5",
+      "arabic_text": "أَمَّا مَنِ ٱسْتَغْنَىٰ",
+      "phonetic_text": "Amma mani istaghna",
+      "translations": {
+        "fr": "Quant à celui qui se complaît et se suffit de sa richesse,",
+        "en": "For the self-satisfied one",
+        "es": "En cambio, al soberbio",
+        "it": "Quanto a colui che invece pensa di bastare a se stesso <a class=f><sup foot_note=160481>1</sup></a> ,",
+        "ru": "Тому, кто решил, что он ни в чем не нуждается,",
+        "tr": "Ama buna ihtiyaç hissetmeyene gelince,",
+        "de": "Was nun jemanden angeht, der sich für unbedürftig hält,",
+        "pt": "Quanto ao opulento,",
+        "nl": "Wat betreft degene die zich behoefteloos waant.",
+        "ur": "جو شخص بے پروائی برتتا ہے",
+        "bn": "আনহাতে যিয়ে নিজকে অমুখাপেক্ষী বুলি ভাৱে,",
+        "fa": "اما آن کس که [از ایمان] بی‌نیازی می‌ورزد"
+      }
+    },
+    {
+      "verse_number": 5764,
+      "verse_key": "80:6",
+      "arabic_text": "فَأَنتَ لَهُۥ تَصَدَّىٰ",
+      "phonetic_text": "Faanta lahu tasadda",
+      "translations": {
+        "fr": "celui-là tu vas volontiers à sa rencontre,",
+        "en": "you go out of your way––",
+        "es": "le dedicaste toda tu atención.",
+        "it": "tu ne hai maggiore premura.",
+        "ru": "ты уделяешь внимание,",
+        "tr": "Sen ona yöneliyorsun.",
+        "de": "so widmest du dich ihm,",
+        "pt": "Tu o atendes,",
+        "nl": "Aan hem schenk jij alle aandacht.",
+        "ur": "اس کی طرف تو تم توجہ کرتے ہو",
+        "bn": "তুমি তাৰ প্ৰতি মনোযোগ দিছা।",
+        "fa": "تو به او روی می‌آوری؛"
+      }
+    },
+    {
+      "verse_number": 5765,
+      "verse_key": "80:7",
+      "arabic_text": "وَمَا عَلَيْكَ أَلَّا يَزَّكَّىٰ",
+      "phonetic_text": "Wama AAalayka alla yazzakka",
+      "translations": {
+        "fr": "alors qu’il ne te sera fait aucun reproche s’il ne se purifie pas (de sa mécréance).",
+        "en": "though you are not to be blamed for his lack of spiritual growth––",
+        "es": "Pero tú no eres responsable si él rechaza purificarse [de la idolatría, ya que tu obligación solo es transmitir el Mensaje].",
+        "it": "Cosa t’importa se non si purifica <a class=f><sup foot_note=160482>1</sup></a> ?",
+        "ru": "Что же будет тебе, если он не очистится?",
+        "tr": "Onun temizlenmemesinden sana ne?",
+        "de": "obgleich es dich nicht zu kümmern hat, daß er sich nicht läutern will.",
+        "pt": "Não tens culpa se ele não crescer (em conhecimentos espirituais).",
+        "nl": "Terwijl jij niet verantwoordelijk bent als hij zich niet reinigt.",
+        "ur": "حالانکہ اگر وہ نہ سدھرے تو تم پر اس کی کیا ذمہ داری ہے؟",
+        "bn": "অথচ সি পৰিশুদ্ধ নহ’লে তোমাৰ কোনো দায়িত্ব নাই,",
+        "fa": "در حالی که اگر او خود را [از کفر] پاک نسازد، ایرادی بر تو نیست؛"
+      }
+    },
+    {
+      "verse_number": 5766,
+      "verse_key": "80:8",
+      "arabic_text": "وَأَمَّا مَن جَآءَكَ يَسْعَىٰ",
+      "phonetic_text": "Waamma man jaaka yasAAa",
+      "translations": {
+        "fr": "Mais celui qui vient te trouver en toute hâte,",
+        "en": "but from the one who has come to you full of eagerness",
+        "es": "En cambio, aquel que se presentó ante ti con deseos [de aprender],",
+        "it": "Quanto a colui che ti viene incontro pieno di zelo,",
+        "ru": "А того, кто приходит к тебе со рвением",
+        "tr": "Ama sana can atarak gelen,",
+        "de": "Was aber jemanden angeht, der zu dir geeilt kommt",
+        "pt": "Porém, quem a corre a ti,",
+        "nl": "Maar wat betreft degene die haastig tot jou kwam.",
+        "ur": "اور جو خود تمہارے پاس دوڑا آتا ہے",
+        "bn": "আনহাতে যিয়ে তোমাৰ ওচৰলৈ দৌৰি আহিলে,",
+        "fa": "اما کسی که شتابان به سراغ تو می‌آید"
+      }
+    },
+    {
+      "verse_number": 5767,
+      "verse_key": "80:9",
+      "arabic_text": "وَهُوَ يَخْشَىٰ",
+      "phonetic_text": "Wahuwa yakhsha",
+      "translations": {
+        "fr": "et qui craint (Allah),",
+        "en": "and awe",
+        "es": "teniendo temor de Dios,",
+        "it": "essendo timorato [di Allah],",
+        "ru": "и страшится Аллаха,",
+        "tr": "Allah'tan korkarak gelmişken,",
+        "de": "und dabei gottesfürchtig ist,",
+        "pt": "E é temente,",
+        "nl": "En hij vreest (Allah).",
+        "ur": "اور وہ ڈر رہا ہوتا ہے",
+        "bn": "আৰু সি (আল্লাহক) ভয়ো কৰে,",
+        "fa": "و [از الله] می‌ترسد،"
+      }
+    },
+    {
+      "verse_number": 5768,
+      "verse_key": "80:10",
+      "arabic_text": "فَأَنتَ عَنْهُ تَلَهَّىٰ",
+      "phonetic_text": "Faanta AAanhu talahha",
+      "translations": {
+        "fr": "tu le délaisses, détourné par (autre chose) !",
+        "en": "you allow yourself to be distracted.",
+        "es": "te apartaste de él.",
+        "it": "di lui non ti occupi affatto!",
+        "ru": "ты оставляешь без внимания.",
+        "tr": "Sen onunla ilgilenmiyorsun.",
+        "de": "von dem läßt du dich ablenken.",
+        "pt": "Tu o negligenciais!",
+        "nl": "Aan hem schenk jij geen aandacht.",
+        "ur": "اس سے تم بے رُخی برتتے ہو۔ <sup foot_note=\"188335\">1</sup>",
+        "bn": "তাৰ প্ৰতি তুমি উদাসীন হ’লা।",
+        "fa": "تو از او غافل می‌شوی [و به دیگران می‌پردازی]."
+      }
+    },
+    {
+      "verse_number": 5769,
+      "verse_key": "80:11",
+      "arabic_text": "كَلَّآ إِنَّهَا تَذْكِرَةٌ",
+      "phonetic_text": "Kalla innaha tathkira",
+      "translations": {
+        "fr": "Que non, et cela est un rappel.",
+        "en": "No indeed! This [Quran] is a lesson",
+        "es": "No lo vuelvas a hacer, porque este Mensaje es para toda la humanidad.",
+        "it": "In verità questo è un Monito:",
+        "ru": "Но нет! Это есть Назидание,",
+        "tr": "Hayır hayır, sakın. Çünkü o Kur'ân bir öğüttür.",
+        "de": "Keineswegs! Gewiß, es ist eine Erinnerung.",
+        "pt": "Qual! Em verdade, (o Alcorão) é uma mensagem de advertência.",
+        "nl": "Nee! Voorwaar, het is een Vermaning.",
+        "ur": "ہر گز نہیں، <sup foot_note=\"188336\">1</sup> یہ تو ایک نصیحت ہے، <sup foot_note=\"188337\">2</sup>",
+        "bn": "কেতিয়াও নহয়, নিশ্চয় এইটো উপদেশ বাণী,",
+        "fa": "هرگز چنین نیست؛ بی‌گمان، این [آیات برای] تذکر و یادآوری است."
+      }
+    },
+    {
+      "verse_number": 5770,
+      "verse_key": "80:12",
+      "arabic_text": "فَمَن شَآءَ ذَكَرَهُۥ",
+      "phonetic_text": "Faman shaa thakarah",
+      "translations": {
+        "fr": "S’en souvienne qui voudra.",
+        "en": "from which those who wish to be taught should learn,",
+        "es": "Quien quiera, que reflexione y obre acorde a él.",
+        "it": "se ne ricordi, dunque, chi vuole.",
+        "ru": "и пусть помянет его всякий желающий.",
+        "tr": "Artık dileyen onu düşünür.",
+        "de": "Wer nun will, gedenkt seiner.",
+        "pt": "Quem quiser, pois, que preste atenção.",
+        "nl": "Laat wie het wil er lering uit trekken.",
+        "ur": "جس کا جی چاہے اِسے قبول کرے",
+        "bn": "গতিকে যিয়ে ইচ্ছা কৰিব সিয়েই ইয়াক স্মৰণ ৰাখিব,",
+        "fa": "پس هر کس که بخواهد، [می‌تواند] از آن پند گیرد."
+      }
+    },
+    {
+      "verse_number": 5771,
+      "verse_key": "80:13",
+      "arabic_text": "فِى صُحُفٍ مُّكَرَّمَةٍ",
+      "phonetic_text": "Fee suhufin mukarrama",
+      "translations": {
+        "fr": "(Ce rappel est écrit) sur des Feuillets révérés,",
+        "en": "[written] on honoured,",
+        "es": "Pues el Mensaje está registrado en páginas honorables,",
+        "it": "[È contenuto] in Fogli onorati,",
+        "ru": "Оно записано в свитках почитаемых,",
+        "tr": "O, değerli sahifelerdedir.",
+        "de": "(Er steht) auf in Ehren gehaltenen Blättern,",
+        "pt": "(Está registrado) em páginas honoráveis,",
+        "nl": "(Geschreven) op edele bladen.",
+        "ur": "یہ ایسے صحیفوں میں درج ہے جو مکرم ہیں",
+        "bn": "এইটো মৰ্যদা সম্পন্ন ছহীফাত লিপিবদ্ধ।",
+        "fa": "در صحیفه‌های ارجمندی [ثبت] است."
+      }
+    },
+    {
+      "verse_number": 5772,
+      "verse_key": "80:14",
+      "arabic_text": "مَّرْفُوعَةٍ مُّطَهَّرَةٍۭ",
+      "phonetic_text": "MarfooAAatin mutahhara",
+      "translations": {
+        "fr": "élevées haut et purifiées",
+        "en": "exalted, pure pages,",
+        "es": "distinguidas y purificadas,",
+        "it": "sublimi, purissimi,",
+        "ru": "вознесенных и очищенных,",
+        "tr": "Yüksek tutulan tertemiz sahifelerde.",
+        "de": "erhöhten und rein gehaltenen,",
+        "pt": "Exaltadas, purificadas,",
+        "nl": "Verheven en gereinigd.",
+        "ur": "بلند مرتبہ ہیں، پاکیزہ ہیں، <sup foot_note=\"188338\">1</sup>",
+        "bn": "সমুন্নত, পৱিত্ৰ,",
+        "fa": "[در جایگاهی] بلندپایه و پاکیزه [از پلیدی]"
+      }
+    },
+    {
+      "verse_number": 5773,
+      "verse_key": "80:15",
+      "arabic_text": "بِأَيْدِى سَفَرَةٍ",
+      "phonetic_text": "Bi-aydee safara",
+      "translations": {
+        "fr": "entre les mains d’émissaires<sup foot_note=195221>1</sup>",
+        "en": "by the hands of",
+        "es": "en manos de [ángeles] encargados de ejecutar las órdenes de Dios,",
+        "it": "tra le mani di scribi",
+        "ru": "в руках посланцев",
+        "tr": "Yazıcıların ellerindedir,",
+        "de": "durch die Hände von Entsandten,",
+        "pt": "Por mãos de escribas,",
+        "nl": "Door de handen van schrijvers (Engelen).",
+        "ur": "معزّز اور نیک کاتبوں <sup foot_note=\"188339\">1</sup> کے",
+        "bn": "লেখক বা দূতসকলৰ হাতত।",
+        "fa": "در دست سفیران [وحی] است"
+      }
+    },
+    {
+      "verse_number": 5774,
+      "verse_key": "80:16",
+      "arabic_text": "كِرَامٍۭ بَرَرَةٍ",
+      "phonetic_text": "Kiramin barara",
+      "translations": {
+        "fr": "honorés et dévoués.",
+        "en": "noble and virtuous scribes.",
+        "es": "nobles y obedientes.",
+        "it": "nobili, obbedienti <a class=f><sup foot_note=160483>1</sup></a> !",
+        "ru": "благородных и покорных.",
+        "tr": "Değerli, iyi yazıcıların.",
+        "de": "edlen, frommen.",
+        "pt": "Nobres e retos.",
+        "nl": "Edel, deugdzaam.",
+        "ur": "ہاتھوں میں رہتے ہیں۔ <sup foot_note=\"188340\">1</sup>",
+        "bn": "(যিসকল) মহাসন্মানিত, পূণ্যবান।",
+        "fa": "[که] بزرگوار و نیکوکارند."
+      }
+    },
+    {
+      "verse_number": 5775,
+      "verse_key": "80:17",
+      "arabic_text": "قُتِلَ ٱلْإِنسَـٰنُ مَآ أَكْفَرَهُۥ",
+      "phonetic_text": "Qutila al-insanu ma akfarah",
+      "translations": {
+        "fr": "Périsse l’homme ! Comme il est ingrat !",
+        "en": "Woe to man! How ungrateful he is!",
+        "es": "El ser humano se destruye a sí mismo con su ingratitud.",
+        "it": "Perisca l’uomo, quell’ingrato <a class=f><sup foot_note=160484>1</sup></a> !",
+        "ru": "Да сгинет человек! Как же он неблагодарен!",
+        "tr": "O kahrolası insan, ne nankör şey.",
+        "de": "Tod dem Menschen, wie undankbar er ist!",
+        "pt": "Ai do homem; quão ingrato é!",
+        "nl": "Verdoemd is de mens. Hoe ondankbaar is hij!",
+        "ur": "لعنت ہو <sup foot_note=\"188341\">1</sup> انسان پر، <sup foot_note=\"188342\">2</sup> کیسا سخت مُنکرِ حق ہے یہ۔ <sup foot_note=\"188343\">3</sup>",
+        "bn": "মানুহ ধ্বংস হওঁক, কিমান যে অকৃতজ্ঞ!",
+        "fa": "مرگ بر انسان [کافر، که] چقدر ناسپاس است!"
+      }
+    },
+    {
+      "verse_number": 5776,
+      "verse_key": "80:18",
+      "arabic_text": "مِنْ أَىِّ شَىْءٍ خَلَقَهُۥ",
+      "phonetic_text": "Min ayyi shay-in khalaqah",
+      "translations": {
+        "fr": "De quoi l’a-t-Il créé ?",
+        "en": "From what thing does God create him?",
+        "es": "¿Acaso no sabe de qué ha sido creado?",
+        "it": "Da cosa l’ha creato Allah?",
+        "ru": "Из чего Он сотворил его?",
+        "tr": "O yaratan onu hangi şeyden yarattı?",
+        "de": "Woraus hat Er ihn erschaffen?",
+        "pt": "De que Ele o criou?",
+        "nl": "Waaruit heeft Hij hem geschapen?",
+        "ur": "کس چیز سے اللہ نے اِسے پیدا کیا ہے؟",
+        "bn": "তেওঁ তাক কি বস্তুৰ পৰা সৃষ্টি কৰিছে?",
+        "fa": "[الله] او را از چه چیز آفریده است؟"
+      }
+    },
+    {
+      "verse_number": 5777,
+      "verse_key": "80:19",
+      "arabic_text": "مِن نُّطْفَةٍ خَلَقَهُۥ فَقَدَّرَهُۥ",
+      "phonetic_text": "Min nutfatin khalaqahu faqaddarah",
+      "translations": {
+        "fr": "C’est d’une goutte de sperme qu’Il l’a créé ; puis Il en a déterminé la destinée.",
+        "en": "He creates him from a droplet, He proportions him,",
+        "es": "De un óvulo fecundado, que crece en etapas según lo [que Él ha] establecido.",
+        "it": "Da una goccia di sperma. Lo ha creato e ha stabilito [il suo destino] <a class=f><sup foot_note=160485>1</sup></a>,",
+        "ru": "Он сотворил его из капли и соразмерил (или предопределил стадии его развития),",
+        "tr": "Bir damla sudan, onu yarattı da biçime koydu.",
+        "de": "Aus einem Samentropfen hat Er ihn erschaffen und ihm dabei sein Maß festgesetzt.",
+        "pt": "De uma gota de esperma; Ele o criou e o modelou (em seguida).",
+        "nl": "Hij heeft hem uit een druppel geschapen en daarna voor hem beschikt.",
+        "ur": "نُطفہ کی ایک بُوند سے۔ <sup foot_note=\"188344\">1</sup> اللہ نے اِسے پیدا کیا، پھر اِس کی تقدیر مقرر کی، <sup foot_note=\"188345\">2</sup>",
+        "bn": "শুক্ৰবিন্দুৰ পৰা, তেওঁ তাক সৃষ্টি কৰিছে, পিছত তাৰ পৰিমিত বিকাশ সাধন কৰিছে,",
+        "fa": "او را از نطفۀ [ناچیزی] آفرید، سپس او را موزون ساخت."
+      }
+    },
+    {
+      "verse_number": 5778,
+      "verse_key": "80:20",
+      "arabic_text": "ثُمَّ ٱلسَّبِيلَ يَسَّرَهُۥ",
+      "phonetic_text": "Thumma assabeela yassarah",
+      "translations": {
+        "fr": "Il lui a rendu facile le chemin,",
+        "en": "He makes the way easy for him,",
+        "es": "Luego le facilita el camino.",
+        "it": "quindi gli ha reso facile la via <a class=f><sup foot_note=160486>1</sup></a>,",
+        "ru": "потом облегчил ему путь,",
+        "tr": "Sonra ona yolunu kolaylaştırdı.",
+        "de": "Den Weg hierauf macht Er ihm leicht.",
+        "pt": "Então, suavizou-lhe o caminho,",
+        "nl": "Daarna vergemakkelijkt Hij voor hem de Weg.",
+        "ur": "پھر اِس کے لیے زندگی کی راہ آسان کی، <sup foot_note=\"188346\">1</sup>",
+        "bn": "তাৰ পিছত তাৰ বাবে পথ সহজ কৰি দিছে;",
+        "fa": "سپس راه را برایش آسان نمود."
+      }
+    },
+    {
+      "verse_number": 5779,
+      "verse_key": "80:21",
+      "arabic_text": "ثُمَّ أَمَاتَهُۥ فَأَقْبَرَهُۥ",
+      "phonetic_text": "Thumma amatahu faaqbarah",
+      "translations": {
+        "fr": "puis l’a fait mourir et entrer dans la tombe,",
+        "en": "then He causes him to die and be buried.",
+        "es": "Luego le hace morir y ser enterrado.",
+        "it": "quindi l’ha fatto morire e giacere nella tomba;",
+        "ru": "потом умертвил его и поместил в могилу.",
+        "tr": "Sonra onu öldürdü de kabre koydurdu.",
+        "de": "Hierauf läßt Er ihn sterben und bringt ihn dann ins Grab.",
+        "pt": "Depois o fez morrer e o sepultou;",
+        "nl": "Vervolgens doet Hij hem sterven en doet Hij hem begraven.",
+        "ur": "پھر اِسے موت دی اور قبر میں پہنچایا۔ <sup foot_note=\"188347\">1</sup>",
+        "bn": "তাৰ পিছত তাক মৃত্যু প্ৰদান কৰে আৰু কবৰস্থ কৰে।",
+        "fa": "آنگاه [پس از پایان عمر،] او را میرانْد و در قبر [پنهان] نمود."
+      }
+    },
+    {
+      "verse_number": 5780,
+      "verse_key": "80:22",
+      "arabic_text": "ثُمَّ إِذَا شَآءَ أَنشَرَهُۥ",
+      "phonetic_text": "Thumma itha shaa ansharah",
+      "translations": {
+        "fr": "puis quand Il voudra, Il le ressuscitera.",
+        "en": "When He wills, He will raise him up again.",
+        "es": "Finalmente le resucita cuando Él quiere.",
+        "it": "infine lo resusciterà quando lo vorrà!",
+        "ru": "Потом, когда пожелает, Он воскресит его.",
+        "tr": "Sonra dilediği vakit onu tekrar diriltir.",
+        "de": "Hierauf, wenn Er will, läßt Er ihn auferstehen.",
+        "pt": "E, por fim, quando Lhe aprouver, ressuscitá-lo-á.",
+        "nl": "Daarop, als Hij het wil, wekt Hij hem op.",
+        "ur": "پھر جب چاہے وہ اِسے دوبارہ اُٹھا کھڑا کرے۔ <sup foot_note=\"188348\">1</sup>",
+        "bn": "আকৌ যেতিয়া তেওঁ ইচ্ছা কৰিব তাক পুনৰ্জীৱিত কৰিব।",
+        "fa": "سپس هر گاه بخواهد، او را [زنده می‌کند و] برمی‌انگیزد."
+      }
+    },
+    {
+      "verse_number": 5781,
+      "verse_key": "80:23",
+      "arabic_text": "كَلَّا لَمَّا يَقْضِ مَآ أَمَرَهُۥ",
+      "phonetic_text": "Kalla lamma yaqdi maamarah",
+      "translations": {
+        "fr": "Non, (l’homme) n’a pas encore accompli ce qu’(Allah) lui a ordonné.",
+        "en": "Yet man does not fulfil God’s commands.",
+        "es": "Pero a pesar de esto no cumple con los preceptos que se le ordenan.",
+        "it": "No, non ha adempiuto a quello [che Allah] gli ha comandato.",
+        "ru": "Но нет! Он не выполняет того, что Он приказал ему.",
+        "tr": "Hayır hayır, doğrusu o, hiç Allah'ın emrini tam yerine getirmedi,",
+        "de": "Keineswegs! Er hat noch nicht ausgeführt, was Er ihm befohlen hat.",
+        "pt": "Qual! O homem ainda não cumpriu o que Ele lhe ordenou.",
+        "nl": "Nee, hij heeft nog niet verricht wat Hij hem opdroeg.",
+        "ur": "ہر گز نہیں، اِس نے وہ فرض ادا نہیں کیا جس کا اللہ نے اِسے حکم دیا تھا۔ <sup foot_note=\"188349\">1</sup>",
+        "bn": "কেতিয়াও নহয়, তেওঁ তাক যি আদেশ কৰিছিল সেয়া সি এতিয়াও পূৰ্ণ কৰা নাই।",
+        "fa": "هرگز چنین نیست [که او می‌پندارد]. او هنوز آنچه را که [الله] فرمان داده به جای نیاورده است."
+      }
+    },
+    {
+      "verse_number": 5782,
+      "verse_key": "80:24",
+      "arabic_text": "فَلْيَنظُرِ ٱلْإِنسَـٰنُ إِلَىٰ طَعَامِهِۦٓ",
+      "phonetic_text": "Falyanthuri al-insanuila taAAamih",
+      "translations": {
+        "fr": "Que l’homme considère donc sa nourriture !",
+        "en": "Let man consider the food he eats!",
+        "es": "El ser humano debería reflexionar sobre su alimento:",
+        "it": "Pre-Eg. n. Di versetti. Il nome della sura deriva dal vers. In nome di Allah, il Compassionevole, il Misericordioso. Consideri l’uomo il suo cibo:",
+        "ru": "Пусть посмотрит человек на свое пропитание!",
+        "tr": "Bir de o insan yiyeceğine baksın.",
+        "de": "So schaue der Mensch doch auf seine Nahrung:",
+        "pt": "Que o homem repare, pois, em seu alimento.",
+        "nl": "Laat de mens dan naar zijn voedsel kijken.",
+        "ur": "پھر ذرا انسان اپنی خوراک کو دیکھے۔ <sup foot_note=\"188350\">1</sup>",
+        "bn": "এতেকে মানুহে নিজ খাদ্যৰ প্ৰতি লক্ষ্য কৰা উচিত।",
+        "fa": "انسان باید به غذای خویش [و آفرینشِ آن] بنگرد:"
+      }
+    },
+    {
+      "verse_number": 5783,
+      "verse_key": "80:25",
+      "arabic_text": "أَنَّا صَبَبْنَا ٱلْمَآءَ صَبًّا",
+      "phonetic_text": "Anna sababna almaasabba",
+      "translations": {
+        "fr": "C’est bien Nous Qui déversons l’eau (du ciel) en abondance,",
+        "en": "We pour down abundant water",
+        "es": "Hice descender el agua en abundancia,",
+        "it": "siamo Noi che versiamo l’acqua in abbondanza,",
+        "ru": "Мы проливаем обильные ливни,",
+        "tr": "Biz o suyu bol bol döktük.",
+        "de": "Wir gießen ja Güsse von Wasser,",
+        "pt": "Em verdade, derramamos a água em abundância,",
+        "nl": "Voorwaar, Wij doen het water in stromen neerkomen.",
+        "ur": "ہم نے خُوب پانی لُنڈھایا، <sup foot_note=\"188351\">1</sup>",
+        "bn": "নিশ্চয় আমি প্ৰচুৰ পৰিমাণে পানী বৰ্ষণ কৰোঁ,",
+        "fa": "ما آب فراوان [از آسمان] فروریختیم،"
+      }
+    },
+    {
+      "verse_number": 5784,
+      "verse_key": "80:26",
+      "arabic_text": "ثُمَّ شَقَقْنَا ٱلْأَرْضَ شَقًّا",
+      "phonetic_text": "Thumma shaqaqna al-arda shaqqa",
+      "translations": {
+        "fr": "puis fendons (et creusons) la terre,",
+        "en": "and cause the soil to split open.",
+        "es": "luego hice que la tierra brotara.",
+        "it": "poi spacchiamo la terra in profondità",
+        "ru": "затем рассекаем землю трещинами",
+        "tr": "Sonra toprağı nasıl da yardık.",
+        "de": "hierauf spalten Wir die Erde in Spalten auf",
+        "pt": "Depois, abrimos a terra em fendas,",
+        "nl": "Daarna doen Wij de aarde openploegen.",
+        "ur": "پھر زمین کو عجیب طرح پھاڑا، <sup foot_note=\"188352\">1</sup>",
+        "bn": "তাৰ পিছত আমি পৃথিৱীক যথাযথভাৱে বিদীৰ্ণ কৰোঁ;",
+        "fa": "سپس زمین را از هم شکافتیم،"
+      }
+    },
+    {
+      "verse_number": 5785,
+      "verse_key": "80:27",
+      "arabic_text": "فَأَنۢبَتْنَا فِيهَا حَبًّا",
+      "phonetic_text": "Faanbatna feeha habba",
+      "translations": {
+        "fr": "pour y faire pousser le grain,",
+        "en": "We make grain grow,",
+        "es": "Hice surgir de ella granos,",
+        "it": "e vi facciamo germinare cereali,",
+        "ru": "и взращиваем на ней зерна,",
+        "tr": "Bu suretle orada ekinler bitirdik.",
+        "de": "und lassen dann auf ihr Korn wachsen",
+        "pt": "E fazemos nascer o grão,",
+        "nl": "Dan doen Wij daarin granen groeien.",
+        "ur": "پھر اُس کے اندر اگائے غلے",
+        "bn": "তাৰ পিছত আমি তাত উত্পন্ন কৰোঁ শস্য;",
+        "fa": "آنگاه دانه‌[های فراون] در آن رویاندیم،"
+      }
+    },
+    {
+      "verse_number": 5786,
+      "verse_key": "80:28",
+      "arabic_text": "وَعِنَبًا وَقَضْبًا",
+      "phonetic_text": "WaAAinaban waqadba",
+      "translations": {
+        "fr": "la vigne et la luzerne,",
+        "en": "and vines, fresh vegetation,",
+        "es": "vides, hierbas,",
+        "it": "vitigni e foraggi <a class=f><sup foot_note=160487>1</sup></a> ,",
+        "ru": "виноград и люцерну,",
+        "tr": "Üzümler, yoncalar,",
+        "de": "und Rebstöcke und Grünzeug",
+        "pt": "A videira e as plantas (nutritivas),",
+        "nl": "En druiven en groenten.",
+        "ur": "اور انگور اور ترکاریاں",
+        "bn": "আঙুৰ আৰু শাক-পাচলি,",
+        "fa": "و انگور و سبزی [خوراکی بسیار]،"
+      }
+    },
+    {
+      "verse_number": 5787,
+      "verse_key": "80:29",
+      "arabic_text": "وَزَيْتُونًا وَنَخْلًا",
+      "phonetic_text": "Wazaytoonan wanakhla",
+      "translations": {
+        "fr": "l’olivier et le palmier,",
+        "en": "olive trees, date palms,",
+        "es": "olivos, palmeras,",
+        "it": "olive e palmeti,",
+        "ru": "маслины и финиковые пальмы,",
+        "tr": "Zeytinlikler, hurmalıklar,",
+        "de": "und Ölbäume und Palmen",
+        "pt": "A oliveira e a tamareira,",
+        "nl": "En olijfbomen on dadelpalmen.",
+        "ur": "اور زیتون اور کھجوریں",
+        "bn": "যায়তুন আৰু খেজুৰ গছ,",
+        "fa": "و زیتون و نخل،"
+      }
+    },
+    {
+      "verse_number": 5788,
+      "verse_key": "80:30",
+      "arabic_text": "وَحَدَآئِقَ غُلْبًا",
+      "phonetic_text": "Wahada-iqa ghulba",
+      "translations": {
+        "fr": "et les jardins luxuriants,",
+        "en": "luscious gardens,",
+        "es": "huertos frondosos,",
+        "it": "lussureggianti giardini,",
+        "ru": "сады густые (или с могучими деревьями),",
+        "tr": "İri ve sık ağaçlı bahçeler,",
+        "de": "und Gärten mit dicken Bäumen",
+        "pt": "E jardins frondosos,",
+        "nl": "En dichtbegroeide gaarden.",
+        "ur": "اور گھنے باغ",
+        "bn": "ঘন গছ-গছনি বিশিষ্ট উদ্যান,",
+        "fa": "و باغ‌هایی [انبوه و] پردرخت،"
+      }
+    },
+    {
+      "verse_number": 5789,
+      "verse_key": "80:31",
+      "arabic_text": "وَفَـٰكِهَةً وَأَبًّا",
+      "phonetic_text": "Wafakihatan waabba",
+      "translations": {
+        "fr": "et les fruits et les pâturages,",
+        "en": "fruits, and fodder:",
+        "es": "frutos y forraje",
+        "it": "frutti e pascoli,",
+        "ru": "фрукты и травы",
+        "tr": "Meyveler, çayırlar bitirdik.",
+        "de": "und Früchte und Futter,",
+        "pt": "E o fruto e a forragem,",
+        "nl": "En vruchten en weidegras.",
+        "ur": "اور طرح طرح کے پھل، اور چارے",
+        "bn": "ফল-মূল আৰু তৃণ-ঘাঁহ,",
+        "fa": "و [انواع] میوه و علوفه [پدید آوردیم]."
+      }
+    },
+    {
+      "verse_number": 5790,
+      "verse_key": "80:32",
+      "arabic_text": "مَّتَـٰعًا لَّكُمْ وَلِأَنْعَـٰمِكُمْ",
+      "phonetic_text": "MataAAan lakum wali-anAAamikum",
+      "translations": {
+        "fr": "en jouissance pour vous et pour vos bestiaux.",
+        "en": "all for you and your livestock to enjoy.",
+        "es": "para vuestro beneficio y de vuestros rebaños.",
+        "it": "di cui godete voi e il vostro bestiame.",
+        "ru": "на пользу вам и вашей скотине.",
+        "tr": "Siz ve hayvanlarınız faydalansın diye.",
+        "de": "als Nießbrauch für euch und für euer Vieh.",
+        "pt": "Para o vosso uso e do vosso gado.",
+        "nl": "Als een voorziening voor jullie en voor jullie vee.",
+        "ur": "تمہارے لیے اور تمہارے مویشیوں کے لیے سامانِ زیست کے طور پر۔ <sup foot_note=\"188353\">1</sup>",
+        "bn": "এইবোৰ তোমালোকৰ আৰু তোমালোকৰ ঘৰচীয়া জন্তুৰ জীৱনোপকৰণৰ বাবে।",
+        "fa": "[همۀ اینها] برای بهره‌گیری شما و چهارپایانتان است."
+      }
+    },
+    {
+      "verse_number": 5791,
+      "verse_key": "80:33",
+      "arabic_text": "فَإِذَا جَآءَتِ ٱلصَّآخَّةُ",
+      "phonetic_text": "Fa-itha jaati assakhkha",
+      "translations": {
+        "fr": "Mais quand viendra la Clameur retentissante,",
+        "en": "When the Deafening Blast comes––",
+        "es": "El día que llegue el estruendo terrible [comenzando el fin del mundo],",
+        "it": "Ma quando verrà il Fragore,",
+        "ru": "Когда же раздастся Оглушительный глас,",
+        "tr": "Kulakları sağır eden o gürültü geldiğinde,",
+        "de": "Wenn dann der betäubende (Schrei) kommt,",
+        "pt": "Porém, quando retumbar o toque ensurdecedor,",
+        "nl": "En wanneer dan de bazuinstoot komt.",
+        "ur": "آخر کار جب وہ کان بہرے کر دینے والی آواز بلند ہوگی <sup foot_note=\"188354\">1</sup>",
+        "bn": "এতেকে যেতিয়া তীক্ষ্ন (বিকট) শব্দ আহিব,",
+        "fa": "هنگامی ‌که [آن] صدای مهیب [قیامت] فرارسد،"
+      }
+    },
+    {
+      "verse_number": 5792,
+      "verse_key": "80:34",
+      "arabic_text": "يَوْمَ يَفِرُّ ٱلْمَرْءُ مِنْ أَخِيهِ",
+      "phonetic_text": "Yawma yafirru almaro min akheeh",
+      "translations": {
+        "fr": "le jour où l’homme fuira son frère,",
+        "en": "the Day man will flee from his own brother,",
+        "es": "el ser humano huirá de su hermano,",
+        "it": "il Giorno in cui l’uomo fuggirà da suo fratello,",
+        "ru": "в тот день человек бросит своего брата,",
+        "tr": "O gün kişi kaçar, kardeşinden...",
+        "de": "am Tag, da der Mensch flieht vor seinem Bruder",
+        "pt": "Nesse dia, o homem fugirá do seu irmão,",
+        "nl": "Op die Dag vlucht de mens van zijn broeder.",
+        "ur": "اُس روز آدمی اپنے بھائی سے بھاگے گا",
+        "bn": "সেইদিনা মানুহে পলায়ন কৰিব তাৰ ভাতৃৰ পৰা,",
+        "fa": "روزی ‌که انسان از برادرش می‌گریزد"
+      }
+    },
+    {
+      "verse_number": 5793,
+      "verse_key": "80:35",
+      "arabic_text": "وَأُمِّهِۦ وَأَبِيهِ",
+      "phonetic_text": "Waommihi waabeeh",
+      "translations": {
+        "fr": "sa mère et son père,",
+        "en": "his mother, his father,",
+        "es": "de su madre y de su padre,",
+        "it": "da sua madre e da suo padre,",
+        "ru": "свою мать и своего отца,",
+        "tr": "Anasından, babasından..",
+        "de": "und seiner Mutter und seinem Vater",
+        "pt": "Da sua mãe e do seu pai,",
+        "nl": "En van zijn moeder en zijn vader.",
+        "ur": "اور اپنی ماں اور اپنے باپ",
+        "bn": "আৰু তাৰ মাক-বাপেকৰ পৰা,",
+        "fa": "و از مادرش و از پدرش"
+      }
+    },
+    {
+      "verse_number": 5794,
+      "verse_key": "80:36",
+      "arabic_text": "وَصَـٰحِبَتِهِۦ وَبَنِيهِ",
+      "phonetic_text": "Wasahibatihi wabaneeh",
+      "translations": {
+        "fr": "sa compagne et ses enfants,",
+        "en": "his wife, his children:",
+        "es": "de su esposa y de sus hijos.",
+        "it": "dalla sua compagna e dai suoi figli,",
+        "ru": "свою жену и своих сыновей,",
+        "tr": "Eşinden ve oğullarından.",
+        "de": "und seiner Gefährtin und seinen Söhnen-",
+        "pt": "Da sua esposa e dos seus filhos.",
+        "nl": "En van zijn vrouw en van zijn kinderen.",
+        "ur": "اور اپنی بیوی اور اپنی اولاد سے بھاگے گا۔ <sup foot_note=\"188355\">1</sup>",
+        "bn": "তাৰ স্ত্ৰী আৰু সন্তানৰ পৰা,",
+        "fa": "و از زنش و پسرانش [نیز می‌گریزد]،"
+      }
+    },
+    {
+      "verse_number": 5795,
+      "verse_key": "80:37",
+      "arabic_text": "لِكُلِّ ٱمْرِئٍ مِّنْهُمْ يَوْمَئِذٍ شَأْنٌ يُغْنِيهِ",
+      "phonetic_text": "Likulli imri-in minhum yawma-ithinsha/nun yughneeh",
+      "translations": {
+        "fr": "alors, ce jour-là, chacun d’entre eux sera préoccupé par ce qui le concerne.",
+        "en": "each of them will be absorbed in concerns of their own on that Day-",
+        "es": "Ese día cada uno estará preocupado por sí mismo.",
+        "it": "poiché ognuno di loro, in quel Giorno, avrà da pensare a se stesso,",
+        "ru": "ибо у каждого человека своих забот будет сполна.",
+        "tr": "Onlardan her birinin o gün başından aşan işi vardır.",
+        "de": "jedermann von ihnen wird an jenem Tag eine Angelegenheit haben, die ihn beschäftigt.",
+        "pt": "Nesse dia, a cada qual bastará a preocupação consigo mesmo.",
+        "nl": "Een ieder ven hen zal op die Dag een bezigheid hebben die hem genoeg is.",
+        "ur": "ان میں سے ہر شخص پر اس دن ایسا وقت آپڑے گا کہ اسے اپنے سوا کسی کا ہوش نہ ہوگا۔ <sup foot_note=\"188356\">1</sup>",
+        "bn": "সেইদিনা সিহঁত প্ৰত্যকৰে হ’ব, এনে এক গুৰুতৰ অৱস্থা যিটো তাক সম্পূৰ্ণৰূপে ব্যস্ত ৰাখিব।",
+        "fa": "در آن روز، هر کس را کاری است که او را به خودش سرگرم می‌دارد [و از دیگری بازمی‌دارد]."
+      }
+    },
+    {
+      "verse_number": 5796,
+      "verse_key": "80:38",
+      "arabic_text": "وُجُوهٌ يَوْمَئِذٍ مُّسْفِرَةٌ",
+      "phonetic_text": "Wujoohun yawma-ithin musfira",
+      "translations": {
+        "fr": "Des visages, ce jour-là, seront radieux,",
+        "en": "on that Day some faces will be beaming,",
+        "es": "Ese día habrá rostros radiantes,",
+        "it": "ci saranno in quel Giorno volti radiosi,",
+        "ru": "В тот день одни лица будут сиять,",
+        "tr": "Yüzler var ki, o gün parıl parıl,",
+        "de": "(Die einen) Gesichter werden an jenem Tag erstrahlen,",
+        "pt": "Nesse dia, haverá rostos resplandecentes,",
+        "nl": "Gezichten (van de gelovigen) zullen op die Dag stralen.",
+        "ur": "کچھ چہرے اُس روز دمک رہے ہوں گے",
+        "bn": "সেইদিনা কিছুমান চেহেৰা হ’ব উজ্জ্বল,",
+        "fa": "چهره‌هایی در آن روز، گشاده و روشن است."
+      }
+    },
+    {
+      "verse_number": 5797,
+      "verse_key": "80:39",
+      "arabic_text": "ضَاحِكَةٌ مُّسْتَبْشِرَةٌ",
+      "phonetic_text": "Dahikatun mustabshira",
+      "translations": {
+        "fr": "riants et pleins d’espérance.",
+        "en": "laughing, and rejoicing,",
+        "es": "risueños y felices [por haber alcanzado la salvación].",
+        "it": "sorridenti e lieti.",
+        "ru": "смеяться и ликовать.",
+        "tr": "Güler, sevinir.",
+        "de": "lachen und sich freuen.",
+        "pt": "Risonhos, regozijadores.",
+        "nl": "Lachend, verblijd.",
+        "ur": "ہشاش بشاش اور خوش و خرم ہوں گے",
+        "bn": "হাঁহিৰে ভৰা, আনন্দত উত্ফুল্লিত,",
+        "fa": "[به خاطر نعمت و رحمتِ الله] خندان [و] شاد است."
+      }
+    },
+    {
+      "verse_number": 5798,
+      "verse_key": "80:40",
+      "arabic_text": "وَوُجُوهٌ يَوْمَئِذٍ عَلَيْهَا غَبَرَةٌ",
+      "phonetic_text": "Wawujoohun yawma-ithin AAalayhaghabara",
+      "translations": {
+        "fr": "Et (d’autres) visages, ce jour-là, seront couverts de poussière",
+        "en": "but some faces will be dust-stained",
+        "es": "Pero habrá otros rostros ensombrecidos,",
+        "it": "E ci saranno, in quel Giorno, [anche] volti terrei",
+        "ru": "На других же лицах в тот день будет прах,",
+        "tr": "Yüzler de var ki, o gün tozlanmış,",
+        "de": "Und auf (den anderen) Gesichtern wird an jenem Tag Staub sein.",
+        "pt": "E também haverá, nesse dia, rostos cobertos de pó,",
+        "nl": "En gezichten (van de ongelovigen) zullen op die Dag met stof bedekt Zijn.",
+        "ur": "اور کچھ چہروں پر اس روز خاک اڑ رہی ہوگی",
+        "bn": "আৰু সেইদিনা কিছুমান চেহেৰা ধূলিৰে মলিন হ’ব,",
+        "fa": "و چهره‌هایی در آن روز، غبارآلود است."
+      }
+    },
+    {
+      "verse_number": 5799,
+      "verse_key": "80:41",
+      "arabic_text": "تَرْهَقُهَا قَتَرَةٌ",
+      "phonetic_text": "Tarhaquha qatara",
+      "translations": {
+        "fr": "rembrunis par les ténèbres.",
+        "en": "and covered in darkness:",
+        "es": "apesadumbrados [por haber merecido la condena al Infierno].",
+        "it": "coperti di tenebre:",
+        "ru": "покрывающий их мраком.",
+        "tr": "Onları karanlık bürümüş,",
+        "de": "und sie werden von Dunkelheit bedeckt sein.",
+        "pt": "Cobertos de lugubridade.",
+        "nl": "En een duisternis zal hen omhullen.",
+        "ur": "اور کلونس چھائی ہوئی ہوگی",
+        "bn": "ক’লা আৱৰণে আৱৰি ধৰিব।",
+        "fa": "[و] سیاهی [و تاریکی] آنها را پوشانده است."
+      }
+    },
+    {
+      "verse_number": 5800,
+      "verse_key": "80:42",
+      "arabic_text": "أُو۟لَـٰٓئِكَ هُمُ ٱلْكَفَرَةُ ٱلْفَجَرَةُ",
+      "phonetic_text": "Ola-ika humu alkafaratu alfajara",
+      "translations": {
+        "fr": "Ceux-là sont les mécréants et les pervers !",
+        "en": "those are the disbelievers, the licentious.",
+        "es": "Esos serán los que rechazaron el Mensaje y los transgresores [de la ley].",
+        "it": "sono i miscredenti, i peccatori. <a class=f><sup foot_note=160488>1</sup></a> Riferisce la tradizione (Tabarì xxx, 50-Ibn Kathìr IV, ecc.) che questa sura fu rivelata dall’Altissimo (gloria a Lui) in occasione di un episodio di impazienza che vide protagonista Muhammad (pace e benedizioni su di lui) e che avvenne durante la prima fase della predicazione alla Mecca. L’Inviato di Allah (pace e benedizioni su di lui) stava parlando con alcuni tra i più importanti notabili Quraysh quando Abdallah ibn Umm Maktùm, un non vedente, gli si avvicinò e gli chiese ad alta voce di istruirlo sulla religione che Allah gli aveva rivelato. Il Profeta non gli diede ascolto, impegnato com’era nel tentativo di convincere i più nobili ad aderire alla rivelazione di cui era latore e, di fronte alle reiterate richieste del cieco, si infastidì, prese cipiglio e lo ignorò completamente. Poco più tardi Allah (gloria a Lui l’Altissimo) gli inviò questa sura, i cui primi undici versetti sono un vero e proprio rimprovero che l’Altissimo (gloria a Lui) rivolgeva al Suo Inviato, per ricordargli la pazienza, il valore profondo delle cose e il primato del desiderio di Lui sopra ogni altra considerazione politica e di opportunità. <a class=f><sup foot_note=160489>2</sup></a> «pensa di bastare a se stesso»: del ricco, tronfio della sua ricchezza, del notabile pieno di superbia per il suo lignaggio. <a class=f><sup foot_note=160490>3</sup></a> Il versetto può essere inteso in senso ironico, nel quadro dell’aspro rimprovero che Allah (gloria a Lui l’Altissimo) sta rivolgendo al Suo Inviato (pace e benedizioni su di lui) oppure nel senso che il Profeta non deve preoccuparsi di chi non vuole accettare la fede, ma trasmettere il messaggio e curarsi di chi è disposto ad accettarlo e agire conseguentemente. <a class=f><sup foot_note=160491>4</sup></a> Si tratta di un riferimento agli angeli che fungono da «guardiani e segretari» dell’archetipo celeste della rivelazione divina (i «Fogli onorati»), e tramite tra la volontà di Allah (gloria a Lui l’Altissimo) e i Suoi eletti (profeti e messaggeri). <a class=f><sup foot_note=160492>5</sup></a> Anche «QuelFincredulo». <a class=f><sup foot_note=160493>6</sup></a> «e ha stabilito [il suo destino]»: anche «e lo ha formato [armoniosamente]». <a class=f><sup foot_note=160494>7</sup></a> Secondo la maggior parte dei commentatori questa espressione si riferisce alla nascita dell’uomo; Tabarì (xxx, cita anche un’altra interpretazione: «Allah gli ha reso agevole il procurarsi i mezzi della sussistenza materiale», o ancora «Allah gli ha reso agevole il cammino sulla via del bene o del male». <a class=f><sup foot_note=160495>8</sup></a> «…e foraggi»: anche «verdure».",
+        "ru": "Это будут неверующие грешники.",
+        "tr": "İşte onlardır kâfirler, haktan sapanlar.",
+        "de": "Das sind die Ungläubigen und Sittenlosen.",
+        "pt": "Estes serão os rostos dos incrédulos, dos depravados.",
+        "nl": "Zij zijn degenen die de zondige ongelovigen zijn.",
+        "ur": "یہی کافر و فاجر لوگ ہوں گے",
+        "bn": "এওঁলোকেই কাফিৰ, অত্যন্ত পাপী।",
+        "fa": "اینان همان کافرانِ بدکردارند."
+      }
+    }
+  ]
+}

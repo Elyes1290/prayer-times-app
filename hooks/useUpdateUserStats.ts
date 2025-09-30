@@ -1,6 +1,7 @@
 import { useCallback } from "react";
 import { getCurrentUserId } from "../utils/userAuth";
 import { AppConfig } from "../utils/config";
+import OfflineStatsManager from "../utils/OfflineStatsManager";
 
 export interface UpdateStatsAction {
   action:
@@ -23,27 +24,27 @@ export const useUpdateUserStats = () => {
         throw new Error("Aucun utilisateur connecté");
       }
 
-      const response = await fetch(AppConfig.USER_STATS_API, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify({
-          user_id: userId,
-          action: updateAction.action,
-          action_data: updateAction.action_data || {},
-        }),
-      });
-
-      const result = await response.json();
+      // 🌐 NOUVEAU : Utiliser le gestionnaire offline
+      const offlineManager = OfflineStatsManager.getInstance();
+      const result = await offlineManager.addOfflineAction(
+        updateAction.action,
+        updateAction.action_data || {}
+      );
 
       if (result.success) {
-        console.log("✅ Statistiques mises à jour:", result.message);
-        return { success: true, data: result.data };
+        console.log(
+          `✅ Action ${updateAction.action} ${
+            result.isOffline ? "enregistrée offline" : "synchronisée"
+          }`
+        );
+        return {
+          success: true,
+          isOffline: result.isOffline,
+          pendingCount: result.pendingCount,
+        };
       } else {
-        console.error("❌ Erreur mise à jour stats:", result.message);
-        return { success: false, error: result.message };
+        console.error("❌ Erreur enregistrement action:", updateAction.action);
+        return { success: false, error: "Erreur enregistrement" };
       }
     } catch (error) {
       console.error("❌ Erreur mise à jour stats:", error);
@@ -152,6 +153,27 @@ export const useUpdateUserStats = () => {
     });
   }, [updateStats]);
 
+  // 🌐 NOUVEAU : Fonction pour synchroniser manuellement les actions en attente
+  const syncPendingActions = useCallback(async () => {
+    try {
+      const offlineManager = OfflineStatsManager.getInstance();
+      const result = await offlineManager.syncPendingActions();
+
+      console.log(
+        `🔄 Synchronisation: ${result.synced_actions} actions synchronisées`
+      );
+      return result;
+    } catch (error) {
+      console.error("❌ Erreur synchronisation:", error);
+      return {
+        success: false,
+        synced_actions: 0,
+        failed_actions: [],
+        error: "Erreur synchronisation",
+      };
+    }
+  }, []);
+
   return {
     updateStats,
     recordPrayer,
@@ -162,5 +184,6 @@ export const useUpdateUserStats = () => {
     recordContentDownloaded,
     recordAppUsage,
     resetAllStats,
+    syncPendingActions,
   };
 };

@@ -1,0 +1,426 @@
+{
+  "surah_number": 92,
+  "extracted_at": "2025-09-20T15:17:21.567Z",
+  "verses": [
+    {
+      "verse_number": 6059,
+      "verse_key": "92:1",
+      "arabic_text": " وَٱلَّيْلِ إِذَا يَغْشَىٰ",
+      "phonetic_text": "Wallayli itha yaghsha",
+      "translations": {
+        "fr": "Par la nuit quand elle voile tout !",
+        "en": "By the enshrouding night,",
+        "es": "Juro por la noche cuando cubre con la oscuridad,",
+        "it": "Per la notte quando avvolge <a class=f><sup foot_note=160644>1</sup></a> [con le sue tenebre],",
+        "ru": "Клянусь ночью, когда она покрывает землю!",
+        "tr": "Örttüğü zaman geceye,",
+        "de": "Bei der Nacht, wenn sie (alles) überdeckt,",
+        "pt": "Pela noite, quando cobre (a luz),",
+        "nl": "Bij de nacht wanneer hij bedekt.",
+        "ur": "قسم ہے رات کی جبکہ وہ چھا جائے",
+        "bn": "শপত ৰাতিৰ, যেতিয়া ই আচ্ছন্ন কৰে,",
+        "fa": "سوگند به شب، هنگامی ‌که [همه چیز را] بپوشانَد،"
+      }
+    },
+    {
+      "verse_number": 6060,
+      "verse_key": "92:2",
+      "arabic_text": "وَٱلنَّهَارِ إِذَا تَجَلَّىٰ",
+      "phonetic_text": "Wannahari itha tajalla",
+      "translations": {
+        "fr": "Par le jour quand il est dans tout son éclat !",
+        "en": "by the radiant day,",
+        "es": "por el día cuando resplandece,",
+        "it": "per il giorno quando risplende,",
+        "ru": "Клянусь днем, когда он проясняется!",
+        "tr": "Açıldığı zaman gündüze,",
+        "de": "und dem Tag, wenn er (in seiner Helligkeit) erscheint,",
+        "pt": "Pelo dia, quando resplandece,",
+        "nl": "Bij de dag wanneer hij beschijnt.",
+        "ur": "اور دن کی جبکہ وہ روشن ہو",
+        "bn": "শপত দিনৰ, যেতিয়া ই উজ্জ্বল হয়,",
+        "fa": "و سوگند به روز، هنگامی‌ که آشکار شود،"
+      }
+    },
+    {
+      "verse_number": 6061,
+      "verse_key": "92:3",
+      "arabic_text": "وَمَا خَلَقَ ٱلذَّكَرَ وَٱلْأُنثَىٰٓ",
+      "phonetic_text": "Wama khalaqa aththakarawal-ontha",
+      "translations": {
+        "fr": "Par ce qui<sup foot_note=195237>1</sup> a créé le mâle et la femelle !",
+        "en": "by His creation of male and female!",
+        "es": "por Quien creó al hombre y a la mujer,",
+        "it": "per Colui Che ha creato il maschio e la femmina.",
+        "ru": "Клянусь Тем, Кто создал мужчину и женщину!",
+        "tr": "Erkeği ve dişiyi yaratana and olsun ki,",
+        "de": "und Dem, Der das Männliche und das Weibliche erschaffen hat!",
+        "pt": "Por Quem criou o masculino e o feminino,",
+        "nl": "Bij Wie de man en de vrouw schiep.",
+        "ur": "اور اُس ذات کی جس نے نر اور مادہ کو پیدا کیا",
+        "bn": "আৰু শপত সেই সত্তাৰ, যিজনে নৰ আৰু নাৰী সৃষ্টি কৰিছে।",
+        "fa": "و سوگند به ذاتی که نر و ماده را آفرید،"
+      }
+    },
+    {
+      "verse_number": 6062,
+      "verse_key": "92:4",
+      "arabic_text": "إِنَّ سَعْيَكُمْ لَشَتَّىٰ",
+      "phonetic_text": "Inna saAAyakum lashatta",
+      "translations": {
+        "fr": "Vos efforts sont, en vérité, (déployés) pour des desseins divers.",
+        "en": "The ways you take differ greatly.",
+        "es": "que las obras [de las personas] son diversas.",
+        "it": "Invero i vostri sforzi divergono <a class=f><sup foot_note=160645>1</sup></a> .",
+        "ru": "Ваши стремления различны.",
+        "tr": "Gerçekten sizin işiniz başka başkadır.",
+        "de": "Euer Bemühen ist wahrlich verschieden.",
+        "pt": "Que os vossos esforços são diferentes (quanto às metas a atingir).",
+        "nl": "Voorwaar, jullie daden zijn zeker verschillend.",
+        "ur": "درحقیقت تم لوگوں کی کوششیں مختلف قسم کی ہیں۔ <sup foot_note=\"188503\">1</sup>",
+        "bn": "নিশ্চয় তোমালোকৰ কৰ্মপ্ৰচেষ্টা বিভিন্ন প্ৰকৃতিৰ।",
+        "fa": "که یقیناً سعی [و تلاش] شما مختلف [و نیک و بد] است."
+      }
+    },
+    {
+      "verse_number": 6063,
+      "verse_key": "92:5",
+      "arabic_text": "فَأَمَّا مَنْ أَعْطَىٰ وَٱتَّقَىٰ",
+      "phonetic_text": "Faamma man aAAta wattaqa",
+      "translations": {
+        "fr": "Celui qui donne (de ses biens) et qui craint (Allah),",
+        "en": "There is the one who gives, who is mindful of God,",
+        "es": "A quien dé caridades, tenga temor [de Dios]",
+        "it": "A chi sarà stato generoso e timorato",
+        "ru": "Тому, кто отдавал должное (или раздавал милостыню) и был богобоязнен,",
+        "tr": "Bundan böyle her kim malını hayır için verir ve korunursa,",
+        "de": "Was nun jemanden angeht, der gibt und gottesfürchtig ist",
+        "pt": "Porém, àquele que dá (em caridade e é temente a Deus,",
+        "nl": "Wat betreft degene die geeft en (Allah) vreest.",
+        "ur": "تو جس نے (راہ خدا میں) مال دیا اور (خدا کی نافرمانی سے) پرہیز کیا",
+        "bn": "এতেকে কোনোবাই দান কৰিলে আৰু তাক্বৱা অৱলম্বন কৰিলে,",
+        "fa": "و اما کسی‌ که [در راه الله] ببخشد و پرهیزگاری نماید"
+      }
+    },
+    {
+      "verse_number": 6064,
+      "verse_key": "92:6",
+      "arabic_text": "وَصَدَّقَ بِٱلْحُسْنَىٰ",
+      "phonetic_text": "Wasaddaqa bilhusna",
+      "translations": {
+        "fr": "Qui croit en la meilleure des récompenses,",
+        "en": "who testifies to goodness––",
+        "es": "y crea en los valores más sublimes,",
+        "it": "e avrà attestato la verità della cosa più bella <a class=f><sup foot_note=160646>1</sup></a> ,",
+        "ru": "кто признавал наилучшее (свидетельство единобожия или Рай),",
+        "tr": "Ve en güzel olanı doğrularsa,",
+        "de": "und das Beste für wahr hält,",
+        "pt": "E crê no melhor,",
+        "nl": "En in de goede beloning (het Paradijs) gelooft.",
+        "ur": "اور بھلائی کو سچ مانا، <sup foot_note=\"188504\">1</sup>",
+        "bn": "আৰু যি উত্তম তাক সত্য বুলি গ্ৰহণ কৰিলে,",
+        "fa": "و [وعدۀ الله و سخنان] نیک را تصدیق کند،"
+      }
+    },
+    {
+      "verse_number": 6065,
+      "verse_key": "92:7",
+      "arabic_text": "فَسَنُيَسِّرُهُۥ لِلْيُسْرَىٰ",
+      "phonetic_text": "Fasanuyassiruhu lilyusra",
+      "translations": {
+        "fr": "Nous le mettrons sur la voie la plus facile.",
+        "en": "We shall smooth his way towards ease.",
+        "es": "le facilitaré el camino del bien.",
+        "it": "faciliteremo il facile <a class=f><sup foot_note=160647>1</sup></a> ;",
+        "ru": "Мы облегчим путь к легчайшему (к праведным деяниям).",
+        "tr": "Biz onu en kolay yola muvaffak kılacağız.",
+        "de": "so werden Wir ihm den Weg zum Leichteren leicht machen.",
+        "pt": "Facilitaremos o caminho do conforto.",
+        "nl": "Wij zullen voor hem het gemakkelijke vergemakkelijken.",
+        "ur": "اس کو ہم آسان راستے کے لیے سہُولت دیں گے۔ <sup foot_note=\"188505\">1</sup>",
+        "bn": "আমি তাৰ বাবে সহজ পথত চলা সুগম কৰি দিম।",
+        "fa": "به زودی انجام [کار خیر و] آسانی [= اعمال نیکو و انفاق در راه الله] را برایش آسان می‌کنیم."
+      }
+    },
+    {
+      "verse_number": 6066,
+      "verse_key": "92:8",
+      "arabic_text": "وَأَمَّا مَنۢ بَخِلَ وَٱسْتَغْنَىٰ",
+      "phonetic_text": "Waamma man bakhila wastaghna",
+      "translations": {
+        "fr": "Quant à celui qui fait preuve d’avarice, se passe (de la récompense d’Allah),",
+        "en": "There is the one who is miserly, who is self-satisfied,",
+        "es": "Pero a quien sea avaro, crea que puede prescindir [de Dios]",
+        "it": "a chi invece sarà stato avaro e avrà creduto di bastare a se stesso",
+        "ru": "А тому, кто был скуп и полагал, что ни в чем не нуждается,",
+        "tr": "Kim de cimrilik eder ve kendini hiçbir şeye ihtiyacı kalmamış görür.",
+        "de": "Was aber jemanden angeht, der geizt und sich für unbedürftig hält",
+        "pt": "Porém, àquele que mesquinhar e se considerar suficiente,",
+        "nl": "En wat betreft degene die gierig is en zich behoefteloos waant.",
+        "ur": "اور جس نے بخل کیا اور (اپنے خدا سے) بے نیازی برتی",
+        "bn": "আৰু কোনোবাই কৃপণালি কৰিলে আৰু নিজকে অমুখাপেক্ষী ভাবিলে,",
+        "fa": "و اما کسی‌که بخل ورزد و بی‌نیازی بجوید،"
+      }
+    },
+    {
+      "verse_number": 6067,
+      "verse_key": "92:9",
+      "arabic_text": "وَكَذَّبَ بِٱلْحُسْنَىٰ",
+      "phonetic_text": "Wakaththaba bilhusna",
+      "translations": {
+        "fr": "et refuse de croire en la meilleure des récompenses,",
+        "en": "who denies goodness––",
+        "es": "y desmienta los valores más sublimes,",
+        "it": "Pre-Eg. n. Di versetti. Il nome della sura deriva dal vers. In nome di Allah, il Compassionevole, il Misericordioso. e tacciato di menzogna la cosa più bella,",
+        "ru": "кто счел ложью наилучшее (свидетельство единобожия или Рай),",
+        "tr": "Ve en güzeli de yalanlarsa,",
+        "de": "und das Beste für Lüge erklärt,",
+        "pt": "E negar o melhor,",
+        "nl": "En die de goede beloning loochent.",
+        "ur": "اور بَھلائی کو جھُٹلایا، <sup foot_note=\"188506\">1</sup>",
+        "bn": "আৰু যি উত্তম তাক অস্বীকাৰ কৰিলে,",
+        "fa": "و [وعدۀ الله و سخنانِ] نیک را تکذیب کند،"
+      }
+    },
+    {
+      "verse_number": 6068,
+      "verse_key": "92:10",
+      "arabic_text": "فَسَنُيَسِّرُهُۥ لِلْعُسْرَىٰ",
+      "phonetic_text": "Fasanuyassiruhu lilAAusra",
+      "translations": {
+        "fr": "Nous le mettrons sur la voie la plus difficile.",
+        "en": "We shall smooth his way towards hardship",
+        "es": "no le impediré transitar por el camino de la adversidad.",
+        "it": "lo spingeremo nelle avversità <a class=f><sup foot_note=160648>1</sup></a> .",
+        "ru": "Мы облегчим путь к тягчайшему (к злу и наказанию).",
+        "tr": "Onu da en zor yola hazırlarız.",
+        "de": "so werden Wir ihm den Weg zum Schwereren leicht machen;",
+        "pt": "Facilitaremos o caminho da adversidade.",
+        "nl": "Wij zullen voor hem het moeilijke vergemakkelijken.",
+        "ur": "اس کو ہم سخت راستے کے لیے سہُولت دیں گے۔ <sup foot_note=\"188507\">1</sup>",
+        "bn": "আমি তাৰ বাবে কঠিন পথত চলা সুগম কৰি দিম।",
+        "fa": "به زودی انجام دشواری [= اعمال شر و پلید] را برایش آسان می‌سازیم [و انجام کار خیر را بر او سخت می‌گردانیم]؛"
+      }
+    },
+    {
+      "verse_number": 6069,
+      "verse_key": "92:11",
+      "arabic_text": "وَمَا يُغْنِى عَنْهُ مَالُهُۥٓ إِذَا تَرَدَّىٰٓ",
+      "phonetic_text": "Wama yughnee AAanhu maluhu ithataradda",
+      "translations": {
+        "fr": "Ses biens ne lui seront en rien utiles quand il sera livré (au Feu).",
+        "en": "and his wealth will not help him as he falls.",
+        "es": "¿De qué le servirán sus bienes materiales cuando muera?",
+        "it": "Quando precipiterà [nell’abisso], a nulla gli serviranno i suoi beni!",
+        "ru": "Не спасет его достояние, когда он падет (в Геенну или погибнет).",
+        "tr": "Çukura yuvarlandığı zaman malı onu kurtaramayacak.",
+        "de": "und was soll sein Besitz ihm nützen, wenn er sich ins Verderben stürzt?",
+        "pt": "E de nada lhe valerão os seus bens, quando ele cair no abismo.",
+        "nl": "En zijn bezit zal hem niet baten wanneer hij (in de Hel) valt.",
+        "ur": "اور اُس کا مال آخر اُس کے کس کام آئے گا جبکہ وہ ہلاک ہو جائے؟ <sup foot_note=\"188508\">1</sup>",
+        "bn": "আৰু তাৰ সম্পদ তাৰ কোনো কামত নাহিব, যেতিয়া সি ধ্বংস হ’ব।",
+        "fa": "و در هنگام [مرگ و] ورود به دوزخ، دارایی او سودی به حالش نخواهد داشت."
+      }
+    },
+    {
+      "verse_number": 6070,
+      "verse_key": "92:12",
+      "arabic_text": "إِنَّ عَلَيْنَا لَلْهُدَىٰ",
+      "phonetic_text": "Inna AAalayna lalhuda",
+      "translations": {
+        "fr": "À Nous incombe de guider (les hommes).",
+        "en": "Our part is to provide guidance––",
+        "es": "Evidencio la guía,",
+        "it": "In verità spetta a Noi la guida!",
+        "ru": "Воистину, Нам надлежит вести прямым путем.",
+        "tr": "Doğru yolu göstermek muhakkak bize aittir.",
+        "de": "Uns obliegt wahrlich die Rechtleitung.",
+        "pt": "Sabei que a Nós incumbe a orientação,",
+        "nl": "Voorwaar, aan Ons is zeker de Leiding.",
+        "ur": "بے شک راستہ بتانا ہمارے ذمّہ ہے، <sup foot_note=\"188509\">1</sup>",
+        "bn": "নিশ্চয় পথপ্ৰদৰ্শন কৰাটোৱে আমাৰ কৰ্তব্য।",
+        "fa": "مسلماً هدایت [بندگان] بر [عهدۀ] ماست."
+      }
+    },
+    {
+      "verse_number": 6071,
+      "verse_key": "92:13",
+      "arabic_text": "وَإِنَّ لَنَا لَلْـَٔاخِرَةَ وَٱلْأُولَىٰ",
+      "phonetic_text": "Wa-inna lana lal-akhirata wal-oola",
+      "translations": {
+        "fr": "À Nous appartiennent la vie dans l’autre monde et la vie en ce bas monde.",
+        "en": "this world and the next belong to Us––",
+        "es": "y a Mí me pertenecen esta vida y la otra.",
+        "it": "In verità a Noi appartengono l’altra vita e questa vita.",
+        "ru": "Нам же принадлежат жизнь Последняя и первая.",
+        "tr": "Kuşkusuz ahiret de dünya da bizimdir.",
+        "de": "Und Uns gehört wahrlich das Jenseits und das Diesseits.",
+        "pt": "Assim como também são Nossos o fim e o começo.",
+        "nl": "En voorwaar, Ons behoort zeker het laatste (het Hiernamaals) en het eerste (het wereldse leven).",
+        "ur": "اور درحقیقت آخرت اور دنیا، دونوں کے ہم ہی مالک ہیں۔ <sup foot_note=\"188510\">1</sup>",
+        "bn": "নিশ্চয় আমিয়েই পৰকাল আৰু ইহকালৰ মালিক।",
+        "fa": "و محققاً آخرت و دنیا [نیز] از آنِ ماست."
+      }
+    },
+    {
+      "verse_number": 6072,
+      "verse_key": "92:14",
+      "arabic_text": "فَأَنذَرْتُكُمْ نَارًا تَلَظَّىٰ",
+      "phonetic_text": "Faanthartukum naran talaththa",
+      "translations": {
+        "fr": "Je vous mets en garde contre un Feu dévorant,",
+        "en": "so I warn you about the raging Fire,",
+        "es": "Les he advertido sobre un fuego abrasador,",
+        "it": "Vi ho dunque messo in guardia da un fuoco fiammeggiante,",
+        "ru": "Я предостерег вас от пылающего Огня.",
+        "tr": "Ben sizi köpürdükçe köpüren bir ateşe karşı uyardım.",
+        "de": "So habe Ich euch gewarnt vor einem Feuer, das lodert,",
+        "pt": "Por isso, vos tenho admoestado com o fogo voraz,",
+        "nl": "Daarom waarschuw Ik jullie voor een laaiend vuur (de Hel).",
+        "ur": "پس میں نے تم کو خبردار کر دیا ہے بھڑکتی ہوئی آگ سے",
+        "bn": "এতেকে আমি তোমালোকক লেলিহান জুই সম্পৰ্কে সতৰ্ক কৰি দিছো।",
+        "fa": "من شما را از آتشی شعله‌ور بیم دادم"
+      }
+    },
+    {
+      "verse_number": 6073,
+      "verse_key": "92:15",
+      "arabic_text": "لَا يَصْلَىٰهَآ إِلَّا ٱلْأَشْقَى",
+      "phonetic_text": "La yaslaha illaal-ashqa",
+      "translations": {
+        "fr": "où ne brûlera que le réprouvé,",
+        "en": "in which none but the most wicked one will burn,",
+        "es": "en el que solo ingresarán los desventurados",
+        "it": "nel quale brucerà solo il malvagio,",
+        "ru": "Войдет в него только самый несчастный,",
+        "tr": "Ona ancak en azgın olan girer.",
+        "de": "dem nur der Unseligste ausgesetzt sein wird,",
+        "pt": "Em que não entrará senão o mais desventurado,",
+        "nl": "Daarin gaat slechts de ergste ellendeling binnen.",
+        "ur": "اُس میں نہیں جھلسے گا مگر وہ انتہائی بد بخت",
+        "bn": "তাত প্ৰৱেশ কৰিব কেৱল সেই ব্যক্তি যি হ’ব চৰম হতভাগ্য,",
+        "fa": "که جز بدبخت‌ترین [مردم] در آن نیفتد؛"
+      }
+    },
+    {
+      "verse_number": 6074,
+      "verse_key": "92:16",
+      "arabic_text": "ٱلَّذِى كَذَّبَ وَتَوَلَّىٰ",
+      "phonetic_text": "Allathee kaththaba watawalla",
+      "translations": {
+        "fr": "qui a osé démentir et s’est détourné avec dédain.",
+        "en": "who denied [the truth], and turned away.",
+        "es": "que desmientan y se aparten [del Mensaje].",
+        "it": "che avrà tacciato di menzogna e avrà girato le spalle;",
+        "ru": "который считает истину ложью и отворачивается.",
+        "tr": "Öyle azgın ki, yalanlamış ve sırtını dönmüştür.",
+        "de": "der (die Botschaft) für Lüge erklärt und sich abkehrt.",
+        "pt": "Que desmentir (a verdade) e desdenhar.",
+        "nl": "Die loochende en zich afwendde.",
+        "ur": "جس نے جھٹلایا اور منہ پھیرا",
+        "bn": "যিয়ে অস্বীকাৰ কৰিছে আৰু মুখ ঘূৰাই লৈছে।",
+        "fa": "[همان] کسی ‌که [آیات ما را] تکذیب کرد و روی گرداند"
+      }
+    },
+    {
+      "verse_number": 6075,
+      "verse_key": "92:17",
+      "arabic_text": "وَسَيُجَنَّبُهَا ٱلْأَتْقَى",
+      "phonetic_text": "Wasayujannabuha al-atqa",
+      "translations": {
+        "fr": "Il ne sera épargné qu’à l’homme pieux,",
+        "en": "The most pious one will be spared this––",
+        "es": "Pero el piadoso estará a salvo [de ese fuego],",
+        "it": "mentre ne sarà preservato il timorato,",
+        "ru": "Отдален от него будет самый богобоязненный,",
+        "tr": "En çok korunan ise ondan uzaklaştırılacaktır.",
+        "de": "Doch davon ferngehalten wird der Gottesfürchtigste werden,",
+        "pt": "Contudo, livrar-se-á dele o mais temente a Deus,",
+        "nl": "Maar degenen die (Allah) vrezen zal daar ver van gehouden worden.",
+        "ur": "اور اُس سے دور رکھا جائیگا وہ نہایت پرہیزگار",
+        "bn": "আৰু ইয়াৰ পৰা দুৰৈত ৰখা হ’ব পৰম মুত্তাক্বী ব্যক্তিক,",
+        "fa": "و به زودی پرهیزگارترین [مردم] از آن دور نگه داشته می‌شود."
+      }
+    },
+    {
+      "verse_number": 6076,
+      "verse_key": "92:18",
+      "arabic_text": "ٱلَّذِى يُؤْتِى مَالَهُۥ يَتَزَكَّىٰ",
+      "phonetic_text": "Allathee yu/tee malahuyatazakka",
+      "translations": {
+        "fr": "qui dépense de ses biens pour se purifier,",
+        "en": "who gives his wealth away as self-purification,",
+        "es": "aquel que da parte de su riqueza para purificarse [de la avaricia],",
+        "it": "che dà dei suoi beni per purificarsi,",
+        "ru": "который раздает свое имущество, очищаясь,",
+        "tr": "O ki, Allah yolunda malını verir, temizlenir.",
+        "de": "der seinen Besitz hingibt, um sich zu läutern,",
+        "pt": "Que aplica os seus bens, com o fito de purificá-los,",
+        "nl": "Degene die van zijn bezit geeft om zich te reinigen.",
+        "ur": "جو پاکیزہ ہونے کی خاطر اپنا مال دیتا ہے۔ <sup foot_note=\"188511\">1</sup>",
+        "bn": "যিয়ে আত্মশুদ্ধিৰ বাবে নিজৰ সম্পদ দান কৰে,",
+        "fa": "[همان] کسی‌که مال خود را [در راه الله] می‌بخشد تا [از گناه] پاک شود."
+      }
+    },
+    {
+      "verse_number": 6077,
+      "verse_key": "92:19",
+      "arabic_text": "وَمَا لِأَحَدٍ عِندَهُۥ مِن نِّعْمَةٍ تُجْزَىٰٓ",
+      "phonetic_text": "Wama li-ahadin AAindahu minniAAmatin tujza",
+      "translations": {
+        "fr": "et ne le fait point pour rendre à quelqu’un la dette d’un bienfait,",
+        "en": "not to return a favour to anyone",
+        "es": "no anhelando una retribución ni favor [de otra persona],",
+        "it": "che a nessuno avrà fatto un bene per ottenere ricompensa,",
+        "ru": "и всякую милость возмещает сполна",
+        "tr": "Onun yanında, başka bir kimse için karşılığı verilecek hiçbir nimet yoktur.",
+        "de": "und niemand hat bei ihm eine Gunst (anzurechnen), die vergolten werden müßte,",
+        "pt": "E não faz favores a ninguém com o fito de ser recompensado,",
+        "nl": "En niet om voor een gunst aan iemand beloond te worden.",
+        "ur": "اُس پر کسی کا کوئی احسان نہیں ہے جس کا بدلہ اُسے دینا ہو",
+        "bn": "আৰু তাৰ প্ৰতি কাৰো এনে অনুগ্ৰহ নাই যাৰ প্ৰতিদান দিব লাগিব,",
+        "fa": "و هیچ كس را به قصد پاداش‌یافتن نعمت نمى‌بخشد؛"
+      }
+    },
+    {
+      "verse_number": 6078,
+      "verse_key": "92:20",
+      "arabic_text": "إِلَّا ٱبْتِغَآءَ وَجْهِ رَبِّهِ ٱلْأَعْلَىٰ",
+      "phonetic_text": "Illa ibtighaa wajhi rabbihial-aAAla",
+      "translations": {
+        "fr": "mais pour être agréable à son Seigneur,<sup foot_note=195238>1</sup> l’Altissime.",
+        "en": "but for the sake of his Lord the Most High––",
+        "es": "sino anhelando el Rostro de su Señor, el Altísimo,",
+        "it": "ma solo per amore del suo Signore l’Altissimo.",
+        "ru": "только из стремления к Лику своего Всевышнего Господа.",
+        "tr": "O ancak yüce Rabbinin rızasını aramak için verir.",
+        "de": "sondern (er handelt) im Trachten nach dem Angesicht seines höchsten Herrn.",
+        "pt": "Senão com o intuito de ver o Rosto do seu Senhor, o Altíssimo;",
+        "nl": "Maar om het welbehagen van zijn Heer, de Verhevene, te zoeken.",
+        "ur": "وہ تو صرف اپنے ربِّ برتر کی رضا جوئی کے لیے یہ کام کرتا ہے۔ <sup foot_note=\"188512\">1</sup>",
+        "bn": "কেৱল তাৰ মহান প্ৰতিপালকৰ সন্তুষ্টিৰ প্ৰত্যাশাত;",
+        "fa": "مگر [برای] کسبِ رضا [و خشنودی] پروردگار برترش."
+      }
+    },
+    {
+      "verse_number": 6079,
+      "verse_key": "92:21",
+      "arabic_text": "وَلَسَوْفَ يَرْضَىٰ",
+      "phonetic_text": "Walasawfa yarda",
+      "translations": {
+        "fr": "Et il sera, assurément, satisfait.",
+        "en": "and he will be well pleased.",
+        "es": "y por eso quedará complacido.",
+        "it": "Per certo sarà soddisfatto <a class=f><sup foot_note=160649>1</sup></a> . <a class=f><sup foot_note=160650>2</sup></a> Vedi nota a lxxxviii,. <a class=f><sup foot_note=160651>3</sup></a> Alcuni tendono al bene, altri alla dannazione. <a class=f><sup foot_note=160652>4</sup></a> «la cosa più bella»: la fede e l’attestazione che «Non c’è altro dio all’infuori di Allah e Muhammad è l’Inviato di Allah»; oppure il premio che otterranno coloro che avranno temuto Allah. <a class=f><sup foot_note=160653>5</sup></a> Vedi nota a lxxxvii, <a class=f><sup foot_note=160654>6</sup></a> La via dell’iniquità e della perdizione. <a class=f><sup foot_note=160655>7</sup></a> In questa vita dalla certezza del bene compiuto, nell’altra dal premio che riceverà dal suo Signore.",
+        "ru": "И он непременно будет удовлетворен.",
+        "tr": "Elbette yakında kendisi de hoşnut olacaktır.",
+        "de": "Und er wird wahrlich zufrieden sein.",
+        "pt": "A logo alcançará (completa) satisfação.",
+        "nl": "Hij zal zeker tevreden zijn.",
+        "ur": "اور ضرور وہ (اُس سے) خوش ہوگا۔ <sup foot_note=\"188513\">1</sup>",
+        "bn": "আৰু অনতিপলমে তেওঁ সন্তুষ্টি লাভ কৰিব।",
+        "fa": "و به راستی که [با پاداشِ الله] راضی خواهد شد."
+      }
+    }
+  ]
+}

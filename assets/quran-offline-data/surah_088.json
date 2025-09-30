@@ -1,0 +1,526 @@
+{
+  "surah_number": 88,
+  "extracted_at": "2025-09-20T15:17:16.002Z",
+  "verses": [
+    {
+      "verse_number": 5968,
+      "verse_key": "88:1",
+      "arabic_text": " هَلْ أَتَىٰكَ حَدِيثُ ٱلْغَـٰشِيَةِ",
+      "phonetic_text": "Hal ataka hadeethu alghashiyat",
+      "translations": {
+        "fr": "T’est-il parvenu la nouvelle de (la Journée) envahissante ?",
+        "en": "Have you heard tell [Prophet] about the Overwhelming Event?",
+        "es": "¿Te ha llegado la historia sobre el día que todo lo alcanza?",
+        "it": "Ti è giunta notizia dell’Avvolgente <a class=f><sup foot_note=160600>1</sup></a> ?",
+        "ru": "Дошел ли до тебя рассказ о Покрывающем (Дне воскресения)?",
+        "tr": "O her şeyi kuşatacak olan Kıyamet'in haberi sana geldi mi?",
+        "de": "Ist zu dir die Geschichte der Überdeckenden gekommen?",
+        "pt": "Porventura, chegou-te a notícia do evento assolador?",
+        "nl": "Heeft het bericht over de Opstanding jou bereikt?",
+        "ur": "کیا تمہیں اُس چھا جانے والی آفت کی خبر پہنچی ہے؟ <sup foot_note=\"188453\">1</sup>",
+        "bn": "তোমাৰ ওচৰত আচ্ছন্নকাৰী (ক্বিয়ামতৰ) সংবাদ আহিছেনে?",
+        "fa": "[ای پیامبر،] آیا خبرِ قیامت هولناکِ فراگیر به تو رسیده است؟"
+      }
+    },
+    {
+      "verse_number": 5969,
+      "verse_key": "88:2",
+      "arabic_text": "وُجُوهٌ يَوْمَئِذٍ خَـٰشِعَةٌ",
+      "phonetic_text": "Wujoohun yawma-ithin khashiAAa",
+      "translations": {
+        "fr": "Des visages, ce jour-là, seront  empreints d’humiliation,",
+        "en": "On that Day, there will be downcast faces,",
+        "es": "Ese día los rostros [de los condenados al Fuego] se verán humillados,",
+        "it": "Ci saranno in quel Giorno volti umiliati,",
+        "ru": "Одни лица в тот день будут унижены,",
+        "tr": "Yüzler var ki, o gün eğilmiş, zillete düşmüştür.",
+        "de": "(Die einen) Gesichter werden an jenem Tag demütig sein,",
+        "pt": "Haverá rostos humildes, nesse dia,",
+        "nl": "Er zijn gezichten die op die Dag angstig zijn.",
+        "ur": "کچھ چہرے <sup foot_note=\"188454\">1</sup> اُس روز خوف زدہ ہوں گے",
+        "bn": "সেইদিনা কিছুমান মুখমণ্ডল হ’ব অৱনত,",
+        "fa": "در آن روز، چهره‌هایی خوار و ذلیل خواهند بود."
+      }
+    },
+    {
+      "verse_number": 5970,
+      "verse_key": "88:3",
+      "arabic_text": "عَامِلَةٌ نَّاصِبَةٌ",
+      "phonetic_text": "AAamilatun nasiba",
+      "translations": {
+        "fr": "peinant, épuisés,",
+        "en": "toiling and weary,",
+        "es": "abatidos y asfixiados.",
+        "it": "di spossati e afflitti,",
+        "ru": "изнурены и утомлены.",
+        "tr": "Çalışmış, yorulmuştur.",
+        "de": "sich abarbeitend und von Mühsal erfüllt,",
+        "pt": "Fatigados, abatidos,",
+        "nl": "Werkend en zwoegend.",
+        "ur": "سخت مشقت کر رہے ہونگے",
+        "bn": "কৰ্মক্লান্ত, পৰিশ্ৰান্ত,",
+        "fa": "[در دنیا] پیوسته تلاش کرده [و] خسته شده [و چون در راه حق نبوده، نتیجه‌ای ندیده‌اند]."
+      }
+    },
+    {
+      "verse_number": 5971,
+      "verse_key": "88:4",
+      "arabic_text": "تَصْلَىٰ نَارًا حَامِيَةً",
+      "phonetic_text": "Tasla naran hamiya",
+      "translations": {
+        "fr": "qui brûleront dans un Feu très ardent,",
+        "en": "as they enter the blazing Fire",
+        "es": "Serán llevados a un fuego intenso",
+        "it": "che bruceranno nel Fuoco ardente,",
+        "ru": "Они войдут в Огонь жаркий.",
+        "tr": "Kızışmış bir ateşe girer.",
+        "de": "einem sehr heißen Feuer ausgesetzt,",
+        "pt": "Chamuscados, pelo fogo abrasador!",
+        "nl": "Die de brandende Hel binnengaan.",
+        "ur": "تھکے جاتے ہونگے، شدید آگ میں جھلس رہے ہونگے",
+        "bn": "সিহঁত প্ৰৱেশ কৰিব জ্বলন্ত জুইত;",
+        "fa": "در آتش سوزان درمی‌آیند،"
+      }
+    },
+    {
+      "verse_number": 5972,
+      "verse_key": "88:5",
+      "arabic_text": "تُسْقَىٰ مِنْ عَيْنٍ ءَانِيَةٍ",
+      "phonetic_text": "Tusqa min AAaynin aniya",
+      "translations": {
+        "fr": "et boiront à une source d’eau bouillante.",
+        "en": "and are forced to drink from a boiling spring,",
+        "es": "donde les será dado a beber de una fuente de agua hirviente.",
+        "it": "e saranno abbeverati da una fonte bollente.",
+        "ru": "Их будут поить из источника кипящего",
+        "tr": "Onlara kızgın bir kaynaktan su verilir.",
+        "de": "und aus einer siedenden Quelle zu trinken bekommen.",
+        "pt": "Ser-lhes-á dado a beber de um manancial fervente;",
+        "nl": "Hen wordt te drinken gegeven uit een kokende bron.",
+        "ur": "کھولتے ہوئے چشمے کا پانی انہیں پینے کو دیا جائے گا",
+        "bn": "উত্তপ্ত উতলা নিজৰাৰ পানী পান কৰিবলৈ দিয়া হ’ব;",
+        "fa": "از چشمۀ بسیار داغ به آنها نوشانیده می‌شود."
+      }
+    },
+    {
+      "verse_number": 5973,
+      "verse_key": "88:6",
+      "arabic_text": "لَّيْسَ لَهُمْ طَعَامٌ إِلَّا مِن ضَرِيعٍ",
+      "phonetic_text": "Laysa lahum taAAamun illamin dareeAA",
+      "translations": {
+        "fr": "Ils n’auront pour toute nourriture que du Dhari‘,<sup foot_note=195232>1</sup>",
+        "en": "with no food for them except bitter dry thorns",
+        "es": "No tendrán otra comida más que espinas",
+        "it": "Per essi non ci sarà altro cibo che il darì‘ <a class=f><sup foot_note=160601>1</sup></a> ,",
+        "ru": "и кормить только ядовитыми колючками,",
+        "tr": "Onlar için kuru bir dikenden başka yiyecek de yoktur.",
+        "de": "Es wird für sie keine Speise geben außer aus trockenen Dornen,",
+        "pt": "Não terão, por alimento, nada além de frutos amargos e espinhosos,",
+        "nl": "Er is voor hen geen ander voedsel dan van doornen.",
+        "ur": "خاردار سُوکھی گھاس کے سوا کوئی کھانا اُن کے لیے نہ ہوگا، <sup foot_note=\"188455\">1</sup>",
+        "bn": "সিহঁতৰ বাবে কাঁইটবিশিষ্ট ঘাঁহৰ বাহিৰে আন কোনো খাদ্য নাথাকিব,",
+        "fa": "غذایی جز خارِ خشک و تلخ ندارند"
+      }
+    },
+    {
+      "verse_number": 5974,
+      "verse_key": "88:7",
+      "arabic_text": "لَّا يُسْمِنُ وَلَا يُغْنِى مِن جُوعٍ",
+      "phonetic_text": "La yusminu wala yughnee minjooAA",
+      "translations": {
+        "fr": "qui n’engraissera point, ni ne calmera la faim.",
+        "en": "that neither nourish nor satisfy hunger.",
+        "es": "que no alimentan ni sacian.",
+        "it": "che non nutre e non placa la fame.",
+        "ru": "от которых не поправляются и которые не утоляют голода.",
+        "tr": "O da ne besler, ne de açlığı giderir.",
+        "de": "die weder fett machen noch gegen den Hunger nützen.",
+        "pt": "Que não os alimentará, nem lhes saciarão a fome!",
+        "nl": "Dat niet dik maakt en de honger niet stilt.",
+        "ur": "جو نہ موٹا کرے نہ بھوک مٹائے",
+        "bn": "ই সিহঁতৰ পুষ্টিও সাধন নকৰিব আৰু ক্ষুধাও নিবৃত্ত নকৰিব।",
+        "fa": "که نه [آنان را] فربه کند و نه گرسنگی را دفع می‌نماید."
+      }
+    },
+    {
+      "verse_number": 5975,
+      "verse_key": "88:8",
+      "arabic_text": "وُجُوهٌ يَوْمَئِذٍ نَّاعِمَةٌ",
+      "phonetic_text": "Wujoohun yawma-ithin naAAima",
+      "translations": {
+        "fr": "Et il y aura, ce jour-là, des visages radieux,",
+        "en": "On that Day there will also be faces radiant with bliss,",
+        "es": "Pero ese día los rostros [de los bienaventurados] estarán radiantes de felicidad.",
+        "it": "Ci saranno in quel Giorno volti lieti,",
+        "ru": "Другие же лица в тот день будут радостны.",
+        "tr": "Yüzler de var ki, o gün nimetle mutludur.",
+        "de": "(Die anderen) Gesichter werden an jenem Tag wonnig sein,",
+        "pt": "(Outros) rostos, nesse dia, estarão calmos,",
+        "nl": "Er zijn gezichten die op die Dag verheugd zijn.",
+        "ur": "کچھ چہرے اُس روز با رونق ہوں گے",
+        "bn": "সেইদিনা কিছুমান মুখমণ্ডল হ’ব আনন্দোজ্জ্বল,",
+        "fa": "در آن روز، چهره‌هایی شاداب و تازه هستند"
+      }
+    },
+    {
+      "verse_number": 5976,
+      "verse_key": "88:9",
+      "arabic_text": "لِّسَعْيِهَا رَاضِيَةٌ",
+      "phonetic_text": "LisaAAyiha radiya",
+      "translations": {
+        "fr": "satisfaits de ce qu’ils auront accompli,",
+        "en": "well pleased with their labour,",
+        "es": "Estarán complacidos de sus obras.",
+        "it": "soddisfatti delle loro opere,",
+        "ru": "Они будут довольны своими стараниями",
+        "tr": "Yaptığından hoşnuttur.",
+        "de": "mit ihrem Bemühen zufrieden",
+        "pt": "Contentes, por seus (passados) esforços;",
+        "nl": "Over hun streven voldaan.",
+        "ur": "اپنی کار گزاری پر خوش ہوں گے، <sup foot_note=\"188456\">1</sup>",
+        "bn": "নিজ কৰ্মৰ সাফল্যত পৰিতৃপ্ত,",
+        "fa": "و از سعی [و تلاش] خود راضیند؛"
+      }
+    },
+    {
+      "verse_number": 5977,
+      "verse_key": "88:10",
+      "arabic_text": "فِى جَنَّةٍ عَالِيَةٍ",
+      "phonetic_text": "Fee jannatin AAaliya",
+      "translations": {
+        "fr": "dans des jardins surplombants,",
+        "en": "in a lofty garden,",
+        "es": "Morarán en un jardín sublime,",
+        "it": "in un Giardino elevato,",
+        "ru": "в Вышних садах.",
+        "tr": "Yüksek bir cennettedir.",
+        "de": "und in einem hohen Garten,",
+        "pt": "Estarão em um jardim suspenso,",
+        "nl": "In een hooggelegen Paradijs.",
+        "ur": "عالی مقام جنت میں ہوں گے",
+        "bn": "সুউচ্চ জান্নাতত,",
+        "fa": "در بهشت برین هستند."
+      }
+    },
+    {
+      "verse_number": 5978,
+      "verse_key": "88:11",
+      "arabic_text": "لَّا تَسْمَعُ فِيهَا لَـٰغِيَةً",
+      "phonetic_text": "La tasmaAAu feeha laghiya",
+      "translations": {
+        "fr": "où il ne sera entendu aucune parole futile.",
+        "en": "where they will hear no idle talk,",
+        "es": "en el que no oirán palabras vanas.",
+        "it": "in cui non s’odono discorsi vani.",
+        "ru": "Они не услышат там словоблудия.",
+        "tr": "Orada boş bir söz işitmez.",
+        "de": "worin sie keine unbedachte Rede hören.",
+        "pt": "Onde não ouvirão futilidade alguma;",
+        "nl": "Jij hoort daarin geen zinloos gepraat.",
+        "ur": "کوئی بےہودہ بات وہاں نہ سُنیں گے، <sup foot_note=\"188457\">1</sup>",
+        "bn": "তাত সিহঁতে কোনো অনৰ্থক কথা শুনিবলৈ নাপাব,",
+        "fa": "در آنجا هیچ سخن بیهوده‌ای نمی‌شنوند."
+      }
+    },
+    {
+      "verse_number": 5979,
+      "verse_key": "88:12",
+      "arabic_text": "فِيهَا عَيْنٌ جَارِيَةٌ",
+      "phonetic_text": "Feeha AAaynun jariya",
+      "translations": {
+        "fr": "Il s’y trouvera une source qui coule,",
+        "en": "with a flowing spring,",
+        "es": "En él habrá manantiales,",
+        "it": "Colà vi è una fonte che scorre,",
+        "ru": "Там есть источник текущий.",
+        "tr": "Orada akan bir kaynak,",
+        "de": "Darin gibt es eine fließende Quelle,",
+        "pt": "Nele haverá um manancial fluente,",
+        "nl": "Daarin is een stromende bron.",
+        "ur": "اُس میں چشمے رواں ہونگے",
+        "bn": "তাত থাকিব প্ৰবাহমান নিজৰা,",
+        "fa": "در آن، چشمه[های آب] روان است."
+      }
+    },
+    {
+      "verse_number": 5980,
+      "verse_key": "88:13",
+      "arabic_text": "فِيهَا سُرُرٌ مَّرْفُوعَةٌ",
+      "phonetic_text": "Feeha sururun marfooAAa",
+      "translations": {
+        "fr": "des lits y seront élevés,",
+        "en": "raised couches,",
+        "es": "lechos elevados,",
+        "it": "colà alti divani,",
+        "ru": "Там воздвигнуты ложа,",
+        "tr": "Yükseltilmiş divanlar,",
+        "de": "darin gibt es erhöhte Liegen",
+        "pt": "Nele haverá leitos elevados,",
+        "nl": "Daarin zijn verhoogde rustbanken.",
+        "ur": "اُس کے اندر اونچی مسندیں ہوں گی",
+        "bn": "তাত থাকিব উন্নত শয্যাসমূহ,",
+        "fa": "تخت‌های [زیبای] بلند [پایه] در آن است."
+      }
+    },
+    {
+      "verse_number": 5981,
+      "verse_key": "88:14",
+      "arabic_text": "وَأَكْوَابٌ مَّوْضُوعَةٌ",
+      "phonetic_text": "Waakwabun mawdooAAa",
+      "translations": {
+        "fr": "des coupes posées,",
+        "en": "goblets placed before them,",
+        "es": "copas al alcance de su mano,",
+        "it": "e coppe poste [a portata di mano]",
+        "ru": "расставлены чаши,",
+        "tr": "Konulmuş kadehler,",
+        "de": "und hingestellte Trinkschalen",
+        "pt": "E taças, ao alcance da mão.",
+        "nl": "En gereedgezette bekers.",
+        "ur": "ساغر رکھے ہوئے ہوں گے، <sup foot_note=\"188458\">1</sup>",
+        "bn": "আৰু প্ৰস্তুত থাকিব পানপাত্ৰসমূহ,",
+        "fa": "و جام‌هایی [که در کنار چشمه‌ها] نهاده شده."
+      }
+    },
+    {
+      "verse_number": 5982,
+      "verse_key": "88:15",
+      "arabic_text": "وَنَمَارِقُ مَصْفُوفَةٌ",
+      "phonetic_text": "Wanamariqu masfoofa",
+      "translations": {
+        "fr": "des coussins bien disposés,",
+        "en": "cushions set in rows,",
+        "es": "cojines alineados",
+        "it": "e cuscini assestati",
+        "ru": "разложены подушки,",
+        "tr": "Dizilmiş koltuklar, yastıklar,",
+        "de": "und aufgereihte Kissen",
+        "pt": "E almofadas enfileiradas,",
+        "nl": "En in rijen gezetten kussens.",
+        "ur": "گاؤ تکیوں کی قطاریں لگی ہوں گی",
+        "bn": "আৰু শাৰী শাৰীকৈ ৰখা গাৰুসমূহ,",
+        "fa": "و بالشت‌های [منظم] چیده‌شده،"
+      }
+    },
+    {
+      "verse_number": 5983,
+      "verse_key": "88:16",
+      "arabic_text": "وَزَرَابِىُّ مَبْثُوثَةٌ",
+      "phonetic_text": "Wazarabiyyu mabthootha",
+      "translations": {
+        "fr": "et des tapis étendus.",
+        "en": "and carpets spread.",
+        "es": "y alfombras extendidas.",
+        "it": "e tappeti distesi.",
+        "ru": "и разостланы ковры.",
+        "tr": "Serilmiş halılar vardır.",
+        "de": "und ausgebreitete Teppiche.",
+        "pt": "E tapetes de seda estendidos.",
+        "nl": "En uitgerolde tapijten.",
+        "ur": "اور نفیس فرش بچھے ہوئے ہوں گے",
+        "bn": "আৰু বিস্তৃত পাৰি থোৱা দলিচাসমূহ,",
+        "fa": "و [نیز] فرش‌های گرانبها گسترده شده است."
+      }
+    },
+    {
+      "verse_number": 5984,
+      "verse_key": "88:17",
+      "arabic_text": "أَفَلَا يَنظُرُونَ إِلَى ٱلْإِبِلِ كَيْفَ خُلِقَتْ",
+      "phonetic_text": "Afala yanthuroona ilaal-ibili kayfa khuliqat",
+      "translations": {
+        "fr": "Ne voient-ils donc pas comment les chameaux ont été créés ?",
+        "en": "Do the disbelievers not see how rain clouds are formed <sup foot_note=77646>1</sup>",
+        "es": "¿Acaso no reflexionan [los que niegan la verdad] en la maravillosa creación del camello?",
+        "it": "Non riflettono <a class=f><sup foot_note=160602>1</sup></a> sui cammelli e su come sono stati creati,",
+        "ru": "Неужели они не видят, как созданы верблюды,",
+        "tr": "Bakmıyorlar mı o develere, nasıl yaratılmış?",
+        "de": "Schauen sie denn nicht zu den Kamelen, wie sie erschaffen worden sind,",
+        "pt": "Porventura, não reparam nos camelídeos, como são criados?",
+        "nl": "Kijken zij dan niet naar hoe de kamelen zijn geschapen?",
+        "ur": "(یہ لوگ نہیں مانتے) تو کیا یہ اونٹوں کو نہیں دیکھتے کہ کیسے بنائے گئے؟",
+        "bn": "ইহঁতে উটৰ পিনে দৃষ্টিপাত নকৰে নেকি, কেনেকৈ তাক সৃষ্টি কৰা হৈছে?",
+        "fa": "آیا [کافران] به شتر نمی‌نگرند که چگونه آفریده شده است؟"
+      }
+    },
+    {
+      "verse_number": 5985,
+      "verse_key": "88:18",
+      "arabic_text": "وَإِلَى ٱلسَّمَآءِ كَيْفَ رُفِعَتْ",
+      "phonetic_text": "Wa-ila assama-i kayfarufiAAat",
+      "translations": {
+        "fr": "Et comment le ciel a été élevé ?",
+        "en": "how the heavens are lifted,",
+        "es": "En el cielo, cómo ha sido elevado.",
+        "it": "sul cielo e come è stato elevato,",
+        "ru": "как вознесено небо,",
+        "tr": "Göğe bakmıyorlar mı, nasıl yükseltilmiş?",
+        "de": "und zum Himmel, wie er emporgehoben worden ist,",
+        "pt": "E no céu, como foi elevado?",
+        "nl": "En naar hoe de hemel opgeheven is?",
+        "ur": "آسمان کو نہیں دیکھتے کہ کیسے اٹھایا گیا؟",
+        "bn": "আৰু আকাশৰ ফালে, কেনেকৈ তাক উৰ্দ্ধত স্থাপন কৰা হৈছে?",
+        "fa": "و به آسمان [نمی‌نگرند] که چگونه برافراشته شده است؟"
+      }
+    },
+    {
+      "verse_number": 5986,
+      "verse_key": "88:19",
+      "arabic_text": "وَإِلَى ٱلْجِبَالِ كَيْفَ نُصِبَتْ",
+      "phonetic_text": "Wa-ila aljibali kayfa nusibat",
+      "translations": {
+        "fr": "Et comment les montagnes ont été érigées ?",
+        "en": "how the mountains are raised high,",
+        "es": "En las montañas, cómo han sido afirmadas.",
+        "it": "sulle montagne e come sono state infisse <a class=f><sup foot_note=160603>1</sup></a> ,",
+        "ru": "как водружены горы,",
+        "tr": "Bakmıyorlar mı dağlara, nasıl dikilmiş?",
+        "de": "und zu den Bergen, wie sie aufgerichtet worden sind,",
+        "pt": "E nas montanhas, como foram fixadas?",
+        "nl": "En naar hoe de bergen stevig gegrondvest zijn?",
+        "ur": "پہاڑوں کو نہیں دیکھتے کہ کیسے جمائے گئے؟",
+        "bn": "আৰু পৰ্বতসমূহৰ ফালে, সেইবোৰ কেনেকৈ প্ৰতিষ্ঠিত কৰা হৈছে?",
+        "fa": "و به کوه‌ها [نمی‌نگرند] که چگونه [محکم بر زمین] نصب شده است؟"
+      }
+    },
+    {
+      "verse_number": 5987,
+      "verse_key": "88:20",
+      "arabic_text": "وَإِلَى ٱلْأَرْضِ كَيْفَ سُطِحَتْ",
+      "phonetic_text": "Wa-ila al-ardi kayfa sutihat",
+      "translations": {
+        "fr": "Et comment la terre a été aplanie ?",
+        "en": "how the earth is spread out?",
+        "es": "Y en la Tierra, cómo ha sido extendida.",
+        "it": "sulla terra e come è stata distesa?",
+        "ru": "как распростерта земля?",
+        "tr": "Yere bakmıyorlar mı, nasıl yayılmış?",
+        "de": "und zur Erde, wie sie flach gemacht worden ist?",
+        "pt": "E na terra, como foi dilatada?",
+        "nl": "En naar hoe de aarde uitgespreid is?",
+        "ur": "اور زمین کو نہیں دیکھتے کہ کیسے بچھائی گئی؟ <sup foot_note=\"188459\">1</sup>",
+        "bn": "আৰু পৃথিৱীখনৰ ফালে, কিদৰে তাক বিস্তৃত কৰা হৈছে?",
+        "fa": "و به زمین [نمی‌نگرند] که چگونه گسترده شده است؟"
+      }
+    },
+    {
+      "verse_number": 5988,
+      "verse_key": "88:21",
+      "arabic_text": "فَذَكِّرْ إِنَّمَآ أَنتَ مُذَكِّرٌ",
+      "phonetic_text": "Fathakkir innama anta muthakkir",
+      "translations": {
+        "fr": "Rappelle donc ! Car tu es là pour rappeler !",
+        "en": "So [Prophet] warn them: your only task is to give warning,",
+        "es": "Exhorta a la gente porque esa es tu misión.",
+        "it": "Ammonisci dunque, ché tu altro non sei che un ammonitore",
+        "ru": "Наставляй же, ведь ты - наставник,",
+        "tr": "Haydi öğüt ver; sen şimdi sırf bir öğütçüsün.",
+        "de": "So ermahne; du bist nur ein Ermahner.",
+        "pt": "Admoesta, pois, porque és tão-somente um admoestador!",
+        "nl": "Waarschuw daarom: voorwaar, jij (O Mohammed) bent slechts een waarschuwer.",
+        "ur": "اچھا تو (اے نبیؐ) نصیحت کیے جاؤ، تم بس نصیحت ہی کرنے والے ہو",
+        "bn": "এতেকে তুমি উপদেশ দিয়া, তুমিতো কেৱল এজন উপদেশদাতা,",
+        "fa": "[ای پیامبر،] پند بده، که تو فقط پنددهنده‌ای."
+      }
+    },
+    {
+      "verse_number": 5989,
+      "verse_key": "88:22",
+      "arabic_text": "لَّسْتَ عَلَيْهِم بِمُصَيْطِرٍ",
+      "phonetic_text": "Lasta AAalayhim bimusaytir",
+      "translations": {
+        "fr": "Tu n’as pas à les contraindre,",
+        "en": "you are not there to control them.",
+        "es": "No puedes obligarlos a creer.",
+        "it": "e non hai autorità alcuna su di loro <a class=f><sup foot_note=160604>1</sup></a> .",
+        "ru": "и ты не властен над ними.",
+        "tr": "Onların üzerinde bir zorba değilsin.",
+        "de": "Du übst nicht die Oberherrschaft über sie aus.",
+        "pt": "Não és, de maneira alguma, guardião deles.",
+        "nl": "Jij bent over hen geen heerser.",
+        "ur": "کچھ ان پر جبر کرنے والے نہیں ہو۔ <sup foot_note=\"188460\">1</sup>",
+        "bn": "তুমি সিহঁতৰ ওপৰত শক্তি প্ৰয়োগকাৰী নহয়।",
+        "fa": "تو بر آنان مسلط [و چیره] نیستی [که آنان را بر ایمان‌آوردن وادار کنی]."
+      }
+    },
+    {
+      "verse_number": 5990,
+      "verse_key": "88:23",
+      "arabic_text": "إِلَّا مَن تَوَلَّىٰ وَكَفَرَ",
+      "phonetic_text": "Illa man tawalla wakafar",
+      "translations": {
+        "fr": "mais celui-là seul qui se détourne et mécroit,",
+        "en": "As for those who turn away and disbelieve,",
+        "es": "A quien dé la espalda y rechace la verdad",
+        "it": "Quanto a chi volge le spalle e non crede,",
+        "ru": "А тех, кто отвернется и не уверует,",
+        "tr": "Ancak kim yüz çevirir ve kâfir olursa,",
+        "de": "Wer sich aber abkehrt und ungläubig ist,",
+        "pt": "E, àquele que te for adverso e incrédulo,",
+        "nl": "Maar degene die zich afwendt en ongelovig is.",
+        "ur": "البتہ جو شخص منہ موڑے گا اور انکار کرے گا",
+        "bn": "কিন্তু কোনোবাই মুখ ঘুৰাই ল’লে অথবা কুফৰী কৰিলে,",
+        "fa": "اما کسی‌ که روی بگردانَد و کافر شود"
+      }
+    },
+    {
+      "verse_number": 5991,
+      "verse_key": "88:24",
+      "arabic_text": "فَيُعَذِّبُهُ ٱللَّهُ ٱلْعَذَابَ ٱلْأَكْبَرَ",
+      "phonetic_text": "FayuAAaththibuhu Allahu alAAathabaal-akbar",
+      "translations": {
+        "fr": "Allah lui infligera le plus grand supplice.",
+        "en": "God will inflict the greatest torment upon them.",
+        "es": "Dios lo someterá al peor de los castigos.",
+        "it": "Allah lo castigherà con il castigo più grande.",
+        "ru": "Аллах подвергнет величайшим мучениям.",
+        "tr": "Allah ona en büyük azap ile azap edecek.",
+        "de": "den straft dann Allah mit der größten Strafe.",
+        "pt": "Deus infligirá o maior castigo.",
+        "nl": "Allah straft hem met de grootste bestraffing.",
+        "ur": "تو اللہ اس کو بھاری سزا دے گا",
+        "bn": "তেন্তে আল্লাহে তাক মহাশাস্তি প্ৰদান কৰিব।",
+        "fa": "الله او را با بزرگ‌ترین عذاب، مجازات می‌کند."
+      }
+    },
+    {
+      "verse_number": 5992,
+      "verse_key": "88:25",
+      "arabic_text": "إِنَّ إِلَيْنَآ إِيَابَهُمْ",
+      "phonetic_text": "Inna ilayna iyabahum",
+      "translations": {
+        "fr": "C’est vers Nous, certes, que sera leur retour.",
+        "en": "It is to Us they will return,",
+        "es": "Porque todos comparecerán ante Mí,",
+        "it": "In verità a Noi ritorneranno,",
+        "ru": "К Нам они вернутся,",
+        "tr": "Kuşkusuz onlar döne dolaşa bize gelecekler.",
+        "de": "Gewiß, zu Uns ist ihre Rückkehr",
+        "pt": "Em verdade, o seu retorno será para Nós;",
+        "nl": "Voorwaar, tot Ons is hun terugkeer.",
+        "ur": "اِن لوگوں کو پلٹنا ہماری طرف ہی ہے",
+        "bn": "নিশ্চয় আমাৰ ওচৰতেই সিহঁতৰ প্ৰত্যাৱৰ্তন।",
+        "fa": "همانا بازگشت آنها به سوی ماست."
+      }
+    },
+    {
+      "verse_number": 5993,
+      "verse_key": "88:26",
+      "arabic_text": "ثُمَّ إِنَّ عَلَيْنَا حِسَابَهُم",
+      "phonetic_text": "Thumma inna AAalayna hisabahum",
+      "translations": {
+        "fr": "Puis c’est à Nous qu’il incombera de leur demander des comptes.",
+        "en": "and then it is for Us to call them to account.",
+        "es": "y seré Yo Quien los juzgue.",
+        "it": "e allora spetterà a Noi chieder loro conto [delle loro azioni]. <a class=f><sup foot_note=160605>1</sup></a> «l’Avvolgente»:senza alcun dubbio è l’ora del Giudizio. Il termine «al-ghâshiya» che abbiamo tradotto con «avvolgente» significa coprire, avvolgere, attaccare il nemico da ogni lato. <a class=f><sup foot_note=160606>2</sup></a> «darì‘»: pianta spinosa e amarissima tipica dei deserti. <a class=f><sup foot_note=160607>3</sup></a> «Non considerano [quelli che non credono]…» <a class=f><sup foot_note=160608>4</sup></a> «infisse le montagne»: vedi nota a xvi,<a class=f><sup foot_note=160609>5</sup></a> «non hai autorità alcuna su di loro» nel senso di: «non hai nessun potere per costringere chi non crede a farlo». Per quanto riguarda il concetto di autorità letteralmente inteso, si consideri che la sura è meccana (pre-Egira) e che Muhammad (pace e benedizioni su di lui) a cui si rivolge il Sacro testo, non era ancora a capo di una comunità organizzata di credenti.",
+        "ru": "и затем Мы потребуем у них отчета.",
+        "tr": "Sonra da bize hesap verecekler.",
+        "de": "und gewiß, hierauf obliegt Uns ihre Abrechnung.",
+        "pt": "E o seu cômputo Nos concerne.",
+        "nl": "En voorwaar: aan Ons is hun afrekening.",
+        "ur": "پھر اِن کا حساب لینا ہمارے ہی ذمہ ہے",
+        "bn": "আৰু সিহঁতৰ হিচাপ-নিকাচ আমাৰেই দায়িত্ব।",
+        "fa": "سپس بی‌گمان، حسابشان [نیز] با ماست."
+      }
+    }
+  ]
+}

@@ -22,6 +22,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons } from "@expo/vector-icons";
 import { useUserStats } from "../hooks/useUserStats";
 import { useUpdateUserStats } from "../hooks/useUpdateUserStats";
+import { getCurrentUserData } from "../utils/userAuth";
 import ThemedImageBackground from "../components/ThemedImageBackground";
 import { useThemeColors, useCurrentTheme } from "../hooks/useThemeAssets";
 import { useTranslation } from "react-i18next";
@@ -54,10 +55,19 @@ const PrayerStatsPremiumScreen: React.FC = () => {
   const [showGoalModal, setShowGoalModal] = useState(false);
   const [tempGoal, setTempGoal] = useState("35");
   const [timeframe, setTimeframe] = useState<7 | 30 | 90>(7);
+  const [userDisplayName, setUserDisplayName] = useState<string>("");
   const insightsScrollRef = useRef<ScrollView | null>(null);
 
-  const { stats, loading, error, premiumRequired, refresh, lastUpdated } =
-    useUserStats();
+  const {
+    stats,
+    loading,
+    error,
+    premiumRequired,
+    refresh,
+    lastUpdated,
+    isOffline,
+    pendingActionsCount,
+  } = useUserStats();
 
   const {
     recordPrayer,
@@ -65,12 +75,48 @@ const PrayerStatsPremiumScreen: React.FC = () => {
     recordQuranRead,
     recordHadithRead,
     resetAllStats,
+    syncPendingActions,
   } = useUpdateUserStats();
+
+  // 🌐 NOUVEAU : Charger le nom de l'utilisateur
+  useEffect(() => {
+    const loadUserName = async () => {
+      try {
+        const userData = await getCurrentUserData();
+        if (userData) {
+          setUserDisplayName(userData.user_first_name || userData.email || "");
+        }
+      } catch (error) {
+        console.error("Erreur chargement nom utilisateur:", error);
+      }
+    };
+    loadUserName();
+  }, []);
 
   const onRefresh = async () => {
     setRefreshing(true);
     await refresh();
     setRefreshing(false);
+  };
+
+  // 🌐 NOUVEAU : Fonction pour synchroniser les actions en attente
+  const handleSyncActions = async () => {
+    try {
+      setRefreshing(true);
+      const result = await syncPendingActions();
+
+      if (result.success) {
+        console.log(`✅ ${result.synced_actions} actions synchronisées`);
+        // Rafraîchir les stats après synchronisation
+        await refresh();
+      } else {
+        console.error("❌ Erreur synchronisation:", result.error);
+      }
+    } catch (error) {
+      console.error("❌ Erreur synchronisation:", error);
+    } finally {
+      setRefreshing(false);
+    }
   };
 
   const openInsightsModal = () => {
@@ -114,22 +160,24 @@ const PrayerStatsPremiumScreen: React.FC = () => {
 
   // 🎯 Nouvelles fonctionnalités utilitaires
   const generateInsights = () => {
-    if (!stats) return [];
+    if (!statsToUse) return [];
 
     const insights = [];
 
     // Analyse de consistance
-    if (stats.stats.success_rate >= 80) {
+    if (statsToUse.stats.success_rate >= 80) {
       insights.push({
         type: "success",
         icon: "trending-up",
         title: t("excellent_consistency") || "Excellente consistance !",
         description:
-          t("success_rate_remarkable", { rate: stats.stats.success_rate }) ||
-          `Votre taux de réussite de ${stats.stats.success_rate}% est remarquable.`,
+          t("success_rate_remarkable", {
+            rate: statsToUse.stats.success_rate,
+          }) ||
+          `Votre taux de réussite de ${statsToUse.stats.success_rate}% est remarquable.`,
         color: colors.success,
       });
-    } else if (stats.stats.success_rate < 30) {
+    } else if (statsToUse.stats.success_rate < 30) {
       insights.push({
         type: "improvement",
         icon: "bulb",
@@ -142,13 +190,13 @@ const PrayerStatsPremiumScreen: React.FC = () => {
     }
 
     // Analyse des séries
-    if (stats.streaks.current_streak >= 3) {
+    if (statsToUse.streaks.current_streak >= 3) {
       insights.push({
         type: "streak",
         icon: "flame",
         title:
-          t("streak_days", { days: stats.streaks.current_streak }) ||
-          `Série de ${stats.streaks.current_streak} jours !`,
+          t("streak_days", { days: statsToUse.streaks.current_streak }) ||
+          `Série de ${statsToUse.streaks.current_streak} jours !`,
         description:
           t("spiritual_shape_continue") ||
           "Vous êtes en pleine forme spirituelle. Continuez !",
@@ -157,25 +205,25 @@ const PrayerStatsPremiumScreen: React.FC = () => {
     }
 
     // Analyse du niveau
-    if (stats.level.progress > 0.8) {
+    if (statsToUse.level.progress > 0.8) {
       insights.push({
         type: "level",
         icon: "trophy",
         title: t("almost_next_level") || "Presque au niveau suivant !",
         description:
           t("percentage_to_next_level", {
-            percentage: Math.round((1 - stats.level.progress) * 100),
-            nextLevel: stats.level.level + 1,
+            percentage: Math.round((1 - statsToUse.level.progress) * 100),
+            nextLevel: statsToUse.level.level + 1,
           }) ||
           `Plus que ${Math.round(
-            (1 - stats.level.progress) * 100
-          )}% pour atteindre le niveau ${stats.level.level + 1}.`,
+            (1 - statsToUse.level.progress) * 100
+          )}% pour atteindre le niveau ${statsToUse.level.level + 1}.`,
         color: colors.accent,
       });
     }
 
     // Analyse des activités
-    if (stats.stats.total_dhikr > stats.stats.total_prayers) {
+    if (statsToUse.stats.total_dhikr > statsToUse.stats.total_prayers) {
       insights.push({
         type: "balance",
         icon: "heart",
@@ -193,10 +241,10 @@ const PrayerStatsPremiumScreen: React.FC = () => {
   const getWeekProgress = () => {
     if (!stats) return 0;
     // Calcul basé sur la fenêtre sélectionnée (approximation depuis l'historique)
-    const window = Math.min(timeframe, stats.history?.length || 0);
+    const window = Math.min(timeframe, statsToUse.history?.length || 0);
     let sum = 0;
     for (let i = 0; i < window; i++) {
-      const day: any = stats.history[i];
+      const day: any = statsToUse.history[i];
       // Si pas de 'score', approximer par somme des activités
       const dailyTotal = day
         ? Number(day.prayers || 0) +
@@ -239,25 +287,25 @@ const PrayerStatsPremiumScreen: React.FC = () => {
   };
 
   const shareAchievement = async () => {
-    if (!stats) return;
+    if (!statsToUse) return;
 
     try {
       const message =
         `🌟 ${t("my_spiritual_progress") || "Mes progrès spirituels"} 🌟\n\n` +
-        `📊 ${stats.stats.total_prayers} ${
+        `📊 ${statsToUse.stats.total_prayers} ${
           t("prayers_completed") || "prières accomplies"
         }\n` +
         `🔥 ${
-          t("streak_of_days", { days: stats.streaks.current_streak }) ||
-          `Série de ${stats.streaks.current_streak} jours`
+          t("streak_of_days", { days: statsToUse.streaks.current_streak }) ||
+          `Série de ${statsToUse.streaks.current_streak} jours`
         }\n` +
         `🏆 ${
           t("level_title", {
-            level: stats.level.level,
-            title: stats.level.title,
-          }) || `Niveau ${stats.level.level} - ${stats.level.title}`
+            level: statsToUse.level.level,
+            title: statsToUse.level.title,
+          }) || `Niveau ${statsToUse.level.level} - ${statsToUse.level.title}`
         }\n` +
-        `💰 ${stats.points} ${
+        `💰 ${statsToUse.points} ${
           t("spiritual_points") || "points spirituels"
         }\n\n` +
         `#PrayerTimes #SpiritualJourney`;
@@ -306,9 +354,9 @@ const PrayerStatsPremiumScreen: React.FC = () => {
     try {
       const rows: string[] = [];
       rows.push("day_index,prayers,dhikr,quran,hadiths,total");
-      const window = Math.min(timeframe, stats.history?.length || 0);
+      const window = Math.min(timeframe, statsToUse.history?.length || 0);
       for (let i = 0; i < window; i++) {
-        const d: any = stats.history[i] || {};
+        const d: any = statsToUse.history[i] || {};
         const p = Number(d.prayers || 0);
         const dh = Number(d.dhikr || 0);
         const q = Number(d.quran || 0);
@@ -327,7 +375,7 @@ const PrayerStatsPremiumScreen: React.FC = () => {
   };
 
   const getCommunityComparison = () => {
-    if (!stats) return null;
+    if (!statsToUse) return null;
 
     // Simulation de comparaison communautaire (normalement venant de l'API)
     const avgSuccessRate = 45;
@@ -336,20 +384,23 @@ const PrayerStatsPremiumScreen: React.FC = () => {
 
     return {
       successRate: {
-        user: stats.stats.success_rate,
+        user: statsToUse.stats.success_rate,
         average: avgSuccessRate,
-        position: stats.stats.success_rate > avgSuccessRate ? "above" : "below",
+        position:
+          statsToUse.stats.success_rate > avgSuccessRate ? "above" : "below",
       },
       streak: {
-        user: stats.streaks.current_streak,
+        user: statsToUse.streaks.current_streak,
         average: avgStreakLength,
         position:
-          stats.streaks.current_streak > avgStreakLength ? "above" : "below",
+          statsToUse.streaks.current_streak > avgStreakLength
+            ? "above"
+            : "below",
       },
       level: {
-        user: stats.level.level,
+        user: statsToUse.level.level,
         average: avgLevel,
-        position: stats.level.level > avgLevel ? "above" : "below",
+        position: statsToUse.level.level > avgLevel ? "above" : "below",
       },
     };
   };
@@ -505,8 +556,11 @@ const PrayerStatsPremiumScreen: React.FC = () => {
             <Text
               style={[styles.premiumSubtitle, { color: colors.textSecondary }]}
             >
-              {t("unlock_full_progress_analysis") ||
-                "Débloquez l'analyse complète de votre progression spirituelle"}
+              {isOffline
+                ? t("offline_mode_stats") ||
+                  "Mode hors ligne - Connectez-vous pour synchroniser vos statistiques"
+                : t("unlock_full_progress_analysis") ||
+                  "Débloquez l'analyse complète de votre progression spirituelle"}
             </Text>
 
             <View style={styles.featuresList}>
@@ -573,34 +627,50 @@ const PrayerStatsPremiumScreen: React.FC = () => {
     );
   }
 
-  if (!stats) {
-    return (
-      <ThemedImageBackground style={styles.container}>
-        <View style={[styles.overlay, { backgroundColor: colors.background }]}>
-          <View style={styles.centerContainer}>
-            <Ionicons
-              name="analytics-outline"
-              size={64}
-              color={colors.primary}
-            />
-            <Text style={[styles.emptyTitle, { color: colors.text }]}>
-              {t("start_spiritual_journey") ||
-                "🚀 Commencez votre voyage spirituel"}
-            </Text>
-            <Text
-              style={[styles.emptyMessage, { color: colors.textSecondary }]}
-            >
-              {t("stats_appear_after_first_prayers") ||
-                "Vos statistiques apparaîtront après vos premières prières"}
-            </Text>
-          </View>
-        </View>
-      </ThemedImageBackground>
-    );
-  }
+  // 🌐 NOUVEAU : Créer des données par défaut si pas de stats
+  const defaultStats = {
+    user_id: 0,
+    is_premium: true,
+    profile: { level: 1, experience: 0, title: "Débutant" },
+    level: { level: 1, progress: 0, title: "Débutant" },
+    stats: {
+      total_days: 0,
+      complete_days: 0,
+      success_rate: 0,
+      success_rate_all_time: 0,
+      total_prayers: 0,
+      total_prayers_all_time: 0,
+      avg_prayers_per_day: 0,
+      total_dhikr: 0,
+      total_quran_verses: 0,
+      total_hadiths: 0,
+      total_favorites: 0,
+      total_downloads: 0,
+      total_usage_minutes: 0,
+      current_streak: 0,
+      best_streak: 0,
+    },
+    streaks: {
+      current_streak: 0,
+      max_streak: 0,
+      total_streaks: 0,
+      short_streaks: 0,
+    },
+    points: 0,
+    history: [],
+    advice: { advice: [], action_plan: [] },
+    challenges: [],
+    badges: [],
+    smart_notification: { key: "welcome", params: {} },
+  };
 
-  const profileInfo = getProfileInfo(stats.profile);
-  const levelInfo = getLevelColors(stats.level.level);
+  const statsToUse = stats || defaultStats;
+  const profileInfo = getProfileInfo(
+    typeof statsToUse.profile === "object"
+      ? statsToUse.profile.title
+      : statsToUse.profile || "beginner"
+  );
+  const levelInfo = getLevelColors(statsToUse.level.level);
 
   // Rendu du contenu par onglet
   const renderTabContent = () => {
@@ -623,7 +693,7 @@ const PrayerStatsPremiumScreen: React.FC = () => {
                 </View>
                 <View style={styles.profileDetails}>
                   <Text style={[styles.profileTitle, { color: colors.text }]}>
-                    {profileInfo.title}
+                    {userDisplayName || profileInfo.title}
                   </Text>
                   <Text
                     style={[
@@ -642,8 +712,8 @@ const PrayerStatsPremiumScreen: React.FC = () => {
                     💡{" "}
                     {
                       t(
-                        stats.smart_notification.key,
-                        stats.smart_notification.params
+                        statsToUse.smart_notification.key,
+                        statsToUse.smart_notification.params
                       ) as string
                     }
                   </Text>
@@ -662,31 +732,33 @@ const PrayerStatsPremiumScreen: React.FC = () => {
               >
                 <View style={styles.levelHeader}>
                   <Text style={styles.levelNumber}>
-                    {t("level_number", { level: stats.level.level }) ||
-                      `Niveau ${stats.level.level}`}
+                    {t("level_number", { level: statsToUse.level.level }) ||
+                      `Niveau ${statsToUse.level.level}`}
                   </Text>
-                  <Text style={styles.levelTitle}>{stats.level.title}</Text>
+                  <Text style={styles.levelTitle}>
+                    {statsToUse.level.title}
+                  </Text>
                 </View>
                 <View style={styles.progressSection}>
                   <View style={styles.progressBar}>
                     <View
                       style={[
                         styles.progressFill,
-                        { width: `${stats.level.progress * 100}%` },
+                        { width: `${statsToUse.level.progress * 100}%` },
                       ]}
                     />
                   </View>
                   <Text style={styles.progressText}>
                     {t("progress_to_next_level", {
-                      percentage: Math.round(stats.level.progress * 100),
+                      percentage: Math.round(statsToUse.level.progress * 100),
                     }) ||
                       `${Math.round(
-                        stats.level.progress * 100
+                        statsToUse.level.progress * 100
                       )}% vers le niveau suivant`}
                   </Text>
                 </View>
                 <Text style={styles.pointsText}>
-                  💰 {stats.points}{" "}
+                  💰 {statsToUse.points}{" "}
                   {t("spiritual_points") || "points spirituels"}
                 </Text>
               </LinearGradient>
@@ -701,7 +773,7 @@ const PrayerStatsPremiumScreen: React.FC = () => {
                 <View style={styles.statItem}>
                   <Ionicons name="calendar" size={24} color={colors.primary} />
                   <Text style={[styles.statValue, { color: colors.text }]}>
-                    {stats.stats.total_days}
+                    {statsToUse.stats.total_days}
                   </Text>
                   <Text
                     style={[styles.statLabel, { color: colors.textSecondary }]}
@@ -716,7 +788,7 @@ const PrayerStatsPremiumScreen: React.FC = () => {
                     color={colors.success}
                   />
                   <Text style={[styles.statValue, { color: colors.text }]}>
-                    {stats.stats.success_rate}%
+                    {statsToUse.stats.success_rate}%
                   </Text>
                   <Text
                     style={[styles.statLabel, { color: colors.textSecondary }]}
@@ -727,7 +799,7 @@ const PrayerStatsPremiumScreen: React.FC = () => {
                 <View style={styles.statItem}>
                   <Ionicons name="flame" size={24} color={colors.error} />
                   <Text style={[styles.statValue, { color: colors.text }]}>
-                    {stats.streaks.current_streak}
+                    {statsToUse.streaks.current_streak}
                   </Text>
                   <Text
                     style={[styles.statLabel, { color: colors.textSecondary }]}
@@ -738,7 +810,7 @@ const PrayerStatsPremiumScreen: React.FC = () => {
                 <View style={styles.statItem}>
                   <Ionicons name="trophy" size={24} color={colors.accent} />
                   <Text style={[styles.statValue, { color: colors.text }]}>
-                    {stats.streaks.max_streak}
+                    {statsToUse.streaks.max_streak}
                   </Text>
                   <Text
                     style={[styles.statLabel, { color: colors.textSecondary }]}
@@ -761,7 +833,7 @@ const PrayerStatsPremiumScreen: React.FC = () => {
                   "Vos 7 derniers jours d'activité spirituelle"}
               </Text>
               <View style={styles.consistencyCalendar}>
-                {stats.history
+                {statsToUse.history
                   .slice(0, 7)
                   .reverse()
                   .map((day, index) => (
@@ -825,7 +897,7 @@ const PrayerStatsPremiumScreen: React.FC = () => {
                   }}
                 >
                   {buildSparkline(
-                    stats.history
+                    statsToUse.history
                       .slice(0, 7)
                       .reverse()
                       .map((d) => getDailyTotal(d as any))
@@ -966,7 +1038,7 @@ const PrayerStatsPremiumScreen: React.FC = () => {
                 {t("goals_overview") || "🎯 Objectifs"}
               </Text>
               {[7, 30, 90].map((win) => {
-                const values = (stats.history || [])
+                const values = (statsToUse.history || [])
                   .slice(0, win)
                   .map((d: any) => getDailyTotal(d));
                 const total = values.reduce((a, b) => a + b, 0);
@@ -1017,12 +1089,12 @@ const PrayerStatsPremiumScreen: React.FC = () => {
               </View>
             </View>
             {/* Conseils personnalisés */}
-            {stats.advice.advice.length > 0 && (
+            {statsToUse.advice.advice.length > 0 && (
               <View style={[styles.card, { backgroundColor: colors.cardBG }]}>
                 <Text style={[styles.cardTitle, { color: colors.text }]}>
                   {t("personalized_advice") || "💡 Conseils personnalisés"}
                 </Text>
-                {stats.advice.advice.map((advice, index) => (
+                {statsToUse.advice.advice.map((advice, index) => (
                   <View key={index} style={styles.adviceItem}>
                     <Ionicons name="bulb" size={18} color={colors.accent} />
                     <Text style={[styles.adviceText, { color: colors.text }]}>
@@ -1034,13 +1106,13 @@ const PrayerStatsPremiumScreen: React.FC = () => {
             )}
 
             {/* Plan d'action */}
-            {stats.advice.action_plan.length > 0 && (
+            {statsToUse.advice.action_plan.length > 0 && (
               <View style={[styles.card, { backgroundColor: colors.cardBG }]}>
                 <Text style={[styles.cardTitle, { color: colors.text }]}>
                   {t("recommended_action_plan") ||
                     "🎯 Plan d'action recommandé"}
                 </Text>
-                {stats.advice.action_plan.map((action, index) => (
+                {statsToUse.advice.action_plan.map((action, index) => (
                   <View key={index} style={styles.actionPlanItem}>
                     <View style={styles.actionHeader}>
                       <Text style={[styles.actionStep, { color: colors.text }]}>
@@ -1070,56 +1142,89 @@ const PrayerStatsPremiumScreen: React.FC = () => {
               <Text style={[styles.cardTitle, { color: colors.text }]}>
                 {t("ongoing_challenges") || "🏆 Défis en cours"}
               </Text>
-              {stats.challenges.map((challenge, index) => (
-                <View key={index} style={styles.challengeItem}>
-                  <View style={styles.challengeHeader}>
-                    <Ionicons
-                      name={challenge.icon as any}
-                      size={20}
-                      color={challenge.color}
-                    />
+              {statsToUse.challenges.length > 0 ? (
+                statsToUse.challenges.map((challenge, index) => (
+                  <View key={index} style={styles.challengeItem}>
+                    <View style={styles.challengeHeader}>
+                      <Ionicons
+                        name={challenge.icon as any}
+                        size={20}
+                        color={challenge.color}
+                      />
+                      <Text
+                        style={[styles.challengeTitle, { color: colors.text }]}
+                      >
+                        {t(challenge.title)}
+                      </Text>
+                    </View>
                     <Text
-                      style={[styles.challengeTitle, { color: colors.text }]}
+                      style={[
+                        styles.challengeDescription,
+                        { color: colors.textSecondary },
+                      ]}
                     >
-                      {t(challenge.title)}
+                      {t(challenge.description)}
+                    </Text>
+                    <View style={styles.challengeProgress}>
+                      <View
+                        style={[
+                          styles.progressBar,
+                          { backgroundColor: "rgba(0,0,0,0.1)" },
+                        ]}
+                      >
+                        <View
+                          style={[
+                            styles.progressFill,
+                            {
+                              width: `${challenge.progress * 100}%`,
+                              backgroundColor: challenge.color,
+                            },
+                          ]}
+                        />
+                      </View>
+                      <Text
+                        style={[styles.progressText, { color: colors.text }]}
+                      >
+                        {Math.round(challenge.progress * 100)}%
+                      </Text>
+                    </View>
+                    <Text
+                      style={[
+                        styles.challengeReward,
+                        { color: challenge.color },
+                      ]}
+                    >
+                      🎁 {challenge.reward}
                     </Text>
                   </View>
+                ))
+              ) : (
+                <View style={styles.emptyState}>
+                  <Ionicons
+                    name="trophy-outline"
+                    size={48}
+                    color={colors.textTertiary}
+                  />
                   <Text
                     style={[
-                      styles.challengeDescription,
+                      styles.emptyStateText,
                       { color: colors.textSecondary },
                     ]}
                   >
-                    {t(challenge.description)}
+                    {t("no_challenges_available") ||
+                      "Aucun défi disponible pour le moment"}
                   </Text>
-                  <View style={styles.challengeProgress}>
-                    <View
-                      style={[
-                        styles.progressBar,
-                        { backgroundColor: "rgba(0,0,0,0.1)" },
-                      ]}
-                    >
-                      <View
-                        style={[
-                          styles.progressFill,
-                          {
-                            width: `${challenge.progress * 100}%`,
-                            backgroundColor: challenge.color,
-                          },
-                        ]}
-                      />
-                    </View>
-                    <Text style={[styles.progressText, { color: colors.text }]}>
-                      {Math.round(challenge.progress * 100)}%
-                    </Text>
-                  </View>
                   <Text
-                    style={[styles.challengeReward, { color: challenge.color }]}
+                    style={[
+                      styles.emptyStateSubtext,
+                      { color: colors.textTertiary },
+                    ]}
                   >
-                    🎁 {challenge.reward}
+                    {t("challenges_will_appear_soon") ||
+                      "Les défis apparaîtront bientôt !"}
                   </Text>
                 </View>
-              ))}
+              )}
             </View>
           </View>
         );
@@ -1135,90 +1240,90 @@ const PrayerStatsPremiumScreen: React.FC = () => {
               <View style={styles.badgesGrid}>
                 {(() => {
                   // Filtrer les badges : afficher seulement ceux débloqués ou proches d'être débloqués
-                  const relevantBadges = stats.badges.filter((badge) => {
+                  const relevantBadges = statsToUse.badges.filter((badge) => {
                     if (!!badge.unlocked) return true; // Déjà débloqué
 
                     // Logique pour les badges "proches" selon le type
                     // Ne montrer que si l'utilisateur a vraiment progressé
                     const hasAnyActivity =
-                      stats.stats.total_prayers > 0 ||
-                      stats.stats.total_dhikr > 0 ||
-                      stats.stats.total_quran_verses > 0 ||
-                      stats.stats.total_hadiths > 0 ||
-                      stats.stats.total_favorites > 0;
+                      statsToUse.stats.total_prayers > 0 ||
+                      statsToUse.stats.total_dhikr > 0 ||
+                      statsToUse.stats.total_quran_verses > 0 ||
+                      statsToUse.stats.total_hadiths > 0 ||
+                      statsToUse.stats.total_favorites > 0;
 
                     if (!hasAnyActivity) return false; // Aucun badge si aucune activité
 
                     switch (badge.id) {
                       case "first_prayer":
                         // "Accompli votre première prière" - dès 1 prière ✅
-                        return stats.stats.total_prayers >= 1;
+                        return statsToUse.stats.total_prayers >= 1;
 
                       case "early_bird":
                         // "Prière de Fajr accomplie 5 fois" - montrer quand proche (3+ prières)
-                        return stats.stats.total_prayers >= 3;
+                        return statsToUse.stats.total_prayers >= 3;
 
                       case "dhikr_beginner":
                         // "10 sessions de dhikr accomplies" - montrer quand proche (5+ dhikr)
-                        return stats.stats.total_dhikr >= 5;
+                        return statsToUse.stats.total_dhikr >= 5;
 
                       case "prayer_streak_7":
                         // "7 jours consécutifs de prières" - montrer si streak >= 3 ou activité élevée
                         return (
-                          stats.streaks.current_streak >= 3 ||
-                          stats.stats.total_prayers >= 10
+                          statsToUse.streaks.current_streak >= 3 ||
+                          statsToUse.stats.total_prayers >= 10
                         );
 
                       case "faithful_worshipper":
                         // "Accompli 50 prières au total" - montrer à partir de 25
-                        return stats.stats.total_prayers >= 25;
+                        return statsToUse.stats.total_prayers >= 25;
 
                       case "quran_reader":
                         // "10 sessions de lecture du Coran" - montrer à partir de 5 versets
-                        return stats.stats.total_quran_verses >= 5;
+                        return statsToUse.stats.total_quran_verses >= 5;
 
                       case "hadith_student":
                         // "Lu 25 hadiths" - montrer à partir de 10 hadiths
-                        return stats.stats.total_hadiths >= 10;
+                        return statsToUse.stats.total_hadiths >= 10;
 
                       case "community_helper":
                         // "Partagé 10 contenus spirituels" - montrer à partir de 5 favoris
-                        return stats.stats.total_favorites >= 5;
+                        return statsToUse.stats.total_favorites >= 5;
 
                       // === BADGES AVANCÉS ===
                       case "prayer_master":
                         // "Accompli 500 prières au total" - montrer à partir de 250
-                        return stats.stats.total_prayers >= 250;
+                        return statsToUse.stats.total_prayers >= 250;
 
                       case "prayer_streak_30":
                         // "30 jours consécutifs de prières" - montrer si streak >= 15 ou très actif
                         return (
-                          stats.streaks.current_streak >= 15 ||
-                          stats.stats.total_prayers >= 50
+                          statsToUse.streaks.current_streak >= 15 ||
+                          statsToUse.stats.total_prayers >= 50
                         );
 
                       case "prayer_streak_100":
                         // "100 jours consécutifs de prières" - montrer si streak >= 50 ou expert
                         return (
-                          stats.streaks.current_streak >= 50 ||
-                          stats.stats.total_prayers >= 200
+                          statsToUse.streaks.current_streak >= 50 ||
+                          statsToUse.stats.total_prayers >= 200
                         );
 
                       case "dhikr_master":
                         // "100 sessions de dhikr accomplies" - montrer à partir de 50
-                        return stats.stats.total_dhikr >= 50;
+                        return statsToUse.stats.total_dhikr >= 50;
 
                       case "quran_scholar":
                         // "100 sessions de lecture du Coran" - montrer à partir de 50 versets
-                        return stats.stats.total_quran_verses >= 50;
+                        return statsToUse.stats.total_quran_verses >= 50;
 
                       case "social_butterfly":
                         // "Partagé 50 contenus spirituels" - montrer à partir de 25 favoris
-                        return stats.stats.total_favorites >= 25;
+                        return statsToUse.stats.total_favorites >= 25;
 
                       case "hadith_scholar":
                         // "Lu 100 hadiths" - montrer à partir de 50 hadiths
-                        return stats.stats.total_hadiths >= 50;
+                        return statsToUse.stats.total_hadiths >= 50;
 
                       default:
                         return false; // Badges non définis
@@ -1347,6 +1452,7 @@ const PrayerStatsPremiumScreen: React.FC = () => {
                         t("prayer_recorded_success") ||
                           "✅ Prière enregistrée !"
                       );
+                      // ✅ NOUVEAU : Rafraîchir immédiatement après l'action
                       await refresh();
                     } else {
                       showToast(
@@ -1514,7 +1620,7 @@ const PrayerStatsPremiumScreen: React.FC = () => {
                     {t("total_prayers") || "Total prières:"}
                   </Text>
                   <Text style={[styles.statRowValue, { color: colors.text }]}>
-                    {stats.stats.total_prayers}
+                    {statsToUse.stats.total_prayers}
                   </Text>
                 </View>
                 <View style={styles.statRow}>
@@ -1527,7 +1633,7 @@ const PrayerStatsPremiumScreen: React.FC = () => {
                     {t("total_dhikr") || "Dhikr accomplis:"}
                   </Text>
                   <Text style={[styles.statRowValue, { color: colors.text }]}>
-                    {stats.stats.total_dhikr}
+                    {statsToUse.stats.total_dhikr}
                   </Text>
                 </View>
                 <View style={styles.statRow}>
@@ -1540,7 +1646,7 @@ const PrayerStatsPremiumScreen: React.FC = () => {
                     {t("total_quran_verses") || "Versets lus:"}
                   </Text>
                   <Text style={[styles.statRowValue, { color: colors.text }]}>
-                    {stats.stats.total_quran_verses}
+                    {statsToUse.stats.total_quran_verses}
                   </Text>
                 </View>
                 <View style={styles.statRow}>
@@ -1553,7 +1659,7 @@ const PrayerStatsPremiumScreen: React.FC = () => {
                     {t("total_hadiths") || "Hadiths étudiés:"}
                   </Text>
                   <Text style={[styles.statRowValue, { color: colors.text }]}>
-                    {stats.stats.total_hadiths}
+                    {statsToUse.stats.total_hadiths}
                   </Text>
                 </View>
                 <View style={styles.statRow}>
@@ -1566,7 +1672,7 @@ const PrayerStatsPremiumScreen: React.FC = () => {
                     {t("total_favorites") || "Favoris:"}
                   </Text>
                   <Text style={[styles.statRowValue, { color: colors.text }]}>
-                    {stats.stats.total_favorites}
+                    {statsToUse.stats.total_favorites}
                   </Text>
                 </View>
               </View>
@@ -1778,6 +1884,62 @@ const PrayerStatsPremiumScreen: React.FC = () => {
                 "Votre progression spirituelle en détail"}
             </Text>
           </View>
+
+          {/* 🌐 NOUVEAU : Indicateur mode offline */}
+          {isOffline && (
+            <View
+              style={[
+                styles.offlineIndicator,
+                {
+                  backgroundColor: colors.warning + "20",
+                  borderColor: colors.warning,
+                },
+              ]}
+            >
+              <View style={styles.offlineContent}>
+                <Ionicons
+                  name="cloud-offline"
+                  size={20}
+                  color={colors.warning}
+                />
+                <View style={styles.offlineTextContainer}>
+                  <Text
+                    style={[styles.offlineTitle, { color: colors.warning }]}
+                  >
+                    {t("offline_mode") || "Mode hors ligne"}
+                  </Text>
+                  <Text
+                    style={[
+                      styles.offlineSubtitle,
+                      { color: colors.textSecondary },
+                    ]}
+                  >
+                    {pendingActionsCount > 0
+                      ? t("pending_sync_actions", {
+                          count: pendingActionsCount,
+                        }) ||
+                        `${pendingActionsCount} actions en attente de synchronisation`
+                      : t("offline_stats_cached") ||
+                        "Données en cache - synchronisation automatique quand en ligne"}
+                  </Text>
+                </View>
+                {pendingActionsCount > 0 && (
+                  <TouchableOpacity
+                    style={[
+                      styles.syncButton,
+                      { backgroundColor: colors.warning },
+                    ]}
+                    onPress={handleSyncActions}
+                  >
+                    <Ionicons name="sync" size={16} color="white" />
+                    <Text style={styles.syncButtonText}>
+                      {t("sync") || "Sync"}
+                    </Text>
+                  </TouchableOpacity>
+                )}
+              </View>
+            </View>
+          )}
 
           {/* Navigation par onglets */}
           <View style={[styles.tabBar, { backgroundColor: colors.cardBG }]}>
@@ -2072,7 +2234,7 @@ const PrayerStatsPremiumScreen: React.FC = () => {
                       Prières cette semaine
                     </Text>
                     <Text style={[styles.goalValue, { color: colors.text }]}>
-                      {stats?.stats.total_prayers || 0} / {weeklyGoal}
+                      {statsToUse.stats.total_prayers || 0} / {weeklyGoal}
                     </Text>
                     <View style={styles.goalBar}>
                       <View
@@ -2981,6 +3143,66 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginLeft: 8,
     textAlign: "center",
+  },
+
+  // 🌐 NOUVEAU : Styles pour l'indicateur offline
+  offlineIndicator: {
+    marginHorizontal: 20,
+    marginBottom: 16,
+    borderRadius: 12,
+    borderWidth: 1,
+    padding: 16,
+  },
+  offlineContent: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  offlineTextContainer: {
+    flex: 1,
+    marginLeft: 12,
+    marginRight: 8,
+  },
+  offlineTitle: {
+    fontSize: 14,
+    fontWeight: "600",
+    marginBottom: 2,
+  },
+  offlineSubtitle: {
+    fontSize: 12,
+    lineHeight: 16,
+  },
+  syncButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingVertical: 6,
+    paddingHorizontal: 12,
+    borderRadius: 8,
+    gap: 4,
+  },
+  syncButtonText: {
+    color: "white",
+    fontSize: 12,
+    fontWeight: "600",
+  },
+
+  // 🌐 NOUVEAU : Styles pour l'état vide des défis
+  emptyState: {
+    alignItems: "center",
+    paddingVertical: 32,
+    paddingHorizontal: 20,
+  },
+  emptyStateText: {
+    fontSize: 16,
+    fontWeight: "600",
+    textAlign: "center",
+    marginTop: 12,
+    marginBottom: 8,
+  },
+  emptyStateSubtext: {
+    fontSize: 14,
+    textAlign: "center",
+    lineHeight: 20,
   },
 });
 

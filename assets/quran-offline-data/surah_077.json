@@ -1,0 +1,1006 @@
+{
+  "surah_number": 77,
+  "extracted_at": "2025-09-20T15:17:00.375Z",
+  "verses": [
+    {
+      "verse_number": 5623,
+      "verse_key": "77:1",
+      "arabic_text": " وَٱلْمُرْسَلَـٰتِ عُرْفًا",
+      "phonetic_text": "Walmursalati AAurfa",
+      "translations": {
+        "fr": "Par ceux qui sont envoyés l’un après l’autre !",
+        "en": "By the [winds] sent forth in swift succession,",
+        "es": "Juro por los [ángeles] enviados uno tras de otro,",
+        "it": "Per le inviate in successione <a class=f><sup foot_note=160420>1</sup></a> ,",
+        "ru": "Клянусь посылаемыми с добром,",
+        "tr": "Andolsun birbiri ardınca gönderilenlere,",
+        "de": "Bei den Entsandten, die wie eine Mähne aufeinanderfolgen,",
+        "pt": "Pelos ventos enviados, uns após os outros,",
+        "nl": "Bij de met goedheid uitgezondenen.",
+        "ur": "قسم ہے اُن (ہواؤں) کی جو پے در پے بھیجی جاتی ہیں",
+        "bn": "শপত কল্যাণস্বৰূপ প্ৰেৰিত বতাহৰ,",
+        "fa": "سوگند به فرشتگانی که پیاپی فرستاده می‌شوند،"
+      }
+    },
+    {
+      "verse_number": 5624,
+      "verse_key": "77:2",
+      "arabic_text": "فَٱلْعَـٰصِفَـٰتِ عَصْفًا",
+      "phonetic_text": "FalAAasifati AAasfa",
+      "translations": {
+        "fr": "Par les tempêtes déchaînées !",
+        "en": "violently storming,",
+        "es": "por los [ángeles] encargados de los vientos que soplan violentamente,",
+        "it": "per quelle che impetuose tempestano,",
+        "ru": "несущимися быстро,",
+        "tr": "Büküp devirenlere,",
+        "de": "den einen Sturm Entfesselnden",
+        "pt": "Que sobram impetuosamente,",
+        "nl": "Bij de met spoed voortspoedenden.",
+        "ur": "پھر طوفانی رفتار سے چلتی ہیں",
+        "bn": "তাৰ পিছত প্ৰচণ্ড বেগত প্ৰবাহিত ধুমুহাৰ,",
+        "fa": "و سوگند به فرشتگانی که همچون تندباد می‌روند،"
+      }
+    },
+    {
+      "verse_number": 5625,
+      "verse_key": "77:3",
+      "arabic_text": "وَٱلنَّـٰشِرَٰتِ نَشْرًا",
+      "phonetic_text": "Wannashirati nashra",
+      "translations": {
+        "fr": "Par ceux qui répandent et déploient,",
+        "en": "scattering far and wide,",
+        "es": "por los [ángeles] que conducen y extienden las nubes,",
+        "it": "per quelle che si diffondono ampie,",
+        "ru": "распространяющими бурно,",
+        "tr": "Yaydıkça yayanlara,",
+        "de": "und den alles Ausbreitenden,",
+        "pt": "E dispersam (as coisas) violentamente;",
+        "nl": "En bij de verspreid verspreidenden.",
+        "ur": "اور (بادلوں کو) اٹھا کر پھیلاتی ہیں",
+        "bn": "শপত প্ৰচণ্ড সঞ্চালনকাৰীৰ,",
+        "fa": "و سوگند به فرشتگانی که [ابرها را] پراکنده می‌کنند،"
+      }
+    },
+    {
+      "verse_number": 5626,
+      "verse_key": "77:4",
+      "arabic_text": "فَٱلْفَـٰرِقَـٰتِ فَرْقًا",
+      "phonetic_text": "Falfariqati farqa",
+      "translations": {
+        "fr": "séparent et discernent !",
+        "en": "separating forcefully,",
+        "es": "por los [ángeles] que distinguen claramente,",
+        "it": "per quelle che separano con esattezza <a class=f><sup foot_note=160421>1</sup></a>",
+        "ru": "различающими твердо,",
+        "tr": "Seçip ayıranlara,",
+        "de": "den klar Trennenden,",
+        "pt": "E discriminam profundamente,",
+        "nl": "Bij de scheidend scheidenden.",
+        "ur": "پھر (اُن کو) پھاڑ کر جدا کرتی ہیں",
+        "bn": "তাৰ পিছত সুস্পষ্টৰূপে পাৰ্থক্যকাৰীৰ,",
+        "fa": "و سوگند به فرشتگانی که جداکننده[ی حق از باطل] هستند"
+      }
+    },
+    {
+      "verse_number": 5627,
+      "verse_key": "77:5",
+      "arabic_text": "فَٱلْمُلْقِيَـٰتِ ذِكْرًا",
+      "phonetic_text": "Falmulqiyati thikra",
+      "translations": {
+        "fr": "Par ceux qui sèment (partout) le Rappel,",
+        "en": "delivering a reminder,",
+        "es": "por los [Profetas] que transmiten Mensajes",
+        "it": "e per quelle che lanciano un monito",
+        "ru": "и передающими Напоминание",
+        "tr": "Bir öğüt bırakanlara,",
+        "de": "den Ermahnung Überbringenden",
+        "pt": "Comunicadores da Mensagem,",
+        "nl": "Bij de doorgevenden van de Vermaning.",
+        "ur": "پھر (دلوں میں خدا کی) یاد ڈالتی ہیں",
+        "bn": "তাৰ পিছত সিহঁতৰ, যিসকলে মানুহৰ অন্তৰত উপদেশ পৌঁচাই দিয়ে---",
+        "fa": "و سوگند به فرشتگانی که وحی [الهی] را [به پیامبران] القا می‌کنند،"
+      }
+    },
+    {
+      "verse_number": 5628,
+      "verse_key": "77:6",
+      "arabic_text": "عُذْرًا أَوْ نُذْرًا",
+      "phonetic_text": "AAuthran aw nuthra",
+      "translations": {
+        "fr": "soit pour justifier soit pour avertir !",
+        "en": "as a proof or a warning:",
+        "es": "como aclaración o advertencia [para el Día del Juicio].",
+        "it": "[a guisa] di scusa o di avvertimento!",
+        "ru": "для оправдания или предостережения.",
+        "tr": "Gerek özür için olsun, gerek uyarı için,",
+        "de": "zur Pflichterfüllung oder zur Warnung!",
+        "pt": "Seja de justificação ou de admoestação,",
+        "nl": "Als een afwijzing van verontschuldigingen of als een waarschuwing.",
+        "ur": "عُذر کے طور پر یا ڈراوے کے طور پر، <sup foot_note=\"188265\">1</sup>",
+        "bn": "ওজৰ-আপত্তি দূৰীকৰণ আৰু সতৰ্ক কৰাৰ বাবে,",
+        "fa": "برای اتمامِ‌حجت یا برای بیم و هشدار."
+      }
+    },
+    {
+      "verse_number": 5629,
+      "verse_key": "77:7",
+      "arabic_text": "إِنَّمَا تُوعَدُونَ لَوَٰقِعٌ",
+      "phonetic_text": "Innama tooAAadoona lawaqiAA",
+      "translations": {
+        "fr": "Ce qui vous est promis s’accomplira certainement.",
+        "en": "what you are promised will come to pass.",
+        "es": "Tengan certeza de que aquello con que se les advierte se cumplirá",
+        "it": "In verità quello che vi è stato promesso avverrà,",
+        "ru": "Обещанное вам непременно сбудется.",
+        "tr": "Herhalde size vaad olunan kesinlikle olacaktır.",
+        "de": "Gewiß, was euch versprochen wird, wird sicher hereinbrechen.",
+        "pt": "De que o que vos é prometido está iminente!",
+        "nl": "Voorwaar, wat jullie is aangezegd, zal zeker gebeuren.",
+        "ur": "جس چیز کا تم سے وعدہ کیا جا رہا ہے <sup foot_note=\"188266\">1</sup> وہ ضرور واقع ہونے والی ہے۔ <sup foot_note=\"188267\">2</sup>",
+        "bn": "নিশ্চয় তোমালোকক যি প্ৰতিশ্ৰুতি দিয়া হৈছে সেয়া অৱশ্যে সংঘটিত হ’ব।",
+        "fa": "بی‌گمان، آنچه به شما وعده داده می‌شود، واقع خواهد شد؛"
+      }
+    },
+    {
+      "verse_number": 5630,
+      "verse_key": "77:8",
+      "arabic_text": "فَإِذَا ٱلنُّجُومُ طُمِسَتْ",
+      "phonetic_text": "Fa-itha annujoomu tumisat",
+      "translations": {
+        "fr": "Quand les étoiles seront éteintes,",
+        "en": "When the stars are dimmed",
+        "es": "cuando las estrellas pierdan su luz,",
+        "it": "quando le stelle perderanno la luce",
+        "ru": "Когда погаснут звезды,",
+        "tr": "Hani o yıldızlar silindiği zaman,",
+        "de": "Wenn dann die Sterne ausgelöscht werden",
+        "pt": "Quanto as estrelas se tornarem escuras,",
+        "nl": "Wanneer dan de sterren gedoofd worden.",
+        "ur": "پھر جب ستارے ماند پڑ جائیں گے، <sup foot_note=\"188268\">1</sup>",
+        "bn": "যেতিয়া নক্ষত্ৰৰাজি আলোহীন হ’ব,",
+        "fa": "آنگاه ‌که ستارگان تیره [و محو] شود"
+      }
+    },
+    {
+      "verse_number": 5631,
+      "verse_key": "77:9",
+      "arabic_text": "وَإِذَا ٱلسَّمَآءُ فُرِجَتْ",
+      "phonetic_text": "Wa-itha assamao furijat",
+      "translations": {
+        "fr": "et que le ciel sera fendu,",
+        "en": "and the sky is torn apart,",
+        "es": "cuando el cielo se resquebraje,",
+        "it": "e si fenderà il cielo",
+        "ru": "когда расколется небо,",
+        "tr": "Gök yarıldığı zaman,",
+        "de": "und wenn der Himmel gespalten wird",
+        "pt": "Quando o céu se fender,",
+        "nl": "En wanneer de hemel gespleten wordt.",
+        "ur": "اور آسمان پھاڑ دیا جائے گا، <sup foot_note=\"188269\">1</sup>",
+        "bn": "আৰু যেতিয়া আকাশখন বিদীৰ্ণ কৰা হ’ব,",
+        "fa": "و آنگاه‌ که آسمان شکافته شود،"
+      }
+    },
+    {
+      "verse_number": 5632,
+      "verse_key": "77:10",
+      "arabic_text": "وَإِذَا ٱلْجِبَالُ نُسِفَتْ",
+      "phonetic_text": "Wa-itha aljibalu nusifat",
+      "translations": {
+        "fr": "et que les montagnes seront désintégrées,",
+        "en": "when the mountains are turned to dust",
+        "es": "cuando las montañas sean convertidas en polvo",
+        "it": "e le montagne saranno disperse <a class=f><sup foot_note=160422>1</sup></a>",
+        "ru": "когда развеются горы,",
+        "tr": "Dağlar savrulduğu zaman,",
+        "de": "und wenn die Berge zersprengt werden",
+        "pt": "Quando as montanhas forem desintegradas,",
+        "nl": "En wanneer de bergen verpulverd worden.",
+        "ur": "اور پہاڑ دھنک ڈالے جائیں گے",
+        "bn": "আৰু যেতিয়া পৰ্বতসমূহক চূৰ্ণবিচূৰ্ণ কৰা হ’ব,",
+        "fa": "و آنگاه ‌که کوه‌ها [از جا کنده و] پراکنده شود،"
+      }
+    },
+    {
+      "verse_number": 5633,
+      "verse_key": "77:11",
+      "arabic_text": "وَإِذَا ٱلرُّسُلُ أُقِّتَتْ",
+      "phonetic_text": "Wa-itha arrusulu oqqitat",
+      "translations": {
+        "fr": "et que le moment sera venu pour les Messagers de comparaître,",
+        "en": "and the messengers given their appointed time––",
+        "es": "y los Mensajeros sean convocados.",
+        "it": "e sarà indicato il momento ai Messaggeri !… <a class=f><sup foot_note=160423>1</sup></a>",
+        "ru": "когда посланникам будет установлен срок.",
+        "tr": "Elçiler, tayin edilen vakitlerine erdirildikleri zaman,",
+        "de": "und wenn für die Gesandten ihre Zeit gesetzt wird.",
+        "pt": "E quando os mensageiros forem citados!",
+        "nl": "En wanneer voor de Boodschappers de tijd vastgesteld is.",
+        "ur": "اور رسُولوں کی حاضری کا وقت آپہنچے گا <sup foot_note=\"188270\">1</sup> (اس روز وہ چیز واقع ہوجائے گی)",
+        "bn": "আৰু যেতিয়া ৰাছুলসকলক নিৰ্ধাৰিত সময়ত উপস্থিত কৰা হ’ব,",
+        "fa": "و آنگاه ‌که برای پیامبران [جهت گواهی دادن در مورد امت‌ها]، وقت تعیین گردد،"
+      }
+    },
+    {
+      "verse_number": 5634,
+      "verse_key": "77:12",
+      "arabic_text": "لِأَىِّ يَوْمٍ أُجِّلَتْ",
+      "phonetic_text": "Li-ayyi yawmin ojjilat",
+      "translations": {
+        "fr": "à quel jour cela est-il donc différé ?",
+        "en": "for what Day has all this been set?",
+        "es": "¿Para qué día se les convocará?",
+        "it": "A quale giorno saranno rinviati?",
+        "ru": "До какого дня отсрочено?",
+        "tr": "Bunlar hangi güne ertelendiler?",
+        "de": "Auf weichen Tag ist ihre Frist festgelegt worden?",
+        "pt": "- Para que dia foi deferido (o portento)? -",
+        "nl": "(Er wordt gezegd:) \"Tot welke dag is er uitstel gegeven?\"",
+        "ur": "کس روز کے لیے یہ کام اٹھا رکھا گیا ہے؟",
+        "bn": "কোনটো দিনৰ বাবে এইবোৰ স্থগিত ৰখা হৈছে?",
+        "fa": "این [امر،] برای چه روزی به تأخیر افتاده است؟"
+      }
+    },
+    {
+      "verse_number": 5635,
+      "verse_key": "77:13",
+      "arabic_text": "لِيَوْمِ ٱلْفَصْلِ",
+      "phonetic_text": "Liyawmi alfasl",
+      "translations": {
+        "fr": "Au jour de la Décision.",
+        "en": "The Day of Decision.",
+        "es": "Para el Día del Juicio.",
+        "it": "Al Giorno della Decisione <a class=f><sup foot_note=160424>1</sup></a> !",
+        "ru": "До Дня различения!",
+        "tr": "Hüküm gününe..",
+        "de": "Auf den Tag der Entscheidung.",
+        "pt": "Para o Dia da Discriminação.",
+        "nl": "Tot de Dag van de Beoordeling.",
+        "ur": "فیصلے کے روز کے لیے",
+        "bn": "বিচাৰ দিনৰ বাবে।",
+        "fa": "برای روز جدایی [و داوری]."
+      }
+    },
+    {
+      "verse_number": 5636,
+      "verse_key": "77:14",
+      "arabic_text": "وَمَآ أَدْرَىٰكَ مَا يَوْمُ ٱلْفَصْلِ",
+      "phonetic_text": "Wama adraka ma yawmualfasl",
+      "translations": {
+        "fr": "Et qui te fera jamais savoir ce qu’est le jour de la Décision ?",
+        "en": "What will explain to you what the Day of Decision is?",
+        "es": "¿Y qué te hará comprender qué es el Día del Juicio?",
+        "it": "Chi mai ti dirà cos’è il Giorno della Decisione?",
+        "ru": "Откуда ты мог знать, что такое День различения?",
+        "tr": "Bildin mi, nedir o hüküm günü?",
+        "de": "Und was läßt dich wissen, was der Tag der Entscheidung ist?",
+        "pt": "E o que te fará compreender o que é o Dia da Discriminação?",
+        "nl": "En wat doet jullie weten wat Dag van de Beoordeling is?",
+        "ur": "اور تمہیں کیا خبر کہ وہ فیصلے کا دن کیا ہے؟",
+        "bn": "আৰু কিহে তোমাক জনাব বিচাৰ দিৱস কি?",
+        "fa": "و تو چه دانی روز جدایی [و داوری] چیست؟"
+      }
+    },
+    {
+      "verse_number": 5637,
+      "verse_key": "77:15",
+      "arabic_text": "وَيْلٌ يَوْمَئِذٍ لِّلْمُكَذِّبِينَ",
+      "phonetic_text": "Waylun yawma-ithin lilmukaththibeen",
+      "translations": {
+        "fr": "Malheur, ce jour-là, aux négateurs !",
+        "en": "Woe, on that Day, to those who denied the truth!",
+        "es": "¡Cuán desdichados serán ese día los que negaron la verdad!",
+        "it": "Guai, in quel Giorno, a coloro che tacciano di menzogna <a class=f><sup foot_note=160425>1</sup></a> !",
+        "ru": "Горе в тот день тем, кто считает истину ложью!",
+        "tr": "O gün yalanlayanların vay haline!",
+        "de": "Wehe an jenem Tag den Leugnern!",
+        "pt": "Ai, nesse dia, dos desmentidores!",
+        "nl": "Wee die Dag de loochenaars!",
+        "ur": "تباہی ہے اُس دن جُھٹلانے والوں کے لیے۔ <sup foot_note=\"188271\">1</sup>",
+        "bn": "সেইদিনা ধ্বংস অনিবাৰ্য অস্বীকাৰকাৰীসকলৰ বাবে,",
+        "fa": "در آن روز، [= قیامت] وای بر تکذیب‌کنندگان!"
+      }
+    },
+    {
+      "verse_number": 5638,
+      "verse_key": "77:16",
+      "arabic_text": "أَلَمْ نُهْلِكِ ٱلْأَوَّلِينَ",
+      "phonetic_text": "Alam nuhliki al-awwaleen",
+      "translations": {
+        "fr": "N’avons-Nous pas anéanti les (peuples) premiers ?",
+        "en": "Did We not destroy the first [of them]?",
+        "es": "¿Acaso no he destruido otros pueblos en la antigüedad [que rechazaron el Mensaje]?",
+        "it": "Già non facemmo perire gli antichi?",
+        "ru": "Разве мы не погубили первые поколения?",
+        "tr": "Biz, öncekileri helak etmedik mi?",
+        "de": "Haben Wir nicht die Früheren vernichtet?",
+        "pt": "Acaso, não exterminamos as gerações primitivas?",
+        "nl": "Hebben Wij de vroegeren niet vernietigd?",
+        "ur": "کیا ہم نے اگلوں کو ہلاک نہیں کیا؟ <sup foot_note=\"188272\">1</sup>",
+        "bn": "আমি পূৰ্বৱৰ্তীসকলক ধ্বংস কৰা নাইনে?",
+        "fa": "آیا ما پیشینیان [مجرم] را نابود نکردیم؟"
+      }
+    },
+    {
+      "verse_number": 5639,
+      "verse_key": "77:17",
+      "arabic_text": "ثُمَّ نُتْبِعُهُمُ ٱلْـَٔاخِرِينَ",
+      "phonetic_text": "Thumma nutbiAAuhumu al-akhireen",
+      "translations": {
+        "fr": "Puis n’avons-Nous pas enchaîné par les derniers ?",
+        "en": "We shall make the last follow them:",
+        "es": "Luego les siguieron otros pueblos [de desmentidores].",
+        "it": "E non li facemmo seguire dagli ultimi?",
+        "ru": "Вслед за ними Мы отправили последующие поколения.",
+        "tr": "Sonra geridekileri de onlara katarız.",
+        "de": "Hierauf lassen Wir ihnen die Späteren folgen.",
+        "pt": "Então, fizemos os seus sucessores seguirem-nas.",
+        "nl": "Waarna Wij hen deden opvolgen door de lateren?",
+        "ur": "پھر اُنہی کے پیچھے ہم بعد والوں کو چلتا کریں گے۔ <sup foot_note=\"188273\">1</sup>",
+        "bn": "তাৰ পিছত পৰবৰ্তীসকলকো সিহঁতৰ অনুগামী বনাম।",
+        "fa": "سپس دیگران را در پی آنها خواهیم آورد."
+      }
+    },
+    {
+      "verse_number": 5640,
+      "verse_key": "77:18",
+      "arabic_text": "كَذَٰلِكَ نَفْعَلُ بِٱلْمُجْرِمِينَ",
+      "phonetic_text": "Kathalika nafAAalu bilmujrimeen",
+      "translations": {
+        "fr": "C’est ainsi que Nous traitons les criminels.",
+        "en": "this is how We deal with the guilty.",
+        "es": "Eso es lo que sucede a los pecadores.",
+        "it": "Così trattiamo i colpevoli.",
+        "ru": "Так поступаем Мы с грешниками.",
+        "tr": "Biz suçlulara böyle yaparız.",
+        "de": "So verfahren Wir mit den Übeltätern.",
+        "pt": "Assim faremos com os pecadores.",
+        "nl": "Zo behandelen Wij de misdadigers.",
+        "ur": "مجرموں کے ساتھ ہم یہی کچھ کیا کرتے ہیں",
+        "bn": "অপৰাধীবিলাকৰ লগত আমি এনেকুৱা আচৰণেই কৰো।",
+        "fa": "اینچنین با گنهکاران رفتار می‌کنیم."
+      }
+    },
+    {
+      "verse_number": 5641,
+      "verse_key": "77:19",
+      "arabic_text": "وَيْلٌ يَوْمَئِذٍ لِّلْمُكَذِّبِينَ",
+      "phonetic_text": "Waylun yawma-ithin lilmukaththibeen",
+      "translations": {
+        "fr": "Malheur, ce jour-là, aux négateurs !",
+        "en": "Woe, on that Day, to those who denied the truth!",
+        "es": "¡Cuán desdichados serán ese día los que negaron la verdad!",
+        "it": "Guai, in quel Giorno, a coloro che tacciano di menzogna!",
+        "ru": "Горе в тот день тем, кто считает истину ложью!",
+        "tr": "O gün yalanlayanların vah haline!",
+        "de": "Wehe an jenem Tag den Leugnern!",
+        "pt": "Ai, nesse dia, dos desmentidores!",
+        "nl": "Wee die Dag de loochenaars!",
+        "ur": "تباہی ہے اُس دن جھُٹلانے والوں کے لیے۔ <sup foot_note=\"188274\">1</sup>",
+        "bn": "সেইদিনা ধ্বংস অনিবাৰ্য অস্বীকাৰকাৰীসকলৰ বাবে,",
+        "fa": "در آن روز، وای بر تکذیب‌کنندگان!"
+      }
+    },
+    {
+      "verse_number": 5642,
+      "verse_key": "77:20",
+      "arabic_text": "أَلَمْ نَخْلُقكُّم مِّن مَّآءٍ مَّهِينٍ",
+      "phonetic_text": "Alam nakhluqkum min ma-in maheen",
+      "translations": {
+        "fr": "Ne vous avons-Nous pas créés d’un vulgaire liquide,",
+        "en": "Did We not make you from an underrated fluid",
+        "es": "¿No les he creado de un líquido insignificante",
+        "it": "Non vi creammo da un liquido vile <a class=f><sup foot_note=160426>1</sup></a> ,",
+        "ru": "Разве Мы не сотворили вас из презренной жидкости",
+        "tr": "Biz sizi âdi bir sudan yaratmadık mı?",
+        "de": "Haben Wir euch nicht aus verächtlichem Wasser erschaffen,",
+        "pt": "Porventura, não vos criamos de líquido débil,",
+        "nl": "Hebben Wij jullie niet uit een onaanzienlijk water geschapen?",
+        "ur": "کیا ہم نے ایک حقیر پانی سے تمہیں پیدا نہیں کیا",
+        "bn": "আমি তোমালোকক ঘৃণনীয় পানীৰ পৰা সৃষ্টি কৰা নাইনে?",
+        "fa": "آیا شما را از آبی پست [و ناچیز] نیافریدیم؟"
+      }
+    },
+    {
+      "verse_number": 5643,
+      "verse_key": "77:21",
+      "arabic_text": "فَجَعَلْنَـٰهُ فِى قَرَارٍ مَّكِينٍ",
+      "phonetic_text": "FajaAAalnahu fee qararinmakeen",
+      "translations": {
+        "fr": "que Nous avons établi dans un réceptacle sûr,",
+        "en": "which We housed in a safe lodging",
+        "es": "que deposité en un lugar seguro [el útero]",
+        "it": "che depositammo in un sicuro ricettacolo <a class=f><sup foot_note=160427>1</sup></a>",
+        "ru": "и не поместили ее в надежном месте",
+        "tr": "Onu sağlam bir yerde oturttuk.",
+        "de": "das Wir dann in einem festen Aufenthaltsort haben sein lassen,",
+        "pt": "Que depositamos em um lugar seguro,",
+        "nl": "Toen plaatsten Wij het in een beschermende rustplaats.",
+        "ur": "اور ایک مقرر مدت تک<sup foot_note=\"188275\">1</sup>",
+        "bn": "তাৰ পিছত আমি ইয়াক নিৰাপদ স্থানত সুৰক্ষিত কৰি ৰাখিছো,",
+        "fa": "سپس آن را در قرارگاهی محفوظ [= رحِم] قرار دادیم"
+      }
+    },
+    {
+      "verse_number": 5644,
+      "verse_key": "77:22",
+      "arabic_text": "إِلَىٰ قَدَرٍ مَّعْلُومٍ",
+      "phonetic_text": "Ila qadarin maAAloom",
+      "translations": {
+        "fr": "pour un délai déjà fixé ?",
+        "en": "for a determined period?",
+        "es": "por un tiempo determinado?",
+        "it": "per un tempo stabilito <a class=f><sup foot_note=160428>1</sup></a> ?",
+        "ru": "до известного срока?",
+        "tr": "Belli bir süreye kadar.",
+        "de": "bis zu einem bekannten Zeitpunkt?",
+        "pt": "Até um prazo determinado.",
+        "nl": "Tot een bekend tijdstip.",
+        "ur": "اُسے ایک محفوظ جگہ ٹھیرائے رکھا؟",
+        "bn": "এটা নিৰ্দিষ্ট সময় লৈকে,",
+        "fa": "تا زمانی معین."
+      }
+    },
+    {
+      "verse_number": 5645,
+      "verse_key": "77:23",
+      "arabic_text": "فَقَدَرْنَا فَنِعْمَ ٱلْقَـٰدِرُونَ",
+      "phonetic_text": "Faqadarna faniAAma alqadiroon",
+      "translations": {
+        "fr": "Ainsi l’avons-Nous déterminé, et nul ne le pourra mieux que Nous !",
+        "en": "We determine [it]: how excellently We determine!",
+        "es": "Así lo he decretado, y Mi decreto es perfecto.",
+        "it": "Siamo Noi che lo stabiliamo. Siamo i migliori nello stabilire [tutte le cose].",
+        "ru": "Мы предопределили меру, и как прекрасно Мы предопределяем!",
+        "tr": "Demek ki biçimlendirmişiz. Ne güzel biçimlendireniz biz.",
+        "de": "So haben Wir bemessen. Welch trefflicher Bemesser sind Wir!",
+        "pt": "Que predestinamos? E somos o melhor Predestinador!",
+        "nl": "Wij beschikten (erover) en Wij zijn de beste Beschikkers.",
+        "ur": "تو دیکھو، ہم اِس پر قادر تھے ، پس ہم بہت اچھی قدرت رکھنے والے ہیں۔ <sup foot_note=\"188276\">1</sup>",
+        "bn": "তাৰ পিছত আমি পৰিমাপ কৰিছো, এতেকে আমি কিমান নিপুণ পৰিমাপকাৰী!",
+        "fa": "ما [بر این کار] توانا بودیم و چه نیک توانا [و قدرتمند] هستیم."
+      }
+    },
+    {
+      "verse_number": 5646,
+      "verse_key": "77:24",
+      "arabic_text": "وَيْلٌ يَوْمَئِذٍ لِّلْمُكَذِّبِينَ",
+      "phonetic_text": "Waylun yawma-ithin lilmukaththibeen",
+      "translations": {
+        "fr": "Malheur, ce jour-là, aux négateurs !",
+        "en": "Woe, on that Day, to those who denied the truth!",
+        "es": "¡Cuán desdichados serán ese día los que negaron la verdad!",
+        "it": "Guai, in quel Giorno, a coloro che tacciano di menzogna!",
+        "ru": "Горе в тот день тем, кто считает истину ложью!",
+        "tr": "O gün yalanlayanların vay haline!",
+        "de": "Wehe an jenem Tag den Leugnern!",
+        "pt": "Ai, nesse dia, dos desmentidores!",
+        "nl": "Wee die Dag de loochenaars!",
+        "ur": "تباہی ہے اُس روز جھُٹلانے والوں کے لیے۔ <sup foot_note=\"188277\">1</sup>",
+        "bn": "সেইদিনা ধ্বংস অনিবাৰ্য অস্বীকাৰকাৰীসকলৰ বাবে,",
+        "fa": "در آن روز، وای بر تکذیب‌کنندگان!"
+      }
+    },
+    {
+      "verse_number": 5647,
+      "verse_key": "77:25",
+      "arabic_text": "أَلَمْ نَجْعَلِ ٱلْأَرْضَ كِفَاتًا",
+      "phonetic_text": "Alam najAAali al-arda kifata",
+      "translations": {
+        "fr": "N’avons-Nous pas fait de la terre un réceptacle commun",
+        "en": "Did We not make the earth a home",
+        "es": "¿Acaso no he hecho de la tierra una morada",
+        "it": "Non abbiamo fatto della terra un luogo di riunione",
+        "ru": "Разве Мы не сделали землю вместилищем",
+        "tr": "Yeryüzünü bir tokat (toplanma yeri) yapmadık mı?",
+        "de": "Haben Wir nicht die Erde zu einem Ort der Aufbewahrung gemacht",
+        "pt": "Porventura, não destinamos a terra por abrigo,",
+        "nl": "Hebben Wij de aarde niet tot een plaats ven verzameling gemaakt?",
+        "ur": "کیا ہم نے زمین کو سمیٹ کر رکھنے والی نہیں بنایا",
+        "bn": "আমি পৃথিৱীখনক ধাৰণকাৰীৰূপে সৃষ্টি কৰা নাইনে?",
+        "fa": "آیا زمین را جایگاه [تجمع مردم] قرار ندادیم؟"
+      }
+    },
+    {
+      "verse_number": 5648,
+      "verse_key": "77:26",
+      "arabic_text": "أَحْيَآءً وَأَمْوَٰتًا",
+      "phonetic_text": "Ahyaan waamwata",
+      "translations": {
+        "fr": "aux vivants et aux morts ?",
+        "en": "for the living and the dead?",
+        "es": "para los vivos y los muertos,",
+        "it": "dei vivi e dei morti?",
+        "ru": "для живых и мертвых?",
+        "tr": "Gerek diriler, gerekse ölüler için.",
+        "de": "- für die Lebenden und die Toten -",
+        "pt": "Dos vivos e dos mortos,",
+        "nl": "Zowel voor levenden en doden?",
+        "ur": "زندوں کے لیے بھی اور مُردوں کے لیے بھی",
+        "bn": "জীৱিতসকল আৰু মৃতসকলৰ বাবে?",
+        "fa": "هم در حال حیات و هم مرگشان؟"
+      }
+    },
+    {
+      "verse_number": 5649,
+      "verse_key": "77:27",
+      "arabic_text": "وَجَعَلْنَا فِيهَا رَوَٰسِىَ شَـٰمِخَـٰتٍ وَأَسْقَيْنَـٰكُم مَّآءً فُرَاتًا",
+      "phonetic_text": "WajaAAalna feeha rawasiyashamikhatin waasqaynakum maan furata",
+      "translations": {
+        "fr": "N’y avons-Nous pas implanté des montagnes altières ? Ne vous avons-Nous pas donné à boire une eau très douce ?",
+        "en": "Did We not place firm, lofty mountains on it and provide you with sweet water?",
+        "es": "y he puesto en ella montañas elevadas y firmes? ¿Acaso no les he dado de beber agua dulce?",
+        "it": "Non vi ponemmo alte montagne? Non vi demmo da bere un’acqua dolce <a class=f><sup foot_note=160429>1</sup></a> ?",
+        "ru": "Разве Мы не воздвигли на ней незыблемые и высокие горы и не напоили вас пресной водой?",
+        "tr": "Orada yüksek yüksek dağlar oturtup da size bir tatlı su sunmadık mı?",
+        "de": "und auf ihr festgegründete, hoch aufragende Berge gemacht und euch frisches Wasser zu trinken gegeben?",
+        "pt": "Onde fixamos firmes e elevadas montanhas, e vos demos para beber água potável?",
+        "nl": "En Wij plaatsten daarop stevige bergen en Wij schonken jullie helder water.",
+        "ur": "اور اس میں بلند و بالا پہاڑ جمائے، اور تمہیں میٹھا پانی پلایا؟ <sup foot_note=\"188278\">1</sup>",
+        "bn": "আৰু আমি তাত স্থাপন কৰিছো সুদৃঢ় আৰু সুউচ্চ পৰ্বতসমূহ আৰু তোমালোকক পান কৰাইছো তৃ়ষ্ণা নিবাৰণকাৰী মিঠা উপযোগী পানী।",
+        "fa": "و کوه‌های بسیار بلند [و استوار] در آن قرار دادیم و آبی شیرین [و گوارا] به شما نوشاندیم."
+      }
+    },
+    {
+      "verse_number": 5650,
+      "verse_key": "77:28",
+      "arabic_text": "وَيْلٌ يَوْمَئِذٍ لِّلْمُكَذِّبِينَ",
+      "phonetic_text": "Waylun yawma-ithin lilmukaththibeen",
+      "translations": {
+        "fr": "Malheur, ce jour-là, aux négateurs !",
+        "en": "Woe, on that Day, to those who denied the truth!",
+        "es": "¡Cuán desdichados serán ese día los que negaron la verdad!",
+        "it": "Guai, in quel Giorno, a coloro che tacciano di menzogna!",
+        "ru": "Горе в тот день тем, кто считает истину ложью!",
+        "tr": "O gün yalanlayanların vay haline!",
+        "de": "Wehe an jenem Tag den Leugnern!",
+        "pt": "Ai, nesse dia, dos desmentidores!",
+        "nl": "Wee die Dag de loochenaars!",
+        "ur": "تباہی ہے اُس روز جھُٹلانے والوں کے لیے۔ <sup foot_note=\"188263\">1</sup>",
+        "bn": "সেইদিনা ধ্বংস অনিবাৰ্য অস্বীকাৰকাৰীসকলৰ বাবে,",
+        "fa": "در آن روز، وای بر تکذیب‌کنندگان!"
+      }
+    },
+    {
+      "verse_number": 5651,
+      "verse_key": "77:29",
+      "arabic_text": "ٱنطَلِقُوٓا۟ إِلَىٰ مَا كُنتُم بِهِۦ تُكَذِّبُونَ",
+      "phonetic_text": "Intaliqoo ila ma kuntumbihi tukaththiboon",
+      "translations": {
+        "fr": "Précipitez-vous donc vers ce que vous teniez pour mensonge !",
+        "en": "They will be told, ‘Go to that which you used to deny!",
+        "es": "[Se les dirá:] Dirigíos a lo que desmentíais [el Infierno].",
+        "it": "[Sarà detto ai miscredenti] «Andate verso quel che tacciavate di menzogna!",
+        "ru": "Ступайте к тому, что вы считали ложью!",
+        "tr": "(Kıyameti yalanlayanlara şöyle denir): \"Haydin gidin o yalanladığınız şeye doğru.\"",
+        "de": "- Zieht los zu dem, was ihr stets für Lüge erklärt habt,",
+        "pt": "(Ser-lhes-á dito): Dirigi-vos, pois, ao destino que costumáveis negar!",
+        "nl": "Gaat naar dat wat jullie plachten to loochenen!",
+        "ur": "<sup foot_note=\"171627\">1</sup> چلو اب اُسی چیز کی طرف جسے تم جھُٹلایا کرتے تھے",
+        "bn": "(সিহঁতক কোৱা হ’ব) তোমালোকে যাক অস্বীকাৰ কৰিছিলা, এতিয়া গতি কৰা তাৰফালে।",
+        "fa": "[به آنها گفته می‌شود:] «به سوی همان چیزی بروید که پیوسته آن را تکذیب می‌کردید."
+      }
+    },
+    {
+      "verse_number": 5652,
+      "verse_key": "77:30",
+      "arabic_text": "ٱنطَلِقُوٓا۟ إِلَىٰ ظِلٍّ ذِى ثَلَـٰثِ شُعَبٍ",
+      "phonetic_text": "Intaliqoo ila thillinthee thalathi shuAAab",
+      "translations": {
+        "fr": "Élancez-vous vers l’ombre aux trois colonnes de (la fumée de l’Enfer),",
+        "en": "Go to a shadow of smoke!’ It rises in three columns;",
+        "es": "Dirigíos a la sombra [infernal] ramificada en tres,",
+        "it": "Andate verso un’ombra di tre colonne",
+        "ru": "Ступайте к тени с тремя разветвлениями.",
+        "tr": "\"Haydi gidin o üç çatallı gölgeye (cehenneme).\"",
+        "de": "zieht los zu einem Schatten mit drei Verzweigungen,",
+        "pt": "Dirigi-vos à sombra trifurcada,",
+        "nl": "Gaat naar een schaduw (van rook) die drie kolommen heeft.",
+        "ur": "چلو اُس سائے کی طرف جو تین شاخوں والا ہے، <sup foot_note=\"188279\">1</sup>",
+        "bn": "যোৱা তিনিটা শাখা বিশিষ্ট জুইৰ ছাঁৰ পিনে,",
+        "fa": "بروید به سوی سایۀ [دودهای آتش] سه‌شاخه،"
+      }
+    },
+    {
+      "verse_number": 5653,
+      "verse_key": "77:31",
+      "arabic_text": "لَّا ظَلِيلٍ وَلَا يُغْنِى مِنَ ٱللَّهَبِ",
+      "phonetic_text": "La thaleelin walayughnee mina allahab",
+      "translations": {
+        "fr": "qui ne protège ni ne prémunit contre les flammes.",
+        "en": "no shade does it give, nor relief from the flame;",
+        "es": "que no protege ni salva de las llamas,",
+        "it": "che non ombreggia e non ripara dalla vampa [infernale]",
+        "ru": "Не прохладна она и от пламени не избавляет,",
+        "tr": "O, ne gölgelendirir, ne alevden korur.",
+        "de": "der kein (wirklicher) Schattenspender ist und nicht (als Schutz) gegen die Flammen nützt.",
+        "pt": "Que com nada guarnece ou protege das chamas!",
+        "nl": "Die geen schaduw geeft en die niet baat tegen het vlammende Vuur.",
+        "ur": "نہ ٹھنڈک پہنچانے والا اور نہ آگ کی لپٹ سے بچانے والا",
+        "bn": "যিটো ছাঁ শীতল নহয় আৰু ই অগ্নিশিখাৰ পৰা ৰক্ষাও নকৰিব,",
+        "fa": "نه سایه‌افکن [و خنک] است و نه از [گرمیِ] شعله‌های آتش جلوگیری می‌کند»."
+      }
+    },
+    {
+      "verse_number": 5654,
+      "verse_key": "77:32",
+      "arabic_text": "إِنَّهَا تَرْمِى بِشَرَرٍ كَٱلْقَصْرِ",
+      "phonetic_text": "Innaha tarmee bishararin kalqasr",
+      "translations": {
+        "fr": "Car (le Feu de la Géhenne) projette des étincelles aussi grandes que de hautes citadelles,",
+        "en": "it shoots out sparks as large as treetrunks",
+        "es": "pues arroja chispas grandes como palacios.",
+        "it": "che proietta scintille [grandi] come tronchi,",
+        "ru": "а он бросает искры, подобные замку,",
+        "tr": "O, saray gibi kıvılcımlar atar.",
+        "de": "Sie wirft mit Funken wie Schlösser,",
+        "pt": "Sabei que arrojará chispas, que parecerão castelos,",
+        "nl": "Zij (de Hel) werpt vonken als kastelen.",
+        "ur": "وہ آگ محل جیسی بڑی بڑی چنگاریاں پھینکے گی",
+        "bn": "নিশ্চয় জাহান্নামে উৎক্ষেপন কৰিব বৃহৎ অট্ৰালিকা সদৃশ ফিৰিঙতি,",
+        "fa": "همانا [دوزخ،‌] شراره‌هایی چون كاخى [بلند] مى‌افكنَد."
+      }
+    },
+    {
+      "verse_number": 5655,
+      "verse_key": "77:33",
+      "arabic_text": "كَأَنَّهُۥ جِمَـٰلَتٌ صُفْرٌ",
+      "phonetic_text": "Kaannahu jimalatun sufr",
+      "translations": {
+        "fr": "ou semblables à des chameaux jaunes.",
+        "en": "and as bright as copper.",
+        "es": "Chispas que parecen camellos pardos<sup foot_note=169486>1</sup>.",
+        "it": "che sembrano invero lastre di rame» <a class=f><sup foot_note=160430>1</sup></a> .",
+        "ru": "который выглядит словно желтые верблюды.",
+        "tr": "Sanki o kıvılcımlar, sarı sarı (erkek deve sürüleridir).",
+        "de": "als wären sie gelbe Kamele.",
+        "pt": "Semelhantes a camelos, de matizes amarelos.",
+        "nl": "Alsof zij gele kamelen waren.",
+        "ur": "(جو اُچھلتی ہوئی یُوں محسُوس ہوں گی) گویا کہ وہ زرد اُونٹ ہیں۔ <sup foot_note=\"188280\">1</sup>",
+        "bn": "এনেকুৱা যেন হালধীয়া উটৰ শ্ৰেণী,",
+        "fa": "گویی که آن [شراره‌ها] شتران زردرنگ هستند."
+      }
+    },
+    {
+      "verse_number": 5656,
+      "verse_key": "77:34",
+      "arabic_text": "وَيْلٌ يَوْمَئِذٍ لِّلْمُكَذِّبِينَ",
+      "phonetic_text": "Waylun yawma-ithin lilmukaththibeen",
+      "translations": {
+        "fr": "Malheur, ce jour-là, aux négateurs !",
+        "en": "Woe, on that Day, to those who denied the truth!",
+        "es": "¡Cuán desdichados serán ese día los que negaron la verdad!",
+        "it": "Guai, in quel Giorno, a quelli che tacciano di menzogna!",
+        "ru": "Горе в тот день тем, кто считает истину ложью!",
+        "tr": "O gün yalanlayanların vay haline!",
+        "de": "Wehe an jenem Tag den Leugnern!",
+        "pt": "Ai, nesse dia, dos desmentidores!",
+        "nl": "Wee die Dag de loochenaars!",
+        "ur": "تباہی ہے اُس روز جھٹلانے والوں کے لیے",
+        "bn": "সেইদিনা ধ্বংস অনিবাৰ্য অস্বীকাৰকাৰীসকলৰ বাবে,",
+        "fa": "در آن روز، وای بر تکذیب‌کنندگان!"
+      }
+    },
+    {
+      "verse_number": 5657,
+      "verse_key": "77:35",
+      "arabic_text": "هَـٰذَا يَوْمُ لَا يَنطِقُونَ",
+      "phonetic_text": "Hatha yawmu la yantiqoon",
+      "translations": {
+        "fr": "Ce jour-là, (les mécréants) ne pourront ni parler,",
+        "en": "On that Day they will be speechless,",
+        "es": "Ese día no hablarán",
+        "it": "Sarà il Giorno in cui non potranno parlare,",
+        "ru": "В тот день они будут безмолвствовать,",
+        "tr": "Bugün, konuşamıyacakları gündür.",
+        "de": "Das ist der Tag, an dem sie nicht reden werden",
+        "pt": "Esse será o dia em que não falarão (estarrecidos),",
+        "nl": "Dit is een Dag waarop zij niet spreken.",
+        "ur": "یہ وہ دن ہے جس میں وہ نہ کچھ بولیں گے",
+        "bn": "এইটো এনেকুৱা দিন যিদিনা সিহঁতে কথা ক’ব নোৱাৰিব,",
+        "fa": "این [همان] روزی است که سخن نمی‌گویند."
+      }
+    },
+    {
+      "verse_number": 5658,
+      "verse_key": "77:36",
+      "arabic_text": "وَلَا يُؤْذَنُ لَهُمْ فَيَعْتَذِرُونَ",
+      "phonetic_text": "Wala yu/thanu lahum fayaAAtathiroon",
+      "translations": {
+        "fr": "ni ne seront autorisés à présenter des excuses.",
+        "en": "and they will be given no chance to offer any excuses.",
+        "es": "ni se les permitirá excusarse.",
+        "it": "e non sarà dato loro il permesso di scusarsi.",
+        "ru": "и не будет им дозволено оправдываться.",
+        "tr": "Kendilerine izin de verilmez ki, özür beyan etsinler.",
+        "de": "und (es) ihnen nicht erlaubt wird, daß sie sich entschuldigen.",
+        "pt": "Nem lhes será permitido escusarem-se.",
+        "nl": "En er wordt hun niet toegestaan zich te verontschuldigen.",
+        "ur": "اور نہ اُنہیں موقع دیا جائے گا کہ کوئی عُذر پیش کریں۔ <sup foot_note=\"188281\">1</sup>",
+        "bn": "আৰু সিহঁতক অজুহাত পেচ কৰাৰ অনুমতিও দিয়া নহ’ব।",
+        "fa": "و به آنها اجازه داده نمی‌شود تا عذرخواهی کنند."
+      }
+    },
+    {
+      "verse_number": 5659,
+      "verse_key": "77:37",
+      "arabic_text": "وَيْلٌ يَوْمَئِذٍ لِّلْمُكَذِّبِينَ",
+      "phonetic_text": "Waylun yawma-ithin lilmukaththibeen",
+      "translations": {
+        "fr": "Malheur, ce jour-là, aux négateurs !",
+        "en": "Woe, on that Day, to those who denied the truth!",
+        "es": "¡Cuán desdichados serán ese día los que negaron la verdad!",
+        "it": "Guai, in quel Giorno, a coloro che tacciano di menzogna!",
+        "ru": "Горе в тот день тем, кто считает истину ложью!",
+        "tr": "O gün yalanlayanların vay haline!",
+        "de": "Wehe an jenem Tag den Leugnern!",
+        "pt": "Ai, nesse dia, dos desmentidores!",
+        "nl": "Wee die Dag de loochenaars!",
+        "ur": "تباہی ہے اُس دن جھٹلانے والوں کے لیے",
+        "bn": "সেইদিনা ধ্বংস অনিবাৰ্য অস্বীকাৰকাৰীসকলৰ বাবে,",
+        "fa": "در آن روز، وای بر تکذیب‌کنندگان!"
+      }
+    },
+    {
+      "verse_number": 5660,
+      "verse_key": "77:38",
+      "arabic_text": "هَـٰذَا يَوْمُ ٱلْفَصْلِ ۖ جَمَعْنَـٰكُمْ وَٱلْأَوَّلِينَ",
+      "phonetic_text": "Hatha yawmu alfasli jamaAAnakumwal-awwaleen",
+      "translations": {
+        "fr": "Voici venu le Jour de la Décision où Nous vous réunissons avec ceux qui vous ont précédés.",
+        "en": "[They will be told], ‘This is the Day of Decision: We have gathered you and earlier generations.",
+        "es": "Este es el día de la sentencia. Les he reunido a los primeros y a los últimos.",
+        "it": "È il Giorno della Decisione, in cui riuniremo voi e gli antichi.",
+        "ru": "Вот День различения! Мы собрали вас и тех, кто был прежде.",
+        "tr": "Bu, işte o hüküm günüdür. Sizi ve öncekileri bir araya topladık.",
+        "de": "- Das ist der Tag der Entscheidung; Wir haben euch mit den Früheren versammelt.",
+        "pt": "Eis o Dia da Discriminação, em que vos congregaremos, juntamente com os vossos antepassados!",
+        "nl": "Dit is de Dag van de Beoordeling, Wij verzamelen jullie en de vroegeren.",
+        "ur": "یہ فیصلے کا دن ہے ہم نے تمہیں اور تم سے پہلے گزرے ہوئے لوگوں کو جمع کر دیا ہے",
+        "bn": "‘এইটো ফয়চালাৰ দিন, আমি একত্ৰিত কৰিছো তোমালোকক আৰু পূৰ্বৱৰ্তীসকলক’।",
+        "fa": "این [همان] روز جدایی [و داوری] است که شما و گذشتگان را گرد آورده‌ایم."
+      }
+    },
+    {
+      "verse_number": 5661,
+      "verse_key": "77:39",
+      "arabic_text": "فَإِن كَانَ لَكُمْ كَيْدٌ فَكِيدُونِ",
+      "phonetic_text": "Fa-in kana lakum kaydun fakeedoon",
+      "translations": {
+        "fr": "Si vous avez quelque stratagème faites-en donc usage contre Moi !",
+        "en": "If you have any plots against Me, try them now.’",
+        "es": "Si creen tener alguna treta [para huir], usadla ahora.",
+        "it": "Se possedete uno stratagemma, usatelo dunque contro di Me.",
+        "ru": "Если у вас есть какая-нибудь хитрость, то ухитритесь против Меня!",
+        "tr": "Bir hileniz varsa beni atlatın.",
+        "de": "Wenn ihr also eine List habt, so führt sie gegen Mich aus.",
+        "pt": "Assim, pois, se possuís alguma conspiração, conspirai contra Mim!",
+        "nl": "Als jullie dan een list hebben, voert die dan uit.",
+        "ur": "اب اگر کوئی چال تم چل سکتے ہو تو میرے مقابلہ میں چل دیکھو۔ <sup foot_note=\"188282\">1</sup>",
+        "bn": "এতেকে যদি তোমালোকৰ কোনো কৌশল আছে তেন্তে প্ৰয়োগ কৰা মোৰ বিৰুদ্ধে।",
+        "fa": "پس اگر [حیله و] نیرنگی دارید، آن را در حق من به کار گیرید."
+      }
+    },
+    {
+      "verse_number": 5662,
+      "verse_key": "77:40",
+      "arabic_text": "وَيْلٌ يَوْمَئِذٍ لِّلْمُكَذِّبِينَ",
+      "phonetic_text": "Waylun yawma-ithin lilmukaththibeen",
+      "translations": {
+        "fr": "Malheur, ce jour-là, aux négateurs !",
+        "en": "Woe, on that Day, to those who denied the truth!",
+        "es": "¡Cuán desdichados serán ese día los que negaron la verdad!",
+        "it": "Guai, in quel Giorno, a coloro che tacciano di menzogna!",
+        "ru": "Горе в тот день тем, кто считает истину ложью!",
+        "tr": "O gün yalanlayanların vay haline!",
+        "de": "Wehe an jenem Tag den Leugnern!",
+        "pt": "Ai, nesse dia, dos desmentidores!",
+        "nl": "Wee die Dag de loochenaars!",
+        "ur": "تباہی ہے اُس دن جھٹلانے والوں کے لیے",
+        "bn": "সেইদিনা ধ্বংস অনিবাৰ্য অস্বীকাৰকাৰীসকলৰ বাবে,",
+        "fa": "در آن روز، وای بر تکذیب‌کنندگان!"
+      }
+    },
+    {
+      "verse_number": 5663,
+      "verse_key": "77:41",
+      "arabic_text": "إِنَّ ٱلْمُتَّقِينَ فِى ظِلَـٰلٍ وَعُيُونٍ",
+      "phonetic_text": "Inna almuttaqeena fee thilalinwaAAuyoon",
+      "translations": {
+        "fr": "Ceux qui sont pieux seront au milieu d’ombrages et de sources (vives),",
+        "en": "But those who took heed of God will enjoy cool shade, springs,",
+        "es": "Pero los que hayan tenido temor de Dios, estarán bajo sombras frescas entre manantiales.",
+        "it": "I timorati [di Allah] saranno tra ombre e sorgenti,",
+        "ru": "А богобоязненные, воистину, пребудут среди сеней и источников",
+        "tr": "Kuşkusuz takva sahipleri gölgeler altında ve pınar başlarındadır.",
+        "de": "Gewiß, die Gottesfürchtigen werden sich in Schatten und an Quellen befinden",
+        "pt": "Por outra, os tementes estarão entre sombras e mananciais,",
+        "nl": "Voorwaar, de Moettaqôen verkeren in schaduwen en bij bronnen.",
+        "ur": "<sup foot_note=\"171628\">1</sup> متقی لوگ آج سایوں اور چشموں میں ہیں",
+        "bn": "নিশ্চয় মুত্তাক্বীসকল থাকিব ছাঁৰ তলত আৰু নিজৰা বহুল স্থানত,",
+        "fa": "به راستی که [در آن روز،] پرهیزگاران در سایه‌ها و [کنار] چشمه‌ها قرار دارند،"
+      }
+    },
+    {
+      "verse_number": 5664,
+      "verse_key": "77:42",
+      "arabic_text": "وَفَوَٰكِهَ مِمَّا يَشْتَهُونَ",
+      "phonetic_text": "Wafawakiha mimma yashtahoon",
+      "translations": {
+        "fr": "et auront les fruits qu’ils désireront.",
+        "en": "and any fruit they desire;",
+        "es": "Tendrán las frutas que deseen.",
+        "it": "e frutti che brameranno.",
+        "ru": "и плодов, каких только пожелают.",
+        "tr": "Canlarının çektiğinden türlü meyveler arasındadırlar.",
+        "de": "und bei Früchten von dem, was sie begehren.",
+        "pt": "E terão os frutos que lhes apetecerem.",
+        "nl": "En er zijn vruchten die zij wensen.",
+        "ur": "اور جو پھل وہ چاہیں (اُن کے لیے حاضر ہیں)",
+        "bn": "আৰু তেওঁলোকৰ হেঁপাহ অনুযায়ী ফলমূলৰ মাজত।",
+        "fa": "و میوه‌هایی که میل داشته باشند."
+      }
+    },
+    {
+      "verse_number": 5665,
+      "verse_key": "77:43",
+      "arabic_text": "كُلُوا۟ وَٱشْرَبُوا۟ هَنِيٓـًٔۢا بِمَا كُنتُمْ تَعْمَلُونَ",
+      "phonetic_text": "Kuloo washraboo hanee-an bimakuntum taAAmaloon",
+      "translations": {
+        "fr": "« Mangez et buvez en paix pour tout ce que vous faisiez. »",
+        "en": "[they will be told], ‘Eat and drink to your hearts’ content as a reward for your deeds:",
+        "es": "[Se les dirá:] “Comed y bebed cuanto queráis como recompensa por cuanto habéis obrado”.",
+        "it": "[Sarà detto loro]: «Mangiate e bevete in pace, [compenso] per quello che avete fatto».",
+        "ru": "Ешьте и пейте во здравие за то, что вы совершали!",
+        "tr": "(Onlara): \"Yaptıklarınıza karşılık afiyetle yiyin, için\" (denir).",
+        "de": "Eßt und trinkt als wohlbekömmlich für das, was ihr zu tun pflegtet.",
+        "pt": "Comei e bebei, com proveito, pelo bem que fizestes!",
+        "nl": "(Er wordt gezegd:) \"Eet en drinkt smakelijk voor wat jullie plachten te verrichten.\"",
+        "ur": "کھاؤ اور پیو مزے سے اپنے اُن اعمال کے صلے میں جو تم کرتے رہے ہو",
+        "bn": "(তেওঁলোকক কোৱা হ'ব) তোমালোকে যি আমল কৰিছিলা তাৰ প্ৰতিদানস্বৰূপে তৃপ্তিৰ সৈতে পানাহাৰ কৰা;",
+        "fa": "[به آنها گفته می‌شود:] «به پاداش آنچه می‌کردید، گوارا بخورید و بیاشامید."
+      }
+    },
+    {
+      "verse_number": 5666,
+      "verse_key": "77:44",
+      "arabic_text": "إِنَّا كَذَٰلِكَ نَجْزِى ٱلْمُحْسِنِينَ",
+      "phonetic_text": "Inna kathalika najzee almuhsineen",
+      "translations": {
+        "fr": "C’est ainsi que Nous rétribuons les bienfaiteurs.",
+        "en": "this is how We reward those who do good.’",
+        "es": "Así recompensaré a los que hagan el bien.",
+        "it": "Compensiamo così coloro che compiono il bene.",
+        "ru": "Так Мы вознаграждаем творящих добро.",
+        "tr": "İşte biz güzel amel işleyenleri böyle mükafatlandırırız.",
+        "de": "Gewiß, so vergelten Wir den Rechtschaffenen.",
+        "pt": "Certamente, assim recompensaremos os benfeitores.",
+        "nl": "Voorwaar, zo belonen Wij de weldoeners.",
+        "ur": "ہم نیک لوگوں کو ایسی ہی جزا دیتے ہیں",
+        "bn": "সৎকৰ্মশীলসকলক আমি এনেকুৱাই প্ৰতিদান দি থাকো।",
+        "fa": "ما این گونه نیکوکاران را پاداش می‌دهیم»."
+      }
+    },
+    {
+      "verse_number": 5667,
+      "verse_key": "77:45",
+      "arabic_text": "وَيْلٌ يَوْمَئِذٍ لِّلْمُكَذِّبِينَ",
+      "phonetic_text": "Waylun yawma-ithin lilmukaththibeen",
+      "translations": {
+        "fr": "Malheur, ce jour-là, aux négateurs !",
+        "en": "Woe, on that Day, to those who denied the truth!",
+        "es": "¡Cuán desdichados serán ese día los que negaron la verdad!",
+        "it": "Guai, in quel Giorno, a coloro che tacciano di menzogna!",
+        "ru": "Горе в тот день тем, кто считает истину ложью!",
+        "tr": "O gün yalanlayanların vay haline!",
+        "de": "Wehe an jenem Tag den Leugnern!",
+        "pt": "Ai, nesse dia, dos desmentidores!",
+        "nl": "Wee die Dag de loochenaars!",
+        "ur": "تباہی ہے اُس روز جھُٹلانے والوں کے لیے۔ <sup foot_note=\"188283\">1</sup>",
+        "bn": "সেইদিনা ধ্বংস অনিবাৰ্য অস্বীকাৰকাৰীসকলৰ বাবে,",
+        "fa": "در آن روز، وای بر تکذیب‌کنندگان!"
+      }
+    },
+    {
+      "verse_number": 5668,
+      "verse_key": "77:46",
+      "arabic_text": "كُلُوا۟ وَتَمَتَّعُوا۟ قَلِيلًا إِنَّكُم مُّجْرِمُونَ",
+      "phonetic_text": "Kuloo watamattaAAoo qaleelan innakummujrimoon",
+      "translations": {
+        "fr": "« Mangez et jouissez pour peu de temps (ô mécréants), vous êtes certes des scélérats ! »",
+        "en": "[You may] eat and enjoy yourselves for a short while, evildoers that you are.",
+        "es": "[¡Aquellos que niegan el Mensaje!] Comed y disfrutad temporalmente, porque están hundidos en el pecado.",
+        "it": "[Sarà detto loro]: «Mangiate e godete un poco <a class=f><sup foot_note=160431>1</sup></a> , voi che siete criminali».",
+        "ru": "Вкушайте и наслаждайтесь недолго, ведь вы являетесь грешниками.",
+        "tr": "Yiyin, zevklenin biraz, çünkü siz suçlularsınız.",
+        "de": "Eßt und genießt ein wenig, ihr seid ja Übeltäter.",
+        "pt": "Comei e regozijai-vos (ó injustos), transitoriamente;",
+        "nl": "Eet en geniet even: voorwaar, jullie zijn misdadigers.",
+        "ur": "<sup foot_note=\"171629\">1</sup> کھالو اور مزے کر لو تھوڑے دن۔ <sup foot_note=\"171630\">2</sup> حقیقت میں تم لوگ مجرم ہو",
+        "bn": "(হে কাফিৰসকল!) তোমালোকে আহাৰ কৰা আৰু ভোগ কৰা খন্তেকৰ বাবে; নিশ্চয় তোমালোক অপৰাধী।",
+        "fa": "«[ای کافران، در این دنیا] اندکی بخورید و بهره گیرید؛ زیرا شما گناهکارید»."
+      }
+    },
+    {
+      "verse_number": 5669,
+      "verse_key": "77:47",
+      "arabic_text": "وَيْلٌ يَوْمَئِذٍ لِّلْمُكَذِّبِينَ",
+      "phonetic_text": "Waylun yawma-ithin lilmukaththibeen",
+      "translations": {
+        "fr": "Malheur, ce jour-là, aux négateurs !",
+        "en": "Woe, on that Day, to those who denied the truth!",
+        "es": "¡Cuán desdichados serán ese día los que negaron la verdad!",
+        "it": "Guai, in quel Giorno, a coloro che tacciano di menzogna!",
+        "ru": "Горе в тот день тем, кто считает истину ложью!",
+        "tr": "O gün yalanlayanların vay haline!",
+        "de": "Wehe an jenem Tag den Leugnern!",
+        "pt": "Ai, nesse dia, dos desmentidores!",
+        "nl": "Wee die Dag de loochenaars!",
+        "ur": "تباہی ہے اُس روز جھٹلانے والوں کے لیے",
+        "bn": "সেইদিনা ধ্বংস অনিবাৰ্য অস্বীকাৰকাৰীসকলৰ বাবে,",
+        "fa": "در آن روز، وای بر تکذیب‌کنندگان!"
+      }
+    },
+    {
+      "verse_number": 5670,
+      "verse_key": "77:48",
+      "arabic_text": "وَإِذَا قِيلَ لَهُمُ ٱرْكَعُوا۟ لَا يَرْكَعُونَ",
+      "phonetic_text": "Wa-itha qeela lahumu irkaAAoo layarkaAAoon",
+      "translations": {
+        "fr": "Quand il leur est dit : « Inclinez-vous (pour la Çalât) », ils ne s’inclinent pas.",
+        "en": "When they are told, ‘Bow down in prayer,’ they do not do so.",
+        "es": "Cuando se les dice: “Haced la oración”, no la hacen.",
+        "it": "Quando si dice loro: «Inchinatevi [nella preghiera]» <a class=f><sup foot_note=160432>1</sup></a> , non si inchinano.",
+        "ru": "Когда им говорят: «Поклонитесь!». - они не кланяются.",
+        "tr": "Onlara: \"Rüku edin\" denildiği zaman etmezler.",
+        "de": "Und wenn zu ihnen gesagt wird: Verbeugt euch!, verbeugen sie sich nicht.",
+        "pt": "E quando lhes foi dito: Genuflecti!, não genuflectiram.",
+        "nl": "En wanneer er tot hen gezegd wordt: \"Buigt jullie (in de shalât),\" dan buigen zij niet.",
+        "ur": "جب اِن سے کہا جاتا ہے کہ (اللہ کے آگے) جُھکو تو نہیں جُھکتے۔ <sup foot_note=\"188284\">1</sup>",
+        "bn": "যেতিয়া সিহঁতক কোৱা হয়, ‘ৰুকু’ কৰা, (তেতিয়া) সিহঁতে ৰুকু’ নকৰে’।",
+        "fa": "و هنگامی‌ که به آنها گفته شود: [نماز بگزارید و] رکوع کنید، [نماز نمی‌گزارند و] رکوع نمی‌کنند."
+      }
+    },
+    {
+      "verse_number": 5671,
+      "verse_key": "77:49",
+      "arabic_text": "وَيْلٌ يَوْمَئِذٍ لِّلْمُكَذِّبِينَ",
+      "phonetic_text": "Waylun yawma-ithin lilmukaththibeen",
+      "translations": {
+        "fr": "Malheur, ce jour-là, aux négateurs !",
+        "en": "Woe, on that Day, to those who denied the truth!",
+        "es": "¡Cuán desdichados serán ese día los que negaron la verdad!",
+        "it": "Guai, in quel Giorno, a coloro che tacciano di menzogna!",
+        "ru": "Горе в тот день тем, кто считает истину ложью!",
+        "tr": "Vay haline o gün yalanlayanların!",
+        "de": "Wehe an jenem Tag den Leugnern!",
+        "pt": "Ai, nesse dia, dos desmentidores!",
+        "nl": "Wee die Dag de loochenaars!",
+        "ur": "تباہی ہے اُس روز جھٹلانے والوں کے لیے",
+        "bn": "সেইদিনা ধ্বংস অনিবাৰ্য অস্বীকাৰকাৰীসকলৰ বাবে,",
+        "fa": "در آن روز، وای بر تکذیب‌کنندگان!"
+      }
+    },
+    {
+      "verse_number": 5672,
+      "verse_key": "77:50",
+      "arabic_text": "فَبِأَىِّ حَدِيثٍۭ بَعْدَهُۥ يُؤْمِنُونَ",
+      "phonetic_text": "Fabi-ayyi hadeethin baAAdahuyu/minoon",
+      "translations": {
+        "fr": "En quelle parole, après celle-là, vont-ils donc croire ?",
+        "en": "In what revelation, after this, will they believe?",
+        "es": "¿En qué otro Mensaje fuera de este han de creer?",
+        "it": "A quale discorso mai crederanno, dopo di ciò? <a class=f><sup foot_note=160433>1</sup></a> L’esegesi non è concorde a proposito dell’interpretazione del soggetto, femminile e plurale dell’invocazione iniziale compresa nei verss.-Secondo i più si tratterebbe di venti, altri ritengono che siano angeli, altri ancora nuvole, mentre alcuni riferendosi particolarmente ai verss. 3-avanzano l’ipotesi che siano piuttosto le stesse «ayât» (i versetti del Corano). Ognuna di queste tesi è credibile e non esclude le altre dando (gloria ad Allah!) un’ulteriore dimostrazione della grande intensità dei significati del Sublime Corano. <a class=f><sup foot_note=160434>2</sup></a> «che separano con esattezza… [il vero dal falso].» <a class=f><sup foot_note=160435>3</sup></a> «e le montagne saranno disperse [come polvere].» <a class=f><sup foot_note=160436>4</sup></a> «e sarà indicato il momento ai Messaggeri! [di presentarsi perla loro testimonianza j…». I profeti testimonieranno di aver trasmesso agli uomini la parola di Allah (gloria a Lui l’Altissimo) e renderanno in tal modo vane le loro scuse. <a class=f><sup foot_note=160437>5</sup></a> «Giorno della Decisione»: «yaum al fasli», uno dei nomi del Giorno del Giudizio. <a class=f><sup foot_note=160438>6</sup></a> Questo versetto si ripete dieci volte nella sura e ne costituisce ritmicamente il motivo conduttore. <a class=f><sup foot_note=160439>7</sup></a> «un liquido vile»: lo sperma, la cui fuoriuscita determina impurità maggiore da rimuovere con abluzione completa (ghusl), questo il senso dell’aggettivo vile; anche: infimo, banale, abbietto. <a class=f><sup foot_note=160440>8</sup></a> «in un sicuro ricettacolo»: l’utero materno. <a class=f><sup foot_note=160441>9</sup></a> Per la durata della gestazione. <a class=f><sup foot_note=160442>10</sup></a> La dolcezza dell’acqua delle fonti di alta montagna è addirittura proverbiale, il versetto vi accenna con precisione e delicatezza. <a class=f><sup foot_note=160443>11</sup></a> Nella maggior parte delle versioni in francese e in italiano la traduzione di questi due versetti parla di «scintille grandi come castelli e cammelli gialli». Noi abbiamo preterito riferirci ad un’ipotesi dell’esegesi classica (Tabarì XXIX, 240-241-suffragata da un hadith riferito dai -Bukhârî che ci sembra più consona allo stile e alla logica coranica. <a class=f><sup foot_note=160444>12</sup></a> «godete un poco»: in questa vita terrena. <a class=f><sup foot_note=160445>13</sup></a> «Inchinatevi»: nell’orazione. Vedi Appendice 2.",
+        "ru": "В какой же рассказ после этого вы уверуете?",
+        "tr": "Artık bundan (Kur'an'dan) sonra hangi söze inanacaklar?",
+        "de": "An welche Aussage nach dieser wollen sie denn glauben?",
+        "pt": "Assim, pois, em que mensagem crerão, depois desta?",
+        "nl": "In welk Woord na hem (de Koran) zullen zij dan geloven?",
+        "ur": "اب اِس (قرآن)کے بعد اورکونسا کلام ایسا ہو سکتا ہے جس پر یہ ایمان لائیں؟<sup foot_note=\"188285\">1</sup>",
+        "bn": "এতেকে কোৰআনৰ পৰিবৰ্তে সিহঁতে আৰু কোন বাণীৰ প্ৰতি ঈমান আনিব?",
+        "fa": "[وقتی مردم به این قرآن که از جانب پروردگارشان نازل شده است ایمان نمی‌آورند،] پس به کدام سخن دیگری غیر از آن ایمان خواهند آورد؟"
+      }
+    }
+  ]
+}

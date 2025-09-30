@@ -1,0 +1,406 @@
+{
+  "surah_number": 73,
+  "extracted_at": "2025-09-20T15:16:54.619Z",
+  "verses": [
+    {
+      "verse_number": 5476,
+      "verse_key": "73:1",
+      "arabic_text": " يَـٰٓأَيُّهَا ٱلْمُزَّمِّلُ",
+      "phonetic_text": "Ya ayyuha almuzzammil",
+      "translations": {
+        "fr": "Ô toi qui t’emmitoufles dans tes vêtements !<sup foot_note=195212>1</sup>",
+        "en": "You [Prophet], enfolded in your cloak!",
+        "es": "¡Oh, tú [Muhámmad] que estás arropado!",
+        "it": "O tu l’avvolto [nelle tue vesti],",
+        "ru": "О закутавшийся!",
+        "tr": "Ey örtünen! (Peygamber)",
+        "de": "O du Eingehüllter,",
+        "pt": "Ó tu, acobertado,",
+        "nl": "O jij omhulde.",
+        "ur": "اے اوڑھ لپیٹ کر سونے والے، <sup foot_note=\"188153\">1</sup>",
+        "bn": "হে বস্ত্ৰাবৃত!",
+        "fa": "ای جامه‌به‌خودپیچیده،"
+      }
+    },
+    {
+      "verse_number": 5477,
+      "verse_key": "73:2",
+      "arabic_text": "قُمِ ٱلَّيْلَ إِلَّا قَلِيلًا",
+      "phonetic_text": "Qumi allayla illa qaleela",
+      "translations": {
+        "fr": "Lève-toi la nuit (pour prier), et n’en excepte qu’une petite partie.",
+        "en": "Stay up throughout the night, all but a small part of it,",
+        "es": "Levántate a orar en la noche, salvo una pequeña parte de ella,",
+        "it": "veglia una parte della notte,",
+        "ru": "Простаивай ночь без малого,",
+        "tr": "Gecenin birazı hariç olmak üzere geceleyin kalk (namaz kıl).",
+        "de": "steh (zum Gebet) die (ganze) Nacht auf- bis auf einen kleinen Teil,",
+        "pt": "Levanta-te à noite (para rezar), porém não durante toda a noite;",
+        "nl": "Sta op in de nacht om de shalât te verrichten, met uitzondering van een kort gedeelte (van de nacht).",
+        "ur": "رات کو نماز میں کھڑے رہا کرو مگر کم، <sup foot_note=\"188154\">1</sup>",
+        "bn": "ৰাতি ছালাত আদায় কৰা, কিছু অংশৰ বাহিৰে,",
+        "fa": "شب را ـ جز اندکی‌ـ به پا خیز [و عبادت کن]."
+      }
+    },
+    {
+      "verse_number": 5478,
+      "verse_key": "73:3",
+      "arabic_text": "نِّصْفَهُۥٓ أَوِ ٱنقُصْ مِنْهُ قَلِيلًا",
+      "phonetic_text": "Nisfahu awi onqus minhu qaleela",
+      "translations": {
+        "fr": "Ce sera sa moitié, un peu moins,",
+        "en": "half, or a little less,",
+        "es": "la mitad, o un poco menos,",
+        "it": "Pre-Eg. n. Di versetti. Il nome della sura deriva dal vers. In nome di Allah, il Compassionevole, il Misericordioso. la metà, oppure meno,",
+        "ru": "половину ночи или чуть меньше того,",
+        "tr": "Gecenin yarısında kalk, yahut yarısından biraz eksilt.",
+        "de": "ihre Hälfte, oder verringere sie um einen kleinen Teil",
+        "pt": "A metade dela ou pouco menos,",
+        "nl": "De helft ervan of iets minder dan dat.",
+        "ur": "آدھی رات، یا اس سے تھوڑا کم",
+        "bn": "আধা ৰাতি বা তাতোকৈ অলপ কম;",
+        "fa": "نیمه‌ای از آن را، یا اندکی از آن کم کن."
+      }
+    },
+    {
+      "verse_number": 5479,
+      "verse_key": "73:4",
+      "arabic_text": "أَوْ زِدْ عَلَيْهِ وَرَتِّلِ ٱلْقُرْءَانَ تَرْتِيلًا",
+      "phonetic_text": "Aw zid AAalayhi warattili alqur-anatarteela",
+      "translations": {
+        "fr": "ou un peu plus. Et récite le Coran de ta plus belle récitation.",
+        "en": "or a little more; recite the Quran slowly and distinctly:",
+        "es": "o un poco más, y recita el Corán claramente y meditando en su significado.",
+        "it": "oppure poco più. E recita il Corano lentamente, distintamente <a class=f><sup foot_note=160361>1</sup></a> .",
+        "ru": "или чуть больше того, и читай Коран размеренным чтением.",
+        "tr": "Veya bunu artır ve ağır ağır Kur'ân oku.",
+        "de": "oder füge etwas hinzu. Und trage den Qur’an wohlgeordnet vor.",
+        "pt": "Ou pouco mais, e recita fervorosamente o Alcorão.",
+        "nl": "Of maak het iets langer en draag de Koran voor, nauwkeurig.",
+        "ur": "یا اس سے کچھ کم کر لو، یا اس سے کچھ زیادہ بڑھا دو، <sup foot_note=\"188155\">1</sup> اور قرآن کو خوب ٹھہر ٹھہر کر پڑھو۔ <sup foot_note=\"188156\">2</sup>",
+        "bn": "অথবা তাতোকৈ অলপ বেছি। আৰু স্পষ্টভাৱে ধীৰে ধীৰে কোৰআন তিলাৱাত কৰা।",
+        "fa": "یا اندکی بر [نصف] آن بیفزای، و قرآن را با ترتیل [و تأمل] بخوان."
+      }
+    },
+    {
+      "verse_number": 5480,
+      "verse_key": "73:5",
+      "arabic_text": "إِنَّا سَنُلْقِى عَلَيْكَ قَوْلًا ثَقِيلًا",
+      "phonetic_text": "Inna sanulqee AAalayka qawlan thaqeela",
+      "translations": {
+        "fr": "Nous allons bientôt te faire porter de lourdes paroles.",
+        "en": "We shall send a momentous message down to you.",
+        "es": "Porque he de transmitirte una revelación de gran peso.",
+        "it": "Faremo scendere su di te parole gravi.",
+        "ru": "Мы непременно ниспошлем тебе весомые слова.",
+        "tr": "Doğrusu biz, senin üzerine ağır bir söz bırakacağız (Kur'an vahyedeceğiz).",
+        "de": "Gewiß, Wir werden dir gewichtige Worte offenbaren.",
+        "pt": "Em verdade, vamos revelar-te uma mensagem de peso.",
+        "nl": "Voorwaar, Wij zullen zware Woorden tot jou neerzenden.",
+        "ur": "ہم تم پر ایک بھاری کلام نازل کرنے والے ہیں۔ <sup foot_note=\"188157\">1</sup>",
+        "bn": "নিশ্চয় আমি তোমাৰ প্ৰতি এটি গধুৰ বাণী অৱতীৰ্ণ কৰিম।",
+        "fa": "یقیناً ما به زودی سخنی سنگین بر تو نازل خواهیم کرد."
+      }
+    },
+    {
+      "verse_number": 5481,
+      "verse_key": "73:6",
+      "arabic_text": "إِنَّ نَاشِئَةَ ٱلَّيْلِ هِىَ أَشَدُّ وَطْـًٔا وَأَقْوَمُ قِيلًا",
+      "phonetic_text": "Inna nashi-ata allayli hiya ashaddu wat-anwaaqwamu qeela",
+      "translations": {
+        "fr": "La prière du réveil nocturne est d’un impact plus profond et les paroles en sont plus justes.",
+        "en": "Night prayer makes a deeper impression and sharpens words––",
+        "es": "Si te levantas a orar en el seno de la noche encontrarás mayor quietud y podrás concentrarte mejor,",
+        "it": "In verità la preghiera della notte è la più efficace e la più propizia:",
+        "ru": "Воистину, молитвы после пробуждения среди ночи тяжелее и яснее по изложению.",
+        "tr": "Çünkü gece kalkışı hem daha etkili, hem de söz bakımından daha sağlamdır.",
+        "de": "Das Aufstehen in der Nacht hat stärkeren Einfluß (auf die Seele) und bringt eher aufklärende Worte.",
+        "pt": "Em verdade, o ato de te levantares à noite para rezares é mais marcante e mais adequado.",
+        "nl": "Voorwaar, het opstaan in de nacht (om te bidden) is zwaarder en maakt het woord zekerder.",
+        "ur": "درحقیقت رات کا اُٹھنا <sup foot_note=\"188158\">1</sup> نفس پر قابو پانے کے لیے بہت کارگر  <sup foot_note=\"188159\">2</sup> اور قرآن ٹھیک پڑھنے کے لیے زیادہ موزوں ہے۔ <sup foot_note=\"188160\">3</sup>",
+        "bn": "নিশ্চয় ৰাতি-জাগৰণ আত্মসংযমৰ বাবে অধিক প্ৰবল আৰু বাকস্ফুৰণত অধিক উপযোগী।",
+        "fa": "بی‌گمان، شب‌زنده‌داری [بر نفس] دشوار است، و برای گفتار [و نیایش،] مناسب‌تر و استوارتر است."
+      }
+    },
+    {
+      "verse_number": 5482,
+      "verse_key": "73:7",
+      "arabic_text": "إِنَّ لَكَ فِى ٱلنَّهَارِ سَبْحًا طَوِيلًا",
+      "phonetic_text": "Inna laka fee annahari sabhantaweela",
+      "translations": {
+        "fr": "Tu as, en vérité, de longs moments d’activité pendant la journée.",
+        "en": "you are kept busy for long periods of the day––",
+        "es": "pues durante el día tienes muchas ocupaciones.",
+        "it": "durante il giorno hai occupazioni impegnative.",
+        "ru": "Воистину, днем ты бываешь подолгу занят.",
+        "tr": "Çünkü gündüz senin için uzun bir meşguliyet vardır.",
+        "de": "Du hast ja am Tage lange Zeit für Beschäftigung.",
+        "pt": "Porque durante o dia tens muitos afazeres.",
+        "nl": "Voorwaar, jij bent overdag belast met vele aangelegenheden.",
+        "ur": "دن کے اوقات میں تو تمہارے لیے بہت مصروفیات ہیں",
+        "bn": "নিশ্চয় দিনৰ ভাগত তোমাৰ বাবে আছে দীৰ্ঘ কৰ্মব্যস্ততা।",
+        "fa": "و یقیناً تو در روز، مشغلۀ بسیار داری."
+      }
+    },
+    {
+      "verse_number": 5483,
+      "verse_key": "73:8",
+      "arabic_text": "وَٱذْكُرِ ٱسْمَ رَبِّكَ وَتَبَتَّلْ إِلَيْهِ تَبْتِيلًا",
+      "phonetic_text": "Wathkuri isma rabbikawatabattal ilayhi tabteela",
+      "translations": {
+        "fr": "Évoque le Nom de ton Seigneur ! Voue-toi exclusivement à Son culte !",
+        "en": "so celebrate the name of your Lord and devote yourself wholeheart-edly to Him.",
+        "es": "Celebra el nombre de tu Señor y conságrate a Él con total devoción.",
+        "it": "Menziona il Nome del tuo Signore e consacrati totalmente a Lui.",
+        "ru": "Поминай же имя Господа твоего и посвяти себя Ему полностью.",
+        "tr": "Rabbinin adını an ve bütün gönlünle ona yönel.",
+        "de": "Und gedenke des Namens deines Herrn und widme dich Ihm ganz allein.",
+        "pt": "Porém, recorda-te do teu Senhor e consagra-te integralmente a Ele.",
+        "nl": "En gedenk de Naam van jouw Heer en wijd je geheel aan Hem.",
+        "ur": "اپنے ربّ کے نام کا ذکر کیا کرو <sup foot_note=\"188161\">1</sup> اور سب سے کٹ کر اسی کے ہو رہو",
+        "bn": "আৰু তুমি তোমাৰ প্ৰতিপালকৰ নাম স্মৰণ কৰা আৰু একনিষ্ঠভাৱে তেওঁৰ প্ৰতি মনোনিবেশ কৰা।",
+        "fa": "و نام پروردگارت را یاد کن و [با خالص نمودن عبادت] تنها به او دل ببند."
+      }
+    },
+    {
+      "verse_number": 5484,
+      "verse_key": "73:9",
+      "arabic_text": "رَّبُّ ٱلْمَشْرِقِ وَٱلْمَغْرِبِ لَآ إِلَـٰهَ إِلَّا هُوَ فَٱتَّخِذْهُ وَكِيلًا",
+      "phonetic_text": "Rabbu almashriqi walmaghribi lailaha illa huwa fattakhithhu wakeela",
+      "translations": {
+        "fr": "Il est le Seigneur du Levant et du Couchant. Il n’est point d’autre divinité que Lui. Prends-Le donc pour unique Protecteur !",
+        "en": "He is Lord of the east and west, there is no god but Him, so take Him as your Protector,",
+        "es": "Él es el Señor del oriente y del occidente. No hay nada ni nadie con derecho a ser adorado salvo Él. Tómalo como tu protector.",
+        "it": "Il Signore dell’Oriente e dell’Occidente: non c’è dio all’infuori di Lui. Prendi Lui come Protettore.",
+        "ru": "Господь востока и запада - нет божества, кроме Него. Сделай же Его своим Попечителем и Хранителем.",
+        "tr": "O, doğunun ve batının Rabbidir. Ondan başka tanrı yoktur. O halde yalnız O'nu vekil tut.",
+        "de": "(Er ist) der Herr des Ostens und des Westens. Es gibt keinen Gott außer Ihm. So nimm Ihn dir zum Sachwalter.",
+        "pt": "Ele é o Senhor do Oriente e do Ocidente. Não há mais divindade além d'Ele! Toma-O, pois, por Guardião!",
+        "nl": "De Heer van de opgang (van de zon etc.) en de ondergang, geen god is er dan Hij, neem Hem daarom als Beschermer.",
+        "ur": "وہ مشرق و مغرب کا مالک ہے، اُس کے سوا کوئی خدا نہیں ہے، لہٰذا اُسی کو اپنا وکیل بنا لو۔<sup foot_note=\"188162\">1</sup>",
+        "bn": "তেৱেঁই পূৱ আৰু পশ্চিমৰ ৰব, তেওঁৰ বাহিৰে আন কোনো (সত্য) ইলাহ নাই। এতেকে তেওঁকেই তুমি কাৰ্য সম্পাদনকাৰীৰূপে গ্ৰহণ কৰা।",
+        "fa": "[همان] پروردگار مشرق و مغرب که معبودی [به‌حق] جز او نیست؛ پس او را کارساز [و نگهبان خود] برگُزین."
+      }
+    },
+    {
+      "verse_number": 5485,
+      "verse_key": "73:10",
+      "arabic_text": "وَٱصْبِرْ عَلَىٰ مَا يَقُولُونَ وَٱهْجُرْهُمْ هَجْرًا جَمِيلًا",
+      "phonetic_text": "Wasbir AAala mayaqooloona wahjurhum hajran jameela",
+      "translations": {
+        "fr": "Prends en patience ce qu’ils disent et déserte-les de la désertion la plus sereine !",
+        "en": "patiently endure what they say, ignore them politely,",
+        "es": "Ten paciencia con lo que dicen [insultándote], pero apártate de ellos discretamente.",
+        "it": "Sopporta con pazienza quello che dicono e allontanati dignitosamente <a class=f><sup foot_note=160362>1</sup></a> .",
+        "ru": "Терпимо относись к их словам и сторонись их красиво.",
+        "tr": "Başkalarının diyeceklerine sabret, güzellikle onlardan ayrıl.",
+        "de": "Und ertrage standhaft, was sie sagen, und meide sie auf schöne Weise.",
+        "pt": "E tolera tudo quanto te digam, e afasta-te dignamente deles.",
+        "nl": "En wees geduldig met wat zij zeggen en houd op gepaste wijze afstand van hen.",
+        "ur": "اور جو باتیں لوگ بنا رہے ہیں ان پر صبر کرو اور شرافت کے ساتھ اُن سے الگ ہو جاوٴ۔ <sup foot_note=\"188163\">1</sup>",
+        "bn": "আৰু মানুহে যি কয় তাৰ ওপৰত তুমি ধৈৰ্য ধাৰণ কৰা আৰু সৌজন্যৰ সৈতে সিহঁতক পৰিহাৰ কৰি চলা।",
+        "fa": "و بر آنچه [مشرکان] می‌گویند، شکیبا باش، و به شیوۀ نیکو [و شایسته] از آنان دوری کن،"
+      }
+    },
+    {
+      "verse_number": 5486,
+      "verse_key": "73:11",
+      "arabic_text": "وَذَرْنِى وَٱلْمُكَذِّبِينَ أُو۟لِى ٱلنَّعْمَةِ وَمَهِّلْهُمْ قَلِيلًا",
+      "phonetic_text": "Watharnee walmukaththibeenaolee annaAAmati wamahhilhum qaleela",
+      "translations": {
+        "fr": "Laisse-Moi avec les contradicteurs,<sup foot_note=195213>1</sup> qui sont privilégiés par les biens (de ce monde). Accorde-leur quelque répit.",
+        "en": "and leave to Me those who deny the truth and live in luxury. Bear with them for a little while;",
+        "es": "Deja que Yo me ocupe de los que niegan la verdad, los que ahora tienen opulencia. Tenles paciencia brevemente.",
+        "it": "LasciaMi <a class=f><sup foot_note=160363>1</sup></a> con coloro che tacciano di menzogna, che vivono nell’agiatezza e concedi loro un po’ di tempo.",
+        "ru": "Оставь Меня с теми, кто считает истину ложью, но пользуется мирскими благами, и предоставь им небольшую отсрочку.",
+        "tr": "O yalanlayıcı zevk ve refah sahiplerini bana bırak, onlara biraz mühlet ver.",
+        "de": "Und lasse Mich (allein) mit den Leugnern (der Botschaft), die ein angenehmes Leben haben, und lasse ihnen noch kurze Zeit.",
+        "pt": "E deixa por Minha conta os desmentidores, opulentos, e tolera-os por curto tempo,",
+        "nl": "En Laat de loochenaars, de bezitters van weelde, aan Mij over, en geef hen nog even uitstel.",
+        "ur": "اِن جُھٹلانے والے خوشحال لوگوں سے نمٹنے کا کام تم مجھ پر چھوڑ دو <sup foot_note=\"188164\">1</sup> اور اِنہیں ذرا کچھ دیر اِسی حالت میں رہنے دو",
+        "bn": "আৰু বিলাসী সামগ্ৰীৰ অধিকাৰী মিথ্যাৰোপকাৰীসকলক মোলৈ এৰি দিয়া আৰু সিহঁতক কিছু সময় অৱকাশ দিয়া।",
+        "fa": "و مرا با این تکذیب‌کنندگان مرفّه واگذار و کمی به آنان مهلت ده."
+      }
+    },
+    {
+      "verse_number": 5487,
+      "verse_key": "73:12",
+      "arabic_text": "إِنَّ لَدَيْنَآ أَنكَالًا وَجَحِيمًا",
+      "phonetic_text": "Inna ladayna ankalan wajaheema",
+      "translations": {
+        "fr": "Nous disposons (pour eux) de lourdes chaînes et d’un ardent Brasier,",
+        "en": "We have fetters, a blazing fire,",
+        "es": "[Porque] dispongo de cadenas y del fuego del Infierno [para castigarles],",
+        "it": "Invero presso di Noi ci sono catene e la Fornace",
+        "ru": "Воистину, есть у Нас оковы и Ад,",
+        "tr": "Zira bizim yanımızda bukağılar var, bir cehennem var.",
+        "de": "Gewiß, bei Uns gibt es schwere Fesseln und einen Höllenbrand",
+        "pt": "Porque lhes reservamos os grilhões e o fogo,",
+        "nl": "Voorwaar, bij Ons bevinden zich (voor hen) ketenen en Djahim (de Hel).",
+        "ur": "ہمارے پاس (اِن کے لیے) بھاری بیڑیاں ہیں <sup foot_note=\"188165\">1</sup> اور بھڑکتی ہوئی آگ",
+        "bn": "নিশ্চয় আমাৰ ওচৰত আছে শিকলিসমূহ আৰু প্ৰজ্বলিত জুই,",
+        "fa": "بی‌گمان، نزد ما قید [و بندهایی] سنگین و [آتش] دوزخ است،"
+      }
+    },
+    {
+      "verse_number": 5488,
+      "verse_key": "73:13",
+      "arabic_text": "وَطَعَامًا ذَا غُصَّةٍ وَعَذَابًا أَلِيمًا",
+      "phonetic_text": "WataAAaman tha ghussatinwaAAathaban aleema",
+      "translations": {
+        "fr": "d’une nourriture qui étouffe et d’un supplice très douloureux.",
+        "en": "food that chokes, and agonizing torment in store for them",
+        "es": "de una comida que [por su repugnancia] se atraganta, un castigo doloroso.",
+        "it": "e cibo che soffoca e doloroso castigo,",
+        "ru": "еда, которой давятся, и мучительные страдания.",
+        "tr": "Boğaza duran bir yiyecek, elem verici bir azap var.",
+        "de": "und Speise, die im Hals Würgen hervorruft, und schmerzhafte Strafe",
+        "pt": "Um alimento que engasga e um doloroso castigo.",
+        "nl": "En voedsel dat in de keel blijft steken en een pijnlijke bestraffing.",
+        "ur": "اور حلق میں پھنسنے والا کھانا اور دردناک عذاب",
+        "bn": "আৰু আছে কাইটযুক্ত খাদ্য আৰু যন্ত্ৰণাদায়ক শাস্তি।",
+        "fa": "و غذایی [ناگوار و] گلوگیر و عذابی دردناک."
+      }
+    },
+    {
+      "verse_number": 5489,
+      "verse_key": "73:14",
+      "arabic_text": "يَوْمَ تَرْجُفُ ٱلْأَرْضُ وَٱلْجِبَالُ وَكَانَتِ ٱلْجِبَالُ كَثِيبًا مَّهِيلًا",
+      "phonetic_text": "Yawma tarjufu al-ardu waljibaluwakanati aljibalu katheeban maheela",
+      "translations": {
+        "fr": "Ce jour-là, la terre et les montagnes s’ébranleront ; et les massifs se mueront en dunes de terre mouvante.",
+        "en": "on the Day when the earth and the mountains will shake. The mountains will become a heap of loose sand.",
+        "es": "El día que la tierra y las montañas convulsionen, y las montañas se conviertan en arena dispersa.",
+        "it": "nel Giorno in cui la terra e le montagne tremeranno e in cui le montagne diventeranno come dune di sabbia fina.",
+        "ru": "В тот день земля и горы сотрясутся, и горы превратятся в холмы сыпучего песка.",
+        "tr": "O gün yer ve dağlar sarsılacak, dağlar erimiş bir kum yığınına dönecek.",
+        "de": "am Tag, da die Erde und die Berge zittern und die Berge ein zerrinnender Sandhügel sein werden.",
+        "pt": "Será o dia em que haverão de tremer a terra e as montanhas, e haverão de se converter, as montanhas, em dunas dispersas.",
+        "nl": "Op de Dag waarop de aarde en de bergen heftig zullen beven en de bergen tot uit elkaar geblazen stof zullen worden.",
+        "ur": "یہ اُس دن ہو گا جب زمین اور پہاڑ لرز اُٹھیں گے اور پہاڑوں کا حال ایسا ہو جائے گا جیسے ریت کے ڈھیر جو بکھرے جا رہے ہیں۔ <sup foot_note=\"188166\">1</sup>",
+        "bn": "যিদিনা পৃথিৱী আৰু পৰ্বতসমূহ প্ৰকম্পিত হ’ব আৰু পৰ্বতসমূহ বিক্ষিপ্ত চলমান বালীময়ত পৰিণত হ’ব।",
+        "fa": "روزی ‌که زمین و کوه‌ها به لرزه درآید و کوه‌ها [متلاشی ‌شوند و] همچون تودۀ شنِ نرم [و روان] ‌گردند."
+      }
+    },
+    {
+      "verse_number": 5490,
+      "verse_key": "73:15",
+      "arabic_text": "إِنَّآ أَرْسَلْنَآ إِلَيْكُمْ رَسُولًا شَـٰهِدًا عَلَيْكُمْ كَمَآ أَرْسَلْنَآ إِلَىٰ فِرْعَوْنَ رَسُولًا",
+      "phonetic_text": "Inna arsalna ilaykum rasoolanshahidan AAalaykum kama arsalna ilafirAAawna rasoola",
+      "translations": {
+        "fr": "Nous vous avons envoyé un Messager qui témoignera contre vous, comme Nous avions déjà envoyé un Messager à Pharaon.",
+        "en": "We have sent a messenger to you [people] to be your witness, just as We sent a messenger to Pharaoh,",
+        "es": "[¡Oh, gente!] Os he enviado un Mensajero para que dé testimonio de la verdad ante vosotros, tal como antes había enviado un Mensajero al Faraón.",
+        "it": "In verità inviammo a voi un Messaggero, affinché testimoniasse contro di voi, così come inviammo un Messaggero a Faraone.",
+        "ru": "Мы отправили к вам Посланника свидетелем против вас, подобно тому, как отправили посланника к Фараону.",
+        "tr": "Doğrusu biz size tanıklık edecek bir elçi gönderdik. Nitekim Firavun'a da bir elçi göndermiştik.",
+        "de": "Wir haben zu euch ja einen Gesandten als Zeugen über euch gesandt, so wie Wir zu Fir’aun einen Gesandten sandten.",
+        "pt": "Sabei que vos enviamos um Mensageiro, para ser testemunha contra vós, tal como enviamos um mensageiro ao Faraó.",
+        "nl": "Voorwaar, Wij hebben een Boodschapper tot jullie gezonden als getuige over jullie, zoals Wij tot Fir'aun een Boodschapper zonden.",
+        "ur": "<sup foot_note=\"171612\">1</sup> تم لوگوں کے پاس ہم نے اُسی طرح ایک رسول تم پر گواہ بنا کر بھیجا<sup foot_note=\"171613\">2</sup> ہے جس طرح ہم نے فرعون کی طرف ایک رسُول بھیجا تھا",
+        "bn": "নিশ্চয় আমি তোমালোকৰ বাবে সাক্ষী স্বৰূপে তোমালোকৰ ওচৰত ৰাছুল প্ৰেৰণ কৰিছো যেনেকৈ ফিৰআউনৰ ওচৰত ৰাছুল প্ৰেৰণ কৰিছিলো।",
+        "fa": "یقیناً ما پیامبری به سوی شما فرستادیم که بر شما شاهد [و گواه] است؛ همان‌گونه که به سوی فرعون پیامبری فرستادیم."
+      }
+    },
+    {
+      "verse_number": 5491,
+      "verse_key": "73:16",
+      "arabic_text": "فَعَصَىٰ فِرْعَوْنُ ٱلرَّسُولَ فَأَخَذْنَـٰهُ أَخْذًا وَبِيلًا",
+      "phonetic_text": "FaAAasa firAAawnu arrasoolafaakhathnahu akhthan wabeela",
+      "translations": {
+        "fr": "Pharaon ayant désobéi au Messager, Nous sévîmes contre lui d’une façon implacable.",
+        "en": "but Pharaoh disobeyed the messenger and so We inflicted a heavy punishment on him.",
+        "es": "[Pero] el Faraón desmintió al Mensajero y por eso le castigué duramente.",
+        "it": "Ma Faraone disobbedì al Messaggero. Lo afferrammo allora con stretta severa.",
+        "ru": "Фараон ослушался посланника, и Мы схватили его Хваткой суровой.",
+        "tr": "Firavun o elçiye isyan etmişti. Biz de onu ağır bir yakalayışla yakaladık.",
+        "de": "Es widersetzte sich Fir’aun dem Gesandten. Da ergriffen Wir ihn mit hartem Griff.",
+        "pt": "Porém, o Faraó desobedeceu ao mensageiro, pelo que o castigamos severamente.",
+        "nl": "Toen was Fir'aun de Boodschapper ongehoorzaam, waarop Wij hem grepen met een verschrikkelijke greep.",
+        "ur": "(پھر دیکھ لو کہ جب) فرعون نے اُس رسول کی بات نہ مانی تو ہم نے اس کو بڑی سختی کے ساتھ پکڑ لیا",
+        "bn": "কিন্তু ফিৰআউনে ৰাছুলক অমান্য কৰিছে, সেয়ে আমি তাক শাস্তি বিহিছো।",
+        "fa": "آنگاه فرعون از آن پیامبر نافرمانی [و با او مخالفت] کرد، و ما او را به شدّت مجازات کردیم."
+      }
+    },
+    {
+      "verse_number": 5492,
+      "verse_key": "73:17",
+      "arabic_text": "فَكَيْفَ تَتَّقُونَ إِن كَفَرْتُمْ يَوْمًا يَجْعَلُ ٱلْوِلْدَٰنَ شِيبًا",
+      "phonetic_text": "Fakayfa tattaqoona in kafartum yawmanyajAAalu alwildana sheeba",
+      "translations": {
+        "fr": "Comment, si vous mécroyez, pourrez-vous donc vous protéger d’un jour où les enfants seront chenus ?",
+        "en": "So if you disbelieve, how can you guard yourselves against a Day that will turn children’s hair grey,",
+        "es": "Si no creéis, no podréis libraros del castigo del día terrible [del Juicio], que hará encanecer hasta a los niños.",
+        "it": "Come vi difenderete, voi che già non credeste nel Giorno che trasformerà i bambini in vecchi canuti",
+        "ru": "Как же вы спасетесь, если не уверуете, в тот день, который заставит поседеть младенцев?",
+        "tr": "Peki inkâr ederseniz, çocukları ihtiyarlatacak o günden (kıyamet gününden) kendinizi nasıl kurtaracaksınız?",
+        "de": "Wie wollt ihr euch denn, wenn ihr ungläubig seid, vor einem Tag bewahren, der die Kinder weißhaarig (wie Greise) macht?",
+        "pt": "Se não crerdes, como, então, vos precavereis, no dia em que envelhecerão as crianças.",
+        "nl": "Hoe zullen jullie je dan beschermen, als jullie de Dag waarop de kinderen grijsaards worden ontkennen?",
+        "ur": "اگر تم ماننے سے انکار کرو گے تو اُس دن کیسے بچ جاوٴ گے جو بچوں کو بوڑھا کر دے گا <sup foot_note=\"188167\">1</sup>",
+        "bn": "এতেকে তোমালোকে যদি কুফুৰী কৰা তেন্তে তোমালোকে সেই দিনটোত কেনেকৈ আত্ম ৰক্ষা কৰিবা যি দিৱসে শিশুসকলক বৃদ্ধত পৰিণত কৰিব,",
+        "fa": "پس اگر کافر شوید، چگونه خود را [از عذاب] در امان می‌دارید [در] روزی‌ که [از هول و سختی] کودکان را پیر می‌گرداند؟"
+      }
+    },
+    {
+      "verse_number": 5493,
+      "verse_key": "73:18",
+      "arabic_text": "ٱلسَّمَآءُ مُنفَطِرٌۢ بِهِۦ ۚ كَانَ وَعْدُهُۥ مَفْعُولًا",
+      "phonetic_text": "Assamao munfatirunbihi kana waAAduhu mafAAoola",
+      "translations": {
+        "fr": "Le ciel, alors, en sera fendu, car Sa promesse à Lui se sera accomplie.",
+        "en": "a Day when the sky will be torn apart? God’s promise will certainly be fulfilled.",
+        "es": "El cosmos se romperá y Su promesa se cumplirá.",
+        "it": "[nel Giorno in cui] si spaccherà il cielo? La promessa [di Allah] si realizzerà.",
+        "ru": "Небо тогда будет расколото, и обещание Его непременно исполнится.",
+        "tr": "O günün dehşetinden gök yarılır. Allah'ın sözü kesinlikle gerçekleşmiştir.",
+        "de": "Der Himmel wird an ihm zerbrechen. Sein Versprechen wird ausgeführt.",
+        "pt": "E o céu se fenderá? Sabei que a Sua promessa se cumprirá!",
+        "nl": "De hemel zal dan gespleten zijn (en) Zijn aanzegging zal zeker uitgevoerd worden.",
+        "ur": "اور جس کی سختی سے آسمان پھٹا جا رہا ہوگا؟ اللہ کا وعدہ تو پورا ہو کر ہی رہنا ہے",
+        "bn": "সেই দিনা আকাশখন বিদীৰ্ণ হ’ব, তেওঁৰ প্ৰতিশ্ৰুতি বাস্তবায়িত হ’ব।",
+        "fa": "[در آن روز،] آسمان شکافته می‌شود [و] وعدۀ او قطعاً به وقوع می‌پیوندد."
+      }
+    },
+    {
+      "verse_number": 5494,
+      "verse_key": "73:19",
+      "arabic_text": "إِنَّ هَـٰذِهِۦ تَذْكِرَةٌ ۖ فَمَن شَآءَ ٱتَّخَذَ إِلَىٰ رَبِّهِۦ سَبِيلًا",
+      "phonetic_text": "Inna hathihi tathkiratun famanshaa ittakhatha ila rabbihi sabeela",
+      "translations": {
+        "fr": "Voilà qui est un rappel. Prenne donc qui voudra le chemin vers son Seigneur !",
+        "en": "This is a reminder. Let whoever wishes take the way to his Lord.",
+        "es": "Esto es una advertencia real; en consecuencia, quien quiera que emprenda un camino hacia su Señor.",
+        "it": "In verità questo è un Monito. Chi vuole, intraprenda dunque la via che conduce al suo Signore.",
+        "ru": "Воистину, это - Назидание, и всякий, кто пожелает, встанет на путь к своему Господу.",
+        "tr": "İşte bu bir öğüttür. Artık dileyen Rabbine bir yol tutar.",
+        "de": "Gewiß, dies ist eine Erinnerung; wer nun will, (der) nimmt (so diesen) einen Weg zu seinem Herrn.",
+        "pt": "Em verdade, esta é uma admoestação, e, quem quiser, poderá encaminhar-se para a senda do seu Senhor.",
+        "nl": "Voorwaar, dit is een Vermaning en wie wil, laat hem een Weg nemen naar zijn Heer.",
+        "ur": "یہ ایک نصیحت ہے، اب جس کا جی چاہے اپنے رب کی طرف جانے کا راستہ اختیار کر لے",
+        "bn": "নিশ্চয় এইটো এটা উপদেশ, এতেকে যিয়ে ইচ্ছা কৰে সি নিজ প্ৰতিপালকৰ পথ অৱলম্বন কৰক।",
+        "fa": "بی‌گمان، این [آیات،] پند [و هشداری] است تا هر کس بخواهد، به سوى پروردگار خود راهى در پیش گیرد."
+      }
+    },
+    {
+      "verse_number": 5495,
+      "verse_key": "73:20",
+      "arabic_text": "۞ إِنَّ رَبَّكَ يَعْلَمُ أَنَّكَ تَقُومُ أَدْنَىٰ مِن ثُلُثَىِ ٱلَّيْلِ وَنِصْفَهُۥ وَثُلُثَهُۥ وَطَآئِفَةٌ مِّنَ ٱلَّذِينَ مَعَكَ ۚ وَٱللَّهُ يُقَدِّرُ ٱلَّيْلَ وَٱلنَّهَارَ ۚ عَلِمَ أَن لَّن تُحْصُوهُ فَتَابَ عَلَيْكُمْ ۖ فَٱقْرَءُوا۟ مَا تَيَسَّرَ مِنَ ٱلْقُرْءَانِ ۚ عَلِمَ أَن سَيَكُونُ مِنكُم مَّرْضَىٰ ۙ وَءَاخَرُونَ يَضْرِبُونَ فِى ٱلْأَرْضِ يَبْتَغُونَ مِن فَضْلِ ٱللَّهِ ۙ وَءَاخَرُونَ يُقَـٰتِلُونَ فِى سَبِيلِ ٱللَّهِ ۖ فَٱقْرَءُوا۟ مَا تَيَسَّرَ مِنْهُ ۚ وَأَقِيمُوا۟ ٱلصَّلَوٰةَ وَءَاتُوا۟ ٱلزَّكَوٰةَ وَأَقْرِضُوا۟ ٱللَّهَ قَرْضًا حَسَنًا ۚ وَمَا تُقَدِّمُوا۟ لِأَنفُسِكُم مِّنْ خَيْرٍ تَجِدُوهُ عِندَ ٱللَّهِ هُوَ خَيْرًا وَأَعْظَمَ أَجْرًا ۚ وَٱسْتَغْفِرُوا۟ ٱللَّهَ ۖ إِنَّ ٱللَّهَ غَفُورٌ رَّحِيمٌۢ",
+      "phonetic_text": "Inna rabbaka yaAAlamu annaka taqoomu adnamin thuluthayi allayli wanisfahu wathuluthahu wata-ifatunmina allatheena maAAaka wallahu yuqaddiruallayla wannahara AAalima an lan tuhsoohufataba AAalaykum faqraoo ma tayassara minaalqur-ani AAalima an sayakoonu minkum marda waakharoonayadriboona fee al-ardi yabtaghoona min fadliAllahi waakharoona yuqatiloona fee sabeeliAllahi faqraoo ma tayassara minhu waaqeemooassalata waatoo azzakatawaaqridoo Allaha qardan hasanan wamatuqaddimoo li-anfusikum min khayrin tajidoohu AAinda Allahihuwa khayran waaAAthama ajran wastaghfirooAllaha inna Allaha ghafoorun raheem",
+      "translations": {
+        "fr": "Ton Seigneur Sait que, toi et quelques-uns de ceux qui t’accompagnent, vous vous levez (pour prier) durant les deux tiers, parfois la moitié et parfois le tiers, de la nuit. Or c’est Allah Qui Sait estimer (la durée) de la nuit et du jour. Il Sait que vous ne pourrez passer toute la nuit à prier et vous pardonne. Récitez donc ce que vous pourrez du Coran, car (Allah) Sait que parmi vous il y a des malades, que d’autres ont à parcourir la terre pour quêter les faveurs d’Allah ; que d’autres encore combattent pour la cause d’Allah. Récitez-en donc ce que vous pourrez ! Accomplissez la Çalât ! Acquittez-vous de la Zakât ! Faites à Allah un prêt de bonne volonté ! Tout ce que vous aurez avancé comme bien pour vous-mêmes (en ce bas monde), vous le trouverez bien meilleur auprès d’Allah et bien mieux récompensé. Implorez le pardon d’Allah, car Allah est Absoluteur et Tout Miséricordieux.",
+        "en": "[Prophet], your Lord is well aware that you sometimes spend nearly two-thirds of the night at prayer––sometimes half, sometimes a third––as do some of your followers. God determines the division of night and day. He knows that you will not be able to keep a measure of it and He has relented towards all of you, so recite as much of the Quran as is easy for you. He knows that some of you will be sick, some of you travelling through the land seeking God’s bounty, some of you fighting in God’s way: recite as much as is easy for you, keep up the prayer, pay the prescribed alms, and make God a good loan. Whatever good you store up for yourselves will be improved and increased for you. Ask God for His forgiveness, He is most forgiving, most merciful.",
+        "es": "Tu Señor bien sabe que te levantas a orar casi dos tercios de la noche, otras la mitad o un tercio de ella, así como lo hacen algunos de los creyentes que te siguen. Dios es Quien determina cuánto dura la noche y el día, sabe que no pueden hacerlo siempre, por lo que os perdona aligerando vuestra obligación. Así que recitad durante la oración lo que sepáis del Corán. Dios sabe que habrá entre vosotros alguien enfermo [al que se le dificulte la oración], otros que estén de viaje recorriendo la tierra en busca del sustento de Dios, y otros combatiendo por Su causa. Así que recitad durante la oración de lo que sepáis del Corán. Cumplid con la oración obligatoria y pagad el zakat. Prestad a la causa de Dios generosamente, porque toda obra de bien que hagáis será en favor de vosotros mismos, y Dios os recompensará grandemente. Pedid a Dios el perdón [de vuestras faltas y omisiones] porque Él es Absolvedor, Misericordioso.",
+        "it": "In verità il tuo Signore sa che stai ritto [in preghiera] per quasi due terzi della notte, o la metà, o un terzo e che lo stesso [fanno] una parte di coloro che sono con te. Allah ha stabilito la notte e il giorno. Egli già sapeva che <a class=f><sup foot_note=160364>1</sup></a> non avreste potuto passare tutta la notte in preghiera ed è stato indulgente verso di voi. Recitate dunque, del Corano, quello che vi sarà agevole. Egli già sapeva che ci sarebbero stati tra voi i malati ed altri che avrebbero viaggiato sulla terra in cerca della grazia di Allah ed altri ancora che avrebbero lottato per la Sua causa. Recitatene dunque quello che vi sarà agevole. Assolvete all’orazione e versate la decima e fate ad Allah un prestito bello. Tutto il bene che avrete compiuto, lo ritroverete presso Allah, migliore e maggiore ricompensa. Implorate il perdono di Allah. In verità Allah è perdonatore, misericordioso.   <a class=f><sup foot_note=160365>2</sup></a> In base a dati tradizionali possiamo ricostruire le circostanze e il clima in cui fu rivelata questa sura. La Rivelazione scendeva su Muhammad (pace e benedizioni su di lui) suscitando un’enorme emozione in lui e nel gruppo dei primi musulmani. Il Profeta e i suoi compagni passavano parte della notte in preghiera, recitando le sure che già erano state rivelate e una notte avvenne che, sopraffatto dalla stanchezza, Muhammad non resse e crollò a terra. Stava riposando spossato sotto le coltri quando gli giunse questa rivelazione, con la quale Allah nella Sua infinita bontà lo rassicurava e gli raccomandava la moderazione anche nel culto. <a class=f><sup foot_note=160366>3</sup></a> «recita il Corano lentamente, distintamente»: lett. «recita il Corano di recitazione». <a class=f><sup foot_note=160367>4</sup></a> Si tratta di una raccomandazione che Allah (gloria a Lui l’Altissimo) fa al Suo Inviato (pace e benedizioni su di lui) nei primissimi tempi della rivelazione. La sura è la terza in ordine cronologico. Poi venne l’ordine di tenere testa ai miscredenti e affermare l’IsIàm (vedi sura IX). <a class=f><sup foot_note=160368>5</sup></a> «LasciaMi»: con il senso di: «lascia che sia Io ad occuparmi della sorte finale di…». <a class=f><sup foot_note=160369>6</sup></a> «Egli già sapeva che…»: non avreste potuto realizzare, a causa della vostra natura umana, quella devozione rituale che i vostri cuori avrebbero desiderato assolvere (vedi anche nota).",
+        "ru": "Воистину, твой Господь знает, что ты и часть тех, кто с тобой, простаиваете менее двух третей ночи, или половину ее, или треть ее. Аллах определяет меру дня и ночи. Он знает, что вам не сосчитать этого, и принимает ваши покаяния. Читайте же из Корана то, что необременительно для вас. Он знает, что среди вас будут больные, что одни странствуют по земле в поисках милости Аллаха, а другие сражаются на пути Аллаха. Читайте же из него то, что необременительно для вас, совершайте намаз, раздавайте закят и одолжите Аллаху прекрасный заем. Какое бы добро вы ни приготовили для себя заранее, вы найдете его у Аллаха в виде лучшего и большего вознаграждения. Просите же у Аллаха прощения, ведь Аллах - Прощающий, Милосердный.",
+        "tr": "Rabbin, senin gecenin üçte ikisinden daha azında, yarısında ve üçte birinde kalktığını, seninle beraber bulunanlardan bir topluluğun da böyle yaptığını biliyor. Gece ve gündüzü Allah takdir eder. O, sizin onu sayamayacağınızı bildi de sizi affetti. Bundan böyle Kur'ân'dan size ne kolay gelirse okuyun. Allah, içinizden hastalar, yeryüzünde gezip Allah'ın lütfunu arayan başka kimseler ve Allah yolunda savaşan daha başka insanlar olacağını bilmiştir. Onun için Kur'ân'dan kolayınıza geldiği kadar okuyun, namazı kılın, zekatı verin ve Allah'a güzel bir borç verin (Hayırlı işlere mal sarfedin). Kendiniz için gönderdiğiniz her iyiliği, Allah katında daha hayırlı ve sevapça daha büyük olarak bulacaksınız. Allah'tan bağış dileyin. Kuşkusuz Allah bağışlayandır, merhamet edendir.",
+        "de": "Gewiß, dein Herr weiß, daß du etwas weniger als zwei Drittel der Nacht (zum Gebet) aufstehst, oder die Hälfte oder ein Drittel davon, und (ebenso) ein Teil von denjenigen, die mit dir sind. Und Allah setzt das Maß der Nacht und des Tages fest. Er weiß, daß ihr es nicht erfassen würdet. Da wandte Er Sich euch zu und erließ es euch. So lest (bei Nacht), was euch vom Qur’an leichtfällt. Er weiß, daß es unter euch Kranke geben wird und andere, die im Land umherreisen, wo sie nach (etwas) von Allahs Huld trachten, und (wieder) andere, die auf Allahs Weg kämpfen. So lest davon, was euch leichtfällt, und verrichtet das Gebet und entrichtet die Abgabe und gebt Allah ein gutes Darlehen. Und was ihr für euch selbst an Gutem vorausschickt, das werdet ihr noch besser und großartiger belohnt bei Allah finden. Und bittet Allah um Vergebung. Gewiß, Allah ist Allvergebend und Barmherzig.",
+        "pt": "Em verdade, o teu Senhor sabe que tu te levantas para rezar, algumas vezes durante dois terços da noite, outras, metade, e outras, ainda, um terço, assim como (o faz) uma boa parte dos teus; mas Deus mede a noite e o dia, e bem sabe que não podeis precisar (as horas), pelo que vos absolve. Recitai, pois, o que puderdes do Alcorão! Ele sabe que, entre vós, há enfermos, e outros que viajam pela terra, à procura da graça de Deus, e outros, que combatem pela causa de Deus. Recitai, oferecei espontaneamente a Deus. E todo o bem que fizerdes, será em favor às vossas almas; achareis a recompensa em Deus, porque Deus é Indulgente, Misericordiosíssimo.",
+        "nl": "Voorwaar, jouw Heer weet dat jij bijna tweederde van de nacht, of de helft of een derde (in gebed) staat, en (ook) een groep van degenen die bij jou horen. En Allah kent de nacht en de dag. Hij weet dat jullie nooit (de hele nacht) de shalât kunnen verrichten, daarom heeft Hij jullie berouw aanvaard. Verricht van het nachtgebed wat gemakkelijk is voor jullie. Hij weet dat er onder jullie zieken zijn en anderen die door het land reizen, zoekend naar de gunst van Allah, en anderen die strijden op de Weg van Allah. En verricht van het nachtgebed wat gemakkelijk is voor jullie. En onderhoudt de shalât en geeft de zakât en leent aan Allah een goede lening. En wat jullie vooruitzenden voor julliezelf aan goede daden, jullie zullen het bij Allah aantreffen. Het is een betere en grotere beloning. En vraagt Allah om vergeving. Voorwaar, Allah is Vergevensgezind, Meest Barmhartig.",
+        "ur": "<sup foot_note=\"171614\">1</sup> اے نبیؐ ، تمہارا ربّ جانتا ہے کہ تم کبھی دو تہائی رات کے قریب اور کبھی آدھی رات اور کبھی ایک تہائی رات عبادت میں کھڑے رہتے ہو،<sup foot_note=\"171615\">2</sup> اور تمہارے ساتھیوں میں سے بھی ایک گروہ یہ عمل کرتا ہے۔ <sup foot_note=\"171616\">3</sup> اللہ ہی رات اور دن کے اوقات کا حساب رکھتا ہے ، اُسے معلوم ہے کہ تم لوگ اوقات  کا ٹھیک شمار نہیں کر سکتے، لہٰذا اس نے تم پر مہربانی فرمائی، اب جتنا قرآن آسانی سے پڑھ سکتے ہو پڑھ لیا کرو۔ <sup foot_note=\"171617\">4</sup> اُسے معلوم ہے کہ تم میں کچھ مریض ہوں گے، کچھ دُوسرے لوگ اللہ کے فضل کی تلاش میں سفر کرتے ہیں، <sup foot_note=\"171618\">5</sup> اور کچھ اور لوگ اللہ کی راہ میں جنگ کرتے ہیں۔ <sup foot_note=\"171619\">6</sup> پس جتنا قرآن بآسانی پڑھا جاسکے  پڑھ لیا کرو، نماز قائم کرو، زکوٰة <sup foot_note=\"171620\">7</sup> دو اور اللہ کو اچھا قرض دیتے رہو۔ <sup foot_note=\"171621\">8</sup> جو کچھ بھلائی تم اپنے لیے آگے بھیجو گے اسے اللہ کے ہاں موجود پاوٴ گے، وہی زیادہ بہتر ہے اور اس کا اجر بہت بڑا ہے۔ <sup foot_note=\"171622\">9</sup> اللہ سے مغفرت مانگتے رہو، بے شک اللہ بڑا غفور و رحیم ہے",
+        "bn": "নিশ্চয় তোমাৰ প্ৰতিপালকে জানে যে, তুমি ছালাতৰ বাবে থিয় দিয়া কেতিয়াবা ৰাতিৰ প্ৰায় দুই-তৃতীয়াংশত, কেতিয়াবা অৰ্ধাংশত আৰু কেতিয়াবা এক-তৃতীয়াংশত আৰু তোমাৰ লগত থকাসকলৰ এটা দলেও থিয় দিয়ে। আৰু আল্লাহেই নিৰ্ধাৰণ কৰে দিন আৰু ৰাতিৰ পৰিমাণ। তেওঁ জানে যে, তোমালোকে ইয়াৰ সঠিক নিৰ্ধাৰণ পালন কৰিব নোৱাৰিবা, সেয়ে তেওঁ তোমালোকক ক্ষমা কৰিলে। এতেকে তোমালোকে কোৰআনৰ পৰা যিমানখিনি সহজ হয় সিমানখিনি পাঠ কৰা। তেওঁ জানে যে, তোমালোকৰ মাজৰ কিছুমান অসুস্থ হৈ পৰিব, আকৌ কিছুমানে আল্লাহৰ অনুগ্ৰহ সন্ধান কৰিবলৈ ভ্ৰমণ কৰিব আৰু আন কিছুমানে আল্লাহৰ পথত যুদ্ধৰত অৱস্থাত থাকিব। সেয়ে তোমালোকে কোৰআনৰ পৰা যিমানখিনি সহজ হয় সেইখিনি পাঠ কৰা; আৰু তোমালোকে ছালাত প্ৰতিষ্ঠা কৰা আৰু যাকাত প্ৰদান কৰা লগতে আল্লাহক উত্তম ঋণ প্ৰদান কৰা। তোমালোকৰ নিজৰ মঙ্গলৰ বাবে তোমালোকে যি আগতীয়াকৈ প্ৰেৰণ কৰিবা সেয়া আল্লাহৰ ওচৰত পাবা। ই উৎকৃষ্টতম আৰু পুৰষ্কাৰ হিচাপে বৰ মহৎ। আল্লাহৰ ওচৰত ক্ষমা প্ৰাৰ্থনা কৰি থাকা; নিশ্চয় আল্লাহ ক্ষমাশীল, পৰম দয়ালু।",
+        "fa": "[ای پیامبر،] یقیناً پروردگارت می‌داند که تو و گروهی از کسانی که با تو هستند، نزدیک دو سوم شب و [یا] نصف [یا] یک‌سومِ آن را به [نماز] برمی‌خیزید؛ و الله شب و روز را اندازه‌گیری می‌کند. [او] می‌داند که شما نمی‌توانید شمارشِ آن را [دقیق] محاسبه کنید؛ و شما را بخشید. پس اکنون هر چه از قرآن [برای شما] میسّر باشد، بخوانید. [الله] می‌داند که برخی از شما بیمار خواهند شد، و گروهی [دیگر] برای به دست ‌آوردن فضل و نعمتِ الله، در زمین سفر می‌کنند، و گروهی [نیز] در راه الله جهاد می‌کنند؛ پس آنچه از آن میسر باشد بخوانید و نماز بر پا دارید و زکات دهید و به الله قرض نیکو دهید؛ و [بدانید که] آنچه از کارهای خیر پیشاپیش برای خود می‌فرستید، [آن را] نزد الله به بهترین وجه و بزرگ‌ترین پاداش خواهید یافت؛ و از الله آمرزش بخواهید، که همانا الله آمرزندۀ مهربان است."
+      }
+    }
+  ]
+}

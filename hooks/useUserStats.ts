@@ -1,8 +1,8 @@
 import { useState, useEffect, useCallback } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getCurrentUserId } from "../utils/userAuth";
-import { AppConfig } from "../utils/config";
-import apiClient from "../utils/apiClient";
+import OfflineStatsManager from "../utils/OfflineStatsManager";
+import { usePremium } from "../contexts/PremiumContext";
 
 export interface UserStats {
   user_id: number;
@@ -89,18 +89,20 @@ interface UseUserStatsReturn {
   premiumMessage: string | null;
   refresh: () => Promise<void>;
   lastUpdated: Date | null;
+  isOffline: boolean;
+  pendingActionsCount: number;
 }
 
-const CACHE_KEY = "user_stats_cache";
-const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
-
 export const useUserStats = (): UseUserStatsReturn => {
+  const { user } = usePremium();
   const [stats, setStats] = useState<UserStats | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [premiumRequired, setPremiumRequired] = useState(false);
   const [premiumMessage, setPremiumMessage] = useState<string | null>(null);
   const [lastUpdated, setLastUpdated] = useState<Date | null>(null);
+  const [isOffline, setIsOffline] = useState(false);
+  const [pendingActionsCount, setPendingActionsCount] = useState(0);
   const [connectionState, setConnectionState] = useState<string>("unknown");
 
   // 🚀 NOUVEAU : Listener pour détecter les changements d'état de connexion
@@ -138,107 +140,77 @@ export const useUserStats = (): UseUserStatsReturn => {
     checkConnectionState();
 
     return () => clearInterval(interval);
-  }, [connectionState]);
+  }, [connectionState]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const fetchStats = useCallback(async (forceRefresh = false) => {
-    try {
-      setLoading(true);
-      setError(null);
-      setPremiumRequired(false);
-      setPremiumMessage(null);
-
-      const userId = await getCurrentUserId();
-      if (!userId) {
-        throw new Error("Aucun utilisateur connecté");
-      }
-
-      // Vérifier le cache si pas de force refresh
-      if (!forceRefresh) {
-        const cached = await AsyncStorage.getItem(CACHE_KEY);
-        if (cached) {
-          let parsedCache: any = null;
-          try {
-            parsedCache = JSON.parse(cached);
-          } catch {
-            // Cache corrompu, ignorer et refetch
-            await AsyncStorage.removeItem(CACHE_KEY);
-            return;
-          }
-          const { data, timestamp } = parsedCache;
-          const age = Date.now() - timestamp;
-
-          if (age < CACHE_DURATION) {
-            setStats(data);
-            setLastUpdated(new Date(timestamp));
-            setLoading(false);
-            return;
-          }
-        }
-      }
-
-      // Appel API centralisé (Authorization + refresh + retry)
-      const apiResponse = await apiClient.getUserStats();
-      console.log(
-        "🔍 [DEBUG] Réponse API JSON:",
-        JSON.stringify(apiResponse, null, 2)
-      );
-
-      // Vérifier si c'est une réponse premium
-      if (!apiResponse.success && (apiResponse as any).premium_required) {
-        setPremiumRequired(true);
-        setPremiumMessage(
-          (apiResponse as any).premium_message ||
-            "Devenez Premium pour accéder à vos statistiques"
-        );
-        setLoading(false);
-        return;
-      }
-
-      if (apiResponse.success && apiResponse.data) {
-        setStats(apiResponse.data as any);
-        setLastUpdated(new Date());
-
-        // Mettre en cache
-        await AsyncStorage.setItem(
-          CACHE_KEY,
-          JSON.stringify({
-            data: apiResponse.data,
-            timestamp: Date.now(),
-          })
-        );
-      } else {
-        throw new Error(
-          apiResponse.message ||
-            "Erreur lors de la récupération des statistiques"
-        );
-      }
-    } catch (err) {
-      console.error("Erreur useUserStats:", err);
-
-      // En cas d'erreur, essayer de charger depuis le cache même expiré
+  const fetchStats = useCallback(
+    async (forceRefresh = false) => {
       try {
-        const cached = await AsyncStorage.getItem(CACHE_KEY);
-        if (cached) {
-          const { data, timestamp } = JSON.parse(cached);
-          setStats(data);
-          setLastUpdated(new Date(timestamp));
-          setLoading(false);
-          return;
-        }
-      } catch (cacheErr) {
-        console.error("Erreur cache:", cacheErr);
-      }
+        console.log(
+          "🔄 [DEBUG] fetchStats appelé, forceRefresh:",
+          forceRefresh
+        );
+        setLoading(true);
+        setError(null);
+        setPremiumRequired(false);
+        setPremiumMessage(null);
 
-      // Si pas de cache, afficher un message premium par défaut
-      setPremiumRequired(true);
-      setPremiumMessage(
-        "Connectez-vous pour accéder à vos statistiques détaillées"
-      );
-      setError(null); // Pas d'erreur, juste premium requis
-    } finally {
-      setLoading(false);
-    }
-  }, []);
+        const userId = await getCurrentUserId();
+        if (!userId) {
+          throw new Error("Aucun utilisateur connecté");
+        }
+
+        // 🌐 NOUVEAU : Utiliser le gestionnaire offline
+        const offlineManager = OfflineStatsManager.getInstance();
+        const result = await offlineManager.getStats();
+        console.log("📊 [DEBUG] Résultat getStats:", result);
+
+        // Ajouter challenges et badges aux stats
+        if (result.stats) {
+          result.stats.challenges = result.challenges || [];
+          result.stats.badges = result.badges || [];
+        }
+
+        console.log("📈 [DEBUG] Stats finales à afficher:", result.stats);
+        setStats(result.stats);
+        setIsOffline(result.isOffline);
+        setLastUpdated(result.lastSync);
+
+        // Mettre à jour le compteur d'actions en attente
+        const pendingCount = await offlineManager.getPendingActionsCount();
+        setPendingActionsCount(pendingCount);
+
+        // Si on est en mode offline et qu'il n'y a pas de données
+        // MAIS SEULEMENT si l'utilisateur n'est PAS premium
+        if (result.isOffline && !result.stats && !user?.isPremium) {
+          setPremiumRequired(true);
+          setPremiumMessage(
+            "Mode hors ligne - Connectez-vous pour accéder à vos statistiques"
+          );
+        } else {
+          // Réinitialiser premiumRequired si l'utilisateur est premium ou a des données
+          setPremiumRequired(false);
+          setPremiumMessage(null);
+        }
+
+        console.log(
+          `📊 [DEBUG] Stats chargées: ${
+            result.isOffline ? "offline" : "online"
+          }, ${pendingCount} actions en attente`
+        );
+      } catch (err) {
+        console.error("❌ [DEBUG] Erreur useUserStats:", err);
+        setError(err instanceof Error ? err.message : "Erreur inconnue");
+        // Ne pas afficher le message premium si l'utilisateur est premium
+        if (!user?.isPremium) {
+          setPremiumRequired(true);
+          setPremiumMessage("Erreur de chargement - Vérifiez votre connexion");
+        }
+      } finally {
+        setLoading(false);
+      }
+    },
+    [user?.isPremium]
+  );
 
   const refresh = useCallback(async () => {
     await fetchStats(true);
@@ -247,7 +219,7 @@ export const useUserStats = (): UseUserStatsReturn => {
   // Charger les stats au montage
   useEffect(() => {
     fetchStats();
-  }, [fetchStats]);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Rafraîchir automatiquement toutes les 10 minutes
   useEffect(() => {
@@ -258,6 +230,16 @@ export const useUserStats = (): UseUserStatsReturn => {
     return () => clearInterval(interval);
   }, [fetchStats]);
 
+  // Démarrer la synchronisation automatique au montage
+  useEffect(() => {
+    const offlineManager = OfflineStatsManager.getInstance();
+    offlineManager.startAutoSync();
+
+    return () => {
+      offlineManager.stopAutoSync();
+    };
+  }, []);
+
   return {
     stats,
     loading,
@@ -266,6 +248,8 @@ export const useUserStats = (): UseUserStatsReturn => {
     premiumMessage,
     refresh,
     lastUpdated,
+    isOffline,
+    pendingActionsCount,
   };
 };
 

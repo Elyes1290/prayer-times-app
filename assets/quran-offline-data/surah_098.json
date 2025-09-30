@@ -1,0 +1,166 @@
+{
+  "surah_number": 98,
+  "extracted_at": "2025-09-20T15:17:30.153Z",
+  "verses": [
+    {
+      "verse_number": 6131,
+      "verse_key": "98:1",
+      "arabic_text": " لَمْ يَكُنِ ٱلَّذِينَ كَفَرُوا۟ مِنْ أَهْلِ ٱلْكِتَـٰبِ وَٱلْمُشْرِكِينَ مُنفَكِّينَ حَتَّىٰ تَأْتِيَهُمُ ٱلْبَيِّنَةُ",
+      "phonetic_text": "Lam yakuni allatheena kafaroo min ahlialkitabi walmushrikeena munfakkeena hattata/tiyahumu albayyina",
+      "translations": {
+        "fr": "Les mécréants, parmi les gens du Livre et les associâtres, n’allaient pas renoncer (à leur impiété) avant que ne leur parvînt la preuve évidente :",
+        "en": "Those who disbelieve among the People of the Book and the idolaters were not about to change their ways until they were sent clear evidence,",
+        "es": "No es concebible que los incrédulos, de la Gente del Libro o los idólatras, sean condenados hasta que les haya llegado una evidencia clara,",
+        "it": "I miscredenti fra la gente della Scrittura <a class=f><sup foot_note=160706>1</sup></a> e gli associatori <a class=f><sup foot_note=160707>2</sup></a> , non cesseranno <a class=f><sup foot_note=160708>3</sup></a> , finché non giunga loro la Prova Evidente <a class=f><sup foot_note=160709>4</sup></a> ,",
+        "ru": "Неверующие из людей Писания и многобожников не расстались с неверием, пока к ним не явилось ясное знамение -",
+        "tr": "Kitap ehlinden ve müşriklerden (Hakk'ı) tanımayanlar, kendilerine açık delil gelinceye kadar inkârlarından ayrılacak değillerdi.",
+        "de": "Diejenigen von den Leuten der Schrift und den Götzendienern, die ungläubig sind, werden sich nicht (eher von ihrem Unglauben) lösen, bis (daß) der klare Beweis zu ihnen kommt,",
+        "pt": "Os incrédulos, entre os adeptos do Livro, bem como os idólatras, não desistiriam da sua religião, a não ser quando lhes chegasse a Evidência:",
+        "nl": "De ongelovigen onder de Lieden van de Schrift en de veelgodenaanbidders houden niet op (ongelovig te zijn) tot er een duidelijk bewijs tot hen komt.",
+        "ur": "اہلِ کتاب اور مشرکین <sup foot_note=\"188558\">1</sup> میں سے جو لوگ کافر تھے <sup foot_note=\"188559\">2</sup> (وہ اپنے کُفر سے) باز آنے والے نہ تھے جب تک کہ ان کے پاس دلیلِ روشن نہ آجائے <sup foot_note=\"188560\">3</sup>",
+        "bn": "আহলে কিতাবসকলৰ মাজত যিসকলে কুফৰী কৰিছে আৰু মুশ্বৰিকসকল, সিহঁতৰ ওচৰত সুস্পষ্ট প্ৰমাণ নহালৈকে সিহঁতে বিৰত থাকিবলৈ প্ৰস্তুত নাছিল।",
+        "fa": "کسانی از اهل کتاب و مشرکان ‌که کافر شدند، [از آیین کفر] دست برنمی‌دارند تا اینکه دلیل روشنی برایشان بیاید."
+      }
+    },
+    {
+      "verse_number": 6132,
+      "verse_key": "98:2",
+      "arabic_text": "رَسُولٌ مِّنَ ٱللَّهِ يَتْلُوا۟ صُحُفًا مُّطَهَّرَةً",
+      "phonetic_text": "Rasoolun mina Allahi yatloo suhufanmutahhara",
+      "translations": {
+        "fr": "un Messager d’Allah qui récite des Feuillets purifiés,",
+        "en": "a messenger from God, reading out pages [blessed with] purity,",
+        "es": "que sea un Mensajero de Dios, que les recite una revelación purificada [de toda falsedad y contradicción],",
+        "it": "un Messaggero, da parte di Allah, che legge fogli purissimi <a class=f><sup foot_note=160710>1</sup></a> ,",
+        "ru": "Посланник от Аллаха, который читает очищенные свитки.",
+        "tr": "(Bu delil), tertemiz sayfaları okuyan, Allah tarafından gönderilmiş bir peygamberdir.",
+        "de": "ein Gesandter von Allah, der gereinigte Blätter verliest,",
+        "pt": "Um Mensageiro de Deus, que lhes recitasse páginas purificadas,",
+        "nl": "Een Boodschapper van Allah die gereinigde bladen voordraagt.",
+        "ur": "(یعنی) اللہ کی طرف سے ایک رسُول <sup foot_note=\"188561\">1</sup> جو پاک صحیفے پڑھ کر سُنائے <sup foot_note=\"188562\">2</sup>",
+        "bn": "আল্লাহৰ তৰফৰ পৰা এজন ৰাছুল, যিজনে তিলাৱত কৰি শুনাব পৱিত্ৰ পত্ৰসমূহ,",
+        "fa": "پیامبری از سوی الله [بیاید] که صحیفه‌های پاک را بخواند."
+      }
+    },
+    {
+      "verse_number": 6133,
+      "verse_key": "98:3",
+      "arabic_text": "فِيهَا كُتُبٌ قَيِّمَةٌ",
+      "phonetic_text": "Feeha kutubun qayyima",
+      "translations": {
+        "fr": "dans lesquels se trouvent des Écritures parfaitement justes.",
+        "en": "containing true scriptures.",
+        "es": "que contiene preceptos de rectitud y justicia.",
+        "it": "contenenti precetti immutabili.",
+        "ru": "В них содержатся правдивые Писания.",
+        "tr": "O sayfalarda, en doğru hükümler vardır.",
+        "de": "in denen rechte Schriften sind.",
+        "pt": "Que contivessem escrituras corretas.",
+        "nl": "Waarin rechtzinnige boeken (de Koran) zijn.",
+        "ur": "جن میں بالکل راست اور درست تحریریں لکھی ہوئی ہوں",
+        "bn": "য’ত আছে সঠিক বিধিবদ্ধ বিধান।",
+        "fa": "و نوشته‌هایی استوار [و درست] در آن [صحیفه‌ها] است."
+      }
+    },
+    {
+      "verse_number": 6134,
+      "verse_key": "98:4",
+      "arabic_text": "وَمَا تَفَرَّقَ ٱلَّذِينَ أُوتُوا۟ ٱلْكِتَـٰبَ إِلَّا مِنۢ بَعْدِ مَا جَآءَتْهُمُ ٱلْبَيِّنَةُ",
+      "phonetic_text": "Wama tafarraqa allatheena ootooalkitaba illa min baAAdi ma jaat-humualbayyina",
+      "translations": {
+        "fr": "Ceux à qui le Livre a été donné ne se sont divisés qu’après avoir reçu la preuve évidente.",
+        "en": "[Yet] those who were given the Scripture became divided only after they were sent [such] clear evi-dence",
+        "es": "Pero quienes recibieron el Libro con anterioridad [judíos, cristianos y otros] rompieron su unidad [en la fe] cuando les llegó la evidencia clara [a pesar de provenir de la misma fuente divina],",
+        "it": "Coloro cui fu data la Scrittura non si divisero, finché non giunse loro la Prova Evidente <a class=f><sup foot_note=160711>1</sup></a> ;",
+        "ru": "Те, кому было даровано Писание, распались только после того, как к ним явилось ясное знамение.",
+        "tr": "Kitap ehli, ancak kendilerine apaçık delil geldikten sonra ayrılığa düştüler.",
+        "de": "Und diejenigen, denen die Schrift gegeben wurde, haben sich nicht eher gespalten, als bis der klare Beweis zu ihnen gekommen ist.",
+        "pt": "Os adeptos do Livro não se dividiram, senão depois de lhes ter chegado a Evidência,",
+        "nl": "En degenen aan wie het Boek is gegeven splitsten zich pas op nadat het duidelijke bewijs tot hen gekomen was.",
+        "ur": "پہلے جن لوگوں کو کتاب دی گئی تھی اُن میں تفرقہ برپا نہیں ہوا مگر اِس کے بعد کہ اُن کے پاس  (راہِ راست کا) بیانِ واضح آچکا تھا۔ <sup foot_note=\"188563\">1</sup>",
+        "bn": "আৰু যিসকলক কিতাপ দিয়া হৈছিল সিহঁতে বিভক্ত হ’ল, সিহঁতৰ ওচৰত সুস্পষ্ট প্ৰমাণ অহাৰ পিছত।",
+        "fa": "و کسانی‌ که به آنان کتاب داده شد [از جمله یهود و نصاری] پراکنده نشدند [و اختلاف نکردند،] مگر بعد از آنکه دلیل روشن برایشان آمد."
+      }
+    },
+    {
+      "verse_number": 6135,
+      "verse_key": "98:5",
+      "arabic_text": "وَمَآ أُمِرُوٓا۟ إِلَّا لِيَعْبُدُوا۟ ٱللَّهَ مُخْلِصِينَ لَهُ ٱلدِّينَ حُنَفَآءَ وَيُقِيمُوا۟ ٱلصَّلَوٰةَ وَيُؤْتُوا۟ ٱلزَّكَوٰةَ ۚ وَذَٰلِكَ دِينُ ٱلْقَيِّمَةِ",
+      "phonetic_text": "Wama omiroo illa liyaAAbudooAllaha mukhliseena lahu addeena hunafaawayuqeemoo assalata wayu/too azzakatawathalika deenu alqayyima",
+      "translations": {
+        "fr": "Il ne leur a été ordonné que d’adorer Allah en Lui vouant un culte sincère, d’accomplir la Çalât et de s’acquitter de la Zakât. Telle est la religion juste.",
+        "en": "though all they are ordered to do is worship God alone, sincerely devoting their religion to Him as people of true faith, keep up the prayer, and pay the prescribed alms, for that is the true religion.",
+        "es": "En la que únicamente se les ordenaba que fueran monoteístas adorando solo a Dios con sinceridad, que realizaran la oración y pagaran el zakat, pues esa es la verdadera religión.",
+        "it": "eppure non ricevettero altro comando che adorare Allah, tributandoGli un culto esclusivo e sincero <a class=f><sup foot_note=160712>1</sup></a> , eseguire l’orazione e versare la decima <a class=f><sup foot_note=160713>2</sup></a> . Questa è la Religione della verità.",
+        "ru": "А ведь им было велено лишь поклоняться Аллаху, служа ему искренне, как ханифы, совершать намаз и выплачивать закят. Это - правая вера.",
+        "tr": "Halbuki onlar, dini sadece Allah'a tahsis ederek, Allah'ı birleyerek, ancak Allah'a ibadet etmekle, namazı kılmakla ve zekatı vermekle emrolunmuşlardır. İşte dosdoğru din budur.",
+        "de": "Und nichts anderes wurde ihnen befohlen, als nur Allah zu dienen und (dabei) Ihm gegenüber aufrichtig in der Religion (zu sein), als Anhänger des rechten Glaubens, und das Gebet zu verrichten und die Abgabe zu entrichten; das ist die Religion des rechten Verhaltens.",
+        "pt": "E lhes foi ordenado que adorassem sinceramente a Deus, fossem monoteístas, observassem a oração e pagassem o zakat; esta é a verdadeira religião.",
+        "nl": "Zij werden niets anders bevolen dan Allah met zuivere aanbidding te aanbidden, als Hoenafâ. En (ook) de shalât te verrichten en de zakât te geven en dat is de rechte godsdienst.",
+        "ur": "اور اُن کو اِس کے سوا کوئی حکم نہیں دیا گیا تھا کہ اللہ کی بندگی کریں اپنے دین کو اُس کے لیے خالص کر کے، بالکل یَکسُو ہو کر، اور نماز قائم کریں اور زکوٰة دیں۔ یہی نہایت صحیح و درست دین ہے۔ <sup foot_note=\"188564\">1</sup>",
+        "bn": "আৰু সিহঁতক কেৱল এই নিৰ্দেশ দিয়া হৈছিল যে, সিহঁতে যেন আল্লাহৰ ইবাদত কৰে তেওঁৰ বাবেই যেন দ্বীনক একনিষ্ঠ কৰে আৰু যেন ছালাত প্ৰতিষ্ঠা কৰে আৰু যাকাত প্ৰদান কৰে, আৰু এইটোৱেই হৈছে সঠিক দ্বীন।",
+        "fa": "و آنان فرمان نیافتند جز اینکه الله را عبادت کنند در حالی ‌که دین [خود] را برای او خالص گردانند [و از شرک و عبادت معبودان باطل،] به توحید روی آورند؛ و نماز برپا دارند و زکات بپردازند؛ و این است آیین راستین و مستقیم."
+      }
+    },
+    {
+      "verse_number": 6136,
+      "verse_key": "98:6",
+      "arabic_text": "إِنَّ ٱلَّذِينَ كَفَرُوا۟ مِنْ أَهْلِ ٱلْكِتَـٰبِ وَٱلْمُشْرِكِينَ فِى نَارِ جَهَنَّمَ خَـٰلِدِينَ فِيهَآ ۚ أُو۟لَـٰٓئِكَ هُمْ شَرُّ ٱلْبَرِيَّةِ",
+      "phonetic_text": "Inna allatheena kafaroo min ahli alkitabiwalmushrikeena fee nari jahannama khalideenafeeha ola-ika hum sharru albariyya",
+      "translations": {
+        "fr": "Ceux qui ont mécru, parmi les gens du Livre et les associâtres, seront livrés au feu de la Géhenne, où ils demeureront pour l’éternité. Car ce sont les pires des créatures.",
+        "en": "Those who disbelieve among the People of the Book and the idolaters will have the Fire of Hell, there to remain. They are the worst of creation.",
+        "es": "Quienes se hayan negado a seguir la verdad, sean Gente del Libro o idólatras, serán castigados eternamente en el fuego del Infierno. Ellos son lo peor entre todos los seres creados.",
+        "it": "In verità i miscredenti fra la gente della Scrittura e gli associatori, saranno nel fuoco dell’Inferno, dove rimarranno in perpetuo. Di tutta la creazione essi sono i più abbietti.",
+        "ru": "Воистину, неверующие из людей Писания и многобожников окажутся в огне Геенны и пребудут там вечно. Они являются наихудшими из тварей.",
+        "tr": "Kâfirler, gerek kitap ehlinden olsun gerek puta tapanlardan olsun muhakkak, cehennem ateşindedirler. Orada ebedî olarak kalacaklardır. Onlar, insanların en şerlileridir.",
+        "de": "Gewiß, diejenigen unter den Leuten der Schrift und den Götzendienern, die ungläubig sind, werden im Feuer der Hölle sein, ewig darin zu bleiben. Das sind die schlechtesten Geschöpfe.",
+        "pt": "Em verdade, os incrédulos, entre os adeptos do Livro, bem como os idólatras, entrarão no fogo infernal, onde permanecerão eternamente. Estas são as piores das criaturas!",
+        "nl": "Voorwaar, degenen die ongelovig zijn onder de Lieden van de Schrift en de veelgodenaanbidders zullen in het vuur van de Hel eeuwig levenden zijn. Zij zijn degenen die de slechtste schepsels zijn.",
+        "ur": "اہلِ کتاب اور مشرکین میں سے جن لوگوں نے کُفر کیا ہے <sup foot_note=\"188565\">1</sup> وہ یقیناً جہنّم کی آگ میں جائیں گے اور ہمیشہ اس میں رہیں گے ، یہ لوگ بدترینِ خلائق ہیں۔ <sup foot_note=\"188566\">2</sup>",
+        "bn": "নিশ্চয় আহলে কিতাবসকলৰ মাজৰ যিসকলে কুফৰী কৰিছে সিহঁত আৰু মুশ্বৰিকসকল জাহান্নামৰ জুইত স্থায়ীভাৱে অৱস্থান কৰিব; ইহঁতেই হৈছে নিকৃষ্ট সৃষ্টি।",
+        "fa": "بی‌گمان، کسانی از اهل کتاب و مشرکان ‌که کافر شدند، جاودانه در آتش جهنم خواهند ماند. آنان بدترینِ آفریدگان هستند."
+      }
+    },
+    {
+      "verse_number": 6137,
+      "verse_key": "98:7",
+      "arabic_text": "إِنَّ ٱلَّذِينَ ءَامَنُوا۟ وَعَمِلُوا۟ ٱلصَّـٰلِحَـٰتِ أُو۟لَـٰٓئِكَ هُمْ خَيْرُ ٱلْبَرِيَّةِ",
+      "phonetic_text": "Inna allatheena amanoowaAAamiloo assalihati ola-ika humkhayru albariyya",
+      "translations": {
+        "fr": "Ceux qui ont cru et accompli les bonnes œuvres, ceux là sont les meilleures de toutes les créatures.",
+        "en": "Those who believe and do good deeds are the best of creation.",
+        "es": "En cambio, los que creen y obran rectamente son lo mejor entre todos los seres creados.",
+        "it": "Quelli che invece credono e compiono il bene sono i migliori di tutta la creazione.",
+        "ru": "Воистину, те, которые уверовали и совершали праведные деяния, являются наилучшими из тварей.",
+        "tr": "İnanan ve güzel amel işleyenler de insanların en hayırlılarıdır.",
+        "de": "Gewiß, diejenigen aber, die glauben und rechtschaffene Werke tun, das sind die besten Geschöpfe.",
+        "pt": "Por outra, os fiéis, que praticam o bem, são as melhores criaturas,",
+        "nl": "Voorwaar, degenen die geloven en goede werken verrichten, zij zijn degenen die de beste schepselen zijn.",
+        "ur": "جو لوگ ایمان لے آئے اور جنہوں نے نیک عمل کیے ، وہ یقیناً بہترین خلائق ہیں۔ <sup foot_note=\"188567\">1</sup>",
+        "bn": "নিশ্চয় যিসকলে ঈমান আনিছে আৰু নেক কাম কৰিছে, তেওঁলোকেই হৈছে সৃষ্টিৰ শ্ৰেষ্ঠ।",
+        "fa": "همانا کسانی که ایمان آوردند و کارهای شایسته انجام دادند، آنان بهترینِ آفریدگان هستند."
+      }
+    },
+    {
+      "verse_number": 6138,
+      "verse_key": "98:8",
+      "arabic_text": "جَزَآؤُهُمْ عِندَ رَبِّهِمْ جَنَّـٰتُ عَدْنٍ تَجْرِى مِن تَحْتِهَا ٱلْأَنْهَـٰرُ خَـٰلِدِينَ فِيهَآ أَبَدًا ۖ رَّضِىَ ٱللَّهُ عَنْهُمْ وَرَضُوا۟ عَنْهُ ۚ ذَٰلِكَ لِمَنْ خَشِىَ رَبَّهُۥ",
+      "phonetic_text": "Jazaohum AAinda rabbihim jannatuAAadnin tajree min tahtiha al-anharu khalideenafeeha abadan radiya Allahu AAanhum waradooAAanhu thalika liman khashiya rabbah",
+      "translations": {
+        "fr": "Leur récompense, auprès de leur Seigneur, sera les Jardins d’Éden sous lesquels coulent les rivières, où ils séjourneront à tout jamais. Allah sera satisfait d’eux, et eux seront satisfaits de Lui. Voilà (ce qui attend) celui qui craint son Seigneur.",
+        "en": "Their reward with their Lord is everlasting Gardens graced with flowing streams, where they will stay forever. God is well pleased with them and they with Him. All this is for those who stand in awe of their Lord.",
+        "es": "Ellos recibirán como recompensa de su Señor Jardines del Edén por donde corren ríos, en los que estarán eternamente. Dios estará complacido con ellos y ellos lo estarán con Él. Esto es lo que aguarda a quienes hayan tenido temor de Dios.",
+        "it": "Presso il loro Signore, la loro ricompensa saranno i Giardini di Eden, dove scorrono i ruscelli, in cui rimarranno in perpetuo. Allah Si compiace di loro e loro si compiacciono di Lui. Ecco [cosa è riservato] a chi teme il suo Signore. <a class=f><sup foot_note=160714>1</sup></a> «la gente della Scrittura»: i nazareni e gli israeliti. <a class=f><sup foot_note=160715>2</sup></a> «gli associatori»; i politeisti, quelli che fanno associazione (shirk) di qualcosa ad Allah, l’Unico. <a class=f><sup foot_note=160716>3</sup></a> «non cesseranno»: di seguire i loro culti erronei; di coltivare i loro dubbi a proposito dell’unicità di Allah; le loro diatribe. Questi alcuni dei significati proposti per questo versetto. <a class=f><sup foot_note=160717>4</sup></a> «…la Prova Evidente»: il Sublime Corano sceso su Muhammad (pace e benedizioni su di lui) come meglio specificato dal versetto successivo. <a class=f><sup foot_note=160718>5</sup></a> «fogli purissimi»: una metafora per indicare il Corano. <a class=f><sup foot_note=160719>6</sup></a> Nel contesto di questo versetto «la Prova Evidente» è la missione di Muhammad (pace e benedizioni su di lui) l’espressione «si divisero» può essere infatti intesa come la constatazione che fu grazie ad essa che una parte dei giudei e dei nazareni accettarono l’IsIàm, separandosi dalle loro rispettive comunità, per aderire alla grande Umma dei credenti. <a class=f><sup foot_note=160720>7</sup></a> «un culto esclusivo»: lett. «come hanìf». Vedi II,e la nota. <a class=f><sup foot_note=160721>8</sup></a> «eseguire l’orazione… versare la decima.» Vedi Appendici e 3.",
+        "ru": "Их воздаянием у их Господа будут сады Эдема, в которых текут реки. Они пребудут в них вечно. Аллах доволен ими, и они довольны Им. Это уготовано для тех, кто боится своего Господа.",
+        "tr": "Rableri katında onların mükâfatı, altlarından ırmaklar akan Adn cennetleridir. Orada ebedî olarak kalacaklardır. Allah onlardan razı olmuş, onlar da O'ndan razı olmuşlardır. İşte bu mükâfat, Rabbine saygı gösterene mahsustur.",
+        "de": "Ihr Lohn bei ihrem Herrn sind die Gärten Edens, durcheilt von Bächen, ewig und auf immer darin zu bleiben. Allah hat Wohlgefallen an ihnen, und sie haben Wohlgefallen an Ihm; das ist für jemanden, der seinen Herrn fürchtet.",
+        "pt": "Cuja recompensa está em seu Senhor: Jardins do Éden, abaixo dos quais correm os rios, onde morarão eternamente. Deus se comprazerá com eles e eles se comprazerão n'Ele. Isto acontecerá com quem teme o seu Senhor.",
+        "nl": "Hun beloningen bij hun Heer zijn de Tuinen van 'Adn (het Paradijs), waar de rivieren onder door stromen, zij zijn eeuwig levenden daarin, voor altijd. Allah is met hen behaagd en zij zijn met Hem behaagd. Dat is voor wie zijn Heer vreest.",
+        "ur": "ن کی جزا اُن کے ربّ کے ہاں دائمی قیام کی جنّتیں ہیں جن کے نیچے نہریں بہ رہی ہوں گی، وہ ان میں ہمیشہ ہمیشہ رہیں گے۔ اللہ ان سے راضی ہوا اور وہ اللہ سے راضی ہوئے۔ یہ کچھ ہے اُس شخص کے لیے جس نے اپنے ربّ کا خوف کیا ہو۔ <sup foot_note=\"188568\">1</sup>",
+        "bn": "তেওঁলোকৰ প্ৰতিপালকৰ ওচৰত তেওঁলোকৰ পুৰষ্কাৰ আছে স্থায়ী জান্নাত, যাৰ তলত নদীসমূহ প্ৰবাহিত, তাত তেওঁলোকে চিৰকাল থাকিব। আল্লাহ তেওঁলোকৰ প্ৰতি সন্তুষ্ট আৰু তেওঁলোকেও তেওঁৰ প্ৰতি সন্তুষ্ট। এইটো তাৰ বাবে, যিয়ে নিজ প্ৰতিপালকক ভয় কৰে।",
+        "fa": "پاداش آنان نزد پروردگار‌شان، باغ‌های [بهشت] جاویدان است که جویبارها از زیر [درختان] آن جاری است؛ همیشه در آن خواهند ماند؛ الله از [اعمال] آنها راضی است و آنان [نیز] از [پاداشِ] او راضیند؛ و این [مقام و پاداش،] برای کسی است که از پروردگارش بترسد."
+      }
+    }
+  ]
+}

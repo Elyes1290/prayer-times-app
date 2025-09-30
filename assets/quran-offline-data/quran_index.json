@@ -1,0 +1,2082 @@
+{
+  "metadata": {
+    "total_surahs": 114,
+    "languages": [
+      "ar",
+      "fr",
+      "en",
+      "es",
+      "it",
+      "ru",
+      "tr",
+      "de",
+      "pt",
+      "nl",
+      "ur",
+      "bn",
+      "fa"
+    ],
+    "extracted_at": "2025-09-20T15:17:53.971Z",
+    "api_source": "Quran.com API v4",
+    "version": "1.0.0",
+    "extraction_stats": {
+      "successful": 114,
+      "failed": 0,
+      "total_verses": 6236
+    }
+  },
+  "surahs": [
+    {
+      "surah_number": 1,
+      "verse_count": 7,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 2,
+      "verse_count": 286,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 3,
+      "verse_count": 200,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 4,
+      "verse_count": 176,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 5,
+      "verse_count": 120,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 6,
+      "verse_count": 165,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 7,
+      "verse_count": 206,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 8,
+      "verse_count": 75,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 9,
+      "verse_count": 129,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 10,
+      "verse_count": 109,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 11,
+      "verse_count": 123,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 12,
+      "verse_count": 111,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 13,
+      "verse_count": 43,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 14,
+      "verse_count": 52,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 15,
+      "verse_count": 99,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 16,
+      "verse_count": 128,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 17,
+      "verse_count": 111,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 18,
+      "verse_count": 110,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 19,
+      "verse_count": 98,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 20,
+      "verse_count": 135,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 21,
+      "verse_count": 112,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 22,
+      "verse_count": 78,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 23,
+      "verse_count": 118,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 24,
+      "verse_count": 64,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 25,
+      "verse_count": 77,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 26,
+      "verse_count": 227,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 27,
+      "verse_count": 93,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 28,
+      "verse_count": 88,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 29,
+      "verse_count": 69,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 30,
+      "verse_count": 60,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 31,
+      "verse_count": 34,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 32,
+      "verse_count": 30,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 33,
+      "verse_count": 73,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 34,
+      "verse_count": 54,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 35,
+      "verse_count": 45,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 36,
+      "verse_count": 83,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 37,
+      "verse_count": 182,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 38,
+      "verse_count": 88,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 39,
+      "verse_count": 75,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 40,
+      "verse_count": 85,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 41,
+      "verse_count": 54,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 42,
+      "verse_count": 53,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 43,
+      "verse_count": 89,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 44,
+      "verse_count": 59,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 45,
+      "verse_count": 37,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 46,
+      "verse_count": 35,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 47,
+      "verse_count": 38,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 48,
+      "verse_count": 29,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 49,
+      "verse_count": 18,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 50,
+      "verse_count": 45,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 51,
+      "verse_count": 60,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 52,
+      "verse_count": 49,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 53,
+      "verse_count": 62,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 54,
+      "verse_count": 55,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 55,
+      "verse_count": 78,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 56,
+      "verse_count": 96,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 57,
+      "verse_count": 29,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 58,
+      "verse_count": 22,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 59,
+      "verse_count": 24,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 60,
+      "verse_count": 13,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 61,
+      "verse_count": 14,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 62,
+      "verse_count": 11,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 63,
+      "verse_count": 11,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 64,
+      "verse_count": 18,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 65,
+      "verse_count": 12,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 66,
+      "verse_count": 12,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 67,
+      "verse_count": 30,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 68,
+      "verse_count": 52,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 69,
+      "verse_count": 52,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 70,
+      "verse_count": 44,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 71,
+      "verse_count": 28,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 72,
+      "verse_count": 28,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 73,
+      "verse_count": 20,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 74,
+      "verse_count": 56,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 75,
+      "verse_count": 40,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 76,
+      "verse_count": 31,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 77,
+      "verse_count": 50,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 78,
+      "verse_count": 40,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 79,
+      "verse_count": 46,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 80,
+      "verse_count": 42,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 81,
+      "verse_count": 29,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 82,
+      "verse_count": 19,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 83,
+      "verse_count": 36,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 84,
+      "verse_count": 25,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 85,
+      "verse_count": 22,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 86,
+      "verse_count": 17,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 87,
+      "verse_count": 19,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 88,
+      "verse_count": 26,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 89,
+      "verse_count": 30,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 90,
+      "verse_count": 20,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 91,
+      "verse_count": 15,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 92,
+      "verse_count": 21,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 93,
+      "verse_count": 11,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 94,
+      "verse_count": 8,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 95,
+      "verse_count": 8,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 96,
+      "verse_count": 19,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 97,
+      "verse_count": 5,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 98,
+      "verse_count": 8,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 99,
+      "verse_count": 8,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 100,
+      "verse_count": 11,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 101,
+      "verse_count": 11,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 102,
+      "verse_count": 8,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 103,
+      "verse_count": 3,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 104,
+      "verse_count": 9,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 105,
+      "verse_count": 5,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 106,
+      "verse_count": 4,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 107,
+      "verse_count": 7,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 108,
+      "verse_count": 3,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 109,
+      "verse_count": 6,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 110,
+      "verse_count": 3,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 111,
+      "verse_count": 5,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 112,
+      "verse_count": 4,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 113,
+      "verse_count": 5,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    },
+    {
+      "surah_number": 114,
+      "verse_count": 6,
+      "available_translations": [
+        "fr",
+        "en",
+        "es",
+        "it",
+        "ru",
+        "tr",
+        "de",
+        "pt",
+        "nl",
+        "ur",
+        "bn",
+        "fa"
+      ]
+    }
+  ]
+}

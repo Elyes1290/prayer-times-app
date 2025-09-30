@@ -1,0 +1,106 @@
+{
+  "surah_number": 113,
+  "extracted_at": "2025-09-20T15:17:51.234Z",
+  "verses": [
+    {
+      "verse_number": 6226,
+      "verse_key": "113:1",
+      "arabic_text": " قُلْ أَعُوذُ بِرَبِّ ٱلْفَلَقِ",
+      "phonetic_text": "Qul aAAoothu birabbi alfalaq",
+      "translations": {
+        "fr": "Dis : « Je cherche refuge auprès du Seigneur de l’aube naissante,",
+        "en": "Say [Prophet], ‘I seek refuge with the Lord of daybreak",
+        "es": "Di: “Me refugio en el Señor del amanecer,",
+        "it": "Di’: «Mi rifugio nel Signore dell’alba nascente,",
+        "ru": "Скажи: «Прибегаю к защите Господа рассвета",
+        "tr": "De ki: \"Ben, ağaran sabahın Rabbine sığınırım,",
+        "de": "Sag: Ich nehme Zuflucht beim Herrn des Tagesanbruchs",
+        "pt": "Dize: Amparo-me no Senhor da Alvorada;",
+        "nl": "Zeg: \"Ik zoek bescherming bij de Heer der dageraad.",
+        "ur": "کہو، <sup foot_note=\"188652\">1</sup> میں پناہ مانگتا ہوں <sup foot_note=\"188653\">2</sup> صبح کے ربّ <sup foot_note=\"188654\">3</sup> کی",
+        "bn": "কোৱা, মই আশ্ৰয় বিচাৰো উষাৰ প্ৰতিপালকৰ।",
+        "fa": "[ای پیامبر،] بگو: «به پروردگار سپیده‌دم پناه می‌برم،"
+      }
+    },
+    {
+      "verse_number": 6227,
+      "verse_key": "113:2",
+      "arabic_text": "مِن شَرِّ مَا خَلَقَ",
+      "phonetic_text": "Min sharri ma khalaq",
+      "translations": {
+        "fr": "contre le mal de ce qu’Il a créé,",
+        "en": "against the harm in what He has created,",
+        "es": "de todo el mal que existe en lo que Él creó,",
+        "it": "contro il male di ciò che ha creato,",
+        "ru": "от зла того, что Он сотворил,",
+        "tr": "Yarattığı şeylerin şerrinden,",
+        "de": "vor dem Übel dessen, was Er erschaffen hat,",
+        "pt": "Do mal de quem por Ele foi criado.",
+        "nl": "Tegen het kwaad dat Hij geschapen heeft.",
+        "ur": "ہر اُس چیز کے شر سے جو اُس نے پیدا کی ہے <sup foot_note=\"188655\">1</sup>",
+        "bn": "তেওঁ যি সৃষ্টি কৰিছে তাৰ অনিষ্টৰ পৰা,",
+        "fa": "از شرِ تمام آنچه آفریده است،"
+      }
+    },
+    {
+      "verse_number": 6228,
+      "verse_key": "113:3",
+      "arabic_text": "وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ",
+      "phonetic_text": "Wamin sharri ghasiqin ithawaqab",
+      "translations": {
+        "fr": "contre le mal de l’obscurité quand elle devient ténèbres,",
+        "en": "the harm in the night when darkness gathers,",
+        "es": "del mal de la oscuridad de la noche cuando se extiende,",
+        "it": "e contro il male dell’oscurità che si estende",
+        "ru": "от зла мрака, когда он наступает,",
+        "tr": "Karanlığı çöktüğü zaman gecenin şerrinden,",
+        "de": "und vor dem Übel der Dunkelheit, wenn sie zunimmt,",
+        "pt": "Do mal da tenebrosa noite, quando se estende.",
+        "nl": "En tegen het kwaad van de donkere nacht wanneer hij aanbreekt.",
+        "ur": "اور رات کی تاریکی کے شر سے جب کہ وہ چھا جائے، <sup foot_note=\"188656\">1</sup>",
+        "bn": "আৰু ৰাতিৰ অন্ধকাৰৰ অনিষ্টৰ পৰা, যেতিয়া ই গভীৰ হয়,",
+        "fa": "و از شر تاریکی شب، آنگاه که همه جا را فراگیرد،"
+      }
+    },
+    {
+      "verse_number": 6229,
+      "verse_key": "113:4",
+      "arabic_text": "وَمِن شَرِّ ٱلنَّفَّـٰثَـٰتِ فِى ٱلْعُقَدِ",
+      "phonetic_text": "Wamin sharri annaffathatifee alAAuqad",
+      "translations": {
+        "fr": "contre le mal des (sorcières) qui soufflent dans les nœuds,",
+        "en": "the harm in witches when they blow on knots,",
+        "es": "del mal de las [hechiceras] sopladoras de nudos<sup foot_note=169518>1</sup>,",
+        "it": "e contro il male delle soffianti sui nodi <a class=f><sup foot_note=160797>1</sup></a>,",
+        "ru": "от зла колдуний, поплевывающих на узлы,",
+        "tr": "Ve düğümlere üfleyen büyücülerin şerrinden,",
+        "de": "und vor dem Übel der Knotenanbläserinnen",
+        "pt": "Do mal dos que praticam ciências ocultas.",
+        "nl": "En tegen het kwaad van hen die op knopen blazen.",
+        "ur": "اور گِرہوں میں پُھونکنے والوں (یا والیوں)کے شر سے، <sup foot_note=\"188657\">1</sup>",
+        "bn": "আৰু সেইসকল নাৰীৰ অনিষ্টৰ পৰা যিসকলে গাঁঠিত ফুঁ দিয়ে,",
+        "fa": "و از شر [زنان جادوگر] که با افسون در گره‌ها می‌دمند."
+      }
+    },
+    {
+      "verse_number": 6230,
+      "verse_key": "113:5",
+      "arabic_text": "وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ",
+      "phonetic_text": "Wamin sharri hasidin itha hasad",
+      "translations": {
+        "fr": "et contre le mal de l’envieux quand il envie. »",
+        "en": "the harm in the envier when he envies.’",
+        "es": "y del mal del envidioso cuando envidia”.",
+        "it": "e contro il male dell’invidioso quando invidia» <a class=f><sup foot_note=160798>1</sup></a>. ",
+        "ru": "от зла завистника, когда он завидует».",
+        "tr": "Ve hased ettiği zaman hasetçinin şerrinden.",
+        "de": "und vor dem Übel eines (jeden) Neidenden, wenn er neidet.",
+        "pt": "Do mal do invejoso, quando inveja!",
+        "nl": "En tegen het kwaad van een jaloerse wanneer deze jaloers is.\"",
+        "ur": "اور حاسد کے شر سے جب کہ وہ حسد کرے۔ <sup foot_note=\"188658\">1</sup>",
+        "bn": "আৰু হিংসুকৰ অনিষ্টৰ পৰা, যেতিয়া সি হিংসা কৰে।",
+        "fa": "و از شر [هر] حسود، آنگاه که حسد ورزد»."
+      }
+    }
+  ]
+}

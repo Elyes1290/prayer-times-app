@@ -1,0 +1,1566 @@
+{
+  "surah_number": 55,
+  "extracted_at": "2025-09-20T15:16:28.699Z",
+  "verses": [
+    {
+      "verse_number": 4902,
+      "verse_key": "55:1",
+      "arabic_text": " ٱلرَّحْمَـٰنُ",
+      "phonetic_text": "Arrahman",
+      "translations": {
+        "fr": "Le Tout Clément.",
+        "en": "It is the Lord of Mercy",
+        "es": "El Compasivo",
+        "it": "Il Compassionevole,",
+        "ru": "Милостивый",
+        "tr": "Rahmân (çok merhametli olan Allah)",
+        "de": "Der Allerbarmer",
+        "pt": "O Clemente.",
+        "nl": "De Erbarmer.",
+        "ur": "رحمٰن نے",
+        "bn": "আৰ-ৰাহমান, (দয়াময় আল্লাহ)",
+        "fa": "[الله] رحمان"
+      }
+    },
+    {
+      "verse_number": 4903,
+      "verse_key": "55:2",
+      "arabic_text": "عَلَّمَ ٱلْقُرْءَانَ",
+      "phonetic_text": "AAallama alqur-an",
+      "translations": {
+        "fr": "Il a enseigné le Coran.",
+        "en": "who taught the Quran.",
+        "es": "ha enseñado el Corán,",
+        "it": "ha insegnato il Corano,",
+        "ru": "научил Корану,",
+        "tr": "Kurân'ı öğretti.",
+        "de": "hat den Qur’an gelehrt.",
+        "pt": "Ensinou o Alcorão.",
+        "nl": "Hij heeft de Koran onderwezen.",
+        "ur": "اِس قرآن کی تعلیم دی ہے۔ <sup foot_note=\"187605\">1</sup>",
+        "bn": "তেৱেঁই শিক্ষা দিছে কোৰআন,",
+        "fa": "قرآن را آموزش داد؛"
+      }
+    },
+    {
+      "verse_number": 4904,
+      "verse_key": "55:3",
+      "arabic_text": "خَلَقَ ٱلْإِنسَـٰنَ",
+      "phonetic_text": "Khalaqa al-insan",
+      "translations": {
+        "fr": "Il a créé l’homme,",
+        "en": "He created man",
+        "es": "ha creado al ser humano",
+        "it": "ha creato l’uomo",
+        "ru": "создал человека",
+        "tr": "İnsanı yarattı.",
+        "de": "Er hat den Menschen erschaffen.",
+        "pt": "Criou o homem.",
+        "nl": "Hij heeft de mens geschapen.",
+        "ur": "اُسی نے انسان کو پیدا کیا <sup foot_note=\"187606\">1</sup>",
+        "bn": "তেৱেঁই সৃষ্টি কৰিছে মানুহ,",
+        "fa": "انسان را آفرید؛"
+      }
+    },
+    {
+      "verse_number": 4905,
+      "verse_key": "55:4",
+      "arabic_text": "عَلَّمَهُ ٱلْبَيَانَ",
+      "phonetic_text": "AAallamahu albayan",
+      "translations": {
+        "fr": "et Lui a appris à parler clairement.",
+        "en": "and taught him to communicate.",
+        "es": "y le ha enseñado a hablar con elocuencia.",
+        "it": "e gli ha insegnato ad esprimersi <a class=f><sup foot_note=160068>1</sup></a> .",
+        "ru": "и научил его изъясняться.",
+        "tr": "Ona beyanı öğretti.",
+        "de": "Er hat ihn die klare Darlegung gelehrt.",
+        "pt": "E ensinou-lhe a eloqüência.",
+        "nl": "Hij heeft hem de duidelijke verklaring onderwezen.",
+        "ur": "اور اسے بولنا سکھایا۔ <sup foot_note=\"187607\">1</sup>",
+        "bn": "তেৱেঁই তাক ভাষা শিকাইছে,",
+        "fa": "[و] به او سخن‌گفتن آموخت."
+      }
+    },
+    {
+      "verse_number": 4906,
+      "verse_key": "55:5",
+      "arabic_text": "ٱلشَّمْسُ وَٱلْقَمَرُ بِحُسْبَانٍ",
+      "phonetic_text": "Ashshamsu walqamaru bihusban",
+      "translations": {
+        "fr": "Le soleil et la lune (gravitent) selon un calcul (précis).",
+        "en": "The sun and the moon follow their calculated courses;",
+        "es": "El Sol y la Luna siguen una órbita precisa,",
+        "it": "Il sole e la luna [si muovono] secondo calcolo [preciso].",
+        "ru": "Солнце и луна движутся согласно рассчитанному порядку.",
+        "tr": "Güneş de ay da bir hesab iledir.",
+        "de": "Die Sonne und der Mond (laufen) nach Berechnung.",
+        "pt": "O sol e a lua giram (em suas órbitas).",
+        "nl": "De zon en de maan volgen de berekende banen.",
+        "ur": "سورج اور چاند ایک حساب کے پابند ہیں <sup foot_note=\"187608\">1</sup>",
+        "bn": "সূৰ্য আৰু চন্দ্ৰ নিৰ্ধাৰিত হিচাপ-অনুযায়ী আৱৰ্তন কৰে,",
+        "fa": "خورشید و ماه، با حسابی منظم [و دقیق] در گردِشَند؛"
+      }
+    },
+    {
+      "verse_number": 4907,
+      "verse_key": "55:6",
+      "arabic_text": "وَٱلنَّجْمُ وَٱلشَّجَرُ يَسْجُدَانِ",
+      "phonetic_text": "Wannajmu washshajaru yasjudan",
+      "translations": {
+        "fr": "L’étoile et les arbres se prosternent.",
+        "en": "the plants and the trees submit to His designs;",
+        "es": "y las hierbas y los árboles se prosternan [ante Dios].",
+        "it": "E si prosternano le stelle e gli alberi <a class=f><sup foot_note=160069>1</sup></a> .",
+        "ru": "Травы (или звезды) и деревья совершают поклоны.",
+        "tr": "Bitkiler ve ağaçlar secde etmektedirler.",
+        "de": "Die stiellosen Pflanzen und die Bäume werfen sich nieder.",
+        "pt": "E as ervas e as árvores prostram-se em adoração.",
+        "nl": "En de struiken en de bomen knielen zich neer.",
+        "ur": "اور تارے <sup foot_note=\"187609\">1</sup> اور درخت سب سجدہ ریز ہیں۔ <sup foot_note=\"187610\">2</sup>",
+        "bn": "আৰু তৃণলতা আৰু বৃক্ষাদিয়ে ছাজদা কৰে,",
+        "fa": "و گیاه و درخت [برایش] سجده می‌کنند."
+      }
+    },
+    {
+      "verse_number": 4908,
+      "verse_key": "55:7",
+      "arabic_text": "وَٱلسَّمَآءَ رَفَعَهَا وَوَضَعَ ٱلْمِيزَانَ",
+      "phonetic_text": "Wassamaa rafaAAahawawadaAAa almeezan",
+      "translations": {
+        "fr": "Le ciel, Il l’a élevé, et Il a établi la balance (de l’équité),",
+        "en": "He has raised up the sky. He has set the balance",
+        "es": "Ha elevado el cielo, y establecido la balanza de la justicia",
+        "it": "Ha elevato il cielo e ha eretto la bilancia,",
+        "ru": "Он возвысил небо и установил весы,",
+        "tr": "Göğü yükseltti ve mizanı koydu.",
+        "de": "Den Himmel hat Er emporgehoben und die Waage aufgestellt,",
+        "pt": "E elevou o firmamento e estabeleceu a balança da justiça,",
+        "nl": "En Hij heeft de hemel opgeheven en Hij heeft de weegschaal geplaatst.",
+        "ur": "آسمان کو اُس نے بلند کیا اور میزان قائم کر دی۔ <sup foot_note=\"187611\">1</sup>",
+        "bn": "আৰু তেৱেঁই আকাশখনক সমুন্নত কৰিছে আৰু স্থাপন কৰিছে তুলাচনী,",
+        "fa": "و آسمان را برافراشت و میزان [عدالت را در زمین] برقرار نمود."
+      }
+    },
+    {
+      "verse_number": 4909,
+      "verse_key": "55:8",
+      "arabic_text": "أَلَّا تَطْغَوْا۟ فِى ٱلْمِيزَانِ",
+      "phonetic_text": "Alla tatghaw fee almeezan",
+      "translations": {
+        "fr": "afin que vous n’abusiez pas dans la pesée.",
+        "en": "so that you may not exceed in the balance:",
+        "es": "para que no transgredáis el equilibrio [de la equidad].",
+        "it": "affinché non frodiate nella bilancia:",
+        "ru": "чтобы вы не преступали границы дозволенного на весах.",
+        "tr": "Sakın tartıda taşkınlık etmeyin.",
+        "de": "damit ihr beim Wägen nicht das Maß überschreitet.",
+        "pt": "Para que não defraudeis no peso.",
+        "nl": "Opdat jullie het evenwicht niet verstoren.",
+        "ur": "اِس کا تقاضا یہ ہے کہ تم میزان میں خلل نہ ڈالو",
+        "bn": "যাতে তোমালোকে জোখ-মাখত সীমালঙ্ঘন নকৰা।",
+        "fa": "[ای مردم، چنین کرد] تا در وزن و پیمانه، [به یکدیگر] ستم نکنید؛"
+      }
+    },
+    {
+      "verse_number": 4910,
+      "verse_key": "55:9",
+      "arabic_text": "وَأَقِيمُوا۟ ٱلْوَزْنَ بِٱلْقِسْطِ وَلَا تُخْسِرُوا۟ ٱلْمِيزَانَ",
+      "phonetic_text": "Waaqeemoo alwazna bilqisti walatukhsiroo almeezan",
+      "translations": {
+        "fr": "Pesez donc avec équité, ne trichez pas dans la pesée.",
+        "en": "weigh with justice and do not fall short in the balance.",
+        "es": "Peséis con equidad y no cometáis fraude en la balanza.",
+        "it": "stabilite il peso con equità e non falsate la bilancia.",
+        "ru": "Взвешивайте беспристрастно и не занижайте вес.",
+        "tr": "Tartıyı adaletle yapın, terazide eksiklik yapmayın.",
+        "de": "Und meßt das Gewicht in Gerechtigkeit und gebt beim Wägen nicht weniger.",
+        "pt": "Pesai, pois, escrupulosamente, e não diminuais a balança!",
+        "nl": "En houdt de weegschaal in evenwicht met rechtvaardigheid en neemt niets van de weegschaal af.",
+        "ur": "انصاف کے ساتھ ٹھیک ٹھیک تولو اور ترازو میں ڈنڈی نہ مارو۔ <sup foot_note=\"187612\">1</sup>",
+        "bn": "আৰু তোমালোকে ন্যায়সঙ্গতভাৱে ওজন প্ৰতিষ্ঠা কৰা আৰু ওজনকৃত বস্তু কম নিদিবা।",
+        "fa": "و سنجش [حقوق دیگران] را به عدالت برآورد كنید و در سنجش [چیزی] مکاهید [و کم‌فروشی نکنید]."
+      }
+    },
+    {
+      "verse_number": 4911,
+      "verse_key": "55:10",
+      "arabic_text": "وَٱلْأَرْضَ وَضَعَهَا لِلْأَنَامِ",
+      "phonetic_text": "Wal-arda wadaAAahalil-anam",
+      "translations": {
+        "fr": "La terre, Il l’a aménagée pour les humains.",
+        "en": "He set down the Earth for His creatures,",
+        "es": "Ha preparado la Tierra para Sus criaturas.",
+        "it": "La terra l’ha disposta per le creature:",
+        "ru": "Он установил землю для тварей.",
+        "tr": "(Allah) yeri mahlukat için (aşağıya) koydu.",
+        "de": "Und die Erde hat Er für die Geschöpfe (an)gelegt;",
+        "pt": "Aplainou a terra para as (Suas) criaturas,",
+        "nl": "En Hij heeft de aarde bereid voor de schepselen.",
+        "ur": "<sup foot_note=\"171572\">1</sup> زمین کو اس نے سب مخلوقات کے لیے بنایا۔ <sup foot_note=\"171573\">2</sup>",
+        "bn": "আৰু পৃথিৱীখনক তেওঁ সৃষ্টি জীৱৰ বাবে স্থাপন কৰিছে;",
+        "fa": "و زمین را براى [زندگى] انسان‌ها مقرر داشت،"
+      }
+    },
+    {
+      "verse_number": 4912,
+      "verse_key": "55:11",
+      "arabic_text": "فِيهَا فَـٰكِهَةٌ وَٱلنَّخْلُ ذَاتُ ٱلْأَكْمَامِ",
+      "phonetic_text": "Feeha fakihatun wannakhluthatu al-akmam",
+      "translations": {
+        "fr": "S’y trouvent des fruits, ainsi que les palmiers chargés de leurs régimes.",
+        "en": "with its fruits, its palm trees with sheathed clusters,",
+        "es": "En ella hay árboles frutales, palmeras con racimos [de dátiles],",
+        "it": "vi crescono frutti e palme dalle spate protette",
+        "ru": "На ней есть фрукты и финиковые пальмы с чашечками (или волокнами),",
+        "tr": "Orada meyvalar ve salkımlı hurma ağaçları vardır.",
+        "de": "auf ihr gibt es Früchte, Palmen mit Fruchthüllen",
+        "pt": "Na qual há toda a espécie de frutos, e tamareiras com cachos,",
+        "nl": "Daarop zijn vruchten en dadelpalmen met kolven.",
+        "ur": "اس میں ہر طرح کے بکثرت لذیذ پھل ہیں کھجور کے درخت ہیں جن کے پھل غلافوں میں لپٹے ہوئے ہیں",
+        "bn": "য’ত আছে ফল-মূল আৰু খেজুৰ গছ, যাৰ ফল আৱৰণমূক্ত,",
+        "fa": "که [انواع] میوه‌ها و نخل‌های خوشه‌دار در آن است."
+      }
+    },
+    {
+      "verse_number": 4913,
+      "verse_key": "55:12",
+      "arabic_text": "وَٱلْحَبُّ ذُو ٱلْعَصْفِ وَٱلرَّيْحَانُ",
+      "phonetic_text": "Walhabbu thoo alAAasfiwarrayhan",
+      "translations": {
+        "fr": "Et les graines (de céréales) dans leurs enveloppes, ainsi que les plantes odoriférantes.",
+        "en": "its husked grain, its fragrant plants.",
+        "es": "semillas y plantas aromáticas.",
+        "it": "e cereali nei loro involucri e piante aromatiche.",
+        "ru": "а также злаки с листьями и травы благоуханные.",
+        "tr": "Yapraklı taneler ve hoş kokulu bitkiler vardır.",
+        "de": "und Korn mit Halmen und duftende Pflanzen.",
+        "pt": "E as graníferas, com a sua palha, e as odoríferas.",
+        "nl": "En graan in aren en geurige planten.",
+        "ur": "طرح طرح کے غلّے ہیں جن میں بُھوسا بھی ہوتا ہے اور دانہ بھی۔ <sup foot_note=\"187613\">1</sup>",
+        "bn": "আৰু আছে বাকলিযুক্ত দানা আৰু সুগন্ধিযুক্ত ফুল।",
+        "fa": "و [همچنین] حبوباتِ برگ‌دار و گیاهانِ خوشبو؛"
+      }
+    },
+    {
+      "verse_number": 4914,
+      "verse_key": "55:13",
+      "arabic_text": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "phonetic_text": "Fabi-ayyi ala-i rabbikumatukaththiban",
+      "translations": {
+        "fr": "Quels bienfaits de votre Seigneur, oseriez-vous donc, vous deux,<sup foot_note=195168>1</sup> démentir ?",
+        "en": "Which, then, of your Lord’s blessings do you both deny?",
+        "es": "¿Acaso podéis negar<sup foot_note=169378>1</sup> alguna de las gracias que os ha concedido vuestro Señor?",
+        "it": "Quale dunque dei benefici del vostro Signore negherete <a class=f><sup foot_note=160070>1</sup></a> ?",
+        "ru": "Какую же из милостей вашего Господа вы считаете ложью?",
+        "tr": "Şimdi Rabbinizin hangi nimetlerini yalanlıyorsunuz?",
+        "de": "Welche der Wohltaten eures Herrn wollt ihr beide denn leugnen?",
+        "pt": "-Assim, pois, quais das mercês de vosso Senhor desagradeceis?",
+        "nl": "Welke gunsten van jullie (Djinn's en mensen) Heer loochenen jullie dan?",
+        "ur": "پس اے جِنّ وانس، تم اپنے رب کی کن کن نعمتوں <sup foot_note=\"187614\">1</sup> کو جھٹلاؤ گے؟ <sup foot_note=\"187615\">2</sup>",
+        "bn": "এতেকে তোমালোক উভয়ে তোমালোকৰ প্ৰতিপালকৰ কোনটো অনুগ্ৰহ অস্বীকাৰ কৰিবা?",
+        "fa": "پس [ای جن و انس] كدام یک از نعمت‌های پروردگارتان را انكار مى‌كنید؟"
+      }
+    },
+    {
+      "verse_number": 4915,
+      "verse_key": "55:14",
+      "arabic_text": "خَلَقَ ٱلْإِنسَـٰنَ مِن صَلْصَـٰلٍ كَٱلْفَخَّارِ",
+      "phonetic_text": "Khalaqa al-insana min salsalinkalfakhkhar",
+      "translations": {
+        "fr": "Il créa l’homme d’une argile semblable à celle de la poterie.",
+        "en": "He created mankind out of dried clay, like pottery,",
+        "es": "Ha creado al ser humano de arcilla como la cerámica,",
+        "it": "Creò l’uomo di argilla risonante come terraglia <a class=f><sup foot_note=160071>1</sup></a>",
+        "ru": "Он создал человека из сухой (или звенящей) глины, подобной гончарной,",
+        "tr": "Allah insanı, pişmiş bir çamura benzeyen bir balçıktan yarattı.",
+        "de": "Er hat den Menschen aus trockenem Ton wie Töpferware erschaffen.",
+        "pt": "Ele criou os gênios do fogo vivo.",
+        "nl": "Hij heeft de mens geschapen van droge klei, als aardewerk.",
+        "ur": "انسان کو اُس نے ٹھیکری جیسے سُوکھے سڑے ہوئے گارے سے بنایا <sup foot_note=\"187616\">1</sup>",
+        "bn": "তেৱেঁই মানুহক সৃষ্টি কৰিছে পানী মিশ্ৰিত শুকান মাটিৰ পৰা যিটো পোৰা মাটিৰ দৰে,",
+        "fa": "او انسان را از گِل خشکی همچون سفال آفرید؛"
+      }
+    },
+    {
+      "verse_number": 4916,
+      "verse_key": "55:15",
+      "arabic_text": "وَخَلَقَ ٱلْجَآنَّ مِن مَّارِجٍ مِّن نَّارٍ",
+      "phonetic_text": "Wakhalaqa aljanna min marijinmin nar",
+      "translations": {
+        "fr": "Et Il créa les djinns d’un feu pur et sans fumée.",
+        "en": "the jinn out of smokeless fire.",
+        "es": "y ha creado a los yinn de fuego puro.",
+        "it": "e i dèmoni da fiamma di un fuoco senza fumo.",
+        "ru": "и создал джиннов из чистого пламени (или из пламени, смешанного с дымом).",
+        "tr": "Cinleri de hâlis ateşten yarattı.",
+        "de": "Und Er hat die Ginn aus einer unruhigen Feuerflamme erschaffen.",
+        "pt": "E criou os gênios do fogo vivo.",
+        "nl": "En Hij heeft de Djinn's geschapen van een rookloze vlam van vuur.",
+        "ur": "اور جِن کو آگ کی لَپٹ سے پیدا کیا۔ <sup foot_note=\"187617\">1</sup>",
+        "bn": "আৰু তেৱেঁই জিনক সৃষ্টি কৰিছে ধোঁৱাবিহীন অগ্নিশিখাৰ পৰা।",
+        "fa": "و جن را از شعله‌ای از آتش خلق کرد؛"
+      }
+    },
+    {
+      "verse_number": 4917,
+      "verse_key": "55:16",
+      "arabic_text": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "phonetic_text": "Fabi-ayyi ala-i rabbikumatukaththiban",
+      "translations": {
+        "fr": "Quels bienfaits de votre Seigneur, oseriez-vous donc, vous deux, démentir ?",
+        "en": "Which, then, of your Lord’s blessings do you both deny?",
+        "es": "¿Acaso podéis negar alguna de las gracias que os ha concedido vuestro Señor?",
+        "it": "Quale dunque dei benefici del vostro Signore negherete?",
+        "ru": "Какую же из милостей вашего Господа вы считаете ложью?",
+        "tr": "Şimdi Rabbinizin hangi nimetlerini yalanlıyorsunuz?",
+        "de": "Welche der Wohltaten eures Herrn wollt ihr beide denn leugnen?",
+        "pt": "-Assim, pois, quais das mercês de vosso Senhor desagradeceis?",
+        "nl": "Welke gunsten van jullie Heer loochenen jullie dan?",
+        "ur": "پس اے جِنّ و اِنس ، تم اپنے رب کی  کن کن عجائبِ قدرت <sup foot_note=\"187618\">1</sup> کو جھٹلاؤ گے؟",
+        "bn": "এতেকে তোমালোক উভয়ে তোমালোকৰ প্ৰতিপালকৰ কোনটো অনুগ্ৰহ অস্বীকাৰ কৰিবা?",
+        "fa": "پس [ای جن و انس] كدام یک از نعمت‌های پروردگارتان را انكار مى‌كنید؟"
+      }
+    },
+    {
+      "verse_number": 4918,
+      "verse_key": "55:17",
+      "arabic_text": "رَبُّ ٱلْمَشْرِقَيْنِ وَرَبُّ ٱلْمَغْرِبَيْنِ",
+      "phonetic_text": "Rabbu almashriqayni warabbu almaghribayn",
+      "translations": {
+        "fr": "Le Seigneur des deux Orients, (Il est aussi) le Seigneur des deux Occidents.",
+        "en": "He is Lord of the two risings and Lord of the two settings.",
+        "es": "El Señor de los dos nacientes y los dos ponientes<sup foot_note=169379>1</sup>.",
+        "it": "Il Signore dei due Orienti e il Signore dei due Occidenti <a class=f><sup foot_note=160072>1</sup></a> .",
+        "ru": "Господь обоих востоков и Господь обоих западов!",
+        "tr": "(O) iki doğunun ve iki batının Rabbidir.",
+        "de": "(Er ist) der Herr der beiden Osten und der Herr der beiden Westen.",
+        "pt": "É o Senhor dos dois solstícios e dos dois equinócios.",
+        "nl": "De Heer van de twee opgangen en de twee ondergangen.",
+        "ur": "دونوں مشرق اور دونوں مغرب، سب کا مالک و پروردگار وہی ہے۔ <sup foot_note=\"187619\">1</sup>",
+        "bn": "তেৱেঁই দুই উদয়াচল আৰু দুই অস্তাচলৰ প্ৰতিপালক।",
+        "fa": "[او] پروردگار مشرق‌ها و مغرب‌هاست؛"
+      }
+    },
+    {
+      "verse_number": 4919,
+      "verse_key": "55:18",
+      "arabic_text": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "phonetic_text": "Fabi-ayyi ala-i rabbikumatukaththiban",
+      "translations": {
+        "fr": "Quels bienfaits de votre Seigneur, oseriez-vous donc, vous deux, démentir ?",
+        "en": "Which, then, of your Lord’s blessings do you both deny?",
+        "es": "¿Acaso podéis negar alguna de las gracias que os ha concedido vuestro Señor?",
+        "it": "Quale dunque dei benefici del vostro Signore negherete?",
+        "ru": "Какую же из милостей вашего Господа вы считаете ложью?",
+        "tr": "Şimdi Rabbinizin hangi nimetlerini yalanlıyorsunuz?",
+        "de": "Welche der Wohltaten eures Herrn wollt ihr beide denn leugnen?",
+        "pt": "-Assim, pois, quais das mercês dos vosso Senhor desagradeceis?",
+        "nl": "Welke gunsten van jullie Heer loochenen jullie dan?",
+        "ur": "پس اے جِنّ و اِنس تم اپنے رب کی کن کن قدرتوں <sup foot_note=\"187620\">1</sup>   کو جھٹلاؤ گے؟",
+        "bn": "এতেকে তোমালোক উভয়ে তোমালোকৰ প্ৰতিপালকৰ কোনটো অনুগ্ৰহ অস্বীকাৰ কৰিবা?",
+        "fa": "پس [ای گروه انس و جن] کدام یک از نعمت‌های پروردگارتان را تکذیب می‌کنید؟"
+      }
+    },
+    {
+      "verse_number": 4920,
+      "verse_key": "55:19",
+      "arabic_text": "مَرَجَ ٱلْبَحْرَيْنِ يَلْتَقِيَانِ",
+      "phonetic_text": "Maraja albahrayni yaltaqiyan",
+      "translations": {
+        "fr": "Il a laissé courir les deux mers qui se rencontrent.",
+        "en": "He released the two bodies of [fresh and salt] water. They meet,",
+        "es": "Ha hecho que las dos grandes masas de agua se encuentren,",
+        "it": "Ha lasciato liberi mari affinché si incontrassero <a class=f><sup foot_note=160073>1</sup></a> ,",
+        "ru": "Он смешал два моря, которые встречаются друг с другом.",
+        "tr": "(Acı ve tatlı) iki denizi salıverdi birbirine kavuşuyorlar.",
+        "de": "Er hat den beiden Meeren freien Lauf gelassen; sie treffen aufeinander,",
+        "pt": "Liberam os dois mares, para que se encontrassem.",
+        "nl": "Hij heeft de twee zeeën laten stromen en zij ontmoeten elkaar.",
+        "ur": "دو سمندروں کو اس نے چھوڑ دیا کہ باہم مل جائیں",
+        "bn": "তেৱেঁ দুই সাগৰক প্ৰবাহিত কৰে, উভয়ে পৰস্পৰ মিলিত হয়,",
+        "fa": "او دو دریا[ی شور و شیرین] را روان کرد تا [به یکدیگر] برسند؛"
+      }
+    },
+    {
+      "verse_number": 4921,
+      "verse_key": "55:20",
+      "arabic_text": "بَيْنَهُمَا بَرْزَخٌ لَّا يَبْغِيَانِ",
+      "phonetic_text": "Baynahuma barzakhun la yabghiyan",
+      "translations": {
+        "fr": "Entre les deux (se dresse) une barrière pour qu’elles n’empiètent pas l’une sur l’autre.",
+        "en": "yet there is a barrier between them they do not cross.",
+        "es": "pero dispuso entre ambas una barrera que no transgreden.",
+        "it": "[ma] fra loro vi è una barriera che non possono oltrepassare <a class=f><sup foot_note=160074>1</sup></a> .",
+        "ru": "Между ними существует преграда, которую они не могут преступить.",
+        "tr": "Fakat aralarında bir engel vardır, birbirlerine geçip karışmıyorlar.",
+        "de": "zwischen ihnen ist (aber) ein trennendes Hindernis, (das)s sie (ihre Grenzen) nicht überschreiten.",
+        "pt": "Entre ambos, há uma barreira, para que não seja ultrapassada.",
+        "nl": "Tussen beide is een scheiding, zij kunnen die niet passeren.",
+        "ur": "پھر بھی ان کے درمیا ن ایک پر دہ حائل ہے جس سے وہ تجاوز نہیں کرتے۔ <sup foot_note=\"187621\">1</sup>",
+        "bn": "কিন্তু সিহঁত উভয়ৰ মাজত আছে এটা অন্তৰাল, যিটো সিহঁতে অতিক্ৰম কৰিব নোৱাৰে।",
+        "fa": "[در عین حال،] مانعی میان آن دو است که با هم نمی‌آمیزند؛"
+      }
+    },
+    {
+      "verse_number": 4922,
+      "verse_key": "55:21",
+      "arabic_text": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "phonetic_text": "Fabi-ayyi ala-i rabbikumatukaththiban",
+      "translations": {
+        "fr": "Quels bienfaits de votre Seigneur, oseriez-vous donc, vous deux, démentir ?",
+        "en": "Which, then, of your Lord’s blessings do you both deny?",
+        "es": "¿Acaso podéis negar alguna de las gracias que os ha concedido vuestro Señor?",
+        "it": "Quale dunque dei benefici del vostro Signore negherete?",
+        "ru": "Какую же из милостей вашего Господа вы считаете ложью?",
+        "tr": "Şimdi Rabbinizin hangi nimetlerini yalanlıyorsunuz?",
+        "de": "Welche der Wohltaten eures Herrn wollt ihr beide denn leugnen?",
+        "pt": "-Assim, pois, quais das mercês do vosso Senhor desagradeceis?",
+        "nl": "Welke gunsten van jullie Heer loochenen jullie dan?",
+        "ur": "پس اے جن و انس، تم اپنے رب کی قدرت کے کن کن کرشموں کو جھٹلاؤ گے؟",
+        "bn": "এতেকে তোমালোক উভয়ে তোমালোকৰ প্ৰতিপালকৰ কোনটো অনুগ্ৰহ অস্বীকাৰ কৰিবা?",
+        "fa": "پس [ای جن و انس] كدام یک از نعمت‌های پروردگارتان را انكار مى‌كنید؟"
+      }
+    },
+    {
+      "verse_number": 4923,
+      "verse_key": "55:22",
+      "arabic_text": "يَخْرُجُ مِنْهُمَا ٱللُّؤْلُؤُ وَٱلْمَرْجَانُ",
+      "phonetic_text": "Yakhruju minhuma allu/luo walmarjan",
+      "translations": {
+        "fr": "De toutes deux sortent les perles et le corail.",
+        "en": "Pearls come forth from them: large ones, and small, brilliant ones.",
+        "es": "De ambas se extraen perlas y corales.",
+        "it": "Da entrambi si estraggono la perla e il corallo.",
+        "ru": "Из них обоих вылавливают жемчуг и кораллы.",
+        "tr": "İkisinden de inci ve mercan çıkar.",
+        "de": "Aus ihnen beiden kommen Perlen und Korallen hervor.",
+        "pt": "De ambos saem as pérolas e os corais.",
+        "nl": "Uit beide komen parels en koraal voort.",
+        "ur": "اِن سمندروں سے موتی اور مونگے <sup foot_note=\"187622\">1</sup> نکلتے ہیں۔ <sup foot_note=\"187623\">2</sup>",
+        "bn": "উভয় সাগৰৰ পৰা উৎপন্ন হয় মুকুতা আৰু পোৱাল।",
+        "fa": "از آن دو [دریا] مروارید و مرجان به دست می‌آید؛"
+      }
+    },
+    {
+      "verse_number": 4924,
+      "verse_key": "55:23",
+      "arabic_text": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "phonetic_text": "Fabi-ayyi ala-i rabbikumatukaththibani",
+      "translations": {
+        "fr": "Quels bienfaits de votre Seigneur, oseriez-vous donc, vous deux, démentir ?",
+        "en": "Which, then, of your Lord’s blessings do you both deny?",
+        "es": "¿Acaso podéis negar alguna de las gracias que os ha concedido vuestro Señor?",
+        "it": "Quale dunque dei benefici del vostro Signore negherete?",
+        "ru": "Какую же из милостей вашего Господа вы считаете ложью?",
+        "tr": "Şimdi Rabbinizin hangi nimetlerini yalanlıyorsunuz?",
+        "de": "Welche der Wohltaten eures Herrn wollt ihr beide denn leugnen?",
+        "pt": "-Assim, pois, quais das mercês do vosso Senhor desagradeceis?",
+        "nl": "Welke gunsten van jullie Heer loochenen jullie dan?",
+        "ur": "پس اے جِنّ و اِنس، تم اپنے رب کی قدرت کے  کن کن کمالات کو جھٹلاؤ گے؟ <sup foot_note=\"187624\">1</sup>",
+        "bn": "এতেকে তোমালোক উভয়ে তোমালোকৰ প্ৰতিপালকৰ কোনটো অনুগ্ৰহ অস্বীকাৰ কৰিবা?",
+        "fa": "پس [ای جن و انس] كدام یک از نعمت‌های پروردگارتان را انكار مى‌كنید؟"
+      }
+    },
+    {
+      "verse_number": 4925,
+      "verse_key": "55:24",
+      "arabic_text": "وَلَهُ ٱلْجَوَارِ ٱلْمُنشَـَٔاتُ فِى ٱلْبَحْرِ كَٱلْأَعْلَـٰمِ",
+      "phonetic_text": "Walahu aljawari almunshaatufee albahri kal-aAAlam",
+      "translations": {
+        "fr": "À Lui appartiennent les navires qui voguent en haute mer (et se dressent fièrement) comme des montagnes.",
+        "en": "His are the moving ships that float, high as mountains, on the sea.",
+        "es": "Suyas son las embarcaciones que sobresalen en el mar como montañas.",
+        "it": "A Lui [appartengono] le navi, alte sul mare come colline.",
+        "ru": "Ему принадлежат плывущие по морю с поднятыми парусами корабли, подобные горам.",
+        "tr": "Denizde koca dağlar gibi yükselen gemiler de onundur.",
+        "de": "Und Sein sind (auch) die (hoch)gebauten auf dem Meer fahrenden (Schiffe), wie Berge.",
+        "pt": "E suas são as naves, que se elevam no mar, como montanhas.",
+        "nl": "En aan Hem behoren de over de zee varende schepen, als bergen.",
+        "ur": "اور یہ جہاز اُسی کے ہیں <sup foot_note=\"187625\">1</sup> جو سمندر میں پہاڑوں  کی طرح اونچے اُٹھے ہوئے ہیں",
+        "bn": "আৰু সাগৰত বিচৰণশীল পৰ্বত সদৃশ নৌযানসমূহ তেওঁৰেই (নিয়ন্ত্ৰণাধীন);",
+        "fa": "کشتی‌های كوه‌پیكرِ بادبان‌برافراشته [و جاری] در دریا برای اوست؛"
+      }
+    },
+    {
+      "verse_number": 4926,
+      "verse_key": "55:25",
+      "arabic_text": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "phonetic_text": "Fabi-ayyi ala-i rabbikumatukaththiban",
+      "translations": {
+        "fr": "Quels bienfaits de votre Seigneur, oseriez-vous donc, vous deux, démentir ?",
+        "en": "Which, then, of your Lord’s blessings do you both deny?",
+        "es": "¿Acaso podéis negar alguna de las gracias que os ha concedido vuestro Señor?",
+        "it": "Quale dunque dei benefici del vostro Signore negherete?",
+        "ru": "Какую же из милостей вашего Господа вы считаете ложью?",
+        "tr": "Şimdi Rabbinizin hangi nimetlerini yalanlıyorsunuz?",
+        "de": "Welche der Wohltaten eures Herrn wollt ihr beide denn leugnen?",
+        "pt": "-Assim, pois, quais das mercês do vosso Senhor desagradeceis?",
+        "nl": "Welke gunsten van jullie Heer loochenen jullie dan?",
+        "ur": "پس اے جِنّ و اِنس تم اپنے رب کے کن کن احسانات کو جھٹلاؤ گے؟ <sup foot_note=\"187626\">1</sup>",
+        "bn": "এতেকে তোমালোক উভয়ে তোমালোকৰ প্ৰতিপালকৰ কোনটো অনুগ্ৰহ অস্বীকাৰ কৰিবা?",
+        "fa": "پس [ای جن و انس] كدام یک از نعمت‌های پروردگارتان را انكار مى‌كنید؟"
+      }
+    },
+    {
+      "verse_number": 4927,
+      "verse_key": "55:26",
+      "arabic_text": "كُلُّ مَنْ عَلَيْهَا فَانٍ",
+      "phonetic_text": "Kullu man AAalayha fan",
+      "translations": {
+        "fr": "Tout ce qui est sur elle<sup foot_note=195169>1</sup> est appelé à périr,",
+        "en": "Everyone on earth perishes;",
+        "es": "Todo cuanto existe en la Tierra perecerá,",
+        "it": "Tutto quel che è sulla terra è destinato a perire,",
+        "ru": "Все на ней (земле) смертны.",
+        "tr": "Yer üzerinde bulunan her şey fânidir.",
+        "de": "Alle, die auf ihr sind, werden vergehen;",
+        "pt": "Tudo quanto existe na terra perecerá.",
+        "nl": "Alles wat op aarde is zal vergaan.",
+        "ur": "<sup foot_note=\"171574\">1</sup> ہر چیز جو اس زمین پر ہے فنا ہو جانے والی ہے",
+        "bn": "ভূপৃষ্ঠত যি আছে সকলো ধ্বংসশীল,",
+        "fa": "هر چه روی زمین وجود دارد، فناپذیر است"
+      }
+    },
+    {
+      "verse_number": 4928,
+      "verse_key": "55:27",
+      "arabic_text": "وَيَبْقَىٰ وَجْهُ رَبِّكَ ذُو ٱلْجَلَـٰلِ وَٱلْإِكْرَامِ",
+      "phonetic_text": "Wayabqa wajhu rabbika thooaljalali wal-ikram",
+      "translations": {
+        "fr": "et seul restera le Visage (Wajh) de ton Seigneur, à la Majesté Suprême et à l’Infinie Noblesse.",
+        "en": "all that remains is the Face of your Lord, full of majesty, bestowing honour.",
+        "es": "y solo el rostro de tu Señor perdurará por siempre, el Majestuoso y el Noble.",
+        "it": "[solo] rimarrà il Volto del tuo Signore <a class=f><sup foot_note=160075>1</sup></a> , pieno di Maestà e di Magnificenza.",
+        "ru": "Вечен лишь Лик Господа твоего, обладающий величием и великодушием.",
+        "tr": "Yalnız celâl ve ikram sahibi Rabbinin yüzü (zâtı) baki kalacaktır.",
+        "de": "bleiben wird (nur) das Angesicht deines Herrn, Besitzer der Erhabenheit und Ehre.",
+        "pt": "E só subsistirá o Rosto do teu Senhor, o Majestoso, o Honorabilíssimo",
+        "nl": "En het Aangezicht van jouw Heer is blijvend, de Bezitter van Majesteit en Eer.",
+        "ur": "اور صرف تیرے رب کی جلیل و کریم ذات ہی باقی رہنے والی ہے",
+        "bn": "আৰু অবিনশ্বৰ কেৱল তোমাৰ প্ৰতিপালকৰ চেহেৰা, যিজন মহিমাময়, মহানুভৱ;",
+        "fa": "و [تنها ذات جاوید و] روی پروردگار باشکوه و ارجمندت باقی خواهد ماند؛"
+      }
+    },
+    {
+      "verse_number": 4929,
+      "verse_key": "55:28",
+      "arabic_text": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "phonetic_text": "Fabi-ayyi ala-i rabbikumatukaththiban",
+      "translations": {
+        "fr": "Quels bienfaits de votre Seigneur, oseriez-vous donc, vous deux, démentir ?",
+        "en": "Which, then, of your Lord’s blessings do you both deny?",
+        "es": "¿Acaso podéis negar alguna de las gracias que os ha concedido vuestro Señor?",
+        "it": "Quale dunque dei benefici del vostro Signore negherete?",
+        "ru": "Какую же из милостей вашего Господа вы считаете ложью?",
+        "tr": "Şimdi Rabbinizin hangi nimetlerini yalanlıyorsunuz?",
+        "de": "Welche der Wohltaten eures Herrn wollt ihr beide denn leugnen?",
+        "pt": ".",
+        "nl": "Welke gunsten van jullie Heer loochenen jullie dan?",
+        "ur": "پس اے جِنّ و اِنس، تم اپنے رب کے  کن کن کمالات کو جھٹلاؤ گے؟ <sup foot_note=\"187627\">1</sup>",
+        "bn": "এতেকে তোমালোক উভয়ে তোমালোকৰ প্ৰতিপালকৰ কোনটো অনুগ্ৰহ অস্বীকাৰ কৰিবা?",
+        "fa": "پس [ای جن و انس] كدام یک از نعمت‌های پروردگارتان را انكار مى‌كنید؟"
+      }
+    },
+    {
+      "verse_number": 4930,
+      "verse_key": "55:29",
+      "arabic_text": "يَسْـَٔلُهُۥ مَن فِى ٱلسَّمَـٰوَٰتِ وَٱلْأَرْضِ ۚ كُلَّ يَوْمٍ هُوَ فِى شَأْنٍ",
+      "phonetic_text": "Yas-aluhu man fee assamawatiwal-ardi kulla yawmin huwa fee sha/n",
+      "translations": {
+        "fr": "Ceux qui sont dans les cieux et sur terre L’implorent (sans cesse), Lui Qui, chaque jour, S’occupe d’une œuvre (nouvelle).",
+        "en": "Everyone in heaven and earth entreats Him; every day He is at work.",
+        "es": "Lo invocan suplicando todos los que habitan en los cielos y en la Tierra. Todos los días se encuentra atendiendo los asuntos [de Su creación].",
+        "it": "Lo invocano tutti quelli che sono nei cieli e sulla terra. È ogni giorno in [nuova] opera <a class=f><sup foot_note=160076>1</sup></a> .",
+        "ru": "Его просят те, кто на небесах и на земле, и каждый день Он занят делом.",
+        "tr": "Göklerde ve yerde bulunanlar, O'ndan isterler. O, her gün yeni bir iştedir.",
+        "de": "Ihn bittet wer in den Himmeln und auf der Erde ist. Jeden Tag befaßt Er sich mit einer Angelegenheit.",
+        "pt": "Assim, pois, quais das mercês do vosso Senhor desagradeceis?",
+        "nl": "Allen die in de hemelen en op de aarde zijn vragen Hem. Iedere dag is Hij bezig.",
+        "ur": "زمین اور آسمانوں میں جو  بھی ہیں سب اپنی حا جتیں اُسی سے مانگ رہے ہیں۔ ہر آن وہ نئی شان میں ہے۔ <sup foot_note=\"187628\">1</sup>",
+        "bn": "আকাশমণ্ডল আৰু পৃথিৱীত যিসকল আছে, সকলোৱে তেওঁৰ ওচৰত প্ৰাৰ্থী, তেওঁ প্ৰতিটো মুহূৰ্ত্ততে গুৰুত্বপূৰ্ণ কামত নিয়োজিত।",
+        "fa": "[تمام] کسانی که در آسمان‌ها و زمین هستند از او درخواستِ نیاز می‌کنند و او هر روز [و هر لحظه] در کاری است؛"
+      }
+    },
+    {
+      "verse_number": 4931,
+      "verse_key": "55:30",
+      "arabic_text": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "phonetic_text": "Fabi-ayyi ala-i rabbikumatukaththiban",
+      "translations": {
+        "fr": "Quels bienfaits de votre Seigneur, oseriez-vous donc, vous deux, démentir ?",
+        "en": "Which, then, of your Lord’s blessings do you both deny?",
+        "es": "¿Acaso podéis negar alguna de las gracias que os ha concedido vuestro Señor?",
+        "it": "Quale dunque dei benefici del vostro Signore negherete?",
+        "ru": "Какую же из милостей вашего Господа вы считаете ложью?",
+        "tr": "Şimdi Rabbinizin hangi nimetlerini yalanlıyorsunuz?",
+        "de": "Welche der Wohltaten eures Herrn wollt ihr beide denn leugnen?",
+        "pt": "Todos os que estão nos céus e na terra O invocam. A cada dia Ele está ocupado em uma nova obra.",
+        "nl": "Welke gunsten van jullie Heer loochenen jullie dan?",
+        "ur": "پس اے جِنّ و اِنس، تم اپنے رب کی کن کن صفاتِ حمیدہ کو جھٹلاؤ گے؟ <sup foot_note=\"187629\">1</sup>",
+        "bn": "এতেকে তোমালোক উভয়ে তোমালোকৰ প্ৰতিপালকৰ কোনটো অনুগ্ৰহ অস্বীকাৰ কৰিবা?",
+        "fa": "پس [ای جن و انس] كدام یک از نعمت‌های پروردگارتان را انكار مى‌كنید؟"
+      }
+    },
+    {
+      "verse_number": 4932,
+      "verse_key": "55:31",
+      "arabic_text": "سَنَفْرُغُ لَكُمْ أَيُّهَ ٱلثَّقَلَانِ",
+      "phonetic_text": "Sanafrughu lakum ayyuha aththaqalan",
+      "translations": {
+        "fr": "Nous allons bientôt Nous occuper de votre jugement, ô vous, hommes et djinns.<sup foot_note=195170>1</sup>",
+        "en": "We shall attend to you two huge armies [of jinn and mankind].",
+        "es": "Me encargaré de los que cargan con el libre albedrío<sup foot_note=169380>1</sup>.",
+        "it": "Presto ci occuperemo di voi, o due pesi <a class=f><sup foot_note=160067>1</sup></a> !",
+        "ru": "Скоро Мы займемся только вами, о два весомых (или обремененных) рода!",
+        "tr": "Ey insan ve cin! sizin de hesabınızı ele alacağız.",
+        "de": "Wir werden Uns euch widmen, ihr beiden Schwerlastenden.",
+        "pt": "-Assim, pois, quais das mercês do vosso Senhor desagradeceis?",
+        "nl": "Wij zullen voor jullie een afrekening maken, O jullie Djinn's en mensen!",
+        "ur": "اے زمین کے بوجھو، <sup foot_note=\"187630\">1</sup> عنقریب ہم تم سے باز پُرس کرنے کے لیے فارغ ہوئے جاتے ہیں، <sup foot_note=\"187631\">2</sup>",
+        "bn": "হে মানৱ আৰু জিন! আমি অনতিপলমে তোমালোকৰ (হিচাপ-নিকাচ গ্ৰহণৰ) প্ৰতি মনোনিবেশ কৰিম।",
+        "fa": "ای گروه جن و انس، به زودی به حساب شما می‌پردازیم؛"
+      }
+    },
+    {
+      "verse_number": 4933,
+      "verse_key": "55:32",
+      "arabic_text": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "phonetic_text": "Fabi-ayyi ala-i rabbikumatukaththiban",
+      "translations": {
+        "fr": "Quels bienfaits de votre Seigneur, oseriez-vous donc, vous deux, démentir ?",
+        "en": "Which, then, of your Lord’s blessings do you both deny?",
+        "es": "¿Acaso podéis negar alguna de las gracias que os ha concedido vuestro Señor?",
+        "it": "Quale dunque dei benefici del vostro Signore negherete?",
+        "ru": "Какую же из милостей вашего Господа вы считаете ложью?",
+        "tr": "Şimdi Rabbinizin hangi nimetlerini yalanlıyorsunuz?",
+        "de": "Welche der Wohltaten eures Herrn wollt ihr beide denn leugnen?",
+        "pt": "Logo, estabelecermos os vossos assuntos, ó ambos os mundos!",
+        "nl": "Welke gunsten van jullie Heer loochenen jullie dan?",
+        "ur": "پھر دیکھ لیں گے کہ ، تم اپنے رب کے کن کن احسانات کو جھٹلاتے ہو۔ <sup foot_note=\"187632\">1</sup>",
+        "bn": "এতেকে তোমালোক উভয়ে তোমালোকৰ প্ৰতিপালকৰ কোনটো অনুগ্ৰহ অস্বীকাৰ কৰিবা?",
+        "fa": "پس [ای جن و انس] كدام یک از نعمت‌های پروردگارتان را انكار مى‌كنید؟"
+      }
+    },
+    {
+      "verse_number": 4934,
+      "verse_key": "55:33",
+      "arabic_text": "يَـٰمَعْشَرَ ٱلْجِنِّ وَٱلْإِنسِ إِنِ ٱسْتَطَعْتُمْ أَن تَنفُذُوا۟ مِنْ أَقْطَارِ ٱلسَّمَـٰوَٰتِ وَٱلْأَرْضِ فَٱنفُذُوا۟ ۚ لَا تَنفُذُونَ إِلَّا بِسُلْطَـٰنٍ",
+      "phonetic_text": "Ya maAAshara aljinni wal-insiini istataAAtum an tanfuthoo min aqtari assamawatiwal-ardi fanfuthoo la tanfuthoonailla bisultan",
+      "translations": {
+        "fr": "Ô vous autres, djinns et humains ! Si vous pouvez vous échapper des domaines des cieux et de la terre, faites-le. Mais vous ne pourrez le faire que forts d’une autorité.",
+        "en": "Jinn and mankind, if you can pass beyond the regions of heaven and earth, then do so: you will not pass without Our authority.",
+        "es": "¡Oh, comunidad del yinn y de seres humanos! Si podéis traspasar los confines del cielo y de la Tierra<sup foot_note=169381>1</sup>, hacedlo. Pero sabed que solo podrán traspasarlos con autorización [de Dios].",
+        "it": "O consesso dei dèmoni e degli uomini, se potrete varcare i limiti dei cieli e della terra, fatelo. Non fuggirete senza un’autorità [proveniente da Allah].",
+        "ru": "О сонмище джиннов и людей! Если вы можете проникнуть за пределы небес и земли, то проникните. Но вы не проникните, не обладая властью (или ясным доводом)!",
+        "tr": "Ey cin ve insan toplulukları! Göklerin ve yerin çevresinden geçmeye gücünüz yeterse geçin gidin. Allah'ın verdiği bir güç olmadan geçemezsiniz.",
+        "de": "O ihr Gesellschaft der Ginn und der Menschen, wenn ihr aus den Bezirken der Himmel und der Erde hinausdringen könnt, so dringt doch heraus. Ihr werdet nicht herausdringen, außer mit einer Ermächtigung.",
+        "pt": "Ó assembléia de gênios e humanos, se sois capazes de atravessar os limites dos céus e da terra, fazei-o! Porém, nãopodereis fazê-lo, sem autoridade.",
+        "nl": "O verzameling van Djinn's en mensen, als jullie in staat zijn de hoeken van de hemelen en de aarde te verlaten, verlaat die dan, maar jullie zullen die slechts met een (grote) macht kunnen verlaten.",
+        "ur": "اے  گروہ جِنّ و اِنس، اگر تم زمین اور آسمانوں کی سرحدوں سے نکل  کر بھاگ سکتے ہو تو بھاگ دیکھو۔ نہیں بھاگ سکتے۔ اس کے لیے بڑا زور چاہیے۔ <sup foot_note=\"187633\">1</sup>",
+        "bn": "হে জিন আৰু মানৱ সম্প্ৰদায়! আকাশমণ্ডল আৰু পৃথিৱীৰ সীমা যদি তোমালোকে অতিক্ৰম কৰিব পাৰা তেন্তে অতিক্ৰম কৰা, কিন্তু তোমালোকে (আল্লাহৰ) শক্তিবিহীন অতিক্ৰম কৰিব নোৱাৰিবা।",
+        "fa": "ای گروه جن و انس، اگر مى‌توانید از كرانه‌هاى آسمان و زمین گذر كنید [تا از مجازات الهی برهید]، پس بگذرید؛ قادر [به این کار] نخواهید بود، مگر با قدرت [و بَیّنه فراوان که شما آن را ندارید]؛"
+      }
+    },
+    {
+      "verse_number": 4935,
+      "verse_key": "55:34",
+      "arabic_text": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "phonetic_text": "Fabi-ayyi ala-i rabbikumatukaththiban",
+      "translations": {
+        "fr": "Quels bienfaits de votre Seigneur, oseriez-vous donc, vous deux, démentir ?",
+        "en": "Which, then, of your Lord’s blessings do you both deny?",
+        "es": "¿Acaso podéis negar alguna de las gracias que os ha concedido vuestro Señor?",
+        "it": "Quale dunque dei benefici del vostro Signore negherete?",
+        "ru": "Какую же из милостей вашего Господа вы считаете ложью?",
+        "tr": "Şimdi Rabbinizin hangi nimetlerini yalanlıyorsunuz?",
+        "de": "Welche der Wohltaten eures Herrn wollt ihr beide denn leugnen?",
+        "pt": "-Assim, pois, quais das mercês do vosso Senhor desagradeceis?",
+        "nl": "Welke gunsten van jullie Heer loochenen jullie dan?",
+        "ur": "اپنے رب کی کن کن قدرتوں کو تم جھٹلاؤ گے؟",
+        "bn": "এতেকে তোমালোক উভয়ে তোমালোকৰ প্ৰতিপালকৰ কোনটো অনুগ্ৰহ অস্বীকাৰ কৰিবা?",
+        "fa": "پس [ای جن و انس] كدام یک از نعمت‌های پروردگارتان را انكار مى‌كنید؟"
+      }
+    },
+    {
+      "verse_number": 4936,
+      "verse_key": "55:35",
+      "arabic_text": "يُرْسَلُ عَلَيْكُمَا شُوَاظٌ مِّن نَّارٍ وَنُحَاسٌ فَلَا تَنتَصِرَانِ",
+      "phonetic_text": "Yursalu AAalaykuma shuwathunmin narin wanuhasun fala tantasiran",
+      "translations": {
+        "fr": "Flammes, fumée et cuivre fondu seront projetés sur vous et vous n’aurez aucun secours.",
+        "en": "A flash of fire and smoke will be released upon you and no one will come to your aid.",
+        "es": "[Si lo intentaran,] llamaradas de fuego y cobre fundido os serían lanzadas y no podríais defenderos.",
+        "it": "Sarà inviata contro entrambi fiamma ardente e rame fuso e non sarete soccorsi.",
+        "ru": "На вас нашлют зеленое пламя (или пламя без дыма) и расплавленную медь (или дым), и вы не поможете друг другу.",
+        "tr": "Üzerinize ateşten alev ve duman gönderilir, kendinizi savunamazsınız.",
+        "de": "Gegen euch beide wird eine rauchlose Feuerflamme und Kupfer gesandt werden, so werdet ihr euch selbst nicht helfen (können).",
+        "pt": "Então, uma chama de fogo e uma fumaça serão lançados sobre vós, e não podereis contê-las.",
+        "nl": "Er zal een vlam van vuur en gesmolten koper tot jullie gezonden worden, waartegen jullie elkaar niet kunnen helpen.",
+        "ur": "(بھاگنے کی کوشش کرو گے تو) تم پر آگ کا شعلہ اور دھواں <sup foot_note=\"187634\">1</sup> چھوڑ دیا جائیگا جس کا تم مقابلہ نہ کر سکو گے",
+        "bn": "তোমালোক উভয়ৰে প্ৰতি প্ৰেৰণ কৰা হ’ব অগ্নিশিখা আৰু ধুম্ৰপুঞ্জ, তেতিয়া তোমালোকে প্ৰতিৰোধ কৰিব নোৱাৰিবা।",
+        "fa": "شراره‌اى از آتش و مِس گداخته بر شما باریده مى‌شود كه [در برابر آن] قادر به دفاع [از خود] نیستید؛"
+      }
+    },
+    {
+      "verse_number": 4937,
+      "verse_key": "55:36",
+      "arabic_text": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "phonetic_text": "Fabi-ayyi ala-i rabbikumatukaththiban",
+      "translations": {
+        "fr": "Quels bienfaits de votre Seigneur, oseriez-vous donc, vous deux, démentir ?",
+        "en": "Which, then, of your Lord’s blessings do you both deny?",
+        "es": "¿Acaso podéis negar alguna de las gracias que os ha concedido vuestro Señor?",
+        "it": "Quale dunque dei benefici del vostro Signore negherete?",
+        "ru": "Какую же из милостей вашего Господа вы считаете ложью?",
+        "tr": "Şimdi Rabbinizin hangi nimetlerini yalanlıyorsunuz",
+        "de": "Welche der Wohltaten eures Herrn wollt ihr beide denn leugnen?",
+        "pt": "Assim, pois, quais das mercês do vosso Senhor desagradeceis?",
+        "nl": "Welke gunsten van jullie Heer loochenen jullie dan?",
+        "ur": "اے جن و انس، تم اپنے رب کی کن کن قدرتوں کا انکار کرو گے؟",
+        "bn": "এতেকে তোমালোক উভয়ে তোমালোকৰ প্ৰতিপালকৰ কোনটো অনুগ্ৰহ অস্বীকাৰ কৰিবা?",
+        "fa": "پس [ای جن و انس] كدام یک از نعمت‌های پروردگارتان را انكار مى‌كنید؟"
+      }
+    },
+    {
+      "verse_number": 4938,
+      "verse_key": "55:37",
+      "arabic_text": "فَإِذَا ٱنشَقَّتِ ٱلسَّمَآءُ فَكَانَتْ وَرْدَةً كَٱلدِّهَانِ",
+      "phonetic_text": "Fa-itha inshaqqati assamaofakanat wardatan kaddihan",
+      "translations": {
+        "fr": "Lorsque le ciel se sera fendu, et qu’il sera devenu comme une rose de couleur pourpre, (ou comme la coulée de plomb fondu).",
+        "en": "When the sky is torn apart and turns crimson, like red hide.",
+        "es": "El cielo se hendirá y se pondrá al rojo vivo como la lava<sup foot_note=169382>1</sup>.",
+        "it": "Quando si fenderà il cielo e sarà come cuoio rossastro <a class=f><sup foot_note=160077>1</sup></a> ,",
+        "ru": "И вот небо разверзнется и станет красным, как кипящее масло (или покрасневшая кожа; или расплавленный свинец).",
+        "tr": "Gök yarılıp da, erimiş yağ gibi kıpkırmızı bir gül olduğu zaman...",
+        "de": "Wenn der Himmel sich spalten und dann rosig werden wird wie Farböl",
+        "pt": "(Será) quando o céu se fender e derreter; e se avermelhar como um ungüento.",
+        "nl": "Wanneer dan de hemel is gespleten is zij rozenrood, als een geverfde huid.",
+        "ur": "پھر (کیا بنے گی اُس وقت) جب آسمان پھٹے گا اور لال چمڑے کی طرح سُرخ ہو جائے گا؟ <sup foot_note=\"187635\">1</sup>",
+        "bn": "যিদিনা আকাশ বিদীৰ্ণ হ’ব সেইদিনা ই তেজবৰ্ণ গোলাপৰ দৰে ৰঙা ছালৰ ৰূপ ধাৰণ কৰিব;",
+        "fa": "آنگاه كه آسمان بشكافد و همچون روغن گداخته، سرخ‌فام گردد [قیامت آغاز خواهد شد]."
+      }
+    },
+    {
+      "verse_number": 4939,
+      "verse_key": "55:38",
+      "arabic_text": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "phonetic_text": "Fabi-ayyi ala-i rabbikumatukaththiban",
+      "translations": {
+        "fr": "Quels bienfaits de votre Seigneur, oseriez-vous donc, vous deux, démentir ?",
+        "en": "Which, then, of your Lord’s blessings do you both deny?",
+        "es": "¿Acaso podéis negar alguna de las gracias que os ha concedido vuestro Señor?",
+        "it": "quale dunque dei benefici del vostro Signore negherete?",
+        "ru": "Какую же из милостей вашего Господа вы считаете ложью?",
+        "tr": "Şimdi Rabbinizin hangi nimetlerini yalanlıyorsunuz?",
+        "de": "-welche der Wohltaten eures Herrn wollt ihr beide denn leugnen? -,",
+        "pt": "-Assim, pois, quais das mercês do vosso Senhor desagradeceis?",
+        "nl": "Welke gunsten van jullie Heer loochenen jullie dan?",
+        "ur": "اےجِنّ و اِنس (اُس وقت) تم اپنے رب کی کن کن  قدرتوں کو جھٹلاؤ گے؟ <sup foot_note=\"187636\">1</sup>",
+        "bn": "এতেকে তোমালোক উভয়ে তোমালোকৰ প্ৰতিপালকৰ কোনটো অনুগ্ৰহ অস্বীকাৰ কৰিবা?",
+        "fa": "پس [ای جن و انس] كدام یک از نعمت‌های پروردگارتان را انكار مى‌كنید؟"
+      }
+    },
+    {
+      "verse_number": 4940,
+      "verse_key": "55:39",
+      "arabic_text": "فَيَوْمَئِذٍ لَّا يُسْـَٔلُ عَن ذَنۢبِهِۦٓ إِنسٌ وَلَا جَآنٌّ",
+      "phonetic_text": "Fayawma-ithin la yus-alu AAan thanbihiinsun wala jan",
+      "translations": {
+        "fr": "Ce jour-là, ni hommes ni djinns ne seront interrogés sur leurs péchés ?",
+        "en": "On that Day neither mankind nor jinn will be asked about their sins.",
+        "es": "Ese día no será necesario preguntarles por sus pecados a los seres humanos ni a los yinn.<sup foot_note=169383>1</sup>",
+        "it": "In quel Giorno né gli uomini né i dèmoni saranno interrogati sui loro peccati <a class=f><sup foot_note=160078>1</sup></a> .",
+        "ru": "В тот день ни человек, ни джинн не будет спрошен о его грехе.",
+        "tr": "İşte o gün, ne insana ne de cinne günahından sorulmaz.",
+        "de": "an jenem Tag nun werden nach ihrer Sünde weder Mensch noch Gänn gefragt.",
+        "pt": "Nesse dia, nenhum homem ou gênio será inquirido por seu pecado.",
+        "nl": "Op die Dag zullen de mensen en de Djinn's niet ondervraagd worden over hun zonden.",
+        "ur": "اُس روز کسی انسان اور  کسی جِن سے اُس کا گناہ پوچھنے کی ضرورت نہ ہوگی، <sup foot_note=\"187637\">1</sup>",
+        "bn": "গতিকে সেইদিনা মানুহকো তাৰ অপৰাধ সম্পৰ্কে সোধা নহ’ব আৰু জিনকো নহয়।",
+        "fa": "آن روز، [به علت روشن‌بودن همۀ امور،] از انس و جن [دربارۀ گناهانشان] سؤال نخواهد شد؛"
+      }
+    },
+    {
+      "verse_number": 4941,
+      "verse_key": "55:40",
+      "arabic_text": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "phonetic_text": "Fabi-ayyi ala-i rabbikumatukaththiban",
+      "translations": {
+        "fr": "Quels bienfaits de votre Seigneur, oseriez-vous donc, vous deux, démentir.",
+        "en": "Which, then, of your Lord’s blessings do you both deny?",
+        "es": "¿Acaso podéis negar alguna de las gracias que os ha concedido vuestro Señor?41. Los pecadores serán reconocidos por su aspecto, y se les tomará por la frente y por los pies<sup foot_note=169384>1</sup>.",
+        "it": "Quale dunque dei benefici del vostro Signore negherete?",
+        "ru": "Какую же из милостей вашего Господа вы считаете ложью?",
+        "tr": "Şimdi Rabbinizin hangi nimetlerini yalanlıyorsunuz?",
+        "de": "Welche der Wohltaten eures Herrn wollt ihr beide denn leugnen?",
+        "pt": "-Assim, pois, quais das mercês do vosso Senhor desagradeceis?",
+        "nl": "Welke gunsten van jullie Heer loochenen jullie dan?",
+        "ur": "پھر(دیکھ لیاجائے گا کہ) تم دونوں گروہ اپنے رب کے کن کن احسانات کا انکار کرتے ہو۔ <sup foot_note=\"187638\">1</sup>",
+        "bn": "এতেকে তোমালোক উভয়ে তোমালোকৰ প্ৰতিপালকৰ কোনটো অনুগ্ৰহ অস্বীকাৰ কৰিবা?",
+        "fa": "پس [ای جن و انس] كدام یک از نعمت‌های پروردگارتان را انكار مى‌كنید؟"
+      }
+    },
+    {
+      "verse_number": 4942,
+      "verse_key": "55:41",
+      "arabic_text": "يُعْرَفُ ٱلْمُجْرِمُونَ بِسِيمَـٰهُمْ فَيُؤْخَذُ بِٱلنَّوَٰصِى وَٱلْأَقْدَامِ",
+      "phonetic_text": "YuAArafu almujrimoona biseemahumfayu/khathu binnawasee wal-aqdam",
+      "translations": {
+        "fr": "Les criminels seront reconnaissables à leurs traits particuliers. Ils seront saisis par les toupets et par les pieds.",
+        "en": "The guilty will be known by their mark and will be seized by their foreheads and their feet.",
+        "es": "Los pecadores serán reconocidos por su aspecto, y se les tomará por la frente y por los pies. <sup foot_note=148936>1</sup>",
+        "it": "Gli empi saranno riconosciuti dai loro segni e afferrati per il ciuffo e per i piedi.",
+        "ru": "Грешников будут узнавать по их признакам, а затем хватать за хохлы и стопы.",
+        "tr": "Suçlular simalarından tanınır, alınlarından ve ayaklarından tutulur.",
+        "de": "Die Übeltäter werden an ihrem Merkmal erkannt werden und dann an den Stirnlocken und an den Füßen ergriffen.",
+        "pt": "Os pecadores serão reconhecidos por suas marcas, e serão arrastados pelos topetes e pelos pés.",
+        "nl": "De misdadigers zullen herkend worden aan hun kenmerken en daarna gegrepen worden bij het haar van het voorhoofd en de voeten.",
+        "ur": "مجرم وہاں اپنے چہروں سے پہچان لیے جائیں گے اور انہیں پیشانی کے بال اور پاؤں پکڑ پکڑ کر گھسیٹا جائے گا",
+        "bn": "অপৰাধীসকলৰ পৰিচয় পোৱা যাব সিহঁতৰ লক্ষণৰ দ্বাৰা, তাৰ পিছত সিহঁতৰ আগচুলি আৰু ভৰিত ধৰি টানি নিয়া হ’ব।",
+        "fa": "گناهکاران از سيمايشان شناخته می‌شوند؛ آنگاه [آنان را] از موی پیشانی و پاهایشان می‌گیرند [و به دوزخ می‌اندازند]؛"
+      }
+    },
+    {
+      "verse_number": 4943,
+      "verse_key": "55:42",
+      "arabic_text": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "phonetic_text": "Fabi-ayyi ala-i rabbikumatukaththiban",
+      "translations": {
+        "fr": "Quels bienfaits de votre Seigneur, oseriez-vous donc, vous deux, démentir ?",
+        "en": "Which, then, of your Lord’s blessings do you both deny?",
+        "es": "¿Acaso podéis negar alguna de las gracias que os ha concedido vuestro Señor?",
+        "it": "Quale dunque dei benefici del vostro Signore negherete?",
+        "ru": "Какую же из милостей вашего Господа вы считаете ложью?",
+        "tr": "Şimdi Rabbinizin hangi nimetlerini yalanlıyorsunuz?",
+        "de": "Welche der Wohltaten eures Herrn wollt ihr beide denn leugnen?",
+        "pt": "-Assim, pois, quais das mercês do vosso Senhor desagradeceis?",
+        "nl": "Welke gunsten van jullie Heer loochenen jullie dan?",
+        "ur": "اُس وقت تم اپنے رب کی کن کن قدرتوں کو جھٹلاؤ گے؟",
+        "bn": "এতেকে তোমালোক উভয়ে তোমালোকৰ প্ৰতিপালকৰ কোনটো অনুগ্ৰহ অস্বীকাৰ কৰিবা?",
+        "fa": "پس [ای جن و انس] كدام یک از نعمت‌های پروردگارتان را انكار مى‌كنید؟"
+      }
+    },
+    {
+      "verse_number": 4944,
+      "verse_key": "55:43",
+      "arabic_text": "هَـٰذِهِۦ جَهَنَّمُ ٱلَّتِى يُكَذِّبُ بِهَا ٱلْمُجْرِمُونَ",
+      "phonetic_text": "Hathihi jahannamu allatee yukaththibubiha almujrimoon",
+      "translations": {
+        "fr": "Voici la Géhenne que ces scélérats tenaient pour mensonge !",
+        "en": "This is the Hell the guilty deny,",
+        "es": "Este es el Infierno que desmentían los criminales.",
+        "it": "[Sarà detto loro:] «Ecco l’Inferno che i colpevoli negavano!»",
+        "ru": "Вот Геенна, которую грешники считали ложью.",
+        "tr": "İşte bu, suçluların yalanladığı cehennemdir.",
+        "de": "Das ist die Hölle, die die Übeltäter für Lüge erklären.",
+        "pt": "Este é o inferno, que os pecadores negavam!",
+        "nl": "Dit is de Hel die de zondaren loochenden.",
+        "ur": "(اُس وقت کہا جائے گا) یہ وہی جہنم ہے جس کو مجرمین جھوٹ قرار دیا کرتے تھے",
+        "bn": "এইটোৱেই সেই জাহান্নাম, যাক অপৰাধীসকলে অস্বীকাৰ কৰিছিল।",
+        "fa": "این [همان] جهنمی است که گناهکاران انکارش می‌کردند؛"
+      }
+    },
+    {
+      "verse_number": 4945,
+      "verse_key": "55:44",
+      "arabic_text": "يَطُوفُونَ بَيْنَهَا وَبَيْنَ حَمِيمٍ ءَانٍ",
+      "phonetic_text": "Yatoofoona baynaha wabayna hameeminan",
+      "translations": {
+        "fr": "Ils circuleront entre elle<sup foot_note=195171>1</sup> et une eau bouillante.",
+        "en": "but they will go round between its flames and scalding water.",
+        "es": "No dejarán de ir y venir entre el fuego y un agua hirviente.",
+        "it": "Vagheranno tra esso e il magma ribollente.",
+        "ru": "Они будут ходить между нею и кипящей водой.",
+        "tr": "Onunla kaynar su arasında dolaşırlar.",
+        "de": "Sie werden zwischen ihr und siedend heißem Wasser umhergehen.",
+        "pt": "Circularão nele, e na água fervente!",
+        "nl": "Zij dolen daar rond in het midden van kokend heet water.",
+        "ur": "اسی جہنم اور کھولتے ہوئے پانی کے درمیان  وہ گردش کرتے رہیں گے۔ <sup foot_note=\"187639\">1</sup>",
+        "bn": "সিহঁত জাহান্নামৰ জুই আৰু উতলা পানীৰ মাজত ঘুৰি থাকিব।",
+        "fa": "[در آنجا] میان آتش و آب بی‌نهایت داغ در حركتند؛"
+      }
+    },
+    {
+      "verse_number": 4946,
+      "verse_key": "55:45",
+      "arabic_text": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "phonetic_text": "Fabi-ayyi ala-i rabbikumatukaththiban",
+      "translations": {
+        "fr": "Quels bienfaits de votre Seigneur, oseriez-vous donc, vous deux, démentir ?",
+        "en": "Which, then, of your Lord’s blessings do you both deny?",
+        "es": "¿Acaso podéis negar alguna de las gracias que os ha concedido vuestro Señor?",
+        "it": "Quale dunque dei benefici del vostro Signore negherete?",
+        "ru": "Какую же из милостей вашего Господа вы считаете ложью?",
+        "tr": "Şimdi Rabbinizin hangi nimetlerini yalanlıyorsunuz?",
+        "de": "Welche der Wohltaten eures Herrn wollt ihr beide denn leugnen?",
+        "pt": "-Assim, pois, quais, das mercês do vosso Senhor desagradeceis?",
+        "nl": "Welke gunsten van jullie Heer loochenen jullie dan?",
+        "ur": "پھر اپنے رب کی کن کن قدرتوں کو تم جھٹلاؤ گے؟ <sup foot_note=\"187640\">1</sup>",
+        "bn": "এতেকে তোমালোক উভয়ে তোমালোকৰ প্ৰতিপালকৰ কোনটো অনুগ্ৰহ অস্বীকাৰ কৰিবা?",
+        "fa": "پس [ای جن و انس] كدام یک از نعمت‌های پروردگارتان را انكار مى‌كنید؟"
+      }
+    },
+    {
+      "verse_number": 4947,
+      "verse_key": "55:46",
+      "arabic_text": "وَلِمَنْ خَافَ مَقَامَ رَبِّهِۦ جَنَّتَانِ",
+      "phonetic_text": "Waliman khafa maqama rabbihijannatan",
+      "translations": {
+        "fr": "À celui qui aura redouté la rencontre de son Seigneur seront (destinés) deux jardins.",
+        "en": "For those who fear [the time when they will] stand before their Lord there are two gardens.",
+        "es": "Para quien haya tenido temor de comparecer ante su Señor habrá dos jardines.",
+        "it": "Per chi avrà temuto di presentarsi [al cospetto] del suo Signore ci saranno due Giardini.",
+        "ru": "Тем же, которые боялись предстать перед своим Господом, уготовано два сада.",
+        "tr": "Rabbinin makamından korkan kimselere iki cennet vardır.",
+        "de": "Für jemanden aber, der den Stand seines Herrn fürchtet, wird es zwei Gärten geben",
+        "pt": "Por outra, para quem teme o comparecimento ante o seu Senhor, haverá dois jardins.",
+        "nl": "En voor wie vreesde voor het staan voor zijn Heer zijn er twee Tuinen (in het Paradijs).",
+        "ur": "اور ہر اُس شخص کے لیے جو اپنے رب کے حضور پیش ہونے کا خوف رکھتا ہو، <sup foot_note=\"187641\">1</sup> دو باغ ہیں۔ <sup foot_note=\"187642\">2</sup>",
+        "bn": "আৰু যিয়ে তাৰ প্ৰতিপালকৰ সন্মুখত উপস্থিত হোৱাৰ ভয় পোষণ কৰে, তাৰ বাবে আছে দুটা জান্নাত।",
+        "fa": "هر کس از ایستادن در پیشگاهِ پروردگارش [براى حساب] مى‌ترسد، دو باغ [در بهشت] دارد؛"
+      }
+    },
+    {
+      "verse_number": 4948,
+      "verse_key": "55:47",
+      "arabic_text": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "phonetic_text": "Fabi-ayyi ala-i rabbikumatukaththiban",
+      "translations": {
+        "fr": "Quels bienfaits de votre Seigneur, oseriez-vous donc, vous deux, démentir ?",
+        "en": "Which, then, of your Lord’s blessings do you both deny?",
+        "es": "¿Acaso podéis negar alguna de las gracias que os ha concedido vuestro Señor?",
+        "it": "Quale dunque dei benefici del vostro Signore negherete?",
+        "ru": "Какую же из милостей вашего Господа вы считаете ложью?",
+        "tr": "Şimdi Rabbinizin hangi nimetlerini yalanlıyorsunuz?",
+        "de": "-welche der Wohltaten eures Herrn wollt ihr beide denn leugnen? -,",
+        "pt": "-Assim, pois, quais das mercês do vosso Senhor desagradeceis?",
+        "nl": "Welke gunsten van jullie Heer loochenen jullie dan?",
+        "ur": "اپنے رب کے کن کن انعامات کو تم جھٹلاؤ گے؟<sup foot_note=\"187643\">1</sup>",
+        "bn": "এতেকে তোমালোক উভয়ে তোমালোকৰ প্ৰতিপালকৰ কোনটো অনুগ্ৰহ অস্বীকাৰ কৰিবা?",
+        "fa": "پس [ای جن و انس] كدام یک از نعمت‌های پروردگارتان را انكار مى‌كنید؟"
+      }
+    },
+    {
+      "verse_number": 4949,
+      "verse_key": "55:48",
+      "arabic_text": "ذَوَاتَآ أَفْنَانٍ",
+      "phonetic_text": "Thawata afnan",
+      "translations": {
+        "fr": "(Deux jardins) aux branches magnifiquement garnies de fruits.",
+        "en": "With shading branches.",
+        "es": "[Jardines] frondosos.",
+        "it": "Di fresche fronde.",
+        "ru": "В них обоих есть ветви.",
+        "tr": "İkisinin de çeşitli ağaçları, meyvaları vardır.",
+        "de": "die beide Zweige haben.",
+        "pt": "Contudo todas as espécies (de frutos e prazeres).",
+        "nl": "Beide met een overvloed aan takken en vruchten.",
+        "ur": "ہری بھری ڈالیوں سے بھرپور",
+        "bn": "উভয়েই বহু ফল শাখাবিশিষ্ট।",
+        "fa": "[با درختانى] پر از شاخسارِ [تر و تازه و ثمردهنده]؛"
+      }
+    },
+    {
+      "verse_number": 4950,
+      "verse_key": "55:49",
+      "arabic_text": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "phonetic_text": "Fabi-ayyi ala-i rabbikumatukaththiban",
+      "translations": {
+        "fr": "Quels bienfaits de votre Seigneur, oseriez-vous donc, vous deux, démentir ?",
+        "en": "Which, then, of your Lord’s blessings do you both deny?",
+        "es": "¿Acaso podéis negar alguna de las gracias que os ha concedido vuestro Señor?",
+        "it": "Quale dunque dei benefici del vostro Signore negherete?",
+        "ru": "Какую же из милостей вашего Господа вы считаете ложью?",
+        "tr": "Şimdi Rabbinizin hangi nimetlerini yalanlıyorsunuz?",
+        "de": "Welche der Wohltaten eures Herrn wollt ihr beide denn leugnen?",
+        "pt": "-Assim, pois, quais das mercês do vosso Senhor desagradeceis?",
+        "nl": "Welke gunsten van jullie Heer loochenen jullie dan?",
+        "ur": "اپنے رب کے کن کن انعامات کو تم جھٹلاؤ گے؟",
+        "bn": "এতেকে তোমালোক উভয়ে তোমালোকৰ প্ৰতিপালকৰ কোনটো অনুগ্ৰহ অস্বীকাৰ কৰিবা?",
+        "fa": "پس [ای جن و انس] كدام یک از نعمت‌های پروردگارتان را انكار مى‌كنید؟"
+      }
+    },
+    {
+      "verse_number": 4951,
+      "verse_key": "55:50",
+      "arabic_text": "فِيهِمَا عَيْنَانِ تَجْرِيَانِ",
+      "phonetic_text": "Feehima AAaynani tajriyan",
+      "translations": {
+        "fr": "S’y trouvent deux ruisseaux qui courent.",
+        "en": "With a pair of flowing springs.",
+        "es": "En cada uno habrá dos manantiales.",
+        "it": "In entrambi sgorgano due fonti.",
+        "ru": "В них обоих текут два источника.",
+        "tr": "İkisinde de akıp giden iki kaynak vardır.",
+        "de": "Darin sind zwei Quellen, die fließen.",
+        "pt": "Em ambos, haverá duas fontes a verter.",
+        "nl": "In beide zijn twee stromende bronnen.",
+        "ur": "دونوں باغوں میں دو چشمے رواں",
+        "bn": "উভয় জান্নাতত আছে প্ৰবাহমান দুটা নিজৰা;",
+        "fa": "در آن دو [باغ]، دو چشمه جاری است؛"
+      }
+    },
+    {
+      "verse_number": 4952,
+      "verse_key": "55:51",
+      "arabic_text": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "phonetic_text": "Fabi-ayyi ala-i rabbikumatukaththiban",
+      "translations": {
+        "fr": "Quels bienfaits de votre Seigneur, oseriez-vous donc, vous deux, démentir ?",
+        "en": "Which, then, of your Lord’s blessings do you both deny?",
+        "es": "¿Acaso podéis negar alguna de las gracias que os ha concedido vuestro Señor?",
+        "it": "Quale dunque dei benefici del vostro Signore negherete?",
+        "ru": "Какую же из милостей вашего Господа вы считаете ложью?",
+        "tr": "Şimdi Rabbinizin hangi nimetlerini yalanlıyorsunuz?",
+        "de": "Welche der Wohltaten eures Herrn wollt ihr beide denn leugnen?",
+        "pt": "-Assim, pois, quais das mercês do vosso Senhor desagradeceis?",
+        "nl": "Welke gunsten van jullie Heer loochenen jullie dan?",
+        "ur": "اپنے رب کے کن کن انعامات کو تم جھٹلاؤ گے؟",
+        "bn": "এতেকে তোমালোক উভয়ে তোমালোকৰ প্ৰতিপালকৰ কোনটো অনুগ্ৰহ অস্বীকাৰ কৰিবা?",
+        "fa": "پس [ای جن و انس] كدام یک از نعمت‌های پروردگارتان را انكار مى‌كنید؟"
+      }
+    },
+    {
+      "verse_number": 4953,
+      "verse_key": "55:52",
+      "arabic_text": "فِيهِمَا مِن كُلِّ فَـٰكِهَةٍ زَوْجَانِ",
+      "phonetic_text": "Feehima min kulli fakihatinzawjan",
+      "translations": {
+        "fr": "Et de toutes sortes de fruits, il y aura deux espèces.",
+        "en": "With every kind of fruit in pairs.",
+        "es": "En cada uno habrá dos especies de cada fruta.",
+        "it": "In entrambi due specie di ogni frutto.",
+        "ru": "В них обоих есть от всех фруктов по паре.",
+        "tr": "İkisinde de her türlü meyvadan çift çift vardır.",
+        "de": "Darin gibt es von jeder Frucht zwei Arten.",
+        "pt": "Em ambos haverá duas espécies de cada fruta.",
+        "nl": "In beide zijn er vruchten van elke soort, in paren.",
+        "ur": "دونوں باغوں میں ہر پھل کی دو قسمیں۔ <sup foot_note=\"187644\">1</sup>",
+        "bn": "উভয়ৰ মাজত আছে প্ৰত্যেক ফল দুই দুই প্ৰকাৰ।",
+        "fa": "در آن دو [باغ]، از هر میوه‌ای دو نوع وجود دارد؛"
+      }
+    },
+    {
+      "verse_number": 4954,
+      "verse_key": "55:53",
+      "arabic_text": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "phonetic_text": "Fabi-ayyi ala-i rabbikumatukaththiban",
+      "translations": {
+        "fr": "Quels bienfaits de votre Seigneur, oseriez-vous donc, vous deux, démentir ?",
+        "en": "Which, then, of your Lord’s blessings do you both deny?",
+        "es": "¿Acaso podéis negar alguna de las gracias que os ha concedido vuestro Señor?",
+        "it": "Quale dunque dei benefici del vostro Signore negherete?",
+        "ru": "Какую же из милостей вашего Господа вы считаете ложью?",
+        "tr": "Şimdi Rabbinizin hangi nimetlerini yalanlıyorsunuz?",
+        "de": "Welche der Wohltaten eures Herrn wollt ihr beide denn leugnen?",
+        "pt": "-Assim, pois, quais das mercês do vosso Senhor desagradeceis?",
+        "nl": "Welke gunsten van jullie Heer loochenen jullie dan?",
+        "ur": "اپنے رب کے کن کن انعامات کو تم جھٹلاؤ گے؟",
+        "bn": "এতেকে তোমালোক উভয়ে তোমালোকৰ প্ৰতিপালকৰ কোনটো অনুগ্ৰহ অস্বীকাৰ কৰিবা?",
+        "fa": "پس [ای جن و انس] كدام یک از نعمت‌های پروردگارتان را انكار مى‌كنید؟"
+      }
+    },
+    {
+      "verse_number": 4955,
+      "verse_key": "55:54",
+      "arabic_text": "مُتَّكِـِٔينَ عَلَىٰ فُرُشٍۭ بَطَآئِنُهَا مِنْ إِسْتَبْرَقٍ ۚ وَجَنَى ٱلْجَنَّتَيْنِ دَانٍ",
+      "phonetic_text": "Muttaki-eena AAala furushin bata-inuhamin istabraqin wajana aljannatayni dan",
+      "translations": {
+        "fr": "Ils seront là, accoudés sur des tapis au revers de brocart, et les fruits des deux  jardins seront à portée de main.",
+        "en": "They will sit on couches upholstered with brocade, the fruit of both gardens within easy reach.",
+        "es": "Estarán reclinados en sofás tapizados de brocado, y la fruta de ambos jardines estará al alcance de la mano.",
+        "it": "Saranno appoggiati, [i loro ospiti], su divani rivestiti internamente di broccato, e i frutti dei due giardini saranno a portata di mano.",
+        "ru": "Они будут лежать, прислонившись, на матрацах, выстланных снизу парчой, а свежие плоды этих двух садов будут склоняться низко.",
+        "tr": "Astarları atlastan yataklara yaslanırlar. İki cennetin de devşirmesi yakındır.",
+        "de": "Sie werden sich auf Ruhebetten lehnen, deren Futter aus schwerem Brokat sind. Und die Ernte der beiden Gärten hängt herab.",
+        "pt": "Estarão reclinados sobre almofadas forradas de brocado, e os frutos de ambos os jardins estarão ao (seu) alcance.",
+        "nl": "Leunend, op tapijten met brokaat aan hun binnenzijden en (de vruchten) van beide Tuinen hangen binnen handbereik.",
+        "ur": "جنّتی  لوگ ایسے فرشو ں پر تکیے لگا کے بیٹھیں گے جن کے اَستر دبیز ریشم کے ہوں گے، <sup foot_note=\"187645\">1</sup> اور باغوں کی ڈالیاں پھلوں  سے جھکی پڑرہی ہوں گی",
+        "bn": "তাত তেওঁলোকে আউজি বহিব এনেকুৱা বিছনাত যাৰ অভ্যন্তৰভাগ হ'ব সিংখাপেৰে তৈৰী সুকোমল; আৰু উভয় জান্নাতৰ ফল-মূল থাকিব নিকটৱৰ্তী।",
+        "fa": "[بهشتیان] بر بسترهایی كه آسترش از دیباى ضخیم است تكیه می‌زنند و میوه‌هاى آن باغ‌ها در دسترسشان است؛"
+      }
+    },
+    {
+      "verse_number": 4956,
+      "verse_key": "55:55",
+      "arabic_text": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "phonetic_text": "Fabi-ayyi ala-i rabbikumatukaththiban",
+      "translations": {
+        "fr": "Quels bienfaits de votre Seigneur, oseriez-vous donc, vous deux, démentir ?",
+        "en": "Which, then, of your Lord’s blessings do you both deny?",
+        "es": "¿Acaso podéis negar alguna de las gracias que os ha concedido vuestro Señor?",
+        "it": "Quale dunque dei benefici del vostro Signore negherete?",
+        "ru": "Какую же из милостей вашего Господа вы считаете ложью?",
+        "tr": "Şimdi Rabbinizin hangi nimetlerini yalanlıyorsunuz?",
+        "de": "Welche der Wohltaten eures Herrn wollt ihr beide denn leugnen?",
+        "pt": "-Assim, pois, quais das mercês do vosso Senhor desagradeceis?",
+        "nl": "Welke gunsten van jullie Heer loochenen jullie dan?",
+        "ur": "اپنے رب کے کن کن انعامات کو تم جھٹلاؤ گے؟",
+        "bn": "এতেকে তোমালোক উভয়ে তোমালোকৰ প্ৰতিপালকৰ কোনটো অনুগ্ৰহ অস্বীকাৰ কৰিবা?",
+        "fa": "پس [ای جن و انس] كدام یک از نعمت‌های پروردگارتان را انكار مى‌كنید؟"
+      }
+    },
+    {
+      "verse_number": 4957,
+      "verse_key": "55:56",
+      "arabic_text": "فِيهِنَّ قَـٰصِرَٰتُ ٱلطَّرْفِ لَمْ يَطْمِثْهُنَّ إِنسٌ قَبْلَهُمْ وَلَا جَآنٌّ",
+      "phonetic_text": "Feehinna qasiratu attarfilam yatmithhunna insun qablahum wala jan",
+      "translations": {
+        "fr": "Il y aura des jeunes filles au regard chaste, que ni homme ni djinn n’auront souillées.",
+        "en": "There will be maidens restraining their glances, untouched beforehand by man or jinn.",
+        "es": "Habrá en ellos mujeres de mirar recatado, que no fueron tocadas antes por ningún ser humano ni tampoco un yinn.",
+        "it": "Vi saranno colà quelle dagli sguardi casti, mai toccate da uomini o da dèmoni.",
+        "ru": "Там будут девы, потупляющие взоры, с которыми прежде не имели близости ни человек, ни джинн.",
+        "tr": "Oralarda gözlerini yalnız eşlerine çevirmiş dilberler var ki, bunlardan önce onlara ne insan ne de cin dokunmuştur.",
+        "de": "Darin sind (weibliche Wesen), die ihre Blicke zurückhalten, die vor ihnen weder Mensch noch Ginn berührt haben",
+        "pt": "Ali haverá, também, aquelas de olhares recatados que, antes deles, jamais foram tocadas por homem ou gênio.",
+        "nl": "In de Tuinen bevinden zich schonen met ingetogen blikken, die geen mens en geen Djinn ooit vóór hen heeft aangeraakt.",
+        "ur": "اِن نعمتوں  کے درمیان شرمیلی نگاہوں والیاں ہوں گی <sup foot_note=\"187646\">1</sup> جنہیں اِن جنتیوں سے پہلے کسی انسان یا جِن نے چُھوا نہ ہوگا۔<sup foot_note=\"187647\">2</sup>",
+        "bn": "তাত থাকিব স্বামীৰ প্ৰতি দৃষ্টি সীমিতকাৰী ৰূপহীসকল, যিসকলক ইতিপূৰ্বে কোনো মানুহে অথবা কোনো জিনে স্পৰ্শ কৰা নাই।",
+        "fa": "در آن باغ‌ها، حوریانی هستند که تنها [به شوهران خود] نظر دارند [و فقط به آنها عشق می‌ورزند]، و دستِ احدى از انس و جن قبلاً به آنان نرسیده است؛"
+      }
+    },
+    {
+      "verse_number": 4958,
+      "verse_key": "55:57",
+      "arabic_text": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "phonetic_text": "Fabi-ayyi ala-i rabbikumatukaththiban",
+      "translations": {
+        "fr": "Quels bienfaits de votre Seigneur, oseriez-vous donc, vous deux, démentir ?",
+        "en": "Which, then, of your Lord’s blessings do you both deny?",
+        "es": "¿Acaso podéis negar alguna de las gracias que os ha concedido vuestro Señor?",
+        "it": "Quale dunque dei benefici del vostro Signore negherete?",
+        "ru": "Какую же из милостей вашего Господа вы считаете ложью?",
+        "tr": "Şimdi Rabbinizin hangi nimetlerini yalanlıyorsunuz?",
+        "de": "-welche der Wohltaten eures Herrn wollt ihr beide denn leugnen? -,",
+        "pt": "-Assim, pois, quais das mercês do vosso Senhor desagradeceis?",
+        "nl": "Welke gunsten van jullie Heer loochenen jullie dan?",
+        "ur": "اپنے رب کے کن کن انعامات کو تم جھٹلاؤ گے؟",
+        "bn": "এতেকে তোমালোক উভয়ে তোমালোকৰ প্ৰতিপালকৰ কোনটো অনুগ্ৰহ অস্বীকাৰ কৰিবা?",
+        "fa": "پس [ای جن و انس] كدام یک از نعمت‌های پروردگارتان را انكار مى‌كنید؟"
+      }
+    },
+    {
+      "verse_number": 4959,
+      "verse_key": "55:58",
+      "arabic_text": "كَأَنَّهُنَّ ٱلْيَاقُوتُ وَٱلْمَرْجَانُ",
+      "phonetic_text": "Kaannahunna alyaqootu walmarjan",
+      "translations": {
+        "fr": "Elles seront pareilles au rubis et au corail.",
+        "en": "Like rubies and brilliant pearls.",
+        "es": "Ellas serán de una belleza semejante al rubí y al coral.",
+        "it": "Saranno simili a rubino e corallo.",
+        "ru": "Они подобны рубинам и кораллам.",
+        "tr": "Sanki onlar yâkut ve mercandırlar.",
+        "de": "als wären sie Rubine und Korallen.",
+        "pt": "Parecem-se com o rubi e com o coral.",
+        "nl": "Als waren zij van robijn en koraal.",
+        "ur": "ایسی خوبصورت جیسے ہیرے اور موتی",
+        "bn": "সিহঁত যেনিবা হীৰা আৰু মুকুতা।",
+        "fa": "گویی آن حوریان، یاقوت و مرجانند؛"
+      }
+    },
+    {
+      "verse_number": 4960,
+      "verse_key": "55:59",
+      "arabic_text": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "phonetic_text": "Fabi-ayyi ala-i rabbikumatukaththiban",
+      "translations": {
+        "fr": "Quels bienfaits de votre Seigneur, oseriez-vous donc, vous deux, démentir ?",
+        "en": "Which, then, of your Lord’s blessings do you both deny?",
+        "es": "¿Acaso podéis negar alguna de las gracias que os ha concedido vuestro Señor?",
+        "it": "Quale dunque dei benefici del vostro Signore negherete?",
+        "ru": "Какую же из милостей вашего Господа вы считаете ложью?",
+        "tr": "Şimdi Rabbinizin hangi nimetlerini yalanlıyorsunuz?",
+        "de": "Welche der Wohltaten eures Herrn wollt ihr beide denn leugnen?",
+        "pt": "-Assim, pois, quais das mercês do vosso Senhor desagradeceis?",
+        "nl": "Welke gunsten van jullie Heer loochenen jullie dan?",
+        "ur": "اپنے رب کے کن کن انعامات کو تم جھٹلاؤ گے؟",
+        "bn": "এতেকে তোমালোক উভয়ে তোমালোকৰ প্ৰতিপালকৰ কোনটো অনুগ্ৰহ অস্বীকাৰ কৰিবা?",
+        "fa": "پس [ای جن و انس] كدام یک از نعمت‌های پروردگارتان را انكار مى‌كنید؟"
+      }
+    },
+    {
+      "verse_number": 4961,
+      "verse_key": "55:60",
+      "arabic_text": "هَلْ جَزَآءُ ٱلْإِحْسَـٰنِ إِلَّا ٱلْإِحْسَـٰنُ",
+      "phonetic_text": "Hal jazao al-ihsani illaal-ihsan",
+      "translations": {
+        "fr": "Est-il autre récompense pour la bienfaisance, que la bienfaisance ?",
+        "en": "Shall the reward of good be anything but good?",
+        "es": "¿Acaso la recompensa del bien no es el bien mismo?",
+        "it": "Qual altro compenso del bene se non il bene?",
+        "ru": "Воздают ли за добро иначе, чем добром?",
+        "tr": "İyiliğin karşılığı, yalnız iyilik değil midir?",
+        "de": "Ist der Lohn des Guten nicht ebenfalls das Gute?",
+        "pt": "A retribuição à bondade não é, acaso, a própria bondade?",
+        "nl": "Er is voor het verrichten van het goede geen andere beloning dan het goede.",
+        "ur": "نیکی کا بدلہ نیکی کے سوا اور کیا ہوسکتا ہے۔ <sup foot_note=\"187648\">1</sup>",
+        "bn": "উত্তম কামৰ প্ৰতিদান উত্তমৰ বাহিৰে আৰু কি হ’ব পাৰে?",
+        "fa": "آیا پاداشِ نیکی جز نیکی است؟"
+      }
+    },
+    {
+      "verse_number": 4962,
+      "verse_key": "55:61",
+      "arabic_text": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "phonetic_text": "Fabi-ayyi ala-i rabbikumatukaththiban",
+      "translations": {
+        "fr": "Quels bienfaits de votre Seigneur, oseriez-vous donc, vous deux, démentir ?",
+        "en": "Which, then, of your Lord’s blessings do you both deny?",
+        "es": "¿Acaso podéis negar alguna de las gracias que os ha concedido vuestro Señor?",
+        "it": "Quale dunque dei benefici del vostro Signore negherete?",
+        "ru": "Какую же из милостей вашего Господа вы считаете ложью?",
+        "tr": "Şimdi Rabbinizin hangi nimetlerini yalanlıyorsunuz?",
+        "de": "Welche der Wohltaten eures Herrn wollt ihr beide denn leugnen?",
+        "pt": "-Assim, pois, quais das mercês do vosso Senhor desagradeceis?",
+        "nl": "Welke gunsten van jullie Heer loochenen jullie dan?",
+        "ur": "پھر اے جِنّ و اِنس۔ اپنے رب کے کن کن اوصاف ِحمیدہ کا تم انکار کرو گے؟ <sup foot_note=\"187649\">1</sup>",
+        "bn": "এতেকে তোমালোক উভয়ে তোমালোকৰ প্ৰতিপালকৰ কোনটো অনুগ্ৰহ অস্বীকাৰ কৰিবা?",
+        "fa": "پس [ای جن و انس] كدام یک از نعمت‌های پروردگارتان را انكار مى‌كنید؟"
+      }
+    },
+    {
+      "verse_number": 4963,
+      "verse_key": "55:62",
+      "arabic_text": "وَمِن دُونِهِمَا جَنَّتَانِ",
+      "phonetic_text": "Wamin doonihima jannatan",
+      "translations": {
+        "fr": "En contrebas de ces deux jardins, il y en aura deux autres encore.",
+        "en": "There are two other gardens below these two.",
+        "es": "Además de esos dos, habrá otros dos jardines.",
+        "it": "E [ci saranno] altri due giardini oltre a quelli.",
+        "ru": "А перед теми двумя есть еще два сада.",
+        "tr": "Bu ikisinden başka iki cennet daha vardır.",
+        "de": "Unterhalb der beiden gibt es (noch) zwei andere Gärten",
+        "pt": "E, além dos dois mencionados, haverá outros dois jardins,",
+        "nl": "En naast deze twee zijn nog twee Tuinen.",
+        "ur": "اور ان دو باغوں کے علاوہ دوباغ اور ہوں گے۔ <sup foot_note=\"187650\">1</sup>",
+        "bn": "আৰু সেই দুখন জান্নাতৰ বাহিৰেও আৰু দুখন জান্নাত আছে।",
+        "fa": "در کنار آن باغ‌ها، دو باغ [بهشتیِ] دیگر است؛"
+      }
+    },
+    {
+      "verse_number": 4964,
+      "verse_key": "55:63",
+      "arabic_text": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "phonetic_text": "Fabi-ayyi ala-i rabbikumatukaththiban",
+      "translations": {
+        "fr": "Quels bienfaits de votre Seigneur, oseriez-vous donc, vous deux, démentir ?",
+        "en": "Which, then, of your Lord’s blessings do you both deny?",
+        "es": "¿Acaso podéis negar alguna de las gracias que os ha concedido vuestro Señor?",
+        "it": "Quale dunque dei benefici del vostro Signore negherete?",
+        "ru": "Какую же из милостей вашего Господа вы считаете ложью?",
+        "tr": "Şimdi Rabbinizin hangi nimetlerini yalanlıyorsunuz?",
+        "de": "-welche der Wohltaten eures Herrn wollt ihr beide denn leugnen? -,",
+        "pt": "-Assim, pois, quais das mercês, do vosso Senhor, desagradeceis?",
+        "nl": "Welke gunsten van jullie Heer loochenen jullie dan?",
+        "ur": "اپنے رب کے کن کن انعامات کو تم جھٹلاؤ گے؟",
+        "bn": "এতেকে তোমালোক উভয়ে তোমালোকৰ প্ৰতিপালকৰ কোনটো অনুগ্ৰহ অস্বীকাৰ কৰিবা?",
+        "fa": "پس [ای جن و انس] كدام یک از نعمت‌های پروردگارتان را انكار مى‌كنید؟"
+      }
+    },
+    {
+      "verse_number": 4965,
+      "verse_key": "55:64",
+      "arabic_text": "مُدْهَآمَّتَانِ",
+      "phonetic_text": "Mudhammatan",
+      "translations": {
+        "fr": "(Deux jardins) d’un vert des plus sombres.",
+        "en": "Both of deepest green.",
+        "es": "De profundo verdor.",
+        "it": "Entrambi di un verde scurissimo.",
+        "ru": "Они оба - темно-зеленые.",
+        "tr": "(Bu cennetler) yemyeşildirler.",
+        "de": "dich bewachsene.",
+        "pt": "De cor verde-escuro, vicejantes.",
+        "nl": "Donkergroen van kleur.",
+        "ur": "گھَنے سرسبز و شاداب باغ۔ <sup foot_note=\"187651\">1</sup>",
+        "bn": "জান্নাত দুখন হৈছে ঘন সেইউজীয়া।",
+        "fa": "[آن دو باغ] كه [درختانش] در نهایت سبزى [و خرمى] است؛"
+      }
+    },
+    {
+      "verse_number": 4966,
+      "verse_key": "55:65",
+      "arabic_text": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "phonetic_text": "Fabi-ayyi ala-i rabbikumatukaththiban",
+      "translations": {
+        "fr": "Quels bienfaits de votre Seigneur, oseriez-vous donc, vous deux, démentir ?",
+        "en": "Which, then, of your Lord’s blessings do you both deny?",
+        "es": "¿Acaso podéis negar alguna de las gracias que os ha concedido vuestro Señor?",
+        "it": "Quale dunque dei benefici del vostro Signore negherete?",
+        "ru": "Какую же из милостей вашего Господа вы считаете ложью?",
+        "tr": "Şimdi Rabbinizin hangi nimetlerini yalanlıyorsunuz?",
+        "de": "Welche der Wohltaten eures Herrn wollt ihr beide denn leugnen?",
+        "pt": "-Assim, pois, quais das mercês do vosso Senhor desagradeceis?",
+        "nl": "Welke gunsten van jullie Heer loochenen jullie dan?",
+        "ur": "اپنے رب کے کن کن انعامات کو تم جھٹلاؤ گے؟",
+        "bn": "এতেকে তোমালোক উভয়ে তোমালোকৰ প্ৰতিপালকৰ কোনটো অনুগ্ৰহ অস্বীকাৰ কৰিবা?",
+        "fa": "پس [ای جن و انس] كدام یک از نعمت‌های پروردگارتان را انكار مى‌كنید؟"
+      }
+    },
+    {
+      "verse_number": 4967,
+      "verse_key": "55:66",
+      "arabic_text": "فِيهِمَا عَيْنَانِ نَضَّاخَتَانِ",
+      "phonetic_text": "Feehima AAaynani naddakhatan",
+      "translations": {
+        "fr": "Où il y aura deux sources dont l’eau jaillit en abondance.",
+        "en": "With a pair of gushing springs.",
+        "es": "En ambos habrá dos manantiales brotando.",
+        "it": "In entrambi due sorgenti sgorganti.",
+        "ru": "В них обоих бурлят два источника.",
+        "tr": "İkisinde de fışkıran iki kaynak vardır.",
+        "de": "Darin sind zwei sprudelnde Quellen.",
+        "pt": "Neles haverá duas fontes a jorrar.",
+        "nl": "In beide bevinden zich twee overvloedige bronnen.",
+        "ur": "دونوں باغوں میں دو چشمے فواروں کی طرح ابلتے ہوئے",
+        "bn": "এই দুখন জান্নাতত আছে উচ্ছলিত দুটা নিজৰা।",
+        "fa": "در آن دو [باغ بهشتی،] دو چشمۀ همیشه جوشان جاری است."
+      }
+    },
+    {
+      "verse_number": 4968,
+      "verse_key": "55:67",
+      "arabic_text": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "phonetic_text": "Fabi-ayyi ala-i rabbikumatukaththiban",
+      "translations": {
+        "fr": "Quels bienfaits de votre Seigneur, oseriez-vous donc, vous deux, démentir ?",
+        "en": "Which, then, of your Lord’s blessings do you both deny?",
+        "es": "¿Acaso podéis negar alguna de las gracias que os ha concedido vuestro Señor?",
+        "it": "Quale dunque dei benefici del vostro Signore negherete?",
+        "ru": "Какую же из милостей вашего Господа вы считаете ложью?",
+        "tr": "Şimdi Rabbinizin hangi nimetlerini yalanlıyorsunuz?",
+        "de": "Welche der Wohltaten eures Herrn wollt ihr beide denn leugnen?",
+        "pt": "-Assim, pois, quais das mercês do vosso Senhor desagradeceis?",
+        "nl": "Welke gunsten van jullie Heer loochenen jullie dan?",
+        "ur": "اپنے رب کے کن کن انعامات کو تم جھٹلاؤ گے؟",
+        "bn": "এতেকে তোমালোক উভয়ে তোমালোকৰ প্ৰতিপালকৰ কোনটো অনুগ্ৰহ অস্বীকাৰ কৰিবা?",
+        "fa": "پس [ای جن و انس] كدام یک از نعمت‌های پروردگارتان را انكار مى‌كنید؟"
+      }
+    },
+    {
+      "verse_number": 4969,
+      "verse_key": "55:68",
+      "arabic_text": "فِيهِمَا فَـٰكِهَةٌ وَنَخْلٌ وَرُمَّانٌ",
+      "phonetic_text": "Feehima fakihatun wanakhlunwarumman",
+      "translations": {
+        "fr": "S’y trouveront des fruits, des palmiers et des grenadiers.",
+        "en": "With fruits- date palms and pomegranate trees.",
+        "es": "Habrá frutas, datileras y granadas.",
+        "it": "In entrambi frutti, palme e melograni.",
+        "ru": "В них обоих есть фрукты, финиковые пальмы, гранаты.",
+        "tr": "İkisinde de her türlü meyva, hurma ve nar vardır.",
+        "de": "Darin sind Früchte und Palmen und Granatäpfel.",
+        "pt": "Em ambos haverá frutas, tamareiras e romãzeiras.",
+        "nl": "In beide zijn vruchten, dadels en granaatappels.",
+        "ur": "اُن میں بکثرت پھل اور کھجوریں اور انار",
+        "bn": "তাত আছে ফল-মূল, খেজুৰ আৰু ডালিম।",
+        "fa": "و در آنها [درختان] میوه و درختان خرما و انار هست؛"
+      }
+    },
+    {
+      "verse_number": 4970,
+      "verse_key": "55:69",
+      "arabic_text": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "phonetic_text": "Fabi-ayyi ala-i rabbikumatukaththiban",
+      "translations": {
+        "fr": "Quels bienfaits de votre Seigneur, oseriez-vous donc, vous deux, démentir ?",
+        "en": "Which, then, of your Lord’s blessings do you both deny?",
+        "es": "¿Acaso podéis negar alguna de las gracias que os ha concedido vuestro Señor?",
+        "it": "Quale dunque dei benefici del vostro Signore negherete?",
+        "ru": "Какую же из милостей вашего Господа вы считаете ложью?",
+        "tr": "Şimdi Rabbinizin hangi nimetlerini yalanlıyorsunuz?",
+        "de": "Welche der Wohltaten eures Herrn wollt ihr beide denn leugnen?",
+        "pt": "-Assim, pois, quais das mercês do vosso Senhor desagradeceis?",
+        "nl": "Welke gunsten van jullie Heer loochenen jullie dan?",
+        "ur": "اپنے رب کے کن کن انعامات کو تم جھٹلاؤ گے؟",
+        "bn": "এতেকে তোমালোক উভয়ে তোমালোকৰ প্ৰতিপালকৰ কোনটো অনুগ্ৰহ অস্বীকাৰ কৰিবা?",
+        "fa": "پس [ای جن و انس] كدام یک از نعمت‌های پروردگارتان را انكار مى‌كنید؟"
+      }
+    },
+    {
+      "verse_number": 4971,
+      "verse_key": "55:70",
+      "arabic_text": "فِيهِنَّ خَيْرَٰتٌ حِسَانٌ",
+      "phonetic_text": "Feehinna khayratun hisan",
+      "translations": {
+        "fr": "Et il y aura des (femmes) vertueuses et belles.",
+        "en": "There are good-natured, beautiful maidens.",
+        "es": "Y también habrá buenas y hermosas [mujeres].",
+        "it": "E [fanciulle] pie e belle.",
+        "ru": "Там есть девы хорошие, прекрасные.",
+        "tr": "İçlerinde güzel huylu, güzel yüzlü kadınlar vardır.",
+        "de": "Darin sind gute schöne (weibliche Wesen)",
+        "pt": "Neles haverá beldades inocentes,",
+        "nl": "Er in bevinden zich goede en mooie vrouwen.",
+        "ur": "اِن نعمتوں کے درمیان خوب سیرت اور خوبصورت بیویاں",
+        "bn": "সেই জান্নাতসমূহৰ মাজত আছে চৰিত্ৰৱৰ্তী, ৰূপহী ৰমণী।",
+        "fa": "در میان آن باغ‌ها، زنان نیک‌سیرت و نیکوروی، حضور دارند؛"
+      }
+    },
+    {
+      "verse_number": 4972,
+      "verse_key": "55:71",
+      "arabic_text": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "phonetic_text": "Fabi-ayyi ala-i rabbikumatukaththiban",
+      "translations": {
+        "fr": "Quels bienfaits de votre Seigneur, oseriez-vous donc, vous deux, démentir ?",
+        "en": "Which, then, of your Lord’s blessings do you both deny?",
+        "es": "¿Acaso podéis negar alguna de las gracias que os ha concedido vuestro Señor?",
+        "it": "Quale dunque dei benefici del vostro Signore negherete?",
+        "ru": "Какую же из милостей вашего Господа вы считаете ложью?",
+        "tr": "Şimdi Rabbinizin hangi nimetlerini yalanlıyorsunuz?",
+        "de": "- welche der Wohltaten eures Herrn wollt ihr beide denn leugnen? -,",
+        "pt": "-Assim, pois, quais das mercês do vosso Senhor desagradeceis?",
+        "nl": "Welke gunsten van jullie Heer loochenen jullie dan?",
+        "ur": "اپنے رب کے کن کن انعامات کو تم جھٹلاؤ گے؟",
+        "bn": "এতেকে তোমালোক উভয়ে তোমালোকৰ প্ৰতিপালকৰ কোনটো অনুগ্ৰহ অস্বীকাৰ কৰিবা?",
+        "fa": "پس [ای جن و انس] كدام یک از نعمت‌های پروردگارتان را انكار مى‌كنید؟"
+      }
+    },
+    {
+      "verse_number": 4973,
+      "verse_key": "55:72",
+      "arabic_text": "حُورٌ مَّقْصُورَٰتٌ فِى ٱلْخِيَامِ",
+      "phonetic_text": "Hoorun maqsooratun feealkhiyam",
+      "translations": {
+        "fr": "Des houris retirées sous les tentes.",
+        "en": "Dark-eyed, sheltered in pavilions.",
+        "es": "Huríes, retiradas en bellas moradas.",
+        "it": "E fanciulle dai grandi occhi neri <a class=f><sup foot_note=160079>1</sup></a> ritirate nelle loro tende.",
+        "ru": "Они - черноокие и большеглазые, удерживаемые в шатрах.",
+        "tr": "Çadırlar içerisinde gözlerini yalnız kocalarına çevirmiş hûriler vardır.",
+        "de": "Huris, (die) in den Zelten zurückgezogen (leben) -,",
+        "pt": "Huris recolhidas em pavilhões,",
+        "nl": "Vrouwen met prachtige ogen, afgezonderd in tentverblijven.",
+        "ur": "خیموں میں ٹھیرائی ہوئی حُوریں۔ <sup foot_note=\"187652\">1</sup>",
+        "bn": "চামিয়ানাবোৰত সুৰক্ষিতা হৈ থাকিব হুৰসকল।",
+        "fa": "حوریانی که در خیمه‌های بهشتی [از چشم بیگانگان] مستورند؛"
+      }
+    },
+    {
+      "verse_number": 4974,
+      "verse_key": "55:73",
+      "arabic_text": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "phonetic_text": "Fabi-ayyi ala-i rabbikumatukaththiban",
+      "translations": {
+        "fr": "Quels bienfaits de votre Seigneur, oseriez-vous donc, vous deux, démentir ?",
+        "en": "Which, then, of your Lord’s blessings do you both deny?",
+        "es": "¿Acaso podéis negar alguna de las gracias que os ha concedido vuestro Señor?",
+        "it": "Quale dunque dei benefici del vostro Signore negherete?",
+        "ru": "Какую же из милостей вашего Господа вы считаете ложью?",
+        "tr": "Şimdi Rabbinizin hangi nimetlerini yalanlıyorsunuz?",
+        "de": "welche der Wohltaten eures Herrn wollt ihr beide denn leugnen? -,",
+        "pt": "-Assim, pois, quais das mercês do vosso Senhor desagradeceis?",
+        "nl": "Welke gunsten van jullie Heer loochenen jullie dan?",
+        "ur": "اپنے رب کے کن کن انعامات کو تم جھٹلاؤ گے؟",
+        "bn": "এতেকে তোমালোক উভয়ে তোমালোকৰ প্ৰতিপালকৰ কোনটো অনুগ্ৰহ অস্বীকাৰ কৰিবা?",
+        "fa": "پس [ای جن و انس] كدام یک از نعمت‌های پروردگارتان را انكار مى‌كنید؟"
+      }
+    },
+    {
+      "verse_number": 4975,
+      "verse_key": "55:74",
+      "arabic_text": "لَمْ يَطْمِثْهُنَّ إِنسٌ قَبْلَهُمْ وَلَا جَآنٌّ",
+      "phonetic_text": "Lam yatmithhunna insun qablahum walajan",
+      "translations": {
+        "fr": "Qu’aucun homme, avant eux, ni aucun djinn, n’aura souillées.",
+        "en": "Untouched beforehand by man or jinn.",
+        "es": "Que no fueron tocadas antes por ningún ser humano ni tampoco un yinn.",
+        "it": "Che nessun uomo o demone mai han toccato.",
+        "ru": "С ними прежде не имели близости ни человек, ни джинн.",
+        "tr": "Bunlardan önce onlara ne insan ne de cin dokunmuştur.",
+        "de": "die vor ihnen weder Mensch noch Ginn berührt haben.",
+        "pt": "Que jamais, antes deles, foram tocadas por homem ou gênio,",
+        "nl": "Die geen mens en geen Djinn ooit vóór hen heeft aangeraakt.",
+        "ur": "اِن جنتیوں سے پہلے کبھی انسان یا جن نے اُن کو نہ چھوا ہوگا",
+        "bn": "যিসকলক ইতিপূৰ্বে কোনো মানুহে অথবা কোনো জিনে স্পৰ্শ কৰা নাই।",
+        "fa": "[دوشیزگانی که] دست هیچ انس و جنی قبلاً به آنان نرسیده است؛"
+      }
+    },
+    {
+      "verse_number": 4976,
+      "verse_key": "55:75",
+      "arabic_text": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "phonetic_text": "Fabi-ayyi ala-i rabbikumatukaththiban",
+      "translations": {
+        "fr": "Quels bienfaits de votre Seigneur, oseriez-vous donc, vous deux, démentir ?",
+        "en": "Which, then, of your Lord’s blessings do you both deny?",
+        "es": "¿Acaso podéis negar alguna de las gracias que os ha concedido vuestro Señor?",
+        "it": "Quale dunque dei benefici del vostro Signore negherete?",
+        "ru": "Какую же из милостей вашего Господа вы считаете ложью?",
+        "tr": "Şimdi Rabbinizin hangi nimetlerini yalanlıyorsunuz?",
+        "de": "Welche der Wohltaten eures Herrn wollt ihr beide denn leugnen?",
+        "pt": "-Assim, pois, quais das mercês do vosso Senhor desagradeceis?",
+        "nl": "Welke gunsten van jullie Heer loochenen jullie dan?",
+        "ur": "اپنے رب کے کن کن انعامات کو تم جھٹلاؤ گے؟",
+        "bn": "এতেকে তোমালোক উভয়ে তোমালোকৰ প্ৰতিপালকৰ কোনটো অনুগ্ৰহ অস্বীকাৰ কৰিবা?",
+        "fa": "پس [ای جن و انس] كدام یک از نعمت‌های پروردگارتان را انكار مى‌كنید؟"
+      }
+    },
+    {
+      "verse_number": 4977,
+      "verse_key": "55:76",
+      "arabic_text": "مُتَّكِـِٔينَ عَلَىٰ رَفْرَفٍ خُضْرٍ وَعَبْقَرِىٍّ حِسَانٍ",
+      "phonetic_text": "Muttaki-eena AAala rafrafin khudrinwaAAabqariyyin hisan",
+      "translations": {
+        "fr": "Ils seront accoudés sur des coussins verts, (étendus) sur d’épais tapis de toute beauté.",
+        "en": "They will all sit on green cushions and fine carpets.",
+        "es": "[Los bienaventurados] estarán reclinados sobre cojines verdes y hermosas alfombras.",
+        "it": "Staranno appoggiati su verdi cuscini e meravigliosi tappeti.",
+        "ru": "Они будут лежать, прислонившись, на зеленых подушках и прекрасных матрацах.",
+        "tr": "Yeşil yastıklara ve hârikulâde güzel işlemeli döşeklere yaslanırlar.",
+        "de": "Sie lehnen sich auf grünen Decken und schönen Teppichen.",
+        "pt": "Reclinadas em coxins, cobertos com pano verde e formosas almofadas.",
+        "nl": "Leunend op groene kussens en op prachtige tapijten.",
+        "ur": "وہ جنّتی سبز قالینوں اور نفیس و نادر فرشوں<sup foot_note=\"187653\">1</sup> پر تکیے لگا کے بیٹھیں گے",
+        "bn": "সিহঁতে আউজি বহিব সেইউজীয়া দলিছা আৰু ধুনীয়া সিংখাপৰ গাদীযুক্ত আসনত।",
+        "fa": "[بهشتیان] بر بالشت‌های سبز و بسترهایى نفیس و زیبا آرمیده‌اند؛"
+      }
+    },
+    {
+      "verse_number": 4978,
+      "verse_key": "55:77",
+      "arabic_text": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "phonetic_text": "Fabi-ayyi ala-i rabbikumatukaththiban",
+      "translations": {
+        "fr": "Quels bienfaits de votre Seigneur, oseriez-vous donc, vous deux, démentir ?",
+        "en": "Which, then, of your Lord’s blessings do you both deny?",
+        "es": "¿Acaso podéis negar alguna de las gracias que os ha concedido vuestro Señor?",
+        "it": "Quale dunque dei benefici del vostro Signore negherete?",
+        "ru": "Какую же из милостей вашего Господа вы считаете ложью?",
+        "tr": "Şimdi Rabbinizin hangi nimetlerini yalanlıyorsunuz?",
+        "de": "Welche der Wohltaten eures Herrn wollt ihr beide denn leugnen?",
+        "pt": "-Assim, pois, quais das mercês do vosso Senhor desagradeceis?",
+        "nl": "Welke gunsten van jullie Heer loochenen jullie dan?",
+        "ur": "اپنے رب کے کن کن انعامات کو تم جھٹلاؤ گے؟",
+        "bn": "এতেকে তোমালোক উভয়ে তোমালোকৰ প্ৰতিপালকৰ কোনটো অনুগ্ৰহ অস্বীকাৰ কৰিবা?",
+        "fa": "پس [ای جن و انس] كدام یک از نعمت‌های پروردگارتان را انكار مى‌كنید؟"
+      }
+    },
+    {
+      "verse_number": 4979,
+      "verse_key": "55:78",
+      "arabic_text": "تَبَـٰرَكَ ٱسْمُ رَبِّكَ ذِى ٱلْجَلَـٰلِ وَٱلْإِكْرَامِ",
+      "phonetic_text": "Tabaraka ismu rabbika theealjalali wal-ikram",
+      "translations": {
+        "fr": "Béni soit le Nom de ton Seigneur, à la Majesté Suprême, à l’Infinie Noblesse.",
+        "en": "Blessed is the name of your Lord, full of majesty, bestowing honour.",
+        "es": "¡Bendito sea el nombre de tu Señor, el poseedor de la majestuosidad y la generosidad!",
+        "it": "Sia benedetto il Nome del tuo Signore, colmo di Maestà e di Magnificenza. <a class=f><sup foot_note=160080>1</sup></a> Lett. «gli ha insegnato il “bayân”», cioè il discorso chiaro ed esauriente. <a class=f><sup foot_note=160081>2</sup></a> «le stelle e gli alberi»: è anche possibile tradurre «l’erbe e l’albero». Oltre alla loro connaturata sottomissione al loro Signore (gloria a Lui l’Altissimo) queste creature si prosternano sorgendo e tramontando (le stelle) con la loro ombra e volgendosi verso il sole (le erbe e gli alberi). <a class=f><sup foot_note=160082>3</sup></a> Secondo la maggior parte dei commentatori coloro ai quali viene rivolta questa domanda, che si ripete ben volte in questa sura, sono gli uomini e i dèmoni. Riferisce una tradizione che un giorno l’Inviato di Allah (pace e benedizioni su di lui) recitò questa sura davanti ai suoi compagni e poi disse loro di averla salmodiata nella notte in cui predicò ai dèmoni. Essi ascoltarono con attenzione e ogniqualvolta udivano questo versetto rispondevano: «Signor nostro, non neghiamo nessuno dei benefici, Tu sei il Sapiente». <a class=f><sup foot_note=160083>4</sup></a> Racconta la tradizione che Allah (gloria a Lui l’Altissimo) plasmò l’uomo con l’argilla e poi lo lasciò ad asciugare. Durante tutto questo periodo Iblìs, che avrebbe poi disobbedito rifiutando di prosternarsi davanti ad Adamo (vedi II, 30-34), colpiva la figura di argilla ed essa risuonava come «i vasi che il vasaio rigira per farli asciugare e che cozzano tra loro» (Tabarì). <a class=f><sup foot_note=160084>5</sup></a> Nel suo moto apparente il sole si leva in autunno/inverno a sud-est e tramonta a sud- ovest mentre in primavera/estate si leva a nord-est e tramonta a nord-ovest. Questa l’esegesi classica di questo versetto. Naturalmente altri significati che si riferiscono alla contemporanea pregnanza divina nel mondo terreno e in quello invisibile, in questa vita c nell’altra, non sono esclusi né escludibili. <a class=f><sup foot_note=160085>6</sup></a> Possono essere le acque piovane e quelle dei fiumi, laghi, mari, oppure quelle dolci e quelle salate, o ancora quelle dell’Atlantico e del Mediterraneo. <a class=f><sup foot_note=160086>7</sup></a> L’oceanografia ha stabilito che i mari si compenetrano solo apparentemente e che ogni mare ha sue peculiari caratteristiche per quanto riguarda salinità, densità, temperatura. In realtà esistono delle vere e proprie barriere, di cui si è avuta la prova (utilizzando ad esempio la fotografia all’infrarosso). Quando le acque oltrepassano queste barriere, si trasformano e assumendo le caratteristiche del mare in cui sono confluite, «diventano» il mare in cui sono confluite. <a class=f><sup foot_note=160087>8</sup></a> «[solo] rimarrà il Volto del tuo Signore»: nel senso dell’eternità della realtà divina (vedi XXVIII, e la nota). <a class=f><sup foot_note=160088>9</sup></a> L’attività divina è continua, Allah (gloria a Lui l’Altissimo) non è indifferente alle vicissitudini delle Sue creature. La Sua presenza e la Sua opera governano il creato in modo dinamico. <a class=f><sup foot_note=160089>10</sup></a> «o due pesi»: gli uomini e i dèmoni. <a class=f><sup foot_note=160090>11</sup></a> « cuoio rossastro »: anche « come olio infuocato » <a class=f><sup foot_note=160091>12</sup></a> Tutto sarà evidente a tutti e per tutti parleranno i registri delle azioni, ognuno porterà in sé i segni delle sue colpe (vedi anche vers. e non ci sarà scampo per i peccatori. <a class=f><sup foot_note=160092>13</sup></a> «Quelle bianche dai grandi occhi scuri», questo è il significato del termine arabo «hurì».",
+        "ru": "Благословенно имя Господа твоего, Обладающего величием и великодушием!",
+        "tr": "Büyüklük ve ikram sahibi Rabbinin adı ne yücedir!",
+        "de": "Segensreich ist der Name deines Herrn, Besitzer der Erhabenheit und Ehre!",
+        "pt": "Bendito seja o nome do teu Senhor, o Majestoso, o Honorabilíssimo.",
+        "nl": "Gezegend zij de Naam van jouw Heer, de Bezitter van Majesteit en Eer.",
+        "ur": "بڑی برکت والا ہے تیرے رب جلیل و کریم کا نام",
+        "bn": "বৰকতময় তোমাৰ প্ৰতিপালকৰ নাম, যিজন মহামহিম আৰু মহানুভৱ।",
+        "fa": "نامِ پروردگارِ باشکوه و ارجمند تو، بابرکت و فرخنده است."
+      }
+    }
+  ]
+}

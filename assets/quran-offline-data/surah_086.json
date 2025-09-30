@@ -1,0 +1,346 @@
+{
+  "surah_number": 86,
+  "extracted_at": "2025-09-20T15:17:13.167Z",
+  "verses": [
+    {
+      "verse_number": 5932,
+      "verse_key": "86:1",
+      "arabic_text": " وَٱلسَّمَآءِ وَٱلطَّارِقِ",
+      "phonetic_text": "Wassama-i wattariq",
+      "translations": {
+        "fr": "Par le ciel et l’étoile nocturne !",
+        "en": "By the sky and the night-comer––",
+        "es": "Juro por el cosmos y el astro nocturno.",
+        "it": "Per il cielo e per l’astro notturno <a class=f><sup foot_note=160578>1</sup></a> ,",
+        "ru": "Клянусь небом и ночным путником!",
+        "tr": "Andolsun o göğe ve Târık'a,",
+        "de": "Beim Himmel und dem Pochenden!",
+        "pt": "Pelo céu e pelo visitante noturno;",
+        "nl": "Bij de hemel en de verlichtende ster.",
+        "ur": "قسم ہے آسمان کی اور رات کو نمودار ہونے والے کی",
+        "bn": "শপত আকাশৰ আৰু যি ৰাতিত আত্মপ্ৰকাশ কৰে;",
+        "fa": "سوگند به آسمان و سوگند به ستارۀ شبگرد."
+      }
+    },
+    {
+      "verse_number": 5933,
+      "verse_key": "86:2",
+      "arabic_text": "وَمَآ أَدْرَىٰكَ مَا ٱلطَّارِقُ",
+      "phonetic_text": "Wama adraka ma attariq",
+      "translations": {
+        "fr": "Et qui te fera jamais savoir ce qu’est l’étoile nocturne ?",
+        "en": "What will explain to you what the night-comer is?",
+        "es": "¿Y qué puede hacerte comprender lo que es el astro nocturno?",
+        "it": "e chi mai ti dirà cos’è l’astro notturno?",
+        "ru": "Откуда ты мог знать, что такое ночной путник?",
+        "tr": "Târık nedir, bildin mi?",
+        "de": "Und was läßt dich wissen, was der Pochende ist?",
+        "pt": "E o que te fará entender o que é o visitante noturno?",
+        "nl": "En wat doet jou weten wat de verlichtende ster is?",
+        "ur": "اور تم کیا جانو کہ وہ رات کو نمودار ہونے والا کیا ہے؟",
+        "bn": "আৰু কিহে তোমাক জনাব যে, ৰাতিত যিয়ে আত্মপ্ৰকাশ কৰে, সেয়ানো কি?",
+        "fa": "و تو چه می‌دانی که ستارۀ شبگرد چیست؟"
+      }
+    },
+    {
+      "verse_number": 5934,
+      "verse_key": "86:3",
+      "arabic_text": "ٱلنَّجْمُ ٱلثَّاقِبُ",
+      "phonetic_text": "Annajmu aththaqib",
+      "translations": {
+        "fr": "L’étoile (à la lumière) pénétrante.",
+        "en": "The piercing star––",
+        "es": "Es una estrella fulgurante.",
+        "it": "È la fulgida stella.",
+        "ru": "Это - звезда пронизывающая небеса своим светом.",
+        "tr": "O, karanlığı delen yıldızdır.",
+        "de": "(Es ist) der durchbohrend helle Stem.",
+        "pt": "É a estrela fulgurante!",
+        "nl": "De doordringende ster.",
+        "ur": "چمکتا ہوا تارا",
+        "bn": "(সেয়া হৈছে) উজ্জ্বল নক্ষত্ৰ।",
+        "fa": "[همان] ستارۀ فروزان است."
+      }
+    },
+    {
+      "verse_number": 5935,
+      "verse_key": "86:4",
+      "arabic_text": "إِن كُلُّ نَفْسٍ لَّمَّا عَلَيْهَا حَافِظٌ",
+      "phonetic_text": "In kullu nafsin lamma AAalayha hafith",
+      "translations": {
+        "fr": "Il n’est pas d’âme qui n’ait son (Ange) gardien.",
+        "en": "there is a watcher over every soul.",
+        "es": "Toda alma tiene designada un ángel protector que registra sus obras.",
+        "it": "Non c’è anima alcuna che non abbia su di sé un [angelo] guardiano <a class=f><sup foot_note=160579>1</sup></a> .",
+        "ru": "Нет души, при которой не было бы хранителя.",
+        "tr": "Hiçbir nefis yoktur ki başında bir denetleyici bulunmasın.",
+        "de": "Es gibt keine Seele, über der nicht ein Hüter (eingesetzt) ist.",
+        "pt": "Cada alma tem sobre si um guardião (angelical).",
+        "nl": "Voorwaar, er is geen ziel of er is een bewaker over aangesteld.",
+        "ur": "کوئی جان ایسی نہیں ہے جس کے اوپر کوئی نگہبان نہ ہو۔ <sup foot_note=\"188425\">1</sup>",
+        "bn": "প্ৰত্যেক জীৱৰ ওপৰতেই তত্ত্বাবধায়ক আছে।",
+        "fa": "هیچ کس نیست، مگر اینکه نگهبانی [از فرشتگان] بر او[گماشته شده] است."
+      }
+    },
+    {
+      "verse_number": 5936,
+      "verse_key": "86:5",
+      "arabic_text": "فَلْيَنظُرِ ٱلْإِنسَـٰنُ مِمَّ خُلِقَ",
+      "phonetic_text": "Falyanthuri al-insanumimma khuliq",
+      "translations": {
+        "fr": "Que l’homme voie donc de quoi il est créé !",
+        "en": "Man should reflect on what he was created from.",
+        "es": "Que medite el ser humano de qué fue creado:",
+        "it": "Consideri dunque l’uomo da che cosa fu creato!",
+        "ru": "Пусть посмотрит человек, из чего он создан.",
+        "tr": "Onun için insan neden yaratıldığına bir baksın.",
+        "de": "So soll der Mensch doch hinsehen, woraus er erschaffen ist.",
+        "pt": "Que o homem considere, pois, do quê foi criado!",
+        "nl": "Laat de mens er daarom over denken waarvan hij geschapen is.",
+        "ur": "پھر ذرا انسان یہی دیکھ لے کہ وہ کِس چیز سے پیدا کیا گیا ہے۔ <sup foot_note=\"188426\">1</sup>",
+        "bn": "এতেকে মানুহে চিন্তা কৰা উচিত যে, তাক কিহেৰে সৃষ্টি কৰা হৈছে!",
+        "fa": "انسان باید بنگرد که از چه چیز آفریده شده است:"
+      }
+    },
+    {
+      "verse_number": 5937,
+      "verse_key": "86:6",
+      "arabic_text": "خُلِقَ مِن مَّآءٍ دَافِقٍ",
+      "phonetic_text": "Khuliqa min ma-in dafiq",
+      "translations": {
+        "fr": "Il est créé d’une eau qui gicle,",
+        "en": "He is created from spurting fluid,",
+        "es": "Fue creado de un líquido seminal",
+        "it": "Da un liquido eiaculato,",
+        "ru": "Он создан из изливающейся жидкости,",
+        "tr": "Atılan bir sudan yaratıldı.",
+        "de": "Er ist aus sich ergießendem Wasser erschaffen,",
+        "pt": "Foi criado de uma gota ejaculada,",
+        "nl": "Geschapen is hij van een spurtend water.",
+        "ur": "ایک اچھلنے والے پانی سے پیدا کیا گیا ہے",
+        "bn": "তাক সৃষ্টি কৰা হৈছে দ্ৰুতগতিত নিৰ্গত হোৱা পানীৰে,",
+        "fa": "از یک آب جهنده آفریده شده"
+      }
+    },
+    {
+      "verse_number": 5938,
+      "verse_key": "86:7",
+      "arabic_text": "يَخْرُجُ مِنۢ بَيْنِ ٱلصُّلْبِ وَٱلتَّرَآئِبِ",
+      "phonetic_text": "Yakhruju min bayni assulbi wattara-ib",
+      "translations": {
+        "fr": "sortant d’entre les reins (de l’homme) et les côtes (de la femme).",
+        "en": "then he emerges from between the backbone and breastbone:",
+        "es": "que proviene de entre las entrañas [del hombre] y el arco pélvico [de la mujer].",
+        "it": "che esce di tra i lombi e le costole.",
+        "ru": "которая выходит между чреслами и грудными костями.",
+        "tr": "O su, erkeğin sulbü ile kadının göğüs kemikleri arasından çıkar.",
+        "de": "das zwischen der Lende und der (weiblichen) Brust hervorkommt.",
+        "pt": "Que emana da conjunção das regiões sexuais do homem e da mulher.",
+        "nl": "Dat komt van tussen de lendenen en de ribben.",
+        "ur": "جو پیٹھ اور سینے کی ہڈیوں کے درمیان سے نکلتا ہے۔ <sup foot_note=\"188427\">1</sup>",
+        "bn": "যিটো নিৰ্গত হয় মেৰুদণ্ড আৰু বুকুৰ মাজৰ পৰা।",
+        "fa": "که از میان [استخوانِ] پشت [مرد] و سینۀ [زن] بیرون می‌آید."
+      }
+    },
+    {
+      "verse_number": 5939,
+      "verse_key": "86:8",
+      "arabic_text": "إِنَّهُۥ عَلَىٰ رَجْعِهِۦ لَقَادِرٌ",
+      "phonetic_text": "Innahu AAala rajAAihi laqadir",
+      "translations": {
+        "fr": "(Allah) est certes Capable de le ressusciter.",
+        "en": "God is certainly able to bring him back to life.",
+        "es": "[Así como lo ha creado la primera vez] Él tiene el poder para resucitarlo.",
+        "it": "[Allah] è certo capace di ricondurlo <a class=f><sup foot_note=160580>1</sup></a> ,",
+        "ru": "Воистину, Он способен вернуть его.",
+        "tr": "Elbette Allah'ın onu döndürmeye gücü yeter.",
+        "de": "Er hat die Macht dazu, ihn zurückkehren zu lassen,",
+        "pt": "Sabei que Ele é capaz de ressuscitá-lo!",
+        "nl": "Voorwaar, Hij heeft zeker macht over zijn terugkeer.",
+        "ur": "یقیناً وہ (خالق) اُسے دوبارہ پیدا کرنے پر قادر ہے۔ <sup foot_note=\"188428\">1</sup>",
+        "bn": "নিশ্চয় তেওঁ তাক ওভোতাই আনিবলৈ সক্ষম।",
+        "fa": "بی‌گمان، الله بر بازگرداندن او [پس از مرگ] تواناست."
+      }
+    },
+    {
+      "verse_number": 5940,
+      "verse_key": "86:9",
+      "arabic_text": "يَوْمَ تُبْلَى ٱلسَّرَآئِرُ",
+      "phonetic_text": "Yawma tubla assara-ir",
+      "translations": {
+        "fr": "Le jour où les secrets seront révélés,",
+        "en": "On the Day when secrets are laid bare",
+        "es": "El día que sean revelados todos los secretos,",
+        "it": "nel Giorno in cui i segreti saranno svelati,",
+        "ru": "В тот день будут испытаны (или раскроются) тайны,",
+        "tr": "O gün bütün sırlar yoklanıp, meydana çıkarılır.",
+        "de": "am Tag, da die geheimsten Gedanken geprüft werden.",
+        "pt": "(Isso se dará) no dia em que forem revelados os segredos,",
+        "nl": "Op de Dag dat de harten beproefd worden.",
+        "ur": "جس روز پوشیدہ اسرار کی جانچ پڑتال ہوگی<sup foot_note=\"188429\">1</sup>",
+        "bn": "যিদিনা গোপন বিষয়সমূহ পৰীক্ষা কৰা হ’ব,",
+        "fa": "روزی ‌که [تمام] رازها فاش شود،"
+      }
+    },
+    {
+      "verse_number": 5941,
+      "verse_key": "86:10",
+      "arabic_text": "فَمَا لَهُۥ مِن قُوَّةٍ وَلَا نَاصِرٍ",
+      "phonetic_text": "Fama lahu min quwwatin wala nasir",
+      "translations": {
+        "fr": "il n’aura ni force ni soutien.",
+        "en": "he will have no power and no one to help him.",
+        "es": "y [el ser humano] no tenga fuerzas [para defenderse] a sí mismo ni auxiliador alguno.",
+        "it": "e [l’uomo] non avrà più né forza né ausilio <a class=f><sup foot_note=160581>1</sup></a> .",
+        "ru": "и тогда не будет у него ни силы, ни помощника.",
+        "tr": "İnsanın o gün ne bir gücü vardır, ne de bir yardımcısı.",
+        "de": "Dann hat er weder Kraft noch einen Helfer.",
+        "pt": "E em que (o homem) carecerá de poder e de um socorredor.",
+        "nl": "Dan heeft hij geen kracht en geen helper.",
+        "ur": "اُس وقت انسان کے پاس نہ خود اپنا کوئی زور ہوگا اور نہ کوئی اس کی مدد کرنے والا ہوگا",
+        "bn": "সেইদিনা তাৰ কোনো শক্তি নাথাকিব আৰু কোনো সহায়কাৰীও নাথাকিব।",
+        "fa": "[در آن روز،] انسان هیچ توان و یاوری ندارد."
+      }
+    },
+    {
+      "verse_number": 5942,
+      "verse_key": "86:11",
+      "arabic_text": "وَٱلسَّمَآءِ ذَاتِ ٱلرَّجْعِ",
+      "phonetic_text": "Wassama-i thati arrajAA",
+      "translations": {
+        "fr": "Par le ciel qui fait revenir (régulièrement la pluie) !",
+        "en": "By the sky and its recurring rain,",
+        "es": "Juro por el cielo que devuelve [el agua que sube en forma de lluvias],",
+        "it": "Per il cielo che ritorna incessantemente <a class=f><sup foot_note=160582>1</sup></a>",
+        "ru": "Клянусь небом возвращающим (возвращающим воду земле или возвращающим небесные тела, которые восходят с одной стороны и заходят в другой)!",
+        "tr": "Andolsun o dönüşlü göğe,",
+        "de": "Beim Himmel mit der Wiederkehr",
+        "pt": "Pelo céu, que proporciona a volta da chuva.",
+        "nl": "Bij de hemel, regen bevattend.",
+        "ur": "قسم ہے بارش برسانے والے آسمان کی <sup foot_note=\"188430\">1</sup>",
+        "bn": "শপত আকাশৰ, যিয়ে বৰষুণ ধাৰণ কৰে,",
+        "fa": "سوگند به آسمان پرباران"
+      }
+    },
+    {
+      "verse_number": 5943,
+      "verse_key": "86:12",
+      "arabic_text": "وَٱلْأَرْضِ ذَاتِ ٱلصَّدْعِ",
+      "phonetic_text": "Wal-ardi thati assadAA",
+      "translations": {
+        "fr": "Par la terre qui se fend (quand les graines viennent à pousser) !",
+        "en": "by the earth that cracks open!",
+        "es": "y por la tierra que se abre para que broten los cultivos,",
+        "it": "e per la terra quando si fende <a class=f><sup foot_note=160583>1</sup></a> :",
+        "ru": "Клянусь землей раскалываемой (при прорастании растений, или при выходе из земли воды, или при воскрешении мертвых)!",
+        "tr": "O yarılıp çatlayan yere,",
+        "de": "und der Erde mit ihren Sprüngen!",
+        "pt": "E pela terra, que se fende (com o crescimento das plantas),",
+        "nl": "En bij de aarde, planten bevattend.",
+        "ur": "اور (نباتات اگتے وقت) پھٹ جانے والی زمین کی",
+        "bn": "শপত পৃথিৱীৰ, যিটো বিদীৰ্ণ হয়,",
+        "fa": "و سوگند به زمینِ پرشکاف [که گیاهان از آن سر برمی‌آورند]."
+      }
+    },
+    {
+      "verse_number": 5944,
+      "verse_key": "86:13",
+      "arabic_text": "إِنَّهُۥ لَقَوْلٌ فَصْلٌ",
+      "phonetic_text": "Innahu laqawlun fasl",
+      "translations": {
+        "fr": "C’est là, certes, une parole décisive,<sup foot_note=195231>1</sup>",
+        "en": "This is truly a decisive statement;",
+        "es": "que el Corán es la Verdad que discrimina [la verdad de la falsedad],",
+        "it": "in verità questa è Parola <a class=f><sup foot_note=160584>1</sup></a> decisiva,",
+        "ru": "Воистину, это - Слово различающее,",
+        "tr": "Kuşkusuz Kur'ân, ayırıcı bir sözdür.",
+        "de": "Er ist wahrlich ein entscheidendes Wort;",
+        "pt": "Que (este Alcorão) é a palavra concludente,",
+        "nl": "Voorwaar, hij (de Koran) is zeker een beslissend Woord.",
+        "ur": "یہ ایک جچی تلی بات ہے",
+        "bn": "নিশ্চয় এইটো (আল-কোৰআন) মীমাংসাকাৰী বাণী।",
+        "fa": "[که] بی‌گمان، این قرآن، سخن جداکنندۀ حق از باطل است"
+      }
+    },
+    {
+      "verse_number": 5945,
+      "verse_key": "86:14",
+      "arabic_text": "وَمَا هُوَ بِٱلْهَزْلِ",
+      "phonetic_text": "Wama huwa bilhazl",
+      "translations": {
+        "fr": "et non point des propos frivoles.",
+        "en": "it is not something to be taken lightly.",
+        "es": "Y no es algo trivial.",
+        "it": "per nulla frivola.",
+        "ru": "а не шутка.",
+        "tr": "O asla bir şaka değildir.",
+        "de": "er ist kein Scherz.",
+        "pt": "E não entretenimento.",
+        "nl": "En hij bevat geen scherts.",
+        "ur": "ہنسی مذاق نہیں ہے۔ <sup foot_note=\"188431\">1</sup>",
+        "bn": "আৰু এইটো নিৰৰ্থক নহয়।",
+        "fa": "و [سخنِ] هزل و بیهوده نیست."
+      }
+    },
+    {
+      "verse_number": 5946,
+      "verse_key": "86:15",
+      "arabic_text": "إِنَّهُمْ يَكِيدُونَ كَيْدًا",
+      "phonetic_text": "Innahum yakeedoona kayda",
+      "translations": {
+        "fr": "Ils rusent de leur meilleure ruse,",
+        "en": "They plot and scheme,",
+        "es": "[Los que niegan la verdad] traman [cizañas],",
+        "it": "Invero tramano insidie,",
+        "ru": "Они замышляют козни,",
+        "tr": "Haberin olsun ki, kâfirler hep hile kuruyorlar.",
+        "de": "Sie wenden eine List an,",
+        "pt": "Em verdade, eles conspiram intensivamente (contra ti),",
+        "nl": "Voorwaar, zij beramen een plan.",
+        "ur": "یہ لوگ کچھ چالیں چل رہے ہیں <sup foot_note=\"188432\">1</sup>",
+        "bn": "নিশ্চয় সিহঁতে ভীষণ ষড়যন্ত্ৰ কৰে,",
+        "fa": "آنان [= کافران] پیوسته حیله و نیرنگ می‌کنند"
+      }
+    },
+    {
+      "verse_number": 5947,
+      "verse_key": "86:16",
+      "arabic_text": "وَأَكِيدُ كَيْدًا",
+      "phonetic_text": "Waakeedu kayda",
+      "translations": {
+        "fr": "Et Je ruse de Ma meilleure ruse.",
+        "en": "but so do I:",
+        "es": "pero Yo desbarato sus planes.",
+        "it": "e Io tesso la Mia strategia.",
+        "ru": "и Я замышляю козни.",
+        "tr": "Ben de hilelerine karşılık veririm.",
+        "de": "Und Ich wende eine List an.",
+        "pt": "E Eu conspiro intensivamente (contra eles).",
+        "nl": "En Ik beraam een plan.",
+        "ur": "اور میں بھی ایک چال چل رہا ہوں۔ <sup foot_note=\"188433\">1</sup>",
+        "bn": "আৰু ময়ো ভীষণ কৌশল কৰিছো।",
+        "fa": "و من [نیز] حیله [و تدبیر] می‌کنم؛"
+      }
+    },
+    {
+      "verse_number": 5948,
+      "verse_key": "86:17",
+      "arabic_text": "فَمَهِّلِ ٱلْكَـٰفِرِينَ أَمْهِلْهُمْ رُوَيْدًۢا",
+      "phonetic_text": "Famahhili alkafireena amhilhum ruwayda",
+      "translations": {
+        "fr": "Accorde donc un délai aux mécréants, donne-leur répit pour quelque temps.",
+        "en": "[Prophet], let the disbelievers be, let them be for a while.",
+        "es": "Sé tolerante con los que niegan la verdad, y dales un tiempo.",
+        "it": "Concedi una dilazione ai miscredenti, da’ loro un po’ di tempo. <a class=f><sup foot_note=160585>1</sup></a> Abbiamo tradotto con «astro notturno» il termine arabo «at-târiq» che implica il concetto di venire di notte inaspettatamente <a class=f><sup foot_note=160586>2</sup></a> Vedi XIII,<a class=f><sup foot_note=160587>3</sup></a> «di ricondurlo»: alla vita eterna dopo la morte. <a class=f><sup foot_note=160588>4</sup></a> «né forza né ausilio»: per sottrarsi al suo destino. <a class=f><sup foot_note=160589>5</sup></a> Il cielo nel suo ciclo di evaporazione-nuvole-precipitazioni che continuerà incessantemente fino alla fine di questo mondo. <a class=f><sup foot_note=160590>6</sup></a> «quando si fende»: in conseguenza della spinta della vegetazione che cresce. <a class=f><sup foot_note=160591>7</sup></a> Il Sublime Corano, Rivelazione ultima e Legge finale per tutti gli uomini.",
+        "ru": "Предоставь же неверующим отсрочку, помедли с ними недолго!",
+        "tr": "Onun için sen kâfirlere mühlet ver, onlara az bir zaman tanı.",
+        "de": "So lasse den Ungläubigen noch Zeit; lasse ihnen nur eine Weile Zeit.",
+        "pt": "Tolera, pois, os incrédulos; tolera-os, por ora!",
+        "nl": "Geef daarom de ongelovigen uitstel, geef hun even uitstel.",
+        "ur": "پس چھوڑ دو اے نبیؐ ، اِن کافروں کو اِک ذرا کی ذرا اِن کے حال پر چھوڑ دو۔ <sup foot_note=\"188434\">1</sup>",
+        "bn": "এতেকে কাফিৰসকলক অৱকাশ দিয়া; সিহঁতক কিছু সময়ৰ বাবে অৱকাশ দিয়া।",
+        "fa": "پس به کافران مهلت بده [و] اندکی رهایشان کن [تا غرق گناه باشند]."
+      }
+    }
+  ]
+}

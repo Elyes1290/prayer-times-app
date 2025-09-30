@@ -1,0 +1,246 @@
+{
+  "surah_number": 65,
+  "extracted_at": "2025-09-20T15:16:42.952Z",
+  "verses": [
+    {
+      "verse_number": 5218,
+      "verse_key": "65:1",
+      "arabic_text": " يَـٰٓأَيُّهَا ٱلنَّبِىُّ إِذَا طَلَّقْتُمُ ٱلنِّسَآءَ فَطَلِّقُوهُنَّ لِعِدَّتِهِنَّ وَأَحْصُوا۟ ٱلْعِدَّةَ ۖ وَٱتَّقُوا۟ ٱللَّهَ رَبَّكُمْ ۖ لَا تُخْرِجُوهُنَّ مِنۢ بُيُوتِهِنَّ وَلَا يَخْرُجْنَ إِلَّآ أَن يَأْتِينَ بِفَـٰحِشَةٍ مُّبَيِّنَةٍ ۚ وَتِلْكَ حُدُودُ ٱللَّهِ ۚ وَمَن يَتَعَدَّ حُدُودَ ٱللَّهِ فَقَدْ ظَلَمَ نَفْسَهُۥ ۚ لَا تَدْرِى لَعَلَّ ٱللَّهَ يُحْدِثُ بَعْدَ ذَٰلِكَ أَمْرًا",
+      "phonetic_text": "Ya ayyuha annabiyyu ithatallaqtumu annisaa fatalliqoohunnaliAAiddatihinna waahsoo alAAiddata wattaqoo Allaharabbakum la tukhrijoohunna min buyootihinna walayakhrujna illa an ya/teena bifahishatinmubayyinatin watilka hudoodu Allahi wamanyataAAadda hudooda Allahi faqad thalamanafsahu la tadree laAAalla Allaha yuhdithubaAAda thalika amra",
+      "translations": {
+        "fr": "Ô Prophète ! Si vous divorcez d’avec les femmes, faites-le (en respectant) leur délai de viduité (‘iddah) dont vous compterez (les jours). Craignez Allah, votre Seigneur, ne les faites pas sortir de leurs maisons ! Qu’elles n’en sortent que si elles ont commis un acte immoral évident. Telles sont les limites d’Allah (hudûd). Celui qui outrepasse les limites d’Allah est injuste envers lui-même. Tu ne peux savoir si, entre-temps, Allah ne fera pas advenir une situation nouvelle.<sup foot_note=195188>1</sup>",
+        "en": "Prophet, when any of you intend to divorce women, do so at a time when their prescribed waiting period can properly start, and calculate the period carefully: be mindful of God, your Lord. Do not drive them out of their homes––nor should they themselves leave––unless they commit a flagrant indecency. These are the limits set by God–– whoever oversteps God’s limits wrongs his own soul––for you cannot know what new situation God may perhaps bring about.",
+        "es": "¡Oh, Profeta!, [haz saber a los musulmanes que] cuando divorcien a las mujeres, deben hacerlo durante el tiempo señalado<sup foot_note=169450>1</sup>. Calculad con atención los días de ese período, y tened temor de Dios, vuestro Señor. No las expulséis de sus hogares y que ellas tampoco lo abandonen, a menos que hayan cometido una indecencia evidente. Estas son las leyes de Dios. Quien quebrante las leyes de Dios habrá sido injusto consigo mismo. Tú no sabes si Dios, después de esa [primera ruptura], hará surgir una reconciliación.",
+        "it": "O Profeta, quando ripudiate le vostre donne, ripudiatele allo scadere del termine prescritto <a class=f><sup foot_note=160230>1</sup></a> e contate bene il termine. Temete Allah vostro Signore e non scacciatele dalle loro case, ed esse non se ne vadano, a meno che non abbiano commesso una provata indecenza <a class=f><sup foot_note=160231>2</sup></a> . Ecco i termini di Allah. Chi oltrepassa i termini di Allah, danneggia se stesso. Tu non sai: forse in questo periodo Allah farà succedere qualcosa.",
+        "ru": "О Пророк! Когда вы даете женам развод, то разводитесь в течение установленного срока, ведите счет этому сроку и бойтесь Аллаха, вашего Господа. Не выгоняйте их из их домов, и пусть они не выходят из них, если только они не совершат явную мерзость. Таковы ограничения Аллаха. Кто преступает ограничения Аллаха, тот поступает несправедливо по отношению к себе. Ты не знаешь, что Аллах, возможно, после этого решит иначе.",
+        "tr": "Ey Peygamber! Kadınları boşamak istediğiniz zaman onları iddetleri içinde boşayın ve iddeti de sayın. Rabbiniz Allah'tan korkun. Apaçık bir hayasızlık yapmaları hali bir yana, onları evlerinden çıkarmayın, kendileri de çıkmasınlar. Bunlar Allah'ın sınırlarıdır. Kim Allah'ın sınırlarını aşarsa, şüphesiz kendine zulmetmiş olur. Bilmezsin, olur ki Allah, bundan sonra bir durum ortaya çıkarıverir.",
+        "de": "O Prophet, wenn ihr euch von Frauen scheidet, dann scheidet euch von ihnen auf ihre Wartezeit hin, und berechnet die Wartezeit. Und fürchtet Allah, euren Herrn. Weist sie nicht aus ihren Häusern aus; sie sollen auch nicht selbst ausziehen, außer, sie begehen etwas klar Abscheuliches. Dies sind Allahs Grenzen.Wer aber Allahs Grenzen übertritt, der fügt sich ja selbst Unrecht zu. Du weißt nicht, vielleicht führt Allah danach eine neue Lage herbei.",
+        "pt": "Ó Profeta, quando vos divorciardes das vossas mulheres, divorciai-vos delas em seus períodos prescritos e contaiexatamente tais períodos e temei a Deus, vosso Senhor. Não as expulseis dos seus lares, nem elas deverão sair, a não serque tenham cometido obscenidade comprovada. Tais são as leis de Deus; e quem profanar as leis de Deus, condenar-se-á. Tu o ignoras, mas é possível que Deus, depois disto, modifique a situação para melhor.",
+        "nl": "O Profeet als jullie van de vrouwen scheiden, scheidt dan van hen met inachtneming van hun perioden, en berekent de perioden (precies) en vreest Allah, jullie Heer. Verwijdert hen niet uit hun huizen en zij mogen (deze) niet verlaten, behalve wanneer zij duidelijk zedeloosheden begaan. Dat zijn de Wetten van Allah en wie de Wetten van Allah overschrijdt, die heeft waarlijk zichzelf onrecht aangedaan. Jij weet niet of Allah misschien daarna een nieuwe omstandigheid zal doen ontstaan.",
+        "ur": "اے نبیؐ ، جب تم لوگ عورتوں کو طلاق دو تو اُنہیں اُن کی عدّت کے لیے طلاق دیا کرو۔ <sup foot_note=\"187929\">1</sup> اور عدّت کے زمانے کا ٹھیک ٹھیک شمار کرو، <sup foot_note=\"187930\">2</sup> اور اللہ سے ڈرو جو تمہارا رب ہے۔ (زمانہ عدّت  میں) نہ تم اُنہیں اُن کے گھروں سے نکالو اور نہ وہ خود نکلیں، <sup foot_note=\"187931\">3</sup> الّا یہ کہ وہ کسی صریح بُرائی  کی مرتکب ہوں۔ <sup foot_note=\"187932\">4</sup> یہ اللہ کی مقرر  کر دہ حدیں ہیں، اور جو کوئی اللہ کی حدوں سے تجاوز کریگا وہ اپنے اوپر خود ظلم کریگا۔ تم نہیں جانتے، شاید اس کے بعد اللہ (موافقت کی) کوئی صُورت پیدا کر دے۔ <sup foot_note=\"187933\">5</sup>",
+        "bn": "হে নবী (কোৱা), তোমালোকে যেতিয়া স্ত্ৰীসকলক তালাক দিবা, তেতিয়া সিহঁতক সিহঁতৰ ইদ্দতৰ প্ৰতি লক্ষ্য ৰাখি তালাক দিবা আৰু তোমালোকে ইদ্দতৰ হিচাপ ৰাখিবা; আৰু তোমালোকৰ প্ৰতিপালক আল্লাহৰ তাক্বৱা অৱলম্বন কৰা। তোমালোকে সিহঁতক সিহঁতৰ ঘৰৰ পৰা বহিষ্কাৰ নকৰিবা আৰু সিহঁত নিজেও বাহিৰ নহ’ব, যদি সিহঁতে কোনো স্পষ্ট অশ্লিলতাত লিপ্ত নহয়। এইবোৰ আল্লাহৰ নিৰ্ধাৰিত সীমাৰেখা; আৰু যিয়ে আল্লাহৰ সীমাৰেখা লঙ্ঘন কৰে সি নিজৰ ওপৰত অত্যাচাৰ কৰে। তুমি নাজানা, সম্ভৱত আল্লাহে ইয়াৰ পিছত কোনো উপায় উদ্ভাৱন কৰি দিব।",
+        "fa": "ای پیامبر، هرگاه خواستید زنان را طلاق دهید، آنها را در زمان [آغاز] عده طلاق دهید [یعنی پس از پاک شدن از حیض و پیش از آمیزش]، و حساب عدّه را نگه دارید، و از الله که پروردگار شماست پروا کنید. نه شما آنها را [تا پایان عده] از خانه‌هایشان بیرون کنید و نه آنها بیرون روند؛ مگر آنکه کار زشتِ آشکاری [مانند زنا] مرتکب شوند؛ و این حدود [احکام] الله است؛ و هر ‌کس از حدود الله تجاوز کند، مسلماً به خود ستم کرده است. تو نمی‌دانی، شاید الله پس از آن، وضع تازه‌ای فراهم آورَد [و رغبتی در دل زوجین بیندازد که به صلح و آشتی منجر شود]."
+      }
+    },
+    {
+      "verse_number": 5219,
+      "verse_key": "65:2",
+      "arabic_text": "فَإِذَا بَلَغْنَ أَجَلَهُنَّ فَأَمْسِكُوهُنَّ بِمَعْرُوفٍ أَوْ فَارِقُوهُنَّ بِمَعْرُوفٍ وَأَشْهِدُوا۟ ذَوَىْ عَدْلٍ مِّنكُمْ وَأَقِيمُوا۟ ٱلشَّهَـٰدَةَ لِلَّهِ ۚ ذَٰلِكُمْ يُوعَظُ بِهِۦ مَن كَانَ يُؤْمِنُ بِٱللَّهِ وَٱلْيَوْمِ ٱلْـَٔاخِرِ ۚ وَمَن يَتَّقِ ٱللَّهَ يَجْعَل لَّهُۥ مَخْرَجًا",
+      "phonetic_text": "Fa-itha balaghna ajalahunnafaamsikoohunna bimaAAroofin aw fariqoohunna bimaAAroofinwaashhidoo thaway AAadlin minkum waaqeemoo ashshahadatalillahi thalikum yooAAathu bihi man kanayu/minu billahi walyawmi al-akhiriwaman yattaqi Allaha yajAAal lahu makhraja",
+      "translations": {
+        "fr": "Leur terme ayant été atteint, ou vous les garderez alors d’une manière convenable, ou vous les quitterez d’une manière tout aussi convenable. Faites témoigner de cela deux hommes parmi les plus équitables d’entre vous. Vous devez en témoigner (par obéissance) à Allah. Voilà une exhortation pour qui croit en Allah et au Jour Dernier. À quiconque Le craint, Allah prévoit une (honorable) voie de sortie,",
+        "en": "When they have completed their appointed term, either keep them honourably, or part with them honourably. Call two just witnesses from your people and establish witness for the sake of God. Anyone who believes in God and the Last Day should heed this: God will find a way out for those who are mindful of Him,",
+        "es": "Cuando estén a punto de finalizar su período de espera, podéis reconciliaros de forma justa o divorciaros definitivamente en términos justos. Hacedlo ante dos testigos neutrales de entre vosotros, y cumplid con vuestro testimonio por Dios. Al cumplimiento de estas leyes es que se exhorta a quien cree en Dios y en el Día del Juicio. Sabed que a quien tenga temor de Dios, Él le dará una solución,",
+        "it": "Quando poi siano giunte al loro termine, trattenetele convenientemente o separatevi da esse convenientemente. Richiedete la testimonianza di due dei vostri uomini retti, che testimonino davanti ad Allah. Ecco a che cosa è esortato chi crede in Allah e nell’Ultimo Giorno. A chi teme Allah, Egli apre una via d’uscita,",
+        "ru": "Когда для них наступит установленный срок, оставьте их у себя по-хорошему или же отпустите по-хорошему. Призовите свидетелями двух справедливых мужей из вас и будьте свидетелями ради Аллаха. Таково увещевание для тех, кто верует в Аллаха и в Последний день. Тому, кто боится Аллаха, Он создает выход из положения",
+        "tr": "Sürelerinin sonuna vardıklarında onları güzelce tutun, yahut güzellikle onlardan ayrılın. İçinizden adalet sahibi iki kişiyi şahit tutun. Şahidliği Allah için yapın. İşte Allah'a ve son güne inanan kimseye öğütlenen budur. Kim Allah'tan korkarsa Allah ona bir çıkış yolu yaratır.",
+        "de": "Wenn sie dann ihre Frist erreichen, so behaltet sie in rechtlicher Weise oder trennt euch von ihnen in rechtlicher Weise. Und nehmt zwei gerechte Personen von euch zu Zeugen, und legt das Zeugnis (in Aufrichtigkeit) um Allahs willen ab. Damit wird ermahnt, wer an Allah und den Jüngsten Tag glaubt. Und wer Allah fürchtet, dem schafft Er einen Ausweg",
+        "pt": "Todavia, quando tiverem cumprido o seu término prefixado, tomai-as em termos eqüitativos ou separai-vos delas, emtermos eqüitativos. (Em ambos os casos) fazei-o ante testemunhas eqüitativas, dentre vós, e justificai o testemunho anteDeus, com o qual se exorta quem crê em Deus e no Dia do Juízo Final. Mas, a quem temer a Deus, Ele lhe apontará umasaída.",
+        "nl": "Wanneer zij dan hun termijn bereikt hebben, behoudt hen dan volgens de voorschriften of scheidt van hen volgens de voorschriften, en neemt twee rechtvaardige personen als getuigen. En weest oprecht in de getuigenis voor Allah. Dat is waartoe jullie gemaand worden, (voor) wie gelooft in Allah en in de Laatste Dag. En wie Allah vreest die zal Hij een oplossing geven.",
+        "ur": "پھر جب وہ اپنی (عدّت کی) مدّت کے خاتمے پر پہنچیں تو یا انہیں بھلے طریقے سے (اپنے نکاح میں) روک رکھو، یا بَھلے طریقے پر اُن سے جُدا ہو جاؤ۔ <sup foot_note=\"187934\">1</sup> اور دو ایسے آدمیوں کو گواہ بنالو جو تم میں سے صاحبِ عدل ہوں۔ <sup foot_note=\"187935\">2</sup> اور (اے گواہ بننے والو) گواہی ٹھیک ٹھیک اللہ کے لیے ادا کرو۔یہ باتیں ہیں جن کی تم لوگوں کو نصیحت کی جاتی ہے، ہر اُس شخص کو جو اللہ اور آخرت کےدن پر ایمان رکھتا ہو۔ <sup foot_note=\"187936\">3</sup> جو کوئی اللہ سے ڈرتے ہوئے کام کرے گا اللہ اُس کے لیے مشکلات سے نکلنے کا کوئی راستہ پیدا کر دے گا <sup foot_note=\"187937\">4</sup>",
+        "bn": "তাৰ পিছত যেতিয়া সিহঁতে সিহঁতৰ ইদ্দতৰ শেষ সীমাত উপনীত হ’ব, তেতিয়া তোমালোকে সিহঁতক যথাবিধি ৰাখি দিবা নহ’লে সিহঁতক যথাবিধি পৰিত্যাগ কৰিবা আৰু তোমালোকৰ মাজৰ পৰা দুজন ন্যায়পৰায়ণ লোকক সাক্ষী ৰাখিবা; আৰু তোমালোকে আল্লাহৰ বাবে সঠিকভাৱে সাক্ষ্য দিবা। ইয়াৰ দ্বাৰা তোমালোকৰ মাজত যিয়ে আল্লাহ আৰু শেষ দিৱসৰ প্ৰতি ঈমান ৰাখে তাক উপদেশ দিয়া হৈছে; আৰু যিয়ে আল্লাহৰ তাক্বৱা অৱলম্বন কৰিব আল্লাহে তাৰ বাবে উত্তৰণৰ পথ উলিয়াই দিব,",
+        "fa": "و هنگامی که [آنها را طلاق دادید و] عده‌شان به سر رسید، آنان را به طرز شایسته‌ای نگه‌ دارید یا به طرز شایسته‌ای از آنها جدا شوید؛ و دو مرد عادل از خودتان را گواه بگیرید و شهادت را برای الله برپا دارید. این [حکمی است] که هر کس به الله و روز قیامت ایمان دارد، به آن پند و اندرز داده می‌شود؛ و هر‌ کس که از الله بترسد، راه نجاتی برای او قرار می‌دهد"
+      }
+    },
+    {
+      "verse_number": 5220,
+      "verse_key": "65:3",
+      "arabic_text": "وَيَرْزُقْهُ مِنْ حَيْثُ لَا يَحْتَسِبُ ۚ وَمَن يَتَوَكَّلْ عَلَى ٱللَّهِ فَهُوَ حَسْبُهُۥٓ ۚ إِنَّ ٱللَّهَ بَـٰلِغُ أَمْرِهِۦ ۚ قَدْ جَعَلَ ٱللَّهُ لِكُلِّ شَىْءٍ قَدْرًا",
+      "phonetic_text": "Wayarzuqhu min haythu la yahtasibuwaman yatawakkal AAala Allahi fahuwa hasbuhuinna Allaha balighu amrihi qad jaAAala Allahulikulli shay-in qadra",
+      "translations": {
+        "fr": "et lui dispensera (des biens) d’une manière à laquelle il ne s’attendait pas. Quiconque s’en remet à Allah, (Allah) lui suffira. Allah atteint toujours Son objectif et Il a prévu à chaque chose un terme mesuré.",
+        "en": "and will provide for them from an unexpected source; God will be enough for those who put their trust in Him. God achieves His purpose; God has set a due measure for everything.",
+        "es": "y le dará sustento de donde no lo esperaba. Quien deposite su confianza en Dios, sepa que Él le será suficiente. Dios hará que el designio se cumpla, y ha establecido para cada cosa un término y una medida.",
+        "it": "e gli concede provvidenze da dove non ne attendeva. Allah basta a chi confida in Lui. In verità Allah realizza i Suoi intenti. Allah ha stabilito una misura per ogni cosa.",
+        "ru": "и наделяет его уделом оттуда, откуда он даже не предполагает. Тому, кто уповает на Аллаха, достаточно Его. Аллах доводит до конца Свое дело. Аллах установил меру для каждой вещи.",
+        "tr": "Ve onu ummadığı yerden rızıklandırır. Kim Allah'a güvenirse O, ona yeter. Allah, emrini yerine getirendir. Allah her şey için bir ölçü koymuştur.",
+        "de": "und gewährt ihm Versorgung, von wo (aus) er damit nicht rechnet. Und wer sich auf Allah verläßt, dem ist Er seine Genüge. Allah wird gewiß (die Durchführung) seine(r) Angelegenheit erreichen. Allah legt ja für alles ein Maß fest.",
+        "pt": "E o agraciará, de onde menos esperar. Quanto àquele que se encomendar a Deus, saiba que Ele será Suficiente, porqueDeus cumpre o que promete. Certamente Deus predestinou uma proporção para cada coisa.",
+        "nl": "En Hij voorziet hem van waar hij het niet verwacht, en (voor) wie op Allah vertrouwt, is Hij voldoende. Voorwaar, Allah voert Zijn zaak uit. Waarlijk, Allah heeft voor alle zaken een maatgeving bepaald.",
+        "ur": "اور اُسے ایسے راستے سے رزق دے گا جدھر اُس کا گمان بھی نہ جاتا ہو۔ <sup foot_note=\"187938\">1</sup> جو اللہ پر بھروسہ کرے اُس کےلیے وہ کافی ہے۔ اللہ اپنا کام پورا کرکے رہتا ہے۔ <sup foot_note=\"187939\">2</sup> اللہ نے ہر چیز کے لیے ایک تقدیر مقرر کر رکھی ہے",
+        "bn": "আৰু তেওঁ তাক তাৰ ধাৰণাতীত উৎসৰ পৰা জীৱিকা দান কৰিব; আৰু যি ব্যক্তি আল্লাহৰ প্ৰতি তাৱাক্কুল কৰিব তাৰ বাবে আল্লাহেই যথেষ্ট। নিশ্চয় আল্লাহে তেওঁৰ উদ্দেশ্য পূৰণ কৰিবই; নিশ্চয় আল্লাহে প্ৰতিটো বস্তুৰ বাবে এটা সময়সীমা নিৰ্ধাৰণ কৰি দিছে।",
+        "fa": "و او را از جایی که گمان ندارد، روزی می‌دهد؛ و هر کس بر الله توکل کند، او تعالی برایش کافی است. بی‌گمان، الله فرمان خود را به انجام می‌رسانَد. مسلّماً الله برای هر چیزی اندازه‌ای قرار داده است."
+      }
+    },
+    {
+      "verse_number": 5221,
+      "verse_key": "65:4",
+      "arabic_text": "وَٱلَّـٰٓـِٔى يَئِسْنَ مِنَ ٱلْمَحِيضِ مِن نِّسَآئِكُمْ إِنِ ٱرْتَبْتُمْ فَعِدَّتُهُنَّ ثَلَـٰثَةُ أَشْهُرٍ وَٱلَّـٰٓـِٔى لَمْ يَحِضْنَ ۚ وَأُو۟لَـٰتُ ٱلْأَحْمَالِ أَجَلُهُنَّ أَن يَضَعْنَ حَمْلَهُنَّ ۚ وَمَن يَتَّقِ ٱللَّهَ يَجْعَل لَّهُۥ مِنْ أَمْرِهِۦ يُسْرًا",
+      "phonetic_text": "Walla-ee ya-isna mina almaheedimin nisa-ikum ini irtabtum faAAiddatuhunna thalathatuashhurin walla-ee lam yahidna waolatual-ahmali ajaluhunna an yadaAAna hamlahunnawaman yattaqi Allaha yajAAal lahu min amrihi yusra",
+      "translations": {
+        "fr": "Celles qui ont atteint la ménopause,<sup foot_note=195189>1</sup> parmi vos femmes, devront observer, si vous avez des doutes (en comptant les jours de la ‘iddah), une (période) d’attente de trois mois. La même (attente est prescrite) à celles qui n’ont pas encore leurs règles. Quant à celles qui sont enceintes, leur terme de viduité est l’accouchement. Quiconque craint Allah, (Allah) lui rendra les choses plus faciles.",
+        "en": "If you are in doubt, the period of waiting will be three months for those women who have ceased menstruating and for those who have not [yet] menstruated; the waiting period of those who are pregnant will be until they deliver their burden: God makes things easy for those who are mindful of Him.",
+        "es": "El período de espera para aquellas mujeres que hayan llegado a la menopausia, si tienen dudas [sobre el término del periodo], o aquellas que no menstrúan, es de tres meses. En cambio, el de las embarazadas finalizará cuando den a luz. Sabed que a quien tenga temor de Dios, Él le facilitará sus asuntos.",
+        "it": "Se avete qualche dubbio a proposito di quelle delle vostre donne che non sperano più nel mestruo, il loro termine sia di tre mesi. Lo stesso valga per quelle che non hanno ancora il mestruo. Quelle che sono incinte avranno per termine il parto stesso. A chi teme Allah, Egli facilita i suoi intenti.",
+        "ru": "Для тех из ваших женщин, у которых прекратились менструации, если вы сомневаетесь, установленный для развода срок равен трем месяцам, как и для тех, у которых не было менструаций. Для беременных срок установлен до тех пор, пока они не разрешатся от бремени. Тому, кто боится Аллаха, Он облегчает дела.",
+        "tr": "Kadınlarınız içinden âdetten kesilmiş olanlarla, henüz âdetini görmemiş bulunanlardan eğer şüphe ederseniz (iddetlerinin nasıl olacağında tereddüt ederseniz), onların bekleme süresi üç aydır. Gebe olanların bekleme süresi ise, yüklerini bırakmaları, doğum yapmalarıdır. Kim Allah'tan korkarsa, Allah ona işinde bir kolaylık verir.",
+        "de": "Und diejenigen von euren Frauen, die keine Monatsblutung mehr erwarten, wenn ihr im Zweifel seid, so ist ihre Wartezeit drei Monate; und ebenso derjenigen, die (noch) keine Monatsblutung haben. Diejenigen, die schwanger sind - ihre Frist ist (erreicht), wenn sie mit dem niederkommen, was sie (in ihren Leibern) tragen. Und wer Allah fürchtet, dem schafft Er in seiner Angelegenheit Erleichterung.",
+        "pt": "Quanto àquelas, das vossas mulheres, que tiverem chegado à menopausa, se tiverdes dúvida quanto a isso, o seu períodoprescrito será de três meses; o mesmo se diga, com respeito àquelas que ainda não tiverem chegado a tal condição; e, quantoàs grávidas, o seu período estará terminado quando derem à luz. Mas, a quem temer a Deus, Ele lhe aplainará o assunto.",
+        "nl": "En voor hen die (gezien hun leeftijd) onzeker zijn omtrent de menstruatie van jullie vrouwen; als jullie (mannen) twijfelen is hun wachttijd drie maanden. En (dit geldt ook voor) hen die nog geen menstruatie hebben. Voor hen die zwanger zijn geldt de wachttijd totdat zij hebben gebaard wat zij dragen. En wie Allah vreest, voor hem zal Hij zijn zaak makkelijk maken.",
+        "ur": "اور تمہاری عورتوں میں سے جو حیض سے مایوس ہو چکی ہوں ان کے معاملہ میں اگر تم لوگوں کو کوئی شک لاحق ہے تو (تمہیں معلوم ہو کہ) ان کی عدّت  تین مہینے ہے۔ <sup foot_note=\"187940\">1</sup> اور یہی حکم اُن کا ہے جنہیں ابھی حیض نہ آیا ہو۔ <sup foot_note=\"187941\">2</sup> اور حاملہ عورتوں کی عدّت کی حد یہ ہے کہ اُن کا وضعِ حمل ہو جائے۔ <sup foot_note=\"187942\">3</sup> جو شخص اللہ سے ڈرے اُس کے معاملہ میں وہ سہولت پیدا کردیتاہے",
+        "bn": "তোমালোকৰ স্ত্ৰীসকলৰ মাজত যিসকলে ঋতুমতি হোৱাৰ কাল অতিক্ৰম কৰিছে, সিহঁতৰ ইদ্দত সম্পৰ্কে যদি তোমালোকে সংশয় কৰা তেনেহ’লে সিহঁতৰ ইদ্দতকাল হ’ব তিনি মাহ আৰু যিসকলে এতিয়াও ঋতুৰ বয়সত উপনীত হোৱা নাই সিহঁতৰো (তিনি মাহ); আৰু গৰ্ভৱতী নাৰীসকলৰ ইদ্দতকাল সন্তান প্ৰসৱ নোহোৱা লৈকে; আৰু যিয়ে আল্লাহৰ তাক্বৱা অৱলম্বন কৰে আল্লাহে তাৰ বাবে তাৰ কৰ্মক সহজ কৰি দিয়ে।",
+        "fa": "و کسانی از زنانتان که [به سبب سن زیاد و ...] از عادت ماهانه مأیوس شده‌اند، اگر [در چگونگی عده آنان] شک کردید، عدّۀ آنان سه ماه است، و زنانی که عادت ماهانه نديده‌اند [نيز عده‌شان سه ماه است‌]. و عدّۀ زنان باردار این است که وضع حمل کنند؛ و هر کس از الله بترسد، [الله] کارش را برایش آسان می‌سازد."
+      }
+    },
+    {
+      "verse_number": 5222,
+      "verse_key": "65:5",
+      "arabic_text": "ذَٰلِكَ أَمْرُ ٱللَّهِ أَنزَلَهُۥٓ إِلَيْكُمْ ۚ وَمَن يَتَّقِ ٱللَّهَ يُكَفِّرْ عَنْهُ سَيِّـَٔاتِهِۦ وَيُعْظِمْ لَهُۥٓ أَجْرًا",
+      "phonetic_text": "Thalika amru Allahi anzalahuilaykum waman yattaqi Allaha yukaffir AAanhu sayyi-atihiwayuAAthim lahu ajra",
+      "translations": {
+        "fr": "Tel est l’ordre qu’Allah a fait descendre pour vous. Quiconque craint Allah, (Allah) rachètera ses mauvaises actions et lui accordera une grande récompense.",
+        "en": "This is God’s command, which He has sent down to you. God will wipe out the sinful deeds and increase the rewards of anyone who is mindful of Him.",
+        "es": "Estas son las leyes que Dios ha prescrito. A quien tenga temor de Dios, Él le perdonará sus malas obras y le aumentará su recompensa.",
+        "it": "Questo è l’Ordine che Allah ha fatto scendere su di voi. A chi teme Allah, Egli cancella i peccati e aumenta la sua ricompensa.",
+        "ru": "Таково повеление Аллаха, которое Он ниспослал вам. Тому, кто боится Аллаха, Он простит злодеяния и увеличит награду.",
+        "tr": "Bu, Allah'ın size indirdiği buyruğudur. Kim Allah'tan korkarsa Allah onun kötülüklerini örter ve onun mükafatını büyütür.",
+        "de": "Das ist Allahs Anordnung, die Er zu euch (als Offenbarung) herabgesandt hat. Und wer Allah fürchtet, dem tilgt Er seine bösen Taten und dem gewährt Er großartigen Lohn.",
+        "pt": "Tal é o mandamento que Deus vos revelou. E quem temer a Deus, (saiba que) Ele lhe absolverá os pecados e lheaumentará a recompensa.",
+        "nl": "Dat is het bevel van Allah, dat Hij aan jullie neerzendt. En wie Allah vreest, voor hem zal Hij zijn zonden uitwissen en hem een geweldige beloning geven.",
+        "ur": "یہ اللہ کا حکم ہے جواُس نے تمہاری طرف نازل کیا ہے۔  جو اللہ سے ڈرے گا اللہ اُس کی بُرائیوں کو اُس سے دُور کر دے گا اور اُس کو بڑا اجر دے گا۔ <sup foot_note=\"187943\">1</sup>",
+        "bn": "এইটো আল্লাহৰ বিধান, যিটো তেওঁ তোমালোকৰ প্ৰতি অৱতীৰ্ণ কৰিছে; আৰু যিয়ে আল্লাহৰ তাক্বৱা অৱলম্বন কৰিব তেওঁ তাৰ পাপসমূহ মোচন কৰি দিব আৰু তাক প্ৰদান কৰিব মহাপুৰষ্কাৰ।",
+        "fa": "این، فرمان الله است که بر شما نازل کرده است؛ و هر کس از الله پروا کند، الله گناهانش را از او می‌زداید [و می‌بخشد] و پاداش او را بزرگ می‌گردانَد."
+      }
+    },
+    {
+      "verse_number": 5223,
+      "verse_key": "65:6",
+      "arabic_text": "أَسْكِنُوهُنَّ مِنْ حَيْثُ سَكَنتُم مِّن وُجْدِكُمْ وَلَا تُضَآرُّوهُنَّ لِتُضَيِّقُوا۟ عَلَيْهِنَّ ۚ وَإِن كُنَّ أُو۟لَـٰتِ حَمْلٍ فَأَنفِقُوا۟ عَلَيْهِنَّ حَتَّىٰ يَضَعْنَ حَمْلَهُنَّ ۚ فَإِنْ أَرْضَعْنَ لَكُمْ فَـَٔاتُوهُنَّ أُجُورَهُنَّ ۖ وَأْتَمِرُوا۟ بَيْنَكُم بِمَعْرُوفٍ ۖ وَإِن تَعَاسَرْتُمْ فَسَتُرْضِعُ لَهُۥٓ أُخْرَىٰ",
+      "phonetic_text": "Askinoohunna min haythu sakantum minwujdikum wala tudarroohunna litudayyiqooAAalayhinna wa-in kunna olati hamlin faanfiqooAAalayhinna hatta yadaAAna hamlahunnafa-in ardaAAna lakum faatoohunna ojoorahunnawa/tamiroo baynakum bimaAAroofin wa-in taAAasartum fasaturdiAAulahu okhra",
+      "translations": {
+        "fr": "Logez (vos femmes répudiées) dans (les habitations) où vous résidez vous-mêmes, selon vos moyens. Ne leur cherchez pas noise en leur rendant la vie insupportable. Et si elles sont enceintes, assurez les dépenses qui leur sont nécessaires jusqu’à ce qu’elles accouchent. Si, (par la suite), elles allaitent (votre enfant), versez-leur une pension. Que vos concertations (à ce sujet) soient sereines et convenables. Mais, si vous ne vous vous êtes pas entendus, que l’allaitement soit confié à une autre (femme).",
+        "en": "House the wives you are divorcing according to your means, wherever you house yourselves, and do not harass them so as to make their lives difficult. If they are pregnant, maintain them until they are delivered of their burdens; if they suckle your infants, pay them for it. Consult together in a good way- if you make difficulties for one another, another woman may suckle the child for the father––",
+        "es": "Dadle a la mujer durante ese periodo el mismo nivel de vida que vosotros tenéis conforme a vuestras posibilidades. No la perjudiquen con ánimo de molestarla. Si ella está embarazada, debéis mantenerla hasta que dé a luz, y si ambos acordáis que ella amamante a su hijo, debéis mantenerla [hasta que termine la lactancia]. Tened buen trato y llegad a un acuerdo de buena manera. Pero si discrepáis [sobre la lactancia del hijo], entonces que otra mujer lo amamante [por cuenta del padre].",
+        "it": "Fatele abitare <a class=f><sup foot_note=160232>1</sup></a> dove voi stessi abitate, secondo i vostri mezzi. Non tormentatele mettendole in ristrettezze. Se sono incinte, provvedete al loro mantenimento fino a che non abbiano partorito. Se allatteranno per voi, date loro un compenso e accordatevi tra voi convenientemente. Se andrete incontro a difficoltà <a class=f><sup foot_note=160233>2</sup></a> , sia un’altra ad allattare per voi.",
+        "ru": "Поселяйте их там, где вы живете сами - по вашему достатку. Не причиняйте им вреда, желая стеснить их. Если они беременны, то содержите их, пока они не разрешатся от бремени. Если они кормят грудью для вас, то платите им вознаграждение и советуйтесь между собой по-хорошему. Если же вы станете обременять друг друга, то кормить для него будет другая женщина.",
+        "tr": "O kadınları, gücünüz ölçüsünde oturduğunuz yerin bir bölümünde oturtun ve onları sıkıştırmak için kendilerine zarar vermeye kalkışmayın. Şayet gebe iseler, yüklerini bırakıncaya kadar onları besleyin. Sonra sizin için emzirirlerse ücretlerini verin ve aranızda güzellikle konuşup danışın. Güçlük çekerseniz çocuğu, başka bir kadın emzirecektir.",
+        "de": "Laßt sie dort wohnen, wo ihr (selbst) wohnt, von dem, was ihr euch leisten könnt. Und fügt ihnen keinen Schaden zu, um sie in die Enge zu treiben. Und wenn sie schwanger sind, dann gebt für sie (das Nötige) aus, bis sie mit dem niederkommen, was sie (in ihren Leibern) tragen. Wenn sie für euch (das Kind) stillen, dann gebt ihnen ihren Lohn, und beratet untereinander (darüber) in rechtlicher Weise. Wenn ihr aber einander Schwierigkeiten bereitet, dann wird (das Kind) für ihn eine andere stillen.",
+        "pt": "Instalai-as (as divorciadas) onde habitais, segundo os vossos recursos, e não as molesteis, para criar-lhes dificuldades. Se estiverem grávidas, mantende-as, até que tenham dado à luz. Se amamentam os vossos filhos, pagai-lhes a suarecompensa e consultai-vos cordialmente. Porém, se encontrardes constrangimento nisso, que os amamente outra mulher.",
+        "nl": "Laat hen (gedurende de wachttijd) wonen zoals jullie zelf wonen, naar jullie vermogens, en kwelt hen niet om hen in het nauw te drijven. En als zij zwanger zijn, voorziet hun dan tot zij gebaard hebben wat zij dragen. En als zij (de kinderen) voor jullie zogen, geeft hun dan hun vergoeding en pleegt onderling overleg op een redelijke wijze. En als jullie moeilijkheden ondervinden, laat dan een andere (vrouw het kind) voor hem zogen.",
+        "ur": "اُن کو (زمانہ عدّت میں) اُسی جگہ رکھو جہاں تم رہتے ہو، جیسی کچھ بھی جگہ تمہیں میسّر ہو،اور انہیں تنگ کرنے کے لیے ان کو نہ ستاؤ۔ <sup foot_note=\"187944\">1</sup>  اور اگر وہ حاملہ ہوں تو ان پر اُس وقت تک خرچ کرتے رہو جب تک ان کا وضع حمل نہ ہوجائے۔ <sup foot_note=\"187945\">2</sup> پھر اگر وہ تمہارے لیے (بچےکو) دُودھ پلائیں تو ان کی اُجرت انہیں دو، اور بھلے طریقےسے (اُجرت کا معاملہ) باہمی گفت وشنید سے طے کر لو۔ <sup foot_note=\"187946\">3</sup> لیکن اگر تم نے (اُجرت طے کرنے میں) ایک دُوسرے کو تنگ کیا تو بچے کو کوئی اور عورت دُودھ پلالے گی۔<sup foot_note=\"187947\">4</sup>",
+        "bn": "তোমালোকৰ সামৰ্থ অনুযায়ী য’ত তোমালোকে বসবাস কৰা তাতেই সিহঁতকো বাস কৰিবলৈ দিয়া, সিহঁতক সঙ্কটত পেলাবলৈ কষ্ট নিদিবা; আৰু সিহঁত গৰ্ভৱতী থাকিলে সন্তান প্ৰসৱ নকৰালৈকে সিহঁতৰ বাবে ব্যয় কৰা। তাৰ পিছত যদি সিহঁতে তোমালোকৰ সন্তানসকলক পিয়াহ খুৱায় তেনেহ’লে সিহঁতক পাৰিশ্ৰমিক প্ৰদান কৰিবা আৰু (সন্তানৰ কল্যাণ সম্পৰ্কে) তোমালোকে নিজৰ মাজতেই সংগতভাৱে পৰামৰ্শ কৰা; আৰু যদি তোমালোকে পৰস্পৰে ঐক্যমত হ’বলৈ টান পোৱা তেনেহ’লে পিতাৰ পক্ষৰ পৰা আন তিৰোতাই পিয়াহ খুৱাব।",
+        "fa": "آنان [= زنان مطلقه] را در حد توان خود، هر جا که خودتان سکونت دارید [و در تواناییِ شماست] سکونت دهید، و به آنها زیان نرسانید تا [عرصه را] بر آنان تنگ کنید [و پیش از پایان عده، به ترک منزل مجبور شوند]؛ و اگر باردار هستند، نفقۀ آنها را بدهید تا وضع حمل کنند. اگر [فرزندتان را] برای شما شیر می‌دهند، مزدشان را بپردازید و [این کار را] به نیکی و با مشورت یکدیگر انجام دهید؛ و اگر به توافق نرسیدید، زن دیگری [به درخواست شوهر،] او را شیر دهد."
+      }
+    },
+    {
+      "verse_number": 5224,
+      "verse_key": "65:7",
+      "arabic_text": "لِيُنفِقْ ذُو سَعَةٍ مِّن سَعَتِهِۦ ۖ وَمَن قُدِرَ عَلَيْهِ رِزْقُهُۥ فَلْيُنفِقْ مِمَّآ ءَاتَىٰهُ ٱللَّهُ ۚ لَا يُكَلِّفُ ٱللَّهُ نَفْسًا إِلَّا مَآ ءَاتَىٰهَا ۚ سَيَجْعَلُ ٱللَّهُ بَعْدَ عُسْرٍ يُسْرًا",
+      "phonetic_text": "Liyunfiq thoo saAAatin min saAAatihiwaman qudira AAalayhi rizquhu falyunfiq mimma atahuAllahu la yukallifu Allahu nafsan illama ataha sayajAAalu AllahubaAAda AAusrin yusra",
+      "translations": {
+        "fr": "Que le fortuné dépense selon sa fortune ; et que l’homme de condition plus modeste dépense de ce qu’Allah lui a accordé (comme biens). Allah ne charge une personne que selon ce qu’Il lui a donné. Allah fera qu’après la difficulté vienne l’aisance.",
+        "en": "and let the wealthy man spend according to his wealth. But let him whose provision is restricted spend according to what God has given him: God does not burden any soul with more than He has given it- after hardship, God will bring ease.",
+        "es": "Que el adinerado mantenga de acuerdo a su abundancia<sup foot_note=169451>1</sup>, pero aquel cuyo sustento es escaso que lo haga acorde a lo que Dios le ha provisto. Dios no exige a nadie por encima de sus posibilidades. Dios hará que luego de toda estrechez venga la prosperidad.",
+        "it": "L’agiato spenda della sua agiatezza, colui che ha scarse risorse spenda di quello che Allah gli ha concesso. Allah non impone a nessuno se non in misura di ciò che Egli ha concesso. Allah farà seguire il benessere al disagio.",
+        "ru": "Пусть обладающий достатком расходует согласно своему достатку. А тот, кто стеснен в средствах, пусть расходует из того, чем его одарил Аллах. Аллах не возлагает на человека сверх того, что Он даровал ему. После тяготы Аллах создает облегчение.",
+        "tr": "Eli geniş olan genişliğine göre nafaka versin. Rızkı kısılmış bulunan da Allah'ın kendisine verdiğinden versin. Allah bir kişiye ne vermişse ancak onu teklif eder. Allah bir güçlükten sonra bir kolaylık yaratacaktır.",
+        "de": "Der Wohlhabende soll entsprechend seinem Wohlstand (die Aufwendungen) ausgeben. Und wem seine Versorgung bemessen (zugeteilt) wurde, der soll (eben) von dem ausgeben, was Allah ihm gegeben hat. Allah erlegt keiner Seele mehr auf als das, was Er ihr gegeben hat. Allah wird nach Schwierigkeit Erleichterung schaffen.",
+        "pt": "Que o abastado retribua isso, segundo as suas posses; quanto àquele, cujos recursos forem parcos, que retribua comaquilo com que Deus lhe agraciou. Deus não impõe a ninguém obrigação superior ao que lhe concedeu; Deus trocará adificuldade pela facilidade.",
+        "nl": "Laat de welvarende besteden volgens zijn welvaart; en degene wiens voorzieningen beperkt zijn, laat hem besteden van wat Allah hem heeft gegeven. Allah belast geen ziel dan volgens wat Hij haar heeft gegeven. Allah zal na moeilijkheden gemak schenken.",
+        "ur": "خوشحال آدمی اپنی خوشحالی کے مطابق نفقہ دے، اور جس کو رزق کم دیا گیا ہو وہ اُسی مال میں سے خرچ کرے جو اللہ نے اسے دیا ہے اللہ نے جس کو جتنا کچھ دیا ہے اس سے زیادہ کا وہ اُسے مکلف نہیں کرتا بعید نہیں کہ اللہ تنگ دستی کے بعد فراخ دستی بھی عطا فرما دے",
+        "bn": "বিত্তবানে নিজ সামৰ্থ অনুযায়ী ব্যয় কৰিব আৰু যাৰ জীৱনোপকৰণ সীমিত তাক আল্লাহে যি দান কৰিছে তাৰ পৰা ব্যয় কৰিব। আল্লাহে যাক যি সামৰ্থ দিছে তাতকৈ বেছি গুৰুতৰ বোজা তেওঁ তাৰ ওপৰত জাপি নিদিয়ে। নিশ্চয় আল্লাহে কঠিন অৱস্থাৰ পিছত সচ্চলতা প্ৰদান কৰিব।",
+        "fa": "کسانی که دارا [و ثروتمند] هستند، باید از دارایی [و ثروت] خود [بر زن مطلقه و فرزندش] خرج کنند، و کسی‌ که تنگدست است، باید از آنچه که الله به او داده [و در توانش است] خرج کند. الله هیچ کس را جز به ‌آن اندازه که به او [توان] داده است مکلّف نمی‌کند. الله به زودی بعد از سختی [و تنگدستی،] آسانی [و گشایش] قرار می‌دهد."
+      }
+    },
+    {
+      "verse_number": 5225,
+      "verse_key": "65:8",
+      "arabic_text": "وَكَأَيِّن مِّن قَرْيَةٍ عَتَتْ عَنْ أَمْرِ رَبِّهَا وَرُسُلِهِۦ فَحَاسَبْنَـٰهَا حِسَابًا شَدِيدًا وَعَذَّبْنَـٰهَا عَذَابًا نُّكْرًا",
+      "phonetic_text": "Wakaayyin min qaryatin AAatat AAan amrirabbiha warusulihi fahasabnaha hisabanshadeedan waAAaththabnaha AAathabannukra",
+      "translations": {
+        "fr": "Combien de cités se sont dressées contre l’ordre de leur Seigneur et de Ses Messagers ! Nous le leur fîmes payer cher,<sup foot_note=195190>1</sup> et Nous sévîmes contre elles par un supplice des plus atroces.",
+        "en": "Many a town that insolently opposed the command of its Lord and His messengers We have brought sternly to account: We punished them severely",
+        "es": "¡A cuántos pueblos que desobedecieron a su Señor y a Sus Mensajeros les hice rendir cuentas en forma severa y les azoté con un castigo nunca visto!",
+        "it": "Quante città si mostrarono orgogliose di fronte all’ordine del loro Signore e dei Suoi messaggeri! Le costringemmo ad un rendiconto rigoroso, e le castigammo di un orribile castigo.",
+        "ru": "Сколько городов ослушались повелений своего Господа и Его посланников! Мы представили им суровый счет и подвергли их ужасным мучениям.",
+        "tr": "Nice kent var ki Rablerinin ve O'nun elçilerinin emrine başkaldırdı, biz de onları çetin bir hesaba çektik ve onlara görülmemiş şekilde azab ettik.",
+        "de": "Und wieviele Städte lehnten sich gegen den Befehl ihres Herrn und Seiner Gesandten auf, worauf Wir sie einer strengen Abrechnung unterzogen und mit entsetzlicher Strafe straften.",
+        "pt": "Quantas cidades descartaram a autoridade do seu Senhor e dos Seus mensageiros! Saldamo-lhes as contas rigorosamente elhes infligimos um castigo exemplar.",
+        "nl": "En hoeveel steden zijn er niet in opstand gekomen tegen het bevel van hun Heer en Zijn Boodschappers, waarop Wij met hen afrekenden met een harde afrekening. En Wij hebben hen met een verschrikkelijke bestraffing bestraft.",
+        "ur": "<sup foot_note=\"171606\">1</sup> کتنی ہی بستیاں ہیں جنہوں نے اپنے رب اور اُس کے رسُولوں کے حکم سے سرتابی کی تو ہم نے اُن سے سخت محاسبہ کیا  اور اُن کو بُری طرح سزا دی۔",
+        "bn": "আৰু বহুতো জনপদে সিহঁতৰ প্ৰতিপালক আৰু তেওঁৰ ৰাছুলৰ নিৰ্দেশৰ বিৰুদ্ধাচাৰণ কৰিছিল। ফলত আমি সিহঁতৰ পৰা কঠিন হিচাপ লৈছিলো আৰু আমি সিহঁতক কঠিন শাস্তি বিহিছিলো।",
+        "fa": "چه بسیار [اهالی] شهرها که از فرمان پروردگارشان و [فرمان] پیامبرانش سرپیچی کردند؛ ما به شدت از آنها حساب کشیدیم و آنها را به عذابی سخت [و سهمناک] عذاب کردیم."
+      }
+    },
+    {
+      "verse_number": 5226,
+      "verse_key": "65:9",
+      "arabic_text": "فَذَاقَتْ وَبَالَ أَمْرِهَا وَكَانَ عَـٰقِبَةُ أَمْرِهَا خُسْرًا",
+      "phonetic_text": "Fathaqat wabala amrihawakana AAaqibatu amriha khusra",
+      "translations": {
+        "fr": "Elles goûtèrent alors le péril dû à leur conduite, et leur sort fut la ruine.",
+        "en": "to make them taste the ill effect of their conduct- the result of their conduct was ruin.",
+        "es": "Ellos sufrieron las consecuencias de sus obras. Su final fue la perdición.",
+        "it": "Gustarono le conseguenze della loro condotta e l’esito della loro condotta fu la dannazione.",
+        "ru": "Они вкусили пагубные последствия своих деяний, и исходом их деяний стал убыток.",
+        "tr": "İşlerinin vebalini tattılar. İşlerinin sonucu tam bir hüsran olmuştur.",
+        "de": "Da kosteten sie die schlimmen Folgen ihres Verhaltens, und das Ende ihres Verhaltens war (nur) Verlust.",
+        "pt": "Sofreram, então, a dura conseqüência da sua conduta, e o resultado da sua conduta foi a perdição.",
+        "nl": "Zij proefden toen het kwaad van hun wandaden, en het einde van hun zaak was een verlies.",
+        "ur": "انہوں نے اپنے کیے کا مزا چکھ لیا اور اُن کا انجام کار گھاٹا ہی گھاٹا ہے",
+        "bn": "ফলত সিহঁতে নিজ কৃতকৰ্মৰ সোৱাদ পালে; আৰু সিহঁতৰ কৰ্মৰ পৰিণাম আছিল ক্ষতিয়েই ক্ষতি।",
+        "fa": "پس آنان کیفر کار خود را چشیدند، و سرانجامِ کارشان زیان بود."
+      }
+    },
+    {
+      "verse_number": 5227,
+      "verse_key": "65:10",
+      "arabic_text": "أَعَدَّ ٱللَّهُ لَهُمْ عَذَابًا شَدِيدًا ۖ فَٱتَّقُوا۟ ٱللَّهَ يَـٰٓأُو۟لِى ٱلْأَلْبَـٰبِ ٱلَّذِينَ ءَامَنُوا۟ ۚ قَدْ أَنزَلَ ٱللَّهُ إِلَيْكُمْ ذِكْرًا",
+      "phonetic_text": "aAAadda Allahu lahum AAathabanshadeedan fattaqoo Allaha ya olee al-albabiallatheena amanoo qad anzala Allahu ilaykum thikra",
+      "translations": {
+        "fr": "Allah leur a préparé un terrible supplice. Craignez Allah, ô esprits sagaces qui avez cru ! Allah a fait descendre (en révélation) pour vous un Rappel,<sup foot_note=195191>1</sup>",
+        "en": "God has prepared a severe torment for them. So, you who have understanding, you who believe, beware of God. He has sent you the Quran",
+        "es": "[A ellos] Dios les ha preparado un castigo severo. Tened temor de Dios, vosotros que reflexionáis y sois creyentes, ya que Dios ha descendido para vosotros el Corán [para que lo toméis como código de vida],",
+        "it": "Allah ha preparato loro un severo castigo. Temete dunque Allah, o dotati d’intelletto, voi che avete la fede. Invero Allah ha fatto scendere su di voi un Monito,",
+        "ru": "Аллах приготовил для них тяжкие мучения. Бойтесь же Аллаха, о обладающие разумом, которые уверовали. Аллах уже ниспослал вам напоминание -",
+        "tr": "Allah onlara şiddetli bir azap hazırlamıştır. O halde ey inanan aklı selim sahipleri! Allah'tan korkun, Allah size bir uyarıcı gönderdi.",
+        "de": "Allah hat für sie strenge Strafe bereitet. So fürchtet Allah, o die ihr Verstand besitzt und die ihr glaubt. Allah hat ja zu euch eine Ermahnung (als Offenbarung) herabgesandt,",
+        "pt": "Deus lhes preparou um severo castigo. Temei, pois, a Deus, ó fiéis sensatos, pois Deus vos enviou uma Mensagem.",
+        "nl": "Allah heeft voor hen een harde bestraffing bereid. Vreest daarom Allah, O bezitters van verstand die geloven! Waarlijk, Allah heeft tot jullie een Vermaning gezonden.",
+        "ur": "اللہ نے (آخرت میں) ان کے لیے سخت عذاب مہیا کر رکھا ہے پس اللہ سے ڈرو اے صاحب عقل لوگو جو ایمان لائے ہو اللہ نے تمہاری طرف ایک نصیحت نازل کر دی ہے",
+        "bn": "আল্লাহে সিহঁতৰ বাবে কঠিন শাস্তি প্ৰস্তুত কৰি ৰাখিছে। এতেকে তোমালোকে আল্লাহৰ তাক্বৱা অৱলম্বন কৰা, হে বোধসম্পন্ন ব্যক্তিসকল! যিসকলে ঈমান আনিছা। নিশ্চয় আল্লাহে তোমালোকৰ প্ৰতি অৱতীৰ্ণ কৰিছে এটা উপদেশ---",
+        "fa": "الله عذاب سختی برایشان مهیّا کرده است؛ پس ای خردمندانی که ایمان آورده‌اید، از الله پروا کنید. همانا الله ذکر [= قرآن] را به سوی شما نازل کرده است."
+      }
+    },
+    {
+      "verse_number": 5228,
+      "verse_key": "65:11",
+      "arabic_text": "رَّسُولًا يَتْلُوا۟ عَلَيْكُمْ ءَايَـٰتِ ٱللَّهِ مُبَيِّنَـٰتٍ لِّيُخْرِجَ ٱلَّذِينَ ءَامَنُوا۟ وَعَمِلُوا۟ ٱلصَّـٰلِحَـٰتِ مِنَ ٱلظُّلُمَـٰتِ إِلَى ٱلنُّورِ ۚ وَمَن يُؤْمِنۢ بِٱللَّهِ وَيَعْمَلْ صَـٰلِحًا يُدْخِلْهُ جَنَّـٰتٍ تَجْرِى مِن تَحْتِهَا ٱلْأَنْهَـٰرُ خَـٰلِدِينَ فِيهَآ أَبَدًا ۖ قَدْ أَحْسَنَ ٱللَّهُ لَهُۥ رِزْقًا",
+      "phonetic_text": "Rasoolan yatloo AAalaykum ayatiAllahi mubayyinatin liyukhrija allatheena amanoowaAAamiloo assalihati mina aththulumatiila annoori waman yu/min billahiwayaAAmal salihan yudkhilhu jannatin tajreemin tahtiha al-anharu khalideena feehaabadan qad ahsana Allahu lahu rizqa",
+      "translations": {
+        "fr": "(et envoyé) un Messager qui vous récite les versets explicites d’Allah, pour faire sortir ceux qui ont cru et ont accompli les bonnes œuvres des ténèbres vers la lumière. (Car) ceux qui croient en Allah et font le bien, (Allah) les fera entrer dans des jardins sous lesquels coulent les rivières, où ils séjourneront à tout jamais. Allah leur<sup foot_note=195192>1</sup> dispensera ce qu’il y a de meilleur !",
+        "en": "and a messenger- reciting to you God’s revelations that make things clear- to bring those who believe and do righteous deeds from darkness into light. God will admit those who believe in Him and do righteous deeds into Gardens graced with flowing streams, where they will remain for ever––He has made good provision for them.",
+        "es": "y os ha enviado un Mensajero que os recita el claro Mensaje de Dios, para sacar de las tinieblas hacia la luz a quienes crean y obren correctamente. A quien crea en Dios y obre piadosamente, Él lo introducirá en jardines por donde corren ríos, en los que vivirán eternamente. ¡Qué hermoso sustento!",
+        "it": "un Messaggero che vi recita i versetti espliciti di Allah, per trarre dalle tenebre alla luce coloro che credono e compiono il bene. Chi crede in Allah e compie il bene, Egli lo farà entrare nei Giardini in cui scorrono i ruscelli, dove rimarrà in perpetuo. A costui Allah ha concesso buona provvidenza.",
+        "ru": "Посланника, который читает вам ясные аяты Аллаха, чтобы вывести тех, которые уверовали и совершали праведные деяния, из мраков к свету. Тех, которые уверовали в Аллаха и поступали праведно, Аллах введет в Райские сады, в которых текут реки. Они пребудут там вечно. Аллах уже сделал их удел прекрасным!",
+        "tr": "Size Allah'ın açık açık âyetlerini okuyan bir elçi (gönderdi) ki inanıp faydalı işler yapanları, karanlıklardan aydınlığa çıkarsın. Kim Allah'a inanır ve yararlı iş yaparsa (Allah) onu, altlarından ırmaklar akan, içinde ebedi kalacakları cennetlere sokar. Allah ona gerçekten ne güzel rızık vermiştir.",
+        "de": "einen Gesandten, der euch Allahs Zeichen verliest, die alles klar machen, um diejenigen, die glauben und rechtschaffene Werke tun, aus den Finsternissen ins Licht hinauszubringen. Und wer an Allah glaubt und rechtschaffen handelt, den wird Er in Gärten eingehen lassen, durcheilt von Bächen, ewig und auf immer darin zu bleiben. Allah hat ihm (damit) ja eine schöne Versorgung gewährt.",
+        "pt": "Por um Mensageiro, que vos recita os lúcidos versículos de Deus, para tirar os que crêem e praticam o bem, das trevas, para os levar à luz. E os que crêem em Deus e praticam o bem, Ele os introduzirá em jardins, abaixo dos quais correm osrios, onde morarão eternamente. Deus lhes reservou uma excelente provisão.",
+        "nl": "Een Boodschapper die voor jullie de verduidelijkende Verzen van Allah voordraagt, om degenen die geloven en goede daden verrichten uit de duisternissen naar het licht te voeren. En wie in Allah gelooft en goede daden verricht: Hij zal hem Tuinen (het Paradijs) doen binnengaan waar de rivieren onder door stromen. Zij zijn daarin eeuwig levenden, voor altijd. Allah heeft hem waarlijk een goede voorziening gegeven.",
+        "ur": "ایک ایسا رسُول <sup foot_note=\"187948\">1</sup> جو تم کو اللہ کی صاف صاف ہدایت دینے والی آیات سناتا ہے تاکہ ایمان لانے والوں اور نیک عمل کرنے والوں کو تاریکیوں سے نکال کر روشنی میں لے آئے۔ <sup foot_note=\"187949\">2</sup> جو کوئی اللہ پر ایمان لائے اور نیک عمل کرے، اللہ اُسے ایسی جنّتوں میں داخل کرے گا جن کے نیچے نہریں بہتی ہوں گی۔ یہ لوگ اُن میں ہمیشہ رہیں گے۔ اللہ نے ایسے شخص کے لیے بہترین رزق رکھا ہے",
+        "bn": "এজন ৰাছুল, যিয়ে তোমালোকৰ ওচৰত আল্লাহৰ সুস্পষ্ট আয়াতসমূহ তিলাৱাত কৰে, যাতে সেইসকল লোকক অন্ধকাৰৰ পৰা পোহৰলৈ উলিয়াই আনিব পাৰে যিসকলে ঈমান আনিছে আৰু সৎকৰ্ম কৰিছে; আৰু যিয়ে আল্লাহৰ ওপৰত ঈমান আনিব আৰু সৎকাম কৰিব তেওঁ তাক জান্নাতত প্ৰৱেশ কৰাব, যাৰ তলত নদীসমূহ প্ৰবাহিত, তাত সিহঁত চিৰকাল অৱস্থান কৰিব। নিশ্চয় আল্লাহে তাক উত্তম জীৱিকা প্ৰদান কৰিব।",
+        "fa": "[و نیز] پیامبری [فرستاده] که آیات روشن الله را بر شما می‌خوانَد، تا کسانی را که ایمان آورده‌ و کارهای شایسته انجام داده‌اند، از تاریکی‌ها به سوی نور بیرون آورَد؛ و هر کس به الله ایمان آورَد و کار شایسته انجام دهد، [الله] او را به باغ‌هایی [از بهشت] وارد می‌کند که از زیر [درختان] آن جویبارها جاری است؛ جاودانه در آن می‌مانند. به راستی الله رزق و روزی‌اش را نیکو گردانیده است."
+      }
+    },
+    {
+      "verse_number": 5229,
+      "verse_key": "65:12",
+      "arabic_text": "ٱللَّهُ ٱلَّذِى خَلَقَ سَبْعَ سَمَـٰوَٰتٍ وَمِنَ ٱلْأَرْضِ مِثْلَهُنَّ يَتَنَزَّلُ ٱلْأَمْرُ بَيْنَهُنَّ لِتَعْلَمُوٓا۟ أَنَّ ٱللَّهَ عَلَىٰ كُلِّ شَىْءٍ قَدِيرٌ وَأَنَّ ٱللَّهَ قَدْ أَحَاطَ بِكُلِّ شَىْءٍ عِلْمًۢا",
+      "phonetic_text": "Allahu allathee khalaqa sabAAasamawatin wamina al-ardi mithlahunnayatanazzalu al-amru baynahunna litaAAlamoo anna AllahaAAala kulli shay-in qadeerun waanna Allaha qad ahatabikulli shay-in AAilma",
+      "translations": {
+        "fr": "C’est Allah Qui a créé sept cieux et des terres en nombre semblable. Entre (cieux et terres), l’ordre descend (toujours) pour que vous sachiez qu’Allah est de Toute chose Infiniment Capable, et qu’Allah Cerne Toute Chose par Sa Science.",
+        "en": "It is God who created seven heavens and a similar [number] of earths. His command descends throughout them. So you should realize that He has power over all things and that His knowledge encompasses everything.",
+        "es": "Dios ha creado siete cielos y la Tierra de manera similar<sup foot_note=169452>1</sup>. A través de ellos desciende Su designio para que sepáis que Dios tiene poder sobre todas las cosas y que todo lo abarca en Su conocimiento.",
+        "it": "Allah è Colui che ha creato sette cieli e altrettante terre. Scende il Suo Ordine tra di loro, affinché sappiate che in verità Allah è onnipotente e che Allah abbraccia nella Sua Scienza ogni cosa. <a class=f><sup foot_note=160234>1</sup></a> «il termine prescritto»: la Idda è il periodo del ritiro legale della donna divorziata, al termine del quale il divorzio diventa definitivo ed essa può risposarsi (vedi II, e la nota). <a class=f><sup foot_note=160235>2</sup></a> «una provata indecenza»: si intende l’adulterio. <a class=f><sup foot_note=160236>3</sup></a> «Fate abitare le vostre donne»: sottintendendo: «che si trovano nel periodo di Idda». <a class=f><sup foot_note=160237>4</sup></a> «Se andrete incontro a difficoltà»: «nel mettervi d’accordo sul compenso in cambio del quale allatteranno».",
+        "ru": "Аллах - Тот, Кто сотворил семь небес и столько же земель. Повеление нисходит между ними, чтобы вы знали, что Аллах способен на всякую вещь и что Аллах объемлет знанием всякую вещь.",
+        "tr": "Allah O'dur ki yedi göğü ve yerden de onlar kadarını yarattı. Emir bunlar arasında iner ki Allah'ın her şeye kâdir olduğunu ve Allah'ın bilgisinin, her şeyi kuşattığını bilesiniz.",
+        "de": "Allah ist es, Der sieben Himmel erschaffen hat, und von der Erde gleich (viel). Der Befehl (Allahs) kommt wahrhaftig zwischen ihnen herab, damit ihr wißt, daß Allah zu allem die Macht hat und daß Allah ja alles mit Seinem Wissen umfaßt.",
+        "pt": "Deus foi Quem criou sete firmamentos e outro tanto de terras; e Seus desígnios se cumprem, entre eles, para que saibaisque Deus é Onipotente e que Deus tudo abrange, com a Sua onisciência.",
+        "nl": "Allah is Degene Die de zeven hemelen heeft geschapen en zo ook de aarde. De beschikking daalt tussen hen (hemel en aarde) neer, opdat jullie weten dat Allah de Almachtige over alle zaken is en dat Allah alle zaken in kennis omvat.",
+        "ur": "اللہ وہ ہے جس نے سات آسمان بنائے اور زمین کی قسم سے بھی اُنہی کے مانند۔ <sup foot_note=\"187927\">1</sup> ان کے درمیان حکم نازل ہوتا رہتا ہے۔ (یہ بات تمہیں اس لیے بتائی جارہی ہے) تاکہ تم جان لو کہ اللہ ہر چیز پر قدرت رکھتا ہے، اور یہ کہ اللہ کا علم ہر چیز پر محیط ہے",
+        "bn": "তেৱেঁই আল্লাহ, যিজনে সাতখন আকাশ সৃষ্টি কৰিছে আৰু অনুৰূপ পৃথিৱীও, এইবোৰৰ মাজত নামি আহে তেওঁৰ নিৰ্দেশ; যাতে তোমালোকে জানিব পাৰা যে, আল্লাহ সকলো বস্তুৰ ওপৰত ক্ষমতাবান আৰু আল্লাহৰ জ্ঞানে সকলো বস্তুকে পৰিবেষ্টন কৰি আছে।",
+        "fa": "الله است که هفت آسمان را آفرید و از زمین [نیز] همانند آنها را [آفرید]؛ و فرمان [الله] پیوسته در میان آنها نازل می‌شود، تا بدانید که الله بر همه چیز تواناست، و اینکه علم الله بر همه چیز احاطه دارد."
+      }
+    }
+  ]
+}

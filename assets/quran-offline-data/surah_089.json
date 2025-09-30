@@ -1,0 +1,606 @@
+{
+  "surah_number": 89,
+  "extracted_at": "2025-09-20T15:17:17.377Z",
+  "verses": [
+    {
+      "verse_number": 5994,
+      "verse_key": "89:1",
+      "arabic_text": " وَٱلْفَجْرِ",
+      "phonetic_text": "Walfajr",
+      "translations": {
+        "fr": "Par l’aube !",
+        "en": "By the Daybreak,",
+        "es": "Juro por la Aurora,",
+        "it": "Per l’alba,",
+        "ru": "Клянусь зарею!",
+        "tr": "Andolsun fecre.",
+        "de": "Bei der Morgendämmerung",
+        "pt": "Pela aurora,",
+        "nl": "Bij de dageraad.",
+        "ur": "قسم ہے فجر کی",
+        "bn": "ফজৰৰ সময়ৰ শপত,",
+        "fa": "سوگند به سپيده‌دم [صبحگاهان]"
+      }
+    },
+    {
+      "verse_number": 5995,
+      "verse_key": "89:2",
+      "arabic_text": "وَلَيَالٍ عَشْرٍ",
+      "phonetic_text": "Walayalin AAashr",
+      "translations": {
+        "fr": "Par les Dix nuits !",
+        "en": "by the Ten Nights,",
+        "es": "por las diez noches<sup foot_note=169500>1</sup>,",
+        "it": "per le dieci notti <a class=f><sup foot_note=160611>1</sup></a> ,",
+        "ru": "Клянусь десятью ночами!",
+        "tr": "On geceye (Zilhicce ayının ilk on gecesine).",
+        "de": "und den zehn Nächten",
+        "pt": "E pelas dez noites,",
+        "nl": "Bij de tien nachten. (De eerste tien dagen en nachten van de maand Dzoelhiddjah)",
+        "ur": "اور دس راتوں کی",
+        "bn": "শপত দহ ৰাতিৰ,",
+        "fa": "و به شب‌های دهگانه [آغاز ذی‌حجه]"
+      }
+    },
+    {
+      "verse_number": 5996,
+      "verse_key": "89:3",
+      "arabic_text": "وَٱلشَّفْعِ وَٱلْوَتْرِ",
+      "phonetic_text": "WashshafAAi walwatr",
+      "translations": {
+        "fr": "Par le pair et l’impair !",
+        "en": "by the even and the odd,",
+        "es": "por [las oraciones] pares e impares,",
+        "it": "per il pari e per il dispari <a class=f><sup foot_note=160612>1</sup></a>",
+        "ru": "Клянусь четом и нечетом!",
+        "tr": "Çifte ve teke.",
+        "de": "und dem geraden und dem ungeraden (Tag)",
+        "pt": "E pelo par e pelo ímpar,",
+        "nl": "Bij het even en het oneven.",
+        "ur": "اور جفت اور طاق کی",
+        "bn": "শপত যোৰ আৰু বিযোৰৰ,",
+        "fa": "و به زوج و فرد [اشیاء]"
+      }
+    },
+    {
+      "verse_number": 5997,
+      "verse_key": "89:4",
+      "arabic_text": "وَٱلَّيْلِ إِذَا يَسْرِ",
+      "phonetic_text": "Wallayli itha yasr",
+      "translations": {
+        "fr": "Par la nuit quand elle passe!",
+        "en": "by the passing night––",
+        "es": "y por la noche cuando transcurre<sup foot_note=169501>1</sup>.",
+        "it": "e per la notte quando trascorre.",
+        "ru": "Клянусь ночью, когда она проходит!",
+        "tr": "Gitmekte olan geceye.",
+        "de": "und der Nacht, wenn sie fortzieht!",
+        "pt": "E pela noite, quando se retira (que sereis castigados)!",
+        "nl": "Bij de nacht wanneer hij voorbijgaat.",
+        "ur": "اور رات کی جبکہ وہ رخصت ہو رہی ہو",
+        "bn": "আৰু ৰাতিৰ শপত যেতিয়া ই বিদায় লয়,",
+        "fa": "و سوگند به شب، هنگامی‌ که [حرکت می‌کند و] می‌رود."
+      }
+    },
+    {
+      "verse_number": 5998,
+      "verse_key": "89:5",
+      "arabic_text": "هَلْ فِى ذَٰلِكَ قَسَمٌ لِّذِى حِجْرٍ",
+      "phonetic_text": "Hal fee thalika qasamun lithee hijr",
+      "translations": {
+        "fr": "N’y a-t-il pas là un serment pour un esprit sagace?",
+        "en": "is this oath strong enough for a rational person?",
+        "es": "¿Acaso no son estos juramentos [argumentos suficientes sobre el poder de Dios] para los dotados de intelecto?",
+        "it": "Non è questo un giuramento per chi ha intelletto?",
+        "ru": "Неужели этих клятв не достаточно для обладающего разумом?",
+        "tr": "Nasıl, bunlarda bir akıl sahibi için yemin var değil mi?",
+        "de": "Ist darin ein (ausreichender) Schwur für jemanden, der Klugheit besitzt?",
+        "pt": "Porventura, não há nisso um juramento adequado, para o sensato?",
+        "nl": "Is daarin geen eed voor de bezitter van verstand?",
+        "ur": "کیا اِس میں کسی صاحب ِ عقل کے لیے کوئی قسم ہے؟ <sup foot_note=\"188461\">1</sup>",
+        "bn": "ইয়াৰ মাজত বোধসম্পন্ন ব্যক্তিৰ বাবে দৃঢ় প্ৰমাণ নাইনে?",
+        "fa": "آیا در این [چیزها] سوگندی برای صاحب‌خرد نیست [که او را قانع نماید]؟"
+      }
+    },
+    {
+      "verse_number": 5999,
+      "verse_key": "89:6",
+      "arabic_text": "أَلَمْ تَرَ كَيْفَ فَعَلَ رَبُّكَ بِعَادٍ",
+      "phonetic_text": "Alam tara kayfa faAAala rabbuka biAAad",
+      "translations": {
+        "fr": "Ne vois-tu pas ce que ton Seigneur a fait des ‘Ad,",
+        "en": "Have you [Prophet] considered how your Lord dealt with [the people] of 'Ad,",
+        "es": "¿No has visto cómo tu Señor castigó al pueblo de ‘Ád<sup foot_note=169502>1</sup>",
+        "it": "Non hai visto come il tuo Signore ha trattato gli ‘Ad?",
+        "ru": "Неужели ты не видел, как Господь твой поступил с адитами -",
+        "tr": "Görmedin mi Rabbin ne yaptı Âd kavmine?",
+        "de": "Siehst du nicht, wie dein Herr mit den ’Ad verfuhr,",
+        "pt": "Não reparaste em como o teu Senhor procedeu, em relação à (tribo de) Ad,",
+        "nl": "Heb jij niet vernomen hoe jouw Heer de 'Âd heeft behandeld?",
+        "ur": "<sup foot_note=\"171634\">1</sup> تم نے دیکھا نہیں کہ تمہارے ربّ نے کیا برتاوٴ کیا",
+        "bn": "তুমি দেখা নাইনে, তোমাৰ প্ৰতিপালকে আদ সম্প্ৰদায়ৰ লগত কি আচৰণ কৰিছিল?",
+        "fa": "[ای پیامبر،] آیا ندیدی که پروردگارت با [قوم] عاد چه کرد؟"
+      }
+    },
+    {
+      "verse_number": 6000,
+      "verse_key": "89:7",
+      "arabic_text": "إِرَمَ ذَاتِ ٱلْعِمَادِ",
+      "phonetic_text": "Irama thati alAAimad",
+      "translations": {
+        "fr": "et de Iram, la cité aux (hautes) colonnes,",
+        "en": "of Iram, [the city] of lofty pillars,",
+        "es": "en Iram?, el de las [construcciones con grandes] columnas,",
+        "it": "e Iram <a class=f><sup foot_note=160613>1</sup></a> dalla colonna,",
+        "ru": "народом Ирама, обладавшим колоннами (воздвигавшим высокие здания с колоннами или обладавшим могучим сложением и огромной силой),",
+        "tr": "Sütunlar sahibi İrem'e?",
+        "de": "(mit) Iram mit den Stützen,",
+        "pt": "Aos (habitantes de) Iram, (cidade) de pilares elevados,",
+        "nl": "Van de stad Iram met zijn zuilen?",
+        "ur": "اُونچے ستونوں والے عادِ اِرَم کے ساتھ، <sup foot_note=\"188462\">1</sup>",
+        "bn": "ইৰাম গোত্ৰৰ লগত, যিহঁতে অধিকাৰী আছিল সুউচ্চ প্ৰাসাদৰ?",
+        "fa": "[همان قبیلۀ] اِرَم که دارای [کاخ‌هایی با] ستونهای بلند بودند"
+      }
+    },
+    {
+      "verse_number": 6001,
+      "verse_key": "89:8",
+      "arabic_text": "ٱلَّتِى لَمْ يُخْلَقْ مِثْلُهَا فِى ٱلْبِلَـٰدِ",
+      "phonetic_text": "Allatee lam yukhlaq mithluha fee albilad",
+      "translations": {
+        "fr": "à laquelle jamais cité semblable ne fut créée dans la contrée ?",
+        "en": "whose like has never been made in any land,",
+        "es": "que no tenía similar entre los otros pueblos [en su opulencia].",
+        "it": "senza eguali tra le contrade,",
+        "ru": "подобных которому не было сотворено в городах?",
+        "tr": "Ki ülkeler içinde onun benzeri yaratılmamıştı.",
+        "de": "dergleichen nicht erschaffen wurden in den Landstrichen?",
+        "pt": "Cujo similar não foi criado em toda a terra?",
+        "nl": "Zoals nog nooit een stad is geschapen in de landen?",
+        "ur": "جن کے مانند کوئی قوم دنیا کے ملکوں میں پیدا نہیں کی گئی تھی؟ <sup foot_note=\"188463\">1</sup>",
+        "bn": "যাৰ সমতুল্য (জাতি) কোনো দেশতে সৃষ্টি কৰা হোৱা নাই;",
+        "fa": "که همانند آن در شهرها آفریده نشده بود؟"
+      }
+    },
+    {
+      "verse_number": 6002,
+      "verse_key": "89:9",
+      "arabic_text": "وَثَمُودَ ٱلَّذِينَ جَابُوا۟ ٱلصَّخْرَ بِٱلْوَادِ",
+      "phonetic_text": "Wathamooda allatheena jaboo assakhrabilwad",
+      "translations": {
+        "fr": "Et (ce qu’Il a fait) des Thamûd qui avaient taillé (leurs maisons) à même le roc dans la vallée,",
+        "en": "and the Thamud, who hewed into the rocks in the valley,",
+        "es": "Y al pueblo de Zamud, que esculpieron sus casas en las montañas rocosas del valle.",
+        "it": "e i Thamùd che scavavano la roccia nella vallata",
+        "ru": "С самудянами, рассекавшими скалы в лощине?",
+        "tr": "Vâdide kayaları yontan Semud kavmine?",
+        "de": "Und (mit) den Tamud, die im Tal die Felsen aushöhlten?",
+        "pt": "E no povo de Samud, que perfurou rochas no vale?",
+        "nl": "En de Tsamôed die de rotsen uithieuwen in de vallei?",
+        "ur": "اور ثمود کے ساتھ جنہوں نے وادی میں چٹانیں تراشی تھیں؟ <sup foot_note=\"188464\">1</sup>",
+        "bn": "আৰু ছামূদ সম্প্ৰদায়ৰ লগত (কি আচৰণ কৰিছিল) যিসকলে ভৈয়ামত শিল কাটি ঘৰ নিৰ্মাণ কৰিছিল;",
+        "fa": "و [نیز قوم] ثَمود، کسانی که صخره‌های سخت را از [کنار] وادی می‌تراشیدند [و خانه برای خودشان می‌ساختند]؟"
+      }
+    },
+    {
+      "verse_number": 6003,
+      "verse_key": "89:10",
+      "arabic_text": "وَفِرْعَوْنَ ذِى ٱلْأَوْتَادِ",
+      "phonetic_text": "WafirAAawna thee al-awtad",
+      "translations": {
+        "fr": "et de Pharaon, (qui avait inventé le supplice) des épieux,",
+        "en": "and the mighty and powerful Pharaoh?",
+        "es": "Y al Faraón, el de las estacas<sup foot_note=169503>1</sup>.",
+        "it": "Pre-Eg. n.Di versetti. Il nome della sura deriva dal vers. In nome di Allah, il Compassionevole, il Misericordioso. e Faraone, quello dei pali <a class=f><sup foot_note=160610>1</sup></a> ?",
+        "ru": "С Фараоном, владевшим кольями (обладавшим множеством воинов, которые поддерживали его власть, подобно тому, как колышки поддерживают шатер, или привязывавшим людей к кольям во время казни)?",
+        "tr": "Kazıklar sahibi (güçlü, kuvvetli) Firavun'a?",
+        "de": "Und (mit) Fir’aun, dem Besitzer der Pfähle,",
+        "pt": "E no Faraó, o senhor das estacas,",
+        "nl": "En Fir'aun, de bezitter van de pinnen?",
+        "ur": "اور میخوں والے فرعون <sup foot_note=\"188465\">1</sup> کے ساتھ؟",
+        "bn": "আৰু শূলদণ্ডৰ অধিকাৰী ফিৰআউনৰ লগত (কি আচৰণ কৰিছিল)",
+        "fa": "و فرعون، صاحب سپاه [بزرگ و قدرتمند]."
+      }
+    },
+    {
+      "verse_number": 6004,
+      "verse_key": "89:11",
+      "arabic_text": "ٱلَّذِينَ طَغَوْا۟ فِى ٱلْبِلَـٰدِ",
+      "phonetic_text": "Allatheena taghaw fee albilad",
+      "translations": {
+        "fr": "qui tous transgressaient dans la contrée,",
+        "en": "All of them committed excesses in their lands,",
+        "es": "Todos ellos fueron tiranos con los pueblos,",
+        "it": "[Tutti] costoro furono ribelli nel mondo",
+        "ru": "Они преступали границы дозволенного на земле",
+        "tr": "Bunlar ülkelerde azmışlardı.",
+        "de": "die (sie alle) das Maß (an Frevel) in den Landstrichen überschritten",
+        "pt": "Os quais transgrediram, na terra,",
+        "nl": "Degenen die overtraden in het land?",
+        "ur": "یہ وہ لوگ تھے جنہوں نے دنیا کے ملکوں میں بڑی سرکشی کی تھی",
+        "bn": "যিসকলে দেশত সীমালঙ্ঘন কৰিছিল,",
+        "fa": "[همان] کسانی که در شهر‌ها طغیان [و سرکشی] کردند"
+      }
+    },
+    {
+      "verse_number": 6005,
+      "verse_key": "89:12",
+      "arabic_text": "فَأَكْثَرُوا۟ فِيهَا ٱلْفَسَادَ",
+      "phonetic_text": "Faaktharoo feeha alfasad",
+      "translations": {
+        "fr": "et y semaient un grand désordre ?",
+        "en": "and spread corruption there:",
+        "es": "sembrando la corrupción.",
+        "it": "e seminarono la corruzione,",
+        "ru": "и распространяли в них много нечестия.",
+        "tr": "Oralarda çok bozgunculuk yapmışlardı.",
+        "de": "und darin viel Unheil stifteten?",
+        "pt": "E multiplicaram, nela, a corrupção,",
+        "nl": "En daarin veelvuldig verderf zaaiden?",
+        "ur": "اور ان میں بہت فساد پھیلایا تھا",
+        "bn": "তাৰ পিছত তাত অশান্তি বৃদ্ধি কৰিছিল।",
+        "fa": "و فسادِ بسیار در آنها به بار آوردند."
+      }
+    },
+    {
+      "verse_number": 6006,
+      "verse_key": "89:13",
+      "arabic_text": "فَصَبَّ عَلَيْهِمْ رَبُّكَ سَوْطَ عَذَابٍ",
+      "phonetic_text": "Fasabba AAalayhim rabbuka sawtaAAathab",
+      "translations": {
+        "fr": "Ton Seigneur sévit alors contre eux par le fouet de (Son) supplice.",
+        "en": "your Lord let a scourge of punishment loose on them.",
+        "es": "Pero como consecuencia de eso tu Señor les azotó con un castigo,",
+        "it": "e il tuo Signore calò su di loro la frusta del castigo.",
+        "ru": "Тогда твой Господь пролил на них бич мучений.",
+        "tr": "Bu yüzden Rabbin onların üstüne azap kamçısı yağdırdı.",
+        "de": "Da schüttete dein Herr auf sie eine Geißel von Strafe aus.",
+        "pt": "Pelo que o teu Senhor lhes infligiu variados castigos?",
+        "nl": "Toen deed jouw Heer de gesel van de bestraffing op hen neerdalen.",
+        "ur": "آخرکار تمہارے رب نے ان پر عذاب کا کوڑا برسا دیا",
+        "bn": "ফলত তোমাৰ প্ৰতিপালকে সিহঁতৰ ওপৰত শাস্তিৰ চাবুক মাৰিলে।",
+        "fa": "آنگاه پروردگارت تازیانۀ عذاب را بر آنان فرود آورد."
+      }
+    },
+    {
+      "verse_number": 6007,
+      "verse_key": "89:14",
+      "arabic_text": "إِنَّ رَبَّكَ لَبِٱلْمِرْصَادِ",
+      "phonetic_text": "Inna rabbaka labilmirsad",
+      "translations": {
+        "fr": "Car, certes, ton Seigneur toujours guette.",
+        "en": "Your Lord is always watchful.",
+        "es": "tu Señor está atento [a las acciones de la gente].",
+        "it": "In verità il tuo Signore è all’erta.",
+        "ru": "Воистину, твой Господь - в засаде (предоставляет отсрочку грешникам, чтобы затем неожиданно наказать их за ослушание).",
+        "tr": "Kuşkusuz Rabbin her an gözetlemededir.",
+        "de": "Gewiß, dein Herr wartet ja (auf sie).",
+        "pt": "Atenta para o fato de que o teu Senhor está sempre alerta.",
+        "nl": "Voorwaar, jouw Heer is zeker waakzaam.",
+        "ur": "حقیقت یہ ہے کہ تمہارا ربّ گھات لگائے ہوئے ہے۔ <sup foot_note=\"188466\">1</sup>",
+        "bn": "নিশ্চয় তোমাৰ প্ৰতিপালকে সতৰ্ক দৃষ্টি ৰাখে।",
+        "fa": "یقیناً پروردگار تو در کمینگاه است."
+      }
+    },
+    {
+      "verse_number": 6008,
+      "verse_key": "89:15",
+      "arabic_text": "فَأَمَّا ٱلْإِنسَـٰنُ إِذَا مَا ٱبْتَلَىٰهُ رَبُّهُۥ فَأَكْرَمَهُۥ وَنَعَّمَهُۥ فَيَقُولُ رَبِّىٓ أَكْرَمَنِ",
+      "phonetic_text": "Faamma al-insanu itha maibtalahu rabbuhu faakramahu wanaAAAAamahu fayaqoolu rabbeeakraman",
+      "translations": {
+        "fr": "Quand son Seigneur, en l’éprouvant, l’honore et le comble de bienfaits, l’homme dit : « Mon Seigneur m’a honoré ! »",
+        "en": "[The nature of] man is that, when his Lord tries him through honour and blessings, he says, ‘My Lord has honoured me,’",
+        "es": "El ser humano, cuando su Señor lo agracia, dice: “Mi Señor me ha honrado [porque lo merezco]”.",
+        "it": "Quanto all’uomo, allorché il suo Signore lo mette alla prova onorandolo e colmandolo di favore, egli dice: «Il mio Signore mi ha onorato».",
+        "ru": "Когда Господь испытывает человека, оказывая ему милость и одаряя его благами, тот говорит: «Господь мой почтил меня!».",
+        "tr": "Ama insan, her ne zaman Rabbi onu sınayıp da ikramda bulunur, nimet verirse, \"Rabbim bana ikram etti.\" der.",
+        "de": "Was nun den Menschen angeht, wenn sein Herr ihn prüft und ihn da(bei) freigebig behandelt und ihm ein wonnevolles Leben verschafft, so sagt er: Mein Herr behandelt mich freigebig.",
+        "pt": "Quanto ao homem, quando seu Senhor o experimenta, honrando-o e agraciando-o, diz (empertigado): Meu Senhor me honra!",
+        "nl": "Wat de mens betreft, wanneer zijn Heer hem op de proef stelt en hem aanzien geeft en hem genietingen schenkt, dan zegt hij: \"Mijn Heer heeft mij geëerd.\"",
+        "ur": "<sup foot_note=\"171635\">1</sup> مگر انسان کا حال یہ ہے کہ اس کا ربّ جب اس کو آزمائش میں ڈالتا ہے  اور اُسے عزت اور نعمت دیتا ہے تو وہ کہتا ہے کہ میرے ربّ نے مجھے عزت دار بنا دیا",
+        "bn": "আৰু মানুহৰ প্ৰকৃতি এনেকুৱা যে, যেতিয়া তাৰ প্ৰতিপালকে তাক সন্মান আৰু অনুগ্ৰহ প্ৰদান কৰি পৰীক্ষা কৰে, তেতিয়া সি কয়, ‘মোৰ প্ৰতিপালকে মোক সন্মানিত কৰিছে’।",
+        "fa": "و اما انسان هنگامی که پروردگارش او را بیازماید و گرامی دارد و به او نعمت بخشد، [مغرور می‌گردد و گمان می‌کند که این امر به خاطر کرامتی است که نزد الله دارد]، پس می‌گوید: «پروردگارم مرا گرامی داشته است»؛"
+      }
+    },
+    {
+      "verse_number": 6009,
+      "verse_key": "89:16",
+      "arabic_text": "وَأَمَّآ إِذَا مَا ٱبْتَلَىٰهُ فَقَدَرَ عَلَيْهِ رِزْقَهُۥ فَيَقُولُ رَبِّىٓ أَهَـٰنَنِ",
+      "phonetic_text": "Waamma itha ma ibtalahufaqadara AAalayhi rizqahu fayaqoolu rabbee ahanan",
+      "translations": {
+        "fr": "Mais quand, en l’éprouvant, Il lui accorde parcimonieusement sa subsistance, il proteste : « Mon Seigneur m’a humilié ! »",
+        "en": "but when He tries him through the restriction of his provision, he says, ‘My Lord has humiliated me.’",
+        "es": "En cambio cuando lo pone a prueba restringiendo su sustento, dice: “Mi Señor me ha despreciado [y no ha tenido en cuenta mis méritos]”.",
+        "it": "Quando invece lo mette alla prova lesinando i Suoi doni, egli dice: «Il mio Signore mi ha umiliato».",
+        "ru": "Когда же Он испытывает его, ограничивая его в пропитании, тот говорит: «Господь мой унизил меня!».",
+        "tr": "Ama her ne zaman da sınayıp rızkını daraltırsa, o vakit de, \"Rabbim beni zillete düşürdü.\" der.",
+        "de": "Was (ihn) aber angeht, wenn Er ihn prüft und ihm da(bei) seine Versorgung bemißt, so sagt er: Mein Herr setzt mich der Schmach aus.",
+        "pt": "Porém, quando o prova, restringindo a Sua graça, diz: Meu Senhor me afronta!",
+        "nl": "Maar wanneer Hij hem beproeft, en dan zijn voorzieningen beperkt, dan zegt hij: \"Mijn Heer heeft mij vernederd.\"",
+        "ur": "اور جب وہ اُس کو آزمائش میں ڈالتا ہے اور اُس کا رزق اُس پر تنگ کر دیتا ہے تو وہ کہتا ہے میرے ربّ نے مجھے ذلیل کر دیا۔ <sup foot_note=\"188467\">1</sup>",
+        "bn": "আৰু যেতিয়া তাক পৰীক্ষা কৰিবলৈ তাৰ জীৱিকা সংকুচিত কৰি দিয়ে, তেতিয়া সি কয়, ‘মোৰ প্ৰতিপালকে মোক লাঞ্ছিত কৰিছে’।",
+        "fa": "و اما هنگامی که او را بیازماید و روزی‌اش را بر او تنگ سازد، [دلسرد ‌شده و گمان می‌کند که این امر بدان سبب است که نزد الله، خوار و ذلیل است؛] پس می‌گوید: «پروردگارم مرا خوار کرده است»."
+      }
+    },
+    {
+      "verse_number": 6010,
+      "verse_key": "89:17",
+      "arabic_text": "كَلَّا ۖ بَل لَّا تُكْرِمُونَ ٱلْيَتِيمَ",
+      "phonetic_text": "Kalla bal la tukrimoonaalyateem",
+      "translations": {
+        "fr": "Que non ! Car c’est plutôt vous qui manquez de générosité envers l’orphelin,",
+        "en": "No indeed! You [people] do not honour orphans,",
+        "es": "¡Pero no! No habéis comprendido el verdadero significado de las pruebas [de la riqueza y la pobreza] y por eso no sois generosos con el huérfano",
+        "it": "No, siete voi che non onorate l’orfano,",
+        "ru": "Но нет! Вы же сами не почитаете сироту,",
+        "tr": "Hayır hayır, doğrusu siz yetime ikram etmiyorsunuz.",
+        "de": "Keineswegs! Vielmehr behandelt ihr die Waise nicht freigebig",
+        "pt": "Qual! Vós não honrais o órfão,",
+        "nl": "Nee! Jullie ondersteunen immers de wees niet.",
+        "ur": "ہرگز نہیں، <sup foot_note=\"188468\">1</sup> بلکہ تم یتیم سے عزّت کا سلوک نہیں کرتے <sup foot_note=\"188469\">2</sup>",
+        "bn": "কেতিয়াও নহয়, বৰং তোমালোকে এতীমক সমাদৰ নকৰা,",
+        "fa": "هرگز چنین نیست [که شما می‌پندارید]؛ بلکه شما یتیم را گرامی نمی‌دارید"
+      }
+    },
+    {
+      "verse_number": 6011,
+      "verse_key": "89:18",
+      "arabic_text": "وَلَا تَحَـٰٓضُّونَ عَلَىٰ طَعَامِ ٱلْمِسْكِينِ",
+      "phonetic_text": "Wala tahaddoona AAala taAAamialmiskeen",
+      "translations": {
+        "fr": "qui ne vous exhortez pas (les uns les autres) à nourrir le pauvre,",
+        "en": "you do not urge one another to feed the poor,",
+        "es": "ni exhortáis unos a otros a alimentar al pobre.",
+        "it": "che non vi sollecitate vicendevolmente a nutrire il povero,",
+        "ru": "не побуждаете друг друга кормить бедняка,",
+        "tr": "Birbirinizi yoksulu yedirmeye teşvik etmiyorsunuz.",
+        "de": "und haltet euch nicht gegenseitig zur Speisung des Armen an.",
+        "pt": "Nem nos estimulais a alimentar o necessitado;",
+        "nl": "En jullie sporen elkaar niet aan tot het voeden van de behoeftigen.",
+        "ur": "اور مسکین کو کھانا کھلانے پر ایک دُوسرے کو نہیں اُکساتے، <sup foot_note=\"188470\">1</sup>",
+        "bn": "আৰু তোমালোকে মিচকিনক খাদ্য প্ৰদান কৰিবলৈ পৰস্পৰে পৰস্পৰক উত্সাহিত নকৰা,",
+        "fa": "و یکدیگر را بر اطعام مستمندان ترغیب نمی‌کنید"
+      }
+    },
+    {
+      "verse_number": 6012,
+      "verse_key": "89:19",
+      "arabic_text": "وَتَأْكُلُونَ ٱلتُّرَاثَ أَكْلًا لَّمًّا",
+      "phonetic_text": "Wata/kuloona atturatha aklanlamma",
+      "translations": {
+        "fr": "qui vous emparez des héritages avec cupidité,",
+        "en": "you consume inheritance greedily,",
+        "es": "[En lugar de eso] os apropiáis codiciosamente de los bienes del prójimo,",
+        "it": "che divorate avidamente l’eredità",
+        "ru": "жадно (или целиком) пожираете наследство",
+        "tr": "Oysa mirası öyle bir yiyorsunuz ki, haramhelal gözetmeden.",
+        "de": "Und ihr verzehrt das Erbe, ja ihr verzehrt es ganz und gar.",
+        "pt": "E consumis avidamente as heranças,",
+        "nl": "En jullie verteren het erfdeel inhalig.",
+        "ur": "اور میراث کا سارا مال سمیٹ کر کھا جاتے ہو، <sup foot_note=\"188471\">1</sup>",
+        "bn": "আৰু তোমালোকে উত্তৰাধিকাৰৰ সম্পদ সম্পূৰ্ণৰূপে গ্ৰাস কৰি পেলোৱা,",
+        "fa": "و میراث را حریصانه می‌خورید [و حق ضعیفان را نمی‌دهید]"
+      }
+    },
+    {
+      "verse_number": 6013,
+      "verse_key": "89:20",
+      "arabic_text": "وَتُحِبُّونَ ٱلْمَالَ حُبًّا جَمًّا",
+      "phonetic_text": "Watuhibboona almala hubbanjamma",
+      "translations": {
+        "fr": "et aimez les richesses d’un amour démesuré.",
+        "en": "and you love wealth with a passion.",
+        "es": "y sois insaciables en vuestro amor [y codicia] por el dinero.",
+        "it": "e amate le ricchezze d’amore smodato.",
+        "ru": "и страстно любите богатство.",
+        "tr": "Malı öyle bir seviyorsunuz ki, yığmacasına.",
+        "de": "Und ihr liebt den Besitz, ja ihr liebt ihn voll und ganz.",
+        "pt": "E cobiçais insaciavelmente os bens terrenos!",
+        "nl": "En jullie beminnen het bezit met overdreven liefde.",
+        "ur": "اور مال کی محبت میں بُری طرح گرفتار ہو۔ <sup foot_note=\"188472\">1</sup>",
+        "bn": "আৰু তোমালোকে ধন-সম্পদক অতিকৈ ভালপোৱা;",
+        "fa": "و مال و ثروت [دنیا] را بسیار دوست دارید."
+      }
+    },
+    {
+      "verse_number": 6014,
+      "verse_key": "89:21",
+      "arabic_text": "كَلَّآ إِذَا دُكَّتِ ٱلْأَرْضُ دَكًّا دَكًّا",
+      "phonetic_text": "Kalla itha dukkati al-ardudakkan dakka",
+      "translations": {
+        "fr": "Que non ! Lorsque la terre s’effritera parcelle par parcelle,",
+        "en": "No indeed! When the earth is pounded to dust, pounded and pounded,",
+        "es": "¡Basta! [Pensad en cuál será su destino] cuando la Tierra sea golpeada una y otra vez,",
+        "it": "No, quando la terra sarà polverizzata, in polvere fine,",
+        "ru": "Но нет! Когда земля разобьется и превратится в песок.",
+        "tr": "Hayır hayır, yer birbiri ardınca sarsılıp dümdüz olduğu zaman,",
+        "de": "Keineswegs! Wenn die Erde eingeebnet, ja platt eingeebnet wird",
+        "pt": "Qual! Quando a terra for triturada fortemente,",
+        "nl": "Nee, wanneer de aarde met klappen verpulverd wordt.",
+        "ur": "ہرگز نہیں، <sup foot_note=\"188473\">1</sup> جب زمین پے در پے کوُٹ کوُٹ کر ریگ زار بنا دی جائے گی",
+        "bn": "কেতিয়াও নহয়। যেতিয়া পৃথিৱীখনক চূৰ্ণ-বিচূৰ্ণ কৰা হ’ব,",
+        "fa": "هرگز چنین نیست [که شما گمان می‌کنید]؛ هنگامی ‌که زمین سخت در هم کوبیده شود [و هموار گردد]"
+      }
+    },
+    {
+      "verse_number": 6015,
+      "verse_key": "89:22",
+      "arabic_text": "وَجَآءَ رَبُّكَ وَٱلْمَلَكُ صَفًّا صَفًّا",
+      "phonetic_text": "Wajaa rabbuka walmalaku saffansaffa",
+      "translations": {
+        "fr": "et lorsque ton Seigneur viendra, de même que les Anges, rangée par rangée,",
+        "en": "when your Lord comes with the angels, rank upon rank,",
+        "es": "y llegue vuestro Señor y se presenten los ángeles en fila tras fila,",
+        "it": "e verranno il tuo Signore e gli angeli schiere su schiere,",
+        "ru": "и твой Господь придет с ангелами, выстроившимися рядами,",
+        "tr": "Rabbinin emri gelip melekler sıra sıra dizildiği zaman,",
+        "de": "und dein Herr kommt und die Engel, Reihe um Reihe,",
+        "pt": "E aparecer o teu Senhor, com os Seus anjos em desfile,",
+        "nl": "En jouw Heer komt, en de Engelen, rij na rij.",
+        "ur": "اور تمہارا ربّ جلوہ فرما ہوگا <sup foot_note=\"188474\">1</sup> اِس حال میں کہ فرشتے صف در صف کھڑے ہوں گے",
+        "bn": "আৰু যেতিয়া তোমাৰ প্ৰতিপালকে আগমন কৰিব আৰু ফিৰিস্তাসকল শাৰীবদ্ধভাৱে উপস্থিত হ’ব,",
+        "fa": "و پروردگارت [برای دادرسی] بیاید و [نیز] فرشتگان صف‌درصف [بایستند]"
+      }
+    },
+    {
+      "verse_number": 6016,
+      "verse_key": "89:23",
+      "arabic_text": "وَجِا۟ىٓءَ يَوْمَئِذٍۭ بِجَهَنَّمَ ۚ يَوْمَئِذٍ يَتَذَكَّرُ ٱلْإِنسَـٰنُ وَأَنَّىٰ لَهُ ٱلذِّكْرَىٰ",
+      "phonetic_text": "Wajee-a yawma-ithin bijahannamayawma-ithin yatathakkaru al-insanu waannalahu aththikra",
+      "translations": {
+        "fr": "et lorsque, ce jour-là, la Géhenne sera amenée; ce jour-là alors, l’homme se souviendra. Mais à quoi pourrait bien lui servir de se souvenir ?",
+        "en": "when Hell is that Day brought near- on that Day man will take heed, but what good will that be to him then?",
+        "es": "y sea traído el Infierno. Ese día el ser humano recordará sus obras, pero de nada le servirá.",
+        "it": "in quel Giorno sarà avvicinata l’Inferno, in quel Giorno l’uomo si rammenterà <a class=f><sup foot_note=160614>1</sup></a> . Ma a cosa gli servirà rammentarsi?",
+        "ru": "в тот день приведут Геенну, и тогда человек помянет назидание. Но к чему такое поминание?",
+        "tr": "Ki cehennem de o gün getirilmiştir. İşte o gün insan anlar. Fakat bu anlamanın ona ne yararı var?",
+        "de": "und herbeigebracht wird an jenem Tag die Hölle, an jenem Tag wird der Mensch bedenken. Wie soll ihm dann die Selbstbesinnung (nützen)?",
+        "pt": "E o inferno, nesse dia, for destacado, então o homem recordará; porém de que lhe servirá a recordação!",
+        "nl": "En op de Dag dat de Hel wordt getoond, op die Dag zal de mens zich (zijn slechte daden) herinneren, maar wat baat hem dan nog de herinnering?",
+        "ur": "اور جہنّم اُس روز سامنے لے آئی جائے گی، اُس دن انسان کو سمجھ آئے گی اور اس وقت اُس کے سمجھنے کا کیا حاصل ؟ <sup foot_note=\"188475\">1</sup>",
+        "bn": "আৰু সেইদিনা জাহান্নামক উপস্থিত কৰা হ’ব, সেইদিনা মানুহে স্মৰণ কৰিব, কিন্তু এই স্মৰণ তাৰ কোন কামত আহিব?",
+        "fa": "و در آن روز جهنم آورده شود، آن روز است که انسان [کافر] پند می‌گیرد [و توبه می‌کند]؛ و [اما] این پند گرفتن، چه سودی برایش دارد؟"
+      }
+    },
+    {
+      "verse_number": 6017,
+      "verse_key": "89:24",
+      "arabic_text": "يَقُولُ يَـٰلَيْتَنِى قَدَّمْتُ لِحَيَاتِى",
+      "phonetic_text": "Yaqoolu ya laytanee qaddamtu lihayatee",
+      "translations": {
+        "fr": "Il dira : « Ah, Si seulement j’avais prévu (de faire le bien) pour ma vie (dans l’autre monde) ! »",
+        "en": "He will say, ‘Would that I had provided for this life to come!’",
+        "es": "Y dirá lamentándose: “¡Ojalá hubiera realizado buenas obras para mi vida [del más allá]!”",
+        "it": "Dirà: «Ahimè! Se avessi mandato avanti qualcosa <a class=f><sup foot_note=160615>1</sup></a> per la mia vita [futura]!».",
+        "ru": "Он скажет: «Эх, если бы я заранее позаботился о своей жизни!».",
+        "tr": "\"Keşke hayatım için bir şeyler yapıp gönderseydim.\" der.",
+        "de": "Er wird sagen: O hätte ich doch für mein (jenseitiges) Leben (etwas) vorausgeschickt!",
+        "pt": "Dirá: Oxalá tivesse diligenciado (na prática do bem), durante a minha vida!",
+        "nl": "Hij zegt: \"Wee, had ik maar goede (daden) verricht tijdens mijn leven.\"",
+        "ur": "وہ کہے گا کہ کاش میں نے اپنی اِس زندگی کے لیے کچھ پیشگی سامان کیا ہوتا!",
+        "bn": "(তেতিয়া) সি ক’ব, ‘হায়! এই জীৱনৰ বাবে মই যদি কিবা অগ্ৰিম পঠালোহেঁতেন,",
+        "fa": "وی می‌گوید: «ای کاش [در دنیا] برای [این] زندگی‌ام [اعمال نیک، از] پیش فرستاده بودم!"
+      }
+    },
+    {
+      "verse_number": 6018,
+      "verse_key": "89:25",
+      "arabic_text": "فَيَوْمَئِذٍ لَّا يُعَذِّبُ عَذَابَهُۥٓ أَحَدٌ",
+      "phonetic_text": "Fayawma-ithin la yuAAaththibuAAathabahu ahad",
+      "translations": {
+        "fr": "Ce jour-là, nul ne suppliciera comme Lui supplicie.",
+        "en": "On that Day, no one will punish as He punishes,",
+        "es": "Sabed que nadie ha castigado como Él castigará ese día,",
+        "it": "In quel Giorno nessuno castigherà come Lui castiga,",
+        "ru": "В тот день никто не причинит таких мучений, как Он,",
+        "tr": "Artık o gün Allah'ın edeceği azabı kimse edemez.",
+        "de": "An jenem Tag wird niemand strafen, so wie Er straft,",
+        "pt": "Porém, nesse dia, ninguém castigará como Ele (o fará),",
+        "nl": "Maar op die Dag is er niemand die straft zoals Hij.",
+        "ur": "پھر اُس دن اللہ جو عذاب دے گا ویسا عذاب دینے والا کوئی نہیں",
+        "bn": "সেইদিনা তেওঁৰ শাস্তিৰ দৰে শাস্তি কোনেও দিব নোৱাৰিব।",
+        "fa": "در آن روز، هیچ کس همانند عذاب او [= الله] عذاب نمی‌کند،"
+      }
+    },
+    {
+      "verse_number": 6019,
+      "verse_key": "89:26",
+      "arabic_text": "وَلَا يُوثِقُ وَثَاقَهُۥٓ أَحَدٌ",
+      "phonetic_text": "Wala yoothiqu wathaqahu ahad",
+      "translations": {
+        "fr": "Nul ne ligotera comme Lui ligote.",
+        "en": "and no one will bind as He binds.",
+        "es": "y nadie ha encadenado como Él encadenará [ese día].",
+        "it": "e nessuno incatenerà come Lui incatena.",
+        "ru": "и никто не наложит таких оков, как Он.",
+        "tr": "Onun vuracağı bağı kimse vuramaz.",
+        "de": "und niemand wird fesseln, so wie Er fesselt.",
+        "pt": "Nem ninguém acorrentará, como Ele (o fará);",
+        "nl": "En niemand knevelt zoals Hij knevelt.",
+        "ur": "اور اللہ جیسا باندھے گا ویسا باندھنے والا کوئی نہیں",
+        "bn": "আৰু তেওঁৰ বান্ধোনৰ দৰে বান্ধোন আন কোনেও দিব নোৱাৰিব।",
+        "fa": "و هیچ کس همچون بند کشیدن او [= الله]، کسی را به بند نمی‌کشد."
+      }
+    },
+    {
+      "verse_number": 6020,
+      "verse_key": "89:27",
+      "arabic_text": "يَـٰٓأَيَّتُهَا ٱلنَّفْسُ ٱلْمُطْمَئِنَّةُ",
+      "phonetic_text": "Ya ayyatuha annafsualmutma-inna",
+      "translations": {
+        "fr": "« Ô toi, âme sereine !",
+        "en": "‘[But] you, soul at peace:",
+        "es": "[Le será dicho al creyente:] “¡Oh, alma que estás en paz con tu Señor!",
+        "it": "«O anima ormai acquietata <a class=f><sup foot_note=160616>1</sup></a> ,",
+        "ru": "О обретшая покой душа!",
+        "tr": "Ey, Rabbine, itaat edip huzura eren nefis!",
+        "de": "O du Seele, die du Ruhe gefunden hast,",
+        "pt": "E tu, ó alma em paz,",
+        "nl": "O tot rust gekomen ziel!",
+        "ur": "(دُوسری طرف ارشاد ہوگا)اے نفسِ مطمئن، <sup foot_note=\"188476\">1</sup>",
+        "bn": "হে প্ৰশান্ত আত্মা!",
+        "fa": "[اما به مؤمن ندا می‌شود:] «ای روحِ آرام‌یافته،"
+      }
+    },
+    {
+      "verse_number": 6021,
+      "verse_key": "89:28",
+      "arabic_text": "ٱرْجِعِىٓ إِلَىٰ رَبِّكِ رَاضِيَةً مَّرْضِيَّةً",
+      "phonetic_text": "IrjiAAee ila rabbiki radiyatanmardiyya",
+      "translations": {
+        "fr": "Reviens vers ton Seigneur, contente et agréée !",
+        "en": "return to your Lord well pleased and well pleasing;",
+        "es": "Vuelve a la vera de tu Señor complacida, porque Dios está complacido contigo,",
+        "it": "ritorna al tuo Signore soddisfatta e accetta;",
+        "ru": "Вернись к своему Господу удовлетворенной и снискавшей довольство!",
+        "tr": "Hem hoşnut edici, hem de hoşnut edilmiş olarak Rabbine dön.",
+        "de": "kehre zu deinem Herrn zufrieden und mit Wohlgefallen zurück.",
+        "pt": "Retorna ao teu Senhor, satisfeita (com Ele) e Ele satisfeito (contigo)!",
+        "nl": "Keer terug tot jouw Heer, behaagd en welbehaagd (ontvangen door Hem).",
+        "ur": "چل اپنے ربّ کی طرف<sup foot_note=\"188477\">1</sup> اِس حال میں کہ تُو (اپنے انجامِ نیک سے) خوش (اور اپنے ربّ کے نزدیک) پسندیدہ ہے",
+        "bn": "তুমি তোমাৰ প্ৰতিপালকৰ ওচৰলৈ উভতি আহা সন্তুষ্ট আৰু সন্তোষভাজন হৈ,",
+        "fa": "به سوی پروردگارت بازگرد، در حالی که تو [از پاداشِ الله] راضی هستی، و او از [اعمال] تو راضی است."
+      }
+    },
+    {
+      "verse_number": 6022,
+      "verse_key": "89:29",
+      "arabic_text": "فَٱدْخُلِى فِى عِبَـٰدِى",
+      "phonetic_text": "Fadkhulee fee AAibadee",
+      "translations": {
+        "fr": "Entre parmi Mes serviteurs !",
+        "en": "go in among My servants;",
+        "es": "y únete a Mis siervos piadosos",
+        "it": "entra tra i Miei servi,",
+        "ru": "Войди в круг Моих рабов!",
+        "tr": "Kullarımın arasına gir.",
+        "de": "Tritt ein unter Meine Diener,",
+        "pt": "Entre no número dos Meus servos!",
+        "nl": "En treed binnen onder Mijn dienaren.",
+        "ur": "شامل ہو جا میرے (نیک) بندوں میں",
+        "bn": "আৰু মোৰ বান্দাসকলৰ অন্তৰ্ভূক্ত হৈ যোৱা,",
+        "fa": "پس در زمرۀ بندگان [خاصّ] من در آی"
+      }
+    },
+    {
+      "verse_number": 6023,
+      "verse_key": "89:30",
+      "arabic_text": "وَٱدْخُلِى جَنَّتِى",
+      "phonetic_text": "Wadkhulee jannatee",
+      "translations": {
+        "fr": "Entre dans Mon Paradis !»",
+        "en": "and into My Garden.’",
+        "es": "entrando a Mi Paraíso”.",
+        "it": "entra nel Mio Paradiso.» <a class=f><sup foot_note=160617>1</sup></a> <a class=f><sup foot_note=160618>2</sup></a> Le prime dieci notti del mese di Dhul-Hijja, quelle durante il quale si svolge il pellegrinaggio. L’imâm Bukhâri, riferì che l’Inviato di Allah (pace e benedizioni su di lui) disse: «Non vi è opera migliore o più gradita ad Allah di quella meritoria che si fa in questi dieci giorni». Dissero: «Neppure la lotta per la causa di Dio?», rispose: «Neppure questa, a parte il caso di quello che ha marciato con i suoi beni e la sua persona e non ha fatto ritorno». <a class=f><sup foot_note=160619>3</sup></a> Forse il versetto fa riferimento a opere sovraerogatorie che seguono la preghiera della notte: due unità adorati ve dette «shaf » (pari) e un’ulteriore unità detta «witr» (dispari). <a class=f><sup foot_note=160620>4</sup></a> Dovrebbe trattarsi di una città dell’Arabia meridionale un tempo abitata dagli ‘Ad. Una recente scoperta archeologica sembrerebbe confermare questa tesi. Secondo Tabari (xxx,si tratterebbe dell’antica Alessandria d’Egitto, altri esegeti hanno avanzato ipotesi diverse: Damasco, Palmira. <a class=f><sup foot_note=160621>5</sup></a> Vedi XX, : XXXVIII.<a class=f><sup foot_note=160622>6</sup></a> «l’uomo si rammenterà»: di quello che avrà fatto. v <a class=f><sup foot_note=160623>7</sup></a> «Se avessi mandato avanti qualcosa»: espressione tipica del Corano. È l’espressione di rammarico dell’uomo che si accorge di non aver compiuto bene a sufficienza per meritarsi la pace eterna. <a class=f><sup foot_note=160624>8</sup></a> «acquietata»: dall’acquisita certezza di aver meritato la misericordia di Allah (gloria a Lui l’Altissimo). <a class=f><sup foot_note=160625>9</sup></a> Questi ultimi quattro versetti di grande impatto emotivo, fanno parte della preghiera che si recita presso un moribondo. Secondo alcuni commentatori, i primi due riferirebbero il saluto che gli angeli rivolgeranno alle anime che entreranno nel Paradiso, e gli ultimi due l’invito che rivolgerà loro Allah stesso (gloria a Lui l’Altissimo).",
+        "ru": "Войди в Мой Рай!",
+        "tr": "Cennetime gir.",
+        "de": "und tritt ein in Meinen (Paradies)garten.",
+        "pt": "E entra no Meu jardim!",
+        "nl": "En treed binnen in Mijn Paradijs.",
+        "ur": "اور داخل ہو جا میری جنت میں",
+        "bn": "আৰু মোৰ জান্নাতত প্ৰৱেশ কৰা।",
+        "fa": "و به بهشت من وارد شو»."
+      }
+    }
+  ]
+}

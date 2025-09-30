@@ -16,6 +16,10 @@ jest.mock("expo-router", () => ({
 
 jest.mock("react-i18next", () => ({
   useTranslation: jest.fn(),
+  initReactI18next: {
+    type: "3rdParty",
+    init: jest.fn(),
+  },
 }));
 
 jest.mock("../../contexts/SettingsContext", () => {

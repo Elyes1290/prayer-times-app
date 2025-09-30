@@ -32,6 +32,7 @@ import WeeklyPrayerView from "../components/WeeklyPrayerView";
 import PrayerStats from "../components/PrayerStats";
 import { Colors } from "../constants/Colors";
 import { SettingsContext } from "../contexts/SettingsContext";
+import { usePremium } from "../contexts/PremiumContext";
 import {
   useThemeColors,
   useOverlayTextColor,
@@ -599,6 +600,7 @@ export default function PrayerScreen() {
 
   const settings = useContext(SettingsContext);
   const { location } = useLocation();
+  const { user } = usePremium();
 
   // Fonction pour charger les préférences de son
   const loadMutedPrayers = useCallback(async () => {
@@ -675,7 +677,11 @@ export default function PrayerScreen() {
       ? location
       : null;
 
-  const currentPrayerTimes = usePrayerTimes(locationToUse, today);
+  const currentPrayerTimes = usePrayerTimes(
+    locationToUse,
+    today,
+    user?.isPremium || false
+  );
   const weekPrayerTimes = useWeeklyPrayerTimes(locationToUse, today);
 
   // Animation d'entrée

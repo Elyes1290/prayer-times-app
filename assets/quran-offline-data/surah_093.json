@@ -1,0 +1,226 @@
+{
+  "surah_number": 93,
+  "extracted_at": "2025-09-20T15:17:22.962Z",
+  "verses": [
+    {
+      "verse_number": 6080,
+      "verse_key": "93:1",
+      "arabic_text": " وَٱلضُّحَىٰ",
+      "phonetic_text": "Wadduha",
+      "translations": {
+        "fr": "Par la première clarté du jour !",
+        "en": "By the morning brightness",
+        "es": "Juro por el resplandor matinal,",
+        "it": "Per la luce del mattino,",
+        "ru": "Клянусь утром!",
+        "tr": "Andolsun kuşluk vaktine.",
+        "de": "Bei der Morgenhelle",
+        "pt": "Pelas horas da manhã,",
+        "nl": "Bij het ochtendlicht.",
+        "ur": "قسم ہے روزِ روشن کی <sup foot_note=\"188514\">1</sup>",
+        "bn": "পূৰ্বাহ্নৰ শপত,",
+        "fa": "سوگند به آغاز روز،"
+      }
+    },
+    {
+      "verse_number": 6081,
+      "verse_key": "93:2",
+      "arabic_text": "وَٱلَّيْلِ إِذَا سَجَىٰ",
+      "phonetic_text": "Wallayli itha saja",
+      "translations": {
+        "fr": "Par la nuit quand elle voile tout !",
+        "en": "and by the night when it grows still,",
+        "es": "por la noche cuando se serena,",
+        "it": "per la notte quando si addensa:",
+        "ru": "Клянусь ночью, когда она успокаивается (или покрывается мраком)!",
+        "tr": "Ve sakinleştiği zaman geceye ki,",
+        "de": "und der Nacht, wenn sie (alles) umhüllt!",
+        "pt": "E pela noite, quando é serena,",
+        "nl": "En bij de nacht wanneer het geheel donker is.",
+        "ur": "اور رات کی جبکہ وہ سکون کے ساتھ طاری ہو جائے <sup foot_note=\"188515\">1</sup>",
+        "bn": "শপত ৰাতিৰ, যেতিয়া ই অন্ধকাৰাচ্ছন্ন হয়।",
+        "fa": "و سوگند به شب، هنگامی‌ که آرام گیرد"
+      }
+    },
+    {
+      "verse_number": 6082,
+      "verse_key": "93:3",
+      "arabic_text": "مَا وَدَّعَكَ رَبُّكَ وَمَا قَلَىٰ",
+      "phonetic_text": "Ma waddaAAaka rabbuka wama qala",
+      "translations": {
+        "fr": "Ton Seigneur ne t’a point délaissé, ni ne t’a haï.",
+        "en": "your Lord has not forsaken you [Prophet], nor does He hate you,",
+        "es": "que tu Señor no te ha abandonado ni aborrecido [¡Oh, Muhámmad!].",
+        "it": "il tuo Signore non ti ha abbandonato e non ti disprezza <a class=f><sup foot_note=160656>1</sup></a>",
+        "ru": "Не покинул тебя твой Господь и не возненавидел.",
+        "tr": "Rabbin seni bırakmadı ve darılmadı.",
+        "de": "Dein Herr hat sich weder von dir verabschiedet noch haßt Er (dich).",
+        "pt": "Que o teu Senhor não te abandonou, nem te odiou.",
+        "nl": "Jouw Heer heeft jou (O Moehammad) niet verlaten en Hij is niet kwaad (op jou).",
+        "ur": "(اے نبیؐ) تمہارے ربّ نے تم کو ہر گز نہیں چھوڑا اور نہ وہ ناراض ہوا۔ <sup foot_note=\"188516\">1</sup>",
+        "bn": "তোমাৰ প্ৰতিপালকে তোমাক পৰিত্যাগ কৰা নাই আৰু অসন্তুষ্টও হোৱা নাই।",
+        "fa": "[که] پروردگارت تو را وانگذاشته و [بر تو] خشم نگرفته است."
+      }
+    },
+    {
+      "verse_number": 6083,
+      "verse_key": "93:4",
+      "arabic_text": "وَلَلْـَٔاخِرَةُ خَيْرٌ لَّكَ مِنَ ٱلْأُولَىٰ",
+      "phonetic_text": "Walal-akhiratu khayrun laka minaal-oola",
+      "translations": {
+        "fr": "Le monde dernier est pour toi meilleur que le premier.<sup foot_note=195239>1</sup>",
+        "en": "and the future will be better for you than the past;",
+        "es": "La vida del más allá será mejor para ti que esta.",
+        "it": "e per te l’altra vita sarà migliore della precedente.",
+        "ru": "Воистину, будущее для тебя лучше, чем настоящее.",
+        "tr": "Ahiret senin için dünyadan iyi olacaktır.",
+        "de": "Und das Jenseits ist wahrlich besser für dich als das Diesseits.",
+        "pt": "E sem dúvida que a outra vida será melhor, para ti, do que a presente.",
+        "nl": "En het latere (het Hiernamaals) is zeker beter voor jou dan het eerste (het wereldse leven).",
+        "ur": "اور یقیناً تمہارے لیے بعد کا دور پہلے دور سے بہتر ہے، <sup foot_note=\"188517\">1</sup>",
+        "bn": "নিশ্চয় তোমাৰ বাবে পৰবৰ্তী সময় পূৰ্বৱৰ্তী সময়তকৈ উত্তম।",
+        "fa": "و مسلماً آخرت برای تو از دنیا بهتر است."
+      }
+    },
+    {
+      "verse_number": 6084,
+      "verse_key": "93:5",
+      "arabic_text": "وَلَسَوْفَ يُعْطِيكَ رَبُّكَ فَتَرْضَىٰٓ",
+      "phonetic_text": "Walasawfa yuAAteeka rabbuka fatarda",
+      "translations": {
+        "fr": "Ton Seigneur te donnera certes ce dont tu seras satisfait.",
+        "en": "your Lord is sure to give you so much that you will be well satisfied.",
+        "es": "Tu Señor te agraciará y te complacerás.",
+        "it": "Il tuo Signore ti darà [in abbondanza] e ne sarai soddisfatto <a class=f><sup foot_note=160657>1</sup></a>.",
+        "ru": "Господь твой непременно одарит тебя, и ты будешь удовлетворен.",
+        "tr": "Rabbın sana verecek ve sen hoşnut olacaksın.",
+        "de": "Und dein Herr wird dir wahrlich geben, und dann wirst du zufrieden sein.",
+        "pt": "Logo o teu Senhor te agraciará, de um modo que te satisfaça.",
+        "nl": "En jouw Heer zal jou zeker gunsten schenken, zodat jij tevreden zult zijn.",
+        "ur": "اور عنقریب تمہارا ربّ تم کو اتنا دے گا کہ تم خوش ہو جاوٴ گے۔ <sup foot_note=\"188518\">1</sup>",
+        "bn": "নিশ্চয় অনতিপলমে তোমাৰ প্ৰতিপালকে তোমাক অনুগ্ৰহ প্ৰদান কৰিব, ফলত তুমি সন্তুষ্ট হ’বা।",
+        "fa": "و به زودی پروردگارت به تو [و امت تو آنقدر] عطا خواهد کرد که راضی گردی."
+      }
+    },
+    {
+      "verse_number": 6085,
+      "verse_key": "93:6",
+      "arabic_text": "أَلَمْ يَجِدْكَ يَتِيمًا فَـَٔاوَىٰ",
+      "phonetic_text": "Alam yajidka yateeman faawa",
+      "translations": {
+        "fr": "Ne t’a-t-Il pas trouvé orphelin, et Il t’a alors donné asile ?",
+        "en": "Did He not find you an orphan and shelter you?",
+        "es": "¿Acaso no te encontró huérfano y te dio amparo,",
+        "it": "Non ti ha trovato orfano e ti ha dato rifugio<a class=f><sup foot_note=160658>1</sup></a>?",
+        "ru": "Разве Он не нашел тебя сиротой и не дал тебе приют?",
+        "tr": "O seni yetim bulup da barındırmadı mı?",
+        "de": "Hat Er dich nicht als Waise gefunden und (dir) dann Zuflucht verschafft",
+        "pt": "Porventura, não te encontrou órgão e te amparou?",
+        "nl": "Heeft Hij jou niet als wees gevonden en jou in bescherming genomen?",
+        "ur": "کیا اُس نے تم کو یتیم نہیں پایا اور پھر ٹھِکانا فراہم کیا؟ <sup foot_note=\"188519\">1</sup>",
+        "bn": "তেওঁ তোমাক অনাথ অৱস্থাত পোৱা নাছিলনে? তাৰ পিছত তেৱেঁই তোমাক আশ্ৰয় দিছে।",
+        "fa": "آیا تو را یتیم نیافت، و پناه داد؟"
+      }
+    },
+    {
+      "verse_number": 6086,
+      "verse_key": "93:7",
+      "arabic_text": "وَوَجَدَكَ ضَآلًّا فَهَدَىٰ",
+      "phonetic_text": "Wawajadaka dallan fahada",
+      "translations": {
+        "fr": "Ne t’a-t-Il pas trouvé égaré, et Il t’a alors guidé ?",
+        "en": "Did He not find you lost and guide you?",
+        "es": "y te encontró perdido y te guió,",
+        "it": "Non ti ha trovato smarrito e ti ha dato la guida?",
+        "ru": "Он нашел тебя заблудшим и повел прямым путем.",
+        "tr": "Seni yol bilmez bulup yola iletmedi mi?",
+        "de": "und dich irregehend gefunden und dann rechtgeleitet",
+        "pt": "Não te encontrou extraviado e te encaminhou?",
+        "nl": "En Hij heeft jou dwalend gevonden en jou geleid.",
+        "ur": "اور تمہیں ناواقفِ راہ پایا اور پھر ہدایت بخشی۔ <sup foot_note=\"188520\">1</sup>",
+        "bn": "আৰু তেওঁ তোমাক পাইছিল পথহাৰা অৱস্থাত, তাৰ পিছত তেৱেঁই তোমাক পথনিৰ্দেশ দিছে।",
+        "fa": "و تو را [راه‌نایافته و] سرگشته یافت، و هدایت کرد."
+      }
+    },
+    {
+      "verse_number": 6087,
+      "verse_key": "93:8",
+      "arabic_text": "وَوَجَدَكَ عَآئِلًا فَأَغْنَىٰ",
+      "phonetic_text": "Wawajadaka AAa-ilan faaghna",
+      "translations": {
+        "fr": "Ne t’a-t-Il pas trouvé pauvre, et Il t’a alors enrichi ?",
+        "en": "Did He not find you in need and make you self-sufficient?",
+        "es": "y te encontró pobre y te enriqueció?",
+        "it": "Non ti ha trovato povero e ti ha arricchito<a class=f><sup foot_note=160659>1</sup></a>?",
+        "ru": "Он нашел тебя бедным и обогатил.",
+        "tr": "Seni yoksul bulup zengin etmedi mi?",
+        "de": "und dich arm gefunden und dann reich gemacht?",
+        "pt": "Não te achou necessitado e te enriqueceu?",
+        "nl": "En Hij heeft jou behoeftig gevonden en rijk gemaakt.",
+        "ur": "اور تمہیں نادار پایا اور پھر مالدار کر دیا۔ <sup foot_note=\"188521\">1</sup>",
+        "bn": "আৰু তেওঁ তোমাক পাইছিল সম্বলহীন দৰিদ্ৰৰূপে, তাৰ পিছত তেৱেঁই অভাৱমুক্ত কৰিলে।",
+        "fa": "و تو را فقیر یافت، و بی‌نیاز نمود."
+      }
+    },
+    {
+      "verse_number": 6088,
+      "verse_key": "93:9",
+      "arabic_text": "فَأَمَّا ٱلْيَتِيمَ فَلَا تَقْهَرْ",
+      "phonetic_text": "Faamma alyateema fala taqhar",
+      "translations": {
+        "fr": "Quant à l’orphelin, ne le persécute point.",
+        "en": "So do not be harsh with the orphan",
+        "es": "No maltrates al huérfano",
+        "it": "Dunque non opprimere l’orfano,",
+        "ru": "Посему не притесняй сироту!",
+        "tr": "Öyleyse sakın yetimi ezme.",
+        "de": "Was nun die Waise angeht, so unterjoche (sie) nicht,",
+        "pt": "Portanto, não maltrates o órfão,",
+        "nl": "Wat de wees betreft: beledig hem niet.",
+        "ur": "لہٰذا یتیم پر سختی نہ کرو، <sup foot_note=\"188522\">1</sup>",
+        "bn": "এতেকে তুমি এতীমৰ (অনাথৰ) প্ৰতি কঠোৰ নহ’বা।",
+        "fa": "پس [تو نیز] یتیم را میازار،"
+      }
+    },
+    {
+      "verse_number": 6089,
+      "verse_key": "93:10",
+      "arabic_text": "وَأَمَّا ٱلسَّآئِلَ فَلَا تَنْهَرْ",
+      "phonetic_text": "Waamma assa-ila falatanhar",
+      "translations": {
+        "fr": "Quant au mendiant, ne le malmène point.",
+        "en": "and do not chide the one who asks for help;",
+        "es": "ni rechaces al mendigo.",
+        "it": "non respingere il mendicante,",
+        "ru": "И не гони просящего!",
+        "tr": "Dilenciyi de azarlama.",
+        "de": "und was den Bettler angeht, so fahre (ihn) nicht an,",
+        "pt": "Nem tampouco repudies o mendigo,",
+        "nl": "En wat de bedelaar betreft: wijs hem niet af.",
+        "ur": "اور سائل کو نہ جھِڑکو، <sup foot_note=\"188523\">1</sup>",
+        "bn": "আৰু ভিখাৰীক ধমক নিদিবা।",
+        "fa": "و [مستمندِ] نیازخواه را مران [و با او خشونت مکن]،"
+      }
+    },
+    {
+      "verse_number": 6090,
+      "verse_key": "93:11",
+      "arabic_text": "وَأَمَّا بِنِعْمَةِ رَبِّكَ فَحَدِّثْ",
+      "phonetic_text": "Waamma biniAAmati rabbika fahaddith",
+      "translations": {
+        "fr": "Et quant aux bienfaits de ton Seigneur, proclame-les tout haut !",
+        "en": "talk about the blessings of your Lord.",
+        "es": "Y divulga las bendiciones de tu Señor.",
+        "it": "e proclama la grazia del tuo Signore<a class=f><sup foot_note=160660>1</sup></a>. <a class=f><sup foot_note=160661>2</sup></a>Questa sura scese su Muhammad (pace e benedizioni su di lui) dopo una lunga interruzione della rivelazione, durante la quale il Profeta dovette subire il dileggio dei miscredenti e lo scherno dei suoi peggiori nemici. La moglie di suo zio Abù Lahab lo scherniva dicendogli: «Il tuo padrone ti ha abbandonato» (Tabarì xxx, 229). <a class=f><sup foot_note=160662>3</sup></a>II versetto allude agli immensi favori che Allah (gloria a Lui l’Altissimo) riverserà nel Giorno della Resurrezione sul Suo Inviato Muhammad (pace e benedizioni su di lui) e gli consentirà di intercedere per la comunità dei musulmani. <a class=f><sup foot_note=160663>4</sup></a>Abdallah ibn Abdalmuttalib, padre dell’Inviato di Allah (pace e benedizioni su di lui), morì quando egli era ancora nel grembo materno e sua madre Amina pochi anni dopo. Muhammad rimase poi orfano della sua tribù quando i Quraysh condannarono il suo clan all’ostracismo, e ancora fu orfano della sua stessa famiglia quando, dopo la morte del suo protettore lo zio Abù Talib, l’altro fratello di suo padre, Abù Lahab suo nemico giurato, divenne il capo del clan dei Banì Hashìm. In questa triste condizione Allah (gloria a Lui l’Altissimo) gli concesse un asilo sicuro in quella Yatrib che sarebbe diventata Medinatu-an-Naby al Munawwara (la città del Profeta, l’illuminata). <a class=f><sup foot_note=160664>5</sup></a>La ricchezza di cui parla il versetto è di tipo eminentemente spirituale. In tutta la sua vita terrena l’Inviato di Allah (pace e benedizioni su di lui) non fu mai ricco e tutta la sua famiglia visse in un clima di grande austerità. <a class=f><sup foot_note=160665>6</sup></a>La grazia più grande che Allah (gloria a Lui l’Altissimo) ha dato al suo Inviato (pace e benedizioni su di lui) è stata il Corano e la profezia e questo ben spiega che cosa debba riferire Muhammad.",
+        "ru": "И возвещай о милости своего Господа.",
+        "tr": "Fakat Rabbinin nimetini anlat da anlat.",
+        "de": "und was die Gunst deines Herrn angeht, so erzähle (davon).",
+        "pt": "Mas divulga a mercê do teu Senhor, em teu discurso.",
+        "nl": "En wat de gunsten van jouw Heer betreft: spreek daarover!",
+        "ur": "اور اپنے ربّ کی نعمت کا اظہار کرو۔ <sup foot_note=\"188524\">1</sup>",
+        "bn": "আৰু তোমাৰ প্ৰতিপালকৰ অনুগ্ৰহৰ কথা প্ৰচাৰ কৰা।",
+        "fa": "و نعمت‌های پروردگارت را بازگو کن [و سپاس گزار]."
+      }
+    }
+  ]
+}

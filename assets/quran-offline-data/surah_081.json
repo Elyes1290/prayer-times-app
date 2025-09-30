@@ -1,0 +1,586 @@
+{
+  "surah_number": 81,
+  "extracted_at": "2025-09-20T15:17:06.120Z",
+  "verses": [
+    {
+      "verse_number": 5801,
+      "verse_key": "81:1",
+      "arabic_text": " إِذَا ٱلشَّمْسُ كُوِّرَتْ",
+      "phonetic_text": "Itha ashshamsu kuwwirat",
+      "translations": {
+        "fr": "Quand le soleil sera une sphère obscurcie,",
+        "en": "When the sun is shrouded in darkness,",
+        "es": "Cuando el Sol se contraiga [y oscurezca],",
+        "it": "Quando sarà oscurato <a class=f><sup foot_note=160497>1</sup></a> il sole,",
+        "ru": "Когда солнце будет свернуто (или потеряет свое сияние, или будет выброшено),",
+        "tr": "Güneş katlanıp dürüldüğünde,",
+        "de": "Wenn die Sonne umschlungen wird’",
+        "pt": "Quando o sol for enfolado,",
+        "nl": "Wanneer de zon opgerold wordt.",
+        "ur": "جب سورج لپیٹ دیا جائے گا، <sup foot_note=\"188357\">1</sup>",
+        "bn": "সূৰ্যক যেতিয়া নিষ্প্ৰভ কৰা হ’ব,",
+        "fa": "آنگاه ‌که خورشید درهم پیچیده [و تاریک] گردد،"
+      }
+    },
+    {
+      "verse_number": 5802,
+      "verse_key": "81:2",
+      "arabic_text": "وَإِذَا ٱلنُّجُومُ ٱنكَدَرَتْ",
+      "phonetic_text": "Wa-itha annujoomu inkadarat",
+      "translations": {
+        "fr": "que les étoiles tomberont, éteintes,",
+        "en": "when the stars are dimmed,",
+        "es": "cuando las estrellas pierdan su luz,",
+        "it": "e spente le stelle,",
+        "ru": "когда падут звезды,",
+        "tr": "Yıldızlar bulandığında,",
+        "de": "und wenn die Sterne verstreut werden",
+        "pt": "Quando as estrelas forem extintas,",
+        "nl": "En wanneer de sterren vallen.",
+        "ur": "اور جب تارے بکھر جائیں گے،<sup foot_note=\"188358\">1</sup>",
+        "bn": "আৰু নক্ষত্ৰৰাজি যেতিয়া খহি পৰিব,",
+        "fa": "و آنگاه ‌که ستارگان بی‌فروغ شوند،"
+      }
+    },
+    {
+      "verse_number": 5803,
+      "verse_key": "81:3",
+      "arabic_text": "وَإِذَا ٱلْجِبَالُ سُيِّرَتْ",
+      "phonetic_text": "Wa-itha aljibalu suyyirat",
+      "translations": {
+        "fr": "que les montagnes seront mises en mouvement,",
+        "en": "when the mountains are set in motion,",
+        "es": "cuando las montañas sean pulverizadas,",
+        "it": "e messe in marcia le montagne <a class=f><sup foot_note=160498>1</sup></a> ,",
+        "ru": "когда горы будут сдвинуты с мест (или приведены в движение),",
+        "tr": "Dağlar yürütüldüğünde,",
+        "de": "und wenn die Berge versetzt werden",
+        "pt": "Quando as montanhas estiverem dispersas,",
+        "nl": "En wanneer de bergen bewogen worden.",
+        "ur": "اور جب پہاڑ چلائے جائیں گے،<sup foot_note=\"188359\">1</sup>",
+        "bn": "পৰ্বতসমূহক যেতিয়া সঞ্চালিত কৰা হ’ব,",
+        "fa": "و آنگاه ‌که کوه‌ها به حرکت درآید،"
+      }
+    },
+    {
+      "verse_number": 5804,
+      "verse_key": "81:4",
+      "arabic_text": "وَإِذَا ٱلْعِشَارُ عُطِّلَتْ",
+      "phonetic_text": "Wa-itha alAAisharu AAuttilat",
+      "translations": {
+        "fr": "que les chamelles en gésine seront délaissées,",
+        "en": "when pregnant camels are abandoned,",
+        "es": "cuando las camellas preñadas<sup foot_note=169494>1</sup> sean dejadas de lado,",
+        "it": "e neglette le cammelle gravide di dieci mesi <a class=f><sup foot_note=160499>1</sup></a> ,",
+        "ru": "когда верблюдицы на десятом месяце беременности останутся без присмотра,",
+        "tr": "Kıyılmaz mallar bırakıldığında,",
+        "de": "und wenn die trächtigen Kamelstuten vernachlässigt werden",
+        "pt": "Quando as camelas, com crias de dez meses, forem abandonadas,",
+        "nl": "En wanneer de drachtige kamelen achtergelaten worden.",
+        "ur": "اور جب دس مہینے کی حاملہ اُونٹنیاں اپنے حال پر چھوڑ دی جائیں گی، <sup foot_note=\"188360\">1</sup>",
+        "bn": "আৰু যেতিয়া পূৰ্ণ গাভিনী উটবোৰক অযত্নে এৰি দিয়া হ’ব,",
+        "fa": "و آنگاه ‌که ماده‌شترانِ باردار رها شوند،"
+      }
+    },
+    {
+      "verse_number": 5805,
+      "verse_key": "81:5",
+      "arabic_text": "وَإِذَا ٱلْوُحُوشُ حُشِرَتْ",
+      "phonetic_text": "Wa-itha alwuhooshu hushirat",
+      "translations": {
+        "fr": "que les bêtes sauvages seront rassemblées,",
+        "en": "when wild beasts are herded together,",
+        "es": "cuando las bestias salvajes sean acorraladas,",
+        "it": "e radunate le belve,",
+        "ru": "когда дикие звери будут собраны,",
+        "tr": "Vahşi hayvanlar bir araya toplandığında,",
+        "de": "und wenn die wilden Tiere versammelt werden",
+        "pt": "Quando as feras forem congregadas,",
+        "nl": "En wanneer de wilde dieren verzameld worden.",
+        "ur": "اور جب جنگلی جانور سمیٹ کر اکٹھے کر دیے جائیں گے، <sup foot_note=\"188361\">1</sup>",
+        "bn": "আৰু যেতিয়া বনৰীয়া পশুবোৰক একত্ৰিত কৰা হ’ব,",
+        "fa": "و آنگاه ‌که حیوانات وحشی [در کنار انسان] گرد آورده شوند،"
+      }
+    },
+    {
+      "verse_number": 5806,
+      "verse_key": "81:6",
+      "arabic_text": "وَإِذَا ٱلْبِحَارُ سُجِّرَتْ",
+      "phonetic_text": "Wa-itha albiharu sujjirat",
+      "translations": {
+        "fr": "que les mers seront enflammées,",
+        "en": "when the seas boil over,",
+        "es": "cuando los mares hiervan y se desborden,",
+        "it": "e ribollenti i mari,",
+        "ru": "когда моря запылают (или переполнятся; или опустеют; или перемешаются; или станут красными),",
+        "tr": "Denizler ateşlendiğinde (suları çekilip, volkanlar halinde ateş püskürdüğünde),",
+        "de": "und wenn die Meere zum Überfließen gebracht werden",
+        "pt": "Quando os mares transbordarem,",
+        "nl": "En wanneer de zeeën tot koken gebracht worden.",
+        "ur": "اور جب سمندر بھڑکا دیے جائیں گے، <sup foot_note=\"188362\">1</sup>",
+        "bn": "আৰু যেতিয়া সাগৰসমূহক অগ্নিউত্তাল কৰা হ’ব,",
+        "fa": "و آنگاه ‌که دریا‌ها [جوشان و] برافروخته شود،"
+      }
+    },
+    {
+      "verse_number": 5807,
+      "verse_key": "81:7",
+      "arabic_text": "وَإِذَا ٱلنُّفُوسُ زُوِّجَتْ",
+      "phonetic_text": "Wa-itha annufoosu zuwwijat",
+      "translations": {
+        "fr": "que les âmes seront réunies en couples (semblables),",
+        "en": "when souls are sorted into classes,",
+        "es": "cuando las almas vuelvan a emparejarse [con sus cuerpos],",
+        "it": "Pre-Eg. n. Di versetti. Il nome della sura deriva dal vers. In nome di Allah, il Compassionevole, il Misericordioso. e divise in gruppi le anime <a class=f><sup foot_note=160496>1</sup></a> ,",
+        "ru": "когда души объединятся (праведники объединятся с праведниками, а грешники - с грешниками; или праведники соединятся с райскими гуриями, а неверующие - с дьяволами; или души соединятся с телами),",
+        "tr": "Nefisler eşleştirildiğinde (iyiler iyilerle, kötüler kötülerle bir araya toplandığında),",
+        "de": "und wenn die Seelen gepaart werden",
+        "pt": "Quando as almas forem reunidas,",
+        "nl": "En wanneer de zielen verenigd worden.",
+        "ur": "اور جب <sup foot_note=\"188363\">1</sup> جانیں (جسموں سے) جوڑ دی جائیں گی، <sup foot_note=\"188364\">2</sup>",
+        "bn": "আৰু যেতিয়া আত্মাসমূহক (সমগোত্ৰীয়সকলৰ লগত) মিলিত কৰা হ’ব,",
+        "fa": "و آنگاه ‌که هر کس با همسانِ خود قرین گردد،"
+      }
+    },
+    {
+      "verse_number": 5808,
+      "verse_key": "81:8",
+      "arabic_text": "وَإِذَا ٱلْمَوْءُۥدَةُ سُئِلَتْ",
+      "phonetic_text": "Wa-itha almawoodatu su-ilat",
+      "translations": {
+        "fr": "et qu’il sera demandé à la fillette enterrée vivante",
+        "en": "when the baby girl buried alive is asked",
+        "es": "cuando se le pregunte a las niñas que fueron enterradas vivas",
+        "it": "e quando verrà chiesto alla [neonata] sepolta viva",
+        "ru": "когда зарытую живьем спросят,",
+        "tr": "Diri diri toprağa gömülen kıza sorulduğunda,",
+        "de": "und wenn das lebendig begrabene Mädchen gefragt wird,",
+        "pt": "Quando a filha, sepultada vida, for interrogada:",
+        "nl": "En wanneer het levend begraven meisje ondervraagd wordt.",
+        "ur": "اور جب زندہ گاڑی ہوئی لڑکی سے پوچھا جائے گا",
+        "bn": "আৰু যেতিয়া জীৱন্ত সমাধিস্থ কন্যাশিশুক সোধা হ’ব,",
+        "fa": "و آنگاه ‌که از دختر زنده‌به‌گورشده پرسیده شود"
+      }
+    },
+    {
+      "verse_number": 5809,
+      "verse_key": "81:9",
+      "arabic_text": "بِأَىِّ ذَنۢبٍ قُتِلَتْ",
+      "phonetic_text": "Bi-ayyi thanbin qutilat",
+      "translations": {
+        "fr": "pour quel péché elle a été tuée,",
+        "en": "for what sin she was killed,",
+        "es": "por qué pecado las mataron<sup foot_note=169495>1</sup>,",
+        "it": "per quale colpa sia stata uccisa <a class=f><sup foot_note=160500>1</sup></a> ,",
+        "ru": "за какой грех ее убили,",
+        "tr": "\"Hangi günahtan dolayı öldürüldü?\" diye.",
+        "de": "wegen welcher Sünde es getötet wurde,",
+        "pt": "Por que delito foste assassinada?",
+        "nl": "Voor welke zonde zij gedood werd.",
+        "ur": "کہ وہ کس قُصور میں مار ی گئی؟ <sup foot_note=\"188365\">1</sup>",
+        "bn": "কি অপৰাধত তাইক হত্যা কৰা হৈছিল?",
+        "fa": "[که] به کدامین گناه کشته شده است،"
+      }
+    },
+    {
+      "verse_number": 5810,
+      "verse_key": "81:10",
+      "arabic_text": "وَإِذَا ٱلصُّحُفُ نُشِرَتْ",
+      "phonetic_text": "Wa-itha assuhufunushirat",
+      "translations": {
+        "fr": "quand les feuilles (du Livre des comptes) seront déployées,",
+        "en": "when the records of deeds are spread open,",
+        "es": "cuando los registros [de las obras] sean repartidos,",
+        "it": "e quando saranno dispiegati i fogli <a class=f><sup foot_note=160501>1</sup></a> ,",
+        "ru": "когда свитки с деяниями рабов будут развернуты,",
+        "tr": "Amel defterleri açıldığında,",
+        "de": "und wenn die Blätter aufgeschlagen werden",
+        "pt": "Quando as páginas forem abertas,",
+        "nl": "En wanneer de bladen opengeslagen worden.",
+        "ur": "اور جب اعمال نامے کھولے جائیں گے",
+        "bn": "আৰু যেতিয়া আমলনামাসমূহ উন্মোচিত কৰা হ’ব,",
+        "fa": "و آنگاه ‌که نامه‌های [اعمال] گشوده شود،"
+      }
+    },
+    {
+      "verse_number": 5811,
+      "verse_key": "81:11",
+      "arabic_text": "وَإِذَا ٱلسَّمَآءُ كُشِطَتْ",
+      "phonetic_text": "Wa-itha assamao kushitat",
+      "translations": {
+        "fr": "quand le ciel sera dépouillé,",
+        "en": "when the sky is stripped away,",
+        "es": "cuando la bóveda celeste desaparezca,",
+        "it": "e scorticato il cielo,",
+        "ru": "когда небо будет сдернуто,",
+        "tr": "Gök sıyrılıp açıldığında,",
+        "de": "und wenn der Himmel abgezogen wird",
+        "pt": "Quando o céu for desvendado,",
+        "nl": "En wanneer de hemel afgestroopt wordt.",
+        "ur": "اور جب آسمان کا پردہ ہٹا دیا جائے گا، <sup foot_note=\"188366\">1</sup>",
+        "bn": "আৰু যেতিয়া আকাশৰ আৱৰণ অপসাৰিত কৰা হ’ব,",
+        "fa": "و آنگاه ‌که پرده از روی آسمان برگرفته شود،"
+      }
+    },
+    {
+      "verse_number": 5812,
+      "verse_key": "81:12",
+      "arabic_text": "وَإِذَا ٱلْجَحِيمُ سُعِّرَتْ",
+      "phonetic_text": "Wa-itha aljaheemu suAAAAirat",
+      "translations": {
+        "fr": "que l’Enfer sera attisé,",
+        "en": "when Hell is made to blaze",
+        "es": "cuando el fuego del Infierno sea avivado,",
+        "it": "e attizzata la Fornace,",
+        "ru": "когда Ад будет разожжен с новой силой,",
+        "tr": "Cehennem kızıştırıldığında,",
+        "de": "und wenn die Hölle angefacht wird",
+        "pt": "Quando o inferno for aceso,",
+        "nl": "En wanneer Djahîm (de Hel) ontstoken wordt.",
+        "ur": "اور جب جہنم دہکائی جائے گی",
+        "bn": "আৰু যেতিয়া জাহান্নামক ভীষণভাৱে প্ৰজ্জ্বলিত কৰা হ’ব,",
+        "fa": "و آنگاه ‌که دوزخ، افروخته [و شعله‌ور] گردد،"
+      }
+    },
+    {
+      "verse_number": 5813,
+      "verse_key": "81:13",
+      "arabic_text": "وَإِذَا ٱلْجَنَّةُ أُزْلِفَتْ",
+      "phonetic_text": "Wa-itha aljannatu ozlifat",
+      "translations": {
+        "fr": "et le Paradis rapproché,",
+        "en": "and Paradise brought near:",
+        "es": "y cuando el Paraíso sea acercado.",
+        "it": "e avvicinato il Paradiso,",
+        "ru": "когда Рай будет приближен к праведникам,",
+        "tr": "Ve cennet yaklaştırıldığında,",
+        "de": "und wenn der (Paradies)garten nahe herangebracht wird,",
+        "pt": "E quando o jardim for aproximado,",
+        "nl": "En wanneer het Paradijs nabij gebracht wordt.",
+        "ur": "اور جب جنّت قریب لے آئی جائے گی، <sup foot_note=\"188367\">1</sup>",
+        "bn": "আৰু জান্নাতক যেতিয়া নিকটবৰ্তী কৰা হ’ব,",
+        "fa": "و آنگاه ‌که بهشت [برای پرواپیشگان] نزدیک آورده شود."
+      }
+    },
+    {
+      "verse_number": 5814,
+      "verse_key": "81:14",
+      "arabic_text": "عَلِمَتْ نَفْسٌ مَّآ أَحْضَرَتْ",
+      "phonetic_text": "AAalimat nafsun ma ahdarat",
+      "translations": {
+        "fr": "chaque âme saura alors ce qu’elle aura accompli.",
+        "en": "then every soul will know what it has brought about.",
+        "es": "En ese momento sabrá cada alma el resultado de sus obras.",
+        "it": "ogni anima conoscerà quel che avrà prodotto <a class=f><sup foot_note=160502>1</sup></a> .",
+        "ru": "тогда познает душа, что она принесла.",
+        "tr": "Herkes ne getirmiş olduğunu anlar.",
+        "de": "wird eine (jede) Seele erfahren, was sie vorgebracht hat.",
+        "pt": "Então, saberá, cada alma, o que está apresentando.",
+        "nl": "Dan weet een ziel wat zij verricht heeft.",
+        "ur": "اُس وقت ہر شخص کو معلوم ہو جائے گا کہ وہ کیا لے کر آیا ہے",
+        "bn": "তেতিয়া প্ৰত্যেক ব্যক্তিয়েই জানিব সি কি উপস্থিত কৰিছে।",
+        "fa": "[در آن هنگام،] هر کس خواهد دانست که چه چیزی [برای آخرت خود] آماده کرده است."
+      }
+    },
+    {
+      "verse_number": 5815,
+      "verse_key": "81:15",
+      "arabic_text": "فَلَآ أُقْسِمُ بِٱلْخُنَّسِ",
+      "phonetic_text": "Fala oqsimu bilkhunnas",
+      "translations": {
+        "fr": "J’en jure par les étoiles qui se meuvent,",
+        "en": "I swear by the planets",
+        "es": "Juro por los astros",
+        "it": "Giuro per i pianeti",
+        "ru": "Но нет! Клянусь телами небесными - отступающими,",
+        "tr": "Şimdi yemin ederim o sinenlere (gündüzleri gözden kaybolan yıldızlara),",
+        "de": "Nein! Ich schwöre bei den sich Verbergenden,",
+        "pt": "Juro pelos planetas,",
+        "nl": "Ik zweer bij de sterren.",
+        "ur": "پس نہیں، <sup foot_note=\"188368\">1</sup> میں قسم کھاتا ہوں",
+        "bn": "এতেকে মই শপত কৰিছো আৱৰ্তনশীল নক্ষত্ৰবোৰৰ,",
+        "fa": "سوگند به ستارگانی که [به جایگاه خود] بازمی‌گردند،"
+      }
+    },
+    {
+      "verse_number": 5816,
+      "verse_key": "81:16",
+      "arabic_text": "ٱلْجَوَارِ ٱلْكُنَّسِ",
+      "phonetic_text": "Aljawari alkunnas",
+      "translations": {
+        "fr": "qui surgissent et s’éclipsent,",
+        "en": "that recede, move, and hide,",
+        "es": "que recorren sus órbitas,",
+        "it": "che passano e che si occultano <a class=f><sup foot_note=160503>1</sup></a> ,",
+        "ru": "передвигающимися и исчезающими!",
+        "tr": "O akıp akıp yuvasına gidenlere,",
+        "de": "den Dahinziehenden und sich wieder Zeigenden",
+        "pt": "Que se mostram e se escondem,",
+        "nl": "De voortspoedenden, de ondergaanden.",
+        "ur": "پلٹنے اور چھپ جانے والے تاروں کی",
+        "bn": "যিবোৰ গতিশীল, অদৃশ্য,",
+        "fa": "[شتابان] حرکت می‌کنند [و از نظر] پنهان می‌شوند؛"
+      }
+    },
+    {
+      "verse_number": 5817,
+      "verse_key": "81:17",
+      "arabic_text": "وَٱلَّيْلِ إِذَا عَسْعَسَ",
+      "phonetic_text": "Wallayli itha AAasAAas",
+      "translations": {
+        "fr": "par la nuit quand elle rampe et se répand,",
+        "en": "by the night that descends,",
+        "es": "y [juro] por la noche cuando extiende su oscuridad,",
+        "it": "per la notte che si estende,",
+        "ru": "Клянусь ночью, когда она наступила (или отступила)!",
+        "tr": "Yöneldiği an geceye,",
+        "de": "und bei der Nacht, wenn sie anbricht,",
+        "pt": "E pela noite, quando escurece,",
+        "nl": "En bij de nacht wanneer hij opdoemt.",
+        "ur": "اور رات کی جبکہ وہ رخصت ہوئی",
+        "bn": "আৰু ৰাতিৰ শপত যেতিয়া ই বিদায় লয়,",
+        "fa": "و سوگند به شب، هنگامی ‌که [از تاریکی‌اش کاسته شود و] پشت کند؛"
+      }
+    },
+    {
+      "verse_number": 5818,
+      "verse_key": "81:18",
+      "arabic_text": "وَٱلصُّبْحِ إِذَا تَنَفَّسَ",
+      "phonetic_text": "Wassubhi ithatanaffas",
+      "translations": {
+        "fr": "par l’aurore quand elle respire,",
+        "en": "by the dawn that softly breathes:",
+        "es": "y [juro] por la mañana cuando extiende su luminosidad,",
+        "it": "per l’aurora che esala il suo alito <a class=f><sup foot_note=160504>1</sup></a> ,",
+        "ru": "Клянусь рассветом, когда он забрезжил!",
+        "tr": "Nefeslendiği (ağardığı) an sabaha ki,",
+        "de": "und bei dem Morgen, wenn er Atem schöpft:",
+        "pt": "E pela aurora, quando afasta a escuridão,",
+        "nl": "En bij de dageraad wanneer hij gloort.",
+        "ur": "اور صبح کی جبکہ اس نے سانس لیا، <sup foot_note=\"188369\">1</sup>",
+        "bn": "আৰু প্ৰভাতৰ শপত যেতিয়া ইয়াৰ আবিৰ্ভাৱ হয়,",
+        "fa": "و سوگند به صبح، هنگامی که بدمد؛"
+      }
+    },
+    {
+      "verse_number": 5819,
+      "verse_key": "81:19",
+      "arabic_text": "إِنَّهُۥ لَقَوْلُ رَسُولٍ كَرِيمٍ",
+      "phonetic_text": "Innahu laqawlu rasoolin kareem",
+      "translations": {
+        "fr": "que c’est la parole<sup foot_note=195222>1</sup> d’un noble émissaire,<sup foot_note=195223>2</sup>",
+        "en": "this is the speech of a noble messenger,",
+        "es": "que [el Corán] es la palabra [de Dios transmitida] por un emisario noble<sup foot_note=169496>1</sup>,",
+        "it": "questa è la parola di un Messaggero <a class=f><sup foot_note=160505>1</sup></a> nobilissimo,",
+        "ru": "Это - слова благородного посланца,",
+        "tr": "Kuşkusuz o Kur'an, değerli bir elçinin sözüdür.",
+        "de": "Dies sind wahrlich die Worte eines edlen Gesandten,",
+        "pt": "Que (o Alcorão) é a palavra de um honorável Mensageiro,",
+        "nl": "Voorwaar, het is zeker het woord van een edele Boodschapper.",
+        "ur": "یہ فی الواقع ایک بزرگ پیغام بر کا قول ہے <sup foot_note=\"188370\">1</sup>",
+        "bn": "নিশ্চয় এই কোৰআন সন্মানিত ৰাছুলে লৈ অহা বাণী।",
+        "fa": "بی‌تردید، این [قرآن، سخن الله است که ابلاغش به پیامبر، بر عهدۀ] فرستاده‌ای بزرگوار [=جبرئیل] است؛"
+      }
+    },
+    {
+      "verse_number": 5820,
+      "verse_key": "81:20",
+      "arabic_text": "ذِى قُوَّةٍ عِندَ ذِى ٱلْعَرْشِ مَكِينٍ",
+      "phonetic_text": "Thee quwwatin AAinda theealAAarshi makeen",
+      "translations": {
+        "fr": "fort de l’estime du Détenteur du Trône,",
+        "en": "who possesses great strength and is held in honour by the Lord of the Throne––",
+        "es": "dotado de poder y distinción ante el Señor del Trono.",
+        "it": "potente ed eccellente presso il Signore del Trono,",
+        "ru": "обладателя силы при Владыке Трона, почитаемого,",
+        "tr": "O elçi güçlüdür, Arş'ın sahibinin yanında çok itibarlıdır.",
+        "de": "Besitzer von Kraft und beim Herrn des Thrones in Ansehen,",
+        "pt": "Forte, digníssimo, ante o Senhor do Trono.",
+        "nl": "Een bezitter van kracht die een ereplaats heeft bij de Bezitter van de Troon.",
+        "ur": "جو بڑی توانائی رکھتا ہے، <sup foot_note=\"188371\">1</sup> عرش والے کے ہاں بلند مرتبہ ہے",
+        "bn": "যিজন শক্তিশালী, আৰশ্বৰ মালিকৰ ওচৰত মৰ্যদাসম্পন্ন,",
+        "fa": "[همان فرشته‌ای] که [مقتدر و] نیرومند است و نزد [اللهِ] صاحب‌عرش، مقام والایی دارد؛"
+      }
+    },
+    {
+      "verse_number": 5821,
+      "verse_key": "81:21",
+      "arabic_text": "مُّطَاعٍ ثَمَّ أَمِينٍ",
+      "phonetic_text": "MutaAAin thamma ameen",
+      "translations": {
+        "fr": "écouté<sup foot_note=195224>1</sup> et loyal.",
+        "en": "he is obeyed there and worthy of trust.",
+        "es": "El obedecido [por otros ángeles] y el digno confidente [de la revelación].",
+        "it": "colà obbedito e fedele.",
+        "ru": "которому там (на небесах) повинуются, доверенного.",
+        "tr": "Orada ona itaat edilir, güvenilir.",
+        "de": "dem man dort gehorcht und (der) vertrauenswürdig (ist).",
+        "pt": "Que deve ser obedecido, e no qual se deve confiar.",
+        "nl": "Die gehoorzaamd wordt en betrouwbaar is.",
+        "ur": "وہاں اُس کا حکم مانا جاتا ہے، <sup foot_note=\"188372\">1</sup> وہ بااعتماد ہے۔ <sup foot_note=\"188373\">2</sup>",
+        "bn": "মান্যবৰ, তাত তেওঁ বিশ্বস্ত।",
+        "fa": "[در ملکوت اعلی و عالم فرشتگان] از او فرمان می‌برند و امین [وحی] است."
+      }
+    },
+    {
+      "verse_number": 5822,
+      "verse_key": "81:22",
+      "arabic_text": "وَمَا صَاحِبُكُم بِمَجْنُونٍ",
+      "phonetic_text": "Wama sahibukum bimajnoon",
+      "translations": {
+        "fr": "Votre compagnon n’est certes pas fou.",
+        "en": "Your companion is not mad:",
+        "es": "[Sabed que] su compañero [el profeta Muhámmad] no es un loco,",
+        "it": "Il vostro compagno non è un folle <a class=f><sup foot_note=160506>1</sup></a> :",
+        "ru": "Ваш товарищ (Мухаммад) не является одержимым.",
+        "tr": "Arkadaşınızı cin çarpmış değildir.",
+        "de": "Und euer Gefährte ist kein Besessener.",
+        "pt": "E o vosso companheiro (ó povos), não é um energúmeno!",
+        "nl": "En jullie metgezel (Moehammad) is niet bezeten.",
+        "ur": "اور (اے اہلِ مکّہ) تمہارا رفیق <sup foot_note=\"188374\">1</sup> مجنون نہیں ہے",
+        "bn": "আৰু তোমালোকৰ সঙ্গী উন্মাদ নহয়,",
+        "fa": "[ای مردم،] همنشین شما [= محمد] دیوانه نیست؛"
+      }
+    },
+    {
+      "verse_number": 5823,
+      "verse_key": "81:23",
+      "arabic_text": "وَلَقَدْ رَءَاهُ بِٱلْأُفُقِ ٱلْمُبِينِ",
+      "phonetic_text": "Walaqad raahu bilofuqialmubeen",
+      "translations": {
+        "fr": "Il l’a bien vu à l’horizon où tout est clair.",
+        "en": "he did see him on the clear horizon.",
+        "es": "lo vio [al ángel Gabriel] en el horizonte claro,",
+        "it": "in verità l’ha visto sull’orizzonte luminoso <a class=f><sup foot_note=160507>1</sup></a> ,",
+        "ru": "Он видел его (Джибрила) на ясном горизонте",
+        "tr": "Andolsun o, Cebrail'i açık ufukta gördü.",
+        "de": "Er hat ihn ja am deutlichen Gesichtskreis gesehen,",
+        "pt": "Ele o viu (Gabriel), no claro horizonte,",
+        "nl": "En voorzeker, hij heeft hem (Djibrîl) aan de heldere horizon gezien.",
+        "ur": "اُس نے اُس پیغام بر کو روشن اُفق پر دیکھا ہے۔ <sup foot_note=\"188375\">1</sup>",
+        "bn": "আৰু তেখেতে (নবীয়ে) তেখেতক (জিব্ৰীলক) স্পষ্ট দিগন্তত দেখিছে,",
+        "fa": "و بی‌تردید، [محمد]، او [= جبرئیل] را در افق روشن دیده است."
+      }
+    },
+    {
+      "verse_number": 5824,
+      "verse_key": "81:24",
+      "arabic_text": "وَمَا هُوَ عَلَى ٱلْغَيْبِ بِضَنِينٍ",
+      "phonetic_text": "Wama huwa AAala alghaybi bidaneen",
+      "translations": {
+        "fr": "Et ce n’est pas lui qui sera avare du mystère révélé.",
+        "en": "He does not withhold what is revealed to him from beyond.",
+        "es": "no oculta nada de lo que le fue revelado.",
+        "it": "non è avaro dell’Invisibile <a class=f><sup foot_note=160508>1</sup></a> .",
+        "ru": "и не скупится передать сокровенное.",
+        "tr": "O, gayb hakkında cimri de değildir.",
+        "de": "und er hält nicht aus Geiz das Verborgene zurück.",
+        "pt": "E não é avaro, quanto ao incognoscível.",
+        "nl": "En hij is niet achterhoudend (met berichten) over het onwaarneembare.",
+        "ur": "اور وہ غَیب (کے اِس علم کو لوگوں تک پہنچانے) کے معاملہ میں بخیل نہیں ہے۔ <sup foot_note=\"188376\">1</sup>",
+        "bn": "আৰু তেওঁ গায়েবী বিষয় সম্পৰ্কে কৃপণালিও নকৰে।",
+        "fa": "و او بر [ابلاغِ آنچه از طریق] غیب [به وی وحی می‌گردد] بخیل نیست [و همانند کاهنان نیز مزد نمی‌گیرد]."
+      }
+    },
+    {
+      "verse_number": 5825,
+      "verse_key": "81:25",
+      "arabic_text": "وَمَا هُوَ بِقَوْلِ شَيْطَـٰنٍ رَّجِيمٍ",
+      "phonetic_text": "Wama huwa biqawli shaytaninrajeem",
+      "translations": {
+        "fr": "Ce n’est nullement la parole d’un démon lapidé.",
+        "en": "This is not the word of an outcast devil.",
+        "es": "[El Corán] no es la palabra de un demonio maldito.",
+        "it": "Questa non è parola di dèmone lapidato.",
+        "ru": "Это - не речи дьявола изгнанного, побиваемого.",
+        "tr": "O, kovulmuş bir şeytanın sözü değildir.",
+        "de": "Und es sind nicht die Worte eines gesteinigten Satans.",
+        "pt": "E não é (o Alcorão) a palavra do maldito Satanás.",
+        "nl": "En het is niet het Woord van een vervloekte Satan.",
+        "ur": "اور یہ کسی شیطان ِ مردُود کا قول نہیں ہے۔ <sup foot_note=\"188377\">1</sup>",
+        "bn": "আৰু এয়া কোনো অভিশপ্ত চয়তানৰো বাক্য নহয়।",
+        "fa": "و این [قرآن] گفتۀ شیطان رانده‌شده نیست."
+      }
+    },
+    {
+      "verse_number": 5826,
+      "verse_key": "81:26",
+      "arabic_text": "فَأَيْنَ تَذْهَبُونَ",
+      "phonetic_text": "Faayna tathhaboon",
+      "translations": {
+        "fr": "Qu’allez-vous donc chercher ?",
+        "en": "So where are you [people] going?",
+        "es": "¿A dónde iréis [con ese argumento]?",
+        "it": "Dove andate dunque <a class=f><sup foot_note=160509>1</sup></a> ?",
+        "ru": "Куда же вы направляетесь?",
+        "tr": "Hâl böyle iken, siz nereye gidiyorsunuz?",
+        "de": "Wo geht ihr denn hin?",
+        "pt": "Assim, pois, aonde ides?",
+        "nl": "Waarheen wenden jullie je dan?",
+        "ur": "پھر تم لوگ کدھر چلے جا رہے ہو؟",
+        "bn": "এতেকে তোমালোকে কোনফালে গতি কৰিছা?",
+        "fa": "پس به کجا می‌روید؟"
+      }
+    },
+    {
+      "verse_number": 5827,
+      "verse_key": "81:27",
+      "arabic_text": "إِنْ هُوَ إِلَّا ذِكْرٌ لِّلْعَـٰلَمِينَ",
+      "phonetic_text": "In huwa illa thikrun lilAAalameen",
+      "translations": {
+        "fr": "Ce n’est là qu’un Rappel pour l’Univers,",
+        "en": "This is a message for all people;",
+        "es": "[El Corán] es un Mensaje para toda la humanidad,",
+        "it": "Questo non è che un Monito rivolto al creato",
+        "ru": "Это - лишь Напоминание мирам,",
+        "tr": "O, âlemler için öğütten başka bir şey değildir,",
+        "de": "Es ist nur eine Ermahnung für die Weltenbewohner,",
+        "pt": "Certamente, não é mais do que uma mensagem, para o universo.",
+        "nl": "Dit is niets anders dan een Vermaning voor de werelden.",
+        "ur": "یہ تو سارے جہان والوں کے لیے ایک نصیحت ہے",
+        "bn": "এইটো কেৱল সমগ্ৰ জগতবাসীৰ বাবে উপদেশ বাণী,",
+        "fa": "این [قرآن] چیزی جز پند و اندرز برای جهانیان نیست."
+      }
+    },
+    {
+      "verse_number": 5828,
+      "verse_key": "81:28",
+      "arabic_text": "لِمَن شَآءَ مِنكُمْ أَن يَسْتَقِيمَ",
+      "phonetic_text": "Liman shaa minkum an yastaqeem",
+      "translations": {
+        "fr": "pour ceux d’entre vous, qui voudraient prendre le droit chemin.",
+        "en": "for those who wish to take the straight path.",
+        "es": "para que se encamine quien quiera.",
+        "it": "per chi di voi voglia seguire la Retta Via.",
+        "ru": "тем из вас, кто желает следовать прямым путем.",
+        "tr": "İçinizden doğru gitmek isteyenler için.",
+        "de": "für jemanden von euch, der sich recht verhalten will.",
+        "pt": "Para quem de vós se quiser encaminhar.",
+        "nl": "Voor wie van jullie het rechte (Pad) wil volgen.",
+        "ur": "تم میں سے ہر اُس شخص کے لیے جو راہِ راست پر چلنا چاہتا ہو۔ <sup foot_note=\"188378\">1</sup>",
+        "bn": "তাৰ বাবে, তোমালোকৰ মাজৰ যিয়ে সৰল পথত চলিব বিচাৰে।",
+        "fa": "برای هر یک از شما که بخواهد راه راست [حق را] در پیش گیرد."
+      }
+    },
+    {
+      "verse_number": 5829,
+      "verse_key": "81:29",
+      "arabic_text": "وَمَا تَشَآءُونَ إِلَّآ أَن يَشَآءَ ٱللَّهُ رَبُّ ٱلْعَـٰلَمِينَ",
+      "phonetic_text": "Wama tashaoona illa anyashaa Allahu rabbu alAAalameen",
+      "translations": {
+        "fr": "Or, vous ne voudrez rien qu’Allah ne veuille, Lui, le Seigneur de l’Univers.",
+        "en": "But you will only wish to do so by the will of God, the Lord of all people.",
+        "es": "Pero sabed que solo se encaminará quien quiera Dios, Señor del universo.",
+        "it": "Ma voi lo vorrete solo se lo vorrà Allah, il Signore dei mondi. <a class=f><sup foot_note=160510>1</sup></a> Il termine «kuwwirat» che abbiamo tradotto con «oscurato», secondo Tabarì (xxx, 63-ha diversi significati: avvolto come un turbante, raccolto su se stesso, condensato. <a class=f><sup foot_note=160511>2</sup></a> Come già xviii, lii,lxxv,<a class=f><sup foot_note=160512>3</sup></a> La gestazione della cammella dura dieci mesi e, nel corso dell’ultimo mese, la femmina pregna è fatta oggetto di grandi attenzioni per far sì che la gravidanza vada a buon fine. L’immagine che dà il Corano è quella di un Giorno in cui saranno stravolte tutte le consuetudini, anche quelle più profondamente radicate nel cuore e nella mente degli uomini. <a class=f><sup foot_note=160513>4</sup></a> «e divise in gruppi le anime»: «e i buoni saranno ricongiunti ai buoni e i malvagi ai malvagi»: è questo il senso suggerito dal Tabarì (xxx, che tuttavia ne cita un altro accettato da molti traduttori «e riunite [ai corpi] le anime». <a class=f><sup foot_note=160514>5</sup></a> Come già in altri brani Allah (gloria a Lui l’Altissimo) ribadisce la condanna della pratica dell’uccisione delle neonate (vedi XVII, 31). <a class=f><sup foot_note=160515>6</sup></a> I registri dove saranno annotate le azioni degli uomini. <a class=f><sup foot_note=160516>7</sup></a> «che avrà prodotto»: lett. «che avrà presentato» alla resa dei conti finale. <a class=f><sup foot_note=160517>8</sup></a> Nella loro orbita intorno al sole. <a class=f><sup foot_note=160518>9</sup></a> «l’aurora che esala il suo alito»: come un soffio che scaccia le tenebre e fa risplendere la luce. La similitudine è tanto più efficace se la si collega al versetto successivo in cui la «parola» non è altro che lo stesso Corano. <a class=f><sup foot_note=160519>10</sup></a> Il messaggero in questione è in questo caso Gabriele (pace su di lui). <a class=f><sup foot_note=160520>11</sup></a> Il versetto si rivolge che pur conoscendo Muhammad (pace e benedizioni su di lui), dicevano che era «majnûn» (posseduto dai dèmoni). <a class=f><sup foot_note=160521>12</sup></a> «l’ha visto»: Gabriele (pace su di lui), in occasione della prima rivelazione del Corano. <a class=f><sup foot_note=160522>13</sup></a> «non è avaro»: nel senso di «non vuole e non può riservare solo a sé l’esperienza della rivelazione». <a class=f><sup foot_note=160523>14</sup></a> «Dove andate dunque?»: quale altra strada potreste mai prendere se non quella che vi è stata indicata dal Corano?",
+        "ru": "Но вы не пожелаете этого, если этого не пожелает Аллах, Господь миров.",
+        "tr": "Âlemlerin Rabbi olan Allah dilemeyince, siz dileyemezsiniz.",
+        "de": "Und ihr könnt nicht wollen, außer daß Allah will, (Er), der Herr der Weltenbewohner.",
+        "pt": "Porém, não vos encaminhareis, salvo se Deus, o Senhor do Universo, assim o permitir.",
+        "nl": "En jullie kunnen niets willen, behalve wanneer Allah, de Heer der Werelden, het wil.",
+        "ur": "اور تمہارے چاہنے سے کچھ نہیں ہوتا جب تک اللہ ربّ العالمین نہ چاہے۔ <sup foot_note=\"188379\">1</sup>",
+        "bn": "তোমালোকে ইচ্ছা কৰিব নোৱাৰা, যেতিয়া লৈকে বিশ্বজগতৰ প্ৰতিপালক আল্লাহে ইচ্ছা নকৰে।",
+        "fa": "و شما [چیزی را] نمی‌خواهید، مگر آنکه پروردگار جهانیان [اراده کند و] بخواهد."
+      }
+    }
+  ]
+}

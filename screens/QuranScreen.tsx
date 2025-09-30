@@ -26,6 +26,7 @@ import {
 } from "react-native";
 import { useTranslation } from "react-i18next";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import {
   PanGestureHandler,
   State,
@@ -44,6 +45,13 @@ import { Image as ExpoImage } from "expo-image";
 import RNFS from "react-native-fs";
 import { useQuranWidget } from "../hooks/useQuranWidget";
 import { useQuranAudioService } from "../hooks/useQuranAudioService";
+import { useNetworkStatus, useOfflineAccess } from "../hooks/useNetworkStatus";
+import { OfflineMessage } from "../components/OfflineMessage";
+import {
+  OfflineNavigationTabs,
+  OfflineTabType,
+} from "../components/OfflineNavigationTabs";
+import QuranOfflineService from "../utils/QuranOfflineService";
 
 // 🚀 NOUVEAU : Composant de jauge de progression
 const ProgressBar = ({
@@ -196,6 +204,9 @@ export default function QuranScreen() {
   const flatListRef = useRef<FlatList>(null);
   const windowHeight = Dimensions.get("window").height;
 
+  // 📱 Hook pour obtenir les insets de la barre de statut
+  const insets = useSafeAreaInsets();
+
   // États pour les récitations premium
   const [availableRecitations, setAvailableRecitations] = useState<
     PremiumContent[]
@@ -205,6 +216,19 @@ export default function QuranScreen() {
   const [isOnline, setIsOnline] = useState(true);
   const [isCheckingConnection, setIsCheckingConnection] = useState(false);
   const [forceOfflineMode, setForceOfflineMode] = useState(false);
+
+  // 📱 NOUVEAU : États pour la logique offline
+  const networkStatus = useNetworkStatus();
+  const offlineAccess = useOfflineAccess(!!user?.isPremium);
+
+  const [activeOfflineTab, setActiveOfflineTab] =
+    useState<OfflineTabType>("quran");
+  const [offlineSurahs, setOfflineSurahs] = useState<any[]>([]);
+  const [loadingOfflineData, setLoadingOfflineData] = useState(false);
+
+  // Supprimer les variables non utilisées pour éviter les warnings
+  console.log("offlineSurahs:", offlineSurahs.length);
+  console.log("loadingOfflineData:", loadingOfflineData);
 
   // 🎵 NOUVEAU : Navigation par récitateur en mode hors ligne
   const [selectedOfflineReciter, setSelectedOfflineReciter] = useState<
@@ -369,13 +393,30 @@ export default function QuranScreen() {
                       .replace(/_/g, " ");
 
                     if (!isNaN(surahNumber) && reciterName) {
-                      // Utiliser getSpecificRecitation pour les métadonnées complètes
+                      // ✅ Créer directement les métadonnées sans appel serveur
                       try {
-                        const completeRecitation =
-                          await premiumManager.getSpecificRecitation(
-                            reciterName,
-                            surahNumber
-                          );
+                        const contentId = `quran_${reciterName.replace(
+                          /\s+/g,
+                          "_"
+                        )}_${surahNumber}`;
+                        const completeRecitation: PremiumContent = {
+                          id: contentId,
+                          type: "quran",
+                          title: `${reciterName} - Sourate ${surahNumber}`,
+                          description: t(
+                            "quran.offline_recitation",
+                            "Récitation téléchargée (hors ligne)"
+                          ),
+                          fileUrl: "",
+                          reciter: reciterName,
+                          surahNumber: surahNumber,
+                          isDownloaded: true,
+                          downloadPath: file.path,
+                          fileSize: Math.round(
+                            (file.size || 0) / (1024 * 1024)
+                          ), // ✅ Convertir bytes en MB
+                          version: "1.0", // ✅ Ajouté
+                        };
                         if (completeRecitation) {
                           // Forcer le statut téléchargé avec le bon chemin
                           const offlineRecitation: PremiumContent = {
@@ -746,6 +787,44 @@ export default function QuranScreen() {
     }
   }, [isServiceAvailable, user?.isPremium]);
 
+  // 🎵 NOUVEAU : Démarrer le service automatiquement pour les utilisateurs premium
+  useEffect(() => {
+    const shouldStartService = async () => {
+      if (
+        isServiceAvailable() &&
+        user?.isPremium &&
+        !serviceAudioState.isServiceRunning
+      ) {
+        // ✅ En mode offline, vérifier s'il y a des fichiers audio téléchargés
+        if (offlineAccess.isOfflineMode) {
+          const hasOfflineAudio = offlineRecitations.length > 0;
+          if (!hasOfflineAudio) {
+            console.log(
+              "🎵 Pas de fichiers audio offline - service audio désactivé"
+            );
+            return;
+          }
+        }
+
+        console.log(
+          "🎵 Démarrage automatique du service audio pour utilisateur premium"
+        );
+        startService().catch((error) => {
+          console.error("❌ Erreur démarrage service audio:", error);
+        });
+      }
+    };
+
+    shouldStartService();
+  }, [
+    isServiceAvailable,
+    user?.isPremium,
+    serviceAudioState.isServiceRunning,
+    startService,
+    offlineAccess.isOfflineMode,
+    offlineRecitations.length,
+  ]);
+
   // 🎵 NOUVEAU : Écouter aussi les événements du hook useQuranAudioService
   useEffect(() => {
     if (isServiceAvailable() && user?.isPremium) {
@@ -949,6 +1028,85 @@ export default function QuranScreen() {
     }
   };
 
+  // 📱 NOUVEAU : Charger les données offline du Coran
+  const loadOfflineQuranData = async () => {
+    setLoadingOfflineData(true);
+    try {
+      // Charger l'index des sourates
+      const index = await QuranOfflineService.getQuranIndex();
+      if (index) {
+        setOfflineSurahs(index.surahs);
+        console.log(
+          `✅ [QuranOffline] ${index.surahs.length} sourates chargées`
+        );
+      }
+    } catch (error) {
+      console.error("❌ [QuranOffline] Erreur chargement données:", error);
+    } finally {
+      setLoadingOfflineData(false);
+    }
+  };
+
+  // 📱 NOUVEAU : Charger les versets offline pour une sourate
+  const loadOfflineSurah = async (surahNumber: number) => {
+    try {
+      console.log(
+        `🔍 [QuranOffline] Tentative de chargement sourate ${surahNumber}...`
+      );
+      const surahData = await QuranOfflineService.getSurah(surahNumber);
+      if (surahData) {
+        console.log(
+          `✅ [QuranOffline] Données sourate ${surahNumber} reçues:`,
+          {
+            versesCount: surahData.verses.length,
+            availableTranslations: Object.keys(
+              surahData.verses[0]?.translations || {}
+            ),
+          }
+        );
+        // Convertir au format attendu par l'interface existante
+        const arabicVerses = surahData.verses.map((verse) => ({
+          id: verse.verse_number,
+          verse_number: verse.verse_number,
+          verse_key: verse.verse_key, // ✅ AJOUTÉ : verse_key manquant
+          text_uthmani: verse.arabic_text,
+        }));
+
+        const phoneticArr = surahData.verses.map((verse) => ({
+          id: verse.verse_number,
+          verse_number: verse.verse_number,
+          verse_key: verse.verse_key, // ✅ AJOUTÉ : verse_key manquant
+          text: verse.phonetic_text,
+        }));
+
+        const translationArr = surahData.verses.map((verse) => ({
+          id: verse.verse_number,
+          verse_number: verse.verse_number,
+          verse_key: verse.verse_key, // ✅ AJOUTÉ : verse_key manquant
+          text:
+            verse.translations[lang] ||
+            verse.translations["en"] ||
+            verse.translations["ar"] ||
+            "",
+        }));
+
+        setArabicVerses(arabicVerses);
+        setPhoneticArr(phoneticArr);
+        setTranslationArr(translationArr);
+
+        console.log(`✅ [QuranOffline] Sourate ${surahNumber} chargée offline`);
+        return true;
+      }
+      return false;
+    } catch (error) {
+      console.error(
+        `❌ [QuranOffline] Erreur chargement sourate ${surahNumber}:`,
+        error
+      );
+      return false;
+    }
+  };
+
   const getAvailableReciters = () => {
     const reciters = new Set<string>();
     availableRecitations.forEach((recitation) => {
@@ -1001,11 +1159,12 @@ export default function QuranScreen() {
 
   // Charger la récitation quand le récitateur ou la sourate change
   useEffect(() => {
-    if (selectedReciter && selectedSourate) {
+    // ✅ Ne pas charger les récitations en mode offline
+    if (selectedReciter && selectedSourate && !offlineAccess.isOfflineMode) {
       loadSpecificRecitation(selectedReciter, selectedSourate);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedReciter, selectedSourate]);
+  }, [selectedReciter, selectedSourate, offlineAccess.isOfflineMode]);
 
   // 🚀 SUPPRIMÉ : Anciens événements de téléchargement non natifs
 
@@ -1250,6 +1409,21 @@ export default function QuranScreen() {
       try {
         setIsLoading(true);
 
+        // 📱 NOUVEAU : Vérifier le mode offline
+        const shouldUseOffline =
+          offlineAccess.isOfflineMode || !networkStatus.isConnected;
+
+        // En mode offline, vérifier que le fichier est téléchargé
+        if (shouldUseOffline && !recitation.isDownloaded) {
+          showToast({
+            type: "error",
+            title: t("audio_offline_only"),
+            message: t("offline_access_premium"),
+          });
+          setIsLoading(false);
+          return;
+        }
+
         // Arrêter toute lecture précédente
         if (sound) {
           await sound.unloadAsync();
@@ -1417,6 +1591,34 @@ export default function QuranScreen() {
         // Fallback vers l'ancien système si service non disponible ou non premium
         if (!isServiceAvailable() || !user?.isPremium) {
           console.log("🎵 Utilisation du système audio Expo");
+
+          // 📱 NOUVEAU : En mode offline, pas de fallback streaming
+          if (shouldUseOffline) {
+            console.log("📱 Mode offline - lecture locale uniquement");
+            try {
+              const createdSound = await audioManager.playSource(
+                audioSource,
+                1.0
+              );
+              setSound(createdSound);
+              setIsPlaying(true);
+              setCurrentlyPlaying(recitation.id);
+              setIsLoading(false);
+              return;
+            } catch (playError: any) {
+              console.error(
+                "❌ Erreur lecture locale en mode offline:",
+                playError
+              );
+              showToast({
+                type: "error",
+                title: t("audio_offline_only"),
+                message: "Fichier audio corrompu ou indisponible",
+              });
+              setIsLoading(false);
+              return;
+            }
+          }
 
           // Créer et configurer l'objet audio (avec fallback streaming si local corrompu)
           let createdSound: any | null = null;
@@ -1598,6 +1800,8 @@ export default function QuranScreen() {
       updateWidgetAudio,
       updateWidgetPlaybackState,
       playNextInPlaylist,
+      offlineAccess.isOfflineMode,
+      networkStatus.isConnected,
     ]
   );
 
@@ -1798,6 +2002,41 @@ export default function QuranScreen() {
   useEffect(() => {
     async function fetchQuranData() {
       setLoading(true);
+
+      // 📱 NOUVEAU : Logique Premium optimisée
+      if (user?.isPremium) {
+        // Premium : TOUJOURS utiliser les données locales (plus rapide)
+        console.log(
+          `📱 [QuranOffline] Chargement sourate ${selectedSourate} avec données locales Premium`
+        );
+        const success = await loadOfflineSurah(selectedSourate);
+        if (success) {
+          setLoading(false);
+          return;
+        } else {
+          // ✅ Si le chargement offline échoue, ne pas essayer le serveur
+          console.error(
+            `❌ [QuranOffline] Impossible de charger la sourate ${selectedSourate} offline`
+          );
+          setArabicVerses([]);
+          setPhoneticArr([]);
+          setTranslationArr([]);
+          setLoading(false);
+          return;
+        }
+      } else if (!networkStatus.isConnected) {
+        // Non-Premium hors ligne : accès refusé
+        console.log(
+          `🚫 [QuranOffline] Accès refusé - connexion requise pour utilisateur gratuit`
+        );
+        setArabicVerses([]);
+        setPhoneticArr([]);
+        setTranslationArr([]);
+        setLoading(false);
+        return;
+      }
+
+      // 🌐 Mode en ligne : fonctionnement normal
       try {
         // Fetch arabe (toujours même endpoint)
         const arabicRes = await fetch(
@@ -1822,23 +2061,45 @@ export default function QuranScreen() {
         setPhoneticArr(phoneticJson.translations || []);
         setTranslationArr(translationJson.translations || []);
       } catch {
-        setArabicVerses([]);
-        setPhoneticArr([]);
-        setTranslationArr([]);
+        // En cas d'erreur réseau, essayer le mode offline si Premium
+        if (user?.isPremium) {
+          console.log(
+            `🔄 [QuranOffline] Erreur réseau, basculement vers mode offline`
+          );
+          await loadOfflineSurah(selectedSourate);
+        } else {
+          setArabicVerses([]);
+          setPhoneticArr([]);
+          setTranslationArr([]);
+        }
       }
       setLoading(false);
     }
     fetchQuranData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedSourate, lang]);
+  }, [selectedSourate, lang, user?.isPremium, networkStatus.isConnected]);
+
+  // 📱 NOUVEAU : Charger les données offline au démarrage
+  useEffect(() => {
+    if (user?.isPremium) {
+      loadOfflineQuranData();
+    }
+  }, [user?.isPremium]);
 
   function stripHtml(text: string | undefined) {
     if (!text) return "";
-    return text
-      .replace(/<sup[^>]*>.*?<\/sup>/gi, "")
-      .replace(/<[^>]*>/g, "")
-      .replace(/(\.)(\d+)$/g, "$1")
-      .trim();
+    return (
+      text
+        // Supprimer les balises sup avec foot_note (avec ou sans guillemets)
+        .replace(/<sup[^>]*foot_note[^>]*>.*?<\/sup>/gi, "")
+        // Supprimer les balises a avec des balises sup imbriquées
+        .replace(/<a[^>]*>.*?<\/a>/gi, "")
+        // Supprimer toutes les autres balises HTML
+        .replace(/<[^>]*>/g, "")
+        // Supprimer les espaces multiples
+        .replace(/\s+/g, " ")
+        .trim()
+    );
   }
 
   // Fonction pour normaliser le texte (supprimer accents et caractères spéciaux)
@@ -1861,10 +2122,24 @@ export default function QuranScreen() {
     translationText: string,
     chapterName: string
   ): Omit<QuranVerseFavorite, "id" | "dateAdded"> => {
+    // Vérifier que verse_key existe avant de le splitter
+    if (!item.verse_key) {
+      console.warn("⚠️ verse_key manquant pour l'item:", item);
+      return {
+        type: "quran_verse" as const,
+        chapterNumber: 1,
+        verseNumber: 1,
+        arabicText: item.text_uthmani || "",
+        translation: stripHtml(translationText),
+        chapterName: chapterName,
+      };
+    }
+
+    const verseParts = item.verse_key.split(":");
     return {
       type: "quran_verse" as const,
-      chapterNumber: parseInt(item.verse_key.split(":")[0]),
-      verseNumber: parseInt(item.verse_key.split(":")[1]),
+      chapterNumber: parseInt(verseParts[0]) || 1,
+      verseNumber: parseInt(verseParts[1]) || 1,
       arabicText: item.text_uthmani,
       translation: stripHtml(translationText),
       chapterName: chapterName,
@@ -1897,6 +2172,21 @@ export default function QuranScreen() {
       );
     });
   }, [searchQuery, arabicVerses, phoneticArr, translationArr]);
+
+  // 📱 NOUVEAU : Afficher le message offline si nécessaire
+  if (offlineAccess.shouldShowOfflineMessage) {
+    return (
+      <OfflineMessage
+        onRetry={() => {
+          // Recharger les données
+          if (user?.isPremium) {
+            loadOfflineQuranData();
+          }
+        }}
+        customMessage={t("offline_message_quran")}
+      />
+    );
+  }
 
   if (loading)
     return <ActivityIndicator size="large" style={{ marginTop: 40 }} />;
@@ -1940,6 +2230,161 @@ export default function QuranScreen() {
     </TouchableOpacity>
   );
 
+  // 📱 NOUVEAU : Rendu spécial pour le mode offline premium
+  if (user?.isPremium && offlineAccess.isOfflineMode) {
+    return (
+      <ImageBackground
+        source={require("../assets/images/parchment_bg.jpg")}
+        style={{ flex: 1 }}
+      >
+        <SafeAreaView style={{ flex: 1 }}>
+          <View style={[styles.container, { paddingTop: insets.top + 10 }]}>
+            {/* ✅ Utilise SafeAreaView + paddingTop réduit */}
+            {/* 📱 Onglets de navigation offline pour Premium */}
+            <OfflineNavigationTabs
+              activeTab={activeOfflineTab}
+              onTabChange={setActiveOfflineTab}
+              isPremium={!!user?.isPremium}
+            />
+            {/* Contenu selon l'onglet sélectionné */}
+            {activeOfflineTab === "quran" ? (
+              // Onglet "Texte du Coran" - afficher le contenu normal
+              <View style={{ flex: 1 }}>
+                {/* Header avec sélecteur de sourate uniquement - version compacte pour offline */}
+                <View style={styles.compactHeaderOffline}>
+                  {/* Sélecteur de sourate */}
+                  <TouchableOpacity
+                    style={[styles.compactSourateSelector, { flex: 1 }]} // ✅ Prend tout l'espace disponible
+                    onPress={() => setModalVisible(true)}
+                  >
+                    <Text style={styles.compactSourateText}>
+                      {getSelectedSourateLabel()}
+                    </Text>
+                    <MaterialCommunityIcons
+                      name="chevron-down"
+                      size={20}
+                      color="#4ECDC4"
+                    />
+                  </TouchableOpacity>
+                </View>
+
+                {/* Contenu du Coran */}
+                <FlatList
+                  ref={flatListRef}
+                  data={filteredVerses}
+                  keyExtractor={(item, index) =>
+                    `${item.verse_key || item.id || index}`
+                  }
+                  renderItem={({ item, index }) => {
+                    // Affichage simplifié pour le mode offline
+                    const originalIndex = arabicVerses.findIndex(
+                      (v) => v.id === item.id
+                    );
+                    const phoneticText = phoneticArr[originalIndex]?.text || "";
+                    const translationText =
+                      translationArr[originalIndex]?.text || "";
+
+                    return (
+                      <View style={styles.ayahContainer}>
+                        <View style={styles.arabicRow}>
+                          <Text style={styles.arabic}>
+                            {item.text_uthmani || ""}
+                          </Text>
+                          <View style={styles.verseActions}>
+                            <View style={styles.verseCircle}>
+                              <Text style={styles.verseNumber}>
+                                {item.verse_key
+                                  ? item.verse_key.split(":")[1]
+                                  : "1"}
+                              </Text>
+                            </View>
+                            <FavoriteButton
+                              favoriteData={convertToFavorite(
+                                item,
+                                translationText,
+                                getSelectedSourateLabel()
+                              )}
+                              size={20}
+                              iconColor="#ba9c34"
+                              iconColorActive="#FFD700"
+                              style={styles.favoriteButtonCompact}
+                            />
+                          </View>
+                        </View>
+                        {phoneticText ? (
+                          <Text style={styles.phonetic}>{phoneticText}</Text>
+                        ) : null}
+                        {translationText ? (
+                          <Text style={styles.traduction}>
+                            {stripHtml(translationText)}
+                          </Text>
+                        ) : null}
+                      </View>
+                    );
+                  }}
+                  initialNumToRender={5}
+                  maxToRenderPerBatch={5}
+                  windowSize={10}
+                  removeClippedSubviews={true}
+                  updateCellsBatchingPeriod={100}
+                  contentContainerStyle={[
+                    styles.versesContainer,
+                    { paddingBottom: 100 },
+                  ]} // ✅ Espace supplémentaire en bas
+                />
+              </View>
+            ) : (
+              // Onglet "Audio Téléchargés" - afficher la liste des fichiers audio
+              <View style={{ flex: 1, padding: 20 }}>
+                <Text style={styles.sectionTitle}>
+                  {t("downloaded_audio") || "Audio Téléchargés"}
+                </Text>
+                <Text style={styles.placeholderText}>
+                  {t("audio_list_placeholder") ||
+                    "Liste des fichiers audio téléchargés sera affichée ici"}
+                </Text>
+              </View>
+            )}
+          </View>
+        </SafeAreaView>
+
+        {/* 📱 Modal de sélection de sourate - accessible en mode offline */}
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => setModalVisible(false)}
+        >
+          <SafeAreaView style={styles.modalContainer}>
+            <View
+              style={[styles.modalContent, { maxHeight: windowHeight * 0.8 }]}
+            >
+              <View style={styles.modalHeader}>
+                <Text style={styles.modalTitle}>{t("choose_sourate")}</Text>
+                <TouchableOpacity
+                  style={styles.closeButton}
+                  onPress={() => setModalVisible(false)}
+                >
+                  <Text style={styles.closeButtonText}>✕</Text>
+                </TouchableOpacity>
+              </View>
+              <FlatList
+                data={modalData}
+                renderItem={renderSourateItem}
+                keyExtractor={(item) => item.key.toString()}
+                initialNumToRender={20}
+                maxToRenderPerBatch={20}
+                windowSize={10}
+                removeClippedSubviews={true}
+              />
+            </View>
+          </SafeAreaView>
+        </Modal>
+      </ImageBackground>
+    );
+  }
+
+  // Rendu normal pour les utilisateurs en ligne ou non-premium
   return (
     <ImageBackground
       source={require("../assets/images/parchment_bg.jpg")}
@@ -2833,7 +3278,9 @@ export default function QuranScreen() {
                               // TODO: isCurrentlyPlaying && styles.verseNumberPlaying,
                             ]}
                           >
-                            {item.verse_key.split(":")[1]}
+                            {item.verse_key
+                              ? item.verse_key.split(":")[1]
+                              : "1"}
                           </Text>
                         </View>
                         <FavoriteButton
@@ -2963,11 +3410,32 @@ const styles = StyleSheet.create({
     borderColor: "#ba9c34",
     flex: 2,
   },
-  compactSourateText: {
+  compactLangSelector: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#fffbe6",
+    borderRadius: 12,
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    borderWidth: 1,
+    borderColor: "#ba9c34",
     flex: 1,
+  },
+  compactSourateText: {
     fontSize: 14,
-    color: "#483C1C",
-    fontFamily: "ScheherazadeNew",
+    color: "#2c1810",
+    fontWeight: "600",
+    flex: 1,
+    marginRight: 8,
+  },
+  compactLangText: {
+    fontSize: 14,
+    color: "#2c1810",
+    fontWeight: "600",
+    marginRight: 8,
+  },
+  versesContainer: {
+    paddingBottom: 20,
     marginRight: 4,
   },
   compactReciterSelector: {
@@ -4521,5 +4989,32 @@ const styles = StyleSheet.create({
     textShadowColor: "rgba(0,0,0,0.7)",
     textShadowOffset: { width: 0, height: 1 },
     textShadowRadius: 2,
+  },
+  // 📱 NOUVEAU : Styles pour la page offline
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "#2c1810",
+    marginBottom: 16,
+    textAlign: "center",
+  },
+  placeholderText: {
+    fontSize: 14,
+    color: "#666",
+    textAlign: "center",
+    fontStyle: "italic",
+    lineHeight: 20,
+  },
+  compactHeaderOffline: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    backgroundColor: "rgba(231, 200, 106, 0.15)",
+    borderRadius: 12, // ✅ RÉDUIT de 16 à 12
+    padding: 8, // ✅ RÉDUIT de 12 à 8
+    marginBottom: 8, // ✅ RÉDUIT de 16 à 8
+    borderWidth: 1,
+    borderColor: "#e7c86a",
+    gap: 6, // ✅ RÉDUIT de 8 à 6
   },
 });
