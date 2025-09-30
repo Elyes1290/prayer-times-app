@@ -179,11 +179,19 @@
       "local_storage": "Stockage local sécurisé"
     },
 
+    "faq_title": "❓ Questions fréquentes",
+    "faq_location_question": "Pourquoi l'app a besoin de ma localisation ?",
+    "faq_location_answer": "La localisation est nécessaire pour calculer avec précision les horaires de prière selon votre position géographique. Vous pouvez aussi saisir votre ville manuellement.",
+    "faq_notifications_question": "Pourquoi mes notifications ne fonctionnent pas ?",
+    "faq_notifications_answer": "Vérifiez que les notifications sont autorisées dans les paramètres de votre téléphone et que l'optimisation de batterie est désactivée pour l'application.",
+    "faq_qibla_question": "Comment améliorer la précision de la Qibla ?",
+    "faq_qibla_answer": "Tenez votre téléphone à plat, éloigné des objets métalliques. Faites des mouvements en 8 pour calibrer la boussole si elle est instable.",
+    "faq_offline_question": "L'app fonctionne-t-elle hors ligne ?",
+    "faq_offline_answer": "Oui, une fois configurée, l'app fonctionne hors ligne pour les horaires de prière, Qibla, dhikr et lecture du Coran.",
+
     "premium_title": "👑 Fonctionnalités Premium",
     "premium_subtitle": "Découvrez les fonctionnalités exclusives de la version premium :",
     "premium_stats": "Statistiques détaillées de vos prières",
-    "premium_stat": "Statistiques Premium",
-    "insights_spirituels": "Insights Spirituels",
     "premium_badges": "Système de badges et récompenses",
     "premium_audio": "Lecteur audio avancé et cache",
     "premium_themes": "Thèmes personnalisables avancés",
@@ -203,16 +211,6 @@
     "new_downloads": "Téléchargements natifs optimisés",
     "new_mosques": "Localisateur de mosquées intelligent",
     "new_backup": "Système de sauvegarde complet",
-
-    "faq_title": "❓ Questions fréquentes",
-    "faq_location_question": "Pourquoi l'app a besoin de ma localisation ?",
-    "faq_location_answer": "La localisation est nécessaire pour calculer avec précision les horaires de prière selon votre position géographique. Vous pouvez aussi saisir votre ville manuellement.",
-    "faq_notifications_question": "Pourquoi mes notifications ne fonctionnent pas ?",
-    "faq_notifications_answer": "Vérifiez que les notifications sont autorisées dans les paramètres de votre téléphone et que l'optimisation de batterie est désactivée pour l'application.",
-    "faq_qibla_question": "Comment améliorer la précision de la Qibla ?",
-    "faq_qibla_answer": "Tenez votre téléphone à plat, éloigné des objets métalliques. Faites des mouvements en 8 pour calibrer la boussole si elle est instable.",
-    "faq_offline_question": "L'app fonctionne-t-elle hors ligne ?",
-    "faq_offline_answer": "Oui, une fois configurée, l'app fonctionne hors ligne pour les horaires de prière, Qibla, dhikr et lecture du Coran.",
 
     "support_title": "🤝 Support et communauté",
     "send_suggestion": "Envoyer une suggestion",
