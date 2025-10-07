@@ -714,10 +714,17 @@ class PremiumContentManager {
   ): Promise<PremiumContent[]> {
     try {
       debugLog(`🔍 Scan du dossier: ${folderPath} (type: ${type})`);
-      // 🔐 CORRECTION : Utiliser apiClient pour inclure l'authentification
-      const apiUrl = `/list-files.php?folder=${encodeURIComponent(folderPath)}`;
-      const response = await apiClient.get(apiUrl);
-      const data = response;
+      const token = await AsyncStorage.getItem("auth_token");
+      const apiUrl = `${
+        AppConfig.API_BASE_URL
+      }/list-files.php?folder=${encodeURIComponent(folderPath)}`;
+      const response = await fetch(apiUrl, {
+        headers: {
+          Accept: "application/json",
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        },
+      });
+      const data = await response.json();
       if (!data.success || !Array.isArray(data.data?.files)) {
         debugLog(`❌ Réponse API invalide:`, data);
         return [];

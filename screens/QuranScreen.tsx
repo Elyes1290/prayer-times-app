@@ -201,6 +201,8 @@ export default function QuranScreen() {
   const { showToast } = useToast();
   const [modalVisible, setModalVisible] = useState(false);
   const [reciterModalVisible, setReciterModalVisible] = useState(false);
+  const [menuVisible, setMenuVisible] = useState(false);
+  const [modalType, setModalType] = useState<"sourate" | "reciter">("sourate");
   const flatListRef = useRef<FlatList>(null);
   const windowHeight = Dimensions.get("window").height;
 
@@ -212,10 +214,6 @@ export default function QuranScreen() {
     PremiumContent[]
   >([]);
   const [selectedReciter, setSelectedReciter] = useState<string | null>(null);
-  // 🌐 NOUVEAU : États pour la connectivité et mode hors ligne
-  const [isOnline, setIsOnline] = useState(true);
-  const [isCheckingConnection, setIsCheckingConnection] = useState(false);
-  const [forceOfflineMode, setForceOfflineMode] = useState(false);
 
   // 📱 NOUVEAU : États pour la logique offline
   const networkStatus = useNetworkStatus();
@@ -229,16 +227,6 @@ export default function QuranScreen() {
   // Supprimer les variables non utilisées pour éviter les warnings
   console.log("offlineSurahs:", offlineSurahs.length);
   console.log("loadingOfflineData:", loadingOfflineData);
-
-  // 🎵 NOUVEAU : Navigation par récitateur en mode hors ligne
-  const [selectedOfflineReciter, setSelectedOfflineReciter] = useState<
-    string | null
-  >(null);
-  const [offlineRecitations, setOfflineRecitations] = useState<
-    PremiumContent[]
-  >([]);
-  const [loadingOfflineRecitations, setLoadingOfflineRecitations] =
-    useState(false);
 
   // 🎵 NOUVEAU : Lecture en continu (playlist mode)
   const [playlistMode, setPlaylistMode] = useState(false);
@@ -325,198 +313,6 @@ export default function QuranScreen() {
     "🎵 Hook useQuranAudioService - Service disponible:",
     isServiceAvailable()
   );
-
-  // 🌐 NOUVEAU : Fonction pour tester la connectivité
-  const checkConnectivity = async (): Promise<boolean> => {
-    try {
-      setIsCheckingConnection(true);
-      // Test simple avec timeout court
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 3000); // 3 secondes
-
-      await fetch("https://api.quran.com/api/v4/chapters?language=fr&limit=1", {
-        method: "HEAD",
-        signal: controller.signal,
-      });
-
-      clearTimeout(timeoutId);
-      return true;
-    } catch (error) {
-      console.log("🌐 Mode hors ligne détecté:", error);
-      return false;
-    } finally {
-      setIsCheckingConnection(false);
-    }
-  };
-
-  // 🌐 NOUVEAU : Scanner directement les dossiers de récitateurs (comme premiumManager)
-  const loadOfflineRecitations = async (): Promise<PremiumContent[]> => {
-    try {
-      console.log("🔍 Scan direct des dossiers de récitateurs...");
-
-      const downloadedRecitations: PremiumContent[] = [];
-      const quranDirectory = `${RNFS.DocumentDirectoryPath}/quran`;
-
-      // Vérifier que le répertoire quran existe
-      const quranExists = await RNFS.exists(quranDirectory);
-      if (!quranExists) {
-        console.log("❌ Répertoire /quran inexistant");
-        return [];
-      }
-
-      // Scanner tous les dossiers de récitateurs
-      const reciterFolders = await RNFS.readDir(quranDirectory);
-      console.log(`📁 Dossiers récitateurs trouvés: ${reciterFolders.length}`);
-
-      for (const reciterFolder of reciterFolders) {
-        if (reciterFolder.isDirectory()) {
-          console.log(`📂 Scan dossier: ${reciterFolder.name}`);
-
-          try {
-            // Scanner tous les fichiers MP3 dans ce dossier récitateur
-            const reciterFiles = await RNFS.readDir(reciterFolder.path);
-
-            for (const file of reciterFiles) {
-              if (file.isFile() && file.name.endsWith(".mp3")) {
-                // Le nom du fichier (sans .mp3) = contentId complet
-                const contentId = file.name.replace(/\.mp3$/, "");
-                console.log(`🎵 Fichier trouvé: ${contentId} -> ${file.path}`);
-
-                // Parser l'ID pour extraire les infos
-                if (contentId.startsWith("quran_")) {
-                  const parts = contentId.split("_");
-                  if (parts.length >= 3 && parts[0] === "quran") {
-                    const surahNumber = parseInt(parts[parts.length - 1]);
-                    const reciterName = parts
-                      .slice(1, -1)
-                      .join(" ")
-                      .replace(/_/g, " ");
-
-                    if (!isNaN(surahNumber) && reciterName) {
-                      // ✅ Créer directement les métadonnées sans appel serveur
-                      try {
-                        const contentId = `quran_${reciterName.replace(
-                          /\s+/g,
-                          "_"
-                        )}_${surahNumber}`;
-                        const completeRecitation: PremiumContent = {
-                          id: contentId,
-                          type: "quran",
-                          title: `${reciterName} - Sourate ${surahNumber}`,
-                          description: t(
-                            "quran.offline_recitation",
-                            "Récitation téléchargée (hors ligne)"
-                          ),
-                          fileUrl: "",
-                          reciter: reciterName,
-                          surahNumber: surahNumber,
-                          isDownloaded: true,
-                          downloadPath: file.path,
-                          fileSize: Math.round(
-                            (file.size || 0) / (1024 * 1024)
-                          ), // ✅ Convertir bytes en MB
-                          version: "1.0", // ✅ Ajouté
-                        };
-                        if (completeRecitation) {
-                          // Forcer le statut téléchargé avec le bon chemin
-                          const offlineRecitation: PremiumContent = {
-                            ...completeRecitation,
-                            isDownloaded: true,
-                            downloadPath: file.path,
-                          };
-                          downloadedRecitations.push(offlineRecitation);
-                          console.log(
-                            `✅ Récitation complète: ${completeRecitation.title}`
-                          );
-                          continue;
-                        }
-                      } catch (error) {
-                        console.log(
-                          `⚠️ API non disponible pour ${reciterName} sourate ${surahNumber}:`,
-                          error
-                        );
-                      }
-
-                      // Fallback : récitation basique si API non disponible
-                      const basicRecitation: PremiumContent = {
-                        id: contentId,
-                        type: "quran",
-                        title: `${reciterName} - Sourate ${surahNumber}`,
-                        description: t(
-                          "quran.offline_recitation",
-                          "Récitation téléchargée (hors ligne)"
-                        ),
-                        fileUrl: "",
-                        fileSize: 0,
-                        version: "1.0",
-                        isDownloaded: true,
-                        downloadPath: file.path,
-                        reciter: reciterName,
-                        surahNumber: surahNumber,
-                      };
-                      downloadedRecitations.push(basicRecitation);
-                      console.log(
-                        `✅ Récitation basique: ${basicRecitation.title}`
-                      );
-                    }
-                  }
-                }
-              }
-            }
-          } catch (reciterError) {
-            console.error(
-              `❌ Erreur scan dossier ${reciterFolder.name}:`,
-              reciterError
-            );
-          }
-        }
-      }
-
-      console.log(
-        `📱 Total récitations trouvées: ${downloadedRecitations.length}`
-      );
-      return downloadedRecitations;
-    } catch (error) {
-      console.error("❌ Erreur scan dossiers récitateurs:", error);
-      return [];
-    }
-  };
-
-  // 🎵 NOUVEAU : Regrouper les récitations par récitateur pour l'affichage hors ligne
-  const groupRecitationsByReciter = (recitations: PremiumContent[]) => {
-    const groups: { [reciterName: string]: PremiumContent[] } = {};
-
-    recitations.forEach((recitation) => {
-      const reciterName =
-        recitation.reciter || t("quran.unknown_reciter", "Récitateur inconnu");
-      if (!groups[reciterName]) {
-        groups[reciterName] = [];
-      }
-      groups[reciterName].push(recitation);
-    });
-
-    // Trier chaque groupe par numéro de sourate
-    Object.keys(groups).forEach((reciter) => {
-      groups[reciter].sort(
-        (a, b) => (a.surahNumber || 0) - (b.surahNumber || 0)
-      );
-    });
-
-    return groups;
-  };
-
-  // 🎵 NOUVEAU : Obtenir la liste des récitateurs avec comptage
-  const getOfflineReciters = (recitations: PremiumContent[]) => {
-    const groups = groupRecitationsByReciter(recitations);
-
-    return Object.keys(groups)
-      .map((reciterName) => ({
-        name: reciterName,
-        count: groups[reciterName].length,
-        recitations: groups[reciterName],
-      }))
-      .sort((a, b) => a.name.localeCompare(b.name));
-  };
 
   // 🎵 NOUVEAU : Démarrer la lecture en continu d'un récitateur
   const startPlaylistMode = (reciterRecitations: PremiumContent[]) => {
@@ -715,48 +511,11 @@ export default function QuranScreen() {
       .catch(() => setSourates([]));
   }, [lang]);
 
-  // 🎵 NOUVEAU : Charger les récitations locales réelles
-  const loadOfflineRecitationsData = useCallback(async () => {
-    setLoadingOfflineRecitations(true);
-    try {
-      console.log("🔍 Chargement des récitations réellement locales...");
-      const localRecitations = await loadOfflineRecitations();
-      setOfflineRecitations(localRecitations);
-      console.log(`📱 ${localRecitations.length} récitations locales chargées`);
-    } catch (error) {
-      console.error("❌ Erreur chargement récitations locales:", error);
-      setOfflineRecitations([]);
-    } finally {
-      setLoadingOfflineRecitations(false);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   // Charger les récitations premium disponibles
   useEffect(() => {
     loadAvailableRecitations();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  // 🌐 NOUVEAU : Charger les bonnes récitations selon le mode
-  useEffect(() => {
-    // Réinitialiser le récitateur sélectionné quand on change de mode
-    setSelectedOfflineReciter(null);
-
-    // Arrêter la playlist si on change de mode
-    if (playlistMode) {
-      stopPlaylistMode();
-    }
-
-    if (!isOnline || forceOfflineMode) {
-      // Mode hors ligne : charger les vraies récitations locales
-      loadOfflineRecitationsData();
-    } else {
-      // Mode en ligne : charger les récitations du serveur
-      loadAvailableRecitations();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [forceOfflineMode, isOnline, loadOfflineRecitationsData]);
 
   // Nettoyer l'audio à la fermeture
   useEffect(() => {
@@ -795,17 +554,6 @@ export default function QuranScreen() {
         user?.isPremium &&
         !serviceAudioState.isServiceRunning
       ) {
-        // ✅ En mode offline, vérifier s'il y a des fichiers audio téléchargés
-        if (offlineAccess.isOfflineMode) {
-          const hasOfflineAudio = offlineRecitations.length > 0;
-          if (!hasOfflineAudio) {
-            console.log(
-              "🎵 Pas de fichiers audio offline - service audio désactivé"
-            );
-            return;
-          }
-        }
-
         console.log(
           "🎵 Démarrage automatique du service audio pour utilisateur premium"
         );
@@ -821,8 +569,6 @@ export default function QuranScreen() {
     user?.isPremium,
     serviceAudioState.isServiceRunning,
     startService,
-    offlineAccess.isOfflineMode,
-    offlineRecitations.length,
   ]);
 
   // 🎵 NOUVEAU : Écouter aussi les événements du hook useQuranAudioService
@@ -956,30 +702,6 @@ export default function QuranScreen() {
 
   const loadAvailableRecitations = async (forceRefresh = false) => {
     try {
-      // 🌐 NOUVEAU : Vérifier d'abord la connectivité (sauf si mode forcé)
-      const isConnected = !forceOfflineMode ? await checkConnectivity() : true;
-      setIsOnline(isConnected);
-
-      if (!isConnected || forceOfflineMode) {
-        // 📱 Mode hors ligne ou forcé : charger uniquement les récitations téléchargées
-        console.log(
-          forceOfflineMode
-            ? "🌐 Mode hors ligne forcé - affichage des récitations locales"
-            : "🌐 Mode hors ligne détecté - chargement des récitations locales"
-        );
-        const offlineRecitations = await loadOfflineRecitations();
-        setAvailableRecitations(offlineRecitations);
-
-        // Sélectionner automatiquement le premier récitateur hors ligne
-        if (!selectedReciter && offlineRecitations.length > 0) {
-          const firstOfflineReciter = offlineRecitations[0].reciter;
-          if (firstOfflineReciter) {
-            setSelectedReciter(firstOfflineReciter);
-          }
-        }
-        return;
-      }
-
       // 🌐 Mode en ligne : fonctionnement normal
       // 🎯 OPTIMISATION : Utiliser le cache par défaut, forcer le rechargement seulement si demandé
       if (forceRefresh) {
@@ -1021,10 +743,8 @@ export default function QuranScreen() {
       }
     } catch (error) {
       console.error("Erreur chargement récitations:", error);
-      // En cas d'erreur, essayer de charger les récitations hors ligne
-      setIsOnline(false);
-      const offlineRecitations = await loadOfflineRecitations();
-      setAvailableRecitations(offlineRecitations);
+      // En cas d'erreur réseau, le catalogue reste vide
+      // L'utilisateur verra le mode hors ligne avec les 2 onglets si isPremium et hors connexion
     }
   };
 
@@ -1456,7 +1176,7 @@ export default function QuranScreen() {
 
           // 🎵 NOUVEAU : Mettre à jour le récitateur sélectionné pour la synchronisation UI (mode hors ligne)
           if (recitation.reciter) {
-            setSelectedOfflineReciter(recitation.reciter);
+            setSelectedReciter(recitation.reciter);
           }
         }
         // 🌐 Priorité 2: Streaming depuis Infomaniak
@@ -2217,6 +1937,7 @@ export default function QuranScreen() {
       onPress={() => {
         setSelectedSourate(item.key);
         setModalVisible(false);
+        // Le menu reste ouvert, pas besoin de le rouvrir
       }}
     >
       <Text
@@ -2391,76 +2112,25 @@ export default function QuranScreen() {
       style={{ flex: 1 }}
     >
       <View style={styles.container}>
-        {/* 🎨 NOUVEAU : Header compact avec sélecteurs */}
-        <View style={styles.compactHeader}>
-          {/* Sélecteur de sourate */}
+        {/* 🎨 Header avec bouton menu */}
+        <View style={styles.header}>
+          <View style={styles.headerInfo}>
+            <Text style={styles.headerTitle}>{getSelectedSourateLabel()}</Text>
+            {user.isPremium && selectedReciter && (
+              <Text style={styles.headerSubtitle}>{selectedReciter}</Text>
+            )}
+          </View>
           <TouchableOpacity
-            style={styles.compactSourateSelector}
-            onPress={() => setModalVisible(true)}
+            style={styles.menuButton}
+            onPress={() => setMenuVisible(true)}
           >
-            <Text style={styles.compactSourateText}>
-              {getSelectedSourateLabel()}
-            </Text>
-            <MaterialCommunityIcons
-              name="chevron-down"
-              size={16}
-              color="#ba9c34"
-            />
+            <Text style={styles.menuButtonText}>☰</Text>
           </TouchableOpacity>
-
-          {/* Sélecteur de récitateur premium (seulement si premium) */}
-          {user.isPremium && getAvailableReciters().length > 0 && (
-            <TouchableOpacity
-              style={styles.compactReciterSelector}
-              onPress={() => setReciterModalVisible(true)}
-            >
-              <MaterialCommunityIcons
-                name="account-music"
-                size={16}
-                color="#ba9c34"
-              />
-              <Text style={styles.compactReciterText}>
-                {selectedReciter || t("quran.reciter", "Récitateur")}
-              </Text>
-              <MaterialCommunityIcons
-                name="chevron-down"
-                size={16}
-                color="#ba9c34"
-              />
-            </TouchableOpacity>
-          )}
         </View>
 
-        {/* 🌐 NOUVEAU : Section contrôles hors ligne */}
-        <View style={styles.offlineControlsSection}>
-          {/* Indicateur de mode hors ligne */}
-          {(!isOnline || forceOfflineMode) && (
-            <View style={styles.offlineIndicator}>
-              <MaterialCommunityIcons
-                name={forceOfflineMode ? "cloud-off-outline" : "wifi-off"}
-                size={14}
-                color="#ff6b6b"
-              />
-              <Text style={styles.offlineText}>
-                {forceOfflineMode
-                  ? t("forced_offline_mode", "Mode local")
-                  : t("offline_mode", "Mode hors ligne")}
-              </Text>
-            </View>
-          )}
-
-          {/* Indicateur de vérification connectivité */}
-          {isCheckingConnection && (
-            <View style={styles.connectivityIndicator}>
-              <ActivityIndicator size="small" color="#ba9c34" />
-              <Text style={styles.connectivityText}>
-                {t("quran.checking_connection", "Vérification...")}
-              </Text>
-            </View>
-          )}
-
-          {/* 🔍 NOUVEAU : Bouton de diagnostic widget */}
-          {__DEV__ && (
+        {/* 🔍 NOUVEAU : Bouton de diagnostic widget (mode dev) */}
+        {__DEV__ && (
+          <View style={styles.offlineControlsSection}>
             <TouchableOpacity
               style={styles.diagnosticButton}
               onPress={runWidgetDiagnostic}
@@ -2468,35 +2138,8 @@ export default function QuranScreen() {
               <MaterialCommunityIcons name="bug" size={16} color="#ffffff" />
               <Text style={styles.diagnosticButtonText}>Diagnostic Widget</Text>
             </TouchableOpacity>
-          )}
-
-          {/* Bouton basculer mode hors ligne (visible quand premium) */}
-          {user.isPremium && (
-            <TouchableOpacity
-              style={[
-                styles.offlineManagerButton,
-                forceOfflineMode && styles.offlineManagerButtonActive,
-              ]}
-              onPress={() => setForceOfflineMode(!forceOfflineMode)}
-            >
-              <MaterialCommunityIcons
-                name={forceOfflineMode ? "cloud-off-outline" : "download"}
-                size={16}
-                color={forceOfflineMode ? "#ff6b6b" : "#ba9c34"}
-              />
-              <Text
-                style={[
-                  styles.offlineManagerButtonText,
-                  forceOfflineMode && styles.offlineManagerButtonTextActive,
-                ]}
-              >
-                {forceOfflineMode
-                  ? t("back_online", "En ligne")
-                  : t("offline_manager", "Hors ligne")}
-              </Text>
-            </TouchableOpacity>
-          )}
-        </View>
+          </View>
+        )}
 
         {/* 🎨 NOUVEAU : Barre de recherche séparée */}
         <View style={styles.searchContainer}>
@@ -2513,6 +2156,67 @@ export default function QuranScreen() {
           />
         </View>
 
+        {/* 🎨 NOUVEAU : Menu latéral de navigation */}
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={menuVisible}
+          onRequestClose={() => setMenuVisible(false)}
+        >
+          <SafeAreaView style={styles.menuOverlay}>
+            <View style={styles.menuContent}>
+              <View style={styles.menuHeader}>
+                <Text style={styles.menuTitle}>{t("navigation")}</Text>
+                <TouchableOpacity
+                  style={styles.closeButton}
+                  onPress={() => setMenuVisible(false)}
+                >
+                  <Text style={styles.closeButtonText}>✕</Text>
+                </TouchableOpacity>
+              </View>
+
+              {/* Section Sourate */}
+              <View style={styles.menuSection}>
+                <Text style={styles.menuSectionTitle}>{t("sourate")}</Text>
+                <TouchableOpacity
+                  style={styles.menuOption}
+                  onPress={() => {
+                    setModalType("sourate");
+                    setModalVisible(true);
+                    // Ne pas fermer le menu tout de suite
+                  }}
+                >
+                  <Text style={styles.menuOptionText}>
+                    {getSelectedSourateLabel()}
+                  </Text>
+                  <Text style={styles.menuArrow}>›</Text>
+                </TouchableOpacity>
+              </View>
+
+              {/* Section Récitateur (premium uniquement) */}
+              {user.isPremium && getAvailableReciters().length > 0 && (
+                <View style={styles.menuSection}>
+                  <Text style={styles.menuSectionTitle}>{t("reciter")}</Text>
+                  <TouchableOpacity
+                    style={styles.menuOption}
+                    onPress={() => {
+                      setModalType("reciter");
+                      setReciterModalVisible(true);
+                      setMenuVisible(false); // Fermer le menu après sélection du récitateur
+                    }}
+                  >
+                    <Text style={styles.menuOptionText}>
+                      {selectedReciter || t("quran.reciter", "Récitateur")}
+                    </Text>
+                    <Text style={styles.menuArrow}>›</Text>
+                  </TouchableOpacity>
+                </View>
+              )}
+            </View>
+          </SafeAreaView>
+        </Modal>
+
+        {/* Modal de sélection (sourate ou récitateur) */}
         <Modal
           animationType="slide"
           transparent={true}
@@ -2942,305 +2646,35 @@ export default function QuranScreen() {
           </SafeAreaView>
         </Modal>
 
-        {/* 🌐 NOUVEAU : Affichage conditionnel selon le mode */}
-        {!isOnline || forceOfflineMode ? (
-          // 📱 Mode hors ligne : Navigation par récitateur
-          <View style={styles.offlineRecitationsContainer}>
-            {/* En-tête avec navigation */}
-            <View style={styles.offlineHeader}>
-              {selectedOfflineReciter ? (
-                // Vue récitateur sélectionné avec bouton retour
-                <View style={styles.offlineHeaderWithBack}>
-                  <TouchableOpacity
-                    style={styles.backButton}
-                    onPress={() => {
-                      setSelectedOfflineReciter(null);
-                      // Arrêter la playlist si on retourne en arrière
-                      if (playlistMode) {
-                        stopPlaylistMode();
-                      }
-                    }}
-                  >
-                    <MaterialCommunityIcons
-                      name="arrow-left"
-                      size={20}
-                      color="#ba9c34"
-                    />
-                    <Text style={styles.backButtonText}>
-                      {t("back", "Retour")}
-                    </Text>
-                  </TouchableOpacity>
-                  <View style={styles.offlineReciterTitleContainer}>
-                    <Text style={styles.offlineRecitationsTitle}>
-                      {selectedOfflineReciter}
-                    </Text>
-                    {playlistMode && (
-                      <Text style={styles.playlistIndicator}>
-                        🎵 {currentPlaylistIndex + 1}/{playlistItems.length}
-                      </Text>
-                    )}
-                  </View>
+        {/* 🌐 Affichage normal du Coran */}
+        <>
+          {/* N'affiche pas Bismillah pour sourate 9 */}
+          {selectedSourate !== 9 && (
+            <Text style={styles.bismillah}>{t("bismillah")}</Text>
+          )}
 
-                  {/* 🎵 NOUVEAU : Contrôles playlist */}
-                  <View style={styles.playlistControls}>
-                    {!playlistMode ? (
-                      <TouchableOpacity
-                        style={styles.playAllButton}
-                        onPress={() => {
-                          const reciterRecitations =
-                            groupRecitationsByReciter(offlineRecitations)[
-                              selectedOfflineReciter
-                            ] || [];
-                          if (reciterRecitations.length > 0) {
-                            startPlaylistMode(reciterRecitations);
-                          }
-                        }}
-                      >
-                        <MaterialCommunityIcons
-                          name="playlist-play"
-                          size={20}
-                          color="#4ECDC4"
-                        />
-                        <Text style={styles.playAllButtonText}>
-                          {t("play_all", "Tout lire")}
-                        </Text>
-                      </TouchableOpacity>
-                    ) : (
-                      <TouchableOpacity
-                        style={styles.stopPlaylistButton}
-                        onPress={stopPlaylistMode}
-                      >
-                        <MaterialCommunityIcons
-                          name="stop"
-                          size={20}
-                          color="#FF6B6B"
-                        />
-                        <Text style={styles.stopPlaylistButtonText}>
-                          {t("stop_playlist", "Arrêter")}
-                        </Text>
-                      </TouchableOpacity>
-                    )}
-                  </View>
-                </View>
-              ) : (
-                // Vue liste des récitateurs
-                <Text style={styles.offlineRecitationsTitle}>
-                  {t("downloaded_recitations", "Récitations téléchargées")}
-                </Text>
-              )}
-            </View>
+          <FlatList
+            data={filteredVerses}
+            keyExtractor={(item) => item.id.toString()}
+            renderItem={({ item, index }) => {
+              // Affichage normal d'une sourate
+              const originalIndex = arabicVerses.findIndex(
+                (v) => v.id === item.id
+              );
+              const phoneticText = phoneticArr[originalIndex]?.text || "";
+              const translationText = translationArr[originalIndex]?.text || "";
 
-            {loadingOfflineRecitations ? (
-              <View style={styles.noRecitationsContainer}>
-                <ActivityIndicator size="large" color="#ba9c34" />
-                <Text style={styles.noRecitationsTitle}>
-                  {t("checking_connection", "Vérification...")}
-                </Text>
-              </View>
-            ) : offlineRecitations.length === 0 ? (
-              <View style={styles.noRecitationsContainer}>
-                <MaterialCommunityIcons
-                  name="download-off"
-                  size={48}
-                  color="#ba9c34"
-                />
-                <Text style={styles.noRecitationsTitle}>
-                  {t(
-                    "no_downloaded_recitations",
-                    "Aucune récitation téléchargée"
-                  )}
-                </Text>
-                <Text style={styles.noRecitationsSubtitle}>
-                  {t(
-                    "download_recitations_first",
-                    "Téléchargez des récitations en mode connecté pour les écouter hors ligne"
-                  )}
-                </Text>
-              </View>
-            ) : selectedOfflineReciter ? (
-              // Vue des récitations du récitateur sélectionné
-              <FlatList
-                data={
-                  groupRecitationsByReciter(offlineRecitations)[
-                    selectedOfflineReciter
-                  ] || []
-                }
-                keyExtractor={(item) => item.id}
-                renderItem={({ item, index }) => {
-                  const isCurrentInPlaylist =
-                    playlistMode &&
-                    playlistItems[currentPlaylistIndex]?.id === item.id;
-                  // const isPlayingThis = currentlyPlaying === item.id && isPlaying;
+              // Obtenir le nom de la sourate pour les favoris
+              const currentSourate = sourates.find(
+                (s) => s.id === selectedSourate
+              );
+              const chapterName = currentSourate
+                ? currentSourate.name_simple
+                : "Sourate inconnue";
 
-                  return (
-                    <View
-                      style={[
-                        styles.offlineRecitationItem,
-                        isCurrentInPlaylist &&
-                          styles.offlineRecitationItemActive,
-                      ]}
-                    >
-                      <View style={styles.offlineRecitationInfo}>
-                        <View style={styles.offlineRecitationTitleContainer}>
-                          {isCurrentInPlaylist && (
-                            <MaterialCommunityIcons
-                              name="music-note"
-                              size={16}
-                              color="#4ECDC4"
-                              style={styles.playlistCurrentIcon}
-                            />
-                          )}
-                          <Text
-                            style={[
-                              styles.offlineRecitationTitle,
-                              isCurrentInPlaylist &&
-                                styles.offlineRecitationTitleActive,
-                            ]}
-                          >
-                            {item.title}
-                          </Text>
-                        </View>
-                        <View style={styles.offlineRecitationBadgesContainer}>
-                          <View style={styles.offlineRecitationBadge}>
-                            <MaterialCommunityIcons
-                              name="download"
-                              size={12}
-                              color="#4CAF50"
-                            />
-                            <Text style={styles.offlineRecitationBadgeText}>
-                              {t("offline", "Hors ligne")}
-                            </Text>
-                          </View>
-                          {playlistMode && index === currentPlaylistIndex && (
-                            <View style={styles.playlistPositionBadge}>
-                              <Text style={styles.playlistPositionText}>
-                                {index + 1}/{playlistItems.length}
-                              </Text>
-                            </View>
-                          )}
-                        </View>
-                      </View>
-
-                      <View style={styles.offlineRecitationActions}>
-                        <TouchableOpacity
-                          style={[
-                            styles.offlineRecitationPlayButton,
-                            currentlyPlaying === item.id &&
-                              isPlaying &&
-                              styles.offlineRecitationPlayButtonActive,
-                          ]}
-                          onPress={() => {
-                            if (currentlyPlaying === item.id && isPlaying) {
-                              stopRecitation();
-                            } else {
-                              playRecitation(item);
-                            }
-                          }}
-                        >
-                          <MaterialCommunityIcons
-                            name={
-                              currentlyPlaying === item.id && isPlaying
-                                ? "pause"
-                                : "play"
-                            }
-                            size={20}
-                            color={
-                              currentlyPlaying === item.id && isPlaying
-                                ? "#FF6B6B"
-                                : "#4ECDC4"
-                            }
-                          />
-                        </TouchableOpacity>
-
-                        <TouchableOpacity
-                          style={styles.offlineRecitationDeleteButton}
-                          onPress={async () => {
-                            await handleDeleteRecitation(item);
-                            // Rafraîchir la liste après suppression
-                            loadOfflineRecitationsData();
-                          }}
-                        >
-                          <MaterialCommunityIcons
-                            name="delete"
-                            size={18}
-                            color="#FF6B6B"
-                          />
-                        </TouchableOpacity>
-                      </View>
-                    </View>
-                  );
-                }}
-                showsVerticalScrollIndicator={false}
-                contentContainerStyle={styles.offlineRecitationsList}
-              />
-            ) : (
-              // Vue liste des récitateurs
-              <FlatList
-                data={getOfflineReciters(offlineRecitations)}
-                keyExtractor={(item) => item.name}
-                renderItem={({ item }) => (
-                  <TouchableOpacity
-                    style={styles.offlineReciterItem}
-                    onPress={() => setSelectedOfflineReciter(item.name)}
-                  >
-                    <View style={styles.offlineReciterInfo}>
-                      <View style={styles.offlineReciterHeader}>
-                        <MaterialCommunityIcons
-                          name="account-music"
-                          size={24}
-                          color="#ba9c34"
-                        />
-                        <Text style={styles.offlineReciterName}>
-                          {item.name}
-                        </Text>
-                      </View>
-                      <Text style={styles.offlineReciterCount}>
-                        {item.count} récitation{item.count > 1 ? "s" : ""}
-                      </Text>
-                    </View>
-                    <MaterialCommunityIcons
-                      name="chevron-right"
-                      size={20}
-                      color="#ba9c34"
-                    />
-                  </TouchableOpacity>
-                )}
-                showsVerticalScrollIndicator={false}
-                contentContainerStyle={styles.offlineRecitersList}
-              />
-            )}
-          </View>
-        ) : (
-          // 🌐 Mode en ligne : Affichage normal du Coran
-          <>
-            {/* N'affiche pas Bismillah pour sourate 9 */}
-            {selectedSourate !== 9 && (
-              <Text style={styles.bismillah}>{t("bismillah")}</Text>
-            )}
-
-            <FlatList
-              data={filteredVerses}
-              keyExtractor={(item) => item.id.toString()}
-              renderItem={({ item, index }) => {
-                // Affichage normal d'une sourate
-                const originalIndex = arabicVerses.findIndex(
-                  (v) => v.id === item.id
-                );
-                const phoneticText = phoneticArr[originalIndex]?.text || "";
-                const translationText =
-                  translationArr[originalIndex]?.text || "";
-
-                // Obtenir le nom de la sourate pour les favoris
-                const currentSourate = sourates.find(
-                  (s) => s.id === selectedSourate
-                );
-                const chapterName = currentSourate
-                  ? currentSourate.name_simple
-                  : "Sourate inconnue";
-
-                // 🎯 NOUVEAU : Vérifier si ce verset est en cours de lecture (version simplifiée pour debug)
-                // TODO: À implémenter plus tard
-                /*
+              // 🎯 NOUVEAU : Vérifier si ce verset est en cours de lecture (version simplifiée pour debug)
+              // TODO: À implémenter plus tard
+              /*
             const isCurrentlyPlaying =
               currentVerseIndex !== null && originalIndex === currentVerseIndex;
 
@@ -3249,78 +2683,75 @@ export default function QuranScreen() {
             );
             */
 
-                return (
-                  <View
-                    style={[
-                      styles.ayahContainer,
-                      // TODO: isCurrentlyPlaying && styles.ayahContainerPlaying,
-                    ]}
-                  >
-                    <View style={styles.arabicRow}>
-                      <Text
+              return (
+                <View
+                  style={[
+                    styles.ayahContainer,
+                    // TODO: isCurrentlyPlaying && styles.ayahContainerPlaying,
+                  ]}
+                >
+                  <View style={styles.arabicRow}>
+                    <Text
+                      style={[
+                        styles.arabic,
+                        // TODO: isCurrentlyPlaying && styles.arabicPlaying,
+                      ]}
+                    >
+                      {item.text_uthmani}
+                    </Text>
+                    <View style={styles.verseActions}>
+                      <View
                         style={[
-                          styles.arabic,
-                          // TODO: isCurrentlyPlaying && styles.arabicPlaying,
+                          styles.verseCircle,
+                          // TODO: isCurrentlyPlaying && styles.verseCirclePlaying,
                         ]}
                       >
-                        {item.text_uthmani}
-                      </Text>
-                      <View style={styles.verseActions}>
-                        <View
+                        <Text
                           style={[
-                            styles.verseCircle,
-                            // TODO: isCurrentlyPlaying && styles.verseCirclePlaying,
+                            styles.verseNumber,
+                            // TODO: isCurrentlyPlaying && styles.verseNumberPlaying,
                           ]}
                         >
-                          <Text
-                            style={[
-                              styles.verseNumber,
-                              // TODO: isCurrentlyPlaying && styles.verseNumberPlaying,
-                            ]}
-                          >
-                            {item.verse_key
-                              ? item.verse_key.split(":")[1]
-                              : "1"}
-                          </Text>
-                        </View>
-                        <FavoriteButton
-                          favoriteData={convertToFavorite(
-                            item,
-                            translationText,
-                            chapterName
-                          )}
-                          size={20}
-                          iconColor="#ba9c34"
-                          iconColorActive="#FFD700"
-                          style={styles.favoriteButtonCompact}
-                        />
+                          {item.verse_key ? item.verse_key.split(":")[1] : "1"}
+                        </Text>
                       </View>
+                      <FavoriteButton
+                        favoriteData={convertToFavorite(
+                          item,
+                          translationText,
+                          chapterName
+                        )}
+                        size={20}
+                        iconColor="#ba9c34"
+                        iconColorActive="#FFD700"
+                        style={styles.favoriteButtonCompact}
+                      />
                     </View>
-
-                    <Text style={styles.phonetic}>{phoneticText}</Text>
-
-                    {lang !== "ar" && (
-                      <Text style={styles.traduction}>
-                        {stripHtml(translationText)}
-                      </Text>
-                    )}
-
-                    <Image
-                      source={require("../assets/images/ayah_separator.png")}
-                      style={styles.ayahSeparator}
-                      resizeMode="contain"
-                    />
                   </View>
-                );
-              }}
-              initialNumToRender={5}
-              maxToRenderPerBatch={5}
-              windowSize={10}
-              removeClippedSubviews={true}
-              updateCellsBatchingPeriod={100}
-            />
-          </>
-        )}
+
+                  <Text style={styles.phonetic}>{phoneticText}</Text>
+
+                  {lang !== "ar" && (
+                    <Text style={styles.traduction}>
+                      {stripHtml(translationText)}
+                    </Text>
+                  )}
+
+                  <Image
+                    source={require("../assets/images/ayah_separator.png")}
+                    style={styles.ayahSeparator}
+                    resizeMode="contain"
+                  />
+                </View>
+              );
+            }}
+            initialNumToRender={5}
+            maxToRenderPerBatch={5}
+            windowSize={10}
+            removeClippedSubviews={true}
+            updateCellsBatchingPeriod={100}
+          />
+        </>
       </View>
 
       {/* Modal d'information de navigation */}
@@ -3386,7 +2817,110 @@ const styles = StyleSheet.create({
     padding: 16,
     paddingTop: 60, // Ajout d'un padding en haut pour descendre le bouton
   },
-  // 🎨 NOUVEAU : Styles pour le header compact
+  // 🎨 NOUVEAU : Styles pour le header avec menu
+  header: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 20,
+    paddingHorizontal: 4,
+  },
+  headerInfo: {
+    flex: 1,
+  },
+  headerTitle: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "#523f13",
+    fontFamily: "ScheherazadeNew",
+  },
+  headerSubtitle: {
+    fontSize: 16,
+    color: "#2c1810",
+    fontFamily: "ScheherazadeNew",
+    marginTop: 4,
+    fontWeight: "500",
+  },
+  menuButton: {
+    backgroundColor: "#e7c86a",
+    borderRadius: 25,
+    width: 50,
+    height: 50,
+    alignItems: "center",
+    justifyContent: "center",
+    borderColor: "#ba9c34",
+    borderWidth: 2,
+    shadowColor: "#b59d42",
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    shadowOffset: { width: 0, height: 2 },
+    elevation: 3,
+  },
+  menuButtonText: {
+    fontSize: 24,
+    color: "#523f13",
+    fontWeight: "bold",
+  },
+  menuOverlay: {
+    flex: 1,
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    justifyContent: "flex-end",
+  },
+  menuContent: {
+    backgroundColor: "#fffbe6",
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    paddingBottom: 40,
+    maxHeight: "70%",
+  },
+  menuHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: 20,
+    borderBottomWidth: 1,
+    borderBottomColor: "#e7c86a",
+  },
+  menuTitle: {
+    fontSize: 22,
+    fontWeight: "bold",
+    color: "#523f13",
+    fontFamily: "ScheherazadeNew",
+  },
+  menuSection: {
+    padding: 20,
+    borderBottomWidth: 1,
+    borderBottomColor: "#f0f0f0",
+  },
+  menuSectionTitle: {
+    fontSize: 16,
+    fontWeight: "600",
+    color: "#ba9c34",
+    marginBottom: 12,
+    fontFamily: "ScheherazadeNew",
+  },
+  menuOption: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    backgroundColor: "#f8f8f8",
+    padding: 16,
+    borderRadius: 12,
+    borderColor: "#e7c86a",
+    borderWidth: 1,
+  },
+  menuOptionText: {
+    fontSize: 16,
+    color: "#523f13",
+    fontFamily: "ScheherazadeNew",
+    flex: 1,
+  },
+  menuArrow: {
+    fontSize: 20,
+    color: "#ba9c34",
+    marginLeft: 10,
+  },
+  // 🎨 ANCIEN : Styles pour le header compact (gardé pour la version offline)
   compactHeader: {
     flexDirection: "row",
     alignItems: "center",
@@ -4372,14 +3906,22 @@ const styles = StyleSheet.create({
   },
   modalContainer: {
     flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
     backgroundColor: "rgba(0, 0, 0, 0.5)",
-    justifyContent: "flex-end",
   },
   modalContent: {
-    backgroundColor: "#fff",
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-    paddingBottom: 20,
+    backgroundColor: "#fffbe6",
+    borderRadius: 20,
+    width: "90%",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
   },
   modalHeader: {
     flexDirection: "row",
@@ -4405,12 +3947,13 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
   },
   optionStyle: {
-    padding: 16,
+    backgroundColor: "#fffbe6",
     borderBottomWidth: 1,
-    borderBottomColor: "#f0f0f0",
+    borderColor: "#e7c86a",
+    padding: 12,
   },
   selectedOptionStyle: {
-    backgroundColor: "#fffbe6",
+    backgroundColor: "#e7c86a",
   },
   optionTextStyle: {
     fontSize: 18,
@@ -4528,20 +4071,16 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(186, 156, 52, 0.08)",
   },
   searchInput: {
+    height: 40,
     backgroundColor: "#fffbe6",
-    borderRadius: 22,
-    paddingVertical: 12,
-    paddingHorizontal: 20,
-    paddingRight: 50, // Espace pour le loader
+    borderRadius: 20,
     borderColor: "#ba9c34",
-    borderWidth: 2,
-    fontSize: 16,
+    borderWidth: 1.5,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    fontSize: 14,
     color: "#523f13",
-    shadowColor: "#b59d42",
-    shadowOpacity: 0.3,
-    shadowRadius: 8,
-    shadowOffset: { width: 0, height: 2 },
-    elevation: 3,
+    textAlign: "left",
   },
   sourateHeader: {
     backgroundColor: "rgba(231, 200, 106, 0.2)",
@@ -4560,8 +4099,8 @@ const styles = StyleSheet.create({
     fontFamily: "ScheherazadeNew",
   },
   searchContainer: {
-    position: "relative",
-    marginBottom: 16,
+    marginBottom: 10,
+    paddingHorizontal: 15,
   },
   searchLoader: {
     position: "absolute",

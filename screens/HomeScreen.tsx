@@ -467,7 +467,7 @@ export default function HomeScreen() {
       ? location
       : null;
 
-  const currentPrayerTimes = usePrayerTimes(
+  const { prayerTimes: currentPrayerTimes } = usePrayerTimes(
     locationToUse,
     today,
     user?.isPremium || false

@@ -1,5 +1,6 @@
 package com.drogbinho.prayertimesapp2;
 
+import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
@@ -34,6 +35,7 @@ public class PrayerTimesWidget extends AppWidgetProvider {
 
     private static final String TAG = "PrayerTimesWidget";
     private static final String ACTION_REFRESH_DUA = "com.drogbinho.prayertimesapp2.REFRESH_DUA";
+    private static final String ACTION_MIDNIGHT_UPDATE = "com.drogbinho.prayertimesapp2.MIDNIGHT_UPDATE_WIDGET";
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
@@ -81,17 +83,38 @@ public class PrayerTimesWidget extends AppWidgetProvider {
             } else {
                 widgetDebugLog(TAG, "⏭️ Widget non mis à jour (pas de changement)");
             }
+        } else if (ACTION_MIDNIGHT_UPDATE.equals(action)) {
+            widgetDebugLog(TAG, "🌙 Mise à jour quotidienne à minuit déclenchée");
+            
+            // Effacer le cache des horaires de prière
+            SharedPreferences prefs = context.getSharedPreferences("adhan_prefs", Context.MODE_PRIVATE);
+            prefs.edit()
+                .remove("today_prayer_times")
+                .remove("widget_last_date")
+                .apply();
+            
+            widgetDebugLog(TAG, "🗑️ Cache des horaires de prière effacé");
+            
+            // Forcer la mise à jour du widget
+            forceUpdateWidgets(context);
+            
+            // Re-planifier pour demain
+            scheduleMidnightUpdate(context);
         }
     }
 
     @Override
     public void onEnabled(Context context) {
         // Called when the first widget is created
+        widgetDebugLog(TAG, "🆕 Premier widget créé, planification de l'alarme quotidienne");
+        scheduleMidnightUpdate(context);
     }
 
     @Override
     public void onDisabled(Context context) {
         // Called when the last widget is removed
+        widgetDebugLog(TAG, "🗑️ Dernier widget supprimé, annulation de l'alarme quotidienne");
+        cancelMidnightUpdate(context);
     }
 
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
@@ -1203,5 +1226,73 @@ public class PrayerTimesWidget extends AppWidgetProvider {
             errorLog(TAG, "❌ Erreur isAfterIshaTime: " + e.getMessage(), e);
             return false;
         }
+    }
+
+    /**
+     * 🌙 Planifier une alarme pour mettre à jour le widget à minuit chaque jour
+     */
+    private static void scheduleMidnightUpdate(Context context) {
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        if (alarmManager == null) {
+            errorLog(TAG, "❌ AlarmManager non disponible");
+            return;
+        }
+
+        // Créer l'intent pour l'alarme
+        Intent intent = new Intent(context, PrayerTimesWidget.class);
+        intent.setAction(ACTION_MIDNIGHT_UPDATE);
+        
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(
+            context,
+            0,
+            intent,
+            PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
+        );
+
+        // Calculer l'heure de la prochaine minuit
+        Calendar midnight = Calendar.getInstance();
+        midnight.set(Calendar.HOUR_OF_DAY, 0);
+        midnight.set(Calendar.MINUTE, 0);
+        midnight.set(Calendar.SECOND, 0);
+        midnight.set(Calendar.MILLISECOND, 0);
+        
+        // Si on est déjà passé minuit aujourd'hui, planifier pour demain
+        if (midnight.getTimeInMillis() <= System.currentTimeMillis()) {
+            midnight.add(Calendar.DAY_OF_MONTH, 1);
+        }
+
+        // Planifier l'alarme quotidienne
+        alarmManager.setRepeating(
+            AlarmManager.RTC_WAKEUP,
+            midnight.getTimeInMillis(),
+            AlarmManager.INTERVAL_DAY,
+            pendingIntent
+        );
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.getDefault());
+        widgetDebugLog(TAG, "⏰ Alarme quotidienne planifiée pour: " + sdf.format(midnight.getTime()));
+    }
+
+    /**
+     * 🗑️ Annuler l'alarme quotidienne de mise à jour du widget
+     */
+    private static void cancelMidnightUpdate(Context context) {
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        if (alarmManager == null) {
+            return;
+        }
+
+        Intent intent = new Intent(context, PrayerTimesWidget.class);
+        intent.setAction(ACTION_MIDNIGHT_UPDATE);
+        
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(
+            context,
+            0,
+            intent,
+            PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
+        );
+
+        alarmManager.cancel(pendingIntent);
+        widgetDebugLog(TAG, "🗑️ Alarme quotidienne annulée");
     }
 }

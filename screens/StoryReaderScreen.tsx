@@ -23,11 +23,54 @@ import { useCurrentTheme } from "../hooks/useThemeColor";
 import { usePremium } from "../contexts/PremiumContext";
 import { useTranslation } from "react-i18next";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useNetworkStatus } from "../hooks/useNetworkStatus";
 
 // Helper pour obtenir le token d'authentification
 const getAuthToken = async (): Promise<string> => {
   const token = await AsyncStorage.getItem("auth_token");
   return token || "";
+};
+
+// 🆕 Helper pour récupérer une histoire téléchargée depuis le stockage local
+const DOWNLOADED_STORIES_KEY = "downloaded_prophet_stories";
+
+interface ProphetStory {
+  id: string;
+  title: string;
+  title_arabic?: string;
+  category: string;
+  difficulty: "beginner" | "intermediate" | "advanced";
+  age_recommendation: number | string;
+  reading_time: number | string;
+  word_count: number | string;
+  is_premium: boolean | number | string;
+  user_progress: number | string;
+  is_favorited: boolean | number | string;
+  view_count: number | string;
+  rating: number | string;
+  historical_location?: string;
+  isDownloaded?: boolean;
+  fullData?: {
+    story: any;
+    chapters: StoryChapter[];
+    references: StoryReference[];
+    glossary: GlossaryTerm[];
+  };
+}
+
+const getDownloadedStory = async (
+  storyId: string
+): Promise<ProphetStory | null> => {
+  try {
+    const data = await AsyncStorage.getItem(DOWNLOADED_STORIES_KEY);
+    if (!data) return null;
+
+    const stories: ProphetStory[] = JSON.parse(data);
+    return stories.find((s) => s.id === storyId) || null;
+  } catch (error) {
+    console.error("Erreur lecture histoire téléchargée:", error);
+    return null;
+  }
 };
 
 interface StoryChapter {
@@ -92,6 +135,7 @@ export default function StoryReaderScreen() {
   const { user: premiumUser } = usePremium();
   const { t } = useTranslation();
   const router = useRouter();
+  const networkStatus = useNetworkStatus(); // 🆕 Détection du mode hors ligne
 
   // État local
   const [storyData, setStoryData] = useState<StoryData | null>(null);
@@ -142,13 +186,53 @@ export default function StoryReaderScreen() {
     }, [storyId])
   );
 
-  // Charger l'histoire
+  // 🆕 Charger l'histoire (en ligne ou hors ligne)
   useEffect(() => {
     if (!storyId) return;
 
     const loadStory = async () => {
       try {
         setLoading(true);
+
+        // 🆕 Si hors ligne, essayer de charger depuis le stockage local
+        if (!networkStatus.isConnected) {
+          console.log(
+            "📱 Mode hors ligne - chargement depuis le stockage local"
+          );
+          const downloadedStory = await getDownloadedStory(storyId);
+
+          if (downloadedStory && downloadedStory.fullData) {
+            // 🆕 Charger directement la structure complète sauvegardée
+            const offlineStoryData: StoryData = downloadedStory.fullData;
+
+            setStoryData(offlineStoryData);
+
+            // Animation d'apparition
+            Animated.timing(fadeAnim, {
+              toValue: 1,
+              duration: 800,
+              useNativeDriver: true,
+            }).start();
+          } else {
+            Alert.alert(
+              "Histoire non disponible",
+              "Cette histoire n'est pas téléchargée pour l'accès hors ligne.",
+              [
+                {
+                  text: "OK",
+                  onPress: () => {
+                    AsyncStorage.removeItem("current_story_id");
+                    router.replace("/prophet-stories" as any);
+                  },
+                },
+              ]
+            );
+          }
+          setLoading(false);
+          return;
+        }
+
+        // Mode en ligne : charger depuis l'API
         const token = await getAuthToken();
         const headers: any = {
           "Content-Type": "application/json",
@@ -184,16 +268,33 @@ export default function StoryReaderScreen() {
         }
       } catch (error) {
         console.error("Erreur chargement histoire:", error);
-        Alert.alert("Erreur", "Erreur de connexion");
-        await AsyncStorage.removeItem("current_story_id");
-        router.replace("/prophet-stories" as any);
+
+        // 🆕 En cas d'erreur, essayer le mode hors ligne
+        const downloadedStory = await getDownloadedStory(storyId);
+        if (downloadedStory && downloadedStory.fullData) {
+          const offlineStoryData: StoryData = downloadedStory.fullData;
+          setStoryData(offlineStoryData);
+
+          Animated.timing(fadeAnim, {
+            toValue: 1,
+            duration: 800,
+            useNativeDriver: true,
+          }).start();
+        } else {
+          Alert.alert(
+            "Erreur",
+            "Erreur de connexion et histoire non téléchargée"
+          );
+          await AsyncStorage.removeItem("current_story_id");
+          router.replace("/prophet-stories" as any);
+        }
       } finally {
         setLoading(false);
       }
     };
 
     loadStory();
-  }, [storyId]);
+  }, [storyId, networkStatus.isConnected]);
 
   // 🧹 Nettoyer l'AsyncStorage quand le composant se démonte
   useEffect(() => {

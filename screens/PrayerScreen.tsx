@@ -677,11 +677,8 @@ export default function PrayerScreen() {
       ? location
       : null;
 
-  const currentPrayerTimes = usePrayerTimes(
-    locationToUse,
-    today,
-    user?.isPremium || false
-  );
+  const { prayerTimes: currentPrayerTimes, isLoading: isPrayerTimesLoading } =
+    usePrayerTimes(locationToUse, today, user?.isPremium || false);
   const weekPrayerTimes = useWeeklyPrayerTimes(locationToUse, today);
 
   // Animation d'entrée
@@ -925,8 +922,8 @@ export default function PrayerScreen() {
     );
   }
 
-  // Si on n'a pas encore d'horaires de prières
-  if (!currentPrayerTimes) {
+  // Si on n'a pas encore d'horaires de prières ou si le chargement est en cours
+  if (!currentPrayerTimes || isPrayerTimesLoading) {
     return (
       <ThemedImageBackground style={styles.background}>
         <StatusBar

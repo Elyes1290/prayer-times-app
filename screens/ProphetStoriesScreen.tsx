@@ -8,6 +8,7 @@ import {
   FlatList,
   Alert,
   StatusBar,
+  ActivityIndicator,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons } from "@expo/vector-icons";
@@ -25,12 +26,86 @@ import {
   useFavorites,
   ProphetStoryFavorite,
 } from "../contexts/FavoritesContext";
+import { useNetworkStatus } from "../hooks/useNetworkStatus";
 
 // Helper pour obtenir le token d'authentification
 const getAuthToken = async (): Promise<string> => {
   const token = await AsyncStorage.getItem("auth_token");
   return token || "";
 };
+
+// 🆕 Helper pour gérer le stockage local des histoires
+const DOWNLOADED_STORIES_KEY = "downloaded_prophet_stories";
+
+const getDownloadedStories = async (): Promise<ProphetStory[]> => {
+  try {
+    const data = await AsyncStorage.getItem(DOWNLOADED_STORIES_KEY);
+    return data ? JSON.parse(data) : [];
+  } catch (error) {
+    console.error("Erreur lecture histoires téléchargées:", error);
+    return [];
+  }
+};
+
+const saveDownloadedStory = async (story: ProphetStory): Promise<boolean> => {
+  try {
+    const downloaded = await getDownloadedStories();
+    const exists = downloaded.find((s) => s.id === story.id);
+    if (!exists) {
+      downloaded.push({ ...story, isDownloaded: true });
+      await AsyncStorage.setItem(
+        DOWNLOADED_STORIES_KEY,
+        JSON.stringify(downloaded)
+      );
+    }
+    return true;
+  } catch (error) {
+    console.error("Erreur sauvegarde histoire:", error);
+    return false;
+  }
+};
+
+const removeDownloadedStory = async (storyId: string): Promise<boolean> => {
+  try {
+    const downloaded = await getDownloadedStories();
+    const filtered = downloaded.filter((s) => s.id !== storyId);
+    await AsyncStorage.setItem(
+      DOWNLOADED_STORIES_KEY,
+      JSON.stringify(filtered)
+    );
+    return true;
+  } catch (error) {
+    console.error("Erreur suppression histoire:", error);
+    return false;
+  }
+};
+
+const isStoryDownloaded = async (storyId: string): Promise<boolean> => {
+  const downloaded = await getDownloadedStories();
+  return downloaded.some((s) => s.id === storyId);
+};
+
+interface StoryChapter {
+  id: string;
+  title: string;
+  content: string;
+  chapter_order: number;
+  reading_time: number;
+}
+
+interface StoryReference {
+  type: "quran" | "hadith" | "sira" | "historical";
+  source: string;
+  reference_text: string;
+  authenticity?: string;
+}
+
+interface GlossaryTerm {
+  term: string;
+  arabic_term?: string;
+  definition: string;
+  pronunciation?: string;
+}
 
 interface ProphetStory {
   id: string;
@@ -47,6 +122,14 @@ interface ProphetStory {
   view_count: number | string;
   rating: number | string;
   historical_location?: string;
+  isDownloaded?: boolean; // 🆕 Pour savoir si l'histoire est téléchargée
+  // 🆕 Structure complète pour le mode hors ligne
+  fullData?: {
+    story: any;
+    chapters: StoryChapter[];
+    references: StoryReference[];
+    glossary: GlossaryTerm[];
+  };
 }
 
 interface StoryStats {
@@ -108,53 +191,88 @@ export default function ProphetStoriesScreen() {
     );
   };
 
+  // 🆕 Hook pour détecter le mode hors ligne
+  const networkStatus = useNetworkStatus();
+
   // État local
   const [stories, setStories] = useState<ProphetStory[]>([]);
   const [stats, setStats] = useState<StoryStats | null>(null);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
+  const [downloadingStories, setDownloadingStories] = useState<Set<string>>(
+    new Set()
+  );
 
-  // Charger les données
-  const loadStories = useCallback(async (showLoader = true) => {
-    try {
-      if (showLoader) setLoading(true);
+  // 🆕 Charger les données (en ligne ou hors ligne)
+  const loadStories = useCallback(
+    async (showLoader = true) => {
+      try {
+        if (showLoader) setLoading(true);
 
-      const token = await getAuthToken();
-      const headers: any = {
-        "Content-Type": "application/json",
-      };
-
-      // Ajouter le token seulement s'il existe
-      if (token) {
-        headers.Authorization = `Bearer ${token}`;
-      }
-
-      const response = await fetch(
-        `https://myadhanapp.com/api/prophet-stories.php?action=catalog`,
-        {
-          method: "GET",
-          headers: headers,
+        // 🆕 Si hors ligne, charger depuis le stockage local
+        if (!networkStatus.isConnected) {
+          console.log(
+            "📱 Mode hors ligne - chargement des histoires téléchargées"
+          );
+          const downloadedStories = await getDownloadedStories();
+          setStories(downloadedStories);
+          setStats(null); // Pas de stats en mode hors ligne
+          return;
         }
-      );
-      const responseData = await response.json();
 
-      if (responseData.success) {
-        setStories(responseData.data.stories || []);
-        setStats(responseData.data.stats || null);
-      } else {
-        Alert.alert(
-          "Erreur",
-          responseData.message || "Impossible de charger les histoires"
+        // Mode en ligne : charger depuis l'API
+        const token = await getAuthToken();
+        const headers: any = {
+          "Content-Type": "application/json",
+        };
+
+        // Ajouter le token seulement s'il existe
+        if (token) {
+          headers.Authorization = `Bearer ${token}`;
+        }
+
+        const response = await fetch(
+          `https://myadhanapp.com/api/prophet-stories.php?action=catalog`,
+          {
+            method: "GET",
+            headers: headers,
+          }
         );
+        const responseData = await response.json();
+
+        if (responseData.success) {
+          // 🆕 Vérifier quelles histoires sont téléchargées
+          const storiesWithDownloadStatus = await Promise.all(
+            (responseData.data.stories || []).map(
+              async (story: ProphetStory) => ({
+                ...story,
+                isDownloaded: await isStoryDownloaded(story.id),
+              })
+            )
+          );
+          setStories(storiesWithDownloadStatus);
+          setStats(responseData.data.stats || null);
+        } else {
+          Alert.alert(
+            "Erreur",
+            responseData.message || "Impossible de charger les histoires"
+          );
+        }
+      } catch (error) {
+        console.error("Erreur chargement histoires:", error);
+        // 🆕 En cas d'erreur, essayer de charger depuis le local
+        const downloadedStories = await getDownloadedStories();
+        if (downloadedStories.length > 0) {
+          setStories(downloadedStories);
+        }
+        // Ne pas afficher d'alerte ici, géré dans le rendu
+      } finally {
+        setLoading(false);
+        setRefreshing(false);
       }
-    } catch (error) {
-      console.error("Erreur chargement histoires:", error);
-      Alert.alert("Erreur", "Erreur de connexion");
-    } finally {
-      setLoading(false);
-      setRefreshing(false);
-    }
-  }, []);
+    },
+    [networkStatus.isConnected]
+  );
 
   useFocusEffect(
     useCallback(() => {
@@ -277,6 +395,90 @@ export default function ProphetStoriesScreen() {
     } catch (error) {
       console.error("Erreur toggle favorite:", error);
       Alert.alert("Erreur", "Impossible de modifier les favoris");
+    }
+  };
+
+  // 🆕 Télécharger une histoire pour l'accès hors ligne
+  const handleDownloadStory = async (story: ProphetStory) => {
+    try {
+      setDownloadingStories((prev) => new Set(prev).add(story.id));
+
+      // Charger le contenu complet de l'histoire depuis l'API
+      const token = await getAuthToken();
+      const headers: any = {
+        "Content-Type": "application/json",
+      };
+      if (token) {
+        headers.Authorization = `Bearer ${token}`;
+      }
+
+      const response = await fetch(
+        `https://myadhanapp.com/api/prophet-stories.php?action=story&id=${story.id}`,
+        {
+          method: "GET",
+          headers: headers,
+        }
+      );
+      const responseData = await response.json();
+
+      if (responseData.success && responseData.data) {
+        // 🆕 Sauvegarder toute la structure de l'histoire (chapitres, références, glossaire)
+        const storyWithFullData: ProphetStory = {
+          ...story,
+          isDownloaded: true,
+          fullData: {
+            story: responseData.data.story,
+            chapters: responseData.data.chapters || [],
+            references: responseData.data.references || [],
+            glossary: responseData.data.glossary || [],
+          },
+        };
+
+        const success = await saveDownloadedStory(storyWithFullData);
+        if (success) {
+          // Mettre à jour l'état local
+          setStories((prev) =>
+            prev.map((s) =>
+              s.id === story.id ? { ...s, isDownloaded: true } : s
+            )
+          );
+          Alert.alert("Succès", "Histoire téléchargée avec succès");
+        }
+      } else {
+        Alert.alert(
+          "Erreur",
+          responseData.message ||
+            "Impossible de télécharger le contenu de l'histoire"
+        );
+      }
+    } catch (error) {
+      console.error("Erreur téléchargement histoire:", error);
+      Alert.alert("Erreur", "Erreur lors du téléchargement");
+    } finally {
+      setDownloadingStories((prev) => {
+        const newSet = new Set(prev);
+        newSet.delete(story.id);
+        return newSet;
+      });
+    }
+  };
+
+  // 🆕 Supprimer une histoire téléchargée
+  const handleDeleteStory = async (storyId: string) => {
+    try {
+      const success = await removeDownloadedStory(storyId);
+      if (success) {
+        // Mettre à jour l'état local
+        setStories((prev) =>
+          prev.map((s) =>
+            s.id === storyId ? { ...s, isDownloaded: false } : s
+          )
+        );
+        Alert.alert("Succès", "Histoire supprimée du stockage local");
+      }
+    } catch (error) {
+      console.error("Erreur suppression histoire:", error);
+      Alert.alert("Erreur", "Erreur lors de la suppression");
     }
   };
 
@@ -488,6 +690,53 @@ export default function ProphetStoriesScreen() {
             </Text>
           </View>
         )}
+
+        {/* 🆕 Bouton de téléchargement/suppression */}
+        {networkStatus.isConnected && (
+          <TouchableOpacity
+            style={[
+              styles.downloadButton,
+              story.isDownloaded && styles.downloadedButton,
+            ]}
+            onPress={(e) => {
+              e.stopPropagation();
+              if (story.isDownloaded) {
+                Alert.alert(
+                  "Supprimer",
+                  "Voulez-vous supprimer cette histoire téléchargée ?",
+                  [
+                    { text: "Annuler", style: "cancel" },
+                    {
+                      text: "Supprimer",
+                      style: "destructive",
+                      onPress: () => handleDeleteStory(safeStory.id),
+                    },
+                  ]
+                );
+              } else {
+                handleDownloadStory(story);
+              }
+            }}
+            disabled={downloadingStories.has(safeStory.id)}
+          >
+            {downloadingStories.has(safeStory.id) ? (
+              <ActivityIndicator size="small" color="#fff" />
+            ) : (
+              <>
+                <Ionicons
+                  name={
+                    story.isDownloaded ? "checkmark-circle" : "download-outline"
+                  }
+                  size={20}
+                  color="#fff"
+                />
+                <Text style={styles.downloadButtonText}>
+                  {story.isDownloaded ? "Téléchargée" : "Télécharger"}
+                </Text>
+              </>
+            )}
+          </TouchableOpacity>
+        )}
       </TouchableOpacity>
     );
   };
@@ -574,6 +823,35 @@ export default function ProphetStoriesScreen() {
     );
   }
 
+  // 🆕 Si hors ligne et aucune histoire téléchargée
+  if (!networkStatus.isConnected && stories.length === 0) {
+    return (
+      <ThemedView style={styles.container}>
+        <StatusBar
+          barStyle={currentTheme === "dark" ? "light-content" : "dark-content"}
+          backgroundColor="transparent"
+          translucent
+        />
+        {renderHeader()}
+        <View style={styles.emptyContainer}>
+          <Ionicons
+            name="cloud-offline-outline"
+            size={80}
+            color={colors.textSecondary}
+          />
+          <ThemedText style={styles.emptyTitle}>Mode hors ligne</ThemedText>
+          <ThemedText style={styles.emptyMessage}>
+            Aucune histoire téléchargée
+          </ThemedText>
+          <ThemedText style={styles.emptySubtext}>
+            Connectez-vous à Internet et téléchargez des histoires pour y
+            accéder hors ligne
+          </ThemedText>
+        </View>
+      </ThemedView>
+    );
+  }
+
   return (
     <ThemedView style={styles.container}>
       <StatusBar
@@ -595,7 +873,9 @@ export default function ProphetStoriesScreen() {
         ]}
       >
         <Text style={[styles.filterTitle, { color: colors.text }]}>
-          📂 Histoires disponibles
+          {networkStatus.isConnected
+            ? "📂 Histoires disponibles"
+            : "📥 Histoires téléchargées"}
         </Text>
       </View>
 
@@ -802,6 +1082,51 @@ const styles = StyleSheet.create({
     fontSize: 12,
     minWidth: 60,
     textAlign: "right",
+  },
+  // 🆕 Styles pour le message vide (hors ligne)
+  emptyContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    paddingHorizontal: 30,
+  },
+  emptyTitle: {
+    fontSize: 24,
+    fontWeight: "bold",
+    marginTop: 20,
+    marginBottom: 10,
+    textAlign: "center",
+  },
+  emptyMessage: {
+    fontSize: 18,
+    marginBottom: 10,
+    textAlign: "center",
+  },
+  emptySubtext: {
+    fontSize: 14,
+    opacity: 0.7,
+    textAlign: "center",
+    lineHeight: 20,
+  },
+  // 🆕 Styles pour les boutons de téléchargement
+  downloadButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#4CAF50",
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    borderRadius: 8,
+    marginTop: 12,
+    gap: 6,
+  },
+  downloadedButton: {
+    backgroundColor: "#2E7D32",
+  },
+  downloadButtonText: {
+    color: "#fff",
+    fontSize: 14,
+    fontWeight: "600",
   },
   premiumBadge: {
     position: "absolute",

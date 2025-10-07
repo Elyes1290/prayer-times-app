@@ -9,7 +9,7 @@ export function usePrayerTimes(
   location: LocationObject | null,
   date: Date,
   isPremium: boolean = false
-): PrayerTimes | null {
+): { prayerTimes: PrayerTimes | null; isLoading: boolean } {
   const { calcMethod } = useContext(SettingsContext);
 
   // 🚀 NOUVEAU : Utiliser le système de cache intelligent
@@ -37,5 +37,5 @@ export function usePrayerTimes(
     }
   }, [prayerTimes, isFromCache, cacheStats]);
 
-  return prayerTimes;
+  return { prayerTimes, isLoading };
 }
