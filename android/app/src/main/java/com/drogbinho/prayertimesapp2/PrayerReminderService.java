@@ -48,10 +48,32 @@ public class PrayerReminderService extends Service {
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setSound(null); // Pas de son pour la notification temporaire
 
-        if (Build.VERSION.SDK_INT >= 34) {
-            startForeground(NOTIFICATION_ID, tempBuilder.build(), ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC);
-        } else {
-            startForeground(NOTIFICATION_ID, tempBuilder.build());
+        // ✅ CORRECTION : Utiliser SHORT_SERVICE au lieu de DATA_SYNC + gestion d'erreur
+        try {
+            if (Build.VERSION.SDK_INT >= 34) {
+                // Android 14+ : Utilise SHORT_SERVICE pour les tâches courtes
+                startForeground(NOTIFICATION_ID, tempBuilder.build(), ServiceInfo.FOREGROUND_SERVICE_TYPE_SHORT_SERVICE);
+            } else if (Build.VERSION.SDK_INT >= 29) {
+                // Android 10-13 : Démarre en foreground simple
+                startForeground(NOTIFICATION_ID, tempBuilder.build());
+            } else {
+                // Android <10 : Juste afficher la notification
+                NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                if (manager != null) {
+                    manager.notify(NOTIFICATION_ID, tempBuilder.build());
+                }
+            }
+        } catch (Exception e) {
+            // Si le service ne peut pas démarrer, affiche quand même la notification
+            Log.e("PrayerReminderService", "❌ Erreur startForeground: " + e.getMessage());
+            try {
+                NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                if (manager != null) {
+                    manager.notify(NOTIFICATION_ID, tempBuilder.build());
+                }
+            } catch (Exception ex) {
+                Log.e("PrayerReminderService", "❌ Erreur notification fallback: " + ex.getMessage());
+            }
         }
 
         String action = intent != null ? intent.getAction() : null;
@@ -165,17 +187,44 @@ public class PrayerReminderService extends Service {
         Notification notification = builder.build();
 
         // Met à jour la notification avec la vraie notification
-        if (Build.VERSION.SDK_INT >= 34) {
-            startForeground(NOTIFICATION_ID, notification, ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC);
-        } else {
-            startForeground(NOTIFICATION_ID, notification);
+        // ✅ CORRECTION : Utiliser SHORT_SERVICE + gestion d'erreur
+        try {
+            if (Build.VERSION.SDK_INT >= 34) {
+                // Android 14+ : Utilise SHORT_SERVICE pour les tâches courtes
+                startForeground(NOTIFICATION_ID, notification, ServiceInfo.FOREGROUND_SERVICE_TYPE_SHORT_SERVICE);
+            } else if (Build.VERSION.SDK_INT >= 29) {
+                // Android 10-13 : Démarre en foreground simple
+                startForeground(NOTIFICATION_ID, notification);
+            } else {
+                // Android <10 : Juste afficher la notification
+                NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                if (manager != null) {
+                    manager.notify(NOTIFICATION_ID, notification);
+                }
+            }
+        } catch (Exception e) {
+            // Si le service ne peut pas démarrer, affiche quand même la notification
+            Log.e("PrayerReminderService", "❌ Erreur startForeground (update): " + e.getMessage());
+            try {
+                NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                if (manager != null) {
+                    manager.notify(NOTIFICATION_ID, notification);
+                }
+            } catch (Exception ex) {
+                Log.e("PrayerReminderService", "❌ Erreur notification fallback (update): " + ex.getMessage());
+            }
         }
 
         // Laisse le temps au service de démarrer puis arrête le foreground en gardant
         // la notification
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
-            stopForeground(STOP_FOREGROUND_DETACH);
-            stopSelf();
+            try {
+                stopForeground(STOP_FOREGROUND_DETACH);
+                stopSelf();
+            } catch (Exception e) {
+                Log.e("PrayerReminderService", "❌ Erreur stopForeground: " + e.getMessage());
+                stopSelf();
+            }
         }, 2000);
 
         return START_NOT_STICKY;

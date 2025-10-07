@@ -36,7 +36,8 @@ class MainActivity : ReactActivity() {
     // 🔧 NOUVEAU : Configuration Edge-to-Edge pour Android 15+
     configureEdgeToEdge()
     
-    super.onCreate(null)
+    // ✅ CORRECTION : Passer savedInstanceState pour éviter les crashs sur vieux appareils
+    super.onCreate(savedInstanceState)
     
     // NOUVEAU : Enregistrer le BroadcastReceiver global pour les événements audio
     registerAudioEventReceiver()

@@ -42,13 +42,13 @@ import { reverseGeocodeAsync } from "expo-location";
 import { useLocation } from "../hooks/useLocation";
 import { usePrayerTimes } from "../hooks/usePrayerTimes";
 import { scheduleNotificationsFor2Days } from "../utils/sheduleAllNotificationsFor30Days";
-import { getQuranVersesWithTranslations } from "../utils/quranApi";
-import { getRandomHadith } from "../utils/hadithApi";
 import { debugLog, errorLog } from "../utils/logger";
 import WelcomePersonalizationModal from "../components/WelcomePersonalizationModal";
 import { usePremium } from "../contexts/PremiumContext";
 import { useUniversalStyles } from "../hooks/useUniversalLayout";
 import { useNetworkStatus, useOfflineAccess } from "../hooks/useNetworkStatus";
+import QuranOfflineService from "../utils/QuranOfflineService";
+import { HadithOfflineService } from "../utils/hadithOfflineService";
 
 const { AdhanModule } = NativeModules;
 
@@ -199,24 +199,7 @@ export default function HomeScreen() {
   const { user: premiumUser } = usePremium();
   const offlineAccess = useOfflineAccess(!!premiumUser?.isPremium);
 
-  // Map langue => id traduction Quran.com
-  const translationMap: Record<string, number | null> = {
-    fr: 136,
-    en: 85,
-    ru: 45,
-    tr: 52,
-    de: 27,
-    ar: null,
-    es: 83,
-    it: 153,
-    pt: 43,
-    nl: 144,
-    ur: 97,
-    bn: 120,
-    fa: 135,
-  };
-
-  // Détecter la langue à utiliser pour l'API Quran.com
+  // Détecter la langue de l'utilisateur pour les traductions locales
   const lang = i18n.language.startsWith("fr")
     ? "fr"
     : i18n.language.startsWith("en")
@@ -244,40 +227,6 @@ export default function HomeScreen() {
     : i18n.language.startsWith("bn")
     ? "bn"
     : "en";
-
-  // Fonction fetch avec fallback sur anglais (id 85)
-  async function fetchTranslation(chapterNumber: number, lang: string) {
-    const translationId = translationMap[lang] || 85; // fallback anglais
-
-    try {
-      const res = await fetch(
-        `https://api.quran.com/api/v4/quran/translations/${translationId}?chapter_number=${chapterNumber}`
-      );
-      const json = await res.json();
-
-      if (json.translations && json.translations.length > 0) {
-        return json.translations;
-      } else if (translationId !== 85) {
-        // fallback anglais si vide
-        const fallbackRes = await fetch(
-          `https://api.quran.com/api/v4/quran/translations/85?chapter_number=${chapterNumber}`
-        );
-        const fallbackJson = await fallbackRes.json();
-        return fallbackJson.translations || [];
-      }
-      return [];
-    } catch {
-      // fallback en cas d'erreur réseau
-      if (translationId !== 85) {
-        const fallbackRes = await fetch(
-          `https://api.quran.com/api/v4/quran/translations/85?chapter_number=${chapterNumber}`
-        );
-        const fallbackJson = await fallbackRes.json();
-        return fallbackJson.translations || [];
-      }
-      return [];
-    }
-  }
 
   // État pour le contenu aléatoire
   const [randomDua, setRandomDua] = useState<any>(null);
@@ -328,6 +277,82 @@ export default function HomeScreen() {
     loadRandomContent();
   }, [i18n.language]);
 
+  // 🆕 Charger un verset aléatoire depuis QuranOfflineService
+  const loadRandomVerseFromLocal = async () => {
+    try {
+      // Choisir une sourate aléatoire (1-114)
+      const randomSurahNumber = Math.floor(Math.random() * 114) + 1;
+
+      // Charger la sourate via le service
+      const surahData = await QuranOfflineService.getSurah(randomSurahNumber);
+
+      if (surahData && surahData.verses && surahData.verses.length > 0) {
+        // Sélectionner un verset aléatoire
+        const randomVerseIndex = Math.floor(
+          Math.random() * surahData.verses.length
+        );
+        const randomVerse = surahData.verses[randomVerseIndex];
+
+        // Récupérer la traduction dans la langue de l'utilisateur
+        const translation =
+          randomVerse.translations[lang] || randomVerse.translations["en"];
+
+        setRandomVerse({
+          arabic: randomVerse.arabic_text,
+          translation: translation.replace(/<[^>]*>/g, ""), // Supprimer les balises HTML
+          reference: `Sourate ${randomSurahNumber} – ${randomVerse.verse_key}`,
+        });
+      }
+    } catch (error) {
+      errorLog("Erreur lors du chargement du verset local:", error);
+    }
+  };
+
+  // 🆕 Charger un hadith aléatoire depuis HadithOfflineService
+  const loadRandomHadithFromLocal = async () => {
+    try {
+      // Liste des livres de hadiths disponibles
+      const hadithBooks = [
+        "bukhari",
+        "muslim",
+        "abudawud",
+        "tirmidhi",
+        "nasai",
+        "ibnmajah",
+      ];
+
+      // Choisir un livre aléatoire
+      const randomBook =
+        hadithBooks[Math.floor(Math.random() * hadithBooks.length)];
+
+      // Charger le livre via le service
+      const hadithData = await HadithOfflineService.loadBook(randomBook);
+
+      if (hadithData && hadithData.hadiths && hadithData.hadiths.length > 0) {
+        // Sélectionner un hadith aléatoire
+        const randomHadithIndex = Math.floor(
+          Math.random() * hadithData.hadiths.length
+        );
+        const randomHadith = hadithData.hadiths[randomHadithIndex];
+
+        // Récupérer le nom du chapitre
+        const chapter = hadithData.chapters?.find(
+          (ch: any) => ch.id === randomHadith.chapterId
+        );
+
+        setRandomHadith({
+          hadithArabic: randomHadith.arabic,
+          hadithEnglish: randomHadith.english?.text || "",
+          bookSlug: hadithData.metadata?.english?.title || randomBook,
+          chapterNumber: chapter?.id || randomHadith.chapterId,
+          hadithNumber: randomHadith.idInBook,
+        });
+      }
+    } catch (error) {
+      errorLog("Erreur lors du chargement du hadith local:", error);
+    }
+  };
+
   const loadRandomContent = async () => {
     try {
       // Utiliser le système i18n pour récupérer les dhikr selon la langue courante
@@ -353,50 +378,18 @@ export default function HomeScreen() {
         }
       }
 
-      // Utiliser l'API utilitaire pour récupérer un verset aléatoire et sa traduction
+      // 🆕 NOUVEAU : Verset aléatoire - TOUJOURS depuis les fichiers JSON locaux (plus rapide et fiable)
       try {
-        // Récupérer la liste des sourates
-        const apiLang = i18n.language;
-        const souratesRes = await fetch(
-          `https://api.quran.com/api/v4/chapters?language=${apiLang}`
-        );
-        const souratesJson = await souratesRes.json();
-        const sourates = souratesJson.chapters || [];
-
-        if (sourates.length > 0) {
-          // Sélectionner une sourate aléatoire
-          const randomSourate =
-            sourates[Math.floor(Math.random() * sourates.length)];
-          // Récupérer tous les versets + traductions de cette sourate
-          // UTILISER la variable lang normalisée plutôt que i18n.language directement
-          const versesWithTranslations = await getQuranVersesWithTranslations(
-            randomSourate.id,
-            lang
-          );
-          if (versesWithTranslations.length > 0) {
-            // Sélectionner un verset aléatoire
-            const randomVerse =
-              versesWithTranslations[
-                Math.floor(Math.random() * versesWithTranslations.length)
-              ];
-            setRandomVerse({
-              arabic: randomVerse.text_uthmani,
-              translation: randomVerse.translation,
-              reference: `${randomSourate.name_simple} – ${randomSourate.id}:${
-                randomVerse.verse_key.split(":")[1]
-              }`,
-            });
-          }
-        }
+        await loadRandomVerseFromLocal();
       } catch (error) {
         errorLog("Erreur lors de la récupération du verset:", error);
       }
 
-      // Hadith du jour
+      // 🆕 NOUVEAU : Hadith aléatoire - TOUJOURS depuis les fichiers JSON locaux (plus rapide et fiable)
       try {
-        const hadith = await getRandomHadith();
-        setRandomHadith(hadith);
+        await loadRandomHadithFromLocal();
       } catch (error) {
+        errorLog("Erreur lors de la récupération du hadith:", error);
         setRandomHadith(null);
       }
     } catch (error) {

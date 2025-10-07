@@ -6,6 +6,7 @@
   <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK"/>
   <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
   <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
+  <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SHORT_SERVICE" />
   <uses-permission android:name="android.permission.INTERNET"/>
   <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
   <!-- READ_EXTERNAL_STORAGE est obsolète pour API récentes; utiliser SAF/MediaStore si nécessaire -->
@@ -52,13 +53,13 @@
       android:name=".PrayerReminderService"
       android:enabled="true"
       android:exported="false"
-      android:foregroundServiceType="dataSync" />
+      android:foregroundServiceType="shortService" />
 
     <service
       android:name=".DhikrService"
       android:enabled="true"
       android:exported="false"
-      android:foregroundServiceType="dataSync" />
+      android:foregroundServiceType="shortService" />
 
     <service
       android:name=".PrayerTimesWidgetService"
