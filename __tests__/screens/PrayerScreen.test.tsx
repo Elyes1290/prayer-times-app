@@ -57,12 +57,15 @@ jest.mock("../../hooks/useLocation", () => ({
 
 jest.mock("../../hooks/usePrayerTimes", () => ({
   usePrayerTimes: () => ({
-    fajr: new Date("2024-01-01T06:00:00"),
-    sunrise: new Date("2024-01-01T07:30:00"),
-    dhuhr: new Date("2024-01-01T12:00:00"),
-    asr: new Date("2024-01-01T15:00:00"),
-    maghrib: new Date("2024-01-01T18:00:00"),
-    isha: new Date("2024-01-01T19:30:00"),
+    prayerTimes: {
+      fajr: new Date("2024-01-01T06:00:00"),
+      sunrise: new Date("2024-01-01T07:30:00"),
+      dhuhr: new Date("2024-01-01T12:00:00"),
+      asr: new Date("2024-01-01T15:00:00"),
+      maghrib: new Date("2024-01-01T18:00:00"),
+      isha: new Date("2024-01-01T19:30:00"),
+    },
+    isLoading: false,
   }),
 }));
 
