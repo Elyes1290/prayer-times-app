@@ -457,69 +457,39 @@ export default function AccountManagementSection({
               </Text>
               <Text style={styles.subscriptionValue}>
                 {(() => {
-                  // 🔍 Debug des données disponibles
+                  // 🔄 CORRECTION : Utiliser premium_expiry directement au lieu de le calculer
                   console.log("🔍 [DEBUG] userData pour facturation:", {
-                    premium_activated_at: userData?.premium_activated_at,
-                    subscription_type: userData?.subscription_type,
                     premium_expiry: userData?.premium_expiry,
-                    created_at: userData?.created_at,
+                    subscription_type: userData?.subscription_type,
                   });
 
-                  if (!userData?.subscription_type) {
-                    return `Non disponible (Manque: type abo)`;
+                  // Vérifier si premium_expiry existe
+                  if (!userData?.premium_expiry) {
+                    console.warn(
+                      "⚠️ [WARNING] premium_expiry manquant dans userData"
+                    );
+                    return t("not_available", "Non disponible");
                   }
 
-                  // 🔧 Fallback si premium_activated_at manque
-                  let activationDate = userData.premium_activated_at;
-                  if (!activationDate) {
-                    // Utiliser created_at, updated_at, ou la date actuelle moins 1 mois comme fallback
-                    activationDate =
-                      userData.created_at ||
-                      userData.updated_at ||
-                      new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
+                  try {
+                    // Utiliser directement premium_expiry qui contient la vraie date de facturation
+                    const expiryDate = new Date(userData.premium_expiry);
+
                     console.log(
-                      "⚠️ [FALLBACK] Utilisation date fallback pour activation:",
-                      activationDate
+                      "✅ [OK] Date d'expiration/prochaine facturation:",
+                      expiryDate.toLocaleDateString("fr-FR")
                     );
-                  } else {
-                    console.log(
-                      "✅ [OK] Utilisation premium_activated_at:",
-                      activationDate
-                    );
+
+                    // Formatage en français
+                    return expiryDate.toLocaleDateString("fr-FR", {
+                      day: "numeric",
+                      month: "long",
+                      year: "numeric",
+                    });
+                  } catch (error) {
+                    console.error("❌ [ERROR] Erreur parsing date:", error);
+                    return t("not_available", "Non disponible");
                   }
-
-                  const activatedDate = new Date(activationDate);
-                  console.log(
-                    "📅 [DEBUG] Date d'activation:",
-                    activatedDate.toLocaleDateString("fr-FR")
-                  );
-
-                  let nextBilling = new Date(activatedDate);
-
-                  // Calculer la prochaine facturation selon le type
-                  if (userData.subscription_type === "monthly") {
-                    nextBilling.setMonth(nextBilling.getMonth() + 1);
-                    console.log(
-                      "📅 [DEBUG] +1 mois = ",
-                      nextBilling.toLocaleDateString("fr-FR")
-                    );
-                  } else if (
-                    userData.subscription_type === "yearly" ||
-                    userData.subscription_type === "family"
-                  ) {
-                    nextBilling.setFullYear(nextBilling.getFullYear() + 1);
-                    console.log(
-                      "📅 [DEBUG] +1 an = ",
-                      nextBilling.toLocaleDateString("fr-FR")
-                    );
-                  }
-
-                  // Formatage en français
-                  return nextBilling.toLocaleDateString("fr-FR", {
-                    day: "numeric",
-                    month: "long",
-                    year: "numeric",
-                  });
                 })()}
               </Text>
             </View>

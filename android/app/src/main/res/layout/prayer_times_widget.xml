@@ -7,11 +7,31 @@
     android:background="@drawable/widget_background"
     android:padding="8dp">
 
+    <!-- 🔄 Bouton d'actualisation en haut à droite -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="4dp">
+        
+        <ImageButton
+            android:id="@+id/refresh_button"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_alignParentEnd="true"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:src="@android:drawable/ic_menu_rotate"
+            android:contentDescription="Actualiser les horaires"
+            android:scaleType="fitCenter"
+            android:padding="4dp"
+            android:alpha="0.7" />
+    </RelativeLayout>
+
     <!-- ListView scrollable pour tout le contenu -->
     <ListView
         android:id="@+id/widget_listview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:divider="@null"
         android:dividerHeight="0dp"
         android:scrollbars="none"

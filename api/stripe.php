@@ -539,6 +539,28 @@ elseif ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_SERVER['HTTP_STRIPE_SI
             $customer = $event->data->object;
             handleCustomerDeleted($customer);
             break;
+            
+        case 'invoice.payment_action_required':
+            // 🔐 Action requise (3D Secure, etc.)
+            $invoice = $event->data->object;
+            handlePaymentActionRequired($invoice);
+            break;
+            
+        case 'customer.subscription.paused':
+            // ⏸️ Abonnement mis en pause
+            $subscription = $event->data->object;
+            handleSubscriptionPaused($subscription);
+            break;
+            
+        case 'customer.subscription.resumed':
+            // ▶️ Abonnement repris
+            $subscription = $event->data->object;
+            handleSubscriptionResumed($subscription);
+            break;
+            
+        default:
+            // ℹ️ Événement non géré
+            logError("ℹ️ Événement webhook non géré: " . $event->type);
     }
     
     echo json_encode(['received' => true]);
@@ -1007,6 +1029,14 @@ function createUserViaExistingAPI($email, $name, $subscriptionType, $sessionId, 
             )
         ");
         
+        // 🔧 CORRECTION : Calculer la date d'expiration selon le type d'abonnement
+        $expiryInterval = match($subscriptionType) {
+            'monthly' => '+1 month',
+            'yearly' => '+1 year',
+            'family' => '+1 year',
+            default => '+1 year'
+        };
+        
         // Utiliser les MÊMES paramètres que auth.php
         $params = [
             $email,
@@ -1016,7 +1046,7 @@ function createUserViaExistingAPI($email, $name, $subscriptionType, $sessionId, 
             1, // premium_status
             $subscriptionType,
             $sessionId,
-            date('Y-m-d H:i:s', strtotime('+1 year')), // premium_expiry
+            date('Y-m-d H:i:s', strtotime($expiryInterval)), // premium_expiry - calculé selon le type
             date('Y-m-d H:i:s'), // premium_activated_at
             'auto', // location_mode
             null, // location_city
@@ -1264,8 +1294,118 @@ function handleSubscriptionUpdated($subscription) {
         logError("🔄 Abonnement mis à jour: " . $subscription->id);
         logError("📦 Nouveau status: " . $subscription->status);
         
-        // Mettre à jour le statut dans la base de données
         $pdo = getDBConnection();
+        
+        // 🔧 CORRECTION : Gérer les changements de statut importants
+        // Récupérer l'utilisateur associé à cet abonnement
+        $subStmt = $pdo->prepare("
+            SELECT user_id, subscription_type 
+            FROM premium_subscriptions 
+            WHERE stripe_subscription_id = ?
+        ");
+        $subStmt->execute([$subscription->id]);
+        $subData = $subStmt->fetch();
+        
+        if ($subData) {
+            $userId = $subData['user_id'];
+            
+            // Gérer les différents statuts
+            switch ($subscription->status) {
+                case 'active':
+                    // ✅ Abonnement actif - réactiver le premium si nécessaire
+                    logError("✅ Abonnement actif pour l'utilisateur $userId");
+                    
+                    // Calculer la date d'expiration depuis Stripe
+                    $expiryDate = date('Y-m-d H:i:s', $subscription->current_period_end);
+                    
+                    $updateStmt = $pdo->prepare("
+                        UPDATE users 
+                        SET premium_status = 1,
+                            premium_expiry = ?,
+                            updated_at = NOW()
+                        WHERE id = ?
+                    ");
+                    $updateStmt->execute([$expiryDate, $userId]);
+                    break;
+                    
+                case 'canceled':
+                case 'unpaid':
+                    // ❌ Abonnement annulé ou impayé - désactiver le premium
+                    logError("❌ Abonnement $subscription->status pour l'utilisateur $userId - désactivation");
+                    
+                    $updateStmt = $pdo->prepare("
+                        UPDATE users 
+                        SET premium_status = 0,
+                            premium_expiry = NOW(),
+                            updated_at = NOW()
+                        WHERE id = ?
+                    ");
+                    $updateStmt->execute([$userId]);
+                    break;
+                    
+                case 'past_due':
+                    // ⚠️ Paiement en retard - désactiver le premium temporairement
+                    logError("⚠️ Paiement en retard pour l'utilisateur $userId - désactivation temporaire");
+                    
+                    $updateStmt = $pdo->prepare("
+                        UPDATE users 
+                        SET premium_status = 0,
+                            premium_expiry = NOW(),
+                            updated_at = NOW()
+                        WHERE id = ?
+                    ");
+                    $updateStmt->execute([$userId]);
+                    break;
+                    
+                case 'trialing':
+                    // 🎁 En période d'essai - activer le premium
+                    logError("🎁 Essai gratuit actif pour l'utilisateur $userId");
+                    
+                    $trialEndDate = date('Y-m-d H:i:s', $subscription->trial_end ?? time());
+                    
+                    $updateStmt = $pdo->prepare("
+                        UPDATE users 
+                        SET premium_status = 1,
+                            premium_expiry = ?,
+                            updated_at = NOW()
+                        WHERE id = ?
+                    ");
+                    $updateStmt->execute([$trialEndDate, $userId]);
+                    break;
+                    
+                case 'incomplete':
+                case 'incomplete_expired':
+                    // ⏳ Paiement incomplet - désactiver le premium
+                    logError("⏳ Paiement incomplet pour l'utilisateur $userId");
+                    
+                    $updateStmt = $pdo->prepare("
+                        UPDATE users 
+                        SET premium_status = 0,
+                            updated_at = NOW()
+                        WHERE id = ?
+                    ");
+                    $updateStmt->execute([$userId]);
+                    break;
+                    
+                case 'paused':
+                    // ⏸️ Abonnement en pause - désactiver temporairement
+                    logError("⏸️ Abonnement en pause pour l'utilisateur $userId");
+                    
+                    $updateStmt = $pdo->prepare("
+                        UPDATE users 
+                        SET premium_status = 0,
+                            updated_at = NOW()
+                        WHERE id = ?
+                    ");
+                    $updateStmt->execute([$userId]);
+                    break;
+                    
+                default:
+                    logError("⚠️ Statut non géré: " . $subscription->status);
+            }
+        }
+        
+        // Mettre à jour le statut dans premium_subscriptions
         $stmt = $pdo->prepare("
             UPDATE premium_subscriptions 
             SET status = ?, 
@@ -1274,6 +1414,8 @@ function handleSubscriptionUpdated($subscription) {
         ");
         
         $stmt->execute([$subscription->status, $subscription->id]);
+        
+        logError("✅ Mise à jour abonnement terminée");
         
     } catch (Exception $e) {
         logError("❌ Erreur traitement mise à jour abonnement", $e);
@@ -1320,8 +1462,48 @@ function handlePaymentSucceeded($invoice) {
         logError("📧 Customer: " . $invoice->customer);
         logError("💵 Montant: " . $invoice->amount_paid);
         
-        // Mettre à jour le statut de paiement si nécessaire
         $pdo = getDBConnection();
+        
+        // 🔄 CORRECTION : Lors d'un renouvellement, mettre à jour premium_expiry
+        if ($invoice->subscription) {
+            // Récupérer les détails de l'abonnement Stripe
+            \Stripe\Stripe::setApiKey(STRIPE_SECRET_KEY);
+            $subscription = \Stripe\Subscription::retrieve($invoice->subscription);
+            
+            // Récupérer le type d'abonnement depuis la base de données
+            $subStmt = $pdo->prepare("
+                SELECT user_id, subscription_type 
+                FROM premium_subscriptions 
+                WHERE stripe_subscription_id = ?
+            ");
+            $subStmt->execute([$invoice->subscription]);
+            $subData = $subStmt->fetch();
+            
+            if ($subData) {
+                $userId = $subData['user_id'];
+                $subscriptionType = $subData['subscription_type'];
+                
+                // Calculer la nouvelle date d'expiration basée sur current_period_end de Stripe
+                $newExpiryDate = date('Y-m-d H:i:s', $subscription->current_period_end);
+                
+                logError("🔄 Renouvellement détecté - User ID: $userId, Type: $subscriptionType");
+                logError("📅 Nouvelle date d'expiration: $newExpiryDate");
+                
+                // Mettre à jour la date d'expiration dans la table users
+                $updateUserStmt = $pdo->prepare("
+                    UPDATE users 
+                    SET premium_expiry = ?,
+                        premium_status = 1,
+                        updated_at = NOW()
+                    WHERE id = ?
+                ");
+                $updateUserStmt->execute([$newExpiryDate, $userId]);
+                
+                logError("✅ Date d'expiration mise à jour pour l'utilisateur $userId");
+            }
+        }
+        
+        // Mettre à jour le statut de paiement dans premium_subscriptions
         $stmt = $pdo->prepare("
             UPDATE premium_subscriptions 
             SET last_payment_date = NOW(), 
@@ -1342,8 +1524,39 @@ function handlePaymentFailed($invoice) {
         logError("❌ Paiement échoué: " . $invoice->id);
         logError("📧 Customer: " . $invoice->customer);
         
-        // Mettre à jour le statut de paiement
         $pdo = getDBConnection();
+        
+        // 🔧 CORRECTION : Désactiver le premium immédiatement lors d'un échec de paiement
+        if ($invoice->subscription) {
+            // Récupérer l'utilisateur associé à cet abonnement
+            $subStmt = $pdo->prepare("
+                SELECT user_id 
+                FROM premium_subscriptions 
+                WHERE stripe_subscription_id = ?
+            ");
+            $subStmt->execute([$invoice->subscription]);
+            $subData = $subStmt->fetch();
+            
+            if ($subData) {
+                $userId = $subData['user_id'];
+                
+                logError("⚠️ Désactivation du premium pour l'utilisateur $userId suite à échec de paiement");
+                
+                // Désactiver le premium dans la table users
+                $updateUserStmt = $pdo->prepare("
+                    UPDATE users 
+                    SET premium_status = 0,
+                        premium_expiry = NOW(),
+                        updated_at = NOW()
+                    WHERE id = ?
+                ");
+                $updateUserStmt->execute([$userId]);
+                
+                logError("✅ Premium désactivé pour l'utilisateur $userId");
+            }
+        }
+        
+        // Mettre à jour le statut de l'abonnement à 'past_due'
         $stmt = $pdo->prepare("
             UPDATE premium_subscriptions 
             SET status = 'past_due', 
@@ -1533,6 +1746,152 @@ function handleCustomerDeleted($customer) {
         
     } catch (Exception $e) {
         logError("❌ Erreur suppression customer", $e);
+    }
+}
+
+// 🔐 NOUVEAU : Fonction pour gérer les actions de paiement requises (3D Secure, etc.)
+function handlePaymentActionRequired($invoice) {
+    try {
+        logError("🔐 Action de paiement requise: " . $invoice->id);
+        logError("📧 Customer: " . $invoice->customer);
+        
+        $pdo = getDBConnection();
+        
+        // Récupérer l'utilisateur associé
+        if ($invoice->subscription) {
+            $subStmt = $pdo->prepare("
+                SELECT user_id 
+                FROM premium_subscriptions 
+                WHERE stripe_subscription_id = ?
+            ");
+            $subStmt->execute([$invoice->subscription]);
+            $subData = $subStmt->fetch();
+            
+            if ($subData) {
+                $userId = $subData['user_id'];
+                
+                logError("⚠️ Action requise pour l'utilisateur $userId - maintien temporaire du premium");
+                
+                // Note: On ne désactive PAS le premium immédiatement
+                // On laisse à l'utilisateur le temps de compléter l'action (3D Secure, etc.)
+                // Si le paiement échoue définitivement, invoice.payment_failed sera déclenché
+                
+                // On peut envoyer une notification à l'utilisateur ici (future implémentation)
+                logError("📧 TODO: Envoyer notification à l'utilisateur pour action requise");
+            }
+        }
+        
+        // Mettre à jour le statut dans premium_subscriptions
+        $stmt = $pdo->prepare("
+            UPDATE premium_subscriptions 
+            SET status = 'action_required', 
+                updated_at = NOW()
+            WHERE stripe_subscription_id = ?
+        ");
+        
+        $stmt->execute([$invoice->subscription]);
+        
+    } catch (Exception $e) {
+        logError("❌ Erreur traitement action de paiement requise", $e);
+    }
+}
+
+// ⏸️ NOUVEAU : Fonction pour gérer la mise en pause d'un abonnement
+function handleSubscriptionPaused($subscription) {
+    try {
+        logError("⏸️ Abonnement mis en pause: " . $subscription->id);
+        
+        $pdo = getDBConnection();
+        
+        // Récupérer l'utilisateur associé
+        $subStmt = $pdo->prepare("
+            SELECT user_id 
+            FROM premium_subscriptions 
+            WHERE stripe_subscription_id = ?
+        ");
+        $subStmt->execute([$subscription->id]);
+        $subData = $subStmt->fetch();
+        
+        if ($subData) {
+            $userId = $subData['user_id'];
+            
+            logError("⏸️ Désactivation temporaire du premium pour l'utilisateur $userId");
+            
+            // Désactiver le premium pendant la pause
+            $updateStmt = $pdo->prepare("
+                UPDATE users 
+                SET premium_status = 0,
+                    updated_at = NOW()
+                WHERE id = ?
+            ");
+            $updateStmt->execute([$userId]);
+            
+            logError("✅ Premium désactivé (pause) pour l'utilisateur $userId");
+        }
+        
+        // Mettre à jour le statut dans premium_subscriptions
+        $stmt = $pdo->prepare("
+            UPDATE premium_subscriptions 
+            SET status = 'paused', 
+                updated_at = NOW()
+            WHERE stripe_subscription_id = ?
+        ");
+        
+        $stmt->execute([$subscription->id]);
+        
+    } catch (Exception $e) {
+        logError("❌ Erreur traitement pause abonnement", $e);
+    }
+}
+
+// ▶️ NOUVEAU : Fonction pour gérer la reprise d'un abonnement
+function handleSubscriptionResumed($subscription) {
+    try {
+        logError("▶️ Abonnement repris: " . $subscription->id);
+        
+        $pdo = getDBConnection();
+        
+        // Récupérer l'utilisateur associé
+        $subStmt = $pdo->prepare("
+            SELECT user_id 
+            FROM premium_subscriptions 
+            WHERE stripe_subscription_id = ?
+        ");
+        $subStmt->execute([$subscription->id]);
+        $subData = $subStmt->fetch();
+        
+        if ($subData) {
+            $userId = $subData['user_id'];
+            
+            logError("▶️ Réactivation du premium pour l'utilisateur $userId");
+            
+            // Réactiver le premium et mettre à jour la date d'expiration
+            $expiryDate = date('Y-m-d H:i:s', $subscription->current_period_end);
+            
+            $updateStmt = $pdo->prepare("
+                UPDATE users 
+                SET premium_status = 1,
+                    premium_expiry = ?,
+                    updated_at = NOW()
+                WHERE id = ?
+            ");
+            $updateStmt->execute([$expiryDate, $userId]);
+            
+            logError("✅ Premium réactivé (reprise) pour l'utilisateur $userId");
+        }
+        
+        // Mettre à jour le statut dans premium_subscriptions
+        $stmt = $pdo->prepare("
+            UPDATE premium_subscriptions 
+            SET status = 'active', 
+                updated_at = NOW()
+            WHERE stripe_subscription_id = ?
+        ");
+        
+        $stmt->execute([$subscription->id]);
+        
+    } catch (Exception $e) {
+        logError("❌ Erreur traitement reprise abonnement", $e);
     }
 }
 

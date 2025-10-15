@@ -64,6 +64,17 @@ public class AdhanReceiver extends BroadcastReceiver {
 
             // 🔄 FORCER LA MISE À JOUR DU WIDGET après chaque adhan (pour Samsung)
             try {
+                // 🌙 CORRECTION : Si c'est Isha, vider le cache pour afficher les horaires de demain
+                if ("Isha".equals(prayerLabel)) {
+                    debugLog("AdhanReceiver", "🌙 Isha passée - vidage du cache pour afficher horaires de demain");
+                    SharedPreferences widgetPrefs = context.getSharedPreferences("prayer_times_settings", Context.MODE_PRIVATE);
+                    widgetPrefs.edit()
+                        .remove("today_prayer_times")
+                        .remove("widget_last_date")
+                        .remove("widget_last_calc_method")
+                        .apply();
+                }
+                
                 PrayerTimesWidget.forceUpdateWidgets(context);
                 debugLog("AdhanReceiver", "✅ Widget forcé à se mettre à jour après Adhan " + prayerLabel);
             } catch (Exception e) {

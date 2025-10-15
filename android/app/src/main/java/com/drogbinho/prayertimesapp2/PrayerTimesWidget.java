@@ -35,6 +35,7 @@ public class PrayerTimesWidget extends AppWidgetProvider {
 
     private static final String TAG = "PrayerTimesWidget";
     private static final String ACTION_REFRESH_DUA = "com.drogbinho.prayertimesapp2.REFRESH_DUA";
+    private static final String ACTION_REFRESH_PRAYER_TIMES = "com.drogbinho.prayertimesapp2.REFRESH_PRAYER_TIMES";
     private static final String ACTION_MIDNIGHT_UPDATE = "com.drogbinho.prayertimesapp2.MIDNIGHT_UPDATE_WIDGET";
 
     @Override
@@ -72,6 +73,25 @@ public class PrayerTimesWidget extends AppWidgetProvider {
                 // Notifier que les données ont changé
                 appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId, R.id.widget_listview);
             }
+        } else if (ACTION_REFRESH_PRAYER_TIMES.equals(action)) {
+            widgetDebugLog(TAG, "🔄 Bouton actualiser horaires cliqué");
+            
+            // 🔧 CORRECTION : Ne PAS vider le cache, juste forcer la relecture
+            // Les horaires sont déjà sauvegardés par l'application React Native
+            SharedPreferences prefs = context.getSharedPreferences("prayer_times_settings", Context.MODE_PRIVATE);
+            
+            // Réinitialiser seulement widget_last_date pour forcer une vérification
+            String currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+            prefs.edit()
+                .putString("widget_last_date", currentDate)
+                .apply();
+            
+            widgetDebugLog(TAG, "🔄 Date widget réinitialisée, relecture forcée");
+            
+            // Forcer la mise à jour de tous les widgets (va relire depuis today_prayer_times)
+            forceUpdateWidgets(context);
+            
+            widgetDebugLog(TAG, "✅ Horaires actualisés manuellement depuis l'application");
         } else if ("FORCE_UPDATE_WIDGET".equals(action) || "SMART_UPDATE_WIDGET".equals(action)) {
             widgetDebugLog(TAG,
                     "🔄 " + action + " reçu (planificateur Samsung), mise à jour intelligente");
@@ -86,14 +106,15 @@ public class PrayerTimesWidget extends AppWidgetProvider {
         } else if (ACTION_MIDNIGHT_UPDATE.equals(action)) {
             widgetDebugLog(TAG, "🌙 Mise à jour quotidienne à minuit déclenchée");
             
-            // Effacer le cache des horaires de prière
-            SharedPreferences prefs = context.getSharedPreferences("adhan_prefs", Context.MODE_PRIVATE);
+            // 🔧 CORRECTION : Effacer le cache dans le BON SharedPreferences
+            SharedPreferences prefs = context.getSharedPreferences("prayer_times_settings", Context.MODE_PRIVATE);
             prefs.edit()
                 .remove("today_prayer_times")
                 .remove("widget_last_date")
+                .remove("widget_last_calc_method")
                 .apply();
             
-            widgetDebugLog(TAG, "🗑️ Cache des horaires de prière effacé");
+            widgetDebugLog(TAG, "🗑️ Cache des horaires de prière effacé (prayer_times_settings)");
             
             // Forcer la mise à jour du widget
             forceUpdateWidgets(context);
@@ -142,6 +163,13 @@ public class PrayerTimesWidget extends AppWidgetProvider {
             PendingIntent refreshPendingIntent = PendingIntent.getBroadcast(context, 0, refreshIntent,
                     PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
             views.setPendingIntentTemplate(R.id.widget_listview, refreshPendingIntent);
+
+            // 🔄 NOUVEAU : Configuration du bouton actualiser les horaires
+            Intent refreshPrayerTimesIntent = new Intent(context, PrayerTimesWidget.class);
+            refreshPrayerTimesIntent.setAction(ACTION_REFRESH_PRAYER_TIMES);
+            PendingIntent refreshPrayerTimesPendingIntent = PendingIntent.getBroadcast(context, 1, refreshPrayerTimesIntent,
+                    PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+            views.setOnClickPendingIntent(R.id.refresh_button, refreshPrayerTimesPendingIntent);
 
             // Action au clic sur le widget (optionnel)
             Intent appIntent = new Intent();
