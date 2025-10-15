@@ -377,6 +377,7 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
         premium_status: userData.premium_status,
         subscription_type: userData.subscription_type,
         subscription_id: userData.subscription_id,
+        stripe_customer_id: userData.stripe_customer_id, // 🔑 AJOUT pour gérer l'abonnement Stripe
         premium_expiry: userData.premium_expiry,
         premium_activated_at: userData.premium_activated_at, // 🔑 AJOUT MANQUANT !
         language: userData.language,

@@ -125,11 +125,22 @@ function handleGetUser() {
         }
         
         // Construire la requête selon le paramètre fourni
+        // 🔧 CORRECTION : Récupérer stripe_customer_id depuis premium_subscriptions
         if ($user_id) {
-            $stmt = $pdo->prepare("SELECT * FROM users WHERE id = ? AND status = 'active'");
+            $stmt = $pdo->prepare("
+                SELECT u.*, ps.stripe_customer_id 
+                FROM users u
+                LEFT JOIN premium_subscriptions ps ON u.id = ps.user_id AND ps.status = 'active'
+                WHERE u.id = ? AND u.status = 'active'
+            ");
             $stmt->execute([$user_id]);
         } elseif ($email) {
-            $stmt = $pdo->prepare("SELECT * FROM users WHERE email = ? AND status = 'active'");
+            $stmt = $pdo->prepare("
+                SELECT u.*, ps.stripe_customer_id 
+                FROM users u
+                LEFT JOIN premium_subscriptions ps ON u.id = ps.user_id AND ps.status = 'active'
+                WHERE u.email = ? AND u.status = 'active'
+            ");
             $stmt->execute([$email]);
         } else {
             handleError("Paramètre requis: user_id ou email", 400);
@@ -196,8 +207,13 @@ function handleGetUser() {
             error_log("Warning: Impossible de mettre à jour les colonnes de connexion: " . $e->getMessage());
         }
         
-        // Récupérer l'utilisateur avec toutes les données mises à jour
-        $userStmt = $pdo->prepare("SELECT * FROM users WHERE id = ?");
+        // Récupérer l'utilisateur avec toutes les données mises à jour + stripe_customer_id
+        $userStmt = $pdo->prepare("
+            SELECT u.*, ps.stripe_customer_id 
+            FROM users u
+            LEFT JOIN premium_subscriptions ps ON u.id = ps.user_id AND ps.status = 'active'
+            WHERE u.id = ?
+        ");
         $userStmt->execute([$user['id']]);
         $user = $userStmt->fetch(PDO::FETCH_ASSOC);
         
@@ -274,8 +290,13 @@ function handleCreateUser() {
                         $existingUser['id']
                     ]);
                     
-                    // Retourner les données de l'utilisateur mis à jour
-                    $userStmt = $pdo->prepare("SELECT * FROM users WHERE id = ?");
+                    // Retourner les données de l'utilisateur mis à jour + stripe_customer_id
+                    $userStmt = $pdo->prepare("
+                        SELECT u.*, ps.stripe_customer_id 
+                        FROM users u
+                        LEFT JOIN premium_subscriptions ps ON u.id = ps.user_id AND ps.status = 'active'
+                        WHERE u.id = ?
+                    ");
                     $userStmt->execute([$existingUser['id']]);
                     $updatedUser = $userStmt->fetch();
                     
@@ -373,8 +394,13 @@ function handleCreateUser() {
         // Logger le résultat pour debug
         error_log("✅ [users.php] Utilisateur créé - ID: $user_id, premium_status: $premium_status, location_city: $location_city");
         
-        // Récupérer et retourner l'utilisateur créé
-        $stmt = $pdo->prepare("SELECT * FROM users WHERE id = ?");
+        // Récupérer et retourner l'utilisateur créé + stripe_customer_id
+        $stmt = $pdo->prepare("
+            SELECT u.*, ps.stripe_customer_id 
+            FROM users u
+            LEFT JOIN premium_subscriptions ps ON u.id = ps.user_id AND ps.status = 'active'
+            WHERE u.id = ?
+        ");
         $stmt->execute([$user_id]);
         $user = $stmt->fetch();
         
@@ -494,8 +520,13 @@ function handleUpdateUser() {
         'updated_fields' => array_keys(array_filter($data, function($value) { return $value !== null; }))
     ]);
     
-    // Récupérer et retourner l'utilisateur mis à jour
-    $stmt = $pdo->prepare("SELECT * FROM users WHERE id = ?");
+    // Récupérer et retourner l'utilisateur mis à jour + stripe_customer_id
+    $stmt = $pdo->prepare("
+        SELECT u.*, ps.stripe_customer_id 
+        FROM users u
+        LEFT JOIN premium_subscriptions ps ON u.id = ps.user_id AND ps.status = 'active'
+        WHERE u.id = ?
+    ");
     $stmt->execute([$data['user_id']]);
     $user = $stmt->fetch();
     

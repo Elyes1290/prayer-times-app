@@ -136,8 +136,13 @@ function handleLogin() {
     ");
     $updateStmt->execute([$user['id']]);
     
-    // 🚀 CORRECTION : Récupérer l'utilisateur avec les données mises à jour
-    $userStmt = $pdo->prepare("SELECT * FROM users WHERE id = ?");
+    // 🚀 CORRECTION : Récupérer l'utilisateur avec les données mises à jour + stripe_customer_id
+    $userStmt = $pdo->prepare("
+        SELECT u.*, ps.stripe_customer_id 
+        FROM users u
+        LEFT JOIN premium_subscriptions ps ON u.id = ps.user_id AND ps.status = 'active'
+        WHERE u.id = ?
+    ");
     $userStmt->execute([$user['id']]);
     $user = $userStmt->fetch(PDO::FETCH_ASSOC);
     
@@ -147,8 +152,26 @@ function handleLogin() {
         'has_password' => !empty($user['password_hash'])
     ]);
     
+    // 🔍 DEBUG : Logger les données avant formatage
+    $debugData = json_encode([
+        'id' => $user['id'],
+        'email' => $user['email'],
+        'stripe_customer_id' => $user['stripe_customer_id'] ?? 'NULL',
+        'subscription_id' => $user['subscription_id'] ?? 'NULL'
+    ], JSON_PRETTY_PRINT);
+    error_log("🔍 [AUTH] Données brutes user après requête: " . $debugData);
+    file_put_contents(__DIR__ . '/auth-debug.log', date('Y-m-d H:i:s') . " - LOGIN - Données brutes: " . $debugData . "\n", FILE_APPEND);
+    
     // Retourner les données utilisateur + tokens
     $formattedUser = formatUserData($user);
+    
+    // 🔍 DEBUG : Logger les données après formatage
+    $debugFormatted = json_encode([
+        'stripe_customer_id' => $formattedUser['stripe_customer_id'] ?? 'NULL',
+        'subscription_id' => $formattedUser['subscription_id'] ?? 'NULL'
+    ], JSON_PRETTY_PRINT);
+    error_log("🔍 [AUTH] Données formatées: " . $debugFormatted);
+    file_put_contents(__DIR__ . '/auth-debug.log', date('Y-m-d H:i:s') . " - LOGIN - Données formatées: " . $debugFormatted . "\n", FILE_APPEND);
 
     // Single-device: révoquer d'abord les anciennes sessions et refresh tokens,
     // puis émettre de nouveaux tokens (évite d'invalider le token fraîchement créé)
@@ -405,8 +428,13 @@ function handleRegister() {
         error_log("🔍 Pas d'appel updateUserPremiumStatus car premium_status = $premium_status (déjà défini)");
     }
     
-    // Récupérer l'utilisateur créé
-    $stmt = $pdo->prepare("SELECT * FROM users WHERE id = ?");
+    // Récupérer l'utilisateur créé + stripe_customer_id
+    $stmt = $pdo->prepare("
+        SELECT u.*, ps.stripe_customer_id 
+        FROM users u
+        LEFT JOIN premium_subscriptions ps ON u.id = ps.user_id AND ps.status = 'active'
+        WHERE u.id = ?
+    ");
     $stmt->execute([$user_id]);
     $user = $stmt->fetch();
     
@@ -561,9 +589,14 @@ function handleRefresh() {
         handleError('Refresh token invalide ou expiré', 401);
     }
 
-    // Charger l'utilisateur pour s'assurer qu'il est actif
+    // Charger l'utilisateur pour s'assurer qu'il est actif + stripe_customer_id
     $pdo = getDBConnection();
-    $stmt = $pdo->prepare('SELECT * FROM users WHERE id = ? AND status = \"active\"');
+    $stmt = $pdo->prepare("
+        SELECT u.*, ps.stripe_customer_id 
+        FROM users u
+        LEFT JOIN premium_subscriptions ps ON u.id = ps.user_id AND ps.status = 'active'
+        WHERE u.id = ? AND u.status = 'active'
+    ");
     $stmt->execute([$record['user_id']]);
     $user = $stmt->fetch();
     if (!$user) {
@@ -660,8 +693,13 @@ function handleAddPassword() {
         'method' => 'email'
     ]);
     
-    // Récupérer l'utilisateur mis à jour
-    $stmt = $pdo->prepare("SELECT * FROM users WHERE id = ?");
+    // Récupérer l'utilisateur mis à jour + stripe_customer_id
+    $stmt = $pdo->prepare("
+        SELECT u.*, ps.stripe_customer_id 
+        FROM users u
+        LEFT JOIN premium_subscriptions ps ON u.id = ps.user_id AND ps.status = 'active'
+        WHERE u.id = ?
+    ");
     $stmt->execute([$user['id']]);
     $updatedUser = $stmt->fetch();
     
@@ -761,8 +799,13 @@ function handleChangePassword() {
         'changed_at' => date('Y-m-d H:i:s')
     ]);
     
-    // Récupérer l'utilisateur mis à jour
-    $stmt = $pdo->prepare("SELECT * FROM users WHERE id = ?");
+    // Récupérer l'utilisateur mis à jour + stripe_customer_id
+    $stmt = $pdo->prepare("
+        SELECT u.*, ps.stripe_customer_id 
+        FROM users u
+        LEFT JOIN premium_subscriptions ps ON u.id = ps.user_id AND ps.status = 'active'
+        WHERE u.id = ?
+    ");
     $stmt->execute([$user['id']]);
     $updatedUser = $stmt->fetch();
     
@@ -788,6 +831,7 @@ function formatUserData($user) {
         'premium_status' => (int)$user['premium_status'],
         'subscription_type' => $user['subscription_type'],
         'subscription_id' => $user['subscription_id'],
+        'stripe_customer_id' => $user['stripe_customer_id'] ?? null,
         'premium_expiry' => $user['premium_expiry'],
         'premium_features' => $user['premium_features'],
         'premium_activated_at' => $user['premium_activated_at'],

@@ -475,6 +475,16 @@ function SettingsSections({
     }
   }, [settings]);
 
+  // Scanner les adhans téléchargés au démarrage
+  useEffect(() => {
+    const initAdhans = async () => {
+      if (user.isPremium) {
+        await updateAvailableSounds();
+      }
+    };
+    initAdhans();
+  }, [user.isPremium]);
+
   // Switch principal dhikr indépendant des dhikrs individuels
 
   // 🚀 NOUVEAU : Grille de boutons carrés pour les paramètres
@@ -590,23 +600,13 @@ function SettingsSections({
     } else {
       setActiveSection(sectionId);
 
-      // 🔄 NOUVEAU : Rafraîchissement automatique de la liste des adhans premium
+      // Scanner les adhans téléchargés quand on ouvre la section
       if (sectionId === "adhan_sound" && user?.isPremium) {
         try {
-          console.log(
-            "🔄 Ouverture section Son & Adhan - rafraîchissement automatique..."
-          );
-
-          // Charger les adhans depuis le serveur avec forceRefresh
-          await loadAvailableAdhans(true);
-
-          // Mettre à jour immédiatement la liste de sélection
+          // Ne PAS appeler loadAvailableAdhans car ça supprime DOWNLOADED_CONTENT
           await updateAvailableSounds();
-
-          console.log("✅ Liste des adhans premium rafraîchie automatiquement");
         } catch (error) {
-          console.error("❌ Erreur rafraîchissement automatique:", error);
-          // Continuer silencieusement, pas besoin de toast ici
+          console.error("❌ Erreur scan adhans:", error);
         }
       }
     }
@@ -1610,13 +1610,13 @@ export default function SettingsScreenOptimized() {
                     if (fileStats.size > 1000) {
                       downloadedPremiumSounds.push(contentId as AdhanSoundKey);
 
-                      // Récupérer le titre depuis les données ou le catalogue
+                      // Récupérer le titre sauvegardé en priorité, sinon le catalogue
                       const catalogAdhan =
                         premiumContent.premiumContentState.availableAdhanVoices.find(
                           (a) => a.id === contentId
                         );
                       premiumTitles[contentId] =
-                        catalogAdhan?.title || contentId;
+                        adhanData.title || catalogAdhan?.title || contentId;
 
                       // 🔧 FIX: Logs uniquement si debug nécessaire
                       // console.log(`✅ TROUVÉ: ${contentId} (${fileStats.size} bytes) - ${premiumTitles[contentId]}`);

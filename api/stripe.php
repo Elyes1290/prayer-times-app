@@ -907,6 +907,10 @@ function handleCheckoutSessionCompleted($session) {
             $finalCustomerName = $tokenData['customer_name'] ?? $customerName;
             $finalCustomerLanguage = $tokenData['customer_language'] ?? $customerLanguage;
             
+            // 🔧 CORRECTION : Récupérer le Customer ID Stripe
+            $stripeCustomerId = $session->customer ?? null;
+            logError("🔑 Customer ID Stripe: " . $stripeCustomerId);
+            
             // 🔧 NOUVEAU : Vérifier si l'utilisateur existe déjà avec un premium actif
             $pdo = getDBConnection();
             $existingUserStmt = $pdo->prepare("SELECT id, premium_status, premium_expiry FROM users WHERE email = ?");
@@ -924,7 +928,7 @@ function handleCheckoutSessionCompleted($session) {
                 if ($isPremiumActive) {
                     logError("⚠️ Utilisateur existe déjà avec premium actif - Renouvellement automatique");
                     // Mettre à jour l'abonnement existant
-                    updateUserPremiumStatus($existingUser['id'], $subscriptionType, $session->id);
+                    updateUserPremiumStatus($existingUser['id'], $subscriptionType, $session->id, $stripeCustomerId);
                     logError("✅ Abonnement existant renouvelé");
                 } else {
                     logError("🔄 Utilisateur existe avec premium expiré - Création d'un nouvel abonnement");
@@ -935,7 +939,8 @@ function handleCheckoutSessionCompleted($session) {
                         $subscriptionType, 
                         $session->id, 
                         $finalCustomerLanguage, 
-                        $originalPassword
+                        $originalPassword,
+                        $stripeCustomerId
                     );
                 }
             } else {
@@ -946,7 +951,8 @@ function handleCheckoutSessionCompleted($session) {
                     $subscriptionType, 
                     $session->id, 
                     $finalCustomerLanguage, 
-                    $originalPassword
+                    $originalPassword,
+                    $stripeCustomerId
                 );
             }
             
@@ -962,9 +968,9 @@ function handleCheckoutSessionCompleted($session) {
 }
 
 // Fonction pour créer un utilisateur via l'API existante qui fonctionne
-function createUserViaExistingAPI($email, $name, $subscriptionType, $sessionId, $language = 'fr', $originalPassword = null) {
+function createUserViaExistingAPI($email, $name, $subscriptionType, $sessionId, $language = 'fr', $originalPassword = null, $stripeCustomerId = null) {
     try {
-        logError("🚀 Début création utilisateur - Email: $email, Type: $subscriptionType");
+        logError("🚀 Début création utilisateur - Email: $email, Type: $subscriptionType, Customer ID: $stripeCustomerId");
         
         // Vérifier d'abord si l'utilisateur existe
         $pdo = getDBConnection();
@@ -1084,7 +1090,7 @@ function createUserViaExistingAPI($email, $name, $subscriptionType, $sessionId, 
         logError("✅ Utilisateur créé avec succès - ID: $userId, Email: $email");
         
         // Enregistrer l'abonnement premium dans la table dédiée
-        insertPremiumSubscription($userId, $sessionId, $subscriptionType);
+        insertPremiumSubscription($userId, $sessionId, $subscriptionType, $stripeCustomerId);
         
         logError("✅ Abonnement premium enregistré pour l'utilisateur $userId");
         
@@ -1100,7 +1106,7 @@ function createUserViaExistingAPI($email, $name, $subscriptionType, $sessionId, 
 }
 
 // ✅ SÉCURISÉ : Fonction pour enregistrer l'abonnement premium dans toutes les tables
-function insertPremiumSubscription($userId, $sessionId, $subscriptionType) {
+function insertPremiumSubscription($userId, $sessionId, $subscriptionType, $stripeCustomerId = null) {
     $pdo = getDBConnection();
     
     // ✅ NOUVEAU : Démarrer une transaction pour garantir la cohérence
@@ -1127,16 +1133,16 @@ function insertPremiumSubscription($userId, $sessionId, $subscriptionType) {
             throw new Exception("Données manquantes pour l'insertion premium");
         }
         
-        // Insérer dans premium_subscriptions (gestion Stripe)
+        // 🔧 CORRECTION : Insérer dans premium_subscriptions avec stripe_customer_id
         $subscriptionStmt = $pdo->prepare("
             INSERT INTO premium_subscriptions (
-                user_id, stripe_session_id, stripe_subscription_id, 
+                user_id, stripe_session_id, stripe_subscription_id, stripe_customer_id,
                 subscription_type, status, start_date, end_date
-            ) VALUES (?, ?, ?, ?, 'active', NOW(), ?)
+            ) VALUES (?, ?, ?, ?, ?, 'active', NOW(), ?)
         ");
         
         $subscriptionStmt->execute([
-            $userId, $sessionId, $sessionId, $subscriptionType, $expiryDate
+            $userId, $sessionId, $sessionId, $stripeCustomerId, $subscriptionType, $expiryDate
         ]);
         
         $subscriptionId = $pdo->lastInsertId();
@@ -1202,7 +1208,7 @@ function insertPremiumSubscription($userId, $sessionId, $subscriptionType) {
 // Ancienne fonction supprimée - on utilise maintenant createUserViaExistingAPI()
 
 // 🔄 FONCTION AMÉLIORÉE : Mise à jour premium pour utilisateurs existants (renouvellements)
-function updateUserPremiumStatus($userId, $subscriptionType, $sessionId) {
+function updateUserPremiumStatus($userId, $subscriptionType, $sessionId, $stripeCustomerId = null) {
     try {
         $pdo = getDBConnection();
         $pdo->beginTransaction();
@@ -1215,7 +1221,7 @@ function updateUserPremiumStatus($userId, $subscriptionType, $sessionId) {
             default => date('Y-m-d H:i:s', strtotime('+1 year'))
         };
         
-        logError("🔄 Renouvellement premium - User ID: $userId, Type: $subscriptionType, Expiry: $expiryDate");
+        logError("🔄 Renouvellement premium - User ID: $userId, Type: $subscriptionType, Expiry: $expiryDate, Customer ID: $stripeCustomerId");
         
         // 1. Mettre à jour l'utilisateur avec la nouvelle structure
         $stmt = $pdo->prepare("
@@ -1232,7 +1238,7 @@ function updateUserPremiumStatus($userId, $subscriptionType, $sessionId) {
         $stmt->execute([$subscriptionType, $sessionId, $expiryDate, $userId]);
         
         // 2. Enregistrer le nouvel abonnement
-        insertPremiumSubscription($userId, $sessionId, $subscriptionType);
+        insertPremiumSubscription($userId, $sessionId, $subscriptionType, $stripeCustomerId);
         
         $pdo->commit();
         logError("✅ Renouvellement premium réussi pour l'utilisateur $userId");
@@ -1617,18 +1623,16 @@ function handleCustomerCreated($customer) {
                 email, 
                 password_hash, 
                 user_first_name, 
-                stripe_customer_id,
                 created_from,
                 created_at,
                 updated_at
-            ) VALUES (?, ?, ?, ?, 'stripe_dashboard', NOW(), NOW())
+            ) VALUES (?, ?, ?, 'stripe_dashboard', NOW(), NOW())
         ");
         
         $stmt->execute([
             $customer->email,
             $hashedPassword,
-            $firstName,
-            $customer->id
+            $firstName
         ]);
         
         $userId = $pdo->lastInsertId();

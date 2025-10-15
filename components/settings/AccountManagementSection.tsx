@@ -222,10 +222,30 @@ export default function AccountManagementSection({
     try {
       setIsLoading(true);
 
-      // Récupérer le customer ID depuis les données utilisateur
-      const customerId = userData?.subscription_id;
+      // 🔍 DEBUG COMPLET : Afficher toutes les données utilisateur
+      console.log(
+        "🔍 [DEBUG] userData complet:",
+        JSON.stringify(userData, null, 2)
+      );
+      console.log(
+        "🔍 [DEBUG] userData.stripe_customer_id:",
+        userData?.stripe_customer_id
+      );
+      console.log(
+        "🔍 [DEBUG] userData.subscription_id:",
+        userData?.subscription_id
+      );
+      console.log(
+        "🔍 [DEBUG] userData.premium_status:",
+        userData?.premium_status
+      );
+
+      // 🔧 CORRECTION : Utiliser stripe_customer_id au lieu de subscription_id
+      const customerId =
+        userData?.stripe_customer_id || userData?.subscription_id;
 
       if (!customerId) {
+        console.error("❌ [DEBUG] Aucun Customer ID trouvé !");
         showToast({
           type: "error",
           title: "Erreur",
@@ -234,12 +254,14 @@ export default function AccountManagementSection({
         return;
       }
 
+      console.log("🔑 [DEBUG] Customer ID pour portal:", customerId);
+
       // Créer une session pour le Customer Portal
       const response = await apiClient.createPortalSession(customerId);
 
-      if (response.success && response.data?.url) {
+      if (response.success && response.url) {
         // Ouvrir le lien dans le navigateur
-        await Linking.openURL(response.data.url);
+        await Linking.openURL(response.url);
       } else {
         throw new Error(
           response.message || "Erreur lors de la création de la session"
