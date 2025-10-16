@@ -103,39 +103,24 @@ public class PrayerTimesWidget extends AppWidgetProvider {
             } else {
                 widgetDebugLog(TAG, "⏭️ Widget non mis à jour (pas de changement)");
             }
-        } else if (ACTION_MIDNIGHT_UPDATE.equals(action)) {
-            widgetDebugLog(TAG, "🌙 Mise à jour quotidienne à minuit déclenchée");
-            
-            // 🔧 CORRECTION : Effacer le cache dans le BON SharedPreferences
-            SharedPreferences prefs = context.getSharedPreferences("prayer_times_settings", Context.MODE_PRIVATE);
-            prefs.edit()
-                .remove("today_prayer_times")
-                .remove("widget_last_date")
-                .remove("widget_last_calc_method")
-                .apply();
-            
-            widgetDebugLog(TAG, "🗑️ Cache des horaires de prière effacé (prayer_times_settings)");
-            
-            // Forcer la mise à jour du widget
-            forceUpdateWidgets(context);
-            
-            // Re-planifier pour demain
-            scheduleMidnightUpdate(context);
         }
+        // 🔧 CORRECTION BUG : Pas de mise à jour automatique à minuit
+        // Le widget est uniquement mis à jour par AdhanService après chaque adhan
+        // Cela évite d'afficher des horaires vides entre minuit et Fajr
     }
 
     @Override
     public void onEnabled(Context context) {
         // Called when the first widget is created
-        widgetDebugLog(TAG, "🆕 Premier widget créé, planification de l'alarme quotidienne");
-        scheduleMidnightUpdate(context);
+        widgetDebugLog(TAG, "🆕 Premier widget créé");
+        // 🔧 Pas d'alarme à minuit : le widget est mis à jour uniquement par AdhanService
     }
 
     @Override
     public void onDisabled(Context context) {
         // Called when the last widget is removed
-        widgetDebugLog(TAG, "🗑️ Dernier widget supprimé, annulation de l'alarme quotidienne");
-        cancelMidnightUpdate(context);
+        widgetDebugLog(TAG, "🗑️ Dernier widget supprimé");
+        // 🔧 Pas d'alarme à minuit : rien à annuler
     }
 
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
@@ -318,75 +303,22 @@ public class PrayerTimesWidget extends AppWidgetProvider {
      * changement de jour
      * Recalcule automatiquement les horaires si on a passé minuit
      */
+    /**
+     * 📱 SIMPLIFIÉ : Récupère les horaires sauvegardés par AdhanService
+     * Le widget ne calcule plus les horaires, il les lit directement !
+     */
     public static Map<String, String> getAllPrayerTimes(Context context) {
         SharedPreferences prefs = context.getSharedPreferences("prayer_times_settings", Context.MODE_PRIVATE);
         Map<String, String> prayerTimes = new HashMap<>();
 
         try {
-            // Vérifier si c'est un nouveau jour ou si la méthode de calcul a changé
-            String currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
-            String lastDate = prefs.getString("widget_last_date", "");
-            String currentCalcMethod = prefs.getString("calc_method", "MuslimWorldLeague");
-            String lastCalcMethod = prefs.getString("widget_last_calc_method", "");
-
-            boolean isNewDay = !currentDate.equals(lastDate);
-            boolean isNewCalcMethod = !currentCalcMethod.equals(lastCalcMethod);
-            
-            // 🔧 NOUVEAU : Détecter si on a passé Isha et qu'il faut afficher les horaires de demain
-            boolean needTomorrowSchedule = isAfterIshaTime(context, prefs);
-
-            widgetDebugLog(TAG, "🔍 [WIDGET DEBUG] Vérification changements:");
-            widgetDebugLog(TAG,
-                    "📅 [WIDGET DEBUG] Date actuelle: " + currentDate + ", dernière: " + lastDate
-                            + " (nouveau jour: " + isNewDay + ")");
-            widgetDebugLog(TAG,
-                    "📊 [WIDGET DEBUG] Méthode actuelle: " + currentCalcMethod + ", dernière: " + lastCalcMethod
-                            + " (nouvelle méthode: " + isNewCalcMethod + ")");
-            widgetDebugLog(TAG,
-                    "🌙 [WIDGET DEBUG] Après Isha (besoin horaires demain): " + needTomorrowSchedule);
-
-            if (isNewDay || isNewCalcMethod || needTomorrowSchedule) {
-                widgetDebugLog(TAG, "🔄 [WIDGET DEBUG] CHANGEMENT DÉTECTÉ - Recalcul nécessaire");
-                widgetDebugLog(TAG, "📅 [WIDGET DEBUG] Nouveau jour: " + isNewDay);
-                widgetDebugLog(TAG, "📊 [WIDGET DEBUG] Nouvelle méthode: " + isNewCalcMethod);
-
-                // Mettre à jour les préférences
-                prefs.edit()
-                        .putString("widget_last_date", currentDate)
-                        .putString("widget_last_calc_method", currentCalcMethod)
-                        .apply();
-
-                // Récupérer les coordonnées depuis prayer_times_settings
-                double lat = prefs.getFloat("latitude", 0.0f);
-                double lon = prefs.getFloat("longitude", 0.0f);
-
-                if (lat != 0.0 && lon != 0.0) {
-                    widgetDebugLog(TAG, "📍 Recalcul avec coordonnées: " + lat + ", " + lon);
-                    Map<String, String> calculatedTimes = calculatePrayerTimesForCoordinates(lat, lon, prefs, context, needTomorrowSchedule);
-
-                    if (!calculatedTimes.isEmpty()) {
-                        widgetDebugLog(TAG,
-                                "✅ Recalcul réussi avec " + calculatedTimes.size() + " horaires");
-
-                        // Sauvegarder dans today_prayer_times
-                        try {
-                            JSONObject jsonToSave = new JSONObject();
-                            for (Map.Entry<String, String> entry : calculatedTimes.entrySet()) {
-                                jsonToSave.put(entry.getKey(), entry.getValue());
-                            }
-                            prefs.edit().putString("today_prayer_times", jsonToSave.toString()).apply();
-                            widgetDebugLog(TAG, "💾 Horaires sauvegardés dans today_prayer_times");
-                        } catch (Exception e) {
-                            errorLog(TAG, "⚠️ Erreur sauvegarde: " + e.getMessage(), e);
-                        }
-
-                        return calculatedTimes;
-                    }
-                }
-            }
-
-            // Récupérer les horaires depuis today_prayer_times
+            // Récupérer les horaires sauvegardés par AdhanService
             String todayPrayerTimesJson = prefs.getString("today_prayer_times", null);
+            String savedDate = prefs.getString("widget_last_date", "");
+            
+            widgetDebugLog(TAG, "📱 [WIDGET] Lecture horaires sauvegardés par AdhanService");
+            widgetDebugLog(TAG, "📅 [WIDGET] Date sauvegardée: " + savedDate);
+            
             if (todayPrayerTimesJson != null) {
                 try {
                     JSONObject json = new JSONObject(todayPrayerTimesJson);
@@ -395,24 +327,23 @@ public class PrayerTimesWidget extends AppWidgetProvider {
                         String key = keys.next();
                         prayerTimes.put(key, json.getString(key));
                     }
-                    widgetDebugLog(TAG, "✅ Horaires récupérés depuis today_prayer_times");
-                    widgetDebugLog(TAG,
-                            "🔍 [WIDGET DEBUG] Contenu exact du cache: " + todayPrayerTimesJson);
+                    widgetDebugLog(TAG, "✅ [WIDGET] Horaires chargés: " + todayPrayerTimesJson);
                     for (Map.Entry<String, String> entry : prayerTimes.entrySet()) {
-                        widgetDebugLog(TAG,
-                                "🕐 [WIDGET DEBUG] " + entry.getKey() + ": " + entry.getValue());
+                        widgetDebugLog(TAG, "🕐 [WIDGET] " + entry.getKey() + ": " + entry.getValue());
                     }
                     return prayerTimes;
                 } catch (Exception e) {
-                    errorLog(TAG, "❌ Erreur parsing JSON: " + e.getMessage(), e);
+                    errorLog(TAG, "❌ [WIDGET] Erreur parsing JSON: " + e.getMessage(), e);
                 }
+            } else {
+                widgetDebugLog(TAG, "⚠️ [WIDGET] Aucun horaire sauvegardé trouvé");
+                widgetDebugLog(TAG, "💡 [WIDGET] Les horaires seront sauvegardés au prochain adhan");
             }
 
-            widgetDebugLog(TAG, "⚠️ Aucun horaire trouvé, retour map vide");
             return prayerTimes;
 
         } catch (Exception e) {
-            errorLog(TAG, "❌ Erreur getAllPrayerTimes: " + e.getMessage(), e);
+            errorLog(TAG, "❌ [WIDGET] Erreur getAllPrayerTimes: " + e.getMessage(), e);
             e.printStackTrace();
             return prayerTimes;
         }

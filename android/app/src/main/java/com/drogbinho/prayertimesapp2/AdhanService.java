@@ -132,23 +132,23 @@ public class AdhanService extends Service {
             debugLog(TAG, "[ACTION_STOP] Demande d'arrêt pour Adhan: " + stopReason);
             stopAdhan(); // Arrête le MediaPlayer
 
-            // 🔧 CORRECTION BUG : Reprogrammer après CHAQUE adhan, pas seulement Isha
+            // 🔧 CORRECTION BUG WIDGET : Reprogrammer après CHAQUE adhan + sauvegarder horaires
             if (prayerLabel != null || lastPrayerLabel != null) {
                 String currentPrayer = prayerLabel != null ? prayerLabel : lastPrayerLabel;
-                errorLog(TAG, "🔥 [DÉCLENCHEMENT] Arrêt " + currentPrayer + " - DÉBUT reprogrammation automatique");
+                errorLog(TAG, "🔥 [DÉCLENCHEMENT] Arrêt " + currentPrayer + " - Reprogrammation + Widget");
                 
-                if ("Isha".equals(currentPrayer)) {
-                    // Après Isha : programmer seulement pour demain
-                    errorLog(TAG, "🔄 [ISHA] Utilisation reprogramAlarmsForTomorrow()");
-                    reprogramAlarmsForTomorrow();
-                } else {
-                    // 🔥 CORRECTION FINALE : Reprogrammer les prières restantes d'aujourd'hui + demain
-                    // reprogramAlarmsForTomorrow() ne programme QUE demain !
-                    errorLog(TAG, "🔄 [CORRECTION] Reprogrammation prières restantes + demain pour " + currentPrayer);
-                    reprogramRemainingPrayersAndTomorrow(currentPrayer);
+                // Appel unifié pour toutes les prières (y compris Isha)
+                reprogramRemainingPrayersAndTomorrow(currentPrayer);
+                
+                // 📱 MISE À JOUR DU WIDGET après chaque adhan
+                try {
+                    PrayerTimesWidget.forceUpdateWidgets(this);
+                    errorLog(TAG, "📱 Widget mis à jour après " + currentPrayer);
+                } catch (Exception e) {
+                    errorLog(TAG, "❌ Erreur mise à jour widget: " + e.getMessage(), e);
                 }
             } else {
-                errorLog(TAG, "❌ [PROBLÈME] Aucune prière détectée pour reprogrammation (prayerLabel=" + prayerLabel + ", lastPrayerLabel=" + lastPrayerLabel + ")");
+                errorLog(TAG, "❌ [PROBLÈME] Aucune prière détectée pour reprogrammation");
             }
             stopForeground(true); // Retire la notif de premier plan
             stopSelf(); // Arrête le service
@@ -1145,6 +1145,19 @@ public class AdhanService extends Service {
             scheduleAdhanAlarmInternal(context, alarmManager, prayers[i], tomorrowPrayerTimes[i].getTime(), adhanSound, language);
         }
 
+        // 📱 SAUVEGARDER LES HORAIRES POUR LE WIDGET
+        // Si on est après Isha (completedIndex == 4), sauvegarder les horaires de demain
+        // Sinon, sauvegarder les horaires d'aujourd'hui
+        if (completedIndex == 4) {
+            // Après Isha : sauvegarder demain
+            savePrayerTimesForWidget(context, tomorrowTimes, tomorrow);
+            errorLog(TAG, "📱 Horaires de DEMAIN sauvegardés pour le widget");
+        } else {
+            // Avant Isha : sauvegarder aujourd'hui
+            savePrayerTimesForWidget(context, todayTimes, today);
+            errorLog(TAG, "📱 Horaires d'AUJOURD'HUI sauvegardés pour le widget");
+        }
+
         // 6. PROGRAMMER LES RAPPELS ET DHIKRS
         boolean remindersEnabled = settingsPrefs.getBoolean("reminders_enabled", true);
         int reminderOffset = settingsPrefs.getInt("reminder_offset", 10);
@@ -1403,6 +1416,18 @@ public class AdhanService extends Service {
                 scheduleDhikrInternal(context, alarmManager, "selectedDua", prayers[i], prayerTimestamp,
                         delaySelectedDua, language);
             }
+        }
+
+        // 📱 SAUVEGARDER LES HORAIRES POUR LE WIDGET
+        // Déterminer si on doit afficher aujourd'hui ou demain
+        if (now.getTime().after(prayerTimesToday.isha)) {
+            // Après Isha : sauvegarder les horaires de demain
+            savePrayerTimesForWidget(context, prayerTimesTomorrow, tomorrow);
+            errorLog(TAG, "📱 [BOOT] Horaires de DEMAIN sauvegardés pour le widget");
+        } else {
+            // Avant Isha : sauvegarder les horaires d'aujourd'hui
+            savePrayerTimesForWidget(context, prayerTimesToday, now);
+            errorLog(TAG, "📱 [BOOT] Horaires d'AUJOURD'HUI sauvegardés pour le widget");
         }
 
         debugLog(TAG, "====> REPROGRAMMATION APRÈS REDÉMARRAGE TERMINÉE <====");
@@ -1868,6 +1893,41 @@ public class AdhanService extends Service {
                     " (requestCode: " + requestCode + ", jour: " + dayString + ")");
         } catch (Exception e) {
             errorLog(TAG, "❌ Boot Reprog: Erreur Adhan " + prayerName + suffix + ": " + e.getMessage());
+        }
+    }
+
+    /**
+     * 📱 Sauvegarde les horaires de prière pour le widget
+     */
+    private void savePrayerTimesForWidget(Context context, PrayerTimes prayerTimes, Calendar date) {
+        try {
+            SharedPreferences prefs = context.getSharedPreferences("prayer_times_settings", MODE_PRIVATE);
+            
+            // Format HH:mm pour le widget
+            java.text.SimpleDateFormat timeFormat = new java.text.SimpleDateFormat("HH:mm", java.util.Locale.getDefault());
+            
+            // Créer le JSON des horaires
+            org.json.JSONObject jsonTimes = new org.json.JSONObject();
+            jsonTimes.put("Fajr", timeFormat.format(prayerTimes.fajr));
+            jsonTimes.put("Sunrise", timeFormat.format(prayerTimes.sunrise));
+            jsonTimes.put("Dhuhr", timeFormat.format(prayerTimes.dhuhr));
+            jsonTimes.put("Asr", timeFormat.format(prayerTimes.asr));
+            jsonTimes.put("Maghrib", timeFormat.format(prayerTimes.maghrib));
+            jsonTimes.put("Isha", timeFormat.format(prayerTimes.isha));
+            
+            // Sauvegarder la date pour laquelle ces horaires sont valides
+            java.text.SimpleDateFormat dateFormat = new java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault());
+            String dateString = dateFormat.format(date.getTime());
+            
+            prefs.edit()
+                .putString("today_prayer_times", jsonTimes.toString())
+                .putString("widget_last_date", dateString)
+                .apply();
+            
+            errorLog(TAG, "📱 Horaires sauvegardés pour le widget - Date: " + dateString + ", Horaires: " + jsonTimes.toString());
+            
+        } catch (Exception e) {
+            errorLog(TAG, "❌ Erreur sauvegarde horaires widget: " + e.getMessage(), e);
         }
     }
 }
