@@ -101,6 +101,7 @@ const PremiumContext = createContext<PremiumContextType>(defaultContext);
 const STORAGE_KEYS = {
   PREMIUM_USER: "@prayer_app_premium_user",
   PREMIUM_FEATURES: "@prayer_app_premium_features",
+  LAST_EXPIRY_NOTIFICATION: "@prayer_app_last_expiry_notification", // 🆕 Dernière notification d'expiration
 } as const;
 
 // Provider
@@ -157,15 +158,37 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
             hasPurchasedPremium: parsedUser.hasPurchasedPremium || false,
           });
 
-          // Informer l'utilisateur
-          showToast?.({
-            type: "error",
-            title: t("premium.expired_title", "Abonnement expiré"),
-            message: t(
-              "premium.expired_message",
-              "Votre abonnement premium a expiré. Renouvelez pour continuer à profiter des fonctionnalités premium."
-            ),
-          });
+          // 🚀 CORRECTION : Ne montrer la notification d'expiration qu'une fois par jour
+          const lastExpiredNotificationDate = await AsyncStorage.getItem(
+            `${STORAGE_KEYS.LAST_EXPIRY_NOTIFICATION}_expired`
+          );
+          const today = new Date().toISOString().split("T")[0]; // Format: YYYY-MM-DD
+
+          // Vérifier si on a déjà montré la notification d'expiration complète aujourd'hui
+          if (lastExpiredNotificationDate !== today) {
+            // Informer l'utilisateur
+            showToast?.({
+              type: "error",
+              title: t("premium.expired_title", "Abonnement expiré"),
+              message: t(
+                "premium.expired_message",
+                "Votre abonnement premium a expiré. Renouvelez pour continuer à profiter des fonctionnalités premium."
+              ),
+            });
+
+            // Sauvegarder qu'on a montré la notification d'expiration complète aujourd'hui
+            await AsyncStorage.setItem(
+              `${STORAGE_KEYS.LAST_EXPIRY_NOTIFICATION}_expired`,
+              today
+            );
+            console.log(
+              `✅ Notification d'expiration complète affichée pour le ${today}`
+            );
+          } else {
+            console.log(
+              `ℹ️ Notification d'expiration complète déjà affichée aujourd'hui (${today})`
+            );
+          }
 
           return true; // Expiration détectée
         }
@@ -177,17 +200,39 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
         if (daysRemaining <= 7 && daysRemaining > 0) {
           console.log(`⚠️ Premium expire dans ${daysRemaining} jour(s)`);
 
-          showToast?.({
-            type: "info",
-            title: t(
-              "premium.expiring_soon_title",
-              "Abonnement bientôt expiré"
-            ),
-            message: t(
-              "premium.expiring_soon_message",
-              `Votre abonnement expire dans ${daysRemaining} jour(s). Pensez à le renouveler !`
-            ),
-          });
+          // 🚀 CORRECTION : Ne montrer la notification qu'une fois par jour
+          const lastNotificationDate = await AsyncStorage.getItem(
+            STORAGE_KEYS.LAST_EXPIRY_NOTIFICATION
+          );
+          const today = new Date().toISOString().split("T")[0]; // Format: YYYY-MM-DD
+
+          // Vérifier si on a déjà montré la notification aujourd'hui
+          if (lastNotificationDate !== today) {
+            showToast?.({
+              type: "info",
+              title: t(
+                "premium.expiring_soon_title",
+                "Abonnement bientôt expiré"
+              ),
+              message: t(
+                "premium.expiring_soon_message",
+                `Votre abonnement expire dans ${daysRemaining} jour(s). Pensez à le renouveler !`
+              ),
+            });
+
+            // Sauvegarder qu'on a montré la notification aujourd'hui
+            await AsyncStorage.setItem(
+              STORAGE_KEYS.LAST_EXPIRY_NOTIFICATION,
+              today
+            );
+            console.log(
+              `✅ Notification d'expiration affichée pour le ${today}`
+            );
+          } else {
+            console.log(
+              `ℹ️ Notification d'expiration déjà affichée aujourd'hui (${today})`
+            );
+          }
         }
       }
 

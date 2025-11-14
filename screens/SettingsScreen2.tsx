@@ -382,18 +382,29 @@ function SettingsSections({
     // console.log("🔄 Début actualisation adhans premium...");
 
     try {
-      // 🚀 SOLUTION HYBRIDE : Préserver les téléchargements AVANT de recharger
+      // 🚀 SOLUTION HYBRIDE : Préserver les téléchargements ET les titres AVANT de recharger
       const currentAdhans =
         premiumContent.premiumContentState.availableAdhanVoices;
       const downloadedAdhans = currentAdhans.filter(
         (adhan: PremiumContent) => adhan.isDownloaded
       );
+
+      // 🔧 CORRECTION BUG : Préserver aussi les titres originaux des adhans téléchargés
+      const currentTitles = {
+        ...premiumContent.premiumContentState.premiumSoundTitles,
+      };
+
+      // 🔧 CORRECTION BUG 2 : Sauvegarder DOWNLOADED_CONTENT car loadAvailableAdhans(true) le vide !
+      const downloadedContentBackup = await LocalStorageManager.getPremium(
+        "DOWNLOADED_CONTENT"
+      );
+
       // console.log(
       //   `💾 Sauvegarde de ${downloadedAdhans.length} adhans téléchargés avant actualisation`
       // );
 
-      // Charger depuis le serveur
-      await loadAvailableAdhans(true);
+      // Charger depuis le serveur (ceci vide DOWNLOADED_CONTENT !)
+      await loadAvailableAdhans(false); // 🔧 CORRECTION : Ne PAS forcer le vidage du cache
 
       // Restaurer les téléchargements après chargement
       if (downloadedAdhans.length > 0) {
@@ -409,12 +420,33 @@ function SettingsSections({
               ...freshAdhan,
               isDownloaded: true,
               downloadPath: downloadedVersion.downloadPath,
+              title: downloadedVersion.title, // 🔧 CORRECTION : Préserver le titre original
             };
           }
           return freshAdhan;
         });
         premiumContent.setAvailableAdhanVoices(mergedAdhans);
-        updateAvailableSounds(); // Mettre à jour la liste de sélection
+
+        // 🔧 CORRECTION BUG : Restaurer DOWNLOADED_CONTENT avant updateAvailableSounds
+        if (downloadedContentBackup) {
+          await LocalStorageManager.savePremium(
+            "DOWNLOADED_CONTENT",
+            downloadedContentBackup,
+            true,
+            true
+          );
+        }
+
+        // 🔧 CORRECTION BUG : Restaurer les titres originaux dans premiumSoundTitles
+        const restoredTitles = { ...currentTitles };
+        downloadedAdhans.forEach((adhan: PremiumContent) => {
+          if (currentTitles[adhan.id]) {
+            restoredTitles[adhan.id] = currentTitles[adhan.id];
+          }
+        });
+        premiumContent.setPremiumSoundTitles(restoredTitles);
+
+        await updateAvailableSounds(); // Mettre à jour la liste de sélection APRÈS restauration
       }
 
       // console.log("✅ Actualisation adhans terminée");
@@ -1598,6 +1630,20 @@ export default function SettingsScreenOptimized() {
             // Vérifier chaque adhan physiquement
             for (const contentId of contentIds) {
               const adhanData = downloaded[contentId];
+
+              // 🚀 CORRECTION BUG : Filtrer uniquement les adhans (exclure sourates/récitateurs)
+              const isAdhan =
+                contentId.startsWith("adhan_") ||
+                adhanData.type === "adhan" ||
+                (!contentId.includes("quran_") &&
+                  !contentId.startsWith("reciter_") &&
+                  !contentId.match(/^\d{3}_/)); // Exclure format sourates (001_, 002_, etc.)
+
+              if (!isAdhan) {
+                // console.log(`⏭️ IGNORÉ (pas un adhan): ${contentId} (type: ${adhanData.type})`);
+                continue; // Sauter ce contenu, ce n'est pas un adhan
+              }
+
               if (adhanData.downloadPath) {
                 const filePath = adhanData.downloadPath.replace("file://", "");
 

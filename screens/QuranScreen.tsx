@@ -203,6 +203,7 @@ export default function QuranScreen() {
   const [reciterModalVisible, setReciterModalVisible] = useState(false);
   const [menuVisible, setMenuVisible] = useState(false);
   const [modalType, setModalType] = useState<"sourate" | "reciter">("sourate");
+  const [showDownloadsView, setShowDownloadsView] = useState(false); // 🆕 Vue cachée de gestion des téléchargements
   const flatListRef = useRef<FlatList>(null);
   const windowHeight = Dimensions.get("window").height;
 
@@ -223,6 +224,9 @@ export default function QuranScreen() {
     useState<OfflineTabType>("quran");
   const [offlineSurahs, setOfflineSurahs] = useState<any[]>([]);
   const [loadingOfflineData, setLoadingOfflineData] = useState(false);
+  const [scannedQuranFiles, setScannedQuranFiles] = useState<PremiumContent[]>(
+    []
+  ); // 🆕 Récitations scannées depuis le dossier physique
 
   // Supprimer les variables non utilisées pour éviter les warnings
   console.log("offlineSurahs:", offlineSurahs.length);
@@ -517,6 +521,21 @@ export default function QuranScreen() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // 🆕 Scanner le dossier physique quand on active le mode hors ligne ou la vue des téléchargements
+  useEffect(() => {
+    console.log(
+      `🔍 useEffect scan - isOfflineMode: ${offlineAccess.isOfflineMode}, showDownloadsView: ${showDownloadsView}`
+    );
+    if (offlineAccess.isOfflineMode || showDownloadsView) {
+      scanDownloadedQuranFiles().then((files) => {
+        console.log(
+          `🎯 Fichiers scannés à setter dans l'état: ${files.length}`
+        );
+        setScannedQuranFiles(files);
+      });
+    }
+  }, [offlineAccess.isOfflineMode, showDownloadsView]);
+
   // Nettoyer l'audio à la fermeture
   useEffect(() => {
     return () => {
@@ -767,6 +786,78 @@ export default function QuranScreen() {
     }
   };
 
+  // 🆕 Scanner physiquement le dossier /quran/ pour trouver les récitations téléchargées
+  const scanDownloadedQuranFiles = async (): Promise<PremiumContent[]> => {
+    try {
+      // 🎯 CORRECTION : Les récitations Quran sont dans /quran/ organisées par récitateur
+      const quranDirectory = `${RNFS.DocumentDirectoryPath}/quran`;
+
+      // Vérifier si le dossier existe
+      const dirExists = await RNFS.exists(quranDirectory);
+      if (!dirExists) {
+        console.log("📁 Dossier /quran/ n'existe pas encore");
+        return [];
+      }
+
+      // Lire tous les sous-dossiers (récitateurs)
+      const reciterFolders = await RNFS.readDir(quranDirectory);
+      const quranRecitations: PremiumContent[] = [];
+
+      for (const folder of reciterFolders) {
+        // Ignorer les fichiers, on ne veut que les dossiers
+        if (!folder.isDirectory()) continue;
+
+        const reciterName = folder.name;
+
+        // Lire tous les fichiers MP3 dans le dossier du récitateur
+        const reciterFiles = await RNFS.readDir(folder.path);
+
+        for (const file of reciterFiles) {
+          // Ne garder que les fichiers .mp3
+          if (!file.isFile() || !file.name.endsWith(".mp3")) continue;
+
+          // Format: quran_reciterName_surahNumber.mp3
+          // Exemple: quran_abdulbaset_mujawwad_1.mp3
+          const nameWithoutExt = file.name.replace(".mp3", "");
+          const parts = nameWithoutExt.split("_");
+
+          // Le dernier élément est le numéro de sourate
+          const surahNumberStr = parts[parts.length - 1];
+          if (!surahNumberStr) continue;
+
+          const surahNumber = parseInt(surahNumberStr, 10);
+          if (isNaN(surahNumber)) continue;
+
+          // Obtenir la taille du fichier en MB
+          const fileSizeMB = (file.size / (1024 * 1024)).toFixed(2);
+
+          quranRecitations.push({
+            id: nameWithoutExt,
+            type: "quran",
+            title: `Sourate ${surahNumber}`,
+            description: `Récitation par ${reciterName}`,
+            fileUrl: "",
+            fileSize: parseFloat(fileSizeMB),
+            version: "1.0",
+            isDownloaded: true,
+            downloadPath: file.path,
+            reciter: reciterName,
+            surahNumber: surahNumber,
+            surahName: `Sourate ${surahNumber}`,
+          });
+        }
+      }
+
+      console.log(
+        `✅ ${quranRecitations.length} récitations Quran trouvées dans ${reciterFolders.length} récitateurs`
+      );
+      return quranRecitations;
+    } catch (error) {
+      console.error("❌ Erreur scan dossier récitations:", error);
+      return [];
+    }
+  };
+
   // 📱 NOUVEAU : Charger les versets offline pour une sourate
   const loadOfflineSurah = async (surahNumber: number) => {
     try {
@@ -927,8 +1018,8 @@ export default function QuranScreen() {
                   });
                 }
 
-                // 🚀 OPTIMISATION : Ne plus recharger tout le catalogue, juste mettre à jour localement
-                // await loadAvailableRecitations(); // ❌ SUPPRIMÉ
+                // 🆕 CORRECTION BUG : Rescanner le dossier physique après suppression
+                scanDownloadedQuranFiles().then(setScannedQuranFiles);
               } else {
                 showToast({
                   type: "error",
@@ -1951,6 +2042,199 @@ export default function QuranScreen() {
     </TouchableOpacity>
   );
 
+  // 📱 NOUVEAU : Vue cachée de gestion des téléchargements (accessible en ligne)
+  if (showDownloadsView) {
+    return (
+      <ImageBackground
+        source={require("../assets/images/parchment_bg.jpg")}
+        style={{ flex: 1 }}
+      >
+        <SafeAreaView style={{ flex: 1 }}>
+          <View style={[styles.container, { paddingTop: insets.top + 10 }]}>
+            {/* En-tête avec bouton retour */}
+            <View style={{ marginBottom: 16, paddingHorizontal: 16 }}>
+              <TouchableOpacity
+                onPress={() => setShowDownloadsView(false)}
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  padding: 8,
+                }}
+              >
+                <MaterialCommunityIcons
+                  name="arrow-left"
+                  size={24}
+                  color="#ba9c34"
+                />
+                <Text
+                  style={[
+                    styles.sourateName,
+                    { marginLeft: 8, fontSize: 20, fontWeight: "bold" },
+                  ]}
+                >
+                  {t("manage_downloads") || "Gérer les téléchargements"}
+                </Text>
+              </TouchableOpacity>
+            </View>
+
+            {/* Affichage de la liste des audio téléchargés */}
+            <View style={styles.offlineRecitationsContainer}>
+              <Text style={styles.offlineRecitationsTitle}>
+                {t("downloaded_audio") || "Audio Téléchargés"}
+              </Text>
+              {(() => {
+                // 🔧 Utiliser les récitations scannées physiquement
+                const downloadedRecitations = scannedQuranFiles;
+                console.log(
+                  `📊 Affichage vue téléchargements - scannedQuranFiles.length: ${scannedQuranFiles.length}`
+                );
+
+                if (downloadedRecitations.length === 0) {
+                  return (
+                    <View
+                      style={{
+                        flex: 1,
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
+                      <MaterialCommunityIcons
+                        name="download-outline"
+                        size={64}
+                        color="#ba9c34"
+                        style={{ opacity: 0.5, marginBottom: 16 }}
+                      />
+                      <Text style={styles.placeholderText}>
+                        {t("no_downloaded_audio") ||
+                          "Aucun audio téléchargé pour le moment"}
+                      </Text>
+                      <Text
+                        style={[
+                          styles.placeholderText,
+                          { fontSize: 12, marginTop: 8 },
+                        ]}
+                      >
+                        {t("download_audio_hint") ||
+                          "Téléchargez des récitations en mode en ligne"}
+                      </Text>
+                    </View>
+                  );
+                }
+
+                // 🎵 Grouper les récitations par récitateur
+                const recitationsByReciter: {
+                  [key: string]: PremiumContent[];
+                } = {};
+                downloadedRecitations.forEach((rec: PremiumContent) => {
+                  const reciterName =
+                    rec.reciter || t("unknown_reciter") || "Récitateur inconnu";
+                  if (!recitationsByReciter[reciterName]) {
+                    recitationsByReciter[reciterName] = [];
+                  }
+                  recitationsByReciter[reciterName].push(rec);
+                });
+
+                return (
+                  <FlatList
+                    data={Object.entries(recitationsByReciter)}
+                    keyExtractor={([reciterName]) => reciterName}
+                    renderItem={({ item: [reciterName, recitations] }) => (
+                      <View style={{ marginBottom: 24 }}>
+                        <View style={styles.offlineReciterHeader}>
+                          <Text style={styles.offlineReciterName}>
+                            {reciterName}
+                          </Text>
+                          <Text style={styles.offlineReciterCount}>
+                            {recitations.length} {t("surah", "Sourate")}
+                            {recitations.length > 1 ? "s" : ""}
+                          </Text>
+                        </View>
+                        {recitations
+                          .sort(
+                            (a, b) =>
+                              (a.surahNumber || 0) - (b.surahNumber || 0)
+                          )
+                          .map((recitation) => (
+                            <View
+                              key={recitation.id}
+                              style={[
+                                styles.offlineRecitationItem,
+                                currentlyPlaying === recitation.id && {
+                                  backgroundColor: "#fff5e6",
+                                  borderColor: "#FFD700",
+                                  borderWidth: 2,
+                                },
+                              ]}
+                            >
+                              <TouchableOpacity
+                                style={{
+                                  flex: 1,
+                                  flexDirection: "row",
+                                  alignItems: "center",
+                                }}
+                                onPress={() => playRecitation(recitation)}
+                              >
+                                <View style={{ flex: 1 }}>
+                                  <Text style={styles.offlineRecitationTitle}>
+                                    {recitation.surahName || recitation.title}
+                                  </Text>
+                                  <Text
+                                    style={styles.offlineRecitationSubtitle}
+                                  >
+                                    {t("surah")} {recitation.surahNumber} •{" "}
+                                    {recitation.fileSize} MB
+                                  </Text>
+                                </View>
+                                {currentlyPlaying === recitation.id &&
+                                isPlaying ? (
+                                  <MaterialCommunityIcons
+                                    name="pause-circle"
+                                    size={32}
+                                    color="#FFD700"
+                                  />
+                                ) : (
+                                  <MaterialCommunityIcons
+                                    name="play-circle"
+                                    size={32}
+                                    color="#4ECDC4"
+                                  />
+                                )}
+                              </TouchableOpacity>
+
+                              {/* 🗑️ Bouton de suppression */}
+                              <TouchableOpacity
+                                style={{
+                                  padding: 8,
+                                  marginLeft: 8,
+                                }}
+                                onPress={() =>
+                                  handleDeleteRecitation(recitation)
+                                }
+                              >
+                                <MaterialCommunityIcons
+                                  name="delete-outline"
+                                  size={24}
+                                  color="#ff6b6b"
+                                />
+                              </TouchableOpacity>
+                            </View>
+                          ))}
+                      </View>
+                    )}
+                    contentContainerStyle={[
+                      styles.offlineRecitationsList,
+                      { paddingBottom: 100 },
+                    ]}
+                  />
+                );
+              })()}
+            </View>
+          </View>
+        </SafeAreaView>
+      </ImageBackground>
+    );
+  }
+
   // 📱 NOUVEAU : Rendu spécial pour le mode offline premium
   if (user?.isPremium && offlineAccess.isOfflineMode) {
     return (
@@ -2056,14 +2340,130 @@ export default function QuranScreen() {
               </View>
             ) : (
               // Onglet "Audio Téléchargés" - afficher la liste des fichiers audio
-              <View style={{ flex: 1, padding: 20 }}>
-                <Text style={styles.sectionTitle}>
+              <View style={styles.offlineRecitationsContainer}>
+                <Text style={styles.offlineRecitationsTitle}>
                   {t("downloaded_audio") || "Audio Téléchargés"}
                 </Text>
-                <Text style={styles.placeholderText}>
-                  {t("audio_list_placeholder") ||
-                    "Liste des fichiers audio téléchargés sera affichée ici"}
-                </Text>
+                {(() => {
+                  // 🔧 CORRECTION BUG : Utiliser les récitations scannées physiquement
+                  const downloadedRecitations = scannedQuranFiles;
+                  console.log(
+                    `📊 Affichage mode hors ligne - scannedQuranFiles.length: ${scannedQuranFiles.length}`
+                  );
+
+                  if (downloadedRecitations.length === 0) {
+                    return (
+                      <View
+                        style={{
+                          flex: 1,
+                          justifyContent: "center",
+                          alignItems: "center",
+                        }}
+                      >
+                        <MaterialCommunityIcons
+                          name="download-outline"
+                          size={64}
+                          color="#ba9c34"
+                          style={{ opacity: 0.5, marginBottom: 16 }}
+                        />
+                        <Text style={styles.placeholderText}>
+                          {t("no_downloaded_audio") ||
+                            "Aucun audio téléchargé pour le moment"}
+                        </Text>
+                        <Text
+                          style={[
+                            styles.placeholderText,
+                            { fontSize: 12, marginTop: 8 },
+                          ]}
+                        >
+                          {t("download_audio_hint") ||
+                            "Téléchargez des récitations en mode en ligne"}
+                        </Text>
+                      </View>
+                    );
+                  }
+
+                  // 🎵 Grouper les récitations par récitateur
+                  const recitationsByReciter: {
+                    [key: string]: PremiumContent[];
+                  } = {};
+                  downloadedRecitations.forEach((rec: PremiumContent) => {
+                    const reciterName =
+                      rec.reciter ||
+                      t("unknown_reciter") ||
+                      "Récitateur inconnu";
+                    if (!recitationsByReciter[reciterName]) {
+                      recitationsByReciter[reciterName] = [];
+                    }
+                    recitationsByReciter[reciterName].push(rec);
+                  });
+
+                  return (
+                    <FlatList
+                      data={Object.entries(recitationsByReciter)}
+                      keyExtractor={([reciterName]) => reciterName}
+                      renderItem={({ item: [reciterName, recitations] }) => (
+                        <View style={{ marginBottom: 24 }}>
+                          <View style={styles.offlineReciterHeader}>
+                            <Text style={styles.offlineReciterName}>
+                              {reciterName}
+                            </Text>
+                            <Text style={styles.offlineReciterCount}>
+                              {recitations.length} {t("surah", "Sourate")}
+                              {recitations.length > 1 ? "s" : ""}
+                            </Text>
+                          </View>
+                          {recitations
+                            .sort(
+                              (a, b) =>
+                                (a.surahNumber || 0) - (b.surahNumber || 0)
+                            )
+                            .map((recitation) => (
+                              <TouchableOpacity
+                                key={recitation.id}
+                                style={[
+                                  styles.offlineRecitationItem,
+                                  currentlyPlaying === recitation.id && {
+                                    backgroundColor: "#fff5e6",
+                                    borderColor: "#FFD700",
+                                    borderWidth: 2,
+                                  },
+                                ]}
+                                onPress={() => playRecitation(recitation)}
+                              >
+                                <View style={{ flex: 1 }}>
+                                  <Text style={styles.offlineRecitationTitle}>
+                                    {recitation.surahName || recitation.title}
+                                  </Text>
+                                  <Text
+                                    style={styles.offlineRecitationSubtitle}
+                                  >
+                                    {t("surah")} {recitation.surahNumber} •{" "}
+                                    {recitation.fileSize} MB
+                                  </Text>
+                                </View>
+                                {currentlyPlaying === recitation.id &&
+                                isPlaying ? (
+                                  <MaterialCommunityIcons
+                                    name="pause-circle"
+                                    size={32}
+                                    color="#FFD700"
+                                  />
+                                ) : (
+                                  <MaterialCommunityIcons
+                                    name="play-circle"
+                                    size={32}
+                                    color="#4ECDC4"
+                                  />
+                                )}
+                              </TouchableOpacity>
+                            ))}
+                        </View>
+                      )}
+                      contentContainerStyle={styles.offlineRecitationsList}
+                    />
+                  );
+                })()}
               </View>
             )}
           </View>
@@ -2208,6 +2608,41 @@ export default function QuranScreen() {
                     <Text style={styles.menuOptionText}>
                       {selectedReciter || t("quran.reciter", "Récitateur")}
                     </Text>
+                    <Text style={styles.menuArrow}>›</Text>
+                  </TouchableOpacity>
+                </View>
+              )}
+
+              {/* 🆕 Section Gestion des téléchargements (premium uniquement) */}
+              {user.isPremium && (
+                <View style={styles.menuSection}>
+                  <Text style={styles.menuSectionTitle}>
+                    {t("downloads_manager") || "Téléchargements"}
+                  </Text>
+                  <TouchableOpacity
+                    style={styles.menuOption}
+                    onPress={() => {
+                      setMenuVisible(false);
+                      setShowDownloadsView(true);
+                    }}
+                  >
+                    <View
+                      style={{
+                        flexDirection: "row",
+                        alignItems: "center",
+                        flex: 1,
+                      }}
+                    >
+                      <MaterialCommunityIcons
+                        name="download-multiple"
+                        size={20}
+                        color="#4ECDC4"
+                        style={{ marginRight: 8 }}
+                      />
+                      <Text style={styles.menuOptionText}>
+                        {t("manage_downloads") || "Gérer les téléchargements"}
+                      </Text>
+                    </View>
                     <Text style={styles.menuArrow}>›</Text>
                   </TouchableOpacity>
                 </View>
@@ -3267,6 +3702,11 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     color: "#483C1C",
     marginBottom: 4,
+  },
+  offlineRecitationSubtitle: {
+    fontSize: 13,
+    color: "#ba9c34",
+    opacity: 0.8,
   },
   offlineRecitationReciter: {
     fontSize: 14,
