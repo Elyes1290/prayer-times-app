@@ -104,7 +104,7 @@ ios/GoogleService-Info-Debug.plist
 ios/GoogleService-Info-Release.plist
 ios/Runner/GoogleService-Info.plist
 
-# ✅ EXCEPTION : Autoriser ios/GoogleService-Info.plist pour EAS Build
+# EXCEPTION: Allow ios/GoogleService-Info.plist for EAS Build
 !ios/GoogleService-Info.plist
 
 # Keystore and signing files
