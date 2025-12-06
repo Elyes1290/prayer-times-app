@@ -4,9 +4,6 @@
     "appVersionSource": "remote"
   },
   "build": {
-    "prebuild": {
-      "eas-build-pre-install": "./eas-hooks/eas-build-pre-install.sh"
-    },
     "development": {
       "developmentClient": true,
       "distribution": "internal",
@@ -29,6 +26,9 @@
         "simulator": false
       }
     }
+  },
+  "hooks": {
+    "prebuild": "./eas-hooks/eas-build-pre-install.sh"
   },
   "submit": {
     "production": {
