@@ -119,9 +119,9 @@ export async function scheduleNotificationsFor2Days({
     const dates = [];
     const labels = [];
 
-    // 🚀 iOS : Programme pour 3 jours (limite 64 notifs : 5×3 Adhans + 5×3 Rappels + 4×3 Dhikrs = 42)
+    // 🚀 iOS : Programme pour 2 jours (Background Fetch reprogramme automatiquement toutes les ~2h)
     // 🤖 Android : Programme pour 2 jours (le Worker natif reprogramme quotidiennement)
-    const daysToSchedule = Platform.OS === "ios" ? 3 : 2;
+    const daysToSchedule = 2;
 
     notificationDebugLog(
       `📅 Programmation pour ${daysToSchedule} jours (${Platform.OS})`
@@ -218,8 +218,8 @@ export async function scheduleNotificationsFor2Days({
             label !== "today" ||
             (label === "today" && timestamp > now.getTime());
 
-          // 🚀 iOS : Limite 3 jours (4320 min), Android : 24h (1440 min)
-          const maxMinutes = Platform.OS === "ios" ? 4320 : 1440;
+          // 🚀 iOS : Limite 2 jours (2880 min), Android : 2 jours (2880 min)
+          const maxMinutes = 2880;
 
           notificationDebugLog(
             `  🔍 ${prayer} (${label}): ${minutesUntilPrayer}min, shouldSchedule=${shouldSchedule}, inLimit=${
@@ -241,7 +241,11 @@ export async function scheduleNotificationsFor2Days({
               ).toLocaleTimeString()})`
             );
 
-            acc[`${prayer}_${label}`] = {
+            // 🔑 Identifiant UNIQUE avec la date complète pour éviter les collisions iOS
+            const dateKey = date.toISOString().split('T')[0]; // Format: "2025-12-07"
+            const uniqueKey = `${prayer}_${dateKey}`;
+
+            acc[uniqueKey] = {
               time: adjustedTimestamp,
               triggerAtMillis: adjustedTimestamp, // 🔧 iOS compatibility
               displayLabel: prayer,
@@ -251,8 +255,9 @@ export async function scheduleNotificationsFor2Days({
               isToday: label === "today",
             };
           } else {
+            const dateKey = date.toISOString().split('T')[0];
             notificationDebugLog(
-              `⏭️ ${prayer}_${label} ignoré car ${
+              `⏭️ ${prayer}_${dateKey} ignoré car ${
                 !shouldSchedule
                   ? "déjà passé"
                   : minutesUntilPrayer > 1440

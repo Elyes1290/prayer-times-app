@@ -92,7 +92,7 @@ TaskManager.defineTask(BACKGROUND_FETCH_TASK, async () => {
     }
 
     // 3. Exécuter la reprogrammation
-    // Sur iOS, cela va étendre la planification à 3 jours à partir de "maintenant"
+    // Sur iOS, cela va reprogrammer aujourd'hui + demain (Background Fetch rappelle toutes les ~2h)
     await scheduleNotificationsFor2Days({
       userLocation,
       calcMethod: calcMethod || "MuslimWorldLeague",
@@ -119,7 +119,7 @@ TaskManager.defineTask(BACKGROUND_FETCH_TASK, async () => {
     const duration = endTime.getTime() - now.getTime();
     console.log("════════════════════════════════════════════════════════");
     console.log(`✅ [BackgroundFetch] Succès en ${duration}ms`);
-    console.log("   📅 Notifications reprogrammées pour les 3 prochains jours");
+    console.log("   📅 Notifications: Aujourd'hui + Demain");
     console.log("   ⏰ Prochain réveil: dans ~2h (selon iOS)");
     console.log("════════════════════════════════════════════════════════");
     return BackgroundFetch.BackgroundFetchResult.NewData;
