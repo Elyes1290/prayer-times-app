@@ -17,6 +17,7 @@ import i18n from "../locales/i18n";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { verifyAuth } from "../utils/apiClient";
 import { isOfflineMode } from "../utils/networkUtils";
+import { registerBackgroundFetchAsync } from "../utils/backgroundTask";
 
 // 🚨 NOUVEAU : Protection contre les reloads Expo en mode développement
 let isAbonnementProcessActive = false;
@@ -302,9 +303,12 @@ export default function TabLayout() {
           console.error("❌ Erreur vérification token:", error);
         }
 
-        // 🍎 Configuration spécifique iOS (rien de spécial pour l'instant)
+        // 🍎 Configuration spécifique iOS : Background Fetch pour notifications illimitées
         if (Platform.OS === "ios") {
           console.log("🔔 [iOS] Configuration des notifications locales...");
+          console.log("🔄 [iOS] Activation du Background Fetch pour reprogrammation automatique...");
+          await registerBackgroundFetchAsync();
+          console.log("✅ [iOS] Background Fetch activé - notifications illimitées même app fermée");
         }
 
         console.log("✅ Application initialisée");

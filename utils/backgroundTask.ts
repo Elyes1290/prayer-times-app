@@ -15,8 +15,10 @@ TaskManager.defineTask(BACKGROUND_FETCH_TASK, async () => {
       return BackgroundFetch.BackgroundFetchResult.NoData;
     }
 
-    console.log("🔄 [BackgroundFetch] Réveil silencieux iOS démarré...");
     const now = new Date();
+    console.log("════════════════════════════════════════════════════════");
+    console.log(`🔄 [BackgroundFetch] Réveil iOS : ${now.toLocaleString('fr-FR')}`);
+    console.log("════════════════════════════════════════════════════════");
 
     // 1. Récupérer les réglages depuis le stockage persistant
     const [
@@ -113,9 +115,13 @@ TaskManager.defineTask(BACKGROUND_FETCH_TASK, async () => {
       },
     });
 
-    console.log(
-      `✅ [BackgroundFetch] Succès ! Notifications étendues à 3 jours à ${now.toLocaleTimeString()}`
-    );
+    const endTime = new Date();
+    const duration = endTime.getTime() - now.getTime();
+    console.log("════════════════════════════════════════════════════════");
+    console.log(`✅ [BackgroundFetch] Succès en ${duration}ms`);
+    console.log("   📅 Notifications reprogrammées pour les 3 prochains jours");
+    console.log("   ⏰ Prochain réveil: dans ~2h (selon iOS)");
+    console.log("════════════════════════════════════════════════════════");
     return BackgroundFetch.BackgroundFetchResult.NewData;
   } catch (error) {
     console.error("❌ [BackgroundFetch] Erreur:", error);
@@ -133,10 +139,10 @@ export async function registerBackgroundFetchAsync() {
     );
     if (!isRegistered) {
       await BackgroundFetch.registerTaskAsync(BACKGROUND_FETCH_TASK, {
-        minimumInterval: 60 * 60 * 12, // Minimum 12 heures (Apple décide du timing réel)
-        stopOnTerminate: false, // Tenter de continuer même si l'app est fermée
+        minimumInterval: 60 * 60 * 2, // Minimum 2 heures (Apple peut décider d'un timing différent selon batterie/usage)
+        stopOnTerminate: false, // Continue même si l'app est fermée
       });
-      console.log("✅ [BackgroundFetch] Tâche iOS enregistrée avec succès");
+      console.log("✅ [BackgroundFetch] Tâche iOS enregistrée (réveil toutes les ~2h pour reprogrammer notifications)");
     }
   } catch (err) {
     console.log("❌ [BackgroundFetch] Erreur enregistrement:", err);

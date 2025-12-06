@@ -400,6 +400,43 @@ export default function DebugNotificationsScreen() {
               <Text style={styles.buttonText}>💾 Test Sauvegarde Complète</Text>
             </TouchableOpacity>
 
+            {Platform.OS === "ios" && (
+              <TouchableOpacity
+                style={[styles.button, { backgroundColor: "#9C27B0" }]}
+                onPress={async () => {
+                  try {
+                    addLog("═══════════════════════════════════════");
+                    addLog("🔄 [TEST] Simulation Background Fetch iOS");
+                    addLog("═══════════════════════════════════════");
+                    
+                    const { registerBackgroundFetchAsync } = await import(
+                      "../utils/backgroundTask"
+                    );
+                    
+                    // Réenregistrer la tâche (au cas où)
+                    await registerBackgroundFetchAsync();
+                    addLog("✅ Tâche Background Fetch réenregistrée");
+                    
+                    addLog("ℹ️ INFO: iOS déclenche le Background Fetch selon:");
+                    addLog("   • Usage de l'app (fréquence d'ouverture)");
+                    addLog("   • Niveau de batterie");
+                    addLog("   • Connexion réseau");
+                    addLog("   • Minimum configuré: 2 heures");
+                    addLog("");
+                    addLog("💡 Pour tester immédiatement:");
+                    addLog("   1. Fermer complètement l'app");
+                    addLog("   2. Xcode > Debug > Simulate Background Fetch");
+                    addLog("   3. Ou attendre ~2-4 heures en usage normal");
+                    addLog("═══════════════════════════════════════");
+                  } catch (error) {
+                    addLog(`❌ ERREUR: ${error}`);
+                  }
+                }}
+              >
+                <Text style={styles.buttonText}>🔄 Info Background Fetch (iOS)</Text>
+              </TouchableOpacity>
+            )}
+
             <View style={styles.row}>
               <TouchableOpacity
                 style={[
