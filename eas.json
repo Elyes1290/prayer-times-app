@@ -27,9 +27,6 @@
       }
     }
   },
-  "hooks": {
-    "prebuild": "./eas-hooks/eas-build-pre-install.sh"
-  },
   "submit": {
     "production": {
       "ios": {
