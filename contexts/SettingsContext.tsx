@@ -974,12 +974,12 @@ export const SettingsProvider = ({
     console.log("📍 locationMode:", locationMode);
     console.log("🗺️ autoLocation:", autoLocation);
     console.log("📌 manualLocation:", manualLocation);
-    
+
     // 🔥 LOG VISIBLE DANS 3UTOOLS pour debug iOS
     if (Platform.OS === "ios" && AdhanModule?.debugLog) {
       AdhanModule.debugLog("💾 [JS] saveAndReprogramAll APPELÉ");
     }
-    
+
     if (!locationMode || (!autoLocation && !manualLocation)) {
       console.log("❌ [saveAndReprogramAll] ARRÊT: Pas de localisation");
       return;
@@ -993,14 +993,19 @@ export const SettingsProvider = ({
           ? { latitude: manualLocation.lat, longitude: manualLocation.lon }
           : null;
 
-      console.log("📍 [saveAndReprogramAll] userLocation calculé:", userLocation);
+      console.log(
+        "📍 [saveAndReprogramAll] userLocation calculé:",
+        userLocation
+      );
 
       if (!userLocation) {
         console.log("❌ [saveAndReprogramAll] userLocation est null !");
         return;
       }
 
-      console.log("✅ [saveAndReprogramAll] Appel scheduleNotificationsFor2Days...");
+      console.log(
+        "✅ [saveAndReprogramAll] Appel scheduleNotificationsFor2Days..."
+      );
       await scheduleNotificationsFor2Days({
         userLocation,
         calcMethod,
@@ -1022,7 +1027,9 @@ export const SettingsProvider = ({
           delaySelectedDua,
         },
       });
-      console.log("✅ [saveAndReprogramAll] scheduleNotificationsFor2Days terminé");
+      console.log(
+        "✅ [saveAndReprogramAll] scheduleNotificationsFor2Days terminé"
+      );
       console.log("═══════════════════════════════════════");
     } catch (error) {
       console.error("❌ [saveAndReprogramAll] ERREUR:", error);

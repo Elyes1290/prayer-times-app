@@ -111,7 +111,7 @@ class AdhanModule: NSObject {
     ]
     resolve(result)
   }
-
+  
   // MARK: - Adhan Scheduling
   
   @objc
@@ -125,7 +125,7 @@ class AdhanModule: NSObject {
     
     requestPermissions { granted in
         NSLog("🔐 Permission notifications: \(granted ? "✅ GRANTED" : "❌ DENIED")")
-        if granted {
+          if granted {
             NSLog("🗑️ Annulation adhans existants...")
             self.cancelNotifications(prefix: "adhan")
             NSLog("✅ Annulation terminée, début programmation...")
@@ -160,7 +160,7 @@ class AdhanModule: NSObject {
         if granted {
             self.cancelNotifications(prefix: "reminder")
             self.scheduleNotificationsInternal(formattedReminders, adhanSound: "default", type: "REMINDER")
-        }
+  }
     }
   }
   
@@ -196,7 +196,7 @@ class AdhanModule: NSObject {
     NSLog("🚫 [AdhanModule] Annulation DHIKR")
     cancelNotifications(prefix: "dhikr")
   }
-
+  
   @objc
   func cancelAllAdhanAlarms() {
     NSLog("🚫 [AdhanModule] Annulation TOUTES ADHAN")
@@ -321,7 +321,7 @@ class AdhanModule: NSObject {
     NSLog("⚠️ [AdhanModule] \(skipped) notifs ignorées (données invalides)")
     NSLog("📊 [AdhanModule] Total traité: \(items.count), Programmé: \(count), Ignoré: \(skipped)")
   }
-
+  
   // MARK: - Stubs & Helpers
   
   @objc func debugLog(_ message: String) {

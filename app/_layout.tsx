@@ -17,10 +17,6 @@ import i18n from "../locales/i18n";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { verifyAuth } from "../utils/apiClient";
 import { isOfflineMode } from "../utils/networkUtils";
-import {
-  subscribeToNotificationsTopic,
-  setupBackgroundMessageHandler,
-} from "../utils/pushNotifications";
 
 // 🚨 NOUVEAU : Protection contre les reloads Expo en mode développement
 let isAbonnementProcessActive = false;
@@ -82,9 +78,6 @@ if (__DEV__) {
   }
 }
 
-// 🔔 IMPORTANT : Configurer le gestionnaire de Silent Push AVANT tout le reste
-// Cela permet à l'app de répondre aux notifications même quand elle est fermée
-setupBackgroundMessageHandler();
 
 type IconName =
   | "home"
@@ -309,12 +302,9 @@ export default function TabLayout() {
           console.error("❌ Erreur vérification token:", error);
         }
 
-        // 🔔 iOS : S'abonner au topic de Silent Push Notifications
+        // 🍎 Configuration spécifique iOS (rien de spécial pour l'instant)
         if (Platform.OS === "ios") {
-          console.log(
-            "🔔 [iOS] Configuration des Silent Push Notifications..."
-          );
-          await subscribeToNotificationsTopic();
+          console.log("🔔 [iOS] Configuration des notifications locales...");
         }
 
         console.log("✅ Application initialisée");

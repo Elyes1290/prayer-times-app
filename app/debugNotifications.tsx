@@ -422,25 +422,6 @@ export default function DebugNotificationsScreen() {
             </View>
 
             <TouchableOpacity
-              style={[styles.button, { backgroundColor: "#9C27B0" }]}
-              onPress={async () => {
-                if (Platform.OS === "ios") {
-                  addLog("🔔 Test de reprogrammation Silent Push (iOS)...");
-                  const { testSilentPushRefresh } = await import(
-                    "../utils/pushNotifications"
-                  );
-                  await testSilentPushRefresh();
-                  addLog("✅ Reprogrammation terminée");
-                  setTimeout(fetchDebugInfo, 2000);
-                } else {
-                  addLog("⚠️ Test Silent Push disponible uniquement sur iOS");
-                }
-              }}
-            >
-              <Text style={styles.buttonText}>🔔 Test Silent Push (iOS)</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
               style={[styles.button, { backgroundColor: "#607D8B" }]}
               onPress={fetchDebugInfo}
             >
