@@ -58,7 +58,8 @@
       "expo-font",
       "expo-background-fetch",
       "./plugins/withIosNativeModules.js",
-      "./plugins/withGoogleServicesFile.js"
+      "./plugins/withGoogleServicesFile.js",
+      "./plugins/withPodfile.js"
     ],
     "experiments": {
       "typedRoutes": true
