@@ -92,7 +92,7 @@ TaskManager.defineTask(BACKGROUND_FETCH_TASK, async () => {
     }
 
     // 3. Exécuter la reprogrammation
-    // Sur iOS, cela va reprogrammer aujourd'hui + demain (Background Fetch rappelle toutes les ~2h)
+    // Sur iOS, cela va reprogrammer aujourd'hui + demain (Background Fetch rappelle quotidiennement)
     await scheduleNotificationsFor2Days({
       userLocation,
       calcMethod: calcMethod || "MuslimWorldLeague",
@@ -120,7 +120,7 @@ TaskManager.defineTask(BACKGROUND_FETCH_TASK, async () => {
     console.log("════════════════════════════════════════════════════════");
     console.log(`✅ [BackgroundFetch] Succès en ${duration}ms`);
     console.log("   📅 Notifications: Aujourd'hui + Demain");
-    console.log("   ⏰ Prochain réveil: dans ~2h (selon iOS)");
+    console.log("   ⏰ Prochain réveil: dans ~24h (selon iOS)");
     console.log("════════════════════════════════════════════════════════");
     return BackgroundFetch.BackgroundFetchResult.NewData;
   } catch (error) {
@@ -139,10 +139,10 @@ export async function registerBackgroundFetchAsync() {
     );
     if (!isRegistered) {
       await BackgroundFetch.registerTaskAsync(BACKGROUND_FETCH_TASK, {
-        minimumInterval: 60 * 60 * 2, // Minimum 2 heures (Apple peut décider d'un timing différent selon batterie/usage)
+        minimumInterval: 60 * 60 * 24, // Minimum 24 heures (1 reprogrammation par jour suffit)
         stopOnTerminate: false, // Continue même si l'app est fermée
       });
-      console.log("✅ [BackgroundFetch] Tâche iOS enregistrée (réveil toutes les ~2h pour reprogrammer notifications)");
+      console.log("✅ [BackgroundFetch] Tâche iOS enregistrée (réveil quotidien pour reprogrammer aujourd'hui + demain)");
     }
   } catch (err) {
     console.log("❌ [BackgroundFetch] Erreur enregistrement:", err);

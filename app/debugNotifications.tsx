@@ -421,12 +421,12 @@ export default function DebugNotificationsScreen() {
                     addLog("   • Usage de l'app (fréquence d'ouverture)");
                     addLog("   • Niveau de batterie");
                     addLog("   • Connexion réseau");
-                    addLog("   • Minimum configuré: 2 heures");
+                    addLog("   • Minimum configuré: 24 heures (quotidien)");
                     addLog("");
                     addLog("💡 Pour tester immédiatement:");
                     addLog("   1. Fermer complètement l'app");
                     addLog("   2. Xcode > Debug > Simulate Background Fetch");
-                    addLog("   3. Ou attendre ~2-4 heures en usage normal");
+                    addLog("   3. Ou attendre ~24h en usage normal");
                     addLog("═══════════════════════════════════════");
                   } catch (error) {
                     addLog(`❌ ERREUR: ${error}`);
