@@ -97,13 +97,12 @@ android/app/src/debug/google-services.json
 android/app/src/release/google-services.json
 
 # iOS specific secrets
-# Allow ios/GoogleService-Info.plist for Firebase (needed for EAS Build)
-# But block all other GoogleService-Info.plist locations
+# Only block GoogleService-Info.plist in these specific locations:
 ios/GoogleService-Info-Debug.plist
 ios/GoogleService-Info-Release.plist
 ios/Runner/GoogleService-Info.plist
-**/GoogleService-Info.plist
-!ios/GoogleService-Info.plist
+android/**/GoogleService-Info.plist
+# NOTE: ios/GoogleService-Info.plist is ALLOWED (needed for Firebase)
 
 # Keystore and signing files
 *.keystore
