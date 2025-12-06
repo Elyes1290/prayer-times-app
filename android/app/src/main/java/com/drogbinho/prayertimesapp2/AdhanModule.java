@@ -1216,17 +1216,36 @@ public class AdhanModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void savePremiumContentData(String jsonData, Promise promise) {
         try {
+            errorLog("AdhanModule", "💾 SAUVEGARDE DONNÉES PREMIUM...");
+            errorLog("AdhanModule", "   Taille JSON: " + jsonData.length() + " caractères");
+            
             SharedPreferences premiumPrefs = getReactApplicationContext()
                 .getSharedPreferences("premium_content", Context.MODE_PRIVATE);
             
-            premiumPrefs.edit()
+            // 🔧 FIX CRITIQUE : Utiliser commit() au lieu de apply()
+            // commit() = SYNCHRONE, garantit que l'écriture est terminée
+            // apply() = ASYNCHRONE, peut causer des race conditions
+            boolean success = premiumPrefs.edit()
                 .putString("downloaded_premium_content", jsonData)
-                .apply();
+                .commit(); // ✅ SYNCHRONE
             
-            debugLog("AdhanModule", "✅ Données premium sauvées dans SharedPreferences pour Android");
-            promise.resolve(true);
+            if (success) {
+                // Vérification : Relire pour confirmer
+                String savedData = premiumPrefs.getString("downloaded_premium_content", null);
+                if (savedData != null && savedData.equals(jsonData)) {
+                    errorLog("AdhanModule", "✅✅✅ DONNÉES PREMIUM SAUVÉES ET VÉRIFIÉES ✅✅✅");
+                    errorLog("AdhanModule", "   Taille vérifiée: " + savedData.length() + " caractères");
+                    promise.resolve(true);
+                } else {
+                    errorLog("AdhanModule", "❌ VÉRIFICATION ÉCHOUÉE : Données lues différentes");
+                    promise.reject("VERIFICATION_ERROR", "Saved data doesn't match");
+                }
+            } else {
+                errorLog("AdhanModule", "❌ COMMIT A ÉCHOUÉ");
+                promise.reject("COMMIT_ERROR", "commit() returned false");
+            }
         } catch (Exception e) {
-            errorLog("AdhanModule", "❌ Erreur sauvegarde données premium: " + e.getMessage());
+            errorLog("AdhanModule", "❌ ERREUR SAUVEGARDE DONNÉES PREMIUM: " + e.getMessage());
             promise.reject("SAVE_ERROR", e);
         }
     }

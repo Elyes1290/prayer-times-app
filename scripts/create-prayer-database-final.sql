@@ -30,6 +30,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `premium_status` tinyint(1) DEFAULT 0 COMMENT '0=free, 1=premium',
   `subscription_type` enum('monthly','yearly','family','lifetime','test') DEFAULT NULL,
   `subscription_id` varchar(255) DEFAULT NULL,
+  `stripe_customer_id` varchar(255) DEFAULT NULL COMMENT 'ID customer Stripe (cus_xxx) pour les webhooks',
   `premium_expiry` datetime DEFAULT NULL,
   `premium_features` text DEFAULT NULL COMMENT 'JSON des fonctionnalités premium disponibles',
   `premium_activated_at` timestamp NULL DEFAULT NULL,
@@ -105,6 +106,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   UNIQUE KEY `email` (`email`),
   KEY `premium_status` (`premium_status`),
   KEY `premium_expiry` (`premium_expiry`),
+  KEY `stripe_customer_id` (`stripe_customer_id`),
   KEY `last_seen` (`last_seen`),
   KEY `created_at` (`created_at`),
   KEY `status` (`status`)
@@ -750,6 +752,11 @@ FROM achievements;
 -- =================================================
 -- 🔧 CORRECTIONS POST-CRÉATION (DATA FIXES)
 -- =================================================
+
+-- ✅ Migration 2025-11-17: stripe_customer_id ajouté à la table users
+-- Permet de lier les utilisateurs à leur customer ID Stripe (cus_xxx)
+-- pour gérer correctement les renouvellements automatiques d'abonnement
+-- et la synchronisation avec les webhooks Stripe
 
 -- Corriger les utilisateurs premium sans date d'activation
 -- 🎯 LOGIQUE : Si l'utilisateur est premium mais sans date d'activation,

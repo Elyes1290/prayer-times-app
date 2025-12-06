@@ -144,7 +144,7 @@ export const useQuranWidget = () => {
 
   // Forcer la synchronisation du statut premium immédiatement
   useEffect(() => {
-    if (user) {
+    if (user && QuranWidgetModule) {
       console.log(
         "🔄 Synchronisation immédiate du statut premium:",
         user.isPremium
@@ -191,7 +191,7 @@ export const useQuranWidget = () => {
 
   // Forcer la synchronisation du statut premium au démarrage
   useEffect(() => {
-    if (isWidgetAvailable && user) {
+    if (isWidgetAvailable && user && QuranWidgetModule) {
       // Délai pour s'assurer que l'app est complètement chargée
       const timer = setTimeout(async () => {
         try {

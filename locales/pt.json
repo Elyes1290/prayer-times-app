@@ -1047,6 +1047,9 @@
   "offline_mode": "Modo Offline",
   "online_mode": "Modo Online",
   "downloaded_audio": "Áudio Baixado",
+  "manage_downloads": "Gerenciar downloads",
+  "no_downloaded_audio": "Nenhum áudio baixado",
+  "downloads_manager": "Downloads",
   "quran_text": "Texto do Alcorão",
   "switch_to_offline": "Alternar para modo offline",
   "switch_to_online": "Alternar para modo online",
@@ -1216,7 +1219,13 @@
       "detailed_stats": "Estatísticas detalhadas",
       "exclusive_themes": "Temas exclusivos",
       "unlimited_favorites": "Favoritos ilimitados"
-    }
+    },
+    "expired_title": "Assinatura expirada",
+    "expired_message": "Sua assinatura premium expirou. Renove para continuar aproveitando os recursos premium.",
+    "expiring_soon_title": "Assinatura expirando em breve",
+    "expiring_soon_message": "Sua assinatura expira em {{days}} dia(s). Lembre-se de renová-la!",
+    "renewed_title": "Assinatura renovada",
+    "renewed_message": "Sua assinatura premium foi renovada automaticamente até {{date}}"
   },
 
   "account": {

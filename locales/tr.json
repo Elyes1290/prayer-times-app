@@ -1047,6 +1047,9 @@
   "offline_mode": "Çevrimdışı Mod",
   "online_mode": "Çevrimiçi Mod",
   "downloaded_audio": "İndirilen Sesler",
+  "manage_downloads": "İndirmeleri yönet",
+  "no_downloaded_audio": "İndirilmiş ses yok",
+  "downloads_manager": "İndirmeler",
   "quran_text": "Kur'an Metni",
   "switch_to_offline": "Çevrimdışı moda geç",
   "switch_to_online": "Çevrimiçi moda geç",
@@ -1216,7 +1219,13 @@
       "detailed_stats": "Detaylı istatistikler",
       "exclusive_themes": "Özel temalar",
       "unlimited_favorites": "Sınırsız favoriler"
-    }
+    },
+    "expired_title": "Abonelik Süresi Doldu",
+    "expired_message": "Premium aboneliğinizin süresi doldu. Premium özelliklerden yararlanmaya devam etmek için yenileyin.",
+    "expiring_soon_title": "Abonelik Yakında Sona Erecek",
+    "expiring_soon_message": "Aboneliğiniz {{days}} gün içinde sona erecek. Yenilemeyi unutmayın!",
+    "renewed_title": "Abonelik Yenilendi",
+    "renewed_message": "Premium aboneliğiniz otomatik olarak {{date}} tarihine kadar yenilendi"
   },
 
   "account": {

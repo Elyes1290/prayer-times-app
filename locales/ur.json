@@ -1047,6 +1047,9 @@
   "offline_mode": "آف لائن موڈ",
   "online_mode": "آن لائن موڈ",
   "downloaded_audio": "ڈاؤن لوڈ شدہ آڈیو",
+  "manage_downloads": "ڈاؤن لوڈز کا انتظام کریں",
+  "no_downloaded_audio": "کوئی آڈیو ڈاؤن لوڈ نہیں ہوئی",
+  "downloads_manager": "ڈاؤن لوڈز",
   "quran_text": "قرآن کا متن",
   "switch_to_offline": "آف لائن موڈ میں سوئچ کریں",
   "switch_to_online": "آن لائن موڈ میں سوئچ کریں",
@@ -1216,7 +1219,13 @@
       "detailed_stats": "تفصیلی اعداد و شمار",
       "exclusive_themes": "خصوصی تھیمز",
       "unlimited_favorites": "لامحدود پسندیدہ"
-    }
+    },
+    "expired_title": "سبسکرپشن ختم ہوگئی",
+    "expired_message": "آپ کی پریمیم سبسکرپشن ختم ہو گئی ہے۔ پریمیم خصوصیات سے لطف اندوز ہونے کے لیے تجدید کریں۔",
+    "expiring_soon_title": "سبسکرپشن جلد ختم ہو رہی ہے",
+    "expiring_soon_message": "آپ کی سبسکرپشن {{days}} دن میں ختم ہو جائے گی۔ تجدید کرنا یاد رکھیں!",
+    "renewed_title": "سبسکرپشن کی تجدید ہو گئی",
+    "renewed_message": "آپ کی پریمیم سبسکرپشن خود بخود {{date}} تک تجدید کر دی گئی ہے"
   },
 
   "account": {

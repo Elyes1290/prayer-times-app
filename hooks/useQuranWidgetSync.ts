@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { NativeEventEmitter, NativeModules } from "react-native";
+import { NativeEventEmitter, NativeModules, Platform } from "react-native";
 
 const { QuranSyncModule } = NativeModules;
 
@@ -23,8 +23,10 @@ export const useQuranWidgetSync = (): UseQuranWidgetSyncReturn => {
   const subscription = useRef<any>(null);
 
   useEffect(() => {
-    // Créer l'event emitter
-    eventEmitter.current = new NativeEventEmitter(QuranSyncModule);
+    // ✅ Vérifier que le module existe avant de créer l'event emitter (iOS compatible)
+    if (Platform.OS === "android" && QuranSyncModule) {
+      eventEmitter.current = new NativeEventEmitter(QuranSyncModule);
+    }
 
     return () => {
       // Nettoyer la subscription
@@ -36,6 +38,17 @@ export const useQuranWidgetSync = (): UseQuranWidgetSyncReturn => {
   }, []);
 
   const checkWidgetSync = async (): Promise<WidgetSyncData> => {
+    // ✅ Vérifier que le module existe (Android uniquement)
+    if (Platform.OS !== "android" || !QuranSyncModule) {
+      return {
+        surahNumber: 0,
+        surahName: "",
+        reciter: "",
+        timestamp: 0,
+        hasData: false,
+      };
+    }
+
     try {
       console.log("🔍 Vérification synchronisation widget...");
       const result = await QuranSyncModule.checkWidgetSync();
@@ -48,6 +61,11 @@ export const useQuranWidgetSync = (): UseQuranWidgetSyncReturn => {
   };
 
   const clearWidgetSync = async (): Promise<boolean> => {
+    // ✅ Vérifier que le module existe (Android uniquement)
+    if (Platform.OS !== "android" || !QuranSyncModule) {
+      return false;
+    }
+
     try {
       console.log("🗑️ Effacement données synchronisation...");
       const result = await QuranSyncModule.clearWidgetSync();

@@ -27,6 +27,7 @@ import {
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
+import * as Notifications from "expo-notifications";
 import ThemedImageBackground from "../components/ThemedImageBackground";
 import PrayerTimes from "adhan/lib/types/PrayerTimes";
 
@@ -408,12 +409,13 @@ export default function HomeScreen() {
     }
   };
 
-  // Permission Android 13+
+  // Permission notifications (Android 13+ et iOS)
   useEffect(() => {
     async function askNotifPermission() {
-      debugLog("🔐 Vérification permissions notifications Android 13+");
+      debugLog("🔐 Vérification permissions notifications");
 
       if (Platform.OS === "android" && Platform.Version >= 33) {
+        // Android 13+
         const granted = await PermissionsAndroid.request(
           "android.permission.POST_NOTIFICATIONS"
         );
@@ -423,6 +425,41 @@ export default function HomeScreen() {
             t("notifications_disabled_message") ||
               "Vous devez autoriser les notifications pour recevoir les rappels de prière et de dhikr."
           );
+        }
+      } else if (Platform.OS === "ios") {
+        // iOS - Demander les permissions de notification via expo-notifications
+        try {
+          debugLog("🔐 [iOS] Vérification permissions notifications...");
+          const { status: existingStatus } =
+            await Notifications.getPermissionsAsync();
+          debugLog(`🔐 [iOS] Status actuel: ${existingStatus}`);
+          let finalStatus = existingStatus;
+
+          if (existingStatus !== "granted") {
+            debugLog("🔐 [iOS] Demande de permissions...");
+            const { status } = await Notifications.requestPermissionsAsync({
+              ios: {
+                allowAlert: true,
+                allowSound: true,
+                allowBadge: true,
+              },
+            });
+            finalStatus = status;
+            debugLog(`🔐 [iOS] Nouveau status: ${finalStatus}`);
+          }
+
+          if (finalStatus !== "granted") {
+            errorLog("❌ [iOS] Permissions notifications refusées");
+            Alert.alert(
+              t("notifications_disabled_title") || "Notifications désactivées",
+              t("notifications_disabled_message") ||
+                "Vous devez autoriser les notifications dans les Réglages iOS pour recevoir les rappels de prière et de dhikr."
+            );
+          } else {
+            debugLog("✅ [iOS] Permissions notifications accordées");
+          }
+        } catch (error) {
+          errorLog("❌ [iOS] Erreur demande permissions notifications:", error);
         }
       }
     }

@@ -1,4 +1,5 @@
 import * as Font from "expo-font";
+import { Audio } from "expo-av";
 import React, {
   useEffect,
   useState,
@@ -277,6 +278,20 @@ export default function QuranScreen() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [playbackPosition, setPlaybackPosition] = useState(0);
   const [playbackDuration, setPlaybackDuration] = useState(0);
+
+  // 🎵 NOUVEAU : États pour le lecteur de téléchargements (complètement indépendant)
+  const [downloadsSound, setDownloadsSound] = useState<Audio.Sound | null>(
+    null
+  );
+  const [downloadsPlaying, setDownloadsPlaying] = useState<string | null>(null);
+  const [downloadsIsPlaying, setDownloadsIsPlaying] = useState(false);
+  const [downloadsPosition, setDownloadsPosition] = useState(0);
+  const [downloadsDuration, setDownloadsDuration] = useState(0);
+  const [downloadsPlaylist, setDownloadsPlaylist] = useState<PremiumContent[]>(
+    []
+  );
+  const [downloadsPlaylistIndex, setDownloadsPlaylistIndex] = useState(0);
+  const playNextDownloadedRef = useRef<(() => Promise<void>) | null>(null); // Ref pour éviter la closure
   const [isLoading, setIsLoading] = useState(false);
 
   const premiumManager = PremiumContentManager.getInstance();
@@ -526,7 +541,10 @@ export default function QuranScreen() {
     console.log(
       `🔍 useEffect scan - isOfflineMode: ${offlineAccess.isOfflineMode}, showDownloadsView: ${showDownloadsView}`
     );
-    if (offlineAccess.isOfflineMode || showDownloadsView) {
+    if (
+      (offlineAccess.isOfflineMode || showDownloadsView) &&
+      sourates.length > 0
+    ) {
       scanDownloadedQuranFiles().then((files) => {
         console.log(
           `🎯 Fichiers scannés à setter dans l'état: ${files.length}`
@@ -534,7 +552,7 @@ export default function QuranScreen() {
         setScannedQuranFiles(files);
       });
     }
-  }, [offlineAccess.isOfflineMode, showDownloadsView]);
+  }, [offlineAccess.isOfflineMode, showDownloadsView, sourates]);
 
   // Nettoyer l'audio à la fermeture
   useEffect(() => {
@@ -831,10 +849,16 @@ export default function QuranScreen() {
           // Obtenir la taille du fichier en MB
           const fileSizeMB = (file.size / (1024 * 1024)).toFixed(2);
 
+          // 🎯 Obtenir le nom réel de la sourate depuis les données chargées
+          const surahData = sourates.find((s) => s.id === surahNumber);
+          const surahName = surahData
+            ? `${surahData.name_simple} (${surahData.name_arabic})`
+            : `Sourate ${surahNumber}`;
+
           quranRecitations.push({
             id: nameWithoutExt,
             type: "quran",
-            title: `Sourate ${surahNumber}`,
+            title: surahName,
             description: `Récitation par ${reciterName}`,
             fileUrl: "",
             fileSize: parseFloat(fileSizeMB),
@@ -843,7 +867,7 @@ export default function QuranScreen() {
             downloadPath: file.path,
             reciter: reciterName,
             surahNumber: surahNumber,
-            surahName: `Sourate ${surahNumber}`,
+            surahName: surahName,
           });
         }
       }
@@ -1616,6 +1640,186 @@ export default function QuranScreen() {
     ]
   );
 
+  // 🎵 LECTEUR COMPLÈTEMENT INDÉPENDANT POUR LES TÉLÉCHARGEMENTS
+  // Utilise Audio.Sound avec configuration pour lecture en arrière-plan
+  const playDownloadedRecitation = useCallback(
+    async (recitation: PremiumContent) => {
+      try {
+        console.log(
+          `🎵 [DOWNLOADS] Lecture téléchargement: ${recitation.title}`
+        );
+
+        // 1️⃣ Arrêter toute lecture précédente dans le lecteur téléchargements
+        if (downloadsSound) {
+          console.log("🎵 [DOWNLOADS] Arrêt son précédent");
+          await downloadsSound.unloadAsync();
+          setDownloadsSound(null);
+        }
+
+        // 2️⃣ Créer la playlist avec SEULEMENT les fichiers téléchargés du même récitateur
+        if (recitation.reciter) {
+          const downloadedRecitations = scannedQuranFiles
+            .filter((r) => r.reciter === recitation.reciter)
+            .sort((a, b) => (a.surahNumber || 0) - (b.surahNumber || 0));
+
+          if (downloadedRecitations.length > 0) {
+            const currentIndex = downloadedRecitations.findIndex(
+              (r) => r.id === recitation.id
+            );
+
+            setDownloadsPlaylist(downloadedRecitations);
+            setDownloadsPlaylistIndex(currentIndex >= 0 ? currentIndex : 0);
+
+            console.log(
+              `🎵 [DOWNLOADS] Playlist: ${
+                downloadedRecitations.length
+              } récitations, position: ${currentIndex + 1}`
+            );
+          }
+        }
+
+        // 3️⃣ Vérifier que le fichier est téléchargé
+        const downloadPath = await premiumManager.isContentDownloaded(
+          recitation.id
+        );
+        if (!downloadPath) {
+          showToast({
+            type: "error",
+            title: t("error"),
+            message: t("file_not_found"),
+          });
+          return;
+        }
+
+        // 4️⃣ Configurer l'audio pour lecture en arrière-plan
+        await Audio.setAudioModeAsync({
+          staysActiveInBackground: true,
+          playsInSilentModeIOS: true,
+          shouldDuckAndroid: true,
+        });
+
+        // 5️⃣ Charger et jouer l'audio (système indépendant)
+        console.log(`🎵 [DOWNLOADS] Chargement: file://${downloadPath}`);
+        const { sound: newSound } = await Audio.Sound.createAsync(
+          { uri: `file://${downloadPath}` },
+          {
+            shouldPlay: true,
+            progressUpdateIntervalMillis: 1000,
+          },
+          (status) => {
+            if (status.isLoaded) {
+              setDownloadsDuration(status.durationMillis || 0);
+              setDownloadsPosition(status.positionMillis || 0);
+              setDownloadsIsPlaying(status.isPlaying || false);
+
+              // 🎵 Détecter la fin du fichier
+              if (status.didJustFinish && !status.isLooping) {
+                console.log(
+                  "🎵 [DOWNLOADS] Fichier terminé, passage au suivant"
+                );
+                if (playNextDownloadedRef.current) {
+                  playNextDownloadedRef.current();
+                }
+              }
+            }
+          }
+        );
+
+        setDownloadsSound(newSound);
+        setDownloadsPlaying(recitation.id);
+        setDownloadsIsPlaying(true);
+
+        showToast({
+          type: "success",
+          title: t("playing"),
+          message: recitation.title,
+        });
+      } catch (error) {
+        console.error("❌ [DOWNLOADS] Erreur lecture:", error);
+        showToast({
+          type: "error",
+          title: t("playback_error"),
+          message: t("playback_error_message"),
+        });
+      }
+    },
+    [downloadsSound, scannedQuranFiles, premiumManager, showToast, t]
+  );
+
+  // 🎵 Pause/Resume pour le lecteur téléchargements (complètement indépendant)
+  const pauseDownloadedRecitation = useCallback(async () => {
+    try {
+      if (downloadsSound) {
+        const status = await downloadsSound.getStatusAsync();
+        if (status.isLoaded && status.isPlaying) {
+          await downloadsSound.pauseAsync();
+          setDownloadsIsPlaying(false);
+          console.log("⏸️ [DOWNLOADS] Pause");
+        }
+      }
+    } catch (error) {
+      console.error("❌ [DOWNLOADS] Erreur pause:", error);
+    }
+  }, [downloadsSound]);
+
+  const resumeDownloadedRecitation = useCallback(async () => {
+    try {
+      if (downloadsSound) {
+        const status = await downloadsSound.getStatusAsync();
+        if (status.isLoaded && !status.isPlaying) {
+          await downloadsSound.playAsync();
+          setDownloadsIsPlaying(true);
+          console.log("▶️ [DOWNLOADS] Resume");
+        }
+      }
+    } catch (error) {
+      console.error("❌ [DOWNLOADS] Erreur resume:", error);
+    }
+  }, [downloadsSound]);
+
+  // 🎵 Passage au fichier suivant dans la playlist téléchargements
+  const playNextDownloaded = useCallback(async () => {
+    const nextIndex = downloadsPlaylistIndex + 1;
+    if (nextIndex < downloadsPlaylist.length) {
+      console.log(
+        `🎵 [DOWNLOADS] Passage à ${nextIndex + 1}/${downloadsPlaylist.length}`
+      );
+      setDownloadsPlaylistIndex(nextIndex);
+      await playDownloadedRecitation(downloadsPlaylist[nextIndex]);
+    } else {
+      console.log("🎵 [DOWNLOADS] Fin de la playlist");
+      if (downloadsSound) {
+        await downloadsSound.unloadAsync();
+        setDownloadsSound(null);
+      }
+      setDownloadsPlaying(null);
+      setDownloadsIsPlaying(false);
+      setDownloadsPlaylist([]);
+      setDownloadsPlaylistIndex(0);
+    }
+  }, [
+    downloadsPlaylistIndex,
+    downloadsPlaylist,
+    downloadsSound,
+    playDownloadedRecitation,
+  ]);
+
+  // Assigner la fonction à la ref pour éviter les problèmes de closure
+  useEffect(() => {
+    playNextDownloadedRef.current = playNextDownloaded;
+  }, [playNextDownloaded]);
+
+  // 🎵 Nettoyer le son à la fermeture de la vue téléchargements
+  useEffect(() => {
+    if (!showDownloadsView && downloadsSound) {
+      console.log("🎵 [DOWNLOADS] Nettoyage à la fermeture");
+      downloadsSound.unloadAsync();
+      setDownloadsSound(null);
+      setDownloadsPlaying(null);
+      setDownloadsIsPlaying(false);
+    }
+  }, [showDownloadsView, downloadsSound]);
+
   const pauseRecitation = async () => {
     try {
       // 🎵 NOUVEAU : Utiliser le service natif si disponible
@@ -2172,7 +2376,22 @@ export default function QuranScreen() {
                                   flexDirection: "row",
                                   alignItems: "center",
                                 }}
-                                onPress={() => playRecitation(recitation)}
+                                onPress={() => {
+                                  // 🎵 Toggle play/pause (lecteur téléchargements indépendant)
+                                  if (
+                                    downloadsPlaying === recitation.id &&
+                                    downloadsIsPlaying
+                                  ) {
+                                    pauseDownloadedRecitation();
+                                  } else if (
+                                    downloadsPlaying === recitation.id &&
+                                    !downloadsIsPlaying
+                                  ) {
+                                    resumeDownloadedRecitation();
+                                  } else {
+                                    playDownloadedRecitation(recitation);
+                                  }
+                                }}
                               >
                                 <View style={{ flex: 1 }}>
                                   <Text style={styles.offlineRecitationTitle}>
@@ -2181,12 +2400,12 @@ export default function QuranScreen() {
                                   <Text
                                     style={styles.offlineRecitationSubtitle}
                                   >
-                                    {t("surah")} {recitation.surahNumber} •{" "}
-                                    {recitation.fileSize} MB
+                                    {recitation.reciter} • {recitation.fileSize}{" "}
+                                    MB
                                   </Text>
                                 </View>
-                                {currentlyPlaying === recitation.id &&
-                                isPlaying ? (
+                                {downloadsPlaying === recitation.id &&
+                                downloadsIsPlaying ? (
                                   <MaterialCommunityIcons
                                     name="pause-circle"
                                     size={32}
@@ -2429,7 +2648,22 @@ export default function QuranScreen() {
                                     borderWidth: 2,
                                   },
                                 ]}
-                                onPress={() => playRecitation(recitation)}
+                                onPress={() => {
+                                  // 🎵 Toggle play/pause (lecteur téléchargements indépendant)
+                                  if (
+                                    downloadsPlaying === recitation.id &&
+                                    downloadsIsPlaying
+                                  ) {
+                                    pauseDownloadedRecitation();
+                                  } else if (
+                                    downloadsPlaying === recitation.id &&
+                                    !downloadsIsPlaying
+                                  ) {
+                                    resumeDownloadedRecitation();
+                                  } else {
+                                    playDownloadedRecitation(recitation);
+                                  }
+                                }}
                               >
                                 <View style={{ flex: 1 }}>
                                   <Text style={styles.offlineRecitationTitle}>
@@ -2438,12 +2672,12 @@ export default function QuranScreen() {
                                   <Text
                                     style={styles.offlineRecitationSubtitle}
                                   >
-                                    {t("surah")} {recitation.surahNumber} •{" "}
-                                    {recitation.fileSize} MB
+                                    {recitation.reciter} • {recitation.fileSize}{" "}
+                                    MB
                                   </Text>
                                 </View>
-                                {currentlyPlaying === recitation.id &&
-                                isPlaying ? (
+                                {downloadsPlaying === recitation.id &&
+                                downloadsIsPlaying ? (
                                   <MaterialCommunityIcons
                                     name="pause-circle"
                                     size={32}
@@ -3305,8 +3539,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#fffbe6",
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
-    paddingBottom: 40,
-    maxHeight: "70%",
+    paddingBottom: 60,
+    marginBottom: 20,
+    maxHeight: "75%",
   },
   menuHeader: {
     flexDirection: "row",

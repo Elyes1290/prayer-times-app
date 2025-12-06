@@ -72,6 +72,15 @@ class PremiumContentManager {
     return PremiumContentManager.instance;
   }
 
+  // 🚀 NOUVEAU : Helper central pour garantir un chemin unique et cohérent pour les Adhans
+  private getAdhanStoragePath(id: string): string {
+    // Nettoyage de l'ID pour éviter les doubles préfixes
+    const cleanId = id.replace(/^adhan_/, "");
+    // Format strict : toujours adhan_xxx.mp3
+    const fileName = `adhan_${cleanId}.mp3`;
+    return `${this.downloadDirectory}/${fileName}`;
+  }
+
   private async initializeDirectory(): Promise<void> {
     try {
       // 1. Créer le dossier principal
@@ -1036,7 +1045,9 @@ class PremiumContentManager {
             onProgress?.(1.0);
 
             // Vérifier si le fichier existe dans le dossier natif
-            const nativePath = await this.checkNativeDownloadPath(fileName);
+            const nativePath = await this.checkNativeDownloadForContent(
+              content.id
+            );
             if (nativePath) {
               await this.markAsDownloaded(content.id, nativePath);
               return true;
@@ -1064,36 +1075,30 @@ class PremiumContentManager {
   }
 
   // 🚀 NOUVEAU : Vérifier le chemin de téléchargement natif
-  private async checkNativeDownloadPath(
-    fileName: string
+  private async checkNativeDownloadForContent(
+    contentId: string
   ): Promise<string | null> {
     try {
-      // 🚀 FIX : Utiliser uniquement le stockage interne pour éviter les suppressions automatiques
-      const internalDownloadDir = `${RNFS.DocumentDirectoryPath}/premium_content`;
-
-      // Vérifier si le fichier existe dans le stockage interne
-      const filePath = `${internalDownloadDir}/${fileName}`;
-      const exists = await RNFS.exists(filePath);
-
-      if (exists) {
-        debugLog(`✅ Fichier interne trouvé: ${filePath}`);
-        return filePath;
+      // 1. Pour les récitations Quran (dossier spécifique)
+      if (contentId.startsWith("quran_") || contentId.startsWith("reciter_")) {
+        const reciterName = this.extractReciterNameFromId(contentId);
+        const fileName = `${contentId}.mp3`;
+        const quranPath = `${this.quranDirectory}/${reciterName}/${fileName}`;
+        if (await RNFS.exists(quranPath)) return quranPath;
+        return null;
       }
 
-      // 🚀 NOUVEAU : Essayer aussi avec l'ancien format de nom de fichier (pour compatibilité)
-      const oldFileName = fileName.replace(/\.mp3$/, "").replace(/_/g, "%20");
-      const oldFilePath = `${internalDownloadDir}/${oldFileName}`;
-      const oldExists = await RNFS.exists(oldFilePath);
+      // 2. Pour les Adhans : On utilise UNIQUEMENT le chemin standardisé
+      const targetPath = this.getAdhanStoragePath(contentId);
 
-      if (oldExists) {
-        debugLog(`✅ Ancien fichier interne trouvé: ${oldFilePath}`);
-        return oldFilePath;
+      if (await RNFS.exists(targetPath)) {
+        debugLog(`✅ Adhan trouvé (Standard): ${targetPath}`);
+        return targetPath;
       }
 
-      debugLog(`❌ Fichier non trouvé: ${fileName}`);
       return null;
     } catch (error) {
-      errorLog("❌ Erreur vérification chemin interne:", error);
+      errorLog("❌ Erreur vérification chemin:", error);
       return null;
     }
   }
@@ -1104,123 +1109,173 @@ class PremiumContentManager {
     onCancel?: () => boolean
   ): Promise<boolean> {
     try {
-      debugLog(`📥 Début téléchargement: ${content.title}`);
+      debugLog(`📥 Début téléchargement PROPRE: ${content.title}`);
+      debugLog(`🔗 URL source: ${content.fileUrl}`);
 
-      // 🚀 FIX: Nettoyer l'URL pour éviter les noms de fichiers corrompus
-      const cleanUrl = content.fileUrl.split("?")[0]; // Enlever les paramètres d'URL
-      const originalFileName = cleanUrl.split("/").pop() || "audio.mp3";
-      const fileExtension = originalFileName.split(".").pop() || "mp3";
-
-      // 🚀 NOUVEAU : Utiliser le bon dossier selon le type de contenu
-      const fileName = `${content.id}.${fileExtension}`;
       let downloadPath: string;
+      let tempPathInCorrectDir: string;
+      // Nom temporaire avec extension mp3 forcée
+      const tempFileName = `temp_${content.id}_${Date.now()}.mp3`;
 
-      // Pour les récitations Quran, utiliser le dossier Quran séparé
+      // Gestion différenciée Quran vs Adhan
       if (
         content.type === "quran" ||
         content.id.startsWith("quran_") ||
         content.id.startsWith("reciter_")
       ) {
-        downloadPath = `${this.quranDirectory}/${fileName}`;
-        debugLog(`📖 Téléchargement Quran dans: ${downloadPath}`);
+        const fileName = `${content.id}.mp3`;
+        const reciterName = this.extractReciterNameFromId(content.id);
+        // 🚀 FIX : Pour le Coran, utiliser un dossier spécifique mais la même logique de téléchargement
+        // const reciterDir = `${this.quranDirectory}/${reciterName}`;
+        // await RNFS.mkdir(reciterDir);
+        downloadPath = `${this.quranDirectory}/${reciterName}/${fileName}`;
+        // Créer le répertoire parent
+        await RNFS.mkdir(`${this.quranDirectory}/${reciterName}`);
+
+        tempPathInCorrectDir = `${this.quranDirectory}/${reciterName}/${tempFileName}`;
       } else {
-        // Pour les adhans et autres contenus, utiliser le dossier principal
-        downloadPath = `${this.downloadDirectory}/${fileName}`;
-        debugLog(`🎵 Téléchargement Adhan dans: ${downloadPath}`);
+        // 🎯 ADHAN : Utilisation du chemin standardisé forcé via le helper
+        downloadPath = this.getAdhanStoragePath(content.id);
+        // Le fichier temporaire va aussi dans le même dossier
+        tempPathInCorrectDir = `${this.downloadDirectory}/${tempFileName}`;
       }
 
-      debugLog(`🎯 Téléchargement ${content.title}:`);
-      debugLog(`   📂 Dossier source: ${content.fileUrl}`);
-      debugLog(`   💾 Fichier local: ${fileName}`);
-      debugLog(`   🔑 ID unique: ${content.id}`);
+      debugLog(`🎯 Cible : ${downloadPath}`);
 
-      // Vérifier si déjà téléchargé
-      const exists = await RNFS.exists(downloadPath);
-      if (exists) {
-        debugLog(`✅ Contenu déjà téléchargé: ${content.title}`);
-        await this.markAsDownloaded(content.id, downloadPath);
-        return true;
+      // Nettoyage préventif du fichier cible
+      if (await RNFS.exists(downloadPath)) {
+        await RNFS.unlink(downloadPath);
       }
 
-      // Télécharger depuis Infomaniak
-      const downloadUrl = content.fileUrl;
+      // Récupérer le token d'authentification pour les headers
+      const token = await AsyncStorage.getItem("auth_token");
 
-      // 🚀 FIX: Créer un nom de fichier temporaire pour éviter les conflits
-      const tempFileName = `temp_${content.id}_${Date.now()}.${fileExtension}`;
-      const tempPath = `${this.downloadDirectory}/${tempFileName}`;
+      // 🚀 NOUVEAU : Gestion des URLs signées/redirections JSON
+      // Certaines URLs renvoient un JSON avec la vraie URL de téléchargement (ex: adhans)
+      let finalUrl = content.fileUrl;
 
-      // 🚀 NOUVEAU : Utiliser le même dossier que le fichier final pour le temporaire
-      const tempDirectory =
-        content.type === "quran" ||
-        content.id.startsWith("quran_") ||
-        content.id.startsWith("reciter_")
-          ? this.quranDirectory
-          : this.downloadDirectory;
-      const tempPathInCorrectDir = `${tempDirectory}/${tempFileName}`;
+      try {
+        // Faire une requête HEAD/GET légère pour voir le type de contenu
+        const response = await fetch(content.fileUrl, {
+          method: "GET",
+          headers: {
+            ...(token ? { Authorization: `Bearer ${token}` } : {}),
+            "User-Agent": "PrayerTimesApp/1.0 Android",
+            Accept: "application/json",
+          },
+        });
 
-      // 🚀 FIX: Utiliser RNFS.downloadFile avec une meilleure gestion de l'annulation
-      debugLog(`🎯 Début téléchargement RNFS: ${content.title}`);
+        const contentType = response.headers.get("content-type");
 
-      // Créer un job de téléchargement
-      const downloadJob = RNFS.downloadFile({
-        fromUrl: downloadUrl,
+        if (contentType && contentType.includes("application/json")) {
+          const jsonResponse = await response.json();
+          debugLog(
+            "🔄 URL initiale renvoie du JSON, extraction de l'URL de téléchargement..."
+          );
+
+          if (
+            jsonResponse.success &&
+            jsonResponse.data &&
+            jsonResponse.data.downloadUrl
+          ) {
+            finalUrl = jsonResponse.data.downloadUrl;
+            debugLog(`🔗 Nouvelle URL cible: ${finalUrl}`);
+          }
+        }
+      } catch (e) {
+        debugLog(
+          "⚠️ Impossible de vérifier le type de contenu avant téléchargement, utilisation URL directe"
+        );
+      }
+
+      // Télécharger
+      const options: RNFS.DownloadFileOptions = {
+        fromUrl: finalUrl,
         toFile: tempPathInCorrectDir,
-        progress: (res: { bytesWritten: number; contentLength: number }) => {
-          // 🚀 FIX: Vérifier l'annulation dans le callback de progression
-          if (onCancel && onCancel()) {
+        headers: {
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+          "User-Agent": "PrayerTimesApp/1.0 Android",
+          Accept: "*/*",
+        },
+        progress: (res) => {
+          if (onProgress) {
+            // Vérifier l'annulation dans le callback de progression
+            if (onCancel && onCancel()) return;
+            const progress = (res.bytesWritten / res.contentLength) * 100;
+            onProgress(Math.round(progress));
+          }
+        },
+        progressDivider: 5,
+      };
+
+      const result = RNFS.downloadFile(options);
+
+      // Attendre la promesse
+      const finalRes = await result.promise;
+
+      if (finalRes.statusCode === 200) {
+        // Renommage final atomique
+        await RNFS.moveFile(tempPathInCorrectDir, downloadPath);
+
+        if (await RNFS.exists(downloadPath)) {
+          const fileStat = await RNFS.stat(downloadPath);
+          debugLog(
+            `✅ Téléchargement réussi : ${downloadPath} (Taille: ${fileStat.size} octets)`
+          );
+
+          // 🔍 DIAGNOSTIC CRITIQUE : Vérifier l'en-tête et la TAILLE du fichier
+          try {
+            // 2. Lire les 50 premiers caractères pour voir si c'est du HTML/PHP
+            const header = await RNFS.read(downloadPath, 330, 0, "utf8");
             debugLog(
-              `🛑 Annulation détectée dans le callback: ${content.title}`
+              `🔍 HEADER FICHIER (330 premiers caractères): ${header.replace(
+                /\n/g,
+                "\\n"
+              )}`
             );
-            return;
+
+            if (fileStat.size < 10000) {
+              errorLog(
+                `❌ FICHIER TROP PETIT (${fileStat.size} octets) - Ce n'est pas un MP3 valide !`
+              );
+              // Afficher le contenu pour débogage
+              errorLog(`📄 CONTENU DU FICHIER ERREUR: ${header}`);
+
+              await RNFS.unlink(downloadPath);
+              return false;
+            }
+
+            if (
+              header.trim().startsWith("<") ||
+              header.includes("<?php") ||
+              header.includes("Error") ||
+              header.startsWith("{") // JSON error
+            ) {
+              errorLog(
+                "❌ LE FICHIER SEMBLE ÊTRE DU TEXTE/HTML/JSON ET NON UN MP3 !"
+              );
+              // 🚀 AUTO-FIX : Supprimer le fichier corrompu immédiatement
+              await RNFS.unlink(downloadPath);
+              return false;
+            }
+          } catch (hErr) {
+            debugLog("⚠️ Impossible de lire le header ou la taille");
           }
 
-          // 🚀 FIX: Mettre à jour la progression de manière non-bloquante
-          setTimeout(() => {
-            const progress = (res.bytesWritten / res.contentLength) * 100;
-            onProgress?.(Math.round(progress));
-          }, 0);
-        },
-      });
-
-      // Attendre la fin du téléchargement
-      const downloadResult = await downloadJob.promise;
-
-      // 🚀 FIX: Vérifier l'annulation avant de finaliser
-      if (onCancel && onCancel()) {
-        debugLog(
-          `🛑 Téléchargement annulé avant finalisation: ${content.title}`
-        );
-        // Nettoyer le fichier temporaire
-        try {
-          await RNFS.unlink(tempPathInCorrectDir);
-        } catch (error) {
-          debugLog(`⚠️ Erreur nettoyage fichier temporaire: ${error}`);
-        }
-        return false;
-      }
-
-      // 🚀 FIX: Vérifier que le téléchargement s'est bien passé
-      if (downloadResult.statusCode === 200) {
-        // 🚀 FIX: Renommer le fichier temporaire vers le nom final
-        try {
-          await RNFS.moveFile(tempPathInCorrectDir, downloadPath);
-          debugLog(`✅ Fichier renommé: ${tempFileName} → ${fileName}`);
           await this.markAsDownloaded(content.id, downloadPath);
-        } catch (moveError) {
-          debugLog(
-            `⚠️ Erreur renommage, utilisation du fichier temporaire: ${moveError}`
-          );
-          // Si le renommage échoue, utiliser le fichier temporaire
-          await this.markAsDownloaded(content.id, tempPathInCorrectDir);
+          return true;
         }
-
-        debugLog(`✅ Téléchargement terminé: ${content.title}`);
-        return true;
-      } else {
-        throw new Error(`Échec téléchargement: fichier non créé`);
       }
+
+      // Nettoyage en cas d'échec (si le fichier temporaire existe encore)
+      if (await RNFS.exists(tempPathInCorrectDir)) {
+        await RNFS.unlink(tempPathInCorrectDir);
+      }
+
+      errorLog(`❌ Erreur téléchargement (Status: ${finalRes.statusCode})`);
+      return false;
     } catch (error) {
-      errorLog(`❌ Erreur téléchargement ${content.title}:`, error);
+      errorLog("❌ Exception téléchargement:", error);
       return false;
     }
   }
@@ -1429,50 +1484,6 @@ class PremiumContentManager {
     }
   }
 
-  // 🚀 NOUVEAU : Vérifier les téléchargements natifs pour un contenu spécifique
-  private async checkNativeDownloadForContent(
-    contentId: string
-  ): Promise<string | null> {
-    try {
-      // 🚀 NOUVEAU : Vérifier directement dans les dossiers appropriés
-
-      // Pour les adhans (dossier principal)
-      if (contentId.startsWith("adhan_")) {
-        const adhanPath = `${this.downloadDirectory}/${contentId}.mp3`;
-        const adhanExists = await RNFS.exists(adhanPath);
-        if (adhanExists) {
-          debugLog(`✅ Adhan trouvé: ${adhanPath}`);
-          return adhanPath;
-        }
-      }
-
-      // 🚀 NOUVEAU : Pour les récitations Quran (dossier Quran/nom_récitateur/)
-      if (contentId.startsWith("quran_") || contentId.startsWith("reciter_")) {
-        const reciterName = this.extractReciterNameFromId(contentId);
-        const fileName = contentId + ".mp3";
-        const quranPath = `${this.quranDirectory}/${reciterName}/${fileName}`;
-        const quranExists = await RNFS.exists(quranPath);
-        if (quranExists) {
-          debugLog(`✅ Récitation Quran trouvée: ${quranPath}`);
-          return quranPath;
-        }
-      }
-
-      // Fallback : vérifier dans le dossier principal pour compatibilité
-      const mainPath = `${this.downloadDirectory}/${contentId}.mp3`;
-      const mainExists = await RNFS.exists(mainPath);
-      if (mainExists) {
-        debugLog(`✅ Fichier trouvé (fallback): ${mainPath}`);
-        return mainPath;
-      }
-
-      return null;
-    } catch (error) {
-      errorLog("❌ Erreur vérification téléchargement natif:", error);
-      return null;
-    }
-  }
-
   // 🗑️ Supprimer contenu premium
   async deletePremiumContent(contentId: string): Promise<boolean> {
     try {
@@ -1553,6 +1564,62 @@ class PremiumContentManager {
         console.log("Erreur synchronisation téléchargements:", error);
       }
 
+      // 🚀 CRITIQUE : Mettre à jour le catalogue en cache pour refléter la suppression
+      try {
+        const catalog = await this.getPremiumCatalog();
+        if (catalog) {
+          let updated = false;
+
+          // Mettre à jour les Adhans
+          if (catalog.adhanVoices) {
+            catalog.adhanVoices = catalog.adhanVoices.map((item) => {
+              if (
+                item.id === contentId ||
+                item.id === this.cleanContentId(contentId)
+              ) {
+                updated = true;
+                return {
+                  ...item,
+                  isDownloaded: false,
+                  downloadPath: undefined,
+                };
+              }
+              return item;
+            });
+          }
+
+          // Mettre à jour le Quran
+          if (catalog.quranRecitations) {
+            catalog.quranRecitations = catalog.quranRecitations.map((item) => {
+              if (
+                item.id === contentId ||
+                item.id === this.cleanContentId(contentId)
+              ) {
+                updated = true;
+                return {
+                  ...item,
+                  isDownloaded: false,
+                  downloadPath: undefined,
+                };
+              }
+              return item;
+            });
+          }
+
+          if (updated) {
+            await AsyncStorage.setItem(
+              "premium_catalog_cache",
+              JSON.stringify(catalog)
+            );
+            debugLog(
+              `✅ Catalogue cache mis à jour après suppression: ${contentId}`
+            );
+          }
+        }
+      } catch (catError) {
+        console.log("Erreur mise à jour catalogue cache:", catError);
+      }
+
       // console.log(`✅ Contenu supprimé: ${contentId}`);
       return true;
     } catch (error) {
@@ -1589,7 +1656,7 @@ class PremiumContentManager {
         const currentPath = info.downloadPath;
 
         // Vérifier si le fichier existe et s'il suit l'ancien format
-        if (await RNFS.exists(currentPath)) {
+        if (currentPath && (await RNFS.exists(currentPath))) {
           const fileName = currentPath.split("/").pop() || "";
 
           // Si le nom ne contient pas l'ID complet, c'est un ancien format
@@ -1825,6 +1892,94 @@ class PremiumContentManager {
   private async getInfomaniakUrl(filePath: string): Promise<string | null> {
     debugLog("🔍 getInfomaniakUrl - Méthode pour Infomaniak");
     return filePath;
+  }
+
+  // 🔧 NOUVEAU : Synchroniser le JSON avec les fichiers physiques
+  public async syncDownloadedContentWithFiles(): Promise<{
+    fixed: number;
+    errors: string[];
+  }> {
+    try {
+      debugLog("🔄 Synchronisation JSON ↔ Fichiers physiques...");
+
+      const result = { fixed: 0, errors: [] as string[] };
+
+      // 1. Charger le JSON actuel
+      const downloadedContentRaw = await LocalStorageManager.getPremium(
+        "DOWNLOADED_CONTENT"
+      );
+      const downloaded = downloadedContentRaw
+        ? JSON.parse(downloadedContentRaw)
+        : {};
+
+      // 2. Scanner le dossier premium_content
+      try {
+        const files = await RNFS.readDir(this.downloadDirectory);
+
+        for (const file of files) {
+          if (file.isFile() && file.name.endsWith(".mp3")) {
+            // Extraire l'ID depuis le nom de fichier (ex: adhan_azan_madina.mp3 → adhan_azan_madina)
+            const contentId = file.name.replace(".mp3", "");
+
+            // Vérifier si cette entrée existe dans le JSON
+            if (!downloaded[contentId]) {
+              debugLog(`🔧 Fichier orphelin trouvé: ${file.name}`);
+
+              // Ajouter l'entrée manquante
+              downloaded[contentId] = {
+                downloadPath: file.path,
+                downloadedAt: new Date(file.mtime || Date.now()).toISOString(),
+                fileSize: file.size,
+                syncedAt: new Date().toISOString(),
+              };
+
+              result.fixed++;
+              debugLog(`✅ Entrée ajoutée pour: ${contentId}`);
+            }
+          }
+        }
+
+        // 3. Sauvegarder le JSON mis à jour
+        if (result.fixed > 0) {
+          await LocalStorageManager.savePremium(
+            "DOWNLOADED_CONTENT",
+            downloaded,
+            true,
+            true
+          );
+
+          // 🔧 AUSSI sauvegarder dans SharedPreferences accessibles depuis Android
+          if (Platform.OS === "android") {
+            const { NativeModules } = require("react-native");
+            const { AdhanModule } = NativeModules;
+
+            if (AdhanModule && AdhanModule.savePremiumContentData) {
+              try {
+                await AdhanModule.savePremiumContentData(
+                  JSON.stringify(downloaded)
+                );
+                debugLog("✅ Données premium synchronisées pour Android");
+              } catch (error) {
+                debugLog("❌ Erreur sauvegarde Android:", error);
+              }
+            }
+          }
+
+          debugLog(
+            `🎉 Synchronisation terminée: ${result.fixed} entrées ajoutées`
+          );
+        } else {
+          debugLog("✅ Aucune désynchronisation détectée");
+        }
+      } catch (readError) {
+        result.errors.push(`Erreur lecture dossier: ${readError}`);
+      }
+
+      return result;
+    } catch (error) {
+      errorLog("❌ Erreur synchronisation:", error);
+      return { fixed: 0, errors: [`Erreur générale: ${error}`] };
+    }
   }
 
   // 🧹 Nettoyer les téléchargements corrompus

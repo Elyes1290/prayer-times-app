@@ -173,6 +173,56 @@ function handleLogin() {
     error_log("🔍 [AUTH] Données formatées: " . $debugFormatted);
     file_put_contents(__DIR__ . '/auth-debug.log', date('Y-m-d H:i:s') . " - LOGIN - Données formatées: " . $debugFormatted . "\n", FILE_APPEND);
 
+    // 🚀 SYNCHRONISATION STRIPE : Vérifier et mettre à jour les données depuis Stripe
+    try {
+        $stripeCustomerId = $user['stripe_customer_id'];
+        
+        // Vérifier si stripe_customer_id est NULL (valeur ou chaîne "NULL")
+        if (empty($stripeCustomerId) || $stripeCustomerId === 'NULL') {
+            error_log("⚠️ [AUTH] stripe_customer_id manquant pour user {$user['id']} - Recherche sur Stripe...");
+            
+            // Essayer de récupérer le customer_id depuis Stripe par email
+            $stripeCustomerId = findStripeCustomerByEmail($user['email'], $pdo);
+            
+            if ($stripeCustomerId) {
+                // Mettre à jour la base de données avec le customer_id trouvé
+                $updateStmt = $pdo->prepare("UPDATE users SET stripe_customer_id = ? WHERE id = ?");
+                $updateStmt->execute([$stripeCustomerId, $user['id']]);
+                error_log("✅ [AUTH] stripe_customer_id trouvé et enregistré: " . $stripeCustomerId);
+            } else {
+                error_log("⚠️ [AUTH] Aucun customer Stripe trouvé pour: " . $user['email']);
+            }
+        }
+        
+        // Si on a un stripe_customer_id, synchroniser avec Stripe
+        if (!empty($stripeCustomerId) && $stripeCustomerId !== 'NULL') {
+            error_log("🔄 [AUTH] Synchronisation avec Stripe pour customer: " . $stripeCustomerId);
+            $updated = syncUserWithStripe($user['id'], $stripeCustomerId, $pdo);
+            
+            if ($updated) {
+                // Recharger les données utilisateur mises à jour
+                $userStmt = $pdo->prepare("
+                    SELECT u.*, ps.stripe_customer_id 
+                    FROM users u
+                    LEFT JOIN premium_subscriptions ps ON u.id = ps.user_id AND ps.status = 'active'
+                    WHERE u.id = ?
+                ");
+                $userStmt->execute([$user['id']]);
+                $user = $userStmt->fetch(PDO::FETCH_ASSOC);
+                
+                // Reformater avec les nouvelles données
+                $formattedUser = formatUserData($user);
+                
+                error_log("✅ [AUTH] Données utilisateur synchronisées avec Stripe");
+                error_log("📅 [AUTH] Nouveau statut premium: " . $user['premium_status']);
+                error_log("📅 [AUTH] Nouvelle date d'expiration: " . ($user['premium_expiry'] ?? 'NULL'));
+            }
+        }
+    } catch (Exception $e) {
+        // En cas d'erreur, logger mais continuer le login normalement
+        error_log("❌ [AUTH] Erreur synchronisation Stripe (non bloquante): " . $e->getMessage());
+    }
+
     // Single-device: révoquer d'abord les anciennes sessions et refresh tokens,
     // puis émettre de nouveaux tokens (évite d'invalider le token fraîchement créé)
     $deviceId = $data['device_id'] ?? null;
@@ -921,4 +971,201 @@ function handleCheckEmail() {
 /**
  * 🚀 SUPPRIMÉ : Fonctions Firebase non nécessaires
  */
+
+/**
+ * 🚀 NOUVEAU : Trouver le customer ID Stripe en utilisant l'email
+ * Utile quand stripe_customer_id est NULL dans la base de données
+ */
+function findStripeCustomerByEmail($email, $pdo) {
+    try {
+        // Charger Stripe (le dossier vendor est au niveau parent du dossier api/)
+        require_once __DIR__ . '/../vendor/autoload.php';
+        
+        if (!defined('STRIPE_SECRET_KEY')) {
+            error_log("⚠️ [AUTH] STRIPE_SECRET_KEY non définie");
+            return null;
+        }
+        
+        \Stripe\Stripe::setApiKey(STRIPE_SECRET_KEY);
+        
+        error_log("🔍 [AUTH] Recherche customer Stripe par email: " . $email);
+        
+        // Rechercher le customer sur Stripe
+        $customers = \Stripe\Customer::all([
+            'email' => $email,
+            'limit' => 1
+        ]);
+        
+        if (empty($customers->data)) {
+            error_log("❌ [AUTH] Aucun customer trouvé sur Stripe pour: " . $email);
+            return null;
+        }
+        
+        $customer = $customers->data[0];
+        error_log("✅ [AUTH] Customer trouvé: " . $customer->id);
+        
+        return $customer->id;
+        
+    } catch (\Stripe\Exception\ApiErrorException $e) {
+        error_log("❌ [AUTH] Erreur Stripe API lors de la recherche: " . $e->getMessage());
+        return null;
+    } catch (Exception $e) {
+        error_log("❌ [AUTH] Erreur recherche customer: " . $e->getMessage());
+        return null;
+    }
+}
+
+/**
+ * 🚀 NOUVEAU : Synchroniser l'utilisateur avec Stripe lors du login
+ * Vérifie l'état actuel de l'abonnement sur Stripe et met à jour la base de données
+ */
+function syncUserWithStripe($userId, $stripeCustomerId, $pdo) {
+    try {
+        // Charger Stripe (le dossier vendor est au niveau parent du dossier api/)
+        require_once __DIR__ . '/../vendor/autoload.php';
+        
+        if (!defined('STRIPE_SECRET_KEY')) {
+            error_log("⚠️ [AUTH] STRIPE_SECRET_KEY non définie, synchronisation impossible");
+            return false;
+        }
+        
+        \Stripe\Stripe::setApiKey(STRIPE_SECRET_KEY);
+        
+        error_log("🔍 [AUTH] Récupération des abonnements pour customer: " . $stripeCustomerId);
+        
+        // Récupérer TOUS les abonnements du customer (pas seulement actifs)
+        // pour voir ceux qui sont actifs, trialing, past_due, etc.
+        $subscriptions = \Stripe\Subscription::all([
+            'customer' => $stripeCustomerId,
+            'limit' => 10 // Récupérer plusieurs pour voir
+        ]);
+        
+        // Logger tous les abonnements trouvés pour debug
+        error_log("🔍 [AUTH] Nombre d'abonnements trouvés: " . count($subscriptions->data));
+        foreach ($subscriptions->data as $index => $sub) {
+            error_log("📋 [AUTH] Abonnement #$index - ID: {$sub->id}, Status: {$sub->status}, Period End: " . date('Y-m-d H:i:s', $sub->current_period_end));
+        }
+        
+        // Filtrer pour ne garder que les abonnements actifs ou trialing
+        $activeSubscriptions = array_filter($subscriptions->data, function($sub) {
+            return in_array($sub->status, ['active', 'trialing']);
+        });
+        
+        // Trier par date de création (le plus récent en premier)
+        usort($activeSubscriptions, function($a, $b) {
+            return $b->created - $a->created;
+        });
+        
+        if (empty($activeSubscriptions)) {
+            error_log("⚠️ [AUTH] Aucun abonnement actif trouvé pour ce customer");
+            
+            // Vérifier si l'abonnement est expiré dans la base de données
+            $stmt = $pdo->prepare("SELECT premium_status, premium_expiry FROM users WHERE id = ?");
+            $stmt->execute([$userId]);
+            $currentUser = $stmt->fetch();
+            
+            if ($currentUser && $currentUser['premium_status'] == 1) {
+                // Désactiver le premium car aucun abonnement actif sur Stripe
+                $updateStmt = $pdo->prepare("
+                    UPDATE users 
+                    SET premium_status = 0,
+                        updated_at = NOW()
+                    WHERE id = ?
+                ");
+                $updateStmt->execute([$userId]);
+                error_log("❌ [AUTH] Premium désactivé - aucun abonnement actif sur Stripe");
+                return true; // Données mises à jour
+            }
+            
+            return false; // Pas de changement
+        }
+        
+        // Récupérer le premier abonnement actif (reset array keys after filter)
+        $activeSubscriptions = array_values($activeSubscriptions);
+        $subscription = $activeSubscriptions[0];
+        
+        error_log("✅ [AUTH] Abonnement actif trouvé: " . $subscription->id);
+        
+        // 🔧 CORRECTION CRITIQUE : current_period_end n'est plus au niveau subscription
+        // mais dans items.data[0] depuis la nouvelle API Stripe
+        $currentPeriodEnd = null;
+        if ($subscription->items && $subscription->items->data && count($subscription->items->data) > 0) {
+            $currentPeriodEnd = $subscription->items->data[0]->current_period_end;
+            error_log("🔍 [AUTH] Timestamp depuis items[0]: " . $currentPeriodEnd);
+        } else {
+            // Fallback sur l'ancienne méthode (pour compatibilité)
+            $currentPeriodEnd = $subscription->current_period_end ?? time();
+            error_log("⚠️ [AUTH] Timestamp depuis subscription (fallback): " . $currentPeriodEnd);
+        }
+        
+        error_log("📅 [AUTH] Date d'expiration Stripe: " . date('Y-m-d H:i:s', $currentPeriodEnd));
+        error_log("🚫 [AUTH] Cancel at period end: " . ($subscription->cancel_at_period_end ? 'OUI' : 'NON'));
+        
+        // Déterminer le type d'abonnement
+        $subscriptionType = 'monthly'; // Par défaut
+        if ($subscription->items && $subscription->items->data) {
+            $priceId = $subscription->items->data[0]->price->id;
+            if (strpos($priceId, 'month') !== false) {
+                $subscriptionType = 'monthly';
+            } elseif (strpos($priceId, 'year') !== false) {
+                $subscriptionType = 'yearly';
+            }
+        }
+        
+        // Calculer la nouvelle date d'expiration depuis Stripe
+        $newExpiryDate = date('Y-m-d H:i:s', $currentPeriodEnd);
+        
+        // Mettre à jour la base de données
+        $updateStmt = $pdo->prepare("
+            UPDATE users 
+            SET premium_status = 1,
+                premium_expiry = ?,
+                subscription_type = ?,
+                subscription_id = ?,
+                stripe_customer_id = ?,
+                updated_at = NOW()
+            WHERE id = ?
+        ");
+        
+        $updateStmt->execute([
+            $newExpiryDate,
+            $subscriptionType,
+            $subscription->id, // Mettre le vrai subscription_id (sub_xxx) au lieu du checkout session (cs_xxx)
+            $stripeCustomerId, // S'assurer que le customer_id est aussi mis à jour
+            $userId
+        ]);
+        
+        error_log("✅ [AUTH] Base de données mise à jour avec les données Stripe");
+        error_log("📅 [AUTH] Nouvelle date d'expiration: " . $newExpiryDate);
+        error_log("🆔 [AUTH] Subscription ID: " . $subscription->id);
+        
+        // Mettre à jour aussi premium_subscriptions
+        $subUpdateStmt = $pdo->prepare("
+            UPDATE premium_subscriptions 
+            SET stripe_subscription_id = ?,
+                stripe_customer_id = ?,
+                status = ?,
+                updated_at = NOW()
+            WHERE user_id = ?
+            ORDER BY created_at DESC
+            LIMIT 1
+        ");
+        
+        $subUpdateStmt->execute([
+            $subscription->id,
+            $stripeCustomerId,
+            $subscription->status,
+            $userId
+        ]);
+        
+        return true; // Données mises à jour
+        
+    } catch (\Stripe\Exception\ApiErrorException $e) {
+        error_log("❌ [AUTH] Erreur Stripe API: " . $e->getMessage());
+        return false;
+    } catch (Exception $e) {
+        error_log("❌ [AUTH] Erreur synchronisation Stripe: " . $e->getMessage());
+        return false;
+    }
+}
 ?> 

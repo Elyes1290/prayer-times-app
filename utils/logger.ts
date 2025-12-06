@@ -8,8 +8,8 @@ type LogLevel = "debug" | "info" | "warn" | "error";
 
 // Configuration du logger
 const LOG_CONFIG = {
-  // 🧹 DÉSACTIVÉ : Tous les logs de debug pour une console propre
-  enableDebugLogs: false, // __DEV__ || process.env.NODE_ENV !== "production",
+  // 🔥 ACTIVÉ pour debug iOS !
+  enableDebugLogs: true, // __DEV__ || process.env.NODE_ENV !== "production",
   // Préfixe pour identifier nos logs
   prefix: "[MyAdhan]",
 };

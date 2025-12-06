@@ -439,6 +439,19 @@ export const SettingsProvider = ({
       setAutoLocation(coords);
       setLocationError(null); // Clear any previous errors
 
+      // 💾 Sauvegarder dans AsyncStorage pour iOS et Android
+      try {
+        await LocalStorageManager.saveEssential(
+          "AUTO_LOCATION",
+          JSON.stringify(coords)
+        );
+        debugLog(
+          `💾 Localisation automatique sauvegardée: ${coords.lat}, ${coords.lon}`
+        );
+      } catch (error) {
+        errorLog("Erreur sauvegarde autoLocation:", error);
+      }
+
       if (Platform.OS === "android" && AdhanModule && AdhanModule.setLocation) {
         try {
           AdhanModule.setLocation(coords.lat, coords.lon);
@@ -812,12 +825,40 @@ export const SettingsProvider = ({
       // New logic for initial location load
       if (loadedLocationMode === "auto") {
         try {
-          const savedAuto = await AdhanModule.getSavedAutoLocation();
-          if (savedAuto && savedAuto.lat && savedAuto.lon) {
-            setAutoLocation(savedAuto);
+          // 🔧 ANDROID : Utiliser AdhanModule (SharedPreferences natif)
+          // 🔧 iOS : Utiliser AsyncStorage
+          if (Platform.OS === "android" && AdhanModule?.getSavedAutoLocation) {
+            const savedAuto = await AdhanModule.getSavedAutoLocation();
+            if (savedAuto && savedAuto.lat && savedAuto.lon) {
+              setAutoLocation(savedAuto);
+              debugLog(
+                `✅ [Android] Localisation auto chargée: ${savedAuto.lat}, ${savedAuto.lon}`
+              );
+            } else {
+              setLocationError("Aucune localisation automatique sauvée");
+            }
           } else {
-            // Pas de localisation sauvée, l'utilisateur devra refaire la demande
-            setLocationError("Aucune localisation automatique sauvée");
+            // iOS ou AdhanModule indisponible : Utiliser AsyncStorage
+            const autoLocationValue = await LocalStorageManager.getEssential(
+              "AUTO_LOCATION"
+            );
+
+            if (autoLocationValue) {
+              const savedAuto = safeJsonParse<Coords | null>(
+                autoLocationValue,
+                null
+              );
+              if (savedAuto && savedAuto.lat && savedAuto.lon) {
+                setAutoLocation(savedAuto);
+                debugLog(
+                  `✅ [iOS] Localisation auto chargée: ${savedAuto.lat}, ${savedAuto.lon}`
+                );
+              } else {
+                setLocationError("Aucune localisation automatique sauvée");
+              }
+            } else {
+              setLocationError("Aucune localisation automatique sauvée");
+            }
           }
         } catch (error) {
           errorLog(
@@ -927,7 +968,20 @@ export const SettingsProvider = ({
 
   // Fonction pour reprogrammer toutes les notifications
   const saveAndReprogramAll = async () => {
+    console.log("═══════════════════════════════════════");
+    console.log("💾 [saveAndReprogramAll] DÉBUT");
+    console.log("═══════════════════════════════════════");
+    console.log("📍 locationMode:", locationMode);
+    console.log("🗺️ autoLocation:", autoLocation);
+    console.log("📌 manualLocation:", manualLocation);
+    
+    // 🔥 LOG VISIBLE DANS 3UTOOLS pour debug iOS
+    if (Platform.OS === "ios" && AdhanModule?.debugLog) {
+      AdhanModule.debugLog("💾 [JS] saveAndReprogramAll APPELÉ");
+    }
+    
     if (!locationMode || (!autoLocation && !manualLocation)) {
+      console.log("❌ [saveAndReprogramAll] ARRÊT: Pas de localisation");
       return;
     }
 
@@ -939,10 +993,14 @@ export const SettingsProvider = ({
           ? { latitude: manualLocation.lat, longitude: manualLocation.lon }
           : null;
 
+      console.log("📍 [saveAndReprogramAll] userLocation calculé:", userLocation);
+
       if (!userLocation) {
+        console.log("❌ [saveAndReprogramAll] userLocation est null !");
         return;
       }
 
+      console.log("✅ [saveAndReprogramAll] Appel scheduleNotificationsFor2Days...");
       await scheduleNotificationsFor2Days({
         userLocation,
         calcMethod,
@@ -964,7 +1022,11 @@ export const SettingsProvider = ({
           delaySelectedDua,
         },
       });
+      console.log("✅ [saveAndReprogramAll] scheduleNotificationsFor2Days terminé");
+      console.log("═══════════════════════════════════════");
     } catch (error) {
+      console.error("❌ [saveAndReprogramAll] ERREUR:", error);
+      console.log("═══════════════════════════════════════");
       throw error;
     }
   };

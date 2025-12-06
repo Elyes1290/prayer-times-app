@@ -741,13 +741,21 @@ elseif ($_SERVER['REQUEST_METHOD'] === 'POST' && $_SERVER['REQUEST_URI'] === '/a
             ) VALUES (?, ?, ?, ?, ?, ?, NOW())
         ");
         
+        // 🔧 CORRECTION : Lire les dates depuis items.data[0]
+        $periodStart = $subscription->current_period_start ?? time();
+        $periodEnd = $subscription->current_period_end ?? time();
+        if ($subscription->items && $subscription->items->data && count($subscription->items->data) > 0) {
+            $periodStart = $subscription->items->data[0]->current_period_start ?? $periodStart;
+            $periodEnd = $subscription->items->data[0]->current_period_end ?? $periodEnd;
+        }
+        
         $stmt->execute([
             $subscription->id,
             $customer->id,
             $subscriptionType,
             $subscription->status,
-            date('Y-m-d H:i:s', $subscription->current_period_start),
-            date('Y-m-d H:i:s', $subscription->current_period_end),
+            date('Y-m-d H:i:s', $periodStart),
+            date('Y-m-d H:i:s', $periodEnd),
         ]);
         
         echo json_encode([
@@ -819,11 +827,19 @@ elseif ($_SERVER['REQUEST_METHOD'] === 'GET' && preg_match('/\/api\/stripe\/subs
         
         $subscription = Subscription::retrieve($subscriptionId);
         
+        // 🔧 CORRECTION : Lire les dates depuis items.data[0]
+        $periodStart = $subscription->current_period_start ?? time();
+        $periodEnd = $subscription->current_period_end ?? time();
+        if ($subscription->items && $subscription->items->data && count($subscription->items->data) > 0) {
+            $periodStart = $subscription->items->data[0]->current_period_start ?? $periodStart;
+            $periodEnd = $subscription->items->data[0]->current_period_end ?? $periodEnd;
+        }
+        
         echo json_encode([
             'id' => $subscription->id,
             'status' => $subscription->status,
-            'currentPeriodStart' => date('Y-m-d H:i:s', $subscription->current_period_start),
-            'currentPeriodEnd' => date('Y-m-d H:i:s', $subscription->current_period_end),
+            'currentPeriodStart' => date('Y-m-d H:i:s', $periodStart),
+            'currentPeriodEnd' => date('Y-m-d H:i:s', $periodEnd),
             'cancelAtPeriodEnd' => $subscription->cancel_at_period_end,
             'customerId' => $subscription->customer,
         ]);
@@ -984,8 +1000,8 @@ function createUserViaExistingAPI($email, $name, $subscriptionType, $sessionId, 
         
         if ($existingUser) {
             logError("👤 Utilisateur existe déjà - ID: " . $existingUser['id']);
-            // Mettre à jour le statut premium
-            updateUserPremiumStatus($existingUser['id'], $subscriptionType, $sessionId);
+            // Mettre à jour le statut premium avec le customer ID
+            updateUserPremiumStatus($existingUser['id'], $subscriptionType, $sessionId, $stripeCustomerId);
             return;
         }
         
@@ -1008,7 +1024,7 @@ function createUserViaExistingAPI($email, $name, $subscriptionType, $sessionId, 
         $insertStmt = $pdo->prepare("
             INSERT INTO users (
                 email, password_hash, language, user_first_name,
-                premium_status, subscription_type, subscription_id, premium_expiry, premium_activated_at,
+                premium_status, subscription_type, subscription_id, stripe_customer_id, premium_expiry, premium_activated_at,
                 location_mode, location_city, location_country, location_lat, location_lon,
                 calc_method, adhan_sound, adhan_volume,
                 notifications_enabled, reminders_enabled, reminder_offset,
@@ -1021,7 +1037,7 @@ function createUserViaExistingAPI($email, $name, $subscriptionType, $sessionId, 
                 created_at, updated_at, last_seen, status
             ) VALUES (
                 ?, ?, ?, ?, 
-                ?, ?, ?, ?, ?,
+                ?, ?, ?, ?, ?, ?,
                 ?, ?, ?, ?, ?,
                 ?, ?, ?,
                 ?, ?, ?,
@@ -1052,6 +1068,7 @@ function createUserViaExistingAPI($email, $name, $subscriptionType, $sessionId, 
             1, // premium_status
             $subscriptionType,
             $sessionId,
+            $stripeCustomerId, // 🔑 stripe_customer_id
             date('Y-m-d H:i:s', strtotime($expiryInterval)), // premium_expiry - calculé selon le type
             date('Y-m-d H:i:s'), // premium_activated_at
             'auto', // location_mode
@@ -1229,13 +1246,14 @@ function updateUserPremiumStatus($userId, $subscriptionType, $sessionId, $stripe
             SET premium_status = 1, 
                 subscription_type = ?, 
                 subscription_id = ?,
+                stripe_customer_id = ?,
                 premium_expiry = ?,
                 premium_activated_at = NOW(),
                 updated_at = NOW()
             WHERE id = ?
         ");
         
-        $stmt->execute([$subscriptionType, $sessionId, $expiryDate, $userId]);
+        $stmt->execute([$subscriptionType, $sessionId, $stripeCustomerId, $expiryDate, $userId]);
         
         // 2. Enregistrer le nouvel abonnement
         insertPremiumSubscription($userId, $sessionId, $subscriptionType, $stripeCustomerId);
@@ -1321,8 +1339,16 @@ function handleSubscriptionUpdated($subscription) {
                     // ✅ Abonnement actif - réactiver le premium si nécessaire
                     logError("✅ Abonnement actif pour l'utilisateur $userId");
                     
+                    // 🔧 CORRECTION : current_period_end est dans items.data[0]
+                    $currentPeriodEnd = null;
+                    if ($subscription->items && $subscription->items->data && count($subscription->items->data) > 0) {
+                        $currentPeriodEnd = $subscription->items->data[0]->current_period_end;
+                    } else {
+                        $currentPeriodEnd = $subscription->current_period_end ?? time();
+                    }
+                    
                     // Calculer la date d'expiration depuis Stripe
-                    $expiryDate = date('Y-m-d H:i:s', $subscription->current_period_end);
+                    $expiryDate = date('Y-m-d H:i:s', $currentPeriodEnd);
                     
                     $updateStmt = $pdo->prepare("
                         UPDATE users 
@@ -1476,7 +1502,8 @@ function handlePaymentSucceeded($invoice) {
             \Stripe\Stripe::setApiKey(STRIPE_SECRET_KEY);
             $subscription = \Stripe\Subscription::retrieve($invoice->subscription);
             
-            // Récupérer le type d'abonnement depuis la base de données
+            // 🚀 CORRECTION CRITIQUE : Chercher l'utilisateur de plusieurs façons
+            // 1. D'abord par stripe_subscription_id
             $subStmt = $pdo->prepare("
                 SELECT user_id, subscription_type 
                 FROM premium_subscriptions 
@@ -1485,15 +1512,74 @@ function handlePaymentSucceeded($invoice) {
             $subStmt->execute([$invoice->subscription]);
             $subData = $subStmt->fetch();
             
+            // 2. Si pas trouvé, chercher par stripe_customer_id (via users)
+            if (!$subData && $invoice->customer) {
+                logError("⚠️ Abonnement non trouvé par subscription_id, recherche par customer_id...");
+                
+                $userStmt = $pdo->prepare("
+                    SELECT id FROM users WHERE stripe_customer_id = ?
+                ");
+                $userStmt->execute([$invoice->customer]);
+                $userData = $userStmt->fetch();
+                
+                if ($userData) {
+                    $userId = $userData['id'];
+                    
+                    // Récupérer le type d'abonnement depuis Stripe
+                    $subscriptionType = 'monthly'; // Par défaut
+                    if ($subscription->items && $subscription->items->data) {
+                        $priceId = $subscription->items->data[0]->price->id;
+                        // Déterminer le type depuis le price_id
+                        if (strpos($priceId, 'month') !== false) {
+                            $subscriptionType = 'monthly';
+                        } elseif (strpos($priceId, 'year') !== false) {
+                            $subscriptionType = 'yearly';
+                        }
+                    }
+                    
+                    $subData = [
+                        'user_id' => $userId,
+                        'subscription_type' => $subscriptionType
+                    ];
+                    
+                    // Mettre à jour premium_subscriptions avec le vrai subscription_id
+                    $updateSubStmt = $pdo->prepare("
+                        UPDATE premium_subscriptions 
+                        SET stripe_subscription_id = ?,
+                            status = ?,
+                            updated_at = NOW()
+                        WHERE user_id = ?
+                        ORDER BY created_at DESC
+                        LIMIT 1
+                    ");
+                    $updateSubStmt->execute([
+                        $invoice->subscription,
+                        $subscription->status,
+                        $userId
+                    ]);
+                    
+                    logError("✅ Abonnement trouvé par customer_id et mis à jour");
+                }
+            }
+            
             if ($subData) {
                 $userId = $subData['user_id'];
                 $subscriptionType = $subData['subscription_type'];
                 
-                // Calculer la nouvelle date d'expiration basée sur current_period_end de Stripe
-                $newExpiryDate = date('Y-m-d H:i:s', $subscription->current_period_end);
+                // 🔧 CORRECTION : current_period_end est dans items.data[0]
+                $currentPeriodEnd = null;
+                if ($subscription->items && $subscription->items->data && count($subscription->items->data) > 0) {
+                    $currentPeriodEnd = $subscription->items->data[0]->current_period_end;
+                } else {
+                    $currentPeriodEnd = $subscription->current_period_end ?? time();
+                }
+                
+                // Calculer la nouvelle date d'expiration basée on current_period_end de Stripe
+                $newExpiryDate = date('Y-m-d H:i:s', $currentPeriodEnd);
                 
                 logError("🔄 Renouvellement détecté - User ID: $userId, Type: $subscriptionType");
                 logError("📅 Nouvelle date d'expiration: $newExpiryDate");
+                logError("🆔 Subscription ID: " . $invoice->subscription);
                 
                 // Mettre à jour la date d'expiration dans la table users
                 $updateUserStmt = $pdo->prepare("
@@ -1506,6 +1592,10 @@ function handlePaymentSucceeded($invoice) {
                 $updateUserStmt->execute([$newExpiryDate, $userId]);
                 
                 logError("✅ Date d'expiration mise à jour pour l'utilisateur $userId");
+            } else {
+                logError("❌ Impossible de trouver l'utilisateur pour cet abonnement");
+                logError("🔍 Customer ID: " . $invoice->customer);
+                logError("🔍 Subscription ID: " . $invoice->subscription);
             }
         }
         
@@ -1869,8 +1959,16 @@ function handleSubscriptionResumed($subscription) {
             
             logError("▶️ Réactivation du premium pour l'utilisateur $userId");
             
+            // 🔧 CORRECTION : Lire la date depuis items.data[0]
+            $currentPeriodEnd = null;
+            if ($subscription->items && $subscription->items->data && count($subscription->items->data) > 0) {
+                $currentPeriodEnd = $subscription->items->data[0]->current_period_end;
+            } else {
+                $currentPeriodEnd = $subscription->current_period_end ?? time();
+            }
+            
             // Réactiver le premium et mettre à jour la date d'expiration
-            $expiryDate = date('Y-m-d H:i:s', $subscription->current_period_end);
+            $expiryDate = date('Y-m-d H:i:s', $currentPeriodEnd);
             
             $updateStmt = $pdo->prepare("
                 UPDATE users 

@@ -132,14 +132,15 @@ public class AdhanService extends Service {
             debugLog(TAG, "[ACTION_STOP] Demande d'arrêt pour Adhan: " + stopReason);
             stopAdhan(); // Arrête le MediaPlayer
 
-            // 🔧 CORRECTION BUG WIDGET : Reprogrammer après CHAQUE adhan + sauvegarder horaires
+            // 🔧 CORRECTION BUG WIDGET : Reprogrammer après CHAQUE adhan + sauvegarder
+            // horaires
             if (prayerLabel != null || lastPrayerLabel != null) {
                 String currentPrayer = prayerLabel != null ? prayerLabel : lastPrayerLabel;
                 errorLog(TAG, "🔥 [DÉCLENCHEMENT] Arrêt " + currentPrayer + " - Reprogrammation + Widget");
-                
+
                 // Appel unifié pour toutes les prières (y compris Isha)
                 reprogramRemainingPrayersAndTomorrow(currentPrayer);
-                
+
                 // 📱 MISE À JOUR DU WIDGET après chaque adhan
                 try {
                     PrayerTimesWidget.forceUpdateWidgets(this);
@@ -240,8 +241,7 @@ public class AdhanService extends Service {
         SharedPreferences adhanPrefs = getSharedPreferences("adhan_prefs", MODE_PRIVATE);
         String soundFromPrefs = adhanPrefs.getString("ADHAN_SOUND", "misharyrachid");
         String soundToPlay = (adhanSoundKey != null) ? adhanSoundKey : soundFromPrefs;
-        
-        
+
         float volume = adhanPrefs.getFloat("adhan_volume", 1.0f);
 
         debugLog(TAG, "🔊 ============ DEBUG SONS ADHAN ============");
@@ -258,13 +258,13 @@ public class AdhanService extends Service {
             debugLog(TAG, "🔍 Recherche du fichier premium...");
             String premiumFilePath = getPremiumSoundPath(soundToPlay);
             debugLog(TAG, "🔍 Chemin retourné par getPremiumSoundPath: " + premiumFilePath);
-            
+
             if (premiumFilePath != null) {
                 java.io.File premiumFile = new java.io.File(premiumFilePath);
                 debugLog(TAG, "🔍 Vérification fichier: " + premiumFilePath);
                 debugLog(TAG, "🔍 Fichier existe: " + premiumFile.exists());
                 debugLog(TAG, "🔍 Fichier taille: " + (premiumFile.exists() ? premiumFile.length() + " bytes" : "N/A"));
-                
+
                 if (premiumFile.exists()) {
                     debugLog(TAG, "✅ FICHIER PREMIUM TROUVÉ: " + premiumFilePath);
                     debugLog(TAG, "🎵 LECTURE DU SON PREMIUM...");
@@ -276,7 +276,7 @@ public class AdhanService extends Service {
             } else {
                 errorLog(TAG, "❌ AUCUN CHEMIN PREMIUM TROUVÉ pour: " + soundToPlay);
             }
-            
+
             debugLog(TAG, "🔄 FALLBACK vers sons par défaut...");
         } else {
             debugLog(TAG, "ℹ️ Son standard détecté: " + soundToPlay);
@@ -552,15 +552,21 @@ public class AdhanService extends Service {
         }
 
         if (resId == 0) {
-            errorLog(TAG, "❌ Fichier audio Adhan non trouvé: '" + soundToPlay + "'. Tentative fallback...");
-            debugLog(TAG, "🔍 Recherche fallback: 'adhamalsharqawe'");
+            errorLog(TAG, "❌❌❌ FICHIER AUDIO ADHAN NON TROUVÉ ❌❌❌");
+            errorLog(TAG, "   Son demandé: '" + soundToPlay + "'");
+            errorLog(TAG, "   Type: " + (isPremiumSound(soundToPlay) ? "PREMIUM" : "BASE"));
+            errorLog(TAG, "🔄 TENTATIVE FALLBACK vers 'adhamalsharqawe'");
+            errorLog(TAG, "=========================================");
+
             resId = getResources().getIdentifier("adhamalsharqawe", "raw", getPackageName());
-            debugLog(TAG, "🔍 Fallback resId: " + resId);
+
             if (resId == 0) {
-                errorLog(TAG, "Fichier audio Adhan fallback non trouvé non plus. Arrêt Adhan.");
+                errorLog(TAG, "❌ Fichier audio Adhan fallback non trouvé non plus. Arrêt Adhan.");
                 // Simule la fin pour déclencher la logique de stop/reprog
                 handleAdhanCompletion(prayerLabelForCompletion);
                 return;
+            } else {
+                errorLog(TAG, "✅ FALLBACK RÉUSSI: Lecture de 'adhamalsharqawe' (ID: " + resId + ")");
             }
         }
 
@@ -615,24 +621,29 @@ public class AdhanService extends Service {
     // Obtenir le chemin du fichier premium téléchargé
     private String getPremiumSoundPath(String soundName) {
         try {
-            debugLog(TAG, "🔍 Recherche du son premium: " + soundName);
-            
+            errorLog(TAG, "🔍 ========== RECHERCHE SON PREMIUM ==========");
+            errorLog(TAG, "🔍 Son demandé: " + soundName);
+
             // Essayer plusieurs noms de bases de données AsyncStorage (pour compatibilité)
             String[] possibleDbNames = {
-                "RCTAsyncLocalStorage_AsyncStorageDatabase",
-                "AsyncStorage",
-                "RCTAsyncLocalStorage"
+                    "RCTAsyncLocalStorage_AsyncStorageDatabase",
+                    "AsyncStorage",
+                    "RCTAsyncLocalStorage"
             };
-            
+
             String downloadedContentJson = null;
-            
+            String foundInDb = null;
+
             // Essayer chaque nom de base de données
             for (String dbName : possibleDbNames) {
                 try {
                     SharedPreferences prefs = getSharedPreferences(dbName, MODE_PRIVATE);
                     downloadedContentJson = prefs.getString("downloaded_premium_content", null);
                     if (downloadedContentJson != null) {
-                        debugLog(TAG, "✅ Données premium trouvées dans: " + dbName);
+                        foundInDb = dbName;
+                        errorLog(TAG, "✅ Données premium trouvées dans: " + dbName);
+                        errorLog(TAG, "📦 Contenu JSON (premiers 200 chars): "
+                                + downloadedContentJson.substring(0, Math.min(200, downloadedContentJson.length())));
                         break;
                     } else {
                         debugLog(TAG, "❌ Pas de données dans: " + dbName);
@@ -641,42 +652,139 @@ public class AdhanService extends Service {
                     debugLog(TAG, "❌ Erreur accès " + dbName + ": " + e.getMessage());
                 }
             }
-            
+
             // Si pas trouvé dans AsyncStorage, essayer dans les préférences dédiées
             if (downloadedContentJson == null) {
                 SharedPreferences premiumPrefs = getSharedPreferences("premium_content", MODE_PRIVATE);
                 downloadedContentJson = premiumPrefs.getString("downloaded_premium_content", null);
                 if (downloadedContentJson != null) {
-                    debugLog(TAG, "✅ Données premium trouvées dans premium_content");
+                    foundInDb = "premium_content";
+                    errorLog(TAG, "✅ Données premium trouvées dans premium_content");
+                    errorLog(TAG, "📦 Contenu JSON (premiers 200 chars): "
+                            + downloadedContentJson.substring(0, Math.min(200, downloadedContentJson.length())));
+                } else {
+                    errorLog(TAG, "❌ Pas de données dans premium_content non plus");
                 }
             }
-            
+
+            // 🚀 NOUVEAU FALLBACK : Si toujours rien, scanner le dossier physique
+            // directement
+            if (downloadedContentJson == null) {
+                errorLog(TAG, "🔍 FALLBACK: Scan du dossier physique...");
+                String physicalPath = scanPhysicalDirectoryForAdhan(soundName);
+                if (physicalPath != null) {
+                    errorLog(TAG, "✅✅✅ FICHIER TROUVÉ PAR SCAN PHYSIQUE ✅✅✅");
+                    errorLog(TAG, "   Chemin: " + physicalPath);
+                    errorLog(TAG, "=========================================");
+                    return physicalPath;
+                } else {
+                    errorLog(TAG, "❌ Scan physique: Aucun fichier trouvé");
+                }
+            }
+
             if (downloadedContentJson != null) {
-                debugLog(TAG, "📦 Contenu téléchargé trouvé: " + downloadedContentJson);
-                
+                errorLog(TAG, "📦 Base de données trouvée dans: " + foundInDb);
+
                 // Parser le JSON pour trouver le chemin du fichier
                 org.json.JSONObject downloadedContent = new org.json.JSONObject(downloadedContentJson);
+                errorLog(TAG, "🔍 Clés disponibles dans le JSON: " + downloadedContent.keys().toString());
+                errorLog(TAG, "🔍 Recherche de la clé: '" + soundName + "'");
+
                 if (downloadedContent.has(soundName)) {
+                    errorLog(TAG, "✅ Clé trouvée dans JSON: " + soundName);
                     org.json.JSONObject contentInfo = downloadedContent.getJSONObject(soundName);
                     String filePath = contentInfo.getString("downloadPath");
-                    
+                    errorLog(TAG, "📁 Chemin extrait: " + filePath);
+
                     // Vérifier que le fichier existe vraiment
                     java.io.File file = new java.io.File(filePath);
                     if (file.exists()) {
-                        debugLog(TAG, "✅ Fichier premium trouvé: " + filePath);
+                        long fileSize = file.length();
+                        errorLog(TAG, "✅✅✅ FICHIER PREMIUM TROUVÉ ✅✅✅");
+                        errorLog(TAG, "   Chemin: " + filePath);
+                        errorLog(TAG, "   Taille: " + fileSize + " bytes");
+                        errorLog(TAG, "=========================================");
                         return filePath;
                     } else {
-                        errorLog(TAG, "❌ Fichier premium manquant: " + filePath);
+                        errorLog(TAG, "❌❌❌ FICHIER MANQUANT ❌❌❌");
+                        errorLog(TAG, "   Chemin attendu: " + filePath);
+                        errorLog(TAG, "=========================================");
                     }
                 } else {
-                    debugLog(TAG, "❌ Son premium non trouvé dans les données: " + soundName);
+                    errorLog(TAG, "❌❌❌ CLÉ NON TROUVÉE DANS JSON ❌❌❌");
+                    errorLog(TAG, "   Clé recherchée: '" + soundName + "'");
+                    errorLog(TAG, "   Clés disponibles: " + downloadedContent.keys().toString());
+                    errorLog(TAG, "=========================================");
                 }
             } else {
-                debugLog(TAG, "❌ Aucune donnée de contenu premium trouvée");
+                errorLog(TAG, "❌❌❌ AUCUNE BASE DE DONNÉES TROUVÉE ❌❌❌");
+                errorLog(TAG, "   Testé: AsyncStorage + premium_content");
+                errorLog(TAG, "=========================================");
             }
         } catch (Exception e) {
             errorLog(TAG, "❌ Erreur récupération chemin premium: " + e.getMessage());
         }
+        return null;
+    }
+
+    // 🚀 NOUVEAU : Scanner le dossier physique pour trouver le fichier Adhan
+    private String scanPhysicalDirectoryForAdhan(String soundName) {
+        try {
+            errorLog(TAG, "📁 Début scan physique pour: " + soundName);
+
+            // Chemin du dossier premium_content
+            java.io.File premiumDir = new java.io.File(getFilesDir(), "premium_content");
+
+            if (!premiumDir.exists() || !premiumDir.isDirectory()) {
+                errorLog(TAG, "❌ Dossier premium_content n'existe pas: " + premiumDir.getAbsolutePath());
+                return null;
+            }
+
+            errorLog(TAG, "📁 Dossier trouvé: " + premiumDir.getAbsolutePath());
+
+            // Lister tous les fichiers .mp3
+            java.io.File[] files = premiumDir.listFiles(new java.io.FileFilter() {
+                @Override
+                public boolean accept(java.io.File file) {
+                    return file.isFile() && file.getName().endsWith(".mp3");
+                }
+            });
+
+            if (files == null || files.length == 0) {
+                errorLog(TAG, "❌ Aucun fichier .mp3 trouvé dans le dossier");
+                return null;
+            }
+
+            errorLog(TAG, "📦 " + files.length + " fichiers .mp3 trouvés");
+
+            // Chercher le fichier qui correspond au soundName
+            // Format attendu: adhan_azan_madina.mp3 pour soundName = "adhan_azan_madina"
+            String targetFileName = soundName + ".mp3";
+
+            for (java.io.File file : files) {
+                String fileName = file.getName();
+                errorLog(TAG, "🔍 Comparaison: '" + fileName + "' vs '" + targetFileName + "'");
+
+                if (fileName.equals(targetFileName)) {
+                    errorLog(TAG, "✅ CORRESPONDANCE TROUVÉE: " + file.getAbsolutePath());
+                    errorLog(TAG, "📏 Taille: " + file.length() + " bytes");
+
+                    // Vérifier que le fichier n'est pas vide ou corrompu
+                    if (file.length() > 10000) { // Au moins 10KB pour un fichier audio valide
+                        return file.getAbsolutePath();
+                    } else {
+                        errorLog(TAG, "⚠️ Fichier trop petit (probablement corrompu): " + file.length() + " bytes");
+                    }
+                }
+            }
+
+            errorLog(TAG, "❌ Aucun fichier correspondant trouvé pour: " + soundName);
+
+        } catch (Exception e) {
+            errorLog(TAG, "❌ Erreur scan physique: " + e.getMessage());
+            e.printStackTrace();
+        }
+
         return null;
     }
 
@@ -686,7 +794,7 @@ public class AdhanService extends Service {
             mediaPlayer = new MediaPlayer();
             mediaPlayer.setDataSource(filePath);
             mediaPlayer.prepare();
-            
+
             // Vérifier si cette prière est muette par l'utilisateur
             boolean isPrayerMutedByUser = isPrayerMuted(prayerLabelForCompletion);
 
@@ -695,7 +803,8 @@ public class AdhanService extends Service {
                 mediaPlayer.setVolume(0, 0);
             } else {
                 mediaPlayer.setVolume(volume, volume);
-                debugLog(TAG, "Adhan premium joué avec volume configuré: " + volume + " pour " + prayerLabelForCompletion);
+                debugLog(TAG,
+                        "Adhan premium joué avec volume configuré: " + volume + " pour " + prayerLabelForCompletion);
             }
 
             mediaPlayer.setOnCompletionListener(mp -> {
@@ -750,8 +859,9 @@ public class AdhanService extends Service {
     private void playDuaAfterAdhan(String prayerLabelForCompletion) {
         // 🚀 NOUVEAU : Vérifier si la dua après l'adhan est activée
         SharedPreferences settingsPrefs = getSharedPreferences("prayer_times_settings", MODE_PRIVATE);
-        boolean duaAfterAdhanEnabled = settingsPrefs.getBoolean("dua_after_adhan_enabled", false); // Par défaut désactivé
-        
+        boolean duaAfterAdhanEnabled = settingsPrefs.getBoolean("dua_after_adhan_enabled", false); // Par défaut
+                                                                                                   // désactivé
+
         if (!duaAfterAdhanEnabled) {
             debugLog(TAG, "Dua après adhan désactivée par l'utilisateur. Passage direct à la terminaison finale.");
             handleFinalCompletion(prayerLabelForCompletion);
@@ -936,8 +1046,9 @@ public class AdhanService extends Service {
         // 🔧 CORRECTION : Lire depuis les bons SharedPreferences avec les bonnes clés
         String calcMethodName = settingsPrefs.getString("calc_method", "MuslimWorldLeague");
         String adhanSound = adhanPrefs.getString("ADHAN_SOUND", "misharyrachid");
-        
-        errorLog(TAG, "🔧 Réprogram: Paramètres chargés - CalcMethod: " + calcMethodName + ", AdhanSound: " + adhanSound);
+
+        errorLog(TAG,
+                "🔧 Réprogram: Paramètres chargés - CalcMethod: " + calcMethodName + ", AdhanSound: " + adhanSound);
 
         // Paramètres généraux de notification
         boolean notificationsEnabled = settingsPrefs.getBoolean("notifications_enabled", true);
@@ -1057,7 +1168,7 @@ public class AdhanService extends Service {
 
         String language = settingsPrefs.getString("current_language", "en");
         String locationMode = settingsPrefs.getString("location_mode", "auto");
-        
+
         double latitude, longitude;
         if ("manual".equals(locationMode)) {
             latitude = settingsPrefs.getFloat("manual_latitude", 0f);
@@ -1067,8 +1178,9 @@ public class AdhanService extends Service {
             longitude = settingsPrefs.getFloat("auto_longitude", 0f);
         }
 
-        errorLog(TAG, "🔍 ReprogRest: Coordonnées chargées: lat=" + latitude + ", lon=" + longitude + ", mode=" + locationMode);
-        
+        errorLog(TAG, "🔍 ReprogRest: Coordonnées chargées: lat=" + latitude + ", lon=" + longitude + ", mode="
+                + locationMode);
+
         if (latitude == 0.0 && longitude == 0.0) {
             errorLog(TAG, "❌ ReprogRest: Coordonnées invalides (0,0), reprogrammation annulée.");
             errorLog(TAG, "🔍 ReprogRest: Vérifiez vos paramètres de localisation dans Settings !");
@@ -1078,16 +1190,17 @@ public class AdhanService extends Service {
         // 🔧 CORRECTION : Lire depuis les bons SharedPreferences avec les bonnes clés
         String calcMethodName = settingsPrefs.getString("calc_method", "MuslimWorldLeague");
         String adhanSound = adhanPrefs.getString("ADHAN_SOUND", "misharyrachid");
-        
-        errorLog(TAG, "🔧 ReprogRest: Paramètres chargés - CalcMethod: " + calcMethodName + ", AdhanSound: " + adhanSound);
+
+        errorLog(TAG,
+                "🔧 ReprogRest: Paramètres chargés - CalcMethod: " + calcMethodName + ", AdhanSound: " + adhanSound);
 
         // 3. CALCUL DES HORAIRES AUJOURD'HUI ET DEMAIN
         long currentTimeMillis = System.currentTimeMillis();
-        
+
         // Paramètres de calcul
         CalculationParameters calcParams = getCalculationParameters(calcMethodName);
         Coordinates coordinates = new Coordinates(latitude, longitude);
-        
+
         // Aujourd'hui
         Calendar today = Calendar.getInstance();
         DateComponents todayComponents = DateComponents.from(today.getTime());
@@ -1100,9 +1213,10 @@ public class AdhanService extends Service {
         PrayerTimes tomorrowTimes = new PrayerTimes(coordinates, tomorrowComponents, calcParams);
 
         // 4. PROGRAMMER LES PRIÈRES RESTANTES D'AUJOURD'HUI
-        String[] prayers = {"Fajr", "Dhuhr", "Asr", "Maghrib", "Isha"};
-        Date[] todayPrayerTimes = {todayTimes.fajr, todayTimes.dhuhr, todayTimes.asr, todayTimes.maghrib, todayTimes.isha};
-        
+        String[] prayers = { "Fajr", "Dhuhr", "Asr", "Maghrib", "Isha" };
+        Date[] todayPrayerTimes = { todayTimes.fajr, todayTimes.dhuhr, todayTimes.asr, todayTimes.maghrib,
+                todayTimes.isha };
+
         // Trouver l'index de la prière qui vient de se terminer
         int completedIndex = -1;
         for (int i = 0; i < prayers.length; i++) {
@@ -1112,41 +1226,50 @@ public class AdhanService extends Service {
             }
         }
 
-        errorLog(TAG, "🔍 ReprogRest: Début programmation des prières restantes après " + completedPrayer + " (index " + completedIndex + ")");
+        errorLog(TAG, "🔍 ReprogRest: Début programmation des prières restantes après " + completedPrayer + " (index "
+                + completedIndex + ")");
         errorLog(TAG, "🔍 ReprogRest: Heure actuelle: " + new Date(currentTimeMillis));
-        
-        // Programmer les prières restantes d'aujourd'hui (après celle qui vient de se terminer)
-        errorLog(TAG, "🔍 AUDIT: Début boucle programmation adhans restants - completedIndex=" + completedIndex + ", prayers.length=" + prayers.length);
-        
+
+        // Programmer les prières restantes d'aujourd'hui (après celle qui vient de se
+        // terminer)
+        errorLog(TAG, "🔍 AUDIT: Début boucle programmation adhans restants - completedIndex=" + completedIndex
+                + ", prayers.length=" + prayers.length);
+
         for (int i = completedIndex + 1; i < prayers.length; i++) {
-            errorLog(TAG, "🔍 AUDIT: Vérification " + prayers[i] + " (index " + i + ") - heure: " + todayPrayerTimes[i] + " vs maintenant: " + new Date(currentTimeMillis));
-            
+            errorLog(TAG, "🔍 AUDIT: Vérification " + prayers[i] + " (index " + i + ") - heure: " + todayPrayerTimes[i]
+                    + " vs maintenant: " + new Date(currentTimeMillis));
+
             if (todayPrayerTimes[i].getTime() > currentTimeMillis) {
                 errorLog(TAG, "✅ AUDIT: Aujourd'hui " + prayers[i] + " DOIT être programmé: " + todayPrayerTimes[i]);
                 try {
-                    scheduleAdhanAlarmInternal(context, alarmManager, prayers[i], todayPrayerTimes[i].getTime(), adhanSound, language);
+                    scheduleAdhanAlarmInternal(context, alarmManager, prayers[i], todayPrayerTimes[i].getTime(),
+                            adhanSound, language);
                     errorLog(TAG, "✅ AUDIT: " + prayers[i] + " programmé avec SUCCÈS !");
                 } catch (Exception e) {
                     errorLog(TAG, "❌ AUDIT: ERREUR programmation " + prayers[i] + ": " + e.getMessage());
                 }
             } else {
-                errorLog(TAG, "❌ AUDIT: " + prayers[i] + " ignoré (dans le passé): " + todayPrayerTimes[i] + " <= " + new Date(currentTimeMillis));
+                errorLog(TAG, "❌ AUDIT: " + prayers[i] + " ignoré (dans le passé): " + todayPrayerTimes[i] + " <= "
+                        + new Date(currentTimeMillis));
             }
         }
-        
+
         errorLog(TAG, "🔍 AUDIT: Fin boucle programmation adhans restants");
 
         // 5. PROGRAMMER TOUTES LES PRIÈRES DE DEMAIN
-        Date[] tomorrowPrayerTimes = {tomorrowTimes.fajr, tomorrowTimes.dhuhr, tomorrowTimes.asr, tomorrowTimes.maghrib, tomorrowTimes.isha};
-        
+        Date[] tomorrowPrayerTimes = { tomorrowTimes.fajr, tomorrowTimes.dhuhr, tomorrowTimes.asr,
+                tomorrowTimes.maghrib, tomorrowTimes.isha };
+
         debugLog(TAG, "ReprogRest: Programmation de toutes les prières de demain");
         for (int i = 0; i < prayers.length; i++) {
             debugLog(TAG, "ReprogRest: Demain " + prayers[i] + " programmé: " + tomorrowPrayerTimes[i]);
-            scheduleAdhanAlarmInternal(context, alarmManager, prayers[i], tomorrowPrayerTimes[i].getTime(), adhanSound, language);
+            scheduleAdhanAlarmInternal(context, alarmManager, prayers[i], tomorrowPrayerTimes[i].getTime(), adhanSound,
+                    language);
         }
 
         // 📱 SAUVEGARDER LES HORAIRES POUR LE WIDGET
-        // Si on est après Isha (completedIndex == 4), sauvegarder les horaires de demain
+        // Si on est après Isha (completedIndex == 4), sauvegarder les horaires de
+        // demain
         // Sinon, sauvegarder les horaires d'aujourd'hui
         if (completedIndex == 4) {
             // Après Isha : sauvegarder demain
@@ -1161,7 +1284,7 @@ public class AdhanService extends Service {
         // 6. PROGRAMMER LES RAPPELS ET DHIKRS
         boolean remindersEnabled = settingsPrefs.getBoolean("reminders_enabled", true);
         int reminderOffset = settingsPrefs.getInt("reminder_offset", 10);
-        
+
         boolean enabledAfterSalah = settingsPrefs.getBoolean("enabled_after_salah", true);
         boolean enabledMorningDhikr = settingsPrefs.getBoolean("enabled_morning_dhikr", true);
         boolean enabledEveningDhikr = settingsPrefs.getBoolean("enabled_evening_dhikr", true);
@@ -1170,18 +1293,20 @@ public class AdhanService extends Service {
         int delayMorningDhikr = settingsPrefs.getInt("delay_morning_dhikr", 10);
         int delayEveningDhikr = settingsPrefs.getInt("delay_evening_dhikr", 10);
         int delaySelectedDua = settingsPrefs.getInt("delay_selected_dua", 15);
-        
+
         if (remindersEnabled) {
             // Rappels pour les prières restantes d'aujourd'hui
             for (int i = completedIndex + 1; i < prayers.length; i++) {
                 if (todayPrayerTimes[i].getTime() > currentTimeMillis) {
-                    scheduleReminderInternal(context, alarmManager, prayers[i], todayPrayerTimes[i].getTime(), reminderOffset, language);
+                    scheduleReminderInternal(context, alarmManager, prayers[i], todayPrayerTimes[i].getTime(),
+                            reminderOffset, language);
                 }
             }
-            
+
             // Rappels pour toutes les prières de demain
             for (int i = 0; i < prayers.length; i++) {
-                scheduleReminderInternal(context, alarmManager, prayers[i], tomorrowPrayerTimes[i].getTime(), reminderOffset, language);
+                scheduleReminderInternal(context, alarmManager, prayers[i], tomorrowPrayerTimes[i].getTime(),
+                        reminderOffset, language);
             }
         }
 
@@ -1191,38 +1316,48 @@ public class AdhanService extends Service {
             if (todayPrayerTimes[i].getTime() > currentTimeMillis) {
                 String prayerName = prayers[i];
                 long prayerTimestamp = todayPrayerTimes[i].getTime();
-                
+
                 if (enabledAfterSalah) {
-                    scheduleDhikrInternal(context, alarmManager, "afterSalah", prayerName, prayerTimestamp, delayAfterSalah, language);
+                    scheduleDhikrInternal(context, alarmManager, "afterSalah", prayerName, prayerTimestamp,
+                            delayAfterSalah, language);
                 }
                 if (enabledMorningDhikr && "Fajr".equals(prayerName)) {
-                    scheduleDhikrInternal(context, alarmManager, "dhikrMorning", prayerName, prayerTimestamp, delayMorningDhikr, language);
+                    scheduleDhikrInternal(context, alarmManager, "dhikrMorning", prayerName, prayerTimestamp,
+                            delayMorningDhikr, language);
                 }
                 if (enabledEveningDhikr && "Maghrib".equals(prayerName)) {
-                    scheduleDhikrInternal(context, alarmManager, "eveningDhikr", prayerName, prayerTimestamp, delayEveningDhikr, language);
+                    scheduleDhikrInternal(context, alarmManager, "eveningDhikr", prayerName, prayerTimestamp,
+                            delayEveningDhikr, language);
                 }
-                if (enabledSelectedDua && ("Dhuhr".equals(prayerName) || "Asr".equals(prayerName) || "Isha".equals(prayerName))) {
-                    scheduleDhikrInternal(context, alarmManager, "selectedDua", prayerName, prayerTimestamp, delaySelectedDua, language);
+                if (enabledSelectedDua
+                        && ("Dhuhr".equals(prayerName) || "Asr".equals(prayerName) || "Isha".equals(prayerName))) {
+                    scheduleDhikrInternal(context, alarmManager, "selectedDua", prayerName, prayerTimestamp,
+                            delaySelectedDua, language);
                 }
             }
         }
-        
+
         // Dhikrs pour toutes les prières de demain
         for (int i = 0; i < prayers.length; i++) {
             String prayerName = prayers[i];
             long prayerTimestamp = tomorrowPrayerTimes[i].getTime();
-            
+
             if (enabledAfterSalah) {
-                scheduleDhikrInternal(context, alarmManager, "afterSalah", prayerName, prayerTimestamp, delayAfterSalah, language);
+                scheduleDhikrInternal(context, alarmManager, "afterSalah", prayerName, prayerTimestamp, delayAfterSalah,
+                        language);
             }
             if (enabledMorningDhikr && "Fajr".equals(prayerName)) {
-                scheduleDhikrInternal(context, alarmManager, "dhikrMorning", prayerName, prayerTimestamp, delayMorningDhikr, language);
+                scheduleDhikrInternal(context, alarmManager, "dhikrMorning", prayerName, prayerTimestamp,
+                        delayMorningDhikr, language);
             }
             if (enabledEveningDhikr && "Maghrib".equals(prayerName)) {
-                scheduleDhikrInternal(context, alarmManager, "eveningDhikr", prayerName, prayerTimestamp, delayEveningDhikr, language);
+                scheduleDhikrInternal(context, alarmManager, "eveningDhikr", prayerName, prayerTimestamp,
+                        delayEveningDhikr, language);
             }
-            if (enabledSelectedDua && ("Dhuhr".equals(prayerName) || "Asr".equals(prayerName) || "Isha".equals(prayerName))) {
-                scheduleDhikrInternal(context, alarmManager, "selectedDua", prayerName, prayerTimestamp, delaySelectedDua, language);
+            if (enabledSelectedDua
+                    && ("Dhuhr".equals(prayerName) || "Asr".equals(prayerName) || "Isha".equals(prayerName))) {
+                scheduleDhikrInternal(context, alarmManager, "selectedDua", prayerName, prayerTimestamp,
+                        delaySelectedDua, language);
             }
         }
 
@@ -1263,8 +1398,9 @@ public class AdhanService extends Service {
         // 🔧 CORRECTION : Lire depuis les bons SharedPreferences avec les bonnes clés
         String calcMethodName = settingsPrefs.getString("calc_method", "MuslimWorldLeague");
         String adhanSound = adhanPrefs.getString("ADHAN_SOUND", "misharyrachid");
-        
-        errorLog(TAG, "🔧 Boot Reprog: Paramètres chargés - CalcMethod: " + calcMethodName + ", AdhanSound: " + adhanSound);
+
+        errorLog(TAG,
+                "🔧 Boot Reprog: Paramètres chargés - CalcMethod: " + calcMethodName + ", AdhanSound: " + adhanSound);
 
         // Paramètres généraux de notification
         boolean notificationsEnabled = settingsPrefs.getBoolean("notifications_enabled", true);
@@ -1327,22 +1463,22 @@ public class AdhanService extends Service {
         // Adhans pour aujourd'hui (prières futures uniquement)
         for (int i = 0; i < prayers.length; i++) {
             if (todayTimes[i].getTime() > currentTimeMillis) {
-                debugLog(TAG, "🔵 Aujourd'hui " + prayers[i] + " programmé: " + todayTimes[i] + " (dans " + 
-                    ((todayTimes[i].getTime() - currentTimeMillis) / 60000) + " min)");
+                debugLog(TAG, "🔵 Aujourd'hui " + prayers[i] + " programmé: " + todayTimes[i] + " (dans " +
+                        ((todayTimes[i].getTime() - currentTimeMillis) / 60000) + " min)");
                 scheduleAdhanAlarmInternalWithSuffix(context, alarmManager, prayers[i], todayTimes[i].getTime(),
                         adhanSound,
                         language, "_today");
             } else {
-                debugLog(TAG, "🔴 Aujourd'hui " + prayers[i] + " PASSÉ: " + todayTimes[i] + " (il y a " + 
-                    ((currentTimeMillis - todayTimes[i].getTime()) / 60000) + " min)");
+                debugLog(TAG, "🔴 Aujourd'hui " + prayers[i] + " PASSÉ: " + todayTimes[i] + " (il y a " +
+                        ((currentTimeMillis - todayTimes[i].getTime()) / 60000) + " min)");
             }
         }
 
         // Adhans pour demain (toutes les prières)
         debugLog(TAG, "🔵 DEMAIN - Programmation de toutes les prières:");
         for (int i = 0; i < prayers.length; i++) {
-            debugLog(TAG, "🔵 Demain " + prayers[i] + " programmé: " + tomorrowTimes[i] + " (dans " + 
-                ((tomorrowTimes[i].getTime() - currentTimeMillis) / 3600000) + " heures)");
+            debugLog(TAG, "🔵 Demain " + prayers[i] + " programmé: " + tomorrowTimes[i] + " (dans " +
+                    ((tomorrowTimes[i].getTime() - currentTimeMillis) / 3600000) + " heures)");
             scheduleAdhanAlarmInternalWithSuffix(context, alarmManager, prayers[i], tomorrowTimes[i].getTime(),
                     adhanSound,
                     language, "_tomorrow");
@@ -1437,17 +1573,18 @@ public class AdhanService extends Service {
         String[] prayers = { "Fajr", "Dhuhr", "Asr", "Maghrib", "Isha" };
         String[] suffixes = { "", "_today", "_tomorrow" }; // Anciens formats
         int cancelCount = 0;
-        
+
         // 🔧 CORRECTION : Annuler aussi les nouveaux formats avec date
-        java.text.SimpleDateFormat dayFormat = new java.text.SimpleDateFormat("yyyyMMdd", java.util.Locale.getDefault());
+        java.text.SimpleDateFormat dayFormat = new java.text.SimpleDateFormat("yyyyMMdd",
+                java.util.Locale.getDefault());
         java.util.Calendar cal = java.util.Calendar.getInstance();
-        
+
         // Annuler pour aujourd'hui, hier, demain (au cas où)
         for (int dayOffset = -1; dayOffset <= 1; dayOffset++) {
             cal.setTimeInMillis(System.currentTimeMillis());
             cal.add(java.util.Calendar.DAY_OF_YEAR, dayOffset);
             String dayString = dayFormat.format(cal.getTime());
-            
+
             for (String prayer : prayers) {
                 // Nouveau format avec date
                 Intent intent = new Intent(context, AdhanReceiver.class);
@@ -1465,7 +1602,7 @@ public class AdhanService extends Service {
                     cancelCount++;
                     debugLog(TAG, "Réprogram: Alarme Adhan annulée pour " + prayer + "_" + dayString);
                 }
-                
+
                 // Anciens formats pour compatibilité
                 for (String suffix : suffixes) {
                     intent = new Intent(context, AdhanReceiver.class);
@@ -1547,24 +1684,25 @@ public class AdhanService extends Service {
 
         // 🔧 CORRECTION BUG : Différencier les requestCode pour aujourd'hui vs demain
         // Ajouter le jour pour éviter les collisions entre aujourd'hui/demain
-        java.text.SimpleDateFormat dayFormat = new java.text.SimpleDateFormat("yyyyMMdd", java.util.Locale.getDefault());
+        java.text.SimpleDateFormat dayFormat = new java.text.SimpleDateFormat("yyyyMMdd",
+                java.util.Locale.getDefault());
         String dayString = dayFormat.format(new Date(triggerAtMillis));
         int requestCode = (prayerName + "_" + dayString).hashCode();
-        
+
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, requestCode, intent,
                 PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
         try {
             alarmManager.setAlarmClock(new AlarmManager.AlarmClockInfo(triggerAtMillis, null), pendingIntent);
-            
+
             // 🔥 DEBUG CRITIQUE : Log avec tous les détails pour diagnostiquer
             long delayMinutes = (triggerAtMillis - System.currentTimeMillis()) / 60000;
-            errorLog(TAG, "🔥 ADHAN PROGRAMMÉ - " + prayerName + 
-                " | Timestamp: " + triggerAtMillis + 
-                " | Heure: " + new Date(triggerAtMillis) + 
-                " | Dans: " + delayMinutes + " min" +
-                " | RequestCode: " + requestCode + 
-                " | Jour: " + dayString);
-                
+            errorLog(TAG, "🔥 ADHAN PROGRAMMÉ - " + prayerName +
+                    " | Timestamp: " + triggerAtMillis +
+                    " | Heure: " + new Date(triggerAtMillis) +
+                    " | Dans: " + delayMinutes + " min" +
+                    " | RequestCode: " + requestCode +
+                    " | Jour: " + dayString);
+
             debugLog(TAG, "Réprogram: Adhan programmé pour " + prayerName + " à " + new Date(triggerAtMillis));
         } catch (Exception e) {
             errorLog(TAG, "Réprogram: Erreur Adhan " + prayerName + ": " + e.getMessage());
@@ -1797,8 +1935,9 @@ public class AdhanService extends Service {
             if (!arabic.isEmpty()) {
                 bodyBuilder.append(arabic);
             }
-            
-            // Pour les langues non-arabes, afficher aussi la traduction et la translittération
+
+            // Pour les langues non-arabes, afficher aussi la traduction et la
+            // translittération
             if (!language.equals("ar")) {
                 if (!translation.isEmpty()) {
                     bodyBuilder.append(arabic.isEmpty() ? "\n" : "\n\n").append(translation);
@@ -1865,7 +2004,6 @@ public class AdhanService extends Service {
         return localizedName;
     }
 
-
     private void scheduleAdhanAlarmInternalWithSuffix(Context context, AlarmManager alarmManager, String prayerName,
             long triggerAtMillis, String adhanSound, String language, String suffix) {
         Intent intent = new Intent(context, AdhanReceiver.class);
@@ -1880,17 +2018,18 @@ public class AdhanService extends Service {
                         .replace("{{prayer}}", getPrayerDisplayNameForLocale(prayerName, language)));
 
         // 🔧 CORRECTION BUG : Utiliser le même système de requestCode avec date
-        java.text.SimpleDateFormat dayFormat = new java.text.SimpleDateFormat("yyyyMMdd", java.util.Locale.getDefault());
+        java.text.SimpleDateFormat dayFormat = new java.text.SimpleDateFormat("yyyyMMdd",
+                java.util.Locale.getDefault());
         String dayString = dayFormat.format(new Date(triggerAtMillis));
         int requestCode = (prayerName + "_" + dayString).hashCode();
-        
+
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, requestCode, intent,
                 PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
         try {
             alarmManager.setAlarmClock(new AlarmManager.AlarmClockInfo(triggerAtMillis, null), pendingIntent);
             debugLog(TAG,
-                    "✅ Boot Reprog: Adhan programmé pour " + prayerName + suffix + " à " + new Date(triggerAtMillis) + 
-                    " (requestCode: " + requestCode + ", jour: " + dayString + ")");
+                    "✅ Boot Reprog: Adhan programmé pour " + prayerName + suffix + " à " + new Date(triggerAtMillis) +
+                            " (requestCode: " + requestCode + ", jour: " + dayString + ")");
         } catch (Exception e) {
             errorLog(TAG, "❌ Boot Reprog: Erreur Adhan " + prayerName + suffix + ": " + e.getMessage());
         }
@@ -1902,10 +2041,11 @@ public class AdhanService extends Service {
     private void savePrayerTimesForWidget(Context context, PrayerTimes prayerTimes, Calendar date) {
         try {
             SharedPreferences prefs = context.getSharedPreferences("prayer_times_settings", MODE_PRIVATE);
-            
+
             // Format HH:mm pour le widget
-            java.text.SimpleDateFormat timeFormat = new java.text.SimpleDateFormat("HH:mm", java.util.Locale.getDefault());
-            
+            java.text.SimpleDateFormat timeFormat = new java.text.SimpleDateFormat("HH:mm",
+                    java.util.Locale.getDefault());
+
             // Créer le JSON des horaires
             org.json.JSONObject jsonTimes = new org.json.JSONObject();
             jsonTimes.put("Fajr", timeFormat.format(prayerTimes.fajr));
@@ -1914,18 +2054,20 @@ public class AdhanService extends Service {
             jsonTimes.put("Asr", timeFormat.format(prayerTimes.asr));
             jsonTimes.put("Maghrib", timeFormat.format(prayerTimes.maghrib));
             jsonTimes.put("Isha", timeFormat.format(prayerTimes.isha));
-            
+
             // Sauvegarder la date pour laquelle ces horaires sont valides
-            java.text.SimpleDateFormat dateFormat = new java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault());
+            java.text.SimpleDateFormat dateFormat = new java.text.SimpleDateFormat("yyyy-MM-dd",
+                    java.util.Locale.getDefault());
             String dateString = dateFormat.format(date.getTime());
-            
+
             prefs.edit()
-                .putString("today_prayer_times", jsonTimes.toString())
-                .putString("widget_last_date", dateString)
-                .apply();
-            
-            errorLog(TAG, "📱 Horaires sauvegardés pour le widget - Date: " + dateString + ", Horaires: " + jsonTimes.toString());
-            
+                    .putString("today_prayer_times", jsonTimes.toString())
+                    .putString("widget_last_date", dateString)
+                    .apply();
+
+            errorLog(TAG, "📱 Horaires sauvegardés pour le widget - Date: " + dateString + ", Horaires: "
+                    + jsonTimes.toString());
+
         } catch (Exception e) {
             errorLog(TAG, "❌ Erreur sauvegarde horaires widget: " + e.getMessage(), e);
         }

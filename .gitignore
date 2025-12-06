@@ -45,7 +45,7 @@ app.config.ts
 api-keys.json
 secrets.json
 google-services.json
-GoogleService-Info.plist
+# GoogleService-Info.plist  ← Commenté, voir exception plus bas
 firebase-config.json
 firebase-config.js
 firebase-config.ts
@@ -66,7 +66,7 @@ firebase-config.ts
 **/service-account.json
 **/firebase-admin.json
 **/google-services.json
-**/GoogleService-Info.plist
+# **/GoogleService-Info.plist  ← Commenté, voir exception plus bas
 
 # Database credentials
 **/database.json
@@ -99,10 +99,13 @@ android/app/src/debug/google-services.json
 android/app/src/release/google-services.json
 
 # iOS specific secrets
-ios/GoogleService-Info.plist
+# ios/GoogleService-Info.plist  ← Commenté car on a besoin de ce fichier pour EAS Build
 ios/GoogleService-Info-Debug.plist
 ios/GoogleService-Info-Release.plist
 ios/Runner/GoogleService-Info.plist
+
+# ✅ EXCEPTION : Autoriser ios/GoogleService-Info.plist pour EAS Build
+!ios/GoogleService-Info.plist
 
 # Keystore and signing files
 *.keystore

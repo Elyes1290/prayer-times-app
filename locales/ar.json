@@ -1036,6 +1036,9 @@
   "offline_mode": "الوضع غير المتصل",
   "online_mode": "الوضع المتصل",
   "downloaded_audio": "الصوتيات المحملة",
+  "manage_downloads": "إدارة التنزيلات",
+  "no_downloaded_audio": "لا توجد صوتيات محملة",
+  "downloads_manager": "التنزيلات",
   "quran_text": "نص القرآن الكريم",
   "switch_to_offline": "التبديل إلى الوضع غير المتصل",
   "switch_to_online": "التبديل إلى الوضع المتصل",
@@ -1216,7 +1219,13 @@
       "detailed_stats": "إحصائيات مفصلة",
       "exclusive_themes": "مظاهر حصرية",
       "unlimited_favorites": "مفضلة غير محدودة"
-    }
+    },
+    "expired_title": "انتهى الاشتراك",
+    "expired_message": "انتهى اشتراكك المميز. جدد للاستمرار في الاستمتاع بالمزايا المميزة.",
+    "expiring_soon_title": "الاشتراك ينتهي قريباً",
+    "expiring_soon_message": "ينتهي اشتراكك خلال {{days}} يوم (أيام). تذكر تجديده!",
+    "renewed_title": "تم تجديد الاشتراك",
+    "renewed_message": "تم تجديد اشتراكك المميز تلقائياً حتى {{date}}"
   },
 
   "account": {

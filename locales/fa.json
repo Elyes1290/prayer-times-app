@@ -1047,6 +1047,9 @@
   "offline_mode": "حالت آفلاین",
   "online_mode": "حالت آنلاین",
   "downloaded_audio": "صوت‌های دانلود شده",
+  "manage_downloads": "مدیریت دانلودها",
+  "no_downloaded_audio": "صوت دانلود شده‌ای وجود ندارد",
+  "downloads_manager": "دانلودها",
   "quran_text": "متن قرآن",
   "switch_to_offline": "تبدیل به حالت آفلاین",
   "switch_to_online": "تبدیل به حالت آنلاین",
@@ -1216,7 +1219,13 @@
       "detailed_stats": "آمار دقیق",
       "exclusive_themes": "طرح‌های خاص",
       "unlimited_favorites": "علاقه‌مندی‌های نامحدود"
-    }
+    },
+    "expired_title": "اشتراک منقضی شد",
+    "expired_message": "اشتراک پریمیوم شما منقضی شده است. برای ادامه استفاده از ویژگی‌های پریمیوم، تمدید کنید.",
+    "expiring_soon_title": "اشتراک به زودی منقضی می‌شود",
+    "expiring_soon_message": "اشتراک شما در {{days}} روز منقضی می‌شود. فراموش نکنید که تمدید کنید!",
+    "renewed_title": "اشتراک تمدید شد",
+    "renewed_message": "اشتراک پریمیوم شما به صورت خودکار تا {{date}} تمدید شد"
   },
 
   "account": {

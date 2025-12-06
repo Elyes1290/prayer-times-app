@@ -6,6 +6,7 @@ import React, {
   ReactNode,
 } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { NativeModules, Platform } from "react-native";
 import { safeJsonParse } from "../utils/safeJson";
 import { useNetworkStatus } from "../hooks/useNetworkStatus";
 // 🚀 NOUVEAU : Import apiClient pour vérifier la connexion Infomaniak
@@ -14,6 +15,8 @@ import apiClient from "../utils/apiClient";
 import SyncManager from "../utils/syncManager";
 import { useToast } from "../contexts/ToastContext";
 import { useTranslation } from "react-i18next";
+// 🔧 NOUVEAU : Import pour synchronisation fichiers premium
+import PremiumContentManager from "../utils/premiumContent";
 
 // Types de base
 export interface PremiumUser {
@@ -142,8 +145,87 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
 
         if (expiryDate <= now) {
           console.log(
-            "⏰ Abonnement premium expiré - désactivation automatique"
+            "⏰ Date d'expiration locale atteinte - vérification avec le serveur..."
           );
+
+          // 🚀 CORRECTION CRITIQUE : Vérifier avec le serveur AVANT de désactiver
+          // Car Stripe peut avoir renouvelé automatiquement l'abonnement
+          try {
+            // Vérifier si l'utilisateur est connecté
+            const token = await AsyncStorage.getItem("auth_token");
+            if (
+              token &&
+              networkStatus.isConnected &&
+              networkStatus.isInternetReachable
+            ) {
+              console.log(
+                "🔄 Synchronisation avec le serveur pour vérifier le renouvellement..."
+              );
+
+              const result = await apiClient.getUser();
+              if (result.success && result.data) {
+                const serverUser = result.data;
+
+                // Vérifier si le premium est toujours actif sur le serveur
+                if (
+                  serverUser.premium_status === 1 &&
+                  serverUser.premium_expiry
+                ) {
+                  const serverExpiryDate = new Date(serverUser.premium_expiry);
+
+                  if (serverExpiryDate > now) {
+                    console.log(
+                      "✅ Abonnement renouvelé sur Stripe ! Synchronisation des données locales..."
+                    );
+                    console.log(
+                      `📅 Nouvelle date d'expiration: ${serverExpiryDate.toLocaleDateString()}`
+                    );
+
+                    // Synchroniser les données locales avec le serveur
+                    const updatedUser = {
+                      ...parsedUser,
+                      isPremium: true,
+                      subscriptionType:
+                        serverUser.subscription_type ||
+                        parsedUser.subscriptionType,
+                      subscriptionId:
+                        serverUser.subscription_id || parsedUser.subscriptionId,
+                      expiryDate: serverExpiryDate,
+                      premiumActivatedAt: serverUser.premium_activated_at
+                        ? new Date(serverUser.premium_activated_at)
+                        : parsedUser.premiumActivatedAt,
+                      hasPurchasedPremium: true,
+                    };
+
+                    // Sauvegarder les données mises à jour
+                    await AsyncStorage.setItem(
+                      STORAGE_KEYS.PREMIUM_USER,
+                      JSON.stringify(updatedUser)
+                    );
+                    setUser(updatedUser);
+
+                    // Afficher un toast de confirmation
+                    showToast?.({
+                      type: "success",
+                      title: t("premium.renewed_title", "Abonnement renouvelé"),
+                      message: t(
+                        "premium.renewed_message",
+                        `Votre abonnement premium a été renouvelé automatiquement jusqu'au ${serverExpiryDate.toLocaleDateString()}`
+                      ),
+                    });
+
+                    return false; // Pas d'expiration, renouvellement effectué
+                  }
+                }
+              }
+            }
+          } catch (syncError) {
+            console.log("⚠️ Erreur synchronisation serveur:", syncError);
+            // En cas d'erreur réseau, on continue avec la vérification locale
+          }
+
+          // Si on arrive ici, le serveur confirme l'expiration OU on ne peut pas se connecter
+          console.log("❌ Abonnement premium expiré confirmé - désactivation");
 
           // Désactiver le premium localement
           await AsyncStorage.setItem(
@@ -424,16 +506,38 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
       // 🕐 NOUVEAU : Vérifier l'expiration locale AVANT tout
       await checkLocalPremiumExpiration();
 
-      // 🔗 NOUVEAU : Synchroniser le token d'authentification vers les services natifs
+      // 🔧 NOUVEAU : Synchroniser les fichiers premium avec le JSON
+      try {
+        const premiumManager = PremiumContentManager.getInstance();
+        const syncResult =
+          await premiumManager.syncDownloadedContentWithFiles();
+        if (syncResult.fixed > 0) {
+          console.log(
+            `✅ [PremiumContext] ${syncResult.fixed} fichiers premium synchronisés`
+          );
+        }
+        if (syncResult.errors.length > 0) {
+          console.log(
+            "⚠️ [PremiumContext] Erreurs synchronisation:",
+            syncResult.errors
+          );
+        }
+      } catch (syncError) {
+        console.error(
+          "❌ [PremiumContext] Erreur synchronisation fichiers premium:",
+          syncError
+        );
+      }
+
+      // 🔗 NOUVEAU : Synchroniser le token d'authentification vers les services natifs (Android uniquement)
       try {
         const token = await AsyncStorage.getItem("auth_token");
-        if (token) {
+        if (token && Platform.OS === "android") {
           console.log(
             "🔗 [PremiumContext] Synchronisation token vers services natifs:",
             token.substring(0, 10) + "..."
           );
-          // Importer le module natif dynamiquement pour éviter les erreurs
-          const { NativeModules } = await import("react-native");
+          // ✅ Vérifier que le module existe avant de l'utiliser
           if (NativeModules?.QuranAudioServiceModule?.syncAuthToken) {
             NativeModules.QuranAudioServiceModule.syncAuthToken(token);
             console.log("✅ [PremiumContext] Token synchronisé avec succès");
@@ -442,7 +546,7 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
               "⚠️ [PremiumContext] Module QuranAudioServiceModule non disponible"
             );
           }
-        } else {
+        } else if (!token) {
           console.log("⚠️ [PremiumContext] Aucun token auth_token trouvé");
         }
       } catch (tokenError) {
@@ -450,6 +554,70 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
           "❌ [PremiumContext] Erreur synchronisation token:",
           tokenError
         );
+      }
+
+      // 🚀 CORRECTION CRITIQUE : Synchroniser avec le serveur AVANT de lire user_data local
+      // Pour s'assurer d'avoir toujours la date d'expiration la plus récente
+      try {
+        const token = await AsyncStorage.getItem("auth_token");
+        if (
+          token &&
+          networkStatus.isConnected &&
+          networkStatus.isInternetReachable
+        ) {
+          console.log(
+            "🔄 [SYNC] Synchronisation avec le serveur pour récupérer les données à jour..."
+          );
+
+          const result = await apiClient.getUser();
+          if (result.success && result.data) {
+            const serverUser = result.data;
+            console.log(
+              "✅ [SYNC] Données serveur récupérées - premium_status:",
+              serverUser.premium_status
+            );
+            console.log(
+              "📅 [SYNC] Date d'expiration serveur:",
+              serverUser.premium_expiry
+            );
+
+            // Mettre à jour user_data avec les données du serveur
+            const userDataToUpdate = {
+              id: serverUser.id,
+              user_id: serverUser.id,
+              email: serverUser.email,
+              user_first_name: serverUser.user_first_name,
+              premium_status: serverUser.premium_status,
+              subscription_type: serverUser.subscription_type,
+              subscription_id: serverUser.subscription_id,
+              stripe_customer_id: serverUser.stripe_customer_id,
+              premium_expiry: serverUser.premium_expiry, // 🎯 Date à jour depuis le serveur
+              premium_activated_at: serverUser.premium_activated_at,
+              language: serverUser.language,
+              last_sync: new Date().toISOString(),
+              device_id: serverUser.device_id,
+              is_vip: serverUser.is_vip,
+              vip_reason: serverUser.vip_reason,
+              vip_granted_by: serverUser.vip_granted_by,
+              vip_granted_at: serverUser.vip_granted_at,
+            };
+
+            await AsyncStorage.setItem(
+              "user_data",
+              JSON.stringify(userDataToUpdate)
+            );
+            console.log(
+              "✅ [SYNC] user_data mis à jour avec les données du serveur"
+            );
+          }
+        } else {
+          console.log(
+            "⚠️ [SYNC] Pas de synchronisation serveur (hors ligne ou pas de token)"
+          );
+        }
+      } catch (syncError) {
+        console.log("⚠️ [SYNC] Erreur synchronisation serveur:", syncError);
+        // Continuer avec les données locales en cas d'erreur réseau
       }
 
       // 🔧 NOUVEAU : Synchroniser avec user_data en priorité
