@@ -28,6 +28,7 @@ RCT_EXTERN_METHOD(debugNotifications:(RCTPromiseResolveBlock)resolve rejecter:(R
 
 // Debug
 RCT_EXTERN_METHOD(debugLog:(NSString *)message)
+RCT_EXTERN_METHOD(listAvailableSounds:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject)
 
 // Widget Update (stubs for compatibility)
 RCT_EXTERN_METHOD(forceUpdateWidgets)

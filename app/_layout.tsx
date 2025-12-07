@@ -18,6 +18,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { verifyAuth } from "../utils/apiClient";
 import { isOfflineMode } from "../utils/networkUtils";
 import { registerBackgroundFetchAsync } from "../utils/backgroundTask";
+import { setupIosSoundsForNotifications } from "../utils/iosSoundsSetup";
 
 // 🚨 NOUVEAU : Protection contre les reloads Expo en mode développement
 let isAbonnementProcessActive = false;
@@ -172,6 +173,21 @@ export default function TabLayout() {
       try {
         console.log("🧹 Nettoyage des données obsolètes au démarrage...");
         await cleanupObsoleteUserData();
+
+        // 🎵 NOUVEAU : Configuration des sons pour les notifications iOS
+        if (Platform.OS === "ios") {
+          console.log("═══════════════════════════════════════════════════════════");
+          console.log("🎵 [_layout] Démarrage configuration sons iOS...");
+          console.log("═══════════════════════════════════════════════════════════");
+          setupIosSoundsForNotifications()
+            .then(() => {
+              console.log("✅ [_layout] Configuration sons iOS terminée avec succès");
+            })
+            .catch((error) => {
+              console.error("❌ [_layout] Erreur configuration sons iOS:", error);
+              console.error("❌ [_layout] Stack:", error?.stack);
+            });
+        }
 
         // 🚀 CORRECTION : Nettoyer les données incohérentes
         const explicitConnection = await AsyncStorage.getItem(

@@ -1,4 +1,4 @@
-const { withDangerousMod, withPlugins } = require("@expo/config-plugins");
+const { withDangerousMod } = require("@expo/config-plugins");
 const fs = require("fs");
 const path = require("path");
 
@@ -8,7 +8,8 @@ const path = require("path");
  * Ce plugin :
  * 1. Copie tous les modules Swift depuis ios-native/ vers le projet iOS
  * 2. Ajoute les dépendances au Podfile
- * 3. Copie les sons d'Adhan dans le bundle iOS pour les notifications
+ * 
+ * Note: Les sons d'Adhan sont copiés au runtime (voir utils/iosSoundsSetup.ts)
  */
 const withIosNativeModules = (config) => {
   return withDangerousMod(config, [
@@ -17,7 +18,6 @@ const withIosNativeModules = (config) => {
       const projectRoot = config.modRequest.projectRoot;
       const iosRoot = config.modRequest.platformProjectRoot;
       const nativeModulesPath = path.join(projectRoot, "ios-native");
-      const soundsPath = path.join(projectRoot, "assets", "sounds");
 
       // Trouver le nom du projet iOS
       const iosProjectFiles = fs
@@ -28,7 +28,6 @@ const withIosNativeModules = (config) => {
         return config;
       }
       const projectName = iosProjectFiles[0].replace(".xcodeproj", "");
-      const iosProjectTargetDir = path.join(iosRoot, projectName);
 
       console.log(`📱 Configuration iOS pour: ${projectName}`);
 
@@ -55,28 +54,7 @@ const withIosNativeModules = (config) => {
         console.log("  ✅ Modules natifs copiés");
       }
 
-      // 2. COPIE DES SONS (CRITIQUE POUR IOS)
-      if (fs.existsSync(soundsPath)) {
-        console.log("  🎵 Copie des sons d'Adhan vers le bundle iOS...");
-        // S'assurer que le dossier de destination existe (normalement oui car c'est la racine du projet)
-        if (!fs.existsSync(iosProjectTargetDir)) {
-          console.warn(
-            `⚠️ Dossier cible ${iosProjectTargetDir} introuvable, tentative copie dans racine iOS`
-          );
-        }
-
-        fs.readdirSync(soundsPath).forEach((file) => {
-          if (file.endsWith(".mp3")) {
-            const src = path.join(soundsPath, file);
-            // Sur iOS, les sons doivent être à la racine du target pour être trouvés par UNNotificationSound
-            const dest = path.join(iosProjectTargetDir, file);
-            fs.copyFileSync(src, dest);
-          }
-        });
-        console.log("  ✅ Sons copiés avec succès");
-      }
-
-      // 3. CONFIGURATION PODFILE
+      // 2. CONFIGURATION PODFILE
       const podfilePath = path.join(iosRoot, "Podfile");
       if (fs.existsSync(podfilePath)) {
         let podfileContent = fs.readFileSync(podfilePath, "utf8");

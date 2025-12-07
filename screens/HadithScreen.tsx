@@ -82,6 +82,8 @@ export default function HadithScreen() {
   const [menuVisible, setMenuVisible] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [modalType, setModalType] = useState<"book" | "chapter">("book");
+  // 🍎 iOS: Navigation interne dans le menu (pas de 2ème modal)
+  const [menuView, setMenuView] = useState<"main" | "bookList" | "chapterList">("main");
   const windowHeight = Dimensions.get("window").height;
   const flatListRef = useRef<FlatList>(null);
 
@@ -109,10 +111,19 @@ export default function HadithScreen() {
     // Les hooks de réseau se mettront à jour automatiquement
   };
 
+  // 🍎 iOS: Fonctions pour gérer les sélections depuis le menu
+  const handleBookChange = (bookSlug: string) => {
+    setSelectedBook(bookSlug);
+  };
+
+  const handleChapterChange = (chapterId: number) => {
+    setSelectedChapter(chapterId);
+  };
+
   // Charger la liste des livres
   useEffect(() => {
-    if (!offlineAccess.canAccessOffline) return;
-
+    // Note: On charge TOUJOURS la liste des livres, même pour les non-premium
+    // L'accès aux hadiths sera vérifié plus tard
     setLoadingBooks(true);
 
     try {
@@ -147,7 +158,7 @@ export default function HadithScreen() {
       console.error("❌ Erreur chargement livres:", error);
       setLoadingBooks(false);
     }
-  }, [offlineAccess.canAccessOffline, t]);
+  }, [t]);
 
   // Charger les chapitres du livre sélectionné
   useEffect(() => {
@@ -157,7 +168,8 @@ export default function HadithScreen() {
     setCurrentPage(1);
     setSearchQuery(""); // Réinitialiser la recherche
 
-    if (!selectedBook || !offlineAccess.canAccessOffline) return;
+    if (!selectedBook) return;
+    // Note: On charge les chapitres même pour les non-premium (liste seulement)
 
     setLoadingChapters(true);
 
@@ -178,17 +190,18 @@ export default function HadithScreen() {
         setChapters([]);
         setLoadingChapters(false);
       });
-  }, [selectedBook, offlineAccess.canAccessOffline, t]);
+  }, [selectedBook, t]);
 
   // Fonction pour charger les hadiths
   const loadHadiths = useCallback(
     async (page: number) => {
-      if (
-        !selectedBook ||
-        selectedChapter === null ||
-        !offlineAccess.canAccessOffline
-      )
+      if (!selectedBook || selectedChapter === null) return;
+
+      // Bloquer seulement si hors ligne ET non-premium
+      if (offlineAccess.shouldShowOfflineMessage) {
+        console.log("⚠️ Accès hadiths bloqué : hors ligne sans premium");
         return;
+      }
 
       setLoadingHadiths(true);
 
@@ -217,7 +230,7 @@ export default function HadithScreen() {
         setLoadingHadiths(false);
       }
     },
-    [selectedBook, selectedChapter, offlineAccess.canAccessOffline]
+    [selectedBook, selectedChapter, offlineAccess.shouldShowOfflineMessage]
   );
 
   // Charger les hadiths quand on change de livre ou chapitre
@@ -228,7 +241,7 @@ export default function HadithScreen() {
   }, [
     selectedChapter,
     selectedBook,
-    offlineAccess.canAccessOffline,
+    offlineAccess.shouldShowOfflineMessage,
     t,
     loadHadiths,
   ]);
@@ -238,7 +251,7 @@ export default function HadithScreen() {
     if (
       selectedBook &&
       selectedChapter !== null &&
-      offlineAccess.canAccessOffline &&
+      !offlineAccess.shouldShowOfflineMessage && // En ligne OU premium
       currentPage > 1
     ) {
       loadHadiths(currentPage);
@@ -247,7 +260,7 @@ export default function HadithScreen() {
     currentPage,
     selectedBook,
     selectedChapter,
-    offlineAccess.canAccessOffline,
+    offlineAccess.shouldShowOfflineMessage,
     loadHadiths,
   ]);
 
@@ -510,59 +523,187 @@ export default function HadithScreen() {
             <SafeAreaView style={styles.menuOverlay}>
               <View style={styles.menuContent}>
                 <View style={styles.menuHeader}>
-                  <Text style={styles.menuTitle}>{t("hadith_navigation")}</Text>
+                  {/* 🍎 iOS: Bouton retour si on est dans une sous-vue */}
+                  {Platform.OS === 'ios' && menuView !== 'main' && (
+                    <TouchableOpacity
+                      style={styles.backButton}
+                      onPress={() => setMenuView("main")}
+                    >
+                      <Text style={styles.backButtonText}>‹ {t("back", "Retour")}</Text>
+                    </TouchableOpacity>
+                  )}
+                  <Text style={styles.menuTitle}>
+                    {Platform.OS === 'ios' && menuView === 'bookList' 
+                      ? t("select_book")
+                      : Platform.OS === 'ios' && menuView === 'chapterList'
+                      ? t("select_chapter")
+                      : t("hadith_navigation")}
+                  </Text>
                   <TouchableOpacity
                     style={styles.closeButton}
-                    onPress={() => setMenuVisible(false)}
+                    onPress={() => {
+                      setMenuVisible(false);
+                      setMenuView("main"); // Reset à la fermeture
+                    }}
                   >
                     <Text style={styles.closeButtonText}>✕</Text>
                   </TouchableOpacity>
                 </View>
 
-                {/* Sélection livre */}
-                <View style={styles.menuSection}>
-                  <Text style={styles.menuSectionTitle}>
-                    {t("select_book")}
-                  </Text>
-                  <TouchableOpacity
-                    style={styles.menuOption}
-                    onPress={() => {
-                      setModalType("book");
-                      setModalVisible(true);
-                      // Ne pas fermer le menu, seulement ouvrir la modal de sélection
-                    }}
-                  >
-                    <Text style={styles.menuOptionText}>
-                      {getSelectedBookLabel()}
-                    </Text>
-                    <Text style={styles.menuArrow}>›</Text>
-                  </TouchableOpacity>
-                </View>
+                {/* 🍎 iOS: Affichage conditionnel selon la vue */}
+                {Platform.OS === 'ios' ? (
+                  <>
+                    {menuView === 'main' && (
+                      <>
+                        {/* Sélection livre */}
+                        <View style={styles.menuSection}>
+                          <Text style={styles.menuSectionTitle}>
+                            {t("select_book")}
+                          </Text>
+                          <TouchableOpacity
+                            style={styles.menuOption}
+                            onPress={() => setMenuView("bookList")}
+                          >
+                            <Text style={styles.menuOptionText}>
+                              {getSelectedBookLabel()}
+                            </Text>
+                            <Text style={styles.menuArrow}>›</Text>
+                          </TouchableOpacity>
+                        </View>
 
-                {/* Sélection chapitre */}
-                {selectedBook && (
-                  <View style={styles.menuSection}>
-                    <Text style={styles.menuSectionTitle}>
-                      {t("select_chapter")}
-                    </Text>
-                    {loadingChapters ? (
-                      <ActivityIndicator style={styles.menuLoader} />
-                    ) : (
+                        {/* Sélection chapitre */}
+                        {selectedBook && (
+                          <View style={styles.menuSection}>
+                            <Text style={styles.menuSectionTitle}>
+                              {t("select_chapter")}
+                            </Text>
+                            {loadingChapters ? (
+                              <ActivityIndicator style={styles.menuLoader} />
+                            ) : (
+                              <TouchableOpacity
+                                style={styles.menuOption}
+                                onPress={() => setMenuView("chapterList")}
+                              >
+                                <Text style={styles.menuOptionText}>
+                                  {getSelectedChapterLabel()}
+                                </Text>
+                                <Text style={styles.menuArrow}>›</Text>
+                              </TouchableOpacity>
+                            )}
+                          </View>
+                        )}
+                      </>
+                    )}
+
+                    {menuView === 'bookList' && (
+                      <FlatList
+                        data={books}
+                        keyExtractor={(item) => item.bookSlug}
+                        renderItem={({ item }) => (
+                          <TouchableOpacity
+                            style={[
+                              styles.menuOption,
+                              selectedBook === item.bookSlug && styles.selectedOptionStyle
+                            ]}
+                            onPress={() => {
+                              handleBookChange(item.bookSlug);
+                              setMenuView("main"); // Retour à la vue principale
+                            }}
+                          >
+                            <View style={{ flex: 1 }}>
+                              <Text style={styles.menuOptionText}>{item.bookName}</Text>
+                              <Text style={styles.menuOptionSubtitle}>
+                                {item.category === "main" 
+                                  ? t("book_category_main", "Principal") 
+                                  : item.category === "additional"
+                                  ? t("book_category_additional", "Complémentaire")
+                                  : t("book_category_specialized", "Spécialisé")}
+                              </Text>
+                            </View>
+                            {selectedBook === item.bookSlug && (
+                              <Text style={styles.checkMark}>✓</Text>
+                            )}
+                          </TouchableOpacity>
+                        )}
+                      />
+                    )}
+
+                    {menuView === 'chapterList' && (
+                      <FlatList
+                        data={chapters}
+                        keyExtractor={(item) => item.id.toString()}
+                        renderItem={({ item }) => (
+                          <TouchableOpacity
+                            style={[
+                              styles.menuOption,
+                              selectedChapter === item.id && styles.selectedOptionStyle
+                            ]}
+                            onPress={() => {
+                              handleChapterChange(item.id);
+                              setMenuView("main"); // Retour à la vue principale
+                              setMenuVisible(false); // Ferme le menu après sélection
+                            }}
+                          >
+                            <View style={{ flex: 1 }}>
+                              <Text style={styles.menuOptionText}>
+                                {`${item.id || ""}. ${item.english || ""} ${item.arabic || ""}`.trim()}
+                              </Text>
+                            </View>
+                            {selectedChapter === item.id && (
+                              <Text style={styles.checkMark}>✓</Text>
+                            )}
+                          </TouchableOpacity>
+                        )}
+                      />
+                    )}
+                  </>
+                ) : (
+                  /* 🤖 Android: Comportement original */
+                  <>
+                    {/* Sélection livre */}
+                    <View style={styles.menuSection}>
+                      <Text style={styles.menuSectionTitle}>
+                        {t("select_book")}
+                      </Text>
                       <TouchableOpacity
                         style={styles.menuOption}
                         onPress={() => {
-                          setModalType("chapter");
+                          setModalType("book");
                           setModalVisible(true);
-                          setMenuVisible(false); // Fermer le menu seulement après sélection du chapitre
                         }}
                       >
                         <Text style={styles.menuOptionText}>
-                          {getSelectedChapterLabel()}
+                          {getSelectedBookLabel()}
                         </Text>
                         <Text style={styles.menuArrow}>›</Text>
                       </TouchableOpacity>
+                    </View>
+
+                    {/* Sélection chapitre */}
+                    {selectedBook && (
+                      <View style={styles.menuSection}>
+                        <Text style={styles.menuSectionTitle}>
+                          {t("select_chapter")}
+                        </Text>
+                        {loadingChapters ? (
+                          <ActivityIndicator style={styles.menuLoader} />
+                        ) : (
+                          <TouchableOpacity
+                            style={styles.menuOption}
+                            onPress={() => {
+                              setModalType("chapter");
+                              setModalVisible(true);
+                            }}
+                          >
+                            <Text style={styles.menuOptionText}>
+                              {getSelectedChapterLabel()}
+                            </Text>
+                            <Text style={styles.menuArrow}>›</Text>
+                          </TouchableOpacity>
+                        )}
+                      </View>
                     )}
-                  </View>
+                  </>
                 )}
               </View>
             </SafeAreaView>
@@ -833,10 +974,32 @@ const styles = StyleSheet.create({
     fontFamily: "ScheherazadeNew",
     flex: 1,
   },
+  menuOptionSubtitle: {
+    fontSize: 12,
+    color: "#8b7355",
+    fontStyle: "italic",
+    marginTop: 2,
+  },
   menuArrow: {
     fontSize: 20,
     color: "#ba9c34",
     marginLeft: 10,
+  },
+  backButton: {
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    marginRight: 10,
+  },
+  backButtonText: {
+    fontSize: 18,
+    color: "#ba9c34",
+    fontWeight: "600",
+  },
+  checkMark: {
+    fontSize: 18,
+    color: "#ba9c34",
+    marginLeft: 10,
+    fontWeight: "bold",
   },
   menuLoader: {
     marginVertical: 10,

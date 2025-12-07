@@ -1003,6 +1003,50 @@ export const SettingsProvider = ({
         return;
       }
 
+      // 🎵 NOUVEAU iOS : Vérifier que les sons sont disponibles avant de programmer
+      if (Platform.OS === "ios") {
+        try {
+          const { checkIosSoundsStatus } = await import(
+            "../utils/iosSoundsSetup"
+          );
+          const soundStatus = await checkIosSoundsStatus(adhanSound);
+
+          console.log("🎵 [saveAndReprogramAll] Vérification sons iOS...");
+          console.log(
+            `   Dossier Library/Sounds existe: ${
+              soundStatus.directoryExists ? "✅" : "❌"
+            }`
+          );
+          console.log(`   Sons disponibles: ${soundStatus.totalSounds}`);
+          console.log(
+            `   Son sélectionné (${adhanSound}.mp3): ${
+              soundStatus.currentSoundExists ? "✅ DISPONIBLE" : "❌ MANQUANT"
+            }`
+          );
+
+          if (!soundStatus.directoryExists || !soundStatus.currentSoundExists) {
+            console.log(
+              "⚠️ [saveAndReprogramAll] Sons non disponibles - tentative de setup..."
+            );
+            const { setupIosSoundsForNotifications } = await import(
+              "../utils/iosSoundsSetup"
+            );
+            await setupIosSoundsForNotifications();
+            console.log("✅ [saveAndReprogramAll] Setup sons terminé");
+          } else {
+            console.log("✅ [saveAndReprogramAll] Sons déjà disponibles");
+          }
+        } catch (error) {
+          console.error(
+            "⚠️ [saveAndReprogramAll] Erreur vérification sons iOS:",
+            error
+          );
+          console.log(
+            "   Programmation continuera avec son par défaut en fallback"
+          );
+        }
+      }
+
       console.log(
         "✅ [saveAndReprogramAll] Appel scheduleNotificationsFor2Days..."
       );

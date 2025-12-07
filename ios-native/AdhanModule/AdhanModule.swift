@@ -281,8 +281,38 @@ class AdhanModule: NSObject {
       if type == "ADHAN" {
           content.title = "🕌 \(prayerName.capitalized)"
           content.body = info["notifBody"] as? String ?? "Heure de la prière"
-          // Pour iOS, le son doit être dans le bundle principal
-          content.sound = UNNotificationSound(named: UNNotificationSoundName("\(adhanSound).mp3"))
+          
+          // Sur iOS, UNNotificationSound cherche les sons dans le bundle de l'app
+          // Les MP3 sont copiés dans le bundle lors du build EAS par le hook post-install
+          let soundFileName = "\(adhanSound).mp3"
+          NSLog("🎵 [AdhanModule] Configuration son pour notification: \(soundFileName)")
+          
+          // Vérifier si le fichier existe dans le bundle
+          if let soundPath = Bundle.main.path(forResource: adhanSound, ofType: "mp3") {
+              NSLog("✅ [AdhanModule] Son trouvé dans le bundle: \(soundPath)")
+              // UNNotificationSound utilise le son depuis le bundle
+              content.sound = UNNotificationSound(named: UNNotificationSoundName(soundFileName))
+          } else {
+              NSLog("⚠️ [AdhanModule] Son '\(soundFileName)' NON TROUVÉ dans le bundle")
+              NSLog("   Le hook EAS Build n'a peut-être pas copié les MP3")
+              NSLog("   Utilisation du son par défaut")
+              
+              // Lister les fichiers MP3 disponibles dans le bundle pour debug
+              if let bundlePath = Bundle.main.resourcePath {
+                  let fileManager = FileManager.default
+                  if let files = try? fileManager.contentsOfDirectory(atPath: bundlePath) {
+                      let mp3Files = files.filter { $0.hasSuffix(".mp3") }
+                      if mp3Files.isEmpty {
+                          NSLog("   📂 Aucun fichier MP3 trouvé dans le bundle")
+                      } else {
+                          NSLog("   📂 Fichiers MP3 dans le bundle: \(mp3Files.joined(separator: ", "))")
+                      }
+                  }
+              }
+              
+              content.sound = UNNotificationSound.default
+          }
+          
           content.categoryIdentifier = "PRAYER_NOTIFICATION"
           content.userInfo = ["type": "adhan", "prayer": prayerName]
       } else if type == "DHIKR" {
@@ -350,6 +380,37 @@ class AdhanModule: NSObject {
       }
     }
     userDefaults.synchronize()
+  }
+  
+  @objc func listAvailableSounds(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) {
+    NSLog("🎵 [listAvailableSounds] Recherche des MP3 dans le bundle...")
+    
+    guard let bundlePath = Bundle.main.resourcePath else {
+        NSLog("❌ [listAvailableSounds] Impossible d'accéder au resourcePath")
+        resolve(["sounds": [], "count": 0, "bundlePath": "N/A"])
+        return
+    }
+    
+    let fileManager = FileManager.default
+    
+    do {
+        let files = try fileManager.contentsOfDirectory(atPath: bundlePath)
+        let mp3Files = files.filter { $0.hasSuffix(".mp3") }
+        
+        NSLog("✅ [listAvailableSounds] \(mp3Files.count) fichiers MP3 trouvés dans le bundle")
+        mp3Files.forEach { file in
+            NSLog("   - \(file)")
+        }
+        
+        resolve([
+            "sounds": mp3Files,
+            "count": mp3Files.count,
+            "bundlePath": bundlePath
+        ])
+    } catch {
+        NSLog("❌ [listAvailableSounds] Erreur lecture bundle: \(error.localizedDescription)")
+        reject("ERROR", "Failed to list sounds: \(error.localizedDescription)", error)
+    }
   }
   
   @objc func debugNotifications(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) {

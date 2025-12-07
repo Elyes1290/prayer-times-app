@@ -24,6 +24,7 @@ import {
   ScrollView,
   DeviceEventEmitter,
   Animated,
+  Platform,
 } from "react-native";
 import { useTranslation } from "react-i18next";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -204,6 +205,8 @@ export default function QuranScreen() {
   const [reciterModalVisible, setReciterModalVisible] = useState(false);
   const [menuVisible, setMenuVisible] = useState(false);
   const [modalType, setModalType] = useState<"sourate" | "reciter">("sourate");
+  // 🍎 iOS: Navigation interne dans le menu (pas de 2ème modal)
+  const [menuView, setMenuView] = useState<"main" | "sourateList">("main");
   const [showDownloadsView, setShowDownloadsView] = useState(false); // 🆕 Vue cachée de gestion des téléchargements
   const flatListRef = useRef<FlatList>(null);
   const windowHeight = Dimensions.get("window").height;
@@ -2795,37 +2798,178 @@ export default function QuranScreen() {
           animationType="slide"
           transparent={true}
           visible={menuVisible}
-          onRequestClose={() => setMenuVisible(false)}
+          onRequestClose={() => {
+            setMenuVisible(false);
+            setMenuView("main"); // Reset à la fermeture
+          }}
         >
           <SafeAreaView style={styles.menuOverlay}>
             <View style={styles.menuContent}>
               <View style={styles.menuHeader}>
-                <Text style={styles.menuTitle}>{t("navigation")}</Text>
+                {/* 🍎 iOS: Bouton retour si on est dans une sous-vue */}
+                {Platform.OS === "ios" && menuView !== "main" && (
+                  <TouchableOpacity
+                    style={styles.backButton}
+                    onPress={() => setMenuView("main")}
+                  >
+                    <Text style={styles.backButtonText}>
+                      ‹ {t("back", "Retour")}
+                    </Text>
+                  </TouchableOpacity>
+                )}
+                <Text style={styles.menuTitle}>
+                  {Platform.OS === "ios" && menuView === "sourateList"
+                    ? t("choose_sourate")
+                    : t("navigation")}
+                </Text>
                 <TouchableOpacity
                   style={styles.closeButton}
-                  onPress={() => setMenuVisible(false)}
+                  onPress={() => {
+                    setMenuVisible(false);
+                    setMenuView("main"); // Reset à la fermeture
+                  }}
                 >
                   <Text style={styles.closeButtonText}>✕</Text>
                 </TouchableOpacity>
               </View>
 
-              {/* Section Sourate */}
-              <View style={styles.menuSection}>
-                <Text style={styles.menuSectionTitle}>{t("sourate")}</Text>
-                <TouchableOpacity
-                  style={styles.menuOption}
-                  onPress={() => {
-                    setModalType("sourate");
-                    setModalVisible(true);
-                    // Ne pas fermer le menu tout de suite
-                  }}
-                >
-                  <Text style={styles.menuOptionText}>
-                    {getSelectedSourateLabel()}
-                  </Text>
-                  <Text style={styles.menuArrow}>›</Text>
-                </TouchableOpacity>
-              </View>
+              {/* 🍎 iOS: Affichage conditionnel selon la vue */}
+              {Platform.OS === "ios" ? (
+                <>
+                  {menuView === "main" && (
+                    <>
+                      {/* Section Sourate */}
+                      <View style={styles.menuSection}>
+                        <Text style={styles.menuSectionTitle}>
+                          {t("sourate")}
+                        </Text>
+                        <TouchableOpacity
+                          style={styles.menuOption}
+                          onPress={() => setMenuView("sourateList")}
+                        >
+                          <Text style={styles.menuOptionText}>
+                            {getSelectedSourateLabel()}
+                          </Text>
+                          <Text style={styles.menuArrow}>›</Text>
+                        </TouchableOpacity>
+                      </View>
+
+                      {/* Section Récitateur (premium uniquement) - Dans la vue main iOS */}
+                      {user.isPremium && getAvailableReciters().length > 0 && (
+                        <View style={styles.menuSection}>
+                          <Text style={styles.menuSectionTitle}>
+                            {t("reciter")}
+                          </Text>
+                          <TouchableOpacity
+                            style={styles.menuOption}
+                            onPress={() => {
+                              setModalType("reciter");
+                              setReciterModalVisible(true);
+                              setMenuVisible(false); // Fermer le menu
+                            }}
+                          >
+                            <Text style={styles.menuOptionText}>
+                              {selectedReciter ||
+                                t("quran.reciter", "Récitateur")}
+                            </Text>
+                            <Text style={styles.menuArrow}>›</Text>
+                          </TouchableOpacity>
+                        </View>
+                      )}
+
+                      {/* Section Téléchargements (premium uniquement) - Dans la vue main iOS */}
+                      {user.isPremium && (
+                        <View style={styles.menuSection}>
+                          <Text style={styles.menuSectionTitle}>
+                            {t("downloads_manager") || "Téléchargements"}
+                          </Text>
+                          <TouchableOpacity
+                            style={styles.menuOption}
+                            onPress={() => {
+                              setMenuVisible(false);
+                              setShowDownloadsView(true);
+                            }}
+                          >
+                            <View
+                              style={{
+                                flexDirection: "row",
+                                alignItems: "center",
+                                flex: 1,
+                              }}
+                            >
+                              <MaterialCommunityIcons
+                                name="download-multiple"
+                                size={20}
+                                color="#4ECDC4"
+                                style={{ marginRight: 8 }}
+                              />
+                              <Text style={styles.menuOptionText}>
+                                {t("manage_downloads") ||
+                                  "Gérer les téléchargements"}
+                              </Text>
+                            </View>
+                            <Text style={styles.menuArrow}>›</Text>
+                          </TouchableOpacity>
+                        </View>
+                      )}
+                    </>
+                  )}
+
+                  {menuView === "sourateList" && (
+                    <FlatList
+                      data={sourates}
+                      keyExtractor={(item) => item.id.toString()}
+                      renderItem={({ item }) => (
+                        <TouchableOpacity
+                          style={[
+                            styles.menuOption,
+                            selectedSourate === item.id &&
+                              styles.selectedOptionStyle,
+                          ]}
+                          onPress={() => {
+                            setSelectedSourate(item.id);
+                            setMenuView("main"); // Retour à la vue principale
+                            setMenuVisible(false); // Fermer le menu après sélection
+                          }}
+                        >
+                          <View style={{ flex: 1 }}>
+                            <Text style={styles.menuOptionText}>
+                              {item.id}. {item.name_simple}
+                            </Text>
+                            <Text style={styles.menuOptionSubtitle}>
+                              {item.name_arabic}
+                            </Text>
+                          </View>
+                          {selectedSourate === item.id && (
+                            <Text style={styles.checkMark}>✓</Text>
+                          )}
+                        </TouchableOpacity>
+                      )}
+                    />
+                  )}
+                </>
+              ) : (
+                /* 🤖 Android: Comportement original */
+                <>
+                  {/* Section Sourate */}
+                  <View style={styles.menuSection}>
+                    <Text style={styles.menuSectionTitle}>{t("sourate")}</Text>
+                    <TouchableOpacity
+                      style={styles.menuOption}
+                      onPress={() => {
+                        setModalType("sourate");
+                        setModalVisible(true);
+                        // Ne pas fermer le menu tout de suite
+                      }}
+                    >
+                      <Text style={styles.menuOptionText}>
+                        {getSelectedSourateLabel()}
+                      </Text>
+                      <Text style={styles.menuArrow}>›</Text>
+                    </TouchableOpacity>
+                  </View>
+                </>
+              )}
 
               {/* Section Récitateur (premium uniquement) */}
               {user.isPremium && getAvailableReciters().length > 0 && (
@@ -3584,6 +3728,18 @@ const styles = StyleSheet.create({
     color: "#523f13",
     fontFamily: "ScheherazadeNew",
     flex: 1,
+  },
+  menuOptionSubtitle: {
+    fontSize: 12,
+    color: "#8b7355",
+    fontStyle: "italic",
+    marginTop: 2,
+  },
+  checkMark: {
+    fontSize: 18,
+    color: "#4CAF50",
+    fontWeight: "bold",
+    marginLeft: 10,
   },
   menuArrow: {
     fontSize: 20,

@@ -13,6 +13,7 @@ import {
 import { Stack } from "expo-router";
 import { useSettings } from "../contexts/SettingsContext";
 import { computePrayerTimesForNotifications } from "../utils/prayerTimes";
+import { checkIosSoundsStatus } from "../utils/iosSoundsSetup";
 
 export default function DebugNotificationsScreen() {
   const [debugInfo, setDebugInfo] = useState<any>(null);
@@ -401,40 +402,169 @@ export default function DebugNotificationsScreen() {
             </TouchableOpacity>
 
             {Platform.OS === "ios" && (
-              <TouchableOpacity
-                style={[styles.button, { backgroundColor: "#9C27B0" }]}
-                onPress={async () => {
-                  try {
-                    addLog("═══════════════════════════════════════");
-                    addLog("🔄 [TEST] Simulation Background Fetch iOS");
-                    addLog("═══════════════════════════════════════");
-                    
-                    const { registerBackgroundFetchAsync } = await import(
-                      "../utils/backgroundTask"
-                    );
-                    
-                    // Réenregistrer la tâche (au cas où)
-                    await registerBackgroundFetchAsync();
-                    addLog("✅ Tâche Background Fetch réenregistrée");
-                    
-                    addLog("ℹ️ INFO: iOS déclenche le Background Fetch selon:");
-                    addLog("   • Usage de l'app (fréquence d'ouverture)");
-                    addLog("   • Niveau de batterie");
-                    addLog("   • Connexion réseau");
-                    addLog("   • Minimum configuré: 24 heures (quotidien)");
-                    addLog("");
-                    addLog("💡 Pour tester immédiatement:");
-                    addLog("   1. Fermer complètement l'app");
-                    addLog("   2. Xcode > Debug > Simulate Background Fetch");
-                    addLog("   3. Ou attendre ~24h en usage normal");
-                    addLog("═══════════════════════════════════════");
-                  } catch (error) {
-                    addLog(`❌ ERREUR: ${error}`);
-                  }
-                }}
-              >
-                <Text style={styles.buttonText}>🔄 Info Background Fetch (iOS)</Text>
-              </TouchableOpacity>
+              <>
+                <TouchableOpacity
+                  style={[styles.button, { backgroundColor: "#9C27B0" }]}
+                  onPress={async () => {
+                    try {
+                      addLog("═══════════════════════════════════════");
+                      addLog("🔄 [TEST] Simulation Background Fetch iOS");
+                      addLog("═══════════════════════════════════════");
+
+                      const { registerBackgroundFetchAsync } = await import(
+                        "../utils/backgroundTask"
+                      );
+
+                      // Réenregistrer la tâche (au cas où)
+                      await registerBackgroundFetchAsync();
+                      addLog("✅ Tâche Background Fetch réenregistrée");
+
+                      addLog(
+                        "ℹ️ INFO: iOS déclenche le Background Fetch selon:"
+                      );
+                      addLog("   • Usage de l'app (fréquence d'ouverture)");
+                      addLog("   • Niveau de batterie");
+                      addLog("   • Connexion réseau");
+                      addLog("   • Minimum configuré: 24 heures (quotidien)");
+                      addLog("");
+                      addLog("💡 Pour tester immédiatement:");
+                      addLog("   1. Fermer complètement l'app");
+                      addLog("   2. Xcode > Debug > Simulate Background Fetch");
+                      addLog("   3. Ou attendre ~24h en usage normal");
+                      addLog("═══════════════════════════════════════");
+                    } catch (error) {
+                      addLog(`❌ ERREUR: ${error}`);
+                    }
+                  }}
+                >
+                  <Text style={styles.buttonText}>
+                    🔄 Info Background Fetch (iOS)
+                  </Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                  style={[styles.button, { backgroundColor: "#FF9800" }]}
+                  onPress={async () => {
+                    try {
+                      addLog("═══════════════════════════════════════");
+                      addLog("🎵 [VÉRIFICATION] Sons dans Library/Sounds");
+                      addLog("═══════════════════════════════════════");
+
+                      const status = await checkIosSoundsStatus(adhanSound);
+
+                      addLog(`📂 Chemin Library: ${status.libraryPath}`);
+                      addLog(`📂 Chemin Sounds: ${status.soundsPath}`);
+                      addLog(
+                        `📁 Dossier existe: ${
+                          status.directoryExists ? "✅ OUI" : "❌ NON"
+                        }`
+                      );
+                      addLog(`🎵 Total MP3 disponibles: ${status.totalSounds}`);
+
+                      if (status.availableSounds.length > 0) {
+                        addLog("📋 Liste des sons disponibles:");
+                        status.availableSounds.forEach((sound) => {
+                          const isCurrent = sound === `${adhanSound}.mp3`;
+                          addLog(
+                            `   ${isCurrent ? "👉" : "  "} ${sound}${
+                              isCurrent ? " (ACTUEL)" : ""
+                            }`
+                          );
+                        });
+                      } else {
+                        addLog("⚠️ Aucun son MP3 trouvé dans Library/Sounds");
+                        addLog(
+                          "💡 Solution: Utiliser le bouton 'Copier Sons' ci-dessous"
+                        );
+                      }
+
+                      addLog("");
+                      addLog(`🎯 Son sélectionné: ${adhanSound}.mp3`);
+                      if (status.currentSoundExists) {
+                        addLog(`✅ Le son sélectionné EST disponible`);
+                        addLog(`📍 Chemin: ${status.currentSoundPath}`);
+                      } else {
+                        addLog(`❌ Le son sélectionné N'EST PAS disponible`);
+                        addLog(
+                          `⚠️ Les notifications sonneront avec le son par défaut`
+                        );
+                      }
+                      addLog("═══════════════════════════════════════");
+                    } catch (error) {
+                      addLog(`❌ ERREUR vérification sons: ${error}`);
+                    }
+                  }}
+                >
+                  <Text style={styles.buttonText}>🎵 Vérifier Sons iOS</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                  style={[styles.button, { backgroundColor: "#4CAF50" }]}
+                  onPress={async () => {
+                    try {
+                      addLog("═══════════════════════════════════════");
+                      addLog("📥 [COPIE SONS] Début de la copie...");
+                      addLog("═══════════════════════════════════════");
+
+                      // Intercepter console.log temporairement pour capturer TOUS les logs
+                      const originalLog = console.log;
+                      const originalError = console.error;
+
+                      console.log = (...args: any[]) => {
+                        originalLog(...args);
+                        const message = args
+                          .map((arg) =>
+                            typeof arg === "object"
+                              ? JSON.stringify(arg, null, 2)
+                              : String(arg)
+                          )
+                          .join(" ");
+                        addLog(message);
+                      };
+
+                      console.error = (...args: any[]) => {
+                        originalError(...args);
+                        const message = args
+                          .map((arg) =>
+                            typeof arg === "object"
+                              ? JSON.stringify(arg, null, 2)
+                              : String(arg)
+                          )
+                          .join(" ");
+                        addLog(`❌ ${message}`);
+                      };
+
+                      // Importer et appeler la fonction
+                      const { setupIosSoundsForNotifications } = await import(
+                        "../utils/iosSoundsSetup"
+                      );
+                      await setupIosSoundsForNotifications();
+
+                      // Restaurer console.log
+                      console.log = originalLog;
+                      console.error = originalError;
+
+                      addLog("═══════════════════════════════════════");
+                      addLog("✅ [COPIE SONS] Terminé !");
+                      addLog("💡 Utilisez 'Vérifier Sons' pour confirmer");
+                      addLog("═══════════════════════════════════════");
+
+                      Alert.alert(
+                        "✅ Copie terminée",
+                        "Les sons ont été copiés dans Library/Sounds.\n\nVérifiez les logs pour voir le détail."
+                      );
+                    } catch (error) {
+                      addLog(`❌ ERREUR FATALE copie sons: ${error}`);
+                      addLog(`Stack: ${(error as Error)?.stack}`);
+                      Alert.alert("❌ Erreur", `Échec de la copie: ${error}`);
+                    }
+                  }}
+                >
+                  <Text style={styles.buttonText}>
+                    📥 Copier Sons Maintenant
+                  </Text>
+                </TouchableOpacity>
+              </>
             )}
 
             <View style={styles.row}>

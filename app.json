@@ -57,13 +57,18 @@
       ],
       "expo-font",
       "expo-background-fetch",
-      "./plugins/withIosNativeModules.js"
+      "./plugins/withIosNativeModules.js",
+      "./plugins/withIosSounds.js",
+      "expo-asset"
     ],
     "experiments": {
       "typedRoutes": true
     },
     "developmentClient": true,
-    "assetBundlePatterns": ["assets/sounds*"],
+    "assetBundlePatterns": [
+      "assets/**/*",
+      "assets/sounds/*.mp3"
+    ],
     "extra": {
       "router": {},
       "eas": {
