@@ -66,7 +66,8 @@ function buildDhikrNotifText(namespace: string, dhikr: DhikrItem): string {
 
 export async function scheduleAllDhikrNotifications(
   prayerTimes: Record<string, Date>,
-  dhikrSettings: DhikrSettings
+  dhikrSettings: DhikrSettings,
+  dateKey?: string // 🔑 Nouvelle param optionnelle pour identifier la date
 ): Promise<void> {
   const now = new Date();
   const minTimeGap = 30 * 1000; // 30 secondes en millisecondes
@@ -89,7 +90,13 @@ export async function scheduleAllDhikrNotifications(
 
           const dhikr = getRandomDhikrFromNamespace("afterSalah");
           if (dhikr) {
+            // 🔑 Génère une clé unique incluant la date
+            const uniqueKey = dateKey
+              ? `afterSalah_${prayer}_${dateKey}`
+              : `afterSalah_${prayer}_${Date.now()}`;
+
             dhikrNotifs.push({
+              key: uniqueKey, // 🔑 Ajout de la clé unique
               type: "afterSalah",
               triggerMillis: adjustedDhikrTime,
               title: i18n.t("dhikr_dua"),
@@ -108,7 +115,13 @@ export async function scheduleAllDhikrNotifications(
         if (notifTime > now) {
           const dhikr = getRandomDhikrFromNamespace("dhikrMorning");
           if (dhikr) {
+            // 🔑 Génère une clé unique incluant la date
+            const uniqueKey = dateKey
+              ? `dhikrMorning_${prayer}_${dateKey}`
+              : `dhikrMorning_${prayer}_${Date.now()}`;
+
             dhikrNotifs.push({
+              key: uniqueKey, // 🔑 Ajout de la clé unique
               type: "dhikrMorning",
               triggerMillis: notifTime.getTime(),
               title: i18n.t("dhikr_dua"),
@@ -126,7 +139,13 @@ export async function scheduleAllDhikrNotifications(
         if (notifTime > now) {
           const dhikr = getRandomDhikrFromNamespace("eveningDhikr");
           if (dhikr) {
+            // 🔑 Génère une clé unique incluant la date
+            const uniqueKey = dateKey
+              ? `eveningDhikr_${prayer}_${dateKey}`
+              : `eveningDhikr_${prayer}_${Date.now()}`;
+
             dhikrNotifs.push({
+              key: uniqueKey, // 🔑 Ajout de la clé unique
               type: "eveningDhikr",
               triggerMillis: notifTime.getTime(),
               title: i18n.t("dhikr_dua"),
@@ -144,7 +163,13 @@ export async function scheduleAllDhikrNotifications(
         if (notifTime > now) {
           const dhikr = getRandomDhikrFromNamespace("selectedDua");
           if (dhikr) {
+            // 🔑 Génère une clé unique incluant la date
+            const uniqueKey = dateKey
+              ? `selectedDua_${prayer}_${dateKey}`
+              : `selectedDua_${prayer}_${Date.now()}`;
+
             dhikrNotifs.push({
+              key: uniqueKey, // 🔑 Ajout de la clé unique
               type: "selectedDua",
               triggerMillis: notifTime.getTime(),
               title: i18n.t("dhikr_dua"),

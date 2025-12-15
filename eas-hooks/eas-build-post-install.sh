@@ -34,32 +34,42 @@ TARGET_DIR="ios/$PROJECT_NAME"
 echo "📱 Projet iOS: $PROJECT_NAME"
 echo "📂 Dossier cible: $TARGET_DIR"
 
-# Vérifier que le dossier Android raw existe (contient les VRAIS MP3)
-ANDROID_RAW_DIR="android/app/src/main/res/raw"
-if [ ! -d "$ANDROID_RAW_DIR" ]; then
-  echo "❌ Dossier $ANDROID_RAW_DIR introuvable!"
+# ✅ iOS EXIGE le format .caf (Core Audio Format) pour les notifications
+# Les MP3 ne fonctionnent PAS avec UNNotificationSound !
+IOS_SOUNDS_DIR="assets/sounds-ios"
+if [ ! -d "$IOS_SOUNDS_DIR" ]; then
+  echo "❌ Dossier $IOS_SOUNDS_DIR introuvable!"
+  echo "   ℹ️ Créez le dossier assets/sounds-ios/ avec les fichiers .caf"
   exit 1
 fi
 
-# Copier TOUS les MP3 depuis le dossier Android (VRAIS Adhan complets)
-echo "🎵 Copie des fichiers MP3 depuis Android vers le bundle iOS..."
-echo "   (Utilise les VRAIS Adhan, pas les previews de 20 secondes)"
+# Copier les fichiers .caf (format natif iOS pour notifications)
+echo "🎵 Copie des fichiers .caf depuis assets/sounds-ios/ vers le bundle iOS..."
+echo "   (Format CAF = Core Audio Format, SEUL format accepté par iOS pour notifications)"
 COPIED=0
-for mp3_file in $ANDROID_RAW_DIR/*.mp3; do
-  if [ -f "$mp3_file" ]; then
-    filename=$(basename "$mp3_file")
-    cp -v "$mp3_file" "$TARGET_DIR/"
+for caf_file in $IOS_SOUNDS_DIR/*.caf; do
+  if [ -f "$caf_file" ]; then
+    filename=$(basename "$caf_file")
+    cp -v "$caf_file" "$TARGET_DIR/"
     echo "  ✅ Copié: $filename"
     ((COPIED++))
   fi
 done
 
-echo "✅ $COPIED fichiers MP3 copiés dans le bundle iOS"
+echo "✅ $COPIED fichiers .caf copiés dans le bundle iOS"
 echo ""
-echo "ℹ️ Le plugin Expo (withIosSounds.js) va ajouter ces fichiers au projet Xcode"
+
+# 🎵 SUPPRIMÉ : Plus besoin de copier les MP3 dans le bundle iOS
+# Les MP3 complets sont maintenant dans assets/soundsComplete-ios/
+# et sont chargés via expo-asset (comme les previews)
+echo "ℹ️ MP3 complets chargés via assets React Native (assets/soundsComplete-ios/)"
+echo "   Plus besoin de les copier dans le bundle iOS"
+
+echo ""
+echo "ℹ️ Le plugin Expo (withIosSounds.js) va ajouter les fichiers .caf au projet Xcode"
 echo "   pendant le prebuild, garantissant qu'ils sont dans Copy Bundle Resources"
 echo ""
 echo "═══════════════════════════════════════════════════════════"
 echo "✅ Configuration terminée !"
-echo "ℹ️ Les sons seront disponibles pour UNNotificationSound"
+echo "ℹ️ Sons .caf → notifications | MP3 complets → assets React Native"
 echo "═══════════════════════════════════════════════════════════"

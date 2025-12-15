@@ -12,7 +12,8 @@ export async function schedulePrayerNotifications(
   prayerTimes: Record<string, Date>,
   adhanSound: string,
   remindersEnabled: boolean,
-  reminderOffset: number
+  reminderOffset: number,
+  dateKey?: string // 🔑 Nouvelle param optionnelle pour identifier la date
 ) {
   const now = new Date();
   const minTimeGap = 30 * 1000; // 30 secondes en millisecondes
@@ -33,7 +34,13 @@ export async function schedulePrayerNotifications(
           ? now.getTime() + minTimeGap
           : reminderTime;
 
+      // 🔑 Génère une clé unique incluant la date pour éviter les collisions
+      const uniqueKey = dateKey
+        ? `${prayer}_${dateKey}`
+        : `${prayer}_${Date.now()}`;
+
       return {
+        key: uniqueKey, // 🔑 Ajout de la clé unique
         prayer,
         triggerMillis: adjustedReminderTime,
         title: i18n.t("prayer_reminder_title"),

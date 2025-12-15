@@ -8,6 +8,9 @@ RCT_EXTERN_METHOD(getSavedAutoLocation:(RCTPromiseResolveBlock)resolve rejecter:
 
 // Notification Settings
 RCT_EXTERN_METHOD(saveNotificationSettings:(NSDictionary *)settings)
+RCT_EXTERN_METHOD(setupNotificationDelegate)
+RCT_EXTERN_METHOD(getNotificationLogs:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject)
+RCT_EXTERN_METHOD(clearNotificationLogs)
 
 // Adhan Sound & Volume
 RCT_EXTERN_METHOD(setAdhanSound:(NSString *)adhanSound)
@@ -29,6 +32,7 @@ RCT_EXTERN_METHOD(debugNotifications:(RCTPromiseResolveBlock)resolve rejecter:(R
 // Debug
 RCT_EXTERN_METHOD(debugLog:(NSString *)message)
 RCT_EXTERN_METHOD(listAvailableSounds:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject)
+RCT_EXTERN_METHOD(getFullAdhanPath:(NSString *)soundName resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject)
 
 // Widget Update (stubs for compatibility)
 RCT_EXTERN_METHOD(forceUpdateWidgets)

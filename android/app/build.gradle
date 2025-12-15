@@ -173,9 +173,18 @@ android {
         jniLibs {
             useLegacyPackaging (findProperty('expo.useLegacyPackaging')?.toBoolean() ?: false)
         }
+        // 🍎 Exclure les assets et dossiers iOS du build Android pour réduire la taille de l'APK
+        excludes += [
+            '**/soundsComplete-ios/**',
+            '**/sounds-ios/**',
+            '**/ios/**',
+            '**/ios-native/**'
+        ]
     }
     androidResources {
         ignoreAssetsPattern '!.svn:!.git:!.ds_store:!*.scc:!CVS:!thumbs.db:!picasa.ini:!*~'
+        // 🍎 Exclure les assets et dossiers iOS du build Android pour réduire la taille de l'APK
+        ignoreAssetsPattern '**/soundsComplete-ios/**:**/sounds-ios/**:**/ios/**:**/ios-native/**'
     }
 }
 

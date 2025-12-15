@@ -7,6 +7,8 @@ import React
 class AdhanModule: NSObject {
   
   private let userDefaults = UserDefaults.standard
+  // 🕌 App Group pour partager avec le Widget
+  private let appGroupDefaults = UserDefaults(suiteName: "group.com.drogbinho.myadhan")
   private let prefs = "adhan_prefs"
   private let settingsPrefs = "prayer_times_settings"
   
@@ -15,6 +17,25 @@ class AdhanModule: NSObject {
   @objc
   static func requiresMainQueueSetup() -> Bool {
     return false
+  }
+  
+  // 🔧 Activer le délégué de notifications pour debug
+  @objc func setupNotificationDelegate() {
+    NSLog("🔧 [AdhanModule] Configuration du délégué de notifications...")
+    UNUserNotificationCenter.current().delegate = NotificationDelegate.shared
+    NSLog("✅ [AdhanModule] Délégué configuré - les logs de notifications seront visibles")
+  }
+  
+  // 📋 Récupérer les logs du délégué de notifications
+  @objc func getNotificationLogs(_ resolve: RCTPromiseResolveBlock, rejecter reject: RCTPromiseRejectBlock) {
+    let logs = NotificationDelegate.shared.getCapturedLogs()
+    resolve(["logs": logs, "count": logs.count])
+  }
+  
+  // 🗑️ Nettoyer les logs du délégué
+  @objc func clearNotificationLogs() {
+    NotificationDelegate.shared.clearCapturedLogs()
+    NSLog("🗑️ [AdhanModule] Logs de notifications nettoyés")
   }
   
   // MARK: - Location Management
@@ -126,9 +147,8 @@ class AdhanModule: NSObject {
     requestPermissions { granted in
         NSLog("🔐 Permission notifications: \(granted ? "✅ GRANTED" : "❌ DENIED")")
           if granted {
-            NSLog("🗑️ Annulation adhans existants...")
-            self.cancelNotifications(prefix: "adhan")
-            NSLog("✅ Annulation terminée, début programmation...")
+            // ✅ NE PAS annuler ici - JS gère l'annulation avant la boucle
+            NSLog("📝 Programmation sans annulation préalable...")
             self.scheduleNotificationsInternal(prayerTimes, adhanSound: adhanSound, type: "ADHAN")
             NSLog("═════════════════════════════════════════════")
             NSLog("✅ [scheduleAdhanAlarms] TERMINÉ")
@@ -144,10 +164,9 @@ class AdhanModule: NSObject {
     NSLog("⏰ [AdhanModule] Programmation RAPPELS iOS (\(reminders.count) rappels)")
     
     var formattedReminders: [String: Any] = [:]
-    for (index, reminder) in reminders.enumerated() {
-        let time = Int(Date().timeIntervalSince1970)
-        let prayer = reminder["prayer"] as? String ?? "unknown"
-        let key = "reminder_\(prayer)_\(index)_\(time)"
+    for reminder in reminders {
+        // 🔑 UTILISER LA CLÉ UNIQUE ENVOYÉE DEPUIS JS (contient la date)
+        let key = reminder["key"] as? String ?? "reminder_unknown_\(Int(Date().timeIntervalSince1970))"
         
         var item = reminder
         // Mapper triggerMillis (Android) -> triggerAtMillis (iOS convention locale)
@@ -158,7 +177,8 @@ class AdhanModule: NSObject {
     
     requestPermissions { granted in
         if granted {
-            self.cancelNotifications(prefix: "reminder")
+            // ✅ NE PAS annuler ici - JS gère l'annulation avant la boucle
+            NSLog("📝 Programmation sans annulation préalable...")
             self.scheduleNotificationsInternal(formattedReminders, adhanSound: "default", type: "REMINDER")
   }
     }
@@ -171,10 +191,11 @@ class AdhanModule: NSObject {
     NSLog("📿 [AdhanModule] Programmation DHIKR iOS (\(dhikrNotifications.count) dhikrs)")
     
     var formattedDhikrs: [String: Any] = [:]
-    for (index, dhikr) in dhikrNotifications.enumerated() {
+    for dhikr in dhikrNotifications {
+        // 🔑 UTILISER LA CLÉ UNIQUE ENVOYÉE DEPUIS JS (contient la date)
         let prayer = dhikr["prayer"] as? String ?? "unknown"
         let type = dhikr["type"] as? String ?? "dhikr"
-        let key = "dhikr_\(prayer)_\(type)_\(index)"
+        let key = dhikr["key"] as? String ?? "dhikr_\(prayer)_\(type)_\(Int(Date().timeIntervalSince1970))"
         
         var item = dhikr
         if let tm = dhikr["triggerMillis"] { item["triggerAtMillis"] = tm }
@@ -185,7 +206,8 @@ class AdhanModule: NSObject {
     
     requestPermissions { granted in
         if granted {
-            self.cancelNotifications(prefix: "dhikr")
+            // ✅ NE PAS annuler ici - JS gère l'annulation avant la boucle
+            NSLog("📝 Programmation sans annulation préalable...")
             self.scheduleNotificationsInternal(formattedDhikrs, adhanSound: "default", type: "DHIKR")
         }
     }
@@ -280,41 +302,79 @@ class AdhanModule: NSObject {
       
       if type == "ADHAN" {
           content.title = "🕌 \(prayerName.capitalized)"
-          content.body = info["notifBody"] as? String ?? "Heure de la prière"
+          var baseBody = info["notifBody"] as? String ?? "Heure de la prière"
           
-          // Sur iOS, UNNotificationSound cherche les sons dans le bundle de l'app
-          // Les MP3 sont copiés dans le bundle lors du build EAS par le hook post-install
-          let soundFileName = "\(adhanSound).mp3"
-          NSLog("🎵 [AdhanModule] Configuration son pour notification: \(soundFileName)")
+          // ℹ️ iOS seulement : ajouter un indice pour jouer l'Adhan complet via clic
+          if let iosHint = info["notifHintIos"] as? String, !iosHint.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+              baseBody = "\(baseBody)\n\n\(iosHint)"
+          }
+          
+          content.body = baseBody
+          
+          // 🎵 SONS iOS : FORMAT .caf OBLIGATOIRE !
+          // iOS n'accepte QUE le format .caf (Core Audio Format) pour les notifications
+          // Les MP3 ne fonctionnent PAS avec UNNotificationSound !
+          let soundFileName = "\(adhanSound).caf"
+          
+          NSLog("═════════════════════════════════════════════")
+          NSLog("🎵 [AdhanModule] CONFIGURATION SON NOTIFICATION")
+          NSLog("═════════════════════════════════════════════")
+          NSLog("🕌 Prière: \(prayerName)")
+          NSLog("🎵 Son demandé: \(soundFileName)")
+          NSLog("📂 Recherche dans le bundle...")
           
           // Vérifier si le fichier existe dans le bundle
-          if let soundPath = Bundle.main.path(forResource: adhanSound, ofType: "mp3") {
-              NSLog("✅ [AdhanModule] Son trouvé dans le bundle: \(soundPath)")
-              // UNNotificationSound utilise le son depuis le bundle
-              content.sound = UNNotificationSound(named: UNNotificationSoundName(soundFileName))
-          } else {
-              NSLog("⚠️ [AdhanModule] Son '\(soundFileName)' NON TROUVÉ dans le bundle")
-              NSLog("   Le hook EAS Build n'a peut-être pas copié les MP3")
-              NSLog("   Utilisation du son par défaut")
+          if let soundPath = Bundle.main.path(forResource: adhanSound, ofType: "caf") {
+              NSLog("✅ [AdhanModule] SUCCÈS: Fichier .caf trouvé!")
+              NSLog("📍 Chemin complet: \(soundPath)")
               
-              // Lister les fichiers MP3 disponibles dans le bundle pour debug
+              // Vérifier que le fichier existe vraiment
+              let fileManager = FileManager.default
+              if fileManager.fileExists(atPath: soundPath) {
+                  let fileSize = try? fileManager.attributesOfItem(atPath: soundPath)[.size] as? Int ?? 0
+                  NSLog("✅ Fichier existe physiquement")
+                  NSLog("📊 Taille: \(fileSize ?? 0) bytes")
+                  
+                  // Créer le son de notification avec le fichier .caf
+                  content.sound = UNNotificationSound(named: UNNotificationSoundName(soundFileName))
+                  NSLog("✅ UNNotificationSound créé avec: \(soundFileName)")
+              } else {
+                  NSLog("❌ ERREUR: Chemin trouvé mais fichier n'existe pas!")
+                  content.sound = UNNotificationSound.default
+              }
+          } else {
+              NSLog("❌ [AdhanModule] ERREUR: Fichier .caf '\(soundFileName)' NON TROUVÉ")
+              NSLog("📂 Listing des fichiers .caf disponibles dans le bundle:")
+              
               if let bundlePath = Bundle.main.resourcePath {
                   let fileManager = FileManager.default
                   if let files = try? fileManager.contentsOfDirectory(atPath: bundlePath) {
-                      let mp3Files = files.filter { $0.hasSuffix(".mp3") }
-                      if mp3Files.isEmpty {
-                          NSLog("   📂 Aucun fichier MP3 trouvé dans le bundle")
+                      let cafFiles = files.filter { $0.hasSuffix(".caf") }
+                      if cafFiles.isEmpty {
+                          NSLog("   ❌ AUCUN fichier .caf dans le bundle!")
+                          NSLog("   ⚠️ Le plugin Expo n'a pas copié les fichiers .caf")
+                          NSLog("   💡 Vérifiez que assets/sounds-ios/ contient les fichiers .caf")
                       } else {
-                          NSLog("   📂 Fichiers MP3 dans le bundle: \(mp3Files.joined(separator: ", "))")
+                          NSLog("   📋 \(cafFiles.count) fichiers .caf trouvés:")
+                          cafFiles.forEach { file in
+                              NSLog("      • \(file)")
+                          }
                       }
                   }
               }
               
+              NSLog("⚠️ Utilisation du son par défaut iOS")
               content.sound = UNNotificationSound.default
           }
+          NSLog("═════════════════════════════════════════════")
           
           content.categoryIdentifier = "PRAYER_NOTIFICATION"
-          content.userInfo = ["type": "adhan", "prayer": prayerName]
+          // Inclure le nom du son pour que React Native puisse jouer le MP3 complet
+          content.userInfo = [
+              "type": "adhan",
+              "prayer": prayerName,
+              "soundName": adhanSound  // 🎵 Nom du son (sans extension)
+          ]
       } else if type == "DHIKR" {
           content.title = info["title"] as? String ?? "📿 Dhikr"
           content.body = info["body"] as? String ?? "N'oubliez pas vos invocations"
@@ -364,13 +424,29 @@ class AdhanModule: NSObject {
   @objc func startWidgetUpdateScheduler() {}
   
   @objc func saveTodayPrayerTimes(_ prayerTimes: [String: Any]) {
-    // Implémentation simple pour sauvegarder les horaires locaux
+    NSLog("🕌 [saveTodayPrayerTimes] Sauvegarde des horaires du jour...")
+    
+    // Sauvegarder dans UserDefaults standard (pour l'app)
     for (key, value) in prayerTimes {
       if let strVal = value as? String {
           userDefaults.set(strVal, forKey: "\(settingsPrefs)_today_\(key)")
       }
     }
     userDefaults.synchronize()
+    
+    // 📱 SAUVEGARDER DANS APP GROUP POUR LE WIDGET iOS
+    if let appGroupDefaults = appGroupDefaults {
+      for (key, value) in prayerTimes {
+        if let strVal = value as? String {
+            appGroupDefaults.set(strVal, forKey: "today_prayer_\(key)")
+            NSLog("  ✅ Widget: \(key) = \(strVal)")
+        }
+      }
+      appGroupDefaults.synchronize()
+      NSLog("✅ [saveTodayPrayerTimes] Horaires sauvegardés pour le widget iOS")
+    } else {
+      NSLog("⚠️ [saveTodayPrayerTimes] App Group non disponible - le widget ne se mettra pas à jour")
+    }
   }
   
   @objc func savePrayerTimesForTomorrow(_ prayerTimes: [String: Any]) {
@@ -383,7 +459,7 @@ class AdhanModule: NSObject {
   }
   
   @objc func listAvailableSounds(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) {
-    NSLog("🎵 [listAvailableSounds] Recherche des MP3 dans le bundle...")
+    NSLog("🎵 [listAvailableSounds] Recherche des fichiers .caf dans le bundle...")
     
     guard let bundlePath = Bundle.main.resourcePath else {
         NSLog("❌ [listAvailableSounds] Impossible d'accéder au resourcePath")
@@ -395,21 +471,50 @@ class AdhanModule: NSObject {
     
     do {
         let files = try fileManager.contentsOfDirectory(atPath: bundlePath)
-        let mp3Files = files.filter { $0.hasSuffix(".mp3") }
+        let cafFiles = files.filter { $0.hasSuffix(".caf") }
         
-        NSLog("✅ [listAvailableSounds] \(mp3Files.count) fichiers MP3 trouvés dans le bundle")
-        mp3Files.forEach { file in
+        NSLog("✅ [listAvailableSounds] \(cafFiles.count) fichiers .caf trouvés dans le bundle")
+        cafFiles.forEach { file in
             NSLog("   - \(file)")
         }
         
         resolve([
-            "sounds": mp3Files,
-            "count": mp3Files.count,
+            "sounds": cafFiles,
+            "count": cafFiles.count,
             "bundlePath": bundlePath
         ])
     } catch {
         NSLog("❌ [listAvailableSounds] Erreur lecture bundle: \(error.localizedDescription)")
         reject("ERROR", "Failed to list sounds: \(error.localizedDescription)", error)
+    }
+  }
+  
+  // 🎵 NOUVEAU : Obtenir le chemin du MP3 complet pour la lecture in-app
+  @objc func getFullAdhanPath(_ soundName: NSString, resolver resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) {
+    NSLog("🎵 [getFullAdhanPath] Recherche du MP3 complet: \(soundName)")
+    
+    let soundNameStr = soundName as String
+    
+    // Chercher le MP3 complet dans le bundle
+    if let mp3Path = Bundle.main.path(forResource: soundNameStr, ofType: "mp3") {
+        NSLog("✅ [getFullAdhanPath] MP3 complet trouvé: \(mp3Path)")
+        resolve(["path": mp3Path, "exists": true])
+    } else {
+        NSLog("❌ [getFullAdhanPath] MP3 complet NON TROUVÉ: \(soundNameStr).mp3")
+        
+        // Lister les MP3 disponibles pour debug
+        if let bundlePath = Bundle.main.resourcePath {
+            let fileManager = FileManager.default
+            if let files = try? fileManager.contentsOfDirectory(atPath: bundlePath) {
+                let mp3Files = files.filter { $0.hasSuffix(".mp3") }
+                NSLog("📂 MP3 disponibles dans le bundle:")
+                mp3Files.forEach { file in
+                    NSLog("   - \(file)")
+                }
+            }
+        }
+        
+        reject("NOT_FOUND", "MP3 file not found: \(soundNameStr).mp3", nil)
     }
   }
   

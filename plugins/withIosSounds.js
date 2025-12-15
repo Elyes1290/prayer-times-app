@@ -1,12 +1,11 @@
-const {
-  withDangerousMod,
-  withXcodeProject,
-} = require("@expo/config-plugins");
+const { withDangerousMod, withXcodeProject } = require("@expo/config-plugins");
 const fs = require("fs");
 const path = require("path");
 
 /**
- * Plugin Expo - Étape 1 : Copier les fichiers MP3
+ * Plugin Expo - Étape 1 : Copier les fichiers CAF pour iOS
+ * iOS EXIGE le format .caf (Core Audio Format) pour les sons de notification
+ * Les MP3 ne fonctionnent PAS avec UNNotificationSound !
  */
 const withIosSoundFiles = (config) => {
   return withDangerousMod(config, [
@@ -14,10 +13,8 @@ const withIosSoundFiles = (config) => {
     async (config) => {
       const projectRoot = config.modRequest.projectRoot;
       const iosRoot = path.join(projectRoot, "ios");
-      const androidSoundsDir = path.join(
-        projectRoot,
-        "android/app/src/main/res/raw"
-      );
+      // ✅ iOS UNIQUEMENT : Utiliser les fichiers .caf depuis assets/sounds-ios/
+      const iosSoundsDir = path.join(projectRoot, "assets/sounds-ios");
 
       // Trouver le nom du projet iOS
       const xcodeProjects = fs
@@ -32,39 +29,58 @@ const withIosSoundFiles = (config) => {
       const projectName = xcodeProjects[0].replace(".xcodeproj", "");
       const targetDir = path.join(iosRoot, projectName);
 
-      console.log("🎵 [withIosSounds] Configuration des sons pour iOS...");
+      console.log(
+        "🎵 [withIosSounds] Configuration des sons iOS (format .caf)..."
+      );
       console.log(`📂 Projet: ${projectName}`);
-      console.log(`📂 Dossier cible: ${targetDir}`);
+      console.log(`📂 Source: assets/sounds-ios/ (format CAF natif iOS)`);
+      console.log(`📂 Destination: ${targetDir}`);
 
       // Créer le dossier cible s'il n'existe pas
       if (!fs.existsSync(targetDir)) {
         fs.mkdirSync(targetDir, { recursive: true });
       }
 
-      // Copier tous les MP3 depuis Android
-      if (!fs.existsSync(androidSoundsDir)) {
+      // Vérifier que le dossier assets/sounds-ios existe
+      if (!fs.existsSync(iosSoundsDir)) {
         console.log(
-          `❌ [withIosSounds] Dossier Android ${androidSoundsDir} introuvable`
+          `❌ [withIosSounds] Dossier ${iosSoundsDir} introuvable`
         );
+        console.log(`   ℹ️ Créez le dossier assets/sounds-ios/ avec les fichiers .caf`);
         return config;
       }
 
-      const mp3Files = fs
-        .readdirSync(androidSoundsDir)
-        .filter((file) => file.endsWith(".mp3"));
+      // Copier les fichiers .caf (format natif iOS pour notifications)
+      const cafFiles = fs
+        .readdirSync(iosSoundsDir)
+        .filter((file) => file.endsWith(".caf"));
 
       console.log(
-        `🎵 [withIosSounds] Copie de ${mp3Files.length} fichiers MP3...`
+        `🎵 [withIosSounds] Copie de ${cafFiles.length} fichiers .caf...`
       );
 
-      mp3Files.forEach((file) => {
-        const sourcePath = path.join(androidSoundsDir, file);
-        const destPath = path.join(targetDir, file);
-        fs.copyFileSync(sourcePath, destPath);
-        console.log(`  ✅ Copié: ${file}`);
-      });
+      if (cafFiles.length === 0) {
+        console.log("⚠️ [withIosSounds] AUCUN fichier .caf trouvé !");
+        console.log(`   Vérifiez que ${iosSoundsDir} contient des fichiers .caf`);
+      } else {
+        cafFiles.forEach((file) => {
+          const sourcePath = path.join(iosSoundsDir, file);
+          const destPath = path.join(targetDir, file);
+          fs.copyFileSync(sourcePath, destPath);
+          console.log(`  ✅ Copié (notification): ${file}`);
+        });
 
-      console.log("✅ [withIosSounds] Fichiers MP3 copiés physiquement");
+        console.log(
+          `✅ [withIosSounds] ${cafFiles.length} fichiers .caf copiés (format natif iOS)`
+        );
+      }
+
+      // 🎵 SUPPRIMÉ : Plus besoin de copier les MP3 dans le bundle iOS
+      // Les MP3 complets sont maintenant dans assets/soundsComplete-ios/
+      // et sont chargés via expo-asset (comme les previews)
+      console.log(
+        "ℹ️ [withIosSounds] MP3 complets chargés via assets React Native (assets/soundsComplete-ios/)"
+      );
 
       return config;
     },
@@ -72,8 +88,8 @@ const withIosSoundFiles = (config) => {
 };
 
 /**
- * Plugin Expo - Étape 2 : Ajouter une phase de build pour copier les MP3
- * Xcode copiera les MP3 dans le bundle à chaque build
+ * Plugin Expo - Étape 2 : Ajouter une phase de build pour copier les .caf
+ * Xcode copiera les fichiers .caf dans le bundle à chaque build
  */
 const withIosSoundsXcode = (config) => {
   return withXcodeProject(config, (config) => {
@@ -84,37 +100,41 @@ const withIosSoundsXcode = (config) => {
     try {
       const target = xcodeProject.getFirstTarget().uuid;
 
-      // Ajouter une phase de script qui copie les MP3 depuis Android vers Resources
+      // Ajouter une phase de script qui copie UNIQUEMENT les .caf vers le bundle
+      // Les MP3 complets sont maintenant chargés via assets React Native
       const buildPhase = xcodeProject.addBuildPhase(
         [],
         "PBXShellScriptBuildPhase",
-        "Copy Adhan MP3 Sounds",
+        "Copy Adhan Sounds (CAF only)",
         target,
         {
           shellPath: "/bin/sh",
           shellScript: `
-# Copier les sons Adhan depuis Android vers le bundle
-SOUNDS_SRC="$SRCROOT/../android/app/src/main/res/raw"
+# Copier les sons Adhan dans le bundle
+SOUNDS_CAF="$SRCROOT/../assets/sounds-ios"
 SOUNDS_DEST="$BUILT_PRODUCTS_DIR/$PRODUCT_NAME.app"
 
-if [ -d "$SOUNDS_SRC" ]; then
-  echo "🎵 Copie des sons Adhan dans le bundle..."
-  cp "$SOUNDS_SRC"/*.mp3 "$SOUNDS_DEST/" 2>/dev/null || true
-  echo "✅ Sons copiés dans: $SOUNDS_DEST"
+# Copier les .caf pour les notifications
+if [ -d "$SOUNDS_CAF" ]; then
+  echo "🎵 Copie des sons .caf (notifications)..."
+  cp "$SOUNDS_CAF"/*.caf "$SOUNDS_DEST/" 2>/dev/null || true
+  echo "✅ Sons .caf copiés"
 else
-  echo "⚠️ Dossier source introuvable: $SOUNDS_SRC"
+  echo "⚠️ Dossier .caf introuvable: $SOUNDS_CAF"
 fi
+
+# ℹ️ Les MP3 complets sont chargés via assets React Native (assets/soundsComplete-ios/)
+# Plus besoin de les copier dans le bundle
+
+echo "✅ Sons copiés dans: $SOUNDS_DEST"
 `,
         }
       );
 
       if (buildPhase) {
-        console.log(
-          "  ✅ Phase de build 'Copy Adhan MP3 Sounds' ajoutée"
-        );
-        console.log(
-          "  ℹ️ Les MP3 seront copiés dans le bundle à chaque build"
-        );
+        console.log("  ✅ Phase de build 'Copy Adhan Sounds (CAF only)' ajoutée");
+        console.log("  ℹ️ .caf (notifications) copiés à chaque build");
+        console.log("  ℹ️ MP3 complets chargés via assets React Native (assets/soundsComplete-ios/)");
       }
 
       console.log("✅ [withIosSoundsXcode] Configuration Xcode terminée");
@@ -134,4 +154,3 @@ module.exports = (config) => {
   config = withIosSoundsXcode(config);
   return config;
 };
-

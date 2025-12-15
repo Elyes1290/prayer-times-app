@@ -98,7 +98,12 @@ class PrayerTimesCacheService {
     if (!latitude || !longitude) {
       throw new Error("Latitude and longitude are required");
     }
-    const dateStr = date.toISOString().split("T")[0];
+    // 🐛 FIX iOS: Utiliser l'heure locale au lieu d'UTC pour éviter les décalages de jour
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const dateStr = `${year}-${month}-${day}`;
+    
     const locationKey = `${latitude.toFixed(4)}_${longitude.toFixed(4)}`;
     return `${dateStr}_${locationKey}_${calcMethod}`;
   }

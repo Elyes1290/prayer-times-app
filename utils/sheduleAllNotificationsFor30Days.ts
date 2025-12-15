@@ -13,7 +13,6 @@ import { notificationDebugLog } from "./logger";
 // Types pour la fonction
 type Location = { latitude: number; longitude: number };
 type PrayerLabel = "Fajr" | "Sunrise" | "Dhuhr" | "Asr" | "Maghrib" | "Isha";
-type PrayerTimes = Record<PrayerLabel, Date>;
 
 type DhikrSettings = {
   enabledAfterSalah: boolean;
@@ -119,9 +118,10 @@ export async function scheduleNotificationsFor2Days({
     const dates = [];
     const labels = [];
 
-    // 🚀 iOS : Programme pour 2 jours (Background Fetch reprogramme automatiquement toutes les ~2h)
-    // 🤖 Android : Programme pour 2 jours (le Worker natif reprogramme quotidiennement)
-    const daysToSchedule = 2;
+    // 🚀 Fenêtre glissante :
+    // - iOS : 3 jours max (~54 notifs à 18/jour) pour rester sous la limite ~64
+    // - Android : on garde 2 jours, le worker natif reprogramme déjà quotidiennement
+    const daysToSchedule = Platform.OS === "ios" ? 3 : 2;
 
     notificationDebugLog(
       `📅 Programmation pour ${daysToSchedule} jours (${Platform.OS})`
@@ -153,6 +153,9 @@ export async function scheduleNotificationsFor2Days({
     notificationDebugLog(
       `📅 Dates à traiter: ${dates.map((d) => d.toISOString())}`
     );
+
+    // 🔑 ACCUMULATION : Stocker tous les adhans de tous les jours
+    let allAdhanNotifications: Record<string, any> = {};
 
     for (let i = 0; i < dates.length; i++) {
       const date = dates[i];
@@ -218,8 +221,8 @@ export async function scheduleNotificationsFor2Days({
             label !== "today" ||
             (label === "today" && timestamp > now.getTime());
 
-          // 🚀 iOS : Limite 2 jours (2880 min), Android : 2 jours (2880 min)
-          const maxMinutes = 2880;
+          // 🚀 Limite en minutes basée sur daysToSchedule (3j iOS, 2j Android)
+          const maxMinutes = daysToSchedule * 24 * 60;
 
           notificationDebugLog(
             `  🔍 ${prayer} (${label}): ${minutesUntilPrayer}min, shouldSchedule=${shouldSchedule}, inLimit=${
@@ -242,7 +245,7 @@ export async function scheduleNotificationsFor2Days({
             );
 
             // 🔑 Identifiant UNIQUE avec la date complète pour éviter les collisions iOS
-            const dateKey = date.toISOString().split('T')[0]; // Format: "2025-12-07"
+            const dateKey = date.toISOString().split("T")[0]; // Format: "2025-12-07"
             const uniqueKey = `${prayer}_${dateKey}`;
 
             acc[uniqueKey] = {
@@ -252,10 +255,15 @@ export async function scheduleNotificationsFor2Days({
               prayer: prayer, // 🔧 iOS compatibility
               notifTitle: i18n.t("adhan_notification_title"),
               notifBody: i18n.t("adhan_notification_body", { prayer }),
+              // ℹ️ Indication iOS uniquement : cliquer pour jouer l'Adhan complet
+              notifHintIos:
+                Platform.OS === "ios"
+                  ? i18n.t("adhan_notification_tap_full")
+                  : undefined,
               isToday: label === "today",
             };
           } else {
-            const dateKey = date.toISOString().split('T')[0];
+            const dateKey = date.toISOString().split("T")[0];
             notificationDebugLog(
               `⏭️ ${prayer}_${dateKey} ignoré car ${
                 !shouldSchedule
@@ -291,12 +299,12 @@ export async function scheduleNotificationsFor2Days({
         `⚙️ settings.adhanEnabled = ${settings.adhanEnabled}`
       );
 
-      // Programme l'adhan si activé
+      // 🔑 ACCUMULATION : Ajouter les adhans de ce jour à la liste globale
       if (settings.adhanEnabled && Object.keys(formattedTimes).length > 0) {
         notificationDebugLog(
-          `🔔 Programmation ${
+          `📝 Accumulation ${
             Object.keys(formattedTimes).length
-          } alarmes adhan:`,
+          } alarmes adhan pour ${label}:`,
           Object.entries(formattedTimes).map(([key, value]) => ({
             [key]: {
               ...value,
@@ -306,62 +314,23 @@ export async function scheduleNotificationsFor2Days({
           }))
         );
 
-        console.log("🔍 [iOS DEBUG] Appel scheduleAdhanAlarms...");
-        console.log(
-          "🔍 [iOS DEBUG] formattedTimes:",
-          JSON.stringify(formattedTimes, null, 2)
-        );
-        console.log("🔍 [iOS DEBUG] adhanSound:", adhanSound);
-        console.log("🔍 [iOS DEBUG] Platform:", Platform.OS);
-        console.log(
-          "🔍 [iOS DEBUG] AdhanModule exists?",
-          !!NativeModules.AdhanModule
-        );
-
-        // 🔥 LOG VISIBLE DANS 3UTOOLS
-        if (Platform.OS === "ios" && NativeModules.AdhanModule?.debugLog) {
-          NativeModules.AdhanModule.debugLog(
-            `🔔 [JS] Appel scheduleAdhanAlarms avec ${
-              Object.keys(formattedTimes).length
-            } entrées`
-          );
-        }
-
-        try {
-          await NativeModules.AdhanModule.scheduleAdhanAlarms(
-            formattedTimes,
-            adhanSound
-          );
-          console.log("✅ [iOS DEBUG] scheduleAdhanAlarms terminé sans erreur");
-
-          // 🔥 LOG VISIBLE DANS 3UTOOLS
-          if (Platform.OS === "ios" && NativeModules.AdhanModule?.debugLog) {
-            NativeModules.AdhanModule.debugLog(
-              "✅ [JS] scheduleAdhanAlarms terminé"
-            );
-          }
-        } catch (error) {
-          console.error("❌ [iOS DEBUG] Erreur scheduleAdhanAlarms:", error);
-
-          // 🔥 LOG VISIBLE DANS 3UTOOLS
-          if (Platform.OS === "ios" && NativeModules.AdhanModule?.debugLog) {
-            NativeModules.AdhanModule.debugLog(
-              `❌ [JS] Erreur scheduleAdhanAlarms: ${error}`
-            );
-          }
-        }
+        // Ajouter tous les adhans de ce jour à l'accumulation globale
+        Object.assign(allAdhanNotifications, formattedTimes);
       } else {
-        notificationDebugLog("🔕 Aucune alarme adhan à programmer");
+        notificationDebugLog(`🔕 Aucune alarme adhan pour ${label}`);
       }
 
       // Programme les reminders si activés (utilise les timestamps synchronisés)
       if (remindersEnabled && Object.keys(synchronizedPrayerTimes).length > 0) {
         notificationDebugLog("⏰ Programmation des reminders");
+        // 🔑 Passer le dateKey pour identifier de manière unique chaque reminder
+        const dateKey = date.toISOString().split("T")[0]; // Format: "2025-12-08"
         await schedulePrayerNotifications(
           synchronizedPrayerTimes,
           adhanSound,
           remindersEnabled,
-          reminderOffset
+          reminderOffset,
+          dateKey // 🔑 Clé unique pour éviter les collisions
         );
       } else {
         notificationDebugLog("⏰ Aucun reminder à programmer");
@@ -374,16 +343,102 @@ export async function scheduleNotificationsFor2Days({
 
       if (anyDhikrEnabled && Object.keys(synchronizedPrayerTimes).length > 0) {
         notificationDebugLog("📿 Programmation des dhikr");
+        // 🔑 Passer le dateKey pour identifier de manière unique chaque dhikr
+        const dateKey = date.toISOString().split("T")[0]; // Format: "2025-12-08"
         await scheduleAllDhikrNotifications(
           synchronizedPrayerTimes,
-          dhikrSettings
+          dhikrSettings,
+          dateKey // 🔑 Clé unique pour éviter les collisions
         );
       } else {
         notificationDebugLog("📿 Aucun dhikr à programmer");
       }
     }
 
+    // 🔔 PROGRAMMATION GLOBALE : Programmer TOUS les adhans en une seule fois
+    let truncated = false;
+    // 🧭 Garde-fou iOS : ne jamais dépasser ~54 notifs Adhan (18/jour * 3j)
+    if (Platform.OS === "ios") {
+      const entries = Object.entries(allAdhanNotifications);
+      if (entries.length > 54) {
+        truncated = true;
+        notificationDebugLog(
+          `⚠️ Trop de notifications (${entries.length}) → tronquage à 54`
+        );
+        const sorted = entries.sort(
+          (a, b) => (a[1].time as number) - (b[1].time as number)
+        );
+        const kept = sorted.slice(0, 54);
+        allAdhanNotifications = Object.fromEntries(kept);
+      }
+    }
+
+    if (
+      settings.adhanEnabled &&
+      Object.keys(allAdhanNotifications).length > 0
+    ) {
+      notificationDebugLog(
+        `🔔 Programmation FINALE de ${
+          Object.keys(allAdhanNotifications).length
+        } alarmes adhan pour tous les jours`
+      );
+
+      console.log("🔍 [iOS DEBUG] Appel scheduleAdhanAlarms GLOBAL...");
+      console.log(
+        `🔍 [iOS DEBUG] Total adhans: ${
+          Object.keys(allAdhanNotifications).length
+        }`
+      );
+      console.log("🔍 [iOS DEBUG] adhanSound:", adhanSound);
+
+      // 🔥 LOG VISIBLE DANS 3UTOOLS
+      if (Platform.OS === "ios" && NativeModules.AdhanModule?.debugLog) {
+        NativeModules.AdhanModule.debugLog(
+          `🔔 [JS] Appel scheduleAdhanAlarms GLOBAL avec ${
+            Object.keys(allAdhanNotifications).length
+          } adhans`
+        );
+      }
+
+      try {
+        await NativeModules.AdhanModule.scheduleAdhanAlarms(
+          allAdhanNotifications,
+          adhanSound
+        );
+        console.log(
+          "✅ [iOS DEBUG] scheduleAdhanAlarms GLOBAL terminé sans erreur"
+        );
+
+        // 🔥 LOG VISIBLE DANS 3UTOOLS
+        if (Platform.OS === "ios" && NativeModules.AdhanModule?.debugLog) {
+          NativeModules.AdhanModule.debugLog(
+            "✅ [JS] scheduleAdhanAlarms GLOBAL terminé avec succès"
+          );
+        }
+      } catch (error) {
+        console.error(
+          "❌ [iOS DEBUG] Erreur scheduleAdhanAlarms GLOBAL:",
+          error
+        );
+
+        // 🔥 LOG VISIBLE DANS 3UTOOLS
+        if (Platform.OS === "ios" && NativeModules.AdhanModule?.debugLog) {
+          NativeModules.AdhanModule.debugLog(
+            `❌ [JS] Erreur scheduleAdhanAlarms GLOBAL: ${error}`
+          );
+        }
+      }
+    } else {
+      notificationDebugLog("🔕 Aucune alarme adhan à programmer au total");
+    }
+
     notificationDebugLog("✨ Planification terminée avec succès");
+
+    // ✅ Retourner un résumé (utilisé par le background fetch pour log)
+    return {
+      adhanCount: Object.keys(allAdhanNotifications).length,
+      truncated,
+    };
   } catch (error: any) {
     console.error("❌ ERREUR CRITIQUE dans scheduleNotificationsFor2Days:");
     console.error("  Message:", error?.message || "Pas de message");

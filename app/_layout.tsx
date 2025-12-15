@@ -1,9 +1,17 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import * as NavigationBar from "expo-navigation-bar";
+import * as Notifications from "expo-notifications";
 import { Tabs } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import React, { useEffect } from "react";
-import { Platform, View, Animated } from "react-native";
+import {
+  Platform,
+  View,
+  Animated,
+  NativeModules,
+  NativeEventEmitter,
+  AppState,
+} from "react-native";
 import { SettingsProvider } from "../contexts/SettingsContext";
 import { FavoritesProvider, useFavorites } from "../contexts/FavoritesContext";
 import { PremiumProvider, usePremium } from "../contexts/PremiumContext";
@@ -19,6 +27,11 @@ import { verifyAuth } from "../utils/apiClient";
 import { isOfflineMode } from "../utils/networkUtils";
 import { registerBackgroundFetchAsync } from "../utils/backgroundTask";
 import { setupIosSoundsForNotifications } from "../utils/iosSoundsSetup";
+import {
+  AdhanAudioProvider,
+  useAdhanAudio,
+} from "../contexts/AdhanAudioContext";
+import { AdhanStopButton } from "../components/AdhanStopButton";
 
 // 🚨 NOUVEAU : Protection contre les reloads Expo en mode développement
 let isAbonnementProcessActive = false;
@@ -79,7 +92,6 @@ if (__DEV__) {
     };
   }
 }
-
 
 type IconName =
   | "home"
@@ -149,7 +161,8 @@ const TabBarIcon = ({ icon, color, size, focused }: TabBarIconProps) => {
   );
 };
 
-export default function TabLayout() {
+// 🎵 Composant interne qui utilise le contexte AdhanAudio
+function TabLayoutContent() {
   const insets = useSafeAreaInsets();
   const { forceLogout } = usePremium();
   const { forceReset } = useFavorites();
@@ -162,6 +175,231 @@ export default function TabLayout() {
       NavigationBar.setBehaviorAsync("overlay-swipe");
     }
   }, []);
+
+  // 🎵 NOUVEAU : Écouter les clics sur notifications d'Adhan pour jouer le son complet
+  // Utilise le module natif AVAudioPlayer sur iOS
+  const { playAdhan, state: adhanState } = useAdhanAudio();
+
+  // 🔍 DEBUG : Vérifier que playAdhan est disponible
+  console.log("🔍 [_layout] playAdhan disponible:", typeof playAdhan);
+
+  // Mémoriser le traitement de la dernière notification (cold start / resume)
+  const handledLastResponseRef = React.useRef(false);
+  const appState = React.useRef(AppState.currentState);
+  const isAdhanPlayingRef = React.useRef(false);
+  const lastHandledNotificationIdRef = React.useRef<string | null>(null);
+
+  // Suivre l'état de lecture pour éviter les relances
+  useEffect(() => {
+    isAdhanPlayingRef.current = !!adhanState?.isPlaying;
+  }, [adhanState?.isPlaying]);
+
+  // 🎯 Gestion du cas où l'app est ouverte par clic sur notification (y compris cold start)
+  useEffect(() => {
+    if (Platform.OS !== "ios") return; // Seulement pour iOS
+
+    console.log("═══════════════════════════════════════════");
+    console.log("🎵 [_layout] Listener de notifications ACTIVÉ");
+    console.log("═══════════════════════════════════════════");
+
+    // 🎵 NOUVEAU : Écouter l'événement natif quand une notification d'Adhan arrive en foreground
+    // Cela permet de lancer le MP3 complet automatiquement car iOS arrête le .caf quand la notification disparaît
+    let nativeEventSubscription: any = null;
+    try {
+      const { AdhanAudioPlayer } = NativeModules;
+      if (AdhanAudioPlayer) {
+        const eventEmitter = new NativeEventEmitter(AdhanAudioPlayer);
+        nativeEventSubscription = eventEmitter.addListener(
+          "AdhanNotificationReceived",
+          async (event: { soundName: string; prayer: string }) => {
+            try {
+              console.log("═══════════════════════════════════════════");
+              console.log(
+                "🔔 [_layout] ÉVÉNEMENT NATIF: Notification Adhan reçue en foreground"
+              );
+              console.log(`🎵 Son: ${event.soundName}`);
+              console.log(`🕌 Prière: ${event.prayer}`);
+              console.log(
+                "💡 Lancement du MP3 complet pour continuer après le .caf..."
+              );
+              console.log("═══════════════════════════════════════════");
+
+              await playAdhan(event.soundName, event.prayer);
+
+              showGlobalToast({
+                type: "info",
+                title: `🕌 ${event.prayer}`,
+                message: "Adhan complet en lecture",
+                duration: 3000,
+              });
+            } catch (error: any) {
+              console.error(
+                "❌ [_layout] Erreur lors de la lecture automatique:",
+                error
+              );
+            }
+          }
+        );
+        console.log(
+          "✅ [_layout] Listener natif AdhanNotificationReceived configuré"
+        );
+      }
+    } catch (error) {
+      console.warn(
+        "⚠️ [_layout] Impossible de configurer le listener natif:",
+        error
+      );
+    }
+
+    // Factorisé: traitement d'une réponse de notification (clic)
+    const handleNotificationResponse = async (
+      response: Notifications.NotificationResponse
+    ) => {
+      try {
+        console.log("═══════════════════════════════════════════");
+        console.log("🔔 [_layout] NOTIFICATION CLIQUÉE !");
+        console.log("═══════════════════════════════════════════");
+
+        const notifId = response.notification.request.identifier;
+        // Éviter de retraiter la même notification (utile après un stop + reprise)
+        if (notifId && lastHandledNotificationIdRef.current === notifId) {
+          console.log(
+            "⏸️ [_layout] Notification déjà traitée, pas de relance:",
+            notifId
+          );
+          console.log("═══════════════════════════════════════════");
+          return;
+        }
+
+        const data = response.notification.request.content.data;
+        console.log("📦 [_layout] Données de la notification:");
+        console.log(JSON.stringify(data, null, 2));
+
+        // Vérifier si c'est une notification d'Adhan
+        if (data.type === "adhan" && data.soundName) {
+          console.log("✅ [_layout] Type: adhan confirmé");
+
+          const soundName = data.soundName as string;
+          const prayer = data.prayer as string;
+
+          console.log(`🎵 [_layout] Son à jouer: ${soundName}`);
+          console.log(`🕌 [_layout] Prière: ${prayer}`);
+
+          // ⚠️ Ne pas relancer si déjà en cours
+          if (isAdhanPlayingRef.current) {
+            console.log(
+              "⏸️ [_layout] Lecture déjà en cours, pas de relance de l'Adhan complet"
+            );
+            console.log("═══════════════════════════════════════════");
+            return;
+          }
+
+          console.log(
+            `🎵 [_layout] Lancement lecture avec AdhanAudioPlayer (AVAudioPlayer natif)...`
+          );
+
+          // Jouer l'Adhan avec le module natif iOS
+          await playAdhan(soundName, prayer);
+          console.log(
+            `✅ [_layout] AdhanAudioPlayer.playAdhan() appelé avec succès`
+          );
+          console.log(`🎶 [_layout] Adhan complet en cours de lecture`);
+
+          // Marquer cette notification comme traitée
+          if (notifId) {
+            lastHandledNotificationIdRef.current = notifId;
+          }
+
+          // Afficher un toast
+          showGlobalToast({
+            type: "info",
+            title: `🕌 ${prayer}`,
+            message: "Adhan complet en lecture",
+            duration: 3000,
+          });
+
+          console.log("═══════════════════════════════════════════");
+        } else if (data.type === "adhan") {
+          console.error("❌ [_layout] soundName manquant dans les données !");
+        } else {
+          console.log(
+            `ℹ️ [_layout] Type de notification: ${data.type} (pas un adhan)`
+          );
+        }
+      } catch (error: any) {
+        console.error("═══════════════════════════════════════════");
+        console.error("❌ [_layout] ERREUR lors de la lecture de l'Adhan:");
+        console.error(`   Message: ${error.message}`);
+        console.error(`   Stack: ${error.stack}`);
+        console.error("═══════════════════════════════════════════");
+
+        showGlobalToast({
+          type: "error",
+          title: "Erreur",
+          message: `Impossible de jouer l'Adhan: ${error.message}`,
+          duration: 3000,
+        });
+      }
+    };
+
+    // Listener clic temps réel
+    const subscription = Notifications.addNotificationResponseReceivedListener(
+      handleNotificationResponse
+    );
+
+    // 🔁 Rattraper le cas cold start / app en arrière-plan : traiter la dernière réponse si elle existe
+    Notifications.getLastNotificationResponseAsync()
+      .then((lastResponse) => {
+        if (lastResponse && !handledLastResponseRef.current) {
+          handledLastResponseRef.current = true;
+          console.log(
+            "🔁 [_layout] Traitement lastNotificationResponse (cold start / background)"
+          );
+          handleNotificationResponse(lastResponse);
+        }
+      })
+      .catch((err) => {
+        console.warn(
+          "⚠️ [_layout] Impossible de récupérer lastNotificationResponse:",
+          err
+        );
+      });
+
+    // 🔁 Re-check quand l'app revient en foreground (cas app en arrière-plan)
+    const appStateListener = AppState.addEventListener(
+      "change",
+      (nextState) => {
+        const wasBackground = appState.current.match(/background/);
+        appState.current = nextState;
+        if (wasBackground && nextState === "active") {
+          Notifications.getLastNotificationResponseAsync()
+            .then((lastResponse) => {
+              if (lastResponse) {
+                console.log(
+                  "🔁 [_layout] App reprise (background→active), tentative de traitement lastResponse"
+                );
+                handleNotificationResponse(lastResponse);
+              }
+            })
+            .catch((err) => {
+              console.warn(
+                "⚠️ [_layout] Erreur getLastNotificationResponse (resume):",
+                err
+              );
+            });
+        }
+      }
+    );
+
+    return () => {
+      console.log("🔴 [_layout] Listener de notifications DÉSACTIVÉ");
+      subscription.remove();
+      if (nativeEventSubscription) {
+        nativeEventSubscription.remove();
+      }
+      appStateListener.remove();
+    };
+  }, [playAdhan]);
 
   // 🚀 NOUVEAU : Nettoyer les données obsolètes une seule fois au démarrage
   const initializationRef = React.useRef(false);
@@ -176,15 +414,24 @@ export default function TabLayout() {
 
         // 🎵 NOUVEAU : Configuration des sons pour les notifications iOS
         if (Platform.OS === "ios") {
-          console.log("═══════════════════════════════════════════════════════════");
+          console.log(
+            "═══════════════════════════════════════════════════════════"
+          );
           console.log("🎵 [_layout] Démarrage configuration sons iOS...");
-          console.log("═══════════════════════════════════════════════════════════");
+          console.log(
+            "═══════════════════════════════════════════════════════════"
+          );
           setupIosSoundsForNotifications()
             .then(() => {
-              console.log("✅ [_layout] Configuration sons iOS terminée avec succès");
+              console.log(
+                "✅ [_layout] Configuration sons iOS terminée avec succès"
+              );
             })
             .catch((error) => {
-              console.error("❌ [_layout] Erreur configuration sons iOS:", error);
+              console.error(
+                "❌ [_layout] Erreur configuration sons iOS:",
+                error
+              );
               console.error("❌ [_layout] Stack:", error?.stack);
             });
         }
@@ -322,9 +569,26 @@ export default function TabLayout() {
         // 🍎 Configuration spécifique iOS : Background Fetch pour notifications illimitées
         if (Platform.OS === "ios") {
           console.log("🔔 [iOS] Configuration des notifications locales...");
-          console.log("🔄 [iOS] Activation du Background Fetch pour reprogrammation automatique...");
+          console.log(
+            "🔄 [iOS] Activation du Background Fetch pour reprogrammation automatique..."
+          );
           await registerBackgroundFetchAsync();
-          console.log("✅ [iOS] Background Fetch activé - notifications illimitées même app fermée");
+          console.log(
+            "✅ [iOS] Background Fetch activé - notifications illimitées même app fermée"
+          );
+
+          // 🔍 Activer le délégué de notifications pour debug détaillé
+          try {
+            NativeModules.AdhanModule?.setupNotificationDelegate();
+            console.log(
+              "✅ [iOS] Délégué de notifications activé - logs détaillés disponibles"
+            );
+          } catch (error) {
+            console.warn(
+              "⚠️ [iOS] Erreur activation délégué notifications:",
+              error
+            );
+          }
         }
 
         console.log("✅ Application initialisée");
@@ -346,273 +610,289 @@ export default function TabLayout() {
   }, [forceRefresh]);
 
   return (
+    <>
+      <StatusBar style="light" translucent backgroundColor="transparent" />
+      <Tabs
+        screenOptions={{
+          headerShown: false,
+          tabBarStyle: {
+            position: "absolute",
+            bottom: Math.max(insets.bottom, 20),
+            left: 5,
+            right: 5,
+            height: 70,
+            borderRadius: 35,
+            backgroundColor: "rgba(25, 29, 43, 0.95)",
+            borderTopWidth: 0,
+            elevation: 8,
+            shadowColor: "#000",
+            shadowOffset: {
+              width: 0,
+              height: 4,
+            },
+            shadowOpacity: 0.5,
+            shadowRadius: 12,
+            paddingBottom: 0,
+            borderWidth: 1,
+            borderColor: "rgba(255, 215, 0, 0.2)",
+            backdropFilter: "blur(10px)",
+          },
+          tabBarItemStyle: {
+            height: 70,
+            padding: 0,
+            margin: 0,
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "center",
+            width: 70,
+          },
+          tabBarActiveTintColor: "#ffd700",
+          tabBarInactiveTintColor: "rgba(255,255,255,0.6)",
+          tabBarShowLabel: false,
+        }}
+      >
+        <Tabs.Screen
+          name="index"
+          options={{
+            tabBarIcon: ({ color, size, focused }) => (
+              <TabBarIcon
+                icon="home"
+                color={color}
+                size={size}
+                focused={focused}
+              />
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="prayerScreen"
+          options={{
+            tabBarIcon: ({ color, size, focused }) => (
+              <TabBarIcon
+                icon="clock-time-four"
+                color={color}
+                size={size}
+                focused={focused}
+              />
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="qibla"
+          options={{
+            tabBarIcon: ({ color, size, focused }) => (
+              <TabBarIcon
+                icon="compass"
+                color={color}
+                size={size}
+                focused={focused}
+              />
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="mosques"
+          options={{
+            tabBarIcon: ({ color, size, focused }) => (
+              <TabBarIcon
+                icon="mosque"
+                color={color}
+                size={size}
+                focused={focused}
+              />
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="tasbih"
+          options={{
+            tabBarIcon: ({ color, size, focused }) => (
+              <TabBarIcon
+                icon="counter"
+                color={color}
+                size={size}
+                focused={focused}
+              />
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="quran"
+          options={{
+            tabBarIcon: ({ color, size, focused }) => (
+              <TabBarIcon
+                icon="book-open-variant"
+                color={color}
+                size={size}
+                focused={focused}
+              />
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="hadith"
+          options={{
+            tabBarIcon: ({ color, size, focused }) => (
+              <TabBarIcon
+                icon="book-multiple"
+                color={color}
+                size={size}
+                focused={focused}
+              />
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="dhikr"
+          options={{
+            tabBarIcon: ({ color, size, focused }) => (
+              <TabBarIcon
+                icon="hand-heart"
+                color={color}
+                size={size}
+                focused={focused}
+              />
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="asmaulhusna"
+          options={{
+            tabBarIcon: ({ color, size, focused }) => (
+              <TabBarIcon
+                icon="star-circle"
+                color={color}
+                size={size}
+                focused={focused}
+              />
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="hijri"
+          options={{
+            tabBarIcon: ({ color, size, focused }) => (
+              <TabBarIcon
+                icon="calendar"
+                color={color}
+                size={size}
+                focused={focused}
+              />
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="prayerStatsPremium"
+          options={{
+            tabBarIcon: ({ color, size, focused }) => (
+              <TabBarIcon
+                icon="chart-bar"
+                color={color}
+                size={size}
+                focused={focused}
+              />
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="settings"
+          options={{
+            tabBarIcon: ({ color, size, focused }) => (
+              <TabBarIcon
+                icon="cog"
+                color={color}
+                size={size}
+                focused={focused}
+              />
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="about"
+          options={{
+            tabBarIcon: ({ color, size, focused }) => (
+              <TabBarIcon
+                icon="information"
+                color={color}
+                size={size}
+                focused={focused}
+              />
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="debugNotifications"
+          options={{
+            // DEBUG: onglet visible (à recacher avant build App Store)
+            href: undefined,
+          }}
+        />
+        {/* Écran favoris accessible par navigation (pas visible dans la tab bar) */}
+        <Tabs.Screen
+          name="favorites"
+          options={{
+            href: null, // Cache l'onglet de la navigation
+          }}
+        />
+        {/* Écran de paiement premium accessible par navigation (pas visible dans la tab bar) */}
+        <Tabs.Screen
+          name="premium-payment"
+          options={{
+            href: null, // Cache l'onglet de la navigation
+          }}
+        />
+        {/* Pages de résultat de paiement accessibles par deep links (pas visible dans la tab bar) */}
+        <Tabs.Screen
+          name="payment-success"
+          options={{
+            href: null, // Cache l'onglet de la navigation
+          }}
+        />
+        <Tabs.Screen
+          name="payment-cancel"
+          options={{
+            href: null, // Cache l'onglet de la navigation
+          }}
+        />
+        {/* Écran de suppression de données accessible par navigation (pas visible dans la tab bar) */}
+        <Tabs.Screen
+          name="data-deletion"
+          options={{
+            href: null, // Cache l'onglet de la navigation
+          }}
+        />
+        {/* 📚 NOUVEAUX ÉCRANS : Histoires du Prophète (PBUH) */}
+        <Tabs.Screen
+          name="prophet-stories"
+          options={{
+            href: null, // Cache l'onglet de la navigation
+          }}
+        />
+        <Tabs.Screen
+          name="story-reader"
+          options={{
+            href: null, // Cache l'onglet de la navigation
+          }}
+        />
+      </Tabs>
+      {/* 🎵 Bouton flottant pour arrêter l'Adhan (iOS uniquement) */}
+      <AdhanStopButton />
+    </>
+  );
+}
+
+// 🎵 Composant principal qui enveloppe avec les providers
+export default function TabLayout() {
+  return (
     <SettingsProvider>
       <ToastProvider>
         <PremiumProvider>
           <FavoritesProvider>
             <BackupProvider>
-              <StatusBar
-                style="light"
-                translucent
-                backgroundColor="transparent"
-              />
-              <Tabs
-                screenOptions={{
-                  headerShown: false,
-                  tabBarStyle: {
-                    position: "absolute",
-                    bottom: Math.max(insets.bottom, 20),
-                    left: 5,
-                    right: 5,
-                    height: 70,
-                    borderRadius: 35,
-                    backgroundColor: "rgba(25, 29, 43, 0.95)",
-                    borderTopWidth: 0,
-                    elevation: 8,
-                    shadowColor: "#000",
-                    shadowOffset: {
-                      width: 0,
-                      height: 4,
-                    },
-                    shadowOpacity: 0.5,
-                    shadowRadius: 12,
-                    paddingBottom: 0,
-                    borderWidth: 1,
-                    borderColor: "rgba(255, 215, 0, 0.2)",
-                    backdropFilter: "blur(10px)",
-                  },
-                  tabBarItemStyle: {
-                    height: 70,
-                    padding: 0,
-                    margin: 0,
-                    display: "flex",
-                    flexDirection: "row",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    width: 70,
-                  },
-                  tabBarActiveTintColor: "#ffd700",
-                  tabBarInactiveTintColor: "rgba(255,255,255,0.6)",
-                  tabBarShowLabel: false,
-                }}
-              >
-                <Tabs.Screen
-                  name="index"
-                  options={{
-                    tabBarIcon: ({ color, size, focused }) => (
-                      <TabBarIcon
-                        icon="home"
-                        color={color}
-                        size={size}
-                        focused={focused}
-                      />
-                    ),
-                  }}
-                />
-                <Tabs.Screen
-                  name="prayerScreen"
-                  options={{
-                    tabBarIcon: ({ color, size, focused }) => (
-                      <TabBarIcon
-                        icon="clock-time-four"
-                        color={color}
-                        size={size}
-                        focused={focused}
-                      />
-                    ),
-                  }}
-                />
-                <Tabs.Screen
-                  name="qibla"
-                  options={{
-                    tabBarIcon: ({ color, size, focused }) => (
-                      <TabBarIcon
-                        icon="compass"
-                        color={color}
-                        size={size}
-                        focused={focused}
-                      />
-                    ),
-                  }}
-                />
-                <Tabs.Screen
-                  name="mosques"
-                  options={{
-                    tabBarIcon: ({ color, size, focused }) => (
-                      <TabBarIcon
-                        icon="mosque"
-                        color={color}
-                        size={size}
-                        focused={focused}
-                      />
-                    ),
-                  }}
-                />
-                <Tabs.Screen
-                  name="tasbih"
-                  options={{
-                    tabBarIcon: ({ color, size, focused }) => (
-                      <TabBarIcon
-                        icon="counter"
-                        color={color}
-                        size={size}
-                        focused={focused}
-                      />
-                    ),
-                  }}
-                />
-                <Tabs.Screen
-                  name="quran"
-                  options={{
-                    tabBarIcon: ({ color, size, focused }) => (
-                      <TabBarIcon
-                        icon="book-open-variant"
-                        color={color}
-                        size={size}
-                        focused={focused}
-                      />
-                    ),
-                  }}
-                />
-                <Tabs.Screen
-                  name="hadith"
-                  options={{
-                    tabBarIcon: ({ color, size, focused }) => (
-                      <TabBarIcon
-                        icon="book-multiple"
-                        color={color}
-                        size={size}
-                        focused={focused}
-                      />
-                    ),
-                  }}
-                />
-                <Tabs.Screen
-                  name="dhikr"
-                  options={{
-                    tabBarIcon: ({ color, size, focused }) => (
-                      <TabBarIcon
-                        icon="hand-heart"
-                        color={color}
-                        size={size}
-                        focused={focused}
-                      />
-                    ),
-                  }}
-                />
-                <Tabs.Screen
-                  name="asmaulhusna"
-                  options={{
-                    tabBarIcon: ({ color, size, focused }) => (
-                      <TabBarIcon
-                        icon="star-circle"
-                        color={color}
-                        size={size}
-                        focused={focused}
-                      />
-                    ),
-                  }}
-                />
-                <Tabs.Screen
-                  name="hijri"
-                  options={{
-                    tabBarIcon: ({ color, size, focused }) => (
-                      <TabBarIcon
-                        icon="calendar"
-                        color={color}
-                        size={size}
-                        focused={focused}
-                      />
-                    ),
-                  }}
-                />
-                <Tabs.Screen
-                  name="prayerStatsPremium"
-                  options={{
-                    tabBarIcon: ({ color, size, focused }) => (
-                      <TabBarIcon
-                        icon="chart-bar"
-                        color={color}
-                        size={size}
-                        focused={focused}
-                      />
-                    ),
-                  }}
-                />
-                <Tabs.Screen
-                  name="settings"
-                  options={{
-                    tabBarIcon: ({ color, size, focused }) => (
-                      <TabBarIcon
-                        icon="cog"
-                        color={color}
-                        size={size}
-                        focused={focused}
-                      />
-                    ),
-                  }}
-                />
-                <Tabs.Screen
-                  name="about"
-                  options={{
-                    tabBarIcon: ({ color, size, focused }) => (
-                      <TabBarIcon
-                        icon="information"
-                        color={color}
-                        size={size}
-                        focused={focused}
-                      />
-                    ),
-                  }}
-                />
-                {/* Écran favoris accessible par navigation (pas visible dans la tab bar) */}
-                <Tabs.Screen
-                  name="favorites"
-                  options={{
-                    href: null, // Cache l'onglet de la navigation
-                  }}
-                />
-                {/* Écran de paiement premium accessible par navigation (pas visible dans la tab bar) */}
-                <Tabs.Screen
-                  name="premium-payment"
-                  options={{
-                    href: null, // Cache l'onglet de la navigation
-                  }}
-                />
-                {/* Pages de résultat de paiement accessibles par deep links (pas visible dans la tab bar) */}
-                <Tabs.Screen
-                  name="payment-success"
-                  options={{
-                    href: null, // Cache l'onglet de la navigation
-                  }}
-                />
-                <Tabs.Screen
-                  name="payment-cancel"
-                  options={{
-                    href: null, // Cache l'onglet de la navigation
-                  }}
-                />
-                {/* Écran de suppression de données accessible par navigation (pas visible dans la tab bar) */}
-                <Tabs.Screen
-                  name="data-deletion"
-                  options={{
-                    href: null, // Cache l'onglet de la navigation
-                  }}
-                />
-                {/* 📚 NOUVEAUX ÉCRANS : Histoires du Prophète (PBUH) */}
-                <Tabs.Screen
-                  name="prophet-stories"
-                  options={{
-                    href: null, // Cache l'onglet de la navigation
-                  }}
-                />
-                <Tabs.Screen
-                  name="story-reader"
-                  options={{
-                    href: null, // Cache l'onglet de la navigation
-                  }}
-                />
-              </Tabs>
+              <AdhanAudioProvider>
+                <TabLayoutContent />
+              </AdhanAudioProvider>
             </BackupProvider>
           </FavoritesProvider>
         </PremiumProvider>

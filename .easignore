@@ -1,0 +1,9 @@
+# Exclure les artefacts Android générés (non nécessaires au build iOS)
+android/.gradle/
+android/app/build/
+android/app/.cxx/
+
+# Exclure les artefacts iOS générés (inutile dans l'archive EAS)
+ios/build/
+ios/Pods/
+

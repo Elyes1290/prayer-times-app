@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text, Switch } from "react-native";
 import Slider from "@react-native-community/slider";
 import { useTranslation } from "react-i18next";
+import { Platform } from "react-native";
 
 interface GeneralSectionProps {
   // États général
@@ -57,8 +58,12 @@ export default function GeneralSection({
                     {t("dua_after_adhan", "Dua après l'adhan")}
                   </Text>
                   <Switch
-                    value={duaAfterAdhanEnabled}
+                    value={
+                      Platform.OS === "ios" ? false : duaAfterAdhanEnabled
+                    }
+                    disabled={Platform.OS === "ios"}
                     onValueChange={(value) => {
+                      if (Platform.OS === "ios") return;
                       setDuaAfterAdhanEnabled(value);
                       markPendingChanges();
                     }}
