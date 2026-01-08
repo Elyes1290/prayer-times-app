@@ -1,7 +1,26 @@
 import React from "react";
+import { View, Text, Switch, Platform } from "react-native";
 import GeneralSection from "@/components/settings/GeneralSection";
 
 // Mock Slider
+jest.mock("@react-native-community/slider", () => {
+  const { View } = require("react-native");
+  return {
+    Slider: ({ value, onSlidingComplete, ...props }: any) => (
+      <View {...props} testID="slider-mock" />
+    ),
+  };
+});
+
+// Mock Platform
+jest.mock("react-native", () => {
+  const rn = jest.requireActual("react-native");
+  rn.Platform.OS = "android";
+  rn.Platform.select = (obj: any) => obj.android || obj.default;
+  return rn;
+});
+
+// Mock useTranslation
 jest.mock("@react-native-community/slider", () => {
   const { View } = require("react-native");
   return {

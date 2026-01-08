@@ -5,7 +5,7 @@ import {
   fireEvent,
   waitFor,
 } from "@testing-library/react-native";
-import { View } from "react-native";
+import { View, Platform } from "react-native";
 import DhikrScreen from "../../screens/DhikrScreen";
 import { useTranslation } from "react-i18next";
 
@@ -99,13 +99,22 @@ describe("DhikrScreen", () => {
     expect(screen.getAllByTestId("favorite-btn").length).toBeGreaterThan(0);
   });
 
-  it("change de catégorie via le Picker", () => {
+  it("change de catégorie via le Picker ou le sélecteur iOS", () => {
     render(<DhikrScreen />);
-    // Cibler le Picker par type ou testID (ici, le premier Picker)
-    const picker = screen.UNSAFE_getAllByType(
-      require("@react-native-picker/picker").Picker
-    )[0];
-    fireEvent(picker, "valueChange", "morningDhikr");
+    
+    if (Platform.OS === "ios") {
+      // Sur iOS, on clique sur le bouton pour ouvrir la modal, puis sur l'option
+      const pickerButton = screen.getByText("Quotidien");
+      fireEvent.press(pickerButton);
+      const option = screen.getByText("Matin");
+      fireEvent.press(option);
+    } else {
+      // Sur Android, on utilise le Picker
+      const picker = screen.UNSAFE_getAllByType(
+        require("@react-native-picker/picker").Picker
+      )[0];
+      fireEvent(picker, "valueChange", "morningDhikr");
+    }
     expect(screen.getByText("Invocations")).toBeTruthy();
   });
 

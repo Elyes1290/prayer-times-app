@@ -5,7 +5,8 @@ jest.mock("react-native-fs", () => ({
   exists: jest.fn(),
   readDir: jest.fn(),
   unlink: jest.fn(),
-  stat: jest.fn(),
+  stat: jest.fn().mockResolvedValue({ size: 1024000 }),
+  read: jest.fn().mockResolvedValue("ID3v2... some mp3 data..."),
   DocumentDirectoryPath: "/data/user/0/com.app/files/",
   mkdir: jest.fn(),
   downloadFile: jest.fn(() => ({
@@ -108,7 +109,9 @@ describe("PremiumContentManager", () => {
       const mockLocalStorage = require("../../utils/localStorageManager");
 
       // Mock pour simuler un téléchargement réussi
-      mockRNFS.exists.mockResolvedValue(false);
+      mockRNFS.exists.mockResolvedValue(true); // Toujours true pour simplifier
+      mockRNFS.stat.mockResolvedValue({ size: 1024000 });
+      mockRNFS.read.mockResolvedValue("ID3v2... some mp3 data...");
       mockRNFS.downloadFile.mockReturnValue({
         promise: Promise.resolve({ statusCode: 200 }),
       });
@@ -136,6 +139,8 @@ describe("PremiumContentManager", () => {
       const mockLocalStorage = require("../../utils/localStorageManager");
 
       mockRNFS.exists.mockResolvedValue(true);
+      mockRNFS.stat.mockResolvedValue({ size: 1024000 });
+      mockRNFS.read.mockResolvedValue("ID3v2... some mp3 data...");
       mockLocalStorage.LocalStorageManager.savePremium.mockResolvedValue(
         undefined
       );

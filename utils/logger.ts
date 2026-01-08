@@ -8,8 +8,8 @@ type LogLevel = "debug" | "info" | "warn" | "error";
 
 // Configuration du logger
 const LOG_CONFIG = {
-  // 🔥 ACTIVÉ pour debug iOS !
-  enableDebugLogs: true, // __DEV__ || process.env.NODE_ENV !== "production",
+  // 🔥 ACTIVÉ pour debug ! (Désactivé en test pour les tests unitaires)
+  enableDebugLogs: process.env.NODE_ENV !== "test",
   // Préfixe pour identifier nos logs
   prefix: "[MyAdhan]",
 };
