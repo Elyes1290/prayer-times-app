@@ -1294,10 +1294,28 @@ class PremiumContentManager {
         ? JSON.parse(downloadedContentRaw)
         : {};
 
-      downloaded[contentId] = {
-        downloadPath,
-        downloadedAt: new Date().toISOString(),
-      };
+      // 🚀 NOUVEAU : Enregistrer TOUTES les variantes possibles du nom pour garantir que Android le trouve
+      const variants: string[] = [contentId];
+
+      if (contentId.startsWith("adhan_")) {
+        // Si ça commence par "adhan_", ajouter aussi la version sans préfixe
+        const withoutPrefix = contentId.substring(6);
+        variants.push(withoutPrefix);
+        debugLog(`🔄 Variante AsyncStorage ajoutée: ${withoutPrefix}`);
+      } else if (contentId.startsWith("azan_") || contentId.startsWith("al_")) {
+        // Si ça commence par "azan_" ou autre, ajouter aussi la version avec préfixe "adhan_"
+        const withPrefix = `adhan_${contentId}`;
+        variants.push(withPrefix);
+        debugLog(`🔄 Variante AsyncStorage ajoutée: ${withPrefix}`);
+      }
+
+      // Enregistrer toutes les variantes avec le même chemin
+      for (const variant of variants) {
+        downloaded[variant] = {
+          downloadPath,
+          downloadedAt: new Date().toISOString(),
+        };
+      }
 
       // Sauvegarder dans le gestionnaire stratifié (toujours premium + explicite)
       await LocalStorageManager.savePremium(
@@ -1317,7 +1335,11 @@ class PremiumContentManager {
             await AdhanModule.savePremiumContentData(
               JSON.stringify(downloaded)
             );
-            debugLog("✅ Données premium sauvées pour Android");
+            debugLog(
+              `✅ Données premium sauvées pour Android (${
+                variants.length
+              } variantes: ${variants.join(", ")})`
+            );
           } catch (error) {
             debugLog("❌ Erreur sauvegarde Android, mais AsyncStorage OK");
           }
@@ -1325,7 +1347,7 @@ class PremiumContentManager {
       }
 
       debugLog(
-        `✅ Son premium ${contentId} marqué comme téléchargé: ${downloadPath}`
+        `✅ Son premium ${contentId} marqué comme téléchargé: ${downloadPath} (${variants.length} variantes enregistrées)`
       );
     } catch (error) {
       errorLog("❌ Erreur sauvegarde statut téléchargement:", error);
@@ -2264,6 +2286,10 @@ class PremiumContentManager {
                 `📏 ${adhanName}: ${realFileSize} MB (taille réelle depuis API)`
               );
 
+              // 🍎 Ajouter le paramètre platform pour iOS/Android
+              const platformParam =
+                Platform.OS === "ios" ? "&platform=ios" : "&platform=android";
+
               const adhanEntry: PremiumContent = {
                 id: adhanId,
                 type: "adhan",
@@ -2273,7 +2299,7 @@ class PremiumContentManager {
                   AppConfig.ADHANS_API
                 }?action=download&adhan=${encodeURIComponent(
                   adhanName
-                )}${tokenParam}`,
+                )}${tokenParam}${platformParam}`,
                 fileSize: realFileSize, // 🔧 VRAIE taille depuis l'API !
                 version: "1.0",
                 isDownloaded: isDownloaded,
@@ -2322,6 +2348,10 @@ class PremiumContentManager {
                 realFileSize = this.estimateAdhanFileSize(adhanName);
               }
 
+              // 🍎 Ajouter le paramètre platform pour iOS/Android
+              const platformParam =
+                Platform.OS === "ios" ? "&platform=ios" : "&platform=android";
+
               const adhanEntry: PremiumContent = {
                 id: adhanId,
                 type: "adhan",
@@ -2331,7 +2361,7 @@ class PremiumContentManager {
                   AppConfig.ADHANS_API
                 }?action=download&adhan=${encodeURIComponent(
                   adhanName
-                )}${tokenParam}`,
+                )}${tokenParam}${platformParam}`,
                 fileSize: realFileSize,
                 version: "1.0",
                 isDownloaded: isDownloaded,

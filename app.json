@@ -2,7 +2,7 @@
   "expo": {
     "name": "MyAdhan: Muslim Prayer App",
     "slug": "prayer-times-app",
-    "version": "1.0.6",
+    "version": "1.0.13",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "prayertimesapp",
@@ -11,8 +11,23 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.drogbinho.myadhan",
-      "buildNumber": "1.0.6",
+      "buildNumber": "1.0.13",
       "icon": "./assets/images/icon.png",
+      "locales": {
+        "en": "./locales/ios/en.json",
+        "fr": "./locales/ios/fr.json",
+        "ar": "./locales/ios/ar.json",
+        "es": "./locales/ios/es.json",
+        "it": "./locales/ios/it.json",
+        "de": "./locales/ios/de.json",
+        "pt": "./locales/ios/pt.json",
+        "tr": "./locales/ios/tr.json",
+        "bn": "./locales/ios/bn.json",
+        "fa": "./locales/ios/fa.json",
+        "nl": "./locales/ios/nl.json",
+        "ru": "./locales/ios/ru.json",
+        "ur": "./locales/ios/ur.json"
+      },
       "infoPlist": {
         "UIBackgroundModes": [
           "audio",
@@ -20,13 +35,12 @@
           "fetch",
           "remote-notification"
         ],
-        "NSLocationWhenInUseUsageDescription": "Nous avons besoin de votre position pour calculer les horaires de prière précis.",
-        "NSLocationAlwaysAndWhenInUseUsageDescription": "Nous avons besoin de votre position pour calculer les horaires de prière et envoyer des notifications.",
-        "NSLocationAlwaysUsageDescription": "Nous avons besoin de votre position pour envoyer des notifications aux bons horaires.",
-        "NSMicrophoneUsageDescription": "Nous n'utilisons pas le microphone.",
-        "NSCameraUsageDescription": "Nous n'utilisons pas la caméra.",
-        "NSPhotoLibraryUsageDescription": "Nous n'utilisons pas vos photos.",
-        "NSUserTrackingUsageDescription": "Ces données nous permettent d'améliorer l'expérience utilisateur et de personnaliser le contenu.",
+        "NSLocationWhenInUseUsageDescription": "We need your location to calculate accurate prayer times based on your current city.",
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "We need your location to calculate accurate prayer times and send notifications even when the app is in the background.",
+        "NSLocationAlwaysUsageDescription": "We need your location to provide accurate prayer times notifications based on your position.",
+        "NSMicrophoneUsageDescription": "This app does not use the microphone.",
+        "NSCameraUsageDescription": "This app does not use the camera.",
+        "NSPhotoLibraryUsageDescription": "This app does not use your photo library.",
         "ITSAppUsesNonExemptEncryption": false
       }
     },
@@ -37,7 +51,7 @@
       },
       "edgeToEdgeEnabled": true,
       "package": "com.drogbinho.prayertimesapp2",
-      "versionCode": 48
+      "versionCode": 80
     },
     "web": {
       "bundler": "metro",
@@ -66,10 +80,13 @@
     },
     "developmentClient": true,
     "assetBundlePatterns": [
-      "assets/**/*",
+      "assets/images/**/*",
       "assets/sounds/*.mp3",
-      "assets/sounds-ios/*.caf",
-      "assets/soundsComplete-ios/*.mp3"
+      "assets/fonts/**/*",
+      "assets/quran-offline-data/**/*",
+      "assets/hadith-offline-data/**/*",
+      "assets/data/**/*",
+      "assets/boussole/**/*"
     ],
     "extra": {
       "router": {},

@@ -100,6 +100,8 @@
   },
   "qibla_direction": "Qibla-Richtung",
   "qibla_instructions": "Für genaue Ergebnisse: Halten Sie das Telefon flach, fern von Metallobjekten und Magneten. Wenn der Kompass schwankt, bewegen Sie das Telefon in einer 8-Form zur Kalibrierung.",
+  "change_compass": "Kompass ändern",
+  "select_compass": "Kompass auswählen",
   "choose_sourate": "Wählen Sie eine Sure",
   "bismillah": "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ",
   "select_book": "Wählen Sie ein Buch",

@@ -15,6 +15,7 @@ interface SettingsModalsProps {
   activatePremium: any;
   showToast: any;
   handleLoginSuccess: (userData: any) => void;
+  initialTab?: "login" | "signup";
 }
 
 export default function SettingsModals({
@@ -28,6 +29,7 @@ export default function SettingsModals({
   activatePremium,
   showToast,
   handleLoginSuccess,
+  initialTab = "login",
 }: SettingsModalsProps) {
   return (
     <>
@@ -101,6 +103,7 @@ export default function SettingsModals({
                 t={t}
                 onLoginSuccess={handleLoginSuccess}
                 isInModal={true}
+                initialTab={initialTab}
               />
 
               {/* 🚀 Toast dans la zone scrollable pour rester visible */}

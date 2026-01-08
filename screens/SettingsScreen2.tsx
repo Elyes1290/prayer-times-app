@@ -541,6 +541,7 @@ function SettingsSections(props: OptimizedSettingsSectionsProps) {
               </>
             )}
 
+            {/* DEBUG: Bouton caché pour la prod
             {Platform.OS === "ios" && (
               <TouchableOpacity
                 style={[
@@ -563,6 +564,7 @@ function SettingsSections(props: OptimizedSettingsSectionsProps) {
                 />
               </TouchableOpacity>
             )}
+            */}
 
             <TouchableOpacity
               style={[styles.row, { marginTop: 20 }]}
@@ -738,7 +740,7 @@ export default function SettingsScreenOptimized() {
   const { showToast } = useToast();
   const navigation = useNavigation();
 
-  const { openLocation, mode } = useLocalSearchParams();
+  const { openLocation, mode, openPremium, premiumTab } = useLocalSearchParams();
 
   const {
     audioPlayer,
@@ -793,13 +795,10 @@ export default function SettingsScreenOptimized() {
   }, [settings.locationMode]);
 
   useEffect(() => {
-    if (openLocation === "true") {
-      setActiveSection("location");
-      if (mode === "manual") {
-        setLocationUIMode("manual");
-      }
+    if (openPremium === "true") {
+      uiManager.setShowPremiumModal(true);
     }
-  }, [openLocation, mode]);
+  }, [openPremium]);
 
   const [hasPendingChanges, setHasPendingChanges] = useState(false);
 
@@ -1529,6 +1528,7 @@ export default function SettingsScreenOptimized() {
         activatePremium={activatePremium}
         showToast={showToast}
         handleLoginSuccess={handleLoginSuccess}
+        initialTab={(premiumTab as "login" | "signup") || "login"}
       />
     </ThemedImageBackground>
   );

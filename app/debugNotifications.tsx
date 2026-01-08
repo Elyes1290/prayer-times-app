@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import {
   View,
   Text,
@@ -9,6 +9,7 @@ import {
   Platform,
   RefreshControl,
   Alert,
+  DeviceEventEmitter,
 } from "react-native";
 import { Stack } from "expo-router";
 import { useRouter } from "expo-router";
@@ -21,13 +22,15 @@ import { usePremium } from "../contexts/PremiumContext";
 
 export default function DebugNotificationsScreen() {
   const router = useRouter();
-  // 🚧 Page accessible pour les testeurs internes
-  const isDebugAllowed = true;
+  // 🚧 Page désactivée pour la production (à réactiver seulement pour le debug local)
+  const isDebugAllowed = false;
   const [debugInfo, setDebugInfo] = useState<any>(null);
   const [loading, setLoading] = useState(false);
   const [logs, setLogs] = useState<string[]>([]);
   const [bgRuns, setBgRuns] = useState<any[]>([]);
   const [bgRunLoading, setBgRunLoading] = useState(false);
+  const [playbackLogs, setPlaybackLogs] = useState<any[]>([]);
+  const [playbackLogsLoading, setPlaybackLogsLoading] = useState(false);
   const {
     manualLocation,
     autoLocation,
@@ -44,7 +47,7 @@ export default function DebugNotificationsScreen() {
   const { location } = useLocation();
   const { user } = usePremium();
   const [today] = useState(new Date());
-  
+
   const locationToUse =
     locationMode === "manual"
       ? manualLocation
@@ -60,17 +63,13 @@ export default function DebugNotificationsScreen() {
       : null;
 
   const { prayerTimes: currentPrayerTimes, isLoading: isPrayerTimesLoading } =
-    usePrayerTimes(
-      locationToUse as any,
-      today,
-      user?.isPremium || false
-    );
+    usePrayerTimes(locationToUse as any, today, user?.isPremium || false);
 
   const addLog = (msg: string) => {
     setLogs((prev) => [`[${new Date().toLocaleTimeString()}] ${msg}`, ...prev]);
   };
 
-  const loadBackgroundLogs = async () => {
+  const loadBackgroundLogs = useCallback(async () => {
     try {
       if (Platform.OS !== "ios") return;
       const { getBackgroundFetchLogs } = await import(
@@ -81,6 +80,35 @@ export default function DebugNotificationsScreen() {
       addLog("📜 Historique background fetch chargé");
     } catch (error: any) {
       addLog(`❌ Erreur lecture logs background: ${error.message}`);
+    }
+  }, []);
+
+  const loadPlaybackLogs = useCallback(async () => {
+    try {
+      setPlaybackLogsLoading(true);
+      const { getPlaybackDebugLogs } = await import(
+        "../utils/playbackDebugLogs"
+      );
+      const logs = await getPlaybackDebugLogs();
+      setPlaybackLogs(logs || []);
+      addLog(`📜 ${logs.length} logs lecture chargés`);
+    } catch (error: any) {
+      addLog(`❌ Erreur lecture logs playback: ${error.message}`);
+    } finally {
+      setPlaybackLogsLoading(false);
+    }
+  }, []);
+
+  const clearPlaybackLogs = async () => {
+    try {
+      const { clearPlaybackDebugLogs } = await import(
+        "../utils/playbackDebugLogs"
+      );
+      await clearPlaybackDebugLogs();
+      setPlaybackLogs([]);
+      addLog("🗑️ Logs lecture effacés");
+    } catch (error: any) {
+      addLog(`❌ Erreur effacement logs playback: ${error.message}`);
     }
   };
 
@@ -115,7 +143,6 @@ export default function DebugNotificationsScreen() {
       router.replace("/");
     }
   }, [router, isDebugAllowed]);
-  if (!isDebugAllowed) return null;
 
   // 🔥 INTERCEPTER console.log pour capturer TOUS les logs
   useEffect(() => {
@@ -154,7 +181,34 @@ export default function DebugNotificationsScreen() {
     };
   }, []);
 
-  const fetchDebugInfo = async () => {
+  // 🎵 Écouter les logs de lecture en temps réel
+  useEffect(() => {
+    const sub = DeviceEventEmitter.addListener(
+      "AddPlaybackDebugLog",
+      (event) => {
+        const message = event.message || "Message inconnu";
+        console.log(`📡 [DebugPage] Event reçu: ${message}`);
+
+        const newLog = {
+          timestamp: new Date().toISOString(),
+          action: event.type === "error" ? `❌ ${message}` : `🎵 ${message}`,
+          details: event.details || {},
+        };
+
+        setPlaybackLogs((prev) => [newLog, ...prev].slice(0, 100));
+      }
+    );
+
+    // Auto-refresh logs from storage periodically
+    const interval = setInterval(loadPlaybackLogs, 5000);
+
+    return () => {
+      sub.remove();
+      clearInterval(interval);
+    };
+  }, [loadPlaybackLogs]);
+
+  const fetchDebugInfo = useCallback(async () => {
     if (Platform.OS !== "ios") {
       addLog("⚠️ Ce diagnostic est pour iOS uniquement");
       return;
@@ -178,7 +232,7 @@ export default function DebugNotificationsScreen() {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   const testFullSave = async () => {
     try {
@@ -408,18 +462,20 @@ export default function DebugNotificationsScreen() {
         addLog(`   4. Le MP3 complet se joue via AVAudioPlayer`);
         addLog("   5. Un bouton flottant rouge apparaît pour arrêter");
         addLog("");
-        addLog("🎯 NOUVEAU (iOS) : Clic sur notification → MP3 complet + bouton stop");
+        addLog(
+          "🎯 NOUVEAU (iOS) : Clic sur notification → MP3 complet + bouton stop"
+        );
         addLog("");
         addLog("💡 Si la notif arrive MAIS pas de son:");
         addLog("   → Clique sur 'Vérifier Sons Bundle'");
         addLog("   → Regarde les logs Swift dans 3uTools");
         addLog("═══════════════════════════════════════");
-        
+
         setTimeout(() => {
           fetchDebugInfo();
           addLog("🔄 État natif rafraîchi");
         }, 2000);
-        
+
         Alert.alert(
           "✅ Test programmé",
           `Notification dans 10s avec son: ${adhanSound}`,
@@ -437,9 +493,11 @@ export default function DebugNotificationsScreen() {
   useEffect(() => {
     fetchDebugInfo();
     loadBackgroundLogs();
-  }, []);
+    loadPlaybackLogs();
+  }, [fetchDebugInfo, loadBackgroundLogs, loadPlaybackLogs]);
 
-  // ... (getStatusLabel inchangé) ...
+  if (!isDebugAllowed) return null;
+
   const getStatusLabel = (status: number) => {
     switch (status) {
       case 0:
@@ -479,55 +537,85 @@ export default function DebugNotificationsScreen() {
             ⏰ Heure système: {new Date().toLocaleString("fr-FR")}
           </Text>
           <Text style={styles.logText}>
-            📅 Date aujourd'hui: {today.toLocaleDateString("fr-FR")}
+            📅 Date aujourd&apos;hui: {today.toLocaleDateString("fr-FR")}
           </Text>
           <Text style={styles.logText}>
             📍 Localisation: {locationToUse ? "✅ OK" : "❌ Manquante"}
           </Text>
           {locationToUse && (
             <Text style={styles.logText}>
-              Coords: {(locationToUse as any).coords?.latitude.toFixed(4)}, {(locationToUse as any).coords?.longitude.toFixed(4)}
+              Coords: {(locationToUse as any).coords?.latitude.toFixed(4)},{" "}
+              {(locationToUse as any).coords?.longitude.toFixed(4)}
             </Text>
           )}
           <Text style={styles.logText}>
-            🔄 Chargement: {isPrayerTimesLoading ? "⏳ En cours..." : "✅ Terminé"}
+            🔄 Chargement:{" "}
+            {isPrayerTimesLoading ? "⏳ En cours..." : "✅ Terminé"}
           </Text>
-          
+
           {currentPrayerTimes ? (
             <>
-              <Text style={[styles.logText, { marginTop: 10, fontWeight: "bold" }]}>
+              <Text
+                style={[styles.logText, { marginTop: 10, fontWeight: "bold" }]}
+              >
                 📖 Horaires du jour:
               </Text>
-              {["fajr", "sunrise", "dhuhr", "asr", "maghrib", "isha"].map((prayer) => {
-                const prayerTime = (currentPrayerTimes as any)[prayer];
-                const now = new Date();
-                const isPast = prayerTime && now >= prayerTime;
-                return (
-                  <Text key={prayer} style={[styles.logText, { color: isPast ? "#999" : "#000" }]}>
-                    {prayer.toUpperCase()}: {prayerTime ? prayerTime.toLocaleTimeString("fr-FR") : "N/A"} {isPast ? "✓" : ""}
-                  </Text>
-                );
-              })}
-              
-              <Text style={[styles.logText, { marginTop: 10, fontWeight: "bold", color: "#E91E63" }]}>
+              {["fajr", "sunrise", "dhuhr", "asr", "maghrib", "isha"].map(
+                (prayer) => {
+                  const prayerTime = (currentPrayerTimes as any)[prayer];
+                  const now = new Date();
+                  const isPast = prayerTime && now >= prayerTime;
+                  return (
+                    <Text
+                      key={prayer}
+                      style={[
+                        styles.logText,
+                        { color: isPast ? "#999" : "#000" },
+                      ]}
+                    >
+                      {prayer.toUpperCase()}:{" "}
+                      {prayerTime
+                        ? prayerTime.toLocaleTimeString("fr-FR")
+                        : "N/A"}{" "}
+                      {isPast ? "✓" : ""}
+                    </Text>
+                  );
+                }
+              )}
+
+              <Text
+                style={[
+                  styles.logText,
+                  { marginTop: 10, fontWeight: "bold", color: "#E91E63" },
+                ]}
+              >
                 ⏭️ Calcul Prochaine Prière:
               </Text>
               {(() => {
                 const now = new Date();
                 const prayers = ["Fajr", "Dhuhr", "Asr", "Maghrib", "Isha"];
                 let found = false;
-                
+
                 for (const prayer of prayers) {
-                  const prayerTime = (currentPrayerTimes as any)[prayer.toLowerCase()];
+                  const prayerTime = (currentPrayerTimes as any)[
+                    prayer.toLowerCase()
+                  ];
                   if (prayerTime && now < prayerTime) {
                     const diff = prayerTime.getTime() - now.getTime();
                     const hours = Math.floor(diff / (1000 * 60 * 60));
-                    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                    const minutes = Math.floor(
+                      (diff % (1000 * 60 * 60)) / (1000 * 60)
+                    );
                     found = true;
-                    
+
                     return (
                       <>
-                        <Text style={[styles.logText, { color: "#4CAF50", fontWeight: "bold" }]}>
+                        <Text
+                          style={[
+                            styles.logText,
+                            { color: "#4CAF50", fontWeight: "bold" },
+                          ]}
+                        >
                           ✅ PROCHAINE: {prayer}
                         </Text>
                         <Text style={styles.logText}>
@@ -542,14 +630,12 @@ export default function DebugNotificationsScreen() {
                         <Text style={styles.logText}>
                           Timestamp now: {now.getTime()}
                         </Text>
-                        <Text style={styles.logText}>
-                          Diff ms: {diff}
-                        </Text>
+                        <Text style={styles.logText}>Diff ms: {diff}</Text>
                       </>
                     );
                   }
                 }
-                
+
                 if (!found) {
                   return (
                     <Text style={[styles.logText, { color: "red" }]}>
@@ -561,7 +647,7 @@ export default function DebugNotificationsScreen() {
             </>
           ) : (
             <Text style={[styles.logText, { color: "red" }]}>
-              ❌ Pas d'horaires de prière chargés
+              ❌ Pas d&apos;horaires de prière chargés
             </Text>
           )}
         </View>
@@ -645,7 +731,10 @@ export default function DebugNotificationsScreen() {
                 <TouchableOpacity
                   style={[
                     styles.button,
-                    { backgroundColor: "#3F51B5", opacity: bgRunLoading ? 0.7 : 1 },
+                    {
+                      backgroundColor: "#3F51B5",
+                      opacity: bgRunLoading ? 0.7 : 1,
+                    },
                   ]}
                   onPress={forceBackgroundRun}
                   disabled={bgRunLoading}
@@ -671,21 +760,23 @@ export default function DebugNotificationsScreen() {
                       addLog("═══════════════════════════════════════");
 
                       const { AdhanModule } = NativeModules;
-                      
+
                       if (!AdhanModule?.listAvailableSounds) {
-                        addLog("❌ Module AdhanModule.listAvailableSounds non disponible");
+                        addLog(
+                          "❌ Module AdhanModule.listAvailableSounds non disponible"
+                        );
                         return;
                       }
 
                       const result = await AdhanModule.listAvailableSounds();
-                      
+
                       addLog(`📂 Bundle Path: ${result.bundlePath}`);
                       addLog(`🎵 Total MP3 dans le bundle: ${result.count}`);
                       addLog("");
 
                       if (result.sounds && result.sounds.length > 0) {
                         addLog("📋 Liste des MP3 dans le bundle:");
-                        result.sounds.forEach((sound) => {
+                        result.sounds.forEach((sound: string) => {
                           const isCurrent = sound === `${adhanSound}.mp3`;
                           addLog(
                             `   ${isCurrent ? "👉" : "  "} ${sound}${
@@ -693,31 +784,43 @@ export default function DebugNotificationsScreen() {
                             }`
                           );
                         });
-                        
+
                         addLog("");
-                        addLog(`🎯 Son actuellement sélectionné: ${adhanSound}.mp3`);
-                        
-                        const currentSoundExists = result.sounds.includes(`${adhanSound}.mp3`);
+                        addLog(
+                          `🎯 Son actuellement sélectionné: ${adhanSound}.mp3`
+                        );
+
+                        const currentSoundExists = result.sounds.includes(
+                          `${adhanSound}.mp3`
+                        );
                         if (currentSoundExists) {
                           addLog(`✅ Le son sélectionné EST dans le bundle`);
                           addLog(`✅ Les notifications devraient jouer ce son`);
                         } else {
-                          addLog(`❌ Le son sélectionné N'EST PAS dans le bundle`);
-                          addLog(`⚠️ Les notifications utiliseront le son par défaut iOS`);
+                          addLog(
+                            `❌ Le son sélectionné N'EST PAS dans le bundle`
+                          );
+                          addLog(
+                            `⚠️ Les notifications utiliseront le son par défaut iOS`
+                          );
                           addLog("");
-                          addLog(`💡 Sons disponibles: ${result.sounds.join(", ")}`);
+                          addLog(
+                            `💡 Sons disponibles: ${result.sounds.join(", ")}`
+                          );
                         }
                       } else {
                         addLog("❌ AUCUN MP3 trouvé dans le bundle !");
                         addLog("");
                         addLog("💡 Causes possibles:");
-                        addLog("   1. Le plugin Expo n'a pas copié les fichiers");
+                        addLog(
+                          "   1. Le plugin Expo n'a pas copié les fichiers"
+                        );
                         addLog("   2. Le build n'a pas inclus les MP3");
                         addLog("   3. Les MP3 ne sont pas dans assets/sounds/");
                         addLog("");
                         addLog("🔧 Solution: Rebuild l'app avec EAS Build");
                       }
-                      
+
                       addLog("═══════════════════════════════════════");
                     } catch (error) {
                       addLog(`❌ ERREUR vérification sons: ${error}`);
@@ -733,15 +836,21 @@ export default function DebugNotificationsScreen() {
                   onPress={async () => {
                     try {
                       addLog("═══════════════════════════════════════");
-                      addLog("📋 [LOGS] Récupération des logs de notifications");
+                      addLog(
+                        "📋 [LOGS] Récupération des logs de notifications"
+                      );
                       addLog("═══════════════════════════════════════");
 
                       const { AdhanModule } = NativeModules;
-                      
+
                       if (!AdhanModule?.getNotificationLogs) {
-                        addLog("❌ Module AdhanModule.getNotificationLogs non disponible");
+                        addLog(
+                          "❌ Module AdhanModule.getNotificationLogs non disponible"
+                        );
                         addLog("");
-                        addLog("ℹ️ Alternative: Utilise 3uTools pour voir les logs:");
+                        addLog(
+                          "ℹ️ Alternative: Utilise 3uTools pour voir les logs:"
+                        );
                         addLog("   1. Ouvre 3uTools sur PC");
                         addLog("   2. Onglet 'Journaux en temps réel'");
                         addLog("   3. Filtre: 'NotificationDelegate'");
@@ -749,7 +858,7 @@ export default function DebugNotificationsScreen() {
                       }
 
                       const result = await AdhanModule.getNotificationLogs();
-                      
+
                       addLog(`📊 Total de logs capturés: ${result.count}`);
                       addLog("");
 
@@ -761,25 +870,37 @@ export default function DebugNotificationsScreen() {
                         });
                         addLog("─────────────────────────────────────");
                         addLog("");
-                        addLog("💡 Ces logs sont capturés QUAND LA NOTIFICATION ARRIVE");
-                        addLog("   Ils montrent si le son est bien configuré ou non");
+                        addLog(
+                          "💡 Ces logs sont capturés QUAND LA NOTIFICATION ARRIVE"
+                        );
+                        addLog(
+                          "   Ils montrent si le son est bien configuré ou non"
+                        );
                       } else {
                         addLog("ℹ️ Aucun log capturé pour l'instant");
                         addLog("");
                         addLog("💡 Pour voir des logs:");
-                        addLog("   1. Clique sur 'Test Adhan' (bouton ci-dessus)");
+                        addLog(
+                          "   1. Clique sur 'Test Adhan' (bouton ci-dessus)"
+                        );
                         addLog("   2. Attends 10 secondes");
-                        addLog("   3. Quand la notification arrive, elle est loggée");
-                        addLog("   4. Reclique sur ce bouton pour voir les logs");
+                        addLog(
+                          "   3. Quand la notification arrive, elle est loggée"
+                        );
+                        addLog(
+                          "   4. Reclique sur ce bouton pour voir les logs"
+                        );
                       }
-                      
+
                       addLog("═══════════════════════════════════════");
                     } catch (error) {
                       addLog(`❌ ERREUR: ${error}`);
                     }
                   }}
                 >
-                  <Text style={styles.buttonText}>📋 Voir Logs Notifications</Text>
+                  <Text style={styles.buttonText}>
+                    📋 Voir Logs Notifications
+                  </Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity
@@ -886,15 +1007,18 @@ export default function DebugNotificationsScreen() {
                   addLog("═══════════════════════════════════════");
                   addLog("🗑️ [CACHE] Vidage du cache des horaires de prière");
                   addLog("═══════════════════════════════════════");
-                  
-                  const PrayerTimesCacheService = await import("../utils/PrayerTimesCacheService");
-                  const cacheService = PrayerTimesCacheService.default.getInstance();
-                  
+
+                  const PrayerTimesCacheService = await import(
+                    "../utils/PrayerTimesCacheService"
+                  );
+                  const cacheService =
+                    PrayerTimesCacheService.default.getInstance();
+
                   await cacheService.clearAllCache();
                   addLog("✅ Cache vidé avec succès");
                   addLog("🔄 Rechargement de la page recommandé...");
                   addLog("═══════════════════════════════════════");
-                  
+
                   Alert.alert(
                     "✅ Cache vidé",
                     "Le cache des horaires a été vidé. Retourne sur la page d'accueil pour recharger les horaires.",
@@ -931,12 +1055,54 @@ export default function DebugNotificationsScreen() {
           )}
         </View>
 
+        {/* 🎵 NOUVEAU : Logs Lecture Audio */}
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>🎵 Debug Lecture Audio</Text>
+          {playbackLogsLoading && (
+            <Text style={styles.emptyText}>Chargement...</Text>
+          )}
+          {!playbackLogsLoading && playbackLogs.length > 0
+            ? playbackLogs.slice(0, 20).map((log, i) => (
+                <View
+                  key={i}
+                  style={[styles.card, { backgroundColor: "#f9f9f9" }]}
+                >
+                  <Text style={styles.cardTitle}>
+                    {new Date(log.timestamp).toLocaleTimeString()} -{" "}
+                    {log.action}
+                  </Text>
+                  {log.details && Object.keys(log.details).length > 0 && (
+                    <Text style={styles.cardBody}>
+                      {JSON.stringify(log.details, null, 2)}
+                    </Text>
+                  )}
+                </View>
+              ))
+            : !playbackLogsLoading && (
+                <Text style={styles.emptyText}>
+                  Aucun log de lecture. Essayez de lancer une sourate.
+                </Text>
+              )}
+          <View style={{ flexDirection: "row", gap: 10, marginTop: 10 }}>
+            <TouchableOpacity
+              style={[styles.button, { backgroundColor: "#2196F3", flex: 1 }]}
+              onPress={loadPlaybackLogs}
+            >
+              <Text style={styles.buttonText}>🔄 Actualiser</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[styles.button, { backgroundColor: "#F44336", flex: 1 }]}
+              onPress={clearPlaybackLogs}
+            >
+              <Text style={styles.buttonText}>🗑️ Effacer</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Historique Background (iOS)</Text>
           {Platform.OS !== "ios" ? (
-            <Text style={styles.emptyText}>
-              Disponible uniquement sur iOS.
-            </Text>
+            <Text style={styles.emptyText}>Disponible uniquement sur iOS.</Text>
           ) : bgRuns.length > 0 ? (
             bgRuns.map((run, i) => (
               <View key={i} style={styles.card}>
@@ -965,7 +1131,7 @@ export default function DebugNotificationsScreen() {
             ))
           ) : (
             <Text style={styles.emptyText}>
-              Aucun run background enregistré pour l'instant.
+              Aucun run background enregistré pour l&apos;instant.
             </Text>
           )}
         </View>

@@ -96,8 +96,8 @@ android {
         applicationId 'com.drogbinho.prayertimesapp2'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 78
-        versionName "1.0.0"
+        versionCode 80
+        versionName "1.0.13"
     }
     signingConfigs {
     debug {
@@ -173,18 +173,18 @@ android {
         jniLibs {
             useLegacyPackaging (findProperty('expo.useLegacyPackaging')?.toBoolean() ?: false)
         }
-        // 🍎 Exclure les assets et dossiers iOS du build Android pour réduire la taille de l'APK
+        // 🛡️ EXCLUSION DÉFINITIVE : Force Gradle à ignorer ces dossiers même s'ils existent dans le projet
         excludes += [
-            '**/soundsComplete-ios/**',
-            '**/sounds-ios/**',
-            '**/ios/**',
-            '**/ios-native/**'
+            '**/assets/sounds-ios/**',
+            '**/assets/soundsComplete-ios/**',
+            '**/assets/ios/**',
+            '**/assets/ios-native/**'
         ]
     }
-    androidResources {
-        ignoreAssetsPattern '!.svn:!.git:!.ds_store:!*.scc:!CVS:!thumbs.db:!picasa.ini:!*~'
-        // 🍎 Exclure les assets et dossiers iOS du build Android pour réduire la taille de l'APK
-        ignoreAssetsPattern '**/soundsComplete-ios/**:**/sounds-ios/**:**/ios/**:**/ios-native/**'
+
+    // 🍎 Exclure les dossiers iOS des ressources Android pour réduire la taille de l'APK
+    aaptOptions {
+        ignoreAssetsPattern '!.svn:!.git:!.ds_store:!*.scc:!CVS:!thumbs.db:!picasa.ini:!*~:sounds-ios:soundsComplete-ios:ios:ios-native'
     }
 }
 

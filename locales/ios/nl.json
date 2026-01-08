@@ -1,0 +1,10 @@
+{
+  "NSLocationWhenInUseUsageDescription": "We hebben uw locatie nodig om nauwkeurige gebedstijden te berekenen op basis van uw huidige stad.",
+  "NSLocationAlwaysAndWhenInUseUsageDescription": "We hebben uw locatie nodig om nauwkeurige gebedstijden te berekenen en meldingen te sturen, zelfs als de app op de achtergrond draait.",
+  "NSLocationAlwaysUsageDescription": "We hebben uw locatie nodig om nauwkeurige meldingen voor gebedstijden te geven op basis van uw positie.",
+  "NSMicrophoneUsageDescription": "Deze app gebruikt de microfoon niet.",
+  "NSCameraUsageDescription": "Deze app gebruikt de camera niet.",
+  "NSPhotoLibraryUsageDescription": "Deze app gebruikt uw fotobibliotheek niet."
+}
+
+

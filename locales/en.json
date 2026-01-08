@@ -100,6 +100,8 @@
   },
   "qibla_direction": "Qibla Direction",
   "qibla_instructions": "For accurate results: hold your phone flat, away from metal objects and magnets. If the compass spins, make figure-8 movements to calibrate.",
+  "change_compass": "Change compass",
+  "select_compass": "Select a compass",
   "choose_sourate": "Choose a surah",
   "bismillah": "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ",
   "select_book": "Select a book",

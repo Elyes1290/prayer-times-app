@@ -824,8 +824,8 @@ function TabLayoutContent() {
         <Tabs.Screen
           name="debugNotifications"
           options={{
-            // DEBUG: onglet visible (à recacher avant build App Store)
-            href: undefined,
+            // DEBUG: onglet caché (à recacher avant build App Store)
+            href: null,
           }}
         />
         {/* Écran favoris accessible par navigation (pas visible dans la tab bar) */}

@@ -509,6 +509,7 @@ class ApiClient {
     if (!userId) {
       throw new Error("Aucun utilisateur connecté");
     }
+    
     return this.makeRequest("/adhans.php", "GET", null, {
       action: "catalog",
       user_id: userId.toString(),

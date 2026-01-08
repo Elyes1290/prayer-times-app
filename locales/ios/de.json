@@ -1,0 +1,10 @@
+{
+  "NSLocationWhenInUseUsageDescription": "Wir benötigen Ihren Standort, um genaue Gebetszeiten basierend auf Ihrer aktuellen Stadt zu berechnen.",
+  "NSLocationAlwaysAndWhenInUseUsageDescription": "Wir benötigen Ihren Standort, um genaue Gebetszeiten zu berechnen und Benachrichtigungen zu senden, auch wenn die App im Hintergrund läuft.",
+  "NSLocationAlwaysUsageDescription": "Wir benötigen Ihren Standort, um genaue Benachrichtigungen zu Gebetszeiten basierend auf Ihrer Position bereitzustellen.",
+  "NSMicrophoneUsageDescription": "Diese App verwendet das Mikrofon nicht.",
+  "NSCameraUsageDescription": "Diese App verwendet die Kamera nicht.",
+  "NSPhotoLibraryUsageDescription": "Diese App verwendet nicht Ihre Fotogalerie."
+}
+
+

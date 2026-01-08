@@ -100,6 +100,8 @@
   },
   "qibla_direction": "Kıble Yönü",
   "qibla_instructions": "Doğru sonuç için: Telefonunuzu düz tutun, metal ve mıknatıslardan uzak tutun. Pusula dengesiz dönüyorsa, kalibrasyon için sekiz çizerek hareket ettirin.",
+  "change_compass": "Pusula değiştir",
+  "select_compass": "Pusula seç",
   "choose_sourate": "Bir sure seçin",
   "bismillah": "بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ",
   "select_book": "Bir kitap seçin",

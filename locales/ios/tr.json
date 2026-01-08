@@ -1,0 +1,10 @@
+{
+  "NSLocationWhenInUseUsageDescription": "Namaz vakitlerini bulunduğunuz şehre göre doğru hesaplayabilmek için konumunuza ihtiyacımız var.",
+  "NSLocationAlwaysAndWhenInUseUsageDescription": "Namaz vakitlerini doğru hesaplamak ve uygulama arka planda olsa bile bildirim göndermek için konumunuza ihtiyacımız var.",
+  "NSLocationAlwaysUsageDescription": "Konumunuza göre doğru namaz vakti bildirimleri sağlamak için konumunuza ihtiyacımız var.",
+  "NSMicrophoneUsageDescription": "Bu uygulama mikrofonu kullanmaz.",
+  "NSCameraUsageDescription": "Bu uygulama kamerayı kullanmaz.",
+  "NSPhotoLibraryUsageDescription": "Bu uygulama fotoğraf kitaplığınızı kullanmaz."
+}
+
+

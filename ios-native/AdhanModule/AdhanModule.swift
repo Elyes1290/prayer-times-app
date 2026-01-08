@@ -494,20 +494,49 @@ class AdhanModule: NSObject {
     NSLog("🎵 [getFullAdhanPath] Recherche du MP3 complet: \(soundName)")
     
     let soundNameStr = soundName as String
+    let fileManager = FileManager.default
     
-    // Chercher le MP3 complet dans le bundle
+    // 1️⃣ PRIORITÉ : Chercher d'abord dans le dossier de téléchargements (adhans premium)
+    if let documentsPath = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first {
+        let premiumAdhanPath = documentsPath.appendingPathComponent("premium/adhan/\(soundNameStr).mp3")
+        NSLog("🔍 [getFullAdhanPath] Recherche premium: \(premiumAdhanPath.path)")
+        
+        if fileManager.fileExists(atPath: premiumAdhanPath.path) {
+            NSLog("✅ [getFullAdhanPath] MP3 PREMIUM trouvé: \(premiumAdhanPath.path)")
+            resolve(["path": premiumAdhanPath.path, "exists": true, "source": "premium"])
+            return
+        } else {
+            NSLog("⏭️ [getFullAdhanPath] Pas de MP3 premium, recherche dans le bundle...")
+        }
+    }
+    
+    // 2️⃣ FALLBACK : Chercher le MP3 complet dans le bundle (sons gratuits)
     if let mp3Path = Bundle.main.path(forResource: soundNameStr, ofType: "mp3") {
-        NSLog("✅ [getFullAdhanPath] MP3 complet trouvé: \(mp3Path)")
-        resolve(["path": mp3Path, "exists": true])
+        NSLog("✅ [getFullAdhanPath] MP3 bundle trouvé: \(mp3Path)")
+        resolve(["path": mp3Path, "exists": true, "source": "bundle"])
     } else {
         NSLog("❌ [getFullAdhanPath] MP3 complet NON TROUVÉ: \(soundNameStr).mp3")
         
         // Lister les MP3 disponibles pour debug
+        NSLog("📂 === DIAGNOSTIC ===")
+        
+        // Lister les MP3 du bundle
         if let bundlePath = Bundle.main.resourcePath {
-            let fileManager = FileManager.default
             if let files = try? fileManager.contentsOfDirectory(atPath: bundlePath) {
                 let mp3Files = files.filter { $0.hasSuffix(".mp3") }
-                NSLog("📂 MP3 disponibles dans le bundle:")
+                NSLog("📂 MP3 dans le bundle: \(mp3Files.count)")
+                mp3Files.prefix(5).forEach { file in
+                    NSLog("   - \(file)")
+                }
+            }
+        }
+        
+        // Lister les MP3 téléchargés
+        if let documentsPath = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first {
+            let premiumDir = documentsPath.appendingPathComponent("premium/adhan")
+            if let files = try? fileManager.contentsOfDirectory(atPath: premiumDir.path) {
+                let mp3Files = files.filter { $0.hasSuffix(".mp3") }
+                NSLog("📂 MP3 téléchargés: \(mp3Files.count)")
                 mp3Files.forEach { file in
                     NSLog("   - \(file)")
                 }

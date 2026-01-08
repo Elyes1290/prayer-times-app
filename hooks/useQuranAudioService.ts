@@ -1,11 +1,15 @@
 import { useState, useEffect, useCallback } from "react";
-import { NativeModules, Platform, DeviceEventEmitter } from "react-native";
+import {
+  NativeModules,
+  Platform,
+  DeviceEventEmitter,
+  NativeEventEmitter,
+} from "react-native";
+import { addPlaybackDebugLog } from "../utils/playbackDebugLogs";
 
 // Vérifier si nous sommes en mode test
 const isTestEnvironment = () => {
-  console.log("🎵 isTestEnvironment - NODE_ENV:", process.env.NODE_ENV);
   const result = process.env.NODE_ENV === "test";
-  console.log("🎵 isTestEnvironment - Résultat:", result);
   return result;
 };
 
@@ -15,6 +19,7 @@ interface QuranAudioState {
   currentReciter: string;
   position: number;
   duration: number;
+  totalDuration?: number; // 🍎 Ajouté pour compatibilité iOS
   isPremium: boolean;
   isServiceRunning: boolean;
 }
@@ -86,6 +91,7 @@ const createMockService = () => ({
       currentReciter: "",
       position: 0,
       duration: 0,
+      totalDuration: 0,
       isPremium: false,
       isServiceRunning: false,
     }),
@@ -93,26 +99,17 @@ const createMockService = () => ({
 
 // Récupérer le module natif ou utiliser le mock
 const QuranAudioServiceModule = (() => {
-  console.log("🎵 Initialisation QuranAudioServiceModule...");
-  console.log(
-    "🎵 NativeModules.QuranAudioServiceModule:",
-    !!NativeModules.QuranAudioServiceModule
-  );
-
   // En mode test, utiliser le mock
   if (isTestEnvironment()) {
-    console.log("🎵 Utilisation du mock (mode test)");
     return createMockService();
   }
 
-  // En production, utiliser le module natif si disponible
-  if (Platform.OS === "android" && NativeModules.QuranAudioServiceModule) {
-    console.log("🎵 Utilisation du module natif");
+  // En production, utiliser le module natif si disponible (iOS ET Android)
+  if (NativeModules.QuranAudioServiceModule) {
     return NativeModules.QuranAudioServiceModule;
   }
 
   // Fallback vers le mock
-  console.log("🎵 Utilisation du mock (fallback)");
   return createMockService();
 })();
 
@@ -129,138 +126,147 @@ export const useQuranAudioService = (): QuranAudioServiceInterface => {
 
   // Initialiser l'écouteur d'événements
   useEffect(() => {
-    console.log(
-      "🎵 Hook useQuranAudioService - Initialisation des écouteurs..."
-    );
-    console.log("🎵 isTestEnvironment():", isTestEnvironment());
-    console.log(
-      "🎵 QuranAudioServiceModule disponible:",
-      !!QuranAudioServiceModule
-    );
-    console.log(
-      "🎵 QuranAudioServiceModule type:",
-      typeof QuranAudioServiceModule
-    );
-    console.log("🎵 Platform.OS:", Platform.OS);
-    console.log("🎵 Platform.OS === 'android':", Platform.OS === "android");
-
     // Ne pas initialiser en mode test ou si le module n'est pas disponible
-    if (
-      isTestEnvironment() ||
-      !QuranAudioServiceModule ||
-      Platform.OS !== "android"
-    ) {
-      console.log("🎵 Hook useQuranAudioService - Initialisation annulée");
-      console.log("🎵 Raison - isTestEnvironment:", isTestEnvironment());
-      console.log(
-        "🎵 Raison - !QuranAudioServiceModule:",
-        !QuranAudioServiceModule
-      );
-      console.log(
-        "🎵 Raison - Platform.OS !== 'android':",
-        Platform.OS !== "android"
-      );
+    if (isTestEnvironment() || !QuranAudioServiceModule) {
       return;
     }
 
     try {
       console.log("🎵 Initialisation des écouteurs d'événements audio...");
 
-      // NOUVEAU : Synchronisation token déléguée au PremiumContext
-      // (Éviter la double synchronisation)
+      // 🍎 Configuration NativeEventEmitter pour iOS (INDISPENSABLE pour RCTEventEmitter)
+      const emitter =
+        Platform.OS === "ios"
+          ? new NativeEventEmitter(NativeModules.QuranAudioServiceModule)
+          : DeviceEventEmitter;
+
+      // 🚀 NOUVEAU : Écouter les logs natifs Swift
+      const nativeLogSubscription = emitter.addListener(
+        "NativeDebugLog",
+        (event: any) => {
+          // Sauvegarde persistante
+          addPlaybackDebugLog("iOS Swift", { message: event.message });
+          // Émission temps réel vers debug page
+          DeviceEventEmitter.emit("AddPlaybackDebugLog", {
+            message: `[iOS Swift] ${event.message}`,
+            type: event.message.includes("❌") ? "error" : "info",
+          });
+        }
+      );
 
       // Écouter les changements d'état audio
-      const audioStateSubscription = DeviceEventEmitter.addListener(
-        "QuranAudioStateChanged",
-        (event) => {
-          console.log("🎵 Événement audio reçu:", event);
-          console.log(
-            "🎵 Détails événement - isPlaying:",
-            event.isPlaying,
-            "position:",
-            event.position,
-            "duration:",
-            event.duration
-          );
-          setAudioState((prevState) => {
-            const newState = {
-              ...prevState,
-              isPlaying: event.isPlaying || false,
-              currentSurah: event.surah || "",
-              currentReciter: event.reciter || "",
-              position: event.position || 0,
-              duration: event.duration || 0,
-              isPremium: event.isPremium || false,
-            };
-            console.log("🎵 Nouvel état audio:", newState);
-            return newState;
-          });
-        }
-      );
+      const audioStateEventName =
+        Platform.OS === "ios" ? "AudioStateChanged" : "QuranAudioStateChanged";
 
-      // Écouter les mises à jour de progression
-      const audioProgressSubscription = DeviceEventEmitter.addListener(
-        "QuranAudioProgress",
-        (event) => {
-          console.log("🎵 Progression audio reçue:", event);
-          console.log(
-            "🎵 Détails progression - position:",
-            event.position,
-            "duration:",
-            event.duration
-          );
-          setAudioState((prevState) => {
-            const newState = {
-              ...prevState,
-              position: event.position || 0,
-              duration: event.duration || 0,
-            };
-            console.log("🎵 Nouvel état progression:", newState);
-            return newState;
-          });
-        }
-      );
+      const audioStateSubscription = emitter.addListener(
+        audioStateEventName,
+        (event: any) => {
+          // 🎯 NOUVEAU : Log systématique pour debug
+          if (Platform.OS === "ios") {
+            DeviceEventEmitter.emit("AddPlaybackDebugLog", {
+              message: `[Native Event] StateChanged: ${
+                event.isPlaying ? "PLAY" : "PAUSE"
+              }`,
+              details: {
+                pos: event.position || event.currentPosition,
+                dur: event.duration || event.totalDuration,
+                rate: event.playerRate,
+              },
+            });
+          }
 
-      // Écouter les changements de statut du service
-      const serviceStatusSubscription = DeviceEventEmitter.addListener(
-        "QuranServiceStatusChanged",
-        (event) => {
-          console.log("🎵 Statut service reçu:", event);
+          // 🎯 NOUVEAU : Harmonisation intelligente iOS (secondes) vs Android (ms)
+          let rawPos =
+            event.position ??
+            event.currentPosition ??
+            event.positionMillis ??
+            0;
+          let rawDur =
+            event.duration ?? event.totalDuration ?? event.durationMillis ?? 0;
+
+          // iOS envoie des secondes (Double), Android des millisecondes (Int)
+          // On convertit en ms si la valeur est "petite" et qu'on est sur iOS
+          const position =
+            Platform.OS === "ios" && rawPos > 0 && rawPos < 40000
+              ? rawPos * 1000
+              : rawPos;
+          const duration =
+            Platform.OS === "ios" && rawDur > 0 && rawDur < 40000
+              ? rawDur * 1000
+              : rawDur;
+
           setAudioState((prevState) => ({
             ...prevState,
-            isServiceRunning: event.isRunning || false,
+            isPlaying: event.isPlaying ?? prevState.isPlaying,
+            currentSurah:
+              event.surah ?? event.currentTitle ?? prevState.currentSurah,
+            currentReciter:
+              event.reciter ?? event.currentReciter ?? prevState.currentReciter,
+            position: Math.round(position),
+            duration: Math.round(duration),
+            totalDuration: Math.round(duration),
+            isPremium: event.isPremium ?? prevState.isPremium,
+            isServiceRunning:
+              event.isServiceRunning ?? prevState.isServiceRunning,
           }));
         }
       );
 
-      // NOUVEAU : Écouter la fin de sourate
-      const surahCompletedSubscription = DeviceEventEmitter.addListener(
-        "QuranSurahCompleted",
-        (event) => {
-          console.log("🎵 Événement fin de sourate reçu:", event);
-          console.log(
-            "🎵 Détails - surah:",
-            event.surah,
-            "reciter:",
-            event.reciter,
-            "autoAdvance:",
-            event.autoAdvanceEnabled
-          );
+      // 🤖 NOUVEAU : Écouter la progression audio (Spécifique Android)
+      // Sur Android, le timer de progression envoie des événements séparés
+      const audioProgressSubscription =
+        Platform.OS === "android"
+          ? emitter.addListener("QuranAudioProgress", (event: any) => {
+              setAudioState((prevState) => ({
+                ...prevState,
+                position: Math.round(event.position ?? prevState.position),
+                duration: Math.round(event.duration ?? prevState.duration),
+                totalDuration: Math.round(event.duration ?? prevState.duration),
+              }));
+            })
+          : null;
 
-          // Émettre un événement personnalisé pour que QuranScreen puisse l'écouter
+      // Écouter les erreurs
+      const audioErrorEventName =
+        Platform.OS === "ios" ? "AudioError" : "QuranAudioError";
+      const audioErrorSubscription = emitter.addListener(
+        audioErrorEventName,
+        (event: any) => {
+          DeviceEventEmitter.emit("AddPlaybackDebugLog", {
+            message: `[Native Error] ${event.error}`,
+            type: "error",
+          });
+        }
+      );
+
+      // NOUVEAU : Écouter la fin de sourate
+      const surahCompletedEventName =
+        Platform.OS === "ios" ? "AudioCompleted" : "QuranSurahCompleted";
+      const surahCompletedSubscription = emitter.addListener(
+        surahCompletedEventName,
+        (event: any) => {
+          if (Platform.OS === "ios") {
+            DeviceEventEmitter.emit("AddPlaybackDebugLog", {
+              message: `[Native Event] Completed (reason: ${
+                event.reason || "end"
+              })`,
+              type: "info",
+            });
+          }
+
           DeviceEventEmitter.emit("QuranSurahCompletedForPlaylist", {
             surah: event.surah,
             reciter: event.reciter,
             autoAdvanceEnabled: event.autoAdvanceEnabled,
+            reason: event.reason, // iOS: "next", "previous", ou undefined
           });
         }
       );
 
       // 🛠️ NOUVEAU : Écouter les navigations depuis le widget
-      const widgetNavigationSubscription = DeviceEventEmitter.addListener(
+      const widgetNavigationSubscription = emitter.addListener(
         "WidgetNavigateNext",
-        (event) => {
-          console.log("🎯 Navigation widget suivante reçue:", event);
+        (event: any) => {
           DeviceEventEmitter.emit("WidgetNavigationNext", {
             surahNumber: event.surahNumber,
             surahName: event.surahName,
@@ -269,10 +275,9 @@ export const useQuranAudioService = (): QuranAudioServiceInterface => {
         }
       );
 
-      const widgetNavigationPrevSubscription = DeviceEventEmitter.addListener(
+      const widgetNavigationPrevSubscription = emitter.addListener(
         "WidgetNavigatePrevious",
-        (event) => {
-          console.log("🎯 Navigation widget précédente reçue:", event);
+        (event: any) => {
           DeviceEventEmitter.emit("WidgetNavigationPrevious", {
             surahNumber: event.surahNumber,
             surahName: event.surahName,
@@ -281,17 +286,15 @@ export const useQuranAudioService = (): QuranAudioServiceInterface => {
         }
       );
 
-      console.log("🎵 Écouteurs d'événements audio initialisés");
-
       // Nettoyer les écouteurs lors du démontage
       return () => {
+        nativeLogSubscription?.remove();
         audioStateSubscription?.remove();
         audioProgressSubscription?.remove();
-        serviceStatusSubscription?.remove();
+        audioErrorSubscription?.remove();
         surahCompletedSubscription?.remove();
         widgetNavigationSubscription?.remove();
         widgetNavigationPrevSubscription?.remove();
-        console.log("🎵 Écouteurs d'événements audio nettoyés");
       };
     } catch (error) {
       console.error("❌ Erreur initialisation écouteurs audio:", error);
@@ -301,13 +304,11 @@ export const useQuranAudioService = (): QuranAudioServiceInterface => {
   // Démarrer le service audio
   const startService = useCallback(async (): Promise<void> => {
     try {
-      console.log("🎵 Démarrage du service audio...");
       await QuranAudioServiceModule.startAudioService();
       setAudioState((prevState) => ({
         ...prevState,
         isServiceRunning: true,
       }));
-      console.log("✅ Service audio démarré");
     } catch (error) {
       console.error("❌ Erreur démarrage service audio:", error);
       throw error;
@@ -317,14 +318,12 @@ export const useQuranAudioService = (): QuranAudioServiceInterface => {
   // Arrêter le service audio
   const stopService = useCallback(async (): Promise<void> => {
     try {
-      console.log("🎵 Arrêt du service audio...");
       await QuranAudioServiceModule.stopAudioService();
       setAudioState((prevState) => ({
         ...prevState,
         isServiceRunning: false,
         isPlaying: false,
       }));
-      console.log("✅ Service audio arrêté");
     } catch (error) {
       console.error("❌ Erreur arrêt service audio:", error);
       throw error;
@@ -339,12 +338,6 @@ export const useQuranAudioService = (): QuranAudioServiceInterface => {
       reciter: string
     ): Promise<void> => {
       try {
-        console.log("🎵 Chargement audio dans le service:", {
-          surah,
-          reciter,
-          audioPath,
-        });
-
         // Démarrer le service s'il n'est pas déjà démarré
         if (!audioState.isServiceRunning) {
           await startService();
@@ -361,8 +354,6 @@ export const useQuranAudioService = (): QuranAudioServiceInterface => {
           currentSurah: surah,
           currentReciter: reciter,
         }));
-
-        console.log("✅ Audio chargé dans le service");
       } catch (error) {
         console.error("❌ Erreur chargement audio:", error);
         throw error;
@@ -374,13 +365,11 @@ export const useQuranAudioService = (): QuranAudioServiceInterface => {
   // Lancer la lecture
   const playAudio = useCallback(async (): Promise<void> => {
     try {
-      console.log("🎵 Lancement de la lecture audio...");
       await QuranAudioServiceModule.playAudio();
       setAudioState((prevState) => ({
         ...prevState,
         isPlaying: true,
       }));
-      console.log("✅ Lecture audio lancée");
     } catch (error) {
       console.error("❌ Erreur lancement lecture:", error);
       throw error;
@@ -390,13 +379,11 @@ export const useQuranAudioService = (): QuranAudioServiceInterface => {
   // Mettre en pause
   const pauseAudio = useCallback(async (): Promise<void> => {
     try {
-      console.log("🎵 Mise en pause de l'audio...");
       await QuranAudioServiceModule.pauseAudio();
       setAudioState((prevState) => ({
         ...prevState,
         isPlaying: false,
       }));
-      console.log("✅ Audio mis en pause");
     } catch (error) {
       console.error("❌ Erreur pause audio:", error);
       throw error;
@@ -406,14 +393,12 @@ export const useQuranAudioService = (): QuranAudioServiceInterface => {
   // Arrêter la lecture
   const stopAudio = useCallback(async (): Promise<void> => {
     try {
-      console.log("🎵 Arrêt de l'audio...");
       await QuranAudioServiceModule.stopAudio();
       setAudioState((prevState) => ({
         ...prevState,
         isPlaying: false,
         position: 0,
       }));
-      console.log("✅ Audio arrêté");
     } catch (error) {
       console.error("❌ Erreur arrêt audio:", error);
       throw error;
@@ -424,13 +409,11 @@ export const useQuranAudioService = (): QuranAudioServiceInterface => {
   const seekToPosition = useCallback(
     async (position: number): Promise<void> => {
       try {
-        console.log("🎵 Navigation vers position:", position);
         await QuranAudioServiceModule.seekToPosition(position);
         setAudioState((prevState) => ({
           ...prevState,
           position,
         }));
-        console.log("✅ Navigation effectuée");
       } catch (error) {
         console.error("❌ Erreur navigation audio:", error);
         throw error;
@@ -442,9 +425,7 @@ export const useQuranAudioService = (): QuranAudioServiceInterface => {
   // Naviguer vers la sourate suivante
   const navigateToNextSurah = useCallback(async (): Promise<void> => {
     try {
-      console.log("⏭️ Navigation vers sourate suivante...");
       await QuranAudioServiceModule.navigateToNextSurah();
-      console.log("✅ Navigation vers sourate suivante effectuée");
     } catch (error) {
       console.error("❌ Erreur navigation vers sourate suivante:", error);
       throw error;
@@ -454,9 +435,7 @@ export const useQuranAudioService = (): QuranAudioServiceInterface => {
   // Naviguer vers la sourate précédente
   const navigateToPreviousSurah = useCallback(async (): Promise<void> => {
     try {
-      console.log("⏮️ Navigation vers sourate précédente...");
       await QuranAudioServiceModule.navigateToPreviousSurah();
-      console.log("✅ Navigation vers sourate précédente effectuée");
     } catch (error) {
       console.error("❌ Erreur navigation vers sourate précédente:", error);
       throw error;
@@ -466,9 +445,7 @@ export const useQuranAudioService = (): QuranAudioServiceInterface => {
   // Lire la sourate actuelle depuis le widget
   const getCurrentWidgetSurah = useCallback(async () => {
     try {
-      console.log("📖 Lecture sourate widget...");
       const result = await QuranAudioServiceModule.getCurrentWidgetSurah();
-      console.log("📖 Sourate widget:", result);
       return result;
     } catch (error) {
       console.error("❌ Erreur lecture sourate widget:", error);
@@ -479,9 +456,7 @@ export const useQuranAudioService = (): QuranAudioServiceInterface => {
   // Synchroniser avec la sourate du widget
   const syncWithWidgetSurah = useCallback(async (): Promise<boolean> => {
     try {
-      console.log("🔄 Synchronisation avec widget...");
       const result = await QuranAudioServiceModule.syncWithWidgetSurah();
-      console.log("🔄 Résultat synchronisation:", result);
       return result;
     } catch (error) {
       console.error("❌ Erreur synchronisation widget:", error);
@@ -493,13 +468,11 @@ export const useQuranAudioService = (): QuranAudioServiceInterface => {
   const updatePremiumStatus = useCallback(
     async (isPremium: boolean): Promise<void> => {
       try {
-        console.log("👑 Mise à jour statut premium:", isPremium);
         await QuranAudioServiceModule.updatePremiumStatus(isPremium);
         setAudioState((prevState) => ({
           ...prevState,
           isPremium,
         }));
-        console.log("✅ Statut premium mis à jour");
       } catch (error) {
         console.error("❌ Erreur mise à jour statut premium:", error);
         throw error;
@@ -508,9 +481,9 @@ export const useQuranAudioService = (): QuranAudioServiceInterface => {
     []
   );
 
-  // Vérifier si le service est disponible
+  // Vérifier si le service est disponible (iOS ET Android)
   const isServiceAvailable = useCallback((): boolean => {
-    return Platform.OS === "android" && !!NativeModules.QuranAudioServiceModule;
+    return !!NativeModules.QuranAudioServiceModule;
   }, []);
 
   // Obtenir l'état actuel

@@ -9,10 +9,15 @@ import {
   Text,
   View,
   Dimensions,
+  Modal,
+  TouchableOpacity,
+  ScrollView,
+  SafeAreaView,
 } from "react-native";
 import { useTranslation } from "react-i18next";
 import { useFocusEffect } from "@react-navigation/native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { Ionicons } from "@expo/vector-icons";
 import compassImg from "../assets/images/compass.png";
 import kaabaImg from "../assets/images/kaaba.png";
 import ThemedImageBackground from "../components/ThemedImageBackground";
@@ -22,6 +27,79 @@ import {
   useOverlayTextColor,
   useCurrentTheme,
 } from "../hooks/useThemeColor";
+import { usePremium } from "../contexts/PremiumContext";
+
+// 🧭 Import des boussoles disponibles
+import compass1 from "../assets/boussole/compass1.png";
+import compass2 from "../assets/boussole/compass2.png";
+import compass3 from "../assets/boussole/compass3.png";
+import compass4 from "../assets/boussole/compass4.jpg";
+import compass5 from "../assets/boussole/compass5.png";
+import compass6 from "../assets/boussole/compass6.png";
+import compass7 from "../assets/boussole/compass7.png";
+import compass8 from "../assets/boussole/compass8.png";
+
+// 🧭 Types et configuration des boussoles
+type CompassType =
+  | "compass1"
+  | "compass2"
+  | "compass3"
+  | "compass4"
+  | "compass5"
+  | "compass6"
+  | "compass7"
+  | "compass8";
+
+const AVAILABLE_COMPASSES = {
+  compass1: {
+    id: "compass1" as CompassType,
+    name: "Classique",
+    image: compass1,
+    premium: false,
+  },
+  compass2: {
+    id: "compass2" as CompassType,
+    name: "Boussole 2",
+    image: compass2,
+    premium: true,
+  },
+  compass3: {
+    id: "compass3" as CompassType,
+    name: "Boussole 3",
+    image: compass3,
+    premium: true,
+  },
+  compass4: {
+    id: "compass4" as CompassType,
+    name: "Boussole 4",
+    image: compass4,
+    premium: true,
+  },
+  compass5: {
+    id: "compass5" as CompassType,
+    name: "Boussole 5",
+    image: compass5,
+    premium: true,
+  },
+  compass6: {
+    id: "compass6" as CompassType,
+    name: "Boussole 6",
+    image: compass6,
+    premium: true,
+  },
+  compass7: {
+    id: "compass7" as CompassType,
+    name: "Boussole 7",
+    image: compass7,
+    premium: true,
+  },
+  compass8: {
+    id: "compass8" as CompassType,
+    name: "Boussole 8",
+    image: compass8,
+    premium: true,
+  },
+};
 
 const KAABA_LAT = 21.4225;
 const KAABA_LNG = 39.8262;
@@ -192,11 +270,144 @@ const getStyles = (
       textAlign: "center",
       opacity: 0.8,
     },
+    // 🧭 Styles pour la sélection de boussole
+    compassSelectorButton: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "center",
+      backgroundColor:
+        currentTheme === "light"
+          ? "rgba(255, 255, 255, 0.9)"
+          : "rgba(34, 40, 58, 0.9)",
+      paddingVertical: 10,
+      paddingHorizontal: 16,
+      borderRadius: 20,
+      marginBottom: 15,
+      borderWidth: 1.5,
+      borderColor: currentTheme === "light" ? colors.primary : "#e7c86a",
+      shadowColor: "#000",
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.1,
+      shadowRadius: 4,
+      elevation: 3,
+    },
+    compassSelectorText: {
+      fontSize: 14,
+      fontWeight: "600",
+      marginLeft: 8,
+    },
+    modalOverlay: {
+      flex: 1,
+      backgroundColor: "rgba(0, 0, 0, 0.5)",
+      justifyContent: "flex-end",
+    },
+    modalContent: {
+      backgroundColor: "#fffbe6",
+      borderTopLeftRadius: 20,
+      borderTopRightRadius: 20,
+      paddingBottom: 40,
+      maxHeight: "70%",
+    },
+    modalHeader: {
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: "center",
+      padding: 20,
+      borderBottomWidth: 1,
+      borderBottomColor: "#e7c86a",
+    },
+    modalTitle: {
+      fontSize: 18,
+      fontWeight: "bold",
+      color: "#242428",
+      flex: 1,
+    },
+    closeButton: {
+      padding: 5,
+    },
+    closeButtonText: {
+      fontSize: 24,
+      color: "#242428",
+      fontWeight: "bold",
+    },
+    compassList: {
+      paddingHorizontal: 15,
+      paddingTop: 10,
+    },
+    compassOption: {
+      flexDirection: "row",
+      alignItems: "center",
+      backgroundColor: "#fff",
+      borderRadius: 12,
+      padding: 15,
+      marginBottom: 12,
+      borderWidth: 2,
+      borderColor: "transparent",
+      shadowColor: "#000",
+      shadowOffset: { width: 0, height: 1 },
+      shadowOpacity: 0.1,
+      shadowRadius: 2,
+      elevation: 2,
+    },
+    selectedCompassOption: {
+      borderColor: "#4ECDC4",
+      backgroundColor: "#f5fff8",
+    },
+    lockedCompassOption: {
+      opacity: 0.6,
+    },
+    compassPreview: {
+      width: 60,
+      height: 60,
+      borderRadius: 30,
+      backgroundColor: "#f0f0f0",
+      overflow: "hidden",
+      marginRight: 15,
+      position: "relative",
+    },
+    compassThumbnail: {
+      width: "100%",
+      height: "100%",
+    },
+    lockOverlay: {
+      ...StyleSheet.absoluteFillObject,
+      backgroundColor: "rgba(0, 0, 0, 0.5)",
+      justifyContent: "center",
+      alignItems: "center",
+    },
+    compassInfo: {
+      flex: 1,
+    },
+    compassName: {
+      fontSize: 16,
+      fontWeight: "600",
+      color: "#242428",
+      marginBottom: 4,
+    },
+    selectedCompassName: {
+      color: "#4ECDC4",
+    },
+    premiumBadge: {
+      flexDirection: "row",
+      alignItems: "center",
+      backgroundColor: "rgba(255, 215, 0, 0.2)",
+      paddingHorizontal: 8,
+      paddingVertical: 2,
+      borderRadius: 10,
+      alignSelf: "flex-start",
+    },
+    premiumText: {
+      fontSize: 11,
+      fontWeight: "600",
+      color: "#DAA520",
+      marginLeft: 4,
+    },
   });
 
 export default function QiblaScreen() {
   const { t } = useTranslation();
   const insets = useSafeAreaInsets();
+  const { user } = usePremium();
 
   // Utiliser les couleurs thématiques
   const colors = useThemeColors();
@@ -207,6 +418,11 @@ export default function QiblaScreen() {
 
   const [direction, setDirection] = useState<number | null>(null);
   const [heading, setHeading] = useState<number | null>(null);
+
+  // 🧭 États pour la sélection de boussole (premium)
+  const [selectedCompass, setSelectedCompass] =
+    useState<CompassType>("compass1");
+  const [compassModalVisible, setCompassModalVisible] = useState(false);
   const [isPointingToQibla, setIsPointingToQibla] = useState(false);
   const [locationPermissionGranted, setLocationPermissionGranted] = useState<
     boolean | null
@@ -238,6 +454,42 @@ export default function QiblaScreen() {
     };
     loadDeniedStatus();
   }, []);
+
+  // 🧭 Charger le choix de boussole sauvegardé
+  useEffect(() => {
+    const loadCompassChoice = async () => {
+      try {
+        const saved = await AsyncStorage.getItem("@selected_compass");
+        const validCompasses = [
+          "compass1",
+          "compass2",
+          "compass3",
+          "compass4",
+          "compass5",
+          "compass6",
+          "compass7",
+          "compass8",
+        ];
+        if (saved && validCompasses.includes(saved)) {
+          setSelectedCompass(saved as CompassType);
+        }
+      } catch (err) {
+        console.error("Erreur chargement boussole:", err);
+      }
+    };
+    loadCompassChoice();
+  }, []);
+
+  // 🧭 Sauvegarder le choix de boussole
+  const selectCompass = async (compassId: CompassType) => {
+    try {
+      setSelectedCompass(compassId);
+      await AsyncStorage.setItem("@selected_compass", compassId);
+      setCompassModalVisible(false);
+    } catch (err) {
+      console.error("Erreur sauvegarde boussole:", err);
+    }
+  };
 
   // Animation: valeur de rotation de la boussole
   const animatedHeading = useRef(new Animated.Value(0)).current;
@@ -542,6 +794,25 @@ export default function QiblaScreen() {
           </View>
         )}
 
+        {/* 🧭 Bouton de sélection de boussole (premium only) */}
+        {user?.isPremium && !userDeniedPermission && (
+          <TouchableOpacity
+            style={styles.compassSelectorButton}
+            onPress={() => setCompassModalVisible(true)}
+          >
+            <Ionicons
+              name="color-palette-outline"
+              size={20}
+              color={overlayTextColor}
+            />
+            <Text
+              style={[styles.compassSelectorText, { color: overlayTextColor }]}
+            >
+              {t("change_compass") || "Changer de boussole"}
+            </Text>
+          </TouchableOpacity>
+        )}
+
         {/* 🚀 NOUVEAU : Masquer la boussole si localisation désactivée */}
         {!userDeniedPermission && (
           <View style={styles.compassWrap}>
@@ -552,7 +823,10 @@ export default function QiblaScreen() {
                 { transform: [{ rotate: compassRotation }] },
               ]}
             >
-              <Image source={compassImg} style={styles.compass} />
+              <Image
+                source={AVAILABLE_COMPASSES[selectedCompass].image}
+                style={styles.compass}
+              />
               {/* Kaaba sur le pourtour du cercle */}
               <Image
                 source={kaabaImg}
@@ -607,6 +881,89 @@ export default function QiblaScreen() {
             </Text>
           </View>
         )}
+
+        {/* 🧭 Modal de sélection de boussole (premium) */}
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={compassModalVisible}
+          onRequestClose={() => setCompassModalVisible(false)}
+        >
+          <SafeAreaView style={styles.modalOverlay}>
+            <View style={styles.modalContent}>
+              <View style={styles.modalHeader}>
+                <Text style={styles.modalTitle}>
+                  {t("select_compass") || "Sélectionner une boussole"}
+                </Text>
+                <TouchableOpacity
+                  style={styles.closeButton}
+                  onPress={() => setCompassModalVisible(false)}
+                >
+                  <Text style={styles.closeButtonText}>✕</Text>
+                </TouchableOpacity>
+              </View>
+
+              <ScrollView style={styles.compassList}>
+                {Object.values(AVAILABLE_COMPASSES).map((compass) => {
+                  const isLocked = compass.premium && !user?.isPremium;
+                  const isSelected = selectedCompass === compass.id;
+
+                  return (
+                    <TouchableOpacity
+                      key={compass.id}
+                      style={[
+                        styles.compassOption,
+                        isSelected && styles.selectedCompassOption,
+                        isLocked && styles.lockedCompassOption,
+                      ]}
+                      onPress={() => !isLocked && selectCompass(compass.id)}
+                      disabled={isLocked}
+                    >
+                      <View style={styles.compassPreview}>
+                        <Image
+                          source={compass.image}
+                          style={styles.compassThumbnail}
+                        />
+                        {isLocked && (
+                          <View style={styles.lockOverlay}>
+                            <Ionicons
+                              name="lock-closed"
+                              size={24}
+                              color="#FFD700"
+                            />
+                          </View>
+                        )}
+                      </View>
+                      <View style={styles.compassInfo}>
+                        <Text
+                          style={[
+                            styles.compassName,
+                            isSelected && styles.selectedCompassName,
+                          ]}
+                        >
+                          {compass.name}
+                        </Text>
+                        {compass.premium && (
+                          <View style={styles.premiumBadge}>
+                            <Ionicons name="star" size={12} color="#FFD700" />
+                            <Text style={styles.premiumText}>Premium</Text>
+                          </View>
+                        )}
+                      </View>
+                      {isSelected && (
+                        <Ionicons
+                          name="checkmark-circle"
+                          size={24}
+                          color="#4ECDC4"
+                        />
+                      )}
+                    </TouchableOpacity>
+                  );
+                })}
+              </ScrollView>
+            </View>
+          </SafeAreaView>
+        </Modal>
       </View>
     </ThemedImageBackground>
   );

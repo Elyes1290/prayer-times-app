@@ -66,8 +66,9 @@ try {
 }
 
 function handleCatalog() {
-    // 🎵 Scanner le vrai dossier des adhans premium sur Infomaniak
+    // 🎵 Scanner le dossier adhan (fichiers .mp3 complets pour tous)
     $adhanDirectory = __DIR__ . '/../private/premium/adhan/';
+    $allowedExtensions = ['mp3', 'wav', 'ogg', 'm4a'];
     
     if (!is_dir($adhanDirectory)) {
         echo json_encode([
@@ -77,7 +78,8 @@ function handleCatalog() {
             'data' => [
                 'availableAdhans' => [],
                 'adhanDetails' => [],
-                'total' => 0
+                'total' => 0,
+                'platform' => $platform
             ]
         ]);
         return;
@@ -85,7 +87,6 @@ function handleCatalog() {
     
     $availableAdhans = [];
     $adhanDetails = []; // 🔧 NOUVEAU : Détails complets avec tailles
-    $allowedExtensions = ['mp3', 'wav', 'ogg', 'm4a'];
     
     $items = scandir($adhanDirectory);
     
@@ -144,11 +145,18 @@ function handleCatalog() {
 
 function handleDownload() {
     $adhanName = $_GET['adhan'] ?? '';
+    
     if (empty($adhanName)) {
         throw new Exception('Nom de l\'adhan requis');
     }
 
-    // 🎵 Scanner le dossier pour trouver le fichier correspondant
+    $token = getBearerToken();
+    if (!$token && isset($_GET['token']) && !empty($_GET['token'])) {
+        $token = $_GET['token'];
+    }
+    $tokenParam = $token ? ("&token=" . urlencode($token)) : "";
+
+    // 🎵 Scanner le dossier adhan (même comportement pour tous)
     $adhanDirectory = __DIR__ . '/../private/premium/adhan/';
     if (!is_dir($adhanDirectory)) {
         throw new Exception('Dossier adhan non trouvé');
@@ -168,12 +176,6 @@ function handleDownload() {
                 if ($fileNameFormatted === $adhanName) {
                     $fileSize = filesize($itemPath);
                     $fileSizeMB = round($fileSize / (1024 * 1024), 2);
-                    // 🔐 Construire l'URL vers serve, avec token via header ou query
-                    $token = getBearerToken();
-                    if (!$token && isset($_GET['token']) && !empty($_GET['token'])) {
-                        $token = $_GET['token'];
-                    }
-                    $tokenParam = $token ? ("&token=" . urlencode($token)) : "";
                     $serveUrl = "https://myadhanapp.com/api/adhans.php?action=serve&adhan=" . urlencode($adhanName) . $tokenParam;
                     echo json_encode([
                         'success' => true,
@@ -198,20 +200,23 @@ function handleDownload() {
  */
 function handleServe() {
     $adhanName = $_GET['adhan'] ?? '';
+    
     if (empty($adhanName)) {
         http_response_code(400);
         echo json_encode(['success' => false, 'message' => 'Nom de l\'adhan requis']);
         return;
     }
 
+    // 🎵 Dossier des adhans premium
     $adhanDirectory = __DIR__ . '/../private/premium/adhan/';
+    $allowedExtensions = ['mp3', 'wav', 'ogg', 'm4a'];
+    
     if (!is_dir($adhanDirectory)) {
         http_response_code(404);
         echo json_encode(['success' => false, 'message' => 'Dossier adhan non trouvé']);
         return;
     }
 
-    $allowedExtensions = ['mp3', 'wav', 'ogg', 'm4a'];
     $items = scandir($adhanDirectory);
     foreach ($items as $item) {
         if ($item === '.' || $item === '..') continue;
@@ -230,6 +235,7 @@ function handleServe() {
                 if ($extension === 'wav') $mime = 'audio/wav';
                 if ($extension === 'ogg') $mime = 'audio/ogg';
                 if ($extension === 'm4a') $mime = 'audio/mp4';
+                if ($extension === 'caf') $mime = 'audio/x-caf';
 
                 @ini_set('zlib.output_compression', 'Off');
                 if (function_exists('apache_setenv')) @apache_setenv('no-gzip', '1');

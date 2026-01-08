@@ -1,0 +1,10 @@
+{
+  "NSLocationWhenInUseUsageDescription": "نحتاج إلى موقعك لحساب مواقيت الصلاة الدقيقة بناءً على مدينتك الحالية.",
+  "NSLocationAlwaysAndWhenInUseUsageDescription": "نحتاج إلى موقعك لحساب مواقيت الصلاة الدقيقة وإرسال التنبيهات حتى عندما يكون التطبيق في الخلفية.",
+  "NSLocationAlwaysUsageDescription": "نحتاج إلى موقعك لتوفير تنبيهات دقيقة لمواقيت الصلاة بناءً على موقعك.",
+  "NSMicrophoneUsageDescription": "هذا التطبيق لا يستخدم الميكروفون.",
+  "NSCameraUsageDescription": "هذا التطبيق لا يستخدم الكاميرا.",
+  "NSPhotoLibraryUsageDescription": "هذا التطبيق لا يستخدم مكتبة الصور الخاصة بك."
+}
+
+

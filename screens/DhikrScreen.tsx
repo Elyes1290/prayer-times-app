@@ -10,6 +10,7 @@ import {
   TextInput,
   TouchableOpacity,
   Alert,
+  Modal,
 } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import { useTranslation } from "react-i18next";
@@ -70,6 +71,7 @@ export default function DhikrScreen() {
       : CATEGORIES[0].key
   );
   const [search, setSearch] = useState("");
+  const [categoryModalVisible, setCategoryModalVisible] = useState(false); // 🆕 Modal pour iOS
 
   const flatListRef = useRef<FlatList>(null);
   const [hasScrolled, setHasScrolled] = useState(false);
@@ -260,28 +262,42 @@ export default function DhikrScreen() {
         <View style={styles.headerWrap}>
           <Text style={styles.title}>{title}</Text>
 
-          <View style={styles.pickerWrap}>
-            <Picker
-              selectedValue={selectedKey}
-              style={styles.picker}
-              onValueChange={(val) => {
-                setSelectedKey(val as CategoryKey);
-                setSearch("");
-                setHasScrolled(false);
-              }}
-              mode={Platform.OS === "ios" ? "dialog" : "dropdown"}
-              dropdownIconColor="#e4c678"
+          {/* 🍎 iOS: Sélecteur personnalisé avec Modal */}
+          {Platform.OS === "ios" ? (
+            <TouchableOpacity
+              style={styles.iosPickerButton}
+              onPress={() => setCategoryModalVisible(true)}
             >
-              {CATEGORIES.map((cat) => (
-                <Picker.Item
-                  key={cat.key}
-                  label={CATEGORY_LABELS[cat.key]}
-                  value={cat.key}
-                  color="#e4c678"
-                />
-              ))}
-            </Picker>
-          </View>
+              <Text style={styles.iosPickerText}>
+                {CATEGORY_LABELS[selectedKey]}
+              </Text>
+              <Ionicons name="chevron-down" size={20} color="#e4c678" />
+            </TouchableOpacity>
+          ) : (
+            /* 🤖 Android: Picker natif */
+            <View style={styles.pickerWrap}>
+              <Picker
+                selectedValue={selectedKey}
+                style={styles.picker}
+                onValueChange={(val) => {
+                  setSelectedKey(val as CategoryKey);
+                  setSearch("");
+                  setHasScrolled(false);
+                }}
+                mode="dropdown"
+                dropdownIconColor="#e4c678"
+              >
+                {CATEGORIES.map((cat) => (
+                  <Picker.Item
+                    key={cat.key}
+                    label={CATEGORY_LABELS[cat.key]}
+                    value={cat.key}
+                    color="#e4c678"
+                  />
+                ))}
+              </Picker>
+            </View>
+          )}
 
           <TextInput
             style={styles.searchInput}
@@ -292,6 +308,61 @@ export default function DhikrScreen() {
             clearButtonMode="while-editing"
           />
         </View>
+
+        {/* 🍎 Modal de sélection de catégorie pour iOS */}
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={categoryModalVisible}
+          onRequestClose={() => setCategoryModalVisible(false)}
+        >
+          <SafeAreaView style={styles.modalOverlay}>
+            <View style={styles.modalContent}>
+              <View style={styles.modalHeader}>
+                <Text style={styles.modalTitle}>
+                  {t("dhikr.select_category") || "Sélectionner une catégorie"}
+                </Text>
+                <TouchableOpacity
+                  style={styles.closeButton}
+                  onPress={() => setCategoryModalVisible(false)}
+                >
+                  <Text style={styles.closeButtonText}>✕</Text>
+                </TouchableOpacity>
+              </View>
+              <FlatList
+                data={CATEGORIES}
+                keyExtractor={(item) => item.key}
+                renderItem={({ item }) => (
+                  <TouchableOpacity
+                    style={[
+                      styles.categoryOption,
+                      selectedKey === item.key && styles.selectedCategoryOption,
+                    ]}
+                    onPress={() => {
+                      setSelectedKey(item.key);
+                      setSearch("");
+                      setHasScrolled(false);
+                      setCategoryModalVisible(false);
+                    }}
+                  >
+                    <Text
+                      style={[
+                        styles.categoryOptionText,
+                        selectedKey === item.key &&
+                          styles.selectedCategoryOptionText,
+                      ]}
+                    >
+                      {CATEGORY_LABELS[item.key]}
+                    </Text>
+                    {selectedKey === item.key && (
+                      <Ionicons name="checkmark" size={24} color="#4ECDC4" />
+                    )}
+                  </TouchableOpacity>
+                )}
+              />
+            </View>
+          </SafeAreaView>
+        </Modal>
 
         <FlatList
           ref={flatListRef}
@@ -435,5 +506,77 @@ const styles = StyleSheet.create({
   dhikrButton: {
     padding: 2,
     marginTop: 2,
+  },
+  // 🍎 iOS Styles
+  iosPickerButton: {
+    marginHorizontal: 25,
+    backgroundColor: "rgba(36, 36, 40, 0.6)",
+    borderRadius: 12,
+    paddingHorizontal: 15,
+    paddingVertical: 12,
+    marginBottom: 10,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  iosPickerText: {
+    color: "#e4c678",
+    fontSize: 16,
+    fontWeight: "700",
+  },
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    justifyContent: "flex-end",
+  },
+  modalContent: {
+    backgroundColor: "#fffbe6",
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    paddingBottom: 60,
+    maxHeight: "60%",
+  },
+  modalHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: 20,
+    borderBottomWidth: 1,
+    borderBottomColor: "#e7c86a",
+  },
+  modalTitle: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "#242428",
+    flex: 1,
+  },
+  closeButton: {
+    padding: 5,
+  },
+  closeButtonText: {
+    fontSize: 24,
+    color: "#242428",
+    fontWeight: "bold",
+  },
+  categoryOption: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: 18,
+    borderBottomWidth: 1,
+    borderBottomColor: "#f0e9c6",
+  },
+  selectedCategoryOption: {
+    backgroundColor: "#f5edc8",
+  },
+  categoryOptionText: {
+    fontSize: 16,
+    color: "#242428",
+    fontWeight: "500",
+    flex: 1,
+  },
+  selectedCategoryOptionText: {
+    fontWeight: "bold",
+    color: "#4ECDC4",
   },
 });

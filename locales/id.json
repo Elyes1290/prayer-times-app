@@ -68,6 +68,8 @@
   },
   "qibla_direction": "Arah Kiblat",
   "qibla_instructions": "Untuk hasil yang akurat: pegang ponsel Anda rata, jauh dari benda logam dan magnet. Jika kompas berputar liar, gerakkan dalam pola angka delapan untuk kalibrasi.",
+  "change_compass": "Ubah kompas",
+  "select_compass": "Pilih kompas",
   "choose_sourate": "Pilih Surah",
   "bismillah": "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ",
   "select_book": "Pilih buku",

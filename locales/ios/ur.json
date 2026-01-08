@@ -1,0 +1,10 @@
+{
+  "NSLocationWhenInUseUsageDescription": "آپ کے موجودہ شہر کی بنیاد پر نماز کے درست اوقات کا حساب لگانے کے لیے ہمیں آپ کے مقام کی ضرورت ہے۔",
+  "NSLocationAlwaysAndWhenInUseUsageDescription": "پس منظر میں ہونے پر بھی نماز کے درست اوقات کا حساب لگانے اور اطلاعات بھیجنے کے لیے ہمیں آپ کے مقام کی ضرورت ہے۔",
+  "NSLocationAlwaysUsageDescription": "آپ کے مقام کی بنیاد پر نماز کے اوقات کی درست اطلاعات فراہم کرنے کے لیے ہمیں آپ کے مقام کی ضرورت ہے۔",
+  "NSMicrophoneUsageDescription": "یہ ایپ مائیکروفون کا استعمال نہیں کرتی ہے۔",
+  "NSCameraUsageDescription": "یہ ایپ کیمرہ کا استعمال نہیں کرتی ہے۔",
+  "NSPhotoLibraryUsageDescription": "یہ ایپ آپ کی فوٹو لائبریری کا استعمال نہیں کرتی ہے۔"
+}
+
+

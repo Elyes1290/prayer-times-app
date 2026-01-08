@@ -1,0 +1,9 @@
+{
+  "NSLocationWhenInUseUsageDescription": "We need your location to calculate accurate prayer times based on your current city.",
+  "NSLocationAlwaysAndWhenInUseUsageDescription": "We need your location to calculate accurate prayer times and send notifications even when the app is in the background.",
+  "NSLocationAlwaysUsageDescription": "We need your location to provide accurate prayer times notifications based on your position.",
+  "NSMicrophoneUsageDescription": "This app does not use the microphone.",
+  "NSCameraUsageDescription": "This app does not use the camera.",
+  "NSPhotoLibraryUsageDescription": "This app does not use your photo library."
+}
+

@@ -1,0 +1,10 @@
+{
+  "NSLocationWhenInUseUsageDescription": "Precisamos da sua localização para calcular horários de oração precisos com base na sua cidade atual.",
+  "NSLocationAlwaysAndWhenInUseUsageDescription": "Precisamos da sua localização para calcular horários de oração precisos e enviar notificações mesmo quando o aplicativo está em segundo plano.",
+  "NSLocationAlwaysUsageDescription": "Precisamos da sua localização para fornecer notificações de horários de oração precisas com base na sua posição.",
+  "NSMicrophoneUsageDescription": "Este aplicativo não usa o microfone.",
+  "NSCameraUsageDescription": "Este aplicativo não usa a câmera.",
+  "NSPhotoLibraryUsageDescription": "Este aplicativo não usa sua biblioteca de fotos."
+}
+
+

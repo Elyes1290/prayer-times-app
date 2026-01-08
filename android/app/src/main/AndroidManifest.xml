@@ -1,28 +1,24 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
-  <!-- Permissions OK -->
   <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
   <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
   <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+  <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC"/>
   <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK"/>
-  <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
-  <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
-  <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SHORT_SERVICE" />
+  <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SHORT_SERVICE"/>
+  <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE"/>
   <uses-permission android:name="android.permission.INTERNET"/>
+  <uses-permission android:name="android.permission.MEDIA_CONTENT_CONTROL"/>
   <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
-  <!-- READ_EXTERNAL_STORAGE est obsolète pour API récentes; utiliser SAF/MediaStore si nécessaire -->
-  <!-- <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/> -->
+  <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+  <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+  <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+  <uses-permission android:name="android.permission.RECORD_AUDIO"/>
   <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
   <uses-permission android:name="android.permission.USE_EXACT_ALARM"/>
   <uses-permission android:name="android.permission.VIBRATE"/>
-  <!-- WRITE_EXTERNAL_STORAGE est obsolète/interdit sur API récentes; supprimé -->
-  <!-- <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/> -->
-  <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
-  <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-  <!-- Permissions pour le téléchargement natif -->
-  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-  <uses-permission android:name="android.permission.WAKE_LOCK" />
-  <!-- Permission pour les contrôles média sur l'écran de verrouillage -->
-  <uses-permission android:name="android.permission.MEDIA_CONTENT_CONTROL" />
+  <uses-permission android:name="android.permission.WAKE_LOCK"/>
+  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
   <queries>
     <intent>
       <action android:name="android.intent.action.VIEW"/>
@@ -30,55 +26,16 @@
       <data android:scheme="https"/>
     </intent>
   </queries>
-
-  <application
-    android:name=".MainApplication"
-    android:label="@string/app_name"
-    android:icon="@mipmap/ic_launcher"
-    android:roundIcon="@mipmap/ic_launcher_round"
-    android:allowBackup="false"
-    android:theme="@style/AppTheme"
-    android:supportsRtl="true">
-
+  <application android:name=".MainApplication" android:label="@string/app_name" android:icon="@mipmap/ic_launcher" android:roundIcon="@mipmap/ic_launcher_round" android:allowBackup="true" android:theme="@style/AppTheme" android:supportsRtl="true">
     <meta-data android:name="expo.modules.updates.ENABLED" android:value="false"/>
     <meta-data android:name="expo.modules.updates.EXPO_UPDATES_CHECK_ON_LAUNCH" android:value="ALWAYS"/>
     <meta-data android:name="expo.modules.updates.EXPO_UPDATES_LAUNCH_WAIT_MS" android:value="0"/>
-
-    <service
-      android:name=".AdhanService"
-      android:exported="false"
-      android:foregroundServiceType="mediaPlayback" />
-
-    <service
-      android:name=".PrayerReminderService"
-      android:enabled="true"
-      android:exported="false"
-      android:foregroundServiceType="shortService" />
-
-    <service
-      android:name=".DhikrService"
-      android:enabled="true"
-      android:exported="false"
-      android:foregroundServiceType="shortService" />
-
-    <service
-      android:name=".PrayerTimesWidgetService"
-      android:permission="android.permission.BIND_REMOTEVIEWS"
-      android:exported="false" />
-
-    <service
-      android:name=".QuranAudioService"
-      android:exported="false"
-      android:foregroundServiceType="mediaPlayback" />
-
-    <activity
-      android:name=".MainActivity"
-      android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|uiMode"
-      android:launchMode="singleTask"
-      android:windowSoftInputMode="adjustResize"
-      android:theme="@style/AppTheme"
-      android:exported="true"
-      android:screenOrientation="portrait">
+    <service android:name=".AdhanService" android:exported="false" android:foregroundServiceType="mediaPlayback"/>
+    <service android:name=".PrayerReminderService" android:enabled="true" android:exported="false" android:foregroundServiceType="shortService"/>
+    <service android:name=".DhikrService" android:enabled="true" android:exported="false" android:foregroundServiceType="shortService"/>
+    <service android:name=".PrayerTimesWidgetService" android:permission="android.permission.BIND_REMOTEVIEWS" android:exported="false"/>
+    <service android:name=".QuranAudioService" android:exported="false" android:foregroundServiceType="mediaPlayback"/>
+    <activity android:name=".MainActivity" android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|uiMode" android:launchMode="singleTask" android:windowSoftInputMode="adjustResize" android:theme="@style/AppTheme" android:exported="true" android:screenOrientation="portrait">
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
         <category android:name="android.intent.category.LAUNCHER"/>
@@ -93,63 +50,35 @@
         <data android:scheme="exp+myadhan-prayer-app"/>
       </intent-filter>
     </activity>
-
-    <!-- Receivers -->
-    <receiver 
-      android:name=".AdhanReceiver" 
-      android:exported="true">
-        <intent-filter>
-            <action android:name="com.drogbinho.prayertimesapp2.ACTION_ADHAN_ALARM" />
-        </intent-filter>
-    </receiver>    
-    <receiver 
-      android:name=".DhikrReceiver" 
-      android:exported="false"/>
-    <receiver 
-      android:name=".PrayerReminderReceiver" 
-      android:exported="false"/>
-    <receiver 
-      android:name=".AdhanDismissReceiver" 
-      android:exported="false"/>
-    <receiver
-      android:name=".BootReceiver"
-      android:exported="true">
+    <receiver android:name=".AdhanReceiver" android:exported="true">
       <intent-filter>
-        <action android:name="android.intent.action.BOOT_COMPLETED" />
+        <action android:name="com.drogbinho.prayertimesapp2.ACTION_ADHAN_ALARM"/>
       </intent-filter>
     </receiver>
-    
-    <receiver
-      android:name=".MaintenanceReceiver"
-      android:exported="false">
+    <receiver android:name=".DhikrReceiver" android:exported="false"/>
+    <receiver android:name=".PrayerReminderReceiver" android:exported="false"/>
+    <receiver android:name=".AdhanDismissReceiver" android:exported="false"/>
+    <receiver android:name=".BootReceiver" android:exported="true">
       <intent-filter>
-        <action android:name="com.drogbinho.prayertimesapp2.ACTION_DAILY_MAINTENANCE" />
+        <action android:name="android.intent.action.BOOT_COMPLETED"/>
       </intent-filter>
     </receiver>
-
-    <!-- Widget de prières -->
-    <receiver 
-      android:name=".PrayerTimesWidget"
-      android:exported="true">
+    <receiver android:name=".MaintenanceReceiver" android:exported="false">
       <intent-filter>
-        <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+        <action android:name="com.drogbinho.prayertimesapp2.ACTION_DAILY_MAINTENANCE"/>
       </intent-filter>
-      <meta-data 
-        android:name="android.appwidget.provider"
-        android:resource="@xml/prayer_times_widget_info" />
     </receiver>
-
-    <!-- Widget Coran Premium -->
-    <receiver 
-      android:name=".QuranWidget"
-      android:exported="true">
+    <receiver android:name=".PrayerTimesWidget" android:exported="true">
       <intent-filter>
-        <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+        <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
       </intent-filter>
-      <meta-data 
-        android:name="android.appwidget.provider"
-        android:resource="@xml/quran_widget_info" />
+      <meta-data android:name="android.appwidget.provider" android:resource="@xml/prayer_times_widget_info"/>
     </receiver>
-
+    <receiver android:name=".QuranWidget" android:exported="true">
+      <intent-filter>
+        <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+      </intent-filter>
+      <meta-data android:name="android.appwidget.provider" android:resource="@xml/quran_widget_info"/>
+    </receiver>
   </application>
 </manifest>

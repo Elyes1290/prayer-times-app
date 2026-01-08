@@ -1,0 +1,10 @@
+{
+  "NSLocationWhenInUseUsageDescription": "বর্তমান শহরের উপর ভিত্তি করে সঠিক নামাজের সময় গণনার জন্য আপনার লোকেশন প্রয়োজন।",
+  "NSLocationAlwaysAndWhenInUseUsageDescription": "ব্যাকগ্রাউন্ডে থাকাকালীন সঠিক নামাজের সময় গণনা এবং বিজ্ঞপ্তি পাঠানোর জন্য আপনার লোকেশন প্রয়োজন।",
+  "NSLocationAlwaysUsageDescription": "আপনার অবস্থানের উপর ভিত্তি করে সঠিক নামাজের সময়ের বিজ্ঞপ্তি দেওয়ার জন্য আপনার লোকেশন প্রয়োজন।",
+  "NSMicrophoneUsageDescription": "এই অ্যাপটি মাইক্রোফোন ব্যবহার করে না।",
+  "NSCameraUsageDescription": "এই অ্যাপটি ক্যামেরা ব্যবহার করে না।",
+  "NSPhotoLibraryUsageDescription": "এই অ্যাপটি আপনার ফটো লাইব্রেরি ব্যবহার করে না।"
+}
+
+

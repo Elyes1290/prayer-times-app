@@ -690,32 +690,64 @@ public class AdhanService extends Service {
                 errorLog(TAG, "🔍 Clés disponibles dans le JSON: " + downloadedContent.keys().toString());
                 errorLog(TAG, "🔍 Recherche de la clé: '" + soundName + "'");
 
-                if (downloadedContent.has(soundName)) {
-                    errorLog(TAG, "✅ Clé trouvée dans JSON: " + soundName);
-                    org.json.JSONObject contentInfo = downloadedContent.getJSONObject(soundName);
-                    String filePath = contentInfo.getString("downloadPath");
-                    errorLog(TAG, "📁 Chemin extrait: " + filePath);
-
-                    // Vérifier que le fichier existe vraiment
-                    java.io.File file = new java.io.File(filePath);
-                    if (file.exists()) {
-                        long fileSize = file.length();
-                        errorLog(TAG, "✅✅✅ FICHIER PREMIUM TROUVÉ ✅✅✅");
-                        errorLog(TAG, "   Chemin: " + filePath);
-                        errorLog(TAG, "   Taille: " + fileSize + " bytes");
-                        errorLog(TAG, "=========================================");
-                        return filePath;
-                    } else {
-                        errorLog(TAG, "❌❌❌ FICHIER MANQUANT ❌❌❌");
-                        errorLog(TAG, "   Chemin attendu: " + filePath);
-                        errorLog(TAG, "=========================================");
-                    }
+                // 🚀 NOUVEAU : Générer plusieurs variantes du nom pour maximiser les chances de trouver le fichier
+                java.util.List<String> soundNameVariants = new java.util.ArrayList<>();
+                soundNameVariants.add(soundName); // Nom original
+                
+                // Variante sans préfixe "adhan_"
+                if (soundName.startsWith("adhan_")) {
+                    soundNameVariants.add(soundName.substring(6)); // Enlever "adhan_"
+                    errorLog(TAG, "🔄 Variante ajoutée (sans préfixe): " + soundName.substring(6));
                 } else {
-                    errorLog(TAG, "❌❌❌ CLÉ NON TROUVÉE DANS JSON ❌❌❌");
-                    errorLog(TAG, "   Clé recherchée: '" + soundName + "'");
-                    errorLog(TAG, "   Clés disponibles: " + downloadedContent.keys().toString());
-                    errorLog(TAG, "=========================================");
+                    // Variante avec préfixe "adhan_"
+                    soundNameVariants.add("adhan_" + soundName);
+                    errorLog(TAG, "🔄 Variante ajoutée (avec préfixe): adhan_" + soundName);
                 }
+
+                // Essayer chaque variante
+                for (String variant : soundNameVariants) {
+                    errorLog(TAG, "🔍 Test variante: '" + variant + "'");
+                    
+                    if (downloadedContent.has(variant)) {
+                        errorLog(TAG, "✅ Clé trouvée dans JSON: " + variant);
+                        org.json.JSONObject contentInfo = downloadedContent.getJSONObject(variant);
+                        String filePath = contentInfo.getString("downloadPath");
+                        errorLog(TAG, "📁 Chemin extrait: " + filePath);
+
+                        // Vérifier que le fichier existe vraiment
+                        java.io.File file = new java.io.File(filePath);
+                        if (file.exists()) {
+                            long fileSize = file.length();
+                            errorLog(TAG, "✅✅✅ FICHIER PREMIUM TROUVÉ ✅✅✅");
+                            errorLog(TAG, "   Variante utilisée: " + variant);
+                            errorLog(TAG, "   Chemin: " + filePath);
+                            errorLog(TAG, "   Taille: " + fileSize + " bytes");
+                            errorLog(TAG, "=========================================");
+                            return filePath;
+                        } else {
+                            errorLog(TAG, "⚠️ Clé trouvée mais fichier manquant: " + filePath);
+                            // Continuer avec la prochaine variante
+                        }
+                    }
+                }
+
+                // Si aucune variante n'a fonctionné
+                errorLog(TAG, "❌❌❌ AUCUNE VARIANTE TROUVÉE DANS JSON ❌❌❌");
+                errorLog(TAG, "   Clé recherchée: '" + soundName + "'");
+                errorLog(TAG, "   Variantes testées: " + soundNameVariants.toString());
+                errorLog(TAG, "   Clés disponibles: " + downloadedContent.keys().toString());
+                errorLog(TAG, "🔍 FALLBACK: Tentative scan physique...");
+                
+                // 🚀 FALLBACK : Scanner le dossier physique même si JSON existe
+                String physicalPath = scanPhysicalDirectoryForAdhan(soundName);
+                if (physicalPath != null) {
+                    errorLog(TAG, "✅✅✅ FICHIER TROUVÉ PAR SCAN PHYSIQUE (malgré JSON présent) ✅✅✅");
+                    errorLog(TAG, "   Chemin: " + physicalPath);
+                    errorLog(TAG, "=========================================");
+                    return physicalPath;
+                }
+                
+                errorLog(TAG, "=========================================");
             } else {
                 errorLog(TAG, "❌❌❌ AUCUNE BASE DE DONNÉES TROUVÉE ❌❌❌");
                 errorLog(TAG, "   Testé: AsyncStorage + premium_content");
@@ -757,28 +789,48 @@ public class AdhanService extends Service {
 
             errorLog(TAG, "📦 " + files.length + " fichiers .mp3 trouvés");
 
-            // Chercher le fichier qui correspond au soundName
-            // Format attendu: adhan_azan_madina.mp3 pour soundName = "adhan_azan_madina"
-            String targetFileName = soundName + ".mp3";
+            // 🚀 NOUVEAU : Générer plusieurs variantes du nom de fichier pour maximiser les chances
+            java.util.List<String> targetFileNames = new java.util.ArrayList<>();
+            targetFileNames.add(soundName + ".mp3"); // Nom original
+            
+            // Variante sans préfixe "adhan_"
+            if (soundName.startsWith("adhan_")) {
+                targetFileNames.add(soundName.substring(6) + ".mp3"); // Enlever "adhan_"
+                errorLog(TAG, "🔄 Variante fichier ajoutée: " + soundName.substring(6) + ".mp3");
+            } else {
+                // Variante avec préfixe "adhan_"
+                targetFileNames.add("adhan_" + soundName + ".mp3");
+                errorLog(TAG, "🔄 Variante fichier ajoutée: adhan_" + soundName + ".mp3");
+            }
 
+            // Chercher le fichier qui correspond à l'une des variantes
             for (java.io.File file : files) {
                 String fileName = file.getName();
-                errorLog(TAG, "🔍 Comparaison: '" + fileName + "' vs '" + targetFileName + "'");
+                
+                for (String targetFileName : targetFileNames) {
+                    if (fileName.equals(targetFileName)) {
+                        errorLog(TAG, "✅ CORRESPONDANCE TROUVÉE: " + file.getAbsolutePath());
+                        errorLog(TAG, "   Variante: " + targetFileName);
+                        errorLog(TAG, "📏 Taille: " + file.length() + " bytes");
 
-                if (fileName.equals(targetFileName)) {
-                    errorLog(TAG, "✅ CORRESPONDANCE TROUVÉE: " + file.getAbsolutePath());
-                    errorLog(TAG, "📏 Taille: " + file.length() + " bytes");
-
-                    // Vérifier que le fichier n'est pas vide ou corrompu
-                    if (file.length() > 10000) { // Au moins 10KB pour un fichier audio valide
-                        return file.getAbsolutePath();
-                    } else {
-                        errorLog(TAG, "⚠️ Fichier trop petit (probablement corrompu): " + file.length() + " bytes");
+                        // Vérifier que le fichier n'est pas vide ou corrompu
+                        if (file.length() > 10000) { // Au moins 10KB pour un fichier audio valide
+                            return file.getAbsolutePath();
+                        } else {
+                            errorLog(TAG, "⚠️ Fichier trop petit (probablement corrompu): " + file.length() + " bytes");
+                        }
                     }
                 }
             }
 
-            errorLog(TAG, "❌ Aucun fichier correspondant trouvé pour: " + soundName);
+            errorLog(TAG, "❌ Aucun fichier correspondant trouvé");
+            errorLog(TAG, "   Variantes recherchées: " + targetFileNames.toString());
+            
+            // Log tous les fichiers disponibles pour debug
+            errorLog(TAG, "📂 Fichiers disponibles dans le dossier:");
+            for (java.io.File file : files) {
+                errorLog(TAG, "   - " + file.getName());
+            }
 
         } catch (Exception e) {
             errorLog(TAG, "❌ Erreur scan physique: " + e.getMessage());

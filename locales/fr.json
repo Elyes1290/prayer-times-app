@@ -100,6 +100,8 @@
   },
   "qibla_direction": "Direction de la Qibla",
   "qibla_instructions": "Pour un résultat précis : tenez votre téléphone à plat, éloigné des objets métalliques et éloignez-le des aimants. Si la boussole tourne dans tous les sens, faites des mouvements en 8 pour calibrer.",
+  "change_compass": "Changer de boussole",
+  "select_compass": "Sélectionner une boussole",
   "choose_sourate": "Choisissez une sourate",
   "bismillah": "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ",
   "select_book": "Sélectionnez un livre",

@@ -60,7 +60,7 @@ public class QuranWidgetModule extends ReactContextBaseJavaModule {
             Log.d(TAG, "🎵 Mise à jour état lecture: " + (isPlaying ? "lecture" : "pause") + " - " + position + "/" + duration);
             
             // Mettre à jour l'état dans le widget
-            QuranWidget.updatePlaybackState(isPlaying, position, duration);
+            QuranWidget.updatePlaybackState(reactContext, isPlaying, position, duration);
             
             // Forcer la mise à jour du widget
             updateWidget();

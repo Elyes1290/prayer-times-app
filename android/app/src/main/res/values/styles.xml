@@ -1,25 +1,13 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-  <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
+  <style name="AppTheme" parent="Theme.EdgeToEdge">
     <item name="android:editTextBackground">@drawable/rn_edit_text_material</item>
     <item name="colorPrimary">@color/colorPrimary</item>
-    <!-- 🔧 Configuration hybride pour Samsung -->
-    <item name="android:statusBarColor">#FFFFFF</item>
-    <item name="android:navigationBarColor">#000000</item>
-    <item name="android:windowLightStatusBar">true</item>
-    <item name="android:windowLightNavigationBar">false</item>
-    <!-- 🔧 FORCER la couleur de fond -->
-    <item name="android:windowBackground">#000000</item>
     <item name="android:colorBackground">#000000</item>
-    <!-- 🔧 Configuration normale pour Samsung -->
-    <item name="android:windowDrawsSystemBarBackgrounds">true</item>
-    <item name="android:fitsSystemWindows">true</item>
-    <!-- 🔧 Configuration Samsung -->
-    <item name="android:windowTranslucentNavigation">false</item>
-    <item name="android:windowTranslucentStatus">false</item>
+    <item name="android:statusBarColor">#ffffff</item>
   </style>
   <style name="Theme.App.SplashScreen" parent="Theme.SplashScreen">
     <item name="windowSplashScreenBackground">@color/splashscreen_background</item>
-    <!-- Plus de windowSplashScreenAnimatedIcon -->
+    <item name="windowSplashScreenAnimatedIcon">@drawable/splashscreen_logo</item>
     <item name="postSplashScreenTheme">@style/AppTheme</item>
   </style>
 </resources>

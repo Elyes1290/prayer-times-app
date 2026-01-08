@@ -1,0 +1,10 @@
+{
+  "NSLocationWhenInUseUsageDescription": "Nous avons besoin de votre position pour calculer les horaires de prière précis selon votre ville actuelle.",
+  "NSLocationAlwaysAndWhenInUseUsageDescription": "Nous avons besoin de votre position pour calculer les horaires de prière et envoyer des notifications même lorsque l'application est en arrière-plan.",
+  "NSLocationAlwaysUsageDescription": "Nous avons besoin de votre position pour fournir des notifications d'horaires de prière précises basées sur votre position.",
+  "NSMicrophoneUsageDescription": "Cette application n'utilise pas le microphone.",
+  "NSCameraUsageDescription": "Cette application n'utilise pas la caméra.",
+  "NSPhotoLibraryUsageDescription": "Cette application n'utilise pas votre bibliothèque de photos."
+}
+
+

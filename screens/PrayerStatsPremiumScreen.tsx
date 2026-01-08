@@ -20,6 +20,7 @@ import {
 // NB: gesture-handler non utilisé en tests (module natif manquant). On fallback sur ScrollView RN.
 import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 import { useUserStats } from "../hooks/useUserStats";
 import { useUpdateUserStats } from "../hooks/useUpdateUserStats";
 import { getCurrentUserData } from "../utils/userAuth";
@@ -41,6 +42,7 @@ interface TabButtonProps {
 }
 
 const PrayerStatsPremiumScreen: React.FC = () => {
+  const router = useRouter();
   const { t } = useTranslation();
   const colors = useThemeColors();
   const currentTheme = useCurrentTheme();
@@ -586,7 +588,9 @@ const PrayerStatsPremiumScreen: React.FC = () => {
 
             <TouchableOpacity
               style={[styles.premiumButton, { backgroundColor: colors.accent }]}
-              onPress={() => console.log("Navigation vers premium")}
+              onPress={() =>
+                router.push("/settings?openPremium=true&premiumTab=signup")
+              }
             >
               <Text style={styles.premiumButtonText}>
                 {t("become_premium") || "✨ Devenir Premium"}

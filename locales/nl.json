@@ -100,6 +100,8 @@
   },
   "qibla_direction": "Qibla Richting",
   "qibla_instructions": "Voor nauwkeurige resultaten: houd uw telefoon plat, weg van metalen voorwerpen en magneten. Als het kompas draait, maak dan 8-vormige bewegingen om te kalibreren.",
+  "change_compass": "Kompas wijzigen",
+  "select_compass": "Kompas selecteren",
   "choose_sourate": "Kies een soera",
   "bismillah": "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ",
   "select_book": "Selecteer een boek",

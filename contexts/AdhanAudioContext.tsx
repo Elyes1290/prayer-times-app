@@ -148,28 +148,85 @@ export const AdhanAudioProvider: React.FC<AdhanAudioProviderProps> = ({
 
       console.log("✅ [AdhanAudioContext] Module natif trouvé");
 
-      // 🎵 NOUVEAU : Charger le MP3 complet depuis assets/soundsComplete-ios/
-      // Ces fichiers sont les versions complètes (pas les previews)
+      console.log(
+        `🎵 [AdhanAudioContext] Recherche du MP3 complet pour: ${soundName}`
+      );
+
+      // 🎯 PRIORITÉ : Utiliser PremiumContentManager pour chercher le fichier téléchargé
+      // (Exactement la même méthode que dans Settings)
+      let localPath: string | null = null;
+      try {
+        console.log(
+          "🔍 [AdhanAudioContext] Vérification fichier téléchargé avec PremiumContentManager..."
+        );
+        const PremiumContentManager = (await import("../utils/premiumContent"))
+          .default;
+        const manager = PremiumContentManager.getInstance();
+
+        // Essayer avec l'ID exact
+        localPath = await manager.isContentDownloaded(soundName);
+
+        // Si pas trouvé, essayer sans le préfixe 'adhan_' si présent
+        if (!localPath && soundName.startsWith("adhan_")) {
+          localPath = await manager.isContentDownloaded(
+            soundName.replace("adhan_", "")
+          );
+        }
+        // Si pas trouvé, essayer AVEC le préfixe 'adhan_' si absent
+        if (!localPath && !soundName.startsWith("adhan_")) {
+          localPath = await manager.isContentDownloaded(`adhan_${soundName}`);
+        }
+
+        if (localPath) {
+          console.log(
+            `✅ [AdhanAudioContext] Fichier local trouvé: ${localPath}`
+          );
+
+          // Ajouter le préfixe file:// si nécessaire
+          const fileUri = localPath.startsWith("file://")
+            ? localPath
+            : "file://" + localPath;
+
+          console.log(
+            "🎵 [AdhanAudioContext] Appel du module natif playAdhanWithURI avec fichier téléchargé..."
+          );
+          const playResult = await AdhanAudioPlayer.playAdhanWithURI(
+            fileUri,
+            prayer
+          );
+          console.log(
+            "✅ [AdhanAudioContext] playAdhanWithURI retourné:",
+            playResult
+          );
+          return; // Succès, on sort
+        } else {
+          console.log(
+            "⚠️ [AdhanAudioContext] Aucun fichier téléchargé trouvé, fallback sur assets..."
+          );
+        }
+      } catch (managerError: any) {
+        console.warn(
+          "⚠️ [AdhanAudioContext] Erreur PremiumContentManager:",
+          managerError.message
+        );
+      }
+
+      // 🔄 FALLBACK : Si pas de fichier téléchargé, charger depuis assets/soundsComplete-ios/
+      console.log(
+        "🔄 [AdhanAudioContext] Fallback: Chargement depuis les assets..."
+      );
       const { Asset } = await import("expo-asset");
 
-      // Mapping des sons complets depuis soundsComplete-ios/
-      const soundObjects: Record<string, any> = {
-        adhamalsharqawe: require("../assets/soundsComplete-ios/adhamalsharqawe.mp3"),
-        adhanaljazaer: require("../assets/soundsComplete-ios/adhanaljazaer.mp3"),
-        ahmadnafees: require("../assets/soundsComplete-ios/ahmadnafees.mp3"),
-        ahmedelkourdi: require("../assets/soundsComplete-ios/ahmedelkourdi.mp3"),
-        dubai: require("../assets/soundsComplete-ios/dubai.mp3"),
-        karljenkins: require("../assets/soundsComplete-ios/karljenkins.mp3"),
-        mansourzahrani: require("../assets/soundsComplete-ios/mansourzahrani.mp3"),
-        misharyrachid: require("../assets/soundsComplete-ios/misharyrachid.mp3"),
-        mustafaozcan: require("../assets/soundsComplete-ios/mustafaozcan.mp3"),
-        masjidquba: require("../assets/soundsComplete-ios/masjidquba.mp3"),
-        islamsobhi: require("../assets/soundsComplete-ios/islamsobhi.mp3"),
-      };
+      // 🛡️ IMPORTATION SÉLECTIVE : getAdhanIosSound vient de .ios.ts sur iOS et .android.ts sur Android
+      // Cela garantit que Metro n'inclut PAS les mp3 sur Android.
+      const { getAdhanIosSound } = require("../utils/adhanIosAssets");
+      const soundModule = getAdhanIosSound(soundName);
 
-      const soundModule = soundObjects[soundName];
       if (!soundModule) {
-        throw new Error(`Son introuvable: ${soundName}`);
+        throw new Error(`Son introuvable dans les assets: ${soundName}`);
+      }
+      if (!soundModule) {
+        throw new Error(`Son introuvable dans les assets: ${soundName}`);
       }
 
       // Charger l'asset et obtenir son URI locale
@@ -181,19 +238,21 @@ export const AdhanAudioProvider: React.FC<AdhanAudioProviderProps> = ({
       }
 
       console.log(
-        `🎵 [AdhanAudioContext] playAdhan: ${soundName} pour ${prayer}`
+        `📍 [AdhanAudioContext] URI locale (asset): ${asset.localUri}`
       );
-      console.log(`📍 URI locale: ${asset.localUri}`);
 
       // Passer l'URI au module natif
       console.log(
-        "🎵 [AdhanAudioContext] Appel du module natif playAdhanWithURI..."
+        "🎵 [AdhanAudioContext] Appel du module natif playAdhanWithURI (asset)..."
       );
-      const result = await AdhanAudioPlayer.playAdhanWithURI(
+      const playResult = await AdhanAudioPlayer.playAdhanWithURI(
         asset.localUri,
         prayer
       );
-      console.log("✅ [AdhanAudioContext] playAdhanWithURI retourné:", result);
+      console.log(
+        "✅ [AdhanAudioContext] playAdhanWithURI retourné:",
+        playResult
+      );
     } catch (error: any) {
       console.error("❌ [AdhanAudioContext] Erreur playAdhan:", error);
       throw error;

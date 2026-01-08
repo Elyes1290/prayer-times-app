@@ -1,0 +1,10 @@
+{
+  "NSLocationWhenInUseUsageDescription": "برای محاسبه دقیق اوقات شرعی بر اساس شهر فعلی شما، به موقعیت مکانی شما نیاز داریم.",
+  "NSLocationAlwaysAndWhenInUseUsageDescription": "برای محاسبه دقیق اوقات شرعی و ارسال اعلان‌ها حتی زمانی که برنامه در پس‌زمینه است، به موقعیت مکانی شما نیاز داریم.",
+  "NSLocationAlwaysUsageDescription": "برای ارائه اعلان‌های دقیق اوقات شرعی بر اساس موقعیت شما، به موقعیت مکانی شما نیاز داریم.",
+  "NSMicrophoneUsageDescription": "این برنامه از میکروفون استفاده نمی‌کند.",
+  "NSCameraUsageDescription": "این برنامه از دوربین استفاده نمی‌کند.",
+  "NSPhotoLibraryUsageDescription": "این برنامه از کتابخانه تصاویر شما استفاده نمی‌کند."
+}
+
+

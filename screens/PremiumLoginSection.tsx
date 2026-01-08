@@ -9,6 +9,8 @@ import {
   StyleSheet,
   Animated,
   ScrollView,
+  KeyboardAvoidingView,
+  Platform,
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -35,6 +37,7 @@ interface PremiumLoginSectionProps {
   onOpenPremiumModal?: () => void;
   // Nouveau: indique si le composant est rendu DANS la modale
   isInModal?: boolean;
+  initialTab?: "login" | "signup";
 }
 
 const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
@@ -46,6 +49,7 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
   currentTheme = "dark",
   onOpenPremiumModal,
   isInModal = false,
+  initialTab = "login",
 }) => {
   // Couleurs dynamiques selon le thème
   const isDarkTheme = currentTheme === "dark";
@@ -53,7 +57,7 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
   const textSecondaryColor = isDarkTheme ? "#CBD5E1" : "#666666"; // Slate-300 vs gris
   const { user: premiumUser, forceLogout, checkPremiumStatus } = usePremium();
   const { getErrorTitle, getErrorMessage } = useErrorHandler();
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState(initialTab === "login");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState(""); // 🚀 NOUVEAU : Champ mot de passe
   const [firstName, setFirstName] = useState("");
@@ -822,13 +826,18 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
 
   // Mode modal: afficher le formulaire complet
   return (
-    <View style={[localStyles.container, { minHeight: isLogin ? 400 : 630 }]}>
-      <ScrollView
-        style={localStyles.scrollContainer}
-        showsVerticalScrollIndicator={false}
-        keyboardShouldPersistTaps="handled"
-        contentContainerStyle={localStyles.scrollContent}
-      >
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={{ flex: 1 }}
+      keyboardVerticalOffset={Platform.OS === "ios" ? 100 : 0}
+    >
+      <View style={[localStyles.container, { minHeight: isLogin ? 400 : 630 }]}>
+        <ScrollView
+          style={localStyles.scrollContainer}
+          showsVerticalScrollIndicator={false}
+          keyboardShouldPersistTaps="handled"
+          contentContainerStyle={localStyles.scrollContent}
+        >
         {/* Toggle connexion/inscription */}
         <View style={localStyles.toggleContainer}>
           <TouchableOpacity
@@ -1328,8 +1337,9 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
         )}
 
         {/* 🚀 SUPPRIMÉ : Modal React Native ne fonctionne pas dans cet environnement */}
-      </ScrollView>
-    </View>
+        </ScrollView>
+      </View>
+    </KeyboardAvoidingView>
   );
 };
 
