@@ -1,8 +1,7 @@
 import React from "react";
-import { View, Text, Switch } from "react-native";
+import { View, Text, Switch, Platform } from "react-native";
 import Slider from "@react-native-community/slider";
 import { useTranslation } from "react-i18next";
-import { Platform } from "react-native";
 
 interface GeneralSectionProps {
   // États général

@@ -11,11 +11,9 @@ import {
   Alert,
   DeviceEventEmitter,
 } from "react-native";
-import { Stack } from "expo-router";
-import { useRouter } from "expo-router";
+import { Stack, useRouter } from "expo-router";
 import { useSettings } from "../contexts/SettingsContext";
 import { computePrayerTimesForNotifications } from "../utils/prayerTimes";
-import { checkIosSoundsStatus } from "../utils/iosSoundsSetup";
 import { useLocation } from "../hooks/useLocation";
 import { usePrayerTimes } from "../hooks/usePrayerTimes";
 import { usePremium } from "../contexts/PremiumContext";
@@ -413,10 +411,6 @@ export default function DebugNotificationsScreen() {
     }
   };
 
-  // ... (méthodes de test existantes inchangées) ...
-  const requestPermissions = async () => {
-    /* ... */
-  };
   const testNotification = async () => {
     /* ... */
   };

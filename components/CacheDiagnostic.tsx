@@ -1,5 +1,5 @@
 // components/CacheDiagnostic.tsx
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
   View,
   Text,
@@ -32,13 +32,7 @@ export default function CacheDiagnostic({
   const cacheService = PrayerTimesCacheService.getInstance();
   const preloader = PrayerTimesPreloader.getInstance();
 
-  useEffect(() => {
-    if (visible) {
-      loadStats();
-    }
-  }, [visible]);
-
-  const loadStats = async () => {
+  const loadStats = useCallback(async () => {
     setIsLoading(true);
     try {
       const [cache, preload] = await Promise.all([
@@ -47,12 +41,18 @@ export default function CacheDiagnostic({
       ]);
       setCacheStats(cache);
       setPreloadStats(preload);
-    } catch (error) {
-      console.error("Erreur chargement stats:", error);
+    } catch (err) {
+      console.error("Erreur chargement stats:", err);
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [cacheService, preloader]);
+
+  useEffect(() => {
+    if (visible) {
+      loadStats();
+    }
+  }, [visible, loadStats]);
 
   const handleClearCache = () => {
     Alert.alert(
@@ -68,7 +68,7 @@ export default function CacheDiagnostic({
               await cacheService.clearAllCache();
               await loadStats();
               Alert.alert("Succès", "Cache vidé avec succès");
-            } catch (error) {
+            } catch (err) {
               Alert.alert("Erreur", "Impossible de vider le cache");
             }
           },
@@ -82,7 +82,7 @@ export default function CacheDiagnostic({
       await cacheService.cleanupExpiredCache();
       await loadStats();
       Alert.alert("Succès", "Cache nettoyé avec succès");
-    } catch (error) {
+    } catch (err) {
       Alert.alert("Erreur", "Impossible de nettoyer le cache");
     }
   };

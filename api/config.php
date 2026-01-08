@@ -326,11 +326,6 @@ function authenticate() {
         $token = $_REQUEST['token'];
     }
     
-    // Pour le développement, accepter un token simple
-    if ($token === 'dev_token_' . date('Y-m-d')) {
-        return ['user_id' => 1];
-    }
-    
     // TODO: Implémenter JWT ou validation token plus robuste
     if ($token) {
         // Simulation de validation - à remplacer par JWT
