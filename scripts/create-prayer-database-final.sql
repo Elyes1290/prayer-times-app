@@ -30,6 +30,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `premium_status` tinyint(1) DEFAULT 0 COMMENT '0=free, 1=premium',
   `subscription_type` enum('monthly','yearly','family','lifetime','test') DEFAULT NULL,
   `subscription_id` varchar(255) DEFAULT NULL,
+  `subscription_platform` enum('none','stripe','apple','vip') DEFAULT 'none' COMMENT 'Plateforme d\'origine de l\'abonnement pour gestion cross-platform',
   `stripe_customer_id` varchar(255) DEFAULT NULL COMMENT 'ID customer Stripe (cus_xxx) pour les webhooks',
   `premium_expiry` datetime DEFAULT NULL,
   `premium_features` text DEFAULT NULL COMMENT 'JSON des fonctionnalités premium disponibles',
@@ -91,7 +92,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `sync_enabled` tinyint(1) DEFAULT 1,
   
   -- 📊 Métadonnées système
-  `created_from` enum('app_registration','stripe_payment','stripe_dashboard','admin_import') DEFAULT 'app_registration' COMMENT 'Source de création du compte',
+  `created_from` enum('app_registration','stripe_payment','stripe_dashboard','admin_import','apple_iap') DEFAULT 'app_registration' COMMENT 'Source de création du compte',
   `created_at` timestamp DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `last_seen` timestamp NULL DEFAULT NULL,
@@ -106,6 +107,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   UNIQUE KEY `email` (`email`),
   KEY `premium_status` (`premium_status`),
   KEY `premium_expiry` (`premium_expiry`),
+  KEY `subscription_platform` (`subscription_platform`),
   KEY `stripe_customer_id` (`stripe_customer_id`),
   KEY `last_seen` (`last_seen`),
   KEY `created_at` (`created_at`),
@@ -595,6 +597,7 @@ SELECT
   u.premium_status,
   u.subscription_type,
   u.subscription_id,
+  u.subscription_platform,
   u.premium_expiry,
   u.premium_activated_at,
   pu.is_active as premium_user_active,
@@ -605,6 +608,7 @@ SELECT
   pp.currency,
   DATEDIFF(u.premium_expiry, NOW()) as days_remaining,
   CASE 
+    WHEN u.subscription_platform = 'vip' THEN 'vip_lifetime'
     WHEN u.premium_expiry < NOW() THEN 'expired'
     WHEN DATEDIFF(u.premium_expiry, NOW()) <= 7 THEN 'expiring_soon'
     ELSE 'active'
@@ -1407,6 +1411,32 @@ CREATE TABLE IF NOT EXISTS maintenance_logs (
     INDEX idx_maintenance_operation (operation),
     INDEX idx_maintenance_date (executed_at)
 );
+
+-- =================================================
+-- 📊 TABLE: account_deletions_log
+-- =================================================
+-- Historique des suppressions de comptes (conformité RGPD + audit)
+-- Cette table conserve une trace de TOUTES les suppressions de compte
+-- pour des raisons légales, d'audit et de metrics
+
+CREATE TABLE IF NOT EXISTS account_deletions_log (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL COMMENT 'ID du compte supprimé (référence historique)',
+    email VARCHAR(255) NOT NULL COMMENT 'Email du compte supprimé',
+    subscription_platform ENUM('none', 'stripe', 'apple', 'vip') DEFAULT 'none' COMMENT 'Plateforme d\'abonnement',
+    premium_status TINYINT(1) DEFAULT 0 COMMENT 'Était premium au moment de la suppression',
+    deletion_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT 'Date/heure exacte de la suppression',
+    ip_address VARCHAR(45) DEFAULT NULL COMMENT 'Adresse IP de la requête de suppression',
+    deleted_from_stripe BOOLEAN DEFAULT FALSE COMMENT 'Client Stripe supprimé (oui/non)',
+    deleted_from_revenuecat BOOLEAN DEFAULT FALSE COMMENT 'Subscriber RevenueCat supprimé (oui/non)',
+    
+    -- Index pour recherches et rapports
+    INDEX idx_deletion_date (deletion_date),
+    INDEX idx_email (email),
+    INDEX idx_subscription_platform (subscription_platform),
+    INDEX idx_premium_status (premium_status)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+COMMENT='Historique des suppressions de comptes pour audit, RGPD et metrics';
 
 -- =================================================
 -- 🗑️ SUPPRESSION D'UTILISATEUR (RGPD / DEMANDES DE COMPTE)

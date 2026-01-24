@@ -164,36 +164,19 @@ function handleGetUser() {
             error_log("Warning: Impossible de logger l'action: " . $e->getMessage());
         }
         
-        // 🚀 NOUVEAU : Mettre à jour last_login et login_count (avec vérification des colonnes)
+        // 🚀 ADAPTÉ : Mettre à jour last_seen et last_sync_time (mais PAS login_count)
         try {
-            // Vérifier si les colonnes existent avant de les utiliser
-            $columnsCheck = $pdo->query("SHOW COLUMNS FROM users LIKE 'last_login'");
-            $hasLastLogin = $columnsCheck->rowCount() > 0;
-            
-            $columnsCheck = $pdo->query("SHOW COLUMNS FROM users LIKE 'login_count'");
-            $hasLoginCount = $columnsCheck->rowCount() > 0;
-            
-            $columnsCheck = $pdo->query("SHOW COLUMNS FROM users LIKE 'last_seen'");
-            $hasLastSeen = $columnsCheck->rowCount() > 0;
-            
-            // Construire la requête UPDATE dynamiquement
+            // Construire la requête UPDATE dynamiquement pour les colonnes de présence
             $updateFields = [];
-            $updateParams = [];
             
-            if ($hasLastLogin) {
-                $updateFields[] = "last_login = NOW()";
-            }
-            if ($hasLoginCount) {
-                $updateFields[] = "login_count = login_count + 1";
-            }
-            if ($hasLastSeen) {
+            // Vérifier si les colonnes existent avant de les utiliser
+            $columnsCheck = $pdo->query("SHOW COLUMNS FROM users LIKE 'last_seen'");
+            if ($columnsCheck->rowCount() > 0) {
                 $updateFields[] = "last_seen = NOW()";
             }
             
-            // Ajouter last_sync_time si la colonne existe
             $columnsCheck = $pdo->query("SHOW COLUMNS FROM users LIKE 'last_sync_time'");
-            $hasLastSyncTime = $columnsCheck->rowCount() > 0;
-            if ($hasLastSyncTime) {
+            if ($columnsCheck->rowCount() > 0) {
                 $updateFields[] = "last_sync_time = NOW()";
             }
             
@@ -203,8 +186,7 @@ function handleGetUser() {
                 $updateLoginStmt->execute([$user['id']]);
             }
         } catch (Exception $e) {
-            // Ignorer les erreurs de mise à jour des colonnes manquantes
-            error_log("Warning: Impossible de mettre à jour les colonnes de connexion: " . $e->getMessage());
+            error_log("Warning: Impossible de mettre à jour les colonnes de présence: " . $e->getMessage());
         }
         
         // Récupérer l'utilisateur avec toutes les données mises à jour + stripe_customer_id

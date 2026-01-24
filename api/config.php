@@ -116,10 +116,75 @@ define('NOMINATIM_API_URL', $_ENV['NOMINATIM_API_URL'] ?? 'https://nominatim.ope
 define('ALADHAN_API_URL', $_ENV['ALADHAN_API_URL'] ?? 'http://api.aladhan.com/v1');
 define('HADITH_API_KEY', $_ENV['HADITH_API_KEY'] ?? '');
 
-// 💳 STRIPE : Configuration des paiements
+// 💳 STRIPE : Configuration des paiements (Android)
 define('STRIPE_SECRET_KEY', $_ENV['STRIPE_SECRET_KEY'] ?? '');
 define('STRIPE_PUBLISHABLE_KEY', $_ENV['STRIPE_PUBLISHABLE_KEY'] ?? '');
 define('STRIPE_WEBHOOK_SECRET', $_ENV['STRIPE_WEBHOOK_SECRET'] ?? '');
+
+// 🍎 REVENUECAT : Configuration des abonnements iOS (Apple In-App Purchases)
+define('REVENUECAT_SECRET_KEY', $_ENV['REVENUECAT_SECRET_KEY'] ?? '');
+
+// 📧 RESEND : Configuration des emails
+define('RESEND_API_KEY', $_ENV['RESEND_API_KEY'] ?? getenv('RESEND_API_KEY') ?? '');
+define('RESEND_FROM_EMAIL', $_ENV['FROM_EMAIL'] ?? 'support@elyesnaitliman.ch');
+
+/**
+ * 📧 Fonction universelle pour envoyer un email via l'API Resend
+ */
+function sendEmailWithResend($to, $subject, $htmlContent) {
+    $apiKey = RESEND_API_KEY;
+    $fromEmail = RESEND_FROM_EMAIL;
+    
+    if (empty($apiKey)) {
+        error_log("❌ RESEND_API_KEY is empty");
+        return false;
+    }
+
+    if (!function_exists('curl_init')) {
+        error_log("❌ CURL is not installed");
+        return false;
+    }
+
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, 'https://api.resend.com/emails');
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, [
+        'Authorization: Bearer ' . $apiKey,
+        'Content-Type: application/json',
+    ]);
+    
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode([
+        'from' => 'myAdhan <' . $fromEmail . '>',
+        'to' => [$to],
+        'subject' => $subject,
+        'html' => $htmlContent,
+    ]));
+
+    $response = curl_exec($ch);
+    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    curl_close($ch);
+
+    if ($httpCode === 200 || $httpCode === 201) {
+        return true;
+    } else {
+        error_log("❌ Resend Error ($httpCode): $response");
+        return false;
+    }
+}
+
+/**
+ * 📝 Logger les erreurs de manière uniforme
+ */
+function logError($message, $e = null) {
+    $log = "[ERROR] " . $message;
+    if ($e instanceof Exception || $e instanceof Throwable) {
+        $log .= " | Exception: " . $e->getMessage() . " in " . $e->getFile() . " on line " . $e->getLine();
+    } elseif ($e !== null) {
+        $log .= " | Context: " . json_encode($e);
+    }
+    error_log($log);
+}
 
 // 👑 VIP ADMIN : Configuration du token d'administration VIP
 // 🔒 SÉCURITÉ : Token obligatoirement défini dans les variables d'environnement

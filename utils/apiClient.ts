@@ -32,6 +32,8 @@ export interface ApiResponse<T = any> {
   timestamp: string;
   data?: T;
   url?: string; // Pour les réponses comme createPortalSession
+  status?: string; // Pour les statuts de réponse (ex: 'deleted')
+  request_id?: string; // Pour les IDs de demande
 }
 
 // Interface pour les erreurs API
@@ -172,8 +174,8 @@ class ApiClient {
                       i18n.t("toast_connection_interrupted") ||
                       "Connexion interrompue",
                     message:
-                      i18n.t("toast_single_device_only") ||
-                      "Non autorisé. Veuillez vous connecter sur un seul appareil.",
+                      i18n.t("toast_session_expired") ||
+                      "Votre session a expiré ou est invalide. Veuillez vous reconnecter.",
                   });
                   throw new Error(
                     `HTTP ${retryResponse.status}: ${
@@ -190,8 +192,8 @@ class ApiClient {
                   i18n.t("toast_connection_interrupted") ||
                   "Connexion interrompue",
                 message:
-                  i18n.t("toast_single_device_only") ||
-                  "Non autorisé. Veuillez vous connecter sur un seul appareil.",
+                  i18n.t("toast_session_expired") ||
+                  "Votre session a expiré ou est invalide. Veuillez vous reconnecter.",
               });
             }
             throw new Error(
@@ -706,6 +708,7 @@ class ApiClient {
     email: string;
     reason?: string;
     message?: string;
+    immediate?: boolean;
   }): Promise<ApiResponse> {
     return this.makeRequest("/data-deletion.php", "POST", data);
   }

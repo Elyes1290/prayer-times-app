@@ -122,10 +122,15 @@ function handleLogin() {
     }
     
     if (!password_verify($password, $user['password_hash'])) {
+        // 🚀 DEBUG : Identifier si c'est un utilisateur Dashboard Stripe avec le mot de passe par défaut
+        if ($user['created_from'] === 'stripe_dashboard') {
+            error_log("⚠️ [AUTH] Login échoué pour utilisateur Dashboard - mot de passe probablement encore à '123456'");
+        }
         handleError("Mot de passe incorrect", 401);
     }
     
     // 🚀 ADAPTÉ : Mettre à jour les statistiques de connexion
+    // On le fait une seule fois ici de manière robuste
     $updateStmt = $pdo->prepare("
         UPDATE users SET 
             last_seen = NOW(), 
@@ -136,7 +141,7 @@ function handleLogin() {
     ");
     $updateStmt->execute([$user['id']]);
     
-    // 🚀 CORRECTION : Récupérer l'utilisateur avec les données mises à jour + stripe_customer_id
+    // On recharge l'utilisateur IMMÉDIATEMENT après l'update pour avoir le bon login_count
     $userStmt = $pdo->prepare("
         SELECT u.*, ps.stripe_customer_id 
         FROM users u
@@ -145,83 +150,6 @@ function handleLogin() {
     ");
     $userStmt->execute([$user['id']]);
     $user = $userStmt->fetch(PDO::FETCH_ASSOC);
-    
-    // Logger la connexion
-    logUserAction($user['id'], 'user_login', null, null, [
-        'login_method' => 'email',
-        'has_password' => !empty($user['password_hash'])
-    ]);
-    
-    // 🔍 DEBUG : Logger les données avant formatage
-    $debugData = json_encode([
-        'id' => $user['id'],
-        'email' => $user['email'],
-        'stripe_customer_id' => $user['stripe_customer_id'] ?? 'NULL',
-        'subscription_id' => $user['subscription_id'] ?? 'NULL'
-    ], JSON_PRETTY_PRINT);
-    error_log("🔍 [AUTH] Données brutes user après requête: " . $debugData);
-    file_put_contents(__DIR__ . '/auth-debug.log', date('Y-m-d H:i:s') . " - LOGIN - Données brutes: " . $debugData . "\n", FILE_APPEND);
-    
-    // Retourner les données utilisateur + tokens
-    $formattedUser = formatUserData($user);
-    
-    // 🔍 DEBUG : Logger les données après formatage
-    $debugFormatted = json_encode([
-        'stripe_customer_id' => $formattedUser['stripe_customer_id'] ?? 'NULL',
-        'subscription_id' => $formattedUser['subscription_id'] ?? 'NULL'
-    ], JSON_PRETTY_PRINT);
-    error_log("🔍 [AUTH] Données formatées: " . $debugFormatted);
-    file_put_contents(__DIR__ . '/auth-debug.log', date('Y-m-d H:i:s') . " - LOGIN - Données formatées: " . $debugFormatted . "\n", FILE_APPEND);
-
-    // 🚀 SYNCHRONISATION STRIPE : Vérifier et mettre à jour les données depuis Stripe
-    try {
-        $stripeCustomerId = $user['stripe_customer_id'];
-        
-        // Vérifier si stripe_customer_id est NULL (valeur ou chaîne "NULL")
-        if (empty($stripeCustomerId) || $stripeCustomerId === 'NULL') {
-            error_log("⚠️ [AUTH] stripe_customer_id manquant pour user {$user['id']} - Recherche sur Stripe...");
-            
-            // Essayer de récupérer le customer_id depuis Stripe par email
-            $stripeCustomerId = findStripeCustomerByEmail($user['email'], $pdo);
-            
-            if ($stripeCustomerId) {
-                // Mettre à jour la base de données avec le customer_id trouvé
-                $updateStmt = $pdo->prepare("UPDATE users SET stripe_customer_id = ? WHERE id = ?");
-                $updateStmt->execute([$stripeCustomerId, $user['id']]);
-                error_log("✅ [AUTH] stripe_customer_id trouvé et enregistré: " . $stripeCustomerId);
-            } else {
-                error_log("⚠️ [AUTH] Aucun customer Stripe trouvé pour: " . $user['email']);
-            }
-        }
-        
-        // Si on a un stripe_customer_id, synchroniser avec Stripe
-        if (!empty($stripeCustomerId) && $stripeCustomerId !== 'NULL') {
-            error_log("🔄 [AUTH] Synchronisation avec Stripe pour customer: " . $stripeCustomerId);
-            $updated = syncUserWithStripe($user['id'], $stripeCustomerId, $pdo);
-            
-            if ($updated) {
-                // Recharger les données utilisateur mises à jour
-                $userStmt = $pdo->prepare("
-                    SELECT u.*, ps.stripe_customer_id 
-                    FROM users u
-                    LEFT JOIN premium_subscriptions ps ON u.id = ps.user_id AND ps.status = 'active'
-                    WHERE u.id = ?
-                ");
-                $userStmt->execute([$user['id']]);
-                $user = $userStmt->fetch(PDO::FETCH_ASSOC);
-                
-                // Reformater avec les nouvelles données
-                $formattedUser = formatUserData($user);
-                
-                error_log("✅ [AUTH] Données utilisateur synchronisées avec Stripe");
-                error_log("📅 [AUTH] Nouveau statut premium: " . $user['premium_status']);
-                error_log("📅 [AUTH] Nouvelle date d'expiration: " . ($user['premium_expiry'] ?? 'NULL'));
-            }
-        }
-    } catch (Exception $e) {
-        // En cas d'erreur, logger mais continuer le login normalement
-        error_log("❌ [AUTH] Erreur synchronisation Stripe (non bloquante): " . $e->getMessage());
-    }
 
     // Single-device: révoquer d'abord les anciennes sessions et refresh tokens,
     // puis émettre de nouveaux tokens (évite d'invalider le token fraîchement créé)
@@ -230,7 +158,18 @@ function handleLogin() {
     revokeAllSessionsForUser($user['id']);
     $accessToken = generateAuthToken($user['id']);
     $refreshToken = createRefreshToken($user['id'], $deviceId, 30);
-    
+    $formattedUser = formatUserData($user);
+
+    // 📧 Envoyer le mail de bienvenue UNIQUEMENT lors de la toute première connexion (login_count == 1 après update)
+    try {
+        if (function_exists('curl_init') && (int)$user['login_count'] === 1) {
+            sendLoginEmail($user['email'], $user['user_first_name'] ?: 'Utilisateur', $password);
+            error_log("📧 Mail de bienvenue envoyé pour la première connexion (count=1) de: " . $user['email']);
+        }
+    } catch (Exception $e) {
+        error_log("📧 Erreur non bloquante envoi mail login: " . $e->getMessage());
+    }
+
     jsonResponse(true, [
         'user' => $formattedUser,
         'token' => $accessToken,
@@ -334,8 +273,8 @@ function handleRegister() {
     if (isset($data['premium_status']) && $data['premium_status'] == 1) {
         $premium_status = 1;
         $subscription_type = $data['subscription_type'] ?? 'yearly';
-        $subscription_id = $data['subscription_id'] ?? "premium-" . time();
-        $premium_expiry = $data['premium_expiry'] ?? date('Y-m-d H:i:s', strtotime('+1 year'));
+        $subscription_id = $subscription_id ?? "premium-" . time();
+        $premium_expiry = $premium_expiry ?? date('Y-m-d H:i:s', strtotime('+1 year'));
     }
 
     // 🚀 ADAPTÉ : Récupérer les données de localisation transmises
@@ -374,7 +313,8 @@ function handleRegister() {
             dhikr_selected_dua_enabled, dhikr_selected_dua_delay,
             theme_mode, is_first_time, audio_quality, download_strategy,
             enable_data_saving, max_cache_size, auto_backup_enabled,
-            created_at, updated_at, last_seen, status
+            created_at, updated_at, last_seen, status,
+            created_from, subscription_platform
         ) VALUES (
             ?, ?, ?, ?, 
             ?, ?, ?, ?, ?,
@@ -387,73 +327,59 @@ function handleRegister() {
             ?, ?,
             ?, ?, ?, ?,
             ?, ?, ?,
-            NOW(), NOW(), NOW(), 'active'
+            NOW(), NOW(), NOW(), 'active',
+            'app_native', 'none'
         )
     ");
     
-    $logMessage = date('Y-m-d H:i:s') . " - 💾 Insertion utilisateur avec premium_status=$premium_status, subscription_type=$subscription_type, subscription_id=$subscription_id, premium_expiry=$premium_expiry\n";
-    $logMessage .= date('Y-m-d H:i:s') . " - 💾 Valeurs à insérer: email=$email, user_first_name=$user_first_name, premium_status=$premium_status, subscription_type=$subscription_type, subscription_id=$subscription_id, premium_expiry=$premium_expiry\n";
-    $logMessage .= date('Y-m-d H:i:s') . " - 💾 Paramètres execute: " . json_encode([$email, $password_hash, $language, $user_first_name, $premium_status, $subscription_type, $subscription_id, $premium_expiry, $premium_status === 1 ? date('Y-m-d H:i:s') : null, $location_mode, $location_city, $location_country, $location_lat, $location_lon]) . "\n";
-    $logMessage .= date('Y-m-d H:i:s') . " - 🔍 Données reçues dans \$data: " . json_encode($data) . "\n";
-    $logMessage .= date('Y-m-d H:i:s') . " - 🔍 Premium status dans \$data: " . ($data['premium_status'] ?? 'non défini') . "\n";
-    file_put_contents(__DIR__ . '/debug_premium.log', $logMessage, FILE_APPEND);
-    
-    error_log("💾 Insertion utilisateur avec premium_status=$premium_status, subscription_type=$subscription_type, subscription_id=$subscription_id, premium_expiry=$premium_expiry");
-    error_log("💾 Valeurs à insérer: email=$email, user_first_name=$user_first_name, premium_status=$premium_status, subscription_type=$subscription_type, subscription_id=$subscription_id, premium_expiry=$premium_expiry");
-    error_log("💾 Paramètres execute: " . json_encode([$email, $password_hash, $language, $user_first_name, $premium_status, $subscription_type, $subscription_id, $premium_expiry, $premium_status === 1 ? date('Y-m-d H:i:s') : null, $location_mode, $location_city, $location_country, $location_lat, $location_lon]));
-    
+    // Fallback pour le nom si vide
+    if (empty($user_first_name)) {
+        $user_first_name = explode('@', $email)[0];
+    }
+
     try {
         $params = [
             $email,
-            $password_hash, // 🚀 ADAPTÉ : Hash du mot de passe
+            $password_hash,
             $language,
             $user_first_name,
-            $premium_status, // 🚀 ADAPTÉ : Statut premium dynamique
+            $premium_status,
             $subscription_type,
             $subscription_id,
             $premium_expiry,
-            $premium_status === 1 ? date('Y-m-d H:i:s') : null, // Date d'activation si premium
-            $location_mode, // 🚀 ADAPTÉ : Mode de localisation
-            $location_city, // 🚀 ADAPTÉ : Ville
-            $location_country, // 🚀 ADAPTÉ : Pays
-            $location_lat, // 🚀 ADAPTÉ : Latitude
-            $location_lon, // 🚀 ADAPTÉ : Longitude
-            // Valeurs par défaut pour les paramètres de configuration
-            'MuslimWorldLeague', // calc_method
-            'misharyrachid', // adhan_sound
-            1.0, // adhan_volume
-            1, // notifications_enabled
-            1, // reminders_enabled
-            10, // reminder_offset
-            1, // dhikr_after_salah_enabled
-            5, // dhikr_after_salah_delay
-            1, // dhikr_morning_enabled
-            10, // dhikr_morning_delay
-            1, // dhikr_evening_enabled
-            10, // dhikr_evening_delay
-            1, // dhikr_selected_dua_enabled
-            15, // dhikr_selected_dua_delay
-            'auto', // theme_mode
-            1, // is_first_time
-            'medium', // audio_quality
-            'streaming_only', // download_strategy
-            1, // enable_data_saving
-            100, // max_cache_size
-            0 // auto_backup_enabled
+            $premium_status === 1 ? date('Y-m-d H:i:s') : null,
+            $location_mode,
+            $location_city,
+            $location_country,
+            $location_lat,
+            $location_lon,
+            'MuslimWorldLeague',
+            'misharyrachid',
+            1.0,
+            1,
+            1,
+            10,
+            1,
+            5,
+            1,
+            10,
+            1,
+            10,
+            1,
+            15,
+            'auto',
+            1,
+            'medium',
+            'streaming_only',
+            1,
+            100,
+            0
         ];
         
-        $logMessage = date('Y-m-d H:i:s') . " - 🔍 Paramètres d'exécution: " . json_encode($params) . "\n";
-        file_put_contents(__DIR__ . '/debug_premium.log', $logMessage, FILE_APPEND);
-        error_log("🔍 Paramètres d'exécution: " . json_encode($params));
-        
+        error_log("💾 Tentative d'insertion utilisateur: $email");
         $insertStmt->execute($params);
-        
-        $logMessage = date('Y-m-d H:i:s') . " - ✅ Insertion réussie - user_id: " . $pdo->lastInsertId() . "\n";
-        file_put_contents(__DIR__ . '/debug_premium.log', $logMessage, FILE_APPEND);
         error_log("✅ Insertion réussie - user_id: " . $pdo->lastInsertId());
     } catch (Exception $e) {
-        $logMessage = date('Y-m-d H:i:s') . " - ❌ Erreur insertion: " . $e->getMessage() . "\n";
-        file_put_contents(__DIR__ . '/debug_premium.log', $logMessage, FILE_APPEND);
         error_log("❌ Erreur insertion: " . $e->getMessage());
         handleError("Erreur lors de l'inscription: " . $e->getMessage(), 500);
     }
@@ -506,6 +432,15 @@ function handleRegister() {
     revokeAllSessionsForUser($user_id);
     $accessToken = generateAuthToken($user_id);
     $refreshToken = createRefreshToken($user_id, $deviceId, 30);
+
+    // 📧 Envoyer le mail de bienvenue lors de l'inscription (considérée comme première connexion)
+    try {
+        if ($email && $password) {
+            sendLoginEmail($email, $user_first_name ?: 'User', $password);
+        }
+    } catch (Exception $e) {
+        error_log("📧 Erreur non bloquante mail inscription: " . $e->getMessage());
+    }
 
     jsonResponse(true, [
         'user' => $formattedUser,
@@ -1168,4 +1103,103 @@ function syncUserWithStripe($userId, $stripeCustomerId, $pdo) {
         return false;
     }
 }
-?> 
+
+/**
+ * 📧 Send a beautiful welcome email with credentials via Resend (English)
+ */
+function sendWelcomeEmailResend($email, $firstName, $password) {
+    $subject = "Welcome to myAdhan! 🤲";
+    
+    $htmlContent = "
+    <html>
+    <body style='font-family: \"Segoe UI\", Tahoma, Geneva, Verdana, sans-serif; color: #333; line-height: 1.6; background-color: #f4f7f6; padding: 20px;'>
+        <div style='max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1);'>
+            <div style='background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%); padding: 30px; text-align: center;'>
+                <h1 style='color: #ffffff; margin: 0; font-size: 28px;'>Welcome to myAdhan</h1>
+            </div>
+            
+            <div style='padding: 30px;'>
+                <h2 style='color: #2C3E50; margin-top: 0;'>Assalamu Alaikum $firstName,</h2>
+                <p>We are absolutely thrilled to have you join our community! Thank you for choosing <strong>myAdhan</strong> to accompany you in your daily prayers.</p>
+                
+                <p>Your account has been successfully created. Here are your login credentials to access the app:</p>
+                
+                <div style='background-color: #f8f9fa; border-left: 4px solid #4A90E2; padding: 20px; margin: 25px 0; border-radius: 4px;'>
+                    <p style='margin: 5px 0;'><strong>Email:</strong> <span style='color: #4A90E2;'>$email</span></p>
+                    <p style='margin: 5px 0;'><strong>Password:</strong> <span style='color: #4A90E2;'><code>$password</code></span></p>
+                </div>
+                
+                <p style='font-size: 14px; color: #7f8c8d;'><i>Tip: For security reasons, we recommend changing your password in the app settings after your first login.</i></p>
+                
+                <p>With myAdhan, you can now enjoy accurate prayer times, beautiful Adhan notifications, Qibla finder, and much more.</p>
+                
+                <div style='text-align: center; margin-top: 35px;'>
+                    <p style='margin-bottom: 5px;'>May this app be a source of blessing for you.</p>
+                    <p style='font-weight: bold; color: #2C3E50; margin-top: 0;'>The myAdhan Team</p>
+                </div>
+            </div>
+            
+            <div style='background-color: #f1f1f1; padding: 15px; text-align: center; font-size: 12px; color: #95a5a6;'>
+                <p style='margin: 0;'>&copy; " . date('Y') . " myAdhan. All rights reserved.</p>
+                <p style='margin: 5px 0;'>This is an automated message, please do not reply to this email.</p>
+            </div>
+        </div>
+    </body>
+    </html>
+    ";
+    
+    return sendEmailWithResend($email, $subject, $htmlContent);
+}
+
+/**
+ * 📧 Envoyer un magnifique email de bienvenue (unique) via Resend
+ */
+function sendLoginEmail($email, $firstName, $password = null) {
+    $subject = "Welcome to myAdhan! 🤲";
+    
+    $credsHtml = "";
+    if ($password) {
+        $credsHtml = "
+        <div style='background-color: #f8f9fa; border-left: 4px solid #4A90E2; padding: 20px; margin: 25px 0; border-radius: 4px;'>
+            <p style='margin: 5px 0;'><strong>Email:</strong> <span style='color: #4A90E2;'>$email</span></p>
+            <p style='margin: 5px 0;'><strong>Password:</strong> <span style='color: #4A90E2;'><code>$password</code></span></p>
+        </div>";
+    }
+
+    $htmlContent = "
+    <html>
+    <body style='font-family: \"Segoe UI\", Tahoma, Geneva, Verdana, sans-serif; color: #333; line-height: 1.6; background-color: #f4f7f6; padding: 20px;'>
+        <div style='max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1);'>
+            <div style='background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%); padding: 30px; text-align: center;'>
+                <h1 style='color: #ffffff; margin: 0; font-size: 28px;'>Welcome to myAdhan</h1>
+            </div>
+            
+            <div style='padding: 30px;'>
+                <h2 style='color: #2C3E50; margin-top: 0;'>Assalamu Alaikum $firstName,</h2>
+                <p>We are absolutely thrilled to have you join our community! Thank you for choosing <strong>myAdhan</strong> to accompany you in your daily prayers.</p>
+                
+                <p>Your account has been successfully set up. Here are your login credentials to access the app:</p>
+                
+                $credsHtml
+                
+                <p style='font-size: 14px; color: #7f8c8d;'><i>Tip: You can change your password anytime in the app settings.</i></p>
+                
+                <p>With myAdhan, you can enjoy accurate prayer times, beautiful Adhan notifications, Qibla finder, and much more.</p>
+                
+                <div style='text-align: center; margin-top: 35px;'>
+                    <p style='margin-bottom: 5px;'>May this app be a source of blessing for you.</p>
+                    <p style='font-weight: bold; color: #2C3E50; margin-top: 0;'>The myAdhan Team</p>
+                </div>
+            </div>
+            
+            <div style='background-color: #f1f1f1; padding: 15px; text-align: center; font-size: 12px; color: #95a5a6;'>
+                <p style='margin: 0;'>&copy; " . date('Y') . " myAdhan. All rights reserved.</p>
+                <p style='margin: 5px 0;'>This is an automated message, please do not reply to this email.</p>
+            </div>
+        </div>
+    </body>
+    </html>";
+    
+    return sendEmailWithResend($email, $subject, $htmlContent);
+}
+?>

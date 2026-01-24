@@ -1,23 +1,50 @@
 import React, { useEffect } from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, ActivityIndicator } from "react-native";
 import { useRouter } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { AppConfig } from "../utils/config";
 
 const PaymentCancelScreen: React.FC = () => {
   const router = useRouter();
+  const [isDeleting, setIsDeleting] = React.useState(false);
 
-  // 🚀 NOUVEAU : Nettoyer les données d'inscription après paiement annulé
+  // 🚀 NOUVEAU : Nettoyer les données et supprimer le compte préemptif si nécessaire
   useEffect(() => {
-    const cleanupRegistration = async () => {
+    const handleCancellation = async () => {
       try {
+        const registrationData = await AsyncStorage.getItem("pending_registration");
+        
+        if (registrationData) {
+          const parsedData = JSON.parse(registrationData);
+          const email = parsedData.email;
+
+          if (email) {
+            console.log("🗑️ Demande de suppression du compte annulé pour:", email);
+            setIsDeleting(true);
+            
+            // Appeler l'API pour supprimer l'utilisateur préemptif
+            const response = await fetch(`${AppConfig.API_BASE_URL}/stripe.php/handle-payment-cancellation`, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ email }),
+            });
+
+            const result = await response.json();
+            console.log("✅ Résultat suppression:", result);
+          }
+        }
+
+        // Nettoyer le stockage local quoi qu'il arrive
         await AsyncStorage.removeItem("pending_registration");
         console.log("🧹 Données d'inscription nettoyées - PaymentCancelScreen");
       } catch (error) {
-        console.error("❌ Erreur nettoyage données inscription:", error);
+        console.error("❌ Erreur lors de l'annulation:", error);
+      } finally {
+        setIsDeleting(false);
       }
     };
 
-    cleanupRegistration();
+    handleCancellation();
   }, []);
 
   const handleRetry = () => {
@@ -34,16 +61,23 @@ const PaymentCancelScreen: React.FC = () => {
       <View style={styles.content}>
         <Text style={styles.title}>❌ Paiement Annulé</Text>
         <Text style={styles.message}>
-          Aucun montant n&apos;a été débité de votre compte.
+          {isDeleting 
+            ? "Annulation en cours et nettoyage de vos données..." 
+            : "Aucun montant n'a été débité de votre compte."}
         </Text>
-        <View style={styles.buttonsContainer}>
-          <TouchableOpacity style={styles.retryButton} onPress={handleRetry}>
-            <Text style={styles.retryButtonText}>Réessayer</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.homeButton} onPress={handleGoHome}>
-            <Text style={styles.homeButtonText}>Accueil</Text>
-          </TouchableOpacity>
-        </View>
+        
+        {isDeleting ? (
+          <ActivityIndicator size="large" color="#FF6B6B" style={{ marginBottom: 20 }} />
+        ) : (
+          <View style={styles.buttonsContainer}>
+            <TouchableOpacity style={styles.retryButton} onPress={handleRetry}>
+              <Text style={styles.retryButtonText}>Réessayer</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.homeButton} onPress={handleGoHome}>
+              <Text style={styles.homeButtonText}>Accueil</Text>
+            </TouchableOpacity>
+          </View>
+        )}
       </View>
     </View>
   );

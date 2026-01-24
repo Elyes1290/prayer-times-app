@@ -104,6 +104,7 @@ export default function SettingsModals({
                 onLoginSuccess={handleLoginSuccess}
                 isInModal={true}
                 initialTab={initialTab}
+                onCloseModal={() => uiManager.setShowPremiumModal(false)}
               />
 
               {/* 🚀 Toast dans la zone scrollable pour rester visible */}

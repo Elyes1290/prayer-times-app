@@ -34,15 +34,16 @@ export async function schedulePrayerNotifications(
           ? now.getTime() + minTimeGap
           : reminderTime;
 
-      // 🔑 Génère une clé unique incluant la date pour éviter les collisions
+      // 🔑 Génère une clé unique incluant la date et un préfixe pour éviter les collisions avec les adhans
       const uniqueKey = dateKey
-        ? `${prayer}_${dateKey}`
-        : `${prayer}_${Date.now()}`;
+        ? `reminder_${prayer}_${dateKey}`
+        : `reminder_${prayer}_${Date.now()}`;
 
       return {
         key: uniqueKey, // 🔑 Ajout de la clé unique
         prayer,
-        triggerMillis: adjustedReminderTime,
+        triggerMillis: adjustedReminderTime, // Pour Android
+        triggerAtMillis: adjustedReminderTime, // 🔧 Pour iOS (même nom que Adhans)
         title: i18n.t("prayer_reminder_title"),
         body: i18n.t("prayer_reminder_body", {
           prayer,
@@ -63,7 +64,11 @@ export async function schedulePrayerNotifications(
       reminderOffset: reminderOffset,
     });
 
-    NativeModules.AdhanModule.schedulePrayerReminders(reminders);
+    // 🍎 Sur iOS, on ne programme pas ici car on aggrège tout à la fin
+    // (pour éviter d'écraser les notifs précédentes)
+    if (Platform.OS !== "ios") {
+      NativeModules.AdhanModule.schedulePrayerReminders(reminders);
+    }
   }
-  return;
+  return reminders; // 🔔 Retourner les reminders créés
 }

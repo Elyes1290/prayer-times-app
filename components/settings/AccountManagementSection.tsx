@@ -6,8 +6,10 @@ import {
   TextInput,
   ActivityIndicator,
   Linking,
+  Platform,
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { SettingsContext } from "../../contexts/SettingsContext";
 import apiClient from "../../utils/apiClient";
@@ -41,6 +43,7 @@ export default function AccountManagementSection({
   setActiveSection,
   navigation,
 }: AccountManagementSectionProps) {
+  const router = useRouter();
   const settings = useContext(SettingsContext);
   const { getErrorTitle, getErrorMessage } = useErrorHandler();
 
@@ -220,53 +223,91 @@ export default function AccountManagementSection({
 
   const handleManageSubscription = async () => {
     try {
-      setIsLoading(true);
-
-      // 🔍 DEBUG COMPLET : Afficher toutes les données utilisateur
-      console.log(
-        "🔍 [DEBUG] userData complet:",
-        JSON.stringify(userData, null, 2)
-      );
-      console.log(
-        "🔍 [DEBUG] userData.stripe_customer_id:",
-        userData?.stripe_customer_id
-      );
-      console.log(
-        "🔍 [DEBUG] userData.subscription_id:",
-        userData?.subscription_id
-      );
-      console.log(
-        "🔍 [DEBUG] userData.premium_status:",
-        userData?.premium_status
-      );
-
-      // 🔧 CORRECTION : Utiliser stripe_customer_id au lieu de subscription_id
-      const customerId =
-        userData?.stripe_customer_id || userData?.subscription_id;
-
-      if (!customerId) {
-        console.error("❌ [DEBUG] Aucun Customer ID trouvé !");
-        showToast({
-          type: "error",
-          title: "Erreur",
-          message: "Aucun abonnement trouvé pour votre compte",
-        });
+      // 🎯 NOUVEAU : Vérifier la plateforme d'abonnement, pas la plateforme actuelle
+      const subscriptionPlatform = userData?.subscription_platform || 'none';
+      
+      console.log("🔍 Platform d'abonnement:", subscriptionPlatform);
+      console.log("🔍 Platform actuelle:", Platform.OS);
+      
+      // 🍎 Si abonnement créé sur Apple → toujours rediriger vers Apple (même sur Android)
+      if (subscriptionPlatform === 'apple') {
+        const APPLE_SUBSCRIPTION_URL =
+          "https://apps.apple.com/account/subscriptions";
+        const canOpen = await Linking.canOpenURL(APPLE_SUBSCRIPTION_URL);
+        if (canOpen) {
+          await Linking.openURL(APPLE_SUBSCRIPTION_URL);
+        } else {
+          // Fallback si le lien profond ne marche pas
+          await Linking.openURL("https://support.apple.com/HT202039");
+        }
+        
+        // Message neutre si plateforme différente
+        if (Platform.OS === 'android') {
+          showToast({
+            type: "info",
+            title: t("subscription_management", "Gestion de l'abonnement"),
+            message: t("redirecting_to_provider", "Redirection vers votre espace de gestion..."),
+          });
+        }
         return;
       }
 
-      console.log("🔑 [DEBUG] Customer ID pour portal:", customerId);
+      // 💳 Si abonnement créé sur Stripe → toujours utiliser Stripe Portal (même sur iOS)
+      if (subscriptionPlatform === 'stripe') {
+        setIsLoading(true);
+        
+        // Message neutre si sur iOS (pas de mention "Android")
+        if (Platform.OS === 'ios') {
+          showToast({
+            type: "info",
+            title: t("subscription_management", "Gestion de l'abonnement"),
+            message: t("redirecting_to_provider", "Redirection vers votre espace de gestion..."),
+          });
+        }
 
-      // Créer une session pour le Customer Portal
-      const response = await apiClient.createPortalSession(customerId);
+        const customerId = userData?.stripe_customer_id;
 
-      if (response.success && response.url) {
-        // Ouvrir le lien dans le navigateur
-        await Linking.openURL(response.url);
-      } else {
-        throw new Error(
-          response.message || "Erreur lors de la création de la session"
-        );
+        if (!customerId) {
+          showToast({
+            type: "error",
+            title: "Erreur",
+            message: "Aucun abonnement Stripe trouvé pour votre compte",
+          });
+          setIsLoading(false);
+          return;
+        }
+
+        // Créer une session pour le Customer Portal
+        const response = await apiClient.createPortalSession(customerId);
+
+        if (response.success && response.url) {
+          // Ouvrir le lien dans le navigateur
+          await Linking.openURL(response.url);
+        } else {
+          throw new Error(
+            response.message || "Erreur lors de la création de la session"
+          );
+        }
+        setIsLoading(false);
+        return;
       }
+      
+      // 👑 VIP : Ne devrait jamais arriver ici car le bouton est caché
+      if (subscriptionPlatform === 'vip') {
+        showToast({
+          type: "info",
+          title: "Accès VIP",
+          message: "Vous disposez d'un accès premium à vie. Aucun abonnement récurrent à gérer.",
+        });
+        return;
+      }
+      
+      // ⚠️ Aucune plateforme détectée
+      showToast({
+        type: "error",
+        title: "Erreur",
+        message: "Type d'abonnement non reconnu",
+      });
     } catch (error) {
       console.error("Erreur gestion abonnement:", error);
 
@@ -460,7 +501,9 @@ export default function AccountManagementSection({
             <Text style={styles.subscriptionLabel}>{t("type", "Type")}</Text>
             <Text style={styles.subscriptionValue}>
               {user?.isPremium
-                ? userData?.subscription_type === "monthly"
+                ? userData?.subscription_platform === "vip"
+                  ? "👑 VIP"
+                  : userData?.subscription_type === "monthly"
                   ? t("monthly_subscription", "Abonnement Mensuel")
                   : userData?.subscription_type === "yearly"
                   ? t("yearly_subscription", "Abonnement Annuel")
@@ -575,8 +618,8 @@ export default function AccountManagementSection({
 
       {/* Section Actions */}
       <View style={[styles.accountSection, { marginTop: 16 }]}>
-        {/* Bouton Gestion Abonnement - seulement pour les utilisateurs premium */}
-        {userData?.premium_status === 1 && (
+        {/* Bouton Gestion Abonnement - seulement pour les utilisateurs premium NON-VIP */}
+        {userData?.premium_status === 1 && userData?.subscription_platform !== 'vip' && (
           <TouchableOpacity
             style={[
               styles.logoutButton,
@@ -591,42 +634,40 @@ export default function AccountManagementSection({
               <MaterialCommunityIcons name="crown" size={20} color="#FFFFFF" />
             )}
             <Text style={[styles.logoutButtonText, { marginLeft: 8 }]}>
-              Gérer mon abonnement
+              {t("manage_subscription", "Gérer mon abonnement")}
             </Text>
           </TouchableOpacity>
         )}
 
-        <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
-          <MaterialCommunityIcons name="logout" size={20} color="#FF6B6B" />
-          <Text style={styles.logoutButtonText}>
-            {t("logout", "Se déconnecter")}
-          </Text>
-        </TouchableOpacity>
+        {/* 🔒 SÉCURITÉ : Bouton déconnexion uniquement pour utilisateurs connectés avec email */}
+        {userEmail && (
+          <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
+            <MaterialCommunityIcons name="logout" size={20} color="#FF6B6B" />
+            <Text style={styles.logoutButtonText}>
+              {t("logout", "Se déconnecter")}
+            </Text>
+          </TouchableOpacity>
+        )}
 
-        <TouchableOpacity
-          style={styles.deleteAccountButton}
-          onPress={() => {
-            // Navigation vers la page de suppression de données
-            if (typeof navigation !== "undefined") {
-              navigation.navigate("data-deletion");
-            } else {
-              showToast({
-                type: "info",
-                title: "Suppression de compte",
-                message: "Contactez le support pour supprimer votre compte",
-              });
-            }
-          }}
-        >
-          <MaterialCommunityIcons
-            name="delete-forever"
-            size={20}
-            color="#EF4444"
-          />
-          <Text style={styles.deleteAccountButtonText}>
-            {t("delete_account", "Supprimer le compte")}
-          </Text>
-        </TouchableOpacity>
+        {/* 🔒 SÉCURITÉ : Bouton suppression uniquement pour utilisateurs connectés avec email */}
+        {userEmail && (
+          <TouchableOpacity
+            style={styles.deleteAccountButton}
+            onPress={() => {
+              // Navigation vers la page de suppression de données via le router Expo
+              router.push("/data-deletion");
+            }}
+          >
+            <MaterialCommunityIcons
+              name="delete-forever"
+              size={20}
+              color="#EF4444"
+            />
+            <Text style={styles.deleteAccountButtonText}>
+              {t("delete_account", "Supprimer le compte")}
+            </Text>
+          </TouchableOpacity>
+        )}
       </View>
 
       {/* Modal de changement de mot de passe */}

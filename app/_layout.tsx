@@ -109,7 +109,8 @@ type IconName =
   | "heart-multiple"
   | "chart-bar"
   | "account-heart"
-  | "calendar-heart";
+  | "calendar-heart"
+  | "bug";
 
 interface TabBarIconProps {
   icon: IconName;
@@ -824,8 +825,15 @@ function TabLayoutContent() {
         <Tabs.Screen
           name="debugNotifications"
           options={{
-            // DEBUG: onglet caché (à recacher avant build App Store)
-            href: null,
+            // DEBUG: onglet visible pour test iOS (À RECACHER AVANT PROD)
+            tabBarIcon: ({ color, size, focused }) => (
+              <TabBarIcon
+                icon="bug"
+                color={color}
+                size={size}
+                focused={focused}
+              />
+            ),
           }}
         />
         {/* Écran favoris accessible par navigation (pas visible dans la tab bar) */}

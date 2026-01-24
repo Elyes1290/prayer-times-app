@@ -156,12 +156,15 @@ export async function scheduleNotificationsFor2Days({
 
     // 🔑 ACCUMULATION : Stocker tous les adhans de tous les jours
     let allAdhanNotifications: Record<string, any> = {};
+    let allPrayerReminders: any[] = []; // 🔔 NOUVEAU : Accumuler aussi les reminders
+    let allDhikrNotifications: any[] = []; // 🔔 NOUVEAU : Accumuler aussi les dhikrs
 
     for (let i = 0; i < dates.length; i++) {
       const date = dates[i];
       const label = labels[i];
 
       notificationDebugLog(`🔄 Traitement ${label} (${date.toDateString()})`);
+      console.log(`📝 [JS] Traitement ${label} (${date.toDateString()})`);
 
       // 🔧 CORRECTION : Utiliser la fonction SANS Sunrise pour éviter les rappels sur Sunrise
       const prayerTimesForNotifications = computePrayerTimesForNotifications(
@@ -244,9 +247,9 @@ export async function scheduleNotificationsFor2Days({
               ).toLocaleTimeString()})`
             );
 
-            // 🔑 Identifiant UNIQUE avec la date complète pour éviter les collisions iOS
+            // 🔑 Identifiant UNIQUE avec la date complète et un préfixe pour éviter les collisions
             const dateKey = date.toISOString().split("T")[0]; // Format: "2025-12-07"
-            const uniqueKey = `${prayer}_${dateKey}`;
+            const uniqueKey = `adhan_${prayer}_${dateKey}`;
 
             acc[uniqueKey] = {
               time: adjustedTimestamp,
@@ -325,13 +328,16 @@ export async function scheduleNotificationsFor2Days({
         notificationDebugLog("⏰ Programmation des reminders");
         // 🔑 Passer le dateKey pour identifier de manière unique chaque reminder
         const dateKey = date.toISOString().split("T")[0]; // Format: "2025-12-08"
-        await schedulePrayerNotifications(
+        const dailyReminders = await schedulePrayerNotifications(
           synchronizedPrayerTimes,
           adhanSound,
           remindersEnabled,
           reminderOffset,
           dateKey // 🔑 Clé unique pour éviter les collisions
         );
+        if (dailyReminders) {
+          allPrayerReminders = [...allPrayerReminders, ...dailyReminders];
+        }
       } else {
         notificationDebugLog("⏰ Aucun reminder à programmer");
       }
@@ -345,17 +351,83 @@ export async function scheduleNotificationsFor2Days({
         notificationDebugLog("📿 Programmation des dhikr");
         // 🔑 Passer le dateKey pour identifier de manière unique chaque dhikr
         const dateKey = date.toISOString().split("T")[0]; // Format: "2025-12-08"
-        await scheduleAllDhikrNotifications(
+        const dailyDhikrs = await scheduleAllDhikrNotifications(
           synchronizedPrayerTimes,
           dhikrSettings,
           dateKey // 🔑 Clé unique pour éviter les collisions
         );
+        if (dailyDhikrs) {
+          allDhikrNotifications = [...allDhikrNotifications, ...dailyDhikrs];
+        }
       } else {
         notificationDebugLog("📿 Aucun dhikr à programmer");
       }
     }
 
-    // 🔔 PROGRAMMATION GLOBALE : Programmer TOUS les adhans en une seule fois
+    // 🍎 NOUVEAU : Notification de sécurité iOS
+    // Pour rester sous la limite de 64, on programme 3 jours de prières (~54 notifs)
+    // et on ajoute une notification à la fin du 3ème jour pour demander d'ouvrir l'app.
+    if (Platform.OS === "ios" && dates.length > 0) {
+      const lastDate = dates[dates.length - 1];
+      const safetyTime = new Date(lastDate);
+      // On la programme le soir (21h) du dernier jour pour que l'utilisateur ait le temps d'ouvrir l'app pour le lendemain
+      safetyTime.setHours(21, 0, 0, 0);
+
+      // S'assurer que le safetyTime est bien dans le futur
+      if (safetyTime.getTime() > now.getTime()) {
+        const safetyNotif = {
+          key: "ios_safety_reminder",
+          prayer: "AppUsage", 
+          triggerMillis: safetyTime.getTime(), // 🔑 Utiliser les deux pour une compatibilité max
+          triggerAtMillis: safetyTime.getTime(),
+          title: i18n.t("ios_safety_notif_title"),
+          body: i18n.t("ios_safety_notif_body"),
+          isToday: false,
+        };
+
+        notificationDebugLog(
+          `🍎 [iOS] Programmation notification de sécurité pour le ${safetyTime.toLocaleString()}`
+        );
+        console.log(
+          `🍎 [iOS] AJOUT notification de sécurité: ${safetyTime.toLocaleString()} (ID: ios_safety_reminder)`
+        );
+        allPrayerReminders.push(safetyNotif);
+      } else {
+        console.log("🍎 [iOS] Notification de sécurité ignorée car le temps est passé");
+      }
+    }
+
+    // 🔔 PROGRAMMATION GLOBALE : Programmer TOUS les adhans, reminders et dhikrs
+    // Pour iOS, il est crucial d'envoyer tout en une seule fois pour ne pas écraser les précédents
+    if (Platform.OS === "ios") {
+      console.log("═══════════════════════════════════════");
+      console.log("🍎 [iOS] BILAN DE PROGRAMMATION FINAL");
+      console.log(`📡 Total Adhans: ${Object.keys(allAdhanNotifications).length}`);
+      console.log(`⏰ Total Reminders: ${allPrayerReminders.length}`);
+      console.log(`📿 Total Dhikrs: ${allDhikrNotifications.length}`);
+      console.log("═══════════════════════════════════════");
+
+      try {
+        // 1. Reminders (incluant la sécurité)
+        if (allPrayerReminders.length > 0) {
+          console.log(`📡 [iOS] Envoi de ${allPrayerReminders.length} rappels au module natif...`);
+          console.log(`📋 [iOS] Liste des clés rappels: ${allPrayerReminders.map(r => r.key).join(", ")}`);
+          await NativeModules.AdhanModule.schedulePrayerReminders(
+            allPrayerReminders
+          );
+        }
+        // 2. Dhikrs
+        if (allDhikrNotifications.length > 0) {
+          console.log(`📿 [iOS] Envoi de ${allDhikrNotifications.length} dhikrs au module natif...`);
+          await NativeModules.AdhanModule.scheduleDhikrNotifications(
+            allDhikrNotifications
+          );
+        }
+      } catch (err) {
+        console.error("❌ [iOS] Erreur lors de l'envoi global des notifications:", err);
+      }
+    }
+
     let truncated = false;
     // 🧭 Garde-fou iOS : ne jamais dépasser ~54 notifs Adhan (18/jour * 3j)
     if (Platform.OS === "ios") {

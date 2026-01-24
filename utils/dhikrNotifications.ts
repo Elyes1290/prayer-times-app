@@ -68,7 +68,7 @@ export async function scheduleAllDhikrNotifications(
   prayerTimes: Record<string, Date>,
   dhikrSettings: DhikrSettings,
   dateKey?: string // 🔑 Nouvelle param optionnelle pour identifier la date
-): Promise<void> {
+): Promise<any[]> {
   const now = new Date();
   const minTimeGap = 30 * 1000; // 30 secondes en millisecondes
 
@@ -98,7 +98,8 @@ export async function scheduleAllDhikrNotifications(
             dhikrNotifs.push({
               key: uniqueKey, // 🔑 Ajout de la clé unique
               type: "afterSalah",
-              triggerMillis: adjustedDhikrTime,
+              triggerMillis: adjustedDhikrTime, // Pour Android
+              triggerAtMillis: adjustedDhikrTime, // 🔧 Pour iOS (même nom que Adhans)
               title: i18n.t("dhikr_dua"),
               body: buildDhikrNotifText("afterSalah", dhikr),
               prayer,
@@ -123,7 +124,8 @@ export async function scheduleAllDhikrNotifications(
             dhikrNotifs.push({
               key: uniqueKey, // 🔑 Ajout de la clé unique
               type: "dhikrMorning",
-              triggerMillis: notifTime.getTime(),
+              triggerMillis: notifTime.getTime(), // Pour Android
+              triggerAtMillis: notifTime.getTime(), // 🔧 Pour iOS (même nom que Adhans)
               title: i18n.t("dhikr_dua"),
               body: buildDhikrNotifText("dhikrMorning", dhikr),
               prayer,
@@ -147,7 +149,8 @@ export async function scheduleAllDhikrNotifications(
             dhikrNotifs.push({
               key: uniqueKey, // 🔑 Ajout de la clé unique
               type: "eveningDhikr",
-              triggerMillis: notifTime.getTime(),
+              triggerMillis: notifTime.getTime(), // Pour Android
+              triggerAtMillis: notifTime.getTime(), // 🔧 Pour iOS (même nom que Adhans)
               title: i18n.t("dhikr_dua"),
               body: buildDhikrNotifText("eveningDhikr", dhikr),
               prayer,
@@ -171,7 +174,8 @@ export async function scheduleAllDhikrNotifications(
             dhikrNotifs.push({
               key: uniqueKey, // 🔑 Ajout de la clé unique
               type: "selectedDua",
-              triggerMillis: notifTime.getTime(),
+              triggerMillis: notifTime.getTime(), // Pour Android
+              triggerAtMillis: notifTime.getTime(), // 🔧 Pour iOS (même nom que Adhans)
               title: i18n.t("dhikr_dua"),
               body: buildDhikrNotifText("selectedDua", dhikr),
               prayer,
@@ -193,7 +197,9 @@ export async function scheduleAllDhikrNotifications(
   });
 
   // 3. Programme SEULEMENT ce qui doit l'être
-  if (notifications.length > 0) {
+  // 🍎 Sur iOS, on ne programme pas ici car on aggrège tout à la fin
+  if (notifications.length > 0 && Platform.OS !== "ios") {
     NativeModules.AdhanModule.scheduleDhikrNotifications(notifications);
   }
+  return notifications; // 🔔 Retourner les notifications créées
 }

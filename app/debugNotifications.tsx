@@ -21,11 +21,12 @@ import { usePremium } from "../contexts/PremiumContext";
 export default function DebugNotificationsScreen() {
   const router = useRouter();
   // 🚧 Page désactivée pour la production (à réactiver seulement pour le debug local)
-  const isDebugAllowed = false;
+  const isDebugAllowed = true;
   const [debugInfo, setDebugInfo] = useState<any>(null);
   const [loading, setLoading] = useState(false);
   const [logs, setLogs] = useState<string[]>([]);
   const [bgRuns, setBgRuns] = useState<any[]>([]);
+  const [lastAutoReprog, setLastAutoReprog] = useState<string>("Jamais");
   const [bgRunLoading, setBgRunLoading] = useState(false);
   const [playbackLogs, setPlaybackLogs] = useState<any[]>([]);
   const [playbackLogsLoading, setPlaybackLogsLoading] = useState(false);
@@ -69,6 +70,13 @@ export default function DebugNotificationsScreen() {
 
   const loadBackgroundLogs = useCallback(async () => {
     try {
+      // Charger la dernière auto-reprog depuis HomeScreen
+      const { default: AsyncStorage } = await import("@react-native-async-storage/async-storage");
+      const lastAuto = await AsyncStorage.getItem("last_notif_reprogram_ios");
+      if (lastAuto) {
+        setLastAutoReprog(new Date(parseInt(lastAuto)).toLocaleString("fr-FR"));
+      }
+
       if (Platform.OS !== "ios") return;
       const { getBackgroundFetchLogs } = await import(
         "../utils/backgroundTask"
@@ -522,6 +530,9 @@ export default function DebugNotificationsScreen() {
             {NativeModules.AdhanModule ? "✅ PRÉSENT" : "❌ ABSENT"}
           </Text>
           <Text style={styles.status}>Plateforme: {Platform.OS}</Text>
+          <Text style={[styles.status, { color: "#2196F3", fontWeight: "bold" }]}>
+            Dernière Auto-Reprog: {lastAutoReprog}
+          </Text>
         </View>
 
         {/* 🕌 DEBUG: Horaires de prière et calcul de la prochaine */}
@@ -1039,7 +1050,7 @@ export default function DebugNotificationsScreen() {
                 <Text style={styles.cardTitle}>{n.title}</Text>
                 <Text style={styles.cardBody}>{n.body}</Text>
                 <Text style={styles.cardFooter}>Trigger: {n.trigger}</Text>
-                <Text style={styles.cardId}>ID: {n.identifier}</Text>
+                <Text style={styles.cardId}>ID: {n.id || n.identifier}</Text>
               </View>
             ))
           ) : (

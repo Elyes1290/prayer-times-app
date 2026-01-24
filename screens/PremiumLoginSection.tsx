@@ -38,6 +38,8 @@ interface PremiumLoginSectionProps {
   // Nouveau: indique si le composant est rendu DANS la modale
   isInModal?: boolean;
   initialTab?: "login" | "signup";
+  // 🆕 NOUVEAU : Fermer la modal après inscription réussie
+  onCloseModal?: () => void;
 }
 
 const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
@@ -50,6 +52,7 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
   onOpenPremiumModal,
   isInModal = false,
   initialTab = "login",
+  onCloseModal,
 }) => {
   // Couleurs dynamiques selon le thème
   const isDarkTheme = currentTheme === "dark";
@@ -381,6 +384,7 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
         premium_status: userData.premium_status,
         subscription_type: userData.subscription_type,
         subscription_id: userData.subscription_id,
+        subscription_platform: userData.subscription_platform, // 🔑 AJOUT pour la gestion cross-platform
         stripe_customer_id: userData.stripe_customer_id, // 🔑 AJOUT pour gérer l'abonnement Stripe
         premium_expiry: userData.premium_expiry,
         premium_activated_at: userData.premium_activated_at, // 🔑 AJOUT MANQUANT !
@@ -637,6 +641,13 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
             // Rediriger vers la page de paiement
             const { router } = await import("expo-router");
             router.push("/premium-payment");
+            
+            // 🆕 CORRECTION APPLE : Fermer la modal après redirection pour révéler la page de paiement
+            if (onCloseModal) {
+              console.log("✅ Fermeture de la modal après inscription");
+              onCloseModal();
+            }
+            
             setIsLoading(false);
             return;
           } catch (emailCheckError: any) {
@@ -825,20 +836,10 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
   }
 
   // Mode modal: afficher le formulaire complet
-  return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-      style={{ flex: 1 }}
-      keyboardVerticalOffset={Platform.OS === "ios" ? 100 : 0}
-    >
-      <View style={[localStyles.container, { minHeight: isLogin ? 400 : 630 }]}>
-        <ScrollView
-          style={localStyles.scrollContainer}
-          showsVerticalScrollIndicator={false}
-          keyboardShouldPersistTaps="handled"
-          contentContainerStyle={localStyles.scrollContent}
-        >
-        {/* Toggle connexion/inscription */}
+  // 🆕 CORRECTION ANDROID : Si dans une modal, pas besoin de ScrollView (déjà géré par le parent)
+  const formContent = (
+    <>
+      {/* Toggle connexion/inscription */}
         <View style={localStyles.toggleContainer}>
           <TouchableOpacity
             style={[
@@ -1337,6 +1338,30 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
         )}
 
         {/* 🚀 SUPPRIMÉ : Modal React Native ne fonctionne pas dans cet environnement */}
+    </>
+  );
+
+  // 🆕 CORRECTION ANDROID : Rendu conditionnel selon le contexte (modal vs standalone)
+  if (isInModal) {
+    // Dans une modal : pas de ScrollView (déjà géré par le parent SettingsModals.tsx)
+    return <View style={localStyles.container}>{formContent}</View>;
+  }
+
+  // Standalone : avec KeyboardAvoidingView et ScrollView
+  return (
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={{ flex: 1 }}
+      keyboardVerticalOffset={Platform.OS === "ios" ? 100 : 0}
+    >
+      <View style={[localStyles.container, { minHeight: isLogin ? 400 : 630 }]}>
+        <ScrollView
+          style={localStyles.scrollContainer}
+          showsVerticalScrollIndicator={false}
+          keyboardShouldPersistTaps="handled"
+          contentContainerStyle={localStyles.scrollContent}
+        >
+          {formContent}
         </ScrollView>
       </View>
     </KeyboardAvoidingView>

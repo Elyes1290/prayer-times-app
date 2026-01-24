@@ -232,11 +232,12 @@ export async function registerBackgroundFetchAsync() {
     );
     if (!isRegistered) {
       await BackgroundFetch.registerTaskAsync(BACKGROUND_FETCH_TASK, {
-        minimumInterval: 60 * 60 * 24, // 24h (best effort iOS)
+        minimumInterval: 60 * 60 * 6, // 6h (iOS best effort - plus fréquent pour plus de fiabilité)
         stopOnTerminate: false, // Continue même si l'app est fermée
+        startOnBoot: true,
       });
       console.log(
-        "✅ [BackgroundFetch] Tâche iOS enregistrée (réveil quotidien pour reprogrammer 3 jours)"
+        "✅ [BackgroundFetch] Tâche iOS enregistrée (réveil toutes les 6h pour reprogrammer 3 jours)"
       );
     }
   } catch (err) {

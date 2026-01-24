@@ -250,5 +250,7 @@
   "welcome_personalization_description": "Untuk memberikan pengalaman yang lebih personal, bisakah Anda memberitahu kami nama depan Anda?",
   "welcome_personalization_placeholder": "Nama depan Anda (opsional)",
   "welcome_personalization_confirm": "Konfirmasi",
-  "welcome_personalization_skip": "Lewati"
+  "welcome_personalization_skip": "Lewati",
+  "ios_safety_notif_title": "Keberlanjutan Pengingat",
+  "ios_safety_notif_body": "Silakan buka aplikasi untuk terus menerima pengingat shalat Anda. Semoga Allah menerima amal ibadah Anda."
 }

@@ -31,5 +31,7 @@
   "welcome_personalization_description": "Untuk memberikan pengalaman yang lebih peribadi, bolehkah anda beritahu kami nama pertama anda?",
   "welcome_personalization_placeholder": "Nama pertama anda (pilihan)",
   "welcome_personalization_confirm": "Sahkan",
-  "welcome_personalization_skip": "Langkau"
+  "welcome_personalization_skip": "Langkau",
+  "ios_safety_notif_title": "Kesinambungan Peringatan",
+  "ios_safety_notif_body": "Sila buka aplikasi untuk terus menerima peringatan solat anda. Semoga Allah menerima amal ibadah anda."
 }

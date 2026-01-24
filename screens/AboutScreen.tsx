@@ -7,7 +7,6 @@ import {
   Image,
   TouchableOpacity,
   ScrollView,
-  Alert,
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useTranslation } from "react-i18next";
@@ -86,11 +85,7 @@ export default function AboutScreen() {
   };
 
   const handlePrivacyPolicy = () => {
-    Alert.alert(
-      t("abouts.privacy_policy"),
-      t("abouts.privacy_policy_content"),
-      [{ text: t("abouts.understand"), style: "default" }]
-    );
+    Linking.openURL("https://www.myadhanapp.com/public/privacy-policy.html");
   };
 
   const renderFeatureItem = (feature: any, index: number) => (
@@ -415,7 +410,7 @@ export default function AboutScreen() {
           <TouchableOpacity
             style={styles.legalButton}
             onPress={() =>
-              Alert.alert(t("abouts.terms_title"), t("abouts.terms_content"))
+              Linking.openURL("https://www.myadhanapp.com/public/terms-of-service.html")
             }
           >
             <Text style={styles.legalButtonText}>

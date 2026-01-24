@@ -55,245 +55,81 @@ $PREMIUM_PRODUCTS = [
 // ✅ NOUVEAU : Fonction pour créer un token temporaire sécurisé
 function createTemporaryToken($email, $subscriptionType, $customerName = '', $customerLanguage = 'fr', $originalPassword = null) {
     try {
-        logError("🔧 DEBUG createTemporaryToken - Début avec email: $email, type: $subscriptionType");
-        
         $pdo = getDBConnection();
-        
-        // Générer un token sécurisé
         $token = bin2hex(random_bytes(32));
-        $expiry = date('Y-m-d H:i:s', time() + 3600); // Expire dans 1 heure
+        $expiresAt = date('Y-m-d H:i:s', strtotime('+1 hour'));
         
-        logError("🔧 DEBUG createTemporaryToken - Token généré: $token");
-        logError("🔧 DEBUG createTemporaryToken - Expiry: $expiry");
-        
-        // Chiffrer le mot de passe si fourni
-        $encryptedPassword = null;
-        if ($originalPassword) {
-            $encryptedPassword = openssl_encrypt(
-                $originalPassword,
-                'AES-256-CBC',
-                getenv('ENCRYPTION_KEY') ?: hash('sha256', STRIPE_SECRET_KEY),
-                0,
-                substr(hash('sha256', STRIPE_SECRET_KEY), 0, 16)
-            );
-            logError("🔧 DEBUG createTemporaryToken - Mot de passe chiffré: " . ($encryptedPassword ? 'OUI' : 'NON'));
-        }
-        
-        // Insérer le token temporaire
         $stmt = $pdo->prepare("
-            INSERT INTO temp_payment_tokens (
-                token, email, subscription_type, customer_name, 
-                customer_language, encrypted_password, expires_at, created_at
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, NOW())
+            INSERT INTO payment_tokens (token, customer_email, subscription_type, customer_name, customer_language, original_password, expires_at)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
         ");
         
-        $result = $stmt->execute([
-            $token, $email, $subscriptionType, $customerName,
-            $customerLanguage, $encryptedPassword, $expiry
+        $stmt->execute([
+            $token,
+            $email,
+            $subscriptionType,
+            $customerName,
+            $customerLanguage,
+            $originalPassword, // Le mot de passe sera stocké temporairement pour la création du compte
+            $expiresAt
         ]);
         
-        logError("🔧 DEBUG createTemporaryToken - Insertion réussie: " . ($result ? 'OUI' : 'NON'));
-        logError("🔧 DEBUG createTemporaryToken - Token final: $token");
-        
         return $token;
-        
     } catch (Exception $e) {
-        logError("❌ Erreur création token temporaire", $e);
-        logError("❌ Détails erreur: " . $e->getMessage());
-        throw new Exception("Impossible de créer le token de paiement");
+        logError("Erreur création token temporaire", $e);
+        return null;
     }
 }
 
-// ✅ NOUVEAU : Fonction pour récupérer et valider un token
+// ✅ NOUVEAU : Fonction pour récupérer et valider un token temporaire
 function retrieveAndValidateToken($token) {
     try {
-        logError("🔧 DEBUG retrieveAndValidateToken - Début avec token: $token");
-        
         $pdo = getDBConnection();
-        
-        // Récupérer le token
         $stmt = $pdo->prepare("
-            SELECT * FROM temp_payment_tokens 
-            WHERE token = ? AND expires_at > NOW() AND used = 0
+            SELECT * FROM payment_tokens 
+            WHERE token = ? AND expires_at > NOW() AND used_at IS NULL
         ");
         $stmt->execute([$token]);
-        $tokenData = $stmt->fetch();
+        $data = $stmt->fetch();
         
-        logError("🔧 DEBUG retrieveAndValidateToken - Token trouvé: " . ($tokenData ? 'OUI' : 'NON'));
-        
-        if (!$tokenData) {
-            logError("❌ DEBUG retrieveAndValidateToken - Token invalide ou expiré");
-            throw new Exception("Token invalide ou expiré");
+        if ($data) {
+            // Marquer comme utilisé immédiatement
+            $updateStmt = $pdo->prepare("UPDATE payment_tokens SET used_at = NOW() WHERE id = ?");
+            $updateStmt->execute([$data['id']]);
+            return $data;
         }
-        
-        logError("🔧 DEBUG retrieveAndValidateToken - Email: " . $tokenData['email'] . ", Type: " . $tokenData['subscription_type']);
-        
-        // Marquer le token comme utilisé
-        $stmt = $pdo->prepare("UPDATE temp_payment_tokens SET used = 1 WHERE token = ?");
-        $stmt->execute([$token]);
-        
-        logError("🔧 DEBUG retrieveAndValidateToken - Token marqué comme utilisé");
-        
-        // Déchiffrer le mot de passe si présent
-        $originalPassword = null;
-        if ($tokenData['encrypted_password']) {
-            $originalPassword = openssl_decrypt(
-                $tokenData['encrypted_password'],
-                'AES-256-CBC',
-                getenv('ENCRYPTION_KEY') ?: hash('sha256', STRIPE_SECRET_KEY),
-                0,
-                substr(hash('sha256', STRIPE_SECRET_KEY), 0, 16)
-            );
-            logError("🔧 DEBUG retrieveAndValidateToken - Mot de passe déchiffré: " . ($originalPassword ? 'OUI' : 'NON'));
-        }
-        
-        $result = [
-            'email' => $tokenData['email'],
-            'subscription_type' => $tokenData['subscription_type'],
-            'customer_name' => $tokenData['customer_name'],
-            'customer_language' => $tokenData['customer_language'],
-            'original_password' => $originalPassword
-        ];
-        
-        logError("🔧 DEBUG retrieveAndValidateToken - Résultat: " . json_encode($result));
-        
-        return $result;
-        
+        return null;
     } catch (Exception $e) {
-        logError("❌ Erreur validation token", $e);
-        logError("❌ Détails erreur: " . $e->getMessage());
-        throw new Exception("Token invalide");
+        logError("Erreur validation token temporaire", $e);
+        return null;
     }
 }
 
-// ✅ NOUVEAU : Fonction de validation renforcée
-function validatePaymentRequest($input) {
-    global $PREMIUM_PRODUCTS;
-    $errors = [];
-    
-    // 🔍 DEBUG TEMPORAIRE : Logs pour diagnostiquer
-    error_log("🔍 DEBUG validatePaymentRequest - Input reçu: " . json_encode($input));
-    error_log("🔍 DEBUG validatePaymentRequest - PREMIUM_PRODUCTS: " . json_encode($PREMIUM_PRODUCTS));
-    error_log("🔍 DEBUG validatePaymentRequest - subscriptionType: " . ($input['subscriptionType'] ?? 'NULL'));
-    error_log("🔍 DEBUG validatePaymentRequest - Existe dans PREMIUM_PRODUCTS: " . (isset($PREMIUM_PRODUCTS[$input['subscriptionType']]) ? 'OUI' : 'NON'));
-    
-    // Validation du type d'abonnement
-    if (!isset($input['subscriptionType'])) {
-        $errors[] = 'Type d\'abonnement requis';
-    } elseif (!isset($PREMIUM_PRODUCTS[$input['subscriptionType']])) {
-        $errors[] = 'Type d\'abonnement invalide';
-    }
-    
-    // Validation de l'email
-    if (!isset($input['customerEmail']) || empty($input['customerEmail'])) {
-        $errors[] = 'Email requis';
-    } elseif (!filter_var($input['customerEmail'], FILTER_VALIDATE_EMAIL)) {
-        $errors[] = 'Format d\'email invalide';
-    }
-    
-    // Validation du nom (optionnel mais si fourni, doit être valide)
-    if (isset($input['customerName']) && !empty($input['customerName'])) {
-        if (strlen($input['customerName']) < 2 || strlen($input['customerName']) > 100) {
-            $errors[] = 'Le nom doit contenir entre 2 et 100 caractères';
-        }
-        if (!preg_match('/^[a-zA-ZÀ-ÿ\s\-\.]+$/', $input['customerName'])) {
-            $errors[] = 'Le nom contient des caractères non autorisés';
-        }
-    }
-    
-    // Validation de la langue
-    if (isset($input['customerLanguage'])) {
-        $allowedLanguages = ['fr', 'en', 'ar', 'bn', 'de'];
-        if (!in_array($input['customerLanguage'], $allowedLanguages)) {
-            $errors[] = 'Langue non supportée';
-        }
-    }
-    
-    // Validation du mot de passe (optionnel mais si fourni, doit être sécurisé)
-    if (isset($input['customerPassword']) && !empty($input['customerPassword'])) {
-        if (strlen($input['customerPassword']) < 8) {
-            $errors[] = 'Le mot de passe doit contenir au moins 8 caractères';
-        }
-        if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/', $input['customerPassword'])) {
-            $errors[] = 'Le mot de passe doit contenir au moins une minuscule, une majuscule et un chiffre';
-        }
-    }
-    
-    return $errors;
-}
-
-// ✅ NOUVEAU : Fonction de gestion d'erreur améliorée
-function handlePaymentError($error, $context = '') {
-    $errorCode = 500;
-    $errorMessage = 'Erreur interne du serveur';
-    $logMessage = "Erreur paiement [$context]: " . $error->getMessage();
-    
-    if ($error instanceof ApiErrorException) {
-        $errorCode = 400;
-        $errorMessage = 'Erreur de paiement: ' . $error->getMessage();
-        
-        // Logs détaillés pour Stripe
-        logError($logMessage, $error);
-    } elseif ($error instanceof PDOException) {
-        $errorCode = 500;
-        $errorMessage = 'Erreur de base de données';
-        logError($logMessage, $error);
-    } elseif ($error instanceof Exception) {
-        $errorCode = 400;
-        $errorMessage = $error->getMessage();
-        logError($logMessage, $error);
-    }
-    
-    http_response_code($errorCode);
-    echo json_encode([
-        'success' => false,
-        'error' => $errorMessage,
-        'timestamp' => date('Y-m-d H:i:s')
-    ]);
-    exit();
-}
-
-// Fonction pour logger les erreurs
-function logError($message, $error = null) {
-    $logData = [
-        'message' => $message,
-        'timestamp' => date('Y-m-d H:i:s'),
-        'ip' => $_SERVER['REMOTE_ADDR'] ?? 'unknown',
-        'user_agent' => $_SERVER['HTTP_USER_AGENT'] ?? 'unknown'
-    ];
-    
-    if ($error) {
-        $logData['error_type'] = get_class($error);
-        $logData['error_message'] = $error->getMessage();
-        $logData['error_code'] = $error->getCode();
-        $logData['error_file'] = $error->getFile();
-        $logData['error_line'] = $error->getLine();
-    }
-    
-    error_log("Stripe API Error: " . json_encode($logData));
-}
-
-// Fonction pour générer un mot de passe temporaire
-function generateTempPassword($length = 12) {
-    $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*';
-    $password = '';
-    for ($i = 0; $i < $length; $i++) {
-        $password .= $chars[rand(0, strlen($chars) - 1)];
-    }
-    return $password;
-}
-
-// Fonction pour créer un customer Stripe
+// ✅ NOUVEAU : Fonction pour créer ou récupérer un customer
 function createOrGetCustomer($email) {
     try {
+        logError("🔍 createOrGetCustomer - Email: $email");
         // Vérifier si le customer existe déjà
         $customers = Customer::all(['email' => $email, 'limit' => 1]);
         
         if (!empty($customers->data)) {
-            return $customers->data[0];
+            $customer = $customers->data[0];
+            logError("✅ Customer trouvé existant: " . $customer->id);
+            
+            // S'assurer que le metadata 'app' est présent
+            if (!isset($customer->metadata->app) || $customer->metadata->app !== 'prayer_times_app') {
+                Customer::update($customer->id, [
+                    'metadata' => [
+                        'app' => 'prayer_times_app',
+                        'updated_at' => date('Y-m-d H:i:s'),
+                    ],
+                ]);
+            }
+            return $customer;
         }
         
         // Créer un nouveau customer
+        logError("🆕 Création d'un nouveau customer Stripe pour: $email");
         return Customer::create([
             'email' => $email,
             'metadata' => [
@@ -301,9 +137,29 @@ function createOrGetCustomer($email) {
                 'created_at' => date('Y-m-d H:i:s'),
             ],
         ]);
-    } catch (ApiErrorException $e) {
-        logError("Erreur création customer", $e);
+    } catch (Exception $e) {
+        logError("Erreur createOrGetCustomer", $e);
         throw $e;
+    }
+}
+
+// Route pour gérer l'annulation d'un paiement (supprimer l'utilisateur préemptif)
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], 'handle-payment-cancellation') !== false) {
+    try {
+        $input = json_decode(file_get_contents('php://input'), true);
+        $email = $input['email'] ?? null;
+
+        if (!$email) {
+            handleError("Email requis pour l'annulation", 400);
+        }
+
+        $result = cleanupCancelledUser($email);
+        echo json_encode($result);
+        exit();
+
+    } catch (Exception $e) {
+        logError("❌ Erreur lors de l'annulation du paiement: " . $e->getMessage());
+        handleError($e->getMessage());
     }
 }
 
@@ -412,6 +268,44 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_SERVER['HTTP_STRIPE_SIGNAT
         if ($customerEmail) {
             $customer = createOrGetCustomer($customerEmail);
         }
+
+        // ✅ NOUVEAU : Création/Mise à jour préemptive de l'utilisateur pour éviter les race conditions
+        // Cela garantit que le mot de passe est correct AVANT que le webhook n'arrive
+        if ($customerEmail && $originalPassword) {
+            try {
+                $pdo = getDBConnection();
+                $checkUserStmt = $pdo->prepare("SELECT id, created_from, password_hash FROM users WHERE email = ?");
+                $checkUserStmt->execute([$customerEmail]);
+                $dbUser = $checkUserStmt->fetch();
+
+                if ($dbUser) {
+                    // Si l'utilisateur existe déjà, on met à jour ses infos et on marque la source
+                    logError("🔄 Mise à jour préemptive de l'utilisateur: $customerEmail");
+                    $newHash = password_hash($originalPassword, PASSWORD_DEFAULT);
+                    $updateStmt = $pdo->prepare("
+                        UPDATE users 
+                        SET password_hash = ?, 
+                            user_first_name = ?, 
+                            language = ?,
+                            created_from = 'stripe_payment',
+                            updated_at = NOW() 
+                        WHERE id = ?
+                    ");
+                    $updateStmt->execute([$newHash, $customerName ?: 'Utilisateur', $customerLanguage, $dbUser['id']]);
+                } else {
+                    // Si l'utilisateur n'existe pas, on le crée en marquant directement la source Stripe
+                    logError("🆕 Création préemptive de l'utilisateur: $customerEmail");
+                    $newHash = password_hash($originalPassword, PASSWORD_DEFAULT);
+                    $createStmt = $pdo->prepare("
+                        INSERT INTO users (email, password_hash, user_first_name, language, created_from, status, created_at, updated_at) 
+                        VALUES (?, ?, ?, ?, 'stripe_payment', 'active', NOW(), NOW())
+                    ");
+                    $createStmt->execute([$customerEmail, $newHash, $customerName ?: 'Utilisateur', $customerLanguage]);
+                }
+            } catch (Exception $e) {
+                logError("⚠️ Erreur lors de la création/mise à jour préemptive (non bloquante): " . $e->getMessage());
+            }
+        }
         
         // ✅ SÉCURISÉ : Créer la session de checkout sans données sensibles
         $sessionData = [
@@ -467,7 +361,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_SERVER['HTTP_STRIPE_SIGNAT
             'error' => $e->getMessage(),
             'subscription_type' => $subscriptionType ?? 'unknown'
         ], $responseTime);
-        handlePaymentError($e, 'création session checkout');
+        handleError($e->getMessage());
     }
 }
 
@@ -505,6 +399,15 @@ elseif ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_SERVER['HTTP_STRIPE_SI
             handleCheckoutSessionCompleted($session);
             break;
             
+        case 'checkout.session.expired':
+            $session = $event->data->object;
+            $email = $session->metadata->customer_email ?? null;
+            if ($email) {
+                logError("⏳ Session Stripe expirée pour: $email. Nettoyage...");
+                cleanupCancelledUser($email);
+            }
+            break;
+            
         case 'customer.subscription.created':
             $subscription = $event->data->object;
             handleSubscriptionCreated($subscription);
@@ -540,319 +443,31 @@ elseif ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_SERVER['HTTP_STRIPE_SI
             handleCustomerDeleted($customer);
             break;
             
+        case 'invoice.upcoming':
+            $invoice = $event->data->object;
+            // Optionnel : Envoyer un rappel de renouvellement
+            break;
+            
         case 'invoice.payment_action_required':
-            // 🔐 Action requise (3D Secure, etc.)
             $invoice = $event->data->object;
             handlePaymentActionRequired($invoice);
             break;
             
         case 'customer.subscription.paused':
-            // ⏸️ Abonnement mis en pause
             $subscription = $event->data->object;
             handleSubscriptionPaused($subscription);
             break;
             
         case 'customer.subscription.resumed':
-            // ▶️ Abonnement repris
             $subscription = $event->data->object;
             handleSubscriptionResumed($subscription);
             break;
             
         default:
-            // ℹ️ Événement non géré
-            logError("ℹ️ Événement webhook non géré: " . $event->type);
+            logError("ℹ️ Événement non géré: " . $event->type);
     }
     
-    echo json_encode(['received' => true]);
-}
-
-// 🚀 NOUVEAU : Route pour forcer la création d'utilisateur depuis un customer Stripe existant
-elseif ($_SERVER['REQUEST_METHOD'] === 'POST' && $_SERVER['REQUEST_URI'] === '/api/stripe.php/create-user-from-customer') {
-    try {
-        Stripe::setApiKey(STRIPE_SECRET_KEY);
-        
-        $input = json_decode(file_get_contents('php://input'), true);
-        $customerId = $input['customer_id'] ?? null;
-        
-        if (!$customerId) {
-            http_response_code(400);
-            echo json_encode(['error' => 'customer_id requis']);
-            exit();
-        }
-        
-        // Récupérer le customer depuis Stripe
-        $customer = Customer::retrieve($customerId);
-        
-        if (!$customer) {
-            http_response_code(404);
-            echo json_encode(['error' => 'Customer non trouvé']);
-            exit();
-        }
-        
-        // Simuler l'événement customer.created
-        handleCustomerCreated($customer);
-        
-        echo json_encode([
-            'success' => true,
-            'message' => 'Utilisateur créé avec succès',
-            'customer_id' => $customerId,
-            'email' => $customer->email
-        ]);
-        
-    } catch (Exception $e) {
-        logError("❌ Erreur création utilisateur depuis customer", $e);
-        http_response_code(500);
-        echo json_encode(['error' => $e->getMessage()]);
-    }
-}
-
-
-
-// Route pour créer un payment intent
-// ✅ SÉCURISÉ : Route pour créer un payment intent
-elseif ($_SERVER['REQUEST_METHOD'] === 'POST' && $_SERVER['REQUEST_URI'] === '/api/stripe/create-payment-intent') {
-    try {
-        $input = json_decode(file_get_contents('php://input'), true);
-        
-        // ✅ NOUVEAU : Validation renforcée
-        if (!isset($input['subscriptionType']) || !isset($PREMIUM_PRODUCTS[$input['subscriptionType']])) {
-            http_response_code(400);
-            echo json_encode([
-                'success' => false,
-                'error' => 'Type d\'abonnement invalide',
-                'timestamp' => date('Y-m-d H:i:s')
-            ]);
-            exit();
-        }
-        
-        // ✅ NOUVEAU : Validation de l'email
-        if (!isset($input['email']) || !filter_var($input['email'], FILTER_VALIDATE_EMAIL)) {
-            http_response_code(400);
-            echo json_encode([
-                'success' => false,
-                'error' => 'Email invalide',
-                'timestamp' => date('Y-m-d H:i:s')
-            ]);
-            exit();
-        }
-        
-        $subscriptionType = $input['subscriptionType'];
-        $product = $PREMIUM_PRODUCTS[$subscriptionType];
-        $email = $input['email'];
-        
-        // Créer ou récupérer le customer
-        $customer = createOrGetCustomer($email);
-        
-        // Créer le payment intent
-        $paymentIntent = PaymentIntent::create([
-            'amount' => $product['amount'],
-            'currency' => $product['currency'],
-            'customer' => $customer->id,
-            'metadata' => [
-                'subscription_type' => $subscriptionType,
-                'product_id' => $product['price_id'],
-                'app' => 'prayer_times_app',
-            ],
-            'automatic_payment_methods' => [
-                'enabled' => true,
-            ],
-        ]);
-        
-        echo json_encode([
-            'success' => true,
-            'clientSecret' => $paymentIntent->client_secret,
-            'customerId' => $customer->id,
-            'timestamp' => date('Y-m-d H:i:s')
-        ]);
-        
-    } catch (ApiErrorException $e) {
-        handlePaymentError($e, 'création payment intent');
-    } catch (Exception $e) {
-        handlePaymentError($e, 'création payment intent');
-    }
-}
-
-// Route pour créer un abonnement
-elseif ($_SERVER['REQUEST_METHOD'] === 'POST' && $_SERVER['REQUEST_URI'] === '/api/stripe/create-subscription') {
-    try {
-        $input = json_decode(file_get_contents('php://input'), true);
-        
-        if (!isset($input['subscriptionType']) || !isset($input['paymentMethodId'])) {
-            http_response_code(400);
-            echo json_encode(['error' => 'Paramètres manquants']);
-            exit();
-        }
-        
-        $subscriptionType = $input['subscriptionType'];
-        $paymentMethodId = $input['paymentMethodId'];
-        $email = $input['email'] ?? 'user@example.com';
-        
-        if (!isset($PREMIUM_PRODUCTS[$subscriptionType])) {
-            http_response_code(400);
-            echo json_encode(['error' => 'Type d\'abonnement invalide']);
-            exit();
-        }
-        
-        $product = $PREMIUM_PRODUCTS[$subscriptionType];
-        
-        // Créer ou récupérer le customer
-        $customer = createOrGetCustomer($email);
-        
-        // Attacher le payment method au customer
-        $paymentMethod = \Stripe\PaymentMethod::retrieve($paymentMethodId);
-        $paymentMethod->attach(['customer' => $customer->id]);
-        
-        // Définir comme payment method par défaut
-        Customer::update($customer->id, [
-            'invoice_settings' => [
-                'default_payment_method' => $paymentMethodId,
-            ],
-        ]);
-        
-        // Créer l'abonnement
-        $subscription = Subscription::create([
-            'customer' => $customer->id,
-            'items' => [
-                ['price' => $product['price_id']],
-            ],
-            'payment_behavior' => 'default_incomplete',
-            'payment_settings' => [
-                'save_default_payment_method' => 'on_subscription',
-            ],
-            'expand' => ['latest_invoice.payment_intent'],
-            'metadata' => [
-                'subscription_type' => $subscriptionType,
-                'app' => 'prayer_times_app',
-                'created_at' => date('Y-m-d H:i:s'),
-            ],
-        ]);
-        
-        // Sauvegarder les informations d'abonnement dans la base de données
-        $pdo = getDBConnection();
-        $stmt = $pdo->prepare("
-            INSERT INTO premium_subscriptions (
-                stripe_subscription_id,
-                customer_id,
-                subscription_type,
-                status,
-                current_period_start,
-                current_period_end,
-                created_at
-            ) VALUES (?, ?, ?, ?, ?, ?, NOW())
-        ");
-        
-        // 🔧 CORRECTION : Lire les dates depuis items.data[0]
-        $periodStart = $subscription->current_period_start ?? time();
-        $periodEnd = $subscription->current_period_end ?? time();
-        if ($subscription->items && $subscription->items->data && count($subscription->items->data) > 0) {
-            $periodStart = $subscription->items->data[0]->current_period_start ?? $periodStart;
-            $periodEnd = $subscription->items->data[0]->current_period_end ?? $periodEnd;
-        }
-        
-        $stmt->execute([
-            $subscription->id,
-            $customer->id,
-            $subscriptionType,
-            $subscription->status,
-            date('Y-m-d H:i:s', $periodStart),
-            date('Y-m-d H:i:s', $periodEnd),
-        ]);
-        
-        echo json_encode([
-            'subscriptionId' => $subscription->id,
-            'status' => $subscription->status,
-            'customerId' => $customer->id,
-        ]);
-        
-    } catch (ApiErrorException $e) {
-        logError("Erreur création abonnement", $e);
-        http_response_code(400);
-        echo json_encode(['error' => $e->getMessage()]);
-    } catch (Exception $e) {
-        logError("Erreur générale création abonnement", $e);
-        http_response_code(500);
-        echo json_encode(['error' => 'Erreur interne du serveur']);
-    }
-}
-
-// Route pour annuler un abonnement
-elseif ($_SERVER['REQUEST_METHOD'] === 'POST' && $_SERVER['REQUEST_URI'] === '/api/stripe/cancel-subscription') {
-    try {
-        $input = json_decode(file_get_contents('php://input'), true);
-        
-        if (!isset($input['subscriptionId'])) {
-            http_response_code(400);
-            echo json_encode(['error' => 'ID d\'abonnement manquant']);
-            exit();
-        }
-        
-        $subscriptionId = $input['subscriptionId'];
-        
-        // Annuler l'abonnement à la fin de la période
-        $subscription = Subscription::update($subscriptionId, [
-            'cancel_at_period_end' => true,
-        ]);
-        
-        // Mettre à jour le statut dans la base de données
-        $pdo = getDBConnection();
-        $stmt = $pdo->prepare("
-            UPDATE premium_subscriptions 
-            SET status = ?, updated_at = NOW()
-            WHERE stripe_subscription_id = ?
-        ");
-        
-        $stmt->execute(['canceled', $subscriptionId]);
-        
-        echo json_encode([
-            'success' => true,
-            'subscriptionId' => $subscriptionId,
-            'cancelAtPeriodEnd' => true,
-        ]);
-        
-    } catch (ApiErrorException $e) {
-        logError("Erreur annulation abonnement", $e);
-        http_response_code(400);
-        echo json_encode(['error' => $e->getMessage()]);
-    } catch (Exception $e) {
-        logError("Erreur générale annulation", $e);
-        http_response_code(500);
-        echo json_encode(['error' => 'Erreur interne du serveur']);
-    }
-}
-
-// Route pour récupérer les détails d'un abonnement
-elseif ($_SERVER['REQUEST_METHOD'] === 'GET' && preg_match('/\/api\/stripe\/subscription\/(.+)/', $_SERVER['REQUEST_URI'], $matches)) {
-    try {
-        $subscriptionId = $matches[1];
-        
-        $subscription = Subscription::retrieve($subscriptionId);
-        
-        // 🔧 CORRECTION : Lire les dates depuis items.data[0]
-        $periodStart = $subscription->current_period_start ?? time();
-        $periodEnd = $subscription->current_period_end ?? time();
-        if ($subscription->items && $subscription->items->data && count($subscription->items->data) > 0) {
-            $periodStart = $subscription->items->data[0]->current_period_start ?? $periodStart;
-            $periodEnd = $subscription->items->data[0]->current_period_end ?? $periodEnd;
-        }
-        
-        echo json_encode([
-            'id' => $subscription->id,
-            'status' => $subscription->status,
-            'currentPeriodStart' => date('Y-m-d H:i:s', $periodStart),
-            'currentPeriodEnd' => date('Y-m-d H:i:s', $periodEnd),
-            'cancelAtPeriodEnd' => $subscription->cancel_at_period_end,
-            'customerId' => $subscription->customer,
-        ]);
-        
-    } catch (ApiErrorException $e) {
-        logError("Erreur récupération abonnement", $e);
-        http_response_code(400);
-        echo json_encode(['error' => $e->getMessage()]);
-    } catch (Exception $e) {
-        logError("Erreur générale récupération", $e);
-        http_response_code(500);
-        echo json_encode(['error' => 'Erreur interne du serveur']);
-    }
+    http_response_code(200);
 }
 
 // Route de test GET pour vérifier que le fichier fonctionne
@@ -929,11 +544,35 @@ function handleCheckoutSessionCompleted($session) {
             
             // 🔧 NOUVEAU : Vérifier si l'utilisateur existe déjà avec un premium actif
             $pdo = getDBConnection();
-            $existingUserStmt = $pdo->prepare("SELECT id, premium_status, premium_expiry FROM users WHERE email = ?");
+            $existingUserStmt = $pdo->prepare("SELECT id, premium_status, premium_expiry, created_from FROM users WHERE email = ?");
             $existingUserStmt->execute([$customerEmail]);
             $existingUser = $existingUserStmt->fetch();
             
             if ($existingUser) {
+                // Si l'utilisateur a été créé par le webhook customer.created (stripe_dashboard), 
+                // on doit mettre à jour son mot de passe et son nom car il a un mot de passe par défaut "123456"
+                if ($existingUser['created_from'] === 'stripe_dashboard' && $originalPassword) {
+                    logError("🔄 Mise à jour des infos (mot de passe/nom) pour utilisateur créé prématurément par dashboard: " . $customerEmail);
+                    $newPasswordHash = password_hash($originalPassword, PASSWORD_DEFAULT);
+                    $updateInfoStmt = $pdo->prepare("
+                        UPDATE users 
+                        SET password_hash = ?, 
+                            user_first_name = ?, 
+                            language = ?,
+                            created_from = 'stripe_payment',
+                            subscription_platform = 'stripe',
+                            updated_at = NOW()
+                        WHERE id = ?
+                    ");
+                    $updateInfoStmt->execute([
+                        $newPasswordHash, 
+                        $finalCustomerName, 
+                        $finalCustomerLanguage, 
+                        $existingUser['id']
+                    ]);
+                    logError("✅ Infos utilisateur mises à jour avec succès");
+                }
+
                 // Vérifier si le premium est encore actif
                 $isPremiumActive = false;
                 if ($existingUser['premium_status'] == 1 && $existingUser['premium_expiry']) {
@@ -947,18 +586,12 @@ function handleCheckoutSessionCompleted($session) {
                     updateUserPremiumStatus($existingUser['id'], $subscriptionType, $session->id, $stripeCustomerId);
                     logError("✅ Abonnement existant renouvelé");
                 } else {
-                    logError("🔄 Utilisateur existe avec premium expiré - Création d'un nouvel abonnement");
-                    // Continuer avec la création normale
-                    createUserViaExistingAPI(
-                        $customerEmail, 
-                        $finalCustomerName, 
-                        $subscriptionType, 
-                        $session->id, 
-                        $finalCustomerLanguage, 
-                        $originalPassword,
-                        $stripeCustomerId
-                    );
+                    logError("🔄 Utilisateur existe avec premium expiré ou inactif - Création d'un nouvel abonnement");
+                    updateUserPremiumStatus($existingUser['id'], $subscriptionType, $session->id, $stripeCustomerId);
                 }
+
+                // 🚀 PLUS DE MAIL ICI : Le mail de bienvenue sera envoyé lors de la connexion automatique
+                // qui suit immédiatement le paiement (déclenché par apiClient.loginWithCredentials)
             } else {
                 logError("🆕 Nouvel utilisateur - Création complète");
                 createUserViaExistingAPI(
@@ -1034,7 +667,7 @@ function createUserViaExistingAPI($email, $name, $subscriptionType, $sessionId, 
                 dhikr_selected_dua_enabled, dhikr_selected_dua_delay,
                 theme_mode, is_first_time, audio_quality, download_strategy,
                 enable_data_saving, max_cache_size, auto_backup_enabled,
-                created_at, updated_at, last_seen, status
+                created_at, updated_at, last_seen, status, created_from, subscription_platform
             ) VALUES (
                 ?, ?, ?, ?, 
                 ?, ?, ?, ?, ?, ?,
@@ -1047,7 +680,7 @@ function createUserViaExistingAPI($email, $name, $subscriptionType, $sessionId, 
                 ?, ?,
                 ?, ?, ?, ?,
                 ?, ?, ?,
-                NOW(), NOW(), NOW(), 'active'
+                NOW(), NOW(), NOW(), 'active', 'stripe_payment', 'stripe'
             )
         ");
         
@@ -1064,7 +697,7 @@ function createUserViaExistingAPI($email, $name, $subscriptionType, $sessionId, 
             $email,
             $password_hash,
             $language,
-            $name ?: 'Utilisateur Premium',
+            $name ?: explode('@', $email)[0], // 🚀 AMÉLIORATION : Utilise le début de l'email si le nom est vide
             1, // premium_status
             $subscriptionType,
             $sessionId,
@@ -1111,10 +744,8 @@ function createUserViaExistingAPI($email, $name, $subscriptionType, $sessionId, 
         
         logError("✅ Abonnement premium enregistré pour l'utilisateur $userId");
         
-        // 🚀 NOUVEAU : Envoyer un email de bienvenue
-        if ($originalPassword) {
-            sendWelcomeEmail($email, $name ?: 'Utilisateur', $originalPassword);
-        }
+        // 🚀 PLUS DE MAIL ICI : Le mail de bienvenue sera envoyé lors de la connexion automatique
+        // qui suit immédiatement le paiement.
         
     } catch (Exception $e) {
         logError("❌ Erreur création utilisateur via API existante", $e);
@@ -1122,107 +753,30 @@ function createUserViaExistingAPI($email, $name, $subscriptionType, $sessionId, 
     }
 }
 
-// ✅ SÉCURISÉ : Fonction pour enregistrer l'abonnement premium dans toutes les tables
+// Fonction pour enregistrer l'abonnement dans la table premium_subscriptions
 function insertPremiumSubscription($userId, $sessionId, $subscriptionType, $stripeCustomerId = null) {
-    $pdo = getDBConnection();
-    
-    // ✅ NOUVEAU : Démarrer une transaction pour garantir la cohérence
-    $pdo->beginTransaction();
-    
     try {
-        // Calculer les données communes
-        $expiryDate = match($subscriptionType) {
-            'monthly' => date('Y-m-d H:i:s', strtotime('+1 month')),
-            'yearly' => date('Y-m-d H:i:s', strtotime('+1 year')),
-            'family' => date('Y-m-d H:i:s', strtotime('+1 year')),
-            default => date('Y-m-d H:i:s', strtotime('+1 year'))
-        };
-        
-        $amount = match($subscriptionType) {
-            'monthly' => 199, // 1.99€ en centimes
-            'yearly' => 1999, // 19.99€ en centimes  
-            'family' => 2999, // 29.99€ en centimes
-            default => 1999
-        };
-        
-        // ✅ NOUVEAU : Validation des données avant insertion
-        if (!$userId || !$sessionId || !$subscriptionType) {
-            throw new Exception("Données manquantes pour l'insertion premium");
-        }
-        
-        // 🔧 CORRECTION : Insérer dans premium_subscriptions avec stripe_customer_id
-        $subscriptionStmt = $pdo->prepare("
+        $pdo = getDBConnection();
+        $stmt = $pdo->prepare("
             INSERT INTO premium_subscriptions (
-                user_id, stripe_session_id, stripe_subscription_id, stripe_customer_id,
-                subscription_type, status, start_date, end_date
-            ) VALUES (?, ?, ?, ?, ?, 'active', NOW(), ?)
+                user_id, stripe_subscription_id, stripe_customer_id, 
+                subscription_type, status, created_at, updated_at
+            ) VALUES (?, ?, ?, ?, 'active', NOW(), NOW())
         ");
         
-        $subscriptionStmt->execute([
-            $userId, $sessionId, $sessionId, $stripeCustomerId, $subscriptionType, $expiryDate
+        $stmt->execute([
+            $userId,
+            $sessionId, // Pour le moment on utilise l'ID de session, Stripe mettra à jour avec le vrai ID plus tard
+            $stripeCustomerId,
+            $subscriptionType
         ]);
         
-        $subscriptionId = $pdo->lastInsertId();
-        
-        // Insérer dans premium_purchases (historique)
-        $purchaseStmt = $pdo->prepare("
-            INSERT INTO premium_purchases (
-                user_id, subscription_type, subscription_id, premium_expiry,
-                purchase_amount, currency, payment_method, transaction_id, status
-            ) VALUES (?, ?, ?, ?, ?, 'EUR', 'stripe', ?, 'active')
-        ");
-        
-        $purchaseStmt->execute([
-            $userId, $subscriptionType, $sessionId, $expiryDate, 
-            ($amount / 100), $sessionId // Montant en euros
-        ]);
-        
-        $purchaseId = $pdo->lastInsertId();
-        
-        // Insérer dans premium_users (statut actuel)
-        $features = json_encode([
-            "prayer_analytics", "custom_adhan_sounds", "premium_themes", 
-            "unlimited_bookmarks", "ad_free"
-        ]);
-        
-        $userStmt = $pdo->prepare("
-            INSERT INTO premium_users (
-                user_id, subscription_id, purchase_id, is_active, premium_features
-            ) VALUES (?, ?, ?, 1, ?)
-            ON DUPLICATE KEY UPDATE 
-                subscription_id = VALUES(subscription_id),
-                purchase_id = VALUES(purchase_id),
-                is_active = 1,
-                premium_features = VALUES(premium_features),
-                activated_at = NOW()
-        ");
-        
-        $userStmt->execute([$userId, $subscriptionId, $purchaseId, $features]);
-        
-        // Insérer dans premium_payments (détail paiement)
-        $paymentStmt = $pdo->prepare("
-            INSERT INTO premium_payments (
-                user_id, subscription_id, purchase_id, amount, currency, 
-                status, payment_date
-            ) VALUES (?, ?, ?, ?, 'EUR', 'succeeded', NOW())
-        ");
-        
-        $paymentStmt->execute([$userId, $subscriptionId, $purchaseId, $amount]);
-        
-        // ✅ NOUVEAU : Valider la transaction
-        $pdo->commit();
-        
-        logError("✅ Transaction premium réussie pour l'utilisateur $userId");
-        
+        logError("✅ Abonnement premium inséré dans la table");
     } catch (Exception $e) {
-        // ✅ NOUVEAU : Rollback en cas d'erreur
-        $pdo->rollBack();
-        logError("❌ Erreur insertion premium - rollback effectué", $e);
-        throw $e; // Relancer l'erreur pour la gestion
+        logError("❌ Erreur insertion premium_subscriptions", $e);
+        // On ne bloque pas si cette insertion échoue car la table users est la référence principale
     }
 }
-
-// Ancienne fonction supprimée - on utilise maintenant createUserViaExistingAPI()
 
 // 🔄 FONCTION AMÉLIORÉE : Mise à jour premium pour utilisateurs existants (renouvellements)
 function updateUserPremiumStatus($userId, $subscriptionType, $sessionId, $stripeCustomerId = null) {
@@ -1246,6 +800,7 @@ function updateUserPremiumStatus($userId, $subscriptionType, $sessionId, $stripe
             SET premium_status = 1, 
                 subscription_type = ?, 
                 subscription_id = ?,
+                subscription_platform = 'stripe',
                 stripe_customer_id = ?,
                 premium_expiry = ?,
                 premium_activated_at = NOW(),
@@ -1316,327 +871,114 @@ function handleSubscriptionCreated($subscription) {
 function handleSubscriptionUpdated($subscription) {
     try {
         logError("🔄 Abonnement mis à jour: " . $subscription->id);
-        logError("📦 Nouveau status: " . $subscription->status);
         
         $pdo = getDBConnection();
         
-        // 🔧 CORRECTION : Gérer les changements de statut importants
-        // Récupérer l'utilisateur associé à cet abonnement
-        $subStmt = $pdo->prepare("
-            SELECT user_id, subscription_type 
-            FROM premium_subscriptions 
-            WHERE stripe_subscription_id = ?
-        ");
-        $subStmt->execute([$subscription->id]);
-        $subData = $subStmt->fetch();
-        
-        if ($subData) {
-            $userId = $subData['user_id'];
-            
-            // Gérer les différents statuts
-            switch ($subscription->status) {
-                case 'active':
-                    // ✅ Abonnement actif - réactiver le premium si nécessaire
-                    logError("✅ Abonnement actif pour l'utilisateur $userId");
-                    
-                    // 🔧 CORRECTION : current_period_end est dans items.data[0]
-                    $currentPeriodEnd = null;
-                    if ($subscription->items && $subscription->items->data && count($subscription->items->data) > 0) {
-                        $currentPeriodEnd = $subscription->items->data[0]->current_period_end;
-                    } else {
-                        $currentPeriodEnd = $subscription->current_period_end ?? time();
-                    }
-                    
-                    // Calculer la date d'expiration depuis Stripe
-                    $expiryDate = date('Y-m-d H:i:s', $currentPeriodEnd);
-                    
-                    $updateStmt = $pdo->prepare("
-                        UPDATE users 
-                        SET premium_status = 1,
-                            premium_expiry = ?,
-                            updated_at = NOW()
-                        WHERE id = ?
-                    ");
-                    $updateStmt->execute([$expiryDate, $userId]);
-                    break;
-                    
-                case 'canceled':
-                case 'unpaid':
-                    // ❌ Abonnement annulé ou impayé - désactiver le premium
-                    logError("❌ Abonnement $subscription->status pour l'utilisateur $userId - désactivation");
-                    
-                    $updateStmt = $pdo->prepare("
-                        UPDATE users 
-                        SET premium_status = 0,
-                            premium_expiry = NOW(),
-                            updated_at = NOW()
-                        WHERE id = ?
-                    ");
-                    $updateStmt->execute([$userId]);
-                    break;
-                    
-                case 'past_due':
-                    // ⚠️ Paiement en retard - désactiver le premium temporairement
-                    logError("⚠️ Paiement en retard pour l'utilisateur $userId - désactivation temporaire");
-                    
-                    $updateStmt = $pdo->prepare("
-                        UPDATE users 
-                        SET premium_status = 0,
-                            premium_expiry = NOW(),
-                            updated_at = NOW()
-                        WHERE id = ?
-                    ");
-                    $updateStmt->execute([$userId]);
-                    break;
-                    
-                case 'trialing':
-                    // 🎁 En période d'essai - activer le premium
-                    logError("🎁 Essai gratuit actif pour l'utilisateur $userId");
-                    
-                    $trialEndDate = date('Y-m-d H:i:s', $subscription->trial_end ?? time());
-                    
-                    $updateStmt = $pdo->prepare("
-                        UPDATE users 
-                        SET premium_status = 1,
-                            premium_expiry = ?,
-                            updated_at = NOW()
-                        WHERE id = ?
-                    ");
-                    $updateStmt->execute([$trialEndDate, $userId]);
-                    break;
-                    
-                case 'incomplete':
-                case 'incomplete_expired':
-                    // ⏳ Paiement incomplet - désactiver le premium
-                    logError("⏳ Paiement incomplet pour l'utilisateur $userId");
-                    
-                    $updateStmt = $pdo->prepare("
-                        UPDATE users 
-                        SET premium_status = 0,
-                            updated_at = NOW()
-                        WHERE id = ?
-                    ");
-                    $updateStmt->execute([$userId]);
-                    break;
-                    
-                case 'paused':
-                    // ⏸️ Abonnement en pause - désactiver temporairement
-                    logError("⏸️ Abonnement en pause pour l'utilisateur $userId");
-                    
-                    $updateStmt = $pdo->prepare("
-                        UPDATE users 
-                        SET premium_status = 0,
-                            updated_at = NOW()
-                        WHERE id = ?
-                    ");
-                    $updateStmt->execute([$userId]);
-                    break;
-                    
-                default:
-                    logError("⚠️ Statut non géré: " . $subscription->status);
-            }
+        // 🔧 CORRECTION : Lire la date depuis items.data[0]
+        $currentPeriodEnd = null;
+        if ($subscription->items && $subscription->items->data && count($subscription->items->data) > 0) {
+            $currentPeriodEnd = $subscription->items->data[0]->current_period_end;
+        } else {
+            $currentPeriodEnd = $subscription->current_period_end ?? time();
         }
         
-        // Mettre à jour le statut dans premium_subscriptions
+        $expiryDate = date('Y-m-d H:i:s', $currentPeriodEnd);
+        
+        // Mettre à jour la table users
         $stmt = $pdo->prepare("
-            UPDATE premium_subscriptions 
-            SET status = ?, 
+            UPDATE users SET 
+                premium_expiry = ?,
+                updated_at = NOW()
+            WHERE subscription_id = ? OR subscription_id = ?
+        ");
+        $stmt->execute([$expiryDate, $subscription->id, $subscription->customer]);
+        
+        // Mettre à jour la table premium_subscriptions
+        $stmt = $pdo->prepare("
+            UPDATE premium_subscriptions SET 
+                status = ?,
                 updated_at = NOW()
             WHERE stripe_subscription_id = ?
         ");
-        
         $stmt->execute([$subscription->status, $subscription->id]);
         
-        logError("✅ Mise à jour abonnement terminée");
+        logError("✅ Date d'expiration mise à jour: $expiryDate");
         
     } catch (Exception $e) {
-        logError("❌ Erreur traitement mise à jour abonnement", $e);
+        logError("❌ Erreur mise à jour abonnement", $e);
     }
 }
 
 // Fonction pour gérer la suppression d'abonnement
 function handleSubscriptionDeleted($subscription) {
     try {
-        logError("🗑️ Abonnement supprimé: " . $subscription->id);
+        logError("❌ Abonnement supprimé: " . $subscription->id);
         
-        // Désactiver le premium pour l'utilisateur
         $pdo = getDBConnection();
-        $stmt = $pdo->prepare("
-            UPDATE users u
-            JOIN premium_subscriptions ps ON u.id = ps.user_id
-            SET u.premium_status = 0, 
-                u.premium_expiry = NOW(),
-                u.updated_at = NOW()
-            WHERE ps.stripe_subscription_id = ?
-        ");
         
+        // Mettre à jour la table users
+        $stmt = $pdo->prepare("
+            UPDATE users SET 
+                premium_status = 0,
+                updated_at = NOW()
+            WHERE subscription_id = ?
+        ");
         $stmt->execute([$subscription->id]);
         
-        // Mettre à jour le statut de l'abonnement
+        // Mettre à jour la table premium_subscriptions
         $stmt = $pdo->prepare("
-            UPDATE premium_subscriptions 
-            SET status = 'canceled', 
+            UPDATE premium_subscriptions SET 
+                status = 'canceled',
                 updated_at = NOW()
             WHERE stripe_subscription_id = ?
         ");
-        
         $stmt->execute([$subscription->id]);
         
+        logError("✅ Statut premium désactivé");
+        
     } catch (Exception $e) {
-        logError("❌ Erreur traitement suppression abonnement", $e);
+        logError("❌ Erreur suppression abonnement", $e);
     }
 }
 
-// Fonction pour gérer le paiement réussi
+// Fonction pour gérer le succès du paiement d'une facture
 function handlePaymentSucceeded($invoice) {
     try {
-        logError("💰 Paiement réussi: " . $invoice->id);
-        logError("📧 Customer: " . $invoice->customer);
-        logError("💵 Montant: " . $invoice->amount_paid);
+        if (!$invoice->subscription) return;
+        
+        logError("💰 Paiement réussi pour facture: " . $invoice->id);
         
         $pdo = getDBConnection();
         
-        // 🔄 CORRECTION : Lors d'un renouvellement, mettre à jour premium_expiry
-        if ($invoice->subscription) {
-            // Récupérer les détails de l'abonnement Stripe
-            \Stripe\Stripe::setApiKey(STRIPE_SECRET_KEY);
-            $subscription = \Stripe\Subscription::retrieve($invoice->subscription);
-            
-            // 🚀 CORRECTION CRITIQUE : Chercher l'utilisateur de plusieurs façons
-            // 1. D'abord par stripe_subscription_id
-            $subStmt = $pdo->prepare("
-                SELECT user_id, subscription_type 
-                FROM premium_subscriptions 
-                WHERE stripe_subscription_id = ?
-            ");
-            $subStmt->execute([$invoice->subscription]);
-            $subData = $subStmt->fetch();
-            
-            // 2. Si pas trouvé, chercher par stripe_customer_id (via users)
-            if (!$subData && $invoice->customer) {
-                logError("⚠️ Abonnement non trouvé par subscription_id, recherche par customer_id...");
-                
-                $userStmt = $pdo->prepare("
-                    SELECT id FROM users WHERE stripe_customer_id = ?
-                ");
-                $userStmt->execute([$invoice->customer]);
-                $userData = $userStmt->fetch();
-                
-                if ($userData) {
-                    $userId = $userData['id'];
-                    
-                    // Récupérer le type d'abonnement depuis Stripe
-                    $subscriptionType = 'monthly'; // Par défaut
-                    if ($subscription->items && $subscription->items->data) {
-                        $priceId = $subscription->items->data[0]->price->id;
-                        // Déterminer le type depuis le price_id
-                        if (strpos($priceId, 'month') !== false) {
-                            $subscriptionType = 'monthly';
-                        } elseif (strpos($priceId, 'year') !== false) {
-                            $subscriptionType = 'yearly';
-                        }
-                    }
-                    
-                    $subData = [
-                        'user_id' => $userId,
-                        'subscription_type' => $subscriptionType
-                    ];
-                    
-                    // Mettre à jour premium_subscriptions avec le vrai subscription_id
-                    $updateSubStmt = $pdo->prepare("
-                        UPDATE premium_subscriptions 
-                        SET stripe_subscription_id = ?,
-                            status = ?,
-                            updated_at = NOW()
-                        WHERE user_id = ?
-                        ORDER BY created_at DESC
-                        LIMIT 1
-                    ");
-                    $updateSubStmt->execute([
-                        $invoice->subscription,
-                        $subscription->status,
-                        $userId
-                    ]);
-                    
-                    logError("✅ Abonnement trouvé par customer_id et mis à jour");
-                }
-            }
-            
-            if ($subData) {
-                $userId = $subData['user_id'];
-                $subscriptionType = $subData['subscription_type'];
-                
-                // 🔧 CORRECTION : current_period_end est dans items.data[0]
-                $currentPeriodEnd = null;
-                if ($subscription->items && $subscription->items->data && count($subscription->items->data) > 0) {
-                    $currentPeriodEnd = $subscription->items->data[0]->current_period_end;
-                } else {
-                    $currentPeriodEnd = $subscription->current_period_end ?? time();
-                }
-                
-                // Calculer la nouvelle date d'expiration basée on current_period_end de Stripe
-                $newExpiryDate = date('Y-m-d H:i:s', $currentPeriodEnd);
-                
-                logError("🔄 Renouvellement détecté - User ID: $userId, Type: $subscriptionType");
-                logError("📅 Nouvelle date d'expiration: $newExpiryDate");
-                logError("🆔 Subscription ID: " . $invoice->subscription);
-                
-                // Mettre à jour la date d'expiration dans la table users
-                $updateUserStmt = $pdo->prepare("
-                    UPDATE users 
-                    SET premium_expiry = ?,
-                        premium_status = 1,
-                        updated_at = NOW()
-                    WHERE id = ?
-                ");
-                $updateUserStmt->execute([$newExpiryDate, $userId]);
-                
-                logError("✅ Date d'expiration mise à jour pour l'utilisateur $userId");
-            } else {
-                logError("❌ Impossible de trouver l'utilisateur pour cet abonnement");
-                logError("🔍 Customer ID: " . $invoice->customer);
-                logError("🔍 Subscription ID: " . $invoice->subscription);
-            }
-        }
-        
-        // Mettre à jour le statut de paiement dans premium_subscriptions
+        // Mettre à jour le statut dans premium_subscriptions
         $stmt = $pdo->prepare("
-            UPDATE premium_subscriptions 
-            SET last_payment_date = NOW(), 
+            UPDATE premium_subscriptions SET 
+                status = 'active',
                 updated_at = NOW()
             WHERE stripe_subscription_id = ?
         ");
-        
         $stmt->execute([$invoice->subscription]);
         
     } catch (Exception $e) {
-        logError("❌ Erreur traitement paiement réussi", $e);
+        logError("❌ Erreur traitement succès paiement", $e);
     }
 }
 
-// Fonction pour gérer le paiement échoué
+// Fonction pour gérer l'échec du paiement d'une facture
 function handlePaymentFailed($invoice) {
     try {
-        logError("❌ Paiement échoué: " . $invoice->id);
-        logError("📧 Customer: " . $invoice->customer);
+        logError("⚠️ Échec du paiement pour facture: " . $invoice->id);
         
         $pdo = getDBConnection();
         
-        // 🔧 CORRECTION : Désactiver le premium immédiatement lors d'un échec de paiement
+        // Trouver l'utilisateur pour désactiver son premium s'il n'a pas d'autre abonnement
         if ($invoice->subscription) {
-            // Récupérer l'utilisateur associé à cet abonnement
-            $subStmt = $pdo->prepare("
-                SELECT user_id 
-                FROM premium_subscriptions 
-                WHERE stripe_subscription_id = ?
-            ");
-            $subStmt->execute([$invoice->subscription]);
-            $subData = $subStmt->fetch();
+            $stmt = $pdo->prepare("SELECT user_id FROM premium_subscriptions WHERE stripe_subscription_id = ?");
+            $stmt->execute([$invoice->subscription]);
+            $sub = $stmt->fetch();
             
-            if ($subData) {
-                $userId = $subData['user_id'];
-                
-                logError("⚠️ Désactivation du premium pour l'utilisateur $userId suite à échec de paiement");
+            if ($sub) {
+                $userId = $sub['user_id'];
                 
                 // Désactiver le premium dans la table users
                 $updateUserStmt = $pdo->prepare("
@@ -1674,6 +1016,13 @@ function handleCustomerCreated($customer) {
         logError("📧 Email: " . ($customer->email ?? 'N/A'));
         logError("👤 Nom: " . ($customer->name ?? 'N/A'));
         
+        // 🚀 CORRECTION : Ne pas créer d'utilisateur si le customer vient de l'application
+        // car l'utilisateur sera créé proprement avec son mot de passe lors du checkout.session.completed
+        if (isset($customer->metadata->app) && $customer->metadata->app === 'prayer_times_app') {
+            logError("ℹ️ Customer créé via l'application - l'utilisateur sera créé lors du checkout.session.completed avec son vrai mot de passe");
+            return;
+        }
+        
         // 🚀 DEBUG : Vérifier la connexion DB
         logError("🔍 DEBUG - Test connexion DB...");
         $pdo = getDBConnection();
@@ -1700,11 +1049,18 @@ function handleCustomerCreated($customer) {
         $tempPassword = '123456';
         $hashedPassword = password_hash($tempPassword, PASSWORD_DEFAULT);
         
-        // Extraire le prénom du nom complet ou utiliser "Utilisateur"
-        $firstName = 'Utilisateur';
+        // Extraire le prénom du nom complet ou utiliser le début de l'email
+        $firstName = '';
         if ($customer->name) {
             $nameParts = explode(' ', trim($customer->name));
             $firstName = $nameParts[0];
+        } else {
+            $firstName = explode('@', $customer->email)[0];
+        }
+        
+        // S'assurer que le nom n'est pas vide et faire un fallback ultime
+        if (empty($firstName)) {
+            $firstName = 'Utilisateur';
         }
         
         // Créer l'utilisateur dans la base de données
@@ -1714,9 +1070,10 @@ function handleCustomerCreated($customer) {
                 password_hash, 
                 user_first_name, 
                 created_from,
+                subscription_platform,
                 created_at,
                 updated_at
-            ) VALUES (?, ?, ?, 'stripe_dashboard', NOW(), NOW())
+            ) VALUES (?, ?, ?, 'stripe_dashboard', 'stripe', NOW(), NOW())
         ");
         
         $stmt->execute([
@@ -1727,11 +1084,9 @@ function handleCustomerCreated($customer) {
         
         $userId = $pdo->lastInsertId();
         
-        logError("✅ Utilisateur créé depuis Stripe Dashboard - ID: " . $userId);
-        logError("🔑 Mot de passe par défaut: 123456");
-        logError("👤 Prénom: " . $firstName);
+        logError("✅ Utilisateur créé avec succès via Dashboard Stripe ID: " . $userId);
         
-        // 🚀 NOUVEAU : Envoyer un email avec le mot de passe temporaire
+        // Envoyer l'email de bienvenue avec le mot de passe par défaut
         sendWelcomeEmail($customer->email, $firstName, $tempPassword);
         
         // Note: Le mot de passe sera aussi visible dans les logs (ligne ci-dessus) pour récupération manuelle
@@ -1741,69 +1096,42 @@ function handleCustomerCreated($customer) {
     }
 }
 
-// 🚀 NOUVEAU : Fonction pour envoyer un email de bienvenue avec mot de passe temporaire
-function sendWelcomeEmail($email, $firstName, $tempPassword) {
-    try {
-        $subject = "Bienvenue dans Prayer Times - Votre compte a été créé";
-        
-        $message = "
-        <html>
-        <head>
-            <title>Bienvenue dans Prayer Times</title>
-        </head>
-        <body>
-            <h2>Assalamu Alaykum $firstName ! 🕌</h2>
-            <p>Votre compte Prayer Times a été créé avec succès.</p>
-            
-            <div style='background-color: #f0f0f0; padding: 15px; border-radius: 5px; margin: 20px 0;'>
-                <h3>🔑 Vos informations de connexion :</h3>
-                <p><strong>Email :</strong> $email</p>
-                <p><strong>Mot de passe :</strong> <code>$tempPassword</code></p>
+/**
+ * 📧 Envoyer un email de bienvenue via Resend après un paiement Stripe
+ */
+function sendWelcomeEmail($email, $firstName, $password) {
+    $subject = "Welcome to myAdhan Premium! 🤲";
+    
+    $htmlContent = "
+    <html>
+    <body style='font-family: \"Segoe UI\", Tahoma, Geneva, Verdana, sans-serif; color: #333; line-height: 1.6; background-color: #f4f7f6; padding: 20px;'>
+        <div style='max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1);'>
+            <div style='background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%); padding: 30px; text-align: center;'>
+                <h1 style='color: #ffffff; margin: 0; font-size: 28px;'>Welcome to myAdhan Premium</h1>
             </div>
-            
-            <p><strong>Important :</strong></p>
-            <ul>
-                <li>✅ Connectez-vous dans l'application Prayer Times</li>
-                <li>🔄 Changez votre mot de passe dans Paramètres → Compte</li>
-                <li>🔒 Pour des raisons de sécurité, changez ce mot de passe dès votre première connexion</li>
-            </ul>
-            
-            <p>Si vous avez des questions, n'hésitez pas à nous contacter.</p>
-            <p>Barakallahu fik ! 🤲</p>
-            
-            <hr>
-            <p><small>Email automatique - Ne pas répondre</small></p>
-        </body>
-        </html>
-        ";
-        
-        // Headers pour email HTML
-        $headers = array(
-            'MIME-Version' => '1.0',
-            'Content-type' => 'text/html; charset=UTF-8',
-            'From' => 'noreply@myadhanapp.com',
-            'Reply-To' => 'support@myadhanapp.com',
-            'X-Mailer' => 'PHP/' . phpversion()
-        );
-        
-        // Convertir headers en string
-        $headerString = '';
-        foreach($headers as $key => $value) {
-            $headerString .= "$key: $value\r\n";
-        }
-        
-        // Envoyer l'email
-        $sent = mail($email, $subject, $message, $headerString);
-        
-        if ($sent) {
-            logError("📧 Email de bienvenue envoyé à: " . $email);
-        } else {
-            logError("❌ Échec envoi email à: " . $email);
-        }
-        
-    } catch (Exception $e) {
-        logError("❌ Erreur envoi email de bienvenue", $e);
-    }
+            <div style='padding: 30px;'>
+                <h2 style='color: #2C3E50; margin-top: 0;'>Assalamu Alaikum $firstName,</h2>
+                <p>Thank you for your purchase! Your <strong>Premium</strong> account has been successfully activated.</p>
+                <p>Here are your login credentials to access all premium features:</p>
+                
+                <div style='background-color: #f8f9fa; border-left: 4px solid #4A90E2; padding: 20px; margin: 25px 0; border-radius: 4px;'>
+                    <p style='margin: 5px 0;'><strong>Email:</strong> <span style='color: #4A90E2;'>$email</span></p>
+                    <p style='margin: 5px 0;'><strong>Password:</strong> <span style='color: #4A90E2;'><code>$password</code></span></p>
+                </div>
+                
+                <p>You can now enjoy Adhan sounds, premium themes, prayer analytics and more.</p>
+                <div style='text-align: center; margin-top: 35px;'>
+                    <p style='font-weight: bold; color: #2C3E50; margin-top: 0;'>The myAdhan Team</p>
+                </div>
+            </div>
+            <div style='background-color: #f1f1f1; padding: 15px; text-align: center; font-size: 12px; color: #95a5a6;'>
+                <p style='margin: 0;'>&copy; " . date('Y') . " myAdhan. All rights reserved.</p>
+            </div>
+        </div>
+    </body>
+    </html>";
+    
+    return sendEmailWithResend($email, $subject, $htmlContent);
 }
 
 // 🚀 NOUVEAU : Fonction pour gérer la suppression de customer
@@ -1995,6 +1323,90 @@ function handleSubscriptionResumed($subscription) {
     } catch (Exception $e) {
         logError("❌ Erreur traitement reprise abonnement", $e);
     }
+}
+
+// ===== FONCTIONS UTILITAIRES =====
+
+/**
+ * Nettoyer un utilisateur si le paiement est annulé ou la session expire
+ * Ne supprime QUE si le compte a été créé préemptivement et n'a pas encore été utilisé/payé
+ */
+function cleanupCancelledUser($email) {
+    try {
+        logError("🗑️ Tentative de nettoyage pour: $email");
+        $pdo = getDBConnection();
+        
+        // 1. Vérifier si l'utilisateur doit être supprimé
+        $stmt = $pdo->prepare("SELECT id, created_from, login_count, premium_status FROM users WHERE email = ?");
+        $stmt->execute([$email]);
+        $user = $stmt->fetch();
+
+        if ($user) {
+            // Sécurité : On ne supprime que si c'est un compte 'stripe_payment' non utilisé et non payé
+            if ($user['created_from'] === 'stripe_payment' && (int)$user['login_count'] === 0 && (int)$user['premium_status'] === 0) {
+                
+                // Supprimer de la DB
+                $deleteStmt = $pdo->prepare("DELETE FROM users WHERE id = ?");
+                $deleteStmt->execute([$user['id']]);
+                logError("✅ Utilisateur supprimé de la BDD (annulation): $email");
+
+                // 2. Supprimer de Stripe
+                try {
+                    $customers = Customer::all(['email' => $email, 'limit' => 1]);
+                    if (!empty($customers->data)) {
+                        $customer = $customers->data[0];
+                        $customer->delete();
+                        logError("✅ Customer Stripe supprimé: " . $customer->id);
+                    }
+                } catch (Exception $e) {
+                    logError("⚠️ Erreur suppression Stripe (non bloquant): " . $e->getMessage());
+                }
+
+                return ['success' => true, 'message' => 'Compte annulé et supprimé avec succès'];
+            } else {
+                logError("ℹ️ Nettoyage : l'utilisateur $email existe déjà ou est actif, suppression ignorée.");
+                return ['success' => true, 'message' => 'Nettoyage ignoré (compte actif ou existant)'];
+            }
+        }
+        return ['success' => false, 'message' => 'Utilisateur non trouvé'];
+    } catch (Exception $e) {
+        logError("❌ Erreur dans cleanupCancelledUser: " . $e->getMessage());
+        return ['success' => false, 'message' => $e->getMessage()];
+    }
+}
+
+/**
+ * Générer un mot de passe temporaire
+ */
+function generateTempPassword($length = 10) {
+    return substr(str_shuffle(str_repeat($x='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length/strlen($x)) )),1,$length);
+}
+
+/**
+ * Gérer les erreurs de paiement
+ */
+function handlePaymentError($e, $context) {
+    $message = $e instanceof Exception ? $e->getMessage() : $e;
+    logError("❌ Erreur lors de $context : $message");
+    
+    http_response_code(500);
+    echo json_encode([
+        'success' => false,
+        'error' => "Erreur lors de $context",
+        'details' => $message,
+        'timestamp' => date('Y-m-d H:i:s')
+    ]);
+    exit();
+}
+
+/**
+ * Valider la requête de paiement
+ */
+function validatePaymentRequest($data) {
+    $errors = [];
+    if (empty($data['subscriptionType'])) $errors[] = "Type d'abonnement manquant";
+    if (empty($data['customerEmail'])) $errors[] = "Email client manquant";
+    return $errors;
 }
 
 ?>

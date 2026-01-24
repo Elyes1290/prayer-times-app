@@ -266,27 +266,29 @@ class AdhanModule: NSObject {
     NSLog("🔧 [scheduleNotificationsInternal] Début - \(items.count) items à traiter")
     
     for (key, value) in items {
-      NSLog("🔍 [scheduleNotificationsInternal] Processing key: \(key)")
-      NSLog("🔍 [scheduleNotificationsInternal] Value: \(value)")
-      
       guard let info = value as? [String: Any] else {
-          NSLog("❌ [scheduleNotificationsInternal] \(key) - value n'est pas un dictionnaire")
           skipped += 1
           continue
       }
       
-      NSLog("🔍 [scheduleNotificationsInternal] \(key) - info keys: \(info.keys)")
-      
-      guard let triggerAtMillis = info["triggerAtMillis"] as? Double else {
-          NSLog("❌ [scheduleNotificationsInternal] \(key) - triggerAtMillis manquant ou invalide")
-          NSLog("   Valeur reçue: \(info["triggerAtMillis"] ?? "nil")")
+      // 🔧 Correction: Extraction robuste du timestamp (supporte Int et Double)
+      let triggerAtMillis: Double
+      if let val = info["triggerAtMillis"] as? Double {
+          triggerAtMillis = val
+      } else if let val = info["triggerAtMillis"] as? Int64 {
+          triggerAtMillis = Double(val)
+      } else if let val = info["triggerAtMillis"] as? Int {
+          triggerAtMillis = Double(val)
+      } else if let val = info["triggerAtMillis"] as? NSNumber {
+          triggerAtMillis = val.doubleValue
+      } else {
+          NSLog("❌ [AdhanModule] \(key) - triggerAtMillis manquant ou invalide")
           skipped += 1
           continue
       }
       
       guard let prayerName = info["prayer"] as? String else {
-          NSLog("❌ [scheduleNotificationsInternal] \(key) - prayer manquant ou invalide")
-          NSLog("   Valeur reçue: \(info["prayer"] ?? "nil")")
+          NSLog("❌ [AdhanModule] \(key) - prayer manquant ou invalide")
           skipped += 1
           continue
       }

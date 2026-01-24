@@ -2,7 +2,7 @@
   "expo": {
     "name": "MyAdhan: Muslim Prayer App",
     "slug": "prayer-times-app",
-    "version": "1.0.13",
+    "version": "1.0.14",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "prayertimesapp",
@@ -11,7 +11,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.drogbinho.myadhan",
-      "buildNumber": "1.0.13",
+      "buildNumber": "1.0.14",
       "icon": "./assets/images/icon.png",
       "locales": {
         "en": "./locales/ios/en.json",
@@ -29,12 +29,7 @@
         "ur": "./locales/ios/ur.json"
       },
       "infoPlist": {
-        "UIBackgroundModes": [
-          "audio",
-          "location",
-          "fetch",
-          "remote-notification"
-        ],
+        "UIBackgroundModes": ["audio", "fetch", "remote-notification"],
         "NSLocationWhenInUseUsageDescription": "We need your location to calculate accurate prayer times based on your current city.",
         "NSLocationAlwaysAndWhenInUseUsageDescription": "We need your location to calculate accurate prayer times and send notifications even when the app is in the background.",
         "NSLocationAlwaysUsageDescription": "We need your location to provide accurate prayer times notifications based on your position.",
@@ -51,7 +46,7 @@
       },
       "edgeToEdgeEnabled": true,
       "package": "com.drogbinho.prayertimesapp2",
-      "versionCode": 80
+      "versionCode": 85
     },
     "web": {
       "bundler": "metro",

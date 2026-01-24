@@ -17,6 +17,7 @@ import { useToast } from "../contexts/ToastContext";
 import { useTranslation } from "react-i18next";
 // 🔧 NOUVEAU : Import pour synchronisation fichiers premium
 import PremiumContentManager from "../utils/premiumContent";
+import { IapService } from "../utils/iapService";
 
 // Types de base
 export interface PremiumUser {
@@ -502,6 +503,35 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
   const loadPremiumData = async () => {
     try {
       setLoading(true);
+
+      // 🍎 iOS : Vérifier le statut RevenueCat
+      if (Platform.OS === "ios") {
+        try {
+          const iapService = IapService.getInstance();
+          const isIapPremium = await iapService.checkPremiumStatus();
+          if (isIapPremium) {
+            console.log("🍎 [PremiumContext] Premium détecté via RevenueCat");
+            const iapUser: PremiumUser = {
+              ...user,
+              isPremium: true,
+              premiumType: "Apple In-App Purchase",
+              hasPurchasedPremium: true,
+              features: [
+                "prayer_analytics",
+                "custom_adhan_sounds",
+                "premium_themes",
+                "unlimited_bookmarks",
+                "ad_free",
+              ],
+            };
+            setUser(iapUser);
+            setLoading(false);
+            return;
+          }
+        } catch (iapError) {
+          console.error("❌ [PremiumContext] Erreur vérification IAP:", iapError);
+        }
+      }
 
       // 🕐 NOUVEAU : Vérifier l'expiration locale AVANT tout
       await checkLocalPremiumExpiration();

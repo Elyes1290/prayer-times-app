@@ -28,6 +28,7 @@ import {
 import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
 import * as Notifications from "expo-notifications";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import ThemedImageBackground from "../components/ThemedImageBackground";
 import PrayerTimes from "adhan/lib/types/PrayerTimes";
 
@@ -630,6 +631,38 @@ export default function HomeScreen() {
       errorLog("❌ Erreur lors de la mise à jour des notifications:", error);
     }
   };
+
+  // 🍎 NOUVEAU : Reprogrammation silencieuse à l'ouverture de l'app (iOS uniquement)
+  // Car le background fetch iOS est capricieux, on force une reprog discrète toutes les 6h max.
+  useEffect(() => {
+    if (Platform.OS !== "ios") return;
+
+    const reprogramIfNeeded = async () => {
+      try {
+        const lastUpdate = await AsyncStorage.getItem(
+          "last_notif_reprogram_ios"
+        );
+        const now = Date.now();
+        const sixHours = 6 * 60 * 60 * 1000;
+
+        if (!lastUpdate || now - parseInt(lastUpdate) > sixHours) {
+          console.log("🚀🚀🚀 [iOS] AUTO-REPROG: Lancement de la reprogrammation automatique (ouverture app)");
+          debugLog("🍎 [iOS] Reprogrammation silencieuse (throttle 6h)...");
+          await updateNotifications();
+          await AsyncStorage.setItem(
+            "last_notif_reprogram_ios",
+            now.toString()
+          );
+        }
+      } catch (err) {
+        errorLog("❌ [iOS] Erreur reprog silencieuse:", err);
+      }
+    };
+
+    if (currentPrayerTimes && stableCoords) {
+      reprogramIfNeeded();
+    }
+  }, [currentPrayerTimes, stableCoords]);
 
   // Timer pour vérifier périodiquement si on doit reprogrammer (après Isha) et mettre à jour le widget
   useEffect(() => {
