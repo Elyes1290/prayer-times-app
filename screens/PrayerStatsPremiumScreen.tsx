@@ -25,7 +25,8 @@ import { useUserStats } from "../hooks/useUserStats";
 import { useUpdateUserStats } from "../hooks/useUpdateUserStats";
 import { getCurrentUserData } from "../utils/userAuth";
 import ThemedImageBackground from "../components/ThemedImageBackground";
-import { useThemeColors, useCurrentTheme } from "../hooks/useThemeAssets";
+import { useThemeColors } from "../hooks/useThemeAssets";
+import { useCurrentTheme } from "../hooks/useThemeColor"; // 🔧 Import unifié
 import { useTranslation } from "react-i18next";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 

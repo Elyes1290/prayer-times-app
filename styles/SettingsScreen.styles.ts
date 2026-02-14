@@ -4,9 +4,14 @@ export const getStyles = (
   colors: any,
   overlayTextColor: string,
   overlayIconColor: string,
-  currentTheme: "light" | "dark"
-) =>
-  StyleSheet.create({
+  currentTheme: "light" | "dark" | "morning" | "sunset"
+) => {
+  // 🆕 Helpers pour déterminer le type de thème
+  const isLightTheme = currentTheme === "light" || currentTheme === "morning";
+  const isSunset = currentTheme === "sunset"; // 🌆 Nouveau : thème crépuscule distinct
+  const isDark = currentTheme === "dark"; // 🌙 Thème nuit pur
+
+  return StyleSheet.create({
     container: {
       flex: 1,
     },
@@ -18,10 +23,9 @@ export const getStyles = (
       marginTop: 16,
       textAlign: "center",
       letterSpacing: -0.5,
-      textShadowColor:
-        currentTheme === "light"
-          ? "rgba(255, 255, 255, 0.5)"
-          : "rgba(0,0,0,0.7)",
+      textShadowColor: isLightTheme
+        ? "rgba(255, 255, 255, 0.5)"
+        : "rgba(0,0,0,0.7)",
       textShadowOffset: { width: 0, height: 2 },
       textShadowRadius: 8,
       flex: 1,
@@ -37,16 +41,18 @@ export const getStyles = (
     premiumButton: {
       padding: 8,
       borderRadius: 20,
-      backgroundColor:
-        currentTheme === "light"
-          ? "rgba(255, 255, 255, 0.2)"
-          : "rgba(0, 0, 0, 0.3)",
+      backgroundColor: isLightTheme
+        ? "rgba(255, 255, 255, 0.2)"
+        : isSunset
+        ? "rgba(255, 127, 80, 0.2)" // 🌆 Coral transparent pour Maghrib
+        : "rgba(0, 0, 0, 0.3)",
       borderWidth: 1,
-      borderColor:
-        currentTheme === "light"
-          ? "rgba(255, 255, 255, 0.3)"
-          : "rgba(255, 255, 255, 0.2)",
-      shadowColor: currentTheme === "light" ? colors.shadow : "#D4AF37",
+      borderColor: isLightTheme
+        ? "rgba(255, 255, 255, 0.3)"
+        : isSunset
+        ? colors.border // 🌅 Utilise border du thème Maghrib
+        : "rgba(255, 255, 255, 0.2)",
+      shadowColor: isLightTheme ? colors.shadow : colors.primary, // 🌅 Utilise primary du thème actif
       shadowOffset: { width: 0, height: 2 },
       shadowOpacity: 0.3,
       shadowRadius: 4,
@@ -57,28 +63,27 @@ export const getStyles = (
     },
     modalOverlay: {
       flex: 1,
-      backgroundColor:
-        currentTheme === "light" ? "rgba(0, 0, 0, 0.6)" : "rgba(0, 0, 0, 0.8)",
+      backgroundColor: isLightTheme
+        ? "rgba(0, 0, 0, 0.6)"
+        : "rgba(0, 0, 0, 0.8)",
       justifyContent: "center",
       alignItems: "center",
       padding: 20,
     },
     modalContent: {
-      backgroundColor:
-        currentTheme === "light"
-          ? "rgba(255, 255, 255, 0.98)"
-          : "rgba(15, 23, 42, 0.95)",
+      backgroundColor: isLightTheme
+        ? "rgba(255, 255, 255, 0.98)"
+        : colors.cardBG, // 🌅 Utilise cardBG du thème actif
       padding: 28,
       borderRadius: 20,
       alignItems: "center",
-      shadowColor: currentTheme === "light" ? colors.shadow : "#D4AF37",
+      shadowColor: isLightTheme ? colors.shadow : colors.primary, // 🌅 Utilise primary du thème actif
       shadowOffset: { width: 0, height: 8 },
       shadowOpacity: 0.4,
       shadowRadius: 16,
       elevation: 10,
       borderWidth: 2,
-      borderColor:
-        currentTheme === "light" ? colors.border : "rgba(212, 175, 55, 0.3)",
+      borderColor: isLightTheme ? colors.border : isSunset ? "rgba(255, 127, 80, 0.4)" : "rgba(212, 175, 55, 0.3)",
       width: "90%",
       maxWidth: 350,
     },
@@ -86,21 +91,21 @@ export const getStyles = (
       width: 80,
       height: 80,
       borderRadius: 40,
-      backgroundColor:
-        currentTheme === "light"
-          ? "rgba(34, 139, 34, 0.15)"
-          : "rgba(212, 175, 55, 0.2)",
+      backgroundColor: isLightTheme
+        ? "rgba(34, 139, 34, 0.15)"
+        : isSunset
+        ? "rgba(255, 127, 80, 0.25)" // 🌆 Coral transparent pour Maghrib
+        : "rgba(212, 175, 55, 0.2)",
       justifyContent: "center",
       alignItems: "center",
       marginBottom: 20,
-      shadowColor: currentTheme === "light" ? colors.shadow : "#D4AF37",
+      shadowColor: isLightTheme ? colors.shadow : colors.primary, // 🌅 Utilise primary du thème actif
       shadowOffset: { width: 0, height: 4 },
       shadowOpacity: 0.3,
       shadowRadius: 8,
       elevation: 6,
       borderWidth: 1,
-      borderColor:
-        currentTheme === "light" ? colors.primary : "rgba(212, 175, 55, 0.4)",
+      borderColor: isLightTheme ? colors.primary : isSunset ? "rgba(255, 127, 80, 0.5)" : "rgba(212, 175, 55, 0.4)",
     },
     modalIcon: {
       fontSize: 40,
@@ -109,45 +114,45 @@ export const getStyles = (
     modalTitle: {
       fontSize: 22,
       fontWeight: "bold",
-      color: currentTheme === "light" ? colors.primary : "#D4AF37",
+      color: isLightTheme ? colors.primary : colors.accent, // 🌅 Utilise accent du thème actif
       textAlign: "center",
       marginBottom: 16,
       letterSpacing: 0.5,
-      textShadowColor:
-        currentTheme === "light"
-          ? "rgba(255, 255, 255, 0.5)"
-          : "rgba(0,0,0,0.8)",
+      textShadowColor: isLightTheme
+        ? "rgba(255, 255, 255, 0.5)"
+        : "rgba(0,0,0,0.8)",
       textShadowOffset: { width: 0, height: 2 },
       textShadowRadius: 4,
     },
     modalMessage: {
       fontSize: 16,
-      color: currentTheme === "light" ? colors.text : "#F8FAFC",
+      color: isLightTheme ? colors.text : "#F8FAFC",
       textAlign: "center",
       lineHeight: 24,
       marginBottom: 24,
       paddingHorizontal: 8,
-      textShadowColor:
-        currentTheme === "light"
-          ? "rgba(255, 255, 255, 0.5)"
-          : "rgba(0,0,0,0.6)",
+      textShadowColor: isLightTheme
+        ? "rgba(255, 255, 255, 0.5)"
+        : "rgba(0,0,0,0.6)",
       textShadowOffset: { width: 0, height: 1 },
       textShadowRadius: 2,
     },
     modalButton: {
-      backgroundColor:
-        currentTheme === "light" ? colors.primary : "rgba(212, 175, 55, 0.9)",
+      backgroundColor: isLightTheme
+        ? colors.primary
+        : isSunset
+        ? "rgba(255, 127, 80, 0.9)" // 🌆 Coral pour bouton Maghrib
+        : "rgba(212, 175, 55, 0.9)",
       paddingVertical: 14,
       paddingHorizontal: 32,
       borderRadius: 16,
-      shadowColor: currentTheme === "light" ? colors.shadow : "#D4AF37",
+      shadowColor: isLightTheme ? colors.shadow : colors.primary, // 🌅 Utilise primary du thème actif
       shadowOffset: { width: 0, height: 4 },
       shadowOpacity: 0.4,
       shadowRadius: 8,
       elevation: 6,
       borderWidth: 1,
-      borderColor:
-        currentTheme === "light" ? colors.primary : "rgba(212, 175, 55, 0.5)",
+      borderColor: isLightTheme ? colors.primary : isSunset ? "rgba(255, 127, 80, 0.6)" : "rgba(212, 175, 55, 0.5)",
       minWidth: 180,
     },
     modalButtonText: {
@@ -156,8 +161,7 @@ export const getStyles = (
       fontWeight: "bold",
       textAlign: "center",
       letterSpacing: 0.5,
-      textShadowColor:
-        currentTheme === "light" ? "rgba(0, 0, 0, 0.3)" : "rgba(0,0,0,0.8)",
+      textShadowColor: isLightTheme ? "rgba(0, 0, 0, 0.3)" : "rgba(0,0,0,0.8)",
       textShadowOffset: { width: 0, height: 1 },
       textShadowRadius: 2,
     },
@@ -167,8 +171,7 @@ export const getStyles = (
       justifyContent: "flex-end",
     },
     premiumModalContent: {
-      backgroundColor:
-        currentTheme === "light" ? colors.surface : "rgba(15, 23, 42, 0.95)",
+      backgroundColor: isLightTheme ? colors.surface : "rgba(15, 23, 42, 0.95)",
       borderTopLeftRadius: 24,
       borderTopRightRadius: 24,
       maxHeight: "90%",
@@ -184,20 +187,20 @@ export const getStyles = (
       alignItems: "center",
       padding: 20,
       borderBottomWidth: 1,
-      borderBottomColor:
-        currentTheme === "light" ? colors.border : "rgba(148, 163, 184, 0.2)",
+      borderBottomColor: isLightTheme
+        ? colors.border
+        : "rgba(148, 163, 184, 0.2)",
     },
     premiumModalTitle: {
       fontSize: 20,
       fontWeight: "700",
-      color: currentTheme === "light" ? colors.text : "#F8FAFC",
+      color: isLightTheme ? colors.text : "#F8FAFC",
       flex: 1,
     },
     premiumModalCloseButton: {
       padding: 8,
       borderRadius: 8,
-      backgroundColor:
-        currentTheme === "light" ? colors.cardBG : "rgba(30, 41, 59, 0.8)",
+      backgroundColor: isLightTheme ? colors.cardBG : "rgba(30, 41, 59, 0.8)",
     },
     modalToastContainer: {
       position: "absolute",
@@ -212,14 +215,18 @@ export const getStyles = (
       flexDirection: "row",
       justifyContent: "center",
       marginBottom: 24,
-      backgroundColor:
-        currentTheme === "light" ? colors.surface : "rgba(15, 23, 42, 0.8)",
+      backgroundColor: isLightTheme 
+        ? colors.surface 
+        : colors.surface, // 🌅 Utilise surface du thème actif
       borderRadius: 16,
       padding: 6,
       borderWidth: 1,
-      borderColor:
-        currentTheme === "light" ? colors.border : "rgba(148, 163, 184, 0.3)",
-      shadowColor: currentTheme === "light" ? colors.shadow : "#000",
+      borderColor: isLightTheme 
+        ? colors.border 
+        : isSunset 
+        ? colors.border // 🌅 Utilise border du thème Maghrib
+        : "rgba(148, 163, 184, 0.3)",
+      shadowColor: isLightTheme ? colors.shadow : isDark ? "#000" : colors.shadow, // 🌅 Utilise shadow du thème actif
       shadowOffset: { width: 0, height: 4 },
       shadowOpacity: 0.3,
       shadowRadius: 8,
@@ -237,33 +244,37 @@ export const getStyles = (
       justifyContent: "center",
     },
     toggleButtonActive: {
-      backgroundColor:
-        currentTheme === "light" ? colors.primary : "rgba(212, 175, 55, 0.9)",
-      shadowColor: currentTheme === "light" ? colors.shadow : "#D4AF37",
+      backgroundColor: isLightTheme
+        ? colors.primary
+        : isSunset
+        ? colors.primary // 🌅 Utilise primary du thème Maghrib
+        : "rgba(212, 175, 55, 0.9)",
+      shadowColor: isLightTheme ? colors.shadow : colors.primary, // 🌅 Utilise primary du thème actif
       shadowOffset: { width: 0, height: 4 },
       shadowOpacity: 0.5,
       shadowRadius: 8,
       elevation: 6,
       borderWidth: 1,
-      borderColor:
-        currentTheme === "light" ? colors.primary : "rgba(212, 175, 55, 0.5)",
+      borderColor: isLightTheme ? colors.primary : isSunset ? "rgba(255, 127, 80, 0.6)" : "rgba(212, 175, 55, 0.5)",
     },
     toggleButtonText: {
-      color: currentTheme === "light" ? colors.textSecondary : "#94A3B8",
+      color: isLightTheme 
+        ? colors.textSecondary 
+        : isSunset 
+        ? "#E5B299" // 🌆 Beige rosé pour texte toggle Maghrib
+        : "#94A3B8",
       fontSize: 15,
       fontWeight: "600",
       letterSpacing: -0.2,
-      textShadowColor:
-        currentTheme === "light"
-          ? "rgba(255, 255, 255, 0.5)"
-          : "rgba(0,0,0,0.6)",
+      textShadowColor: isLightTheme
+        ? "rgba(255, 255, 255, 0.5)"
+        : "rgba(0,0,0,0.6)",
       textShadowOffset: { width: 0, height: 1 },
       textShadowRadius: 2,
     },
     toggleButtonTextActive: {
       color: "#FFFFFF",
-      textShadowColor:
-        currentTheme === "light" ? "rgba(0, 0, 0, 0.3)" : "rgba(0,0,0,0.8)",
+      textShadowColor: isLightTheme ? "rgba(0, 0, 0, 0.3)" : "rgba(0,0,0,0.8)",
       textShadowOffset: { width: 0, height: 1 },
       textShadowRadius: 2,
     },
@@ -272,14 +283,18 @@ export const getStyles = (
       justifyContent: "space-between",
       marginTop: 12,
       marginBottom: 16,
-      backgroundColor:
-        currentTheme === "light" ? colors.surface : "rgba(15, 23, 42, 0.8)",
+      backgroundColor: isLightTheme 
+        ? colors.surface 
+        : colors.surface, // 🌅 Utilise surface du thème actif
       borderRadius: 12,
       padding: 4,
       borderWidth: 1,
-      borderColor:
-        currentTheme === "light" ? colors.border : "rgba(148, 163, 184, 0.3)",
-      shadowColor: currentTheme === "light" ? colors.shadow : "#000",
+      borderColor: isLightTheme 
+        ? colors.border 
+        : isSunset 
+        ? colors.border // 🌅 Utilise border du thème Maghrib
+        : "rgba(148, 163, 184, 0.3)",
+      shadowColor: isLightTheme ? colors.shadow : isDark ? "#000" : colors.shadow, // 🌅 Utilise shadow du thème actif
       shadowOffset: { width: 0, height: 2 },
       shadowOpacity: 0.2,
       shadowRadius: 4,
@@ -288,13 +303,17 @@ export const getStyles = (
     autoLocationSection: {
       alignItems: "center",
       padding: 24,
-      backgroundColor:
-        currentTheme === "light" ? colors.surface : "rgba(15, 23, 42, 0.8)",
+      backgroundColor: isLightTheme 
+        ? colors.surface 
+        : colors.surface, // 🌅 Utilise surface du thème actif
       borderRadius: 16,
       borderWidth: 1,
-      borderColor:
-        currentTheme === "light" ? colors.border : "rgba(148, 163, 184, 0.3)",
-      shadowColor: currentTheme === "light" ? colors.shadow : "#000",
+      borderColor: isLightTheme 
+        ? colors.border 
+        : isSunset 
+        ? colors.border // 🌅 Utilise border du thème Maghrib
+        : "rgba(148, 163, 184, 0.3)",
+      shadowColor: isLightTheme ? colors.shadow : isDark ? "#000" : colors.shadow, // 🌅 Utilise shadow du thème actif
       shadowOffset: { width: 0, height: 4 },
       shadowOpacity: 0.3,
       shadowRadius: 12,
@@ -302,20 +321,22 @@ export const getStyles = (
       marginTop: 16,
     },
     refreshButton: {
-      backgroundColor:
-        currentTheme === "light" ? colors.primary : "rgba(212, 175, 55, 0.9)",
+      backgroundColor: isLightTheme
+        ? colors.primary
+        : isSunset
+        ? "rgba(255, 127, 80, 0.9)" // 🌆 Coral pour bouton Maghrib
+        : "rgba(212, 175, 55, 0.9)",
       paddingVertical: 14,
       paddingHorizontal: 28,
       borderRadius: 12,
       marginBottom: 16,
-      shadowColor: currentTheme === "light" ? colors.shadow : "#D4AF37",
+      shadowColor: isLightTheme ? colors.shadow : colors.primary, // 🌅 Utilise primary du thème actif
       shadowOffset: { width: 0, height: 4 },
       shadowOpacity: 0.4,
       shadowRadius: 8,
       elevation: 6,
       borderWidth: 1,
-      borderColor:
-        currentTheme === "light" ? colors.primary : "rgba(212, 175, 55, 0.5)",
+      borderColor: isLightTheme ? colors.primary : isSunset ? "rgba(255, 127, 80, 0.6)" : "rgba(212, 175, 55, 0.5)",
     },
     refreshButtonText: {
       color: "#FFFFFF",
@@ -323,35 +344,45 @@ export const getStyles = (
       fontWeight: "600",
       textAlign: "center",
       letterSpacing: -0.2,
-      textShadowColor:
-        currentTheme === "light" ? "rgba(0, 0, 0, 0.3)" : "rgba(0,0,0,0.8)",
+      textShadowColor: isLightTheme ? "rgba(0, 0, 0, 0.3)" : "rgba(0,0,0,0.8)",
       textShadowOffset: { width: 0, height: 1 },
       textShadowRadius: 2,
     },
     locationText: {
       fontSize: 14,
-      color: currentTheme === "light" ? colors.textSecondary : "#CBD5E1",
+      color: isLightTheme 
+        ? colors.textSecondary 
+        : isSunset 
+        ? "#F4E4C1" // 🌆 Wheat beige pour textes Maghrib
+        : "#CBD5E1",
       textAlign: "center",
       fontWeight: "500",
-      textShadowColor:
-        currentTheme === "light"
-          ? "rgba(255, 255, 255, 0.5)"
-          : "rgba(0,0,0,0.6)",
+      textShadowColor: isLightTheme
+        ? "rgba(255, 255, 255, 0.5)"
+        : "rgba(0,0,0,0.6)",
       textShadowOffset: { width: 0, height: 1 },
       textShadowRadius: 2,
     },
     input: {
-      backgroundColor:
-        currentTheme === "light" ? colors.surface : "rgba(30, 41, 59, 0.9)",
-      color: currentTheme === "light" ? colors.text : "#F8FAFC",
+      backgroundColor: isLightTheme 
+        ? colors.surface 
+        : colors.cardBG, // 🌅 Utilise cardBG du thème actif
+      color: isLightTheme 
+        ? colors.text 
+        : isSunset 
+        ? "#FFF8DC" // 🌆 Cornsilk pour texte inputs Maghrib
+        : "#F8FAFC",
       padding: 16,
       borderRadius: 12,
       marginBottom: 12,
       fontSize: 16,
       borderWidth: 2,
-      borderColor:
-        currentTheme === "light" ? colors.border : "rgba(148, 163, 184, 0.3)",
-      shadowColor: currentTheme === "light" ? colors.shadow : "#000",
+      borderColor: isLightTheme 
+        ? colors.border 
+        : isSunset 
+        ? colors.border // 🌅 Utilise border du thème Maghrib
+        : "rgba(148, 163, 184, 0.3)",
+      shadowColor: isLightTheme ? colors.shadow : isDark ? "#000" : colors.shadow, // 🌅 Utilise shadow du thème actif
       shadowOffset: { width: 0, height: 4 },
       shadowOpacity: 0.3,
       shadowRadius: 8,
@@ -388,28 +419,31 @@ export const getStyles = (
       textAlign: "center",
     },
     resultsList: {
-      backgroundColor:
-        currentTheme === "light" ? colors.surface : "rgba(15, 23, 42, 0.9)",
+      backgroundColor: isLightTheme ? colors.surface : "rgba(15, 23, 42, 0.9)",
       borderRadius: 12,
-      shadowColor: currentTheme === "light" ? colors.shadow : "#000",
+      shadowColor: isLightTheme ? colors.shadow : "#000",
       shadowOffset: { width: 0, height: 4 },
       shadowOpacity: 0.3,
       shadowRadius: 8,
       elevation: 4,
       borderWidth: 1,
-      borderColor:
-        currentTheme === "light" ? colors.border : "rgba(148, 163, 184, 0.3)",
+      borderColor: isLightTheme ? colors.border : "rgba(148, 163, 184, 0.3)",
     },
     resultItem: {
       padding: 16,
       borderBottomWidth: 1,
-      borderBottomColor:
-        currentTheme === "light" ? colors.border : "rgba(148, 163, 184, 0.2)",
+      borderBottomColor: isLightTheme
+        ? colors.border
+        : "rgba(148, 163, 184, 0.2)",
     },
     resultText: {
       fontSize: 16,
       lineHeight: 22,
-      color: currentTheme === "light" ? colors.text : "#F8FAFC",
+      color: isLightTheme 
+        ? colors.text 
+        : isSunset 
+        ? "#FFF8DC" // 🌆 Cornsilk pour résultats Maghrib
+        : "#F8FAFC",
       fontWeight: "500",
     },
     row: {
@@ -418,14 +452,18 @@ export const getStyles = (
       alignItems: "center",
       paddingVertical: 16,
       paddingHorizontal: 20,
-      backgroundColor:
-        currentTheme === "light" ? colors.surface : "rgba(15, 23, 42, 0.8)",
+      backgroundColor: isLightTheme 
+        ? colors.surface 
+        : colors.surface, // 🌅 Utilise surface du thème actif
       borderRadius: 12,
       marginBottom: 12,
       borderWidth: 1,
-      borderColor:
-        currentTheme === "light" ? colors.border : "rgba(148, 163, 184, 0.3)",
-      shadowColor: currentTheme === "light" ? colors.shadow : "#000",
+      borderColor: isLightTheme 
+        ? colors.border 
+        : isSunset 
+        ? "rgba(255, 127, 80, 0.3)" // 🌆 Coral doux pour bordures Maghrib
+        : "rgba(148, 163, 184, 0.3)",
+      shadowColor: isLightTheme ? colors.shadow : "#000",
       shadowOffset: { width: 0, height: 2 },
       shadowOpacity: 0.1,
       shadowRadius: 4,
@@ -434,47 +472,65 @@ export const getStyles = (
     label: {
       fontSize: 16,
       fontWeight: "600",
-      color: currentTheme === "light" ? colors.text : "#F8FAFC",
+      color: isLightTheme 
+        ? colors.text 
+        : isSunset 
+        ? "#FFF8DC" // 🌆 Cornsilk pour labels Maghrib
+        : "#F8FAFC",
       letterSpacing: -0.2,
     },
     pickerContainer: {
       flex: 1,
       marginLeft: 16,
-      backgroundColor:
-        currentTheme === "light" ? colors.cardBG : "rgba(30, 41, 59, 0.8)",
+      backgroundColor: isLightTheme 
+        ? colors.cardBG 
+        : colors.surface, // 🌅 Utilise surface du thème actif
       borderRadius: 8,
       borderWidth: 1,
-      borderColor:
-        currentTheme === "light" ? colors.border : "rgba(148, 163, 184, 0.3)",
+      borderColor: isLightTheme 
+        ? colors.border 
+        : isSunset 
+        ? colors.border // 🌅 Utilise border du thème Maghrib
+        : "rgba(148, 163, 184, 0.3)",
     },
     pickerContainerFull: {
       flex: 1,
       marginLeft: 16,
-      backgroundColor:
-        currentTheme === "light" ? colors.cardBG : "rgba(30, 41, 59, 0.8)",
+      backgroundColor: isLightTheme 
+        ? colors.cardBG 
+        : colors.surface, // 🌅 Utilise surface du thème actif
       borderRadius: 8,
       borderWidth: 1,
-      borderColor:
-        currentTheme === "light" ? colors.border : "rgba(148, 163, 184, 0.3)",
+      borderColor: isLightTheme 
+        ? colors.border 
+        : isSunset 
+        ? colors.border // 🌅 Utilise border du thème Maghrib
+        : "rgba(148, 163, 184, 0.3)",
     },
     picker: {
       height: 50,
-      color: currentTheme === "light" ? colors.text : "#F8FAFC",
+      color: isLightTheme 
+        ? colors.text 
+        : isSunset 
+        ? "#FFF8DC" // 🌆 Cornsilk pour texte picker Maghrib
+        : "#F8FAFC",
     },
     pickerItem: {
-      color: currentTheme === "light" ? colors.text : "#F8FAFC",
+      color: isLightTheme 
+        ? colors.text 
+        : isSunset 
+        ? "#FFF8DC" // 🌆 Cornsilk pour items picker Maghrib
+        : "#F8FAFC",
       fontSize: 16,
     },
     previewControlsContainer: {
       marginTop: 20,
       padding: 20,
-      backgroundColor:
-        currentTheme === "light" ? colors.surface : "rgba(15, 23, 42, 0.8)",
+      backgroundColor: isLightTheme ? colors.surface : "rgba(15, 23, 42, 0.8)",
       borderRadius: 16,
       borderWidth: 1,
-      borderColor:
-        currentTheme === "light" ? colors.border : "rgba(148, 163, 184, 0.3)",
-      shadowColor: currentTheme === "light" ? colors.shadow : "#000",
+      borderColor: isLightTheme ? colors.border : "rgba(148, 163, 184, 0.3)",
+      shadowColor: isLightTheme ? colors.shadow : "#000",
       shadowOffset: { width: 0, height: 4 },
       shadowOpacity: 0.3,
       shadowRadius: 12,
@@ -488,44 +544,42 @@ export const getStyles = (
     },
     previewInfo: {
       fontSize: 12,
-      color: currentTheme === "light" ? colors.textSecondary : "#CBD5E1",
+      color: isLightTheme ? colors.textSecondary : "#CBD5E1",
       textAlign: "center",
       marginBottom: 8,
       fontStyle: "italic",
     },
     playButtonMain: {
-      backgroundColor:
-        currentTheme === "light" ? colors.primary : "rgba(212, 175, 55, 0.9)",
+      backgroundColor: isLightTheme
+        ? colors.primary
+        : "rgba(212, 175, 55, 0.9)",
       width: 56,
       height: 56,
       borderRadius: 28,
       justifyContent: "center",
       alignItems: "center",
-      shadowColor: currentTheme === "light" ? colors.shadow : "#D4AF37",
+      shadowColor: isLightTheme ? colors.shadow : "#D4AF37",
       shadowOffset: { width: 0, height: 4 },
       shadowOpacity: 0.4,
       shadowRadius: 12,
       elevation: 8,
       borderWidth: 2,
-      borderColor:
-        currentTheme === "light" ? colors.primary : "rgba(212, 175, 55, 0.5)",
+      borderColor: isLightTheme ? colors.primary : "rgba(212, 175, 55, 0.5)",
     },
     stopButtonMain: {
-      backgroundColor:
-        currentTheme === "light" ? "#EF4444" : "rgba(239, 68, 68, 0.9)",
+      backgroundColor: isLightTheme ? "#EF4444" : "rgba(239, 68, 68, 0.9)",
       width: 48,
       height: 48,
       borderRadius: 24,
       justifyContent: "center",
       alignItems: "center",
-      shadowColor: currentTheme === "light" ? "#EF4444" : "#EF4444",
+      shadowColor: isLightTheme ? "#EF4444" : "#EF4444",
       shadowOffset: { width: 0, height: 4 },
       shadowOpacity: 0.4,
       shadowRadius: 12,
       elevation: 8,
       borderWidth: 2,
-      borderColor:
-        currentTheme === "light" ? "#EF4444" : "rgba(239, 68, 68, 0.5)",
+      borderColor: isLightTheme ? "#EF4444" : "rgba(239, 68, 68, 0.5)",
     },
     progressContainer: {
       flexDirection: "row",
@@ -535,7 +589,11 @@ export const getStyles = (
     },
     timeText: {
       fontSize: 12,
-      color: currentTheme === "light" ? colors.textSecondary : "#CBD5E1",
+      color: isLightTheme 
+        ? colors.textSecondary 
+        : isSunset 
+        ? "#F4E4C1" // 🌆 Wheat beige pour textes temps Maghrib
+        : "#CBD5E1",
       fontWeight: "500",
       minWidth: 45,
       textAlign: "center",
@@ -547,15 +605,17 @@ export const getStyles = (
     },
     progressBar: {
       height: 8,
-      backgroundColor:
-        currentTheme === "light" ? colors.border : "rgba(148, 163, 184, 0.3)",
+      backgroundColor: isLightTheme
+        ? colors.border
+        : "rgba(148, 163, 184, 0.3)",
       borderRadius: 4,
       overflow: "hidden",
     },
     progressFill: {
       height: "100%",
-      backgroundColor:
-        currentTheme === "light" ? colors.primary : "rgba(212, 175, 55, 0.9)",
+      backgroundColor: isLightTheme
+        ? colors.primary
+        : "rgba(212, 175, 55, 0.9)",
       borderRadius: 4,
     },
     sliderContainer: {
@@ -565,50 +625,47 @@ export const getStyles = (
     },
     sliderValue: {
       fontSize: 14,
-      color: currentTheme === "light" ? colors.textSecondary : "#CBD5E1",
+      color: isLightTheme ? colors.textSecondary : "#CBD5E1",
       fontWeight: "600",
       marginTop: 8,
     },
     sectionHeader: {
       fontSize: 20,
       fontWeight: "700",
-      color: currentTheme === "light" ? colors.text : "#F8FAFC",
+      color: isLightTheme ? colors.text : "#F8FAFC",
       paddingTop: 24,
       paddingBottom: 12,
       paddingHorizontal: 20,
       backgroundColor: "transparent",
       letterSpacing: -0.3,
-      textShadowColor:
-        currentTheme === "light"
-          ? "rgba(255, 255, 255, 0.5)"
-          : "rgba(0,0,0,0.7)",
+      textShadowColor: isLightTheme
+        ? "rgba(255, 255, 255, 0.5)"
+        : "rgba(0,0,0,0.7)",
       textShadowOffset: { width: 0, height: 1 },
       textShadowRadius: 2,
     },
     subLabel: {
       fontSize: 15,
       fontWeight: "500",
-      color: currentTheme === "light" ? colors.textSecondary : "#CBD5E1",
+      color: isLightTheme ? colors.textSecondary : "#CBD5E1",
       letterSpacing: -0.1,
     },
     premiumSection: {
       padding: 16,
-      backgroundColor:
-        currentTheme === "light"
-          ? "rgba(255, 215, 0, 0.08)"
-          : "rgba(212, 175, 55, 0.15)",
+      backgroundColor: isLightTheme
+        ? "rgba(255, 215, 0, 0.08)"
+        : "rgba(212, 175, 55, 0.15)",
       borderRadius: 16,
       borderWidth: 1,
-      borderColor:
-        currentTheme === "light"
-          ? "rgba(255, 215, 0, 0.3)"
-          : "rgba(212, 175, 55, 0.4)",
+      borderColor: isLightTheme
+        ? "rgba(255, 215, 0, 0.3)"
+        : "rgba(212, 175, 55, 0.4)",
       marginVertical: 8,
     },
     premiumSectionTitle: {
       fontSize: 18,
       fontWeight: "700",
-      color: currentTheme === "light" ? colors.text : "#F8FAFC",
+      color: isLightTheme ? colors.text : "#F8FAFC",
       marginBottom: 16,
       textAlign: "center",
     },
@@ -616,14 +673,12 @@ export const getStyles = (
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "space-between",
-      backgroundColor:
-        currentTheme === "light" ? colors.surface : "rgba(15, 23, 42, 0.7)",
+      backgroundColor: isLightTheme ? colors.surface : "rgba(15, 23, 42, 0.7)",
       borderRadius: 12,
       padding: 16,
       marginBottom: 12,
       borderWidth: 1,
-      borderColor:
-        currentTheme === "light" ? colors.border : "rgba(148, 163, 184, 0.2)",
+      borderColor: isLightTheme ? colors.border : "rgba(148, 163, 184, 0.2)",
     },
     premiumAdhanInfo: {
       flex: 1,
@@ -632,12 +687,12 @@ export const getStyles = (
     premiumAdhanTitle: {
       fontSize: 16,
       fontWeight: "600",
-      color: currentTheme === "light" ? colors.text : "#F8FAFC",
+      color: isLightTheme ? colors.text : "#F8FAFC",
       marginBottom: 4,
     },
     premiumAdhanSize: {
       fontSize: 14,
-      color: currentTheme === "light" ? colors.textSecondary : "#CBD5E1",
+      color: isLightTheme ? colors.textSecondary : "#CBD5E1",
     },
     premiumAdhanActions: {
       flexDirection: "row",
@@ -671,7 +726,7 @@ export const getStyles = (
     },
     progressTextPremium: {
       fontSize: 12,
-      color: currentTheme === "light" ? colors.textSecondary : "#CBD5E1",
+      color: isLightTheme ? colors.textSecondary : "#CBD5E1",
       fontWeight: "600",
     },
     downloadButtonPremium: {
@@ -756,19 +811,19 @@ export const getStyles = (
       paddingHorizontal: 20,
     },
     applyButton: {
-      backgroundColor:
-        currentTheme === "light" ? colors.primary : "rgba(212, 175, 55, 0.9)",
+      backgroundColor: isLightTheme
+        ? colors.primary
+        : "rgba(212, 175, 55, 0.9)",
       paddingVertical: 16,
       paddingHorizontal: 50,
       borderRadius: 16,
       elevation: 8,
-      shadowColor: currentTheme === "light" ? colors.shadow : "#D4AF37",
+      shadowColor: isLightTheme ? colors.shadow : "#D4AF37",
       shadowOffset: { width: 0, height: 6 },
       shadowOpacity: 0.5,
       shadowRadius: 16,
       borderWidth: 2,
-      borderColor:
-        currentTheme === "light" ? colors.primary : "rgba(212, 175, 55, 0.4)",
+      borderColor: isLightTheme ? colors.primary : "rgba(212, 175, 55, 0.4)",
       minWidth: 200,
       alignItems: "center",
     },
@@ -779,8 +834,7 @@ export const getStyles = (
       letterSpacing: 1,
       textTransform: "uppercase",
       textAlign: "center",
-      textShadowColor:
-        currentTheme === "light" ? "rgba(0, 0, 0, 0.3)" : "rgba(0,0,0,0.8)",
+      textShadowColor: isLightTheme ? "rgba(0, 0, 0, 0.3)" : "rgba(0,0,0,0.8)",
       textShadowOffset: { width: 0, height: 2 },
       textShadowRadius: 4,
     },
@@ -803,7 +857,7 @@ export const getStyles = (
     premiumBuySubtitle: {
       fontSize: 14,
       fontWeight: "400",
-      color: currentTheme === "light" ? colors.textSecondary : "#CBD5E1",
+      color: isLightTheme ? colors.textSecondary : "#CBD5E1",
       marginBottom: 16,
       textAlign: "center",
       lineHeight: 20,
@@ -851,7 +905,11 @@ export const getStyles = (
     premiumStatusText: {
       fontSize: 14,
       fontWeight: "400",
-      color: currentTheme === "light" ? colors.textSecondary : "#CBD5E1",
+      color: isLightTheme 
+        ? colors.textSecondary 
+        : isSunset 
+        ? "#F4E4C1" // 🌆 Wheat beige pour status Maghrib
+        : "#CBD5E1",
       textAlign: "center",
       lineHeight: 20,
       marginBottom: 16,
@@ -888,11 +946,19 @@ export const getStyles = (
     sectionTitle: {
       fontSize: 18,
       fontWeight: "700",
-      color: currentTheme === "light" ? colors.text : "#F8FAFC",
+      color: isLightTheme 
+        ? colors.text 
+        : isSunset 
+        ? "#FFF8DC" // 🌆 Cornsilk pour titres Maghrib
+        : "#F8FAFC",
       marginLeft: 8,
     },
     iconColor: {
-      color: currentTheme === "light" ? colors.text : "#F8FAFC",
+      color: isLightTheme 
+        ? colors.text 
+        : isSunset 
+        ? colors.accent // 🌅 Utilise accent du thème Maghrib
+        : "#F8FAFC",
     },
     settingItem: {
       flexDirection: "row",
@@ -900,13 +966,11 @@ export const getStyles = (
       justifyContent: "space-between",
       paddingVertical: 12,
       paddingHorizontal: 16,
-      backgroundColor:
-        currentTheme === "light" ? colors.surface : "rgba(15, 23, 42, 0.8)",
+      backgroundColor: isLightTheme ? colors.surface : "rgba(15, 23, 42, 0.8)",
       borderRadius: 12,
       marginBottom: 8,
       borderWidth: 1,
-      borderColor:
-        currentTheme === "light" ? colors.border : "rgba(148, 163, 184, 0.3)",
+      borderColor: isLightTheme ? colors.border : "rgba(148, 163, 184, 0.3)",
     },
     settingInfo: {
       flex: 1,
@@ -914,16 +978,16 @@ export const getStyles = (
     settingLabel: {
       fontSize: 16,
       fontWeight: "600",
-      color: currentTheme === "light" ? colors.text : "#F8FAFC",
+      color: isLightTheme ? colors.text : "#F8FAFC",
       marginBottom: 4,
     },
     settingValue: {
       fontSize: 14,
-      color: currentTheme === "light" ? colors.textSecondary : "#CBD5E1",
+      color: isLightTheme ? colors.textSecondary : "#CBD5E1",
     },
     settingDescription: {
       fontSize: 12,
-      color: currentTheme === "light" ? colors.textSecondary : "#94A3B8",
+      color: isLightTheme ? colors.textSecondary : "#94A3B8",
       marginTop: 2,
     },
     statusIndicator: {
@@ -936,12 +1000,12 @@ export const getStyles = (
       width: 48,
       height: 24,
       borderRadius: 12,
-      backgroundColor: currentTheme === "light" ? "#E2E8F0" : "#475569",
+      backgroundColor: isLightTheme ? "#E2E8F0" : "#475569",
       padding: 2,
       justifyContent: "center",
     },
     toggleActive: {
-      backgroundColor: currentTheme === "light" ? colors.primary : "#4ECDC4",
+      backgroundColor: isLightTheme ? colors.primary : "#4ECDC4",
     },
     toggleThumb: {
       width: 20,
@@ -973,13 +1037,12 @@ export const getStyles = (
       borderWidth: 1,
     },
     primaryButton: {
-      backgroundColor: currentTheme === "light" ? colors.primary : "#4ECDC4",
-      borderColor: currentTheme === "light" ? colors.primary : "#4ECDC4",
+      backgroundColor: isLightTheme ? colors.primary : "#4ECDC4",
+      borderColor: isLightTheme ? colors.primary : "#4ECDC4",
     },
     secondaryButton: {
       backgroundColor: "transparent",
-      borderColor:
-        currentTheme === "light" ? colors.border : "rgba(148, 163, 184, 0.3)",
+      borderColor: isLightTheme ? colors.border : "rgba(148, 163, 184, 0.3)",
     },
     actionButtonText: {
       fontSize: 14,
@@ -987,7 +1050,11 @@ export const getStyles = (
       marginLeft: 6,
     },
     secondaryButtonText: {
-      color: currentTheme === "light" ? colors.text : "#F8FAFC",
+      color: isLightTheme 
+        ? colors.text 
+        : isSunset 
+        ? "#FFF8DC" // 🌆 Cornsilk pour boutons secondaires Maghrib
+        : "#F8FAFC",
     },
     syncStatus: {
       flexDirection: "row",
@@ -996,10 +1063,9 @@ export const getStyles = (
       marginTop: 12,
       paddingVertical: 8,
       paddingHorizontal: 12,
-      backgroundColor:
-        currentTheme === "light"
-          ? "rgba(78, 205, 196, 0.1)"
-          : "rgba(78, 205, 196, 0.2)",
+      backgroundColor: isLightTheme
+        ? "rgba(78, 205, 196, 0.1)"
+        : "rgba(78, 205, 196, 0.2)",
       borderRadius: 8,
       borderWidth: 1,
       borderColor: "rgba(78, 205, 196, 0.3)",
@@ -1030,7 +1096,7 @@ export const getStyles = (
     upgradeDescription: {
       fontSize: 14,
       fontWeight: "400",
-      color: currentTheme === "light" ? colors.textSecondary : "#CBD5E1",
+      color: isLightTheme ? colors.textSecondary : "#CBD5E1",
       textAlign: "center",
       lineHeight: 20,
       marginBottom: 16,
@@ -1063,28 +1129,37 @@ export const getStyles = (
     gridButton: {
       width: "30%",
       aspectRatio: 1,
-      backgroundColor:
-        currentTheme === "light" ? colors.surface : "rgba(15, 23, 42, 0.8)",
+      backgroundColor: isLightTheme 
+        ? colors.surface 
+        : colors.surface, // 🌅 Utilise surface du thème actif
       borderRadius: 16,
       padding: 16,
       alignItems: "center",
       justifyContent: "center",
       borderWidth: 2,
-      borderColor:
-        currentTheme === "light" ? colors.border : "rgba(148, 163, 184, 0.3)",
-      shadowColor: currentTheme === "light" ? colors.shadow : "#000",
+      borderColor: isLightTheme 
+        ? colors.border 
+        : isSunset 
+        ? "rgba(255, 127, 80, 0.4)" // 🌆 Coral pour bordures Maghrib
+        : "rgba(148, 163, 184, 0.3)",
+      shadowColor: isLightTheme ? colors.shadow : isDark ? "#000" : colors.shadow, // 🌅 Utilise shadow du thème actif
       shadowOffset: { width: 0, height: 2 },
       shadowOpacity: 0.1,
       shadowRadius: 4,
       elevation: 3,
     },
     gridButtonActive: {
-      borderColor: currentTheme === "light" ? colors.primary : "#4ECDC4",
-      backgroundColor:
-        currentTheme === "light"
-          ? "rgba(78, 205, 196, 0.1)"
-          : "rgba(78, 205, 196, 0.2)",
-      shadowColor: currentTheme === "light" ? colors.primary : "#4ECDC4",
+      borderColor: isLightTheme 
+        ? colors.primary 
+        : isSunset 
+        ? colors.primary // 🌅 Utilise primary du thème Maghrib
+        : "#4ECDC4",
+      backgroundColor: isLightTheme
+        ? "rgba(78, 205, 196, 0.1)"
+        : isSunset
+        ? colors.border // 🌅 Utilise border du thème Maghrib (transparent)
+        : "rgba(78, 205, 196, 0.2)",
+      shadowColor: isLightTheme ? colors.primary : isSunset ? colors.primary : "#4ECDC4", // 🌅 Utilise primary du thème actif
       shadowOpacity: 0.3,
       shadowRadius: 8,
       elevation: 6,
@@ -1092,34 +1167,40 @@ export const getStyles = (
     gridButtonText: {
       fontSize: 12,
       fontWeight: "600",
-      color: currentTheme === "light" ? colors.text : "#F8FAFC",
+      color: isLightTheme 
+        ? colors.text 
+        : isSunset 
+        ? "#FFF8DC" // 🌆 Cornsilk pour texte Maghrib
+        : "#F8FAFC",
       textAlign: "center",
       marginTop: 8,
       lineHeight: 16,
     },
     gridButtonDisabled: {
-      backgroundColor:
-        currentTheme === "light"
-          ? "rgba(107, 114, 128, 0.1)"
-          : "rgba(107, 114, 128, 0.2)",
-      borderColor:
-        currentTheme === "light"
-          ? "rgba(107, 114, 128, 0.3)"
-          : "rgba(107, 114, 128, 0.4)",
+      backgroundColor: isLightTheme
+        ? "rgba(107, 114, 128, 0.1)"
+        : "rgba(107, 114, 128, 0.2)",
+      borderColor: isLightTheme
+        ? "rgba(107, 114, 128, 0.3)"
+        : "rgba(107, 114, 128, 0.4)",
       opacity: 0.6,
     },
     gridButtonTextDisabled: {
-      color: currentTheme === "light" ? "#6B7280" : "#9CA3AF",
+      color: isLightTheme ? "#6B7280" : "#9CA3AF",
     },
     activeSectionContainer: {
       marginTop: 16,
       marginHorizontal: 16,
-      backgroundColor:
-        currentTheme === "light" ? colors.surface : "rgba(15, 23, 42, 0.8)",
+      backgroundColor: isLightTheme 
+        ? colors.surface 
+        : colors.surface, // 🌅 Utilise surface du thème actif
       borderRadius: 16,
       borderWidth: 1,
-      borderColor:
-        currentTheme === "light" ? colors.border : "rgba(148, 163, 184, 0.3)",
+      borderColor: isLightTheme 
+        ? colors.border 
+        : isSunset 
+        ? "rgba(255, 127, 80, 0.4)" // 🌆 Coral pour bordures Maghrib
+        : "rgba(148, 163, 184, 0.3)",
       overflow: "hidden",
     },
     activeSectionHeader: {
@@ -1128,28 +1209,28 @@ export const getStyles = (
       justifyContent: "space-between",
       padding: 16,
       borderBottomWidth: 1,
-      borderBottomColor:
-        currentTheme === "light" ? colors.border : "rgba(148, 163, 184, 0.3)",
+      borderBottomColor: isLightTheme
+        ? colors.border
+        : "rgba(148, 163, 184, 0.3)",
     },
     activeSectionTitle: {
       fontSize: 18,
       fontWeight: "700",
-      color: currentTheme === "light" ? colors.text : "#F8FAFC",
+      color: isLightTheme ? colors.text : "#F8FAFC",
     },
     closeButton: {
       padding: 8,
       borderRadius: 8,
-      backgroundColor:
-        currentTheme === "light"
-          ? "rgba(0, 0, 0, 0.05)"
-          : "rgba(255, 255, 255, 0.1)",
+      backgroundColor: isLightTheme
+        ? "rgba(0, 0, 0, 0.05)"
+        : "rgba(255, 255, 255, 0.1)",
     },
     activeSectionContent: {
       padding: 16,
     },
     sectionDescription: {
       fontSize: 14,
-      color: currentTheme === "light" ? colors.textSecondary : "#CBD5E1",
+      color: isLightTheme ? colors.textSecondary : "#CBD5E1",
       lineHeight: 20,
     },
     themeSection: {
@@ -1157,13 +1238,17 @@ export const getStyles = (
       marginTop: 16,
       marginBottom: 24,
       padding: 16,
-      backgroundColor:
-        currentTheme === "light" ? colors.surface : "rgba(15, 23, 42, 0.8)",
+      backgroundColor: isLightTheme 
+        ? colors.surface 
+        : colors.surface, // 🌅 Utilise surface du thème actif
       borderRadius: 16,
       borderWidth: 1,
-      borderColor:
-        currentTheme === "light" ? colors.border : "rgba(148, 163, 184, 0.3)",
-      shadowColor: currentTheme === "light" ? colors.shadow : "#000",
+      borderColor: isLightTheme 
+        ? colors.border 
+        : isSunset 
+        ? colors.border // 🌅 Utilise border du thème Maghrib
+        : "rgba(148, 163, 184, 0.3)",
+      shadowColor: isLightTheme ? colors.shadow : isDark ? "#000" : colors.shadow, // 🌅 Utilise shadow du thème actif
       shadowOffset: { width: 0, height: 4 },
       shadowOpacity: 0.3,
       shadowRadius: 8,
@@ -1178,35 +1263,63 @@ export const getStyles = (
       fontSize: 18,
       fontWeight: "600",
       marginLeft: 8,
-      color: currentTheme === "light" ? colors.text : "#F8FAFC",
+      color: isLightTheme 
+        ? colors.text 
+        : isSunset 
+        ? "#FFF8DC" // 🌆 Cornsilk pour texte Maghrib
+        : "#F8FAFC",
     },
     themeSwitchContainer: {
       flexDirection: "row",
       gap: 12,
+      flexWrap: "wrap", // 🆕 Pour permettre 4 thèmes sur 2 lignes si nécessaire
     },
     themeOption: {
       flex: 1,
+      minWidth: "45%", // 🆕 Pour que 2 thèmes par ligne
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "center",
       paddingVertical: 12,
       paddingHorizontal: 16,
       borderRadius: 12,
-      backgroundColor:
-        currentTheme === "light" ? colors.cardBG : "rgba(30, 41, 59, 0.8)",
+      backgroundColor: isLightTheme 
+        ? colors.cardBG 
+        : colors.surface, // 🌅 Utilise surface du thème actif
       borderWidth: 1,
-      borderColor:
-        currentTheme === "light" ? colors.border : "rgba(148, 163, 184, 0.3)",
+      borderColor: isLightTheme 
+        ? colors.border 
+        : isSunset 
+        ? "rgba(255, 127, 80, 0.5)" // 🌆 Coral pour bordure Maghrib
+        : "rgba(148, 163, 184, 0.3)",
     },
     themeOptionActive: {
       backgroundColor: colors.primary,
       borderColor: colors.primary,
     },
+    // 🆕 Style pour les thèmes verrouillés (non-premium)
+    themeOptionLocked: {
+      opacity: 0.7,
+      borderStyle: "dashed",
+    },
     themeOptionText: {
       fontSize: 14,
       fontWeight: "600",
       marginLeft: 6,
-      color: currentTheme === "light" ? colors.text : "#F8FAFC",
+      color: isLightTheme 
+        ? colors.text 
+        : isSunset 
+        ? "#FFF8DC" // 🌆 Cornsilk pour texte boutons Maghrib
+        : "#F8FAFC",
+    },
+    // 🆕 Badge premium (couronne dorée)
+    premiumBadge: {
+      position: "absolute",
+      top: -4,
+      right: -4,
+      backgroundColor: "rgba(0, 0, 0, 0.6)",
+      borderRadius: 8,
+      padding: 2,
     },
     applyChangesContainer: {
       position: "absolute",
@@ -1277,13 +1390,11 @@ export const getStyles = (
       opacity: 0.95,
     },
     accountSection: {
-      backgroundColor:
-        currentTheme === "light" ? colors.surface : "rgba(15, 23, 42, 0.8)",
+      backgroundColor: isLightTheme ? colors.surface : "rgba(15, 23, 42, 0.8)",
       borderRadius: 16,
       borderWidth: 1,
-      borderColor:
-        currentTheme === "light" ? colors.border : "rgba(148, 163, 184, 0.3)",
-      shadowColor: currentTheme === "light" ? colors.shadow : "#000",
+      borderColor: isLightTheme ? colors.border : "rgba(148, 163, 184, 0.3)",
+      shadowColor: isLightTheme ? colors.shadow : "#000",
       shadowOffset: { width: 0, height: 4 },
       shadowOpacity: 0.3,
       shadowRadius: 8,
@@ -1295,23 +1406,23 @@ export const getStyles = (
       alignItems: "center",
       padding: 16,
       borderBottomWidth: 1,
-      borderBottomColor:
-        currentTheme === "light" ? colors.border : "rgba(148, 163, 184, 0.2)",
+      borderBottomColor: isLightTheme
+        ? colors.border
+        : "rgba(148, 163, 184, 0.2)",
     },
     accountSectionTitle: {
       fontSize: 16,
       fontWeight: "700",
-      color: currentTheme === "light" ? colors.text : "#F8FAFC",
+      color: isLightTheme ? colors.text : "#F8FAFC",
       flex: 1,
       marginLeft: 12,
     },
     editButton: {
       padding: 8,
       borderRadius: 8,
-      backgroundColor:
-        currentTheme === "light"
-          ? "rgba(78, 205, 196, 0.1)"
-          : "rgba(78, 205, 196, 0.2)",
+      backgroundColor: isLightTheme
+        ? "rgba(78, 205, 196, 0.1)"
+        : "rgba(78, 205, 196, 0.2)",
       borderWidth: 1,
       borderColor: "rgba(78, 205, 196, 0.3)",
     },
@@ -1324,30 +1435,26 @@ export const getStyles = (
     inputLabel: {
       fontSize: 14,
       fontWeight: "600",
-      color: currentTheme === "light" ? colors.text : "#F8FAFC",
+      color: isLightTheme ? colors.text : "#F8FAFC",
       marginBottom: 8,
     },
     inputValue: {
       fontSize: 16,
-      color: currentTheme === "light" ? colors.textSecondary : "#CBD5E1",
+      color: isLightTheme ? colors.textSecondary : "#CBD5E1",
       padding: 12,
-      backgroundColor:
-        currentTheme === "light" ? colors.cardBG : "rgba(30, 41, 59, 0.8)",
+      backgroundColor: isLightTheme ? colors.cardBG : "rgba(30, 41, 59, 0.8)",
       borderRadius: 8,
       borderWidth: 1,
-      borderColor:
-        currentTheme === "light" ? colors.border : "rgba(148, 163, 184, 0.3)",
+      borderColor: isLightTheme ? colors.border : "rgba(148, 163, 184, 0.3)",
     },
     accountInput: {
       fontSize: 16,
-      color: currentTheme === "light" ? colors.text : "#F8FAFC",
+      color: isLightTheme ? colors.text : "#F8FAFC",
       padding: 12,
-      backgroundColor:
-        currentTheme === "light" ? colors.surface : "rgba(30, 41, 59, 0.9)",
+      backgroundColor: isLightTheme ? colors.surface : "rgba(30, 41, 59, 0.9)",
       borderRadius: 8,
       borderWidth: 2,
-      borderColor:
-        currentTheme === "light" ? colors.border : "rgba(148, 163, 184, 0.3)",
+      borderColor: isLightTheme ? colors.border : "rgba(148, 163, 184, 0.3)",
     },
     cancelButton: {
       flex: 1,
@@ -1356,15 +1463,14 @@ export const getStyles = (
       borderRadius: 8,
       backgroundColor: "transparent",
       borderWidth: 1,
-      borderColor:
-        currentTheme === "light" ? colors.border : "rgba(148, 163, 184, 0.3)",
+      borderColor: isLightTheme ? colors.border : "rgba(148, 163, 184, 0.3)",
       marginRight: 8,
       alignItems: "center",
     },
     cancelButtonText: {
       fontSize: 14,
       fontWeight: "600",
-      color: currentTheme === "light" ? colors.text : "#F8FAFC",
+      color: isLightTheme ? colors.text : "#F8FAFC",
     },
     saveButton: {
       flex: 1,
@@ -1398,11 +1504,11 @@ export const getStyles = (
     subscriptionLabel: {
       fontSize: 14,
       fontWeight: "600",
-      color: currentTheme === "light" ? colors.text : "#F8FAFC",
+      color: isLightTheme ? colors.text : "#F8FAFC",
     },
     subscriptionValue: {
       fontSize: 14,
-      color: currentTheme === "light" ? colors.textSecondary : "#CBD5E1",
+      color: isLightTheme ? colors.textSecondary : "#CBD5E1",
     },
     premiumBadge: {
       flexDirection: "row",
@@ -1425,13 +1531,14 @@ export const getStyles = (
       alignItems: "center",
       padding: 16,
       borderBottomWidth: 1,
-      borderBottomColor:
-        currentTheme === "light" ? colors.border : "rgba(148, 163, 184, 0.2)",
+      borderBottomColor: isLightTheme
+        ? colors.border
+        : "rgba(148, 163, 184, 0.2)",
     },
     securityOptionText: {
       fontSize: 14,
       fontWeight: "500",
-      color: currentTheme === "light" ? colors.text : "#F8FAFC",
+      color: isLightTheme ? colors.text : "#F8FAFC",
       flex: 1,
       marginLeft: 12,
     },
@@ -1469,3 +1576,4 @@ export const getStyles = (
       color: "#EF4444",
     },
   });
+};

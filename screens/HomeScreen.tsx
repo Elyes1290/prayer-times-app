@@ -627,6 +627,55 @@ export default function HomeScreen() {
           dhikrSettings: dhikrSettingsToSend,
         });
       }
+
+      // 🍎 CORRECTION : Ajouter la reprogrammation pour iOS aussi !
+      if (Platform.OS === "ios") {
+        debugLog(
+          "🍎 [iOS] Reprogrammation des notifications via scheduleNotificationsFor2Days"
+        );
+
+        // Si les notifications sont désactivées, ne rien faire
+        if (!settings.notificationsEnabled) {
+          debugLog(
+            "🚫 [iOS] Notifications désactivées - pas de reprogrammation"
+          );
+          return;
+        }
+
+        // Calculer les settings dhikr finaux
+        const dhikrSettingsToSend = {
+          ...stableDhikrSettings,
+          enabledAfterSalah:
+            settings.notificationsEnabled &&
+            stableDhikrSettings.enabledAfterSalah,
+          enabledMorningDhikr:
+            settings.notificationsEnabled &&
+            stableDhikrSettings.enabledMorningDhikr,
+          enabledEveningDhikr:
+            settings.notificationsEnabled &&
+            stableDhikrSettings.enabledEveningDhikr,
+          enabledSelectedDua:
+            settings.notificationsEnabled &&
+            stableDhikrSettings.enabledSelectedDua,
+        };
+
+        // Programmer les notifications pour iOS (identique au bouton orange)
+        await scheduleNotificationsFor2Days({
+          userLocation: stableCoords,
+          calcMethod: settings.calcMethod,
+          settings: {
+            notificationsEnabled: true,
+            adhanEnabled: true,
+          },
+          adhanSound: settings.adhanSound,
+          remindersEnabled:
+            settings.notificationsEnabled && settings.remindersEnabled,
+          reminderOffset: settings.reminderOffset,
+          dhikrSettings: dhikrSettingsToSend,
+        });
+
+        debugLog("✅ [iOS] Reprogrammation terminée avec succès");
+      }
     } catch (error) {
       errorLog("❌ Erreur lors de la mise à jour des notifications:", error);
     }
@@ -646,7 +695,9 @@ export default function HomeScreen() {
         const sixHours = 6 * 60 * 60 * 1000;
 
         if (!lastUpdate || now - parseInt(lastUpdate) > sixHours) {
-          console.log("🚀🚀🚀 [iOS] AUTO-REPROG: Lancement de la reprogrammation automatique (ouverture app)");
+          console.log(
+            "🚀🚀🚀 [iOS] AUTO-REPROG: Lancement de la reprogrammation automatique (ouverture app)"
+          );
           debugLog("🍎 [iOS] Reprogrammation silencieuse (throttle 6h)...");
           await updateNotifications();
           await AsyncStorage.setItem(
@@ -670,6 +721,25 @@ export default function HomeScreen() {
       if (!currentPrayerTimes) return;
 
       const now = new Date();
+
+      // 🚀 NOUVEAU : S'assurer que 'today' est au moins le jour actuel (now)
+      // Si on est en retard (ex: on ouvre l'app le matin et today est resté à hier),
+      // on doit d'abord se caler sur aujourd'hui avant de décider si on passe à demain (post-Isha).
+      // Cela évite de sauter directement au lendemain soir (24h plus tard) le matin.
+      if (now.toDateString() !== today.toDateString()) {
+        // On ne recale sur 'now' que si 'now' est dans le futur par rapport à 'today'
+        if (now.getTime() > today.getTime()) {
+          const startOfNow = new Date(now);
+          startOfNow.setHours(0, 0, 0, 0);
+          debugLog(
+            "📅 Rattrapage de la date vers aujourd'hui: " +
+              startOfNow.toDateString()
+          );
+          setToday(startOfNow);
+          return; // Sortir et attendre la mise à jour des horaires
+        }
+      }
+
       const ishaTime =
         currentPrayerTimes.isha || (currentPrayerTimes as any).Isha;
 
@@ -1157,11 +1227,7 @@ export default function HomeScreen() {
                     <MaterialCommunityIcons
                       name="pencil-outline"
                       size={16}
-                      color={
-                        currentTheme === "light"
-                          ? colors.textSecondary
-                          : "rgba(255, 255, 255, 0.7)"
-                      }
+                      color={colors.textSecondary} // 🌅 Utilise la couleur du thème actif
                     />
                   </TouchableOpacity>
                 )}
@@ -1254,11 +1320,7 @@ export default function HomeScreen() {
                 <MaterialCommunityIcons
                   name="cog-outline"
                   size={24}
-                  color={
-                    currentTheme === "light"
-                      ? colors.textSecondary
-                      : "rgba(255, 255, 255, 0.7)"
-                  }
+                  color={colors.textSecondary} // 🌅 Utilise la couleur du thème actif
                 />
               </TouchableOpacity>
             </Animated.View>
@@ -1774,9 +1836,7 @@ export default function HomeScreen() {
                         <MaterialCommunityIcons
                           name={action.icon as any}
                           size={24}
-                          color={
-                            currentTheme === "light" ? colors.text : "#fffbe8"
-                          }
+                          color={colors.text} // 🌅 Utilise la couleur du thème actif
                         />
                       </View>
                       <View
@@ -1793,11 +1853,7 @@ export default function HomeScreen() {
                       <MaterialCommunityIcons
                         name="chevron-right"
                         size={20}
-                        color={
-                          currentTheme === "light"
-                            ? colors.textSecondary
-                            : "rgba(255, 255, 255, 0.7)"
-                        }
+                        color={colors.textSecondary} // 🌅 Utilise la couleur du thème actif
                       />
                     </LinearGradient>
                   </TouchableOpacity>
@@ -1830,10 +1886,12 @@ const getStyles = (
   colors: any,
   overlayTextColor: string,
   overlayIconColor: string,
-  currentTheme: "light" | "dark",
+  currentTheme: "light" | "dark" | "morning" | "sunset",
   universalLayout: any // 🚀 NOUVEAU : Layout universel pour tous les appareils Samsung
-) =>
-  StyleSheet.create({
+) => {
+  // 🆕 Les couleurs sont maintenant gérées directement via colors du thème actif
+
+  return StyleSheet.create({
     background: {
       flex: 1,
       width: "100%",
@@ -1879,10 +1937,7 @@ const getStyles = (
     },
     locationText: {
       fontSize: 14,
-      color:
-        currentTheme === "light"
-          ? colors.textSecondary
-          : "rgba(255, 255, 255, 0.8)",
+      color: colors.textSecondary, // 🌅 Utilise la couleur du thème actif
       marginLeft: 6,
       fontWeight: "500",
     },
@@ -1901,11 +1956,9 @@ const getStyles = (
     settingsButton: {
       padding: 12,
       borderRadius: 16,
-      backgroundColor:
-        currentTheme === "light" ? colors.surface : "rgba(255, 255, 255, 0.1)",
+      backgroundColor: colors.surface, // 🌅 Utilise la couleur du thème actif
       borderWidth: 1,
-      borderColor:
-        currentTheme === "light" ? colors.border : "rgba(255, 255, 255, 0.2)",
+      borderColor: colors.border, // 🌅 Utilise la couleur du thème actif
       minWidth: 48,
       minHeight: 48,
       justifyContent: "center",
@@ -1916,15 +1969,13 @@ const getStyles = (
       marginBottom: 16,
     },
     nextPrayerCard: {
-      backgroundColor:
-        currentTheme === "light" ? colors.cardBG : "rgba(0, 0, 0, 0.4)",
+      backgroundColor: colors.cardBG, // 🌅 Utilise la couleur du thème actif
       borderRadius: 16,
       padding: 16,
       marginBottom: 16,
       borderWidth: 1,
-      borderColor:
-        currentTheme === "light" ? colors.border : "rgba(255, 255, 255, 0.1)",
-      shadowColor: currentTheme === "light" ? colors.shadow : "#000",
+      borderColor: colors.border, // 🌅 Utilise la couleur du thème actif
+      shadowColor: colors.shadow, // 🌅 Utilise la couleur du thème actif
       shadowOffset: { width: 0, height: 4 },
       shadowOpacity: 0.3,
       shadowRadius: 12,
@@ -1982,10 +2033,7 @@ const getStyles = (
     },
     progressText: {
       fontSize: 12,
-      color:
-        currentTheme === "light"
-          ? colors.textTertiary
-          : "rgba(255, 255, 255, 0.7)",
+      color: colors.textTertiary, // 🌅 Utilise la couleur du thème actif
       textAlign: "center",
     },
     prayerGrid: {
@@ -1995,12 +2043,10 @@ const getStyles = (
       gap: 8,
     },
     prayerCard: {
-      backgroundColor:
-        currentTheme === "light" ? colors.surface : "rgba(255, 255, 255, 0.08)",
+      backgroundColor: colors.surface, // 🌅 Utilise la couleur du thème actif
       borderRadius: 12,
       borderWidth: 1,
-      borderColor:
-        currentTheme === "light" ? colors.border : "rgba(255, 255, 255, 0.1)",
+      borderColor: colors.border, // 🌅 Utilise la couleur du thème actif
       overflow: "hidden",
       width: "48%",
       marginBottom: 8,
@@ -2083,25 +2129,21 @@ const getStyles = (
       textTransform: "uppercase",
     },
     loadingCard: {
-      backgroundColor:
-        currentTheme === "light" ? colors.cardBG : "rgba(0, 0, 0, 0.6)",
+      backgroundColor: colors.cardBG, // 🌅 Utilise la couleur du thème actif
       padding: 30,
       borderRadius: 20,
       alignItems: "center",
       borderWidth: 1,
-      borderColor:
-        currentTheme === "light" ? colors.border : "rgba(255, 255, 255, 0.1)",
+      borderColor: colors.border, // 🌅 Utilise la couleur du thème actif
     },
 
     setupCard: {
-      backgroundColor:
-        currentTheme === "light" ? colors.cardBG : "rgba(0, 0, 0, 0.6)",
+      backgroundColor: colors.cardBG, // 🌅 Utilise la couleur du thème actif
       padding: 30,
       borderRadius: 20,
       alignItems: "center",
       borderWidth: 1,
-      borderColor:
-        currentTheme === "light" ? colors.border : "rgba(255, 255, 255, 0.1)",
+      borderColor: colors.border, // 🌅 Utilise la couleur du thème actif
       width: "100%",
       maxWidth: 320,
     },
@@ -2117,10 +2159,7 @@ const getStyles = (
     },
     setupSubtitle: {
       fontSize: 16,
-      color:
-        currentTheme === "light"
-          ? colors.textSecondary
-          : "rgba(255, 255, 255, 0.8)",
+      color: colors.textSecondary, // 🌅 Utilise la couleur du thème actif
       textAlign: "center",
       marginBottom: 25,
       lineHeight: 22,
@@ -2186,10 +2225,7 @@ const getStyles = (
       textAlign: "center",
     },
     errorText: {
-      color:
-        currentTheme === "light"
-          ? colors.textSecondary
-          : "rgba(255, 255, 255, 0.8)",
+      color: colors.textSecondary, // 🌅 Utilise la couleur du thème actif
       fontSize: 16,
       textAlign: "center",
       marginBottom: 25,
@@ -2236,10 +2272,7 @@ const getStyles = (
     },
     duaTranslation: {
       fontSize: 16,
-      color:
-        currentTheme === "light"
-          ? colors.textSecondary
-          : "rgba(255, 255, 255, 0.9)",
+      color: colors.textSecondary, // 🌅 Utilise la couleur du thème actif
       textAlign: "center",
       marginBottom: 8,
       lineHeight: 22,
@@ -2247,10 +2280,7 @@ const getStyles = (
     },
     duaBenefits: {
       fontSize: 14,
-      color:
-        currentTheme === "light"
-          ? colors.textTertiary
-          : "rgba(255, 255, 255, 0.7)",
+      color: colors.textTertiary, // 🌅 Utilise la couleur du thème actif
       textAlign: "center",
       fontStyle: "italic",
       lineHeight: 20,
@@ -2302,20 +2332,14 @@ const getStyles = (
     },
     versetTranslation: {
       fontSize: 16,
-      color:
-        currentTheme === "light"
-          ? colors.textSecondary
-          : "rgba(255, 255, 255, 0.9)",
+      color: colors.textSecondary, // 🌅 Utilise la couleur du thème actif
       textAlign: "center",
       marginBottom: 8,
       lineHeight: 22,
     },
     versetReference: {
       fontSize: 14,
-      color:
-        currentTheme === "light"
-          ? colors.textTertiary
-          : "rgba(255, 255, 255, 0.7)",
+      color: colors.textTertiary, // 🌅 Utilise la couleur du thème actif
       textAlign: "center",
       fontStyle: "italic",
     },
@@ -2652,10 +2676,7 @@ const getStyles = (
       fontWeight: "700",
       marginBottom: 16,
       textAlign: "center",
-      textShadowColor:
-        currentTheme === "light"
-          ? "rgba(255, 255, 255, 0.5)"
-          : "rgba(0, 0, 0, 0.3)",
+      textShadowColor: colors.shadow, // 🌅 Utilise la couleur du thème actif
       textShadowOffset: { width: 0, height: 2 },
       textShadowRadius: 4,
     },
@@ -2706,14 +2727,12 @@ const getStyles = (
       alignItems: "flex-start",
       justifyContent: "space-between",
       padding: 16,
-      backgroundColor:
-        currentTheme === "light" ? colors.cardBG : "rgba(0, 0, 0, 0.3)",
+      backgroundColor: colors.cardBG, // 🌅 Utilise la couleur du thème actif
       borderRadius: 20,
       marginBottom: 20,
       borderWidth: 1,
-      borderColor:
-        currentTheme === "light" ? colors.border : "rgba(255, 255, 255, 0.1)",
-      shadowColor: currentTheme === "light" ? colors.shadow : "#000",
+      borderColor: colors.border, // 🌅 Utilise la couleur du thème actif
+      shadowColor: colors.shadow, // 🌅 Utilise la couleur du thème actif
       shadowOffset: { width: 0, height: 4 },
       shadowOpacity: 0.3,
       shadowRadius: 12,
@@ -2740,8 +2759,7 @@ const getStyles = (
       marginLeft: 8,
       padding: 4,
       borderRadius: 8,
-      backgroundColor:
-        currentTheme === "light" ? colors.surface : "rgba(255, 255, 255, 0.1)",
+      backgroundColor: colors.surface, // 🌅 Utilise la couleur du thème actif
       opacity: 0.8,
     },
 
@@ -2750,10 +2768,7 @@ const getStyles = (
       fontWeight: "800",
       color: overlayTextColor,
       marginBottom: 4,
-      textShadowColor:
-        currentTheme === "light"
-          ? "rgba(255, 255, 255, 0.5)"
-          : "rgba(0, 0, 0, 0.3)",
+      textShadowColor: colors.shadow, // 🌅 Utilise la couleur du thème actif
       textShadowOffset: { width: 0, height: 2 },
       textShadowRadius: 4,
       flexWrap: "wrap",
@@ -2762,15 +2777,9 @@ const getStyles = (
 
     dateText: {
       fontSize: 14,
-      color:
-        currentTheme === "light"
-          ? colors.textSecondary
-          : "rgba(255, 255, 255, 0.9)",
+      color: colors.textSecondary, // 🌅 Utilise la couleur du thème actif
       fontWeight: "600",
-      textShadowColor:
-        currentTheme === "light"
-          ? "rgba(255, 255, 255, 0.3)"
-          : "rgba(0, 0, 0, 0.2)",
+      textShadowColor: colors.shadow, // 🌅 Utilise la couleur du thème actif
       textShadowOffset: { width: 0, height: 1 },
       textShadowRadius: 2,
     },
@@ -2882,10 +2891,7 @@ const getStyles = (
 
     nameTranslit: {
       fontSize: 20,
-      color:
-        currentTheme === "light"
-          ? colors.textSecondary
-          : "rgba(255, 255, 255, 0.9)",
+      color: colors.textSecondary, // 🌅 Utilise la couleur du thème actif
       textAlign: "center",
       marginBottom: 8,
       fontStyle: "italic",
@@ -2893,10 +2899,7 @@ const getStyles = (
 
     nameMeaning: {
       fontSize: 16,
-      color:
-        currentTheme === "light"
-          ? colors.textTertiary
-          : "rgba(255, 255, 255, 0.8)",
+      color: colors.textTertiary, // 🌅 Utilise la couleur du thème actif
       textAlign: "center",
       lineHeight: 22,
     },
@@ -2918,10 +2921,7 @@ const getStyles = (
 
     hadithTranslation: {
       fontSize: 16,
-      color:
-        currentTheme === "light"
-          ? colors.textSecondary
-          : "rgba(255, 255, 255, 0.9)",
+      color: colors.textSecondary, // 🌅 Utilise la couleur du thème actif
       textAlign: "center",
       marginBottom: 8,
       lineHeight: 22,
@@ -2934,3 +2934,4 @@ const getStyles = (
       backgroundColor: "rgba(255, 255, 255, 0.1)",
     },
   });
+};

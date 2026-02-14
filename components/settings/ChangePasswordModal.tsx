@@ -31,6 +31,7 @@ export default function ChangePasswordModal({
   const { t } = useTranslation();
   const { showToast } = useToast();
   const { currentTheme } = useSettings();
+  const isLightTheme = currentTheme === "light" || currentTheme === "morning";
   const { getErrorTitle, getErrorMessage } = useErrorHandler();
 
   const [currentPassword, setCurrentPassword] = useState("");
@@ -247,7 +248,7 @@ export default function ChangePasswordModal({
       alignItems: "center" as const,
     },
     modalContent: {
-      backgroundColor: currentTheme === "light" ? "#FFFFFF" : "#1F2937",
+      backgroundColor: isLightTheme ? "#FFFFFF" : "#1F2937",
       borderRadius: 16,
       padding: 24,
       margin: 20,
@@ -268,7 +269,7 @@ export default function ChangePasswordModal({
     modalTitle: {
       fontSize: 20,
       fontWeight: "bold" as const,
-      color: currentTheme === "light" ? "#1F2937" : "#F9FAFB",
+      color: isLightTheme ? "#1F2937" : "#F9FAFB",
     },
     closeButton: {
       padding: 4,
@@ -279,23 +280,23 @@ export default function ChangePasswordModal({
     inputLabel: {
       fontSize: 14,
       fontWeight: "600" as const,
-      color: currentTheme === "light" ? "#374151" : "#D1D5DB",
+      color: isLightTheme ? "#374151" : "#D1D5DB",
       marginBottom: 8,
     },
     inputWrapper: {
       flexDirection: "row" as const,
       alignItems: "center" as const,
       borderWidth: 1,
-      borderColor: currentTheme === "light" ? "#D1D5DB" : "#4B5563",
+      borderColor: isLightTheme ? "#D1D5DB" : "#4B5563",
       borderRadius: 8,
-      backgroundColor: currentTheme === "light" ? "#FFFFFF" : "#374151",
+      backgroundColor: isLightTheme ? "#FFFFFF" : "#374151",
       paddingHorizontal: 12,
     },
     input: {
       flex: 1,
       paddingVertical: 12,
       fontSize: 16,
-      color: currentTheme === "light" ? "#1F2937" : "#F9FAFB",
+      color: isLightTheme ? "#1F2937" : "#F9FAFB",
     },
     eyeIcon: {
       padding: 4,
@@ -304,7 +305,7 @@ export default function ChangePasswordModal({
       marginTop: 8,
       padding: 8,
       borderRadius: 6,
-      backgroundColor: currentTheme === "light" ? "#F3F4F6" : "#374151",
+      backgroundColor: isLightTheme ? "#F3F4F6" : "#374151",
     },
     strengthText: {
       fontSize: 12,
@@ -313,7 +314,7 @@ export default function ChangePasswordModal({
     strengthBar: {
       height: 4,
       borderRadius: 2,
-      backgroundColor: currentTheme === "light" ? "#E5E7EB" : "#4B5563",
+      backgroundColor: isLightTheme ? "#E5E7EB" : "#4B5563",
       marginTop: 4,
     },
     strengthFill: {
@@ -343,14 +344,14 @@ export default function ChangePasswordModal({
       paddingHorizontal: 16,
       borderRadius: 8,
       borderWidth: 1,
-      borderColor: currentTheme === "light" ? "#D1D5DB" : "#4B5563",
+      borderColor: isLightTheme ? "#D1D5DB" : "#4B5563",
       marginRight: 8,
       alignItems: "center" as const,
     },
     cancelButtonText: {
       fontSize: 16,
       fontWeight: "600" as const,
-      color: currentTheme === "light" ? "#374151" : "#D1D5DB",
+      color: isLightTheme ? "#374151" : "#D1D5DB",
     },
     saveButton: {
       flex: 1,
@@ -390,11 +391,11 @@ export default function ChangePasswordModal({
               onPress={handleClose}
               disabled={isLoading}
             >
-              <MaterialCommunityIcons
-                name="close"
-                size={24}
-                color={currentTheme === "light" ? "#6B7280" : "#9CA3AF"}
-              />
+                <MaterialCommunityIcons
+                  name="close"
+                  size={24}
+                  color={isLightTheme ? "#6B7280" : "#9CA3AF"}
+                />
             </TouchableOpacity>
           </View>
 
@@ -407,7 +408,7 @@ export default function ChangePasswordModal({
               <MaterialCommunityIcons
                 name="lock"
                 size={20}
-                color={currentTheme === "light" ? "#6B7280" : "#9CA3AF"}
+                color={isLightTheme ? "#6B7280" : "#9CA3AF"}
               />
               <TextInput
                 ref={currentPasswordRef}
@@ -431,7 +432,7 @@ export default function ChangePasswordModal({
                 <MaterialCommunityIcons
                   name={showCurrentPassword ? "eye" : "eye-off"}
                   size={20}
-                  color={currentTheme === "light" ? "#6B7280" : "#9CA3AF"}
+                  color={isLightTheme ? "#6B7280" : "#9CA3AF"}
                 />
               </TouchableOpacity>
             </View>
@@ -446,7 +447,7 @@ export default function ChangePasswordModal({
               <MaterialCommunityIcons
                 name="lock-plus"
                 size={20}
-                color={currentTheme === "light" ? "#6B7280" : "#9CA3AF"}
+                color={isLightTheme ? "#6B7280" : "#9CA3AF"}
               />
               <TextInput
                 ref={newPasswordRef}
@@ -470,7 +471,7 @@ export default function ChangePasswordModal({
                 <MaterialCommunityIcons
                   name={showNewPassword ? "eye" : "eye-off"}
                   size={20}
-                  color={currentTheme === "light" ? "#6B7280" : "#9CA3AF"}
+                  color={isLightTheme ? "#6B7280" : "#9CA3AF"}
                 />
               </TouchableOpacity>
             </View>
@@ -526,7 +527,7 @@ export default function ChangePasswordModal({
                       {
                         color: newPasswordValidation.minLength
                           ? "#10B981"
-                          : currentTheme === "light"
+                          : isLightTheme
                           ? "#6B7280"
                           : "#9CA3AF",
                       },
@@ -556,7 +557,7 @@ export default function ChangePasswordModal({
                       {
                         color: newPasswordValidation.hasUpperCase
                           ? "#10B981"
-                          : currentTheme === "light"
+                          : isLightTheme
                           ? "#6B7280"
                           : "#9CA3AF",
                       },
@@ -583,7 +584,7 @@ export default function ChangePasswordModal({
                       {
                         color: newPasswordValidation.hasNumbers
                           ? "#10B981"
-                          : currentTheme === "light"
+                          : isLightTheme
                           ? "#6B7280"
                           : "#9CA3AF",
                       },
@@ -612,7 +613,7 @@ export default function ChangePasswordModal({
                       {
                         color: newPasswordValidation.hasSpecialChar
                           ? "#10B981"
-                          : currentTheme === "light"
+                          : isLightTheme
                           ? "#6B7280"
                           : "#9CA3AF",
                       },
@@ -642,7 +643,7 @@ export default function ChangePasswordModal({
                     ? confirmPasswordValidation
                       ? "#10B981"
                       : "#EF4444"
-                    : currentTheme === "light"
+                    : isLightTheme
                     ? "#6B7280"
                     : "#9CA3AF"
                 }
@@ -669,7 +670,7 @@ export default function ChangePasswordModal({
                 <MaterialCommunityIcons
                   name={showConfirmPassword ? "eye" : "eye-off"}
                   size={20}
-                  color={currentTheme === "light" ? "#6B7280" : "#9CA3AF"}
+                  color={isLightTheme ? "#6B7280" : "#9CA3AF"}
                 />
               </TouchableOpacity>
             </View>

@@ -32,7 +32,7 @@ interface PremiumLoginSectionProps {
   }) => void;
   t: any;
   onLoginSuccess?: (userData: any) => void;
-  currentTheme?: "light" | "dark";
+  currentTheme?: "light" | "dark" | "morning" | "sunset";
   // Nouveau: contrôle d'ouverture de la modale premium existante
   onOpenPremiumModal?: () => void;
   // Nouveau: indique si le composant est rendu DANS la modale

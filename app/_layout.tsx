@@ -2,7 +2,6 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import * as NavigationBar from "expo-navigation-bar";
 import * as Notifications from "expo-notifications";
 import { Tabs } from "expo-router";
-import { StatusBar } from "expo-status-bar";
 import React, { useEffect } from "react";
 import {
   Platform,
@@ -11,6 +10,7 @@ import {
   NativeModules,
   NativeEventEmitter,
   AppState,
+  StatusBar,
 } from "react-native";
 import { SettingsProvider } from "../contexts/SettingsContext";
 import { FavoritesProvider, useFavorites } from "../contexts/FavoritesContext";
@@ -32,6 +32,7 @@ import {
   useAdhanAudio,
 } from "../contexts/AdhanAudioContext";
 import { AdhanStopButton } from "../components/AdhanStopButton";
+import { useThemeColors } from "../hooks/useThemeColor"; // 🎨 Pour la TabBar adaptative
 
 // 🚨 NOUVEAU : Protection contre les reloads Expo en mode développement
 let isAbonnementProcessActive = false;
@@ -97,6 +98,8 @@ type IconName =
   | "home"
   | "clock-time-four"
   | "compass"
+  | "bookshelf"
+  | "dots-grid"
   | "book-open-variant"
   | "book-multiple"
   | "hand-heart"
@@ -144,7 +147,7 @@ const TabBarIcon = ({ icon, color, size, focused }: TabBarIconProps) => {
       <MaterialCommunityIcons
         name={icon}
         size={size}
-        color={focused ? "#ffd700" : "rgba(255,255,255,0.6)"}
+        color={color}  // 🎨 Utilise directement la couleur passée en prop (déjà thématique)
       />
       {focused && (
         <View
@@ -154,7 +157,7 @@ const TabBarIcon = ({ icon, color, size, focused }: TabBarIconProps) => {
             width: 4,
             height: 4,
             borderRadius: 2,
-            backgroundColor: "#ffd700",
+            backgroundColor: color,  // 🎨 Utilise la même couleur que l'icône
           }}
         />
       )}
@@ -168,6 +171,9 @@ function TabLayoutContent() {
   const { forceLogout } = usePremium();
   const { forceReset } = useFavorites();
   const [forceRefresh, setForceRefresh] = React.useState(0);
+  
+  // 🎨 NOUVEAU : Utiliser les couleurs thématiques pour la TabBar
+  const themeColors = useThemeColors();
 
   useEffect(() => {
     if (Platform.OS === "android") {
@@ -612,7 +618,11 @@ function TabLayoutContent() {
 
   return (
     <>
-      <StatusBar style="light" translucent backgroundColor="transparent" />
+      <StatusBar
+        barStyle="light-content"
+        translucent
+        backgroundColor="transparent"
+      />
       <Tabs
         screenOptions={{
           headerShown: false,
@@ -623,7 +633,7 @@ function TabLayoutContent() {
             right: 5,
             height: 70,
             borderRadius: 35,
-            backgroundColor: "rgba(25, 29, 43, 0.95)",
+            backgroundColor: themeColors.tabBar || "rgba(25, 29, 43, 0.95)",  // 🎨 Thématique
             borderTopWidth: 0,
             elevation: 8,
             shadowColor: "#000",
@@ -635,7 +645,7 @@ function TabLayoutContent() {
             shadowRadius: 12,
             paddingBottom: 0,
             borderWidth: 1,
-            borderColor: "rgba(255, 215, 0, 0.2)",
+            borderColor: themeColors.border || "rgba(255, 215, 0, 0.2)",  // 🎨 Thématique
             backdropFilter: "blur(10px)",
           },
           tabBarItemStyle: {
@@ -648,11 +658,15 @@ function TabLayoutContent() {
             justifyContent: "center",
             width: 70,
           },
-          tabBarActiveTintColor: "#ffd700",
-          tabBarInactiveTintColor: "rgba(255,255,255,0.6)",
+          tabBarActiveTintColor: themeColors.tabBarActive || "#ffd700",  // 🎨 Thématique
+          tabBarInactiveTintColor: themeColors.tabBarInactive || "rgba(255,255,255,0.6)",  // 🎨 Thématique
           tabBarShowLabel: false,
         }}
       >
+        {/* ═══════════════════════════════════════════════════ */}
+        {/* 🎯 ONGLETS VISIBLES DANS LA TABBAR (5 principaux) */}
+        {/* ═══════════════════════════════════════════════════ */}
+        
         <Tabs.Screen
           name="index"
           options={{
@@ -680,6 +694,19 @@ function TabLayoutContent() {
           }}
         />
         <Tabs.Screen
+          name="library"
+          options={{
+            tabBarIcon: ({ color, size, focused }) => (
+              <TabBarIcon
+                icon="bookshelf"
+                color={color}
+                size={size}
+                focused={focused}
+              />
+            ),
+          }}
+        />
+        <Tabs.Screen
           name="qibla"
           options={{
             tabBarIcon: ({ color, size, focused }) => (
@@ -693,11 +720,11 @@ function TabLayoutContent() {
           }}
         />
         <Tabs.Screen
-          name="mosques"
+          name="more"
           options={{
             tabBarIcon: ({ color, size, focused }) => (
               <TabBarIcon
-                icon="mosque"
+                icon="dots-grid"
                 color={color}
                 size={size}
                 focused={focused}
@@ -705,137 +732,91 @@ function TabLayoutContent() {
             ),
           }}
         />
-        <Tabs.Screen
-          name="tasbih"
-          options={{
-            tabBarIcon: ({ color, size, focused }) => (
-              <TabBarIcon
-                icon="counter"
-                color={color}
-                size={size}
-                focused={focused}
-              />
-            ),
-          }}
-        />
+
+        {/* ═══════════════════════════════════════════════════ */}
+        {/* 📚 PAGES BIBLIOTHÈQUE (accessibles via /library) */}
+        {/* ═══════════════════════════════════════════════════ */}
+        
         <Tabs.Screen
           name="quran"
           options={{
-            tabBarIcon: ({ color, size, focused }) => (
-              <TabBarIcon
-                icon="book-open-variant"
-                color={color}
-                size={size}
-                focused={focused}
-              />
-            ),
+            href: null, // Caché de la TabBar
           }}
         />
         <Tabs.Screen
           name="hadith"
           options={{
-            tabBarIcon: ({ color, size, focused }) => (
-              <TabBarIcon
-                icon="book-multiple"
-                color={color}
-                size={size}
-                focused={focused}
-              />
-            ),
+            href: null, // Caché de la TabBar
           }}
         />
         <Tabs.Screen
           name="dhikr"
           options={{
-            tabBarIcon: ({ color, size, focused }) => (
-              <TabBarIcon
-                icon="hand-heart"
-                color={color}
-                size={size}
-                focused={focused}
-              />
-            ),
+            href: null, // Caché de la TabBar
           }}
         />
         <Tabs.Screen
           name="asmaulhusna"
           options={{
-            tabBarIcon: ({ color, size, focused }) => (
-              <TabBarIcon
-                icon="star-circle"
-                color={color}
-                size={size}
-                focused={focused}
-              />
-            ),
+            href: null, // Caché de la TabBar
+          }}
+        />
+
+        {/* ═══════════════════════════════════════════════════ */}
+        {/* ➕ PAGES "PLUS" (accessibles via /more) */}
+        {/* ═══════════════════════════════════════════════════ */}
+        
+        <Tabs.Screen
+          name="mosques"
+          options={{
+            href: null, // Caché de la TabBar
+          }}
+        />
+        <Tabs.Screen
+          name="tasbih"
+          options={{
+            href: null, // Caché de la TabBar
           }}
         />
         <Tabs.Screen
           name="hijri"
           options={{
-            tabBarIcon: ({ color, size, focused }) => (
-              <TabBarIcon
-                icon="calendar"
-                color={color}
-                size={size}
-                focused={focused}
-              />
-            ),
+            href: null, // Caché de la TabBar
           }}
         />
         <Tabs.Screen
           name="prayerStatsPremium"
           options={{
-            tabBarIcon: ({ color, size, focused }) => (
-              <TabBarIcon
-                icon="chart-bar"
-                color={color}
-                size={size}
-                focused={focused}
-              />
-            ),
+            href: null, // Caché de la TabBar
           }}
         />
         <Tabs.Screen
           name="settings"
           options={{
-            tabBarIcon: ({ color, size, focused }) => (
-              <TabBarIcon
-                icon="cog"
-                color={color}
-                size={size}
-                focused={focused}
-              />
-            ),
+            href: null, // Caché de la TabBar
           }}
         />
         <Tabs.Screen
           name="about"
           options={{
-            tabBarIcon: ({ color, size, focused }) => (
-              <TabBarIcon
-                icon="information"
-                color={color}
-                size={size}
-                focused={focused}
-              />
-            ),
+            href: null, // Caché de la TabBar
           }}
         />
+        {/* ═══════════════════════════════════════════════════ */}
+        {/* 🐛 DEBUG (complètement désactivé) */}
+        {/* ═══════════════════════════════════════════════════ */}
+        
         <Tabs.Screen
           name="debugNotifications"
           options={{
-            // DEBUG: onglet visible pour test iOS (À RECACHER AVANT PROD)
-            tabBarIcon: ({ color, size, focused }) => (
-              <TabBarIcon
-                icon="bug"
-                color={color}
-                size={size}
-                focused={focused}
-              />
-            ),
+            href: null, // Complètement caché et désactivé
           }}
         />
+
+        {/* ═══════════════════════════════════════════════════ */}
+        {/* 🔒 PAGES CACHÉES (accessibles par navigation) */}
+        {/* ═══════════════════════════════════════════════════ */}
+        
         {/* Écran favoris accessible par navigation (pas visible dans la tab bar) */}
         <Tabs.Screen
           name="favorites"

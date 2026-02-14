@@ -95,7 +95,7 @@ const LearningSection = ({
 }: {
   colors: any;
   overlayTextColor: string;
-  currentTheme: "light" | "dark";
+  currentTheme: "light" | "dark" | "morning" | "sunset";
 }) => {
   const { t, i18n } = useTranslation();
   const [expandedSection, setExpandedSection] = useState<string | null>(null);
@@ -147,7 +147,7 @@ const LearningSection = ({
           <MaterialCommunityIcons
             name={isExpanded ? "chevron-up" : "chevron-down"}
             size={24}
-            color={currentTheme === "light" ? colors.primary : "#4ECDC4"}
+            color={colors.primary} // 🌅 Utilise la couleur du thème actif
           />
         </TouchableOpacity>
 
@@ -166,7 +166,7 @@ const LearningSection = ({
         <MaterialCommunityIcons
           name="school"
           size={28}
-          color={currentTheme === "light" ? colors.primary : "#FFD700"}
+          color={colors.primary} // 🌅 Utilise la couleur du thème actif
         />
         <Text style={learningStyles.sectionTitle}>{t("learn_to_pray")}</Text>
       </View>
@@ -991,7 +991,7 @@ export default function PrayerScreen() {
               <MaterialCommunityIcons
                 name="bell-ring-outline"
                 size={24}
-                color="#4ECDC4"
+                color={colors.primary} // 🌅 Utilise la couleur du thème actif
               />
               <Text style={styles.nextPrayerTitle}>{t("next_prayer")}</Text>
             </View>
@@ -1017,7 +1017,7 @@ export default function PrayerScreen() {
               <MaterialCommunityIcons
                 name="clock-outline"
                 size={24}
-                color="#4ECDC4"
+                color={colors.primary} // 🌅 Utilise la couleur du thème actif
               />
               <Text style={styles.todayPrayersTitle}>{t("today_prayers")}</Text>
             </View>
@@ -1081,7 +1081,7 @@ export default function PrayerScreen() {
                             <MaterialCommunityIcons
                               name={isMuted ? "volume-off" : "volume-high"}
                               size={20}
-                              color={isMuted ? "#ff6b6b" : "#4ECDC4"}
+                              color={isMuted ? colors.error : colors.primary} // 🌅 Utilise les couleurs du thème actif
                             />
                           </TouchableOpacity>
                         )}
@@ -1090,7 +1090,7 @@ export default function PrayerScreen() {
                           <MaterialCommunityIcons
                             name="check-circle"
                             size={16}
-                            color="#4ECDC4"
+                            color={colors.primary} // 🌅 Utilise la couleur du thème actif
                             style={styles.prayerItemCheck}
                           />
                         )}
@@ -1165,10 +1165,11 @@ const getStyles = (
   colors: any,
   overlayTextColor: string,
   overlayIconColor: string,
-  currentTheme: "light" | "dark",
+  currentTheme: "light" | "dark" | "morning" | "sunset",
   universalLayout: any // 🚀 NOUVEAU : Layout universel pour tous les appareils Samsung
-) =>
-  StyleSheet.create({
+) => {
+  // 🆕 Les couleurs sont maintenant gérées directement via colors du thème actif
+  return StyleSheet.create({
     background: {
       flex: 1,
       // 🔧 CORRECTION : Étendre l'image de fond jusqu'en bas pour masquer le fond blanc
@@ -1200,15 +1201,13 @@ const getStyles = (
       marginTop: 40,
     },
     nextPrayerCard: {
-      backgroundColor:
-        currentTheme === "light" ? colors.cardBG : "rgba(0, 0, 0, 0.5)",
+      backgroundColor: colors.cardBG, // 🌅 Utilise la couleur du thème actif
       borderRadius: 16,
       padding: 16,
       marginBottom: 16,
       borderWidth: 1,
-      borderColor:
-        currentTheme === "light" ? colors.border : "rgba(78, 205, 196, 0.3)",
-      shadowColor: currentTheme === "light" ? colors.shadow : "#4ECDC4",
+      borderColor: colors.border, // 🌅 Utilise la couleur du thème actif
+      shadowColor: colors.shadow, // 🌅 Utilise la couleur du thème actif
       shadowOffset: { width: 0, height: 4 },
       shadowOpacity: 0.3,
       shadowRadius: 10,
@@ -1221,7 +1220,7 @@ const getStyles = (
     },
     nextPrayerTitle: {
       fontSize: 18,
-      color: currentTheme === "light" ? colors.primary : "#4ECDC4",
+      color: colors.primary, // 🌅 Utilise la couleur du thème actif
       marginLeft: 8,
       fontWeight: "600",
     },
@@ -1236,19 +1235,17 @@ const getStyles = (
     },
     timeUntil: {
       fontSize: 36,
-      color: currentTheme === "light" ? colors.primary : "#4ECDC4",
+      color: colors.primary, // 🌅 Utilise la couleur du thème actif
       fontWeight: "bold",
     },
     todayPrayersCard: {
-      backgroundColor:
-        currentTheme === "light" ? colors.cardBG : "rgba(0, 0, 0, 0.5)",
+      backgroundColor: colors.cardBG, // 🌅 Utilise la couleur du thème actif
       borderRadius: 16,
       padding: 16,
       marginBottom: 16,
       borderWidth: 1,
-      borderColor:
-        currentTheme === "light" ? colors.border : "rgba(78, 205, 196, 0.3)",
-      shadowColor: currentTheme === "light" ? colors.shadow : "#4ECDC4",
+      borderColor: colors.border, // 🌅 Utilise la couleur du thème actif
+      shadowColor: colors.shadow, // 🌅 Utilise la couleur du thème actif
       shadowOffset: { width: 0, height: 4 },
       shadowOpacity: 0.3,
       shadowRadius: 10,
@@ -1261,7 +1258,7 @@ const getStyles = (
     },
     todayPrayersTitle: {
       fontSize: 18,
-      color: currentTheme === "light" ? colors.primary : "#4ECDC4",
+      color: colors.primary, // 🌅 Utilise la couleur du thème actif
       marginLeft: 8,
       fontWeight: "600",
     },
@@ -1275,8 +1272,7 @@ const getStyles = (
         : Math.max(universalLayout.spacing.sm, 12),
     },
     prayerItem: {
-      backgroundColor:
-        currentTheme === "light" ? colors.surface : "rgba(78, 205, 196, 0.1)",
+      backgroundColor: colors.surface, // 🌅 Utilise la couleur du thème actif
       borderRadius: 12,
       // 🚀 RESPONSIVE : Padding adaptatif pour tous les appareils Samsung
       padding: universalLayout.isSmallScreen
@@ -1317,15 +1313,15 @@ const getStyles = (
       fontSize: universalLayout.isSmallScreen
         ? Math.max(universalLayout.fontSize.sm, 14)
         : Math.max(universalLayout.fontSize.md, 16),
-      color: currentTheme === "light" ? colors.primary : "#4ECDC4",
+      color: colors.primary, // 🌅 Utilise la couleur du thème actif
       fontWeight: "600",
     },
     prayerItemTextPassed: {
-      color: currentTheme === "light" ? colors.primary : "#4ECDC4",
+      color: colors.primary, // 🌅 Utilise la couleur du thème actif
       opacity: 0.8,
     },
     nextPrayerItemText: {
-      color: currentTheme === "light" ? colors.primary : "#4ECDC4",
+      color: colors.primary, // 🌅 Utilise la couleur du thème actif
       fontWeight: "bold",
     },
     prayerItemCheck: {
@@ -1348,14 +1344,12 @@ const getStyles = (
       padding: 20,
     },
     loadingCard: {
-      backgroundColor:
-        currentTheme === "light" ? colors.cardBG : "rgba(0, 0, 0, 0.6)",
+      backgroundColor: colors.cardBG, // 🌅 Utilise la couleur du thème actif
       padding: 30,
       borderRadius: 20,
       alignItems: "center",
       borderWidth: 1,
-      borderColor:
-        currentTheme === "light" ? colors.border : "rgba(255, 255, 255, 0.1)",
+      borderColor: colors.border, // 🌅 Utilise la couleur du thème actif
     },
     loadingText: {
       color: overlayTextColor,
@@ -1364,14 +1358,12 @@ const getStyles = (
       marginTop: 15,
     },
     setupCard: {
-      backgroundColor:
-        currentTheme === "light" ? colors.cardBG : "rgba(0, 0, 0, 0.6)",
+      backgroundColor: colors.cardBG, // 🌅 Utilise la couleur du thème actif
       padding: 30,
       borderRadius: 20,
       alignItems: "center",
       borderWidth: 1,
-      borderColor:
-        currentTheme === "light" ? colors.border : "rgba(255, 255, 255, 0.1)",
+      borderColor: colors.border, // 🌅 Utilise la couleur du thème actif
       width: "100%",
       maxWidth: 320,
     },
@@ -1387,10 +1379,7 @@ const getStyles = (
     },
     setupSubtitle: {
       fontSize: 16,
-      color:
-        currentTheme === "light"
-          ? colors.textSecondary
-          : "rgba(255, 255, 255, 0.8)",
+      color: colors.textSecondary, // 🌅 Utilise la couleur du thème actif
       textAlign: "center",
       marginBottom: 25,
       lineHeight: 22,
@@ -1436,7 +1425,7 @@ const getStyles = (
       marginLeft: 8,
     },
     errorCard: {
-      backgroundColor: "rgba(0, 0, 0, 0.6)",
+      backgroundColor: colors.cardBG, // 🌅 Utilise la couleur du thème actif
       padding: 30,
       borderRadius: 20,
       alignItems: "center",
@@ -1456,21 +1445,23 @@ const getStyles = (
       textAlign: "center",
     },
     errorText: {
-      color: "rgba(255, 255, 255, 0.8)",
+      color: colors.textSecondary, // 🌅 Utilise la couleur du thème actif
       fontSize: 16,
       textAlign: "center",
       marginBottom: 25,
       lineHeight: 22,
     },
   });
+};
 
 // Styles pour la section d'apprentissage (adaptatifs)
 const getLearningStyles = (
   colors: any,
   overlayTextColor: string,
-  currentTheme: "light" | "dark"
-) =>
-  StyleSheet.create({
+  currentTheme: "light" | "dark" | "morning" | "sunset"
+) => {
+  // 🆕 Les couleurs sont maintenant gérées directement via colors du thème actif
+  return StyleSheet.create({
     container: {
       marginBottom: 30,
     },
@@ -1483,19 +1474,17 @@ const getLearningStyles = (
     sectionTitle: {
       fontSize: 24,
       fontWeight: "bold",
-      color: currentTheme === "light" ? colors.primary : "#FFD700",
+      color: colors.primary, // 🌅 Utilise la couleur du thème actif
       marginLeft: 12,
       textAlign: "center",
     },
     card: {
-      backgroundColor:
-        currentTheme === "light" ? colors.cardBG : "rgba(0, 0, 0, 0.6)",
+      backgroundColor: colors.cardBG, // 🌅 Utilise la couleur du thème actif
       borderRadius: 16,
       marginBottom: 16,
       borderWidth: 1,
-      borderColor:
-        currentTheme === "light" ? colors.border : "rgba(78, 205, 196, 0.3)",
-      shadowColor: currentTheme === "light" ? colors.shadow : "#4ECDC4",
+      borderColor: colors.border, // 🌅 Utilise la couleur du thème actif
+      shadowColor: colors.shadow, // 🌅 Utilise la couleur du thème actif
       shadowOffset: { width: 0, height: 4 },
       shadowOpacity: 0.3,
       shadowRadius: 10,
@@ -1534,13 +1523,11 @@ const getLearningStyles = (
     stepContainer: {
       marginTop: 8,
       marginBottom: 16,
-      backgroundColor:
-        currentTheme === "light" ? colors.surface : "rgba(255, 255, 255, 0.05)",
+      backgroundColor: colors.surface, // 🌅 Utilise la couleur du thème actif
       borderRadius: 12,
       padding: 12,
       borderWidth: 1,
-      borderColor:
-        currentTheme === "light" ? colors.border : "rgba(78, 205, 196, 0.2)",
+      borderColor: colors.border, // 🌅 Utilise la couleur du thème actif
     },
     stepHeader: {
       flexDirection: "row",
@@ -1551,7 +1538,7 @@ const getLearningStyles = (
     stepTitle: {
       fontSize: 16,
       fontWeight: "600",
-      color: currentTheme === "light" ? colors.primary : "#4ECDC4",
+      color: colors.primary, // 🌅 Utilise la couleur du thème actif
       marginBottom: 12,
     },
     step: {
@@ -1559,13 +1546,11 @@ const getLearningStyles = (
       marginBottom: 16,
       alignItems: "flex-start",
       justifyContent: "space-between",
-      backgroundColor:
-        currentTheme === "light" ? colors.surface : "rgba(255, 255, 255, 0.05)",
+      backgroundColor: colors.surface, // 🌅 Utilise la couleur du thème actif
       borderRadius: 12,
       padding: 12,
       borderWidth: 1,
-      borderColor:
-        currentTheme === "light" ? colors.border : "rgba(78, 205, 196, 0.2)",
+      borderColor: colors.border, // 🌅 Utilise la couleur du thème actif
     },
     stepContent: {
       flexDirection: "row",
@@ -1576,7 +1561,7 @@ const getLearningStyles = (
     stepNumber: {
       fontSize: 16,
       fontWeight: "600",
-      color: currentTheme === "light" ? colors.primary : "#FFD700",
+      color: colors.primary, // 🌅 Utilise la couleur du thème actif
       marginRight: 8,
       minWidth: 20,
     },
@@ -1594,53 +1579,46 @@ const getLearningStyles = (
       height: 80,
       borderRadius: 8,
       borderWidth: 2,
-      borderColor:
-        currentTheme === "light" ? colors.border : "rgba(78, 205, 196, 0.4)",
+      borderColor: colors.border, // 🌅 Utilise la couleur du thème actif
     },
     imagePlaceholder: {
-      backgroundColor:
-        currentTheme === "light" ? colors.surface : "rgba(78, 205, 196, 0.1)",
+      backgroundColor: colors.surface, // 🌅 Utilise la couleur du thème actif
       borderRadius: 12,
       padding: 20,
       alignItems: "center",
       marginTop: 16,
       borderWidth: 1,
-      borderColor:
-        currentTheme === "light" ? colors.border : "rgba(78, 205, 196, 0.3)",
+      borderColor: colors.border, // 🌅 Utilise la couleur du thème actif
       borderStyle: "dashed",
     },
     imagePlaceholderText: {
       fontSize: 14,
-      color: currentTheme === "light" ? colors.primary : "#4ECDC4",
+      color: colors.primary, // 🌅 Utilise la couleur du thème actif
       marginTop: 8,
       fontStyle: "italic",
     },
 
     footer: {
-      backgroundColor:
-        currentTheme === "light" ? colors.surface : "rgba(255, 215, 0, 0.1)",
+      backgroundColor: colors.surface, // 🌅 Utilise la couleur du thème actif
       borderRadius: 12,
       padding: 16,
       marginTop: 8,
       borderWidth: 1,
-      borderColor:
-        currentTheme === "light" ? colors.border : "rgba(255, 215, 0, 0.3)",
+      borderColor: colors.border, // 🌅 Utilise la couleur du thème actif
     },
     footerText: {
       fontSize: 14,
-      color: currentTheme === "light" ? colors.primary : "#FFD700",
+      color: colors.primary, // 🌅 Utilise la couleur du thème actif
       textAlign: "center",
       fontStyle: "italic",
     },
     invocationContainer: {
       marginTop: 8,
-      backgroundColor:
-        currentTheme === "light" ? colors.surface : "rgba(76, 99, 210, 0.1)",
+      backgroundColor: colors.surface, // 🌅 Utilise la couleur du thème actif
       borderRadius: 8,
       padding: 12,
       borderWidth: 1,
-      borderColor:
-        currentTheme === "light" ? colors.border : "rgba(76, 99, 210, 0.3)",
+      borderColor: colors.border, // 🌅 Utilise la couleur du thème actif
     },
     invocationArabic: {
       fontSize: 20,
@@ -1652,7 +1630,7 @@ const getLearningStyles = (
     },
     invocationPhonetic: {
       fontSize: 16,
-      color: currentTheme === "light" ? colors.primary : "#4ECDC4",
+      color: colors.primary, // 🌅 Utilise la couleur du thème actif
       textAlign: "center",
       marginBottom: 4,
       fontStyle: "italic",
@@ -1660,31 +1638,24 @@ const getLearningStyles = (
     },
     invocationTranslation: {
       fontSize: 14,
-      color:
-        currentTheme === "light"
-          ? colors.textSecondary
-          : "rgba(255, 255, 255, 0.8)",
+      color: colors.textSecondary, // 🌅 Utilise la couleur du thème actif
       textAlign: "center",
       fontStyle: "italic",
     },
     stepDetailText: {
       fontSize: 12,
-      color:
-        currentTheme === "light"
-          ? colors.textSecondary
-          : "rgba(255, 255, 255, 0.7)",
+      color: colors.textSecondary, // 🌅 Utilise la couleur du thème actif
       lineHeight: 18,
       marginTop: 4,
       fontStyle: "italic",
     },
     invocationContainerFull: {
-      backgroundColor:
-        currentTheme === "light" ? colors.surface : "rgba(76, 99, 210, 0.1)",
+      backgroundColor: colors.surface, // 🌅 Utilise la couleur du thème actif
       borderRadius: 8,
       padding: 12,
       borderWidth: 1,
-      borderColor:
-        currentTheme === "light" ? colors.border : "rgba(76, 99, 210, 0.3)",
+      borderColor: colors.border, // 🌅 Utilise la couleur du thème actif
       width: "100%",
     },
   });
+};

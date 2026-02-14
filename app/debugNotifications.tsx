@@ -20,8 +20,8 @@ import { usePremium } from "../contexts/PremiumContext";
 
 export default function DebugNotificationsScreen() {
   const router = useRouter();
-  // 🚧 Page désactivée pour la production (à réactiver seulement pour le debug local)
-  const isDebugAllowed = true;
+  // 🚧 Page complètement désactivée
+  const isDebugAllowed = false;
   const [debugInfo, setDebugInfo] = useState<any>(null);
   const [loading, setLoading] = useState(false);
   const [logs, setLogs] = useState<string[]>([]);
@@ -71,7 +71,9 @@ export default function DebugNotificationsScreen() {
   const loadBackgroundLogs = useCallback(async () => {
     try {
       // Charger la dernière auto-reprog depuis HomeScreen
-      const { default: AsyncStorage } = await import("@react-native-async-storage/async-storage");
+      const { default: AsyncStorage } = await import(
+        "@react-native-async-storage/async-storage"
+      );
       const lastAuto = await AsyncStorage.getItem("last_notif_reprogram_ios");
       if (lastAuto) {
         setLastAutoReprog(new Date(parseInt(lastAuto)).toLocaleString("fr-FR"));
@@ -530,7 +532,9 @@ export default function DebugNotificationsScreen() {
             {NativeModules.AdhanModule ? "✅ PRÉSENT" : "❌ ABSENT"}
           </Text>
           <Text style={styles.status}>Plateforme: {Platform.OS}</Text>
-          <Text style={[styles.status, { color: "#2196F3", fontWeight: "bold" }]}>
+          <Text
+            style={[styles.status, { color: "#2196F3", fontWeight: "bold" }]}
+          >
             Dernière Auto-Reprog: {lastAutoReprog}
           </Text>
         </View>

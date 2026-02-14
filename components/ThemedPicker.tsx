@@ -18,7 +18,7 @@ interface ThemedPickerProps {
     value: string;
   }[];
   selectedValue: string;
-  onValueChange: (value: string) => void;
+  onValueChange: (value: string) => void | boolean; // 🔧 Peut retourner boolean pour contrôler la fermeture
   onClose: () => void;
 }
 
@@ -140,8 +140,11 @@ const ThemedPicker: React.FC<ThemedPickerProps> = ({
       <TouchableOpacity
         style={[styles.item, isSelected && styles.selectedItem]}
         onPress={() => {
-          onValueChange(item.value);
-          onClose();
+          const result = onValueChange(item.value);
+          // 🔧 Ne fermer que si le résultat est true ou undefined (pour rétrocompatibilité)
+          if (result !== false) {
+            onClose();
+          }
         }}
       >
         <Text style={[styles.itemText, isSelected && styles.selectedItemText]}>

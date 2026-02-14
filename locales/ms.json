@@ -33,5 +33,13 @@
   "welcome_personalization_confirm": "Sahkan",
   "welcome_personalization_skip": "Langkau",
   "ios_safety_notif_title": "Kesinambungan Peringatan",
-  "ios_safety_notif_body": "Sila buka aplikasi untuk terus menerima peringatan solat anda. Semoga Allah menerima amal ibadah anda."
+  "ios_safety_notif_body": "Sila buka aplikasi untuk terus menerima peringatan solat anda. Semoga Allah menerima amal ibadah anda.",
+  "dark_mode": "Gelap",
+  "light_mode": "Terang",
+  "morning_mode": "Pagi",
+  "sunset_mode": "Matahari terbenam",
+  "theme": "Tema",
+  "premium_required": "Premium Diperlukan",
+  "premium_themes_message": "Tema Pagi dan Matahari terbenam dikhaskan untuk ahli Premium.",
+  "go_premium": "Pergi ke Premium"
 }

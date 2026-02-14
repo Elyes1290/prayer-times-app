@@ -252,5 +252,13 @@
   "welcome_personalization_confirm": "Konfirmasi",
   "welcome_personalization_skip": "Lewati",
   "ios_safety_notif_title": "Keberlanjutan Pengingat",
-  "ios_safety_notif_body": "Silakan buka aplikasi untuk terus menerima pengingat shalat Anda. Semoga Allah menerima amal ibadah Anda."
+  "ios_safety_notif_body": "Silakan buka aplikasi untuk terus menerima pengingat shalat Anda. Semoga Allah menerima amal ibadah Anda.",
+  "dark_mode": "Gelap",
+  "light_mode": "Terang",
+  "morning_mode": "Pagi",
+  "sunset_mode": "Matahari terbenam",
+  "theme": "Tema",
+  "premium_required": "Premium Diperlukan",
+  "premium_themes_message": "Tema Pagi dan Matahari terbenam dicadangkan untuk anggota Premium.",
+  "go_premium": "Beralih ke Premium"
 }

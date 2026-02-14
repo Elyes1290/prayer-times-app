@@ -1,34 +1,59 @@
 /**
- * Hook pour gérer les assets selon le thème (jour/nuit)
+ * Hook pour gérer les assets selon le thème (jour/nuit/matin/maghrib)
  * Images, couleurs et styles adaptatifs
  */
 
 import { useContext } from "react";
 import { useColorScheme } from "react-native";
 import { Colors } from "../constants/Colors";
-import { SettingsContext } from "../contexts/SettingsContext";
+import { SettingsContext, BackgroundImageType } from "../contexts/SettingsContext";
 
-// Images de fond selon le thème
-const backgroundImages = {
-  light: require("../assets/images/prayer-bg-jour.png"),
-  dark: require("../assets/images/prayer-bg.png"),
+// 🖼️ NOUVEAU : Images de fond selon le thème ET le type d'image (premium)
+// 3 types d'images : prophet (Mosquée du Prophète), makka (Makka), alquds (Al-Quds)
+// 📁 Images organisées dans assets/images/background/
+const backgroundImages: Record<
+  BackgroundImageType,
+  Record<"light" | "dark" | "morning" | "sunset", any>
+> = {
+  prophet: {
+    light: require("../assets/images/background/prayer-bg-jour.png"),
+    dark: require("../assets/images/background/prayer-bg.png"),
+    morning: require("../assets/images/background/prayer-bg-matin.png"),
+    sunset: require("../assets/images/background/prayer-bg-maghrib.png"),
+  },
+  makka: {
+    light: require("../assets/images/background/makka-bg-jour.png"),
+    dark: require("../assets/images/background/makka-bg.png"),
+    morning: require("../assets/images/background/makka-bg-matin.png"),
+    sunset: require("../assets/images/background/makka-bg-maghrib.png"),
+  },
+  alquds: {
+    light: require("../assets/images/background/alquds-bg-jour.png"),
+    dark: require("../assets/images/background/alquds-bg.png"),
+    morning: require("../assets/images/background/alquds-bg-matin.png"),
+    sunset: require("../assets/images/background/alquds-bg-maghrib.png"),
+  },
 };
 
 export function useThemeAssets() {
   const systemTheme = useColorScheme() ?? "light";
   const settingsContext = useContext(SettingsContext);
 
-  // Détermine le thème actuel
-  let currentTheme: "light" | "dark";
+  // Détermine le thème actuel (4 thèmes possibles)
+  let currentTheme: "light" | "dark" | "morning" | "sunset";
   if (settingsContext && settingsContext.currentTheme) {
     currentTheme = settingsContext.currentTheme;
   } else {
     currentTheme = systemTheme;
   }
 
+  // 🖼️ NOUVEAU : Obtenir le type d'image de fond (premium)
+  const backgroundImageType: BackgroundImageType = 
+    settingsContext?.backgroundImageType || "prophet";
+
   return {
-    // Image de fond selon le thème
-    backgroundImage: backgroundImages[currentTheme],
+    // Image de fond selon le thème ET le type d'image (premium)
+    backgroundImage: backgroundImages[backgroundImageType][currentTheme],
 
     // Couleurs du thème actuel
     colors: Colors[currentTheme],
@@ -37,8 +62,10 @@ export function useThemeAssets() {
     theme: currentTheme,
 
     // Helper pour vérifier le thème
-    isLight: currentTheme === "light",
-    isDark: currentTheme === "dark",
+    isLight: currentTheme === "light" || currentTheme === "morning", // 🆕 morning est aussi un thème clair
+    isDark: currentTheme === "dark" || currentTheme === "sunset", // 🆕 sunset est aussi un thème sombre
+    isMorning: currentTheme === "morning", // 🆕 Helper pour thème matin
+    isSunset: currentTheme === "sunset", // 🆕 Helper pour thème maghrib
   };
 }
 
@@ -54,8 +81,12 @@ export function useThemeColors() {
   return colors;
 }
 
-// Hook pour obtenir le thème actuel
-export function useCurrentTheme(): "light" | "dark" {
+// 🔧 DÉPRÉCIÉ : Utiliser useCurrentTheme depuis @/hooks/useThemeColor à la place
+// Ce hook est conservé pour la compatibilité mais redirige vers le hook principal
+export function useCurrentTheme(): "light" | "dark" | "morning" | "sunset" {
   const { theme } = useThemeAssets();
   return theme;
 }
+
+// 🆕 NOTE : Il est recommandé d'utiliser useCurrentTheme depuis @/hooks/useThemeColor
+// import { useCurrentTheme } from "@/hooks/useThemeColor";

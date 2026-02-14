@@ -5,6 +5,8 @@ import { useThemeColor } from "@/hooks/useThemeColor";
 export type ThemedTextProps = TextProps & {
   lightColor?: string;
   darkColor?: string;
+  morningColor?: string;   // 🌅 NOUVEAU : Support thème matin
+  sunsetColor?: string;    // 🌆 NOUVEAU : Support thème crépuscule
   type?: "default" | "title" | "defaultSemiBold" | "subtitle" | "link";
 };
 
@@ -12,11 +14,21 @@ export function ThemedText({
   style,
   lightColor,
   darkColor,
+  morningColor,
+  sunsetColor,
   type = "default",
   testID,
   ...rest
 }: ThemedTextProps) {
-  const color = useThemeColor({ light: lightColor, dark: darkColor }, "text");
+  const color = useThemeColor(
+    { 
+      light: lightColor, 
+      dark: darkColor,
+      morning: morningColor,
+      sunset: sunsetColor 
+    }, 
+    "text"
+  );
 
   return (
     <Text

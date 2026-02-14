@@ -16,19 +16,20 @@ export default function CachePremiumPromotion({
 }: CachePremiumPromotionProps) {
   const colors = useThemeColors();
   const currentTheme = useCurrentTheme();
+  const isLightTheme = currentTheme === "light" || currentTheme === "morning";
 
   if (!visible) return null;
 
   const styles = StyleSheet.create({
     container: {
       backgroundColor:
-        currentTheme === "light" ? colors.cardBG : "rgba(0, 0, 0, 0.8)",
+        isLightTheme ? colors.cardBG : "rgba(0, 0, 0, 0.8)",
       borderRadius: 12,
       padding: 16,
       marginVertical: 8,
       borderWidth: 1,
       borderColor:
-        currentTheme === "light" ? colors.border : "rgba(255, 255, 255, 0.1)",
+        isLightTheme ? colors.border : "rgba(255, 255, 255, 0.1)",
     },
     header: {
       flexDirection: "row",

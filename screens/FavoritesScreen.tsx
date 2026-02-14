@@ -38,6 +38,7 @@ const FavoritesScreen: React.FC = () => {
   const colors = useThemeColors();
   const overlayTextColor = useOverlayTextColor();
   const currentTheme = useCurrentTheme();
+  const isLightTheme = currentTheme === "light" || currentTheme === "morning";
 
   const {
     favorites,
@@ -216,7 +217,7 @@ const FavoritesScreen: React.FC = () => {
             <MaterialCommunityIcons
               name={getIconForType(item.type) as any}
               size={20}
-              color="#FFD700"
+              color={colors.islamicGold} // 🌅 Utilise la couleur du thème actif
             />
             <Text style={styles.cardType}>{getTypeLabel(item.type, t)}</Text>
           </View>
@@ -229,7 +230,7 @@ const FavoritesScreen: React.FC = () => {
               <MaterialCommunityIcons
                 name="share-variant"
                 size={20}
-                color={currentTheme === "light" ? colors.text : "#fff"}
+                color={isLightTheme ? colors.text : "#fff"}
               />
             </TouchableOpacity>
 
@@ -261,7 +262,7 @@ const FavoritesScreen: React.FC = () => {
             <MaterialCommunityIcons
               name="note-text"
               size={16}
-              color="#FFD700"
+              color={colors.islamicGold} // 🌅 Utilise la couleur du thème actif
             />
             <Text style={styles.noteText}>{item.note}</Text>
           </View>
@@ -461,7 +462,7 @@ const FavoritesScreen: React.FC = () => {
                 color={
                   selectedFilter === item.key
                     ? "#000"
-                    : currentTheme === "light"
+                    : isLightTheme
                     ? colors.text
                     : "#fff"
                 }
@@ -525,9 +526,10 @@ const FavoritesScreen: React.FC = () => {
 // Fonctions utilitaires
 const getGradientForType = (
   type: FavoriteType,
-  currentTheme: "light" | "dark"
+  currentTheme: "light" | "dark" | "morning" | "sunset"
 ): [string, string] => {
-  if (currentTheme === "light") {
+  const isLightTheme = currentTheme === "light" || currentTheme === "morning";
+  if (isLightTheme) {
     switch (type) {
       case "quran_verse":
         return ["rgba(78,205,196,0.15)", "rgba(78,205,196,0.05)"];
@@ -598,9 +600,10 @@ const getTypeLabel = (type: FavoriteType, t: any): string => {
 const getStyles = (
   colors: any,
   overlayTextColor: string,
-  currentTheme: "light" | "dark"
-) =>
-  StyleSheet.create({
+  currentTheme: "light" | "dark" | "morning" | "sunset"
+) => {
+  const isLightTheme = currentTheme === "light" || currentTheme === "morning";
+  return StyleSheet.create({
     container: {
       flex: 1,
     },
@@ -612,7 +615,7 @@ const getStyles = (
       paddingVertical: 15,
       borderBottomWidth: 1,
       borderBottomColor:
-        currentTheme === "light" ? colors.border : "rgba(255, 255, 255, 0.1)",
+        isLightTheme ? colors.border : "rgba(255, 255, 255, 0.1)",
     },
     headerLeft: {
       flexDirection: "row",
@@ -647,17 +650,17 @@ const getStyles = (
       marginRight: 12,
       borderRadius: 20,
       backgroundColor:
-        currentTheme === "light" ? colors.surface : "rgba(255, 255, 255, 0.1)",
+        isLightTheme ? colors.surface : "rgba(255, 255, 255, 0.1)",
       borderWidth: 1,
       borderColor:
-        currentTheme === "light" ? colors.border : "rgba(255, 255, 255, 0.2)",
+        isLightTheme ? colors.border : "rgba(255, 255, 255, 0.2)",
     },
     filterButtonActive: {
-      backgroundColor: "#FFD700",
-      borderColor: "#FFD700",
+      backgroundColor: colors.islamicGold, // 🌅 Utilise la couleur du thème actif
+      borderColor: colors.islamicGold, // 🌅 Utilise la couleur du thème actif
     },
     filterText: {
-      color: currentTheme === "light" ? colors.text : "#fff",
+      color: isLightTheme ? colors.text : "#fff",
       fontSize: 14,
       fontWeight: "600",
       marginLeft: 6,
@@ -668,7 +671,7 @@ const getStyles = (
     countBadge: {
       marginLeft: 8,
       backgroundColor:
-        currentTheme === "light"
+        isLightTheme
           ? "rgba(0, 0, 0, 0.1)"
           : "rgba(255, 255, 255, 0.2)",
       borderRadius: 10,
@@ -681,7 +684,7 @@ const getStyles = (
       backgroundColor: "rgba(0, 0, 0, 0.2)",
     },
     countText: {
-      color: currentTheme === "light" ? colors.text : "#fff",
+      color: isLightTheme ? colors.text : "#fff",
       fontSize: 12,
       fontWeight: "700",
     },
@@ -706,7 +709,7 @@ const getStyles = (
       borderRadius: 16,
       borderWidth: 1,
       borderColor:
-        currentTheme === "light" ? colors.border : "rgba(255, 255, 255, 0.1)",
+        isLightTheme ? colors.border : "rgba(255, 255, 255, 0.1)",
     },
     cardHeader: {
       flexDirection: "row",
@@ -719,7 +722,7 @@ const getStyles = (
       alignItems: "center",
     },
     cardType: {
-      color: "#FFD700",
+      color: colors.islamicGold, // 🌅 Utilise la couleur du thème actif
       fontSize: 14,
       fontWeight: "600",
       marginLeft: 8,
@@ -732,7 +735,7 @@ const getStyles = (
       marginLeft: 8,
       borderRadius: 8,
       backgroundColor:
-        currentTheme === "light" ? colors.surface : "rgba(255, 255, 255, 0.1)",
+        isLightTheme ? colors.surface : "rgba(255, 255, 255, 0.1)",
     },
     cardContent: {
       marginBottom: 12,
@@ -747,7 +750,7 @@ const getStyles = (
     },
     transliterationText: {
       fontSize: 16,
-      color: "#FFD700",
+      color: colors.islamicGold, // 🌅 Utilise la couleur du thème actif
       fontStyle: "italic",
       textAlign: "center",
       marginBottom: 6,
@@ -755,7 +758,7 @@ const getStyles = (
     translationText: {
       fontSize: 16,
       color:
-        currentTheme === "light"
+        isLightTheme
           ? colors.textSecondary
           : "rgba(255, 255, 255, 0.9)",
       textAlign: "center",
@@ -765,7 +768,7 @@ const getStyles = (
     referenceText: {
       fontSize: 14,
       color:
-        currentTheme === "light"
+        isLightTheme
           ? colors.textTertiary
           : "rgba(255, 255, 255, 0.7)",
       textAlign: "center",
@@ -774,7 +777,7 @@ const getStyles = (
     dateAdded: {
       fontSize: 12,
       color:
-        currentTheme === "light"
+        isLightTheme
           ? colors.textTertiary
           : "rgba(255, 255, 255, 0.6)",
       textAlign: "right",
@@ -787,12 +790,12 @@ const getStyles = (
       backgroundColor: "rgba(255, 215, 0, 0.1)",
       borderRadius: 8,
       borderLeftWidth: 3,
-      borderLeftColor: "#FFD700",
+      borderLeftColor: colors.islamicGold, // 🌅 Utilise la couleur du thème actif
     },
     noteText: {
       flex: 1,
       color:
-        currentTheme === "light"
+        isLightTheme
           ? colors.textSecondary
           : "rgba(255, 255, 255, 0.9)",
       fontSize: 14,
@@ -815,7 +818,7 @@ const getStyles = (
     emptySubtitle: {
       fontSize: 16,
       color:
-        currentTheme === "light"
+        isLightTheme
           ? colors.textSecondary
           : "rgba(255, 255, 255, 0.7)",
       textAlign: "center",
@@ -829,7 +832,7 @@ const getStyles = (
     prophetStoryTitle: {
       fontSize: 16,
       fontWeight: "700",
-      color: currentTheme === "light" ? colors.text : "#fff",
+      color: isLightTheme ? colors.text : "#fff",
       marginBottom: 6,
       lineHeight: 22,
     },
@@ -837,7 +840,7 @@ const getStyles = (
       fontSize: 14,
       fontWeight: "600",
       color:
-        currentTheme === "light"
+        isLightTheme
           ? colors.textSecondary
           : "rgba(255, 255, 255, 0.8)",
       marginBottom: 8,
@@ -852,37 +855,38 @@ const getStyles = (
     },
     prophetStoryCategory: {
       fontSize: 12,
-      color: currentTheme === "light" ? "#2E8B57" : "#90EE90",
+      color: isLightTheme ? "#2E8B57" : "#90EE90",
       fontWeight: "600",
     },
     prophetStoryDifficulty: {
       fontSize: 12,
-      color: currentTheme === "light" ? "#FF6B6B" : "#FFB6C1",
+      color: isLightTheme ? "#FF6B6B" : "#FFB6C1",
       fontWeight: "600",
     },
     prophetStoryTime: {
       fontSize: 12,
-      color: currentTheme === "light" ? "#4ECDC4" : "#AFEEEE",
+      color: colors.primary, // 🌅 Utilise la couleur du thème actif
       fontWeight: "600",
     },
     prophetStoryPremium: {
       fontSize: 12,
-      color: "#FFD700",
+      color: colors.islamicGold, // 🌅 Utilise la couleur du thème actif
       fontWeight: "700",
     },
     prophetStoryAction: {
       fontSize: 13,
-      color: currentTheme === "light" ? "#007AFF" : "#40A9FF",
+      color: colors.info, // 🌅 Utilise la couleur du thème actif
       fontWeight: "600",
       fontStyle: "italic",
       textAlign: "center",
       paddingTop: 8,
       borderTopWidth: 1,
       borderTopColor:
-        currentTheme === "light"
+        isLightTheme
           ? "rgba(0, 0, 0, 0.1)"
           : "rgba(255, 255, 255, 0.2)",
     },
   });
+};
 
 export default FavoritesScreen;

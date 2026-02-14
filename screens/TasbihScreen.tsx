@@ -35,9 +35,10 @@ const dhikrList = [
 const getStyles = (
   colors: any,
   overlayTextColor: string,
-  currentTheme: "light" | "dark"
-) =>
-  StyleSheet.create({
+  currentTheme: "light" | "dark" | "morning" | "sunset"
+) => {
+  const isLightTheme = currentTheme === "light" || currentTheme === "morning";
+  return StyleSheet.create({
     background: {
       flex: 1,
       width: "100%",
@@ -59,8 +60,7 @@ const getStyles = (
       marginBottom: 15,
       textAlign: "center",
       color: overlayTextColor,
-      textShadowColor:
-        currentTheme === "light" ? colors.textShadow : "rgba(0,0,0,0.5)",
+      textShadowColor: isLightTheme ? colors.textShadow : "rgba(0,0,0,0.5)",
       textShadowOffset: { width: 1, height: 1 },
       textShadowRadius: 2,
     },
@@ -70,20 +70,17 @@ const getStyles = (
       padding: 15,
       borderRadius: 15,
       width: "100%",
-      backgroundColor:
-        currentTheme === "light" ? colors.cardBG : "rgba(0,0,0,0.3)",
+      backgroundColor: isLightTheme ? colors.cardBG : "rgba(0,0,0,0.3)",
       borderWidth: 1,
-      borderColor:
-        currentTheme === "light" ? colors.border : "rgba(255,215,0,0.3)",
+      borderColor: isLightTheme ? colors.border : "rgba(255,215,0,0.3)",
     },
     arabicText: {
       fontSize: Math.min(width * 0.07, 28),
-      color: currentTheme === "light" ? colors.primary : "#FFD700",
+      color: colors.primary, // 🌅 Utilise la couleur du thème actif
       fontWeight: "bold",
       marginBottom: 8,
       textAlign: "center",
-      textShadowColor:
-        currentTheme === "light" ? colors.textShadow : "rgba(0,0,0,0.3)",
+      textShadowColor: isLightTheme ? colors.textShadow : "rgba(0,0,0,0.3)",
       textShadowOffset: { width: 1, height: 1 },
       textShadowRadius: 2,
     },
@@ -102,21 +99,20 @@ const getStyles = (
       width: CIRCLE_SIZE,
       height: CIRCLE_SIZE,
       borderRadius: CIRCLE_SIZE / 2,
-      backgroundColor:
-        currentTheme === "light" ? colors.primary : colors.primary,
+      backgroundColor: isLightTheme ? colors.primary : colors.primary,
       justifyContent: "center",
       alignItems: "center",
       elevation: 8,
-      shadowColor: currentTheme === "light" ? colors.shadow : "#000",
+      shadowColor: isLightTheme ? colors.shadow : "#000",
       shadowOffset: { width: 0, height: 4 },
       shadowOpacity: 0.3,
       shadowRadius: 8,
       borderWidth: 3,
-      borderColor: currentTheme === "light" ? colors.surface : "#FFD700",
+      borderColor: colors.primary, // 🌅 Utilise la couleur du thème actif
     },
     countText: {
       fontWeight: "bold",
-      color: currentTheme === "light" ? "#FFFFFF" : "#FFFFFF",
+      color: isLightTheme ? "#FFFFFF" : "#FFFFFF",
       textShadowColor: "rgba(0,0,0,0.3)",
       textShadowOffset: { width: 1, height: 1 },
       textShadowRadius: 2,
@@ -127,10 +123,9 @@ const getStyles = (
       paddingHorizontal: 30,
       paddingVertical: 15,
       borderRadius: 25,
-      backgroundColor:
-        currentTheme === "light" ? colors.accent : colors.notification,
+      backgroundColor: isLightTheme ? colors.accent : colors.notification,
       elevation: 4,
-      shadowColor: currentTheme === "light" ? colors.shadow : "#000",
+      shadowColor: isLightTheme ? colors.shadow : "#000",
       shadowOffset: { width: 0, height: 2 },
       shadowOpacity: 0.2,
       shadowRadius: 4,
@@ -142,6 +137,7 @@ const getStyles = (
       color: "#FFFFFF",
     },
   });
+};
 
 const TasbihScreen = () => {
   const { colors } = useTheme();

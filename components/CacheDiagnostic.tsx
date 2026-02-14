@@ -25,6 +25,7 @@ export default function CacheDiagnostic({
 }: CacheDiagnosticProps) {
   const colors = useThemeColors();
   const currentTheme = useCurrentTheme();
+  const isLightTheme = currentTheme === "light" || currentTheme === "morning";
   const [cacheStats, setCacheStats] = useState<any>(null);
   const [preloadStats, setPreloadStats] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -115,7 +116,7 @@ export default function CacheDiagnostic({
     },
     modal: {
       backgroundColor:
-        currentTheme === "light" ? colors.cardBG : "rgba(0, 0, 0, 0.9)",
+        isLightTheme ? colors.cardBG : "rgba(0, 0, 0, 0.9)",
       borderRadius: 20,
       padding: 20,
       width: "100%",
@@ -123,7 +124,7 @@ export default function CacheDiagnostic({
       maxHeight: "80%",
       borderWidth: 1,
       borderColor:
-        currentTheme === "light" ? colors.border : "rgba(255, 255, 255, 0.1)",
+        isLightTheme ? colors.border : "rgba(255, 255, 255, 0.1)",
     },
     header: {
       flexDirection: "row",
@@ -160,7 +161,7 @@ export default function CacheDiagnostic({
       paddingVertical: 8,
       borderBottomWidth: 1,
       borderBottomColor:
-        currentTheme === "light" ? colors.border : "rgba(255, 255, 255, 0.1)",
+        isLightTheme ? colors.border : "rgba(255, 255, 255, 0.1)",
     },
     statLabel: {
       fontSize: 14,

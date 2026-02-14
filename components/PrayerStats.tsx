@@ -24,19 +24,18 @@ interface PrayerStatsProps {
 const getStyles = (
   colors: any,
   overlayTextColor: string,
-  currentTheme: "light" | "dark"
-) =>
-  StyleSheet.create({
+  currentTheme: "light" | "dark" | "morning" | "sunset"
+) => {
+  // 🆕 Les couleurs sont maintenant gérées directement via colors du thème actif
+  return StyleSheet.create({
     container: {
-      backgroundColor:
-        currentTheme === "light" ? colors.cardBG : "rgba(0, 0, 0, 0.5)",
+      backgroundColor: colors.cardBG, // 🌅 Utilise la couleur du thème actif
       borderRadius: 16,
       padding: 16,
       marginBottom: 16,
       borderWidth: 1,
-      borderColor:
-        currentTheme === "light" ? colors.border : "rgba(78, 205, 196, 0.3)",
-      shadowColor: currentTheme === "light" ? colors.shadow : "#4ECDC4",
+      borderColor: colors.border, // 🌅 Utilise la couleur du thème actif
+      shadowColor: colors.shadow, // 🌅 Utilise la couleur du thème actif
       shadowOffset: { width: 0, height: 4 },
       shadowOpacity: 0.3,
       shadowRadius: 10,
@@ -49,7 +48,7 @@ const getStyles = (
     },
     headerText: {
       fontSize: 18,
-      color: currentTheme === "light" ? colors.primary : "#4ECDC4",
+      color: colors.primary, // 🌅 Utilise la couleur du thème actif
       marginLeft: 8,
       fontWeight: "600",
     },
@@ -57,8 +56,7 @@ const getStyles = (
       gap: 16,
     },
     statItem: {
-      backgroundColor:
-        currentTheme === "light" ? colors.surface : "rgba(78, 205, 196, 0.1)",
+      backgroundColor: colors.surface, // 🌅 Utilise la couleur du thème actif
       borderRadius: 12,
       padding: 12,
       flexDirection: "row",
@@ -72,18 +70,17 @@ const getStyles = (
       flex: 1,
     },
     statValue: {
-      color: currentTheme === "light" ? colors.primary : "#4ECDC4",
+      color: colors.primary, // 🌅 Utilise la couleur du thème actif
       fontSize: 14,
       fontWeight: "600",
     },
     spacingContainer: {
-      backgroundColor:
-        currentTheme === "light" ? colors.surface : "rgba(78, 205, 196, 0.1)",
+      backgroundColor: colors.surface, // 🌅 Utilise la couleur du thème actif
       borderRadius: 12,
       padding: 12,
     },
     spacingTitle: {
-      color: currentTheme === "light" ? colors.primary : "#4ECDC4",
+      color: colors.primary, // 🌅 Utilise la couleur du thème actif
       fontSize: 16,
       fontWeight: "600",
       marginBottom: 12,
@@ -102,11 +99,12 @@ const getStyles = (
       fontWeight: "500",
     },
     spacingValue: {
-      color: currentTheme === "light" ? colors.primary : "#4ECDC4",
+      color: colors.primary, // 🌅 Utilise la couleur du thème actif
       fontSize: 12,
       fontWeight: "600",
     },
   });
+};
 
 export default function PrayerStats({
   dayLength,
@@ -135,7 +133,7 @@ export default function PrayerStats({
         <MaterialCommunityIcons
           name="chart-timeline-variant"
           size={24}
-          color={currentTheme === "light" ? colors.primary : "#4ECDC4"}
+          color={colors.primary} // 🌅 Utilise la couleur du thème actif
         />
         <Text style={styles.headerText}>{t("prayer_stats")}</Text>
       </View>
@@ -146,7 +144,7 @@ export default function PrayerStats({
           <MaterialCommunityIcons
             name="weather-sunny"
             size={20}
-            color={currentTheme === "light" ? colors.primary : "#4ECDC4"}
+            color={colors.primary} // 🌅 Utilise la couleur du thème actif
           />
           <Text style={styles.statLabel}>{t("day_length")}</Text>
           <Text style={styles.statValue}>{formatDuration(dayLength)}</Text>
@@ -157,7 +155,7 @@ export default function PrayerStats({
           <MaterialCommunityIcons
             name="weather-sunset-up"
             size={20}
-            color={currentTheme === "light" ? colors.primary : "#4ECDC4"}
+            color={colors.primary} // 🌅 Utilise la couleur du thème actif
           />
           <Text style={styles.statLabel}>{t("fajr_to_sunrise")}</Text>
           <Text style={styles.statValue}>{formatDuration(fajrToSunrise)}</Text>
@@ -168,7 +166,7 @@ export default function PrayerStats({
           <MaterialCommunityIcons
             name="weather-sunset-down"
             size={20}
-            color={currentTheme === "light" ? colors.primary : "#4ECDC4"}
+            color={colors.primary} // 🌅 Utilise la couleur du thème actif
           />
           <Text style={styles.statLabel}>{t("sunset_to_isha")}</Text>
           <Text style={styles.statValue}>{formatDuration(sunsetToIsha)}</Text>

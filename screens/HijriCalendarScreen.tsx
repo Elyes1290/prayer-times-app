@@ -23,9 +23,10 @@ function formatLocalDateString(date: Date) {
 const getStyles = (
   colors: any,
   overlayTextColor: string,
-  currentTheme: "light" | "dark"
-) =>
-  StyleSheet.create({
+  currentTheme: "light" | "dark" | "morning" | "sunset"
+) => {
+  // 🆕 Les couleurs sont maintenant gérées directement via colors du thème actif
+  return StyleSheet.create({
     background: { flex: 1 },
     scroll: { flex: 1, backgroundColor: "transparent" },
     container: { flexGrow: 1, padding: 20 },
@@ -36,8 +37,7 @@ const getStyles = (
       marginBottom: 20,
       marginTop: 40,
       color: overlayTextColor,
-      textShadowColor:
-        currentTheme === "light" ? colors.textShadow : "rgba(0,0,0,0.25)",
+      textShadowColor: colors.shadow, // 🌅 Utilise la couleur du thème actif
       textShadowOffset: { width: 1, height: 1 },
       textShadowRadius: 2,
     },
@@ -46,12 +46,11 @@ const getStyles = (
       justifyContent: "space-between",
       paddingVertical: 12,
       borderBottomWidth: 1,
-      borderBottomColor: currentTheme === "light" ? colors.border : "#e7c86a",
-      backgroundColor:
-        currentTheme === "light" ? colors.surface : "transparent",
-      paddingHorizontal: currentTheme === "light" ? 12 : 0,
-      borderRadius: currentTheme === "light" ? 8 : 0,
-      marginBottom: currentTheme === "light" ? 8 : 0,
+      borderBottomColor: colors.border, // 🌅 Utilise la couleur du thème actif
+      backgroundColor: colors.surface, // 🌅 Utilise la couleur du thème actif
+      paddingHorizontal: 12,
+      borderRadius: 8,
+      marginBottom: 8,
     },
     label: {
       fontSize: 18,
@@ -61,31 +60,28 @@ const getStyles = (
     value: {
       fontSize: 18,
       fontWeight: "bold",
-      color: currentTheme === "light" ? colors.primary : "#FFD700",
+      color: colors.primary, // 🌅 Utilise la couleur du thème actif
     },
     calendar: {
       borderRadius: 8,
       marginTop: 16,
-      backgroundColor:
-        currentTheme === "light" ? colors.cardBG : "rgba(34,40,58,0.32)",
+      backgroundColor: colors.cardBG, // 🌅 Utilise la couleur du thème actif
       overflow: "hidden",
-      borderWidth: currentTheme === "light" ? 1 : 0,
-      borderColor: currentTheme === "light" ? colors.border : "transparent",
+      borderWidth: 1,
+      borderColor: colors.border, // 🌅 Utilise la couleur du thème actif
     },
     eventsContainer: {
       marginTop: 20,
-      backgroundColor:
-        currentTheme === "light" ? colors.surface : "rgba(0,0,0,0.3)",
+      backgroundColor: colors.surface, // 🌅 Utilise la couleur du thème actif
       borderRadius: 12,
       padding: 16,
       borderWidth: 1,
-      borderColor:
-        currentTheme === "light" ? colors.border : "rgba(46,125,50,0.3)",
+      borderColor: colors.border, // 🌅 Utilise la couleur du thème actif
     },
     eventsTitle: {
       fontWeight: "bold",
       fontSize: 18,
-      color: currentTheme === "light" ? colors.primary : "#2E7D32",
+      color: colors.primary, // 🌅 Utilise la couleur du thème actif
       marginBottom: 12,
     },
     eventItem: {
@@ -95,6 +91,7 @@ const getStyles = (
       paddingLeft: 8,
     },
   });
+};
 
 export default function HijriCalendarScreen() {
   const { t } = useTranslation();
@@ -139,7 +136,10 @@ export default function HijriCalendarScreen() {
       dots: [
         {
           key: "event",
-          color: currentTheme === "light" ? colors.primary : "#2E7D32",
+          color:
+            currentTheme === "light" || currentTheme === "morning"
+              ? colors.primary
+              : "#2E7D32",
         },
       ],
     };
@@ -207,32 +207,61 @@ export default function HijriCalendarScreen() {
             [selectedDateString]: {
               selected: true,
               selectedColor:
-                currentTheme === "light" ? colors.primary : "#2E7D32",
+                currentTheme === "light" || currentTheme === "morning"
+                  ? colors.primary
+                  : "#2E7D32",
             },
           }}
           theme={{
             backgroundColor: "transparent",
             calendarBackground:
-              currentTheme === "light" ? colors.cardBG : "rgba(34,40,58,0.32)",
+              currentTheme === "light" || currentTheme === "morning"
+                ? colors.cardBG
+                : "rgba(34,40,58,0.32)",
             textSectionTitleColor:
-              currentTheme === "light" ? colors.textSecondary : "#fffbe8",
-            dayTextColor: currentTheme === "light" ? colors.text : "#fff",
+              currentTheme === "light" || currentTheme === "morning"
+                ? colors.textSecondary
+                : "#fffbe8",
+            dayTextColor:
+              currentTheme === "light" || currentTheme === "morning"
+                ? colors.text
+                : "#fff",
             monthTextColor:
-              currentTheme === "light" ? colors.primary : "#FFD700",
+              currentTheme === "light" || currentTheme === "morning"
+                ? colors.primary
+                : "#FFD700",
             todayTextColor:
-              currentTheme === "light" ? colors.primary : "#00CFFF",
+              currentTheme === "light" || currentTheme === "morning"
+                ? colors.primary
+                : "#00CFFF",
             selectedDayTextColor:
-              currentTheme === "light" ? "#FFFFFF" : "#fffbe8",
+              currentTheme === "light" || currentTheme === "morning"
+                ? "#FFFFFF"
+                : "#fffbe8",
             selectedDayBackgroundColor:
-              currentTheme === "light" ? colors.primary : "#2E7D32",
+              currentTheme === "light" || currentTheme === "morning"
+                ? colors.primary
+                : "#2E7D32",
             textDisabledColor:
-              currentTheme === "light" ? colors.textSecondary : "#bbb",
-            dotColor: currentTheme === "light" ? colors.primary : "#FFD700",
+              currentTheme === "light" || currentTheme === "morning"
+                ? colors.textSecondary
+                : "#bbb",
+            dotColor:
+              currentTheme === "light" || currentTheme === "morning"
+                ? colors.primary
+                : "#FFD700",
             selectedDotColor:
-              currentTheme === "light" ? colors.primary : "#FFD700",
-            arrowColor: currentTheme === "light" ? colors.primary : "#FFD700",
+              currentTheme === "light" || currentTheme === "morning"
+                ? colors.primary
+                : "#FFD700",
+            arrowColor:
+              currentTheme === "light" || currentTheme === "morning"
+                ? colors.primary
+                : "#FFD700",
             indicatorColor:
-              currentTheme === "light" ? colors.primary : "#FFD700",
+              currentTheme === "light" || currentTheme === "morning"
+                ? colors.primary
+                : "#FFD700",
             textDayFontWeight: "700",
             textMonthFontWeight: "bold",
             textDayHeaderFontWeight: "700",

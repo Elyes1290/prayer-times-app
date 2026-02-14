@@ -1,17 +1,24 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, Alert } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import ThemedPicker from "../ThemedPicker";
 import { TFunction } from "i18next";
+import { BackgroundImageType } from "../../contexts/SettingsContext";
 
 interface AppearanceSectionProps {
   selectedLang: string;
   languages: { code: string; label: string }[];
   onChangeLanguage: (langCode: string) => void;
-  currentTheme: "light" | "dark" | "auto";
-  setThemeMode: (theme: "light" | "dark" | "auto") => void;
+  currentTheme: "light" | "dark" | "morning" | "sunset" | "auto";
+  setThemeMode: (
+    theme: "auto" | "light" | "dark" | "morning" | "sunset"
+  ) => void;
+  backgroundImageType?: BackgroundImageType; // 🖼️ NOUVEAU : Type d'image de fond
+  setBackgroundImageType?: (type: BackgroundImageType) => void; // 🖼️ NOUVEAU : Setter pour le type d'image
   styles: any;
   t: TFunction;
+  isPremium?: boolean; // 🆕 Pour vérifier le statut premium
+  onShowPremiumModal?: () => void; // 🚀 NOUVEAU : Callback pour afficher la modal premium
 }
 
 export default function AppearanceSection({
@@ -20,21 +27,79 @@ export default function AppearanceSection({
   onChangeLanguage,
   currentTheme,
   setThemeMode,
+  backgroundImageType = "prophet",
+  setBackgroundImageType,
   styles,
   t,
+  isPremium = false,
+  onShowPremiumModal,
 }: AppearanceSectionProps) {
   const [languagePickerVisible, setLanguagePickerVisible] = useState(false);
   const [themePickerVisible, setThemePickerVisible] = useState(false);
+  const [backgroundPickerVisible, setBackgroundPickerVisible] = useState(false); // 🖼️ NOUVEAU : État pour le picker d'images
+
+  // 🔒 NOUVEAU : Fonction pour vérifier et appliquer le thème avec protection premium
+  // Retourne true si le thème a été appliqué, false sinon
+  const handleThemeChange = (value: string): boolean => {
+    const premiumThemes = ["morning", "sunset"];
+    
+    // Vérifier si c'est un thème premium et si l'utilisateur n'est pas premium
+    if (premiumThemes.includes(value) && !isPremium) {
+      // Fermer le picker avant d'afficher la modal premium
+      setThemePickerVisible(false);
+      
+      // Afficher la modal premium si fournie
+      if (onShowPremiumModal) {
+        onShowPremiumModal();
+        return false;
+      }
+      
+      // Sinon afficher une alerte simple
+      Alert.alert(
+        t("premium_required", "Premium requis") || "Premium requis",
+        t("premium_themes_message", "Les thèmes Matin et Crépuscule sont réservés aux membres Premium.") || 
+        "Les thèmes Matin et Crépuscule sont réservés aux membres Premium.",
+        [
+          {
+            text: t("cancel", "Annuler") || "Annuler",
+            style: "cancel"
+          },
+          {
+            text: t("go_premium", "Passer Premium") || "Passer Premium",
+          }
+        ]
+      );
+      return false;
+    }
+
+    // Appliquer le thème si validé
+    const validThemes = ["light", "dark", "morning", "sunset", "auto"];
+    if (validThemes.includes(value)) {
+      setThemeMode(value as "auto" | "light" | "dark" | "morning" | "sunset");
+      return true;
+    }
+    
+    return false;
+  };
 
   // Trouver le label de la langue sélectionnée
   const selectedLanguageLabel =
     languages.find((lang) => lang.code === selectedLang)?.label || selectedLang;
 
-  // Labels pour les thèmes
-  const themeLabels = {
-    light: t("theme.light", "Clair"),
-    dark: t("theme.dark", "Sombre"),
-    auto: t("theme.auto", "Automatique"),
+  // 🆕 Labels pour les thèmes (5 options)
+  const themeLabels: Record<string, string> = {
+    light: t("light_mode", "Clair"),
+    dark: t("dark_mode", "Sombre"),
+    morning: t("morning_mode", "Matin"),
+    sunset: t("sunset_mode", "Maghrib"),
+    auto: t("theme_auto", "Automatique"),
+  };
+
+  // 🖼️ NOUVEAU : Labels pour les types d'images de fond (premium)
+  const backgroundImageLabels: Record<BackgroundImageType, string> = {
+    prophet: t("background_prophet", "Mosquée du Prophète") || "Mosquée du Prophète",
+    makka: t("background_makka", "Makka") || "Makka",
+    alquds: t("background_alquds", "Al-Quds") || "Al-Quds",
   };
 
   // Styles identiques à AdhanSoundSection
@@ -124,20 +189,80 @@ export default function AppearanceSection({
               visible={themePickerVisible}
               title={t("theme", "Thème")}
               items={[
-                { label: t("theme.light", "Clair"), value: "light" },
-                { label: t("theme.dark", "Sombre"), value: "dark" },
-                { label: t("theme.auto", "Automatique"), value: "auto" },
+                { label: t("theme_auto", "Automatique"), value: "auto" },
+                { label: t("light_mode", "Clair"), value: "light" },
+                { label: t("dark_mode", "Sombre"), value: "dark" },
+                // 🆕 Thèmes premium avec indicateur
+                {
+                  label: isPremium
+                    ? t("morning_mode", "Matin")
+                    : `${t("morning_mode", "Matin")} 👑`,
+                  value: "morning",
+                },
+                {
+                  label: isPremium
+                    ? t("sunset_mode", "Maghrib")
+                    : `${t("sunset_mode", "Maghrib")} 👑`,
+                  value: "sunset",
+                },
               ]}
               selectedValue={currentTheme}
-              onValueChange={(value) => {
-                if (value === "light" || value === "dark" || value === "auto") {
-                  setThemeMode(value);
-                }
-              }}
+              onValueChange={handleThemeChange}
               onClose={() => setThemePickerVisible(false)}
             />
           </View>
         </View>
+
+        {/* 🖼️ NOUVEAU : Type d'image de fond (PREMIUM uniquement) */}
+        {isPremium && setBackgroundImageType && (
+          <View>
+            <Text style={styles.label}>
+              {t("background_image_type", "Type d'image de fond")} 👑
+            </Text>
+            <View
+              style={[styles.row, { justifyContent: "center", marginTop: 8 }]}
+            >
+              <TouchableOpacity
+                style={buttonStyles.container}
+                onPress={() => setBackgroundPickerVisible(true)}
+              >
+                <Text style={buttonStyles.text}>
+                  {backgroundImageLabels[backgroundImageType]}
+                </Text>
+                <MaterialCommunityIcons
+                  name="chevron-down"
+                  size={20}
+                  color="#4ECDC4"
+                  style={buttonStyles.icon}
+                />
+              </TouchableOpacity>
+
+              <ThemedPicker
+                visible={backgroundPickerVisible}
+                title={t("background_image_type", "Type d'image de fond")}
+                items={[
+                  {
+                    label: t("background_prophet", "🕌 Mosquée du Prophète"),
+                    value: "prophet",
+                  },
+                  {
+                    label: t("background_makka", "🕋 Makka"),
+                    value: "makka",
+                  },
+                  {
+                    label: t("background_alquds", "🏛️ Al-Quds"),
+                    value: "alquds",
+                  },
+                ]}
+                selectedValue={backgroundImageType}
+                onValueChange={(value) => {
+                  setBackgroundImageType(value as BackgroundImageType);
+                }}
+                onClose={() => setBackgroundPickerVisible(false)}
+              />
+            </View>
+          </View>
+        )}
       </View>
     </View>
   );

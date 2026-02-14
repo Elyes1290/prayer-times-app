@@ -13,6 +13,7 @@ import {
   TouchableOpacity,
   ScrollView,
   SafeAreaView,
+  StatusBar,
 } from "react-native";
 import { useTranslation } from "react-i18next";
 import { useFocusEffect } from "@react-navigation/native";
@@ -144,9 +145,10 @@ function getPointOnCircle(
 const getStyles = (
   colors: any,
   overlayTextColor: string,
-  currentTheme: "light" | "dark"
-) =>
-  StyleSheet.create({
+  currentTheme: "light" | "dark" | "morning" | "sunset"
+) => {
+  // 🆕 Les couleurs sont maintenant gérées directement via colors du thème actif
+  return StyleSheet.create({
     container: {
       flex: 1,
       alignItems: "center",
@@ -158,8 +160,7 @@ const getStyles = (
       marginTop: 20,
       marginBottom: 20,
       color: overlayTextColor,
-      textShadowColor:
-        currentTheme === "light" ? colors.textShadow : "rgba(0,0,0,0.25)",
+      textShadowColor: colors.shadow, // 🌅 Utilise la couleur du thème actif
       textShadowOffset: { width: 1, height: 1 },
       textShadowRadius: 2,
       textAlign: "center",
@@ -173,9 +174,9 @@ const getStyles = (
       backgroundColor: "rgba(34,40,58,0.30)", // Toujours sombre pour la boussole blanche
       borderRadius: COMPASS_SIZE / 2,
       borderWidth: 2,
-      borderColor: currentTheme === "light" ? colors.primary : "#e7c86a",
+      borderColor: colors.primary, // 🌅 Utilise la couleur du thème actif
       overflow: "hidden",
-      shadowColor: currentTheme === "light" ? colors.shadow : "#000",
+      shadowColor: colors.shadow, // 🌅 Utilise la couleur du thème actif
       shadowOffset: { width: 0, height: 4 },
       shadowOpacity: 0.3,
       shadowRadius: 10,
@@ -195,7 +196,7 @@ const getStyles = (
       width: COMPASS_SIZE,
       height: COMPASS_SIZE,
       borderRadius: COMPASS_SIZE / 2,
-      opacity: currentTheme === "light" ? 0.9 : 1,
+      opacity: 1,
     },
     needle: {
       position: "absolute",
@@ -204,7 +205,7 @@ const getStyles = (
       borderRadius: 2,
     },
     qiblaNeedle: {
-      backgroundColor: currentTheme === "light" ? colors.primary : "#204296",
+      backgroundColor: colors.primary, // 🌅 Utilise la couleur du thème actif
       zIndex: 2,
     },
     background: { flex: 1, resizeMode: "cover" },
@@ -215,50 +216,55 @@ const getStyles = (
       top: -12,
       left: -10,
     },
-    instructionsContainer: {
-      alignItems: "center",
+    instructionsWrapper: {
+      width: "100%",
       paddingHorizontal: 20,
-      paddingBottom: 20,
+      paddingVertical: 20,
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    instructionsBox: {
+      backgroundColor: colors.surface, // 🌅 Utilise la couleur du thème actif
+      borderRadius: 16,
+      paddingHorizontal: 20,
+      paddingVertical: 14,
+      elevation: 3,
+      shadowColor: colors.shadow, // 🌅 Utilise la couleur du thème actif
+      shadowOffset: { width: 0, height: 4 },
+      shadowOpacity: 0.3,
+      shadowRadius: 8,
+      borderWidth: 1.5,
+      borderColor: colors.border, // 🌅 Utilise la couleur du thème actif
+      width: "100%",
     },
     instructions: {
-      color: currentTheme === "light" ? colors.primary : "#FFD700",
+      color: colors.primary, // 🌅 Utilise la couleur du thème actif
       fontSize: 15,
       fontWeight: "600",
-      textAlign: "center",
-      paddingHorizontal: 18,
-      paddingVertical: 14,
+      textAlign: "justify",
       lineHeight: 22,
-      backgroundColor:
-        currentTheme === "light" ? colors.surface : "rgba(34,40,58,0.85)",
-      borderRadius: 16,
-      elevation: 3,
-      textShadowColor:
-        currentTheme === "light" ? colors.textShadow : "rgba(0,0,0,0.28)",
+      textShadowColor: colors.shadow, // 🌅 Utilise la couleur du thème actif
       textShadowOffset: { width: 0, height: 1 },
       textShadowRadius: 2,
-      overflow: "hidden",
-      borderWidth: 1.5,
-      borderColor: currentTheme === "light" ? colors.border : "#e7c86a",
     },
     statusContainer: {
-      backgroundColor:
-        currentTheme === "light" ? colors.surface : "rgba(34,40,58,0.9)",
+      backgroundColor: colors.surface, // 🌅 Utilise la couleur du thème actif
       borderRadius: 12,
       padding: 16,
       marginHorizontal: 20,
       marginBottom: 20,
       alignItems: "center",
       borderWidth: 1,
-      borderColor: currentTheme === "light" ? colors.border : "#e7c86a",
+      borderColor: colors.border, // 🌅 Utilise la couleur du thème actif
     },
     statusText: {
-      color: currentTheme === "light" ? colors.primary : "#FFD700",
+      color: colors.primary, // 🌅 Utilise la couleur du thème actif
       fontSize: 16,
       fontWeight: "600",
       textAlign: "center",
     },
     statusTextError: {
-      color: currentTheme === "light" ? colors.accent : "#FF6B6B",
+      color: colors.error, // 🌅 Utilise la couleur du thème actif
       fontSize: 16,
       fontWeight: "600",
       textAlign: "center",
@@ -275,16 +281,13 @@ const getStyles = (
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "center",
-      backgroundColor:
-        currentTheme === "light"
-          ? "rgba(255, 255, 255, 0.9)"
-          : "rgba(34, 40, 58, 0.9)",
+      backgroundColor: colors.surface, // 🌅 Utilise la couleur du thème actif
       paddingVertical: 10,
       paddingHorizontal: 16,
       borderRadius: 20,
       marginBottom: 15,
       borderWidth: 1.5,
-      borderColor: currentTheme === "light" ? colors.primary : "#e7c86a",
+      borderColor: colors.primary, // 🌅 Utilise la couleur du thème actif
       shadowColor: "#000",
       shadowOffset: { width: 0, height: 2 },
       shadowOpacity: 0.1,
@@ -350,8 +353,8 @@ const getStyles = (
       elevation: 2,
     },
     selectedCompassOption: {
-      borderColor: "#4ECDC4",
-      backgroundColor: "#f5fff8",
+      borderColor: colors.primary, // 🌅 Utilise la couleur du thème actif
+      backgroundColor: colors.surface, // 🌅 Utilise la couleur du thème actif
     },
     lockedCompassOption: {
       opacity: 0.6,
@@ -385,7 +388,7 @@ const getStyles = (
       marginBottom: 4,
     },
     selectedCompassName: {
-      color: "#4ECDC4",
+      color: colors.primary, // 🌅 Utilise la couleur du thème actif
     },
     premiumBadge: {
       flexDirection: "row",
@@ -403,6 +406,7 @@ const getStyles = (
       marginLeft: 4,
     },
   });
+};
 
 export default function QiblaScreen() {
   const { t } = useTranslation();
@@ -494,6 +498,11 @@ export default function QiblaScreen() {
   // Animation: valeur de rotation de la boussole
   const animatedHeading = useRef(new Animated.Value(0)).current;
   const lastHeading = useRef(0);
+  
+  // 🎯 Filtrage pour fluidité (low-pass filter)
+  const smoothedHeading = useRef(0);
+  const SMOOTHING_FACTOR = 0.15; // Plus c'est petit, plus c'est lisse (0.1-0.3)
+  const MIN_MOVEMENT_THRESHOLD = 0.5; // Seuil minimum de mouvement en degrés
 
   // Animation pour la couleur de l'aiguille
   const needleColorAnimation = useRef(new Animated.Value(0)).current;
@@ -605,9 +614,29 @@ export default function QiblaScreen() {
         headingSubscription.current.remove();
       }
 
-      // Démarrer l'écoute du heading
+      // Démarrer l'écoute du heading avec filtrage
       headingSubscription.current = await Location.watchHeadingAsync((data) => {
-        setHeading(data.trueHeading);
+        // 🎯 Filtre passe-bas (low-pass filter) pour lisser les valeurs
+        const rawHeading = data.trueHeading;
+        
+        // Initialisation du filtre
+        if (smoothedHeading.current === 0) {
+          smoothedHeading.current = rawHeading;
+        }
+        
+        // Gérer le passage 0-360 degrés correctement
+        let delta = rawHeading - smoothedHeading.current;
+        if (delta > 180) delta -= 360;
+        if (delta < -180) delta += 360;
+        
+        // Appliquer le lissage (low-pass filter)
+        smoothedHeading.current += delta * SMOOTHING_FACTOR;
+        
+        // Normaliser à 0-360
+        if (smoothedHeading.current < 0) smoothedHeading.current += 360;
+        if (smoothedHeading.current >= 360) smoothedHeading.current -= 360;
+        
+        setHeading(smoothedHeading.current);
       });
 
       setIsInitializing(false);
@@ -710,19 +739,28 @@ export default function QiblaScreen() {
 
       // Delta dans [-180, +180]
       let delta = ((to - from + 540) % 360) - 180;
+      
+      // 🎯 Seuil minimum : ignorer les micro-mouvements
+      if (Math.abs(delta) < MIN_MOVEMENT_THRESHOLD) {
+        return;
+      }
+      
       let target = from + delta; // la vraie cible pour éviter le tour
 
-      // Si saut > 90° (rotation rapide), MAJ immédiate (optionnel)
+      // Si saut > 90° (rotation rapide du téléphone), MAJ immédiate
       if (Math.abs(delta) > 90) {
         animatedHeading.setValue(-target);
+        lastHeading.current = target;
       } else {
-        Animated.timing(animatedHeading, {
+        // 🎯 Animation fluide avec spring pour un mouvement naturel
+        Animated.spring(animatedHeading, {
           toValue: -target,
-          duration: 150,
+          friction: 8, // Plus c'est élevé, plus c'est amorti (5-10)
+          tension: 20, // Plus c'est élevé, plus c'est rapide (10-40)
           useNativeDriver: true,
         }).start();
+        lastHeading.current = target;
       }
-      lastHeading.current = target; // 👈 important ! On mémorise la vraie position
     }
   }, [heading, animatedHeading]);
 
@@ -752,14 +790,16 @@ export default function QiblaScreen() {
   // Interpolation de couleur pour l'aiguille
   const needleColor = needleColorAnimation.interpolate({
     inputRange: [0, 1],
-    outputRange:
-      currentTheme === "light"
-        ? [colors.primary, "#22C55E"]
-        : ["#204296", "#22C55E"],
+    outputRange: [colors.primary, colors.success], // 🌅 Utilise les couleurs du thème actif
   });
 
   return (
     <ThemedImageBackground style={styles.background}>
+      <StatusBar
+        barStyle="light-content"
+        translucent
+        backgroundColor="transparent"
+      />
       <View
         style={[
           styles.container,
@@ -870,15 +910,17 @@ export default function QiblaScreen() {
 
         {/* 🚀 NOUVEAU : Masquer les instructions si localisation désactivée */}
         {!userDeniedPermission && (
-          <View style={styles.instructionsContainer}>
-            <Text
-              style={[
-                styles.instructions,
-                { fontSize: Math.min(width * 0.035, 15) },
-              ]}
-            >
-              {t("qibla_instructions")}
-            </Text>
+          <View style={styles.instructionsWrapper}>
+            <View style={styles.instructionsBox}>
+              <Text
+                style={[
+                  styles.instructions,
+                  { fontSize: Math.min(width * 0.035, 15) },
+                ]}
+              >
+                {t("qibla_instructions")}
+              </Text>
+            </View>
           </View>
         )}
 
@@ -954,7 +996,7 @@ export default function QiblaScreen() {
                         <Ionicons
                           name="checkmark-circle"
                           size={24}
-                          color="#4ECDC4"
+                          color={colors.primary} // 🌅 Utilise la couleur du thème actif
                         />
                       )}
                     </TouchableOpacity>

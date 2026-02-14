@@ -53,6 +53,9 @@ export type CalcMethodKey =
 
 export type LocationMode = "auto" | "manual" | null;
 
+// 🖼️ Type pour les images de fond (premium)
+export type BackgroundImageType = "prophet" | "makka" | "alquds";
+
 export type Coords = {
   lat: number;
   lon: number;
@@ -90,8 +93,9 @@ export interface SettingsContextType {
   currentLanguage: string;
   userFirstName: string | null;
   isFirstTime: boolean;
-  themeMode: "auto" | "light" | "dark";
-  currentTheme: "light" | "dark";
+  themeMode: "auto" | "light" | "dark" | "morning" | "sunset";
+  currentTheme: "light" | "dark" | "morning" | "sunset";
+  backgroundImageType: BackgroundImageType; // 🖼️ NOUVEAU : Type d'image de fond (premium)
   audioQuality: "low" | "medium" | "high";
   downloadStrategy: "streaming_only" | "wifi_download" | "always_download";
   enableDataSaving: boolean;
@@ -118,7 +122,10 @@ export interface SettingsContextType {
   setCurrentLanguage: (language: string) => void;
   setUserFirstName: (firstName: string | null) => void;
   setIsFirstTime: (isFirstTime: boolean) => void;
-  setThemeMode: (mode: "auto" | "light" | "dark") => void;
+  setThemeMode: (
+    mode: "auto" | "light" | "dark" | "morning" | "sunset"
+  ) => void;
+  setBackgroundImageType: (type: BackgroundImageType) => void; // 🖼️ NOUVEAU : Setter pour le type d'image de fond
   setAudioQuality: (quality: "low" | "medium" | "high") => void;
   setDownloadStrategy: (
     strategy: "streaming_only" | "wifi_download" | "always_download"
@@ -161,6 +168,7 @@ const defaultSettings: SettingsContextType = {
   isFirstTime: true,
   themeMode: "auto",
   currentTheme: "light",
+  backgroundImageType: "prophet", // 🖼️ NOUVEAU : Par défaut Mosquée du Prophète
   audioQuality: "medium",
   downloadStrategy: "streaming_only",
   enableDataSaving: true,
@@ -186,6 +194,7 @@ const defaultSettings: SettingsContextType = {
   setUserFirstName: () => {},
   setIsFirstTime: () => {},
   setThemeMode: () => {},
+  setBackgroundImageType: () => {}, // 🖼️ NOUVEAU : Setter pour le type d'image de fond
   setAudioQuality: () => {},
   setDownloadStrategy: () => {},
   setEnableDataSaving: () => {},
@@ -237,9 +246,11 @@ export const SettingsProvider = ({
   const [isRefreshingLocation, setIsRefreshingLocation] = useState(false);
 
   // Nouveau : État du thème
-  const [themeMode, setThemeModeState] = useState<"auto" | "light" | "dark">(
-    "auto"
-  );
+  const [themeMode, setThemeModeState] = useState<
+    "auto" | "light" | "dark" | "morning" | "sunset"
+  >("auto");
+  // 🖼️ NOUVEAU : État pour le type d'image de fond (premium)
+  const [backgroundImageType, setBackgroundImageTypeState] = useState<BackgroundImageType>("prophet");
   // 🚀 SOLUTION TEMPORAIRE : Mock useColorScheme pour les tests
   const systemColorScheme = useColorScheme() || "light";
 
@@ -259,8 +270,10 @@ export const SettingsProvider = ({
   const [apiSyncEnabled, setApiSyncEnabled] = useState(false); // 🚀 DÉSACTIVÉ par défaut (premium uniquement)
 
   // Calculer le thème actuel basé sur le mode choisi
-  const currentTheme =
-    themeMode === "auto" ? systemColorScheme ?? "light" : themeMode;
+  const currentTheme: "light" | "dark" | "morning" | "sunset" =
+    themeMode === "auto"
+      ? (systemColorScheme ?? "light")
+      : themeMode; // Si ce n'est pas "auto", utiliser directement themeMode
 
   // 🚀 NOUVEAU : Fonctions de synchronisation API
   const buildSettingsObject = useCallback(() => {
@@ -397,7 +410,14 @@ export const SettingsProvider = ({
           setUserFirstName(userData.user_first_name);
         }
         if (userData.theme_mode) {
-          setThemeModeState(userData.theme_mode as "auto" | "light" | "dark");
+          setThemeModeState(
+            userData.theme_mode as
+              | "auto"
+              | "light"
+              | "dark"
+              | "morning"
+              | "sunset"
+          );
         }
 
         // Plus de paramètres selon la réponse API...
@@ -889,14 +909,32 @@ export const SettingsProvider = ({
       try {
         // 🚀 NOUVEAU : Utiliser le gestionnaire de stockage stratifié
         const savedTheme = await LocalStorageManager.getEssential("THEME_MODE");
-        if (savedTheme && ["auto", "light", "dark"].includes(savedTheme)) {
-          setThemeModeState(savedTheme as "auto" | "light" | "dark");
+        if (
+          savedTheme &&
+          ["auto", "light", "dark", "morning", "sunset"].includes(savedTheme)
+        ) {
+          setThemeModeState(
+            savedTheme as "auto" | "light" | "dark" | "morning" | "sunset"
+          );
         }
       } catch (error) {
         console.error("Erreur lors du chargement du thème:", error);
       }
     };
     loadTheme();
+
+    // 🖼️ NOUVEAU : Charger le type d'image de fond
+    const loadBackgroundImageType = async () => {
+      try {
+        const savedType = await AsyncStorage.getItem("backgroundImageType");
+        if (savedType && ["prophet", "makka", "alquds"].includes(savedType)) {
+          setBackgroundImageTypeState(savedType as BackgroundImageType);
+        }
+      } catch (error) {
+        console.error("Erreur lors du chargement du type d'image de fond:", error);
+      }
+    };
+    loadBackgroundImageType();
   }, []);
 
   // 🚀 NOUVEAU : Synchronisation automatique des paramètres (premium uniquement)
@@ -942,13 +980,26 @@ export const SettingsProvider = ({
   ]);
 
   // Nouveau : Fonction pour changer le thème
-  const setThemeMode = async (mode: "auto" | "light" | "dark") => {
+  const setThemeMode = async (
+    mode: "auto" | "light" | "dark" | "morning" | "sunset"
+  ) => {
     try {
       setThemeModeState(mode);
       // 🚀 NOUVEAU : Utiliser le gestionnaire de stockage stratifié
       await LocalStorageManager.saveEssential("THEME_MODE", mode);
     } catch (error) {
       console.error("Erreur lors de la sauvegarde du thème:", error);
+    }
+  };
+
+  // 🖼️ NOUVEAU : Setter pour le type d'image de fond (premium)
+  const setBackgroundImageType = async (type: BackgroundImageType) => {
+    try {
+      setBackgroundImageTypeState(type);
+      // Sauvegarder dans le stockage local
+      await AsyncStorage.setItem("backgroundImageType", type);
+    } catch (error) {
+      console.error("Erreur lors de la sauvegarde du type d'image de fond:", error);
     }
   };
 
@@ -1111,6 +1162,7 @@ export const SettingsProvider = ({
     isFirstTime,
     themeMode,
     currentTheme,
+    backgroundImageType, // 🖼️ NOUVEAU : Type d'image de fond (premium)
     audioQuality,
     downloadStrategy,
     enableDataSaving,
@@ -1359,6 +1411,7 @@ export const SettingsProvider = ({
       await LocalStorageManager.saveEssential("IS_FIRST_TIME", String(isFirst));
     },
     setThemeMode,
+    setBackgroundImageType, // 🖼️ NOUVEAU : Setter pour le type d'image de fond
     setAudioQuality: (quality) => {
       const validQualities = ["low", "medium", "high"];
       if (!validQualities.includes(quality)) {

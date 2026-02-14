@@ -19,7 +19,7 @@ import { useErrorHandler } from "../../utils/errorHandler";
 // 🚀 Interface pour les props du composant
 interface AccountManagementSectionProps {
   user: any; // Garde pour la compatibilité (isPremium)
-  currentTheme: "light" | "dark";
+  currentTheme: "light" | "dark" | "morning" | "sunset";
   styles: any;
   showToast: (toast: {
     type: "success" | "error" | "info";
@@ -46,6 +46,7 @@ export default function AccountManagementSection({
   const router = useRouter();
   const settings = useContext(SettingsContext);
   const { getErrorTitle, getErrorMessage } = useErrorHandler();
+  const isLightTheme = currentTheme === "light" || currentTheme === "morning";
 
   // 🚀 NOUVEAU : États pour les vraies données utilisateur
   const [realUserData, setRealUserData] = useState<any>(null);
@@ -376,7 +377,7 @@ export default function AccountManagementSection({
                     onChangeText={setEditedFirstName}
                     placeholder="Votre prénom"
                     placeholderTextColor={
-                      currentTheme === "light" ? "#94A3B8" : "#64748B"
+                      isLightTheme ? "#94A3B8" : "#64748B"
                     }
                   />
                 ) : (
@@ -399,7 +400,7 @@ export default function AccountManagementSection({
                     keyboardType="email-address"
                     autoCapitalize="none"
                     placeholderTextColor={
-                      currentTheme === "light" ? "#94A3B8" : "#64748B"
+                      isLightTheme ? "#94A3B8" : "#64748B"
                     }
                   />
                 ) : (
@@ -586,7 +587,7 @@ export default function AccountManagementSection({
           <MaterialCommunityIcons
             name="chevron-right"
             size={20}
-            color={currentTheme === "light" ? "#94A3B8" : "#64748B"}
+            color={isLightTheme ? "#94A3B8" : "#64748B"}
           />
         </TouchableOpacity>
 
@@ -611,7 +612,7 @@ export default function AccountManagementSection({
           <MaterialCommunityIcons
             name="chevron-right"
             size={20}
-            color={currentTheme === "light" ? "#94A3B8" : "#64748B"}
+            color={isLightTheme ? "#94A3B8" : "#64748B"}
           />
         </TouchableOpacity>
       </View>

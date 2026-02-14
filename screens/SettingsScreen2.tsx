@@ -148,8 +148,10 @@ interface OptimizedSettingsSectionsProps {
   styles: any;
   activeSection: string | null;
   setActiveSection: (sectionId: string | null) => void;
-  currentTheme: "light" | "dark";
-  setThemeMode: (mode: "auto" | "light" | "dark") => void;
+  currentTheme: "light" | "dark" | "morning" | "sunset";
+  setThemeMode: (
+    mode: "auto" | "light" | "dark" | "morning" | "sunset"
+  ) => void;
   hasPendingChanges: boolean;
   markPendingChanges: () => void;
   applyAllChanges: () => void;
@@ -174,6 +176,7 @@ function SettingsSections(props: OptimizedSettingsSectionsProps) {
   } = props;
 
   const { t } = useTranslation();
+  const isLightTheme = currentTheme === "light" || currentTheme === "morning";
 
   // États locaux pour le dhikr
   const [allDhikrEnabled, setAllDhikrEnabled] = useState(true);
@@ -448,10 +451,14 @@ function SettingsSections(props: OptimizedSettingsSectionsProps) {
           selectedLang={props.selectedLang}
           languages={props.languages}
           onChangeLanguage={props.onChangeLanguage}
-          currentTheme={currentTheme}
+          currentTheme={settings.themeMode}
           setThemeMode={settings.setThemeMode}
+          backgroundImageType={settings.backgroundImageType} // 🖼️ NOUVEAU : Type d'image de fond
+          setBackgroundImageType={settings.setBackgroundImageType} // 🖼️ NOUVEAU : Setter pour le type d'image
           styles={styles}
           t={t}
+          isPremium={user?.isPremium || false}
+          onShowPremiumModal={props.handleBuyPremium}
         />
       ),
       backup: <BackupSectionWrapper />,
@@ -535,7 +542,7 @@ function SettingsSections(props: OptimizedSettingsSectionsProps) {
                   <MaterialCommunityIcons
                     name="account-cog"
                     size={20}
-                    color={currentTheme === "light" ? "#333333" : "#F8FAFC"}
+                    color={isLightTheme ? "#333333" : "#F8FAFC"}
                   />
                 </TouchableOpacity>
               </>
@@ -582,7 +589,7 @@ function SettingsSections(props: OptimizedSettingsSectionsProps) {
               <MaterialCommunityIcons
                 name="chevron-right"
                 size={20}
-                color={currentTheme === "light" ? "#333333" : "#F8FAFC"}
+                color={isLightTheme ? "#333333" : "#F8FAFC"}
               />
             </TouchableOpacity>
           </View>
@@ -607,7 +614,7 @@ function SettingsSections(props: OptimizedSettingsSectionsProps) {
               <MaterialCommunityIcons
                 name="email"
                 size={20}
-                color={currentTheme === "light" ? "#333333" : "#F8FAFC"}
+                color={isLightTheme ? "#333333" : "#F8FAFC"}
               />
             </TouchableOpacity>
             <TouchableOpacity
@@ -623,7 +630,7 @@ function SettingsSections(props: OptimizedSettingsSectionsProps) {
               <MaterialCommunityIcons
                 name="help-circle"
                 size={20}
-                color={currentTheme === "light" ? "#333333" : "#F8FAFC"}
+                color={isLightTheme ? "#333333" : "#F8FAFC"}
               />
             </TouchableOpacity>
           </View>
@@ -684,6 +691,7 @@ function SettingsSections(props: OptimizedSettingsSectionsProps) {
         onPremiumPress={() => props.openPremiumModal()}
         overlayTextColor={styles.text.color}
         styles={styles}
+        isPremium={user?.isPremium || false}
       />
 
       <SettingsGrid
@@ -740,7 +748,8 @@ export default function SettingsScreenOptimized() {
   const { showToast } = useToast();
   const navigation = useNavigation();
 
-  const { openLocation, mode, openPremium, premiumTab } = useLocalSearchParams();
+  const { openLocation, mode, openPremium, premiumTab } =
+    useLocalSearchParams();
 
   const {
     audioPlayer,
@@ -757,6 +766,7 @@ export default function SettingsScreenOptimized() {
   const overlayTextColor = useOverlayTextColor();
   const overlayIconColor = useOverlayIconColor();
   const currentTheme = useCurrentTheme();
+  const isLightTheme = currentTheme === "light" || currentTheme === "morning";
 
   const styles = React.useMemo(
     () => getStyles(colors, overlayTextColor, overlayIconColor, currentTheme),

@@ -33,19 +33,18 @@ interface WeeklyPrayerViewProps {
 const getStyles = (
   colors: any,
   overlayTextColor: string,
-  currentTheme: "light" | "dark"
-) =>
-  StyleSheet.create({
+  currentTheme: "light" | "dark" | "morning" | "sunset"
+) => {
+  // 🆕 Les couleurs sont maintenant gérées directement via colors du thème actif
+  return StyleSheet.create({
     container: {
-      backgroundColor:
-        currentTheme === "light" ? colors.cardBG : "rgba(0, 0, 0, 0.5)",
+      backgroundColor: colors.cardBG, // 🌅 Utilise la couleur du thème actif
       borderRadius: 16,
       padding: 16,
       marginBottom: 16,
       borderWidth: 1,
-      borderColor:
-        currentTheme === "light" ? colors.border : "rgba(78, 205, 196, 0.3)",
-      shadowColor: currentTheme === "light" ? colors.shadow : "#4ECDC4",
+      borderColor: colors.border, // 🌅 Utilise la couleur du thème actif
+      shadowColor: colors.shadow, // 🌅 Utilise la couleur du thème actif
       shadowOffset: { width: 0, height: 4 },
       shadowOpacity: 0.3,
       shadowRadius: 10,
@@ -58,7 +57,7 @@ const getStyles = (
     },
     headerText: {
       fontSize: 18,
-      color: currentTheme === "light" ? colors.primary : "#4ECDC4",
+      color: colors.primary, // 🌅 Utilise la couleur du thème actif
       marginLeft: 8,
       fontWeight: "600",
     },
@@ -71,8 +70,7 @@ const getStyles = (
     headerRow: {
       flexDirection: "row",
       borderBottomWidth: 1,
-      borderBottomColor:
-        currentTheme === "light" ? colors.border : "rgba(78, 205, 196, 0.2)",
+      borderBottomColor: colors.border, // 🌅 Utilise la couleur du thème actif
       paddingBottom: 8,
       marginBottom: 8,
     },
@@ -85,8 +83,7 @@ const getStyles = (
       borderRadius: 8,
     },
     todayCell: {
-      backgroundColor:
-        currentTheme === "light" ? colors.surface : "rgba(78, 205, 196, 0.2)",
+      backgroundColor: colors.surface, // 🌅 Utilise la couleur du thème actif
     },
     dateText: {
       fontSize: 12,
@@ -101,7 +98,7 @@ const getStyles = (
       marginTop: 2,
     },
     todayText: {
-      color: currentTheme === "light" ? colors.primary : "#4ECDC4",
+      color: colors.primary, // 🌅 Utilise la couleur du thème actif
     },
     prayerRow: {
       flexDirection: "row",
@@ -126,22 +123,19 @@ const getStyles = (
       borderRadius: 8,
     },
     todayTimeCell: {
-      backgroundColor:
-        currentTheme === "light" ? colors.surface : "rgba(78, 205, 196, 0.1)",
+      backgroundColor: colors.surface, // 🌅 Utilise la couleur du thème actif
     },
     timeText: {
       fontSize: 12,
-      color:
-        currentTheme === "light"
-          ? colors.textSecondary
-          : "rgba(255, 255, 255, 0.9)",
+      color: colors.textSecondary, // 🌅 Utilise la couleur du thème actif
       fontWeight: "500",
     },
     todayTimeText: {
-      color: currentTheme === "light" ? colors.primary : "#4ECDC4",
+      color: colors.primary, // 🌅 Utilise la couleur du thème actif
       fontWeight: "600",
     },
   });
+};
 
 export default function WeeklyPrayerView({
   currentDate,
@@ -193,7 +187,7 @@ export default function WeeklyPrayerView({
         <MaterialCommunityIcons
           name="calendar-week"
           size={24}
-          color={currentTheme === "light" ? colors.primary : "#4ECDC4"}
+          color={colors.primary} // 🌅 Utilise la couleur du thème actif
         />
         <Text style={styles.headerText}>{t("weekly_view")}</Text>
       </View>

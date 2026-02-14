@@ -913,7 +913,12 @@
   "backup": "النسخ الاحتياطي",
   "dark_mode": "داكن",
   "light_mode": "فاتح",
+  "morning_mode": "صباح",
+  "sunset_mode": "المغرب",
   "theme": "المظهر",
+  "premium_required": "مطلوب اشتراك مميز",
+  "premium_themes_message": "مواضيع الصباح والمغرب محجوزة لأعضاء Premium.",
+  "go_premium": "انتقل إلى Premium",
   "excellent_consistency": "اتساق ممتاز!",
   "success_rate_remarkable": "معدل نجاحك البالغ {{rate}}% رائع.",
   "improvement_opportunity": "فرصة للتحسين",
@@ -1610,5 +1615,33 @@
   "toast_auto_fix_error_title": "خطأ في الإصلاح التلقائي",
   "toast_auto_fix_error_message": "تعذر تطبيق الإصلاحات التلقائية",
   "toast_payment_success_title": "تم الدفع بنجاح!",
-  "toast_payment_success_message": "اشتراكك {{subscriptionName}} نشط الآن."
+  "toast_payment_success_message": "اشتراكك {{subscriptionName}} نشط الآن.",
+
+  "library": "المكتبة",
+  "islamic_knowledge": "موارد روحية",
+  "read_listen": "القراءة والاستماع",
+  "prophetic_traditions": "الأحاديث النبوية",
+  "invocations": "الأذكار",
+  "99_names": "أسماء الله الحسنى",
+  "library_info": "الوصول إلى جميع الموارد الروحية في مكان واحد",
+  
+  "more": "المزيد",
+  "additional_features": "ميزات إضافية",
+  "tools": "الأدوات",
+  "find_nearby": "البحث في الجوار",
+  "digital_counter": "عداد رقمي",
+  "islamic_dates": "التواريخ الإسلامية",
+  "premium": "بريميوم",
+  "prayer_stats": "الإحصائيات",
+  "track_prayers": "تتبع صلواتك",
+  "account": "الحساب",
+  "app_preferences": "تفضيلات التطبيق",
+  "app_info": "معلومات التطبيق",
+  "asmaul_husna": "أسماء الله الحسنى",
+  "hijri_calendar": "التقويم الهجري",
+  
+  "background_image_type": "نوع صورة الخلفية",
+  "background_prophet": "🕌 المسجد النبوي",
+  "background_makka": "🕋 مكة المكرمة",
+  "background_alquds": "🌙 القدس"
 }

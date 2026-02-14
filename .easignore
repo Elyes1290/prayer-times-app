@@ -7,3 +7,6 @@ android/app/.cxx/
 ios/build/
 ios/Pods/
 
+# Exclure le dossier de la landing page (non nécessaire pour l'app mobile)
+prayer-times-landing/
+

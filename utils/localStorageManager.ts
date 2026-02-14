@@ -18,6 +18,7 @@ export const ESSENTIAL_STORAGE_KEYS = {
   // Préférences d'interface essentielles
   CURRENT_LANGUAGE: "currentLanguage",
   THEME_MODE: "theme_mode",
+  BACKGROUND_IMAGE_TYPE: "backgroundImageType", // 🖼️ NOUVEAU : Type d'image de fond (premium)
   IS_FIRST_TIME: "isFirstTime",
 
   // Paramètres de prière essentiels

@@ -913,7 +913,12 @@
   "backup": "پشتیبان",
   "dark_mode": "حالت تاریک",
   "light_mode": "حالت روز",
+  "morning_mode": "صبح",
+  "sunset_mode": "مغرب",
   "theme": "حالت",
+  "premium_required": "پریمیوم مورد نیاز",
+  "premium_themes_message": "تم‌های صبح و مغرب برای اعضای پریمیوم رزرو شده است.",
+  "go_premium": "به پریمیوم بروید",
   "excellent_consistency": "تنوع یکنواختی عالی!",
   "success_rate_remarkable": "نرخ موفقیت شما {{rate}}% است و به نظر می‌رسد.",
   "improvement_opportunity": "فرصت بهبود",
@@ -1609,5 +1614,33 @@
   "toast_auto_fix_error_title": "خطای اصلاح خودکار",
   "toast_auto_fix_error_message": "نمی‌توان اصلاحات خودکار را اعمال کرد",
   "toast_payment_success_title": "پرداخت موفق!",
-  "toast_payment_success_message": "اشتراک {{subscriptionName}} شما اکنون فعال است."
+  "toast_payment_success_message": "اشتراک {{subscriptionName}} شما اکنون فعال است.",
+
+  "library": "کتابخانه",
+  "islamic_knowledge": "منابع معنوی",
+  "read_listen": "خواندن و گوش دادن",
+  "prophetic_traditions": "سنت‌های پیامبر",
+  "invocations": "دعاها",
+  "99_names": "۹۹ نام الله",
+  "library_info": "دسترسی به تمام منابع معنوی در یک مکان",
+  
+  "more": "بیشتر",
+  "additional_features": "ویژگی‌های اضافی",
+  "tools": "ابزارها",
+  "find_nearby": "یافتن در نزدیکی",
+  "digital_counter": "شمارنده دیجیتال",
+  "islamic_dates": "تاریخ‌های اسلامی",
+  "premium": "پرمیوم",
+  "prayer_stats": "آمار",
+  "track_prayers": "نمازهای خود را پیگیری کنید",
+  "account": "حساب",
+  "app_preferences": "تنظیمات برنامه",
+  "app_info": "اطلاعات برنامه",
+  "asmaul_husna": "اسماء الحسنی",
+  "hijri_calendar": "تقویم هجری",
+  
+  "background_image_type": "نوع تصویر پس‌زمینه",
+  "background_prophet": "🕌 مسجد النبی",
+  "background_makka": "🕋 مکه",
+  "background_alquds": "🌙 القدس"
 }

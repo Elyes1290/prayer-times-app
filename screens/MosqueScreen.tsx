@@ -496,6 +496,14 @@ export default function MosqueScreen() {
     }
   };
 
+  // Définir styles AVANT renderMosqueItem pour éviter les problèmes
+  const styles = getStyles(
+    colors,
+    overlayTextColor,
+    overlayIconColor,
+    currentTheme
+  );
+
   // Rendu d'une mosquée
   const renderMosqueItem = ({ item }: { item: Mosque }) => (
     <View style={styles.mosqueCard}>
@@ -503,7 +511,7 @@ export default function MosqueScreen() {
         <MaterialCommunityIcons
           name="mosque"
           size={24}
-          color="#4ECDC4"
+          color={colors.primary} // 🌅 Utilise la couleur du thème actif
           style={styles.mosqueIcon}
         />
         <View style={styles.mosqueInfo}>
@@ -523,7 +531,7 @@ export default function MosqueScreen() {
           style={styles.actionButton}
           onPress={() => openDirections(item)}
         >
-          <MaterialCommunityIcons name="directions" size={20} color="#4ECDC4" />
+          <MaterialCommunityIcons name="directions" size={20} color={colors.primary} /> {/* 🌅 Utilise la couleur du thème actif */}
           <Text style={styles.actionText}>
             {t("mosque_screen.directions", "Itinéraire")}
           </Text>
@@ -534,7 +542,7 @@ export default function MosqueScreen() {
             style={styles.actionButton}
             onPress={() => callMosque(item.phone)}
           >
-            <MaterialCommunityIcons name="phone" size={20} color="#4ECDC4" />
+            <MaterialCommunityIcons name="phone" size={20} color={colors.primary} /> {/* 🌅 Utilise la couleur du thème actif */}
             <Text style={styles.actionText}>
               {t("mosque_screen.call", "Appeler")}
             </Text>
@@ -544,19 +552,12 @@ export default function MosqueScreen() {
     </View>
   );
 
-  const styles = getStyles(
-    colors,
-    overlayTextColor,
-    overlayIconColor,
-    currentTheme
-  );
-
   // États de chargement et d'erreur
   if (loading) {
     return (
       <ThemedImageBackground style={styles.container}>
         <View style={styles.loadingContainer}>
-          <ActivityIndicator size="large" color="#4ECDC4" />
+          <ActivityIndicator size="large" color={colors.primary} /> {/* 🌅 Utilise la couleur du thème actif */}
           <Text style={styles.loadingText}>
             {t("mosque_screen.searching_mosques", "Recherche de mosquées...")}
           </Text>
@@ -641,9 +642,10 @@ const getStyles = (
   colors: any,
   overlayTextColor: string,
   overlayIconColor: string,
-  currentTheme: "light" | "dark"
-) =>
-  StyleSheet.create({
+  currentTheme: "light" | "dark" | "morning" | "sunset"
+) => {
+  // 🆕 Les couleurs sont maintenant gérées directement via colors du thème actif
+  return StyleSheet.create({
     container: {
       flex: 1,
     },
@@ -674,7 +676,7 @@ const getStyles = (
       lineHeight: 24,
     },
     retryButton: {
-      backgroundColor: "#4ECDC4",
+      backgroundColor: colors.primary, // 🌅 Utilise la couleur du thème actif
       paddingHorizontal: 24,
       paddingVertical: 12,
       borderRadius: 8,
@@ -694,13 +696,10 @@ const getStyles = (
       alignItems: "center",
       padding: 20,
       paddingTop: 60,
-      backgroundColor:
-        currentTheme === "light"
-          ? "rgba(255, 255, 255, 0.1)" // ✅ Léger fond en mode jour pour plus de lisibilité
-          : "transparent",
-      borderRadius: currentTheme === "light" ? 16 : 0, // ✅ Coins arrondis en mode jour
-      marginHorizontal: currentTheme === "light" ? 16 : 0, // ✅ Marges en mode jour
-      marginBottom: currentTheme === "light" ? 8 : 0, // ✅ Espacement en mode jour
+      backgroundColor: colors.surface, // 🌅 Utilise la couleur du thème actif
+      borderRadius: 16,
+      marginHorizontal: 16,
+      marginBottom: 8,
     },
     title: {
       fontSize: 28,
@@ -708,22 +707,16 @@ const getStyles = (
       color: overlayTextColor,
       marginTop: 8,
       textAlign: "center",
-      textShadowColor:
-        currentTheme === "light"
-          ? "rgba(255, 255, 255, 0.8)" // ✅ Ombre blanche en mode jour pour plus de lisibilité
-          : "rgba(0, 0, 0, 0.5)",
+      textShadowColor: colors.shadow, // 🌅 Utilise la couleur du thème actif
       textShadowOffset: { width: 0, height: 1 },
       textShadowRadius: 2,
     },
     subtitle: {
       fontSize: 14,
       color: overlayTextColor,
-      opacity: currentTheme === "light" ? 0.9 : 0.8, // ✅ Plus d'opacité en mode jour
+      opacity: 0.9,
       marginTop: 4,
-      textShadowColor:
-        currentTheme === "light"
-          ? "rgba(255, 255, 255, 0.6)" // ✅ Ombre blanche en mode jour
-          : "rgba(0, 0, 0, 0.3)",
+      textShadowColor: colors.shadow, // 🌅 Utilise la couleur du thème actif
       textShadowOffset: { width: 0, height: 1 },
       textShadowRadius: 1,
     },
@@ -732,23 +725,17 @@ const getStyles = (
       paddingBottom: 120, // ✅ Plus d'espace pour éviter le menu de navigation
     },
     mosqueCard: {
-      backgroundColor:
-        currentTheme === "light"
-          ? "rgba(255, 255, 255, 0.98)" // ✅ Plus opaque pour mode jour
-          : "rgba(15, 23, 42, 0.95)",
+      backgroundColor: colors.cardBG, // 🌅 Utilise la couleur du thème actif
       borderRadius: 16,
       padding: 20,
       marginBottom: 16,
-      shadowColor: currentTheme === "light" ? "rgba(0, 0, 0, 0.1)" : "#000", // ✅ Ombre plus douce en mode jour
-      shadowOffset: { width: 0, height: currentTheme === "light" ? 2 : 4 }, // ✅ Ombre plus subtile en mode jour
-      shadowOpacity: currentTheme === "light" ? 0.08 : 0.15, // ✅ Opacité réduite en mode jour
-      shadowRadius: currentTheme === "light" ? 8 : 12, // ✅ Rayon plus petit en mode jour
-      elevation: currentTheme === "light" ? 3 : 6, // ✅ Élévation réduite en mode jour
+      shadowColor: colors.shadow, // 🌅 Utilise la couleur du thème actif
+      shadowOffset: { width: 0, height: 4 },
+      shadowOpacity: 0.15,
+      shadowRadius: 12,
+      elevation: 6,
       borderWidth: 1,
-      borderColor:
-        currentTheme === "light"
-          ? "rgba(0, 0, 0, 0.08)" // ✅ Bordure plus visible en mode jour
-          : "rgba(255, 255, 255, 0.1)",
+      borderColor: colors.border, // 🌅 Utilise la couleur du thème actif
     },
     mosqueHeader: {
       flexDirection: "row",
@@ -765,19 +752,19 @@ const getStyles = (
     mosqueName: {
       fontSize: 18,
       fontWeight: "bold",
-      color: currentTheme === "light" ? "#1E293B" : "#F8FAFC",
+      color: colors.text, // 🌅 Utilise la couleur du thème actif
       marginBottom: 6,
       lineHeight: 24,
     },
     mosqueAddress: {
       fontSize: 14,
-      color: currentTheme === "light" ? "#64748B" : "#CBD5E1",
+      color: colors.textSecondary, // 🌅 Utilise la couleur du thème actif
       marginBottom: 6,
       lineHeight: 20,
     },
     mosqueDistance: {
       fontSize: 13,
-      color: "#4ECDC4",
+      color: colors.primary, // 🌅 Utilise la couleur du thème actif
       fontWeight: "600",
     },
     mosqueActions: {
@@ -787,27 +774,20 @@ const getStyles = (
     actionButton: {
       flexDirection: "row",
       alignItems: "center",
-      backgroundColor:
-        currentTheme === "light"
-          ? "rgba(78, 205, 196, 0.15)" // ✅ Plus de contraste en mode jour
-          : "rgba(78, 205, 196, 0.12)",
+      backgroundColor: colors.surfaceVariant, // 🌅 Utilise la couleur du thème actif
       paddingHorizontal: 16,
       paddingVertical: 10,
       borderRadius: 10,
       borderWidth: 1,
-      borderColor:
-        currentTheme === "light"
-          ? "rgba(78, 205, 196, 0.4)" // ✅ Bordure plus visible en mode jour
-          : "rgba(78, 205, 196, 0.3)",
-      shadowColor:
-        currentTheme === "light" ? "rgba(78, 205, 196, 0.2)" : "#4ECDC4", // ✅ Ombre adaptée
-      shadowOffset: { width: 0, height: currentTheme === "light" ? 1 : 2 }, // ✅ Ombre plus subtile en mode jour
-      shadowOpacity: currentTheme === "light" ? 0.06 : 0.1, // ✅ Opacité réduite en mode jour
+      borderColor: colors.border, // 🌅 Utilise la couleur du thème actif
+      shadowColor: colors.shadow, // 🌅 Utilise la couleur du thème actif
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.1,
       shadowRadius: 4,
-      elevation: currentTheme === "light" ? 1 : 2, // ✅ Élévation réduite en mode jour
+      elevation: 2,
     },
     actionText: {
-      color: "#4ECDC4",
+      color: colors.primary, // 🌅 Utilise la couleur du thème actif
       fontSize: 14,
       fontWeight: "600",
       marginLeft: 6,
@@ -816,25 +796,20 @@ const getStyles = (
       alignItems: "center",
       padding: 40,
       marginTop: 60,
-      backgroundColor:
-        currentTheme === "light"
-          ? "rgba(255, 255, 255, 0.1)" // ✅ Léger fond en mode jour
-          : "transparent",
-      borderRadius: currentTheme === "light" ? 16 : 0, // ✅ Coins arrondis en mode jour
-      marginHorizontal: currentTheme === "light" ? 16 : 0, // ✅ Marges en mode jour
+      backgroundColor: colors.surface, // 🌅 Utilise la couleur du thème actif
+      borderRadius: 16,
+      marginHorizontal: 16,
     },
     emptyText: {
       fontSize: 16,
       color: overlayTextColor,
       textAlign: "center",
       marginTop: 16,
-      opacity: currentTheme === "light" ? 0.8 : 0.7, // ✅ Plus d'opacité en mode jour
+      opacity: 0.8,
       lineHeight: 24,
-      textShadowColor:
-        currentTheme === "light"
-          ? "rgba(255, 255, 255, 0.6)" // ✅ Ombre blanche pour la lisibilité
-          : "rgba(0, 0, 0, 0.3)",
+      textShadowColor: colors.shadow, // 🌅 Utilise la couleur du thème actif
       textShadowOffset: { width: 0, height: 1 },
       textShadowRadius: 1,
     },
   });
+};

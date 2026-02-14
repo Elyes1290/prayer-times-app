@@ -9,7 +9,7 @@ import { Colors, ColorName } from "@/constants/Colors";
 import { SettingsContext } from "@/contexts/SettingsContext";
 
 // Hook internal pour obtenir le thème actuel depuis le contexte des paramètres
-function useCurrentThemeInternal(): "light" | "dark" {
+function useCurrentThemeInternal(): "light" | "dark" | "morning" | "sunset" {
   const settings = useContext(SettingsContext);
   const systemTheme = useColorScheme() ?? "light";
 
@@ -20,6 +20,10 @@ function useCurrentThemeInternal(): "light" | "dark" {
         return "light";
       case "dark":
         return "dark";
+      case "morning":
+        return "morning";
+      case "sunset":
+        return "sunset";
       case "auto":
       default:
         return systemTheme;
@@ -31,7 +35,12 @@ function useCurrentThemeInternal(): "light" | "dark" {
 }
 
 export function useThemeColor(
-  props: { light?: string; dark?: string },
+  props: { 
+    light?: string; 
+    dark?: string;
+    morning?: string;   // 🌅 NOUVEAU : Support thème matin
+    sunset?: string;    // 🌆 NOUVEAU : Support thème crépuscule
+  },
   colorName: ColorName
 ): string {
   const theme = useCurrentThemeInternal();
@@ -55,7 +64,7 @@ export function useThemeColors() {
 }
 
 // Hook pour obtenir le thème actuel
-export function useCurrentTheme(): "light" | "dark" {
+export function useCurrentTheme(): "light" | "dark" | "morning" | "sunset" {
   return useCurrentThemeInternal();
 }
 

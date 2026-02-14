@@ -27,7 +27,7 @@ import {
   Platform,
 } from "react-native";
 import { useTranslation } from "react-i18next";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { MaterialCommunityIcons, Ionicons } from "@expo/vector-icons";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import {
   PanGestureHandler,
@@ -55,6 +55,74 @@ import {
   OfflineTabType,
 } from "../components/OfflineNavigationTabs";
 import QuranOfflineService from "../utils/QuranOfflineService";
+
+// 🎵 Import des GIFs disponibles (premium)
+import audioWave3Gif from "../assets/images/gif/audio_wave3.gif";
+import audioWave3Fix from "../assets/images/gif/audio_wave3_fix.png";
+import chuteGif from "../assets/images/gif/chute.gif";
+import chuteFix from "../assets/images/gif/chute_fix.png";
+import riviereGif from "../assets/images/gif/riviere.gif";
+import riviereFix from "../assets/images/gif/riviere_fix.png";
+import alqudsGif from "../assets/images/gif/alquds.gif";
+import alqudsFix from "../assets/images/gif/alquds_fix.png";
+import madinaGif from "../assets/images/gif/madina.gif";
+import madinaFix from "../assets/images/gif/madina_fix.png";
+import makkaGif from "../assets/images/gif/makka.gif";
+import makkaFix from "../assets/images/gif/makka_fix.png";
+
+// 🎵 Types et configuration des GIFs
+type AudioGifType =
+  | "audio_wave3"
+  | "chute"
+  | "riviere"
+  | "alquds"
+  | "madina"
+  | "makka";
+
+const AVAILABLE_GIFS = {
+  audio_wave3: {
+    id: "audio_wave3" as AudioGifType,
+    name: "Ondes Audio",
+    gifImage: audioWave3Gif,
+    fixImage: audioWave3Fix,
+    premium: false,
+  },
+  chute: {
+    id: "chute" as AudioGifType,
+    name: "Cascade",
+    gifImage: chuteGif,
+    fixImage: chuteFix,
+    premium: true,
+  },
+  riviere: {
+    id: "riviere" as AudioGifType,
+    name: "Rivière",
+    gifImage: riviereGif,
+    fixImage: riviereFix,
+    premium: true,
+  },
+  alquds: {
+    id: "alquds" as AudioGifType,
+    name: "Al-Quds 🏛️",
+    gifImage: alqudsGif,
+    fixImage: alqudsFix,
+    premium: true,
+  },
+  madina: {
+    id: "madina" as AudioGifType,
+    name: "Médine 🕌",
+    gifImage: madinaGif,
+    fixImage: madinaFix,
+    premium: true,
+  },
+  makka: {
+    id: "makka" as AudioGifType,
+    name: "Makka 🕋",
+    gifImage: makkaGif,
+    fixImage: makkaFix,
+    premium: true,
+  },
+};
 
 // 🚀 NOUVEAU : Composant de jauge de progression
 const ProgressBar = ({
@@ -172,7 +240,7 @@ const AudioSeekBar = ({
                 {
                   width: `${Math.max(
                     0,
-                    Math.min(100, displayProgress * 100)
+                    Math.min(100, displayProgress * 100),
                   )}%`,
                   backgroundColor: isDragging ? "#FF6B6B" : "#4ECDC4",
                 },
@@ -241,12 +309,12 @@ export default function QuranScreen() {
   const [offlineSurahs, setOfflineSurahs] = useState<any[]>([]);
   const [loadingOfflineData, setLoadingOfflineData] = useState(false);
   const [scannedQuranFiles, setScannedQuranFiles] = useState<PremiumContent[]>(
-    []
+    [],
   );
 
   // 🍎 État local pour les téléchargements iOS (RNFS)
   const [iosDownloadingIds, setIosDownloadingIds] = useState<Set<string>>(
-    new Set()
+    new Set(),
   ); // 🆕 Récitations scannées depuis le dossier physique
 
   // Supprimer les variables non utilisées pour éviter les warnings
@@ -270,6 +338,21 @@ export default function QuranScreen() {
     useState(false);
   // 🎵 NOUVEAU : État pour forcer l'animation du GIF
   const [gifKey, setGifKey] = useState(0);
+
+  // 🎵 NOUVEAU : États pour la sélection de GIF (premium)
+  const [selectedGif, setSelectedGif] = useState<AudioGifType>("audio_wave3");
+  const [gifModalVisible, setGifModalVisible] = useState(false);
+  // 🍎 iOS: Navigation interne dans la modal audio (pas de 2ème modal)
+  const [audioModalView, setAudioModalView] = useState<"player" | "gifSelector">("player");
+
+  // 🎨 NOUVEAU : Déterminer la couleur des boutons en fonction du GIF
+  // Pour makka, madina, alquds, riviere → blanc (fonds clairs)
+  // Pour audio_wave3, chute → couleur sombre
+  const modalButtonColor = ["makka", "madina", "alquds", "riviere"].includes(
+    selectedGif,
+  )
+    ? "#FFFFFF"
+    : "#483C1C";
 
   // 👆 NOUVEAU : État pour désactiver la synchronisation automatique (mode navigation app)
   const [isAppNavigation, setIsAppNavigation] = useState(false);
@@ -307,14 +390,14 @@ export default function QuranScreen() {
 
   // 🎵 NOUVEAU : États pour le lecteur de téléchargements (complètement indépendant)
   const [downloadsSound, setDownloadsSound] = useState<Audio.Sound | null>(
-    null
+    null,
   );
   const [downloadsPlaying, setDownloadsPlaying] = useState<string | null>(null);
   const [downloadsIsPlaying, setDownloadsIsPlaying] = useState(false);
   const [downloadsPosition, setDownloadsPosition] = useState(0);
   const [downloadsDuration, setDownloadsDuration] = useState(0);
   const [downloadsPlaylist, setDownloadsPlaylist] = useState<PremiumContent[]>(
-    []
+    [],
   );
   const [downloadsPlaylistIndex, setDownloadsPlaylistIndex] = useState(0);
 
@@ -388,7 +471,7 @@ export default function QuranScreen() {
       }
 
       console.log(
-        `✅ ${quranRecitations.length} récitations Quran trouvées dans ${reciterFolders.length} récitateurs`
+        `✅ ${quranRecitations.length} récitations Quran trouvées dans ${reciterFolders.length} récitateurs`,
       );
       return quranRecitations;
     } catch (error) {
@@ -431,27 +514,27 @@ export default function QuranScreen() {
   // 🎵 DEBUG : Vérifier l'état du hook
   console.log(
     "🎵 Hook useQuranAudioService - État initial:",
-    serviceAudioState
+    serviceAudioState,
   );
   console.log(
     "🎵 Hook useQuranAudioService - Service disponible:",
-    isServiceAvailable()
+    isServiceAvailable(),
   );
 
   // 🎵 NOUVEAU : Démarrer la lecture en continu d'un récitateur
   const startPlaylistMode = (reciterRecitations: PremiumContent[]) => {
     console.log(
-      `🎵 Démarrage playlist avec ${reciterRecitations.length} récitations`
+      `🎵 Démarrage playlist avec ${reciterRecitations.length} récitations`,
     );
 
     const sortedRecitations = [...reciterRecitations].sort(
-      (a, b) => (a.surahNumber || 0) - (b.surahNumber || 0)
+      (a, b) => (a.surahNumber || 0) - (b.surahNumber || 0),
     );
 
     console.log(
       `🎵 Récitations triées: ${sortedRecitations
         .map((r) => r.title)
-        .join(", ")}`
+        .join(", ")}`,
     );
 
     setPlaylistItems(sortedRecitations);
@@ -466,7 +549,7 @@ export default function QuranScreen() {
     // Commencer par la première récitation
     if (sortedRecitations.length > 0) {
       console.log(
-        `🎵 Démarrage de la première récitation: ${sortedRecitations[0].title}`
+        `🎵 Démarrage de la première récitation: ${sortedRecitations[0].title}`,
       );
       playRecitation(sortedRecitations[0]);
     }
@@ -479,6 +562,49 @@ export default function QuranScreen() {
       setGifKey((prev) => prev + 1);
     }
   }, [audioControlsModalVisible]);
+
+  // 🎵 NOUVEAU : Charger le GIF sélectionné au démarrage
+  useEffect(() => {
+    const loadSelectedGif = async () => {
+      try {
+        const saved = await AsyncStorage.getItem("@selected_audio_gif");
+        const validGifs: AudioGifType[] = [
+          "audio_wave3",
+          "chute",
+          "riviere",
+          "alquds",
+          "madina",
+          "makka",
+        ];
+        if (saved && validGifs.includes(saved as AudioGifType)) {
+          setSelectedGif(saved as AudioGifType);
+        }
+      } catch (err) {
+        console.error("Erreur chargement GIF:", err);
+      }
+    };
+    loadSelectedGif();
+  }, []);
+
+  // 🎵 NOUVEAU : Sauvegarder le choix de GIF
+  const selectGif = async (gifId: AudioGifType) => {
+    try {
+      setSelectedGif(gifId);
+      await AsyncStorage.setItem("@selected_audio_gif", gifId);
+      
+      // 🍎 iOS: Fermer la vue interne au lieu de la modal
+      if (Platform.OS === "ios") {
+        setAudioModalView("player");
+      } else {
+        setGifModalVisible(false);
+      }
+      
+      // Forcer le re-render pour appliquer le nouveau GIF
+      setGifKey((prev) => prev + 1);
+    } catch (err) {
+      console.error("Erreur sauvegarde GIF:", err);
+    }
+  };
 
   // Map langue => id traduction Quran.com (ajoute d'autres langues si besoin)
   const translationMap: Record<string, number | null> = {
@@ -505,30 +631,30 @@ export default function QuranScreen() {
   const lang = i18n.language.startsWith("fr")
     ? "fr"
     : i18n.language.startsWith("en")
-    ? "en"
-    : i18n.language.startsWith("ru")
-    ? "ru"
-    : i18n.language.startsWith("tr")
-    ? "tr"
-    : i18n.language.startsWith("de")
-    ? "de"
-    : i18n.language.startsWith("it")
-    ? "it"
-    : i18n.language.startsWith("es")
-    ? "es"
-    : i18n.language.startsWith("pt")
-    ? "pt"
-    : i18n.language.startsWith("ur")
-    ? "ur"
-    : i18n.language.startsWith("fa")
-    ? "fa"
-    : i18n.language.startsWith("ar")
-    ? "ar"
-    : i18n.language.startsWith("nl") // Ajout du néerlandais
-    ? "nl"
-    : i18n.language.startsWith("bn") // Ajout du bengali
-    ? "bn"
-    : "en";
+      ? "en"
+      : i18n.language.startsWith("ru")
+        ? "ru"
+        : i18n.language.startsWith("tr")
+          ? "tr"
+          : i18n.language.startsWith("de")
+            ? "de"
+            : i18n.language.startsWith("it")
+              ? "it"
+              : i18n.language.startsWith("es")
+                ? "es"
+                : i18n.language.startsWith("pt")
+                  ? "pt"
+                  : i18n.language.startsWith("ur")
+                    ? "ur"
+                    : i18n.language.startsWith("fa")
+                      ? "fa"
+                      : i18n.language.startsWith("ar")
+                        ? "ar"
+                        : i18n.language.startsWith("nl") // Ajout du néerlandais
+                          ? "nl"
+                          : i18n.language.startsWith("bn") // Ajout du bengali
+                            ? "bn"
+                            : "en";
 
   // Fonction fetch avec fallback sur anglais (id 85)
   async function fetchTranslation(chapterNumber: number, lang: string) {
@@ -536,7 +662,7 @@ export default function QuranScreen() {
 
     try {
       const res = await fetch(
-        `https://api.quran.com/api/v4/quran/translations/${translationId}?chapter_number=${chapterNumber}`
+        `https://api.quran.com/api/v4/quran/translations/${translationId}?chapter_number=${chapterNumber}`,
       );
       const json = await res.json();
 
@@ -545,7 +671,7 @@ export default function QuranScreen() {
       } else if (translationId !== 85) {
         // fallback anglais si vide
         const fallbackRes = await fetch(
-          `https://api.quran.com/api/v4/quran/translations/85?chapter_number=${chapterNumber}`
+          `https://api.quran.com/api/v4/quran/translations/85?chapter_number=${chapterNumber}`,
         );
         const fallbackJson = await fallbackRes.json();
         return fallbackJson.translations || [];
@@ -555,7 +681,7 @@ export default function QuranScreen() {
       // fallback en cas d'erreur réseau
       if (translationId !== 85) {
         const fallbackRes = await fetch(
-          `https://api.quran.com/api/v4/quran/translations/85?chapter_number=${chapterNumber}`
+          `https://api.quran.com/api/v4/quran/translations/85?chapter_number=${chapterNumber}`,
         );
         const fallbackJson = await fallbackRes.json();
         return fallbackJson.translations || [];
@@ -581,7 +707,7 @@ export default function QuranScreen() {
   // 🆕 Scanner le dossier physique quand on active le mode hors ligne ou la vue des téléchargements
   useEffect(() => {
     console.log(
-      `🔍 useEffect scan - isOfflineMode: ${offlineAccess.isOfflineMode}, showDownloadsView: ${showDownloadsView}`
+      `🔍 useEffect scan - isOfflineMode: ${offlineAccess.isOfflineMode}, showDownloadsView: ${showDownloadsView}`,
     );
     if (
       (offlineAccess.isOfflineMode || showDownloadsView) &&
@@ -589,7 +715,7 @@ export default function QuranScreen() {
     ) {
       scanDownloadedQuranFiles().then((files) => {
         console.log(
-          `🎯 Fichiers scannés à setter dans l'état: ${files.length}`
+          `🎯 Fichiers scannés à setter dans l'état: ${files.length}`,
         );
         setScannedQuranFiles(files);
       });
@@ -620,7 +746,7 @@ export default function QuranScreen() {
 
       // 🎵 SUPPRIMÉ : Plus d'écoute directe des événements - utilisation uniquement du hook useQuranAudioService
       console.log(
-        "🎵 Écouteurs d'événements audio initialisés via useQuranAudioService"
+        "🎵 Écouteurs d'événements audio initialisés via useQuranAudioService",
       );
 
       // Nettoyer les écouteurs lors du démontage
@@ -639,7 +765,7 @@ export default function QuranScreen() {
         !serviceAudioState.isServiceRunning
       ) {
         console.log(
-          "🎵 Démarrage automatique du service audio pour utilisateur premium"
+          "🎵 Démarrage automatique du service audio pour utilisateur premium",
         );
         startService().catch((error) => {
           console.error("❌ Erreur démarrage service audio:", error);
@@ -674,7 +800,7 @@ export default function QuranScreen() {
         "isPlaying:",
         newIsPlaying,
         "currentSurah:",
-        serviceAudioState.currentSurah
+        serviceAudioState.currentSurah,
       );
 
       // 🎯 Mise à jour simplifiée du timer (iOS/Android)
@@ -734,13 +860,13 @@ export default function QuranScreen() {
         if (currentRecitation && currentRecitation.id) {
           setCurrentlyPlaying(currentRecitation.id);
           console.log(
-            `🎯 Synchronisation currentlyPlaying: ${currentRecitation.id}`
+            `🎯 Synchronisation currentlyPlaying: ${currentRecitation.id}`,
           );
         }
       } else if (!newIsPlaying) {
         // Si le service ne joue rien, réinitialiser si nécessaire
         console.log(
-          `🎯 Service en pause, currentlyPlaying conservé: ${currentlyPlaying}`
+          `🎯 Service en pause, currentlyPlaying conservé: ${currentlyPlaying}`,
         );
       }
 
@@ -750,7 +876,7 @@ export default function QuranScreen() {
         serviceAudioState.currentSurah !== lastServiceSurah
       ) {
         console.log(
-          `🎯 Changement sourate détecté: "${lastServiceSurah}" → "${serviceAudioState.currentSurah}"`
+          `🎯 Changement sourate détecté: "${lastServiceSurah}" → "${serviceAudioState.currentSurah}"`,
         );
         setLastServiceSurah(serviceAudioState.currentSurah);
 
@@ -758,7 +884,7 @@ export default function QuranScreen() {
         if (isAppNavigation) {
           setIsAppNavigation(false);
           console.log(
-            "🔄 Navigation widget détectée - Mode navigation app désactivé - Sync réactivée"
+            "🔄 Navigation widget détectée - Mode navigation app désactivé - Sync réactivée",
           );
         }
       }
@@ -767,14 +893,14 @@ export default function QuranScreen() {
       // ⚠️ Synchronisation DÉSACTIVÉE en mode navigation app
       if (serviceAudioState.currentSurah && !isAppNavigation) {
         console.log(
-          `🔍 Vérification sync: currentSurah="${serviceAudioState.currentSurah}" selectedSourate=${selectedSourate}`
+          `🔍 Vérification sync: currentSurah="${serviceAudioState.currentSurah}" selectedSourate=${selectedSourate}`,
         );
         // Extraire le numéro de sourate depuis le nom (format: "Al-Fatiha (001) - Récitateur")
         const surahMatch = serviceAudioState.currentSurah.match(/\((\d{3})\)/);
         if (surahMatch) {
           const surahNumber = parseInt(surahMatch[1]);
           console.log(
-            `🔍 Sourate extraite: ${surahNumber}, actuelle: ${selectedSourate}`
+            `🔍 Sourate extraite: ${surahNumber}, actuelle: ${selectedSourate}`,
           );
           if (
             surahNumber >= 1 &&
@@ -782,7 +908,7 @@ export default function QuranScreen() {
             surahNumber !== selectedSourate
           ) {
             console.log(
-              `🎯 Synchronisation interface: passage sourate ${selectedSourate} → ${surahNumber}`
+              `🎯 Synchronisation interface: passage sourate ${selectedSourate} → ${surahNumber}`,
             );
             setSelectedSourate(surahNumber);
           } else {
@@ -790,12 +916,12 @@ export default function QuranScreen() {
           }
         } else {
           console.log(
-            `🔍 Regex ne match pas: "${serviceAudioState.currentSurah}"`
+            `🔍 Regex ne match pas: "${serviceAudioState.currentSurah}"`,
           );
         }
       } else if (isAppNavigation) {
         console.log(
-          "🚫 Synchronisation désactivée - Mode navigation app actif"
+          "🚫 Synchronisation désactivée - Mode navigation app actif",
         );
       }
     }
@@ -829,14 +955,14 @@ export default function QuranScreen() {
         const recitationsWithStatus = await Promise.all(
           catalog.quranRecitations.map(async (recitation) => {
             const actualDownloadPath = await premiumManager.isContentDownloaded(
-              recitation.id
+              recitation.id,
             );
             return {
               ...recitation,
               isDownloaded: !!actualDownloadPath,
               downloadPath: actualDownloadPath || undefined,
             };
-          })
+          }),
         );
         setAvailableRecitations(recitationsWithStatus);
 
@@ -868,7 +994,7 @@ export default function QuranScreen() {
       if (index) {
         setOfflineSurahs(index.surahs);
         console.log(
-          `✅ [QuranOffline] ${index.surahs.length} sourates chargées`
+          `✅ [QuranOffline] ${index.surahs.length} sourates chargées`,
         );
       }
     } catch (error) {
@@ -883,7 +1009,7 @@ export default function QuranScreen() {
   const loadOfflineSurah = async (surahNumber: number) => {
     try {
       console.log(
-        `🔍 [QuranOffline] Tentative de chargement sourate ${surahNumber}...`
+        `🔍 [QuranOffline] Tentative de chargement sourate ${surahNumber}...`,
       );
       const surahData = await QuranOfflineService.getSurah(surahNumber);
       if (surahData) {
@@ -892,9 +1018,9 @@ export default function QuranScreen() {
           {
             versesCount: surahData.verses.length,
             availableTranslations: Object.keys(
-              surahData.verses[0]?.translations || {}
+              surahData.verses[0]?.translations || {},
             ),
-          }
+          },
         );
         // Convertir au format attendu par l'interface existante
         const arabicVerses = surahData.verses.map((verse) => ({
@@ -933,7 +1059,7 @@ export default function QuranScreen() {
     } catch (error) {
       console.error(
         `❌ [QuranOffline] Erreur chargement sourate ${surahNumber}:`,
-        error
+        error,
       );
       return false;
     }
@@ -966,7 +1092,7 @@ export default function QuranScreen() {
   const loadSpecificRecitation = async (
     reciterName: string,
     surahNumber: number,
-    autoPlay: boolean = false
+    autoPlay: boolean = false,
   ) => {
     if (!reciterName) return;
 
@@ -974,14 +1100,14 @@ export default function QuranScreen() {
     try {
       const recitation = await premiumManager.getSpecificRecitation(
         reciterName,
-        surahNumber
+        surahNumber,
       );
       setCurrentRecitation(recitation);
 
       // 🚀 NOUVEAU : Lecture automatique si demandé (pour boutons suivant/précédent)
       if (autoPlay && recitation) {
         console.log(
-          `🎵 Lecture automatique après chargement: ${recitation.title}`
+          `🎵 Lecture automatique après chargement: ${recitation.title}`,
         );
         playRecitation(recitation);
       }
@@ -1024,7 +1150,7 @@ export default function QuranScreen() {
               }
 
               const success = await premiumManager.deletePremiumContent(
-                recitation.id
+                recitation.id,
               );
 
               if (success) {
@@ -1065,7 +1191,7 @@ export default function QuranScreen() {
             }
           },
         },
-      ]
+      ],
     );
   };
 
@@ -1092,7 +1218,7 @@ export default function QuranScreen() {
 
     try {
       console.log(
-        `🎯 Début téléchargement: ${recitation.title} (${Platform.OS})`
+        `🎯 Début téléchargement: ${recitation.title} (${Platform.OS})`,
       );
 
       // 🍎 iOS : Utiliser PremiumContentManager (RNFS) comme pour les Adhans
@@ -1122,7 +1248,7 @@ export default function QuranScreen() {
             quranContent,
             (progress) => {
               console.log(`📥 Progression: ${Math.round(progress * 100)}%`);
-            }
+            },
           );
 
           console.log("✅ Téléchargement terminé, attente 500ms avant scan...");
@@ -1140,14 +1266,14 @@ export default function QuranScreen() {
 
           // 🎯 CRITIQUE : Recharger availableRecitations pour mettre à jour les boutons Télécharger/Supprimer
           console.log(
-            "🔄 Rechargement des récitations pour actualiser l'UI..."
+            "🔄 Rechargement des récitations pour actualiser l'UI...",
           );
           await loadAvailableRecitations(true);
 
           // 🚀 NOUVEAU : Mettre à jour currentRecitation localement pour actualiser le bouton immédiatement
           if (currentRecitation && currentRecitation.id === recitation.id) {
             const updatedPath = await premiumManager.isContentDownloaded(
-              recitation.id
+              recitation.id,
             );
             setCurrentRecitation({
               ...currentRecitation,
@@ -1155,7 +1281,7 @@ export default function QuranScreen() {
               downloadPath: updatedPath || undefined,
             });
             console.log(
-              "✅ currentRecitation mis à jour avec le statut téléchargé"
+              "✅ currentRecitation mis à jour avec le statut téléchargé",
             );
           }
 
@@ -1217,7 +1343,7 @@ export default function QuranScreen() {
           // Utiliser la fonction de migration du PremiumContentManager
           const migratedPath = await premiumManager.migrateFileToInternal(
             localUri.replace("file://", ""),
-            contentId
+            contentId,
           );
 
           if (migratedPath) {
@@ -1225,7 +1351,7 @@ export default function QuranScreen() {
             // Utiliser le nouveau chemin migré
             await premiumManager.markContentAsDownloaded(
               contentId,
-              migratedPath
+              migratedPath,
             );
 
             // Mettre à jour l'état local avec le nouveau chemin
@@ -1276,7 +1402,7 @@ export default function QuranScreen() {
         });
       }
     },
-    [currentRecitation, t, premiumManager, showToast]
+    [currentRecitation, t, premiumManager, showToast],
   );
 
   // 🚀 NOUVEAU : Gérer l'annulation du téléchargement natif
@@ -1363,7 +1489,7 @@ export default function QuranScreen() {
 
         // Vérifier si le fichier est réellement téléchargé
         const actualDownloadPath = await premiumManager.isContentDownloaded(
-          recitation.id
+          recitation.id,
         );
 
         if (actualDownloadPath) {
@@ -1385,7 +1511,7 @@ export default function QuranScreen() {
             if (streamingUrl.includes("action=download")) {
               streamingUrl = streamingUrl.replace(
                 /action=download/g,
-                "action=stream"
+                "action=stream",
               );
             } else if (!streamingUrl.includes("action=")) {
               streamingUrl += streamingUrl.includes("?")
@@ -1494,7 +1620,7 @@ export default function QuranScreen() {
             await loadAudioInService(
               audioPath,
               recitation.title,
-              recitation.reciter || ""
+              recitation.reciter || "",
             );
 
             // Lancer la lecture
@@ -1564,7 +1690,7 @@ export default function QuranScreen() {
             try {
               const createdSound = await audioManager.playSource(
                 audioSource,
-                1.0
+                1.0,
               );
               setSound(createdSound);
               setIsPlaying(true);
@@ -1574,7 +1700,7 @@ export default function QuranScreen() {
             } catch (playError: any) {
               console.error(
                 "❌ Erreur lecture locale en mode offline:",
-                playError
+                playError,
               );
               showToast({
                 type: "error",
@@ -1593,7 +1719,7 @@ export default function QuranScreen() {
           } catch (playError: any) {
             console.error(
               "Erreur lecture locale, fallback streaming:",
-              playError
+              playError,
             );
             // Fallback: tenter le streaming HTTP sécurisé
             try {
@@ -1605,7 +1731,7 @@ export default function QuranScreen() {
               if (!remoteUrl) throw new Error("URL streaming indisponible");
               createdSound = await audioManager.playSource(
                 { uri: remoteUrl },
-                1.0
+                1.0,
               );
             } catch (fallbackError) {
               console.error("Erreur fallback streaming:", fallbackError);
@@ -1627,7 +1753,7 @@ export default function QuranScreen() {
           updateWidgetAudio(
             recitation.title,
             recitation.reciter || "",
-            audioPath
+            audioPath,
           );
           updateWidgetPlaybackState(true, 0, 0);
         }
@@ -1645,7 +1771,7 @@ export default function QuranScreen() {
                 updateWidgetPlaybackState(
                   isPlaying,
                   status.positionMillis || 0,
-                  status.durationMillis || 0
+                  status.durationMillis || 0,
                 );
               }
 
@@ -1683,7 +1809,7 @@ export default function QuranScreen() {
 
               if (status.didJustFinish) {
                 console.log(
-                  "🎵 Audio terminé - didJustFinish détecté (Expo-AV uniquement)"
+                  "🎵 Audio terminé - didJustFinish détecté (Expo-AV uniquement)",
                 );
                 console.log("🎵 État playlist:", {
                   playlistMode: playlistModeRef.current,
@@ -1700,11 +1826,11 @@ export default function QuranScreen() {
                 // 🎵 Mode playlist - passer automatiquement à la suivante (Expo-AV uniquement)
                 if (playlistModeRef.current) {
                   console.log(
-                    "🎵 Mode playlist actif - passage automatique à la suivante (Expo-AV)"
+                    "🎵 Mode playlist actif - passage automatique à la suivante (Expo-AV)",
                   );
                   setTimeout(() => {
                     console.log(
-                      "🎵 Exécution de playNextInPlaylist après délai (Expo-AV)"
+                      "🎵 Exécution de playNextInPlaylist après délai (Expo-AV)",
                     );
                     playNextInPlaylistRef.current();
                   }, 1000); // Petite pause entre les récitations
@@ -1723,7 +1849,7 @@ export default function QuranScreen() {
             user?.isPremium
           ) {
             console.log(
-              "🎵 Mode playlist détecté - pas de timer nécessaire, utilisation de l'événement natif"
+              "🎵 Mode playlist détecté - pas de timer nécessaire, utilisation de l'événement natif",
             );
           }
         }
@@ -1767,7 +1893,7 @@ export default function QuranScreen() {
       updateWidgetPlaybackState,
       offlineAccess.isOfflineMode,
       networkStatus.isConnected,
-    ]
+    ],
   );
 
   // 🎵 LECTEUR COMPLÈTEMENT INDÉPENDANT POUR LES TÉLÉCHARGEMENTS
@@ -1776,7 +1902,7 @@ export default function QuranScreen() {
     async (recitation: PremiumContent) => {
       try {
         console.log(
-          `🎵 [DOWNLOADS] Lecture téléchargement: ${recitation.title}`
+          `🎵 [DOWNLOADS] Lecture téléchargement: ${recitation.title}`,
         );
 
         // 1️⃣ Arrêter toute lecture précédente dans le lecteur téléchargements
@@ -1794,7 +1920,7 @@ export default function QuranScreen() {
 
           if (downloadedRecitations.length > 0) {
             const currentIndex = downloadedRecitations.findIndex(
-              (r) => r.id === recitation.id
+              (r) => r.id === recitation.id,
             );
 
             setDownloadsPlaylist(downloadedRecitations);
@@ -1803,14 +1929,14 @@ export default function QuranScreen() {
             console.log(
               `🎵 [DOWNLOADS] Playlist: ${
                 downloadedRecitations.length
-              } récitations, position: ${currentIndex + 1}`
+              } récitations, position: ${currentIndex + 1}`,
             );
           }
         }
 
         // 3️⃣ Vérifier que le fichier est téléchargé
         const downloadPath = await premiumManager.isContentDownloaded(
-          recitation.id
+          recitation.id,
         );
         if (!downloadPath) {
           showToast({
@@ -1845,14 +1971,14 @@ export default function QuranScreen() {
               // 🎵 Détecter la fin du fichier
               if (status.didJustFinish && !status.isLooping) {
                 console.log(
-                  "🎵 [DOWNLOADS] Fichier terminé, passage au suivant"
+                  "🎵 [DOWNLOADS] Fichier terminé, passage au suivant",
                 );
                 if (playNextDownloadedRef.current) {
                   playNextDownloadedRef.current();
                 }
               }
             }
-          }
+          },
         );
 
         setDownloadsSound(newSound);
@@ -1873,7 +1999,7 @@ export default function QuranScreen() {
         });
       }
     },
-    [downloadsSound, scannedQuranFiles, premiumManager, showToast, t]
+    [downloadsSound, scannedQuranFiles, premiumManager, showToast, t],
   );
 
   // 🎵 Pause/Resume pour le lecteur téléchargements (complètement indépendant)
@@ -1912,7 +2038,7 @@ export default function QuranScreen() {
     const nextIndex = downloadsPlaylistIndex + 1;
     if (nextIndex < downloadsPlaylist.length) {
       console.log(
-        `🎵 [DOWNLOADS] Passage à ${nextIndex + 1}/${downloadsPlaylist.length}`
+        `🎵 [DOWNLOADS] Passage à ${nextIndex + 1}/${downloadsPlaylist.length}`,
       );
       setDownloadsPlaylistIndex(nextIndex);
       await playDownloadedRecitation(downloadsPlaylist[nextIndex]);
@@ -2030,7 +2156,7 @@ export default function QuranScreen() {
         console.error("Erreur navigation audio:", error);
       }
     },
-    [sound, isServiceAvailable, user?.isPremium, seekToPositionInService]
+    [sound, isServiceAvailable, user?.isPremium, seekToPositionInService],
   );
 
   const stopRecitation = useCallback(async () => {
@@ -2085,12 +2211,12 @@ export default function QuranScreen() {
       if (direction === "next") {
         targetSurah = currentSurah >= 114 ? 1 : currentSurah + 1;
         console.log(
-          `👆 Navigation SUIVANT: ${currentSurah} → ${targetSurah} (autoPlay: ${autoPlay})`
+          `👆 Navigation SUIVANT: ${currentSurah} → ${targetSurah} (autoPlay: ${autoPlay})`,
         );
       } else {
         targetSurah = currentSurah <= 1 ? 114 : currentSurah - 1;
         console.log(
-          `👆 Navigation PRÉCÉDENT: ${currentSurah} → ${targetSurah} (autoPlay: ${autoPlay})`
+          `👆 Navigation PRÉCÉDENT: ${currentSurah} → ${targetSurah} (autoPlay: ${autoPlay})`,
         );
       }
 
@@ -2100,7 +2226,7 @@ export default function QuranScreen() {
       // Activer le mode navigation app (désactive sync automatique) AVANT l'animation
       setIsAppNavigation(true);
       console.log(
-        "🎯 Mode navigation app activé - Sync automatique désactivée"
+        "🎯 Mode navigation app activé - Sync automatique désactivée",
       );
 
       // Changer la sourate AVANT l'animation
@@ -2128,13 +2254,13 @@ export default function QuranScreen() {
         }),
       ]).start();
     },
-    [selectedSourate, selectedReciter, loadSpecificRecitation, slideAnim]
+    [selectedSourate, selectedReciter, loadSpecificRecitation, slideAnim],
   );
 
   // 🎵 NOUVEAU : Passer à la récitation suivante dans la playlist
   const playNextInPlaylist = useCallback(() => {
     console.log(
-      `🎵 playNextInPlaylist - currentIndex: ${currentPlaylistIndexRef.current}, total: ${playlistItemsRef.current.length}, mode: ${playlistModeRef.current}`
+      `🎵 playNextInPlaylist - currentIndex: ${currentPlaylistIndexRef.current}, total: ${playlistItemsRef.current.length}, mode: ${playlistModeRef.current}`,
     );
 
     // 🎯 Si on n'est pas en mode playlist, on utilise la navigation classique avec animation
@@ -2166,7 +2292,7 @@ export default function QuranScreen() {
 
     if (nextRecitation) {
       console.log(
-        `🎵 Passage à la récitation suivante: ${nextRecitation.title} (index: ${nextIndex})`
+        `🎵 Passage à la récitation suivante: ${nextRecitation.title} (index: ${nextIndex})`,
       );
       setCurrentPlaylistIndex(nextIndex);
       currentPlaylistIndexRef.current = nextIndex;
@@ -2182,7 +2308,7 @@ export default function QuranScreen() {
   // 🎵 NOUVEAU : Passer à la récitation précédente dans la playlist
   const playPreviousInPlaylist = useCallback(() => {
     console.log(
-      `🎵 playPreviousInPlaylist - currentIndex: ${currentPlaylistIndexRef.current}, mode: ${playlistModeRef.current}`
+      `🎵 playPreviousInPlaylist - currentIndex: ${currentPlaylistIndexRef.current}, mode: ${playlistModeRef.current}`,
     );
 
     // 🎯 Si on n'est pas en mode playlist, on utilise la navigation classique avec animation
@@ -2203,7 +2329,7 @@ export default function QuranScreen() {
 
     if (prevRecitation) {
       console.log(
-        `🎵 Passage à la récitation précédente: ${prevRecitation.title} (index: ${prevIndex})`
+        `🎵 Passage à la récitation précédente: ${prevRecitation.title} (index: ${prevIndex})`,
       );
       setCurrentPlaylistIndex(prevIndex);
       currentPlaylistIndexRef.current = prevIndex;
@@ -2252,7 +2378,7 @@ export default function QuranScreen() {
       if (playlistModeRef.current || isRemoteCommand) {
         if (event.reason === "previous") {
           console.log(
-            "🎵 Navigation vers la sourate précédente demandée (via Ref)"
+            "🎵 Navigation vers la sourate précédente demandée (via Ref)",
           );
           playPreviousInPlaylistRef.current();
         } else {
@@ -2267,7 +2393,7 @@ export default function QuranScreen() {
 
     const subscription = DeviceEventEmitter.addListener(
       "QuranSurahCompletedForPlaylist",
-      handleSurahCompleted
+      handleSurahCompleted,
     );
 
     return () => {
@@ -2303,7 +2429,7 @@ export default function QuranScreen() {
         }
       }
     },
-    [handleSwipeNavigation]
+    [handleSwipeNavigation],
   );
 
   // 🎯 NAVIGATION SUPPRIMÉE - Utiliser uniquement le widget pour naviguer
@@ -2320,7 +2446,7 @@ export default function QuranScreen() {
       if (user?.isPremium) {
         // Premium : TOUJOURS utiliser les données locales (plus rapide)
         console.log(
-          `📱 [QuranOffline] Chargement sourate ${selectedSourate} avec données locales Premium`
+          `📱 [QuranOffline] Chargement sourate ${selectedSourate} avec données locales Premium`,
         );
         const success = await loadOfflineSurah(selectedSourate);
         if (success) {
@@ -2329,7 +2455,7 @@ export default function QuranScreen() {
         } else {
           // ✅ Si le chargement offline échoue, ne pas essayer le serveur
           console.error(
-            `❌ [QuranOffline] Impossible de charger la sourate ${selectedSourate} offline`
+            `❌ [QuranOffline] Impossible de charger la sourate ${selectedSourate} offline`,
           );
           setArabicVerses([]);
           setPhoneticArr([]);
@@ -2340,7 +2466,7 @@ export default function QuranScreen() {
       } else if (!networkStatus.isConnected) {
         // Non-Premium hors ligne : accès refusé
         console.log(
-          `🚫 [QuranOffline] Accès refusé - connexion requise pour utilisateur gratuit`
+          `🚫 [QuranOffline] Accès refusé - connexion requise pour utilisateur gratuit`,
         );
         setArabicVerses([]);
         setPhoneticArr([]);
@@ -2353,13 +2479,13 @@ export default function QuranScreen() {
       try {
         // Fetch arabe (toujours même endpoint)
         const arabicRes = await fetch(
-          `https://api.quran.com/api/v4/quran/verses/uthmani?chapter_number=${selectedSourate}`
+          `https://api.quran.com/api/v4/quran/verses/uthmani?chapter_number=${selectedSourate}`,
         );
         const arabicJson = await arabicRes.json();
 
         // Fetch translittération (toujours id=57)
         const phoneticRes = await fetch(
-          `https://api.quran.com/api/v4/quran/translations/57?chapter_number=${selectedSourate}`
+          `https://api.quran.com/api/v4/quran/translations/57?chapter_number=${selectedSourate}`,
         );
         const phoneticJson = await phoneticRes.json();
 
@@ -2377,7 +2503,7 @@ export default function QuranScreen() {
         // En cas d'erreur réseau, essayer le mode offline si Premium
         if (user?.isPremium) {
           console.log(
-            `🔄 [QuranOffline] Erreur réseau, basculement vers mode offline`
+            `🔄 [QuranOffline] Erreur réseau, basculement vers mode offline`,
           );
           await loadOfflineSurah(selectedSourate);
         } else {
@@ -2433,7 +2559,7 @@ export default function QuranScreen() {
   const convertToFavorite = (
     item: any,
     translationText: string,
-    chapterName: string
+    chapterName: string,
   ): Omit<QuranVerseFavorite, "id" | "dateAdded"> => {
     // Vérifier que verse_key existe avant de le splitter
     if (!item.verse_key) {
@@ -2588,7 +2714,7 @@ export default function QuranScreen() {
                 // 🔧 Utiliser les récitations scannées physiquement
                 const downloadedRecitations = scannedQuranFiles;
                 console.log(
-                  `📊 Affichage vue téléchargements - scannedQuranFiles.length: ${scannedQuranFiles.length}`
+                  `📊 Affichage vue téléchargements - scannedQuranFiles.length: ${scannedQuranFiles.length}`,
                 );
 
                 if (downloadedRecitations.length === 0) {
@@ -2654,7 +2780,7 @@ export default function QuranScreen() {
                         {recitations
                           .sort(
                             (a, b) =>
-                              (a.surahNumber || 0) - (b.surahNumber || 0)
+                              (a.surahNumber || 0) - (b.surahNumber || 0),
                           )
                           .map((recitation) => (
                             <View
@@ -2800,7 +2926,7 @@ export default function QuranScreen() {
                   renderItem={({ item, index }) => {
                     // Affichage simplifié pour le mode offline
                     const originalIndex = arabicVerses.findIndex(
-                      (v) => v.id === item.id
+                      (v) => v.id === item.id,
                     );
                     const phoneticText = phoneticArr[originalIndex]?.text || "";
                     const translationText =
@@ -2824,7 +2950,7 @@ export default function QuranScreen() {
                               favoriteData={convertToFavorite(
                                 item,
                                 translationText,
-                                getSelectedSourateLabel()
+                                getSelectedSourateLabel(),
                               )}
                               size={20}
                               iconColor="#ba9c34"
@@ -2865,7 +2991,7 @@ export default function QuranScreen() {
                   // 🔧 CORRECTION BUG : Utiliser les récitations scannées physiquement
                   const downloadedRecitations = scannedQuranFiles;
                   console.log(
-                    `📊 Affichage mode hors ligne - scannedQuranFiles.length: ${scannedQuranFiles.length}`
+                    `📊 Affichage mode hors ligne - scannedQuranFiles.length: ${scannedQuranFiles.length}`,
                   );
 
                   if (downloadedRecitations.length === 0) {
@@ -2933,7 +3059,7 @@ export default function QuranScreen() {
                           {recitations
                             .sort(
                               (a, b) =>
-                                (a.surahNumber || 0) - (b.surahNumber || 0)
+                                (a.surahNumber || 0) - (b.surahNumber || 0),
                             )
                             .map((recitation) => (
                               <TouchableOpacity
@@ -3392,10 +3518,10 @@ export default function QuranScreen() {
                 isLoading
                   ? "loading"
                   : !selectedReciter
-                  ? "account-music"
-                  : currentlyPlaying === currentRecitation?.id && isPlaying
-                  ? "pause"
-                  : "play"
+                    ? "account-music"
+                    : currentlyPlaying === currentRecitation?.id && isPlaying
+                      ? "pause"
+                      : "play"
               }
               size={24}
               color="#fff"
@@ -3433,8 +3559,8 @@ export default function QuranScreen() {
                     <ExpoImage
                       source={
                         currentlyPlaying === currentRecitation?.id && isPlaying
-                          ? require("../assets/images/audio_wave3.gif")
-                          : require("../assets/images/audio_wave3_fix.png")
+                          ? AVAILABLE_GIFS[selectedGif].gifImage
+                          : AVAILABLE_GIFS[selectedGif].fixImage
                       }
                       style={styles.audioModalGifBackground}
                       contentFit="cover"
@@ -3452,19 +3578,108 @@ export default function QuranScreen() {
                     />
                     <View style={styles.audioModalOverlay}>
                       <View style={styles.audioModalHeader}>
-                        <TouchableOpacity
-                          style={styles.closeButton}
-                          onPress={() => setAudioControlsModalVisible(false)}
-                        >
-                          <MaterialCommunityIcons
-                            name="close"
-                            size={24}
-                            color="#483C1C"
-                          />
-                        </TouchableOpacity>
+                        {/* 🍎 iOS: Bouton retour si on est dans la vue gifSelector */}
+                        {Platform.OS === "ios" && audioModalView === "gifSelector" ? (
+                          <TouchableOpacity
+                            style={styles.closeButton}
+                            onPress={() => setAudioModalView("player")}
+                          >
+                            <MaterialCommunityIcons
+                              name="arrow-left"
+                              size={24}
+                              color={modalButtonColor}
+                            />
+                          </TouchableOpacity>
+                        ) : (
+                          <TouchableOpacity
+                            style={styles.closeButton}
+                            onPress={() => {
+                              setAudioControlsModalVisible(false);
+                              // Réinitialiser la vue sur iOS
+                              if (Platform.OS === "ios") {
+                                setAudioModalView("player");
+                              }
+                            }}
+                          >
+                            <MaterialCommunityIcons
+                              name="close"
+                              size={24}
+                              color={modalButtonColor}
+                            />
+                          </TouchableOpacity>
+                        )}
+                        
+                        {/* 🎵 NOUVEAU : Bouton de sélection de GIF (premium only, visible uniquement sur vue player) */}
+                        {user?.isPremium && audioModalView === "player" && (
+                          <TouchableOpacity
+                            style={styles.gifSelectorButton}
+                            onPress={() => {
+                              // 🍎 iOS: Navigation interne (pas de 2ème modal)
+                              if (Platform.OS === "ios") {
+                                setAudioModalView("gifSelector");
+                              } else {
+                                setGifModalVisible(true);
+                              }
+                            }}
+                          >
+                            <Ionicons
+                              name="images-outline"
+                              size={20}
+                              color={modalButtonColor}
+                            />
+                          </TouchableOpacity>
+                        )}
                       </View>
-                      {currentRecitation && (
-                        <View style={styles.audioModalBody}>
+                      
+                      {/* 🍎 iOS: Navigation interne entre player et sélecteur GIF */}
+                      {Platform.OS === "ios" && audioModalView === "gifSelector" ? (
+                        <ScrollView style={styles.gifList}>
+                          {Object.values(AVAILABLE_GIFS).map((gif) => {
+                            const isLocked = gif.premium && !user?.isPremium;
+                            const isSelected = selectedGif === gif.id;
+
+                            return (
+                              <TouchableOpacity
+                                key={gif.id}
+                                style={[
+                                  styles.gifOption,
+                                  isSelected && styles.selectedGifOption,
+                                  isLocked && styles.lockedGifOption,
+                                ]}
+                                onPress={() => !isLocked && selectGif(gif.id)}
+                                disabled={isLocked}
+                              >
+                                <ExpoImage
+                                  source={gif.fixImage}
+                                  style={styles.gifPreview}
+                                  contentFit="cover"
+                                />
+                                <View style={styles.gifInfo}>
+                                  <Text
+                                    style={[
+                                      styles.gifName,
+                                      isSelected && styles.selectedGifName,
+                                    ]}
+                                  >
+                                    {gif.name}
+                                  </Text>
+                                  {gif.premium && (
+                                    <View style={styles.premiumBadge}>
+                                      <MaterialCommunityIcons name="crown" size={14} color="#FFD700" />
+                                      <Text style={styles.premiumText}>Premium</Text>
+                                    </View>
+                                  )}
+                                </View>
+                                {isSelected && (
+                                  <MaterialCommunityIcons name="check-circle" size={24} color="#4CAF50" />
+                                )}
+                              </TouchableOpacity>
+                            );
+                          })}
+                        </ScrollView>
+                      ) : (
+                        currentRecitation && (
+                          <View style={styles.audioModalBody}>
                           {/* 🎵 Indicateur de lecture - SIMPLE et STABLE */}
                           <View style={styles.audioAnimationContainer}>
                             <Text style={styles.audioAnimationText}>
@@ -3539,9 +3754,9 @@ export default function QuranScreen() {
                                   isLoading
                                     ? "loading"
                                     : currentlyPlaying ===
-                                        currentRecitation.id && isPlaying
-                                    ? "pause"
-                                    : "play"
+                                          currentRecitation.id && isPlaying
+                                      ? "pause"
+                                      : "play"
                                 }
                                 size={40}
                                 color="#fff"
@@ -3583,19 +3798,9 @@ export default function QuranScreen() {
                                 <MaterialCommunityIcons
                                   name="information-outline"
                                   size={18}
-                                  color={
-                                    showNavigationTooltip
-                                      ? "#4ECDC4"
-                                      : "#B0B0B0"
-                                  }
+                                  color="#FFD700"
                                 />
-                                <Text
-                                  style={[
-                                    styles.navigationInfoText,
-                                    showNavigationTooltip &&
-                                      styles.navigationInfoTextActive,
-                                  ]}
-                                >
+                                <Text style={styles.navigationInfoText}>
                                   Navigation
                                 </Text>
                               </TouchableOpacity>
@@ -3615,7 +3820,7 @@ export default function QuranScreen() {
                             {/* 🚀 NOUVEAU : Vérifier si téléchargement en cours */}
                             {(() => {
                               const downloadingState = downloadState.get(
-                                currentRecitation.id
+                                currentRecitation.id,
                               );
                               const isDownloading =
                                 downloadingState?.isDownloading || false;
@@ -3629,7 +3834,7 @@ export default function QuranScreen() {
                                     progress={progress}
                                     onCancel={() =>
                                       handleNativeCancelDownload(
-                                        currentRecitation.id
+                                        currentRecitation.id,
                                       )
                                     }
                                   />
@@ -3641,16 +3846,21 @@ export default function QuranScreen() {
                                     style={styles.audioDownloadButton}
                                     onPress={() =>
                                       handleNativeDownloadRecitation(
-                                        currentRecitation
+                                        currentRecitation,
                                       )
                                     }
                                   >
                                     <MaterialCommunityIcons
                                       name="download"
                                       size={20}
-                                      color="#FFD700"
+                                      color={modalButtonColor}
                                     />
-                                    <Text style={styles.audioDownloadText}>
+                                    <Text
+                                      style={[
+                                        styles.audioDownloadText,
+                                        { color: modalButtonColor },
+                                      ]}
+                                    >
                                       {t("download")} (
                                       {currentRecitation.fileSize}
                                       MB)
@@ -3673,7 +3883,7 @@ export default function QuranScreen() {
                                       style={styles.audioDeleteButton}
                                       onPress={() =>
                                         handleDeleteRecitation(
-                                          currentRecitation
+                                          currentRecitation,
                                         )
                                       }
                                     >
@@ -3697,13 +3907,19 @@ export default function QuranScreen() {
                             <MaterialCommunityIcons
                               name="stop"
                               size={24}
-                              color="#FF6B6B"
+                              color={modalButtonColor}
                             />
-                            <Text style={styles.audioStopText}>
+                            <Text
+                              style={[
+                                styles.audioStopText,
+                                { color: modalButtonColor },
+                              ]}
+                            >
                               {t("stop")}
                             </Text>
                           </TouchableOpacity>
                         </View>
+                        )
                       )}
                     </View>
                   </Animated.View>
@@ -3712,6 +3928,89 @@ export default function QuranScreen() {
             </SafeAreaView>
           </GestureHandlerRootView>
         </Modal>
+
+        {/* 🎵 NOUVEAU : Modal de sélection de GIF (premium - Android uniquement) */}
+        {Platform.OS !== "ios" && (
+          <Modal
+          animationType="slide"
+          transparent={true}
+          visible={gifModalVisible}
+          onRequestClose={() => setGifModalVisible(false)}
+        >
+          <SafeAreaView style={styles.modalOverlay}>
+            <View style={styles.modalContent}>
+              <View style={styles.modalHeader}>
+                <Text style={styles.modalTitle}>
+                  {t("choose_gif", "Choisir un effet visuel")}
+                </Text>
+                <TouchableOpacity
+                  style={styles.closeButton}
+                  onPress={() => setGifModalVisible(false)}
+                >
+                  <MaterialCommunityIcons
+                    name="close"
+                    size={24}
+                    color="#483C1C"
+                  />
+                </TouchableOpacity>
+              </View>
+
+              <ScrollView style={styles.gifList}>
+                {Object.values(AVAILABLE_GIFS).map((gif) => {
+                  const isLocked = gif.premium && !user?.isPremium;
+                  const isSelected = selectedGif === gif.id;
+
+                  return (
+                    <TouchableOpacity
+                      key={gif.id}
+                      style={[
+                        styles.gifOption,
+                        isSelected && styles.selectedGifOption,
+                        isLocked && styles.lockedGifOption,
+                      ]}
+                      onPress={() => !isLocked && selectGif(gif.id)}
+                      disabled={isLocked}
+                    >
+                      <ExpoImage
+                        source={gif.fixImage}
+                        style={styles.gifPreview}
+                        contentFit="cover"
+                      />
+                      <View style={styles.gifInfo}>
+                        <Text
+                          style={[
+                            styles.gifName,
+                            isSelected && styles.selectedGifName,
+                          ]}
+                        >
+                          {gif.name}
+                        </Text>
+                        {gif.premium && (
+                          <View style={styles.premiumBadge}>
+                            <MaterialCommunityIcons
+                              name="crown"
+                              size={14}
+                              color="#FFD700"
+                            />
+                            <Text style={styles.premiumText}>Premium</Text>
+                          </View>
+                        )}
+                      </View>
+                      {isSelected && (
+                        <MaterialCommunityIcons
+                          name="check-circle"
+                          size={24}
+                          color="#4CAF50"
+                        />
+                      )}
+                    </TouchableOpacity>
+                  );
+                })}
+              </ScrollView>
+            </View>
+          </SafeAreaView>
+        </Modal>
+        )}
 
         {/* Modal de sélection du récitateur */}
         <Modal
@@ -3782,14 +4081,14 @@ export default function QuranScreen() {
             renderItem={({ item, index }) => {
               // Affichage normal d'une sourate
               const originalIndex = arabicVerses.findIndex(
-                (v) => v.id === item.id
+                (v) => v.id === item.id,
               );
               const phoneticText = phoneticArr[originalIndex]?.text || "";
               const translationText = translationArr[originalIndex]?.text || "";
 
               // Obtenir le nom de la sourate pour les favoris
               const currentSourate = sourates.find(
-                (s) => s.id === selectedSourate
+                (s) => s.id === selectedSourate,
               );
               const chapterName = currentSourate
                 ? currentSourate.name_simple
@@ -3842,7 +4141,7 @@ export default function QuranScreen() {
                         favoriteData={convertToFavorite(
                           item,
                           translationText,
-                          chapterName
+                          chapterName,
                         )}
                         size={20}
                         iconColor="#ba9c34"
@@ -4517,6 +4816,12 @@ const styles = StyleSheet.create({
     // borderBottomWidth: 1, // SUPPRIMÉ
     // borderBottomColor: "#e7c86a", // SUPPRIMÉ
   },
+  // 🎵 NOUVEAU : Bouton de sélection de GIF (premium)
+  gifSelectorButton: {
+    padding: 8,
+    borderRadius: 8,
+    backgroundColor: "rgba(255, 255, 255, 0.2)",
+  },
   audioModalTitle: {
     fontSize: 18,
     color: "#FFF",
@@ -5104,6 +5409,62 @@ const styles = StyleSheet.create({
   closeButtonText: {
     fontSize: 20,
     color: "#483C1C",
+  },
+  // 🎵 NOUVEAU : Styles pour la liste de sélection de GIF
+  gifList: {
+    maxHeight: 400,
+  },
+  gifOption: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#fff",
+    borderRadius: 12,
+    padding: 15,
+    marginBottom: 12,
+    marginHorizontal: 16,
+    borderWidth: 2,
+    borderColor: "transparent",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.2,
+    shadowRadius: 2,
+    elevation: 2,
+  },
+  selectedGifOption: {
+    borderColor: "#4CAF50",
+    backgroundColor: "#f0f8f0",
+  },
+  lockedGifOption: {
+    opacity: 0.6,
+  },
+  gifPreview: {
+    width: 60,
+    height: 60,
+    borderRadius: 8,
+    marginRight: 12,
+  },
+  gifInfo: {
+    flex: 1,
+  },
+  gifName: {
+    fontSize: 16,
+    fontWeight: "600",
+    color: "#242428",
+    marginBottom: 4,
+  },
+  selectedGifName: {
+    color: "#4CAF50",
+  },
+  premiumBadge: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: 4,
+  },
+  premiumText: {
+    fontSize: 12,
+    color: "#FFD700",
+    marginLeft: 4,
+    fontWeight: "600",
   },
   listContent: {
     paddingBottom: 20,

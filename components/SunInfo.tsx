@@ -17,19 +17,18 @@ interface SunInfoProps {
 const getStyles = (
   colors: any,
   overlayTextColor: string,
-  currentTheme: "light" | "dark"
-) =>
-  StyleSheet.create({
+  currentTheme: "light" | "dark" | "morning" | "sunset"
+) => {
+  // 🆕 Les couleurs sont maintenant gérées directement via colors du thème actif
+  return StyleSheet.create({
     container: {
-      backgroundColor:
-        currentTheme === "light" ? colors.cardBG : "rgba(0, 0, 0, 0.5)",
+      backgroundColor: colors.cardBG, // 🌅 Utilise la couleur du thème actif
       borderRadius: 16,
       padding: 16,
       marginBottom: 16,
       borderWidth: 1,
-      borderColor:
-        currentTheme === "light" ? colors.border : "rgba(255, 217, 61, 0.3)",
-      shadowColor: currentTheme === "light" ? colors.shadow : "#FFD93D",
+      borderColor: colors.border, // 🌅 Utilise la couleur du thème actif
+      shadowColor: colors.shadow, // 🌅 Utilise la couleur du thème actif
       shadowOffset: { width: 0, height: 4 },
       shadowOpacity: 0.3,
       shadowRadius: 10,
@@ -51,8 +50,7 @@ const getStyles = (
     },
     sunPath: {
       height: 3,
-      backgroundColor:
-        currentTheme === "light" ? colors.border : "rgba(255, 217, 61, 0.2)",
+      backgroundColor: colors.border, // 🌅 Utilise la couleur du thème actif
       borderRadius: 1.5,
       marginBottom: 8,
       position: "relative",
@@ -61,11 +59,11 @@ const getStyles = (
       position: "absolute",
       width: 12,
       height: 12,
-      backgroundColor: currentTheme === "light" ? colors.primary : "#FFD93D",
+      backgroundColor: colors.primary, // 🌅 Utilise la couleur du thème actif
       borderRadius: 6,
       top: -4.5,
       marginLeft: -6,
-      shadowColor: currentTheme === "light" ? colors.shadow : "#FFD93D",
+      shadowColor: colors.shadow, // 🌅 Utilise la couleur du thème actif
       shadowOffset: { width: 0, height: 0 },
       shadowOpacity: 0.8,
       shadowRadius: 4,
@@ -78,16 +76,12 @@ const getStyles = (
     },
     timeText: {
       fontSize: 14,
-      color:
-        currentTheme === "light"
-          ? colors.textSecondary
-          : "rgba(255, 255, 255, 0.8)",
+      color: colors.textSecondary, // 🌅 Utilise la couleur du thème actif
     },
     nextEvent: {
       flexDirection: "row",
       alignItems: "center",
-      backgroundColor:
-        currentTheme === "light" ? colors.surface : "rgba(255, 217, 61, 0.1)",
+      backgroundColor: colors.surface, // 🌅 Utilise la couleur du thème actif
       padding: 12,
       borderRadius: 12,
     },
@@ -98,6 +92,7 @@ const getStyles = (
       fontWeight: "500",
     },
   });
+};
 
 export function SunInfo({ sunrise, sunset, currentTime }: SunInfoProps) {
   const { t } = useTranslation();
@@ -188,7 +183,7 @@ export function SunInfo({ sunrise, sunset, currentTime }: SunInfoProps) {
         <MaterialCommunityIcons
           name="weather-sunny"
           size={24}
-          color={currentTheme === "light" ? colors.primary : "#FFD93D"}
+          color={colors.primary} // 🌅 Utilise la couleur du thème actif
         />
         <Text style={styles.headerText}>
           {t("sun_info.day_duration", "Durée du jour")}: {getDayDuration()}
@@ -225,7 +220,7 @@ export function SunInfo({ sunrise, sunset, currentTime }: SunInfoProps) {
               : "weather-sunset-down"
           }
           size={20}
-          color={currentTheme === "light" ? colors.primary : "#FFD93D"}
+          color={colors.primary} // 🌅 Utilise la couleur du thème actif
         />
         <Text style={styles.nextEventText}>
           {nextSunEvent.event === "sunrise"

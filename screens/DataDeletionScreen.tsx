@@ -22,6 +22,7 @@ export default function DataDeletionScreen() {
   const router = useRouter();
   const { t } = useTranslation();
   const currentTheme = useCurrentTheme();
+  const isLightTheme = currentTheme === "light" || currentTheme === "morning";
   const { forceLogout } = usePremium();
 
   const [email, setEmail] = useState("");
@@ -172,7 +173,7 @@ export default function DataDeletionScreen() {
           <MaterialCommunityIcons
             name="arrow-left"
             size={24}
-            color={currentTheme === "light" ? "#333333" : "#F8FAFC"}
+            color={isLightTheme ? "#333333" : "#F8FAFC"}
           />
         </TouchableOpacity>
         <Text style={styles.headerTitle}>
@@ -223,9 +224,7 @@ export default function DataDeletionScreen() {
                   "data_deletion.email_placeholder",
                   "Votre adresse email"
                 )}
-                placeholderTextColor={
-                  currentTheme === "light" ? "#94A3B8" : "#64748B"
-                }
+                placeholderTextColor={isLightTheme ? "#94A3B8" : "#64748B"}
                 keyboardType="email-address"
                 autoCapitalize="none"
                 autoCorrect={false}
@@ -257,9 +256,7 @@ export default function DataDeletionScreen() {
               "data_deletion.reason_placeholder",
               "Pourquoi souhaitez-vous supprimer votre compte ?"
             )}
-            placeholderTextColor={
-              currentTheme === "light" ? "#94A3B8" : "#64748B"
-            }
+            placeholderTextColor={isLightTheme ? "#94A3B8" : "#64748B"}
             multiline
             numberOfLines={3}
           />
@@ -278,9 +275,7 @@ export default function DataDeletionScreen() {
               "data_deletion.message_placeholder",
               "Message supplémentaire..."
             )}
-            placeholderTextColor={
-              currentTheme === "light" ? "#94A3B8" : "#64748B"
-            }
+            placeholderTextColor={isLightTheme ? "#94A3B8" : "#64748B"}
             multiline
             numberOfLines={4}
           />
@@ -436,11 +431,12 @@ export default function DataDeletionScreen() {
   );
 }
 
-const getStyles = (theme: "light" | "dark") =>
-  StyleSheet.create({
+const getStyles = (theme: "light" | "dark" | "morning" | "sunset") => {
+  const isLightTheme = theme === "light" || theme === "morning";
+  return StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: theme === "light" ? "#FFFFFF" : "#0F172A",
+      backgroundColor: isLightTheme ? "#FFFFFF" : "#0F172A",
     },
     content: {
       padding: 16,
@@ -458,14 +454,14 @@ const getStyles = (theme: "light" | "dark") =>
     headerTitle: {
       fontSize: 20,
       fontWeight: "bold",
-      color: theme === "light" ? "#1F2937" : "#F8FAFC",
+      color: isLightTheme ? "#1F2937" : "#F8FAFC",
     },
     placeholder: {
       width: 40,
     },
     warningSection: {
       alignItems: "center",
-      backgroundColor: theme === "light" ? "#FEF2F2" : "#450A0A",
+      backgroundColor: isLightTheme ? "#FEF2F2" : "#450A0A",
       padding: 20,
       borderRadius: 12,
       marginBottom: 24,
@@ -479,7 +475,7 @@ const getStyles = (theme: "light" | "dark") =>
     },
     warningText: {
       fontSize: 14,
-      color: theme === "light" ? "#7F1D1D" : "#FECACA",
+      color: isLightTheme ? "#7F1D1D" : "#FECACA",
       textAlign: "center",
       lineHeight: 20,
     },
@@ -489,7 +485,7 @@ const getStyles = (theme: "light" | "dark") =>
     sectionTitle: {
       fontSize: 18,
       fontWeight: "bold",
-      color: theme === "light" ? "#1F2937" : "#F8FAFC",
+      color: isLightTheme ? "#1F2937" : "#F8FAFC",
       marginBottom: 16,
     },
     inputGroup: {
@@ -498,27 +494,27 @@ const getStyles = (theme: "light" | "dark") =>
     label: {
       fontSize: 14,
       fontWeight: "600",
-      color: theme === "light" ? "#374151" : "#E2E8F0",
+      color: isLightTheme ? "#374151" : "#E2E8F0",
       marginBottom: 8,
     },
     textInput: {
       borderWidth: 1,
-      borderColor: theme === "light" ? "#D1D5DB" : "#374151",
+      borderColor: isLightTheme ? "#D1D5DB" : "#374151",
       borderRadius: 8,
       padding: 12,
       fontSize: 16,
-      color: theme === "light" ? "#1F2937" : "#F8FAFC",
-      backgroundColor: theme === "light" ? "#FFFFFF" : "#1E293B",
+      color: isLightTheme ? "#1F2937" : "#F8FAFC",
+      backgroundColor: isLightTheme ? "#FFFFFF" : "#1E293B",
     },
     // 🔒 Style pour input en lecture seule
     readOnlyInput: {
-      backgroundColor: theme === "light" ? "#F3F4F6" : "#1F2937",
-      borderColor: theme === "light" ? "#E5E7EB" : "#334155",
+      backgroundColor: isLightTheme ? "#F3F4F6" : "#1F2937",
+      borderColor: isLightTheme ? "#E5E7EB" : "#334155",
       opacity: 0.8,
     },
     readOnlyNote: {
       fontSize: 12,
-      color: theme === "light" ? "#6B7280" : "#94A3B8",
+      color: isLightTheme ? "#6B7280" : "#94A3B8",
       marginTop: 4,
       fontStyle: "italic",
     },
@@ -531,7 +527,7 @@ const getStyles = (theme: "light" | "dark") =>
     loadingText: {
       marginLeft: 8,
       fontSize: 14,
-      color: theme === "light" ? "#6B7280" : "#94A3B8",
+      color: isLightTheme ? "#6B7280" : "#94A3B8",
     },
     textArea: {
       height: 100,
@@ -547,7 +543,7 @@ const getStyles = (theme: "light" | "dark") =>
     },
     infoText: {
       fontSize: 14,
-      color: theme === "light" ? "#6B7280" : "#94A3B8",
+      color: isLightTheme ? "#6B7280" : "#94A3B8",
       marginLeft: 12,
     },
     processSection: {
@@ -575,25 +571,25 @@ const getStyles = (theme: "light" | "dark") =>
     },
     processText: {
       fontSize: 14,
-      color: theme === "light" ? "#6B7280" : "#94A3B8",
+      color: isLightTheme ? "#6B7280" : "#94A3B8",
       flex: 1,
       lineHeight: 20,
     },
     subscriptionWarningSection: {
       flexDirection: "row",
       alignItems: "flex-start",
-      backgroundColor: theme === "light" ? "#FEF3C7" : "#78350F",
+      backgroundColor: isLightTheme ? "#FEF3C7" : "#78350F",
       padding: 16,
       borderRadius: 12,
       marginBottom: 24,
       marginHorizontal: 16,
       borderWidth: 1,
-      borderColor: theme === "light" ? "#FCD34D" : "#92400E",
+      borderColor: isLightTheme ? "#FCD34D" : "#92400E",
     },
     subscriptionWarningText: {
       flex: 1,
       fontSize: 13,
-      color: theme === "light" ? "#92400E" : "#FEF3C7",
+      color: isLightTheme ? "#92400E" : "#FEF3C7",
       marginLeft: 12,
       lineHeight: 18,
     },
@@ -622,11 +618,11 @@ const getStyles = (theme: "light" | "dark") =>
       alignItems: "center",
       paddingTop: 16,
       borderTopWidth: 1,
-      borderTopColor: theme === "light" ? "#E5E7EB" : "#374151",
+      borderTopColor: isLightTheme ? "#E5E7EB" : "#374151",
     },
     contactText: {
       fontSize: 14,
-      color: theme === "light" ? "#6B7280" : "#94A3B8",
+      color: isLightTheme ? "#6B7280" : "#94A3B8",
       textAlign: "center",
     },
     contactEmail: {
@@ -634,3 +630,4 @@ const getStyles = (theme: "light" | "dark") =>
       fontWeight: "600",
     },
   });
+};

@@ -23,6 +23,7 @@ export function DateNavigator({ date, onPrev, onNext, onReset }: Props) {
   const colors = useThemeColors();
   const overlayTextColor = useOverlayTextColor();
   const currentTheme = useCurrentTheme();
+  const isLightTheme = currentTheme === "light" || currentTheme === "morning";
 
   const getLocale = () => {
     if (i18n.language.startsWith("ar")) return "ar";
@@ -54,12 +55,12 @@ export function DateNavigator({ date, onPrev, onNext, onReset }: Props) {
       padding: 6,
       borderRadius: 18,
       backgroundColor:
-        currentTheme === "light"
+        isLightTheme
           ? "rgba(34, 139, 34, 0.15)"
           : "rgba(30,30,30,0.3)",
       marginHorizontal: 2,
-      borderWidth: currentTheme === "light" ? 1 : 0,
-      borderColor: currentTheme === "light" ? colors.border : "transparent",
+      borderWidth: isLightTheme ? 1 : 0,
+      borderColor: isLightTheme ? colors.border : "transparent",
     },
     text: {
       fontSize: 17,
@@ -69,19 +70,19 @@ export function DateNavigator({ date, onPrev, onNext, onReset }: Props) {
       minWidth: 120,
       textAlign: "center",
       textShadowColor:
-        currentTheme === "light"
+        isLightTheme
           ? "rgba(255, 255, 255, 0.5)"
           : "rgba(0,0,0,0.8)",
       textShadowOffset: { width: 0, height: 1 },
       textShadowRadius: 2,
     },
     todayBtn: {
-      backgroundColor: currentTheme === "light" ? colors.primary : "#3faea6",
+      backgroundColor: isLightTheme ? colors.primary : "#3faea6",
       borderRadius: 14,
       paddingHorizontal: 14,
       paddingVertical: 7,
       marginLeft: 8,
-      shadowColor: currentTheme === "light" ? colors.shadow : "#3faea6",
+      shadowColor: isLightTheme ? colors.shadow : "#3faea6",
       shadowOffset: { width: 0, height: 2 },
       shadowOpacity: 0.3,
       shadowRadius: 4,
@@ -98,7 +99,7 @@ export function DateNavigator({ date, onPrev, onNext, onReset }: Props) {
     },
   });
 
-  const arrowColor = currentTheme === "light" ? colors.primary : "#FFF";
+  const arrowColor = isLightTheme ? colors.primary : "#FFF";
 
   return (
     <View style={styles.nav} testID="date-navigator">

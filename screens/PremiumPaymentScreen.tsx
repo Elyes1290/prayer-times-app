@@ -17,7 +17,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { PurchasesPackage } from "react-native-purchases";
 
 import ThemedImageBackground from "../components/ThemedImageBackground";
-import { useThemeColors, useCurrentTheme } from "../hooks/useThemeAssets";
+import { useThemeColors } from "../hooks/useThemeAssets";
+import { useCurrentTheme } from "../hooks/useThemeColor"; // 🔧 Import unifié
 import { STRIPE_CONFIG } from "../utils/stripeConfig";
 import { IapService } from "../utils/iapService";
 import { IAP_CONFIG } from "../utils/iapConfig";
@@ -637,8 +638,9 @@ const PremiumPaymentScreen: React.FC = () => {
   );
 };
 
-const getStyles = (colors: any, currentTheme: "light" | "dark") =>
-  StyleSheet.create({
+const getStyles = (colors: any, currentTheme: "light" | "dark" | "morning" | "sunset") => {
+  const isLightTheme = currentTheme === "light" || currentTheme === "morning";
+  return StyleSheet.create({
     container: {
       flex: 1,
       padding: 20,
@@ -834,5 +836,6 @@ const getStyles = (colors: any, currentTheme: "light" | "dark") =>
       height: 120, // Espace suffisant pour éviter que le bouton soit caché par le menu
     },
   });
+};
 
 export default PremiumPaymentScreen;

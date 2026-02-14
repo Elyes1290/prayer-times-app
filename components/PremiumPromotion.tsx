@@ -5,7 +5,8 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { useTranslation } from "react-i18next";
 
-import { useThemeColors, useCurrentTheme } from "../hooks/useThemeAssets";
+import { useThemeColors } from "../hooks/useThemeAssets";
+import { useCurrentTheme } from "../hooks/useThemeColor"; // 🔧 Import unifié
 import { usePremium } from "../contexts/PremiumContext";
 
 interface PremiumPromotionProps {
@@ -180,7 +181,7 @@ const FeatureItem: React.FC<{
 
 const getStyles = (
   colors: any,
-  currentTheme: "light" | "dark",
+  currentTheme: "light" | "dark" | "morning" | "sunset",
   variant: string
 ) =>
   StyleSheet.create({

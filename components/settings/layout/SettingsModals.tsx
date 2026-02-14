@@ -11,7 +11,7 @@ interface SettingsModalsProps {
   styles: any;
   t: any;
   colors: any;
-  currentTheme: "light" | "dark";
+  currentTheme: "light" | "dark" | "morning" | "sunset";
   activatePremium: any;
   showToast: any;
   handleLoginSuccess: (userData: any) => void;
@@ -31,6 +31,7 @@ export default function SettingsModals({
   handleLoginSuccess,
   initialTab = "login",
 }: SettingsModalsProps) {
+  const isLightTheme = currentTheme === "light" || currentTheme === "morning";
   return (
     <>
       {/* 🌙 Modal de confirmation mystique */}
@@ -85,7 +86,7 @@ export default function SettingsModals({
                   name="close"
                   size={24}
                   color={
-                    currentTheme === "light" ? colors.textSecondary : "#CBD5E1"
+                    isLightTheme ? colors.textSecondary : "#CBD5E1"
                   }
                 />
               </TouchableOpacity>
