@@ -144,7 +144,6 @@ struct PrayerTimesWidgetView: View {
                     Color.black.opacity(0.25)
                 } else {
                     // Fallback si l'image ne charge pas
-                    print("⚠️ [Widget] Image '\(backgroundImage)' non trouvée, utilisation du dégradé")
                     LinearGradient(
                         gradient: Gradient(colors: backgroundColors()),
                         startPoint: .topLeading,
