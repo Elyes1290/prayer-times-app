@@ -5,9 +5,14 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import PremiumPaymentScreen from "../../screens/PremiumPaymentScreen";
 
 // Mock des dépendances
+jest.mock("../../locales/i18n", () => ({}));
+
 jest.mock("expo-router", () => ({
   useRouter: () => ({
     back: jest.fn(),
+  }),
+  useFocusEffect: jest.fn((callback) => {
+    callback();
   }),
 }));
 
@@ -63,6 +68,13 @@ jest.mock("@react-native-async-storage/async-storage", () => ({
 
 // Mock Alert
 jest.spyOn(Alert, "alert");
+
+// Mock @react-navigation/native
+jest.mock("@react-navigation/native", () => ({
+  useFocusEffect: jest.fn((callback) => {
+    callback();
+  }),
+}));
 
 describe("PremiumPaymentScreen", () => {
   beforeEach(() => {

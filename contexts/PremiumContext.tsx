@@ -458,11 +458,30 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
   useEffect(() => {
     const checkExplicitConnection = async () => {
       try {
+        // 🎯 VIP PROTECTION : Vérifier d'abord si l'utilisateur est VIP
+        const storedUser = await AsyncStorage.getItem(STORAGE_KEYS.PREMIUM_USER);
+        if (storedUser) {
+          const parsedUser = safeJsonParse<any>(storedUser, null);
+          if (parsedUser?.isVip) {
+            console.log("👑 [VIP PROTECTION] Utilisateur VIP détecté - pas de déconnexion automatique");
+            return; // NE JAMAIS déconnecter les VIP
+          }
+        }
+        
+        // Vérifier aussi dans user_data
+        const userData = await AsyncStorage.getItem("user_data");
+        if (userData) {
+          const parsedUserData = safeJsonParse<any>(userData, null);
+          if (parsedUserData?.is_vip === true || parsedUserData?.subscription_platform === 'vip') {
+            console.log("👑 [VIP PROTECTION] Utilisateur VIP détecté dans user_data - pas de déconnexion automatique");
+            return; // NE JAMAIS déconnecter les VIP
+          }
+        }
+
         // Vérifier si l'utilisateur est connecté explicitement
         const isExplicitConnection = await AsyncStorage.getItem(
           "explicit_connection"
         );
-        const userData = await AsyncStorage.getItem("user_data");
 
         if (isExplicitConnection === "true" && userData) {
           // Connexion explicite détectée - maintenir le premium
@@ -472,7 +491,7 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
           // Ne pas désactiver le premium
           return;
         } else {
-          // Pas de connexion explicite - désactiver le premium
+          // Pas de connexion explicite - désactiver le premium (sauf VIP déjà vérifié ci-dessus)
           console.log(
             "🔍 [DEBUG] Mode professionnel - aucune connexion explicite, désactivation du premium"
           );
@@ -483,8 +502,8 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
           "❌ [DEBUG] Erreur vérification connexion explicite:",
           error
         );
-        // En cas d'erreur, désactiver le premium par sécurité
-        await deactivatePremium();
+        // 🎯 VIP PROTECTION : Ne pas désactiver en cas d'erreur (pourrait être un VIP)
+        console.log("⚠️ [SECURITY] Erreur détectée - pas de désactivation automatique pour éviter de déconnecter les VIP");
       }
     };
 
@@ -492,7 +511,7 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
     const interval = setInterval(checkExplicitConnection, 5 * 60 * 1000);
 
     // Vérifier après un délai pour laisser le temps au loadPremiumData de s'exécuter
-    const timeout = setTimeout(checkExplicitConnection, 1000);
+    const timeout = setTimeout(checkExplicitConnection, 3000); // 3 secondes au lieu de 1
 
     return () => {
       clearInterval(interval);

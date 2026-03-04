@@ -169,10 +169,8 @@ describe("AboutScreen", () => {
     const privacyPolicyButton = getByText("Politique de confidentialité");
     fireEvent.press(privacyPolicyButton);
 
-    expect(Alert.alert).toHaveBeenCalledWith(
-      "Politique de confidentialité",
-      "Contenu de la politique de confidentialité",
-      [{ text: "Compris", style: "default" }]
+    expect(Linking.openURL).toHaveBeenCalledWith(
+      "https://www.myadhanapp.com/public/privacy-policy.html"
     );
   });
 

@@ -139,7 +139,7 @@ export default function LibraryScreen() {
         {/* Content */}
         <ScrollView
           style={styles.scrollView}
-          contentContainerStyle={styles.scrollContent}
+          contentContainerStyle={[styles.scrollContent, { paddingBottom: Math.max(100, insets.bottom + 80) }]}
           showsVerticalScrollIndicator={false}
         >
           <View style={styles.grid}>
@@ -199,7 +199,6 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     padding: 20,
-    paddingBottom: 100,
   },
   grid: {
     flexDirection: "row",

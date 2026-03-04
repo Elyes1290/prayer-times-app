@@ -1125,6 +1125,23 @@ export const SettingsProvider = ({
       console.log(
         "✅ [saveAndReprogramAll] scheduleNotificationsFor2Days terminé"
       );
+      
+      // 🕌 NOUVEAU iOS : Rafraîchir le widget Prayer Times
+      if (Platform.OS === "ios") {
+        try {
+          const { PrayerTimesWidgetModule } = require("react-native").NativeModules;
+          if (PrayerTimesWidgetModule?.forceWidgetRefresh) {
+            await PrayerTimesWidgetModule.forceWidgetRefresh();
+            console.log("✅ [saveAndReprogramAll] Widget iOS rafraîchi");
+          } else {
+            console.log("⚠️ [saveAndReprogramAll] Module Widget iOS non disponible");
+          }
+        } catch (widgetError) {
+          console.log("⚠️ [saveAndReprogramAll] Erreur rafraîchissement widget:", widgetError);
+          // Non bloquant - continuer même si le widget ne peut pas être rafraîchi
+        }
+      }
+      
       console.log("═══════════════════════════════════════");
     } catch (error) {
       console.error("❌ [saveAndReprogramAll] ERREUR:", error);

@@ -450,17 +450,32 @@ function TabLayoutContent() {
         const userData = await AsyncStorage.getItem("user_data");
 
         if (explicitConnection === "true" && !userData) {
-          console.log(
-            "🧹 Nettoyage des données incohérentes - explicit_connection=true mais pas de user_data"
-          );
-          await AsyncStorage.multiRemove([
-            "auth_token",
-            "refresh_token",
-            "user_data",
-            "explicit_connection",
-            "@prayer_app_premium_user",
-            "user_stats_cache",
-          ]);
+          // 🎯 VIP PROTECTION : Vérifier si c'est un VIP avant de nettoyer
+          const premiumUser = await AsyncStorage.getItem("@prayer_app_premium_user");
+          let isVip = false;
+          
+          if (premiumUser) {
+            try {
+              const parsed = JSON.parse(premiumUser);
+              isVip = parsed?.isVip === true;
+            } catch {}
+          }
+          
+          if (isVip) {
+            console.log("👑 [VIP PROTECTION] Utilisateur VIP détecté - pas de nettoyage");
+          } else {
+            console.log(
+              "🧹 Nettoyage des données incohérentes - explicit_connection=true mais pas de user_data"
+            );
+            await AsyncStorage.multiRemove([
+              "auth_token",
+              "refresh_token",
+              "user_data",
+              "explicit_connection",
+              "@prayer_app_premium_user",
+              "user_stats_cache",
+            ]);
+          }
         }
 
         // 🧪 DEBUG: Forcer le rafraîchissement du cache des statistiques
@@ -490,6 +505,22 @@ function TabLayoutContent() {
             // Vérifier aussi que user_data existe et est valide
             const userData = await AsyncStorage.getItem("user_data");
             if (!userData) {
+              // 🎯 VIP PROTECTION : Vérifier si c'est un VIP avant de nettoyer
+              const premiumUser = await AsyncStorage.getItem("@prayer_app_premium_user");
+              let isVip = false;
+              
+              if (premiumUser) {
+                try {
+                  const parsed = JSON.parse(premiumUser);
+                  isVip = parsed?.isVip === true;
+                } catch {}
+              }
+              
+              if (isVip) {
+                console.log("👑 [VIP PROTECTION] Utilisateur VIP détecté - pas de nettoyage");
+                return;
+              }
+              
               console.log(
                 "🧹 Nettoyage - explicit_connection=true mais pas de user_data"
               );
@@ -521,49 +552,98 @@ function TabLayoutContent() {
                 verify
               );
               if (!verify) {
-                console.log("❌ Token invalide détecté, déconnexion...");
-                await AsyncStorage.multiRemove([
-                  "auth_token",
-                  "refresh_token",
-                  "user_data",
-                  "explicit_connection",
-                  "@prayer_app_premium_user",
-                  "user_stats_cache",
-                ]);
-                console.log("✅ Données utilisateur supprimées");
+                // 🎯 VIP PROTECTION : Vérifier si c'est un VIP avant de déconnecter
+                const premiumUserStr = await AsyncStorage.getItem("@prayer_app_premium_user");
+                const userDataStr = await AsyncStorage.getItem("user_data");
+                let isVip = false;
+                
+                if (premiumUserStr) {
+                  try {
+                    const parsed = JSON.parse(premiumUserStr);
+                    isVip = parsed?.isVip === true;
+                  } catch {}
+                }
+                
+                if (!isVip && userDataStr) {
+                  try {
+                    const parsed = JSON.parse(userDataStr);
+                    isVip = parsed?.is_vip === true || parsed?.subscription_platform === 'vip';
+                  } catch {}
+                }
+                
+                if (isVip) {
+                  console.log("👑 [VIP PROTECTION] Token invalide mais utilisateur VIP - pas de déconnexion automatique");
+                  console.log("⚠️ L'utilisateur VIP devra se reconnecter manuellement si nécessaire");
+                } else {
+                  console.log("❌ Token invalide détecté, déconnexion...");
+                  await AsyncStorage.multiRemove([
+                    "auth_token",
+                    "refresh_token",
+                    "user_data",
+                    "explicit_connection",
+                    "@prayer_app_premium_user",
+                    "user_stats_cache",
+                  ]);
+                  console.log("✅ Données utilisateur supprimées");
 
-                // Forcer la mise à jour des contextes React
-                await forceLogout();
-                await forceReset();
+                  // Forcer la mise à jour des contextes React
+                  await forceLogout();
+                  await forceReset();
 
-                // Forcer un re-render de tous les composants
-                setForceRefresh((prev) => prev + 1);
+                  // Forcer un re-render de tous les composants
+                  setForceRefresh((prev) => prev + 1);
 
-                showGlobalToast({
-                  type: "error",
-                  title:
-                    i18n.t("toast_connection_interrupted") ||
-                    "Connexion interrompue",
-                  message:
-                    i18n.t("toast_single_device_only") ||
-                    "Non autorisé. Veuillez vous connecter sur un seul appareil.",
-                });
+                  showGlobalToast({
+                    type: "error",
+                    title:
+                      i18n.t("toast_connection_interrupted") ||
+                      "Connexion interrompue",
+                    message:
+                      i18n.t("toast_single_device_only") ||
+                      "Non autorisé. Veuillez vous connecter sur un seul appareil.",
+                  });
+                }
               } else {
                 console.log("✅ Token valide au démarrage");
               }
             }
           } else if (token && explicitConnection !== "true") {
-            // 🚀 CORRECTION : Nettoyer les tokens orphelins (sans connexion explicite)
-            console.log(
-              "🧹 Nettoyage des tokens orphelins - pas de connexion explicite"
-            );
-            await AsyncStorage.multiRemove([
-              "auth_token",
-              "refresh_token",
-              "user_data",
-              "@prayer_app_premium_user",
-              "user_stats_cache",
-            ]);
+            // 🎯 VIP PROTECTION : Vérifier si c'est un VIP avant de nettoyer les tokens orphelins
+            const premiumUserStr = await AsyncStorage.getItem("@prayer_app_premium_user");
+            const userDataStr = await AsyncStorage.getItem("user_data");
+            let isVip = false;
+            
+            if (premiumUserStr) {
+              try {
+                const parsed = JSON.parse(premiumUserStr);
+                isVip = parsed?.isVip === true;
+              } catch {}
+            }
+            
+            if (!isVip && userDataStr) {
+              try {
+                const parsed = JSON.parse(userDataStr);
+                isVip = parsed?.is_vip === true || parsed?.subscription_platform === 'vip';
+              } catch {}
+            }
+            
+            if (isVip) {
+              console.log("👑 [VIP PROTECTION] Token orphelin mais utilisateur VIP - restauration de explicit_connection");
+              // Restaurer explicit_connection pour les VIP
+              await AsyncStorage.setItem("explicit_connection", "true");
+            } else {
+              // 🚀 CORRECTION : Nettoyer les tokens orphelins (sans connexion explicite)
+              console.log(
+                "🧹 Nettoyage des tokens orphelins - pas de connexion explicite"
+              );
+              await AsyncStorage.multiRemove([
+                "auth_token",
+                "refresh_token",
+                "user_data",
+                "@prayer_app_premium_user",
+                "user_stats_cache",
+              ]);
+            }
           } else {
             console.log(
               "🔍 Aucun token ou utilisateur non connecté - pas de vérification API"
@@ -810,6 +890,13 @@ function TabLayoutContent() {
           name="debugNotifications"
           options={{
             href: null, // Complètement caché et désactivé
+          }}
+        />
+
+        <Tabs.Screen
+          name="debugWidget"
+          options={{
+            href: null, // Caché de la TabBar
           }}
         />
 

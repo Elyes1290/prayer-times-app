@@ -3,6 +3,39 @@ import { render, fireEvent } from "@testing-library/react-native";
 import ChangePasswordModal from "../../../components/settings/ChangePasswordModal";
 
 // Mock des dépendances
+jest.mock("../../../locales/i18n", () => ({}));
+
+jest.mock("react-i18next", () => ({
+  useTranslation: () => ({
+    t: (key: string) => {
+      const translations: { [key: string]: string } = {
+        "password.change_password": "Changer le mot de passe",
+        "password.current_password": "Mot de passe actuel",
+        "password.current_password_placeholder": "Saisissez votre mot de passe actuel",
+        "password.new_password": "Nouveau mot de passe",
+        "password.new_password_placeholder": "Saisissez votre nouveau mot de passe",
+        "password.confirm_password": "Confirmer le mot de passe",
+        "password.confirm_password_placeholder": "Confirmez votre nouveau mot de passe",
+        "password.save": "Enregistrer",
+        "password.cancel": "Annuler",
+        "password.password_strength": "Force",
+        "password.password_strength_weak": "Faible",
+        "password.password_strength_medium": "Moyen",
+        "password.password_strength_good": "Bon",
+        "password.password_strength_excellent": "Excellent",
+        "password.password_min_length_8": "Au moins 8 caractères",
+        "password.password_uppercase": "Au moins une majuscule",
+        "password.password_lowercase": "Au moins une minuscule",
+        "password.password_number": "Au moins un chiffre",
+        "password.password_special_char": "Au moins un caractère spécial",
+        "password.password_mismatch": "Les mots de passe ne correspondent pas",
+        "password.password_changed_success": "Mot de passe modifié avec succès",
+      };
+      return translations[key] || key;
+    },
+  }),
+}));
+
 jest.mock("@expo/vector-icons", () => ({
   MaterialCommunityIcons: "MaterialCommunityIcons",
 }));

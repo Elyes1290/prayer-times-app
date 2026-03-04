@@ -4,6 +4,28 @@ import PaymentSuccessScreen from "../../screens/PaymentSuccessScreen";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 // Mock des dépendances
+jest.mock("../../locales/i18n", () => ({}));
+
+jest.mock("react-i18next", () => ({
+  useTranslation: () => ({
+    t: (key: string) => {
+      const translations: { [key: string]: string } = {
+        "processing_payment": "Création de votre compte en cours...",
+        "processing": "processing",
+        "account_created_connected": "Votre compte a été créé et vous êtes maintenant connecté !",
+        "go_home": "Accéder à l'application",
+      };
+      return translations[key] || key;
+    },
+  }),
+}));
+
+jest.mock("@react-navigation/native", () => ({
+  useFocusEffect: jest.fn((callback) => {
+    callback();
+  }),
+}));
+
 jest.mock("expo-router", () => ({
   useRouter: () => ({
     push: jest.fn(),
@@ -11,6 +33,7 @@ jest.mock("expo-router", () => ({
 }));
 
 jest.mock("@react-native-async-storage/async-storage", () => ({
+  getItem: jest.fn(),
   removeItem: jest.fn(),
 }));
 

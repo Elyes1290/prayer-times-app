@@ -12,10 +12,13 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useTranslation } from "react-i18next";
 import Constants from "expo-constants";
 import ThemedImageBackground from "../components/ThemedImageBackground";
+import { useRouter } from "expo-router";
 
 export default function AboutScreen() {
   const { t } = useTranslation();
+  const router = useRouter();
   const [expandedFAQ, setExpandedFAQ] = useState<number | null>(null);
+  const [debugTapCount, setDebugTapCount] = useState(0);
   // Les couleurs sont maintenant gérées via le système de thème dans Colors.ts
 
   // 🚀 DYNAMIQUE : Version et build depuis app.json
@@ -425,17 +428,29 @@ export default function AboutScreen() {
         </View>
 
         {/* Version Info */}
-        <View style={styles.versionContainer}>
+        <TouchableOpacity 
+          style={styles.versionContainer}
+          onPress={() => {
+            const newCount = debugTapCount + 1;
+            setDebugTapCount(newCount);
+            if (newCount >= 7) {
+              setDebugTapCount(0);
+              router.push('/debugWidget' as any);
+            }
+          }}
+          activeOpacity={0.7}
+        >
           <Text style={styles.version}>
             {t("abouts.version")} {appVersion} ({t("abouts.build")}{" "}
             {buildNumber})
+            {debugTapCount > 0 && debugTapCount < 7 && ` 🐛 ${debugTapCount}/7`}
           </Text>
           <Text style={styles.lastUpdate}>
             {t("abouts.last_update")} {getLastUpdateDate()}
           </Text>
           <Text style={styles.footer}>{t("abouts.footer_thanks")}</Text>
           <Text style={styles.dua}>{t("abouts.closing_dua")}</Text>
-        </View>
+        </TouchableOpacity>
 
         <View style={{ height: 50 }} />
       </ScrollView>

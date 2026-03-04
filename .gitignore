@@ -127,6 +127,14 @@ android/build/
 dist/
 web-build/
 
+# iOS build artifacts (temporary files)
+ios/Pods/
+ios/build/
+ios/*.xcworkspace/xcuserdata/
+ios/*.xcodeproj/xcuserdata/
+ios/*.xcodeproj/project.xcworkspace/xcuserdata/
+ios/DerivedData/
+
 # Development files
 app-example/
 *.tsbuildinfo

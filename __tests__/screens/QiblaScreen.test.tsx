@@ -28,6 +28,7 @@ jest.mock("../../hooks/useThemeColor", () => ({
     border: "#E0E0E0",
     shadow: "#000000",
     accent: "#FF6B6B",
+    success: "#4CAF50",
   }),
   useOverlayTextColor: () => "#000000",
   useCurrentTheme: () => "light",

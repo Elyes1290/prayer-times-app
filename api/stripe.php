@@ -871,39 +871,37 @@ function handleSubscriptionCreated($subscription) {
 function handleSubscriptionUpdated($subscription) {
     try {
         logError("🔄 Abonnement mis à jour: " . $subscription->id);
-        
+
         $pdo = getDBConnection();
-        
-        // 🔧 CORRECTION : Lire la date depuis items.data[0]
-        $currentPeriodEnd = null;
-        if ($subscription->items && $subscription->items->data && count($subscription->items->data) > 0) {
-            $currentPeriodEnd = $subscription->items->data[0]->current_period_end;
-        } else {
-            $currentPeriodEnd = $subscription->current_period_end ?? time();
-        }
-        
+
+        // Lire la date depuis current_period_end
+        $currentPeriodEnd = $subscription->current_period_end ?? time();
         $expiryDate = date('Y-m-d H:i:s', $currentPeriodEnd);
-        
-        // Mettre à jour la table users
+
+        // 🔧 CORRECTION : Utiliser stripe_customer_id au lieu de subscription_id pour trouver l'utilisateur
         $stmt = $pdo->prepare("
-            UPDATE users SET 
+            UPDATE users SET
                 premium_expiry = ?,
                 updated_at = NOW()
-            WHERE subscription_id = ? OR subscription_id = ?
+            WHERE stripe_customer_id = ?
         ");
-        $stmt->execute([$expiryDate, $subscription->id, $subscription->customer]);
+        $stmt->execute([$expiryDate, $subscription->customer]);
         
+        if ($stmt->rowCount() > 0) {
+            logError("✅ Date d'expiration mise à jour: $expiryDate pour customer: " . $subscription->customer);
+        } else {
+            logError("⚠️ Aucun utilisateur trouvé avec stripe_customer_id: " . $subscription->customer);
+        }
+
         // Mettre à jour la table premium_subscriptions
         $stmt = $pdo->prepare("
-            UPDATE premium_subscriptions SET 
+            UPDATE premium_subscriptions SET
                 status = ?,
                 updated_at = NOW()
             WHERE stripe_subscription_id = ?
         ");
         $stmt->execute([$subscription->status, $subscription->id]);
-        
-        logError("✅ Date d'expiration mise à jour: $expiryDate");
-        
+
     } catch (Exception $e) {
         logError("❌ Erreur mise à jour abonnement", $e);
     }
@@ -945,20 +943,45 @@ function handleSubscriptionDeleted($subscription) {
 function handlePaymentSucceeded($invoice) {
     try {
         if (!$invoice->subscription) return;
-        
+
         logError("💰 Paiement réussi pour facture: " . $invoice->id);
-        
+
         $pdo = getDBConnection();
         
+        // 🔧 CORRECTION : Récupérer l'abonnement Stripe pour obtenir la nouvelle date d'expiration
+        \Stripe\Stripe::setApiKey(STRIPE_SECRET_KEY);
+        $subscription = \Stripe\Subscription::retrieve($invoice->subscription);
+        
+        // Calculer la nouvelle date d'expiration à partir de current_period_end
+        $currentPeriodEnd = $subscription->current_period_end ?? time();
+        $expiryDate = date('Y-m-d H:i:s', $currentPeriodEnd);
+        
+        logError("🔄 Renouvellement détecté - Nouvelle date d'expiration: $expiryDate");
+
+        // 🚀 NOUVEAU : Mettre à jour la date d'expiration dans users via stripe_customer_id
+        $stmt = $pdo->prepare("
+            UPDATE users 
+            SET premium_expiry = ?,
+                updated_at = NOW()
+            WHERE stripe_customer_id = ?
+        ");
+        $stmt->execute([$expiryDate, $invoice->customer]);
+        
+        if ($stmt->rowCount() > 0) {
+            logError("✅ Date d'expiration mise à jour pour customer: " . $invoice->customer);
+        } else {
+            logError("⚠️ Aucun utilisateur trouvé avec stripe_customer_id: " . $invoice->customer);
+        }
+
         // Mettre à jour le statut dans premium_subscriptions
         $stmt = $pdo->prepare("
-            UPDATE premium_subscriptions SET 
+            UPDATE premium_subscriptions SET
                 status = 'active',
                 updated_at = NOW()
             WHERE stripe_subscription_id = ?
         ");
         $stmt->execute([$invoice->subscription]);
-        
+
     } catch (Exception $e) {
         logError("❌ Erreur traitement succès paiement", $e);
     }

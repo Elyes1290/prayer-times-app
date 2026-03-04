@@ -12,6 +12,7 @@
       "supportsTablet": true,
       "bundleIdentifier": "com.drogbinho.myadhan",
       "buildNumber": "1.0.16",
+      "deploymentTarget": "15.1",
       "icon": "./assets/images/icon.png",
       "locales": {
         "en": "./locales/ios/en.json",
@@ -37,6 +38,11 @@
         "NSCameraUsageDescription": "This app does not use the camera.",
         "NSPhotoLibraryUsageDescription": "This app does not use your photo library.",
         "ITSAppUsesNonExemptEncryption": false
+      },
+      "entitlements": {
+        "com.apple.security.application-groups": [
+          "group.com.drogbinho.myadhan"
+        ]
       }
     },
     "android": {
@@ -68,6 +74,7 @@
       "expo-background-fetch",
       "./plugins/withIosNativeModules.js",
       "./plugins/withIosSounds.js",
+      "./plugins/withPrayerTimesWidget.js",
       "expo-asset"
     ],
     "experiments": {
@@ -86,7 +93,24 @@
     "extra": {
       "router": {},
       "eas": {
-        "projectId": "14e34a3b-d846-4f78-8908-d80cdbc6d1d7"
+        "projectId": "14e34a3b-d846-4f78-8908-d80cdbc6d1d7",
+        "build": {
+          "experimental": {
+            "ios": {
+              "appExtensions": [
+                {
+                  "targetName": "PrayerTimesWidgetExtension",
+                  "bundleIdentifier": "com.drogbinho.myadhan.PrayerTimesWidget",
+                  "entitlements": {
+                    "com.apple.security.application-groups": [
+                      "group.com.drogbinho.myadhan"
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        }
       },
       "apiBaseUrl": "https://myadhanapp.com/api",
       "premiumContentBaseUrl": "https://myadhanapp.com/premium",

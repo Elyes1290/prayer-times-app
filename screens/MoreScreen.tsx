@@ -83,23 +83,6 @@ export default function MoreScreen() {
 
   const menuSections = [
     {
-      title: t("library") || "Bibliothèque",
-      items: [
-        {
-          icon: "heart-multiple",
-          title: t("favorites") || "Favoris",
-          subtitle: t("saved_content") || "Contenu sauvegardé",
-          route: "/favorites",
-        },
-        {
-          icon: "account-heart",
-          title: t("prophet_stories") || "Histoires du Prophète",
-          subtitle: t("prophetic_biography") || "Biographie prophétique",
-          route: "/prophet-stories",
-        },
-      ],
-    },
-    {
       title: t("tools") || "Outils",
       items: [
         {
@@ -151,6 +134,17 @@ export default function MoreScreen() {
         },
       ],
     },
+    {
+      title: "🔧 Outils développeur",
+      items: [
+        {
+          icon: "clock-outline",
+          title: "Widget iOS",
+          subtitle: "Diagnostiquer le widget",
+          route: "/debugWidget",
+        },
+      ],
+    },
   ];
 
   return (
@@ -176,7 +170,7 @@ export default function MoreScreen() {
         {/* Content */}
         <ScrollView
           style={styles.scrollView}
-          contentContainerStyle={styles.scrollContent}
+          contentContainerStyle={[styles.scrollContent, { paddingBottom: Math.max(100, insets.bottom + 80) }]}
           showsVerticalScrollIndicator={false}
         >
           {menuSections.map((section, sectionIndex) => (
@@ -251,7 +245,6 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     padding: 20,
-    paddingBottom: 100,
   },
   section: {
     marginBottom: 24,

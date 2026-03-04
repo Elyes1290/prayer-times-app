@@ -43,6 +43,7 @@ import { useTranslation } from "react-i18next";
 import { reverseGeocodeAsync } from "expo-location";
 import { useLocation } from "../hooks/useLocation";
 import { usePrayerTimes } from "../hooks/usePrayerTimes";
+import { usePrayerTimesWidget } from "../hooks/usePrayerTimesWidget";
 import { scheduleNotificationsFor2Days } from "../utils/sheduleAllNotificationsFor30Days";
 import { debugLog, errorLog } from "../utils/logger";
 import WelcomePersonalizationModal from "../components/WelcomePersonalizationModal";
@@ -503,6 +504,33 @@ export default function HomeScreen() {
     today,
     user?.isPremium || false
   );
+
+  // 🕌 Hook pour le widget iOS
+  const { updatePrayerTimes: updateWidget, isWidgetAvailable } = usePrayerTimesWidget();
+
+  // Mettre à jour le widget iOS quand les horaires changent
+  useEffect(() => {
+    if (isWidgetAvailable && currentPrayerTimes) {
+      // Convertir les objets Date en strings au format HH:mm
+      const formatTime = (date: Date): string => {
+        const hours = date.getHours().toString().padStart(2, '0');
+        const minutes = date.getMinutes().toString().padStart(2, '0');
+        return `${hours}:${minutes}`;
+      };
+
+      const prayerTimesForWidget = {
+        Fajr: formatTime(currentPrayerTimes.fajr),
+        Sunrise: formatTime(currentPrayerTimes.sunrise),
+        Dhuhr: formatTime(currentPrayerTimes.dhuhr),
+        Asr: formatTime(currentPrayerTimes.asr),
+        Maghrib: formatTime(currentPrayerTimes.maghrib),
+        Isha: formatTime(currentPrayerTimes.isha),
+      };
+
+      console.log("🕌 Mise à jour du widget iOS avec les nouveaux horaires:", prayerTimesForWidget);
+      updateWidget(prayerTimesForWidget);
+    }
+  }, [currentPrayerTimes, isWidgetAvailable, updateWidget]);
 
   // Stabiliser les dhikr settings
   const stableDhikrSettings = useMemo(

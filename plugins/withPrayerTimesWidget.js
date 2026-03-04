@@ -1,6 +1,5 @@
 const {
   withDangerousMod,
-  withInfoPlist,
   withEntitlementsPlist,
   withXcodeProject,
 } = require("@expo/config-plugins");
@@ -8,357 +7,182 @@ const fs = require("fs");
 const path = require("path");
 
 /**
- * Plugin Expo pour créer le Widget Extension iOS
- * Ajoute un widget pour afficher les horaires de prière
+ * Plugin Expo pour configurer le Widget Extension iOS
+ * Copie UNIQUEMENT le .xcodeproj depuis le template (avec la config du widget)
+ * et laisse Expo gérer le reste
  */
 const withPrayerTimesWidget = (config) => {
-  // 1. Ajouter l'App Group pour partager les données entre l'app et le widget
-  config = withEntitlementsPlist(config, (config) => {
-    const appGroupId = `group.${
-      config.ios?.bundleIdentifier || "com.drogbinho.myadhan"
-    }`;
+  const APP_GROUP_ID = "group.com.drogbinho.myadhan";
 
+  // 1. Ajouter l'App Group pour l'app principale
+  config = withEntitlementsPlist(config, (config) => {
     if (!config.modResults["com.apple.security.application-groups"]) {
       config.modResults["com.apple.security.application-groups"] = [];
     }
 
     if (
       !config.modResults["com.apple.security.application-groups"].includes(
-        appGroupId
+        APP_GROUP_ID
       )
     ) {
       config.modResults["com.apple.security.application-groups"].push(
-        appGroupId
+        APP_GROUP_ID
       );
     }
 
-    console.log(`✅ [withPrayerTimesWidget] App Group ajouté: ${appGroupId}`);
+    console.log(`✅ [withPrayerTimesWidget] App Group ajouté: ${APP_GROUP_ID}`);
     return config;
   });
 
-  // 2. Créer les fichiers du Widget Extension
+  // 2. Copier UNIQUEMENT le .xcodeproj depuis le template
   config = withDangerousMod(config, [
     "ios",
     async (config) => {
       const projectRoot = config.modRequest.projectRoot;
+      const templateXcodeproj = path.join(
+        projectRoot,
+        "ios-native",
+        "ios-template",
+        "MyAdhanMuslimPrayerApp.xcodeproj"
+      );
       const iosRoot = path.join(projectRoot, "ios");
+      const targetXcodeproj = path.join(iosRoot, "MyAdhanMuslimPrayerApp.xcodeproj");
 
-      // Trouver le nom du projet iOS
-      const xcodeProjects = fs
-        .readdirSync(iosRoot)
-        .filter((file) => file.endsWith(".xcodeproj"));
+      console.log("🕌 [withPrayerTimesWidget] Configuration du widget iOS...");
 
-      if (xcodeProjects.length === 0) {
-        console.log("⚠️ [withPrayerTimesWidget] Aucun projet Xcode trouvé");
+      // Vérifier que le template .xcodeproj existe
+      if (!fs.existsSync(templateXcodeproj)) {
+        console.error(
+          `❌ [withPrayerTimesWidget] Le template .xcodeproj n'existe pas: ${templateXcodeproj}`
+        );
         return config;
       }
 
-      const projectName = xcodeProjects[0].replace(".xcodeproj", "");
-      const widgetExtensionDir = path.join(iosRoot, "PrayerTimesWidget");
+      console.log("📋 [withPrayerTimesWidget] Remplacement du .xcodeproj par le template...");
 
-      console.log("🕌 [withPrayerTimesWidget] Création du widget iOS...");
-      console.log(`📂 Widget directory: ${widgetExtensionDir}`);
-
-      // Créer le dossier du widget
-      if (!fs.existsSync(widgetExtensionDir)) {
-        fs.mkdirSync(widgetExtensionDir, { recursive: true });
+      // Supprimer le .xcodeproj généré par Expo
+      if (fs.existsSync(targetXcodeproj)) {
+        deleteFolder(targetXcodeproj);
       }
 
-      // Créer le fichier principal du widget
-      const widgetSwiftContent = `import WidgetKit
-import SwiftUI
+      // Copier le .xcodeproj du template
+      copyFolderRecursiveSync(templateXcodeproj, targetXcodeproj);
+      console.log("✅ .xcodeproj remplacé avec la config du widget");
 
-// 🕌 MODÈLE DE DONNÉES
-struct PrayerTimesEntry: TimelineEntry {
-    let date: Date
-    let prayerTimes: [String: String]
-    let currentPrayer: String
-    let nextPrayer: String
-    let nextPrayerTime: String
-}
+          // Copier les fichiers du widget
+          const widgetSourceDir = path.join(projectRoot, "ios-native", "PrayerTimesWidget");
+          const widgetTargetDir = path.join(iosRoot, "PrayerTimesWidget");
 
-// 📊 TIMELINE PROVIDER
-struct PrayerTimesProvider: TimelineProvider {
-    typealias Entry = PrayerTimesEntry
-    
-    func placeholder(in context: Context) -> PrayerTimesEntry {
-        PrayerTimesEntry(
-            date: Date(),
-            prayerTimes: [:],
-            currentPrayer: "Fajr",
-            nextPrayer: "Dhuhr",
-            nextPrayerTime: "12:00"
-        )
-    }
-    
-    func getSnapshot(in context: Context, completion: @escaping (PrayerTimesEntry) -> Void) {
-        let entry = createEntry()
-        completion(entry)
-    }
-    
-    func getTimeline(in context: Context, completion: @escaping (Timeline<PrayerTimesEntry>) -> Void) {
-        let entry = createEntry()
-        
-        // Mettre à jour toutes les 15 minutes
-        let nextUpdate = Calendar.current.date(byAdding: .minute, value: 15, to: Date())!
-        let timeline = Timeline(entries: [entry], policy: .after(nextUpdate))
-        
-        completion(timeline)
-    }
-    
-    // 📖 LIRE LES HORAIRES DEPUIS APP GROUP
-    private func createEntry() -> PrayerTimesEntry {
-        let userDefaults = UserDefaults(suiteName: "group.com.drogbinho.myadhan")
-        
-        var prayerTimes: [String: String] = [:]
-        let prayers = ["Fajr", "Sunrise", "Dhuhr", "Asr", "Maghrib", "Isha"]
-        
-        for prayer in prayers {
-            if let time = userDefaults?.string(forKey: "today_prayer_\\(prayer)") {
-                prayerTimes[prayer] = time
-            }
-        }
-        
-        let (current, next, nextTime) = calculateCurrentAndNextPrayer(prayerTimes: prayerTimes)
-        
-        return PrayerTimesEntry(
-            date: Date(),
-            prayerTimes: prayerTimes,
-            currentPrayer: current,
-            nextPrayer: next,
-            nextPrayerTime: nextTime
-        )
-    }
-    
-    // 🔍 CALCULER LA PRIÈRE ACTUELLE ET SUIVANTE
-    private func calculateCurrentAndNextPrayer(prayerTimes: [String: String]) -> (String, String, String) {
-        let now = Date()
-        let calendar = Calendar.current
-        let formatter = DateFormatter()
-        formatter.dateFormat = "HH:mm"
-        
-        let prayerOrder = ["Fajr", "Dhuhr", "Asr", "Maghrib", "Isha"]
-        var currentPrayer = "Isha"
-        var nextPrayer = "Fajr"
-        var nextPrayerTime = "00:00"
-        
-        for i in 0..<prayerOrder.count {
-            let prayer = prayerOrder[i]
-            guard let timeStr = prayerTimes[prayer],
-                  let prayerTime = formatter.date(from: timeStr) else {
-                continue
-            }
+          if (fs.existsSync(widgetSourceDir)) {
+            console.log("📂 [withPrayerTimesWidget] Copie des fichiers du widget...");
+            copyFolderRecursiveSync(widgetSourceDir, widgetTargetDir);
+            console.log("✅ Fichiers du widget copiés");
             
-            // Ajuster la date pour aujourd'hui
-            let prayerDate = calendar.date(
-                bySettingHour: calendar.component(.hour, from: prayerTime),
-                minute: calendar.component(.minute, from: prayerTime),
-                second: 0,
-                of: now
-            )!
+            // 🖼️ NOUVEAU : Copier les Assets (images de fond)
+            const assetsSourceDir = path.join(widgetSourceDir, "Assets.xcassets");
+            const assetsTargetDir = path.join(widgetTargetDir, "Assets.xcassets");
             
-            if now < prayerDate {
-                nextPrayer = prayer
-                nextPrayerTime = timeStr
-                currentPrayer = i > 0 ? prayerOrder[i - 1] : "Isha"
-                break
+            if (fs.existsSync(assetsSourceDir)) {
+              console.log("🖼️ [withPrayerTimesWidget] Copie des assets du widget...");
+              copyFolderRecursiveSync(assetsSourceDir, assetsTargetDir);
+              console.log("✅ Assets du widget copiés");
+            } else {
+              console.log("⚠️ [withPrayerTimesWidget] Assets non trouvés (normal si pas encore ajoutés)");
             }
-        }
-        
-        return (currentPrayer, nextPrayer, nextPrayerTime)
-    }
-}
+          }
 
-// 🎨 VUE DU WIDGET
-struct PrayerTimesWidgetView: View {
-    var entry: PrayerTimesProvider.Entry
-    
-    var body: some View {
-        ZStack {
-            // Fond dégradé selon l'heure
-            LinearGradient(
-                gradient: Gradient(colors: backgroundColors()),
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            )
-            
-            VStack(alignment: .leading, spacing: 8) {
-                // 🕌 Titre
-                HStack {
-                    Image(systemName: "clock")
-                        .foregroundColor(.white)
-                    Text("Horaires de Prière")
-                        .font(.headline)
-                        .foregroundColor(.white)
-                }
-                .padding(.bottom, 4)
-                
-                // ⏰ Prochaine prière
-                if !entry.nextPrayer.isEmpty {
-                    HStack {
-                        Text("Prochaine:")
-                            .font(.subheadline)
-                            .foregroundColor(.white.opacity(0.9))
-                        Spacer()
-                        Text("\\(entry.nextPrayer) à \\(entry.nextPrayerTime)")
-                            .font(.subheadline)
-                            .bold()
-                            .foregroundColor(.white)
-                    }
-                    .padding(8)
-                    .background(Color.white.opacity(0.2))
-                    .cornerRadius(8)
-                }
-                
-                Divider()
-                    .background(Color.white.opacity(0.5))
-                
-                // 📋 Liste des horaires
-                ForEach(["Fajr", "Sunrise", "Dhuhr", "Asr", "Maghrib", "Isha"], id: \\.self) { prayer in
-                    if let time = entry.prayerTimes[prayer] {
-                        HStack {
-                            Text(prayerEmoji(prayer))
-                            Text(prayerName(prayer))
-                                .font(.subheadline)
-                                .foregroundColor(entry.currentPrayer == prayer ? .yellow : .white)
-                            Spacer()
-                            Text(time)
-                                .font(.subheadline)
-                                .bold()
-                                .foregroundColor(.white)
-                        }
-                    }
-                }
-            }
-            .padding()
-        }
-    }
-    
-    // 🎨 Couleurs de fond selon l'heure
-    private func backgroundColors() -> [Color] {
-        let hour = Calendar.current.component(.hour, from: entry.date)
-        
-        switch hour {
-        case 0..<5: // Nuit
-            return [Color(red: 0.1, green: 0.1, blue: 0.3), Color(red: 0.2, green: 0.1, blue: 0.4)]
-        case 5..<7: // Fajr/Aube
-            return [Color(red: 0.4, green: 0.5, blue: 0.8), Color(red: 0.6, green: 0.4, blue: 0.7)]
-        case 7..<12: // Matin
-            return [Color(red: 0.3, green: 0.6, blue: 0.9), Color(red: 0.5, green: 0.7, blue: 1.0)]
-        case 12..<15: // Midi
-            return [Color(red: 0.9, green: 0.7, blue: 0.3), Color(red: 1.0, green: 0.6, blue: 0.2)]
-        case 15..<18: // Après-midi
-            return [Color(red: 0.9, green: 0.6, blue: 0.3), Color(red: 0.8, green: 0.5, blue: 0.4)]
-        case 18..<20: // Maghrib/Coucher
-            return [Color(red: 0.8, green: 0.4, blue: 0.3), Color(red: 0.6, green: 0.3, blue: 0.5)]
-        default: // Soirée
-            return [Color(red: 0.2, green: 0.2, blue: 0.4), Color(red: 0.3, green: 0.2, blue: 0.5)]
-        }
-    }
-    
-    // 🕌 Emoji par prière
-    private func prayerEmoji(_ prayer: String) -> String {
-        switch prayer {
-        case "Fajr": return "🌅"
-        case "Sunrise": return "🌄"
-        case "Dhuhr": return "☀️"
-        case "Asr": return "🌤️"
-        case "Maghrib": return "🌆"
-        case "Isha": return "🌙"
-        default: return "🕌"
-        }
-    }
-    
-    // 📖 Nom localisé
-    private func prayerName(_ prayer: String) -> String {
-        switch prayer {
-        case "Sunrise": return "Lever du Soleil"
-        default: return prayer
-        }
-    }
-}
+      // Note: PrayerTimesWidgetModule est copié par withIosNativeModules dans ios/NativeModules/
+      console.log("ℹ️ PrayerTimesWidgetModule sera copié par withIosNativeModules");
 
-// 🔧 CONFIGURATION DU WIDGET
-@main
-struct PrayerTimesWidget: Widget {
-    let kind: String = "PrayerTimesWidget"
-    
-    var body: some WidgetConfiguration {
-        StaticConfiguration(kind: kind, provider: PrayerTimesProvider()) { entry in
-            PrayerTimesWidgetView(entry: entry)
-        }
-        .configurationDisplayName("Horaires de Prière")
-        .description("Affiche les horaires de prière du jour")
-        .supportedFamilies([.systemSmall, .systemMedium, .systemLarge])
-    }
-}
-
-// 🔍 PREVIEW
-struct PrayerTimesWidget_Previews: PreviewProvider {
-    static var previews: some View {
-        let entry = PrayerTimesEntry(
-            date: Date(),
-            prayerTimes: [
-                "Fajr": "05:30",
-                "Sunrise": "07:00",
-                "Dhuhr": "12:45",
-                "Asr": "15:30",
-                "Maghrib": "18:15",
-                "Isha": "19:45"
-            ],
-            currentPrayer: "Dhuhr",
-            nextPrayer: "Asr",
-            nextPrayerTime: "15:30"
-        )
-        
-        PrayerTimesWidgetView(entry: entry)
-            .previewContext(WidgetPreviewContext(family: .systemMedium))
-    }
-}
-`;
-
-      fs.writeFileSync(
-        path.join(widgetExtensionDir, "PrayerTimesWidget.swift"),
-        widgetSwiftContent
+      // Copier l'entitlements du widget
+      const entitlementsSource = path.join(
+        projectRoot,
+        "ios-native",
+        "PrayerTimesWidget",
+        "PrayerTimesWidgetExtension.entitlements"
       );
+      const entitlementsTarget = path.join(iosRoot, "PrayerTimesWidgetExtension.entitlements");
 
-      // Créer Info.plist pour le widget
-      const widgetInfoPlist = `<?xml version="1.0" encoding="UTF-8"?>
+      if (fs.existsSync(entitlementsSource)) {
+        fs.copyFileSync(entitlementsSource, entitlementsTarget);
+        console.log("✅ Entitlements du widget copiés");
+      }
+
+      // Créer un fichier exportOptions.plist pour spécifier les profils
+      const exportOptionsPlist = `<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <key>CFBundleDevelopmentRegion</key>
-    <string>$(DEVELOPMENT_LANGUAGE)</string>
-    <key>CFBundleDisplayName</key>
-    <string>Prayer Times</string>
-    <key>CFBundleExecutable</key>
-    <string>$(EXECUTABLE_NAME)</string>
-    <key>CFBundleIdentifier</key>
-    <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
-    <key>CFBundleInfoDictionaryVersion</key>
-    <string>6.0</string>
-    <key>CFBundleName</key>
-    <string>$(PRODUCT_NAME)</string>
-    <key>CFBundlePackageType</key>
-    <string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
-    <key>CFBundleShortVersionString</key>
-    <string>1.0</string>
-    <key>CFBundleVersion</key>
-    <string>1</string>
-    <key>NSExtension</key>
+    <key>provisioningProfiles</key>
     <dict>
-        <key>NSExtensionPointIdentifier</key>
-        <string>com.apple.widgetkit-extension</string>
+        <key>com.drogbinho.myadhan</key>
+        <string>ebf79e49-9e26-4a09-b435-3d90f0c482b8</string>
+        <key>com.drogbinho.myadhan.PrayerTimesWidget</key>
+        <string>49YRG27697</string>
     </dict>
 </dict>
 </plist>`;
 
-      fs.writeFileSync(
-        path.join(widgetExtensionDir, "Info.plist"),
-        widgetInfoPlist
-      );
+      const exportOptionsPath = path.join(iosRoot, "exportOptions.plist");
+      fs.writeFileSync(exportOptionsPath, exportOptionsPlist);
+      console.log("✅ exportOptions.plist créé avec les profils du widget");
 
-      console.log("✅ [withPrayerTimesWidget] Fichiers du widget créés");
+      // 🔧 CORRECTION : Injecter les versions depuis app.json dans le project.pbxproj
+      const pbxprojPath = path.join(iosRoot, "MyAdhanMuslimPrayerApp.xcodeproj", "project.pbxproj");
+      
+      if (fs.existsSync(pbxprojPath)) {
+        console.log("🔄 Injection des versions du widget depuis app.json...");
+        
+        // Lire les versions depuis la config Expo
+        const appVersion = config.version || "1.0.0";
+        const buildNumber = config.ios?.buildNumber || appVersion;
+        
+        console.log(`  📦 Version: ${appVersion}, Build: ${buildNumber}`);
+        
+        let pbxprojContent = fs.readFileSync(pbxprojPath, "utf8");
+        
+        // 🎯 STRATÉGIE : Supprimer les anciennes versions du widget puis ajouter les nouvelles
+        
+        // 1. Configuration Debug du widget (95A024662F4349D100408651)
+        // Supprimer les lignes MARKETING_VERSION et CURRENT_PROJECT_VERSION existantes
+        pbxprojContent = pbxprojContent.replace(
+          /(95A024662F4349D100408651 \/\* Debug \*\/ = \{[\s\S]*?buildSettings = \{[\s\S]*?)(\s+MARKETING_VERSION = [^;]+;\s+)/,
+          '$1'
+        );
+        pbxprojContent = pbxprojContent.replace(
+          /(95A024662F4349D100408651 \/\* Debug \*\/ = \{[\s\S]*?buildSettings = \{[\s\S]*?)(\s+CURRENT_PROJECT_VERSION = [^;]+;\s+)/,
+          '$1'
+        );
+        
+        // Ajouter les nouvelles versions après CODE_SIGN_STYLE
+        pbxprojContent = pbxprojContent.replace(
+          /(95A024662F4349D100408651 \/\* Debug \*\/ = \{[\s\S]*?buildSettings = \{[\s\S]*?CODE_SIGN_STYLE = Automatic;)/,
+          `$1\n\t\t\t\tCURRENT_PROJECT_VERSION = ${buildNumber};\n\t\t\t\tMARKETING_VERSION = ${appVersion};`
+        );
+        
+        // 2. Configuration Release du widget (95A024672F4349D100408651)
+        // Supprimer les anciennes versions
+        pbxprojContent = pbxprojContent.replace(
+          /(95A024672F4349D100408651 \/\* Release \*\/ = \{[\s\S]*?buildSettings = \{[\s\S]*?)(\s+MARKETING_VERSION = [^;]+;\s+)/,
+          '$1'
+        );
+        pbxprojContent = pbxprojContent.replace(
+          /(95A024672F4349D100408651 \/\* Release \*\/ = \{[\s\S]*?buildSettings = \{[\s\S]*?)(\s+CURRENT_PROJECT_VERSION = [^;]+;\s+)/,
+          '$1'
+        );
+        
+        // Ajouter les nouvelles versions après CODE_SIGN_STYLE
+        pbxprojContent = pbxprojContent.replace(
+          /(95A024672F4349D100408651 \/\* Release \*\/ = \{[\s\S]*?buildSettings = \{[\s\S]*?CODE_SIGN_STYLE = Automatic;)/,
+          `$1\n\t\t\t\tCURRENT_PROJECT_VERSION = ${buildNumber};\n\t\t\t\tMARKETING_VERSION = ${appVersion};`
+        );
+        
+        fs.writeFileSync(pbxprojPath, pbxprojContent);
+        console.log(`✅ Versions remplacées: ${appVersion} (${buildNumber})`);
+      }
+
+      console.log("✅ [withPrayerTimesWidget] Configuration terminée !");
+      console.log("🎯 Le widget est prêt à être compilé");
 
       return config;
     },
@@ -366,5 +190,55 @@ struct PrayerTimesWidget_Previews: PreviewProvider {
 
   return config;
 };
+
+/**
+ * Supprime un dossier récursivement
+ */
+function deleteFolder(folderPath) {
+  if (fs.existsSync(folderPath)) {
+    fs.readdirSync(folderPath).forEach((file) => {
+      const curPath = path.join(folderPath, file);
+      if (fs.lstatSync(curPath).isDirectory()) {
+        deleteFolder(curPath);
+      } else {
+        fs.unlinkSync(curPath);
+      }
+    });
+    fs.rmdirSync(folderPath);
+  }
+}
+
+/**
+ * Copie récursivement un dossier
+ */
+function copyFolderRecursiveSync(source, target) {
+  // Créer le dossier cible s'il n'existe pas
+  if (!fs.existsSync(target)) {
+    fs.mkdirSync(target, { recursive: true });
+  }
+
+  // Lire tous les fichiers/dossiers
+  const files = fs.readdirSync(source);
+
+  files.forEach((file) => {
+    const sourcePath = path.join(source, file);
+    const targetPath = path.join(target, file);
+
+    try {
+      if (fs.statSync(sourcePath).isDirectory()) {
+        // Récursion pour les sous-dossiers
+        copyFolderRecursiveSync(sourcePath, targetPath);
+      } else {
+        // Copier le fichier
+        fs.copyFileSync(sourcePath, targetPath);
+      }
+    } catch (error) {
+      // Ignorer les erreurs de chemins trop longs
+      if (error.code !== "ENAMETOOLONG") {
+        console.warn(`⚠️ Erreur lors de la copie de ${file}:`, error.message);
+      }
+    }
+  });
+}
 
 module.exports = withPrayerTimesWidget;

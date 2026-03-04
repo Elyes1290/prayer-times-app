@@ -4,7 +4,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { scheduleNotificationsFor2Days } from "./sheduleAllNotificationsFor30Days";
 import { LocalStorageManager } from "./localStorageManager";
 import { safeJsonParse } from "./safeJson";
-import { Platform } from "react-native";
+import { Platform, NativeModules } from "react-native";
 
 const BACKGROUND_FETCH_TASK = "BACKGROUND_NOTIFICATION_UPDATE";
 const BACKGROUND_LOG_KEY = "BACKGROUND_NOTIFICATION_UPDATE_LOGS";
@@ -175,12 +175,62 @@ const reprogramFromStoredSettings = async (reason: string) => {
       },
     });
 
+    // 🕌 NOUVEAU : Calculer et mettre à jour les horaires du widget iOS
+    try {
+      const { PrayerTimesWidgetModule } = NativeModules;
+      if (PrayerTimesWidgetModule?.updatePrayerTimes) {
+        // Calculer les horaires du jour pour le widget
+        const { getPrayerTimesForLocation } = await import("./prayerTimes");
+        const todayPrayerTimes = await getPrayerTimesForLocation(
+          userLocation.latitude,
+          userLocation.longitude,
+          calcMethod || "MuslimWorldLeague",
+          new Date()
+        );
+        
+        if (todayPrayerTimes) {
+          // Formater les horaires pour le widget (HH:mm)
+          const formatTime = (date: Date): string => {
+            const hours = date.getHours().toString().padStart(2, '0');
+            const minutes = date.getMinutes().toString().padStart(2, '0');
+            return `${hours}:${minutes}`;
+          };
+          
+          const prayerTimesForWidget = {
+            Fajr: formatTime(todayPrayerTimes.fajr),
+            Sunrise: formatTime(todayPrayerTimes.sunrise),
+            Dhuhr: formatTime(todayPrayerTimes.dhuhr),
+            Asr: formatTime(todayPrayerTimes.asr),
+            Maghrib: formatTime(todayPrayerTimes.maghrib),
+            Isha: formatTime(todayPrayerTimes.isha),
+          };
+          
+          console.log("🕌 [BackgroundFetch] Mise à jour horaires widget:", prayerTimesForWidget);
+          
+          await PrayerTimesWidgetModule.updatePrayerTimes(
+            prayerTimesForWidget.Fajr,
+            prayerTimesForWidget.Sunrise,
+            prayerTimesForWidget.Dhuhr,
+            prayerTimesForWidget.Asr,
+            prayerTimesForWidget.Maghrib,
+            prayerTimesForWidget.Isha
+          );
+          
+          console.log("✅ [BackgroundFetch] Widget iOS mis à jour avec les nouveaux horaires");
+        }
+      }
+    } catch (widgetError) {
+      console.log("⚠️ [BackgroundFetch] Erreur mise à jour widget:", widgetError);
+      // Non bloquant
+    }
+
     const endTime = new Date();
     const duration = endTime.getTime() - start.getTime();
     console.log("════════════════════════════════════════════════════════");
     console.log(`✅ [BackgroundFetch] Succès en ${duration}ms`);
     console.log("   📅 Notifications: fenêtre glissante 3 jours (iOS)");
-    console.log("   ⏰ Prochain réveil: best effort iOS (~24h)");
+    console.log("   🕌 Widget iOS: rafraîchi");
+    console.log("   ⏰ Prochain réveil: best effort iOS (~6-24h)");
     console.log("════════════════════════════════════════════════════════");
 
     await appendBackgroundLog({

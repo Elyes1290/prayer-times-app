@@ -66,6 +66,7 @@ const withIosNativeModules = (config) => {
   pod 'QuranAudioServiceModule', :path => './NativeModules'
   pod 'DownloadModule', :path => './NativeModules'
   pod 'QuranWidgetModule', :path => './NativeModules'
+  pod 'PrayerTimesWidgetModule', :path => './NativeModules'
 `;
           podfileContent = podfileContent.replace(
             "use_expo_modules!",

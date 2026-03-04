@@ -3,7 +3,7 @@ module.exports = {
   setupFiles: ["./setupTests.js"],
   testEnvironment: "node",
   transformIgnorePatterns: [
-    "node_modules/(?!(jest-)?react-native|@react-native|@react-navigation|@expo/vector-icons|expo-.*|@expo/.*|expo-linear-gradient|expo-av|expo-location|expo-notifications|expo-router|expo-constants|expo-font|expo-haptics|expo-image|expo-blur|expo-dev-client|expo-linking|expo-localization|expo-modules-core|expo-navigation-bar|expo-sensors|expo-splash-screen|expo-status-bar|expo-symbols|expo-system-ui|expo-web-browser)",
+    "node_modules/(?!(jest-)?react-native|@react-native|@react-navigation|@expo/vector-icons|expo-.*|@expo/.*|expo-linear-gradient|expo-av|expo-location|expo-notifications|expo-router|expo-constants|expo-font|expo-haptics|expo-image|expo-blur|expo-dev-client|expo-linking|expo-localization|expo-modules-core|expo-navigation-bar|expo-sensors|expo-splash-screen|expo-status-bar|expo-symbols|expo-system-ui|expo-web-browser|react-i18next)",
   ],
   testTimeout: 30000,
   setupFilesAfterEnv: ["@testing-library/jest-native/extend-expect"],
@@ -38,6 +38,10 @@ module.exports = {
     "^expo-location$": "<rootDir>/__mocks__/expoLocation.ts",
     // Mock pour expo-router
     "^expo-router$": "<rootDir>/__mocks__/expoRouter.ts",
+    // Mock pour react-native-purchases
+    "^react-native-purchases$": "<rootDir>/__mocks__/react-native-purchases.ts",
+    // Mock pour react-i18next
+    "^react-i18next$": "<rootDir>/__mocks__/react-i18next.ts",
   },
   // Configuration pour les modules ES6
   extensionsToTreatAsEsm: [".ts", ".tsx"],

@@ -11,6 +11,7 @@ jest.mock("expo-router", () => ({
 }));
 
 jest.mock("@react-native-async-storage/async-storage", () => ({
+  getItem: jest.fn(),
   removeItem: jest.fn(),
 }));
 
@@ -26,9 +27,27 @@ const renderPaymentCancelScreen = () => {
   return render(<PaymentCancelScreen />);
 };
 
+// Mock fetch global
+global.fetch = jest.fn(() =>
+  Promise.resolve({
+    json: () => Promise.resolve({ success: true }),
+  })
+) as jest.Mock;
+
 describe("PaymentCancelScreen", () => {
   beforeEach(() => {
     jest.clearAllMocks();
+    
+    // Configurer getItem par défaut (pas de pending_registration)
+    (AsyncStorage.getItem as jest.Mock).mockResolvedValue(null);
+    
+    // Configurer removeItem par défaut
+    (AsyncStorage.removeItem as jest.Mock).mockResolvedValue(undefined);
+    
+    // Configurer fetch par défaut
+    (global.fetch as jest.Mock).mockResolvedValue({
+      json: () => Promise.resolve({ success: true }),
+    });
   });
 
   it("renders correctly with cancel message", () => {
@@ -43,6 +62,11 @@ describe("PaymentCancelScreen", () => {
   });
 
   it("cleans up registration data on mount", async () => {
+    // Simuler des données de registration en attente
+    (AsyncStorage.getItem as jest.Mock).mockResolvedValueOnce(
+      JSON.stringify({ email: "test@example.com", subscriptionType: "monthly" })
+    );
+    
     renderPaymentCancelScreen();
 
     await waitFor(() => {
@@ -80,6 +104,11 @@ describe("PaymentCancelScreen", () => {
   });
 
   it("handles async storage cleanup error gracefully", async () => {
+    // Simuler des données de registration
+    (AsyncStorage.getItem as jest.Mock).mockResolvedValueOnce(
+      JSON.stringify({ email: "test@example.com" })
+    );
+    
     // Mock une erreur d'AsyncStorage
     (AsyncStorage.removeItem as jest.Mock).mockRejectedValueOnce(
       new Error("Storage error")
@@ -101,7 +130,7 @@ describe("PaymentCancelScreen", () => {
     await new Promise((resolve) => setTimeout(resolve, 10));
 
     expect(consoleSpy).toHaveBeenCalledWith(
-      "❌ Erreur nettoyage données inscription:",
+      "❌ Erreur lors de l'annulation:",
       expect.any(Error)
     );
 
@@ -155,6 +184,11 @@ describe("PaymentCancelScreen", () => {
   });
 
   it("performs cleanup only once on mount", async () => {
+    // Simuler des données de registration
+    (AsyncStorage.getItem as jest.Mock).mockResolvedValueOnce(
+      JSON.stringify({ email: "test@example.com" })
+    );
+    
     renderPaymentCancelScreen();
 
     await waitFor(() => {

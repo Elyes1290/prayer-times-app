@@ -224,10 +224,26 @@ export default function AccountManagementSection({
 
   const handleManageSubscription = async () => {
     try {
-      // 🎯 NOUVEAU : Vérifier la plateforme d'abonnement, pas la plateforme actuelle
-      const subscriptionPlatform = userData?.subscription_platform || 'none';
+      // 🐛 DEBUG : Afficher TOUTES les données pour comprendre le problème
+      console.log("🐛 [DEBUG] userData complet:", JSON.stringify(userData, null, 2));
+      console.log("🐛 [DEBUG] userData.subscription_platform:", userData?.subscription_platform);
+      console.log("🐛 [DEBUG] Type de subscription_platform:", typeof userData?.subscription_platform);
+      console.log("🐛 [DEBUG] userData.stripe_customer_id:", userData?.stripe_customer_id);
+      console.log("🐛 [DEBUG] userData.premium_status:", userData?.premium_status);
       
-      console.log("🔍 Platform d'abonnement:", subscriptionPlatform);
+      // 🎯 NOUVEAU : Détecter la plateforme d'abonnement avec fallback sur stripe_customer_id
+      let subscriptionPlatform = userData?.subscription_platform || 'none';
+      
+      // 🔧 CORRECTION : Nettoyer les valeurs vides ou nulles
+      if (!subscriptionPlatform || subscriptionPlatform === '' || subscriptionPlatform === 'none') {
+        console.log("🔍 subscription_platform vide/none, vérification stripe_customer_id...");
+        if (userData?.stripe_customer_id) {
+          console.log("✅ stripe_customer_id existe → Abonnement Stripe détecté");
+          subscriptionPlatform = 'stripe';
+        }
+      }
+      
+      console.log("🔍 Platform d'abonnement finale:", subscriptionPlatform);
       console.log("🔍 Platform actuelle:", Platform.OS);
       
       // 🍎 Si abonnement créé sur Apple → toujours rediriger vers Apple (même sur Android)
@@ -510,6 +526,8 @@ export default function AccountManagementSection({
                   ? t("yearly_subscription", "Abonnement Annuel")
                   : userData?.subscription_type === "family"
                   ? t("family_subscription", "Abonnement Familial")
+                  : userData?.stripe_customer_id
+                  ? t("stripe_subscription", "Abonnement Stripe")
                   : userData?.subscription_type ||
                     t("type_undefined", "Type non défini")
                 : t("free_version", "Version Gratuite")}
@@ -620,7 +638,10 @@ export default function AccountManagementSection({
       {/* Section Actions */}
       <View style={[styles.accountSection, { marginTop: 16 }]}>
         {/* Bouton Gestion Abonnement - seulement pour les utilisateurs premium NON-VIP */}
-        {userData?.premium_status === 1 && userData?.subscription_platform !== 'vip' && (
+        {/* 🔧 CORRECTION : Afficher aussi pour les anciens utilisateurs avec stripe_customer_id */}
+        {userData?.premium_status === 1 && 
+         userData?.subscription_platform !== 'vip' && 
+         (userData?.subscription_platform === 'stripe' || userData?.subscription_platform === 'apple' || userData?.stripe_customer_id) && (
           <TouchableOpacity
             style={[
               styles.logoutButton,
