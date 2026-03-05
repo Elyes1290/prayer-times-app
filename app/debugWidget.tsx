@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Alert } from 'react-native';
 import { usePrayerTimesWidget } from '../hooks/usePrayerTimesWidget';
 import { useRouter } from 'expo-router';
@@ -10,6 +10,17 @@ export default function DebugWidgetScreen() {
   const router = useRouter();
   const [logs, setLogs] = useState<string[]>([]);
   const { isWidgetAvailable, updatePrayerTimes, getPrayerTimes, forceWidgetRefresh } = usePrayerTimesWidget();
+
+  // 🔒 Désactiver en production
+  useEffect(() => {
+    if (!__DEV__) {
+      Alert.alert(
+        "Accès refusé",
+        "Cette page n'est disponible qu'en mode développement.",
+        [{ text: "OK", onPress: () => router.back() }]
+      );
+    }
+  }, []);
 
   const addLog = (message: string) => {
     const timestamp = new Date().toLocaleTimeString();

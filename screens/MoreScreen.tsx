@@ -134,17 +134,6 @@ export default function MoreScreen() {
         },
       ],
     },
-    {
-      title: "🔧 Outils développeur",
-      items: [
-        {
-          icon: "clock-outline",
-          title: "Widget iOS",
-          subtitle: "Diagnostiquer le widget",
-          route: "/debugWidget",
-        },
-      ],
-    },
   ];
 
   return (

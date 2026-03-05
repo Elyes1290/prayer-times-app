@@ -129,37 +129,29 @@ struct PrayerTimesWidgetView: View {
     @Environment(\.widgetFamily) var family
    
     var body: some View {
-        ZStack {
-            // 🖼️ Image de fond selon le moment de la journée
-            if let backgroundImage = getBackgroundImage() {
-                // 🔧 CORRECTIF : Charger l'image depuis le bundle avec UIImage
-                if let uiImage = UIImage(named: backgroundImage) {
-                    Image(uiImage: uiImage)
+        GeometryReader { geometry in
+            ZStack {
+                // 🖼️ Image de fond selon le moment de la journée
+                if let backgroundImage = getBackgroundImage() {
+                    // 🎨 Charger l'image depuis l'Asset Catalog
+                    Image(backgroundImage)
                         .resizable()
                         .aspectRatio(contentMode: .fill)
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .frame(width: geometry.size.width, height: geometry.size.height)
                         .clipped()
                     
                     // Overlay sombre pour lisibilité du texte
-                    Color.black.opacity(0.25)
+                    Color.black.opacity(0.3)
                 } else {
-                    // Fallback si l'image ne charge pas
+                    // Fallback : Dégradé si l'image n'existe pas
                     LinearGradient(
                         gradient: Gradient(colors: backgroundColors()),
                         startPoint: .topLeading,
                         endPoint: .bottomTrailing
                     )
                 }
-            } else {
-                // Fallback : Dégradé si l'image n'existe pas
-                LinearGradient(
-                    gradient: Gradient(colors: backgroundColors()),
-                    startPoint: .topLeading,
-                    endPoint: .bottomTrailing
-                )
-            }
-           
-            VStack(alignment: .leading, spacing: family == .systemSmall ? 4 : 8) {
+               
+                VStack(alignment: .leading, spacing: family == .systemSmall ? 4 : 8) {
                 // 🕌 Titre
                 HStack {
                     Image(systemName: "clock")
@@ -222,6 +214,7 @@ struct PrayerTimesWidgetView: View {
                 }
             }
             .padding(family == .systemSmall ? 8 : 12)
+            }
         }
     }
    
@@ -312,55 +305,101 @@ struct PrayerTimesCircularView: View {
     var entry: PrayerTimesProvider.Entry
     
     var body: some View {
-        // 🎯 Layout simplifié pour Lock Screen
-        ZStack {
-            AccessoryWidgetBackground()
-            VStack(spacing: 0) {
-                Text(entry.nextPrayerTime.isEmpty ? "..." : entry.nextPrayerTime)
-                    .font(.system(.title3, design: .rounded))
-                    .fontWeight(.bold)
-                    .monospacedDigit()
-                    .minimumScaleFactor(0.5)
-                    .lineLimit(1)
-            }
+        // 🎯 Layout ultra-simple pour Lock Screen Circular
+        VStack(spacing: 1) {
+            Image(systemName: prayerSymbol(entry.nextPrayer))
+                .font(.body)
+            Text(entry.nextPrayerTime.isEmpty ? "--:--" : entry.nextPrayerTime)
+                .font(.caption)
+                .fontWeight(.bold)
+                .monospacedDigit()
+        }
+    }
+    
+    private func prayerSymbol(_ prayer: String) -> String {
+        switch prayer {
+        case "Fajr": return "sunrise.fill"
+        case "Dhuhr": return "sun.max.fill"
+        case "Asr": return "sun.min.fill"
+        case "Maghrib": return "sunset.fill"
+        case "Isha": return "moon.stars.fill"
+        default: return "building.2.fill"
         }
     }
 }
 
-// 📏 Widget Rectangular - 3 prochaines prières
+// 📏 Widget Rectangular GAUCHE - Fajr/Sunrise/Dhuhr
 @available(iOS 16.0, *)
-struct PrayerTimesRectangularView: View {
+struct PrayerTimesRectangularLeftView: View {
     var entry: PrayerTimesProvider.Entry
     
     var body: some View {
-        // 🎯 Layout optimisé pour Lock Screen Rectangular
-        HStack(spacing: 0) {
-            VStack(alignment: .leading, spacing: 2) {
-                // Prochaine prière uniquement
-                Text(entry.nextPrayer.isEmpty ? "Prière" : entry.nextPrayer)
-                    .font(.caption)
-                    .fontWeight(.semibold)
-                    .lineLimit(1)
-                Text(entry.nextPrayerTime.isEmpty ? "--:--" : entry.nextPrayerTime)
-                    .font(.body)
-                    .fontWeight(.bold)
-                    .monospacedDigit()
+        VStack(alignment: .leading, spacing: 1) {
+            prayerRow("Fajr")
+            if let sunrise = entry.prayerTimes["Sunrise"], !sunrise.isEmpty {
+                prayerRow("Sunrise")
             }
-            Spacer(minLength: 8)
-            Text(prayerEmoji(entry.nextPrayer))
-                .font(.title2)
+            prayerRow("Dhuhr")
         }
-        .privacySensitive()
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
     }
     
-    private func prayerEmoji(_ prayer: String) -> String {
+    private func prayerRow(_ prayer: String) -> some View {
+        HStack(spacing: 3) {
+            Circle()
+                .fill(entry.nextPrayer == prayer ? Color.white : Color.white.opacity(0.3))
+                .frame(width: 6, height: 6)
+            Text(prayerShortName(prayer))
+                .font(.system(size: 11))
+            Text(entry.prayerTimes[prayer] ?? "--:--")
+                .font(.system(size: 11))
+                .monospacedDigit()
+        }
+    }
+    
+    private func prayerShortName(_ prayer: String) -> String {
         switch prayer {
-        case "Fajr": return "🌅"
-        case "Dhuhr": return "☀️"
-        case "Asr": return "🌤️"
-        case "Maghrib": return "🌆"
-        case "Isha": return "🌙"
-        default: return "🕌"
+        case "Fajr": return "Fajr"
+        case "Sunrise": return "Sunrise"
+        case "Dhuhr": return "Dhuhr"
+        default: return prayer
+        }
+    }
+}
+
+// 📏 Widget Rectangular DROIT - Asr/Maghrib/Isha
+@available(iOS 16.0, *)
+struct PrayerTimesRectangularRightView: View {
+    var entry: PrayerTimesProvider.Entry
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 1) {
+            prayerRow("Asr")
+            prayerRow("Maghrib")
+            prayerRow("Isha")
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+    }
+    
+    private func prayerRow(_ prayer: String) -> some View {
+        HStack(spacing: 3) {
+            Circle()
+                .fill(entry.nextPrayer == prayer ? Color.white : Color.white.opacity(0.3))
+                .frame(width: 6, height: 6)
+            Text(prayerShortName(prayer))
+                .font(.system(size: 11))
+            Text(entry.prayerTimes[prayer] ?? "--:--")
+                .font(.system(size: 11))
+                .monospacedDigit()
+        }
+    }
+    
+    private func prayerShortName(_ prayer: String) -> String {
+        switch prayer {
+        case "Asr": return "Asr"
+        case "Maghrib": return "Maghrib"
+        case "Isha": return "Isha"
+        default: return prayer
         }
     }
 }
@@ -371,28 +410,17 @@ struct PrayerTimesInlineView: View {
     var entry: PrayerTimesProvider.Entry
     
     var body: some View {
-        // 🎯 Format ultra-compact pour Inline
+        // 🎯 Format ultra-compact pour Inline (texte seulement)
         if !entry.nextPrayer.isEmpty && !entry.nextPrayerTime.isEmpty {
-            Text("\(prayerEmoji(entry.nextPrayer)) \(entry.nextPrayer) \(entry.nextPrayerTime)")
-                .privacySensitive()
+            Text("\(entry.nextPrayer) \(entry.nextPrayerTime)")
+                .fontWeight(.medium)
         } else {
-            Text("🕌 Prières")
-        }
-    }
-    
-    private func prayerEmoji(_ prayer: String) -> String {
-        switch prayer {
-        case "Fajr": return "🌅"
-        case "Dhuhr": return "☀️"
-        case "Asr": return "🌤️"
-        case "Maghrib": return "🌆"
-        case "Isha": return "🌙"
-        default: return "🕌"
+            Text("Horaires de prière")
         }
     }
 }
 
-// 🔄 Vue principale qui dispatche selon le type de widget
+// 🔄 Vue principale qui dispatche selon le type de widget (Home Screen + Circular + Inline)
 struct PrayerTimesWidgetEntryView: View {
     var entry: PrayerTimesProvider.Entry
     @Environment(\.widgetFamily) var family
@@ -402,8 +430,6 @@ struct PrayerTimesWidgetEntryView: View {
             switch family {
             case .accessoryCircular:
                 PrayerTimesCircularView(entry: entry)
-            case .accessoryRectangular:
-                PrayerTimesRectangularView(entry: entry)
             case .accessoryInline:
                 PrayerTimesInlineView(entry: entry)
             default:
@@ -415,8 +441,19 @@ struct PrayerTimesWidgetEntryView: View {
     }
 }
 
-// 🔧 CONFIGURATION DU WIDGET
+// 🔧 CONFIGURATION DES WIDGETS (3 widgets séparés)
 @main
+struct PrayerTimesWidgetBundle: WidgetBundle {
+    var body: some Widget {
+        PrayerTimesWidget()
+        if #available(iOS 16.0, *) {
+            PrayerTimesLeftWidget()
+            PrayerTimesRightWidget()
+        }
+    }
+}
+
+// 🏠 Widget Principal (Home Screen + Circular + Inline)
 struct PrayerTimesWidget: Widget {
     let kind: String = "PrayerTimesWidget"
    
@@ -436,7 +473,6 @@ struct PrayerTimesWidget: Widget {
                 .systemMedium,
                 .systemLarge,
                 .accessoryCircular,
-                .accessoryRectangular,
                 .accessoryInline
             ]
         } else {
@@ -446,6 +482,36 @@ struct PrayerTimesWidget: Widget {
                 .systemLarge
             ]
         }
+    }
+}
+
+// 📏 Widget Lock Screen GAUCHE (Fajr/Sunrise/Dhuhr)
+@available(iOS 16.0, *)
+struct PrayerTimesLeftWidget: Widget {
+    let kind: String = "PrayerTimesLeftWidget"
+    
+    var body: some WidgetConfiguration {
+        StaticConfiguration(kind: kind, provider: PrayerTimesProvider()) { entry in
+            PrayerTimesRectangularLeftView(entry: entry)
+        }
+        .configurationDisplayName("Prières (Matin)")
+        .description("Fajr, Sunrise, Dhuhr")
+        .supportedFamilies([.accessoryRectangular])
+    }
+}
+
+// 📏 Widget Lock Screen DROIT (Asr/Maghrib/Isha)
+@available(iOS 16.0, *)
+struct PrayerTimesRightWidget: Widget {
+    let kind: String = "PrayerTimesRightWidget"
+    
+    var body: some WidgetConfiguration {
+        StaticConfiguration(kind: kind, provider: PrayerTimesProvider()) { entry in
+            PrayerTimesRectangularRightView(entry: entry)
+        }
+        .configurationDisplayName("Prières (Soir)")
+        .description("Asr, Maghrib, Isha")
+        .supportedFamilies([.accessoryRectangular])
     }
 }
 
