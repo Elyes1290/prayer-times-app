@@ -420,7 +420,7 @@ struct PrayerTimesInlineView: View {
     }
 }
 
-// 🔄 Vue principale qui dispatche selon le type de widget (Home Screen + Circular + Inline)
+// 🔄 Vue principale pour widget Home Screen
 struct PrayerTimesWidgetEntryView: View {
     var entry: PrayerTimesProvider.Entry
     @Environment(\.widgetFamily) var family
@@ -441,11 +441,12 @@ struct PrayerTimesWidgetEntryView: View {
     }
 }
 
-// 🔧 CONFIGURATION DES WIDGETS (3 widgets séparés)
+// 🔧 CONFIGURATION DU WIDGET PRINCIPAL
 @main
 struct PrayerTimesWidgetBundle: WidgetBundle {
+    @WidgetBundleBuilder
     var body: some Widget {
-        PrayerTimesWidget()
+        PrayerTimesMainWidget()
         if #available(iOS 16.0, *) {
             PrayerTimesLeftWidget()
             PrayerTimesRightWidget()
@@ -454,7 +455,7 @@ struct PrayerTimesWidgetBundle: WidgetBundle {
 }
 
 // 🏠 Widget Principal (Home Screen + Circular + Inline)
-struct PrayerTimesWidget: Widget {
+struct PrayerTimesMainWidget: Widget {
     let kind: String = "PrayerTimesWidget"
    
     var body: some WidgetConfiguration {
