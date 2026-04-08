@@ -68,6 +68,13 @@ class AdhanModule: NSObject {
       if let val = value as? String { userDefaults.set(val, forKey: prefKey) }
       else if let val = value as? NSNumber { userDefaults.set(val, forKey: prefKey) }
       else if let val = value as? Bool { userDefaults.set(val, forKey: prefKey) }
+      
+      // 🌍 Si c'est la langue, sauvegarder aussi dans l'App Group pour le widget
+      if key == "currentLanguage", let lang = value as? String {
+        appGroupDefaults?.set(lang, forKey: "app_language")
+        appGroupDefaults?.synchronize()
+        NSLog("✅ [AdhanModule] Langue sauvegardée pour le widget: \(lang)")
+      }
     }
     userDefaults.synchronize()
   }

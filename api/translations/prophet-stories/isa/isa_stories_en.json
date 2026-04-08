@@ -1,0 +1,515 @@
+{
+  "isa_birth": {
+    "title": "The miraculous birth of Isa",
+    "title_arabic": "مولد عيسى المعجزي",
+    "introduction": "Isa (عيسى ابن مريم عليه السلام), Jesus son of Mary, is one of the greatest prophets. The Quran says: \"We gave him clear signs and strengthened him with the Holy Spirit.\" (2:253) His birth was miraculous: Mary (Maryam) conceived without a father, by the word of Allah. She withdrew to a distant place and gave birth under a palm tree.",
+    "conclusion": "Mary returned to her people with the child. When they accused her, the baby Isa spoke from the cradle to defend her. Thus Allah manifested His power: a child without a father, speaking from birth.",
+    "moral_lesson": "This story teaches us that Allah creates as He wills. The birth of Isa is a sign for the worlds, and Mary is a model of purity and devotion.",
+    "historical_location": "Palestine (Bethlehem)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "isa_birth_chapter_1",
+        "title": "The announcement to Mary",
+        "content": "The Quran relates: \"And when the angels said: O Mary! Allah has chosen you and purified you; He has chosen you above the women of the worlds. O Mary! Be devout to your Lord; prostrate and bow with those who bow.\" (3:42-43) The angels announced to Mary that she would have a son, created by the word of Allah: \"Be!\" Mary asked: \"How can I have a son when no man has touched me?\" The angel replied: \"Thus it will be. Allah creates what He wills. When He decrees a thing, He only says to it: Be! and it is.\" (3:47)"
+      },
+      {
+        "id": "isa_birth_chapter_2",
+        "title": "The birth under the palm tree",
+        "content": "The Quran says: \"She conceived him and withdrew with him to a distant place. The pains of childbirth drove her to the trunk of a palm tree. She said: Would that I had died before this and been forgotten! A voice called to her from beneath her: Grieve not. Your Lord has placed a stream at your feet. Shake the trunk of the palm tree toward you: it will drop upon you fresh ripe dates.\" (19:22-25) Mary gave birth alone, sustained by Allah. She ate dates and drank from the stream."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 3:42-43",
+        "reference_text": "Surah Âl-Imran, verses 42-43",
+        "content": "وَإِذْ قَالَتِ ٱلْمَلَـٰٓئِكَةُ يَـٰمَرْيَمُ إِنَّ ٱللَّهَ ٱصْطَفَىٰكِ وَطَهَّرَكِ وَٱصْطَفَىٰكِ عَلَىٰ نِسَآءِ ٱلْعَـٰلَمِينَ",
+        "translation": "And when the angels said: O Mary! Allah has chosen you and purified you; He has chosen you above the women of the worlds.",
+        "relevance": "This verse establishes Mary's election by Allah."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 19:22-25",
+        "reference_text": "Surah Maryam, verses 22-25",
+        "content": "فَحَمَلَتْهُ فَٱنتَبَذَتْ بِهِۦ مَكَانًۭا قَصِيًّۭا ۝ فَأَجَآءَهَا ٱلْمَخَاضُ إِلَىٰ جِذْعِ ٱلنَّخْلَةِ",
+        "translation": "She conceived him and withdrew with him to a distant place. The pains of childbirth drove her to the trunk of a palm tree.",
+        "relevance": "This verse describes the miraculous birth of Isa."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Isa",
+        "arabic_term": "عيسى",
+        "definition": "Jesus in Arabic. Son of Mary, prophet of Allah, messiah of the Children of Israel.",
+        "pronunciation": "i-sa"
+      },
+      {
+        "id": 2,
+        "term": "Maryam",
+        "arabic_term": "مريم",
+        "definition": "Mary in Arabic. Mother of Isa, chosen above the women of the worlds.",
+        "pronunciation": "ma-ryam"
+      }
+    ]
+  },
+  "isa_cradle": {
+    "title": "Isa speaks from the cradle",
+    "title_arabic": "كلام عيسى في المهد",
+    "introduction": "Mary returned to her people with her child. The people accused her of having sinned. How could a chaste woman have a child without a husband? Mary did not answer; she pointed to the child. They said: \"How can we speak to a baby in the cradle?\"",
+    "conclusion": "Isa then spoke from the cradle to defend his mother and proclaim his mission. He said: \"I am the servant of Allah. He has given me the Book and made me a prophet.\" This miracle astonished the assembly.",
+    "moral_lesson": "This story teaches us that Allah can make whoever He wills speak, whenever He wills. The cradle of Isa is a sign for those who reflect.",
+    "historical_location": "Palestine",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "isa_cradle_chapter_1",
+        "title": "The accusation",
+        "content": "The Quran relates: \"She came to her people carrying him. They said: O Mary! You have done something monstrous! Sister of Harun, your father was not a man of evil and your mother was not a prostitute.\" (19:27-28) Mary's people were shocked. They did not understand how she could have had a child. Mary, obeying a divine inspiration, pointed to the child."
+      },
+      {
+        "id": "isa_cradle_chapter_2",
+        "title": "The word from the cradle",
+        "content": "The Quran says: \"They said: How can we speak to a baby in the cradle? He said: I am the servant of Allah. He has given me the Book and made me a prophet. He has made me blessed wherever I am, and has enjoined upon me prayer and charity as long as I live, and kindness to my mother. He has not made me arrogant or wretched. And peace be upon me the day I was born, the day I die, and the day I am raised to life.\" (19:29-33) Isa spoke from the cradle to bear witness to his mission and exonerate his mother."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 19:27-28",
+        "reference_text": "Surah Maryam, verses 27-28",
+        "content": "فَأَتَتْ بِهِۦ قَوْمَهَا تَحْمِلُهُۥ ۖ قَالُوا۟ يَـٰمَرْيَمُ لَقَدْ جِئْتِ شَيْـًۭٔا فَرِيًّۭا",
+        "translation": "She came to her people carrying him. They said: O Mary! You have done something monstrous!",
+        "relevance": "This verse describes the accusation against Mary."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 19:30-33",
+        "reference_text": "Surah Maryam, verses 30-33",
+        "content": "قَالَ إِنِّى عَبْدُ ٱللَّهِ ءَاتَىٰنِىَ ٱلْكِتَـٰبَ وَجَعَلَنِى نَبِيًّۭا",
+        "translation": "He said: I am the servant of Allah. He has given me the Book and made me a prophet.",
+        "relevance": "This verse contains Isa's words from the cradle."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Mihrab",
+        "arabic_term": "محراب",
+        "definition": "Place of prayer. Mary withdrew to a mihrab to worship Allah.",
+        "pronunciation": "mih-rab"
+      },
+      {
+        "id": 2,
+        "term": "Abdullah",
+        "arabic_term": "عبد الله",
+        "definition": "Servant of Allah. Isa designated himself thus in the cradle.",
+        "pronunciation": "ab-dul-lah"
+      }
+    ]
+  },
+  "isa_childhood": {
+    "title": "The childhood of Isa",
+    "title_arabic": "طفولة عيسى",
+    "introduction": "Isa grew up under Allah's protection. From his childhood, he manifested extraordinary signs. The Quran says: \"And He will teach him the Book, wisdom, the Torah and the Gospel.\" (3:48) He learned the Scriptures and prepared for his prophetic mission.",
+    "conclusion": "Isa was a pious and wise child. He spoke with maturity and already performed acts that foreshadowed his mission. The scholars of Israel were astonished by his knowledge.",
+    "moral_lesson": "This story teaches us that prophets are prepared from childhood. Wisdom and piety are cultivated from a young age.",
+    "historical_location": "Palestine (Nazareth)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "isa_childhood_chapter_1",
+        "title": "Early wisdom",
+        "content": "The Quran relates that Allah said to Mary: \"He will speak to the people in the cradle and in maturity, and he will be among the righteous.\" (3:46) Isa grew in wisdom. He frequented the People of the Book and discussed with them. His knowledge exceeded his age. He spoke only words of truth and goodness."
+      },
+      {
+        "id": "isa_childhood_chapter_2",
+        "title": "Preparation for the mission",
+        "content": "The Quran says: \"And when Allah will say: O Isa, son of Mary! Remember My favor upon you and upon your mother, when I strengthened you with the Holy Spirit. You spoke to the people in the cradle and in your maturity.\" (5:110) From childhood, Isa was strengthened by the Holy Spirit (Jibril). He prepared to call the Children of Israel to monotheism and guide them to the straight path."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 3:46",
+        "reference_text": "Surah Âl-Imran, verse 46",
+        "content": "وَيُكَلِّمُ ٱلنَّاسَ فِى ٱلْمَهْدِ وَكَهْلًۭا وَمِنَ ٱلصَّـٰلِحِينَ",
+        "translation": "He will speak to the people in the cradle and in maturity, and he will be among the righteous.",
+        "relevance": "This verse announces Isa's speech from the cradle and his maturity."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 3:48",
+        "reference_text": "Surah Âl-Imran, verse 48",
+        "content": "وَيُعَلِّمُهُ ٱلْكِتَـٰبَ وَٱلْحِكْمَةَ وَٱلتَّوْرَىٰةَ وَٱلْإِنجِيلَ",
+        "translation": "And He will teach him the Book, wisdom, the Torah and the Gospel.",
+        "relevance": "This verse shows the divine teaching received by Isa."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Ruh al-Qudus",
+        "arabic_term": "روح القدس",
+        "definition": "Holy Spirit. The angel Jibril who strengthened Isa.",
+        "pronunciation": "rouh al-qu-dous"
+      },
+      {
+        "id": 2,
+        "term": "Tawrat",
+        "arabic_term": "التوراة",
+        "definition": "The Torah. Book revealed to Musa, which Isa confirmed.",
+        "pronunciation": "at-taw-ra"
+      }
+    ]
+  },
+  "isa_prophecy": {
+    "title": "The prophecy of Isa",
+    "title_arabic": "نبوة عيسى",
+    "introduction": "Isa was sent as a prophet to the Children of Israel. The Quran says: \"And when Isa, son of Mary, said: O Children of Israel! I am the messenger of Allah to you, confirming what came before me in the Torah, and giving glad tidings of a messenger who will come after me, whose name will be Ahmad.\" (61:6) He brought the Injil (Gospel) and confirmed the Torah.",
+    "conclusion": "Isa called his people to worship Allah alone, to follow the Torah and to prepare for the coming of the Prophet Muhammad. Many believed; others rejected him and plotted against him.",
+    "moral_lesson": "This story teaches us that prophets confirm one another. Isa announced Muhammad; the prophetic chain is one.",
+    "historical_location": "Palestine",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "isa_prophecy_chapter_1",
+        "title": "The call to monotheism",
+        "content": "The Quran relates: \"Isa said: I have come to you with a sign from your Lord. Fear Allah and obey me. Allah is my Lord and your Lord. So worship Him: that is the straight path.\" (3:50-51) Isa called the Children of Israel to abandon innovations and return to pure monotheism. He reminded them of the commandments of the Torah and invited them to righteousness."
+      },
+      {
+        "id": "isa_prophecy_chapter_2",
+        "title": "The announcement of Ahmad",
+        "content": "The Quran says: \"And when Isa, son of Mary, said: O Children of Israel! I am the messenger of Allah to you, confirming what came before me in the Torah, and giving glad tidings of a messenger who will come after me, whose name will be Ahmad.\" (61:6) Ahmad is one of the names of the Prophet Muhammad. Isa announced his coming and ordered his disciples to believe in him when he would come."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 3:50-51",
+        "reference_text": "Surah Âl-Imran, verses 50-51",
+        "content": "وَمُصَدِّقًۭا لِّمَا بَيْنَ يَدَىَّ مِنَ ٱلتَّوْرَىٰةِ وَلِأُحِلَّ لَكُم بَعْضَ ٱلَّذِى حُرِّمَ عَلَيْكُمْ ۚ وَجِئْتُكُم بِـَٔايَةٍۢ مِّن رَّبِّكُمْ فَٱتَّقُوا۟ ٱللَّهَ وَأَطِيعُونِ",
+        "translation": "And confirming what is in the Torah, and to permit you some of what was forbidden to you. I have come to you with a sign from your Lord. Fear Allah and obey me.",
+        "relevance": "This verse contains Isa's call to his people."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 61:6",
+        "reference_text": "Surah As-Saff, verse 6",
+        "content": "وَإِذْ قَالَ عِيسَى ٱبْنُ مَرْيَمَ يَـٰبَنِىٓ إِسْرَٰٓءِيلَ إِنِّى رَسُولُ ٱللَّهِ إِلَيْكُم مُّصَدِّقًۭا لِّمَا بَيْنَ يَدَىَّ مِنَ ٱلتَّوْرَىٰةِ وَمُبَشِّرًۢا بِرَسُولٍۢ يَأْتِى مِنۢ بَعْدِى ٱسْمُهُۥٓ أَحْمَدُ",
+        "translation": "And when Isa said: O Children of Israel! I am the messenger of Allah, confirming the Torah and giving glad tidings of a messenger named Ahmad.",
+        "relevance": "This verse establishes the announcement of the Prophet Muhammad by Isa."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Injil",
+        "arabic_term": "الإنجيل",
+        "definition": "The Gospel. Book revealed to Isa by Allah.",
+        "pronunciation": "al-in-jil"
+      },
+      {
+        "id": 2,
+        "term": "Ahmad",
+        "arabic_term": "أحمد",
+        "definition": "One of the names of the Prophet Muhammad. Isa announced him to his people.",
+        "pronunciation": "ah-mad"
+      }
+    ]
+  },
+  "isa_miracles": {
+    "title": "The miracles of Isa",
+    "title_arabic": "معجزات عيسى",
+    "introduction": "Allah granted Isa remarkable miracles to prove his prophecy. The Quran says: \"I come to you with a sign from your Lord: I form for you, from clay, the form of a bird; I breathe into it and, by the permission of Allah, it becomes a bird.\" (3:49) He healed the blind from birth and the leper, and raised the dead.",
+    "conclusion": "These miracles were signs for the Children of Israel. They proved that Isa was indeed a prophet of Allah. But many, out of pride, refused to believe.",
+    "moral_lesson": "This story teaches us that miracles are signs from Allah. They serve only to confirm the truth; faith remains a choice of the heart.",
+    "historical_location": "Palestine",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "isa_miracles_chapter_1",
+        "title": "The clay birds",
+        "content": "The Quran relates: \"I form for you, from clay, the form of a bird; I breathe into it and, by the permission of Allah, it becomes a bird.\" (3:49) Isa took clay, shaped a bird, breathed into it with Allah's permission, and the bird flew away alive. This miracle astonished the witnesses and proved that life comes from Allah alone."
+      },
+      {
+        "id": "isa_miracles_chapter_2",
+        "title": "Healings and resurrection",
+        "content": "The Quran says: \"I heal the blind from birth and the leper, and I raise the dead, by the permission of Allah.\" (3:49) Isa healed by Allah's will. The blind from birth could see, the leper was purified, the dead rose. Each miracle was a reminder: all power belongs to Allah. Isa was only His servant and messenger."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 3:49",
+        "reference_text": "Surah Âl-Imran, verse 49",
+        "content": "وَأَنۢبِئُكُم بِمَا تَأْكُلُونَ وَمَا تَدَّخِرُونَ فِى بُيُوتِكُمْ ۚ إِنَّ فِى ذَٰلِكَ لَـَٔايَةًۭ لَّكُمْ إِن كُنتُم مُّؤْمِنِينَ",
+        "translation": "I come to you with a sign: I form a bird from clay, I breathe and it becomes a bird by the permission of Allah.",
+        "relevance": "This verse describes the miracle of the clay birds."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 5:110",
+        "reference_text": "Surah Al-Ma'idah, verse 110",
+        "content": "إِذْ قَالَ ٱللَّهُ يَـٰعِيسَى ٱبْنَ مَرْيَمَ ٱذْكُرْ نِعْمَتِى عَلَيْكَ وَعَلَىٰ وَالِدَتِكَ إِذْ أَيَّدتُّكَ بِرُوحِ ٱلْقُدُسِ",
+        "translation": "When Allah said: O Isa! Remember My favor: I strengthened you with the Holy Spirit.",
+        "relevance": "This verse recalls the miracles granted to Isa."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Ayat",
+        "arabic_term": "آية",
+        "definition": "Sign, miracle. The miracles of Isa were signs from Allah.",
+        "pronunciation": "a-ya"
+      },
+      {
+        "id": 2,
+        "term": "Bi-idhni Allah",
+        "arabic_term": "بإذن الله",
+        "definition": "By the permission of Allah. Isa performed miracles by divine will.",
+        "pronunciation": "bi-idh-ni-llah"
+      }
+    ]
+  },
+  "isa_disciples": {
+    "title": "The disciples of Isa",
+    "title_arabic": "الحواريون",
+    "introduction": "Isa had devoted disciples, the Hawariyun. The Quran says: \"And when I inspired the apostles: Believe in Me and in My messenger. They said: We believe; bear witness that we are submitted.\" (5:111) They believed in Isa and followed him. They helped him call people to Allah.",
+    "conclusion": "The disciples asked Isa to bring down a table spread from heaven to reassure them. Allah answered their request on condition that they believe. Those who believed were strengthened; those who doubted went astray.",
+    "moral_lesson": "This story teaches us that the disciples of prophets must believe without demanding additional proof. Faith precedes signs.",
+    "historical_location": "Palestine",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "isa_disciples_chapter_1",
+        "title": "The faith of the apostles",
+        "content": "The Quran relates: \"O you who have believed! Be allies of Allah, as Isa, son of Mary, said to the apostles: Who are my allies for Allah? The apostles said: We are the allies of Allah. A faction of the Children of Israel believed, and a faction disbelieved. We strengthened those who believed against their enemy, and they became the victors.\" (61:14) The disciples of Isa were sincere believers who supported him."
+      },
+      {
+        "id": "isa_disciples_chapter_2",
+        "title": "The request for the table",
+        "content": "The Quran says: \"The apostles said: O Isa, son of Mary! Can your Lord send down to us a table spread from heaven? He said: Fear Allah if you are believers. They said: We want to eat from it and our hearts to be reassured, and we will know that you have told us the truth, and we will be among the witnesses.\" (5:112-113) The disciples asked for a sign; Isa invited them to fear and faith."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 5:111",
+        "reference_text": "Surah Al-Ma'idah, verse 111",
+        "content": "وَإِذْ أَوْحَيْتُ إِلَى ٱلْحَوَارِيِّـۧنَ أَنْ ءَامِنُوا۟ بِى وَبِرَسُولِى قَالُوا۟ ءَامَنَّا وَٱشْهَدْ بِأَنَّنَا مُسْلِمُونَ",
+        "translation": "And when I inspired the apostles: Believe in Me and in My messenger. They said: We believe; bear witness that we are submitted.",
+        "relevance": "This verse describes the faith of Isa's apostles."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 5:112-113",
+        "reference_text": "Surah Al-Ma'idah, verses 112-113",
+        "content": "إِذْ قَالَ ٱلْحَوَارِيُّونَ يَـٰعِيسَى ٱبْنَ مَرْيَمَ هَلْ يَسْتَطِيعُ رَبُّكَ أَن يُنَزِّلَ عَلَيْنَا مَآئِدَةًۭ مِّنَ ٱلسَّمَآءِ",
+        "translation": "The apostles said: O Isa! Can your Lord send down to us a table spread from heaven?",
+        "relevance": "This verse relates the request of the apostles."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Hawariyun",
+        "arabic_term": "الحواريون",
+        "definition": "The apostles, disciples of Isa. They believed in him and supported him.",
+        "pronunciation": "al-ha-wa-ri-yun"
+      },
+      {
+        "id": 2,
+        "term": "Ansar",
+        "arabic_term": "أنصار",
+        "definition": "Allies, supporters. The disciples were the ansar of Isa for Allah.",
+        "pronunciation": "an-sar"
+      }
+    ]
+  },
+  "isa_table": {
+    "title": "The table spread",
+    "title_arabic": "المائدة",
+    "introduction": "The apostles asked Isa to bring down a table spread from heaven. Isa invoked Allah. The Quran says: \"O Allah, our Lord! Send down to us a table spread from heaven that will be for us a feast — for the first and the last among us — and a sign from You. And provide for us sustenance, for You are the best of providers.\" (5:114)",
+    "conclusion": "Allah answered the request. A table descended from heaven, laden with food. But Allah warned: whoever disbelieves after this sign will suffer a punishment that He has not inflicted on any other. The table was a test for hearts.",
+    "moral_lesson": "This story teaches us that divine signs can be a blessing or a trial. Gratitude and faith are the key.",
+    "historical_location": "Palestine",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "isa_table_chapter_1",
+        "title": "Isa's invocation",
+        "content": "The Quran relates: \"Isa, son of Mary, said: O Allah, our Lord! Send down to us a table spread from heaven that will be for us a feast — for the first and the last among us — and a sign from You. And provide for us sustenance, for You are the best of providers. Allah said: I will send it down to you. But whoever among you disbelieves after that, I will punish him with a punishment I have never inflicted on any being.\" (5:114-115) Isa invoked; Allah responded with a condition."
+      },
+      {
+        "id": "isa_table_chapter_2",
+        "title": "The sign and the warning",
+        "content": "The table descended. The believers ate from it and their faith was strengthened. But some, after seeing the sign, persisted in disbelief. The Quran concludes: \"And when Allah will say: O Isa, son of Mary! Did you say to the people: Take me and my mother as two deities besides Allah? He will say: Glory to You! It is not for me to say what I have no right to say.\" (5:116) The table was a sign; ingratitude was punished."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 5:114",
+        "reference_text": "Surah Al-Ma'idah, verse 114",
+        "content": "قَالَ عِيسَى ٱبْنُ مَرْيَمَ ٱللَّهُمَّ رَبَّنَآ أَنزِلْ عَلَيْنَا مَآئِدَةًۭ مِّنَ ٱلسَّمَآءِ تَكُونُ لَنَا عِيدًۭا لِّأَوَّلِنَا وَءَاخِرِنَا وَءَايَةًۭ مِّنكَ ۖ وَٱرْزُقْنَا وَأَنتَ خَيْرُ ٱلرَّـٰزِقِينَ",
+        "translation": "Isa said: O Allah! Send down to us a table spread from heaven, a feast for us and a sign from You. Provide for us; You are the best of providers.",
+        "relevance": "This verse contains Isa's invocation for the table."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 5:115",
+        "reference_text": "Surah Al-Ma'idah, verse 115",
+        "content": "قَالَ ٱللَّهُ إِنِّى مُنَزِّلُهَا عَلَيْكُمْ ۖ فَمَن يَكْفُرْ بَعْدُ مِنكُمْ فَإِنِّىٓ أُعَذِّبُهُۥ عَذَابًۭا لَّآ أُعَذِّبُهُۥٓ أَحَدًۭا مِّنَ ٱلْعَـٰلَمِينَ",
+        "translation": "Allah said: I will send it down. But whoever disbelieves after that, I will punish him with an unparalleled punishment.",
+        "relevance": "This verse relates Allah's response and the warning."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Ma'idah",
+        "arabic_term": "المائدة",
+        "definition": "The table. A surah of the Quran bears this name.",
+        "pronunciation": "al-ma-i-dah"
+      },
+      {
+        "id": 2,
+        "term": "Rizq",
+        "arabic_term": "رزق",
+        "definition": "Sustenance, provision. The table was rizq from heaven.",
+        "pronunciation": "rizq"
+      }
+    ]
+  },
+  "isa_ascension": {
+    "title": "The ascension of Isa",
+    "title_arabic": "رفع عيسى",
+    "introduction": "The disbelievers among the Children of Israel plotted against Isa. They claimed to have killed and crucified him. The Quran refutes: \"They did not kill him, they did not crucify him; but it was made to appear so to them.\" (4:157) Allah raised Isa to Himself, alive. He will return at the end of times.",
+    "conclusion": "Isa did not die on the cross. Allah saved him and raised him. He is with Allah, alive. He will descend again before the Last Day to fight the Antichrist (Dajjal) and establish justice.",
+    "moral_lesson": "This story teaches us that Allah protects His prophets. The Islamic truth about Isa differs from beliefs that claim he was crucified. He is alive and will return.",
+    "historical_location": "Palestine",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "isa_ascension_chapter_1",
+        "title": "The plot and the salvation",
+        "content": "The Quran relates: \"And because of their saying: We killed the Messiah, Isa, son of Mary, the messenger of Allah. But they did not kill him, they did not crucify him; but it was made to appear so to them. And those who differ concerning him are in doubt; they have no knowledge of it, they follow only conjecture. And they certainly did not kill him. But Allah raised him to Himself. And Allah is Almighty and Wise.\" (4:157-158) Allah saved Isa and raised him. An appearance was given to the disbelievers; Isa was preserved."
+      },
+      {
+        "id": "isa_ascension_chapter_2",
+        "title": "The return of Isa",
+        "content": "Prophetic tradition relates that Isa will descend to earth at the end of times. He will fight the Antichrist (Dajjal), break the cross, kill the pig, and call to Islam. He will rule with justice, then die and be buried. His return is a major sign of the Hour. The Quran says: \"He is knowledge of the Hour. Do not doubt it. Follow me; that is a straight path.\" (43:61)"
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 4:157-158",
+        "reference_text": "Surah An-Nisa, verses 157-158",
+        "content": "وَقَوْلِهِمْ إِنَّا قَتَلْنَا ٱلْمَسِيحَ عِيسَى ٱبْنَ مَرْيَمَ رَسُولَ ٱللَّهِ وَمَا قَتَلُوهُ وَمَا صَلَبُوهُ وَلَـٰكِن شُبِّهَ لَهُمْ ۚ وَإِنَّ ٱلَّذِينَ ٱخْتَلَفُوا۟ فِيهِ لَفِى شَكٍّۢ مِّنْهُ ۚ مَا لَهُم بِهِۦ مِنْ عِلْمٍ إِلَّا ٱتِّبَاعَ ٱلظَّنِّ ۚ وَمَا قَتَلُوهُ يَقِينًۢا ۝ بَل رَّفَعَهُ ٱللَّهُ إِلَيْهِ ۚ وَكَانَ ٱللَّهُ عَزِيزًا حَكِيمًۭا",
+        "translation": "They did not kill him, they did not crucify him; but it was made to appear so to them. Allah raised him to Himself. Allah is Almighty and Wise.",
+        "relevance": "These verses establish that Isa was not crucified and that Allah raised him."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 3:55",
+        "reference_text": "Surah Âl-Imran, verse 55",
+        "content": "إِذْ قَالَ ٱللَّهُ يَـٰعِيسَىٰ إِنِّى مُتَوَفِّيكَ وَرَافِعُكَ إِلَىَّ وَمُطَهِّرُكَ مِنَ ٱلَّذِينَ كَفَرُوا۟",
+        "translation": "When Allah said: O Isa! I will take you to Me, raise you to Me and purify you from those who disbelieve.",
+        "relevance": "This verse confirms Isa's ascension by Allah."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Raf'",
+        "arabic_term": "رفع",
+        "definition": "Ascension. Allah raised Isa to Himself, alive.",
+        "pronunciation": "raf'"
+      },
+      {
+        "id": 2,
+        "term": "Dajjal",
+        "arabic_term": "الدجال",
+        "definition": "The Antichrist. Isa will fight him upon his return.",
+        "pronunciation": "ad-daj-jal"
+      }
+    ]
+  },
+  "lessons_from_isa": {
+    "title": "Lessons from the story of Isa",
+    "title_arabic": "دروس من قصة عيسى",
+    "introduction": "Isa is one of the five great prophets (Ulul Azm): Nuh, Ibrahim, Musa, Isa and Muhammad. His story teaches the power of Allah, the purity of Mary, and the continuity of the prophetic message. The Quran says: \"The Messiah, son of Mary, was only a messenger. Messengers have passed before him.\" (5:75)",
+    "conclusion": "Isa is not divine; he is a servant of Allah and His messenger. He announced Muhammad. To believe in Isa is to believe in his message: the oneness of Allah, obedience and righteousness.",
+    "moral_lesson": "This story teaches us that all prophets have preached the same message: worship Allah alone. Isa is a link in the prophetic chain that culminates with Muhammad.",
+    "historical_location": "Palestine",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lessons_from_isa_chapter_1",
+        "title": "Isa, servant of Allah",
+        "content": "The Quran says: \"The Messiah, son of Mary, was only a messenger. Messengers have passed before him. His mother was a truthful woman. They used to eat food. See how We make clear to them the signs, then see how they turn away.\" (5:75) Isa was a prophet like the others. He ate, drank, slept. He was not divine. He called to the worship of Allah alone."
+      },
+      {
+        "id": "lessons_from_isa_chapter_2",
+        "title": "The prophetic chain",
+        "content": "The Quran relates: \"And when Allah will say: O Isa, son of Mary! Did you say to the people: Take me and my mother as two deities besides Allah? He will say: Glory to You! It is not for me to say what I have no right to say. If I had said it, You would have known.\" (5:116) Isa never claimed to be divine. He confirmed the Torah, brought the Injil, and announced Muhammad. Faith in all prophets is one."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 5:75",
+        "reference_text": "Surah Al-Ma'idah, verse 75",
+        "content": "مَا ٱلْمَسِيحُ ٱبْنُ مَرْيَمَ إِلَّا رَسُولٌۭ قَدْ خَلَتْ مِن قَبْلِهِ ٱلرُّسُلُ",
+        "translation": "The Messiah, son of Mary, was only a messenger. Messengers have passed before him.",
+        "relevance": "This verse establishes that Isa is a messenger like the others."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 2:136",
+        "reference_text": "Surah Al-Baqarah, verse 136",
+        "content": "قُولُوٓا۟ ءَامَنَّا بِٱللَّهِ وَمَآ أُنزِلَ إِلَيْنَا وَمَآ أُنزِلَ إِلَىٰٓ إِبْرَٰهِـۧمَ وَإِسْمَـٰعِيلَ وَإِسْحَـٰقَ وَيَعْقُوبَ وَٱلْأَسْبَاطِ وَمَآ أُوتِىَ مُوسَىٰ وَعِيسَىٰ وَمَآ أُوتِىَ ٱلنَّبِيُّونَ مِن رَّبِّهِمْ",
+        "translation": "Say: We believe in Allah, in what was revealed to us, in what was revealed to Ibrahim, Ismael, Isaac, Jacob, the tribes, Musa, Isa and the prophets.",
+        "relevance": "This verse unites faith in all prophets, including Isa."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Ulul Azm",
+        "arabic_term": "أولو العزم",
+        "definition": "The prophets of firm resolve: Nuh, Ibrahim, Musa, Isa, Muhammad.",
+        "pronunciation": "u-lul azm"
+      },
+      {
+        "id": 2,
+        "term": "Tawhid",
+        "arabic_term": "توحيد",
+        "definition": "Monotheism. The central message of Isa and all prophets.",
+        "pronunciation": "taw-hid"
+      }
+    ]
+  }
+}

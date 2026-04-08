@@ -1,0 +1,401 @@
+{
+  "sulayman_kingdom": {
+    "title": "Süleyman'ın krallığı",
+    "title_arabic": "ملك سليمان",
+    "introduction": "Süleyman (سليمان عليه السلام), Süleyman, Davud'un oğludur. Onun yerine kral ve peygamber oldu. Kur'an şöyle der: \"Ve Süleyman Davud'dan miras aldı. Dedi: Ey insanlar! Bize kuşların dilini öğrettiler ve bize her şeyden verdiler. Bu gerçekten apaçık bir lütuftur.\" (27:16) Süleyman eşi benzeri olmayan bir krallık aldı.",
+    "conclusion": "Süleyman bilgelikle hükmetti. Hayvanların ve cinlerin dilini anlıyordu. Krallığı insanlar, cinler ve kuşlar üzerine yayıldı.",
+    "moral_lesson": "Bu hikaye bize bilgeliğin ve gücün Allah'tan geldiğini öğretir. Süleyman kibirlenmedi; Rabbine şükretti.",
+    "historical_location": "Kudüs, Filistin",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "sulayman_kingdom_chapter_1",
+        "title": "Davud'un mirası",
+        "content": "Kur'an şöyle bildirir: \"Ve Davud'a Süleyman'ı verdik. Ne mükemmel kul! O her zaman tövbeye dönüyordu.\" (38:30) Süleyman babası Davud'un yerine geçti. Allah ona ne istediğini sordu. Süleyman ne zenginlik ne güç istedi; kendisinden sonra kimsenin sahip olmayacağı bir krallık istedi. Allah duasını kabul etti ve ona daha fazlasını verdi."
+      },
+      {
+        "id": "sulayman_kingdom_chapter_2",
+        "title": "Süleyman'ın hediyeleri",
+        "content": "Kur'an şöyle der: \"Dedi: Rabbim! Beni bağışla ve benden sonra kimsenin sahip olmayacağı bir krallık ver. Sen Büyük Bağışlayansın. Ona rüzgarı boyun eğdirdik, emriyle hafifçe esiyordu. Ve cinler, inşaatçılar ve dalgıçlar.\" (38:35-37) Süleyman rüzgarı, cinleri ve kuşların dilini aldı. Krallığı tarihte benzersizdi."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 27:16",
+        "reference_text": "Neml Suresi, 16. ayet",
+        "content": "وَوَرِثَ سُلَيْمَـٰنُ دَاوُۥدَ ۖ وَقَالَ يَـٰٓأَيُّهَا ٱلنَّاسُ عُلِّمْنَا مَنطِقَ ٱلطَّيْرِ وَأُوتِينَا مِن كُلِّ شَىْءٍ ۖ إِنَّ هَـٰذَا لَهُوَ ٱلْفَضْلُ ٱلْمُبِينُ",
+        "translation": "Sulayman inherited from Dawud. He said: We have been taught the speech of birds and we have been given of all things. This is a manifest favour.",
+        "relevance": "Bu ayet Süleyman'ın mirasını ve hediyelerini tesis eder."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 38:30",
+        "reference_text": "Sad Suresi, 30. ayet",
+        "content": "وَوَهَبْنَا لِدَاوُۥدَ سُلَيْمَـٰنَ ۚ نِعْمَ ٱلْعَبْدُ ۖ إِنَّهُۥٓ أَوَّابٌ",
+        "translation": "We gave to Dawud Sulayman. What an excellent servant! He was ever turning in repentance.",
+        "relevance": "Bu ayet Süleyman'ın takvasını gösterir."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Sulayman",
+        "arabic_term": "سليمان",
+        "definition": "Arapça'da Süleyman. Davud'un oğlu, kral ve peygamber.",
+        "pronunciation": "sou-lay-man"
+      },
+      {
+        "id": 2,
+        "term": "Mulk",
+        "arabic_term": "ملك",
+        "definition": "Krallık. Süleyman eşi benzeri olmayan bir krallık aldı.",
+        "pronunciation": "mulk"
+      }
+    ]
+  },
+  "sulayman_wind": {
+    "title": "Süleyman'a boyun eğdirilen rüzgar",
+    "title_arabic": "تسخير الريح لسليمان",
+    "introduction": "Allah rüzgarı Süleyman'a boyun eğdirdi. Kur'an şöyle der: \"Ve Süleyman'a rüzgarı boyun eğdirdik. Sabah rüzgarı bir aylık yol, akşam rüzgarı bir aylık yol kat ediyordu.\" (34:12) Süleyman muazzam hızda seyahat edebiliyordu. Rüzgar emrine itaat ediyordu.",
+    "conclusion": "Bu mucize Süleyman'ın büyük mesafeler kat etmesini sağladı. Tahtı rüzgar tarafından taşınıyordu. Krallığını rekor sürede ziyaret ediyordu.",
+    "moral_lesson": "Bu hikaye bize Allah'ın yaratılışı peygamberlerine boyun eğdirdiğini öğretir. Rüzgar, cinler, kuşlar — hepsi emrine itaat eder.",
+    "historical_location": "Filistin",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "sulayman_wind_chapter_1",
+        "title": "Rüzgar hediyesi",
+        "content": "Kur'an şöyle bildirir: \"Ve Süleyman'a rüzgarı boyun eğdirdik. Sabah rüzgarı bir aylık yol, akşam rüzgarı bir aylık yol kat ediyordu. Ve ona erimiş bakır pınarı akıttık. Ve cinlerden bazıları emri altında çalışıyordu.\" (34:12) Sabah rüzgarı bir saatte bir aylık mesafeyi kat ediyordu; akşam rüzgarı da öyle. Süleyman böylece muazzam hızda seyahat ediyordu."
+      },
+      {
+        "id": "sulayman_wind_chapter_2",
+        "title": "Rüzgar tarafından taşınan taht",
+        "content": "Kur'an şöyle der: \"Ve Davud'a dağları boyun eğdirdik. Onunla birlikte tesbih ediyorlardı. Ve kuşları. Ve bunu yaptık. Ve Süleyman'a rüzgarı boyun eğdirdik.\" (38:36) Rüzgar Süleyman'ın tahtını taşıyordu. Krallığını rekor sürede kat ediyordu. Bu Allah'ın gücünün bir işaretiydi."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 34:12",
+        "reference_text": "Sebe Suresi, 12. ayet",
+        "content": "وَلِسُلَيْمَـٰنَ ٱلرِّيحَ غُدُوُّهَا شَهْرٌۭ وَرَوَاحُهَا شَهْرٌۭ ۖ وَأَسَلْنَا لَهُۥ عَيْنَ ٱلْقِطْرِ",
+        "translation": "To Sulayman We subjected the wind. The morning wind covered a month's journey and the evening wind a month's journey.",
+        "relevance": "Bu ayet rüzgar mucizesini tasvir eder."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 21:81",
+        "reference_text": "Enbiya Suresi, 81. ayet",
+        "content": "وَلِسُلَيْمَـٰنَ ٱلرِّيحَ عَاصِفَةًۭ تَجْرِى بِأَمْرِهِۦٓ إِلَى ٱلْأَرْضِ ٱلَّتِى بَارَكْنَا فِيهَا",
+        "translation": "To Sulayman the fierce wind that ran by his command towards the land that We have blessed.",
+        "relevance": "Bu ayet rüzgarın boyun eğdirilmesini doğrular."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Rih",
+        "arabic_term": "ريح",
+        "definition": "Rüzgar. Allah onu Süleyman'a boyun eğdirdi.",
+        "pronunciation": "rih"
+      },
+      {
+        "id": 2,
+        "term": "Taskhir",
+        "arabic_term": "تسخير",
+        "definition": "Boyun eğdirme. Allah yaratılışı Süleyman'a boyun eğdirdi.",
+        "pronunciation": "tas-khir"
+      }
+    ]
+  },
+  "sulayman_jinn": {
+    "title": "Süleyman'ın hizmetindeki cinler",
+    "title_arabic": "الجن في خدمة سليمان",
+    "introduction": "Allah cinleri Süleyman'a boyun eğdirdi. Kur'an şöyle der: \"Ve cinlerden bazıları emri altında çalışıyordu.\" (34:12) Anıtlar inşa ettiler, inciler için daldılar ve emirlerini yerine getirdiler. Süleyman onları devasa işler için kullandı.",
+    "conclusion": "Cinler Süleyman için saraylar ve heykeller inşa ettiler. Emrinden kaçamazlardı. Süleyman öldüğünde, asası yere yenilene kadar fark etmediler.",
+    "moral_lesson": "Bu hikaye bize Allah'ın dilediğine yaratıklar üzerinde güç verdiğini öğretir. Süleyman bu hediyeyi Allah'ı yüceltmek için kullandı.",
+    "historical_location": "Filistin",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "sulayman_jinn_chapter_1",
+        "title": "İnşaatçılar ve dalgıçlar",
+        "content": "Kur'an şöyle bildirir: \"Ve cinlerden bazıları emri altında çalışıyordu. Ve onlardan emrimizden sapan kimseye cehennem azabını tattırırdık. Ona istediği şeyleri inşa ediyorlardı: mihraplar, heykeller, havuzlar gibi leğenler ve sağlam kazanlar.\" (34:12-13) Cinler etkileyici anıtlar inşa ettiler. Diğerleri inciler çıkarmak için daldılar. Her şey Süleyman'ın kontrolündeydi."
+      },
+      {
+        "id": "sulayman_jinn_chapter_2",
+        "title": "Süleyman'ın ölümü",
+        "content": "Kur'an şöyle der: \"Sonra ona ölümü hükmettiğimizde, ölümünü onlara yalnızca asasını yiyen yeryüzü canlısı gösterdi. Düştüğünde, cinler gaybı bilselerdi aşağılayıcı azapta kalmazlardı.\" (34:14) Süleyman asasına yaslanmış ayakta öldü. Cinler bilmeden çalışmaya devam ettiler. Asa termitler tarafından yenildiğinde, Süleyman düştü. O zaman anladılar."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 34:12-13",
+        "reference_text": "Sebe Suresi, 12-13. ayetler",
+        "content": "وَمِنَ ٱلْجِنِّ مَن يَعْمَلُ بَيْنَ يَدَيْهِ بِإِذْنِ رَبِّهِۦ ۖ وَمَن يَزِغْ مِنْهُمْ عَنْ أَمْرِنَا نُذِقْهُ مِنْ عَذَابِ ٱلسَّعِيرِ",
+        "translation": "Among the jinn, some worked under his command. They built sanctuaries and statues for him.",
+        "relevance": "Bu ayet cinlerin Süleyman için çalışmasını tasvir eder."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 34:14",
+        "reference_text": "Sebe Suresi, 14. ayet",
+        "content": "فَلَمَّا قَضَيْنَا عَلَيْهِ ٱلْمَوْتَ مَا دَلَّهُمْ عَلَىٰ مَوْتِهِۦٓ إِلَّا دَآبَّةُ ٱلْأَرْضِ تَأْكُلُ مِنسَأَتَهُۥ",
+        "translation": "When We decreed his death, nothing indicated his death to them except a creature that ate his staff.",
+        "relevance": "Bu ayet Süleyman'ın ölümünü anlatır."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Jinn",
+        "arabic_term": "جن",
+        "definition": "Görünmez ateş yaratığı. Allah onları Süleyman'a boyun eğdirdi.",
+        "pronunciation": "jinn"
+      },
+      {
+        "id": 2,
+        "term": "Mihrab",
+        "arabic_term": "محراب",
+        "definition": "Mihrap. Cinler Süleyman için mihraplar inşa ettiler.",
+        "pronunciation": "mih-rab"
+      }
+    ]
+  },
+  "sulayman_ant": {
+    "title": "Süleyman ve karınca",
+    "title_arabic": "سليمان والنملة",
+    "introduction": "Bir gün Süleyman ve ordusu yürüyordu. Bir karınca kendi topluluğunu uyardı: \"Ey karıncalar! Yuvalarınıza girin, yoksa Süleyman ve orduları farkında olmadan sizi ezecek.\" (27:18) Süleyman karıncayı duydu ve gülümsedi. Allah'a şükretti ve adaletsiz olmamasını istedi.",
+    "conclusion": "Süleyman karıncaların dilini anlıyordu. Onları ezmedi; bu hediye için Allah'a şükretti. Bu hikaye onun merhametini ve tevazusunu gösterir.",
+    "moral_lesson": "Bu hikaye bize en zayıflara karşı merhameti öğretir. En küçük yaratık bile korunmayı hak eder. Bilgelik zarar vermemektir.",
+    "historical_location": "Karınca vadisi",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "sulayman_ant_chapter_1",
+        "title": "Karıncanın uyarısı",
+        "content": "Kur'an şöyle bildirir: \"Karınca vadisine geldiklerinde bir karınca dedi: Ey karıncalar! Yuvalarınıza girin, yoksa Süleyman ve orduları farkında olmadan sizi ezecek.\" (27:18) Süleyman Allah'ın hediyesi sayesinde karıncayı duydu. Sözlerine gülümsedi. Karınca topluluğunu koruyordu; Süleyman bu uyarıya saygı gösterdi."
+      },
+      {
+        "id": "sulayman_ant_chapter_2",
+        "title": "Süleyman'ın şükrü",
+        "content": "Kur'an şöyle der: \"Sözlerine gülümsedi ve dedi: Rabbim! Bana verdiğin nimetlere şükretmemi ilham et. Ve onayladığın iyiliği yapmama izin ver. Ve beni rahmetinle salih kullarının arasına sok.\" (27:19) Süleyman karıncadan kızmadı. Allah'a şükretti ve yaratıklara zarar vermemesini istedi. Bilgeliği örnek alınacaktı."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 27:18",
+        "reference_text": "Neml Suresi, 18. ayet",
+        "content": "حَتَّىٰٓ إِذَآ أَتَوْا۟ عَلَىٰ وَادِ ٱلنَّمْلِ قَالَتْ نَمْلَةٌۭ يَـٰٓأَيُّهَا ٱلنَّمْلُ ٱدْخُلُوا۟ مَسَـٰكِنَكُمْ لَا يَحْطِمَنَّكُّمْ سُلَيْمَـٰنُ وَجُنُودُهُۥ وَهُمْ لَا يَشْعُرُونَ",
+        "translation": "An ant said: O ants! Enter your dwellings, lest Sulayman and his armies crush you without realising it.",
+        "relevance": "Bu ayet karıncanın sözlerini içerir."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 27:19",
+        "reference_text": "Neml Suresi, 19. ayet",
+        "content": "فَتَبَسَّمَ ضَاحِكًۭا مِّن قَوْلِهَا وَقَالَ رَبِّ أَوْزِعْنِىٓ أَنْ أَشْكُرَ نِعْمَتَكَ",
+        "translation": "He smiled and said: O my Lord! Inspire me to give thanks for Your favours.",
+        "relevance": "Bu ayet Süleyman'ın tepkisini gösterir."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Naml",
+        "arabic_term": "نمل",
+        "definition": "Karınca. Kur'an'da bu adı taşıyan bir sure vardır.",
+        "pronunciation": "naml"
+      },
+      {
+        "id": 2,
+        "term": "Shukr",
+        "arabic_term": "شكر",
+        "definition": "Şükür. Süleyman Allah'tan kendisini şükreden yapmasını istedi.",
+        "pronunciation": "shoukr"
+      }
+    ]
+  },
+  "sulayman_hoopoe": {
+    "title": "Hüdhüd ve Sebe krallığı",
+    "title_arabic": "الهدهد وبلقيس",
+    "introduction": "Süleyman kuşları gözden geçirdi. Hüdhüd eksikti. Geri döndü ve dedi: \"Senin bilmediğin şeyi öğrendim. Sana Sebe'den kesin haberle geliyorum.\" (27:22) Kraliçesi ve halkı güneşe tapan bir krallık keşfetmişti. Süleyman hüdhüdü bir mektupla gönderdi.",
+    "conclusion": "Hüdhüd değerli bir elçiydi. Süleyman'ın bilmediği bilgileri getirdi. Bu hediye Süleyman'ın Sebe kraliçesini İslam'a çağırmasını sağladı.",
+    "moral_lesson": "Bu hikaye bize bilginin bir zenginlik olduğunu öğretir. En mütevazı yaratıklar büyük görevler başarabilir.",
+    "historical_location": "Sebe (Yemen)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "sulayman_hoopoe_chapter_1",
+        "title": "Hüdhüd ve keşfi",
+        "content": "Kur'an şöyle bildirir: \"Kuşları kontrol etti ve dedi: Neden hüdhüdü görmüyorum? Yoksa kayıplar arasında mı? Onu şiddetle cezalandıracağım ya da keseceğim, bana açık bir sebep getirmezse. Gecikmedi ve dedi: Senin bilmediğin şeyi öğrendim. Sana Sebe'den kesin haberle geliyorum.\" (27:20-22) Hüdhüd Sebe krallığını keşfetmişti. Kraliçe ve halkının Allah yerine güneşe taptığını bildirdi."
+      },
+      {
+        "id": "sulayman_hoopoe_chapter_2",
+        "title": "Kraliçeye mektup",
+        "content": "Kur'an şöyle der: \"Dedi: Doğru mu söyledin yoksa yalancılardan mısın göreceğiz. Mektubumla git ve onlara at. Sonra dön.\" (27:27-28) Süleyman Sebe kraliçesine (Belkıs) bir mektup yazdı. Onu Allah'a teslim olmaya çağırdı. Hüdhüd mektubu taşıdı ve saraya attı. Kraliçe okudu ve danışmanlarını topladı."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 27:22",
+        "reference_text": "Neml Suresi, 22. ayet",
+        "content": "فَمَكَثَ غَيْرَ بَعِيدٍۢ فَقَالَ أَحَطتُ بِمَا لَمْ تُحِطْ بِهِۦ وَجِئْتُكَ مِن سَبَإٍۭ بِنَبَإٍۢ يَقِينٍ",
+        "translation": "It said: I have learned what you have not learned. I come to you from Saba with certain news.",
+        "relevance": "Bu ayet hüdhüdün cevabını anlatır."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 27:27-28",
+        "reference_text": "Neml Suresi, 27-28. ayetler",
+        "content": "قَالَ سَنَنظُرُ أَصَدَقْتَ أَمْ كُنتَ مِنَ ٱلْكَـٰذِبِينَ ۝ ٱذْهَب بِّكِتَـٰبِى هَـٰذَا فَأَلْقِهْ إِلَيْهِمْ",
+        "translation": "He said: Go with my letter and cast it to them. Then return.",
+        "relevance": "Bu ayet hüdhüd tarafından mektubun gönderilmesini doğrular."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Hudhud",
+        "arabic_term": "هدهد",
+        "definition": "Hüdhüd. Süleyman'ın elçi kuşu.",
+        "pronunciation": "houd-houd"
+      },
+      {
+        "id": 2,
+        "term": "Saba",
+        "arabic_term": "سبأ",
+        "definition": "Yemen krallığı. Kur'an'da bu adı taşıyan bir sure vardır.",
+        "pronunciation": "sa-ba"
+      }
+    ]
+  },
+  "sulayman_sheba": {
+    "title": "Sebe kraliçesi",
+    "title_arabic": "ملكة سبأ",
+    "introduction": "Sebe kraliçesi (Belkıs) Süleyman'ın mektubunu aldı. Danışmanlarını topladı. Kur'an şöyle bildirir: \"Dedi: Ey ileri gelenler! Bana şerefli bir mektup gönderildi. Süleyman'dan. Diyor ki: Rahman ve Rahim Allah'ın adıyla. Bana karşı büyüklenmeyin ve bana tam teslimiyetle gelin.\" (27:29-31)",
+    "conclusion": "Sebe kraliçesi Süleyman'ın sarayına geldi. Tahtını ve krallığını gördü. Dedi: \"Rabbim! Kendime zulmettim. Süleyman ile birlikte alemlerin Rabbi Allah'a teslim oldum.\" (27:44)",
+    "moral_lesson": "Bu hikaye bize İslam'a çağrının bilgelikle zafer kazanabileceğini öğretir. Sebe kraliçesi işaretleri gördükten sonra inandı.",
+    "historical_location": "Sebe (Yemen) ve Kudüs",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "sulayman_sheba_chapter_1",
+        "title": "Kraliçenin cevabı",
+        "content": "Kur'an şöyle bildirir: \"Dedi: Ey ileri gelenler! Bu konuda bana görüşünüzü verin. Siz hazır olmadan hiçbir şey kararlaştırmam. Dediler: Gücümüz ve kuvvetimiz var. Karar size ait. Ne emrediyorsunuz görün. Dedi: Krallar bir şehre girdiklerinde onu bozarlar.\" (27:32-34) Kraliçe barışı tercih etti. Süleyman'a hediyeler gönderdi. Ama Süleyman hediyeleri geri gönderdi ve tam teslimiyet istedi."
+      },
+      {
+        "id": "sulayman_sheba_chapter_2",
+        "title": "Belkıs'ın hidayeti",
+        "content": "Kur'an şöyle der: \"Ona dendi: Saraya gir. Gördüğünde su havuzu sandı ve bacaklarını açtı. Dedi: Bu kristal döşeli bir saraydır. Dedi: Rabbim! Kendime zulmettim. Süleyman ile birlikte alemlerin Rabbi Allah'a teslim oldum.\" (27:44) Kraliçe hakikati kabul etti. Güneşe tapmayı bıraktı ve İslam'ı kabul etti."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 27:29-31",
+        "reference_text": "Neml Suresi, 29-31. ayetler",
+        "content": "قَالَتْ يَـٰٓأَيُّهَا ٱلْمَلَؤُا۟ إِنِّىٓ أُلْقِىَ إِلَىَّ كِتَـٰبٌۭ كَرِيمٌ ۝ إِنَّهُۥ مِن سُلَيْمَـٰنَ وَإِنَّهُۥ بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ",
+        "translation": "She said: An honourable letter has been sent to me. It is from Sulayman. It says: In the name of Allah, the Most Gracious.",
+        "relevance": "Bu ayet kraliçenin cevabını anlatır."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 27:44",
+        "reference_text": "Neml Suresi, 44. ayet",
+        "content": "قِيلَ لَهَا ٱدْخُلِى ٱلصَّرْحَ ۖ فَلَمَّا رَأَتْهُ حَسِبَتْهُ لُجَّةًۭ وَكَشَفَتْ عَن سَاقَيْهَا",
+        "translation": "It was said to her: Enter the palace. She said: I submit with Sulayman to Allah.",
+        "relevance": "Bu ayet kraliçenin hidayetini tasvir eder."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Bilqis",
+        "arabic_term": "بلقيس",
+        "definition": "Sebe kraliçesi. Süleyman ile tanıştıktan sonra İslam'ı kabul etti.",
+        "pronunciation": "bil-qis"
+      },
+      {
+        "id": 2,
+        "term": "Islam",
+        "arabic_term": "إسلام",
+        "definition": "Allah'a teslimiyet. Kraliçe Allah'a teslim oldu.",
+        "pronunciation": "is-lam"
+      }
+    ]
+  },
+  "lessons_from_sulayman": {
+    "title": "Süleyman hikayesinden dersler",
+    "title_arabic": "دروس من قصة سليمان",
+    "introduction": "Süleyman kral ve peygamberdi. Rüzgarı, cinleri, kuşların dilini aldı. Kur'an şöyle der: \"Ve Süleyman Davud'dan miras aldı. Dedi: Ey insanlar! Bize kuşların dilini öğrettiler.\" (27:16) Hikayesi bilgelik, şükür ve tevazu öğretir.",
+    "conclusion": "Muazzam gücüne rağmen Süleyman mütevazi kaldı. Allah'a şükretti ve yaratıklara zarar vermedi. Sebe kraliçesi onun bilgeliğiyle inandı. Asasına yaslanmış ayakta öldü — cinler sonradan fark etti.",
+    "moral_lesson": "Bu hikaye bize gücün bilgelikle kullanılması gerektiğini öğretir. Şükür ve tevazu mümini yükseltir. Krallar bile Allah'ın kullarıdır.",
+    "historical_location": "Filistin ve Yemen",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lessons_from_sulayman_chapter_1",
+        "title": "Bilgelik ve güç",
+        "content": "Süleyman kendisinden sonra kimsenin sahip olmayacağı bir krallık istedi. Allah ona rüzgarı, cinleri, kuşların dilini verdi. Ama Süleyman kibirlenmedi. Karıncayı dinledi. Allah'a şükretti. Sebe kraliçesine saygılı bir mektupla çağırdı. Bilgelik gücü yönlendirir."
+      },
+      {
+        "id": "lessons_from_sulayman_chapter_2",
+        "title": "Ölüm ve hatırlatma",
+        "content": "Kur'an şöyle der: \"Sonra ona ölümü hükmettiğimizde, ölümünü onlara yalnızca asasını yiyen yeryüzü canlısı gösterdi.\" (34:14) Süleyman ayakta öldü. Cinler bilmeden çalışıyordu. Asa yenildiğinde düştü. Böylece Allah ölümün kaçınılmaz olduğunu hatırlatır. En güçlü krallar bile Rabbine dönen kullardır."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 27:16",
+        "reference_text": "Neml Suresi, 16. ayet",
+        "content": "وَوَرِثَ سُلَيْمَـٰنُ دَاوُۥدَ ۖ وَقَالَ يَـٰٓأَيُّهَا ٱلنَّاسُ عُلِّمْنَا مَنطِقَ ٱلطَّيْرِ",
+        "translation": "Sulayman inherited from Dawud. He said: We have been taught the speech of birds.",
+        "relevance": "Bu ayet Süleyman'ın hediyelerini tesis eder."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 34:14",
+        "reference_text": "Sebe Suresi, 14. ayet",
+        "content": "فَلَمَّا قَضَيْنَا عَلَيْهِ ٱلْمَوْتَ مَا دَلَّهُمْ عَلَىٰ مَوْتِهِۦٓ إِلَّا دَآبَّةُ ٱلْأَرْضِ تَأْكُلُ مِنسَأَتَهُۥ",
+        "translation": "When We decreed his death, nothing indicated his death to them except a creature that ate his staff.",
+        "relevance": "Bu ayet Süleyman'ın ölümünü anlatır."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Hikmah",
+        "arabic_term": "حكمة",
+        "definition": "Bilgelik. Süleyman hikmetle donatıldı.",
+        "pronunciation": "hik-mah"
+      },
+      {
+        "id": 2,
+        "term": "Awab",
+        "arabic_term": "أواب",
+        "definition": "Allah'a dönen. Süleyman evvab (tövbeye dönen) idi.",
+        "pronunciation": "a-wab"
+      }
+    ]
+  }
+}

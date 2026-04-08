@@ -1,0 +1,287 @@
+{
+  "lut_prophecy": {
+    "title": "Lot and His Mission to the People of Sodom",
+    "title_arabic": "لوط عليه السلام وإرساله إلى قوم سدوم",
+    "introduction": "Lot (لوط عليه السلام) is one of the prophets mentioned in the Quran. Allah says: \"And Lot was indeed one of the messengers.\" (37:133) He was sent to a people who practiced a shameful deed that no one before them had committed. The Quran reports his call to righteousness and his people's response of rejecting the warnings.",
+    "conclusion": "Lot was sent as a messenger to his people. Despite his sincere call, the people persisted in their shameful deeds and rejected the warnings. Allah prepared the punishment for those who obstinately refused.",
+    "moral_lesson": "This story teaches us that every people receives messengers to guide them. Rejecting the warnings leads to perdition.",
+    "historical_location": "Region of Sodom (al-Mu'tafikat)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lut_prophecy_chapter_1",
+        "title": "The Sending of Lot",
+        "content": "The Quran establishes Lot among the messengers: \"And Lot was indeed one of the messengers.\" (37:133) Lot was sent to a people who inhabited cities. The Quran says: \"The people of Lot rejected the messengers.\" (26:160) Lot called his people to fear Allah and abandon shameful deeds. He warned them of the punishment to come if they persisted."
+      },
+      {
+        "id": "lut_prophecy_chapter_2",
+        "title": "The People of Sodom",
+        "content": "The Quran describes Lot's people: \"And Lot, when he said to his people: Do you commit a shameful deed that no one among the worlds has preceded you in?\" (7:80) This people practiced acts that the Quran calls \"الفاحشة\" (al-fahisha) — the shameful deed. Lot exhorted them to fear Allah and not to dishonor him regarding his guests. But they responded with rejection and mockery."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 37:133",
+        "reference_text": "Surah As-Saffat, verse 133",
+        "content": "وَإِنَّ لُوطًا لَّمِنَ ٱلْمُرْسَلِينَ",
+        "translation": "And Lot was indeed one of the messengers.",
+        "relevance": "This verse confirms that Lot is a messenger of Allah."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 7:80",
+        "reference_text": "Surah Al-A'raf, verse 80",
+        "content": "وَلُوطًا إِذْ قَالَ لِقَوْمِهِۦٓ أَتَأْتُونَ ٱلْفَـٰحِشَةَ مَا سَبَقَكُم بِهَا مِنْ أَحَدٍۢ مِّنَ ٱلْعَـٰلَمِينَ",
+        "translation": "And Lot, when he said to his people: Do you commit a shameful deed that no one among the worlds has preceded you in?",
+        "relevance": "This verse establishes Lot's call to his people."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Lut",
+        "arabic_term": "لوط",
+        "definition": "Lot in Arabic. Prophet of Allah sent to the people of Sodom.",
+        "pronunciation": "lout"
+      },
+      {
+        "id": 2,
+        "term": "Al-Fahisha",
+        "arabic_term": "الفاحشة",
+        "definition": "The shameful deed. Quranic term for the disgraceful acts of Lot's people.",
+        "pronunciation": "al-fa-hi-sha"
+      }
+    ]
+  },
+  "lut_call": {
+    "title": "Lot's Call to Righteousness",
+    "title_arabic": "دعوة لوط إلى الاستقامة",
+    "introduction": "Lot (عليه السلام) called his people to abandon the shameful deed and fear Allah. The Quran reports: \"Do you not fear Allah? I am a trustworthy messenger to you. So fear Allah and obey me.\" (26:161-163) His people responded with rejection and threats.",
+    "conclusion": "Lot fulfilled his mission of warning. His people chose to persist in misguidance. Lot asked Allah to save him and his family from the people of the wicked.",
+    "moral_lesson": "This story teaches us that the messenger fulfills his mission; it is for the people to choose guidance or misguidance.",
+    "historical_location": "Region of Sodom",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lut_call_chapter_1",
+        "title": "The Exhortation",
+        "content": "The Quran reports Lot's words: \"Do you not fear Allah? I am a trustworthy messenger to you. So fear Allah and obey me. I ask of you no reward for it; my reward is only with the Lord of the worlds.\" (26:161-164) Lot called his people with sincerity. He asked for no earthly reward; his reward came from Allah alone."
+      },
+      {
+        "id": "lut_call_chapter_2",
+        "title": "The People's Rejection",
+        "content": "The Quran says: \"The people of Lot rejected the messengers.\" (26:160) And: \"The people of Lot rejected the warnings.\" (54:33) They refused to listen to Lot and persisted in their deeds. Lot invoked his Lord: \"My Lord! Save me and my family from what they do.\" (26:169) Allah answered his invocation."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 26:161-164",
+        "reference_text": "Surah Ash-Shu'ara, verses 161-164",
+        "content": "إِذْ قَالَ لَهُمْ لُوطٌ أَلَا تَتَّقُونَ إِنِّى لَكُمْ رَسُولٌ أَمِينٌ فَٱتَّقُوا۟ ٱللَّهَ وَأَطِيعُونِ وَمَآ أَسْـَٔلُكُمْ عَلَيْهِ مِنْ أَجْرٍ ۖ إِنْ أَجْرِىَ إِلَّا عَلَىٰ رَبِّ ٱلْعَـٰلَمِينَ",
+        "translation": "When Lot said to them: Do you not fear Allah? I am a trustworthy messenger to you. So fear Allah and obey me. I ask of you no reward for it; my reward is only with the Lord of the worlds.",
+        "relevance": "These verses describe Lot's call to his people."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 54:33",
+        "reference_text": "Surah Al-Qamar, verse 33",
+        "content": "كَذَّبَتْ قَوْمُ لُوطٍۭ بِٱلنُّذُرِ",
+        "translation": "The people of Lot rejected the warnings.",
+        "relevance": "This verse confirms the people's rejection of the warnings."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Rasul",
+        "arabic_term": "رسول",
+        "definition": "Messenger. Lot presented himself as a trustworthy messenger.",
+        "pronunciation": "ra-soul"
+      },
+      {
+        "id": 2,
+        "term": "An-Nudhur",
+        "arabic_term": "النذر",
+        "definition": "The warnings. Lot's people rejected the divine warnings.",
+        "pronunciation": "an-noud-hour"
+      }
+    ]
+  },
+  "lut_guests": {
+    "title": "The Guests at Lot's House",
+    "title_arabic": "الضيوف عند لوط",
+    "introduction": "Angels came to Lot's house in the form of guests. The people learned of their presence and rushed to Lot's house. Lot exhorted them: \"Here are my daughters — they are purer for you. Fear Allah and do not disgrace me regarding my guests. Is there not among you a man of reason?\" (11:78) The people refused and insisted.",
+    "conclusion": "The angels revealed to Lot their mission: the destruction of the people. They ordered him to leave with his family before dawn, without turning back. Lot's wife was among those who remained.",
+    "moral_lesson": "This story teaches us the duty to protect one's guests and that hospitality is a sacred value in Islam. It also shows that disobedience can affect even the prophet's family.",
+    "historical_location": "Sodom",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lut_guests_chapter_1",
+        "title": "The Arrival of the Guests",
+        "content": "The Quran reports: \"And when Our messengers came to Lot, he was distressed for them and felt great unease because of them. He said: This is a terrible day.\" (11:77) The angels came to Lot's house in the form of young men. Lot welcomed them, not knowing they were Allah's envoys. He feared for them because he knew his people's ways."
+      },
+      {
+        "id": "the_guests_chapter_2",
+        "title": "The People's Reaction",
+        "content": "The Quran says: \"And his people came to him rushing — and before that they used to do evil. He said: O my people! Here are my daughters — they are purer for you. Fear Allah and do not disgrace me regarding my guests. Is there not among you a man of reason?\" (11:78) Lot tried to protect his guests. He offered a lawful alternative. But the people refused and insisted on their intention. The angels said to Lot: \"We are the messengers of your Lord. They will not reach you.\" (11:81)"
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 11:77-78",
+        "reference_text": "Surah Hud, verses 77-78",
+        "content": "وَلَمَّا جَآءَتْ رُسُلُنَآ إِلَىٰ لُوطٍۢ سِىٓءَ بِهِمْ وَضَاقَ بِهِمْ ذَرْعًۭا وَقَالَ هَـٰذَا يَوْمٌ عَصِيبٌ ۝ وَجَآءَهُۥ قَوْمُهُۥ يُهْرَعُونَ إِلَيْهِ وَمِن قَبْلُ كَانُوا۟ يَعْمَلُونَ ٱلسَّيِّـَٔاتِ ۚ قَالَ يَـٰقَوْمِ هَـٰٓؤُلَآءِ بَنَاتِى هُنَّ أَطْهَرُ لَكُمْ",
+        "translation": "And when Our messengers came to Lot, he was distressed for them. And his people came to him rushing. He said: O my people! Here are my daughters — they are purer for you.",
+        "relevance": "These verses describe the arrival of the angels and Lot's reaction."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 11:81",
+        "reference_text": "Surah Hud, verse 81",
+        "content": "قَالُوا۟ يَـٰلُوطُ إِنَّا رُسُلُ رَبِّكَ لَن يَصِلُوٓا۟ إِلَيْكَ",
+        "translation": "They said: O Lot! We are the messengers of your Lord. They will not reach you.",
+        "relevance": "This verse reveals the identity of the guests and divine protection."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Dayf",
+        "arabic_term": "ضيف",
+        "definition": "Guest, visitor. Lot sought to protect his guests according to the tradition of hospitality.",
+        "pronunciation": "dayf"
+      },
+      {
+        "id": 2,
+        "term": "Rasul",
+        "arabic_term": "رسل",
+        "definition": "Messengers. The angels were Allah's messengers sent to Lot.",
+        "pronunciation": "rou-soul"
+      }
+    ]
+  },
+  "the_destruction": {
+    "title": "The Destruction of the People",
+    "title_arabic": "هلاك قوم لوط",
+    "introduction": "When the people persisted in their shameful deeds and rejected all warnings, Allah's punishment fell upon them. The Quran says: \"And We overturned the city and rained upon them stones of baked clay.\" (15:74) The people were destroyed. Lot and those who followed him were saved.",
+    "conclusion": "The punishment fell at dawn. The city was overturned. Lot and his family — except his wife who disobeyed — left in safety. This story remains a warning for peoples who persist in evil.",
+    "moral_lesson": "This story teaches us that Allah's punishment reaches those who persist in evil after receiving the warnings. Disobedience leads to perdition.",
+    "historical_location": "Sodom (al-Mu'tafikat)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lut_destruction_chapter_1",
+        "title": "The Order to Leave",
+        "content": "The Quran reports: \"They said: O Lot! We are the messengers of your Lord. They will not reach you. Set out with your family during the night, and let none of you turn back — except your wife. What befalls them will befall her. Their appointment is at dawn. Is not dawn near?\" (11:81) Lot received the order to leave the city with his family before dawn. He was not to turn back. His wife, who had betrayed by informing the people of the guests, was among those who remained."
+      },
+      {
+        "id": "lut_destruction_chapter_2",
+        "title": "The Punishment",
+        "content": "The Quran describes the punishment: \"And We overturned the city and rained upon them stones of baked clay, one upon another, marked with your Lord. And they are not far from the wrongdoers.\" (11:82-83) And: \"The people of Lot rejected the warnings. We sent against them a storm.\" (54:33-34) The city was destroyed. The people perished. Lot and his household who had followed him were saved. The Quran concludes: \"Nothing remains of them but ruins.\" (37:138)"
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 11:81-83",
+        "reference_text": "Surah Hud, verses 81-83",
+        "content": "قَالُوا۟ يَـٰلُوطُ إِنَّا رُسُلُ رَبِّكَ لَن يَصِلُوٓا۟ إِلَيْكَ ۖ فَأَسْرِ بِأَهْلِكَ بِقِطْعٍۢ مِّنَ ٱلَّيْلِ وَلَا يَلْتَفِتْ مِنكُمْ أَحَدٌ إِلَّا ٱمْرَأَتَكَ ۖ إِنَّهُۥ مُصِيبُهَا مَا أَصَابَهُمْ ۚ إِنَّ مَوْعِدَهُمُ ٱلصُّبْحُ ۚ أَلَيْسَ ٱلصُّبْحُ بِقَرِيبٍۢ ۝ فَلَمَّا جَآءَ أَمْرُنَا جَعَلْنَا عَـٰلِيَهَا سَافِلَهَا وَأَمْطَرْنَا عَلَيْهَا حِجَارَةًۭ مِّن سِجِّيلٍۢ مَّنضُودٍۢ",
+        "translation": "They said: O Lot! Set out with your family during the night... And We overturned the city and rained upon them stones of baked clay.",
+        "relevance": "These verses describe the order to leave and the punishment."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 54:33-34",
+        "reference_text": "Surah Al-Qamar, verses 33-34",
+        "content": "كَذَّبَتْ قَوْمُ لُوطٍۭ بِٱلنُّذُرِ ۝ إِنَّآ أَرْسَلْنَا عَلَيْهِمْ حَاصِبًا",
+        "translation": "The people of Lot rejected the warnings. We sent against them a storm.",
+        "relevance": "These verses describe the rejection and the punishment."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Sijjil",
+        "arabic_term": "سجيل",
+        "definition": "Baked clay, hardened clay. The stones of punishment were of sijjil.",
+        "pronunciation": "sij-jil"
+      },
+      {
+        "id": 2,
+        "term": "Al-Mu'tafikat",
+        "arabic_term": "المؤتفكات",
+        "definition": "The overturned cities. Sodom and the cities of Lot's people.",
+        "pronunciation": "al-mou-ta-fi-kat"
+      }
+    ]
+  },
+  "lessons_from_lut": {
+    "title": "Lessons from Lot's Story",
+    "title_arabic": "دروس من قصة لوط",
+    "introduction": "The story of Lot (عليه السلام) contains timeless lessons. The Quran cites it as a warning: \"And Lot was indeed one of the messengers.\" (37:133) It teaches that every people receives messengers, that rejecting the warnings leads to punishment, and that hospitality is a sacred value.",
+    "conclusion": "Lot fulfilled his mission. His people were destroyed for persisting in evil. The story of Lot remains a warning for humanity: to fear Allah, to listen to the messengers, and not to persist in disobedience.",
+    "moral_lesson": "This story teaches us to heed the warnings, to protect our guests, and never to persist in acts that Allah has forbidden.",
+    "historical_location": "Region of Sodom",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lessons_from_lut_chapter_1",
+        "title": "A Warning for Peoples",
+        "content": "The Quran cites Lot's story among the examples of destroyed peoples: \"The people of Lot rejected the warnings.\" (54:33) Every people receives messengers. Those who believe and repent are saved. Those who persist in evil suffer punishment. Lot called his people with sincerity; he asked for no reward. His people chose rejection. The result was destruction."
+      },
+      {
+        "id": "lessons_from_lut_chapter_2",
+        "title": "Hospitality and Protection",
+        "content": "Lot sought to protect his guests despite the threat from his people. He said: \"Fear Allah and do not disgrace me regarding my guests.\" (11:78) Hospitality (ضيافة) is a fundamental value in Islam. The Prophet Muhammad (ﷺ) said that whoever believes in Allah and the Last Day must honor his guest. Lot's story reminds us that protecting the guest is a sacred duty. In contrast, Lot's wife betrayed by informing the people — she was among those who perished."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 37:133-138",
+        "reference_text": "Surah As-Saffat, verses 133-138",
+        "content": "وَإِنَّ لُوطًا لَّمِنَ ٱلْمُرْسَلِينَ ۝ إِذْ نَجَّيْنَـٰهُ وَأَهْلَهُۥٓ أَجْمَعِينَ ۝ إِلَّا عَجُوزًا فِى ٱلْغَـٰبِرِينَ ۝ ثُمَّ دَمَّرْنَا ٱلْءَاخَرِينَ",
+        "translation": "And Lot was indeed one of the messengers. When We saved him and his entire household, except an old woman who was among those who remained behind. Then We destroyed the others.",
+        "relevance": "These verses summarize Lot's salvation and the destruction of his people."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 29:34",
+        "reference_text": "Surah Al-Ankabut, verse 34",
+        "content": "إِنَّا مُنزِلُونَ عَلَىٰٓ أَهْلِ هَـٰذِهِ ٱلْقَرْيَةِ رِجْزًۭا مِّنَ ٱلسَّمَآءِ بِمَا كَانُوا۟ يَفْسُقُونَ",
+        "translation": "We will bring down upon the inhabitants of this city a punishment from the sky, for what they have perpetrated.",
+        "relevance": "This verse explains the cause of the punishment."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Diyafa",
+        "arabic_term": "ضيافة",
+        "definition": "Hospitality. Lot sought to protect his guests according to this sacred value.",
+        "pronunciation": "di-ya-fa"
+      },
+      {
+        "id": 2,
+        "term": "Rijz",
+        "arabic_term": "رجز",
+        "definition": "Punishment, plague. The punishment descended upon Lot's people.",
+        "pronunciation": "rijz"
+      }
+    ]
+  }
+}

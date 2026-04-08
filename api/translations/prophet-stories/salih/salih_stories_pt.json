@@ -1,0 +1,342 @@
+{
+  "salih_prophecy": {
+    "title": "O envio de Salih como profeta",
+    "title_arabic": "إرسال صالح عليه السلام",
+    "introduction": "Salih (صالح عليه السلام) é um profeta enviado por Allah ao povo de Thamud, que sucedeu aos 'Ad. Após a destruição dos 'Ad, Allah estabeleceu os Thamud na terra. Construíram palácios nas planícies e escavaram moradas nas montanhas. Mas desviaram-se e Allah enviou Salih, seu irmão, para chamá-los ao monoteísmo.",
+    "conclusion": "O envio de Salih marca a continuidade da missão profética após Hud. Os Thamud receberam um mensageiro escolhido entre eles. Salih trouxe-lhes uma prova clara: a camela de Allah.",
+    "moral_lesson": "Esta história ensina-nos que Allah nunca abandona um povo sem lhe enviar um admoestador. Os bens terrenos — palácios e moradas — não dispensam da adoração de Allah.",
+    "historical_location": "Al-Hijr (região entre o Hijaz e a Síria)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "salih_prophecy_chapter_1",
+        "title": "A ordem divina",
+        "content": "Allah enviou Salih para o povo de Thamud, seus irmãos. O Alcorão relata: «E para os Thamud, o seu irmão Salih. Disse: Ó povo meu! Adorai Allah. Não tendes outra divindade além d'Ele. Uma prova clara chegou-vos do vosso Senhor: eis a camela de Allah, um sinal para vós. Deixai-a pastar na terra de Allah e não lhe façais mal algum, senão um castigo doloroso vos atingirá. » (7:73) Salih recebeu a revelação e uma prova milagrosa: a camela, sinal do poder de Allah."
+      },
+      {
+        "id": "salih_prophecy_chapter_2",
+        "title": "Os sucessores dos 'Ad",
+        "content": "O Alcorão recorda aos Thamud: «E recordai quando Ele vos fez suceder aos 'Ad e vos estabeleceu na terra. Construís palácios nas suas planícies e escavais moradas nas montanhas. Recordai pois os favores de Allah e não semeais a corrupção na terra. » (7:74) Os Thamud tinham recebido favores imensos. Habitavam uma região fértil e tinham desenvolvido uma civilização avançada. Mas esqueceram Allah e entregaram-se à corrupção."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 7:73",
+        "reference_text": "Surata Al-A'raf, versículo 73",
+        "content": "وَإِلَىٰ ثَمُودَ أَخَاهُمْ صَـٰلِحًۭا ۗ قَالَ يَـٰقَوْمِ ٱعْبُدُوا۟ ٱللَّهَ مَا لَكُم مِّنْ إِلَـٰهٍ غَيْرُهُۥٓ ۖ قَدْ جَآءَتْكُم بَيِّنَةٌۭ مِّن رَّبِّكُمْ ۖ هَـٰذِهِۦ نَاقَةُ ٱللَّهِ لَكُمْ ءَايَةًۭ ۖ فَذَرُوهَا تَأْكُلْ فِىٓ أَرْضِ ٱللَّهِ ۖ وَلَا تَمَسُّوهَا بِسُوٓءٍۢ فَيَأْخُذَكُمْ عَذَابٌ أَلِيمٌۭ",
+        "translation": "E para os Thamud, o seu irmão Salih. Disse: Ó povo meu! Adorai Allah — não tendes outra divindade além d'Ele. Uma prova clara chegou-vos do vosso Senhor: eis a camela de Allah, um sinal para vós. Deixai-a pastar na terra de Allah e não lhe façais mal algum, senão um castigo doloroso vos atingirá.",
+        "relevance": "Este versículo estabelece o envio de Salih e a camela como sinal divino."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 7:74",
+        "reference_text": "Surata Al-A'raf, versículo 74",
+        "content": "وَٱذْكُرُوٓا۟ إِذْ جَعَلَكُمْ خُلَفَآءَ مِنۢ بَعْدِ عَادٍۢ وَبَوَّأَكُمْ فِى ٱلْأَرْضِ تَتَّخِذُونَ مِن سُهُولِهَا قُصُورًۭا وَتَنْحِتُونَ ٱلْجِبَالَ بُيُوتًۭا",
+        "translation": "Recordai quando Ele vos fez suceder aos 'Ad e vos estabeleceu na terra. Construís palácios nas suas planícies e escavais moradas nas montanhas.",
+        "relevance": "Este versículo descreve os Thamud como sucessores dos 'Ad e as suas realizações."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Salih",
+        "arabic_term": "صالح",
+        "definition": "Salih em árabe. Profeta de Allah enviado ao povo de Thamud. O seu nome significa «o virtuoso».",
+        "pronunciation": "sa-lih"
+      },
+      {
+        "id": 2,
+        "term": "Thamud",
+        "arabic_term": "ثمود",
+        "definition": "Povo antigo da Arábia que sucedeu aos 'Ad. Escavavam moradas nas montanhas. Foram destruídos por terem matado a camela.",
+        "pronunciation": "tha-moud"
+      },
+      {
+        "id": 3,
+        "term": "Al-Hijr",
+        "arabic_term": "الحجر",
+        "definition": "Região onde viviam os Thamud, entre o Hijaz e a Síria. O Profeta Muhammad passou pelas suas ruínas.",
+        "pronunciation": "al-hijr"
+      }
+    ]
+  },
+  "salih_call": {
+    "title": "O chamamento de Salih ao seu povo",
+    "title_arabic": "دعوة صالح لقومه",
+    "introduction": "Salih (عليه السلام) chamou o povo de Thamud com clareza. Convidou-os a adorar apenas Allah, a pedir perdão e a arrepender-se. Recordou-lhes que Allah os fizera nascer da terra e os estabelecera nela. Avertiu-os das consequências da desobediência. Apesar da sua mensagem, os Thamud recusaram.",
+    "conclusion": "O chamamento de Salih ilustra a constância da mensagem profética. Não pediu recompensa alguma; o seu Senhor é Próximo e Atende as invocações. Os Thamud tiveram a sua oportunidade antes do castigo.",
+    "moral_lesson": "Esta história ensina-nos que o arrependimento é sempre possível antes que o castigo se abata. Recorda-nos que o nosso Senhor é Próximo e Atende aqueles que O invocam.",
+    "historical_location": "Al-Hijr",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "salih_call_chapter_1",
+        "title": "O convite ao monoteísmo",
+        "content": "Salih disse ao seu povo: «Ó povo meu! Adorai Allah. Não tendes outra divindade além d'Ele. É Ele que vos fez nascer da terra e vos estabeleceu nela. Implorai pois o Seu perdão, depois arrependei-vos para com Ele. O meu Senhor é Próximo, Ele atende.» (11:61) Salih recordou-lhes os favores de Allah e convidou-os a não semear a corrupção na terra. Avertiu-os de que se persistissem, sofreriam o destino dos povos do passado."
+      },
+      {
+        "id": "salih_call_chapter_2",
+        "title": "A rejeição dos Thamud",
+        "content": "O Alcorão relata que «os Thamud trataram os mensageiros de mentirosos» (26:141) e que «rejeitaram os avisos» (54:23). Apesar da prova clara — a camela — e do chamamento de Salih, os notáveis do povo recusaram. Ensoberbeceram-se. O Alcorão diz: «Os Thamud rejeitaram por arrogância.» (91:11) Salih continuou a chamá-los com paciência, mas persistiram na sua descrença."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 11:61",
+        "reference_text": "Surata Hud, versículo 61",
+        "content": "وَإِلَىٰ ثَمُودَ أَخَاهُمْ صَـٰلِحًۭا ۚ قَالَ يَـٰقَوْمِ ٱعْبُدُوا۟ ٱللَّهَ مَا لَكُم مِّنْ إِلَـٰهٍ غَيْرُهُۥٓ ۖ هُوَ أَنشَأَكُم مِّنَ ٱلْأَرْضِ وَٱسْتَعْمَرَكُمْ فِيهَا فَٱسْتَغْفِرُوهُ ثُمَّ تُوبُوٓا۟ إِلَيْهِ ۚ إِنَّ رَبِّى قَرِيبٌۭ مُّجِيبٌۭ",
+        "translation": "E para os Thamud, o seu irmão Salih. Disse: Ó povo meu! Adorai Allah. Não tendes outra divindade além d'Ele. É Ele que vos fez nascer da terra e vos estabeleceu nela. Implorai o Seu perdão, depois arrependei-vos para com Ele. O meu Senhor é Próximo, Ele atende.",
+        "relevance": "Este versículo contém o chamamento de Salih e a promessa do perdão."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 91:11",
+        "reference_text": "Surata Ash-Shams, versículo 11",
+        "content": "كَذَّبَتْ ثَمُودُ بِطَغْوَىٰهَآ",
+        "translation": "Os Thamud rejeitaram por arrogância.",
+        "relevance": "Este versículo descreve a atitude dos Thamud perante o chamamento de Salih."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Tawba",
+        "arabic_term": "توبة",
+        "definition": "Arrependimento. Salih convidou os Thamud a arrepender-se antes do castigo.",
+        "pronunciation": "taw-ba"
+      },
+      {
+        "id": 2,
+        "term": "Qarib Mujib",
+        "arabic_term": "قريب مجيب",
+        "definition": "Próximo, Ele atende. Descrição do Senhor que responde às invocações.",
+        "pronunciation": "qa-rib mou-jib"
+      }
+    ]
+  },
+  "the_thamud_people": {
+    "title": "O povo de Thamud",
+    "title_arabic": "قوم ثمود",
+    "introduction": "O povo de Thamud sucedeu aos 'Ad na terra. Allah estabeleceu-os e concedeu-lhes capacidades notáveis: construíam palácios nas planícies e escavavam moradas nas montanhas. Mas esqueceram os favores de Allah e semearam a corrupção. Rejeitaram Salih e o seu sinal.",
+    "conclusion": "A civilização dos Thamud — os seus palácios e moradas escavadas na rocha — não os protegeu. O sismo aniquilou-os nas suas habitações. Apenas Salih e os crentes foram poupados.",
+    "moral_lesson": "Esta história ensina-nos que as realizações humanas não dispensam da adoração de Allah. A corrupção na terra conduz ao castigo.",
+    "historical_location": "Al-Hijr (entre o Hijaz e a Síria)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "the_thamud_people_chapter_1",
+        "title": "Uma civilização avançada",
+        "content": "O Alcorão descreve os Thamud: «Recordai quando Ele vos fez suceder aos 'Ad e vos estabeleceu na terra. Construís palácios nas suas planícies e escavais moradas nas montanhas.» (7:74) Os Thamud eram construtores hábeis. As suas moradas escavadas nas montanhas testemunham ainda hoje da sua perícia. Mas o Alcorão exorta-os: «Recordai os favores de Allah e não semeais a corrupção na terra.» Fizeram o contrário."
+      },
+      {
+        "id": "the_thamud_people_chapter_2",
+        "title": "A ingratidão",
+        "content": "Allah tinha concedido aos Thamud a terra, a capacidade de construir e de prosperar. Mas entregaram-se à corrupção (fasād). Rejeitaram o mensageiro de Allah e desprezaram o sinal que Ele lhes enviara: a camela. A sua ingratidão e transgressão fizeram-nos merecer o castigo. Salih advertiu-os várias vezes, mas persistiram até cometerem o crime que selou o seu destino: a morte da camela."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 7:74",
+        "reference_text": "Surata Al-A'raf, versículo 74",
+        "content": "وَٱذْكُرُوٓا۟ إِذْ جَعَلَكُمْ خُلَفَآءَ مِنۢ بَعْدِ عَادٍۢ وَبَوَّأَكُمْ فِى ٱلْأَرْضِ تَتَّخِذُونَ مِن سُهُولِهَا قُصُورًۭا وَتَنْحِتُونَ ٱلْجِبَالَ بُيُوتًۭا ۖ فَٱذْكُرُوٓا۟ ءَالَآءَ ٱللَّهِ وَلَا تَعْثَوْا۟ فِى ٱلْأَرْضِ مُفْسِدِينَ",
+        "translation": "Recordai quando Ele vos fez suceder aos 'Ad e vos estabeleceu na terra. Construís palácios nas suas planícies e escavais moradas nas montanhas. Recordai os favores de Allah e não semeais a corrupção na terra.",
+        "relevance": "Este versículo descreve a civilização dos Thamud e a exortação à gratidão."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Khulafa",
+        "arabic_term": "خلفاء",
+        "definition": "Sucessores. Os Thamud sucederam aos 'Ad na terra.",
+        "pronunciation": "khou-la-fa"
+      },
+      {
+        "id": 2,
+        "term": "Mufsidun",
+        "arabic_term": "مفسدون",
+        "definition": "Aqueles que semeiam a corrupção. O Alcorão adverte os Thamud de não serem corruptores.",
+        "pronunciation": "mouf-si-doun"
+      }
+    ]
+  },
+  "the_she_camel": {
+    "title": "A camela de Allah",
+    "title_arabic": "ناقة الله",
+    "introduction": "Allah enviou aos Thamud uma camela como sinal e prova. Esta camela (nāqat Allāh) era uma prova clara da verdade de Salih. Ordenou-lhes que a deixassem pastar livremente e que não lhe fizessem mal. A água devia ser partilhada entre eles e ela, cada um bebendo à sua vez. Os Thamud rejeitaram esta prova.",
+    "conclusion": "A camela era um sinal da misericórdia de Allah e uma prova para os Thamud. Respeitando-a, teriam sido poupados. Matando-a, selaram a sua perdição.",
+    "moral_lesson": "Esta história ensina-nos que os sinais de Allah são provas. Respeitá-los conduz à salvação; transgredi-los conduz ao castigo.",
+    "historical_location": "Al-Hijr",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "the_she_camel_chapter_1",
+        "title": "O sinal divino",
+        "content": "O Alcorão relata as palavras de Salih: «Uma prova clara chegou-vos do vosso Senhor: eis a camela de Allah, um sinal para vós. Deixai-a pastar na terra de Allah e não lhe façais mal algum, senão um castigo doloroso vos atingirá.» (7:73) A camela era um milagre — um sinal tangível do poder de Allah e da verdade da mensagem de Salih. Devia pastar livremente na terra de Allah. Quem lhe fizesse mal incorreria num castigo doloroso."
+      },
+      {
+        "id": "the_she_camel_chapter_2",
+        "title": "A partilha da água",
+        "content": "O Alcorão indica que Allah ordenou a Salih que informasse os Thamud: «A água será partilhada entre vós e ela; cada um beberá à sua vez.» (54:28) A camela era uma prova (fitna) para os Thamud. O Alcorão diz: «Enviamos a camela como prova para eles. Vigiai-os pois e sê paciente.» (54:27) Os Thamud deviam aceitar esta partilha e não prejudicar a camela. Aqueles que cressem e obedecessem seriam poupados; os outros sofreriam o castigo."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 7:73",
+        "reference_text": "Surata Al-A'raf, versículo 73",
+        "content": "هَـٰذِهِۦ نَاقَةُ ٱللَّهِ لَكُمْ ءَايَةًۭ ۖ فَذَرُوهَا تَأْكُلْ فِىٓ أَرْضِ ٱللَّهِ ۖ وَلَا تَمَسُّوهَا بِسُوٓءٍۢ فَيَأْخُذَكُمْ عَذَابٌ أَلِيمٌۭ",
+        "translation": "Eis a camela de Allah, um sinal para vós. Deixai-a pastar na terra de Allah e não lhe façais mal algum, senão um castigo doloroso vos atingirá.",
+        "relevance": "Este versículo estabelece a camela como sinal e a proibição de lhe prejudicar."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 54:27-28",
+        "reference_text": "Surata Al-Qamar, versículos 27-28",
+        "content": "إِنَّا مُرْسِلُوا۟ ٱلنَّاقَةِ فِتْنَةًۭ لَّهُمْ فَٱرْتَقِبْهُمْ وَٱصْطَبِرْ ۝ وَنَبِّئْهُمْ أَنَّ ٱلْمَآءَ قِسْمَةٌۢ بَيْنَهُمْ ۖ كُلُّ شِرْبٍۢ مُّحْتَضَرٌۭ",
+        "translation": "Enviamos a camela como prova para eles. Vigiai-os pois e sê paciente. E informai que a água será partilhada entre eles e ela; cada um beberá à sua vez.",
+        "relevance": "Estes versículos descrevem a camela como prova e a partilha da água."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Naqat Allah",
+        "arabic_term": "ناقة الله",
+        "definition": "A camela de Allah. O sinal milagroso enviado aos Thamud.",
+        "pronunciation": "na-qat al-lah"
+      },
+      {
+        "id": 2,
+        "term": "Fitna",
+        "arabic_term": "فتنة",
+        "definition": "Prova, tentação. A camela era uma prova para os Thamud.",
+        "pronunciation": "fit-na"
+      }
+    ]
+  },
+  "the_camel_killed": {
+    "title": "A morte da camela e o castigo",
+    "title_arabic": "عقر الناقة والعذاب",
+    "introduction": "Apesar do aviso de Salih, os Thamud mataram a camela. O Alcorão relata que «a negaram e a mataram» (91:14). Em resposta, Allah destruiu-os por um sismo (rajfah). Foram apanhados nas suas moradas e encontrados mortos, prostrados. Salih e os crentes foram salvos.",
+    "conclusion": "A morte da camela selou o destino dos Thamud. O sismo aniquilou-os. A sua transgressão contra um sinal claro de Allah valeu-lhes um castigo imediato. A história dos Thamud permanece um aviso para as gerações.",
+    "moral_lesson": "Esta história ensina-nos que transgredir os sinais de Allah conduz à perdição. O castigo pode ser súbito. Apenas aqueles que crêem e obedecem são poupados.",
+    "historical_location": "Al-Hijr",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "the_camel_killed_chapter_1",
+        "title": "O crime",
+        "content": "O Alcorão descreve o que aconteceu: «Quando o mais miserável entre eles se levantou» (91:12), e o mensageiro de Allah (Salih) lhes disse: «Eis a camela de Allah, deixai-a beber» (91:13), «negá-lo-ão e matá-la-ão. O seu Senhor aniquilou-os então pelo seu pecado e nivelou-os.» (91:14) Os Thamud cometeram o crime supremo: matar o sinal de Allah após terem sido avisados. A sua arrogância cegou-os."
+      },
+      {
+        "id": "the_camel_killed_chapter_2",
+        "title": "O sismo",
+        "content": "O Alcorão descreve o castigo: «O sismo apanhou-os, e de manhã jaziam mortos nas suas moradas.» (7:78) A palavra «rajfah» designa um sismo ou abalo violento. Os Thamud, tão orgulhosos dos seus palácios e moradas escavadas nas montanhas, foram aniquilados num instante. Salih e aqueles que tinham crido com ele foram salvos pela misericórdia de Allah. As ruínas de Al-Hijr testemunham ainda da sua civilização desaparecida."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 91:12-15",
+        "reference_text": "Surata Ash-Shams, versículos 12-15",
+        "content": "إِذِ ٱنۢبَعَثَ أَشْقَىٰهَا ۝ فَقَالَ لَهُمْ رَسُولُ ٱللَّهِ نَاقَةَ ٱللَّهِ وَسُقْيَـٰهَا ۝ فَكَذَّبُوهُ فَعَقَرُوهَا فَدَمْدَمَ عَلَيْهِمْ رَبُّهُم بِذَنۢبِهِمْ فَسَوَّىٰهَا ۝ وَلَا يَخَافُ عُقْبَـٰهَا",
+        "translation": "Quando o mais miserável entre eles se levantou. O mensageiro de Allah disse-lhes: Eis a camela de Allah, deixai-a beber. Negaram-no e mataram-na. O seu Senhor aniquilou-os pelo seu pecado e nivelou-os. E Ele não teme as consequências.",
+        "relevance": "Estes versículos descrevem o crime dos Thamud e o seu castigo."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 7:78",
+        "reference_text": "Surata Al-A'raf, versículo 78",
+        "content": "فَأَخَذَتْهُمُ ٱلرَّجْفَةُ فَأَصْبَحُوا۟ فِى دَارِهِمْ جَـٰثِمِينَ",
+        "translation": "O sismo apanhou-os, e de manhã jaziam mortos nas suas moradas.",
+        "relevance": "Este versículo descreve a natureza do castigo: um sismo."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Aqar",
+        "arabic_term": "عقر",
+        "definition": "Matar (cortando os jarretes). Os Thamud «aqarū» a camela.",
+        "pronunciation": "a-qar"
+      },
+      {
+        "id": 2,
+        "term": "Rajfah",
+        "arabic_term": "رجفة",
+        "definition": "Sismo, abalo. O castigo com que Allah destruiu os Thamud.",
+        "pronunciation": "raj-fa"
+      }
+    ]
+  },
+  "lessons_from_salih": {
+    "title": "As lições da história de Salih",
+    "title_arabic": "دروس من قصة صالح",
+    "introduction": "A história de Salih (عليه السلام) contém lições intemporais. Ensina as consequências da transgressão dos sinais de Allah, a importância da gratidão pelos favores, e a rapidez do castigo para aqueles que persistem no mal. O Alcorão cita-a como exemplo.",
+    "conclusion": "Salih cumpriu a sua missão. Os Thamud foram aniquilados por terem matado a camela. A sua história permanece um aviso: os sinais de Allah não devem ser transgredidos. A civilização e as realizações materiais não protegem do castigo.",
+    "moral_lesson": "Esta história ensina-nos a respeitar os sinais de Allah, a ser gratos pelos Seus favores, e a não semear a corrupção. Recorda-nos que o arrependimento é possível antes que seja tarde demais.",
+    "historical_location": "De Al-Hijr ao esquecimento",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lessons_from_salih_chapter_1",
+        "title": "Um exemplo para os povos",
+        "content": "O Alcorão apresenta a história de Salih como um aviso. Os Thamud tinham tudo: palácios, moradas escavadas nas montanhas, um sinal claro — a camela. Mas faltava-lhes o essencial: a fé e a obediência. Transgrediram o sinal de Allah e foram destruídos. Salih, por sua vez, permaneceu firme. Não pediu recompensa alguma; transmitiu a mensagem. A sua história recorda-nos que o mensageiro cumpre a sua missão; o resultado pertence a Allah."
+      },
+      {
+        "id": "lessons_from_salih_chapter_2",
+        "title": "A continuidade profética",
+        "content": "Salih faz parte da linhagem dos profetas enviados após Hud. Adão, Noé, Hud, Salih — cada povo recebe o seu mensageiro. Os Thamud, como os 'Ad antes deles, tiveram a sua oportunidade. Recusaram e transgrediram. A história de Salih insere-se no mesmo padrão: o chamamento ao monoteísmo, o sinal milagroso, a rejeição, a transgressão, o castigo, e a salvação dos crentes. As ruínas de Al-Hijr, que o Profeta Muhammad atravessou durante a expedição de Tabuk, recordam esta lição às gerações."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 11:120",
+        "reference_text": "Surata Hud, versículo 120",
+        "content": "وَكُلًّا نَّقُصُّ عَلَيْكَ مِنْ أَنبَاءِ الرُّسُلِ مَا نُثَبِّتُ بِهِ فُؤَادَكَ وَجَاءَكَ فِي هَٰذِهِ الْحَقُّ وَمَوْعِظَةٌ وَذِكْرَىٰ لِلْمُؤْمِنِينَ",
+        "translation": "E tudo o que te relatamos dos relatos dos mensageiros, é para fortalecer o teu coração. E chegou-te neste relato a verdade, assim como uma exortação e um aviso para os crentes.",
+        "relevance": "Este versículo explica o propósito dos relatos dos profetas no Alcorão."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 11:68",
+        "reference_text": "Surata Hud, versículo 68",
+        "content": "كَأَن لَّمْ يَغْنَوْا۟ فِيهَا ۗ أَلَآ إِنَّ ثَمُودًا كَفَرُوا۟ رَبَّهُمْ ۗ أَلَا بُعْدًۭا لِّثَمُودَ",
+        "translation": "Como se nunca tivessem vivido nela. Em verdade, os Thamud descreram no seu Senhor. Que os Thamud sejam aniquilados!",
+        "relevance": "Este versículo conclui o relato dos Thamud e o seu castigo."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Ibra",
+        "arabic_term": "عبرة",
+        "definition": "Exemplo ou lição. As histórias dos profetas são exemplos para a humanidade.",
+        "pronunciation": "ib-ra"
+      },
+      {
+        "id": 2,
+        "term": "Dhikra",
+        "arabic_term": "ذكرى",
+        "definition": "Aviso. Os relatos dos profetas servem de aviso para os crentes.",
+        "pronunciation": "dhik-ra"
+      }
+    ]
+  }
+}

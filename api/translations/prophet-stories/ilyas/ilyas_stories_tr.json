@@ -1,0 +1,230 @@
+{
+  "ilyas_call": {
+    "title": "İlyas'ın daveti",
+    "title_arabic": "دعوة إلياس",
+    "introduction": "İlyas (إلياس عليه السلام), İlyas, İsrail halkına gönderilen bir peygamberdir. Kur'an şöyle buyurur: \"Ve İlyas gerçekten elçilerdendi.\" (37:123) Kavmini Baal'a tapmayı bırakıp Allah'a dönmeye çağırdı. Halk putlara taparak sapıtmıştı.",
+    "conclusion": "İlyas kararlılıkla vaaz etti. Cezayı uyardı. Bazıları inandı, diğerleri onu reddetti. Muhalefete rağmen görevine sadık kaldı.",
+    "moral_lesson": "Bu hikaye bize peygamberin tereddüt etmeden tevhide çağırması gerektiğini öğretir. Putperestlik helakete götürür.",
+    "historical_location": "Filistin (İsrail Krallığı)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "ilyas_call_chapter_1",
+        "title": "İlyas'ın görevi",
+        "content": "Kur'an şöyle bildirir: \"Ve İlyas gerçekten elçilerdendi. Kavmine dediğinde: Allah'tan korkmuyor musunuz? Baal'a mı yalvarıyorsunuz ve yaratıcıların en iyisini mi terk ediyorsunuz?\" (37:123-125) İlyas Baal'a tapan bir kavme gönderildi. Onları yalnızca Allah'a tapmaya çağırdı. Putperestlikten vazgeçmelerini teşvik etti."
+      },
+      {
+        "id": "ilyas_call_chapter_2",
+        "title": "Uyarı",
+        "content": "Kur'an şöyle buyurur: \"Allah, sizin Rabbiniz ve ilk atalarınızın Rabbi?\" (37:126) İlyas kavmine Allah'ın Yaratıcı olduğunu hatırlattı. Baal hiçbir şeydir. Yalnızca Allah tapılmaya layıktır. Hatada ısrar ederlerse cezayı uyardı. Mesajı açıktı: tevhide dönün."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Kur'an 37:123",
+        "reference_text": "Saffat Suresi, 123. ayet",
+        "content": "وَإِنَّ إِلْيَاسَ لَمِنَ ٱلْمُرْسَلِينَ",
+        "translation": "Ve İlyas gerçekten elçilerdendi.",
+        "relevance": "Bu ayet İlyas'ı elçi olarak tespit eder."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Kur'an 37:124-125",
+        "reference_text": "Saffat Suresi, 124-125. ayetler",
+        "content": "إِذْ قَالَ لِقَوْمِهِۦٓ أَلَا تَتَّقُونَ ۝ أَتَدْعُونَ بَعْلًۭا وَتَذَرُونَ أَحْسَنَ ٱلْخَـٰلِقِينَ",
+        "translation": "Kavmine dediğinde: Allah'tan korkmuyor musunuz? Baal'a mı yalvarıyorsunuz ve yaratıcıların en iyisini mi terk ediyorsunuz?",
+        "relevance": "Bu ayet İlyas'ın Baal'a karşı çağrısını anlatır."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Ilyas",
+        "arabic_term": "إلياس",
+        "definition": "Arapça'da İlyas. İsrail halkına gönderilen peygamber.",
+        "pronunciation": "il-yas"
+      },
+      {
+        "id": 2,
+        "term": "Baal",
+        "arabic_term": "بعْل",
+        "definition": "İsrail halkının taptığı put. İlyas onun kültüne karşı savaştı.",
+        "pronunciation": "ba'l"
+      }
+    ]
+  },
+  "ilyas_baal": {
+    "title": "İlyas ve Baal meydan okuması",
+    "title_arabic": "إلياس وبعل",
+    "introduction": "İlyas Baal'a tapanlara meydan okudu. Kur'an şöyle buyurur: \"Baal'a mı yalvarıyorsunuz ve yaratıcıların en iyisini mi terk ediyorsunuz?\" (37:125) Bir test önerdi: her biri kendi ilahına yalvaracaktı. Gerçek ilah ateşle cevap verecekti. Putperestler Baal'a boşuna yalvardılar.",
+    "conclusion": "Baal cevap vermedi. İlyas Allah'a yalvardı. Gökten ateş indi ve kurbanını yaktı. Hakikat galip geldi. Kalpler İslam'a açıldı.",
+    "moral_lesson": "Bu hikaye bize putların güçsüz olduğunu öğretir. Yalnızca Allah duaya cevap verir. Hakikat nihayetinde galip gelir.",
+    "historical_location": "Karmel Dağı, Filistin",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "ilyas_baal_chapter_1",
+        "title": "Meydan okuma",
+        "content": "Kur'an İlyas'ın çağrısını bildirir: \"Allah'tan korkmuyor musunuz?\" (37:124) İlyas halkı ve Baal peygamberlerini topladı. Bir test önerdi: her biri bir kurban hazırlayacaktı. Baal'a tapanlar putlarına yalvaracaktı. İlyas Allah'a yalvaracaktı. Ateşle cevap veren gerçek Tanrı olacaktı. Putperestler kabul etti."
+      },
+      {
+        "id": "ilyas_baal_chapter_2",
+        "title": "Allah'ın zaferi",
+        "content": "Kur'an şöyle buyurur: \"Allah, sizin Rabbiniz ve ilk atalarınızın Rabbi?\" (37:126) Baal peygamberleri bütün gün yalvardı. Hiçbir şey. Baal cevap vermedi. Sonra İlyas Allah'a yalvardı. Gökten ateş indi. Kurbanı, odunu ve suyu yaktı. Halk haykırdı: \"Allah gerçek Tanrıdır!\" Birçoğu inandı."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Kur'an 37:125",
+        "reference_text": "Saffat Suresi, 125. ayet",
+        "content": "أَتَدْعُونَ بَعْلًۭا وَتَذَرُونَ أَحْسَنَ ٱلْخَـٰلِقِينَ",
+        "translation": "Baal'a mı yalvarıyorsunuz ve yaratıcıların en iyisini mi terk ediyorsunuz?",
+        "relevance": "Bu ayet Baal'a karşı meydan okumayı hatırlatır."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Kur'an 37:127",
+        "reference_text": "Saffat Suresi, 127. ayet",
+        "content": "فَكَذَّبُوهُ فَإِنَّهُمْ لَمُحْضَرُونَ",
+        "translation": "Onu yalancı saydılar. Onlar (cezaya) getirilecekler.",
+        "relevance": "Bu ayet bazılarının İlyas'ı reddetmesini anlatır."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Baal",
+        "arabic_term": "بعْل",
+        "definition": "Put. Baal'a tapanlar yenildi.",
+        "pronunciation": "ba'l"
+      },
+      {
+        "id": 2,
+        "term": "Khalq",
+        "arabic_term": "خَلْق",
+        "definition": "Yaratılış. Allah ahsan al-khaliqin, yaratıcıların en iyisidir.",
+        "pronunciation": "khalq"
+      }
+    ]
+  },
+  "ilyas_miracle": {
+    "title": "İlyas'ın mucizeleri",
+    "title_arabic": "معجزات إلياس",
+    "introduction": "Allah görevini doğrulamak için İlyas'a mucizeler verdi. Kur'an şöyle buyurur: \"İlyas'a selam! İyilik yapanları böyle mükâfatlandırırız. O gerçekten inanan kullarımızdandı.\" (37:129-132) Mucizeleri arasında: gökten ateş, ölüyü diriltme ve yemeğin çoğalması.",
+    "conclusion": "İlyas'ın mucizeleri inananların imanını güçlendirdi. Onun gerçekten Allah'ın peygamberi olduğunu kanıtladı. Yaratılış Yaratıcısına itaat eder.",
+    "moral_lesson": "Bu hikaye bize mucizelerin Allah'tan işaretler olduğunu öğretir. Peygamberlik mesajının doğruluğunu doğrularlar.",
+    "historical_location": "Filistin",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "ilyas_miracle_chapter_1",
+        "title": "Gökten ateş",
+        "content": "Kur'an şöyle bildirir: \"İlyas'a selam!\" (37:130) Karmel Dağı'ndaki ateş mucizesi en ünlüsüydü. İlyas Allah'a yalvardı. Ateş indi ve kurbanı yaktı. Bu mucize yalnızca Allah'ın güce sahip olduğunu gösterdi. Putlar güçsüzdür. O gün birçok kişi inandı."
+      },
+      {
+        "id": "ilyas_miracle_chapter_2",
+        "title": "Mükâfat",
+        "content": "Kur'an şöyle buyurur: \"İyilik yapanları böyle mükâfatlandırırız. O gerçekten inanan kullarımızdandı.\" (37:131-132) İlyas sadakati için mükâfatlandırıldı. Allah onu düşmanlarından korudu. Bazı rivayetlere göre ölmeden göğe yükseltildi. İsmi peygamberler arasında mübarek kalır."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Kur'an 37:129-130",
+        "reference_text": "Saffat Suresi, 129-130. ayetler",
+        "content": "وَسَلَـٰمٌ عَلَىٰٓ إِلْ يَاسِينَ ۝ إِنَّا كَذَٰلِكَ نَجْزِى ٱلْمُحْسِنِينَ",
+        "translation": "İlyas'a selam! İyilik yapanları böyle mükâfatlandırırız.",
+        "relevance": "Bu ayet İlyas'ın mükâfatını tespit eder."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Kur'an 6:85",
+        "reference_text": "En'am Suresi, 85. ayet",
+        "content": "وَزَكَرِيَّا وَيَحْيَىٰ وَعِيسَىٰ وَإِلْيَاسَ كُلٌّۭ مِّنَ ٱلصَّـٰلِحِينَ",
+        "translation": "Ve Zekeriya, Yahya, İsa ve İlyas: hepsi salihlerdendir.",
+        "relevance": "Bu ayet İlyas'ı salih peygamberler arasına yerleştirir."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Muhsin",
+        "arabic_term": "محسن",
+        "definition": "İyilik yapan. İlyas muhsindi ve mükâfatlandırıldı.",
+        "pronunciation": "mouh-sin"
+      },
+      {
+        "id": 2,
+        "term": "Mu'min",
+        "arabic_term": "مؤمن",
+        "definition": "İnanan. İlyas mu'minlerdendi.",
+        "pronunciation": "mou-min"
+      }
+    ]
+  },
+  "lessons_from_ilyas": {
+    "title": "İlyas hikayesinden dersler",
+    "title_arabic": "دروس من قصة إلياس",
+    "introduction": "İlyas putperestliğe karşı savaşan peygamberdir. Kur'an şöyle buyurur: \"Ve İlyas gerçekten elçilerdendi.\" (37:123) Kavmini Baal'ı bırakıp Allah'a tapmaya çağırdı. Cesareti ve kararlılığı model olarak kalır.",
+    "conclusion": "İlyas putperestliğe karşı durdu. Baal'a meydan okudu ve galip geldi. Mesajı: Yalnızca Allah tapılmaya layıktır. Bu ders ebedidir.",
+    "moral_lesson": "Bu hikaye bize tevhidin (tevhid) imanın temeli olduğunu öğretir. Allah'a herhangi bir şekilde ortak koşulması hataya götürür.",
+    "historical_location": "Filistin",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lessons_from_ilyas_chapter_1",
+        "title": "Putperestliğe karşı savaş",
+        "content": "Kur'an şöyle buyurur: \"Baal'a mı yalvarıyorsunuz ve yaratıcıların en iyisini mi terk ediyorsunuz?\" (37:125) İlyas taviz vermedi. Açıkça tevhide çağırdı. Putperestlik (şirk) en büyük günahtır. Mümin onu tamamen reddetmelidir. İlyas davette kararlılığın modelidir."
+      },
+      {
+        "id": "lessons_from_ilyas_chapter_2",
+        "title": "Allah'a güven",
+        "content": "İlyas yüzlerce Baal peygamberine meydan okudu. Tek başınaydı. Ama Allah'ı vardı. Ateş indi ve hakikati kanıtladı. Kur'an hatırlatır: \"İyilik yapanları böyle mükâfatlandırırız.\" (37:131) Allah'a güvenen hayal kırıklığına uğramaz. Zafer inananlara aittir."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Kur'an 37:123-132",
+        "reference_text": "Saffat Suresi, 123-132. ayetler",
+        "content": "وَإِنَّ إِلْيَاسَ لَمِنَ ٱلْمُرْسَلِينَ ۝ إِذْ قَالَ لِقَوْمِهِۦٓ أَلَا تَتَّقُونَ",
+        "translation": "Ve İlyas elçilerdendi. Kavmine dediğinde: Allah'tan korkmuyor musunuz?",
+        "relevance": "Bu pasaj İlyas'ın hikayesini özetler."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Kur'an 37:132",
+        "reference_text": "Saffat Suresi, 132. ayet",
+        "content": "إِنَّهُۥ كَانَ مِنْ عِبَادِنَا ٱلْمُؤْمِنِينَ",
+        "translation": "O gerçekten inanan kullarımızdandı.",
+        "relevance": "Bu ayet İlyas'ı inanan olarak övüyor."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Tawhid",
+        "arabic_term": "توحيد",
+        "definition": "Allah'ın birliği. İlyas tevhide çağırdı.",
+        "pronunciation": "taw-hid"
+      },
+      {
+        "id": 2,
+        "term": "Shirk",
+        "arabic_term": "شرك",
+        "definition": "Ortak koşma, putperestlik. İlyas şirke karşı savaştı.",
+        "pronunciation": "chirk"
+      }
+    ]
+  }
+}

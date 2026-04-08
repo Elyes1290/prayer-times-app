@@ -1,0 +1,344 @@
+{
+  "yunus_call": {
+    "title": "Yunus'un kavmine daveti",
+    "title_arabic": "دعوة يونس لقومه",
+    "introduction": "Yunus (يونس عليه السلام), Yunus peygamber, Ninova halkına gönderilen bir peygamberdir. Kur'an şöyle buyurur: \"Ve Yunus gerçekten elçilerdendi.\" (37:139) Kavmini yalnızca Allah'a ibadet etmeye ve putperestliği bırakmaya çağırdı. Ama halk reddetti ve küfründe ısrar etti.",
+    "conclusion": "Yunus onları azaptan uyardı. İnanmadıklarında, Allah izin vermeden öfkeyle ayrıldı. Bu acele onu balina imtihanına götürecekti.",
+    "moral_lesson": "Bu hikaye bize peygamberin sabırlı olması ve Allah'ın emri olmadan kavmini terk etmemesi gerektiğini öğretir. Sabır peygamberi bir erdemdir.",
+    "historical_location": "Ninova (Irak)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "yunus_call_chapter_1",
+        "title": "Yunus'un görevi",
+        "content": "Kur'an şöyle bildirir: \"Yunus öfkeyle ayrıldığında, onu cezalandırmayacağımızı sandı.\" (21:87) Yunus büyük bir şehir olan Ninova halkına gönderildi. Onları tevhide çağırdı. Israr ederlerse azaptan uyardı. Ama reddettiler. Yunus sabırsızlandı ve Allah'ın emrini beklemeden şehri terk etti."
+      },
+      {
+        "id": "yunus_call_chapter_2",
+        "title": "Aceleci ayrılış",
+        "content": "Kur'an şöyle buyurur: \"Zünnun (Yunus) öfkeyle ayrıldığında ve onu sıkıştırmayacağımızı sandığında.\" (21:87) Yunus kavmi yargılanmadan önce ayrıldı. Allah'ın iznini beklemedi. Bu acele bir hataydı. Bir peygamber Rabbinin emri olmadan görevini terk etmemelidir."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 37:139",
+        "reference_text": "Saffat Suresi, 139. ayet",
+        "content": "وَإِنَّ يُونُسَ لَمِنَ ٱلْمُرْسَلِينَ",
+        "translation": "And Yunus was indeed among the messengers.",
+        "relevance": "Bu ayet Yunus'u elçi olarak tespit eder."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 21:87",
+        "reference_text": "Enbiya Suresi, 87. ayet",
+        "content": "وَذَا ٱلنُّونِ إِذ ذَّهَبَ مُغَـٰضِبًۭا فَظَنَّ أَن لَّن نَّقْدِرَ عَلَيْهِ",
+        "translation": "And Yunus when he left in anger and thought that We would not constrain him.",
+        "relevance": "Bu ayet Yunus'un ayrılışını anlatır."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Yunus",
+        "arabic_term": "يونس",
+        "definition": "Arapça'da Yunus. Ninova halkına gönderilen peygamber.",
+        "pronunciation": "you-nous"
+      },
+      {
+        "id": 2,
+        "term": "Dhu an-Nun",
+        "arabic_term": "ذو النون",
+        "definition": "Balığın sahibi. Kur'an'da Yunus'un lakabı.",
+        "pronunciation": "dhou an-noun"
+      }
+    ]
+  },
+  "yunus_ship": {
+    "title": "Yunus gemide",
+    "title_arabic": "يونس في السفينة",
+    "introduction": "Yunus kaçmak için bir gemiye bindi. Kur'an şöyle bildirir: \"Ve gemi onu dalgalar üzerinde dağ gibi taşıdı.\" (11:42) Bir fırtına çıktı. Yolcular denize atılacak kişiyi belirlemek için kura çektiler. Kura Yunus'a düştü.",
+    "conclusion": "Yunus denize atıldı. Bir balina onu yuttu. Kendini balığın karnının karanlığında buldu. Bu, imtihanının ve tövbesinin başlangıcıydı.",
+    "moral_lesson": "Bu hikaye bize Allah'ın takdirinden kaçılamayacağını öğretir. Kaçış gibi görünen şey, arındıran bir imtihana yol açabilir.",
+    "historical_location": "Denizde",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "yunus_ship_chapter_1",
+        "title": "Fırtına",
+        "content": "Kur'an şöyle bildirir: \"Yüklü gemiye kaçtığında kura çekti ve kaybedenlerden oldu.\" (37:140-141) Yunus bir gemiye bindi. Bir fırtına tekneyi tehdit etti. Denizciler bir yolcunun sorumlu olduğuna inandı. Kura çektiler. Kura üç kez Yunus'a düştü. Bunun Allah'tan bir işaret olduğunu anladı."
+      },
+      {
+        "id": "yunus_ship_chapter_2",
+        "title": "Denize atılma",
+        "content": "Kur'an şöyle buyurur: \"Sonra balık onu kınanır halde yuttu.\" (37:142) Yunus gemiyi batırmamak için kendini denize attı. Bir balina onu yuttu. Kendini karanlıkta, canlı ama esir buldu. Bu, kavmini izinsiz terk etmesinin cezasıydı."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 37:140-141",
+        "reference_text": "Saffat Suresi, 140-141. ayetler",
+        "content": "إِذْ أَبَقَ إِلَى ٱلْفُلْكِ ٱلْمَشْحُونِ ۝ فَسَاهَمَ فَكَانَ مِنَ ٱلْمُدْحَضِينَ",
+        "translation": "When he fled to the laden ship, he drew lots and was among the losers.",
+        "relevance": "Bu ayet kaçışı ve kura çekmeyi anlatır."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 37:142",
+        "reference_text": "Saffat Suresi, 142. ayet",
+        "content": "فَٱلْتَقَمَهُ ٱلْحُوتُ وَهُوَ مُلِيمٌ",
+        "translation": "Then the fish swallowed him while he was blameworthy.",
+        "relevance": "Bu ayet balina tarafından yutulmayı anlatır."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Fulk",
+        "arabic_term": "فلك",
+        "definition": "Gemi. Yunus kaçmak için fulk'a bindi.",
+        "pronunciation": "foulk"
+      },
+      {
+        "id": 2,
+        "term": "Hut",
+        "arabic_term": "حوت",
+        "definition": "Balina, balık. Yunus'u yuttu.",
+        "pronunciation": "hout"
+      }
+    ]
+  },
+  "yunus_whale": {
+    "title": "Yunus balinanın karnında",
+    "title_arabic": "يونس في بطن الحوت",
+    "introduction": "Yunus kendini balinanın karnının karanlığında buldu. Kur'an şöyle buyurur: \"Allah'ı tesbih edenlerden olmasaydı, kıyamet gününe kadar karnında kalırdı.\" (37:143-144) Bu karanlıkta Yunus Rabbine dua etti.",
+    "conclusion": "Yunus hatasını anladı. Yalnızca Allah'a güvenebilirdi. Umutsuzluk ve tövbe duasını etti. Allah duasına icabet etti.",
+    "moral_lesson": "Bu hikaye bize hiçbir yerin Allah'tan kaçamayacağını öğretir. En derin karanlıkta bile dua Rabbe ulaşır.",
+    "historical_location": "Denizde",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "yunus_whale_chapter_1",
+        "title": "Karanlık",
+        "content": "Kur'an şöyle bildirir: \"Sonra karanlıkların derinliklerinden şöyle seslendi: Senden başka ilah yoktur! Seni tenzih ederim! Ben zalimlerden oldum.\" (21:87) Yunus balığın karnının karanlığındaydı. Hiçbir şey göremiyordu. Yalnızca Allah'a güvenebilirdi. Samimiyetle dua etti."
+      },
+      {
+        "id": "yunus_whale_chapter_2",
+        "title": "Dua",
+        "content": "Kur'an şöyle buyurur: \"Ona icabet ettik ve onu sıkıntıdan kurtardık. İşte müminleri böyle kurtarırız.\" (21:88) Yunus'un duası — \"La ilaha illa Anta, Subhanaka, inni kuntu min adh-dhalimin\" — Kur'an'ın en meşhur dualarından biri oldu. Tövbe ve Allah'ın birliğinin kabulünü ifade eder. Allah ona icabet etti."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 21:87",
+        "reference_text": "Enbiya Suresi, 87. ayet",
+        "content": "فَنَادَىٰ فِى ٱلظُّلُمَـٰتِ أَن لَّآ إِلَـٰهَ إِلَّآ أَنتَ سُبْحَـٰنَكَ إِنِّى كُنتُ مِنَ ٱلظَّـٰلِمِينَ",
+        "translation": "Then he called out from the depths of darkness: There is no deity except You! Glory to You! I have been among the wrongdoers.",
+        "relevance": "Bu ayet Yunus'un duasını içerir."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 21:88",
+        "reference_text": "Enbiya Suresi, 88. ayet",
+        "content": "فَٱسْتَجَبْنَا لَهُۥ وَنَجَّيْنَـٰهُ مِنَ ٱلْغَمِّ ۚ وَكَذَٰلِكَ نُـۨجِى ٱلْمُؤْمِنِينَ",
+        "translation": "So We answered him and saved him from distress. Thus do We save the believers.",
+        "relevance": "Bu ayet Allah'ın icabetini anlatır."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Dhikr",
+        "arabic_term": "ذكر",
+        "definition": "Dua, Allah'ı zikir. Yunus karanlıkta dua etti.",
+        "pronunciation": "dhikr"
+      },
+      {
+        "id": 2,
+        "term": "Zulumat",
+        "arabic_term": "ظلمات",
+        "definition": "Karanlık. Yunus balığın karnının zulumatındaydı.",
+        "pronunciation": "dhou-lou-mat"
+      }
+    ]
+  },
+  "yunus_repentance": {
+    "title": "Yunus'un tövbesi ve kurtuluşu",
+    "title_arabic": "توبة يونس ونجاته",
+    "introduction": "Allah Yunus'un duasına icabet etti. Kur'an şöyle buyurur: \"Ona icabet ettik ve onu sıkıntıdan kurtardık.\" (21:88) Balina onu sahile attı. Yunus zayıf ve hastaydı. Allah gölgelendirmek ve beslemek için üzerinde bir bitki bitirdi.",
+    "conclusion": "Yunus kurtarıldı. Dersi öğrenmişti: Allah'ın emri olmadan asla görevini terk etme. Samimi tövbe kusurları siler ve rahmeti çeker.",
+    "moral_lesson": "Bu hikaye bize tövbenin kurtuluşun kapılarını açtığını öğretir. Allah, O'na samimiyetle dua edenlere çok merhametlidir.",
+    "historical_location": "Sahil",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "yunus_repentance_chapter_1",
+        "title": "Sahile atılma",
+        "content": "Kur'an şöyle bildirir: \"Onu çıplak sahile attık ve o hastaydı. Üzerinde bir kabak bitkisi bitirdik.\" (37:145-146) Balina Yunus'u sahile attı. Bitkin, çıplak ve hastaydı. Allah gölgelendirmek ve korumak için üzerinde bir kabak bitkisi (yaqtin) bitirdi. Rahmeti Yunus'u örttü."
+      },
+      {
+        "id": "yunus_repentance_chapter_2",
+        "title": "Ders",
+        "content": "Kur'an şöyle buyurur: \"Allah'ı tesbih edenlerden olmasaydı, kıyamet gününe kadar karnında kalırdı.\" (37:143-144) Yunus karanlıkta Allah'ı tesbih etmişti. Bu tesbih onu kurtardı. Kur'an şöyle sonuçlandırır: \"Ona icabet ettik ve ona yüz bin veya daha fazla kişilik bir topluluk verdik.\" (37:147) Allah onu kavmine geri gönderdi."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 37:145-146",
+        "reference_text": "Saffat Suresi, 145-146. ayetler",
+        "content": "فَنَبَذْنَـٰهُ بِٱلْعَرَآءِ وَهُوَ سَقِيمٌ ۝ وَأَنۢبَتْنَا عَلَيْهِ شَجَرَةًۭ مِّن يَقْطِينٍۢ",
+        "translation": "So We cast him onto the bare shore, and he was ill. And We caused a plant of gourd to grow over him.",
+        "relevance": "Bu ayet Yunus'un kurtuluşunu anlatır."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 37:147",
+        "reference_text": "Saffat Suresi, 147. ayet",
+        "content": "وَأَرْسَلْنَـٰهُ إِلَىٰ مِئَةِ أَلْفٍ أَوْ يَزِيدُونَ",
+        "translation": "And We sent him to a hundred thousand or more.",
+        "relevance": "Bu ayet Yunus'un kavmine dönüşünü anlatır."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Yaqtin",
+        "arabic_term": "يقطين",
+        "definition": "Kabak. Allah Yunus için yaqtin bitirdi.",
+        "pronunciation": "yaq-tin"
+      },
+      {
+        "id": 2,
+        "term": "Tawba",
+        "arabic_term": "توبة",
+        "definition": "Tövbe. Yunus balığın karnında tawba yaptı.",
+        "pronunciation": "taw-ba"
+      }
+    ]
+  },
+  "yunus_people": {
+    "title": "Yunus'un kavmi inandı",
+    "title_arabic": "إيمان قوم يونس",
+    "introduction": "Yunus kavmine döndüğünde, onlar inanmışlardı. Kur'an şöyle buyurur: \"Yunus kavminden başka inanıp imanı kendisine fayda veren bir şehir neden olmasın? İnandıklarında dünya hayatında onlardan rezil edici azabı kaldırdık.\" (10:98) Ninova halkı azap inmeden önce tövbe etti.",
+    "conclusion": "Yunus'un kavmi azaptan önce toplu olarak inanan tek topluluktu. Böylece yıkımdan kaçındılar. Yunus onları İslam'a yönlendirebildi.",
+    "moral_lesson": "Bu hikaye bize toplu tövbenin azabı önleyebileceğini öğretir. Geç bile olsa iman Allah tarafından kabul edilir.",
+    "historical_location": "Ninova (Irak)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "yunus_people_chapter_1",
+        "title": "Kavmin imanı",
+        "content": "Kur'an şöyle bildirir: \"Yunus kavminden başka inanıp imanı kendisine fayda veren bir şehir neden olmasın? İnandıklarında dünya hayatında onlardan rezil edici azabı kaldırdık ve onlara bir süreye kadar nimet verdik.\" (10:98) Yunus'un ayrılışından sonra Ninova halkı uyarısını hatırladı. Tövbe ettiler ve inandılar. Allah tövbelerini kabul etti ve azabı önledi."
+      },
+      {
+        "id": "yunus_people_chapter_2",
+        "title": "Yunus'un dönüşü",
+        "content": "Kur'an şöyle buyurur: \"Onu yüz bin veya daha fazlasına gönderdik. İnandılar. Onlara bir süreye kadar nimet verdik.\" (37:147-148) Yunus kavmine döndü. Onları mümin buldu. Yokluğunda inanmışlardı. İmtihanı bir amaca hizmet etmişti: sabrı öğrenmişti ve kavmi inanmıştı. Allah'ın hikmeti mükemmeldir."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 10:98",
+        "reference_text": "Yunus Suresi, 98. ayet",
+        "content": "فَلَوْلَا كَانَتْ قَرْيَةٌ ءَامَنَتْ فَنَفَعَهَآ إِيمَـٰنُهَآ إِلَّا قَوْمَ يُونُسَ ۖ لَمَّآ ءَامَنُوا۟ كَشَفْنَا عَنْهُمْ عَذَابَ ٱلْخِزْىِ فِى ٱلْحَيَوٰةِ ٱلدُّنْيَا",
+        "translation": "Why was there no town that believed and whose faith benefited it, except the people of Yunus? When they believed, We removed from them the punishment.",
+        "relevance": "Bu ayet Yunus'un kavminin inandığını ve kurtarıldığını tespit eder."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 37:147-148",
+        "reference_text": "Saffat Suresi, 147-148. ayetler",
+        "content": "وَأَرْسَلْنَـٰهُ إِلَىٰ مِئَةِ أَلْفٍ أَوْ يَزِيدُونَ ۝ فَـَٔامَنُوا۟ فَمَتَّعْنَـٰهُمْ إِلَىٰ حِينٍۢ",
+        "translation": "And We sent him to a hundred thousand or more. And they believed. So We gave them enjoyment for a time.",
+        "relevance": "Bu ayet kavmin imanını ve verilen nimeti teyit eder."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Ninawa",
+        "arabic_term": "نينوى",
+        "definition": "Ninova. Irak'ta Yunus'un kavminin şehri.",
+        "pronunciation": "ni-na-wa"
+      },
+      {
+        "id": 2,
+        "term": "Iman",
+        "arabic_term": "إيمان",
+        "definition": "İman. Yunus'un kavminin imanı vardı ve kurtarıldılar.",
+        "pronunciation": "i-man"
+      }
+    ]
+  },
+  "lessons_from_yunus": {
+    "title": "Yunus hikayesinden dersler",
+    "title_arabic": "دروس من قصة يونس",
+    "introduction": "Yunus Kur'an'da en çok bahsedilen peygamberlerden biridir. Bir sure onun adını taşır. Hikayesi sabır, tövbe ve Allah'ın rahmetini öğretir. Kur'an şöyle buyurur: \"Ve Yunus gerçekten elçilerdendi.\" (37:139)",
+    "conclusion": "Yunus kavmini izinsiz terk etti; imtihan edildi. Karanlıkta tövbe etti; Allah onu kurtardı. Kavmi inandı; bağışlandılar. Yunus hikayesi bir hatırlatmadır: sabır, tövbe ve iman galip gelir.",
+    "moral_lesson": "Bu hikaye bize Yunus'un duası — \"La ilaha illa Anta, Subhanaka, inni kuntu min adh-dhalimin\" — en güçlülerden biri olduğunu öğretir. Tövbe ve birliği ifade eder. İmtihanda bunu kim dua ederse icabet edilir.",
+    "historical_location": "Ninova ve denizde",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lessons_from_yunus_chapter_1",
+        "title": "Peygamberin sabrı",
+        "content": "Yunus sabırsızlandı ve ayrıldı. Bir peygamber sabırlı olmalıdır. Kur'an şöyle buyurur: \"Azim sahibi elçiler gibi sabret.\" (46:35) Sabır temel bir erdemdir. Yunus bu dersi balığın karnında öğrendi."
+      },
+      {
+        "id": "lessons_from_yunus_chapter_2",
+        "title": "Kurtaran dua",
+        "content": "Peygamber Muhammed şöyle dedi: \"Kardeşim Yunus'un duası: Senden başka ilah yoktur! Seni tenzih ederim! Ben zalimlerden oldum. Hiçbir Müslüman bir şey için bunu dua etmez ki Allah ona icabet etmesin.\" (Tirmizi) Bu dua müminler için bir hazinedir. Tövbe ve tesbihi birleştirir."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 37:139",
+        "reference_text": "Saffat Suresi, 139. ayet",
+        "content": "وَإِنَّ يُونُسَ لَمِنَ ٱلْمُرْسَلِينَ",
+        "translation": "And Yunus was indeed among the messengers.",
+        "relevance": "Bu ayet Yunus'u elçi olarak tespit eder."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 68:48",
+        "reference_text": "Kalem Suresi, 48. ayet",
+        "content": "فَلَا تَكُن كَصَاحِبِ ٱلْحُوتِ إِذْ نَادَىٰ وَهُوَ مَكْظُومٌ",
+        "translation": "So do not be like the companion of the fish when he called out, full of resentment.",
+        "relevance": "Bu ayet Yunus hikayesini ders olarak hatırlatır."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Sabr",
+        "arabic_term": "صبر",
+        "definition": "Sabır. Yunus imtihanda sabrı öğrendi.",
+        "pronunciation": "sabr"
+      },
+      {
+        "id": 2,
+        "term": "Du'a",
+        "arabic_term": "دعاء",
+        "definition": "Dua. Yunus'un duası güçlü bir du'adır.",
+        "pronunciation": "dou-a"
+      }
+    ]
+  }
+}

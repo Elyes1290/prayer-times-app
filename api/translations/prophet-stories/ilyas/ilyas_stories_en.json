@@ -1,0 +1,230 @@
+{
+  "ilyas_call": {
+    "title": "The call of Ilyas",
+    "title_arabic": "دعوة إلياس",
+    "introduction": "Ilyas (إلياس عليه السلام), Elijah, is a prophet sent to the people of Israel. The Quran says: \"And Ilyas was indeed among the messengers.\" (37:123) He called his people to abandon the worship of Baal and return to Allah. The people had gone astray by worshipping idols.",
+    "conclusion": "Ilyas preached with firmness. He warned of punishment. Some believed, others rejected him. He remained faithful to his mission despite opposition.",
+    "moral_lesson": "This story teaches us that the prophet must call to monotheism without wavering. Idolatry leads to perdition.",
+    "historical_location": "Palestine (Kingdom of Israel)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "ilyas_call_chapter_1",
+        "title": "The mission of Ilyas",
+        "content": "The Quran relates: \"And Ilyas was indeed among the messengers. When he said to his people: Do you not fear Allah? Do you invoke Baal and forsake the Best of creators?\" (37:123-125) Ilyas was sent to a people who worshipped Baal, an idol. He called them to worship Allah alone. He exhorted them to abandon idolatry."
+      },
+      {
+        "id": "ilyas_call_chapter_2",
+        "title": "The warning",
+        "content": "The Quran says: \"Allah, your Lord and the Lord of your first forefathers?\" (37:126) Ilyas reminded his people that Allah is the Creator. Baal is nothing. Only Allah deserves worship. He warned them of punishment if they persisted in error. His message was clear: return to unity."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 37:123",
+        "reference_text": "Surah As-Saffat, verse 123",
+        "content": "وَإِنَّ إِلْيَاسَ لَمِنَ ٱلْمُرْسَلِينَ",
+        "translation": "And Ilyas was indeed among the messengers.",
+        "relevance": "This verse establishes Ilyas as a messenger."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 37:124-125",
+        "reference_text": "Surah As-Saffat, verses 124-125",
+        "content": "إِذْ قَالَ لِقَوْمِهِۦٓ أَلَا تَتَّقُونَ ۝ أَتَدْعُونَ بَعْلًۭا وَتَذَرُونَ أَحْسَنَ ٱلْخَـٰلِقِينَ",
+        "translation": "When he said to his people: Do you not fear Allah? Do you invoke Baal and forsake the Best of creators?",
+        "relevance": "This verse describes Ilyas's call against Baal."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Ilyas",
+        "arabic_term": "إلياس",
+        "definition": "Elijah in Arabic. Prophet sent to the people of Israel.",
+        "pronunciation": "il-yas"
+      },
+      {
+        "id": 2,
+        "term": "Baal",
+        "arabic_term": "بعْل",
+        "definition": "Idol worshipped by the people of Israel. Ilyas fought its cult.",
+        "pronunciation": "ba'l"
+      }
+    ]
+  },
+  "ilyas_baal": {
+    "title": "Ilyas and the challenge of Baal",
+    "title_arabic": "إلياس وبعل",
+    "introduction": "Ilyas challenged the worshippers of Baal. The Quran says: \"Do you invoke Baal and forsake the Best of creators?\" (37:125) He proposed a test: each would invoke their deity. The true deity would respond with fire. The idolaters invoked Baal in vain.",
+    "conclusion": "Baal did not respond. Ilyas invoked Allah. Fire descended from heaven and consumed his offering. Truth triumphed. Hearts opened to Islam.",
+    "moral_lesson": "This story teaches us that idols are powerless. Only Allah answers invocation. Truth ultimately triumphs.",
+    "historical_location": "Mount Carmel, Palestine",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "ilyas_baal_chapter_1",
+        "title": "The challenge",
+        "content": "The Quran relates Ilyas's call: \"Do you not fear Allah?\" (37:124) Ilyas gathered the people and the prophets of Baal. He proposed a test: each would prepare an offering. The worshippers of Baal would invoke their idol. Ilyas would invoke Allah. Whoever responded with fire would be the true God. The idolaters accepted."
+      },
+      {
+        "id": "ilyas_baal_chapter_2",
+        "title": "Allah's victory",
+        "content": "The Quran says: \"Allah, your Lord and the Lord of your first forefathers?\" (37:126) The prophets of Baal invoked all day. Nothing. Baal did not respond. Then Ilyas invoked Allah. Fire descended from heaven. It consumed the offering, the wood and the water. The people cried: \"Allah is the true God!\" Many believed."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 37:125",
+        "reference_text": "Surah As-Saffat, verse 125",
+        "content": "أَتَدْعُونَ بَعْلًۭا وَتَذَرُونَ أَحْسَنَ ٱلْخَـٰلِقِينَ",
+        "translation": "Do you invoke Baal and forsake the Best of creators?",
+        "relevance": "This verse recalls the challenge against Baal."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 37:127",
+        "reference_text": "Surah As-Saffat, verse 127",
+        "content": "فَكَذَّبُوهُ فَإِنَّهُمْ لَمُحْضَرُونَ",
+        "translation": "They called him a liar. They will be brought (to punishment).",
+        "relevance": "This verse relates the rejection of Ilyas by some."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Baal",
+        "arabic_term": "بعْل",
+        "definition": "Idol. The worshippers of Baal were defeated.",
+        "pronunciation": "ba'l"
+      },
+      {
+        "id": 2,
+        "term": "Khalq",
+        "arabic_term": "خَلْق",
+        "definition": "Creation. Allah is ahsan al-khaliqin, the Best of creators.",
+        "pronunciation": "khalq"
+      }
+    ]
+  },
+  "ilyas_miracle": {
+    "title": "The miracles of Ilyas",
+    "title_arabic": "معجزات إلياس",
+    "introduction": "Allah granted Ilyas miracles to confirm his mission. The Quran says: \"Peace upon Ilyas! Thus do We reward the doers of good. He was indeed among Our believing servants.\" (37:129-132) Among his miracles: fire from heaven, resurrection of a dead person, and multiplication of food.",
+    "conclusion": "Ilyas's miracles strengthened the faith of believers. They proved that he was indeed a prophet of Allah. Creation obeys its Creator.",
+    "moral_lesson": "This story teaches us that miracles are signs from Allah. They confirm the truth of the prophetic message.",
+    "historical_location": "Palestine",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "ilyas_miracle_chapter_1",
+        "title": "Fire from heaven",
+        "content": "The Quran relates: \"Peace upon Ilyas!\" (37:130) The miracle of fire on Mount Carmel was the most famous. Ilyas invoked Allah. Fire descended and consumed the offering. This miracle showed that only Allah has power. Idols are powerless. Many people believed that day."
+      },
+      {
+        "id": "ilyas_miracle_chapter_2",
+        "title": "The reward",
+        "content": "The Quran says: \"Thus do We reward the doers of good. He was indeed among Our believing servants.\" (37:131-132) Ilyas was rewarded for his faithfulness. Allah protected him from his enemies. He was raised to heaven without dying, according to some traditions. His name remains blessed among the prophets."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 37:129-130",
+        "reference_text": "Surah As-Saffat, verses 129-130",
+        "content": "وَسَلَـٰمٌ عَلَىٰٓ إِلْ يَاسِينَ ۝ إِنَّا كَذَٰلِكَ نَجْزِى ٱلْمُحْسِنِينَ",
+        "translation": "Peace upon Ilyas! Thus do We reward the doers of good.",
+        "relevance": "This verse establishes Ilyas's reward."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 6:85",
+        "reference_text": "Surah Al-An'am, verse 85",
+        "content": "وَزَكَرِيَّا وَيَحْيَىٰ وَعِيسَىٰ وَإِلْيَاسَ كُلٌّۭ مِّنَ ٱلصَّـٰلِحِينَ",
+        "translation": "And Zakariya, Yahya, Isa and Ilyas: all among the righteous.",
+        "relevance": "This verse places Ilyas among the righteous prophets."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Muhsin",
+        "arabic_term": "محسن",
+        "definition": "Doer of good. Ilyas was muhsin and was rewarded.",
+        "pronunciation": "mouh-sin"
+      },
+      {
+        "id": 2,
+        "term": "Mu'min",
+        "arabic_term": "مؤمن",
+        "definition": "Believer. Ilyas was among the mu'minin.",
+        "pronunciation": "mou-min"
+      }
+    ]
+  },
+  "lessons_from_ilyas": {
+    "title": "Lessons from the story of Ilyas",
+    "title_arabic": "دروس من قصة إلياس",
+    "introduction": "Ilyas is the prophet who fought idolatry. The Quran says: \"And Ilyas was indeed among the messengers.\" (37:123) He called his people to abandon Baal and worship Allah. His courage and firmness remain a model.",
+    "conclusion": "Ilyas confronted idolatry. He challenged Baal and triumphed. His message: Allah alone deserves worship. This lesson is eternal.",
+    "moral_lesson": "This story teaches us that monotheism (tawhid) is the foundation of faith. Any form of association with Allah leads to error.",
+    "historical_location": "Palestine",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lessons_from_ilyas_chapter_1",
+        "title": "The fight against idolatry",
+        "content": "The Quran says: \"Do you invoke Baal and forsake the Best of creators?\" (37:125) Ilyas did not compromise. He clearly called to unity. Idolatry (shirk) is the greatest sin. The believer must reject it entirely. Ilyas is a model of firmness in the call."
+      },
+      {
+        "id": "lessons_from_ilyas_chapter_2",
+        "title": "Trust in Allah",
+        "content": "Ilyas challenged hundreds of prophets of Baal. He was alone. But he had Allah. Fire descended and proved the truth. The Quran reminds: \"Thus do We reward the doers of good.\" (37:131) Whoever relies on Allah will not be disappointed. Victory belongs to the believers."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 37:123-132",
+        "reference_text": "Surah As-Saffat, verses 123-132",
+        "content": "وَإِنَّ إِلْيَاسَ لَمِنَ ٱلْمُرْسَلِينَ ۝ إِذْ قَالَ لِقَوْمِهِۦٓ أَلَا تَتَّقُونَ",
+        "translation": "And Ilyas was among the messengers. When he said to his people: Do you not fear Allah?",
+        "relevance": "This passage summarizes Ilyas's story."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 37:132",
+        "reference_text": "Surah As-Saffat, verse 132",
+        "content": "إِنَّهُۥ كَانَ مِنْ عِبَادِنَا ٱلْمُؤْمِنِينَ",
+        "translation": "He was indeed among Our believing servants.",
+        "relevance": "This verse praises Ilyas as a believer."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Tawhid",
+        "arabic_term": "توحيد",
+        "definition": "Oneness of Allah. Ilyas called to tawhid.",
+        "pronunciation": "taw-hid"
+      },
+      {
+        "id": 2,
+        "term": "Shirk",
+        "arabic_term": "شرك",
+        "definition": "Association, idolatry. Ilyas fought shirk.",
+        "pronunciation": "chirk"
+      }
+    ]
+  }
+}

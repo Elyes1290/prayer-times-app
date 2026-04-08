@@ -1,0 +1,344 @@
+{
+  "yusuf_dream": {
+    "title": "Yusuf'un Rüyası",
+    "title_arabic": "رؤيا يوسف",
+    "introduction": "Yusuf (يوسف عليه السلام), Ya'qub'un (Yakup) oğlu, İbrahim'in torunudur. Kur'an der ki: « Sana en güzel kıssaları anlatıyoruz. » (12:3) Yusuf peygamberlik rüyası gördü: on bir yıldız, güneş ve ay ona secde etti. Babası Ya'qub bu rüyanın olağanüstü bir kaderi müjdelediğini anladı.",
+    "conclusion": "Ya'qub, Yusuf'a bu rüyayı kardeşlerine anlatmamasını tavsiye etti, çünkü onların kıskançlığından korkuyordu. Kardeşlerin kıskançlığı yakında ortaya çıkacaktı.",
+    "moral_lesson": "Bu hikaye bize peygamberlerin rüyalarının vahyin bir biçimi olduğunu öğretir. Kıskançlık kötülüğe yol açabilir; ondan korkulmalıdır.",
+    "historical_location": "Kenan (Filistin)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "yusuf_dream_chapter_1",
+        "title": "Görüm",
+        "content": "Kur'an bildirir: « Yusuf babasına dedi ki: Ey babam! On bir yıldız, güneş ve ay gördüm; onları bana secde ederken gördüm. » (12:4) Yusuf, henüz çocukken rüyasını babasına anlattı. On bir yıldız on bir kardeşini temsil ediyordu; güneş ve ay, babası ve annesi (veya halası). Secde ona gösterilecek saygıyı simgeliyordu."
+      },
+      {
+        "id": "yusuf_dream_chapter_2",
+        "title": "Ya'qub'un Uyarısı",
+        "content": "Kur'an der ki: « Dedi ki: Ey oğlum! Görümünü kardeşlerine anlatma, yoksa sana tuzak kurarlar. Şüphesiz şeytan insan için apaçık bir düşmandır. Böylece Rabbin seni seçecek ve sana rüya yorumunu öğretecek, ve nimetini sana ve Ya'qub ailesine tamamlayacak, tıpkı daha önce iki atan İbrahim ve İshak'a tamamladığı gibi. Rabbin her şeyi bilendir, hikmet sahibidir. » (12:5-6) Ya'qub rüyanın önemini anladı ve oğlunu kıskançlıktan korudu."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Kur'an 12:4",
+        "reference_text": "Yusuf suresi, 4. ayet",
+        "content": "إِذْ قَالَ يُوسُفُ لِأَبِيهِ يَـٰٓأَبَتِ إِنِّى رَأَيْتُ أَحَدَ عَشَرَ كَوْكَبًۭا وَٱلشَّمْسَ وَٱلْقَمَرَ رَأَيْتُهُمْ لِى سَـٰجِدِينَ",
+        "translation": "Yusuf babasına dedi ki: Ey babam! On bir yıldız, güneş ve ay gördüm; onları bana secde ederken gördüm.",
+        "relevance": "Bu ayet Yusuf'un peygamberlik rüyasını tesis eder."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Kur'an 12:5-6",
+        "reference_text": "Yusuf suresi, 5-6. ayetler",
+        "content": "قَالَ يَـٰبُنَىَّ لَا تَقْصُصْ رُءْيَاكَ عَلَىٰٓ إِخْوَتِكَ فَيَكِيدُوا۟ لَكَ كَيْدًا ۖ إِنَّ ٱلشَّيْطَـٰنَ لِلْإِنسَـٰنِ عَدُوٌّ مُّبِينٌ",
+        "translation": "Dedi ki: Ey oğlum! Görümünü kardeşlerine anlatma, yoksa sana tuzak kurarlar. Şüphesiz şeytan insan için apaçık bir düşmandır.",
+        "relevance": "Bu ayetler Ya'qub'un hikmetini ve Yusuf'a olan korumasını gösterir."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Yusuf",
+        "arabic_term": "يوسف",
+        "definition": "Arapçada Yusuf. Ya'qub'un oğlu, Allah'ın peygamberi.",
+        "pronunciation": "you-souf"
+      },
+      {
+        "id": 2,
+        "term": "Ya'qub",
+        "arabic_term": "يعقوب",
+        "definition": "Arapçada Yakup. Yusuf'un babası, Allah'ın peygamberi.",
+        "pronunciation": "ya-qoub"
+      }
+    ]
+  },
+  "yusuf_pit": {
+    "title": "Yusuf Kuyuya Atıldı",
+    "title_arabic": "يوسف في البئر",
+    "introduction": "Yusuf'un kardeşleri, Ya'qub'un ona olan sevgisine kıskançlık duyarak bir komplo kurdular. Onu oyun bahanesiyle götürüp bir kuyunun dibine attılar. Babalarına sahte kanla lekeli bir gömlek getirdiler ve bir kurdun onu yediğini iddia ettiler.",
+    "conclusion": "Bir kervan geçti ve Yusuf'u kuyuda buldu. Onu Mısır'da değersiz bir fiyata sattılar. Yusuf Kenan'dan ayrıldı ama Allah'ın onun için bir planı vardı.",
+    "moral_lesson": "Bu hikaye bize insanların kötülüğünün Allah'ın planına hizmet edebileceğini öğretir. Bir imtihan gibi görünen şey yükselişe yol açabilir.",
+    "historical_location": "Kenan'dan Mısır'a",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "yusuf_pit_chapter_1",
+        "title": "Kardeşlerin Komplosu",
+        "content": "Kur'an bildirir: « Dediler ki: Yusuf ve kardeşi babamıza bizden daha sevgili, oysa biz bir topluluğuz. Babamız açıkça sapıklık içindedir. Yusuf'u öldürün veya onu uzak bir diyara atın. » (12:8-9) Bir kardeş onu öldürmek yerine kuyunun dibine atmayı önerdi. Bu hile üzerinde anlaştılar ve Ya'qub'dan Yusuf'u götürmek için izin istediler."
+      },
+      {
+        "id": "yusuf_pit_chapter_2",
+        "title": "Kuyu ve Kervan",
+        "content": "Kur'an der ki: « Onu götürdüklerinde ve onu kuyunun dibine atmak için anlaştıklarında, ona vahyettik: Onlara bu işlerini mutlaka hatırlatacaksın, onlar farkında olmayacaklar. » (12:15) Yusuf kuyuya atıldı. Bir kervan su içmeye geldi. Bir adam kovasını indirdi ve haykırdı: « İşte bir oğlan! » Onu satmak için gizlediler. Onu Mısır'da nüfuzlu bir adama (El-Aziz) sattılar. Kur'an sonuçlandırır: « Allah plan kuranların en hayırlısıdır. » (12:76)"
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Kur'an 12:8-9",
+        "reference_text": "Yusuf suresi, 8-9. ayetler",
+        "content": "إِذْ قَالُوا۟ لَيُوسُفُ وَأَخُوهُ أَحَبُّ إِلَىٰٓ أَبِينَا مِنَّا وَنَحْنُ عُصْبَةٌ إِنَّ أَبَانَا لَفِى ضَلَـٰلٍۢ مُّبِينٍ ۝ ٱقْتُلُوا۟ يُوسُفَ أَوِ ٱطْرَحُوهُ أَرْضًۭا",
+        "translation": "Dediler ki: Yusuf ve kardeşi babamıza bizden daha sevgili. Yusuf'u öldürün veya onu uzak bir diyara atın.",
+        "relevance": "Bu ayetler kardeşlerin kıskançlığını ve komplosunu anlatır."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Kur'an 12:15",
+        "reference_text": "Yusuf suresi, 15. ayet",
+        "content": "فَلَمَّا ذَهَبُوا۟ بِهِۦ وَأَجْمَعُوٓا۟ أَن يَجْعَلُوهُ فِى غَيَابَتِ ٱلْجُبِّ ۚ وَأَوْحَيْنَآ إِلَيْهِ لَتُنَبِّئَنَّهُم بِأَمْرِهِمْ هَـٰذَا وَهُمْ لَا يَشْعُرُونَ",
+        "translation": "Onu götürdüklerinde ve onu kuyunun dibine atmak için anlaştıklarında, ona vahyettik: Onlara bu işlerini mutlaka hatırlatacaksın, onlar farkında olmayacaklar.",
+        "relevance": "Bu ayet Yusuf'a ilahi vahyi ve gelecek vahyin vaadini gösterir."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Al-Jubb",
+        "arabic_term": "الجب",
+        "definition": "Kuyu. Kardeşler Yusuf'u kuyunun dibine attı.",
+        "pronunciation": "al-joubb"
+      },
+      {
+        "id": 2,
+        "term": "Al-Aziz",
+        "arabic_term": "العزيز",
+        "definition": "Nüfuzlu adam. Yusuf'u satın alan Mısırlı vezir.",
+        "pronunciation": "al-a-ziz"
+      }
+    ]
+  },
+  "yusuf_egypt": {
+    "title": "Yusuf Mısır'da ve İmtihan",
+    "title_arabic": "يوسف في مصر والابتلاء",
+    "introduction": "Yusuf Mısır'da El-Aziz'in evinde büyüdü. Ergenliğe ulaştı ve Allah'tan hikmet ve ilim aldı. El-Aziz'in karısı onu arzuladı ve onu baştan çıkarmaya çalıştı. Yusuf reddetti, günaha hapse tercih etti. Kur'an der ki: « Böylece ondan kötülüğü ve fuhşu uzaklaştırdık. O bizim seçkin kullarımızdandı. » (12:24)",
+    "conclusion": "Kadın Yusuf'u suçladı. Aileden bir tanık gömleğini incelemeyi önerdi: önden yırtıksa o doğru söylemişti; arkadan yırtıksa Yusuf doğru söylemişti. Gömlek arkadan yırtıktı. Yusuf aklanmış ama şüpheleri yatıştırmak için hapsedilmişti.",
+    "moral_lesson": "Bu hikaye bize imtihan pahasına bile günahtan kaçınmayı öğretir. İffet ve Allah korkusu her şeyden önce gelir.",
+    "historical_location": "Mısır",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "yusuf_egypt_chapter_1",
+        "title": "İmtihan",
+        "content": "Kur'an bildirir: « Onun evinde kalan kadın onu baştan çıkarmaya çalıştı. Kapıları kapattı ve dedi: Gel! Dedi ki: Allah korusun! O benim efendim, bana güzel bir barınak verdi. Zalimler asla başarılı olmaz. » (12:23) Yusuf reddetti. Kadın onu kovaladı. Kapıya doğru gittiler. Gömleğini arkadan yırttı. Kapıda efendiyi buldular. Kadın Yusuf'u suçladı. Yusuf dedi: « Beni baştan çıkarmaya çalışan oydu. »"
+      },
+      {
+        "id": "yusuf_egypt_chapter_2",
+        "title": "Kanıtlanan Masumiyet",
+        "content": "Kur'an der ki: « Ailesinden bir tanık dedi: Gömleği önden yırtıksa o doğru söylemiştir ve o yalancılardandır. Gömleği arkadan yırtıksa o yalan söylemiştir ve o doğrulardandır. » (12:26-27) Gömleğin arkadan yırtık olduğu görülünce El-Aziz karısına dedi: « Bu sizin hilenizdir. Hileniz gerçekten büyüktür. » Yusuf dedi: « Allah korusun! » Masumiyetine rağmen Yusuf dedikodulardan kaçınmak için hapsedilmeyi istedi. Hapse günaha tercih etti."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Kur'an 12:23-24",
+        "reference_text": "Yusuf suresi, 23-24. ayetler",
+        "content": "وَرَٰوَدَتْهُ ٱلَّتِى هُوَ فِى بَيْتِهَا عَن نَّفْسِهِۦ ۖ وَغَلَّقَتِ ٱلْأَبْوَٰبَ وَقَالَتْ هَيْتَ لَكَ ۚ قَالَ مَعَاذَ ٱللَّهِ ۖ إِنَّهُۥ رَبِّىٓ أَحْسَنَ مَثْوَاىَ ۖ إِنَّهُۥ لَا يُفْلِحُ ٱلظَّـٰلِمُونَ",
+        "translation": "Onun evinde kalan kadın onu baştan çıkarmaya çalıştı. Kapıları kapattı ve dedi: Gel! Dedi ki: Allah korusun! O benim efendim, bana güzel bir barınak verdi. Zalimler asla başarılı olmaz.",
+        "relevance": "Bu ayetler imtihanı ve Yusuf'un direncini anlatır."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Kur'an 12:24",
+        "reference_text": "Yusuf suresi, 24. ayet",
+        "content": "وَلَقَدْ هَمَّتْ بِهِۦ ۖ وَهَمَّ بِهَا لَوْلَآ أَن رَّأَىٰ بُرْهَـٰنَ رَبِّهِۦ ۚ كَذَٰلِكَ لِنَصْرِفَ عَنْهُ ٱلسُّوٓءَ وَٱلْفَحْشَآءَ ۚ إِنَّهُۥ مِنْ عِبَادِنَا ٱلْمُخْلَصِينَ",
+        "translation": "Böylece ondan kötülüğü ve fuhşu uzaklaştırdık. O bizim seçkin kullarımızdandı.",
+        "relevance": "Bu ayet ilahi korumayı ve Yusuf'un seçilmişliğini teyit eder."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Burhan",
+        "arabic_term": "برهان",
+        "definition": "Delil, işaret. Yusuf onu koruyan Rabbinin delilini gördü.",
+        "pronunciation": "bour-han"
+      },
+      {
+        "id": 2,
+        "term": "Mukhlisin",
+        "arabic_term": "المخلصين",
+        "definition": "Seçilmişler, saf olanlar. Yusuf Allah'ın seçkin kullarındandı.",
+        "pronunciation": "moukh-li-sine"
+      }
+    ]
+  },
+  "yusuf_prison": {
+    "title": "Yusuf Hapiste ve Rüya Yorumu",
+    "title_arabic": "يوسف في السجن وتأويل الأحلام",
+    "introduction": "Yusuf hapsedildi. İki genç onunla birlikte hapse girdi. Her biri bir rüya gördü ve Yusuf'tan yorumlamasını istedi. Yusuf rüyaları açıkladı ve fırsattan yararlanarak yalnızca Allah'a ibadete çağırdı. İkisinden biri serbest bırakılacak ve krala hizmet edecekti; diğeri çarmıha gerilecekti.",
+    "conclusion": "Mısır kralı rahatsız edici bir rüya gördü. Serbest bırakılan adam Yusuf'u hatırladı. Yusuf rüyayı yorumladı: yedi yıl bolluk ardından yedi yıl kıtlık. Kral Yusuf'u hapisten çıkardı ve onu vezir atadı.",
+    "moral_lesson": "Bu hikaye bize sabır ve ilmin Allah'tan geldiğini öğretir. Yusuf rüyaları yorumlamadan önce imana çağırmak için yeteneğini kullandı.",
+    "historical_location": "Mısır",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "yusuf_prison_chapter_1",
+        "title": "İki Gencin Rüyaları",
+        "content": "Kur'an bildirir: « Onunla birlikte iki genç hapse girdi. Biri dedi: Kendimi üzüm sıkarken görüyorum. Diğeri dedi: Kendimi başımda kuşların yediği ekmek taşırken görüyorum. Yorumlarını bize bildir; seni iyilerden görüyoruz. » (12:36) Yusuf dedi: « Size verilen yiyecek size gelmeden önce size bildirmeden size gelmeyecek. Bu Rabbimin bana öğrettiğidir. Allah'a inanmayan bir kavmin dinini terk ettim. » (12:37) Sonra yorumladı: biri serbest bırakılacak ve krala hizmet edecekti; diğeri çarmıha gerilecek ve kuşlar başından yiyecekti."
+      },
+      {
+        "id": "yusuf_prison_chapter_2",
+        "title": "Kralın Rüyası",
+        "content": "Kur'an der ki: « Kral dedi: Yedi semiz ineğin yedi zayıf tarafından yenildiğini ve yedi yeşil başak ile aynı sayıda kuru başak görüyorum. » (12:43) Kahinler yorumlayamadı. Serbest bırakılan adam Yusuf'u hatırladı. Yusuf dedi: « Yedi yıl ardı ardına ekeceksiniz. Biçtiklerinizi başakta bırakın, yiyeceğiniz az bir kısmı hariç. Sonra ardından yedi yıl kıtlık gelecek. » (12:47-48) Kral Yusuf'u serbest bıraktı ve onu ambarların sorumlusu atadı."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Kur'an 12:36",
+        "reference_text": "Yusuf suresi, 36. ayet",
+        "content": "وَدَخَلَ مَعَهُ ٱلسِّجْنَ فَتَيَانِ ۖ قَالَ أَحَدُهُمَآ إِنِّىٓ أَرَىٰنِىٓ أَعْصِرُ خَمْرًۭا ۖ وَقَالَ ٱلْـَٔاخَرُ إِنِّىٓ أَرَىٰنِىٓ أَحْمِلُ فَوْقَ رَأْسِى خُبْزًۭا تَأْكُلُ ٱلطَّيْرُ مِنْهُ",
+        "translation": "Onunla birlikte iki genç hapse girdi. Biri dedi: Kendimi üzüm sıkarken görüyorum. Diğeri dedi: Kendimi başımda kuşların yediği ekmek taşırken görüyorum.",
+        "relevance": "Bu ayet iki mahkumun rüyalarını anlatır."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Kur'an 12:43-49",
+        "reference_text": "Yusuf suresi, 43-49. ayetler",
+        "content": "وَقَالَ ٱلْمَلِكُ إِنِّىٓ أَرَىٰ سَبْعَ بَقَرَٰتٍۢ سِمَانٍۢ يَأْكُلُهُنَّ سَبْعٌ عِجَافٌ",
+        "translation": "Kral dedi: Yedi semiz ineğin yedi zayıf tarafından yenildiğini görüyorum.",
+        "relevance": "Bu ayetler kralın rüyasını ve Yusuf'un yorumunu anlatır."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Ta'wil",
+        "arabic_term": "تأويل",
+        "definition": "Yorum. Yusuf rüyaları Allah'ın ilmiyle yorumluyordu.",
+        "pronunciation": "ta-wil"
+      },
+      {
+        "id": 2,
+        "term": "Sijn",
+        "arabic_term": "سجن",
+        "definition": "Hapishane. Yusuf vezir atanmadan önce hapsedildi.",
+        "pronunciation": "sijn"
+      }
+    ]
+  },
+  "yusuf_reunion": {
+    "title": "Kardeşlerle Buluşma",
+    "title_arabic": "لقاء يوسف بإخوته",
+    "introduction": "Kıtlık yılları bölgeyi vurdu. Yusuf'un kardeşleri erzak almak için Mısır'a geldi. Yusuf onları tanıdı ama onlar onu tanımadı. Onları karşıladı, kardeşi Bünyamin'i alıkoydu ve onları denedi. Sonunda kendini onlara açıkladı: « Ben Yusuf'um ve bu kardeşimdir. Allah bize lütfetti. » (12:90)",
+    "conclusion": "Yusuf kardeşlerinden tüm aileyi getirmelerini istedi. Ya'qub, gözü kederden zayıflamıştı, Yusuf'un gömleği yüzüne atıldığında gözü açıldı. Aile Mısır'da bir araya geldi. Yusuf'un rüyası gerçekleşti: babası, annesi ve kardeşleri saygı işareti olarak ona secde ettiler.",
+    "moral_lesson": "Bu hikaye bize bağışlama ve merhameti öğretir. Yusuf kardeşlerini bağışladı ve her şeyi Allah'ın hikmetine atfetti.",
+    "historical_location": "Mısır",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "yusuf_reunion_chapter_1",
+        "title": "Mısır'da Kardeşler",
+        "content": "Kur'an bildirir: « Yusuf'un kardeşleri geldi ve ona girdiler. Onları tanıdı ama onlar onu tanımadılar. » (12:58) Yusuf onları erzakla tedarik etti ve bir sonraki sefer kardeşleri Bünyamin'i getirmelerini istedi. Bünyamin ile döndüklerinde Yusuf Bünyamin'in eşyalarına bir kase koydu. Bünyamin'i alıkoydu. Kardeşler yalvardı. Yusuf onlara dedi: « Cehaletinizde Yusuf'a ve kardeşine ne yaptığınızı biliyor musunuz? » (12:89) Dediler: « Sen Yusuf musun? » Dedi: « Ben Yusuf'um ve bu kardeşimdir. Allah bize lütfetti. »"
+      },
+      {
+        "id": "yusuf_reunion_chapter_2",
+        "title": "Ya'qub ile Buluşma",
+        "content": "Kur'an der ki: « Gömleğimi alın ve babamın yüzüne atın; gözü açılacak. Ve tüm ailenizi bana getirin. » (12:93) Kervan ayrıldığında Ya'qub dedi: « Yusuf'un kokusunu alıyorum. » Ona dediler: « Eski sapıklığındasın. » Müjdeci geldiğinde gömleği Ya'qub'un yüzüne attı ve gözü açıldı. Dedi: « Size Allah'tan bildiğim şeyi bilmediğinizi söylemedim mi? » (12:96) Aile Mısır'a gitti. Yusuf anne babasını tahta yükseltti. Ona secde ettiler. Rüya gerçekleşti."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Kur'an 12:58",
+        "reference_text": "Yusuf suresi, 58. ayet",
+        "content": "وَجَآءَ إِخْوَةُ يُوسُفَ فَدَخَلُوا۟ عَلَيْهِ فَعَرَفَهُمْ وَهُمْ لَهُۥ مُنكِرُونَ",
+        "translation": "Yusuf'un kardeşleri geldi ve ona girdiler. Onları tanıdı ama onlar onu tanımadılar.",
+        "relevance": "Bu ayet kardeşlerin Yusuf ile ilk karşılaşmasını anlatır."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Kur'an 12:100",
+        "reference_text": "Yusuf suresi, 100. ayet",
+        "content": "وَرَفَعَ أَبَوَيْهِ عَلَى ٱلْعَرْشِ وَخَرُّوا۟ لَهُۥ سُجَّدًۭا ۖ وَقَالَ يَـٰٓأَبَتِ هَـٰذَا تَأْوِيلُ رُءْيَـٰىَ مِن قَبْلُ",
+        "translation": "Anne babasını tahta yükseltti ve ona secde ettiler. Dedi: Ey babam! Bu önceki rüyamın yorumudur.",
+        "relevance": "Bu ayet Yusuf'un rüyasının gerçekleşmesini gösterir."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Sujud",
+        "arabic_term": "سجود",
+        "definition": "Secde. Yusuf'un anne babası saygı işareti olarak ona secde ettiler.",
+        "pronunciation": "sou-joud"
+      },
+      {
+        "id": 2,
+        "term": "Arsh",
+        "arabic_term": "عرش",
+        "definition": "Taht. Yusuf anne babasını tahta yükseltti.",
+        "pronunciation": "arch"
+      }
+    ]
+  },
+  "lessons_from_yusuf": {
+    "title": "Yusuf Hikayesinin Dersleri",
+    "title_arabic": "دروس من قصة يوسف",
+    "introduction": "Kur'an Yusuf hikayesini « en güzel kıssalar » (12:3) olarak sunar. Sabır, iffet, bağışlama ve Allah'a güveni öğretir. Yusuf kuyu, fitne ve hapishane imtihanından geçti ama her imtihan onu kaderine yaklaştırdı.",
+    "conclusion": "Yusuf sonunda dedi: « Ey babam! Bu önceki rüyamın yorumudur. Rabbim onu gerçekleştirdi. Beni hapisten çıkardığında ve şeytan benimle kardeşlerim arasına nifak soktuktan sonra sizi çölden getirdiğinde bana lütfetti. Rabbim dilediğinde yumuşaktır. O her şeyi bilendir, hikmet sahibidir. » (12:100)",
+    "moral_lesson": "Bu hikaye bize sabır (sabr) ve Allah'a güvenin başarıya götürdüğünü öğretir. İnsanların kötülüğü ilahi plana hizmet edebilir.",
+    "historical_location": "Kenan'dan Mısır'a",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lessons_from_yusuf_chapter_1",
+        "title": "En Güzel Kıssalar",
+        "content": "Kur'an der ki: « Sana bu Kur'an'ı vahyetmekle en güzel kıssaları anlatıyoruz, oysa daha önce gafillerdendin. » (12:3) Yusuf hikayesi düşünenler için dersler içerir: kıskançlık kötülüğe yol açar; iffet korur; ilim Allah'tan gelir; bağışlama özgürleştirir; ve Allah'ın planı insanların hilelerine rağmen gerçekleşir."
+      },
+      {
+        "id": "lessons_from_yusuf_chapter_2",
+        "title": "Müminler İçin Bir İşaret",
+        "content": "Kur'an sureyi şöyle sonuçlandırır: « Onların kıssalarında akıl sahipleri için elbette bir ibret vardır. Uydurulmuş bir söz değildir, ancak önündekinin tasdiki, her şeyin ayrıntılı açıklaması ve inanan bir toplum için hidayet ve rahmettir. » (12:111) Yusuf hikayesi inananlar için bir işarettir. Allah'ın sabredenler ve takvalılarla birlikte olduğunu gösterir."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Kur'an 12:3",
+        "reference_text": "Yusuf suresi, 3. ayet",
+        "content": "نَحْنُ نَقُصُّ عَلَيْكَ أَحْسَنَ ٱلْقَصَصِ بِمَآ أَوْحَيْنَآ إِلَيْكَ هَـٰذَا ٱلْقُرْءَانَ",
+        "translation": "Sana bu Kur'an'ı vahyetmekle en güzel kıssaları anlatıyoruz.",
+        "relevance": "Bu ayet Yusuf hikayesini en güzel olarak sunar."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Kur'an 12:111",
+        "reference_text": "Yusuf suresi, 111. ayet",
+        "content": "لَقَدْ كَانَ فِى قَصَصِهِمْ عِبْرَةٌۭ لِّأُو۟لِى ٱلْأَلْبَـٰبِ ۗ مَا كَانَ حَدِيثًۭا يُفْتَرَىٰ وَلَـٰكِن تَصْدِيقَ ٱلَّذِى بَيْنَ يَدَيْهِ وَتَفْصِيلَ كُلِّ شَىْءٍۢ وَهُدًۭى وَرَحْمَةًۭ لِّقَوْمٍۢ يُؤْمِنُونَ",
+        "translation": "Onların kıssalarında akıl sahipleri için elbette bir ibret vardır. Uydurulmuş bir söz değildir, ancak tasdik, ayrıntılı açıklama, hidayet ve inanan bir toplum için rahmettir.",
+        "relevance": "Bu ayet sureyi sonuçlandırır ve dersi vurgular."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Sabr",
+        "arabic_term": "صبر",
+        "definition": "Sabır. Yusuf tüm imtihanlarında sabır gösterdi.",
+        "pronunciation": "sabr"
+      },
+      {
+        "id": 2,
+        "term": "Ibra",
+        "arabic_term": "عبرة",
+        "definition": "Ders, örnek. Peygamberlerin hikayeleri insanlık için derslerdir.",
+        "pronunciation": "ib-ra"
+      }
+    ]
+  }
+}

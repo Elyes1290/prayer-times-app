@@ -1,0 +1,748 @@
+{
+  "musa_birth": {
+    "title": "De geboorte van Musa en het paleis van de Farao",
+    "title_arabic": "مولد موسى وقصر فرعون",
+    "introduction": "Musa (موسى عليه السلام) is een van de grootste profeten die in de Koran worden genoemd. Allah zegt: \"Wij vertellen jou in waarheid het verhaal van Mozes en de Farao, voor mensen die geloven.\" (28:3) De Farao beval alle pasgeboren mannelijke kinderen van de Kinderen van Israël te doden. De moeder van Musa legde hem in een kist en vertrouwde hem aan de rivier toe. De kist werd gevonden door het huishouden van de Farao.",
+    "conclusion": "Musa groeide op in het paleis van de Farao, gezoogd door zijn eigen moeder die Allah had geïnspireerd. Hij ontving wijsheid en kennis. Zijn lot was door de Schepper getekend.",
+    "moral_lesson": "Dit verhaal leert ons dat Allah hen beschermt die Hij kiest. Het goddelijke plan wordt vervuld ondanks de samenzweringen van tirannen.",
+    "historical_location": "Oud-Egypte",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "musa_birth_chapter_1",
+        "title": "Het decreet van de Farao",
+        "content": "De Koran vermeldt: \"De Farao was hoogmoedig in het land; hij had zijn volk in facties verdeeld om een groep onder hen te verzwakken, hun zonen te slachten en hun vrouwen te sparen. Hij behoorde tot de verdervers.\" (28:4) De Farao vreesde dat de Kinderen van Israël sterk zouden worden. Hij beval alle pasgeboren jongens te doden. De moeder van Musa ontving goddelijke inspiratie."
+      },
+      {
+        "id": "musa_birth_chapter_2",
+        "title": "De kist op de Nijl",
+        "content": "De Koran zegt: \"En Wij openbaarden aan de moeder van Mozes: Zoog hem. En wanneer je voor hem vreest, werp hem dan in de rivier. En vrees niet en treur niet. Wij zullen hem aan jou teruggeven en hem tot een van de boodschappers maken.\" (28:7) Zij legde Musa in een kist en vertrouwde hem aan de Nijl toe. De zuster van Musa volgde van verre. De kist werd gevonden door de vrouw van de Farao die zei: \"Een vreugde voor mij en voor jou! Dood hem niet. Hij kan ons van nut zijn, of wij kunnen hem als zoon adopteren.\" (28:9)"
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 28:4",
+        "reference_text": "Soera Al-Qasas, vers 4",
+        "content": "إِنَّ فِرْعَوْنَ عَلَا فِى ٱلْأَرْضِ وَجَعَلَ أَهْلَهَا شِيَعًۭا يَسْتَضْعِفُ طَآئِفَةًۭ مِّنْهُمْ يُذَبِّحُ أَبْنَآءَهُمْ وَيَسْتَحْىِۦ نِسَآءَهُمْ ۚ إِنَّهُۥ كَانَ مِنَ ٱلْمُفْسِدِينَ",
+        "translation": "De Farao was hoogmoedig in het land; hij had zijn volk in facties verdeeld, hun zonen slachtend en hun vrouwen sparend.",
+        "relevance": "Dit vers beschrijft de tirannie van de Farao."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 28:7",
+        "reference_text": "Soera Al-Qasas, vers 7",
+        "content": "وَأَوْحَيْنَآ إِلَىٰٓ أُمِّ مُوسَىٰٓ أَنْ أَرْضِعِيهِ ۖ فَإِذَا خِفْتِ عَلَيْهِ فَأَلْقِيهِ فِى ٱلْيَمِّ وَلَا تَخَافِى وَلَا تَحْزَنِى ۖ إِنَّا رَآدُّوهُ إِلَيْكِ وَجَاعِلُوهُ مِنَ ٱلْمُرْسَلِينَ",
+        "translation": "En Wij openbaarden aan de moeder van Mozes: Zoog hem. En wanneer je voor hem vreest, werp hem dan in de rivier. En vrees niet en treur niet. Wij zullen hem aan jou teruggeven en hem tot een van de boodschappers maken.",
+        "relevance": "Dit vers toont de goddelijke bescherming van Musa."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Musa",
+        "arabic_term": "موسى",
+        "definition": "Mozes in het Arabisch. Profeet van Allah, boodschapper gezonden naar de Farao.",
+        "pronunciation": "mou-sa"
+      },
+      {
+        "id": 2,
+        "term": "Fir'awn",
+        "arabic_term": "فرعون",
+        "definition": "Farao. De tiran van Egypte die Musa tegenstond.",
+        "pronunciation": "fi-raoune"
+      }
+    ]
+  },
+  "musa_flee": {
+    "title": "De vlucht van Musa naar Madyan",
+    "title_arabic": "هروب موسى إلى مدين",
+    "introduction": "Musa groeide op in het paleis. Op een dag greep hij in om een Israëliet te helpen en sloeg een Egyptenaar die stierf. Musa betreurde zijn daad en riep Allahs vergeving aan. Hij verliet Egypte en ging naar Madyan.",
+    "conclusion": "In Madyan hielp Musa de twee dochters van Shu'ayb hun schapen te drenken. Hun vader bood hem gastvrijheid en een van zijn dochters ten huwelijk aan. Musa bleef tien jaar in Madyan voordat Allah hem riep.",
+    "moral_lesson": "Dit verhaal leert ons dat oprecht berouw tot vergeving leidt. Allah leidt hen die Hem zoeken.",
+    "historical_location": "Van Egypte naar Madyan",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "musa_flee_chapter_1",
+        "title": "Het incident en het berouw",
+        "content": "De Koran vermeldt: \"En hij betrad de stad op een moment van onoplettendheid van haar inwoners. Hij vond daar twee mannen die vochten: één was van zijn partij, de andere van zijn vijanden. Die van zijn partij riep hem om hulp tegen die van zijn vijanden. Mozes sloeg hem en veroorzaakte zijn dood. Hij zei: Dit is het werk van Satan. Hij is een duidelijke vijand die tot dwaling leidt.\" (28:15) Musa riep: \"Mijn Heer! Ik heb mijzelf onrecht aangedaan. Vergeef mij!\" (28:16) Allah vergaf hem."
+      },
+      {
+        "id": "musa_flee_chapter_2",
+        "title": "Madyan en Shu'ayb",
+        "content": "De Koran zegt: \"Toen ging hij naar Madyan. Hij zei: Misschien zal mijn Heer mij op het rechte pad leiden.\" (28:22) Bij aankomst bij de drinkplaats hielp hij twee vrouwen hun kudde te drenken. Zij zeiden: \"Onze vader is een oude man.\" Musa drenkte voor hen. Hun vader (Shu'ayb) bood hem gastvrijheid aan en zei: \"Ik wil je met een van mijn twee dochters uithuwelijken.\" (28:27) Musa accepteerde en bleef tien jaar."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 28:15-16",
+        "reference_text": "Soera Al-Qasas, verzen 15-16",
+        "content": "وَدَخَلَ ٱلْمَدِينَةَ عَلَىٰ حِينِ غَفْلَةٍۢ مِّنْ أَهْلِهَا فَوَجَدَ فِيهَا رَجُلَيْنِ يَقْتَتِلَانِ",
+        "translation": "En hij betrad de stad op een moment van onoplettendheid. Hij vond daar twee mannen die vochten. Mozes sloeg en veroorzaakte de dood. Hij zei: Dit is het werk van Satan.",
+        "relevance": "Dit vers beschrijft het incident en het berouw van Musa."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 28:27",
+        "reference_text": "Soera Al-Qasas, vers 27",
+        "content": "قَالَ إِنِّىٓ أُرِيدُ أَنْ أُنكِحَكَ إِحْدَى ٱبْنَتَىَّ هَـٰتَيْنِ",
+        "translation": "Ik wil je met een van mijn twee dochters uithuwelijken.",
+        "relevance": "Shu'ayb biedt zijn dochter ten huwelijk aan Musa aan."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Madyan",
+        "arabic_term": "مدين",
+        "definition": "Midian. Regio waar Musa na het verlaten van Egypte toevlucht vond.",
+        "pronunciation": "ma-diyane"
+      },
+      {
+        "id": 2,
+        "term": "Shu'ayb",
+        "arabic_term": "شعيب",
+        "definition": "Jethro. De profeet of wijze van Madyan die Musa verwelkomde.",
+        "pronunciation": "chou-ayb"
+      }
+    ]
+  },
+  "musa_burning_bush": {
+    "title": "De brandende braamstruik en de openbaring",
+    "title_arabic": "العليقة المحترقة والوحي",
+    "introduction": "Na tien jaar in Madyan vertrok Musa met zijn gezin. Hij zag een vuur op de helling van de berg Tur. Hij naderde het en Allah sprak tot hem: \"O Mozes! Ik ben jouw Heer.\" (20:12) Dit was het begin van zijn profetische missie.",
+    "conclusion": "Allah gaf Musa twee tekenen: zijn staf die in een slang veranderde, en zijn hand die wit werd wanneer hij die uit zijn boezem trok. Musa vroeg dat Harun (Aäron) hem zou vergezellen. Allah verhoorde zijn verzoek.",
+    "moral_lesson": "Dit verhaal leert ons dat Allah Zijn boodschappers kiest en hen met tekenen uitrust. De profetische missie is een eer en een verantwoordelijkheid.",
+    "historical_location": "Berg Tur (Sinaï)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "musa_burning_bush_chapter_1",
+        "title": "De roeping op de berg Tur",
+        "content": "De Koran vermeldt: \"Toen hij een vuur zag, zei hij tegen zijn gezin: Blijf hier. Ik heb een vuur gezien. Misschien breng ik jullie een fakkel ervan of vind ik leiding bij het vuur.\" (28:29) Toen hij naderde, riep een stem hem: \"O Mozes! Ik ben jouw Heer. Doe je sandalen uit. Je bent in de heilige vallei van Tuwa.\" (20:11-12) Musa ontving het bevel naar de Farao te gaan: \"Ga naar de Farao. Hij heeft overtreden.\" (20:24)"
+      },
+      {
+        "id": "musa_burning_bush_chapter_2",
+        "title": "De tekenen: de staf en de hand",
+        "content": "De Koran zegt: \"Wat is in je rechterhand? — Het is mijn staf waarop ik leun en waarmee ik bladeren voor mijn schapen neersla.\" (20:17-18) Allah zei: \"Werp hem neer, Mozes!\" Hij wierp hem en zie, hij werd een kronkelende slang. \"Grijp hem en vrees niet. Wij zullen hem in zijn vorige staat terugbrengen.\" (20:19-21) Dan: \"Steek je hand in je boezem. Zij zal wit tevoorschijn komen zonder schade.\" (20:22) Deze twee tekenen moesten de Farao overtuigen."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 20:11-12",
+        "reference_text": "Soera Taha, verzen 11-12",
+        "content": "فَلَمَّآ أَتَىٰهَا نُودِىَ يَـٰمُوسَىٰٓ إِنِّىٓ أَنَا رَبُّكَ فَٱخْلَعْ نَعْلَيْكَ ۖ إِنَّكَ بِٱلْوَادِ ٱلْمُقَدَّسِ طُوًى",
+        "translation": "O Mozes! Ik ben jouw Heer. Doe je sandalen uit. Je bent in de heilige vallei van Tuwa.",
+        "relevance": "De openbaring aan Musa bij de brandende braamstruik."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 20:19-21",
+        "reference_text": "Soera Taha, verzen 19-21",
+        "content": "وَأَلْقِ عَصَاكَ ۚ فَلَمَّا رَءَاهَا تَهْتَزُّ كَأَنَّهَا جَآنٌّ وَلَّىٰ مُدْبِرًۭا وَلَمْ يُعَقِّبْ",
+        "translation": "Werp hem neer, Mozes! Hij wierp hem en zie, hij werd een kronkelende slang.",
+        "relevance": "Het eerste teken: de staf veranderd in slang."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Tur",
+        "arabic_term": "طور",
+        "definition": "Berg Sinaï. De berg waar Musa de openbaring ontving.",
+        "pronunciation": "tour"
+      },
+      {
+        "id": 2,
+        "term": "Asa",
+        "arabic_term": "عصا",
+        "definition": "Staf. De staf van Musa die door Allahs wil een slang werd.",
+        "pronunciation": "a-sa"
+      }
+    ]
+  },
+  "musa_pharaoh": {
+    "title": "Musa voor de Farao",
+    "title_arabic": "موسى أمام فرعون",
+    "introduction": "Musa en Harun gingen naar de Farao met Allahs tekenen. De Farao spotte en riep zijn tovenaars. De tovenaars wierpen hun touwen die leken in slangen te veranderen. Toen wierp Musa zijn staf die verslond wat zij hadden gemaakt.",
+    "conclusion": "De tovenaars bogen zich neer en zeiden: \"Wij geloven in de Heer van Aäron en Mozes.\" (20:70) De Farao bedreigde hen, maar hun geloof was standvastig. De Farao weigerde te geloven en volhardde in zijn hoogmoed.",
+    "moral_lesson": "Dit verhaal leert ons dat waarheid over leugen triomfeert. Allahs tekenen zijn machtiger dan de listen van mensen.",
+    "historical_location": "Egypte",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "musa_pharaoh_chapter_1",
+        "title": "De oproep aan de Farao",
+        "content": "De Koran vermeldt: \"Ga, jij en je broer, met Mijn tekenen. En verslapt niet in Mijn gedachtenis. Ga naar de Farao. Hij heeft overtreden. Spreek dan zacht tot hem. Misschien zal hij zich herinneren of vrezen.\" (20:42-44) Musa zei tegen de Farao: \"Wij zijn de boodschappers van jouw Heer. Laat de Kinderen van Israël met ons meegaan.\" (20:47) De Farao antwoordde: \"Hebben wij je niet onder ons grootgebracht toen je een kind was?\" (26:18) Musa antwoordde: \"Het is Allah die mij wijsheid schonk en mij tot boodschapper maakte.\" (26:21)"
+      },
+      {
+        "id": "musa_pharaoh_chapter_2",
+        "title": "De uitdaging van de tovenaars",
+        "content": "De Koran zegt: \"De Farao zei: Breng mij elke geleerde tovenaar.\" (10:79) De tovenaars wierpen hun touwen en staven. Zij zeiden: \"Bij de macht van de Farao zullen wij de overwinnaars zijn.\" (26:44) Musa wierp zijn staf. Zij verslond wat zij hadden gemaakt. De tovenaars vielen neer en zeiden: \"Wij geloven in de Heer der werelden, de Heer van Aäron en Mozes.\" (20:70) De Farao was woedend maar de waarheid had gezegevierd."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 20:47",
+        "reference_text": "Soera Taha, vers 47",
+        "content": "إِنَّا رَسُولَا رَبِّكَ فَأَرْسِلْ مَعَنَا بَنِىٓ إِسْرَٰٓءِيلَ وَلَا تُعَذِّبْهُمْ",
+        "translation": "Wij zijn de boodschappers van jouw Heer. Laat de Kinderen van Israël met ons meegaan.",
+        "relevance": "De oproep van Musa aan de Farao."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 20:70",
+        "reference_text": "Soera Taha, vers 70",
+        "content": "فَأُلْقِىَ ٱلسَّحَرَةُ سُجَّدًۭا قَالُوٓا۟ ءَامَنَّا بِرَبِّ هَـٰرُونَ وَمُوسَىٰ",
+        "translation": "De tovenaars bogen zich neer en zeiden: Wij geloven in de Heer van Aäron en Mozes.",
+        "relevance": "De bekering van de tovenaars na het zien van het teken."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Harun",
+        "arabic_term": "هارون",
+        "definition": "Aäron. De broer van Musa, zijn steun in de missie.",
+        "pronunciation": "ha-roune"
+      },
+      {
+        "id": 2,
+        "term": "Bani Israil",
+        "arabic_term": "بنو إسرائيل",
+        "definition": "De Kinderen van Israël. Het volk dat Musa moest bevrijden.",
+        "pronunciation": "banou is-ra-il"
+      }
+    ]
+  },
+  "musa_plagues": {
+    "title": "De plagen van Egypte",
+    "title_arabic": "آيات مصر",
+    "introduction": "De Farao weigerde de Kinderen van Israël te bevrijden ondanks de tekenen. Allah zond plagen over Egypte. De Koran zegt: \"Zo troffen Wij hen met overstromingen, sprinkhanen, luizen, kikkers en bloed, als duidelijke tekenen. Maar zij volhardden in hoogmoed en waren een slecht volk.\" (7:133)",
+    "conclusion": "Bij elke plaag smeekte de Farao Musa om te bemiddelen. Musa riep Allah aan en de plaag hield op. Maar de Farao brak zijn belofte zodra de kwelling wegtrok. Zijn hart bleef verhard.",
+    "moral_lesson": "Dit verhaal leert ons dat Allah Zijn tekenen manifesteert om te leiden, maar trots kan verblinden. Oprecht berouw moet bevrijding voorafgaan.",
+    "historical_location": "Egypte",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "musa_plagues_chapter_1",
+        "title": "De gezonden tekenen",
+        "content": "De Koran vermeldt: \"Zo troffen Wij hen met overstromingen, sprinkhanen, luizen, kikkers en bloed, als duidelijke tekenen.\" (7:133) Deze plagen troffen Egypte een voor een. De Nijl veranderde in bloed. Kikkers vielen de woningen binnen. Luizen en sprinkhanen verwoestten. Elk teken was bewijs van Allahs macht en een waarschuwing voor de Farao."
+      },
+      {
+        "id": "musa_plagues_chapter_2",
+        "title": "De verharding van de Farao",
+        "content": "De Koran zegt: \"En telkens wanneer Wij hen een straf toedienden, zeiden zij: O Mozes! Roep jouw Heer voor ons aan volgens het verbond dat Hij met jou heeft gesloten. Als je de straf weghaalt, zullen wij in jou geloven en de Kinderen van Israël met jou laten gaan. En toen Wij de straf voor een termijn die zij moesten bereiken wegnamen, zie, zij braken hun belofte.\" (7:134-135) De Farao hield nooit woord. Zijn hart bleef tot het einde verhard."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 7:133",
+        "reference_text": "Soera Al-A'raf, vers 133",
+        "content": "فَأَرْسَلْنَا عَلَيْهِمُ ٱلطُّوفَانَ وَٱلْجَرَادَ وَٱلْقُمَّلَ وَٱلضَّفَادِعَ وَٱلدَّمَ",
+        "translation": "Zo troffen Wij hen met overstromingen, sprinkhanen, luizen, kikkers en bloed.",
+        "relevance": "De plagen gezonden over Egypte."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 7:134-135",
+        "reference_text": "Soera Al-A'raf, verzen 134-135",
+        "content": "وَمَا نُرْسِلُ بِٱلْـَٔايَـٰتِ إِلَّا تَخْوِيفًۭا",
+        "translation": "Telkens wanneer een plaag hen trof, vroegen zij Musa om aan te roepen. Dan braken zij hun belofte.",
+        "relevance": "De verharding van de Farao."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Ayat",
+        "arabic_term": "آيات",
+        "definition": "Teken. De plagen waren tekenen van Allah voor de Farao.",
+        "pronunciation": "a-ya"
+      },
+      {
+        "id": 2,
+        "term": "Tufan",
+        "arabic_term": "الطوفان",
+        "definition": "De overstroming. Een van de plagen gezonden over Egypte.",
+        "pronunciation": "at-tou-fan"
+      }
+    ]
+  },
+  "musa_exodus": {
+    "title": "De uittocht en de oversteek van de zee",
+    "title_arabic": "الخروج وعبور البحر",
+    "introduction": "Na de plagen liet de Farao de Kinderen van Israël gaan. Toen veranderde hij van gedachten en achtervolgde hen met zijn leger. De Kinderen van Israël bevonden zich gevangen tussen de zee en het leger van de Farao. Musa ontving het bevel de zee met zijn staf te slaan.",
+    "conclusion": "De zee scheidde en de Kinderen van Israël staken over op droog land. De Farao en zijn leger achtervolgden hen. De zee sloot zich over hen. De Farao zei, terwijl hij verdronk: \"Ik geloof dat er geen god is dan Hij in wie de Kinderen van Israël geloven.\" (10:90) Maar het was te laat.",
+    "moral_lesson": "Dit verhaal leert ons dat Allah de gelovigen redt en de tirannen vernietigt. De zee gehoorzaamt Zijn bevel.",
+    "historical_location": "Rode Zee",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "musa_exodus_chapter_1",
+        "title": "De achtervolging van de Farao",
+        "content": "De Koran vermeldt: \"En Wij openbaarden aan Mozes: Vertrek 's nachts met Mijn dienaren. Want jullie zullen worden achtervolgd.\" (26:52) De Farao mobiliseerde zijn troepen en achtervolgde hen. De Kinderen van Israël zeiden: \"Wij zullen worden ingehaald.\" Musa antwoordde: \"Nooit! Mijn Heer is met mij. Hij zal mij leiden.\" (26:62) Allah beval Musa: \"Sla de zee met je staf.\" Zij scheidde en elk deel was als een grote berg."
+      },
+      {
+        "id": "musa_exodus_chapter_2",
+        "title": "De verdrinking van de Farao",
+        "content": "De Koran zegt: \"Wij lieten de Kinderen van Israël de zee oversteken. De Farao en zijn legers achtervolgden hen in opstand en vijandigheid. Toen, toen de verdrinking hem overviel, zei hij: Ik geloof dat er geen god is dan Hij in wie de Kinderen van Israël geloven. En ik behoor tot hen die zich onderwerpen. Nu? Toen je tevoren ongehoorzaam was en tot de verdervers behoorde! Vandaag redden Wij je in je lichaam opdat je een teken zult zijn voor hen die na jou komen.\" (10:90-92) De Farao verging. De Kinderen van Israël werden gered."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 26:52",
+        "reference_text": "Soera Ash-Shu'ara, vers 52",
+        "content": "وَأَوْحَيْنَآ إِلَىٰ مُوسَىٰٓ أَنْ أَسْرِ بِعِبَادِىٓ إِنَّكُم مُّتَّبَعُونَ",
+        "translation": "En Wij openbaarden aan Mozes: Vertrek 's nachts met Mijn dienaren. Want jullie zullen worden achtervolgd.",
+        "relevance": "Het bevel Egypte te verlaten."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 10:90-92",
+        "reference_text": "Soera Yunus, verzen 90-92",
+        "content": "حَتَّىٰٓ إِذَآ أَدْرَكَهُ ٱلْغَرَقُ قَالَ ءَامَنْتُ أَنَّهُۥ لَآ إِلَـٰهَ إِلَّا ٱلَّذِىٓ ءَامَنَتْ بِهِۦ بَنُوٓا۟ إِسْرَٰٓءِيلَ",
+        "translation": "Toen de verdrinking hem overviel, zei hij: Ik geloof dat er geen god is dan Hij in wie de Kinderen van Israël geloven.",
+        "relevance": "Het late berouw van de Farao."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Yamm",
+        "arabic_term": "يم",
+        "definition": "Zee. De zee die Musa met zijn volk overstak.",
+        "pronunciation": "yamm"
+      },
+      {
+        "id": 2,
+        "term": "Fir'awn",
+        "arabic_term": "فرعون",
+        "definition": "Farao. Zijn lichaam werd als teken voor de generaties bewaard.",
+        "pronunciation": "fi-raoune"
+      }
+    ]
+  },
+  "musa_desert": {
+    "title": "De woestijn: water, manna en kwartels",
+    "title_arabic": "الماء والمن والسلوى",
+    "introduction": "In de Sinaïwoestijn hadden de Kinderen van Israël dorst en honger. Allah voorzag in hun behoeften. De Koran zegt: \"En toen Mozes om water voor zijn volk vroeg, zeiden Wij: Sla de rots met je staf. En er welden twaalf bronnen op.\" (2:60) Hij zond ook manna en kwartels, en beschermde hen met wolken.",
+    "conclusion": "Allah zegt: \"Eet van de goede dingen die Wij voor jullie hebben voorzien.\" (7:160) Ondanks deze zegeningen klaagde een deel van het volk en was ongehoorzaam. Dankbaarheid is een beproeving voor de harten.",
+    "moral_lesson": "Dit verhaal leert ons dat Allah voorziet in de behoeften van Zijn dienaren. Manna en kwartels zijn zegeningen om te gedenken.",
+    "historical_location": "Sinaïwoestijn",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "musa_desert_chapter_1",
+        "title": "Water uit de rots",
+        "content": "De Koran vermeldt: \"En Wij openbaarden aan Mozes, toen zijn volk hem om water vroeg: Sla de rots met je staf. En er welden twaalf bronnen op. Elke stam wist waar te drinken.\" (7:160) Musa sloeg de rots met zijn staf. Twaalf bronnen welden op — één voor elke stam van Israël. Het wonder van water in de dorre woestijn."
+      },
+      {
+        "id": "musa_desert_chapter_2",
+        "title": "Manna en kwartels",
+        "content": "De Koran zegt: \"En Wij overschaduwden jullie met wolken. En Wij zonden manna en kwartels op jullie neer. Eet van de goede dingen die Wij voor jullie hebben voorzien.\" (2:57, 7:160) Manna (المن) was hemels voedsel. Kwartels (السلوى) waren vogels. Allah beschermde hen met wolken. Ondanks dit alles klaagden sommigen en vroegen om groenten zoals in Egypte."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 7:160",
+        "reference_text": "Soera Al-A'raf, vers 160",
+        "content": "وَأَوْحَيْنَآ إِلَىٰ مُوسَىٰٓ إِذِ ٱسْتَسْقَىٰهُ قَوْمُهُۥٓ أَنِ ٱضْرِب بِّعَصَاكَ ٱلْحَجَرَ ۖ فَٱنۢبَجَسَتْ مِنْهُ ٱثْنَتَا عَشْرَةَ عَيْنًۭا",
+        "translation": "En Wij openbaarden aan Mozes, toen zijn volk hem om water vroeg: Sla de rots met je staf. En er welden twaalf bronnen op.",
+        "relevance": "Het wonderbaarlijke water uit de rots."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 2:57",
+        "reference_text": "Soera Al-Baqarah, vers 57",
+        "content": "وَظَلَّلْنَا عَلَيْكُمُ ٱلْغَمَامَ وَأَنزَلْنَا عَلَيْكُمُ ٱلْمَنَّ وَٱلسَّلْوَىٰ",
+        "translation": "En Wij overschaduwden jullie met wolken. En Wij zonden manna en kwartels op jullie neer.",
+        "relevance": "Manna en kwartels."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Al-Mann",
+        "arabic_term": "المن",
+        "definition": "Manna. Hemels voedsel gezonden aan de Kinderen van Israël.",
+        "pronunciation": "al-mann"
+      },
+      {
+        "id": 2,
+        "term": "As-Salwa",
+        "arabic_term": "السلوى",
+        "definition": "Kwartels. Vogels gezonden als voedsel in de woestijn.",
+        "pronunciation": "as-sal-wa"
+      }
+    ]
+  },
+  "musa_tablets": {
+    "title": "De openbaring van de tafelen (Tawrat)",
+    "title_arabic": "وحي الألواح والتوراة",
+    "introduction": "Na de oversteek van de zee leidde Musa zijn volk naar de berg Tur (Sinaï). Allah riep hem om tot hem te spreken en hem de Tawrat (de Thora) te openbaren. De Koran zegt: \"En Wij schreven voor hem op de tafelen een vermaning betreffende alle dingen.\" (7:145) Musa was veertig nachten afwezig.",
+    "conclusion": "Allah sprak rechtstreeks tot Musa. Dit is een unieke eer onder de profeten. De tafelen bevatten leiding en barmhartigheid voor de Kinderen van Israël. Tijdens zijn afwezigheid wachtte een beproeving zijn volk.",
+    "moral_lesson": "Dit verhaal leert ons dat goddelijke openbaring de bron van alle leiding is. De Tawrat, zoals de Koran, is een licht voor de mensheid.",
+    "historical_location": "Berg Tur (Sinaï)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "musa_tablets_chapter_1",
+        "title": "De roeping op de berg Tur",
+        "content": "De Koran vermeldt: \"En Wij gaven Mozes het Boek nadat Wij de eerdere generaties hadden vernietigd, als bewijzen voor de mensen, leiding en barmhartigheid.\" (28:43) Musa besteeg de berg Tur om de openbaring te ontvangen. Allah zegt: \"En Wij maakten een afspraak met Mozes voor dertig nachten. En Wij voltooiden ze met tien.\" (7:142) Veertig nachten waarin Allah tot hem sprak."
+      },
+      {
+        "id": "musa_tablets_chapter_2",
+        "title": "De tafelen en de Tawrat",
+        "content": "De Koran zegt: \"En Wij schreven voor hem op de tafelen een vermaning betreffende alle dingen en een gedetailleerde uitleg van alle dingen. Neem ze dus met vastberadenheid en beveel je volk het beste ervan te nemen.\" (7:145) De Tawrat is het Boek geopenbaard aan Musa. De tafelen bevatten de geboden, leiding en wijsheid. Allah sprak tot Musa (كَلَّمَ اللَّهُ مُوسَىٰ تَكْلِيمًا) — een directe rede, een immense eer."
+      },
+      {
+        "id": "musa_tablets_chapter_3",
+        "title": "Het verzoek Allah te zien",
+        "content": "De Koran vermeldt: \"En toen Mozes naar Onze afspraak kwam en zijn Heer tot hem sprak, zei hij: O mijn Heer! Toon U aan mij opdat ik U zie. Hij zei: Je zult Mij niet zien. Maar kijk naar de berg: als hij op zijn plaats blijft, dan zul je Mij zien.\" (7:143) Toen Allah Zich aan de berg manifesteerde, stortte deze in tot stof en Musa viel bewusteloos. Bij het ontwaken zei hij: \"Glorie aan U! Ik heb berouw en ik ben de eerste der gelovigen.\""
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 7:142",
+        "reference_text": "Soera Al-A'raf, vers 142",
+        "content": "وَوَٰعَدْنَا مُوسَىٰ ثَلَٰثِينَ لَيْلَةًۭ وَأَتْمَمْنَٰهَا بِعَشْرٍۢ",
+        "translation": "En Wij maakten een afspraak met Mozes voor dertig nachten. En Wij voltooiden ze met tien.",
+        "relevance": "De veertig nachten van Musa op de berg Tur."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 7:145",
+        "reference_text": "Soera Al-A'raf, vers 145",
+        "content": "وَكَتَبْنَا لَهُۥ فِى ٱلْأَلْوَاحِ مِن كُلِّ شَىْءٍۢ مَّوْعِظَةًۭ وَتَفْصِيلًۭا لِّكُلِّ شَىْءٍۢ",
+        "translation": "En Wij schreven voor hem op de tafelen een vermaning betreffende alle dingen en een gedetailleerde uitleg van alle dingen.",
+        "relevance": "De openbaring van de tafelen."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Alwah",
+        "arabic_term": "الألواح",
+        "definition": "De tafelen. Waarop Allah de Tawrat voor Musa inschreef.",
+        "pronunciation": "al-al-wah"
+      },
+      {
+        "id": 2,
+        "term": "Tawrat",
+        "arabic_term": "التوراة",
+        "definition": "De Thora. Het Boek geopenbaard aan Musa (Mozes).",
+        "pronunciation": "at-taw-ra"
+      }
+    ]
+  },
+  "musa_samiri": {
+    "title": "De beproeving van de Samiri en het gouden kalf",
+    "title_arabic": "فتنة السامري والعجل",
+    "introduction": "Terwijl Musa op de berg Tur was, maakte de Samiri (السامري) gebruik van zijn afwezigheid. Hij verzamelde de sieraden van het volk en maakte een gouden kalf dat een loeigeluid maakte. Een deel van de Kinderen van Israël aanbad het. De Koran zegt: \"En het volk van Mozes nam na hem een kalf gemaakt van hun sieraden aan.\" (7:148)",
+    "conclusion": "Bij zijn terugkeer was Musa boos. Hij vernietigde het kalf, confronteerde de Samiri en beval de gelovigen berouw te tonen. De Samiri werd verbannen. Harun had geprobeerd hen te weerhouden maar werd niet gehoord.",
+    "moral_lesson": "Dit verhaal leert ons dat afgoderij kan ontstaan in afwezigheid van gidsen. Men moet standvastig in het geloof blijven en niet toegeven aan verleidingen.",
+    "historical_location": "Sinaïwoestijn",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "musa_samiri_chapter_1",
+        "title": "Het kalf van de Samiri",
+        "content": "De Koran vermeldt: \"Hij zei: Ik nam waar wat zij niet waarnamen. Ik nam een handvol van de spoor van de boodschapper en wierp het. Zo spoorde mijn ziel mij aan.\" (20:96) De Samiri beweerde een inspiratie te hebben gevolgd. Hij maakte een gouden kalf van de sieraden van het volk. Het kalf maakte een geluid — misschien door een truc. Een deel van het volk zei: \"Dit is jullie god en de god van Mozes.\" (20:88)"
+      },
+      {
+        "id": "musa_samiri_chapter_2",
+        "title": "De woede van Musa en het berouw",
+        "content": "De Koran zegt: \"En toen Mozes naar zijn volk terugkeerde, boos en bedroefd, zei hij: Wat een slechte opvolgers zijn jullie na mij geweest! Zochten jullie het bevel van jullie Heer te verhaasten?\" (7:150) Musa wierp de tafelen neer, greep zijn broer Harun bij het hoofd en trok hem naar zich toe. Harun legde uit dat hij niet was gehoord. Musa vernietigde het kalf en wierp het in de zee. De Samiri werd verbannen: \"Ga! Want in het leven zul je zeggen: Raak mij niet aan!\" (20:97)"
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 20:85-88",
+        "reference_text": "Soera Taha, verzen 85-88",
+        "content": "قَالَ فَإِنَّا قَدْ فَتَنَّا قَوْمَكَ مِنۢ بَعْدِكَ وَأَضَلَّهُمُ ٱلسَّامِرِىُّ",
+        "translation": "Wij hebben je volk na je vertrek beproefd. En de Samiri heeft hen tot dwaling geleid.",
+        "relevance": "De beproeving tijdens de afwezigheid van Musa."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 20:97",
+        "reference_text": "Soera Taha, vers 97",
+        "content": "قَالَ فَٱذْهَبْ فَإِنَّ لَكَ فِى ٱلْحَيَوٰةِ أَن تَقُولَ لَا مِسَاسَ",
+        "translation": "Ga! Want in het leven zul je zeggen: Raak mij niet aan!",
+        "relevance": "De straf van de Samiri."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "As-Samiri",
+        "arabic_term": "السامري",
+        "definition": "De Samiri. Degene die het gouden kalf maakte en het volk tot dwaling leidde.",
+        "pronunciation": "as-sa-mi-ri"
+      },
+      {
+        "id": 2,
+        "term": "Al-Ijl",
+        "arabic_term": "العجل",
+        "definition": "Het kalf. Het gouden afgodsbeeld gemaakt door de Samiri.",
+        "pronunciation": "al-idjl"
+      }
+    ]
+  },
+  "musa_qarun": {
+    "title": "Qarun (Korah) en de hoogmoed van rijkdom",
+    "title_arabic": "قارون والكبر",
+    "introduction": "Qarun (قارون) was van het volk van Musa. Allah had hem immense schatten geschonken. De Koran zegt: \"Voorwaar, Qarun was van het volk van Mozes, maar hij onderdrukte hen. Wij hadden hem zulke schatten gegeven dat de sleutels alleen al een last zouden zijn geweest voor een groep sterke mannen.\" (28:76)",
+    "conclusion": "Qarun schreef zijn rijkdom aan zichzelf toe. Hij weigerde advies. Allah deed de aarde hem en zijn woning verzwelgen. Degenen die zijn rijkdom hadden benijd begrepen dat ware voorspoed bij Allah is.",
+    "moral_lesson": "Dit verhaal leert ons dat rijkdom een beproeving is. Hoogmoed en ondankbaarheid leiden tot ondergang. Ware voorspoed is vroomheid.",
+    "historical_location": "Sinaïwoestijn",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "musa_qarun_chapter_1",
+        "title": "De schatten van Qarun",
+        "content": "De Koran vermeldt: \"Wij hadden hem zulke schatten gegeven dat de sleutels alleen al een last zouden zijn geweest voor een groep sterke mannen. Zijn volk zei tegen hem: Verheug je niet. Allah houdt niet van de hoogmoedigen.\" (28:76) Qarun pronkte met zijn rijkdom. De sleutels van zijn kluizen vereisten meerdere mannen om te dragen. Hij werd trots en vergat dat alles van Allah komt."
+      },
+      {
+        "id": "musa_qarun_chapter_2",
+        "title": "Het verzwelgen",
+        "content": "De Koran zegt: \"Zo deden Wij de aarde hem en zijn woning verzwelgen. Hij had geen groep om hem te helpen behalve Allah. En hij kon zichzelf niet helpen.\" (28:81) 's Ochtends zeiden degenen die zijn positie hadden benijd: \"Voorwaar, Allah verruimt de voorziening voor wie Hij wil en beperkt haar.\" (28:82) De aarde opende zich en Qarun verdween met al zijn schatten."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 28:76",
+        "reference_text": "Soera Al-Qasas, vers 76",
+        "content": "إِنَّ قَٰرُونَ كَانَ مِن قَوْمِ مُوسَىٰ فَبَغَىٰ عَلَيْهِمْ ۖ وَءَاتَيْنَٰهُ مِنَ ٱلْكُنُوزِ مَآ إِنَّ مَفَاتِحَهُۥ لَتَنُوٓأُ بِٱلْعُصْبَةِ أُوْلِى ٱلْقُوَّةِ",
+        "translation": "Qarun was van het volk van Mozes, maar hij onderdrukte hen. Wij hadden hem schatten gegeven wier sleutels zwaar waren.",
+        "relevance": "De schatten van Qarun."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 28:81",
+        "reference_text": "Soera Al-Qasas, vers 81",
+        "content": "فَخَسَفْنَا بِهِۦ وَبِدَارِهِ ٱلْأَرْضَ",
+        "translation": "Zo deden Wij de aarde hem en zijn woning verzwelgen.",
+        "relevance": "De straf van Qarun."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Qarun",
+        "arabic_term": "قارون",
+        "definition": "Korah. Een rijke man van het volk van Musa, verzwolgen door de aarde vanwege zijn hoogmoed.",
+        "pronunciation": "qa-roun"
+      },
+      {
+        "id": 2,
+        "term": "Kunuz",
+        "arabic_term": "الكنوز",
+        "definition": "Schatten. De immense rijkdom van Qarun.",
+        "pronunciation": "al-kou-nouz"
+      }
+    ]
+  },
+  "musa_cow": {
+    "title": "Het verhaal van de koe",
+    "title_arabic": "قصة البقرة",
+    "introduction": "Er werd een moord gepleegd onder de Kinderen van Israël. Om de dader te ontdekken, beval Allah hen een koe te offeren. De Koran zegt: \"En toen Mozes tegen zijn volk zei: Allah beveelt jullie een koe te offeren. Zij zeiden: Spot je met ons? Hij zei: Ik zoek toevlucht bij Allah tegen behoren tot de onwetenden.\" (2:67)",
+    "conclusion": "Zij vermenigvuldigden vragen in plaats van te gehoorzamen: welke kleur? welke leeftijd? enz. Door vele moeilijkheden vonden zij uiteindelijk een koe die paste. De les: eenvoudige gehoorzaamheid is beter dan overbodige vragen.",
+    "moral_lesson": "Dit verhaal leert ons de geboden van Allah te gehoorzamen zonder moeilijkheden te vermenigvuldigen. Overmatige vragen kunnen compliceren wat eenvoudig was.",
+    "historical_location": "Sinaïwoestijn",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "musa_cow_chapter_1",
+        "title": "Het gebod van Allah",
+        "content": "De Koran vermeldt: \"En toen Mozes tegen zijn volk zei: Allah beveelt jullie een koe te offeren. Zij zeiden: Spot je met ons? Hij zei: Ik zoek toevlucht bij Allah tegen behoren tot de onwetenden.\" (2:67) Er had een moord plaatsgevonden. Om de dader te onthullen, vroeg Allah hen het lijk te slaan met een stuk van de geofferde koe. Het gebod was eenvoudig: offer een koe."
+      },
+      {
+        "id": "musa_cow_chapter_2",
+        "title": "Overbodige vragen",
+        "content": "De Koran zegt: \"Zij zeiden: Roep jouw Heer voor ons aan om ons duidelijk te maken hoe zij moet zijn. Hij zei: Hij zegt dat zij een koe moet zijn noch te oud noch te jong, van middelbare leeftijd.\" (2:68) Zij vroegen de kleur: \"een gele koe\" (2:69). Dan: \"dat zij niet voor ploegen is gebruikt\" (2:71). Door hun vragen werd de taak bijna onmogelijk. Zij leerden dat eenvoudige gehoorzaamheid had volstaan."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 2:67",
+        "reference_text": "Soera Al-Baqarah, vers 67",
+        "content": "وَإِذْ قَالَ مُوسَىٰ لِقَوْمِهِۦٓ إِنَّ ٱللَّهَ يَأْمُرُكُمْ أَن تَذْبَحُوا۟ بَقَرَةًۭ",
+        "translation": "En toen Mozes tegen zijn volk zei: Allah beveelt jullie een koe te offeren.",
+        "relevance": "Het gebod een koe te offeren."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 2:71",
+        "reference_text": "Soera Al-Baqarah, vers 71",
+        "content": "قَالَ إِنَّهُۥ يَقُولُ إِنَّهَا بَقَرَةٌۭ لَّا ذَلُولٌۭ تُثِيرُ ٱلْأَرْضَ وَلَا تَسْقِى ٱلْحَرْثَ",
+        "translation": "Hij zegt dat zij niet voor het ploegen van de aarde of het bevloeien van de velden mag zijn gebruikt.",
+        "relevance": "De criteria voor de koe."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Baqara",
+        "arabic_term": "بقرة",
+        "definition": "Koe. Soera Al-Baqarah ontleent haar naam aan dit verhaal.",
+        "pronunciation": "ba-qa-ra"
+      },
+      {
+        "id": 2,
+        "term": "Dhabaha",
+        "arabic_term": "ذبح",
+        "definition": "Offeren. De daad van het slachten van de koe voor Allah.",
+        "pronunciation": "dha-ba-ha"
+      }
+    ]
+  },
+  "musa_khidr": {
+    "title": "De ontmoeting met Al-Khidr",
+    "title_arabic": "لقاء موسى بالخضر",
+    "introduction": "Musa vroeg Allah hem iemand te tonen die meer kennis had dan hij. Hij werd geleid naar Al-Khidr (الخضر) — \"de Groene\" — een dienaar van Allah begiftigd met bijzondere kennis. De Koran zegt: \"En Mozes zei tegen hem: Mag ik je volgen opdat je mij leert van wat jou is geleerd betreffende juiste leiding?\" (18:66)",
+    "conclusion": "Al-Khidr accepteerde op voorwaarde dat Musa geen vragen zou stellen. Maar Musa kon niet zwijgen in het aangezicht van daden die onrechtvaardig leken: het doorboren van de boot, het doden van een jongen, het repareren van een muur zonder betaling. Elke keer legde Al-Khidr de verborgen wijsheid uit. Zij scheidden omdat Musa zijn belofte had gebroken.",
+    "moral_lesson": "Dit verhaal leert ons dat goddelijke wijsheid ons begrip te boven gaat. Wat kwaad lijkt kan een goed verbergen. Geduld en vertrouwen in Allah zijn essentieel.",
+    "historical_location": "Samenvloeiing van de twee zeeën (مجمع البحرين)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "musa_khidr_chapter_1",
+        "title": "De zoektocht naar kennis",
+        "content": "De Koran vermeldt: \"En toen Mozes tegen zijn dienaar zei: Ik zal niet ophouden te lopen tot ik de samenvloeiing van de twee zeeën bereik, zelfs als ik jarenlang loop.\" (18:60) Musa zocht Al-Khidr. Zij ontmoetten elkaar bij de samenvloeiing van de twee zeeën. Al-Khidr zei: \"Je zult geen geduld met mij kunnen hebben. Hoe zou je geduldig kunnen zijn over dingen waarvan je geen volledige kennis hebt?\" (18:67-68) Musa beloofde geen vragen te stellen."
+      },
+      {
+        "id": "musa_khidr_chapter_2",
+        "title": "De drie beproevingen",
+        "content": "De Koran zegt: \"Al-Khidr maakte een gat in de boot.\" Musa protesteerde. Al-Khidr legde uit: een tirannieke koning confisqueerde alle goede boten; het gat redde de boot van de armen. Toen doodde Al-Khidr een jongen — omdat zijn ouders gelovigen waren en deze jongen hen tot ongeloof zou hebben gedreven. Ten slotte repareerde hij een muur zonder betaling — omdat eronder een schat was die aan twee wezen toebehoorde. Elke keer werd de verborgen wijsheid onthuld. Musa had zijn belofte van stilte gebroken; zij scheidden."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 18:66",
+        "reference_text": "Soera Al-Kahf, vers 66",
+        "content": "قَالَ لَهُۥ مُوسَىٰ هَلْ أَتَّبِعُكَ عَلَىٰٓ أَن تُعَلِّمَنِ مِمَّا عُلِّمْتَ رُشْدًۭا",
+        "translation": "En Mozes zei tegen hem: Mag ik je volgen opdat je mij leert van wat jou is geleerd betreffende juiste leiding?",
+        "relevance": "Musa vraagt Al-Khidr te volgen."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 18:78-82",
+        "reference_text": "Soera Al-Kahf, verzen 78-82",
+        "content": "قَالَ هَـٰذَا فِرَاقُ بَيْنِى وَبَيْنِكَ",
+        "translation": "Al-Khidr zei: Dit is de scheiding tussen jou en mij.",
+        "relevance": "De scheiding na de uitleg."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Al-Khidr",
+        "arabic_term": "الخضر",
+        "definition": "De Groene. Dienaar van Allah begiftigd met bijzondere kennis, die Musa ontmoette.",
+        "pronunciation": "al-khidr"
+      },
+      {
+        "id": 2,
+        "term": "Majma' al-Bahrayn",
+        "arabic_term": "مجمع البحرين",
+        "definition": "De samenvloeiing van de twee zeeën. Plaats van de ontmoeting tussen Musa en Al-Khidr.",
+        "pronunciation": "maj-ma' al-bah-rayn"
+      }
+    ]
+  },
+  "lessons_from_musa": {
+    "title": "Lessen uit het verhaal van Musa",
+    "title_arabic": "دروس من قصة موسى",
+    "introduction": "De Koran noemt Musa meer dan enige andere profeet. Zijn verhaal leert vertrouwen in Allah, moed in het aangezicht van tirannie, en geduld in beproeving. Van de plagen van Egypte tot de uittocht, van manna in de woestijn tot de tafelen, van de Samiri tot Qarun, van de koe tot Al-Khidr — elke fase is een les.",
+    "conclusion": "Allah zegt: \"Wij vertellen jou in waarheid het verhaal van Mozes en de Farao, voor mensen die geloven.\" (28:3) Het verhaal van Musa is een herinnering voor hen die nadenken: Allah is met de gelovigen, en tirannen vergaan uiteindelijk.",
+    "moral_lesson": "Dit verhaal leert ons dat waarheid altijd triomfeert. Wie zijn vertrouwen in Allah stelt zal worden beschermd en geleid.",
+    "historical_location": "Egypte en Sinaïschiereiland",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lessons_from_musa_chapter_1",
+        "title": "Een teken voor de gelovigen",
+        "content": "De Koran zegt: \"In het verhaal van Mozes en de Farao zijn er tekenen voor mensen die geloven.\" (28:3) Musa werd vanaf zijn geboorte beschermd. Hij groeide op in het huis van zijn vijand. Hij ontving de openbaring bij de brandende braamstruik. Hij confronteerde de machtigste tiran van zijn tijd. Elke fase toont dat Allah Zijn belofte vervult."
+      },
+      {
+        "id": "lessons_from_musa_chapter_2",
+        "title": "Het einde van de tirannen",
+        "content": "De Koran concludeert: \"Zo vertellen Wij de verhalen van de volken van weleer. En van Ons is tot hen een duidelijk bewijs gekomen.\" (28:36) De Farao had zich tot de rang van godheid verheven. Hij onderdrukte de Kinderen van Israël. Maar toen het uur kwam, verzwolg de zee hem. Zijn lichaam werd als teken bewaard. Het verhaal van Musa herinnert ons eraan dat niemand aan Allahs oordeel kan ontsnappen."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 28:3",
+        "reference_text": "Soera Al-Qasas, vers 3",
+        "content": "نَتْلُوا۟ عَلَيْكَ مِن نَّبَإِ مُوسَىٰ وَفِرْعَوْنَ بِٱلْحَقِّ لِقَوْمٍۢ يُؤْمِنُونَ",
+        "translation": "Wij vertellen jou in waarheid het verhaal van Mozes en de Farao, voor mensen die geloven.",
+        "relevance": "De Koran presenteert dit verhaal als een teken."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 28:36",
+        "reference_text": "Soera Al-Qasas, vers 36",
+        "content": "وَكَذَٰلِكَ نَقُصُّ عَلَيْكَ مِنْ أَنۢبَآءِ مَا قَدْ سَبَقَ ۚ وَقَدْ ءَاتَيْنَـٰكَ مِن لَّدُنَّا ذِكْرًۭا",
+        "translation": "Zo vertellen Wij de verhalen van de volken van weleer. En van Ons is tot hen een duidelijk bewijs gekomen.",
+        "relevance": "De verhalen zijn bewijzen voor de mensheid."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Tawakkul",
+        "arabic_term": "توكل",
+        "definition": "Vertrouwen in Allah. Musa toonde tawakkul in het aangezicht van de Farao.",
+        "pronunciation": "ta-wak-koul"
+      },
+      {
+        "id": 2,
+        "term": "Ayat",
+        "arabic_term": "آية",
+        "definition": "Teken, vers. De wonderen van Musa waren tekenen van Allah.",
+        "pronunciation": "a-ya"
+      }
+    ]
+  }
+}

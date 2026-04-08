@@ -1,0 +1,748 @@
+{
+  "musa_birth": {
+    "title": "Musa'nın Doğumu ve Firavun'un Sarayı",
+    "title_arabic": "مولد موسى وقصر فرعون",
+    "introduction": "Musa (موسى عليه السلام) Kur'an'da bahsedilen en büyük peygamberlerden biridir. Allah şöyle buyurur: \"Sana Musa ile Firavun'un hikayesini, inananlar için gerçek olarak anlatıyoruz.\" (28:3) Firavun, İsrailoğulları arasındaki tüm yeni doğan erkeklerin öldürülmesini emretti. Musa'nın annesi onu bir sandığa koydu ve nehre emanet etti. Sandık Firavun'un ev halkı tarafından bulundu.",
+    "conclusion": "Musa Firavun'un sarayında büyüdü, Allah'ın ilham verdiği kendi annesi tarafından emzirildi. Hikmet ve ilim aldı. Kaderi Yaratıcı tarafından çizilmişti.",
+    "moral_lesson": "Bu hikaye bize Allah'ın seçtiklerini koruduğunu öğretir. İlahi plan zorbaların tuzaklarına rağmen gerçekleşir.",
+    "historical_location": "Eski Mısır",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "musa_birth_chapter_1",
+        "title": "Firavun'un Fermanı",
+        "content": "Kur'an şöyle bildirir: \"Firavun yeryüzünde kibre kapıldı; halkını fırkalara böldü, aralarından bir grubu zayıf düşürmek için oğullarını boğazlıyor, kadınlarını sağ bırakıyordu. O bozguncularndandı.\" (28:4) Firavun İsrailoğullarının güçleneceğinden korkuyordu. Tüm yeni doğan erkeklerin öldürülmesini emretti. Musa'nın annesi ilahi ilham aldı."
+      },
+      {
+        "id": "musa_birth_chapter_2",
+        "title": "Nil Üzerindeki Sandık",
+        "content": "Kur'an şöyle der: \"Musa'nın annesine vahyettik: Onu emzir. Onun için korktuğunda onu nehre at. Korkma ve üzülme. Onu sana geri getireceğiz ve onu elçilerden biri yapacağız.\" (28:7) Musa'yı bir sandığa koydu ve Nil'e emanet etti. Musa'nın kız kardeşi uzaktan takip etti. Sandık Firavun'un karısı tarafından bulundu; o da dedi ki: \"Benim ve senin için bir sevinç! Onu öldürme. Bize faydalı olabilir veya onu oğul edinebiliriz.\" (28:9)"
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 28:4",
+        "reference_text": "Kasas Suresi, 4. ayet",
+        "content": "إِنَّ فِرْعَوْنَ عَلَا فِى ٱلْأَرْضِ وَجَعَلَ أَهْلَهَا شِيَعًۭا يَسْتَضْعِفُ طَآئِفَةًۭ مِّنْهُمْ يُذَبِّحُ أَبْنَآءَهُمْ وَيَسْتَحْىِۦ نِسَآءَهُمْ ۚ إِنَّهُۥ كَانَ مِنَ ٱلْمُفْسِدِينَ",
+        "translation": "Firavun yeryüzünde kibre kapıldı; halkını fırkalara böldü, oğullarını boğazlıyor, kadınlarını sağ bırakıyordu.",
+        "relevance": "Bu ayet Firavun'un zulmünü tasvir eder."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 28:7",
+        "reference_text": "Kasas Suresi, 7. ayet",
+        "content": "وَأَوْحَيْنَآ إِلَىٰٓ أُمِّ مُوسَىٰٓ أَنْ أَرْضِعِيهِ ۖ فَإِذَا خِفْتِ عَلَيْهِ فَأَلْقِيهِ فِى ٱلْيَمِّ وَلَا تَخَافِى وَلَا تَحْزَنِى ۖ إِنَّا رَآدُّوهُ إِلَيْكِ وَجَاعِلُوهُ مِنَ ٱلْمُرْسَلِينَ",
+        "translation": "Musa'nın annesine vahyettik: Onu emzir. Onun için korktuğunda onu nehre at. Korkma ve üzülme. Onu sana geri getireceğiz ve onu elçilerden biri yapacağız.",
+        "relevance": "Bu ayet Musa'nın ilahi korumasını gösterir."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Musa",
+        "arabic_term": "موسى",
+        "definition": "Arapça'da Musa. Allah'ın peygamberi, Firavun'a gönderilen elçi.",
+        "pronunciation": "mou-sa"
+      },
+      {
+        "id": 2,
+        "term": "Fir'awn",
+        "arabic_term": "فرعون",
+        "definition": "Firavun. Musa'ya karşı çıkan Mısır zorbası.",
+        "pronunciation": "fi-raoune"
+      }
+    ]
+  },
+  "musa_flee": {
+    "title": "Musa'nın Medyen'e Kaçışı",
+    "title_arabic": "هروب موسى إلى مدين",
+    "introduction": "Musa sarayda büyüdü. Bir gün bir İsrailli'ye yardım etmek için müdahale etti ve ölen bir Mısırlı'ya vurdu. Musa yaptığından pişman oldu ve Allah'ın bağışlamasını diledi. Mısır'dan ayrıldı ve Medyen'e yöneldi.",
+    "conclusion": "Medyen'de Musa Şuayb'ın iki kızına koyunlarını sulamalarında yardım etti. Babaları ona misafirperverlik sundu ve kızlarından birini ona nikahladı. Musa Allah onu çağırmadan önce Medyen'de on yıl kaldı.",
+    "moral_lesson": "Bu hikaye bize samimi tövbenin bağışlamaya yol açtığını öğretir. Allah kendisini arayanları hidayete erdirir.",
+    "historical_location": "Mısır'dan Medyen'e",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "musa_flee_chapter_1",
+        "title": "Olay ve Tövbe",
+        "content": "Kur'an şöyle bildirir: \"Şehre halkının gaflet anında girdi. Orada kavga eden iki adam buldu: biri kendi tarafından, diğeri düşmanlarından. Kendi tarafındaki, düşmanına karşı yardım için ona seslendi. Musa ona vurdu ve ölümüne neden oldu. Dedi: Bu Şeytan'ın işi. O saptıran apaçık bir düşmandır.\" (28:15) Musa şöyle dua etti: \"Rabbim! Kendime zulmettim. Beni bağışla!\" (28:16) Allah onu bağışladı."
+      },
+      {
+        "id": "musa_flee_chapter_2",
+        "title": "Medyen ve Şuayb",
+        "content": "Kur'an şöyle der: \"Sonra Medyen'e yöneldi. Dedi: Belki Rabbim beni dosdoğru yola hidayet eder.\" (28:22) Su yerine vardığında iki kadına sürülerini sulamalarında yardım etti. Dediler ki: \"Babamız yaşlı bir adam.\" Musa onlar için suladı. Babaları (Şuayb) ona misafirperverlik sundu ve dedi: \"İki kızımdan birini sana nikahlamak istiyorum.\" (28:27) Musa kabul etti ve on yıl kaldı."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 28:15-16",
+        "reference_text": "Kasas Suresi, 15-16. ayetler",
+        "content": "وَدَخَلَ ٱلْمَدِينَةَ عَلَىٰ حِينِ غَفْلَةٍۢ مِّنْ أَهْلِهَا فَوَجَدَ فِيهَا رَجُلَيْنِ يَقْتَتِلَانِ",
+        "translation": "Şehre gaflet anında girdi. Orada kavga eden iki adam buldu. Musa vurdu ve ölüme neden oldu. Dedi: Bu Şeytan'ın işi.",
+        "relevance": "Bu ayet olayı ve Musa'nın tövbesini tasvir eder."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 28:27",
+        "reference_text": "Kasas Suresi, 27. ayet",
+        "content": "قَالَ إِنِّىٓ أُرِيدُ أَنْ أُنكِحَكَ إِحْدَى ٱبْنَتَىَّ هَـٰتَيْنِ",
+        "translation": "İki kızımdan birini sana nikahlamak istiyorum.",
+        "relevance": "Şuayb kızını Musa'ya nikahlıyor."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Madyan",
+        "arabic_term": "مدين",
+        "definition": "Medyen. Musa'nın Mısır'dan ayrıldıktan sonra sığındığı bölge.",
+        "pronunciation": "ma-diyane"
+      },
+      {
+        "id": 2,
+        "term": "Shu'ayb",
+        "arabic_term": "شعيب",
+        "definition": "Şuayb. Musa'yı karşılayan Medyen peygamberi veya bilgesi.",
+        "pronunciation": "chou-ayb"
+      }
+    ]
+  },
+  "musa_burning_bush": {
+    "title": "Yanan Çalı ve Vahiy",
+    "title_arabic": "العليقة المحترقة والوحي",
+    "introduction": "Medyen'de on yıldan sonra Musa ailesiyle ayrıldı. Tur Dağı'nın yamacında bir ateş gördü. Yaklaştı ve Allah ona konuştu: \"Ey Musa! Ben senin Rabbinim.\" (20:12) Bu peygamberlik görevinin başlangıcıydı.",
+    "conclusion": "Allah Musa'ya iki ayet verdi: yılan olan asası ve göğsünden çıkardığında beyaz olan eli. Musa Harun'un ona eşlik etmesini istedi. Allah isteğini kabul etti.",
+    "moral_lesson": "Bu hikaye bize Allah'ın elçilerini seçtiğini ve onları ayetlerle donattığını öğretir. Peygamberlik görevi bir onur ve sorumluluktur.",
+    "historical_location": "Tur Dağı (Sina)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "musa_burning_bush_chapter_1",
+        "title": "Tur Dağı'nda Çağrı",
+        "content": "Kur'an şöyle bildirir: \"Ateş gördüğünde ailesine dedi: Burada kalın. Bir ateş gördüm. Belki size ondan bir meşale getiririm veya ateşte hidayet bulurum.\" (28:29) Yaklaştığında bir ses ona seslendi: \"Ey Musa! Ben senin Rabbinim. Nalinleri çıkar. Sen Tuva'nın kutsal vadisindesin.\" (20:11-12) Musa Firavun'a gitme emri aldı: \"Firavun'a git. O azdı.\" (20:24)"
+      },
+      {
+        "id": "musa_burning_bush_chapter_2",
+        "title": "Ayetler: Asa ve El",
+        "content": "Kur'an şöyle der: \"Sağ elindeki nedir? — Koyunlarıma yaprak dökmek için dayandığım ve onunla vurduğum asamdır.\" (20:17-18) Allah dedi: \"Onu at, Musa!\" Attı ve işte sürünen bir yılan oldu. \"Onu al ve korkma. Onu önceki haline döndüreceğiz.\" (20:19-21) Sonra: \"Elini göğsüne koy. Zarar vermeden beyaz çıkacak.\" (20:22) Bu iki ayet Firavun'u ikna etmek içindi."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 20:11-12",
+        "reference_text": "Taha Suresi, 11-12. ayetler",
+        "content": "فَلَمَّآ أَتَىٰهَا نُودِىَ يَـٰمُوسَىٰٓ إِنِّىٓ أَنَا رَبُّكَ فَٱخْلَعْ نَعْلَيْكَ ۖ إِنَّكَ بِٱلْوَادِ ٱلْمُقَدَّسِ طُوًى",
+        "translation": "Ey Musa! Ben senin Rabbinim. Nalinleri çıkar. Sen Tuva'nın kutsal vadisindesin.",
+        "relevance": "Yanan çalıda Musa'ya vahiy."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 20:19-21",
+        "reference_text": "Taha Suresi, 19-21. ayetler",
+        "content": "وَأَلْقِ عَصَاكَ ۚ فَلَمَّا رَءَاهَا تَهْتَزُّ كَأَنَّهَا جَآنٌّ وَلَّىٰ مُدْبِرًۭا وَلَمْ يُعَقِّبْ",
+        "translation": "Onu at, Musa! Attı ve işte sürünen bir yılan oldu.",
+        "relevance": "İlk ayet: asanın yılana dönüşmesi."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Tur",
+        "arabic_term": "طور",
+        "definition": "Sina Dağı. Musa'nın vahiy aldığı dağ.",
+        "pronunciation": "tour"
+      },
+      {
+        "id": 2,
+        "term": "Asa",
+        "arabic_term": "عصا",
+        "definition": "Asa. Allah'ın iradesiyle yılan olan Musa'nın asası.",
+        "pronunciation": "a-sa"
+      }
+    ]
+  },
+  "musa_pharaoh": {
+    "title": "Musa Firavun'un Huzurunda",
+    "title_arabic": "موسى أمام فرعون",
+    "introduction": "Musa ve Harun Allah'ın ayetleriyle Firavun'a gittiler. Firavun alay etti ve sihirbazlarını çağırdı. Sihirbazlar iplerini attılar, yılan gibi görünüyorlardı. Sonra Musa asasını attı ve onların uydurduklarını yuttu.",
+    "conclusion": "Sihirbazlar secde ettiler ve dediler: \"Harun ve Musa'nın Rabbine inandık.\" (20:70) Firavun onları tehdit etti ama imanları sağlamdı. Firavun inanmayı reddetti ve kibrinde ısrar etti.",
+    "moral_lesson": "Bu hikaye bize hakikatin batıla galip geldiğini öğretir. Allah'ın ayetleri insanların hilelerinden daha güçlüdür.",
+    "historical_location": "Mısır",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "musa_pharaoh_chapter_1",
+        "title": "Firavun'a Çağrı",
+        "content": "Kur'an şöyle bildirir: \"Kardeşinle birlikte ayetlerimle git. Beni anmada gevşeklik göstermeyin. Firavun'a gidin. O azdı. Sonra ona yumuşak söz söyleyin. Belki öğüt alır veya korkar.\" (20:42-44) Musa Firavun'a dedi: \"Biz senin Rabbinin elçileriyiz. İsrailoğullarını bizimle gönder.\" (20:47) Firavun cevap verdi: \"Sen çocukken seni aramızda büyütmedik mi?\" (26:18) Musa cevap verdi: \"Bana hikmet veren ve beni elçi yapan Allah'tır.\" (26:21)"
+      },
+      {
+        "id": "musa_pharaoh_chapter_2",
+        "title": "Sihirbazların Meydan Okuması",
+        "content": "Kur'an şöyle der: \"Firavun dedi: Bana her bilgili sihirbazı getirin.\" (10:79) Sihirbazlar iplerini ve asalarını attılar. Dediler: \"Firavun'un gücüyle biz galip olacağız.\" (26:44) Musa asasını attı. Onların uydurduklarını yuttu. Sihirbazlar secdeye kapandılar ve dediler: \"Alemlerin Rabbine, Harun ve Musa'nın Rabbine inandık.\" (20:70) Firavun öfkelendi ama hakikat galip geldi."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 20:47",
+        "reference_text": "Taha Suresi, 47. ayet",
+        "content": "إِنَّا رَسُولَا رَبِّكَ فَأَرْسِلْ مَعَنَا بَنِىٓ إِسْرَٰٓءِيلَ وَلَا تُعَذِّبْهُمْ",
+        "translation": "Biz senin Rabbinin elçileriyiz. İsrailoğullarını bizimle gönder.",
+        "relevance": "Musa'nın Firavun'a çağrısı."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 20:70",
+        "reference_text": "Taha Suresi, 70. ayet",
+        "content": "فَأُلْقِىَ ٱلسَّحَرَةُ سُجَّدًۭا قَالُوٓا۟ ءَامَنَّا بِرَبِّ هَـٰرُونَ وَمُوسَىٰ",
+        "translation": "Sihirbazlar secdeye kapandılar ve dediler: Harun ve Musa'nın Rabbine inandık.",
+        "relevance": "Ayeti gördükten sonra sihirbazların imanı."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Harun",
+        "arabic_term": "هارون",
+        "definition": "Harun. Musa'nın kardeşi, görevdeki desteği.",
+        "pronunciation": "ha-roune"
+      },
+      {
+        "id": 2,
+        "term": "Bani Israil",
+        "arabic_term": "بنو إسرائيل",
+        "definition": "İsrailoğulları. Musa'nın özgürleştirmesi gereken halk.",
+        "pronunciation": "banou is-ra-il"
+      }
+    ]
+  },
+  "musa_plagues": {
+    "title": "Mısır Belaları",
+    "title_arabic": "آيات مصر",
+    "introduction": "Firavun ayetlere rağmen İsrailoğullarını serbest bırakmayı reddetti. Allah Mısır'a belalar gönderdi. Kur'an şöyle der: \"Onlara tufan, çekirge, bit, kurbağa ve kan gönderdik, apaçık ayetler olarak. Ama kibirde ısrar ettiler ve kötü bir kavim oldular.\" (7:133)",
+    "conclusion": "Her belada Firavun Musa'dan şefaat dilemesini istedi. Musa Allah'a dua ederdi ve bela kalkardı. Ama Firavun musibet kalkar kalkmaz sözünü bozdu. Kalbi katı kaldı.",
+    "moral_lesson": "Bu hikaye bize Allah'ın hidayet için ayetlerini gösterdiğini ama gururun kör edebileceğini öğretir. Samimi tövbe kurtuluştan önce gelmelidir.",
+    "historical_location": "Mısır",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "musa_plagues_chapter_1",
+        "title": "Gönderilen Ayetler",
+        "content": "Kur'an şöyle bildirir: \"Onlara tufan, çekirge, bit, kurbağa ve kan gönderdik, apaçık ayetler olarak.\" (7:133) Bu belalar Mısır'ı birer birer vurdu. Nil kana döndü. Kurbağalar meskenleri istila etti. Bit ve çekirge tahrip etti. Her ayet Allah'ın kudretinin kanıtı ve Firavun için bir uyarıydı."
+      },
+      {
+        "id": "musa_plagues_chapter_2",
+        "title": "Firavun'un Katılaşması",
+        "content": "Kur'an şöyle der: \"Onlara her ceza indirdiğimizde dediler: Ey Musa! Seninle yaptığı ahit gereğince Rabbine bizim için dua et. Cezayı kaldırırsan sana inanacağız ve İsrailoğullarını seninle göndereceğiz. Cezayı ulaşacakları süreye kadar kaldırdığımızda, işte sözlerini bozdular.\" (7:134-135) Firavun sözünü hiç tutmadı. Kalbi sonuna kadar katı kaldı."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 7:133",
+        "reference_text": "A'raf Suresi, 133. ayet",
+        "content": "فَأَرْسَلْنَا عَلَيْهِمُ ٱلطُّوفَانَ وَٱلْجَرَادَ وَٱلْقُمَّلَ وَٱلضَّفَادِعَ وَٱلدَّمَ",
+        "translation": "Onlara tufan, çekirge, bit, kurbağa ve kan gönderdik.",
+        "relevance": "Mısır'a gönderilen belalar."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 7:134-135",
+        "reference_text": "A'raf Suresi, 134-135. ayetler",
+        "content": "وَمَا نُرْسِلُ بِٱلْـَٔايَـٰتِ إِلَّا تَخْوِيفًۭا",
+        "translation": "Her bela onlara indiğinde Musa'dan dua etmesini istediler. Sonra sözlerini bozdular.",
+        "relevance": "Firavun'un katılaşması."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Ayat",
+        "arabic_term": "آيات",
+        "definition": "Ayetler. Belalar Firavun için Allah'ın ayetleriydi.",
+        "pronunciation": "a-ya"
+      },
+      {
+        "id": 2,
+        "term": "Tufan",
+        "arabic_term": "الطوفان",
+        "definition": "Tufan. Mısır'a gönderilen belalardan biri.",
+        "pronunciation": "at-tou-fan"
+      }
+    ]
+  },
+  "musa_exodus": {
+    "title": "Çıkış ve Denizin Geçişi",
+    "title_arabic": "الخروج وعبور البحر",
+    "introduction": "Belalardan sonra Firavun İsrailoğullarını serbest bıraktı. Sonra fikrini değiştirdi ve ordusuyla onları takip etti. İsrailoğulları kendilerini deniz ile Firavun'un ordusu arasında sıkışmış buldular. Musa denize asasıyla vurma emri aldı.",
+    "conclusion": "Deniz yarıldı ve İsrailoğulları kuru toprakta geçtiler. Firavun ve ordusu onları takip etti. Deniz onların üzerine kapandı. Firavun boğulurken dedi: \"İsrailoğullarının inandığından başka ilah olmadığına inandım.\" (10:90) Ama çok geçti.",
+    "moral_lesson": "Bu hikaye bize Allah'ın müminleri kurtardığını ve zorbaları yok ettiğini öğretir. Deniz O'nun emrine itaat eder.",
+    "historical_location": "Kızıldeniz",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "musa_exodus_chapter_1",
+        "title": "Firavun'un Takibi",
+        "content": "Kur'an şöyle bildirir: \"Musa'ya vahyettik: Kullarımla geceleyin yürü. Takip edileceksiniz.\" (26:52) Firavun birliklerini seferber etti ve onları takip etti. İsrailoğulları dedi: \"Yakalanacağız.\" Musa cevap verdi: \"Asla! Rabbim benimle. Beni hidayet edecek.\" (26:62) Allah Musa'ya emretti: \"Denize asanla vur.\" Yarıldı ve her parça büyük bir dağ gibiydi."
+      },
+      {
+        "id": "musa_exodus_chapter_2",
+        "title": "Firavun'un Boğulması",
+        "content": "Kur'an şöyle der: \"İsrailoğullarını denizi geçirdik. Firavun ve orduları isyan ve düşmanlıkla onları takip etti. Sonra boğulma ona yetiştiğinde dedi: İsrailoğullarının inandığından başka ilah olmadığına inandım. Ve ben teslim olanlardanım. Şimdi mi? Daha önce isyan etmiştin ve bozgunculardandın! Bugün seni bedeninle kurtarıyoruz ki senden sonrakilere bir ayet olasın.\" (10:90-92) Firavun helak oldu. İsrailoğulları kurtarıldı."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 26:52",
+        "reference_text": "Şuara Suresi, 52. ayet",
+        "content": "وَأَوْحَيْنَآ إِلَىٰ مُوسَىٰٓ أَنْ أَسْرِ بِعِبَادِىٓ إِنَّكُم مُّتَّبَعُونَ",
+        "translation": "Musa'ya vahyettik: Kullarımla geceleyin yürü. Takip edileceksiniz.",
+        "relevance": "Mısır'dan ayrılma emri."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 10:90-92",
+        "reference_text": "Yunus Suresi, 90-92. ayetler",
+        "content": "حَتَّىٰٓ إِذَآ أَدْرَكَهُ ٱلْغَرَقُ قَالَ ءَامَنْتُ أَنَّهُۥ لَآ إِلَـٰهَ إِلَّا ٱلَّذِىٓ ءَامَنَتْ بِهِۦ بَنُوٓا۟ إِسْرَٰٓءِيلَ",
+        "translation": "Boğulma ona yetiştiğinde dedi: İsrailoğullarının inandığından başka ilah olmadığına inandım.",
+        "relevance": "Firavun'un geç tövbesi."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Yamm",
+        "arabic_term": "يم",
+        "definition": "Deniz. Musa'nın halkıyla geçtiği deniz.",
+        "pronunciation": "yamm"
+      },
+      {
+        "id": 2,
+        "term": "Fir'awn",
+        "arabic_term": "فرعون",
+        "definition": "Firavun. Bedeni nesiller için bir ayet olarak korundu.",
+        "pronunciation": "fi-raoune"
+      }
+    ]
+  },
+  "musa_desert": {
+    "title": "Çöl: Su, Men ve Bıldırcın",
+    "title_arabic": "الماء والمن والسلوى",
+    "introduction": "Sina çölünde İsrailoğulları susadı ve acıktı. Allah ihtiyaçlarını karşıladı. Kur'an şöyle der: \"Musa halkı için su istediğinde dedik: Asanla taşa vur. Ve ondan on iki pınar fışkırdı.\" (2:60) Ayrıca men ve bıldırcın gönderdi ve onları bulutlarla korudu.",
+    "conclusion": "Allah şöyle der: \"Size rızık olarak verdiklerimizin temizinden yiyin.\" (7:160) Bu nimetlere rağmen halkın bir kısmı şikayet etti ve isyan etti. Şükür kalpler için bir imtihandır.",
+    "moral_lesson": "Bu hikaye bize Allah'ın kullarının ihtiyaçlarını karşıladığını öğretir. Men ve bıldırcın hatırlanacak nimetlerdir.",
+    "historical_location": "Sina Çölü",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "musa_desert_chapter_1",
+        "title": "Taştan Su",
+        "content": "Kur'an şöyle bildirir: \"Halkı ona su istediğinde Musa'ya vahyettik: Asanla taşa vur. Ve ondan on iki pınar fışkırdı. Her kabile nereden içeceğini bildi.\" (7:160) Musa asasıyla taşa vurdu. On iki pınar fışkırdı — İsrail'in her oymağı için bir tane. Kurak çölde su mucizesi."
+      },
+      {
+        "id": "musa_desert_chapter_2",
+        "title": "Men ve Bıldırcın",
+        "content": "Kur'an şöyle der: \"Sizi bulutlarla gölgeledik. Size men ve bıldırcın indirdik. Size rızık olarak verdiklerimizin temizinden yiyin.\" (2:57, 7:160) Men (المن) göksel bir yiyecekti. Bıldırcın (السلوى) kuşlardı. Allah onları bulutlarla korudu. Tüm bunlara rağmen bazıları şikayet etti ve Mısır'daki gibi sebze istedi."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 7:160",
+        "reference_text": "A'raf Suresi, 160. ayet",
+        "content": "وَأَوْحَيْنَآ إِلَىٰ مُوسَىٰٓ إِذِ ٱسْتَسْقَىٰهُ قَوْمُهُۥٓ أَنِ ٱضْرِب بِّعَصَاكَ ٱلْحَجَرَ ۖ فَٱنۢبَجَسَتْ مِنْهُ ٱثْنَتَا عَشْرَةَ عَيْنًۭا",
+        "translation": "Halkı ona su istediğinde Musa'ya vahyettik: Asanla taşa vur. Ve ondan on iki pınar fışkırdı.",
+        "relevance": "Taştan mucizevi su."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 2:57",
+        "reference_text": "Bakara Suresi, 57. ayet",
+        "content": "وَظَلَّلْنَا عَلَيْكُمُ ٱلْغَمَامَ وَأَنزَلْنَا عَلَيْكُمُ ٱلْمَنَّ وَٱلسَّلْوَىٰ",
+        "translation": "Sizi bulutlarla gölgeledik. Size men ve bıldırcın indirdik.",
+        "relevance": "Men ve bıldırcın."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Al-Mann",
+        "arabic_term": "المن",
+        "definition": "Men. İsrailoğullarına gönderilen göksel yiyecek.",
+        "pronunciation": "al-mann"
+      },
+      {
+        "id": 2,
+        "term": "As-Salwa",
+        "arabic_term": "السلوى",
+        "definition": "Bıldırcın. Çölde yiyecek olarak gönderilen kuşlar.",
+        "pronunciation": "as-sal-wa"
+      }
+    ]
+  },
+  "musa_tablets": {
+    "title": "Levhaların Vahyi (Tevrat)",
+    "title_arabic": "وحي الألواح والتوراة",
+    "introduction": "Denizi geçtikten sonra Musa halkını Tur Dağı'na (Sina) doğru yönlendirdi. Allah onu kendisiyle konuşmak ve Tevrat'ı vahyetmek için çağırdı. Kur'an şöyle der: \"Ona levhalarda her şey hakkında öğüt ve her şeyin ayrıntısı yazdık.\" (7:145) Musa kırk gece yoktu.",
+    "conclusion": "Allah Musa ile doğrudan konuştu. Bu peygamberler arasında benzersiz bir onurdur. Levhalar İsrailoğulları için hidayet ve rahmet içeriyordu. Yokluğunda halkı bir imtihan bekliyordu.",
+    "moral_lesson": "Bu hikaye bize ilahi vahyin tüm hidayetin kaynağı olduğunu öğretir. Tevrat, Kur'an gibi insanlık için bir nurdur.",
+    "historical_location": "Tur Dağı (Sina)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "musa_tablets_chapter_1",
+        "title": "Tur Dağı'na Çağrı",
+        "content": "Kur'an şöyle bildirir: \"Önceki nesilleri helak ettikten sonra Musa'ya Kitabı verdik, insanlar için deliller, hidayet ve rahmet olarak.\" (28:43) Musa vahiy almak için Tur Dağı'na çıktı. Allah şöyle der: \"Musa ile otuz gece sözleştik. Onu on ile tamamladık.\" (7:142) Allah'ın onunla konuştuğu kırk gece."
+      },
+      {
+        "id": "musa_tablets_chapter_2",
+        "title": "Levhalar ve Tevrat",
+        "content": "Kur'an şöyle der: \"Ona levhalarda her şey hakkında öğüt ve her şeyin ayrıntısı yazdık. Onları kuvvetle al ve halkına en iyisini almalarını emret.\" (7:145) Tevrat Musa'ya vahyedilen Kitaptır. Levhalar emirleri, hidayeti ve hikmeti içeriyordu. Allah Musa ile konuştu (كَلَّمَ اللَّهُ مُوسَىٰ تَكْلِيمًا) — doğrudan konuşma, büyük bir onur."
+      },
+      {
+        "id": "musa_tablets_chapter_3",
+        "title": "Allah'ı Görme Talebi",
+        "content": "Kur'an şöyle bildirir: \"Musa randevumuza geldiğinde ve Rabbi onunla konuştuğunda dedi: Rabbim! Bana Kendini göster ki Seni göreyim. Dedi: Beni göremezsin. Ama dağa bak: yerinde kalırsa beni göreceksin.\" (7:143) Allah dağa tecelli ettiğinde toz haline geldi ve Musa bayıldı. Uyandığında dedi: \"Seni tenzih ederim! Sana tövbe ettim ve ben müminlerin ilkiyim.\""
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 7:142",
+        "reference_text": "A'raf Suresi, 142. ayet",
+        "content": "وَوَٰعَدْنَا مُوسَىٰ ثَلَٰثِينَ لَيْلَةًۭ وَأَتْمَمْنَٰهَا بِعَشْرٍۢ",
+        "translation": "Musa ile otuz gece sözleştik. Onu on ile tamamladık.",
+        "relevance": "Musa'nın Tur Dağı'ndaki kırk gecesi."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 7:145",
+        "reference_text": "A'raf Suresi, 145. ayet",
+        "content": "وَكَتَبْنَا لَهُۥ فِى ٱلْأَلْوَاحِ مِن كُلِّ شَىْءٍۢ مَّوْعِظَةًۭ وَتَفْصِيلًۭا لِّكُلِّ شَىْءٍۢ",
+        "translation": "Ona levhalarda her şey hakkında öğüt ve her şeyin ayrıntısı yazdık.",
+        "relevance": "Levhaların vahyi."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Alwah",
+        "arabic_term": "الألواح",
+        "definition": "Levhalar. Allah'ın Musa için Tevrat'ı yazdığı levhalar.",
+        "pronunciation": "al-al-wah"
+      },
+      {
+        "id": 2,
+        "term": "Tawrat",
+        "arabic_term": "التوراة",
+        "definition": "Tevrat. Musa'ya vahyedilen Kitap.",
+        "pronunciation": "at-taw-ra"
+      }
+    ]
+  },
+  "musa_samiri": {
+    "title": "Samiri'nin İmtihanı ve Altın Buzağı",
+    "title_arabic": "فتنة السامري والعجل",
+    "introduction": "Musa Tur Dağı'ndayken Samiri (السامري) yokluğundan faydalandı. Halkın takılarını topladı ve böğüren altın bir buzağı yaptı. İsrailoğullarının bir kısmı ona taptı. Kur'an şöyle der: \"Musa'nın halkı ondan sonra süslerinden bir buzağı edindi.\" (7:148)",
+    "conclusion": "Dönüşünde Musa öfkelendi. Buzağıyı yok etti, Samiri ile yüzleşti ve müminlere tövbe etmelerini emretti. Samiri sürgün edildi. Harun onları vazgeçirmeye çalıştı ama dinlenmedi.",
+    "moral_lesson": "Bu hikaye bize rehberlerin yokluğunda putperestliğin ortaya çıkabileceğini öğretir. İmanda sağlam kalmalı ve ayartmalara boyun eğmemelidir.",
+    "historical_location": "Sina Çölü",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "musa_samiri_chapter_1",
+        "title": "Samiri'nin Buzağısı",
+        "content": "Kur'an şöyle bildirir: \"Dedi: Onların görmediğini gördüm. Elçinin izinden bir avuç aldım ve attım. Nefsim bana böyle ilham etti.\" (20:96) Samiri bir ilham izlediğini iddia etti. Halkın takılarından altın bir buzağı yaptı. Buzağı bir ses çıkardı — belki bir hileyle. Halkın bir kısmı dedi: \"Bu sizin ilahınız ve Musa'nın ilahıdır.\" (20:88)"
+      },
+      {
+        "id": "musa_samiri_chapter_2",
+        "title": "Musa'nın Öfkesi ve Tövbe",
+        "content": "Kur'an şöyle der: \"Musa halkına öfkeli ve üzgün döndüğünde dedi: Benden sonra ne kötü halef oldunuz! Rabbinizin emrini acele mi ettirdiniz?\" (7:150) Musa levhaları attı, kardeşi Harun'u başından tutup kendine çekti. Harun dinlenmediğini açıkladı. Musa buzağıyı yok etti ve denize attı. Samiri sürgün edildi: \"Git! Hayatta 'Dokunma!' diyeceksin.\" (20:97)"
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 20:85-88",
+        "reference_text": "Taha Suresi, 85-88. ayetler",
+        "content": "قَالَ فَإِنَّا قَدْ فَتَنَّا قَوْمَكَ مِنۢ بَعْدِكَ وَأَضَلَّهُمُ ٱلسَّامِرِىُّ",
+        "translation": "Halkını senden sonra imtihan ettik. Ve Samiri onları saptırdı.",
+        "relevance": "Musa'nın yokluğunda imtihan."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 20:97",
+        "reference_text": "Taha Suresi, 97. ayet",
+        "content": "قَالَ فَٱذْهَبْ فَإِنَّ لَكَ فِى ٱلْحَيَوٰةِ أَن تَقُولَ لَا مِسَاسَ",
+        "translation": "Git! Hayatta 'Dokunma!' diyeceksin.",
+        "relevance": "Samiri'nin cezası."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "As-Samiri",
+        "arabic_term": "السامري",
+        "definition": "Samiri. Altın buzağıyı yapan ve halkı saptıran.",
+        "pronunciation": "as-sa-mi-ri"
+      },
+      {
+        "id": 2,
+        "term": "Al-Ijl",
+        "arabic_term": "العجل",
+        "definition": "Buzağı. Samiri'nin yaptığı altın put.",
+        "pronunciation": "al-idjl"
+      }
+    ]
+  },
+  "musa_qarun": {
+    "title": "Karun (Korah) ve Servetin Kibri",
+    "title_arabic": "قارون والكبر",
+    "introduction": "Karun (قارون) Musa'nın halkındandı. Allah ona büyük hazineler bahşetmişti. Kur'an şöyle der: \"Karun Musa'nın halkındandı ama onlara zulmetti. Ona öyle hazineler verdik ki anahtarları güçlü bir topluluk için ağırlıktı.\" (28:76)",
+    "conclusion": "Karun servetini kendine atfetti. Nasihati reddetti. Allah onu ve meskenini yere batırdı. Servetini kıskananlar gerçek başarının Allah'ta olduğunu anladı.",
+    "moral_lesson": "Bu hikaye bize servetin bir imtihan olduğunu öğretir. Kibir ve nankörlük helakete götürür. Gerçek başarı takvadadır.",
+    "historical_location": "Sina Çölü",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "musa_qarun_chapter_1",
+        "title": "Karun'un Hazineleri",
+        "content": "Kur'an şöyle bildirir: \"Ona öyle hazineler verdik ki anahtarları güçlü bir topluluk için ağırlıktı. Halkı ona dedi: Övünme. Allah kibirli olanları sevmez.\" (28:76) Karun servetini sergiledi. Hazine anahtarları taşımak için birkaç adam gerektiriyordu. Kibirlendi ve her şeyin Allah'tan geldiğini unuttu."
+      },
+      {
+        "id": "musa_qarun_chapter_2",
+        "title": "Yere Batma",
+        "content": "Kur'an şöyle der: \"Onu ve meskenini yere batırdık. Allah'tan başka ona yardım edecek bir topluluk yoktu. Ve kendine yardım edemiyordu.\" (28:81) Sabahleyin konumunu kıskananlar dedi: \"Allah dilediğine rızkı genişletir ve daraltır.\" (28:82) Yer açıldı ve Karun tüm hazineleriyle kayboldu."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 28:76",
+        "reference_text": "Kasas Suresi, 76. ayet",
+        "content": "إِنَّ قَٰرُونَ كَانَ مِن قَوْمِ مُوسَىٰ فَبَغَىٰ عَلَيْهِمْ ۖ وَءَاتَيْنَٰهُ مِنَ ٱلْكُنُوزِ مَآ إِنَّ مَفَاتِحَهُۥ لَتَنُوٓأُ بِٱلْعُصْبَةِ أُوْلِى ٱلْقُوَّةِ",
+        "translation": "Karun Musa'nın halkındandı ama onlara zulmetti. Ona anahtarları ağır hazineler verdik.",
+        "relevance": "Karun'un hazineleri."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 28:81",
+        "reference_text": "Kasas Suresi, 81. ayet",
+        "content": "فَخَسَفْنَا بِهِۦ وَبِدَارِهِ ٱلْأَرْضَ",
+        "translation": "Onu ve meskenini yere batırdık.",
+        "relevance": "Karun'un cezası."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Qarun",
+        "arabic_term": "قارون",
+        "definition": "Korah. Musa'nın halkından kibrinden dolayı yere batırılan zengin adam.",
+        "pronunciation": "qa-roun"
+      },
+      {
+        "id": 2,
+        "term": "Kunuz",
+        "arabic_term": "الكنوز",
+        "definition": "Hazineler. Karun'un büyük serveti.",
+        "pronunciation": "al-kou-nouz"
+      }
+    ]
+  },
+  "musa_cow": {
+    "title": "İnek Hikayesi",
+    "title_arabic": "قصة البقرة",
+    "introduction": "İsrailoğulları arasında bir cinayet işlendi. Suçluyu bulmak için Allah onlara bir inek kurban etmelerini emretti. Kur'an şöyle der: \"Musa halkına dediğinde: Allah size bir inek kurban etmenizi emrediyor. Dediler: Bizi alaya mı alıyorsun? Dedi: Cahillerden olmaktan Allah'a sığınırım.\" (2:67)",
+    "conclusion": "İtaat etmek yerine soruları çoğalttılar: hangi renk? kaç yaşında? vb. Birçok zorlukla sonunda uygun bir inek buldular. Ders: basit itaat gereksiz sorulardan daha iyidir.",
+    "moral_lesson": "Bu hikaye bize Allah'ın emirlerine zorlukları çoğaltmadan itaat etmemizi öğretir. Aşırı sorular basit olanı karmaşıklaştırabilir.",
+    "historical_location": "Sina Çölü",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "musa_cow_chapter_1",
+        "title": "Allah'ın Emri",
+        "content": "Kur'an şöyle bildirir: \"Musa halkına dediğinde: Allah size bir inek kurban etmenizi emrediyor. Dediler: Bizi alaya mı alıyorsun? Dedi: Cahillerden olmaktan Allah'a sığınırım.\" (2:67) Bir cinayet olmuştu. Suçluyu ortaya çıkarmak için Allah onlardan cesedi kurban edilen ineğin bir parçasıyla vurmalarını istedi. Emir basitti: bir inek kurban et."
+      },
+      {
+        "id": "musa_cow_chapter_2",
+        "title": "Gereksiz Sorular",
+        "content": "Kur'an şöyle der: \"Dediler: Rabbine bizim için dua et, ne olması gerektiğini bize açıklasın. Dedi: Ne çok yaşlı ne çok genç, orta yaşta bir inek olmalı diyor.\" (2:68) Rengi sordular: \"sarı bir inek\" (2:69). Sonra: \"toprağı sürmek için kullanılmamış olmalı\" (2:71). Sorularıyla görev neredeyse imkansız hale geldi. Basit itaatin yeterli olacağını öğrendiler."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 2:67",
+        "reference_text": "Bakara Suresi, 67. ayet",
+        "content": "وَإِذْ قَالَ مُوسَىٰ لِقَوْمِهِۦٓ إِنَّ ٱللَّهَ يَأْمُرُكُمْ أَن تَذْبَحُوا۟ بَقَرَةًۭ",
+        "translation": "Musa halkına dediğinde: Allah size bir inek kurban etmenizi emrediyor.",
+        "relevance": "İnek kurban etme emri."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 2:71",
+        "reference_text": "Bakara Suresi, 71. ayet",
+        "content": "قَالَ إِنَّهُۥ يَقُولُ إِنَّهَا بَقَرَةٌۭ لَّا ذَلُولٌۭ تُثِيرُ ٱلْأَرْضَ وَلَا تَسْقِى ٱلْحَرْثَ",
+        "translation": "Toprağı sürmek veya tarlaları sulamak için kullanılmamış olmalı diyor.",
+        "relevance": "İneğin kriterleri."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Baqara",
+        "arabic_term": "بقرة",
+        "definition": "İnek. Bakara Suresi bu hikayeden adını alır.",
+        "pronunciation": "ba-qa-ra"
+      },
+      {
+        "id": 2,
+        "term": "Dhabaha",
+        "arabic_term": "ذبح",
+        "definition": "Kurban etmek. Allah için ineği kesme eylemi.",
+        "pronunciation": "dha-ba-ha"
+      }
+    ]
+  },
+  "musa_khidr": {
+    "title": "Hızır ile Buluşma",
+    "title_arabic": "لقاء موسى بالخضر",
+    "introduction": "Musa Allah'tan kendisinden daha fazla ilme sahip birini göstermesini istedi. Hızır'a (الخضر) — \"Yeşil Olan\" — özel ilimle donatılmış Allah'ın bir kuluna yönlendirildi. Kur'an şöyle der: \"Musa ona dedi: Sana öğretildiğinden doğru hidayet konusunda bana öğretmen şartıyla sana tabi olabilir miyim?\" (18:66)",
+    "conclusion": "Hızır Musa'nın soru sormayacağı şartıyla kabul etti. Ama Musa haksız görünen eylemler karşısında sessiz kalamadı: gemiyi delmek, bir çocuğu öldürmek, ücretsiz duvar onarmak. Her seferinde Hızır gizli hikmeti açıkladı. Musa sözünü bozduğu için ayrıldılar.",
+    "moral_lesson": "Bu hikaye bize ilahi hikmetin anlayışımızı aştığını öğretir. Kötü görünen iyilik gizleyebilir. Sabır ve Allah'a güven esastır.",
+    "historical_location": "İki denizin birleştiği yer (مجمع البحرين)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "musa_khidr_chapter_1",
+        "title": "İlim Arayışı",
+        "content": "Kur'an şöyle bildirir: \"Musa genç adamına dediğinde: İki denizin birleştiği yere ulaşana kadar yürümekten vazgeçmeyeceğim, uzun yıllar yürüsem bile.\" (18:60) Musa Hızır'ı arıyordu. İki denizin birleştiği yerde buluştular. Hızır dedi: \"Benimle sabredemezsin. Hakkında kapsamlı bilgin olmayan şeylere nasıl sabredersin?\" (18:67-68) Musa sormayacağına söz verdi."
+      },
+      {
+        "id": "musa_khidr_chapter_2",
+        "title": "Üç İmtihan",
+        "content": "Kur'an şöyle der: \"Hızır gemide bir delik açtı.\" Musa itiraz etti. Hızır açıkladı: zorba bir kral tüm sağlam gemilere el koyuyordu; delik fakirlerin gemisini kurtardı. Sonra Hızır bir çocuğu öldürdü — çünkü ebeveynleri müminlerdi ve bu çocuk onları küfre itecekti. Son olarak ücretsiz bir duvar onardı — çünkü altında iki yetime ait bir hazine vardı. Her seferinde gizli hikmet ortaya çıktı. Musa sessizlik sözünü bozmuştu; ayrıldılar."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 18:66",
+        "reference_text": "Kehf Suresi, 66. ayet",
+        "content": "قَالَ لَهُۥ مُوسَىٰ هَلْ أَتَّبِعُكَ عَلَىٰٓ أَن تُعَلِّمَنِ مِمَّا عُلِّمْتَ رُشْدًۭا",
+        "translation": "Musa ona dedi: Sana öğretildiğinden doğru hidayet konusunda bana öğretmen şartıyla sana tabi olabilir miyim?",
+        "relevance": "Musa Hızır'ı takip etmek istiyor."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 18:78-82",
+        "reference_text": "Kehf Suresi, 78-82. ayetler",
+        "content": "قَالَ هَـٰذَا فِرَاقُ بَيْنِى وَبَيْنِكَ",
+        "translation": "Hızır dedi: Bu seninle benim ayrılığımız.",
+        "relevance": "Açıklamalardan sonra ayrılık."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Al-Khidr",
+        "arabic_term": "الخضر",
+        "definition": "Yeşil Olan. Musa'nın buluştuğu özel ilimle donatılmış Allah'ın kulu.",
+        "pronunciation": "al-khidr"
+      },
+      {
+        "id": 2,
+        "term": "Majma' al-Bahrayn",
+        "arabic_term": "مجمع البحرين",
+        "definition": "İki denizin birleştiği yer. Musa ile Hızır'ın buluşma yeri.",
+        "pronunciation": "maj-ma' al-bah-rayn"
+      }
+    ]
+  },
+  "lessons_from_musa": {
+    "title": "Musa Hikayesinden Dersler",
+    "title_arabic": "دروس من قصة موسى",
+    "introduction": "Kur'an Musa'dan diğer tüm peygamberlerden daha fazla bahseder. Hikayesi Allah'a güveni, zorbalık karşısında cesareti ve imtihanda sabrı öğretir. Mısır belalarından çıkışa, çöldeki men ve levhalara, Samiri'den Karun'a, inekten Hızır'a — her aşama bir derstir.",
+    "conclusion": "Allah şöyle der: \"Sana Musa ile Firavun'un hikayesini, inananlar için gerçek olarak anlatıyoruz.\" (28:3) Musa'nın hikayesi düşünenler için bir hatırlatmadır: Allah müminlerle beraberdir ve zorbalar nihayet helak olur.",
+    "moral_lesson": "Bu hikaye bize hakikatin her zaman galip geldiğini öğretir. Allah'a güvenen korunur ve hidayet edilir.",
+    "historical_location": "Mısır ve Sina Yarımadası",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lessons_from_musa_chapter_1",
+        "title": "Müminler İçin Bir Ayet",
+        "content": "Kur'an şöyle der: \"Musa ile Firavun'un hikayesinde inananlar için ayetler vardır.\" (28:3) Musa doğumundan itibaren korundu. Düşmanının evinde büyüdü. Yanan çalıda vahiy aldı. Zamanının en güçlü zorbasıyla yüzleşti. Her aşama Allah'ın vaadini yerine getirdiğini gösterir."
+      },
+      {
+        "id": "lessons_from_musa_chapter_2",
+        "title": "Zorbaların Sonu",
+        "content": "Kur'an şöyle sonuçlandırır: \"Böylece geçmiş kavimlerin hikayelerini anlatıyoruz. Ve katımızdan onlara apaçık bir delil geldi.\" (28:36) Firavun kendini ilah mertebesine yükseltti. İsrailoğullarına zulmetti. Ama saat geldiğinde deniz onu yuttu. Bedeni bir ayet olarak korundu. Musa'nın hikayesi hiç kimsenin Allah'ın hükmünden kaçamayacağını hatırlatır."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 28:3",
+        "reference_text": "Kasas Suresi, 3. ayet",
+        "content": "نَتْلُوا۟ عَلَيْكَ مِن نَّبَإِ مُوسَىٰ وَفِرْعَوْنَ بِٱلْحَقِّ لِقَوْمٍۢ يُؤْمِنُونَ",
+        "translation": "Sana Musa ile Firavun'un hikayesini, inananlar için gerçek olarak anlatıyoruz.",
+        "relevance": "Kur'an bu hikayeyi bir ayet olarak sunar."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 28:36",
+        "reference_text": "Kasas Suresi, 36. ayet",
+        "content": "وَكَذَٰلِكَ نَقُصُّ عَلَيْكَ مِنْ أَنۢبَآءِ مَا قَدْ سَبَقَ ۚ وَقَدْ ءَاتَيْنَـٰكَ مِن لَّدُنَّا ذِكْرًۭا",
+        "translation": "Böylece geçmiş kavimlerin hikayelerini anlatıyoruz. Ve katımızdan onlara apaçık bir delil geldi.",
+        "relevance": "Hikayeler insanlık için delillerdir."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Tawakkul",
+        "arabic_term": "توكل",
+        "definition": "Allah'a güven. Musa Firavun karşısında tevekkül gösterdi.",
+        "pronunciation": "ta-wak-koul"
+      },
+      {
+        "id": 2,
+        "term": "Ayat",
+        "arabic_term": "آية",
+        "definition": "Ayet, işaret. Musa'nın mucizeleri Allah'ın ayetleriydi.",
+        "pronunciation": "a-ya"
+      }
+    ]
+  }
+}

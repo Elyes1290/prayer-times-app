@@ -1,0 +1,287 @@
+{
+  "ayyub_blessings": {
+    "title": "Le benedizioni di Ayyub",
+    "title_arabic": "نعم أيوب",
+    "introduction": "Ayyub (أيوب عليه السلام), Giobbe, è un profeta noto per la sua esemplare pazienza. Il Corano dice: \"E Ayyub, quando invocò il suo Signore: L'afflizione mi ha colpito, e Tu sei il Più Misericordioso dei misericordiosi.\" (21:83) Ayyub era un uomo ricco, pio e grato. Possedeva proprietà, una grande famiglia e perfetta salute. Adorava Allah giorno e notte.",
+    "conclusion": "Ayyub fu benedetto con abbondanza. La sua ricchezza, famiglia e salute erano doni di Allah. Le usò per glorificarlo e aiutare i bisognosi. La sua gratitudine era incrollabile.",
+    "moral_lesson": "Questa storia ci insegna che le benedizioni sono un dono di Allah. Il credente deve esserne grato e usarle per obbedire al suo Creatore.",
+    "historical_location": "Regione di Damasco (Sham)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "ayyub_blessings_chapter_1",
+        "title": "Ricchezza e pietà",
+        "content": "Il Corano racconta: \"Lo trovammo paziente. Che eccellente servo! Si volgeva costantemente ad Allah.\" (38:44) Ayyub possedeva greggi, terre e servi. Ma la sua vera ricchezza era la sua fede. Non si aggrappava ai beni mondani. Li considerava un deposito di Allah da amministrare con giustizia."
+      },
+      {
+        "id": "ayyub_blessings_chapter_2",
+        "title": "La famiglia benedetta",
+        "content": "Ayyub aveva una moglie fedele e figli. Li allevò nell'adorazione di Allah. La sua casa era un luogo di pace e benedizione. Condivideva la sua ricchezza con i poveri. La sua generosità era nota a tutti. Ayyub incarnava la gratitudine verso il suo Signore."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Corano 38:44",
+        "reference_text": "Sura Sad, versetto 44",
+        "content": "إِنَّا وَجَدْنَـٰهُ صَابِرًۭا ۚ نِعْمَ ٱلْعَبْدُ ۖ إِنَّهُۥٓ أَوَّابٌ",
+        "translation": "Lo trovammo paziente. Che eccellente servo! Si volgeva costantemente ad Allah.",
+        "relevance": "Questo versetto elogia la pazienza e la pietà di Ayyub."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Corano 6:84",
+        "reference_text": "Sura Al-An'am, versetto 84",
+        "content": "وَمِن ذُرِّيَّتِهِۦ دَاوُۥدَ وَسُلَيْمَـٰنَ وَأَيُّوبَ وَيُوسُفَ",
+        "translation": "E tra i suoi discendenti: Dawud, Sulayman, Ayyub e Yusuf.",
+        "relevance": "Questo versetto colloca Ayyub tra i profeti."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Ayyub",
+        "arabic_term": "أيوب",
+        "definition": "Giobbe in arabo. Profeta noto per la sua esemplare pazienza.",
+        "pronunciation": "ay-youb"
+      },
+      {
+        "id": 2,
+        "term": "Ni'ma",
+        "arabic_term": "نعمة",
+        "definition": "Benedizione, favore. Ayyub fu benedetto con ni'am.",
+        "pronunciation": "ni-ma"
+      }
+    ]
+  },
+  "ayyub_trial": {
+    "title": "La prova di Ayyub",
+    "title_arabic": "بلاء أيوب",
+    "introduction": "Allah mise alla prova Ayyub. Il Corano dice: \"E ricorda Ayyub, quando invocò il suo Signore: L'afflizione mi ha colpito, e Tu sei il Più Misericordioso dei misericordiosi.\" (21:83) Ayyub perse tutto: i suoi beni, i suoi figli, la sua salute. Fu colpito da una terribile malattia che lo fece soffrire per anni. Il suo corpo era coperto di piaghe.",
+    "conclusion": "Nonostante tutto, Ayyub non maledì mai Allah. Non disperò. Continuò a invocare il suo Signore. Sua moglie rimase al suo fianco, sostenendolo durante la prova.",
+    "moral_lesson": "Questa storia ci insegna che la prova può toccare i migliori dei servi. La fede non protegge dalle difficoltà, ma dà la forza per superarle.",
+    "historical_location": "Regione di Damasco",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "ayyub_trial_chapter_1",
+        "title": "La perdita dei beni",
+        "content": "Il Corano racconta: \"E Ayyub, quando invocò il suo Signore.\" (21:83) Le prove caddero su Ayyub. I suoi greggi perirono. Le sue terre furono distrutte. I suoi servi lo abbandonarono. I suoi figli morirono. In breve tempo, Ayyub perse tutto ciò che possedeva. Rimase solo con sua moglie."
+      },
+      {
+        "id": "ayyub_trial_chapter_2",
+        "title": "La malattia",
+        "content": "Il Corano dice: \"Batti (il suolo) con il tuo piede: ecco acqua fresca per lavarti e bere.\" (38:42) Ayyub fu colpito da una grave malattia. Il suo corpo era coperto di piaghe. La gente si allontanava da lui. Solo sua moglie rimase fedele. Lo curò e lo sostenne. Ayyub soffrì ma non si lamentò con Allah. Invocò solo la Sua misericordia."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Corano 21:83",
+        "reference_text": "Sura Al-Anbiya, versetto 83",
+        "content": "وَأَيُّوبَ إِذْ نَادَىٰ رَبَّهُۥٓ أَنِّى مَسَّنِىَ ٱلضُّرُّ وَأَنتَ أَرْحَمُ ٱلرَّٰحِمِينَ",
+        "translation": "E Ayyub, quando invocò il suo Signore: L'afflizione mi ha colpito, e Tu sei il Più Misericordioso dei misericordiosi.",
+        "relevance": "Questo versetto racconta l'invocazione di Ayyub nella prova."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Corano 38:41",
+        "reference_text": "Sura Sad, versetto 41",
+        "content": "وَٱذْكُرْ عَبْدَنَآ أَيُّوبَ إِذْ نَادَىٰ رَبَّهُۥٓ أَنِّى مَسَّنِىَ ٱلشَّيْطَـٰنُ بِنُصْبٍۢ وَعَذَابٍ",
+        "translation": "E ricorda il Nostro servo Ayyub, quando invocò il suo Signore: Il Diavolo mi ha colpito con affaticamento e castigo.",
+        "relevance": "Questo versetto descrive la prova di Ayyub."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Bala",
+        "arabic_term": "بلاء",
+        "definition": "Prova, tribolazione. Ayyub sopportò un immenso bala.",
+        "pronunciation": "ba-la"
+      },
+      {
+        "id": 2,
+        "term": "Dhurr",
+        "arabic_term": "ضر",
+        "definition": "Afflizione, danno. Ayyub disse: \"Dhurr mi ha colpito.\"",
+        "pronunciation": "dhourr"
+      }
+    ]
+  },
+  "ayyub_patience": {
+    "title": "La pazienza di Ayyub",
+    "title_arabic": "صبر أيوب",
+    "introduction": "Ayyub è il modello della pazienza. Il Corano dice: \"Lo trovammo paziente. Che eccellente servo! Si volgeva costantemente ad Allah.\" (38:44) Nonostante aver perso tutto, Ayyub non cessò mai di glorificare Allah. Accettò il decreto del suo Signore. La sua pazienza durò anni.",
+    "conclusion": "La pazienza di Ayyub fu ricompensata. Allah lo menziona tra i profeti dotati di fermezza. Il suo nome è diventato sinonimo di pazienza in tutte le tradizioni.",
+    "moral_lesson": "Questa storia ci insegna che la pazienza (sabr) è una virtù suprema. Il credente deve accettare le prove e affidarsi ad Allah.",
+    "historical_location": "Regione di Damasco",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "ayyub_patience_chapter_1",
+        "title": "Resistenza",
+        "content": "Il Corano racconta: \"Sii paziente, come i messaggeri di ferma risolutezza furono pazienti.\" (46:35) Ayyub sopportò tutto: povertà, solitudine, malattia. Non si ribellò mai. Non chiese mai perché. Sapeva che Allah è Saggio e il Suo decreto è giusto. Continuò a invocare e sperare nella Sua misericordia."
+      },
+      {
+        "id": "ayyub_patience_chapter_2",
+        "title": "L'invocazione",
+        "content": "Il Corano dice: \"E Ayyub, quando invocò il suo Signore: L'afflizione mi ha colpito, e Tu sei il Più Misericordioso dei misericordiosi. Così lo esaudimmo e rimuovemmo l'afflizione che era su di lui.\" (21:83-84) Ayyub non invocò per lamentarsi. Invocò per ricordare ad Allah la Sua misericordia. Sapeva che nessuno tranne Lui poteva alleviarlo. Questa totale fiducia caratterizza il vero credente."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Corano 38:44",
+        "reference_text": "Sura Sad, versetto 44",
+        "content": "إِنَّا وَجَدْنَـٰهُ صَابِرًۭا ۚ نِعْمَ ٱلْعَبْدُ ۖ إِنَّهُۥٓ أَوَّابٌ",
+        "translation": "Lo trovammo paziente. Che eccellente servo! Si volgeva costantemente ad Allah.",
+        "relevance": "Questo versetto elogia la pazienza di Ayyub."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Corano 21:84",
+        "reference_text": "Sura Al-Anbiya, versetto 84",
+        "content": "فَٱسْتَجَبْنَا لَهُۥ فَكَشَفْنَا مَا بِهِۦ مِن ضُرٍّ",
+        "translation": "Così lo esaudimmo e rimuovemmo l'afflizione che era su di lui.",
+        "relevance": "Questo versetto racconta la risposta di Allah."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Sabr",
+        "arabic_term": "صبر",
+        "definition": "Pazienza. Ayyub è il modello del sabr.",
+        "pronunciation": "sabr"
+      },
+      {
+        "id": 2,
+        "term": "Awab",
+        "arabic_term": "أواب",
+        "definition": "Colui che si volge ad Allah. Ayyub era awab, sempre rivolto verso il suo Signore.",
+        "pronunciation": "a-wab"
+      }
+    ]
+  },
+  "ayyub_healing": {
+    "title": "La guarigione di Ayyub",
+    "title_arabic": "شفاء أيوب",
+    "introduction": "Allah esaudì l'invocazione di Ayyub. Il Corano dice: \"Così lo esaudimmo e rimuovemmo l'afflizione che era su di lui. E gli demmo la sua famiglia e simili con loro, come misericordia da Noi.\" (21:84) Allah ordinò ad Ayyub di battere il suolo con il suo piede. Sgorgò una sorgente di acqua fresca. Si lavò e bevve. La sua malattia scomparve.",
+    "conclusion": "Ayyub recuperò la sua salute. Allah restaurò la sua famiglia e i suoi beni. La sua pazienza era stata ricompensata. Glorificò il suo Signore e Gli rese grazie.",
+    "moral_lesson": "Questa storia ci insegna che Allah ricompensa la pazienza. La prova ha una fine. La guarigione e il sollievo vengono dal Più Misericordioso.",
+    "historical_location": "Regione di Damasco",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "ayyub_healing_chapter_1",
+        "title": "La sorgente miracolosa",
+        "content": "Il Corano racconta: \"Batti (il suolo) con il tuo piede: ecco acqua fresca per lavarti e bere.\" (38:42) Allah ordinò ad Ayyub di battere il suolo. Sgorgò una sorgente. Ayyub si lavò con quest'acqua. Le piaghe scomparvero. La sua pelle divenne sana di nuovo. La guarigione fu un miracolo di Allah, una ricompensa per la pazienza."
+      },
+      {
+        "id": "ayyub_healing_chapter_2",
+        "title": "Restaurazione",
+        "content": "Il Corano dice: \"E gli demmo la sua famiglia e simili con loro, come misericordia da Noi e monito per gli adoratori.\" (21:84) Ayyub recuperò tutto: la sua salute, una nuova famiglia, i beni. Allah raddoppiò le sue benedizioni. Ayyub non dimenticò mai la prova. Rimase grato fino alla fine della sua vita. La sua storia è un monito per tutti i credenti."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Corano 38:42",
+        "reference_text": "Sura Sad, versetto 42",
+        "content": "ٱرْكُضْ بِرِجْلِكَ ۖ هَـٰذَا مُغْتَسَلٌۢ بَارِدٌۭ وَشَرَابٌۭ",
+        "translation": "Batti (il suolo) con il tuo piede: ecco acqua fresca per lavarti e bere.",
+        "relevance": "Questo versetto descrive il miracolo della guarigione."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Corano 21:84",
+        "reference_text": "Sura Al-Anbiya, versetto 84",
+        "content": "فَٱسْتَجَبْنَا لَهُۥ فَكَشَفْنَا مَا بِهِۦ مِن ضُرٍّ ۖ وَءَاتَيْنَـٰهُ أَهْلَهُۥ وَمِثْلَهُم مَّعَهُمْ رَحْمَةًۭ مِّنَّا",
+        "translation": "Lo esaudimmo e rimuovemmo l'afflizione. Gli demmo la sua famiglia e simili.",
+        "relevance": "Questo versetto racconta la completa restaurazione di Ayyub."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Shifa",
+        "arabic_term": "شفاء",
+        "definition": "Guarigione. Ayyub ricevette shifa da Allah.",
+        "pronunciation": "chi-fa"
+      },
+      {
+        "id": 2,
+        "term": "Rahma",
+        "arabic_term": "رحمة",
+        "definition": "Misericordia. La guarigione di Ayyub fu una rahma da Allah.",
+        "pronunciation": "rah-ma"
+      }
+    ]
+  },
+  "lessons_from_ayyub": {
+    "title": "Lezioni dalla storia di Ayyub",
+    "title_arabic": "دروس من قصة أيوب",
+    "introduction": "Ayyub è il profeta della pazienza. Il Corano lo menziona diverse volte. La sua storia insegna che la prova può toccare i migliori, e che la pazienza conduce alla salvezza. Il Profeta Muhammad disse: \"Quale prova maggiore di quella di Ayyub!\"",
+    "conclusion": "Ayyub perse tutto e poi recuperò tutto. La sua pazienza fu ricompensata. Il suo nome è diventato un simbolo. Quando parliamo di pazienza, diciamo: \"Pazienza di Ayyub.\"",
+    "moral_lesson": "Questa storia ci insegna che il sabr (pazienza) è un'arma contro la prova. Il credente deve affidarsi ad Allah, invocare la Sua misericordia e accettare il Suo decreto.",
+    "historical_location": "Regione di Damasco",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lessons_from_ayyub_chapter_1",
+        "title": "Pazienza nella prova",
+        "content": "Il Corano dice: \"Inviiamo solo messaggeri come portatori di buone novelle e ammonitori.\" (6:48) Ayyub ci insegna che la prova è parte della vita. Il credente non deve disperare. Deve essere paziente e invocare. Allah è il Più Misericordioso."
+      },
+      {
+        "id": "lessons_from_ayyub_chapter_2",
+        "title": "Invocazione nella tribolazione",
+        "content": "L'invocazione di Ayyub — \"L'afflizione mi ha colpito, e Tu sei il Più Misericordioso dei misericordiosi\" — è un modello. Esprime tribolazione senza lamentarsi. Ricorda ad Allah la Sua misericordia. Ripone la speranza solo in Lui. Ogni musulmano può usarla nella prova. Il Profeta Muhammad insegnò questa invocazione alla sua comunità."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Corano 21:83-84",
+        "reference_text": "Sura Al-Anbiya, versetti 83-84",
+        "content": "وَأَيُّوبَ إِذْ نَادَىٰ رَبَّهُۥٓ أَنِّى مَسَّنِىَ ٱلضُّرُّ وَأَنتَ أَرْحَمُ ٱلرَّٰحِمِينَ ۝ فَٱسْتَجَبْنَا لَهُۥ فَكَشَفْنَا مَا بِهِۦ مِن ضُرٍّ",
+        "translation": "E Ayyub invocò il suo Signore. Lo esaudimmo e rimuovemmo l'afflizione.",
+        "relevance": "Questo passaggio riassume la storia di Ayyub."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Corano 38:44",
+        "reference_text": "Sura Sad, versetto 44",
+        "content": "إِنَّا وَجَدْنَـٰهُ صَابِرًۭا ۚ نِعْمَ ٱلْعَبْدُ ۖ إِنَّهُۥٓ أَوَّابٌ",
+        "translation": "Lo trovammo paziente. Che eccellente servo!",
+        "relevance": "Questo versetto elogia Ayyub come modello."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Sabr",
+        "arabic_term": "صبر",
+        "definition": "Pazienza. Ayyub incarna il sabr perfetto.",
+        "pronunciation": "sabr"
+      },
+      {
+        "id": 2,
+        "term": "Du'a",
+        "arabic_term": "دعاء",
+        "definition": "Invocazione. L'invocazione di Ayyub è un potente du'a.",
+        "pronunciation": "dou-a"
+      }
+    ]
+  }
+}

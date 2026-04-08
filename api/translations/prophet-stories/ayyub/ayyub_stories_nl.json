@@ -1,0 +1,287 @@
+{
+  "ayyub_blessings": {
+    "title": "De zegeningen van Ayyub",
+    "title_arabic": "نعم أيوب",
+    "introduction": "Ayyub (أيوب عليه السلام), Job, is een profeet bekend om zijn voorbeeldige geduld. De Koran zegt: \"En Ayyub, toen hij zijn Heer aanriep: Verdrukking heeft mij getroffen, en U bent de Meest Barmhartige der barmhartigen.\" (21:83) Ayyub was een rijk, vroom en dankbaar man. Hij bezat eigendom, een groot gezin en volmaakte gezondheid. Hij aanbad Allah dag en nacht.",
+    "conclusion": "Ayyub werd gezegend met overvloed. Zijn rijkdom, gezin en gezondheid waren geschenken van Allah. Hij gebruikte ze om Hem te verheerlijken en de behoeftigen te helpen. Zijn dankbaarheid was onwrikbaar.",
+    "moral_lesson": "Dit verhaal leert ons dat zegeningen een geschenk van Allah zijn. De gelovige moet er dankbaar voor zijn en ze gebruiken om zijn Schepper te gehoorzamen.",
+    "historical_location": "Regio Damascus (Sham)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "ayyub_blessings_chapter_1",
+        "title": "Rijkdom en vroomheid",
+        "content": "De Koran vertelt: \"Wij vonden hem geduldig. Wat een uitstekende dienaar! Hij wendde zich voortdurend tot Allah.\" (38:44) Ayyub bezat kuddes, land en dienaren. Maar zijn ware rijkdom was zijn geloof. Hij klampte zich niet vast aan wereldse goederen. Hij beschouwde ze als een toevertrouwd goed van Allah om met rechtvaardigheid te beheren."
+      },
+      {
+        "id": "ayyub_blessings_chapter_2",
+        "title": "Het gezegende gezin",
+        "content": "Ayyub had een trouwe vrouw en kinderen. Hij bracht hen groot in de aanbidding van Allah. Zijn huis was een plaats van vrede en zegen. Hij deelde zijn rijkdom met de armen. Zijn vrijgevigheid was bij iedereen bekend. Ayyub belichaamde dankbaarheid jegens zijn Heer."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 38:44",
+        "reference_text": "Soera Sad, vers 44",
+        "content": "إِنَّا وَجَدْنَـٰهُ صَابِرًۭا ۚ نِعْمَ ٱلْعَبْدُ ۖ إِنَّهُۥٓ أَوَّابٌ",
+        "translation": "Wij vonden hem geduldig. Wat een uitstekende dienaar! Hij wendde zich voortdurend tot Allah.",
+        "relevance": "Dit vers prijst Ayyubs geduld en vroomheid."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 6:84",
+        "reference_text": "Soera Al-An'am, vers 84",
+        "content": "وَمِن ذُرِّيَّتِهِۦ دَاوُۥدَ وَسُلَيْمَـٰنَ وَأَيُّوبَ وَيُوسُفَ",
+        "translation": "En onder zijn nakomelingen: Dawud, Sulayman, Ayyub en Yusuf.",
+        "relevance": "Dit vers plaatst Ayyub onder de profeten."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Ayyub",
+        "arabic_term": "أيوب",
+        "definition": "Job in het Arabisch. Profeet bekend om zijn voorbeeldige geduld.",
+        "pronunciation": "ay-youb"
+      },
+      {
+        "id": 2,
+        "term": "Ni'ma",
+        "arabic_term": "نعمة",
+        "definition": "Zegen, gunst. Ayyub werd gezegend met ni'am.",
+        "pronunciation": "ni-ma"
+      }
+    ]
+  },
+  "ayyub_trial": {
+    "title": "De beproeving van Ayyub",
+    "title_arabic": "بلاء أيوب",
+    "introduction": "Allah beproefde Ayyub. De Koran zegt: \"En gedenk Ayyub, toen hij zijn Heer aanriep: Verdrukking heeft mij getroffen, en U bent de Meest Barmhartige der barmhartigen.\" (21:83) Ayyub verloor alles: zijn bezittingen, zijn kinderen, zijn gezondheid. Hij werd getroffen door een vreselijke ziekte die hem jarenlang deed lijden. Zijn lichaam was bedekt met zweren.",
+    "conclusion": "Ondanks alles vervloekte Ayyub Allah nooit. Hij wanhoopte niet. Hij bleef zijn Heer aanroepen. Zijn vrouw bleef aan zijn zijde en steunde hem door de beproeving heen.",
+    "moral_lesson": "Dit verhaal leert ons dat beproeving de besten der dienaren kan treffen. Geloof beschermt niet tegen moeilijkheden, maar geeft de kracht om ze te overwinnen.",
+    "historical_location": "Regio Damascus",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "ayyub_trial_chapter_1",
+        "title": "Het verlies van bezittingen",
+        "content": "De Koran vertelt: \"En Ayyub, toen hij zijn Heer aanriep.\" (21:83) Beproevingen vielen op Ayyub. Zijn kuddes vergingen. Zijn landerijen werden verwoest. Zijn dienaren verlieten hem. Zijn kinderen stierven. In korte tijd verloor Ayyub alles wat hij bezat. Hij bleef alleen met zijn vrouw."
+      },
+      {
+        "id": "ayyub_trial_chapter_2",
+        "title": "De ziekte",
+        "content": "De Koran zegt: \"Stamp met je voet: hier is koel water om te wassen en te drinken.\" (38:42) Ayyub werd getroffen door een ernstige ziekte. Zijn lichaam was bedekt met zweren. Mensen bleven bij hem vandaan. Alleen zijn vrouw bleef trouw. Zij verzorgde hem en steunde hem. Ayyub leed maar klaagde niet bij Allah. Hij riep alleen Zijn barmhartigheid aan."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 21:83",
+        "reference_text": "Soera Al-Anbiya, vers 83",
+        "content": "وَأَيُّوبَ إِذْ نَادَىٰ رَبَّهُۥٓ أَنِّى مَسَّنِىَ ٱلضُّرُّ وَأَنتَ أَرْحَمُ ٱلرَّٰحِمِينَ",
+        "translation": "En Ayyub, toen hij zijn Heer aanriep: Verdrukking heeft mij getroffen, en U bent de Meest Barmhartige der barmhartigen.",
+        "relevance": "Dit vers vertelt van Ayyubs aanroeping in de beproeving."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 38:41",
+        "reference_text": "Soera Sad, vers 41",
+        "content": "وَٱذْكُرْ عَبْدَنَآ أَيُّوبَ إِذْ نَادَىٰ رَبَّهُۥٓ أَنِّى مَسَّنِىَ ٱلشَّيْطَـٰنُ بِنُصْبٍۢ وَعَذَابٍ",
+        "translation": "En gedenk Onze dienaar Ayyub, toen hij zijn Heer aanriep: De Duivel heeft mij getroffen met vermoeidheid en straf.",
+        "relevance": "Dit vers beschrijft Ayyubs beproeving."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Bala",
+        "arabic_term": "بلاء",
+        "definition": "Beproeving, verdrukking. Ayyub doorstond immens bala.",
+        "pronunciation": "ba-la"
+      },
+      {
+        "id": 2,
+        "term": "Dhurr",
+        "arabic_term": "ضر",
+        "definition": "Verdrukking, kwaad. Ayyub zei: \"Dhurr heeft mij getroffen.\"",
+        "pronunciation": "dhourr"
+      }
+    ]
+  },
+  "ayyub_patience": {
+    "title": "Het geduld van Ayyub",
+    "title_arabic": "صبر أيوب",
+    "introduction": "Ayyub is het model van geduld. De Koran zegt: \"Wij vonden hem geduldig. Wat een uitstekende dienaar! Hij wendde zich voortdurend tot Allah.\" (38:44) Ondanks het verlies van alles hield Ayyub nooit op Allah te verheerlijken. Hij aanvaardde het decreet van zijn Heer. Zijn geduld duurde jaren.",
+    "conclusion": "Ayyubs geduld werd beloond. Allah noemt hem onder de profeten met standvastigheid. Zijn naam is in alle tradities synoniem geworden met geduld.",
+    "moral_lesson": "Dit verhaal leert ons dat geduld (sabr) een opperste deugd is. De gelovige moet beproevingen aanvaarden en op Allah vertrouwen.",
+    "historical_location": "Regio Damascus",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "ayyub_patience_chapter_1",
+        "title": "Volharding",
+        "content": "De Koran vertelt: \"Wees geduldig, zoals de boodschappers met vastberadenheid geduldig waren.\" (46:35) Ayyub doorstond alles: armoede, eenzaamheid, ziekte. Hij rebelleerde nooit. Hij vroeg nooit waarom. Hij wist dat Allah Wijze is en Zijn decreet rechtvaardig is. Hij bleef aanroepen en hopen op Zijn barmhartigheid."
+      },
+      {
+        "id": "ayyub_patience_chapter_2",
+        "title": "De aanroeping",
+        "content": "De Koran zegt: \"En Ayyub, toen hij zijn Heer aanriep: Verdrukking heeft mij getroffen, en U bent de Meest Barmhartige der barmhartigen. Zo verhoorden Wij hem en verwijderden Wij de verdrukking die op hem was.\" (21:83-84) Ayyub riep niet aan om te klagen. Hij riep aan om Allah aan Zijn barmhartigheid te herinneren. Hij wist dat niemand behalve Hij hem kon verlichten. Dit totale vertrouwen kenmerkt de ware gelovige."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 38:44",
+        "reference_text": "Soera Sad, vers 44",
+        "content": "إِنَّا وَجَدْنَـٰهُ صَابِرًۭا ۚ نِعْمَ ٱلْعَبْدُ ۖ إِنَّهُۥٓ أَوَّابٌ",
+        "translation": "Wij vonden hem geduldig. Wat een uitstekende dienaar! Hij wendde zich voortdurend tot Allah.",
+        "relevance": "Dit vers prijst Ayyubs geduld."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 21:84",
+        "reference_text": "Soera Al-Anbiya, vers 84",
+        "content": "فَٱسْتَجَبْنَا لَهُۥ فَكَشَفْنَا مَا بِهِۦ مِن ضُرٍّ",
+        "translation": "Zo verhoorden Wij hem en verwijderden Wij de verdrukking die op hem was.",
+        "relevance": "Dit vers vertelt van Allahs antwoord."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Sabr",
+        "arabic_term": "صبر",
+        "definition": "Geduld. Ayyub is het model van sabr.",
+        "pronunciation": "sabr"
+      },
+      {
+        "id": 2,
+        "term": "Awab",
+        "arabic_term": "أواب",
+        "definition": "Hij die zich tot Allah wendt. Ayyub was awab, altijd naar zijn Heer gekeerd.",
+        "pronunciation": "a-wab"
+      }
+    ]
+  },
+  "ayyub_healing": {
+    "title": "De genezing van Ayyub",
+    "title_arabic": "شفاء أيوب",
+    "introduction": "Allah verhoorde Ayyubs aanroeping. De Koran zegt: \"Zo verhoorden Wij hem en verwijderden Wij de verdrukking die op hem was. En Wij gaven hem zijn gezin en het gelijke daarmee, als barmhartigheid van Ons.\" (21:84) Allah beval Ayyub met zijn voet op de grond te stampen. Een bron van koel water borrelde op. Hij waste zich en dronk. Zijn ziekte verdween.",
+    "conclusion": "Ayyub herkreeg zijn gezondheid. Allah herstelde zijn gezin en bezittingen. Zijn geduld was beloond. Hij verheerlijkte zijn Heer en dankte Hem.",
+    "moral_lesson": "Dit verhaal leert ons dat Allah geduld beloont. Beproeving heeft een einde. Genezing en verlichting komen van de Meest Barmhartige.",
+    "historical_location": "Regio Damascus",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "ayyub_healing_chapter_1",
+        "title": "De wonderbaarlijke bron",
+        "content": "De Koran vertelt: \"Stamp met je voet: hier is koel water om te wassen en te drinken.\" (38:42) Allah beval Ayyub op de grond te stampen. Een bron borrelde op. Ayyub waste zich met dit water. De zweren verdwenen. Zijn huid werd weer gezond. De genezing was een wonder van Allah, een beloning voor geduld."
+      },
+      {
+        "id": "ayyub_healing_chapter_2",
+        "title": "Herstel",
+        "content": "De Koran zegt: \"En Wij gaven hem zijn gezin en het gelijke daarmee, als barmhartigheid van Ons en een herinnering voor de aanbidders.\" (21:84) Ayyub herkreeg alles: zijn gezondheid, een nieuw gezin, bezittingen. Allah verdubbelde zijn zegeningen. Ayyub vergat de beproeving nooit. Hij bleef dankbaar tot het einde van zijn leven. Zijn verhaal is een herinnering voor alle gelovigen."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 38:42",
+        "reference_text": "Soera Sad, vers 42",
+        "content": "ٱرْكُضْ بِرِجْلِكَ ۖ هَـٰذَا مُغْتَسَلٌۢ بَارِدٌۭ وَشَرَابٌۭ",
+        "translation": "Stamp met je voet: hier is koel water om te wassen en te drinken.",
+        "relevance": "Dit vers beschrijft het genezingswonder."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 21:84",
+        "reference_text": "Soera Al-Anbiya, vers 84",
+        "content": "فَٱسْتَجَبْنَا لَهُۥ فَكَشَفْنَا مَا بِهِۦ مِن ضُرٍّ ۖ وَءَاتَيْنَـٰهُ أَهْلَهُۥ وَمِثْلَهُم مَّعَهُمْ رَحْمَةًۭ مِّنَّا",
+        "translation": "Wij verhoorden hem en verwijderden de verdrukking. Wij gaven hem zijn gezin en het gelijke.",
+        "relevance": "Dit vers vertelt van Ayyubs volledige herstel."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Shifa",
+        "arabic_term": "شفاء",
+        "definition": "Genezing. Ayyub ontving shifa van Allah.",
+        "pronunciation": "chi-fa"
+      },
+      {
+        "id": 2,
+        "term": "Rahma",
+        "arabic_term": "رحمة",
+        "definition": "Barmhartigheid. Ayyubs genezing was een rahma van Allah.",
+        "pronunciation": "rah-ma"
+      }
+    ]
+  },
+  "lessons_from_ayyub": {
+    "title": "Lessen uit het verhaal van Ayyub",
+    "title_arabic": "دروس من قصة أيوب",
+    "introduction": "Ayyub is de profeet van het geduld. De Koran noemt hem meerdere keren. Zijn verhaal leert dat beproeving de besten kan treffen, en dat geduld tot redding leidt. De Profeet Muhammad zei: \"Welke grotere beproeving dan die van Ayyub!\"",
+    "conclusion": "Ayyub verloor alles en herkreeg toen alles. Zijn geduld werd beloond. Zijn naam is een symbool geworden. Wanneer we over geduld spreken, zeggen we: \"Geduld van Ayyub.\"",
+    "moral_lesson": "Dit verhaal leert ons dat sabr (geduld) een wapen tegen beproeving is. De gelovige moet op Allah vertrouwen, Zijn barmhartigheid aanroepen en Zijn decreet aanvaarden.",
+    "historical_location": "Regio Damascus",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lessons_from_ayyub_chapter_1",
+        "title": "Geduld in beproeving",
+        "content": "De Koran zegt: \"Wij zenden alleen boodschappers als brengers van goed nieuws en waarschuwers.\" (6:48) Ayyub leert ons dat beproeving deel uitmaakt van het leven. De gelovige mag niet wanhopen. Hij moet geduldig zijn en aanroepen. Allah is de Meest Barmhartige."
+      },
+      {
+        "id": "lessons_from_ayyub_chapter_2",
+        "title": "Aanroeping in nood",
+        "content": "Ayyubs aanroeping — \"Verdrukking heeft mij getroffen, en U bent de Meest Barmhartige der barmhartigen\" — is een model. Zij drukt nood uit zonder te klagen. Zij herinnert Allah aan Zijn barmhartigheid. Zij plaatst de hoop alleen op Hem. Elke moslim kan haar in beproeving gebruiken. De Profeet Muhammad leerde deze aanroeping aan zijn gemeenschap."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 21:83-84",
+        "reference_text": "Soera Al-Anbiya, verzen 83-84",
+        "content": "وَأَيُّوبَ إِذْ نَادَىٰ رَبَّهُۥٓ أَنِّى مَسَّنِىَ ٱلضُّرُّ وَأَنتَ أَرْحَمُ ٱلرَّٰحِمِينَ ۝ فَٱسْتَجَبْنَا لَهُۥ فَكَشَفْنَا مَا بِهِۦ مِن ضُرٍّ",
+        "translation": "En Ayyub riep zijn Heer aan. Wij verhoorden hem en verwijderden de verdrukking.",
+        "relevance": "Dit gedeelte vat het verhaal van Ayyub samen."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 38:44",
+        "reference_text": "Soera Sad, vers 44",
+        "content": "إِنَّا وَجَدْنَـٰهُ صَابِرًۭا ۚ نِعْمَ ٱلْعَبْدُ ۖ إِنَّهُۥٓ أَوَّابٌ",
+        "translation": "Wij vonden hem geduldig. Wat een uitstekende dienaar!",
+        "relevance": "Dit vers prijst Ayyub als model."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Sabr",
+        "arabic_term": "صبر",
+        "definition": "Geduld. Ayyub belichaamt de volmaakte sabr.",
+        "pronunciation": "sabr"
+      },
+      {
+        "id": 2,
+        "term": "Du'a",
+        "arabic_term": "دعاء",
+        "definition": "Aanroeping. Ayyubs aanroeping is een krachtige du'a.",
+        "pronunciation": "dou-a"
+      }
+    ]
+  }
+}

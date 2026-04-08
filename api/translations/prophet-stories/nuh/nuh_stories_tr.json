@@ -1,0 +1,495 @@
+{
+  "nuh_prophecy": {
+    "title": "Nuh'un Peygamber Olarak Gönderilmesi",
+    "title_arabic": "إرسال نوح عليه السلام",
+    "introduction": "Nuh (عليه السلام), Kur'an'da bahsedilen en büyük peygamberlerden biridir. Allah onu kavmine, Tek Allah'a ibadet etmeye çağırmak ve gelecek azaptan uyarmak için gönderdi. Hikayesi, peygamberin reddedilme ve düşmanlık karşısındaki örnek sabrını gösterir ve Allah'ın inananlara merhametini ortaya koyar.",
+    "conclusion": "Nuh'un gönderilmesi, neredeyse bin yıl süren bir peygamberlik görevinin başlangıcını işaret eder. Zorluklara rağmen Nuh mesajına sadık kaldı ve ardından gelen tüm peygamberler için azim ve bağlılık modeli oluşturdu.",
+    "moral_lesson": "Bu hikaye bize peygamberlik görevinin Allah tarafından verilen kutsal bir sorumluluk olduğunu öğretir. İnsanları açıkça uyarmanın ve ilahi rahmetten asla ümidi kesmemenin önemini hatırlatır.",
+    "historical_location": "Mezopotamya (günümüz Irak bölgesi)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "nuh_prophecy_chapter_1",
+        "title": "İlahi Emir",
+        "content": "Allah, Nuh'u Adem'in soyundan seçerek bir topluma gönderilen ilk elçi yaptı. Kur'an şöyle bildirir: \"Nuh'u kavmine gönderdik: Acı bir azap gelmeden önce kavmini uyar.\" Nuh, kavmini putlara tapmayı bırakmaya ve ibadete layık olan Tek Allah'a dönmeye çağırması için ilahi vahiy aldı. Görevi açıktı: azaptan önce uyarmak, böylece isteyen tövbe edip kurtulabilsin."
+      },
+      {
+        "id": "nuh_prophecy_chapter_2",
+        "title": "Nuh'un Kavmi",
+        "content": "Nuh'un kavmi sapıklığa düşmüştü. Kendilerinin uydurduğu Wadd, Suwa', Yaghuth, Ya'uq ve Nasr adlı putlara tapıyorlardı. Adem ve onun salih torunları tarafından aktarılan tevhid mesajını unutmuşlardı. Allah'ın seçtiği peygamber olarak Nuh, onları hakka geri getirme sorumluluğuna sahipti. Onları hikmet ve açıklıkla çağırdı, bu putların ne yaratabileceğini ne zarar ne de fayda verebileceğini açıkladı ve yalnızca Allah'ın ibadete layık olduğunu söyledi."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 71:1",
+        "reference_text": "Nuh Suresi, 1. ayet",
+        "content": "إِنَّا أَرْسَلْنَا نُوحًا إِلَىٰ قَوْمِهِ أَنْ أَنذِرْ قَوْمَكَ مِن قَبْلِ أَن يَأْتِيَهُمْ عَذَابٌ أَلِيمٌ",
+        "translation": "Nuh'u kavmine gönderdik: Acı bir azap gelmeden önce kavmini uyar.",
+        "relevance": "Bu ayet Nuh'un peygamber olarak gönderilmesini ve uyarı görevinin niteliğini tespit eder."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 11:25",
+        "reference_text": "Hud Suresi, 25. ayet",
+        "content": "وَلَقَدْ أَرْسَلْنَا نُوحًا إِلَىٰ قَوْمِهِ إِنِّي لَكُمْ نَذِيرٌ مُّبِينٌ",
+        "translation": "Andolsun Nuh'u kavmine gönderdik: Ben sizin için apaçık bir uyarıcıyım.",
+        "relevance": "Bu ayet Nuh'un gönderilmesini ve açık uyarıcı rolünü teyit eder."
+      },
+      {
+        "id": 3,
+        "type": "quran",
+        "source": "Quran 71:23",
+        "reference_text": "Nuh Suresi, 23. ayet",
+        "content": "وَقَالُوا لَا تَذَرُنَّ آلِهَتَكُمْ وَلَا تَذَرُنَّ وَدًّا وَلَا سُوَاعًا وَلَا يَغُوثَ وَيَعُوقَ وَنَسْرًا",
+        "translation": "Dediler ki: İlahlarınızı asla bırakmayın. Wadd'i, Suwa'ı, Yaghuth'u, Ya'uq'u ve Nasr'ı bırakmayın.",
+        "relevance": "Bu ayet Nuh'un kavminin taptığı putların isimlerini ortaya koyar."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Nuh",
+        "arabic_term": "نوح",
+        "definition": "Arapça'da Nuh. Kavmini tevhide çağırmak için gönderilen Allah'ın peygamberi. 950 yıl tebliğ etti.",
+        "pronunciation": "nouh"
+      },
+      {
+        "id": 2,
+        "term": "Nadhir",
+        "arabic_term": "نذير",
+        "definition": "Uyarıcı. Azabı gelmeden önce kavmini uyaran peygamberin rolünü ifade eder.",
+        "pronunciation": "na-dhir"
+      },
+      {
+        "id": 3,
+        "term": "Qawm",
+        "arabic_term": "قوم",
+        "definition": "Kavim veya topluluk. Nuh'un elçi olarak gönderildiği kavim.",
+        "pronunciation": "qawm"
+      }
+    ]
+  },
+  "nuh_call": {
+    "title": "Nuh'un Kavmine Daveti",
+    "title_arabic": "دعوة نوح لقومه",
+    "introduction": "Nuh (عليه السلام) kavmini sabır ve sebatla çağırdı. Gece gündüz onları davet etti: \"Allah'a ibadet edin. O'ndan başka ilahınız yoktur.\" Mesajını iletmek için çeşitli yöntemler kullandı: açık vaaz, özel davetler ve açık uyarılar. Özverisine rağmen kavminin çoğu inatla reddetti.",
+    "conclusion": "Nuh'un daveti, peygamberin görevine tam bağlılığını gösterir. Reddedilme ve alaylara rağmen kavmini yönlendirmek için hiçbir fırsatı kaçırmadı.",
+    "moral_lesson": "Bu hikaye bize hikmet ve güzel öğütle davetin (İslam'a çağrı) önemini öğretir. Görevimizin mesajı iletmek olduğunu, hidayetin ise Allah'ın elinde olduğunu hatırlatır.",
+    "historical_location": "Mezopotamya",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "nuh_call_chapter_1",
+        "title": "Tevhide Davet",
+        "content": "Nuh kavmine dedi: \"Ey kavmim! Allah'a ibadet edin. O'ndan başka ilahınız yoktur. Sizin için korkunç bir günün azabından korkuyorum.\" Onlara taptıkları putların kendilerinin ve atalarının uydurduğu isimlerden ibaret olduğunu, Allah'ın bunlar için hiçbir delil indirmediğini açıkladı. Allah'tan bağışlanma dilemelerini istedi, çünkü O çok bağışlayandır, çok merhametlidir. Nuh, tövbe ederlerse Allah'ın üzerlerine bol yağmur indireceğini ve onları mal ve evlatla çoğaltacağını vaat etti."
+      },
+      {
+        "id": "nuh_call_chapter_2",
+        "title": "Nuh'un Yöntemleri",
+        "content": "Kur'an Nuh'un kavmini nasıl çağırdığını şöyle anlatır: \"Kavmimi gece gündüz çağırdım. Ama davetim onların kaçışını artırmaktan başka bir şey yapmadı.\" Onları Allah'ın bağışlaması için her çağırdığında parmaklarını kulaklarına tıkıyor ve elbiselerine bürünüyor, kibirlenmeye devam ediyorlardı. Nuh cesaretini kaybetmedi. Açıktan ve gizlice çağırmaya devam etti: \"Rabbinizden bağışlanma dileyin, çünkü O çok bağışlayandır.\""
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 71:2-4",
+        "reference_text": "Nuh Suresi, 2-4. ayetler",
+        "content": "قَالَ يَا قَوْمِ إِنِّي لَكُمْ نَذِيرٌ مُّبِينٌ أَنِ اعْبُدُوا اللَّهَ وَاتَّقُوهُ وَأَطِيعُونِ يَغْفِرْ لَكُم مِّن ذُنُوبِكُمْ وَيُؤَخِّرْكُمْ إِلَىٰ أَجَلٍ مُّسَمًّى",
+        "translation": "Dedi: Ey kavmim! Ben sizin için apaçık bir uyarıcıyım. Allah'a ibadet edin, O'ndan korkun ve bana itaat edin. O sizin günahlarınızdan bir kısmını bağışlayacak ve sizi belirlenmiş bir süreye kadar erteleyecektir.",
+        "relevance": "Bu ayetler Nuh'un merkezi mesajını içerir: Allah'a ibadet ve bağışlanma vaadi."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 71:5-7",
+        "reference_text": "Nuh Suresi, 5-7. ayetler",
+        "content": "قَالَ رَبِّ إِنِّي دَعَوْتُ قَوْمِي لَيْلًا وَنَهَارًا فَلَمْ يَزِدْهُمْ دُعَائِي إِلَّا فِرَارًا وَإِنِّي كُلَّمَا دَعَوْتُهُمْ لِتَغْفِرَ لَهُمْ جَعَلُوا أَصَابِعَهُمْ فِي آذَانِهِمْ وَاسْتَغْشَوْا ثِيَابَهُمْ وَأَصَرُّوا وَاسْتَكْبَرُوا اسْتِكْبَارًا",
+        "translation": "Dedi: Rabbim! Kavmimi gece gündüz çağırdım. Ama davetim onların kaçışını artırmaktan başka bir şey yapmadı. Onları bağışlaman için her çağırdığımda parmaklarını kulaklarına tıkadılar, elbiselerine büründüler, ısrar ettiler ve kibirlendiler.",
+        "relevance": "Bu ayetler Nuh'un sebatını ve kavminin inatçı tepkisini anlatır."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Da'wa",
+        "arabic_term": "دعوة",
+        "definition": "Davet veya çağrı. İslam'a ve Allah'a ibadete davet. Nuh daveti sürekli uyguladı.",
+        "pronunciation": "da-wa"
+      },
+      {
+        "id": 2,
+        "term": "Tawhid",
+        "arabic_term": "توحيد",
+        "definition": "Tevhid. İbadette Allah'ın birliği. Nuh'un merkezi mesajıydı.",
+        "pronunciation": "taw-hid"
+      },
+      {
+        "id": 3,
+        "term": "Istighfar",
+        "arabic_term": "استغفار",
+        "definition": "Bağışlanma dileme. Nuh kavmini Allah'tan bağışlanma dilemeye davet etti.",
+        "pronunciation": "is-tigh-far"
+      }
+    ]
+  },
+  "rejection_and_mockery": {
+    "title": "Reddetme ve Alay",
+    "title_arabic": "الرفض والسخرية",
+    "introduction": "Nuh kavminin ileri gelenleri mesajını kibirle reddetti. Onu yalancı saydılar, deli olarak nitelendirdiler ve insanları inanan \"mütevazı durumdakileri\" takip etmemeye teşvik ettiler. Kibirleri onları kör etti ve gerçeği tanımalarını engelledi.",
+    "conclusion": "İleri gelenlerin Nuh'u reddetmesi, kibir ve ataların geleneklerine bağlılığın insanların gerçeği kabul etmesini nasıl engelleyebileceğini gösterir, hatta açıkça sunulduğunda bile.",
+    "moral_lesson": "Bu hikaye bizi kibirin ve inananlara karşı küçümsemenin tehlikelerine karşı uyarır. Gerçeğin sosyal statüyle değil, Allah'ın vahyettiğiyle belirlendiğini öğretir.",
+    "historical_location": "Mezopotamya",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "rejection_and_mockery_chapter_1",
+        "title": "İleri Gelenlerin Suçlaması",
+        "content": "Nuh kavminin önderleri ona gelip dediler: \"Sende bizim gibi sadece bir adam görüyoruz ve seni takip edenleri ilk bakışta aramızda en aşağılık olanlar görüyoruz. Sende bizden üstünlük görmüyoruz. Aksine sizin yalancı olduğunuzu düşünüyoruz.\" Sıradan bir adamın peygamber olabileceğine inanmayı reddettiler ve inananları küçümsediler, onları düşük durumda insanlar olarak gördüler. Nuh onlara hikmetle cevap verdi: \"Ey kavmim! Görüyor musunuz? Eğer Rabbimden açık bir delile dayanıyorsam ve O bana sizin kör olduğunuz bir rahmet vermişse, siz onu tiksindirici bulduğunuzda sizi kabul etmeye zorlayacak mıyız?\""
+      },
+      {
+        "id": "rejection_and_mockery_chapter_2",
+        "title": "Sapıklıkta Israr",
+        "content": "Nuh'un delillerine ve uyarılarına rağmen kavmi reddinde ısrar etti. Dediler: \"Ey Nuh! Bizimle tartıştın ve tartışmaları çoğalttın. Eğer doğru söyleyenlerdensen bize vadettiğin şeyi getir.\" Nuh'u meydan okudular, uyardığı azabı görmek istediler, asla gelmeyeceğine inanarak. Nuh cevap verdi: \"Onu size ancak Allah getirecektir, eğer dilerse. Ve siz O'ndan kaçamazsınız.\" Kibirleri onları kör etti; kendilerine verilen sürenin tövbe etme fırsatı vermek için bir rahmet olduğunu anlamadılar."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 11:27",
+        "reference_text": "Hud Suresi, 27. ayet",
+        "content": "فَقَالَ الْمَلَأُ الَّذِينَ كَفَرُوا مِن قَوْمِهِ مَا نَرَاكَ إِلَّا بَشَرًا مِّثْلَنَا وَمَا نَرَاكَ اتَّبَعَكَ إِلَّا الَّذِينَ هُمْ أَرَاذِلُنَا بَادِيَ الرَّأْيِ وَمَا نَرَىٰ لَكُمْ عَلَيْنَا مِن فَضْلٍ بَلْ نَظُنُّكُمْ كَاذِبِينَ",
+        "translation": "Kavminden inkâr eden ileri gelenler dediler: Sende bizim gibi sadece bir adam görüyoruz ve seni takip edenleri aramızda en aşağılık olanlar görüyoruz. Sende bizden üstünlük görmüyoruz. Aksine sizin yalancı olduğunuzu düşünüyoruz.",
+        "relevance": "Bu ayet ileri gelenlerin kibrini ve inananlara karşı küçümsemesini anlatır."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 11:32",
+        "reference_text": "Hud Suresi, 32. ayet",
+        "content": "قَالُوا يَا نُوحُ قَدْ جَادَلْتَنَا فَأَكْثَرْتَ جِدَالَنَا فَأْتِنَا بِمَا تَعِدُنَا إِن كُنتَ مِنَ الصَّادِقِينَ",
+        "translation": "Dediler: Ey Nuh! Bizimle tartıştın ve tartışmaları çoğalttın. Eğer doğru söyleyenlerdensen bize vadettiğin şeyi getir.",
+        "relevance": "Bu ayet halkın Nuh'un uyarılarına karşı kibirli meydan okumasını gösterir."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Mala'",
+        "arabic_term": "ملأ",
+        "definition": "İleri gelenler veya önderler. Nuh'a karşı muhalefeti yöneten kavminin liderleri.",
+        "pronunciation": "ma-la"
+      },
+      {
+        "id": 2,
+        "term": "Kufr",
+        "arabic_term": "كفر",
+        "definition": "İnkâr veya gerçeği reddetme. Nuh'un mesajını reddedenlerin durumu.",
+        "pronunciation": "koufr"
+      },
+      {
+        "id": 3,
+        "term": "Istikbar",
+        "arabic_term": "استكبار",
+        "definition": "Kibir veya gurur. Nuh'un kavminin gerçeği kabul etmesini engelleyen günah.",
+        "pronunciation": "is-tik-bar"
+      }
+    ]
+  },
+  "nuh_patience": {
+    "title": "Nuh'un Sabrı",
+    "title_arabic": "صبر نوح عليه السلام",
+    "introduction": "Nuh (عليه السلام) Kur'an'a göre kavmine dokuz yüz elli yıl tebliğ etti. Bu olağanüstü süreye rağmen sadece küçük bir azınlık inandı. Bu uzun sabır, peygamberin örnek sebatını ve Allah'ın insanlara tövbe için zaman veren merhametini gösterir.",
+    "conclusion": "Nuh'un neredeyse bin yıllık sabrı tüm inananlar için bir model olarak kalır. Başarının mühtedi sayısıyla değil, Allah'ın verdiği görevi yerine getirmedeki sadakatle ölçüldüğünü gösterir.",
+    "moral_lesson": "Bu hikaye bize İslam davetinde sabır (sabr) erdemini öğretir. Muhalefet karşısında cesaretimizi kaybetmeden görevimizde sebat etmemiz gerektiğini hatırlatır.",
+    "historical_location": "Mezopotamya",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "nuh_patience_chapter_1",
+        "title": "Dokuz Yüz Elli Yıl",
+        "content": "Kur'an bize bildirir: \"Nuh'u kavmine gönderdik. Aralarında bin yıldan elli yıl eksik kaldı.\" Böylece Nuh dokuz yüz elli yıl kavmini İslam'a çağırdı. Bu süre boyunca mesajı iletmekten hiç yorulmadı. Onları gündüz ve gece, açıktan ve gizlice çağırdı. Bu olağanüstü sebata rağmen çoğunluk reddetti. Sadece küçük bir grup inanan, çoğunlukla mütevazı insanlar, davetine cevap verdi. Bu uzun süre hem Allah'ın insanlara tövbe için zaman veren sonsuz sabrını hem de peygamberin görevini yerine getirmedeki sarsılmaz kararlılığını gösterir."
+      },
+      {
+        "id": "nuh_patience_chapter_2",
+        "title": "Nuh'un Duası",
+        "content": "Çoğunluk arasında yüzyıllarca başarısız davetten sonra Nuh Allah'a şöyle seslendi: \"Rabbim! Kavmim bana isyan etti ve malı ve evlatları sadece kaybını artıran birini takip etti. Büyük bir tuzak kurdular. Dediler ki: İlahlarınızı asla bırakmayın. Wadd'i, Suwa'ı, Yaghuth'u, Ya'uq'u ve Nasr'ı bırakmayın. Zaten birçoklarını saptırdılar. Zalimleri sadece sapıklıkta artır.\" Nuh kavminin tüm sınırları aştığını kabul etti ve Allah'tan yeryüzünde kâfirlerden hiçbir sakin bırakmamasını istedi, çünkü bırakırsa sadece kullarını saptıracak ve sadece günahkâr ve inatçı kâfirler doğuracaklardı."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 29:14",
+        "reference_text": "Ankebut Suresi, 14. ayet",
+        "content": "وَلَقَدْ أَرْسَلْنَا نُوحًا إِلَىٰ قَوْمِهِ فَلَبِثَ فِيهِمْ أَلْفَ سَنَةٍ إِلَّا خَمْسِينَ عَامًا",
+        "translation": "Nuh'u kavmine gönderdik. Aralarında bin yıldan elli yıl eksik kaldı.",
+        "relevance": "Bu ayet Nuh'un görevinin olağanüstü süresini tespit eder: 950 yıl."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 71:26-28",
+        "reference_text": "Nuh Suresi, 26-28. ayetler",
+        "content": "وَقَالَ نُوحٌ رَبِّ لَا تَذَرْ عَلَى الْأَرْضِ مِنَ الْكَافِرِينَ دَيَّارًا إِنَّكَ إِن تَذَرْهُمْ يُضِلُّوا عِبَادَكَ وَلَا يَلِدُوا إِلَّا فَاجِرًا كَفَّارًا",
+        "translation": "Nuh dedi: Rabbim! Yeryüzünde kâfirlerden hiçbir sakin bırakma. Onları bırakırsan kullarını saptırırlar ve sadece günahkâr inatçı kâfirler doğururlar.",
+        "relevance": "Bu ayetler kavminin yüzyıllarca reddinden sonra Nuh'un duasını içerir."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Sabr",
+        "arabic_term": "صبر",
+        "definition": "Sabır. Nuh'un 950 yıl İslam davetinde gösterdiği erdem.",
+        "pronunciation": "sabr"
+      },
+      {
+        "id": 2,
+        "term": "Du'a",
+        "arabic_term": "دعاء",
+        "definition": "Dua veya yalvarma. Nuh kavmi inkârda ısrar ettikten sonra Allah'a yalvardı.",
+        "pronunciation": "dou-a"
+      }
+    ]
+  },
+  "building_the_ark": {
+    "title": "Geminin İnşası",
+    "title_arabic": "بناء السفينة",
+    "introduction": "Allah tufan beklentisiyle Nuh'a bir gemi inşa etmesini emretti. Nuh itaat etti ve gemiyi inşa etmeye başladı, gelecek azaba inanmayan kavminin alaylarına katlandı. Gemi kesin ilahi talimatlara göre inşa edildi ve inananlar için kurtuluş aracı oldu.",
+    "conclusion": "Geminin inşası, Nuh'un Allah'ın emirlerine olağandışı görünse bile tam itaatini gösterir. Ayrıca Allah'ın inananlar için kurtuluşu nasıl hazırladığını gösterir.",
+    "moral_lesson": "Bu hikaye bize Allah'ın emirlerine tereddüt etmeden itaat etmemizi öğretir, bize anlaşılmaz görünse bile. İlahi hikmet sınırlı anlayışımızı aşar.",
+    "historical_location": "Mezopotamya",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "building_the_ark_chapter_1",
+        "title": "İnşa Emri",
+        "content": "Allah Nuh'a vahyetti: \"Gözlerimiz önünde ve vahyimize göre gemiyi yap. Zalimler hakkında Bana hitap etme: onlar boğulacak.\" Nuh hemen işe koyuldu. Allah'ın kendisine belirttiği tam özelliklere göre gemiyi inşa etti. Kur'an inşanın teknik detaylarını vermez ama her şeyin ilahi gözetim altında ve vahye göre yapıldığını vurgular. Nuh inşa ederken kâfirler yanından geçip alay ettiler: \"Ey Nuh! Bizimle tartıştın ve tartışmaları çoğalttın.\" Nuh onları uyardı: \"Bizimle alay ederseniz, sizin alay ettiğiniz gibi biz de sizinle alay edeceğiz.\""
+      },
+      {
+        "id": "building_the_ark_chapter_2",
+        "title": "Biniş",
+        "content": "Gemi tamamlandığında ve azap zamanı yaklaştığında Allah Nuh'a emretti: \"Her türden bir çift ve ailen - hakkında söz söylenenler hariç - ve inananları yükle.\" Sadece inananlar Nuh ile bindi. Ailesi arasında karısı ve oğullarından biri inanmayı reddetti ve kurtulanlar arasında değildi. Kur'an Nuh'un karısının ve oğlunun zalimler arasında olduğunu belirtir. Gemi Nuh'u, inananları ve Allah'ın emrettiği gibi her hayvan türünden bir çifti ağırladı."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 11:37-38",
+        "reference_text": "Hud Suresi, 37-38. ayetler",
+        "content": "وَاصْنَعِ الْفُلْكَ بِأَعْيُنِنَا وَوَحْيِنَا وَلَا تُخَاطِبْنِي فِي الَّذِينَ ظَلَمُوا إِنَّهُم مُّغْرَقُونَ وَيَصْنَعُ الْفُلْكَ وَكُلَّمَا مَرَّ عَلَيْهِ مَلَأٌ مِّن قَوْمِهِ سَخِرُوا مِنْهُ",
+        "translation": "Gözlerimiz önünde ve vahyimize göre gemiyi yap. Zalimler hakkında Bana hitap etme: onlar boğulacak. Ve gemiyi yapıyordu. Kavminin ileri gelenleri her yanından geçtiğinde onunla alay ediyorlardı.",
+        "relevance": "Bu ayetler gemiyi inşa emrini ve halkın alayını anlatır."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 11:40",
+        "reference_text": "Hud Suresi, 40. ayet",
+        "content": "حَتَّىٰ إِذَا جَاءَ أَمْرُنَا وَفَارَ التَّنُّورُ قُلْنَا احْمِلْ فِيهَا مِن كُلٍّ زَوْجَيْنِ اثْنَيْنِ وَأَهْلَكَ إِلَّا مَن سَبَقَ عَلَيْهِ الْقَوْلُ وَمَن آمَنَ",
+        "translation": "Emrimiz gelip fırın kaynadığında dedik: Her türden bir çift ve ailen - hakkında söz söylenenler hariç - ve inananları yükle.",
+        "relevance": "Bu ayet tufan anında gemideki binişi anlatır."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Fulk",
+        "arabic_term": "فلك",
+        "definition": "Gemi veya tekne. Nuh'un Allah'ın emriyle inşa ettiği araç.",
+        "pronunciation": "foulk"
+      },
+      {
+        "id": 2,
+        "term": "Tannur",
+        "arabic_term": "تنور",
+        "definition": "Fırın. Kur'an'da tufanın başlangıcını gösteren işaret - fırın kaynadı.",
+        "pronunciation": "tan-nour"
+      },
+      {
+        "id": 3,
+        "term": "Zawjayn",
+        "arabic_term": "زوجين",
+        "definition": "Bir çift. Gemide her türden bir erkek ve bir dişi yüklendi.",
+        "pronunciation": "zaw-jayn"
+      }
+    ]
+  },
+  "the_flood": {
+    "title": "Tufan",
+    "title_arabic": "الطوفان",
+    "introduction": "Allah'ın azabı Nuh'un kavmine indi. Sular yerden ve gökten fışkırdı, her şeyi su altında bıraktı. Gemi suların üzerinde yüzdü, inananları ve hayvanları güvenle taşıdı. Kâfirler boğuldu, Nuh'un yüzyıllardır uyardığı gibi.",
+    "conclusion": "Tufan Allah'ın adaletini gösterir: İnananları kurtardı ve kâfirleri yok etti. Gerçeği reddetmenin sonuçları hakkında tüm nesiller için bir derstir.",
+    "moral_lesson": "Bu hikaye bizi Allah'ın azabının gerçek olduğu ve inkârda ısrar edenlere isabet ettiği konusunda uyarır. Allah'a isyan ederken asla güvende hissetmememizi hatırlatır.",
+    "historical_location": "Mezopotamya",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "the_flood_chapter_1",
+        "title": "Suların Salıverilmesi",
+        "content": "Allah'ın emri geldiğinde gök kapıları açıldı ve yer kaynaklarını fışkırttı. Kur'an şöyle anlatır: \"Göğün kapılarını sağanak suya açtık ve yeri kaynaklar halinde fışkırttık. Sular takdir edilmiş bir emre göre birleşti.\" Tufan tamdı. Tüm bölge su altında kaldı. Dağlar bile sığınak sunamadı. Nuh'un gemisi suların üzerinde yüzdü, Allah'ın iradesiyle korundu. İçerde Nuh ve inananlar güvendeydi, dışarıda ise binmeyi reddeden kâfirler dalgalar tarafından yutuldu."
+      },
+      {
+        "id": "the_flood_chapter_2",
+        "title": "İnananların Kurtuluşu",
+        "content": "Allah Nuh'a dedi: \"Ona bin. Allah'ın adıyla yüzsün ve demirlesin! Rabbin gerçekten çok bağışlayandır, çok merhametlidir.\" Gemi suların üzerinde yüzdü, yolcularını güvenle taşıdı. Nuh ve onunla olanlar kurtuldu, diğerleri boğuldu. Kur'an vurgular: \"Ve denildi: Ey yer! Suyunu yut. Ve sen ey gök! Kesil! Su çekildi. Emir yerine getirildi. Gemi Cudi'ye oturdu. Ve denildi: Zalimler helak olsun!\""
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 54:11-14",
+        "reference_text": "Kamer Suresi, 11-14. ayetler",
+        "content": "فَفَتَحْنَا أَبْوَابَ السَّمَاءِ بِمَاءٍ مُّنْهَمِرٍ وَفَجَّرْنَا الْأَرْضَ عُيُونًا فَالْتَقَى الْمَاءُ عَلَىٰ أَمْرٍ قَدْ قُدِرَ وَحَمَلْنَاهُ عَلَىٰ ذَاتِ أَلْوَاحٍ وَدُسُرٍ",
+        "translation": "Göğün kapılarını sağanak suya açtık ve yeri kaynaklar halinde fışkırttık. Sular takdir edilmiş bir emre göre birleşti. Ve onu tahtalar ve çivilerden yapılmış bir araçta taşıdık.",
+        "relevance": "Bu ayetler tufanın salıverilmesini ve geminin korunmasını anlatır."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 11:44",
+        "reference_text": "Hud Suresi, 44. ayet",
+        "content": "وَقِيلَ يَا أَرْضُ ابْلَعِي مَاءَكِ وَيَا سَمَاءُ أَقْلِعِي وَغِيضَ الْمَاءُ وَقُضِيَ الْأَمْرُ وَاسْتَوَتْ عَلَى الْجُودِيِّ وَقِيلَ بُعْدًا لِّلْقَوْمِ الظَّالِمِينَ",
+        "translation": "Ve denildi: Ey yer! Suyunu yut. Ve sen ey gök! Kesil! Su çekildi. Emir yerine getirildi. Gemi Cudi'ye oturdu. Ve denildi: Zalimler helak olsun!",
+        "relevance": "Bu ayet tufanın sonunu ve geminin Cudi Dağı'na oturmasını anlatır."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Tufan",
+        "arabic_term": "طوفان",
+        "definition": "Tufan. Nuh'un kavmini yok eden su ile azap.",
+        "pronunciation": "tou-fan"
+      },
+      {
+        "id": 2,
+        "term": "Al-Judi",
+        "arabic_term": "الجودي",
+        "definition": "Cudi Dağı. Nuh'un gemisinin tufandan sonra oturduğu dağ, geleneksel olarak Türkiye'de tanımlanır.",
+        "pronunciation": "al-jou-di"
+      }
+    ]
+  },
+  "nuh_son_refused": {
+    "title": "Reddeden Nuh'un Oğlu",
+    "title_arabic": "ابن نوح الذي أبى",
+    "introduction": "Nuh'un imtihanları arasında kendi oğlunun gemiye binmeyi reddetmesi vardı. Bu oğul tufandan kaçabileceğine inanarak bir dağa sığınmayı seçti. Boğuldu. Nuh oğlu için Allah'a yalvardığında, Allah ona derin bir gerçeği hatırlattı: bu oğul iman açısından ailesinden değildi, çünkü zalimce bir davranışta bulunmuştu.",
+    "conclusion": "Nuh'un oğlunun hikayesi kan bağlarının kurtuluş için yeterli olmadığını öğretir. Sadece iman ve Allah'a itaat önemlidir. Manevi bağlar aile bağlarını aşar.",
+    "moral_lesson": "Bu hikaye kimseyi iradesi dışında kurtaramayacağımızı hatırlatır. Herkes kendi seçimlerinden sorumludur. Ayrıca takva ve imanın Allah katında akrabalığın gerçek ölçütü olduğunu öğretir.",
+    "historical_location": "Tufan sırasında",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "nuh_son_refused_chapter_1",
+        "title": "Binmeyi Reddetme",
+        "content": "Nuh ayrı kalan oğluna seslendi: \"Ey oğlum! Bizimle bin ve kâfirlerle kalma.\" Oğlu cevap verdi: \"Beni sudan koruyacak bir dağa sığınacağım.\" Nuh ona dedi: \"Bugün Allah'ın emrine karşı O'nun merhamet ettiği dışında hiçbir koruyucu yoktur.\" Bir dalga onları ayırdı ve oğul boğulanlar arasındaydı. Nuh'un oğlu kendi gücünün ve bir dağın onu kurtarabileceğine inanmıştı, sadece Allah'ın koruyabileceğini unutarak. Babasının davetini reddetti ve helak yolunu seçti."
+      },
+      {
+        "id": "nuh_son_refused_chapter_2",
+        "title": "Allah'ın Cevabı",
+        "content": "Nuh Rabbine seslendi ve dedi: \"Rabbim! Oğlum ailemdendir. Senin vaadin haktır. Sen hakimlerin en adilisin.\" Allah cevap verdi: \"Ey Nuh! O ailenden değildir. Bu salih olmayan bir ameldi. Bilmediğin şey hakkında Bana sorma. Seni cahillerden olmaktan sakındırırım.\" Nuh anladı ve dedi: \"Rabbim! Bilmediğim şey hakkında Sana sormaktan Sana sığınırım. Eğer beni bağışlamaz ve bana merhamet etmezsen, kaybedenlerden olurum.\" Bu ilahi cevap gerçek ailenin iman ailesi olduğunu öğretir. Nuh'un oğlu, inanmayı ve gemiye binmeyi reddederek kendini inananlar ailesinden çıkarmıştı."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 11:42-43",
+        "reference_text": "Hud Suresi, 42-43. ayetler",
+        "content": "وَهِيَ تَجْرِي بِهِمْ فِي مَوْجٍ كَالْجِبَالِ وَنَادَىٰ نُوحٌ ابْنَهُ وَكَانَ فِي مَعْزِلٍ يَا بُنَيَّ ارْكَب مَّعَنَا وَلَا تَكُن مَّعَ الْكَافِرِينَ قَالَ سَآوِي إِلَىٰ جَبَلٍ يَعْصِمُنِي مِنَ الْمَاءِ",
+        "translation": "Dağlar gibi dalgalar arasında onlarla birlikte yüzüyordu. Nuh ayrı kalan oğluna seslendi: Ey oğlum! Bizimle bin ve kâfirlerle kalma. Dedi: Beni sudan koruyacak bir dağa sığınacağım.",
+        "relevance": "Bu ayetler Nuh'un oğluna çağrısını ve onun reddini anlatır."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 11:45-46",
+        "reference_text": "Hud Suresi, 45-46. ayetler",
+        "content": "وَنَادَىٰ نُوحٌ رَبَّهُ فَقَالَ رَبِّ إِنَّ ابْنِي مِنْ أَهْلِي وَإِنَّ وَعْدَكَ الْحَقُّ وَأَنتَ أَحْكَمُ الْحَاكِمِينَ قَالَ يَا نُوحُ إِنَّهُ لَيْسَ مِنْ أَهْلِكَ إِنَّهُ عَمَلٌ غَيْرُ صَالِحٍ",
+        "translation": "Nuh Rabbine seslendi ve dedi: Rabbim! Oğlum ailemdendir. Senin vaadin haktır. Sen hakimlerin en adilisin. Allah dedi: Ey Nuh! O ailenden değildir. Bu salih olmayan bir ameldi.",
+        "relevance": "Bu ayetler Nuh ile Allah arasındaki diyaloğu içerir, gerçek ailenin iman ailesi olduğunu tespit eder."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Ahl",
+        "arabic_term": "أهل",
+        "definition": "Aile veya halk. Allah Nuh'a gerçek ailesinin kan değil iman edenler olduğunu öğretti.",
+        "pronunciation": "ahl"
+      },
+      {
+        "id": 2,
+        "term": "Amal ghayr salih",
+        "arabic_term": "عمل غير صالح",
+        "definition": "Salih olmayan amel. Allah'ın Nuh'un oğlunun davranışına verdiği tanım.",
+        "pronunciation": "a-mal ghayr sa-lih"
+      }
+    ]
+  },
+  "lessons_from_nuh": {
+    "title": "Nuh Hikayesinden Dersler",
+    "title_arabic": "دروس من قصة نوح",
+    "introduction": "Nuh'un (عليه السلام) hikayesi tüm insanlık için zamansız dersler içerir. Sabrı, İslam davetinde sebatı, inkârın sonuçlarını ve Allah'ın inananlara merhametini öğretir. Kur'an bunu gelecek nesiller için örnek olarak zikreder.",
+    "conclusion": "Nuh görevini mükemmellikle yerine getirdi ve inananlarla birlikte kurtuldu. Hikayesi tüm insanlık için bir hatırlatma olarak kalır: Peygamberlerin davetine cevap vermek ve Allah'a inanmak kurtuluş yoludur.",
+    "moral_lesson": "Bu hikaye bize Allah'ın elçilerini takip etmeyi, zorluklarda sabırlı olmayı ve ilahi rahmetten asla ümidi kesmemeyi öğretir. Gerçeği inatla reddetmenin sonuçlarına karşı bizi uyarır.",
+    "historical_location": "Mezopotamya'dan Cudi Dağı'na",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lessons_from_nuh_chapter_1",
+        "title": "İnsanlık İçin Bir Örnek",
+        "content": "Kur'an Nuh'un hikayesini halklar için örnek olarak sunar: \"Sana elçilerin haberlerinden kalbini güçlendireceğimiz şeyleri anlatıyoruz. Bu anlatıda sana hak, inananlar için öğüt ve hatırlatma gelmiştir.\" Nuh'un hikayesi bize peygamberlerin hepsinin muhalefetle karşılaştığını ama nihai zaferin inananlara ait olduğunu gösterir. Kâfirlere verilen sürenin Allah'ın zayıflığının işareti değil, tövbe etmeleri için bir fırsat olduğunu hatırlatır. Süre geldiğinde kimse erteleyemez."
+      },
+      {
+        "id": "lessons_from_nuh_chapter_2",
+        "title": "Peygamberlerin Soyu",
+        "content": "Nuh peygamberlik soyunda merkezi bir yere sahiptir. Kur'an der: \"Allah Adem'i, Nuh'u, İbrahim ailesini ve İmran ailesini âlemlerin üstüne seçti.\" Nuh Adem'den sonra bir topluma gönderilen ilk elçiydi. Soyu tufandan sonra yeryüzünü doldurdu. Torunları arasında İbrahim, Musa, İsa ve Muhammed (hepsine selam olsun) peygamberleri vardır. Nuh'un hikayesi tüm peygamberlerin takip ettiği modeli oluşturur: tevhide davet, redde karşı sabır ve inananlar için kurtuluş."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 11:120",
+        "reference_text": "Hud Suresi, 120. ayet",
+        "content": "وَكُلًّا نَّقُصُّ عَلَيْكَ مِنْ أَنبَاءِ الرُّسُلِ مَا نُثَبِّتُ بِهِ فُؤَادَكَ وَجَاءَكَ فِي هَٰذِهِ الْحَقُّ وَمَوْعِظَةٌ وَذِكْرَىٰ لِلْمُؤْمِنِينَ",
+        "translation": "Sana elçilerin haberlerinden kalbini güçlendireceğimiz şeyleri anlatıyoruz. Bu anlatıda sana hak, inananlar için öğüt ve hatırlatma gelmiştir.",
+        "relevance": "Bu ayet peygamberlerin anlatılarının amacını açıklar: kalpleri güçlendirmek ve öğüt vermek."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 3:33",
+        "reference_text": "Al-i İmran Suresi, 33. ayet",
+        "content": "إِنَّ اللَّهَ اصْطَفَىٰ آدَمَ وَنُوحًا وَآلَ إِبْرَاهِيمَ وَآلَ عِمْرَانَ عَلَى الْعَالَمِينَ",
+        "translation": "Allah Adem'i, Nuh'u, İbrahim ailesini ve İmran ailesini âlemlerin üstüne seçti.",
+        "relevance": "Bu ayet Nuh'un Allah'ın seçilmişlerinin soyundaki seçkin yerini tespit eder."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Ibra",
+        "arabic_term": "عبرة",
+        "definition": "Örnek veya ders. Peygamberlerin hikayeleri insanlık için örneklerdir.",
+        "pronunciation": "ib-ra"
+      },
+      {
+        "id": 2,
+        "term": "Dhikra",
+        "arabic_term": "ذكرى",
+        "definition": "Hatırlatma. Peygamberlerin anlatıları inananlar için hatırlatma görevi görür.",
+        "pronunciation": "dhik-ra"
+      }
+    ]
+  }
+}

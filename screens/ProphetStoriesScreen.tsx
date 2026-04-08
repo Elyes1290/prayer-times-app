@@ -14,12 +14,12 @@ import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons } from "@expo/vector-icons";
 import { useFocusEffect, useRouter } from "expo-router";
 
-import { ThemedView } from "../components/ThemedView";
-import { ThemedText } from "../components/ThemedText";
+import ThemedImageBackground from "../components/ThemedImageBackground";
 import { useThemeColors } from "../hooks/useThemeAssets";
 import { useCurrentTheme } from "../hooks/useThemeColor";
 import { usePremium } from "../contexts/PremiumContext";
 import { useTranslation } from "react-i18next";
+import i18n from "i18next";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useUniversalStyles } from "../hooks/useUniversalLayout";
 import {
@@ -27,6 +27,15 @@ import {
   ProphetStoryFavorite,
 } from "../contexts/FavoritesContext";
 import { useNetworkStatus } from "../hooks/useNetworkStatus";
+import {
+  ProphetSelector,
+} from "../components/prophet-stories/ProphetSelector";
+import { StoryCard } from "../components/prophet-stories/StoryCard";
+import {
+  getProphetLabel,
+  VALID_PROPHET_IDS,
+  type ProphetId,
+} from "../constants/prophetStories";
 
 // Helper pour obtenir le token d'authentification
 const getAuthToken = async (): Promise<string> => {
@@ -55,7 +64,7 @@ const saveDownloadedStory = async (story: ProphetStory): Promise<boolean> => {
       downloaded.push({ ...story, isDownloaded: true });
       await AsyncStorage.setItem(
         DOWNLOADED_STORIES_KEY,
-        JSON.stringify(downloaded)
+        JSON.stringify(downloaded),
       );
     }
     return true;
@@ -71,7 +80,7 @@ const removeDownloadedStory = async (storyId: string): Promise<boolean> => {
     const filtered = downloaded.filter((s) => s.id !== storyId);
     await AsyncStorage.setItem(
       DOWNLOADED_STORIES_KEY,
-      JSON.stringify(filtered)
+      JSON.stringify(filtered),
     );
     return true;
   } catch (error) {
@@ -139,25 +148,22 @@ interface StoryStats {
   avg_reading_time: number | string;
 }
 
-const CATEGORY_ICONS: Record<string, string> = {
-  childhood: "person-outline",
-  revelation: "flash-outline",
-  meccan_period: "home-outline",
-  hijra: "walk-outline",
-  medinian_period: "business-outline",
-  battles: "shield-outline",
-  companions: "people-outline",
-  family_life: "heart-outline",
-  final_years: "hourglass-outline",
-  character_traits: "star-outline",
-  miracles: "sparkles-outline",
-  daily_life: "calendar-outline",
-};
-
-const DIFFICULTY_COLORS = {
-  beginner: "#4CAF50",
-  intermediate: "#FF9800",
-  advanced: "#F44336",
+// Gradients du header selon le thème (cohérent avec le design system)
+const getHeaderGradient = (
+  theme: "light" | "dark" | "morning" | "sunset",
+): [string, string] => {
+  switch (theme) {
+    case "light":
+      return ["rgba(248,249,250,0.96)", "rgba(200,230,201,0.88)"];
+    case "dark":
+      return ["rgba(11,21,32,0.95)", "rgba(21,34,56,0.9)"];
+    case "morning":
+      return ["rgba(255,250,240,0.96)", "rgba(255,228,181,0.9)"];
+    case "sunset":
+      return ["rgba(42,31,26,0.95)", "rgba(61,43,34,0.9)"];
+    default:
+      return ["rgba(248,249,250,0.96)", "rgba(200,230,201,0.88)"];
+  }
 };
 
 export default function ProphetStoriesScreen() {
@@ -187,7 +193,7 @@ export default function ProphetStoriesScreen() {
     return favorites.some(
       (fav) =>
         fav.type === "prophet_story" &&
-        (fav as ProphetStoryFavorite).storyId === storyId
+        (fav as ProphetStoryFavorite).storyId === storyId,
     );
   };
 
@@ -200,8 +206,10 @@ export default function ProphetStoriesScreen() {
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [downloadingStories, setDownloadingStories] = useState<Set<string>>(
-    new Set()
+    new Set(),
   );
+  // 🆕 État pour le prophète sélectionné
+  const [selectedProphet, setSelectedProphet] = useState<ProphetId>("muhammad");
 
   // 🆕 Charger les données (en ligne ou hors ligne)
   const loadStories = useCallback(
@@ -212,7 +220,7 @@ export default function ProphetStoriesScreen() {
         // 🆕 Si hors ligne, charger depuis le stockage local
         if (!networkStatus.isConnected) {
           console.log(
-            "📱 Mode hors ligne - chargement des histoires téléchargées"
+            "📱 Mode hors ligne - chargement des histoires téléchargées",
           );
           const downloadedStories = await getDownloadedStories();
           setStories(downloadedStories);
@@ -231,12 +239,15 @@ export default function ProphetStoriesScreen() {
           headers.Authorization = `Bearer ${token}`;
         }
 
+        // Récupérer la langue actuelle de l'app
+        const currentLang = i18n.language || "fr";
+
         const response = await fetch(
-          `https://myadhanapp.com/api/prophet-stories.php?action=catalog`,
+          `https://myadhanapp.com/api/prophet-stories.php?action=catalog&prophet=${selectedProphet}&lang=${currentLang}`,
           {
             method: "GET",
             headers: headers,
-          }
+          },
         );
         const responseData = await response.json();
 
@@ -247,15 +258,15 @@ export default function ProphetStoriesScreen() {
               async (story: ProphetStory) => ({
                 ...story,
                 isDownloaded: await isStoryDownloaded(story.id),
-              })
-            )
+              }),
+            ),
           );
           setStories(storiesWithDownloadStatus);
           setStats(responseData.data.stats || null);
         } else {
           Alert.alert(
             "Erreur",
-            responseData.message || "Impossible de charger les histoires"
+            responseData.message || "Impossible de charger les histoires",
           );
         }
       } catch (error) {
@@ -271,14 +282,54 @@ export default function ProphetStoriesScreen() {
         setRefreshing(false);
       }
     },
-    [networkStatus.isConnected]
+    [networkStatus.isConnected, selectedProphet],
   );
 
   useFocusEffect(
     useCallback(() => {
       loadStories();
-    }, [loadStories])
+    }, [loadStories]),
   );
+
+  // 🆕 Fonction pour changer de prophète
+  const handleProphetChange = (
+    prophet:
+      | "muhammad"
+      | "adam"
+      | "nuh"
+      | "hud"
+      | "salih"
+      | "ibrahim"
+      | "lut"
+      | "yusuf"
+      | "musa"
+      | "dawud"
+      | "sulayman"
+      | "yunus"
+      | "ayyub"
+      | "zakariya"
+      | "yahya"
+      | "ilyas"
+      | "alyasa"
+      | "shuayb"
+      | "isa",
+  ) => {
+    if (prophet !== selectedProphet) {
+      setSelectedProphet(prophet);
+      setLoading(true);
+      // Sauvegarder la préférence
+      AsyncStorage.setItem("selected_prophet", prophet);
+    }
+  };
+
+  // 🆕 Charger la préférence sauvegardée au démarrage
+  React.useEffect(() => {
+    AsyncStorage.getItem("selected_prophet").then((saved) => {
+      if (saved && VALID_PROPHET_IDS.includes(saved as ProphetId)) {
+        setSelectedProphet(saved as ProphetId);
+      }
+    });
+  }, []);
 
   // 🚀 Synchroniser l'état des favoris quand les favoris changent
   React.useEffect(() => {
@@ -307,7 +358,7 @@ export default function ProphetStoriesScreen() {
             text: t("upgrade"),
             onPress: () => router.push("/premium-payment"),
           },
-        ]
+        ],
       );
       return;
     }
@@ -329,7 +380,7 @@ export default function ProphetStoriesScreen() {
         const favoriteToRemove = favorites.find(
           (fav) =>
             fav.type === "prophet_story" &&
-            (fav as ProphetStoryFavorite).storyId === storyId
+            (fav as ProphetStoryFavorite).storyId === storyId,
         );
 
         if (favoriteToRemove) {
@@ -338,8 +389,8 @@ export default function ProphetStoriesScreen() {
             // Mettre à jour l'état local des histoires
             setStories((prev) =>
               prev.map((s) =>
-                s.id === storyId ? { ...s, is_favorited: false } : s
-              )
+                s.id === storyId ? { ...s, is_favorited: false } : s,
+              ),
             );
           }
         }
@@ -358,7 +409,7 @@ export default function ProphetStoriesScreen() {
                 text: "Passer au Premium",
                 onPress: () => router.push("/premium-payment"),
               },
-            ]
+            ],
           );
           return;
         }
@@ -377,8 +428,8 @@ export default function ProphetStoriesScreen() {
           readingTime: Number(story.reading_time) || 0,
           isPremium: Boolean(
             story.is_premium === true ||
-              story.is_premium === 1 ||
-              story.is_premium === "1"
+            story.is_premium === 1 ||
+            story.is_premium === "1",
           ),
         };
 
@@ -387,8 +438,8 @@ export default function ProphetStoriesScreen() {
           // Mettre à jour l'état local des histoires
           setStories((prev) =>
             prev.map((s) =>
-              s.id === storyId ? { ...s, is_favorited: true } : s
-            )
+              s.id === storyId ? { ...s, is_favorited: true } : s,
+            ),
           );
         }
       }
@@ -412,12 +463,15 @@ export default function ProphetStoriesScreen() {
         headers.Authorization = `Bearer ${token}`;
       }
 
+      // Récupérer la langue actuelle de l'app
+      const currentLang = i18n.language || "fr";
+
       const response = await fetch(
-        `https://myadhanapp.com/api/prophet-stories.php?action=story&id=${story.id}`,
+        `https://myadhanapp.com/api/prophet-stories.php?action=story&id=${story.id}&prophet=${selectedProphet}&lang=${currentLang}`,
         {
           method: "GET",
           headers: headers,
-        }
+        },
       );
       const responseData = await response.json();
 
@@ -439,8 +493,8 @@ export default function ProphetStoriesScreen() {
           // Mettre à jour l'état local
           setStories((prev) =>
             prev.map((s) =>
-              s.id === story.id ? { ...s, isDownloaded: true } : s
-            )
+              s.id === story.id ? { ...s, isDownloaded: true } : s,
+            ),
           );
           Alert.alert("Succès", "Histoire téléchargée avec succès");
         }
@@ -448,7 +502,7 @@ export default function ProphetStoriesScreen() {
         Alert.alert(
           "Erreur",
           responseData.message ||
-            "Impossible de télécharger le contenu de l'histoire"
+            "Impossible de télécharger le contenu de l'histoire",
         );
       }
     } catch (error) {
@@ -471,8 +525,8 @@ export default function ProphetStoriesScreen() {
         // Mettre à jour l'état local
         setStories((prev) =>
           prev.map((s) =>
-            s.id === storyId ? { ...s, isDownloaded: false } : s
-          )
+            s.id === storyId ? { ...s, isDownloaded: false } : s,
+          ),
         );
         Alert.alert("Succès", "Histoire supprimée du stockage local");
       }
@@ -482,46 +536,27 @@ export default function ProphetStoriesScreen() {
     }
   };
 
-  const getCategoryDisplayName = (category: string): string => {
-    const translations: Record<string, string> = {
-      childhood: "Enfance",
-      revelation: "Révélation",
-      meccan_period: "Période Mecquoise",
-      hijra: "Hijra",
-      medinian_period: "Période Médinoise",
-      battles: "Batailles",
-      companions: "Compagnons",
-      family_life: "Vie Familiale",
-      final_years: "Dernières Années",
-      character_traits: "Traits de Caractère",
-      miracles: "Miracles",
-      daily_life: "Vie Quotidienne",
-    };
-    return translations[category] || category;
-  };
-
   const renderStoryCard = ({ item: story }: { item: ProphetStory }) => {
-    // Protection contre les objets undefined/null
-    if (!story || !story.id || !story.title) {
-      return null;
-    }
+    if (!story || !story.id || !story.title) return null;
 
-    // 🚀 PROTECTION TOTALE : Normaliser toutes les valeurs pour éviter null/undefined
     const safeStory = {
       id: String(story.id || ""),
       title: String(story.title || "Histoire"),
       title_arabic: story.title_arabic ? String(story.title_arabic) : null,
       category: String(story.category || "daily_life"),
-      difficulty: story.difficulty || "beginner",
+      difficulty: (story.difficulty || "beginner") as
+        | "beginner"
+        | "intermediate"
+        | "advanced",
       reading_time: Number(story.reading_time) || 0,
       view_count: Number(story.view_count) || 0,
       rating: Number(story.rating) || 0,
       user_progress: Number(story.user_progress) || 0,
-      is_favorited: isStoryFavorited(String(story.id)), // 🚀 UTILISER LE SYSTÈME LOCAL
+      is_favorited: isStoryFavorited(String(story.id)),
       is_premium: Boolean(
         story.is_premium === true ||
           story.is_premium === 1 ||
-          story.is_premium === "1"
+          story.is_premium === "1",
       ),
       historical_location: story.historical_location
         ? String(story.historical_location)
@@ -529,331 +564,197 @@ export default function ProphetStoriesScreen() {
     };
 
     return (
-      <TouchableOpacity
-        style={[
-          styles.storyCard,
-          {
-            backgroundColor: colors.cardBG,
-            // 🚀 RESPONSIVE : Marges adaptatives selon la taille d'écran
-            marginHorizontal: Math.max(
-              universalLayout.contentPaddingHorizontal - 4,
-              12
-            ),
-          },
-        ]}
+      <StoryCard
+        story={safeStory}
+        rawStory={{ id: story.id, isDownloaded: story.isDownloaded }}
+        colors={{
+          cardBG: colors.cardBG,
+          border: colors.border,
+          primary: colors.primary,
+          textSecondary: colors.textSecondary,
+        }}
+        contentPaddingHorizontal={universalLayout.contentPaddingHorizontal}
         onPress={() => handleStoryPress(story)}
-        activeOpacity={0.8}
-      >
-        <View style={styles.storyHeader}>
-          <View style={styles.storyTitleContainer}>
-            <ThemedText style={styles.storyTitle} numberOfLines={2}>
-              {safeStory.title}
-            </ThemedText>
-            {safeStory.title_arabic && (
-              <Text
-                style={[
-                  styles.storyTitleArabic,
-                  { color: colors.textSecondary },
-                ]}
-              >
-                {safeStory.title_arabic}
-              </Text>
-            )}
-          </View>
-
-          <TouchableOpacity
-            onPress={() => toggleFavorite(safeStory.id)}
-            style={styles.favoriteButton}
-          >
-            <Ionicons
-              name={safeStory.is_favorited ? "heart" : "heart-outline"}
-              size={24}
-              color={safeStory.is_favorited ? "#FF6B6B" : colors.textSecondary}
-            />
-          </TouchableOpacity>
-        </View>
-
-        <View style={styles.storyMeta}>
-          <View style={styles.metaRow}>
-            <View
-              style={[
-                styles.categoryBadge,
-                { backgroundColor: colors.primary },
-              ]}
-            >
-              <Ionicons
-                name={CATEGORY_ICONS[safeStory.category] as any}
-                size={14}
-                color="white"
-              />
-              <Text style={styles.categoryBadgeText}>
-                {getCategoryDisplayName(safeStory.category)}
-              </Text>
-            </View>
-
-            <View
-              style={[
-                styles.difficultyBadge,
-                { backgroundColor: DIFFICULTY_COLORS[safeStory.difficulty] },
-              ]}
-            >
-              <Text style={styles.difficultyBadgeText}>
-                {safeStory.difficulty === "beginner"
-                  ? "Débutant"
-                  : safeStory.difficulty === "intermediate"
-                  ? "Intermédiaire"
-                  : "Avancé"}
-              </Text>
-            </View>
-          </View>
-
-          <View style={styles.metaRow}>
-            <View style={styles.metaItem}>
-              <Ionicons
-                name="time-outline"
-                size={16}
-                color={colors.textSecondary}
-              />
-              <Text style={[styles.metaText, { color: colors.textSecondary }]}>
-                {safeStory.reading_time} min
-              </Text>
-            </View>
-
-            <View style={styles.metaItem}>
-              <Ionicons
-                name="eye-outline"
-                size={16}
-                color={colors.textSecondary}
-              />
-              <Text style={[styles.metaText, { color: colors.textSecondary }]}>
-                {safeStory.view_count}
-              </Text>
-            </View>
-
-            {safeStory.rating > 0 && (
-              <View style={styles.metaItem}>
-                <Ionicons name="star" size={16} color="#FFD700" />
-                <Text
-                  style={[styles.metaText, { color: colors.textSecondary }]}
-                >
-                  {safeStory.rating.toFixed(1)}
-                </Text>
-              </View>
-            )}
-          </View>
-        </View>
-
-        {/* Barre de progression si l'histoire a été commencée */}
-        {safeStory.user_progress > 0 && (
-          <View style={styles.progressContainer}>
-            <View
-              style={[styles.progressBar, { backgroundColor: colors.border }]}
-            >
-              <View
-                style={[
-                  styles.progressFill,
-                  {
-                    backgroundColor: colors.primary,
-                    width: `${safeStory.user_progress}%`,
-                  },
-                ]}
-              />
-            </View>
-            <Text
-              style={[styles.progressText, { color: colors.textSecondary }]}
-            >
-              {Math.round(safeStory.user_progress)}% lu
-            </Text>
-          </View>
-        )}
-
-        {/* Badge Premium */}
-        {safeStory.is_premium && (
-          <View style={[styles.premiumBadge, { backgroundColor: "#FFD700" }]}>
-            <Ionicons name="star" size={12} color="#000" />
-            <Text style={styles.premiumText}>Premium</Text>
-          </View>
-        )}
-
-        {/* Badge localisation historique */}
-        {safeStory.historical_location && (
-          <View style={styles.locationContainer}>
-            <Ionicons
-              name="location-outline"
-              size={14}
-              color={colors.textSecondary}
-            />
-            <Text
-              style={[styles.locationText, { color: colors.textSecondary }]}
-            >
-              {safeStory.historical_location}
-            </Text>
-          </View>
-        )}
-
-        {/* 🆕 Bouton de téléchargement/suppression */}
-        {networkStatus.isConnected && (
-          <TouchableOpacity
-            style={[
-              styles.downloadButton,
-              story.isDownloaded && styles.downloadedButton,
-            ]}
-            onPress={(e) => {
-              e.stopPropagation();
-              if (story.isDownloaded) {
-                Alert.alert(
-                  "Supprimer",
-                  "Voulez-vous supprimer cette histoire téléchargée ?",
-                  [
-                    { text: "Annuler", style: "cancel" },
-                    {
-                      text: "Supprimer",
-                      style: "destructive",
-                      onPress: () => handleDeleteStory(safeStory.id),
-                    },
-                  ]
-                );
-              } else {
-                handleDownloadStory(story);
-              }
-            }}
-            disabled={downloadingStories.has(safeStory.id)}
-          >
-            {downloadingStories.has(safeStory.id) ? (
-              <ActivityIndicator size="small" color="#fff" />
-            ) : (
-              <>
-                <Ionicons
-                  name={
-                    story.isDownloaded ? "checkmark-circle" : "download-outline"
-                  }
-                  size={20}
-                  color="#fff"
-                />
-                <Text style={styles.downloadButtonText}>
-                  {story.isDownloaded ? "Téléchargée" : "Télécharger"}
-                </Text>
-              </>
-            )}
-          </TouchableOpacity>
-        )}
-      </TouchableOpacity>
+        onToggleFavorite={() => toggleFavorite(safeStory.id)}
+        isConnected={networkStatus.isConnected}
+        isDownloading={downloadingStories.has(safeStory.id)}
+        onDownload={() => handleDownloadStory(story)}
+        onDelete={() => handleDeleteStory(safeStory.id)}
+      />
     );
   };
 
   const renderHeader = () => (
     <View style={styles.headerContainer}>
       <LinearGradient
-        colors={
-          currentTheme === "dark"
-            ? ["#1a472a", "#2d5a3d"]
-            : ["#E8F5E8", "#C8E6C9"]
-        }
+        colors={getHeaderGradient(currentTheme)}
         style={[
           styles.headerGradient,
           {
-            // 🚀 RESPONSIVE : Adapte le padding selon l'appareil (S22, S24, S25 Ultra)
             paddingHorizontal: universalLayout.contentPaddingHorizontal,
-            paddingTop: Math.max(universalLayout.safeAreaTop + 20, 60),
+            paddingTop: Math.max(universalLayout.safeAreaTop + 16, 56),
           },
         ]}
       >
-        <View style={styles.headerContent}>
-          <View style={styles.headerTextContainer}>
-            <ThemedText style={styles.headerTitle}>
-              📚 Histoires du Prophète
-            </ThemedText>
-            <ThemedText style={styles.headerSubtitle}>
-              Mohammad (ﷺ) - Paix et Bénédictions sur Lui
-            </ThemedText>
+        {/* Titre principal avec icône */}
+        <View style={styles.headerHero}>
+          <View style={[styles.headerIconWrap, { backgroundColor: colors.primary }]}>
+            <Ionicons name="book" size={28} color={colors.textOnPrimary} />
           </View>
+          <View style={styles.headerTextContainer}>
+            <Text style={[styles.headerTitle, { color: colors.text }]}>
+              {t("prophets_stories") || "Histoires des Prophètes"}
+            </Text>
+            <Text
+              style={[styles.headerSubtitle, { color: colors.textSecondary }]}
+              numberOfLines={1}
+            >
+              {getProphetLabel(selectedProphet)}
+            </Text>
+          </View>
+        </View>
 
-          {stats && (
+        <ProphetSelector
+          selectedProphet={selectedProphet}
+          onProphetChange={handleProphetChange}
+          colors={{
+            primary: colors.primary,
+            text: colors.text,
+            textOnPrimary: colors.textOnPrimary,
+            surfaceVariant: colors.surfaceVariant,
+            cardBG: colors.cardBG,
+            border: colors.border,
+          }}
+        />
+
+        {stats && (
+          <View style={styles.statsRow}>
             <View
               style={[
-                styles.statsContainer,
-                { backgroundColor: colors.cardBG },
+                styles.statPill,
+                { backgroundColor: colors.cardBG, borderColor: colors.border },
               ]}
             >
-              <View style={styles.statItem}>
-                <ThemedText style={styles.statNumber}>
-                  {parseInt(stats.total_stories?.toString() || "0")}
-                </ThemedText>
-                <ThemedText style={styles.statLabel}>Histoires</ThemedText>
-              </View>
-              <View style={styles.statItem}>
-                <ThemedText style={styles.statNumber}>
-                  {parseInt(stats.free_stories?.toString() || "0")}
-                </ThemedText>
-                <ThemedText style={styles.statLabel}>Gratuites</ThemedText>
-              </View>
-              <View style={styles.statItem}>
-                <ThemedText style={styles.statNumber}>
-                  {parseInt(stats.premium_stories?.toString() || "0")}
-                </ThemedText>
-                <ThemedText style={styles.statLabel}>Premium</ThemedText>
-              </View>
-              <View style={styles.statItem}>
-                <ThemedText style={styles.statNumber}>
-                  {Math.round(
-                    parseFloat(stats.avg_reading_time?.toString() || "0")
-                  )}
-                </ThemedText>
-                <ThemedText style={styles.statLabel}>Min/histoire</ThemedText>
-              </View>
+              <Ionicons name="library" size={18} color={colors.primary} />
+              <Text style={[styles.statPillNumber, { color: colors.text }]}>
+                {parseInt(stats.total_stories?.toString() || "0")}
+              </Text>
+              <Text style={[styles.statPillLabel, { color: colors.textSecondary }]}>
+                Histoires
+              </Text>
             </View>
-          )}
-        </View>
+            <View
+              style={[
+                styles.statPill,
+                { backgroundColor: colors.cardBG, borderColor: colors.border },
+              ]}
+            >
+              <Ionicons name="gift" size={18} color="#4CAF50" />
+              <Text style={[styles.statPillNumber, { color: colors.text }]}>
+                {parseInt(stats.free_stories?.toString() || "0")}
+              </Text>
+              <Text style={[styles.statPillLabel, { color: colors.textSecondary }]}>
+                Gratuites
+              </Text>
+            </View>
+            <View
+              style={[
+                styles.statPill,
+                { backgroundColor: colors.cardBG, borderColor: colors.border },
+              ]}
+            >
+              <Ionicons name="star" size={18} color="#FFD700" />
+              <Text style={[styles.statPillNumber, { color: colors.text }]}>
+                {parseInt(stats.premium_stories?.toString() || "0")}
+              </Text>
+              <Text style={[styles.statPillLabel, { color: colors.textSecondary }]}>
+                Premium
+              </Text>
+            </View>
+            <View
+              style={[
+                styles.statPill,
+                { backgroundColor: colors.cardBG, borderColor: colors.border },
+              ]}
+            >
+              <Ionicons name="time" size={18} color={colors.primary} />
+              <Text style={[styles.statPillNumber, { color: colors.text }]}>
+                {Math.round(
+                  parseFloat(stats.avg_reading_time?.toString() || "0"),
+                )}
+              </Text>
+              <Text style={[styles.statPillLabel, { color: colors.textSecondary }]}>
+                min
+              </Text>
+            </View>
+          </View>
+        )}
       </LinearGradient>
     </View>
   );
 
   if (loading) {
     return (
-      <ThemedView style={styles.container}>
+      <ThemedImageBackground style={styles.container}>
         <StatusBar
-          barStyle={currentTheme === "dark" ? "light-content" : "dark-content"}
+          barStyle={
+            currentTheme === "dark" || currentTheme === "sunset"
+              ? "light-content"
+              : "dark-content"
+          }
           backgroundColor="transparent"
           translucent
         />
         <View style={styles.loadingContainer}>
-          <ThemedText>Chargement des histoires...</ThemedText>
+          <View style={[styles.loadingIconWrap, { backgroundColor: colors.primary }]}>
+            <Ionicons name="book" size={40} color={colors.textOnPrimary} />
+          </View>
+          <ActivityIndicator size="large" color={colors.primary} style={{ marginTop: 16 }} />
+          <Text style={[styles.loadingText, { color: colors.text }]}>
+            Chargement des histoires...
+          </Text>
         </View>
-      </ThemedView>
+      </ThemedImageBackground>
     );
   }
 
-  // 🆕 Si hors ligne et aucune histoire téléchargée
   if (!networkStatus.isConnected && stories.length === 0) {
     return (
-      <ThemedView style={styles.container}>
+      <ThemedImageBackground style={styles.container}>
         <StatusBar
-          barStyle={currentTheme === "dark" ? "light-content" : "dark-content"}
+          barStyle={
+            currentTheme === "dark" || currentTheme === "sunset"
+              ? "light-content"
+              : "dark-content"
+          }
           backgroundColor="transparent"
           translucent
         />
         {renderHeader()}
         <View style={styles.emptyContainer}>
-          <Ionicons
-            name="cloud-offline-outline"
-            size={80}
-            color={colors.textSecondary}
-          />
-          <ThemedText style={styles.emptyTitle}>Mode hors ligne</ThemedText>
-          <ThemedText style={styles.emptyMessage}>
+          <View style={[styles.emptyIconWrap, { backgroundColor: colors.surfaceVariant }]}>
+            <Ionicons
+              name="cloud-offline-outline"
+              size={56}
+              color={colors.textSecondary}
+            />
+          </View>
+          <Text style={[styles.emptyTitle, { color: colors.text }]}>
+            Mode hors ligne
+          </Text>
+          <Text style={[styles.emptyMessage, { color: colors.textSecondary }]}>
             Aucune histoire téléchargée
-          </ThemedText>
-          <ThemedText style={styles.emptySubtext}>
-            Connectez-vous à Internet et téléchargez des histoires pour y
-            accéder hors ligne
-          </ThemedText>
+          </Text>
+          <Text style={[styles.emptySubtext, { color: colors.textTertiary }]}>
+            Connectez-vous à Internet et téléchargez des histoires pour y accéder hors ligne
+          </Text>
         </View>
-      </ThemedView>
+      </ThemedImageBackground>
     );
   }
 
   return (
-    <ThemedView style={styles.container}>
+    <ThemedImageBackground style={styles.container}>
       <StatusBar
         barStyle={currentTheme === "dark" ? "light-content" : "dark-content"}
         backgroundColor="transparent"
@@ -863,20 +764,47 @@ export default function ProphetStoriesScreen() {
       {/* 🚀 HEADER FIXE : Ne défile pas avec la liste */}
       {renderHeader()}
 
-      {/* 📂 SECTION TITRE FIXE */}
+      {/* Section titre + refresh */}
       <View
         style={[
           styles.filtersContainer,
           {
             paddingHorizontal: universalLayout.contentPaddingHorizontal,
+            borderBottomColor: colors.border,
           },
         ]}
       >
-        <Text style={[styles.filterTitle, { color: colors.text }]}>
-          {networkStatus.isConnected
-            ? "📂 Histoires disponibles"
-            : "📥 Histoires téléchargées"}
-        </Text>
+        <View style={styles.filterRow}>
+          <View style={styles.filterLeft}>
+            <Ionicons
+              name={networkStatus.isConnected ? "library-outline" : "cloud-download-outline"}
+              size={20}
+              color={colors.primary}
+            />
+            <Text style={[styles.filterTitle, { color: colors.text }]}>
+              {networkStatus.isConnected
+                ? "Histoires disponibles"
+                : "Histoires téléchargées"}
+            </Text>
+          </View>
+          {networkStatus.isConnected && (
+            <TouchableOpacity
+              onPress={onRefresh}
+              style={[styles.refreshButton, { backgroundColor: colors.primary }]}
+              activeOpacity={0.7}
+            >
+              <Ionicons name="refresh" size={18} color={colors.textOnPrimary} />
+              <Text
+                style={[
+                  styles.refreshButtonText,
+                  { color: colors.textOnPrimary },
+                ]}
+              >
+                {t("refresh")}
+              </Text>
+            </TouchableOpacity>
+          )}
+        </View>
       </View>
 
       {/* 📜 LISTE DÉFILABLE UNIQUEMENT */}
@@ -903,15 +831,24 @@ export default function ProphetStoriesScreen() {
         showsVerticalScrollIndicator={false}
         ListEmptyComponent={
           !loading ? (
-            <View style={{ padding: 20, alignItems: "center" }}>
-              <ThemedText style={{ textAlign: "center", fontSize: 16 }}>
+            <View style={styles.emptyListContainer}>
+              <View style={[styles.emptyListIconWrap, { backgroundColor: colors.surfaceVariant }]}>
+                <Ionicons
+                  name="book-outline"
+                  size={40}
+                  color={colors.textTertiary}
+                />
+              </View>
+              <Text
+                style={[styles.emptyListText, { color: colors.textSecondary }]}
+              >
                 Aucune histoire disponible pour le moment
-              </ThemedText>
+              </Text>
             </View>
           ) : null
         }
       />
-    </ThemedView>
+    </ThemedImageBackground>
   );
 }
 
@@ -924,63 +861,104 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  loadingIconWrap: {
+    width: 80,
+    height: 80,
+    borderRadius: 24,
+    alignItems: "center",
+    justifyContent: "center",
+  },
   headerContainer: {
     marginBottom: 0,
+    overflow: "hidden",
   },
   headerGradient: {
-    paddingTop: 60,
-    paddingHorizontal: 16, // Sera remplacé par le padding universel
+    paddingHorizontal: 16,
     paddingBottom: 20,
+    borderBottomLeftRadius: 28,
+    borderBottomRightRadius: 28,
+    overflow: "hidden",
   },
-  headerContent: {
+  headerHero: {
+    flexDirection: "row",
     alignItems: "center",
+    marginBottom: 16,
+    gap: 14,
+  },
+  headerIconWrap: {
+    width: 52,
+    height: 52,
+    borderRadius: 16,
+    alignItems: "center",
+    justifyContent: "center",
   },
   headerTextContainer: {
-    alignItems: "center",
-    marginBottom: 15,
+    flex: 1,
   },
   headerTitle: {
-    fontSize: 24,
-    fontWeight: "bold",
-    textAlign: "center",
-    marginBottom: 5,
-  },
-  headerSubtitle: {
-    fontSize: 16,
-    opacity: 0.8,
-    textAlign: "center",
-  },
-  statsContainer: {
-    flexDirection: "row",
-    borderRadius: 12,
-    padding: 15,
-    elevation: 2,
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-  },
-  statItem: {
-    flex: 1,
-    alignItems: "center",
-  },
-  statNumber: {
-    fontSize: 18,
-    fontWeight: "bold",
+    fontSize: 22,
+    fontWeight: "700",
+    letterSpacing: 0.3,
     marginBottom: 2,
   },
-  statLabel: {
-    fontSize: 12,
-    opacity: 0.7,
+  headerSubtitle: {
+    fontSize: 14,
+    opacity: 0.85,
+  },
+  statsRow: {
+    flexDirection: "row",
+    gap: 8,
+    marginTop: 14,
+  },
+  statPill: {
+    flex: 1,
+    flexDirection: "column",
+    alignItems: "center",
+    paddingVertical: 10,
+    paddingHorizontal: 6,
+    borderRadius: 14,
+    borderWidth: 1,
+    gap: 2,
+  },
+  statPillNumber: {
+    fontSize: 16,
+    fontWeight: "700",
+  },
+  statPillLabel: {
+    fontSize: 10,
+    opacity: 0.85,
   },
   filtersContainer: {
-    paddingVertical: 15,
-    paddingBottom: 10,
-    // paddingHorizontal défini dynamiquement dans le composant
+    paddingVertical: 14,
+    paddingBottom: 12,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+  },
+  filterRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  filterLeft: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
   },
   filterTitle: {
     fontSize: 16,
     fontWeight: "600",
-    marginBottom: 10,
+  },
+  refreshButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 20,
+    gap: 6,
+  },
+  refreshButtonText: {
+    color: "#FFF",
+    fontSize: 13,
+    fontWeight: "600",
   },
   flatListContainer: {
     flex: 1, // 🚀 OCCUPER L'ESPACE RESTANT : Pour que la liste prenne tout l'espace disponible
@@ -988,170 +966,55 @@ const styles = StyleSheet.create({
   listContent: {
     // paddingBottom calculé dynamiquement dans le composant pour éviter que le contenu soit masqué par la barre de navigation
   },
-  storyCard: {
-    marginHorizontal: 12, // Sera remplacé par le responsive margin
-    marginVertical: 8,
-    borderRadius: 12,
-    padding: 15,
-    elevation: 2,
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    position: "relative",
-  },
-  storyHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "flex-start",
-    marginBottom: 12,
-  },
-  storyTitleContainer: {
-    flex: 1,
-    marginRight: 10,
-  },
-  storyTitle: {
-    fontSize: 18,
-    fontWeight: "bold",
-    lineHeight: 24,
-    marginBottom: 4,
-  },
-  storyTitleArabic: {
-    fontSize: 14,
-    fontStyle: "italic",
-    textAlign: "right",
-  },
-  favoriteButton: {
-    padding: 5,
-  },
-  storyMeta: {
-    gap: 10,
-  },
-  metaRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 10,
-  },
-  categoryBadge: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-    borderRadius: 12,
-    gap: 4,
-  },
-  categoryBadgeText: {
-    color: "white",
-    fontSize: 12,
-    fontWeight: "600",
-  },
-  difficultyBadge: {
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-    borderRadius: 10,
-  },
-  difficultyBadgeText: {
-    color: "white",
-    fontSize: 11,
-    fontWeight: "600",
-  },
-  metaItem: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 4,
-  },
-  metaText: {
-    fontSize: 13,
-  },
-  progressContainer: {
-    marginTop: 12,
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 8,
-  },
-  progressBar: {
-    flex: 1,
-    height: 4,
-    borderRadius: 2,
-    overflow: "hidden",
-  },
-  progressFill: {
-    height: "100%",
-    borderRadius: 2,
-  },
-  progressText: {
-    fontSize: 12,
-    minWidth: 60,
-    textAlign: "right",
-  },
-  // 🆕 Styles pour le message vide (hors ligne)
   emptyContainer: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    paddingHorizontal: 30,
+    paddingHorizontal: 32,
+  },
+  emptyIconWrap: {
+    width: 100,
+    height: 100,
+    borderRadius: 28,
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 20,
   },
   emptyTitle: {
-    fontSize: 24,
-    fontWeight: "bold",
-    marginTop: 20,
-    marginBottom: 10,
+    fontSize: 22,
+    fontWeight: "700",
+    marginBottom: 8,
     textAlign: "center",
   },
   emptyMessage: {
-    fontSize: 18,
-    marginBottom: 10,
+    fontSize: 16,
+    marginBottom: 8,
     textAlign: "center",
   },
   emptySubtext: {
     fontSize: 14,
-    opacity: 0.7,
+    opacity: 0.75,
     textAlign: "center",
-    lineHeight: 20,
+    lineHeight: 22,
   },
-  // 🆕 Styles pour les boutons de téléchargement
-  downloadButton: {
-    flexDirection: "row",
+  loadingText: {
+    fontSize: 16,
+    marginTop: 12,
+  },
+  emptyListContainer: {
+    padding: 48,
+    alignItems: "center",
+    gap: 16,
+  },
+  emptyListIconWrap: {
+    width: 80,
+    height: 80,
+    borderRadius: 24,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#4CAF50",
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-    borderRadius: 8,
-    marginTop: 12,
-    gap: 6,
   },
-  downloadedButton: {
-    backgroundColor: "#2E7D32",
-  },
-  downloadButtonText: {
-    color: "#fff",
-    fontSize: 14,
-    fontWeight: "600",
-  },
-  premiumBadge: {
-    position: "absolute",
-    top: 10,
-    right: 10,
-    flexDirection: "row",
-    alignItems: "center",
-    paddingHorizontal: 6,
-    paddingVertical: 3,
-    borderRadius: 8,
-    gap: 2,
-  },
-  premiumText: {
-    fontSize: 10,
-    fontWeight: "bold",
-    color: "#000",
-  },
-  locationContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginTop: 8,
-    gap: 4,
-  },
-  locationText: {
-    fontSize: 12,
-    fontStyle: "italic",
+  emptyListText: {
+    fontSize: 16,
+    textAlign: "center",
   },
 });

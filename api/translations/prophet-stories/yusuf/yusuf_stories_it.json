@@ -1,0 +1,344 @@
+{
+  "yusuf_dream": {
+    "title": "Il sogno di Yusuf",
+    "title_arabic": "رؤيا يوسف",
+    "introduction": "Yusuf (يوسف عليه السلام) è il figlio di Ya'qub (Giacobbe), nipote di Ibrahim. Il Corano dice: «Ti raccontiamo la più bella delle storie.» (12:3) Yusuf ebbe un sogno profetico: undici stelle, il sole e la luna si prosternavano davanti a lui. Suo padre Ya'qub comprese che questo sogno annunciava un destino eccezionale.",
+    "conclusion": "Ya'qub consigliò a Yusuf di non raccontare questo sogno ai suoi fratelli, poiché temeva la loro gelosia. La gelosia dei fratelli si sarebbe presto manifestata.",
+    "moral_lesson": "Questa storia ci insegna che i sogni dei profeti sono una forma di rivelazione. La gelosia può portare al male; bisogna temerla.",
+    "historical_location": "Canaan (Palestina)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "yusuf_dream_chapter_1",
+        "title": "La visione",
+        "content": "Il Corano riporta: «Quando Yusuf disse a suo padre: O padre mio! Ho visto undici stelle, e il sole e la luna; li ho visti prosternarsi davanti a me.» (12:4) Yusuf, ancora bambino, raccontò il suo sogno a suo padre. Le undici stelle rappresentavano i suoi undici fratelli; il sole e la luna, suo padre e sua madre (o zia). La prosternazione simboleggiava l'onore che gli sarebbe stato reso."
+      },
+      {
+        "id": "yusuf_dream_chapter_2",
+        "title": "L'avvertimento di Ya'qub",
+        "content": "Il Corano dice: «Disse: O figlio mio! Non raccontare la tua visione ai tuoi fratelli, poiché tramerebbero un complotto contro di te. In verità, Satana è per l'uomo un nemico dichiarato. Così il tuo Signore ti sceglierà e ti insegnerà l'interpretazione dei sogni, e completerà la Sua grazia su di te e sulla famiglia di Ya'qub, come la completò sui tuoi antenati Ibrahim e Ishaq. Il tuo Signore è Onnisciente, Saggio.» (12:5-6) Ya'qub comprese la portata del sogno e protesse suo figlio dalla gelosia."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Corano 12:4",
+        "reference_text": "Sura Yusuf, versetto 4",
+        "content": "إِذْ قَالَ يُوسُفُ لِأَبِيهِ يَـٰٓأَبَتِ إِنِّى رَأَيْتُ أَحَدَ عَشَرَ كَوْكَبًۭا وَٱلشَّمْسَ وَٱلْقَمَرَ رَأَيْتُهُمْ لِى سَـٰجِدِينَ",
+        "translation": "Quando Yusuf disse a suo padre: O padre mio! Ho visto undici stelle, e il sole e la luna; li ho visti prosternarsi davanti a me.",
+        "relevance": "Questo versetto stabilisce il sogno profetico di Yusuf."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Corano 12:5-6",
+        "reference_text": "Sura Yusuf, versetti 5-6",
+        "content": "قَالَ يَـٰبُنَىَّ لَا تَقْصُصْ رُءْيَاكَ عَلَىٰٓ إِخْوَتِكَ فَيَكِيدُوا۟ لَكَ كَيْدًا ۖ إِنَّ ٱلشَّيْطَـٰنَ لِلْإِنسَـٰنِ عَدُوٌّ مُّبِينٌ",
+        "translation": "Disse: O figlio mio! Non raccontare la tua visione ai tuoi fratelli, poiché tramerebbero un complotto contro di te. In verità, Satana è per l'uomo un nemico dichiarato.",
+        "relevance": "Questi versetti mostrano la saggezza di Ya'qub e la sua protezione di Yusuf."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Yusuf",
+        "arabic_term": "يوسف",
+        "definition": "Giuseppe in arabo. Figlio di Ya'qub, profeta di Allah.",
+        "pronunciation": "you-souf"
+      },
+      {
+        "id": 2,
+        "term": "Ya'qub",
+        "arabic_term": "يعقوب",
+        "definition": "Giacobbe in arabo. Padre di Yusuf, profeta di Allah.",
+        "pronunciation": "ya-qoub"
+      }
+    ]
+  },
+  "yusuf_pit": {
+    "title": "Yusuf gettato nel pozzo",
+    "title_arabic": "يوسف في البئر",
+    "introduction": "I fratelli di Yusuf, gelosi dell'amore che Ya'qub gli portava, tramarono un complotto. Lo portarono con il pretesto di giocare e lo gettarono in fondo a un pozzo. Riferirono al padre una camicia macchiata di sangue falso, sostenendo che un lupo l'aveva divorato.",
+    "conclusion": "Passò una carovana e trovò Yusuf nel pozzo. Lo vendettero in Egitto per una miseria. Yusuf lasciò Canaan, ma Allah aveva un piano per lui.",
+    "moral_lesson": "Questa storia ci insegna che il male degli uomini può servire il piano di Allah. Ciò che sembra una prova può condurre a un'elevazione.",
+    "historical_location": "Da Canaan all'Egitto",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "yusuf_pit_chapter_1",
+        "title": "Il complotto dei fratelli",
+        "content": "Il Corano riporta: «Dissero: Yusuf e suo fratello sono più amati da nostro padre di noi, mentre noi siamo un gruppo. Nostro padre è certamente in un errore manifesto. Uccidete Yusuf o gettatelo in una terra lontana.» (12:8-9) Un fratello suggerì di gettarlo in fondo a un pozzo piuttosto che ucciderlo. Si accordarono su questo stratagemma e chiesero a Ya'qub il permesso di portare Yusuf."
+      },
+      {
+        "id": "yusuf_pit_chapter_2",
+        "title": "Il pozzo e la carovana",
+        "content": "Il Corano dice: «Quando lo portarono e si accordarono per gettarlo in fondo al pozzo, Gli rivelammo: Certamente ricorderai loro questa faccenda quando non ne avranno coscienza.» (12:15) Yusuf fu gettato nel pozzo. Una carovana venne ad abbeverarsi. Un uomo calò il suo secchio ed esclamò: «Ecco un ragazzo!» Lo nascosero per venderlo. Lo vendettero in Egitto a un uomo influente (Al-Aziz). Il Corano conclude: «E Allah è il migliore degli strateghi.» (12:76)"
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Corano 12:8-9",
+        "reference_text": "Sura Yusuf, versetti 8-9",
+        "content": "إِذْ قَالُوا۟ لَيُوسُفُ وَأَخُوهُ أَحَبُّ إِلَىٰٓ أَبِينَا مِنَّا وَنَحْنُ عُصْبَةٌ إِنَّ أَبَانَا لَفِى ضَلَـٰلٍۢ مُّبِينٍ ۝ ٱقْتُلُوا۟ يُوسُفَ أَوِ ٱطْرَحُوهُ أَرْضًۭا",
+        "translation": "Dissero: Yusuf e suo fratello sono più amati da nostro padre di noi. Uccidete Yusuf o gettatelo in una terra lontana.",
+        "relevance": "Questi versetti descrivono la gelosia e il complotto dei fratelli."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Corano 12:15",
+        "reference_text": "Sura Yusuf, versetto 15",
+        "content": "فَلَمَّا ذَهَبُوا۟ بِهِۦ وَأَجْمَعُوٓا۟ أَن يَجْعَلُوهُ فِى غَيَابَتِ ٱلْجُبِّ ۚ وَأَوْحَيْنَآ إِلَيْهِ لَتُنَبِّئَنَّهُم بِأَمْرِهِمْ هَـٰذَا وَهُمْ لَا يَشْعُرُونَ",
+        "translation": "Quando lo portarono e si accordarono per gettarlo in fondo al pozzo, Gli rivelammo: Certamente ricorderai loro questa faccenda quando non ne avranno coscienza.",
+        "relevance": "Questo versetto mostra la rivelazione divina a Yusuf e la promessa di rivelazione futura."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Al-Jubb",
+        "arabic_term": "الجب",
+        "definition": "Il pozzo. I fratelli gettarono Yusuf in fondo a un pozzo.",
+        "pronunciation": "al-joubb"
+      },
+      {
+        "id": 2,
+        "term": "Al-Aziz",
+        "arabic_term": "العزيز",
+        "definition": "L'uomo influente. Il ministro egiziano che comprò Yusuf.",
+        "pronunciation": "al-a-ziz"
+      }
+    ]
+  },
+  "yusuf_egypt": {
+    "title": "Yusuf in Egitto e la prova",
+    "title_arabic": "يوسف في مصر والابتلاء",
+    "introduction": "Yusuf crebbe nella casa di Al-Aziz in Egitto. Raggiunse l'età adulta e ricevette saggezza e conoscenza da Allah. La moglie di Al-Aziz lo desiderò e tentò di sedurlo. Yusuf rifiutò, preferendo la prigione al peccato. Il Corano dice: «Così allontanammo da lui il male e la turpitudine. Egli era certamente tra i Nostri servi eletti.» (12:24)",
+    "conclusion": "La donna accusò Yusuf. Un testimone della famiglia suggerì di esaminare la sua camicia: se era strappata davanti, aveva detto il vero; se dietro, Yusuf aveva detto il vero. La camicia era strappata dietro. Yusuf fu scagionato ma imprigionato per placare i sospetti.",
+    "moral_lesson": "Questa storia ci insegna a fuggire dal peccato anche a costo della prova. La castità e il timore di Allah prevalgono su tutto.",
+    "historical_location": "Egitto",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "yusuf_egypt_chapter_1",
+        "title": "La prova",
+        "content": "Il Corano riporta: «E colei nella cui casa era cercò di sedurlo. Chiuse le porte e disse: Vieni! Disse: Allah mi protegga! Egli è il mio padrone che mi ha accordato un buon rifugio. In verità, gli ingiusti non hanno successo.» (12:23) Yusuf rifiutò. La donna lo inseguì. Si diressero verso la porta. Ella strappò la sua camicia da dietro. Trovarono il padrone alla porta. Ella accusò Yusuf. Yusuf disse: «È stata lei a cercare di sedurmi.»"
+      },
+      {
+        "id": "yusuf_egypt_chapter_2",
+        "title": "Innocenza provata",
+        "content": "Il Corano dice: «Un testimone della sua famiglia disse: Se la sua camicia è strappata davanti, ha detto il vero e lui è tra i bugiardi. E se la sua camicia è strappata dietro, ha mentito e lui è tra i veritieri.» (12:26-27) Quando si vide che la camicia era strappata dietro, Al-Aziz disse a sua moglie: «Questo è del vostro inganno. Il vostro inganno è certamente grande.» Yusuf disse: «Allah mi protegga!» Nonostante la sua innocenza, Yusuf chiese di essere imprigionato per evitare le voci. Preferì la prigione al peccato."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Corano 12:23-24",
+        "reference_text": "Sura Yusuf, versetti 23-24",
+        "content": "وَرَٰوَدَتْهُ ٱلَّتِى هُوَ فِى بَيْتِهَا عَن نَّفْسِهِۦ ۖ وَغَلَّقَتِ ٱلْأَبْوَٰبَ وَقَالَتْ هَيْتَ لَكَ ۚ قَالَ مَعَاذَ ٱللَّهِ ۖ إِنَّهُۥ رَبِّىٓ أَحْسَنَ مَثْوَاىَ ۖ إِنَّهُۥ لَا يُفْلِحُ ٱلظَّـٰلِمُونَ",
+        "translation": "E colei nella cui casa era cercò di sedurlo. Chiuse le porte e disse: Vieni! Disse: Allah mi protegga! Egli è il mio padrone che mi ha accordato un buon rifugio. In verità, gli ingiusti non hanno successo.",
+        "relevance": "Questi versetti descrivono la prova e la resistenza di Yusuf."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Corano 12:24",
+        "reference_text": "Sura Yusuf, versetto 24",
+        "content": "وَلَقَدْ هَمَّتْ بِهِۦ ۖ وَهَمَّ بِهَا لَوْلَآ أَن رَّأَىٰ بُرْهَـٰنَ رَبِّهِۦ ۚ كَذَٰلِكَ لِنَصْرِفَ عَنْهُ ٱلسُّوٓءَ وَٱلْفَحْشَآءَ ۚ إِنَّهُۥ مِنْ عِبَادِنَا ٱلْمُخْلَصِينَ",
+        "translation": "Così allontanammo da lui il male e la turpitudine. Egli era certamente tra i Nostri servi eletti.",
+        "relevance": "Questo versetto conferma la protezione divina e l'elezione di Yusuf."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Burhan",
+        "arabic_term": "برهان",
+        "definition": "Prova, segno. Yusuf vide la prova del suo Signore che lo protesse.",
+        "pronunciation": "bour-han"
+      },
+      {
+        "id": 2,
+        "term": "Mukhlisin",
+        "arabic_term": "المخلصين",
+        "definition": "Gli eletti, i puri. Yusuf era tra i servi eletti di Allah.",
+        "pronunciation": "moukh-li-sine"
+      }
+    ]
+  },
+  "yusuf_prison": {
+    "title": "Yusuf in prigione e l'interpretazione dei sogni",
+    "title_arabic": "يوسف في السجن وتأويل الأحلام",
+    "introduction": "Yusuf fu imprigionato. Due giovani entrarono in prigione con lui. Ognuno ebbe un sogno e chiese a Yusuf di interpretarlo. Yusuf spiegò i sogni e approfittò dell'occasione per chiamare all'adorazione di Allah solo. Uno dei due sarebbe stato liberato e avrebbe servito il re; l'altro sarebbe stato crocifisso.",
+    "conclusion": "Il re d'Egitto ebbe un sogno inquietante. L'uomo liberato si ricordò di Yusuf. Yusuf interpretò il sogno: sette anni di abbondanza seguiti da sette anni di carestia. Il re fece uscire Yusuf dalla prigione e lo nominò ministro.",
+    "moral_lesson": "Questa storia ci insegna che la pazienza e la conoscenza vengono da Allah. Yusuf usò il suo dono per chiamare alla fede prima di interpretare i sogni.",
+    "historical_location": "Egitto",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "yusuf_prison_chapter_1",
+        "title": "I sogni dei due giovani",
+        "content": "Il Corano riporta: «Due giovani entrarono in prigione con lui. Uno disse: Mi vedo premere l'uva. L'altro disse: Mi vedo portare sulla testa pane di cui mangiano gli uccelli. Informaci della loro interpretazione; ti vediamo tra i benefattori.» (12:36) Yusuf disse: «Il cibo che vi è fornito non vi giungerà senza che io ve ne informi prima che vi giunga. Questo è ciò che mi ha insegnato il mio Signore. Ho abbandonato la religione di un popolo che non crede in Allah.» (12:37) Poi interpretò: uno sarebbe stato liberato e avrebbe servito il re; l'altro sarebbe stato crocifisso e gli uccelli avrebbero mangiato dalla sua testa."
+      },
+      {
+        "id": "yusuf_prison_chapter_2",
+        "title": "Il sogno del re",
+        "content": "Il Corano dice: «E il re disse: Vedo sette vacche grasse che divorano sette magre, e sette spighe verdi e altrettante secche.» (12:43) Gli indovini non poterono interpretare. L'uomo liberato si ricordò di Yusuf. Yusuf disse: «Seminarete per sette anni consecutivi. Ciò che avrete mietuto, lasciatelo in spiga, tranne poco che mangerete. Poi verranno dopo sette anni di carestia.» (12:47-48) Il re liberò Yusuf e lo nominò responsabile dei granai."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Corano 12:36",
+        "reference_text": "Sura Yusuf, versetto 36",
+        "content": "وَدَخَلَ مَعَهُ ٱلسِّجْنَ فَتَيَانِ ۖ قَالَ أَحَدُهُمَآ إِنِّىٓ أَرَىٰنِىٓ أَعْصِرُ خَمْرًۭا ۖ وَقَالَ ٱلْـَٔاخَرُ إِنِّىٓ أَرَىٰنِىٓ أَحْمِلُ فَوْقَ رَأْسِى خُبْزًۭا تَأْكُلُ ٱلطَّيْرُ مِنْهُ",
+        "translation": "Due giovani entrarono in prigione con lui. Uno disse: Mi vedo premere l'uva. L'altro disse: Mi vedo portare sulla testa pane di cui mangiano gli uccelli.",
+        "relevance": "Questo versetto descrive i sogni dei due prigionieri."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Corano 12:43-49",
+        "reference_text": "Sura Yusuf, versetti 43-49",
+        "content": "وَقَالَ ٱلْمَلِكُ إِنِّىٓ أَرَىٰ سَبْعَ بَقَرَٰتٍۢ سِمَانٍۢ يَأْكُلُهُنَّ سَبْعٌ عِجَافٌ",
+        "translation": "E il re disse: Vedo sette vacche grasse che divorano sette magre.",
+        "relevance": "Questi versetti descrivono il sogno del re e l'interpretazione di Yusuf."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Ta'wil",
+        "arabic_term": "تأويل",
+        "definition": "Interpretazione. Yusuf interpretava i sogni con la conoscenza di Allah.",
+        "pronunciation": "ta-wil"
+      },
+      {
+        "id": 2,
+        "term": "Sijn",
+        "arabic_term": "سجن",
+        "definition": "Prigione. Yusuf fu imprigionato prima di essere nominato ministro.",
+        "pronunciation": "sijn"
+      }
+    ]
+  },
+  "yusuf_reunion": {
+    "title": "Il ricongiungimento con i fratelli",
+    "title_arabic": "لقاء يوسف بإخوته",
+    "introduction": "Gli anni di carestia colpirono la regione. I fratelli di Yusuf vennero in Egitto a cercare provviste. Yusuf li riconobbe ma essi non lo riconobbero. Li accolse, trattenne suo fratello Benjamin e li mise alla prova. Infine, si rivelò loro: «Io sono Yusuf, e questo è mio fratello. Allah ci ha favorito.» (12:90)",
+    "conclusion": "Yusuf chiese ai suoi fratelli di portare tutta la famiglia. Ya'qub, la cui vista si era indebolita per il dolore, recuperò la vista quando la camicia di Yusuf fu gettata sul suo volto. La famiglia si riunì in Egitto. Il sogno di Yusuf si compì: suo padre, sua madre e i suoi fratelli si prosternarono davanti a lui in segno di rispetto.",
+    "moral_lesson": "Questa storia ci insegna il perdono e la clemenza. Yusuf perdonò i suoi fratelli e attribuì tutto alla saggezza di Allah.",
+    "historical_location": "Egitto",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "yusuf_reunion_chapter_1",
+        "title": "I fratelli in Egitto",
+        "content": "Il Corano riporta: «E i fratelli di Yusuf vennero e entrarono davanti a lui. Egli li riconobbe, ma essi non lo riconobbero.» (12:58) Yusuf li rifornì e chiese che portassero il fratello Benjamin la prossima volta. Quando tornarono con Benjamin, Yusuf pose una coppa nel bagaglio di Benjamin. Fece trattenere Benjamin. I fratelli implorarono. Yusuf disse loro: «Sapete cosa avete fatto a Yusuf e a suo fratello, nella vostra ignoranza?» (12:89) Dissero: «Sei dunque Yusuf?» Disse: «Io sono Yusuf, e questo è mio fratello. Allah ci ha favorito.»"
+      },
+      {
+        "id": "yusuf_reunion_chapter_2",
+        "title": "Il ricongiungimento con Ya'qub",
+        "content": "Il Corano dice: «Portate la mia camicia e gettatela sul volto di mio padre; egli recupererà la vista. E portatemi tutta la vostra famiglia.» (12:93) Quando la carovana partì, Ya'qub disse: «Sento l'odore di Yusuf.» Gli dissero: «Sei nel tuo vecchio errore.» Quando giunse il portatore della buona novella, gettò la camicia sul volto di Ya'qub, ed egli recuperò la vista. Disse: «Non vi ho forse detto che so da Allah ciò che non sapete?» (12:96) La famiglia andò in Egitto. Yusuf elevò i suoi genitori sul trono. Si prosternarono davanti a lui. Il sogno si compì."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Corano 12:58",
+        "reference_text": "Sura Yusuf, versetto 58",
+        "content": "وَجَآءَ إِخْوَةُ يُوسُفَ فَدَخَلُوا۟ عَلَيْهِ فَعَرَفَهُمْ وَهُمْ لَهُۥ مُنكِرُونَ",
+        "translation": "E i fratelli di Yusuf vennero e entrarono davanti a lui. Egli li riconobbe, ma essi non lo riconobbero.",
+        "relevance": "Questo versetto descrive il primo incontro dei fratelli con Yusuf."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Corano 12:100",
+        "reference_text": "Sura Yusuf, versetto 100",
+        "content": "وَرَفَعَ أَبَوَيْهِ عَلَى ٱلْعَرْشِ وَخَرُّوا۟ لَهُۥ سُجَّدًۭا ۖ وَقَالَ يَـٰٓأَبَتِ هَـٰذَا تَأْوِيلُ رُءْيَـٰىَ مِن قَبْلُ",
+        "translation": "E elevò i suoi genitori sul trono, e si prosternarono davanti a lui. Disse: O padre mio! Questa è l'interpretazione del mio sogno di un tempo.",
+        "relevance": "Questo versetto mostra il compimento del sogno di Yusuf."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Sujud",
+        "arabic_term": "سجود",
+        "definition": "Prosternazione. I genitori di Yusuf si prosternarono davanti a lui in segno di rispetto.",
+        "pronunciation": "sou-joud"
+      },
+      {
+        "id": 2,
+        "term": "Arsh",
+        "arabic_term": "عرش",
+        "definition": "Trono. Yusuf elevò i suoi genitori sul trono.",
+        "pronunciation": "arch"
+      }
+    ]
+  },
+  "lessons_from_yusuf": {
+    "title": "Lezioni dalla storia di Yusuf",
+    "title_arabic": "دروس من قصة يوسف",
+    "introduction": "Il Corano presenta la storia di Yusuf come «la più bella delle storie» (12:3). Insegna pazienza, castità, perdono e fiducia in Allah. Yusuf attraversò la prova del pozzo, della tentazione e della prigione, ma ogni prova lo avvicinò al suo destino.",
+    "conclusion": "Yusuf disse alla fine: «O padre mio! Questa è l'interpretazione del mio sogno di un tempo. Il mio Signore l'ha realizzato. Mi ha favorito quando mi fece uscire dalla prigione e vi fece venire dal deserto dopo che Satana seminò la discordia tra me e i miei fratelli. Il mio Signore è Gentile in ciò che vuole. Egli è l'Onnisciente, il Saggio.» (12:100)",
+    "moral_lesson": "Questa storia ci insegna che la pazienza (sabr) e la fiducia in Allah portano al successo. Il male degli uomini può servire il piano divino.",
+    "historical_location": "Da Canaan all'Egitto",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lessons_from_yusuf_chapter_1",
+        "title": "La più bella delle storie",
+        "content": "Il Corano dice: «Ti raccontiamo la più bella delle storie rivelandoti questo Corano, anche se eri prima tra i distratti.» (12:3) La storia di Yusuf contiene lezioni per chi riflette: la gelosia porta al male; la castità preserva; la conoscenza viene da Allah; il perdono libera; e il piano di Allah si compie nonostante i complotti degli uomini."
+      },
+      {
+        "id": "lessons_from_yusuf_chapter_2",
+        "title": "Un segno per i credenti",
+        "content": "Il Corano conclude la sura: «Nelle loro storie c'è certamente una lezione per le persone dotate di intelletto. Non è un racconto inventato, ma una conferma di ciò che esisteva prima, un'esposizione dettagliata di ogni cosa, una guida e una misericordia per le genti che credono.» (12:111) La storia di Yusuf è un segno per i credenti. Mostra che Allah è con i pazienti e i pii."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Corano 12:3",
+        "reference_text": "Sura Yusuf, versetto 3",
+        "content": "نَحْنُ نَقُصُّ عَلَيْكَ أَحْسَنَ ٱلْقَصَصِ بِمَآ أَوْحَيْنَآ إِلَيْكَ هَـٰذَا ٱلْقُرْءَانَ",
+        "translation": "Ti raccontiamo la più bella delle storie rivelandoti questo Corano.",
+        "relevance": "Questo versetto presenta la storia di Yusuf come la più bella."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Corano 12:111",
+        "reference_text": "Sura Yusuf, versetto 111",
+        "content": "لَقَدْ كَانَ فِى قَصَصِهِمْ عِبْرَةٌۭ لِّأُو۟لِى ٱلْأَلْبَـٰبِ ۗ مَا كَانَ حَدِيثًۭا يُفْتَرَىٰ وَلَـٰكِن تَصْدِيقَ ٱلَّذِى بَيْنَ يَدَيْهِ وَتَفْصِيلَ كُلِّ شَىْءٍۢ وَهُدًۭى وَرَحْمَةًۭ لِّقَوْمٍۢ يُؤْمِنُونَ",
+        "translation": "Nelle loro storie c'è certamente una lezione per le persone dotate di intelletto. Non è un racconto inventato, ma una conferma, un'esposizione dettagliata, una guida e una misericordia per le genti che credono.",
+        "relevance": "Questo versetto conclude la sura e enfatizza la lezione."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Sabr",
+        "arabic_term": "صبر",
+        "definition": "Pazienza. Yusuf mostrò pazienza in tutte le sue prove.",
+        "pronunciation": "sabr"
+      },
+      {
+        "id": 2,
+        "term": "Ibra",
+        "arabic_term": "عبرة",
+        "definition": "Lezione, esempio. Le storie dei profeti sono lezioni per l'umanità.",
+        "pronunciation": "ib-ra"
+      }
+    ]
+  }
+}

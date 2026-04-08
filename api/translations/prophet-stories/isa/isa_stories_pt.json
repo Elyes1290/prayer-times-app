@@ -1,0 +1,515 @@
+{
+  "isa_birth": {
+    "title": "O nascimento milagroso de Isa",
+    "title_arabic": "مولد عيسى المعجزي",
+    "introduction": "Isa (عيسى ابن مريم عليه السلام), Jesus filho de Maria, é um dos maiores profetas. O Alcorão diz: «Demos-lhe sinais evidentes e fortificámo-lo com o Espírito Santo.» (2:253) O seu nascimento foi milagroso: Maria (Maryam) concebeu sem pai, pela palavra de Allah. Retirou-se para um lugar distante e deu à luz sob uma palmeira.",
+    "conclusion": "Maria regressou ao seu povo com o menino. Quando a acusaram, o bebé Isa falou do berço para a defender. Assim Allah manifestou o Seu poder: uma criança sem pai, a falar desde o nascimento.",
+    "moral_lesson": "Esta história ensina-nos que Allah cria como quer. O nascimento de Isa é um sinal para os mundos, e Maria é um modelo de pureza e devoção.",
+    "historical_location": "Palestina (Belém)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "isa_birth_chapter_1",
+        "title": "O anúncio a Maria",
+        "content": "O Alcorão relata: «E quando os anjos disseram: Ó Maria! Allah escolheu-te e purificou-te; escolheu-te acima das mulheres dos mundos. Ó Maria! Sê devota ao teu Senhor; prostra-te e inclina-te com os que se inclinam.» (3:42-43) Os anjos anunciaram a Maria que teria um filho, criado pela palavra de Allah: «Sê!» Maria perguntou: «Como posso ter um filho quando nenhum homem me tocou?» O anjo respondeu: «Assim será. Allah cria o que quer. Quando decreta uma coisa, diz-lhe apenas: Sê! e ela é.» (3:47)"
+      },
+      {
+        "id": "isa_birth_chapter_2",
+        "title": "O nascimento sob a palmeira",
+        "content": "O Alcorão diz: «Ela concebeu-o e retirou-se com ele para um lugar distante. As dores do parto levaram-na ao tronco de uma palmeira. Ela disse: Oxalá tivesse morrido antes disto e fosse esquecida! Uma voz chamou-a de baixo dela: Não te aflijas. O teu Senhor colocou um riacho aos teus pés. Sacode o tronco da palmeira em tua direcção: cairão sobre ti tâmaras frescas e maduras.» (19:22-25) Maria deu à luz sozinha, sustentada por Allah. Comeu tâmaras e bebeu do riacho."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Alcorão 3:42-43",
+        "reference_text": "Surata Âl-Imran, versículos 42-43",
+        "content": "وَإِذْ قَالَتِ ٱلْمَلَـٰٓئِكَةُ يَـٰمَرْيَمُ إِنَّ ٱللَّهَ ٱصْطَفَىٰكِ وَطَهَّرَكِ وَٱصْطَفَىٰكِ عَلَىٰ نِسَآءِ ٱلْعَـٰلَمِينَ",
+        "translation": "E quando os anjos disseram: Ó Maria! Allah escolheu-te e purificou-te; escolheu-te acima das mulheres dos mundos.",
+        "relevance": "Este versículo estabelece a eleição de Maria por Allah."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Alcorão 19:22-25",
+        "reference_text": "Surata Maryam, versículos 22-25",
+        "content": "فَحَمَلَتْهُ فَٱنتَبَذَتْ بِهِۦ مَكَانًۭا قَصِيًّۭا ۝ فَأَجَآءَهَا ٱلْمَخَاضُ إِلَىٰ جِذْعِ ٱلنَّخْلَةِ",
+        "translation": "Ela concebeu-o e retirou-se com ele para um lugar distante. As dores do parto levaram-na ao tronco de uma palmeira.",
+        "relevance": "Este versículo descreve o nascimento milagroso de Isa."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Isa",
+        "arabic_term": "عيسى",
+        "definition": "Jesus em árabe. Filho de Maria, profeta de Allah, messias dos Filhos de Israel.",
+        "pronunciation": "i-sa"
+      },
+      {
+        "id": 2,
+        "term": "Maryam",
+        "arabic_term": "مريم",
+        "definition": "Maria em árabe. Mãe de Isa, escolhida acima das mulheres dos mundos.",
+        "pronunciation": "ma-ryam"
+      }
+    ]
+  },
+  "isa_cradle": {
+    "title": "Isa fala do berço",
+    "title_arabic": "كلام عيسى في المهد",
+    "introduction": "Maria regressou ao seu povo com o seu filho. O povo acusou-a de ter pecado. Como podia uma mulher casta ter um filho sem marido? Maria não respondeu; apontou para o menino. Disseram: «Como podemos falar a um bebé no berço?»",
+    "conclusion": "Isa falou então do berço para defender a sua mãe e proclamar a sua missão. Disse: «Sou o servo de Allah. Ele deu-me o Livro e fez-me profeta.» Este milagre espantou a assembleia.",
+    "moral_lesson": "Esta história ensina-nos que Allah pode fazer falar quem quer, quando quer. O berço de Isa é um sinal para os que reflectem.",
+    "historical_location": "Palestina",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "isa_cradle_chapter_1",
+        "title": "A acusação",
+        "content": "O Alcorão relata: «Ela veio ao seu povo carregando-o. Disseram: Ó Maria! Fizeste algo monstruoso! Irmã de Harun, o teu pai não era um homem mau e a tua mãe não era uma prostituta.» (19:27-28) O povo de Maria ficou chocado. Não compreendiam como ela podia ter tido um filho. Maria, obedecendo a uma inspiração divina, apontou para o menino."
+      },
+      {
+        "id": "isa_cradle_chapter_2",
+        "title": "A palavra do berço",
+        "content": "O Alcorão diz: «Disseram: Como podemos falar a um bebé no berço? Ele disse: Sou o servo de Allah. Ele deu-me o Livro e fez-me profeta. Fez-me abençoado onde quer que esteja, e impôs-me a oração e a caridade enquanto viver, e bondade para com a minha mãe. Não me fez arrogante nem miserável. E paz sobre mim no dia em que nasci, no dia em que morrerei e no dia em que serei ressuscitado.» (19:29-33) Isa falou do berço para dar testemunho da sua missão e inocentar a sua mãe."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Alcorão 19:27-28",
+        "reference_text": "Surata Maryam, versículos 27-28",
+        "content": "فَأَتَتْ بِهِۦ قَوْمَهَا تَحْمِلُهُۥ ۖ قَالُوا۟ يَـٰمَرْيَمُ لَقَدْ جِئْتِ شَيْـًۭٔا فَرِيًّۭا",
+        "translation": "Ela veio ao seu povo carregando-o. Disseram: Ó Maria! Fizeste algo monstruoso!",
+        "relevance": "Este versículo descreve a acusação contra Maria."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Alcorão 19:30-33",
+        "reference_text": "Surata Maryam, versículos 30-33",
+        "content": "قَالَ إِنِّى عَبْدُ ٱللَّهِ ءَاتَىٰنِىَ ٱلْكِتَـٰبَ وَجَعَلَنِى نَبِيًّۭا",
+        "translation": "Ele disse: Sou o servo de Allah. Ele deu-me o Livro e fez-me profeta.",
+        "relevance": "Este versículo contém as palavras de Isa do berço."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Mihrab",
+        "arabic_term": "محراب",
+        "definition": "Lugar de oração. Maria retirou-se para um mihrab para adorar Allah.",
+        "pronunciation": "mih-rab"
+      },
+      {
+        "id": 2,
+        "term": "Abdullah",
+        "arabic_term": "عبد الله",
+        "definition": "Servo de Allah. Isa designou-se assim no berço.",
+        "pronunciation": "ab-dul-lah"
+      }
+    ]
+  },
+  "isa_childhood": {
+    "title": "A infância de Isa",
+    "title_arabic": "طفولة عيسى",
+    "introduction": "Isa cresceu sob a protecção de Allah. Desde a infância manifestou sinais extraordinários. O Alcorão diz: «E ensinar-lhe-á o Livro, a sabedoria, a Torá e o Evangelho.» (3:48) Aprendeu as Escrituras e preparou-se para a sua missão profética.",
+    "conclusion": "Isa era uma criança piedosa e sábia. Falava com maturidade e já realizava actos que prefiguravam a sua missão. Os sábios de Israel espantavam-se com o seu conhecimento.",
+    "moral_lesson": "Esta história ensina-nos que os profetas são preparados desde a infância. A sabedoria e a piedade cultivam-se desde jovens.",
+    "historical_location": "Palestina (Nazaré)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "isa_childhood_chapter_1",
+        "title": "Sabedoria precoce",
+        "content": "O Alcorão relata que Allah disse a Maria: «Ele falará às pessoas no berço e na maturidade, e estará entre os justos.» (3:46) Isa cresceu em sabedoria. Frequentava o Povo do Livro e discutia com eles. O seu conhecimento excedia a sua idade. Falava apenas palavras de verdade e bondade."
+      },
+      {
+        "id": "isa_childhood_chapter_2",
+        "title": "Preparação para a missão",
+        "content": "O Alcorão diz: «E quando Allah dirá: Ó Isa, filho de Maria! Recorda o Meu favor sobre ti e sobre a tua mãe, quando te fortaleci com o Espírito Santo. Falaste às pessoas no berço e na tua maturidade.» (5:110) Desde a infância, Isa foi fortalecido pelo Espírito Santo (Jibril). Preparou-se para chamar os Filhos de Israel ao monoteísmo e guiá-los ao caminho recto."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Alcorão 3:46",
+        "reference_text": "Surata Âl-Imran, versículo 46",
+        "content": "وَيُكَلِّمُ ٱلنَّاسَ فِى ٱلْمَهْدِ وَكَهْلًۭا وَمِنَ ٱلصَّـٰلِحِينَ",
+        "translation": "Ele falará às pessoas no berço e na maturidade, e estará entre os justos.",
+        "relevance": "Este versículo anuncia a fala de Isa do berço e a sua maturidade."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Alcorão 3:48",
+        "reference_text": "Surata Âl-Imran, versículo 48",
+        "content": "وَيُعَلِّمُهُ ٱلْكِتَـٰبَ وَٱلْحِكْمَةَ وَٱلتَّوْرَىٰةَ وَٱلْإِنجِيلَ",
+        "translation": "E ensinar-lhe-á o Livro, a sabedoria, a Torá e o Evangelho.",
+        "relevance": "Este versículo mostra o ensino divino recebido por Isa."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Ruh al-Qudus",
+        "arabic_term": "روح القدس",
+        "definition": "Espírito Santo. O anjo Jibril que fortaleceu Isa.",
+        "pronunciation": "rouh al-qu-dous"
+      },
+      {
+        "id": 2,
+        "term": "Tawrat",
+        "arabic_term": "التوراة",
+        "definition": "A Torá. Livro revelado a Musa, que Isa confirmou.",
+        "pronunciation": "at-taw-ra"
+      }
+    ]
+  },
+  "isa_prophecy": {
+    "title": "A profecia de Isa",
+    "title_arabic": "نبوة عيسى",
+    "introduction": "Isa foi enviado como profeta aos Filhos de Israel. O Alcorão diz: «E quando Isa, filho de Maria, disse: Ó Filhos de Israel! Sou o mensageiro de Allah para vós, confirmando o que veio antes de mim na Torá, e anunciando um mensageiro que virá depois de mim, cujo nome será Ahmad.» (61:6) Trouxe o Injil (Evangelho) e confirmou a Torá.",
+    "conclusion": "Isa chamou o seu povo a adorar apenas Allah, a seguir a Torá e a preparar-se para a vinda do Profeta Muhammad. Muitos acreditaram; outros rejeitaram-no e conspiraram contra ele.",
+    "moral_lesson": "Esta história ensina-nos que os profetas confirmam-se uns aos outros. Isa anunciou Muhammad; a cadeia profética é uma só.",
+    "historical_location": "Palestina",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "isa_prophecy_chapter_1",
+        "title": "O chamado ao monoteísmo",
+        "content": "O Alcorão relata: «Isa disse: Vim a vós com um sinal do vosso Senhor. Temei Allah e obedecei-me. Allah é o meu Senhor e o vosso Senhor. Adorai-O pois: esse é o caminho recto.» (3:50-51) Isa chamou os Filhos de Israel a abandonar inovações e regressar ao puro monoteísmo. Lembrou-lhes os mandamentos da Torá e convidou-os à rectidão."
+      },
+      {
+        "id": "isa_prophecy_chapter_2",
+        "title": "O anúncio de Ahmad",
+        "content": "O Alcorão diz: «E quando Isa, filho de Maria, disse: Ó Filhos de Israel! Sou o mensageiro de Allah para vós, confirmando o que veio antes de mim na Torá, e anunciando um mensageiro que virá depois de mim, cujo nome será Ahmad.» (61:6) Ahmad é um dos nomes do Profeta Muhammad. Isa anunciou a sua vinda e ordenou aos seus discípulos que cressem nele quando viesse."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Alcorão 3:50-51",
+        "reference_text": "Surata Âl-Imran, versículos 50-51",
+        "content": "وَمُصَدِّقًۭا لِّمَا بَيْنَ يَدَىَّ مِنَ ٱلتَّوْرَىٰةِ وَلِأُحِلَّ لَكُم بَعْضَ ٱلَّذِى حُرِّمَ عَلَيْكُمْ ۚ وَجِئْتُكُم بِـَٔايَةٍۢ مِّن رَّبِّكُمْ فَٱتَّقُوا۟ ٱللَّهَ وَأَطِيعُونِ",
+        "translation": "E confirmando o que está na Torá, e para permitir-vos parte do que vos foi proibido. Vim a vós com um sinal do vosso Senhor. Temei Allah e obedecei-me.",
+        "relevance": "Este versículo contém o chamado de Isa ao seu povo."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Alcorão 61:6",
+        "reference_text": "Surata As-Saff, versículo 6",
+        "content": "وَإِذْ قَالَ عِيسَى ٱبْنُ مَرْيَمَ يَـٰبَنِىٓ إِسْرَٰٓءِيلَ إِنِّى رَسُولُ ٱللَّهِ إِلَيْكُم مُّصَدِّقًۭا لِّمَا بَيْنَ يَدَىَّ مِنَ ٱلتَّوْرَىٰةِ وَمُبَشِّرًۢا بِرَسُولٍۢ يَأْتِى مِنۢ بَعْدِى ٱسْمُهُۥٓ أَحْمَدُ",
+        "translation": "E quando Isa disse: Ó Filhos de Israel! Sou o mensageiro de Allah, confirmando a Torá e anunciando um mensageiro de nome Ahmad.",
+        "relevance": "Este versículo estabelece o anúncio do Profeta Muhammad por Isa."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Injil",
+        "arabic_term": "الإنجيل",
+        "definition": "O Evangelho. Livro revelado a Isa por Allah.",
+        "pronunciation": "al-in-jil"
+      },
+      {
+        "id": 2,
+        "term": "Ahmad",
+        "arabic_term": "أحمد",
+        "definition": "Um dos nomes do Profeta Muhammad. Isa anunciou-o ao seu povo.",
+        "pronunciation": "ah-mad"
+      }
+    ]
+  },
+  "isa_miracles": {
+    "title": "Os milagres de Isa",
+    "title_arabic": "معجزات عيسى",
+    "introduction": "Allah concedeu a Isa milagres notáveis para provar a sua profecia. O Alcorão diz: «Venho a vós com um sinal do vosso Senhor: formo para vós, do barro, a forma de um pássaro; sopro nele e, com a permissão de Allah, torna-se um pássaro.» (3:49) Curou os cegos de nascença e os leprosos, e ressuscitou os mortos.",
+    "conclusion": "Estes milagres foram sinais para os Filhos de Israel. Provavam que Isa era verdadeiramente um profeta de Allah. Mas muitos, por orgulho, recusaram acreditar.",
+    "moral_lesson": "Esta história ensina-nos que os milagres são sinais de Allah. Servem apenas para confirmar a verdade; a fé permanece uma escolha do coração.",
+    "historical_location": "Palestina",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "isa_miracles_chapter_1",
+        "title": "Os pássaros de barro",
+        "content": "O Alcorão relata: «Formo para vós, do barro, a forma de um pássaro; sopro nele e, com a permissão de Allah, torna-se um pássaro.» (3:49) Isa pegou em barro, moldou um pássaro, soprou nele com a permissão de Allah, e o pássaro voou vivo. Este milagre espantou as testemunhas e provou que a vida vem apenas de Allah."
+      },
+      {
+        "id": "isa_miracles_chapter_2",
+        "title": "Curas e ressurreição",
+        "content": "O Alcorão diz: «Curo os cegos de nascença e os leprosos, e ressuscito os mortos, com a permissão de Allah.» (3:49) Isa curava pela vontade de Allah. Os cegos de nascença podiam ver, o leproso era purificado, os mortos ressuscitavam. Cada milagre era um lembrete: todo o poder pertence a Allah. Isa era apenas o Seu servo e mensageiro."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Alcorão 3:49",
+        "reference_text": "Surata Âl-Imran, versículo 49",
+        "content": "وَأَنۢبِئُكُم بِمَا تَأْكُلُونَ وَمَا تَدَّخِرُونَ فِى بُيُوتِكُمْ ۚ إِنَّ فِى ذَٰلِكَ لَـَٔايَةًۭ لَّكُمْ إِن كُنتُم مُّؤْمِنِينَ",
+        "translation": "Venho a vós com um sinal: formo um pássaro do barro, sopro e torna-se um pássaro com a permissão de Allah.",
+        "relevance": "Este versículo descreve o milagre dos pássaros de barro."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Alcorão 5:110",
+        "reference_text": "Surata Al-Ma'idah, versículo 110",
+        "content": "إِذْ قَالَ ٱللَّهُ يَـٰعِيسَى ٱبْنَ مَرْيَمَ ٱذْكُرْ نِعْمَتِى عَلَيْكَ وَعَلَىٰ وَالِدَتِكَ إِذْ أَيَّدتُّكَ بِرُوحِ ٱلْقُدُسِ",
+        "translation": "Quando Allah disse: Ó Isa! Recorda o Meu favor: fortaleci-te com o Espírito Santo.",
+        "relevance": "Este versículo recorda os milagres concedidos a Isa."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Ayat",
+        "arabic_term": "آية",
+        "definition": "Sinal, milagre. Os milagres de Isa eram sinais de Allah.",
+        "pronunciation": "a-ya"
+      },
+      {
+        "id": 2,
+        "term": "Bi-idhni Allah",
+        "arabic_term": "بإذن الله",
+        "definition": "Com a permissão de Allah. Isa realizou milagres por vontade divina.",
+        "pronunciation": "bi-idh-ni-llah"
+      }
+    ]
+  },
+  "isa_disciples": {
+    "title": "Os discípulos de Isa",
+    "title_arabic": "الحواريون",
+    "introduction": "Isa tinha discípulos devotos, os Hawariyun. O Alcorão diz: «E quando inspirei os apóstolos: Acreditai em Mim e no Meu mensageiro. Disseram: Acreditamos; testemunha que somos submissos.» (5:111) Acreditaram em Isa e seguiram-no. Ajudaram-no a chamar as pessoas a Allah.",
+    "conclusion": "Os discípulos pediram a Isa que fizesse descer uma mesa posta do céu para os tranquilizar. Allah atendeu o seu pedido com a condição de acreditarem. Os que acreditaram foram fortalecidos; os que duvidaram desviaram-se.",
+    "moral_lesson": "Esta história ensina-nos que os discípulos dos profetas devem acreditar sem exigir provas adicionais. A fé precede os sinais.",
+    "historical_location": "Palestina",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "isa_disciples_chapter_1",
+        "title": "A fé dos apóstolos",
+        "content": "O Alcorão relata: «Ó vós que acreditastes! Sede aliados de Allah, como Isa, filho de Maria, disse aos apóstolos: Quem são os meus aliados por Allah? Os apóstolos disseram: Somos os aliados de Allah. Uma facção dos Filhos de Israel acreditou, e uma facção desacreditou. Fortalecemos os que acreditaram contra o seu inimigo, e tornaram-se os vencedores.» (61:14) Os discípulos de Isa eram crentes sinceros que o apoiavam."
+      },
+      {
+        "id": "isa_disciples_chapter_2",
+        "title": "O pedido da mesa",
+        "content": "O Alcorão diz: «Os apóstolos disseram: Ó Isa, filho de Maria! Pode o teu Senhor fazer descer sobre nós uma mesa posta do céu? Ele disse: Temei Allah se sois crentes. Disseram: Queremos comer dela e os nossos corações serem tranquilizados, e saberemos que nos disseste a verdade, e seremos das testemunhas.» (5:112-113) Os discípulos pediram um sinal; Isa convidou-os ao temor e à fé."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Alcorão 5:111",
+        "reference_text": "Surata Al-Ma'idah, versículo 111",
+        "content": "وَإِذْ أَوْحَيْتُ إِلَى ٱلْحَوَارِيِّـۧنَ أَنْ ءَامِنُوا۟ بِى وَبِرَسُولِى قَالُوا۟ ءَامَنَّا وَٱشْهَدْ بِأَنَّنَا مُسْلِمُونَ",
+        "translation": "E quando inspirei os apóstolos: Acreditai em Mim e no Meu mensageiro. Disseram: Acreditamos; testemunha que somos submissos.",
+        "relevance": "Este versículo descreve a fé dos apóstolos de Isa."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Alcorão 5:112-113",
+        "reference_text": "Surata Al-Ma'idah, versículos 112-113",
+        "content": "إِذْ قَالَ ٱلْحَوَارِيُّونَ يَـٰعِيسَى ٱبْنَ مَرْيَمَ هَلْ يَسْتَطِيعُ رَبُّكَ أَن يُنَزِّلَ عَلَيْنَا مَآئِدَةًۭ مِّنَ ٱلسَّمَآءِ",
+        "translation": "Os apóstolos disseram: Ó Isa! Pode o teu Senhor fazer descer sobre nós uma mesa posta do céu?",
+        "relevance": "Este versículo relata o pedido dos apóstolos."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Hawariyun",
+        "arabic_term": "الحواريون",
+        "definition": "Os apóstolos, discípulos de Isa. Acreditaram nele e apoiaram-no.",
+        "pronunciation": "al-ha-wa-ri-yun"
+      },
+      {
+        "id": 2,
+        "term": "Ansar",
+        "arabic_term": "أنصار",
+        "definition": "Aliados, apoiantes. Os discípulos eram os ansar de Isa por Allah.",
+        "pronunciation": "an-sar"
+      }
+    ]
+  },
+  "isa_table": {
+    "title": "A mesa posta",
+    "title_arabic": "المائدة",
+    "introduction": "Os apóstolos pediram a Isa que fizesse descer uma mesa posta do céu. Isa invocou Allah. O Alcorão diz: «Ó Allah, nosso Senhor! Faze descer sobre nós uma mesa posta do céu que será para nós uma festa — para os primeiros e os últimos entre nós — e um sinal de Ti. E provê-nos sustento, pois Tu és o melhor dos provedores.» (5:114)",
+    "conclusion": "Allah atendeu o pedido. Uma mesa desceu do céu, carregada de comida. Mas Allah avisou: quem desacreditar após este sinal sofrerá um castigo que Ele não infligiu a nenhum outro. A mesa foi uma prova para os corações.",
+    "moral_lesson": "Esta história ensina-nos que os sinais divinos podem ser uma bênção ou uma prova. A gratidão e a fé são a chave.",
+    "historical_location": "Palestina",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "isa_table_chapter_1",
+        "title": "A invocação de Isa",
+        "content": "O Alcorão relata: «Isa, filho de Maria, disse: Ó Allah, nosso Senhor! Faze descer sobre nós uma mesa posta do céu que será para nós uma festa — para os primeiros e os últimos entre nós — e um sinal de Ti. E provê-nos sustento, pois Tu és o melhor dos provedores. Allah disse: Fá-la-ei descer sobre vós. Mas quem entre vós desacreditar após isso, castigá-lo-ei com um castigo que nunca infligi a nenhum ser.» (5:114-115) Isa invocou; Allah respondeu com uma condição."
+      },
+      {
+        "id": "isa_table_chapter_2",
+        "title": "O sinal e o aviso",
+        "content": "A mesa desceu. Os crentes comeram dela e a sua fé foi fortalecida. Mas alguns, após verem o sinal, persistiam na descrença. O Alcorão conclui: «E quando Allah dirá: Ó Isa, filho de Maria! Disseste às pessoas: Tomai-me a mim e à minha mãe como duas divindades além de Allah? Ele dirá: Glória a Ti! Não me compete dizer o que não tenho direito de dizer.» (5:116) A mesa foi um sinal; a ingratidão foi castigada."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Alcorão 5:114",
+        "reference_text": "Surata Al-Ma'idah, versículo 114",
+        "content": "قَالَ عِيسَى ٱبْنُ مَرْيَمَ ٱللَّهُمَّ رَبَّنَآ أَنزِلْ عَلَيْنَا مَآئِدَةًۭ مِّنَ ٱلسَّمَآءِ تَكُونُ لَنَا عِيدًۭا لِّأَوَّلِنَا وَءَاخِرِنَا وَءَايَةًۭ مِّنكَ ۖ وَٱرْزُقْنَا وَأَنتَ خَيْرُ ٱلرَّـٰزِقِينَ",
+        "translation": "Isa disse: Ó Allah! Faze descer sobre nós uma mesa posta do céu, uma festa para nós e um sinal de Ti. Provê-nos; Tu és o melhor dos provedores.",
+        "relevance": "Este versículo contém a invocação de Isa pela mesa."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Alcorão 5:115",
+        "reference_text": "Surata Al-Ma'idah, versículo 115",
+        "content": "قَالَ ٱللَّهُ إِنِّى مُنَزِّلُهَا عَلَيْكُمْ ۖ فَمَن يَكْفُرْ بَعْدُ مِنكُمْ فَإِنِّىٓ أُعَذِّبُهُۥ عَذَابًۭا لَّآ أُعَذِّبُهُۥٓ أَحَدًۭا مِّنَ ٱلْعَـٰلَمِينَ",
+        "translation": "Allah disse: Fá-la-ei descer. Mas quem desacreditar após isso, castigá-lo-ei com um castigo sem paralelo.",
+        "relevance": "Este versículo relata a resposta de Allah e o aviso."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Ma'idah",
+        "arabic_term": "المائدة",
+        "definition": "A mesa. Uma surata do Alcorão tem este nome.",
+        "pronunciation": "al-ma-i-dah"
+      },
+      {
+        "id": 2,
+        "term": "Rizq",
+        "arabic_term": "رزق",
+        "definition": "Sustento, provisão. A mesa era rizq do céu.",
+        "pronunciation": "rizq"
+      }
+    ]
+  },
+  "isa_ascension": {
+    "title": "A ascensão de Isa",
+    "title_arabic": "رفع عيسى",
+    "introduction": "Os descrentes entre os Filhos de Israel conspiraram contra Isa. Afirmaram tê-lo morto e crucificado. O Alcorão refuta: «Não o mataram, não o crucificaram; mas assim lhes pareceu.» (4:157) Allah elevou Isa a Si, vivo. Ele regressará no fim dos tempos.",
+    "conclusion": "Isa não morreu na cruz. Allah salvou-o e elevou-o. Está com Allah, vivo. Descerá novamente antes do Último Dia para combater o Anticristo (Dajjal) e estabelecer a justiça.",
+    "moral_lesson": "Esta história ensina-nos que Allah protege os Seus profetas. A verdade islâmica sobre Isa difere das crenças que afirmam que foi crucificado. Está vivo e regressará.",
+    "historical_location": "Palestina",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "isa_ascension_chapter_1",
+        "title": "A conspiração e a salvação",
+        "content": "O Alcorão relata: «E por causa do seu dizer: Matámos o Messias, Isa, filho de Maria, o mensageiro de Allah. Mas não o mataram, não o crucificaram; mas assim lhes pareceu. E os que discordam sobre ele estão em dúvida; não têm conhecimento disso, seguem apenas conjecturas. E certamente não o mataram. Mas Allah elevou-o a Si. E Allah é Todo-Poderoso e Sábio.» (4:157-158) Allah salvou Isa e elevou-o. Uma aparência foi dada aos descrentes; Isa foi preservado."
+      },
+      {
+        "id": "isa_ascension_chapter_2",
+        "title": "O regresso de Isa",
+        "content": "A tradição profética relata que Isa descerá à terra no fim dos tempos. Combaterá o Anticristo (Dajjal), quebrará a cruz, matará o porco e chamará ao Islão. Governará com justiça, depois morrerá e será sepultado. O seu regresso é um grande sinal da Hora. O Alcorão diz: «Ele é conhecimento da Hora. Não duvideis. Segui-me; esse é um caminho recto.» (43:61)"
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Alcorão 4:157-158",
+        "reference_text": "Surata An-Nisa, versículos 157-158",
+        "content": "وَقَوْلِهِمْ إِنَّا قَتَلْنَا ٱلْمَسِيحَ عِيسَى ٱبْنَ مَرْيَمَ رَسُولَ ٱللَّهِ وَمَا قَتَلُوهُ وَمَا صَلَبُوهُ وَلَـٰكِن شُبِّهَ لَهُمْ ۚ وَإِنَّ ٱلَّذِينَ ٱخْتَلَفُوا۟ فِيهِ لَفِى شَكٍّۢ مِّنْهُ ۚ مَا لَهُم بِهِۦ مِنْ عِلْمٍ إِلَّا ٱتِّبَاعَ ٱلظَّنِّ ۚ وَمَا قَتَلُوهُ يَقِينًۢا ۝ بَل رَّفَعَهُ ٱللَّهُ إِلَيْهِ ۚ وَكَانَ ٱللَّهُ عَزِيزًا حَكِيمًۭا",
+        "translation": "Não o mataram, não o crucificaram; mas assim lhes pareceu. Allah elevou-o a Si. Allah é Todo-Poderoso e Sábio.",
+        "relevance": "Estes versículos estabelecem que Isa não foi crucificado e que Allah o elevou."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Alcorão 3:55",
+        "reference_text": "Surata Âl-Imran, versículo 55",
+        "content": "إِذْ قَالَ ٱللَّهُ يَـٰعِيسَىٰ إِنِّى مُتَوَفِّيكَ وَرَافِعُكَ إِلَىَّ وَمُطَهِّرُكَ مِنَ ٱلَّذِينَ كَفَرُوا۟",
+        "translation": "Quando Allah disse: Ó Isa! Tomar-te-ei a Mim, elevar-te-ei a Mim e purificar-te-ei daqueles que desacreditam.",
+        "relevance": "Este versículo confirma a ascensão de Isa por Allah."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Raf'",
+        "arabic_term": "رفع",
+        "definition": "Ascensão. Allah elevou Isa a Si, vivo.",
+        "pronunciation": "raf'"
+      },
+      {
+        "id": 2,
+        "term": "Dajjal",
+        "arabic_term": "الدجال",
+        "definition": "O Anticristo. Isa combaterá-o no seu regresso.",
+        "pronunciation": "ad-daj-jal"
+      }
+    ]
+  },
+  "lessons_from_isa": {
+    "title": "Lições da história de Isa",
+    "title_arabic": "دروس من قصة عيسى",
+    "introduction": "Isa é um dos cinco grandes profetas (Ulul Azm): Nuh, Ibrahim, Musa, Isa e Muhammad. A sua história ensina o poder de Allah, a pureza de Maria e a continuidade da mensagem profética. O Alcorão diz: «O Messias, filho de Maria, era apenas um mensageiro. Mensageiros passaram antes dele.» (5:75)",
+    "conclusion": "Isa não é divino; é um servo de Allah e Seu mensageiro. Anunciou Muhammad. Acreditar em Isa é acreditar na sua mensagem: a unicidade de Allah, a obediência e a rectidão.",
+    "moral_lesson": "Esta história ensina-nos que todos os profetas pregaram a mesma mensagem: adorar apenas Allah. Isa é um elo na cadeia profética que culmina com Muhammad.",
+    "historical_location": "Palestina",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lessons_from_isa_chapter_1",
+        "title": "Isa, servo de Allah",
+        "content": "O Alcorão diz: «O Messias, filho de Maria, era apenas um mensageiro. Mensageiros passaram antes dele. A sua mãe era uma mulher verídica. Comiam alimento. Vede como tornamos claros para eles os sinais, depois vede como se afastam.» (5:75) Isa era um profeta como os outros. Comia, bebia, dormia. Não era divino. Chamava à adoração de Allah apenas."
+      },
+      {
+        "id": "lessons_from_isa_chapter_2",
+        "title": "A cadeia profética",
+        "content": "O Alcorão relata: «E quando Allah dirá: Ó Isa, filho de Maria! Disseste às pessoas: Tomai-me a mim e à minha mãe como duas divindades além de Allah? Ele dirá: Glória a Ti! Não me compete dizer o que não tenho direito de dizer. Se o tivesse dito, Tu terias sabido.» (5:116) Isa nunca afirmou ser divino. Confirmou a Torá, trouxe o Injil e anunciou Muhammad. A fé em todos os profetas é uma."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Alcorão 5:75",
+        "reference_text": "Surata Al-Ma'idah, versículo 75",
+        "content": "مَا ٱلْمَسِيحُ ٱبْنُ مَرْيَمَ إِلَّا رَسُولٌۭ قَدْ خَلَتْ مِن قَبْلِهِ ٱلرُّسُلُ",
+        "translation": "O Messias, filho de Maria, era apenas um mensageiro. Mensageiros passaram antes dele.",
+        "relevance": "Este versículo estabelece que Isa é um mensageiro como os outros."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Alcorão 2:136",
+        "reference_text": "Surata Al-Baqarah, versículo 136",
+        "content": "قُولُوٓا۟ ءَامَنَّا بِٱللَّهِ وَمَآ أُنزِلَ إِلَيْنَا وَمَآ أُنزِلَ إِلَىٰٓ إِبْرَٰهِـۧمَ وَإِسْمَـٰعِيلَ وَإِسْحَـٰقَ وَيَعْقُوبَ وَٱلْأَسْبَاطِ وَمَآ أُوتِىَ مُوسَىٰ وَعِيسَىٰ وَمَآ أُوتِىَ ٱلنَّبِيُّونَ مِن رَّبِّهِمْ",
+        "translation": "Dizei: Acreditamos em Allah, no que nos foi revelado, no que foi revelado a Ibrahim, Ismael, Isaac, Jacob, as tribos, Musa, Isa e os profetas.",
+        "relevance": "Este versículo une a fé em todos os profetas, incluindo Isa."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Ulul Azm",
+        "arabic_term": "أولو العزم",
+        "definition": "Os profetas de firme resolução: Nuh, Ibrahim, Musa, Isa, Muhammad.",
+        "pronunciation": "u-lul azm"
+      },
+      {
+        "id": 2,
+        "term": "Tawhid",
+        "arabic_term": "توحيد",
+        "definition": "Monoteísmo. A mensagem central de Isa e de todos os profetas.",
+        "pronunciation": "taw-hid"
+      }
+    ]
+  }
+}

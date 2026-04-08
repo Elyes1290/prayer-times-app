@@ -1048,6 +1048,9 @@ export default function PrayerScreen() {
                     >
                       <View style={styles.prayerItemContent}>
                         <Text
+                          numberOfLines={1}
+                          adjustsFontSizeToFit
+                          minimumFontScale={0.8}
                           style={[
                             styles.prayerItemName,
                             isPassed && !isNext && styles.prayerItemTextPassed,

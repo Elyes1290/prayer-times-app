@@ -28,11 +28,18 @@ class PrayerTimesWidgetModule: NSObject {
     asr: String,
     maghrib: String,
     isha: String,
+    tomorrowFajr: String,
+    tomorrowSunrise: String,
+    tomorrowDhuhr: String,
+    tomorrowAsr: String,
+    tomorrowMaghrib: String,
+    tomorrowIsha: String,
     resolver resolve: @escaping RCTPromiseResolveBlock,
     rejecter reject: @escaping RCTPromiseRejectBlock
   ) {
     print("🕌 [PrayerTimesWidgetModule] Mise à jour des horaires de prière")
-    print("   Fajr: \(fajr), Dhuhr: \(dhuhr), Asr: \(asr), Maghrib: \(maghrib), Isha: \(isha)")
+    print("   Aujourd'hui - Fajr: \(fajr), Dhuhr: \(dhuhr), Asr: \(asr), Maghrib: \(maghrib), Isha: \(isha)")
+    print("   Demain - Fajr: \(tomorrowFajr), Dhuhr: \(tomorrowDhuhr), Asr: \(tomorrowAsr), Maghrib: \(tomorrowMaghrib), Isha: \(tomorrowIsha)")
     
     guard let defaults = sharedDefaults else {
       print("❌ [PrayerTimesWidgetModule] ERREUR: App Group '\(appGroupIdentifier)' non accessible!")
@@ -42,21 +49,31 @@ class PrayerTimesWidgetModule: NSObject {
     
     print("📝 [PrayerTimesWidgetModule] Écriture dans UserDefaults (App Group: \(appGroupIdentifier))...")
     
-    // Sauvegarder les horaires dans l'App Group
+    // Sauvegarder les horaires d'aujourd'hui dans l'App Group
     defaults.set(fajr, forKey: "today_prayer_Fajr")
     defaults.set(sunrise, forKey: "today_prayer_Sunrise")
     defaults.set(dhuhr, forKey: "today_prayer_Dhuhr")
     defaults.set(asr, forKey: "today_prayer_Asr")
     defaults.set(maghrib, forKey: "today_prayer_Maghrib")
     defaults.set(isha, forKey: "today_prayer_Isha")
+    
+    // Sauvegarder les horaires de demain
+    defaults.set(tomorrowFajr, forKey: "tomorrow_prayer_Fajr")
+    defaults.set(tomorrowSunrise, forKey: "tomorrow_prayer_Sunrise")
+    defaults.set(tomorrowDhuhr, forKey: "tomorrow_prayer_Dhuhr")
+    defaults.set(tomorrowAsr, forKey: "tomorrow_prayer_Asr")
+    defaults.set(tomorrowMaghrib, forKey: "tomorrow_prayer_Maghrib")
+    defaults.set(tomorrowIsha, forKey: "tomorrow_prayer_Isha")
+    
     defaults.set(Date().timeIntervalSince1970, forKey: "prayer_last_update")
     
     let success = defaults.synchronize()
     print("💾 [PrayerTimesWidgetModule] Synchronisation: \(success ? "✅ SUCCÈS" : "❌ ÉCHEC")")
     
     // 🔍 VÉRIFICATION: Relire immédiatement pour confirmer l'écriture
-    if let verifyFajr = defaults.string(forKey: "today_prayer_Fajr") {
-      print("✅ [PrayerTimesWidgetModule] Vérification: Fajr = \(verifyFajr)")
+    if let verifyFajr = defaults.string(forKey: "today_prayer_Fajr"),
+       let verifyTomorrowFajr = defaults.string(forKey: "tomorrow_prayer_Fajr") {
+      print("✅ [PrayerTimesWidgetModule] Vérification: Fajr aujourd'hui = \(verifyFajr), demain = \(verifyTomorrowFajr)")
     } else {
       print("❌ [PrayerTimesWidgetModule] ERREUR: Impossible de relire les données!")
     }

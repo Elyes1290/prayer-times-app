@@ -108,7 +108,7 @@ const FavoritesScreen: React.FC = () => {
     },
     {
       key: "prophet_story",
-      label: t("favorites_screen.prophet_stories") || "Histoires du Prophète",
+      label: t("prophets_stories") || "Histoires des Prophètes",
       icon: "book-open-page-variant",
       count: getFavoritesCountByType("prophet_story"),
     },
@@ -590,7 +590,7 @@ const getTypeLabel = (type: FavoriteType, t: any): string => {
     case "asmaul_husna":
       return t("favorites_screen.names");
     case "prophet_story":
-      return t("favorites_screen.prophet_stories");
+      return t("prophets_stories");
     default:
       return "Favori";
   }

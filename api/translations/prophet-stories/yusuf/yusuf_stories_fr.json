@@ -1,0 +1,344 @@
+{
+  "yusuf_dream": {
+    "title": "Le rêve de Yusuf",
+    "title_arabic": "رؤيا يوسف",
+    "introduction": "Yusuf (يوسف عليه السلام) est le fils de Ya'qub (Jacob), petit-fils d'Ibrahim. Le Coran dit : « Nous te racontons la plus belle des histoires. » (12:3) Yusuf vit un rêve prophétique : onze étoiles, le soleil et la lune se prosternaient devant lui. Son père Ya'qub comprit que ce rêve annonçait un destin exceptionnel.",
+    "conclusion": "Ya'qub recommanda à Yusuf de ne pas raconter ce rêve à ses frères, car il craignait leur jalousie. La jalousie des frères allait bientôt se manifester.",
+    "moral_lesson": "Cette histoire nous enseigne que les rêves des prophètes sont une forme de révélation. La jalousie peut pousser au mal ; il faut la craindre.",
+    "historical_location": "Canaan (Palestine)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "yusuf_dream_chapter_1",
+        "title": "La vision",
+        "content": "Le Coran rapporte : « Quand Yusuf dit à son père : Ô mon père ! J'ai vu onze étoiles, et le soleil et la lune ; je les ai vus se prosterner devant moi. » (12:4) Yusuf, encore enfant, raconta son rêve à son père. Les onze étoiles représentaient ses onze frères ; le soleil et la lune, son père et sa mère (ou sa tante). La prosternation symbolisait l'honneur qui lui serait rendu."
+      },
+      {
+        "id": "yusuf_dream_chapter_2",
+        "title": "L'avertissement de Ya'qub",
+        "content": "Le Coran dit : « Il dit : Ô mon fils ! Ne raconte pas ta vision à tes frères, car ils ourdiraient un stratagème contre toi. Le Diable est pour l'homme un ennemi déclaré. Ainsi ton Seigneur te choisira et t'enseignera l'interprétation des rêves, et Il parachèvera Sa grâce sur toi et sur la famille de Ya'qub, comme Il l'a parachevée auparavant sur tes deux ancêtres Ibrahim et Ishaq. Ton Seigneur est Omniscient et Sage. » (12:5-6) Ya'qub comprit la portée du rêve et protégea son fils de la jalousie."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 12:4",
+        "reference_text": "Sourate Yusuf, verset 4",
+        "content": "إِذْ قَالَ يُوسُفُ لِأَبِيهِ يَـٰٓأَبَتِ إِنِّى رَأَيْتُ أَحَدَ عَشَرَ كَوْكَبًۭا وَٱلشَّمْسَ وَٱلْقَمَرَ رَأَيْتُهُمْ لِى سَـٰجِدِينَ",
+        "translation": "Quand Yusuf dit à son père : Ô mon père ! J'ai vu onze étoiles, et le soleil et la lune ; je les ai vus se prosterner devant moi.",
+        "relevance": "Ce verset établit le rêve prophétique de Yusuf."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 12:5-6",
+        "reference_text": "Sourate Yusuf, versets 5-6",
+        "content": "قَالَ يَـٰبُنَىَّ لَا تَقْصُصْ رُءْيَاكَ عَلَىٰٓ إِخْوَتِكَ فَيَكِيدُوا۟ لَكَ كَيْدًا ۖ إِنَّ ٱلشَّيْطَـٰنَ لِلْإِنسَـٰنِ عَدُوٌّ مُّبِينٌ",
+        "translation": "Il dit : Ô mon fils ! Ne raconte pas ta vision à tes frères, car ils ourdiraient un stratagème contre toi. Le Diable est pour l'homme un ennemi déclaré.",
+        "relevance": "Ces versets montrent la sagesse de Ya'qub et sa protection de Yusuf."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Yusuf",
+        "arabic_term": "يوسف",
+        "definition": "Joseph en arabe. Fils de Ya'qub, prophète d'Allah.",
+        "pronunciation": "you-souf"
+      },
+      {
+        "id": 2,
+        "term": "Ya'qub",
+        "arabic_term": "يعقوب",
+        "definition": "Jacob en arabe. Père de Yusuf, prophète d'Allah.",
+        "pronunciation": "ya-qoub"
+      }
+    ]
+  },
+  "yusuf_pit": {
+    "title": "Yusuf jeté dans le puits",
+    "title_arabic": "يوسف في البئر",
+    "introduction": "Les frères de Yusuf, jaloux de l'amour que Ya'qub lui portait, ourdirent un complot. Ils l'emmenèrent sous prétexte de jouer et le jetèrent au fond d'un puits. Ils rapportèrent à leur père une chemise tachée de faux sang, prétendant qu'un loup l'avait dévoré.",
+    "conclusion": "Une caravane passa et trouva Yusuf dans le puits. Ils le vendirent en Égypte pour une somme dérisoire. Yusuf quitta Canaan, mais Allah avait un plan pour lui.",
+    "moral_lesson": "Cette histoire nous enseigne que le mal des hommes peut servir le plan d'Allah. Ce qui semble une épreuve peut mener à une élévation.",
+    "historical_location": "De Canaan à l'Égypte",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "yusuf_pit_chapter_1",
+        "title": "Le complot des frères",
+        "content": "Le Coran rapporte : « Ils dirent : Yusuf et son frère sont plus aimés de notre père que nous, alors que nous sommes un groupe. Notre père est certes dans un égarement manifeste. Tuez Yusuf ou jetez-le dans une terre lointaine. » (12:8-9) Un frère proposa de le jeter au fond d'un puits plutôt que de le tuer. Ils convinrent de ce stratagème et demandèrent à Ya'qub la permission d'emmener Yusuf."
+      },
+      {
+        "id": "yusuf_pit_chapter_2",
+        "title": "Le puits et la caravane",
+        "content": "Le Coran dit : « Quand ils l'emmenèrent et se concertèrent pour le jeter au fond du puits, Nous lui révélâmes : Tu leur rappelleras certes cette affaire alors qu'ils n'en auront pas conscience. » (12:15) Yusuf fut jeté dans le puits. Une caravane vint s'abreuver. Un homme descendit son seau et s'écria : « Voici un garçon ! » Ils le cachèrent pour le vendre. Ils le vendirent en Égypte à un homme influent (Al-Aziz). Le Coran conclut : « Et Allah est le meilleur des stratèges. » (12:76)"
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 12:8-9",
+        "reference_text": "Sourate Yusuf, versets 8-9",
+        "content": "إِذْ قَالُوا۟ لَيُوسُفُ وَأَخُوهُ أَحَبُّ إِلَىٰٓ أَبِينَا مِنَّا وَنَحْنُ عُصْبَةٌ إِنَّ أَبَانَا لَفِى ضَلَـٰلٍۢ مُّبِينٍ ۝ ٱقْتُلُوا۟ يُوسُفَ أَوِ ٱطْرَحُوهُ أَرْضًۭا",
+        "translation": "Ils dirent : Yusuf et son frère sont plus aimés de notre père que nous. Tuez Yusuf ou jetez-le dans une terre lointaine.",
+        "relevance": "Ces versets décrivent la jalousie et le complot des frères."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 12:15",
+        "reference_text": "Sourate Yusuf, verset 15",
+        "content": "فَلَمَّا ذَهَبُوا۟ بِهِۦ وَأَجْمَعُوٓا۟ أَن يَجْعَلُوهُ فِى غَيَابَتِ ٱلْجُبِّ ۚ وَأَوْحَيْنَآ إِلَيْهِ لَتُنَبِّئَنَّهُم بِأَمْرِهِمْ هَـٰذَا وَهُمْ لَا يَشْعُرُونَ",
+        "translation": "Quand ils l'emmenèrent et se concertèrent pour le jeter au fond du puits, Nous lui révélâmes : Tu leur rappelleras certes cette affaire alors qu'ils n'en auront pas conscience.",
+        "relevance": "Ce verset montre la révélation divine à Yusuf et la promesse de révélation future."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Al-Jubb",
+        "arabic_term": "الجب",
+        "definition": "Le puits. Les frères jetèrent Yusuf au fond d'un puits.",
+        "pronunciation": "al-joubb"
+      },
+      {
+        "id": 2,
+        "term": "Al-Aziz",
+        "arabic_term": "العزيز",
+        "definition": "L'homme influent. Le ministre égyptien qui acheta Yusuf.",
+        "pronunciation": "al-a-ziz"
+      }
+    ]
+  },
+  "yusuf_egypt": {
+    "title": "Yusuf en Égypte et l'épreuve",
+    "title_arabic": "يوسف في مصر والابتلاء",
+    "introduction": "Yusuf grandit dans la maison d'Al-Aziz en Égypte. Il atteignit l'âge adulte et reçut sagesse et science d'Allah. La femme d'Al-Aziz le désira et tenta de le séduire. Yusuf refusa, préférant la prison au péché. Le Coran dit : « Ainsi Nous détournâmes de lui le mal et la turpitude. Il était certes parmi Nos serviteurs élus. » (12:24)",
+    "conclusion": "La femme accusa Yusuf. Un témoin de la famille suggéra d'examiner sa chemise : si elle était déchirée par devant, elle avait dit vrai ; si par derrière, Yusuf disait vrai. La chemise était déchirée par derrière. Yusuf fut innocenté mais emprisonné pour apaiser les soupçons.",
+    "moral_lesson": "Cette histoire nous enseigne à fuir le péché même au prix de l'épreuve. La chasteté et la crainte d'Allah priment sur tout.",
+    "historical_location": "Égypte",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "yusuf_egypt_chapter_1",
+        "title": "L'épreuve",
+        "content": "Le Coran rapporte : « Et celle qui l'hébergeait chercha à le séduire. Elle ferma les portes et dit : Viens ! Il dit : Qu'Allah me protège ! C'est mon maître qui m'a accordé un bon asile. Les injustes ne réussissent pas. » (12:23) Yusuf refusa. La femme le poursuivit. Ils se dirigèrent vers la porte. Elle déchira sa chemise par derrière. Ils trouvèrent le maître à la porte. Elle accusa Yusuf. Yusuf dit : « C'est elle qui a cherché à me séduire. »"
+      },
+      {
+        "id": "yusuf_egypt_chapter_2",
+        "title": "L'innocence prouvée",
+        "content": "Le Coran dit : « Un témoin de sa famille dit : Si sa chemise est déchirée par devant, elle a dit vrai et lui est du nombre des menteurs. Et si sa chemise est déchirée par derrière, elle a menti et lui est du nombre des véridiques. » (12:26-27) Quand on vit que la chemise était déchirée par derrière, Al-Aziz dit à sa femme : « C'est de votre ruse. Votre ruse est certes énorme. » Yusuf dit : « Qu'Allah me protège ! » Malgré son innocence, Yusuf demanda à être emprisonné pour éviter les rumeurs. Il préféra la prison au péché."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 12:23-24",
+        "reference_text": "Sourate Yusuf, versets 23-24",
+        "content": "وَرَٰوَدَتْهُ ٱلَّتِى هُوَ فِى بَيْتِهَا عَن نَّفْسِهِۦ ۖ وَغَلَّقَتِ ٱلْأَبْوَٰبَ وَقَالَتْ هَيْتَ لَكَ ۚ قَالَ مَعَاذَ ٱللَّهِ ۖ إِنَّهُۥ رَبِّىٓ أَحْسَنَ مَثْوَاىَ ۖ إِنَّهُۥ لَا يُفْلِحُ ٱلظَّـٰلِمُونَ",
+        "translation": "Et celle qui l'hébergeait chercha à le séduire. Elle ferma les portes et dit : Viens ! Il dit : Qu'Allah me protège ! C'est mon maître qui m'a accordé un bon asile. Les injustes ne réussissent pas.",
+        "relevance": "Ces versets décrivent l'épreuve et la résistance de Yusuf."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 12:24",
+        "reference_text": "Sourate Yusuf, verset 24",
+        "content": "وَلَقَدْ هَمَّتْ بِهِۦ ۖ وَهَمَّ بِهَا لَوْلَآ أَن رَّأَىٰ بُرْهَـٰنَ رَبِّهِۦ ۚ كَذَٰلِكَ لِنَصْرِفَ عَنْهُ ٱلسُّوٓءَ وَٱلْفَحْشَآءَ ۚ إِنَّهُۥ مِنْ عِبَادِنَا ٱلْمُخْلَصِينَ",
+        "translation": "Ainsi Nous détournâmes de lui le mal et la turpitude. Il était certes parmi Nos serviteurs élus.",
+        "relevance": "Ce verset confirme la protection divine et l'élection de Yusuf."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Burhan",
+        "arabic_term": "برهان",
+        "definition": "Preuve, signe. Yusuf vit la preuve de son Seigneur qui le protégea.",
+        "pronunciation": "bour-han"
+      },
+      {
+        "id": 2,
+        "term": "Mukhlisin",
+        "arabic_term": "المخلصين",
+        "definition": "Les élus, les purs. Yusuf était parmi les serviteurs élus d'Allah.",
+        "pronunciation": "moukh-li-sine"
+      }
+    ]
+  },
+  "yusuf_prison": {
+    "title": "Yusuf en prison et l'interprétation des rêves",
+    "title_arabic": "يوسف في السجن وتأويل الأحلام",
+    "introduction": "Yusuf fut emprisonné. Deux jeunes hommes entrèrent en prison avec lui. Chacun vit un rêve et demanda à Yusuf de l'interpréter. Yusuf expliqua les rêves et profita de l'occasion pour appeler à l'adoration d'Allah seul. L'un des deux serait libéré et servirait le roi ; l'autre serait crucifié.",
+    "conclusion": "Le roi d'Égypte vit un rêve troublant. L'homme libéré se souvint de Yusuf. Yusuf interpréta le rêve : sept années d'abondance suivies de sept années de disette. Le roi fit sortir Yusuf de prison et le nomma ministre.",
+    "moral_lesson": "Cette histoire nous enseigne que la patience et la science viennent d'Allah. Yusuf utilisa son don pour appeler à la foi avant d'interpréter les rêves.",
+    "historical_location": "Égypte",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "yusuf_prison_chapter_1",
+        "title": "Les rêves des deux jeunes",
+        "content": "Le Coran rapporte : « Deux jeunes hommes entrèrent en prison avec lui. L'un dit : Je me vois pressant du raisin. L'autre dit : Je me vois portant sur ma tête du pain dont les oiseaux mangent. Informe-nous de leur interprétation ; nous te voyons parmi les bienfaisants. » (12:36) Yusuf dit : « La nourriture qui vous est fournie ne vous parviendra pas sans que je vous en aie informé avant qu'elle vous arrive. C'est ce que mon Seigneur m'a enseigné. J'ai abandonné la religion d'un peuple qui ne croit pas en Allah. » (12:37) Puis il interpréta : l'un serait libéré et servirait le roi ; l'autre serait crucifié et les oiseaux mangeraient de sa tête."
+      },
+      {
+        "id": "yusuf_prison_chapter_2",
+        "title": "Le rêve du roi",
+        "content": "Le Coran dit : « Et le roi dit : Je vois sept vaches grasses que dévorent sept maigres, et sept épis verts et autant d'autres secs. » (12:43) Les devins ne purent interpréter. L'homme libéré se souvint de Yusuf. Yusuf dit : « Vous sèmerez pendant sept années consécutives. Ce que vous aurez moissonné, laissez-le en épi, sauf peu que vous mangerez. Puis viendront après cela sept années de disette. » (12:47-48) Le roi fit sortir Yusuf et le nomma responsable des greniers."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 12:36",
+        "reference_text": "Sourate Yusuf, verset 36",
+        "content": "وَدَخَلَ مَعَهُ ٱلسِّجْنَ فَتَيَانِ ۖ قَالَ أَحَدُهُمَآ إِنِّىٓ أَرَىٰنِىٓ أَعْصِرُ خَمْرًۭا ۖ وَقَالَ ٱلْـَٔاخَرُ إِنِّىٓ أَرَىٰنِىٓ أَحْمِلُ فَوْقَ رَأْسِى خُبْزًۭا تَأْكُلُ ٱلطَّيْرُ مِنْهُ",
+        "translation": "Deux jeunes hommes entrèrent en prison avec lui. L'un dit : Je me vois pressant du raisin. L'autre dit : Je me vois portant sur ma tête du pain dont les oiseaux mangent.",
+        "relevance": "Ce verset décrit les rêves des deux prisonniers."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 12:43-49",
+        "reference_text": "Sourate Yusuf, versets 43-49",
+        "content": "وَقَالَ ٱلْمَلِكُ إِنِّىٓ أَرَىٰ سَبْعَ بَقَرَٰتٍۢ سِمَانٍۢ يَأْكُلُهُنَّ سَبْعٌ عِجَافٌ",
+        "translation": "Et le roi dit : Je vois sept vaches grasses que dévorent sept maigres.",
+        "relevance": "Ces versets décrivent le rêve du roi et l'interprétation de Yusuf."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Ta'wil",
+        "arabic_term": "تأويل",
+        "definition": "Interprétation. Yusuf interprétait les rêves par la science d'Allah.",
+        "pronunciation": "ta-wil"
+      },
+      {
+        "id": 2,
+        "term": "Sijn",
+        "arabic_term": "سجن",
+        "definition": "Prison. Yusuf fut emprisonné avant d'être nommé ministre.",
+        "pronunciation": "sijn"
+      }
+    ]
+  },
+  "yusuf_reunion": {
+    "title": "La réunion avec les frères",
+    "title_arabic": "لقاء يوسف بإخوته",
+    "introduction": "Les années de disette frappèrent la région. Les frères de Yusuf vinrent en Égypte chercher des vivres. Yusuf les reconnut mais eux ne le reconnurent pas. Il les accueillit, retint son frère Benjamin, et les mit à l'épreuve. Finalement, il se révéla à eux : « Je suis Yusuf, et voici mon frère. Allah nous a favorisés. » (12:90)",
+    "conclusion": "Yusuf demanda à ses frères d'amener toute la famille. Ya'qub, dont la vue avait faibli de chagrin, retrouva la vue quand la chemise de Yusuf lui fut jetée sur le visage. La famille se réunit en Égypte. Le rêve de Yusuf s'accomplit : son père, sa mère et ses frères se prosternèrent devant lui en signe de respect.",
+    "moral_lesson": "Cette histoire nous enseigne le pardon et la clémence. Yusuf pardonna à ses frères et attribua tout à la sagesse d'Allah.",
+    "historical_location": "Égypte",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "yusuf_reunion_chapter_1",
+        "title": "Les frères en Égypte",
+        "content": "Le Coran rapporte : « Et les frères de Yusuf vinrent et entrèrent auprès de lui. Il les reconnut, mais eux ne le reconnurent pas. » (12:58) Yusuf les approvisionna et demanda qu'ils ramènent leur frère Benjamin la prochaine fois. Quand ils revinrent avec Benjamin, Yusuf plaça une coupe dans les bagages de Benjamin. Il fit retenir Benjamin. Les frères implorèrent. Yusuf leur dit : « Savez-vous ce que vous avez fait à Yusuf et à son frère, dans votre ignorance ? » (12:89) Ils dirent : « Es-tu donc Yusuf ? » Il dit : « Je suis Yusuf, et voici mon frère. Allah nous a favorisés. »"
+      },
+      {
+        "id": "yusuf_reunion_chapter_2",
+        "title": "La réunion avec Ya'qub",
+        "content": "Le Coran dit : « Emportez ma chemise et jetez-la sur le visage de mon père ; il recouvrera la vue. Et amenez-moi toute votre famille. » (12:93) Quand la caravane partit, Ya'qub dit : « Je sens l'odeur de Yusuf. » On lui dit : « Tu es dans ton ancien égarement. » Quand le porteur de la bonne nouvelle arriva, il jeta la chemise sur le visage de Ya'qub, qui recouvra la vue. Il dit : « Ne vous ai-je pas dit que je sais d'Allah ce que vous ne savez pas ? » (12:96) La famille se rendit en Égypte. Yusuf éleva ses parents sur le trône. Ils se prosternèrent devant lui. Le rêve était accompli."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 12:58",
+        "reference_text": "Sourate Yusuf, verset 58",
+        "content": "وَجَآءَ إِخْوَةُ يُوسُفَ فَدَخَلُوا۟ عَلَيْهِ فَعَرَفَهُمْ وَهُمْ لَهُۥ مُنكِرُونَ",
+        "translation": "Et les frères de Yusuf vinrent et entrèrent auprès de lui. Il les reconnut, mais eux ne le reconnurent pas.",
+        "relevance": "Ce verset décrit la première rencontre des frères avec Yusuf."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 12:100",
+        "reference_text": "Sourate Yusuf, verset 100",
+        "content": "وَرَفَعَ أَبَوَيْهِ عَلَى ٱلْعَرْشِ وَخَرُّوا۟ لَهُۥ سُجَّدًۭا ۖ وَقَالَ يَـٰٓأَبَتِ هَـٰذَا تَأْوِيلُ رُءْيَـٰىَ مِن قَبْلُ",
+        "translation": "Et il éleva ses parents sur le trône, et ils se prosternèrent devant lui. Il dit : Ô mon père ! Voici l'interprétation de mon rêve d'autrefois.",
+        "relevance": "Ce verset montre l'accomplissement du rêve de Yusuf."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Sujud",
+        "arabic_term": "سجود",
+        "definition": "Prosternation. Les parents de Yusuf se prosternèrent devant lui en signe de respect.",
+        "pronunciation": "sou-joud"
+      },
+      {
+        "id": 2,
+        "term": "Arsh",
+        "arabic_term": "عرش",
+        "definition": "Trône. Yusuf éleva ses parents sur le trône.",
+        "pronunciation": "arch"
+      }
+    ]
+  },
+  "lessons_from_yusuf": {
+    "title": "Les leçons de l'histoire de Yusuf",
+    "title_arabic": "دروس من قصة يوسف",
+    "introduction": "Le Coran présente l'histoire de Yusuf comme « la plus belle des histoires » (12:3). Elle enseigne la patience, la chasteté, le pardon et la confiance en Allah. Yusuf traversa l'épreuve du puits, de la tentation et de la prison, mais chaque épreuve le rapprocha de son destin.",
+    "conclusion": "Yusuf dit à la fin : « Ô mon père ! Voici l'interprétation de mon rêve d'autrefois. Mon Seigneur l'a réalisé. Il m'a favorisé quand Il m'a fait sortir de prison et vous a fait venir du désert après que le Diable eut semé la discorde entre moi et mes frères. Mon Seigneur est Doux dans ce qu'Il veut. Il est l'Omniscient, le Sage. » (12:100)",
+    "moral_lesson": "Cette histoire nous enseigne que la patience (sabr) et la confiance en Allah mènent à la réussite. Le mal des hommes peut servir le plan divin.",
+    "historical_location": "De Canaan à l'Égypte",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lessons_from_yusuf_chapter_1",
+        "title": "La plus belle des histoires",
+        "content": "Le Coran dit : « Nous te racontons la plus belle des histoires en te révélant ce Coran, même si tu étais auparavant du nombre des inattentifs. » (12:3) L'histoire de Yusuf contient des leçons pour ceux qui réfléchissent : la jalousie mène au mal ; la chasteté préserve ; la science vient d'Allah ; le pardon libère ; et le plan d'Allah s'accomplit malgré les complots des hommes."
+      },
+      {
+        "id": "lessons_from_yusuf_chapter_2",
+        "title": "Un signe pour les croyants",
+        "content": "Le Coran conclut la sourate : « Dans leurs récits il y a certes une leçon pour les gens doués d'intelligence. Ce n'est point un récit forgé, mais une confirmation de ce qui existait avant lui, un exposé détaillé de toute chose, une guidance et une miséricorde pour des gens qui croient. » (12:111) L'histoire de Yusuf est un signe pour ceux qui croient. Elle montre que Allah est avec les patients et les pieux."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 12:3",
+        "reference_text": "Sourate Yusuf, verset 3",
+        "content": "نَحْنُ نَقُصُّ عَلَيْكَ أَحْسَنَ ٱلْقَصَصِ بِمَآ أَوْحَيْنَآ إِلَيْكَ هَـٰذَا ٱلْقُرْءَانَ",
+        "translation": "Nous te racontons la plus belle des histoires en te révélant ce Coran.",
+        "relevance": "Ce verset présente l'histoire de Yusuf comme la plus belle."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 12:111",
+        "reference_text": "Sourate Yusuf, verset 111",
+        "content": "لَقَدْ كَانَ فِى قَصَصِهِمْ عِبْرَةٌۭ لِّأُو۟لِى ٱلْأَلْبَـٰبِ ۗ مَا كَانَ حَدِيثًۭا يُفْتَرَىٰ وَلَـٰكِن تَصْدِيقَ ٱلَّذِى بَيْنَ يَدَيْهِ وَتَفْصِيلَ كُلِّ شَىْءٍۢ وَهُدًۭى وَرَحْمَةًۭ لِّقَوْمٍۢ يُؤْمِنُونَ",
+        "translation": "Dans leurs récits il y a certes une leçon pour les gens doués d'intelligence. Ce n'est point un récit forgé, mais une confirmation, un exposé détaillé, une guidance et une miséricorde pour des gens qui croient.",
+        "relevance": "Ce verset conclut la sourate et souligne la leçon."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Sabr",
+        "arabic_term": "صبر",
+        "definition": "Patience. Yusuf fit preuve de patience tout au long de ses épreuves.",
+        "pronunciation": "sabr"
+      },
+      {
+        "id": 2,
+        "term": "Ibra",
+        "arabic_term": "عبرة",
+        "definition": "Leçon, exemple. Les histoires des prophètes sont des leçons pour l'humanité.",
+        "pronunciation": "ib-ra"
+      }
+    ]
+  }
+}

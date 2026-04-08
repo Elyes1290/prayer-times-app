@@ -1,0 +1,401 @@
+{
+  "sulayman_kingdom": {
+    "title": "Het koninkrijk van Sulayman",
+    "title_arabic": "ملك سليمان",
+    "introduction": "Sulayman (سليمان عليه السلام), Salomo, is de zoon van Dawud. Hij volgde hem op als koning en profeet. De Koran zegt: «En Sulayman erfde van Dawud. Hij zei: O mensen! Ons is de spraak der vogels geleerd en ons is van alles gegeven. Dit is inderdaad een duidelijke gunst.» (27:16) Sulayman ontving een koninkrijk zonder weerga.",
+    "conclusion": "Sulayman regeerde met wijsheid. Hij begreep de taal van dieren en djinn. Zijn koninkrijk strekte zich uit over mensen, djinn en vogels.",
+    "moral_lesson": "Dit verhaal leert ons dat wijsheid en macht van Allah komen. Sulayman werd niet hoogmoedig; hij dankte zijn Heer.",
+    "historical_location": "Jeruzalem, Palestina",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "sulayman_kingdom_chapter_1",
+        "title": "De erfenis van Dawud",
+        "content": "De Koran verhaalt: «En Wij gaven aan Dawud Sulayman. Wat een uitstekende dienaar! Hij was steeds berouwvol.» (38:30) Sulayman volgde zijn vader Dawud op. Allah vroeg hem wat hij wenste. Sulayman vroeg noch rijkdom noch macht; hij vroeg om een koninkrijk dat niemand na hem zou hebben. Allah verhoorde zijn verzoek en gaf hem nog meer."
+      },
+      {
+        "id": "sulayman_kingdom_chapter_2",
+        "title": "De gaven van Sulayman",
+        "content": "De Koran zegt: «Hij zei: O mijn Heer! Vergeef mij en schenk mij een koninkrijk dat niemand na mij zal hebben. U bent de Grote Schenker. Wij onderwierpen hem de wind die zachtjes op zijn bevel waaide. En de djinn, bouwers en duikers.» (38:35-37) Sulayman ontving de wind, de djinn en de spraak der vogels. Zijn koninkrijk was uniek in de geschiedenis."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 27:16",
+        "reference_text": "Soera An-Naml, vers 16",
+        "content": "وَوَرِثَ سُلَيْمَـٰنُ دَاوُۥدَ ۖ وَقَالَ يَـٰٓأَيُّهَا ٱلنَّاسُ عُلِّمْنَا مَنطِقَ ٱلطَّيْرِ وَأُوتِينَا مِن كُلِّ شَىْءٍ ۖ إِنَّ هَـٰذَا لَهُوَ ٱلْفَضْلُ ٱلْمُبِينُ",
+        "translation": "Sulayman inherited from Dawud. He said: We have been taught the speech of birds and we have been given of all things. This is a manifest favour.",
+        "relevance": "Dit vers vestigt Sulaymans erfenis en zijn gaven."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 38:30",
+        "reference_text": "Soera Sad, vers 30",
+        "content": "وَوَهَبْنَا لِدَاوُۥدَ سُلَيْمَـٰنَ ۚ نِعْمَ ٱلْعَبْدُ ۖ إِنَّهُۥٓ أَوَّابٌ",
+        "translation": "We gave to Dawud Sulayman. What an excellent servant! He was ever turning in repentance.",
+        "relevance": "Dit vers toont Sulaymans vroomheid."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Sulayman",
+        "arabic_term": "سليمان",
+        "definition": "Salomo in het Arabisch. Zoon van Dawud, koning en profeet.",
+        "pronunciation": "sou-lay-man"
+      },
+      {
+        "id": 2,
+        "term": "Mulk",
+        "arabic_term": "ملك",
+        "definition": "Koninkrijk. Sulayman ontving een koninkrijk zonder weerga.",
+        "pronunciation": "mulk"
+      }
+    ]
+  },
+  "sulayman_wind": {
+    "title": "De wind onderworpen aan Sulayman",
+    "title_arabic": "تسخير الريح لسليمان",
+    "introduction": "Allah onderwierp de wind aan Sulayman. De Koran zegt: «En aan Sulayman onderwierpen Wij de wind. De ochtendwind legde een maand af en de avondwind een maand.» (34:12) Sulayman kon met verbazingwekkende snelheid reizen. De wind gehoorzaamde zijn bevel.",
+    "conclusion": "Dit wonder stelde Sulayman in staat grote afstanden af te leggen. Zijn troon werd door de wind gedragen. Hij bezocht zijn koninkrijk in recordtijd.",
+    "moral_lesson": "Dit verhaal leert ons dat Allah de schepping aan Zijn profeten onderwerpt. De wind, de djinn, de vogels — alles gehoorzaamt zijn bevel.",
+    "historical_location": "Palestina",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "sulayman_wind_chapter_1",
+        "title": "De gave van de wind",
+        "content": "De Koran verhaalt: «En aan Sulayman onderwierpen Wij de wind. De ochtendwind legde een maand af en de avondwind een maand. En Wij lieten voor hem de bron van gesmolten koper vloeien. En onder de djinn werkten sommigen onder zijn bevel.» (34:12) De ochtendwind legde in een uur de afstand van een maand af; de avondwind evenzo. Sulayman reisde zo met verbazingwekkende snelheid."
+      },
+      {
+        "id": "sulayman_wind_chapter_2",
+        "title": "De troon gedragen door de wind",
+        "content": "De Koran zegt: «En Wij onderwierpen de bergen aan Dawud. Zij verheerlijkten met hem. En de vogels. En Wij deden dat. En Wij onderwierpen de wind aan Sulayman.» (38:36) De wind droeg Sulaymans troon. Hij doorkruiste zijn koninkrijk in recordtijd. Het was een teken van Allahs macht."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 34:12",
+        "reference_text": "Soera Saba, vers 12",
+        "content": "وَلِسُلَيْمَـٰنَ ٱلرِّيحَ غُدُوُّهَا شَهْرٌۭ وَرَوَاحُهَا شَهْرٌۭ ۖ وَأَسَلْنَا لَهُۥ عَيْنَ ٱلْقِطْرِ",
+        "translation": "To Sulayman We subjected the wind. The morning wind covered a month's journey and the evening wind a month's journey.",
+        "relevance": "Dit vers beschrijft het wonder van de wind."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 21:81",
+        "reference_text": "Soera Al-Anbiya, vers 81",
+        "content": "وَلِسُلَيْمَـٰنَ ٱلرِّيحَ عَاصِفَةًۭ تَجْرِى بِأَمْرِهِۦٓ إِلَى ٱلْأَرْضِ ٱلَّتِى بَارَكْنَا فِيهَا",
+        "translation": "To Sulayman the fierce wind that ran by his command towards the land that We have blessed.",
+        "relevance": "Dit vers bevestigt de onderwerping van de wind."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Rih",
+        "arabic_term": "ريح",
+        "definition": "Wind. Allah onderwierp hem aan Sulayman.",
+        "pronunciation": "rih"
+      },
+      {
+        "id": 2,
+        "term": "Taskhir",
+        "arabic_term": "تسخير",
+        "definition": "Onderwerping. Allah onderwierp de schepping aan Sulayman.",
+        "pronunciation": "tas-khir"
+      }
+    ]
+  },
+  "sulayman_jinn": {
+    "title": "De djinn in dienst van Sulayman",
+    "title_arabic": "الجن في خدمة سليمان",
+    "introduction": "Allah onderwierp de djinn aan Sulayman. De Koran zegt: «En onder de djinn werkten sommigen onder zijn bevel.» (34:12) Zij bouwden monumenten, doken naar parels en voerden zijn bevelen uit. Sulayman gebruikte hen voor kolossale werken.",
+    "conclusion": "De djinn bouwden paleizen en standbeelden voor Sulayman. Zij konden zijn bevel niet ontvluchten. Toen Sulayman stierf, merkten zij het pas toen zijn staf door de aarde was opgegeten.",
+    "moral_lesson": "Dit verhaal leert ons dat Allah aan wie Hij wil macht over de schepselen geeft. Sulayman gebruikte deze gave om Allah te verheerlijken.",
+    "historical_location": "Palestina",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "sulayman_jinn_chapter_1",
+        "title": "De bouwers en duikers",
+        "content": "De Koran verhaalt: «En onder de djinn werkten sommigen onder zijn bevel. En wie van hen van Ons bevel afweek, dien lieten Wij de straf van het laaiende vuur proeven. Zij bouwden voor hem wat hij wilde: heiligdommen, standbeelden, bassins als reservoirs en stevig verankerde ketels.» (34:12-13) De djinn bouwden imposante monumenten. Anderen doken om parels te extraheren. Alles stond onder Sulaymans controle."
+      },
+      {
+        "id": "sulayman_jinn_chapter_2",
+        "title": "De dood van Sulayman",
+        "content": "De Koran zegt: «Toen Wij zijn dood besloten, wees niets hen op zijn dood behalve een schepsel der aarde dat zijn staf at. Toen hij viel, begrepen de djinn dat als zij het verborgene hadden gekend, zij niet in de vernederende straf zouden zijn gebleven.» (34:14) Sulayman stierf staand, leunend op zijn staf. De djinn bleven werken zonder het te weten. Toen de staf door termieten was opgegeten, viel Sulayman. Toen begrepen zij."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 34:12-13",
+        "reference_text": "Soera Saba, verzen 12-13",
+        "content": "وَمِنَ ٱلْجِنِّ مَن يَعْمَلُ بَيْنَ يَدَيْهِ بِإِذْنِ رَبِّهِۦ ۖ وَمَن يَزِغْ مِنْهُمْ عَنْ أَمْرِنَا نُذِقْهُ مِنْ عَذَابِ ٱلسَّعِيرِ",
+        "translation": "Among the jinn, some worked under his command. They built sanctuaries and statues for him.",
+        "relevance": "Dit vers beschrijft het werk van de djinn voor Sulayman."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 34:14",
+        "reference_text": "Soera Saba, vers 14",
+        "content": "فَلَمَّا قَضَيْنَا عَلَيْهِ ٱلْمَوْتَ مَا دَلَّهُمْ عَلَىٰ مَوْتِهِۦٓ إِلَّا دَآبَّةُ ٱلْأَرْضِ تَأْكُلُ مِنسَأَتَهُۥ",
+        "translation": "When We decreed his death, nothing indicated his death to them except a creature that ate his staff.",
+        "relevance": "Dit vers verhaalt Sulaymans dood."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Jinn",
+        "arabic_term": "جن",
+        "definition": "Onzichtbaar schepsel van vuur. Allah onderwierp hen aan Sulayman.",
+        "pronunciation": "jinn"
+      },
+      {
+        "id": 2,
+        "term": "Mihrab",
+        "arabic_term": "محراب",
+        "definition": "Heiligdom. De djinn bouwden mihrabs voor Sulayman.",
+        "pronunciation": "mih-rab"
+      }
+    ]
+  },
+  "sulayman_ant": {
+    "title": "Sulayman en de mier",
+    "title_arabic": "سليمان والنملة",
+    "introduction": "Op een dag marcheerden Sulayman en zijn leger. Een mier waarschuwde de hare: «O mieren! Ga in jullie woningen, opdat Sulayman en zijn legers jullie niet verpletteren zonder het te beseffen.» (27:18) Sulayman hoorde de mier en glimlachte. Hij dankte Allah en vroeg niet onrechtvaardig te zijn.",
+    "conclusion": "Sulayman begreep de taal der mieren. Hij verpletterde hen niet; hij dankte Allah voor deze gave. Dit verhaal toont zijn mededogen en nederigheid.",
+    "moral_lesson": "Dit verhaal leert ons mededogen jegens de zwaksten. Zelfs het kleinste schepsel verdient bescherming. Wijsheid is niet schaden.",
+    "historical_location": "Mierenvallei",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "sulayman_ant_chapter_1",
+        "title": "De waarschuwing van de mier",
+        "content": "De Koran verhaalt: «Totdat zij bij de mierenvallei kwamen, zei een mier: O mieren! Ga in jullie woningen, opdat Sulayman en zijn legers jullie niet verpletteren zonder het te beseffen.» (27:18) Sulayman hoorde de mier dankzij Allahs gave. Hij glimlachte om haar woorden. De mier beschermde haar gemeenschap; Sulayman respecteerde deze waarschuwing."
+      },
+      {
+        "id": "sulayman_ant_chapter_2",
+        "title": "Sulaymans dankbaarheid",
+        "content": "De Koran zegt: «Hij glimlachte om haar woorden en zei: O mijn Heer! Inspireer mij om dank te geven voor Uw gunsten waarmee U mij hebt begunstigd. En sta mij toe het goede te doen dat U behaagt. En laat mij door Uw barmhartigheid onder Uw rechtschapen dienaren binnengaan.» (27:19) Sulayman werd niet boos op de mier. Hij dankte Allah en vroeg de schepselen niet te schaden. Zijn wijsheid was voorbeeldig."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 27:18",
+        "reference_text": "Soera An-Naml, vers 18",
+        "content": "حَتَّىٰٓ إِذَآ أَتَوْا۟ عَلَىٰ وَادِ ٱلنَّمْلِ قَالَتْ نَمْلَةٌۭ يَـٰٓأَيُّهَا ٱلنَّمْلُ ٱدْخُلُوا۟ مَسَـٰكِنَكُمْ لَا يَحْطِمَنَّكُّمْ سُلَيْمَـٰنُ وَجُنُودُهُۥ وَهُمْ لَا يَشْعُرُونَ",
+        "translation": "An ant said: O ants! Enter your dwellings, lest Sulayman and his armies crush you without realising it.",
+        "relevance": "Dit vers bevat de woorden van de mier."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 27:19",
+        "reference_text": "Soera An-Naml, vers 19",
+        "content": "فَتَبَسَّمَ ضَاحِكًۭا مِّن قَوْلِهَا وَقَالَ رَبِّ أَوْزِعْنِىٓ أَنْ أَشْكُرَ نِعْمَتَكَ",
+        "translation": "He smiled and said: O my Lord! Inspire me to give thanks for Your favours.",
+        "relevance": "Dit vers toont Sulaymans reactie."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Naml",
+        "arabic_term": "نمل",
+        "definition": "Mier. Een soera van de Koran draagt deze naam.",
+        "pronunciation": "naml"
+      },
+      {
+        "id": 2,
+        "term": "Shukr",
+        "arabic_term": "شكر",
+        "definition": "Dankbaarheid. Sulayman vroeg Allah hem dankbaar te maken.",
+        "pronunciation": "shoukr"
+      }
+    ]
+  },
+  "sulayman_hoopoe": {
+    "title": "De hop en het koninkrijk van Saba",
+    "title_arabic": "الهدهد وبلقيس",
+    "introduction": "Sulayman inspecteerde de vogels. De hop (Hudhud) ontbrak. Hij keerde terug en zei: «Ik heb geleerd wat jij niet hebt geleerd. Ik kom tot jou van Saba met zeker nieuws.» (27:22) Hij had een koninkrijk ontdekt wiens koningin en volk de zon aanbaden. Sulayman zond de hop met een brief.",
+    "conclusion": "De hop was een kostbare boodschapper. Hij bracht informatie die Sulayman niet kende. Deze gave stelde Sulayman in staat de koningin van Saba tot de Islam te roepen.",
+    "moral_lesson": "Dit verhaal leert ons dat informatie een rijkdom is. De nederigste schepselen kunnen grote missies volbrengen.",
+    "historical_location": "Saba (Jemen)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "sulayman_hoopoe_chapter_1",
+        "title": "De hop en zijn ontdekking",
+        "content": "De Koran verhaalt: «Hij controleerde de vogels en zei: Waarom zie ik de hop niet? Is hij onder de afwezigen? Ik zal hem streng straffen of hem slachten, tenzij hij mij een duidelijke reden brengt. Hij aarzelde niet en zei: Ik heb geleerd wat jij niet hebt geleerd. Ik kom tot jou van Saba met zeker nieuws.» (27:20-22) De hop had het koninkrijk van Saba ontdekt. Hij meldde dat de koningin en haar volk de zon in plaats van Allah aanbaden."
+      },
+      {
+        "id": "sulayman_hoopoe_chapter_2",
+        "title": "De brief aan de koningin",
+        "content": "De Koran zegt: «Hij zei: Wij zullen zien of je de waarheid hebt gesproken of bij de leugenaars bent. Ga met mijn brief en werp die voor hen. Keer dan terug.» (27:27-28) Sulayman schreef een brief aan de koningin van Saba (Bilqis). Hij riep haar op zich aan Allah te onderwerpen. De hop droeg de brief en wierp die in het paleis. De koningin las hem en riep haar raadslieden bijeen."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 27:22",
+        "reference_text": "Soera An-Naml, vers 22",
+        "content": "فَمَكَثَ غَيْرَ بَعِيدٍۢ فَقَالَ أَحَطتُ بِمَا لَمْ تُحِطْ بِهِۦ وَجِئْتُكَ مِن سَبَإٍۭ بِنَبَإٍۢ يَقِينٍ",
+        "translation": "It said: I have learned what you have not learned. I come to you from Saba with certain news.",
+        "relevance": "Dit vers verhaalt het antwoord van de hop."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 27:27-28",
+        "reference_text": "Soera An-Naml, verzen 27-28",
+        "content": "قَالَ سَنَنظُرُ أَصَدَقْتَ أَمْ كُنتَ مِنَ ٱلْكَـٰذِبِينَ ۝ ٱذْهَب بِّكِتَـٰبِى هَـٰذَا فَأَلْقِهْ إِلَيْهِمْ",
+        "translation": "He said: Go with my letter and cast it to them. Then return.",
+        "relevance": "Dit vers bevestigt het zenden van de brief door de hop."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Hudhud",
+        "arabic_term": "هدهد",
+        "definition": "Hop. Sulaymans boodschappervogel.",
+        "pronunciation": "houd-houd"
+      },
+      {
+        "id": 2,
+        "term": "Saba",
+        "arabic_term": "سبأ",
+        "definition": "Koninkrijk van Jemen. Een soera van de Koran draagt deze naam.",
+        "pronunciation": "sa-ba"
+      }
+    ]
+  },
+  "sulayman_sheba": {
+    "title": "De koningin van Saba",
+    "title_arabic": "ملكة سبأ",
+    "introduction": "De koningin van Saba (Bilqis) ontving Sulaymans brief. Zij riep haar raadslieden bijeen. De Koran verhaalt: «Zij zei: O edelen! Mij is een eerbiedwaardige brief gezonden. Hij is van Sulayman. Hij zegt: In de naam van Allah, de Barmhartige, de Genadevolle. Verheft jullie niet boven mij en komt tot mij in volledige onderwerping.» (27:29-31)",
+    "conclusion": "De koningin van Saba kwam naar Sulaymans paleis. Zij zag zijn troon en zijn koninkrijk. Zij zei: «Mijn Heer! Ik heb mijzelf onrecht aangedaan. Ik onderwerp mij met Sulayman aan Allah, Heer der werelden.» (27:44)",
+    "moral_lesson": "Dit verhaal leert ons dat de oproep tot de Islam door wijsheid kan zegevieren. De koningin van Saba geloofde na de tekenen te hebben gezien.",
+    "historical_location": "Saba (Jemen) en Jeruzalem",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "sulayman_sheba_chapter_1",
+        "title": "Het antwoord van de koningin",
+        "content": "De Koran verhaalt: «Zij zei: O edelen! Geeft mij jullie mening over deze zaak. Ik beslis niets zonder dat jullie aanwezig zijn. Zij zeiden: Wij hebben macht en wij hebben kracht. De beslissing is aan jou. Zie wat jij beveelt. Zij zei: Koningen, wanneer zij een stad binnengaan, bederven zij haar.» (27:32-34) De koningin verkoos vrede. Zij zond geschenken aan Sulayman. Maar Sulayman stuurde de geschenken terug en eiste volledige onderwerping."
+      },
+      {
+        "id": "sulayman_sheba_chapter_2",
+        "title": "Bilqis' bekering",
+        "content": "De Koran zegt: «Er werd tot haar gezegd: Treed het paleis binnen. Toen zij het zag, hield zij het voor een waterbekken en ontblootte haar benen. Hij zei: Het is een met kristal geplaveid paleis. Zij zei: Mijn Heer! Ik heb mijzelf onrecht aangedaan. Ik onderwerp mij met Sulayman aan Allah, Heer der werelden.» (27:44) De koningin erkende de waarheid. Zij verzaakte de aanbidding van de zon en omarmde de Islam."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 27:29-31",
+        "reference_text": "Soera An-Naml, verzen 29-31",
+        "content": "قَالَتْ يَـٰٓأَيُّهَا ٱلْمَلَؤُا۟ إِنِّىٓ أُلْقِىَ إِلَىَّ كِتَـٰبٌۭ كَرِيمٌ ۝ إِنَّهُۥ مِن سُلَيْمَـٰنَ وَإِنَّهُۥ بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ",
+        "translation": "She said: An honourable letter has been sent to me. It is from Sulayman. It says: In the name of Allah, the Most Gracious.",
+        "relevance": "Dit vers verhaalt het antwoord van de koningin."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 27:44",
+        "reference_text": "Soera An-Naml, vers 44",
+        "content": "قِيلَ لَهَا ٱدْخُلِى ٱلصَّرْحَ ۖ فَلَمَّا رَأَتْهُ حَسِبَتْهُ لُجَّةًۭ وَكَشَفَتْ عَن سَاقَيْهَا",
+        "translation": "It was said to her: Enter the palace. She said: I submit with Sulayman to Allah.",
+        "relevance": "Dit vers beschrijft de bekering van de koningin."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Bilqis",
+        "arabic_term": "بلقيس",
+        "definition": "Koningin van Saba. Zij omarmde de Islam na Sulayman te hebben ontmoet.",
+        "pronunciation": "bil-qis"
+      },
+      {
+        "id": 2,
+        "term": "Islam",
+        "arabic_term": "إسلام",
+        "definition": "Onderwerping aan Allah. De koningin onderwierp zich aan Allah.",
+        "pronunciation": "is-lam"
+      }
+    ]
+  },
+  "lessons_from_sulayman": {
+    "title": "Lessen uit het verhaal van Sulayman",
+    "title_arabic": "دروس من قصة سليمان",
+    "introduction": "Sulayman was koning en profeet. Hij ontving de wind, de djinn, de spraak der vogels. De Koran zegt: «En Sulayman erfde van Dawud. Hij zei: O mensen! Ons is de spraak der vogels geleerd.» (27:16) Zijn verhaal leert wijsheid, dankbaarheid en nederigheid.",
+    "conclusion": "Ondanks zijn immense macht bleef Sulayman nederig. Hij dankte Allah en schaadde de schepselen niet. De koningin van Saba geloofde door zijn wijsheid. Hij stierf staand, leunend op zijn staf — de djinn merkten het pas daarna.",
+    "moral_lesson": "Dit verhaal leert ons dat macht met wijsheid moet worden uitgeoefend. Dankbaarheid en nederigheid verheffen de gelovige. Zelfs koningen zijn dienaren van Allah.",
+    "historical_location": "Palestina en Jemen",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lessons_from_sulayman_chapter_1",
+        "title": "Wijsheid en macht",
+        "content": "Sulayman vroeg om een koninkrijk dat niemand na hem zou hebben. Allah schonk hem de wind, de djinn, de spraak der vogels. Maar Sulayman werd niet hoogmoedig. Hij luisterde naar de mier. Hij dankte Allah. Hij riep de koningin van Saba met een respectvolle brief. Wijsheid leidt de macht."
+      },
+      {
+        "id": "lessons_from_sulayman_chapter_2",
+        "title": "Dood en herinnering",
+        "content": "De Koran zegt: «Toen Wij zijn dood besloten, wees niets hen op zijn dood behalve een schepsel der aarde dat zijn staf at.» (34:14) Sulayman stierf staand. De djinn werkten zonder het te weten. Toen de staf was opgegeten, viel hij. Zo herinnert Allah dat de dood onvermijdelijk is. Zelfs de machtigste koningen zijn dienaren die tot hun Heer terugkeren."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 27:16",
+        "reference_text": "Soera An-Naml, vers 16",
+        "content": "وَوَرِثَ سُلَيْمَـٰنُ دَاوُۥدَ ۖ وَقَالَ يَـٰٓأَيُّهَا ٱلنَّاسُ عُلِّمْنَا مَنطِقَ ٱلطَّيْرِ",
+        "translation": "Sulayman inherited from Dawud. He said: We have been taught the speech of birds.",
+        "relevance": "Dit vers vestigt Sulaymans gaven."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 34:14",
+        "reference_text": "Soera Saba, vers 14",
+        "content": "فَلَمَّا قَضَيْنَا عَلَيْهِ ٱلْمَوْتَ مَا دَلَّهُمْ عَلَىٰ مَوْتِهِۦٓ إِلَّا دَآبَّةُ ٱلْأَرْضِ تَأْكُلُ مِنسَأَتَهُۥ",
+        "translation": "When We decreed his death, nothing indicated his death to them except a creature that ate his staff.",
+        "relevance": "Dit vers verhaalt Sulaymans dood."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Hikmah",
+        "arabic_term": "حكمة",
+        "definition": "Wijsheid. Sulayman was met hikmah begiftigd.",
+        "pronunciation": "hik-mah"
+      },
+      {
+        "id": 2,
+        "term": "Awab",
+        "arabic_term": "أواب",
+        "definition": "Hij die (tot Allah) terugkeert. Sulayman was awab (berouwvol).",
+        "pronunciation": "a-wab"
+      }
+    ]
+  }
+}

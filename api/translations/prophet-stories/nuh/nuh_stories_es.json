@@ -1,0 +1,495 @@
+{
+  "nuh_prophecy": {
+    "title": "El envío de Noé como profeta",
+    "title_arabic": "إرسال نوح عليه السلام",
+    "introduction": "Noé (Nuh عليه السلام) es uno de los más grandes profetas mencionados en el Corán. Allah lo envió a su pueblo para llamarlos a adorar al Dios Único y advertirles del castigo venidero. Su historia ilustra la paciencia ejemplar del profeta ante el rechazo y la hostilidad, y demuestra la misericordia de Allah hacia los creyentes.",
+    "conclusion": "El envío de Noé marca el comienzo de una misión profética que duró casi mil años. A pesar de las dificultades, Noé permaneció fiel a su mensaje, estableciendo un modelo de perseverancia y devoción para todos los profetas que le siguieron.",
+    "moral_lesson": "Esta historia nos enseña que la misión profética es una responsabilidad sagrada encomendada por Allah. Nos recuerda la importancia de advertir a la gente con claridad y nunca desesperar de la misericordia divina.",
+    "historical_location": "Mesopotamia (región del actual Irak)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "nuh_prophecy_chapter_1",
+        "title": "La orden divina",
+        "content": "Allah eligió a Noé entre los descendientes de Adán para ser el primer mensajero enviado a una comunidad. El Corán relata: \"Enviamos a Noé a su pueblo: Advierte a tu pueblo antes de que les llegue un castigo doloroso.\" Noé recibió la revelación divina ordenándole llamar a su pueblo a abandonar la adoración de ídolos y volver a Allah, el Único digno de adoración. Su misión era clara: advertir antes del castigo, para que quien quisiera pudiera arrepentirse y salvarse."
+      },
+      {
+        "id": "nuh_prophecy_chapter_2",
+        "title": "El pueblo de Noé",
+        "content": "El pueblo de Noé había caído en el extravío. Adoraban ídolos llamados Wadd, Suwa', Yaghuth, Ya'uq y Nasr, deidades que ellos mismos habían inventado. Habían olvidado el mensaje del monoteísmo transmitido por Adán y sus descendientes piadosos. Noé, como profeta elegido por Allah, tenía la responsabilidad de devolverlos a la verdad. Los llamó con sabiduría y claridad, explicando que estos ídolos no podían ni crear, ni dañar, ni beneficiar, y que solo Allah merecía adoración."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 71:1",
+        "reference_text": "Sura Nuh, versículo 1",
+        "content": "إِنَّا أَرْسَلْنَا نُوحًا إِلَىٰ قَوْمِهِ أَنْ أَنذِرْ قَوْمَكَ مِن قَبْلِ أَن يَأْتِيَهُمْ عَذَابٌ أَلِيمٌ",
+        "translation": "Enviamos a Noé a su pueblo: Advierte a tu pueblo antes de que les llegue un castigo doloroso.",
+        "relevance": "Este versículo establece el envío de Noé como profeta y la naturaleza de su misión de advertencia."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 11:25",
+        "reference_text": "Sura Hud, versículo 25",
+        "content": "وَلَقَدْ أَرْسَلْنَا نُوحًا إِلَىٰ قَوْمِهِ إِنِّي لَكُمْ نَذِيرٌ مُّبِينٌ",
+        "translation": "Ciertamente enviamos a Noé a su pueblo: Soy para vosotros un advertidor claro.",
+        "relevance": "Este versículo confirma el envío de Noé y su papel como advertidor claro."
+      },
+      {
+        "id": 3,
+        "type": "quran",
+        "source": "Quran 71:23",
+        "reference_text": "Sura Nuh, versículo 23",
+        "content": "وَقَالُوا لَا تَذَرُنَّ آلِهَتَكُمْ وَلَا تَذَرُنَّ وَدًّا وَلَا سُوَاعًا وَلَا يَغُوثَ وَيَعُوقَ وَنَسْرًا",
+        "translation": "Y dijeron: Nunca abandonéis vuestras deidades. No abandonéis a Wadd, ni a Suwa', ni a Yaghuth, ni a Ya'uq, ni a Nasr.",
+        "relevance": "Este versículo revela los nombres de los ídolos adorados por el pueblo de Noé."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Nuh",
+        "arabic_term": "نوح",
+        "definition": "Noé en árabe. Profeta de Allah enviado a su pueblo para llamarlos al monoteísmo. Predicó durante 950 años.",
+        "pronunciation": "nouh"
+      },
+      {
+        "id": 2,
+        "term": "Nadhir",
+        "arabic_term": "نذير",
+        "definition": "Advertidor. Se refiere al papel del profeta que advierte a su pueblo del castigo antes de que ocurra.",
+        "pronunciation": "na-dhir"
+      },
+      {
+        "id": 3,
+        "term": "Qawm",
+        "arabic_term": "قوم",
+        "definition": "Pueblo o comunidad. El pueblo de Noé al que fue enviado como mensajero.",
+        "pronunciation": "qawm"
+      }
+    ]
+  },
+  "nuh_call": {
+    "title": "La llamada de Noé a su pueblo",
+    "title_arabic": "دعوة نوح لقومه",
+    "introduction": "Noé (عليه السلام) llamó a su pueblo con paciencia y perseverancia. Los invitó día y noche: \"Adorad a Allah. No tenéis otra deidad que Él.\" Utilizó diversos métodos para transmitir su mensaje: predicación pública, llamadas privadas y advertencias explícitas. A pesar de su dedicación, la mayoría de su pueblo rechazó obstinadamente.",
+    "conclusion": "La llamada de Noé demuestra la total dedicación del profeta a su misión. No descuidó ninguna oportunidad para guiar a su pueblo, incluso ante el rechazo y las burlas.",
+    "moral_lesson": "Esta historia nos enseña la importancia del da'wa (la llamada al Islam) con sabiduría y buena exhortación. Nos recuerda que nuestro deber es transmitir el mensaje; la guía permanece en manos de Allah.",
+    "historical_location": "Mesopotamia",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "nuh_call_chapter_1",
+        "title": "La invitación al monoteísmo",
+        "content": "Noé dijo a su pueblo: \"¡Oh pueblo mío! Adorad a Allah. No tenéis otra deidad que Él. Temo por vosotros el castigo de un día terrible.\" Les explicó que los ídolos que adoraban eran meramente nombres que ellos y sus antepasados habían inventado, sin que Allah hubiera enviado ninguna prueba para ellos. Los invitó a pedir perdón a Allah, pues Él es el Más Indulgente y el Más Misericordioso. Noé prometió que si se arrepentían, Allah enviaría sobre ellos lluvias abundantes y los multiplicaría en riquezas e hijos."
+      },
+      {
+        "id": "nuh_call_chapter_2",
+        "title": "Los métodos de Noé",
+        "content": "El Corán describe cómo Noé llamó a su pueblo: \"Llamé a mi pueblo día y noche. Pero mi llamada solo aumentó su huida.\" Cada vez que los llamaba para que Allah los perdonara, se ponían los dedos en los oídos y se envolvían en sus vestiduras, persistiendo en su orgullo. Noé no se desanimó. Continuó llamándolos abiertamente y en secreto, diciendo: \"Pedid perdón a vuestro Señor, pues Él es el Más Indulgente.\""
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 71:2-4",
+        "reference_text": "Sura Nuh, versículos 2-4",
+        "content": "قَالَ يَا قَوْمِ إِنِّي لَكُمْ نَذِيرٌ مُّبِينٌ أَنِ اعْبُدُوا اللَّهَ وَاتَّقُوهُ وَأَطِيعُونِ يَغْفِرْ لَكُم مِّن ذُنُوبِكُمْ وَيُؤَخِّرْكُمْ إِلَىٰ أَجَلٍ مُّسَمًّى",
+        "translation": "Dijo: ¡Oh pueblo mío! Soy para vosotros un advertidor claro. Adorad a Allah, temedle y obedecedme. Él os perdonará algunos de vuestros pecados y os concederá un plazo hasta un término fijado.",
+        "relevance": "Estos versículos contienen el mensaje central de Noé: la adoración de Allah y la promesa de perdón."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 71:5-7",
+        "reference_text": "Sura Nuh, versículos 5-7",
+        "content": "قَالَ رَبِّ إِنِّي دَعَوْتُ قَوْمِي لَيْلًا وَنَهَارًا فَلَمْ يَزِدْهُمْ دُعَائِي إِلَّا فِرَارًا وَإِنِّي كُلَّمَا دَعَوْتُهُمْ لِتَغْفِرَ لَهُمْ جَعَلُوا أَصَابِعَهُمْ فِي آذَانِهِمْ وَاسْتَغْشَوْا ثِيَابَهُمْ وَأَصَرُّوا وَاسْتَكْبَرُوا اسْتِكْبَارًا",
+        "translation": "Dijo: ¡Señor! Llamé a mi pueblo día y noche. Pero mi llamada solo aumentó su huida. Y cada vez que los llamaba para que Tú los perdonaras, se ponían los dedos en los oídos y se envolvían en sus vestiduras, persistiendo en su orgullo.",
+        "relevance": "Estos versículos describen la perseverancia de Noé y la reacción obstinada de su pueblo."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Da'wa",
+        "arabic_term": "دعوة",
+        "definition": "Llamada o invitación. La invitación al Islam y a la adoración de Allah. Noé practicó el da'wa con constancia.",
+        "pronunciation": "da-wa"
+      },
+      {
+        "id": 2,
+        "term": "Tawhid",
+        "arabic_term": "توحيد",
+        "definition": "Monoteísmo. La unicidad de Allah en la adoración. Era el mensaje central de Noé.",
+        "pronunciation": "taw-hid"
+      },
+      {
+        "id": 3,
+        "term": "Istighfar",
+        "arabic_term": "استغفار",
+        "definition": "Pedir perdón. Noé invitó a su pueblo a pedir el perdón de Allah.",
+        "pronunciation": "is-tigh-far"
+      }
+    ]
+  },
+  "rejection_and_mockery": {
+    "title": "Rechazo y burlas",
+    "title_arabic": "الرفض والسخرية",
+    "introduction": "Los notables del pueblo de Noé rechazaron su mensaje con arrogancia. Lo llamaron mentiroso, lo consideraron loco e instaron a la gente a no seguir a \"los de humilde condición\" que habían creído. Su orgullo los cegó e impidió que reconocieran la verdad.",
+    "conclusion": "El rechazo de Noé por los notables ilustra cómo el orgullo y el apego a las tradiciones ancestrales pueden impedir que la gente acepte la verdad, incluso cuando se presenta claramente.",
+    "moral_lesson": "Esta historia nos advierte de los peligros del orgullo y el desprecio hacia los creyentes. Nos enseña que la verdad no se determina por el estatus social sino por lo que Allah ha revelado.",
+    "historical_location": "Mesopotamia",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "rejection_and_mockery_chapter_1",
+        "title": "La acusación de los notables",
+        "content": "Los jefes del pueblo de Noé vinieron a él y dijeron: \"Solo vemos en ti un hombre como nosotros, y solo vemos a los que te siguen como los más viles entre nosotros, a primera vista. No vemos en ti superioridad sobre nosotros. Más bien, creemos que sois mentirosos.\" Rechazaron creer que un hombre ordinario pudiera ser profeta y despreciaron a los que habían creído, considerándolos gente de baja condición. Noé les respondió con sabiduría: \"¡Oh pueblo mío! ¿Veis? Si me baso en una prueba clara de mi Señor y Él me ha concedido misericordia de Su parte, a la que estáis ciegos, ¿os forzaremos a aceptarla cuando la encontréis repugnante?\""
+      },
+      {
+        "id": "rejection_and_mockery_chapter_2",
+        "title": "Persistencia en el extravío",
+        "content": "A pesar de las pruebas y advertencias de Noé, su pueblo persistió en su rechazo. Dijeron: \"¡Oh Noé! Has disputado con nosotros y multiplicado las disputas. Traenos lo que nos amenazas, si eres de los veraces.\" Desafiaron a Noé, exigiendo ver el castigo del que les advertía, creyendo que nunca llegaría. Noé respondió: \"Solo Allah os lo traerá si Él quiere, y no podréis escapar.\" Su arrogancia los cegó; no entendieron que el plazo concedido era una misericordia para darles oportunidad de arrepentirse."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 11:27",
+        "reference_text": "Sura Hud, versículo 27",
+        "content": "فَقَالَ الْمَلَأُ الَّذِينَ كَفَرُوا مِن قَوْمِهِ مَا نَرَاكَ إِلَّا بَشَرًا مِّثْلَنَا وَمَا نَرَاكَ اتَّبَعَكَ إِلَّا الَّذِينَ هُمْ أَرَاذِلُنَا بَادِيَ الرَّأْيِ وَمَا نَرَىٰ لَكُمْ عَلَيْنَا مِن فَضْلٍ بَلْ نَظُنُّكُمْ كَاذِبِينَ",
+        "translation": "Los notables de su pueblo que habían descreído dijeron: Solo vemos en ti un hombre como nosotros, y solo vemos a los que te siguen como los más viles entre nosotros. No vemos en ti superioridad sobre nosotros. Más bien, creemos que sois mentirosos.",
+        "relevance": "Este versículo describe la arrogancia de los notables y su desprecio hacia los creyentes."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 11:32",
+        "reference_text": "Sura Hud, versículo 32",
+        "content": "قَالُوا يَا نُوحُ قَدْ جَادَلْتَنَا فَأَكْثَرْتَ جِدَالَنَا فَأْتِنَا بِمَا تَعِدُنَا إِن كُنتَ مِنَ الصَّادِقِينَ",
+        "translation": "Dijeron: ¡Oh Noé! Has disputado con nosotros y multiplicado las disputas. Traenos lo que nos amenazas, si eres de los veraces.",
+        "relevance": "Este versículo muestra el desafío arrogante del pueblo ante las advertencias de Noé."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Mala'",
+        "arabic_term": "ملأ",
+        "definition": "Notables o jefes. Los líderes del pueblo de Noé que encabezaron la oposición contra él.",
+        "pronunciation": "ma-la"
+      },
+      {
+        "id": 2,
+        "term": "Kufr",
+        "arabic_term": "كفر",
+        "definition": "Incredulidad o rechazo de la verdad. El estado de quienes rechazaron el mensaje de Noé.",
+        "pronunciation": "koufr"
+      },
+      {
+        "id": 3,
+        "term": "Istikbar",
+        "arabic_term": "استكبار",
+        "definition": "Orgullo o arrogancia. El pecado que impidió al pueblo de Noé aceptar la verdad.",
+        "pronunciation": "is-tik-bar"
+      }
+    ]
+  },
+  "nuh_patience": {
+    "title": "La paciencia de Noé",
+    "title_arabic": "صبر نوح عليه السلام",
+    "introduction": "Noé (عليه السلام) predicó a su pueblo durante novecientos cincuenta años, según el Corán. A pesar de este período excepcional, solo un pequeño número creyó. Esta larga paciencia ilustra la perseverancia ejemplar del profeta y la misericordia de Allah al conceder tiempo a la gente para arrepentirse.",
+    "conclusion": "La paciencia de Noé durante casi mil años sigue siendo un modelo para todos los creyentes. Demuestra que el éxito no se mide por el número de conversos, sino por la fidelidad en cumplir la misión encomendada por Allah.",
+    "moral_lesson": "Esta historia nos enseña la virtud de la paciencia (sabr) en la llamada al Islam. Nos recuerda que debemos perseverar en nuestra misión sin desanimarnos ante la oposición.",
+    "historical_location": "Mesopotamia",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "nuh_patience_chapter_1",
+        "title": "Novecientos cincuenta años",
+        "content": "El Corán nos informa: \"Enviamos a Noé a su pueblo. Permaneció entre ellos mil años menos cincuenta.\" Así, Noé pasó novecientos cincuenta años llamando a su pueblo al Islam. Durante todo este tiempo, nunca se cansó de transmitir el mensaje. Los llamó de día y de noche, en público y en privado. A pesar de esta extraordinaria perseverancia, la mayoría rechazó. Solo un pequeño grupo de creyentes, principalmente gente humilde, respondió a su llamada. Esta larga duración demuestra tanto la infinita paciencia de Allah al dar tiempo a la gente para arrepentirse, como la inquebrantable determinación del profeta en cumplir su misión."
+      },
+      {
+        "id": "nuh_patience_chapter_2",
+        "title": "La oración de Noé",
+        "content": "Después de siglos de llamada sin éxito entre la mayoría, Noé se dirigió a Allah: \"¡Señor! La gente de mi pueblo me ha desobedecido y ha seguido a aquel cuyas riquezas e hijos solo han aumentado su pérdida. Han tramado un inmenso esquema. Han dicho: Nunca abandonéis vuestras deidades. No abandonéis a Wadd, ni a Suwa', ni a Yaghuth, ni a Ya'uq, ni a Nasr. Ya han extraviado a muchos. No aumentes a los injustos sino en error.\" Noé reconoció que su pueblo había excedido todos los límites y pidió a Allah que no dejara en la tierra ningún habitante entre los incrédulos, pues si los dejaba, solo extraviarían a Sus siervos y solo engendrarían pecadores e incrédulos empedernidos."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 29:14",
+        "reference_text": "Sura Al-Ankabut, versículo 14",
+        "content": "وَلَقَدْ أَرْسَلْنَا نُوحًا إِلَىٰ قَوْمِهِ فَلَبِثَ فِيهِمْ أَلْفَ سَنَةٍ إِلَّا خَمْسِينَ عَامًا",
+        "translation": "Enviamos a Noé a su pueblo. Permaneció entre ellos mil años menos cincuenta.",
+        "relevance": "Este versículo establece la duración excepcional de la misión de Noé: 950 años."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 71:26-28",
+        "reference_text": "Sura Nuh, versículos 26-28",
+        "content": "وَقَالَ نُوحٌ رَبِّ لَا تَذَرْ عَلَى الْأَرْضِ مِنَ الْكَافِرِينَ دَيَّارًا إِنَّكَ إِن تَذَرْهُمْ يُضِلُّوا عِبَادَكَ وَلَا يَلِدُوا إِلَّا فَاجِرًا كَفَّارًا",
+        "translation": "Y Noé dijo: ¡Señor! No dejes en la tierra ningún habitante entre los incrédulos. Si los dejas, extraviarán a Tus siervos y solo engendrarán pecadores e incrédulos empedernidos.",
+        "relevance": "Estos versículos contienen la oración de Noé después de siglos de rechazo por su pueblo."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Sabr",
+        "arabic_term": "صبر",
+        "definition": "Paciencia. La virtud que Noé manifestó durante 950 años de llamada al Islam.",
+        "pronunciation": "sabr"
+      },
+      {
+        "id": 2,
+        "term": "Du'a",
+        "arabic_term": "دعاء",
+        "definition": "Súplica u oración. Noé invocó a Allah después de que su pueblo persistiera en la incredulidad.",
+        "pronunciation": "dou-a"
+      }
+    ]
+  },
+  "building_the_ark": {
+    "title": "La construcción del arca",
+    "title_arabic": "بناء السفينة",
+    "introduction": "Allah ordenó a Noé construir un arca en previsión del diluvio. Noé obedeció y se puso a construir el barco, soportando las burlas de su pueblo que no creía en el castigo venidero. El arca fue construida según precisas instrucciones divinas, y se convirtió en el medio de salvación para los creyentes.",
+    "conclusion": "La construcción del arca demuestra la total obediencia de Noé a los mandatos de Allah, incluso cuando parecían inusuales. También ilustra cómo Allah prepara la salvación para quienes creen.",
+    "moral_lesson": "Esta historia nos enseña a obedecer los mandatos de Allah sin vacilar, incluso cuando nos parecen incomprensibles. La sabiduría divina supera nuestro limitado entendimiento.",
+    "historical_location": "Mesopotamia",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "building_the_ark_chapter_1",
+        "title": "La orden de construir",
+        "content": "Allah reveló a Noé: \"Construye el arca bajo Nuestros ojos y según Nuestra revelación. Y no Me hables acerca de los injustos: serán ahogados.\" Noé se puso inmediatamente a trabajar. Construyó el arca según las especificaciones exactas que Allah le había indicado. El Corán no da los detalles técnicos de la construcción, pero enfatiza que todo se hizo bajo supervisión divina y según la revelación. Mientras Noé construía, los incrédulos pasaban junto a él y se burlaban: \"¡Oh Noé! Has disputado con nosotros y multiplicado las disputas.\" Noé les advirtió: \"Si os burláis de nosotros, nos burlaremos de vosotros como os burláis.\""
+      },
+      {
+        "id": "building_the_ark_chapter_2",
+        "title": "El embarque",
+        "content": "Cuando el arca estuvo terminada y se acercó el momento del castigo, Allah ordenó a Noé: \"Carga en ella una pareja de cada especie, así como tu familia - excepto aquellos contra quienes ya se ha pronunciado la palabra - y los creyentes.\" Solo los que habían creído embarcaron con Noé. Entre su familia, su esposa y uno de sus hijos rechazaron creer y no estuvieron entre los salvados. El Corán especifica que la esposa de Noé y su hijo estaban entre los injustos. El arca acogió a Noé, a los creyentes y a una pareja de cada especie de animales, como Allah había ordenado."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 11:37-38",
+        "reference_text": "Sura Hud, versículos 37-38",
+        "content": "وَاصْنَعِ الْفُلْكَ بِأَعْيُنِنَا وَوَحْيِنَا وَلَا تُخَاطِبْنِي فِي الَّذِينَ ظَلَمُوا إِنَّهُم مُّغْرَقُونَ وَيَصْنَعُ الْفُلْكَ وَكُلَّمَا مَرَّ عَلَيْهِ مَلَأٌ مِّن قَوْمِهِ سَخِرُوا مِنْهُ",
+        "translation": "Construye el arca bajo Nuestros ojos y según Nuestra revelación. Y no Me hables acerca de los injustos: serán ahogados. Y construía el arca. Y cada vez que notables de su pueblo pasaban junto a él, se burlaban de él.",
+        "relevance": "Estos versículos describen la orden de construir el arca y las burlas del pueblo."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 11:40",
+        "reference_text": "Sura Hud, versículo 40",
+        "content": "حَتَّىٰ إِذَا جَاءَ أَمْرُنَا وَفَارَ التَّنُّورُ قُلْنَا احْمِلْ فِيهَا مِن كُلٍّ زَوْجَيْنِ اثْنَيْنِ وَأَهْلَكَ إِلَّا مَن سَبَقَ عَلَيْهِ الْقَوْلُ وَمَن آمَنَ",
+        "translation": "Entonces, cuando llegó Nuestra orden y el horno desbordó, dijimos: Carga en ella una pareja de cada especie, así como tu familia - excepto aquellos contra quienes ya se ha pronunciado la palabra - y los creyentes.",
+        "relevance": "Este versículo describe el embarque en el arca en el momento del diluvio."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Fulk",
+        "arabic_term": "فلك",
+        "definition": "Arca o barco. La embarcación que Noé construyó según el mandato de Allah.",
+        "pronunciation": "foulk"
+      },
+      {
+        "id": 2,
+        "term": "Tannur",
+        "arabic_term": "تنور",
+        "definition": "Horno. El signo mencionado en el Corán que indica el comienzo del diluvio - el horno desbordó.",
+        "pronunciation": "tan-nour"
+      },
+      {
+        "id": 3,
+        "term": "Zawjayn",
+        "arabic_term": "زوجين",
+        "definition": "Una pareja. Un macho y una hembra de cada especie fueron cargados en el arca.",
+        "pronunciation": "zaw-jayn"
+      }
+    ]
+  },
+  "the_flood": {
+    "title": "El diluvio",
+    "title_arabic": "الطوفان",
+    "introduction": "El castigo de Allah cayó sobre el pueblo de Noé. Las aguas brotaron de la tierra y del cielo, sumergiendo todo. El arca flotó sobre las aguas, llevando a los creyentes y a los animales en seguridad. Los incrédulos fueron ahogados, como Noé les había advertido durante siglos.",
+    "conclusion": "El diluvio demuestra la justicia de Allah: salvó a los creyentes y destruyó a los incrédulos. Es una lección para todas las generaciones sobre las consecuencias de rechazar la verdad.",
+    "moral_lesson": "Esta historia nos advierte que el castigo de Allah es real y golpea a quienes persisten en la incredulidad. Nos recuerda nunca sentirnos seguros desobedeciendo a Allah.",
+    "historical_location": "Mesopotamia",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "the_flood_chapter_1",
+        "title": "El desencadenamiento de las aguas",
+        "content": "Cuando llegó la orden de Allah, se abrieron las compuertas del cielo y la tierra hizo brotar sus manantiales. El Corán describe: \"Abrimos las puertas del cielo a agua torrencial, e hicimos brotar la tierra en manantiales. Las aguas se encontraron según un decreto ya ordenado.\" El diluvio fue total. Toda la región quedó sumergida. Ni siquiera las montañas pudieron ofrecer refugio. El arca de Noé flotó sobre las aguas, protegida por la voluntad de Allah. Dentro, Noé y los creyentes estaban seguros, mientras fuera, los incrédulos que habían rechazado embarcar fueron engullidos por las olas."
+      },
+      {
+        "id": "the_flood_chapter_2",
+        "title": "La salvación de los creyentes",
+        "content": "Allah dijo a Noé: \"Embarca en ella. En el nombre de Allah, que navegue y ancle. Tu Señor es ciertamente el Más Indulgente y el Más Misericordioso.\" El arca navegó sobre las aguas, llevando a sus ocupantes en seguridad. Noé y los que estaban con él fueron salvados, mientras los demás fueron ahogados. El Corán enfatiza: \"Y se dijo: ¡Oh tierra! Traga tu agua. ¡Y tú, cielo! ¡Cesa! El agua disminuyó. La orden fue ejecutada. El arca se posó en el Monte Judi. Y se dijo: ¡Que los injustos sean aniquilados!\""
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 54:11-14",
+        "reference_text": "Sura Al-Qamar, versículos 11-14",
+        "content": "فَفَتَحْنَا أَبْوَابَ السَّمَاءِ بِمَاءٍ مُّنْهَمِرٍ وَفَجَّرْنَا الْأَرْضَ عُيُونًا فَالْتَقَى الْمَاءُ عَلَىٰ أَمْرٍ قَدْ قُدِرَ وَحَمَلْنَاهُ عَلَىٰ ذَاتِ أَلْوَاحٍ وَدُسُرٍ",
+        "translation": "Abrimos las puertas del cielo a agua torrencial, e hicimos brotar la tierra en manantiales. Las aguas se encontraron según un decreto ya ordenado. Y lo llevamos en una embarcación de tablas y clavos.",
+        "relevance": "Estos versículos describen el desencadenamiento del diluvio y la protección del arca."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 11:44",
+        "reference_text": "Sura Hud, versículo 44",
+        "content": "وَقِيلَ يَا أَرْضُ ابْلَعِي مَاءَكِ وَيَا سَمَاءُ أَقْلِعِي وَغِيضَ الْمَاءُ وَقُضِيَ الْأَمْرُ وَاسْتَوَتْ عَلَى الْجُودِيِّ وَقِيلَ بُعْدًا لِّلْقَوْمِ الظَّالِمِينَ",
+        "translation": "Y se dijo: ¡Oh tierra! Traga tu agua. ¡Y tú, cielo! ¡Cesa! El agua disminuyó. La orden fue ejecutada. El arca se posó en el Monte Judi. Y se dijo: ¡Que los injustos sean aniquilados!",
+        "relevance": "Este versículo describe el fin del diluvio y el arca posándose en el Monte Judi."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Tufan",
+        "arabic_term": "طوفان",
+        "definition": "Diluvio. El castigo por agua que destruyó al pueblo de Noé.",
+        "pronunciation": "tou-fan"
+      },
+      {
+        "id": 2,
+        "term": "Al-Judi",
+        "arabic_term": "الجودي",
+        "definition": "Monte Judi. La montaña donde el arca de Noé se posó después del diluvio, tradicionalmente identificada en Turquía.",
+        "pronunciation": "al-jou-di"
+      }
+    ]
+  },
+  "nuh_son_refused": {
+    "title": "El hijo de Noé que rechazó",
+    "title_arabic": "ابن نوح الذي أبى",
+    "introduction": "Entre las pruebas de Noé estuvo el rechazo de su propio hijo a embarcar en el arca. Este hijo eligió refugiarse en una montaña, creyendo poder escapar del diluvio. Fue ahogado. Cuando Noé imploró a Allah por su hijo, Allah le recordó una verdad profunda: este hijo no era de su familia en términos de fe, pues había cometido un acto injusto.",
+    "conclusion": "La historia del hijo de Noé enseña que los lazos de sangre no bastan para la salvación. Solo importan la fe y la obediencia a Allah. Los lazos espirituales superan los lazos familiares.",
+    "moral_lesson": "Esta historia nos recuerda que no podemos salvar a nadie contra su voluntad. Cada uno es responsable de sus elecciones. También nos enseña que la piedad y la fe son los verdaderos criterios de parentesco a los ojos de Allah.",
+    "historical_location": "Durante el diluvio",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "nuh_son_refused_chapter_1",
+        "title": "El rechazo a embarcar",
+        "content": "Noé llamó a su hijo que había permanecido aparte: \"¡Oh hijo mío! Embarca con nosotros y no permanezcas con los incrédulos.\" Su hijo respondió: \"Me refugiaré en una montaña que me protegerá del agua.\" Noé le dijo: \"Hoy no hay protector contra la orden de Allah, excepto aquel a quien Él muestre misericordia.\" Una ola los separó, y el hijo estuvo entre los ahogados. El hijo de Noé había creído que su propia fuerza y una montaña podrían salvarlo, olvidando que solo Allah puede proteger. Rechazó la invitación de su padre y eligió el camino de la perdición."
+      },
+      {
+        "id": "nuh_son_refused_chapter_2",
+        "title": "La respuesta de Allah",
+        "content": "Noé invocó a su Señor y dijo: \"¡Señor! Mi hijo es parte de mi familia. Tu promesa es verdad. Tú eres el más justo de los jueces.\" Allah respondió: \"¡Oh Noé! No es parte de tu familia. Fue un acto no conforme a la rectitud. No Me preguntes sobre lo que no conoces. Te exhorto a no estar entre los ignorantes.\" Noé comprendió y dijo: \"¡Señor! Me refugio en Ti de preguntarte sobre lo que no conozco. Y si no me perdonas y me muestras misericordia, estaré entre los perdedores.\" Esta respuesta divina enseña que la verdadera familia es la de la fe. El hijo de Noé, al rechazar creer y embarcar en el arca, se había excluido de la familia de los creyentes."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 11:42-43",
+        "reference_text": "Sura Hud, versículos 42-43",
+        "content": "وَهِيَ تَجْرِي بِهِمْ فِي مَوْجٍ كَالْجِبَالِ وَنَادَىٰ نُوحٌ ابْنَهُ وَكَانَ فِي مَعْزِلٍ يَا بُنَيَّ ارْكَب مَّعَنَا وَلَا تَكُن مَّعَ الْكَافِرِينَ قَالَ سَآوِي إِلَىٰ جَبَلٍ يَعْصِمُنِي مِنَ الْمَاءِ",
+        "translation": "Navegaba con ellos entre olas como montañas. Noé llamó a su hijo que había permanecido aparte: ¡Oh hijo mío! Embarca con nosotros y no permanezcas con los incrédulos. Dijo: Me refugiaré en una montaña que me protegerá del agua.",
+        "relevance": "Estos versículos describen la llamada de Noé a su hijo y el rechazo de este."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 11:45-46",
+        "reference_text": "Sura Hud, versículos 45-46",
+        "content": "وَنَادَىٰ نُوحٌ رَبَّهُ فَقَالَ رَبِّ إِنَّ ابْنِي مِنْ أَهْلِي وَإِنَّ وَعْدَكَ الْحَقُّ وَأَنتَ أَحْكَمُ الْحَاكِمِينَ قَالَ يَا نُوحُ إِنَّهُ لَيْسَ مِنْ أَهْلِكَ إِنَّهُ عَمَلٌ غَيْرُ صَالِحٍ",
+        "translation": "Noé invocó a su Señor y dijo: ¡Señor! Mi hijo es parte de mi familia. Tu promesa es verdad. Tú eres el más justo de los jueces. Allah dijo: ¡Oh Noé! No es parte de tu familia. Fue un acto no conforme a la rectitud.",
+        "relevance": "Estos versículos contienen el intercambio entre Noé y Allah, estableciendo que la verdadera familia es la de la fe."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Ahl",
+        "arabic_term": "أهل",
+        "definition": "Familia o gente. Allah enseñó a Noé que su verdadera familia son los que creen, no los de sangre.",
+        "pronunciation": "ahl"
+      },
+      {
+        "id": 2,
+        "term": "Amal ghayr salih",
+        "arabic_term": "عمل غير صالح",
+        "definition": "Acto no conforme a la rectitud. La descripción que Allah dio del comportamiento del hijo de Noé.",
+        "pronunciation": "a-mal ghayr sa-lih"
+      }
+    ]
+  },
+  "lessons_from_nuh": {
+    "title": "Lecciones de la historia de Noé",
+    "title_arabic": "دروس من قصة نوح",
+    "introduction": "La historia de Noé (عليه السلام) contiene lecciones atemporales para toda la humanidad. Enseña la paciencia, la perseverancia en la llamada al Islam, las consecuencias de la incredulidad y la misericordia de Allah hacia los creyentes. El Corán la cita como ejemplo para las generaciones futuras.",
+    "conclusion": "Noé cumplió su misión con excelencia y fue salvado con los creyentes. Su historia permanece como recordatorio para toda la humanidad: responder a la llamada de los profetas y creer en Allah es el camino de la salvación.",
+    "moral_lesson": "Esta historia nos enseña a seguir a los mensajeros de Allah, a ser pacientes en la adversidad y nunca desesperar de la misericordia divina. Nos advierte de las consecuencias de rechazar obstinadamente la verdad.",
+    "historical_location": "De Mesopotamia al Monte Judi",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lessons_from_nuh_chapter_1",
+        "title": "Un ejemplo para la humanidad",
+        "content": "El Corán presenta la historia de Noé como ejemplo para los pueblos: \"Estas son las noticias que te relatamos de los mensajeros, para fortalecer tu corazón. Y en este relato te ha llegado la verdad, así como una exhortación y un recordatorio para los creyentes.\" La historia de Noé nos muestra que los profetas encontraron oposición, pero que la victoria final pertenece a quienes creen. Nos recuerda que el plazo concedido a los incrédulos no es señal de debilidad de Allah, sino una oportunidad para que se arrepientan. Cuando llega el término, nadie puede posponerlo."
+      },
+      {
+        "id": "lessons_from_nuh_chapter_2",
+        "title": "El linaje de los profetas",
+        "content": "Noé ocupa un lugar central en el linaje profético. El Corán dice: \"Ciertamente, Allah eligió a Adán, a Noé, a la familia de Abraham y a la familia de Imran por encima de todos los mundos.\" Noé fue el primer mensajero enviado a una comunidad después de Adán. Sus descendientes poblaron la tierra después del diluvio. Entre sus descendientes están los profetas Ibrahim, Musa, Isa y Muhammad (la paz sea con todos ellos). La historia de Noé establece el modelo que todos los profetas siguieron: la llamada al monoteísmo, la paciencia ante el rechazo y la salvación para los creyentes."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 11:120",
+        "reference_text": "Sura Hud, versículo 120",
+        "content": "وَكُلًّا نَّقُصُّ عَلَيْكَ مِنْ أَنبَاءِ الرُّسُلِ مَا نُثَبِّتُ بِهِ فُؤَادَكَ وَجَاءَكَ فِي هَٰذِهِ الْحَقُّ وَمَوْعِظَةٌ وَذِكْرَىٰ لِلْمُؤْمِنِينَ",
+        "translation": "Y todo lo que te relatamos de las noticias de los mensajeros es para fortalecer tu corazón. Y en este relato te ha llegado la verdad, así como una exhortación y un recordatorio para los creyentes.",
+        "relevance": "Este versículo explica el propósito de los relatos de los profetas: fortalecer los corazones y exhortar."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 3:33",
+        "reference_text": "Sura Al 'Imran, versículo 33",
+        "content": "إِنَّ اللَّهَ اصْطَفَىٰ آدَمَ وَنُوحًا وَآلَ إِبْرَاهِيمَ وَآلَ عِمْرَانَ عَلَى الْعَالَمِينَ",
+        "translation": "Ciertamente, Allah eligió a Adán, a Noé, a la familia de Abraham y a la familia de Imran por encima de todos los mundos.",
+        "relevance": "Este versículo establece el lugar eminente de Noé en el linaje de los elegidos de Allah."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Ibra",
+        "arabic_term": "عبرة",
+        "definition": "Ejemplo o lección. Las historias de los profetas son ejemplos para la humanidad.",
+        "pronunciation": "ib-ra"
+      },
+      {
+        "id": 2,
+        "term": "Dhikra",
+        "arabic_term": "ذكرى",
+        "definition": "Recordatorio. Los relatos de los profetas sirven de recordatorio para los creyentes.",
+        "pronunciation": "dhik-ra"
+      }
+    ]
+  }
+}

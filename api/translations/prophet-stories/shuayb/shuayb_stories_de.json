@@ -1,0 +1,287 @@
+{
+  "shuayb_call": {
+    "title": "Der Ruf von Shu'ayb",
+    "title_arabic": "دعوة شعيب",
+    "introduction": "Shu'ayb (شعيب عليه السلام), Jitro, ist ein Prophet, der zum Volk von Madyan gesandt wurde. Der Quran sagt: \"Und zu Madyan ihren Bruder Shu'ayb. Er sagte: O mein Volk! Dient Allah. Ihr habt keinen anderen Gott als Ihn.\" (7:85) Das Volk von Madyan betrog im Handel. Shu'ayb rief sie zu Gerechtigkeit und Monotheismus auf.",
+    "conclusion": "Shu'ayb predigte mit Weisheit und Geduld. Er warnte vor den Folgen der Ungerechtigkeit. Einige glaubten, aber die Mehrheit lehnte ihn ab. Er erfüllte seine Mission mit Festigkeit.",
+    "moral_lesson": "Diese Geschichte lehrt uns, dass der Prophet zur Gerechtigkeit im Geschäft aufruft. Betrug und Täuschung sind schwere Sünden.",
+    "historical_location": "Madyan (Nordwestarabien)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "shuayb_call_chapter_1",
+        "title": "Die Mission",
+        "content": "Der Quran berichtet: \"Und zu Madyan ihren Bruder Shu'ayb. Er sagte: O mein Volk! Dient Allah. Ihr habt keinen anderen Gott als Ihn. Ein Beweis ist von eurem Herrn zu euch gekommen. So gebt volles Maß und volles Gewicht. Vermindert den Menschen nicht ihre Rechte.\" (7:85) Shu'ayb wurde zu einem Volk von Händlern gesandt. Sie betrogen bei Gewichten und Maßen. Er rief sie auf, Allah zu dienen und gerecht zu sein."
+      },
+      {
+        "id": "shuayb_call_chapter_2",
+        "title": "Die Warnung",
+        "content": "Der Quran sagt: \"Und stiftet kein Unheil auf der Erde an, nachdem sie in Ordnung gebracht wurde. Das ist besser für euch, wenn ihr Gläubige seid.\" (7:85) Shu'ayb warnte sein Volk. Betrug verdirbt die Gesellschaft. Gerechtigkeit sichert Wohlstand. Er ermahnte sie, Allah zu fürchten und ehrlich zu sein."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 7:85",
+        "reference_text": "Sure Al-A'raf, Vers 85",
+        "content": "وَإِلَىٰ مَدْيَنَ أَخَاهُمْ شُعَيْبًۭا ۚ قَالَ يَـٰقَوْمِ ٱعْبُدُوا۟ ٱللَّهَ مَا لَكُم مِّنْ إِلَـٰهٍ غَيْرُهُۥ ۖ قَدْ جَآءَتْكُم بَيِّنَةٌۭ مِّن رَّبِّكُمْ ۖ فَأَوْفُوا۟ ٱلْكَيْلَ وَٱلْمِيزَانَ",
+        "translation": "And to Madyan, their brother Shu'ayb. He said: O my people! Worship Allah. Give full measure and full weight.",
+        "relevance": "Dieser Vers berichtet von Shu'aybs Ruf."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 11:84",
+        "reference_text": "Sure Hud, Vers 84",
+        "content": "وَإِلَىٰ مَدْيَنَ أَخَاهُمْ شُعَيْبًۭا ۚ قَالَ يَـٰقَوْمِ ٱعْبُدُوا۟ ٱللَّهَ مَا لَكُم مِّنْ إِلَـٰهٍ غَيْرُهُۥ",
+        "translation": "And to Madyan, their brother Shu'ayb. He said: O my people! Worship Allah. You have no other deity than Him.",
+        "relevance": "Dieser Vers bestätigt den Ruf zum Monotheismus."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Shu'ayb",
+        "arabic_term": "شعيب",
+        "definition": "Jitro auf Arabisch. Prophet, der zum Volk von Madyan gesandt wurde.",
+        "pronunciation": "chou-ayb"
+      },
+      {
+        "id": 2,
+        "term": "Madyan",
+        "arabic_term": "مدين",
+        "definition": "Midian. Region in Nordwestarabien. Shu'aybs Volk.",
+        "pronunciation": "ma-dyan"
+      }
+    ]
+  },
+  "shuayb_weights": {
+    "title": "Shu'ayb und die Waagen",
+    "title_arabic": "شعيب والميزان",
+    "introduction": "Das Volk von Madyan betrog bei Gewichten und Maßen. Der Quran sagt: \"So gebt volles Maß und volles Gewicht. Vermindert den Menschen nicht ihre Rechte.\" (7:85) Shu'ayb ermahnte sie zur Handelsgerechtigkeit. Sie verkauften, indem sie weniger gaben. Sie kauften, indem sie mehr forderten. Es war flagrante Ungerechtigkeit.",
+    "conclusion": "Shu'ayb bestand auf Ehrlichkeit. Betrug im Handel ist eine Sünde. Allah liebt die Gerechten. Gläubige müssen in ihren Geschäften aufrichtig sein.",
+    "moral_lesson": "Diese Geschichte lehrt uns, dass Gerechtigkeit im Handel eine Pflicht ist. Betrug zerstört Vertrauen und zieht Strafe nach sich.",
+    "historical_location": "Madyan",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "shuayb_weights_chapter_1",
+        "title": "Der Betrug",
+        "content": "Der Quran berichtet: \"O mein Volk! Gebt volles Maß und volles Gewicht in Gerechtigkeit. Vermindert den Menschen nicht ihre Güter. Und stiftet kein Unheil auf der Erde an.\" (11:85) Das Volk von Madyan war für Betrug bekannt. Wenn sie verkauften, gaben sie weniger. Wenn sie kauften, nahmen sie mehr. Shu'ayb verurteilte sie. Diese Praxis war versteckter Diebstahl."
+      },
+      {
+        "id": "shuayb_weights_chapter_2",
+        "title": "Die Ordnung der Gerechtigkeit",
+        "content": "Der Quran sagt: \"Was von Allah (erlaubt) übrig bleibt, ist besser für euch, wenn ihr Gläubige seid. Und ich bin kein Hüter über euch.\" (11:86) Shu'ayb ordnete Gerechtigkeit an. Gebt volles Maß und volles Gewicht. Tut den Menschen kein Unrecht. Erlaubter Gewinn ist gesegnet. Unerlaubter Gewinn führt zum Untergang."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 11:85",
+        "reference_text": "Sure Hud, Vers 85",
+        "content": "وَيَـٰقَوْمِ أَوْفُوا۟ ٱلْمِكْيَالَ وَٱلْمِيزَانَ بِٱلْقِسْطِ ۖ وَلَا تَبْخَسُوا۟ ٱلنَّاسَ أَشْيَآءَهُمْ",
+        "translation": "O my people! Give full measure and full weight in justice. Do not diminish people their goods.",
+        "relevance": "Dieser Vers ordnet Gerechtigkeit in den Maßen an."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 7:85",
+        "reference_text": "Sure Al-A'raf, Vers 85",
+        "content": "فَأَوْفُوا۟ ٱلْكَيْلَ وَٱلْمِيزَانَ وَلَا تَبْخَسُوا۟ ٱلنَّاسَ أَشْيَآءَهُمْ",
+        "translation": "Give full measure and full weight. Do not diminish people their rights.",
+        "relevance": "Dieser Vers erinnert an Shu'aybs Ordnung."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Mizan",
+        "arabic_term": "ميزان",
+        "definition": "Waage. Shu'ayb ordnete an, die Mizan mit Gerechtigkeit zu verwenden.",
+        "pronunciation": "mi-zan"
+      },
+      {
+        "id": 2,
+        "term": "Kayl",
+        "arabic_term": "كيل",
+        "definition": "Maß. Volles Kayl zu geben ist eine Pflicht.",
+        "pronunciation": "kayl"
+      }
+    ]
+  },
+  "shuayb_rejection": {
+    "title": "Die Ablehnung von Shu'ayb",
+    "title_arabic": "تكذيب قوم شعيب",
+    "introduction": "Das Volk von Madyan lehnte Shu'ayb ab. Der Quran sagt: \"Sie sagten: O Shu'ayb! Befiehlt dir dein Gebet, das zu verlassen, was unsere Väter anbeteten, oder mit unserem Vermögen aufzuhören, was wir wollen?\" (11:87) Sie beschuldigten ihn, ein Magier oder Lügner zu sein. Sie weigerten sich, ihre ungerechten Praktiken aufzugeben.",
+    "conclusion": "Shu'ayb war geduldig. Er fuhr fort zu rufen. Er warnte vor der Strafe. Aber sie verharrten im Irrtum. Allahs Dekret fiel über sie.",
+    "moral_lesson": "Diese Geschichte lehrt uns, dass die Ablehnung der Propheten zur Verdammnis führt. Diejenigen, die in der Ungerechtigkeit verharren, werden bestraft.",
+    "historical_location": "Madyan",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "shuayb_rejection_chapter_1",
+        "title": "Die Anschuldigungen",
+        "content": "Der Quran berichtet: \"Sie sagten: O Shu'ayb! Wir verstehen viel von dem, was du sagst, nicht. Und wir betrachten dich unter uns als schwach.\" (11:91) Das Volk verachtete Shu'ayb. Sie nannten ihn schwach. Sie weigerten sich zu gehorchen. Sie sagten: \"Du bist nur ein Mensch wie wir.\" Shu'ayb antwortete: \"Ich verlange keinen Lohn. Mein Lohn ist bei Allah.\""
+      },
+      {
+        "id": "shuayb_rejection_chapter_2",
+        "title": "Die letzte Warnung",
+        "content": "Der Quran sagt: \"Und O mein Volk! Lass meine Uneinigkeit mit euch euch nicht leiden lassen, was das Volk von Nuh erlitt, oder das Volk von Hud, oder das Volk von Salih.\" (11:89) Shu'ayb warnte sie. Frühere Völker wurden zerstört, weil sie ihre Propheten ablehnten. Das gleiche Schicksal erwartete sie, wenn sie verharrten. Aber sie glaubten nicht."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 11:87",
+        "reference_text": "Sure Hud, Vers 87",
+        "content": "قَالُوا۟ يَـٰشُعَيْبُ أَصَلَوٰتُكَ تَأْمُرُكَ أَن نَّتْرُكَ مَا يَعْبُدُ ءَابَآؤُنَآ أَوْ أَن نَّفْعَلَ فِىٓ أَمْوَٰلِنَا مَا نَشَـٰٓؤُا۟",
+        "translation": "They said: O Shu'ayb! Does your prayer command you to abandon what our fathers worshipped?",
+        "relevance": "Dieser Vers berichtet von den Anschuldigungen des Volkes."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 11:91",
+        "reference_text": "Sure Hud, Vers 91",
+        "content": "قَالُوا۟ يَـٰشُعَيْبُ مَا نَفْقَهُ كَثِيرًۭا مِّمَّا تَقُولُ وَإِنَّا لَنَرَىٰكَ فِينَا ضَعِيفًۭا",
+        "translation": "They said: O Shu'ayb! We do not understand much of what you say. We consider you weak.",
+        "relevance": "Dieser Vers beschreibt die Verachtung des Volkes."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Takdhib",
+        "arabic_term": "تكذيب",
+        "definition": "Leugnung, Ablehnung. Das Volk machte Takdhib zu Shu'ayb.",
+        "pronunciation": "tak-dhib"
+      },
+      {
+        "id": 2,
+        "term": "Da'if",
+        "arabic_term": "ضعيف",
+        "definition": "Schwach. Sie nannten Shu'ayb da'if.",
+        "pronunciation": "da-if"
+      }
+    ]
+  },
+  "shuayb_destruction": {
+    "title": "Die Zerstörung des Volkes von Madyan",
+    "title_arabic": "هلاك قوم مدين",
+    "introduction": "Das Volk von Madyan verharrte in der Ablehnung. Der Quran sagt: \"Und als Unser Befehl kam, retteten Wir Shu'ayb und die, die mit ihm geglaubt hatten, aus Barmherzigkeit von Uns. Und der Schrei ergriff die, die ungerecht gewesen waren.\" (11:94) Die Strafe fiel. Ein Erdbeben oder ein Schrei zerstörte sie. Die Ungerechten gingen zugrunde.",
+    "conclusion": "Shu'ayb und die Gläubigen wurden gerettet. Sie verließen die Region vor der Strafe. Die Ungläubigen wurden vernichtet. Madyan wurde eine Lehre für die Generationen.",
+    "moral_lesson": "Diese Geschichte lehrt uns, dass Ungerechtigkeit und Ablehnung der Propheten zur Zerstörung führt. Nur Gläubige werden gerettet.",
+    "historical_location": "Madyan",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "shuayb_destruction_chapter_1",
+        "title": "Die Strafe",
+        "content": "Der Quran berichtet: \"Und der Schrei ergriff sie. Sie lagen leblos in ihren Wohnstätten. Als hätten sie nie dort gelebt.\" (11:94-95) Allahs Strafe fiel über Madyan. Ein Schrei oder ein Erdbeben zerstörte sie. Sie gingen in einem Augenblick zugrunde. Ihre Häuser wurden ihre Gräber. Allahs Gerechtigkeit wurde erfüllt."
+      },
+      {
+        "id": "shuayb_destruction_chapter_2",
+        "title": "Rettung der Gläubigen",
+        "content": "Der Quran sagt: \"Wir retteten Shu'ayb und die, die mit ihm geglaubt hatten, aus Barmherzigkeit von Uns.\" (11:94) Shu'ayb und die Gläubigen wurden verschont. Allah schützte sie. Sie verließen vor der Strafe. Sie fanden Zuflucht anderswo. Allahs Barmherzigkeit umfasst die Gläubigen."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 11:94",
+        "reference_text": "Sure Hud, Vers 94",
+        "content": "وَلَمَّا جَآءَ أَمْرُنَا نَجَّيْنَا شُعَيْبًۭا وَٱلَّذِينَ ءَامَنُوا۟ مَعَهُۥ بِرَحْمَةٍۢ مِّنَّا وَأَخَذَتِ ٱلَّذِينَ ظَلَمُوا۟ ٱلصَّيْحَةُ",
+        "translation": "When Our command came, We saved Shu'ayb and those who had believed with him. The Cry seized the unjust.",
+        "relevance": "Dieser Vers berichtet von Rettung und Strafe."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 7:91-92",
+        "reference_text": "Sure Al-A'raf, Verse 91-92",
+        "content": "فَأَخَذَتْهُمُ ٱلرَّجْفَةُ فَأَصْبَحُوا۟ فِى دَارِهِمْ جَـٰثِمِينَ ۝ ٱلَّذِينَ كَذَّبُوا۟ شُعَيْبًۭا كَأَن لَّمْ يَغْنَوْا۟ فِيهَآ",
+        "translation": "The earthquake seized them. They lay lifeless in their dwellings. As if they had never lived there.",
+        "relevance": "Dieser Vers beschreibt die Zerstörung."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Sayha",
+        "arabic_term": "صيحة",
+        "definition": "Schrei. Die Sayha (oder Rajfa) zerstörte das Volk von Madyan.",
+        "pronunciation": "say-ha"
+      },
+      {
+        "id": 2,
+        "term": "Rajfa",
+        "arabic_term": "رجفة",
+        "definition": "Erdbeben. Die Rajfa fiel über die Ungerechten.",
+        "pronunciation": "raj-fa"
+      }
+    ]
+  },
+  "lessons_from_shuayb": {
+    "title": "Lehren aus der Geschichte von Shu'ayb",
+    "title_arabic": "دروس من قصة شعيب",
+    "introduction": "Shu'ayb ist der Prophet der Handelsgerechtigkeit. Der Quran sagt: \"Und zu Madyan ihren Bruder Shu'ayb.\" (7:85) Er rief sein Volk zur Ehrlichkeit auf. Er kämpfte gegen Betrug. Seine Geschichte lehrt, dass Gerechtigkeit im Geschäft eine religiöse Pflicht ist.",
+    "conclusion": "Shu'ayb rief zur Gerechtigkeit auf. Er wurde abgelehnt. Die Strafe fiel. Die Gläubigen wurden gerettet. Die Geschichte von Madyan ist eine ewige Warnung.",
+    "moral_lesson": "Diese Geschichte lehrt uns, dass Betrug im Handel eine schwere Sünde ist. Der Gläubige muss in allen Geschäften ehrlich sein.",
+    "historical_location": "Madyan",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lessons_from_shuayb_chapter_1",
+        "title": "Handelsgerechtigkeit",
+        "content": "Der Quran sagt: \"Gebt volles Maß und volles Gewicht. Vermindert den Menschen nicht ihre Rechte.\" (7:85) Shu'ayb bestand auf Ehrlichkeit. Der muslimische Händler muss gerecht sein. Betrug bei Gewichten, Maßen oder Preisen ist verboten. Vertrauen ist heilig. Der Islam verlangt Integrität im Handel."
+      },
+      {
+        "id": "lessons_from_shuayb_chapter_2",
+        "title": "Folgen der Ungerechtigkeit",
+        "content": "Das Volk von Madyan weigerte sich. Es verharrte im Betrug. Die Strafe zerstörte sie. Der Quran erinnert: \"Und wie viele Städte haben Wir zerstört! Unsere Strafe kam zu ihnen bei Nacht.\" (7:4) Kollektive Ungerechtigkeit zieht Strafe nach sich. Nur Gerechtigkeit und Glaube sichern die Rettung."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 7:85-93",
+        "reference_text": "Sure Al-A'raf, Verse 85-93",
+        "content": "وَإِلَىٰ مَدْيَنَ أَخَاهُمْ شُعَيْبًۭا ۚ قَالَ يَـٰقَوْمِ ٱعْبُدُوا۟ ٱللَّهَ",
+        "translation": "And to Madyan, their brother Shu'ayb. He said: O my people! Worship Allah.",
+        "relevance": "Dieser Abschnitt fasst Shu'aybs Geschichte zusammen."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 11:94-95",
+        "reference_text": "Sure Hud, Verse 94-95",
+        "content": "نَجَّيْنَا شُعَيْبًۭا وَٱلَّذِينَ ءَامَنُوا۟ مَعَهُۥ بِرَحْمَةٍۢ مِّنَّا",
+        "translation": "We saved Shu'ayb and those who had believed with him by mercy.",
+        "relevance": "Dieser Abschnitt berichtet von der Rettung der Gläubigen."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Adl",
+        "arabic_term": "عدل",
+        "definition": "Gerechtigkeit. Shu'ayb rief zum Adl im Handel auf.",
+        "pronunciation": "adl"
+      },
+      {
+        "id": 2,
+        "term": "Bakhs",
+        "arabic_term": "بخس",
+        "definition": "Verminderung, Betrug. Tabakhasa = bei Maßen betrügen.",
+        "pronunciation": "bakhs"
+      }
+    ]
+  }
+}

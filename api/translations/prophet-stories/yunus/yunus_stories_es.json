@@ -1,0 +1,344 @@
+{
+  "yunus_call": {
+    "title": "La llamada de Yunus a su pueblo",
+    "title_arabic": "دعوة يونس لقومه",
+    "introduction": "Yunus (يونس عليه السلام), Jonás, es un profeta enviado al pueblo de Nínive. El Corán dice: \"Y Yunus era ciertamente de los mensajeros.\" (37:139) Llamó a su pueblo a adorar solo a Allah y a abandonar la idolatría. Pero el pueblo se negó y persistió en su incredulidad.",
+    "conclusion": "Yunus les advirtió del castigo. Cuando no creyeron, partió enojado antes de que Allah le diera permiso. Esta prisa lo llevaría a la prueba de la ballena.",
+    "moral_lesson": "Esta historia nos enseña que el profeta debe ser paciente y no debe abandonar a su pueblo sin la orden de Allah. La paciencia es una virtud profética.",
+    "historical_location": "Nínive (Irak)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "yunus_call_chapter_1",
+        "title": "La misión de Yunus",
+        "content": "El Corán relata: \"Y cuando Yunus partió enojado, pensó que no lo castigaríamos.\" (21:87) Yunus fue enviado al pueblo de Nínive, una gran ciudad. Los llamó al monoteísmo. Les advirtió del castigo si persistían. Pero se negaron. Yunus perdió la paciencia y abandonó la ciudad sin esperar la orden de Allah."
+      },
+      {
+        "id": "yunus_call_chapter_2",
+        "title": "La partida precipitada",
+        "content": "El Corán dice: \"Y Dhu an-Nun (Yunus) cuando partió enojado y pensó que no lo constreñiríamos.\" (21:87) Yunus partió antes de que su pueblo fuera juzgado. No esperó el permiso de Allah. Esta prisa fue un error. Un profeta no debe abandonar su misión sin la orden de su Señor."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Corán 37:139",
+        "reference_text": "Sura As-Saffat, versículo 139",
+        "content": "وَإِنَّ يُونُسَ لَمِنَ ٱلْمُرْسَلِينَ",
+        "translation": "And Yunus was indeed among the messengers.",
+        "relevance": "Este versículo establece a Yunus como mensajero."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Corán 21:87",
+        "reference_text": "Sura Al-Anbiya, versículo 87",
+        "content": "وَذَا ٱلنُّونِ إِذ ذَّهَبَ مُغَـٰضِبًۭا فَظَنَّ أَن لَّن نَّقْدِرَ عَلَيْهِ",
+        "translation": "And Yunus when he left in anger and thought that We would not constrain him.",
+        "relevance": "Este versículo describe la partida de Yunus."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Yunus",
+        "arabic_term": "يونس",
+        "definition": "Jonás en árabe. Profeta enviado al pueblo de Nínive.",
+        "pronunciation": "you-nous"
+      },
+      {
+        "id": 2,
+        "term": "Dhu an-Nun",
+        "arabic_term": "ذو النون",
+        "definition": "El del pez. Apodo de Yunus en el Corán.",
+        "pronunciation": "dhou an-noun"
+      }
+    ]
+  },
+  "yunus_ship": {
+    "title": "Yunus en el barco",
+    "title_arabic": "يونس في السفينة",
+    "introduction": "Yunus subió a un barco para huir. El Corán relata: \"Y el barco lo llevó sobre las olas como una montaña.\" (11:42) Surgió una tormenta. Los pasajeros echaron suertes para determinar quién debía ser arrojado al mar. La suerte cayó sobre Yunus.",
+    "conclusion": "Yunus fue arrojado al mar. Una ballena lo tragó. Se encontró en la oscuridad del vientre del pez. Era el comienzo de su prueba y su arrepentimiento.",
+    "moral_lesson": "Esta historia nos enseña que no se puede huir del decreto de Allah. Lo que parece una huida puede llevar a una prueba que purifica.",
+    "historical_location": "En el mar",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "yunus_ship_chapter_1",
+        "title": "La tormenta",
+        "content": "El Corán relata: \"Y cuando huyó hacia el barco cargado, echó suertes y fue de los perdedores.\" (37:140-141) Yunus subió a un barco. Una tormenta amenazó la embarcación. Los marineros creyeron que un pasajero era responsable. Echaron suertes. La suerte cayó sobre Yunus tres veces. Entendió que era una señal de Allah."
+      },
+      {
+        "id": "yunus_ship_chapter_2",
+        "title": "Ser arrojado al mar",
+        "content": "El Corán dice: \"Entonces el pez lo tragó mientras era censurable.\" (37:142) Yunus se arrojó al mar para no hundir el barco. Una ballena lo tragó. Se encontró en la oscuridad, vivo pero cautivo. Era el castigo por abandonar a su pueblo sin permiso."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Corán 37:140-141",
+        "reference_text": "Sura As-Saffat, versículos 140-141",
+        "content": "إِذْ أَبَقَ إِلَى ٱلْفُلْكِ ٱلْمَشْحُونِ ۝ فَسَاهَمَ فَكَانَ مِنَ ٱلْمُدْحَضِينَ",
+        "translation": "When he fled to the laden ship, he drew lots and was among the losers.",
+        "relevance": "Este versículo describe la huida y el sorteo."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Corán 37:142",
+        "reference_text": "Sura As-Saffat, versículo 142",
+        "content": "فَٱلْتَقَمَهُ ٱلْحُوتُ وَهُوَ مُلِيمٌ",
+        "translation": "Then the fish swallowed him while he was blameworthy.",
+        "relevance": "Este versículo relata la ingestión por la ballena."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Fulk",
+        "arabic_term": "فلك",
+        "definition": "Barco. Yunus subió a un fulk para huir.",
+        "pronunciation": "foulk"
+      },
+      {
+        "id": 2,
+        "term": "Hut",
+        "arabic_term": "حوت",
+        "definition": "Ballena, pez. Tragó a Yunus.",
+        "pronunciation": "hout"
+      }
+    ]
+  },
+  "yunus_whale": {
+    "title": "Yunus en el vientre de la ballena",
+    "title_arabic": "يونس في بطن الحوت",
+    "introduction": "Yunus se encontró en la oscuridad del vientre de la ballena. El Corán dice: \"Y si no hubiera sido de los que glorifican a Allah, habría permanecido en su vientre hasta el Día de la Resurrección.\" (37:143-144) En esta oscuridad, Yunus invocó a su Señor.",
+    "conclusion": "Yunus comprendió su error. Solo podía confiar en Allah. Pronunció la invocación de la desesperación y el arrepentimiento. Allah respondió a su oración.",
+    "moral_lesson": "Esta historia nos enseña que ningún lugar escapa a Allah. En la más profunda oscuridad, la invocación llega al Señor.",
+    "historical_location": "En el mar",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "yunus_whale_chapter_1",
+        "title": "La oscuridad",
+        "content": "El Corán relata: \"Entonces clamó desde las profundidades de la oscuridad: ¡No hay más divinidad que Tú! ¡Gloria a Ti! He sido de los injustos.\" (21:87) Yunus estaba en la oscuridad del vientre del pez. No podía ver nada. Solo podía confiar en Allah. Invocó con sinceridad."
+      },
+      {
+        "id": "yunus_whale_chapter_2",
+        "title": "La invocación",
+        "content": "El Corán dice: \"Así le respondimos y lo salvamos de la angustia. Así salvamos a los creyentes.\" (21:88) La invocación de Yunus — \"La ilaha illa Anta, Subhanaka, inni kuntu min adh-dhalimin\" — se ha convertido en una de las más famosas del Corán. Expresa el arrepentimiento y el reconocimiento de la unicidad de Allah. Allah la respondió."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Corán 21:87",
+        "reference_text": "Sura Al-Anbiya, versículo 87",
+        "content": "فَنَادَىٰ فِى ٱلظُّلُمَـٰتِ أَن لَّآ إِلَـٰهَ إِلَّآ أَنتَ سُبْحَـٰنَكَ إِنِّى كُنتُ مِنَ ٱلظَّـٰلِمِينَ",
+        "translation": "Then he called out from the depths of darkness: There is no deity except You! Glory to You! I have been among the wrongdoers.",
+        "relevance": "Este versículo contiene la invocación de Yunus."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Corán 21:88",
+        "reference_text": "Sura Al-Anbiya, versículo 88",
+        "content": "فَٱسْتَجَبْنَا لَهُۥ وَنَجَّيْنَـٰهُ مِنَ ٱلْغَمِّ ۚ وَكَذَٰلِكَ نُـۨجِى ٱلْمُؤْمِنِينَ",
+        "translation": "So We answered him and saved him from distress. Thus do We save the believers.",
+        "relevance": "Este versículo relata la respuesta de Allah."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Dhikr",
+        "arabic_term": "ذكر",
+        "definition": "Invocación, recuerdo de Allah. Yunus invocó en la oscuridad.",
+        "pronunciation": "dhikr"
+      },
+      {
+        "id": 2,
+        "term": "Zulumat",
+        "arabic_term": "ظلمات",
+        "definition": "Oscuridad. Yunus estaba en las zulumat del vientre del pez.",
+        "pronunciation": "dhou-lou-mat"
+      }
+    ]
+  },
+  "yunus_repentance": {
+    "title": "El arrepentimiento y la salvación de Yunus",
+    "title_arabic": "توبة يونس ونجاته",
+    "introduction": "Allah respondió a la invocación de Yunus. El Corán dice: \"Así le respondimos y lo salvamos de la angustia.\" (21:88) La ballena lo arrojó a la orilla. Yunus estaba débil y enfermo. Allah hizo crecer una planta para darle sombra y nutrirlo.",
+    "conclusion": "Yunus fue salvado. Había aprendido la lección: nunca abandonar la misión sin la orden de Allah. El arrepentimiento sincero borra las faltas y atrae la misericordia.",
+    "moral_lesson": "Esta historia nos enseña que el arrepentimiento abre las puertas de la salvación. Allah es Misericordiosísimo con quienes Lo invocan con sinceridad.",
+    "historical_location": "Orilla",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "yunus_repentance_chapter_1",
+        "title": "Arrojado a la orilla",
+        "content": "El Corán relata: \"Así lo arrojamos a la orilla desnuda, y estaba enfermo. E hicimos crecer sobre él una planta de calabaza.\" (37:145-146) La ballena arrojó a Yunus a la orilla. Estaba agotado, desnudo, enfermo. Allah hizo crecer una planta de calabaza (yaqtin) para darle sombra y protegerlo. Su misericordia cubrió a Yunus."
+      },
+      {
+        "id": "yunus_repentance_chapter_2",
+        "title": "La lección",
+        "content": "El Corán dice: \"Y si no hubiera sido de los que glorifican a Allah, habría permanecido en su vientre hasta el Día de la Resurrección.\" (37:143-144) Yunus había glorificado a Allah en la oscuridad. Esta glorificación lo salvó. El Corán concluye: \"Así le respondimos y le dimos una comunidad de cien mil o más.\" (37:147) Allah lo envió de vuelta a su pueblo."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Corán 37:145-146",
+        "reference_text": "Sura As-Saffat, versículos 145-146",
+        "content": "فَنَبَذْنَـٰهُ بِٱلْعَرَآءِ وَهُوَ سَقِيمٌ ۝ وَأَنۢبَتْنَا عَلَيْهِ شَجَرَةًۭ مِّن يَقْطِينٍۢ",
+        "translation": "So We cast him onto the bare shore, and he was ill. And We caused a plant of gourd to grow over him.",
+        "relevance": "Este versículo describe la salvación de Yunus."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Corán 37:147",
+        "reference_text": "Sura As-Saffat, versículo 147",
+        "content": "وَأَرْسَلْنَـٰهُ إِلَىٰ مِئَةِ أَلْفٍ أَوْ يَزِيدُونَ",
+        "translation": "And We sent him to a hundred thousand or more.",
+        "relevance": "Este versículo relata el regreso de Yunus a su pueblo."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Yaqtin",
+        "arabic_term": "يقطين",
+        "definition": "Calabaza. Allah hizo crecer un yaqtin para Yunus.",
+        "pronunciation": "yaq-tin"
+      },
+      {
+        "id": 2,
+        "term": "Tawba",
+        "arabic_term": "توبة",
+        "definition": "Arrepentimiento. Yunus hizo tawba en el vientre del pez.",
+        "pronunciation": "taw-ba"
+      }
+    ]
+  },
+  "yunus_people": {
+    "title": "El pueblo de Yunus cree",
+    "title_arabic": "إيمان قوم يونس",
+    "introduction": "Cuando Yunus regresó a su pueblo, habían creído. El Corán dice: \"¿Por qué no hubo ciudad que creyera y a la que su fe le beneficiara, excepto el pueblo de Yunus? Cuando creyeron, les quitamos el castigo ignominioso en la vida de este mundo.\" (10:98) El pueblo de Nínive se arrepintió antes de que cayera el castigo.",
+    "conclusion": "El pueblo de Yunus fue el único en creer en masa antes del castigo. Así evitaron la destrucción. Yunus pudo guiarlos al Islam.",
+    "moral_lesson": "Esta historia nos enseña que el arrepentimiento colectivo puede evitar el castigo. La fe, aunque tardía, es aceptada por Allah.",
+    "historical_location": "Nínive (Irak)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "yunus_people_chapter_1",
+        "title": "La fe del pueblo",
+        "content": "El Corán relata: \"¿Por qué no hubo ciudad que creyera y a la que su fe le beneficiara, excepto el pueblo de Yunus? Cuando creyeron, les quitamos el castigo ignominioso en la vida de este mundo y les dimos disfrute por un tiempo.\" (10:98) Después de la partida de Yunus, el pueblo de Nínive recordó su advertencia. Se arrepintieron y creyeron. Allah aceptó su arrepentimiento y evitó el castigo."
+      },
+      {
+        "id": "yunus_people_chapter_2",
+        "title": "El regreso de Yunus",
+        "content": "El Corán dice: \"Y lo enviamos a cien mil o más. Y creyeron. Así les dimos disfrute por un tiempo.\" (37:147-148) Yunus regresó a su pueblo. Los encontró creyentes. Habían creído en su ausencia. Su prueba había servido un propósito: había aprendido la paciencia, y su pueblo había creído. La sabiduría de Allah es perfecta."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Corán 10:98",
+        "reference_text": "Sura Yunus, versículo 98",
+        "content": "فَلَوْلَا كَانَتْ قَرْيَةٌ ءَامَنَتْ فَنَفَعَهَآ إِيمَـٰنُهَآ إِلَّا قَوْمَ يُونُسَ ۖ لَمَّآ ءَامَنُوا۟ كَشَفْنَا عَنْهُمْ عَذَابَ ٱلْخِزْىِ فِى ٱلْحَيَوٰةِ ٱلدُّنْيَا",
+        "translation": "Why was there no town that believed and whose faith benefited it, except the people of Yunus? When they believed, We removed from them the punishment.",
+        "relevance": "Este versículo establece que el pueblo de Yunus creyó y fue salvado."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Corán 37:147-148",
+        "reference_text": "Sura As-Saffat, versículos 147-148",
+        "content": "وَأَرْسَلْنَـٰهُ إِلَىٰ مِئَةِ أَلْفٍ أَوْ يَزِيدُونَ ۝ فَـَٔامَنُوا۟ فَمَتَّعْنَـٰهُمْ إِلَىٰ حِينٍۢ",
+        "translation": "And We sent him to a hundred thousand or more. And they believed. So We gave them enjoyment for a time.",
+        "relevance": "Este versículo confirma la fe del pueblo y el disfrute concedido."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Ninawa",
+        "arabic_term": "نينوى",
+        "definition": "Nínive. Ciudad del pueblo de Yunus en Irak.",
+        "pronunciation": "ni-na-wa"
+      },
+      {
+        "id": 2,
+        "term": "Iman",
+        "arabic_term": "إيمان",
+        "definition": "Fe. El pueblo de Yunus tuvo iman y fue salvado.",
+        "pronunciation": "i-man"
+      }
+    ]
+  },
+  "lessons_from_yunus": {
+    "title": "Lecciones de la historia de Yunus",
+    "title_arabic": "دروس من قصة يونس",
+    "introduction": "Yunus es uno de los profetas más mencionados en el Corán. Una sura lleva su nombre. Su historia enseña paciencia, arrepentimiento y la misericordia de Allah. El Corán dice: \"Y Yunus era ciertamente de los mensajeros.\" (37:139)",
+    "conclusion": "Yunus abandonó a su pueblo sin permiso; fue probado. Se arrepintió en la oscuridad; Allah lo salvó. Su pueblo creyó; fueron perdonados. La historia de Yunus es un recordatorio: la paciencia, el arrepentimiento y la fe triunfan.",
+    "moral_lesson": "Esta historia nos enseña que la invocación de Yunus — \"La ilaha illa Anta, Subhanaka, inni kuntu min adh-dhalimin\" — es una de las más poderosas. Expresa arrepentimiento y unicidad. Quien la invoque en la prueba será respondido.",
+    "historical_location": "Nínive y en el mar",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lessons_from_yunus_chapter_1",
+        "title": "La paciencia del profeta",
+        "content": "Yunus perdió la paciencia y partió. Un profeta debe ser paciente. El Corán dice: \"Sé paciente, como fueron pacientes los mensajeros de firme resolución.\" (46:35) La paciencia es una virtud esencial. Yunus aprendió esta lección en el vientre del pez."
+      },
+      {
+        "id": "lessons_from_yunus_chapter_2",
+        "title": "La invocación que salva",
+        "content": "El Profeta Muhammad dijo: \"La invocación de mi hermano Yunus: ¡No hay más divinidad que Tú! ¡Gloria a Ti! He sido de los injustos. Ningún musulmán la invoca por algo sin que Allah le responda.\" (Tirmidhi) Esta invocación es un tesoro para los creyentes. Une arrepentimiento y glorificación."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Corán 37:139",
+        "reference_text": "Sura As-Saffat, versículo 139",
+        "content": "وَإِنَّ يُونُسَ لَمِنَ ٱلْمُرْسَلِينَ",
+        "translation": "And Yunus was indeed among the messengers.",
+        "relevance": "Este versículo establece a Yunus como mensajero."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Corán 68:48",
+        "reference_text": "Sura Al-Qalam, versículo 48",
+        "content": "فَلَا تَكُن كَصَاحِبِ ٱلْحُوتِ إِذْ نَادَىٰ وَهُوَ مَكْظُومٌ",
+        "translation": "So do not be like the companion of the fish when he called out, full of resentment.",
+        "relevance": "Este versículo recuerda la historia de Yunus como lección."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Sabr",
+        "arabic_term": "صبر",
+        "definition": "Paciencia. Yunus aprendió el sabr en la prueba.",
+        "pronunciation": "sabr"
+      },
+      {
+        "id": 2,
+        "term": "Du'a",
+        "arabic_term": "دعاء",
+        "definition": "Invocación. La invocación de Yunus es una du'a poderosa.",
+        "pronunciation": "dou-a"
+      }
+    ]
+  }
+}

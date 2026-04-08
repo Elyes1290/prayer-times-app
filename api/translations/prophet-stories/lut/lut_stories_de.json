@@ -1,0 +1,287 @@
+{
+  "lut_prophecy": {
+    "title": "Lot und seine Sendung zum Volk von Sodom",
+    "title_arabic": "لوط عليه السلام وإرساله إلى قوم سدوم",
+    "introduction": "Lot (لوط عليه السلام) ist einer der im Koran erwähnten Propheten. Allah sagt: \"Und Lot war wahrlich einer der Gesandten.\" (37:133) Er wurde zu einem Volk gesandt, das eine Schandtat beging, die vor ihnen niemand begangen hatte. Der Koran berichtet von seinem Ruf zur Rechtschaffenheit und der Ablehnung der Warnungen durch sein Volk.",
+    "conclusion": "Lot wurde als Gesandter zu seinem Volk geschickt. Trotz seines aufrichtigen Rufes verharrte das Volk in seiner Schandtat und lehnte die Warnungen ab. Allah bereitete die Strafe für die vor, die sich widersetzten.",
+    "moral_lesson": "Diese Geschichte lehrt uns, dass jedes Volk Gesandte zur Führung erhält. Die Ablehnung der Warnungen führt zur Verdammnis.",
+    "historical_location": "Region von Sodom (al-Mu'tafikat)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lut_prophecy_chapter_1",
+        "title": "Die Entsendung Lots",
+        "content": "Der Koran stellt Lot unter die Gesandten: \"Und Lot war wahrlich einer der Gesandten.\" (37:133) Lot wurde zu einem Volk gesandt, das Städte bewohnte. Der Koran sagt: \"Das Volk Lots leugnete die Gesandten.\" (26:160) Lot rief sein Volk auf, Allah zu fürchten und Schandtaten aufzugeben. Er warnte sie vor der kommenden Strafe, falls sie beharrten."
+      },
+      {
+        "id": "lut_prophecy_chapter_2",
+        "title": "Das Volk von Sodom",
+        "content": "Der Koran beschreibt Lots Volk: \"Und Lot, als er zu seinem Volk sagte: Begeht ihr eine Schandtat, die euch unter den Welten niemand zuvor begangen hat?\" (7:80) Dieses Volk beging Taten, die der Koran \"الفاحشة\" (al-fahisha) — die Schandtat — nennt. Lot ermahnte sie, Allah zu fürchten und ihn nicht in seinen Gästen zu entehren. Aber sie antworteten mit Ablehnung und Spott."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 37:133",
+        "reference_text": "Sure As-Saffat, Vers 133",
+        "content": "وَإِنَّ لُوطًا لَّمِنَ ٱلْمُرْسَلِينَ",
+        "translation": "Und Lot war wahrlich einer der Gesandten.",
+        "relevance": "Dieser Vers bestätigt, dass Lot ein Gesandter Allahs ist."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 7:80",
+        "reference_text": "Sure Al-A'raf, Vers 80",
+        "content": "وَلُوطًا إِذْ قَالَ لِقَوْمِهِۦٓ أَتَأْتُونَ ٱلْفَـٰحِشَةَ مَا سَبَقَكُم بِهَا مِنْ أَحَدٍۢ مِّنَ ٱلْعَـٰلَمِينَ",
+        "translation": "Und Lot, als er zu seinem Volk sagte: Begeht ihr eine Schandtat, die euch unter den Welten niemand zuvor begangen hat?",
+        "relevance": "Dieser Vers begründet Lots Ruf zu seinem Volk."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Lut",
+        "arabic_term": "لوط",
+        "definition": "Lot auf Arabisch. Prophet Allahs, gesandt zum Volk von Sodom.",
+        "pronunciation": "lout"
+      },
+      {
+        "id": 2,
+        "term": "Al-Fahisha",
+        "arabic_term": "الفاحشة",
+        "definition": "Die Schandtat. Koranischer Begriff für die schändlichen Taten von Lots Volk.",
+        "pronunciation": "al-fa-hi-sha"
+      }
+    ]
+  },
+  "lut_call": {
+    "title": "Lots Ruf zur Rechtschaffenheit",
+    "title_arabic": "دعوة لوط إلى الاستقامة",
+    "introduction": "Lot (عليه السلام) rief sein Volk auf, die Schandtat aufzugeben und Allah zu fürchten. Der Koran berichtet: \"Fürchtet ihr Allah nicht? Ich bin euch ein vertrauenswürdiger Gesandter. So fürchtet Allah und gehorcht mir.\" (26:161-163) Sein Volk antwortete mit Ablehnung und Drohungen.",
+    "conclusion": "Lot erfüllte seine Warnmission. Sein Volk wählte, in der Irre zu verharren. Lot bat Allah, ihn und seine Familie vor dem Volk der Frevler zu retten.",
+    "moral_lesson": "Diese Geschichte lehrt uns, dass der Gesandte seine Mission erfüllt; es liegt am Volk, Führung oder Irre zu wählen.",
+    "historical_location": "Region von Sodom",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lut_call_chapter_1",
+        "title": "Die Ermahnung",
+        "content": "Der Koran berichtet Lots Worte: \"Fürchtet ihr Allah nicht? Ich bin euch ein vertrauenswürdiger Gesandter. So fürchtet Allah und gehorcht mir. Ich verlange von euch keinen Lohn dafür; mein Lohn ist nur beim Herrn der Welten.\" (26:161-164) Lot rief sein Volk mit Aufrichtigkeit. Er verlangte keinen irdischen Lohn; sein Lohn kam von Allah allein."
+      },
+      {
+        "id": "lut_call_chapter_2",
+        "title": "Die Ablehnung des Volkes",
+        "content": "Der Koran sagt: \"Das Volk Lots leugnete die Gesandten.\" (26:160) Und: \"Das Volk Lots leugnete die Warnungen.\" (54:33) Sie weigerten sich, auf Lot zu hören, und verharrten in ihren Taten. Lot rief seinen Herrn an: \"Mein Herr! Rette mich und meine Familie vor dem, was sie tun.\" (26:169) Allah erhörte seine Bitte."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 26:161-164",
+        "reference_text": "Sure Ash-Shu'ara, Verse 161-164",
+        "content": "إِذْ قَالَ لَهُمْ لُوطٌ أَلَا تَتَّقُونَ إِنِّى لَكُمْ رَسُولٌ أَمِينٌ فَٱتَّقُوا۟ ٱللَّهَ وَأَطِيعُونِ وَمَآ أَسْـَٔلُكُمْ عَلَيْهِ مِنْ أَجْرٍ ۖ إِنْ أَجْرِىَ إِلَّا عَلَىٰ رَبِّ ٱلْعَـٰلَمِينَ",
+        "translation": "Als Lot zu ihnen sagte: Fürchtet ihr Allah nicht? Ich bin euch ein vertrauenswürdiger Gesandter. So fürchtet Allah und gehorcht mir. Ich verlange von euch keinen Lohn dafür; mein Lohn ist nur beim Herrn der Welten.",
+        "relevance": "Diese Verse beschreiben Lots Ruf zu seinem Volk."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 54:33",
+        "reference_text": "Sure Al-Qamar, Vers 33",
+        "content": "كَذَّبَتْ قَوْمُ لُوطٍۭ بِٱلنُّذُرِ",
+        "translation": "Das Volk Lots leugnete die Warnungen.",
+        "relevance": "Dieser Vers bestätigt die Ablehnung der Warnungen durch das Volk."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Rasul",
+        "arabic_term": "رسول",
+        "definition": "Gesandter. Lot stellte sich als vertrauenswürdiger Gesandter vor.",
+        "pronunciation": "ra-soul"
+      },
+      {
+        "id": 2,
+        "term": "An-Nudhur",
+        "arabic_term": "النذر",
+        "definition": "Die Warnungen. Lots Volk leugnete die göttlichen Warnungen.",
+        "pronunciation": "an-noud-hour"
+      }
+    ]
+  },
+  "lut_guests": {
+    "title": "Die Gäste bei Lot",
+    "title_arabic": "الضيوف عند لوط",
+    "introduction": "Engel kamen zu Lot in Gestalt von Gästen. Das Volk erfuhr von ihrer Anwesenheit und eilte zu Lots Haus. Lot ermahnte sie: \"Hier sind meine Töchter — sie sind reiner für euch. Fürchtet Allah und entehrt mich nicht in meinen Gästen. Ist unter euch kein vernünftiger Mann?\" (11:78) Das Volk lehnte ab und bestand darauf.",
+    "conclusion": "Die Engel offenbarten Lot ihre Mission: die Zerstörung des Volkes. Sie befahlen ihm, mit seiner Familie vor der Morgendämmerung aufzubrechen, ohne sich umzudrehen. Lots Frau gehörte zu denen, die blieben.",
+    "moral_lesson": "Diese Geschichte lehrt uns die Pflicht, seine Gäste zu schützen, und dass Gastfreundschaft ein heiliger Wert im Islam ist. Sie zeigt auch, dass Ungehorsam selbst die Familie des Propheten treffen kann.",
+    "historical_location": "Sodom",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "the_guests_chapter_1",
+        "title": "Die Ankunft der Gäste",
+        "content": "Der Koran berichtet: \"Und als Unsere Gesandten zu Lot kamen, war er bekümmert um sie und fühlte große Unruhe ihretwegen. Er sagte: Dies ist ein schrecklicher Tag.\" (11:77) Die Engel kamen zu Lot in Gestalt junger Männer. Lot nahm sie auf, ohne zu wissen, dass sie Allahs Boten waren. Er fürchtete um sie, weil er die Sitten seines Volkes kannte."
+      },
+      {
+        "id": "lut_guests_chapter_2",
+        "title": "Die Reaktion des Volkes",
+        "content": "Der Koran sagt: \"Und sein Volk kam zu ihm geeilt — und zuvor pflegten sie Böses zu tun. Er sagte: O mein Volk! Hier sind meine Töchter — sie sind reiner für euch. Fürchtet Allah und entehrt mich nicht in meinen Gästen. Ist unter euch kein vernünftiger Mann?\" (11:78) Lot versuchte, seine Gäste zu schützen. Er bot eine rechtmäßige Alternative an. Aber das Volk lehnte ab und bestand auf seiner Absicht. Die Engel sagten zu Lot: \"Wir sind die Gesandten deines Herrn. Sie werden dich nicht erreichen.\" (11:81)"
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 11:77-78",
+        "reference_text": "Sure Hud, Verse 77-78",
+        "content": "وَلَمَّا جَآءَتْ رُسُلُنَآ إِلَىٰ لُوطٍۢ سِىٓءَ بِهِمْ وَضَاقَ بِهِمْ ذَرْعًۭا وَقَالَ هَـٰذَا يَوْمٌ عَصِيبٌ ۝ وَجَآءَهُۥ قَوْمُهُۥ يُهْرَعُونَ إِلَيْهِ وَمِن قَبْلُ كَانُوا۟ يَعْمَلُونَ ٱلسَّيِّـَٔاتِ ۚ قَالَ يَـٰقَوْمِ هَـٰٓؤُلَآءِ بَنَاتِى هُنَّ أَطْهَرُ لَكُمْ",
+        "translation": "Und als Unsere Gesandten zu Lot kamen, war er bekümmert um sie. Und sein Volk kam zu ihm geeilt. Er sagte: O mein Volk! Hier sind meine Töchter — sie sind reiner für euch.",
+        "relevance": "Diese Verse beschreiben die Ankunft der Engel und Lots Reaktion."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 11:81",
+        "reference_text": "Sure Hud, Vers 81",
+        "content": "قَالُوا۟ يَـٰلُوطُ إِنَّا رُسُلُ رَبِّكَ لَن يَصِلُوٓا۟ إِلَيْكَ",
+        "translation": "Sie sagten: O Lot! Wir sind die Gesandten deines Herrn. Sie werden dich nicht erreichen.",
+        "relevance": "Dieser Vers offenbart die Identität der Gäste und den göttlichen Schutz."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Dayf",
+        "arabic_term": "ضيف",
+        "definition": "Gast, Besucher. Lot suchte seine Gäste gemäß der Tradition der Gastfreundschaft zu schützen.",
+        "pronunciation": "dayf"
+      },
+      {
+        "id": 2,
+        "term": "Rasul",
+        "arabic_term": "رسل",
+        "definition": "Gesandte. Die Engel waren Allahs Gesandte, die zu Lot geschickt wurden.",
+        "pronunciation": "rou-soul"
+      }
+    ]
+  },
+  "lut_destruction": {
+    "title": "Die Zerstörung des Volkes",
+    "title_arabic": "هلاك قوم لوط",
+    "introduction": "Als das Volk in seiner Schandtat verharrte und alle Warnungen ablehnte, fiel Allahs Strafe auf sie. Der Koran sagt: \"Und Wir stürzten die Stadt und ließen auf sie Steine aus gebranntem Ton regnen.\" (15:74) Das Volk wurde zerstört. Lot und die ihm Folgenden wurden gerettet.",
+    "conclusion": "Die Strafe fiel bei der Morgendämmerung. Die Stadt wurde gestürzt. Lot und seine Familie — außer seiner Frau, die ungehorsam war — zogen in Sicherheit davon. Diese Geschichte bleibt eine Warnung für Völker, die im Bösen verharren.",
+    "moral_lesson": "Diese Geschichte lehrt uns, dass Allahs Strafe die erreicht, die nach Erhalt der Warnungen im Bösen verharren. Ungehorsam führt zur Verdammnis.",
+    "historical_location": "Sodom (al-Mu'tafikat)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lut_destruction_chapter_1",
+        "title": "Der Befehl zum Aufbruch",
+        "content": "Der Koran berichtet: \"Sie sagten: O Lot! Wir sind die Gesandten deines Herrn. Sie werden dich nicht erreichen. Brich mit deiner Familie in der Nacht auf, und keiner von euch soll sich umwenden — außer deiner Frau. Was sie trifft, wird sie treffen. Ihre Verabredung ist die Morgendämmerung. Ist die Morgendämmerung nicht nahe?\" (11:81) Lot erhielt den Befehl, die Stadt mit seiner Familie vor der Morgendämmerung zu verlassen. Er durfte sich nicht umwenden. Seine Frau, die durch die Mitteilung über die Gäste an das Volk verraten hatte, gehörte zu denen, die blieben."
+      },
+      {
+        "id": "lut_destruction_chapter_2",
+        "title": "Die Strafe",
+        "content": "Der Koran beschreibt die Strafe: \"Und Wir stürzten die Stadt und ließen auf sie Steine aus gebranntem Ton regnen, einen über den anderen, bei deinem Herrn gekennzeichnet. Und sie sind nicht weit von den Ungerechten.\" (11:82-83) Und: \"Das Volk Lots leugnete die Warnungen. Wir sandten gegen sie einen Sturm.\" (54:33-34) Die Stadt wurde zerstört. Das Volk ging zugrunde. Lot und sein Haushalt, die ihm gefolgt waren, wurden gerettet. Der Koran schließt: \"Es bleibt von ihnen nichts als Ruinen.\" (37:138)"
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 11:81-83",
+        "reference_text": "Sure Hud, Verse 81-83",
+        "content": "قَالُوا۟ يَـٰلُوطُ إِنَّا رُسُلُ رَبِّكَ لَن يَصِلُوٓا۟ إِلَيْكَ ۖ فَأَسْرِ بِأَهْلِكَ بِقِطْعٍۢ مِّنَ ٱلَّيْلِ وَلَا يَلْتَفِتْ مِنكُمْ أَحَدٌ إِلَّا ٱمْرَأَتَكَ ۖ إِنَّهُۥ مُصِيبُهَا مَا أَصَابَهُمْ ۚ إِنَّ مَوْعِدَهُمُ ٱلصُّبْحُ ۚ أَلَيْسَ ٱلصُّبْحُ بِقَرِيبٍۢ ۝ فَلَمَّا جَآءَ أَمْرُنَا جَعَلْنَا عَـٰلِيَهَا سَافِلَهَا وَأَمْطَرْنَا عَلَيْهَا حِجَارَةًۭ مِّن سِجِّيلٍۢ مَّنضُودٍۢ",
+        "translation": "Sie sagten: O Lot! Brich mit deiner Familie in der Nacht auf... Und Wir stürzten die Stadt und ließen auf sie Steine aus gebranntem Ton regnen.",
+        "relevance": "Diese Verse beschreiben den Befehl zum Aufbruch und die Strafe."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 54:33-34",
+        "reference_text": "Sure Al-Qamar, Verse 33-34",
+        "content": "كَذَّبَتْ قَوْمُ لُوطٍۭ بِٱلنُّذُرِ ۝ إِنَّآ أَرْسَلْنَا عَلَيْهِمْ حَاصِبًا",
+        "translation": "Das Volk Lots leugnete die Warnungen. Wir sandten gegen sie einen Sturm.",
+        "relevance": "Diese Verse beschreiben die Ablehnung und die Strafe."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Sijjil",
+        "arabic_term": "سجيل",
+        "definition": "Gebrannter Ton, gehärteter Lehm. Die Steine der Strafe waren aus Sijjil.",
+        "pronunciation": "sij-jil"
+      },
+      {
+        "id": 2,
+        "term": "Al-Mu'tafikat",
+        "arabic_term": "المؤتفكات",
+        "definition": "Die gestürzten Städte. Sodom und die Städte von Lots Volk.",
+        "pronunciation": "al-mou-ta-fi-kat"
+      }
+    ]
+  },
+  "lessons_from_lut": {
+    "title": "Lehren aus Lots Geschichte",
+    "title_arabic": "دروس من قصة لوط",
+    "introduction": "Die Geschichte Lots (عليه السلام) enthält zeitlose Lehren. Der Koran zitiert sie als Warnung: \"Und Lot war wahrlich einer der Gesandten.\" (37:133) Sie lehrt, dass jedes Volk Gesandte erhält, dass die Ablehnung der Warnungen zur Strafe führt, und dass Gastfreundschaft ein heiliger Wert ist.",
+    "conclusion": "Lot erfüllte seine Mission. Sein Volk wurde zerstört, weil es im Bösen verharrte. Die Geschichte Lots bleibt eine Warnung für die Menschheit: Allah zu fürchten, auf die Gesandten zu hören und nicht im Ungehorsam zu verharren.",
+    "moral_lesson": "Diese Geschichte lehrt uns, die Warnungen zu beachten, unsere Gäste zu schützen und niemals in Taten zu verharren, die Allah verboten hat.",
+    "historical_location": "Region von Sodom",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lessons_from_lut_chapter_1",
+        "title": "Eine Warnung für die Völker",
+        "content": "Der Koran zitiert Lots Geschichte unter den Beispielen zerstörter Völker: \"Das Volk Lots leugnete die Warnungen.\" (54:33) Jedes Volk erhält Gesandte. Diejenigen, die glauben und bereuen, werden gerettet. Diejenigen, die im Bösen verharren, erleiden die Strafe. Lot rief sein Volk mit Aufrichtigkeit; er verlangte keinen Lohn. Sein Volk wählte die Ablehnung. Das Ergebnis war die Zerstörung."
+      },
+      {
+        "id": "lessons_from_lut_chapter_2",
+        "title": "Gastfreundschaft und Schutz",
+        "content": "Lot suchte seine Gäste trotz der Bedrohung durch sein Volk zu schützen. Er sagte: \"Fürchtet Allah und entehrt mich nicht in meinen Gästen.\" (11:78) Gastfreundschaft (ضيافة) ist ein grundlegender Wert im Islam. Der Prophet Muhammad (ﷺ) sagte, dass wer an Allah und den Jüngsten Tag glaubt, seinen Gast ehren muss. Lots Geschichte erinnert uns, dass der Schutz des Gastes eine heilige Pflicht ist. Im Gegensatz dazu verriet Lots Frau, indem sie das Volk informierte — sie gehörte zu denen, die zugrunde gingen."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 37:133-138",
+        "reference_text": "Sure As-Saffat, Verse 133-138",
+        "content": "وَإِنَّ لُوطًا لَّمِنَ ٱلْمُرْسَلِينَ ۝ إِذْ نَجَّيْنَـٰهُ وَأَهْلَهُۥٓ أَجْمَعِينَ ۝ إِلَّا عَجُوزًا فِى ٱلْغَـٰبِرِينَ ۝ ثُمَّ دَمَّرْنَا ٱلْءَاخَرِينَ",
+        "translation": "Und Lot war wahrlich einer der Gesandten. Als Wir ihn und seinen gesamten Haushalt retteten, außer einer alten Frau, die unter den Zurückbleibenden war. Dann zerstörten Wir die anderen.",
+        "relevance": "Diese Verse fassen Lots Rettung und die Zerstörung seines Volkes zusammen."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 29:34",
+        "reference_text": "Sure Al-Ankabut, Vers 34",
+        "content": "إِنَّا مُنزِلُونَ عَلَىٰٓ أَهْلِ هَـٰذِهِ ٱلْقَرْيَةِ رِجْزًۭا مِّنَ ٱلسَّمَآءِ بِمَا كَانُوا۟ يَفْسُقُونَ",
+        "translation": "Wir werden auf die Bewohner dieser Stadt eine Strafe vom Himmel herabsenden, für das, was sie begangen haben.",
+        "relevance": "Dieser Vers erklärt die Ursache der Strafe."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Diyafa",
+        "arabic_term": "ضيافة",
+        "definition": "Gastfreundschaft. Lot suchte seine Gäste gemäß diesem heiligen Wert zu schützen.",
+        "pronunciation": "di-ya-fa"
+      },
+      {
+        "id": 2,
+        "term": "Rijz",
+        "arabic_term": "رجز",
+        "definition": "Strafe, Plage. Die Strafe fiel auf Lots Volk herab.",
+        "pronunciation": "rijz"
+      }
+    ]
+  }
+}

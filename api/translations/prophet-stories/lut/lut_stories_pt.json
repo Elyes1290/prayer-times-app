@@ -1,0 +1,287 @@
+{
+  "lut_prophecy": {
+    "title": "Lot e a sua missão ao povo de Sodoma",
+    "title_arabic": "لوط عليه السلام وإرساله إلى قوم سدوم",
+    "introduction": "Lot (لوط عليه السلام) é um dos profetas mencionados no Alcorão. Allah diz: \"E Lot era certamente um dos mensageiros.\" (37:133) Foi enviado a um povo que praticava uma vergonha que ninguém antes deles havia cometido. O Alcorão relata o seu apelo à retidão e a resposta do seu povo que rejeitou os avisos.",
+    "conclusion": "Lot foi enviado como mensageiro ao seu povo. Apesar do seu apelo sincero, o povo persistiu na sua vergonha e rejeitou os avisos. Allah preparou o castigo para aqueles que se obstinaram.",
+    "moral_lesson": "Esta história ensina-nos que cada povo recebe mensageiros para o guiar. Rejeitar os avisos conduz à perdição.",
+    "historical_location": "Região de Sodoma (al-Mu'tafikat)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lut_prophecy_chapter_1",
+        "title": "O envio de Lot",
+        "content": "O Alcorão estabelece Lot entre os mensageiros: \"E Lot era certamente um dos mensageiros.\" (37:133) Lot foi enviado a um povo que habitava cidades. O Alcorão diz: \"O povo de Lot rejeitou os mensageiros.\" (26:160) Lot chamou o seu povo a temer Allah e abandonar as vergonhas. Avisou-os do castigo vindouro se persistissem."
+      },
+      {
+        "id": "lut_prophecy_chapter_2",
+        "title": "O povo de Sodoma",
+        "content": "O Alcorão descreve o povo de Lot: \"E Lot, quando disse ao seu povo: Cometais uma vergonha que ninguém entre os mundos vos precedeu?\" (7:80) Este povo praticava actos que o Alcorão chama \"الفاحشة\" (al-fahisha) — a vergonha. Lot exortou-os a temer Allah e a não o desonrar quanto aos seus hóspedes. Mas responderam com rejeição e escárnio."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 37:133",
+        "reference_text": "Sura As-Saffat, versículo 133",
+        "content": "وَإِنَّ لُوطًا لَّمِنَ ٱلْمُرْسَلِينَ",
+        "translation": "E Lot era certamente um dos mensageiros.",
+        "relevance": "Este versículo confirma que Lot é um mensageiro de Allah."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 7:80",
+        "reference_text": "Sura Al-A'raf, versículo 80",
+        "content": "وَلُوطًا إِذْ قَالَ لِقَوْمِهِۦٓ أَتَأْتُونَ ٱلْفَـٰحِشَةَ مَا سَبَقَكُم بِهَا مِنْ أَحَدٍۢ مِّنَ ٱلْعَـٰلَمِينَ",
+        "translation": "E Lot, quando disse ao seu povo: Cometais uma vergonha que ninguém entre os mundos vos precedeu?",
+        "relevance": "Este versículo estabelece o apelo de Lot ao seu povo."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Lut",
+        "arabic_term": "لوط",
+        "definition": "Lot em árabe. Profeta de Allah enviado ao povo de Sodoma.",
+        "pronunciation": "lout"
+      },
+      {
+        "id": 2,
+        "term": "Al-Fahisha",
+        "arabic_term": "الفاحشة",
+        "definition": "A vergonha. Termo corânico para os actos vergonhosos do povo de Lot.",
+        "pronunciation": "al-fa-hi-sha"
+      }
+    ]
+  },
+  "lut_call": {
+    "title": "O apelo de Lot à retidão",
+    "title_arabic": "دعوة لوط إلى الاستقامة",
+    "introduction": "Lot (عليه السلام) chamou o seu povo a abandonar a vergonha e temer Allah. O Alcorão relata: \"Não temeis Allah? Sou para vós um mensageiro digno de confiança. Temei pois Allah e obedecei-me.\" (26:161-163) O seu povo respondeu com rejeição e ameaças.",
+    "conclusion": "Lot cumpriu a sua missão de aviso. O seu povo escolheu persistir no desvio. Lot pediu a Allah que o salvasse a ele e à sua família do povo dos perversos.",
+    "moral_lesson": "Esta história ensina-nos que o mensageiro cumpre a sua missão; cabe ao povo escolher a orientação ou o desvio.",
+    "historical_location": "Região de Sodoma",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lut_call_chapter_1",
+        "title": "A exortação",
+        "content": "O Alcorão relata as palavras de Lot: \"Não temeis Allah? Sou para vós um mensageiro digno de confiança. Temei pois Allah e obedecei-me. Não vos peço nenhuma recompensa por isso; a minha recompensa não incumbe senão ao Senhor do universo.\" (26:161-164) Lot chamou o seu povo com sinceridade. Não pedia nenhuma recompensa terrena; a sua recompensa vinha apenas de Allah."
+      },
+      {
+        "id": "lut_call_chapter_2",
+        "title": "A rejeição do povo",
+        "content": "O Alcorão diz: \"O povo de Lot rejeitou os mensageiros.\" (26:160) E: \"O povo de Lot rejeitou os avisos.\" (54:33) Recusaram ouvir Lot e persistiram nos seus actos. Lot invocou o seu Senhor: \"Senhor meu! Salva-me a mim e à minha família do que fazem.\" (26:169) Allah atendeu a sua invocação."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 26:161-164",
+        "reference_text": "Sura Ash-Shu'ara, versículos 161-164",
+        "content": "إِذْ قَالَ لَهُمْ لُوطٌ أَلَا تَتَّقُونَ إِنِّى لَكُمْ رَسُولٌ أَمِينٌ فَٱتَّقُوا۟ ٱللَّهَ وَأَطِيعُونِ وَمَآ أَسْـَٔلُكُمْ عَلَيْهِ مِنْ أَجْرٍ ۖ إِنْ أَجْرِىَ إِلَّا عَلَىٰ رَبِّ ٱلْعَـٰلَمِينَ",
+        "translation": "Quando Lot lhes disse: Não temeis Allah? Sou para vós um mensageiro digno de confiança. Temei pois Allah e obedecei-me. Não vos peço nenhuma recompensa por isso; a minha recompensa não incumbe senão ao Senhor do universo.",
+        "relevance": "Estes versículos descrevem o apelo de Lot ao seu povo."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 54:33",
+        "reference_text": "Sura Al-Qamar, versículo 33",
+        "content": "كَذَّبَتْ قَوْمُ لُوطٍۭ بِٱلنُّذُرِ",
+        "translation": "O povo de Lot rejeitou os avisos.",
+        "relevance": "Este versículo confirma a rejeição dos avisos pelo povo."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Rasul",
+        "arabic_term": "رسول",
+        "definition": "Mensageiro. Lot apresentou-se como mensageiro digno de confiança.",
+        "pronunciation": "ra-soul"
+      },
+      {
+        "id": 2,
+        "term": "An-Nudhur",
+        "arabic_term": "النذر",
+        "definition": "Os avisos. O povo de Lot rejeitou os avisos divinos.",
+        "pronunciation": "an-noud-hour"
+      }
+    ]
+  },
+  "lut_guests": {
+    "title": "Os hóspedes em casa de Lot",
+    "title_arabic": "الضيوف عند لوط",
+    "introduction": "Anjos vieram a casa de Lot sob a forma de hóspedes. O povo soube da sua presença e precipitou-se para a casa de Lot. Lot exortou-os: \"Aqui estão as minhas filhas — são mais puras para vós. Temei Allah e não me desonreis quanto aos meus hóspedes. Não há entre vós um homem sensato?\" (11:78) O povo recusou e insistiu.",
+    "conclusion": "Os anjos revelaram a Lot a sua missão: a destruição do povo. Ordenaram-lhe que partisse com a sua família antes do amanhecer, sem se voltar. A mulher de Lot esteve entre os que permaneceram.",
+    "moral_lesson": "Esta história ensina-nos o dever de proteger os hóspedes e que a hospitalidade é um valor sagrado no Islão. Mostra também que a desobediência pode afectar mesmo a família do profeta.",
+    "historical_location": "Sodoma",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lut_guests_chapter_1",
+        "title": "A chegada dos hóspedes",
+        "content": "O Alcorão relata: \"E quando os Nossos mensageiros vieram a Lot, ele afligiu-se por eles e sentiu grande inquietação por causa deles. Disse: Este é um dia terrível.\" (11:77) Os anjos vieram a casa de Lot sob a forma de jovens. Lot acolheu-os, sem saber que eram enviados de Allah. Receava por eles porque conhecia os costumes do seu povo."
+      },
+      {
+        "id": "lut_guests_chapter_2",
+        "title": "A reacção do povo",
+        "content": "O Alcorão diz: \"E o seu povo veio a ele precipitando-se — e antes faziam o mal. Disse: Ó povo meu! Aqui estão as minhas filhas — são mais puras para vós. Temei Allah e não me desonreis quanto aos meus hóspedes. Não há entre vós um homem sensato?\" (11:78) Lot tentou proteger os seus hóspedes. Ofereceu uma alternativa legítima. Mas o povo recusou e insistiu na sua intenção. Os anjos disseram a Lot: \"Somos os mensageiros do teu Senhor. Não poderão alcançar-te.\" (11:81)"
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 11:77-78",
+        "reference_text": "Sura Hud, versículos 77-78",
+        "content": "وَلَمَّا جَآءَتْ رُسُلُنَآ إِلَىٰ لُوطٍۢ سِىٓءَ بِهِمْ وَضَاقَ بِهِمْ ذَرْعًۭا وَقَالَ هَـٰذَا يَوْمٌ عَصِيبٌ ۝ وَجَآءَهُۥ قَوْمُهُۥ يُهْرَعُونَ إِلَيْهِ وَمِن قَبْلُ كَانُوا۟ يَعْمَلُونَ ٱلسَّيِّـَٔاتِ ۚ قَالَ يَـٰقَوْمِ هَـٰٓؤُلَآءِ بَنَاتِى هُنَّ أَطْهَرُ لَكُمْ",
+        "translation": "E quando os Nossos mensageiros vieram a Lot, ele afligiu-se por eles. E o seu povo veio a ele precipitando-se. Disse: Ó povo meu! Aqui estão as minhas filhas — são mais puras para vós.",
+        "relevance": "Estes versículos descrevem a chegada dos anjos e a reacção de Lot."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 11:81",
+        "reference_text": "Sura Hud, versículo 81",
+        "content": "قَالُوا۟ يَـٰلُوطُ إِنَّا رُسُلُ رَبِّكَ لَن يَصِلُوٓا۟ إِلَيْكَ",
+        "translation": "Disseram: Ó Lot! Somos os mensageiros do teu Senhor. Não poderão alcançar-te.",
+        "relevance": "Este versículo revela a identidade dos hóspedes e a protecção divina."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Dayf",
+        "arabic_term": "ضيف",
+        "definition": "Hóspede, visitante. Lot procurou proteger os seus hóspedes segundo a tradição da hospitalidade.",
+        "pronunciation": "dayf"
+      },
+      {
+        "id": 2,
+        "term": "Rasul",
+        "arabic_term": "رسل",
+        "definition": "Mensageiros. Os anjos eram os mensageiros de Allah enviados a Lot.",
+        "pronunciation": "rou-soul"
+      }
+    ]
+  },
+  "the_destruction": {
+    "title": "A destruição do povo",
+    "title_arabic": "هلاك قوم لوط",
+    "introduction": "Quando o povo persistiu na sua vergonha e rejeitou todos os avisos, o castigo de Allah caiu sobre eles. O Alcorão diz: \"E voltámos a cidade e fizemos chover sobre eles pedras de argila cozida.\" (15:74) O povo foi destruído. Lot e os que o seguiram foram salvos.",
+    "conclusion": "O castigo caiu ao amanhecer. A cidade foi voltada. Lot e a sua família — excepto a sua mulher que desobedeceu — partiram em segurança. Esta história permanece um aviso para os povos que persistem no mal.",
+    "moral_lesson": "Esta história ensina-nos que o castigo de Allah atinge aqueles que persistem no mal após terem recebido os avisos. A desobediência conduz à perdição.",
+    "historical_location": "Sodoma (al-Mu'tafikat)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "the_destruction_chapter_1",
+        "title": "A ordem para partir",
+        "content": "O Alcorão relata: \"Disseram: Ó Lot! Somos os mensageiros do teu Senhor. Não poderão alcançar-te. Parte com a tua família durante a noite, e que nenhum de vós se volte — excepto a tua mulher. O que os atingir atingi-la-á a ela. O seu encontro é ao amanhecer. Não está o amanhecer próximo?\" (11:81) Lot recebeu a ordem de abandonar a cidade com a sua família antes do amanhecer. Não devia voltar-se. A sua mulher, que tinha traído informando o povo dos hóspedes, esteve entre os que permaneceram."
+      },
+      {
+        "id": "lut_destruction_chapter_2",
+        "title": "O castigo",
+        "content": "O Alcorão descreve o castigo: \"E voltámos a cidade e fizemos chover sobre eles pedras de argila cozida, umas sobre outras, marcadas junto ao teu Senhor. E não estão longe dos injustos.\" (11:82-83) E: \"O povo de Lot rejeitou os avisos. Enviámos contra eles um furacão.\" (54:33-34) A cidade foi destruída. O povo pereceu. Lot e os seus que o tinham seguido foram salvos. O Alcorão conclui: \"Não resta deles senão ruínas.\" (37:138)"
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 11:81-83",
+        "reference_text": "Sura Hud, versículos 81-83",
+        "content": "قَالُوا۟ يَـٰلُوطُ إِنَّا رُسُلُ رَبِّكَ لَن يَصِلُوٓا۟ إِلَيْكَ ۖ فَأَسْرِ بِأَهْلِكَ بِقِطْعٍۢ مِّنَ ٱلَّيْلِ وَلَا يَلْتَفِتْ مِنكُمْ أَحَدٌ إِلَّا ٱمْرَأَتَكَ ۖ إِنَّهُۥ مُصِيبُهَا مَا أَصَابَهُمْ ۚ إِنَّ مَوْعِدَهُمُ ٱلصُّبْحُ ۚ أَلَيْسَ ٱلصُّبْحُ بِقَرِيبٍۢ ۝ فَلَمَّا جَآءَ أَمْرُنَا جَعَلْنَا عَـٰلِيَهَا سَافِلَهَا وَأَمْطَرْنَا عَلَيْهَا حِجَارَةًۭ مِّن سِجِّيلٍۢ مَّنضُودٍۢ",
+        "translation": "Disseram: Ó Lot! Parte com a tua família durante a noite... E voltámos a cidade e fizemos chover sobre eles pedras de argila cozida.",
+        "relevance": "Estes versículos descrevem a ordem para partir e o castigo."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 54:33-34",
+        "reference_text": "Sura Al-Qamar, versículos 33-34",
+        "content": "كَذَّبَتْ قَوْمُ لُوطٍۭ بِٱلنُّذُرِ ۝ إِنَّآ أَرْسَلْنَا عَلَيْهِمْ حَاصِبًا",
+        "translation": "O povo de Lot rejeitou os avisos. Enviámos contra eles um furacão.",
+        "relevance": "Estes versículos descrevem a rejeição e o castigo."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Sijjil",
+        "arabic_term": "سجيل",
+        "definition": "Argila cozida, argila endurecida. As pedras do castigo eram de sijjil.",
+        "pronunciation": "sij-jil"
+      },
+      {
+        "id": 2,
+        "term": "Al-Mu'tafikat",
+        "arabic_term": "المؤتفكات",
+        "definition": "As cidades voltadas. Sodoma e as cidades do povo de Lot.",
+        "pronunciation": "al-mou-ta-fi-kat"
+      }
+    ]
+  },
+  "lessons_from_lut": {
+    "title": "Lições da história de Lot",
+    "title_arabic": "دروس من قصة لوط",
+    "introduction": "A história de Lot (عليه السلام) contém lições intemporais. O Alcorão cita-a como aviso: \"E Lot era certamente um dos mensageiros.\" (37:133) Ensina que cada povo recebe mensageiros, que rejeitar os avisos conduz ao castigo, e que a hospitalidade é um valor sagrado.",
+    "conclusion": "Lot cumpriu a sua missão. O seu povo foi destruído por persistir no mal. A história de Lot permanece um aviso para a humanidade: temer Allah, ouvir os mensageiros, e não persistir na desobediência.",
+    "moral_lesson": "Esta história ensina-nos a atender aos avisos, a proteger os nossos hóspedes, e a nunca persistir nos actos que Allah proibiu.",
+    "historical_location": "Região de Sodoma",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lessons_from_lut_chapter_1",
+        "title": "Um aviso para os povos",
+        "content": "O Alcorão cita a história de Lot entre os exemplos de povos destruídos: \"O povo de Lot rejeitou os avisos.\" (54:33) Cada povo recebe mensageiros. Os que crêem e se arrependem são salvos. Os que persistem no mal sofrem o castigo. Lot chamou o seu povo com sinceridade; não pedia nenhuma recompensa. O seu povo escolheu a rejeição. O resultado foi a destruição."
+      },
+      {
+        "id": "lessons_from_lut_chapter_2",
+        "title": "A hospitalidade e a protecção",
+        "content": "Lot procurou proteger os seus hóspedes apesar da ameaça do seu povo. Disse: \"Temei Allah e não me desonreis quanto aos meus hóspedes.\" (11:78) A hospitalidade (ضيافة) é um valor fundamental no Islão. O Profeta Muhammad (ﷺ) disse que quem crê em Allah e no Dia Final deve honrar o seu convidado. A história de Lot recorda-nos que proteger o convidado é um dever sagrado. Em contraste, a mulher de Lot traiu informando o povo — esteve entre os que pereceram."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 37:133-138",
+        "reference_text": "Sura As-Saffat, versículos 133-138",
+        "content": "وَإِنَّ لُوطًا لَّمِنَ ٱلْمُرْسَلِينَ ۝ إِذْ نَجَّيْنَـٰهُ وَأَهْلَهُۥٓ أَجْمَعِينَ ۝ إِلَّا عَجُوزًا فِى ٱلْغَـٰبِرِينَ ۝ ثُمَّ دَمَّرْنَا ٱلْءَاخَرِينَ",
+        "translation": "E Lot era certamente um dos mensageiros. Quando o salvámos a ele e a toda a sua família, excepto uma idosa que esteve entre as retardatárias. Depois destruímos os outros.",
+        "relevance": "Estes versículos resumem a salvação de Lot e a destruição do seu povo."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 29:34",
+        "reference_text": "Sura Al-Ankabut, versículo 34",
+        "content": "إِنَّا مُنزِلُونَ عَلَىٰٓ أَهْلِ هَـٰذِهِ ٱلْقَرْيَةِ رِجْزًۭا مِّنَ ٱلسَّمَآءِ بِمَا كَانُوا۟ يَفْسُقُونَ",
+        "translation": "Vamos fazer descer sobre os habitantes desta cidade um castigo do céu, pelo que perpetraram.",
+        "relevance": "Este versículo explica a causa do castigo."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Diyafa",
+        "arabic_term": "ضيافة",
+        "definition": "Hospitalidade. Lot procurou proteger os seus hóspedes segundo este valor sagrado.",
+        "pronunciation": "di-ya-fa"
+      },
+      {
+        "id": 2,
+        "term": "Rijz",
+        "arabic_term": "رجز",
+        "definition": "Castigo, praga. O castigo desceu sobre o povo de Lot.",
+        "pronunciation": "rijz"
+      }
+    ]
+  }
+}

@@ -1,0 +1,342 @@
+{
+  "salih_prophecy": {
+    "title": "Salih'in Peygamber Olarak Gönderilmesi",
+    "title_arabic": "إرسال صالح عليه السلام",
+    "introduction": "Salih (صالح عليه السلام), Ad kavminden sonra gelen Semud kavmine Allah tarafından gönderilen bir peygamberdir. Ad'ın yok edilmesinden sonra Allah Semud'u yeryüzüne yerleştirdi. Ovalarda saraylar inşa ettiler ve dağlarda evler oydular. Ama sapıttılar ve Allah onları tevhide çağırmak için kardeşleri Salih'i gönderdi.",
+    "conclusion": "Salih'in gönderilmesi, Hud'dan sonra peygamberlik görevinin devamını işaret eder. Semud kendi aralarından seçilmiş bir elçi aldı. Salih onlara açık bir delil getirdi: Allah'ın dişi devesi.",
+    "moral_lesson": "Bu hikaye bize Allah'ın bir kavmi uyarıcı göndermeden asla terk etmediğini öğretir. Dünyevi nimetler — saraylar ve meskenler — Allah'a ibadetten muaf tutmaz.",
+    "historical_location": "El-Hicr (Hicaz ile Suriye arasındaki bölge)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "salih_prophecy_chapter_1",
+        "title": "İlahi Emir",
+        "content": "Allah Salih'i kardeşleri Semud kavmine gönderdi. Kur'an şöyle bildirir: \"Ve Semud'a kardeşleri Salih'i gönderdik. Dedi: Ey kavmim! Allah'a ibadet edin. Sizin O'ndan başka ilahınız yoktur. Rabbinizden size açık bir delil geldi: işte Allah'ın dişi devesi, sizin için bir ayet. Onu Allah'ın toprağında otlasın bırakın ve ona kötülük etmeyin, yoksa acı bir azap sizi yakalayacaktır.\" (7:73) Salih vahiy ve mucizevi bir delil aldı: deve, Allah'ın kudretinin işareti."
+      },
+      {
+        "id": "salih_prophecy_chapter_2",
+        "title": "Ad'ın Halefleri",
+        "content": "Kur'an Semud'a hatırlatır: \"Ve hatırlayın, O sizi Ad'dan sonra halefler kıldı ve sizi yeryüzüne yerleştirdi. Ovalarında saraylar inşa ediyorsunuz ve dağlarda evler oyuyorsunuz. Öyleyse Allah'ın nimetlerini hatırlayın ve yeryüzünde fesat çıkarmayın.\" (7:74) Semud büyük nimetler almıştı. Verimli bir bölgede yaşıyorlardı ve gelişmiş bir medeniyet kurmuşlardı. Ama Allah'ı unuttular ve fesada bulaştılar."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 7:73",
+        "reference_text": "El-A'raf Suresi, 73. ayet",
+        "content": "وَإِلَىٰ ثَمُودَ أَخَاهُمْ صَـٰلِحًۭا ۗ قَالَ يَـٰقَوْمِ ٱعْبُدُوا۟ ٱللَّهَ مَا لَكُم مِّنْ إِلَـٰهٍ غَيْرُهُۥٓ ۖ قَدْ جَآءَتْكُم بَيِّنَةٌۭ مِّن رَّبِّكُمْ ۖ هَـٰذِهِۦ نَاقَةُ ٱللَّهِ لَكُمْ ءَايَةًۭ ۖ فَذَرُوهَا تَأْكُلْ فِىٓ أَرْضِ ٱللَّهِ ۖ وَلَا تَمَسُّوهَا بِسُوٓءٍۢ فَيَأْخُذَكُمْ عَذَابٌ أَلِيمٌۭ",
+        "translation": "Ve Semud'a kardeşleri Salih'i gönderdik. Dedi: Ey kavmim! Allah'a ibadet edin — sizin O'ndan başka ilahınız yoktur. Rabbinizden size açık bir delil geldi: işte Allah'ın dişi devesi, sizin için bir ayet. Onu Allah'ın toprağında otlasın bırakın ve ona kötülük etmeyin, yoksa acı bir azap sizi yakalayacaktır.",
+        "relevance": "Bu ayet Salih'in gönderilmesini ve deveyi ilahi bir işaret olarak tespit eder."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 7:74",
+        "reference_text": "El-A'raf Suresi, 74. ayet",
+        "content": "وَٱذْكُرُوٓا۟ إِذْ جَعَلَكُمْ خُلَفَآءَ مِنۢ بَعْدِ عَادٍۢ وَبَوَّأَكُمْ فِى ٱلْأَرْضِ تَتَّخِذُونَ مِن سُهُولِهَا قُصُورًۭا وَتَنْحِتُونَ ٱلْجِبَالَ بُيُوتًۭا",
+        "translation": "Hatırlayın, O sizi Ad'dan sonra halefler kıldı ve sizi yeryüzüne yerleştirdi. Ovalarında saraylar inşa ediyorsunuz ve dağlarda evler oyuyorsunuz.",
+        "relevance": "Bu ayet Semud'u Ad'ın halefleri ve başarıları olarak tanımlar."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Salih",
+        "arabic_term": "صالح",
+        "definition": "Arapça'da Salih. Semud kavmine gönderilen Allah'ın peygamberi. İsmi \"salih olan\" anlamına gelir.",
+        "pronunciation": "sa-lih"
+      },
+      {
+        "id": 2,
+        "term": "Thamud",
+        "arabic_term": "ثمود",
+        "definition": "Ad'dan sonra gelen Arap kavmi. Dağlarda evler oydular. Dişi deveyi öldürdükleri için yok edildiler.",
+        "pronunciation": "tha-moud"
+      },
+      {
+        "id": 3,
+        "term": "Al-Hijr",
+        "arabic_term": "الحجر",
+        "definition": "Semud'un yaşadığı bölge, Hicaz ile Suriye arasında. Peygamber Muhammed harabelerinden geçti.",
+        "pronunciation": "al-hijr"
+      }
+    ]
+  },
+  "salih_call": {
+    "title": "Salih'in Kavmine Daveti",
+    "title_arabic": "دعوة صالح لقومه",
+    "introduction": "Salih (عليه السلام) Semud kavmini açıklıkla çağırdı. Onları yalnızca Allah'a ibadet etmeye, bağışlanma dilemeye ve tövbe etmeye davet etti. Allah'ın onları yerden çıkardığını ve yeryüzüne yerleştirdiğini hatırlattı. İtaatsizliğin sonuçları konusunda uyardı. Mesajına rağmen Semud reddetti.",
+    "conclusion": "Salih'in daveti peygamberlik mesajının tutarlılığını gösterir. Hiçbir karşılık istemedi; Rabbi Yakındır ve duaları kabul eder. Semud azaptan önce şansını aldı.",
+    "moral_lesson": "Bu hikaye bize azap vurmadan önce tövbenin her zaman mümkün olduğunu öğretir. Rabbimizin Yakın olduğunu ve O'na yalvaranlara cevap verdiğini hatırlatır.",
+    "historical_location": "El-Hicr",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "salih_call_chapter_1",
+        "title": "Tevhide Davet",
+        "content": "Salih kavmine dedi: \"Ey kavmim! Allah'a ibadet edin. Sizin O'ndan başka ilahınız yoktur. Sizi yerden çıkaran ve yeryüzüne yerleştiren O'dur. Öyleyse O'ndan bağışlanma dileyin, sonra O'na tövbe edin. Rabbim Yakındır, cevap verir.\" (11:61) Salih onlara Allah'ın nimetlerini hatırlattı ve yeryüzünde fesat çıkarmamaya davet etti. Israr ederlerse geçmiş kavimlerin akıbetine uğrayacakları konusunda uyardı."
+      },
+      {
+        "id": "salih_call_chapter_2",
+        "title": "Semud'un Reddi",
+        "content": "Kur'an \"Semud elçileri yalanladı\" (26:141) ve \"uyarıları reddettiler\" (54:23) diye bildirir. Açık delile — dişi deve — ve Salih'in davetine rağmen kavmin ileri gelenleri reddetti. Kibirlendiler. Kur'an der: \"Semud kibrinden dolayı yalanladı.\" (91:11) Salih sabırla onları çağırmaya devam etti ama onlar küfürlerinde ısrar ettiler."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 11:61",
+        "reference_text": "Hud Suresi, 61. ayet",
+        "content": "وَإِلَىٰ ثَمُودَ أَخَاهُمْ صَـٰلِحًۭا ۚ قَالَ يَـٰقَوْمِ ٱعْبُدُوا۟ ٱللَّهَ مَا لَكُم مِّنْ إِلَـٰهٍ غَيْرُهُۥٓ ۖ هُوَ أَنشَأَكُم مِّنَ ٱلْأَرْضِ وَٱسْتَعْمَرَكُمْ فِيهَا فَٱسْتَغْفِرُوهُ ثُمَّ تُوبُوٓا۟ إِلَيْهِ ۚ إِنَّ رَبِّى قَرِيبٌۭ مُّجِيبٌۭ",
+        "translation": "Ve Semud'a kardeşleri Salih'i gönderdik. Dedi: Ey kavmim! Allah'a ibadet edin. Sizin O'ndan başka ilahınız yoktur. Sizi yerden çıkaran ve yeryüzüne yerleştiren O'dur. O'ndan bağışlanma dileyin, sonra O'na tövbe edin. Rabbim Yakındır, cevap verir.",
+        "relevance": "Bu ayet Salih'in davetini ve bağışlanma vaadini içerir."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 91:11",
+        "reference_text": "Eş-Şems Suresi, 11. ayet",
+        "content": "كَذَّبَتْ ثَمُودُ بِطَغْوَىٰهَآ",
+        "translation": "Semud kibrinden dolayı yalanladı.",
+        "relevance": "Bu ayet Semud'un Salih'in davetine karşı tutumunu tanımlar."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Tawba",
+        "arabic_term": "توبة",
+        "definition": "Tövbe. Salih Semud'u azaptan önce tövbeye davet etti.",
+        "pronunciation": "taw-ba"
+      },
+      {
+        "id": 2,
+        "term": "Qarib Mujib",
+        "arabic_term": "قريب مجيب",
+        "definition": "Yakın, cevap verir. Dualara cevap veren Rabbin tanımı.",
+        "pronunciation": "qa-rib mou-jib"
+      }
+    ]
+  },
+  "the_thamud_people": {
+    "title": "Semud Kavmi",
+    "title_arabic": "قوم ثمود",
+    "introduction": "Semud kavmi yeryüzünde Ad'ın halefi oldu. Allah onları yerleştirdi ve dikkat çekici yetenekler bahşetti: ovalarda saraylar inşa ettiler ve dağlarda evler oydular. Ama Allah'ın nimetlerini unuttular ve fesat çıkardılar. Salih'i ve onun işaretini reddettiler.",
+    "conclusion": "Semud medeniyeti — sarayları ve kayalara oyulmuş evleri — onları korumadı. Deprem onları meskenlerinde yok etti. Yalnızca Salih ve müminler kurtuldu.",
+    "moral_lesson": "Bu hikaye bize insan başarılarının Allah'a ibadetten muaf tutmadığını öğretir. Yeryüzünde fesat azaba yol açar.",
+    "historical_location": "El-Hicr (Hicaz ile Suriye arası)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "the_thamud_people_chapter_1",
+        "title": "Gelişmiş Bir Medeniyet",
+        "content": "Kur'an Semud'u şöyle tanımlar: \"Hatırlayın, O sizi Ad'dan sonra halefler kıldı ve sizi yeryüzüne yerleştirdi. Ovalarında saraylar inşa ediyorsunuz ve dağlarda evler oyuyorsunuz.\" (7:74) Semud yetenekli inşaatçılardı. Dağlara oyulmuş evleri bugün hala ustalıklarına tanıklık ediyor. Ama Kur'an onlara öğüt verir: \"Allah'ın nimetlerini hatırlayın ve yeryüzünde fesat çıkarmayın.\" Tersini yaptılar."
+      },
+      {
+        "id": "the_thamud_people_chapter_2",
+        "title": "Nankörlük",
+        "content": "Allah Semud'a toprak, inşa etme ve refah yeteneği bahşetmişti. Ama fesada (fasād) bulaştılar. Allah'ın elçisini reddettiler ve gönderdiği işareti — dişi deveyi — küçümsediler. Nankörlükleri ve isyanları onları azabı hak ettirdi. Salih onları defalarca uyardı ama kaderlerini mühürleyen suçu — dişi deveyi öldürmeyi — işleyene kadar ısrar ettiler."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 7:74",
+        "reference_text": "El-A'raf Suresi, 74. ayet",
+        "content": "وَٱذْكُرُوٓا۟ إِذْ جَعَلَكُمْ خُلَفَآءَ مِنۢ بَعْدِ عَادٍۢ وَبَوَّأَكُمْ فِى ٱلْأَرْضِ تَتَّخِذُونَ مِن سُهُولِهَا قُصُورًۭا وَتَنْحِتُونَ ٱلْجِبَالَ بُيُوتًۭا ۖ فَٱذْكُرُوٓا۟ ءَالَآءَ ٱللَّهِ وَلَا تَعْثَوْا۟ فِى ٱلْأَرْضِ مُفْسِدِينَ",
+        "translation": "Hatırlayın, O sizi Ad'dan sonra halefler kıldı ve sizi yeryüzüne yerleştirdi. Ovalarında saraylar inşa ediyorsunuz ve dağlarda evler oyuyorsunuz. Allah'ın nimetlerini hatırlayın ve yeryüzünde fesat çıkarmayın.",
+        "relevance": "Bu ayet Semud medeniyetini ve şükür öğüdünü tanımlar."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Khulafa",
+        "arabic_term": "خلفاء",
+        "definition": "Halefler. Semud yeryüzünde Ad'ın halefi oldu.",
+        "pronunciation": "khou-la-fa"
+      },
+      {
+        "id": 2,
+        "term": "Mufsidun",
+        "arabic_term": "مفسدون",
+        "definition": "Fesat çıkaranlar. Kur'an Semud'u müfsit olmamaları konusunda uyarır.",
+        "pronunciation": "mouf-si-doun"
+      }
+    ]
+  },
+  "the_she_camel": {
+    "title": "Allah'ın Dişi Devesi",
+    "title_arabic": "ناقة الله",
+    "introduction": "Allah Semud'a bir işaret ve imtihan olarak bir dişi deve gönderdi. Bu dişi deve (nāqat Allāh) Salih'in doğruluğunun açık bir deliliydi. Ona serbestçe otlamasına izin vermelerini ve ona zarar vermemelerini emretti. Su onlarla o arasında paylaşılacaktı, her biri sırayla içecekti. Semud bu imtihanı reddetti.",
+    "conclusion": "Dişi deve Allah'ın rahmetinin bir işareti ve Semud için bir imtihandı. Ona saygı göstererek kurtulacaklardı. Onu öldürerek kaderlerini mühürlediler.",
+    "moral_lesson": "Bu hikaye bize Allah'ın işaretlerinin imtihanlar olduğunu öğretir. Onlara saygı göstermek kurtuluşa; onları çiğnemek azaba yol açar.",
+    "historical_location": "El-Hicr",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "the_she_camel_chapter_1",
+        "title": "İlahi İşaret",
+        "content": "Kur'an Salih'in sözlerini bildirir: \"Rabbinizden size açık bir delil geldi: işte Allah'ın dişi devesi, sizin için bir ayet. Onu Allah'ın toprağında otlasın bırakın ve ona kötülük etmeyin, yoksa acı bir azap sizi yakalayacaktır.\" (7:73) Dişi deve bir mucizeydi — Allah'ın kudretinin ve Salih'in mesajının doğruluğunun somut bir işareti. Allah'ın toprağında serbestçe otlaması gerekiyordu. Ona zarar veren acı bir azaba maruz kalacaktı."
+      },
+      {
+        "id": "the_she_camel_chapter_2",
+        "title": "Suyun Paylaşımı",
+        "content": "Kur'an Allah'ın Salih'e Semud'u bilgilendirmesini emrettiğini belirtir: \"Su sizinle o arasında paylaşılacak; her biri sırayla içecek.\" (54:28) Dişi deve Semud için bir imtihandı (fitna). Kur'an der: \"Deveyi onlar için bir imtihan olarak gönderiyoruz. Öyleyse onları gözetleyin ve sabredin.\" (54:27) Semud bu paylaşımı kabul etmeli ve dişi deveye zarar vermemeliydi. İnanan ve itaat edenler kurtulacak; diğerleri azabı çekecekti."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 7:73",
+        "reference_text": "El-A'raf Suresi, 73. ayet",
+        "content": "هَـٰذِهِۦ نَاقَةُ ٱللَّهِ لَكُمْ ءَايَةًۭ ۖ فَذَرُوهَا تَأْكُلْ فِىٓ أَرْضِ ٱللَّهِ ۖ وَلَا تَمَسُّوهَا بِسُوٓءٍۢ فَيَأْخُذَكُمْ عَذَابٌ أَلِيمٌۭ",
+        "translation": "İşte Allah'ın dişi devesi, sizin için bir ayet. Onu Allah'ın toprağında otlasın bırakın ve ona kötülük etmeyin, yoksa acı bir azap sizi yakalayacaktır.",
+        "relevance": "Bu ayet dişi deveyi bir işaret olarak ve ona zarar vermeyi yasak olarak tespit eder."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 54:27-28",
+        "reference_text": "El-Kamer Suresi, 27-28. ayetler",
+        "content": "إِنَّا مُرْسِلُوا۟ ٱلنَّاقَةِ فِتْنَةًۭ لَّهُمْ فَٱرْتَقِبْهُمْ وَٱصْطَبِرْ ۝ وَنَبِّئْهُمْ أَنَّ ٱلْمَآءَ قِسْمَةٌۢ بَيْنَهُمْ ۖ كُلُّ شِرْبٍۢ مُّحْتَضَرٌۭ",
+        "translation": "Deveyi onlar için bir imtihan olarak gönderiyoruz. Öyleyse onları gözetleyin ve sabredin. Ve onlara suyun sizinle o arasında paylaşılacağını bildirin; her biri sırayla içecek.",
+        "relevance": "Bu ayetler deveyi imtihan ve suyun paylaşımı olarak tanımlar."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Naqat Allah",
+        "arabic_term": "ناقة الله",
+        "definition": "Allah'ın dişi devesi. Semud'a gönderilen mucizevi işaret.",
+        "pronunciation": "na-qat al-lah"
+      },
+      {
+        "id": 2,
+        "term": "Fitna",
+        "arabic_term": "فتنة",
+        "definition": "İmtihan, fitne. Dişi deve Semud için bir imtihandı.",
+        "pronunciation": "fit-na"
+      }
+    ]
+  },
+  "the_camel_killed": {
+    "title": "Dişi Devenin Öldürülmesi ve Azap",
+    "title_arabic": "عقر الناقة والعذاب",
+    "introduction": "Salih'in uyarısına rağmen Semud dişi deveyi öldürdü. Kur'an onların \"onu yalanladılar ve öldürdüler\" (91:14) diye bildirir. Karşılık olarak Allah onları bir depremle (rajfah) yok etti. Meskenlerinde yakalandılar ve ölü, yere serilmiş bulundular. Salih ve müminler kurtuldu.",
+    "conclusion": "Dişi devenin öldürülmesi Semud'un kaderini mühürledi. Deprem onları yok etti. Allah'ın açık bir işaretine karşı isyanları onlara anında azap getirdi. Semud'un hikayesi nesiller için bir uyarı olarak kalıyor.",
+    "moral_lesson": "Bu hikaye bize Allah'ın işaretlerini çiğnemenin kayba yol açtığını öğretir. Azap ani olabilir. Yalnızca inanan ve itaat edenler kurtulur.",
+    "historical_location": "El-Hicr",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "the_camel_killed_chapter_1",
+        "title": "Suç",
+        "content": "Kur'an olanları tanımlar: \"Aralarından en bedbaht olanı kalktığında\" (91:12), ve Allah'ın elçisi (Salih) onlara \"İşte Allah'ın dişi devesi, ona su verin\" (91:13) dediğinde, \"onu yalanladılar ve öldürdüler. Rableri günahları yüzünden onları yok etti ve dümdüz etti.\" (91:14) Semud en büyük suçu işledi: uyarıldıktan sonra Allah'ın işaretini öldürmek. Kibirleri onları kör etti."
+      },
+      {
+        "id": "the_camel_killed_chapter_2",
+        "title": "Deprem",
+        "content": "Kur'an azabı tanımlar: \"Deprem onları yakaladı ve sabahleyin meskenlerinde ölü yatıyorlardı.\" (7:78) \"Rajfah\" kelimesi deprem veya şiddetli sarsıntı anlamına gelir. Saraylarından ve dağlara oyulmuş evlerinden o kadar gurur duyan Semud bir anda yok edildi. Salih ve onunla inananlar Allah'ın rahmetiyle kurtuldu. El-Hicr harabeleri hala yok olan medeniyetlerine tanıklık ediyor."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 91:12-15",
+        "reference_text": "Eş-Şems Suresi, 12-15. ayetler",
+        "content": "إِذِ ٱنۢبَعَثَ أَشْقَىٰهَا ۝ فَقَالَ لَهُمْ رَسُولُ ٱللَّهِ نَاقَةَ ٱللَّهِ وَسُقْيَـٰهَا ۝ فَكَذَّبُوهُ فَعَقَرُوهَا فَدَمْدَمَ عَلَيْهِمْ رَبُّهُم بِذَنۢبِهِمْ فَسَوَّىٰهَا ۝ وَلَا يَخَافُ عُقْبَـٰهَا",
+        "translation": "Aralarından en bedbaht olanı kalktığında. Allah'ın elçisi onlara dedi: İşte Allah'ın dişi devesi, ona su verin. Onu yalanladılar ve öldürdüler. Rableri günahları yüzünden onları yok etti ve dümdüz etti. Ve O sonuçlardan korkmaz.",
+        "relevance": "Bu ayetler Semud'un suçunu ve azabını tanımlar."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 7:78",
+        "reference_text": "El-A'raf Suresi, 78. ayet",
+        "content": "فَأَخَذَتْهُمُ ٱلرَّجْفَةُ فَأَصْبَحُوا۟ فِى دَارِهِمْ جَـٰثِمِينَ",
+        "translation": "Deprem onları yakaladı ve sabahleyin meskenlerinde ölü yatıyorlardı.",
+        "relevance": "Bu ayet azabın niteliğini tanımlar: deprem."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Aqar",
+        "arabic_term": "عقر",
+        "definition": "Öldürmek (tendonları keserek). Semud dişi deveyi \"aqarū\".",
+        "pronunciation": "a-qar"
+      },
+      {
+        "id": 2,
+        "term": "Rajfah",
+        "arabic_term": "رجفة",
+        "definition": "Deprem, sarsıntı. Allah'ın Semud'u yok ettiği azap.",
+        "pronunciation": "raj-fa"
+      }
+    ]
+  },
+  "lessons_from_salih": {
+    "title": "Salih Hikayesinden Dersler",
+    "title_arabic": "دروس من قصة صالح",
+    "introduction": "Salih (عليه السلام) hikayesi zamansız dersler içerir. Allah'ın işaretlerini çiğnemenin sonuçlarını, nimetlere şükürün önemini ve kötülükte ısrar edenlere azabın hızını öğretir. Kur'an bunu örnek olarak zikreder.",
+    "conclusion": "Salih görevini tamamladı. Semud dişi deveyi öldürdükleri için yok edildi. Hikayesi bir hatırlatma olarak kalıyor: Allah'ın işaretleri çiğnenmemelidir. Medeniyet ve maddi başarılar azaptan korumaz.",
+    "moral_lesson": "Bu hikaye bize Allah'ın işaretlerine saygı göstermeyi, nimetleri için şükretmeyi ve fesat çıkarmamayı öğretir. Çok geç olmadan tövbenin mümkün olduğunu hatırlatır.",
+    "historical_location": "El-Hicr'dan unutuluşa",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lessons_from_salih_chapter_1",
+        "title": "Kavimler İçin Örnek",
+        "content": "Kur'an Salih'in hikayesini uyarı olarak sunar. Semud'un her şeyi vardı: saraylar, dağlara oyulmuş evler, açık bir işaret — dişi deve. Ama esas olanı eksikti: iman ve itaat. Allah'ın işaretini çiğnediler ve yok edildiler. Salih ise kararlı kaldı. Hiçbir karşılık istemedi; mesajı iletti. Hikayesi bize elçinin görevini tamamladığını; sonucun Allah'a ait olduğunu hatırlatır."
+      },
+      {
+        "id": "lessons_from_salih_chapter_2",
+        "title": "Peygamberlik Devamlılığı",
+        "content": "Salih Hud'dan sonra gönderilen peygamberler soyunun parçasıdır. Adem, Nuh, Hud, Salih — her kavim kendi elçisini alır. Semud, kendilerinden önceki Ad gibi, şansını aldı. Reddettiler ve çiğnediler. Salih'in hikayesi aynı kalıbı izler: tevhide davet, mucizevi işaret, red, isyan, azap ve müminlerin kurtuluşu. Peygamber Muhammed'in Tebük seferi sırasında geçtiği El-Hicr harabeleri nesillere bu dersi hatırlatıyor."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 11:120",
+        "reference_text": "Hud Suresi, 120. ayet",
+        "content": "وَكُلًّا نَّقُصُّ عَلَيْكَ مِنْ أَنبَاءِ الرُّسُلِ مَا نُثَبِّتُ بِهِ فُؤَادَكَ وَجَاءَكَ فِي هَٰذِهِ الْحَقُّ وَمَوْعِظَةٌ وَذِكْرَىٰ لِلْمُؤْمِنِينَ",
+        "translation": "Ve sana elçilerin haberlerinden anlattığımız her şey kalbini güçlendirmek içindir. Ve bu haberde sana hak, öğüt ve müminler için hatırlatma gelmiştir.",
+        "relevance": "Bu ayet Kur'an'daki peygamber hikayelerinin amacını açıklar."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 11:68",
+        "reference_text": "Hud Suresi, 68. ayet",
+        "content": "كَأَن لَّمْ يَغْنَوْا۟ فِيهَا ۗ أَلَآ إِنَّ ثَمُودًا كَفَرُوا۟ رَبَّهُمْ ۗ أَلَا بُعْدًۭا لِّثَمُودَ",
+        "translation": "Sanki orada hiç yaşamamışlardı. Şüphesiz Semud Rablerine küfretti. Semud'a yazıklar olsun!",
+        "relevance": "Bu ayet Semud hikayesini ve azabını sonuçlandırır."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Ibra",
+        "arabic_term": "عبرة",
+        "definition": "Örnek veya ders. Peygamber hikayeleri insanlık için örneklerdir.",
+        "pronunciation": "ib-ra"
+      },
+      {
+        "id": 2,
+        "term": "Dhikra",
+        "arabic_term": "ذكرى",
+        "definition": "Hatırlatma. Peygamber hikayeleri müminler için hatırlatma görevi görür.",
+        "pronunciation": "dhik-ra"
+      }
+    ]
+  }
+}

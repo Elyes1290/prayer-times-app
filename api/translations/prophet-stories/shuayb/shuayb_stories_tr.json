@@ -1,0 +1,287 @@
+{
+  "shuayb_call": {
+    "title": "Şuayb'ın daveti",
+    "title_arabic": "دعوة شعيب",
+    "introduction": "Şuayb (شعيب عليه السلام), Yitro, Medyen halkına gönderilen bir peygamberdir. Kur'an şöyle buyurur: \"Ve Medyen'e kardeşleri Şuayb'ı. Dedi: Ey kavmim! Allah'a ibadet edin. O'ndan başka ilahınız yoktur.\" (7:85) Medyen halkı ticarette hile yapıyordu. Şuayb onları adalete ve tevhide çağırdı.",
+    "conclusion": "Şuayb hikmet ve sabırla davet etti. Haksızlığın sonuçlarından uyardı. Bazıları inandı ama çoğunluk reddetti. Görevini kararlılıkla tamamladı.",
+    "moral_lesson": "Bu hikaye bize peygamberin ticarette adalete çağırdığını öğretir. Hile ve dolandırıcılık ağır günahlardır.",
+    "historical_location": "Medyen (kuzeybatı Arabistan)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "shuayb_call_chapter_1",
+        "title": "Görev",
+        "content": "Kur'an şöyle bildirir: \"Ve Medyen'e kardeşleri Şuayb'ı. Dedi: Ey kavmim! Allah'a ibadet edin. O'ndan başka ilahınız yoktur. Rabbinizden size bir delil geldi. Öyleyse ölçüyü ve tartıyı tam yapın. İnsanların haklarını eksiltmeyin.\" (7:85) Şuayb tüccar bir halka gönderildi. Tartı ve ölçüde hile yapıyorlardı. Onları Allah'a ibadet ve adalete çağırdı."
+      },
+      {
+        "id": "shuayb_call_chapter_2",
+        "title": "Uyarı",
+        "content": "Kur'an şöyle buyurur: \"Ve yeryüzü düzeltildikten sonra orada bozgunculuk yapmayın. Bu sizin için daha hayırlıdır, eğer inananlarsanız.\" (7:85) Şuayb kavmini uyardı. Hile toplumu bozar. Adalet refahı sağlar. Onları Allah'tan korkmaya ve dürüst olmaya teşvik etti."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Kuran 7:85",
+        "reference_text": "Araf Suresi, 85. ayet",
+        "content": "وَإِلَىٰ مَدْيَنَ أَخَاهُمْ شُعَيْبًۭا ۚ قَالَ يَـٰقَوْمِ ٱعْبُدُوا۟ ٱللَّهَ مَا لَكُم مِّنْ إِلَـٰهٍ غَيْرُهُۥ ۖ قَدْ جَآءَتْكُم بَيِّنَةٌۭ مِّن رَّبِّكُمْ ۖ فَأَوْفُوا۟ ٱلْكَيْلَ وَٱلْمِيزَانَ",
+        "translation": "And to Madyan, their brother Shu'ayb. He said: O my people! Worship Allah. Give full measure and full weight.",
+        "relevance": "Bu ayet Şuayb'ın davetini anlatır."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Kuran 11:84",
+        "reference_text": "Hud Suresi, 84. ayet",
+        "content": "وَإِلَىٰ مَدْيَنَ أَخَاهُمْ شُعَيْبًۭا ۚ قَالَ يَـٰقَوْمِ ٱعْبُدُوا۟ ٱللَّهَ مَا لَكُم مِّنْ إِلَـٰهٍ غَيْرُهُۥ",
+        "translation": "And to Madyan, their brother Shu'ayb. He said: O my people! Worship Allah. You have no other deity than Him.",
+        "relevance": "Bu ayet tevhid davetini doğrular."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Shu'ayb",
+        "arabic_term": "شعيب",
+        "definition": "Arapça'da Yitro. Medyen halkına gönderilen peygamber.",
+        "pronunciation": "chou-ayb"
+      },
+      {
+        "id": 2,
+        "term": "Madyan",
+        "arabic_term": "مدين",
+        "definition": "Medyan. Kuzeybatı Arabistan'da bölge. Şuayb'ın halkı.",
+        "pronunciation": "ma-dyan"
+      }
+    ]
+  },
+  "shuayb_weights": {
+    "title": "Şuayb ve teraziler",
+    "title_arabic": "شعيب والميزان",
+    "introduction": "Medyen halkı tartı ve ölçüde hile yapıyordu. Kur'an şöyle buyurur: \"Öyleyse ölçüyü ve tartıyı tam yapın. İnsanların haklarını eksiltmeyin.\" (7:85) Şuayb onları ticari adalete teşvik etti. Satarken daha az veriyorlardı. Alırken daha fazla istiyorlardı. Bu açık bir haksızlıktı.",
+    "conclusion": "Şuayb dürüstlükte ısrar etti. Ticarette hile günahtır. Allah adilleri sever. Müminler işlemlerinde dürüst olmalıdır.",
+    "moral_lesson": "Bu hikaye bize ticarette adaletin bir zorunluluk olduğunu öğretir. Dolandırıcılık güveni yok eder ve cezayı çeker.",
+    "historical_location": "Medyen",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "shuayb_weights_chapter_1",
+        "title": "Hile",
+        "content": "Kur'an şöyle bildirir: \"Ey kavmim! Ölçüyü ve tartıyı adaletle tam yapın. İnsanların mallarını eksiltmeyin. Ve yeryüzünde bozgunculuk yapmayın.\" (11:85) Medyen halkı dolandırıcılıkla tanınıyordu. Sattıklarında daha az veriyorlardı. Aldıklarında daha fazla alıyorlardı. Şuayb onları kınadı. Bu uygulama gizli hırsızlıktı."
+      },
+      {
+        "id": "shuayb_weights_chapter_2",
+        "title": "Adalet emri",
+        "content": "Kur'an şöyle buyurur: \"Allah'tan kalan (helal) sizin için daha hayırlıdır, eğer inananlarsanız. Ve ben sizin üzerinize bekçi değilim.\" (11:86) Şuayb adaleti emretti. Ölçüyü ve tartıyı tam yapın. İnsanlara haksızlık etmeyin. Helal kazanç bereketlidir. Haram kazanç yıkıma götürür."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Kuran 11:85",
+        "reference_text": "Hud Suresi, 85. ayet",
+        "content": "وَيَـٰقَوْمِ أَوْفُوا۟ ٱلْمِكْيَالَ وَٱلْمِيزَانَ بِٱلْقِسْطِ ۖ وَلَا تَبْخَسُوا۟ ٱلنَّاسَ أَشْيَآءَهُمْ",
+        "translation": "O my people! Give full measure and full weight in justice. Do not diminish people their goods.",
+        "relevance": "Bu ayet ölçülerde adaleti emreder."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Kuran 7:85",
+        "reference_text": "Araf Suresi, 85. ayet",
+        "content": "فَأَوْفُوا۟ ٱلْكَيْلَ وَٱلْمِيزَانَ وَلَا تَبْخَسُوا۟ ٱلنَّاسَ أَشْيَآءَهُمْ",
+        "translation": "Give full measure and full weight. Do not diminish people their rights.",
+        "relevance": "Bu ayet Şuayb'ın emrini hatırlatır."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Mizan",
+        "arabic_term": "ميزان",
+        "definition": "Terazi. Şuayb mizanı adaletle kullanmayı emretti.",
+        "pronunciation": "mi-zan"
+      },
+      {
+        "id": 2,
+        "term": "Kayl",
+        "arabic_term": "كيل",
+        "definition": "Ölçü. Tam kayl vermek bir zorunluluktur.",
+        "pronunciation": "kayl"
+      }
+    ]
+  },
+  "shuayb_rejection": {
+    "title": "Şuayb'ın reddedilmesi",
+    "title_arabic": "تكذيب قوم شعيب",
+    "introduction": "Medyen halkı Şuayb'ı reddetti. Kur'an şöyle buyurur: \"Dediler: Ey Şuayb! Namazın mı sana atalarımızın taptıklarını bırakmamızı veya mallarımızla istediğimizi yapmayı bırakmamızı emrediyor?\" (11:87) Onu büyücü veya yalancı olmakla suçladılar. Haksız uygulamalarından vazgeçmeyi reddettiler.",
+    "conclusion": "Şuayb sabretti. Davete devam etti. Cezadan uyardı. Ama onlar sapıklıkta ısrar etti. Allah'ın hükmü onlara indi.",
+    "moral_lesson": "Bu hikaye bize peygamberleri reddetmenin helake götürdüğünü öğretir. Haksızlıkta ısrar edenler cezalandırılacaktır.",
+    "historical_location": "Medyen",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "shuayb_rejection_chapter_1",
+        "title": "Suçlamalar",
+        "content": "Kur'an şöyle bildirir: \"Dediler: Ey Şuayb! Söylediklerinin çoğunu anlamıyoruz. Ve seni aramızda zayıf görüyoruz.\" (11:91) Medyen halkı Şuayb'ı küçümsedi. Onu zayıf diye çağırdılar. İtaat etmeyi reddettiler. Dediler: \"Sen bizim gibi sadece bir insansın.\" Şuayb cevap verdi: \"Bunun için sizden bir ücret istemiyorum. Mükâfatım Allah katındadır.\""
+      },
+      {
+        "id": "shuayb_rejection_chapter_2",
+        "title": "Son uyarı",
+        "content": "Kur'an şöyle buyurur: \"Ve ey kavmim! Benimle olan anlaşmazlığım, Nuh kavminin, Hud kavminin veya Salih kavminin başına gelenin size isabet etmesine yol açmasın.\" (11:89) Şuayb onları uyardı. Önceki kavimler peygamberlerini reddettikleri için yok edildi. Aynı kader onları da bekliyordu eğer ısrar ederlerse. Ama inanmadılar."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Kuran 11:87",
+        "reference_text": "Hud Suresi, 87. ayet",
+        "content": "قَالُوا۟ يَـٰشُعَيْبُ أَصَلَوٰتُكَ تَأْمُرُكَ أَن نَّتْرُكَ مَا يَعْبُدُ ءَابَآؤُنَآ أَوْ أَن نَّفْعَلَ فِىٓ أَمْوَٰلِنَا مَا نَشَـٰٓؤُا۟",
+        "translation": "They said: O Shu'ayb! Does your prayer command you to abandon what our fathers worshipped?",
+        "relevance": "Bu ayet halkın suçlamalarını anlatır."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Kuran 11:91",
+        "reference_text": "Hud Suresi, 91. ayet",
+        "content": "قَالُوا۟ يَـٰشُعَيْبُ مَا نَفْقَهُ كَثِيرًۭا مِّمَّا تَقُولُ وَإِنَّا لَنَرَىٰكَ فِينَا ضَعِيفًۭا",
+        "translation": "They said: O Shu'ayb! We do not understand much of what you say. We consider you weak.",
+        "relevance": "Bu ayet halkın küçümsemesini anlatır."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Takdhib",
+        "arabic_term": "تكذيب",
+        "definition": "İnkâr, red. Halk Şuayb'a takdhib yaptı.",
+        "pronunciation": "tak-dhib"
+      },
+      {
+        "id": 2,
+        "term": "Da'if",
+        "arabic_term": "ضعيف",
+        "definition": "Zayıf. Şuayb'a da'if dediler.",
+        "pronunciation": "da-if"
+      }
+    ]
+  },
+  "shuayb_destruction": {
+    "title": "Medyen halkının yok edilmesi",
+    "title_arabic": "هلاك قوم مدين",
+    "introduction": "Medyen halkı reddinde ısrar etti. Kur'an şöyle buyurur: \"Ve emrimiz geldiğinde, Şuayb'ı ve onunla birlikte inananları rahmetimizle kurtardık. Ve haksızlık edenleri Sayha yakaladı.\" (11:94) Cezâ indi. Bir deprem veya sayha onları yok etti. Haksızlar helak oldu.",
+    "conclusion": "Şuayb ve müminler kurtarıldı. Cezadan önce bölgeden ayrıldılar. Kâfirler yok edildi. Medyen nesiller için bir ders oldu.",
+    "moral_lesson": "Bu hikaye bize haksızlık ve peygamberleri reddetmenin yıkıma götürdüğünü öğretir. Sadece müminler kurtarılır.",
+    "historical_location": "Medyen",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "shuayb_destruction_chapter_1",
+        "title": "Cezâ",
+        "content": "Kur'an şöyle bildirir: \"Ve Sayha onları yakaladı. Evlerinde cansız yatıyorlardı. Sanki orada hiç yaşamamışlardı.\" (11:94-95) Allah'ın cezası Medyen'e indi. Bir sayha veya deprem onları yok etti. Bir anda helak oldular. Evleri mezarları oldu. Allah'ın adaleti yerine geldi."
+      },
+      {
+        "id": "shuayb_destruction_chapter_2",
+        "title": "Müminlerin kurtuluşu",
+        "content": "Kur'an şöyle buyurur: \"Şuayb'ı ve onunla birlikte inananları rahmetimizle kurtardık.\" (11:94) Şuayb ve müminler bağışlandı. Allah onları korudu. Cezadan önce ayrıldılar. Başka yerde sığınak buldular. Allah'ın rahmeti müminleri kuşatır."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Kuran 11:94",
+        "reference_text": "Hud Suresi, 94. ayet",
+        "content": "وَلَمَّا جَآءَ أَمْرُنَا نَجَّيْنَا شُعَيْبًۭا وَٱلَّذِينَ ءَامَنُوا۟ مَعَهُۥ بِرَحْمَةٍۢ مِّنَّا وَأَخَذَتِ ٱلَّذِينَ ظَلَمُوا۟ ٱلصَّيْحَةُ",
+        "translation": "When Our command came, We saved Shu'ayb and those who had believed with him. The Cry seized the unjust.",
+        "relevance": "Bu ayet kurtuluş ve cezayı anlatır."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Kuran 7:91-92",
+        "reference_text": "Araf Suresi, 91-92. ayetler",
+        "content": "فَأَخَذَتْهُمُ ٱلرَّجْفَةُ فَأَصْبَحُوا۟ فِى دَارِهِمْ جَـٰثِمِينَ ۝ ٱلَّذِينَ كَذَّبُوا۟ شُعَيْبًۭا كَأَن لَّمْ يَغْنَوْا۟ فِيهَآ",
+        "translation": "The earthquake seized them. They lay lifeless in their dwellings. As if they had never lived there.",
+        "relevance": "Bu ayet yıkımı anlatır."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Sayha",
+        "arabic_term": "صيحة",
+        "definition": "Sayha. Sayha (veya rajfa) Medyen halkını yok etti.",
+        "pronunciation": "say-ha"
+      },
+      {
+        "id": 2,
+        "term": "Rajfa",
+        "arabic_term": "رجفة",
+        "definition": "Deprem. Rajfa haksızlara indi.",
+        "pronunciation": "raj-fa"
+      }
+    ]
+  },
+  "lessons_from_shuayb": {
+    "title": "Şuayb kıssasından dersler",
+    "title_arabic": "دروس من قصة شعيب",
+    "introduction": "Şuayb ticari adaletin peygamberidir. Kur'an şöyle buyurur: \"Ve Medyen'e kardeşleri Şuayb'ı.\" (7:85) Kavmini dürüstlüğe çağırdı. Hileyle savaştı. Kıssası ticarette adaletin dini bir zorunluluk olduğunu öğretir.",
+    "conclusion": "Şuayb adalete çağırdı. Reddedildi. Cezâ indi. Müminler kurtarıldı. Medyen kıssası ebedi bir uyarıdır.",
+    "moral_lesson": "Bu hikaye bize ticarette hilenin ağır bir günah olduğunu öğretir. Mümin tüm işlemlerinde dürüst olmalıdır.",
+    "historical_location": "Medyen",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lessons_from_shuayb_chapter_1",
+        "title": "Ticari adalet",
+        "content": "Kur'an şöyle buyurur: \"Ölçüyü ve tartıyı tam yapın. İnsanların haklarını eksiltmeyin.\" (7:85) Şuayb dürüstlükte ısrar etti. Müslüman tüccar adil olmalıdır. Tartıda, ölçüde veya fiyatlarda hile yasaktır. Güven kutsaldır. İslam ticarette dürüstlük talep eder."
+      },
+      {
+        "id": "lessons_from_shuayb_chapter_2",
+        "title": "Haksızlığın sonuçları",
+        "content": "Medyen halkı reddetti. Dolandırıcılıkta ısrar etti. Cezâ onları yok etti. Kur'an hatırlatır: \"Ve nice şehirler yok ettik! Cezamız onlara gece geldi.\" (7:4) Toplu haksızlık cezayı çeker. Sadece adalet ve iman kurtuluşu sağlar."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Kuran 7:85-93",
+        "reference_text": "Araf Suresi, 85-93. ayetler",
+        "content": "وَإِلَىٰ مَدْيَنَ أَخَاهُمْ شُعَيْبًۭا ۚ قَالَ يَـٰقَوْمِ ٱعْبُدُوا۟ ٱللَّهَ",
+        "translation": "And to Madyan, their brother Shu'ayb. He said: O my people! Worship Allah.",
+        "relevance": "Bu pasaj Şuayb'ın kıssasını özetler."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Kuran 11:94-95",
+        "reference_text": "Hud Suresi, 94-95. ayetler",
+        "content": "نَجَّيْنَا شُعَيْبًۭا وَٱلَّذِينَ ءَامَنُوا۟ مَعَهُۥ بِرَحْمَةٍۢ مِّنَّا",
+        "translation": "We saved Shu'ayb and those who had believed with him by mercy.",
+        "relevance": "Bu pasaj müminlerin kurtuluşunu anlatır."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Adl",
+        "arabic_term": "عدل",
+        "definition": "Adalet. Şuayb ticarette adl'e çağırdı.",
+        "pronunciation": "adl"
+      },
+      {
+        "id": 2,
+        "term": "Bakhs",
+        "arabic_term": "بخس",
+        "definition": "Eksiltme, dolandırıcılık. Tabakhasa = ölçülerde hile yapmak.",
+        "pronunciation": "bakhs"
+      }
+    ]
+  }
+}

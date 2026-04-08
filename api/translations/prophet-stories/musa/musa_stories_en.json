@@ -1,0 +1,748 @@
+{
+  "musa_birth": {
+    "title": "The Birth of Musa and Pharaoh's Palace",
+    "title_arabic": "مولد موسى وقصر فرعون",
+    "introduction": "Musa (موسى عليه السلام) is one of the greatest prophets mentioned in the Quran. Allah says: \"We relate to you in truth the story of Moses and Pharaoh, for people who believe.\" (28:3) Pharaoh ordered the killing of all newborn males among the Children of Israel. Musa's mother put him in a chest and entrusted him to the river. The chest was found by Pharaoh's household.",
+    "conclusion": "Musa grew up in Pharaoh's palace, nursed by his own mother whom Allah had inspired. He received wisdom and knowledge. His destiny was traced by the Creator.",
+    "moral_lesson": "This story teaches us that Allah protects those He chooses. The divine plan is fulfilled despite the plots of tyrants.",
+    "historical_location": "Ancient Egypt",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "musa_birth_chapter_1",
+        "title": "Pharaoh's Decree",
+        "content": "The Quran reports: \"Pharaoh was arrogant in the land; he had divided his people into factions to weaken a group among them, slaughtering their sons and sparing their women. He was among the corrupters.\" (28:4) Pharaoh feared that the Children of Israel would grow strong. He ordered the killing of all newborn boys. Musa's mother received divine inspiration."
+      },
+      {
+        "id": "musa_birth_chapter_2",
+        "title": "The Chest on the Nile",
+        "content": "The Quran says: \"And We inspired the mother of Moses: Nurse him. And when you fear for him, cast him into the river. And do not fear or grieve. We will return him to you and make him one of the messengers.\" (28:7) She put Musa in a chest and entrusted him to the Nile. Musa's sister followed from afar. The chest was found by Pharaoh's wife who said: \"A joy for me and for you! Do not kill him. He may be useful to us, or we may adopt him as a son.\" (28:9)"
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 28:4",
+        "reference_text": "Surah Al-Qasas, verse 4",
+        "content": "إِنَّ فِرْعَوْنَ عَلَا فِى ٱلْأَرْضِ وَجَعَلَ أَهْلَهَا شِيَعًۭا يَسْتَضْعِفُ طَآئِفَةًۭ مِّنْهُمْ يُذَبِّحُ أَبْنَآءَهُمْ وَيَسْتَحْىِۦ نِسَآءَهُمْ ۚ إِنَّهُۥ كَانَ مِنَ ٱلْمُفْسِدِينَ",
+        "translation": "Pharaoh was arrogant in the land; he had divided his people into factions, slaughtering their sons and sparing their women.",
+        "relevance": "This verse describes Pharaoh's tyranny."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 28:7",
+        "reference_text": "Surah Al-Qasas, verse 7",
+        "content": "وَأَوْحَيْنَآ إِلَىٰٓ أُمِّ مُوسَىٰٓ أَنْ أَرْضِعِيهِ ۖ فَإِذَا خِفْتِ عَلَيْهِ فَأَلْقِيهِ فِى ٱلْيَمِّ وَلَا تَخَافِى وَلَا تَحْزَنِى ۖ إِنَّا رَآدُّوهُ إِلَيْكِ وَجَاعِلُوهُ مِنَ ٱلْمُرْسَلِينَ",
+        "translation": "And We inspired the mother of Moses: Nurse him. And when you fear for him, cast him into the river. And do not fear or grieve. We will return him to you and make him one of the messengers.",
+        "relevance": "This verse shows divine protection of Musa."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Musa",
+        "arabic_term": "موسى",
+        "definition": "Moses in Arabic. Prophet of Allah, messenger sent to Pharaoh.",
+        "pronunciation": "mou-sa"
+      },
+      {
+        "id": 2,
+        "term": "Fir'awn",
+        "arabic_term": "فرعون",
+        "definition": "Pharaoh. The tyrant of Egypt who opposed Musa.",
+        "pronunciation": "fi-raoune"
+      }
+    ]
+  },
+  "musa_flee": {
+    "title": "Musa's Flight to Madyan",
+    "title_arabic": "هروب موسى إلى مدين",
+    "introduction": "Musa grew up in the palace. One day, he intervened to help an Israelite and struck an Egyptian who died. Musa regretted his act and invoked Allah's forgiveness. He left Egypt and headed for Madyan.",
+    "conclusion": "In Madyan, Musa helped Shu'ayb's two daughters water their sheep. Their father offered him hospitality and one of his daughters in marriage. Musa stayed ten years in Madyan before Allah called him.",
+    "moral_lesson": "This story teaches us that sincere repentance leads to forgiveness. Allah guides those who seek Him.",
+    "historical_location": "From Egypt to Madyan",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "musa_flee_chapter_1",
+        "title": "The Incident and Repentance",
+        "content": "The Quran reports: \"And he entered the city at a time of inattention of its people. He found there two men fighting: one was from his party, the other from his enemies. The one from his party called him for help against the one from his enemies. Moses struck him and caused his death. He said: This is the work of Satan. He is a manifest enemy who leads astray.\" (28:15) Musa invoked: \"My Lord! I have wronged myself. Forgive me!\" (28:16) Allah forgave him."
+      },
+      {
+        "id": "musa_flee_chapter_2",
+        "title": "Madyan and Shu'ayb",
+        "content": "The Quran says: \"Then he headed for Madyan. He said: Perhaps my Lord will guide me to the straight path.\" (28:22) Upon reaching the watering place, he helped two women water their flock. They said: \"Our father is an old man.\" Musa watered for them. Their father (Shu'ayb) offered him hospitality and said: \"I wish to marry you to one of my two daughters.\" (28:27) Musa accepted and stayed ten years."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 28:15-16",
+        "reference_text": "Surah Al-Qasas, verses 15-16",
+        "content": "وَدَخَلَ ٱلْمَدِينَةَ عَلَىٰ حِينِ غَفْلَةٍۢ مِّنْ أَهْلِهَا فَوَجَدَ فِيهَا رَجُلَيْنِ يَقْتَتِلَانِ",
+        "translation": "And he entered the city at a time of inattention. He found there two men fighting. Moses struck and caused death. He said: This is the work of Satan.",
+        "relevance": "This verse describes the incident and Musa's repentance."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 28:27",
+        "reference_text": "Surah Al-Qasas, verse 27",
+        "content": "قَالَ إِنِّىٓ أُرِيدُ أَنْ أُنكِحَكَ إِحْدَى ٱبْنَتَىَّ هَـٰتَيْنِ",
+        "translation": "I wish to marry you to one of my two daughters.",
+        "relevance": "Shu'ayb offers his daughter in marriage to Musa."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Madyan",
+        "arabic_term": "مدين",
+        "definition": "Midian. Region where Musa found refuge after leaving Egypt.",
+        "pronunciation": "ma-diyane"
+      },
+      {
+        "id": 2,
+        "term": "Shu'ayb",
+        "arabic_term": "شعيب",
+        "definition": "Jethro. The prophet or sage of Madyan who welcomed Musa.",
+        "pronunciation": "chou-ayb"
+      }
+    ]
+  },
+  "musa_burning_bush": {
+    "title": "The Burning Bush and the Revelation",
+    "title_arabic": "العليقة المحترقة والوحي",
+    "introduction": "After ten years in Madyan, Musa left with his family. He saw a fire on the slope of Mount Tur. He approached it and Allah spoke to him: \"O Moses! I am your Lord.\" (20:12) This was the beginning of his prophetic mission.",
+    "conclusion": "Allah gave Musa two signs: his staff that turned into a serpent, and his hand that became white when he drew it from his bosom. Musa asked that Harun (Aaron) accompany him. Allah granted his request.",
+    "moral_lesson": "This story teaches us that Allah chooses His messengers and equips them with signs. The prophetic mission is an honor and a responsibility.",
+    "historical_location": "Mount Tur (Sinai)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "musa_burning_bush_chapter_1",
+        "title": "The Call at Mount Tur",
+        "content": "The Quran reports: \"When he saw a fire, he said to his family: Stay here. I have seen a fire. Perhaps I will bring you a torch from it or find guidance at the fire.\" (28:29) When he approached, a voice called him: \"O Moses! I am your Lord. Remove your sandals. You are in the sacred valley of Tuwa.\" (20:11-12) Musa received the order to go to Pharaoh: \"Go to Pharaoh. He has transgressed.\" (20:24)"
+      },
+      {
+        "id": "musa_burning_bush_chapter_2",
+        "title": "The Signs: the Staff and the Hand",
+        "content": "The Quran says: \"What is in your right hand? — It is my staff upon which I lean and with which I beat down leaves for my sheep.\" (20:17-18) Allah said: \"Cast it down, Moses!\" He cast it and behold it became a serpent slithering. \"Seize it and fear not. We will return it to its former state.\" (20:19-21) Then: \"Put your hand in your bosom. It will come out white without harm.\" (20:22) These two signs were to convince Pharaoh."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 20:11-12",
+        "reference_text": "Surah Taha, verses 11-12",
+        "content": "فَلَمَّآ أَتَىٰهَا نُودِىَ يَـٰمُوسَىٰٓ إِنِّىٓ أَنَا رَبُّكَ فَٱخْلَعْ نَعْلَيْكَ ۖ إِنَّكَ بِٱلْوَادِ ٱلْمُقَدَّسِ طُوًى",
+        "translation": "O Moses! I am your Lord. Remove your sandals. You are in the sacred valley of Tuwa.",
+        "relevance": "The revelation to Musa at the burning bush."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 20:19-21",
+        "reference_text": "Surah Taha, verses 19-21",
+        "content": "وَأَلْقِ عَصَاكَ ۚ فَلَمَّا رَءَاهَا تَهْتَزُّ كَأَنَّهَا جَآنٌّ وَلَّىٰ مُدْبِرًۭا وَلَمْ يُعَقِّبْ",
+        "translation": "Cast it down, Moses! He cast it and behold it became a serpent slithering.",
+        "relevance": "The first sign: the staff transformed into a serpent."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Tur",
+        "arabic_term": "طور",
+        "definition": "Mount Sinai. The mountain where Musa received the revelation.",
+        "pronunciation": "tour"
+      },
+      {
+        "id": 2,
+        "term": "Asa",
+        "arabic_term": "عصا",
+        "definition": "Staff. Musa's staff that became a serpent by Allah's will.",
+        "pronunciation": "a-sa"
+      }
+    ]
+  },
+  "musa_pharaoh": {
+    "title": "Musa Before Pharaoh",
+    "title_arabic": "موسى أمام فرعون",
+    "introduction": "Musa and Harun went to Pharaoh with Allah's signs. Pharaoh mocked and summoned his magicians. The magicians threw their ropes which seemed to turn into serpents. Then Musa threw his staff which devoured what they had fabricated.",
+    "conclusion": "The magicians prostrated and said: \"We believe in the Lord of Aaron and Moses.\" (20:70) Pharaoh threatened them, but their faith was firm. Pharaoh refused to believe and persisted in his arrogance.",
+    "moral_lesson": "This story teaches us that truth triumphs over falsehood. Allah's signs are more powerful than the artifices of men.",
+    "historical_location": "Egypt",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "musa_pharaoh_chapter_1",
+        "title": "The Call to Pharaoh",
+        "content": "The Quran reports: \"Go, you and your brother, with My signs. And do not slacken in My remembrance. Go to Pharaoh. He has transgressed. Then speak to him gently. Perhaps he will remember or fear.\" (20:42-44) Musa said to Pharaoh: \"We are the messengers of your Lord. Let the Children of Israel go with us.\" (20:47) Pharaoh replied: \"Did we not raise you among us when you were a child?\" (26:18) Musa answered: \"It is Allah who granted me wisdom and made me a messenger.\" (26:21)"
+      },
+      {
+        "id": "musa_pharaoh_chapter_2",
+        "title": "The Challenge of the Magicians",
+        "content": "The Quran says: \"Pharaoh said: Bring me every learned magician.\" (10:79) The magicians threw their ropes and staffs. They said: \"By the might of Pharaoh, we will be the victors.\" (26:44) Musa threw his staff. It devoured what they had fabricated. The magicians fell prostrate and said: \"We believe in the Lord of the worlds, the Lord of Aaron and Moses.\" (20:70) Pharaoh was furious but truth had triumphed."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 20:47",
+        "reference_text": "Surah Taha, verse 47",
+        "content": "إِنَّا رَسُولَا رَبِّكَ فَأَرْسِلْ مَعَنَا بَنِىٓ إِسْرَٰٓءِيلَ وَلَا تُعَذِّبْهُمْ",
+        "translation": "We are the messengers of your Lord. Let the Children of Israel go with us.",
+        "relevance": "Musa's call to Pharaoh."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 20:70",
+        "reference_text": "Surah Taha, verse 70",
+        "content": "فَأُلْقِىَ ٱلسَّحَرَةُ سُجَّدًۭا قَالُوٓا۟ ءَامَنَّا بِرَبِّ هَـٰرُونَ وَمُوسَىٰ",
+        "translation": "The magicians fell prostrate and said: We believe in the Lord of Aaron and Moses.",
+        "relevance": "The magicians' conversion after seeing the sign."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Harun",
+        "arabic_term": "هارون",
+        "definition": "Aaron. Musa's brother, his support in the mission.",
+        "pronunciation": "ha-roune"
+      },
+      {
+        "id": 2,
+        "term": "Bani Israil",
+        "arabic_term": "بنو إسرائيل",
+        "definition": "The Children of Israel. The people Musa was to liberate.",
+        "pronunciation": "banou is-ra-il"
+      }
+    ]
+  },
+  "musa_plagues": {
+    "title": "The Plagues of Egypt",
+    "title_arabic": "آيات مصر",
+    "introduction": "Pharaoh refused to free the Children of Israel despite the signs. Allah sent plagues upon Egypt. The Quran says: \"So We struck them with floods, locusts, lice, frogs, and blood, as clear signs. But they persisted in arrogance and were a wicked people.\" (7:133)",
+    "conclusion": "With each plague, Pharaoh begged Musa to intercede. Musa would invoke Allah and the plague would cease. But Pharaoh broke his promise as soon as the affliction lifted. His heart remained hardened.",
+    "moral_lesson": "This story teaches us that Allah manifests His signs to guide, but pride can blind. Sincere repentance must precede deliverance.",
+    "historical_location": "Egypt",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "musa_plagues_chapter_1",
+        "title": "The Signs Sent",
+        "content": "The Quran reports: \"So We struck them with floods, locusts, lice, frogs, and blood, as clear signs.\" (7:133) These plagues struck Egypt one by one. The Nile turned to blood. Frogs invaded the dwellings. Lice and locusts devastated. Each sign was proof of Allah's power and a warning for Pharaoh."
+      },
+      {
+        "id": "musa_plagues_chapter_2",
+        "title": "Pharaoh's Hardening",
+        "content": "The Quran says: \"And every time We inflicted a punishment upon them, they said: O Moses! Invoke your Lord for us by the covenant He has made with you. If you remove the punishment, we will believe in you and let the Children of Israel go with you. And when We removed the punishment for a term they were to reach, behold they broke their promise.\" (7:134-135) Pharaoh never kept his word. His heart remained hardened until the end."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 7:133",
+        "reference_text": "Surah Al-A'raf, verse 133",
+        "content": "فَأَرْسَلْنَا عَلَيْهِمُ ٱلطُّوفَانَ وَٱلْجَرَادَ وَٱلْقُمَّلَ وَٱلضَّفَادِعَ وَٱلدَّمَ",
+        "translation": "So We struck them with floods, locusts, lice, frogs, and blood.",
+        "relevance": "The plagues sent upon Egypt."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 7:134-135",
+        "reference_text": "Surah Al-A'raf, verses 134-135",
+        "content": "وَمَا نُرْسِلُ بِٱلْـَٔايَـٰتِ إِلَّا تَخْوِيفًۭا",
+        "translation": "Every time a plague struck them, they asked Musa to invoke. Then they broke their promise.",
+        "relevance": "Pharaoh's hardening."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Ayat",
+        "arabic_term": "آيات",
+        "definition": "Signs. The plagues were signs of Allah for Pharaoh.",
+        "pronunciation": "a-ya"
+      },
+      {
+        "id": 2,
+        "term": "Tufan",
+        "arabic_term": "الطوفان",
+        "definition": "The flood. One of the plagues sent upon Egypt.",
+        "pronunciation": "at-tou-fan"
+      }
+    ]
+  },
+  "musa_exodus": {
+    "title": "The Exodus and the Crossing of the Sea",
+    "title_arabic": "الخروج وعبور البحر",
+    "introduction": "After the plagues, Pharaoh let the Children of Israel go. Then he changed his mind and pursued them with his army. The Children of Israel found themselves trapped between the sea and Pharaoh's army. Musa received the order to strike the sea with his staff.",
+    "conclusion": "The sea parted and the Children of Israel crossed on dry land. Pharaoh and his army pursued them. The sea closed over them. Pharaoh, as he was drowning, said: \"I believe that there is no deity except Him in whom the Children of Israel believe.\" (10:90) But it was too late.",
+    "moral_lesson": "This story teaches us that Allah saves the believers and destroys the tyrants. The sea obeys His command.",
+    "historical_location": "Red Sea",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "musa_exodus_chapter_1",
+        "title": "Pharaoh's Pursuit",
+        "content": "The Quran reports: \"And We inspired Moses: Depart by night with My servants. For you will be pursued.\" (26:52) Pharaoh mobilized his troops and pursued them. The Children of Israel said: \"We will be overtaken.\" Musa replied: \"Never! My Lord is with me. He will guide me.\" (26:62) Allah commanded Musa: \"Strike the sea with your staff.\" It parted and each part was like a great mountain."
+      },
+      {
+        "id": "musa_exodus_chapter_2",
+        "title": "Pharaoh's Drowning",
+        "content": "The Quran says: \"We made the Children of Israel cross the sea. Pharaoh and his armies pursued them in rebellion and hostility. Then, when drowning overtook him, he said: I believe that there is no deity except Him in whom the Children of Israel believe. And I am of those who submit. Now? When you had disobeyed before and were of the corrupters! Today We save you in your body that you may be a sign for those who come after you.\" (10:90-92) Pharaoh perished. The Children of Israel were saved."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 26:52",
+        "reference_text": "Surah Ash-Shu'ara, verse 52",
+        "content": "وَأَوْحَيْنَآ إِلَىٰ مُوسَىٰٓ أَنْ أَسْرِ بِعِبَادِىٓ إِنَّكُم مُّتَّبَعُونَ",
+        "translation": "And We inspired Moses: Depart by night with My servants. For you will be pursued.",
+        "relevance": "The order to leave Egypt."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 10:90-92",
+        "reference_text": "Surah Yunus, verses 90-92",
+        "content": "حَتَّىٰٓ إِذَآ أَدْرَكَهُ ٱلْغَرَقُ قَالَ ءَامَنْتُ أَنَّهُۥ لَآ إِلَـٰهَ إِلَّا ٱلَّذِىٓ ءَامَنَتْ بِهِۦ بَنُوٓا۟ إِسْرَٰٓءِيلَ",
+        "translation": "When drowning overtook him, he said: I believe that there is no deity except Him in whom the Children of Israel believe.",
+        "relevance": "Pharaoh's late repentance."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Yamm",
+        "arabic_term": "يم",
+        "definition": "Sea. The sea that Musa crossed with his people.",
+        "pronunciation": "yamm"
+      },
+      {
+        "id": 2,
+        "term": "Fir'awn",
+        "arabic_term": "فرعون",
+        "definition": "Pharaoh. His body was preserved as a sign for generations.",
+        "pronunciation": "fi-raoune"
+      }
+    ]
+  },
+  "musa_desert": {
+    "title": "The Desert: Water, Manna and Quails",
+    "title_arabic": "الماء والمن والسلوى",
+    "introduction": "In the Sinai desert, the Children of Israel were thirsty and hungry. Allah provided for their needs. The Quran says: \"And when Moses asked for water for his people, We said: Strike the rock with your staff. And there gushed forth twelve springs.\" (2:60) He also sent manna and quails, and protected them with clouds.",
+    "conclusion": "Allah says: \"Eat of the good things We have provided for you.\" (7:160) Despite these blessings, part of the people complained and disobeyed. Gratitude is a trial for the hearts.",
+    "moral_lesson": "This story teaches us that Allah provides for the needs of His servants. Manna and quails are blessings to be remembered.",
+    "historical_location": "Sinai Desert",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "musa_desert_chapter_1",
+        "title": "Water from the Rock",
+        "content": "The Quran reports: \"And We revealed to Moses, when his people asked him for water: Strike the rock with your staff. And there gushed forth twelve springs. Each tribe knew where to drink.\" (7:160) Musa struck the rock with his staff. Twelve springs gushed forth — one for each tribe of Israel. The miracle of water in the arid desert."
+      },
+      {
+        "id": "musa_desert_chapter_2",
+        "title": "Manna and Quails",
+        "content": "The Quran says: \"And We shaded you with clouds. And We sent down upon you manna and quails. Eat of the good things We have provided for you.\" (2:57, 7:160) Manna (المن) was a celestial food. Quails (السلوى) were birds. Allah protected them with clouds. Despite all this, some complained and asked for vegetables as in Egypt."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 7:160",
+        "reference_text": "Surah Al-A'raf, verse 160",
+        "content": "وَأَوْحَيْنَآ إِلَىٰ مُوسَىٰٓ إِذِ ٱسْتَسْقَىٰهُ قَوْمُهُۥٓ أَنِ ٱضْرِب بِّعَصَاكَ ٱلْحَجَرَ ۖ فَٱنۢبَجَسَتْ مِنْهُ ٱثْنَتَا عَشْرَةَ عَيْنًۭا",
+        "translation": "And We revealed to Moses, when his people asked him for water: Strike the rock with your staff. And there gushed forth twelve springs.",
+        "relevance": "The miraculous water from the rock."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 2:57",
+        "reference_text": "Surah Al-Baqarah, verse 57",
+        "content": "وَظَلَّلْنَا عَلَيْكُمُ ٱلْغَمَامَ وَأَنزَلْنَا عَلَيْكُمُ ٱلْمَنَّ وَٱلسَّلْوَىٰ",
+        "translation": "And We shaded you with clouds. And We sent down upon you manna and quails.",
+        "relevance": "Manna and quails."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Al-Mann",
+        "arabic_term": "المن",
+        "definition": "Manna. Celestial food sent to the Children of Israel.",
+        "pronunciation": "al-mann"
+      },
+      {
+        "id": 2,
+        "term": "As-Salwa",
+        "arabic_term": "السلوى",
+        "definition": "Quails. Birds sent as food in the desert.",
+        "pronunciation": "as-sal-wa"
+      }
+    ]
+  },
+  "musa_tablets": {
+    "title": "The Revelation of the Tablets (Tawrat)",
+    "title_arabic": "وحي الألواح والتوراة",
+    "introduction": "After crossing the sea, Musa led his people toward Mount Tur (Sinai). Allah called him to speak to him and reveal the Tawrat (the Torah). The Quran says: \"And We wrote for him on the tablets an exhortation concerning all things.\" (7:145) Musa was absent for forty nights.",
+    "conclusion": "Allah spoke directly to Musa. This is a unique honor among the prophets. The tablets contained guidance and mercy for the Children of Israel. During his absence, a trial awaited his people.",
+    "moral_lesson": "This story teaches us that divine revelation is the source of all guidance. The Tawrat, like the Quran, is a light for humanity.",
+    "historical_location": "Mount Tur (Sinai)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "musa_tablets_chapter_1",
+        "title": "The Call to Mount Tur",
+        "content": "The Quran reports: \"And We gave Moses the Book after We had destroyed the earlier generations, as proofs for the people, guidance and mercy.\" (28:43) Musa ascended Mount Tur to receive the revelation. Allah says: \"And We made an appointment with Moses for thirty nights. And We completed them with ten.\" (7:142) Forty nights during which Allah spoke to him."
+      },
+      {
+        "id": "musa_tablets_chapter_2",
+        "title": "The Tablets and the Tawrat",
+        "content": "The Quran says: \"And We wrote for him on the tablets an exhortation concerning all things and a detailed explanation of all things. So take them with firmness and command your people to take the best of them.\" (7:145) The Tawrat is the Book revealed to Musa. The tablets contained the commandments, guidance, and wisdom. Allah spoke to Musa (كَلَّمَ اللَّهُ مُوسَىٰ تَكْلِيمًا) — a direct speech, an immense honor."
+      },
+      {
+        "id": "musa_tablets_chapter_3",
+        "title": "The Request to See Allah",
+        "content": "The Quran reports: \"And when Moses came to Our appointment and his Lord spoke to him, he said: O my Lord! Show Yourself to me that I may see You. He said: You will not see Me. But look at the mountain: if it remains in its place, then you will see Me.\" (7:143) When Allah manifested Himself to the mountain, it crumbled to dust and Musa fell unconscious. Upon awakening, he said: \"Glory to You! I repent and I am the first of the believers.\""
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 7:142",
+        "reference_text": "Surah Al-A'raf, verse 142",
+        "content": "وَوَٰعَدْنَا مُوسَىٰ ثَلَٰثِينَ لَيْلَةًۭ وَأَتْمَمْنَٰهَا بِعَشْرٍۢ",
+        "translation": "And We made an appointment with Moses for thirty nights. And We completed them with ten.",
+        "relevance": "The forty nights of Musa on Mount Tur."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 7:145",
+        "reference_text": "Surah Al-A'raf, verse 145",
+        "content": "وَكَتَبْنَا لَهُۥ فِى ٱلْأَلْوَاحِ مِن كُلِّ شَىْءٍۢ مَّوْعِظَةًۭ وَتَفْصِيلًۭا لِّكُلِّ شَىْءٍۢ",
+        "translation": "And We wrote for him on the tablets an exhortation concerning all things and a detailed explanation of all things.",
+        "relevance": "The revelation of the tablets."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Alwah",
+        "arabic_term": "الألواح",
+        "definition": "The tablets. On which Allah inscribed the Tawrat for Musa.",
+        "pronunciation": "al-al-wah"
+      },
+      {
+        "id": 2,
+        "term": "Tawrat",
+        "arabic_term": "التوراة",
+        "definition": "The Torah. The Book revealed to Musa (Moses).",
+        "pronunciation": "at-taw-ra"
+      }
+    ]
+  },
+  "musa_samiri": {
+    "title": "The Trial of the Samiri and the Golden Calf",
+    "title_arabic": "فتنة السامري والعجل",
+    "introduction": "While Musa was on Mount Tur, the Samiri (السامري) took advantage of his absence. He collected the people's jewelry and fashioned a golden calf that made a lowing sound. Part of the Children of Israel worshipped it. The Quran says: \"And the people of Moses adopted after him a calf made of their ornaments.\" (7:148)",
+    "conclusion": "Upon his return, Musa was angry. He destroyed the calf, confronted the Samiri, and ordered the believers to repent. The Samiri was banished. Harun had tried to dissuade them but was not heeded.",
+    "moral_lesson": "This story teaches us that idolatry can arise in the absence of guides. One must remain firm in faith and not succumb to temptations.",
+    "historical_location": "Sinai Desert",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "musa_samiri_chapter_1",
+        "title": "The Samiri's Calf",
+        "content": "The Quran reports: \"He said: I perceived what they did not perceive. I took a handful from the messenger's trace and cast it. Thus did my soul prompt me.\" (20:96) The Samiri claimed to have followed an inspiration. He fashioned a golden calf from the people's ornaments. The calf made a sound — perhaps through a trick. Part of the people said: \"This is your god and the god of Moses.\" (20:88)"
+      },
+      {
+        "id": "musa_samiri_chapter_2",
+        "title": "Musa's Anger and Repentance",
+        "content": "The Quran says: \"And when Moses returned to his people, angry and grieved, he said: What an evil successor you have been after me! Did you seek to hasten the command of your Lord?\" (7:150) Musa threw down the tablets, took his brother Harun by the head and pulled him toward him. Harun explained that he had not been heeded. Musa destroyed the calf and cast it into the sea. The Samiri was banished: \"Go! For in life you will say: Touch me not!\" (20:97)"
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 20:85-88",
+        "reference_text": "Surah Taha, verses 85-88",
+        "content": "قَالَ فَإِنَّا قَدْ فَتَنَّا قَوْمَكَ مِنۢ بَعْدِكَ وَأَضَلَّهُمُ ٱلسَّامِرِىُّ",
+        "translation": "We have tried your people after your departure. And the Samiri has led them astray.",
+        "relevance": "The trial during Musa's absence."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 20:97",
+        "reference_text": "Surah Taha, verse 97",
+        "content": "قَالَ فَٱذْهَبْ فَإِنَّ لَكَ فِى ٱلْحَيَوٰةِ أَن تَقُولَ لَا مِسَاسَ",
+        "translation": "Go! For in life you will say: Touch me not!",
+        "relevance": "The Samiri's punishment."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "As-Samiri",
+        "arabic_term": "السامري",
+        "definition": "The Samiri. The one who fashioned the golden calf and led the people astray.",
+        "pronunciation": "as-sa-mi-ri"
+      },
+      {
+        "id": 2,
+        "term": "Al-Ijl",
+        "arabic_term": "العجل",
+        "definition": "The calf. The golden idol fashioned by the Samiri.",
+        "pronunciation": "al-idjl"
+      }
+    ]
+  },
+  "musa_qarun": {
+    "title": "Qarun (Korah) and the Arrogance of Wealth",
+    "title_arabic": "قارون والكبر",
+    "introduction": "Qarun (قارون) was from the people of Musa. Allah had granted him immense treasures. The Quran says: \"Indeed, Qarun was from the people of Moses, but he oppressed them. We had given him such treasures that the keys alone would have been a burden for a band of strong men.\" (28:76)",
+    "conclusion": "Qarun attributed his wealth to himself. He refused advice. Allah caused the earth to swallow him and his dwelling. Those who had envied his riches understood that true success is with Allah.",
+    "moral_lesson": "This story teaches us that wealth is a trial. Pride and ingratitude lead to perdition. True success is piety.",
+    "historical_location": "Sinai Desert",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "musa_qarun_chapter_1",
+        "title": "Qarun's Treasures",
+        "content": "The Quran reports: \"We had given him such treasures that the keys alone would have been a burden for a band of strong men. His people said to him: Do not exult. Allah does not love the arrogant.\" (28:76) Qarun displayed his wealth. The keys to his coffers required several men to carry. He grew proud and forgot that all comes from Allah."
+      },
+      {
+        "id": "musa_qarun_chapter_2",
+        "title": "The Swallowing",
+        "content": "The Quran says: \"So We caused the earth to swallow him and his dwelling. He had no host to help him besides Allah. And he could not help himself.\" (28:81) In the morning, those who had envied his position said: \"Indeed, Allah extends provision to whom He wills and restricts it.\" (28:82) The earth opened and Qarun disappeared with all his treasures."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 28:76",
+        "reference_text": "Surah Al-Qasas, verse 76",
+        "content": "إِنَّ قَٰرُونَ كَانَ مِن قَوْمِ مُوسَىٰ فَبَغَىٰ عَلَيْهِمْ ۖ وَءَاتَيْنَٰهُ مِنَ ٱلْكُنُوزِ مَآ إِنَّ مَفَاتِحَهُۥ لَتَنُوٓأُ بِٱلْعُصْبَةِ أُوْلِى ٱلْقُوَّةِ",
+        "translation": "Qarun was from the people of Moses, but he oppressed them. We had given him treasures whose keys were heavy.",
+        "relevance": "Qarun's treasures."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 28:81",
+        "reference_text": "Surah Al-Qasas, verse 81",
+        "content": "فَخَسَفْنَا بِهِۦ وَبِدَارِهِ ٱلْأَرْضَ",
+        "translation": "So We caused the earth to swallow him and his dwelling.",
+        "relevance": "Qarun's punishment."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Qarun",
+        "arabic_term": "قارون",
+        "definition": "Korah. A wealthy man from Musa's people, swallowed by the earth for his pride.",
+        "pronunciation": "qa-roun"
+      },
+      {
+        "id": 2,
+        "term": "Kunuz",
+        "arabic_term": "الكنوز",
+        "definition": "Treasures. The immense wealth of Qarun.",
+        "pronunciation": "al-kou-nouz"
+      }
+    ]
+  },
+  "musa_cow": {
+    "title": "The Story of the Cow",
+    "title_arabic": "قصة البقرة",
+    "introduction": "A murder was committed among the Children of Israel. To discover the culprit, Allah ordered them to sacrifice a cow. The Quran says: \"And when Moses said to his people: Allah commands you to sacrifice a cow. They said: Are you mocking us? He said: I seek refuge in Allah from being among the ignorant.\" (2:67)",
+    "conclusion": "They multiplied questions instead of obeying: what color? what age? etc. Through many difficulties, they finally found a cow that suited. The lesson: simple obedience is better than superfluous questions.",
+    "moral_lesson": "This story teaches us to obey Allah's commands without multiplying difficulties. Excessive questions can complicate what was simple.",
+    "historical_location": "Sinai Desert",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "musa_cow_chapter_1",
+        "title": "Allah's Command",
+        "content": "The Quran reports: \"And when Moses said to his people: Allah commands you to sacrifice a cow. They said: Are you mocking us? He said: I seek refuge in Allah from being among the ignorant.\" (2:67) A murder had occurred. To reveal the culprit, Allah asked them to strike the corpse with a piece of the sacrificed cow. The order was simple: sacrifice a cow."
+      },
+      {
+        "id": "musa_cow_chapter_2",
+        "title": "Superfluous Questions",
+        "content": "The Quran says: \"They said: Call upon your Lord for us to make clear to us what it should be. He said: He says it should be a cow neither too old nor too young, of middle age.\" (2:68) They asked the color: \"a yellow cow\" (2:69). Then: \"that it has not been used for plowing\" (2:71). Through their questions, the task became nearly impossible. They learned that simple obedience would have sufficed."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 2:67",
+        "reference_text": "Surah Al-Baqarah, verse 67",
+        "content": "وَإِذْ قَالَ مُوسَىٰ لِقَوْمِهِۦٓ إِنَّ ٱللَّهَ يَأْمُرُكُمْ أَن تَذْبَحُوا۟ بَقَرَةًۭ",
+        "translation": "And when Moses said to his people: Allah commands you to sacrifice a cow.",
+        "relevance": "The order to sacrifice a cow."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 2:71",
+        "reference_text": "Surah Al-Baqarah, verse 71",
+        "content": "قَالَ إِنَّهُۥ يَقُولُ إِنَّهَا بَقَرَةٌۭ لَّا ذَلُولٌۭ تُثِيرُ ٱلْأَرْضَ وَلَا تَسْقِى ٱلْحَرْثَ",
+        "translation": "He says it must not have been used for plowing the earth or watering the fields.",
+        "relevance": "The criteria for the cow."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Baqara",
+        "arabic_term": "بقرة",
+        "definition": "Cow. Surah Al-Baqarah takes its name from this story.",
+        "pronunciation": "ba-qa-ra"
+      },
+      {
+        "id": 2,
+        "term": "Dhabaha",
+        "arabic_term": "ذبح",
+        "definition": "To sacrifice. The act of slaughtering the cow for Allah.",
+        "pronunciation": "dha-ba-ha"
+      }
+    ]
+  },
+  "musa_khidr": {
+    "title": "The Meeting with Al-Khidr",
+    "title_arabic": "لقاء موسى بالخضر",
+    "introduction": "Musa asked Allah to show him someone who had more knowledge than him. He was guided to Al-Khidr (الخضر) — \"the Green One\" — a servant of Allah endowed with particular knowledge. The Quran says: \"And Moses said to him: May I follow you so that you teach me of what you have been taught concerning right guidance?\" (18:66)",
+    "conclusion": "Al-Khidr accepted on condition that Musa would not ask questions. But Musa could not remain silent in the face of acts that seemed unjust: piercing the boat, killing a boy, repairing a wall without payment. Each time, Al-Khidr explained the hidden wisdom. They parted because Musa had broken his promise.",
+    "moral_lesson": "This story teaches us that divine wisdom exceeds our understanding. What seems evil may hide a good. Patience and trust in Allah are essential.",
+    "historical_location": "Confluence of the two seas (مجمع البحرين)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "musa_khidr_chapter_1",
+        "title": "The Quest for Knowledge",
+        "content": "The Quran reports: \"And when Moses said to his servant: I will not cease to walk until I reach the confluence of the two seas, even if I walk for long years.\" (18:60) Musa was seeking Al-Khidr. They met at the confluence of the two seas. Al-Khidr said: \"You will not be able to have patience with me. How could you be patient about things of which you have no comprehensive knowledge?\" (18:67-68) Musa promised not to question."
+      },
+      {
+        "id": "musa_khidr_chapter_2",
+        "title": "The Three Trials",
+        "content": "The Quran says: \"Al-Khidr made a hole in the boat.\" Musa protested. Al-Khidr explained: a tyrannical king was confiscating all sound boats; the hole saved the poor people's boat. Then Al-Khidr killed a boy — because his parents were believers and this boy would have pushed them to disbelief. Finally, he repaired a wall without payment — because beneath it was a treasure belonging to two orphans. Each time, the hidden wisdom was revealed. Musa had broken his promise of silence; they parted."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 18:66",
+        "reference_text": "Surah Al-Kahf, verse 66",
+        "content": "قَالَ لَهُۥ مُوسَىٰ هَلْ أَتَّبِعُكَ عَلَىٰٓ أَن تُعَلِّمَنِ مِمَّا عُلِّمْتَ رُشْدًۭا",
+        "translation": "And Moses said to him: May I follow you so that you teach me of what you have been taught concerning right guidance?",
+        "relevance": "Musa asks to follow Al-Khidr."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 18:78-82",
+        "reference_text": "Surah Al-Kahf, verses 78-82",
+        "content": "قَالَ هَـٰذَا فِرَاقُ بَيْنِى وَبَيْنِكَ",
+        "translation": "Al-Khidr said: This is the parting between you and me.",
+        "relevance": "The parting after the explanations."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Al-Khidr",
+        "arabic_term": "الخضر",
+        "definition": "The Green One. Servant of Allah endowed with particular knowledge, whom Musa met.",
+        "pronunciation": "al-khidr"
+      },
+      {
+        "id": 2,
+        "term": "Majma' al-Bahrayn",
+        "arabic_term": "مجمع البحرين",
+        "definition": "The confluence of the two seas. Place of the meeting between Musa and Al-Khidr.",
+        "pronunciation": "maj-ma' al-bah-rayn"
+      }
+    ]
+  },
+  "lessons_from_musa": {
+    "title": "Lessons from the Story of Musa",
+    "title_arabic": "دروس من قصة موسى",
+    "introduction": "The Quran mentions Musa more than any other prophet. His story teaches trust in Allah, courage in the face of tyranny, and patience in trial. From the plagues of Egypt to the exodus, from manna in the desert to the tablets, from the Samiri to Qarun, from the cow to Al-Khidr — each stage is a lesson.",
+    "conclusion": "Allah says: \"We relate to you in truth the story of Moses and Pharaoh, for people who believe.\" (28:3) The story of Musa is a reminder for those who reflect: Allah is with the believers, and tyrants ultimately perish.",
+    "moral_lesson": "This story teaches us that truth always triumphs. Whoever trusts in Allah will be protected and guided.",
+    "historical_location": "Egypt and Sinai Peninsula",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lessons_from_musa_chapter_1",
+        "title": "A Sign for the Believers",
+        "content": "The Quran says: \"In the story of Moses and Pharaoh, there are signs for people who believe.\" (28:3) Musa was protected from birth. He grew up in his enemy's house. He received revelation at the burning bush. He faced the most powerful tyrant of his time. Each stage shows that Allah fulfills His promise."
+      },
+      {
+        "id": "lessons_from_musa_chapter_2",
+        "title": "The End of Tyrants",
+        "content": "The Quran concludes: \"Thus We relate the stories of past peoples. And from Us has come to them a clear proof.\" (28:36) Pharaoh had exalted himself to the rank of deity. He oppressed the Children of Israel. But when the hour came, the sea engulfed him. His body was preserved as a sign. The story of Musa reminds us that none can escape Allah's judgment."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 28:3",
+        "reference_text": "Surah Al-Qasas, verse 3",
+        "content": "نَتْلُوا۟ عَلَيْكَ مِن نَّبَإِ مُوسَىٰ وَفِرْعَوْنَ بِٱلْحَقِّ لِقَوْمٍۢ يُؤْمِنُونَ",
+        "translation": "We relate to you in truth the story of Moses and Pharaoh, for people who believe.",
+        "relevance": "The Quran presents this story as a sign."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 28:36",
+        "reference_text": "Surah Al-Qasas, verse 36",
+        "content": "وَكَذَٰلِكَ نَقُصُّ عَلَيْكَ مِنْ أَنۢبَآءِ مَا قَدْ سَبَقَ ۚ وَقَدْ ءَاتَيْنَـٰكَ مِن لَّدُنَّا ذِكْرًۭا",
+        "translation": "Thus We relate the stories of past peoples. And from Our presence has come to them a clear proof.",
+        "relevance": "The stories are proofs for humanity."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Tawakkul",
+        "arabic_term": "توكل",
+        "definition": "Trust in Allah. Musa showed tawakkul in the face of Pharaoh.",
+        "pronunciation": "ta-wak-koul"
+      },
+      {
+        "id": 2,
+        "term": "Ayat",
+        "arabic_term": "آية",
+        "definition": "Sign, verse. Musa's miracles were signs of Allah.",
+        "pronunciation": "a-ya"
+      }
+    ]
+  }
+}

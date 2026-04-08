@@ -12,6 +12,11 @@ interface PrayerTimes {
   Isha: string;
 }
 
+interface PrayerTimesWithTomorrow {
+  today: PrayerTimes;
+  tomorrow: PrayerTimes;
+}
+
 export const usePrayerTimesWidget = () => {
   const [isWidgetAvailable, setIsWidgetAvailable] = useState(false);
 
@@ -46,25 +51,35 @@ export const usePrayerTimesWidget = () => {
 
   // Mettre à jour les horaires de prière dans le widget
   const updatePrayerTimes = useCallback(
-    async (prayerTimes: PrayerTimes) => {
+    async (prayerTimes: PrayerTimesWithTomorrow | PrayerTimes) => {
       if (!isWidgetAvailable || !PrayerTimesWidgetModule) {
         console.log("⚠️ Widget non disponible ou module natif absent");
         return;
       }
 
       try {
-        console.log("🕌 Mise à jour du widget avec les horaires:", prayerTimes);
+        // Support de l'ancien format (PrayerTimes) et du nouveau format (PrayerTimesWithTomorrow)
+        const todayTimes = 'today' in prayerTimes ? prayerTimes.today : prayerTimes;
+        const tomorrowTimes = 'tomorrow' in prayerTimes ? prayerTimes.tomorrow : todayTimes;
+        
+        console.log("🕌 Mise à jour du widget avec les horaires:", { todayTimes, tomorrowTimes });
         
         await PrayerTimesWidgetModule.updatePrayerTimes(
-          prayerTimes.Fajr,
-          prayerTimes.Sunrise,
-          prayerTimes.Dhuhr,
-          prayerTimes.Asr,
-          prayerTimes.Maghrib,
-          prayerTimes.Isha
+          todayTimes.Fajr,
+          todayTimes.Sunrise,
+          todayTimes.Dhuhr,
+          todayTimes.Asr,
+          todayTimes.Maghrib,
+          todayTimes.Isha,
+          tomorrowTimes.Fajr,
+          tomorrowTimes.Sunrise,
+          tomorrowTimes.Dhuhr,
+          tomorrowTimes.Asr,
+          tomorrowTimes.Maghrib,
+          tomorrowTimes.Isha
         );
         
-        console.log("✅ Widget mis à jour avec succès");
+        console.log("✅ Widget mis à jour avec succès (aujourd'hui + demain)");
       } catch (error) {
         console.error("❌ Erreur mise à jour widget horaires:", error);
       }

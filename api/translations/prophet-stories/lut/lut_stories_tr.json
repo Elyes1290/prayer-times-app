@@ -1,0 +1,287 @@
+{
+  "lut_prophecy": {
+    "title": "Lut ve Sodom Kavmine Gönderilmesi",
+    "title_arabic": "لوط عليه السلام وإرساله إلى قوم سدوم",
+    "introduction": "Lut (لوط عليه السلام) Kur'an'da adı geçen peygamberlerden biridir. Allah şöyle buyurur: \"Ve Lut gerçekten elçilerdendi.\" (37:133) Kendisinden önce kimsenin işlemediği bir rezaleti işleyen bir kavme gönderildi. Kur'an onun doğruluğa çağrısını ve kavminin uyarıları reddetmesini anlatır.",
+    "conclusion": "Lut kavmine elçi olarak gönderildi. Samimi çağrısına rağmen kavim rezaletlerinde ısrar etti ve uyarıları reddetti. Allah inat edenler için cezayı hazırladı.",
+    "moral_lesson": "Bu hikaye bize her kavmin rehberlik için elçiler aldığını öğretir. Uyarıları reddetmek helakete götürür.",
+    "historical_location": "Sodom bölgesi (el-Mu'tefikat)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lut_prophecy_chapter_1",
+        "title": "Lut'un Gönderilmesi",
+        "content": "Kur'an Lut'u elçiler arasında tespit eder: \"Ve Lut gerçekten elçilerdendi.\" (37:133) Lut şehirlerde yaşayan bir kavme gönderildi. Kur'an der ki: \"Lut kavmi elçileri yalancı saydı.\" (26:160) Lut kavmini Allah'tan korkmaya ve rezaletleri terk etmeye çağırdı. Israr ederlerse gelecek cezadan onları uyardı."
+      },
+      {
+        "id": "lut_prophecy_chapter_2",
+        "title": "Sodom Kavmi",
+        "content": "Kur'an Lut kavmini tasvir eder: \"Ve Lut, kavmine dediğinde: Alemlerden hiç kimse sizden önce işlemediği bir rezaleti mi işliyorsunuz?\" (7:80) Bu kavim Kur'an'ın «الفاحشة» (el-fahişa) — rezalet dediği fiilleri işliyordu. Lut onları Allah'tan korkmaya ve misafirleri konusunda onu utandırmamaya öğütledi. Ama red ve alayla cevap verdiler."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 37:133",
+        "reference_text": "Saffat Suresi, 133. ayet",
+        "content": "وَإِنَّ لُوطًا لَّمِنَ ٱلْمُرْسَلِينَ",
+        "translation": "Ve Lut gerçekten elçilerdendi.",
+        "relevance": "Bu ayet Lut'un Allah'ın elçisi olduğunu teyit eder."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 7:80",
+        "reference_text": "A'raf Suresi, 80. ayet",
+        "content": "وَلُوطًا إِذْ قَالَ لِقَوْمِهِۦٓ أَتَأْتُونَ ٱلْفَـٰحِشَةَ مَا سَبَقَكُم بِهَا مِنْ أَحَدٍۢ مِّنَ ٱلْعَـٰلَمِينَ",
+        "translation": "Ve Lut, kavmine dediğinde: Alemlerden hiç kimse sizden önce işlemediği bir rezaleti mi işliyorsunuz?",
+        "relevance": "Bu ayet Lut'un kavmine çağrısını tespit eder."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Lut",
+        "arabic_term": "لوط",
+        "definition": "Arapça'da Lut. Sodom kavmine gönderilen Allah'ın peygamberi.",
+        "pronunciation": "lout"
+      },
+      {
+        "id": 2,
+        "term": "Al-Fahisha",
+        "arabic_term": "الفاحشة",
+        "definition": "Rezalet. Lut kavminin utanç verici fiilleri için Kur'anî terim.",
+        "pronunciation": "al-fa-hi-sha"
+      }
+    ]
+  },
+  "lut_call": {
+    "title": "Lut'un Doğruluğa Çağrısı",
+    "title_arabic": "دعوة لوط إلى الاستقامة",
+    "introduction": "Lut (عليه السلام) kavmini rezaleti terk etmeye ve Allah'tan korkmaya çağırdı. Kur'an şöyle bildirir: \"Allah'tan korkmuyor musunuz? Ben sizin için güvenilir bir elçiyim. Öyleyse Allah'tan korkun ve bana itaat edin.\" (26:161-163) Kavmi red ve tehditlerle cevap verdi.",
+    "conclusion": "Lut uyarı görevini yerine getirdi. Kavmi sapıklıkta ısrar etmeyi seçti. Lut Allah'tan kendisini ve ailesini facirler kavminden kurtarmasını istedi.",
+    "moral_lesson": "Bu hikaye bize elçinin görevini yerine getirdiğini öğretir; kavme hidayet veya sapıklık seçmek düşer.",
+    "historical_location": "Sodom bölgesi",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lut_call_chapter_1",
+        "title": "Öğüt",
+        "content": "Kur'an Lut'un sözlerini bildirir: \"Allah'tan korkmuyor musunuz? Ben sizin için güvenilir bir elçiyim. Öyleyse Allah'tan korkun ve bana itaat edin. Bunda sizden bir ücret istemiyorum; benim ücretim ancak alemlerin Rabbi katındadır.\" (26:161-164) Lut kavmini samimiyetle çağırdı. Dünyevi bir ücret istemiyordu; ücreti yalnızca Allah'tandı."
+      },
+      {
+        "id": "lut_call_chapter_2",
+        "title": "Kavmin Reddi",
+        "content": "Kur'an der ki: \"Lut kavmi elçileri yalancı saydı.\" (26:160) Ve: \"Lut kavmi uyarıları yalanladı.\" (54:33) Lut'u dinlemeyi reddettiler ve fiillerinde ısrar ettiler. Lut Rabbine yalvardı: \"Rabbim! Beni ve ailemi yaptıklarından kurtar.\" (26:169) Allah duasını kabul etti."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 26:161-164",
+        "reference_text": "Şuara Suresi, 161-164. ayetler",
+        "content": "إِذْ قَالَ لَهُمْ لُوطٌ أَلَا تَتَّقُونَ إِنِّى لَكُمْ رَسُولٌ أَمِينٌ فَٱتَّقُوا۟ ٱللَّهَ وَأَطِيعُونِ وَمَآ أَسْـَٔلُكُمْ عَلَيْهِ مِنْ أَجْرٍ ۖ إِنْ أَجْرِىَ إِلَّا عَلَىٰ رَبِّ ٱلْعَـٰلَمِينَ",
+        "translation": "Lut onlara dediğinde: Allah'tan korkmuyor musunuz? Ben sizin için güvenilir bir elçiyim. Öyleyse Allah'tan korkun ve bana itaat edin. Bunda sizden bir ücret istemiyorum; benim ücretim ancak alemlerin Rabbi katındadır.",
+        "relevance": "Bu ayetler Lut'un kavmine çağrısını tasvir eder."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 54:33",
+        "reference_text": "Kamer Suresi, 33. ayet",
+        "content": "كَذَّبَتْ قَوْمُ لُوطٍۭ بِٱلنُّذُرِ",
+        "translation": "Lut kavmi uyarıları yalanladı.",
+        "relevance": "Bu ayet kavmin uyarıları reddini teyit eder."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Rasul",
+        "arabic_term": "رسول",
+        "definition": "Elçi. Lut kendini güvenilir elçi olarak tanıttı.",
+        "pronunciation": "ra-soul"
+      },
+      {
+        "id": 2,
+        "term": "An-Nudhur",
+        "arabic_term": "النذر",
+        "definition": "Uyarılar. Lut kavmi ilahi uyarıları yalanladı.",
+        "pronunciation": "an-noud-hour"
+      }
+    ]
+  },
+  "lut_guests": {
+    "title": "Lut'un Evindeki Misafirler",
+    "title_arabic": "الضيوف عند لوط",
+    "introduction": "Melekler misafir suretinde Lut'un evine geldiler. Kavim varlıklarından haberdar olup Lut'un evine koştu. Lut onlara öğüt verdi: \"İşte kızlarım — sizin için daha temizler. Allah'tan korkun ve misafirlerim konusunda beni utandırmayın. Aranızda aklı başında bir adam yok mu?\" (11:78) Kavim reddetti ve ısrar etti.",
+    "conclusion": "Melekler Lut'a görevlerini açıkladılar: kavmin yok edilmesi. Ona ailesiyle şafaktan önce gitmesini, geri dönmemesini emrettiler. Lut'un karısı kalanlar arasındaydı.",
+    "moral_lesson": "Bu hikaye bize misafirlerimizi koruma görevini ve İslam'da misafirperverliğin kutsal bir değer olduğunu öğretir. Ayrıca itaatsizliğin peygamberin ailesini bile etkileyebileceğini gösterir.",
+    "historical_location": "Sodom",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lut_guests_chapter_1",
+        "title": "Misafirlerin Gelişi",
+        "content": "Kur'an şöyle bildirir: \"Elçilerimiz Lut'a geldiğinde onlar için üzüldü ve onlar yüzünden büyük sıkıntı hissetti. Dedi: Bu zor bir gün.\" (11:77) Melekler genç erkek suretinde Lut'un evine geldiler. Lut onları karşıladı, Allah'ın elçileri olduklarını bilmiyordu. Kavminin âdetlerini bildiği için onlar için korkuyordu."
+      },
+      {
+        "id": "the_guests_chapter_2",
+        "title": "Kavmin Tepkisi",
+        "content": "Kur'an der ki: \"Kavmi ona koşarak geldi — ve önceden kötülük yapıyorlardı. Dedi: Ey kavmim! İşte kızlarım — sizin için daha temizler. Allah'tan korkun ve misafirlerim konusunda beni utandırmayın. Aranızda aklı başında bir adam yok mu?\" (11:78) Lut misafirlerini korumaya çalıştı. Meşru bir alternatif sundu. Ama kavim reddetti ve niyetinde ısrar etti. Melekler Lut'a dediler: \"Biz Rabbinin elçileriyiz. Sana ulaşamayacaklar.\" (11:81)"
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 11:77-78",
+        "reference_text": "Hud Suresi, 77-78. ayetler",
+        "content": "وَلَمَّا جَآءَتْ رُسُلُنَآ إِلَىٰ لُوطٍۢ سِىٓءَ بِهِمْ وَضَاقَ بِهِمْ ذَرْعًۭا وَقَالَ هَـٰذَا يَوْمٌ عَصِيبٌ ۝ وَجَآءَهُۥ قَوْمُهُۥ يُهْرَعُونَ إِلَيْهِ وَمِن قَبْلُ كَانُوا۟ يَعْمَلُونَ ٱلسَّيِّـَٔاتِ ۚ قَالَ يَـٰقَوْمِ هَـٰٓؤُلَآءِ بَنَاتِى هُنَّ أَطْهَرُ لَكُمْ",
+        "translation": "Elçilerimiz Lut'a geldiğinde onlar için üzüldü. Ve kavmi ona koşarak geldi. Dedi: Ey kavmim! İşte kızlarım — sizin için daha temizler.",
+        "relevance": "Bu ayetler meleklerin gelişini ve Lut'un tepkisini tasvir eder."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 11:81",
+        "reference_text": "Hud Suresi, 81. ayet",
+        "content": "قَالُوا۟ يَـٰلُوطُ إِنَّا رُسُلُ رَبِّكَ لَن يَصِلُوٓا۟ إِلَيْكَ",
+        "translation": "Dediler: Ey Lut! Biz Rabbinin elçileriyiz. Sana ulaşamayacaklar.",
+        "relevance": "Bu ayet misafirlerin kimliğini ve ilahi korumayı açığa çıkarır."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Dayf",
+        "arabic_term": "ضيف",
+        "definition": "Misafir, ziyaretçi. Lut misafirperverlik geleneğine göre misafirlerini korumaya çalıştı.",
+        "pronunciation": "dayf"
+      },
+      {
+        "id": 2,
+        "term": "Rasul",
+        "arabic_term": "رسل",
+        "definition": "Elçiler. Melekler Lut'a gönderilen Allah'ın elçileriydi.",
+        "pronunciation": "rou-soul"
+      }
+    ]
+  },
+  "the_destruction": {
+    "title": "Kavmin Yok Edilmesi",
+    "title_arabic": "هلاك قوم لوط",
+    "introduction": "Kavim rezaletlerinde ısrar edip tüm uyarıları reddettiğinde Allah'ın cezası onlara indi. Kur'an der ki: \"Ve şehri altüst ettik ve üzerlerine pişmiş çamurdan taşlar yağdırdık.\" (15:74) Kavim yok edildi. Lut ve onu takip edenler kurtarıldı.",
+    "conclusion": "Cezaya şafakta indi. Şehir altüst edildi. Lut ve ailesi — itaatsizlik eden karısı hariç — güvenle ayrıldı. Bu hikaye kötülükte ısrar eden kavimler için bir uyarı olarak kalır.",
+    "moral_lesson": "Bu hikaye bize Allah'ın cezasının uyarıları aldıktan sonra kötülükte ısrar edenlere ulaştığını öğretir. İtaatsizlik helakete götürür.",
+    "historical_location": "Sodom (el-Mu'tefikat)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lut_destruction_chapter_1",
+        "title": "Gitme Emri",
+        "content": "Kur'an şöyle bildirir: \"Dediler: Ey Lut! Biz Rabbinin elçileriyiz. Sana ulaşamayacaklar. Gecenin bir kısmında ailenle çık, ve sizden hiçbiri geri dönmesin — karın hariç. Onlara isabet eden ona da isabet edecek. Buluşma vakitleri şafak. Şafak yakın değil mi?\" (11:81) Lut ailesiyle şafaktan önce şehri terk etme emri aldı. Geri dönmemeliydi. Misafirler hakkında kavme bilgi vererek ihanet eden karısı kalanlar arasındaydı."
+      },
+      {
+        "id": "lut_destruction_chapter_2",
+        "title": "Ceza",
+        "content": "Kur'an cezayı tasvir eder: \"Ve şehri altüst ettik ve üzerlerine pişmiş çamurdan taşlar yağdırdık, biri diğerinin üstüne, Rabbin katında işaretlenmiş. Ve zalimlerden uzak değiller.\" (11:82-83) Ve: \"Lut kavmi uyarıları yalanladı. Üzerlerine bir fırtına gönderdik.\" (54:33-34) Şehir yok edildi. Kavim helak oldu. Lut ve onu takip eden ev halkı kurtarıldı. Kur'an sonuçlandırır: \"Onlardan harabelerden başka bir şey kalmadı.\" (37:138)"
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 11:81-83",
+        "reference_text": "Hud Suresi, 81-83. ayetler",
+        "content": "قَالُوا۟ يَـٰلُوطُ إِنَّا رُسُلُ رَبِّكَ لَن يَصِلُوٓا۟ إِلَيْكَ ۖ فَأَسْرِ بِأَهْلِكَ بِقِطْعٍۢ مِّنَ ٱلَّيْلِ وَلَا يَلْتَفِتْ مِنكُمْ أَحَدٌ إِلَّا ٱمْرَأَتَكَ ۖ إِنَّهُۥ مُصِيبُهَا مَا أَصَابَهُمْ ۚ إِنَّ مَوْعِدَهُمُ ٱلصُّبْحُ ۚ أَلَيْسَ ٱلصُّبْحُ بِقَرِيبٍۢ ۝ فَلَمَّا جَآءَ أَمْرُنَا جَعَلْنَا عَـٰلِيَهَا سَافِلَهَا وَأَمْطَرْنَا عَلَيْهَا حِجَارَةًۭ مِّن سِجِّيلٍۢ مَّنضُودٍۢ",
+        "translation": "Dediler: Ey Lut! Gecenin bir kısmında ailenle çık... Ve şehri altüst ettik ve üzerlerine pişmiş çamurdan taşlar yağdırdık.",
+        "relevance": "Bu ayetler gitme emrini ve cezayı tasvir eder."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 54:33-34",
+        "reference_text": "Kamer Suresi, 33-34. ayetler",
+        "content": "كَذَّبَتْ قَوْمُ لُوطٍۭ بِٱلنُّذُرِ ۝ إِنَّآ أَرْسَلْنَا عَلَيْهِمْ حَاصِبًا",
+        "translation": "Lut kavmi uyarıları yalanladı. Üzerlerine bir fırtına gönderdik.",
+        "relevance": "Bu ayetler reddi ve cezayı tasvir eder."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Sijjil",
+        "arabic_term": "سجيل",
+        "definition": "Pişmiş çamur, sertleşmiş kil. Cezanın taşları sicilden idi.",
+        "pronunciation": "sij-jil"
+      },
+      {
+        "id": 2,
+        "term": "Al-Mu'tafikat",
+        "arabic_term": "المؤتفكات",
+        "definition": "Altüst edilen şehirler. Sodom ve Lut kavminin şehirleri.",
+        "pronunciation": "al-mou-ta-fi-kat"
+      }
+    ]
+  },
+  "lessons_from_lut": {
+    "title": "Lut'un Hikayesinden Dersler",
+    "title_arabic": "دروس من قصة لوط",
+    "introduction": "Lut'un (عليه السلام) hikayesi zamansız dersler içerir. Kur'an onu uyarı olarak zikreder: \"Ve Lut gerçekten elçilerdendi.\" (37:133) Her kavmin elçiler aldığını, uyarıları reddetmenin cezaya götürdüğünü ve misafirperverliğin kutsal bir değer olduğunu öğretir.",
+    "conclusion": "Lut görevini yerine getirdi. Kavmi kötülükte ısrar ettiği için yok edildi. Lut'un hikayesi insanlık için bir uyarı olarak kalır: Allah'tan korkmak, elçileri dinlemek ve itaatsizlikte ısrar etmemek.",
+    "moral_lesson": "Bu hikaye bize uyarılara kulak vermeyi, misafirlerimizi korumayı ve Allah'ın yasakladığı fiillerde asla ısrar etmemeyi öğretir.",
+    "historical_location": "Sodom bölgesi",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lessons_from_lut_chapter_1",
+        "title": "Kavimler İçin Bir Uyarı",
+        "content": "Kur'an Lut'un hikayesini yok edilen kavimlerin örnekleri arasında zikreder: \"Lut kavmi uyarıları yalanladı.\" (54:33) Her kavim elçiler alır. İman edip tövbe edenler kurtarılır. Kötülükte ısrar edenler cezaya uğrar. Lut kavmini samimiyetle çağırdı; ücret istemiyordu. Kavmi reddi seçti. Sonuç yok oluştu."
+      },
+      {
+        "id": "lessons_from_lut_chapter_2",
+        "title": "Misafirperverlik ve Koruma",
+        "content": "Lut kavminin tehdidine rağmen misafirlerini korumaya çalıştı. Dedi: \"Allah'tan korkun ve misafirlerim konusunda beni utandırmayın.\" (11:78) Misafirperverlik (ضيافة) İslam'da temel bir değerdir. Peygamber Muhammed (ﷺ) Allah'a ve Ahiret Günü'ne iman edenin misafirine ikram etmesi gerektiğini söyledi. Lut'un hikayesi misafiri korumanın kutsal bir görev olduğunu hatırlatır. Buna karşılık Lut'un karısı kavme bilgi vererek ihanet etti — helak olanlar arasındaydı."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 37:133-138",
+        "reference_text": "Saffat Suresi, 133-138. ayetler",
+        "content": "وَإِنَّ لُوطًا لَّمِنَ ٱلْمُرْسَلِينَ ۝ إِذْ نَجَّيْنَـٰهُ وَأَهْلَهُۥٓ أَجْمَعِينَ ۝ إِلَّا عَجُوزًا فِى ٱلْغَـٰبِرِينَ ۝ ثُمَّ دَمَّرْنَا ٱلْءَاخَرِينَ",
+        "translation": "Ve Lut gerçekten elçilerdendi. Onu ve tüm ev halkını kurtardığımızda, geride kalanlardan bir yaşlı kadın hariç. Sonra diğerlerini yok ettik.",
+        "relevance": "Bu ayetler Lut'un kurtarılmasını ve kavminin yok edilmesini özetler."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 29:34",
+        "reference_text": "Ankebut Suresi, 34. ayet",
+        "content": "إِنَّا مُنزِلُونَ عَلَىٰٓ أَهْلِ هَـٰذِهِ ٱلْقَرْيَةِ رِجْزًۭا مِّنَ ٱلسَّمَآءِ بِمَا كَانُوا۟ يَفْسُقُونَ",
+        "translation": "Bu şehrin sakinlerine yaptıklarından dolayı gökten bir ceza indireceğiz.",
+        "relevance": "Bu ayet cezanın nedenini açıklar."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Diyafa",
+        "arabic_term": "ضيافة",
+        "definition": "Misafirperverlik. Lut bu kutsal değere göre misafirlerini korumaya çalıştı.",
+        "pronunciation": "di-ya-fa"
+      },
+      {
+        "id": 2,
+        "term": "Rijz",
+        "arabic_term": "رجز",
+        "definition": "Ceza, bela. Cezaya Lut kavminin üzerine indi.",
+        "pronunciation": "rijz"
+      }
+    ]
+  }
+}

@@ -1,0 +1,230 @@
+{
+  "yahya_birth": {
+    "title": "La naissance de Yahya",
+    "title_arabic": "مولد يحيى",
+    "introduction": "Yahya (يحيى عليه السلام), Jean-Baptiste, est le fils du prophète Zakariya. Le Coran dit : « Ô Zakariya ! Nous t'annonçons la bonne nouvelle d'un fils. Son nom sera Yahya. » (19:7) Yahya naquit miraculeusement : son père était âgé et sa mère stérile. Allah accomplit Sa promesse.",
+    "conclusion": "Yahya naquit comme annoncé. Son nom signifie « il vivra ». Il fut un signe pour les gens. Sa naissance confirma que rien n'est impossible à Allah.",
+    "moral_lesson": "Cette histoire nous enseigne que la parole d'Allah s'accomplit toujours. Les miracles rappellent la puissance du Créateur.",
+    "historical_location": "Palestine",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "yahya_birth_chapter_1",
+        "title": "L'annonce de la naissance",
+        "content": "Le Coran rapporte : « Nous ne lui avons pas donné auparavant d'homonyme. » (19:7) Le nom Yahya était unique. Personne avant lui ne l'avait porté. C'était un signe de l'élection divine. Zakariya et son épouse attendirent avec foi. Quand le moment vint, Yahya naquit. La famille et les proches glorifièrent Allah."
+      },
+      {
+        "id": "yahya_birth_chapter_2",
+        "title": "Un enfant béni",
+        "content": "Le Coran dit : « Et la paix soit sur lui le jour où il naquit, le jour où il mourra, et le jour où il sera ressuscité vivant. » (19:15) Yahya fut béni dès sa naissance. La paix (salam) fut sur lui à chaque étape de sa vie. Il grandit en piété et en sagesse. Son destin était d'être prophète."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 19:7",
+        "reference_text": "Sourate Maryam, verset 7",
+        "content": "يَـٰزَكَرِيَّآ إِنَّا نُبَشِّرُكَ بِغُلَـٰمٍ ٱسْمُهُۥ يَحْيَىٰ لَمْ نَجْعَل لَّهُۥ مِن قَبْلُ سَمِيًّۭا",
+        "translation": "Ô Zakariya ! Nous t'annonçons la bonne nouvelle d'un fils. Son nom sera Yahya.",
+        "relevance": "Ce verset rapporte l'annonce de la naissance de Yahya."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 19:15",
+        "reference_text": "Sourate Maryam, verset 15",
+        "content": "وَسَلَـٰمٌ عَلَيْهِ يَوْمَ وُلِدَ وَيَوْمَ يَمُوتُ وَيَوْمَ يُبْعَثُ حَيًّۭا",
+        "translation": "Et paix sur lui le jour où il naquit, le jour où il mourra, et le jour où il sera ressuscité vivant.",
+        "relevance": "Ce verset établit les bénédictions sur Yahya."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Yahya",
+        "arabic_term": "يحيى",
+        "definition": "Jean en arabe. Signifie « il vivra ». Prophète de pureté.",
+        "pronunciation": "yah-ya"
+      },
+      {
+        "id": 2,
+        "term": "Salam",
+        "arabic_term": "سلام",
+        "definition": "Paix. La salam fut sur Yahya à chaque étape.",
+        "pronunciation": "sa-lam"
+      }
+    ]
+  },
+  "yahya_purity": {
+    "title": "La pureté de Yahya",
+    "title_arabic": "طهارة يحيى",
+    "introduction": "Yahya fut un prophète de pureté et de piété. Le Coran dit : « Et (Yahya) fut plein de sollicitude envers ses parents. Il ne fut ni arrogant ni désobéissant. » (19:14) Il vécut dans l'ascèse, loin des plaisirs du monde. Il se consacra entièrement à l'adoration d'Allah.",
+    "conclusion": "Yahya incarna la pureté. Il ne commit jamais de péché. Il fut un modèle pour les croyants. Son nom est associé à la chasteté et à la piété.",
+    "moral_lesson": "Cette histoire nous enseigne que la pureté du cœur et du corps est une vertu. Le croyant doit s'éloigner du mal et se rapprocher d'Allah.",
+    "historical_location": "Palestine (désert)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "yahya_purity_chapter_1",
+        "title": "La vie ascétique",
+        "content": "Le Coran rapporte : « Et Nous lui donnâmes la sagesse dès l'enfance, et une tendresse de Notre part et une pureté. » (19:12-13) Yahya vécut dans le désert. Il portait des vêtements de poils. Il se nourrissait simplement. Il ne recherchait ni richesse ni pouvoir. Sa seule quête était l'agrément d'Allah."
+      },
+      {
+        "id": "yahya_purity_chapter_2",
+        "title": "L'obéissance",
+        "content": "Le Coran dit : « Il ne fut ni arrogant ni désobéissant. » (19:14) Yahya obéissait à ses parents et à Allah. Il ne se révolta jamais. Il ne commit pas d'injustice. Sa vie fut un exemple de droiture. Les gens le respectaient pour sa piété."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 19:12-14",
+        "reference_text": "Sourate Maryam, versets 12-14",
+        "content": "يَـٰيَحْيَىٰ خُذِ ٱلْكِتَـٰبَ بِقُوَّةٍۢ ۖ وَءَاتَيْنَـٰهُ ٱلْحُكْمَ صَبِيًّۭا ۝ وَحَنَانًۭا مِّن لَّدُنَّا وَزَكَوٰةًۭ ۝ وَكَانَ تَقِيًّۭا",
+        "translation": "Ô Yahya ! Prends le Livre avec force. Nous lui donnâmes la sagesse dès l'enfance, une tendresse et une pureté. Il fut pieux.",
+        "relevance": "Ce passage décrit les qualités de Yahya."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 3:39",
+        "reference_text": "Sourate Al-Imran, verset 39",
+        "content": "مُصَدِّقًۢا بِكَلِمَةٍۢ مِّنَ ٱللَّهِ وَسَيِّدًۭا وَحَصُورًۭا وَنَبِيًّۭا مِّنَ ٱلصَّـٰلِحِينَ",
+        "translation": "Confirmant une parole d'Allah, noble, chaste, et prophète parmi les vertueux.",
+        "relevance": "Ce verset loue la chasteté de Yahya."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Zakât",
+        "arabic_term": "زكاة",
+        "definition": "Pureté. Yahya reçut la zakât (pureté) d'Allah.",
+        "pronunciation": "za-ka"
+      },
+      {
+        "id": 2,
+        "term": "Hasur",
+        "arabic_term": "حصور",
+        "definition": "Chaste. Yahya fut hasur, abstinent des plaisirs du monde.",
+        "pronunciation": "ha-sour"
+      }
+    ]
+  },
+  "yahya_isa": {
+    "title": "Yahya et l'annonce d'Isa",
+    "title_arabic": "يحيى وعيسى",
+    "introduction": "Yahya et Isa (Jésus) sont liés. Le Coran dit : « Et (Yahya) confirma une parole d'Allah. » (3:39) Yahya annonça la venue d'Isa. Il baptisait les gens dans le Jourdain, les préparant à recevoir le message. Il fut le précurseur du Messie.",
+    "conclusion": "Yahya prépara la voie à Isa. Il témoigna de sa venue. Les deux prophètes se rencontrèrent. Yahya reconnut Isa comme le Messie promis. Le message se poursuivit.",
+    "moral_lesson": "Cette histoire nous enseigne que les prophètes se confirment mutuellement. Chaque messager prépare la voie au suivant. La chaîne prophétique est une.",
+    "historical_location": "Palestine (Jourdain)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "yahya_isa_chapter_1",
+        "title": "Le précurseur",
+        "content": "Le Coran rapporte : « (Yahya) confirma une parole d'Allah. » (3:39) Yahya appela les gens à se repentir. Il les baptisait dans le fleuve. Il annonçait la venue d'un plus grand que lui. Quand Isa vint vers lui, Yahya dit : « C'est lui que j'annonçais. » Il s'effaça devant Isa avec humilité."
+      },
+      {
+        "id": "yahya_isa_chapter_2",
+        "title": "La rencontre",
+        "content": "Le Coran dit : « Et (rappelle) Yahya quand il prit le Livre avec force. » (19:12) Yahya et Isa se rencontrèrent au Jourdain. Yahya reconnut en Isa le Messie. Il le baptisa. La mission de Yahya était accomplie : il avait préparé les cœurs. Isa poursuivit le message. Les deux prophètes servirent Allah."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 3:39",
+        "reference_text": "Sourate Al-Imran, verset 39",
+        "content": "مُصَدِّقًۢا بِكَلِمَةٍۢ مِّنَ ٱللَّهِ وَسَيِّدًۭا وَحَصُورًۭا وَنَبِيًّۭا مِّنَ ٱلْصَّـٰلِحِينَ",
+        "translation": "Confirmant une parole d'Allah, noble, chaste, et prophète parmi les vertueux.",
+        "relevance": "Ce verset établit le lien entre Yahya et la parole d'Allah (Isa)."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 19:12",
+        "reference_text": "Sourate Maryam, verset 12",
+        "content": "يَـٰيَحْيَىٰ خُذِ ٱلْكِتَـٰبَ بِقُوَّةٍۢ ۖ وَءَاتَيْنَـٰهُ ٱلْحُكْمَ صَبِيًّۭا",
+        "translation": "Ô Yahya ! Prends le Livre avec force. Nous lui donnâmes la sagesse dès l'enfance.",
+        "relevance": "Ce verset décrit la mission de Yahya."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Kalima",
+        "arabic_term": "كلمة",
+        "definition": "Parole. Yahya confirma la kalima d'Allah (Isa).",
+        "pronunciation": "ka-li-ma"
+      },
+      {
+        "id": 2,
+        "term": "Isa",
+        "arabic_term": "عيسى",
+        "definition": "Jésus en arabe. Prophète annoncé par Yahya.",
+        "pronunciation": "i-sa"
+      }
+    ]
+  },
+  "lessons_from_yahya": {
+    "title": "Les leçons de l'histoire de Yahya",
+    "title_arabic": "دروس من قصة يحيى",
+    "introduction": "Yahya est le prophète de la pureté. Le Coran dit : « Et (Yahya) fut plein de sollicitude envers ses parents. Il ne fut ni arrogant ni désobéissant. » (19:14) Sa vie fut courte mais exemplaire. Il prépara la venue d'Isa et mourut en martyr.",
+    "conclusion": "Yahya vécut dans la pureté. Il annonça Isa. Il fut tué par un tyran. Mais son message survécut. Il reste un modèle de piété et d'humilité.",
+    "moral_lesson": "Cette histoire nous enseigne que la qualité prime sur la quantité. Une vie courte mais pieuse vaut plus qu'une longue vie dans le péché.",
+    "historical_location": "Palestine",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lessons_from_yahya_chapter_1",
+        "title": "La pureté et la piété",
+        "content": "Le Coran dit : « Et (Yahya) fut noble, chaste, et prophète parmi les vertueux. » (3:39) Yahya n'aspira à rien de ce monde. Il vécut dans l'ascèse. Il se consacra à Allah. Le croyant doit imiter cette pureté. S'éloigner du mal, se rapprocher du bien."
+      },
+      {
+        "id": "lessons_from_yahya_chapter_2",
+        "title": "L'humilité devant la vérité",
+        "content": "Yahya annonça Isa. Quand Isa vint, Yahya s'effaça. Il dit : « Il doit croître, et moi diminuer. » Cette humilité est une leçon. Le vrai croyant ne rivalise pas. Il sert la vérité, quel que soit le messager qui la porte."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 19:12-15",
+        "reference_text": "Sourate Maryam, versets 12-15",
+        "content": "يَـٰيَحْيَىٰ خُذِ ٱلْكِتَـٰبَ بِقُوَّةٍۢ ۖ وَءَاتَيْنَـٰهُ ٱلْحُكْمَ صَبِيًّۭا ۝ وَحَنَانًۭا مِّن لَّدُنَّا وَزَكَوٰةًۭ ۝ وَكَانَ تَقِيًّۭا ۝ وَحَنَانًۭا مِّن لَّدُنَّا وَزَكَوٰةًۭ",
+        "translation": "Ô Yahya ! Prends le Livre avec force. Nous lui donnâmes la sagesse, la tendresse et la pureté. Il fut pieux.",
+        "relevance": "Ce passage résume les qualités de Yahya."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 6:85",
+        "reference_text": "Sourate Al-An'am, verset 85",
+        "content": "وَزَكَرِيَّا وَيَحْيَىٰ وَعِيسَىٰ وَإِلْيَاسَ كُلٌّۭ مِّنَ ٱلصَّـٰلِحِينَ",
+        "translation": "Et Zakariya, Yahya, Isa et Ilyas : tous parmi les vertueux.",
+        "relevance": "Ce verset place Yahya parmi les prophètes vertueux."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Taqwa",
+        "arabic_term": "تقوى",
+        "definition": "Piété, crainte d'Allah. Yahya fut plein de taqwa.",
+        "pronunciation": "taq-wa"
+      },
+      {
+        "id": 2,
+        "term": "Sayyid",
+        "arabic_term": "سيد",
+        "definition": "Noble, maître. Yahya fut sayyid, noble parmi les hommes.",
+        "pronunciation": "say-yid"
+      }
+    ]
+  }
+}

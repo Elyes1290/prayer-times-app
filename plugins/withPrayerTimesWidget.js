@@ -131,7 +131,7 @@ const withPrayerTimesWidget = (config) => {
       const pbxprojPath = path.join(iosRoot, "MyAdhanMuslimPrayerApp.xcodeproj", "project.pbxproj");
       
       if (fs.existsSync(pbxprojPath)) {
-        console.log("🔄 Injection des versions du widget depuis app.json...");
+        console.log("🔄 Injection des versions depuis app.json...");
         
         // Lire les versions depuis la config Expo
         const appVersion = config.version || "1.0.0";
@@ -141,10 +141,9 @@ const withPrayerTimesWidget = (config) => {
         
         let pbxprojContent = fs.readFileSync(pbxprojPath, "utf8");
         
-        // 🎯 STRATÉGIE : Supprimer les anciennes versions du widget puis ajouter les nouvelles
+        // 🎯 INJECTER POUR L'APP PRINCIPALE + LE WIDGET
         
         // 1. Configuration Debug du widget (95A024662F4349D100408651)
-        // Supprimer les lignes MARKETING_VERSION et CURRENT_PROJECT_VERSION existantes
         pbxprojContent = pbxprojContent.replace(
           /(95A024662F4349D100408651 \/\* Debug \*\/ = \{[\s\S]*?buildSettings = \{[\s\S]*?)(\s+MARKETING_VERSION = [^;]+;\s+)/,
           '$1'
@@ -153,15 +152,12 @@ const withPrayerTimesWidget = (config) => {
           /(95A024662F4349D100408651 \/\* Debug \*\/ = \{[\s\S]*?buildSettings = \{[\s\S]*?)(\s+CURRENT_PROJECT_VERSION = [^;]+;\s+)/,
           '$1'
         );
-        
-        // Ajouter les nouvelles versions après CODE_SIGN_STYLE
         pbxprojContent = pbxprojContent.replace(
           /(95A024662F4349D100408651 \/\* Debug \*\/ = \{[\s\S]*?buildSettings = \{[\s\S]*?CODE_SIGN_STYLE = Automatic;)/,
           `$1\n\t\t\t\tCURRENT_PROJECT_VERSION = ${buildNumber};\n\t\t\t\tMARKETING_VERSION = ${appVersion};`
         );
         
         // 2. Configuration Release du widget (95A024672F4349D100408651)
-        // Supprimer les anciennes versions
         pbxprojContent = pbxprojContent.replace(
           /(95A024672F4349D100408651 \/\* Release \*\/ = \{[\s\S]*?buildSettings = \{[\s\S]*?)(\s+MARKETING_VERSION = [^;]+;\s+)/,
           '$1'
@@ -170,15 +166,24 @@ const withPrayerTimesWidget = (config) => {
           /(95A024672F4349D100408651 \/\* Release \*\/ = \{[\s\S]*?buildSettings = \{[\s\S]*?)(\s+CURRENT_PROJECT_VERSION = [^;]+;\s+)/,
           '$1'
         );
-        
-        // Ajouter les nouvelles versions après CODE_SIGN_STYLE
         pbxprojContent = pbxprojContent.replace(
           /(95A024672F4349D100408651 \/\* Release \*\/ = \{[\s\S]*?buildSettings = \{[\s\S]*?CODE_SIGN_STYLE = Automatic;)/,
           `$1\n\t\t\t\tCURRENT_PROJECT_VERSION = ${buildNumber};\n\t\t\t\tMARKETING_VERSION = ${appVersion};`
         );
         
+        // 3. 🆕 Configuration Debug de l'APP PRINCIPALE
+        // Remplacer les versions hardcodées dans le template (CURRENT_PROJECT_VERSION = 1; et MARKETING_VERSION = 1.0;)
+        pbxprojContent = pbxprojContent.replace(
+          /CURRENT_PROJECT_VERSION = 1;/g,
+          `CURRENT_PROJECT_VERSION = ${buildNumber};`
+        );
+        pbxprojContent = pbxprojContent.replace(
+          /MARKETING_VERSION = 1\.0;/g,
+          `MARKETING_VERSION = ${appVersion};`
+        );
+        
         fs.writeFileSync(pbxprojPath, pbxprojContent);
-        console.log(`✅ Versions remplacées: ${appVersion} (${buildNumber})`);
+        console.log(`✅ Versions injectées pour APP + WIDGET: ${appVersion} (${buildNumber})`);
       }
 
       console.log("✅ [withPrayerTimesWidget] Configuration terminée !");

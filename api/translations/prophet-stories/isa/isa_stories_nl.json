@@ -1,0 +1,515 @@
+{
+  "isa_birth": {
+    "title": "De wonderbaarlijke geboorte van Isa",
+    "title_arabic": "مولد عيسى المعجزي",
+    "introduction": "Isa (عيسى ابن مريم عليه السلام), Jezus zoon van Maria, is een van de grootste profeten. De Koran zegt: \"Wij gaven hem duidelijke tekenen en versterkten hem met de Heilige Geest.\" (2:253) Zijn geboorte was wonderbaarlijk: Maria (Maryam) werd zwanger zonder vader, door het woord van Allah. Zij trok zich terug op een afgelegen plek en baarde onder een palmboom.",
+    "conclusion": "Maria keerde terug naar haar volk met het kind. Toen zij haar beschuldigden, sprak de baby Isa vanuit de wieg om haar te verdedigen. Zo manifesteerde Allah Zijn macht: een kind zonder vader, sprekend vanaf de geboorte.",
+    "moral_lesson": "Dit verhaal leert ons dat Allah schept zoals Hij wil. De geboorte van Isa is een teken voor de werelden, en Maria is een voorbeeld van zuiverheid en toewijding.",
+    "historical_location": "Palestina (Bethlehem)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "isa_birth_chapter_1",
+        "title": "De aankondiging aan Maria",
+        "content": "De Koran verhaalt: \"En toen de engelen zeiden: O Maria! Allah heeft jou uitgekozen en gezuiverd; Hij heeft jou uitgekozen boven de vrouwen der werelden. O Maria! Wees vroom jegens jouw Heer; buig en kniel met hen die knielen.\" (3:42-43) De engelen kondigden aan Maria aan dat zij een zoon zou krijgen, geschapen door het woord van Allah: \"Wees!\" Maria vroeg: \"Hoe kan ik een zoon hebben wanneer geen man mij heeft aangeraakt?\" De engel antwoordde: \"Zo zal het zijn. Allah schept wat Hij wil. Wanneer Hij iets beschikt, zegt Hij er alleen tegen: Wees! en het is.\" (3:47)"
+      },
+      {
+        "id": "isa_birth_chapter_2",
+        "title": "De geboorte onder de palmboom",
+        "content": "De Koran zegt: \"Zij ontving hem en trok zich met hem terug naar een afgelegen plek. De barensweeën dreven haar naar de stam van een palmboom. Zij zei: Had ik maar vóór dit gestorven en vergeten geweest! Een stem riep haar van onder haar: Treur niet. Jouw Heer heeft een beek aan jouw voeten geplaatst. Schud de stam van de palmboom naar jou toe: hij zal verse rijpe dadels op jou laten vallen.\" (19:22-25) Maria baarde alleen, ondersteund door Allah. Zij at dadels en dronk van de beek."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 3:42-43",
+        "reference_text": "Soera Âl-Imran, verzen 42-43",
+        "content": "وَإِذْ قَالَتِ ٱلْمَلَـٰٓئِكَةُ يَـٰمَرْيَمُ إِنَّ ٱللَّهَ ٱصْطَفَىٰكِ وَطَهَّرَكِ وَٱصْطَفَىٰكِ عَلَىٰ نِسَآءِ ٱلْعَـٰلَمِينَ",
+        "translation": "En toen de engelen zeiden: O Maria! Allah heeft jou uitgekozen en gezuiverd; Hij heeft jou uitgekozen boven de vrouwen der werelden.",
+        "relevance": "Dit vers vestigt Maria's uitverkiezing door Allah."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 19:22-25",
+        "reference_text": "Soera Maryam, verzen 22-25",
+        "content": "فَحَمَلَتْهُ فَٱنتَبَذَتْ بِهِۦ مَكَانًۭا قَصِيًّۭا ۝ فَأَجَآءَهَا ٱلْمَخَاضُ إِلَىٰ جِذْعِ ٱلنَّخْلَةِ",
+        "translation": "Zij ontving hem en trok zich met hem terug naar een afgelegen plek. De barensweeën dreven haar naar de stam van een palmboom.",
+        "relevance": "Dit vers beschrijft de wonderbaarlijke geboorte van Isa."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Isa",
+        "arabic_term": "عيسى",
+        "definition": "Jezus in het Arabisch. Zoon van Maria, profeet van Allah, messias van de Kinderen van Israël.",
+        "pronunciation": "i-sa"
+      },
+      {
+        "id": 2,
+        "term": "Maryam",
+        "arabic_term": "مريم",
+        "definition": "Maria in het Arabisch. Moeder van Isa, uitgekozen boven de vrouwen der werelden.",
+        "pronunciation": "ma-ryam"
+      }
+    ]
+  },
+  "isa_cradle": {
+    "title": "Isa spreekt vanuit de wieg",
+    "title_arabic": "كلام عيسى في المهد",
+    "introduction": "Maria keerde terug naar haar volk met haar kind. De mensen beschuldigden haar van zonde. Hoe kon een kuise vrouw een kind hebben zonder echtgenoot? Maria antwoordde niet; zij wees naar het kind. Zij zeiden: \"Hoe kunnen we spreken tot een baby in de wieg?\"",
+    "conclusion": "Isa sprak toen vanuit de wieg om zijn moeder te verdedigen en zijn missie te verkondigen. Hij zei: \"Ik ben de dienaar van Allah. Hij heeft mij het Boek gegeven en mij tot profeet gemaakt.\" Dit wonder verbaasde de vergadering.",
+    "moral_lesson": "Dit verhaal leert ons dat Allah wie Hij wil kan laten spreken, wanneer Hij wil. De wieg van Isa is een teken voor hen die nadenken.",
+    "historical_location": "Palestina",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "isa_cradle_chapter_1",
+        "title": "De beschuldiging",
+        "content": "De Koran verhaalt: \"Zij kwam bij haar volk terwijl zij hem droeg. Zij zeiden: O Maria! Jij hebt iets gruwelijks gedaan! Zuster van Harun, jouw vader was geen kwaadaardig man en jouw moeder was geen prostituee.\" (19:27-28) Het volk van Maria was geschokt. Zij begrepen niet hoe zij een kind had kunnen krijgen. Maria, gehoorzamend aan een goddelijke inspiratie, wees naar het kind."
+      },
+      {
+        "id": "isa_cradle_chapter_2",
+        "title": "Het woord vanuit de wieg",
+        "content": "De Koran zegt: \"Zij zeiden: Hoe kunnen we spreken tot een baby in de wieg? Hij zei: Ik ben de dienaar van Allah. Hij heeft mij het Boek gegeven en mij tot profeet gemaakt. Hij heeft mij gezegend waar ik ook ben, en heeft mij gebed en liefdadigheid opgelegd zolang ik leef, en vriendelijkheid jegens mijn moeder. Hij heeft mij niet hoogmoedig of ellendig gemaakt. En vrede zij over mij de dag dat ik geboren werd, de dag dat ik sterf, en de dag dat ik tot leven word gewekt.\" (19:29-33) Isa sprak vanuit de wieg om getuigenis af te leggen van zijn missie en zijn moeder vrij te pleiten."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 19:27-28",
+        "reference_text": "Soera Maryam, verzen 27-28",
+        "content": "فَأَتَتْ بِهِۦ قَوْمَهَا تَحْمِلُهُۥ ۖ قَالُوا۟ يَـٰمَرْيَمُ لَقَدْ جِئْتِ شَيْـًۭٔا فَرِيًّۭا",
+        "translation": "Zij kwam bij haar volk terwijl zij hem droeg. Zij zeiden: O Maria! Jij hebt iets gruwelijks gedaan!",
+        "relevance": "Dit vers beschrijft de beschuldiging tegen Maria."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 19:30-33",
+        "reference_text": "Soera Maryam, verzen 30-33",
+        "content": "قَالَ إِنِّى عَبْدُ ٱللَّهِ ءَاتَىٰنِىَ ٱلْكِتَـٰبَ وَجَعَلَنِى نَبِيًّۭا",
+        "translation": "Hij zei: Ik ben de dienaar van Allah. Hij heeft mij het Boek gegeven en mij tot profeet gemaakt.",
+        "relevance": "Dit vers bevat de woorden van Isa vanuit de wieg."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Mihrab",
+        "arabic_term": "محراب",
+        "definition": "Bidplaats. Maria trok zich terug in een mihrab om Allah te aanbidden.",
+        "pronunciation": "mih-rab"
+      },
+      {
+        "id": 2,
+        "term": "Abdullah",
+        "arabic_term": "عبد الله",
+        "definition": "Dienaar van Allah. Isa duidde zichzelf zo aan in de wieg.",
+        "pronunciation": "ab-dul-lah"
+      }
+    ]
+  },
+  "isa_childhood": {
+    "title": "De kindertijd van Isa",
+    "title_arabic": "طفولة عيسى",
+    "introduction": "Isa groeide op onder Allah's bescherming. Vanaf zijn kindertijd manifesteerde hij buitengewone tekenen. De Koran zegt: \"En Hij zal hem het Boek, wijsheid, de Thora en het Evangelie onderwijzen.\" (3:48) Hij leerde de Schriften en bereidde zich voor op zijn profetische missie.",
+    "conclusion": "Isa was een vroom en wijs kind. Hij sprak met rijpheid en verrichtte reeds daden die zijn missie voorafschaduwden. De geleerden van Israël waren verbaasd over zijn kennis.",
+    "moral_lesson": "Dit verhaal leert ons dat profeten vanaf de kindertijd worden voorbereid. Wijsheid en vroomheid worden van jongs af aan gecultiveerd.",
+    "historical_location": "Palestina (Nazareth)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "isa_childhood_chapter_1",
+        "title": "Vroege wijsheid",
+        "content": "De Koran verhaalt dat Allah tot Maria zei: \"Hij zal tot de mensen spreken in de wieg en in volwassenheid, en hij zal onder de rechtvaardigen zijn.\" (3:46) Isa groeide in wijsheid. Hij verkeerde onder de Mensen van het Boek en discussieerde met hen. Zijn kennis overtrof zijn leeftijd. Hij sprak alleen woorden van waarheid en goedheid."
+      },
+      {
+        "id": "isa_childhood_chapter_2",
+        "title": "Voorbereiding op de missie",
+        "content": "De Koran zegt: \"En wanneer Allah zal zeggen: O Isa, zoon van Maria! Gedenk Mijn gunst over jou en over jouw moeder, toen Ik jou versterkte met de Heilige Geest. Jij sprak tot de mensen in de wieg en in jouw volwassenheid.\" (5:110) Vanaf zijn kindertijd werd Isa versterkt door de Heilige Geest (Jibril). Hij bereidde zich voor om de Kinderen van Israël op te roepen tot monotheïsme en hen te leiden op het rechte pad."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 3:46",
+        "reference_text": "Soera Âl-Imran, vers 46",
+        "content": "وَيُكَلِّمُ ٱلنَّاسَ فِى ٱلْمَهْدِ وَكَهْلًۭا وَمِنَ ٱلصَّـٰلِحِينَ",
+        "translation": "Hij zal tot de mensen spreken in de wieg en in volwassenheid, en hij zal onder de rechtvaardigen zijn.",
+        "relevance": "Dit vers kondigt Isa's spreken vanuit de wieg en zijn volwassenheid aan."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 3:48",
+        "reference_text": "Soera Âl-Imran, vers 48",
+        "content": "وَيُعَلِّمُهُ ٱلْكِتَـٰبَ وَٱلْحِكْمَةَ وَٱلتَّوْرَىٰةَ وَٱلْإِنجِيلَ",
+        "translation": "En Hij zal hem het Boek, wijsheid, de Thora en het Evangelie onderwijzen.",
+        "relevance": "Dit vers toont het goddelijke onderricht dat Isa ontving."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Ruh al-Qudus",
+        "arabic_term": "روح القدس",
+        "definition": "Heilige Geest. De engel Jibril die Isa versterkte.",
+        "pronunciation": "rouh al-qu-dous"
+      },
+      {
+        "id": 2,
+        "term": "Tawrat",
+        "arabic_term": "التوراة",
+        "definition": "De Thora. Boek geopenbaard aan Musa, dat Isa bevestigde.",
+        "pronunciation": "at-taw-ra"
+      }
+    ]
+  },
+  "isa_prophecy": {
+    "title": "De profetie van Isa",
+    "title_arabic": "نبوة عيسى",
+    "introduction": "Isa werd gezonden als profeet naar de Kinderen van Israël. De Koran zegt: \"En toen Isa, zoon van Maria, zei: O Kinderen van Israël! Ik ben de boodschapper van Allah tot jullie, bevestigend wat vóór mij kwam in de Thora, en verkondigend een boodschapper die na mij zal komen, wiens naam Ahmad zal zijn.\" (61:6) Hij bracht de Injil (Evangelie) en bevestigde de Thora.",
+    "conclusion": "Isa riep zijn volk op om alleen Allah te aanbidden, de Thora te volgen en zich voor te bereiden op de komst van de Profeet Muhammad. Velen geloofden; anderen verwierpen hem en beraamden plannen tegen hem.",
+    "moral_lesson": "Dit verhaal leert ons dat profeten elkaar bevestigen. Isa kondigde Muhammad aan; de profetische keten is één.",
+    "historical_location": "Palestina",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "isa_prophecy_chapter_1",
+        "title": "De oproep tot monotheïsme",
+        "content": "De Koran verhaalt: \"Isa zei: Ik ben tot jullie gekomen met een teken van jullie Heer. Vreest Allah en gehoorzaamt mij. Allah is mijn Heer en jullie Heer. Aanbidt Hem dus: dat is het rechte pad.\" (3:50-51) Isa riep de Kinderen van Israël op om innovaties te verlaten en terug te keren tot zuiver monotheïsme. Hij herinnerde hen aan de geboden van de Thora en nodigde hen uit tot rechtschapenheid."
+      },
+      {
+        "id": "isa_prophecy_chapter_2",
+        "title": "De aankondiging van Ahmad",
+        "content": "De Koran zegt: \"En toen Isa, zoon van Maria, zei: O Kinderen van Israël! Ik ben de boodschapper van Allah tot jullie, bevestigend wat vóór mij kwam in de Thora, en verkondigend een boodschapper die na mij zal komen, wiens naam Ahmad zal zijn.\" (61:6) Ahmad is een van de namen van de Profeet Muhammad. Isa kondigde zijn komst aan en beval zijn discipelen in hem te geloven wanneer hij zou komen."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 3:50-51",
+        "reference_text": "Soera Âl-Imran, verzen 50-51",
+        "content": "وَمُصَدِّقًۭا لِّمَا بَيْنَ يَدَىَّ مِنَ ٱلتَّوْرَىٰةِ وَلِأُحِلَّ لَكُم بَعْضَ ٱلَّذِى حُرِّمَ عَلَيْكُمْ ۚ وَجِئْتُكُم بِـَٔايَةٍۢ مِّن رَّبِّكُمْ فَٱتَّقُوا۟ ٱللَّهَ وَأَطِيعُونِ",
+        "translation": "En bevestigend wat in de Thora staat, en om jullie een deel te vergunnen van wat jullie verboden was. Ik ben tot jullie gekomen met een teken van jullie Heer. Vreest Allah en gehoorzaamt mij.",
+        "relevance": "Dit vers bevat Isa's oproep tot zijn volk."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 61:6",
+        "reference_text": "Soera As-Saff, vers 6",
+        "content": "وَإِذْ قَالَ عِيسَى ٱبْنُ مَرْيَمَ يَـٰبَنِىٓ إِسْرَٰٓءِيلَ إِنِّى رَسُولُ ٱللَّهِ إِلَيْكُم مُّصَدِّقًۭا لِّمَا بَيْنَ يَدَىَّ مِنَ ٱلتَّوْرَىٰةِ وَمُبَشِّرًۢا بِرَسُولٍۢ يَأْتِى مِنۢ بَعْدِى ٱسْمُهُۥٓ أَحْمَدُ",
+        "translation": "En toen Isa zei: O Kinderen van Israël! Ik ben de boodschapper van Allah, bevestigend de Thora en verkondigend een boodschapper genaamd Ahmad.",
+        "relevance": "Dit vers vestigt de aankondiging van de Profeet Muhammad door Isa."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Injil",
+        "arabic_term": "الإنجيل",
+        "definition": "Het Evangelie. Boek geopenbaard aan Isa door Allah.",
+        "pronunciation": "al-in-jil"
+      },
+      {
+        "id": 2,
+        "term": "Ahmad",
+        "arabic_term": "أحمد",
+        "definition": "Een van de namen van de Profeet Muhammad. Isa kondigde hem aan zijn volk aan.",
+        "pronunciation": "ah-mad"
+      }
+    ]
+  },
+  "isa_miracles": {
+    "title": "De wonderen van Isa",
+    "title_arabic": "معجزات عيسى",
+    "introduction": "Allah schonk Isa opmerkelijke wonderen om zijn profetie te bewijzen. De Koran zegt: \"Ik kom tot jullie met een teken van jullie Heer: ik vorm voor jullie, uit klei, de vorm van een vogel; ik blaas erin en, met de toestemming van Allah, wordt het een vogel.\" (3:49) Hij genas de blindgeborenen en de melaatsen, en wekte de doden op.",
+    "conclusion": "Deze wonderen waren tekenen voor de Kinderen van Israël. Zij bewezen dat Isa inderdaad een profeet van Allah was. Maar velen weigerden uit trots te geloven.",
+    "moral_lesson": "Dit verhaal leert ons dat wonderen tekenen van Allah zijn. Zij dienen alleen om de waarheid te bevestigen; geloof blijft een keuze van het hart.",
+    "historical_location": "Palestina",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "isa_miracles_chapter_1",
+        "title": "De kleivogels",
+        "content": "De Koran verhaalt: \"Ik vorm voor jullie, uit klei, de vorm van een vogel; ik blaas erin en, met de toestemming van Allah, wordt het een vogel.\" (3:49) Isa nam klei, vormde een vogel, blies erin met de toestemming van Allah, en de vogel vloog levend weg. Dit wonder verbaasde de getuigen en bewees dat het leven alleen van Allah komt."
+      },
+      {
+        "id": "isa_miracles_chapter_2",
+        "title": "Genezingen en opstanding",
+        "content": "De Koran zegt: \"Ik genees de blindgeborenen en de melaatsen, en ik wek de doden op, met de toestemming van Allah.\" (3:49) Isa genas door Allah's wil. De blindgeborenen konden zien, de melaatse werd gezuiverd, de doden stonden op. Elk wonder was een herinnering: alle macht behoort aan Allah. Isa was slechts Zijn dienaar en boodschapper."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 3:49",
+        "reference_text": "Soera Âl-Imran, vers 49",
+        "content": "وَأَنۢبِئُكُم بِمَا تَأْكُلُونَ وَمَا تَدَّخِرُونَ فِى بُيُوتِكُمْ ۚ إِنَّ فِى ذَٰلِكَ لَـَٔايَةًۭ لَّكُمْ إِن كُنتُم مُّؤْمِنِينَ",
+        "translation": "Ik kom tot jullie met een teken: ik vorm een vogel uit klei, ik blaas en het wordt een vogel met de toestemming van Allah.",
+        "relevance": "Dit vers beschrijft het wonder van de kleivogels."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 5:110",
+        "reference_text": "Soera Al-Ma'idah, vers 110",
+        "content": "إِذْ قَالَ ٱللَّهُ يَـٰعِيسَى ٱبْنَ مَرْيَمَ ٱذْكُرْ نِعْمَتِى عَلَيْكَ وَعَلَىٰ وَالِدَتِكَ إِذْ أَيَّدتُّكَ بِرُوحِ ٱلْقُدُسِ",
+        "translation": "Toen Allah zei: O Isa! Gedenk Mijn gunst: Ik versterkte jou met de Heilige Geest.",
+        "relevance": "Dit vers herinnert aan de wonderen die Isa geschonken werden."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Ayat",
+        "arabic_term": "آية",
+        "definition": "Teken, wonder. De wonderen van Isa waren tekenen van Allah.",
+        "pronunciation": "a-ya"
+      },
+      {
+        "id": 2,
+        "term": "Bi-idhni Allah",
+        "arabic_term": "بإذن الله",
+        "definition": "Met de toestemming van Allah. Isa verrichtte wonderen door goddelijke wil.",
+        "pronunciation": "bi-idh-ni-llah"
+      }
+    ]
+  },
+  "isa_disciples": {
+    "title": "De discipelen van Isa",
+    "title_arabic": "الحواريون",
+    "introduction": "Isa had toegewijde discipelen, de Hawariyun. De Koran zegt: \"En toen Ik de apostelen inspireerde: Gelooft in Mij en in Mijn boodschapper. Zij zeiden: Wij geloven; getuig dat wij onderworpen zijn.\" (5:111) Zij geloofden in Isa en volgden hem. Zij hielpen hem mensen tot Allah te roepen.",
+    "conclusion": "De discipelen vroegen Isa om een tafel te laten neerdalen uit de hemel om hen gerust te stellen. Allah verhoorde hun verzoek op voorwaarde dat zij zouden geloven. Zij die geloofden werden versterkt; zij die twijfelden dwaalden af.",
+    "moral_lesson": "Dit verhaal leert ons dat de discipelen van profeten moeten geloven zonder extra bewijs te eisen. Geloof gaat vooraf aan tekenen.",
+    "historical_location": "Palestina",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "isa_disciples_chapter_1",
+        "title": "Het geloof van de apostelen",
+        "content": "De Koran verhaalt: \"O jullie die geloofd hebben! Weest bondgenoten van Allah, zoals Isa, zoon van Maria, tot de apostelen zei: Wie zijn mijn bondgenoten voor Allah? De apostelen zeiden: Wij zijn de bondgenoten van Allah. Een factie van de Kinderen van Israël geloofde, en een factie geloofde niet. Wij versterkten hen die geloofden tegen hun vijand, en zij werden de overwinnaars.\" (61:14) De discipelen van Isa waren oprechte gelovigen die hem steunden."
+      },
+      {
+        "id": "isa_disciples_chapter_2",
+        "title": "Het verzoek om de tafel",
+        "content": "De Koran zegt: \"De apostelen zeiden: O Isa, zoon van Maria! Kan jouw Heer ons een gedekte tafel uit de hemel laten neerdalen? Hij zei: Vreest Allah als jullie gelovigen zijn. Zij zeiden: Wij willen er van eten en onze harten gerustgesteld worden, en wij zullen weten dat jij ons de waarheid hebt verteld, en wij zullen onder de getuigen zijn.\" (5:112-113) De discipelen vroegen om een teken; Isa nodigde hen uit tot vrees en geloof."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 5:111",
+        "reference_text": "Soera Al-Ma'idah, vers 111",
+        "content": "وَإِذْ أَوْحَيْتُ إِلَى ٱلْحَوَارِيِّـۧنَ أَنْ ءَامِنُوا۟ بِى وَبِرَسُولِى قَالُوا۟ ءَامَنَّا وَٱشْهَدْ بِأَنَّنَا مُسْلِمُونَ",
+        "translation": "En toen Ik de apostelen inspireerde: Gelooft in Mij en in Mijn boodschapper. Zij zeiden: Wij geloven; getuig dat wij onderworpen zijn.",
+        "relevance": "Dit vers beschrijft het geloof van de apostelen van Isa."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 5:112-113",
+        "reference_text": "Soera Al-Ma'idah, verzen 112-113",
+        "content": "إِذْ قَالَ ٱلْحَوَارِيُّونَ يَـٰعِيسَى ٱبْنَ مَرْيَمَ هَلْ يَسْتَطِيعُ رَبُّكَ أَن يُنَزِّلَ عَلَيْنَا مَآئِدَةًۭ مِّنَ ٱلسَّمَآءِ",
+        "translation": "De apostelen zeiden: O Isa! Kan jouw Heer ons een tafel laten neerdalen uit de hemel?",
+        "relevance": "Dit vers verhaalt het verzoek van de apostelen."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Hawariyun",
+        "arabic_term": "الحواريون",
+        "definition": "De apostelen, discipelen van Isa. Zij geloofden in hem en steunden hem.",
+        "pronunciation": "al-ha-wa-ri-yun"
+      },
+      {
+        "id": 2,
+        "term": "Ansar",
+        "arabic_term": "أنصار",
+        "definition": "Bondgenoten, ondersteuners. De discipelen waren de ansar van Isa voor Allah.",
+        "pronunciation": "an-sar"
+      }
+    ]
+  },
+  "isa_table": {
+    "title": "De gedekte tafel",
+    "title_arabic": "المائدة",
+    "introduction": "De apostelen vroegen Isa om een gedekte tafel uit de hemel te laten neerdalen. Isa riep Allah aan. De Koran zegt: \"O Allah, onze Heer! Laat tot ons een gedekte tafel uit de hemel neerdalen die voor ons een feest zal zijn — voor de eersten en de laatsten onder ons — en een teken van U. En voorzie ons van onderhoud, want U bent de beste der voorzieners.\" (5:114)",
+    "conclusion": "Allah verhoorde het verzoek. Een tafel daalde uit de hemel neer, beladen met voedsel. Maar Allah waarschuwde: wie na dit teken niet gelooft, zal een straf ondergaan die Hij aan geen ander heeft opgelegd. De tafel was een beproeving voor de harten.",
+    "moral_lesson": "Dit verhaal leert ons dat goddelijke tekenen een zegen of een beproeving kunnen zijn. Dankbaarheid en geloof zijn de sleutel.",
+    "historical_location": "Palestina",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "isa_table_chapter_1",
+        "title": "De aanroeping van Isa",
+        "content": "De Koran verhaalt: \"Isa, zoon van Maria, zei: O Allah, onze Heer! Laat tot ons een gedekte tafel uit de hemel neerdalen die voor ons een feest zal zijn — voor de eersten en de laatsten onder ons — en een teken van U. En voorzie ons van onderhoud, want U bent de beste der voorzieners. Allah zei: Ik zal haar tot jullie neerzenden. Maar wie onder jullie daarna niet gelooft, hem zal Ik straffen met een straf die Ik aan geen wezen heb opgelegd.\" (5:114-115) Isa riep aan; Allah antwoordde met een voorwaarde."
+      },
+      {
+        "id": "isa_table_chapter_2",
+        "title": "Het teken en de waarschuwing",
+        "content": "De tafel daalde neer. De gelovigen aten er van en hun geloof werd versterkt. Maar sommigen, na het teken gezien te hebben, volhardden in ongeloof. De Koran concludeert: \"En wanneer Allah zal zeggen: O Isa, zoon van Maria! Zei jij tot de mensen: Neemt mij en mijn moeder als twee godheden naast Allah? Hij zal zeggen: Glorie aan U! Het past mij niet te zeggen wat ik geen recht heb te zeggen.\" (5:116) De tafel was een teken; ondankbaarheid werd gestraft."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 5:114",
+        "reference_text": "Soera Al-Ma'idah, vers 114",
+        "content": "قَالَ عِيسَى ٱبْنُ مَرْيَمَ ٱللَّهُمَّ رَبَّنَآ أَنزِلْ عَلَيْنَا مَآئِدَةًۭ مِّنَ ٱلسَّمَآءِ تَكُونُ لَنَا عِيدًۭا لِّأَوَّلِنَا وَءَاخِرِنَا وَءَايَةًۭ مِّنكَ ۖ وَٱرْزُقْنَا وَأَنتَ خَيْرُ ٱلرَّـٰزِقِينَ",
+        "translation": "Isa zei: O Allah! Laat tot ons een gedekte tafel uit de hemel neerdalen, een feest voor ons en een teken van U. Voorzie ons; U bent de beste der voorzieners.",
+        "relevance": "Dit vers bevat de aanroeping van Isa voor de tafel."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 5:115",
+        "reference_text": "Soera Al-Ma'idah, vers 115",
+        "content": "قَالَ ٱللَّهُ إِنِّى مُنَزِّلُهَا عَلَيْكُمْ ۖ فَمَن يَكْفُرْ بَعْدُ مِنكُمْ فَإِنِّىٓ أُعَذِّبُهُۥ عَذَابًۭا لَّآ أُعَذِّبُهُۥٓ أَحَدًۭا مِّنَ ٱلْعَـٰلَمِينَ",
+        "translation": "Allah zei: Ik zal haar neerzenden. Maar wie daarna niet gelooft, hem zal Ik straffen met een ongeëvenaarde straf.",
+        "relevance": "Dit vers verhaalt Allah's antwoord en de waarschuwing."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Ma'idah",
+        "arabic_term": "المائدة",
+        "definition": "De tafel. Een soera van de Koran draagt deze naam.",
+        "pronunciation": "al-ma-i-dah"
+      },
+      {
+        "id": 2,
+        "term": "Rizq",
+        "arabic_term": "رزق",
+        "definition": "Onderhoud, voorziening. De tafel was rizq uit de hemel.",
+        "pronunciation": "rizq"
+      }
+    ]
+  },
+  "isa_ascension": {
+    "title": "De hemelvaart van Isa",
+    "title_arabic": "رفع عيسى",
+    "introduction": "De ongelovigen onder de Kinderen van Israël beraamden plannen tegen Isa. Zij beweerden hem gedood en gekruisigd te hebben. De Koran weerlegt: \"Zij doodden hem niet, zij kruisigden hem niet; maar het werd hun zo getoond.\" (4:157) Allah verhief Isa tot Zichzelf, levend. Hij zal terugkeren aan het einde der tijden.",
+    "conclusion": "Isa stierf niet aan het kruis. Allah redde hem en verhief hem. Hij is bij Allah, levend. Hij zal weer neerdalen vóór de Laatste Dag om de Antichrist (Dajjal) te bestrijden en gerechtigheid te vestigen.",
+    "moral_lesson": "Dit verhaal leert ons dat Allah Zijn profeten beschermt. De islamitische waarheid over Isa verschilt van overtuigingen die beweren dat hij gekruisigd werd. Hij is levend en zal terugkeren.",
+    "historical_location": "Palestina",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "isa_ascension_chapter_1",
+        "title": "Het complot en de redding",
+        "content": "De Koran verhaalt: \"En vanwege hun zeggen: Wij hebben de Messias, Isa, zoon van Maria, de boodschapper van Allah gedood. Maar zij doodden hem niet, zij kruisigden hem niet; maar het werd hun zo getoond. En zij die over hem van mening verschillen zijn in twijfel; zij hebben er geen kennis van, zij volgen slechts vermoedens. En zij doodden hem zeker niet. Maar Allah verhief hem tot Zichzelf. En Allah is Almachtig en Wijs.\" (4:157-158) Allah redde Isa en verhief hem. Een schijn werd aan de ongelovigen gegeven; Isa werd bewaard."
+      },
+      {
+        "id": "isa_ascension_chapter_2",
+        "title": "De terugkeer van Isa",
+        "content": "De profetische overlevering verhaalt dat Isa op aarde zal neerdalen aan het einde der tijden. Hij zal de Antichrist (Dajjal) bestrijden, het kruis breken, het varken doden en tot de islam roepen. Hij zal met gerechtigheid regeren, dan sterven en begraven worden. Zijn terugkeer is een groot teken van het Uur. De Koran zegt: \"Hij is kennis van het Uur. Twijfelt er niet aan. Volgt mij; dat is een recht pad.\" (43:61)"
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 4:157-158",
+        "reference_text": "Soera An-Nisa, verzen 157-158",
+        "content": "وَقَوْلِهِمْ إِنَّا قَتَلْنَا ٱلْمَسِيحَ عِيسَى ٱبْنَ مَرْيَمَ رَسُولَ ٱللَّهِ وَمَا قَتَلُوهُ وَمَا صَلَبُوهُ وَلَـٰكِن شُبِّهَ لَهُمْ ۚ وَإِنَّ ٱلَّذِينَ ٱخْتَلَفُوا۟ فِيهِ لَفِى شَكٍّۢ مِّنْهُ ۚ مَا لَهُم بِهِۦ مِنْ عِلْمٍ إِلَّا ٱتِّبَاعَ ٱلظَّنِّ ۚ وَمَا قَتَلُوهُ يَقِينًۢا ۝ بَل رَّفَعَهُ ٱللَّهُ إِلَيْهِ ۚ وَكَانَ ٱللَّهُ عَزِيزًا حَكِيمًۭا",
+        "translation": "Zij doodden hem niet, zij kruisigden hem niet; maar het werd hun zo getoond. Allah verhief hem tot Zichzelf. Allah is Almachtig en Wijs.",
+        "relevance": "Deze verzen vestigen dat Isa niet gekruisigd werd en dat Allah hem verhief."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 3:55",
+        "reference_text": "Soera Âl-Imran, vers 55",
+        "content": "إِذْ قَالَ ٱللَّهُ يَـٰعِيسَىٰ إِنِّى مُتَوَفِّيكَ وَرَافِعُكَ إِلَىَّ وَمُطَهِّرُكَ مِنَ ٱلَّذِينَ كَفَرُوا۟",
+        "translation": "Toen Allah zei: O Isa! Ik zal jou tot Mij nemen, jou tot Mij verheffen en jou zuiveren van hen die niet geloven.",
+        "relevance": "Dit vers bevestigt Isa's hemelvaart door Allah."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Raf'",
+        "arabic_term": "رفع",
+        "definition": "Hemelvaart. Allah verhief Isa tot Zichzelf, levend.",
+        "pronunciation": "raf'"
+      },
+      {
+        "id": 2,
+        "term": "Dajjal",
+        "arabic_term": "الدجال",
+        "definition": "De Antichrist. Isa zal hem bestrijden bij zijn terugkeer.",
+        "pronunciation": "ad-daj-jal"
+      }
+    ]
+  },
+  "lessons_from_isa": {
+    "title": "Lessen uit het verhaal van Isa",
+    "title_arabic": "دروس من قصة عيسى",
+    "introduction": "Isa is een van de vijf grote profeten (Ulul Azm): Nuh, Ibrahim, Musa, Isa en Muhammad. Zijn verhaal leert de macht van Allah, de zuiverheid van Maria en de continuïteit van de profetische boodschap. De Koran zegt: \"De Messias, zoon van Maria, was slechts een boodschapper. Boodschappers zijn vóór hem gekomen.\" (5:75)",
+    "conclusion": "Isa is niet goddelijk; hij is een dienaar van Allah en Zijn boodschapper. Hij kondigde Muhammad aan. In Isa geloven is geloven in zijn boodschap: de eenheid van Allah, gehoorzaamheid en rechtschapenheid.",
+    "moral_lesson": "Dit verhaal leert ons dat alle profeten dezelfde boodschap hebben gepredikt: aanbid alleen Allah. Isa is een schakel in de profetische keten die culmineert met Muhammad.",
+    "historical_location": "Palestina",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lessons_from_isa_chapter_1",
+        "title": "Isa, dienaar van Allah",
+        "content": "De Koran zegt: \"De Messias, zoon van Maria, was slechts een boodschapper. Boodschappers zijn vóór hem gekomen. Zijn moeder was een waarachtige vrouw. Zij aten voedsel. Ziet hoe Wij hun de tekenen duidelijk maken, en ziet dan hoe zij zich afwenden.\" (5:75) Isa was een profeet zoals de anderen. Hij at, dronk, sliep. Hij was niet goddelijk. Hij riep op tot de aanbidding van Allah alleen."
+      },
+      {
+        "id": "lessons_from_isa_chapter_2",
+        "title": "De profetische keten",
+        "content": "De Koran verhaalt: \"En wanneer Allah zal zeggen: O Isa, zoon van Maria! Zei jij tot de mensen: Neemt mij en mijn moeder als twee godheden naast Allah? Hij zal zeggen: Glorie aan U! Het past mij niet te zeggen wat ik geen recht heb te zeggen. Als ik het gezegd had, zou U het geweten hebben.\" (5:116) Isa beweerde nooit goddelijk te zijn. Hij bevestigde de Thora, bracht de Injil en kondigde Muhammad aan. Geloof in alle profeten is één."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 5:75",
+        "reference_text": "Soera Al-Ma'idah, vers 75",
+        "content": "مَا ٱلْمَسِيحُ ٱبْنُ مَرْيَمَ إِلَّا رَسُولٌۭ قَدْ خَلَتْ مِن قَبْلِهِ ٱلرُّسُلُ",
+        "translation": "De Messias, zoon van Maria, was slechts een boodschapper. Boodschappers zijn vóór hem gekomen.",
+        "relevance": "Dit vers vestigt dat Isa een boodschapper is zoals de anderen."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 2:136",
+        "reference_text": "Soera Al-Baqarah, vers 136",
+        "content": "قُولُوٓا۟ ءَامَنَّا بِٱللَّهِ وَمَآ أُنزِلَ إِلَيْنَا وَمَآ أُنزِلَ إِلَىٰٓ إِبْرَٰهِـۧمَ وَإِسْمَـٰعِيلَ وَإِسْحَـٰقَ وَيَعْقُوبَ وَٱلْأَسْبَاطِ وَمَآ أُوتِىَ مُوسَىٰ وَعِيسَىٰ وَمَآ أُوتِىَ ٱلنَّبِيُّونَ مِن رَّبِّهِمْ",
+        "translation": "Zegt: Wij geloven in Allah, in wat ons geopenbaard werd, in wat geopenbaard werd aan Ibrahim, Ismaël, Izaäk, Jakob, de stammen, Musa, Isa en de profeten.",
+        "relevance": "Dit vers verenigt het geloof in alle profeten, inclusief Isa."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Ulul Azm",
+        "arabic_term": "أولو العزم",
+        "definition": "De profeten van vastberadenheid: Nuh, Ibrahim, Musa, Isa, Muhammad.",
+        "pronunciation": "u-lul azm"
+      },
+      {
+        "id": 2,
+        "term": "Tawhid",
+        "arabic_term": "توحيد",
+        "definition": "Monotheïsme. De centrale boodschap van Isa en alle profeten.",
+        "pronunciation": "taw-hid"
+      }
+    ]
+  }
+}

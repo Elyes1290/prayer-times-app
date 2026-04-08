@@ -1,0 +1,748 @@
+{
+  "musa_birth": {
+    "title": "El nacimiento de Musa y el palacio del Faraón",
+    "title_arabic": "مولد موسى وقصر فرعون",
+    "introduction": "Musa (موسى عليه السلام) es uno de los mayores profetas mencionados en el Corán. Allah dice: «Te relatamos con verdad la historia de Moisés y del Faraón, para gente que cree.» (28:3) El Faraón ordenó matar a todos los recién nacidos varones de los Hijos de Israel. La madre de Musa lo puso en un cofre y lo confió al río. El cofre fue recogido por la familia del Faraón.",
+    "conclusion": "Musa creció en el palacio del Faraón, amamantado por su propia madre a quien Allah había inspirado. Recibió sabiduría y conocimiento. Su destino estaba trazado por el Creador.",
+    "moral_lesson": "Esta historia nos enseña que Allah protege a quienes Él elige. El plan divino se cumple a pesar de las intrigas de los tiranos.",
+    "historical_location": "Antiguo Egipto",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "musa_birth_chapter_1",
+        "title": "El decreto del Faraón",
+        "content": "El Corán relata: «El Faraón se enalteció en la tierra y dividió a su pueblo en facciones para debilitar a un grupo entre ellos, degollando a sus hijos y dejando vivir a sus mujeres. Era de los corruptores.» (28:4) El Faraón temía que los Hijos de Israel se fortalecieran. Ordenó matar a todos los niños recién nacidos. La madre de Musa recibió la inspiración divina."
+      },
+      {
+        "id": "musa_birth_chapter_2",
+        "title": "El cofre en el Nilo",
+        "content": "El Corán dice: «E inspiramos a la madre de Moisés: Amamántalo. Y cuando temas por él, échalo al río. Y no temas ni te entristezcas. Te lo devolveremos y haremos de él uno de los mensajeros.» (28:7) Puso a Musa en un cofre y lo confió al Nilo. La hermana de Musa siguió de lejos. El cofre fue recogido por la mujer del Faraón que dijo: «¡Una alegría para mí y para ti! No lo matéis. Podría sernos útil, o podríamos adoptarlo como hijo.» (28:9)"
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Corán 28:4",
+        "reference_text": "Sura Al-Qasas, versículo 4",
+        "content": "إِنَّ فِرْعَوْنَ عَلَا فِى ٱلْأَرْضِ وَجَعَلَ أَهْلَهَا شِيَعًۭا يَسْتَضْعِفُ طَآئِفَةًۭ مِّنْهُمْ يُذَبِّحُ أَبْنَآءَهُمْ وَيَسْتَحْىِۦ نِسَآءَهُمْ ۚ إِنَّهُۥ كَانَ مِنَ ٱلْمُفْسِدِينَ",
+        "translation": "El Faraón se enalteció en la tierra; dividió a su pueblo en facciones, degollando a sus hijos y dejando vivir a sus mujeres.",
+        "relevance": "Este versículo describe la tiranía del Faraón."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Corán 28:7",
+        "reference_text": "Sura Al-Qasas, versículo 7",
+        "content": "وَأَوْحَيْنَآ إِلَىٰٓ أُمِّ مُوسَىٰٓ أَنْ أَرْضِعِيهِ ۖ فَإِذَا خِفْتِ عَلَيْهِ فَأَلْقِيهِ فِى ٱلْيَمِّ وَلَا تَخَافِى وَلَا تَحْزَنِى ۖ إِنَّا رَآدُّوهُ إِلَيْكِ وَجَاعِلُوهُ مِنَ ٱلْمُرْسَلِينَ",
+        "translation": "E inspiramos a la madre de Moisés: Amamántalo. Y cuando temas por él, échalo al río. Y no temas ni te entristezcas. Te lo devolveremos y haremos de él uno de los mensajeros.",
+        "relevance": "Este versículo muestra la protección divina de Musa."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Musa",
+        "arabic_term": "موسى",
+        "definition": "Moisés en árabe. Profeta de Allah, mensajero enviado al Faraón.",
+        "pronunciation": "mou-sa"
+      },
+      {
+        "id": 2,
+        "term": "Fir'awn",
+        "arabic_term": "فرعون",
+        "definition": "Faraón. El tirano de Egipto que se opuso a Musa.",
+        "pronunciation": "fi-raoune"
+      }
+    ]
+  },
+  "musa_flee": {
+    "title": "La huida de Musa a Madyan",
+    "title_arabic": "هروب موسى إلى مدين",
+    "introduction": "Musa creció en el palacio. Un día intervino para ayudar a un israelita y golpeó a un egipcio que murió. Musa lamentó su acto e invocó el perdón de Allah. Dejó Egipto y se dirigió a Madyan.",
+    "conclusion": "En Madyan, Musa ayudó a las dos hijas de Shu'ayb a abrevar sus ovejas. Su padre le ofreció hospitalidad y una de sus hijas en matrimonio. Musa permaneció diez años en Madyan antes de que Allah lo llamara.",
+    "moral_lesson": "Esta historia nos enseña que el arrepentimiento sincero conduce al perdón. Allah guía a quienes Lo buscan.",
+    "historical_location": "De Egipto a Madyan",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "musa_flee_chapter_1",
+        "title": "El incidente y el arrepentimiento",
+        "content": "El Corán relata: «Y entró en la ciudad en un momento de descuido de sus habitantes. Encontró allí a dos hombres peleando: uno era de su partido, el otro de sus enemigos. El de su partido lo llamó en ayuda contra el de sus enemigos. Moisés lo golpeó y le causó la muerte. Dijo: Esto es obra de Satanás. Es un enemigo manifiesto que extravía.» (28:15) Musa invocó: «¡Señor mío! Me he hecho daño a mí mismo. ¡Perdóname!» (28:16) Allah le perdonó."
+      },
+      {
+        "id": "musa_flee_chapter_2",
+        "title": "Madyan y Shu'ayb",
+        "content": "El Corán dice: «Luego se dirigió hacia Madyan. Dijo: Quizás mi Señor me guíe al camino recto.» (28:22) Al llegar al abrevadero, ayudó a dos mujeres a abrevar su rebaño. Dijeron: «Nuestro padre es un anciano.» Musa abrevó por ellas. Su padre (Shu'ayb) le ofreció hospitalidad y le dijo: «Quiero casarte con una de mis dos hijas.» (28:27) Musa aceptó y permaneció diez años."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Corán 28:15-16",
+        "reference_text": "Sura Al-Qasas, versículos 15-16",
+        "content": "وَدَخَلَ ٱلْمَدِينَةَ عَلَىٰ حِينِ غَفْلَةٍۢ مِّنْ أَهْلِهَا فَوَجَدَ فِيهَا رَجُلَيْنِ يَقْتَتِلَانِ",
+        "translation": "Y entró en la ciudad en un momento de descuido. Encontró allí a dos hombres peleando. Moisés golpeó y causó la muerte. Dijo: Esto es obra de Satanás.",
+        "relevance": "Este versículo describe el incidente y el arrepentimiento de Musa."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Corán 28:27",
+        "reference_text": "Sura Al-Qasas, versículo 27",
+        "content": "قَالَ إِنِّىٓ أُرِيدُ أَنْ أُنكِحَكَ إِحْدَى ٱبْنَتَىَّ هَـٰتَيْنِ",
+        "translation": "Quiero casarte con una de mis dos hijas.",
+        "relevance": "Shu'ayb ofrece su hija en matrimonio a Musa."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Madyan",
+        "arabic_term": "مدين",
+        "definition": "Madián. Región donde Musa encontró refugio tras dejar Egipto.",
+        "pronunciation": "ma-diyane"
+      },
+      {
+        "id": 2,
+        "term": "Shu'ayb",
+        "arabic_term": "شعيب",
+        "definition": "Jetró. El profeta o sabio de Madyan que acogió a Musa.",
+        "pronunciation": "chou-ayb"
+      }
+    ]
+  },
+  "musa_burning_bush": {
+    "title": "La zarza ardiente y la revelación",
+    "title_arabic": "العليقة المحترقة والوحي",
+    "introduction": "Tras diez años en Madyan, Musa partió con su familia. Vio un fuego en la ladera del monte Tur. Se acercó y Allah le habló: «¡Oh Moisés! Yo soy tu Señor.» (20:12) Este fue el comienzo de su misión profética.",
+    "conclusion": "Allah dio a Musa dos signos: su vara que se transformaba en serpiente, y su mano que se volvía blanca al sacarla de su seno. Musa pidió que Harun (Aaron) lo acompañara. Allah concedió su petición.",
+    "moral_lesson": "Esta historia nos enseña que Allah elige a Sus mensajeros y los equipa con signos. La misión profética es un honor y una responsabilidad.",
+    "historical_location": "Monte Tur (Sinaí)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "musa_burning_bush_chapter_1",
+        "title": "La llamada en el monte Tur",
+        "content": "El Corán relata: «Cuando vio un fuego, dijo a su familia: Quedaos aquí. He visto un fuego. Quizás os traiga una antorcha de él o encuentre guía junto al fuego.» (28:29) Cuando se acercó, una voz lo llamó: «¡Oh Moisés! Yo soy tu Señor. Quítate las sandalias. Estás en el valle sagrado de Tuwa.» (20:11-12) Musa recibió la orden de ir al Faraón: «Ve al Faraón. Ha transgredido.» (20:24)"
+      },
+      {
+        "id": "musa_burning_bush_chapter_2",
+        "title": "Los signos: la vara y la mano",
+        "content": "El Corán dice: «¿Qué hay en tu mano derecha? — Es mi vara sobre la que me apoyo y con la que abato hojas para mis ovejas.» (20:17-18) Allah dijo: «¡Arrójala, Moisés!» La arrojó y he aquí que se convirtió en una serpiente que reptaba. «Agárrala y no temas. La devolveremos a su estado anterior.» (20:19-21) Luego: «Mete tu mano en tu seno. Saldrá blanca sin daño.» (20:22) Estos dos signos debían convencer al Faraón."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Corán 20:11-12",
+        "reference_text": "Sura Taha, versículos 11-12",
+        "content": "فَلَمَّآ أَتَىٰهَا نُودِىَ يَـٰمُوسَىٰٓ إِنِّىٓ أَنَا رَبُّكَ فَٱخْلَعْ نَعْلَيْكَ ۖ إِنَّكَ بِٱلْوَادِ ٱلْمُقَدَّسِ طُوًى",
+        "translation": "¡Oh Moisés! Yo soy tu Señor. Quítate las sandalias. Estás en el valle sagrado de Tuwa.",
+        "relevance": "La revelación a Musa en la zarza ardiente."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Corán 20:19-21",
+        "reference_text": "Sura Taha, versículos 19-21",
+        "content": "وَأَلْقِ عَصَاكَ ۚ فَلَمَّا رَءَاهَا تَهْتَزُّ كَأَنَّهَا جَآنٌّ وَلَّىٰ مُدْبِرًۭا وَلَمْ يُعَقِّبْ",
+        "translation": "¡Arrójala, Moisés! La arrojó y he aquí que se convirtió en una serpiente que reptaba.",
+        "relevance": "El primer signo: la vara transformada en serpiente."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Tur",
+        "arabic_term": "طور",
+        "definition": "Monte Sinaí. La montaña donde Musa recibió la revelación.",
+        "pronunciation": "tour"
+      },
+      {
+        "id": 2,
+        "term": "Asa",
+        "arabic_term": "عصا",
+        "definition": "Vara. La vara de Musa que se convirtió en serpiente por voluntad de Allah.",
+        "pronunciation": "a-sa"
+      }
+    ]
+  },
+  "musa_pharaoh": {
+    "title": "Musa ante el Faraón",
+    "title_arabic": "موسى أمام فرعون",
+    "introduction": "Musa y Harun fueron al Faraón con los signos de Allah. El Faraón se burló y convocó a sus magos. Los magos lanzaron sus cuerdas que parecían convertirse en serpientes. Luego Musa lanzó su vara que devoró lo que habían fabricado.",
+    "conclusion": "Los magos se postraron y dijeron: «Creemos en el Señor de Aarón y de Moisés.» (20:70) El Faraón los amenazó, pero su fe era firme. El Faraón se negó a creer y persistió en su arrogancia.",
+    "moral_lesson": "Esta historia nos enseña que la verdad triunfa sobre la falsedad. Los signos de Allah son más poderosos que los artificios de los hombres.",
+    "historical_location": "Egipto",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "musa_pharaoh_chapter_1",
+        "title": "La llamada al Faraón",
+        "content": "El Corán relata: «Id, tú y tu hermano, con Mis signos. Y no os relajéis en Mi recuerdo. Id al Faraón. Ha transgredido. Luego habladle con suavidad. Quizás recuerde o tema.» (20:42-44) Musa dijo al Faraón: «Somos los mensajeros de tu Señor. Deja partir con nosotros a los Hijos de Israel.» (20:47) El Faraón respondió: «¿No te criamos entre nosotros cuando eras niño?» (26:18) Musa replicó: «Es Allah quien me concedió la sabiduría y me hizo mensajero.» (26:21)"
+      },
+      {
+        "id": "musa_pharaoh_chapter_2",
+        "title": "El desafío de los magos",
+        "content": "El Corán dice: «El Faraón dijo: Traedme a todo mago sabio.» (10:79) Los magos lanzaron sus cuerdas y varas. Dijeron: «Por el poder del Faraón, seremos los vencedores.» (26:44) Musa lanzó su vara. Devoró lo que habían fabricado. Los magos cayeron postrados y dijeron: «Creemos en el Señor de los mundos, el Señor de Aarón y de Moisés.» (20:70) El Faraón se enfureció pero la verdad había triunfado."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Corán 20:47",
+        "reference_text": "Sura Taha, versículo 47",
+        "content": "إِنَّا رَسُولَا رَبِّكَ فَأَرْسِلْ مَعَنَا بَنِىٓ إِسْرَٰٓءِيلَ وَلَا تُعَذِّبْهُمْ",
+        "translation": "Somos los mensajeros de tu Señor. Deja partir con nosotros a los Hijos de Israel.",
+        "relevance": "La llamada de Musa al Faraón."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Corán 20:70",
+        "reference_text": "Sura Taha, versículo 70",
+        "content": "فَأُلْقِىَ ٱلسَّحَرَةُ سُجَّدًۭا قَالُوٓا۟ ءَامَنَّا بِرَبِّ هَـٰرُونَ وَمُوسَىٰ",
+        "translation": "Los magos cayeron postrados y dijeron: Creemos en el Señor de Aarón y de Moisés.",
+        "relevance": "La conversión de los magos tras ver el signo."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Harun",
+        "arabic_term": "هارون",
+        "definition": "Aarón. Hermano de Musa, su apoyo en la misión.",
+        "pronunciation": "ha-roune"
+      },
+      {
+        "id": 2,
+        "term": "Bani Israil",
+        "arabic_term": "بنو إسرائيل",
+        "definition": "Los Hijos de Israel. El pueblo que Musa debía liberar.",
+        "pronunciation": "banou is-ra-il"
+      }
+    ]
+  },
+  "musa_plagues": {
+    "title": "Las plagas de Egipto",
+    "title_arabic": "آيات مصر",
+    "introduction": "El Faraón se negó a liberar a los Hijos de Israel a pesar de los signos. Allah envió plagas sobre Egipto. El Corán dice: «Así los golpeamos con diluvio, langostas, piojos, ranas y sangre, como signos claros. Pero persistieron en la arrogancia y fueron un pueblo perverso.» (7:133)",
+    "conclusion": "Con cada plaga, el Faraón suplicaba a Musa que intercediera. Musa invocaba a Allah y la plaga cesaba. Pero el Faraón rompía su promesa en cuanto la aflicción se alejaba. Su corazón permaneció endurecido.",
+    "moral_lesson": "Esta historia nos enseña que Allah manifiesta Sus signos para guiar, pero el orgullo puede cegar. El arrepentimiento sincero debe preceder a la liberación.",
+    "historical_location": "Egipto",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "musa_plagues_chapter_1",
+        "title": "Los signos enviados",
+        "content": "El Corán relata: «Así los golpeamos con diluvio, langostas, piojos, ranas y sangre, como signos claros.» (7:133) Estas plagas golpearon Egipto una a una. El Nilo se convirtió en sangre. Las ranas invadieron las moradas. Los piojos y langostas devastaron. Cada signo era prueba del poder de Allah y una advertencia para el Faraón."
+      },
+      {
+        "id": "musa_plagues_chapter_2",
+        "title": "El endurecimiento del Faraón",
+        "content": "El Corán dice: «Y cada vez que les infligíamos un castigo, decían: ¡Oh Moisés! Invoca a tu Señor por nosotros según el pacto que ha hecho contigo. Si quitas el castigo, creeremos en ti y dejaremos partir contigo a los Hijos de Israel. Y cuando quitábamos el castigo por un plazo que debían alcanzar, he aquí que rompían su promesa.» (7:134-135) El Faraón nunca cumplió su palabra. Su corazón permaneció endurecido hasta el final."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Corán 7:133",
+        "reference_text": "Sura Al-A'raf, versículo 133",
+        "content": "فَأَرْسَلْنَا عَلَيْهِمُ ٱلطُّوفَانَ وَٱلْجَرَادَ وَٱلْقُمَّلَ وَٱلضَّفَادِعَ وَٱلدَّمَ",
+        "translation": "Así los golpeamos con diluvio, langostas, piojos, ranas y sangre.",
+        "relevance": "Las plagas enviadas sobre Egipto."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Corán 7:134-135",
+        "reference_text": "Sura Al-A'raf, versículos 134-135",
+        "content": "وَمَا نُرْسِلُ بِٱلْـَٔايَـٰتِ إِلَّا تَخْوِيفًۭا",
+        "translation": "Cada vez que una plaga los golpeaba, pedían a Musa que invocara. Luego rompían su promesa.",
+        "relevance": "El endurecimiento del Faraón."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Ayat",
+        "arabic_term": "آيات",
+        "definition": "Signos. Las plagas eran signos de Allah para el Faraón.",
+        "pronunciation": "a-ya"
+      },
+      {
+        "id": 2,
+        "term": "Tufan",
+        "arabic_term": "الطوفان",
+        "definition": "El diluvio. Una de las plagas enviadas sobre Egipto.",
+        "pronunciation": "at-tou-fan"
+      }
+    ]
+  },
+  "musa_exodus": {
+    "title": "El Éxodo y el cruce del mar",
+    "title_arabic": "الخروج وعبور البحر",
+    "introduction": "Tras las plagas, el Faraón dejó partir a los Hijos de Israel. Luego cambió de opinión y los persiguió con su ejército. Los Hijos de Israel se encontraron atrapados entre el mar y el ejército del Faraón. Musa recibió la orden de golpear el mar con su vara.",
+    "conclusion": "El mar se abrió y los Hijos de Israel cruzaron en tierra seca. El Faraón y su ejército los persiguieron. El mar se cerró sobre ellos. El Faraón, al ahogarse, dijo: «Creo que no hay más divinidad que Aquel en quien creen los Hijos de Israel.» (10:90) Pero era demasiado tarde.",
+    "moral_lesson": "Esta historia nos enseña que Allah salva a los creyentes y destruye a los tiranos. El mar obedece Su mandato.",
+    "historical_location": "Mar Rojo",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "musa_exodus_chapter_1",
+        "title": "La persecución del Faraón",
+        "content": "El Corán relata: «E inspiramos a Moisés: Partid de noche con Mis siervos. Seréis perseguidos.» (26:52) El Faraón movilizó sus tropas y los persiguió. Los Hijos de Israel dijeron: «Seremos alcanzados.» Musa respondió: «¡Nunca! Mi Señor está conmigo. Él me guiará.» (26:62) Allah ordenó a Musa: «Golpea el mar con tu vara.» Se partió y cada parte fue como una gran montaña."
+      },
+      {
+        "id": "musa_exodus_chapter_2",
+        "title": "El ahogamiento del Faraón",
+        "content": "El Corán dice: «Hicimos cruzar el mar a los Hijos de Israel. El Faraón y sus ejércitos los persiguieron con rebeldía y hostilidad. Luego, cuando el ahogamiento lo alcanzó, dijo: Creo que no hay más divinidad que Aquel en quien creen los Hijos de Israel. Y soy de los que se someten. ¿Ahora? ¡Cuando antes habías desobedecido y eras de los corruptores! Hoy te salvamos en tu cuerpo para que seas un signo para quienes vengan después de ti.» (10:90-92) El Faraón pereció. Los Hijos de Israel fueron salvados."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Corán 26:52",
+        "reference_text": "Sura Ash-Shu'ara, versículo 52",
+        "content": "وَأَوْحَيْنَآ إِلَىٰ مُوسَىٰٓ أَنْ أَسْرِ بِعِبَادِىٓ إِنَّكُم مُّتَّبَعُونَ",
+        "translation": "E inspiramos a Moisés: Partid de noche con Mis siervos. Seréis perseguidos.",
+        "relevance": "La orden de salir de Egipto."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Corán 10:90-92",
+        "reference_text": "Sura Yunus, versículos 90-92",
+        "content": "حَتَّىٰٓ إِذَآ أَدْرَكَهُ ٱلْغَرَقُ قَالَ ءَامَنْتُ أَنَّهُۥ لَآ إِلَـٰهَ إِلَّا ٱلَّذِىٓ ءَامَنَتْ بِهِۦ بَنُوٓا۟ إِسْرَٰٓءِيلَ",
+        "translation": "Cuando el ahogamiento lo alcanzó, dijo: Creo que no hay más divinidad que Aquel en quien creen los Hijos de Israel.",
+        "relevance": "El arrepentimiento tardío del Faraón."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Yamm",
+        "arabic_term": "يم",
+        "definition": "Mar. El mar que Musa cruzó con su pueblo.",
+        "pronunciation": "yamm"
+      },
+      {
+        "id": 2,
+        "term": "Fir'awn",
+        "arabic_term": "فرعون",
+        "definition": "Faraón. Su cuerpo fue preservado como signo para las generaciones.",
+        "pronunciation": "fi-raoune"
+      }
+    ]
+  },
+  "musa_desert": {
+    "title": "El desierto: agua, maná y codornices",
+    "title_arabic": "الماء والمن والسلوى",
+    "introduction": "En el desierto del Sinaí, los Hijos de Israel tuvieron sed y hambre. Allah proveyó sus necesidades. El Corán dice: «Y cuando Moisés pidió agua para su pueblo, dijimos: Golpea la roca con tu vara. Y brotaron doce manantiales.» (2:60) También envió maná y codornices, y los protegió con nubes.",
+    "conclusion": "Allah dice: «Comed de las cosas buenas que os hemos provisto.» (7:160) A pesar de estas bendiciones, parte del pueblo se quejó y desobedeció. La gratitud es una prueba para los corazones.",
+    "moral_lesson": "Esta historia nos enseña que Allah provee las necesidades de Sus siervos. El maná y las codornices son bendiciones que recordar.",
+    "historical_location": "Desierto del Sinaí",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "musa_desert_chapter_1",
+        "title": "El agua de la roca",
+        "content": "El Corán relata: «Y revelamos a Moisés, cuando su pueblo le pidió agua: Golpea la roca con tu vara. Y brotaron doce manantiales. Cada tribu supo dónde beber.» (7:160) Musa golpeó la roca con su vara. Brotaron doce manantiales — uno para cada tribu de Israel. El milagro del agua en el desierto árido."
+      },
+      {
+        "id": "musa_desert_chapter_2",
+        "title": "El maná y las codornices",
+        "content": "El Corán dice: «Y os dimos sombra con nubes. Y hicimos descender sobre vosotros maná y codornices. Comed de las cosas buenas que os hemos provisto.» (2:57, 7:160) El maná (المن) era un alimento celestial. Las codornices (السلوى) eran aves. Allah los protegió con nubes. A pesar de todo, algunos se quejaron y pidieron verduras como en Egipto."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Corán 7:160",
+        "reference_text": "Sura Al-A'raf, versículo 160",
+        "content": "وَأَوْحَيْنَآ إِلَىٰ مُوسَىٰٓ إِذِ ٱسْتَسْقَىٰهُ قَوْمُهُۥٓ أَنِ ٱضْرِب بِّعَصَاكَ ٱلْحَجَرَ ۖ فَٱنۢبَجَسَتْ مِنْهُ ٱثْنَتَا عَشْرَةَ عَيْنًۭا",
+        "translation": "Y revelamos a Moisés, cuando su pueblo le pidió agua: Golpea la roca con tu vara. Y brotaron doce manantiales.",
+        "relevance": "El agua milagrosa de la roca."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Corán 2:57",
+        "reference_text": "Sura Al-Baqarah, versículo 57",
+        "content": "وَظَلَّلْنَا عَلَيْكُمُ ٱلْغَمَامَ وَأَنزَلْنَا عَلَيْكُمُ ٱلْمَنَّ وَٱلسَّلْوَىٰ",
+        "translation": "Y os dimos sombra con nubes. Y hicimos descender sobre vosotros maná y codornices.",
+        "relevance": "El maná y las codornices."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Al-Mann",
+        "arabic_term": "المن",
+        "definition": "Maná. Alimento celestial enviado a los Hijos de Israel.",
+        "pronunciation": "al-mann"
+      },
+      {
+        "id": 2,
+        "term": "As-Salwa",
+        "arabic_term": "السلوى",
+        "definition": "Codornices. Aves enviadas como alimento en el desierto.",
+        "pronunciation": "as-sal-wa"
+      }
+    ]
+  },
+  "musa_tablets": {
+    "title": "La revelación de las tablas (Tawrat)",
+    "title_arabic": "وحي الألواح والتوراة",
+    "introduction": "Tras cruzar el mar, Musa condujo a su pueblo hacia el monte Tur (Sinaí). Allah lo llamó para hablarle y revelarle la Tawrat (la Torá). El Corán dice: «Y escribimos para él en las tablas una exhortación sobre todas las cosas.» (7:145) Musa estuvo ausente cuarenta noches.",
+    "conclusion": "Allah habló directamente a Musa. Este es un honor único entre los profetas. Las tablas contenían guía y misericordia para los Hijos de Israel. Durante su ausencia, una prueba esperaba a su pueblo.",
+    "moral_lesson": "Esta historia nos enseña que la revelación divina es la fuente de toda guía. La Tawrat, como el Corán, es una luz para la humanidad.",
+    "historical_location": "Monte Tur (Sinaí)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "musa_tablets_chapter_1",
+        "title": "La llamada al monte Tur",
+        "content": "El Corán relata: «Y dimos a Moisés el Libro después de haber destruido las generaciones anteriores, como pruebas para la gente, guía y misericordia.» (28:43) Musa ascendió al monte Tur para recibir la revelación. Allah dice: «E hicimos una cita con Moisés por treinta noches. Y las completamos con diez.» (7:142) Cuarenta noches durante las cuales Allah le habló."
+      },
+      {
+        "id": "musa_tablets_chapter_2",
+        "title": "Las tablas y la Tawrat",
+        "content": "El Corán dice: «Y escribimos para él en las tablas una exhortación sobre todas las cosas y una explicación detallada de todas las cosas. Tómalas con firmeza y ordena a tu pueblo que tome lo mejor de ellas.» (7:145) La Tawrat es el Libro revelado a Musa. Las tablas contenían los mandamientos, la guía y la sabiduría. Allah habló a Musa (كَلَّمَ اللَّهُ مُوسَىٰ تَكْلِيمًا) — un discurso directo, un honor inmenso."
+      },
+      {
+        "id": "musa_tablets_chapter_3",
+        "title": "La petición de ver a Allah",
+        "content": "El Corán relata: «Y cuando Moisés vino a Nuestra cita y su Señor le habló, dijo: ¡Oh Señor mío! Muéstrame para verte. Dijo: No Me verás. Pero mira la montaña: si permanece en su lugar, entonces Me verás.» (7:143) Cuando Allah Se manifestó a la montaña, se pulverizó y Musa cayó inconsciente. Al despertar, dijo: «¡Gloria a Ti! Me arrepiento y soy el primero de los creyentes.»"
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Corán 7:142",
+        "reference_text": "Sura Al-A'raf, versículo 142",
+        "content": "وَوَٰعَدْنَا مُوسَىٰ ثَلَٰثِينَ لَيْلَةًۭ وَأَتْمَمْنَٰهَا بِعَشْرٍۢ",
+        "translation": "E hicimos una cita con Moisés por treinta noches. Y las completamos con diez.",
+        "relevance": "Las cuarenta noches de Musa en el monte Tur."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Corán 7:145",
+        "reference_text": "Sura Al-A'raf, versículo 145",
+        "content": "وَكَتَبْنَا لَهُۥ فِى ٱلْأَلْوَاحِ مِن كُلِّ شَىْءٍۢ مَّوْعِظَةًۭ وَتَفْصِيلًۭا لِّكُلِّ شَىْءٍۢ",
+        "translation": "Y escribimos para él en las tablas una exhortación sobre todas las cosas y una explicación detallada de todas las cosas.",
+        "relevance": "La revelación de las tablas."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Alwah",
+        "arabic_term": "الألواح",
+        "definition": "Las tablas. En las que Allah inscribió la Tawrat para Musa.",
+        "pronunciation": "al-al-wah"
+      },
+      {
+        "id": 2,
+        "term": "Tawrat",
+        "arabic_term": "التوراة",
+        "definition": "La Torá. El Libro revelado a Musa (Moisés).",
+        "pronunciation": "at-taw-ra"
+      }
+    ]
+  },
+  "musa_samiri": {
+    "title": "La prueba del Samiri y el becerro de oro",
+    "title_arabic": "فتنة السامري والعجل",
+    "introduction": "Mientras Musa estaba en el monte Tur, el Samiri (السامري) aprovechó su ausencia. Recogió las joyas del pueblo y fabricó un becerro de oro que emitía un mugido. Parte de los Hijos de Israel lo adoraron. El Corán dice: «Y el pueblo de Moisés adoptó tras él un becerro hecho de sus adornos.» (7:148)",
+    "conclusion": "A su regreso, Musa se enfureció. Destruyó el becerro, confrontó al Samiri y ordenó a los creyentes que se arrepintieran. El Samiri fue desterrado. Harun había intentado disuadirlos pero no fue escuchado.",
+    "moral_lesson": "Esta historia nos enseña que la idolatría puede surgir en ausencia de guías. Hay que permanecer firme en la fe y no sucumbir a las tentaciones.",
+    "historical_location": "Desierto del Sinaí",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "musa_samiri_chapter_1",
+        "title": "El becerro del Samiri",
+        "content": "El Corán relata: «Dijo: Percibí lo que ellos no percibieron. Tomé un puñado de la huella del mensajero y la arrojé. Así me sugirió mi alma.» (20:96) El Samiri afirmó haber seguido una inspiración. Fabricó un becerro de oro con los adornos del pueblo. El becerro emitía un sonido — quizás por un truco. Parte del pueblo dijo: «Este es vuestro dios y el dios de Moisés.» (20:88)"
+      },
+      {
+        "id": "musa_samiri_chapter_2",
+        "title": "La ira de Musa y el arrepentimiento",
+        "content": "El Corán dice: «Y cuando Moisés regresó a su pueblo, enfadado y afligido, dijo: ¡Qué malos sucesores habéis sido después de mí! ¿Queríais adelantar el mandato de vuestro Señor?» (7:150) Musa arrojó las tablas, tomó a su hermano Harun por la cabeza y lo tiró hacia sí. Harun explicó que no había sido escuchado. Musa destruyó el becerro y lo arrojó al mar. El Samiri fue desterrado: «¡Vete! En la vida dirás: ¡No me toquéis!» (20:97)"
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Corán 20:85-88",
+        "reference_text": "Sura Taha, versículos 85-88",
+        "content": "قَالَ فَإِنَّا قَدْ فَتَنَّا قَوْمَكَ مِنۢ بَعْدِكَ وَأَضَلَّهُمُ ٱلسَّامِرِىُّ",
+        "translation": "Hemos probado a tu pueblo tras tu partida. Y el Samiri los ha extraviado.",
+        "relevance": "La prueba durante la ausencia de Musa."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Corán 20:97",
+        "reference_text": "Sura Taha, versículo 97",
+        "content": "قَالَ فَٱذْهَبْ فَإِنَّ لَكَ فِى ٱلْحَيَوٰةِ أَن تَقُولَ لَا مِسَاسَ",
+        "translation": "¡Vete! En la vida dirás: ¡No me toquéis!",
+        "relevance": "El castigo del Samiri."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "As-Samiri",
+        "arabic_term": "السامري",
+        "definition": "El Samiri. El que fabricó el becerro de oro y extravió al pueblo.",
+        "pronunciation": "as-sa-mi-ri"
+      },
+      {
+        "id": 2,
+        "term": "Al-Ijl",
+        "arabic_term": "العجل",
+        "definition": "El becerro. El ídolo de oro fabricado por el Samiri.",
+        "pronunciation": "al-idjl"
+      }
+    ]
+  },
+  "musa_qarun": {
+    "title": "Qarun (Coré) y la arrogancia de la riqueza",
+    "title_arabic": "قارون والكبر",
+    "introduction": "Qarun (قارون) era del pueblo de Musa. Allah le había concedido inmensos tesoros. El Corán dice: «Ciertamente, Qarun era del pueblo de Moisés, pero los oprimió. Le habíamos dado tesoros cuyas llaves habrían sido una carga para un grupo de hombres fuertes.» (28:76)",
+    "conclusion": "Qarun atribuyó su riqueza a sí mismo. Rechazó los consejos. Allah hizo que la tierra lo tragara a él y a su morada. Quienes habían envidiado sus riquezas comprendieron que el verdadero éxito está con Allah.",
+    "moral_lesson": "Esta historia nos enseña que la riqueza es una prueba. El orgullo y la ingratitud llevan a la perdición. El verdadero éxito es la piedad.",
+    "historical_location": "Desierto del Sinaí",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "musa_qarun_chapter_1",
+        "title": "Los tesoros de Qarun",
+        "content": "El Corán relata: «Le habíamos dado tesoros cuyas llaves habrían sido una carga para un grupo de hombres fuertes. Su pueblo le dijo: No te regocijes. Allah no ama a los arrogantes.» (28:76) Qarun exhibía su riqueza. Las llaves de sus cofres requerían varios hombres para llevarlas. Se enorgulleció y olvidó que todo viene de Allah."
+      },
+      {
+        "id": "musa_qarun_chapter_2",
+        "title": "El tragamiento",
+        "content": "El Corán dice: «Así hicimos que la tierra lo tragara a él y a su morada. No tuvo quien lo ayudara además de Allah. Y no pudo ayudarse a sí mismo.» (28:81) Por la mañana, quienes habían envidiado su posición dijeron: «Ciertamente, Allah amplía el sustento a quien quiere y lo restringe.» (28:82) La tierra se abrió y Qarun desapareció con todos sus tesoros."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Corán 28:76",
+        "reference_text": "Sura Al-Qasas, versículo 76",
+        "content": "إِنَّ قَٰرُونَ كَانَ مِن قَوْمِ مُوسَىٰ فَبَغَىٰ عَلَيْهِمْ ۖ وَءَاتَيْنَٰهُ مِنَ ٱلْكُنُوزِ مَآ إِنَّ مَفَاتِحَهُۥ لَتَنُوٓأُ بِٱلْعُصْبَةِ أُوْلِى ٱلْقُوَّةِ",
+        "translation": "Qarun era del pueblo de Moisés, pero los oprimió. Le habíamos dado tesoros cuyas llaves eran pesadas.",
+        "relevance": "Los tesoros de Qarun."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Corán 28:81",
+        "reference_text": "Sura Al-Qasas, versículo 81",
+        "content": "فَخَسَفْنَا بِهِۦ وَبِدَارِهِ ٱلْأَرْضَ",
+        "translation": "Así hicimos que la tierra lo tragara a él y a su morada.",
+        "relevance": "El castigo de Qarun."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Qarun",
+        "arabic_term": "قارون",
+        "definition": "Coré. Hombre rico del pueblo de Musa, tragado por la tierra por su orgullo.",
+        "pronunciation": "qa-roun"
+      },
+      {
+        "id": 2,
+        "term": "Kunuz",
+        "arabic_term": "الكنوز",
+        "definition": "Tesoros. Las inmensas riquezas de Qarun.",
+        "pronunciation": "al-kou-nouz"
+      }
+    ]
+  },
+  "musa_cow": {
+    "title": "La historia de la vaca",
+    "title_arabic": "قصة البقرة",
+    "introduction": "Se cometió un asesinato entre los Hijos de Israel. Para descubrir al culpable, Allah ordenó sacrificar una vaca. El Corán dice: «Y cuando Moisés dijo a su pueblo: Allah os ordena sacrificar una vaca. Dijeron: ¿Te burlas de nosotros? Dijo: Me refugio en Allah de estar entre los ignorantes.» (2:67)",
+    "conclusion": "Multiplicaron preguntas en lugar de obedecer: ¿qué color? ¿qué edad? etc. Tras muchas dificultades, finalmente encontraron una vaca que convenía. La lección: la obediencia simple es mejor que las preguntas superfluas.",
+    "moral_lesson": "Esta historia nos enseña a obedecer los mandatos de Allah sin multiplicar dificultades. Las preguntas excesivas pueden complicar lo que era simple.",
+    "historical_location": "Desierto del Sinaí",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "musa_cow_chapter_1",
+        "title": "El mandato de Allah",
+        "content": "El Corán relata: «Y cuando Moisés dijo a su pueblo: Allah os ordena sacrificar una vaca. Dijeron: ¿Te burlas de nosotros? Dijo: Me refugio en Allah de estar entre los ignorantes.» (2:67) Había ocurrido un asesinato. Para revelar al culpable, Allah les pidió golpear el cadáver con un trozo de la vaca sacrificada. La orden era simple: sacrificar una vaca."
+      },
+      {
+        "id": "musa_cow_chapter_2",
+        "title": "Preguntas superfluas",
+        "content": "El Corán dice: «Dijeron: Invoca a tu Señor por nosotros para que nos aclare cómo debe ser. Dijo: Dice que debe ser una vaca ni muy vieja ni muy joven, de edad media.» (2:68) Pidieron el color: «una vaca amarilla» (2:69). Luego: «que no haya sido usada para arar» (2:71). Por sus preguntas, la tarea se volvió casi imposible. Aprendieron que la obediencia simple habría bastado."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Corán 2:67",
+        "reference_text": "Sura Al-Baqarah, versículo 67",
+        "content": "وَإِذْ قَالَ مُوسَىٰ لِقَوْمِهِۦٓ إِنَّ ٱللَّهَ يَأْمُرُكُمْ أَن تَذْبَحُوا۟ بَقَرَةًۭ",
+        "translation": "Y cuando Moisés dijo a su pueblo: Allah os ordena sacrificar una vaca.",
+        "relevance": "La orden de sacrificar una vaca."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Corán 2:71",
+        "reference_text": "Sura Al-Baqarah, versículo 71",
+        "content": "قَالَ إِنَّهُۥ يَقُولُ إِنَّهَا بَقَرَةٌۭ لَّا ذَلُولٌۭ تُثِيرُ ٱلْأَرْضَ وَلَا تَسْقِى ٱلْحَرْثَ",
+        "translation": "Dice que no debe haber sido usada para arar la tierra ni regar los campos.",
+        "relevance": "Los criterios de la vaca."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Baqara",
+        "arabic_term": "بقرة",
+        "definition": "Vaca. La sura Al-Baqarah toma su nombre de esta historia.",
+        "pronunciation": "ba-qa-ra"
+      },
+      {
+        "id": 2,
+        "term": "Dhabaha",
+        "arabic_term": "ذبح",
+        "definition": "Sacrificar. El acto de degollar la vaca por Allah.",
+        "pronunciation": "dha-ba-ha"
+      }
+    ]
+  },
+  "musa_khidr": {
+    "title": "El encuentro con Al-Jidr",
+    "title_arabic": "لقاء موسى بالخضر",
+    "introduction": "Musa pidió a Allah que le mostrara a alguien que tuviera más conocimiento que él. Fue guiado hacia Al-Jidr (الخضر) — «el Verde» — un siervo de Allah dotado de conocimiento particular. El Corán dice: «Y Moisés le dijo: ¿Puedo seguirte para que me enseñes de lo que te ha sido enseñado concerniente a la guía recta?» (18:66)",
+    "conclusion": "Al-Jidr aceptó con la condición de que Musa no hiciera preguntas. Pero Musa no pudo permanecer en silencio ante actos que parecían injustos: perforar el barco, matar a un niño, reparar un muro sin pago. Cada vez, Al-Jidr explicó la sabiduría oculta. Se separaron porque Musa había roto su promesa.",
+    "moral_lesson": "Esta historia nos enseña que la sabiduría divina supera nuestro entendimiento. Lo que parece mal puede ocultar un bien. La paciencia y la confianza en Allah son esenciales.",
+    "historical_location": "Confluencia de los dos mares (مجمع البحرين)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "musa_khidr_chapter_1",
+        "title": "La búsqueda del conocimiento",
+        "content": "El Corán relata: «Y cuando Moisés dijo a su siervo: No cesaré de caminar hasta alcanzar la confluencia de los dos mares, aunque camine largos años.» (18:60) Musa buscaba a Al-Jidr. Se encontraron en la confluencia de los dos mares. Al-Jidr dijo: «No podrás tener paciencia conmigo. ¿Cómo podrías ser paciente sobre cosas de las que no tienes conocimiento completo?» (18:67-68) Musa prometió no cuestionar."
+      },
+      {
+        "id": "musa_khidr_chapter_2",
+        "title": "Las tres pruebas",
+        "content": "El Corán dice: «Al-Jidr hizo un agujero en el barco.» Musa protestó. Al-Jidr explicó: un rey tiránico confiscaba todos los barcos en buen estado; el agujero salvó el barco de los pobres. Luego Al-Jidr mató a un niño — porque sus padres eran creyentes y este niño los habría llevado a la incredulidad. Finalmente, reparó un muro sin pago — porque debajo había un tesoro perteneciente a dos huérfanos. Cada vez, la sabiduría oculta fue revelada. Musa había roto su promesa de silencio; se separaron."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Corán 18:66",
+        "reference_text": "Sura Al-Kahf, versículo 66",
+        "content": "قَالَ لَهُۥ مُوسَىٰ هَلْ أَتَّبِعُكَ عَلَىٰٓ أَن تُعَلِّمَنِ مِمَّا عُلِّمْتَ رُشْدًۭا",
+        "translation": "Y Moisés le dijo: ¿Puedo seguirte para que me enseñes de lo que te ha sido enseñado concerniente a la guía recta?",
+        "relevance": "Musa pide seguir a Al-Jidr."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Corán 18:78-82",
+        "reference_text": "Sura Al-Kahf, versículos 78-82",
+        "content": "قَالَ هَـٰذَا فِرَاقُ بَيْنِى وَبَيْنِكَ",
+        "translation": "Al-Jidr dijo: Esta es la separación entre tú y yo.",
+        "relevance": "La separación tras las explicaciones."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Al-Khidr",
+        "arabic_term": "الخضر",
+        "definition": "El Verde. Siervo de Allah dotado de conocimiento particular, a quien Musa encontró.",
+        "pronunciation": "al-khidr"
+      },
+      {
+        "id": 2,
+        "term": "Majma' al-Bahrayn",
+        "arabic_term": "مجمع البحرين",
+        "definition": "La confluencia de los dos mares. Lugar del encuentro entre Musa y Al-Jidr.",
+        "pronunciation": "maj-ma' al-bah-rayn"
+      }
+    ]
+  },
+  "lessons_from_musa": {
+    "title": "Lecciones de la historia de Musa",
+    "title_arabic": "دروس من قصة موسى",
+    "introduction": "El Corán menciona a Musa más que a cualquier otro profeta. Su historia enseña confianza en Allah, valor ante la tiranía y paciencia en la prueba. De las plagas de Egipto al Éxodo, del maná en el desierto a las tablas, del Samiri a Qarun, de la vaca a Al-Jidr — cada etapa es una lección.",
+    "conclusion": "Allah dice: «Te relatamos con verdad la historia de Moisés y del Faraón, para gente que cree.» (28:3) La historia de Musa es un recordatorio para quienes reflexionan: Allah está con los creyentes, y los tiranos acaban pereciendo.",
+    "moral_lesson": "Esta historia nos enseña que la verdad siempre triunfa. Quien confía en Allah será protegido y guiado.",
+    "historical_location": "Egipto y península del Sinaí",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lessons_from_musa_chapter_1",
+        "title": "Un signo para los creyentes",
+        "content": "El Corán dice: «En la historia de Moisés y del Faraón hay signos para la gente que cree.» (28:3) Musa fue protegido desde el nacimiento. Creció en la casa de su enemigo. Recibió la revelación en la zarza ardiente. Enfrentó al tirano más poderoso de su tiempo. Cada etapa muestra que Allah cumple Su promesa."
+      },
+      {
+        "id": "lessons_from_musa_chapter_2",
+        "title": "El fin de los tiranos",
+        "content": "El Corán concluye: «Así relatamos las historias de los pueblos pasados. Y de Nuestra parte les ha llegado una prueba clara.» (28:36) El Faraón se había elevado al rango de divinidad. Oprimía a los Hijos de Israel. Pero cuando llegó la hora, el mar lo engulló. Su cuerpo fue preservado como signo. La historia de Musa nos recuerda que nadie puede escapar al juicio de Allah."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Corán 28:3",
+        "reference_text": "Sura Al-Qasas, versículo 3",
+        "content": "نَتْلُوا۟ عَلَيْكَ مِن نَّبَإِ مُوسَىٰ وَفِرْعَوْنَ بِٱلْحَقِّ لِقَوْمٍۢ يُؤْمِنُونَ",
+        "translation": "Te relatamos con verdad la historia de Moisés y del Faraón, para gente que cree.",
+        "relevance": "El Corán presenta esta historia como un signo."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Corán 28:36",
+        "reference_text": "Sura Al-Qasas, versículo 36",
+        "content": "وَكَذَٰلِكَ نَقُصُّ عَلَيْكَ مِنْ أَنۢبَآءِ مَا قَدْ سَبَقَ ۚ وَقَدْ ءَاتَيْنَـٰكَ مِن لَّدُنَّا ذِكْرًۭا",
+        "translation": "Así relatamos las historias de los pueblos pasados. Y de Nuestra parte les ha llegado una prueba clara.",
+        "relevance": "Las historias son pruebas para la humanidad."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Tawakkul",
+        "arabic_term": "توكل",
+        "definition": "Confianza en Allah. Musa mostró tawakkul ante el Faraón.",
+        "pronunciation": "ta-wak-koul"
+      },
+      {
+        "id": 2,
+        "term": "Ayat",
+        "arabic_term": "آية",
+        "definition": "Signo, versículo. Los milagros de Musa eran signos de Allah.",
+        "pronunciation": "a-ya"
+      }
+    ]
+  }
+}

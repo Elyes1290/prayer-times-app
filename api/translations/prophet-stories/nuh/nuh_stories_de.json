@@ -1,0 +1,495 @@
+{
+  "nuh_prophecy": {
+    "title": "Die Entsendung Noahs als Prophet",
+    "title_arabic": "إرسال نوح عليه السلام",
+    "introduction": "Noah (Nuh عليه السلام) ist einer der größten Propheten, die im Koran erwähnt werden. Allah sandte ihn zu seinem Volk, um sie zur Anbetung des Einen Gottes aufzurufen und sie vor der kommenden Strafe zu warnen. Seine Geschichte veranschaulicht die vorbildliche Geduld des Propheten angesichts von Ablehnung und Feindseligkeit und zeigt Allahs Barmherzigkeit gegenüber den Gläubigen.",
+    "conclusion": "Die Entsendung Noahs markiert den Beginn einer prophetischen Mission, die fast tausend Jahre dauerte. Trotz der Schwierigkeiten blieb Noah seiner Botschaft treu und schuf ein Vorbild der Ausdauer und Hingabe für alle Propheten, die ihm folgten.",
+    "moral_lesson": "Diese Geschichte lehrt uns, dass die prophetische Mission eine heilige Verantwortung ist, die von Allah anvertraut wurde. Sie erinnert uns an die Wichtigkeit, die Menschen klar zu warnen und niemals die göttliche Barmherzigkeit zu verzweifeln.",
+    "historical_location": "Mesopotamien (Region des heutigen Irak)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "nuh_prophecy_chapter_1",
+        "title": "Der göttliche Befehl",
+        "content": "Allah wählte Noah aus den Nachkommen Adams aus, um der erste Gesandte zu sein, der zu einer Gemeinschaft geschickt wurde. Der Koran berichtet: \"Wir sandten Noah zu seinem Volk: Warne dein Volk, bevor eine schmerzhafte Strafe über sie kommt.\" Noah empfing die göttliche Offenbarung, die ihm befahl, sein Volk aufzurufen, die Anbetung von Götzen aufzugeben und zu Allah zurückzukehren, dem Einzigen, der der Anbetung würdig ist. Seine Mission war klar: vor der Strafe zu warnen, damit jeder, der wollte, bereuen und gerettet werden konnte."
+      },
+      {
+        "id": "nuh_prophecy_chapter_2",
+        "title": "Noahs Volk",
+        "content": "Noahs Volk war in die Irre gegangen. Sie verehrten Götzen namens Wadd, Suwa', Yaghuth, Ya'uq und Nasr, Gottheiten, die sie selbst erfunden hatten. Sie hatten die Botschaft des Monotheismus vergessen, die von Adam und seinen frommen Nachkommen überliefert wurde. Noah hatte als von Allah erwählter Prophet die Verantwortung, sie zur Wahrheit zurückzuführen. Er rief sie mit Weisheit und Klarheit und erklärte, dass diese Götzen weder erschaffen noch schaden noch nützen konnten und dass allein Allah die Anbetung verdiente."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 71:1",
+        "reference_text": "Sure Nuh, Vers 1",
+        "content": "إِنَّا أَرْسَلْنَا نُوحًا إِلَىٰ قَوْمِهِ أَنْ أَنذِرْ قَوْمَكَ مِن قَبْلِ أَن يَأْتِيَهُمْ عَذَابٌ أَلِيمٌ",
+        "translation": "Wir sandten Noah zu seinem Volk: Warne dein Volk, bevor eine schmerzhafte Strafe über sie kommt.",
+        "relevance": "Dieser Vers begründet Noahs Entsendung als Prophet und die Art seiner Warnmission."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 11:25",
+        "reference_text": "Sure Hud, Vers 25",
+        "content": "وَلَقَدْ أَرْسَلْنَا نُوحًا إِلَىٰ قَوْمِهِ إِنِّي لَكُمْ نَذِيرٌ مُّبِينٌ",
+        "translation": "Wir sandten Noah zu seinem Volk: Ich bin für euch ein deutlicher Warner.",
+        "relevance": "Dieser Vers bestätigt Noahs Entsendung und seine Rolle als deutlicher Warner."
+      },
+      {
+        "id": 3,
+        "type": "quran",
+        "source": "Quran 71:23",
+        "reference_text": "Sure Nuh, Vers 23",
+        "content": "وَقَالُوا لَا تَذَرُنَّ آلِهَتَكُمْ وَلَا تَذَرُنَّ وَدًّا وَلَا سُوَاعًا وَلَا يَغُوثَ وَيَعُوقَ وَنَسْرًا",
+        "translation": "Und sie sagten: Verlasst niemals eure Gottheiten. Verlasst nicht Wadd, noch Suwa', noch Yaghuth, noch Ya'uq, noch Nasr.",
+        "relevance": "Dieser Vers offenbart die Namen der Götzen, die Noahs Volk verehrte."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Nuh",
+        "arabic_term": "نوح",
+        "definition": "Noah auf Arabisch. Prophet Allahs, der zu seinem Volk gesandt wurde, um sie zum Monotheismus aufzurufen. Er predigte 950 Jahre.",
+        "pronunciation": "nouh"
+      },
+      {
+        "id": 2,
+        "term": "Nadhir",
+        "arabic_term": "نذير",
+        "definition": "Warner. Bezieht sich auf die Rolle des Propheten, der sein Volk vor der Strafe warnt, bevor sie eintritt.",
+        "pronunciation": "na-dhir"
+      },
+      {
+        "id": 3,
+        "term": "Qawm",
+        "arabic_term": "قوم",
+        "definition": "Volk oder Gemeinschaft. Das Volk Noahs, zu dem er als Gesandter geschickt wurde.",
+        "pronunciation": "qawm"
+      }
+    ]
+  },
+  "nuh_call": {
+    "title": "Noahs Ruf an sein Volk",
+    "title_arabic": "دعوة نوح لقومه",
+    "introduction": "Noah (عليه السلام) rief sein Volk mit Geduld und Ausdauer. Er lud sie Tag und Nacht ein: \"Dient Allah. Ihr habt keinen anderen Gott als Ihn.\" Er verwendete verschiedene Methoden, um seine Botschaft zu übermitteln: öffentliche Predigt, private Aufrufe und deutliche Warnungen. Trotz seiner Hingabe lehnte die Mehrheit seines Volkes hartnäckig ab.",
+    "conclusion": "Noahs Ruf zeigt die völlige Hingabe des Propheten an seine Mission. Er versäumte keine Gelegenheit, sein Volk zu leiten, selbst angesichts von Ablehnung und Spott.",
+    "moral_lesson": "Diese Geschichte lehrt uns die Bedeutung des Da'wa (der Ruf zum Islam) mit Weisheit und guter Ermahnung. Sie erinnert uns, dass unsere Pflicht ist, die Botschaft zu übermitteln; die Rechtleitung bleibt in Allahs Händen.",
+    "historical_location": "Mesopotamien",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "nuh_call_chapter_1",
+        "title": "Die Einladung zum Monotheismus",
+        "content": "Noah sagte zu seinem Volk: \"O mein Volk! Dient Allah. Ihr habt keinen anderen Gott als Ihn. Ich fürchte für euch die Strafe eines schrecklichen Tages.\" Er erklärte ihnen, dass die Götzen, die sie verehrten, nur Namen waren, die sie und ihre Vorfahren erfunden hatten, ohne dass Allah einen Beweis dafür herabgesandt hatte. Er lud sie ein, Allah um Vergebung zu bitten, denn Er ist Allvergebend und Barmherzig. Noah versprach, dass wenn sie bereuten, Allah reichlich Regen auf sie herabsenden und sie an Reichtum und Kindern vermehren würde."
+      },
+      {
+        "id": "nuh_call_chapter_2",
+        "title": "Noahs Methoden",
+        "content": "Der Koran beschreibt, wie Noah sein Volk rief: \"Ich rief mein Volk Tag und Nacht. Aber mein Ruf vermehrte nur ihre Flucht.\" Jedes Mal, wenn er sie rief, damit Allah ihnen vergebe, steckten sie ihre Finger in die Ohren und hüllten sich in ihre Gewänder, beharrten in ihrem Stolz. Noah ließ sich nicht entmutigen. Er rief sie weiterhin öffentlich und im Geheimen und sagte: \"Bittet euren Herrn um Vergebung, denn Er ist Allvergebend.\""
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 71:2-4",
+        "reference_text": "Sure Nuh, Verse 2-4",
+        "content": "قَالَ يَا قَوْمِ إِنِّي لَكُمْ نَذِيرٌ مُّبِينٌ أَنِ اعْبُدُوا اللَّهَ وَاتَّقُوهُ وَأَطِيعُونِ يَغْفِرْ لَكُم مِّن ذُنُوبِكُمْ وَيُؤَخِّرْكُمْ إِلَىٰ أَجَلٍ مُّسَمًّى",
+        "translation": "Er sagte: O mein Volk! Ich bin für euch ein deutlicher Warner. Dient Allah, fürchtet Ihn und gehorcht mir. Er wird euch einige eurer Sünden vergeben und euch bis zu einer festgesetzten Frist Aufschub gewähren.",
+        "relevance": "Diese Verse enthalten Noahs zentrale Botschaft: die Anbetung Allahs und das Versprechen der Vergebung."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 71:5-7",
+        "reference_text": "Sure Nuh, Verse 5-7",
+        "content": "قَالَ رَبِّ إِنِّي دَعَوْتُ قَوْمِي لَيْلًا وَنَهَارًا فَلَمْ يَزِدْهُمْ دُعَائِي إِلَّا فِرَارًا وَإِنِّي كُلَّمَا دَعَوْتُهُمْ لِتَغْفِرَ لَهُمْ جَعَلُوا أَصَابِعَهُمْ فِي آذَانِهِمْ وَاسْتَغْشَوْا ثِيَابَهُمْ وَأَصَرُّوا وَاسْتَكْبَرُوا اسْتِكْبَارًا",
+        "translation": "Er sagte: Herr! Ich rief mein Volk Tag und Nacht. Aber mein Ruf vermehrte nur ihre Flucht. Und jedes Mal, wenn ich sie rief, damit Du ihnen vergebest, steckten sie ihre Finger in die Ohren und hüllten sich in ihre Gewänder, beharrten in ihrem Stolz.",
+        "relevance": "Diese Verse beschreiben Noahs Ausdauer und die hartnäckige Reaktion seines Volkes."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Da'wa",
+        "arabic_term": "دعوة",
+        "definition": "Ruf oder Einladung. Die Einladung zum Islam und zur Anbetung Allahs. Noah übte Da'wa mit Beständigkeit.",
+        "pronunciation": "da-wa"
+      },
+      {
+        "id": 2,
+        "term": "Tawhid",
+        "arabic_term": "توحيد",
+        "definition": "Monotheismus. Die Einheit Allahs in der Anbetung. Es war Noahs zentrale Botschaft.",
+        "pronunciation": "taw-hid"
+      },
+      {
+        "id": 3,
+        "term": "Istighfar",
+        "arabic_term": "استغفار",
+        "definition": "Um Vergebung bitten. Noah lud sein Volk ein, Allah um Vergebung zu bitten.",
+        "pronunciation": "is-tigh-far"
+      }
+    ]
+  },
+  "rejection_and_mockery": {
+    "title": "Ablehnung und Spott",
+    "title_arabic": "الرفض والسخرية",
+    "introduction": "Die Vornehmen von Noahs Volk lehnten seine Botschaft mit Arroganz ab. Sie nannten ihn Lügner, hielten ihn für verrückt und forderten die Menschen auf, \"die von niedrigem Stand\" nicht zu folgen, die geglaubt hatten. Ihr Stolz blendete sie und hinderte sie daran, die Wahrheit zu erkennen.",
+    "conclusion": "Die Ablehnung Noahs durch die Vornehmen zeigt, wie Stolz und die Bindung an die Traditionen der Vorfahren die Menschen daran hindern können, die Wahrheit zu akzeptieren, selbst wenn sie klar dargelegt wird.",
+    "moral_lesson": "Diese Geschichte warnt uns vor den Gefahren des Stolzes und der Verachtung gegenüber den Gläubigen. Sie lehrt uns, dass die Wahrheit nicht durch den sozialen Status bestimmt wird, sondern durch das, was Allah offenbart hat.",
+    "historical_location": "Mesopotamien",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "rejection_and_mockery_chapter_1",
+        "title": "Die Anschuldigung der Vornehmen",
+        "content": "Die Häuptlinge von Noahs Volk kamen zu ihm und sagten: \"Wir sehen in dir nur einen Mann wie uns, und wir sehen nur die, die dir folgen, als die Geringsten unter uns, auf den ersten Blick. Wir sehen in dir keine Überlegenheit über uns. Vielmehr halten wir euch für Lügner.\" Sie weigerten sich zu glauben, dass ein gewöhnlicher Mann ein Prophet sein könnte, und verachteten die, die geglaubt hatten, indem sie sie als Menschen von niedrigem Stand betrachteten. Noah antwortete ihnen mit Weisheit: \"O mein Volk! Seht ihr? Wenn ich mich auf einen klaren Beweis von meinem Herrn stütze und Er mir Barmherzigkeit von Ihm gewährt hat, der ihr blind seid, sollen wir euch zwingen, sie zu akzeptieren, wenn ihr sie abscheulich findet?\""
+      },
+      {
+        "id": "rejection_and_mockery_chapter_2",
+        "title": "Beharrlichkeit in der Irre",
+        "content": "Trotz Noahs Beweise und Warnungen beharrte sein Volk in seiner Ablehnung. Sie sagten: \"O Noah! Du hast mit uns gestritten und die Streitigkeiten vermehrt. So bring uns, womit du uns drohst, wenn du zu den Wahrhaftigen gehörst.\" Sie forderten Noah heraus und verlangten, die Strafe zu sehen, vor der er sie gewarnt hatte, in dem Glauben, sie würde niemals kommen. Noah antwortete: \"Nur Allah wird sie euch bringen, wenn Er will, und ihr werdet ihr nicht entkommen.\" Ihre Arroganz blendete sie; sie verstanden nicht, dass die gewährte Frist eine Barmherzigkeit war, um ihnen die Gelegenheit zur Reue zu geben."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 11:27",
+        "reference_text": "Sure Hud, Vers 27",
+        "content": "فَقَالَ الْمَلَأُ الَّذِينَ كَفَرُوا مِن قَوْمِهِ مَا نَرَاكَ إِلَّا بَشَرًا مِّثْلَنَا وَمَا نَرَاكَ اتَّبَعَكَ إِلَّا الَّذِينَ هُمْ أَرَاذِلُنَا بَادِيَ الرَّأْيِ وَمَا نَرَىٰ لَكُمْ عَلَيْنَا مِن فَضْلٍ بَلْ نَظُنُّكُمْ كَاذِبِينَ",
+        "translation": "Die Vornehmen seines Volkes, die ungläubig waren, sagten: Wir sehen in dir nur einen Mann wie uns, und wir sehen nur die, die dir folgen, als die Geringsten unter uns. Wir sehen in dir keine Überlegenheit über uns. Vielmehr halten wir euch für Lügner.",
+        "relevance": "Dieser Vers beschreibt die Arroganz der Vornehmen und ihre Verachtung für die Gläubigen."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 11:32",
+        "reference_text": "Sure Hud, Vers 32",
+        "content": "قَالُوا يَا نُوحُ قَدْ جَادَلْتَنَا فَأَكْثَرْتَ جِدَالَنَا فَأْتِنَا بِمَا تَعِدُنَا إِن كُنتَ مِنَ الصَّادِقِينَ",
+        "translation": "Sie sagten: O Noah! Du hast mit uns gestritten und die Streitigkeiten vermehrt. So bring uns, womit du uns drohst, wenn du zu den Wahrhaftigen gehörst.",
+        "relevance": "Dieser Vers zeigt die arrogante Herausforderung des Volkes gegenüber Noahs Warnungen."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Mala'",
+        "arabic_term": "ملأ",
+        "definition": "Vornehme oder Häuptlinge. Die Führer von Noahs Volk, die die Opposition gegen ihn anführten.",
+        "pronunciation": "ma-la"
+      },
+      {
+        "id": 2,
+        "term": "Kufr",
+        "arabic_term": "كفر",
+        "definition": "Unglaube oder Ablehnung der Wahrheit. Der Zustand derer, die Noahs Botschaft ablehnten.",
+        "pronunciation": "koufr"
+      },
+      {
+        "id": 3,
+        "term": "Istikbar",
+        "arabic_term": "استكبار",
+        "definition": "Stolz oder Arroganz. Die Sünde, die Noahs Volk daran hinderte, die Wahrheit zu akzeptieren.",
+        "pronunciation": "is-tik-bar"
+      }
+    ]
+  },
+  "nuh_patience": {
+    "title": "Noahs Geduld",
+    "title_arabic": "صبر نوح عليه السلام",
+    "introduction": "Noah (عليه السلام) predigte laut Koran neunhundertfünfzig Jahre lang zu seinem Volk. Trotz dieser außergewöhnlichen Zeitspanne glaubten nur wenige. Diese lange Geduld veranschaulicht die vorbildliche Ausdauer des Propheten und Allahs Barmherzigkeit, den Menschen Zeit zur Reue zu gewähren.",
+    "conclusion": "Noahs Geduld über fast tausend Jahre bleibt ein Vorbild für alle Gläubigen. Sie zeigt, dass Erfolg nicht an der Zahl der Bekehrten gemessen wird, sondern an der Treue bei der Erfüllung der von Allah anvertrauten Mission.",
+    "moral_lesson": "Diese Geschichte lehrt uns die Tugend der Geduld (Sabr) beim Ruf zum Islam. Sie erinnert uns, dass wir in unserer Mission ausharren müssen, ohne uns angesichts der Opposition entmutigen zu lassen.",
+    "historical_location": "Mesopotamien",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "nuh_patience_chapter_1",
+        "title": "Neunhundertfünfzig Jahre",
+        "content": "Der Koran informiert uns: \"Wir sandten Noah zu seinem Volk. Er verweilte unter ihnen tausend Jahre weniger fünfzig.\" So verbrachte Noah neunhundertfünfzig Jahre damit, sein Volk zum Islam aufzurufen. Während dieser ganzen Zeit wurde er nie müde, die Botschaft zu übermitteln. Er rief sie bei Tag und Nacht, öffentlich und im Geheimen. Trotz dieser außergewöhnlichen Ausdauer lehnte die Mehrheit ab. Nur eine kleine Gruppe von Gläubigen, hauptsächlich bescheidene Menschen, antwortete auf seinen Ruf. Diese lange Dauer zeigt sowohl Allahs unendliche Geduld, den Menschen Zeit zur Reue zu geben, als auch die unerschütterliche Entschlossenheit des Propheten bei der Erfüllung seiner Mission."
+      },
+      {
+        "id": "nuh_patience_chapter_2",
+        "title": "Noahs Gebet",
+        "content": "Nach Jahrhunderten des Rufens ohne Erfolg bei der Mehrheit wandte sich Noah an Allah: \"Herr! Die Menschen meines Volkes haben mir nicht gehorcht und haben denjenigen gefolgt, dessen Reichtum und Kinder nur seinen Verlust vermehrt haben. Sie haben ein gewaltiges Schema ersonnen. Sie haben gesagt: Verlasst niemals eure Gottheiten. Verlasst nicht Wadd, noch Suwa', noch Yaghuth, noch Ya'uq, noch Nasr. Sie haben bereits viele in die Irre geführt. Vermehre die Ungerechten nur in Irrtum.\" Noah erkannte, dass sein Volk alle Grenzen überschritten hatte, und bat Allah, keinen Bewohner unter den Ungläubigen auf der Erde zu lassen, denn wenn Er sie ließe, würden sie nur Seine Diener in die Irre führen und nur Sünder und eingefleischte Ungläubige zeugen."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 29:14",
+        "reference_text": "Sure Al-Ankabut, Vers 14",
+        "content": "وَلَقَدْ أَرْسَلْنَا نُوحًا إِلَىٰ قَوْمِهِ فَلَبِثَ فِيهِمْ أَلْفَ سَنَةٍ إِلَّا خَمْسِينَ عَامًا",
+        "translation": "Wir sandten Noah zu seinem Volk. Er verweilte unter ihnen tausend Jahre weniger fünfzig.",
+        "relevance": "Dieser Vers begründet die außergewöhnliche Dauer von Noahs Mission: 950 Jahre."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 71:26-28",
+        "reference_text": "Sure Nuh, Verse 26-28",
+        "content": "وَقَالَ نُوحٌ رَبِّ لَا تَذَرْ عَلَى الْأَرْضِ مِنَ الْكَافِرِينَ دَيَّارًا إِنَّكَ إِن تَذَرْهُمْ يُضِلُّوا عِبَادَكَ وَلَا يَلِدُوا إِلَّا فَاجِرًا كَفَّارًا",
+        "translation": "Und Noah sagte: Herr! Lass auf der Erde keinen Bewohner unter den Ungläubigen. Wenn Du sie lässt, werden sie Deine Diener in die Irre führen und nur Sünder und eingefleischte Ungläubige zeugen.",
+        "relevance": "Diese Verse enthalten Noahs Gebet nach Jahrhunderten der Ablehnung durch sein Volk."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Sabr",
+        "arabic_term": "صبر",
+        "definition": "Geduld. Die Tugend, die Noah während 950 Jahren des Rufs zum Islam zeigte.",
+        "pronunciation": "sabr"
+      },
+      {
+        "id": 2,
+        "term": "Du'a",
+        "arabic_term": "دعاء",
+        "definition": "Bittgebet oder Gebet. Noah rief Allah an, nachdem sein Volk im Unglauben beharrt hatte.",
+        "pronunciation": "dou-a"
+      }
+    ]
+  },
+  "building_the_ark": {
+    "title": "Der Bau der Arche",
+    "title_arabic": "بناء السفينة",
+    "introduction": "Allah befahl Noah, eine Arche angesichts der Sintflut zu bauen. Noah gehorchte und machte sich daran, das Schiff zu bauen, während er den Spott seines Volkes ertrug, das nicht an die kommende Strafe glaubte. Die Arche wurde nach genauen göttlichen Anweisungen gebaut und wurde zum Mittel der Rettung für die Gläubigen.",
+    "conclusion": "Der Bau der Arche zeigt Noahs völligen Gehorsam gegenüber Allahs Befehlen, selbst wenn sie ungewöhnlich schienen. Sie veranschaulicht auch, wie Allah die Rettung für diejenigen vorbereitet, die glauben.",
+    "moral_lesson": "Diese Geschichte lehrt uns, Allahs Befehlen ohne Zögern zu gehorchen, selbst wenn sie uns unverständlich erscheinen. Die göttliche Weisheit übersteigt unser begrenztes Verständnis.",
+    "historical_location": "Mesopotamien",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "building_the_ark_chapter_1",
+        "title": "Der Befehl zum Bau",
+        "content": "Allah offenbarte Noah: \"Baue die Arche unter Unseren Augen und nach Unserer Offenbarung. Und sprich Mich nicht über die Ungerechten an: sie werden ertränkt.\" Noah machte sich sofort an die Arbeit. Er baute die Arche nach den genauen Spezifikationen, die Allah ihm angegeben hatte. Der Koran gibt keine technischen Details des Baus, betont aber, dass alles unter göttlicher Aufsicht und nach der Offenbarung geschah. Während Noah baute, gingen die Ungläubigen an ihm vorbei und spotteten: \"O Noah! Du hast mit uns gestritten und die Streitigkeiten vermehrt.\" Noah warnte sie: \"Wenn ihr uns verspottet, werden wir euch verspotten, wie ihr verspottet.\""
+      },
+      {
+        "id": "building_the_ark_chapter_2",
+        "title": "Die Einschiffung",
+        "content": "Als die Arche fertig war und die Zeit der Strafe nahte, befahl Allah Noah: \"Lade darin ein Paar von jeder Art sowie deine Familie - außer denen, gegen die das Wort bereits gesprochen wurde - und die Gläubigen.\" Nur die, die geglaubt hatten, bestiegen mit Noah. Unter seiner Familie weigerten sich seine Frau und einer seiner Söhne zu glauben und gehörten nicht zu den Geretteten. Der Koran spezifiziert, dass Noahs Frau und sein Sohn zu den Ungerechten gehörten. Die Arche nahm Noah, die Gläubigen und ein Paar von jeder Tierart auf, wie Allah befohlen hatte."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 11:37-38",
+        "reference_text": "Sure Hud, Verse 37-38",
+        "content": "وَاصْنَعِ الْفُلْكَ بِأَعْيُنِنَا وَوَحْيِنَا وَلَا تُخَاطِبْنِي فِي الَّذِينَ ظَلَمُوا إِنَّهُم مُّغْرَقُونَ وَيَصْنَعُ الْفُلْكَ وَكُلَّمَا مَرَّ عَلَيْهِ مَلَأٌ مِّن قَوْمِهِ سَخِرُوا مِنْهُ",
+        "translation": "Baue die Arche unter Unseren Augen und nach Unserer Offenbarung. Und sprich Mich nicht über die Ungerechten an: sie werden ertränkt. Und er baute die Arche. Und jedes Mal, wenn Vornehme seines Volkes an ihm vorbeikamen, spotteten sie über ihn.",
+        "relevance": "Diese Verse beschreiben den Befehl zum Bau der Arche und den Spott des Volkes."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 11:40",
+        "reference_text": "Sure Hud, Vers 40",
+        "content": "حَتَّىٰ إِذَا جَاءَ أَمْرُنَا وَفَارَ التَّنُّورُ قُلْنَا احْمِلْ فِيهَا مِن كُلٍّ زَوْجَيْنِ اثْنَيْنِ وَأَهْلَكَ إِلَّا مَن سَبَقَ عَلَيْهِ الْقَوْلُ وَمَن آمَنَ",
+        "translation": "Dann, als Unser Befehl kam und der Ofen überlief, sagten Wir: Lade darin ein Paar von jeder Art sowie deine Familie - außer denen, gegen die das Wort bereits gesprochen wurde - und die Gläubigen.",
+        "relevance": "Dieser Vers beschreibt die Einschiffung in die Arche zur Zeit der Sintflut."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Fulk",
+        "arabic_term": "فلك",
+        "definition": "Arche oder Schiff. Das Fahrzeug, das Noah nach Allahs Befehl baute.",
+        "pronunciation": "foulk"
+      },
+      {
+        "id": 2,
+        "term": "Tannur",
+        "arabic_term": "تنور",
+        "definition": "Ofen. Das Zeichen, das im Koran den Beginn der Sintflut anzeigt - der Ofen lief über.",
+        "pronunciation": "tan-nour"
+      },
+      {
+        "id": 3,
+        "term": "Zawjayn",
+        "arabic_term": "زوجين",
+        "definition": "Ein Paar. Ein Männchen und ein Weibchen von jeder Art wurden in die Arche geladen.",
+        "pronunciation": "zaw-jayn"
+      }
+    ]
+  },
+  "the_flood": {
+    "title": "Die Sintflut",
+    "title_arabic": "الطوفان",
+    "introduction": "Allahs Strafe fiel auf Noahs Volk. Die Wasser strömten aus der Erde und dem Himmel und überschwemmten alles. Die Arche schwamm auf den Wassern und trug die Gläubigen und die Tiere in Sicherheit. Die Ungläubigen wurden ertränkt, wie Noah sie jahrhundertelang gewarnt hatte.",
+    "conclusion": "Die Sintflut zeigt Allahs Gerechtigkeit: Er rettete die Gläubigen und vernichtete die Ungläubigen. Es ist eine Lektion für alle Generationen über die Folgen der Ablehnung der Wahrheit.",
+    "moral_lesson": "Diese Geschichte warnt uns, dass Allahs Strafe real ist und diejenigen trifft, die im Unglauben beharren. Sie erinnert uns, uns niemals sicher zu fühlen, wenn wir Allah ungehorsam sind.",
+    "historical_location": "Mesopotamien",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "the_flood_chapter_1",
+        "title": "Das Loslassen der Wasser",
+        "content": "Als Allahs Befehl kam, öffneten sich die Tore des Himmels und die Erde ließ ihre Quellen strömen. Der Koran beschreibt: \"Wir öffneten die Tore des Himmels für strömendes Wasser und ließen die Erde in Quellen hervorbrechen. Die Wasser trafen sich nach einem bereits bestimmten Beschluss.\" Die Sintflut war total. Die gesamte Region wurde überschwemmt. Selbst die Berge konnten keine Zuflucht bieten. Noahs Arche schwamm auf den Wassern, geschützt durch Allahs Willen. Drinnen waren Noah und die Gläubigen in Sicherheit, während draußen die Ungläubigen, die die Einschiffung abgelehnt hatten, von den Wellen verschlungen wurden."
+      },
+      {
+        "id": "the_flood_chapter_2",
+        "title": "Die Rettung der Gläubigen",
+        "content": "Allah sagte zu Noah: \"Steige ein. Im Namen Allahs möge sie segeln und anlegen! Dein Herr ist wahrlich Allvergebend und Barmherzig.\" Die Arche segelte auf den Wassern und trug ihre Insassen in Sicherheit. Noah und die, die mit ihm waren, wurden gerettet, während die anderen ertränkt wurden. Der Koran betont: \"Und es wurde gesagt: O Erde! Schlucke dein Wasser. Und du, Himmel! Höre auf! Das Wasser sank. Der Befehl wurde ausgeführt. Die Arche kam auf dem Berg Judi zur Ruhe. Und es wurde gesagt: Wehe den ungerechten Leuten!\""
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 54:11-14",
+        "reference_text": "Sure Al-Qamar, Verse 11-14",
+        "content": "فَفَتَحْنَا أَبْوَابَ السَّمَاءِ بِمَاءٍ مُّنْهَمِرٍ وَفَجَّرْنَا الْأَرْضَ عُيُونًا فَالْتَقَى الْمَاءُ عَلَىٰ أَمْرٍ قَدْ قُدِرَ وَحَمَلْنَاهُ عَلَىٰ ذَاتِ أَلْوَاحٍ وَدُسُرٍ",
+        "translation": "Wir öffneten die Tore des Himmels für strömendes Wasser und ließen die Erde in Quellen hervorbrechen. Die Wasser trafen sich nach einem bereits bestimmten Beschluss. Und Wir trugen ihn auf einem Fahrzeug aus Brettern und Nägeln.",
+        "relevance": "Diese Verse beschreiben das Loslassen der Sintflut und den Schutz der Arche."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 11:44",
+        "reference_text": "Sure Hud, Vers 44",
+        "content": "وَقِيلَ يَا أَرْضُ ابْلَعِي مَاءَكِ وَيَا سَمَاءُ أَقْلِعِي وَغِيضَ الْمَاءُ وَقُضِيَ الْأَمْرُ وَاسْتَوَتْ عَلَى الْجُودِيِّ وَقِيلَ بُعْدًا لِّلْقَوْمِ الظَّالِمِينَ",
+        "translation": "Und es wurde gesagt: O Erde! Schlucke dein Wasser. Und du, Himmel! Höre auf! Das Wasser sank. Der Befehl wurde ausgeführt. Die Arche kam auf dem Berg Judi zur Ruhe. Und es wurde gesagt: Wehe den ungerechten Leuten!",
+        "relevance": "Dieser Vers beschreibt das Ende der Sintflut und die Arche, die auf dem Berg Judi zur Ruhe kam."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Tufan",
+        "arabic_term": "طوفان",
+        "definition": "Sintflut. Die Strafe durch Wasser, die Noahs Volk zerstörte.",
+        "pronunciation": "tou-fan"
+      },
+      {
+        "id": 2,
+        "term": "Al-Judi",
+        "arabic_term": "الجودي",
+        "definition": "Berg Judi. Der Berg, auf dem Noahs Arche nach der Sintflut zur Ruhe kam, traditionell in der Türkei identifiziert.",
+        "pronunciation": "al-jou-di"
+      }
+    ]
+  },
+  "nuh_son_refused": {
+    "title": "Noahs Sohn, der ablehnte",
+    "title_arabic": "ابن نوح الذي أبى",
+    "introduction": "Zu Noahs Prüfungen gehörte die Weigerung seines eigenen Sohnes, in die Arche zu steigen. Dieser Sohn wählte, sich auf einen Berg zu flüchten, in dem Glauben, der Sintflut entkommen zu können. Er wurde ertränkt. Als Noah Allah für seinen Sohn anflehte, erinnerte Allah ihn an eine tiefe Wahrheit: Dieser Sohn gehörte nicht zu seiner Familie in Bezug auf den Glauben, denn er hatte eine ungerechte Tat begangen.",
+    "conclusion": "Die Geschichte von Noahs Sohn lehrt, dass Blutsbande für die Rettung nicht ausreichen. Nur Glaube und Gehorsam gegenüber Allah zählen. Geistige Bande überwiegen familiäre Bande.",
+    "moral_lesson": "Diese Geschichte erinnert uns, dass wir niemanden gegen seinen Willen retten können. Jeder ist für seine Entscheidungen verantwortlich. Sie lehrt uns auch, dass Frömmigkeit und Glaube die wahren Kriterien der Verwandtschaft in Allahs Augen sind.",
+    "historical_location": "Während der Sintflut",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "nuh_son_refused_chapter_1",
+        "title": "Die Weigerung einzuschiffen",
+        "content": "Noah rief seinen Sohn, der abseits geblieben war: \"O mein Sohn! Steige mit uns ein und bleibe nicht bei den Ungläubigen.\" Sein Sohn antwortete: \"Ich werde mich auf einen Berg flüchten, der mich vor dem Wasser schützen wird.\" Noah sagte zu ihm: \"Heute gibt es keinen Beschützer gegen Allahs Befehl, außer dem, dem Er Barmherzigkeit erweist.\" Eine Welle trennte sie, und der Sohn war unter den Ertrunkenen. Noahs Sohn hatte geglaubt, seine eigene Kraft und ein Berg könnten ihn retten, vergessend, dass nur Allah beschützen kann. Er lehnte die Einladung seines Vaters ab und wählte den Weg des Verderbens."
+      },
+      {
+        "id": "nuh_son_refused_chapter_2",
+        "title": "Allahs Antwort",
+        "content": "Noah rief seinen Herrn an und sagte: \"Herr! Mein Sohn gehört zu meiner Familie. Dein Versprechen ist Wahrheit. Du bist der gerechteste der Richter.\" Allah antwortete: \"O Noah! Er gehört nicht zu deiner Familie. Es war eine Tat, die nicht der Rechtschaffenheit entsprach. Frage Mich nicht über das, was du nicht weißt. Ich ermahne dich, nicht zu den Unwissenden zu gehören.\" Noah verstand und sagte: \"Herr! Ich suche Zuflucht bei Dir davor, Dich über das zu befragen, was ich nicht weiß. Und wenn Du mir nicht vergibst und mir Barmherzigkeit erweist, werde ich unter den Verlierern sein.\" Diese göttliche Antwort lehrt, dass die wahre Familie die des Glaubens ist. Noahs Sohn hatte sich durch seine Weigerung zu glauben und in die Arche zu steigen von der Familie der Gläubigen ausgeschlossen."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 11:42-43",
+        "reference_text": "Sure Hud, Verse 42-43",
+        "content": "وَهِيَ تَجْرِي بِهِمْ فِي مَوْجٍ كَالْجِبَالِ وَنَادَىٰ نُوحٌ ابْنَهُ وَكَانَ فِي مَعْزِلٍ يَا بُنَيَّ ارْكَب مَّعَنَا وَلَا تَكُن مَّعَ الْكَافِرِينَ قَالَ سَآوِي إِلَىٰ جَبَلٍ يَعْصِمُنِي مِنَ الْمَاءِ",
+        "translation": "Sie segelte mit ihnen in Wellen wie Bergen. Noah rief seinen Sohn, der abseits geblieben war: O mein Sohn! Steige mit uns ein und bleibe nicht bei den Ungläubigen. Er sagte: Ich werde mich auf einen Berg flüchten, der mich vor dem Wasser schützen wird.",
+        "relevance": "Diese Verse beschreiben Noahs Ruf an seinen Sohn und dessen Ablehnung."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 11:45-46",
+        "reference_text": "Sure Hud, Verse 45-46",
+        "content": "وَنَادَىٰ نُوحٌ رَبَّهُ فَقَالَ رَبِّ إِنَّ ابْنِي مِنْ أَهْلِي وَإِنَّ وَعْدَكَ الْحَقُّ وَأَنتَ أَحْكَمُ الْحَاكِمِينَ قَالَ يَا نُوحُ إِنَّهُ لَيْسَ مِنْ أَهْلِكَ إِنَّهُ عَمَلٌ غَيْرُ صَالِحٍ",
+        "translation": "Noah rief seinen Herrn an und sagte: Herr! Mein Sohn gehört zu meiner Familie. Dein Versprechen ist Wahrheit. Du bist der gerechteste der Richter. Allah sagte: O Noah! Er gehört nicht zu deiner Familie. Es war eine Tat, die nicht der Rechtschaffenheit entsprach.",
+        "relevance": "Diese Verse enthalten den Austausch zwischen Noah und Allah, der feststellt, dass die wahre Familie die des Glaubens ist."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Ahl",
+        "arabic_term": "أهل",
+        "definition": "Familie oder Leute. Allah lehrte Noah, dass seine wahre Familie die ist, die glaubt, nicht die des Blutes.",
+        "pronunciation": "ahl"
+      },
+      {
+        "id": 2,
+        "term": "Amal ghayr salih",
+        "arabic_term": "عمل غير صالح",
+        "definition": "Tat, die nicht der Rechtschaffenheit entspricht. Die Beschreibung, die Allah dem Verhalten von Noahs Sohn gab.",
+        "pronunciation": "a-mal ghayr sa-lih"
+      }
+    ]
+  },
+  "lessons_from_nuh": {
+    "title": "Lehren aus Noahs Geschichte",
+    "title_arabic": "دروس من قصة نوح",
+    "introduction": "Die Geschichte Noahs (عليه السلام) enthält zeitlose Lehren für die gesamte Menschheit. Sie lehrt Geduld, Ausdauer beim Ruf zum Islam, die Folgen des Unglaubens und Allahs Barmherzigkeit gegenüber den Gläubigen. Der Koran zitiert sie als Beispiel für zukünftige Generationen.",
+    "conclusion": "Noah erfüllte seine Mission mit Vortrefflichkeit und wurde mit den Gläubigen gerettet. Seine Geschichte bleibt eine Erinnerung für die gesamte Menschheit: Auf den Ruf der Propheten zu antworten und an Allah zu glauben ist der Weg zur Rettung.",
+    "moral_lesson": "Diese Geschichte lehrt uns, Allahs Gesandten zu folgen, in der Not geduldig zu sein und niemals die göttliche Barmherzigkeit zu verzweifeln. Sie warnt uns vor den Folgen der hartnäckigen Ablehnung der Wahrheit.",
+    "historical_location": "Von Mesopotamien zum Berg Judi",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lessons_from_nuh_chapter_1",
+        "title": "Ein Beispiel für die Menschheit",
+        "content": "Der Koran präsentiert Noahs Geschichte als Beispiel für die Völker: \"Dies sind die Berichte, die Wir dir von den Nachrichten der Gesandten erzählen, um dein Herz zu stärken. Und in diesem Bericht ist die Wahrheit zu dir gekommen, sowie eine Ermahnung und eine Erinnerung für die Gläubigen.\" Noahs Geschichte zeigt uns, dass die Propheten alle auf Widerstand stießen, aber dass der endgültige Sieg denen gehört, die glauben. Sie erinnert uns, dass die den Ungläubigen gewährte Frist kein Zeichen von Allahs Schwäche ist, sondern eine Gelegenheit für sie, zu bereuen. Wenn die Frist kommt, kann niemand sie verschieben."
+      },
+      {
+        "id": "lessons_from_nuh_chapter_2",
+        "title": "Die Abstammungslinie der Propheten",
+        "content": "Noah nimmt einen zentralen Platz in der prophetischen Abstammungslinie ein. Der Koran sagt: \"Wahrlich, Allah wählte Adam, Noah, die Familie Abrahams und die Familie Imrans über alle Welten.\" Noah war der erste Gesandte, der nach Adam zu einer Gemeinschaft geschickt wurde. Seine Nachkommen bevölkerten die Erde nach der Sintflut. Unter seinen Nachkommen sind die Propheten Ibrahim, Musa, Isa und Muhammad (Friede sei mit ihnen allen). Noahs Geschichte etabliert das Modell, dem alle Propheten folgten: der Ruf zum Monotheismus, Geduld angesichts der Ablehnung und Rettung für die Gläubigen."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 11:120",
+        "reference_text": "Sure Hud, Vers 120",
+        "content": "وَكُلًّا نَّقُصُّ عَلَيْكَ مِنْ أَنبَاءِ الرُّسُلِ مَا نُثَبِّتُ بِهِ فُؤَادَكَ وَجَاءَكَ فِي هَٰذِهِ الْحَقُّ وَمَوْعِظَةٌ وَذِكْرَىٰ لِلْمُؤْمِنِينَ",
+        "translation": "Und alles, was Wir dir von den Berichten der Gesandten erzählen, dient dazu, dein Herz zu stärken. Und in diesem Bericht ist die Wahrheit zu dir gekommen, sowie eine Ermahnung und eine Erinnerung für die Gläubigen.",
+        "relevance": "Dieser Vers erklärt den Zweck der Berichte der Propheten: die Herzen zu stärken und zu ermahnen."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 3:33",
+        "reference_text": "Sure Al 'Imran, Vers 33",
+        "content": "إِنَّ اللَّهَ اصْطَفَىٰ آدَمَ وَنُوحًا وَآلَ إِبْرَاهِيمَ وَآلَ عِمْرَانَ عَلَى الْعَالَمِينَ",
+        "translation": "Wahrlich, Allah wählte Adam, Noah, die Familie Abrahams und die Familie Imrans über alle Welten.",
+        "relevance": "Dieser Vers begründet Noahs hervorragenden Platz in der Abstammungslinie von Allahs Auserwählten."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Ibra",
+        "arabic_term": "عبرة",
+        "definition": "Beispiel oder Lehre. Die Geschichten der Propheten sind Beispiele für die Menschheit.",
+        "pronunciation": "ib-ra"
+      },
+      {
+        "id": 2,
+        "term": "Dhikra",
+        "arabic_term": "ذكرى",
+        "definition": "Erinnerung. Die Berichte der Propheten dienen als Erinnerung für die Gläubigen.",
+        "pronunciation": "dhik-ra"
+      }
+    ]
+  }
+}

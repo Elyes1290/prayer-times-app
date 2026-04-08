@@ -1,0 +1,360 @@
+{
+  "hud_prophecy": {
+    "title": "L'invio di Hud come profeta",
+    "title_arabic": "إرسال هود عليه السلام",
+    "introduction": "Hud (هود عليه السلام) è un profeta inviato da Allah al popolo di 'Ad, una delle antiche civiltà arabe. Dopo Noè, i discendenti di 'Ad si smarrirono di nuovo. Allah inviò Hud, loro fratello, per chiamarli al monoteismo e avvertirli del castigo. La sua storia illustra il confronto tra la verità profetica e l'arroganza di un popolo potente.",
+    "conclusion": "L'invio di Hud segna la continuità della missione profetica dopo Noè. Allah non abbandona mai i popoli senza inviare loro un ammonitore chiaro. Hud fu scelto tra gli 'Ad stessi per guidarli sul retto sentiero.",
+    "moral_lesson": "Questa storia ci insegna che Allah invia messaggeri a ogni popolo, scelti tra loro affinché il messaggio sia chiaro. Ci ricorda che nessuno è al di sopra dell'avvertimento divino.",
+    "historical_location": "Al-Ahqaf (regione meridionale della penisola arabica)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "hud_prophecy_chapter_1",
+        "title": "L'ordine divino",
+        "content": "Allah inviò Hud verso il popolo di 'Ad, suoi fratelli di sangue. Il Corano riporta: «E verso gli 'Ad, il loro fratello Hud. Disse: O popolo mio! Adorate Allah. Non avete altra divinità che Lui. Non Lo temete dunque? » Hud ricevette la rivelazione che gli ordinava di chiamare il suo popolo ad abbandonare l'idolatria e l'orgoglio, e a tornare verso Allah, l'Unico degno di adorazione. La sua missione era avvertire prima che si abbattesse su di loro un castigo simile a quello dei popoli del passato."
+      },
+      {
+        "id": "hud_prophecy_chapter_2",
+        "title": "Il popolo di 'Ad",
+        "content": "Il popolo di 'Ad era una civiltà potente che abitava la regione di Al-Ahqaf, nel sud dell'Arabia. Il Corano li descrive nella sura Al-Fajr: «Non hai visto come il tuo Signore agì con gli 'Ad, con Iram dalle colonne, il cui uguale non fu mai creato nel paese? » Avevano dimenticato il messaggio del monoteismo e erano caduti nell'idolatria. Costruivano monumenti imponenti e si vantavano della loro forza. Hud, come profeta scelto da Allah tra loro, aveva la responsabilità di riportarli alla verità."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 7:65",
+        "reference_text": "Sura Al-A'raf, versetto 65",
+        "content": "وَإِلَىٰ عَادٍ أَخَاهُمْ هُودًا ۗ قَالَ يَـٰقَوْمِ ٱعْبُدُوا۟ ٱللَّهَ مَا لَكُم مِّنْ إِلَـٰهٍ غَيْرُهُۥٓ ۚ أَفَلَا تَتَّقُونَ",
+        "translation": "E verso gli 'Ad, il loro fratello Hud. Disse: O popolo mio! Adorate Allah — non avete altra divinità che Lui. Non Lo temete dunque?",
+        "relevance": "Questo versetto stabilisce l'invio di Hud come profeta presso il popolo di 'Ad e la sua chiamata al monoteismo."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 11:50",
+        "reference_text": "Sura Hud, versetto 50",
+        "content": "وَإِلَىٰ عَادٍ أَخَاهُمْ هُودًۭا ۚ قَالَ يَـٰقَوْمِ ٱعْبُدُوا۟ ٱللَّهَ مَا لَكُم مِّنْ إِلَـٰهٍ غَيْرُهُۥٓ ۖ إِنْ أَنتُمْ إِلَّا مُفْتَرُونَ",
+        "translation": "E verso gli 'Ad inviammo il loro fratello Hud. Disse: O popolo mio! Adorate Allah. Non avete altra divinità che Lui. Non fate che inventare menzogne.",
+        "relevance": "Questo versetto conferma l'invio di Hud e il suo messaggio centrale."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Hud",
+        "arabic_term": "هود",
+        "definition": "Hud in arabo. Profeta di Allah inviato al popolo di 'Ad per chiamarlo al monoteismo. Una sura del Corano porta il suo nome.",
+        "pronunciation": "houd"
+      },
+      {
+        "id": 2,
+        "term": "'Ad",
+        "arabic_term": "عاد",
+        "definition": "Popolo antico d'Arabia, potente e arrogante, al quale Hud fu inviato. Furono distrutti da un vento furioso.",
+        "pronunciation": "aad"
+      },
+      {
+        "id": 3,
+        "term": "Al-Ahqaf",
+        "arabic_term": "الأحقاف",
+        "definition": "Regione meridionale della penisola arabica dove viveva il popolo di 'Ad. Una sura del Corano porta questo nome.",
+        "pronunciation": "al-ah-qaf"
+      }
+    ]
+  },
+  "hud_call": {
+    "title": "La chiamata di Hud al suo popolo",
+    "title_arabic": "دعوة هود لقومه",
+    "introduction": "Hud (عليه السلام) chiamò il popolo di 'Ad con chiarezza e saggezza. Li invitò ad adorare solo Allah, a chiedere perdono per i loro peccati, e a non gonfiarsi d'orgoglio. Ricordò loro i favori di Allah e li avvertì delle conseguenze dell'ingratitudine. Nonostante la chiarezza del suo messaggio, gli 'Ad rifiutarono con arroganza.",
+    "conclusion": "La chiamata di Hud dimostra la costanza del messaggio profetico: l'adorazione di Allah, il timore di Lui, e l'avvertimento prima del castigo. Hud compì la sua missione con integrità, lasciando la scelta al suo popolo.",
+    "moral_lesson": "Questa storia ci insegna che la chiamata all'Islam deve essere fatta con chiarezza e senza compromessi sul monoteismo. Ci ricorda che il messaggero trasmette; la guida rimane nelle mani di Allah.",
+    "historical_location": "Al-Ahqaf",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "hud_call_chapter_1",
+        "title": "L'invito al monoteismo",
+        "content": "Hud disse al suo popolo: «O popolo mio! Adorate Allah. Non avete altra divinità che Lui. Non Lo temete dunque? » Ricordò loro che non chiedeva alcuna ricompensa per la sua chiamata; la sua ricompensa spetta solo ad Allah, Creatore di ogni cosa. Li invitò a pentirsi e a tornare verso il loro Signore, poiché Egli è Perdonatore e Misericordioso. Hud li avvertì che se si fossero allontanati, avrebbero subito il destino dei popoli che lo avevano preceduto."
+      },
+      {
+        "id": "hud_call_chapter_2",
+        "title": "La risposta degli 'Ad",
+        "content": "I notabili del popolo di 'Ad risposero con disprezzo. Dissero: «O Hud! Non ci hai portato alcuna prova chiara. Non abbandoneremo le nostre divinità sulla tua parola, e non ti crediamo. » Lo accusarono di essere un mentitore e di volerli distogliere dalla religione dei loro antenati. Hud rispose loro che prendeva Allah a testimone e li invitava a testimoniare che era innocente di ciò che Gli associavano. Nonostante il loro rifiuto, Hud continuò a chiamarli con pazienza."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 11:50-52",
+        "reference_text": "Sura Hud, versetti 50-52",
+        "content": "قَالَ يَـٰقَوْمِ ٱعْبُدُوا۟ ٱللَّهَ مَا لَكُم مِّنْ إِلَـٰهٍ غَيْرُهُۥٓ ۖ إِنْ أَنتُمْ إِلَّا مُفْتَرُونَ ۝ يَـٰقَوْمِ لَآ أَسْـَٔلُكُمْ عَلَيْهِ أَجْرًا ۖ إِنْ أَجْرِىَ إِلَّا عَلَى ٱلَّذِى فَطَرَنِىٓ ۚ أَفَلَا تَعْقِلُونَ",
+        "translation": "Disse: O popolo mio! Adorate Allah. Non avete altra divinità che Lui. Non fate che inventare menzogne. O popolo mio! Non vi chiedo alcun compenso per questo. Il mio compenso spetta solo a Colui che mi ha creato. Non ragionate?",
+        "relevance": "Questi versetti contengono la chiamata di Hud e la sua dichiarazione di disinteresse."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 11:53-54",
+        "reference_text": "Sura Hud, versetti 53-54",
+        "content": "قَالُوا۟ يَـٰهُودُ مَا جِئْتَنَا بِبَيِّنَةٍۢ وَمَا نَحْنُ بِتَارِكِىٓ آلِهَتِنَا عَن قَوْلِكَ وَمَا نَحْنُ لَكَ بِمُؤْمِنِينَ",
+        "translation": "Dissero: O Hud! Non ci hai portato alcuna prova chiara. Non abbandoneremo le nostre divinità sulla tua parola, e non ti crediamo.",
+        "relevance": "Questi versetti descrivono il rifiuto ostinato del popolo di 'Ad."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Tawhid",
+        "arabic_term": "توحيد",
+        "definition": "Monoteismo. L'unicità di Allah nell'adorazione. Era il messaggio centrale di Hud.",
+        "pronunciation": "taw-hid"
+      },
+      {
+        "id": 2,
+        "term": "Bayyina",
+        "arabic_term": "بينة",
+        "definition": "Prova chiara. Gli 'Ad chiedevano una prova a Hud, quando il messaggio e i segni di Allah erano già evidenti.",
+        "pronunciation": "bay-yi-na"
+      }
+    ]
+  },
+  "rejection_arrogance": {
+    "title": "Il rifiuto e l'arroganza degli 'Ad",
+    "title_arabic": "الرفض والاستكبار",
+    "introduction": "Il popolo di 'Ad rifiutò Hud con arroganza. Si vantavano della loro forza fisica e dei loro monumenti, credendosi superiori a tutto. Dissero: «Chi è più forte di noi? » Negarono i segni di Allah e trattarono Hud da mentitore. Il loro orgoglio li accecò e li condusse alla rovina.",
+    "conclusion": "L'arroganza degli 'Ad illustra come il potere terreno possa accecare i popoli. Dimenticarono che è Allah che li aveva creati e che Egli è più forte di loro. Il loro rifiuto ostinato sigillò il loro destino.",
+    "moral_lesson": "Questa storia ci avverte dei pericoli dell'orgoglio e dell'arroganza. La forza fisica e le ricchezze non proteggono dal castigo di Allah. Solo la sottomissione a Lui assicura la salvezza.",
+    "historical_location": "Al-Ahqaf",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "rejection_arrogance_chapter_1",
+        "title": "L'arroganza degli 'Ad",
+        "content": "Il Corano descrive l'arroganza degli 'Ad: «Quanto agli 'Ad, si inorgoglirono sulla terra senza diritto e dissero: Chi è più forte di noi? Non videro che Allah, Colui che li ha creati, è più forte di loro? E negavano i Nostri segni. » Gli 'Ad erano rinomati per la loro forza eccezionale. Avevano costruito monumenti imponenti, come menziona il Corano riguardo a Iram dalle colonne. Questa potenza li fece credere di essere invincibili. Disprezzarono l'avvertimento di Hud e persistettero nella loro miscredenza."
+      },
+      {
+        "id": "rejection_arrogance_chapter_2",
+        "title": "L'ultimatum di Hud",
+        "content": "Hud disse loro: «O popolo mio! Implorate il perdono del vostro Signore, poi pentitevi verso di Lui. Egli invierà su di voi dal cielo piogge abbondanti e vi concederà una forza in più alla vostra forza. Non allontanatevi come peccatori. » Gli 'Ad rifiutarono. Hud li avvertì allora che il termine concesso da Allah stava per scadere. Annunciò loro che un castigo li avrebbe colpiti. Hud e i credenti che lo avevano seguito si prepararono, mentre gli 'Ad persistettero nella loro arroganza fino all'ultimo momento."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 41:15",
+        "reference_text": "Sura Fussilat, versetto 15",
+        "content": "فَأَمَّا عَادٌۭ فَٱسْتَكْبَرُوا۟ فِى ٱلْأَرْضِ بِغَيْرِ ٱلْحَقِّ وَقَالُوا۟ مَنْ أَشَدُّ مِنَّا قُوَّةً ۖ أَوَلَمْ يَرَوْا۟ أَنَّ ٱللَّهَ ٱلَّذِى خَلَقَهُمْ هُوَ أَشَدُّ مِنْهُمْ قُوَّةًۭ ۖ وَكَانُوا۟ بِـَٔايَـٰتِنَا يَجْحَدُونَ",
+        "translation": "Quanto agli 'Ad, si inorgoglirono sulla terra senza diritto e dissero: Chi è più forte di noi? Non videro che Allah, Colui che li ha creati, è più forte di loro? E negavano i Nostri segni.",
+        "relevance": "Questo versetto descrive l'arroganza degli 'Ad e la loro negazione dei segni di Allah."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 26:123",
+        "reference_text": "Sura Ash-Shu'ara, versetto 123",
+        "content": "كَذَّبَتْ عَادٌ ٱلْمُرْسَلِينَ",
+        "translation": "Il popolo di 'Ad trattò i messaggeri da mentitori.",
+        "relevance": "Questo versetto conferma il rifiuto dei messaggeri da parte degli 'Ad."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Istikbar",
+        "arabic_term": "استكبار",
+        "definition": "Arroganza, orgoglio. L'atteggiamento degli 'Ad che li condusse alla rovina.",
+        "pronunciation": "is-tik-bar"
+      },
+      {
+        "id": 2,
+        "term": "Juhud",
+        "arabic_term": "جحود",
+        "definition": "Negazione, diniego. Gli 'Ad negavano i segni e le prove di Allah.",
+        "pronunciation": "jou-houd"
+      }
+    ]
+  },
+  "the_ad_people": {
+    "title": "Il popolo di 'Ad",
+    "title_arabic": "قوم عاد",
+    "introduction": "Il popolo di 'Ad era una delle più potenti civiltà antiche. Abitavano la regione di Al-Ahqaf, nel sud dell'Arabia. Il Corano li descrive come costruttori di monumenti imponenti (Iram dalle colonne). Avevano ricevuto favori da Allah — bestiame, figli, giardini e sorgenti — ma si mostrarono ingrati e caddero nell'idolatria.",
+    "conclusion": "La potenza degli 'Ad non li protesse. I loro monumenti e la loro forza fisica non poterono salvarli dal castigo. Solo Hud e i credenti che lo seguirono furono risparmiati.",
+    "moral_lesson": "Questa storia ci insegna che i favori di Allah esigono gratitudine e obbedienza. La potenza e le realizzazioni materiali sono effimere se non accompagnate dalla fede.",
+    "historical_location": "Al-Ahqaf (sud dell'Arabia)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "the_ad_people_chapter_1",
+        "title": "Una civiltà potente",
+        "content": "Il popolo di 'Ad era rinomato per la sua forza eccezionale. Il Corano li menziona più volte come esempio di popolo potente che fu distrutto per aver disobbedito. Costruivano monumenti notevoli — il Corano evoca «Iram dalle colonne, il cui uguale non fu mai creato nel paese ». Allah aveva loro concesso «bestiame, figli, giardini e sorgenti» (Corano 26:133). Ma invece di rendere grazie ad Allah per questi favori, si inorgoglirono e si attribuirono questi successi a sé stessi."
+      },
+      {
+        "id": "the_ad_people_chapter_2",
+        "title": "L'ingratitudine",
+        "content": "Allah aveva concesso agli 'Ad favori: bestiame, figli, giardini e sorgenti (Corano 26:133). Aveva dato loro la forza. Ma si inorgoglirono e adorarono divinità al di fuori di Allah. Rifiutarono Hud, Suo messaggero. La loro ingratitudine e miscredenza li fecero meritare il castigo. Hud li avvertì più volte, ma persistettero. La loro civiltà, per quanto imponente, non poté proteggerli quando il decreto di Allah si abbatté su di loro."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 89:6-8",
+        "reference_text": "Sura Al-Fajr, versetti 6-8",
+        "content": "أَلَمْ تَرَ كَيْفَ فَعَلَ رَبُّكَ بِعَادٍ إِرَمَ ذَاتِ الْعِمَادِ الَّتِي لَمْ يُخْلَقْ مِثْلُهَا فِي الْبِلَادِ",
+        "translation": "Non hai visto come il tuo Signore agì con gli 'Ad, con Iram dalle colonne, il cui uguale non fu mai creato nel paese?",
+        "relevance": "Questo versetto evoca la grandezza della civiltà degli 'Ad e i loro monumenti."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 26:133",
+        "reference_text": "Sura Ash-Shu'ara, versetto 133",
+        "content": "أَمَدَّكُم بِأَنْعَامٍ وَبَنِينَ وَجَنَّاتٍ وَعُيُونٍ",
+        "translation": "Vi concesse bestiame, figli, giardini e sorgenti.",
+        "relevance": "Questo versetto menziona i favori che Allah concesse al popolo di 'Ad."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Iram",
+        "arabic_term": "إرم",
+        "definition": "Antenato degli 'Ad o nome della loro città. Il Corano menziona «Iram dalle colonne» per descrivere la loro civiltà.",
+        "pronunciation": "i-ram"
+      },
+      {
+        "id": 2,
+        "term": "Al-'Imad",
+        "arabic_term": "العمد",
+        "definition": "Le colonne. Gli 'Ad costruivano monumenti con colonne imponenti.",
+        "pronunciation": "al-i-mad"
+      }
+    ]
+  },
+  "the_destruction": {
+    "title": "La distruzione per mezzo del vento",
+    "title_arabic": "الهلاك بالريح",
+    "introduction": "Quando gli 'Ad persistettero nella loro miscredenza e arroganza, il castigo di Allah si abbatté su di loro. A differenza del diluvio di Noè, gli 'Ad furono distrutti da un vento furioso e glaciale (rīh sarsar 'ātiya). Questo vento annientò tutto sul suo passaggio. Hud e i credenti furono salvati dalla misericordia di Allah.",
+    "conclusion": "La distruzione degli 'Ad per mezzo del vento ricorda che ogni popolo riceve un castigo conforme alla sua situazione. Gli 'Ad, fieri della loro forza, furono annientati da una forza che non poterono affrontare. Solo i credenti furono risparmiati.",
+    "moral_lesson": "Questa storia ci insegna che nessuno può sfuggire al decreto di Allah. La potenza umana è derisoria di fronte alla Sua volontà. La salvezza risiede nella fede e nell'obbedienza.",
+    "historical_location": "Al-Ahqaf",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "the_destruction_chapter_1",
+        "title": "Il vento distruttore",
+        "content": "Il Corano descrive la distruzione degli 'Ad: «E quanto agli 'Ad, furono distrutti da un vento furioso e glaciale.» (69:6) Questo vento (rīh sarsar) fu imposto su di loro «per sette notti e otto giorni consecutivi» (69:7). Era così violento che la gente giaceva «come tronchi di palme vuoti» (69:7). Il Corano dice anche: «Strappava la gente come tronchi di palme sradicati.» (54:20) Gli 'Ad, così fieri della loro forza, furono impotenti. I loro monumenti non li protessero. Furono annientati."
+      },
+      {
+        "id": "the_destruction_chapter_2",
+        "title": "La salvezza di Hud",
+        "content": "Hud e coloro che avevano creduto con lui furono salvati dalla misericordia di Allah. Il Corano riporta: «E quando venne il Nostro ordine, salvammo Hud e coloro che avevano creduto con lui, per una misericordia da parte Nostra.» (11:58) Gli 'Ad furono annientati, lasciando una lezione per le generazioni future: l'arroganza e la miscredenza portano alla rovina, mentre la fede e l'obbedienza portano alla salvezza."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 69:6-7",
+        "reference_text": "Sura Al-Haqqa, versetti 6-7",
+        "content": "وَأَمَّا عَادٌۭ فَأُهْلِكُوا۟ بِرِيحٍۢ صَرْصَرٍ عَاتِيَةٍۢ ۝ سَخَّرَهَا عَلَيْهِمْ سَبْعَ لَيَالٍ وَثَمَانِيَةَ أَيَّامٍ حُسُومًا فَتَرَى الْقَوْمَ فِيهَا صَرْعَىٰ كَأَنَّهُمْ أَعْجَازُ نَخْلٍ خَاوِيَةٍ",
+        "translation": "E quanto agli 'Ad, furono distrutti da un vento furioso e glaciale. [Allah] lo impose su di loro sette notti e otto giorni consecutivi. Vedevi la gente giacere come tronchi di palme vuoti.",
+        "relevance": "Questi versetti descrivono il castigo degli 'Ad: il vento, la sua durata e il suo effetto."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 54:20",
+        "reference_text": "Sura Al-Qamar, versetto 20",
+        "content": "تَنزِعُ النَّاسَ كَأَنَّهُمْ أَعْجَازُ نَخْلٍ مُّنقَعِرٍ",
+        "translation": "Strappava la gente come tronchi di palme sradicati.",
+        "relevance": "Questo versetto descrive la violenza del vento distruttore."
+      },
+      {
+        "id": 3,
+        "type": "quran",
+        "source": "Coran 11:58",
+        "reference_text": "Sura Hud, versetto 58",
+        "content": "وَلَمَّا جَآءَ أَمْرُنَا نَجَّيْنَا هُودًا وَٱلَّذِينَ ءَامَنُوا۟ مَعَهُۥ بِرَحْمَةٍۢ مِّنَّا",
+        "translation": "E quando venne il Nostro ordine, salvammo Hud e coloro che avevano creduto con lui, per una misericordia da parte Nostra.",
+        "relevance": "Questo versetto conferma la salvezza di Hud e dei credenti."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Sarsar",
+        "arabic_term": "صرصر",
+        "definition": "Vento glaciale e furioso. Il castigo con cui Allah distrusse il popolo di 'Ad.",
+        "pronunciation": "sar-sar"
+      },
+      {
+        "id": 2,
+        "term": "Rahma",
+        "arabic_term": "رحمة",
+        "definition": "Misericordia. Allah salvò Hud e i credenti per Sua misericordia.",
+        "pronunciation": "rah-ma"
+      }
+    ]
+  },
+  "lessons_from_hud": {
+    "title": "Le lezioni della storia di Hud",
+    "title_arabic": "دروس من قصة هود",
+    "introduction": "La storia di Hud (عليه السلام) contiene lezioni senza tempo. Insegna le conseguenze dell'arroganza, l'importanza di rispondere alla chiamata dei profeti, e la misericordia di Allah verso i credenti. Il Corano la cita come esempio per i popoli che verranno dopo.",
+    "conclusion": "Hud compì la sua missione con integrità. Gli 'Ad furono annientati, ma Hud e i credenti furono salvati. La sua storia rimane un monito: il potere terreno è effimero; solo la fede in Allah assicura la salvezza.",
+    "moral_lesson": "Questa storia ci insegna a non inorgoglirci mai dei favori di Allah, a rispondere alla chiamata dei messaggeri, e a temere il castigo. Ci ricorda che ogni popolo riceve ammonitori prima del castigo.",
+    "historical_location": "Da Al-Ahqaf all'oblio",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lessons_from_hud_chapter_1",
+        "title": "Un esempio per i popoli",
+        "content": "Il Corano presenta la storia di Hud come esempio per le generazioni future. Gli 'Ad avevano tutto: la forza, i monumenti, la prosperità. Ma mancava loro l'essenziale: la fede in Allah e l'umiltà. La loro arroganza li distrusse. Hud, da parte sua, rimase fermo nel suo messaggio, senza compromessi. Non cercò né potere né ricchezza; chiese solo al suo popolo di credere. La sua storia ci ricorda che il messaggero compie la sua missione; il risultato appartiene ad Allah."
+      },
+      {
+        "id": "lessons_from_hud_chapter_2",
+        "title": "La continuità profetica",
+        "content": "Hud fa parte della stirpe dei profeti inviati dopo Noè. Ogni popolo riceve il suo messaggero. Gli 'Ad, come i popoli prima di loro, ebbero la loro possibilità. Rifiutarono e furono distrutti. La storia di Hud si iscrive nello stesso schema di quella di Noè: la chiamata al monoteismo, il rifiuto da parte della maggioranza, il castigo, e la salvezza dei credenti. Questa ripetizione nel Corano mira a raffermare i cuori e a esortare i credenti a restare sul retto sentiero."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 11:120",
+        "reference_text": "Sura Hud, versetto 120",
+        "content": "وَكُلًّا نَّقُصُّ عَلَيْكَ مِنْ أَنبَاءِ الرُّسُلِ مَا نُثَبِّتُ بِهِ فُؤَادَكَ وَجَاءَكَ فِي هَٰذِهِ الْحَقُّ وَمَوْعِظَةٌ وَذِكْرَىٰ لِلْمُؤْمِنِينَ",
+        "translation": "E tutto ciò che ti raccontiamo dei racconti dei messaggeri, è per raffermare il tuo cuore. E ti è giunto in questo racconto la verità, nonché un'esortazione e un ricordo per i credenti.",
+        "relevance": "Questo versetto spiega lo scopo dei racconti dei profeti nel Corano."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 11:60",
+        "reference_text": "Sura Hud, versetto 60",
+        "content": "وَأُتْبِعُوا۟ فِى هَـٰذِهِ ٱلدُّنْيَا لَعْنَةًۭ وَيَوْمَ ٱلْقِيَـٰمَةِ ۗ أَلَآ إِنَّ عَادًۭا كَفَرُوا۟ رَبَّهُمْ ۗ أَلَا بُعْدًۭا لِّعَادٍۢ قَوْمِ هُودٍۢ",
+        "translation": "E furono perseguitati da una maledizione in questo mondo, e nel Giorno della Resurrezione. In verità, gli 'Ad hanno miscreduto nel loro Signore. Che gli 'Ad, il popolo di Hud, siano annientati!",
+        "relevance": "Questo versetto conclude il racconto degli 'Ad e il loro castigo in questo mondo e nell'aldilà."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Ibra",
+        "arabic_term": "عبرة",
+        "definition": "Esempio o lezione. Le storie dei profeti sono esempi per l'umanità.",
+        "pronunciation": "ib-ra"
+      },
+      {
+        "id": 2,
+        "term": "Dhikra",
+        "arabic_term": "ذكرى",
+        "definition": "Ricordo. I racconti dei profeti servono da ricordo per i credenti.",
+        "pronunciation": "dhik-ra"
+      }
+    ]
+  }
+}

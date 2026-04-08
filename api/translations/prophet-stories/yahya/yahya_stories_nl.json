@@ -1,0 +1,230 @@
+{
+  "yahya_birth": {
+    "title": "De geboorte van Yahya",
+    "title_arabic": "مولد يحيى",
+    "introduction": "Yahya (يحيى عليه السلام), Johannes de Doper, is de zoon van de profeet Zakariya. De Koran zegt: \"O Zakariya! Wij geven je het goede nieuws van een zoon. Zijn naam zal Yahya zijn.\" (19:7) Yahya werd wonderbaarlijk geboren: zijn vader was oud en zijn moeder onvruchtbaar. Allah vervulde Zijn belofte.",
+    "conclusion": "Yahya werd geboren zoals aangekondigd. Zijn naam betekent \"hij zal leven\". Hij was een teken voor de mensen. Zijn geboorte bevestigde dat niets onmogelijk is voor Allah.",
+    "moral_lesson": "Dit verhaal leert ons dat het woord van Allah altijd wordt vervuld. Wonderen herinneren ons aan de kracht van de Schepper.",
+    "historical_location": "Palestina",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "yahya_birth_chapter_1",
+        "title": "De aankondiging van de geboorte",
+        "content": "De Koran vertelt: \"Wij hebben voor hem niemand die naam gegeven.\" (19:7) De naam Yahya was uniek. Niemand voor hem had hem gedragen. Het was een teken van goddelijke verkiezing. Zakariya en zijn vrouw wachtten in geloof. Toen de tijd kwam, werd Yahya geboren. Familie en verwanten verheerlijkten Allah."
+      },
+      {
+        "id": "yahya_birth_chapter_2",
+        "title": "Een gezegend kind",
+        "content": "De Koran zegt: \"En vrede over hem de dag dat hij werd geboren, de dag dat hij sterft en de dag dat hij levend zal worden opgewekt.\" (19:15) Yahya was gezegend vanaf de geboorte. Vrede (salam) was over hem in elke fase van zijn leven. Hij groeide op in vroomheid en wijsheid. Zijn bestemming was profeet te zijn."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 19:7",
+        "reference_text": "Soera Maryam, vers 7",
+        "content": "يَـٰزَكَرِيَّآ إِنَّا نُبَشِّرُكَ بِغُلَـٰمٍ ٱسْمُهُۥ يَحْيَىٰ لَمْ نَجْعَل لَّهُۥ مِن قَبْلُ سَمِيًّۭا",
+        "translation": "O Zakariya! Wij geven je het goede nieuws van een zoon. Zijn naam zal Yahya zijn.",
+        "relevance": "Dit vers betreft de aankondiging van Yahya's geboorte."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 19:15",
+        "reference_text": "Soera Maryam, vers 15",
+        "content": "وَسَلَـٰمٌ عَلَيْهِ يَوْمَ وُلِدَ وَيَوْمَ يَمُوتُ وَيَوْمَ يُبْعَثُ حَيًّۭا",
+        "translation": "En vrede over hem de dag dat hij werd geboren, de dag dat hij sterft en de dag dat hij levend zal worden opgewekt.",
+        "relevance": "Dit vers vestigt de zegeningen over Yahya."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Yahya",
+        "arabic_term": "يحيى",
+        "definition": "Johannes in het Arabisch. Betekent \"hij zal leven\". Profeet van zuiverheid.",
+        "pronunciation": "yah-ya"
+      },
+      {
+        "id": 2,
+        "term": "Salam",
+        "arabic_term": "سلام",
+        "definition": "Vrede. Salam was over Yahya in elke fase.",
+        "pronunciation": "sa-lam"
+      }
+    ]
+  },
+  "yahya_purity": {
+    "title": "De zuiverheid van Yahya",
+    "title_arabic": "طهارة يحيى",
+    "introduction": "Yahya was een profeet van zuiverheid en vroomheid. De Koran zegt: \"En (Yahya) was gehoorzaam aan zijn ouders. Hij was noch hoogmoedig noch ongehoorzaam.\" (19:14) Hij leefde in ascese, ver van wereldlijke genoegens. Hij wijdde zich volledig aan de aanbidding van Allah.",
+    "conclusion": "Yahya belichaamde zuiverheid. Hij beging nooit zonde. Hij was een voorbeeld voor de gelovigen. Zijn naam is verbonden met kuisheid en vroomheid.",
+    "moral_lesson": "Dit verhaal leert ons dat zuiverheid van hart en lichaam een deugd is. De gelovige moet zich van het kwaad verwijderen en zich tot Allah naderen.",
+    "historical_location": "Palestina (woestijn)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "yahya_purity_chapter_1",
+        "title": "Het ascetische leven",
+        "content": "De Koran vertelt: \"En Wij gaven hem wijsheid vanaf de kindertijd, en tederheid van Ons en zuiverheid.\" (19:12-13) Yahya leefde in de woestijn. Hij droeg kleding van haar. Hij at eenvoudig. Hij zocht noch rijkdom noch macht. Zijn enige zoektocht was het welbehagen van Allah."
+      },
+      {
+        "id": "yahya_purity_chapter_2",
+        "title": "Gehoorzaamheid",
+        "content": "De Koran zegt: \"Hij was noch hoogmoedig noch ongehoorzaam.\" (19:14) Yahya gehoorzaamde zijn ouders en Allah. Hij rebelleerde nooit. Hij beging geen onrecht. Zijn leven was een voorbeeld van rechtschapenheid. De mensen respecteerden hem om zijn vroomheid."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 19:12-14",
+        "reference_text": "Soera Maryam, verzen 12-14",
+        "content": "يَـٰيَحْيَىٰ خُذِ ٱلْكِتَـٰبَ بِقُوَّةٍۢ ۖ وَءَاتَيْنَـٰهُ ٱلْحُكْمَ صَبِيًّۭا ۝ وَحَنَانًۭا مِّن لَّدُنَّا وَزَكَوٰةًۭ ۝ وَكَانَ تَقِيًّۭا",
+        "translation": "O Yahya! Neem het Boek met kracht. Wij gaven hem wijsheid vanaf de kindertijd, tederheid en zuiverheid. Hij was vroom.",
+        "relevance": "Dit gedeelte beschrijft de eigenschappen van Yahya."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 3:39",
+        "reference_text": "Soera Al-Imran, vers 39",
+        "content": "مُصَدِّقًۢا بِكَلِمَةٍۢ مِّنَ ٱللَّهِ وَسَيِّدًۭا وَحَصُورًۭا وَنَبِيًّۭا مِّنَ ٱلصَّـٰلِحِينَ",
+        "translation": "Bevestigend een woord van Allah, edel, kuis en profeet onder de rechtvaardigen.",
+        "relevance": "Dit vers prijst Yahya's kuisheid."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Zakât",
+        "arabic_term": "زكاة",
+        "definition": "Zuiverheid. Yahya ontving zakât (zuiverheid) van Allah.",
+        "pronunciation": "za-ka"
+      },
+      {
+        "id": 2,
+        "term": "Hasur",
+        "arabic_term": "حصور",
+        "definition": "Kuis. Yahya was hasur, onthoudend van wereldlijke genoegens.",
+        "pronunciation": "ha-sour"
+      }
+    ]
+  },
+  "yahya_isa": {
+    "title": "Yahya en de aankondiging van Isa",
+    "title_arabic": "يحيى وعيسى",
+    "introduction": "Yahya en Isa (Jezus) zijn verbonden. De Koran zegt: \"En (Yahya) bevestigde een woord van Allah.\" (3:39) Yahya kondigde de komst van Isa aan. Hij doopte mensen in de Jordaan, hen voorbereidend om de boodschap te ontvangen. Hij was de voorloper van de Messias.",
+    "conclusion": "Yahya bereidde de weg voor Isa. Hij getuigde van zijn komst. De twee profeten ontmoetten elkaar. Yahya herkende Isa als de beloofde Messias. De boodschap ging door.",
+    "moral_lesson": "Dit verhaal leert ons dat profeten elkaar bevestigen. Elke boodschapper bereidt de weg voor de volgende. De profetische keten is één.",
+    "historical_location": "Palestina (Jordanië)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "yahya_isa_chapter_1",
+        "title": "De voorloper",
+        "content": "De Koran vertelt: \"(Yahya) bevestigde een woord van Allah.\" (3:39) Yahya riep de mensen op tot berouw. Hij doopte hen in de rivier. Hij kondigde de komst aan van iemand groter dan hijzelf. Toen Isa tot hem kwam, zei Yahya: \"Dit is hij die ik heb aangekondigd.\" Hij trad nederig opzij voor Isa."
+      },
+      {
+        "id": "yahya_isa_chapter_2",
+        "title": "De ontmoeting",
+        "content": "De Koran zegt: \"En (gedenk) Yahya toen hij het Boek met kracht nam.\" (19:12) Yahya en Isa ontmoetten elkaar bij de Jordaan. Yahya herkende Isa als de Messias. Hij doopte hem. Yahya's missie was volbracht: hij had de harten voorbereid. Isa zette de boodschap voort. Beide profeten dienden Allah."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 3:39",
+        "reference_text": "Soera Al-Imran, vers 39",
+        "content": "مُصَدِّقًۢا بِكَلِمَةٍۢ مِّنَ ٱللَّهِ وَسَيِّدًۭا وَحَصُورًۭا وَنَبِيًّۭا مِّنَ ٱلْصَّـٰلِحِينَ",
+        "translation": "Bevestigend een woord van Allah, edel, kuis en profeet onder de rechtvaardigen.",
+        "relevance": "Dit vers vestigt de band tussen Yahya en het woord van Allah (Isa)."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 19:12",
+        "reference_text": "Soera Maryam, vers 12",
+        "content": "يَـٰيَحْيَىٰ خُذِ ٱلْكِتَـٰبَ بِقُوَّةٍۢ ۖ وَءَاتَيْنَـٰهُ ٱلْحُكْمَ صَبِيًّۭا",
+        "translation": "O Yahya! Neem het Boek met kracht. Wij gaven hem wijsheid vanaf de kindertijd.",
+        "relevance": "Dit vers beschrijft Yahya's missie."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Kalima",
+        "arabic_term": "كلمة",
+        "definition": "Woord. Yahya bevestigde Allahs kalima (Isa).",
+        "pronunciation": "ka-li-ma"
+      },
+      {
+        "id": 2,
+        "term": "Isa",
+        "arabic_term": "عيسى",
+        "definition": "Jezus in het Arabisch. Profeet aangekondigd door Yahya.",
+        "pronunciation": "i-sa"
+      }
+    ]
+  },
+  "lessons_from_yahya": {
+    "title": "Lessen uit het verhaal van Yahya",
+    "title_arabic": "دروس من قصة يحيى",
+    "introduction": "Yahya is de profeet van de zuiverheid. De Koran zegt: \"En (Yahya) was gehoorzaam aan zijn ouders. Hij was noch hoogmoedig noch ongehoorzaam.\" (19:14) Zijn leven was kort maar voorbeeldig. Hij bereidde de komst van Isa voor en stierf als martelaar.",
+    "conclusion": "Yahya leefde in zuiverheid. Hij kondigde Isa aan. Hij werd gedood door een tiran. Maar zijn boodschap overleefde. Hij blijft een model van vroomheid en nederigheid.",
+    "moral_lesson": "Dit verhaal leert ons dat kwaliteit prevaleert over kwantiteit. Een kort maar vroom leven is meer waard dan een lang leven in zonde.",
+    "historical_location": "Palestina",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lessons_from_yahya_chapter_1",
+        "title": "Zuiverheid en vroomheid",
+        "content": "De Koran zegt: \"En (Yahya) was edel, kuis en profeet onder de rechtvaardigen.\" (3:39) Yahya verlangde naar niets van deze wereld. Hij leefde in ascese. Hij wijdde zich aan Allah. De gelovige moet deze zuiverheid navolgen. Zich van het kwaad verwijderen, zich tot het goede naderen."
+      },
+      {
+        "id": "lessons_from_yahya_chapter_2",
+        "title": "Nederigheid voor de waarheid",
+        "content": "Yahya kondigde Isa aan. Toen Isa kwam, trad Yahya opzij. Hij zei: \"Hij moet toenemen en ik moet afnemen.\" Deze nederigheid is een les. De ware gelovige concurreert niet. Hij dient de waarheid, wie de boodschapper ook is die haar draagt."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 19:12-15",
+        "reference_text": "Soera Maryam, verzen 12-15",
+        "content": "يَـٰيَحْيَىٰ خُذِ ٱلْكِتَـٰبَ بِقُوَّةٍۢ ۖ وَءَاتَيْنَـٰهُ ٱلْحُكْمَ صَبِيًّۭا ۝ وَحَنَانًۭا مِّن لَّدُنَّا وَزَكَوٰةًۭ ۝ وَكَانَ تَقِيًّۭا ۝ وَحَنَانًۭا مِّن لَّدُنَّا وَزَكَوٰةًۭ",
+        "translation": "O Yahya! Neem het Boek met kracht. Wij gaven hem wijsheid, tederheid en zuiverheid. Hij was vroom.",
+        "relevance": "Dit gedeelte vat de eigenschappen van Yahya samen."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 6:85",
+        "reference_text": "Soera Al-An'am, vers 85",
+        "content": "وَزَكَرِيَّا وَيَحْيَىٰ وَعِيسَىٰ وَإِلْيَاسَ كُلٌّۭ مِّنَ ٱلصَّـٰلِحِينَ",
+        "translation": "En Zakariya, Yahya, Isa en Ilyas: allen onder de rechtvaardigen.",
+        "relevance": "Dit vers plaatst Yahya onder de rechtvaardige profeten."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Taqwa",
+        "arabic_term": "تقوى",
+        "definition": "Vroomheid, vrees voor Allah. Yahya was vol taqwa.",
+        "pronunciation": "taq-wa"
+      },
+      {
+        "id": 2,
+        "term": "Sayyid",
+        "arabic_term": "سيد",
+        "definition": "Edel, meester. Yahya was sayyid, edel onder de mensen.",
+        "pronunciation": "say-yid"
+      }
+    ]
+  }
+}

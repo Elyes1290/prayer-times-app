@@ -1,0 +1,401 @@
+{
+  "dawud_goliath": {
+    "title": "Dawud en Goliat",
+    "title_arabic": "داوود وجالوت",
+    "introduction": "Dawud (داوود عليه السلام), David, is een profeet en koning van Israël. De Koran verhaalt zijn strijd tegen Goliat (Jalut): \"Hoe vaak heeft een kleine groep, met de toestemming van Allah, een machtig leger overwonnen!\" (2:249) Dawud was een jonge herder toen het leger van Talut (Saul) de Filistijnen tegemoet trad. Goliat daagde de soldaten uit; alleen Dawud aanvaardde.",
+    "conclusion": "Dawud velde Goliat met een steen uit zijn slinger. Allah gaf hem het koningschap en wijsheid. Deze strijd illustreert dat de overwinning van Allah komt, niet van kracht of aantal.",
+    "moral_lesson": "Dit verhaal leert ons dat vertrouwen in Allah en moed kunnen zegevieren over tegenspoed. De zwakke die op Allah vertrouwt kan de sterke overwinnen.",
+    "historical_location": "Palestina (Vallei van Elah)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "dawud_goliath_chapter_1",
+        "title": "De uitdaging van Goliat",
+        "content": "De Koran verhaalt: \"Toen Talut met de troepen uitrukte, zei hij: Allah zal jullie op de proef stellen met een rivier. Wie eruit drinkt is niet van mij; wie er niet van proeft is van mij — behalve wie er een handvol met zijn hand uit schept.\" (2:249) Het leger stak over; weinigen bleven trouw. Onder hen was Dawud. Goliat (Jalut), de Filistijnse reus, daagde de soldaten van Israël uit. Niemand durfde hem te trotseren. Dawud, jonge herder, bood zich vrijwillig aan."
+      },
+      {
+        "id": "dawud_goliath_chapter_2",
+        "title": "De wonderbaarlijke overwinning",
+        "content": "De Koran zegt: \"Zo versloegen zij hen met de toestemming van Allah. En Dawud doodde Goliat. En Allah gaf hem het koningschap en wijsheid, en onderwees hem wat Hij wilde.\" (2:251) Dawud had slechts een slinger en stenen. Hij riep Allah aan en wierp een steen. Hij trof Goliat op het voorhoofd; de reus viel. Het vijandelijke leger werd op de vlucht gejaagd. De overwinning was een teken: Allah ondersteunt hen die op Hem vertrouwen."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 2:249",
+        "reference_text": "Soera Al-Baqarah, vers 249",
+        "content": "فَلَمَّا فَصَلَ طَالُوتُ بِٱلْجُنُودِ قَالَ إِنَّ ٱللَّهَ مُبْتَلِيكُم بِنَهَرٍۢ فَمَن شَرِبَ مِنْهُ فَلَيْسَ مِنِّى وَمَن لَّمْ يَطْعَمْهُ فَإِنَّهُۥ مِنِّىٓ إِلَّا مَنِ ٱغْتَرَفَ غُرْفَةًۢ بِيَدِهِۦ",
+        "translation": "When Talut set out with the troops, he said: Allah will test you with a river. Whoever drinks from it is not of me.",
+        "relevance": "Dit vers beschrijft de beproeving voor de slag."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 2:251",
+        "reference_text": "Soera Al-Baqarah, vers 251",
+        "content": "فَهَزَمُوهُم بِإِذْنِ ٱللَّهِ وَقَتَلَ دَاوُۥدُ جَالُوتَ وَءَاتَىٰهُ ٱللَّهُ ٱلْمُلْكَ وَٱلْحِكْمَةَ وَعَلَّمَهُۥ مِمَّا يَشَآءُ",
+        "translation": "They defeated them by the permission of Allah. Dawud killed Goliath. Allah gave him the kingdom and wisdom.",
+        "relevance": "Dit vers vestigt Dawuds overwinning en de gave van het koningschap."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Dawud",
+        "arabic_term": "داوود",
+        "definition": "David in het Arabisch. Profeet en koning van Israël, overwinnaar van Goliat.",
+        "pronunciation": "da-woud"
+      },
+      {
+        "id": 2,
+        "term": "Jalut",
+        "arabic_term": "جالوت",
+        "definition": "Goliat. Filistijnse reus verslagen door Dawud.",
+        "pronunciation": "ja-lout"
+      }
+    ]
+  },
+  "dawud_kingdom": {
+    "title": "Het koninkrijk van Dawud",
+    "title_arabic": "ملك داوود",
+    "introduction": "Na de dood van Talut werd Dawud koning van Israël. De Koran zegt: \"O Dawud! Wij hebben jou tot opvolger op aarde gemaakt. Oordeel dus tussen de mensen met rechtvaardigheid.\" (38:26) Dawud regeerde met rechtvaardigheid. Hij verenigde de stammen en vestigde Jeruzalem als hoofdstad. Hij vocht tegen de vijanden van Allah en vestigde vrede.",
+    "conclusion": "Dawud was een rechtvaardige en vrome koning. Hij sprak recht met billijkheid en liet zich niet corrumperen. Zijn koninkrijk bloeide onder zijn leiding.",
+    "moral_lesson": "Dit verhaal leert ons dat macht met rechtvaardigheid moet worden uitgeoefend. De heerser moet billijk oordelen en Allah vrezen.",
+    "historical_location": "Jeruzalem, Palestina",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "dawud_kingdom_chapter_1",
+        "title": "De troonsbestijging",
+        "content": "De Koran verhaalt: \"En jouw Heer weet het beste wie in de hemelen en op aarde zijn. En Wij hebben sommige profeten boven anderen bevoorrecht; en aan Dawud gaven Wij de Zabur.\" (17:55) Dawud ontving het koningschap en het Boek (Zabur). Hij vestigde zijn troon in Jeruzalem. Mensen kwamen naar hem voor rechtvaardigheid. Hij luisterde naar klachten en besliste met wijsheid."
+      },
+      {
+        "id": "dawud_kingdom_chapter_2",
+        "title": "De rechtvaardigheid van Dawud",
+        "content": "De Koran zegt: \"O Dawud! Wij hebben jou tot opvolger op aarde gemaakt. Oordeel dus tussen de mensen met rechtvaardigheid en volg de begeerte niet: zij zou je van het pad van Allah doen afdwalen.\" (38:26) Dawud begunstigde niemand. Hij onderzocht elke zaak zorgvuldig. De onderdrukten vonden in hem een verdediger. Zijn koninkrijk was een voorbeeld van rechtvaardigheid."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 17:55",
+        "reference_text": "Soera Al-Isra, vers 55",
+        "content": "وَرَبُّكَ أَعْلَمُ بِمَن فِى ٱلسَّمَـٰوَٰتِ وَٱلْأَرْضِ ۗ وَلَقَدْ فَضَّلْنَا بَعْضَ ٱلنَّبِيِّـۧنَ عَلَىٰ بَعْضٍۢ ۖ وَءَاتَيْنَا دَاوُۥدَ زَبُورًۭا",
+        "translation": "Your Lord knows best. We have favored some prophets. To Dawud We gave the Zabur.",
+        "relevance": "Dit vers vestigt de gave van de Zabur aan Dawud."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 38:26",
+        "reference_text": "Soera Sad, vers 26",
+        "content": "يَـٰدَاوُۥدُ إِنَّا جَعَلْنَـٰكَ خَلِيفَةًۭ فِى ٱلْأَرْضِ فَٱحْكُم بَيْنَ ٱلنَّاسِ بِٱلْحَقِّ وَلَا تَتَّبِعِ ٱلْهَوَىٰ",
+        "translation": "O Dawud! We have made you a successor on earth. Judge between people with justice.",
+        "relevance": "Dit vers gebiedt Dawud met rechtvaardigheid te oordelen."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Khalifa",
+        "arabic_term": "خليفة",
+        "definition": "Opvolger, vertegenwoordiger. Dawud was khalifa op aarde.",
+        "pronunciation": "kha-li-fa"
+      },
+      {
+        "id": 2,
+        "term": "Zabur",
+        "arabic_term": "الزبور",
+        "definition": "De Psalmen. Door Allah aan Dawud geopenbaard boek.",
+        "pronunciation": "az-zabour"
+      }
+    ]
+  },
+  "dawud_zabur": {
+    "title": "De Zabur (De Psalmen)",
+    "title_arabic": "الزبور",
+    "introduction": "Allah openbaarde aan Dawud de Zabur (Psalmen). De Koran zegt: \"En aan Dawud gaven Wij de Zabur.\" (17:55) De Zabur bevat lofprijzingen, smeekbeden en wijsheid. Dawud reciteerde het met zo'n mooie stem dat de bergen en vogels met hem Allah verheerlijkten.",
+    "conclusion": "De Zabur is een van de geopenbaarde boeken, samen met de Thora, het Evangelie en de Koran. In alle boeken geloven is een pijler van het islamitisch geloof.",
+    "moral_lesson": "Dit verhaal leert ons dat elke profeet een openbaring ontving. De goddelijke boeken vullen elkaar aan en bevestigen de boodschap van de eenheid.",
+    "historical_location": "Palestina",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "dawud_zabur_chapter_1",
+        "title": "De openbaring van de Zabur",
+        "content": "De Koran verhaalt: \"Wij hebben aan jou geopenbaard zoals Wij aan Nuh en de profeten na hem openbaarden. En Wij openbaarden aan Ibrahim, Ismael, Izaäk, Jakob, de stammen, Isa, Ayyub, Yunus, Harun en Sulayman. En aan Dawud gaven Wij de Zabur.\" (4:163) De Zabur werd aan Dawud door Allah geopenbaard. Het bevatte woorden van lof en wijsheid. Dawud reciteerde het terwijl hij zijn Heer verheerlijkte."
+      },
+      {
+        "id": "dawud_zabur_chapter_2",
+        "title": "De stem van Dawud",
+        "content": "De Koran zegt: \"Wij hebben Dawud zeker een gunst van Ons gegeven: O bergen! Herhaal met hem de lofprijzingen. En o vogels!\" (34:10) Wanneer Dawud Allah verheerlijkte, herhaalden de bergen en vogels met hem. Zijn stem was zo melodieus dat zij de schepping inspireerde. De Zabur, gereciteerd door Dawud, verhief de harten naar Allah."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 4:163",
+        "reference_text": "Soera An-Nisa, vers 163",
+        "content": "إِنَّآ أَوْحَيْنَآ إِلَيْكَ كَمَآ أَوْحَيْنَآ إِلَىٰ نُوحٍۢ وَٱلنَّبِيِّـۧنَ مِنۢ بَعْدِهِۦ ۚ وَأَوْحَيْنَآ إِلَىٰٓ إِبْرَٰهِـۧمَ وَإِسْمَـٰعِيلَ وَإِسْحَـٰقَ وَيَعْقُوبَ وَٱلْأَسْبَاطِ وَعِيسَىٰ وَأَيُّوبَ وَيُونُسَ وَهَـٰرُونَ وَسُلَيْمَـٰنَ ۚ وَءَاتَيْنَا دَاوُۥدَ زَبُورًۭا",
+        "translation": "We have revealed to you as to the prophets. To Dawud We gave the Zabur.",
+        "relevance": "Dit vers plaatst de Zabur onder de geopenbaarde boeken."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 34:10",
+        "reference_text": "Soera Saba, vers 10",
+        "content": "وَلَقَدْ ءَاتَيْنَا دَاوُۥدَ مِنَّا فَضْلًۭا ۖ يَـٰجِبَالُ أَوِّبِى مَعَهُۥ وَٱلطَّيْرَ",
+        "translation": "We have granted a favor to Dawud: O mountains! Repeat with him. And O birds!",
+        "relevance": "Dit vers beschrijft het wonder van de bergen en vogels."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Zabur",
+        "arabic_term": "الزبور",
+        "definition": "De Psalmen. Aan Dawud geopenbaard boek.",
+        "pronunciation": "az-zabour"
+      },
+      {
+        "id": 2,
+        "term": "Tasbih",
+        "arabic_term": "تسبيح",
+        "definition": "Verheerlijking. Dawud verheerlijkte Allah door de Zabur.",
+        "pronunciation": "tas-bih"
+      }
+    ]
+  },
+  "dawud_mountains": {
+    "title": "De bergen en de vogels",
+    "title_arabic": "الجبال والطيور مع داوود",
+    "introduction": "Allah schonk Dawud een uniek wonder: wanneer hij zijn Heer verheerlijkte, herhaalden de bergen en vogels met hem. De Koran zegt: \"O bergen! Herhaal met hem de lofprijzingen. En o vogels!\" (34:10) De hele schepping verheerlijkte Allah naast Dawud.",
+    "conclusion": "Dit wonder toonde aan dat Dawud inderdaad een profeet van Allah was. De natuur gehoorzaamt haar Schepper en antwoordt op de roep van Zijn uitverkoren dienaren.",
+    "moral_lesson": "Dit verhaal leert ons dat de hele schepping Allah verheerlijkt. De mens moet zich door gebed en dhikr bij deze verheerlijking aansluiten.",
+    "historical_location": "Palestina",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "dawud_mountains_chapter_1",
+        "title": "Het wonder",
+        "content": "De Koran verhaalt: \"En Wij hebben Dawud zeker een gunst van Ons gegeven: O bergen! Herhaal met hem de lofprijzingen. En o vogels! En Wij maakten voor hem het ijzer zacht.\" (34:10) Wanneer Dawud de Zabur reciteerde en Allah verheerlijkte, echoden de bergen zijn stem. De vogels sloten zich bij hem aan. Het was een teken van Allahs macht en Dawuds uitverkiezing."
+      },
+      {
+        "id": "dawud_mountains_chapter_2",
+        "title": "De onderwerping van de schepping",
+        "content": "De Koran zegt ook: \"En de verzamelde vogels: allen herhaalden met hem de lofprijzingen.\" (38:19) De hele schepping — bergen, vogels — verheerlijkte Allah met Dawud. Dit herinnert eraan dat alles wat bestaat aan Allah onderworpen is. De mens moet deze onderwerping door aanbidding navolgen."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 34:10",
+        "reference_text": "Soera Saba, vers 10",
+        "content": "وَلَقَدْ ءَاتَيْنَا دَاوُۥدَ مِنَّا فَضْلًۭا ۖ يَـٰجِبَالُ أَوِّبِى مَعَهُۥ وَٱلطَّيْرَ ۚ وَأَلَنَّا لَهُ ٱلْحَدِيدَ",
+        "translation": "We have granted a favor to Dawud. O mountains! Repeat with him. And O birds!",
+        "relevance": "Dit vers beschrijft het wonder van de bergen en vogels."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 38:19",
+        "reference_text": "Soera Sad, vers 19",
+        "content": "وَٱلطَّيْرَ مَحْشُورَةً ۖ كُلٌّ لَّهُۥٓ أَوَّابٌ",
+        "translation": "And the birds assembled, all with him repeated the praises.",
+        "relevance": "Dit vers bevestigt de verheerlijking van de vogels met Dawud."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Awab",
+        "arabic_term": "أواب",
+        "definition": "Wie (naar Allah) terugkeert. De bergen en vogels waren awab met Dawud.",
+        "pronunciation": "a-wab"
+      },
+      {
+        "id": 2,
+        "term": "Jibal",
+        "arabic_term": "جبال",
+        "definition": "Bergen. Zij verheerlijkten Allah met Dawud.",
+        "pronunciation": "ji-bal"
+      }
+    ]
+  },
+  "dawud_iron": {
+    "title": "Het voor Dawud verzachte ijzer",
+    "title_arabic": "تليين الحديد لداوود",
+    "introduction": "Allah schonk Dawud een ander wonder: ijzer werd zacht in zijn handen. De Koran zegt: \"En Wij maakten voor hem het ijzer zacht.\" (34:10) Dawud kon maliënkolders maken zonder vuur of hamer. Hij maakte harnassen om de soldaten te beschermen.",
+    "conclusion": "Deze gave stelde Dawud in staat sterke harnassen te maken. Hij onderwees de mensen dit ambacht. IJzer, van nature hard, gehoorzaamde de hand van de profeet.",
+    "moral_lesson": "Dit verhaal leert ons dat Allah de wetten van de natuur voor Zijn profeten kan wijzigen. Wonderen bevestigen de waarheid van de boodschap.",
+    "historical_location": "Palestina",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "dawud_iron_chapter_1",
+        "title": "De gave van ijzer",
+        "content": "De Koran verhaalt: \"En Wij maakten voor hem het ijzer zacht: Maak volledige maliënkolders en meet de mazen goed. En doet goed. Ik zie wat jullie doen.\" (34:10-11) IJzer werd vormbaar in Dawuds handen. Hij kon het buigen en vlechten zonder smidse. Hij maakte maliënkolders om de strijders te beschermen. Allah had hem deze vaardigheid onderwezen."
+      },
+      {
+        "id": "dawud_iron_chapter_2",
+        "title": "De onderwijzing",
+        "content": "Dawud gaf deze gave door aan zijn volk. De Koran zegt: \"En aan Dawud onderwezen Wij het maken van maliënkolders om jullie te beschermen tegen jullie geweld. Zullen jullie dankbaar zijn?\" (21:80) Het verzachte ijzer was een gunst van Allah. Mensen konden harnassen maken. Dawud spoorde hen aan tot dankbaarheid."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 34:10-11",
+        "reference_text": "Soera Saba, verzen 10-11",
+        "content": "وَأَلَنَّا لَهُ ٱلْحَدِيدَ ۝ أَنِ ٱعْمَلْ سَـٰبِغَـٰتٍۢ وَقَدِّرْ فِى ٱلسَّرْدِ ۖ وَٱعْمَلُوا۟ صَـٰلِحًا ۖ إِنِّى بِمَا تَعْمَلُونَ بَصِيرٌ",
+        "translation": "We made iron soft for him: Make complete coats of mail. And do good.",
+        "relevance": "Dit vers beschrijft het ijzerwonder en het bevel harnassen te maken."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 21:80",
+        "reference_text": "Soera Al-Anbiya, vers 80",
+        "content": "وَعَلَّمْنَـٰهُ صَنْعَةَ لَبُوسٍۢ لَّكُمْ لِتُحْصِنَكُم مِّنۢ بَأْسِكُمْ ۖ فَهَلْ أَنتُمْ شَـٰكِرُونَ",
+        "translation": "We taught him the making of coats of mail to protect you. Would you be grateful?",
+        "relevance": "Dit vers herinnert aan de gave van ijzer aan Dawud."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Sabighat",
+        "arabic_term": "سابغات",
+        "definition": "Volledige maliënkolders. Dawud maakte ze met het verzachte ijzer.",
+        "pronunciation": "sa-bi-ghat"
+      },
+      {
+        "id": 2,
+        "term": "Hadid",
+        "arabic_term": "حديد",
+        "definition": "IJzer. Allah maakte het zacht voor Dawud.",
+        "pronunciation": "ha-did"
+      }
+    ]
+  },
+  "dawud_judgment": {
+    "title": "Het oordeel van Dawud",
+    "title_arabic": "قضاء داوود",
+    "introduction": "Op een dag kwamen twee mannen voor Dawud vanwege een geschil. De ene bezat negenennegentig ooien, de andere slechts één. De rijke eiste de ooi van de arme. Dawud luisterde en velde een oordeel. Toen begreep hij dat hij op de proef was gesteld en berouwde.",
+    "conclusion": "Allah vergaf Dawud. Dit verhaal toont dat zelfs profeten op de proef kunnen worden gesteld. Oprecht berouw wist de fouten uit.",
+    "moral_lesson": "Dit verhaal leert ons het belang van rechtvaardigheid en nederigheid. De rechter moet elke zaak zorgvuldig onderzoeken en zich niet laten beïnvloeden.",
+    "historical_location": "Jeruzalem",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "dawud_judgment_chapter_1",
+        "title": "De twee partijen",
+        "content": "De Koran verhaalt: \"Is het verhaal van de twistenden tot jou gekomen toen zij het heiligdom beklommen? Toen zij bij Dawud binnenkwamen, schrok hij voor hen. Zij zeiden: Vrees niet. Wij zijn twee twistenden: een van ons heeft de ander onrecht aangedaan. Oordeel dus tussen ons met rechtvaardigheid.\" (38:21-22) Twee engelen kwamen in mensengedaante om Dawud op de proef te stellen. De ene had negenennegentig ooien, de andere slechts één. De eerste eiste de ooi van de ander."
+      },
+      {
+        "id": "dawud_judgment_chapter_2",
+        "title": "Het berouw",
+        "content": "De Koran zegt: \"Dawud zei: Hij heeft jou onrecht aangedaan door jouw ooi te eisen om toe te voegen aan zijn ooien. Vele partners doen elkaar onrecht — behalve zij die geloven en goede daden verrichten, en zij zijn weinigen. Dawud begreep toen dat Wij hem hadden beproefd. Hij vroeg zijn Heer om vergiffenis en wierp zich neer en berouwde.\" (38:24-25) Dawud had te snel geoordeeld. Hij berouwde en Allah vergaf hem. Profeten zijn ook menselijk en kunnen dwalen; berouw verheft hen."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 38:21-22",
+        "reference_text": "Soera Sad, verzen 21-22",
+        "content": "وَهَلْ أَىٰكَ نَبَؤُا۟ ٱلْخَصْمِ إِذْ تَسَوَّرُوا۟ ٱلْمِحْرَابَ ۝ إِذْ دَخَلُوا۟ عَلَىٰ دَاوُۥدَ فَفَزِعَ مِنْهُمْ ۖ قَالُوا۟ لَا تَخَفْ ۖ خَصْمَانِ بَغَىٰ بَعْضُنَا عَلَىٰ بَعْضٍۢ",
+        "translation": "Has the story of the litigants reached you? They entered upon Dawud. They said: We are two litigants.",
+        "relevance": "Dit vers introduceert de beproeving van Dawud."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 38:24-25",
+        "reference_text": "Soera Sad, verzen 24-25",
+        "content": "قَالَ لَقَدْ ظَلَمَكَ بِسُؤَالِ نَعْجَتِكَ إِلَىٰ نِعَاجِهِۦ ۗ وَإِنَّ كَثِيرًۭا مِّنَ ٱلْخُلَطَآءِ لَيَبْغِى بَعْضُهُمْ عَلَىٰ بَعْضٍ إِلَّا ٱلَّذِينَ ءَامَنُوا۟ وَعَمِلُوا۟ ٱلصَّـٰلِحَـٰتِ وَقَلِيلٌۭ مَّا هُمْ ۗ وَظَنَّ دَاوُۥدُ أَنَّمَا فَتَنَّـٰهُ فَٱسْتَغْفَرَ رَبَّهُۥ وَخَرَّ رَاكِعًۭا وَأَنَابَ ۩",
+        "translation": "Dawud said: He has wronged you. Dawud understood that he had been tested. He asked forgiveness and prostrated.",
+        "relevance": "Dit vers toont het berouw van Dawud."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Mihrab",
+        "arabic_term": "محراب",
+        "definition": "Heiligdom, gebedsplaats. De twistenden beklommen de mihrab van Dawud.",
+        "pronunciation": "mih-rab"
+      },
+      {
+        "id": 2,
+        "term": "Istighfar",
+        "arabic_term": "استغفار",
+        "definition": "Vergiffenis vragen. Dawud deed istighfar nadat hij zijn fout had begrepen.",
+        "pronunciation": "is-tigh-far"
+      }
+    ]
+  },
+  "lessons_from_dawud": {
+    "title": "Lessen uit het verhaal van Dawud",
+    "title_arabic": "دروس من قصة داوود",
+    "introduction": "Dawud was profeet en koning. Hij versloeg Goliat, ontving de Zabur en regeerde met rechtvaardigheid. De Koran zegt: \"En Wij hebben sommige profeten boven anderen bevoorrecht; en aan Dawud gaven Wij de Zabur.\" (17:55) Zijn verhaal leert vertrouwen in Allah, rechtvaardigheid en nederigheid.",
+    "conclusion": "Dawud combineerde kracht en zachtheid, macht en vroomheid. Hij verheerlijkte Allah en sprak recht. Zijn berouw na de oordeelsbeproeving toont dat profeten nederige dienaren blijven.",
+    "moral_lesson": "Dit verhaal leert ons dat de overwinning van Allah komt, dat macht rechtvaardigheid vereist, en dat berouw het hart zuivert.",
+    "historical_location": "Palestina",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lessons_from_dawud_chapter_1",
+        "title": "Vertrouwen en overwinning",
+        "content": "Dawud, jonge herder, trotseerde Goliat de reus. Hij had slechts een slinger. Maar hij riep Allah aan en de steen trof zijn doel. De Koran herinnert ons: \"Hoe vaak heeft een kleine groep, met de toestemming van Allah, een machtig leger overwonnen!\" (2:249) De overwinning hangt niet af van aantal of kracht; zij hangt af van Allah."
+      },
+      {
+        "id": "lessons_from_dawud_chapter_2",
+        "title": "Rechtvaardigheid en berouw",
+        "content": "Dawud was een rechtvaardige koning. Maar hij werd op de proef gesteld door de twee twistenden. Hij had te snel geoordeeld. Zodra hij begreep, berouwde hij. De Koran zegt: \"Wij vergaven hem. Hij zal een plaats nabij Ons en een schone toevlucht hebben.\" (38:25) Oprecht berouw verheft de gelovige. Dawud blijft een voorbeeld van koning en profeet."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 17:55",
+        "reference_text": "Soera Al-Isra, vers 55",
+        "content": "وَلَقَدْ فَضَّلْنَا بَعْضَ ٱلنَّبِيِّـۧنَ عَلَىٰ بَعْضٍۢ ۖ وَءَاتَيْنَا دَاوُۥدَ زَبُورًۭا",
+        "translation": "We have favored some prophets. To Dawud We gave the Zabur.",
+        "relevance": "Dit vers vestigt Dawuds plaats onder de profeten."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 38:25",
+        "reference_text": "Soera Sad, vers 25",
+        "content": "فَغَفَرْنَا لَهُۥ ذَٰلِكَ ۖ وَإِنَّ لَهُۥ عِندَنَا لَزُلْفَىٰ وَحُسْنَ مَـَٔابٍۢ",
+        "translation": "We forgave him. He will have a place near to Us and a beautiful refuge.",
+        "relevance": "Dit vers toont Allahs vergiffenis jegens Dawud."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Tawakkul",
+        "arabic_term": "توكل",
+        "definition": "Vertrouwen in Allah. Dawud toonde tawakkul bij het trotseren van Goliat.",
+        "pronunciation": "ta-wak-koul"
+      },
+      {
+        "id": 2,
+        "term": "Adl",
+        "arabic_term": "عدل",
+        "definition": "Rechtvaardigheid. Dawud werd geboden met billijkheid (adl) te oordelen.",
+        "pronunciation": "adl"
+      }
+    ]
+  }
+}

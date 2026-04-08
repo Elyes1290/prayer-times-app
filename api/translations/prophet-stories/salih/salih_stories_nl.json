@@ -1,0 +1,342 @@
+{
+  "salih_prophecy": {
+    "title": "De zending van Salih als profeet",
+    "title_arabic": "إرسال صالح عليه السلام",
+    "introduction": "Salih (صالح عليه السلام) is een profeet die door Allah naar het volk van Thamud werd gezonden, dat de 'Ad opvolgde. Na de vernietiging van de 'Ad vestigde Allah de Thamud op aarde. Zij bouwden paleizen op de vlakten en groeven woningen in de bergen. Maar zij dwaalden af en Allah zond Salih, hun broeder, om hen tot het monotheïsme op te roepen.",
+    "conclusion": "De zending van Salih markeert de continuïteit van de profetische missie na Hud. De Thamud ontvingen een boodschapper uit hun midden. Salih bracht hen een duidelijk bewijs: de kameel van Allah.",
+    "moral_lesson": "Dit verhaal leert ons dat Allah nooit een volk in de steek laat zonder hen een waarschuwer te sturen. De aardse weldaden — paleizen en woningen — ontslaan niet van de aanbidding van Allah.",
+    "historical_location": "Al-Hijr (regio tussen de Hijaz en Syrië)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "salih_prophecy_chapter_1",
+        "title": "Het goddelijke bevel",
+        "content": "Allah zond Salih naar het volk van Thamud, zijn broeders. De Koran vermeldt: «En naar de Thamud hun broeder Salih. Hij zei: O mijn volk! Aanbid Allah. Jullie hebben geen andere god dan Hem. Een duidelijk bewijs is tot jullie gekomen van jullie Heer: dit is de kameel van Allah, een teken voor jullie. Laat haar grazen op de aarde van Allah en doe haar geen kwaad, anders zal een pijnlijke straf jullie treffen. » (7:73) Salih ontving de openbaring en een wonderbaarlijk bewijs: de kameel, teken van de macht van Allah."
+      },
+      {
+        "id": "salih_prophecy_chapter_2",
+        "title": "De opvolgers van de 'Ad",
+        "content": "De Koran herinnert de Thamud eraan: «En herinner jullie toen Hij jullie de 'Ad liet opvolgen en jullie op aarde vestigde. Jullie bouwen paleizen op haar vlakten en houwen woningen in de bergen. Herinner jullie dus de weldaden van Allah en zaai geen verderf op aarde. » (7:74) De Thamud hadden immense weldaden ontvangen. Zij woonden in een vruchtbare regio en hadden een geavanceerde beschaving ontwikkeld. Maar zij vergaten Allah en gaven zich over aan verderf."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 7:73",
+        "reference_text": "Soera Al-A'raf, vers 73",
+        "content": "وَإِلَىٰ ثَمُودَ أَخَاهُمْ صَـٰلِحًۭا ۗ قَالَ يَـٰقَوْمِ ٱعْبُدُوا۟ ٱللَّهَ مَا لَكُم مِّنْ إِلَـٰهٍ غَيْرُهُۥٓ ۖ قَدْ جَآءَتْكُم بَيِّنَةٌۭ مِّن رَّبِّكُمْ ۖ هَـٰذِهِۦ نَاقَةُ ٱللَّهِ لَكُمْ ءَايَةًۭ ۖ فَذَرُوهَا تَأْكُلْ فِىٓ أَرْضِ ٱللَّهِ ۖ وَلَا تَمَسُّوهَا بِسُوٓءٍۢ فَيَأْخُذَكُمْ عَذَابٌ أَلِيمٌۭ",
+        "translation": "En naar de Thamud hun broeder Salih. Hij zei: O mijn volk! Aanbid Allah — jullie hebben geen andere god dan Hem. Een duidelijk bewijs is tot jullie gekomen van jullie Heer: dit is de kameel van Allah, een teken voor jullie. Laat haar grazen op de aarde van Allah en doe haar geen kwaad, anders zal een pijnlijke straf jullie treffen.",
+        "relevance": "Dit vers vestigt de zending van Salih en de kameel als goddelijk teken."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 7:74",
+        "reference_text": "Soera Al-A'raf, vers 74",
+        "content": "وَٱذْكُرُوٓا۟ إِذْ جَعَلَكُمْ خُلَفَآءَ مِنۢ بَعْدِ عَادٍۢ وَبَوَّأَكُمْ فِى ٱلْأَرْضِ تَتَّخِذُونَ مِن سُهُولِهَا قُصُورًۭا وَتَنْحِتُونَ ٱلْجِبَالَ بُيُوتًۭا",
+        "translation": "Herinner jullie toen Hij jullie de 'Ad liet opvolgen en jullie op aarde vestigde. Jullie bouwen paleizen op haar vlakten en houwen woningen in de bergen.",
+        "relevance": "Dit vers beschrijft de Thamud als opvolgers van de 'Ad en hun verwezenlijkingen."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Salih",
+        "arabic_term": "صالح",
+        "definition": "Salih in het Arabisch. Profeet van Allah gezonden naar het volk van Thamud. Zijn naam betekent «de deugdzame».",
+        "pronunciation": "sa-lih"
+      },
+      {
+        "id": 2,
+        "term": "Thamud",
+        "arabic_term": "ثمود",
+        "definition": "Oud volk van Arabië dat de 'Ad opvolgde. Zij groeven woningen in de bergen. Zij werden vernietigd omdat zij de kameel doodden.",
+        "pronunciation": "tha-moud"
+      },
+      {
+        "id": 3,
+        "term": "Al-Hijr",
+        "arabic_term": "الحجر",
+        "definition": "Regio waar de Thamud woonden, tussen de Hijaz en Syrië. De profeet Mohammed passeerde bij haar ruïnes.",
+        "pronunciation": "al-hijr"
+      }
+    ]
+  },
+  "salih_call": {
+    "title": "De oproep van Salih aan zijn volk",
+    "title_arabic": "دعوة صالح لقومه",
+    "introduction": "Salih (عليه السلام) riep het volk van Thamud met helderheid op. Hij nodigde hen uit alleen Allah te aanbidden, vergiffenis te vragen en berouw te tonen. Hij herinnerde hen eraan dat Allah hen uit de aarde had voortgebracht en hen erop had gevestigd. Hij waarschuwde hen voor de gevolgen van ongehoorzaamheid. Ondanks zijn boodschap weigerden de Thamud.",
+    "conclusion": "De oproep van Salih illustreert de standvastigheid van de profetische boodschap. Hij vroeg geen beloning; zijn Heer is Nabij en Verhoort de smeekbeden. De Thamud kregen hun kans vóór de straf.",
+    "moral_lesson": "Dit verhaal leert ons dat berouw altijd mogelijk is vóór de straf neerdaalt. Het herinnert ons eraan dat onze Heer Nabij is en Verhoort hen die Hem aanroepen.",
+    "historical_location": "Al-Hijr",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "salih_call_chapter_1",
+        "title": "De uitnodiging tot monotheïsme",
+        "content": "Salih zei tegen zijn volk: «O mijn volk! Aanbid Allah. Jullie hebben geen andere god dan Hem. Hij is het die jullie uit de aarde voortbracht en jullie erop vestigde. Vraagt dus Zijn vergiffenis, en toont berouw tot Hem. Mijn Heer is Nabij, Hij verhoort.» (11:61) Salih herinnerde hen aan de weldaden van Allah en nodigde hen uit geen verderf op aarde te zaaien. Hij waarschuwde hen dat als zij zouden volharden, zij het lot van de volken van weleer zouden ondergaan."
+      },
+      {
+        "id": "salih_call_chapter_2",
+        "title": "De afwijzing door de Thamud",
+        "content": "De Koran vermeldt dat «de Thamud de boodschappers van leugens beschuldigden» (26:141) en dat «zij de waarschuwingen afwezen» (54:23). Ondanks het duidelijke bewijs — de kameel — en de oproep van Salih weigerden de notabelen van het volk. Zij werden hoogmoedig. De Koran zegt: «De Thamud wezen af uit arrogantie.» (91:11) Salih bleef hen met geduld oproepen, maar zij volhardden in hun ongeloof."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 11:61",
+        "reference_text": "Soera Hoed, vers 61",
+        "content": "وَإِلَىٰ ثَمُودَ أَخَاهُمْ صَـٰلِحًۭا ۚ قَالَ يَـٰقَوْمِ ٱعْبُدُوا۟ ٱللَّهَ مَا لَكُم مِّنْ إِلَـٰهٍ غَيْرُهُۥٓ ۖ هُوَ أَنشَأَكُم مِّنَ ٱلْأَرْضِ وَٱسْتَعْمَرَكُمْ فِيهَا فَٱسْتَغْفِرُوهُ ثُمَّ تُوبُوٓا۟ إِلَيْهِ ۚ إِنَّ رَبِّى قَرِيبٌۭ مُّجِيبٌۭ",
+        "translation": "En naar de Thamud hun broeder Salih. Hij zei: O mijn volk! Aanbid Allah. Jullie hebben geen andere god dan Hem. Hij is het die jullie uit de aarde voortbracht en jullie erop vestigde. Vraagt Zijn vergiffenis, en toont berouw tot Hem. Mijn Heer is Nabij, Hij verhoort.",
+        "relevance": "Dit vers bevat de oproep van Salih en de belofte van vergiffenis."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 91:11",
+        "reference_text": "Soera Ash-Shams, vers 11",
+        "content": "كَذَّبَتْ ثَمُودُ بِطَغْوَىٰهَآ",
+        "translation": "De Thamud wezen af uit arrogantie.",
+        "relevance": "Dit vers beschrijft de houding van de Thamud tegenover de oproep van Salih."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Tawba",
+        "arabic_term": "توبة",
+        "definition": "Berouw. Salih nodigde de Thamud uit zich te bekeren vóór de straf.",
+        "pronunciation": "taw-ba"
+      },
+      {
+        "id": 2,
+        "term": "Qarib Mujib",
+        "arabic_term": "قريب مجيب",
+        "definition": "Nabij, Hij verhoort. Beschrijving van de Heer die de smeekbeden verhoort.",
+        "pronunciation": "qa-rib mou-jib"
+      }
+    ]
+  },
+  "the_thamud_people": {
+    "title": "Het volk van Thamud",
+    "title_arabic": "قوم ثمود",
+    "introduction": "Het volk van Thamud volgde de 'Ad op aarde op. Allah vestigde hen en schonk hen opmerkelijke capaciteiten: zij bouwden paleizen op de vlakten en houwen woningen in de bergen. Maar zij vergaten de weldaden van Allah en zaaiden verderf. Zij wezen Salih en zijn teken af.",
+    "conclusion": "De beschaving van de Thamud — hun paleizen en hun in de rots uitgehouwen woningen — beschermde hen niet. De aardbeving vernietigde hen in hun woningen. Alleen Salih en de gelovigen werden gespaard.",
+    "moral_lesson": "Dit verhaal leert ons dat menselijke verwezenlijkingen niet ontslaan van de aanbidding van Allah. Verderf op aarde leidt tot straf.",
+    "historical_location": "Al-Hijr (tussen de Hijaz en Syrië)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "the_thamud_people_chapter_1",
+        "title": "Een geavanceerde beschaving",
+        "content": "De Koran beschrijft de Thamud: «Herinner jullie toen Hij jullie de 'Ad liet opvolgen en jullie op aarde vestigde. Jullie bouwen paleizen op haar vlakten en houwen woningen in de bergen.» (7:74) De Thamud waren bekwame bouwers. Hun in de bergen uitgehouwen woningen getuigen vandaag nog van hun vakmanschap. Maar de Koran spoort hen aan: «Herinner jullie de weldaden van Allah en zaai geen verderf op aarde.» Zij deden het tegenovergestelde."
+      },
+      {
+        "id": "the_thamud_people_chapter_2",
+        "title": "De ondankbaarheid",
+        "content": "Allah had de Thamud de aarde geschonken, het vermogen te bouwen en te bloeien. Maar zij gaven zich over aan verderf (fasād). Zij wezen de boodschapper van Allah af en verachtten het teken dat Hij hen had gezonden: de kameel. Hun ondankbaarheid en overtreding maakten hen de straf waardig. Salih waarschuwde hen herhaaldelijk, maar zij volhardden tot zij de misdaad begingen die hun lot bezegelde: het doden van de kameel."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 7:74",
+        "reference_text": "Soera Al-A'raf, vers 74",
+        "content": "وَٱذْكُرُوٓا۟ إِذْ جَعَلَكُمْ خُلَفَآءَ مِنۢ بَعْدِ عَادٍۢ وَبَوَّأَكُمْ فِى ٱلْأَرْضِ تَتَّخِذُونَ مِن سُهُولِهَا قُصُورًۭا وَتَنْحِتُونَ ٱلْجِبَالَ بُيُوتًۭا ۖ فَٱذْكُرُوٓا۟ ءَالَآءَ ٱللَّهِ وَلَا تَعْثَوْا۟ فِى ٱلْأَرْضِ مُفْسِدِينَ",
+        "translation": "Herinner jullie toen Hij jullie de 'Ad liet opvolgen en jullie op aarde vestigde. Jullie bouwen paleizen op haar vlakten en houwen woningen in de bergen. Herinner jullie de weldaden van Allah en zaai geen verderf op aarde.",
+        "relevance": "Dit vers beschrijft de beschaving van de Thamud en de aansporing tot dankbaarheid."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Khulafa",
+        "arabic_term": "خلفاء",
+        "definition": "Opvolgers. De Thamud volgden de 'Ad op aarde op.",
+        "pronunciation": "khou-la-fa"
+      },
+      {
+        "id": 2,
+        "term": "Mufsidun",
+        "arabic_term": "مفسدون",
+        "definition": "Zij die verderf zaaien. De Koran waarschuwt de Thamud geen verderfzaaiers te zijn.",
+        "pronunciation": "mouf-si-doun"
+      }
+    ]
+  },
+  "the_she_camel": {
+    "title": "De kameel van Allah",
+    "title_arabic": "ناقة الله",
+    "introduction": "Allah zond de Thamud een kameel als teken en beproeving. Deze kameel (nāqat Allāh) was een duidelijk bewijs van de waarheid van Salih. Hij beval hen haar vrij te laten grazen en haar geen kwaad te doen. Het water moest tussen hen en haar gedeeld worden, ieder dronk op zijn beurt. De Thamud wezen deze beproeving af.",
+    "conclusion": "De kameel was een teken van de barmhartigheid van Allah en een beproeving voor de Thamud. Door haar te respecteren zouden zij gespaard zijn. Door haar te doden bezegelden zij hun ondergang.",
+    "moral_lesson": "Dit verhaal leert ons dat de tekenen van Allah beproevingen zijn. Ze respecteren leidt tot redding; ze overtreden leidt tot straf.",
+    "historical_location": "Al-Hijr",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "the_she_camel_chapter_1",
+        "title": "Het goddelijke teken",
+        "content": "De Koran vermeldt de woorden van Salih: «Een duidelijk bewijs is tot jullie gekomen van jullie Heer: dit is de kameel van Allah, een teken voor jullie. Laat haar grazen op de aarde van Allah en doe haar geen kwaad, anders zal een pijnlijke straf jullie treffen.» (7:73) De kameel was een wonder — een tastbaar teken van de macht van Allah en de waarheid van de boodschap van Salih. Zij moest vrij grazen op de aarde van Allah. Wie haar kwaad zou doen zou een pijnlijke straf incasseren."
+      },
+      {
+        "id": "the_she_camel_chapter_2",
+        "title": "Het delen van het water",
+        "content": "De Koran geeft aan dat Allah Salih beval de Thamud te informeren: «Het water zal tussen jullie en haar gedeeld worden; ieder zal op zijn beurt drinken.» (54:28) De kameel was een beproeving (fitna) voor de Thamud. De Koran zegt: «Wij zenden de kameel als beproeving voor hen. Let dus op hen en wees geduldig.» (54:27) De Thamud moesten deze verdeling accepteren en de kameel geen kwaad doen. Zij die zouden geloven en gehoorzamen zouden gespaard worden; de anderen zouden de straf ondergaan."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 7:73",
+        "reference_text": "Soera Al-A'raf, vers 73",
+        "content": "هَـٰذِهِۦ نَاقَةُ ٱللَّهِ لَكُمْ ءَايَةًۭ ۖ فَذَرُوهَا تَأْكُلْ فِىٓ أَرْضِ ٱللَّهِ ۖ وَلَا تَمَسُّوهَا بِسُوٓءٍۢ فَيَأْخُذَكُمْ عَذَابٌ أَلِيمٌۭ",
+        "translation": "Dit is de kameel van Allah, een teken voor jullie. Laat haar grazen op de aarde van Allah en doe haar geen kwaad, anders zal een pijnlijke straf jullie treffen.",
+        "relevance": "Dit vers vestigt de kameel als teken en het verbod haar kwaad te doen."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 54:27-28",
+        "reference_text": "Soera Al-Qamar, verzen 27-28",
+        "content": "إِنَّا مُرْسِلُوا۟ ٱلنَّاقَةِ فِتْنَةًۭ لَّهُمْ فَٱرْتَقِبْهُمْ وَٱصْطَبِرْ ۝ وَنَبِّئْهُمْ أَنَّ ٱلْمَآءَ قِسْمَةٌۢ بَيْنَهُمْ ۖ كُلُّ شِرْبٍۢ مُّحْتَضَرٌۭ",
+        "translation": "Wij zenden de kameel als beproeving voor hen. Let dus op hen en wees geduldig. En informeer hen dat het water tussen hen en haar gedeeld zal worden; ieder zal op zijn beurt drinken.",
+        "relevance": "Deze verzen beschrijven de kameel als beproeving en het delen van het water."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Naqat Allah",
+        "arabic_term": "ناقة الله",
+        "definition": "De kameel van Allah. Het wonderbaarlijke teken gezonden aan de Thamud.",
+        "pronunciation": "na-qat al-lah"
+      },
+      {
+        "id": 2,
+        "term": "Fitna",
+        "arabic_term": "فتنة",
+        "definition": "Beproeving, verzoeking. De kameel was een beproeving voor de Thamud.",
+        "pronunciation": "fit-na"
+      }
+    ]
+  },
+  "the_camel_killed": {
+    "title": "Het doden van de kameel en de straf",
+    "title_arabic": "عقر الناقة والعذاب",
+    "introduction": "Ondanks de waarschuwing van Salih doodden de Thamud de kameel. De Koran vermeldt dat zij «haar loochenden en haar doodden» (91:14). Als antwoord vernietigde Allah hen door een aardbeving (rajfah). Zij werden in hun woningen gegrepen en dood gevonden, neergevallen. Salih en de gelovigen werden gered.",
+    "conclusion": "Het doden van de kameel bezegelde het lot van de Thamud. De aardbeving vernietigde hen. Hun overtreding tegen een duidelijk teken van Allah bezorgde hen een onmiddellijke straf. Het verhaal van de Thamud blijft een waarschuwing voor de generaties.",
+    "moral_lesson": "Dit verhaal leert ons dat het overtreden van de tekenen van Allah tot ondergang leidt. De straf kan plotseling zijn. Alleen zij die geloven en gehoorzamen worden gespaard.",
+    "historical_location": "Al-Hijr",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "the_camel_killed_chapter_1",
+        "title": "De misdaad",
+        "content": "De Koran beschrijft wat er gebeurde: «Toen de ellendigste onder hen opstond» (91:12), en de boodschapper van Allah (Salih) hun zei: «Dit is de kameel van Allah, laat haar drinken» (91:13), «loochenden zij hem en doodden haar. Hun Heer vernietigde hen toen voor hun zonde en effende hen.» (91:14) De Thamud begingen de ultieme misdaad: het doden van het teken van Allah na gewaarschuwd te zijn. Hun arrogantie verblindde hen."
+      },
+      {
+        "id": "the_camel_killed_chapter_2",
+        "title": "De aardbeving",
+        "content": "De Koran beschrijft de straf: «De aardbeving greep hen, en 's ochtends lagen zij dood in hun woningen.» (7:78) Het woord «rajfah» duidt op een aardbeving of hevige schok. De Thamud, zo trots op hun paleizen en hun in de bergen uitgehouwen woningen, werden in een oogwenk vernietigd. Salih en zij die met hem hadden geloofd werden gered door de barmhartigheid van Allah. De ruïnes van Al-Hijr getuigen nog van hun verdwenen beschaving."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 91:12-15",
+        "reference_text": "Soera Ash-Shams, verzen 12-15",
+        "content": "إِذِ ٱنۢبَعَثَ أَشْقَىٰهَا ۝ فَقَالَ لَهُمْ رَسُولُ ٱللَّهِ نَاقَةَ ٱللَّهِ وَسُقْيَـٰهَا ۝ فَكَذَّبُوهُ فَعَقَرُوهَا فَدَمْدَمَ عَلَيْهِمْ رَبُّهُم بِذَنۢبِهِمْ فَسَوَّىٰهَا ۝ وَلَا يَخَافُ عُقْبَـٰهَا",
+        "translation": "Toen de ellendigste onder hen opstond. De boodschapper van Allah zei hun: Dit is de kameel van Allah, laat haar drinken. Zij loochenden hem en doodden haar. Hun Heer vernietigde hen voor hun zonde en effende hen. En Hij vreest de gevolgen niet.",
+        "relevance": "Deze verzen beschrijven de misdaad van de Thamud en hun straf."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 7:78",
+        "reference_text": "Soera Al-A'raf, vers 78",
+        "content": "فَأَخَذَتْهُمُ ٱلرَّجْفَةُ فَأَصْبَحُوا۟ فِى دَارِهِمْ جَـٰثِمِينَ",
+        "translation": "De aardbeving greep hen, en 's ochtends lagen zij dood in hun woningen.",
+        "relevance": "Dit vers beschrijft de aard van de straf: een aardbeving."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Aqar",
+        "arabic_term": "عقر",
+        "definition": "Doden (door de pezen door te snijden). De Thamud «aqarū» de kameel.",
+        "pronunciation": "a-qar"
+      },
+      {
+        "id": 2,
+        "term": "Rajfah",
+        "arabic_term": "رجفة",
+        "definition": "Aardbeving, schok. De straf waarmee Allah de Thamud vernietigde.",
+        "pronunciation": "raj-fa"
+      }
+    ]
+  },
+  "lessons_from_salih": {
+    "title": "De lessen uit het verhaal van Salih",
+    "title_arabic": "دروس من قصة صالح",
+    "introduction": "Het verhaal van Salih (عليه السلام) bevat tijdloze lessen. Het leert de gevolgen van het overtreden van de tekenen van Allah, het belang van dankbaarheid voor de weldaden, en de snelheid van de straf voor hen die in het kwaad volharden. De Koran citeert het als voorbeeld.",
+    "conclusion": "Salih volbracht zijn missie. De Thamud werden vernietigd omdat zij de kameel doodden. Zijn verhaal blijft een herinnering: de tekenen van Allah mogen niet worden overtreden. Beschaving en materiële verwezenlijkingen beschermen niet tegen de straf.",
+    "moral_lesson": "Dit verhaal leert ons de tekenen van Allah te respecteren, dankbaar te zijn voor Zijn weldaden, en geen verderf te zaaien. Het herinnert ons eraan dat berouw mogelijk is voordat het te laat is.",
+    "historical_location": "Van Al-Hijr tot vergetelheid",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lessons_from_salih_chapter_1",
+        "title": "Een voorbeeld voor de volken",
+        "content": "De Koran presenteert het verhaal van Salih als een waarschuwing. De Thamud hadden alles: paleizen, in de bergen uitgehouwen woningen, een duidelijk teken — de kameel. Maar zij misten het essentiële: geloof en gehoorzaamheid. Zij overtraden het teken van Allah en werden vernietigd. Salih daarentegen bleef standvastig. Hij vroeg geen beloning; hij bracht de boodschap over. Zijn verhaal herinnert ons eraan dat de boodschapper zijn missie volbrengt; het resultaat behoort aan Allah."
+      },
+      {
+        "id": "lessons_from_salih_chapter_2",
+        "title": "De profetische continuïteit",
+        "content": "Salih maakt deel uit van de lijn van profeten gezonden na Hud. Adam, Noeh, Hud, Salih — elk volk ontvangt zijn boodschapper. De Thamud, zoals de 'Ad vóór hen, kregen hun kans. Zij weigerden en overtraden. Het verhaal van Salih past in hetzelfde patroon: de oproep tot monotheïsme, het wonderbaarlijke teken, de afwijzing, de overtreding, de straf, en de redding van de gelovigen. De ruïnes van Al-Hijr, die de profeet Mohammed passeerde tijdens de expeditie van Tabuk, herinneren de generaties aan deze les."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 11:120",
+        "reference_text": "Soera Hoed, vers 120",
+        "content": "وَكُلًّا نَّقُصُّ عَلَيْكَ مِنْ أَنبَاءِ الرُّسُلِ مَا نُثَبِّتُ بِهِ فُؤَادَكَ وَجَاءَكَ فِي هَٰذِهِ الْحَقُّ وَمَوْعِظَةٌ وَذِكْرَىٰ لِلْمُؤْمِنِينَ",
+        "translation": "En alles wat Wij je vertellen van de verhalen van de boodschappers, is om je hart te versterken. En in dit verhaal is tot je gekomen de waarheid, en een vermaning en een herinnering voor de gelovigen.",
+        "relevance": "Dit vers verklaart het doel van de verhalen van de profeten in de Koran."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 11:68",
+        "reference_text": "Soera Hoed, vers 68",
+        "content": "كَأَن لَّمْ يَغْنَوْا۟ فِيهَا ۗ أَلَآ إِنَّ ثَمُودًا كَفَرُوا۟ رَبَّهُمْ ۗ أَلَا بُعْدًۭا لِّثَمُودَ",
+        "translation": "Alsof zij er nooit hadden gewoond. Voorwaar, de Thamud geloofden niet in hun Heer. Weg met de Thamud!",
+        "relevance": "Dit vers sluit het verhaal van de Thamud en hun straf af."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Ibra",
+        "arabic_term": "عبرة",
+        "definition": "Voorbeeld of les. De verhalen van de profeten zijn voorbeelden voor de mensheid.",
+        "pronunciation": "ib-ra"
+      },
+      {
+        "id": 2,
+        "term": "Dhikra",
+        "arabic_term": "ذكرى",
+        "definition": "Herinnering. De verhalen van de profeten dienen als herinnering voor de gelovigen.",
+        "pronunciation": "dhik-ra"
+      }
+    ]
+  }
+}

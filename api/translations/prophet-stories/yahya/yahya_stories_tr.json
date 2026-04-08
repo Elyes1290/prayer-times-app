@@ -1,0 +1,230 @@
+{
+  "yahya_birth": {
+    "title": "Yahya'nın doğumu",
+    "title_arabic": "مولد يحيى",
+    "introduction": "Yahya (يحيى عليه السلام), Vaftizci Yahya, peygamber Zekeriya'nın oğludur. Kur'an şöyle buyurur: \"Ey Zekeriya! Sana bir oğul müjdeliyoruz. Adı Yahya olacak.\" (19:7) Yahya mucizevî bir şekilde doğdu: babası yaşlı, annesi kısırdı. Allah vaadini yerine getirdi.",
+    "conclusion": "Yahya ilan edildiği gibi doğdu. Adı \"yaşayacak\" anlamına gelir. İnsanlar için bir işaretti. Doğumu, Allah için hiçbir şeyin imkansız olmadığını doğruladı.",
+    "moral_lesson": "Bu hikaye bize Allah'ın sözünün her zaman yerine geldiğini öğretir. Mucizeler bize Yaratıcı'nın gücünü hatırlatır.",
+    "historical_location": "Filistin",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "yahya_birth_chapter_1",
+        "title": "Doğumun ilanı",
+        "content": "Kur'an şöyle bildirir: \"Ondan önce ona bu isimde kimseyi vermedik.\" (19:7) Yahya ismi benzersizdi. Ondan önce kimse bu ismi taşımamıştı. İlahi seçimin bir işaretiydi. Zekeriya ve eşi imanla bekledi. Zaman gelince Yahya doğdu. Aile ve akrabalar Allah'ı yüceltti."
+      },
+      {
+        "id": "yahya_birth_chapter_2",
+        "title": "Mübarek bir çocuk",
+        "content": "Kur'an şöyle buyurur: \"Ve ona doğduğu gün, öldüğü gün ve diriltileceği gün selam olsun.\" (19:15) Yahya doğumundan itibaren mübarekti. Hayatının her aşamasında selam (salam) üzerindeydi. Takva ve hikmet içinde büyüdü. Kaderi peygamber olmaktı."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 19:7",
+        "reference_text": "Meryem Suresi, 7. ayet",
+        "content": "يَـٰزَكَرِيَّآ إِنَّا نُبَشِّرُكَ بِغُلَـٰمٍ ٱسْمُهُۥ يَحْيَىٰ لَمْ نَجْعَل لَّهُۥ مِن قَبْلُ سَمِيًّۭا",
+        "translation": "Ey Zekeriya! Sana bir oğul müjdeliyoruz. Adı Yahya olacak.",
+        "relevance": "Bu ayet Yahya'nın doğumunun ilanını anlatır."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 19:15",
+        "reference_text": "Meryem Suresi, 15. ayet",
+        "content": "وَسَلَـٰمٌ عَلَيْهِ يَوْمَ وُلِدَ وَيَوْمَ يَمُوتُ وَيَوْمَ يُبْعَثُ حَيًّۭا",
+        "translation": "Ve ona doğduğu gün, öldüğü gün ve diriltileceği gün selam olsun.",
+        "relevance": "Bu ayet Yahya üzerindeki bereketleri belirler."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Yahya",
+        "arabic_term": "يحيى",
+        "definition": "Arapça'da Yahya. \"Yaşayacak\" anlamına gelir. Saflık peygamberi.",
+        "pronunciation": "yah-ya"
+      },
+      {
+        "id": 2,
+        "term": "Salam",
+        "arabic_term": "سلام",
+        "definition": "Selam. Salam Yahya'nın her aşamasında üzerindeydi.",
+        "pronunciation": "sa-lam"
+      }
+    ]
+  },
+  "yahya_purity": {
+    "title": "Yahya'nın saflığı",
+    "title_arabic": "طهارة يحيى",
+    "introduction": "Yahya saflık ve takva peygamberiydi. Kur'an şöyle buyurur: \"Ve (Yahya) anne babasına karşı saygılıydı. Ne kibirli ne de asiydi.\" (19:14) Dünya zevklerinden uzak, züht içinde yaşadı. Kendini tamamen Allah'a ibadete adadı.",
+    "conclusion": "Yahya saflığı somutlaştırdı. Asla günah işlemedi. Müminler için bir modeldi. Adı iffet ve takva ile ilişkilidir.",
+    "moral_lesson": "Bu hikaye bize kalp ve beden saflığının bir erdem olduğunu öğretir. Mümin kötülükten uzak durmalı ve Allah'a yaklaşmalıdır.",
+    "historical_location": "Filistin (çöl)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "yahya_purity_chapter_1",
+        "title": "Züht hayatı",
+        "content": "Kur'an şöyle bildirir: \"Ve ona çocukluktan hikmet verdik, bizden şefkat ve saflık.\" (19:12-13) Yahya çölde yaşadı. Kıldan giysiler giydi. Sade yedi. Ne zenginlik ne güç aradı. Tek arayışı Allah'ın rızasıydı."
+      },
+      {
+        "id": "yahya_purity_chapter_2",
+        "title": "İtaat",
+        "content": "Kur'an şöyle buyurur: \"Ne kibirli ne de asiydi.\" (19:14) Yahya anne babasına ve Allah'a itaat etti. Asla isyan etmedi. Haksızlık işlemedi. Hayatı doğruluğun bir örneğiydi. İnsanlar onu takvası için saygı duydu."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 19:12-14",
+        "reference_text": "Meryem Suresi, 12-14. ayetler",
+        "content": "يَـٰيَحْيَىٰ خُذِ ٱلْكِتَـٰبَ بِقُوَّةٍۢ ۖ وَءَاتَيْنَـٰهُ ٱلْحُكْمَ صَبِيًّۭا ۝ وَحَنَانًۭا مِّن لَّدُنَّا وَزَكَوٰةًۭ ۝ وَكَانَ تَقِيًّۭا",
+        "translation": "Ey Yahya! Kitabı güçle al. Ona çocukluktan hikmet, şefkat ve saflık verdik. Takvalıydı.",
+        "relevance": "Bu pasaj Yahya'nın niteliklerini tanımlar."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 3:39",
+        "reference_text": "Al-İmran Suresi, 39. ayet",
+        "content": "مُصَدِّقًۢا بِكَلِمَةٍۢ مِّنَ ٱللَّهِ وَسَيِّدًۭا وَحَصُورًۭا وَنَبِيًّۭا مِّنَ ٱلصَّـٰلِحِينَ",
+        "translation": "Allah'tan bir kelimeyi doğrulayan, asil, iffetli ve salihlerden bir peygamber.",
+        "relevance": "Bu ayet Yahya'nın iffetini övüyor."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Zakât",
+        "arabic_term": "زكاة",
+        "definition": "Saflık. Yahya Allah'tan zakât (saflık) aldı.",
+        "pronunciation": "za-ka"
+      },
+      {
+        "id": 2,
+        "term": "Hasur",
+        "arabic_term": "حصور",
+        "definition": "İffetli. Yahya hasurdu, dünya zevklerinden çekindi.",
+        "pronunciation": "ha-sour"
+      }
+    ]
+  },
+  "yahya_isa": {
+    "title": "Yahya ve İsa'nın ilanı",
+    "title_arabic": "يحيى وعيسى",
+    "introduction": "Yahya ve İsa (İsa) bağlantılıdır. Kur'an şöyle buyurur: \"Ve (Yahya) Allah'tan bir kelimeyi doğruladı.\" (3:39) Yahya İsa'nın gelişini ilan etti. Ürdün'de insanları vaftiz etti, mesajı almaları için hazırladı. Mesih'in öncüsüydü.",
+    "conclusion": "Yahya İsa için yolu hazırladı. Gelişine tanıklık etti. İki peygamber buluştu. Yahya İsa'yı vaat edilen Mesih olarak tanıdı. Mesaj devam etti.",
+    "moral_lesson": "Bu hikaye bize peygamberlerin birbirini doğruladığını öğretir. Her elçi bir sonrakine yol hazırlar. Peygamberlik zinciri tektir.",
+    "historical_location": "Filistin (Ürdün)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "yahya_isa_chapter_1",
+        "title": "Öncü",
+        "content": "Kur'an şöyle bildirir: \"(Yahya) Allah'tan bir kelimeyi doğruladı.\" (3:39) Yahya insanları tövbeye çağırdı. Onları nehirde vaftiz etti. Kendisinden daha büyük birinin gelişini ilan etti. İsa ona geldiğinde Yahya dedi: \"İşte ilan ettiğim budur.\" İsa için alçakgönüllüce kenara çekildi."
+      },
+      {
+        "id": "yahya_isa_chapter_2",
+        "title": "Buluşma",
+        "content": "Kur'an şöyle buyurur: \"Ve (hatırla) Yahya'yı, Kitabı güçle aldığında.\" (19:12) Yahya ve İsa Ürdün'de buluştu. Yahya İsa'yı Mesih olarak tanıdı. Onu vaftiz etti. Yahya'nın görevi tamamlandı: kalpleri hazırlamıştı. İsa mesajı sürdürdü. Her iki peygamber de Allah'a hizmet etti."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 3:39",
+        "reference_text": "Al-İmran Suresi, 39. ayet",
+        "content": "مُصَدِّقًۢا بِكَلِمَةٍۢ مِّنَ ٱللَّهِ وَسَيِّدًۭا وَحَصُورًۭا وَنَبِيًّۭا مِّنَ ٱلْصَّـٰلِحِينَ",
+        "translation": "Allah'tan bir kelimeyi doğrulayan, asil, iffetli ve salihlerden bir peygamber.",
+        "relevance": "Bu ayet Yahya ile Allah'ın kelimesi (İsa) arasındaki bağı belirler."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 19:12",
+        "reference_text": "Meryem Suresi, 12. ayet",
+        "content": "يَـٰيَحْيَىٰ خُذِ ٱلْكِتَـٰبَ بِقُوَّةٍۢ ۖ وَءَاتَيْنَـٰهُ ٱلْحُكْمَ صَبِيًّۭا",
+        "translation": "Ey Yahya! Kitabı güçle al. Ona çocukluktan hikmet verdik.",
+        "relevance": "Bu ayet Yahya'nın görevini tanımlar."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Kalima",
+        "arabic_term": "كلمة",
+        "definition": "Kelime. Yahya Allah'ın kalimasını (İsa) doğruladı.",
+        "pronunciation": "ka-li-ma"
+      },
+      {
+        "id": 2,
+        "term": "Isa",
+        "arabic_term": "عيسى",
+        "definition": "Arapça'da İsa. Yahya tarafından ilan edilen peygamber.",
+        "pronunciation": "i-sa"
+      }
+    ]
+  },
+  "lessons_from_yahya": {
+    "title": "Yahya hikayesinden dersler",
+    "title_arabic": "دروس من قصة يحيى",
+    "introduction": "Yahya saflık peygamberidir. Kur'an şöyle buyurur: \"Ve (Yahya) anne babasına karşı saygılıydı. Ne kibirli ne de asiydi.\" (19:14) Hayatı kısa ama örnek alınacaktı. İsa'nın gelişini hazırladı ve şehit olarak öldü.",
+    "conclusion": "Yahya saflık içinde yaşadı. İsa'yı ilan etti. Bir tiran tarafından öldürüldü. Ama mesajı ayakta kaldı. Takva ve tevazu modeli olarak kalır.",
+    "moral_lesson": "Bu hikaye bize niteliğin niceliğe galip geldiğini öğretir. Kısa ama takvalı bir hayat, günahta uzun bir hayattan daha değerlidir.",
+    "historical_location": "Filistin",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lessons_from_yahya_chapter_1",
+        "title": "Saflık ve takva",
+        "content": "Kur'an şöyle buyurur: \"Ve (Yahya) asil, iffetli ve salihlerden bir peygamberdi.\" (3:39) Yahya bu dünyadan hiçbir şeye heveslenmedi. Züht içinde yaşadı. Kendini Allah'a adadı. Mümin bu saflığı taklit etmelidir. Kötülükten uzak dur, iyiliğe yaklaş."
+      },
+      {
+        "id": "lessons_from_yahya_chapter_2",
+        "title": "Hakikat karşısında tevazu",
+        "content": "Yahya İsa'yı ilan etti. İsa geldiğinde Yahya kenara çekildi. Dedi: \"O artmalı, ben azalmalıyım.\" Bu tevazu bir derstir. Gerçek mümin rekabet etmez. Hakikate hizmet eder, taşıyan elçi kim olursa olsun."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 19:12-15",
+        "reference_text": "Meryem Suresi, 12-15. ayetler",
+        "content": "يَـٰيَحْيَىٰ خُذِ ٱلْكِتَـٰبَ بِقُوَّةٍۢ ۖ وَءَاتَيْنَـٰهُ ٱلْحُكْمَ صَبِيًّۭا ۝ وَحَنَانًۭا مِّن لَّدُنَّا وَزَكَوٰةًۭ ۝ وَكَانَ تَقِيًّۭا ۝ وَحَنَانًۭا مِّن لَّدُنَّا وَزَكَوٰةًۭ",
+        "translation": "Ey Yahya! Kitabı güçle al. Ona hikmet, şefkat ve saflık verdik. Takvalıydı.",
+        "relevance": "Bu pasaj Yahya'nın niteliklerini özetler."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 6:85",
+        "reference_text": "En'am Suresi, 85. ayet",
+        "content": "وَزَكَرِيَّا وَيَحْيَىٰ وَعِيسَىٰ وَإِلْيَاسَ كُلٌّۭ مِّنَ ٱلصَّـٰلِحِينَ",
+        "translation": "Ve Zekeriya, Yahya, İsa ve İlyas: hepsi salihlerdendir.",
+        "relevance": "Bu ayet Yahya'yı salih peygamberler arasına yerleştirir."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Taqwa",
+        "arabic_term": "تقوى",
+        "definition": "Takva, Allah korkusu. Yahya taqwa ile doluydu.",
+        "pronunciation": "taq-wa"
+      },
+      {
+        "id": 2,
+        "term": "Sayyid",
+        "arabic_term": "سيد",
+        "definition": "Asil, efendi. Yahya sayyiddi, insanlar arasında asildi.",
+        "pronunciation": "say-yid"
+      }
+    ]
+  }
+}

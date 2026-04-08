@@ -9,6 +9,12 @@ RCT_EXTERN_METHOD(
   asr:(NSString *)asr
   maghrib:(NSString *)maghrib
   isha:(NSString *)isha
+  tomorrowFajr:(NSString *)tomorrowFajr
+  tomorrowSunrise:(NSString *)tomorrowSunrise
+  tomorrowDhuhr:(NSString *)tomorrowDhuhr
+  tomorrowAsr:(NSString *)tomorrowAsr
+  tomorrowMaghrib:(NSString *)tomorrowMaghrib
+  tomorrowIsha:(NSString *)tomorrowIsha
   resolver:(RCTPromiseResolveBlock)resolve
   rejecter:(RCTPromiseRejectBlock)reject
 )

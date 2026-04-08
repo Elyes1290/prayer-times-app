@@ -508,29 +508,105 @@ export default function HomeScreen() {
   // 🕌 Hook pour le widget iOS
   const { updatePrayerTimes: updateWidget, isWidgetAvailable } = usePrayerTimesWidget();
 
+  // ⏰ Mettre à jour 'today' automatiquement au FAJR (pas à minuit)
+  useEffect(() => {
+    const checkAndUpdateAtFajr = () => {
+      const now = new Date();
+      const currentDate = now.toDateString();
+      const stateDate = today.toDateString();
+      
+      // Si le jour a changé ET qu'on a passé le Fajr
+      if (currentDate !== stateDate && currentPrayerTimes) {
+        const fajrTime = currentPrayerTimes.fajr;
+        
+        // Si l'heure actuelle est après le Fajr, mettre à jour
+        if (now > fajrTime) {
+          console.log("📅 Fajr passé, mise à jour de 'today' pour le nouveau jour");
+          setToday(now);
+        } else {
+          console.log("⏰ Après minuit mais avant Fajr, on garde l'ancien 'today'");
+        }
+      }
+    };
+    
+    // Vérifier toutes les minutes
+    const interval = setInterval(checkAndUpdateAtFajr, 60000);
+    
+    return () => clearInterval(interval);
+  }, [today, currentPrayerTimes]);
+
   // Mettre à jour le widget iOS quand les horaires changent
   useEffect(() => {
-    if (isWidgetAvailable && currentPrayerTimes) {
+    if (isWidgetAvailable && currentPrayerTimes && locationToUse) {
       // Convertir les objets Date en strings au format HH:mm
       const formatTime = (date: Date): string => {
         const hours = date.getHours().toString().padStart(2, '0');
         const minutes = date.getMinutes().toString().padStart(2, '0');
         return `${hours}:${minutes}`;
       };
+      
+      // Calculer aussi les horaires de demain pour le widget
+      const updateWidgetWithTomorrowTimes = async () => {
+        try {
+          const todayFormatted = {
+            Fajr: formatTime(currentPrayerTimes.fajr),
+            Sunrise: formatTime(currentPrayerTimes.sunrise),
+            Dhuhr: formatTime(currentPrayerTimes.dhuhr),
+            Asr: formatTime(currentPrayerTimes.asr),
+            Maghrib: formatTime(currentPrayerTimes.maghrib),
+            Isha: formatTime(currentPrayerTimes.isha),
+          };
+          
+          // Calculer les horaires de demain
+          const tomorrow = new Date(today);
+          tomorrow.setDate(tomorrow.getDate() + 1);
+          
+          const { computePrayerTimesForDate } = await import("../utils/prayerTimes");
+          const tomorrowPrayerTimes = computePrayerTimesForDate(
+            tomorrow,
+            {
+              latitude: locationToUse.coords.latitude,
+              longitude: locationToUse.coords.longitude
+            },
+            settings.calcMethod || "MuslimWorldLeague"
+          );
+          
+          if (tomorrowPrayerTimes) {
+            const tomorrowFormatted = {
+              Fajr: formatTime(tomorrowPrayerTimes.Fajr),
+              Sunrise: formatTime(tomorrowPrayerTimes.Sunrise),
+              Dhuhr: formatTime(tomorrowPrayerTimes.Dhuhr),
+              Asr: formatTime(tomorrowPrayerTimes.Asr),
+              Maghrib: formatTime(tomorrowPrayerTimes.Maghrib),
+              Isha: formatTime(tomorrowPrayerTimes.Isha),
+            };
 
-      const prayerTimesForWidget = {
-        Fajr: formatTime(currentPrayerTimes.fajr),
-        Sunrise: formatTime(currentPrayerTimes.sunrise),
-        Dhuhr: formatTime(currentPrayerTimes.dhuhr),
-        Asr: formatTime(currentPrayerTimes.asr),
-        Maghrib: formatTime(currentPrayerTimes.maghrib),
-        Isha: formatTime(currentPrayerTimes.isha),
+            console.log("🕌 Mise à jour du widget iOS - Aujourd'hui:", todayFormatted);
+            console.log("🔮 Mise à jour du widget iOS - Demain:", tomorrowFormatted);
+            
+            updateWidget({
+              today: todayFormatted,
+              tomorrow: tomorrowFormatted
+            });
+          }
+        } catch (error) {
+          console.error("❌ Erreur calcul horaires demain pour widget:", error);
+          // Fallback: envoyer seulement les horaires d'aujourd'hui
+          const todayFormatted = {
+            Fajr: formatTime(currentPrayerTimes.fajr),
+            Sunrise: formatTime(currentPrayerTimes.sunrise),
+            Dhuhr: formatTime(currentPrayerTimes.dhuhr),
+            Asr: formatTime(currentPrayerTimes.asr),
+            Maghrib: formatTime(currentPrayerTimes.maghrib),
+            Isha: formatTime(currentPrayerTimes.isha),
+          };
+          updateWidget(todayFormatted);
+        }
       };
-
-      console.log("🕌 Mise à jour du widget iOS avec les nouveaux horaires:", prayerTimesForWidget);
-      updateWidget(prayerTimesForWidget);
+      
+      updateWidgetWithTomorrowTimes();
     }
-  }, [currentPrayerTimes, isWidgetAvailable, updateWidget]);
+  }, [currentPrayerTimes, isWidgetAvailable, updateWidget, locationToUse, settings.calcMethod, today]);
 
   // Stabiliser les dhikr settings
   const stableDhikrSettings = useMemo(
@@ -1177,7 +1253,7 @@ export default function HomeScreen() {
     // 📚 NOUVELLE FONCTIONNALITÉ : Histoires du Prophète (PBUH)
     {
       icon: "account-heart",
-      title: t("prophet_stories") || "Histoires du Prophète",
+      title: t("prophets_stories") || "Histoires des Prophètes",
       route: "/prophet-stories",
       color: "#2E7D32",
       gradient: ["rgba(46,125,50,0.13)", "rgba(27,94,32,0.10)"] as const,

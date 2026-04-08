@@ -815,6 +815,7 @@ CREATE TABLE IF NOT EXISTS `prophet_stories` (
   `moral_lesson` TEXT,
   
   -- Classification
+  `prophet_name` VARCHAR(50) DEFAULT 'muhammad' COMMENT 'Nom du prophète (muhammad, adam, ibrahim, musa, etc.)',
   `category` ENUM('childhood', 'revelation', 'meccan_period', 'hijra', 'medinian_period', 'battles', 'companions', 'family_life', 'final_years', 'character_traits', 'miracles', 'daily_life') NOT NULL,
   `difficulty` ENUM('beginner', 'intermediate', 'advanced') DEFAULT 'beginner',
   `age_recommendation` INT DEFAULT 12,
@@ -846,12 +847,13 @@ CREATE TABLE IF NOT EXISTS `prophet_stories` (
   `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   
+  KEY `idx_prophet_name` (`prophet_name`),
   KEY `idx_category` (`category`),
   KEY `idx_difficulty` (`difficulty`),
   KEY `idx_premium` (`is_premium`),
   KEY `idx_chronological` (`chronological_order`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
-COMMENT = 'Histoires du Prophète Mohammad (PBUH) - Contenu éducatif premium';
+COMMENT = 'Histoires des Prophètes (AS) - Contenu éducatif premium';
 
 -- Chapitres des histoires
 CREATE TABLE IF NOT EXISTS `prophet_story_chapters` (

@@ -1,0 +1,344 @@
+{
+  "yunus_call": {
+    "title": "Yunus's call to his people",
+    "title_arabic": "دعوة يونس لقومه",
+    "introduction": "Yunus (يونس عليه السلام), Jonah, is a prophet sent to the people of Nineveh. The Quran says: \"And Yunus was indeed among the messengers.\" (37:139) He called his people to worship Allah alone and to abandon idolatry. But the people refused and persisted in their disbelief.",
+    "conclusion": "Yunus warned them of the punishment. When they did not believe, he left in anger before Allah gave him permission. This haste would lead him to the trial of the whale.",
+    "moral_lesson": "This story teaches us that the prophet must be patient and must not leave his people without Allah's command. Patience is a prophetic virtue.",
+    "historical_location": "Nineveh (Iraq)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "yunus_call_chapter_1",
+        "title": "Yunus's mission",
+        "content": "The Quran relates: \"And when Yunus left in anger, he thought that We would not punish him.\" (21:87) Yunus was sent to the people of Nineveh, a great city. He called them to monotheism. He warned them of punishment if they persisted. But they refused. Yunus grew impatient and left the city without waiting for Allah's command."
+      },
+      {
+        "id": "yunus_call_chapter_2",
+        "title": "The hasty departure",
+        "content": "The Quran says: \"And Dhu an-Nun (Yunus) when he left in anger and thought that We would not constrain him.\" (21:87) Yunus left before his people were judged. He did not wait for Allah's permission. This haste was a mistake. A prophet must not abandon his mission without his Lord's command."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 37:139",
+        "reference_text": "Surah As-Saffat, verse 139",
+        "content": "وَإِنَّ يُونُسَ لَمِنَ ٱلْمُرْسَلِينَ",
+        "translation": "And Yunus was indeed among the messengers.",
+        "relevance": "This verse establishes Yunus as a messenger."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 21:87",
+        "reference_text": "Surah Al-Anbiya, verse 87",
+        "content": "وَذَا ٱلنُّونِ إِذ ذَّهَبَ مُغَـٰضِبًۭا فَظَنَّ أَن لَّن نَّقْدِرَ عَلَيْهِ",
+        "translation": "And Yunus when he left in anger and thought that We would not constrain him.",
+        "relevance": "This verse describes Yunus's departure."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Yunus",
+        "arabic_term": "يونس",
+        "definition": "Jonah in Arabic. Prophet sent to the people of Nineveh.",
+        "pronunciation": "you-nous"
+      },
+      {
+        "id": 2,
+        "term": "Dhu an-Nun",
+        "arabic_term": "ذو النون",
+        "definition": "The one of the fish. Nickname of Yunus in the Quran.",
+        "pronunciation": "dhou an-noun"
+      }
+    ]
+  },
+  "yunus_ship": {
+    "title": "Yunus on the ship",
+    "title_arabic": "يونس في السفينة",
+    "introduction": "Yunus boarded a ship to flee. The Quran relates: \"And the ship carried him on the waves like a mountain.\" (11:42) A storm arose. The passengers drew lots to determine who should be thrown into the sea. The lot fell on Yunus.",
+    "conclusion": "Yunus was thrown into the sea. A whale swallowed him. He found himself in the darkness of the fish's belly. It was the beginning of his trial and his repentance.",
+    "moral_lesson": "This story teaches us that one cannot flee Allah's decree. What seems like an escape can lead to a trial that purifies.",
+    "historical_location": "At sea",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "yunus_ship_chapter_1",
+        "title": "The storm",
+        "content": "The Quran relates: \"And when he fled to the laden ship, he drew lots and was among the losers.\" (37:140-141) Yunus boarded a ship. A storm threatened the boat. The sailors believed a passenger was responsible. They drew lots. The lot fell on Yunus three times. He understood that it was a sign from Allah."
+      },
+      {
+        "id": "yunus_ship_chapter_2",
+        "title": "Being thrown into the sea",
+        "content": "The Quran says: \"Then the fish swallowed him while he was blameworthy.\" (37:142) Yunus threw himself into the sea so as not to sink the ship. A whale swallowed him. He found himself in darkness, alive but captive. It was the punishment for leaving his people without permission."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 37:140-141",
+        "reference_text": "Surah As-Saffat, verses 140-141",
+        "content": "إِذْ أَبَقَ إِلَى ٱلْفُلْكِ ٱلْمَشْحُونِ ۝ فَسَاهَمَ فَكَانَ مِنَ ٱلْمُدْحَضِينَ",
+        "translation": "When he fled to the laden ship, he drew lots and was among the losers.",
+        "relevance": "This verse describes the flight and the drawing of lots."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 37:142",
+        "reference_text": "Surah As-Saffat, verse 142",
+        "content": "فَٱلْتَقَمَهُ ٱلْحُوتُ وَهُوَ مُلِيمٌ",
+        "translation": "Then the fish swallowed him while he was blameworthy.",
+        "relevance": "This verse relates the swallowing by the whale."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Fulk",
+        "arabic_term": "فلك",
+        "definition": "Ship. Yunus boarded a fulk to flee.",
+        "pronunciation": "foulk"
+      },
+      {
+        "id": 2,
+        "term": "Hut",
+        "arabic_term": "حوت",
+        "definition": "Whale, fish. It swallowed Yunus.",
+        "pronunciation": "hout"
+      }
+    ]
+  },
+  "yunus_whale": {
+    "title": "Yunus in the belly of the whale",
+    "title_arabic": "يونس في بطن الحوت",
+    "introduction": "Yunus found himself in the darkness of the whale's belly. The Quran says: \"And had he not been among those who glorify Allah, he would have remained in its belly until the Day of Resurrection.\" (37:143-144) In this darkness, Yunus invoked his Lord.",
+    "conclusion": "Yunus understood his error. He could rely only on Allah. He uttered the invocation of despair and repentance. Allah answered his prayer.",
+    "moral_lesson": "This story teaches us that no place escapes Allah. In the deepest darkness, the invocation reaches the Lord.",
+    "historical_location": "At sea",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "yunus_whale_chapter_1",
+        "title": "The darkness",
+        "content": "The Quran relates: \"Then he called out from the depths of darkness: There is no deity except You! Glory to You! I have been among the wrongdoers.\" (21:87) Yunus was in the darkness of the fish's belly. He could see nothing. He could rely only on Allah. He invoked with sincerity."
+      },
+      {
+        "id": "yunus_whale_chapter_2",
+        "title": "The invocation",
+        "content": "The Quran says: \"So We answered him and saved him from distress. Thus do We save the believers.\" (21:88) Yunus's invocation — \"La ilaha illa Anta, Subhanaka, inni kuntu min adh-dhalimin\" — has become one of the most famous in the Quran. It expresses repentance and recognition of Allah's oneness. Allah answered it."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 21:87",
+        "reference_text": "Surah Al-Anbiya, verse 87",
+        "content": "فَنَادَىٰ فِى ٱلظُّلُمَـٰتِ أَن لَّآ إِلَـٰهَ إِلَّآ أَنتَ سُبْحَـٰنَكَ إِنِّى كُنتُ مِنَ ٱلظَّـٰلِمِينَ",
+        "translation": "Then he called out from the depths of darkness: There is no deity except You! Glory to You! I have been among the wrongdoers.",
+        "relevance": "This verse contains Yunus's invocation."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 21:88",
+        "reference_text": "Surah Al-Anbiya, verse 88",
+        "content": "فَٱسْتَجَبْنَا لَهُۥ وَنَجَّيْنَـٰهُ مِنَ ٱلْغَمِّ ۚ وَكَذَٰلِكَ نُـۨجِى ٱلْمُؤْمِنِينَ",
+        "translation": "So We answered him and saved him from distress. Thus do We save the believers.",
+        "relevance": "This verse relates Allah's answer."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Dhikr",
+        "arabic_term": "ذكر",
+        "definition": "Invocation, remembrance of Allah. Yunus invoked in the darkness.",
+        "pronunciation": "dhikr"
+      },
+      {
+        "id": 2,
+        "term": "Zulumat",
+        "arabic_term": "ظلمات",
+        "definition": "Darkness. Yunus was in the zulumat of the fish's belly.",
+        "pronunciation": "dhou-lou-mat"
+      }
+    ]
+  },
+  "yunus_repentance": {
+    "title": "Yunus's repentance and salvation",
+    "title_arabic": "توبة يونس ونجاته",
+    "introduction": "Allah answered Yunus's invocation. The Quran says: \"So We answered him and saved him from distress.\" (21:88) The whale cast him onto the shore. Yunus was weak and ill. Allah caused a plant to grow to shade and nourish him.",
+    "conclusion": "Yunus was saved. He had learned the lesson: never leave one's mission without Allah's command. Sincere repentance erases faults and attracts mercy.",
+    "moral_lesson": "This story teaches us that repentance opens the doors of salvation. Allah is Most Merciful to those who invoke Him with sincerity.",
+    "historical_location": "Shore",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "yunus_repentance_chapter_1",
+        "title": "Cast onto the shore",
+        "content": "The Quran relates: \"So We cast him onto the bare shore, and he was ill. And We caused a plant of gourd to grow over him.\" (37:145-146) The whale cast Yunus onto the shore. He was exhausted, naked, ill. Allah caused a gourd plant (yaqtin) to grow to shade and protect him. His mercy covered Yunus."
+      },
+      {
+        "id": "yunus_repentance_chapter_2",
+        "title": "The lesson",
+        "content": "The Quran says: \"And had he not been among those who glorify Allah, he would have remained in its belly until the Day of Resurrection.\" (37:143-144) Yunus had glorified Allah in the darkness. This glorification saved him. The Quran concludes: \"So We answered him and gave him a community of a hundred thousand or more.\" (37:147) Allah sent him back to his people."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 37:145-146",
+        "reference_text": "Surah As-Saffat, verses 145-146",
+        "content": "فَنَبَذْنَـٰهُ بِٱلْعَرَآءِ وَهُوَ سَقِيمٌ ۝ وَأَنۢبَتْنَا عَلَيْهِ شَجَرَةًۭ مِّن يَقْطِينٍۢ",
+        "translation": "So We cast him onto the bare shore, and he was ill. And We caused a plant of gourd to grow over him.",
+        "relevance": "This verse describes Yunus's salvation."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 37:147",
+        "reference_text": "Surah As-Saffat, verse 147",
+        "content": "وَأَرْسَلْنَـٰهُ إِلَىٰ مِئَةِ أَلْفٍ أَوْ يَزِيدُونَ",
+        "translation": "And We sent him to a hundred thousand or more.",
+        "relevance": "This verse relates Yunus's return to his people."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Yaqtin",
+        "arabic_term": "يقطين",
+        "definition": "Gourd. Allah caused a yaqtin to grow for Yunus.",
+        "pronunciation": "yaq-tin"
+      },
+      {
+        "id": 2,
+        "term": "Tawba",
+        "arabic_term": "توبة",
+        "definition": "Repentance. Yunus made tawba in the belly of the fish.",
+        "pronunciation": "taw-ba"
+      }
+    ]
+  },
+  "yunus_people": {
+    "title": "Yunus's people believe",
+    "title_arabic": "إيمان قوم يونس",
+    "introduction": "When Yunus returned to his people, they had believed. The Quran says: \"Why was there no town that believed and whose faith benefited it, except the people of Yunus? When they believed, We removed from them the disgraceful punishment in the life of this world.\" (10:98) The people of Nineveh repented before the punishment fell.",
+    "conclusion": "Yunus's people were the only ones to believe en masse before the punishment. They thus avoided destruction. Yunus could guide them to Islam.",
+    "moral_lesson": "This story teaches us that collective repentance can avert punishment. Faith, even when late, is accepted by Allah.",
+    "historical_location": "Nineveh (Iraq)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "yunus_people_chapter_1",
+        "title": "The people's faith",
+        "content": "The Quran relates: \"Why was there no town that believed and whose faith benefited it, except the people of Yunus? When they believed, We removed from them the disgraceful punishment in the life of this world and gave them enjoyment for a time.\" (10:98) After Yunus's departure, the people of Nineveh remembered his warning. They repented and believed. Allah accepted their repentance and averted the punishment."
+      },
+      {
+        "id": "yunus_people_chapter_2",
+        "title": "Yunus's return",
+        "content": "The Quran says: \"And We sent him to a hundred thousand or more. And they believed. So We gave them enjoyment for a time.\" (37:147-148) Yunus returned to his people. He found them believers. They had believed in his absence. His trial had served a purpose: he had learned patience, and his people had believed. Allah's wisdom is perfect."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 10:98",
+        "reference_text": "Surah Yunus, verse 98",
+        "content": "فَلَوْلَا كَانَتْ قَرْيَةٌ ءَامَنَتْ فَنَفَعَهَآ إِيمَـٰنُهَآ إِلَّا قَوْمَ يُونُسَ ۖ لَمَّآ ءَامَنُوا۟ كَشَفْنَا عَنْهُمْ عَذَابَ ٱلْخِزْىِ فِى ٱلْحَيَوٰةِ ٱلدُّنْيَا",
+        "translation": "Why was there no town that believed and whose faith benefited it, except the people of Yunus? When they believed, We removed from them the punishment.",
+        "relevance": "This verse establishes that Yunus's people believed and were saved."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 37:147-148",
+        "reference_text": "Surah As-Saffat, verses 147-148",
+        "content": "وَأَرْسَلْنَـٰهُ إِلَىٰ مِئَةِ أَلْفٍ أَوْ يَزِيدُونَ ۝ فَـَٔامَنُوا۟ فَمَتَّعْنَـٰهُمْ إِلَىٰ حِينٍۢ",
+        "translation": "And We sent him to a hundred thousand or more. And they believed. So We gave them enjoyment for a time.",
+        "relevance": "This verse confirms the people's faith and the enjoyment granted."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Ninawa",
+        "arabic_term": "نينوى",
+        "definition": "Nineveh. City of Yunus's people in Iraq.",
+        "pronunciation": "ni-na-wa"
+      },
+      {
+        "id": 2,
+        "term": "Iman",
+        "arabic_term": "إيمان",
+        "definition": "Faith. Yunus's people had iman and were saved.",
+        "pronunciation": "i-man"
+      }
+    ]
+  },
+  "lessons_from_yunus": {
+    "title": "Lessons from the story of Yunus",
+    "title_arabic": "دروس من قصة يونس",
+    "introduction": "Yunus is one of the prophets most mentioned in the Quran. A surah bears his name. His story teaches patience, repentance and Allah's mercy. The Quran says: \"And Yunus was indeed among the messengers.\" (37:139)",
+    "conclusion": "Yunus left his people without permission; he was tried. He repented in the darkness; Allah saved him. His people believed; they were spared. The story of Yunus is a reminder: patience, repentance and faith triumph.",
+    "moral_lesson": "This story teaches us that Yunus's invocation — \"La ilaha illa Anta, Subhanaka, inni kuntu min adh-dhalimin\" — is one of the most powerful. It expresses repentance and oneness. Whoever invokes it in trial will be answered.",
+    "historical_location": "Nineveh and at sea",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lessons_from_yunus_chapter_1",
+        "title": "The prophet's patience",
+        "content": "Yunus grew impatient and left. A prophet must be patient. The Quran says: \"So be patient, as the messengers of firm resolve were patient.\" (46:35) Patience is an essential virtue. Yunus learned this lesson in the belly of the fish."
+      },
+      {
+        "id": "lessons_from_yunus_chapter_2",
+        "title": "The saving invocation",
+        "content": "The Prophet Muhammad said: \"The invocation of my brother Yunus: There is no deity except You! Glory to You! I have been among the wrongdoers. No Muslim invokes it for something without Allah answering him.\" (Tirmidhi) This invocation is a treasure for believers. It unites repentance and glorification."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 37:139",
+        "reference_text": "Surah As-Saffat, verse 139",
+        "content": "وَإِنَّ يُونُسَ لَمِنَ ٱلْمُرْسَلِينَ",
+        "translation": "And Yunus was indeed among the messengers.",
+        "relevance": "This verse establishes Yunus as a messenger."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 68:48",
+        "reference_text": "Surah Al-Qalam, verse 48",
+        "content": "فَلَا تَكُن كَصَاحِبِ ٱلْحُوتِ إِذْ نَادَىٰ وَهُوَ مَكْظُومٌ",
+        "translation": "So do not be like the companion of the fish when he called out, full of resentment.",
+        "relevance": "This verse recalls Yunus's story as a lesson."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Sabr",
+        "arabic_term": "صبر",
+        "definition": "Patience. Yunus learned sabr in the trial.",
+        "pronunciation": "sabr"
+      },
+      {
+        "id": 2,
+        "term": "Du'a",
+        "arabic_term": "دعاء",
+        "definition": "Invocation. Yunus's invocation is a powerful du'a.",
+        "pronunciation": "dou-a"
+      }
+    ]
+  }
+}

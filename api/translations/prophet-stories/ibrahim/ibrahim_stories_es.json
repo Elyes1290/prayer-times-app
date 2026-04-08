@@ -1,0 +1,342 @@
+{
+  "ibrahim_prophecy": {
+    "title": "Ibrahim y la llamada al monoteísmo",
+    "title_arabic": "إبراهيم عليه السلام والدعوة إلى التوحيد",
+    "introduction": "Ibrahim (إبراهيم عليه السلام) es uno de los más grandes profetas. El Corán dice: «Habíamos concedido a Ibrahim una rectitud anteriormente, y le conocíamos bien.» (21:51) Nació en un pueblo de idólatras, en Mesopotamia. Desde su juventud, rechazó la adoración de ídolos y buscó al Señor del universo. Su diálogo con su padre Azar y su razonamiento sobre la estrella, la luna y el sol ilustran su búsqueda de la verdad.",
+    "conclusion": "Ibrahim fue un modelo de monoteísmo puro. Se opuso a su padre y a su pueblo en nombre de la verdad. Allah lo eligió como Imam (guía) para la gente e hizo de su descendencia un linaje de profetas.",
+    "moral_lesson": "Esta historia nos enseña que la verdad puede exigir oponerse a la familia y a la comunidad. La búsqueda sincera de Dios conduce a la guía.",
+    "historical_location": "Mesopotamia (Babilonia/Ur)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "ibrahim_prophecy_chapter_1",
+        "title": "El diálogo con su padre",
+        "content": "El Corán relata: «Y cuando Ibrahim dijo a su padre Azar: ¿Tomas ídolos como divinidades? Te veo a ti y a tu pueblo en un extravío manifiesto.» (6:74) Azar fabricaba ídolos. Ibrahim, aún joven, comprendió que esas estatuas no podían ser dioses — no crean nada, no benefician ni perjudican. Invitó a su padre a abandonar la idolatría. Su padre lo amenazó con lapidarlo si no cesaba. Ibrahim se separó de él, manteniendo la esperanza de su arrepentimiento."
+      },
+      {
+        "id": "ibrahim_prophecy_chapter_2",
+        "title": "La estrella, la luna y el sol",
+        "content": "El Corán describe cómo Ibrahim razonó para alcanzar la verdad: «Cuando la noche lo envolvió, vio una estrella y dijo: ¡Este es mi Señor! Luego cuando desapareció, dijo: No amo a los que desaparecen.» Luego vio la luna salir y dijo: «¡Este es mi Señor!» Cuando desapareció, dijo: «Si mi Señor no me guía, seré de los extraviados.» Luego vio el sol salir y dijo: «¡Este es mi Señor! Este es más grande.» Cuando se puso, dijo: «¡Oh pueblo mío! Reniego de lo que asociáis. Vuelvo mi rostro hacia Quien creó los cielos y la tierra, en puro monoteísmo.» (6:76-79) Por este razonamiento, Ibrahim concluyó que solo el Creador de los cielos y la tierra merece adoración."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 6:74",
+        "reference_text": "Sura Al-An'am, versículo 74",
+        "content": "وَإِذْ قَالَ إِبْرَٰهِيمُ لِأَبِيهِ ءَازَرَ أَتَتَّخِذُ أَصْنَامًا ءَالِهَةً ۖ إِنِّىٓ أَرَىٰكَ وَقَوْمَكَ فِى ضَلَـٰلٍۢ مُّبِينٍۢ",
+        "translation": "Y cuando Ibrahim dijo a su padre Azar: ¿Tomas ídolos como divinidades? Te veo a ti y a tu pueblo en un extravío manifiesto.",
+        "relevance": "Este versículo establece el diálogo de Ibrahim con su padre y su rechazo de la idolatría."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 21:51",
+        "reference_text": "Sura Al-Anbiya, versículo 51",
+        "content": "وَلَقَدْ ءَاتَيْنَآ إِبْرَٰهِيمَ رُشْدَهُۥ مِن قَبْلُ وَكُنَّا بِهِۦ عَـٰلِمِينَ",
+        "translation": "Habíamos concedido a Ibrahim una rectitud anteriormente, y le conocíamos bien.",
+        "relevance": "Este versículo confirma que Allah guió a Ibrahim desde el principio."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Ibrahim",
+        "arabic_term": "إبراهيم",
+        "definition": "Abraham en árabe. Profeta de Allah, amigo íntimo de Allah (Khalilullah). Padre de los profetas.",
+        "pronunciation": "ib-ra-him"
+      },
+      {
+        "id": 2,
+        "term": "Azar",
+        "arabic_term": "آزر",
+        "definition": "Nombre del padre de Ibrahim en el Corán. Fabricaba ídolos.",
+        "pronunciation": "a-zar"
+      },
+      {
+        "id": 3,
+        "term": "Hanif",
+        "arabic_term": "حنيف",
+        "definition": "Monoteísta puro. Ibrahim se describió como hanif, vuelto hacia el Creador.",
+        "pronunciation": "ha-nif"
+      }
+    ]
+  },
+  "ibrahim_idols": {
+    "title": "Ibrahim y los ídolos",
+    "title_arabic": "إبراهيم والأصنام",
+    "introduction": "Ibrahim (عليه السلام) decidió demostrar a su pueblo la vanidad de los ídolos. Durante una fiesta, cuando la gente abandonó el templo, rompió todos los ídolos excepto el más grande. Cuando regresaron y lo interrogaron, les dijo que preguntaran al gran ídolo — que no respondió. Con este estratagema, Ibrahim reveló que esas estatuas no podían ni hablar ni actuar.",
+    "conclusion": "Los ídolos fueron reducidos a pedazos. El pueblo, furioso, decidió arrojar a Ibrahim al fuego. Pero Ibrahim había logrado su objetivo: probar que los ídolos son impotentes.",
+    "moral_lesson": "Esta historia nos enseña que la idolatría es una ilusión. Las criaturas no merecen adoración; solo el Creador la merece.",
+    "historical_location": "Mesopotamia",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "ibrahim_idols_chapter_1",
+        "title": "El estratagema",
+        "content": "El Corán relata: «¡Por Allah! Voy a tramar un estratagema contra vuestros ídolos cuando os hayáis ido.» (21:57) Ibrahim esperó a que su pueblo partiera a una fiesta. Entró en el templo y rompió todos los ídolos en pedazos, excepto el más grande. Tal vez puso la herramienta en la mano del gran ídolo para que la gente comprendiera. Cuando regresaron y vieron el desastre, exclamaron: «¿Quién ha hecho esto a nuestras divinidades?»"
+      },
+      {
+        "id": "ibrahim_idols_chapter_2",
+        "title": "La respuesta de Ibrahim",
+        "content": "La gente dijo: «Hemos oído a un joven mencionarlos; lo llaman Ibrahim.» Lo hicieron venir y preguntaron: «¿Eres tú quien ha hecho esto a nuestras divinidades, oh Ibrahim?» Ibrahim respondió: «Es el más grande de ellos quien lo ha hecho. ¡Interrogadlos, si pueden hablar!» (21:62-63) La gente se miró y dijo: «Sabéis bien que no hablan.» Ibrahim dijo: «¿Adoráis, fuera de Allah, lo que no puede beneficiaros ni perjudicaros? ¡Vergüenza para vosotros y para lo que adoráis fuera de Allah! ¿No razonáis?» (21:66-67) Decidieron quemarlo."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 21:57-58",
+        "reference_text": "Sura Al-Anbiya, versículos 57-58",
+        "content": "وَتَٱللَّهِ لَأَكِيدَنَّ أَصْنَـٰمَكُم بَعْدَ أَن تُوَلُّوا۟ مُدْبِرِينَ ۝ فَجَعَلَهُمْ جُذَـٰذًا إِلَّا كَبِيرًۭا لَّهُمْ لَعَلَّهُمْ إِلَيْهِ يَرْجِعُونَ",
+        "translation": "¡Por Allah! Voy a tramar un estratagema contra vuestros ídolos cuando os hayáis ido. Los redujo a pedazos, excepto el más grande, para que volvieran hacia él.",
+        "relevance": "Estos versículos describen la acción de Ibrahim contra los ídolos."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 21:62-67",
+        "reference_text": "Sura Al-Anbiya, versículos 62-67",
+        "content": "قَالُوا۟ أَأَنتَ فَعَلْتَ هَـٰذَا بِـَٔالِهَتِنَا يَـٰإِبْرَٰهِيمُ ۝ قَالَ بَلْ فَعَلَهُۥ كَبِيرُهُمْ هَـٰذَا فَسْـَٔلُوهُمْ إِن كَانُوا۟ يَنطِقُونَ",
+        "translation": "Dijeron: ¿Eres tú quien ha hecho esto a nuestras divinidades, oh Ibrahim? Dijo: Es el más grande de ellos quien lo ha hecho. ¡Interrogadlos, si pueden hablar!",
+        "relevance": "Estos versículos contienen el intercambio entre Ibrahim y su pueblo."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Asnam",
+        "arabic_term": "أصنام",
+        "definition": "Ídolos. Las estatuas que el pueblo de Ibrahim adoraba.",
+        "pronunciation": "as-nam"
+      },
+      {
+        "id": 2,
+        "term": "Juthadh",
+        "arabic_term": "جذاذ",
+        "definition": "Pedazos, fragmentos. Ibrahim redujo los ídolos a pedazos.",
+        "pronunciation": "jou-thadh"
+      }
+    ]
+  },
+  "ibrahim_fire": {
+    "title": "Ibrahim y el fuego",
+    "title_arabic": "إبراهيم والنار",
+    "introduction": "El pueblo de Ibrahim lo arrojó a un fuego inmenso para castigarlo por haber roto los ídolos. Construyeron una hoguera gigantesca. Pero Allah ordenó al fuego: «¡Oh fuego! Sé frescor y paz para Ibrahim.» (21:69) El fuego no quemó a Ibrahim; fue frescor y salvación. Este milagro demostró el poder de Allah y Su protección hacia Sus siervos fieles.",
+    "conclusion": "Ibrahim salió del fuego sano y salvo. Su pueblo quedó confundido. Este milagro es uno de los más célebres del Corán, ilustrando que Allah protege a quienes confían en Él.",
+    "moral_lesson": "Esta historia nos enseña que Allah puede invertir las leyes de la naturaleza para proteger a Sus siervos. La confianza en Allah (tawakkul) es la mayor fuerza.",
+    "historical_location": "Mesopotamia",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "ibrahim_fire_chapter_1",
+        "title": "La hoguera",
+        "content": "El Corán relata: «Dijeron: ¡Quemadlo y socorred a vuestras divinidades, si queréis actuar!» (21:68) El pueblo reunió leña y encendió un fuego inmenso. Arrojaron a Ibrahim dentro. El Corán describe: «Quisieron tenderle una trampa, pero hicimos que fueran los más perdedores.» (21:70) Ibrahim fue arrojado a las llamas, pero puso su confianza en Allah."
+      },
+      {
+        "id": "ibrahim_fire_chapter_2",
+        "title": "El milagro",
+        "content": "El Corán relata la orden divina: «Dijimos: ¡Oh fuego! Sé frescor y paz para Ibrahim.» (21:69) El fuego perdió su poder de quemar. Ibrahim salió indemne. Este milagro dejó atónito al pueblo. Allah salvó a Su siervo y confundió a los incrédulos. Ibrahim permaneció firme en su fe, y su historia se convirtió en ejemplo para todos los creyentes."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 21:68-70",
+        "reference_text": "Sura Al-Anbiya, versículos 68-70",
+        "content": "قَالُوا۟ ٱحْرُقُوهُ وَٱنصُرُوٓا۟ ءَالِهَتَكُمْ إِن كُنتُمْ فَـٰعِلِينَ ۝ قُلْنَا يَـٰنَارُ كُونِى بَرْدًۭا وَسَلَـٰمًا عَلَىٰٓ إِبْرَٰهِيمَ ۝ وَأَرَادُوا۟ بِهِۦ كَيْدًۭا فَجَعَلْنَـٰهُمُ ٱلْأَخْسَرِينَ",
+        "translation": "Dijeron: ¡Quemadlo y socorred a vuestras divinidades, si queréis actuar! Dijimos: ¡Oh fuego! Sé frescor y paz para Ibrahim. Quisieron tenderle una trampa, pero hicimos que fueran los más perdedores.",
+        "relevance": "Estos versículos describen el fuego y el milagro de la protección de Ibrahim."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Bard",
+        "arabic_term": "برد",
+        "definition": "Frescor. Allah ordenó al fuego ser frescor para Ibrahim.",
+        "pronunciation": "bard"
+      },
+      {
+        "id": 2,
+        "term": "Salam",
+        "arabic_term": "سلام",
+        "definition": "Paz, salvación. El fuego fue paz y salvación para Ibrahim.",
+        "pronunciation": "sa-lam"
+      }
+    ]
+  },
+  "ibrahim_kaaba": {
+    "title": "Ibrahim y la construcción de la Kaaba",
+    "title_arabic": "إبراهيم وبناء الكعبة",
+    "introduction": "Allah probó a Ibrahim con pruebas que cumplió. Dijo: «Voy a hacer de ti un Imam para la gente.» (2:124) Ibrahim pidió que su descendencia también recibiera esta guía. Con su hijo Isma'il, elevó los cimientos de la Casa (la Kaaba) en La Meca. Invocó a Allah para hacer de ella un lugar de paz y guía para la humanidad.",
+    "conclusion": "La Kaaba, construida por Ibrahim e Isma'il, se convirtió en la Qibla de los musulmanes. Las invocaciones de Ibrahim fueron aceptadas: la Casa es un lugar de peregrinación y oración para los creyentes de todo el mundo.",
+    "moral_lesson": "Esta historia nos enseña que las obras realizadas para Allah perduran. La Kaaba une a todos los musulmanes con Ibrahim y el monoteísmo puro.",
+    "historical_location": "La Meca",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "ibrahim_kaaba_chapter_1",
+        "title": "La prueba y el Imamat",
+        "content": "El Corán relata: «Y cuando su Señor probó a Ibrahim con palabras, y las cumplió, dijo: Voy a hacer de ti un Imam para la gente. Ibrahim dijo: ¿Y entre mi descendencia? Dijo: Mi pacto no alcanza a los injustos.» (2:124) Ibrahim cumplió todas las pruebas. Allah lo hizo Imam — guía para la humanidad. Ibrahim pidió que su descendencia piadosa también recibiera esta guía. Allah aceptó, con la condición de que no fueran injustos."
+      },
+      {
+        "id": "ibrahim_kaaba_chapter_2",
+        "title": "Los cimientos de la Casa",
+        "content": "El Corán relata: «Y cuando Ibrahim e Isma'il elevaban los cimientos de la Casa: ¡Señor nuestro! Acepta de nosotros. Tú eres el Oyente, el Omnisciente. ¡Señor nuestro! Haz de nosotros Tus sometidos, y de nuestra descendencia una comunidad sometida a Ti. Muéstranos nuestros ritos y acepta nuestro arrepentimiento. Tú eres el Aceptador del arrepentimiento, el Misericordioso.» (2:127-128) Ibrahim e Isma'il construyeron la Kaaba en La Meca. Su invocación fue aceptada: la Casa se convirtió en el centro del peregrinaje y la oración para los musulmanes."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 2:124",
+        "reference_text": "Sura Al-Baqara, versículo 124",
+        "content": "وَإِذِ ٱبْتَلَىٰٓ إِبْرَٰهِـۧمَ رَبُّهُۥ بِكَلِمَـٰتٍۢ فَأَتَمَّهُنَّ ۖ قَالَ إِنِّى جَاعِلُكَ لِلنَّاسِ إِمَامًۭا ۖ قَالَ وَمِن ذُرِّيَّتِى ۖ قَالَ لَا يَنَالُ عَهْدِى ٱلظَّـٰلِمِينَ",
+        "translation": "Y cuando su Señor probó a Ibrahim con palabras, y las cumplió, dijo: Voy a hacer de ti un Imam para la gente. Ibrahim dijo: ¿Y entre mi descendencia? Dijo: Mi pacto no alcanza a los injustos.",
+        "relevance": "Este versículo establece la prueba de Ibrahim y su estatus de Imam."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 2:127-128",
+        "reference_text": "Sura Al-Baqara, versículos 127-128",
+        "content": "وَإِذْ يَرْفَعُ إِبْرَٰهِـۧمُ ٱلْقَوَاعِدَ مِنَ ٱلْبَيْتِ وَإِسْمَـٰعِيلُ رَبَّنَا تَقَبَّلْ مِنَّا ۖ إِنَّكَ أَنتَ ٱلسَّمِيعُ ٱلْعَلِيمُ ۝ رَبَّنَا وَٱجْعَلْنَا مُسْلِمَيْنِ لَكَ وَمِن ذُرِّيَّتِنَآ أُمَّةًۭ مُّسْلِمَةًۭ لَّكَ",
+        "translation": "Y cuando Ibrahim e Isma'il elevaban los cimientos de la Casa: ¡Señor nuestro! Acepta de nosotros. Tú eres el Oyente, el Omnisciente. ¡Señor nuestro! Haz de nosotros Tus sometidos, y de nuestra descendencia una comunidad sometida a Ti.",
+        "relevance": "Estos versículos describen la construcción de la Kaaba y la invocación de Ibrahim."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Imam",
+        "arabic_term": "إمام",
+        "definition": "Guía, modelo. Allah hizo de Ibrahim un Imam para la gente.",
+        "pronunciation": "i-mam"
+      },
+      {
+        "id": 2,
+        "term": "Al-Bayt",
+        "arabic_term": "البيت",
+        "definition": "La Casa. La Kaaba en La Meca, construida por Ibrahim e Isma'il.",
+        "pronunciation": "al-bayt"
+      }
+    ]
+  },
+  "ibrahim_sacrifice": {
+    "title": "La prueba del sacrificio",
+    "title_arabic": "ابتلاء الذبح",
+    "introduction": "Allah probó a Ibrahim con una prueba suprema: sacrificar a su hijo. Ibrahim vio en sueños que debía inmolarlo. Se lo dijo a su hijo, que aceptó: «¡Oh padre mío! Haz lo que se te ordena. Me encontrarás, si Allah quiere, entre los pacientes.» (37:102) Ambos se sometieron. En el momento del sacrificio, Allah los recompensó y reemplazó al hijo por un cordero.",
+    "conclusion": "Ibrahim y su hijo superaron la prueba. Allah dijo: «Lo redimimos con una inmolación generosa.» (37:107) Esta historia ilustra la sumisión total a Allah (islam) y la recompensa de la obediencia.",
+    "moral_lesson": "Esta historia nos enseña que la obediencia a Allah prima sobre todo, incluso sobre el amor paterno. La sumisión sincera es recompensada con misericordia.",
+    "historical_location": "Mina (cerca de La Meca)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "ibrahim_sacrifice_chapter_1",
+        "title": "La visión",
+        "content": "El Corán relata: «Cuando alcanzó la edad de acompañarlo, dijo: ¡Oh hijo mío! He visto en sueños que te inmolo. Mira qué opinas. Dijo: ¡Oh padre mío! Haz lo que se te ordena. Me encontrarás, si Allah quiere, entre los pacientes.» (37:102) Los sueños de los profetas son una forma de revelación. Ibrahim comprendió que era una orden de Allah. Su hijo, con una fe ejemplar, aceptó sin vacilar."
+      },
+      {
+        "id": "ibrahim_sacrifice_chapter_2",
+        "title": "La sumisión y el rescate",
+        "content": "El Corán relata: «Luego cuando ambos se hubieron sometido y lo hubo tumbado sobre la frente, Lo llamamos: ¡Oh Ibrahim! Has confirmado la visión. Así retribuimos a los bienhechores. Esta era una prueba manifiesta. Y Lo redimimos con una inmolación generosa.» (37:103-107) Ibrahim se dispuso a obedecer. Allah lo detuvo y le anunció que la prueba estaba cumplida. Redimió al hijo con un cordero. Ibrahim y su hijo fueron recompensados por su sumisión total."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 37:102",
+        "reference_text": "Sura As-Saffat, versículo 102",
+        "content": "فَلَمَّا بَلَغَ مَعَهُ ٱلسَّعْيَ قَالَ يَـٰبُنَىَّ إِنِّىٓ أَرَىٰ فِى ٱلْمَنَامِ أَنِّىٓ أَذْبَحُكَ فَٱنظُرْ مَاذَا تَرَىٰ ۚ قَالَ يَـٰٓأَبَتِ ٱفْعَلْ مَا تُؤْمَرُ ۖ سَتَجِدُنِىٓ إِن شَآءَ ٱللَّهُ مِنَ ٱلصَّـٰبِرِينَ",
+        "translation": "Cuando alcanzó la edad de acompañarlo, dijo: ¡Oh hijo mío! He visto en sueños que te inmolo. Mira qué opinas. Dijo: ¡Oh padre mío! Haz lo que se te ordena. Me encontrarás, si Allah quiere, entre los pacientes.",
+        "relevance": "Este versículo describe la visión de Ibrahim y la aceptación de su hijo."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 37:103-107",
+        "reference_text": "Sura As-Saffat, versículos 103-107",
+        "content": "فَلَمَّآ أَسْلَمَا وَتَلَّهُۥ لِلْجَبِينِ ۝ وَنَـٰدَيْنَـٰهُ أَن يَـٰٓإِبْرَٰهِيمُ ۝ قَدْ صَدَّقْتَ ٱلرُّءْيَآ ۚ إِنَّا كَذَٰلِكَ نَجْزِى ٱلْمُحْسِنِينَ ۝ إِنَّ هَـٰذَا لَهُوَ ٱلْبَلَـٰٓؤُا۟ ٱلْمُبِينُ ۝ وَفَدَيْنَـٰهُ بِذِبْحٍ عَظِيمٍ",
+        "translation": "Luego cuando ambos se hubieron sometido y lo hubo tumbado sobre la frente, Lo llamamos: ¡Oh Ibrahim! Has confirmado la visión. Así retribuimos a los bienhechores. Esta era una prueba manifiesta. Y Lo redimimos con una inmolación generosa.",
+        "relevance": "Estos versículos describen la sumisión y el rescate."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Dhabh",
+        "arabic_term": "ذبح",
+        "definition": "Inmolación, sacrificio. La prueba del sacrificio de Ibrahim.",
+        "pronunciation": "dhah-bah"
+      },
+      {
+        "id": 2,
+        "term": "Fadaynahu",
+        "arabic_term": "فديناه",
+        "definition": "Lo redimimos. Allah reemplazó al hijo por un cordero.",
+        "pronunciation": "fa-day-na-hu"
+      }
+    ]
+  },
+  "lessons_from_ibrahim": {
+    "title": "Las lecciones de la historia de Ibrahim",
+    "title_arabic": "دروس من قصة إبراهيم",
+    "introduction": "Ibrahim (عليه السلام) es llamado en el Corán «Khalilullah» — el amigo íntimo de Allah. Su historia contiene lecciones atemporales: el rechazo de la idolatría, la confianza en Allah ante la prueba, la sumisión total, y la construcción de una Casa para la adoración. El Corán lo cita como modelo para la humanidad.",
+    "conclusion": "Ibrahim cumplió todas las pruebas. Su descendencia incluye a Isma'il, Ishaq, Ya'qub, y los profetas hasta Muhammad (ﷺ). Es el padre de los creyentes y un modelo de fe pura.",
+    "moral_lesson": "Esta historia nos enseña a seguir el ejemplo de Ibrahim: el monoteísmo puro, la obediencia, la confianza en Allah, y la construcción de lo que une a los creyentes.",
+    "historical_location": "De Mesopotamia a La Meca",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lessons_from_ibrahim_chapter_1",
+        "title": "Un modelo para la humanidad",
+        "content": "El Corán dice: «Ibrahim era una comunidad por sí solo, sometido a Allah, monoteísta puro, y no era de los politeístas.» (16:120) Ibrahim encarna la fe pura. Se opuso a su padre, a su pueblo, e incluso a un rey, en nombre de la verdad. Fue arrojado al fuego, pero Allah lo protegió. Construyó la Kaaba con su hijo. Aceptó sacrificar a su hijo cuando Allah se lo ordenó. Cada prueba fortaleció su fe."
+      },
+      {
+        "id": "lessons_from_ibrahim_chapter_2",
+        "title": "El linaje de los profetas",
+        "content": "El Corán establece a Ibrahim en el linaje de los elegidos: «Allah eligió a Adam, Noé, la familia de Ibrahim y la familia de Imran por encima de todo el mundo.» (3:33) Ibrahim es el padre de los profetas. Isma'il e Ishaq, sus hijos, fueron profetas. Ya'qub, Yusuf, Musa, Isa y Muhammad (que la paz sea con todos ellos) están entre sus descendientes. La invocación de Ibrahim — «Haz de nosotros Tus sometidos y de nuestra descendencia una comunidad sometida a Ti» — fue aceptada: los musulmanes son la comunidad de Ibrahim."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 16:120",
+        "reference_text": "Sura An-Nahl, versículo 120",
+        "content": "إِنَّ إِبْرَٰهِيمَ كَانَ أُمَّةًۭ قَانِتًۭا لِّلَّهِ حَنِيفًۭا وَلَمْ يَكُ مِنَ ٱلْمُشْرِكِينَ",
+        "translation": "Ibrahim era una comunidad por sí solo, sometido a Allah, monoteísta puro, y no era de los politeístas.",
+        "relevance": "Este versículo describe a Ibrahim como modelo único."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 3:33",
+        "reference_text": "Sura Al 'Imran, versículo 33",
+        "content": "إِنَّ ٱللَّهَ ٱصْطَفَىٰٓ ءَادَمَ وَنُوحًۭا وَءَالَ إِبْرَٰهِيمَ وَءَالَ عِمْرَٰنَ عَلَى ٱلْعَـٰلَمِينَ",
+        "translation": "Allah eligió a Adam, Noé, la familia de Ibrahim y la familia de Imran por encima de todo el mundo.",
+        "relevance": "Este versículo establece el lugar de Ibrahim entre los elegidos de Allah."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Khalilullah",
+        "arabic_term": "خليل الله",
+        "definition": "El amigo íntimo de Allah. Título dado a Ibrahim en la tradición islámica.",
+        "pronunciation": "kha-lil ul-lah"
+      },
+      {
+        "id": 2,
+        "term": "Ibra",
+        "arabic_term": "عبرة",
+        "definition": "Ejemplo o lección. Las historias de los profetas son ejemplos para la humanidad.",
+        "pronunciation": "ib-ra"
+      }
+    ]
+  }
+}

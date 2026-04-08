@@ -1,0 +1,515 @@
+{
+  "isa_birth": {
+    "title": "Isa'nın mucizevi doğumu",
+    "title_arabic": "مولد عيسى المعجزي",
+    "introduction": "Isa (عيسى ابن مريم عليه السلام), Meryem'in oğlu İsa, en büyük peygamberlerden biridir. Kur'an şöyle der: \"Ona apaçık deliller verdik ve onu Ruhu'l-Kudüs ile destekledik.\" (2:253) Doğumu mucizeviydi: Meryem (Maryam) babasız, Allah'ın kelimesiyle hamile kaldı. Uzak bir yere çekildi ve bir hurma ağacının altında doğurdu.",
+    "conclusion": "Meryem çocukla birlikte kavmine döndü. Onu suçladıklarında, bebek Isa onu savunmak için beşikten konuştu. Böylece Allah gücünü gösterdi: babasız bir çocuk, doğumundan itibaren konuşan.",
+    "moral_lesson": "Bu hikaye bize Allah'ın dilediği gibi yarattığını öğretir. Isa'nın doğumu alemlere bir işarettir ve Meryem saflık ve ibadetin bir örneğidir.",
+    "historical_location": "Filistin (Beytüllahim)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "isa_birth_chapter_1",
+        "title": "Meryem'e müjde",
+        "content": "Kur'an şöyle bildirir: \"Melekler dedi ki: Ey Meryem! Allah seni seçti ve temizledi; seni alemlerin kadınlarından üstün kıldı. Ey Meryem! Rabbine itaatkâr ol; secde edenlerle birlikte secde et ve rükû edenlerle birlikte rükû et.\" (3:42-43) Melekler Meryem'e Allah'ın kelimesiyle yaratılmış bir oğlu olacağını müjdeledi: \"Ol!\" Meryem sordu: \"Bana bir erkek dokunmadığı halde nasıl oğlum olabilir?\" Melek cevap verdi: \"Böyle olacak. Allah dilediğini yaratır. Bir şeye hükmettiğinde ona sadece 'Ol!' der ve o da olur.\" (3:47)"
+      },
+      {
+        "id": "isa_birth_chapter_2",
+        "title": "Hurma ağacı altında doğum",
+        "content": "Kur'an şöyle der: \"Onu taşıdı ve onunla uzak bir yere çekildi. Doğum sancıları onu hurma ağacının gövdesine sürükledi. Dedi: Keşke bundan önce ölseydim ve tamamen unutulsaydım! Altından bir ses ona seslendi: Üzülme. Rabbin ayaklarının altına bir dere koydu. Hurma ağacının gövdesini kendine doğru salla: üzerine taze olgun hurmalar düşecek.\" (19:22-25) Meryem yalnız doğurdu, Allah tarafından desteklendi. Hurma yedi ve dereden içti."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 3:42-43",
+        "reference_text": "Âl-i İmran Suresi, 42-43. ayetler",
+        "content": "وَإِذْ قَالَتِ ٱلْمَلَـٰٓئِكَةُ يَـٰمَرْيَمُ إِنَّ ٱللَّهَ ٱصْطَفَىٰكِ وَطَهَّرَكِ وَٱصْطَفَىٰكِ عَلَىٰ نِسَآءِ ٱلْعَـٰلَمِينَ",
+        "translation": "And when the angels said: O Mary! Allah has chosen you and purified you; He has chosen you above the women of the worlds.",
+        "relevance": "Bu ayet Meryem'in Allah tarafından seçilmesini tesis eder."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 19:22-25",
+        "reference_text": "Meryem Suresi, 22-25. ayetler",
+        "content": "فَحَمَلَتْهُ فَٱنتَبَذَتْ بِهِۦ مَكَانًۭا قَصِيًّۭا ۝ فَأَجَآءَهَا ٱلْمَخَاضُ إِلَىٰ جِذْعِ ٱلنَّخْلَةِ",
+        "translation": "She conceived him and withdrew with him to a distant place. The pains of childbirth drove her to the trunk of a palm tree.",
+        "relevance": "Bu ayet Isa'nın mucizevi doğumunu tasvir eder."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Isa",
+        "arabic_term": "عيسى",
+        "definition": "Arapça'da İsa. Meryem'in oğlu, Allah'ın peygamberi, İsrailoğullarının mesihi.",
+        "pronunciation": "i-sa"
+      },
+      {
+        "id": 2,
+        "term": "Maryam",
+        "arabic_term": "مريم",
+        "definition": "Arapça'da Meryem. Isa'nın annesi, alemlerin kadınlarından seçilmiş.",
+        "pronunciation": "ma-ryam"
+      }
+    ]
+  },
+  "isa_cradle": {
+    "title": "Isa beşikten konuşuyor",
+    "title_arabic": "كلام عيسى في المهد",
+    "introduction": "Meryem çocuğuyla kavmine döndü. İnsanlar onu günah işlemekle suçladı. Namuslu bir kadın kocasız nasıl çocuk sahibi olabilirdi? Meryem cevap vermedi; çocuğu işaret etti. Dediler ki: \"Beşikteki bir bebekle nasıl konuşuruz?\"",
+    "conclusion": "Isa sonra annesini savunmak ve misyonunu ilan etmek için beşikten konuştu. Dedi: \"Ben Allah'ın kuluyum. Bana Kitabı verdi ve beni peygamber yaptı.\" Bu mucize topluluğu hayrete düşürdü.",
+    "moral_lesson": "Bu hikaye bize Allah'ın dilediğini, dilediği zaman konuşturabileceğini öğretir. Isa'nın beşiği düşünenler için bir işarettir.",
+    "historical_location": "Filistin",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "isa_cradle_chapter_1",
+        "title": "Suçlama",
+        "content": "Kur'an şöyle bildirir: \"Onu taşıyarak kavmine getirdi. Dediler: Ey Meryem! Çok tuhaf bir şey yaptın! Harun'un kız kardeşi, baban kötü bir adam değildi ve annen fahişe değildi.\" (19:27-28) Meryem'in kavmi şok oldu. Nasıl çocuk sahibi olabildiğini anlamadılar. Meryem, ilahi bir ilhamla, çocuğu işaret etti."
+      },
+      {
+        "id": "isa_cradle_chapter_2",
+        "title": "Beşikten gelen söz",
+        "content": "Kur'an şöyle der: \"Dediler: Beşikteki bir bebekle nasıl konuşuruz? Dedi: Ben Allah'ın kuluyum. Bana Kitabı verdi ve beni peygamber yaptı. Beni nerede olursam olayım mübarek kıldı ve bana yaşadığım sürece namaz ve zekatı emretti ve anneme iyilik. Beni zorba veya bedbaht yapmadı. Doğduğum gün, öleceğim gün ve diriltileceğim gün bana selam olsun.\" (19:29-33) Isa misyonuna şahitlik etmek ve annesini aklamak için beşikten konuştu."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 19:27-28",
+        "reference_text": "Meryem Suresi, 27-28. ayetler",
+        "content": "فَأَتَتْ بِهِۦ قَوْمَهَا تَحْمِلُهُۥ ۖ قَالُوا۟ يَـٰمَرْيَمُ لَقَدْ جِئْتِ شَيْـًۭٔا فَرِيًّۭا",
+        "translation": "She came to her people carrying him. They said: O Mary! You have done something monstrous!",
+        "relevance": "Bu ayet Meryem'e yönelik suçlamayı tasvir eder."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 19:30-33",
+        "reference_text": "Meryem Suresi, 30-33. ayetler",
+        "content": "قَالَ إِنِّى عَبْدُ ٱللَّهِ ءَاتَىٰنِىَ ٱلْكِتَـٰبَ وَجَعَلَنِى نَبِيًّۭا",
+        "translation": "He said: I am the servant of Allah. He has given me the Book and made me a prophet.",
+        "relevance": "Bu ayet Isa'nın beşikten sözlerini içerir."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Mihrab",
+        "arabic_term": "محراب",
+        "definition": "Namaz yeri. Meryem Allah'a ibadet etmek için mihraba çekilirdi.",
+        "pronunciation": "mih-rab"
+      },
+      {
+        "id": 2,
+        "term": "Abdullah",
+        "arabic_term": "عبد الله",
+        "definition": "Allah'ın kulu. Isa kendini beşikte böyle tanımladı.",
+        "pronunciation": "ab-dul-lah"
+      }
+    ]
+  },
+  "isa_childhood": {
+    "title": "Isa'nın çocukluğu",
+    "title_arabic": "طفولة عيسى",
+    "introduction": "Isa Allah'ın koruması altında büyüdü. Çocukluğundan itibaren olağanüstü işaretler gösterdi. Kur'an şöyle der: \"Ona Kitabı, hikmeti, Tevrat'ı ve İncil'i öğretecek.\" (3:48) Kutsal metinleri öğrendi ve peygamberlik misyonuna hazırlandı.",
+    "conclusion": "Isa dindar ve bilge bir çocuktu. Olgunlukla konuşuyordu ve misyonunu önceden haber veren eylemler zaten gerçekleştiriyordu. İsrail alimleri bilgisine hayret ettiler.",
+    "moral_lesson": "Bu hikaye bize peygamberlerin çocukluktan hazırlandığını öğretir. Hikmet ve takva genç yaştan itibaren yetiştirilir.",
+    "historical_location": "Filistin (Nasıra)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "isa_childhood_chapter_1",
+        "title": "Erken hikmet",
+        "content": "Kur'an Allah'ın Meryem'e şöyle dediğini bildirir: \"Beşikte ve olgunlukta insanlarla konuşacak ve salihlerden olacak.\" (3:46) Isa hikmette büyüdü. Ehl-i Kitap ile görüşür ve onlarla tartışırdı. Bilgisi yaşını aşıyordu. Sadece hakikat ve iyilik sözleri söylerdi."
+      },
+      {
+        "id": "isa_childhood_chapter_2",
+        "title": "Misyon için hazırlık",
+        "content": "Kur'an şöyle der: \"Allah dediğinde: Ey Meryem oğlu Isa! Sana ve annene olan nimetimi hatırla, seni Ruhu'l-Kudüs ile desteklediğimde. Beşikte ve olgunlukta insanlarla konuştun.\" (5:110) Çocukluktan itibaren Isa Ruhu'l-Kudüs (Cebrail) ile güçlendirildi. İsrailoğullarını tevhide çağırmaya ve onları dosdoğru yola yönlendirmeye hazırlandı."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 3:46",
+        "reference_text": "Âl-i İmran Suresi, 46. ayet",
+        "content": "وَيُكَلِّمُ ٱلنَّاسَ فِى ٱلْمَهْدِ وَكَهْلًۭا وَمِنَ ٱلصَّـٰلِحِينَ",
+        "translation": "He will speak to the people in the cradle and in maturity, and he will be among the righteous.",
+        "relevance": "Bu ayet Isa'nın beşikten konuşmasını ve olgunluğunu müjdeler."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 3:48",
+        "reference_text": "Âl-i İmran Suresi, 48. ayet",
+        "content": "وَيُعَلِّمُهُ ٱلْكِتَـٰبَ وَٱلْحِكْمَةَ وَٱلتَّوْرَىٰةَ وَٱلْإِنجِيلَ",
+        "translation": "And He will teach him the Book, wisdom, the Torah and the Gospel.",
+        "relevance": "Bu ayet Isa'nın aldığı ilahi öğretimi gösterir."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Ruh al-Qudus",
+        "arabic_term": "روح القدس",
+        "definition": "Kutsal Ruh. Isa'yı güçlendiren Cebrail meleği.",
+        "pronunciation": "rouh al-qu-dous"
+      },
+      {
+        "id": 2,
+        "term": "Tawrat",
+        "arabic_term": "التوراة",
+        "definition": "Tevrat. Musa'ya vahyedilen kitap, Isa tarafından tasdik edildi.",
+        "pronunciation": "at-taw-ra"
+      }
+    ]
+  },
+  "isa_prophecy": {
+    "title": "Isa'nın peygamberliği",
+    "title_arabic": "نبوة عيسى",
+    "introduction": "Isa İsrailoğullarına peygamber olarak gönderildi. Kur'an şöyle der: \"Meryem oğlu Isa dediğinde: Ey İsrailoğulları! Ben size Allah'ın elçisiyim, benden önce gelen Tevrat'ı tasdik eden ve benden sonra gelecek, adı Ahmed olan bir elçiyi müjdeleyen.\" (61:6) İncil'i getirdi ve Tevrat'ı tasdik etti.",
+    "conclusion": "Isa kavmini yalnızca Allah'a ibadet etmeye, Tevrat'ı takip etmeye ve Peygamber Muhammed'in gelişine hazırlanmaya çağırdı. Birçoğu inandı; diğerleri onu reddetti ve ona karşı komplo kurdu.",
+    "moral_lesson": "Bu hikaye bize peygamberlerin birbirini tasdik ettiğini öğretir. Isa Muhammed'i müjdeledi; peygamberlik zinciri tektir.",
+    "historical_location": "Filistin",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "isa_prophecy_chapter_1",
+        "title": "Tevhide çağrı",
+        "content": "Kur'an şöyle bildirir: \"Isa dedi: Size Rabbinizden bir ayetle geldim. Allah'tan korkun ve bana itaat edin. Allah benim Rabbim ve sizin Rabbinizdir. O'na ibadet edin: işte dosdoğru yol.\" (3:50-51) Isa İsrailoğullarını bidatleri bırakmaya ve saf tevhide dönmeye çağırdı. Onlara Tevrat'ın emirlerini hatırlattı ve doğruluğa davet etti."
+      },
+      {
+        "id": "isa_prophecy_chapter_2",
+        "title": "Ahmed'in müjdesi",
+        "content": "Kur'an şöyle der: \"Meryem oğlu Isa dediğinde: Ey İsrailoğulları! Ben size Allah'ın elçisiyim, benden önce gelen Tevrat'ı tasdik eden ve benden sonra gelecek, adı Ahmed olan bir elçiyi müjdeleyen.\" (61:6) Ahmed Peygamber Muhammed'in isimlerinden biridir. Isa onun gelişini müjdeledi ve gelince ona inanmalarını havarilerine emretti."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 3:50-51",
+        "reference_text": "Âl-i İmran Suresi, 50-51. ayetler",
+        "content": "وَمُصَدِّقًۭا لِّمَا بَيْنَ يَدَىَّ مِنَ ٱلتَّوْرَىٰةِ وَلِأُحِلَّ لَكُم بَعْضَ ٱلَّذِى حُرِّمَ عَلَيْكُمْ ۚ وَجِئْتُكُم بِـَٔايَةٍۢ مِّن رَّبِّكُمْ فَٱتَّقُوا۟ ٱللَّهَ وَأَطِيعُونِ",
+        "translation": "And confirming what is in the Torah, and to permit you some of what was forbidden to you. I have come to you with a sign from your Lord. Fear Allah and obey me.",
+        "relevance": "Bu ayet Isa'nın kavmine çağrısını içerir."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 61:6",
+        "reference_text": "Saff Suresi, 6. ayet",
+        "content": "وَإِذْ قَالَ عِيسَى ٱبْنُ مَرْيَمَ يَـٰبَنِىٓ إِسْرَٰٓءِيلَ إِنِّى رَسُولُ ٱللَّهِ إِلَيْكُم مُّصَدِّقًۭا لِّمَا بَيْنَ يَدَىَّ مِنَ ٱلتَّوْرَىٰةِ وَمُبَشِّرًۢا بِرَسُولٍۢ يَأْتِى مِنۢ بَعْدِى ٱسْمُهُۥٓ أَحْمَدُ",
+        "translation": "And when Isa said: O Children of Israel! I am the messenger of Allah, confirming the Torah and giving glad tidings of a messenger named Ahmad.",
+        "relevance": "Bu ayet Peygamber Muhammed'in Isa tarafından müjdelenmesini tesis eder."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Injil",
+        "arabic_term": "الإنجيل",
+        "definition": "İncil. Allah tarafından Isa'ya vahyedilen kitap.",
+        "pronunciation": "al-in-jil"
+      },
+      {
+        "id": 2,
+        "term": "Ahmad",
+        "arabic_term": "أحمد",
+        "definition": "Peygamber Muhammed'in isimlerinden biri. Isa onu kavmine müjdeledi.",
+        "pronunciation": "ah-mad"
+      }
+    ]
+  },
+  "isa_miracles": {
+    "title": "Isa'nın mucizeleri",
+    "title_arabic": "معجزات عيسى",
+    "introduction": "Allah peygamberliğini kanıtlamak için Isa'ya dikkat çekici mucizeler bahşetti. Kur'an şöyle der: \"Size Rabbinizden bir ayetle geliyorum: Sizin için çamurdan kuş şeklinde bir şey oluşturacağım, ona üfleyeceğim ve Allah'ın izniyle kuş olacak.\" (3:49) Doğuştan körü ve cüzamlıyı iyileştirdi ve ölüleri diriltti.",
+    "conclusion": "Bu mucizeler İsrailoğulları için işaretlerdi. Isa'nın gerçekten Allah'ın peygamberi olduğunu kanıtladılar. Ama birçoğu kibirden dolayı inanmayı reddetti.",
+    "moral_lesson": "Bu hikaye bize mucizelerin Allah'tan işaretler olduğunu öğretir. Sadece hakikati tasdik etmeye hizmet ederler; iman kalbin bir seçimi olarak kalır.",
+    "historical_location": "Filistin",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "isa_miracles_chapter_1",
+        "title": "Çamur kuşları",
+        "content": "Kur'an şöyle bildirir: \"Sizin için çamurdan kuş şeklinde bir şey oluşturacağım, ona üfleyeceğim ve Allah'ın izniyle kuş olacak.\" (3:49) Isa çamur aldı, kuş şeklinde yoğurdu, Allah'ın izniyle üfledi ve kuş canlı olarak uçtu. Bu mucize tanıkları hayrete düşürdü ve hayatın yalnızca Allah'tan geldiğini kanıtladı."
+      },
+      {
+        "id": "isa_miracles_chapter_2",
+        "title": "İyileştirmeler ve diriliş",
+        "content": "Kur'an şöyle der: \"Doğuştan körü ve cüzamlıyı iyileştiriyorum ve Allah'ın izniyle ölüleri diriltiyorum.\" (3:49) Isa Allah'ın iradesiyle iyileştirdi. Doğuştan kör görebildi, cüzamlı temizlendi, ölü kalktı. Her mucize bir hatırlatmaydı: tüm güç Allah'a aittir. Isa sadece O'nun kulu ve elçisiydi."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 3:49",
+        "reference_text": "Âl-i İmran Suresi, 49. ayet",
+        "content": "وَأَنۢبِئُكُم بِمَا تَأْكُلُونَ وَمَا تَدَّخِرُونَ فِى بُيُوتِكُمْ ۚ إِنَّ فِى ذَٰلِكَ لَـَٔايَةًۭ لَّكُمْ إِن كُنتُم مُّؤْمِنِينَ",
+        "translation": "I come to you with a sign: I form a bird from clay, I breathe and it becomes a bird by the permission of Allah.",
+        "relevance": "Bu ayet çamur kuşları mucizesini tasvir eder."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 5:110",
+        "reference_text": "Mâide Suresi, 110. ayet",
+        "content": "إِذْ قَالَ ٱللَّهُ يَـٰعِيسَى ٱبْنَ مَرْيَمَ ٱذْكُرْ نِعْمَتِى عَلَيْكَ وَعَلَىٰ وَالِدَتِكَ إِذْ أَيَّدتُّكَ بِرُوحِ ٱلْقُدُسِ",
+        "translation": "When Allah said: O Isa! Remember My favor: I strengthened you with the Holy Spirit.",
+        "relevance": "Bu ayet Isa'ya bahşedilen mucizeleri hatırlatır."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Ayat",
+        "arabic_term": "آية",
+        "definition": "İşaret, mucize. Isa'nın mucizeleri Allah'tan işaretlerdi.",
+        "pronunciation": "a-ya"
+      },
+      {
+        "id": 2,
+        "term": "Bi-idhni Allah",
+        "arabic_term": "بإذن الله",
+        "definition": "Allah'ın izniyle. Isa mucizeleri ilahi iradeyle gerçekleştirdi.",
+        "pronunciation": "bi-idh-ni-llah"
+      }
+    ]
+  },
+  "isa_disciples": {
+    "title": "Isa'nın havarileri",
+    "title_arabic": "الحواريون",
+    "introduction": "Isa'nın sadık havarileri vardı, Havariyun. Kur'an şöyle der: \"Havarilere vahyettiğimde: Bana ve elçime inanın. Dediler: İnandık; bizim teslim olduğumuza şahit ol.\" (5:111) Isa'ya inandılar ve onu takip ettiler. İnsanları Allah'a çağırmada ona yardım ettiler.",
+    "conclusion": "Havariler güvence için Isa'dan gökten bir sofra indirmesini istedi. Allah inanmaları koşuluyla taleplerine cevap verdi. İnananlar güçlendirildi; şüphe edenler sapıttı.",
+    "moral_lesson": "Bu hikaye bize peygamberlerin havarilerinin ek kanıt talep etmeden inanması gerektiğini öğretir. İman işaretlerden önce gelir.",
+    "historical_location": "Filistin",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "isa_disciples_chapter_1",
+        "title": "Havarilerin imanı",
+        "content": "Kur'an şöyle bildirir: \"Ey inananlar! Allah'ın dostları olun, Meryem oğlu Isa havarilere dediği gibi: Allah için dostlarım kim? Havariler dedi: Biz Allah'ın dostlarıyız. İsrailoğullarından bir grup inandı, bir grup inkar etti. İnananları düşmanlarına karşı güçlendirdik ve galip oldular.\" (61:14) Isa'nın havarileri onu destekleyen samimi müminlerdi."
+      },
+      {
+        "id": "isa_disciples_chapter_2",
+        "title": "Sofra talebi",
+        "content": "Kur'an şöyle der: \"Havariler dedi: Ey Meryem oğlu Isa! Rabbin bize gökten bir sofra indirebilir mi? Dedi: İnananlarsanız Allah'tan korkun. Dediler: Ondan yemek ve kalplerimizin tatmin olmasını istiyoruz ve bize doğru söylediğini bileceğiz ve buna şahitlerden olacağız.\" (5:112-113) Havariler bir işaret istedi; Isa onları korkuya ve imana davet etti."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 5:111",
+        "reference_text": "Mâide Suresi, 111. ayet",
+        "content": "وَإِذْ أَوْحَيْتُ إِلَى ٱلْحَوَارِيِّـۧنَ أَنْ ءَامِنُوا۟ بِى وَبِرَسُولِى قَالُوا۟ ءَامَنَّا وَٱشْهَدْ بِأَنَّنَا مُسْلِمُونَ",
+        "translation": "And when I inspired the apostles: Believe in Me and in My messenger. They said: We believe; bear witness that we are submitted.",
+        "relevance": "Bu ayet Isa'nın havarilerinin imanını tasvir eder."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 5:112-113",
+        "reference_text": "Mâide Suresi, 112-113. ayetler",
+        "content": "إِذْ قَالَ ٱلْحَوَارِيُّونَ يَـٰعِيسَى ٱبْنَ مَرْيَمَ هَلْ يَسْتَطِيعُ رَبُّكَ أَن يُنَزِّلَ عَلَيْنَا مَآئِدَةًۭ مِّنَ ٱلسَّمَآءِ",
+        "translation": "The apostles said: O Isa! Can your Lord send down to us a table spread from heaven?",
+        "relevance": "Bu ayet havarilerin talebini anlatır."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Hawariyun",
+        "arabic_term": "الحواريون",
+        "definition": "Havariler, Isa'nın öğrencileri. Ona inandılar ve onu desteklediler.",
+        "pronunciation": "al-ha-wa-ri-yun"
+      },
+      {
+        "id": 2,
+        "term": "Ansar",
+        "arabic_term": "أنصار",
+        "definition": "Dostlar, destekçiler. Havariler Allah için Isa'nın ansarıydı.",
+        "pronunciation": "an-sar"
+      }
+    ]
+  },
+  "isa_table": {
+    "title": "Sofra",
+    "title_arabic": "المائدة",
+    "introduction": "Havariler Isa'dan gökten bir sofra indirmesini istedi. Isa Allah'a dua etti. Kur'an şöyle der: \"Ey Allahımız, Rabbimiz! Üzerimize gökten bir sofra indir ki bizim için bir bayram olsun — aramızdaki ilk ve son için — ve Senden bir işaret. Bize rızık ver, çünkü Sen rızık verenlerin en hayırlısısın.\" (5:114)",
+    "conclusion": "Allah talebe cevap verdi. Gökten yiyeceklerle dolu bir sofra indi. Ama Allah uyardı: bu işaretten sonra inkar eden, hiçbir varlığa vermediği bir cezaya çarptırılacak. Sofra kalpler için bir testti.",
+    "moral_lesson": "Bu hikaye bize ilahi işaretlerin nimet veya deneme olabileceğini öğretir. Şükür ve iman anahtardır.",
+    "historical_location": "Filistin",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "isa_table_chapter_1",
+        "title": "Isa'nın duası",
+        "content": "Kur'an şöyle bildirir: \"Meryem oğlu Isa dedi: Ey Allahımız, Rabbimiz! Üzerimize gökten bir sofra indir ki bizim için bir bayram olsun — aramızdaki ilk ve son için — ve Senden bir işaret. Bize rızık ver, çünkü Sen rızık verenlerin en hayırlısısın. Allah dedi: Onu size indireceğim. Ama sizden sonra inkar eden, hiçbir varlığa vermediğim bir cezayla cezalandıracağım.\" (5:114-115) Isa dua etti; Allah bir koşulla cevap verdi."
+      },
+      {
+        "id": "isa_table_chapter_2",
+        "title": "İşaret ve uyarı",
+        "content": "Sofra indi. Müminler ondan yedi ve imanları güçlendi. Ama bazıları işareti gördükten sonra inkarında ısrar etti. Kur'an şöyle sonuçlandırır: \"Allah dediğinde: Ey Meryem oğlu Isa! İnsanlara beni ve annemi Allah'tan başka iki ilah edinin mi dedin? Dedi: Seni tenzih ederim! Söylemeye hakkım olmayanı söylemek bana düşmez.\" (5:116) Sofra bir işaretti; nankörlük cezalandırıldı."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 5:114",
+        "reference_text": "Mâide Suresi, 114. ayet",
+        "content": "قَالَ عِيسَى ٱبْنُ مَرْيَمَ ٱللَّهُمَّ رَبَّنَآ أَنزِلْ عَلَيْنَا مَآئِدَةًۭ مِّنَ ٱلسَّمَآءِ تَكُونُ لَنَا عِيدًۭا لِّأَوَّلِنَا وَءَاخِرِنَا وَءَايَةًۭ مِّنكَ ۖ وَٱرْزُقْنَا وَأَنتَ خَيْرُ ٱلرَّـٰزِقِينَ",
+        "translation": "Isa said: O Allah! Send down to us a table spread from heaven, a feast for us and a sign from You. Provide for us; You are the best of providers.",
+        "relevance": "Bu ayet Isa'nın sofra duasını içerir."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 5:115",
+        "reference_text": "Mâide Suresi, 115. ayet",
+        "content": "قَالَ ٱللَّهُ إِنِّى مُنَزِّلُهَا عَلَيْكُمْ ۖ فَمَن يَكْفُرْ بَعْدُ مِنكُمْ فَإِنِّىٓ أُعَذِّبُهُۥ عَذَابًۭا لَّآ أُعَذِّبُهُۥٓ أَحَدًۭا مِّنَ ٱلْعَـٰلَمِينَ",
+        "translation": "Allah said: I will send it down. But whoever disbelieves after that, I will punish him with an unparalleled punishment.",
+        "relevance": "Bu ayet Allah'ın cevabını ve uyarıyı anlatır."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Ma'idah",
+        "arabic_term": "المائدة",
+        "definition": "Sofra. Kur'an'da bu isimde bir sure vardır.",
+        "pronunciation": "al-ma-i-dah"
+      },
+      {
+        "id": 2,
+        "term": "Rizq",
+        "arabic_term": "رزق",
+        "definition": "Rızık, geçim. Sofra gökten bir rızıktı.",
+        "pronunciation": "rizq"
+      }
+    ]
+  },
+  "isa_ascension": {
+    "title": "Isa'nın göğe yükseltilmesi",
+    "title_arabic": "رفع عيسى",
+    "introduction": "İsrailoğullarından kafirler Isa'ya karşı komplo kurdu. Onu öldürdüklerini ve çarmıha gerdiklerini iddia ettiler. Kur'an reddeder: \"Onu öldürmediler, çarmıha germediler; ama onlara öyle göründü.\" (4:157) Allah Isa'yı diri olarak Kendine yükseltti. Kıyamet gününden önce geri dönecek.",
+    "conclusion": "Isa çarmıhta ölmedi. Allah onu kurtardı ve yükseltti. Allah'ın yanında, diridir. Kıyamet Gününden önce Deccal ile savaşmak ve adaleti tesis etmek için tekrar inecek.",
+    "moral_lesson": "Bu hikaye bize Allah'ın peygamberlerini koruduğunu öğretir. Isa hakkındaki İslami hakikat, onun çarmıha gerildiğini iddia eden inançlardan farklıdır. O diridir ve geri dönecektir.",
+    "historical_location": "Filistin",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "isa_ascension_chapter_1",
+        "title": "Komplo ve kurtuluş",
+        "content": "Kur'an şöyle bildirir: \"Mesih Meryem oğlu Isa Allah'ın elçisini öldürdük dedikleri için. Ama onu öldürmediler, çarmıha germediler; onlara öyle göründü. Onun hakkında ayrılığa düşenler bundan şüphededir; buna dair bilgileri yok, sadece zanna uyuyorlar. Ve kesinlikle onu öldürmediler. Ama Allah onu Kendine yükseltti. Allah Aziz ve Hakim'dir.\" (4:157-158) Allah Isa'yı kurtardı ve yükseltti. Kafirlere bir görünüm verildi; Isa korundu."
+      },
+      {
+        "id": "isa_ascension_chapter_2",
+        "title": "Isa'nın dönüşü",
+        "content": "Peygamber geleneği Isa'nın kıyamet günlerinde yeryüzüne ineceğini bildirir. Deccal ile savaşacak, haçı kıracak, domuzu öldürecek ve İslam'a çağıracak. Adaletle hükmedecek, sonra ölecek ve gömülecek. Dönüşü Saat'in büyük bir işaretidir. Kur'an şöyle der: \"O Saat'in bilgisidir. Bundan şüphe etmeyin. Bana uyun; işte dosdoğru yol.\" (43:61)"
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 4:157-158",
+        "reference_text": "Nisa Suresi, 157-158. ayetler",
+        "content": "وَقَوْلِهِمْ إِنَّا قَتَلْنَا ٱلْمَسِيحَ عِيسَى ٱبْنَ مَرْيَمَ رَسُولَ ٱللَّهِ وَمَا قَتَلُوهُ وَمَا صَلَبُوهُ وَلَـٰكِن شُبِّهَ لَهُمْ ۚ وَإِنَّ ٱلَّذِينَ ٱخْتَلَفُوا۟ فِيهِ لَفِى شَكٍّۢ مِّنْهُ ۚ مَا لَهُم بِهِۦ مِنْ عِلْمٍ إِلَّا ٱتِّبَاعَ ٱلظَّنِّ ۚ وَمَا قَتَلُوهُ يَقِينًۢا ۝ بَل رَّفَعَهُ ٱللَّهُ إِلَيْهِ ۚ وَكَانَ ٱللَّهُ عَزِيزًا حَكِيمًۭا",
+        "translation": "They did not kill him, they did not crucify him; but it was made to appear so to them. Allah raised him to Himself. Allah is Almighty and Wise.",
+        "relevance": "Bu ayetler Isa'nın çarmıha gerilmediğini ve Allah'ın onu yükselttiğini tesis eder."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 3:55",
+        "reference_text": "Âl-i İmran Suresi, 55. ayet",
+        "content": "إِذْ قَالَ ٱللَّهُ يَـٰعِيسَىٰ إِنِّى مُتَوَفِّيكَ وَرَافِعُكَ إِلَىَّ وَمُطَهِّرُكَ مِنَ ٱلَّذِينَ كَفَرُوا۟",
+        "translation": "When Allah said: O Isa! I will take you to Me, raise you to Me and purify you from those who disbelieve.",
+        "relevance": "Bu ayet Isa'nın Allah tarafından yükseltilmesini tasdik eder."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Raf'",
+        "arabic_term": "رفع",
+        "definition": "Yükseltme. Allah Isa'yı Kendine diri olarak yükseltti.",
+        "pronunciation": "raf'"
+      },
+      {
+        "id": 2,
+        "term": "Dajjal",
+        "arabic_term": "الدجال",
+        "definition": "Deccal. Isa dönüşünde onunla savaşacak.",
+        "pronunciation": "ad-daj-jal"
+      }
+    ]
+  },
+  "lessons_from_isa": {
+    "title": "Isa hikayesinden dersler",
+    "title_arabic": "دروس من قصة عيسى",
+    "introduction": "Isa beş büyük peygamberden (Ulul Azm) biridir: Nuh, İbrahim, Musa, Isa ve Muhammed. Hikayesi Allah'ın gücünü, Meryem'in saflığını ve peygamberlik mesajının sürekliliğini öğretir. Kur'an şöyle der: \"Meryem oğlu Mesih sadece bir elçiydi. Ondan önce elçiler gelip geçti.\" (5:75)",
+    "conclusion": "Isa ilahi değildir; Allah'ın kulu ve elçisidir. Muhammed'i müjdeledi. Isa'ya inanmak mesajına inanmaktır: Allah'ın birliği, itaat ve doğruluk.",
+    "moral_lesson": "Bu hikaye bize tüm peygamberlerin aynı mesajı vaaz ettiğini öğretir: yalnızca Allah'a ibadet edin. Isa Muhammed ile zirveye ulaşan peygamberlik zincirinde bir halkadır.",
+    "historical_location": "Filistin",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lessons_from_isa_chapter_1",
+        "title": "Isa, Allah'ın kulu",
+        "content": "Kur'an şöyle der: \"Meryem oğlu Mesih sadece bir elçiydi. Ondan önce elçiler gelip geçti. Annesi doğru sözlü bir kadındı. Yemek yiyorlardı. Bak onlara ayetleri nasıl açıklıyoruz, sonra bak nasıl yüz çeviriyorlar.\" (5:75) Isa diğerleri gibi bir peygamberdi. Yerdi, içerdi, uyurdu. İlahi değildi. Yalnızca Allah'a ibadete çağırdı."
+      },
+      {
+        "id": "lessons_from_isa_chapter_2",
+        "title": "Peygamberlik zinciri",
+        "content": "Kur'an şöyle bildirir: \"Allah dediğinde: Ey Meryem oğlu Isa! İnsanlara beni ve annemi Allah'tan başka iki ilah edinin mi dedin? Dedi: Seni tenzih ederim! Söylemeye hakkım olmayanı söylemek bana düşmez. Söyleseydim bilirdin.\" (5:116) Isa asla ilahi olduğunu iddia etmedi. Tevrat'ı tasdik etti, İncil'i getirdi ve Muhammed'i müjdeledi. Tüm peygamberlere iman tektir."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 5:75",
+        "reference_text": "Mâide Suresi, 75. ayet",
+        "content": "مَا ٱلْمَسِيحُ ٱبْنُ مَرْيَمَ إِلَّا رَسُولٌۭ قَدْ خَلَتْ مِن قَبْلِهِ ٱلرُّسُلُ",
+        "translation": "The Messiah, son of Mary, was only a messenger. Messengers have passed before him.",
+        "relevance": "Bu ayet Isa'nın diğerleri gibi bir elçi olduğunu tesis eder."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 2:136",
+        "reference_text": "Bakara Suresi, 136. ayet",
+        "content": "قُولُوٓا۟ ءَامَنَّا بِٱللَّهِ وَمَآ أُنزِلَ إِلَيْنَا وَمَآ أُنزِلَ إِلَىٰٓ إِبْرَٰهِـۧمَ وَإِسْمَـٰعِيلَ وَإِسْحَـٰقَ وَيَعْقُوبَ وَٱلْأَسْبَاطِ وَمَآ أُوتِىَ مُوسَىٰ وَعِيسَىٰ وَمَآ أُوتِىَ ٱلنَّبِيُّونَ مِن رَّبِّهِمْ",
+        "translation": "Say: We believe in Allah, in what was revealed to us, in what was revealed to Ibrahim, Ismael, Isaac, Jacob, the tribes, Musa, Isa and the prophets.",
+        "relevance": "Bu ayet Isa dahil tüm peygamberlere imanı birleştirir."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Ulul Azm",
+        "arabic_term": "أولو العزم",
+        "definition": "Azim sahibi peygamberler: Nuh, İbrahim, Musa, Isa, Muhammed.",
+        "pronunciation": "u-lul azm"
+      },
+      {
+        "id": 2,
+        "term": "Tawhid",
+        "arabic_term": "توحيد",
+        "definition": "Tevhit. Isa ve tüm peygamberlerin merkezi mesajı.",
+        "pronunciation": "taw-hid"
+      }
+    ]
+  }
+}

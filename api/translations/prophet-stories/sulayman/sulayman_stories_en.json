@@ -1,0 +1,401 @@
+{
+  "sulayman_kingdom": {
+    "title": "The kingdom of Sulayman",
+    "title_arabic": "ملك سليمان",
+    "introduction": "Sulayman (سليمان عليه السلام), Solomon, is the son of Dawud. He succeeded him as king and prophet. The Quran says: \"And Sulayman inherited from Dawud. He said: O people! We have been taught the speech of birds and we have been given of all things. This is indeed a manifest favour.\" (27:16) Sulayman received a kingdom without equal.",
+    "conclusion": "Sulayman ruled with wisdom. He understood the language of animals and jinn. His kingdom extended over men, jinn and birds.",
+    "moral_lesson": "This story teaches us that wisdom and power come from Allah. Sulayman did not become arrogant; he gave thanks to his Lord.",
+    "historical_location": "Jerusalem, Palestine",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "sulayman_kingdom_chapter_1",
+        "title": "The inheritance of Dawud",
+        "content": "The Quran relates: \"And We gave to Dawud Sulayman. What an excellent servant! He was ever turning in repentance.\" (38:30) Sulayman succeeded his father Dawud. Allah asked him what he desired. Sulayman asked neither for wealth nor power; he asked for a kingdom that none after him would have. Allah granted his request and gave him even more."
+      },
+      {
+        "id": "sulayman_kingdom_chapter_2",
+        "title": "The gifts of Sulayman",
+        "content": "The Quran says: \"He said: O my Lord! Forgive me and grant me a kingdom that none after me will have. You are the Great Bestower. We subjected the wind to him, blowing gently by his command. And the jinn, builders and divers.\" (38:35-37) Sulayman received the wind, the jinn, and the speech of birds. His kingdom was unique in history."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 27:16",
+        "reference_text": "Surah An-Naml, verse 16",
+        "content": "وَوَرِثَ سُلَيْمَـٰنُ دَاوُۥدَ ۖ وَقَالَ يَـٰٓأَيُّهَا ٱلنَّاسُ عُلِّمْنَا مَنطِقَ ٱلطَّيْرِ وَأُوتِينَا مِن كُلِّ شَىْءٍ ۖ إِنَّ هَـٰذَا لَهُوَ ٱلْفَضْلُ ٱلْمُبِينُ",
+        "translation": "Sulayman inherited from Dawud. He said: We have been taught the speech of birds and we have been given of all things. This is a manifest favour.",
+        "relevance": "This verse establishes Sulayman's inheritance and his gifts."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 38:30",
+        "reference_text": "Surah Sad, verse 30",
+        "content": "وَوَهَبْنَا لِدَاوُۥدَ سُلَيْمَـٰنَ ۚ نِعْمَ ٱلْعَبْدُ ۖ إِنَّهُۥٓ أَوَّابٌ",
+        "translation": "We gave to Dawud Sulayman. What an excellent servant! He was ever turning in repentance.",
+        "relevance": "This verse shows Sulayman's piety."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Sulayman",
+        "arabic_term": "سليمان",
+        "definition": "Solomon in Arabic. Son of Dawud, king and prophet.",
+        "pronunciation": "sou-lay-man"
+      },
+      {
+        "id": 2,
+        "term": "Mulk",
+        "arabic_term": "ملك",
+        "definition": "Kingdom. Sulayman received a kingdom without equal.",
+        "pronunciation": "mulk"
+      }
+    ]
+  },
+  "sulayman_wind": {
+    "title": "The wind subjected to Sulayman",
+    "title_arabic": "تسخير الريح لسليمان",
+    "introduction": "Allah subjected the wind to Sulayman. The Quran says: \"And to Sulayman We subjected the wind. The morning wind covered a month's journey and the evening wind a month's journey.\" (34:12) Sulayman could travel at prodigious speed. The wind obeyed his command.",
+    "conclusion": "This miracle allowed Sulayman to cover great distances. His throne was carried by the wind. He visited his kingdom in record time.",
+    "moral_lesson": "This story teaches us that Allah subjects creation to His prophets. The wind, the jinn, the birds — all obey his command.",
+    "historical_location": "Palestine",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "sulayman_wind_chapter_1",
+        "title": "The gift of the wind",
+        "content": "The Quran relates: \"And to Sulayman We subjected the wind. The morning wind covered a month's journey and the evening wind a month's journey. And We made a fountain of molten copper flow for him. And among the jinn, some worked under his command.\" (34:12) The morning wind covered in one hour the distance of a month; the evening wind likewise. Sulayman thus travelled at prodigious speed."
+      },
+      {
+        "id": "sulayman_wind_chapter_2",
+        "title": "The throne carried by the wind",
+        "content": "The Quran says: \"And We subjected the mountains to Dawud. They glorified with him. And the birds. And We did that. And We subjected the wind to Sulayman.\" (38:36) The wind carried Sulayman's throne. He traversed his kingdom in record time. It was a sign of Allah's power."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 34:12",
+        "reference_text": "Surah Saba, verse 12",
+        "content": "وَلِسُلَيْمَـٰنَ ٱلرِّيحَ غُدُوُّهَا شَهْرٌۭ وَرَوَاحُهَا شَهْرٌۭ ۖ وَأَسَلْنَا لَهُۥ عَيْنَ ٱلْقِطْرِ",
+        "translation": "To Sulayman We subjected the wind. The morning wind covered a month's journey and the evening wind a month's journey.",
+        "relevance": "This verse describes the miracle of the wind."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 21:81",
+        "reference_text": "Surah Al-Anbiya, verse 81",
+        "content": "وَلِسُلَيْمَـٰنَ ٱلرِّيحَ عَاصِفَةًۭ تَجْرِى بِأَمْرِهِۦٓ إِلَى ٱلْأَرْضِ ٱلَّتِى بَارَكْنَا فِيهَا",
+        "translation": "To Sulayman the fierce wind that ran by his command towards the land that We have blessed.",
+        "relevance": "This verse confirms the subjection of the wind."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Rih",
+        "arabic_term": "ريح",
+        "definition": "Wind. Allah subjected it to Sulayman.",
+        "pronunciation": "rih"
+      },
+      {
+        "id": 2,
+        "term": "Taskhir",
+        "arabic_term": "تسخير",
+        "definition": "Subjection. Allah subjected creation to Sulayman.",
+        "pronunciation": "tas-khir"
+      }
+    ]
+  },
+  "sulayman_jinn": {
+    "title": "The jinn in the service of Sulayman",
+    "title_arabic": "الجن في خدمة سليمان",
+    "introduction": "Allah subjected the jinn to Sulayman. The Quran says: \"And among the jinn, some worked under his command.\" (34:12) They built monuments, dived for pearls, and carried out his orders. Sulayman employed them for colossal works.",
+    "conclusion": "The jinn built palaces and statues for Sulayman. They could not escape his command. When Sulayman died, they did not realise it until his staff had been eaten by the earth.",
+    "moral_lesson": "This story teaches us that Allah gives to whom He wills power over creatures. Sulayman used this gift to glorify Allah.",
+    "historical_location": "Palestine",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "sulayman_jinn_chapter_1",
+        "title": "The builders and divers",
+        "content": "The Quran relates: \"And among the jinn, some worked under his command. And whoever among them deviated from Our command, We made him taste the punishment of the blazing fire. They built for him what he desired: sanctuaries, statues, basins like reservoirs and firmly anchored cauldrons.\" (34:12-13) The jinn built imposing monuments. Others dived to extract pearls. Everything was under Sulayman's control."
+      },
+      {
+        "id": "sulayman_jinn_chapter_2",
+        "title": "The death of Sulayman",
+        "content": "The Quran says: \"Then when We decreed his death, nothing indicated his death to them except a creature of the earth that ate his staff. When he fell, the jinn understood that had they known the unseen, they would not have remained in humiliating punishment.\" (34:14) Sulayman died standing, leaning on his staff. The jinn continued to work without knowing. When the staff was eaten by termites, Sulayman fell. Then they understood."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 34:12-13",
+        "reference_text": "Surah Saba, verses 12-13",
+        "content": "وَمِنَ ٱلْجِنِّ مَن يَعْمَلُ بَيْنَ يَدَيْهِ بِإِذْنِ رَبِّهِۦ ۖ وَمَن يَزِغْ مِنْهُمْ عَنْ أَمْرِنَا نُذِقْهُ مِنْ عَذَابِ ٱلسَّعِيرِ",
+        "translation": "Among the jinn, some worked under his command. They built sanctuaries and statues for him.",
+        "relevance": "This verse describes the jinn's work for Sulayman."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 34:14",
+        "reference_text": "Surah Saba, verse 14",
+        "content": "فَلَمَّا قَضَيْنَا عَلَيْهِ ٱلْمَوْتَ مَا دَلَّهُمْ عَلَىٰ مَوْتِهِۦٓ إِلَّا دَآبَّةُ ٱلْأَرْضِ تَأْكُلُ مِنسَأَتَهُۥ",
+        "translation": "When We decreed his death, nothing indicated his death to them except a creature that ate his staff.",
+        "relevance": "This verse relates Sulayman's death."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Jinn",
+        "arabic_term": "جن",
+        "definition": "Invisible creature of fire. Allah subjected them to Sulayman.",
+        "pronunciation": "jinn"
+      },
+      {
+        "id": 2,
+        "term": "Mihrab",
+        "arabic_term": "محراب",
+        "definition": "Sanctuary. The jinn built mihrabs for Sulayman.",
+        "pronunciation": "mih-rab"
+      }
+    ]
+  },
+  "sulayman_ant": {
+    "title": "Sulayman and the ant",
+    "title_arabic": "سليمان والنملة",
+    "introduction": "One day, Sulayman and his army were marching. An ant warned her own: \"O ants! Enter your dwellings, lest Sulayman and his armies crush you without realising it.\" (27:18) Sulayman heard the ant and smiled. He thanked Allah and asked not to be unjust.",
+    "conclusion": "Sulayman understood the language of ants. He did not crush them; he thanked Allah for this gift. This story shows his compassion and humility.",
+    "moral_lesson": "This story teaches us compassion towards the weakest. Even the smallest creature deserves to be protected. Wisdom is not to harm.",
+    "historical_location": "Valley of the ants",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "sulayman_ant_chapter_1",
+        "title": "The ant's warning",
+        "content": "The Quran relates: \"Until when they came to the valley of the ants, an ant said: O ants! Enter your dwellings, lest Sulayman and his armies crush you without realising it.\" (27:18) Sulayman heard the ant thanks to Allah's gift. He smiled at her words. The ant was protecting her community; Sulayman respected this warning."
+      },
+      {
+        "id": "sulayman_ant_chapter_2",
+        "title": "Sulayman's gratitude",
+        "content": "The Quran says: \"He smiled at her words and said: O my Lord! Inspire me to give thanks for Your favours with which You have favoured me. And allow me to do good that You approve. And admit me by Your mercy among Your righteous servants.\" (27:19) Sulayman was not angered by the ant. He thanked Allah and asked not to harm the creatures. His wisdom was exemplary."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 27:18",
+        "reference_text": "Surah An-Naml, verse 18",
+        "content": "حَتَّىٰٓ إِذَآ أَتَوْا۟ عَلَىٰ وَادِ ٱلنَّمْلِ قَالَتْ نَمْلَةٌۭ يَـٰٓأَيُّهَا ٱلنَّمْلُ ٱدْخُلُوا۟ مَسَـٰكِنَكُمْ لَا يَحْطِمَنَّكُّمْ سُلَيْمَـٰنُ وَجُنُودُهُۥ وَهُمْ لَا يَشْعُرُونَ",
+        "translation": "An ant said: O ants! Enter your dwellings, lest Sulayman and his armies crush you without realising it.",
+        "relevance": "This verse contains the ant's words."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 27:19",
+        "reference_text": "Surah An-Naml, verse 19",
+        "content": "فَتَبَسَّمَ ضَاحِكًۭا مِّن قَوْلِهَا وَقَالَ رَبِّ أَوْزِعْنِىٓ أَنْ أَشْكُرَ نِعْمَتَكَ",
+        "translation": "He smiled and said: O my Lord! Inspire me to give thanks for Your favours.",
+        "relevance": "This verse shows Sulayman's reaction."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Naml",
+        "arabic_term": "نمل",
+        "definition": "Ant. A surah of the Quran bears this name.",
+        "pronunciation": "naml"
+      },
+      {
+        "id": 2,
+        "term": "Shukr",
+        "arabic_term": "شكر",
+        "definition": "Gratitude. Sulayman asked Allah to make him grateful.",
+        "pronunciation": "shoukr"
+      }
+    ]
+  },
+  "sulayman_hoopoe": {
+    "title": "The hoopoe and the kingdom of Saba",
+    "title_arabic": "الهدهد وبلقيس",
+    "introduction": "Sulayman reviewed the birds. The hoopoe (Hudhud) was missing. It returned and said: \"I have learned what you have not learned. I come to you from Saba with certain news.\" (27:22) It had discovered a kingdom whose queen and people worshipped the sun. Sulayman sent the hoopoe with a letter.",
+    "conclusion": "The hoopoe was a precious messenger. It brought information that Sulayman did not know. This gift allowed Sulayman to call the queen of Saba to Islam.",
+    "moral_lesson": "This story teaches us that information is a wealth. The humblest creatures can accomplish great missions.",
+    "historical_location": "Saba (Yemen)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "sulayman_hoopoe_chapter_1",
+        "title": "The hoopoe and its discovery",
+        "content": "The Quran relates: \"He reviewed the birds and said: Why do I not see the hoopoe? Is it among the absent? I will punish it severely or slaughter it, unless it brings me a clear reason. It did not delay and said: I have learned what you have not learned. I come to you from Saba with certain news.\" (27:20-22) The hoopoe had discovered the kingdom of Saba. It reported that the queen and her people worshipped the sun instead of Allah."
+      },
+      {
+        "id": "sulayman_hoopoe_chapter_2",
+        "title": "The letter to the queen",
+        "content": "The Quran says: \"He said: We shall see if you have spoken the truth or if you are among the liars. Go with my letter and cast it to them. Then return.\" (27:27-28) Sulayman wrote a letter to the queen of Saba (Bilqis). He called her to submit to Allah. The hoopoe carried the letter and cast it into the palace. The queen read it and summoned her advisers."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 27:22",
+        "reference_text": "Surah An-Naml, verse 22",
+        "content": "فَمَكَثَ غَيْرَ بَعِيدٍۢ فَقَالَ أَحَطتُ بِمَا لَمْ تُحِطْ بِهِۦ وَجِئْتُكَ مِن سَبَإٍۭ بِنَبَإٍۢ يَقِينٍ",
+        "translation": "It said: I have learned what you have not learned. I come to you from Saba with certain news.",
+        "relevance": "This verse relates the hoopoe's response."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 27:27-28",
+        "reference_text": "Surah An-Naml, verses 27-28",
+        "content": "قَالَ سَنَنظُرُ أَصَدَقْتَ أَمْ كُنتَ مِنَ ٱلْكَـٰذِبِينَ ۝ ٱذْهَب بِّكِتَـٰبِى هَـٰذَا فَأَلْقِهْ إِلَيْهِمْ",
+        "translation": "He said: Go with my letter and cast it to them. Then return.",
+        "relevance": "This verse confirms the sending of the letter by the hoopoe."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Hudhud",
+        "arabic_term": "هدهد",
+        "definition": "Hoopoe. Sulayman's messenger bird.",
+        "pronunciation": "houd-houd"
+      },
+      {
+        "id": 2,
+        "term": "Saba",
+        "arabic_term": "سبأ",
+        "definition": "Kingdom of Yemen. A surah of the Quran bears this name.",
+        "pronunciation": "sa-ba"
+      }
+    ]
+  },
+  "sulayman_sheba": {
+    "title": "The queen of Saba",
+    "title_arabic": "ملكة سبأ",
+    "introduction": "The queen of Saba (Bilqis) received Sulayman's letter. She summoned her advisers. The Quran relates: \"She said: O nobles! An honourable letter has been sent to me. It is from Sulayman. It says: In the name of Allah, the Most Gracious, the Most Merciful. Do not exalt yourselves against me and come to me in full submission.\" (27:29-31)",
+    "conclusion": "The queen of Saba came to Sulayman's palace. She saw his throne and his kingdom. She said: \"My Lord! I have wronged myself. I submit with Sulayman to Allah, Lord of the worlds.\" (27:44)",
+    "moral_lesson": "This story teaches us that the call to Islam can triumph through wisdom. The queen of Saba believed after seeing the signs.",
+    "historical_location": "Saba (Yemen) and Jerusalem",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "sulayman_sheba_chapter_1",
+        "title": "The queen's response",
+        "content": "The Quran relates: \"She said: O nobles! Give me your opinion on this matter. I decide nothing without you being present. They said: We have power and we have strength. The decision is yours. See what you command. She said: Kings, when they enter a city, corrupt it.\" (27:32-34) The queen preferred peace. She sent gifts to Sulayman. But Sulayman returned the gifts and demanded complete submission."
+      },
+      {
+        "id": "sulayman_sheba_chapter_2",
+        "title": "Bilqis's conversion",
+        "content": "The Quran says: \"It was said to her: Enter the palace. When she saw it, she thought it was a pool of water and uncovered her legs. He said: It is a palace paved with crystal. She said: My Lord! I have wronged myself. I submit with Sulayman to Allah, Lord of the worlds.\" (27:44) The queen recognised the truth. She renounced the worship of the sun and embraced Islam."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 27:29-31",
+        "reference_text": "Surah An-Naml, verses 29-31",
+        "content": "قَالَتْ يَـٰٓأَيُّهَا ٱلْمَلَؤُا۟ إِنِّىٓ أُلْقِىَ إِلَىَّ كِتَـٰبٌۭ كَرِيمٌ ۝ إِنَّهُۥ مِن سُلَيْمَـٰنَ وَإِنَّهُۥ بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ",
+        "translation": "She said: An honourable letter has been sent to me. It is from Sulayman. It says: In the name of Allah, the Most Gracious.",
+        "relevance": "This verse relates the queen's response."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 27:44",
+        "reference_text": "Surah An-Naml, verse 44",
+        "content": "قِيلَ لَهَا ٱدْخُلِى ٱلصَّرْحَ ۖ فَلَمَّا رَأَتْهُ حَسِبَتْهُ لُجَّةًۭ وَكَشَفَتْ عَن سَاقَيْهَا",
+        "translation": "It was said to her: Enter the palace. She said: I submit with Sulayman to Allah.",
+        "relevance": "This verse describes the queen's conversion."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Bilqis",
+        "arabic_term": "بلقيس",
+        "definition": "Queen of Saba. She embraced Islam after meeting Sulayman.",
+        "pronunciation": "bil-qis"
+      },
+      {
+        "id": 2,
+        "term": "Islam",
+        "arabic_term": "إسلام",
+        "definition": "Submission to Allah. The queen submitted to Allah.",
+        "pronunciation": "is-lam"
+      }
+    ]
+  },
+  "lessons_from_sulayman": {
+    "title": "Lessons from the story of Sulayman",
+    "title_arabic": "دروس من قصة سليمان",
+    "introduction": "Sulayman was king and prophet. He received the wind, the jinn, the speech of birds. The Quran says: \"And Sulayman inherited from Dawud. He said: O people! We have been taught the speech of birds.\" (27:16) His story teaches wisdom, gratitude and humility.",
+    "conclusion": "Despite his immense power, Sulayman remained humble. He thanked Allah and did not harm the creatures. The queen of Saba believed through his wisdom. He died standing, leaning on his staff — the jinn did not realise it until afterwards.",
+    "moral_lesson": "This story teaches us that power must be exercised with wisdom. Gratitude and humility elevate the believer. Even kings are servants of Allah.",
+    "historical_location": "Palestine and Yemen",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lessons_from_sulayman_chapter_1",
+        "title": "Wisdom and power",
+        "content": "Sulayman asked for a kingdom that none would have after him. Allah granted him the wind, the jinn, the speech of birds. But Sulayman did not become arrogant. He listened to the ant. He thanked Allah. He called the queen of Saba with a respectful letter. Wisdom guides power."
+      },
+      {
+        "id": "lessons_from_sulayman_chapter_2",
+        "title": "Death and remembrance",
+        "content": "The Quran says: \"Then when We decreed his death, nothing indicated his death to them except a creature of the earth that ate his staff.\" (34:14) Sulayman died standing. The jinn worked without knowing. When the staff was eaten, he fell. Thus Allah reminds that death is inevitable. Even the most powerful kings are servants who return to their Lord."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 27:16",
+        "reference_text": "Surah An-Naml, verse 16",
+        "content": "وَوَرِثَ سُلَيْمَـٰنُ دَاوُۥدَ ۖ وَقَالَ يَـٰٓأَيُّهَا ٱلنَّاسُ عُلِّمْنَا مَنطِقَ ٱلطَّيْرِ",
+        "translation": "Sulayman inherited from Dawud. He said: We have been taught the speech of birds.",
+        "relevance": "This verse establishes Sulayman's gifts."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 34:14",
+        "reference_text": "Surah Saba, verse 14",
+        "content": "فَلَمَّا قَضَيْنَا عَلَيْهِ ٱلْمَوْتَ مَا دَلَّهُمْ عَلَىٰ مَوْتِهِۦٓ إِلَّا دَآبَّةُ ٱلْأَرْضِ تَأْكُلُ مِنسَأَتَهُۥ",
+        "translation": "When We decreed his death, nothing indicated his death to them except a creature that ate his staff.",
+        "relevance": "This verse relates Sulayman's death."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Hikmah",
+        "arabic_term": "حكمة",
+        "definition": "Wisdom. Sulayman was endowed with hikmah.",
+        "pronunciation": "hik-mah"
+      },
+      {
+        "id": 2,
+        "term": "Awab",
+        "arabic_term": "أواب",
+        "definition": "One who returns (to Allah). Sulayman was awab (repentant).",
+        "pronunciation": "a-wab"
+      }
+    ]
+  }
+}

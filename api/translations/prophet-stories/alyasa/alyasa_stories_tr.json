@@ -1,0 +1,230 @@
+{
+  "alyasa_succession": {
+    "title": "El-Yasa İlyas'ın halefi",
+    "title_arabic": "اليسع خليفة إلياس",
+    "introduction": "El-Yasa (اليسع عليه السلام), Elişa, İlyas peygamberin halefidir. Kur'an şöyle buyurur: \"Ve İsmail, El-Yasa, Yunus ve Lut. Hepsini âlemlere üstün kıldık.\" (6:86) El-Yasa'yı İlyas halefi olarak seçti. Tevhit davetine devam etti.",
+    "conclusion": "El-Yasa İlyas'tan sonra peygamberlik aldı. İsrail oğullarını dosdoğru yola iletti. Halefliği müminler için bir bereketti.",
+    "moral_lesson": "Bu hikaye bize peygamberlerin birbirini halef ettiğini öğretir. Her elçi meşaleyi bir sonrakine devreder. İlahi hidayet asla kesilmez.",
+    "historical_location": "Filistin (İsrail Krallığı)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "alyasa_succession_chapter_1",
+        "title": "Seçim",
+        "content": "Kur'an şöyle bildirir: \"Ve İsmail, El-Yasa ve Zülkifl'i an. Hepsi hayırlılardandı.\" (38:48) İlyas onunla tanıştığında El-Yasa takvalı bir gençti. İlyas onda peygamber niteliklerini gördü. Onu öğrenci edindi ve bilgi aktardı. İlyas göğe yükseltildiğinde El-Yasa onun yerine geçti."
+      },
+      {
+        "id": "alyasa_succession_chapter_2",
+        "title": "Mesajın sürekliliği",
+        "content": "Kur'an şöyle buyurur: \"Hepsini âlemlere üstün kıldık.\" (6:86) El-Yasa İlyas'ın işine devam etti. Halkı yalnızca Allah'a ibadete çağırdı. Putperestliğe karşı mücadele etti. Müminler ona uydu. Tevhit mesajı onunla sürdü."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 6:86",
+        "reference_text": "En'am Suresi, 86. ayet",
+        "content": "وَإِسْمَـٰعِيلَ وَٱلْيَسَعَ وَيُونُسَ وَلُوطًۭا ۚ وَكُلًّۭا فَضَّلْنَا عَلَى ٱلْعَـٰلَمِينَ",
+        "translation": "Ve İsmail, El-Yasa, Yunus ve Lut. Hepsini âlemlere üstün kıldık.",
+        "relevance": "Bu ayet El-Yasa'yı üstün peygamberler arasına yerleştirir."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 38:48",
+        "reference_text": "Sad Suresi, 48. ayet",
+        "content": "وَٱذْكُرْ إِسْمَـٰعِيلَ وَٱلْيَسَعَ وَذَا ٱلْكِفْلِ ۖ وَكُلٌّۭ مِّنَ ٱلْأَخْيَارِ",
+        "translation": "Ve İsmail, El-Yasa ve Zülkifl'i an. Hepsi hayırlılardandı.",
+        "relevance": "Bu ayet El-Yasa'yı hayırlılar arasında övüyor."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Al-Yasa",
+        "arabic_term": "اليسع",
+        "definition": "Arapça'da Elişa. İlyas peygamberin halefi.",
+        "pronunciation": "al-ya-sa"
+      },
+      {
+        "id": 2,
+        "term": "Khalifa",
+        "arabic_term": "خليفة",
+        "definition": "Halef. El-Yasa İlyas'ın halifesiydi.",
+        "pronunciation": "kha-li-fa"
+      }
+    ]
+  },
+  "alyasa_prophecy": {
+    "title": "El-Yasa'nın peygamberliği",
+    "title_arabic": "نبوة اليسع",
+    "introduction": "El-Yasa Allah'tan peygamberlik aldı. Kur'an şöyle buyurur: \"Ve İsmail, El-Yasa, Yunus ve Lut. Hepsini âlemlere üstün kıldık.\" (6:86) Müminlerin zaferini müjdeledi ve kâfirleri uyardı. Halkı hikmetle yönetti.",
+    "conclusion": "El-Yasa adil ve bilge bir peygamberdi. Sözleri gerçekleşti. Halk onda Allah'ın elçisini tanıdı. Hakikatle kalplere hükmetti.",
+    "moral_lesson": "Bu hikaye bize peygamberliğin Allah'tan bir lütuf olduğunu öğretir. Peygamber hakikati söyler ve halkı yönlendirir.",
+    "historical_location": "Filistin",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "alyasa_prophecy_chapter_1",
+        "title": "Mesaj",
+        "content": "Kur'an şöyle bildirir: \"Hepsi hayırlılardandı.\" (38:48) El-Yasa Allah'ın mesajını iletti. Yalnızca Yaratıcıya ibadete çağırdı. Putperestliği ve zulmü yasakladı. İyiliği emretti, kötülükten menetti. Mesajı basit ve netti: Allah'ı takip edin."
+      },
+      {
+        "id": "alyasa_prophecy_chapter_2",
+        "title": "Hidayet",
+        "content": "Kur'an şöyle buyurur: \"Hepsini âlemlere üstün kıldık.\" (6:86) El-Yasa söz ve örnekle insanlara rehberlik etti. Zayıflara sabırlıydı. Zalimlere karşı kararlıydı. Müminler onda bir rehber buldu. Onları nura iletti."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 38:48",
+        "reference_text": "Sad Suresi, 48. ayet",
+        "content": "وَٱذْكُرْ إِسْمَـٰعِيلَ وَٱلْيَسَعَ وَذَا ٱلْكِفْلِ ۖ وَكُلٌّۭ مِّنَ ٱلْأَخْيَارِ",
+        "translation": "Ve İsmail, El-Yasa ve Zülkifl'i an. Hepsi hayırlılardandı.",
+        "relevance": "Bu ayet El-Yasa'yı peygamberler arasına yerleştirir."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 6:84-86",
+        "reference_text": "En'am Suresi, 84-86. ayetler",
+        "content": "وَرَسُولًا ۚ وَءَاتَيْنَا دَاوُۥدَ زَبُورًۭا ۝ وَرَسُولًۭا فَضَّلْنَـٰهُمْ",
+        "translation": "Ve elçiler. Onları üstün kıldık.",
+        "relevance": "Bu pasaj El-Yasa'yı peygamberlik zincirine yerleştirir."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Nubuwwa",
+        "arabic_term": "نبوة",
+        "definition": "Peygamberlik. El-Yasa peygamberlik aldı.",
+        "pronunciation": "nou-bou-wa"
+      },
+      {
+        "id": 2,
+        "term": "Huda",
+        "arabic_term": "هدى",
+        "definition": "Hidayet. El-Yasa kavmine hidayet getirdi.",
+        "pronunciation": "hou-da"
+      }
+    ]
+  },
+  "alyasa_miracles": {
+    "title": "El-Yasa'nın mucizeleri",
+    "title_arabic": "معجزات اليسع",
+    "introduction": "Allah peygamberliğini doğrulamak için El-Yasa'ya mucizeler bahşetti. Kur'an şöyle buyurur: \"Hepsini âlemlere üstün kıldık.\" (6:86) Mucizeleri arasında: ölüyü diriltme, hastayı iyileştirme ve yiyeceği çoğaltma. Bu işaretler onun peygamber olduğunu kanıtladı.",
+    "conclusion": "El-Yasa'nın mucizeleri imanı güçlendirdi. Halk hakikati tanıdı. Hayatının sonuna kadar rehberlik etmeye devam etti.",
+    "moral_lesson": "Bu hikaye bize mucizelerin peygamberliğin delilleri olduğunu öğretir. Elçinin Allah tarafından gönderildiğini doğrularlar.",
+    "historical_location": "Filistin",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "alyasa_miracles_chapter_1",
+        "title": "Diriliş mucizesi",
+        "content": "Kur'an şöyle bildirir: \"Hepsi hayırlılardandı.\" (38:48) Rivayetlere göre El-Yasa bir ölüyü diriltti. Bir kadın ona vefat etmiş oğlunu getirdi. Allah'a dua etti. Çocuk hayata döndü. Bu mucize halkı hayrete düşürdü. Birçokları peygamberliğine inandı."
+      },
+      {
+        "id": "alyasa_miracles_chapter_2",
+        "title": "Yiyeceğin çoğalması",
+        "content": "Kur'an şöyle buyurur: \"Hepsini âlemlere üstün kıldık.\" (6:86) El-Yasa açları doyurmak için yiyeceği çoğalttı. Az bir miktar birçoklarını doyurmaya yetti. Bu mucizeler İlyas'ın mucizelerini hatırlattı. Peygamberlik zincirinin devam ettiğini gösterdiler. Allah elçilerini destekledi."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 38:48",
+        "reference_text": "Sad Suresi, 48. ayet",
+        "content": "وَٱذْكُرْ إِسْمَـٰعِيلَ وَٱلْيَسَعَ وَذَا ٱلْكِفْلِ ۖ وَكُلٌّۭ مِّنَ ٱلْأَخْيَارِ",
+        "translation": "Ve İsmail, El-Yasa ve Zülkifl'i an. Hepsi hayırlılardandı.",
+        "relevance": "Bu ayet El-Yasa'yı peygamberler arasına yerleştirir."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 6:86",
+        "reference_text": "En'am Suresi, 86. ayet",
+        "content": "وَإِسْمَـٰعِيلَ وَٱلْيَسَعَ وَيُونُسَ وَلُوطًۭا ۚ وَكُلًّۭا فَضَّلْنَا عَلَى ٱلْعَـٰلَمِينَ",
+        "translation": "Ve İsmail, El-Yasa, Yunus ve Lut. Hepsini üstün kıldık.",
+        "relevance": "Bu ayet El-Yasa'nın peygamberler arasındaki yerini doğrular."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Mu'jiza",
+        "arabic_term": "معجزة",
+        "definition": "Mucize. El-Yasa mucizeler gerçekleştirdi.",
+        "pronunciation": "mou-ji-za"
+      },
+      {
+        "id": 2,
+        "term": "Akhyar",
+        "arabic_term": "أخيار",
+        "definition": "Hayırlılar. El-Yasa hayırlılar arasındaydı.",
+        "pronunciation": "akh-yar"
+      }
+    ]
+  },
+  "lessons_from_alyasa": {
+    "title": "El-Yasa hikayesinden dersler",
+    "title_arabic": "دروس من قصة اليسع",
+    "introduction": "El-Yasa İlyas'ın halefidir. Kur'an şöyle buyurur: \"Ve İsmail, El-Yasa, Yunus ve Lut. Hepsini âlemlere üstün kıldık.\" (6:86) Üstadının misyonuna devam etti. Hikayesi ilahi hidayetin sürekliliğini öğretir.",
+    "conclusion": "El-Yasa meşaleyi İlyas'tan aldı. Sadakatle devretti. Peygamberler birbirini halef eder. Mesaj tektir.",
+    "moral_lesson": "Bu hikaye bize her neslin rehberlere ihtiyaç duyduğunu öğretir. Peygamberler vahyin sürekliliğini sağlar.",
+    "historical_location": "Filistin",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lessons_from_alyasa_chapter_1",
+        "title": "Peygamberlik halefiyeti",
+        "content": "Kur'an şöyle buyurur: \"Hepsini âlemlere üstün kıldık.\" (6:86) İlyas El-Yasa'ya devretti. El-Yasa başkalarına devretti. Zincir kırılmaz. Her peygamber bir sonrakini hazırlar. Mümin tüm elçilere saygı göstermelidir. Tek bir aile oluştururlar."
+      },
+      {
+        "id": "lessons_from_alyasa_chapter_2",
+        "title": "Mesaja sadakat",
+        "content": "El-Yasa İlyas'ın mesajını değiştirmedi. Aynı tevhide çağırdı. Aynı hatalarla mücadele etti. Hakikat tektir. Peygamberler birbirleriyle çelişmez. Birbirlerini doğrularlar. Mümin bu tek hakikati takip etmelidir."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 6:86",
+        "reference_text": "En'am Suresi, 86. ayet",
+        "content": "وَإِسْمَـٰعِيلَ وَٱلْيَسَعَ وَيُونُسَ وَلُوطًۭا ۚ وَكُلًّۭا فَضَّلْنَا عَلَى ٱلْعَـٰلَمِينَ",
+        "translation": "Ve İsmail, El-Yasa, Yunus ve Lut. Hepsini âlemlere üstün kıldık.",
+        "relevance": "Bu ayet El-Yasa'nın yerini özetler."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 38:48",
+        "reference_text": "Sad Suresi, 48. ayet",
+        "content": "وَٱذْكُرْ إِسْمَـٰعِيلَ وَٱلْيَسَعَ وَذَا ٱلْكِفْلِ ۖ وَكُلٌّۭ مِّنَ ٱلْأَخْيَارِ",
+        "translation": "Ve İsmail, El-Yasa ve Zülkifl'i an. Hepsi hayırlılardandı.",
+        "relevance": "Bu ayet El-Yasa'yı hayırlılar arasında övüyor."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Silsila",
+        "arabic_term": "سلسلة",
+        "definition": "Zincir. El-Yasa peygamberler zincirinin parçasıdır.",
+        "pronunciation": "sil-si-la"
+      },
+      {
+        "id": 2,
+        "term": "Fadl",
+        "arabic_term": "فضل",
+        "definition": "Lütuf. El-Yasa Allah'tan lütuf aldı.",
+        "pronunciation": "fadl"
+      }
+    ]
+  }
+}

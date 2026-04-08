@@ -179,16 +179,25 @@ const reprogramFromStoredSettings = async (reason: string) => {
     try {
       const { PrayerTimesWidgetModule } = NativeModules;
       if (PrayerTimesWidgetModule?.updatePrayerTimes) {
-        // Calculer les horaires du jour pour le widget
-        const { getPrayerTimesForLocation } = await import("./prayerTimes");
-        const todayPrayerTimes = await getPrayerTimesForLocation(
-          userLocation.latitude,
-          userLocation.longitude,
-          calcMethod || "MuslimWorldLeague",
-          new Date()
+        // Calculer les horaires du jour et de demain pour le widget
+        const { computePrayerTimesForDate } = await import("./prayerTimes");
+        const today = new Date();
+        const tomorrow = new Date(today);
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        
+        const todayPrayerTimes = computePrayerTimesForDate(
+          today,
+          { latitude: userLocation.latitude, longitude: userLocation.longitude },
+          calcMethod || "MuslimWorldLeague"
         );
         
-        if (todayPrayerTimes) {
+        const tomorrowPrayerTimes = computePrayerTimesForDate(
+          tomorrow,
+          { latitude: userLocation.latitude, longitude: userLocation.longitude },
+          calcMethod || "MuslimWorldLeague"
+        );
+        
+        if (todayPrayerTimes && tomorrowPrayerTimes) {
           // Formater les horaires pour le widget (HH:mm)
           const formatTime = (date: Date): string => {
             const hours = date.getHours().toString().padStart(2, '0');
@@ -196,27 +205,43 @@ const reprogramFromStoredSettings = async (reason: string) => {
             return `${hours}:${minutes}`;
           };
           
-          const prayerTimesForWidget = {
-            Fajr: formatTime(todayPrayerTimes.fajr),
-            Sunrise: formatTime(todayPrayerTimes.sunrise),
-            Dhuhr: formatTime(todayPrayerTimes.dhuhr),
-            Asr: formatTime(todayPrayerTimes.asr),
-            Maghrib: formatTime(todayPrayerTimes.maghrib),
-            Isha: formatTime(todayPrayerTimes.isha),
+          const todayFormatted = {
+            Fajr: formatTime(todayPrayerTimes.Fajr),
+            Sunrise: formatTime(todayPrayerTimes.Sunrise),
+            Dhuhr: formatTime(todayPrayerTimes.Dhuhr),
+            Asr: formatTime(todayPrayerTimes.Asr),
+            Maghrib: formatTime(todayPrayerTimes.Maghrib),
+            Isha: formatTime(todayPrayerTimes.Isha),
           };
           
-          console.log("🕌 [BackgroundFetch] Mise à jour horaires widget:", prayerTimesForWidget);
+          const tomorrowFormatted = {
+            Fajr: formatTime(tomorrowPrayerTimes.Fajr),
+            Sunrise: formatTime(tomorrowPrayerTimes.Sunrise),
+            Dhuhr: formatTime(tomorrowPrayerTimes.Dhuhr),
+            Asr: formatTime(tomorrowPrayerTimes.Asr),
+            Maghrib: formatTime(tomorrowPrayerTimes.Maghrib),
+            Isha: formatTime(tomorrowPrayerTimes.Isha),
+          };
+          
+          console.log("🕌 [BackgroundFetch] Mise à jour widget - Aujourd'hui:", todayFormatted);
+          console.log("🔮 [BackgroundFetch] Mise à jour widget - Demain:", tomorrowFormatted);
           
           await PrayerTimesWidgetModule.updatePrayerTimes(
-            prayerTimesForWidget.Fajr,
-            prayerTimesForWidget.Sunrise,
-            prayerTimesForWidget.Dhuhr,
-            prayerTimesForWidget.Asr,
-            prayerTimesForWidget.Maghrib,
-            prayerTimesForWidget.Isha
+            todayFormatted.Fajr,
+            todayFormatted.Sunrise,
+            todayFormatted.Dhuhr,
+            todayFormatted.Asr,
+            todayFormatted.Maghrib,
+            todayFormatted.Isha,
+            tomorrowFormatted.Fajr,
+            tomorrowFormatted.Sunrise,
+            tomorrowFormatted.Dhuhr,
+            tomorrowFormatted.Asr,
+            tomorrowFormatted.Maghrib,
+            tomorrowFormatted.Isha
           );
           
-          console.log("✅ [BackgroundFetch] Widget iOS mis à jour avec les nouveaux horaires");
+          console.log("✅ [BackgroundFetch] Widget iOS mis à jour avec les horaires (aujourd'hui + demain)");
         }
       }
     } catch (widgetError) {

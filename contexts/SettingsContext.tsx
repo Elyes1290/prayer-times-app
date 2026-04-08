@@ -895,6 +895,14 @@ export const SettingsProvider = ({
       setIsLoaded(true);
       setIsInitializing(false);
 
+      // 🌍 IMPORTANT : Sauvegarder la langue initiale dans l'App Group pour le widget iOS
+      if (Platform.OS === "ios" && AdhanModule && validLanguage) {
+        AdhanModule.saveNotificationSettings({
+          currentLanguage: validLanguage,
+        });
+        debugLog(`✅ Langue initiale sauvegardée pour widget iOS: ${validLanguage}`);
+      }
+
       // 🚀 DÉSACTIVÉ : Synchronisation API automatique
       // L'API sera activée seulement quand l'utilisateur devient premium
       // via enableApiSync() depuis PremiumContext
@@ -1403,15 +1411,13 @@ export const SettingsProvider = ({
       // Synchroniser avec i18n optimisé
       changeLanguage(language);
 
-      // IMPORTANT: Transmettre immédiatement la langue côté Android
-      // pour les notifications ET le widget !
-      if (!isInitializing && Platform.OS === "android" && AdhanModule) {
+      // IMPORTANT: Transmettre immédiatement la langue aux modules natifs
+      // pour les notifications ET le widget (iOS et Android)
+      if (!isInitializing && AdhanModule) {
         AdhanModule.saveNotificationSettings({
           currentLanguage: language,
         });
-
-        // Sauvegarder aussi dans SharedPreferences pour le widget
-        await LocalStorageManager.saveEssential("CURRENT_LANGUAGE", language);
+        debugLog(`✅ Langue sauvegardée pour module natif: ${language}`);
       } else if (isInitializing) {
       }
     },

@@ -2,7 +2,7 @@
   "expo": {
     "name": "MyAdhan: Muslim Prayer App",
     "slug": "prayer-times-app",
-    "version": "1.0.27",
+    "version": "1.0.17",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "prayertimesapp",
@@ -11,7 +11,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.drogbinho.myadhan",
-      "buildNumber": "1.0.27",
+      "buildNumber": "1.0.17",
       "deploymentTarget": "15.1",
       "icon": "./assets/images/icon.png",
       "locales": {
@@ -52,7 +52,7 @@
       },
       "edgeToEdgeEnabled": true,
       "package": "com.drogbinho.prayertimesapp2",
-      "versionCode": 86
+      "versionCode": 88
     },
     "web": {
       "bundler": "metro",

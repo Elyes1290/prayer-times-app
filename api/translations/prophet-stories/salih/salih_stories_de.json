@@ -1,0 +1,342 @@
+{
+  "salih_prophecy": {
+    "title": "Die Entsendung Salihs als Prophet",
+    "title_arabic": "إرسال صالح عليه السلام",
+    "introduction": "Salih (صالح عليه السلام) ist ein Prophet, den Allah zum Volk der Thamud sandte, die den 'Ad folgten. Nach der Zerstörung der 'Ad etablierte Allah die Thamud im Land. Sie bauten Paläste in den Ebenen und gruben Wohnstätten in die Berge. Aber sie gingen in die Irre und Allah sandte Salih, ihren Bruder, um sie zum Monotheismus aufzurufen.",
+    "conclusion": "Die Entsendung Salihs markiert die Kontinuität der prophetischen Mission nach Hud. Die Thamud erhielten einen aus ihrer Mitte erwählten Gesandten. Salih brachte ihnen einen klaren Beweis: die Kamelstute Allahs.",
+    "moral_lesson": "Diese Geschichte lehrt uns, dass Allah niemals ein Volk ohne einen Warner verlässt. Irdische Wohltaten — Paläste und Wohnstätten — befreien nicht von der Anbetung Allahs.",
+    "historical_location": "Al-Hijr (Region zwischen dem Hidschaz und Syrien)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "salih_prophecy_chapter_1",
+        "title": "Der göttliche Befehl",
+        "content": "Allah sandte Salih zum Volk der Thamud, seinen Brüdern. Der Koran berichtet: \"Und zu den Thamud ihren Bruder Salih. Er sagte: O mein Volk! Dient Allah. Ihr habt keinen anderen Gott als Ihn. Ein klarer Beweis ist von eurem Herrn zu euch gekommen: hier ist die Kamelstute Allahs, ein Zeichen für euch. Lasst sie auf Allahs Land weiden und tut ihr kein Leid, sonst wird euch eine schmerzhafte Strafe ergreifen.\" (7:73) Salih empfing die Offenbarung und einen wunderbaren Beweis: die Kamelstute, ein Zeichen von Allahs Macht."
+      },
+      {
+        "id": "salih_prophecy_chapter_2",
+        "title": "Die Nachfolger der 'Ad",
+        "content": "Der Koran erinnert die Thamud: \"Und gedenkt, als Er euch die Nachfolger der 'Ad machte und euch im Land ansiedelte. Ihr baut Paläste in seinen Ebenen und hauet Wohnstätten in die Berge. Gedenkt also der Wohltaten Allahs und stiftet keine Unruhe auf der Erde.\" (7:74) Die Thamud hatten gewaltige Wohltaten erhalten. Sie bewohnten eine fruchtbare Region und hatten eine fortgeschrittene Zivilisation entwickelt. Aber sie vergaßen Allah und verfielen der Korruption."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 7:73",
+        "reference_text": "Sure Al-A'raf, Vers 73",
+        "content": "وَإِلَىٰ ثَمُودَ أَخَاهُمْ صَـٰلِحًۭا ۗ قَالَ يَـٰقَوْمِ ٱعْبُدُوا۟ ٱللَّهَ مَا لَكُم مِّنْ إِلَـٰهٍ غَيْرُهُۥٓ ۖ قَدْ جَآءَتْكُم بَيِّنَةٌۭ مِّن رَّبِّكُمْ ۖ هَـٰذِهِۦ نَاقَةُ ٱللَّهِ لَكُمْ ءَايَةًۭ ۖ فَذَرُوهَا تَأْكُلْ فِىٓ أَرْضِ ٱللَّهِ ۖ وَلَا تَمَسُّوهَا بِسُوٓءٍۢ فَيَأْخُذَكُمْ عَذَابٌ أَلِيمٌۭ",
+        "translation": "Und zu den Thamud ihren Bruder Salih. Er sagte: O mein Volk! Dient Allah — ihr habt keinen anderen Gott als Ihn. Ein klarer Beweis ist von eurem Herrn zu euch gekommen: hier ist die Kamelstute Allahs, ein Zeichen für euch. Lasst sie auf Allahs Land weiden und tut ihr kein Leid, sonst wird euch eine schmerzhafte Strafe ergreifen.",
+        "relevance": "Dieser Vers begründet die Entsendung Salihs und die Kamelstute als göttliches Zeichen."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 7:74",
+        "reference_text": "Sure Al-A'raf, Vers 74",
+        "content": "وَٱذْكُرُوٓا۟ إِذْ جَعَلَكُمْ خُلَفَآءَ مِنۢ بَعْدِ عَادٍۢ وَبَوَّأَكُمْ فِى ٱلْأَرْضِ تَتَّخِذُونَ مِن سُهُولِهَا قُصُورًۭا وَتَنْحِتُونَ ٱلْجِبَالَ بُيُوتًۭا",
+        "translation": "Gedenkt, als Er euch die Nachfolger der 'Ad machte und euch im Land ansiedelte. Ihr baut Paläste in seinen Ebenen und hauet Wohnstätten in die Berge.",
+        "relevance": "Dieser Vers beschreibt die Thamud als Nachfolger der 'Ad und ihre Errungenschaften."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Salih",
+        "arabic_term": "صالح",
+        "definition": "Salih auf Arabisch. Prophet Allahs, der zum Volk der Thamud gesandt wurde. Sein Name bedeutet \"der Tugendhafte\".",
+        "pronunciation": "sa-lih"
+      },
+      {
+        "id": 2,
+        "term": "Thamud",
+        "arabic_term": "ثمود",
+        "definition": "Antikes Volk Arabiens, das den 'Ad folgte. Sie hauten Wohnstätten in die Berge. Sie wurden zerstört, weil sie die Kamelstute töteten.",
+        "pronunciation": "tha-moud"
+      },
+      {
+        "id": 3,
+        "term": "Al-Hijr",
+        "arabic_term": "الحجر",
+        "definition": "Region, wo die Thamud lebten, zwischen dem Hidschaz und Syrien. Der Prophet Muhammad zog an ihren Ruinen vorbei.",
+        "pronunciation": "al-hijr"
+      }
+    ]
+  },
+  "salih_call": {
+    "title": "Salihs Ruf an sein Volk",
+    "title_arabic": "دعوة صالح لقومه",
+    "introduction": "Salih (عليه السلام) rief das Volk der Thamud mit Klarheit auf. Er lud sie ein, allein Allah zu dienen, Vergebung zu suchen und sich zu bekehren. Er erinnerte sie daran, dass Allah sie aus der Erde hervorgebracht und auf ihr angesiedelt hatte. Er warnte sie vor den Folgen des Ungehorsams. Trotz seiner Botschaft lehnten die Thamud ab.",
+    "conclusion": "Salihs Ruf veranschaulicht die Beständigkeit der prophetischen Botschaft. Er bat um keinen Lohn; sein Herr ist Nahe und Erhört die Bitten. Die Thamud hatten ihre Chance vor der Strafe.",
+    "moral_lesson": "Diese Geschichte lehrt uns, dass Reue immer möglich ist, bevor die Strafe zuschlägt. Sie erinnert uns, dass unser Herr Nahe ist und denen antwortet, die Ihn anrufen.",
+    "historical_location": "Al-Hijr",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "salih_call_chapter_1",
+        "title": "Die Einladung zum Monotheismus",
+        "content": "Salih sagte zu seinem Volk: \"O mein Volk! Dient Allah. Ihr habt keinen anderen Gott als Ihn. Er ist es, der euch aus der Erde hervorgebracht und euch auf ihr angesiedelt hat. Bittet also um Seine Vergebung, dann kehrt zu Ihm um. Mein Herr ist Nahe, Er antwortet.\" (11:61) Salih erinnerte sie an Allahs Wohltaten und lud sie ein, keine Unruhe auf der Erde zu stiften. Er warnte sie, dass sie, wenn sie beharrten, das Schicksal der Völker der Vergangenheit erleiden würden."
+      },
+      {
+        "id": "salih_call_chapter_2",
+        "title": "Die Ablehnung der Thamud",
+        "content": "Der Koran berichtet, dass \"die Thamud die Gesandten der Lüge bezichtigten\" (26:141) und dass \"sie die Warnungen ablehnten\" (54:23). Trotz des klaren Beweises — der Kamelstute — und Salihs Ruf lehnten die Notabeln des Volkes ab. Sie wurden hochmütig. Der Koran sagt: \"Die Thamud leugneten aus Übermut.\" (91:11) Salih rief sie weiterhin mit Geduld auf, aber sie beharrten in ihrem Unglauben."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 11:61",
+        "reference_text": "Sure Hud, Vers 61",
+        "content": "وَإِلَىٰ ثَمُودَ أَخَاهُمْ صَـٰلِحًۭا ۚ قَالَ يَـٰقَوْمِ ٱعْبُدُوا۟ ٱللَّهَ مَا لَكُم مِّنْ إِلَـٰهٍ غَيْرُهُۥٓ ۖ هُوَ أَنشَأَكُم مِّنَ ٱلْأَرْضِ وَٱسْتَعْمَرَكُمْ فِيهَا فَٱسْتَغْفِرُوهُ ثُمَّ تُوبُوٓا۟ إِلَيْهِ ۚ إِنَّ رَبِّى قَرِيبٌۭ مُّجِيبٌۭ",
+        "translation": "Und zu den Thamud ihren Bruder Salih. Er sagte: O mein Volk! Dient Allah. Ihr habt keinen anderen Gott als Ihn. Er ist es, der euch aus der Erde hervorgebracht und euch auf ihr angesiedelt hat. Bittet um Seine Vergebung, dann kehrt zu Ihm um. Mein Herr ist Nahe, Er antwortet.",
+        "relevance": "Dieser Vers enthält Salihs Ruf und das Versprechen der Vergebung."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 91:11",
+        "reference_text": "Sure Ash-Shams, Vers 11",
+        "content": "كَذَّبَتْ ثَمُودُ بِطَغْوَىٰهَآ",
+        "translation": "Die Thamud leugneten aus Übermut.",
+        "relevance": "Dieser Vers beschreibt die Haltung der Thamud gegenüber Salihs Ruf."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Tawba",
+        "arabic_term": "توبة",
+        "definition": "Reue. Salih lud die Thamud ein, sich vor der Strafe zu bekehren.",
+        "pronunciation": "taw-ba"
+      },
+      {
+        "id": 2,
+        "term": "Qarib Mujib",
+        "arabic_term": "قريب مجيب",
+        "definition": "Nahe, Er antwortet. Beschreibung des Herrn, der auf Bitten antwortet.",
+        "pronunciation": "qa-rib mou-jib"
+      }
+    ]
+  },
+  "the_thamud_people": {
+    "title": "Das Volk der Thamud",
+    "title_arabic": "قوم ثمود",
+    "introduction": "Das Volk der Thamud folgte den 'Ad auf der Erde. Allah etablierte sie und gewährte ihnen bemerkenswerte Fähigkeiten: sie bauten Paläste in den Ebenen und hauten Wohnstätten in die Berge. Aber sie vergaßen Allahs Wohltaten und stifteten Unruhe. Sie lehnten Salih und sein Zeichen ab.",
+    "conclusion": "Die Zivilisation der Thamud — ihre Paläste und in den Fels gehauenen Wohnstätten — schützte sie nicht. Das Erdbeben vernichtete sie in ihren Behausungen. Nur Salih und die Gläubigen wurden verschont.",
+    "moral_lesson": "Diese Geschichte lehrt uns, dass menschliche Errungenschaften nicht von der Anbetung Allahs befreien. Unruhe auf der Erde führt zur Strafe.",
+    "historical_location": "Al-Hijr (zwischen dem Hidschaz und Syrien)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "the_thamud_people_chapter_1",
+        "title": "Eine fortgeschrittene Zivilisation",
+        "content": "Der Koran beschreibt die Thamud: \"Gedenkt, als Er euch die Nachfolger der 'Ad machte und euch im Land ansiedelte. Ihr baut Paläste in seinen Ebenen und hauet Wohnstätten in die Berge.\" (7:74) Die Thamud waren geschickte Baumeister. Ihre in die Berge gehauenen Wohnstätten zeugen noch heute von ihrem Können. Aber der Koran ermahnt sie: \"Gedenkt der Wohltaten Allahs und stiftet keine Unruhe auf der Erde.\" Sie taten das Gegenteil."
+      },
+      {
+        "id": "the_thamud_people_chapter_2",
+        "title": "Undankbarkeit",
+        "content": "Allah hatte den Thamud das Land, die Fähigkeit zu bauen und zu gedeihen gewährt. Aber sie verfielen der Korruption (fasād). Sie lehnten den Gesandten Allahs ab und verachteten das Zeichen, das Er ihnen gesandt hatte: die Kamelstute. Ihre Undankbarkeit und Übertretung machten sie der Strafe würdig. Salih warnte sie wiederholt, aber sie beharrten, bis sie das Verbrechen begingen, das ihr Schicksal besiegelte: die Tötung der Kamelstute."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 7:74",
+        "reference_text": "Sure Al-A'raf, Vers 74",
+        "content": "وَٱذْكُرُوٓا۟ إِذْ جَعَلَكُمْ خُلَفَآءَ مِنۢ بَعْدِ عَادٍۢ وَبَوَّأَكُمْ فِى ٱلْأَرْضِ تَتَّخِذُونَ مِن سُهُولِهَا قُصُورًۭا وَتَنْحِتُونَ ٱلْجِبَالَ بُيُوتًۭا ۖ فَٱذْكُرُوٓا۟ ءَالَآءَ ٱللَّهِ وَلَا تَعْثَوْا۟ فِى ٱلْأَرْضِ مُفْسِدِينَ",
+        "translation": "Gedenkt, als Er euch die Nachfolger der 'Ad machte und euch im Land ansiedelte. Ihr baut Paläste in seinen Ebenen und hauet Wohnstätten in die Berge. Gedenkt der Wohltaten Allahs und stiftet keine Unruhe auf der Erde.",
+        "relevance": "Dieser Vers beschreibt die Thamud-Zivilisation und die Ermahnung zur Dankbarkeit."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Khulafa",
+        "arabic_term": "خلفاء",
+        "definition": "Nachfolger. Die Thamud folgten den 'Ad auf der Erde.",
+        "pronunciation": "khou-la-fa"
+      },
+      {
+        "id": 2,
+        "term": "Mufsidun",
+        "arabic_term": "مفسدون",
+        "definition": "Diejenigen, die Unruhe stiften. Der Koran warnt die Thamud davor, Unruhestifter zu sein.",
+        "pronunciation": "mouf-si-doun"
+      }
+    ]
+  },
+  "the_she_camel": {
+    "title": "Die Kamelstute Allahs",
+    "title_arabic": "ناقة الله",
+    "introduction": "Allah sandte den Thamud eine Kamelstute als Zeichen und Prüfung. Diese Kamelstute (nāqat Allāh) war ein klarer Beweis für Salihs Wahrheit. Er befahl ihnen, sie frei weiden zu lassen und ihr kein Leid zu tun. Das Wasser sollte zwischen ihnen und ihr geteilt werden, jeder trinkt an seiner Reihe. Die Thamud lehnten diese Prüfung ab.",
+    "conclusion": "Die Kamelstute war ein Zeichen von Allahs Barmherzigkeit und eine Prüfung für die Thamud. Durch ihre Achtung wären sie verschont worden. Durch ihre Tötung besiegelten sie ihr Verderben.",
+    "moral_lesson": "Diese Geschichte lehrt uns, dass Allahs Zeichen Prüfungen sind. Sie zu achten führt zur Rettung; sie zu übertreten führt zur Strafe.",
+    "historical_location": "Al-Hijr",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "the_she_camel_chapter_1",
+        "title": "Das göttliche Zeichen",
+        "content": "Der Koran berichtet Salihs Worte: \"Ein klarer Beweis ist von eurem Herrn zu euch gekommen: hier ist die Kamelstute Allahs, ein Zeichen für euch. Lasst sie auf Allahs Land weiden und tut ihr kein Leid, sonst wird euch eine schmerzhafte Strafe ergreifen.\" (7:73) Die Kamelstute war ein Wunder — ein greifbares Zeichen von Allahs Macht und der Wahrheit von Salihs Botschaft. Sie sollte frei auf Allahs Land weiden. Wer ihr Leid zufügte, würde eine schmerzhafte Strafe erleiden."
+      },
+      {
+        "id": "the_she_camel_chapter_2",
+        "title": "Die Teilung des Wassers",
+        "content": "Der Koran weist darauf hin, dass Allah Salih befahl, die Thamud zu informieren: \"Das Wasser wird zwischen euch und ihr geteilt; jeder trinkt an seiner Reihe.\" (54:28) Die Kamelstute war eine Prüfung (fitna) für die Thamud. Der Koran sagt: \"Wir senden die Kamelstute als Prüfung für sie. Beobachtet sie also und seid geduldig.\" (54:27) Die Thamud sollten diese Teilung akzeptieren und der Kamelstute kein Leid tun. Diejenigen, die glaubten und gehorchten, würden verschont; die anderen würden die Strafe erleiden."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 7:73",
+        "reference_text": "Sure Al-A'raf, Vers 73",
+        "content": "هَـٰذِهِۦ نَاقَةُ ٱللَّهِ لَكُمْ ءَايَةًۭ ۖ فَذَرُوهَا تَأْكُلْ فِىٓ أَرْضِ ٱللَّهِ ۖ وَلَا تَمَسُّوهَا بِسُوٓءٍۢ فَيَأْخُذَكُمْ عَذَابٌ أَلِيمٌۭ",
+        "translation": "Hier ist die Kamelstute Allahs, ein Zeichen für euch. Lasst sie auf Allahs Land weiden und tut ihr kein Leid, sonst wird euch eine schmerzhafte Strafe ergreifen.",
+        "relevance": "Dieser Vers begründet die Kamelstute als Zeichen und das Verbot, ihr Leid zuzufügen."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 54:27-28",
+        "reference_text": "Sure Al-Qamar, Verse 27-28",
+        "content": "إِنَّا مُرْسِلُوا۟ ٱلنَّاقَةِ فِتْنَةًۭ لَّهُمْ فَٱرْتَقِبْهُمْ وَٱصْطَبِرْ ۝ وَنَبِّئْهُمْ أَنَّ ٱلْمَآءَ قِسْمَةٌۢ بَيْنَهُمْ ۖ كُلُّ شِرْبٍۢ مُّحْتَضَرٌۭ",
+        "translation": "Wir senden die Kamelstute als Prüfung für sie. Beobachtet sie also und seid geduldig. Und teilt ihnen mit, dass das Wasser zwischen ihnen und ihr geteilt wird; jeder trinkt an seiner Reihe.",
+        "relevance": "Diese Verse beschreiben die Kamelstute als Prüfung und die Teilung des Wassers."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Naqat Allah",
+        "arabic_term": "ناقة الله",
+        "definition": "Die Kamelstute Allahs. Das wunderbare Zeichen, das den Thamud gesandt wurde.",
+        "pronunciation": "na-qat al-lah"
+      },
+      {
+        "id": 2,
+        "term": "Fitna",
+        "arabic_term": "فتنة",
+        "definition": "Prüfung, Versuchung. Die Kamelstute war eine Prüfung für die Thamud.",
+        "pronunciation": "fit-na"
+      }
+    ]
+  },
+  "the_camel_killed": {
+    "title": "Die Tötung der Kamelstute und die Strafe",
+    "title_arabic": "عقر الناقة والعذاب",
+    "introduction": "Trotz Salihs Warnung töteten die Thamud die Kamelstute. Der Koran berichtet, dass sie \"sie leugneten und sie töteten\" (91:14). Als Antwort zerstörte Allah sie durch ein Erdbeben (rajfah). Sie wurden in ihren Behausungen ergriffen und tot, hingestreckt, vorgefunden. Salih und die Gläubigen wurden gerettet.",
+    "conclusion": "Die Tötung der Kamelstute besiegelte das Schicksal der Thamud. Das Erdbeben vernichtete sie. Ihre Übertretung gegen ein klares Zeichen Allahs brachte ihnen sofortige Strafe ein. Die Geschichte der Thamud bleibt eine Warnung für die Generationen.",
+    "moral_lesson": "Diese Geschichte lehrt uns, dass die Übertretung von Allahs Zeichen zum Verderben führt. Die Strafe kann plötzlich kommen. Nur diejenigen, die glauben und gehorchen, werden verschont.",
+    "historical_location": "Al-Hijr",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "the_camel_killed_chapter_1",
+        "title": "Das Verbrechen",
+        "content": "Der Koran beschreibt, was geschah: \"Als der Elendste unter ihnen sich erhob\" (91:12), und als der Gesandte Allahs (Salih) zu ihnen sagte: \"Hier ist die Kamelstute Allahs, lasst sie trinken\" (91:13), \"leugneten sie ihn und töteten sie. Ihr Herr vernichtete sie darauf für ihre Sünde und ebnete sie ein.\" (91:14) Die Thamud begingen das höchste Verbrechen: das Zeichen Allahs zu töten, nachdem sie gewarnt worden waren. Ihr Hochmut blendete sie."
+      },
+      {
+        "id": "the_camel_killed_chapter_2",
+        "title": "Das Erdbeben",
+        "content": "Der Koran beschreibt die Strafe: \"Das Erdbeben ergriff sie, und am Morgen lagen sie tot in ihren Behausungen.\" (7:78) Das Wort \"rajfah\" bezeichnet ein Erdbeben oder heftiges Beben. Die Thamud, so stolz auf ihre Paläste und in die Berge gehauenen Wohnstätten, wurden in einem Augenblick vernichtet. Salih und die, die mit ihm geglaubt hatten, wurden durch Allahs Barmherzigkeit gerettet. Die Ruinen von Al-Hijr zeugen noch von ihrer untergegangenen Zivilisation."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 91:12-15",
+        "reference_text": "Sure Ash-Shams, Verse 12-15",
+        "content": "إِذِ ٱنۢبَعَثَ أَشْقَىٰهَا ۝ فَقَالَ لَهُمْ رَسُولُ ٱللَّهِ نَاقَةَ ٱللَّهِ وَسُقْيَـٰهَا ۝ فَكَذَّبُوهُ فَعَقَرُوهَا فَدَمْدَمَ عَلَيْهِمْ رَبُّهُم بِذَنۢبِهِمْ فَسَوَّىٰهَا ۝ وَلَا يَخَافُ عُقْبَـٰهَا",
+        "translation": "Als der Elendste unter ihnen sich erhob. Der Gesandte Allahs sagte zu ihnen: Hier ist die Kamelstute Allahs, lasst sie trinken. Sie leugneten ihn und töteten sie. Ihr Herr vernichtete sie für ihre Sünde und ebnete sie ein. Und Er fürchtet nicht die Folgen.",
+        "relevance": "Diese Verse beschreiben das Verbrechen der Thamud und ihre Strafe."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 7:78",
+        "reference_text": "Sure Al-A'raf, Vers 78",
+        "content": "فَأَخَذَتْهُمُ ٱلرَّجْفَةُ فَأَصْبَحُوا۟ فِى دَارِهِمْ جَـٰثِمِينَ",
+        "translation": "Das Erdbeben ergriff sie, und am Morgen lagen sie tot in ihren Behausungen.",
+        "relevance": "Dieser Vers beschreibt die Art der Strafe: ein Erdbeben."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Aqar",
+        "arabic_term": "عقر",
+        "definition": "Töten (durch Durchtrennen der Sehnen). Die Thamud \"aqarū\" die Kamelstute.",
+        "pronunciation": "a-qar"
+      },
+      {
+        "id": 2,
+        "term": "Rajfah",
+        "arabic_term": "رجفة",
+        "definition": "Erdbeben, Beben. Die Strafe, mit der Allah die Thamud zerstörte.",
+        "pronunciation": "raj-fa"
+      }
+    ]
+  },
+  "lessons_from_salih": {
+    "title": "Lehren aus Salihs Geschichte",
+    "title_arabic": "دروس من قصة صالح",
+    "introduction": "Die Geschichte Salihs (عليه السلام) enthält zeitlose Lehren. Sie lehrt die Folgen der Übertretung von Allahs Zeichen, die Wichtigkeit der Dankbarkeit für die Wohltaten und die Schnelligkeit der Strafe für die, die im Bösen beharren. Der Koran zitiert sie als Beispiel.",
+    "conclusion": "Salih erfüllte seine Mission. Die Thamud wurden vernichtet, weil sie die Kamelstute töteten. Seine Geschichte bleibt eine Erinnerung: Allahs Zeichen dürfen nicht übertreten werden. Zivilisation und materielle Errungenschaften schützen nicht vor der Strafe.",
+    "moral_lesson": "Diese Geschichte lehrt uns, Allahs Zeichen zu achten, für Seine Wohltaten dankbar zu sein und keine Unruhe zu stiften. Sie erinnert uns, dass Reue möglich ist, bevor es zu spät ist.",
+    "historical_location": "Von Al-Hijr zur Vergessenheit",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lessons_from_salih_chapter_1",
+        "title": "Ein Beispiel für die Völker",
+        "content": "Der Koran präsentiert Salihs Geschichte als Warnung. Die Thamud hatten alles: Paläste, in die Berge gehauene Wohnstätten, ein klares Zeichen — die Kamelstute. Aber ihnen fehlte das Wesentliche: Glaube und Gehorsam. Sie übertreten das Zeichen Allahs und wurden zerstört. Salih seinerseits blieb standhaft. Er bat um keinen Lohn; er übermittelte die Botschaft. Seine Geschichte erinnert uns, dass der Gesandte seine Mission erfüllt; das Ergebnis gehört Allah."
+      },
+      {
+        "id": "lessons_from_salih_chapter_2",
+        "title": "Die prophetische Kontinuität",
+        "content": "Salih gehört zur Linie der Propheten, die nach Hud gesandt wurden. Adam, Noah, Hud, Salih — jedes Volk erhält seinen Gesandten. Die Thamud hatten wie die 'Ad vor ihnen ihre Chance. Sie lehnten ab und übertreten. Salihs Geschichte folgt dem gleichen Muster: der Ruf zum Monotheismus, das wunderbare Zeichen, Ablehnung, Übertretung, Strafe und die Rettung der Gläubigen. Die Ruinen von Al-Hijr, an denen der Prophet Muhammad während des Feldzugs von Tabuk vorbeizog, erinnern die Generationen an diese Lehre."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 11:120",
+        "reference_text": "Sure Hud, Vers 120",
+        "content": "وَكُلًّا نَّقُصُّ عَلَيْكَ مِنْ أَنبَاءِ الرُّسُلِ مَا نُثَبِّتُ بِهِ فُؤَادَكَ وَجَاءَكَ فِي هَٰذِهِ الْحَقُّ وَمَوْعِظَةٌ وَذِكْرَىٰ لِلْمُؤْمِنِينَ",
+        "translation": "Und alles, was Wir dir von den Berichten der Gesandten erzählen, dient dazu, dein Herz zu festigen. Und in diesem Bericht ist dir die Wahrheit zugekommen, sowie eine Ermahnung und eine Erinnerung für die Gläubigen.",
+        "relevance": "Dieser Vers erklärt den Zweck der Prophetenberichte im Koran."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 11:68",
+        "reference_text": "Sure Hud, Vers 68",
+        "content": "كَأَن لَّمْ يَغْنَوْا۟ فِيهَا ۗ أَلَآ إِنَّ ثَمُودًا كَفَرُوا۟ رَبَّهُمْ ۗ أَلَا بُعْدًۭا لِّثَمُودَ",
+        "translation": "Als hätten sie nie darin gewohnt. Wahrlich, die Thamud verleugneten ihren Herrn. Fort mit den Thamud!",
+        "relevance": "Dieser Vers schließt den Bericht über die Thamud und ihre Strafe ab."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Ibra",
+        "arabic_term": "عبرة",
+        "definition": "Beispiel oder Lehre. Die Geschichten der Propheten sind Beispiele für die Menschheit.",
+        "pronunciation": "ib-ra"
+      },
+      {
+        "id": 2,
+        "term": "Dhikra",
+        "arabic_term": "ذكرى",
+        "definition": "Erinnerung. Die Berichte der Propheten dienen als Erinnerung für die Gläubigen.",
+        "pronunciation": "dhik-ra"
+      }
+    ]
+  }
+}

@@ -1,0 +1,230 @@
+{
+  "yahya_birth": {
+    "title": "Die Geburt Yahyas",
+    "title_arabic": "مولد يحيى",
+    "introduction": "Yahya (يحيى عليه السلام), Johannes der Täufer, ist der Sohn des Propheten Zakariya. Der Koran sagt: \"O Zakariya! Wir verkünden dir die frohe Botschaft eines Sohnes. Sein Name wird Yahya sein.\" (19:7) Yahya wurde wundersam geboren: sein Vater war alt und seine Mutter unfruchtbar. Allah erfüllte Sein Versprechen.",
+    "conclusion": "Yahya wurde wie angekündigt geboren. Sein Name bedeutet \"er wird leben\". Er war ein Zeichen für die Menschen. Seine Geburt bestätigte, dass für Allah nichts unmöglich ist.",
+    "moral_lesson": "Diese Geschichte lehrt uns, dass Allahs Wort immer erfüllt wird. Wunder erinnern uns an die Macht des Schöpfers.",
+    "historical_location": "Palästina",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "yahya_birth_chapter_1",
+        "title": "Die Ankündigung der Geburt",
+        "content": "Der Koran berichtet: \"Wir haben vor ihm niemandem diesen Namen gegeben.\" (19:7) Der Name Yahya war einzigartig. Niemand vor ihm hatte ihn getragen. Es war ein Zeichen göttlicher Erwählung. Zakariya und seine Frau warteten im Glauben. Als die Zeit kam, wurde Yahya geboren. Familie und Verwandte verherrlichten Allah."
+      },
+      {
+        "id": "yahya_birth_chapter_2",
+        "title": "Ein gesegnetes Kind",
+        "content": "Der Koran sagt: \"Und Friede sei auf ihm am Tag seiner Geburt, am Tag seines Todes und am Tag, da er lebendig auferweckt wird.\" (19:15) Yahya war von Geburt an gesegnet. Frieden (Salam) war auf ihm in jeder Phase seines Lebens. Er wuchs in Frömmigkeit und Weisheit auf. Seine Bestimmung war, Prophet zu sein."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 19:7",
+        "reference_text": "Sure Maryam, Vers 7",
+        "content": "يَـٰزَكَرِيَّآ إِنَّا نُبَشِّرُكَ بِغُلَـٰمٍ ٱسْمُهُۥ يَحْيَىٰ لَمْ نَجْعَل لَّهُۥ مِن قَبْلُ سَمِيًّۭا",
+        "translation": "O Zakariya! Wir verkünden dir die frohe Botschaft eines Sohnes. Sein Name wird Yahya sein.",
+        "relevance": "Dieser Vers bezieht sich auf die Ankündigung von Yahyas Geburt."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 19:15",
+        "reference_text": "Sure Maryam, Vers 15",
+        "content": "وَسَلَـٰمٌ عَلَيْهِ يَوْمَ وُلِدَ وَيَوْمَ يَمُوتُ وَيَوْمَ يُبْعَثُ حَيًّۭا",
+        "translation": "Und Friede sei auf ihm am Tag seiner Geburt, am Tag seines Todes und am Tag, da er lebendig auferweckt wird.",
+        "relevance": "Dieser Vers begründet die Segnungen auf Yahya."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Yahya",
+        "arabic_term": "يحيى",
+        "definition": "Johannes auf Arabisch. Bedeutet \"er wird leben\". Prophet der Reinheit.",
+        "pronunciation": "yah-ya"
+      },
+      {
+        "id": 2,
+        "term": "Salam",
+        "arabic_term": "سلام",
+        "definition": "Frieden. Salam war auf Yahya in jeder Phase.",
+        "pronunciation": "sa-lam"
+      }
+    ]
+  },
+  "yahya_purity": {
+    "title": "Die Reinheit Yahyas",
+    "title_arabic": "طهارة يحيى",
+    "introduction": "Yahya war ein Prophet der Reinheit und Frömmigkeit. Der Koran sagt: \"Und (Yahya) war seinen Eltern gegenüber gehorsam. Er war weder hochmütig noch ungehorsam.\" (19:14) Er lebte in Askese, fern von weltlichen Vergnügungen. Er widmete sich ganz der Anbetung Allahs.",
+    "conclusion": "Yahya verkörperte Reinheit. Er beging niemals Sünde. Er war ein Vorbild für die Gläubigen. Sein Name ist mit Keuschheit und Frömmigkeit verbunden.",
+    "moral_lesson": "Diese Geschichte lehrt uns, dass Reinheit von Herz und Körper eine Tugend ist. Der Gläubige muss sich vom Bösen fernhalten und sich Allah nähern.",
+    "historical_location": "Palästina (Wüste)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "yahya_purity_chapter_1",
+        "title": "Das asketische Leben",
+        "content": "Der Koran berichtet: \"Und Wir gaben ihm Weisheit von Kindheit an, und Zärtlichkeit von Uns und Reinheit.\" (19:12-13) Yahya lebte in der Wüste. Er trug Kleider aus Haar. Er aß einfach. Er suchte weder Reichtum noch Macht. Seine einzige Suche war Allahs Wohlgefallen."
+      },
+      {
+        "id": "yahya_purity_chapter_2",
+        "title": "Gehorsam",
+        "content": "Der Koran sagt: \"Er war weder hochmütig noch ungehorsam.\" (19:14) Yahya gehorchte seinen Eltern und Allah. Er rebellierte niemals. Er beging kein Unrecht. Sein Leben war ein Beispiel der Rechtschaffenheit. Die Menschen respektierten ihn für seine Frömmigkeit."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 19:12-14",
+        "reference_text": "Sure Maryam, Verse 12-14",
+        "content": "يَـٰيَحْيَىٰ خُذِ ٱلْكِتَـٰبَ بِقُوَّةٍۢ ۖ وَءَاتَيْنَـٰهُ ٱلْحُكْمَ صَبِيًّۭا ۝ وَحَنَانًۭا مِّن لَّدُنَّا وَزَكَوٰةًۭ ۝ وَكَانَ تَقِيًّۭا",
+        "translation": "O Yahya! Nimm das Buch mit Kraft. Wir gaben ihm Weisheit von Kindheit an, Zärtlichkeit und Reinheit. Er war fromm.",
+        "relevance": "Diese Passage beschreibt Yahyas Eigenschaften."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 3:39",
+        "reference_text": "Sure Al-Imran, Vers 39",
+        "content": "مُصَدِّقًۢا بِكَلِمَةٍۢ مِّنَ ٱللَّهِ وَسَيِّدًۭا وَحَصُورًۭا وَنَبِيًّۭا مِّنَ ٱلصَّـٰلِحِينَ",
+        "translation": "Ein Wort von Allah bestätigend, edel, keusch und Prophet unter den Rechtschaffenen.",
+        "relevance": "Dieser Vers lobt Yahyas Keuschheit."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Zakât",
+        "arabic_term": "زكاة",
+        "definition": "Reinheit. Yahya erhielt Zakât (Reinheit) von Allah.",
+        "pronunciation": "za-ka"
+      },
+      {
+        "id": 2,
+        "term": "Hasur",
+        "arabic_term": "حصور",
+        "definition": "Keusch. Yahya war hasur, enthaltsam von weltlichen Vergnügungen.",
+        "pronunciation": "ha-sour"
+      }
+    ]
+  },
+  "yahya_isa": {
+    "title": "Yahya und die Ankündigung Isas",
+    "title_arabic": "يحيى وعيسى",
+    "introduction": "Yahya und Isa (Jesus) sind verbunden. Der Koran sagt: \"Und (Yahya) bestätigte ein Wort von Allah.\" (3:39) Yahya kündigte die Ankunft Isas an. Er taufte die Menschen im Jordan und bereitete sie darauf vor, die Botschaft zu empfangen. Er war der Vorläufer des Messias.",
+    "conclusion": "Yahya bereitete den Weg für Isa. Er bezeugte seine Ankunft. Die beiden Propheten trafen sich. Yahya erkannte Isa als den verheißenen Messias. Die Botschaft ging weiter.",
+    "moral_lesson": "Diese Geschichte lehrt uns, dass Propheten einander bestätigen. Jeder Gesandte bereitet den Weg für den nächsten. Die prophetische Kette ist eine.",
+    "historical_location": "Palästina (Jordan)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "yahya_isa_chapter_1",
+        "title": "Der Vorläufer",
+        "content": "Der Koran berichtet: \"(Yahya) bestätigte ein Wort von Allah.\" (3:39) Yahya rief die Menschen zur Buße auf. Er taufte sie im Fluss. Er kündigte die Ankunft eines Größeren als er selbst an. Als Isa zu ihm kam, sagte Yahya: \"Dieser ist es, den ich angekündigt habe.\" Er trat demütig für Isa zur Seite."
+      },
+      {
+        "id": "yahya_isa_chapter_2",
+        "title": "Die Begegnung",
+        "content": "Der Koran sagt: \"Und (gedenke) Yahyas, als er das Buch mit Kraft nahm.\" (19:12) Yahya und Isa trafen sich am Jordan. Yahya erkannte Isa als den Messias. Er taufte ihn. Yahyas Mission war erfüllt: er hatte die Herzen vorbereitet. Isa setzte die Botschaft fort. Beide Propheten dienten Allah."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 3:39",
+        "reference_text": "Sure Al-Imran, Vers 39",
+        "content": "مُصَدِّقًۢا بِكَلِمَةٍۢ مِّنَ ٱللَّهِ وَسَيِّدًۭا وَحَصُورًۭا وَنَبِيًّۭا مِّنَ ٱلْصَّـٰلِحِينَ",
+        "translation": "Ein Wort von Allah bestätigend, edel, keusch und Prophet unter den Rechtschaffenen.",
+        "relevance": "Dieser Vers begründet die Verbindung zwischen Yahya und Allahs Wort (Isa)."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 19:12",
+        "reference_text": "Sure Maryam, Vers 12",
+        "content": "يَـٰيَحْيَىٰ خُذِ ٱلْكِتَـٰبَ بِقُوَّةٍۢ ۖ وَءَاتَيْنَـٰهُ ٱلْحُكْمَ صَبِيًّۭا",
+        "translation": "O Yahya! Nimm das Buch mit Kraft. Wir gaben ihm Weisheit von Kindheit an.",
+        "relevance": "Dieser Vers beschreibt Yahyas Mission."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Kalima",
+        "arabic_term": "كلمة",
+        "definition": "Wort. Yahya bestätigte Allahs Kalima (Isa).",
+        "pronunciation": "ka-li-ma"
+      },
+      {
+        "id": 2,
+        "term": "Isa",
+        "arabic_term": "عيسى",
+        "definition": "Jesus auf Arabisch. Prophet, den Yahya ankündigte.",
+        "pronunciation": "i-sa"
+      }
+    ]
+  },
+  "lessons_from_yahya": {
+    "title": "Lehren aus der Geschichte Yahyas",
+    "title_arabic": "دروس من قصة يحيى",
+    "introduction": "Yahya ist der Prophet der Reinheit. Der Koran sagt: \"Und (Yahya) war seinen Eltern gegenüber gehorsam. Er war weder hochmütig noch ungehorsam.\" (19:14) Sein Leben war kurz aber vorbildlich. Er bereitete die Ankunft Isas vor und starb als Märtyrer.",
+    "conclusion": "Yahya lebte in Reinheit. Er kündigte Isa an. Er wurde von einem Tyrannen getötet. Aber seine Botschaft überlebte. Er bleibt ein Vorbild der Frömmigkeit und Demut.",
+    "moral_lesson": "Diese Geschichte lehrt uns, dass Qualität über Quantität siegt. Ein kurzes aber frommes Leben ist mehr wert als ein langes Leben in Sünde.",
+    "historical_location": "Palästina",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lessons_from_yahya_chapter_1",
+        "title": "Reinheit und Frömmigkeit",
+        "content": "Der Koran sagt: \"Und (Yahya) war edel, keusch und Prophet unter den Rechtschaffenen.\" (3:39) Yahya strebte nach nichts von dieser Welt. Er lebte in Askese. Er widmete sich Allah. Der Gläubige muss diese Reinheit nachahmen. Sich vom Bösen fernhalten, sich dem Guten nähern."
+      },
+      {
+        "id": "lessons_from_yahya_chapter_2",
+        "title": "Demut vor der Wahrheit",
+        "content": "Yahya kündigte Isa an. Als Isa kam, trat Yahya zur Seite. Er sagte: \"Er muss zunehmen, und ich muss abnehmen.\" Diese Demut ist eine Lehre. Der wahre Gläubige konkurriert nicht. Er dient der Wahrheit, wer auch immer der Bote ist, der sie trägt."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 19:12-15",
+        "reference_text": "Sure Maryam, Verse 12-15",
+        "content": "يَـٰيَحْيَىٰ خُذِ ٱلْكِتَـٰبَ بِقُوَّةٍۢ ۖ وَءَاتَيْنَـٰهُ ٱلْحُكْمَ صَبِيًّۭا ۝ وَحَنَانًۭا مِّن لَّدُنَّا وَزَكَوٰةًۭ ۝ وَكَانَ تَقِيًّۭا ۝ وَحَنَانًۭا مِّن لَّدُنَّا وَزَكَوٰةًۭ",
+        "translation": "O Yahya! Nimm das Buch mit Kraft. Wir gaben ihm Weisheit, Zärtlichkeit und Reinheit. Er war fromm.",
+        "relevance": "Diese Passage fasst Yahyas Eigenschaften zusammen."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 6:85",
+        "reference_text": "Sure Al-An'am, Vers 85",
+        "content": "وَزَكَرِيَّا وَيَحْيَىٰ وَعِيسَىٰ وَإِلْيَاسَ كُلٌّۭ مِّنَ ٱلصَّـٰلِحِينَ",
+        "translation": "Und Zakariya, Yahya, Isa und Ilyas: alle unter den Rechtschaffenen.",
+        "relevance": "Dieser Vers stellt Yahya unter die rechtschaffenen Propheten."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Taqwa",
+        "arabic_term": "تقوى",
+        "definition": "Frömmigkeit, Gottesfurcht. Yahya war voller Taqwa.",
+        "pronunciation": "taq-wa"
+      },
+      {
+        "id": 2,
+        "term": "Sayyid",
+        "arabic_term": "سيد",
+        "definition": "Edel, Meister. Yahya war Sayyid, edel unter den Menschen.",
+        "pronunciation": "say-yid"
+      }
+    ]
+  }
+}

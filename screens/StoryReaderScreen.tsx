@@ -22,6 +22,7 @@ import { useThemeColors } from "../hooks/useThemeAssets";
 import { useCurrentTheme } from "../hooks/useThemeColor";
 import { usePremium } from "../contexts/PremiumContext";
 import { useTranslation } from "react-i18next";
+import i18n from "i18next";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNetworkStatus } from "../hooks/useNetworkStatus";
 
@@ -165,6 +166,11 @@ export default function StoryReaderScreen() {
   const scrollPosition = useRef(0);
   const fadeAnim = useRef(new Animated.Value(0)).current;
 
+  // 📖 Remonter en haut quand on change de chapitre (Suivant/Précédent/onglet)
+  useEffect(() => {
+    scrollViewRef.current?.scrollTo({ y: 0, animated: true });
+  }, [currentChapter]);
+
   // 🔄 Récupérer l'ID de l'histoire à chaque fois qu'on revient sur cette page
   useFocusEffect(
     useCallback(() => {
@@ -243,8 +249,11 @@ export default function StoryReaderScreen() {
           headers.Authorization = `Bearer ${token}`;
         }
 
+        // Récupérer la langue actuelle de l'app
+        const currentLang = i18n.language || 'fr';
+        
         const response = await fetch(
-          `https://myadhanapp.com/api/prophet-stories.php?action=story&id=${storyId}`,
+          `https://myadhanapp.com/api/prophet-stories.php?action=story&id=${storyId}&lang=${currentLang}`,
           {
             method: "GET",
             headers: headers,

@@ -1,0 +1,495 @@
+{
+  "nuh_prophecy": {
+    "title": "The Sending of Noah as a Prophet",
+    "title_arabic": "إرسال نوح عليه السلام",
+    "introduction": "Noah (Nuh عليه السلام) is one of the greatest prophets mentioned in the Quran. Allah sent him to his people to call them to worship the One God and to warn them of the coming punishment. His story illustrates the exemplary patience of the prophet in the face of rejection and hostility, and demonstrates Allah's mercy towards those who believe.",
+    "conclusion": "The sending of Noah marks the beginning of a prophetic mission that lasted nearly a thousand years. Despite the difficulties, Noah remained faithful to his message, establishing a model of perseverance and devotion for all the prophets who followed.",
+    "moral_lesson": "This story teaches us that the prophetic mission is a sacred responsibility entrusted by Allah. It reminds us of the importance of warning people clearly and never despairing of divine mercy.",
+    "historical_location": "Mesopotamia (region of present-day Iraq)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "nuh_prophecy_chapter_1",
+        "title": "The Divine Command",
+        "content": "Allah chose Noah from among the descendants of Adam to be the first messenger sent to a community. The Quran reports: \"We sent Noah to his people: Warn your people before there comes to them a painful punishment.\" Noah received the divine revelation ordering him to call his people to abandon the worship of idols and return to Allah, the Only One worthy of worship. His mission was clear: to warn before the punishment, so that whoever wished could repent and be saved."
+      },
+      {
+        "id": "nuh_prophecy_chapter_2",
+        "title": "Noah's People",
+        "content": "Noah's people had fallen into misguidance. They worshipped idols named Wadd, Suwa', Yaghuth, Ya'uq and Nasr, deities they had invented themselves. They had forgotten the message of monotheism transmitted by Adam and his pious descendants. Noah, as the prophet chosen by Allah, had the responsibility to bring them back to the truth. He called them with wisdom and clarity, explaining that these idols could neither create, nor harm, nor benefit, and that Allah alone deserved worship."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 71:1",
+        "reference_text": "Surah Nuh, verse 1",
+        "content": "إِنَّا أَرْسَلْنَا نُوحًا إِلَىٰ قَوْمِهِ أَنْ أَنذِرْ قَوْمَكَ مِن قَبْلِ أَن يَأْتِيَهُمْ عَذَابٌ أَلِيمٌ",
+        "translation": "We sent Noah to his people: Warn your people before there comes to them a painful punishment.",
+        "relevance": "This verse establishes Noah's sending as a prophet and the nature of his warning mission."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 11:25",
+        "reference_text": "Surah Hud, verse 25",
+        "content": "وَلَقَدْ أَرْسَلْنَا نُوحًا إِلَىٰ قَوْمِهِ إِنِّي لَكُمْ نَذِيرٌ مُّبِينٌ",
+        "translation": "We certainly sent Noah to his people: I am for you a clear warner.",
+        "relevance": "This verse confirms Noah's sending and his role as a clear warner."
+      },
+      {
+        "id": 3,
+        "type": "quran",
+        "source": "Quran 71:23",
+        "reference_text": "Surah Nuh, verse 23",
+        "content": "وَقَالُوا لَا تَذَرُنَّ آلِهَتَكُمْ وَلَا تَذَرُنَّ وَدًّا وَلَا سُوَاعًا وَلَا يَغُوثَ وَيَعُوقَ وَنَسْرًا",
+        "translation": "And they said: Never abandon your deities. Do not abandon Wadd, nor Suwa', nor Yaghuth, nor Ya'uq, nor Nasr.",
+        "relevance": "This verse reveals the names of the idols worshipped by Noah's people."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Nuh",
+        "arabic_term": "نوح",
+        "definition": "Noah in Arabic. Prophet of Allah sent to his people to call them to monotheism. He preached for 950 years.",
+        "pronunciation": "nouh"
+      },
+      {
+        "id": 2,
+        "term": "Nadhir",
+        "arabic_term": "نذير",
+        "definition": "Warner. Refers to the role of the prophet who warns his people of punishment before it occurs.",
+        "pronunciation": "na-dhir"
+      },
+      {
+        "id": 3,
+        "term": "Qawm",
+        "arabic_term": "قوم",
+        "definition": "People or community. The people of Noah to whom he was sent as a messenger.",
+        "pronunciation": "qawm"
+      }
+    ]
+  },
+  "nuh_call": {
+    "title": "Noah's Call to His People",
+    "title_arabic": "دعوة نوح لقومه",
+    "introduction": "Noah (عليه السلام) called his people with patience and perseverance. He invited them night and day: \"Worship Allah. You have no other deity than Him.\" He used various methods to convey his message: public preaching, private calls, and explicit warnings. Despite his dedication, most of his people stubbornly refused.",
+    "conclusion": "Noah's call demonstrates the prophet's total dedication to his mission. He neglected no opportunity to guide his people, even in the face of rejection and mockery.",
+    "moral_lesson": "This story teaches us the importance of da'wa (the call to Islam) with wisdom and good exhortation. It reminds us that our duty is to convey the message; guidance remains in Allah's hands.",
+    "historical_location": "Mesopotamia",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "nuh_call_chapter_1",
+        "title": "The Invitation to Monotheism",
+        "content": "Noah said to his people: \"O my people! Worship Allah. You have no other deity than Him. I fear for you the punishment of a terrible day.\" He explained to them that the idols they worshipped were merely names they had invented, they and their ancestors, without Allah having sent down any proof for them. He invited them to ask Allah for forgiveness, for He is Most Forgiving and Most Merciful. Noah promised that if they repented, Allah would send down upon them abundant rains and multiply them in wealth and children."
+      },
+      {
+        "id": "nuh_call_chapter_2",
+        "title": "Noah's Methods",
+        "content": "The Quran describes how Noah called his people: \"I called my people night and day. But my call only increased their flight.\" Every time he called them so that Allah might forgive them, they put their fingers in their ears and wrapped themselves in their garments, persisting in their pride. Noah did not become discouraged. He continued to call them openly and in secret, saying: \"Seek forgiveness from your Lord, for He is Most Forgiving.\""
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 71:2-4",
+        "reference_text": "Surah Nuh, verses 2-4",
+        "content": "قَالَ يَا قَوْمِ إِنِّي لَكُمْ نَذِيرٌ مُّبِينٌ أَنِ اعْبُدُوا اللَّهَ وَاتَّقُوهُ وَأَطِيعُونِ يَغْفِرْ لَكُم مِّن ذُنُوبِكُمْ وَيُؤَخِّرْكُمْ إِلَىٰ أَجَلٍ مُّسَمًّى",
+        "translation": "He said: O my people! I am for you a clear warner. Worship Allah, fear Him and obey me. He will forgive you some of your sins and grant you respite until an appointed term.",
+        "relevance": "These verses contain Noah's central message: worship of Allah and the promise of forgiveness."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 71:5-7",
+        "reference_text": "Surah Nuh, verses 5-7",
+        "content": "قَالَ رَبِّ إِنِّي دَعَوْتُ قَوْمِي لَيْلًا وَنَهَارًا فَلَمْ يَزِدْهُمْ دُعَائِي إِلَّا فِرَارًا وَإِنِّي كُلَّمَا دَعَوْتُهُمْ لِتَغْفِرَ لَهُمْ جَعَلُوا أَصَابِعَهُمْ فِي آذَانِهِمْ وَاسْتَغْشَوْا ثِيَابَهُمْ وَأَصَرُّوا وَاسْتَكْبَرُوا اسْتِكْبَارًا",
+        "translation": "He said: Lord! I called my people night and day. But my call only increased their flight. And every time I called them so that You might forgive them, they put their fingers in their ears and wrapped themselves in their garments, persisting in their pride.",
+        "relevance": "These verses describe Noah's perseverance and his people's stubborn reaction."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Da'wa",
+        "arabic_term": "دعوة",
+        "definition": "Call or invitation. The invitation to Islam and worship of Allah. Noah practiced da'wa with constancy.",
+        "pronunciation": "da-wa"
+      },
+      {
+        "id": 2,
+        "term": "Tawhid",
+        "arabic_term": "توحيد",
+        "definition": "Monotheism. The oneness of Allah in worship. It was Noah's central message.",
+        "pronunciation": "taw-hid"
+      },
+      {
+        "id": 3,
+        "term": "Istighfar",
+        "arabic_term": "استغفار",
+        "definition": "Seeking forgiveness. Noah invited his people to seek Allah's forgiveness.",
+        "pronunciation": "is-tigh-far"
+      }
+    ]
+  },
+  "rejection_and_mockery": {
+    "title": "Rejection and Mockery",
+    "title_arabic": "الرفض والسخرية",
+    "introduction": "The notables of Noah's people refused his message with arrogance. They called him a liar, deemed him mad, and urged people not to follow \"those of humble condition\" who had believed. Their pride blinded them and prevented them from recognizing the truth.",
+    "conclusion": "The rejection of Noah by the notables illustrates how pride and attachment to ancestral traditions can prevent people from accepting the truth, even when it is clearly presented.",
+    "moral_lesson": "This story warns us of the dangers of pride and contempt towards believers. It teaches us that truth is not determined by social status but by what Allah has revealed.",
+    "historical_location": "Mesopotamia",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "rejection_and_mockery_chapter_1",
+        "title": "The Notables' Accusation",
+        "content": "The chiefs of Noah's people came to him and said: \"We see in you only a man like ourselves, and we see only those who follow you as the vilest among us, at first sight. We see in you no superiority over us. Rather, we think you are liars.\" They refused to believe that an ordinary man could be a prophet and despised those who had believed, considering them people of low condition. Noah answered them with wisdom: \"O my people! Do you see? If I base myself on clear proof from my Lord and He has granted me mercy from Him, to which you are blind, shall we force you to accept it when you find it repugnant?\""
+      },
+      {
+        "id": "rejection_and_mockery_chapter_2",
+        "title": "Persistence in Misguidance",
+        "content": "Despite Noah's proofs and warnings, his people persisted in their rejection. They said: \"O Noah! You have disputed with us and multiplied the disputes. So bring us what you threaten us with, if you are among the truthful.\" They challenged Noah, demanding to see the punishment he warned them about, believing it would never come. Noah replied: \"It is Allah alone who will bring it to you if He wills, and you will not escape it.\" Their arrogance blinded them; they did not understand that the respite granted to them was a mercy to give them the opportunity to repent."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 11:27",
+        "reference_text": "Surah Hud, verse 27",
+        "content": "فَقَالَ الْمَلَأُ الَّذِينَ كَفَرُوا مِن قَوْمِهِ مَا نَرَاكَ إِلَّا بَشَرًا مِّثْلَنَا وَمَا نَرَاكَ اتَّبَعَكَ إِلَّا الَّذِينَ هُمْ أَرَاذِلُنَا بَادِيَ الرَّأْيِ وَمَا نَرَىٰ لَكُمْ عَلَيْنَا مِن فَضْلٍ بَلْ نَظُنُّكُمْ كَاذِبِينَ",
+        "translation": "The notables of his people who had disbelieved said: We see in you only a man like ourselves, and we see only those who follow you as the vilest among us. We see in you no superiority over us. Rather, we think you are liars.",
+        "relevance": "This verse describes the arrogance of the notables and their contempt for the believers."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 11:32",
+        "reference_text": "Surah Hud, verse 32",
+        "content": "قَالُوا يَا نُوحُ قَدْ جَادَلْتَنَا فَأَكْثَرْتَ جِدَالَنَا فَأْتِنَا بِمَا تَعِدُنَا إِن كُنتَ مِنَ الصَّادِقِينَ",
+        "translation": "They said: O Noah! You have disputed with us and multiplied the disputes. So bring us what you threaten us with, if you are among the truthful.",
+        "relevance": "This verse shows the people's arrogant challenge to Noah's warnings."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Mala'",
+        "arabic_term": "ملأ",
+        "definition": "Notables or chiefs. The leaders of Noah's people who led the opposition against him.",
+        "pronunciation": "ma-la"
+      },
+      {
+        "id": 2,
+        "term": "Kufr",
+        "arabic_term": "كفر",
+        "definition": "Disbelief or rejection of the truth. The state of those who refused Noah's message.",
+        "pronunciation": "koufr"
+      },
+      {
+        "id": 3,
+        "term": "Istikbar",
+        "arabic_term": "استكبار",
+        "definition": "Pride or arrogance. The sin that prevented Noah's people from accepting the truth.",
+        "pronunciation": "is-tik-bar"
+      }
+    ]
+  },
+  "nuh_patience": {
+    "title": "Noah's Patience",
+    "title_arabic": "صبر نوح عليه السلام",
+    "introduction": "Noah (عليه السلام) preached to his people for nine hundred and fifty years, according to the Quran. Despite this exceptional period, only a small number believed. This long patience illustrates the prophet's exemplary perseverance and Allah's mercy in granting people time to repent.",
+    "conclusion": "Noah's patience for nearly a thousand years remains a model for all believers. It demonstrates that success is not measured by the number of converts, but by faithfulness in accomplishing the mission entrusted by Allah.",
+    "moral_lesson": "This story teaches us the virtue of patience (sabr) in the call to Islam. It reminds us that we must persevere in our mission without becoming discouraged in the face of opposition.",
+    "historical_location": "Mesopotamia",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "nuh_patience_chapter_1",
+        "title": "Nine Hundred Fifty Years",
+        "content": "The Quran informs us: \"And We sent Noah to his people. He remained among them a thousand years less fifty years.\" Thus, Noah spent nine hundred and fifty years calling his people to Islam. Throughout this time, he never tired of conveying the message. He called them by day and by night, in public and in private. Despite this extraordinary perseverance, the majority refused. Only a small group of believers, mainly humble people, responded to his call. This long duration demonstrates both Allah's infinite patience in giving people time to repent, and the prophet's unshakeable determination in accomplishing his mission."
+      },
+      {
+        "id": "nuh_patience_chapter_2",
+        "title": "Noah's Prayer",
+        "content": "After centuries of calling without success among the majority, Noah addressed Allah: \"Lord! The people of my people have disobeyed me and have followed one whose wealth and children have only increased his loss. They have devised an immense scheme. They have said: Never abandon your deities. Do not abandon Wadd, nor Suwa', nor Yaghuth, nor Ya'uq, nor Nasr. They have already led many astray. Do not increase the wrongdoers except in error.\" Noah recognized that his people had exceeded all limits and asked Allah not to leave on earth any inhabitant among the disbelievers, for if He left them, they would only lead His servants astray and would only beget sinners and inveterate disbelievers."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 29:14",
+        "reference_text": "Surah Al-Ankabut, verse 14",
+        "content": "وَلَقَدْ أَرْسَلْنَا نُوحًا إِلَىٰ قَوْمِهِ فَلَبِثَ فِيهِمْ أَلْفَ سَنَةٍ إِلَّا خَمْسِينَ عَامًا",
+        "translation": "We sent Noah to his people. He remained among them a thousand years less fifty years.",
+        "relevance": "This verse establishes the exceptional duration of Noah's mission: 950 years."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 71:26-28",
+        "reference_text": "Surah Nuh, verses 26-28",
+        "content": "وَقَالَ نُوحٌ رَبِّ لَا تَذَرْ عَلَى الْأَرْضِ مِنَ الْكَافِرِينَ دَيَّارًا إِنَّكَ إِن تَذَرْهُمْ يُضِلُّوا عِبَادَكَ وَلَا يَلِدُوا إِلَّا فَاجِرًا كَفَّارًا",
+        "translation": "And Noah said: Lord! Do not leave on earth any inhabitant among the disbelievers. If You leave them, they will lead Your servants astray and will only beget sinners and inveterate disbelievers.",
+        "relevance": "These verses contain Noah's prayer after centuries of rejection by his people."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Sabr",
+        "arabic_term": "صبر",
+        "definition": "Patience. The virtue that Noah manifested during 950 years of calling to Islam.",
+        "pronunciation": "sabr"
+      },
+      {
+        "id": 2,
+        "term": "Du'a",
+        "arabic_term": "دعاء",
+        "definition": "Supplication or prayer. Noah invoked Allah after his people persisted in disbelief.",
+        "pronunciation": "dou-a"
+      }
+    ]
+  },
+  "building_the_ark": {
+    "title": "Building the Ark",
+    "title_arabic": "بناء السفينة",
+    "introduction": "Allah commanded Noah to build an ark in anticipation of the flood. Noah obeyed and set about building the ship, enduring the mockery of his people who did not believe in the coming punishment. The ark was built according to precise divine instructions, and it became the means of salvation for the believers.",
+    "conclusion": "Building the ark demonstrates Noah's total obedience to Allah's commands, even when they seemed unusual. It also illustrates how Allah prepares salvation for those who believe.",
+    "moral_lesson": "This story teaches us to obey Allah's commands without hesitation, even when they seem incomprehensible to us. Divine wisdom exceeds our limited understanding.",
+    "historical_location": "Mesopotamia",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "building_the_ark_chapter_1",
+        "title": "The Command to Build",
+        "content": "Allah revealed to Noah: \"Build the ark under Our eyes and according to Our revelation. And do not address Me concerning the wrongdoers: they will be drowned.\" Noah immediately set to work. He built the ark according to the exact specifications that Allah had indicated to him. The Quran does not give the technical details of the construction, but it emphasizes that everything was done under divine supervision and according to revelation. While Noah was building, the disbelievers passed by him and mocked: \"O Noah! You have disputed with us and multiplied the disputes.\" Noah warned them: \"If you mock us, we will mock you as you mock.\""
+      },
+      {
+        "id": "building_the_ark_chapter_2",
+        "title": "The Boarding",
+        "content": "When the ark was completed and the time of punishment approached, Allah commanded Noah: \"Load in it a pair of every species, as well as your family - except those against whom the word has already been pronounced - and the believers.\" Only those who had believed boarded with Noah. Among his family, his wife and one of his sons refused to believe and were not among the saved. The Quran specifies that Noah's wife and his son were among the wrongdoers. The ark welcomed Noah, the believers, and a pair of every species of animals, as Allah had commanded."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 11:37-38",
+        "reference_text": "Surah Hud, verses 37-38",
+        "content": "وَاصْنَعِ الْفُلْكَ بِأَعْيُنِنَا وَوَحْيِنَا وَلَا تُخَاطِبْنِي فِي الَّذِينَ ظَلَمُوا إِنَّهُم مُّغْرَقُونَ وَيَصْنَعُ الْفُلْكَ وَكُلَّمَا مَرَّ عَلَيْهِ مَلَأٌ مِّن قَوْمِهِ سَخِرُوا مِنْهُ",
+        "translation": "Build the ark under Our eyes and according to Our revelation. And do not address Me concerning the wrongdoers: they will be drowned. And he was building the ark. And every time notables of his people passed by him, they mocked him.",
+        "relevance": "These verses describe the command to build the ark and the people's mockery."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 11:40",
+        "reference_text": "Surah Hud, verse 40",
+        "content": "حَتَّىٰ إِذَا جَاءَ أَمْرُنَا وَفَارَ التَّنُّورُ قُلْنَا احْمِلْ فِيهَا مِن كُلٍّ زَوْجَيْنِ اثْنَيْنِ وَأَهْلَكَ إِلَّا مَن سَبَقَ عَلَيْهِ الْقَوْلُ وَمَن آمَنَ",
+        "translation": "Then, when Our command came and the oven overflowed, We said: Load in it a pair of every species, as well as your family - except those against whom the word has already been pronounced - and the believers.",
+        "relevance": "This verse describes the boarding of the ark at the time of the flood."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Fulk",
+        "arabic_term": "فلك",
+        "definition": "Ark or ship. The vessel that Noah built according to Allah's command.",
+        "pronunciation": "foulk"
+      },
+      {
+        "id": 2,
+        "term": "Tannur",
+        "arabic_term": "تنور",
+        "definition": "Oven. The sign mentioned in the Quran indicating the beginning of the flood - the oven overflowed.",
+        "pronunciation": "tan-nour"
+      },
+      {
+        "id": 3,
+        "term": "Zawjayn",
+        "arabic_term": "زوجين",
+        "definition": "A pair. A male and female of every species were loaded into the ark.",
+        "pronunciation": "zaw-jayn"
+      }
+    ]
+  },
+  "the_flood": {
+    "title": "The Flood",
+    "title_arabic": "الطوفان",
+    "introduction": "Allah's punishment fell upon Noah's people. The waters gushed from the earth and the sky, submerging everything. The ark floated on the waters, carrying the believers and the animals in safety. The disbelievers were drowned, as Noah had warned them for centuries.",
+    "conclusion": "The flood demonstrates Allah's justice: He saved the believers and destroyed the disbelievers. It is a lesson for all generations on the consequences of rejecting the truth.",
+    "moral_lesson": "This story warns us that Allah's punishment is real and strikes those who persist in disbelief. It reminds us never to feel secure in disobeying Allah.",
+    "historical_location": "Mesopotamia",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "the_flood_chapter_1",
+        "title": "The Unleashing of the Waters",
+        "content": "When Allah's command came, the gates of heaven opened and the earth gushed forth its springs. The Quran describes: \"We opened the gates of heaven to torrential water, and We made the earth gush forth springs. The waters met according to a decree already ordained.\" The flood was total. The entire region was submerged. Even the mountains could not offer refuge. Noah's ark floated on the waters, protected by Allah's will. Inside, Noah and the believers were safe, while outside, the disbelievers who had refused to board were engulfed by the waves."
+      },
+      {
+        "id": "the_flood_chapter_2",
+        "title": "The Salvation of the Believers",
+        "content": "Allah said to Noah: \"Board it. In the name of Allah, may it sail and moor! Your Lord is indeed Most Forgiving and Most Merciful.\" The ark sailed on the waters, carrying its occupants in safety. Noah and those who were with him were saved, while the others were drowned. The Quran emphasizes: \"And it was said: O earth! Swallow your water. And you, sky! Cease! The water subsided. The command was executed. The ark came to rest on Mount Judi. And it was said: May the wrongdoers be annihilated!\""
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 54:11-14",
+        "reference_text": "Surah Al-Qamar, verses 11-14",
+        "content": "فَفَتَحْنَا أَبْوَابَ السَّمَاءِ بِمَاءٍ مُّنْهَمِرٍ وَفَجَّرْنَا الْأَرْضَ عُيُونًا فَالْتَقَى الْمَاءُ عَلَىٰ أَمْرٍ قَدْ قُدِرَ وَحَمَلْنَاهُ عَلَىٰ ذَاتِ أَلْوَاحٍ وَدُسُرٍ",
+        "translation": "We opened the gates of heaven to torrential water, and We made the earth gush forth springs. The waters met according to a decree already ordained. And We carried him on a vessel of planks and nails.",
+        "relevance": "These verses describe the unleashing of the flood and the protection of the ark."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 11:44",
+        "reference_text": "Surah Hud, verse 44",
+        "content": "وَقِيلَ يَا أَرْضُ ابْلَعِي مَاءَكِ وَيَا سَمَاءُ أَقْلِعِي وَغِيضَ الْمَاءُ وَقُضِيَ الْأَمْرُ وَاسْتَوَتْ عَلَى الْجُودِيِّ وَقِيلَ بُعْدًا لِّلْقَوْمِ الظَّالِمِينَ",
+        "translation": "And it was said: O earth! Swallow your water. And you, sky! Cease! The water subsided. The command was executed. The ark came to rest on Mount Judi. And it was said: May the wrongdoers be annihilated!",
+        "relevance": "This verse describes the end of the flood and the ark's resting on Mount Judi."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Tufan",
+        "arabic_term": "طوفان",
+        "definition": "Flood. The punishment by water that destroyed Noah's people.",
+        "pronunciation": "tou-fan"
+      },
+      {
+        "id": 2,
+        "term": "Al-Judi",
+        "arabic_term": "الجودي",
+        "definition": "Mount Judi. The mountain where Noah's ark came to rest after the flood, traditionally identified in Turkey.",
+        "pronunciation": "al-jou-di"
+      }
+    ]
+  },
+  "nuh_son_refused": {
+    "title": "Noah's Son Who Refused",
+    "title_arabic": "ابن نوح الذي أبى",
+    "introduction": "Among Noah's trials was his own son's refusal to board the ark. This son chose to take refuge on a mountain, believing he could escape the flood. He was drowned. When Noah implored Allah for his son, Allah reminded him of a profound truth: this son was not of his family in terms of faith, for he had committed an unjust act.",
+    "conclusion": "The story of Noah's son teaches that blood ties are not sufficient for salvation. Only faith and obedience to Allah matter. Spiritual bonds surpass family bonds.",
+    "moral_lesson": "This story reminds us that we cannot save anyone against their will. Each person is responsible for their choices. It also teaches us that piety and faith are the true criteria of kinship in Allah's eyes.",
+    "historical_location": "During the flood",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "nuh_son_refused_chapter_1",
+        "title": "The Refusal to Board",
+        "content": "Noah called his son who had remained apart: \"O my son! Board with us and do not remain with the disbelievers.\" His son replied: \"I will take refuge on a mountain that will protect me from the water.\" Noah said to him: \"Today there is no protector against Allah's command, except the one to whom He shows mercy.\" A wave separated them, and the son was among the drowned. Noah's son had believed that his own strength and a mountain could save him, forgetting that only Allah can protect. He refused his father's invitation and chose the path of perdition."
+      },
+      {
+        "id": "nuh_son_refused_chapter_2",
+        "title": "Allah's Response",
+        "content": "Noah called upon his Lord and said: \"Lord! My son is part of my family. Your promise is truth. You are the most just of judges.\" Allah replied: \"O Noah! He is not part of your family. It was an act not in conformity with righteousness. Do not ask Me about what you have no knowledge of. I exhort you not to be among the ignorant.\" Noah understood and said: \"Lord! I seek refuge in You from asking You about what I have no knowledge of. And if You do not forgive me and show me mercy, I will be among the losers.\" This divine response teaches that true family is that of faith. Noah's son, by his refusal to believe and board the ark, had excluded himself from the family of believers."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 11:42-43",
+        "reference_text": "Surah Hud, verses 42-43",
+        "content": "وَهِيَ تَجْرِي بِهِمْ فِي مَوْجٍ كَالْجِبَالِ وَنَادَىٰ نُوحٌ ابْنَهُ وَكَانَ فِي مَعْزِلٍ يَا بُنَيَّ ارْكَب مَّعَنَا وَلَا تَكُن مَّعَ الْكَافِرِينَ قَالَ سَآوِي إِلَىٰ جَبَلٍ يَعْصِمُنِي مِنَ الْمَاءِ",
+        "translation": "It sailed with them amid waves like mountains. Noah called his son who had remained apart: O my son! Board with us and do not remain with the disbelievers. He said: I will take refuge on a mountain that will protect me from the water.",
+        "relevance": "These verses describe Noah's call to his son and the latter's refusal."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 11:45-46",
+        "reference_text": "Surah Hud, verses 45-46",
+        "content": "وَنَادَىٰ نُوحٌ رَبَّهُ فَقَالَ رَبِّ إِنَّ ابْنِي مِنْ أَهْلِي وَإِنَّ وَعْدَكَ الْحَقُّ وَأَنتَ أَحْكَمُ الْحَاكِمِينَ قَالَ يَا نُوحُ إِنَّهُ لَيْسَ مِنْ أَهْلِكَ إِنَّهُ عَمَلٌ غَيْرُ صَالِحٍ",
+        "translation": "Noah called upon his Lord and said: Lord! My son is part of my family. Your promise is truth. You are the most just of judges. Allah said: O Noah! He is not part of your family. It was an act not in conformity with righteousness.",
+        "relevance": "These verses contain the exchange between Noah and Allah, establishing that true family is that of faith."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Ahl",
+        "arabic_term": "أهل",
+        "definition": "Family or people. Allah taught Noah that his true family is those who believe, not those of blood.",
+        "pronunciation": "ahl"
+      },
+      {
+        "id": 2,
+        "term": "Amal ghayr salih",
+        "arabic_term": "عمل غير صالح",
+        "definition": "Act not in conformity with righteousness. The description Allah gave of Noah's son's behavior.",
+        "pronunciation": "a-mal ghayr sa-lih"
+      }
+    ]
+  },
+  "lessons_from_nuh": {
+    "title": "Lessons from Noah's Story",
+    "title_arabic": "دروس من قصة نوح",
+    "introduction": "The story of Noah (عليه السلام) contains timeless lessons for all humanity. It teaches patience, perseverance in the call to Islam, the consequences of disbelief, and Allah's mercy towards believers. The Quran cites it as an example for future generations.",
+    "conclusion": "Noah accomplished his mission with excellence and was saved with the believers. His story remains a reminder for all humanity: responding to the call of the prophets and believing in Allah is the path to salvation.",
+    "moral_lesson": "This story teaches us to follow Allah's messengers, to be patient in adversity, and never to despair of divine mercy. It warns us of the consequences of stubbornly rejecting the truth.",
+    "historical_location": "From Mesopotamia to Mount Judi",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lessons_from_nuh_chapter_1",
+        "title": "An Example for Humanity",
+        "content": "The Quran presents Noah's story as an example for the peoples: \"These are accounts that We relate to you of the news of the messengers, to strengthen your heart. And there has come to you in this account the truth, as well as an exhortation and a reminder for the believers.\" Noah's story shows us that the prophets all encountered opposition, but that final victory belongs to those who believe. It reminds us that the respite granted to disbelievers is not a sign of Allah's weakness, but an opportunity for them to repent. When the term comes, none can postpone it."
+      },
+      {
+        "id": "lessons_from_nuh_chapter_2",
+        "title": "The Lineage of the Prophets",
+        "content": "Noah occupies a central place in the prophetic lineage. The Quran says: \"Indeed, Allah chose Adam, Noah, the family of Abraham and the family of Imran above all the worlds.\" Noah was the first messenger sent to a community after Adam. His descendants populated the earth after the flood. Among his descendants are the prophets Ibrahim, Musa, Isa and Muhammad (peace be upon them all). Noah's story establishes the model that all the prophets followed: the call to monotheism, patience in the face of rejection, and salvation for the believers."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 11:120",
+        "reference_text": "Surah Hud, verse 120",
+        "content": "وَكُلًّا نَّقُصُّ عَلَيْكَ مِنْ أَنبَاءِ الرُّسُلِ مَا نُثَبِّتُ بِهِ فُؤَادَكَ وَجَاءَكَ فِي هَٰذِهِ الْحَقُّ وَمَوْعِظَةٌ وَذِكْرَىٰ لِلْمُؤْمِنِينَ",
+        "translation": "And all that We relate to you of the accounts of the messengers is to strengthen your heart. And there has come to you in this account the truth, as well as an exhortation and a reminder for the believers.",
+        "relevance": "This verse explains the purpose of the prophets' accounts: to strengthen hearts and exhort."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 3:33",
+        "reference_text": "Surah Al 'Imran, verse 33",
+        "content": "إِنَّ اللَّهَ اصْطَفَىٰ آدَمَ وَنُوحًا وَآلَ إِبْرَاهِيمَ وَآلَ عِمْرَانَ عَلَى الْعَالَمِينَ",
+        "translation": "Indeed, Allah chose Adam, Noah, the family of Abraham and the family of Imran above all the worlds.",
+        "relevance": "This verse establishes Noah's eminent place in the lineage of Allah's chosen ones."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Ibra",
+        "arabic_term": "عبرة",
+        "definition": "Example or lesson. The stories of the prophets are examples for humanity.",
+        "pronunciation": "ib-ra"
+      },
+      {
+        "id": 2,
+        "term": "Dhikra",
+        "arabic_term": "ذكرى",
+        "definition": "Reminder. The accounts of the prophets serve as a reminder for the believers.",
+        "pronunciation": "dhik-ra"
+      }
+    ]
+  }
+}

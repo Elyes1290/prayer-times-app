@@ -1,0 +1,401 @@
+{
+  "dawud_goliath": {
+    "title": "Dawud et Goliath",
+    "title_arabic": "داوود وجالوت",
+    "introduction": "Dawud (داوود عليه السلام), David, est un prophète et roi d'Israël. Le Coran rapporte son combat contre Goliath (Jalut) : « Combien de fois une troupe peu nombreuse a, par la permission d'Allah, vaincu une troupe très nombreuse ! » (2:249) Dawud était un jeune berger quand l'armée de Talut (Saül) affronta les Philistins. Goliath défia les soldats ; seul Dawud accepta.",
+    "conclusion": "Dawud terrassa Goliath avec une pierre de sa fronde. Allah lui donna la royauté et la sagesse. Ce combat illustre que la victoire vient d'Allah, et non de la force ou du nombre.",
+    "moral_lesson": "Cette histoire nous enseigne que la confiance en Allah et le courage peuvent triompher de l'adversité. Le faible qui s'appuie sur Allah peut vaincre le fort.",
+    "historical_location": "Palestine (vallée d'Elah)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "dawud_goliath_chapter_1",
+        "title": "Le défi de Goliath",
+        "content": "Le Coran rapporte : « Quand Talut partit avec les troupes, il dit : Allah va vous éprouver par une rivière. Quiconque y boira ne sera pas des miens ; quiconque n'y goûtera pas sera des miens — sauf celui qui en prendra une gorgée dans sa main. » (2:249) L'armée traversa ; peu restèrent fidèles. Parmi eux, Dawud. Goliath (Jalut), géant des Philistins, défia les soldats d'Israël. Personne n'osait l'affronter. Dawud, jeune berger, se porta volontaire."
+      },
+      {
+        "id": "dawud_goliath_chapter_2",
+        "title": "La victoire miraculeuse",
+        "content": "Le Coran dit : « Ils les battirent donc, par la permission d'Allah. Et Dawud tua Goliath. Et Allah lui donna la royauté et la sagesse, et lui enseigna ce qu'Il voulut. » (2:251) Dawud n'avait qu'une fronde et des pierres. Il invoqua Allah et lança une pierre. Elle atteignit Goliath au front ; le géant tomba. L'armée ennemie fut mise en déroute. La victoire était un signe : Allah soutient ceux qui Lui font confiance."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 2:249",
+        "reference_text": "Sourate Al-Baqarah, verset 249",
+        "content": "فَلَمَّا فَصَلَ طَالُوتُ بِٱلْجُنُودِ قَالَ إِنَّ ٱللَّهَ مُبْتَلِيكُم بِنَهَرٍۢ فَمَن شَرِبَ مِنْهُ فَلَيْسَ مِنِّى وَمَن لَّمْ يَطْعَمْهُ فَإِنَّهُۥ مِنِّىٓ إِلَّا مَنِ ٱغْتَرَفَ غُرْفَةًۢ بِيَدِهِۦ",
+        "translation": "Quand Talut partit avec les troupes, il dit : Allah va vous éprouver par une rivière. Quiconque y boira ne sera pas des miens.",
+        "relevance": "Ce verset décrit l'épreuve avant la bataille."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 2:251",
+        "reference_text": "Sourate Al-Baqarah, verset 251",
+        "content": "فَهَزَمُوهُم بِإِذْنِ ٱللَّهِ وَقَتَلَ دَاوُۥدُ جَالُوتَ وَءَاتَىٰهُ ٱللَّهُ ٱلْمُلْكَ وَٱلْحِكْمَةَ وَعَلَّمَهُۥ مِمَّا يَشَآءُ",
+        "translation": "Ils les battirent par la permission d'Allah. Dawud tua Goliath. Allah lui donna la royauté et la sagesse.",
+        "relevance": "Ce verset établit la victoire de Dawud et le don de la royauté."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Dawud",
+        "arabic_term": "داوود",
+        "definition": "David en arabe. Prophète et roi d'Israël, vainqueur de Goliath.",
+        "pronunciation": "da-woud"
+      },
+      {
+        "id": 2,
+        "term": "Jalut",
+        "arabic_term": "جالوت",
+        "definition": "Goliath. Géant philistin vaincu par Dawud.",
+        "pronunciation": "ja-lout"
+      }
+    ]
+  },
+  "dawud_kingdom": {
+    "title": "Le royaume de Dawud",
+    "title_arabic": "ملك داوود",
+    "introduction": "Après la mort de Talut, Dawud devint roi d'Israël. Le Coran dit : « Ô Dawud ! Nous avons fait de toi un successeur sur la terre. Juge donc entre les gens en toute équité. » (38:26) Dawud régna avec justice. Il unifia les tribus et établit Jérusalem comme capitale. Il combattit les ennemis d'Allah et fit régner la paix.",
+    "conclusion": "Dawud fut un roi juste et pieux. Il rendait la justice avec équité et ne se laissait pas corrompre. Son royaume prospéra sous sa guidance.",
+    "moral_lesson": "Cette histoire nous enseigne que le pouvoir doit être exercé avec justice. Le dirigeant doit juger équitablement et craindre Allah.",
+    "historical_location": "Jérusalem, Palestine",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "dawud_kingdom_chapter_1",
+        "title": "L'intronisation",
+        "content": "Le Coran rapporte : « Et ton Seigneur est le plus savant de ceux qui sont dans les cieux et sur la terre. Et Nous avons favorisé certains prophètes par rapport à d'autres ; et à Dawud Nous avons donné le Zabur. » (17:55) Dawud reçut la royauté et le Livre (Zabur). Il établit son trône à Jérusalem. Les gens vinrent à lui pour la justice. Il écoutait les plaintes et tranchait avec sagesse."
+      },
+      {
+        "id": "dawud_kingdom_chapter_2",
+        "title": "La justice de Dawud",
+        "content": "Le Coran dit : « Ô Dawud ! Nous avons fait de toi un successeur sur la terre. Juge donc entre les gens en toute équité et ne suis pas la passion : elle t'égarerait du chemin d'Allah. » (38:26) Dawud ne favorisait personne. Il examinait chaque affaire avec soin. Les opprimés trouvaient en lui un défenseur. Son royaume fut un modèle de justice."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 17:55",
+        "reference_text": "Sourate Al-Isra, verset 55",
+        "content": "وَرَبُّكَ أَعْلَمُ بِمَن فِى ٱلسَّمَـٰوَٰتِ وَٱلْأَرْضِ ۗ وَلَقَدْ فَضَّلْنَا بَعْضَ ٱلنَّبِيِّـۧنَ عَلَىٰ بَعْضٍۢ ۖ وَءَاتَيْنَا دَاوُۥدَ زَبُورًۭا",
+        "translation": "Ton Seigneur sait mieux. Nous avons favorisé certains prophètes. À Dawud Nous avons donné le Zabur.",
+        "relevance": "Ce verset établit le don du Zabur à Dawud."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 38:26",
+        "reference_text": "Sourate Sad, verset 26",
+        "content": "يَـٰدَاوُۥدُ إِنَّا جَعَلْنَـٰكَ خَلِيفَةًۭ فِى ٱلْأَرْضِ فَٱحْكُم بَيْنَ ٱلنَّاسِ بِٱلْحَقِّ وَلَا تَتَّبِعِ ٱلْهَوَىٰ",
+        "translation": "Ô Dawud ! Nous t'avons fait successeur sur la terre. Juge entre les gens en toute équité.",
+        "relevance": "Ce verset ordonne à Dawud de juger avec justice."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Khalifa",
+        "arabic_term": "خليفة",
+        "definition": "Successeur, représentant. Dawud fut khalifa sur la terre.",
+        "pronunciation": "kha-li-fa"
+      },
+      {
+        "id": 2,
+        "term": "Zabur",
+        "arabic_term": "الزبور",
+        "definition": "Les Psaumes. Livre révélé à Dawud par Allah.",
+        "pronunciation": "az-zabour"
+      }
+    ]
+  },
+  "dawud_zabur": {
+    "title": "Le Zabur (Les Psaumes)",
+    "title_arabic": "الزبور",
+    "introduction": "Allah révéla à Dawud le Zabur (Psaumes). Le Coran dit : « Et à Dawud Nous avons donné le Zabur. » (17:55) Le Zabur contient des louanges, des invocations et des sagesses. Dawud le récitait avec une voix si belle que les montagnes et les oiseaux glorifiaient Allah avec lui.",
+    "conclusion": "Le Zabur est l'un des livres révélés, avec la Torah, l'Évangile et le Coran. Croire en tous les livres est un pilier de la foi islamique.",
+    "moral_lesson": "Cette histoire nous enseigne que chaque prophète a reçu une révélation. Les livres divins se complètent et confirment le message de l'unicité.",
+    "historical_location": "Palestine",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "dawud_zabur_chapter_1",
+        "title": "La révélation du Zabur",
+        "content": "Le Coran rapporte : « Nous t'avons révélé comme Nous avons révélé à Nuh et aux prophètes après lui. Et Nous avons révélé à Ibrahim, Ismaël, Isaac, Jacob, les tribus, Isa, Ayyub, Yunus, Harun et Sulayman. Et à Dawud Nous avons donné le Zabur. » (4:163) Le Zabur fut révélé à Dawud par Allah. Il contenait des paroles de louange et de sagesse. Dawud le récitait en glorifiant son Seigneur."
+      },
+      {
+        "id": "dawud_zabur_chapter_2",
+        "title": "La voix de Dawud",
+        "content": "Le Coran dit : « Nous avons certes accordé une faveur à Dawud de Notre part : Ô montagnes ! Répétez avec lui les louanges. Et Ô oiseaux ! » (34:10) Quand Dawud glorifiait Allah, les montagnes et les oiseaux répétaient avec lui. Sa voix était si mélodieuse qu'elle inspirait la création. Le Zabur, récité par Dawud, élevait les cœurs vers Allah."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 4:163",
+        "reference_text": "Sourate An-Nisa, verset 163",
+        "content": "إِنَّآ أَوْحَيْنَآ إِلَيْكَ كَمَآ أَوْحَيْنَآ إِلَىٰ نُوحٍۢ وَٱلنَّبِيِّـۧنَ مِنۢ بَعْدِهِۦ ۚ وَأَوْحَيْنَآ إِلَىٰٓ إِبْرَٰهِـۧمَ وَإِسْمَـٰعِيلَ وَإِسْحَـٰقَ وَيَعْقُوبَ وَٱلْأَسْبَاطِ وَعِيسَىٰ وَأَيُّوبَ وَيُونُسَ وَهَـٰرُونَ وَسُلَيْمَـٰنَ ۚ وَءَاتَيْنَا دَاوُۥدَ زَبُورًۭا",
+        "translation": "Nous t'avons révélé comme aux prophètes. À Dawud Nous avons donné le Zabur.",
+        "relevance": "Ce verset place le Zabur parmi les livres révélés."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 34:10",
+        "reference_text": "Sourate Saba, verset 10",
+        "content": "وَلَقَدْ ءَاتَيْنَا دَاوُۥدَ مِنَّا فَضْلًۭا ۖ يَـٰجِبَالُ أَوِّبِى مَعَهُۥ وَٱلطَّيْرَ",
+        "translation": "Nous avons accordé une faveur à Dawud : Ô montagnes ! Répétez avec lui. Et Ô oiseaux !",
+        "relevance": "Ce verset décrit le miracle des montagnes et des oiseaux."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Zabur",
+        "arabic_term": "الزبور",
+        "definition": "Les Psaumes. Livre révélé à Dawud.",
+        "pronunciation": "az-zabour"
+      },
+      {
+        "id": 2,
+        "term": "Tasbih",
+        "arabic_term": "تسبيح",
+        "definition": "Glorification. Dawud glorifiait Allah par le Zabur.",
+        "pronunciation": "tas-bih"
+      }
+    ]
+  },
+  "dawud_mountains": {
+    "title": "Les montagnes et les oiseaux",
+    "title_arabic": "الجبال والطيور مع داوود",
+    "introduction": "Allah accorda à Dawud un miracle unique : quand il glorifiait son Seigneur, les montagnes et les oiseaux répétaient avec lui. Le Coran dit : « Ô montagnes ! Répétez avec lui les louanges. Et Ô oiseaux ! » (34:10) La création tout entière glorifiait Allah aux côtés de Dawud.",
+    "conclusion": "Ce miracle montrait que Dawud était bien un prophète d'Allah. La nature obéit à son Créateur et répond à l'appel de Ses serviteurs élus.",
+    "moral_lesson": "Cette histoire nous enseigne que toute la création glorifie Allah. L'homme doit s'unir à cette glorification par la prière et le dhikr.",
+    "historical_location": "Palestine",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "dawud_mountains_chapter_1",
+        "title": "Le miracle",
+        "content": "Le Coran rapporte : « Et Nous avons certes accordé une faveur à Dawud de Notre part : Ô montagnes ! Répétez avec lui les louanges. Et Ô oiseaux ! Et Nous avons amolli pour lui le fer. » (34:10) Quand Dawud récitait le Zabur et glorifiait Allah, les montagnes faisaient écho à sa voix. Les oiseaux se joignaient à lui. C'était un signe de la puissance d'Allah et de l'élection de Dawud."
+      },
+      {
+        "id": "dawud_mountains_chapter_2",
+        "title": "La soumission de la création",
+        "content": "Le Coran dit aussi : « Et les oiseaux assemblés : tous avec lui répétaient les louanges. » (38:19) La création tout entière — montagnes, oiseaux — glorifiait Allah avec Dawud. Cela rappelle que tout ce qui existe est soumis à Allah. L'homme doit imiter cette soumission par l'adoration."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 34:10",
+        "reference_text": "Sourate Saba, verset 10",
+        "content": "وَلَقَدْ ءَاتَيْنَا دَاوُۥدَ مِنَّا فَضْلًۭا ۖ يَـٰجِبَالُ أَوِّبِى مَعَهُۥ وَٱلطَّيْرَ ۚ وَأَلَنَّا لَهُ ٱلْحَدِيدَ",
+        "translation": "Nous avons accordé une faveur à Dawud. Ô montagnes ! Répétez avec lui. Et Ô oiseaux !",
+        "relevance": "Ce verset décrit le miracle des montagnes et des oiseaux."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 38:19",
+        "reference_text": "Sourate Sad, verset 19",
+        "content": "وَٱلطَّيْرَ مَحْشُورَةً ۖ كُلٌّ لَّهُۥٓ أَوَّابٌ",
+        "translation": "Et les oiseaux assemblés, tous avec lui répétaient les louanges.",
+        "relevance": "Ce verset confirme la glorification des oiseaux avec Dawud."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Awab",
+        "arabic_term": "أواب",
+        "definition": "Qui revient (à Allah). Les montagnes et oiseaux étaient awab avec Dawud.",
+        "pronunciation": "a-wab"
+      },
+      {
+        "id": 2,
+        "term": "Jibal",
+        "arabic_term": "جبال",
+        "definition": "Montagnes. Elles glorifiaient Allah avec Dawud.",
+        "pronunciation": "ji-bal"
+      }
+    ]
+  },
+  "dawud_iron": {
+    "title": "Le fer amolli pour Dawud",
+    "title_arabic": "تليين الحديد لداوود",
+    "introduction": "Allah accorda à Dawud un autre miracle : le fer s'amollissait entre ses mains. Le Coran dit : « Et Nous avons amolli le fer pour lui. » (34:10) Dawud pouvait façonner des cottes de mailles sans feu ni marteau. Il fabriquait des armures pour protéger les soldats.",
+    "conclusion": "Ce don permit à Dawud de fabriquer des armures résistantes. Il enseigna aux gens ce métier. Le fer, dur par nature, obéissait à la main du prophète.",
+    "moral_lesson": "Cette histoire nous enseigne qu'Allah peut modifier les lois de la nature pour Ses prophètes. Les miracles confirment la vérité du message.",
+    "historical_location": "Palestine",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "dawud_iron_chapter_1",
+        "title": "Le don du fer",
+        "content": "Le Coran rapporte : « Et Nous avons amolli le fer pour lui : Fais des cottes de mailles complètes et mesure bien les mailles. Et œuvrez en bien. Je vois ce que vous faites. » (34:10-11) Le fer devenait malléable entre les mains de Dawud. Il pouvait le plier et le tresser sans forge. Il fabriquait des cottes de mailles pour protéger les combattants. Allah lui avait enseigné ce savoir-faire."
+      },
+      {
+        "id": "dawud_iron_chapter_2",
+        "title": "L'enseignement",
+        "content": "Dawud transmit ce don à son peuple. Le Coran dit : « Et à Dawud Nous avons enseigné la fabrication des cottes de mailles pour vous protéger de votre violence. En seriez-vous reconnaissants ? » (21:80) Le fer amolli était une faveur d'Allah. Les gens purent fabriquer des armures. Dawud les exhorta à la gratitude."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 34:10-11",
+        "reference_text": "Sourate Saba, versets 10-11",
+        "content": "وَأَلَنَّا لَهُ ٱلْحَدِيدَ ۝ أَنِ ٱعْمَلْ سَـٰبِغَـٰتٍۢ وَقَدِّرْ فِى ٱلسَّرْدِ ۖ وَٱعْمَلُوا۟ صَـٰلِحًا ۖ إِنِّى بِمَا تَعْمَلُونَ بَصِيرٌ",
+        "translation": "Nous avons amolli le fer pour lui : Fais des cottes de mailles complètes. Et œuvrez en bien.",
+        "relevance": "Ce verset décrit le miracle du fer et l'ordre de fabriquer des armures."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 21:80",
+        "reference_text": "Sourate Al-Anbiya, verset 80",
+        "content": "وَعَلَّمْنَـٰهُ صَنْعَةَ لَبُوسٍۢ لَّكُمْ لِتُحْصِنَكُم مِّنۢ بَأْسِكُمْ ۖ فَهَلْ أَنتُمْ شَـٰكِرُونَ",
+        "translation": "Nous lui avons enseigné la fabrication des cottes de mailles pour vous protéger. En seriez-vous reconnaissants ?",
+        "relevance": "Ce verset rappelle le don du fer à Dawud."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Sabighat",
+        "arabic_term": "سابغات",
+        "definition": "Cottes de mailles complètes. Dawud les fabriquait avec le fer amolli.",
+        "pronunciation": "sa-bi-ghat"
+      },
+      {
+        "id": 2,
+        "term": "Hadid",
+        "arabic_term": "حديد",
+        "definition": "Fer. Allah l'amollit pour Dawud.",
+        "pronunciation": "ha-did"
+      }
+    ]
+  },
+  "dawud_judgment": {
+    "title": "Le jugement de Dawud",
+    "title_arabic": "قضاء داوود",
+    "introduction": "Deux hommes vinrent un jour devant Dawud pour un litige. L'un possédait quatre-vingt-dix-neuf brebis, l'autre une seule. Le riche exigeait la brebis du pauvre. Dawud écouta et rendit un jugement. Puis il comprit qu'il avait été éprouvé et se repentit.",
+    "conclusion": "Allah pardonna à Dawud. Cette histoire montre que même les prophètes peuvent être éprouvés. Le repentir sincère efface les fautes.",
+    "moral_lesson": "Cette histoire nous enseigne l'importance de la justice et de l'humilité. Le juge doit examiner chaque affaire avec soin et ne pas se laisser influencer.",
+    "historical_location": "Jérusalem",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "dawud_judgment_chapter_1",
+        "title": "Les deux plaideurs",
+        "content": "Le Coran rapporte : « Et t'est-il parvenu le récit des plaideurs quand ils escaladèrent le sanctuaire ? Quand ils entrèrent auprès de Dawud, il en fut effrayé. Ils dirent : N'aie pas peur. Nous sommes deux plaideurs : l'un de nous a lésé l'autre. Juge donc entre nous en équité. » (38:21-22) Deux anges vinrent sous forme d'hommes pour éprouver Dawud. L'un avait quatre-vingt-dix-neuf brebis, l'autre une seule. Le premier réclamait la brebis de l'autre."
+      },
+      {
+        "id": "dawud_judgment_chapter_2",
+        "title": "Le repentir",
+        "content": "Le Coran dit : « Dawud dit : Il t'a lésé en te réclamant ta brebis pour l'ajouter à ses brebis. Beaucoup d'associés se lèsent mutuellement — sauf ceux qui croient et accomplissent les bonnes œuvres, et ils sont peu. Dawud comprit alors que Nous l'avions éprouvé. Il demanda pardon à son Seigneur et se prosterna et se repentit. » (38:24-25) Dawud avait jugé trop vite. Il se repentit et Allah lui pardonna. Les prophètes aussi sont humains et peuvent errer ; le repentir les élève."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 38:21-22",
+        "reference_text": "Sourate Sad, versets 21-22",
+        "content": "وَهَلْ أَىٰكَ نَبَؤُا۟ ٱلْخَصْمِ إِذْ تَسَوَّرُوا۟ ٱلْمِحْرَابَ ۝ إِذْ دَخَلُوا۟ عَلَىٰ دَاوُۥدَ فَفَزِعَ مِنْهُمْ ۖ قَالُوا۟ لَا تَخَفْ ۖ خَصْمَانِ بَغَىٰ بَعْضُنَا عَلَىٰ بَعْضٍۢ",
+        "translation": "T'est-il parvenu le récit des plaideurs ? Ils entrèrent auprès de Dawud. Ils dirent : Nous sommes deux plaideurs.",
+        "relevance": "Ce verset introduit l'épreuve de Dawud."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 38:24-25",
+        "reference_text": "Sourate Sad, versets 24-25",
+        "content": "قَالَ لَقَدْ ظَلَمَكَ بِسُؤَالِ نَعْجَتِكَ إِلَىٰ نِعَاجِهِۦ ۗ وَإِنَّ كَثِيرًۭا مِّنَ ٱلْخُلَطَآءِ لَيَبْغِى بَعْضُهُمْ عَلَىٰ بَعْضٍ إِلَّا ٱلَّذِينَ ءَامَنُوا۟ وَعَمِلُوا۟ ٱلصَّـٰلِحَـٰتِ وَقَلِيلٌۭ مَّا هُمْ ۗ وَظَنَّ دَاوُۥدُ أَنَّمَا فَتَنَّـٰهُ فَٱسْتَغْفَرَ رَبَّهُۥ وَخَرَّ رَاكِعًۭا وَأَنَابَ ۩",
+        "translation": "Dawud dit : Il t'a lésé. Dawud comprit qu'il avait été éprouvé. Il demanda pardon et se prosterna.",
+        "relevance": "Ce verset montre le repentir de Dawud."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Mihrab",
+        "arabic_term": "محراب",
+        "definition": "Sanctuaire, lieu de prière. Les plaideurs escaladèrent le mihrab de Dawud.",
+        "pronunciation": "mih-rab"
+      },
+      {
+        "id": 2,
+        "term": "Istighfar",
+        "arabic_term": "استغفار",
+        "definition": "Demande de pardon. Dawud fit istighfar après avoir compris son erreur.",
+        "pronunciation": "is-tigh-far"
+      }
+    ]
+  },
+  "lessons_from_dawud": {
+    "title": "Les leçons de l'histoire de Dawud",
+    "title_arabic": "دروس من قصة داوود",
+    "introduction": "Dawud fut prophète et roi. Il vainquit Goliath, reçut le Zabur, et régna avec justice. Le Coran dit : « Et Nous avons favorisé certains prophètes par rapport à d'autres ; et à Dawud Nous avons donné le Zabur. » (17:55) Son histoire enseigne la confiance en Allah, la justice et l'humilité.",
+    "conclusion": "Dawud combina la force et la douceur, le pouvoir et la piété. Il glorifiait Allah et rendait la justice. Son repentir après l'épreuve du jugement montre que les prophètes restent des serviteurs humbles.",
+    "moral_lesson": "Cette histoire nous enseigne que la victoire vient d'Allah, que le pouvoir exige la justice, et que le repentir purifie le cœur.",
+    "historical_location": "Palestine",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lessons_from_dawud_chapter_1",
+        "title": "La confiance et la victoire",
+        "content": "Dawud, jeune berger, affronta Goliath le géant. Il n'avait qu'une fronde. Mais il invoqua Allah et la pierre atteignit son but. Le Coran rappelle : « Combien de fois une troupe peu nombreuse a, par la permission d'Allah, vaincu une troupe très nombreuse ! » (2:249) La victoire ne dépend pas du nombre ni de la force ; elle dépend d'Allah."
+      },
+      {
+        "id": "lessons_from_dawud_chapter_2",
+        "title": "La justice et le repentir",
+        "content": "Dawud fut un roi juste. Mais il fut éprouvé par les deux plaideurs. Il jugea trop vite. Dès qu'il comprit, il se repentit. Le Coran dit : « Nous lui pardonnâmes. Il aura une place rapprochée de Nous et un beau refuge. » (38:25) Le repentir sincère élève le croyant. Dawud reste un modèle de roi et de prophète."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 17:55",
+        "reference_text": "Sourate Al-Isra, verset 55",
+        "content": "وَلَقَدْ فَضَّلْنَا بَعْضَ ٱلنَّبِيِّـۧنَ عَلَىٰ بَعْضٍۢ ۖ وَءَاتَيْنَا دَاوُۥدَ زَبُورًۭا",
+        "translation": "Nous avons favorisé certains prophètes. À Dawud Nous avons donné le Zabur.",
+        "relevance": "Ce verset établit la place de Dawud parmi les prophètes."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 38:25",
+        "reference_text": "Sourate Sad, verset 25",
+        "content": "فَغَفَرْنَا لَهُۥ ذَٰلِكَ ۖ وَإِنَّ لَهُۥ عِندَنَا لَزُلْفَىٰ وَحُسْنَ مَـَٔابٍۢ",
+        "translation": "Nous lui pardonnâmes. Il aura une place rapprochée de Nous et un beau refuge.",
+        "relevance": "Ce verset montre le pardon d'Allah envers Dawud."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Tawakkul",
+        "arabic_term": "توكل",
+        "definition": "Confiance en Allah. Dawud fit preuve de tawakkul face à Goliath.",
+        "pronunciation": "ta-wak-koul"
+      },
+      {
+        "id": 2,
+        "term": "Adl",
+        "arabic_term": "عدل",
+        "definition": "Justice. Dawud fut ordonné de juger avec équité (adl).",
+        "pronunciation": "adl"
+      }
+    ]
+  }
+}

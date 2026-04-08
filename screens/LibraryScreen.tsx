@@ -102,7 +102,7 @@ export default function LibraryScreen() {
     },
     {
       icon: "account-heart",
-      title: t("prophet_stories") || "Histoires du Prophète",
+      title: t("prophets_stories") || "Histoires des Prophètes",
       subtitle: t("prophetic_biography") || "Biographie prophétique",
       colors: ["#3d2a4a", "#5d4a6a"],
       route: "/prophet-stories",

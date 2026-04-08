@@ -1,0 +1,342 @@
+{
+  "ibrahim_prophecy": {
+    "title": "İbrahim ve Tevhide Davet",
+    "title_arabic": "إبراهيم عليه السلام والدعوة إلى التوحيد",
+    "introduction": "İbrahim (إبراهيم عليه السلام) en büyük peygamberlerden biridir. Kur'an der: \"Biz daha önce İbrahim'e doğru yolu vermiştik ve onu biliyorduk.\" (21:51) Mezopotamya'da putperest bir kavimde doğdu. Genç yaşından itibaren putlara tapmayı reddetti ve âlemlerin Rabbi'ni aradı. Babası Azer ile diyaloğu ve yıldız, ay ve güneş hakkındaki muhakemesi hakikat arayışını gösterir.",
+    "conclusion": "İbrahim saf tevhidin bir modeliydi. Hakikat adına babasına ve kavmine karşı çıktı. Allah onu insanlar için İmam (rehber) seçti ve soyunu peygamberler nesli yaptı.",
+    "moral_lesson": "Bu hikaye bize hakikatin aileye ve topluma karşı çıkmayı gerektirebileceğini öğretir. Allah'ı samimi arayış hidayete götürür.",
+    "historical_location": "Mezopotamya (Babil/Ur)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "ibrahim_prophecy_chapter_1",
+        "title": "Babasıyla diyalog",
+        "content": "Kur'an bildirir: \"İbrahim babası Azer'e dedi: Putları ilah olarak mı ediniyorsun? Seni ve kavmini apaçık bir sapıklıkta görüyorum.\" (6:74) Azer put yapıyordu. İbrahim, henüz gençken bu heykellerin tanrı olamayacağını anladı — hiçbir şey yaratmazlar, ne fayda ne zarar verirler. Babasını putperestlikten vazgeçmeye davet etti. Babası durmazsa onu taşlayacağını tehdit etti. İbrahim ondan ayrıldı, tövbesi için umut besleyerek."
+      },
+      {
+        "id": "ibrahim_prophecy_chapter_2",
+        "title": "Yıldız, ay ve güneş",
+        "content": "Kur'an İbrahim'in hakikate ulaşmak için nasıl muhakeme ettiğini anlatır: \"Gece onu kaplayınca bir yıldız gördü ve dedi: Bu benim Rabbim! Sonra battığında dedi: Batanları sevmem.\" Sonra ayın doğduğunu gördü ve dedi: \"Bu benim Rabbim!\" Battığında dedi: \"Rabbim bana hidayet etmezse sapıklardan olurum.\" Sonra güneşin doğduğunu gördü ve dedi: \"Bu benim Rabbim! Bu daha büyük.\" Battığında dedi: \"Ey kavmim! Ben sizin ortak koştuklarınızdan beriyim. Ben yüzümü gökleri ve yeri yaratana, hanif olarak çevirdim.\" (6:76-79) Bu muhakeme ile İbrahim sadece göklerin ve yerin Yaratıcısı'nın ibadete layık olduğu sonucuna vardı."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 6:74",
+        "reference_text": "En'am Suresi, 74. ayet",
+        "content": "وَإِذْ قَالَ إِبْرَٰهِيمُ لِأَبِيهِ ءَازَرَ أَتَتَّخِذُ أَصْنَامًا ءَالِهَةً ۖ إِنِّىٓ أَرَىٰكَ وَقَوْمَكَ فِى ضَلَـٰلٍۢ مُّبِينٍۢ",
+        "translation": "İbrahim babası Azer'e dedi: Putları ilah olarak mı ediniyorsun? Seni ve kavmini apaçık bir sapıklıkta görüyorum.",
+        "relevance": "Bu ayet İbrahim'in babasıyla diyaloğunu ve putperestliği reddini tespit eder."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 21:51",
+        "reference_text": "Enbiya Suresi, 51. ayet",
+        "content": "وَلَقَدْ ءَاتَيْنَآ إِبْرَٰهِيمَ رُشْدَهُۥ مِن قَبْلُ وَكُنَّا بِهِۦ عَـٰلِمِينَ",
+        "translation": "Biz daha önce İbrahim'e doğru yolu vermiştik ve onu biliyorduk.",
+        "relevance": "Bu ayet Allah'ın İbrahim'i baştan hidayet ettiğini teyit eder."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Ibrahim",
+        "arabic_term": "إبراهيم",
+        "definition": "Arapça'da İbrahim. Allah'ın peygamberi, Allah'ın samimi dostu (Halilullah). Peygamberlerin babası.",
+        "pronunciation": "ib-ra-him"
+      },
+      {
+        "id": 2,
+        "term": "Azar",
+        "arabic_term": "آزر",
+        "definition": "Kur'an'da İbrahim'in babasının adı. Put yapıyordu.",
+        "pronunciation": "a-zar"
+      },
+      {
+        "id": 3,
+        "term": "Hanif",
+        "arabic_term": "حنيف",
+        "definition": "Saf tevhid ehli. İbrahim kendini hanif, Yaratıcı'ya yönelmiş olarak tanımladı.",
+        "pronunciation": "ha-nif"
+      }
+    ]
+  },
+  "ibrahim_idols": {
+    "title": "İbrahim ve Putlar",
+    "title_arabic": "إبراهيم والأصنام",
+    "introduction": "İbrahim (عليه السلام) kavmine putların boşluğunu göstermeye karar verdi. Bir bayramda insanlar tapınağı terk edince tüm putları en büyüğü hariç kırdı. Geri dönüp onu sorguladıklarında büyük puta sormalarını söyledi — cevap vermedi. Bu hile ile İbrahim bu heykellerin ne konuşabildiğini ne de hareket edebildiğini ortaya koydu.",
+    "conclusion": "Putlar parçalara ayrıldı. Halk öfkeyle İbrahim'i ateşe atmaya karar verdi. Ama İbrahim hedefine ulaştı: putların güçsüz olduğunu kanıtlamak.",
+    "moral_lesson": "Bu hikaye bize putperestliğin bir illüzyon olduğunu öğretir. Yaratıklar ibadete layık değildir; sadece Yaratıcı layıktır.",
+    "historical_location": "Mezopotamya",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "ibrahim_idols_chapter_1",
+        "title": "Hile",
+        "content": "Kur'an bildirir: \"Allah'a andolsun, siz dönüp gittikten sonra putlarınıza bir tuzak kuracağım.\" (21:57) İbrahim kavminin bayrama gitmesini bekledi. Tapınağa girdi ve en büyüğü hariç tüm putları parçaladı. Belki insanların anlaması için aleti büyük putun eline koydu. Geri dönüp felaketi gördüklerinde haykırdılar: \"Bunu ilahlarımıza kim yaptı?\""
+      },
+      {
+        "id": "ibrahim_idols_chapter_2",
+        "title": "İbrahim'in cevabı",
+        "content": "Halk dedi: \"Bir gencin onlardan bahsettiğini duyduk; ona İbrahim diyorlar.\" Onu getirdiler ve sordular: \"Bunu ilahlarımıza sen mi yaptın, ey İbrahim?\" İbrahim cevap verdi: \"Bunu en büyükleri yaptı. Konuşabiliyorlarsa onlara sorun!\" (21:62-63) Halk birbirine baktı ve dedi: \"Konuşmadıklarını iyi biliyorsunuz.\" İbrahim dedi: \"Allah'tan başka size ne fayda ne zarar veren şeylere mi tapıyorsunuz? Size ve Allah'tan başka taptıklarınıza yazıklar olsun! Akıl etmiyor musunuz?\" (21:66-67) Onu yakmaya karar verdiler."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 21:57-58",
+        "reference_text": "Enbiya Suresi, 57-58. ayetler",
+        "content": "وَتَٱللَّهِ لَأَكِيدَنَّ أَصْنَـٰمَكُم بَعْدَ أَن تُوَلُّوا۟ مُدْبِرِينَ ۝ فَجَعَلَهُمْ جُذَـٰذًا إِلَّا كَبِيرًۭا لَّهُمْ لَعَلَّهُمْ إِلَيْهِ يَرْجِعُونَ",
+        "translation": "Allah'a andolsun, siz dönüp gittikten sonra putlarınıza bir tuzak kuracağım. En büyüğü hariç onları parçalara ayırdı, belki ona dönerler.",
+        "relevance": "Bu ayetler İbrahim'in putlara karşı eylemini anlatır."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 21:62-67",
+        "reference_text": "Enbiya Suresi, 62-67. ayetler",
+        "content": "قَالُوا۟ أَأَنتَ فَعَلْتَ هَـٰذَا بِـَٔالِهَتِنَا يَـٰإِبْرَٰهِيمُ ۝ قَالَ بَلْ فَعَلَهُۥ كَبِيرُهُمْ هَـٰذَا فَسْـَٔلُوهُمْ إِن كَانُوا۟ يَنطِقُونَ",
+        "translation": "Dediler: Bunu ilahlarımıza sen mi yaptın, ey İbrahim? Dedi: Bunu en büyükleri yaptı. Konuşabiliyorlarsa onlara sorun!",
+        "relevance": "Bu ayetler İbrahim ile kavmi arasındaki diyaloğu içerir."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Asnam",
+        "arabic_term": "أصنام",
+        "definition": "Putlar. İbrahim'in kavminin taptığı heykeller.",
+        "pronunciation": "as-nam"
+      },
+      {
+        "id": 2,
+        "term": "Juthadh",
+        "arabic_term": "جذاذ",
+        "definition": "Parçalar, kırıntılar. İbrahim putları parçalara ayırdı.",
+        "pronunciation": "jou-thadh"
+      }
+    ]
+  },
+  "ibrahim_fire": {
+    "title": "İbrahim ve Ateş",
+    "title_arabic": "إبراهيم والنار",
+    "introduction": "İbrahim'in kavmi putları kırdığı için cezalandırmak amacıyla onu büyük bir ateşe attı. Devasa bir odun yığını yaptılar. Ama Allah ateşe emretti: \"Ey ateş! İbrahim için serinlik ve selamet ol.\" (21:69) Ateş İbrahim'i yakmadı; serinlik ve kurtuluştu. Bu mucize Allah'ın kudretini ve sadık kullarını korumasını gösterdi.",
+    "conclusion": "İbrahim ateşten sağ salim çıktı. Kavmi şaşkına döndü. Bu mucize Kur'an'ın en meşhur mucizelerinden biridir, Allah'ın Kendisine güvenenleri koruduğunu gösterir.",
+    "moral_lesson": "Bu hikaye bize Allah'ın kullarını korumak için tabiat kanunlarını tersine çevirebileceğini öğretir. Allah'a tevekkül en büyük güçtür.",
+    "historical_location": "Mezopotamya",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "ibrahim_fire_chapter_1",
+        "title": "Odun yığını",
+        "content": "Kur'an bildirir: \"Dediler: Onu yakın ve ilahlarınıza yardım edin, eğer yapacaksanız!\" (21:68) Halk odun topladı ve büyük bir ateş yaktı. İbrahim'i içine attılar. Kur'an anlatır: \"Ona tuzak kurmak istediler ama onları en büyük kaybedenler yaptık.\" (21:70) İbrahim alevlere atıldı ama güvenini Allah'a verdi."
+      },
+      {
+        "id": "ibrahim_fire_chapter_2",
+        "title": "Mucize",
+        "content": "Kur'an ilahi emri bildirir: \"Dedik: Ey ateş! İbrahim için serinlik ve selamet ol.\" (21:69) Ateş yakma gücünü kaybetti. İbrahim zarar görmeden çıktı. Bu mucize halkı hayrete düşürdü. Allah kulunu kurtardı ve kâfirleri mahvetti. İbrahim imanında sebat etti ve hikayesi tüm inananlar için örnek oldu."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 21:68-70",
+        "reference_text": "Enbiya Suresi, 68-70. ayetler",
+        "content": "قَالُوا۟ ٱحْرُقُوهُ وَٱنصُرُوٓا۟ ءَالِهَتَكُمْ إِن كُنتُمْ فَـٰعِلِينَ ۝ قُلْنَا يَـٰنَارُ كُونِى بَرْدًۭا وَسَلَـٰمًا عَلَىٰٓ إِبْرَٰهِيمَ ۝ وَأَرَادُوا۟ بِهِۦ كَيْدًۭا فَجَعَلْنَـٰهُمُ ٱلْأَخْسَرِينَ",
+        "translation": "Dediler: Onu yakın ve ilahlarınıza yardım edin! Dedik: Ey ateş! İbrahim için serinlik ve selamet ol. Ona tuzak kurmak istediler ama onları en büyük kaybedenler yaptık.",
+        "relevance": "Bu ayetler ateşi ve İbrahim'in korunma mucizesini anlatır."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Bard",
+        "arabic_term": "برد",
+        "definition": "Serinlik. Allah ateşe İbrahim için serinlik olmasını emretti.",
+        "pronunciation": "bard"
+      },
+      {
+        "id": 2,
+        "term": "Salam",
+        "arabic_term": "سلام",
+        "definition": "Barış, kurtuluş. Ateş İbrahim için barış ve kurtuluştu.",
+        "pronunciation": "sa-lam"
+      }
+    ]
+  },
+  "ibrahim_kaaba": {
+    "title": "İbrahim ve Kabe'nin İnşası",
+    "title_arabic": "إبراهيم وبناء الكعبة",
+    "introduction": "Allah İbrahim'i yerine getirdiği imtihanlarla denedi. Dedi: \"Seni insanlar için İmam yapacağım.\" (2:124) İbrahim soyunun da bu hidayeti almasını istedi. Oğlu İsmail ile Mekke'de Beyt'in (Kabe'nin) temellerini yükseltti. Allah'a onu insanlık için barış ve hidayet yeri yapması için dua etti.",
+    "conclusion": "İbrahim ve İsmail tarafından inşa edilen Kabe Müslümanların kıblesi oldu. İbrahim'in duaları kabul edildi: Beyt dünya çapında inananlar için hac ve namaz yeridir.",
+    "moral_lesson": "Bu hikaye bize Allah için yapılan işlerin kalıcı olduğunu öğretir. Kabe tüm Müslümanları İbrahim'e ve saf tevhide bağlar.",
+    "historical_location": "Mekke",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "ibrahim_kaaba_chapter_1",
+        "title": "İmtihan ve İmamet",
+        "content": "Kur'an bildirir: \"Rabb'i İbrahim'i kelimelerle denedi, o da onları tamamladı. Dedi: Seni insanlar için İmam yapacağım. İbrahim dedi: Soyumdan da mı? Dedi: Ahdim zalimlere ulaşmaz.\" (2:124) İbrahim tüm imtihanları tamamladı. Allah onu İmam — insanlık için rehber — yaptı. İbrahim salih soyunun da bu hidayeti almasını istedi. Allah kabul etti, zalim olmamaları şartıyla."
+      },
+      {
+        "id": "ibrahim_kaaba_chapter_2",
+        "title": "Beyt'in temelleri",
+        "content": "Kur'an bildirir: \"İbrahim ve İsmail Beyt'in temellerini yükseltirken: Rabbimiz! Bizden kabul et. Sen işitensin, bilensin. Rabbimiz! Bizi Sana teslim olanlar yap ve soyumuzdan Sana teslim bir ümmet yap. Bize ibadetlerimizi göster ve tövbemizi kabul et. Sen tövbeyi kabul edensin, çok merhametlisin.\" (2:127-128) İbrahim ve İsmail Mekke'de Kabe'yi inşa etti. Duaları kabul edildi: Beyt Müslümanlar için hac ve namaz merkezi oldu."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 2:124",
+        "reference_text": "Bakara Suresi, 124. ayet",
+        "content": "وَإِذِ ٱبْتَلَىٰٓ إِبْرَٰهِـۧمَ رَبُّهُۥ بِكَلِمَـٰتٍۢ فَأَتَمَّهُنَّ ۖ قَالَ إِنِّى جَاعِلُكَ لِلنَّاسِ إِمَامًۭا ۖ قَالَ وَمِن ذُرِّيَّتِى ۖ قَالَ لَا يَنَالُ عَهْدِى ٱلظَّـٰلِمِينَ",
+        "translation": "Rabb'i İbrahim'i kelimelerle denedi, o da onları tamamladı. Dedi: Seni insanlar için İmam yapacağım. İbrahim dedi: Soyumdan da mı? Dedi: Ahdim zalimlere ulaşmaz.",
+        "relevance": "Bu ayet İbrahim'in imtihanını ve İmam statüsünü tespit eder."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 2:127-128",
+        "reference_text": "Bakara Suresi, 127-128. ayetler",
+        "content": "وَإِذْ يَرْفَعُ إِبْرَٰهِـۧمُ ٱلْقَوَاعِدَ مِنَ ٱلْبَيْتِ وَإِسْمَـٰعِيلُ رَبَّنَا تَقَبَّلْ مِنَّا ۖ إِنَّكَ أَنتَ ٱلسَّمِيعُ ٱلْعَلِيمُ ۝ رَبَّنَا وَٱجْعَلْنَا مُسْلِمَيْنِ لَكَ وَمِن ذُرِّيَّتِنَآ أُمَّةًۭ مُّسْلِمَةًۭ لَّكَ",
+        "translation": "İbrahim ve İsmail Beyt'in temellerini yükseltirken: Rabbimiz! Bizden kabul et. Sen işitensin, bilensin. Rabbimiz! Bizi Sana teslim olanlar yap ve soyumuzdan Sana teslim bir ümmet yap.",
+        "relevance": "Bu ayetler Kabe'nin inşasını ve İbrahim'in duasını anlatır."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Imam",
+        "arabic_term": "إمام",
+        "definition": "Rehber, model. Allah İbrahim'i insanlar için İmam yaptı.",
+        "pronunciation": "i-mam"
+      },
+      {
+        "id": 2,
+        "term": "Al-Bayt",
+        "arabic_term": "البيت",
+        "definition": "Beyt. Mekke'deki Kabe, İbrahim ve İsmail tarafından inşa edildi.",
+        "pronunciation": "al-bayt"
+      }
+    ]
+  },
+  "ibrahim_sacrifice": {
+    "title": "Kurban imtihanı",
+    "title_arabic": "ابتلاء الذبح",
+    "introduction": "Allah İbrahim'i en büyük imtihanla denedi: oğlunu kurban etmek. İbrahim rüyada onu kesmesi gerektiğini gördü. Oğluna söyledi, o kabul etti: \"Ey babacığım! Emredileni yap. Beni, Allah dilerse, sabredenlerden bulacaksın.\" (37:102) İkisi de teslim oldu. Kurban anında Allah onları mükâfatlandırdı ve oğlun yerine bir koç koydu.",
+    "conclusion": "İbrahim ve oğlu imtihanı geçti. Allah dedi: \"Onu büyük bir kurbanla fidye verdik.\" (37:107) Bu hikaye Allah'a tam teslimiyeti (islam) ve itaatin mükâfatını gösterir.",
+    "moral_lesson": "Bu hikaye bize Allah'a itaatin her şeyden önce geldiğini öğretir, hatta baba sevgisinden bile. Samimi teslimiyet rahmetle mükâfatlandırılır.",
+    "historical_location": "Mina (Mekke yakını)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "ibrahim_sacrifice_chapter_1",
+        "title": "Rüya",
+        "content": "Kur'an bildirir: \"O onunla çalışacak yaşa gelince dedi: Ey oğlum! Rüyada seni kurban ettiğimi görüyorum. Ne düşündüğüne bak. Dedi: Ey babacığım! Emredileni yap. Beni, Allah dilerse, sabredenlerden bulacaksın.\" (37:102) Peygamberlerin rüyaları vahyin bir şeklidir. İbrahim bunun Allah'tan bir emir olduğunu anladı. Oğlu örnek imanla tereddütsüz kabul etti."
+      },
+      {
+        "id": "ibrahim_sacrifice_chapter_2",
+        "title": "Teslimiyet ve fidye",
+        "content": "Kur'an bildirir: \"İkisi de teslim olup onu alnı üzerine yatırdığında ona seslendik: Ey İbrahim! Rüyayı doğruladın. İşte biz iyilik yapanları böyle mükâfatlandırırız. Bu apaçık bir imtihandı. Ve onu büyük bir kurbanla fidye verdik.\" (37:103-107) İbrahim itaat etmeye hazırlandı. Allah onu durdurdu ve imtihanın tamamlandığını bildirdi. Oğlun yerine bir koç fidye verdi. İbrahim ve oğlu tam teslimiyetleri için mükâfatlandırıldı."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 37:102",
+        "reference_text": "Saffat Suresi, 102. ayet",
+        "content": "فَلَمَّا بَلَغَ مَعَهُ ٱلسَّعْيَ قَالَ يَـٰبُنَىَّ إِنِّىٓ أَرَىٰ فِى ٱلْمَنَامِ أَنِّىٓ أَذْبَحُكَ فَٱنظُرْ مَاذَا تَرَىٰ ۚ قَالَ يَـٰٓأَبَتِ ٱفْعَلْ مَا تُؤْمَرُ ۖ سَتَجِدُنِىٓ إِن شَآءَ ٱللَّهُ مِنَ ٱلصَّـٰبِرِينَ",
+        "translation": "O onunla çalışacak yaşa gelince dedi: Ey oğlum! Rüyada seni kurban ettiğimi görüyorum. Ne düşündüğüne bak. Dedi: Ey babacığım! Emredileni yap. Beni, Allah dilerse, sabredenlerden bulacaksın.",
+        "relevance": "Bu ayet İbrahim'in rüyasını ve oğlunun kabulünü anlatır."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 37:103-107",
+        "reference_text": "Saffat Suresi, 103-107. ayetler",
+        "content": "فَلَمَّآ أَسْلَمَا وَتَلَّهُۥ لِلْجَبِينِ ۝ وَنَـٰدَيْنَـٰهُ أَن يَـٰٓإِبْرَٰهِيمُ ۝ قَدْ صَدَّقْتَ ٱلرُّءْيَآ ۚ إِنَّا كَذَٰلِكَ نَجْزِى ٱلْمُحْسِنِينَ ۝ إِنَّ هَـٰذَا لَهُوَ ٱلْبَلَـٰٓؤُا۟ ٱلْمُبِينُ ۝ وَفَدَيْنَـٰهُ بِذِبْحٍ عَظِيمٍ",
+        "translation": "İkisi de teslim olup onu alnı üzerine yatırdığında ona seslendik: Ey İbrahim! Rüyayı doğruladın. İşte biz iyilik yapanları böyle mükâfatlandırırız. Bu apaçık bir imtihandı. Ve onu büyük bir kurbanla fidye verdik.",
+        "relevance": "Bu ayetler teslimiyeti ve fidyeyi anlatır."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Dhabh",
+        "arabic_term": "ذبح",
+        "definition": "Kesim, kurban. İbrahim'in kurban imtihanı.",
+        "pronunciation": "dhah-bah"
+      },
+      {
+        "id": 2,
+        "term": "Fadaynahu",
+        "arabic_term": "فديناه",
+        "definition": "Onu fidye verdik. Allah oğlun yerine bir koç koydu.",
+        "pronunciation": "fa-day-na-hu"
+      }
+    ]
+  },
+  "lessons_from_ibrahim": {
+    "title": "İbrahim Hikayesinden Dersler",
+    "title_arabic": "دروس من قصة إبراهيم",
+    "introduction": "İbrahim (عليه السلام) Kur'an'da \"Halilullah\" — Allah'ın samimi dostu — olarak anılır. Hikayesi zamansız dersler içerir: putperestliği reddetme, imtihan karşısında Allah'a güven, tam teslimiyet ve ibadet için bir Beyt inşa etme. Kur'an onu insanlık için model olarak zikreder.",
+    "conclusion": "İbrahim tüm imtihanları tamamladı. Soyu İsmail, İshak, Yakub ve Muhammed'e (ﷺ) kadar peygamberleri içerir. O inananların babası ve saf imanın modelidir.",
+    "moral_lesson": "Bu hikaye bize İbrahim'in örneğini takip etmeyi öğretir: saf tevhid, itaat, Allah'a güven ve inananları birleştiren şeyi inşa etme.",
+    "historical_location": "Mezopotamya'dan Mekke'ye",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lessons_from_ibrahim_chapter_1",
+        "title": "İnsanlık için model",
+        "content": "Kur'an der: \"İbrahim tek başına bir ümmetti, Allah'a itaatkârdı, hanifti ve müşriklerden değildi.\" (16:120) İbrahim saf imanı somutlaştırır. Babasına, kavmine ve hatta bir krala hakikat adına karşı çıktı. Ateşe atıldı ama Allah onu korudu. Oğluyla Kabe'yi inşa etti. Allah emrettiğinde oğlunu kurban etmeyi kabul etti. Her imtihan imanını güçlendirdi."
+      },
+      {
+        "id": "lessons_from_ibrahim_chapter_2",
+        "title": "Peygamberlerin soyu",
+        "content": "Kur'an İbrahim'i seçilmişlerin soyunda tespit eder: \"Allah Âdem'i, Nuh'u, İbrahim ailesini ve İmran ailesini âlemlerin üstüne seçti.\" (3:33) İbrahim peygamberlerin babasıdır. Oğulları İsmail ve İshak peygamberdiler. Yakub, Yusuf, Musa, İsa ve Muhammed (hepsine selam olsun) onun soyundandır. İbrahim'in duası — \"Bizi Sana teslim olanlar yap ve soyumuzdan Sana teslim bir ümmet yap\" — kabul edildi: Müslümanlar İbrahim'in ümmetidir."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 16:120",
+        "reference_text": "Nahl Suresi, 120. ayet",
+        "content": "إِنَّ إِبْرَٰهِيمَ كَانَ أُمَّةًۭ قَانِتًۭا لِّلَّهِ حَنِيفًۭا وَلَمْ يَكُ مِنَ ٱلْمُشْرِكِينَ",
+        "translation": "İbrahim tek başına bir ümmetti, Allah'a itaatkârdı, hanifti ve müşriklerden değildi.",
+        "relevance": "Bu ayet İbrahim'i benzersiz model olarak tanımlar."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 3:33",
+        "reference_text": "Al-i İmran Suresi, 33. ayet",
+        "content": "إِنَّ ٱللَّهَ ٱصْطَفَىٰٓ ءَادَمَ وَنُوحًۭا وَءَالَ إِبْرَٰهِيمَ وَءَالَ عِمْرَٰنَ عَلَى ٱلْعَـٰلَمِينَ",
+        "translation": "Allah Âdem'i, Nuh'u, İbrahim ailesini ve İmran ailesini âlemlerin üstüne seçti.",
+        "relevance": "Bu ayet İbrahim'in Allah'ın seçilmişleri arasındaki yerini tespit eder."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Khalilullah",
+        "arabic_term": "خليل الله",
+        "definition": "Allah'ın samimi dostu. İslam geleneğinde İbrahim'e verilen unvan.",
+        "pronunciation": "kha-lil ul-lah"
+      },
+      {
+        "id": 2,
+        "term": "Ibra",
+        "arabic_term": "عبرة",
+        "definition": "Örnek veya ders. Peygamberlerin hikayeleri insanlık için örneklerdir.",
+        "pronunciation": "ib-ra"
+      }
+    ]
+  }
+}

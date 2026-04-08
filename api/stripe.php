@@ -843,23 +843,35 @@ function handleSubscriptionCreated($subscription) {
         if ($user) {
             $userId = $user['id'];
             
-            // Mettre à jour l'abonnement le plus récent de cet utilisateur
-            $stmt = $pdo->prepare("
-                UPDATE premium_subscriptions 
-                SET stripe_subscription_id = ?, 
-                    status = ?, 
-                    updated_at = NOW()
+            // Récupérer l'ID de la dernière entrée cs_... pour cet utilisateur (sans ORDER BY/LIMIT dans UPDATE)
+            $selectStmt = $pdo->prepare("
+                SELECT id FROM premium_subscriptions 
                 WHERE user_id = ? 
                 AND stripe_subscription_id LIKE 'cs_%'
                 ORDER BY created_at DESC 
                 LIMIT 1
             ");
+            $selectStmt->execute([$userId]);
+            $row = $selectStmt->fetch();
             
-            $stmt->execute([
-                $subscription->id,
-                $subscription->status,
-                $userId
-            ]);
+            if ($row) {
+                $stmt = $pdo->prepare("
+                    UPDATE premium_subscriptions 
+                    SET stripe_subscription_id = ?, 
+                        status = ?, 
+                        updated_at = NOW()
+                    WHERE id = ?
+                ");
+                $stmt->execute([$subscription->id, $subscription->status, $row['id']]);
+                logError("✅ subscription_id mis à jour: cs_... → " . $subscription->id);
+            }
+
+            // Mettre aussi à jour subscription_id dans users
+            $updateUserStmt = $pdo->prepare("
+                UPDATE users SET subscription_id = ?, updated_at = NOW()
+                WHERE id = ? AND subscription_id LIKE 'cs_%'
+            ");
+            $updateUserStmt->execute([$subscription->id, $userId]);
         }
         
     } catch (Exception $e) {
@@ -870,27 +882,67 @@ function handleSubscriptionCreated($subscription) {
 // Fonction pour gérer la mise à jour d'abonnement
 function handleSubscriptionUpdated($subscription) {
     try {
-        logError("🔄 Abonnement mis à jour: " . $subscription->id);
+        logError("🔄 Abonnement mis à jour: " . $subscription->id . " - Statut: " . $subscription->status);
 
         $pdo = getDBConnection();
+
+        // Si l'abonnement est annulé, ne pas réactiver le premium
+        // (handleSubscriptionDeleted s'en chargera, ou il est déjà en cours d'annulation)
+        if ($subscription->status === 'canceled') {
+            logError("ℹ️ Abonnement annulé — désactivation du premium via stripe_customer_id: " . $subscription->customer);
+            $stmt = $pdo->prepare("
+                UPDATE users SET
+                    premium_status = 0,
+                    premium_cancelled_at = NOW(),
+                    updated_at = NOW()
+                WHERE stripe_customer_id = ?
+            ");
+            $stmt->execute([$subscription->customer]);
+            return;
+        }
 
         // Lire la date depuis current_period_end
         $currentPeriodEnd = $subscription->current_period_end ?? time();
         $expiryDate = date('Y-m-d H:i:s', $currentPeriodEnd);
 
-        // 🔧 CORRECTION : Utiliser stripe_customer_id au lieu de subscription_id pour trouver l'utilisateur
+        // Utiliser stripe_customer_id pour trouver l'utilisateur
         $stmt = $pdo->prepare("
             UPDATE users SET
                 premium_expiry = ?,
+                premium_status = 1,
                 updated_at = NOW()
             WHERE stripe_customer_id = ?
         ");
         $stmt->execute([$expiryDate, $subscription->customer]);
         
         if ($stmt->rowCount() > 0) {
-            logError("✅ Date d'expiration mise à jour: $expiryDate pour customer: " . $subscription->customer);
+            logError("✅ Date d'expiration et statut premium mis à jour: $expiryDate pour customer: " . $subscription->customer);
         } else {
-            logError("⚠️ Aucun utilisateur trouvé avec stripe_customer_id: " . $subscription->customer);
+            logError("⚠️ Aucun utilisateur trouvé avec stripe_customer_id: " . $subscription->customer . " - tentative fallback via email");
+            
+            // Fallback : récupérer l'email du customer Stripe et chercher par email
+            try {
+                \Stripe\Stripe::setApiKey(STRIPE_SECRET_KEY);
+                $stripeCustomer = \Stripe\Customer::retrieve($subscription->customer);
+                if ($stripeCustomer->email) {
+                    $fallbackStmt = $pdo->prepare("
+                        UPDATE users 
+                        SET premium_expiry = ?,
+                            premium_status = 1,
+                            stripe_customer_id = ?,
+                            updated_at = NOW()
+                        WHERE email = ?
+                    ");
+                    $fallbackStmt->execute([$expiryDate, $subscription->customer, $stripeCustomer->email]);
+                    if ($fallbackStmt->rowCount() > 0) {
+                        logError("✅ Fallback réussi - utilisateur mis à jour via email: " . $stripeCustomer->email . " (stripe_customer_id corrigé)");
+                    } else {
+                        logError("❌ Fallback échoué - aucun utilisateur avec l'email: " . $stripeCustomer->email);
+                    }
+                }
+            } catch (Exception $fallbackEx) {
+                logError("❌ Erreur fallback customer email: " . $fallbackEx->getMessage());
+            }
         }
 
         // Mettre à jour la table premium_subscriptions
@@ -910,18 +962,25 @@ function handleSubscriptionUpdated($subscription) {
 // Fonction pour gérer la suppression d'abonnement
 function handleSubscriptionDeleted($subscription) {
     try {
-        logError("❌ Abonnement supprimé: " . $subscription->id);
+        logError("❌ Abonnement supprimé: " . $subscription->id . " - Customer: " . $subscription->customer);
         
         $pdo = getDBConnection();
         
-        // Mettre à jour la table users
+        // Recherche par stripe_customer_id (fiable) — subscription_id en BDD contient cs_... pas sub_...
         $stmt = $pdo->prepare("
             UPDATE users SET 
                 premium_status = 0,
+                premium_cancelled_at = NOW(),
                 updated_at = NOW()
-            WHERE subscription_id = ?
+            WHERE stripe_customer_id = ?
         ");
-        $stmt->execute([$subscription->id]);
+        $stmt->execute([$subscription->customer]);
+        
+        if ($stmt->rowCount() > 0) {
+            logError("✅ Premium désactivé via stripe_customer_id: " . $subscription->customer);
+        } else {
+            logError("⚠️ Aucun utilisateur trouvé via stripe_customer_id: " . $subscription->customer);
+        }
         
         // Mettre à jour la table premium_subscriptions
         $stmt = $pdo->prepare("
@@ -942,35 +1001,65 @@ function handleSubscriptionDeleted($subscription) {
 // Fonction pour gérer le succès du paiement d'une facture
 function handlePaymentSucceeded($invoice) {
     try {
-        if (!$invoice->subscription) return;
+        // Compatibilité API Stripe ancienne (invoice.subscription) et nouvelle (invoice.parent.subscription_details.subscription)
+        $subscriptionId = $invoice->subscription
+            ?? $invoice->parent->subscription_details->subscription
+            ?? null;
 
-        logError("💰 Paiement réussi pour facture: " . $invoice->id);
+        if (!$subscriptionId) {
+            logError("⚠️ invoice.payment_succeeded ignoré : aucun subscription_id trouvé dans la facture " . $invoice->id);
+            return;
+        }
+
+        logError("💰 Paiement réussi pour facture: " . $invoice->id . " - Subscription: " . $subscriptionId);
 
         $pdo = getDBConnection();
         
-        // 🔧 CORRECTION : Récupérer l'abonnement Stripe pour obtenir la nouvelle date d'expiration
-        \Stripe\Stripe::setApiKey(STRIPE_SECRET_KEY);
-        $subscription = \Stripe\Subscription::retrieve($invoice->subscription);
-        
-        // Calculer la nouvelle date d'expiration à partir de current_period_end
-        $currentPeriodEnd = $subscription->current_period_end ?? time();
+        // lines[0].period.end = fin de la NOUVELLE période facturée (la bonne date d'expiration)
+        // invoice.period_end = fin de l'ANCIENNE période — ne pas utiliser pour le renouvellement
+        $currentPeriodEnd = $invoice->lines->data[0]->period->end ?? time();
         $expiryDate = date('Y-m-d H:i:s', $currentPeriodEnd);
         
-        logError("🔄 Renouvellement détecté - Nouvelle date d'expiration: $expiryDate");
+        logError("🔄 Renouvellement détecté - Nouvelle date d'expiration: $expiryDate (lines[0].period.end)");
 
         // 🚀 NOUVEAU : Mettre à jour la date d'expiration dans users via stripe_customer_id
         $stmt = $pdo->prepare("
             UPDATE users 
             SET premium_expiry = ?,
+                premium_status = 1,
                 updated_at = NOW()
             WHERE stripe_customer_id = ?
         ");
         $stmt->execute([$expiryDate, $invoice->customer]);
         
         if ($stmt->rowCount() > 0) {
-            logError("✅ Date d'expiration mise à jour pour customer: " . $invoice->customer);
+            logError("✅ Date d'expiration et statut premium mis à jour pour customer: " . $invoice->customer);
         } else {
-            logError("⚠️ Aucun utilisateur trouvé avec stripe_customer_id: " . $invoice->customer);
+            logError("⚠️ Aucun utilisateur trouvé avec stripe_customer_id: " . $invoice->customer . " - tentative fallback via email");
+            
+            // Fallback : récupérer l'email du customer Stripe et chercher par email
+            try {
+                \Stripe\Stripe::setApiKey(STRIPE_SECRET_KEY);
+                $stripeCustomer = \Stripe\Customer::retrieve($invoice->customer);
+                if ($stripeCustomer->email) {
+                    $fallbackStmt = $pdo->prepare("
+                        UPDATE users 
+                        SET premium_expiry = ?,
+                            premium_status = 1,
+                            stripe_customer_id = ?,
+                            updated_at = NOW()
+                        WHERE email = ?
+                    ");
+                    $fallbackStmt->execute([$expiryDate, $invoice->customer, $stripeCustomer->email]);
+                    if ($fallbackStmt->rowCount() > 0) {
+                        logError("✅ Fallback réussi - utilisateur mis à jour via email: " . $stripeCustomer->email . " (stripe_customer_id corrigé)");
+                    } else {
+                        logError("❌ Fallback échoué - aucun utilisateur avec l'email: " . $stripeCustomer->email);
+                    }
+                }
+            } catch (Exception $fallbackEx) {
+                logError("❌ Erreur fallback customer email: " . $fallbackEx->getMessage());
+            }
         }
 
         // Mettre à jour le statut dans premium_subscriptions
@@ -980,7 +1069,7 @@ function handlePaymentSucceeded($invoice) {
                 updated_at = NOW()
             WHERE stripe_subscription_id = ?
         ");
-        $stmt->execute([$invoice->subscription]);
+        $stmt->execute([$subscriptionId]); // utiliser $subscriptionId (compatible nouvelle API)
 
     } catch (Exception $e) {
         logError("❌ Erreur traitement succès paiement", $e);
@@ -992,131 +1081,45 @@ function handlePaymentFailed($invoice) {
     try {
         logError("⚠️ Échec du paiement pour facture: " . $invoice->id);
         
-        $pdo = getDBConnection();
-        
-        // Trouver l'utilisateur pour désactiver son premium s'il n'a pas d'autre abonnement
-        if ($invoice->subscription) {
-            $stmt = $pdo->prepare("SELECT user_id FROM premium_subscriptions WHERE stripe_subscription_id = ?");
-            $stmt->execute([$invoice->subscription]);
-            $sub = $stmt->fetch();
-            
-            if ($sub) {
-                $userId = $sub['user_id'];
-                
-                // Désactiver le premium dans la table users
-                $updateUserStmt = $pdo->prepare("
-                    UPDATE users 
-                    SET premium_status = 0,
-                        premium_expiry = NOW(),
-                        updated_at = NOW()
-                    WHERE id = ?
-                ");
-                $updateUserStmt->execute([$userId]);
-                
-                logError("✅ Premium désactivé pour l'utilisateur $userId");
-            }
+        // Compatibilité ancienne et nouvelle API Stripe
+        $subscriptionId = $invoice->subscription
+            ?? $invoice->parent->subscription_details->subscription
+            ?? null;
+
+        if (!$subscriptionId) {
+            logError("⚠️ invoice.payment_failed ignoré : aucun subscription_id dans la facture " . $invoice->id);
+            return;
         }
+
+        $pdo = getDBConnection();
+
+        // Ne PAS désactiver le premium immédiatement : Stripe retente le paiement sur plusieurs jours.
+        // L'accès premium est maintenu pendant la période de relance.
+        // La désactivation définitive se fera via customer.subscription.deleted si toutes les tentatives échouent.
+        // On se contente de passer le statut à 'past_due' pour information.
+        logError("⚠️ Paiement échoué pour subscription: $subscriptionId - premium maintenu pendant la relance Stripe");
         
-        // Mettre à jour le statut de l'abonnement à 'past_due'
+        // Mettre à jour le statut de l'abonnement à 'past_due' uniquement
         $stmt = $pdo->prepare("
             UPDATE premium_subscriptions 
             SET status = 'past_due', 
                 updated_at = NOW()
             WHERE stripe_subscription_id = ?
         ");
-        
-        $stmt->execute([$invoice->subscription]);
+        $stmt->execute([$subscriptionId]);
+
+        logError("✅ Statut premium_subscriptions passé à 'past_due' pour: $subscriptionId");
         
     } catch (Exception $e) {
         logError("❌ Erreur traitement paiement échoué", $e);
     }
 }
 
-// 🚀 NOUVEAU : Fonction pour gérer la création de customer
+// Fonction pour gérer la création de customer
+// Les comptes sont créés uniquement depuis l'app ou la page VIP — jamais depuis le dashboard Stripe.
+// Cet événement est donc ignoré volontairement.
 function handleCustomerCreated($customer) {
-    try {
-        logError("🆕 Customer créé dans Stripe: " . $customer->id);
-        logError("📧 Email: " . ($customer->email ?? 'N/A'));
-        logError("👤 Nom: " . ($customer->name ?? 'N/A'));
-        
-        // 🚀 CORRECTION : Ne pas créer d'utilisateur si le customer vient de l'application
-        // car l'utilisateur sera créé proprement avec son mot de passe lors du checkout.session.completed
-        if (isset($customer->metadata->app) && $customer->metadata->app === 'prayer_times_app') {
-            logError("ℹ️ Customer créé via l'application - l'utilisateur sera créé lors du checkout.session.completed avec son vrai mot de passe");
-            return;
-        }
-        
-        // 🚀 DEBUG : Vérifier la connexion DB
-        logError("🔍 DEBUG - Test connexion DB...");
-        $pdo = getDBConnection();
-        logError("✅ Connexion DB réussie");
-        
-        if (!$customer->email) {
-            logError("❌ Pas d'email - impossible de créer l'utilisateur");
-            return;
-        }
-        
-        $pdo = getDBConnection();
-        
-        // Vérifier si l'utilisateur existe déjà
-        $stmt = $pdo->prepare("SELECT id FROM users WHERE email = ?");
-        $stmt->execute([$customer->email]);
-        $existingUser = $stmt->fetch();
-        
-        if ($existingUser) {
-            logError("👤 Utilisateur existe déjà avec l'email: " . $customer->email);
-            return;
-        }
-        
-        // 🚀 NOUVEAU : Créer un utilisateur avec mot de passe fixe
-        $tempPassword = '123456';
-        $hashedPassword = password_hash($tempPassword, PASSWORD_DEFAULT);
-        
-        // Extraire le prénom du nom complet ou utiliser le début de l'email
-        $firstName = '';
-        if ($customer->name) {
-            $nameParts = explode(' ', trim($customer->name));
-            $firstName = $nameParts[0];
-        } else {
-            $firstName = explode('@', $customer->email)[0];
-        }
-        
-        // S'assurer que le nom n'est pas vide et faire un fallback ultime
-        if (empty($firstName)) {
-            $firstName = 'Utilisateur';
-        }
-        
-        // Créer l'utilisateur dans la base de données
-        $stmt = $pdo->prepare("
-            INSERT INTO users (
-                email, 
-                password_hash, 
-                user_first_name, 
-                created_from,
-                subscription_platform,
-                created_at,
-                updated_at
-            ) VALUES (?, ?, ?, 'stripe_dashboard', 'stripe', NOW(), NOW())
-        ");
-        
-        $stmt->execute([
-            $customer->email,
-            $hashedPassword,
-            $firstName
-        ]);
-        
-        $userId = $pdo->lastInsertId();
-        
-        logError("✅ Utilisateur créé avec succès via Dashboard Stripe ID: " . $userId);
-        
-        // Envoyer l'email de bienvenue avec le mot de passe par défaut
-        sendWelcomeEmail($customer->email, $firstName, $tempPassword);
-        
-        // Note: Le mot de passe sera aussi visible dans les logs (ligne ci-dessus) pour récupération manuelle
-        
-    } catch (Exception $e) {
-        logError("❌ Erreur traitement customer créé", $e);
-    }
+    logError("ℹ️ customer.created ignoré (création compte gérée par l'app) - Customer: " . $customer->id . " / Email: " . ($customer->email ?? 'N/A'));
 }
 
 /**
@@ -1194,22 +1197,27 @@ function handleCustomerDeleted($customer) {
     }
 }
 
-// 🔐 NOUVEAU : Fonction pour gérer les actions de paiement requises (3D Secure, etc.)
+    // 🔐 NOUVEAU : Fonction pour gérer les actions de paiement requises (3D Secure, etc.)
 function handlePaymentActionRequired($invoice) {
     try {
         logError("🔐 Action de paiement requise: " . $invoice->id);
         logError("📧 Customer: " . $invoice->customer);
         
         $pdo = getDBConnection();
+
+        // Compatibilité ancienne et nouvelle API Stripe
+        $subscriptionId = $invoice->subscription
+            ?? $invoice->parent->subscription_details->subscription
+            ?? null;
         
         // Récupérer l'utilisateur associé
-        if ($invoice->subscription) {
+        if ($subscriptionId) {
             $subStmt = $pdo->prepare("
                 SELECT user_id 
                 FROM premium_subscriptions 
                 WHERE stripe_subscription_id = ?
             ");
-            $subStmt->execute([$invoice->subscription]);
+            $subStmt->execute([$subscriptionId]);
             $subData = $subStmt->fetch();
             
             if ($subData) {
@@ -1234,7 +1242,7 @@ function handlePaymentActionRequired($invoice) {
             WHERE stripe_subscription_id = ?
         ");
         
-        $stmt->execute([$invoice->subscription]);
+        $stmt->execute([$subscriptionId]);
         
     } catch (Exception $e) {
         logError("❌ Erreur traitement action de paiement requise", $e);

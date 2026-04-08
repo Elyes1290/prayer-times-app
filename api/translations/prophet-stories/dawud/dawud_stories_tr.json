@@ -1,0 +1,401 @@
+{
+  "dawud_goliath": {
+    "title": "Davud ve Golyat",
+    "title_arabic": "داوود وجالوت",
+    "introduction": "Davud (داوود عليه السلام), Davut, İsrail'in peygamberi ve kralıdır. Kur'an onun Golyat (Calut) ile savaşını anlatır: \"Allah'ın izniyle küçük bir topluluk ne kadar çok kez büyük bir orduyu yenmiştir!\" (2:249) Davud, Talut'un (Şaul) ordusu Filistililerle karşılaştığında genç bir çobandı. Golyat askerlere meydan okudu; sadece Davud kabul etti.",
+    "conclusion": "Davud Golyat'ı sapanından bir taşla yere serdi. Allah ona krallık ve hikmet verdi. Bu savaş zaferin Allah'tan geldiğini, güçten veya sayıdan değil, gösterir.",
+    "moral_lesson": "Bu hikaye bize Allah'a güven ve cesaretin zorlukların üstesinden gelebileceğini öğretir. Allah'a dayanan zayıf, güçlüyü yenebilir.",
+    "historical_location": "Filistin (Elah Vadisi)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "dawud_goliath_chapter_1",
+        "title": "Golyat'ın meydan okuması",
+        "content": "Kur'an şöyle bildirir: \"Talut askerlerle yola çıktığında dedi: Allah sizi bir nehirle deneyecek. Ondan içen benden değildir; tadmayan bendendir — eliyle bir avuç alan hariç.\" (2:249) Ordu geçti; azı sadık kaldı. Aralarında Davud vardı. Golyat (Calut), Filistili dev, İsrail askerlerine meydan okudu. Kimse onunla yüzleşmeye cesaret edemedi. Davud, genç çoban, gönüllü oldu."
+      },
+      {
+        "id": "dawud_goliath_chapter_2",
+        "title": "Mucizevi zafer",
+        "content": "Kur'an şöyle der: \"Allah'ın izniyle onları yendiler. Ve Davud Golyat'ı öldürdü. Ve Allah ona krallık ve hikmet verdi ve dilediğini öğretti.\" (2:251) Davud'un sadece sapanı ve taşları vardı. Allah'a dua etti ve bir taş fırlattı. Golyat'ın alnına isabet etti; dev düştü. Düşman ordusu bozguna uğradı. Zafer bir işaretti: Allah O'na güvenenleri destekler."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 2:249",
+        "reference_text": "Bakara Suresi, 249. ayet",
+        "content": "فَلَمَّا فَصَلَ طَالُوتُ بِٱلْجُنُودِ قَالَ إِنَّ ٱللَّهَ مُبْتَلِيكُم بِنَهَرٍۢ فَمَن شَرِبَ مِنْهُ فَلَيْسَ مِنِّى وَمَن لَّمْ يَطْعَمْهُ فَإِنَّهُۥ مِنِّىٓ إِلَّا مَنِ ٱغْتَرَفَ غُرْفَةًۢ بِيَدِهِۦ",
+        "translation": "When Talut set out with the troops, he said: Allah will test you with a river. Whoever drinks from it is not of me.",
+        "relevance": "Bu ayet savaştan önceki denemeyi tasvir eder."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 2:251",
+        "reference_text": "Bakara Suresi, 251. ayet",
+        "content": "فَهَزَمُوهُم بِإِذْنِ ٱللَّهِ وَقَتَلَ دَاوُۥدُ جَالُوتَ وَءَاتَىٰهُ ٱللَّهُ ٱلْمُلْكَ وَٱلْحِكْمَةَ وَعَلَّمَهُۥ مِمَّا يَشَآءُ",
+        "translation": "They defeated them by the permission of Allah. Dawud killed Goliath. Allah gave him the kingdom and wisdom.",
+        "relevance": "Bu ayet Davud'un zaferini ve krallık bağışını tesis eder."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Dawud",
+        "arabic_term": "داوود",
+        "definition": "Arapça'da Davut. İsrail'in peygamberi ve kralı, Golyat'ı yenen.",
+        "pronunciation": "da-woud"
+      },
+      {
+        "id": 2,
+        "term": "Jalut",
+        "arabic_term": "جالوت",
+        "definition": "Golyat. Davud tarafından yenilen Filistili dev.",
+        "pronunciation": "ja-lout"
+      }
+    ]
+  },
+  "dawud_kingdom": {
+    "title": "Davud'un krallığı",
+    "title_arabic": "ملك داوود",
+    "introduction": "Talut'un ölümünden sonra Davud İsrail kralı oldu. Kur'an şöyle der: \"Ey Davud! Seni yeryüzünde halife yaptık. İnsanlar arasında adaletle hükmet.\" (38:26) Davud adaletle hükmetti. Kabileleri birleştirdi ve Kudüs'ü başkent yaptı. Allah'ın düşmanlarıyla savaştı ve barışı tesis etti.",
+    "conclusion": "Davud adil ve dindar bir kraldı. Adaletle hüküm verdi ve kendini yozlaştırmadı. Krallığı onun rehberliğinde refaha kavuştu.",
+    "moral_lesson": "Bu hikaye bize gücün adaletle kullanılması gerektiğini öğretir. Hükümdar adil hükmetmeli ve Allah'tan korkmalıdır.",
+    "historical_location": "Kudüs, Filistin",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "dawud_kingdom_chapter_1",
+        "title": "Tahta çıkış",
+        "content": "Kur'an şöyle bildirir: \"Rabbin göklerde ve yerde olanları en iyi bilir. Ve biz bazı peygamberleri diğerlerinden üstün kıldık; ve Davud'a Zebur'u verdik.\" (17:55) Davud krallığı ve Kitabı (Zebur) aldı. Tahtını Kudüs'te kurdu. İnsanlar ona adalet için geldi. Şikayetleri dinledi ve hikmetle karar verdi."
+      },
+      {
+        "id": "dawud_kingdom_chapter_2",
+        "title": "Davud'un adaleti",
+        "content": "Kur'an şöyle der: \"Ey Davud! Seni yeryüzünde halife yaptık. İnsanlar arasında adaletle hükmet ve hevaya uyma: seni Allah'ın yolundan saptırır.\" (38:26) Davud kimseyi kayırmadı. Her davayı dikkatle inceledi. Mazlumlar onda bir savunucu buldu. Krallığı adaletin bir örneğiydi."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 17:55",
+        "reference_text": "İsra Suresi, 55. ayet",
+        "content": "وَرَبُّكَ أَعْلَمُ بِمَن فِى ٱلسَّمَـٰوَٰتِ وَٱلْأَرْضِ ۗ وَلَقَدْ فَضَّلْنَا بَعْضَ ٱلنَّبِيِّـۧنَ عَلَىٰ بَعْضٍۢ ۖ وَءَاتَيْنَا دَاوُۥدَ زَبُورًۭا",
+        "translation": "Your Lord knows best. We have favored some prophets. To Dawud We gave the Zabur.",
+        "relevance": "Bu ayet Zebur'un Davud'a verilmesini tesis eder."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 38:26",
+        "reference_text": "Sad Suresi, 26. ayet",
+        "content": "يَـٰدَاوُۥدُ إِنَّا جَعَلْنَـٰكَ خَلِيفَةًۭ فِى ٱلْأَرْضِ فَٱحْكُم بَيْنَ ٱلنَّاسِ بِٱلْحَقِّ وَلَا تَتَّبِعِ ٱلْهَوَىٰ",
+        "translation": "O Dawud! We have made you a successor on earth. Judge between people with justice.",
+        "relevance": "Bu ayet Davud'a adaletle hükmetmesini emreder."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Khalifa",
+        "arabic_term": "خليفة",
+        "definition": "Halife, temsilci. Davud yeryüzünde halifeydi.",
+        "pronunciation": "kha-li-fa"
+      },
+      {
+        "id": 2,
+        "term": "Zabur",
+        "arabic_term": "الزبور",
+        "definition": "Zebur. Allah tarafından Davud'a vahyedilen kitap.",
+        "pronunciation": "az-zabour"
+      }
+    ]
+  },
+  "dawud_zabur": {
+    "title": "Zebur (Mezmurlar)",
+    "title_arabic": "الزبور",
+    "introduction": "Allah Davud'a Zebur'u (Mezmurlar) vahyetti. Kur'an şöyle der: \"Ve Davud'a Zebur'u verdik.\" (17:55) Zebur övgüler, dualar ve hikmet içerir. Davud onu öyle güzel bir sesle okurdu ki dağlar ve kuşlar onunla birlikte Allah'ı tesbih ederdi.",
+    "conclusion": "Zebur, Tevrat, İncil ve Kur'an ile birlikte vahyedilen kitaplardan biridir. Tüm kitaplara inanmak İslam inancının bir temelidir.",
+    "moral_lesson": "Bu hikaye bize her peygamberin bir vahiy aldığını öğretir. İlahi kitaplar tevhit mesajını tamamlar ve doğrular.",
+    "historical_location": "Filistin",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "dawud_zabur_chapter_1",
+        "title": "Zebur'un vahyi",
+        "content": "Kur'an şöyle bildirir: \"Sana Nuh'a ve ondan sonraki peygamberlere vahyettiğimiz gibi vahyettik. Ve İbrahim, İsmail, İshak, Yakub, oymaklar, İsa, Eyyub, Yunus, Harun ve Süleyman'a vahyettik. Ve Davud'a Zebur'u verdik.\" (4:163) Zebur Allah tarafından Davud'a vahyedildi. Övgü ve hikmet sözleri içeriyordu. Davud onu Rab'ini tesbih ederek okurdu."
+      },
+      {
+        "id": "dawud_zabur_chapter_2",
+        "title": "Davud'un sesi",
+        "content": "Kur'an şöyle der: \"Biz Davud'a tarafımızdan bir lütuf verdik: Ey dağlar! Onunla birlikte tesbihleri tekrarlayın. Ve ey kuşlar!\" (34:10) Davud Allah'ı tesbih ettiğinde dağlar ve kuşlar onunla tekrarlardı. Sesi o kadar melodikti ki yaratılışı ilham verirdi. Davud tarafından okunan Zebur kalpleri Allah'a yükseltirdi."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 4:163",
+        "reference_text": "Nisa Suresi, 163. ayet",
+        "content": "إِنَّآ أَوْحَيْنَآ إِلَيْكَ كَمَآ أَوْحَيْنَآ إِلَىٰ نُوحٍۢ وَٱلنَّبِيِّـۧنَ مِنۢ بَعْدِهِۦ ۚ وَأَوْحَيْنَآ إِلَىٰٓ إِبْرَٰهِـۧمَ وَإِسْمَـٰعِيلَ وَإِسْحَـٰقَ وَيَعْقُوبَ وَٱلْأَسْبَاطِ وَعِيسَىٰ وَأَيُّوبَ وَيُونُسَ وَهَـٰرُونَ وَسُلَيْمَـٰنَ ۚ وَءَاتَيْنَا دَاوُۥدَ زَبُورًۭا",
+        "translation": "We have revealed to you as to the prophets. To Dawud We gave the Zabur.",
+        "relevance": "Bu ayet Zebur'u vahyedilen kitaplar arasına koyar."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 34:10",
+        "reference_text": "Sebe Suresi, 10. ayet",
+        "content": "وَلَقَدْ ءَاتَيْنَا دَاوُۥدَ مِنَّا فَضْلًۭا ۖ يَـٰجِبَالُ أَوِّبِى مَعَهُۥ وَٱلطَّيْرَ",
+        "translation": "We have granted a favor to Dawud: O mountains! Repeat with him. And O birds!",
+        "relevance": "Bu ayet dağlar ve kuşlar mucizesini tasvir eder."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Zabur",
+        "arabic_term": "الزبور",
+        "definition": "Zebur. Davud'a vahyedilen kitap.",
+        "pronunciation": "az-zabour"
+      },
+      {
+        "id": 2,
+        "term": "Tasbih",
+        "arabic_term": "تسبيح",
+        "definition": "Tesbih. Davud Zebur ile Allah'ı tesbih ederdi.",
+        "pronunciation": "tas-bih"
+      }
+    ]
+  },
+  "dawud_mountains": {
+    "title": "Dağlar ve kuşlar",
+    "title_arabic": "الجبال والطيور مع داوود",
+    "introduction": "Allah Davud'a benzersiz bir mucize bahşetti: Rab'ini tesbih ettiğinde dağlar ve kuşlar onunla tekrarlardı. Kur'an şöyle der: \"Ey dağlar! Onunla birlikte tesbihleri tekrarlayın. Ve ey kuşlar!\" (34:10) Tüm yaratılış Davud ile birlikte Allah'ı tesbih ederdi.",
+    "conclusion": "Bu mucize Davud'un gerçekten Allah'ın peygamberi olduğunu gösterdi. Tabiat Yaratıcısına itaat eder ve seçilmiş kullarının çağrısına cevap verir.",
+    "moral_lesson": "Bu hikaye bize tüm yaratılışın Allah'ı tesbih ettiğini öğretir. İnsan namaz ve zikirle bu tesbihe katılmalıdır.",
+    "historical_location": "Filistin",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "dawud_mountains_chapter_1",
+        "title": "Mucize",
+        "content": "Kur'an şöyle bildirir: \"Ve biz Davud'a tarafımızdan bir lütuf verdik: Ey dağlar! Onunla birlikte tesbihleri tekrarlayın. Ve ey kuşlar! Ve ona demiri yumuşattık.\" (34:10) Davud Zebur'u okuyup Allah'ı tesbih ettiğinde dağlar sesine yankı verirdi. Kuşlar ona katılırdı. Allah'ın gücünün ve Davud'un seçilmişliğinin bir işaretiydi."
+      },
+      {
+        "id": "dawud_mountains_chapter_2",
+        "title": "Yaratılışın boyun eğmesi",
+        "content": "Kur'an şöyle der: \"Ve toplanan kuşlar: hepsi onunla birlikte tesbihleri tekrarlardı.\" (38:19) Tüm yaratılış — dağlar, kuşlar — Davud ile birlikte Allah'ı tesbih ederdi. Bu, var olan her şeyin Allah'a boyun eğdiğini hatırlatır. İnsan ibadetle bu boyun eğmeyi taklit etmelidir."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 34:10",
+        "reference_text": "Sebe Suresi, 10. ayet",
+        "content": "وَلَقَدْ ءَاتَيْنَا دَاوُۥدَ مِنَّا فَضْلًۭا ۖ يَـٰجِبَالُ أَوِّبِى مَعَهُۥ وَٱلطَّيْرَ ۚ وَأَلَنَّا لَهُ ٱلْحَدِيدَ",
+        "translation": "We have granted a favor to Dawud. O mountains! Repeat with him. And O birds!",
+        "relevance": "Bu ayet dağlar ve kuşlar mucizesini tasvir eder."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 38:19",
+        "reference_text": "Sad Suresi, 19. ayet",
+        "content": "وَٱلطَّيْرَ مَحْشُورَةً ۖ كُلٌّ لَّهُۥٓ أَوَّابٌ",
+        "translation": "And the birds assembled, all with him repeated the praises.",
+        "relevance": "Bu ayet kuşların Davud ile tesbihini doğrular."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Awab",
+        "arabic_term": "أواب",
+        "definition": "Allah'a dönen. Dağlar ve kuşlar Davud ile awab'dı.",
+        "pronunciation": "a-wab"
+      },
+      {
+        "id": 2,
+        "term": "Jibal",
+        "arabic_term": "جبال",
+        "definition": "Dağlar. Davud ile Allah'ı tesbih ederlerdi.",
+        "pronunciation": "ji-bal"
+      }
+    ]
+  },
+  "dawud_iron": {
+    "title": "Davud için yumuşatılan demir",
+    "title_arabic": "تليين الحديد لداوود",
+    "introduction": "Allah Davud'a başka bir mucize bahşetti: demir onun ellerinde yumuşardı. Kur'an şöyle der: \"Ve ona demiri yumuşattık.\" (34:10) Davud ateş veya çekiç olmadan zırh yapabiliyordu. Askerleri korumak için zırh yaptı.",
+    "conclusion": "Bu bağış Davud'un güçlü zırh yapmasına olanak verdi. İnsanlara bu zanaatı öğretti. Doğası gereği sert olan demir peygamberin eline itaat etti.",
+    "moral_lesson": "Bu hikaye bize Allah'ın peygamberleri için tabiat kanunlarını değiştirebileceğini öğretir. Mucizeler mesajın doğruluğunu doğrular.",
+    "historical_location": "Filistin",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "dawud_iron_chapter_1",
+        "title": "Demir bağışı",
+        "content": "Kur'an şöyle bildirir: \"Ve ona demiri yumuşattık: Tam zırhlar yap ve halkaları iyi ölç. Ve iyilik yapın. Yaptıklarınızı görüyorum.\" (34:10-11) Demir Davud'un ellerinde şekillenebilir hale geldi. Ocağı olmadan büküp örebiliyordu. Savaşçıları korumak için zırh yaptı. Allah ona bu beceriyi öğretmişti."
+      },
+      {
+        "id": "dawud_iron_chapter_2",
+        "title": "Öğreti",
+        "content": "Davud bu bağışı halkına aktardı. Kur'an şöyle der: \"Ve Davud'a sizi şiddetinizden korumak için zırh yapımını öğrettik. Şükreder misiniz?\" (21:80) Yumuşatılmış demir Allah'tan bir lütuftu. İnsanlar zırh yapabiliyordu. Davud onları şükretmeye teşvik etti."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 34:10-11",
+        "reference_text": "Sebe Suresi, 10-11. ayetler",
+        "content": "وَأَلَنَّا لَهُ ٱلْحَدِيدَ ۝ أَنِ ٱعْمَلْ سَـٰبِغَـٰتٍۢ وَقَدِّرْ فِى ٱلسَّرْدِ ۖ وَٱعْمَلُوا۟ صَـٰلِحًا ۖ إِنِّى بِمَا تَعْمَلُونَ بَصِيرٌ",
+        "translation": "We made iron soft for him: Make complete coats of mail. And do good.",
+        "relevance": "Bu ayet demir mucizesini ve zırh yapma emrini tasvir eder."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 21:80",
+        "reference_text": "Enbiya Suresi, 80. ayet",
+        "content": "وَعَلَّمْنَـٰهُ صَنْعَةَ لَبُوسٍۢ لَّكُمْ لِتُحْصِنَكُم مِّنۢ بَأْسِكُمْ ۖ فَهَلْ أَنتُمْ شَـٰكِرُونَ",
+        "translation": "We taught him the making of coats of mail to protect you. Would you be grateful?",
+        "relevance": "Bu ayet Davud'a demir bağışını hatırlatır."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Sabighat",
+        "arabic_term": "سابغات",
+        "definition": "Tam zırhlar. Davud onları yumuşatılmış demirle yapardı.",
+        "pronunciation": "sa-bi-ghat"
+      },
+      {
+        "id": 2,
+        "term": "Hadid",
+        "arabic_term": "حديد",
+        "definition": "Demir. Allah onu Davud için yumuşattı.",
+        "pronunciation": "ha-did"
+      }
+    ]
+  },
+  "dawud_judgment": {
+    "title": "Davud'un hükmü",
+    "title_arabic": "قضاء داوود",
+    "introduction": "Bir gün iki adam Davud'un önüne bir anlaşmazlık için geldi. Biri doksan dokuz koyuna, diğeri sadece birine sahipti. Zengin fakirin koyununu istedi. Davud dinledi ve hükmetti. Sonra denendiğini anladı ve tövbe etti.",
+    "conclusion": "Allah Davud'u bağışladı. Bu hikaye peygamberlerin bile deneyebileceğini gösterir. Samimi tövbe hataları siler.",
+    "moral_lesson": "Bu hikaye bize adalet ve tevazunun önemini öğretir. Hakim her davayı dikkatle incelemeli ve etkilenmemelidir.",
+    "historical_location": "Kudüs",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "dawud_judgment_chapter_1",
+        "title": "İki davacı",
+        "content": "Kur'an şöyle bildirir: \"Davacıların hikayesi sana ulaştı mı, mihraba tırmandıklarında? Davud'un yanına girdiklerinde korktu. Dediler: Korkma. İki davacıyız: birimiz diğerine haksızlık etti. Aramızda adaletle hükmet.\" (38:21-22) İki melek Davud'u denemek için insan suretinde geldi. Biri doksan dokuz koyuna, diğeri sadece birine sahipti. Birincisi diğerinin koyununu istedi."
+      },
+      {
+        "id": "dawud_judgment_chapter_2",
+        "title": "Tövbe",
+        "content": "Kur'an şöyle der: \"Davud dedi: Koyununu koyunlarına eklemek için istemekle sana haksızlık etti. Birçok ortak birbirine haksızlık eder — inanan ve iyi işler yapanlar hariç, ve onlar azdır. Davud o zaman bizim onu denediğimizi anladı. Rab'inden bağışlanma diledi ve secde etti ve tövbe etti.\" (38:24-25) Davud çok hızlı hükmetmişti. Tövbe etti ve Allah onu bağışladı. Peygamberler de insandır ve hata yapabilir; tövbe onları yükseltir."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 38:21-22",
+        "reference_text": "Sad Suresi, 21-22. ayetler",
+        "content": "وَهَلْ أَىٰكَ نَبَؤُا۟ ٱلْخَصْمِ إِذْ تَسَوَّرُوا۟ ٱلْمِحْرَابَ ۝ إِذْ دَخَلُوا۟ عَلَىٰ دَاوُۥدَ فَفَزِعَ مِنْهُمْ ۖ قَالُوا۟ لَا تَخَفْ ۖ خَصْمَانِ بَغَىٰ بَعْضُنَا عَلَىٰ بَعْضٍۢ",
+        "translation": "Has the story of the litigants reached you? They entered upon Dawud. They said: We are two litigants.",
+        "relevance": "Bu ayet Davud'un denemesini tanıtır."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 38:24-25",
+        "reference_text": "Sad Suresi, 24-25. ayetler",
+        "content": "قَالَ لَقَدْ ظَلَمَكَ بِسُؤَالِ نَعْجَتِكَ إِلَىٰ نِعَاجِهِۦ ۗ وَإِنَّ كَثِيرًۭا مِّنَ ٱلْخُلَطَآءِ لَيَبْغِى بَعْضُهُمْ عَلَىٰ بَعْضٍ إِلَّا ٱلَّذِينَ ءَامَنُوا۟ وَعَمِلُوا۟ ٱلصَّـٰلِحَـٰتِ وَقَلِيلٌۭ مَّا هُمْ ۗ وَظَنَّ دَاوُۥدُ أَنَّمَا فَتَنَّـٰهُ فَٱسْتَغْفَرَ رَبَّهُۥ وَخَرَّ رَاكِعًۭا وَأَنَابَ ۩",
+        "translation": "Dawud said: He has wronged you. Dawud understood that he had been tested. He asked forgiveness and prostrated.",
+        "relevance": "Bu ayet Davud'un tövbesini gösterir."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Mihrab",
+        "arabic_term": "محراب",
+        "definition": "Mihrap, namaz yeri. Davacılar Davud'un mihrabına tırmandı.",
+        "pronunciation": "mih-rab"
+      },
+      {
+        "id": 2,
+        "term": "Istighfar",
+        "arabic_term": "استغفار",
+        "definition": "Bağışlanma dileme. Davud hatasını anladıktan sonra istiğfar etti.",
+        "pronunciation": "is-tigh-far"
+      }
+    ]
+  },
+  "lessons_from_dawud": {
+    "title": "Davud hikayesinden dersler",
+    "title_arabic": "دروس من قصة داوود",
+    "introduction": "Davud peygamber ve kraldı. Golyat'ı yendi, Zebur'u aldı ve adaletle hükmetti. Kur'an şöyle der: \"Ve biz bazı peygamberleri diğerlerinden üstün kıldık; ve Davud'a Zebur'u verdik.\" (17:55) Hikayesi Allah'a güveni, adaleti ve tevazuyu öğretir.",
+    "conclusion": "Davud güç ve yumuşaklığı, iktidar ve takvayı birleştirdi. Allah'ı tesbih etti ve adalet dağıttı. Hüküm denemesinden sonra tövbesi peygamberlerin mütevazi kullar olarak kaldığını gösterir.",
+    "moral_lesson": "Bu hikaye bize zaferin Allah'tan geldiğini, gücün adalet gerektirdiğini ve tövbenin kalbi arındırdığını öğretir.",
+    "historical_location": "Filistin",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lessons_from_dawud_chapter_1",
+        "title": "Güven ve zafer",
+        "content": "Davud, genç çoban, Golyat deviyle yüzleşti. Sadece sapanı vardı. Ama Allah'a dua etti ve taş hedefini buldu. Kur'an bize hatırlatır: \"Allah'ın izniyle küçük bir topluluk ne kadar çok kez büyük bir orduyu yenmiştir!\" (2:249) Zafer sayıya veya güce bağlı değildir; Allah'a bağlıdır."
+      },
+      {
+        "id": "lessons_from_dawud_chapter_2",
+        "title": "Adalet ve tövbe",
+        "content": "Davud adil bir kraldı. Ama iki davacı tarafından denendi. Çok hızlı hükmetmişti. Anlar anlamaz tövbe etti. Kur'an şöyle der: \"Onu bağışladık. Bizim katımızda yakınlık ve güzel bir sığınak olacak.\" (38:25) Samimi tövbe inananı yükseltir. Davud kral ve peygamber örneği olarak kalır."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 17:55",
+        "reference_text": "İsra Suresi, 55. ayet",
+        "content": "وَلَقَدْ فَضَّلْنَا بَعْضَ ٱلنَّبِيِّـۧنَ عَلَىٰ بَعْضٍۢ ۖ وَءَاتَيْنَا دَاوُۥدَ زَبُورًۭا",
+        "translation": "We have favored some prophets. To Dawud We gave the Zabur.",
+        "relevance": "Bu ayet Davud'un peygamberler arasındaki yerini tesis eder."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 38:25",
+        "reference_text": "Sad Suresi, 25. ayet",
+        "content": "فَغَفَرْنَا لَهُۥ ذَٰلِكَ ۖ وَإِنَّ لَهُۥ عِندَنَا لَزُلْفَىٰ وَحُسْنَ مَـَٔابٍۢ",
+        "translation": "We forgave him. He will have a place near to Us and a beautiful refuge.",
+        "relevance": "Bu ayet Allah'ın Davud'a bağışını gösterir."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Tawakkul",
+        "arabic_term": "توكل",
+        "definition": "Allah'a güven. Davud Golyat ile yüzleşirken tevekkül gösterdi.",
+        "pronunciation": "ta-wak-koul"
+      },
+      {
+        "id": 2,
+        "term": "Adl",
+        "arabic_term": "عدل",
+        "definition": "Adalet. Davud'a adaletle (adl) hükmetmesi emredildi.",
+        "pronunciation": "adl"
+      }
+    ]
+  }
+}

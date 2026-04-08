@@ -1,0 +1,342 @@
+{
+  "salih_prophecy": {
+    "title": "L'envoi de Salih comme prophète",
+    "title_arabic": "إرسال صالح عليه السلام",
+    "introduction": "Salih (صالح عليه السلام) est un prophète envoyé par Allah au peuple de Thamud, qui succéda aux 'Ad. Après la destruction des 'Ad, Allah établit les Thamud dans la terre. Ils construisirent des palais sur les plaines et creusèrent des demeures dans les montagnes. Mais ils s'égarent et Allah envoie Salih, leur frère, pour les appeler au monothéisme.",
+    "conclusion": "L'envoi de Salih marque la continuité de la mission prophétique après Hud. Les Thamud reçurent un messager choisi parmi eux. Salih leur apporta une preuve claire : la chamelle d'Allah.",
+    "moral_lesson": "Cette histoire nous enseigne qu'Allah n'abandonne jamais un peuple sans lui envoyer un avertisseur. Les bienfaits terrestres — palais et demeures — n'exemptent pas de l'adoration d'Allah.",
+    "historical_location": "Al-Hijr (région entre le Hijaz et la Syrie)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "salih_prophecy_chapter_1",
+        "title": "L'ordre divin",
+        "content": "Allah envoya Salih vers le peuple de Thamud, ses frères. Le Coran rapporte : « Et vers les Thamud, leur frère Salih. Il dit : Ô mon peuple ! Adorez Allah. Vous n'avez pas d'autre divinité que Lui. Une preuve claire vous est venue de votre Seigneur : voici la chamelle d'Allah, un signe pour vous. Laissez-la paître sur la terre d'Allah et ne lui faites aucun mal, sinon un châtiment douloureux vous saisira. » (7:73) Salih reçut la révélation et une preuve miraculeuse : la chamelle, signe de la puissance d'Allah."
+      },
+      {
+        "id": "salih_prophecy_chapter_2",
+        "title": "Les successeurs des 'Ad",
+        "content": "Le Coran rappelle aux Thamud : « Et rappelez-vous quand Il vous fit succéder aux 'Ad et vous établit sur la terre. Vous construisez des palais dans ses plaines et vous taillez des demeures dans les montagnes. Rappelez-vous donc les bienfaits d'Allah et ne semez pas la corruption sur la terre. » (7:74) Les Thamud avaient reçu des bienfaits immenses. Ils habitaient une région fertile et avaient développé une civilisation avancée. Mais ils oublièrent Allah et s'adonnèrent à la corruption."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 7:73",
+        "reference_text": "Sourate Al-A'raf, verset 73",
+        "content": "وَإِلَىٰ ثَمُودَ أَخَاهُمْ صَـٰلِحًۭا ۗ قَالَ يَـٰقَوْمِ ٱعْبُدُوا۟ ٱللَّهَ مَا لَكُم مِّنْ إِلَـٰهٍ غَيْرُهُۥٓ ۖ قَدْ جَآءَتْكُم بَيِّنَةٌۭ مِّن رَّبِّكُمْ ۖ هَـٰذِهِۦ نَاقَةُ ٱللَّهِ لَكُمْ ءَايَةًۭ ۖ فَذَرُوهَا تَأْكُلْ فِىٓ أَرْضِ ٱللَّهِ ۖ وَلَا تَمَسُّوهَا بِسُوٓءٍۢ فَيَأْخُذَكُمْ عَذَابٌ أَلِيمٌۭ",
+        "translation": "Et vers les Thamud, leur frère Salih. Il dit : Ô mon peuple ! Adorez Allah — vous n'avez pas d'autre divinité que Lui. Une preuve claire vous est venue de votre Seigneur : voici la chamelle d'Allah, un signe pour vous. Laissez-la paître sur la terre d'Allah et ne lui faites aucun mal, sinon un châtiment douloureux vous saisira.",
+        "relevance": "Ce verset établit l'envoi de Salih et la chamelle comme signe divin."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 7:74",
+        "reference_text": "Sourate Al-A'raf, verset 74",
+        "content": "وَٱذْكُرُوٓا۟ إِذْ جَعَلَكُمْ خُلَفَآءَ مِنۢ بَعْدِ عَادٍۢ وَبَوَّأَكُمْ فِى ٱلْأَرْضِ تَتَّخِذُونَ مِن سُهُولِهَا قُصُورًۭا وَتَنْحِتُونَ ٱلْجِبَالَ بُيُوتًۭا",
+        "translation": "Rappelez-vous quand Il vous fit succéder aux 'Ad et vous établit sur la terre. Vous construisez des palais dans ses plaines et vous taillez des demeures dans les montagnes.",
+        "relevance": "Ce verset décrit les Thamud comme successeurs des 'Ad et leurs réalisations."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Salih",
+        "arabic_term": "صالح",
+        "definition": "Salih en arabe. Prophète d'Allah envoyé au peuple de Thamud. Son nom signifie « le vertueux ».",
+        "pronunciation": "sa-lih"
+      },
+      {
+        "id": 2,
+        "term": "Thamud",
+        "arabic_term": "ثمود",
+        "definition": "Peuple antique d'Arabie qui succéda aux 'Ad. Ils creusaient des demeures dans les montagnes. Ils furent détruits pour avoir tué la chamelle.",
+        "pronunciation": "tha-moud"
+      },
+      {
+        "id": 3,
+        "term": "Al-Hijr",
+        "arabic_term": "الحجر",
+        "definition": "Région où vivaient les Thamud, entre le Hijaz et la Syrie. Le Prophète Muhammad passa par ses ruines.",
+        "pronunciation": "al-hijr"
+      }
+    ]
+  },
+  "salih_call": {
+    "title": "L'appel de Salih à son peuple",
+    "title_arabic": "دعوة صالح لقومه",
+    "introduction": "Salih (عليه السلام) appela le peuple de Thamud avec clarté. Il les invita à adorer Allah seul, à demander pardon et à se repentir. Il leur rappela qu'Allah les avait fait naître de la terre et les avait établis sur elle. Il les avertit des conséquences de la désobéissance. Malgré son message, les Thamud refusèrent.",
+    "conclusion": "L'appel de Salih illustre la constance du message prophétique. Il ne demanda aucune récompense ; son Seigneur est Proche et Exauce les invocations. Les Thamud eurent leur chance avant le châtiment.",
+    "moral_lesson": "Cette histoire nous enseigne que le repentir est toujours possible avant que le châtiment ne s'abatte. Elle nous rappelle que notre Seigneur est Proche et Exauce ceux qui L'invoquent.",
+    "historical_location": "Al-Hijr",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "salih_call_chapter_1",
+        "title": "L'invitation au monothéisme",
+        "content": "Salih dit à son peuple : « Ô mon peuple ! Adorez Allah. Vous n'avez pas d'autre divinité que Lui. C'est Lui qui vous a fait naître de la terre et vous a établis sur elle. Implorez donc Son pardon, puis repentez-vous vers Lui. Mon Seigneur est Proche, Il exauce. » (11:61) Salih leur rappela les bienfaits d'Allah et les invita à ne pas semer la corruption sur la terre. Il les avertit que s'ils persistaient, ils subiraient le sort des peuples du passé."
+      },
+      {
+        "id": "salih_call_chapter_2",
+        "title": "Le rejet des Thamud",
+        "content": "Le Coran rapporte que « les Thamud ont traité les messagers de menteurs » (26:141) et qu'« ils ont rejeté les avertissements » (54:23). Malgré la preuve claire — la chamelle — et l'appel de Salih, les notables du peuple refusèrent. Ils s'enorgueillirent. Le Coran dit : « Les Thamud ont rejeté par arrogance. » (91:11) Salih continua à les appeler avec patience, mais ils persistèrent dans leur mécréance."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 11:61",
+        "reference_text": "Sourate Hud, verset 61",
+        "content": "وَإِلَىٰ ثَمُودَ أَخَاهُمْ صَـٰلِحًۭا ۚ قَالَ يَـٰقَوْمِ ٱعْبُدُوا۟ ٱللَّهَ مَا لَكُم مِّنْ إِلَـٰهٍ غَيْرُهُۥٓ ۖ هُوَ أَنشَأَكُم مِّنَ ٱلْأَرْضِ وَٱسْتَعْمَرَكُمْ فِيهَا فَٱسْتَغْفِرُوهُ ثُمَّ تُوبُوٓا۟ إِلَيْهِ ۚ إِنَّ رَبِّى قَرِيبٌۭ مُّجِيبٌۭ",
+        "translation": "Et vers les Thamud, leur frère Salih. Il dit : Ô mon peuple ! Adorez Allah. Vous n'avez pas d'autre divinité que Lui. C'est Lui qui vous a fait naître de la terre et vous a établis sur elle. Implorez Son pardon, puis repentez-vous vers Lui. Mon Seigneur est Proche, Il exauce.",
+        "relevance": "Ce verset contient l'appel de Salih et la promesse du pardon."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 91:11",
+        "reference_text": "Sourate Ash-Shams, verset 11",
+        "content": "كَذَّبَتْ ثَمُودُ بِطَغْوَىٰهَآ",
+        "translation": "Les Thamud ont rejeté par arrogance.",
+        "relevance": "Ce verset décrit l'attitude des Thamud face à l'appel de Salih."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Tawba",
+        "arabic_term": "توبة",
+        "definition": "Repentir. Salih invita les Thamud à se repentir avant le châtiment.",
+        "pronunciation": "taw-ba"
+      },
+      {
+        "id": 2,
+        "term": "Qarib Mujib",
+        "arabic_term": "قريب مجيب",
+        "definition": "Proche, Il exauce. Description du Seigneur qui répond aux invocations.",
+        "pronunciation": "qa-rib mou-jib"
+      }
+    ]
+  },
+  "the_thamud_people": {
+    "title": "Le peuple de Thamud",
+    "title_arabic": "قوم ثمود",
+    "introduction": "Le peuple de Thamud succéda aux 'Ad sur la terre. Allah les établit et leur accorda des capacités remarquables : ils construisaient des palais sur les plaines et taillaient des demeures dans les montagnes. Mais ils oublièrent les bienfaits d'Allah et semèrent la corruption. Ils rejetèrent Salih et son signe.",
+    "conclusion": "La civilisation des Thamud — leurs palais et leurs demeures creusées dans la roche — ne les protégea pas. Le séisme les anéantit dans leurs habitations. Seuls Salih et les croyants furent épargnés.",
+    "moral_lesson": "Cette histoire nous enseigne que les réalisations humaines ne dispensent pas de l'adoration d'Allah. La corruption sur la terre mène au châtiment.",
+    "historical_location": "Al-Hijr (entre le Hijaz et la Syrie)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "the_thamud_people_chapter_1",
+        "title": "Une civilisation avancée",
+        "content": "Le Coran décrit les Thamud : « Rappelez-vous quand Il vous fit succéder aux 'Ad et vous établit sur la terre. Vous construisez des palais dans ses plaines et vous taillez des demeures dans les montagnes. » (7:74) Les Thamud étaient des bâtisseurs habiles. Leurs demeures creusées dans les montagnes témoignent encore aujourd'hui de leur savoir-faire. Mais le Coran les exhorte : « Rappelez-vous les bienfaits d'Allah et ne semez pas la corruption sur la terre. » Ils firent le contraire."
+      },
+      {
+        "id": "the_thamud_people_chapter_2",
+        "title": "L'ingratitude",
+        "content": "Allah avait accordé aux Thamud la terre, la capacité de construire et de prospérer. Mais ils s'adonnèrent à la corruption (fasād). Ils rejetèrent le messager d'Allah et méprisèrent le signe qu'Il leur avait envoyé : la chamelle. Leur ingratitude et leur transgression les firent mériter le châtiment. Salih les avertit à plusieurs reprises, mais ils persistèrent jusqu'à commettre le crime qui scella leur destin : la mise à mort de la chamelle."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 7:74",
+        "reference_text": "Sourate Al-A'raf, verset 74",
+        "content": "وَٱذْكُرُوٓا۟ إِذْ جَعَلَكُمْ خُلَفَآءَ مِنۢ بَعْدِ عَادٍۢ وَبَوَّأَكُمْ فِى ٱلْأَرْضِ تَتَّخِذُونَ مِن سُهُولِهَا قُصُورًۭا وَتَنْحِتُونَ ٱلْجِبَالَ بُيُوتًۭا ۖ فَٱذْكُرُوٓا۟ ءَالَآءَ ٱللَّهِ وَلَا تَعْثَوْا۟ فِى ٱلْأَرْضِ مُفْسِدِينَ",
+        "translation": "Rappelez-vous quand Il vous fit succéder aux 'Ad et vous établit sur la terre. Vous construisez des palais dans ses plaines et vous taillez des demeures dans les montagnes. Rappelez-vous les bienfaits d'Allah et ne semez pas la corruption sur la terre.",
+        "relevance": "Ce verset décrit la civilisation des Thamud et l'exhortation à la gratitude."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Khulafa",
+        "arabic_term": "خلفاء",
+        "definition": "Successeurs. Les Thamud succédèrent aux 'Ad sur la terre.",
+        "pronunciation": "khou-la-fa"
+      },
+      {
+        "id": 2,
+        "term": "Mufsidun",
+        "arabic_term": "مفسدون",
+        "definition": "Ceux qui sèment la corruption. Le Coran avertit les Thamud de ne pas être des corrupteurs.",
+        "pronunciation": "mouf-si-doun"
+      }
+    ]
+  },
+  "the_she_camel": {
+    "title": "La chamelle d'Allah",
+    "title_arabic": "ناقة الله",
+    "introduction": "Allah envoya aux Thamud une chamelle comme signe et épreuve. Cette chamelle (nāqat Allāh) était une preuve claire de la vérité de Salih. Il leur ordonna de la laisser paître librement et de ne pas lui faire de mal. L'eau devait être partagée entre eux et elle, chacun buvant à son tour. Les Thamud rejetèrent cette épreuve.",
+    "conclusion": "La chamelle était un signe de la miséricorde d'Allah et une épreuve pour les Thamud. En la respectant, ils auraient été épargnés. En la tuant, ils scellèrent leur perte.",
+    "moral_lesson": "Cette histoire nous enseigne que les signes d'Allah sont des épreuves. Les respecter mène au salut ; les transgresser mène au châtiment.",
+    "historical_location": "Al-Hijr",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "the_she_camel_chapter_1",
+        "title": "Le signe divin",
+        "content": "Le Coran rapporte les paroles de Salih : « Une preuve claire vous est venue de votre Seigneur : voici la chamelle d'Allah, un signe pour vous. Laissez-la paître sur la terre d'Allah et ne lui faites aucun mal, sinon un châtiment douloureux vous saisira. » (7:73) La chamelle était un miracle — un signe tangible de la puissance d'Allah et de la vérité du message de Salih. Elle devait paître librement sur la terre d'Allah. Quiconque lui ferait du mal encourrait un châtiment douloureux."
+      },
+      {
+        "id": "the_she_camel_chapter_2",
+        "title": "Le partage de l'eau",
+        "content": "Le Coran indique qu'Allah ordonna à Salih d'informer les Thamud : « L'eau sera partagée entre vous et elle ; chacun boira à son tour. » (54:28) La chamelle était une épreuve (fitna) pour les Thamud. Le Coran dit : « Nous envoyons la chamelle comme épreuve pour eux. Surveille-les donc et sois patient. » (54:27) Les Thamud devaient accepter ce partage et ne pas nuire à la chamelle. Ceux qui croiraient et obéiraient seraient épargnés ; les autres subiraient le châtiment."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 7:73",
+        "reference_text": "Sourate Al-A'raf, verset 73",
+        "content": "هَـٰذِهِۦ نَاقَةُ ٱللَّهِ لَكُمْ ءَايَةًۭ ۖ فَذَرُوهَا تَأْكُلْ فِىٓ أَرْضِ ٱللَّهِ ۖ وَلَا تَمَسُّوهَا بِسُوٓءٍۢ فَيَأْخُذَكُمْ عَذَابٌ أَلِيمٌۭ",
+        "translation": "Voici la chamelle d'Allah, un signe pour vous. Laissez-la paître sur la terre d'Allah et ne lui faites aucun mal, sinon un châtiment douloureux vous saisira.",
+        "relevance": "Ce verset établit la chamelle comme signe et l'interdiction de lui nuire."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 54:27-28",
+        "reference_text": "Sourate Al-Qamar, versets 27-28",
+        "content": "إِنَّا مُرْسِلُوا۟ ٱلنَّاقَةِ فِتْنَةًۭ لَّهُمْ فَٱرْتَقِبْهُمْ وَٱصْطَبِرْ ۝ وَنَبِّئْهُمْ أَنَّ ٱلْمَآءَ قِسْمَةٌۢ بَيْنَهُمْ ۖ كُلُّ شِرْبٍۢ مُّحْتَضَرٌۭ",
+        "translation": "Nous envoyons la chamelle comme épreuve pour eux. Surveille-les donc et sois patient. Et informe-les que l'eau sera partagée entre eux et elle ; chacun boira à son tour.",
+        "relevance": "Ces versets décrivent la chamelle comme épreuve et le partage de l'eau."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Naqat Allah",
+        "arabic_term": "ناقة الله",
+        "definition": "La chamelle d'Allah. Le signe miraculeux envoyé aux Thamud.",
+        "pronunciation": "na-qat al-lah"
+      },
+      {
+        "id": 2,
+        "term": "Fitna",
+        "arabic_term": "فتنة",
+        "definition": "Épreuve, tentation. La chamelle était une épreuve pour les Thamud.",
+        "pronunciation": "fit-na"
+      }
+    ]
+  },
+  "the_camel_killed": {
+    "title": "La mise à mort de la chamelle et le châtiment",
+    "title_arabic": "عقر الناقة والعذاب",
+    "introduction": "Malgré l'avertissement de Salih, les Thamud tuèrent la chamelle. Le Coran rapporte qu'ils « la nièrent et la tuèrent » (91:14). En réponse, Allah les détruisit par un séisme (rajfah). Ils furent saisis dans leurs demeures et trouvés morts, prostrés. Salih et les croyants furent sauvés.",
+    "conclusion": "La mise à mort de la chamelle scella le destin des Thamud. Le séisme les anéantit. Leur transgression contre un signe clair d'Allah leur valut un châtiment immédiat. L'histoire des Thamud demeure un avertissement pour les générations.",
+    "moral_lesson": "Cette histoire nous enseigne que transgresser les signes d'Allah mène à la perte. Le châtiment peut être soudain. Seuls ceux qui croient et obéissent sont épargnés.",
+    "historical_location": "Al-Hijr",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "the_camel_killed_chapter_1",
+        "title": "Le crime",
+        "content": "Le Coran décrit ce qui se passa : « Quand le plus misérable d'entre eux se leva » (91:12), et que le messager d'Allah (Salih) leur dit : « Voici la chamelle d'Allah, laissez-la boire » (91:13), « ils le nièrent et la tuèrent. Leur Seigneur les anéantit alors pour leur péché et les nivela. » (91:14) Les Thamud commirent le crime suprême : tuer le signe d'Allah après avoir été avertis. Leur arrogance les aveugla."
+      },
+      {
+        "id": "the_camel_killed_chapter_2",
+        "title": "Le séisme",
+        "content": "Le Coran décrit le châtiment : « Le séisme les saisit, et au matin ils gisaient morts dans leurs demeures. » (7:78) Le mot « rajfah » désigne un séisme ou une secousse violente. Les Thamud, si fiers de leurs palais et de leurs demeures creusées dans les montagnes, furent anéantis en un instant. Salih et ceux qui avaient cru avec lui furent sauvés par la miséricorde d'Allah. Les ruines d'Al-Hijr témoignent encore de leur civilisation disparue."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 91:12-15",
+        "reference_text": "Sourate Ash-Shams, versets 12-15",
+        "content": "إِذِ ٱنۢبَعَثَ أَشْقَىٰهَا ۝ فَقَالَ لَهُمْ رَسُولُ ٱللَّهِ نَاقَةَ ٱللَّهِ وَسُقْيَـٰهَا ۝ فَكَذَّبُوهُ فَعَقَرُوهَا فَدَمْدَمَ عَلَيْهِمْ رَبُّهُم بِذَنۢبِهِمْ فَسَوَّىٰهَا ۝ وَلَا يَخَافُ عُقْبَـٰهَا",
+        "translation": "Quand le plus misérable d'entre eux se leva. Le messager d'Allah leur dit : Voici la chamelle d'Allah, laissez-la boire. Ils le nièrent et la tuèrent. Leur Seigneur les anéantit pour leur péché et les nivela. Et Il ne craint pas les conséquences.",
+        "relevance": "Ces versets décrivent le crime des Thamud et leur châtiment."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 7:78",
+        "reference_text": "Sourate Al-A'raf, verset 78",
+        "content": "فَأَخَذَتْهُمُ ٱلرَّجْفَةُ فَأَصْبَحُوا۟ فِى دَارِهِمْ جَـٰثِمِينَ",
+        "translation": "Le séisme les saisit, et au matin ils gisaient morts dans leurs demeures.",
+        "relevance": "Ce verset décrit la nature du châtiment : un séisme."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Aqar",
+        "arabic_term": "عقر",
+        "definition": "Mettre à mort (en coupant les jarrets). Les Thamud « aqarū » la chamelle.",
+        "pronunciation": "a-qar"
+      },
+      {
+        "id": 2,
+        "term": "Rajfah",
+        "arabic_term": "رجفة",
+        "definition": "Séisme, secousse. Le châtiment par lequel Allah détruisit les Thamud.",
+        "pronunciation": "raj-fa"
+      }
+    ]
+  },
+  "lessons_from_salih": {
+    "title": "Les leçons de l'histoire de Salih",
+    "title_arabic": "دروس من قصة صالح",
+    "introduction": "L'histoire de Salih (عليه السلام) contient des leçons intemporelles. Elle enseigne les conséquences de la transgression des signes d'Allah, l'importance de la gratitude envers les bienfaits, et la rapidité du châtiment pour ceux qui persistent dans le mal. Le Coran la cite comme un exemple.",
+    "conclusion": "Salih accomplit sa mission. Les Thamud furent anéantis pour avoir tué la chamelle. Son histoire demeure un rappel : les signes d'Allah ne doivent pas être transgressés. La civilisation et les réalisations matérielles ne protègent pas du châtiment.",
+    "moral_lesson": "Cette histoire nous enseigne à respecter les signes d'Allah, à être reconnaissants pour Ses bienfaits, et à ne pas semer la corruption. Elle nous rappelle que le repentir est possible avant qu'il ne soit trop tard.",
+    "historical_location": "D'Al-Hijr à l'oubli",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lessons_from_salih_chapter_1",
+        "title": "Un exemple pour les peuples",
+        "content": "Le Coran présente l'histoire de Salih comme un avertissement. Les Thamud avaient tout : des palais, des demeures creusées dans les montagnes, un signe clair — la chamelle. Mais ils manquaient de l'essentiel : la foi et l'obéissance. Ils transgressèrent le signe d'Allah et furent détruits. Salih, quant à lui, resta ferme. Il ne demanda aucune récompense ; il transmit le message. Son histoire nous rappelle que le messager accomplit sa mission ; le résultat appartient à Allah."
+      },
+      {
+        "id": "lessons_from_salih_chapter_2",
+        "title": "La continuité prophétique",
+        "content": "Salih fait partie de la lignée des prophètes envoyés après Hud. Adam, Noé, Hud, Salih — chaque peuple reçoit son messager. Les Thamud, comme les 'Ad avant eux, eurent leur chance. Ils refusèrent et transgressèrent. L'histoire de Salih s'inscrit dans le même schéma : l'appel au monothéisme, le signe miraculeux, le rejet, la transgression, le châtiment, et le salut des croyants. Les ruines d'Al-Hijr, que le Prophète Muhammad passa lors de l'expédition de Tabuk, rappellent cette leçon aux générations."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 11:120",
+        "reference_text": "Sourate Hud, verset 120",
+        "content": "وَكُلًّا نَّقُصُّ عَلَيْكَ مِنْ أَنبَاءِ الرُّسُلِ مَا نُثَبِّتُ بِهِ فُؤَادَكَ وَجَاءَكَ فِي هَٰذِهِ الْحَقُّ وَمَوْعِظَةٌ وَذِكْرَىٰ لِلْمُؤْمِنِينَ",
+        "translation": "Et tout ce que Nous te racontons des récits des messagers, c'est pour affermir ton cœur. Et il t'est parvenu dans ce récit la vérité, ainsi qu'une exhortation et un rappel pour les croyants.",
+        "relevance": "Ce verset explique le but des récits des prophètes dans le Coran."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 11:68",
+        "reference_text": "Sourate Hud, verset 68",
+        "content": "كَأَن لَّمْ يَغْنَوْا۟ فِيهَا ۗ أَلَآ إِنَّ ثَمُودًا كَفَرُوا۟ رَبَّهُمْ ۗ أَلَا بُعْدًۭا لِّثَمُودَ",
+        "translation": "Comme s'ils n'y avaient jamais vécu. En vérité, les Thamud ont mécru en leur Seigneur. Que les Thamud soient anéantis !",
+        "relevance": "Ce verset conclut le récit des Thamud et leur châtiment."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Ibra",
+        "arabic_term": "عبرة",
+        "definition": "Exemple ou leçon. Les histoires des prophètes sont des exemples pour l'humanité.",
+        "pronunciation": "ib-ra"
+      },
+      {
+        "id": 2,
+        "term": "Dhikra",
+        "arabic_term": "ذكرى",
+        "definition": "Rappel. Les récits des prophètes servent de rappel pour les croyants.",
+        "pronunciation": "dhik-ra"
+      }
+    ]
+  }
+}

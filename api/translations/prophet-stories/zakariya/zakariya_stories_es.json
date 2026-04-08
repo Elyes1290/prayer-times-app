@@ -1,0 +1,230 @@
+{
+  "zakariya_prayer": {
+    "title": "La oración de Zakariya",
+    "title_arabic": "دعاء زكريا",
+    "introduction": "Zakariya (زكريا عليه السلام), Zacarías, es un profeta y sacerdote de los Hijos de Israel. El Corán dice: \"Fue entonces cuando Zakariya invocó a su Señor.\" (3:38) Zakariya era anciano y no tenía hijos. Su esposa era estéril. A pesar de esto, no desesperó. Invocó a su Señor en secreto.",
+    "conclusion": "Zakariya pidió un heredero piadoso. Quería a alguien que perpetuara el mensaje de Allah después de él. Su oración fue sincera y desinteresada. Allah la respondió.",
+    "moral_lesson": "Esta historia nos enseña que la invocación sincera llega a Allah. Incluso cuando todo parece imposible, el creyente debe esperar en la misericordia de su Señor.",
+    "historical_location": "Palestina (Bayt al-Maqdis)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "zakariya_prayer_chapter_1",
+        "title": "El deseo de un hijo",
+        "content": "El Corán relata: \"¡Señor mío! Concédeme de Ti una buena descendencia. Tú eres el Mejor de los herederos.\" (19:5-6) Zakariya servía en el Templo. Vio a María, la madre de Isa, recibir su sustento de Allah. Esto lo animó. Invocó en secreto: \"Dame un hijo piadoso.\" Sabía que Allah puede hacer cualquier cosa."
+      },
+      {
+        "id": "zakariya_prayer_chapter_2",
+        "title": "La invocación secreta",
+        "content": "El Corán dice: \"Invocó a su Señor en secreto. Dijo: ¡Señor mío! Mis huesos se han debilitado y mi cabeza se ha encendido de canas. Y nunca he sido infeliz al invocarte.\" (19:3-4) Zakariya invocó con humildad. Reconoció su debilidad. Recordó a Allah que siempre lo había servido. Su invocación fue respondida."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Corán 3:38",
+        "reference_text": "Sura Al-Imran, versículo 38",
+        "content": "هُنَالِكَ دَعَا زَكَرِيَّا رَبَّهُۥ ۖ قَالَ رَبِّ هَبْ لِى مِن لَّدُنكَ ذُرِّيَّةًۭ طَيِّبَةً ۖ إِنَّكَ سَمِيعُ ٱلدُّعَآءِ",
+        "translation": "Fue entonces cuando Zakariya invocó a su Señor. Dijo: ¡Señor mío! Concédeme de Tu presencia una buena descendencia. Tú eres Quien escucha la invocación.",
+        "relevance": "Este versículo relata la invocación de Zakariya."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Corán 19:2-4",
+        "reference_text": "Sura Maryam, versículos 2-4",
+        "content": "ذِكْرُ رَحْمَتِ رَبِّكَ عَبْدَهُۥ زَكَرِيَّآ ۝ إِذْ نَادَىٰ رَبَّهُۥ نِدَآءً خَفِيًّۭا ۝ قَالَ رَبِّ إِنِّى وَهَنَ ٱلْعَظْمُ مِنِّى وَٱشْتَعَلَ ٱلرَّأْسُ شَيْبًۭا",
+        "translation": "Recuerdo de la misericordia de tu Señor hacia Su siervo Zakariya. Cuando invocó a su Señor en secreto.",
+        "relevance": "Este pasaje describe la invocación secreta de Zakariya."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Zakariya",
+        "arabic_term": "زكريا",
+        "definition": "Zacarías en árabe. Profeta y padre de Yahya.",
+        "pronunciation": "za-ka-ri-ya"
+      },
+      {
+        "id": 2,
+        "term": "Du'a",
+        "arabic_term": "دعاء",
+        "definition": "Invocación. Zakariya hizo du'a por un hijo.",
+        "pronunciation": "dou-a"
+      }
+    ]
+  },
+  "zakariya_announcement": {
+    "title": "El anuncio a Zakariya",
+    "title_arabic": "بشارة زكريا",
+    "introduction": "Allah respondió a la invocación de Zakariya. El Corán dice: \"¡Oh Zakariya! Te damos la buena nueva de un hijo. Su nombre será Yahya.\" (19:7) Los ángeles vinieron a Zakariya mientras oraba en el santuario. Anunciaron el nacimiento de un hijo. Zakariya pidió una señal.",
+    "conclusion": "Allah le dio una señal: no podría hablar con la gente durante tres noches. Esto era prueba de que la promesa era verdadera. Zakariya salió del santuario e indicó a su pueblo que glorificaran a Allah.",
+    "moral_lesson": "Esta historia nos enseña que Allah responde las invocaciones de los piadosos. Los milagros confirman la verdad del mensaje profético.",
+    "historical_location": "Palestina (Templo)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "zakariya_announcement_chapter_1",
+        "title": "La buena nueva",
+        "content": "El Corán relata: \"¡Oh Zakariya! Te damos la buena nueva de un hijo. Su nombre será Yahya. No hemos dado antes a nadie ese nombre.\" (19:7) Zakariya estaba en el mihrab (santuario) cuando escuchó el anuncio. No podía creerlo: ¿él, anciano, y su esposa estéril? Pero Allah le dijo: \"Así es. Tu Señor ha dicho: Eso es fácil para Mí.\""
+      },
+      {
+        "id": "zakariya_announcement_chapter_2",
+        "title": "La señal",
+        "content": "El Corán dice: \"Dijo: ¡Señor mío! ¿Cómo puedo tener un hijo cuando mi esposa es estéril y he alcanzado la vejez extrema? Dijo: Así es. Tu Señor ha dicho: Eso es fácil para Mí. Y en verdad te creé antes, cuando no eras nada.\" (19:8-9) Zakariya pidió una señal. Allah dijo: \"Tu señal será que no hablarás con la gente durante tres noches estando en buena salud.\" (19:10)"
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Corán 19:7",
+        "reference_text": "Sura Maryam, versículo 7",
+        "content": "يَـٰزَكَرِيَّآ إِنَّا نُبَشِّرُكَ بِغُلَـٰمٍ ٱسْمُهُۥ يَحْيَىٰ لَمْ نَجْعَل لَّهُۥ مِن قَبْلُ سَمِيًّۭا",
+        "translation": "¡Oh Zakariya! Te damos la buena nueva de un hijo. Su nombre será Yahya.",
+        "relevance": "Este versículo relata el anuncio del nacimiento de Yahya."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Corán 3:39",
+        "reference_text": "Sura Al-Imran, versículo 39",
+        "content": "فَنَادَتْهُ ٱلْمَلَـٰٓئِكَةُ وَهُوَ قَآئِمٌۭ يُصَلِّى فِى ٱلْمِحْرَابِ أَنَّ ٱللَّهَ يُبَشِّرُكَ بِيَحْيَىٰ",
+        "translation": "Los ángeles lo llamaron mientras oraba en el santuario: Allah te da la buena nueva de Yahya.",
+        "relevance": "Este versículo describe el anuncio en el santuario."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Bashara",
+        "arabic_term": "بشارة",
+        "definition": "Buena nueva. Zakariya recibió la bashara de un hijo.",
+        "pronunciation": "ba-cha-ra"
+      },
+      {
+        "id": 2,
+        "term": "Mihrab",
+        "arabic_term": "محراب",
+        "definition": "Santuario, lugar de oración. Zakariya oró en el mihrab.",
+        "pronunciation": "mih-rab"
+      }
+    ]
+  },
+  "zakariya_yahya": {
+    "title": "Zakariya y el nacimiento de Yahya",
+    "title_arabic": "زكريا ويحيى",
+    "introduction": "Yahya nació como Allah había prometido. El Corán dice: \"¡Oh Yahya! Toma el Libro con fuerza. Y le dimos sabiduría desde la infancia.\" (19:12) Zakariya no pudo hablar durante tres días. Cuando Yahya nació, Zakariya recuperó el habla. Glorificó a Allah y agradeció a su Señor.",
+    "conclusion": "Yahya creció en piedad. Se convirtió en un profeta justo y puro. Zakariya había obtenido lo que deseaba: un heredero para perpetuar el mensaje de Allah. La promesa de Allah se había cumplido.",
+    "moral_lesson": "Esta historia nos enseña que la palabra de Allah es verdad. Lo que Él promete, lo cumple. El creyente debe tener total confianza en su Señor.",
+    "historical_location": "Palestina",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "zakariya_yahya_chapter_1",
+        "title": "El nacimiento de Yahya",
+        "content": "El Corán relata: \"Y la paz sea sobre él el día que nació, el día que muera y el día que sea resucitado vivo.\" (19:15) Yahya nació de la esposa de Zakariya. Fue un milagro: una mujer estéril y un hombre anciano tuvieron un hijo. La familia y los parientes se alegraron. Zakariya indicó a su pueblo que glorificaran a Allah por la mañana y por la tarde."
+      },
+      {
+        "id": "zakariya_yahya_chapter_2",
+        "title": "La crianza de Yahya",
+        "content": "El Corán dice: \"Y (Yahya) fue obediente a sus padres. No fue arrogante ni desobediente.\" (19:14) Zakariya crió a Yahya en la adoración de Allah. Yahya era un niño piadoso, gentil y obediente. Aprendió la Torá y la sabiduría. Se convirtió en profeta antes de la edad adulta. Zakariya había pasado la antorcha."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Corán 19:12-13",
+        "reference_text": "Sura Maryam, versículos 12-13",
+        "content": "يَـٰيَحْيَىٰ خُذِ ٱلْكِتَـٰبَ بِقُوَّةٍۢ ۖ وَءَاتَيْنَـٰهُ ٱلْحُكْمَ صَبِيًّۭا ۝ وَحَنَانًۭا مِّن لَّدُنَّا وَزَكَوٰةًۭ",
+        "translation": "¡Oh Yahya! Toma el Libro con fuerza. Le dimos sabiduría desde la infancia y ternura de Nosotros.",
+        "relevance": "Este pasaje describe las cualidades de Yahya."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Corán 3:41",
+        "reference_text": "Sura Al-Imran, versículo 41",
+        "content": "قَالَ رَبِّ ٱجْعَل لِّىٓ ءَايَةًۭ ۖ قَالَ ءَايَتُكَ أَلَّا تُكَلِّمَ ٱلنَّاسَ ثَلَـٰثَ لَيَالٍۢ سَوِيًّۭا",
+        "translation": "Dijo: ¡Señor mío! Dame una señal. Dijo: Tu señal será que no hablarás con la gente durante tres noches.",
+        "relevance": "Este versículo relata la señal dada a Zakariya."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Yahya",
+        "arabic_term": "يحيى",
+        "definition": "Juan en árabe. Hijo de Zakariya, profeta de la pureza.",
+        "pronunciation": "yah-ya"
+      },
+      {
+        "id": 2,
+        "term": "Hikma",
+        "arabic_term": "حكمة",
+        "definition": "Sabiduría. Yahya recibió hikma desde la infancia.",
+        "pronunciation": "hik-ma"
+      }
+    ]
+  },
+  "lessons_from_zakariya": {
+    "title": "Lecciones de la historia de Zakariya",
+    "title_arabic": "دروس من قصة زكريا",
+    "introduction": "Zakariya es el profeta de la invocación respondida. El Corán dice: \"Fue entonces cuando Zakariya invocó a su Señor.\" (3:38) Un hombre anciano sin hijos, invocó con sinceridad. Allah le dio a Yahya, un profeta puro. Su historia enseña que nada es imposible para Allah.",
+    "conclusion": "Zakariya invocó en secreto. Allah respondió. Yahya nació. El mensaje se perpetuó. La historia de Zakariya es un recordatorio: la invocación sincera abre las puertas del cielo.",
+    "moral_lesson": "Esta historia nos enseña que el creyente debe invocar a Allah en todas las circunstancias. Incluso cuando la esperanza parece perdida, la misericordia de Allah puede transformar todo.",
+    "historical_location": "Palestina",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lessons_from_zakariya_chapter_1",
+        "title": "Invocación sincera",
+        "content": "El Corán dice: \"Invocadme, os responderé.\" (40:60) Zakariya invocó con humildad. No pidió para sí un disfrute pasajero. Pidió un heredero piadoso para servir a Allah. Su intención era pura. Allah respondió. La invocación debe ser sincera y desinteresada."
+      },
+      {
+        "id": "lessons_from_zakariya_chapter_2",
+        "title": "Confianza en Allah",
+        "content": "Zakariya pidió una señal. No dudaba de Allah, pero quería prueba para su corazón. Allah le dio la señal del silencio. Cuando Yahya nació, todo fue confirmado. El creyente puede pedir señales a Allah. La fe crece cuando vemos las promesas cumplidas."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Corán 3:38-41",
+        "reference_text": "Sura Al-Imran, versículos 38-41",
+        "content": "هُنَالِكَ دَعَا زَكَرِيَّا رَبَّهُۥ ۖ قَالَ رَبِّ هَبْ لِى مِن لَّدُنكَ ذُرِّيَّةًۭ طَيِّبَةً ۖ إِنَّكَ سَمِيعُ ٱلدُّعَآءِ",
+        "translation": "Zakariya invocó a su Señor. Concédeme una buena descendencia. Tú escuchas la invocación.",
+        "relevance": "Este pasaje resume la historia de Zakariya."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Corán 19:2-15",
+        "reference_text": "Sura Maryam, versículos 2-15",
+        "content": "ذِكْرُ رَحْمَتِ رَبِّكَ عَبْدَهُۥ زَكَرِيَّآ",
+        "translation": "Recuerdo de la misericordia de tu Señor hacia Su siervo Zakariya.",
+        "relevance": "Este pasaje relata la historia completa de Zakariya y Yahya."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Du'a",
+        "arabic_term": "دعاء",
+        "definition": "Invocación. La invocación de Zakariya fue respondida.",
+        "pronunciation": "dou-a"
+      },
+      {
+        "id": 2,
+        "term": "Istijaba",
+        "arabic_term": "استجابة",
+        "definition": "Respuesta. Allah concedió istijaba a Zakariya.",
+        "pronunciation": "is-ti-ja-ba"
+      }
+    ]
+  }
+}

@@ -1,0 +1,344 @@
+{
+  "yusuf_dream": {
+    "title": "De droom van Yusuf",
+    "title_arabic": "رؤيا يوسف",
+    "introduction": "Yusuf (يوسف عليه السلام) is de zoon van Ya'qub (Jakob), kleinzoon van Ibrahim. De Koran zegt: « Wij vertellen jou het mooiste der verhalen. » (12:3) Yusuf had een profetische droom: elf sterren, de zon en de maan bogen zich voor hem neer. Zijn vader Ya'qub begreep dat deze droom een uitzonderlijk lot aankondigde.",
+    "conclusion": "Ya'qub adviseerde Yusuf om deze droom niet aan zijn broers te vertellen, want hij vreesde hun jaloezie. De jaloezie van de broers zou zich spoedig openbaren.",
+    "moral_lesson": "Dit verhaal leert ons dat de dromen van profeten een vorm van openbaring zijn. Jaloezie kan tot kwaad leiden; men moet er bang voor zijn.",
+    "historical_location": "Kanaän (Palestina)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "yusuf_dream_chapter_1",
+        "title": "Het visioen",
+        "content": "De Koran vermeldt: « Toen Yusuf tot zijn vader zei: O mijn vader! Ik zag elf sterren, en de zon en de maan; ik zag hen zich voor mij neerbuigen. » (12:4) Yusuf, nog een kind, vertelde zijn droom aan zijn vader. De elf sterren vertegenwoordigden zijn elf broers; de zon en de maan, zijn vader en moeder (of tante). De neerbuiging symboliseerde de eer die hem zou worden betoond."
+      },
+      {
+        "id": "yusuf_dream_chapter_2",
+        "title": "De waarschuwing van Ya'qub",
+        "content": "De Koran zegt: « Hij zei: O mijn zoon! Vertel je visioen niet aan je broers, want zij zouden een list tegen je beramen. De Duivel is voor de mens een verklaarde vijand. Zo zal jouw Heer jou verkiezen en jou de uitleg der dromen onderwijzen, en Hij zal Zijn genade op jou en op de familie van Ya'qub voltooien, zoals Hij die eerder voltooide op je twee voorvaders Ibrahim en Ishaq. Jouw Heer is Alwetend en Wijs. » (12:5-6) Ya'qub begreep de draagwijdte van de droom en beschermde zijn zoon tegen jaloezie."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 12:4",
+        "reference_text": "Soera Yusuf, vers 4",
+        "content": "إِذْ قَالَ يُوسُفُ لِأَبِيهِ يَـٰٓأَبَتِ إِنِّى رَأَيْتُ أَحَدَ عَشَرَ كَوْكَبًۭا وَٱلشَّمْسَ وَٱلْقَمَرَ رَأَيْتُهُمْ لِى سَـٰجِدِينَ",
+        "translation": "Toen Yusuf tot zijn vader zei: O mijn vader! Ik zag elf sterren, en de zon en de maan; ik zag hen zich voor mij neerbuigen.",
+        "relevance": "Dit vers vestigt de profetische droom van Yusuf."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 12:5-6",
+        "reference_text": "Soera Yusuf, verzen 5-6",
+        "content": "قَالَ يَـٰبُنَىَّ لَا تَقْصُصْ رُءْيَاكَ عَلَىٰٓ إِخْوَتِكَ فَيَكِيدُوا۟ لَكَ كَيْدًا ۖ إِنَّ ٱلشَّيْطَـٰنَ لِلْإِنسَـٰنِ عَدُوٌّ مُّبِينٌ",
+        "translation": "Hij zei: O mijn zoon! Vertel je visioen niet aan je broers, want zij zouden een list tegen je beramen. De Duivel is voor de mens een verklaarde vijand.",
+        "relevance": "Deze verzen tonen de wijsheid van Ya'qub en zijn bescherming van Yusuf."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Yusuf",
+        "arabic_term": "يوسف",
+        "definition": "Jozef in het Arabisch. Zoon van Ya'qub, profeet van Allah.",
+        "pronunciation": "you-souf"
+      },
+      {
+        "id": 2,
+        "term": "Ya'qub",
+        "arabic_term": "يعقوب",
+        "definition": "Jakob in het Arabisch. Vader van Yusuf, profeet van Allah.",
+        "pronunciation": "ya-qoub"
+      }
+    ]
+  },
+  "yusuf_pit": {
+    "title": "Yusuf in de put geworpen",
+    "title_arabic": "يوسف في البئر",
+    "introduction": "De broers van Yusuf, jaloers op de liefde die Ya'qub voor hem had, beraamden een complot. Zij namen hem mee onder het voorwendsel van spelen en wierpen hem op de bodem van een put. Zij brachten hun vader een hemd met vals bloed bevlekt terug, bewerend dat een wolf hem had verslonden.",
+    "conclusion": "Een karavaan kwam voorbij en vond Yusuf in de put. Zij verkochten hem in Egypte voor een spotprijs. Yusuf verliet Kanaän, maar Allah had een plan voor hem.",
+    "moral_lesson": "Dit verhaal leert ons dat het kwaad van mensen het plan van Allah kan dienen. Wat een beproeving lijkt kan tot verheffing leiden.",
+    "historical_location": "Van Kanaän naar Egypte",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "yusuf_pit_chapter_1",
+        "title": "Het complot van de broers",
+        "content": "De Koran vermeldt: « Zij zeiden: Yusuf en zijn broer zijn geliefder bij onze vader dan wij, terwijl wij een groep zijn. Onze vader verkeert zeker in duidelijke dwaling. Dood Yusuf of werp hem in een ver land. » (12:8-9) Een broer stelde voor hem op de bodem van een put te werpen in plaats van hem te doden. Zij kwamen overeen met dit plan en vroegen Ya'qub toestemming om Yusuf mee te nemen."
+      },
+      {
+        "id": "yusuf_pit_chapter_2",
+        "title": "De put en de karavaan",
+        "content": "De Koran zegt: « Toen zij hem meenamen en afspraken hem op de bodem van de put te werpen, openbaarden Wij aan hem: Jij zult hen zeker aan deze zaak herinneren wanneer zij er geen besef van hebben. » (12:15) Yusuf werd in de put geworpen. Een karavaan kwam om te drinken. Een man liet zijn emmer zakken en riep uit: « Hier is een jongen! » Zij verborgen hem om hem te verkopen. Zij verkochten hem in Egypte aan een invloedrijk man (Al-Aziz). De Koran besluit: « En Allah is de beste der plannenmakers. » (12:76)"
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 12:8-9",
+        "reference_text": "Soera Yusuf, verzen 8-9",
+        "content": "إِذْ قَالُوا۟ لَيُوسُفُ وَأَخُوهُ أَحَبُّ إِلَىٰٓ أَبِينَا مِنَّا وَنَحْنُ عُصْبَةٌ إِنَّ أَبَانَا لَفِى ضَلَـٰلٍۢ مُّبِينٍ ۝ ٱقْتُلُوا۟ يُوسُفَ أَوِ ٱطْرَحُوهُ أَرْضًۭا",
+        "translation": "Zij zeiden: Yusuf en zijn broer zijn geliefder bij onze vader dan wij. Dood Yusuf of werp hem in een ver land.",
+        "relevance": "Deze verzen beschrijven de jaloezie en het complot van de broers."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 12:15",
+        "reference_text": "Soera Yusuf, vers 15",
+        "content": "فَلَمَّا ذَهَبُوا۟ بِهِۦ وَأَجْمَعُوٓا۟ أَن يَجْعَلُوهُ فِى غَيَابَتِ ٱلْجُبِّ ۚ وَأَوْحَيْنَآ إِلَيْهِ لَتُنَبِّئَنَّهُم بِأَمْرِهِمْ هَـٰذَا وَهُمْ لَا يَشْعُرُونَ",
+        "translation": "Toen zij hem meenamen en afspraken hem op de bodem van de put te werpen, openbaarden Wij aan hem: Jij zult hen zeker aan deze zaak herinneren wanneer zij er geen besef van hebben.",
+        "relevance": "Dit vers toont de goddelijke openbaring aan Yusuf en de belofte van toekomstige openbaring."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Al-Jubb",
+        "arabic_term": "الجب",
+        "definition": "De put. De broers wierpen Yusuf op de bodem van een put.",
+        "pronunciation": "al-joubb"
+      },
+      {
+        "id": 2,
+        "term": "Al-Aziz",
+        "arabic_term": "العزيز",
+        "definition": "De invloedrijke man. De Egyptische minister die Yusuf kocht.",
+        "pronunciation": "al-a-ziz"
+      }
+    ]
+  },
+  "yusuf_egypt": {
+    "title": "Yusuf in Egypte en de beproeving",
+    "title_arabic": "يوسف في مصر والابتلاء",
+    "introduction": "Yusuf groeide op in het huis van Al-Aziz in Egypte. Hij bereikte de volwassenheid en ontving wijsheid en kennis van Allah. De vrouw van Al-Aziz begeerde hem en probeerde hem te verleiden. Yusuf weigerde, liever de gevangenis dan de zonde. De Koran zegt: « Zo wendden Wij het kwaad en de schandelijkheid van hem af. Hij was zeker onder Onze uitverkoren dienaren. » (12:24)",
+    "conclusion": "De vrouw beschuldigde Yusuf. Een getuige uit de familie stelde voor zijn hemd te onderzoeken: als het van voren gescheurd was, had zij de waarheid gesproken; als van achteren, had Yusuf de waarheid gesproken. Het hemd was van achteren gescheurd. Yusuf werd vrijgesproken maar gevangengezet om de verdenking te sussen.",
+    "moral_lesson": "Dit verhaal leert ons de zonde te vluchten zelfs ten koste van beproeving. Kuisheid en vrees voor Allah gaan boven alles.",
+    "historical_location": "Egypte",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "yusuf_egypt_chapter_1",
+        "title": "De beproeving",
+        "content": "De Koran vermeldt: « En zij in wier huis hij verbleef zocht hem te verleiden. Zij sloot de deuren en zei: Kom! Hij zei: Allah verbiede het! Hij is mijn meester die mij een goede woonplaats heeft gegeven. De onrechtvaardigen slagen niet. » (12:23) Yusuf weigerde. De vrouw achtervolgde hem. Zij gingen naar de deur. Zij scheurde zijn hemd van achteren. Zij vonden de meester bij de deur. Zij beschuldigde Yusuf. Yusuf zei: « Zij was het die mij trachtte te verleiden. »"
+      },
+      {
+        "id": "yusuf_egypt_chapter_2",
+        "title": "De bewezen onschuld",
+        "content": "De Koran zegt: « Een getuige uit haar familie zei: Als zijn hemd van voren gescheurd is, heeft zij de waarheid gesproken en hij behoort tot de leugenaars. En als zijn hemd van achteren gescheurd is, heeft zij gelogen en hij behoort tot de waarheidsprekers. » (12:26-27) Toen men zag dat het hemd van achteren gescheurd was, zei Al-Aziz tot zijn vrouw: « Dit is van jullie list. Jullie list is zeker groot. » Yusuf zei: « Allah verbiede het! » Ondanks zijn onschuld vroeg Yusuf om gevangengezet te worden om geruchten te vermijden. Hij verkoos de gevangenis boven de zonde."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 12:23-24",
+        "reference_text": "Soera Yusuf, verzen 23-24",
+        "content": "وَرَٰوَدَتْهُ ٱلَّتِى هُوَ فِى بَيْتِهَا عَن نَّفْسِهِۦ ۖ وَغَلَّقَتِ ٱلْأَبْوَٰبَ وَقَالَتْ هَيْتَ لَكَ ۚ قَالَ مَعَاذَ ٱللَّهِ ۖ إِنَّهُۥ رَبِّىٓ أَحْسَنَ مَثْوَاىَ ۖ إِنَّهُۥ لَا يُفْلِحُ ٱلظَّـٰلِمُونَ",
+        "translation": "En zij in wier huis hij verbleef zocht hem te verleiden. Zij sloot de deuren en zei: Kom! Hij zei: Allah verbiede het! Hij is mijn meester die mij een goede woonplaats heeft gegeven. De onrechtvaardigen slagen niet.",
+        "relevance": "Deze verzen beschrijven de beproeving en het verzet van Yusuf."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 12:24",
+        "reference_text": "Soera Yusuf, vers 24",
+        "content": "وَلَقَدْ هَمَّتْ بِهِۦ ۖ وَهَمَّ بِهَا لَوْلَآ أَن رَّأَىٰ بُرْهَـٰنَ رَبِّهِۦ ۚ كَذَٰلِكَ لِنَصْرِفَ عَنْهُ ٱلسُّوٓءَ وَٱلْفَحْشَآءَ ۚ إِنَّهُۥ مِنْ عِبَادِنَا ٱلْمُخْلَصِينَ",
+        "translation": "Zo wendden Wij het kwaad en de schandelijkheid van hem af. Hij was zeker onder Onze uitverkoren dienaren.",
+        "relevance": "Dit vers bevestigt de goddelijke bescherming en de uitverkiezing van Yusuf."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Burhan",
+        "arabic_term": "برهان",
+        "definition": "Bewijs, teken. Yusuf zag het bewijs van zijn Heer dat hem beschermde.",
+        "pronunciation": "bour-han"
+      },
+      {
+        "id": 2,
+        "term": "Mukhlisin",
+        "arabic_term": "المخلصين",
+        "definition": "De uitverkorenen, de zuiveren. Yusuf behoorde tot de uitverkoren dienaren van Allah.",
+        "pronunciation": "moukh-li-sine"
+      }
+    ]
+  },
+  "yusuf_prison": {
+    "title": "Yusuf in de gevangenis en de uitleg der dromen",
+    "title_arabic": "يوسف في السجن وتأويل الأحلام",
+    "introduction": "Yusuf werd gevangengezet. Twee jonge mannen kwamen met hem in de gevangenis. Elk had een droom en vroeg Yusuf die uit te leggen. Yusuf legde de dromen uit en maakte van de gelegenheid gebruik om tot de aanbidding van Allah alleen op te roepen. Een van de twee zou worden vrijgelaten en de koning dienen; de andere zou worden gekruisigd.",
+    "conclusion": "De koning van Egypte had een verontrustende droom. De vrijgelaten man herinnerde zich Yusuf. Yusuf legde de droom uit: zeven jaren van overvloed gevolgd door zeven jaren van hongersnood. De koning liet Yusuf uit de gevangenis halen en benoemde hem tot minister.",
+    "moral_lesson": "Dit verhaal leert ons dat geduld en kennis van Allah komen. Yusuf gebruikte zijn gave om tot het geloof op te roepen voordat hij de dromen uitlegde.",
+    "historical_location": "Egypte",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "yusuf_prison_chapter_1",
+        "title": "De dromen van de twee jongelingen",
+        "content": "De Koran vermeldt: « Twee jonge mannen kwamen met hem in de gevangenis. De ene zei: Ik zie mezelf druiven persen. De andere zei: Ik zie mezelf brood op mijn hoofd dragen waarvan de vogels eten. Informeer ons over hun uitleg; wij zien jou onder de weldoeners. » (12:36) Yusuf zei: « Het voedsel dat jullie wordt gegeven zal jullie niet bereiken zonder dat ik jullie erover heb geïnformeerd voordat het jullie bereikt. Dit is wat mijn Heer mij heeft onderwezen. Ik heb de godsdienst van een volk dat niet in Allah gelooft verlaten. » (12:37) Toen legde hij uit: de ene zou worden vrijgelaten en de koning dienen; de andere zou worden gekruisigd en de vogels zouden van zijn hoofd eten."
+      },
+      {
+        "id": "yusuf_prison_chapter_2",
+        "title": "De droom van de koning",
+        "content": "De Koran zegt: « En de koning zei: Ik zie zeven vette koeien die door zeven magere worden verslonden, en zeven groene aren en evenveel andere droge. » (12:43) De waarzeggers konden het niet uitleggen. De vrijgelaten man herinnerde zich Yusuf. Yusuf zei: « Jullie zullen zeven opeenvolgende jaren zaaien. Wat jullie oogsten, laat het in de aar, behalve weinig dat jullie zullen eten. Daarna zullen zeven jaren van hongersnood komen. » (12:47-48) De koning liet Yusuf vrij en benoemde hem tot verantwoordelijke voor de graanschuren."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 12:36",
+        "reference_text": "Soera Yusuf, vers 36",
+        "content": "وَدَخَلَ مَعَهُ ٱلسِّجْنَ فَتَيَانِ ۖ قَالَ أَحَدُهُمَآ إِنِّىٓ أَرَىٰنِىٓ أَعْصِرُ خَمْرًۭا ۖ وَقَالَ ٱلْـَٔاخَرُ إِنِّىٓ أَرَىٰنِىٓ أَحْمِلُ فَوْقَ رَأْسِى خُبْزًۭا تَأْكُلُ ٱلطَّيْرُ مِنْهُ",
+        "translation": "Twee jonge mannen kwamen met hem in de gevangenis. De ene zei: Ik zie mezelf druiven persen. De andere zei: Ik zie mezelf brood op mijn hoofd dragen waarvan de vogels eten.",
+        "relevance": "Dit vers beschrijft de dromen van de twee gevangenen."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 12:43-49",
+        "reference_text": "Soera Yusuf, verzen 43-49",
+        "content": "وَقَالَ ٱلْمَلِكُ إِنِّىٓ أَرَىٰ سَبْعَ بَقَرَٰتٍۢ سِمَانٍۢ يَأْكُلُهُنَّ سَبْعٌ عِجَافٌ",
+        "translation": "En de koning zei: Ik zie zeven vette koeien die door zeven magere worden verslonden.",
+        "relevance": "Deze verzen beschrijven de droom van de koning en de uitleg van Yusuf."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Ta'wil",
+        "arabic_term": "تأويل",
+        "definition": "Uitleg. Yusuf legde dromen uit door de kennis van Allah.",
+        "pronunciation": "ta-wil"
+      },
+      {
+        "id": 2,
+        "term": "Sijn",
+        "arabic_term": "سجن",
+        "definition": "Gevangenis. Yusuf werd gevangengezet voordat hij tot minister werd benoemd.",
+        "pronunciation": "sijn"
+      }
+    ]
+  },
+  "yusuf_reunion": {
+    "title": "De hereniging met de broers",
+    "title_arabic": "لقاء يوسف بإخوته",
+    "introduction": "De jaren van hongersnood troffen de regio. De broers van Yusuf kwamen naar Egypte om proviand te halen. Yusuf herkende hen maar zij herkenden hem niet. Hij ontving hen, hield zijn broer Benjamin vast, en stelde hen op de proef. Uiteindelijk openbaarde hij zich aan hen: « Ik ben Yusuf, en dit is mijn broer. Allah heeft ons begunstigd. » (12:90)",
+    "conclusion": "Yusuf vroeg zijn broers de hele familie mee te brengen. Ya'qub, wiens gezichtsvermogen was verzwakt van verdriet, herwon zijn gezichtsvermogen toen het hemd van Yusuf op zijn gezicht werd geworpen. De familie herenigde zich in Egypte. De droom van Yusuf werd vervuld: zijn vader, moeder en broers bogen zich voor hem neer als teken van respect.",
+    "moral_lesson": "Dit verhaal leert ons vergeving en genade. Yusuf vergaf zijn broers en schreef alles toe aan de wijsheid van Allah.",
+    "historical_location": "Egypte",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "yusuf_reunion_chapter_1",
+        "title": "De broers in Egypte",
+        "content": "De Koran vermeldt: « En de broers van Yusuf kwamen en traden bij hem binnen. Hij herkende hen, maar zij herkenden hem niet. » (12:58) Yusuf voorzag hen van proviand en vroeg dat zij de volgende keer hun broer Benjamin mee zouden brengen. Toen zij terugkwamen met Benjamin, plaatste Yusuf een beker in de bagage van Benjamin. Hij liet Benjamin vasthouden. De broers smeekten. Yusuf zei tot hen: « Weten jullie wat jullie Yusuf en zijn broer hebben aangedaan, in jullie onwetendheid? » (12:89) Zij zeiden: « Ben jij dan Yusuf? » Hij zei: « Ik ben Yusuf, en dit is mijn broer. Allah heeft ons begunstigd. »"
+      },
+      {
+        "id": "yusuf_reunion_chapter_2",
+        "title": "De hereniging met Ya'qub",
+        "content": "De Koran zegt: « Neem mijn hemd en werp het op het gezicht van mijn vader; hij zal zijn gezicht herwinnen. En breng mij jullie hele familie. » (12:93) Toen de karavaan vertrok, zei Ya'qub: « Ik ruik de geur van Yusuf. » Men zei tot hem: « Jij verkeert in je oude dwaling. » Toen de brenger van het goede nieuws aankwam, wierp hij het hemd op het gezicht van Ya'qub, die zijn gezichtsvermogen herwon. Hij zei: « Heb ik jullie niet gezegd dat ik van Allah weet wat jullie niet weten? » (12:96) De familie ging naar Egypte. Yusuf verhief zijn ouders op de troon. Zij bogen zich voor hem neer. De droom was vervuld."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 12:58",
+        "reference_text": "Soera Yusuf, vers 58",
+        "content": "وَجَآءَ إِخْوَةُ يُوسُفَ فَدَخَلُوا۟ عَلَيْهِ فَعَرَفَهُمْ وَهُمْ لَهُۥ مُنكِرُونَ",
+        "translation": "En de broers van Yusuf kwamen en traden bij hem binnen. Hij herkende hen, maar zij herkenden hem niet.",
+        "relevance": "Dit vers beschrijft de eerste ontmoeting van de broers met Yusuf."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 12:100",
+        "reference_text": "Soera Yusuf, vers 100",
+        "content": "وَرَفَعَ أَبَوَيْهِ عَلَى ٱلْعَرْشِ وَخَرُّوا۟ لَهُۥ سُجَّدًۭا ۖ وَقَالَ يَـٰٓأَبَتِ هَـٰذَا تَأْوِيلُ رُءْيَـٰىَ مِن قَبْلُ",
+        "translation": "En hij verhief zijn ouders op de troon, en zij bogen zich voor hem neer. Hij zei: O mijn vader! Dit is de uitleg van mijn droom van weleer.",
+        "relevance": "Dit vers toont de vervulling van de droom van Yusuf."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Sujud",
+        "arabic_term": "سجود",
+        "definition": "Neerbuiging. De ouders van Yusuf bogen zich voor hem neer als teken van respect.",
+        "pronunciation": "sou-joud"
+      },
+      {
+        "id": 2,
+        "term": "Arsh",
+        "arabic_term": "عرش",
+        "definition": "Troon. Yusuf verhief zijn ouders op de troon.",
+        "pronunciation": "arch"
+      }
+    ]
+  },
+  "lessons_from_yusuf": {
+    "title": "De lessen van het verhaal van Yusuf",
+    "title_arabic": "دروس من قصة يوسف",
+    "introduction": "De Koran presenteert het verhaal van Yusuf als « het mooiste der verhalen » (12:3). Het leert geduld, kuisheid, vergeving en vertrouwen in Allah. Yusuf doorstond de beproeving van de put, de verleiding en de gevangenis, maar elke beproeving bracht hem dichter bij zijn lot.",
+    "conclusion": "Yusuf zei aan het einde: « O mijn vader! Dit is de uitleg van mijn droom van weleer. Mijn Heer heeft die verwezenlijkt. Hij heeft mij begunstigd toen Hij mij uit de gevangenis haalde en jullie uit de woestijn bracht nadat de Duivel tweedracht tussen mij en mijn broers had gezaaid. Mijn Heer is Zacht in wat Hij wil. Hij is de Alwetende, de Wijze. » (12:100)",
+    "moral_lesson": "Dit verhaal leert ons dat geduld (sabr) en vertrouwen in Allah tot succes leiden. Het kwaad van mensen kan het goddelijke plan dienen.",
+    "historical_location": "Van Kanaän naar Egypte",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lessons_from_yusuf_chapter_1",
+        "title": "Het mooiste der verhalen",
+        "content": "De Koran zegt: « Wij vertellen jou het mooiste der verhalen door jou deze Koran te openbaren, ook al was je voorheen onder de onoplettenden. » (12:3) Het verhaal van Yusuf bevat lessen voor hen die nadenken: jaloezie leidt tot kwaad; kuisheid bewaart; kennis komt van Allah; vergeving bevrijdt; en het plan van Allah wordt vervuld ondanks de listen van mensen."
+      },
+      {
+        "id": "lessons_from_yusuf_chapter_2",
+        "title": "Een teken voor de gelovigen",
+        "content": "De Koran besluit de soera: « In hun verhalen is er zeker een les voor de mensen van begrip. Het is geen verzonnen verhaal, maar een bevestiging van wat er vóór was, een gedetailleerde uiteenzetting van alle dingen, een leiding en een barmhartigheid voor mensen die geloven. » (12:111) Het verhaal van Yusuf is een teken voor hen die geloven. Het toont dat Allah met de geduldigen en de vromen is."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 12:3",
+        "reference_text": "Soera Yusuf, vers 3",
+        "content": "نَحْنُ نَقُصُّ عَلَيْكَ أَحْسَنَ ٱلْقَصَصِ بِمَآ أَوْحَيْنَآ إِلَيْكَ هَـٰذَا ٱلْقُرْءَانَ",
+        "translation": "Wij vertellen jou het mooiste der verhalen door jou deze Koran te openbaren.",
+        "relevance": "Dit vers presenteert het verhaal van Yusuf als het mooiste."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 12:111",
+        "reference_text": "Soera Yusuf, vers 111",
+        "content": "لَقَدْ كَانَ فِى قَصَصِهِمْ عِبْرَةٌۭ لِّأُو۟لِى ٱلْأَلْبَـٰبِ ۗ مَا كَانَ حَدِيثًۭا يُفْتَرَىٰ وَلَـٰكِن تَصْدِيقَ ٱلَّذِى بَيْنَ يَدَيْهِ وَتَفْصِيلَ كُلِّ شَىْءٍۢ وَهُدًۭى وَرَحْمَةًۭ لِّقَوْمٍۢ يُؤْمِنُونَ",
+        "translation": "In hun verhalen is er zeker een les voor de mensen van begrip. Het is geen verzonnen verhaal, maar een bevestiging, een gedetailleerde uiteenzetting, een leiding en een barmhartigheid voor mensen die geloven.",
+        "relevance": "Dit vers besluit de soera en benadrukt de les."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Sabr",
+        "arabic_term": "صبر",
+        "definition": "Geduld. Yusuf toonde geduld gedurende al zijn beproevingen.",
+        "pronunciation": "sabr"
+      },
+      {
+        "id": 2,
+        "term": "Ibra",
+        "arabic_term": "عبرة",
+        "definition": "Les, voorbeeld. De verhalen van de profeten zijn lessen voor de mensheid.",
+        "pronunciation": "ib-ra"
+      }
+    ]
+  }
+}

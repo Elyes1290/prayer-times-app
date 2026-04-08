@@ -1,0 +1,360 @@
+{
+  "hud_prophecy": {
+    "title": "De zending van Hud als profeet",
+    "title_arabic": "إرسال هود عليه السلام",
+    "introduction": "Hud (هود عليه السلام) is een profeet die door Allah naar het volk van 'Ad werd gezonden, een van de oude Arabische beschavingen. Na Noeh dwaalden de nakomelingen van 'Ad opnieuw af. Allah zond Hud, hun broeder, om hen tot het monotheïsme op te roepen en voor de straf te waarschuwen. Zijn verhaal illustreert de confrontatie tussen profetische waarheid en de arrogantie van een machtig volk.",
+    "conclusion": "De zending van Hud markeert de continuïteit van de profetische missie na Noeh. Allah laat nooit volken in de steek zonder hen een duidelijke waarschuwer te sturen. Hud werd uit de 'Ad zelf gekozen om hen op het rechte pad te leiden.",
+    "moral_lesson": "Dit verhaal leert ons dat Allah aan elk volk boodschappers zendt, uit hun midden gekozen opdat de boodschap duidelijk zij. Het herinnert ons eraan dat niemand boven de goddelijke waarschuwing staat.",
+    "historical_location": "Al-Ahqaf (regio in het zuiden van het Arabisch schiereiland)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "hud_prophecy_chapter_1",
+        "title": "Het goddelijke bevel",
+        "content": "Allah zond Hud naar het volk van 'Ad, zijn bloedbroeders. De Koran vermeldt: «En naar de 'Ad hun broeder Hud. Hij zei: O mijn volk! Aanbid Allah. Jullie hebben geen andere god dan Hem. Vrezen jullie Hem dan niet? » Hud ontving de openbaring die hem beval zijn volk op te roepen afgoderij en hoogmoed op te geven en naar Allah terug te keren, de Enige die aanbidding waardig is. Zijn missie was waarschuwen voordat een straf zoals die van de volken uit het verleden over hen zou neerdalen."
+      },
+      {
+        "id": "hud_prophecy_chapter_2",
+        "title": "Het volk van 'Ad",
+        "content": "Het volk van 'Ad was een machtige beschaving die in de regio Al-Ahqaf in het zuiden van Arabië woonde. De Koran beschrijft hen in de soera Al-Fajr: «Heb je niet gezien hoe jouw Heer handelde met de 'Ad, met Iram van de zuilen, wiens gelijke nooit in het land werd geschapen? » Zij hadden de boodschap van het monotheïsme vergeten en waren in afgoderij vervallen. Zij bouwden imposante monumenten en pochten op hun kracht. Hud, als door Allah gekozen profeet onder hen, had de verantwoordelijkheid hen naar de waarheid terug te brengen."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 7:65",
+        "reference_text": "Soera Al-A'raf, vers 65",
+        "content": "وَإِلَىٰ عَادٍ أَخَاهُمْ هُودًا ۗ قَالَ يَـٰقَوْمِ ٱعْبُدُوا۟ ٱللَّهَ مَا لَكُم مِّنْ إِلَـٰهٍ غَيْرُهُۥٓ ۚ أَفَلَا تَتَّقُونَ",
+        "translation": "En naar de 'Ad hun broeder Hud. Hij zei: O mijn volk! Aanbid Allah — jullie hebben geen andere god dan Hem. Vrezen jullie Hem dan niet?",
+        "relevance": "Dit vers vestigt de zending van Hud als profeet bij het volk van 'Ad en zijn oproep tot monotheïsme."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 11:50",
+        "reference_text": "Soera Hoed, vers 50",
+        "content": "وَإِلَىٰ عَادٍ أَخَاهُمْ هُودًۭا ۚ قَالَ يَـٰقَوْمِ ٱعْبُدُوا۟ ٱللَّهَ مَا لَكُم مِّنْ إِلَـٰهٍ غَيْرُهُۥٓ ۖ إِنْ أَنتُمْ إِلَّا مُفْتَرُونَ",
+        "translation": "En naar de 'Ad zonden Wij hun broeder Hud. Hij zei: O mijn volk! Aanbid Allah. Jullie hebben geen andere god dan Hem. Jullie verzinnen slechts leugens.",
+        "relevance": "Dit vers bevestigt de zending van Hud en zijn centrale boodschap."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Hud",
+        "arabic_term": "هود",
+        "definition": "Hud in het Arabisch. Profeet van Allah gezonden naar het volk van 'Ad om hen tot monotheïsme op te roepen. Een soera van de Koran draagt zijn naam.",
+        "pronunciation": "houd"
+      },
+      {
+        "id": 2,
+        "term": "'Ad",
+        "arabic_term": "عاد",
+        "definition": "Oud volk van Arabië, machtig en arrogant, naar wie Hud werd gezonden. Zij werden door een woeste wind vernietigd.",
+        "pronunciation": "aad"
+      },
+      {
+        "id": 3,
+        "term": "Al-Ahqaf",
+        "arabic_term": "الأحقاف",
+        "definition": "Regio in het zuiden van het Arabisch schiereiland waar het volk van 'Ad leefde. Een soera van de Koran draagt deze naam.",
+        "pronunciation": "al-ah-qaf"
+      }
+    ]
+  },
+  "hud_call": {
+    "title": "De oproep van Hud aan zijn volk",
+    "title_arabic": "دعوة هود لقومه",
+    "introduction": "Hud (عليه السلام) riep het volk van 'Ad met helderheid en wijsheid. Hij nodigde hen uit alleen Allah te aanbidden, om vergeving voor hun zonden te vragen, en zich niet te laten verblinden door hoogmoed. Hij herinnerde hen aan Allahs weldaden en waarschuwde hen voor de gevolgen van ondankbaarheid. Ondanks de helderheid van zijn boodschap weigerden de 'Ad met arrogantie.",
+    "conclusion": "De oproep van Hud toont de standvastigheid van de profetische boodschap: de aanbidding van Allah, de vrees voor Hem, en de waarschuwing vóór de straf. Hud volbracht zijn missie met integriteit en liet de keuze aan zijn volk.",
+    "moral_lesson": "Dit verhaal leert ons dat de oproep tot de Islam met helderheid en zonder compromissen over het monotheïsme moet geschieden. Het herinnert ons eraan dat de boodschapper overdraagt; de leiding blijft in Allahs handen.",
+    "historical_location": "Al-Ahqaf",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "hud_call_chapter_1",
+        "title": "De uitnodiging tot monotheïsme",
+        "content": "Hud zei tegen zijn volk: «O mijn volk! Aanbid Allah. Jullie hebben geen andere god dan Hem. Vrezen jullie Hem dan niet? » Hij herinnerde hen eraan dat hij geen beloning vroeg voor zijn oproep; zijn beloning komt alleen Allah toe, Schepper van alle dingen. Hij nodigde hen uit zich te bekeren en naar hun Heer terug te keren, want Hij is Vergevend en Barmhartig. Hud waarschuwde hen dat als zij zich afwendden, zij het lot zouden ondergaan van de volken die hem waren voorgegaan."
+      },
+      {
+        "id": "hud_call_chapter_2",
+        "title": "Het antwoord van de 'Ad",
+        "content": "De voornaamsten van het volk van 'Ad antwoordden met minachting. Zij zeiden: «O Hud! Je hebt ons geen duidelijk bewijs gebracht. Wij zullen onze goden niet op jouw woord opgeven, en wij geloven je niet. » Zij beschuldigden hem een leugenaar te zijn en hen van de religie van hun voorouders te willen afbrengen. Hud antwoordde hen dat hij Allah tot getuige nam en hen uitnodigde te getuigen dat hij onschuldig was aan wat zij Hem toeschreven. Ondanks hun weigering bleef Hud hen met geduld oproepen."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 11:50-52",
+        "reference_text": "Soera Hoed, verzen 50-52",
+        "content": "قَالَ يَـٰقَوْمِ ٱعْبُدُوا۟ ٱللَّهَ مَا لَكُم مِّنْ إِلَـٰهٍ غَيْرُهُۥٓ ۖ إِنْ أَنتُمْ إِلَّا مُفْتَرُونَ ۝ يَـٰقَوْمِ لَآ أَسْـَٔلُكُمْ عَلَيْهِ أَجْرًا ۖ إِنْ أَجْرِىَ إِلَّا عَلَى ٱلَّذِى فَطَرَنِىٓ ۚ أَفَلَا تَعْقِلُونَ",
+        "translation": "Hij zei: O mijn volk! Aanbid Allah. Jullie hebben geen andere god dan Hem. Jullie verzinnen slechts leugens. O mijn volk! Ik vraag jullie hiervoor geen loon. Mijn loon komt alleen Hem toe die mij schiep. Begrijpen jullie dan niet?",
+        "relevance": "Deze verzen bevatten de oproep van Hud en zijn verklaring van onbaatzuchtigheid."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 11:53-54",
+        "reference_text": "Soera Hoed, verzen 53-54",
+        "content": "قَالُوا۟ يَـٰهُودُ مَا جِئْتَنَا بِبَيِّنَةٍۢ وَمَا نَحْنُ بِتَارِكِىٓ آلِهَتِنَا عَن قَوْلِكَ وَمَا نَحْنُ لَكَ بِمُؤْمِنِينَ",
+        "translation": "Zij zeiden: O Hud! Je hebt ons geen duidelijk bewijs gebracht. Wij zullen onze goden niet op jouw woord opgeven, en wij geloven je niet.",
+        "relevance": "Deze verzen beschrijven de hardnekkige weigering van het volk van 'Ad."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Tawhid",
+        "arabic_term": "توحيد",
+        "definition": "Monotheïsme. De eenheid van Allah in aanbidding. Het was de centrale boodschap van Hud.",
+        "pronunciation": "taw-hid"
+      },
+      {
+        "id": 2,
+        "term": "Bayyina",
+        "arabic_term": "بينة",
+        "definition": "Duidelijk bewijs. De 'Ad vroegen Hud om een bewijs, terwijl de boodschap en de tekenen van Allah al duidelijk waren.",
+        "pronunciation": "bay-yi-na"
+      }
+    ]
+  },
+  "rejection_arrogance": {
+    "title": "De weigering en arrogantie van de 'Ad",
+    "title_arabic": "الرفض والاستكبار",
+    "introduction": "Het volk van 'Ad weigerde Hud met arrogantie. Zij pochten op hun lichamelijke kracht en hun monumenten en waanden zich superieur aan alles. Zij zeiden: «Wie is sterker dan wij? » Zij ontkenden de tekenen van Allah en behandelden Hud als leugenaar. Hun trots verblindde hen en leidde hen naar hun ondergang.",
+    "conclusion": "De arrogantie van de 'Ad illustreert hoe aardse macht volken kan verblinden. Zij vergaten dat Allah hen had geschapen en dat Hij sterker is dan zij. Hun hardnekkige weigering verzegelde hun lot.",
+    "moral_lesson": "Dit verhaal waarschuwt ons voor de gevaren van trots en arrogantie. Lichamelijke kracht en rijkdom beschermen niet tegen de straf van Allah. Alleen onderwerping aan Hem verzekert het heil.",
+    "historical_location": "Al-Ahqaf",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "rejection_arrogance_chapter_1",
+        "title": "De arrogantie van de 'Ad",
+        "content": "De Koran beschrijft de arrogantie van de 'Ad: «Wat de 'Ad betreft, zij verhieven zich op aarde zonder recht en zeiden: Wie is sterker dan wij? Zagen zij niet dat Allah, Die hen schiep, sterker is dan zij? En zij ontkenden Onze tekenen. » De 'Ad stonden bekend om hun buitengewone kracht. Zij hadden imposante monumenten gebouwd, zoals de Koran vermeldt over Iram van de zuilen. Deze macht deed hen geloven dat zij onoverwinnelijk waren. Zij verachtten de waarschuwing van Hud en volhardden in hun ongeloof."
+      },
+      {
+        "id": "rejection_arrogance_chapter_2",
+        "title": "Het ultimatum van Hud",
+        "content": "Hud zei tegen hen: «O mijn volk! Vraag vergeving aan jullie Heer, bekeer jullie dan tot Hem. Hij zal overvloedige regen uit de hemel over jullie zenden en jullie kracht aan jullie kracht toevoegen. Wend jullie niet af als zondaars. » De 'Ad weigerden. Hud waarschuwde hen toen dat de door Allah verleende termijn ten einde liep. Hij kondigde hun aan dat een straf hen zou treffen. Hud en de gelovigen die hem hadden gevolgd bereidden zich voor, terwijl de 'Ad tot het laatste moment in hun arrogantie volhardden."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 41:15",
+        "reference_text": "Soera Fussilat, vers 15",
+        "content": "فَأَمَّا عَادٌۭ فَٱسْتَكْبَرُوا۟ فِى ٱلْأَرْضِ بِغَيْرِ ٱلْحَقِّ وَقَالُوا۟ مَنْ أَشَدُّ مِنَّا قُوَّةً ۖ أَوَلَمْ يَرَوْا۟ أَنَّ ٱللَّهَ ٱلَّذِى خَلَقَهُمْ هُوَ أَشَدُّ مِنْهُمْ قُوَّةًۭ ۖ وَكَانُوا۟ بِـَٔايَـٰتِنَا يَجْحَدُونَ",
+        "translation": "Wat de 'Ad betreft, zij verhieven zich op aarde zonder recht en zeiden: Wie is sterker dan wij? Zagen zij niet dat Allah, Die hen schiep, sterker is dan zij? En zij ontkenden Onze tekenen.",
+        "relevance": "Dit vers beschrijft de arrogantie van de 'Ad en hun ontkenning van de tekenen van Allah."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 26:123",
+        "reference_text": "Soera Ash-Shu'ara, vers 123",
+        "content": "كَذَّبَتْ عَادٌ ٱلْمُرْسَلِينَ",
+        "translation": "Het volk van 'Ad behandelde de boodschappers als leugenaars.",
+        "relevance": "Dit vers bevestigt de weigering van de boodschappers door de 'Ad."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Istikbar",
+        "arabic_term": "استكبار",
+        "definition": "Arrogantie, hoogmoed. De houding van de 'Ad die hen naar hun ondergang leidde.",
+        "pronunciation": "is-tik-bar"
+      },
+      {
+        "id": 2,
+        "term": "Juhud",
+        "arabic_term": "جحود",
+        "definition": "Ontkenning, weigering. De 'Ad ontkenden de tekenen en bewijzen van Allah.",
+        "pronunciation": "jou-houd"
+      }
+    ]
+  },
+  "the_ad_people": {
+    "title": "Het volk van 'Ad",
+    "title_arabic": "قوم عاد",
+    "introduction": "Het volk van 'Ad was een van de machtigste oude beschavingen. Zij woonden in de regio Al-Ahqaf in het zuiden van Arabië. De Koran beschrijft hen als bouwers van imposante monumenten (Iram van de zuilen). Zij hadden weldaden van Allah ontvangen — vee, kinderen, tuinen en bronnen — maar toonden zich ondankbaar en vervielen in afgoderij.",
+    "conclusion": "De macht van de 'Ad beschermde hen niet. Hun monumenten en lichamelijke kracht konden hen niet van de straf redden. Alleen Hud en de gelovigen die hem volgden werden gespaard.",
+    "moral_lesson": "Dit verhaal leert ons dat Allahs weldaden dankbaarheid en gehoorzaamheid vereisen. Macht en materiële prestaties zijn vergankelijk als zij niet door geloof worden vergezeld.",
+    "historical_location": "Al-Ahqaf (zuid-Arabië)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "the_ad_people_chapter_1",
+        "title": "Een machtige beschaving",
+        "content": "Het volk van 'Ad stond bekend om zijn buitengewone kracht. De Koran noemt hen meerdere malen als voorbeeld van een machtig volk dat werd vernietigd wegens ongehoorzaamheid. Zij bouwden opmerkelijke monumenten — de Koran noemt «Iram van de zuilen, wiens gelijke nooit in het land werd geschapen ». Allah had hen «vee, kinderen, tuinen en bronnen» geschonken (Koran 26:133). Maar in plaats van Allah voor deze weldaden te danken, verhieven zij zich en schreven deze successen aan zichzelf toe."
+      },
+      {
+        "id": "the_ad_people_chapter_2",
+        "title": "De ondankbaarheid",
+        "content": "Allah had de 'Ad weldaden geschonken: vee, kinderen, tuinen en bronnen (Koran 26:133). Hij had hen de kracht gegeven. Maar zij verhieven zich en aanbaden goden buiten Allah. Zij weigerden Hud, Zijn boodschapper. Hun ondankbaarheid en ongeloof maakten hen de straf waardig. Hud waarschuwde hen meerdere malen, maar zij volhardden. Hun beschaving, hoe imposant ook, kon hen niet beschermen toen het decreet van Allah over hen neerdalde."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 89:6-8",
+        "reference_text": "Soera Al-Fajr, verzen 6-8",
+        "content": "أَلَمْ تَرَ كَيْفَ فَعَلَ رَبُّكَ بِعَادٍ إِرَمَ ذَاتِ الْعِمَادِ الَّتِي لَمْ يُخْلَقْ مِثْلُهَا فِي الْبِلَادِ",
+        "translation": "Heb je niet gezien hoe jouw Heer handelde met de 'Ad, met Iram van de zuilen, wiens gelijke nooit in het land werd geschapen?",
+        "relevance": "Dit vers roept de grootsheid van de beschaving van de 'Ad en hun monumenten op."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 26:133",
+        "reference_text": "Soera Ash-Shu'ara, vers 133",
+        "content": "أَمَدَّكُم بِأَنْعَامٍ وَبَنِينَ وَجَنَّاتٍ وَعُيُونٍ",
+        "translation": "Hij schonk jullie vee, kinderen, tuinen en bronnen.",
+        "relevance": "Dit vers noemt de weldaden die Allah aan het volk van 'Ad schonk."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Iram",
+        "arabic_term": "إرم",
+        "definition": "Voorouder van de 'Ad of naam van hun stad. De Koran noemt «Iram van de zuilen» om hun beschaving te beschrijven.",
+        "pronunciation": "i-ram"
+      },
+      {
+        "id": 2,
+        "term": "Al-'Imad",
+        "arabic_term": "العمد",
+        "definition": "De zuilen. De 'Ad bouwden monumenten met imposante zuilen.",
+        "pronunciation": "al-i-mad"
+      }
+    ]
+  },
+  "the_destruction": {
+    "title": "De vernietiging door de wind",
+    "title_arabic": "الهلاك بالريح",
+    "introduction": "Toen de 'Ad in hun ongeloof en arrogantie volhardden, daalde de straf van Allah over hen neer. In tegenstelling tot de zondvloed van Noeh werden de 'Ad vernietigd door een woeste en ijskoude wind (rīh sarsar 'ātiya). Deze wind vernietigde alles op zijn pad. Hud en de gelovigen werden door Allahs barmhartigheid gered.",
+    "conclusion": "De vernietiging van de 'Ad door de wind herinnert eraan dat elk volk een straf ontvangt die bij zijn situatie past. De 'Ad, trots op hun kracht, werden vernietigd door een kracht die zij niet konden weerstaan. Alleen de gelovigen werden gespaard.",
+    "moral_lesson": "Dit verhaal leert ons dat niemand aan het decreet van Allah kan ontsnappen. De menselijke macht is nietig tegenover Zijn wil. Het heil ligt in geloof en gehoorzaamheid.",
+    "historical_location": "Al-Ahqaf",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "the_destruction_chapter_1",
+        "title": "De vernietigende wind",
+        "content": "De Koran beschrijft de vernietiging van de 'Ad: «En wat de 'Ad betreft, zij werden vernietigd door een woeste en ijskoude wind.» (69:6) Deze wind (rīh sarsar) werd «zeven nachten en acht dagen achtereen» over hen verhangen (69:7). Hij was zo gewelddadig dat de mensen «als holle palmstronken» lagen (69:7). De Koran zegt ook: «Hij rukte de mensen uit als ontwortelde palmstammen.» (54:20) De 'Ad, zo trots op hun kracht, waren machteloos. Hun monumenten beschermden hen niet. Zij werden vernietigd."
+      },
+      {
+        "id": "the_destruction_chapter_2",
+        "title": "De redding van Hud",
+        "content": "Hud en degenen die met hem hadden geloofd werden door Allahs barmhartigheid gered. De Koran vermeldt: «En toen Ons bevel kwam, redden Wij Hud en degenen die met hem hadden geloofd, door een barmhartigheid van Ons.» (11:58) De 'Ad werden vernietigd en lieten een les na voor de komende generaties: arrogantie en ongeloof leiden tot ondergang, terwijl geloof en gehoorzaamheid tot heil leiden."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 69:6-7",
+        "reference_text": "Soera Al-Haqqa, verzen 6-7",
+        "content": "وَأَمَّا عَادٌۭ فَأُهْلِكُوا۟ بِرِيحٍۢ صَرْصَرٍ عَاتِيَةٍۢ ۝ سَخَّرَهَا عَلَيْهِمْ سَبْعَ لَيَالٍ وَثَمَانِيَةَ أَيَّامٍ حُسُومًا فَتَرَى الْقَوْمَ فِيهَا صَرْعَىٰ كَأَنَّهُمْ أَعْجَازُ نَخْلٍ خَاوِيَةٍ",
+        "translation": "En wat de 'Ad betreft, zij werden vernietigd door een woeste en ijskoude wind. [Allah] verhing hem over hen zeven nachten en acht dagen achtereen. Je zag de mensen liggen als holle palmstronken.",
+        "relevance": "Deze verzen beschrijven de straf van de 'Ad: de wind, zijn duur en zijn effect."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 54:20",
+        "reference_text": "Soera Al-Qamar, vers 20",
+        "content": "تَنزِعُ النَّاسَ كَأَنَّهُمْ أَعْجَازُ نَخْلٍ مُّنقَعِرٍ",
+        "translation": "Hij rukte de mensen uit als ontwortelde palmstammen.",
+        "relevance": "Dit vers beschrijft het geweld van de vernietigende wind."
+      },
+      {
+        "id": 3,
+        "type": "quran",
+        "source": "Coran 11:58",
+        "reference_text": "Soera Hoed, vers 58",
+        "content": "وَلَمَّا جَآءَ أَمْرُنَا نَجَّيْنَا هُودًا وَٱلَّذِينَ ءَامَنُوا۟ مَعَهُۥ بِرَحْمَةٍۢ مِّنَّا",
+        "translation": "En toen Ons bevel kwam, redden Wij Hud en degenen die met hem hadden geloofd, door een barmhartigheid van Ons.",
+        "relevance": "Dit vers bevestigt de redding van Hud en de gelovigen."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Sarsar",
+        "arabic_term": "صرصر",
+        "definition": "Ijskoude en woeste wind. De straf waarmee Allah het volk van 'Ad vernietigde.",
+        "pronunciation": "sar-sar"
+      },
+      {
+        "id": 2,
+        "term": "Rahma",
+        "arabic_term": "رحمة",
+        "definition": "Barmhartigheid. Allah redde Hud en de gelovigen door Zijn barmhartigheid.",
+        "pronunciation": "rah-ma"
+      }
+    ]
+  },
+  "lessons_from_hud": {
+    "title": "De lessen uit het verhaal van Hud",
+    "title_arabic": "دروس من قصة هود",
+    "introduction": "Het verhaal van Hud (عليه السلام) bevat tijdloze lessen. Het leert de gevolgen van arrogantie, het belang van het beantwoorden van de oproep der profeten, en Allahs barmhartigheid jegens de gelovigen. De Koran citeert het als voorbeeld voor de volken die daarna zullen komen.",
+    "conclusion": "Hud volbracht zijn missie met integriteit. De 'Ad werden vernietigd, maar Hud en de gelovigen werden gered. Zijn verhaal blijft een herinnering: de aardse macht is vergankelijk; alleen geloof in Allah verzekert het heil.",
+    "moral_lesson": "Dit verhaal leert ons ons nooit te verheffen over Allahs weldaden, de oproep der boodschappers te beantwoorden, en de straf te vrezen. Het herinnert ons eraan dat elk volk waarschuwers ontvangt vóór de straf.",
+    "historical_location": "Van Al-Ahqaf naar de vergetelheid",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lessons_from_hud_chapter_1",
+        "title": "Een voorbeeld voor de volken",
+        "content": "De Koran presenteert het verhaal van Hud als voorbeeld voor de komende generaties. De 'Ad hadden alles: de kracht, de monumenten, de welvaart. Maar zij misten het wezenlijke: geloof in Allah en nederigheid. Hun arrogantie vernietigde hen. Hud daarentegen bleef standvastig in zijn boodschap, zonder compromissen. Hij zocht noch macht noch rijkdom; hij vroeg zijn volk alleen te geloven. Zijn verhaal herinnert ons eraan dat de boodschapper zijn missie volbrengt; het resultaat behoort Allah toe."
+      },
+      {
+        "id": "lessons_from_hud_chapter_2",
+        "title": "De profetische continuïteit",
+        "content": "Hud behoort tot de lijn van profeten die na Noeh werden gezonden. Elk volk ontvangt zijn boodschapper. De 'Ad hadden, zoals de volken vóór hen, hun kans. Zij weigerden en werden vernietigd. Het verhaal van Hud volgt hetzelfde patroon als dat van Noeh: de oproep tot monotheïsme, de weigering door de meerderheid, de straf, en de redding der gelovigen. Deze herhaling in de Koran beoogt de harten te versterken en de gelovigen aan te sporen op het rechte pad te blijven."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 11:120",
+        "reference_text": "Soera Hoed, vers 120",
+        "content": "وَكُلًّا نَّقُصُّ عَلَيْكَ مِنْ أَنبَاءِ الرُّسُلِ مَا نُثَبِّتُ بِهِ فُؤَادَكَ وَجَاءَكَ فِي هَٰذِهِ الْحَقُّ وَمَوْعِظَةٌ وَذِكْرَىٰ لِلْمُؤْمِنِينَ",
+        "translation": "En alles wat Wij je vertellen van de verhalen der boodschappers, dient om je hart te versterken. En in dit verhaal is je de waarheid gekomen, alsmede een vermaning en een herinnering voor de gelovigen.",
+        "relevance": "Dit vers verklaart het doel van de verhalen der profeten in de Koran."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 11:60",
+        "reference_text": "Soera Hoed, vers 60",
+        "content": "وَأُتْبِعُوا۟ فِى هَـٰذِهِ ٱلدُّنْيَا لَعْنَةًۭ وَيَوْمَ ٱلْقِيَـٰمَةِ ۗ أَلَآ إِنَّ عَادًۭا كَفَرُوا۟ رَبَّهُمْ ۗ أَلَا بُعْدًۭا لِّعَادٍۢ قَوْمِ هُودٍۢ",
+        "translation": "En zij werden in deze wereld en op de Dag der Opstanding door een vloek achtervolgd. Waarlijk, de 'Ad hebben niet in hun Heer geloofd. Wee de 'Ad, het volk van Hud!",
+        "relevance": "Dit vers sluit het verhaal van de 'Ad en hun straf in deze wereld en het hiernamaals af."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Ibra",
+        "arabic_term": "عبرة",
+        "definition": "Voorbeeld of les. De verhalen der profeten zijn voorbeelden voor de mensheid.",
+        "pronunciation": "ib-ra"
+      },
+      {
+        "id": 2,
+        "term": "Dhikra",
+        "arabic_term": "ذكرى",
+        "definition": "Herinnering. De verhalen der profeten dienen als herinnering voor de gelovigen.",
+        "pronunciation": "dhik-ra"
+      }
+    ]
+  }
+}

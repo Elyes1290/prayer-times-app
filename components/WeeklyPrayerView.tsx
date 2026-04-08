@@ -201,7 +201,7 @@ export default function WeeklyPrayerView({
           {/* En-tête des colonnes */}
           <View style={styles.headerRow}>
             <View style={styles.dateCell}>
-              <Text style={styles.headerText}>{t("prayer")}</Text>
+              <Text numberOfLines={1} adjustsFontSizeToFit minimumFontScale={0.7} style={styles.headerText}>{t("prayer")}</Text>
             </View>
             {weekPrayerTimes.map((day) =>
               day.date instanceof Date && !isNaN(day.date.getTime()) ? (
@@ -240,7 +240,7 @@ export default function WeeklyPrayerView({
             (prayer) => (
               <View key={prayer} style={styles.prayerRow}>
                 <View style={styles.prayerNameCell}>
-                  <Text style={styles.prayerName}>
+                  <Text numberOfLines={1} adjustsFontSizeToFit minimumFontScale={0.7} style={styles.prayerName}>
                     {t(prayer.toLowerCase())}
                   </Text>
                 </View>

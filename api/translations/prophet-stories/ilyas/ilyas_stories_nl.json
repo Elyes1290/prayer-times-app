@@ -1,0 +1,230 @@
+{
+  "ilyas_call": {
+    "title": "De roeping van Ilyas",
+    "title_arabic": "دعوة إلياس",
+    "introduction": "Ilyas (إلياس عليه السلام), Elia, is een profeet gezonden naar het volk van Israël. De Koran zegt: \"En Ilyas was zeker onder de boodschappers.\" (37:123) Hij riep zijn volk op om de aanbidding van Baal op te geven en terug te keren tot Allah. Het volk was afgedwaald door afgoden te aanbidden.",
+    "conclusion": "Ilyas predikte met vastberadenheid. Hij waarschuwde voor straf. Sommigen geloofden, anderen verwierpen hem. Hij bleef trouw aan zijn missie ondanks tegenstand.",
+    "moral_lesson": "Dit verhaal leert ons dat de profeet tot het monotheïsme moet oproepen zonder te aarzelen. Afgoderij leidt tot ondergang.",
+    "historical_location": "Palestina (Koninkrijk Israël)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "ilyas_call_chapter_1",
+        "title": "De missie van Ilyas",
+        "content": "De Koran vertelt: \"En Ilyas was zeker onder de boodschappers. Toen hij tot zijn volk zei: Vrezen jullie Allah niet? Roept jullie Baal aan en verlaten jullie de Beste der scheppers?\" (37:123-125) Ilyas werd gezonden naar een volk dat Baal, een afgod, aanbad. Hij riep hen op om alleen Allah te aanbidden. Hij spoorde hen aan afgoderij op te geven."
+      },
+      {
+        "id": "ilyas_call_chapter_2",
+        "title": "De waarschuwing",
+        "content": "De Koran zegt: \"Allah, jullie Heer en de Heer van jullie eerste voorvaderen?\" (37:126) Ilyas herinnerde zijn volk eraan dat Allah de Schepper is. Baal is niets. Alleen Allah verdient aanbidding. Hij waarschuwde hen voor straf als zij in dwaling volhardden. Zijn boodschap was duidelijk: keer terug tot het monotheïsme."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 37:123",
+        "reference_text": "Soera As-Saffat, vers 123",
+        "content": "وَإِنَّ إِلْيَاسَ لَمِنَ ٱلْمُرْسَلِينَ",
+        "translation": "En Ilyas was zeker onder de boodschappers.",
+        "relevance": "Dit vers bevestigt Ilyas als boodschapper."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 37:124-125",
+        "reference_text": "Soera As-Saffat, verzen 124-125",
+        "content": "إِذْ قَالَ لِقَوْمِهِۦٓ أَلَا تَتَّقُونَ ۝ أَتَدْعُونَ بَعْلًۭا وَتَذَرُونَ أَحْسَنَ ٱلْخَـٰلِقِينَ",
+        "translation": "Toen hij tot zijn volk zei: Vrezen jullie Allah niet? Roept jullie Baal aan en verlaten jullie de Beste der scheppers?",
+        "relevance": "Dit vers beschrijft Ilyas' oproep tegen Baal."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Ilyas",
+        "arabic_term": "إلياس",
+        "definition": "Elia in het Arabisch. Profeet gezonden naar het volk van Israël.",
+        "pronunciation": "il-yas"
+      },
+      {
+        "id": 2,
+        "term": "Baal",
+        "arabic_term": "بعْل",
+        "definition": "Afgod aanbeden door het volk van Israël. Ilyas bestreed zijn cultus.",
+        "pronunciation": "ba'l"
+      }
+    ]
+  },
+  "ilyas_baal": {
+    "title": "Ilyas en de uitdaging van Baal",
+    "title_arabic": "إلياس وبعل",
+    "introduction": "Ilyas daagde de aanbidders van Baal uit. De Koran zegt: \"Roept jullie Baal aan en verlaten jullie de Beste der scheppers?\" (37:125) Hij stelde een test voor: ieder zou zijn godheid aanroepen. De ware godheid zou met vuur antwoorden. De afgodendienaars riepen Baal tevergeefs aan.",
+    "conclusion": "Baal antwoordde niet. Ilyas riep Allah aan. Vuur daalde uit de hemel en verteerde zijn offer. De waarheid triomfeerde. Harten openden zich voor de Islam.",
+    "moral_lesson": "Dit verhaal leert ons dat afgoden machteloos zijn. Alleen Allah antwoordt op aanroeping. De waarheid triomfeert uiteindelijk.",
+    "historical_location": "Berg Karmel, Palestina",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "ilyas_baal_chapter_1",
+        "title": "De uitdaging",
+        "content": "De Koran vertelt Ilyas' oproep: \"Vrezen jullie Allah niet?\" (37:124) Ilyas verzamelde het volk en de profeten van Baal. Hij stelde een test voor: ieder zou een offer voorbereiden. De aanbidders van Baal zouden hun afgod aanroepen. Ilyas zou Allah aanroepen. Wie met vuur antwoordde zou de ware God zijn. De afgodendienaars accepteerden."
+      },
+      {
+        "id": "ilyas_baal_chapter_2",
+        "title": "Allahs overwinning",
+        "content": "De Koran zegt: \"Allah, jullie Heer en de Heer van jullie eerste voorvaderen?\" (37:126) De profeten van Baal riepen de hele dag aan. Niets. Baal antwoordde niet. Toen riep Ilyas Allah aan. Vuur daalde uit de hemel. Het verteerde het offer, het hout en het water. Het volk riep: \"Allah is de ware God!\" Velen geloofden."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 37:125",
+        "reference_text": "Soera As-Saffat, vers 125",
+        "content": "أَتَدْعُونَ بَعْلًۭا وَتَذَرُونَ أَحْسَنَ ٱلْخَـٰلِقِينَ",
+        "translation": "Roept jullie Baal aan en verlaten jullie de Beste der scheppers?",
+        "relevance": "Dit vers herinnert aan de uitdaging tegen Baal."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 37:127",
+        "reference_text": "Soera As-Saffat, vers 127",
+        "content": "فَكَذَّبُوهُ فَإِنَّهُمْ لَمُحْضَرُونَ",
+        "translation": "Zij noemden hem leugenaar. Zij zullen (tot straf) worden gebracht.",
+        "relevance": "Dit vers verhaalt de verwerping van Ilyas door sommigen."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Baal",
+        "arabic_term": "بعْل",
+        "definition": "Afgod. De aanbidders van Baal werden verslagen.",
+        "pronunciation": "ba'l"
+      },
+      {
+        "id": 2,
+        "term": "Khalq",
+        "arabic_term": "خَلْق",
+        "definition": "Schepping. Allah is ahsan al-khaliqin, de Beste der scheppers.",
+        "pronunciation": "khalq"
+      }
+    ]
+  },
+  "ilyas_miracle": {
+    "title": "De wonderen van Ilyas",
+    "title_arabic": "معجزات إلياس",
+    "introduction": "Allah schonk Ilyas wonderen om zijn missie te bevestigen. De Koran zegt: \"Vrede over Ilyas! Zo belonen Wij degenen die goed doen. Hij was zeker onder Onze gelovige dienaren.\" (37:129-132) Onder zijn wonderen: vuur uit de hemel, opstanding van een dode en vermenigvuldiging van voedsel.",
+    "conclusion": "De wonderen van Ilyas versterkten het geloof van de gelovigen. Zij bewezen dat hij werkelijk een profeet van Allah was. De schepping gehoorzaamt haar Schepper.",
+    "moral_lesson": "Dit verhaal leert ons dat wonderen tekenen van Allah zijn. Zij bevestigen de waarheid van de profetische boodschap.",
+    "historical_location": "Palestina",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "ilyas_miracle_chapter_1",
+        "title": "Vuur uit de hemel",
+        "content": "De Koran vertelt: \"Vrede over Ilyas!\" (37:130) Het wonder van vuur op de Berg Karmel was het beroemdste. Ilyas riep Allah aan. Vuur daalde neer en verteerde het offer. Dit wonder toonde dat alleen Allah macht heeft. Afgoden zijn machteloos. Vele mensen geloofden die dag."
+      },
+      {
+        "id": "ilyas_miracle_chapter_2",
+        "title": "De beloning",
+        "content": "De Koran zegt: \"Zo belonen Wij degenen die goed doen. Hij was zeker onder Onze gelovige dienaren.\" (37:131-132) Ilyas werd beloond voor zijn trouw. Allah beschermde hem tegen zijn vijanden. Hij werd zonder te sterven ten hemel opgenomen, volgens sommige overleveringen. Zijn naam blijft gezegend onder de profeten."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 37:129-130",
+        "reference_text": "Soera As-Saffat, verzen 129-130",
+        "content": "وَسَلَـٰمٌ عَلَىٰٓ إِلْ يَاسِينَ ۝ إِنَّا كَذَٰلِكَ نَجْزِى ٱلْمُحْسِنِينَ",
+        "translation": "Vrede over Ilyas! Zo belonen Wij degenen die goed doen.",
+        "relevance": "Dit vers bevestigt Ilyas' beloning."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 6:85",
+        "reference_text": "Soera Al-An'am, vers 85",
+        "content": "وَزَكَرِيَّا وَيَحْيَىٰ وَعِيسَىٰ وَإِلْيَاسَ كُلٌّۭ مِّنَ ٱلصَّـٰلِحِينَ",
+        "translation": "En Zakariya, Yahya, Isa en Ilyas: allen onder de rechtvaardigen.",
+        "relevance": "Dit vers plaatst Ilyas onder de rechtvaardige profeten."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Muhsin",
+        "arabic_term": "محسن",
+        "definition": "Weldadige. Ilyas was muhsin en werd beloond.",
+        "pronunciation": "mouh-sin"
+      },
+      {
+        "id": 2,
+        "term": "Mu'min",
+        "arabic_term": "مؤمن",
+        "definition": "Gelovige. Ilyas was onder de mu'minin.",
+        "pronunciation": "mou-min"
+      }
+    ]
+  },
+  "lessons_from_ilyas": {
+    "title": "Lessen uit het verhaal van Ilyas",
+    "title_arabic": "دروس من قصة إلياس",
+    "introduction": "Ilyas is de profeet die afgoderij bestreed. De Koran zegt: \"En Ilyas was zeker onder de boodschappers.\" (37:123) Hij riep zijn volk op Baal op te geven en Allah te aanbidden. Zijn moed en vastberadenheid blijven een voorbeeld.",
+    "conclusion": "Ilyas confronteerde afgoderij. Hij daagde Baal uit en triomfeerde. Zijn boodschap: alleen Allah verdient aanbidding. Deze les is eeuwig.",
+    "moral_lesson": "Dit verhaal leert ons dat monotheïsme (tawhid) de grondslag van het geloof is. Elke vorm van deelgenootschap aan Allah leidt tot dwaling.",
+    "historical_location": "Palestina",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lessons_from_ilyas_chapter_1",
+        "title": "De strijd tegen afgoderij",
+        "content": "De Koran zegt: \"Roept jullie Baal aan en verlaten jullie de Beste der scheppers?\" (37:125) Ilyas deed geen concessies. Hij riep duidelijk op tot monotheïsme. Afgoderij (shirk) is de grootste zonde. De gelovige moet het volledig verwerpen. Ilyas is een voorbeeld van vastberadenheid in de oproep."
+      },
+      {
+        "id": "lessons_from_ilyas_chapter_2",
+        "title": "Vertrouwen op Allah",
+        "content": "Ilyas daagde honderden profeten van Baal uit. Hij was alleen. Maar hij had Allah. Vuur daalde neer en bewees de waarheid. De Koran herinnert: \"Zo belonen Wij degenen die goed doen.\" (37:131) Wie op Allah vertrouwt zal niet teleurgesteld worden. De overwinning behoort aan de gelovigen."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 37:123-132",
+        "reference_text": "Soera As-Saffat, verzen 123-132",
+        "content": "وَإِنَّ إِلْيَاسَ لَمِنَ ٱلْمُرْسَلِينَ ۝ إِذْ قَالَ لِقَوْمِهِۦٓ أَلَا تَتَّقُونَ",
+        "translation": "En Ilyas was onder de boodschappers. Toen hij tot zijn volk zei: Vrezen jullie Allah niet?",
+        "relevance": "Dit gedeelte vat het verhaal van Ilyas samen."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 37:132",
+        "reference_text": "Soera As-Saffat, vers 132",
+        "content": "إِنَّهُۥ كَانَ مِنْ عِبَادِنَا ٱلْمُؤْمِنِينَ",
+        "translation": "Hij was zeker onder Onze gelovige dienaren.",
+        "relevance": "Dit vers prijst Ilyas als gelovige."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Tawhid",
+        "arabic_term": "توحيد",
+        "definition": "Eenheid van Allah. Ilyas riep op tot tawhid.",
+        "pronunciation": "taw-hid"
+      },
+      {
+        "id": 2,
+        "term": "Shirk",
+        "arabic_term": "شرك",
+        "definition": "Deelgenootschap, afgoderij. Ilyas bestreed shirk.",
+        "pronunciation": "chirk"
+      }
+    ]
+  }
+}

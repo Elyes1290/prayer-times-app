@@ -1,0 +1,342 @@
+{
+  "salih_prophecy": {
+    "title": "The Sending of Salih as a Prophet",
+    "title_arabic": "إرسال صالح عليه السلام",
+    "introduction": "Salih (صالح عليه السلام) is a prophet sent by Allah to the people of Thamud, who succeeded the 'Ad. After the destruction of the 'Ad, Allah established the Thamud in the land. They built palaces on the plains and carved dwellings in the mountains. But they went astray and Allah sent Salih, their brother, to call them to monotheism.",
+    "conclusion": "The sending of Salih marks the continuity of the prophetic mission after Hud. The Thamud received a messenger chosen from among them. Salih brought them a clear proof: the she-camel of Allah.",
+    "moral_lesson": "This story teaches us that Allah never abandons a people without sending them a warner. Earthly blessings — palaces and dwellings — do not exempt from the worship of Allah.",
+    "historical_location": "Al-Hijr (region between the Hijaz and Syria)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "salih_prophecy_chapter_1",
+        "title": "The Divine Command",
+        "content": "Allah sent Salih to the people of Thamud, his brothers. The Quran reports: \"And to the Thamud, their brother Salih. He said: O my people! Worship Allah. You have no other deity than Him. A clear proof has come to you from your Lord: here is the she-camel of Allah, a sign for you. Let her graze on Allah's land and do her no harm, lest a painful punishment seize you.\" (7:73) Salih received the revelation and a miraculous proof: the she-camel, a sign of Allah's power."
+      },
+      {
+        "id": "salih_prophecy_chapter_2",
+        "title": "The Successors of the 'Ad",
+        "content": "The Quran reminds the Thamud: \"And remember when He made you succeed the 'Ad and established you in the land. You build palaces on its plains and carve dwellings in the mountains. So remember the blessings of Allah and do not spread corruption on the earth.\" (7:74) The Thamud had received immense blessings. They inhabited a fertile region and had developed an advanced civilization. But they forgot Allah and indulged in corruption."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 7:73",
+        "reference_text": "Surah Al-A'raf, verse 73",
+        "content": "وَإِلَىٰ ثَمُودَ أَخَاهُمْ صَـٰلِحًۭا ۗ قَالَ يَـٰقَوْمِ ٱعْبُدُوا۟ ٱللَّهَ مَا لَكُم مِّنْ إِلَـٰهٍ غَيْرُهُۥٓ ۖ قَدْ جَآءَتْكُم بَيِّنَةٌۭ مِّن رَّبِّكُمْ ۖ هَـٰذِهِۦ نَاقَةُ ٱللَّهِ لَكُمْ ءَايَةًۭ ۖ فَذَرُوهَا تَأْكُلْ فِىٓ أَرْضِ ٱللَّهِ ۖ وَلَا تَمَسُّوهَا بِسُوٓءٍۢ فَيَأْخُذَكُمْ عَذَابٌ أَلِيمٌۭ",
+        "translation": "And to the Thamud, their brother Salih. He said: O my people! Worship Allah — you have no other deity than Him. A clear proof has come to you from your Lord: here is the she-camel of Allah, a sign for you. Let her graze on Allah's land and do her no harm, lest a painful punishment seize you.",
+        "relevance": "This verse establishes the sending of Salih and the she-camel as a divine sign."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 7:74",
+        "reference_text": "Surah Al-A'raf, verse 74",
+        "content": "وَٱذْكُرُوٓا۟ إِذْ جَعَلَكُمْ خُلَفَآءَ مِنۢ بَعْدِ عَادٍۢ وَبَوَّأَكُمْ فِى ٱلْأَرْضِ تَتَّخِذُونَ مِن سُهُولِهَا قُصُورًۭا وَتَنْحِتُونَ ٱلْجِبَالَ بُيُوتًۭا",
+        "translation": "Remember when He made you succeed the 'Ad and established you in the land. You build palaces on its plains and carve dwellings in the mountains.",
+        "relevance": "This verse describes the Thamud as successors of the 'Ad and their achievements."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Salih",
+        "arabic_term": "صالح",
+        "definition": "Salih in Arabic. Prophet of Allah sent to the people of Thamud. His name means \"the virtuous one\".",
+        "pronunciation": "sa-lih"
+      },
+      {
+        "id": 2,
+        "term": "Thamud",
+        "arabic_term": "ثمود",
+        "definition": "Ancient people of Arabia who succeeded the 'Ad. They carved dwellings in the mountains. They were destroyed for killing the she-camel.",
+        "pronunciation": "tha-moud"
+      },
+      {
+        "id": 3,
+        "term": "Al-Hijr",
+        "arabic_term": "الحجر",
+        "definition": "Region where the Thamud lived, between the Hijaz and Syria. The Prophet Muhammad passed by its ruins.",
+        "pronunciation": "al-hijr"
+      }
+    ]
+  },
+  "salih_call": {
+    "title": "Salih's Call to His People",
+    "title_arabic": "دعوة صالح لقومه",
+    "introduction": "Salih (عليه السلام) called the people of Thamud with clarity. He invited them to worship Allah alone, to seek forgiveness and to repent. He reminded them that Allah had brought them forth from the earth and established them upon it. He warned them of the consequences of disobedience. Despite his message, the Thamud refused.",
+    "conclusion": "Salih's call illustrates the consistency of the prophetic message. He asked for no reward; his Lord is Near and Answers supplications. The Thamud had their chance before the punishment.",
+    "moral_lesson": "This story teaches us that repentance is always possible before the punishment strikes. It reminds us that our Lord is Near and Answers those who invoke Him.",
+    "historical_location": "Al-Hijr",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "salih_call_chapter_1",
+        "title": "The Invitation to Monotheism",
+        "content": "Salih said to his people: \"O my people! Worship Allah. You have no other deity than Him. It is He who brought you forth from the earth and established you upon it. So seek His forgiveness, then repent to Him. My Lord is Near, He answers.\" (11:61) Salih reminded them of Allah's blessings and invited them not to spread corruption on the earth. He warned them that if they persisted, they would suffer the fate of the peoples of the past."
+      },
+      {
+        "id": "salih_call_chapter_2",
+        "title": "The Rejection of the Thamud",
+        "content": "The Quran reports that \"the Thamud denied the messengers\" (26:141) and that \"they rejected the warnings\" (54:23). Despite the clear proof — the she-camel — and Salih's call, the notables of the people refused. They grew arrogant. The Quran says: \"The Thamud denied out of arrogance.\" (91:11) Salih continued to call them with patience, but they persisted in their disbelief."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 11:61",
+        "reference_text": "Surah Hud, verse 61",
+        "content": "وَإِلَىٰ ثَمُودَ أَخَاهُمْ صَـٰلِحًۭا ۚ قَالَ يَـٰقَوْمِ ٱعْبُدُوا۟ ٱللَّهَ مَا لَكُم مِّنْ إِلَـٰهٍ غَيْرُهُۥٓ ۖ هُوَ أَنشَأَكُم مِّنَ ٱلْأَرْضِ وَٱسْتَعْمَرَكُمْ فِيهَا فَٱسْتَغْفِرُوهُ ثُمَّ تُوبُوٓا۟ إِلَيْهِ ۚ إِنَّ رَبِّى قَرِيبٌۭ مُّجِيبٌۭ",
+        "translation": "And to the Thamud, their brother Salih. He said: O my people! Worship Allah. You have no other deity than Him. It is He who brought you forth from the earth and established you upon it. Seek His forgiveness, then repent to Him. My Lord is Near, He answers.",
+        "relevance": "This verse contains Salih's call and the promise of forgiveness."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 91:11",
+        "reference_text": "Surah Ash-Shams, verse 11",
+        "content": "كَذَّبَتْ ثَمُودُ بِطَغْوَىٰهَآ",
+        "translation": "The Thamud denied out of arrogance.",
+        "relevance": "This verse describes the Thamud's attitude toward Salih's call."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Tawba",
+        "arabic_term": "توبة",
+        "definition": "Repentance. Salih invited the Thamud to repent before the punishment.",
+        "pronunciation": "taw-ba"
+      },
+      {
+        "id": 2,
+        "term": "Qarib Mujib",
+        "arabic_term": "قريب مجيب",
+        "definition": "Near, He answers. Description of the Lord who responds to supplications.",
+        "pronunciation": "qa-rib mou-jib"
+      }
+    ]
+  },
+  "the_thamud_people": {
+    "title": "The People of Thamud",
+    "title_arabic": "قوم ثمود",
+    "introduction": "The people of Thamud succeeded the 'Ad on the earth. Allah established them and granted them remarkable abilities: they built palaces on the plains and carved dwellings in the mountains. But they forgot Allah's blessings and spread corruption. They rejected Salih and his sign.",
+    "conclusion": "The civilization of the Thamud — their palaces and dwellings carved in the rock — did not protect them. The earthquake annihilated them in their dwellings. Only Salih and the believers were spared.",
+    "moral_lesson": "This story teaches us that human achievements do not exempt from the worship of Allah. Corruption on the earth leads to punishment.",
+    "historical_location": "Al-Hijr (between the Hijaz and Syria)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "the_thamud_people_chapter_1",
+        "title": "An Advanced Civilization",
+        "content": "The Quran describes the Thamud: \"Remember when He made you succeed the 'Ad and established you in the land. You build palaces on its plains and carve dwellings in the mountains.\" (7:74) The Thamud were skilled builders. Their dwellings carved in the mountains still bear witness today to their craftsmanship. But the Quran exhorts them: \"Remember the blessings of Allah and do not spread corruption on the earth.\" They did the opposite."
+      },
+      {
+        "id": "the_thamud_people_chapter_2",
+        "title": "Ingratitude",
+        "content": "Allah had granted the Thamud the land, the ability to build and to prosper. But they indulged in corruption (fasād). They rejected the messenger of Allah and despised the sign He had sent them: the she-camel. Their ingratitude and transgression made them deserve the punishment. Salih warned them repeatedly, but they persisted until they committed the crime that sealed their fate: the killing of the she-camel."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 7:74",
+        "reference_text": "Surah Al-A'raf, verse 74",
+        "content": "وَٱذْكُرُوٓا۟ إِذْ جَعَلَكُمْ خُلَفَآءَ مِنۢ بَعْدِ عَادٍۢ وَبَوَّأَكُمْ فِى ٱلْأَرْضِ تَتَّخِذُونَ مِن سُهُولِهَا قُصُورًۭا وَتَنْحِتُونَ ٱلْجِبَالَ بُيُوتًۭا ۖ فَٱذْكُرُوٓا۟ ءَالَآءَ ٱللَّهِ وَلَا تَعْثَوْا۟ فِى ٱلْأَرْضِ مُفْسِدِينَ",
+        "translation": "Remember when He made you succeed the 'Ad and established you in the land. You build palaces on its plains and carve dwellings in the mountains. Remember the blessings of Allah and do not spread corruption on the earth.",
+        "relevance": "This verse describes the Thamud civilization and the exhortation to gratitude."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Khulafa",
+        "arabic_term": "خلفاء",
+        "definition": "Successors. The Thamud succeeded the 'Ad on the earth.",
+        "pronunciation": "khou-la-fa"
+      },
+      {
+        "id": 2,
+        "term": "Mufsidun",
+        "arabic_term": "مفسدون",
+        "definition": "Those who spread corruption. The Quran warns the Thamud not to be corruptors.",
+        "pronunciation": "mouf-si-doun"
+      }
+    ]
+  },
+  "the_she_camel": {
+    "title": "The She-Camel of Allah",
+    "title_arabic": "ناقة الله",
+    "introduction": "Allah sent the Thamud a she-camel as a sign and trial. This she-camel (nāqat Allāh) was a clear proof of Salih's truth. He ordered them to let her graze freely and not to harm her. The water was to be shared between them and her, each drinking in turn. The Thamud rejected this trial.",
+    "conclusion": "The she-camel was a sign of Allah's mercy and a trial for the Thamud. By respecting her, they would have been spared. By killing her, they sealed their doom.",
+    "moral_lesson": "This story teaches us that Allah's signs are trials. Respecting them leads to salvation; transgressing them leads to punishment.",
+    "historical_location": "Al-Hijr",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "the_she_camel_chapter_1",
+        "title": "The Divine Sign",
+        "content": "The Quran reports Salih's words: \"A clear proof has come to you from your Lord: here is the she-camel of Allah, a sign for you. Let her graze on Allah's land and do her no harm, lest a painful punishment seize you.\" (7:73) The she-camel was a miracle — a tangible sign of Allah's power and the truth of Salih's message. She was to graze freely on Allah's land. Whoever harmed her would incur a painful punishment."
+      },
+      {
+        "id": "the_she_camel_chapter_2",
+        "title": "The Sharing of Water",
+        "content": "The Quran indicates that Allah ordered Salih to inform the Thamud: \"The water will be shared between you and her; each will drink in turn.\" (54:28) The she-camel was a trial (fitna) for the Thamud. The Quran says: \"We send the she-camel as a trial for them. So watch them and be patient.\" (54:27) The Thamud were to accept this sharing and not harm the she-camel. Those who believed and obeyed would be spared; the others would suffer the punishment."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 7:73",
+        "reference_text": "Surah Al-A'raf, verse 73",
+        "content": "هَـٰذِهِۦ نَاقَةُ ٱللَّهِ لَكُمْ ءَايَةًۭ ۖ فَذَرُوهَا تَأْكُلْ فِىٓ أَرْضِ ٱللَّهِ ۖ وَلَا تَمَسُّوهَا بِسُوٓءٍۢ فَيَأْخُذَكُمْ عَذَابٌ أَلِيمٌۭ",
+        "translation": "Here is the she-camel of Allah, a sign for you. Let her graze on Allah's land and do her no harm, lest a painful punishment seize you.",
+        "relevance": "This verse establishes the she-camel as a sign and the prohibition of harming her."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 54:27-28",
+        "reference_text": "Surah Al-Qamar, verses 27-28",
+        "content": "إِنَّا مُرْسِلُوا۟ ٱلنَّاقَةِ فِتْنَةًۭ لَّهُمْ فَٱرْتَقِبْهُمْ وَٱصْطَبِرْ ۝ وَنَبِّئْهُمْ أَنَّ ٱلْمَآءَ قِسْمَةٌۢ بَيْنَهُمْ ۖ كُلُّ شِرْبٍۢ مُّحْتَضَرٌۭ",
+        "translation": "We send the she-camel as a trial for them. So watch them and be patient. And inform them that the water will be shared between them and her; each will drink in turn.",
+        "relevance": "These verses describe the she-camel as a trial and the sharing of water."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Naqat Allah",
+        "arabic_term": "ناقة الله",
+        "definition": "The she-camel of Allah. The miraculous sign sent to the Thamud.",
+        "pronunciation": "na-qat al-lah"
+      },
+      {
+        "id": 2,
+        "term": "Fitna",
+        "arabic_term": "فتنة",
+        "definition": "Trial, temptation. The she-camel was a trial for the Thamud.",
+        "pronunciation": "fit-na"
+      }
+    ]
+  },
+  "the_camel_killed": {
+    "title": "The Killing of the She-Camel and the Punishment",
+    "title_arabic": "عقر الناقة والعذاب",
+    "introduction": "Despite Salih's warning, the Thamud killed the she-camel. The Quran reports that they \"denied her and killed her\" (91:14). In response, Allah destroyed them by an earthquake (rajfah). They were seized in their dwellings and found dead, prostrate. Salih and the believers were saved.",
+    "conclusion": "The killing of the she-camel sealed the fate of the Thamud. The earthquake annihilated them. Their transgression against a clear sign of Allah earned them immediate punishment. The story of the Thamud remains a warning for generations.",
+    "moral_lesson": "This story teaches us that transgressing Allah's signs leads to loss. Punishment can be sudden. Only those who believe and obey are spared.",
+    "historical_location": "Al-Hijr",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "the_camel_killed_chapter_1",
+        "title": "The Crime",
+        "content": "The Quran describes what happened: \"When the most wretched among them arose\" (91:12), and when the messenger of Allah (Salih) said to them: \"Here is the she-camel of Allah, let her drink\" (91:13), \"they denied him and killed her. Their Lord then annihilated them for their sin and leveled them.\" (91:14) The Thamud committed the supreme crime: killing the sign of Allah after having been warned. Their arrogance blinded them."
+      },
+      {
+        "id": "the_camel_killed_chapter_2",
+        "title": "The Earthquake",
+        "content": "The Quran describes the punishment: \"The earthquake seized them, and in the morning they lay dead in their dwellings.\" (7:78) The word \"rajfah\" denotes an earthquake or violent tremor. The Thamud, so proud of their palaces and dwellings carved in the mountains, were annihilated in an instant. Salih and those who had believed with him were saved by Allah's mercy. The ruins of Al-Hijr still bear witness to their vanished civilization."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 91:12-15",
+        "reference_text": "Surah Ash-Shams, verses 12-15",
+        "content": "إِذِ ٱنۢبَعَثَ أَشْقَىٰهَا ۝ فَقَالَ لَهُمْ رَسُولُ ٱللَّهِ نَاقَةَ ٱللَّهِ وَسُقْيَـٰهَا ۝ فَكَذَّبُوهُ فَعَقَرُوهَا فَدَمْدَمَ عَلَيْهِمْ رَبُّهُم بِذَنۢبِهِمْ فَسَوَّىٰهَا ۝ وَلَا يَخَافُ عُقْبَـٰهَا",
+        "translation": "When the most wretched among them arose. The messenger of Allah said to them: Here is the she-camel of Allah, let her drink. They denied him and killed her. Their Lord annihilated them for their sin and leveled them. And He fears not the consequences.",
+        "relevance": "These verses describe the Thamud's crime and their punishment."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 7:78",
+        "reference_text": "Surah Al-A'raf, verse 78",
+        "content": "فَأَخَذَتْهُمُ ٱلرَّجْفَةُ فَأَصْبَحُوا۟ فِى دَارِهِمْ جَـٰثِمِينَ",
+        "translation": "The earthquake seized them, and in the morning they lay dead in their dwellings.",
+        "relevance": "This verse describes the nature of the punishment: an earthquake."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Aqar",
+        "arabic_term": "عقر",
+        "definition": "To kill (by cutting the hamstrings). The Thamud \"aqarū\" the she-camel.",
+        "pronunciation": "a-qar"
+      },
+      {
+        "id": 2,
+        "term": "Rajfah",
+        "arabic_term": "رجفة",
+        "definition": "Earthquake, tremor. The punishment by which Allah destroyed the Thamud.",
+        "pronunciation": "raj-fa"
+      }
+    ]
+  },
+  "lessons_from_salih": {
+    "title": "Lessons from Salih's Story",
+    "title_arabic": "دروس من قصة صالح",
+    "introduction": "The story of Salih (عليه السلام) contains timeless lessons. It teaches the consequences of transgressing Allah's signs, the importance of gratitude for blessings, and the swiftness of punishment for those who persist in evil. The Quran cites it as an example.",
+    "conclusion": "Salih accomplished his mission. The Thamud were annihilated for killing the she-camel. His story remains a reminder: Allah's signs must not be transgressed. Civilization and material achievements do not protect from punishment.",
+    "moral_lesson": "This story teaches us to respect Allah's signs, to be grateful for His blessings, and not to spread corruption. It reminds us that repentance is possible before it is too late.",
+    "historical_location": "From Al-Hijr to oblivion",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lessons_from_salih_chapter_1",
+        "title": "An Example for the Peoples",
+        "content": "The Quran presents Salih's story as a warning. The Thamud had everything: palaces, dwellings carved in the mountains, a clear sign — the she-camel. But they lacked the essential: faith and obedience. They transgressed the sign of Allah and were destroyed. Salih, for his part, remained steadfast. He asked for no reward; he conveyed the message. His story reminds us that the messenger accomplishes his mission; the result belongs to Allah."
+      },
+      {
+        "id": "lessons_from_salih_chapter_2",
+        "title": "Prophetic Continuity",
+        "content": "Salih is part of the lineage of prophets sent after Hud. Adam, Noah, Hud, Salih — each people receives its messenger. The Thamud, like the 'Ad before them, had their chance. They refused and transgressed. Salih's story follows the same pattern: the call to monotheism, the miraculous sign, rejection, transgression, punishment, and the salvation of the believers. The ruins of Al-Hijr, which the Prophet Muhammad passed during the expedition of Tabuk, remind generations of this lesson."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 11:120",
+        "reference_text": "Surah Hud, verse 120",
+        "content": "وَكُلًّا نَّقُصُّ عَلَيْكَ مِنْ أَنبَاءِ الرُّسُلِ مَا نُثَبِّتُ بِهِ فُؤَادَكَ وَجَاءَكَ فِي هَٰذِهِ الْحَقُّ وَمَوْعِظَةٌ وَذِكْرَىٰ لِلْمُؤْمِنِينَ",
+        "translation": "And all that We relate to you of the accounts of the messengers is to strengthen your heart. And there has come to you in this account the truth, as well as an exhortation and a reminder for the believers.",
+        "relevance": "This verse explains the purpose of the prophets' accounts in the Quran."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 11:68",
+        "reference_text": "Surah Hud, verse 68",
+        "content": "كَأَن لَّمْ يَغْنَوْا۟ فِيهَا ۗ أَلَآ إِنَّ ثَمُودًا كَفَرُوا۟ رَبَّهُمْ ۗ أَلَا بُعْدًۭا لِّثَمُودَ",
+        "translation": "As if they had never dwelt there. Verily, the Thamud disbelieved in their Lord. Away with the Thamud!",
+        "relevance": "This verse concludes the account of the Thamud and their punishment."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Ibra",
+        "arabic_term": "عبرة",
+        "definition": "Example or lesson. The stories of the prophets are examples for humanity.",
+        "pronunciation": "ib-ra"
+      },
+      {
+        "id": 2,
+        "term": "Dhikra",
+        "arabic_term": "ذكرى",
+        "definition": "Reminder. The accounts of the prophets serve as a reminder for the believers.",
+        "pronunciation": "dhik-ra"
+      }
+    ]
+  }
+}

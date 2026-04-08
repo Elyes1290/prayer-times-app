@@ -1,0 +1,401 @@
+{
+  "dawud_goliath": {
+    "title": "Davud und Goliath",
+    "title_arabic": "داوود وجالوت",
+    "introduction": "Davud (داوود عليه السلام), David, ist ein Prophet und König Israels. Der Koran berichtet von seinem Kampf gegen Goliath (Dschalut): \"Wie oft hat eine kleine Schar mit Allahs Erlaubnis eine große Schar besiegt!\" (2:249) Davud war ein junger Hirte, als die Armee von Talut (Saul) den Philistern gegenüberstand. Goliath forderte die Soldaten heraus; nur Davud nahm an.",
+    "conclusion": "Davud schlug Goliath mit einem Stein aus seiner Schleuder nieder. Allah gab ihm das Königtum und die Weisheit. Dieser Kampf zeigt, dass der Sieg von Allah kommt, nicht von Stärke oder Zahl.",
+    "moral_lesson": "Diese Geschichte lehrt uns, dass Vertrauen in Allah und Mut über Widrigkeiten triumphieren können. Der Schwache, der sich auf Allah verlässt, kann den Starken besiegen.",
+    "historical_location": "Palästina (Tal von Elah)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "dawud_goliath_chapter_1",
+        "title": "Goliaths Herausforderung",
+        "content": "Der Koran berichtet: \"Als Talut mit den Truppen auszog, sagte er: Allah wird euch mit einem Fluss prüfen. Wer daraus trinkt, ist nicht von mir; wer nicht davon kostet, ist von mir — außer wer eine Handvoll mit der Hand schöpft.\" (2:249) Die Armee überquerte; wenige blieben treu. Unter ihnen war Davud. Goliath (Dschalut), der philistäische Riese, forderte die Soldaten Israels heraus. Niemand wagte es, ihm entgegenzutreten. Davud, der junge Hirte, meldete sich freiwillig."
+      },
+      {
+        "id": "dawud_goliath_chapter_2",
+        "title": "Der wundersame Sieg",
+        "content": "Der Koran sagt: \"So besiegten sie sie mit Allahs Erlaubnis. Und Davud tötete Goliath. Und Allah gab ihm das Königtum und die Weisheit und lehrte ihn, was Er wollte.\" (2:251) Davud hatte nur eine Schleuder und Steine. Er rief Allah an und warf einen Stein. Er traf Goliath an der Stirn; der Riese fiel. Die feindliche Armee wurde in die Flucht geschlagen. Der Sieg war ein Zeichen: Allah unterstützt diejenigen, die auf Ihn vertrauen."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 2:249",
+        "reference_text": "Sure Al-Baqarah, Vers 249",
+        "content": "فَلَمَّا فَصَلَ طَالُوتُ بِٱلْجُنُودِ قَالَ إِنَّ ٱللَّهَ مُبْتَلِيكُم بِنَهَرٍۢ فَمَن شَرِبَ مِنْهُ فَلَيْسَ مِنِّى وَمَن لَّمْ يَطْعَمْهُ فَإِنَّهُۥ مِنِّىٓ إِلَّا مَنِ ٱغْتَرَفَ غُرْفَةًۢ بِيَدِهِۦ",
+        "translation": "When Talut set out with the troops, he said: Allah will test you with a river. Whoever drinks from it is not of me.",
+        "relevance": "Dieser Vers beschreibt die Prüfung vor der Schlacht."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 2:251",
+        "reference_text": "Sure Al-Baqarah, Vers 251",
+        "content": "فَهَزَمُوهُم بِإِذْنِ ٱللَّهِ وَقَتَلَ دَاوُۥدُ جَالُوتَ وَءَاتَىٰهُ ٱللَّهُ ٱلْمُلْكَ وَٱلْحِكْمَةَ وَعَلَّمَهُۥ مِمَّا يَشَآءُ",
+        "translation": "They defeated them by the permission of Allah. Dawud killed Goliath. Allah gave him the kingdom and wisdom.",
+        "relevance": "Dieser Vers begründet Davuds Sieg und die Gabe des Königtums."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Dawud",
+        "arabic_term": "داوود",
+        "definition": "David auf Arabisch. Prophet und König Israels, Sieger über Goliath.",
+        "pronunciation": "da-woud"
+      },
+      {
+        "id": 2,
+        "term": "Jalut",
+        "arabic_term": "جالوت",
+        "definition": "Goliath. Philistäischer Riese, von Davud besiegt.",
+        "pronunciation": "ja-lout"
+      }
+    ]
+  },
+  "dawud_kingdom": {
+    "title": "Das Königreich Davuds",
+    "title_arabic": "ملك داوود",
+    "introduction": "Nach dem Tod Taluts wurde Davud König von Israel. Der Koran sagt: \"O Davud! Wir haben dich zu einem Nachfolger auf der Erde gemacht. So richte zwischen den Menschen mit Gerechtigkeit.\" (38:26) Davud herrschte mit Gerechtigkeit. Er vereinte die Stämme und machte Jerusalem zur Hauptstadt. Er kämpfte gegen die Feinde Allahs und schuf Frieden.",
+    "conclusion": "Davud war ein gerechter und frommer König. Er sprach Recht mit Billigkeit und ließ sich nicht bestechen. Sein Königreich gedieh unter seiner Führung.",
+    "moral_lesson": "Diese Geschichte lehrt uns, dass Macht mit Gerechtigkeit ausgeübt werden muss. Der Herrscher muss gerecht richten und Allah fürchten.",
+    "historical_location": "Jerusalem, Palästina",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "dawud_kingdom_chapter_1",
+        "title": "Die Thronbesteigung",
+        "content": "Der Koran berichtet: \"Und dein Herr weiß am besten, wer in den Himmeln und auf der Erde ist. Und Wir haben einige Propheten vor anderen bevorzugt; und Davud gaben Wir den Zabur.\" (17:55) Davud erhielt das Königtum und das Buch (Zabur). Er errichtete seinen Thron in Jerusalem. Die Menschen kamen zu ihm um Gerechtigkeit. Er hörte Beschwerden an und entschied mit Weisheit."
+      },
+      {
+        "id": "dawud_kingdom_chapter_2",
+        "title": "Die Gerechtigkeit Davuds",
+        "content": "Der Koran sagt: \"O Davud! Wir haben dich zu einem Nachfolger auf der Erde gemacht. So richte zwischen den Menschen mit Gerechtigkeit und folge nicht der Begierde: sie würde dich vom Weg Allahs in die Irre führen.\" (38:26) Davud bevorzugte niemanden. Er prüfte jede Angelegenheit sorgfältig. Die Unterdrückten fanden in ihm einen Verteidiger. Sein Königreich war ein Vorbild der Gerechtigkeit."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 17:55",
+        "reference_text": "Sure Al-Isra, Vers 55",
+        "content": "وَرَبُّكَ أَعْلَمُ بِمَن فِى ٱلسَّمَـٰوَٰتِ وَٱلْأَرْضِ ۗ وَلَقَدْ فَضَّلْنَا بَعْضَ ٱلنَّبِيِّـۧنَ عَلَىٰ بَعْضٍۢ ۖ وَءَاتَيْنَا دَاوُۥدَ زَبُورًۭا",
+        "translation": "Your Lord knows best. We have favored some prophets. To Dawud We gave the Zabur.",
+        "relevance": "Dieser Vers begründet die Gabe des Zabur an Davud."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 38:26",
+        "reference_text": "Sure Sad, Vers 26",
+        "content": "يَـٰدَاوُۥدُ إِنَّا جَعَلْنَـٰكَ خَلِيفَةًۭ فِى ٱلْأَرْضِ فَٱحْكُم بَيْنَ ٱلنَّاسِ بِٱلْحَقِّ وَلَا تَتَّبِعِ ٱلْهَوَىٰ",
+        "translation": "O Dawud! We have made you a successor on earth. Judge between people with justice.",
+        "relevance": "Dieser Vers gebietet Davud, mit Gerechtigkeit zu richten."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Khalifa",
+        "arabic_term": "خليفة",
+        "definition": "Nachfolger, Stellvertreter. Davud war Chalifa auf der Erde.",
+        "pronunciation": "kha-li-fa"
+      },
+      {
+        "id": 2,
+        "term": "Zabur",
+        "arabic_term": "الزبور",
+        "definition": "Die Psalmen. Von Allah an Davud offenbartes Buch.",
+        "pronunciation": "az-zabour"
+      }
+    ]
+  },
+  "dawud_zabur": {
+    "title": "Der Zabur (Die Psalmen)",
+    "title_arabic": "الزبور",
+    "introduction": "Allah offenbarte Davud den Zabur (Psalmen). Der Koran sagt: \"Und Davud gaben Wir den Zabur.\" (17:55) Der Zabur enthält Lobpreisungen, Bittgebete und Weisheit. Davud rezitierte ihn mit einer so schönen Stimme, dass die Berge und Vögel mit ihm Allah preisten.",
+    "conclusion": "Der Zabur ist eines der offenbarten Bücher, zusammen mit der Tora, dem Evangelium und dem Koran. An alle Bücher zu glauben ist eine Säule des islamischen Glaubens.",
+    "moral_lesson": "Diese Geschichte lehrt uns, dass jeder Prophet eine Offenbarung erhielt. Die göttlichen Bücher ergänzen und bestätigen die Botschaft der Einheit.",
+    "historical_location": "Palästina",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "dawud_zabur_chapter_1",
+        "title": "Die Offenbarung des Zabur",
+        "content": "Der Koran berichtet: \"Wir haben dir offenbart, wie Wir Nuh und den Propheten nach ihm offenbart haben. Und Wir offenbarten Ibrahim, Ismael, Isaac, Jakob, den Stämmen, Isa, Ayyub, Yunus, Harun und Sulayman. Und Davud gaben Wir den Zabur.\" (4:163) Der Zabur wurde Davud von Allah offenbart. Er enthielt Worte des Lobpreises und der Weisheit. Davud rezitierte ihn, indem er seinen Herrn pries."
+      },
+      {
+        "id": "dawud_zabur_chapter_2",
+        "title": "Die Stimme Davuds",
+        "content": "Der Koran sagt: \"Wir haben Davud gewiss eine Gunst von Uns gewährt: O Berge! Wiederholt mit ihm die Lobpreisungen. Und o Vögel!\" (34:10) Wenn Davud Allah pries, wiederholten die Berge und Vögel mit ihm. Seine Stimme war so melodisch, dass sie die Schöpfung inspirierte. Der Zabur, von Davud rezitiert, erhob die Herzen zu Allah."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 4:163",
+        "reference_text": "Sure An-Nisa, Vers 163",
+        "content": "إِنَّآ أَوْحَيْنَآ إِلَيْكَ كَمَآ أَوْحَيْنَآ إِلَىٰ نُوحٍۢ وَٱلنَّبِيِّـۧنَ مِنۢ بَعْدِهِۦ ۚ وَأَوْحَيْنَآ إِلَىٰٓ إِبْرَٰهِـۧمَ وَإِسْمَـٰعِيلَ وَإِسْحَـٰقَ وَيَعْقُوبَ وَٱلْأَسْبَاطِ وَعِيسَىٰ وَأَيُّوبَ وَيُونُسَ وَهَـٰرُونَ وَسُلَيْمَـٰنَ ۚ وَءَاتَيْنَا دَاوُۥدَ زَبُورًۭا",
+        "translation": "We have revealed to you as to the prophets. To Dawud We gave the Zabur.",
+        "relevance": "Dieser Vers stellt den Zabur unter die offenbarten Bücher."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 34:10",
+        "reference_text": "Sure Saba, Vers 10",
+        "content": "وَلَقَدْ ءَاتَيْنَا دَاوُۥدَ مِنَّا فَضْلًۭا ۖ يَـٰجِبَالُ أَوِّبِى مَعَهُۥ وَٱلطَّيْرَ",
+        "translation": "We have granted a favor to Dawud: O mountains! Repeat with him. And O birds!",
+        "relevance": "Dieser Vers beschreibt das Wunder der Berge und Vögel."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Zabur",
+        "arabic_term": "الزبور",
+        "definition": "Die Psalmen. An Davud offenbartes Buch.",
+        "pronunciation": "az-zabour"
+      },
+      {
+        "id": 2,
+        "term": "Tasbih",
+        "arabic_term": "تسبيح",
+        "definition": "Lobpreisung. Davud pries Allah durch den Zabur.",
+        "pronunciation": "tas-bih"
+      }
+    ]
+  },
+  "dawud_mountains": {
+    "title": "Die Berge und die Vögel",
+    "title_arabic": "الجبال والطيور مع داوود",
+    "introduction": "Allah gewährte Davud ein einzigartiges Wunder: wenn er seinen Herrn pries, wiederholten die Berge und Vögel mit ihm. Der Koran sagt: \"O Berge! Wiederholt mit ihm die Lobpreisungen. Und o Vögel!\" (34:10) Die gesamte Schöpfung pries Allah an Davuds Seite.",
+    "conclusion": "Dieses Wunder zeigte, dass Davud wahrlich ein Prophet Allahs war. Die Natur gehorcht ihrem Schöpfer und antwortet auf den Ruf Seiner auserwählten Diener.",
+    "moral_lesson": "Diese Geschichte lehrt uns, dass die gesamte Schöpfung Allah preist. Der Mensch muss sich durch Gebet und Dhikr diesem Lobpreis anschließen.",
+    "historical_location": "Palästina",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "dawud_mountains_chapter_1",
+        "title": "Das Wunder",
+        "content": "Der Koran berichtet: \"Und Wir haben Davud gewiss eine Gunst von Uns gewährt: O Berge! Wiederholt mit ihm die Lobpreisungen. Und o Vögel! Und Wir machten ihm das Eisen weich.\" (34:10) Wenn Davud den Zabur rezitierte und Allah pries, hallten die Berge seiner Stimme wider. Die Vögel schlossen sich ihm an. Es war ein Zeichen von Allahs Macht und Davuds Erwählung."
+      },
+      {
+        "id": "dawud_mountains_chapter_2",
+        "title": "Die Unterwerfung der Schöpfung",
+        "content": "Der Koran sagt auch: \"Und die versammelten Vögel: alle wiederholten mit ihm die Lobpreisungen.\" (38:19) Die gesamte Schöpfung — Berge, Vögel — pries Allah mit Davud. Dies erinnert daran, dass alles, was existiert, Allah unterworfen ist. Der Mensch muss diese Unterwerfung durch Anbetung nachahmen."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 34:10",
+        "reference_text": "Sure Saba, Vers 10",
+        "content": "وَلَقَدْ ءَاتَيْنَا دَاوُۥدَ مِنَّا فَضْلًۭا ۖ يَـٰجِبَالُ أَوِّبِى مَعَهُۥ وَٱلطَّيْرَ ۚ وَأَلَنَّا لَهُ ٱلْحَدِيدَ",
+        "translation": "We have granted a favor to Dawud. O mountains! Repeat with him. And O birds!",
+        "relevance": "Dieser Vers beschreibt das Wunder der Berge und Vögel."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 38:19",
+        "reference_text": "Sure Sad, Vers 19",
+        "content": "وَٱلطَّيْرَ مَحْشُورَةً ۖ كُلٌّ لَّهُۥٓ أَوَّابٌ",
+        "translation": "And the birds assembled, all with him repeated the praises.",
+        "relevance": "Dieser Vers bestätigt den Lobpreis der Vögel mit Davud."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Awab",
+        "arabic_term": "أواب",
+        "definition": "Wer (zu Allah) zurückkehrt. Die Berge und Vögel waren mit Davud awab.",
+        "pronunciation": "a-wab"
+      },
+      {
+        "id": 2,
+        "term": "Jibal",
+        "arabic_term": "جبال",
+        "definition": "Berge. Sie priesen Allah mit Davud.",
+        "pronunciation": "ji-bal"
+      }
+    ]
+  },
+  "dawud_iron": {
+    "title": "Das für Davud weichgemachte Eisen",
+    "title_arabic": "تليين الحديد لداوود",
+    "introduction": "Allah gewährte Davud ein weiteres Wunder: Eisen wurde in seinen Händen weich. Der Koran sagt: \"Und Wir machten ihm das Eisen weich.\" (34:10) Davud konnte Panzerhemden ohne Feuer oder Hammer anfertigen. Er fertigte Rüstungen an, um die Soldaten zu schützen.",
+    "conclusion": "Diese Gabe ermöglichte es Davud, starke Rüstungen herzustellen. Er lehrte die Menschen dieses Handwerk. Eisen, von Natur aus hart, gehorchte der Hand des Propheten.",
+    "moral_lesson": "Diese Geschichte lehrt uns, dass Allah die Gesetze der Natur für Seine Propheten ändern kann. Wunder bestätigen die Wahrheit der Botschaft.",
+    "historical_location": "Palästina",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "dawud_iron_chapter_1",
+        "title": "Die Gabe des Eisens",
+        "content": "Der Koran berichtet: \"Und Wir machten ihm das Eisen weich: Mache vollständige Panzerhemden und miss die Maschen gut. Und tut Gutes. Ich sehe, was ihr tut.\" (34:10-11) Eisen wurde in Davuds Händen formbar. Er konnte es ohne Schmiede biegen und flechten. Er fertigte Panzerhemden an, um die Kämpfer zu schützen. Allah hatte ihm diese Fertigkeit gelehrt."
+      },
+      {
+        "id": "dawud_iron_chapter_2",
+        "title": "Die Lehre",
+        "content": "Davud gab diese Gabe an sein Volk weiter. Der Koran sagt: \"Und Davud lehrten Wir die Anfertigung von Panzerhemden, um euch vor eurer Gewalt zu schützen. Werdet ihr dankbar sein?\" (21:80) Das weichgemachte Eisen war eine Gunst von Allah. Die Menschen konnten Rüstungen anfertigen. Davud ermahnte sie zur Dankbarkeit."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 34:10-11",
+        "reference_text": "Sure Saba, Verse 10-11",
+        "content": "وَأَلَنَّا لَهُ ٱلْحَدِيدَ ۝ أَنِ ٱعْمَلْ سَـٰبِغَـٰتٍۢ وَقَدِّرْ فِى ٱلسَّرْدِ ۖ وَٱعْمَلُوا۟ صَـٰلِحًا ۖ إِنِّى بِمَا تَعْمَلُونَ بَصِيرٌ",
+        "translation": "We made iron soft for him: Make complete coats of mail. And do good.",
+        "relevance": "Dieser Vers beschreibt das Eisenwunder und den Befehl, Rüstungen anzufertigen."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 21:80",
+        "reference_text": "Sure Al-Anbiya, Vers 80",
+        "content": "وَعَلَّمْنَـٰهُ صَنْعَةَ لَبُوسٍۢ لَّكُمْ لِتُحْصِنَكُم مِّنۢ بَأْسِكُمْ ۖ فَهَلْ أَنتُمْ شَـٰكِرُونَ",
+        "translation": "We taught him the making of coats of mail to protect you. Would you be grateful?",
+        "relevance": "Dieser Vers erinnert an die Gabe des Eisens an Davud."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Sabighat",
+        "arabic_term": "سابغات",
+        "definition": "Vollständige Panzerhemden. Davud fertigte sie mit dem weichgemachten Eisen an.",
+        "pronunciation": "sa-bi-ghat"
+      },
+      {
+        "id": 2,
+        "term": "Hadid",
+        "arabic_term": "حديد",
+        "definition": "Eisen. Allah machte es für Davud weich.",
+        "pronunciation": "ha-did"
+      }
+    ]
+  },
+  "dawud_judgment": {
+    "title": "Das Urteil Davuds",
+    "title_arabic": "قضاء داوود",
+    "introduction": "Eines Tages kamen zwei Männer vor Davud wegen eines Streits. Der eine besaß neunundneunzig Schafe, der andere nur eines. Der Reiche forderte das Schaf des Armen. Davud hörte zu und fällte ein Urteil. Dann verstand er, dass er geprüft worden war, und bereute.",
+    "conclusion": "Allah vergab Davud. Diese Geschichte zeigt, dass selbst Propheten geprüft werden können. Aufrichtige Reue tilgt die Fehler.",
+    "moral_lesson": "Diese Geschichte lehrt uns die Bedeutung von Gerechtigkeit und Demut. Der Richter muss jede Angelegenheit sorgfältig prüfen und sich nicht beeinflussen lassen.",
+    "historical_location": "Jerusalem",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "dawud_judgment_chapter_1",
+        "title": "Die zwei Streitparteien",
+        "content": "Der Koran berichtet: \"Und ist dir die Geschichte der Streitenden zu Ohren gekommen, als sie das Heiligtum überstiegen? Als sie zu Davud eintraten, erschrak er vor ihnen. Sie sagten: Fürchte dich nicht. Wir sind zwei Streitende: einer von uns hat dem anderen Unrecht getan. So richte zwischen uns mit Gerechtigkeit.\" (38:21-22) Zwei Engel kamen in Menschengestalt, um Davud zu prüfen. Der eine hatte neunundneunzig Schafe, der andere nur eines. Der erste forderte das Schaf des anderen."
+      },
+      {
+        "id": "dawud_judgment_chapter_2",
+        "title": "Die Reue",
+        "content": "Der Koran sagt: \"Davud sagte: Er hat dir Unrecht getan, indem er dein Schaf forderte, um es zu seinen Schafen hinzuzufügen. Viele Partner tun einander Unrecht — außer denen, die glauben und gute Taten vollbringen, und sie sind wenige. Davud verstand dann, dass Wir ihn geprüft hatten. Er bat seinen Herrn um Vergebung und warf sich nieder und bereute.\" (38:24-25) Davud hatte zu schnell geurteilt. Er bereute und Allah vergab ihm. Auch Propheten sind Menschen und können irren; Reue erhebt sie."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 38:21-22",
+        "reference_text": "Sure Sad, Verse 21-22",
+        "content": "وَهَلْ أَىٰكَ نَبَؤُا۟ ٱلْخَصْمِ إِذْ تَسَوَّرُوا۟ ٱلْمِحْرَابَ ۝ إِذْ دَخَلُوا۟ عَلَىٰ دَاوُۥدَ فَفَزِعَ مِنْهُمْ ۖ قَالُوا۟ لَا تَخَفْ ۖ خَصْمَانِ بَغَىٰ بَعْضُنَا عَلَىٰ بَعْضٍۢ",
+        "translation": "Has the story of the litigants reached you? They entered upon Dawud. They said: We are two litigants.",
+        "relevance": "Dieser Vers führt Davuds Prüfung ein."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 38:24-25",
+        "reference_text": "Sure Sad, Verse 24-25",
+        "content": "قَالَ لَقَدْ ظَلَمَكَ بِسُؤَالِ نَعْجَتِكَ إِلَىٰ نِعَاجِهِۦ ۗ وَإِنَّ كَثِيرًۭا مِّنَ ٱلْخُلَطَآءِ لَيَبْغِى بَعْضُهُمْ عَلَىٰ بَعْضٍ إِلَّا ٱلَّذِينَ ءَامَنُوا۟ وَعَمِلُوا۟ ٱلصَّـٰلِحَـٰتِ وَقَلِيلٌۭ مَّا هُمْ ۗ وَظَنَّ دَاوُۥدُ أَنَّمَا فَتَنَّـٰهُ فَٱسْتَغْفَرَ رَبَّهُۥ وَخَرَّ رَاكِعًۭا وَأَنَابَ ۩",
+        "translation": "Dawud said: He has wronged you. Dawud understood that he had been tested. He asked forgiveness and prostrated.",
+        "relevance": "Dieser Vers zeigt Davuds Reue."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Mihrab",
+        "arabic_term": "محراب",
+        "definition": "Heiligtum, Gebetsort. Die Streitenden überstiegen Davuds Mihrab.",
+        "pronunciation": "mih-rab"
+      },
+      {
+        "id": 2,
+        "term": "Istighfar",
+        "arabic_term": "استغفار",
+        "definition": "Bitte um Vergebung. Davud tat Istighfar, nachdem er seinen Fehler verstanden hatte.",
+        "pronunciation": "is-tigh-far"
+      }
+    ]
+  },
+  "lessons_from_dawud": {
+    "title": "Lehren aus der Geschichte Davuds",
+    "title_arabic": "دروس من قصة داوود",
+    "introduction": "Davud war Prophet und König. Er besiegte Goliath, erhielt den Zabur und herrschte mit Gerechtigkeit. Der Koran sagt: \"Und Wir haben einige Propheten vor anderen bevorzugt; und Davud gaben Wir den Zabur.\" (17:55) Seine Geschichte lehrt Vertrauen in Allah, Gerechtigkeit und Demut.",
+    "conclusion": "Davud vereinte Stärke und Sanftmut, Macht und Frömmigkeit. Er pries Allah und sprach Recht. Seine Reue nach der Urteilsprüfung zeigt, dass Propheten demütige Diener bleiben.",
+    "moral_lesson": "Diese Geschichte lehrt uns, dass der Sieg von Allah kommt, dass Macht Gerechtigkeit erfordert und dass Reue das Herz reinigt.",
+    "historical_location": "Palästina",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lessons_from_dawud_chapter_1",
+        "title": "Vertrauen und Sieg",
+        "content": "Davud, der junge Hirte, trat Goliath dem Riesen gegenüber. Er hatte nur eine Schleuder. Aber er rief Allah an und der Stein traf sein Ziel. Der Koran erinnert uns: \"Wie oft hat eine kleine Schar mit Allahs Erlaubnis eine große Schar besiegt!\" (2:249) Der Sieg hängt nicht von Zahl oder Stärke ab; er hängt von Allah ab."
+      },
+      {
+        "id": "lessons_from_dawud_chapter_2",
+        "title": "Gerechtigkeit und Reue",
+        "content": "Davud war ein gerechter König. Aber er wurde von den zwei Streitenden geprüft. Er hatte zu schnell geurteilt. Sobald er verstand, bereute er. Der Koran sagt: \"Wir vergaben ihm. Er wird eine Stätte in unserer Nähe und eine schöne Zuflucht haben.\" (38:25) Aufrichtige Reue erhebt den Gläubigen. Davud bleibt ein Vorbild als König und Prophet."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 17:55",
+        "reference_text": "Sure Al-Isra, Vers 55",
+        "content": "وَلَقَدْ فَضَّلْنَا بَعْضَ ٱلنَّبِيِّـۧنَ عَلَىٰ بَعْضٍۢ ۖ وَءَاتَيْنَا دَاوُۥدَ زَبُورًۭا",
+        "translation": "We have favored some prophets. To Dawud We gave the Zabur.",
+        "relevance": "Dieser Vers begründet Davuds Stellung unter den Propheten."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 38:25",
+        "reference_text": "Sure Sad, Vers 25",
+        "content": "فَغَفَرْنَا لَهُۥ ذَٰلِكَ ۖ وَإِنَّ لَهُۥ عِندَنَا لَزُلْفَىٰ وَحُسْنَ مَـَٔابٍۢ",
+        "translation": "We forgave him. He will have a place near to Us and a beautiful refuge.",
+        "relevance": "Dieser Vers zeigt Allahs Vergebung gegenüber Davud."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Tawakkul",
+        "arabic_term": "توكل",
+        "definition": "Vertrauen in Allah. Davud zeigte Tawakkul beim Kampf gegen Goliath.",
+        "pronunciation": "ta-wak-koul"
+      },
+      {
+        "id": 2,
+        "term": "Adl",
+        "arabic_term": "عدل",
+        "definition": "Gerechtigkeit. Davud wurde geboten, mit Billigkeit (Adl) zu richten.",
+        "pronunciation": "adl"
+      }
+    ]
+  }
+}

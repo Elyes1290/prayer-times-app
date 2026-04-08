@@ -1,0 +1,287 @@
+{
+  "lut_prophecy": {
+    "title": "Lut et l'envoi au peuple de Sodome",
+    "title_arabic": "لوط عليه السلام وإرساله إلى قوم سدوم",
+    "introduction": "Lut (لوط عليه السلام) est l'un des prophètes mentionnés dans le Coran. Allah dit : « Et Lot était certes du nombre des messagers. » (37:133) Il fut envoyé à un peuple qui pratiquait une débauche que nul avant eux n'avait commise. Le Coran rapporte son appel à la droiture et la réponse de son peuple qui rejeta les avertissements.",
+    "conclusion": "Lut fut envoyé comme messager à son peuple. Malgré son appel sincère, le peuple persista dans sa débauche et rejeta les avertissements. Allah prépara le châtiment pour ceux qui s'obstinèrent.",
+    "moral_lesson": "Cette histoire nous enseigne que chaque peuple reçoit des messagers pour le guider. Le rejet des avertissements mène à la perdition.",
+    "historical_location": "Région de Sodome (al-Mu'tafikat)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lut_prophecy_chapter_1",
+        "title": "L'envoi de Lut",
+        "content": "Le Coran établit Lut parmi les messagers : « Et Lot était certes du nombre des messagers. » (37:133) Lut fut envoyé à un peuple qui habitait des cités. Le Coran dit : « Le peuple de Lot traita les messagers de menteurs. » (26:160) Lut appela son peuple à craindre Allah et à abandonner les actes honteux. Il les avertit du châtiment à venir s'ils persistaient."
+      },
+      {
+        "id": "lut_prophecy_chapter_2",
+        "title": "Le peuple de Sodome",
+        "content": "Le Coran décrit le peuple de Lut : « Et Lot, quand il dit à son peuple : Commettez-vous une débauche que nul parmi les mondes ne vous a précédés ? » (7:80) Ce peuple pratiquait des actes que le Coran qualifie de « الفاحشة » (al-fahisha) — la débauche. Lut les exhorta à craindre Allah et à ne pas le déshonorer dans ses hôtes. Mais ils répondirent par le rejet et la moquerie."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 37:133",
+        "reference_text": "Sourate As-Saffat, verset 133",
+        "content": "وَإِنَّ لُوطًا لَّمِنَ ٱلْمُرْسَلِينَ",
+        "translation": "Et Lot était certes du nombre des messagers.",
+        "relevance": "Ce verset confirme que Lut est un messager d'Allah."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 7:80",
+        "reference_text": "Sourate Al-A'raf, verset 80",
+        "content": "وَلُوطًا إِذْ قَالَ لِقَوْمِهِۦٓ أَتَأْتُونَ ٱلْفَـٰحِشَةَ مَا سَبَقَكُم بِهَا مِنْ أَحَدٍۢ مِّنَ ٱلْعَـٰلَمِينَ",
+        "translation": "Et Lot, quand il dit à son peuple : Commettez-vous une débauche que nul parmi les mondes ne vous a précédés ?",
+        "relevance": "Ce verset établit l'appel de Lut à son peuple."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Lut",
+        "arabic_term": "لوط",
+        "definition": "Lot en arabe. Prophète d'Allah envoyé au peuple de Sodome.",
+        "pronunciation": "lout"
+      },
+      {
+        "id": 2,
+        "term": "Al-Fahisha",
+        "arabic_term": "الفاحشة",
+        "definition": "La débauche. Terme coranique pour désigner les actes honteux du peuple de Lut.",
+        "pronunciation": "al-fa-hi-sha"
+      }
+    ]
+  },
+  "lut_call": {
+    "title": "L'appel de Lut à la droiture",
+    "title_arabic": "دعوة لوط إلى الاستقامة",
+    "introduction": "Lut (عليه السلام) appela son peuple à abandonner la débauche et à craindre Allah. Le Coran rapporte : « Ne craignez-vous pas Allah ? Je suis pour vous un messager digne de confiance. Craignez donc Allah et obéissez-moi. » (26:161-163) Son peuple répondit par le rejet et la menace.",
+    "conclusion": "Lut accomplit sa mission d'avertissement. Son peuple choisit de persister dans l'égarement. Lut demanda à Allah de le sauver, lui et sa famille, du peuple des pervers.",
+    "moral_lesson": "Cette histoire nous enseigne que le messager accomplit sa mission ; c'est au peuple de choisir la guidance ou l'égarement.",
+    "historical_location": "Région de Sodome",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lut_call_chapter_1",
+        "title": "L'exhortation",
+        "content": "Le Coran rapporte les paroles de Lut : « Ne craignez-vous pas Allah ? Je suis pour vous un messager digne de confiance. Craignez donc Allah et obéissez-moi. Je ne vous demande aucun salaire pour cela ; mon salaire n'incombe qu'au Seigneur de l'univers. » (26:161-164) Lut appela son peuple avec sincérité. Il ne demandait aucune récompense terrestre ; sa récompense venait d'Allah seul."
+      },
+      {
+        "id": "lut_call_chapter_2",
+        "title": "Le rejet du peuple",
+        "content": "Le Coran dit : « Le peuple de Lot traita les messagers de menteurs. » (26:160) Et : « Le peuple de Lot rejeta les avertissements. » (54:33) Ils refusèrent d'écouter Lut et persistèrent dans leurs actes. Lut invoqua son Seigneur : « Seigneur ! Sauve-moi ainsi que ma famille de ce qu'ils font. » (26:169) Allah exauça son invocation."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 26:161-164",
+        "reference_text": "Sourate Ash-Shu'ara, versets 161-164",
+        "content": "إِذْ قَالَ لَهُمْ لُوطٌ أَلَا تَتَّقُونَ إِنِّى لَكُمْ رَسُولٌ أَمِينٌ فَٱتَّقُوا۟ ٱللَّهَ وَأَطِيعُونِ وَمَآ أَسْـَٔلُكُمْ عَلَيْهِ مِنْ أَجْرٍ ۖ إِنْ أَجْرِىَ إِلَّا عَلَىٰ رَبِّ ٱلْعَـٰلَمِينَ",
+        "translation": "Quand Lut leur dit : Ne craignez-vous pas Allah ? Je suis pour vous un messager digne de confiance. Craignez donc Allah et obéissez-moi. Je ne vous demande aucun salaire pour cela ; mon salaire n'incombe qu'au Seigneur de l'univers.",
+        "relevance": "Ces versets décrivent l'appel de Lut à son peuple."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 54:33",
+        "reference_text": "Sourate Al-Qamar, verset 33",
+        "content": "كَذَّبَتْ قَوْمُ لُوطٍۭ بِٱلنُّذُرِ",
+        "translation": "Le peuple de Lot rejeta les avertissements.",
+        "relevance": "Ce verset confirme le rejet des avertissements par le peuple."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Rasul",
+        "arabic_term": "رسول",
+        "definition": "Messager. Lut se présenta comme messager digne de confiance.",
+        "pronunciation": "ra-soul"
+      },
+      {
+        "id": 2,
+        "term": "An-Nudhur",
+        "arabic_term": "النذر",
+        "definition": "Les avertissements. Le peuple de Lut rejeta les avertissements divins.",
+        "pronunciation": "an-noud-hour"
+      }
+    ]
+  },
+  "lut_guests": {
+    "title": "Les hôtes chez Lut",
+    "title_arabic": "الضيوف عند لوط",
+    "introduction": "Des anges vinrent chez Lut sous forme d'hôtes. Le peuple apprit leur présence et se précipita vers la maison de Lut. Lut les exhorta : « Voici mes filles — elles sont plus pures pour vous. Craignez Allah et ne me déshonorez pas dans mes hôtes. N'y a-t-il pas parmi vous un homme raisonnable ? » (11:78) Le peuple refusa et insista.",
+    "conclusion": "Les anges révélèrent à Lut leur mission : la destruction du peuple. Ils lui ordonnèrent de partir avec sa famille avant l'aube, sans se retourner. La femme de Lut fit partie de ceux qui restèrent.",
+    "moral_lesson": "Cette histoire nous enseigne le devoir de protéger ses hôtes et que l'hospitalité est une valeur sacrée en Islam. Elle montre aussi que la désobéissance peut atteindre même la famille du prophète.",
+    "historical_location": "Sodome",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lut_guests_chapter_1",
+        "title": "L'arrivée des hôtes",
+        "content": "Le Coran rapporte : « Et quand Nos messagers vinrent à Lot, il fut affligé pour eux et ressentit une grande gêne à cause d'eux. Il dit : Voici un jour terrible. » (11:77) Les anges vinrent chez Lut sous forme de jeunes hommes. Lut les accueillit, ignorant qu'ils étaient des envoyés d'Allah. Il craignit pour eux car il connaissait les mœurs de son peuple."
+      },
+      {
+        "id": "lut_guests_chapter_2",
+        "title": "La réaction du peuple",
+        "content": "Le Coran dit : « Et son peuple vint à lui en se précipitant — et auparavant ils faisaient le mal. Il dit : Ô mon peuple ! Voici mes filles — elles sont plus pures pour vous. Craignez Allah et ne me déshonorez pas dans mes hôtes. N'y a-t-il pas parmi vous un homme raisonnable ? » (11:78) Lut tenta de protéger ses hôtes. Il proposa une alternative légitime. Mais le peuple refusa et insista sur son intention. Les anges dirent à Lut : « Nous sommes les messagers de ton Seigneur. Ils ne pourront pas t'atteindre. » (11:81)"
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 11:77-78",
+        "reference_text": "Sourate Hud, versets 77-78",
+        "content": "وَلَمَّا جَآءَتْ رُسُلُنَآ إِلَىٰ لُوطٍۢ سِىٓءَ بِهِمْ وَضَاقَ بِهِمْ ذَرْعًۭا وَقَالَ هَـٰذَا يَوْمٌ عَصِيبٌ ۝ وَجَآءَهُۥ قَوْمُهُۥ يُهْرَعُونَ إِلَيْهِ وَمِن قَبْلُ كَانُوا۟ يَعْمَلُونَ ٱلسَّيِّـَٔاتِ ۚ قَالَ يَـٰقَوْمِ هَـٰٓؤُلَآءِ بَنَاتِى هُنَّ أَطْهَرُ لَكُمْ",
+        "translation": "Et quand Nos messagers vinrent à Lot, il fut affligé pour eux. Et son peuple vint à lui en se précipitant. Il dit : Ô mon peuple ! Voici mes filles — elles sont plus pures pour vous.",
+        "relevance": "Ces versets décrivent l'arrivée des anges et la réaction de Lut."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 11:81",
+        "reference_text": "Sourate Hud, verset 81",
+        "content": "قَالُوا۟ يَـٰلُوطُ إِنَّا رُسُلُ رَبِّكَ لَن يَصِلُوٓا۟ إِلَيْكَ",
+        "translation": "Ils dirent : Ô Lot ! Nous sommes les messagers de ton Seigneur. Ils ne pourront pas t'atteindre.",
+        "relevance": "Ce verset révèle l'identité des hôtes et la protection divine."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Dayf",
+        "arabic_term": "ضيف",
+        "definition": "Hôte, invité. Lut chercha à protéger ses hôtes selon la tradition de l'hospitalité.",
+        "pronunciation": "dayf"
+      },
+      {
+        "id": 2,
+        "term": "Rasul",
+        "arabic_term": "رسل",
+        "definition": "Messagers. Les anges étaient les messagers d'Allah envoyés à Lut.",
+        "pronunciation": "rou-soul"
+      }
+    ]
+  },
+  "the_destruction": {
+    "title": "La destruction du peuple",
+    "title_arabic": "هلاك قوم لوط",
+    "introduction": "Quand le peuple persista dans sa débauche et rejeta tous les avertissements, le châtiment d'Allah s'abattit sur eux. Le Coran dit : « Et Nous renversâmes la cité et fîmes pleuvoir sur eux des pierres de terre cuite. » (15:74) Le peuple fut détruit. Lut et ceux qui le suivirent furent sauvés.",
+    "conclusion": "Le châtiment s'abattit à l'aube. La cité fut renversée. Lut et sa famille — sauf sa femme qui désobéit — partirent en sécurité. Cette histoire reste un avertissement pour les peuples qui persistent dans le mal.",
+    "moral_lesson": "Cette histoire nous enseigne que le châtiment d'Allah atteint ceux qui persistent dans le mal après avoir reçu les avertissements. La désobéissance mène à la perdition.",
+    "historical_location": "Sodome (al-Mu'tafikat)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "the_destruction_chapter_1",
+        "title": "L'ordre de partir",
+        "content": "Le Coran rapporte : « Ils dirent : Ô Lot ! Nous sommes les messagers de ton Seigneur. Ils ne pourront pas t'atteindre. Pars avec ta famille au milieu de la nuit, et que nul parmi vous ne se retourne — sauf ta femme. Ce qui les frappera la frappera. Leur rendez-vous est l'aube. L'aube n'est-elle pas proche ? » (11:81) Lut reçut l'ordre de quitter la cité avec sa famille avant l'aube. Il ne devait pas se retourner. Sa femme, qui avait trahi en informant le peuple des hôtes, fit partie de ceux qui restèrent."
+      },
+      {
+        "id": "lut_destruction_chapter_2",
+        "title": "Le châtiment",
+        "content": "Le Coran décrit le châtiment : « Et Nous renversâmes la cité et fîmes pleuvoir sur eux des pierres de terre cuite, les unes sur les autres, marquées auprès de ton Seigneur. Et elles ne sont pas loin des injustes. » (11:82-83) Et : « Le peuple de Lot rejeta les avertissements. Nous envoyâmes contre eux un ouragan. » (54:33-34) La cité fut détruite. Le peuple périt. Lut et les siens qui l'avaient suivi furent sauvés. Le Coran conclut : « Il ne reste d'eux que des ruines. » (37:138)"
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 11:81-83",
+        "reference_text": "Sourate Hud, versets 81-83",
+        "content": "قَالُوا۟ يَـٰلُوطُ إِنَّا رُسُلُ رَبِّكَ لَن يَصِلُوٓا۟ إِلَيْكَ ۖ فَأَسْرِ بِأَهْلِكَ بِقِطْعٍۢ مِّنَ ٱلَّيْلِ وَلَا يَلْتَفِتْ مِنكُمْ أَحَدٌ إِلَّا ٱمْرَأَتَكَ ۖ إِنَّهُۥ مُصِيبُهَا مَا أَصَابَهُمْ ۚ إِنَّ مَوْعِدَهُمُ ٱلصُّبْحُ ۚ أَلَيْسَ ٱلصُّبْحُ بِقَرِيبٍۢ ۝ فَلَمَّا جَآءَ أَمْرُنَا جَعَلْنَا عَـٰلِيَهَا سَافِلَهَا وَأَمْطَرْنَا عَلَيْهَا حِجَارَةًۭ مِّن سِجِّيلٍۢ مَّنضُودٍۢ",
+        "translation": "Ils dirent : Ô Lot ! Pars avec ta famille au milieu de la nuit... Et Nous renversâmes la cité et fîmes pleuvoir sur eux des pierres de terre cuite.",
+        "relevance": "Ces versets décrivent l'ordre de partir et le châtiment."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 54:33-34",
+        "reference_text": "Sourate Al-Qamar, versets 33-34",
+        "content": "كَذَّبَتْ قَوْمُ لُوطٍۭ بِٱلنُّذُرِ ۝ إِنَّآ أَرْسَلْنَا عَلَيْهِمْ حَاصِبًا",
+        "translation": "Le peuple de Lot rejeta les avertissements. Nous envoyâmes contre eux un ouragan.",
+        "relevance": "Ces versets décrivent le rejet et le châtiment."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Sijjil",
+        "arabic_term": "سجيل",
+        "definition": "Terre cuite, argile durcie. Les pierres du châtiment étaient de sijjil.",
+        "pronunciation": "sij-jil"
+      },
+      {
+        "id": 2,
+        "term": "Al-Mu'tafikat",
+        "arabic_term": "المؤتفكات",
+        "definition": "Les cités renversées. Sodome et les cités du peuple de Lut.",
+        "pronunciation": "al-mou-ta-fi-kat"
+      }
+    ]
+  },
+  "lessons_from_lut": {
+    "title": "Les leçons de l'histoire de Lut",
+    "title_arabic": "دروس من قصة لوط",
+    "introduction": "L'histoire de Lut (عليه السلام) contient des leçons intemporelles. Le Coran la cite comme avertissement : « Et Lot était certes du nombre des messagers. » (37:133) Elle enseigne que chaque peuple reçoit des messagers, que le rejet des avertissements mène au châtiment, et que l'hospitalité est une valeur sacrée.",
+    "conclusion": "Lut accomplit sa mission. Son peuple fut détruit pour avoir persisté dans le mal. L'histoire de Lut reste un avertissement pour l'humanité : craindre Allah, écouter les messagers, et ne pas persister dans la désobéissance.",
+    "moral_lesson": "Cette histoire nous enseigne à écouter les avertissements, à protéger nos hôtes, et à ne jamais persister dans les actes que Allah a interdits.",
+    "historical_location": "Région de Sodome",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lessons_from_lut_chapter_1",
+        "title": "Un avertissement pour les peuples",
+        "content": "Le Coran cite l'histoire de Lut parmi les exemples des peuples détruits : « Le peuple de Lot rejeta les avertissements. » (54:33) Chaque peuple reçoit des messagers. Ceux qui croient et se repentent sont sauvés. Ceux qui persistent dans le mal subissent le châtiment. Lut appela son peuple avec sincérité ; il ne demandait aucun salaire. Son peuple choisit le rejet. Le résultat fut la destruction."
+      },
+      {
+        "id": "lessons_from_lut_chapter_2",
+        "title": "L'hospitalité et la protection",
+        "content": "Lut chercha à protéger ses hôtes malgré la menace de son peuple. Il dit : « Craignez Allah et ne me déshonorez pas dans mes hôtes. » (11:78) L'hospitalité (ضيافة) est une valeur fondamentale en Islam. Le Prophète Muhammad (ﷺ) a dit que celui qui croit en Allah et au Jour Dernier doit honorer son invité. L'histoire de Lut rappelle que protéger l'invité est un devoir sacré. En revanche, la femme de Lut trahit en informant le peuple — elle fit partie de ceux qui périrent."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 37:133-138",
+        "reference_text": "Sourate As-Saffat, versets 133-138",
+        "content": "وَإِنَّ لُوطًا لَّمِنَ ٱلْمُرْسَلِينَ ۝ إِذْ نَجَّيْنَـٰهُ وَأَهْلَهُۥٓ أَجْمَعِينَ ۝ إِلَّا عَجُوزًا فِى ٱلْغَـٰبِرِينَ ۝ ثُمَّ دَمَّرْنَا ٱلْءَاخَرِينَ",
+        "translation": "Et Lot était certes du nombre des messagers. Quand Nous le sauvâmes, lui et sa famille tout entière, sauf une vieille qui fut parmi les retardataires. Puis Nous détruisîmes les autres.",
+        "relevance": "Ces versets résument le salut de Lut et la destruction de son peuple."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 29:34",
+        "reference_text": "Sourate Al-Ankabut, verset 34",
+        "content": "إِنَّا مُنزِلُونَ عَلَىٰٓ أَهْلِ هَـٰذِهِ ٱلْقَرْيَةِ رِجْزًۭا مِّنَ ٱلسَّمَآءِ بِمَا كَانُوا۟ يَفْسُقُونَ",
+        "translation": "Nous allons faire descendre sur les habitants de cette cité un châtiment du ciel, pour ce qu'ils ont perpétré.",
+        "relevance": "Ce verset explique la cause du châtiment."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Diyafa",
+        "arabic_term": "ضيافة",
+        "definition": "Hospitalité. Lut chercha à protéger ses hôtes selon cette valeur sacrée.",
+        "pronunciation": "di-ya-fa"
+      },
+      {
+        "id": 2,
+        "term": "Rijz",
+        "arabic_term": "رجز",
+        "definition": "Châtiment, fléau. Le châtiment descendit sur le peuple de Lut.",
+        "pronunciation": "rijz"
+      }
+    ]
+  }
+}

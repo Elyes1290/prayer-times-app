@@ -1,0 +1,287 @@
+{
+  "ayyub_blessings": {
+    "title": "Eyüp'ün nimetleri",
+    "title_arabic": "نعم أيوب",
+    "introduction": "Eyüp (أيوب عليه السلام), Eyyub, örnek sabrıyla tanınan bir peygamberdir. Kur'an şöyle buyurur: \"Ve Eyüp, Rabbine dua ettiğinde: Bana zarar dokundu, Sen merhametlilerin en merhametlisisin.\" (21:83) Eyüp zengin, takvalı ve şükreden bir adamdı. Malı, büyük bir ailesi ve mükemmel sağlığı vardı. Gece gündüz Allah'a ibadet ederdi.",
+    "conclusion": "Eyüp bollukla mübarek kılındı. Serveti, ailesi ve sağlığı Allah'ın hediyeleriydi. Onları O'nu yüceltmek ve muhtaçlara yardım etmek için kullandı. Şükrü sarsılmazdı.",
+    "moral_lesson": "Bu hikaye bize nimetlerin Allah'tan bir hediye olduğunu öğretir. Mümin onlara şükretmeli ve Yaratıcısına itaat etmek için kullanmalıdır.",
+    "historical_location": "Şam bölgesi",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "ayyub_blessings_chapter_1",
+        "title": "Servet ve takva",
+        "content": "Kur'an şöyle bildirir: \"Onu sabırlı bulduk. Ne güzel kul! Sürekli Allah'a yönelirdi.\" (38:44) Eyüp sürüler, toprak ve hizmetçilere sahipti. Ama gerçek serveti imanıydı. Dünya malına yapışmadı. Onları adaletle yönetmesi gereken Allah'tan bir emanet saydı."
+      },
+      {
+        "id": "ayyub_blessings_chapter_2",
+        "title": "Mübarek aile",
+        "content": "Eyüp'ün sadık bir eşi ve çocukları vardı. Onları Allah'a ibadette yetiştirdi. Evi huzur ve bereket yeriydi. Servetini fakirlerle paylaştı. Cömertliği herkese malumdu. Eyüp Rabbine şükrü somutlaştırdı."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 38:44",
+        "reference_text": "Sad Suresi, 44. ayet",
+        "content": "إِنَّا وَجَدْنَـٰهُ صَابِرًۭا ۚ نِعْمَ ٱلْعَبْدُ ۖ إِنَّهُۥٓ أَوَّابٌ",
+        "translation": "Onu sabırlı bulduk. Ne güzel kul! Sürekli Allah'a yönelirdi.",
+        "relevance": "Bu ayet Eyüp'ün sabrını ve takvasını övüyor."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 6:84",
+        "reference_text": "En'am Suresi, 84. ayet",
+        "content": "وَمِن ذُرِّيَّتِهِۦ دَاوُۥدَ وَسُلَيْمَـٰنَ وَأَيُّوبَ وَيُوسُفَ",
+        "translation": "Ve onun soyundan: Davud, Süleyman, Eyüp ve Yusuf.",
+        "relevance": "Bu ayet Eyüp'ü peygamberler arasına yerleştirir."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Ayyub",
+        "arabic_term": "أيوب",
+        "definition": "Arapça'da Eyyub. Örnek sabrıyla tanınan peygamber.",
+        "pronunciation": "ay-youb"
+      },
+      {
+        "id": 2,
+        "term": "Ni'ma",
+        "arabic_term": "نعمة",
+        "definition": "Nimet, lütuf. Eyüp ni'am ile mübarek kılındı.",
+        "pronunciation": "ni-ma"
+      }
+    ]
+  },
+  "ayyub_trial": {
+    "title": "Eyüp'ün imtihanı",
+    "title_arabic": "بلاء أيوب",
+    "introduction": "Allah Eyüp'ü imtihan etti. Kur'an şöyle buyurur: \"Ve Eyüp'ü hatırla, Rabbine dua ettiğinde: Bana zarar dokundu, Sen merhametlilerin en merhametlisisin.\" (21:83) Eyüp her şeyi kaybetti: malını, çocuklarını, sağlığını. Yıllarca acı çekmesine neden olan korkunç bir hastalığa yakalandı. Bedeni yaralarla kaplandı.",
+    "conclusion": "Buna rağmen Eyüp asla Allah'a lanet etmedi. Umutsuzluğa düşmedi. Rabbine dua etmeye devam etti. Eşi imtihan boyunca onu destekleyerek yanında kaldı.",
+    "moral_lesson": "Bu hikaye bize imtihanın en iyi kullara dokunabileceğini öğretir. İman zorluklardan korumaz, ama onları aşmak için güç verir.",
+    "historical_location": "Şam bölgesi",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "ayyub_trial_chapter_1",
+        "title": "Malın kaybı",
+        "content": "Kur'an şöyle bildirir: \"Ve Eyüp, Rabbine dua ettiğinde.\" (21:83) İmtihanlar Eyüp'e indi. Sürüleri telef oldu. Toprakları yok edildi. Hizmetçileri onu terk etti. Çocukları öldü. Kısa sürede Eyüp sahip olduğu her şeyi kaybetti. Eşiyle yalnız kaldı."
+      },
+      {
+        "id": "ayyub_trial_chapter_2",
+        "title": "Hastalık",
+        "content": "Kur'an şöyle buyurur: \"Ayağınla vur: işte yıkanacak ve içilecek serin su.\" (38:42) Eyüp ciddi bir hastalığa yakalandı. Bedeni yaralarla kaplandı. İnsanlar ondan uzak durdu. Sadece eşi sadık kaldı. Ona baktı ve destekledi. Eyüp acı çekti ama Allah'a şikayet etmedi. Sadece O'nun merhametini diledi."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 21:83",
+        "reference_text": "Enbiya Suresi, 83. ayet",
+        "content": "وَأَيُّوبَ إِذْ نَادَىٰ رَبَّهُۥٓ أَنِّى مَسَّنِىَ ٱلضُّرُّ وَأَنتَ أَرْحَمُ ٱلرَّٰحِمِينَ",
+        "translation": "Ve Eyüp, Rabbine dua ettiğinde: Bana zarar dokundu, Sen merhametlilerin en merhametlisisin.",
+        "relevance": "Bu ayet Eyüp'ün imtihandaki duasını anlatır."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 38:41",
+        "reference_text": "Sad Suresi, 41. ayet",
+        "content": "وَٱذْكُرْ عَبْدَنَآ أَيُّوبَ إِذْ نَادَىٰ رَبَّهُۥٓ أَنِّى مَسَّنِىَ ٱلشَّيْطَـٰنُ بِنُصْبٍۢ وَعَذَابٍ",
+        "translation": "Ve kulumuz Eyüp'ü hatırla, Rabbine dua ettiğinde: Şeytan bana yorgunluk ve azap dokundurdu.",
+        "relevance": "Bu ayet Eyüp'ün imtihanını tasvir eder."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Bala",
+        "arabic_term": "بلاء",
+        "definition": "İmtihan, bela. Eyüp büyük bala'ya katlandı.",
+        "pronunciation": "ba-la"
+      },
+      {
+        "id": 2,
+        "term": "Dhurr",
+        "arabic_term": "ضر",
+        "definition": "Zarar, kötülük. Eyüp dedi: \"Dhurr bana dokundu.\"",
+        "pronunciation": "dhourr"
+      }
+    ]
+  },
+  "ayyub_patience": {
+    "title": "Eyüp'ün sabrı",
+    "title_arabic": "صبر أيوب",
+    "introduction": "Eyüp sabrın modelidir. Kur'an şöyle buyurur: \"Onu sabırlı bulduk. Ne güzel kul! Sürekli Allah'a yönelirdi.\" (38:44) Her şeyi kaybetmesine rağmen Eyüp Allah'ı yüceltmeyi bırakmadı. Rabbinin hükmünü kabul etti. Sabrı yıllarca sürdü.",
+    "conclusion": "Eyüp'ün sabrı mükafatlandırıldı. Allah onu azim sahibi peygamberler arasında anar. İsmi tüm geleneklerde sabırla eşanlamlı hale geldi.",
+    "moral_lesson": "Bu hikaye bize sabrın (sabr) en yüce erdem olduğunu öğretir. Mümin imtihanları kabul etmeli ve Allah'a güvenmelidir.",
+    "historical_location": "Şam bölgesi",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "ayyub_patience_chapter_1",
+        "title": "Dayanıklılık",
+        "content": "Kur'an şöyle bildirir: \"O halde azim sahibi elçiler gibi sabret.\" (46:35) Eyüp her şeye katlandı: yoksulluk, yalnızlık, hastalık. Asla isyan etmedi. Neden diye sormadı. Allah'ın Hakim olduğunu ve hükmünün adil olduğunu biliyordu. Duaya ve O'nun merhametine umut etmeye devam etti."
+      },
+      {
+        "id": "ayyub_patience_chapter_2",
+        "title": "Dua",
+        "content": "Kur'an şöyle buyurur: \"Ve Eyüp, Rabbine dua ettiğinde: Bana zarar dokundu, Sen merhametlilerin en merhametlisisin. Böylece ona icabet ettik ve üzerindeki zararı kaldırdık.\" (21:83-84) Eyüp şikayet etmek için dua etmedi. Allah'a merhametini hatırlatmak için dua etti. Onu rahatlatacak O'ndan başka kimse olmadığını biliyordu. Bu tam güven gerçek mümini karakterize eder."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 38:44",
+        "reference_text": "Sad Suresi, 44. ayet",
+        "content": "إِنَّا وَجَدْنَـٰهُ صَابِرًۭا ۚ نِعْمَ ٱلْعَبْدُ ۖ إِنَّهُۥٓ أَوَّابٌ",
+        "translation": "Onu sabırlı bulduk. Ne güzel kul! Sürekli Allah'a yönelirdi.",
+        "relevance": "Bu ayet Eyüp'ün sabrını övüyor."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 21:84",
+        "reference_text": "Enbiya Suresi, 84. ayet",
+        "content": "فَٱسْتَجَبْنَا لَهُۥ فَكَشَفْنَا مَا بِهِۦ مِن ضُرٍّ",
+        "translation": "Böylece ona icabet ettik ve üzerindeki zararı kaldırdık.",
+        "relevance": "Bu ayet Allah'ın icabetini anlatır."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Sabr",
+        "arabic_term": "صبر",
+        "definition": "Sabır. Eyüp sabrın modelidir.",
+        "pronunciation": "sabr"
+      },
+      {
+        "id": 2,
+        "term": "Awab",
+        "arabic_term": "أواب",
+        "definition": "Allah'a yönelen. Eyüp awab'dı, her zaman Rabbine yönelmişti.",
+        "pronunciation": "a-wab"
+      }
+    ]
+  },
+  "ayyub_healing": {
+    "title": "Eyüp'ün şifası",
+    "title_arabic": "شفاء أيوب",
+    "introduction": "Allah Eyüp'ün duasına icabet etti. Kur'an şöyle buyurur: \"Böylece ona icabet ettik ve üzerindeki zararı kaldırdık. Ve ona ailesini ve onlarla birlikte benzerlerini Bizden bir rahmet olarak verdik.\" (21:84) Allah Eyüp'e ayağıyla yere vurmasını emretti. Serin su pınarı fışkırdı. Yıkandı ve içti. Hastalığı kayboldu.",
+    "conclusion": "Eyüp sağlığını geri kazandı. Allah ailesini ve malını iade etti. Sabrı mükafatlandırıldı. Rabbini yüceltti ve O'na şükretti.",
+    "moral_lesson": "Bu hikaye bize Allah'ın sabrı mükafatlandırdığını öğretir. İmtihanın bir sonu vardır. Şifa ve rahatlama En Merhametli'den gelir.",
+    "historical_location": "Şam bölgesi",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "ayyub_healing_chapter_1",
+        "title": "Mucizevi pınar",
+        "content": "Kur'an şöyle bildirir: \"Ayağınla vur: işte yıkanacak ve içilecek serin su.\" (38:42) Allah Eyüp'e yere vurmasını emretti. Bir pınar fışkırdı. Eyüp bu suyla yıkandı. Yaralar kayboldu. Cildi tekrar sağlıklı oldu. Şifa Allah'tan bir mucize, sabrın mükafatıydı."
+      },
+      {
+        "id": "ayyub_healing_chapter_2",
+        "title": "İade",
+        "content": "Kur'an şöyle buyurur: \"Ve ona ailesini ve onlarla birlikte benzerlerini Bizden bir rahmet ve ibadet edenlere bir hatırlatma olarak verdik.\" (21:84) Eyüp her şeyi geri kazandı: sağlığı, yeni ailesi, malı. Allah nimetlerini ikiye katladı. Eyüp imtihanı unutmadı. Hayatının sonuna kadar şükreden kaldı. Hikayesi tüm müminler için bir hatırlatmadır."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 38:42",
+        "reference_text": "Sad Suresi, 42. ayet",
+        "content": "ٱرْكُضْ بِرِجْلِكَ ۖ هَـٰذَا مُغْتَسَلٌۢ بَارِدٌۭ وَشَرَابٌۭ",
+        "translation": "Ayağınla vur: işte yıkanacak ve içilecek serin su.",
+        "relevance": "Bu ayet şifa mucizesini tasvir eder."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 21:84",
+        "reference_text": "Enbiya Suresi, 84. ayet",
+        "content": "فَٱسْتَجَبْنَا لَهُۥ فَكَشَفْنَا مَا بِهِۦ مِن ضُرٍّ ۖ وَءَاتَيْنَـٰهُ أَهْلَهُۥ وَمِثْلَهُم مَّعَهُمْ رَحْمَةًۭ مِّنَّا",
+        "translation": "Ona icabet ettik ve zararı kaldırdık. Ona ailesini ve benzerlerini verdik.",
+        "relevance": "Bu ayet Eyüp'ün tam iadesini anlatır."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Shifa",
+        "arabic_term": "شفاء",
+        "definition": "Şifa. Eyüp Allah'tan shifa aldı.",
+        "pronunciation": "chi-fa"
+      },
+      {
+        "id": 2,
+        "term": "Rahma",
+        "arabic_term": "رحمة",
+        "definition": "Merhamet. Eyüp'ün şifası Allah'tan bir rahma'ydı.",
+        "pronunciation": "rah-ma"
+      }
+    ]
+  },
+  "lessons_from_ayyub": {
+    "title": "Eyüp hikayesinden dersler",
+    "title_arabic": "دروس من قصة أيوب",
+    "introduction": "Eyüp sabır peygamberidir. Kur'an onu birkaç kez anar. Hikayesi en iyilere imtihanın dokunabileceğini ve sabrın kurtuluşa götürdüğünü öğretir. Peygamber Muhammed dedi: \"Eyüp'ünkinden daha büyük imtihan ne!\"",
+    "conclusion": "Eyüp her şeyi kaybetti sonra her şeyi geri kazandı. Sabrı mükafatlandırıldı. İsmi bir sembol oldu. Sabırdan bahsettiğimizde deriz: \"Eyüp sabrı.\"",
+    "moral_lesson": "Bu hikaye bize sabrın (sabr) imtihana karşı bir silah olduğunu öğretir. Mümin Allah'a güvenmeli, O'nun merhametini dilemeli ve hükmünü kabul etmelidir.",
+    "historical_location": "Şam bölgesi",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lessons_from_ayyub_chapter_1",
+        "title": "İmtihanda sabır",
+        "content": "Kur'an şöyle buyurur: \"Biz elçileri sadece müjdeleyici ve uyarıcı olarak göndeririz.\" (6:48) Eyüp bize imtihanın hayatın parçası olduğunu öğretir. Mümin umutsuzluğa düşmemelidir. Sabretmeli ve dua etmelidir. Allah En Merhametli'dir."
+      },
+      {
+        "id": "lessons_from_ayyub_chapter_2",
+        "title": "Sıkıntıda dua",
+        "content": "Eyüp'ün duası — \"Bana zarar dokundu, Sen merhametlilerin en merhametlisisin\" — bir modeldir. Şikayet etmeden sıkıntıyı ifade eder. Allah'a merhametini hatırlatır. Umudu sadece O'na koyar. Her Müslüman imtihanda bunu kullanabilir. Peygamber Muhammed bu duayı ümmetine öğretti."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 21:83-84",
+        "reference_text": "Enbiya Suresi, 83-84. ayetler",
+        "content": "وَأَيُّوبَ إِذْ نَادَىٰ رَبَّهُۥٓ أَنِّى مَسَّنِىَ ٱلضُّرُّ وَأَنتَ أَرْحَمُ ٱلرَّٰحِمِينَ ۝ فَٱسْتَجَبْنَا لَهُۥ فَكَشَفْنَا مَا بِهِۦ مِن ضُرٍّ",
+        "translation": "Ve Eyüp Rabbine dua etti. Ona icabet ettik ve zararı kaldırdık.",
+        "relevance": "Bu pasaj Eyüp'ün hikayesini özetler."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 38:44",
+        "reference_text": "Sad Suresi, 44. ayet",
+        "content": "إِنَّا وَجَدْنَـٰهُ صَابِرًۭا ۚ نِعْمَ ٱلْعَبْدُ ۖ إِنَّهُۥٓ أَوَّابٌ",
+        "translation": "Onu sabırlı bulduk. Ne güzel kul!",
+        "relevance": "Bu ayet Eyüp'ü model olarak övüyor."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Sabr",
+        "arabic_term": "صبر",
+        "definition": "Sabır. Eyüp mükemmel sabrı somutlaştırır.",
+        "pronunciation": "sabr"
+      },
+      {
+        "id": 2,
+        "term": "Du'a",
+        "arabic_term": "دعاء",
+        "definition": "Dua. Eyüp'ün duası güçlü bir du'a'dır.",
+        "pronunciation": "dou-a"
+      }
+    ]
+  }
+}

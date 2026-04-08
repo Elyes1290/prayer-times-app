@@ -1,0 +1,495 @@
+{
+  "nuh_prophecy": {
+    "title": "De zending van Noeh als profeet",
+    "title_arabic": "إرسال نوح عليه السلام",
+    "introduction": "Noeh (Nuh عليه السلام) is een van de grootste profeten die in de Koran worden genoemd. Allah zond hem naar zijn volk om hen op te roepen tot aanbidding van de Ene God en om hen te waarschuwen voor de komende straf. Zijn verhaal illustreert de voorbeeldige geduld van de profeet in het aangezicht van afwijzing en vijandigheid, en toont Allahs barmhartigheid jegens de gelovigen.",
+    "conclusion": "De zending van Noeh markeert het begin van een profetische missie die bijna duizend jaar duurde. Ondanks de moeilijkheden bleef Noeh trouw aan zijn boodschap en vestigde een model van volharding en toewijding voor alle profeten die hem volgden.",
+    "moral_lesson": "Dit verhaal leert ons dat de profetische missie een heilige verantwoordelijkheid is die door Allah is toevertrouwd. Het herinnert ons aan het belang om mensen duidelijk te waarschuwen en nooit te wanhopen aan de goddelijke barmhartigheid.",
+    "historical_location": "Mesopotamië (regio van het huidige Irak)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "nuh_prophecy_chapter_1",
+        "title": "Het goddelijke bevel",
+        "content": "Allah koos Noeh uit onder de nakomelingen van Adam om de eerste boodschapper te zijn die naar een gemeenschap werd gezonden. De Koran vermeldt: \"Wij zonden Noeh naar zijn volk: Waarschuw je volk voordat er een pijnlijke straf over hen komt.\" Noeh ontving de goddelijke openbaring die hem beval zijn volk op te roepen de aanbidding van afgoden op te geven en terug te keren tot Allah, de Enige die aanbidding waardig is. Zijn missie was duidelijk: waarschuwen vóór de straf, opdat iedereen die wilde zich kon bekeren en gered worden."
+      },
+      {
+        "id": "nuh_prophecy_chapter_2",
+        "title": "Het volk van Noeh",
+        "content": "Het volk van Noeh was in dwaling geraakt. Zij aanbaden afgoden genaamd Wadd, Suwa', Yaghuth, Ya'uq en Nasr, godheden die zij zelf hadden verzonnen. Zij hadden de boodschap van het monotheïsme vergeten die door Adam en zijn vrome nakomelingen was doorgegeven. Noeh, als door Allah gekozen profeet, had de verantwoordelijkheid hen terug te brengen naar de waarheid. Hij riep hen met wijsheid en helderheid en legde uit dat deze afgoden noch konden scheppen, noch schaden, noch baten, en dat alleen Allah aanbidding verdiende."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 71:1",
+        "reference_text": "Soera Noeh, vers 1",
+        "content": "إِنَّا أَرْسَلْنَا نُوحًا إِلَىٰ قَوْمِهِ أَنْ أَنذِرْ قَوْمَكَ مِن قَبْلِ أَن يَأْتِيَهُمْ عَذَابٌ أَلِيمٌ",
+        "translation": "Wij zonden Noeh naar zijn volk: Waarschuw je volk voordat er een pijnlijke straf over hen komt.",
+        "relevance": "Dit vers vestigt Noehs zending als profeet en de aard van zijn waarschuwingsmissie."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 11:25",
+        "reference_text": "Soera Hoed, vers 25",
+        "content": "وَلَقَدْ أَرْسَلْنَا نُوحًا إِلَىٰ قَوْمِهِ إِنِّي لَكُمْ نَذِيرٌ مُّبِينٌ",
+        "translation": "Wij zonden zeker Noeh naar zijn volk: Ik ben voor jullie een duidelijke waarschuwer.",
+        "relevance": "Dit vers bevestigt Noehs zending en zijn rol als duidelijke waarschuwer."
+      },
+      {
+        "id": 3,
+        "type": "quran",
+        "source": "Quran 71:23",
+        "reference_text": "Soera Noeh, vers 23",
+        "content": "وَقَالُوا لَا تَذَرُنَّ آلِهَتَكُمْ وَلَا تَذَرُنَّ وَدًّا وَلَا سُوَاعًا وَلَا يَغُوثَ وَيَعُوقَ وَنَسْرًا",
+        "translation": "En zij zeiden: Verlaat nooit jullie godheden. Verlaat niet Wadd, noch Suwa', noch Yaghuth, noch Ya'uq, noch Nasr.",
+        "relevance": "Dit vers onthult de namen van de afgoden die door Noehs volk werden aanbeden."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Nuh",
+        "arabic_term": "نوح",
+        "definition": "Noeh in het Arabisch. Profeet van Allah gezonden naar zijn volk om hen op te roepen tot monotheïsme. Hij predikte 950 jaar.",
+        "pronunciation": "nouh"
+      },
+      {
+        "id": 2,
+        "term": "Nadhir",
+        "arabic_term": "نذير",
+        "definition": "Waarschuwer. Verwijst naar de rol van de profeet die zijn volk waarschuwt voor de straf voordat deze plaatsvindt.",
+        "pronunciation": "na-dhir"
+      },
+      {
+        "id": 3,
+        "term": "Qawm",
+        "arabic_term": "قوم",
+        "definition": "Volk of gemeenschap. Het volk van Noeh tot wie hij als boodschapper werd gezonden.",
+        "pronunciation": "qawm"
+      }
+    ]
+  },
+  "nuh_call": {
+    "title": "Noehs oproep aan zijn volk",
+    "title_arabic": "دعوة نوح لقومه",
+    "introduction": "Noeh (عليه السلام) riep zijn volk met geduld en volharding. Hij nodigde hen dag en nacht uit: \"Aanbid Allah. Jullie hebben geen andere god dan Hem.\" Hij gebruikte verschillende methoden om zijn boodschap over te brengen: openbare prediking, privé-oproepen en duidelijke waarschuwingen. Ondanks zijn toewijding weigerde het merendeel van zijn volk hardnekkig.",
+    "conclusion": "Noehs oproep toont de totale toewijding van de profeet aan zijn missie. Hij liet geen enkele gelegenheid voorbijgaan om zijn volk te leiden, zelfs in het aangezicht van afwijzing en spot.",
+    "moral_lesson": "Dit verhaal leert ons het belang van da'wa (de oproep tot de Islam) met wijsheid en goede vermaning. Het herinnert ons eraan dat onze plicht is de boodschap over te brengen; de leiding blijft in Allahs handen.",
+    "historical_location": "Mesopotamië",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "nuh_call_chapter_1",
+        "title": "De uitnodiging tot monotheïsme",
+        "content": "Noeh zei tegen zijn volk: \"O mijn volk! Aanbid Allah. Jullie hebben geen andere god dan Hem. Ik vrees voor jullie de straf van een vreselijke dag.\" Hij legde hen uit dat de afgoden die zij aanbaden slechts namen waren die zij en hun voorouders hadden verzonnen, zonder dat Allah enig bewijs voor hen had geopenbaard. Hij nodigde hen uit om Allah om vergeving te vragen, want Hij is de Meest Vergevende en Meest Barmhartige. Noeh beloofde dat als zij zich bekeerden, Allah overvloedige regen over hen zou laten neerdalen en hen zou vermeerderen in rijkdom en kinderen."
+      },
+      {
+        "id": "nuh_call_chapter_2",
+        "title": "Noehs methoden",
+        "content": "De Koran beschrijft hoe Noeh zijn volk riep: \"Ik riep mijn volk dag en nacht. Maar mijn oproep deed hun vlucht alleen maar toenemen.\" Elke keer dat hij hen riep opdat Allah hen zou vergeven, stopten zij hun vingers in hun oren en wikkelden zich in hun kleding, volhardend in hun trots. Noeh liet zich niet ontmoedigen. Hij bleef hen openlijk en in het geheim oproepen en zei: \"Vraag vergeving aan jullie Heer, want Hij is de Meest Vergevende.\""
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 71:2-4",
+        "reference_text": "Soera Noeh, verzen 2-4",
+        "content": "قَالَ يَا قَوْمِ إِنِّي لَكُمْ نَذِيرٌ مُّبِينٌ أَنِ اعْبُدُوا اللَّهَ وَاتَّقُوهُ وَأَطِيعُونِ يَغْفِرْ لَكُم مِّن ذُنُوبِكُمْ وَيُؤَخِّرْكُمْ إِلَىٰ أَجَلٍ مُّسَمًّى",
+        "translation": "Hij zei: O mijn volk! Ik ben voor jullie een duidelijke waarschuwer. Aanbid Allah, vrees Hem en gehoorzaam mij. Hij zal jullie sommige van jullie zonden vergeven en jullie uitstel verlenen tot een vastgestelde termijn.",
+        "relevance": "Deze verzen bevatten Noehs centrale boodschap: aanbidding van Allah en de belofte van vergeving."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 71:5-7",
+        "reference_text": "Soera Noeh, verzen 5-7",
+        "content": "قَالَ رَبِّ إِنِّي دَعَوْتُ قَوْمِي لَيْلًا وَنَهَارًا فَلَمْ يَزِدْهُمْ دُعَائِي إِلَّا فِرَارًا وَإِنِّي كُلَّمَا دَعَوْتُهُمْ لِتَغْفِرَ لَهُمْ جَعَلُوا أَصَابِعَهُمْ فِي آذَانِهِمْ وَاسْتَغْشَوْا ثِيَابَهُمْ وَأَصَرُّوا وَاسْتَكْبَرُوا اسْتِكْبَارًا",
+        "translation": "Hij zei: Heer! Ik riep mijn volk dag en nacht. Maar mijn oproep deed hun vlucht alleen maar toenemen. En elke keer dat ik hen riep opdat U hen zou vergeven, stopten zij hun vingers in hun oren en wikkelden zich in hun kleding, volhardend in hun trots.",
+        "relevance": "Deze verzen beschrijven Noehs volharding en de hardnekkige reactie van zijn volk."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Da'wa",
+        "arabic_term": "دعوة",
+        "definition": "Oproep of uitnodiging. De uitnodiging tot de Islam en aanbidding van Allah. Noeh beoefende da'wa met standvastigheid.",
+        "pronunciation": "da-wa"
+      },
+      {
+        "id": 2,
+        "term": "Tawhid",
+        "arabic_term": "توحيد",
+        "definition": "Monotheïsme. De eenheid van Allah in aanbidding. Het was Noehs centrale boodschap.",
+        "pronunciation": "taw-hid"
+      },
+      {
+        "id": 3,
+        "term": "Istighfar",
+        "arabic_term": "استغفار",
+        "definition": "Vergeving vragen. Noeh nodigde zijn volk uit om Allah om vergeving te vragen.",
+        "pronunciation": "is-tigh-far"
+      }
+    ]
+  },
+  "rejection_and_mockery": {
+    "title": "Afwijzing en spot",
+    "title_arabic": "الرفض والسخرية",
+    "introduction": "De notabelen van Noehs volk wezen zijn boodschap met arrogantie af. Zij noemden hem leugenaar, beschouwden hem als gek en spoorden de mensen aan om \"degenen van nederige afkomst\" die geloofden niet te volgen. Hun trots verblindde hen en belette hen de waarheid te erkennen.",
+    "conclusion": "De afwijzing van Noeh door de notabelen illustreert hoe trots en gehechtheid aan voorouderlijke tradities mensen kunnen beletten de waarheid te aanvaarden, zelfs wanneer deze duidelijk wordt gepresenteerd.",
+    "moral_lesson": "Dit verhaal waarschuwt ons voor de gevaren van trots en minachting jegens gelovigen. Het leert ons dat de waarheid niet wordt bepaald door sociale status maar door wat Allah heeft geopenbaard.",
+    "historical_location": "Mesopotamië",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "rejection_and_mockery_chapter_1",
+        "title": "De beschuldiging van de notabelen",
+        "content": "De leiders van Noehs volk kwamen naar hem toe en zeiden: \"Wij zien in jou slechts een man zoals wij, en wij zien alleen degenen die jou volgen als de laagsten onder ons, op het eerste gezicht. Wij zien in jou geen superioriteit over ons. Integendeel, wij denken dat jullie leugenaars zijn.\" Zij weigerden te geloven dat een gewone man een profeet kon zijn en verachtten degenen die geloofden, hen beschouwend als mensen van lage afkomst. Noeh antwoordde hen met wijsheid: \"O mijn volk! Zien jullie? Als ik mij baseer op een duidelijk bewijs van mijn Heer en Hij heeft mij barmhartigheid van Hem geschonken, waarvoor jullie blind zijn, zullen wij jullie dan dwingen het te aanvaarden wanneer jullie het afschuwelijk vinden?\""
+      },
+      {
+        "id": "rejection_and_mockery_chapter_2",
+        "title": "Volharding in dwaling",
+        "content": "Ondanks Noehs bewijzen en waarschuwingen volhardde zijn volk in hun afwijzing. Zij zeiden: \"O Noeh! Je hebt met ons gedebatteerd en de debatten vermenigvuldigd. Breng ons dus wat je ons belooft, als je tot de waarachtigen behoort.\" Zij daagden Noeh uit en eisten de straf te zien waarvoor hij hen had gewaarschuwd, in de overtuiging dat deze nooit zou komen. Noeh antwoordde: \"Alleen Allah zal het jullie brengen als Hij wil, en jullie zullen er niet aan ontkomen.\" Hun arrogantie verblindde hen; zij begrepen niet dat de verleende uitstel een barmhartigheid was om hen de gelegenheid te geven zich te bekeren."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 11:27",
+        "reference_text": "Soera Hoed, vers 27",
+        "content": "فَقَالَ الْمَلَأُ الَّذِينَ كَفَرُوا مِن قَوْمِهِ مَا نَرَاكَ إِلَّا بَشَرًا مِّثْلَنَا وَمَا نَرَاكَ اتَّبَعَكَ إِلَّا الَّذِينَ هُمْ أَرَاذِلُنَا بَادِيَ الرَّأْيِ وَمَا نَرَىٰ لَكُمْ عَلَيْنَا مِن فَضْلٍ بَلْ نَظُنُّكُمْ كَاذِبِينَ",
+        "translation": "De notabelen van zijn volk die ongelovig waren zeiden: Wij zien in jou slechts een man zoals wij, en wij zien alleen degenen die jou volgen als de laagsten onder ons. Wij zien in jou geen superioriteit over ons. Integendeel, wij denken dat jullie leugenaars zijn.",
+        "relevance": "Dit vers beschrijft de arrogantie van de notabelen en hun minachting voor de gelovigen."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 11:32",
+        "reference_text": "Soera Hoed, vers 32",
+        "content": "قَالُوا يَا نُوحُ قَدْ جَادَلْتَنَا فَأَكْثَرْتَ جِدَالَنَا فَأْتِنَا بِمَا تَعِدُنَا إِن كُنتَ مِنَ الصَّادِقِينَ",
+        "translation": "Zij zeiden: O Noeh! Je hebt met ons gedebatteerd en de debatten vermenigvuldigd. Breng ons dus wat je ons belooft, als je tot de waarachtigen behoort.",
+        "relevance": "Dit vers toont de arrogante uitdaging van het volk jegens Noehs waarschuwingen."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Mala'",
+        "arabic_term": "ملأ",
+        "definition": "Notabelen of leiders. De leiders van Noehs volk die de oppositie tegen hem aanvoerden.",
+        "pronunciation": "ma-la"
+      },
+      {
+        "id": 2,
+        "term": "Kufr",
+        "arabic_term": "كفر",
+        "definition": "Ongeloof of afwijzing van de waarheid. De toestand van degenen die Noehs boodschap afwezen.",
+        "pronunciation": "koufr"
+      },
+      {
+        "id": 3,
+        "term": "Istikbar",
+        "arabic_term": "استكبار",
+        "definition": "Trots of arrogantie. De zonde die Noehs volk belette de waarheid te aanvaarden.",
+        "pronunciation": "is-tik-bar"
+      }
+    ]
+  },
+  "nuh_patience": {
+    "title": "Noehs geduld",
+    "title_arabic": "صبر نوح عليه السلام",
+    "introduction": "Noeh (عليه السلام) predikte negenhonderdvijftig jaar tot zijn volk, volgens de Koran. Ondanks deze uitzonderlijke periode geloofde slechts een klein aantal. Dit lange geduld illustreert de voorbeeldige volharding van de profeet en Allahs barmhartigheid in het verlenen van tijd aan mensen om zich te bekeren.",
+    "conclusion": "Noehs geduld van bijna duizend jaar blijft een model voor alle gelovigen. Het toont aan dat succes niet wordt gemeten door het aantal bekeerlingen, maar door trouw in het vervullen van de door Allah toevertrouwde missie.",
+    "moral_lesson": "Dit verhaal leert ons de deugd van geduld (sabr) in de oproep tot de Islam. Het herinnert ons eraan dat wij moeten volharden in onze missie zonder ontmoedigd te raken door oppositie.",
+    "historical_location": "Mesopotamië",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "nuh_patience_chapter_1",
+        "title": "Negenhonderdvijftig jaar",
+        "content": "De Koran informeert ons: \"Wij zonden Noeh naar zijn volk. Hij verbleef onder hen duizend jaar minus vijftig.\" Zo bracht Noeh negenhonderdvijftig jaar door met het oproepen van zijn volk tot de Islam. Gedurende al deze tijd werd hij nooit moe van het overbrengen van de boodschap. Hij riep hen overdag en 's nachts, in het openbaar en in het geheim. Ondanks deze buitengewone volharding weigerde de meerderheid. Slechts een kleine groep gelovigen, voornamelijk nederige mensen, reageerde op zijn oproep. Deze lange duur toont zowel Allahs oneindige geduld in het geven van tijd aan mensen om zich te bekeren, als de onwrikbare vastberadenheid van de profeet in het vervullen van zijn missie."
+      },
+      {
+        "id": "nuh_patience_chapter_2",
+        "title": "Noehs gebed",
+        "content": "Na eeuwen van oproepen zonder succes bij de meerderheid, wendde Noeh zich tot Allah: \"Heer! De mensen van mijn volk hebben mij niet gehoorzaamd en hebben degene gevolgd wiens rijkdom en kinderen slechts zijn verlies hebben vergroot. Zij hebben een immens plan beraamd. Zij hebben gezegd: Verlaat nooit jullie godheden. Verlaat niet Wadd, noch Suwa', noch Yaghuth, noch Ya'uq, noch Nasr. Zij hebben reeds velen misleid. Vermeerder de onrechtvaardigen niet behalve in dwaling.\" Noeh erkende dat zijn volk alle grenzen had overschreden en vroeg Allah om geen bewoner onder de ongelovigen op aarde te laten, want als Hij hen zou laten, zouden zij alleen Zijn dienaren misleiden en alleen zondaars en verstokte ongelovigen verwekken."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 29:14",
+        "reference_text": "Soera Al-Ankaboet, vers 14",
+        "content": "وَلَقَدْ أَرْسَلْنَا نُوحًا إِلَىٰ قَوْمِهِ فَلَبِثَ فِيهِمْ أَلْفَ سَنَةٍ إِلَّا خَمْسِينَ عَامًا",
+        "translation": "Wij zonden Noeh naar zijn volk. Hij verbleef onder hen duizend jaar minus vijftig.",
+        "relevance": "Dit vers vestigt de uitzonderlijke duur van Noehs missie: 950 jaar."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 71:26-28",
+        "reference_text": "Soera Noeh, verzen 26-28",
+        "content": "وَقَالَ نُوحٌ رَبِّ لَا تَذَرْ عَلَى الْأَرْضِ مِنَ الْكَافِرِينَ دَيَّارًا إِنَّكَ إِن تَذَرْهُمْ يُضِلُّوا عِبَادَكَ وَلَا يَلِدُوا إِلَّا فَاجِرًا كَفَّارًا",
+        "translation": "En Noeh zei: Heer! Laat op aarde geen bewoner onder de ongelovigen. Als U hen laat, zullen zij Uw dienaren misleiden en alleen zondaars en verstokte ongelovigen verwekken.",
+        "relevance": "Deze verzen bevatten Noehs gebed na eeuwen van afwijzing door zijn volk."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Sabr",
+        "arabic_term": "صبر",
+        "definition": "Geduld. De deugd die Noeh manifesteerde gedurende 950 jaar van oproep tot de Islam.",
+        "pronunciation": "sabr"
+      },
+      {
+        "id": 2,
+        "term": "Du'a",
+        "arabic_term": "دعاء",
+        "definition": "Smeekbede of gebed. Noeh riep Allah aan nadat zijn volk in ongeloof had volhard.",
+        "pronunciation": "dou-a"
+      }
+    ]
+  },
+  "building_the_ark": {
+    "title": "De bouw van de ark",
+    "title_arabic": "بناء السفينة",
+    "introduction": "Allah beval Noeh een ark te bouwen in afwachting van de zondvloed. Noeh gehoorzaamde en begon het schip te bouwen, terwijl hij de spot van zijn volk verdroeg dat niet in de komende straf geloofde. De ark werd gebouwd volgens nauwkeurige goddelijke instructies en werd het middel tot redding voor de gelovigen.",
+    "conclusion": "De bouw van de ark toont Noehs totale gehoorzaamheid aan Allahs bevelen, zelfs wanneer deze ongebruikelijk leken. Het illustreert ook hoe Allah de redding voorbereidt voor degenen die geloven.",
+    "moral_lesson": "Dit verhaal leert ons om Allahs bevelen zonder aarzeling te gehoorzamen, zelfs wanneer ze ons onbegrijpelijk lijken. Goddelijke wijsheid overstijgt ons beperkte begrip.",
+    "historical_location": "Mesopotamië",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "building_the_ark_chapter_1",
+        "title": "Het bevel om te bouwen",
+        "content": "Allah openbaarde aan Noeh: \"Bouw de ark onder Onze ogen en volgens Onze openbaring. En spreek Mij niet aan over de onrechtvaardigen: zij zullen verdrinken.\" Noeh begon onmiddellijk te werken. Hij bouwde de ark volgens de exacte specificaties die Allah hem had gegeven. De Koran geeft geen technische details van de constructie, maar benadrukt dat alles onder goddelijk toezicht en volgens de openbaring gebeurde. Terwijl Noeh bouwde, liepen de ongelovigen langs hem heen en spotten: \"O Noeh! Je hebt met ons gedebatteerd en de debatten vermenigvuldigd.\" Noeh waarschuwde hen: \"Als jullie ons bespotten, zullen wij jullie bespotten zoals jullie bespotten.\""
+      },
+      {
+        "id": "building_the_ark_chapter_2",
+        "title": "De inscheping",
+        "content": "Toen de ark voltooid was en de tijd van de straf naderde, beval Allah Noeh: \"Laad erin een paar van elke soort, evenals je familie - behalve degenen tegen wie het woord reeds is uitgesproken - en de gelovigen.\" Alleen degenen die geloofden scheepten in met Noeh. Onder zijn familie weigerden zijn vrouw en een van zijn zonen te geloven en behoorden niet tot de geredden. De Koran specificeert dat Noehs vrouw en zijn zoon tot de onrechtvaardigen behoorden. De ark ontving Noeh, de gelovigen en een paar van elke diersoort, zoals Allah had bevolen."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 11:37-38",
+        "reference_text": "Soera Hoed, verzen 37-38",
+        "content": "وَاصْنَعِ الْفُلْكَ بِأَعْيُنِنَا وَوَحْيِنَا وَلَا تُخَاطِبْنِي فِي الَّذِينَ ظَلَمُوا إِنَّهُم مُّغْرَقُونَ وَيَصْنَعُ الْفُلْكَ وَكُلَّمَا مَرَّ عَلَيْهِ مَلَأٌ مِّن قَوْمِهِ سَخِرُوا مِنْهُ",
+        "translation": "Bouw de ark onder Onze ogen en volgens Onze openbaring. En spreek Mij niet aan over de onrechtvaardigen: zij zullen verdrinken. En hij bouwde de ark. En elke keer dat notabelen van zijn volk langs hem heen liepen, spotten zij met hem.",
+        "relevance": "Deze verzen beschrijven het bevel om de ark te bouwen en de spot van het volk."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 11:40",
+        "reference_text": "Soera Hoed, vers 40",
+        "content": "حَتَّىٰ إِذَا جَاءَ أَمْرُنَا وَفَارَ التَّنُّورُ قُلْنَا احْمِلْ فِيهَا مِن كُلٍّ زَوْجَيْنِ اثْنَيْنِ وَأَهْلَكَ إِلَّا مَن سَبَقَ عَلَيْهِ الْقَوْلُ وَمَن آمَنَ",
+        "translation": "Toen Ons bevel kwam en de oven overstroomde, zeiden Wij: Laad erin een paar van elke soort, evenals je familie - behalve degenen tegen wie het woord reeds is uitgesproken - en de gelovigen.",
+        "relevance": "Dit vers beschrijft de inscheping in de ark op het moment van de zondvloed."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Fulk",
+        "arabic_term": "فلك",
+        "definition": "Ark of schip. Het vaartuig dat Noeh bouwde volgens Allahs bevel.",
+        "pronunciation": "foulk"
+      },
+      {
+        "id": 2,
+        "term": "Tannur",
+        "arabic_term": "تنور",
+        "definition": "Oven. Het teken genoemd in de Koran dat het begin van de zondvloed aangeeft - de oven stroomde over.",
+        "pronunciation": "tan-nour"
+      },
+      {
+        "id": 3,
+        "term": "Zawjayn",
+        "arabic_term": "زوجين",
+        "definition": "Een paar. Een mannetje en vrouwtje van elke soort werden in de ark geladen.",
+        "pronunciation": "zaw-jayn"
+      }
+    ]
+  },
+  "the_flood": {
+    "title": "De zondvloed",
+    "title_arabic": "الطوفان",
+    "introduction": "Allahs straf viel over Noehs volk. De wateren stroomden uit de aarde en de hemel en overspoelden alles. De ark dreef op de wateren en droeg de gelovigen en de dieren in veiligheid. De ongelovigen verdronken, zoals Noeh hen eeuwenlang had gewaarschuwd.",
+    "conclusion": "De zondvloed toont Allahs gerechtigheid: Hij redde de gelovigen en vernietigde de ongelovigen. Het is een les voor alle generaties over de gevolgen van het afwijzen van de waarheid.",
+    "moral_lesson": "Dit verhaal waarschuwt ons dat Allahs straf reëel is en hen treft die in ongeloof volharden. Het herinnert ons eraan om ons nooit veilig te voelen in ongehoorzaamheid aan Allah.",
+    "historical_location": "Mesopotamië",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "the_flood_chapter_1",
+        "title": "Het loslaten van de wateren",
+        "content": "Toen Allahs bevel kwam, openden zich de poorten van de hemel en de aarde deed haar bronnen stromen. De Koran beschrijft: \"Wij openden de poorten van de hemel voor stromend water, en Wij lieten de aarde in bronnen uitbarsten. De wateren ontmoetten elkaar volgens een reeds vastgesteld decreet.\" De zondvloed was totaal. De hele regio werd overspoeld. Zelfs de bergen konden geen toevlucht bieden. Noehs ark dreef op de wateren, beschermd door Allahs wil. Binnen waren Noeh en de gelovigen veilig, terwijl buiten de ongelovigen die de inscheping hadden geweigerd door de golven werden verzwolgen."
+      },
+      {
+        "id": "the_flood_chapter_2",
+        "title": "De redding van de gelovigen",
+        "content": "Allah zei tegen Noeh: \"Scheep in. In de naam van Allah, moge het varen en aanleggen! Jouw Heer is inderdaad de Meest Vergevende en Meest Barmhartige.\" De ark voer op de wateren en droeg haar inzittenden in veiligheid. Noeh en degenen die bij hem waren werden gered, terwijl de anderen verdronken. De Koran benadrukt: \"En er werd gezegd: O aarde! Slik je water in. En jij, hemel! Houd op! Het water daalde. Het bevel werd uitgevoerd. De ark kwam tot rust op de berg Judi. En er werd gezegd: Weg met de onrechtvaardigen!\""
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 54:11-14",
+        "reference_text": "Soera Al-Qamar, verzen 11-14",
+        "content": "فَفَتَحْنَا أَبْوَابَ السَّمَاءِ بِمَاءٍ مُّنْهَمِرٍ وَفَجَّرْنَا الْأَرْضَ عُيُونًا فَالْتَقَى الْمَاءُ عَلَىٰ أَمْرٍ قَدْ قُدِرَ وَحَمَلْنَاهُ عَلَىٰ ذَاتِ أَلْوَاحٍ وَدُسُرٍ",
+        "translation": "Wij openden de poorten van de hemel voor stromend water, en Wij lieten de aarde in bronnen uitbarsten. De wateren ontmoetten elkaar volgens een reeds vastgesteld decreet. En Wij droegen hem op een vaartuig van planken en spijkers.",
+        "relevance": "Deze verzen beschrijven het loslaten van de zondvloed en de bescherming van de ark."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 11:44",
+        "reference_text": "Soera Hoed, vers 44",
+        "content": "وَقِيلَ يَا أَرْضُ ابْلَعِي مَاءَكِ وَيَا سَمَاءُ أَقْلِعِي وَغِيضَ الْمَاءُ وَقُضِيَ الْأَمْرُ وَاسْتَوَتْ عَلَى الْجُودِيِّ وَقِيلَ بُعْدًا لِّلْقَوْمِ الظَّالِمِينَ",
+        "translation": "En er werd gezegd: O aarde! Slik je water in. En jij, hemel! Houd op! Het water daalde. Het bevel werd uitgevoerd. De ark kwam tot rust op de berg Judi. En er werd gezegd: Weg met de onrechtvaardigen!",
+        "relevance": "Dit vers beschrijft het einde van de zondvloed en de ark die tot rust kwam op de berg Judi."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Tufan",
+        "arabic_term": "طوفان",
+        "definition": "Zondvloed. De straf door water die Noehs volk vernietigde.",
+        "pronunciation": "tou-fan"
+      },
+      {
+        "id": 2,
+        "term": "Al-Judi",
+        "arabic_term": "الجودي",
+        "definition": "Berg Judi. De berg waar Noehs ark tot rust kwam na de zondvloed, traditioneel geïdentificeerd in Turkije.",
+        "pronunciation": "al-jou-di"
+      }
+    ]
+  },
+  "nuh_son_refused": {
+    "title": "Noehs zoon die weigerde",
+    "title_arabic": "ابن نوح الذي أبى",
+    "introduction": "Onder Noehs beproevingen was de weigering van zijn eigen zoon om in de ark te stappen. Deze zoon koos ervoor zich op een berg te verschuilen, in de overtuiging dat hij de zondvloed kon ontvluchten. Hij verdronk. Toen Noeh Allah voor zijn zoon aanriep, herinnerde Allah hem aan een diepe waarheid: deze zoon behoorde niet tot zijn familie in termen van geloof, want hij had een onrechtvaardige daad begaan.",
+    "conclusion": "Het verhaal van Noehs zoon leert dat bloedbanden niet voldoende zijn voor redding. Alleen geloof en gehoorzaamheid aan Allah tellen. Geestelijke banden overtreffen familiale banden.",
+    "moral_lesson": "Dit verhaal herinnert ons eraan dat wij niemand tegen zijn wil kunnen redden. Ieder is verantwoordelijk voor zijn keuzes. Het leert ons ook dat vroomheid en geloof de ware criteria van verwantschap zijn in Allahs ogen.",
+    "historical_location": "Tijdens de zondvloed",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "nuh_son_refused_chapter_1",
+        "title": "De weigering om in te schepen",
+        "content": "Noeh riep zijn zoon die op afstand was gebleven: \"O mijn zoon! Stap in met ons en blijf niet bij de ongelovigen.\" Zijn zoon antwoordde: \"Ik zal me verschuilen op een berg die me tegen het water zal beschermen.\" Noeh zei tegen hem: \"Vandaag is er geen beschermer tegen Allahs bevel, behalve degene aan wie Hij barmhartigheid toont.\" Een golf scheidde hen en de zoon behoorde tot de verdronkenen. Noehs zoon had geloofd dat zijn eigen kracht en een berg hem konden redden, vergetend dat alleen Allah kan beschermen. Hij weigerde de uitnodiging van zijn vader en koos het pad van het verderf."
+      },
+      {
+        "id": "nuh_son_refused_chapter_2",
+        "title": "Allahs antwoord",
+        "content": "Noeh riep zijn Heer aan en zei: \"Heer! Mijn zoon behoort tot mijn familie. Uw belofte is waarheid. U bent de rechtvaardigste der rechters.\" Allah antwoordde: \"O Noeh! Hij behoort niet tot jouw familie. Het was een daad niet in overeenstemming met rechtschapenheid. Vraag Mij niet over wat je niet weet. Ik vermaan je om niet tot de onwetenden te behoren.\" Noeh begreep en zei: \"Heer! Ik zoek toevlucht bij U tegen het U vragen over wat ik niet weet. En als U mij niet vergeeft en mij barmhartigheid toont, zal ik tot de verliezers behoren.\" Dit goddelijke antwoord leert dat de ware familie die van het geloof is. Noehs zoon had zich door zijn weigering te geloven en in de ark te stappen uitgesloten van de familie der gelovigen."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 11:42-43",
+        "reference_text": "Soera Hoed, verzen 42-43",
+        "content": "وَهِيَ تَجْرِي بِهِمْ فِي مَوْجٍ كَالْجِبَالِ وَنَادَىٰ نُوحٌ ابْنَهُ وَكَانَ فِي مَعْزِلٍ يَا بُنَيَّ ارْكَب مَّعَنَا وَلَا تَكُن مَّعَ الْكَافِرِينَ قَالَ سَآوِي إِلَىٰ جَبَلٍ يَعْصِمُنِي مِنَ الْمَاءِ",
+        "translation": "Het voer met hen in golven als bergen. Noeh riep zijn zoon die op afstand was gebleven: O mijn zoon! Stap in met ons en blijf niet bij de ongelovigen. Hij zei: Ik zal me verschuilen op een berg die me tegen het water zal beschermen.",
+        "relevance": "Deze verzen beschrijven Noehs oproep aan zijn zoon en diens weigering."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 11:45-46",
+        "reference_text": "Soera Hoed, verzen 45-46",
+        "content": "وَنَادَىٰ نُوحٌ رَبَّهُ فَقَالَ رَبِّ إِنَّ ابْنِي مِنْ أَهْلِي وَإِنَّ وَعْدَكَ الْحَقُّ وَأَنتَ أَحْكَمُ الْحَاكِمِينَ قَالَ يَا نُوحُ إِنَّهُ لَيْسَ مِنْ أَهْلِكَ إِنَّهُ عَمَلٌ غَيْرُ صَالِحٍ",
+        "translation": "Noeh riep zijn Heer aan en zei: Heer! Mijn zoon behoort tot mijn familie. Uw belofte is waarheid. U bent de rechtvaardigste der rechters. Allah zei: O Noeh! Hij behoort niet tot jouw familie. Het was een daad niet in overeenstemming met rechtschapenheid.",
+        "relevance": "Deze verzen bevatten de uitwisseling tussen Noeh en Allah, die vaststelt dat de ware familie die van het geloof is."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Ahl",
+        "arabic_term": "أهل",
+        "definition": "Familie of volk. Allah leerde Noeh dat zijn ware familie degenen zijn die geloven, niet die van bloed.",
+        "pronunciation": "ahl"
+      },
+      {
+        "id": 2,
+        "term": "Amal ghayr salih",
+        "arabic_term": "عمل غير صالح",
+        "definition": "Daad niet in overeenstemming met rechtschapenheid. De beschrijving die Allah gaf van het gedrag van Noehs zoon.",
+        "pronunciation": "a-mal ghayr sa-lih"
+      }
+    ]
+  },
+  "lessons_from_nuh": {
+    "title": "Lessen uit het verhaal van Noeh",
+    "title_arabic": "دروس من قصة نوح",
+    "introduction": "Het verhaal van Noeh (عليه السلام) bevat tijdloze lessen voor de hele mensheid. Het leert geduld, volharding in de oproep tot de Islam, de gevolgen van ongeloof en Allahs barmhartigheid jegens de gelovigen. De Koran citeert het als voorbeeld voor toekomstige generaties.",
+    "conclusion": "Noeh vervulde zijn missie met uitmuntendheid en werd gered met de gelovigen. Zijn verhaal blijft een herinnering voor de hele mensheid: reageren op de oproep van de profeten en geloven in Allah is het pad naar redding.",
+    "moral_lesson": "Dit verhaal leert ons om Allahs boodschappers te volgen, geduldig te zijn in tegenspoed en nooit te wanhopen aan de goddelijke barmhartigheid. Het waarschuwt ons voor de gevolgen van het hardnekkig afwijzen van de waarheid.",
+    "historical_location": "Van Mesopotamië tot de berg Judi",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lessons_from_nuh_chapter_1",
+        "title": "Een voorbeeld voor de mensheid",
+        "content": "De Koran presenteert het verhaal van Noeh als voorbeeld voor de volkeren: \"Dit zijn de verslagen die Wij je vertellen van het nieuws der boodschappers, om je hart te versterken. En in dit verslag is de waarheid tot je gekomen, evenals een vermaning en een herinnering voor de gelovigen.\" Het verhaal van Noeh toont ons dat de profeten allen oppositie ontmoetten, maar dat de uiteindelijke overwinning toebehoort aan hen die geloven. Het herinnert ons eraan dat de aan ongelovigen verleende uitstel geen teken is van Allahs zwakte, maar een gelegenheid voor hen om zich te bekeren. Wanneer de termijn komt, kan niemand deze uitstellen."
+      },
+      {
+        "id": "lessons_from_nuh_chapter_2",
+        "title": "De afstammingslijn van de profeten",
+        "content": "Noeh neemt een centrale plaats in in de profetische afstammingslijn. De Koran zegt: \"Voorwaar, Allah koos Adam, Noeh, de familie van Abraham en de familie van Imran boven alle werelden.\" Noeh was de eerste boodschapper die na Adam naar een gemeenschap werd gezonden. Zijn nakomelingen bevolkten de aarde na de zondvloed. Onder zijn nakomelingen zijn de profeten Ibrahim, Musa, Isa en Muhammad (vrede zij met hen allen). Het verhaal van Noeh vestigt het model dat alle profeten volgden: de oproep tot monotheïsme, geduld in het aangezicht van afwijzing en redding voor de gelovigen."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 11:120",
+        "reference_text": "Soera Hoed, vers 120",
+        "content": "وَكُلًّا نَّقُصُّ عَلَيْكَ مِنْ أَنبَاءِ الرُّسُلِ مَا نُثَبِّتُ بِهِ فُؤَادَكَ وَجَاءَكَ فِي هَٰذِهِ الْحَقُّ وَمَوْعِظَةٌ وَذِكْرَىٰ لِلْمُؤْمِنِينَ",
+        "translation": "En alles wat Wij je vertellen van de verslagen der boodschappers dient om je hart te versterken. En in dit verslag is de waarheid tot je gekomen, evenals een vermaning en een herinnering voor de gelovigen.",
+        "relevance": "Dit vers verklaart het doel van de verslagen der profeten: de harten versterken en vermanen."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 3:33",
+        "reference_text": "Soera Al 'Imran, vers 33",
+        "content": "إِنَّ اللَّهَ اصْطَفَىٰ آدَمَ وَنُوحًا وَآلَ إِبْرَاهِيمَ وَآلَ عِمْرَانَ عَلَى الْعَالَمِينَ",
+        "translation": "Voorwaar, Allah koos Adam, Noeh, de familie van Abraham en de familie van Imran boven alle werelden.",
+        "relevance": "Dit vers vestigt Noehs eminente plaats in de afstammingslijn van Allahs uitverkorenen."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Ibra",
+        "arabic_term": "عبرة",
+        "definition": "Voorbeeld of les. De verhalen van de profeten zijn voorbeelden voor de mensheid.",
+        "pronunciation": "ib-ra"
+      },
+      {
+        "id": 2,
+        "term": "Dhikra",
+        "arabic_term": "ذكرى",
+        "definition": "Herinnering. De verslagen van de profeten dienen als herinnering voor de gelovigen.",
+        "pronunciation": "dhik-ra"
+      }
+    ]
+  }
+}

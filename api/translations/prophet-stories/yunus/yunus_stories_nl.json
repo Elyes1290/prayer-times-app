@@ -1,0 +1,344 @@
+{
+  "yunus_call": {
+    "title": "Yunus' oproep aan zijn volk",
+    "title_arabic": "دعوة يونس لقومه",
+    "introduction": "Yunus (يونس عليه السلام), Jona, is een profeet gezonden naar het volk van Ninevé. De Koran zegt: \"En Yunus was zeker onder de boodschappers.\" (37:139) Hij riep zijn volk op om alleen Allah te aanbidden en afgoderij op te geven. Maar het volk weigerde en volhardde in ongeloof.",
+    "conclusion": "Yunus waarschuwde hen voor de bestraffing. Toen zij niet geloofden, vertrok hij boos voordat Allah hem toestemming gaf. Deze haast zou hem naar de beproeving van de walvis leiden.",
+    "moral_lesson": "Dit verhaal leert ons dat de profeet geduldig moet zijn en zijn volk niet mag verlaten zonder Allahs bevel. Geduld is een profetische deugd.",
+    "historical_location": "Ninevé (Irak)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "yunus_call_chapter_1",
+        "title": "Yunus' missie",
+        "content": "De Koran vertelt: \"En toen Yunus boos vertrok, dacht hij dat Wij hem niet zouden straffen.\" (21:87) Yunus werd gezonden naar het volk van Ninevé, een grote stad. Hij riep hen op tot monotheïsme. Hij waarschuwde hen voor bestraffing als zij volhardden. Maar zij weigerden. Yunus werd ongeduldig en verliet de stad zonder op Allahs bevel te wachten."
+      },
+      {
+        "id": "yunus_call_chapter_2",
+        "title": "De haastige vertrek",
+        "content": "De Koran zegt: \"En Dhu an-Nun (Yunus) toen hij boos vertrok en dacht dat Wij hem niet zouden beperken.\" (21:87) Yunus vertrok voordat zijn volk werd geoordeeld. Hij wachtte niet op Allahs toestemming. Deze haast was een vergissing. Een profeet mag zijn missie niet opgeven zonder het bevel van zijn Heer."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 37:139",
+        "reference_text": "Soera As-Saffat, vers 139",
+        "content": "وَإِنَّ يُونُسَ لَمِنَ ٱلْمُرْسَلِينَ",
+        "translation": "And Yunus was indeed among the messengers.",
+        "relevance": "Dit vers bevestigt Yunus als boodschapper."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 21:87",
+        "reference_text": "Soera Al-Anbiya, vers 87",
+        "content": "وَذَا ٱلنُّونِ إِذ ذَّهَبَ مُغَـٰضِبًۭا فَظَنَّ أَن لَّن نَّقْدِرَ عَلَيْهِ",
+        "translation": "And Yunus when he left in anger and thought that We would not constrain him.",
+        "relevance": "Dit vers beschrijft Yunus' vertrek."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Yunus",
+        "arabic_term": "يونس",
+        "definition": "Jona in het Arabisch. Profeet gezonden naar het volk van Ninevé.",
+        "pronunciation": "you-nous"
+      },
+      {
+        "id": 2,
+        "term": "Dhu an-Nun",
+        "arabic_term": "ذو النون",
+        "definition": "De van de vis. Bijnaam van Yunus in de Koran.",
+        "pronunciation": "dhou an-noun"
+      }
+    ]
+  },
+  "yunus_ship": {
+    "title": "Yunus op het schip",
+    "title_arabic": "يونس في السفينة",
+    "introduction": "Yunus ging aan boord van een schip om te vluchten. De Koran vertelt: \"En het schip droeg hem op de golven als een berg.\" (11:42) Er ontstond een storm. De passagiers trokken lootjes om te bepalen wie in zee geworpen moest worden. Het lot viel op Yunus.",
+    "conclusion": "Yunus werd in zee geworpen. Een walvis slokte hem op. Hij bevond zich in de duisternis van de buik van de vis. Het was het begin van zijn beproeving en zijn berouw.",
+    "moral_lesson": "Dit verhaal leert ons dat men niet aan Allahs decreet kan ontsnappen. Wat op een vlucht lijkt, kan leiden tot een beproeving die zuivert.",
+    "historical_location": "Op zee",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "yunus_ship_chapter_1",
+        "title": "De storm",
+        "content": "De Koran vertelt: \"En toen hij naar het geladen schip vluchtte, trok hij lootjes en was onder de verliezers.\" (37:140-141) Yunus ging aan boord van een schip. Een storm bedreigde het schip. De zeelieden geloofden dat een passagier verantwoordelijk was. Zij trokken lootjes. Het lot viel driemaal op Yunus. Hij begreep dat het een teken van Allah was."
+      },
+      {
+        "id": "yunus_ship_chapter_2",
+        "title": "In zee geworpen",
+        "content": "De Koran zegt: \"Toen slokte de vis hem op terwijl hij berispelijk was.\" (37:142) Yunus wierp zichzelf in zee om het schip niet te laten zinken. Een walvis slokte hem op. Hij bevond zich in duisternis, levend maar gevangen. Het was de straf voor het verlaten van zijn volk zonder toestemming."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 37:140-141",
+        "reference_text": "Soera As-Saffat, verzen 140-141",
+        "content": "إِذْ أَبَقَ إِلَى ٱلْفُلْكِ ٱلْمَشْحُونِ ۝ فَسَاهَمَ فَكَانَ مِنَ ٱلْمُدْحَضِينَ",
+        "translation": "When he fled to the laden ship, he drew lots and was among the losers.",
+        "relevance": "Dit vers beschrijft de vlucht en het lootjes trekken."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 37:142",
+        "reference_text": "Soera As-Saffat, vers 142",
+        "content": "فَٱلْتَقَمَهُ ٱلْحُوتُ وَهُوَ مُلِيمٌ",
+        "translation": "Then the fish swallowed him while he was blameworthy.",
+        "relevance": "Dit vers verhaalt de opslokking door de walvis."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Fulk",
+        "arabic_term": "فلك",
+        "definition": "Schip. Yunus ging aan boord van een fulk om te vluchten.",
+        "pronunciation": "foulk"
+      },
+      {
+        "id": 2,
+        "term": "Hut",
+        "arabic_term": "حوت",
+        "definition": "Walvis, vis. Het slokte Yunus op.",
+        "pronunciation": "hout"
+      }
+    ]
+  },
+  "yunus_whale": {
+    "title": "Yunus in de buik van de walvis",
+    "title_arabic": "يونس في بطن الحوت",
+    "introduction": "Yunus bevond zich in de duisternis van de buik van de walvis. De Koran zegt: \"En als hij niet onder degenen was geweest die Allah verheerlijken, zou hij in zijn buik zijn gebleven tot de Dag der Opstanding.\" (37:143-144) In deze duisternis riep Yunus zijn Heer aan.",
+    "conclusion": "Yunus begreep zijn fout. Hij kon alleen op Allah vertrouwen. Hij sprak het gebed van wanhoop en berouw. Allah verhoorde zijn gebed.",
+    "moral_lesson": "Dit verhaal leert ons dat geen enkele plek aan Allah ontsnapt. In de diepste duisternis bereikt het gebed de Heer.",
+    "historical_location": "Op zee",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "yunus_whale_chapter_1",
+        "title": "De duisternis",
+        "content": "De Koran vertelt: \"Toen riep hij uit de diepten van de duisternis: Er is geen godheid behalve U! Glorie aan U! Ik ben onder de onrechtplegers geweest.\" (21:87) Yunus was in de duisternis van de buik van de vis. Hij kon niets zien. Hij kon alleen op Allah vertrouwen. Hij riep met oprechtheid aan."
+      },
+      {
+        "id": "yunus_whale_chapter_2",
+        "title": "Het gebed",
+        "content": "De Koran zegt: \"Zo verhoorden Wij hem en redden Wij hem uit de benauwdheid. Zo redden Wij de gelovigen.\" (21:88) Yunus' gebed — \"La ilaha illa Anta, Subhanaka, inni kuntu min adh-dhalimin\" — is een van de beroemdste in de Koran geworden. Het drukt berouw en erkenning van Allahs eenheid uit. Allah verhoorde het."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 21:87",
+        "reference_text": "Soera Al-Anbiya, vers 87",
+        "content": "فَنَادَىٰ فِى ٱلظُّلُمَـٰتِ أَن لَّآ إِلَـٰهَ إِلَّآ أَنتَ سُبْحَـٰنَكَ إِنِّى كُنتُ مِنَ ٱلظَّـٰلِمِينَ",
+        "translation": "Then he called out from the depths of darkness: There is no deity except You! Glory to You! I have been among the wrongdoers.",
+        "relevance": "Dit vers bevat Yunus' gebed."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 21:88",
+        "reference_text": "Soera Al-Anbiya, vers 88",
+        "content": "فَٱسْتَجَبْنَا لَهُۥ وَنَجَّيْنَـٰهُ مِنَ ٱلْغَمِّ ۚ وَكَذَٰلِكَ نُـۨجِى ٱلْمُؤْمِنِينَ",
+        "translation": "So We answered him and saved him from distress. Thus do We save the believers.",
+        "relevance": "Dit vers verhaalt Allahs verhoring."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Dhikr",
+        "arabic_term": "ذكر",
+        "definition": "Gebed, gedachtenis van Allah. Yunus riep in de duisternis aan.",
+        "pronunciation": "dhikr"
+      },
+      {
+        "id": 2,
+        "term": "Zulumat",
+        "arabic_term": "ظلمات",
+        "definition": "Duisternis. Yunus was in de zulumat van de buik van de vis.",
+        "pronunciation": "dhou-lou-mat"
+      }
+    ]
+  },
+  "yunus_repentance": {
+    "title": "Yunus' berouw en redding",
+    "title_arabic": "توبة يونس ونجاته",
+    "introduction": "Allah verhoorde Yunus' gebed. De Koran zegt: \"Zo verhoorden Wij hem en redden Wij hem uit de benauwdheid.\" (21:88) De walvis wierp hem op de kust. Yunus was zwak en ziek. Allah deed een plant groeien om hem te beschaduwen en te voeden.",
+    "conclusion": "Yunus werd gered. Hij had de les geleerd: nooit de missie verlaten zonder Allahs bevel. Oprecht berouw wist fouten uit en trekt barmhartigheid aan.",
+    "moral_lesson": "Dit verhaal leert ons dat berouw de deuren van redding opent. Allah is Meest Barmhartig voor hen die Hem met oprechtheid aanroepen.",
+    "historical_location": "Kust",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "yunus_repentance_chapter_1",
+        "title": "Op de kust geworpen",
+        "content": "De Koran vertelt: \"Zo wierpen Wij hem op de kale kust, en hij was ziek. En Wij deden een pompoenplant boven hem groeien.\" (37:145-146) De walvis wierp Yunus op de kust. Hij was uitgeput, naakt, ziek. Allah deed een pompoenplant (yaqtin) groeien om hem te beschaduwen en te beschermen. Zijn barmhartigheid bedekte Yunus."
+      },
+      {
+        "id": "yunus_repentance_chapter_2",
+        "title": "De les",
+        "content": "De Koran zegt: \"En als hij niet onder degenen was geweest die Allah verheerlijken, zou hij in zijn buik zijn gebleven tot de Dag der Opstanding.\" (37:143-144) Yunus had Allah in de duisternis verheerlijkt. Deze verheerlijking redde hem. De Koran concludeert: \"Zo verhoorden Wij hem en gaven Wij hem een gemeenschap van honderdduizend of meer.\" (37:147) Allah zond hem terug naar zijn volk."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 37:145-146",
+        "reference_text": "Soera As-Saffat, verzen 145-146",
+        "content": "فَنَبَذْنَـٰهُ بِٱلْعَرَآءِ وَهُوَ سَقِيمٌ ۝ وَأَنۢبَتْنَا عَلَيْهِ شَجَرَةًۭ مِّن يَقْطِينٍۢ",
+        "translation": "So We cast him onto the bare shore, and he was ill. And We caused a plant of gourd to grow over him.",
+        "relevance": "Dit vers beschrijft Yunus' redding."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 37:147",
+        "reference_text": "Soera As-Saffat, vers 147",
+        "content": "وَأَرْسَلْنَـٰهُ إِلَىٰ مِئَةِ أَلْفٍ أَوْ يَزِيدُونَ",
+        "translation": "And We sent him to a hundred thousand or more.",
+        "relevance": "Dit vers verhaalt Yunus' terugkeer naar zijn volk."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Yaqtin",
+        "arabic_term": "يقطين",
+        "definition": "Pompoen. Allah deed een yaqtin voor Yunus groeien.",
+        "pronunciation": "yaq-tin"
+      },
+      {
+        "id": 2,
+        "term": "Tawba",
+        "arabic_term": "توبة",
+        "definition": "Berouw. Yunus deed tawba in de buik van de vis.",
+        "pronunciation": "taw-ba"
+      }
+    ]
+  },
+  "yunus_people": {
+    "title": "Het volk van Yunus gelooft",
+    "title_arabic": "إيمان قوم يونس",
+    "introduction": "Toen Yunus terugkeerde naar zijn volk, hadden zij geloofd. De Koran zegt: \"Waarom was er geen stad die geloofde en wier geloof haar baatte, behalve het volk van Yunus? Toen zij geloofden, verwijderden Wij van hen de schandelijke bestraffing in het wereldse leven.\" (10:98) Het volk van Ninevé berouwde voordat de bestraffing viel.",
+    "conclusion": "Het volk van Yunus was het enige dat massaal geloofde vóór de bestraffing. Zij vermeden zo de vernietiging. Yunus kon hen naar de Islam leiden.",
+    "moral_lesson": "Dit verhaal leert ons dat collectief berouw bestraffing kan afwenden. Geloof, zelfs wanneer laat, wordt door Allah aanvaard.",
+    "historical_location": "Ninevé (Irak)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "yunus_people_chapter_1",
+        "title": "Het geloof van het volk",
+        "content": "De Koran vertelt: \"Waarom was er geen stad die geloofde en wier geloof haar baatte, behalve het volk van Yunus? Toen zij geloofden, verwijderden Wij van hen de schandelijke bestraffing in het wereldse leven en gaven Wij hen genot voor een tijd.\" (10:98) Na Yunus' vertrek herinnerde het volk van Ninevé zich zijn waarschuwing. Zij berouwden en geloofden. Allah aanvaardde hun berouw en wendde de bestraffing af."
+      },
+      {
+        "id": "yunus_people_chapter_2",
+        "title": "Yunus' terugkeer",
+        "content": "De Koran zegt: \"En Wij zonden hem naar honderdduizend of meer. En zij geloofden. Zo gaven Wij hen genot voor een tijd.\" (37:147-148) Yunus keerde terug naar zijn volk. Hij vond hen als gelovigen. Zij hadden in zijn afwezigheid geloofd. Zijn beproeving had een doel gediend: hij had geduld geleerd, en zijn volk had geloofd. Allahs wijsheid is volmaakt."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 10:98",
+        "reference_text": "Soera Yunus, vers 98",
+        "content": "فَلَوْلَا كَانَتْ قَرْيَةٌ ءَامَنَتْ فَنَفَعَهَآ إِيمَـٰنُهَآ إِلَّا قَوْمَ يُونُسَ ۖ لَمَّآ ءَامَنُوا۟ كَشَفْنَا عَنْهُمْ عَذَابَ ٱلْخِزْىِ فِى ٱلْحَيَوٰةِ ٱلدُّنْيَا",
+        "translation": "Why was there no town that believed and whose faith benefited it, except the people of Yunus? When they believed, We removed from them the punishment.",
+        "relevance": "Dit vers bevestigt dat het volk van Yunus geloofde en gered werd."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 37:147-148",
+        "reference_text": "Soera As-Saffat, verzen 147-148",
+        "content": "وَأَرْسَلْنَـٰهُ إِلَىٰ مِئَةِ أَلْفٍ أَوْ يَزِيدُونَ ۝ فَـَٔامَنُوا۟ فَمَتَّعْنَـٰهُمْ إِلَىٰ حِينٍۢ",
+        "translation": "And We sent him to a hundred thousand or more. And they believed. So We gave them enjoyment for a time.",
+        "relevance": "Dit vers bevestigt het geloof van het volk en het verleende genot."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Ninawa",
+        "arabic_term": "نينوى",
+        "definition": "Ninevé. Stad van het volk van Yunus in Irak.",
+        "pronunciation": "ni-na-wa"
+      },
+      {
+        "id": 2,
+        "term": "Iman",
+        "arabic_term": "إيمان",
+        "definition": "Geloof. Het volk van Yunus had iman en werd gered.",
+        "pronunciation": "i-man"
+      }
+    ]
+  },
+  "lessons_from_yunus": {
+    "title": "Lessen uit het verhaal van Yunus",
+    "title_arabic": "دروس من قصة يونس",
+    "introduction": "Yunus is een van de meest genoemde profeten in de Koran. Een soera draagt zijn naam. Zijn verhaal leert geduld, berouw en Allahs barmhartigheid. De Koran zegt: \"En Yunus was zeker onder de boodschappers.\" (37:139)",
+    "conclusion": "Yunus verliet zijn volk zonder toestemming; hij werd beproefd. Hij berouwde in de duisternis; Allah redde hem. Zijn volk geloofde; zij werden gespaard. Het verhaal van Yunus is een herinnering: geduld, berouw en geloof zegevieren.",
+    "moral_lesson": "Dit verhaal leert ons dat Yunus' gebed — \"La ilaha illa Anta, Subhanaka, inni kuntu min adh-dhalimin\" — een van de krachtigste is. Het drukt berouw en eenheid uit. Wie het in beproeving aanroept, zal verhoord worden.",
+    "historical_location": "Ninevé en op zee",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lessons_from_yunus_chapter_1",
+        "title": "Het geduld van de profeet",
+        "content": "Yunus werd ongeduldig en vertrok. Een profeet moet geduldig zijn. De Koran zegt: \"Wees dus geduldig, zoals de boodschappers van vastberadenheid geduldig waren.\" (46:35) Geduld is een essentiële deugd. Yunus leerde deze les in de buik van de vis."
+      },
+      {
+        "id": "lessons_from_yunus_chapter_2",
+        "title": "Het reddende gebed",
+        "content": "De Profeet Mohammed zei: \"Het gebed van mijn broeder Yunus: Er is geen godheid behalve U! Glorie aan U! Ik ben onder de onrechtplegers geweest. Geen moslim roept het aan voor iets zonder dat Allah hem verhoort.\" (Tirmidhi) Dit gebed is een schat voor de gelovigen. Het verenigt berouw en verheerlijking."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 37:139",
+        "reference_text": "Soera As-Saffat, vers 139",
+        "content": "وَإِنَّ يُونُسَ لَمِنَ ٱلْمُرْسَلِينَ",
+        "translation": "And Yunus was indeed among the messengers.",
+        "relevance": "Dit vers bevestigt Yunus als boodschapper."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 68:48",
+        "reference_text": "Soera Al-Qalam, vers 48",
+        "content": "فَلَا تَكُن كَصَاحِبِ ٱلْحُوتِ إِذْ نَادَىٰ وَهُوَ مَكْظُومٌ",
+        "translation": "So do not be like the companion of the fish when he called out, full of resentment.",
+        "relevance": "Dit vers herinnert aan Yunus' verhaal als les."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Sabr",
+        "arabic_term": "صبر",
+        "definition": "Geduld. Yunus leerde sabr in de beproeving.",
+        "pronunciation": "sabr"
+      },
+      {
+        "id": 2,
+        "term": "Du'a",
+        "arabic_term": "دعاء",
+        "definition": "Gebed. Yunus' gebed is een krachtige du'a.",
+        "pronunciation": "dou-a"
+      }
+    ]
+  }
+}

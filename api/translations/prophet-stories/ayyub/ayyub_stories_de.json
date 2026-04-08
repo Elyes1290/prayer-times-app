@@ -1,0 +1,287 @@
+{
+  "ayyub_blessings": {
+    "title": "Die Segnungen Ayyubs",
+    "title_arabic": "نعم أيوب",
+    "introduction": "Ayyub (أيوب عليه السلام), Hiob, ist ein Prophet, der für seine vorbildliche Geduld bekannt ist. Der Koran sagt: \"Und Ayyub, als er seinen Herrn anrief: Leid hat mich getroffen, und Du bist der Barmherzigste der Barmherzigen.\" (21:83) Ayyub war ein reicher, frommer und dankbarer Mann. Er besaß Eigentum, eine große Familie und vollkommene Gesundheit. Er diente Allah Tag und Nacht.",
+    "conclusion": "Ayyub wurde mit Fülle gesegnet. Sein Reichtum, seine Familie und seine Gesundheit waren Geschenke Allahs. Er nutzte sie, um Ihn zu verherrlichen und den Bedürftigen zu helfen. Seine Dankbarkeit war unerschütterlich.",
+    "moral_lesson": "Diese Geschichte lehrt uns, dass Segnungen ein Geschenk von Allah sind. Der Gläubige muss dafür dankbar sein und sie nutzen, um seinem Schöpfer zu gehorchen.",
+    "historical_location": "Region Damaskus (Scham)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "ayyub_blessings_chapter_1",
+        "title": "Reichtum und Frömmigkeit",
+        "content": "Der Koran berichtet: \"Wir fanden ihn geduldig. Welch vortrefflicher Diener! Er wandte sich ständig Allah zu.\" (38:44) Ayyub besaß Herden, Land und Diener. Aber sein wahrer Reichtum war sein Glaube. Er klammerte sich nicht an weltliche Güter. Er betrachtete sie als eine Treuhand von Allah, die er mit Gerechtigkeit verwalten sollte."
+      },
+      {
+        "id": "ayyub_blessings_chapter_2",
+        "title": "Die gesegnete Familie",
+        "content": "Ayyub hatte eine treue Frau und Kinder. Er erzog sie in der Anbetung Allahs. Sein Zuhause war ein Ort des Friedens und des Segens. Er teilte seinen Reichtum mit den Armen. Seine Großzügigkeit war allen bekannt. Ayyub verkörperte die Dankbarkeit gegenüber seinem Herrn."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 38:44",
+        "reference_text": "Sure Sad, Vers 44",
+        "content": "إِنَّا وَجَدْنَـٰهُ صَابِرًۭا ۚ نِعْمَ ٱلْعَبْدُ ۖ إِنَّهُۥٓ أَوَّابٌ",
+        "translation": "Wir fanden ihn geduldig. Welch vortrefflicher Diener! Er wandte sich ständig Allah zu.",
+        "relevance": "Dieser Vers lobt Ayyubs Geduld und Frömmigkeit."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 6:84",
+        "reference_text": "Sure Al-An'am, Vers 84",
+        "content": "وَمِن ذُرِّيَّتِهِۦ دَاوُۥدَ وَسُلَيْمَـٰنَ وَأَيُّوبَ وَيُوسُفَ",
+        "translation": "Und unter seinen Nachkommen: Dawud, Sulayman, Ayyub und Yusuf.",
+        "relevance": "Dieser Vers stellt Ayyub unter die Propheten."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Ayyub",
+        "arabic_term": "أيوب",
+        "definition": "Hiob auf Arabisch. Prophet, bekannt für seine vorbildliche Geduld.",
+        "pronunciation": "ay-youb"
+      },
+      {
+        "id": 2,
+        "term": "Ni'ma",
+        "arabic_term": "نعمة",
+        "definition": "Segen, Gunst. Ayyub wurde mit ni'am gesegnet.",
+        "pronunciation": "ni-ma"
+      }
+    ]
+  },
+  "ayyub_trial": {
+    "title": "Die Prüfung Ayyubs",
+    "title_arabic": "بلاء أيوب",
+    "introduction": "Allah prüfte Ayyub. Der Koran sagt: \"Und gedenke Ayyubs, als er seinen Herrn anrief: Leid hat mich getroffen, und Du bist der Barmherzigste der Barmherzigen.\" (21:83) Ayyub verlor alles: seinen Besitz, seine Kinder, seine Gesundheit. Er wurde von einer schrecklichen Krankheit heimgesucht, die ihn jahrelang leiden ließ. Sein Körper war mit Geschwüren bedeckt.",
+    "conclusion": "Trotz allem verfluchte Ayyub niemals Allah. Er verzweifelte nicht. Er fuhr fort, seinen Herrn anzurufen. Seine Frau blieb an seiner Seite und unterstützte ihn durch die Prüfung.",
+    "moral_lesson": "Diese Geschichte lehrt uns, dass die Prüfung die besten der Diener treffen kann. Der Glaube schützt nicht vor Schwierigkeiten, aber er gibt die Kraft, sie zu überwinden.",
+    "historical_location": "Region Damaskus",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "ayyub_trial_chapter_1",
+        "title": "Der Verlust des Besitzes",
+        "content": "Der Koran berichtet: \"Und Ayyub, als er seinen Herrn anrief.\" (21:83) Prüfungen fielen auf Ayyub. Seine Herden gingen zugrunde. Seine Ländereien wurden zerstört. Seine Diener verließen ihn. Seine Kinder starben. In kurzer Zeit verlor Ayyub alles, was er besaß. Er blieb allein mit seiner Frau."
+      },
+      {
+        "id": "ayyub_trial_chapter_2",
+        "title": "Die Krankheit",
+        "content": "Der Koran sagt: \"Stampfe mit deinem Fuß: hier ist kühles Wasser zum Waschen und Trinken.\" (38:42) Ayyub wurde von einer schweren Krankheit heimgesucht. Sein Körper war mit Geschwüren bedeckt. Die Menschen mieden ihn. Nur seine Frau blieb treu. Sie pflegte ihn und unterstützte ihn. Ayyub litt, aber er beschwerte sich nicht bei Allah. Er rief nur Seine Barmherzigkeit an."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 21:83",
+        "reference_text": "Sure Al-Anbiya, Vers 83",
+        "content": "وَأَيُّوبَ إِذْ نَادَىٰ رَبَّهُۥٓ أَنِّى مَسَّنِىَ ٱلضُّرُّ وَأَنتَ أَرْحَمُ ٱلرَّٰحِمِينَ",
+        "translation": "Und Ayyub, als er seinen Herrn anrief: Leid hat mich getroffen, und Du bist der Barmherzigste der Barmherzigen.",
+        "relevance": "Dieser Vers erzählt von Ayyubs Anrufung in der Prüfung."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 38:41",
+        "reference_text": "Sure Sad, Vers 41",
+        "content": "وَٱذْكُرْ عَبْدَنَآ أَيُّوبَ إِذْ نَادَىٰ رَبَّهُۥٓ أَنِّى مَسَّنِىَ ٱلشَّيْطَـٰنُ بِنُصْبٍۢ وَعَذَابٍ",
+        "translation": "Und gedenke Unseres Dieners Ayyub, als er seinen Herrn anrief: Der Teufel hat mich mit Mühe und Strafe getroffen.",
+        "relevance": "Dieser Vers beschreibt Ayyubs Prüfung."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Bala",
+        "arabic_term": "بلاء",
+        "definition": "Prüfung, Trübsal. Ayyub ertrug immenses bala.",
+        "pronunciation": "ba-la"
+      },
+      {
+        "id": 2,
+        "term": "Dhurr",
+        "arabic_term": "ضر",
+        "definition": "Leid, Schaden. Ayyub sagte: \"Dhurr hat mich getroffen.\"",
+        "pronunciation": "dhourr"
+      }
+    ]
+  },
+  "ayyub_patience": {
+    "title": "Die Geduld Ayyubs",
+    "title_arabic": "صبر أيوب",
+    "introduction": "Ayyub ist das Vorbild der Geduld. Der Koran sagt: \"Wir fanden ihn geduldig. Welch vortrefflicher Diener! Er wandte sich ständig Allah zu.\" (38:44) Trotz des Verlustes von allem hörte Ayyub niemals auf, Allah zu preisen. Er akzeptierte das Dekret seines Herrn. Seine Geduld dauerte Jahre.",
+    "conclusion": "Ayyubs Geduld wurde belohnt. Allah erwähnt ihn unter den Propheten mit Standhaftigkeit. Sein Name ist in allen Traditionen zum Synonym für Geduld geworden.",
+    "moral_lesson": "Diese Geschichte lehrt uns, dass Geduld (sabr) eine höchste Tugend ist. Der Gläubige muss Prüfungen akzeptieren und sich auf Allah verlassen.",
+    "historical_location": "Region Damaskus",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "ayyub_patience_chapter_1",
+        "title": "Ausdauer",
+        "content": "Der Koran berichtet: \"So sei geduldig, wie die Gesandten mit festem Entschluss geduldig waren.\" (46:35) Ayyub ertrug alles: Armut, Einsamkeit, Krankheit. Er rebellierte niemals. Er fragte niemals warum. Er wusste, dass Allah Weis ist und Sein Dekret gerecht ist. Er fuhr fort, anzurufen und auf Seine Barmherzigkeit zu hoffen."
+      },
+      {
+        "id": "ayyub_patience_chapter_2",
+        "title": "Die Anrufung",
+        "content": "Der Koran sagt: \"Und Ayyub, als er seinen Herrn anrief: Leid hat mich getroffen, und Du bist der Barmherzigste der Barmherzigen. So erhörten Wir ihn und entfernten das Leid, das auf ihm war.\" (21:83-84) Ayyub rief nicht an, um sich zu beschweren. Er rief an, um Allah an Seine Barmherzigkeit zu erinnern. Er wusste, dass niemand außer Ihm ihn erleichtern konnte. Dieses totale Vertrauen kennzeichnet den wahren Gläubigen."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 38:44",
+        "reference_text": "Sure Sad, Vers 44",
+        "content": "إِنَّا وَجَدْنَـٰهُ صَابِرًۭا ۚ نِعْمَ ٱلْعَبْدُ ۖ إِنَّهُۥٓ أَوَّابٌ",
+        "translation": "Wir fanden ihn geduldig. Welch vortrefflicher Diener! Er wandte sich ständig Allah zu.",
+        "relevance": "Dieser Vers lobt Ayyubs Geduld."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 21:84",
+        "reference_text": "Sure Al-Anbiya, Vers 84",
+        "content": "فَٱسْتَجَبْنَا لَهُۥ فَكَشَفْنَا مَا بِهِۦ مِن ضُرٍّ",
+        "translation": "So erhörten Wir ihn und entfernten das Leid, das auf ihm war.",
+        "relevance": "Dieser Vers erzählt von Allahs Antwort."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Sabr",
+        "arabic_term": "صبر",
+        "definition": "Geduld. Ayyub ist das Vorbild des sabr.",
+        "pronunciation": "sabr"
+      },
+      {
+        "id": 2,
+        "term": "Awab",
+        "arabic_term": "أواب",
+        "definition": "Einer, der sich Allah zuwendet. Ayyub war awab, immer seinem Herrn zugewandt.",
+        "pronunciation": "a-wab"
+      }
+    ]
+  },
+  "ayyub_healing": {
+    "title": "Die Heilung Ayyubs",
+    "title_arabic": "شفاء أيوب",
+    "introduction": "Allah erhörte Ayyubs Anrufung. Der Koran sagt: \"So erhörten Wir ihn und entfernten das Leid, das auf ihm war. Und Wir gaben ihm seine Familie und ihresgleichen mit ihnen, als Barmherzigkeit von Uns.\" (21:84) Allah befahl Ayyub, mit seinem Fuß auf den Boden zu stampfen. Eine Quelle kühlen Wassers sprudelte hervor. Er wusch sich und trank. Seine Krankheit verschwand.",
+    "conclusion": "Ayyub erlangte seine Gesundheit zurück. Allah stellte seine Familie und seinen Besitz wieder her. Seine Geduld war belohnt worden. Er pries seinen Herrn und dankte Ihm.",
+    "moral_lesson": "Diese Geschichte lehrt uns, dass Allah Geduld belohnt. Die Prüfung hat ein Ende. Heilung und Erleichterung kommen vom Barmherzigsten.",
+    "historical_location": "Region Damaskus",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "ayyub_healing_chapter_1",
+        "title": "Die wundersame Quelle",
+        "content": "Der Koran berichtet: \"Stampfe mit deinem Fuß: hier ist kühles Wasser zum Waschen und Trinken.\" (38:42) Allah befahl Ayyub, auf den Boden zu stampfen. Eine Quelle sprudelte hervor. Ayyub wusch sich mit diesem Wasser. Die Geschwüre verschwanden. Seine Haut wurde wieder gesund. Die Heilung war ein Wunder von Allah, eine Belohnung für die Geduld."
+      },
+      {
+        "id": "ayyub_healing_chapter_2",
+        "title": "Wiederherstellung",
+        "content": "Der Koran sagt: \"Und Wir gaben ihm seine Familie und ihresgleichen mit ihnen, als Barmherzigkeit von Uns und eine Erinnerung für die Anbetenden.\" (21:84) Ayyub erlangte alles zurück: seine Gesundheit, eine neue Familie, Besitz. Allah verdoppelte seine Segnungen. Ayyub vergaß die Prüfung niemals. Er blieb bis zum Ende seines Lebens dankbar. Seine Geschichte ist eine Erinnerung für alle Gläubigen."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 38:42",
+        "reference_text": "Sure Sad, Vers 42",
+        "content": "ٱرْكُضْ بِرِجْلِكَ ۖ هَـٰذَا مُغْتَسَلٌۢ بَارِدٌۭ وَشَرَابٌۭ",
+        "translation": "Stampfe mit deinem Fuß: hier ist kühles Wasser zum Waschen und Trinken.",
+        "relevance": "Dieser Vers beschreibt das Heilungswunder."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 21:84",
+        "reference_text": "Sure Al-Anbiya, Vers 84",
+        "content": "فَٱسْتَجَبْنَا لَهُۥ فَكَشَفْنَا مَا بِهِۦ مِن ضُرٍّ ۖ وَءَاتَيْنَـٰهُ أَهْلَهُۥ وَمِثْلَهُم مَّعَهُمْ رَحْمَةًۭ مِّنَّا",
+        "translation": "Wir erhörten ihn und entfernten das Leid. Wir gaben ihm seine Familie und ihresgleichen.",
+        "relevance": "Dieser Vers erzählt von Ayyubs vollständiger Wiederherstellung."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Shifa",
+        "arabic_term": "شفاء",
+        "definition": "Heilung. Ayyub erhielt shifa von Allah.",
+        "pronunciation": "chi-fa"
+      },
+      {
+        "id": 2,
+        "term": "Rahma",
+        "arabic_term": "رحمة",
+        "definition": "Barmherzigkeit. Ayyubs Heilung war eine rahma von Allah.",
+        "pronunciation": "rah-ma"
+      }
+    ]
+  },
+  "lessons_from_ayyub": {
+    "title": "Lehren aus der Geschichte Ayyubs",
+    "title_arabic": "دروس من قصة أيوب",
+    "introduction": "Ayyub ist der Prophet der Geduld. Der Koran erwähnt ihn mehrmals. Seine Geschichte lehrt, dass die Prüfung die Besten treffen kann, und dass Geduld zur Rettung führt. Der Prophet Muhammad sagte: \"Welche größere Prüfung als die Ayyubs!\"",
+    "conclusion": "Ayyub verlor alles und gewann dann alles zurück. Seine Geduld wurde belohnt. Sein Name ist zu einem Symbol geworden. Wenn wir von Geduld sprechen, sagen wir: \"Geduld Ayyubs.\"",
+    "moral_lesson": "Diese Geschichte lehrt uns, dass sabr (Geduld) eine Waffe gegen die Prüfung ist. Der Gläubige muss sich auf Allah verlassen, Seine Barmherzigkeit anrufen und Sein Dekret akzeptieren.",
+    "historical_location": "Region Damaskus",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lessons_from_ayyub_chapter_1",
+        "title": "Geduld in der Prüfung",
+        "content": "Der Koran sagt: \"Wir senden nur Gesandte als Überbringer guter Nachrichten und Warner.\" (6:48) Ayyub lehrt uns, dass die Prüfung Teil des Lebens ist. Der Gläubige darf nicht verzweifeln. Er muss geduldig sein und anrufen. Allah ist der Barmherzigste."
+      },
+      {
+        "id": "lessons_from_ayyub_chapter_2",
+        "title": "Anrufung in der Not",
+        "content": "Ayyubs Anrufung — \"Leid hat mich getroffen, und Du bist der Barmherzigste der Barmherzigen\" — ist ein Vorbild. Sie drückt Not aus, ohne sich zu beschweren. Sie erinnert Allah an Seine Barmherzigkeit. Sie setzt die Hoffnung allein auf Ihn. Jeder Muslim kann sie in der Prüfung verwenden. Der Prophet Muhammad lehrte diese Anrufung seiner Gemeinschaft."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 21:83-84",
+        "reference_text": "Sure Al-Anbiya, Verse 83-84",
+        "content": "وَأَيُّوبَ إِذْ نَادَىٰ رَبَّهُۥٓ أَنِّى مَسَّنِىَ ٱلضُّرُّ وَأَنتَ أَرْحَمُ ٱلرَّٰحِمِينَ ۝ فَٱسْتَجَبْنَا لَهُۥ فَكَشَفْنَا مَا بِهِۦ مِن ضُرٍّ",
+        "translation": "Und Ayyub rief seinen Herrn an. Wir erhörten ihn und entfernten das Leid.",
+        "relevance": "Diese Passage fasst Ayyubs Geschichte zusammen."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 38:44",
+        "reference_text": "Sure Sad, Vers 44",
+        "content": "إِنَّا وَجَدْنَـٰهُ صَابِرًۭا ۚ نِعْمَ ٱلْعَبْدُ ۖ إِنَّهُۥٓ أَوَّابٌ",
+        "translation": "Wir fanden ihn geduldig. Welch vortrefflicher Diener!",
+        "relevance": "Dieser Vers lobt Ayyub als Vorbild."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Sabr",
+        "arabic_term": "صبر",
+        "definition": "Geduld. Ayyub verkörpert den vollkommenen sabr.",
+        "pronunciation": "sabr"
+      },
+      {
+        "id": 2,
+        "term": "Du'a",
+        "arabic_term": "دعاء",
+        "definition": "Anrufung. Ayyubs Anrufung ist ein mächtiges du'a.",
+        "pronunciation": "dou-a"
+      }
+    ]
+  }
+}

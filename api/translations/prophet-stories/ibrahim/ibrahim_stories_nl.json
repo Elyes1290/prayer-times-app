@@ -1,0 +1,342 @@
+{
+  "ibrahim_prophecy": {
+    "title": "Ibrahim en de oproep tot monotheïsme",
+    "title_arabic": "إبراهيم عليه السلام والدعوة إلى التوحيد",
+    "introduction": "Ibrahim (إبراهيم عليه السلام) is een van de grootste profeten. De Koran zegt: «Wij hadden Ibrahim eerder een juiste leiding geschonken, en Wij kenden hem goed.» (21:51) Hij werd geboren in een volk van afgodendienaars, in Mesopotamië. Van jongs af aan verwierp hij de aanbidding van afgoden en zocht hij de Heer van het universum. Zijn dialoog met zijn vader Azar en zijn redenering over de ster, de maan en de zon illustreren zijn zoektocht naar de waarheid.",
+    "conclusion": "Ibrahim was een model van zuiver monotheïsme. Hij verzette zich tegen zijn vader en zijn volk in naam van de waarheid. Allah koos hem als Imam (gids) voor de mensen en maakte van zijn nageslacht een geslacht van profeten.",
+    "moral_lesson": "Dit verhaal leert ons dat de waarheid kan vereisen dat we ons verzetten tegen familie en gemeenschap. De oprechte zoektocht naar God leidt tot leiding.",
+    "historical_location": "Mesopotamië (Babylon/Ur)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "ibrahim_prophecy_chapter_1",
+        "title": "De dialoog met zijn vader",
+        "content": "De Koran vermeldt: «En toen Ibrahim tot zijn vader Azar zei: Neem je afgoden als goden? Ik zie jou en je volk in duidelijke dwaling.» (6:74) Azar maakte afgoden. Ibrahim, nog jong, begreep dat deze beelden geen goden konden zijn — ze scheppen niets, ze brengen geen voordeel noch nadeel. Hij nodigde zijn vader uit de afgoderij op te geven. Zijn vader dreigde hem te stenigen als hij niet ophield. Ibrahim scheidde zich van hem, terwijl hij hoop behield op zijn berouw."
+      },
+      {
+        "id": "ibrahim_prophecy_chapter_2",
+        "title": "De ster, de maan en de zon",
+        "content": "De Koran beschrijft hoe Ibrahim redeneerde om de waarheid te bereiken: «Toen de nacht hem omhulde, zag hij een ster en zei: Dat is mijn Heer! Toen die verdween, zei hij: Ik houd niet van hen die verdwijnen.» Toen zag hij de maan opkomen en zei: «Dat is mijn Heer!» Toen die verdween, zei hij: «Als mijn Heer mij niet leidt, zal ik tot de dwalenden behoren.» Toen zag hij de zon opkomen en zei: «Dat is mijn Heer! Deze is groter.» Toen die onderging, zei hij: «O mijn volk! Ik wijs af wat jullie (aan Allah) toeschrijven. Ik wend mijn gezicht tot Degene die de hemelen en de aarde heeft geschapen, als zuiver monotheïst.» (6:76-79) Door deze redenering concludeerde Ibrahim dat alleen de Schepper van de hemelen en de aarde aanbidding verdient."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 6:74",
+        "reference_text": "Soera Al-An'am, vers 74",
+        "content": "وَإِذْ قَالَ إِبْرَٰهِيمُ لِأَبِيهِ ءَازَرَ أَتَتَّخِذُ أَصْنَامًا ءَالِهَةً ۖ إِنِّىٓ أَرَىٰكَ وَقَوْمَكَ فِى ضَلَـٰلٍۢ مُّبِينٍۢ",
+        "translation": "En toen Ibrahim tot zijn vader Azar zei: Neem je afgoden als goden? Ik zie jou en je volk in duidelijke dwaling.",
+        "relevance": "Dit vers vestigt de dialoog van Ibrahim met zijn vader en zijn afwijzing van afgoderij."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 21:51",
+        "reference_text": "Soera Al-Anbiya, vers 51",
+        "content": "وَلَقَدْ ءَاتَيْنَآ إِبْرَٰهِيمَ رُشْدَهُۥ مِن قَبْلُ وَكُنَّا بِهِۦ عَـٰلِمِينَ",
+        "translation": "Wij hadden Ibrahim eerder een juiste leiding geschonken, en Wij kenden hem goed.",
+        "relevance": "Dit vers bevestigt dat Allah Ibrahim vanaf het begin leidde."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Ibrahim",
+        "arabic_term": "إبراهيم",
+        "definition": "Abraham in het Arabisch. Profeet van Allah, vertrouwde vriend van Allah (Khalilullah). Vader van de profeten.",
+        "pronunciation": "ib-ra-him"
+      },
+      {
+        "id": 2,
+        "term": "Azar",
+        "arabic_term": "آزر",
+        "definition": "Naam van de vader van Ibrahim in de Koran. Hij maakte afgoden.",
+        "pronunciation": "a-zar"
+      },
+      {
+        "id": 3,
+        "term": "Hanif",
+        "arabic_term": "حنيف",
+        "definition": "Zuiver monotheïst. Ibrahim beschreef zichzelf als hanif, gericht op de Schepper.",
+        "pronunciation": "ha-nif"
+      }
+    ]
+  },
+  "ibrahim_idols": {
+    "title": "Ibrahim en de afgoden",
+    "title_arabic": "إبراهيم والأصنام",
+    "introduction": "Ibrahim (عليه السلام) besloot zijn volk de ijdelheid van de afgoden te tonen. Tijdens een feest, toen de mensen de tempel verlieten, brak hij alle afgoden behalve de grootste. Toen ze terugkeerden en hem ondervroegen, zei hij hen de grote afgod te vragen — die niet antwoordde. Met deze list onthulde Ibrahim dat deze beelden noch konden spreken noch handelen.",
+    "conclusion": "De afgoden werden in stukken gebroken. Het volk, woedend, besloot Ibrahim in het vuur te werpen. Maar Ibrahim had zijn doel bereikt: bewijzen dat de afgoden machteloos zijn.",
+    "moral_lesson": "Dit verhaal leert ons dat afgoderij een illusie is. De schepselen verdienen geen aanbidding; alleen de Schepper verdient het.",
+    "historical_location": "Mesopotamië",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "ibrahim_idols_chapter_1",
+        "title": "De list",
+        "content": "De Koran vermeldt: «Bij Allah! Ik zal een list tegen jullie afgoden smeden wanneer jullie je hebben afgewend.» (21:57) Ibrahim wachtte tot zijn volk naar een feest ging. Hij betrad de tempel en brak alle afgoden in stukken, behalve de grootste. Misschien legde hij het gereedschap in de hand van de grote afgod zodat de mensen het zouden begrijpen. Toen ze terugkeerden en de ramp zagen, riepen ze: «Wie heeft dit onze goden aangedaan?»"
+      },
+      {
+        "id": "ibrahim_idols_chapter_2",
+        "title": "Het antwoord van Ibrahim",
+        "content": "De mensen zeiden: «We hebben een jongeman ze horen noemen; men noemt hem Ibrahim.» Ze lieten hem komen en vroegen: «Ben jij het die dit onze goden heeft aangedaan, o Ibrahim?» Ibrahim antwoordde: «Het was de grootste onder hen. Vraag hen dus, als ze kunnen spreken!» (21:62-63) De mensen keken elkaar aan en zeiden: «Jullie weten wel dat ze niet spreken.» Ibrahim zei: «Aanbidden jullie dus, naast Allah, wat jullie niet kan baten noch schaden? Schaamte over jullie en wat jullie naast Allah aanbidden! Begrijpen jullie niet?» (21:66-67) Ze besloten hem te verbranden."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 21:57-58",
+        "reference_text": "Soera Al-Anbiya, verzen 57-58",
+        "content": "وَتَٱللَّهِ لَأَكِيدَنَّ أَصْنَـٰمَكُم بَعْدَ أَن تُوَلُّوا۟ مُدْبِرِينَ ۝ فَجَعَلَهُمْ جُذَـٰذًا إِلَّا كَبِيرًۭا لَّهُمْ لَعَلَّهُمْ إِلَيْهِ يَرْجِعُونَ",
+        "translation": "Bij Allah! Ik zal een list tegen jullie afgoden smeden wanneer jullie je hebben afgewend. Hij maakte ze tot stukken, behalve de grootste, opdat zij tot hem zouden terugkeren.",
+        "relevance": "Deze verzen beschrijven de actie van Ibrahim tegen de afgoden."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 21:62-67",
+        "reference_text": "Soera Al-Anbiya, verzen 62-67",
+        "content": "قَالُوا۟ أَأَنتَ فَعَلْتَ هَـٰذَا بِـَٔالِهَتِنَا يَـٰإِبْرَٰهِيمُ ۝ قَالَ بَلْ فَعَلَهُۥ كَبِيرُهُمْ هَـٰذَا فَسْـَٔلُوهُمْ إِن كَانُوا۟ يَنطِقُونَ",
+        "translation": "Zij zeiden: Ben jij het die dit onze goden heeft aangedaan, o Ibrahim? Hij zei: Het was de grootste onder hen. Vraag hen dus, als ze kunnen spreken!",
+        "relevance": "Deze verzen bevatten de uitwisseling tussen Ibrahim en zijn volk."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Asnam",
+        "arabic_term": "أصنام",
+        "definition": "Afgoden. De beelden die het volk van Ibrahim aanbad.",
+        "pronunciation": "as-nam"
+      },
+      {
+        "id": 2,
+        "term": "Juthadh",
+        "arabic_term": "جذاذ",
+        "definition": "Stukken, fragmenten. Ibrahim maakte de afgoden tot stukken.",
+        "pronunciation": "jou-thadh"
+      }
+    ]
+  },
+  "ibrahim_fire": {
+    "title": "Ibrahim en het vuur",
+    "title_arabic": "إبراهيم والنار",
+    "introduction": "Het volk van Ibrahim wierp hem in een enorm vuur om hem te straffen voor het breken van de afgoden. Ze bouwden een gigantische brandstapel. Maar Allah beval het vuur: «O vuur! Wees koelte en vrede voor Ibrahim.» (21:69) Het vuur verbrandde Ibrahim niet; het was koelte en heil. Dit wonder toonde de macht van Allah en Zijn bescherming voor Zijn trouwe dienaren.",
+    "conclusion": "Ibrahim kwam ongedeerd uit het vuur. Zijn volk was verward. Dit wonder is een van de beroemdste in de Koran, illustrerend dat Allah hen beschermt die op Hem vertrouwen.",
+    "moral_lesson": "Dit verhaal leert ons dat Allah de wetten van de natuur kan omkeren om Zijn dienaren te beschermen. Vertrouwen op Allah (tawakkul) is de grootste kracht.",
+    "historical_location": "Mesopotamië",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "ibrahim_fire_chapter_1",
+        "title": "De brandstapel",
+        "content": "De Koran vermeldt: «Zij zeiden: Verbrand hem en help jullie goden, als jullie willen handelen!» (21:68) Het volk verzamelde hout en stak een enorm vuur aan. Ze wierpen Ibrahim erin. De Koran beschrijft: «Zij wilden hem een val stellen, maar Wij maakten hen tot de grootste verliezers.» (21:70) Ibrahim werd in de vlammen geworpen, maar hij stelde zijn vertrouwen op Allah."
+      },
+      {
+        "id": "ibrahim_fire_chapter_2",
+        "title": "Het wonder",
+        "content": "De Koran vermeldt het goddelijke bevel: «Wij zeiden: O vuur! Wees koelte en vrede voor Ibrahim.» (21:69) Het vuur verloor zijn kracht om te verbranden. Ibrahim kwam er ongedeerd uit. Dit wonder verbaasde het volk. Allah redde Zijn dienaar en verwarde de ongelovigen. Ibrahim bleef standvastig in zijn geloof, en zijn verhaal werd een voorbeeld voor alle gelovigen."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 21:68-70",
+        "reference_text": "Soera Al-Anbiya, verzen 68-70",
+        "content": "قَالُوا۟ ٱحْرُقُوهُ وَٱنصُرُوٓا۟ ءَالِهَتَكُمْ إِن كُنتُمْ فَـٰعِلِينَ ۝ قُلْنَا يَـٰنَارُ كُونِى بَرْدًۭا وَسَلَـٰمًا عَلَىٰٓ إِبْرَٰهِيمَ ۝ وَأَرَادُوا۟ بِهِۦ كَيْدًۭا فَجَعَلْنَـٰهُمُ ٱلْأَخْسَرِينَ",
+        "translation": "Zij zeiden: Verbrand hem en help jullie goden, als jullie willen handelen! Wij zeiden: O vuur! Wees koelte en vrede voor Ibrahim. Zij wilden hem een val stellen, maar Wij maakten hen tot de grootste verliezers.",
+        "relevance": "Deze verzen beschrijven het vuur en het wonder van de bescherming van Ibrahim."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Bard",
+        "arabic_term": "برد",
+        "definition": "Koelte. Allah beval het vuur koelte te zijn voor Ibrahim.",
+        "pronunciation": "bard"
+      },
+      {
+        "id": 2,
+        "term": "Salam",
+        "arabic_term": "سلام",
+        "definition": "Vrede, heil. Het vuur was vrede en heil voor Ibrahim.",
+        "pronunciation": "sa-lam"
+      }
+    ]
+  },
+  "ibrahim_kaaba": {
+    "title": "Ibrahim en de bouw van de Kaaba",
+    "title_arabic": "إبراهيم وبناء الكعبة",
+    "introduction": "Allah beproefde Ibrahim met beproevingen die hij volbracht. Hij zei: «Ik zal van jou een Imam voor de mensen maken.» (2:124) Ibrahim vroeg dat ook zijn nageslacht deze leiding zou ontvangen. Met zijn zoon Isma'il verhief hij de fundamenten van het Huis (de Kaaba) in Mekka. Hij riep Allah aan om er een plaats van vrede en leiding voor de mensheid van te maken.",
+    "conclusion": "De Kaaba, gebouwd door Ibrahim en Isma'il, werd de Qibla van de moslims. De smeekbeden van Ibrahim werden verhoord: het Huis is een plaats van bedevaart en gebed voor gelovigen over de hele wereld.",
+    "moral_lesson": "Dit verhaal leert ons dat de werken voor Allah verricht bestendig zijn. De Kaaba verbindt alle moslims met Ibrahim en het zuivere monotheïsme.",
+    "historical_location": "Mekka",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "ibrahim_kaaba_chapter_1",
+        "title": "De beproeving en het Imamat",
+        "content": "De Koran vermeldt: «En toen zijn Heer Ibrahim met woorden beproefde, en hij ze volbracht, zei Hij: Ik zal van jou een Imam voor de mensen maken. Ibrahim zei: En onder mijn nageslacht? Hij zei: Mijn verbond bereikt niet de onrechtplegers.» (2:124) Ibrahim volbracht alle beproevingen. Allah maakte hem tot Imam — gids voor de mensheid. Ibrahim vroeg dat ook zijn vrome nageslacht deze leiding zou ontvangen. Allah aanvaardde, op voorwaarde dat zij niet onrechtvaardig zouden zijn."
+      },
+      {
+        "id": "ibrahim_kaaba_chapter_2",
+        "title": "De fundamenten van het Huis",
+        "content": "De Koran vermeldt: «En toen Ibrahim en Isma'il de fundamenten van het Huis verhieven: Onze Heer! Aanvaard van ons. U bent de Horende, de Alwetende. Onze Heer! Maak van ons Uw onderworpenen, en van ons nageslacht een aan U onderworpen gemeenschap. Toon ons onze riten en aanvaard ons berouw. U bent de Berouw Aanvaardende, de Barmhartige.» (2:127-128) Ibrahim en Isma'il bouwden de Kaaba in Mekka. Hun smeekbede werd verhoord: het Huis werd het centrum van bedevaart en gebed voor de moslims."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 2:124",
+        "reference_text": "Soera Al-Baqara, vers 124",
+        "content": "وَإِذِ ٱبْتَلَىٰٓ إِبْرَٰهِـۧمَ رَبُّهُۥ بِكَلِمَـٰتٍۢ فَأَتَمَّهُنَّ ۖ قَالَ إِنِّى جَاعِلُكَ لِلنَّاسِ إِمَامًۭا ۖ قَالَ وَمِن ذُرِّيَّتِى ۖ قَالَ لَا يَنَالُ عَهْدِى ٱلظَّـٰلِمِينَ",
+        "translation": "En toen zijn Heer Ibrahim met woorden beproefde, en hij ze volbracht, zei Hij: Ik zal van jou een Imam voor de mensen maken. Ibrahim zei: En onder mijn nageslacht? Hij zei: Mijn verbond bereikt niet de onrechtplegers.",
+        "relevance": "Dit vers vestigt de beproeving van Ibrahim en zijn status als Imam."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 2:127-128",
+        "reference_text": "Soera Al-Baqara, verzen 127-128",
+        "content": "وَإِذْ يَرْفَعُ إِبْرَٰهِـۧمُ ٱلْقَوَاعِدَ مِنَ ٱلْبَيْتِ وَإِسْمَـٰعِيلُ رَبَّنَا تَقَبَّلْ مِنَّا ۖ إِنَّكَ أَنتَ ٱلسَّمِيعُ ٱلْعَلِيمُ ۝ رَبَّنَا وَٱجْعَلْنَا مُسْلِمَيْنِ لَكَ وَمِن ذُرِّيَّتِنَآ أُمَّةًۭ مُّسْلِمَةًۭ لَّكَ",
+        "translation": "En toen Ibrahim en Isma'il de fundamenten van het Huis verhieven: Onze Heer! Aanvaard van ons. U bent de Horende, de Alwetende. Onze Heer! Maak van ons Uw onderworpenen, en van ons nageslacht een aan U onderworpen gemeenschap.",
+        "relevance": "Deze verzen beschrijven de bouw van de Kaaba en de smeekbede van Ibrahim."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Imam",
+        "arabic_term": "إمام",
+        "definition": "Gids, model. Allah maakte van Ibrahim een Imam voor de mensen.",
+        "pronunciation": "i-mam"
+      },
+      {
+        "id": 2,
+        "term": "Al-Bayt",
+        "arabic_term": "البيت",
+        "definition": "Het Huis. De Kaaba in Mekka, gebouwd door Ibrahim en Isma'il.",
+        "pronunciation": "al-bayt"
+      }
+    ]
+  },
+  "ibrahim_sacrifice": {
+    "title": "De beproeving van het offer",
+    "title_arabic": "ابتلاء الذبح",
+    "introduction": "Allah beproefde Ibrahim met een hoogste beproeving: zijn zoon offeren. Ibrahim zag in een droom dat hij hem moest slachten. Hij sprak erover met zijn zoon, die aanvaardde: «O mijn vader! Doe wat je wordt bevolen. Je zult mij, als Allah wil, onder de geduldigen vinden.» (37:102) Beiden onderwierpen zich. Op het moment van het offer beloonde Allah hen en verving de zoon door een schaap.",
+    "conclusion": "Ibrahim en zijn zoon doorstonden de beproeving. Allah zei: «Wij losten hem uit met een ruim offer.» (37:107) Dit verhaal illustreert de totale onderwerping aan Allah (islam) en de beloning van gehoorzaamheid.",
+    "moral_lesson": "Dit verhaal leert ons dat gehoorzaamheid aan Allah boven alles gaat, zelfs boven vaderliefde. Oprechte onderwerping wordt beloond met barmhartigheid.",
+    "historical_location": "Mina (bij Mekka)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "ibrahim_sacrifice_chapter_1",
+        "title": "De visioen",
+        "content": "De Koran vermeldt: «Toen hij de leeftijd bereikte om met hem te wandelen, zei hij: O mijn zoon! Ik heb in een droom gezien dat ik je slacht. Zie wat je ervan vindt. Hij zei: O mijn vader! Doe wat je wordt bevolen. Je zult mij, als Allah wil, onder de geduldigen vinden.» (37:102) De dromen van profeten zijn een vorm van openbaring. Ibrahim begreep dat het een bevel van Allah was. Zijn zoon aanvaardde met voorbeeldig geloof zonder aarzeling."
+      },
+      {
+        "id": "ibrahim_sacrifice_chapter_2",
+        "title": "De onderwerping en het losgeld",
+        "content": "De Koran vermeldt: «Toen beiden zich onderwierpen en hij hem op het voorhoofd legde, riepen Wij hem: O Ibrahim! Je hebt het visioen bevestigd. Zo belonen Wij de weldoeners. Dit was een duidelijke beproeving. En Wij losten hem uit met een ruim offer.» (37:103-107) Ibrahim was bereid te gehoorzamen. Allah hield hem tegen en kondigde aan dat de beproeving was volbracht. Hij loste de zoon uit met een schaap. Ibrahim en zijn zoon werden beloond voor hun totale onderwerping."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 37:102",
+        "reference_text": "Soera As-Saffat, vers 102",
+        "content": "فَلَمَّا بَلَغَ مَعَهُ ٱلسَّعْيَ قَالَ يَـٰبُنَىَّ إِنِّىٓ أَرَىٰ فِى ٱلْمَنَامِ أَنِّىٓ أَذْبَحُكَ فَٱنظُرْ مَاذَا تَرَىٰ ۚ قَالَ يَـٰٓأَبَتِ ٱفْعَلْ مَا تُؤْمَرُ ۖ سَتَجِدُنِىٓ إِن شَآءَ ٱللَّهُ مِنَ ٱلصَّـٰبِرِينَ",
+        "translation": "Toen hij de leeftijd bereikte om met hem te wandelen, zei hij: O mijn zoon! Ik heb in een droom gezien dat ik je slacht. Zie wat je ervan vindt. Hij zei: O mijn vader! Doe wat je wordt bevolen. Je zult mij, als Allah wil, onder de geduldigen vinden.",
+        "relevance": "Dit vers beschrijft het visioen van Ibrahim en de aanvaarding van zijn zoon."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 37:103-107",
+        "reference_text": "Soera As-Saffat, verzen 103-107",
+        "content": "فَلَمَّآ أَسْلَمَا وَتَلَّهُۥ لِلْجَبِينِ ۝ وَنَـٰدَيْنَـٰهُ أَن يَـٰٓإِبْرَٰهِيمُ ۝ قَدْ صَدَّقْتَ ٱلرُّءْيَآ ۚ إِنَّا كَذَٰلِكَ نَجْزِى ٱلْمُحْسِنِينَ ۝ إِنَّ هَـٰذَا لَهُوَ ٱلْبَلَـٰٓؤُا۟ ٱلْمُبِينُ ۝ وَفَدَيْنَـٰهُ بِذِبْحٍ عَظِيمٍ",
+        "translation": "Toen beiden zich onderwierpen en hij hem op het voorhoofd legde, riepen Wij hem: O Ibrahim! Je hebt het visioen bevestigd. Zo belonen Wij de weldoeners. Dit was een duidelijke beproeving. En Wij losten hem uit met een ruim offer.",
+        "relevance": "Deze verzen beschrijven de onderwerping en het losgeld."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Dhabh",
+        "arabic_term": "ذبح",
+        "definition": "Slachting, offer. De beproeving van het offer van Ibrahim.",
+        "pronunciation": "dhah-bah"
+      },
+      {
+        "id": 2,
+        "term": "Fadaynahu",
+        "arabic_term": "فديناه",
+        "definition": "Wij losten hem uit. Allah verving de zoon door een schaap.",
+        "pronunciation": "fa-day-na-hu"
+      }
+    ]
+  },
+  "lessons_from_ibrahim": {
+    "title": "De lessen uit het verhaal van Ibrahim",
+    "title_arabic": "دروس من قصة إبراهيم",
+    "introduction": "Ibrahim (عليه السلام) wordt in de Koran «Khalilullah» genoemd — de vertrouwde vriend van Allah. Zijn verhaal bevat tijdloze lessen: de afwijzing van afgoderij, vertrouwen op Allah in de beproeving, totale onderwerping, en de bouw van een Huis voor aanbidding. De Koran citeert hem als model voor de mensheid.",
+    "conclusion": "Ibrahim volbracht alle beproevingen. Zijn nageslacht omvat Isma'il, Ishaq, Ya'qub, en de profeten tot Muhammad (ﷺ). Hij is de vader van de gelovigen en een model van zuiver geloof.",
+    "moral_lesson": "Dit verhaal leert ons het voorbeeld van Ibrahim te volgen: het zuivere monotheïsme, gehoorzaamheid, vertrouwen op Allah, en de bouw van wat de gelovigen verenigt.",
+    "historical_location": "Van Mesopotamië naar Mekka",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lessons_from_ibrahim_chapter_1",
+        "title": "Een model voor de mensheid",
+        "content": "De Koran zegt: «Ibrahim was een gemeenschap op zichzelf, Allah onderworpen, zuiver monotheïst, en hij behoorde niet tot de polytheïsten.» (16:120) Ibrahim belichaamt het zuivere geloof. Hij verzette zich tegen zijn vader, zijn volk, en zelfs een koning, in naam van de waarheid. Hij werd in het vuur geworpen, maar Allah beschermde hem. Hij bouwde de Kaaba met zijn zoon. Hij aanvaardde zijn zoon te offeren toen Allah het hem beval. Elke beproeving versterkte zijn geloof."
+      },
+      {
+        "id": "lessons_from_ibrahim_chapter_2",
+        "title": "De geslachtslijn van de profeten",
+        "content": "De Koran plaatst Ibrahim in de geslachtslijn van de uitverkorenen: «Allah verkoos Adam, Noeh, de familie van Ibrahim en de familie van Imran boven alle werelden.» (3:33) Ibrahim is de vader van de profeten. Isma'il en Ishaq, zijn zonen, waren profeten. Ya'qub, Yusuf, Musa, Isa en Muhammad (vrede zij met hen allen) behoren tot zijn nakomelingen. De smeekbede van Ibrahim — «Maak van ons Uw onderworpenen en van ons nageslacht een aan U onderworpen gemeenschap» — werd verhoord: de moslims zijn de gemeenschap van Ibrahim."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 16:120",
+        "reference_text": "Soera An-Nahl, vers 120",
+        "content": "إِنَّ إِبْرَٰهِيمَ كَانَ أُمَّةًۭ قَانِتًۭا لِّلَّهِ حَنِيفًۭا وَلَمْ يَكُ مِنَ ٱلْمُشْرِكِينَ",
+        "translation": "Ibrahim was een gemeenschap op zichzelf, Allah onderworpen, zuiver monotheïst, en hij behoorde niet tot de polytheïsten.",
+        "relevance": "Dit vers beschrijft Ibrahim als uniek model."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 3:33",
+        "reference_text": "Soera Al 'Imran, vers 33",
+        "content": "إِنَّ ٱللَّهَ ٱصْطَفَىٰٓ ءَادَمَ وَنُوحًۭا وَءَالَ إِبْرَٰهِيمَ وَءَالَ عِمْرَٰنَ عَلَى ٱلْعَـٰلَمِينَ",
+        "translation": "Allah verkoos Adam, Noeh, de familie van Ibrahim en de familie van Imran boven alle werelden.",
+        "relevance": "Dit vers vestigt de plaats van Ibrahim onder de uitverkorenen van Allah."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Khalilullah",
+        "arabic_term": "خليل الله",
+        "definition": "De vertrouwde vriend van Allah. Titel gegeven aan Ibrahim in de islamitische traditie.",
+        "pronunciation": "kha-lil ul-lah"
+      },
+      {
+        "id": 2,
+        "term": "Ibra",
+        "arabic_term": "عبرة",
+        "definition": "Voorbeeld of les. De verhalen van de profeten zijn voorbeelden voor de mensheid.",
+        "pronunciation": "ib-ra"
+      }
+    ]
+  }
+}

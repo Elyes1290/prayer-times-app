@@ -1,0 +1,287 @@
+{
+  "lut_prophecy": {
+    "title": "Lot e la sua missione al popolo di Sodoma",
+    "title_arabic": "لوط عليه السلام وإرساله إلى قوم سدوم",
+    "introduction": "Lot (لوط عليه السلام) è uno dei profeti menzionati nel Corano. Allah dice: \"E Lot era certamente uno degli inviati.\" (37:133) Fu inviato a un popolo che praticava una vergogna che nessuno prima di loro aveva commesso. Il Corano riporta il suo richiamo alla rettitudine e la risposta del suo popolo che rifiutò gli avvertimenti.",
+    "conclusion": "Lot fu inviato come messaggero al suo popolo. Nonostante il suo richiamo sincero, il popolo persistette nella sua vergogna e rifiutò gli avvertimenti. Allah preparò il castigo per coloro che si ostinarono.",
+    "moral_lesson": "Questa storia ci insegna che ogni popolo riceve messaggeri per guidarlo. Rifiutare gli avvertimenti conduce alla perdizione.",
+    "historical_location": "Regione di Sodoma (al-Mu'tafikat)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lut_prophecy_chapter_1",
+        "title": "L'invio di Lot",
+        "content": "Il Corano stabilisce Lot tra gli inviati: \"E Lot era certamente uno degli inviati.\" (37:133) Lot fu inviato a un popolo che abitava città. Il Corano dice: \"Il popolo di Lot trattò i messaggeri di bugiardi.\" (26:160) Lot chiamò il suo popolo a temere Allah e abbandonare le vergogne. Li avvertì del castigo a venire se avessero persistito."
+      },
+      {
+        "id": "lut_prophecy_chapter_2",
+        "title": "Il popolo di Sodoma",
+        "content": "Il Corano descrive il popolo di Lot: \"E Lot, quando disse al suo popolo: Commettete una vergogna che nessuno tra i mondi vi ha preceduto?\" (7:80) Questo popolo praticava atti che il Corano chiama \"الفاحشة\" (al-fahisha) — la vergogna. Lot li esortò a temere Allah e a non disonorarlo riguardo ai suoi ospiti. Ma risposero con rifiuto e scherno."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 37:133",
+        "reference_text": "Sura As-Saffat, versetto 133",
+        "content": "وَإِنَّ لُوطًا لَّمِنَ ٱلْمُرْسَلِينَ",
+        "translation": "E Lot era certamente uno degli inviati.",
+        "relevance": "Questo versetto conferma che Lot è un messaggero di Allah."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 7:80",
+        "reference_text": "Sura Al-A'raf, versetto 80",
+        "content": "وَلُوطًا إِذْ قَالَ لِقَوْمِهِۦٓ أَتَأْتُونَ ٱلْفَـٰحِشَةَ مَا سَبَقَكُم بِهَا مِنْ أَحَدٍۢ مِّنَ ٱلْعَـٰلَمِينَ",
+        "translation": "E Lot, quando disse al suo popolo: Commettete una vergogna che nessuno tra i mondi vi ha preceduto?",
+        "relevance": "Questo versetto stabilisce il richiamo di Lot al suo popolo."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Lut",
+        "arabic_term": "لوط",
+        "definition": "Lot in arabo. Profeta di Allah inviato al popolo di Sodoma.",
+        "pronunciation": "lout"
+      },
+      {
+        "id": 2,
+        "term": "Al-Fahisha",
+        "arabic_term": "الفاحشة",
+        "definition": "La vergogna. Termine coranico per gli atti vergognosi del popolo di Lot.",
+        "pronunciation": "al-fa-hi-sha"
+      }
+    ]
+  },
+  "lut_call": {
+    "title": "Il richiamo di Lot alla rettitudine",
+    "title_arabic": "دعوة لوط إلى الاستقامة",
+    "introduction": "Lot (عليه السلام) chiamò il suo popolo ad abbandonare la vergogna e temere Allah. Il Corano riporta: \"Non temete Allah? Io sono per voi un messaggero degno di fiducia. Temete dunque Allah e obbeditemi.\" (26:161-163) Il suo popolo rispose con rifiuto e minacce.",
+    "conclusion": "Lot compì la sua missione di avvertimento. Il suo popolo scelse di persistere nello smarrimento. Lot chiese ad Allah di salvarlo lui e la sua famiglia dal popolo dei perversi.",
+    "moral_lesson": "Questa storia ci insegna che il messaggero compie la sua missione; spetta al popolo scegliere la guida o lo smarrimento.",
+    "historical_location": "Regione di Sodoma",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lut_call_chapter_1",
+        "title": "L'esortazione",
+        "content": "Il Corano riporta le parole di Lot: \"Non temete Allah? Io sono per voi un messaggero degno di fiducia. Temete dunque Allah e obbeditemi. Non vi chiedo alcuna ricompensa per questo; la mia ricompensa non spetta che al Signore dell'universo.\" (26:161-164) Lot chiamò il suo popolo con sincerità. Non chiedeva alcuna ricompensa terrena; la sua ricompensa veniva solo da Allah."
+      },
+      {
+        "id": "lut_call_chapter_2",
+        "title": "Il rifiuto del popolo",
+        "content": "Il Corano dice: \"Il popolo di Lot trattò i messaggeri di bugiardi.\" (26:160) E: \"Il popolo di Lot rifiutò gli avvertimenti.\" (54:33) Rifiutarono di ascoltare Lot e persistettero nei loro atti. Lot invocò il suo Signore: \"Signore mio! Salvami me e la mia famiglia da ciò che fanno.\" (26:169) Allah esaudì la sua invocazione."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 26:161-164",
+        "reference_text": "Sura Ash-Shu'ara, versetti 161-164",
+        "content": "إِذْ قَالَ لَهُمْ لُوطٌ أَلَا تَتَّقُونَ إِنِّى لَكُمْ رَسُولٌ أَمِينٌ فَٱتَّقُوا۟ ٱللَّهَ وَأَطِيعُونِ وَمَآ أَسْـَٔلُكُمْ عَلَيْهِ مِنْ أَجْرٍ ۖ إِنْ أَجْرِىَ إِلَّا عَلَىٰ رَبِّ ٱلْعَـٰلَمِينَ",
+        "translation": "Quando Lot disse loro: Non temete Allah? Io sono per voi un messaggero degno di fiducia. Temete dunque Allah e obbeditemi. Non vi chiedo alcuna ricompensa per questo; la mia ricompensa non spetta che al Signore dell'universo.",
+        "relevance": "Questi versetti descrivono il richiamo di Lot al suo popolo."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 54:33",
+        "reference_text": "Sura Al-Qamar, versetto 33",
+        "content": "كَذَّبَتْ قَوْمُ لُوطٍۭ بِٱلنُّذُرِ",
+        "translation": "Il popolo di Lot rifiutò gli avvertimenti.",
+        "relevance": "Questo versetto conferma il rifiuto degli avvertimenti da parte del popolo."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Rasul",
+        "arabic_term": "رسول",
+        "definition": "Messaggero. Lot si presentò come messaggero degno di fiducia.",
+        "pronunciation": "ra-soul"
+      },
+      {
+        "id": 2,
+        "term": "An-Nudhur",
+        "arabic_term": "النذر",
+        "definition": "Gli avvertimenti. Il popolo di Lot rifiutò gli avvertimenti divini.",
+        "pronunciation": "an-noud-hour"
+      }
+    ]
+  },
+  "lut_guests": {
+    "title": "Gli ospiti in casa di Lot",
+    "title_arabic": "الضيوف عند لوط",
+    "introduction": "Angeli vennero in casa di Lot sotto forma di ospiti. Il popolo apprese della loro presenza e si precipitò verso la casa di Lot. Lot li esortò: \"Ecco le mie figlie — sono più pure per voi. Temete Allah e non mi disonorate riguardo ai miei ospiti. Non c'è tra voi un uomo ragionevole?\" (11:78) Il popolo rifiutò e insistette.",
+    "conclusion": "Gli angeli rivelarono a Lot la loro missione: la distruzione del popolo. Gli ordinarono di partire con la sua famiglia prima dell'alba, senza voltarsi. La moglie di Lot fu tra coloro che rimasero.",
+    "moral_lesson": "Questa storia ci insegna il dovere di proteggere i propri ospiti e che l'ospitalità è un valore sacro nell'Islam. Mostra anche che la disubbidienza può colpire persino la famiglia del profeta.",
+    "historical_location": "Sodoma",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "the_guests_chapter_1",
+        "title": "L'arrivo degli ospiti",
+        "content": "Il Corano riporta: \"E quando i Nostri messaggeri vennero da Lot, si afflisse per loro e provò grande disagio a causa loro. Disse: Questo è un giorno terribile.\" (11:77) Gli angeli vennero in casa di Lot sotto forma di giovani. Lot li accolse, ignorando che erano inviati di Allah. Temette per loro perché conosceva i costumi del suo popolo."
+      },
+      {
+        "id": "lut_guests_chapter_2",
+        "title": "La reazione del popolo",
+        "content": "Il Corano dice: \"E il suo popolo venne a lui precipitandosi — e prima facevano il male. Disse: O popolo mio! Ecco le mie figlie — sono più pure per voi. Temete Allah e non mi disonorate riguardo ai miei ospiti. Non c'è tra voi un uomo ragionevole?\" (11:78) Lot tentò di proteggere i suoi ospiti. Offrì un'alternativa legittima. Ma il popolo rifiutò e insistette sulla sua intenzione. Gli angeli dissero a Lot: \"Siamo i messaggeri del tuo Signore. Non potranno raggiungerti.\" (11:81)"
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 11:77-78",
+        "reference_text": "Sura Hud, versetti 77-78",
+        "content": "وَلَمَّا جَآءَتْ رُسُلُنَآ إِلَىٰ لُوطٍۢ سِىٓءَ بِهِمْ وَضَاقَ بِهِمْ ذَرْعًۭا وَقَالَ هَـٰذَا يَوْمٌ عَصِيبٌ ۝ وَجَآءَهُۥ قَوْمُهُۥ يُهْرَعُونَ إِلَيْهِ وَمِن قَبْلُ كَانُوا۟ يَعْمَلُونَ ٱلسَّيِّـَٔاتِ ۚ قَالَ يَـٰقَوْمِ هَـٰٓؤُلَآءِ بَنَاتِى هُنَّ أَطْهَرُ لَكُمْ",
+        "translation": "E quando i Nostri messaggeri vennero da Lot, si afflisse per loro. E il suo popolo venne a lui precipitandosi. Disse: O popolo mio! Ecco le mie figlie — sono più pure per voi.",
+        "relevance": "Questi versetti descrivono l'arrivo degli angeli e la reazione di Lot."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 11:81",
+        "reference_text": "Sura Hud, versetto 81",
+        "content": "قَالُوا۟ يَـٰلُوطُ إِنَّا رُسُلُ رَبِّكَ لَن يَصِلُوٓا۟ إِلَيْكَ",
+        "translation": "Dissero: O Lot! Siamo i messaggeri del tuo Signore. Non potranno raggiungerti.",
+        "relevance": "Questo versetto rivela l'identità degli ospiti e la protezione divina."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Dayf",
+        "arabic_term": "ضيف",
+        "definition": "Ospite, visitatore. Lot cercò di proteggere i suoi ospiti secondo la tradizione dell'ospitalità.",
+        "pronunciation": "dayf"
+      },
+      {
+        "id": 2,
+        "term": "Rasul",
+        "arabic_term": "رسل",
+        "definition": "Messaggeri. Gli angeli erano i messaggeri di Allah inviati a Lot.",
+        "pronunciation": "rou-soul"
+      }
+    ]
+  },
+  "lut_destruction": {
+    "title": "La distruzione del popolo",
+    "title_arabic": "هلاك قوم لوط",
+    "introduction": "Quando il popolo persistette nella sua vergogna e rifiutò tutti gli avvertimenti, il castigo di Allah si abbatté su di loro. Il Corano dice: \"E rovesciammo la città e facemmo piovere su di loro pietre di argilla cotta.\" (15:74) Il popolo fu distrutto. Lot e coloro che lo seguirono furono salvati.",
+    "conclusion": "Il castigo si abbatté all'alba. La città fu rovesciata. Lot e la sua famiglia — eccetto sua moglie che disobbedì — partirono in sicurezza. Questa storia rimane un avvertimento per i popoli che persistono nel male.",
+    "moral_lesson": "Questa storia ci insegna che il castigo di Allah raggiunge coloro che persistono nel male dopo aver ricevuto gli avvertimenti. La disubbidienza conduce alla perdizione.",
+    "historical_location": "Sodoma (al-Mu'tafikat)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "the_destruction_chapter_1",
+        "title": "L'ordine di partire",
+        "content": "Il Corano riporta: \"Dissero: O Lot! Siamo i messaggeri del tuo Signore. Non potranno raggiungerti. Parti con la tua famiglia nel cuore della notte, e che nessuno di voi si volti — eccetto tua moglie. Ciò che li colpirà la colpirà. Il loro appuntamento è l'alba. L'alba non è forse vicina?\" (11:81) Lot ricevette l'ordine di lasciare la città con la sua famiglia prima dell'alba. Non doveva voltarsi. Sua moglie, che aveva tradito informando il popolo degli ospiti, fu tra coloro che rimasero."
+      },
+      {
+        "id": "lut_destruction_chapter_2",
+        "title": "Il castigo",
+        "content": "Il Corano descrive il castigo: \"E rovesciammo la città e facemmo piovere su di loro pietre di argilla cotta, le une sulle altre, segnate presso il tuo Signore. E non sono lontane dagli ingiusti.\" (11:82-83) E: \"Il popolo di Lot rifiutò gli avvertimenti. Inviammo contro di loro un uragano.\" (54:33-34) La città fu distrutta. Il popolo perì. Lot e i suoi che lo avevano seguito furono salvati. Il Corano conclude: \"Non resta di loro che rovine.\" (37:138)"
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 11:81-83",
+        "reference_text": "Sura Hud, versetti 81-83",
+        "content": "قَالُوا۟ يَـٰلُوطُ إِنَّا رُسُلُ رَبِّكَ لَن يَصِلُوٓا۟ إِلَيْكَ ۖ فَأَسْرِ بِأَهْلِكَ بِقِطْعٍۢ مِّنَ ٱلَّيْلِ وَلَا يَلْتَفِتْ مِنكُمْ أَحَدٌ إِلَّا ٱمْرَأَتَكَ ۖ إِنَّهُۥ مُصِيبُهَا مَا أَصَابَهُمْ ۚ إِنَّ مَوْعِدَهُمُ ٱلصُّبْحُ ۚ أَلَيْسَ ٱلصُّبْحُ بِقَرِيبٍۢ ۝ فَلَمَّا جَآءَ أَمْرُنَا جَعَلْنَا عَـٰلِيَهَا سَافِلَهَا وَأَمْطَرْنَا عَلَيْهَا حِجَارَةًۭ مِّن سِجِّيلٍۢ مَّنضُودٍۢ",
+        "translation": "Dissero: O Lot! Parti con la tua famiglia nel cuore della notte... E rovesciammo la città e facemmo piovere su di loro pietre di argilla cotta.",
+        "relevance": "Questi versetti descrivono l'ordine di partire e il castigo."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 54:33-34",
+        "reference_text": "Sura Al-Qamar, versetti 33-34",
+        "content": "كَذَّبَتْ قَوْمُ لُوطٍۭ بِٱلنُّذُرِ ۝ إِنَّآ أَرْسَلْنَا عَلَيْهِمْ حَاصِبًا",
+        "translation": "Il popolo di Lot rifiutò gli avvertimenti. Inviammo contro di loro un uragano.",
+        "relevance": "Questi versetti descrivono il rifiuto e il castigo."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Sijjil",
+        "arabic_term": "سجيل",
+        "definition": "Argilla cotta, argilla indurita. Le pietre del castigo erano di sijjil.",
+        "pronunciation": "sij-jil"
+      },
+      {
+        "id": 2,
+        "term": "Al-Mu'tafikat",
+        "arabic_term": "المؤتفكات",
+        "definition": "Le città rovesciate. Sodoma e le città del popolo di Lot.",
+        "pronunciation": "al-mou-ta-fi-kat"
+      }
+    ]
+  },
+  "lessons_from_lut": {
+    "title": "Lezioni dalla storia di Lot",
+    "title_arabic": "دروس من قصة لوط",
+    "introduction": "La storia di Lot (عليه السلام) contiene lezioni senza tempo. Il Corano la cita come avvertimento: \"E Lot era certamente uno degli inviati.\" (37:133) Insegna che ogni popolo riceve messaggeri, che rifiutare gli avvertimenti conduce al castigo, e che l'ospitalità è un valore sacro.",
+    "conclusion": "Lot compì la sua missione. Il suo popolo fu distrutto per aver persistito nel male. La storia di Lot rimane un avvertimento per l'umanità: temere Allah, ascoltare i messaggeri, e non persistere nella disubbidienza.",
+    "moral_lesson": "Questa storia ci insegna a prestare attenzione agli avvertimenti, a proteggere i nostri ospiti, e a non persistere mai negli atti che Allah ha vietato.",
+    "historical_location": "Regione di Sodoma",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lessons_from_lut_chapter_1",
+        "title": "Un avvertimento per i popoli",
+        "content": "Il Corano cita la storia di Lot tra gli esempi di popoli distrutti: \"Il popolo di Lot rifiutò gli avvertimenti.\" (54:33) Ogni popolo riceve messaggeri. Coloro che credono e si pentono sono salvati. Coloro che persistono nel male subiscono il castigo. Lot chiamò il suo popolo con sincerità; non chiedeva alcuna ricompensa. Il suo popolo scelse il rifiuto. Il risultato fu la distruzione."
+      },
+      {
+        "id": "lessons_from_lut_chapter_2",
+        "title": "L'ospitalità e la protezione",
+        "content": "Lot cercò di proteggere i suoi ospiti nonostante la minaccia del suo popolo. Disse: \"Temete Allah e non mi disonorate riguardo ai miei ospiti.\" (11:78) L'ospitalità (ضيافة) è un valore fondamentale nell'Islam. Il Profeta Muhammad (ﷺ) disse che chi crede in Allah e nel Giorno Ultimo deve onorare il suo ospite. La storia di Lot ci ricorda che proteggere l'ospite è un dovere sacro. Al contrario, la moglie di Lot tradì informando il popolo — fu tra coloro che perirono."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 37:133-138",
+        "reference_text": "Sura As-Saffat, versetti 133-138",
+        "content": "وَإِنَّ لُوطًا لَّمِنَ ٱلْمُرْسَلِينَ ۝ إِذْ نَجَّيْنَـٰهُ وَأَهْلَهُۥٓ أَجْمَعِينَ ۝ إِلَّا عَجُوزًا فِى ٱلْغَـٰبِرِينَ ۝ ثُمَّ دَمَّرْنَا ٱلْءَاخَرِينَ",
+        "translation": "E Lot era certamente uno degli inviati. Quando lo salvammo lui e tutta la sua famiglia, eccetto una vecchia che fu tra le ritardatarie. Poi distruggemmo gli altri.",
+        "relevance": "Questi versetti riassumono la salvezza di Lot e la distruzione del suo popolo."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 29:34",
+        "reference_text": "Sura Al-Ankabut, versetto 34",
+        "content": "إِنَّا مُنزِلُونَ عَلَىٰٓ أَهْلِ هَـٰذِهِ ٱلْقَرْيَةِ رِجْزًۭا مِّنَ ٱلسَّمَآءِ بِمَا كَانُوا۟ يَفْسُقُونَ",
+        "translation": "Stiamo per far scendere sugli abitanti di questa città un castigo dal cielo, per ciò che hanno perpetrato.",
+        "relevance": "Questo versetto spiega la causa del castigo."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Diyafa",
+        "arabic_term": "ضيافة",
+        "definition": "Ospitalità. Lot cercò di proteggere i suoi ospiti secondo questo valore sacro.",
+        "pronunciation": "di-ya-fa"
+      },
+      {
+        "id": 2,
+        "term": "Rijz",
+        "arabic_term": "رجز",
+        "definition": "Castigo, flagello. Il castigo scese sul popolo di Lot.",
+        "pronunciation": "rijz"
+      }
+    ]
+  }
+}

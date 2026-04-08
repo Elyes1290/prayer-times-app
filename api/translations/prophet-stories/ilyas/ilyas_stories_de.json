@@ -1,0 +1,230 @@
+{
+  "ilyas_call": {
+    "title": "Der Ruf des Ilyas",
+    "title_arabic": "دعوة إلياس",
+    "introduction": "Ilyas (إلياس عليه السلام), Elija, ist ein Prophet, der zum Volk Israel gesandt wurde. Der Koran sagt: \"Und Ilyas war wahrlich unter den Gesandten.\" (37:123) Er rief sein Volk auf, die Anbetung Baals aufzugeben und zu Allah zurückzukehren. Das Volk war durch die Anbetung von Götzen in die Irre gegangen.",
+    "conclusion": "Ilyas predigte mit Festigkeit. Er warnte vor der Strafe. Einige glaubten, andere lehnten ihn ab. Er blieb seiner Mission trotz Widerstand treu.",
+    "moral_lesson": "Diese Geschichte lehrt uns, dass der Prophet zum Monotheismus aufrufen muss, ohne zu zögern. Götzendienst führt ins Verderben.",
+    "historical_location": "Palästina (Königreich Israel)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "ilyas_call_chapter_1",
+        "title": "Die Mission des Ilyas",
+        "content": "Der Koran berichtet: \"Und Ilyas war wahrlich unter den Gesandten. Als er zu seinem Volk sagte: Fürchtet ihr Allah nicht? Ruft ihr Baal an und verlasst den Besten der Schöpfer?\" (37:123-125) Ilyas wurde zu einem Volk gesandt, das Baal, einen Götzen, anbetete. Er rief sie auf, nur Allah zu dienen. Er ermahnte sie, den Götzendienst aufzugeben."
+      },
+      {
+        "id": "ilyas_call_chapter_2",
+        "title": "Die Warnung",
+        "content": "Der Koran sagt: \"Allah, euer Herr und der Herr eurer ersten Väter?\" (37:126) Ilyas erinnerte sein Volk daran, dass Allah der Schöpfer ist. Baal ist nichts. Nur Allah verdient Anbetung. Er warnte sie vor der Strafe, wenn sie im Irrtum beharrten. Seine Botschaft war klar: kehrt zum Monotheismus zurück."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 37:123",
+        "reference_text": "Sure As-Saffat, Vers 123",
+        "content": "وَإِنَّ إِلْيَاسَ لَمِنَ ٱلْمُرْسَلِينَ",
+        "translation": "Und Ilyas war wahrlich unter den Gesandten.",
+        "relevance": "Dieser Vers bestätigt Ilyas als Gesandten."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 37:124-125",
+        "reference_text": "Sure As-Saffat, Verse 124-125",
+        "content": "إِذْ قَالَ لِقَوْمِهِۦٓ أَلَا تَتَّقُونَ ۝ أَتَدْعُونَ بَعْلًۭا وَتَذَرُونَ أَحْسَنَ ٱلْخَـٰلِقِينَ",
+        "translation": "Als er zu seinem Volk sagte: Fürchtet ihr Allah nicht? Ruft ihr Baal an und verlasst den Besten der Schöpfer?",
+        "relevance": "Dieser Vers beschreibt Ilyas' Ruf gegen Baal."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Ilyas",
+        "arabic_term": "إلياس",
+        "definition": "Elija auf Arabisch. Prophet, der zum Volk Israel gesandt wurde.",
+        "pronunciation": "il-yas"
+      },
+      {
+        "id": 2,
+        "term": "Baal",
+        "arabic_term": "بعْل",
+        "definition": "Götze, den das Volk Israel anbetete. Ilyas bekämpfte seinen Kult.",
+        "pronunciation": "ba'l"
+      }
+    ]
+  },
+  "ilyas_baal": {
+    "title": "Ilyas und die Herausforderung Baals",
+    "title_arabic": "إلياس وبعل",
+    "introduction": "Ilyas forderte die Anbeter Baals heraus. Der Koran sagt: \"Ruft ihr Baal an und verlasst den Besten der Schöpfer?\" (37:125) Er schlug einen Test vor: jeder würde seine Gottheit anrufen. Die wahre Gottheit würde mit Feuer antworten. Die Götzendiener riefen Baal vergeblich an.",
+    "conclusion": "Baal antwortete nicht. Ilyas rief Allah an. Feuer stieg vom Himmel herab und verzehrte sein Opfer. Die Wahrheit triumphierte. Herzen öffneten sich dem Islam.",
+    "moral_lesson": "Diese Geschichte lehrt uns, dass Götzen machtlos sind. Nur Allah antwortet auf die Anrufung. Die Wahrheit triumphiert letztendlich.",
+    "historical_location": "Berg Karmel, Palästina",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "ilyas_baal_chapter_1",
+        "title": "Die Herausforderung",
+        "content": "Der Koran berichtet Ilyas' Ruf: \"Fürchtet ihr Allah nicht?\" (37:124) Ilyas versammelte das Volk und die Propheten Baals. Er schlug einen Test vor: jeder würde ein Opfer vorbereiten. Die Anbeter Baals würden ihren Götzen anrufen. Ilyas würde Allah anrufen. Wer mit Feuer antwortete, wäre der wahre Gott. Die Götzendiener akzeptierten."
+      },
+      {
+        "id": "ilyas_baal_chapter_2",
+        "title": "Allahs Sieg",
+        "content": "Der Koran sagt: \"Allah, euer Herr und der Herr eurer ersten Väter?\" (37:126) Die Propheten Baals riefen den ganzen Tag. Nichts. Baal antwortete nicht. Dann rief Ilyas Allah an. Feuer stieg vom Himmel herab. Es verzehrte das Opfer, das Holz und das Wasser. Das Volk rief: \"Allah ist der wahre Gott!\" Viele glaubten."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 37:125",
+        "reference_text": "Sure As-Saffat, Vers 125",
+        "content": "أَتَدْعُونَ بَعْلًۭا وَتَذَرُونَ أَحْسَنَ ٱلْخَـٰلِقِينَ",
+        "translation": "Ruft ihr Baal an und verlasst den Besten der Schöpfer?",
+        "relevance": "Dieser Vers erinnert an die Herausforderung gegen Baal."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 37:127",
+        "reference_text": "Sure As-Saffat, Vers 127",
+        "content": "فَكَذَّبُوهُ فَإِنَّهُمْ لَمُحْضَرُونَ",
+        "translation": "Sie nannten ihn einen Lügner. Sie werden (zur Strafe) vorgeführt.",
+        "relevance": "Dieser Vers berichtet von der Ablehnung Ilyas durch einige."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Baal",
+        "arabic_term": "بعْل",
+        "definition": "Götze. Die Anbeter Baals wurden besiegt.",
+        "pronunciation": "ba'l"
+      },
+      {
+        "id": 2,
+        "term": "Khalq",
+        "arabic_term": "خَلْق",
+        "definition": "Schöpfung. Allah ist ahsan al-khaliqin, der Beste der Schöpfer.",
+        "pronunciation": "khalq"
+      }
+    ]
+  },
+  "ilyas_miracle": {
+    "title": "Die Wunder des Ilyas",
+    "title_arabic": "معجزات إلياس",
+    "introduction": "Allah gewährte Ilyas Wunder, um seine Mission zu bestätigen. Der Koran sagt: \"Friede über Ilyas! So belohnen Wir die Gutes Tuenden. Er war wahrlich unter Unseren gläubigen Dienern.\" (37:129-132) Unter seinen Wundern: Feuer vom Himmel, Auferweckung eines Toten und Vermehrung von Nahrung.",
+    "conclusion": "Ilyas' Wunder stärkten den Glauben der Gläubigen. Sie bewiesen, dass er wahrlich ein Prophet Allahs war. Die Schöpfung gehorcht ihrem Schöpfer.",
+    "moral_lesson": "Diese Geschichte lehrt uns, dass Wunder Zeichen von Allah sind. Sie bestätigen die Wahrheit der prophetischen Botschaft.",
+    "historical_location": "Palästina",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "ilyas_miracle_chapter_1",
+        "title": "Feuer vom Himmel",
+        "content": "Der Koran berichtet: \"Friede über Ilyas!\" (37:130) Das Wunder des Feuers auf dem Berg Karmel war das berühmteste. Ilyas rief Allah an. Feuer stieg herab und verzehrte das Opfer. Dieses Wunder zeigte, dass nur Allah Macht hat. Götzen sind machtlos. Viele Menschen glaubten an jenem Tag."
+      },
+      {
+        "id": "ilyas_miracle_chapter_2",
+        "title": "Die Belohnung",
+        "content": "Der Koran sagt: \"So belohnen Wir die Gutes Tuenden. Er war wahrlich unter Unseren gläubigen Dienern.\" (37:131-132) Ilyas wurde für seine Treue belohnt. Allah schützte ihn vor seinen Feinden. Er wurde ohne zu sterben in den Himmel erhoben, laut einigen Überlieferungen. Sein Name bleibt unter den Propheten gesegnet."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 37:129-130",
+        "reference_text": "Sure As-Saffat, Verse 129-130",
+        "content": "وَسَلَـٰمٌ عَلَىٰٓ إِلْ يَاسِينَ ۝ إِنَّا كَذَٰلِكَ نَجْزِى ٱلْمُحْسِنِينَ",
+        "translation": "Friede über Ilyas! So belohnen Wir die Gutes Tuenden.",
+        "relevance": "Dieser Vers bestätigt Ilyas' Belohnung."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 6:85",
+        "reference_text": "Sure Al-An'am, Vers 85",
+        "content": "وَزَكَرِيَّا وَيَحْيَىٰ وَعِيسَىٰ وَإِلْيَاسَ كُلٌّۭ مِّنَ ٱلصَّـٰلِحِينَ",
+        "translation": "Und Zakariya, Yahya, Isa und Ilyas: alle unter den Rechtschaffenen.",
+        "relevance": "Dieser Vers stellt Ilyas unter die rechtschaffenen Propheten."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Muhsin",
+        "arabic_term": "محسن",
+        "definition": "Gutes Tuender. Ilyas war muhsin und wurde belohnt.",
+        "pronunciation": "mouh-sin"
+      },
+      {
+        "id": 2,
+        "term": "Mu'min",
+        "arabic_term": "مؤمن",
+        "definition": "Gläubiger. Ilyas war unter den mu'minin.",
+        "pronunciation": "mou-min"
+      }
+    ]
+  },
+  "lessons_from_ilyas": {
+    "title": "Lehren aus der Geschichte des Ilyas",
+    "title_arabic": "دروس من قصة إلياس",
+    "introduction": "Ilyas ist der Prophet, der den Götzendienst bekämpfte. Der Koran sagt: \"Und Ilyas war wahrlich unter den Gesandten.\" (37:123) Er rief sein Volk auf, Baal aufzugeben und Allah zu dienen. Sein Mut und seine Festigkeit bleiben ein Vorbild.",
+    "conclusion": "Ilyas stellte sich dem Götzendienst. Er forderte Baal heraus und triumphierte. Seine Botschaft: Nur Allah verdient Anbetung. Diese Lehre ist ewig.",
+    "moral_lesson": "Diese Geschichte lehrt uns, dass der Monotheismus (Tawhid) das Fundament des Glaubens ist. Jede Form von Beigesellung zu Allah führt in die Irre.",
+    "historical_location": "Palästina",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lessons_from_ilyas_chapter_1",
+        "title": "Der Kampf gegen den Götzendienst",
+        "content": "Der Koran sagt: \"Ruft ihr Baal an und verlasst den Besten der Schöpfer?\" (37:125) Ilyas machte keine Kompromisse. Er rief klar zum Monotheismus auf. Götzendienst (Schirk) ist die größte Sünde. Der Gläubige muss ihn vollständig ablehnen. Ilyas ist ein Vorbild der Festigkeit im Ruf."
+      },
+      {
+        "id": "lessons_from_ilyas_chapter_2",
+        "title": "Vertrauen auf Allah",
+        "content": "Ilyas forderte Hunderte von Propheten Baals heraus. Er war allein. Aber er hatte Allah. Feuer stieg herab und bewies die Wahrheit. Der Koran erinnert: \"So belohnen Wir die Gutes Tuenden.\" (37:131) Wer sich auf Allah verlässt, wird nicht enttäuscht. Der Sieg gehört den Gläubigen."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 37:123-132",
+        "reference_text": "Sure As-Saffat, Verse 123-132",
+        "content": "وَإِنَّ إِلْيَاسَ لَمِنَ ٱلْمُرْسَلِينَ ۝ إِذْ قَالَ لِقَوْمِهِۦٓ أَلَا تَتَّقُونَ",
+        "translation": "Und Ilyas war unter den Gesandten. Als er zu seinem Volk sagte: Fürchtet ihr Allah nicht?",
+        "relevance": "Diese Passage fasst Ilyas' Geschichte zusammen."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 37:132",
+        "reference_text": "Sure As-Saffat, Vers 132",
+        "content": "إِنَّهُۥ كَانَ مِنْ عِبَادِنَا ٱلْمُؤْمِنِينَ",
+        "translation": "Er war wahrlich unter Unseren gläubigen Dienern.",
+        "relevance": "Dieser Vers lobt Ilyas als Gläubigen."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Tawhid",
+        "arabic_term": "توحيد",
+        "definition": "Einheit Allahs. Ilyas rief zum Tawhid auf.",
+        "pronunciation": "taw-hid"
+      },
+      {
+        "id": 2,
+        "term": "Shirk",
+        "arabic_term": "شرك",
+        "definition": "Beigesellung, Götzendienst. Ilyas bekämpfte den Schirk.",
+        "pronunciation": "chirk"
+      }
+    ]
+  }
+}

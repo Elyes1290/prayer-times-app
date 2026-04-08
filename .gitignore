@@ -200,3 +200,7 @@ api/config-prod.php
 
 # Fichier de configuration securise
 .env
+
+# Prophet Stories translations (served from server API)
+api/translations/prophet-stories/muhammad/prophet_stories_*.json
+api/translations/prophet-stories/adam/adam_stories_*.json

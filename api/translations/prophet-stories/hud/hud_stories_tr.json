@@ -1,0 +1,360 @@
+{
+  "hud_prophecy": {
+    "title": "Hud'un Peygamber Olarak Gönderilmesi",
+    "title_arabic": "إرسال هود عليه السلام",
+    "introduction": "Hud (هود عليه السلام), Allah tarafından 'Ad kavmine gönderilen bir peygamberdir; eski Arap medeniyetlerinden biridir. Nuh'tan sonra 'Ad'ın torunları yeniden sapıklığa düştü. Allah, onları tevhide çağırmak ve azaptan uyarmak için kardeşleri Hud'u gönderdi. Hikayesi peygamberlik hakikati ile güçlü bir kavmin kibrinin karşılaşmasını gösterir.",
+    "conclusion": "Hud'un gönderilmesi, Nuh'tan sonra peygamberlik misyonunun devamını işaret eder. Allah asla kavimleri açık bir uyarıcı göndermeden bırakmaz. Hud, 'Ad'ın kendilerinden seçilerek onları doğru yola yönlendirmek için gönderildi.",
+    "moral_lesson": "Bu hikaye bize Allah'ın her kavme, mesajın açık olması için kendi aralarından seçilmiş elçiler gönderdiğini öğretir. Kimsenin ilahi uyarının üzerinde olmadığını hatırlatır.",
+    "historical_location": "El-Ahkaf (Arap yarımadasının güney bölgesi)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "hud_prophecy_chapter_1",
+        "title": "İlahi Emir",
+        "content": "Allah Hud'u 'Ad kavmine, kan kardeşlerine gönderdi. Kur'an şöyle bildirir: «Ve 'Ad'a kardeşleri Hud'u gönderdik. Dedi: Ey kavmim! Allah'a ibadet edin. O'ndan başka ilahınız yoktur. O'ndan korkmuyor musunuz?» Hud, kavmini putperestlik ve kibri bırakmaya, ibadete layık olan Tek Allah'a dönmeye çağırması için vahiy aldı. Görevi, geçmiş kavimlerinki gibi bir azap gelmeden önce uyarmaktı."
+      },
+      {
+        "id": "hud_prophecy_chapter_2",
+        "title": "'Ad Kavmi",
+        "content": "'Ad kavmi, Arabistan'ın güneyindeki El-Ahkaf bölgesinde yaşayan güçlü bir medeniyetti. Kur'an onları El-Fecr suresinde şöyle tanımlar: «Rabbinin 'Ad ile, sütunlu İrem ile nasıl davrandığını görmedin mi? Ülkede benzeri yaratılmamıştı.» Tevhid mesajını unutmuşlar ve putperestliğe düşmüşlerdi. Muhteşem anıtlar inşa ettiler ve güçleriyle övündüler. Allah'ın seçtiği peygamber olarak Hud, onları hakka geri getirme sorumluluğuna sahipti."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 7:65",
+        "reference_text": "El-A'raf Suresi, 65. ayet",
+        "content": "وَإِلَىٰ عَادٍ أَخَاهُمْ هُودًا ۗ قَالَ يَـٰقَوْمِ ٱعْبُدُوا۟ ٱللَّهَ مَا لَكُم مِّنْ إِلَـٰهٍ غَيْرُهُۥٓ ۚ أَفَلَا تَتَّقُونَ",
+        "translation": "Ve 'Ad'a kardeşleri Hud'u gönderdik. Dedi: Ey kavmim! Allah'a ibadet edin — O'ndan başka ilahınız yoktur. O'ndan korkmuyor musunuz?",
+        "relevance": "Bu ayet Hud'un 'Ad kavmine peygamber olarak gönderilmesini ve tevhide çağrısını tespit eder."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 11:50",
+        "reference_text": "Hud Suresi, 50. ayet",
+        "content": "وَإِلَىٰ عَادٍ أَخَاهُمْ هُودًۭا ۚ قَالَ يَـٰقَوْمِ ٱعْبُدُوا۟ ٱللَّهَ مَا لَكُم مِّنْ إِلَـٰهٍ غَيْرُهُۥٓ ۖ إِنْ أَنتُمْ إِلَّا مُفْتَرُونَ",
+        "translation": "Ve 'Ad'a kardeşleri Hud'u gönderdik. Dedi: Ey kavmim! Allah'a ibadet edin. O'ndan başka ilahınız yoktur. Siz sadece yalan uyduruyorsunuz.",
+        "relevance": "Bu ayet Hud'un gönderilmesini ve merkezi mesajını teyit eder."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Hud",
+        "arabic_term": "هود",
+        "definition": "Arapça'da Hud. 'Ad kavmini tevhide çağırmak için gönderilen Allah'ın peygamberi. Kur'an'da adını taşıyan bir sure vardır.",
+        "pronunciation": "houd"
+      },
+      {
+        "id": 2,
+        "term": "'Ad",
+        "arabic_term": "عاد",
+        "definition": "Hud'un gönderildiği güçlü ve kibirli eski Arap kavmi. Öfkeli bir rüzgarla yok edildiler.",
+        "pronunciation": "aad"
+      },
+      {
+        "id": 3,
+        "term": "Al-Ahqaf",
+        "arabic_term": "الأحقاف",
+        "definition": "'Ad kavminin yaşadığı Arap yarımadasının güney bölgesi. Kur'an'da bu adı taşıyan bir sure vardır.",
+        "pronunciation": "al-ah-qaf"
+      }
+    ]
+  },
+  "hud_call": {
+    "title": "Hud'un Kavmine Daveti",
+    "title_arabic": "دعوة هود لقومه",
+    "introduction": "Hud (عليه السلام) 'Ad kavmini açıklık ve hikmetle çağırdı. Onları yalnızca Allah'a ibadet etmeye, günahları için bağışlanma dilemeye ve kibirlenmemeye davet etti. Onlara Allah'ın nimetlerini hatırlattı ve nankörlüğün sonuçlarından uyardı. Mesajının açıklığına rağmen 'Ad kibirle reddetti.",
+    "conclusion": "Hud'un daveti peygamberlik mesajının istikrarını gösterir: Allah'a ibadet, O'ndan korkma ve azaptan önce uyarma. Hud görevini dürüstlükle yerine getirdi, kavmine seçimi bıraktı.",
+    "moral_lesson": "Bu hikaye bize İslam davetinin açıklıkla ve tevhid konusunda taviz vermeden yapılması gerektiğini öğretir. Elçinin iletmesi gerektiğini, hidayetin Allah'ın elinde olduğunu hatırlatır.",
+    "historical_location": "El-Ahkaf",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "hud_call_chapter_1",
+        "title": "Tevhide Davet",
+        "content": "Hud kavmine dedi: «Ey kavmim! Allah'a ibadet edin. O'ndan başka ilahınız yoktur. O'ndan korkmuyor musunuz?» Onlara daveti için hiçbir karşılık istemediğini hatırlattı; karşılığı sadece her şeyi yaratan Allah'a aittir. Onları tövbe etmeye ve Rablerine dönmeye davet etti, çünkü O çok bağışlayandır, çok merhametlidir. Hud, yüz çevirirlerse kendilerinden önceki kavimlerin kaderine uğrayacaklarını uyardı."
+      },
+      {
+        "id": "hud_call_chapter_2",
+        "title": "'Ad'ın Cevabı",
+        "content": "'Ad kavminin ileri gelenleri küçümseyerek cevap verdiler. Dediler: «Ey Hud! Bize açık bir delil getirmedin. Senin sözünle ilahlarımızı bırakmayacağız ve sana inanmıyoruz.» Onu yalancılıkla suçladılar ve onları atalarının dininden saptırmak istediğini söylediler. Hud onlara Allah'ı şahit tuttuğunu ve O'na ortak koştuklarından beri olduğuna dair şahitlik etmelerini istedi. Reddine rağmen Hud sabırla çağırmaya devam etti."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 11:50-52",
+        "reference_text": "Hud Suresi, 50-52. ayetler",
+        "content": "قَالَ يَـٰقَوْمِ ٱعْبُدُوا۟ ٱللَّهَ مَا لَكُم مِّنْ إِلَـٰهٍ غَيْرُهُۥٓ ۖ إِنْ أَنتُمْ إِلَّا مُفْتَرُونَ ۝ يَـٰقَوْمِ لَآ أَسْـَٔلُكُمْ عَلَيْهِ أَجْرًا ۖ إِنْ أَجْرِىَ إِلَّا عَلَى ٱلَّذِى فَطَرَنِىٓ ۚ أَفَلَا تَعْقِلُونَ",
+        "translation": "Dedi: Ey kavmim! Allah'a ibadet edin. O'ndan başka ilahınız yoktur. Siz sadece yalan uyduruyorsunuz. Ey kavmim! Bunun için sizden bir ücret istemiyorum. Benim ücretim sadece beni yaratana aittir. Akıl etmiyor musunuz?",
+        "relevance": "Bu ayetler Hud'un davetini ve çıkar gözetmezlik beyanını içerir."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 11:53-54",
+        "reference_text": "Hud Suresi, 53-54. ayetler",
+        "content": "قَالُوا۟ يَـٰهُودُ مَا جِئْتَنَا بِبَيِّنَةٍۢ وَمَا نَحْنُ بِتَارِكِىٓ آلِهَتِنَا عَن قَوْلِكَ وَمَا نَحْنُ لَكَ بِمُؤْمِنِينَ",
+        "translation": "Dediler: Ey Hud! Bize açık bir delil getirmedin. Senin sözünle ilahlarımızı bırakmayacağız ve sana inanmıyoruz.",
+        "relevance": "Bu ayetler 'Ad kavminin inatçı reddini anlatır."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Tawhid",
+        "arabic_term": "توحيد",
+        "definition": "Tevhid. İbadette Allah'ın birliği. Hud'un merkezi mesajıydı.",
+        "pronunciation": "taw-hid"
+      },
+      {
+        "id": 2,
+        "term": "Bayyina",
+        "arabic_term": "بينة",
+        "definition": "Açık delil. 'Ad Hud'dan delil istiyordu, oysa mesaj ve Allah'ın ayetleri zaten açıktı.",
+        "pronunciation": "bay-yi-na"
+      }
+    ]
+  },
+  "rejection_arrogance": {
+    "title": "'Ad'ın Reddi ve Kibri",
+    "title_arabic": "الرفض والاستكبار",
+    "introduction": "'Ad kavmi Hud'u kibirle reddetti. Fiziksel güçleri ve anıtlarıyla övündüler, herkesten üstün olduklarını sandılar. «Bizden daha güçlü kim var?» dediler. Allah'ın ayetlerini inkar ettiler ve Hud'u yalancı saydılar. Kibirleri onları kör etti ve helaklerine yol açtı.",
+    "conclusion": "'Ad'ın kibri, dünyevi gücün kavimleri nasıl kör edebileceğini gösterir. Allah'ın onları yarattığını ve O'nun onlardan daha güçlü olduğunu unuttular. Inatçı redleri kaderlerini mühürledi.",
+    "moral_lesson": "Bu hikaye bizi kibir ve gururun tehlikelerine karşı uyarır. Fiziksel güç ve zenginlik Allah'ın azabından korumaz. Sadece O'na itaat kurtuluşu sağlar.",
+    "historical_location": "El-Ahkaf",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "rejection_arrogance_chapter_1",
+        "title": "'Ad'ın Kibri",
+        "content": "Kur'an 'Ad'ın kibrini şöyle anlatır: «'Ad'a gelince, yeryüzünde haksız yere kibirlendiler ve dediler: Bizden daha güçlü kim var? Onları yaratan Allah'ın onlardan daha güçlü olduğunu görmediler mi? Ve ayetlerimizi inkar ediyorlardı.» 'Ad olağanüstü güçleriyle ünlüydü. Kur'an'ın sütunlu İrem'den bahsettiği gibi muhteşem anıtlar inşa ettiler. Bu güç onları yenilmez olduklarına inandırdı. Hud'un uyarısını küçümsediler ve inkarlarında ısrar ettiler."
+      },
+      {
+        "id": "rejection_arrogance_chapter_2",
+        "title": "Hud'un Son Uyarısı",
+        "content": "Hud onlara dedi: «Ey kavmim! Rabbinizden bağışlanma dileyin, sonra O'na tövbe edin. O size gökten bol yağmur gönderecek ve size gücünüze güç katacaktır. Günahkarlar olarak yüz çevirmeyin.» 'Ad reddetti. Hud onlara Allah'ın verdiği sürenin sona erdiğini uyardı. Onlara bir azabın geleceğini bildirdi. Hud ve onunla inananlar hazırlandı, 'Ad ise son ana kadar kibirlerinde ısrar etti."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 41:15",
+        "reference_text": "Fussilet Suresi, 15. ayet",
+        "content": "فَأَمَّا عَادٌۭ فَٱسْتَكْبَرُوا۟ فِى ٱلْأَرْضِ بِغَيْرِ ٱلْحَقِّ وَقَالُوا۟ مَنْ أَشَدُّ مِنَّا قُوَّةً ۖ أَوَلَمْ يَرَوْا۟ أَنَّ ٱللَّهَ ٱلَّذِى خَلَقَهُمْ هُوَ أَشَدُّ مِنْهُمْ قُوَّةًۭ ۖ وَكَانُوا۟ بِـَٔايَـٰتِنَا يَجْحَدُونَ",
+        "translation": "'Ad'a gelince, yeryüzünde haksız yere kibirlendiler ve dediler: Bizden daha güçlü kim var? Onları yaratan Allah'ın onlardan daha güçlü olduğunu görmediler mi? Ve ayetlerimizi inkar ediyorlardı.",
+        "relevance": "Bu ayet 'Ad'ın kibri ve Allah'ın ayetlerini inkarını anlatır."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 26:123",
+        "reference_text": "Eş-Şu'ara Suresi, 123. ayet",
+        "content": "كَذَّبَتْ عَادٌ ٱلْمُرْسَلِينَ",
+        "translation": "'Ad kavmi elçileri yalancı saydı.",
+        "relevance": "Bu ayet 'Ad'ın elçileri reddini teyit eder."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Istikbar",
+        "arabic_term": "استكبار",
+        "definition": "Kibir, gurur. 'Ad'ı helake götüren tutum.",
+        "pronunciation": "is-tik-bar"
+      },
+      {
+        "id": 2,
+        "term": "Juhud",
+        "arabic_term": "جحود",
+        "definition": "Inkar, red. 'Ad Allah'ın ayetlerini ve delillerini inkar ediyordu.",
+        "pronunciation": "jou-houd"
+      }
+    ]
+  },
+  "the_ad_people": {
+    "title": "'Ad Kavmi",
+    "title_arabic": "قوم عاد",
+    "introduction": "'Ad kavmi en güçlü eski medeniyetlerden biriydi. Arabistan'ın güneyindeki El-Ahkaf bölgesinde yaşıyorlardı. Kur'an onları muhteşem anıtlar inşa edenler (sütunlu İrem) olarak tanımlar. Allah'tan nimetler aldılar — sürüler, çocuklar, bahçeler ve pınarlar — ama nankör oldular ve putperestliğe düştüler.",
+    "conclusion": "'Ad'ın gücü onları korumadı. Anıtları ve fiziksel güçleri onları azaptan kurtaramadı. Sadece Hud ve onunla inananlar kurtuldu.",
+    "moral_lesson": "Bu hikaye bize Allah'ın nimetlerinin şükür ve itaat gerektirdiğini öğretir. Güç ve maddi başarılar, imanla desteklenmezse geçicidir.",
+    "historical_location": "El-Ahkaf (Arabistan'ın güneyi)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "the_ad_people_chapter_1",
+        "title": "Güçlü Bir Medeniyet",
+        "content": "'Ad kavmi olağanüstü güçleriyle ünlüydü. Kur'an onları itaatsizlik yüzünden yok edilen güçlü bir kavim örneği olarak birçok kez anar. Dikkat çekici anıtlar inşa ettiler — Kur'an «ülkede benzeri yaratılmamış sütunlu İrem»den bahseder. Allah onlara «sürüler, çocuklar, bahçeler ve pınarlar» vermişti (26:133). Ama Allah'a bu nimetler için şükretmek yerine kibirlendiler ve bu başarıları kendilerine mal ettiler."
+      },
+      {
+        "id": "the_ad_people_chapter_2",
+        "title": "Nankörlük",
+        "content": "Allah 'Ad'a nimetler vermişti: sürüler, çocuklar, bahçeler ve pınarlar (26:133). Onlara güç vermişti. Ama kibirlendiler ve Allah'tan başka ilahlara taptılar. O'nun elçisi Hud'u reddettiler. Nankörlükleri ve inkarları onları azabı hak ettirdi. Hud onları birçok kez uyardı ama ısrar ettiler. Medeniyetleri ne kadar muhteşem olursa olsun, Allah'ın emri onlara indiğinde onları koruyamadı."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 89:6-8",
+        "reference_text": "El-Fecr Suresi, 6-8. ayetler",
+        "content": "أَلَمْ تَرَ كَيْفَ فَعَلَ رَبُّكَ بِعَادٍ إِرَمَ ذَاتِ الْعِمَادِ الَّتِي لَمْ يُخْلَقْ مِثْلُهَا فِي الْبِلَادِ",
+        "translation": "Rabbinin 'Ad ile, sütunlu İrem ile nasıl davrandığını görmedin mi? Ülkede benzeri yaratılmamıştı.",
+        "relevance": "Bu ayet 'Ad medeniyetinin büyüklüğünü ve anıtlarını anlatır."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 26:133",
+        "reference_text": "Eş-Şu'ara Suresi, 133. ayet",
+        "content": "أَمَدَّكُم بِأَنْعَامٍ وَبَنِينَ وَجَنَّاتٍ وَعُيُونٍ",
+        "translation": "O size sürüler, çocuklar, bahçeler ve pınarlar verdi.",
+        "relevance": "Bu ayet Allah'ın 'Ad kavmine verdiği nimetleri anlatır."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Iram",
+        "arabic_term": "إرم",
+        "definition": "'Ad'ın atası veya şehirlerinin adı. Kur'an medeniyetlerini tanımlamak için «sütunlu İrem»den bahseder.",
+        "pronunciation": "i-ram"
+      },
+      {
+        "id": 2,
+        "term": "Al-'Imad",
+        "arabic_term": "العمد",
+        "definition": "Sütunlar. 'Ad muhteşem sütunlu anıtlar inşa ediyordu.",
+        "pronunciation": "al-i-mad"
+      }
+    ]
+  },
+  "the_destruction": {
+    "title": "Rüzgarla Yok Oluş",
+    "title_arabic": "الهلاك بالريح",
+    "introduction": "'Ad inkarlarında ve kibirlerinde ısrar edince Allah'ın azabı onlara indi. Nuh'un tufanının aksine, 'Ad öfkeli ve dondurucu bir rüzgarla (rīh sarsar 'ātiya) yok edildi. Bu rüzgar yoluna çıkan her şeyi silip süpürdü. Hud ve inananlar Allah'ın rahmetiyle kurtuldu.",
+    "conclusion": "'Ad'ın rüzgarla yok edilmesi, her kavmin durumuna uygun bir azap aldığını hatırlatır. Güçleriyle övünen 'Ad, karşı koyamadıkları bir güçle yok edildi. Sadece inananlar kurtuldu.",
+    "moral_lesson": "Bu hikaye bize kimsenin Allah'ın emrinden kaçamayacağını öğretir. İnsan gücü O'nun iradesi karşısında değersizdir. Kurtuluş iman ve itaattadır.",
+    "historical_location": "El-Ahkaf",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "the_destruction_chapter_1",
+        "title": "Yıkıcı Rüzgar",
+        "content": "Kur'an 'Ad'ın yok edilişini şöyle anlatır: «'Ad'a gelince, öfkeli ve dondurucu bir rüzgarla yok edildiler.» (69:6) Bu rüzgar (rīh sarsar) onlara «yedi gece ve sekiz gün aralıksız» (69:7) uygulandı. O kadar şiddetliydi ki insanlar «içi boş hurma kütükleri gibi» (69:7) yere serildi. Kur'an ayrıca der: «İnsanları kökünden sökülmüş hurma kütükleri gibi söküp atıyordu.» (54:20) Güçleriyle övünen 'Ad çaresiz kaldı. Anıtları onları korumadı. Yok edildiler."
+      },
+      {
+        "id": "the_destruction_chapter_2",
+        "title": "Hud'un Kurtuluşu",
+        "content": "Hud ve onunla inananlar Allah'ın rahmetiyle kurtuldu. Kur'an şöyle bildirir: «Emrimiz gelince Hud'u ve onunla inananları rahmetimizle kurtardık.» (11:58) 'Ad yok edildi, gelecek nesiller için bir ders bırakarak: kibir ve inkar helake, iman ve itaat kurtuluşa götürür."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 69:6-7",
+        "reference_text": "El-Hakka Suresi, 6-7. ayetler",
+        "content": "وَأَمَّا عَادٌۭ فَأُهْلِكُوا۟ بِرِيحٍۢ صَرْصَرٍ عَاتِيَةٍۢ ۝ سَخَّرَهَا عَلَيْهِمْ سَبْعَ لَيَالٍ وَثَمَانِيَةَ أَيَّامٍ حُسُومًا فَتَرَى الْقَوْمَ فِيهَا صَرْعَىٰ كَأَنَّهُمْ أَعْجَازُ نَخْلٍ خَاوِيَةٍ",
+        "translation": "'Ad'a gelince, öfkeli ve dondurucu bir rüzgarla yok edildiler. [Allah] onu onlara yedi gece ve sekiz gün aralıksız uyguladı. İnsanları içi boş hurma kütükleri gibi yere serilmiş görürdün.",
+        "relevance": "Bu ayetler 'Ad'ın azabını anlatır: rüzgar, süresi ve etkisi."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 54:20",
+        "reference_text": "El-Kamer Suresi, 20. ayet",
+        "content": "تَنزِعُ النَّاسَ كَأَنَّهُمْ أَعْجَازُ نَخْلٍ مُّنقَعِرٍ",
+        "translation": "İnsanları kökünden sökülmüş hurma kütükleri gibi söküp atıyordu.",
+        "relevance": "Bu ayet yıkıcı rüzgarın şiddetini anlatır."
+      },
+      {
+        "id": 3,
+        "type": "quran",
+        "source": "Coran 11:58",
+        "reference_text": "Hud Suresi, 58. ayet",
+        "content": "وَلَمَّا جَآءَ أَمْرُنَا نَجَّيْنَا هُودًا وَٱلَّذِينَ ءَامَنُوا۟ مَعَهُۥ بِرَحْمَةٍۢ مِّنَّا",
+        "translation": "Emrimiz gelince Hud'u ve onunla inananları rahmetimizle kurtardık.",
+        "relevance": "Bu ayet Hud ve inananların kurtuluşunu teyit eder."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Sarsar",
+        "arabic_term": "صرصر",
+        "definition": "Dondurucu ve öfkeli rüzgar. Allah'ın 'Ad kavmini yok ettiği azap.",
+        "pronunciation": "sar-sar"
+      },
+      {
+        "id": 2,
+        "term": "Rahma",
+        "arabic_term": "رحمة",
+        "definition": "Rahmet. Allah Hud ve inananları rahmetiyle kurtardı.",
+        "pronunciation": "rah-ma"
+      }
+    ]
+  },
+  "lessons_from_hud": {
+    "title": "Hud Hikayesinden Dersler",
+    "title_arabic": "دروس من قصة هود",
+    "introduction": "Hud'un (عليه السلام) hikayesi zamansız dersler içerir. Kibirin sonuçlarını, peygamberlerin davetine cevap vermenin önemini ve Allah'ın inananlara rahmetini öğretir. Kur'an bunu gelecek kavimler için örnek olarak zikreder.",
+    "conclusion": "Hud görevini dürüstlükle yerine getirdi. 'Ad yok edildi ama Hud ve inananlar kurtuldu. Hikayesi bir hatırlatma olarak kalır: dünyevi güç geçicidir; sadece Allah'a iman kurtuluşu sağlar.",
+    "moral_lesson": "Bu hikaye bize Allah'ın nimetleriyle asla kibirlenmemeyi, elçilerin davetine cevap vermeyi ve azaptan korkmayı öğretir. Her kavmin azaptan önce uyarıcılar aldığını hatırlatır.",
+    "historical_location": "El-Ahkaf'tan unutuluşa",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lessons_from_hud_chapter_1",
+        "title": "Kavimler İçin Bir Örnek",
+        "content": "Kur'an Hud'un hikayesini gelecek nesiller için örnek olarak sunar. 'Ad'ın her şeyi vardı: güç, anıtlar, refah. Ama temel olanı eksikti: Allah'a iman ve tevazu. Kibirleri onları yok etti. Hud ise mesajında tavizsiz kararlı kaldı. Ne güç ne zenginlik aradı; sadece kavminden inanmalarını istedi. Hikayesi bize elçinin görevini yerine getirdiğini, sonucun Allah'a ait olduğunu hatırlatır."
+      },
+      {
+        "id": "lessons_from_hud_chapter_2",
+        "title": "Peygamberliğin Devamı",
+        "content": "Hud, Nuh'tan sonra gönderilen peygamberler zincirinin bir parçasıdır. Her kavim kendi elçisini alır. 'Ad, kendilerinden önceki kavimler gibi, şansını aldı. Reddettiler ve yok edildiler. Hud'un hikayesi Nuh'unkiyle aynı modeli izler: tevhide davet, çoğunluk tarafından red, azap ve inananların kurtuluşu. Kur'an'daki bu tekrar kalpleri güçlendirmek ve inananları doğru yolda kalmaya teşvik etmek içindir."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Coran 11:120",
+        "reference_text": "Hud Suresi, 120. ayet",
+        "content": "وَكُلًّا نَّقُصُّ عَلَيْكَ مِنْ أَنبَاءِ الرُّسُلِ مَا نُثَبِّتُ بِهِ فُؤَادَكَ وَجَاءَكَ فِي هَٰذِهِ الْحَقُّ وَمَوْعِظَةٌ وَذِكْرَىٰ لِلْمُؤْمِنِينَ",
+        "translation": "Sana elçilerin haberlerinden kalbini güçlendireceğimiz şeyleri anlatıyoruz. Bu anlatıda sana hak, inananlar için öğüt ve hatırlatma gelmiştir.",
+        "relevance": "Bu ayet peygamber anlatılarının Kur'an'daki amacını açıklar."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Coran 11:60",
+        "reference_text": "Hud Suresi, 60. ayet",
+        "content": "وَأُتْبِعُوا۟ فِى هَـٰذِهِ ٱلدُّنْيَا لَعْنَةًۭ وَيَوْمَ ٱلْقِيَـٰمَةِ ۗ أَلَآ إِنَّ عَادًۭا كَفَرُوا۟ رَبَّهُمْ ۗ أَلَا بُعْدًۭا لِّعَادٍۢ قَوْمِ هُودٍۢ",
+        "translation": "Bu dünyada ve kıyamet gününde lanete uğradılar. Şüphesiz 'Ad Rablerine kâfir oldu. Hud kavmi 'Ad helak olsun!",
+        "relevance": "Bu ayet 'Ad'ın anlatısını ve bu dünyada ve ahirette azabını sonuçlandırır."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Ibra",
+        "arabic_term": "عبرة",
+        "definition": "Örnek veya ders. Peygamberlerin hikayeleri insanlık için örneklerdir.",
+        "pronunciation": "ib-ra"
+      },
+      {
+        "id": 2,
+        "term": "Dhikra",
+        "arabic_term": "ذكرى",
+        "definition": "Hatırlatma. Peygamberlerin anlatıları inananlar için hatırlatma görevi görür.",
+        "pronunciation": "dhik-ra"
+      }
+    ]
+  }
+}

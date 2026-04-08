@@ -1,0 +1,287 @@
+{
+  "shuayb_call": {
+    "title": "De oproep van Shu'ayb",
+    "title_arabic": "دعوة شعيب",
+    "introduction": "Shu'ayb (شعيب عليه السلام), Jetro, is een profeet gezonden naar het volk van Madyan. De Koran zegt: \"En naar Madyan hun broeder Shu'ayb. Hij zei: O mijn volk! Aanbid Allah. Jullie hebben geen andere god dan Hem.\" (7:85) Het volk van Madyan bedreef bedrog in de handel. Shu'ayb riep hen op tot gerechtigheid en monotheïsme.",
+    "conclusion": "Shu'ayb predikte met wijsheid en geduld. Hij waarschuwde voor de gevolgen van onrecht. Sommigen geloofden, maar de meerderheid verwierp hem. Hij volbracht zijn missie met vastberadenheid.",
+    "moral_lesson": "Dit verhaal leert ons dat de profeet oproept tot gerechtigheid in zaken. Bedrog en fraude zijn zware zonden.",
+    "historical_location": "Madyan (noordwestelijk Arabië)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "shuayb_call_chapter_1",
+        "title": "De missie",
+        "content": "De Koran vertelt: \"En naar Madyan hun broeder Shu'ayb. Hij zei: O mijn volk! Aanbid Allah. Jullie hebben geen andere god dan Hem. Een bewijs is van jullie Heer tot jullie gekomen. Geef dus volle maat en vol gewicht. Verminder de mensen niet hun rechten.\" (7:85) Shu'ayb werd gezonden naar een volk van handelaars. Zij bedrogen bij gewichten en maten. Hij riep hen op Allah te aanbidden en rechtvaardig te zijn."
+      },
+      {
+        "id": "shuayb_call_chapter_2",
+        "title": "De waarschuwing",
+        "content": "De Koran zegt: \"En zaai geen verderf op aarde nadat zij in orde is gebracht. Dat is beter voor jullie, als jullie gelovigen zijn.\" (7:85) Shu'ayb waarschuwde zijn volk. Bedrog bederft de samenleving. Gerechtigheid zorgt voor welvaart. Hij spoorde hen aan Allah te vrezen en eerlijk te zijn."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 7:85",
+        "reference_text": "Soera Al-A'raf, vers 85",
+        "content": "وَإِلَىٰ مَدْيَنَ أَخَاهُمْ شُعَيْبًۭا ۚ قَالَ يَـٰقَوْمِ ٱعْبُدُوا۟ ٱللَّهَ مَا لَكُم مِّنْ إِلَـٰهٍ غَيْرُهُۥ ۖ قَدْ جَآءَتْكُم بَيِّنَةٌۭ مِّن رَّبِّكُمْ ۖ فَأَوْفُوا۟ ٱلْكَيْلَ وَٱلْمِيزَانَ",
+        "translation": "And to Madyan, their brother Shu'ayb. He said: O my people! Worship Allah. Give full measure and full weight.",
+        "relevance": "Dit vers vertelt van Shu'aybs oproep."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 11:84",
+        "reference_text": "Soera Hud, vers 84",
+        "content": "وَإِلَىٰ مَدْيَنَ أَخَاهُمْ شُعَيْبًۭا ۚ قَالَ يَـٰقَوْمِ ٱعْبُدُوا۟ ٱللَّهَ مَا لَكُم مِّنْ إِلَـٰهٍ غَيْرُهُۥ",
+        "translation": "And to Madyan, their brother Shu'ayb. He said: O my people! Worship Allah. You have no other deity than Him.",
+        "relevance": "Dit vers bevestigt de oproep tot monotheïsme."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Shu'ayb",
+        "arabic_term": "شعيب",
+        "definition": "Jetro in het Arabisch. Profeet gezonden naar het volk van Madyan.",
+        "pronunciation": "chou-ayb"
+      },
+      {
+        "id": 2,
+        "term": "Madyan",
+        "arabic_term": "مدين",
+        "definition": "Midian. Regio in noordwestelijk Arabië. Shu'aybs volk.",
+        "pronunciation": "ma-dyan"
+      }
+    ]
+  },
+  "shuayb_weights": {
+    "title": "Shu'ayb en de weegschalen",
+    "title_arabic": "شعيب والميزان",
+    "introduction": "Het volk van Madyan bedroog bij gewichten en maten. De Koran zegt: \"Geef dus volle maat en vol gewicht. Verminder de mensen niet hun rechten.\" (7:85) Shu'ayb spoorde hen aan tot handelsgerechtigheid. Zij verkochten door minder te geven. Zij kochten door meer te eisen. Het was flagrant onrecht.",
+    "conclusion": "Shu'ayb stond op eerlijkheid. Bedrog in de handel is een zonde. Allah houdt van de rechtvaardigen. Gelovigen moeten oprecht zijn in hun transacties.",
+    "moral_lesson": "Dit verhaal leert ons dat gerechtigheid in de handel een plicht is. Fraude vernietigt vertrouwen en trekt straf aan.",
+    "historical_location": "Madyan",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "shuayb_weights_chapter_1",
+        "title": "Het bedrog",
+        "content": "De Koran vertelt: \"O mijn volk! Geef volle maat en vol gewicht in gerechtigheid. Verminder de mensen niet hun goederen. En zaai geen verderf op aarde.\" (11:85) Het volk van Madyan stond bekend om fraude. Wanneer zij verkochten, gaven zij minder. Wanneer zij kochten, namen zij meer. Shu'ayb veroordeelde hen. Deze praktijk was vermomde diefstal."
+      },
+      {
+        "id": "shuayb_weights_chapter_2",
+        "title": "De orde van gerechtigheid",
+        "content": "De Koran zegt: \"Wat van Allah (toegestaan) overblijft is beter voor jullie, als jullie gelovigen zijn. En ik ben geen bewaker over jullie.\" (11:86) Shu'ayb beval gerechtigheid. Geef volle maat en vol gewicht. Doe de mensen geen onrecht. Wettige winst is gezegend. Onwettige winst leidt tot ondergang."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 11:85",
+        "reference_text": "Soera Hud, vers 85",
+        "content": "وَيَـٰقَوْمِ أَوْفُوا۟ ٱلْمِكْيَالَ وَٱلْمِيزَانَ بِٱلْقِسْطِ ۖ وَلَا تَبْخَسُوا۟ ٱلنَّاسَ أَشْيَآءَهُمْ",
+        "translation": "O my people! Give full measure and full weight in justice. Do not diminish people their goods.",
+        "relevance": "Dit vers beveelt gerechtigheid in de maten."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 7:85",
+        "reference_text": "Soera Al-A'raf, vers 85",
+        "content": "فَأَوْفُوا۟ ٱلْكَيْلَ وَٱلْمِيزَانَ وَلَا تَبْخَسُوا۟ ٱلنَّاسَ أَشْيَآءَهُمْ",
+        "translation": "Give full measure and full weight. Do not diminish people their rights.",
+        "relevance": "Dit vers herinnert aan Shu'aybs bevel."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Mizan",
+        "arabic_term": "ميزان",
+        "definition": "Weegschaal. Shu'ayb beval de mizan met gerechtigheid te gebruiken.",
+        "pronunciation": "mi-zan"
+      },
+      {
+        "id": 2,
+        "term": "Kayl",
+        "arabic_term": "كيل",
+        "definition": "Maat. Volledige kayl geven is een plicht.",
+        "pronunciation": "kayl"
+      }
+    ]
+  },
+  "shuayb_rejection": {
+    "title": "De afwijzing van Shu'ayb",
+    "title_arabic": "تكذيب قوم شعيب",
+    "introduction": "Het volk van Madyan verwierp Shu'ayb. De Koran zegt: \"Zij zeiden: O Shu'ayb! Beveelt jouw gebed je te verlaten wat onze vaders aanbaden, of te stoppen met doen met onze rijkdom wat wij willen?\" (11:87) Zij beschuldigden hem van tovenaar of leugenaar te zijn. Zij weigerden hun onrechtvaardige praktijken op te geven.",
+    "conclusion": "Shu'ayb was geduldig. Hij bleef oproepen. Hij waarschuwde voor de straf. Maar zij volhardden in dwaling. Allahs decreet viel over hen.",
+    "moral_lesson": "Dit verhaal leert ons dat het afwijzen van de profeten tot verderf leidt. Zij die in onrecht volharden zullen gestraft worden.",
+    "historical_location": "Madyan",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "shuayb_rejection_chapter_1",
+        "title": "De beschuldigingen",
+        "content": "De Koran vertelt: \"Zij zeiden: O Shu'ayb! Wij begrijpen veel niet van wat jij zegt. En wij zien jou als zwak onder ons.\" (11:91) Het volk verachtte Shu'ayb. Zij noemden hem zwak. Zij weigerden te gehoorzamen. Zij zeiden: \"Jij bent slechts een man als wij.\" Shu'ayb antwoordde: \"Ik vraag geen loon. Mijn beloning is bij Allah.\""
+      },
+      {
+        "id": "shuayb_rejection_chapter_2",
+        "title": "De laatste waarschuwing",
+        "content": "De Koran zegt: \"En O mijn volk! Laat mijn meningsverschil met jullie jullie niet leiden tot wat het volk van Nuh leed, of het volk van Hud, of het volk van Salih.\" (11:89) Shu'ayb waarschuwde hen. Eerdere volken werden vernietigd omdat zij hun profeten verwierpen. Hetzelfde lot wachtte hen als zij volhardden. Maar zij geloofden niet."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 11:87",
+        "reference_text": "Soera Hud, vers 87",
+        "content": "قَالُوا۟ يَـٰشُعَيْبُ أَصَلَوٰتُكَ تَأْمُرُكَ أَن نَّتْرُكَ مَا يَعْبُدُ ءَابَآؤُنَآ أَوْ أَن نَّفْعَلَ فِىٓ أَمْوَٰلِنَا مَا نَشَـٰٓؤُا۟",
+        "translation": "They said: O Shu'ayb! Does your prayer command you to abandon what our fathers worshipped?",
+        "relevance": "Dit vers vertelt van de beschuldigingen van het volk."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 11:91",
+        "reference_text": "Soera Hud, vers 91",
+        "content": "قَالُوا۟ يَـٰشُعَيْبُ مَا نَفْقَهُ كَثِيرًۭا مِّمَّا تَقُولُ وَإِنَّا لَنَرَىٰكَ فِينَا ضَعِيفًۭا",
+        "translation": "They said: O Shu'ayb! We do not understand much of what you say. We consider you weak.",
+        "relevance": "Dit vers beschrijft de verachting van het volk."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Takdhib",
+        "arabic_term": "تكذيب",
+        "definition": "Ontkenning, afwijzing. Het volk deed takdhib aan Shu'ayb.",
+        "pronunciation": "tak-dhib"
+      },
+      {
+        "id": 2,
+        "term": "Da'if",
+        "arabic_term": "ضعيف",
+        "definition": "Zwak. Zij noemden Shu'ayb da'if.",
+        "pronunciation": "da-if"
+      }
+    ]
+  },
+  "shuayb_destruction": {
+    "title": "De vernietiging van het volk van Madyan",
+    "title_arabic": "هلاك قوم مدين",
+    "introduction": "Het volk van Madyan volhardde in de afwijzing. De Koran zegt: \"En toen Ons bevel kwam, redden Wij Shu'ayb en degenen die met hem geloofd hadden, uit barmhartigheid van Ons. En de Schreeuw greep degenen die onrechtvaardig waren geweest.\" (11:94) De straf viel. Een aardbeving of een schreeuw vernietigde hen. De onrechtvaardigen vergingen.",
+    "conclusion": "Shu'ayb en de gelovigen werden gered. Zij verlieten de regio vóór de straf. De ongelovigen werden vernietigd. Madyan werd een les voor de generaties.",
+    "moral_lesson": "Dit verhaal leert ons dat onrecht en afwijzing van de profeten tot vernietiging leidt. Alleen gelovigen worden gered.",
+    "historical_location": "Madyan",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "shuayb_destruction_chapter_1",
+        "title": "De straf",
+        "content": "De Koran vertelt: \"En de Schreeuw greep hen. Zij lagen levenloos in hun woningen. Alsof zij daar nooit hadden geleefd.\" (11:94-95) Allahs straf viel over Madyan. Een schreeuw of een aardbeving vernietigde hen. Zij vergingen in een ogenblik. Hun huizen werden hun graven. Allahs gerechtigheid werd vervuld."
+      },
+      {
+        "id": "shuayb_destruction_chapter_2",
+        "title": "Redding van de gelovigen",
+        "content": "De Koran zegt: \"Wij redden Shu'ayb en degenen die met hem geloofd hadden, uit barmhartigheid van Ons.\" (11:94) Shu'ayb en de gelovigen werden gespaard. Allah beschermde hen. Zij vertrokken vóór de straf. Zij vonden elders toevlucht. Allahs barmhartigheid omvat de gelovigen."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 11:94",
+        "reference_text": "Soera Hud, vers 94",
+        "content": "وَلَمَّا جَآءَ أَمْرُنَا نَجَّيْنَا شُعَيْبًۭا وَٱلَّذِينَ ءَامَنُوا۟ مَعَهُۥ بِرَحْمَةٍۢ مِّنَّا وَأَخَذَتِ ٱلَّذِينَ ظَلَمُوا۟ ٱلصَّيْحَةُ",
+        "translation": "When Our command came, We saved Shu'ayb and those who had believed with him. The Cry seized the unjust.",
+        "relevance": "Dit vers vertelt van redding en straf."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 7:91-92",
+        "reference_text": "Soera Al-A'raf, verzen 91-92",
+        "content": "فَأَخَذَتْهُمُ ٱلرَّجْفَةُ فَأَصْبَحُوا۟ فِى دَارِهِمْ جَـٰثِمِينَ ۝ ٱلَّذِينَ كَذَّبُوا۟ شُعَيْبًۭا كَأَن لَّمْ يَغْنَوْا۟ فِيهَآ",
+        "translation": "The earthquake seized them. They lay lifeless in their dwellings. As if they had never lived there.",
+        "relevance": "Dit vers beschrijft de vernietiging."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Sayha",
+        "arabic_term": "صيحة",
+        "definition": "Schreeuw. De sayha (of rajfa) vernietigde het volk van Madyan.",
+        "pronunciation": "say-ha"
+      },
+      {
+        "id": 2,
+        "term": "Rajfa",
+        "arabic_term": "رجفة",
+        "definition": "Aardbeving. De rajfa viel over de onrechtvaardigen.",
+        "pronunciation": "raj-fa"
+      }
+    ]
+  },
+  "lessons_from_shuayb": {
+    "title": "Lessen uit het verhaal van Shu'ayb",
+    "title_arabic": "دروس من قصة شعيب",
+    "introduction": "Shu'ayb is de profeet van handelsgerechtigheid. De Koran zegt: \"En naar Madyan hun broeder Shu'ayb.\" (7:85) Hij riep zijn volk op tot eerlijkheid. Hij bestreed bedrog. Zijn verhaal leert dat gerechtigheid in zaken een religieuze plicht is.",
+    "conclusion": "Shu'ayb riep op tot gerechtigheid. Hij werd afgewezen. De straf viel. De gelovigen werden gered. Het verhaal van Madyan is een eeuwige waarschuwing.",
+    "moral_lesson": "Dit verhaal leert ons dat bedrog in de handel een zware zonde is. De gelovige moet eerlijk zijn in alle transacties.",
+    "historical_location": "Madyan",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lessons_from_shuayb_chapter_1",
+        "title": "Handelsgerechtigheid",
+        "content": "De Koran zegt: \"Geef volle maat en vol gewicht. Verminder de mensen niet hun rechten.\" (7:85) Shu'ayb stond op eerlijkheid. De moslimhandelaar moet rechtvaardig zijn. Bedrog bij gewichten, maten of prijzen is verboden. Vertrouwen is heilig. De islam eist integriteit in de handel."
+      },
+      {
+        "id": "lessons_from_shuayb_chapter_2",
+        "title": "Gevolgen van onrecht",
+        "content": "Het volk van Madyan weigerde. Het volhardde in fraude. De straf vernietigde hen. De Koran herinnert: \"En hoeveel steden hebben Wij vernietigd! Onze straf kwam tot hen 's nachts.\" (7:4) Collectief onrecht trekt straf aan. Alleen gerechtigheid en geloof zorgen voor redding."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Koran 7:85-93",
+        "reference_text": "Soera Al-A'raf, verzen 85-93",
+        "content": "وَإِلَىٰ مَدْيَنَ أَخَاهُمْ شُعَيْبًۭا ۚ قَالَ يَـٰقَوْمِ ٱعْبُدُوا۟ ٱللَّهَ",
+        "translation": "And to Madyan, their brother Shu'ayb. He said: O my people! Worship Allah.",
+        "relevance": "Dit gedeelte vat het verhaal van Shu'ayb samen."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Koran 11:94-95",
+        "reference_text": "Soera Hud, verzen 94-95",
+        "content": "نَجَّيْنَا شُعَيْبًۭا وَٱلَّذِينَ ءَامَنُوا۟ مَعَهُۥ بِرَحْمَةٍۢ مِّنَّا",
+        "translation": "We saved Shu'ayb and those who had believed with him by mercy.",
+        "relevance": "Dit gedeelte vertelt van de redding van de gelovigen."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Adl",
+        "arabic_term": "عدل",
+        "definition": "Gerechtigheid. Shu'ayb riep op tot adl in de handel.",
+        "pronunciation": "adl"
+      },
+      {
+        "id": 2,
+        "term": "Bakhs",
+        "arabic_term": "بخس",
+        "definition": "Vermindering, fraude. Tabakhasa = bedriegen bij maten.",
+        "pronunciation": "bakhs"
+      }
+    ]
+  }
+}

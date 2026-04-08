@@ -1,0 +1,230 @@
+{
+  "alyasa_succession": {
+    "title": "Al-Yasa successor of Ilyas",
+    "title_arabic": "اليسع خليفة إلياس",
+    "introduction": "Al-Yasa (اليسع عليه السلام), Elisha, is the successor of the prophet Ilyas. The Quran says: \"And Isma'il, Al-Yasa, Yunus and Lut. And each We favored above the worlds.\" (6:86) Al-Yasa was chosen by Ilyas to succeed him. He continued the mission of calling to monotheism.",
+    "conclusion": "Al-Yasa received prophethood after Ilyas. He guided the people of Israel on the straight path. His succession was a blessing for the believers.",
+    "moral_lesson": "This story teaches us that prophets succeed each other. Each messenger passes the torch to the next. Divine guidance never ceases.",
+    "historical_location": "Palestine (Kingdom of Israel)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "alyasa_succession_chapter_1",
+        "title": "The election",
+        "content": "The Quran relates: \"And remember Isma'il, Al-Yasa and Dhu al-Kifl. All were among the best.\" (38:48) Al-Yasa was a pious young man when Ilyas met him. Ilyas recognized in him the qualities of a prophet. He took him as a disciple and transmitted knowledge to him. When Ilyas was raised to heaven, Al-Yasa succeeded him."
+      },
+      {
+        "id": "alyasa_succession_chapter_2",
+        "title": "Continuity of the message",
+        "content": "The Quran says: \"And each We favored above the worlds.\" (6:86) Al-Yasa continued Ilyas's work. He called the people to worship Allah alone. He fought idolatry. The believers followed him. The message of monotheism was perpetuated through him."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 6:86",
+        "reference_text": "Surah Al-An'am, verse 86",
+        "content": "وَإِسْمَـٰعِيلَ وَٱلْيَسَعَ وَيُونُسَ وَلُوطًۭا ۚ وَكُلًّۭا فَضَّلْنَا عَلَى ٱلْعَـٰلَمِينَ",
+        "translation": "And Isma'il, Al-Yasa, Yunus and Lut. And each We favored above the worlds.",
+        "relevance": "This verse places Al-Yasa among the favored prophets."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 38:48",
+        "reference_text": "Surah Sad, verse 48",
+        "content": "وَٱذْكُرْ إِسْمَـٰعِيلَ وَٱلْيَسَعَ وَذَا ٱلْكِفْلِ ۖ وَكُلٌّۭ مِّنَ ٱلْأَخْيَارِ",
+        "translation": "And remember Isma'il, Al-Yasa and Dhu al-Kifl. All were among the best.",
+        "relevance": "This verse praises Al-Yasa among the best."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Al-Yasa",
+        "arabic_term": "اليسع",
+        "definition": "Elisha in Arabic. Successor of the prophet Ilyas.",
+        "pronunciation": "al-ya-sa"
+      },
+      {
+        "id": 2,
+        "term": "Khalifa",
+        "arabic_term": "خليفة",
+        "definition": "Successor. Al-Yasa was khalifa of Ilyas.",
+        "pronunciation": "kha-li-fa"
+      }
+    ]
+  },
+  "alyasa_prophecy": {
+    "title": "The prophecy of Al-Yasa",
+    "title_arabic": "نبوة اليسع",
+    "introduction": "Al-Yasa received prophethood from Allah. The Quran says: \"And Isma'il, Al-Yasa, Yunus and Lut. And each We favored above the worlds.\" (6:86) He prophesied the victory of the believers and warned the disbelievers. He guided the people with wisdom.",
+    "conclusion": "Al-Yasa was a just and wise prophet. His words came true. The people recognized in him a messenger of Allah. He ruled over hearts through truth.",
+    "moral_lesson": "This story teaches us that prophethood is a gift from Allah. The prophet speaks the truth and guides the people.",
+    "historical_location": "Palestine",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "alyasa_prophecy_chapter_1",
+        "title": "The message",
+        "content": "The Quran relates: \"All were among the best.\" (38:48) Al-Yasa transmitted Allah's message. He called to worship the only Creator. He forbade idolatry and injustice. He enjoined good and forbade evil. His message was simple and clear: follow Allah."
+      },
+      {
+        "id": "alyasa_prophecy_chapter_2",
+        "title": "Guidance",
+        "content": "The Quran says: \"And each We favored above the worlds.\" (6:86) Al-Yasa guided people by word and example. He was patient with the weak. He was firm with tyrants. The believers found in him a guide. He led them to the light."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 38:48",
+        "reference_text": "Surah Sad, verse 48",
+        "content": "وَٱذْكُرْ إِسْمَـٰعِيلَ وَٱلْيَسَعَ وَذَا ٱلْكِفْلِ ۖ وَكُلٌّۭ مِّنَ ٱلْأَخْيَارِ",
+        "translation": "And remember Isma'il, Al-Yasa and Dhu al-Kifl. All were among the best.",
+        "relevance": "This verse establishes Al-Yasa among the prophets."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 6:84-86",
+        "reference_text": "Surah Al-An'am, verses 84-86",
+        "content": "وَرَسُولًا ۚ وَءَاتَيْنَا دَاوُۥدَ زَبُورًۭا ۝ وَرَسُولًۭا فَضَّلْنَـٰهُمْ",
+        "translation": "And messengers. We favored them.",
+        "relevance": "This passage places Al-Yasa in the prophetic chain."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Nubuwwa",
+        "arabic_term": "نبوة",
+        "definition": "Prophethood. Al-Yasa received nubuwwa.",
+        "pronunciation": "nou-bou-wa"
+      },
+      {
+        "id": 2,
+        "term": "Huda",
+        "arabic_term": "هدى",
+        "definition": "Guidance. Al-Yasa brought huda to his people.",
+        "pronunciation": "hou-da"
+      }
+    ]
+  },
+  "alyasa_miracles": {
+    "title": "The miracles of Al-Yasa",
+    "title_arabic": "معجزات اليسع",
+    "introduction": "Allah granted Al-Yasa miracles to confirm his prophethood. The Quran says: \"And each We favored above the worlds.\" (6:86) Among his miracles: resurrection of a dead person, healing of a sick person, and multiplication of food. These signs proved that he was a prophet.",
+    "conclusion": "Al-Yasa's miracles strengthened faith. The people recognized the truth. He continued to guide until the end of his life.",
+    "moral_lesson": "This story teaches us that miracles are proofs of prophethood. They confirm that the messenger is sent by Allah.",
+    "historical_location": "Palestine",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "alyasa_miracles_chapter_1",
+        "title": "The miracle of resurrection",
+        "content": "The Quran relates: \"All were among the best.\" (38:48) According to traditions, Al-Yasa resurrected a dead person. A woman brought him her deceased son. He invoked Allah. The child came back to life. This miracle amazed the people. Many believed in his prophethood."
+      },
+      {
+        "id": "alyasa_miracles_chapter_2",
+        "title": "Multiplication of food",
+        "content": "The Quran says: \"And each We favored above the worlds.\" (6:86) Al-Yasa multiplied food to feed the hungry. A small amount sufficed to satisfy many. These miracles recalled those of Ilyas. They showed that the prophetic chain continued. Allah supported His messengers."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 38:48",
+        "reference_text": "Surah Sad, verse 48",
+        "content": "وَٱذْكُرْ إِسْمَـٰعِيلَ وَٱلْيَسَعَ وَذَا ٱلْكِفْلِ ۖ وَكُلٌّۭ مِّنَ ٱلْأَخْيَارِ",
+        "translation": "And remember Isma'il, Al-Yasa and Dhu al-Kifl. All were among the best.",
+        "relevance": "This verse establishes Al-Yasa among the prophets."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 6:86",
+        "reference_text": "Surah Al-An'am, verse 86",
+        "content": "وَإِسْمَـٰعِيلَ وَٱلْيَسَعَ وَيُونُسَ وَلُوطًۭا ۚ وَكُلًّۭا فَضَّلْنَا عَلَى ٱلْعَـٰلَمِينَ",
+        "translation": "And Isma'il, Al-Yasa, Yunus and Lut. And each We favored.",
+        "relevance": "This verse confirms Al-Yasa's place among the prophets."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Mu'jiza",
+        "arabic_term": "معجزة",
+        "definition": "Miracle. Al-Yasa performed mu'jizat.",
+        "pronunciation": "mou-ji-za"
+      },
+      {
+        "id": 2,
+        "term": "Akhyar",
+        "arabic_term": "أخيار",
+        "definition": "The best. Al-Yasa was among the akhyar.",
+        "pronunciation": "akh-yar"
+      }
+    ]
+  },
+  "lessons_from_alyasa": {
+    "title": "Lessons from the story of Al-Yasa",
+    "title_arabic": "دروس من قصة اليسع",
+    "introduction": "Al-Yasa is the successor of Ilyas. The Quran says: \"And Isma'il, Al-Yasa, Yunus and Lut. And each We favored above the worlds.\" (6:86) He continued his master's mission. His story teaches the continuity of divine guidance.",
+    "conclusion": "Al-Yasa received the torch from Ilyas. He passed it on faithfully. Prophets succeed each other. The message remains one.",
+    "moral_lesson": "This story teaches us that each generation needs guides. Prophets ensure the continuity of revelation.",
+    "historical_location": "Palestine",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lessons_from_alyasa_chapter_1",
+        "title": "Prophetic succession",
+        "content": "The Quran says: \"And each We favored above the worlds.\" (6:86) Ilyas passed to Al-Yasa. Al-Yasa passed to others. The chain does not break. Each prophet prepares the next. The believer must respect all messengers. They form one family."
+      },
+      {
+        "id": "lessons_from_alyasa_chapter_2",
+        "title": "Faithfulness to the message",
+        "content": "Al-Yasa did not change Ilyas's message. He called to the same monotheism. He fought the same errors. Truth is one. Prophets do not contradict each other. They confirm each other. The believer must follow this single truth."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 6:86",
+        "reference_text": "Surah Al-An'am, verse 86",
+        "content": "وَإِسْمَـٰعِيلَ وَٱلْيَسَعَ وَيُونُسَ وَلُوطًۭا ۚ وَكُلًّۭا فَضَّلْنَا عَلَى ٱلْعَـٰلَمِينَ",
+        "translation": "And Isma'il, Al-Yasa, Yunus and Lut. And each We favored above the worlds.",
+        "relevance": "This verse summarizes Al-Yasa's place."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 38:48",
+        "reference_text": "Surah Sad, verse 48",
+        "content": "وَٱذْكُرْ إِسْمَـٰعِيلَ وَٱلْيَسَعَ وَذَا ٱلْكِفْلِ ۖ وَكُلٌّۭ مِّنَ ٱلْأَخْيَارِ",
+        "translation": "And remember Isma'il, Al-Yasa and Dhu al-Kifl. All were among the best.",
+        "relevance": "This verse praises Al-Yasa among the best."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Silsila",
+        "arabic_term": "سلسلة",
+        "definition": "Chain. Al-Yasa is part of the silsila of prophets.",
+        "pronunciation": "sil-si-la"
+      },
+      {
+        "id": 2,
+        "term": "Fadl",
+        "arabic_term": "فضل",
+        "definition": "Favor. Al-Yasa received fadl from Allah.",
+        "pronunciation": "fadl"
+      }
+    ]
+  }
+}

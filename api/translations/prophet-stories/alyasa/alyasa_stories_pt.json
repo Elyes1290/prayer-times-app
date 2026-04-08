@@ -1,0 +1,230 @@
+{
+  "alyasa_succession": {
+    "title": "Al-Yasa sucessor de Ilyas",
+    "title_arabic": "اليسع خليفة إلياس",
+    "introduction": "Al-Yasa (اليسع عليه السلام), Eliseu, é o sucessor do profeta Ilyas. O Alcorão diz: \"E Isma'il, Al-Yasa, Yunus e Lut. E a cada um favorecemos sobre os mundos.\" (6:86) Al-Yasa foi escolhido por Ilyas para sucedê-lo. Continuou a missão de chamar ao monoteísmo.",
+    "conclusion": "Al-Yasa recebeu a profecia após Ilyas. Guiou o povo de Israel no caminho reto. Sua sucessão foi uma bênção para os crentes.",
+    "moral_lesson": "Esta história nos ensina que os profetas sucedem uns aos outros. Cada mensageiro passa a tocha ao seguinte. A orientação divina nunca cessa.",
+    "historical_location": "Palestina (Reino de Israel)",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "alyasa_succession_chapter_1",
+        "title": "A eleição",
+        "content": "O Alcorão relata: \"E lembra-te de Isma'il, Al-Yasa e Dhu al-Kifl. Todos estavam entre os melhores.\" (38:48) Al-Yasa era um jovem piedoso quando Ilyas o conheceu. Ilyas reconheceu nele as qualidades de um profeta. Tomou-o como discípulo e transmitiu-lhe conhecimento. Quando Ilyas foi elevado ao céu, Al-Yasa o sucedeu."
+      },
+      {
+        "id": "alyasa_succession_chapter_2",
+        "title": "Continuidade da mensagem",
+        "content": "O Alcorão diz: \"E a cada um favorecemos sobre os mundos.\" (6:86) Al-Yasa continuou a obra de Ilyas. Chamou o povo a adorar apenas Allah. Combateu a idolatria. Os crentes seguiram-no. A mensagem do monoteísmo perpetuou-se através dele."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Alcorão 6:86",
+        "reference_text": "Sura Al-An'am, versículo 86",
+        "content": "وَإِسْمَـٰعِيلَ وَٱلْيَسَعَ وَيُونُسَ وَلُوطًۭا ۚ وَكُلًّۭا فَضَّلْنَا عَلَى ٱلْعَـٰلَمِينَ",
+        "translation": "E Isma'il, Al-Yasa, Yunus e Lut. E a cada um favorecemos sobre os mundos.",
+        "relevance": "Este versículo coloca Al-Yasa entre os profetas favorecidos."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Alcorão 38:48",
+        "reference_text": "Sura Sad, versículo 48",
+        "content": "وَٱذْكُرْ إِسْمَـٰعِيلَ وَٱلْيَسَعَ وَذَا ٱلْكِفْلِ ۖ وَكُلٌّۭ مِّنَ ٱلْأَخْيَارِ",
+        "translation": "E lembra-te de Isma'il, Al-Yasa e Dhu al-Kifl. Todos estavam entre os melhores.",
+        "relevance": "Este versículo elogia Al-Yasa entre os melhores."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Al-Yasa",
+        "arabic_term": "اليسع",
+        "definition": "Eliseu em árabe. Sucessor do profeta Ilyas.",
+        "pronunciation": "al-ya-sa"
+      },
+      {
+        "id": 2,
+        "term": "Khalifa",
+        "arabic_term": "خليفة",
+        "definition": "Sucessor. Al-Yasa era khalifa de Ilyas.",
+        "pronunciation": "kha-li-fa"
+      }
+    ]
+  },
+  "alyasa_prophecy": {
+    "title": "A profecia de Al-Yasa",
+    "title_arabic": "نبوة اليسع",
+    "introduction": "Al-Yasa recebeu a profecia de Allah. O Alcorão diz: \"E a cada um favorecemos sobre os mundos.\" (6:86) Profetizou a vitória dos crentes e advertiu os incrédulos. Guiou o povo com sabedoria.",
+    "conclusion": "Al-Yasa foi um profeta justo e sábio. Suas palavras se cumpriram. O povo reconheceu nele um mensageiro de Allah. Governou os corações através da verdade.",
+    "moral_lesson": "Esta história nos ensina que a profecia é um dom de Allah. O profeta fala a verdade e guia o povo.",
+    "historical_location": "Palestina",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "alyasa_prophecy_chapter_1",
+        "title": "A mensagem",
+        "content": "O Alcorão relata: \"Todos estavam entre os melhores.\" (38:48) Al-Yasa transmitiu a mensagem de Allah. Chamou a adorar o único Criador. Proibiu a idolatria e a injustiça. Ordenou o bem e proibiu o mal. Sua mensagem era simples e clara: sigam Allah."
+      },
+      {
+        "id": "alyasa_prophecy_chapter_2",
+        "title": "Orientação",
+        "content": "O Alcorão diz: \"E a cada um favorecemos sobre os mundos.\" (6:86) Al-Yasa guiou as pessoas pela palavra e pelo exemplo. Foi paciente com os fracos. Foi firme com os tiranos. Os crentes encontraram nele um guia. Conduziu-os à luz."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Alcorão 38:48",
+        "reference_text": "Sura Sad, versículo 48",
+        "content": "وَٱذْكُرْ إِسْمَـٰعِيلَ وَٱلْيَسَعَ وَذَا ٱلْكِفْلِ ۖ وَكُلٌّۭ مِّنَ ٱلْأَخْيَارِ",
+        "translation": "E lembra-te de Isma'il, Al-Yasa e Dhu al-Kifl. Todos estavam entre os melhores.",
+        "relevance": "Este versículo estabelece Al-Yasa entre os profetas."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Alcorão 6:84-86",
+        "reference_text": "Sura Al-An'am, versículos 84-86",
+        "content": "وَرَسُولًا ۚ وَءَاتَيْنَا دَاوُۥدَ زَبُورًۭا ۝ وَرَسُولًۭا فَضَّلْنَـٰهُمْ",
+        "translation": "E mensageiros. Nós os favorecemos.",
+        "relevance": "Esta passagem coloca Al-Yasa na cadeia profética."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Nubuwwa",
+        "arabic_term": "نبوة",
+        "definition": "Profecia. Al-Yasa recebeu nubuwwa.",
+        "pronunciation": "nou-bou-wa"
+      },
+      {
+        "id": 2,
+        "term": "Huda",
+        "arabic_term": "هدى",
+        "definition": "Orientação. Al-Yasa trouxe huda ao seu povo.",
+        "pronunciation": "hou-da"
+      }
+    ]
+  },
+  "alyasa_miracles": {
+    "title": "Os milagres de Al-Yasa",
+    "title_arabic": "معجزات اليسع",
+    "introduction": "Allah concedeu a Al-Yasa milagres para confirmar sua profecia. O Alcorão diz: \"E a cada um favorecemos sobre os mundos.\" (6:86) Entre seus milagres: ressurreição de um morto, cura de um doente e multiplicação de alimentos. Estes sinais provaram que ele era um profeta.",
+    "conclusion": "Os milagres de Al-Yasa fortaleceram a fé. O povo reconheceu a verdade. Ele continuou a guiar até o fim de sua vida.",
+    "moral_lesson": "Esta história nos ensina que os milagres são provas da profecia. Confirmam que o mensageiro é enviado por Allah.",
+    "historical_location": "Palestina",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "alyasa_miracles_chapter_1",
+        "title": "O milagre da ressurreição",
+        "content": "O Alcorão relata: \"Todos estavam entre os melhores.\" (38:48) Segundo as tradições, Al-Yasa ressuscitou um morto. Uma mulher trouxe-lhe seu filho falecido. Invocou Allah. A criança voltou à vida. Este milagre espantou o povo. Muitos creram em sua profecia."
+      },
+      {
+        "id": "alyasa_miracles_chapter_2",
+        "title": "Multiplicação de alimentos",
+        "content": "O Alcorão diz: \"E a cada um favorecemos sobre os mundos.\" (6:86) Al-Yasa multiplicou os alimentos para alimentar os famintos. Uma pequena quantidade bastou para saciar muitos. Estes milagres recordaram os de Ilyas. Mostraram que a cadeia profética continuava. Allah apoiou Seus mensageiros."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Alcorão 38:48",
+        "reference_text": "Sura Sad, versículo 48",
+        "content": "وَٱذْكُرْ إِسْمَـٰعِيلَ وَٱلْيَسَعَ وَذَا ٱلْكِفْلِ ۖ وَكُلٌّۭ مِّنَ ٱلْأَخْيَارِ",
+        "translation": "E lembra-te de Isma'il, Al-Yasa e Dhu al-Kifl. Todos estavam entre os melhores.",
+        "relevance": "Este versículo estabelece Al-Yasa entre os profetas."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Alcorão 6:86",
+        "reference_text": "Sura Al-An'am, versículo 86",
+        "content": "وَإِسْمَـٰعِيلَ وَٱلْيَسَعَ وَيُونُسَ وَلُوطًۭا ۚ وَكُلًّۭا فَضَّلْنَا عَلَى ٱلْعَـٰلَمِينَ",
+        "translation": "E Isma'il, Al-Yasa, Yunus e Lut. E a cada um favorecemos.",
+        "relevance": "Este versículo confirma o lugar de Al-Yasa entre os profetas."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Mu'jiza",
+        "arabic_term": "معجزة",
+        "definition": "Milagre. Al-Yasa realizou mu'jizat.",
+        "pronunciation": "mou-ji-za"
+      },
+      {
+        "id": 2,
+        "term": "Akhyar",
+        "arabic_term": "أخيار",
+        "definition": "Os melhores. Al-Yasa estava entre os akhyar.",
+        "pronunciation": "akh-yar"
+      }
+    ]
+  },
+  "lessons_from_alyasa": {
+    "title": "Lições da história de Al-Yasa",
+    "title_arabic": "دروس من قصة اليسع",
+    "introduction": "Al-Yasa é o sucessor de Ilyas. O Alcorão diz: \"E a cada um favorecemos sobre os mundos.\" (6:86) Continuou a missão de seu mestre. Sua história ensina a continuidade da orientação divina.",
+    "conclusion": "Al-Yasa recebeu a tocha de Ilyas. Passou-a fielmente. Os profetas sucedem uns aos outros. A mensagem permanece uma.",
+    "moral_lesson": "Esta história nos ensina que cada geração precisa de guias. Os profetas asseguram a continuidade da revelação.",
+    "historical_location": "Palestina",
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lessons_from_alyasa_chapter_1",
+        "title": "Sucessão profética",
+        "content": "O Alcorão diz: \"E a cada um favorecemos sobre os mundos.\" (6:86) Ilyas passou a Al-Yasa. Al-Yasa passou a outros. A cadeia não se quebra. Cada profeta prepara o seguinte. O crente deve respeitar todos os mensageiros. Eles formam uma família."
+      },
+      {
+        "id": "lessons_from_alyasa_chapter_2",
+        "title": "Fidelidade à mensagem",
+        "content": "Al-Yasa não mudou a mensagem de Ilyas. Chamou ao mesmo monoteísmo. Combateu os mesmos erros. A verdade é uma. Os profetas não se contradizem. Confirmam-se uns aos outros. O crente deve seguir esta única verdade."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Alcorão 6:86",
+        "reference_text": "Sura Al-An'am, versículo 86",
+        "content": "وَإِسْمَـٰعِيلَ وَٱلْيَسَعَ وَيُونُسَ وَلُوطًۭا ۚ وَكُلًّۭا فَضَّلْنَا عَلَى ٱلْعَـٰلَمِينَ",
+        "translation": "E Isma'il, Al-Yasa, Yunus e Lut. E a cada um favorecemos sobre os mundos.",
+        "relevance": "Este versículo resume o lugar de Al-Yasa."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Alcorão 38:48",
+        "reference_text": "Sura Sad, versículo 48",
+        "content": "وَٱذْكُرْ إِسْمَـٰعِيلَ وَٱلْيَسَعَ وَذَا ٱلْكِفْلِ ۖ وَكُلٌّۭ مِّنَ ٱلْأَخْيَارِ",
+        "translation": "E lembra-te de Isma'il, Al-Yasa e Dhu al-Kifl. Todos estavam entre os melhores.",
+        "relevance": "Este versículo elogia Al-Yasa entre os melhores."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Silsila",
+        "arabic_term": "سلسلة",
+        "definition": "Cadeia. Al-Yasa faz parte da silsila dos profetas.",
+        "pronunciation": "sil-si-la"
+      },
+      {
+        "id": 2,
+        "term": "Fadl",
+        "arabic_term": "فضل",
+        "definition": "Favor. Al-Yasa recebeu fadl de Allah.",
+        "pronunciation": "fadl"
+      }
+    ]
+  }
+}
