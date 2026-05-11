@@ -293,6 +293,21 @@ class ApiClient {
     });
   }
 
+  /**
+   * Sauvegarde en base la vraie date d'expiration Apple (Renuevecat) après renouvellement.
+   */
+  async syncIosPremiumRenewal(payload: {
+    expiration_at_ms: number;
+    product_id: string;
+    original_transaction_id?: string | null;
+  }): Promise<ApiResponse> {
+    return this.makeRequest<ApiResponse>("/sync-ios-premium.php", "POST", {
+      expiration_at_ms: payload.expiration_at_ms,
+      product_id: payload.product_id,
+      original_transaction_id: payload.original_transaction_id ?? "",
+    });
+  }
+
   // 🚀 NOUVEAU : Récupérer un utilisateur par email
   async getUserByEmail(email: string): Promise<ApiResponse> {
     // 🧪 TEMPORAIRE : Utiliser l'API de test

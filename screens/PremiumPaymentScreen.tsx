@@ -133,6 +133,14 @@ const PremiumPaymentScreen: React.FC = () => {
             const parsedData = JSON.parse(registrationData);
             console.log("✅ Données parsées (focus):", parsedData);
             setPendingRegistration(parsedData);
+            if (Platform.OS === "ios" && parsedData.email) {
+              try {
+                const iap = IapService.getInstance();
+                await iap.login(String(parsedData.email).trim());
+              } catch (e) {
+                console.warn("🍎 [IAP] RevenueCat logIn (écran paiement):", e);
+              }
+            }
           } else {
             console.log("❌ Aucune donnée d'inscription trouvée (focus)");
           }
@@ -184,6 +192,12 @@ const PremiumPaymentScreen: React.FC = () => {
 
         if (success) {
           console.log("🍎 [IAP] Achat réussi via Apple");
+
+          try {
+            await iapService.login(String(pendingRegistration.email).trim());
+          } catch (loginErr) {
+            console.warn("🍎 [IAP] RevenueCat logIn après achat:", loginErr);
+          }
 
           // 🚀 SYNCHRONISATION BACKEND (Modèle Stripe)
           // On informe notre backend de l'achat pour créer/mettre à jour le compte

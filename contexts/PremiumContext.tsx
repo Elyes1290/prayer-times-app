@@ -424,6 +424,20 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
         console.log(
           "🔐 Vérification périodique du token - utilisateur connecté"
         );
+        // 👑 VIP PROTECTION : ne jamais déconnecter un VIP, même si le token expire
+        const vipCheckPremiumRaw = await AsyncStorage.getItem(STORAGE_KEYS.PREMIUM_USER);
+        const vipCheckPremium = safeJsonParse<any>(vipCheckPremiumRaw, null);
+        if (vipCheckPremium?.isVip) {
+          console.log("👑 [VIP] Token expiré ignoré — utilisateur VIP");
+          return;
+        }
+        const vipCheckUserRaw = await AsyncStorage.getItem("user_data");
+        const vipCheckUser = safeJsonParse<any>(vipCheckUserRaw, null);
+        if (vipCheckUser?.is_vip === true) {
+          console.log("👑 [VIP] Token expiré ignoré — is_vip dans user_data");
+          return;
+        }
+
         const result = await apiClient.verifyAuth();
         if (!result?.success) {
           // Token invalide: désactiver premium et nettoyer les tokens
@@ -523,11 +537,36 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
     try {
       setLoading(true);
 
-      // 🍎 iOS : Vérifier le statut RevenueCat
+      // 🍎 iOS : pousser la vraie date d'expiration vers le backend (renouvellements Apple), puis même UX qu'avant
       if (Platform.OS === "ios") {
         try {
           const iapService = IapService.getInstance();
           const isIapPremium = await iapService.checkPremiumStatus();
+
+          const token = await AsyncStorage.getItem("auth_token");
+          if (
+            isIapPremium &&
+            token &&
+            networkStatus.isConnected &&
+            networkStatus.isInternetReachable
+          ) {
+            const snap = await iapService.getActiveEntitlementSnapshot();
+            if (snap) {
+              try {
+                await apiClient.syncIosPremiumRenewal({
+                  expiration_at_ms: snap.expirationAtMs,
+                  product_id: snap.productId,
+                  original_transaction_id: snap.originalTransactionId,
+                });
+              } catch (syncErr) {
+                console.warn(
+                  "⚠️ [PremiumContext] sync-ios-premium:",
+                  syncErr
+                );
+              }
+            }
+          }
+
           if (isIapPremium) {
             console.log("🍎 [PremiumContext] Premium détecté via RevenueCat");
             const iapUser: PremiumUser = {
@@ -548,7 +587,10 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
             return;
           }
         } catch (iapError) {
-          console.error("❌ [PremiumContext] Erreur vérification IAP:", iapError);
+          console.error(
+            "❌ [PremiumContext] Erreur vérification IAP:",
+            iapError
+          );
         }
       }
 

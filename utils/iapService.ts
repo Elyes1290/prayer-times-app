@@ -1,6 +1,12 @@
 import { Platform } from "react-native";
 import Purchases, { LOG_LEVEL, PurchasesPackage } from "react-native-purchases";
-import { IAP_CONFIG, IapSubscriptionType } from "./iapConfig";
+import { IAP_CONFIG } from "./iapConfig";
+
+export interface AppleEntitlementSnapshot {
+  expirationAtMs: number;
+  productId: string;
+  originalTransactionId: string | null;
+}
 
 export class IapService {
   private static instance: IapService;
@@ -71,6 +77,43 @@ export class IapService {
         console.error("❌ Erreur achat RevenueCat:", error);
       }
       return false;
+    }
+  }
+
+  /** Dates réelles côté store (pour sync serveur lors des renouvellements Apple) */
+  async getActiveEntitlementSnapshot(): Promise<AppleEntitlementSnapshot | null> {
+    if (!this.isConfigured) await this.init();
+    if (Platform.OS !== "ios") return null;
+
+    try {
+      const customerInfo = await Purchases.getCustomerInfo();
+      const ent =
+        customerInfo.entitlements.active[IAP_CONFIG.entitlementId] as {
+          expirationDate?: string | null;
+          productIdentifier?: string;
+        };
+
+      if (!ent) return null;
+
+      const iso = ent.expirationDate;
+      let expirationAtMs: number | null = null;
+      if (iso && typeof iso === "string") {
+        const t = new Date(iso).getTime();
+        if (!Number.isNaN(t)) expirationAtMs = t;
+      }
+      if (expirationAtMs === null) return null;
+
+      const productId = ent.productIdentifier ?? "";
+      if (!productId) return null;
+
+      return {
+        expirationAtMs,
+        productId,
+        originalTransactionId: null,
+      };
+    } catch (error) {
+      console.error("❌ Erreur snapshot entitlement RevenueCat:", error);
+      return null;
     }
   }
 

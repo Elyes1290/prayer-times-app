@@ -123,6 +123,10 @@ define('STRIPE_WEBHOOK_SECRET', $_ENV['STRIPE_WEBHOOK_SECRET'] ?? '');
 
 // 🍎 REVENUECAT : Configuration des abonnements iOS (Apple In-App Purchases)
 define('REVENUECAT_SECRET_KEY', $_ENV['REVENUECAT_SECRET_KEY'] ?? '');
+// 🔐 Jeton envoyé dans l'en-tête Authorization par RevenueCat pour les webhooks (à configurer dans le dashboard RC)
+define('REVENUECAT_WEBHOOK_AUTH', $_ENV['REVENUECAT_WEBHOOK_AUTH'] ?? '');
+// Aligné avec utils/iapConfig.ts (entitlementId)
+define('REVENUECAT_ENTITLEMENT_ID', $_ENV['REVENUECAT_ENTITLEMENT_ID'] ?? 'MyAdhan Pro');
 
 // 📧 RESEND : Configuration des emails
 define('RESEND_API_KEY', $_ENV['RESEND_API_KEY'] ?? getenv('RESEND_API_KEY') ?? '');

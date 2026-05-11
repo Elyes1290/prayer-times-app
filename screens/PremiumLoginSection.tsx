@@ -15,6 +15,7 @@ import {
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import apiClient from "../utils/apiClient";
+import { IapService } from "../utils/iapService";
 import { usePremium } from "../contexts/PremiumContext";
 import { LinearGradient } from "expo-linear-gradient";
 import { useErrorHandler } from "../utils/errorHandler";
@@ -498,6 +499,17 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
 
             // Synchroniser les données utilisateur
             await syncUserDataToLocal(userData);
+
+            if (Platform.OS === "ios" && currentEmail) {
+              try {
+                await IapService.getInstance().login(currentEmail.trim());
+              } catch (rcLoginErr) {
+                console.warn(
+                  "🍎 [IAP] RevenueCat logIn après connexion:",
+                  rcLoginErr
+                );
+              }
+            }
 
             // 🚀 NOUVEAU : Forcer la recharge du PremiumContext après login
             await checkPremiumStatus();
