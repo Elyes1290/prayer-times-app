@@ -9,7 +9,7 @@ import { PremiumContent } from "./premiumContent";
  * Économie : 173 CHF → 7 CHF/mois (-96%)
  */
 
-export interface CustomServerConfig {
+interface CustomServerConfig {
   enabled: boolean;
   baseUrl: string;
   fallbackUrls: string[];
@@ -18,14 +18,14 @@ export interface CustomServerConfig {
   cacheEnabled: boolean;
 }
 
-export interface ServerResponse {
+interface ServerResponse {
   success: boolean;
   url?: string;
   error?: string;
   source: "custom" | "cdn" | "firebase";
 }
 
-export class CustomServerManager {
+class CustomServerManager {
   private static instance: CustomServerManager;
   private config: CustomServerConfig;
 
@@ -86,8 +86,15 @@ export class CustomServerManager {
 
     const urls = this.buildAudioUrls(content);
 
-    // Tester chaque URL dans l'ordre
-    for (const { url, source } of urls) {
+    const tryUrlAt = async (index: number): Promise<ServerResponse> => {
+      if (index >= urls.length) {
+        return {
+          success: false,
+          error: "Aucune source audio accessible",
+          source: "custom",
+        };
+      }
+      const { url, source } = urls[index];
       try {
         const isAccessible = await this.testUrlAccessibility(url);
         if (isAccessible) {
@@ -97,13 +104,10 @@ export class CustomServerManager {
       } catch (error) {
         debugLog(`❌ Échec ${source}: ${url}`);
       }
-    }
-
-    return {
-      success: false,
-      error: "Aucune source audio accessible",
-      source: "custom",
+      return tryUrlAt(index + 1);
     };
+
+    return tryUrlAt(0);
   }
 
   /**

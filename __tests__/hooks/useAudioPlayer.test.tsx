@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { render, waitFor, act } from "@testing-library/react-native";
 import { View } from "react-native";
 import { useAudioPlayer } from "../../hooks/useAudioPlayer";
@@ -9,9 +9,7 @@ function HookTest({
   onValue: (api: ReturnType<typeof useAudioPlayer>) => void;
 }) {
   const api = useAudioPlayer();
-  useEffect(() => {
-    onValue(api);
-  }, [api, onValue]);
+  onValue(api);
   return null;
 }
 
@@ -182,9 +180,7 @@ test("useAudioPlayer retourne l'état initial correct", async () => {
     onValue: (v: ReturnType<typeof useAudioPlayer>) => void;
   }) {
     const api = useAudioPlayer();
-    useEffect(() => {
-      onValue(api);
-    }, [api, onValue]);
+    onValue(api);
     return null;
   }
   render(
@@ -209,9 +205,7 @@ test("lecture audio met isAudioPlaying à true", async () => {
     onValue: (v: ReturnType<typeof useAudioPlayer>) => void;
   }) {
     const api = useAudioPlayer();
-    useEffect(() => {
-      onValue(api);
-    }, [api, onValue]);
+    onValue(api);
     return null;
   }
   render(
@@ -239,9 +233,7 @@ test("pause audio met isAudioPlaying à false", async () => {
     onValue: (v: ReturnType<typeof useAudioPlayer>) => void;
   }) {
     const api = useAudioPlayer();
-    useEffect(() => {
-      onValue(api);
-    }, [api, onValue]);
+    onValue(api);
     return null;
   }
   render(
@@ -270,9 +262,7 @@ test("reset audio remet l'état à zéro", async () => {
     onValue: (v: ReturnType<typeof useAudioPlayer>) => void;
   }) {
     const api = useAudioPlayer();
-    useEffect(() => {
-      onValue(api);
-    }, [api, onValue]);
+    onValue(api);
     return null;
   }
   render(
@@ -326,9 +316,7 @@ test("playAsync qui échoue doit être géré sans crash", async () => {
     onValue: (v: ReturnType<typeof useAudioPlayer>) => void;
   }) {
     const api = useAudioPlayer();
-    useEffect(() => {
-      onValue(api);
-    }, [api, onValue]);
+    onValue(api);
     return null;
   }
   render(
@@ -365,9 +353,7 @@ test("stop sans lecture active ne crash pas (edge case)", async () => {
     onValue: (v: ReturnType<typeof useAudioPlayer>) => void;
   }) {
     const api = useAudioPlayer();
-    useEffect(() => {
-      onValue(api);
-    }, [api, onValue]);
+    onValue(api);
     return null;
   }
   render(
@@ -396,9 +382,7 @@ test("double play ne casse pas l'état (edge case)", async () => {
     onValue: (v: ReturnType<typeof useAudioPlayer>) => void;
   }) {
     const api = useAudioPlayer();
-    useEffect(() => {
-      onValue(api);
-    }, [api, onValue]);
+    onValue(api);
     return null;
   }
   render(

@@ -209,5 +209,8 @@
   "widget_feature_navigation": "✨ Sureler arasında gezinme",
   "widget_feature_audio_controls": "✨ Tam ses kontrolleri",
   "widget_feature_offline": "✨ Çevrimdışı mod",
-  "subscribe_premium": "Premium Abone Ol"
+  "subscribe_premium": "Premium Abone Ol",
+  "adhan_completed_title": "✅ Ezan tamamlandı",
+  "adhan_completed_body": "Namaz çağrısı tamamlandı",
+  "dismiss": "Kapat"
 }

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { render, act, waitFor } from "@testing-library/react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { usePremium } from "../../contexts/PremiumContext";
@@ -33,9 +33,7 @@ function Harness({
   onReady: (ctx: ReturnType<typeof useBackup>) => void;
 }) {
   const ctx = useBackup();
-  useEffect(() => {
-    onReady(ctx);
-  }, [ctx, onReady]);
+  onReady(ctx);
   return null;
 }
 
@@ -92,8 +90,10 @@ describe("BackupContext", () => {
     );
 
     await act(async () => {
-      const ok1 = await api.backupData();
-      const ok2 = await api.signInAnonymously();
+      const [ok1, ok2] = await Promise.all([
+        api.backupData(),
+        api.signInAnonymously(),
+      ]);
       expect(ok1).toBe(false);
       expect(ok2).toBe(false);
     });

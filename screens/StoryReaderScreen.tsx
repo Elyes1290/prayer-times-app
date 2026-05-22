@@ -4,16 +4,15 @@ import {
   ScrollView,
   Text,
   StyleSheet,
-  TouchableOpacity,
+  Pressable,
   Alert,
   StatusBar,
   Modal,
-  Dimensions,
   Share,
   Animated,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { Ionicons } from "@expo/vector-icons";
+import { IonIcon } from "@/components/icons/AppVectorIcons";
 import { useRouter, useFocusEffect } from "expo-router";
 
 import { ThemedView } from "../components/ThemedView";
@@ -127,7 +126,6 @@ interface ReaderSettings {
   lineSpacing: number;
 }
 
-const { width: screenWidth } = Dimensions.get("window");
 
 export default function StoryReaderScreen() {
   const [storyId, setStoryId] = useState<string | null>(null);
@@ -135,7 +133,7 @@ export default function StoryReaderScreen() {
   const currentTheme = useCurrentTheme();
   const { user: premiumUser } = usePremium();
   const { t } = useTranslation();
-  const router = useRouter();
+  const { replace } = useRouter();
   const networkStatus = useNetworkStatus(); // 🆕 Détection du mode hors ligne
 
   // État local
@@ -144,10 +142,8 @@ export default function StoryReaderScreen() {
   const [currentChapter, setCurrentChapter] = useState(0);
   const [readingProgress, setReadingProgress] = useState(0);
   const [showSettings, setShowSettings] = useState(false);
-  const [showReferences, setShowReferences] = useState(false);
-  const [showGlossary, setShowGlossary] = useState(false);
-  const [selectedGlossaryTerm, setSelectedGlossaryTerm] =
-    useState<GlossaryTerm | null>(null);
+  const showReferencesRef = useRef(false);
+  const showGlossaryRef = useRef(false);
   const [isFavorited, setIsFavorited] = useState(false);
 
   // Paramètres de lecture
@@ -228,7 +224,7 @@ export default function StoryReaderScreen() {
                   text: "OK",
                   onPress: () => {
                     AsyncStorage.removeItem("current_story_id");
-                    router.replace("/prophet-stories" as any);
+                    replace("/prophet-stories" as any);
                   },
                 },
               ]
@@ -273,7 +269,7 @@ export default function StoryReaderScreen() {
         } else {
           Alert.alert("Erreur", responseData.message || "Histoire introuvable");
           await AsyncStorage.removeItem("current_story_id");
-          router.replace("/prophet-stories" as any);
+          replace("/prophet-stories" as any);
         }
       } catch (error) {
         console.error("Erreur chargement histoire:", error);
@@ -295,7 +291,7 @@ export default function StoryReaderScreen() {
             "Erreur de connexion et histoire non téléchargée"
           );
           await AsyncStorage.removeItem("current_story_id");
-          router.replace("/prophet-stories" as any);
+          replace("/prophet-stories" as any);
         }
       } finally {
         setLoading(false);
@@ -501,9 +497,9 @@ export default function StoryReaderScreen() {
             <ThemedText style={styles.modalTitle}>
               Paramètres de lecture
             </ThemedText>
-            <TouchableOpacity onPress={() => setShowSettings(false)}>
-              <Ionicons name="close" size={24} color={colors.text} />
-            </TouchableOpacity>
+            <Pressable onPress={() => setShowSettings(false)}>
+              <IonIcon name="close" size={24} color={colors.text} />
+            </Pressable>
           </View>
 
           {/* Taille de police */}
@@ -513,7 +509,7 @@ export default function StoryReaderScreen() {
             </ThemedText>
             <View style={styles.settingOptions}>
               {["small", "medium", "large", "extra-large"].map((size) => (
-                <TouchableOpacity
+                <Pressable
                   key={size}
                   style={[
                     styles.settingOption,
@@ -543,7 +539,7 @@ export default function StoryReaderScreen() {
                       ? "A"
                       : "A"}
                   </Text>
-                </TouchableOpacity>
+                </Pressable>
               ))}
             </View>
           </View>
@@ -557,7 +553,7 @@ export default function StoryReaderScreen() {
                 { key: "dark", label: "🌙 Sombre", color: "#1a1a1a" },
                 { key: "sepia", label: "📖 Sépia", color: "#FDF6E3" },
               ].map((theme) => (
-                <TouchableOpacity
+                <Pressable
                   key={theme.key}
                   style={[
                     styles.themeOption,
@@ -585,7 +581,7 @@ export default function StoryReaderScreen() {
                   >
                     {theme.label}
                   </Text>
-                </TouchableOpacity>
+                </Pressable>
               ))}
             </View>
           </View>
@@ -596,7 +592,7 @@ export default function StoryReaderScreen() {
               Options d&apos;affichage
             </ThemedText>
 
-            <TouchableOpacity
+            <Pressable
               style={styles.toggleOption}
               onPress={() =>
                 setReaderSettings((prev) => ({
@@ -621,9 +617,9 @@ export default function StoryReaderScreen() {
                   ]}
                 />
               </View>
-            </TouchableOpacity>
+            </Pressable>
 
-            <TouchableOpacity
+            <Pressable
               style={styles.toggleOption}
               onPress={() =>
                 setReaderSettings((prev) => ({
@@ -648,7 +644,7 @@ export default function StoryReaderScreen() {
                   ]}
                 />
               </View>
-            </TouchableOpacity>
+            </Pressable>
           </View>
         </View>
       </View>
@@ -678,7 +674,7 @@ export default function StoryReaderScreen() {
 
           {storyData.story.historical_location && (
             <View style={styles.historicalInfo}>
-              <Ionicons
+              <IonIcon
                 name="location-outline"
                 size={16}
                 color={colors.textSecondary}
@@ -697,7 +693,7 @@ export default function StoryReaderScreen() {
           <View style={styles.chapterNavigation}>
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
               {storyData.chapters.map((chapter, index) => (
-                <TouchableOpacity
+                <Pressable
                   key={chapter.id}
                   style={[
                     styles.chapterTab,
@@ -717,7 +713,7 @@ export default function StoryReaderScreen() {
                   >
                     {index + 1}. {chapter.title}
                   </Text>
-                </TouchableOpacity>
+                </Pressable>
               ))}
             </ScrollView>
           </View>
@@ -758,25 +754,25 @@ export default function StoryReaderScreen() {
         {/* Navigation précédent/suivant */}
         <View style={styles.navigationButtons}>
           {currentChapter > 0 && (
-            <TouchableOpacity
+            <Pressable
               style={[styles.navButton, { backgroundColor: colors.cardBG }]}
               onPress={() => setCurrentChapter(currentChapter - 1)}
             >
-              <Ionicons name="chevron-back" size={20} color={colors.text} />
+              <IonIcon name="chevron-back" size={20} color={colors.text} />
               <ThemedText style={styles.navButtonText}>Précédent</ThemedText>
-            </TouchableOpacity>
+            </Pressable>
           )}
 
           {currentChapter < storyData.chapters.length - 1 && (
-            <TouchableOpacity
+            <Pressable
               style={[styles.navButton, { backgroundColor: colors.primary }]}
               onPress={() => setCurrentChapter(currentChapter + 1)}
             >
               <Text style={[styles.navButtonText, { color: "white" }]}>
                 Suivant
               </Text>
-              <Ionicons name="chevron-forward" size={20} color="white" />
-            </TouchableOpacity>
+              <IonIcon name="chevron-forward" size={20} color="white" />
+            </Pressable>
           )}
         </View>
       </View>
@@ -794,7 +790,7 @@ export default function StoryReaderScreen() {
           }
         />
         <View style={styles.loadingContainer}>
-          <ThemedText>Chargement de l&apos;histoire...</ThemedText>
+          <ThemedText>Chargement de l&apos;histoire…</ThemedText>
         </View>
       </ThemedView>
     );
@@ -805,15 +801,15 @@ export default function StoryReaderScreen() {
       <ThemedView style={styles.container}>
         <View style={styles.errorContainer}>
           <ThemedText>Histoire introuvable</ThemedText>
-          <TouchableOpacity
+          <Pressable
             onPress={async () => {
               await AsyncStorage.removeItem("current_story_id");
-              router.replace("/prophet-stories" as any);
+              replace("/prophet-stories" as any);
             }}
             style={styles.backButton}
           >
             <ThemedText>Retour</ThemedText>
-          </TouchableOpacity>
+          </Pressable>
         </View>
       </ThemedView>
     );
@@ -836,20 +832,20 @@ export default function StoryReaderScreen() {
         }
         style={styles.toolbar}
       >
-        <TouchableOpacity
+        <Pressable
           onPress={async () => {
             // 🧹 Nettoyer l'ID stocké pour éviter les conflits
             await AsyncStorage.removeItem("current_story_id");
-            router.replace("/prophet-stories" as any);
+            replace("/prophet-stories" as any);
           }}
           style={styles.toolbarButton}
         >
-          <Ionicons
+          <IonIcon
             name="chevron-back"
             size={24}
             color={readerSettings.theme === "dark" ? "#FFFFFF" : "#000000"}
           />
-        </TouchableOpacity>
+        </Pressable>
 
         <View style={styles.toolbarCenter}>
           <Text
@@ -898,11 +894,11 @@ export default function StoryReaderScreen() {
         </View>
 
         <View style={styles.toolbarActions}>
-          <TouchableOpacity
+          <Pressable
             onPress={toggleFavorite}
             style={styles.toolbarButton}
           >
-            <Ionicons
+            <IonIcon
               name={isFavorited ? "heart" : "heart-outline"}
               size={22}
               color={
@@ -913,26 +909,26 @@ export default function StoryReaderScreen() {
                   : "#000000"
               }
             />
-          </TouchableOpacity>
+          </Pressable>
 
-          <TouchableOpacity onPress={shareStory} style={styles.toolbarButton}>
-            <Ionicons
+          <Pressable onPress={shareStory} style={styles.toolbarButton}>
+            <IonIcon
               name="share-outline"
               size={22}
               color={readerSettings.theme === "dark" ? "#FFFFFF" : "#000000"}
             />
-          </TouchableOpacity>
+          </Pressable>
 
-          <TouchableOpacity
+          <Pressable
             onPress={() => setShowSettings(true)}
             style={styles.toolbarButton}
           >
-            <Ionicons
+            <IonIcon
               name="settings-outline"
               size={22}
               color={readerSettings.theme === "dark" ? "#FFFFFF" : "#000000"}
             />
-          </TouchableOpacity>
+          </Pressable>
         </View>
       </LinearGradient>
 
@@ -961,26 +957,26 @@ export default function StoryReaderScreen() {
           },
         ]}
       >
-        <TouchableOpacity
-          onPress={() => setShowReferences(true)}
+        <Pressable
+          onPress={() => { showReferencesRef.current = true; }}
           style={styles.bottomToolbarButton}
         >
-          <Ionicons name="book-outline" size={22} color={colors.text} />
+          <IonIcon name="book-outline" size={22} color={colors.text} />
           <Text style={[styles.bottomToolbarText, { color: colors.text }]}>
             Références ({storyData.references.length})
           </Text>
-        </TouchableOpacity>
+        </Pressable>
 
         {storyData.glossary.length > 0 && (
-          <TouchableOpacity
-            onPress={() => setShowGlossary(true)}
+          <Pressable
+            onPress={() => { showGlossaryRef.current = true; }}
             style={styles.bottomToolbarButton}
           >
-            <Ionicons name="library-outline" size={22} color={colors.text} />
+            <IonIcon name="library-outline" size={22} color={colors.text} />
             <Text style={[styles.bottomToolbarText, { color: colors.text }]}>
               Glossaire ({storyData.glossary.length})
             </Text>
-          </TouchableOpacity>
+          </Pressable>
         )}
       </View>
 
@@ -1019,7 +1015,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     paddingTop: 50,
     paddingBottom: 15,
-    elevation: 2,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 4,
@@ -1163,7 +1158,6 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     borderRadius: 25,
     gap: 8,
-    elevation: 2,
   },
   navButtonText: {
     fontSize: 16,
@@ -1259,7 +1253,6 @@ const styles = StyleSheet.create({
     height: 22,
     borderRadius: 11,
     backgroundColor: "white",
-    elevation: 2,
   },
   toggleKnobActive: {
     alignSelf: "flex-end",

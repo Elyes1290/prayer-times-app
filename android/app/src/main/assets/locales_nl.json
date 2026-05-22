@@ -211,5 +211,8 @@
   "widget_feature_navigation": "✨ Navigeren tussen sura's",
   "widget_feature_audio_controls": "✨ Volledige audiobediening",
   "widget_feature_offline": "✨ Offline modus",
-  "subscribe_premium": "Abonneer Premium"
+  "subscribe_premium": "Abonneer Premium",
+  "adhan_completed_title": "✅ Adhan voltooid",
+  "adhan_completed_body": "De oproep tot gebed is voltooid",
+  "dismiss": "Sluiten"
 }

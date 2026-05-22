@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { render, act, waitFor } from "@testing-library/react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -23,9 +23,7 @@ function HookProbe({
   onValue: (ctx: ReturnType<typeof usePremium>) => void;
 }) {
   const ctx = usePremium();
-  useEffect(() => {
-    onValue(ctx);
-  }, [ctx, onValue]);
+  onValue(ctx);
   return null;
 }
 

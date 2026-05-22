@@ -31,5 +31,3 @@ export function useSettingsOptimized() {
   };
 }
 
-// Export de types pour faciliter l'usage
-export type SettingsOptimizedHook = ReturnType<typeof useSettingsOptimized>;

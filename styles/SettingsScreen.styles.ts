@@ -1,4 +1,6 @@
+import { Z_INDEX } from "../constants/zIndex";
 import { StyleSheet, Platform } from "react-native";
+import { makeBoxShadow } from "../utils/shadowUtils";
 
 export const getStyles = (
   colors: any,
@@ -6,10 +8,10 @@ export const getStyles = (
   overlayIconColor: string,
   currentTheme: "light" | "dark" | "morning" | "sunset"
 ) => {
-  // 🆕 Helpers pour déterminer le type de thème
+  // ðŸ†• Helpers pour dÃ©terminer le type de thÃ¨me
   const isLightTheme = currentTheme === "light" || currentTheme === "morning";
-  const isSunset = currentTheme === "sunset"; // 🌆 Nouveau : thème crépuscule distinct
-  const isDark = currentTheme === "dark"; // 🌙 Thème nuit pur
+  const isSunset = currentTheme === "sunset"; // ðŸŒ† Nouveau : thÃ¨me crÃ©puscule distinct
+  const isDark = currentTheme === "dark"; // ðŸŒ™ ThÃ¨me nuit pur
 
   return StyleSheet.create({
     container: {
@@ -44,19 +46,15 @@ export const getStyles = (
       backgroundColor: isLightTheme
         ? "rgba(255, 255, 255, 0.2)"
         : isSunset
-        ? "rgba(255, 127, 80, 0.2)" // 🌆 Coral transparent pour Maghrib
+        ? "rgba(255, 127, 80, 0.2)" // ðŸŒ† Coral transparent pour Maghrib
         : "rgba(0, 0, 0, 0.3)",
       borderWidth: 1,
       borderColor: isLightTheme
         ? "rgba(255, 255, 255, 0.3)"
         : isSunset
-        ? colors.border // 🌅 Utilise border du thème Maghrib
+        ? colors.border // ðŸŒ… Utilise border du thÃ¨me Maghrib
         : "rgba(255, 255, 255, 0.2)",
-      shadowColor: isLightTheme ? colors.shadow : colors.primary, // 🌅 Utilise primary du thème actif
-      shadowOffset: { width: 0, height: 2 },
-      shadowOpacity: 0.3,
-      shadowRadius: 4,
-      elevation: 4,
+      boxShadow: makeBoxShadow(isLightTheme ? colors.shadow : colors.primary, 0, 2, 4, 0.3),
     },
     text: {
       color: overlayTextColor,
@@ -73,15 +71,11 @@ export const getStyles = (
     modalContent: {
       backgroundColor: isLightTheme
         ? "rgba(255, 255, 255, 0.98)"
-        : colors.cardBG, // 🌅 Utilise cardBG du thème actif
+        : colors.cardBG, // ðŸŒ… Utilise cardBG du thÃ¨me actif
       padding: 28,
       borderRadius: 20,
       alignItems: "center",
-      shadowColor: isLightTheme ? colors.shadow : colors.primary, // 🌅 Utilise primary du thème actif
-      shadowOffset: { width: 0, height: 8 },
-      shadowOpacity: 0.4,
-      shadowRadius: 16,
-      elevation: 10,
+      boxShadow: makeBoxShadow(isLightTheme ? colors.shadow : colors.primary, 0, 8, 16, 0.4),
       borderWidth: 2,
       borderColor: isLightTheme ? colors.border : isSunset ? "rgba(255, 127, 80, 0.4)" : "rgba(212, 175, 55, 0.3)",
       width: "90%",
@@ -94,16 +88,12 @@ export const getStyles = (
       backgroundColor: isLightTheme
         ? "rgba(34, 139, 34, 0.15)"
         : isSunset
-        ? "rgba(255, 127, 80, 0.25)" // 🌆 Coral transparent pour Maghrib
+        ? "rgba(255, 127, 80, 0.25)" // ðŸŒ† Coral transparent pour Maghrib
         : "rgba(212, 175, 55, 0.2)",
       justifyContent: "center",
       alignItems: "center",
       marginBottom: 20,
-      shadowColor: isLightTheme ? colors.shadow : colors.primary, // 🌅 Utilise primary du thème actif
-      shadowOffset: { width: 0, height: 4 },
-      shadowOpacity: 0.3,
-      shadowRadius: 8,
-      elevation: 6,
+      boxShadow: makeBoxShadow(isLightTheme ? colors.shadow : colors.primary, 0, 4, 8, 0.3),
       borderWidth: 1,
       borderColor: isLightTheme ? colors.primary : isSunset ? "rgba(255, 127, 80, 0.5)" : "rgba(212, 175, 55, 0.4)",
     },
@@ -114,7 +104,7 @@ export const getStyles = (
     modalTitle: {
       fontSize: 22,
       fontWeight: "bold",
-      color: isLightTheme ? colors.primary : colors.accent, // 🌅 Utilise accent du thème actif
+      color: isLightTheme ? colors.primary : colors.accent, // ðŸŒ… Utilise accent du thÃ¨me actif
       textAlign: "center",
       marginBottom: 16,
       letterSpacing: 0.5,
@@ -141,16 +131,12 @@ export const getStyles = (
       backgroundColor: isLightTheme
         ? colors.primary
         : isSunset
-        ? "rgba(255, 127, 80, 0.9)" // 🌆 Coral pour bouton Maghrib
+        ? "rgba(255, 127, 80, 0.9)" // ðŸŒ† Coral pour bouton Maghrib
         : "rgba(212, 175, 55, 0.9)",
       paddingVertical: 14,
       paddingHorizontal: 32,
       borderRadius: 16,
-      shadowColor: isLightTheme ? colors.shadow : colors.primary, // 🌅 Utilise primary du thème actif
-      shadowOffset: { width: 0, height: 4 },
-      shadowOpacity: 0.4,
-      shadowRadius: 8,
-      elevation: 6,
+      boxShadow: makeBoxShadow(isLightTheme ? colors.shadow : colors.primary, 0, 4, 8, 0.4),
       borderWidth: 1,
       borderColor: isLightTheme ? colors.primary : isSunset ? "rgba(255, 127, 80, 0.6)" : "rgba(212, 175, 55, 0.5)",
       minWidth: 180,
@@ -175,11 +161,7 @@ export const getStyles = (
       borderTopLeftRadius: 24,
       borderTopRightRadius: 24,
       maxHeight: "90%",
-      shadowColor: "#000",
-      shadowOffset: { width: 0, height: -8 },
-      shadowOpacity: 0.5,
-      shadowRadius: 24,
-      elevation: 12,
+      boxShadow: "0px -8px 24px rgba(0,0,0,0.5)",
     },
     premiumModalHeader: {
       flexDirection: "row",
@@ -207,8 +189,7 @@ export const getStyles = (
       top: 0,
       left: 0,
       right: 0,
-      zIndex: 999999,
-      elevation: 999999,
+      zIndex: Z_INDEX.modal,
       pointerEvents: "box-none",
     },
     locationToggle: {
@@ -217,20 +198,16 @@ export const getStyles = (
       marginBottom: 24,
       backgroundColor: isLightTheme 
         ? colors.surface 
-        : colors.surface, // 🌅 Utilise surface du thème actif
+        : colors.surface, // ðŸŒ… Utilise surface du thÃ¨me actif
       borderRadius: 16,
       padding: 6,
       borderWidth: 1,
       borderColor: isLightTheme 
         ? colors.border 
         : isSunset 
-        ? colors.border // 🌅 Utilise border du thème Maghrib
+        ? colors.border // ðŸŒ… Utilise border du thÃ¨me Maghrib
         : "rgba(148, 163, 184, 0.3)",
-      shadowColor: isLightTheme ? colors.shadow : isDark ? "#000" : colors.shadow, // 🌅 Utilise shadow du thème actif
-      shadowOffset: { width: 0, height: 4 },
-      shadowOpacity: 0.3,
-      shadowRadius: 8,
-      elevation: 4,
+      boxShadow: makeBoxShadow(isDark ? "#000" : colors.shadow, 0, 4, 8, 0.3),
     },
     toggleButton: {
       paddingVertical: 8,
@@ -247,13 +224,9 @@ export const getStyles = (
       backgroundColor: isLightTheme
         ? colors.primary
         : isSunset
-        ? colors.primary // 🌅 Utilise primary du thème Maghrib
+        ? colors.primary // ðŸŒ… Utilise primary du thÃ¨me Maghrib
         : "rgba(212, 175, 55, 0.9)",
-      shadowColor: isLightTheme ? colors.shadow : colors.primary, // 🌅 Utilise primary du thème actif
-      shadowOffset: { width: 0, height: 4 },
-      shadowOpacity: 0.5,
-      shadowRadius: 8,
-      elevation: 6,
+      boxShadow: makeBoxShadow(isLightTheme ? colors.shadow : colors.primary, 0, 4, 8, 0.5),
       borderWidth: 1,
       borderColor: isLightTheme ? colors.primary : isSunset ? "rgba(255, 127, 80, 0.6)" : "rgba(212, 175, 55, 0.5)",
     },
@@ -261,7 +234,7 @@ export const getStyles = (
       color: isLightTheme 
         ? colors.textSecondary 
         : isSunset 
-        ? "#E5B299" // 🌆 Beige rosé pour texte toggle Maghrib
+        ? "#E5B299" // ðŸŒ† Beige rosÃ© pour texte toggle Maghrib
         : "#94A3B8",
       fontSize: 15,
       fontWeight: "600",
@@ -285,56 +258,44 @@ export const getStyles = (
       marginBottom: 16,
       backgroundColor: isLightTheme 
         ? colors.surface 
-        : colors.surface, // 🌅 Utilise surface du thème actif
+        : colors.surface, // ðŸŒ… Utilise surface du thÃ¨me actif
       borderRadius: 12,
       padding: 4,
       borderWidth: 1,
       borderColor: isLightTheme 
         ? colors.border 
         : isSunset 
-        ? colors.border // 🌅 Utilise border du thème Maghrib
+        ? colors.border // ðŸŒ… Utilise border du thÃ¨me Maghrib
         : "rgba(148, 163, 184, 0.3)",
-      shadowColor: isLightTheme ? colors.shadow : isDark ? "#000" : colors.shadow, // 🌅 Utilise shadow du thème actif
-      shadowOffset: { width: 0, height: 2 },
-      shadowOpacity: 0.2,
-      shadowRadius: 4,
-      elevation: 3,
+      boxShadow: makeBoxShadow(isDark ? "#000" : colors.shadow, 0, 2, 4, 0.2),
     },
     autoLocationSection: {
       alignItems: "center",
       padding: 24,
       backgroundColor: isLightTheme 
         ? colors.surface 
-        : colors.surface, // 🌅 Utilise surface du thème actif
+        : colors.surface, // ðŸŒ… Utilise surface du thÃ¨me actif
       borderRadius: 16,
       borderWidth: 1,
       borderColor: isLightTheme 
         ? colors.border 
         : isSunset 
-        ? colors.border // 🌅 Utilise border du thème Maghrib
+        ? colors.border // ðŸŒ… Utilise border du thÃ¨me Maghrib
         : "rgba(148, 163, 184, 0.3)",
-      shadowColor: isLightTheme ? colors.shadow : isDark ? "#000" : colors.shadow, // 🌅 Utilise shadow du thème actif
-      shadowOffset: { width: 0, height: 4 },
-      shadowOpacity: 0.3,
-      shadowRadius: 12,
-      elevation: 6,
+      boxShadow: makeBoxShadow(isDark ? "#000" : colors.shadow, 0, 4, 12, 0.3),
       marginTop: 16,
     },
     refreshButton: {
       backgroundColor: isLightTheme
         ? colors.primary
         : isSunset
-        ? "rgba(255, 127, 80, 0.9)" // 🌆 Coral pour bouton Maghrib
+        ? "rgba(255, 127, 80, 0.9)" // ðŸŒ† Coral pour bouton Maghrib
         : "rgba(212, 175, 55, 0.9)",
       paddingVertical: 14,
       paddingHorizontal: 28,
       borderRadius: 12,
       marginBottom: 16,
-      shadowColor: isLightTheme ? colors.shadow : colors.primary, // 🌅 Utilise primary du thème actif
-      shadowOffset: { width: 0, height: 4 },
-      shadowOpacity: 0.4,
-      shadowRadius: 8,
-      elevation: 6,
+      boxShadow: makeBoxShadow(isLightTheme ? colors.shadow : colors.primary, 0, 4, 8, 0.4),
       borderWidth: 1,
       borderColor: isLightTheme ? colors.primary : isSunset ? "rgba(255, 127, 80, 0.6)" : "rgba(212, 175, 55, 0.5)",
     },
@@ -353,7 +314,7 @@ export const getStyles = (
       color: isLightTheme 
         ? colors.textSecondary 
         : isSunset 
-        ? "#F4E4C1" // 🌆 Wheat beige pour textes Maghrib
+        ? "#F4E4C1" // ðŸŒ† Wheat beige pour textes Maghrib
         : "#CBD5E1",
       textAlign: "center",
       fontWeight: "500",
@@ -366,11 +327,11 @@ export const getStyles = (
     input: {
       backgroundColor: isLightTheme 
         ? colors.surface 
-        : colors.cardBG, // 🌅 Utilise cardBG du thème actif
+        : colors.cardBG, // ðŸŒ… Utilise cardBG du thÃ¨me actif
       color: isLightTheme 
         ? colors.text 
         : isSunset 
-        ? "#FFF8DC" // 🌆 Cornsilk pour texte inputs Maghrib
+        ? "#FFF8DC" // ðŸŒ† Cornsilk pour texte inputs Maghrib
         : "#F8FAFC",
       padding: 16,
       borderRadius: 12,
@@ -380,13 +341,9 @@ export const getStyles = (
       borderColor: isLightTheme 
         ? colors.border 
         : isSunset 
-        ? colors.border // 🌅 Utilise border du thème Maghrib
+        ? colors.border // ðŸŒ… Utilise border du thÃ¨me Maghrib
         : "rgba(148, 163, 184, 0.3)",
-      shadowColor: isLightTheme ? colors.shadow : isDark ? "#000" : colors.shadow, // 🌅 Utilise shadow du thème actif
-      shadowOffset: { width: 0, height: 4 },
-      shadowOpacity: 0.3,
-      shadowRadius: 8,
-      elevation: 4,
+      boxShadow: makeBoxShadow(isDark ? "#000" : colors.shadow, 0, 4, 8, 0.3),
       zIndex: 10,
     },
     searchContainer: {
@@ -404,11 +361,7 @@ export const getStyles = (
       paddingVertical: 16,
       paddingHorizontal: 20,
       borderRadius: 12,
-      shadowColor: "#000",
-      shadowOffset: { width: 0, height: 2 },
-      shadowOpacity: 0.2,
-      shadowRadius: 4,
-      elevation: 3,
+      boxShadow: "0px 2px 4px rgba(0,0,0,0.2)",
       borderWidth: 1,
       borderColor: "#1B5E20",
     },
@@ -421,11 +374,7 @@ export const getStyles = (
     resultsList: {
       backgroundColor: isLightTheme ? colors.surface : "rgba(15, 23, 42, 0.9)",
       borderRadius: 12,
-      shadowColor: isLightTheme ? colors.shadow : "#000",
-      shadowOffset: { width: 0, height: 4 },
-      shadowOpacity: 0.3,
-      shadowRadius: 8,
-      elevation: 4,
+      boxShadow: makeBoxShadow(isLightTheme ? colors.shadow : "#000", 0, 4, 8, 0.3),
       borderWidth: 1,
       borderColor: isLightTheme ? colors.border : "rgba(148, 163, 184, 0.3)",
     },
@@ -442,7 +391,7 @@ export const getStyles = (
       color: isLightTheme 
         ? colors.text 
         : isSunset 
-        ? "#FFF8DC" // 🌆 Cornsilk pour résultats Maghrib
+        ? "#FFF8DC" // ðŸŒ† Cornsilk pour rÃ©sultats Maghrib
         : "#F8FAFC",
       fontWeight: "500",
     },
@@ -454,20 +403,16 @@ export const getStyles = (
       paddingHorizontal: 20,
       backgroundColor: isLightTheme 
         ? colors.surface 
-        : colors.surface, // 🌅 Utilise surface du thème actif
+        : colors.surface, // ðŸŒ… Utilise surface du thÃ¨me actif
       borderRadius: 12,
       marginBottom: 12,
       borderWidth: 1,
       borderColor: isLightTheme 
         ? colors.border 
         : isSunset 
-        ? "rgba(255, 127, 80, 0.3)" // 🌆 Coral doux pour bordures Maghrib
+        ? "rgba(255, 127, 80, 0.3)" // ðŸŒ† Coral doux pour bordures Maghrib
         : "rgba(148, 163, 184, 0.3)",
-      shadowColor: isLightTheme ? colors.shadow : "#000",
-      shadowOffset: { width: 0, height: 2 },
-      shadowOpacity: 0.1,
-      shadowRadius: 4,
-      elevation: 2,
+      boxShadow: makeBoxShadow(isLightTheme ? colors.shadow : "#000", 0, 2, 4, 0.1),
     },
     label: {
       fontSize: 16,
@@ -475,7 +420,7 @@ export const getStyles = (
       color: isLightTheme 
         ? colors.text 
         : isSunset 
-        ? "#FFF8DC" // 🌆 Cornsilk pour labels Maghrib
+        ? "#FFF8DC" // ðŸŒ† Cornsilk pour labels Maghrib
         : "#F8FAFC",
       letterSpacing: -0.2,
     },
@@ -484,13 +429,13 @@ export const getStyles = (
       marginLeft: 16,
       backgroundColor: isLightTheme 
         ? colors.cardBG 
-        : colors.surface, // 🌅 Utilise surface du thème actif
+        : colors.surface, // ðŸŒ… Utilise surface du thÃ¨me actif
       borderRadius: 8,
       borderWidth: 1,
       borderColor: isLightTheme 
         ? colors.border 
         : isSunset 
-        ? colors.border // 🌅 Utilise border du thème Maghrib
+        ? colors.border // ðŸŒ… Utilise border du thÃ¨me Maghrib
         : "rgba(148, 163, 184, 0.3)",
     },
     pickerContainerFull: {
@@ -498,13 +443,13 @@ export const getStyles = (
       marginLeft: 16,
       backgroundColor: isLightTheme 
         ? colors.cardBG 
-        : colors.surface, // 🌅 Utilise surface du thème actif
+        : colors.surface, // ðŸŒ… Utilise surface du thÃ¨me actif
       borderRadius: 8,
       borderWidth: 1,
       borderColor: isLightTheme 
         ? colors.border 
         : isSunset 
-        ? colors.border // 🌅 Utilise border du thème Maghrib
+        ? colors.border // ðŸŒ… Utilise border du thÃ¨me Maghrib
         : "rgba(148, 163, 184, 0.3)",
     },
     picker: {
@@ -512,14 +457,14 @@ export const getStyles = (
       color: isLightTheme 
         ? colors.text 
         : isSunset 
-        ? "#FFF8DC" // 🌆 Cornsilk pour texte picker Maghrib
+        ? "#FFF8DC" // ðŸŒ† Cornsilk pour texte picker Maghrib
         : "#F8FAFC",
     },
     pickerItem: {
       color: isLightTheme 
         ? colors.text 
         : isSunset 
-        ? "#FFF8DC" // 🌆 Cornsilk pour items picker Maghrib
+        ? "#FFF8DC" // ðŸŒ† Cornsilk pour items picker Maghrib
         : "#F8FAFC",
       fontSize: 16,
     },
@@ -530,11 +475,7 @@ export const getStyles = (
       borderRadius: 16,
       borderWidth: 1,
       borderColor: isLightTheme ? colors.border : "rgba(148, 163, 184, 0.3)",
-      shadowColor: isLightTheme ? colors.shadow : "#000",
-      shadowOffset: { width: 0, height: 4 },
-      shadowOpacity: 0.3,
-      shadowRadius: 12,
-      elevation: 6,
+      boxShadow: makeBoxShadow(isLightTheme ? colors.shadow : "#000", 0, 4, 12, 0.3),
     },
     previewControls: {
       flexDirection: "row",
@@ -558,11 +499,7 @@ export const getStyles = (
       borderRadius: 28,
       justifyContent: "center",
       alignItems: "center",
-      shadowColor: isLightTheme ? colors.shadow : "#D4AF37",
-      shadowOffset: { width: 0, height: 4 },
-      shadowOpacity: 0.4,
-      shadowRadius: 12,
-      elevation: 8,
+      boxShadow: makeBoxShadow(isLightTheme ? colors.shadow : "#D4AF37", 0, 4, 12, 0.4),
       borderWidth: 2,
       borderColor: isLightTheme ? colors.primary : "rgba(212, 175, 55, 0.5)",
     },
@@ -573,11 +510,7 @@ export const getStyles = (
       borderRadius: 24,
       justifyContent: "center",
       alignItems: "center",
-      shadowColor: isLightTheme ? "#EF4444" : "#EF4444",
-      shadowOffset: { width: 0, height: 4 },
-      shadowOpacity: 0.4,
-      shadowRadius: 12,
-      elevation: 8,
+      boxShadow: "0px 4px 12px rgba(239,68,68,0.4)",
       borderWidth: 2,
       borderColor: isLightTheme ? "#EF4444" : "rgba(239, 68, 68, 0.5)",
     },
@@ -592,7 +525,7 @@ export const getStyles = (
       color: isLightTheme 
         ? colors.textSecondary 
         : isSunset 
-        ? "#F4E4C1" // 🌆 Wheat beige pour textes temps Maghrib
+        ? "#F4E4C1" // ðŸŒ† Wheat beige pour textes temps Maghrib
         : "#CBD5E1",
       fontWeight: "500",
       minWidth: 45,
@@ -817,11 +750,7 @@ export const getStyles = (
       paddingVertical: 16,
       paddingHorizontal: 50,
       borderRadius: 16,
-      elevation: 8,
-      shadowColor: isLightTheme ? colors.shadow : "#D4AF37",
-      shadowOffset: { width: 0, height: 6 },
-      shadowOpacity: 0.5,
-      shadowRadius: 16,
+      boxShadow: makeBoxShadow(isLightTheme ? colors.shadow : "#D4AF37", 0, 6, 16, 0.5),
       borderWidth: 2,
       borderColor: isLightTheme ? colors.primary : "rgba(212, 175, 55, 0.4)",
       minWidth: 200,
@@ -867,11 +796,7 @@ export const getStyles = (
       paddingVertical: 14,
       paddingHorizontal: 32,
       borderRadius: 12,
-      shadowColor: "#FFD700",
-      shadowOffset: { width: 0, height: 4 },
-      shadowOpacity: 0.4,
-      shadowRadius: 8,
-      elevation: 6,
+      boxShadow: "0px 4px 8px rgba(255,215,0,0.4)",
       borderWidth: 1,
       borderColor: "rgba(255, 215, 0, 0.5)",
       marginBottom: 12,
@@ -908,7 +833,7 @@ export const getStyles = (
       color: isLightTheme 
         ? colors.textSecondary 
         : isSunset 
-        ? "#F4E4C1" // 🌆 Wheat beige pour status Maghrib
+        ? "#F4E4C1" // ðŸŒ† Wheat beige pour status Maghrib
         : "#CBD5E1",
       textAlign: "center",
       lineHeight: 20,
@@ -949,7 +874,7 @@ export const getStyles = (
       color: isLightTheme 
         ? colors.text 
         : isSunset 
-        ? "#FFF8DC" // 🌆 Cornsilk pour titres Maghrib
+        ? "#FFF8DC" // ðŸŒ† Cornsilk pour titres Maghrib
         : "#F8FAFC",
       marginLeft: 8,
     },
@@ -957,7 +882,7 @@ export const getStyles = (
       color: isLightTheme 
         ? colors.text 
         : isSunset 
-        ? colors.accent // 🌅 Utilise accent du thème Maghrib
+        ? colors.accent // ðŸŒ… Utilise accent du thÃ¨me Maghrib
         : "#F8FAFC",
     },
     settingItem: {
@@ -1012,11 +937,7 @@ export const getStyles = (
       height: 20,
       borderRadius: 10,
       backgroundColor: "#FFFFFF",
-      shadowColor: "#000",
-      shadowOffset: { width: 0, height: 2 },
-      shadowOpacity: 0.2,
-      shadowRadius: 4,
-      elevation: 2,
+      boxShadow: "0px 2px 4px rgba(0,0,0,0.2)",
     },
     toggleThumbActive: {
       transform: [{ translateX: 24 }],
@@ -1053,7 +974,7 @@ export const getStyles = (
       color: isLightTheme 
         ? colors.text 
         : isSunset 
-        ? "#FFF8DC" // 🌆 Cornsilk pour boutons secondaires Maghrib
+        ? "#FFF8DC" // ðŸŒ† Cornsilk pour boutons secondaires Maghrib
         : "#F8FAFC",
     },
     syncStatus: {
@@ -1106,11 +1027,7 @@ export const getStyles = (
       paddingVertical: 12,
       paddingHorizontal: 24,
       borderRadius: 12,
-      shadowColor: "#FFD700",
-      shadowOffset: { width: 0, height: 4 },
-      shadowOpacity: 0.4,
-      shadowRadius: 8,
-      elevation: 6,
+      boxShadow: "0px 4px 8px rgba(255,215,0,0.4)",
       borderWidth: 1,
       borderColor: "rgba(255, 215, 0, 0.5)",
     },
@@ -1131,7 +1048,7 @@ export const getStyles = (
       aspectRatio: 1,
       backgroundColor: isLightTheme 
         ? colors.surface 
-        : colors.surface, // 🌅 Utilise surface du thème actif
+        : colors.surface, // ðŸŒ… Utilise surface du thÃ¨me actif
       borderRadius: 16,
       padding: 16,
       alignItems: "center",
@@ -1140,29 +1057,28 @@ export const getStyles = (
       borderColor: isLightTheme 
         ? colors.border 
         : isSunset 
-        ? "rgba(255, 127, 80, 0.4)" // 🌆 Coral pour bordures Maghrib
+        ? "rgba(255, 127, 80, 0.4)" // ðŸŒ† Coral pour bordures Maghrib
         : "rgba(148, 163, 184, 0.3)",
-      shadowColor: isLightTheme ? colors.shadow : isDark ? "#000" : colors.shadow, // 🌅 Utilise shadow du thème actif
-      shadowOffset: { width: 0, height: 2 },
-      shadowOpacity: 0.1,
-      shadowRadius: 4,
-      elevation: 3,
+      boxShadow: makeBoxShadow(isDark ? "#000" : colors.shadow, 0, 2, 4, 0.1),
     },
     gridButtonActive: {
       borderColor: isLightTheme 
         ? colors.primary 
         : isSunset 
-        ? colors.primary // 🌅 Utilise primary du thème Maghrib
+        ? colors.primary // ðŸŒ… Utilise primary du thÃ¨me Maghrib
         : "#4ECDC4",
       backgroundColor: isLightTheme
         ? "rgba(78, 205, 196, 0.1)"
         : isSunset
-        ? colors.border // 🌅 Utilise border du thème Maghrib (transparent)
+        ? colors.border // ðŸŒ… Utilise border du thÃ¨me Maghrib (transparent)
         : "rgba(78, 205, 196, 0.2)",
-      shadowColor: isLightTheme ? colors.primary : isSunset ? colors.primary : "#4ECDC4", // 🌅 Utilise primary du thème actif
-      shadowOpacity: 0.3,
-      shadowRadius: 8,
-      elevation: 6,
+      boxShadow: makeBoxShadow(
+        isLightTheme ? colors.primary : isSunset ? colors.primary : "#4ECDC4",
+        0,
+        0,
+        8,
+        0.3
+      ),
     },
     gridButtonText: {
       fontSize: 12,
@@ -1170,7 +1086,7 @@ export const getStyles = (
       color: isLightTheme 
         ? colors.text 
         : isSunset 
-        ? "#FFF8DC" // 🌆 Cornsilk pour texte Maghrib
+        ? "#FFF8DC" // ðŸŒ† Cornsilk pour texte Maghrib
         : "#F8FAFC",
       textAlign: "center",
       marginTop: 8,
@@ -1193,13 +1109,13 @@ export const getStyles = (
       marginHorizontal: 16,
       backgroundColor: isLightTheme 
         ? colors.surface 
-        : colors.surface, // 🌅 Utilise surface du thème actif
+        : colors.surface, // ðŸŒ… Utilise surface du thÃ¨me actif
       borderRadius: 16,
       borderWidth: 1,
       borderColor: isLightTheme 
         ? colors.border 
         : isSunset 
-        ? "rgba(255, 127, 80, 0.4)" // 🌆 Coral pour bordures Maghrib
+        ? "rgba(255, 127, 80, 0.4)" // ðŸŒ† Coral pour bordures Maghrib
         : "rgba(148, 163, 184, 0.3)",
       overflow: "hidden",
     },
@@ -1240,19 +1156,15 @@ export const getStyles = (
       padding: 16,
       backgroundColor: isLightTheme 
         ? colors.surface 
-        : colors.surface, // 🌅 Utilise surface du thème actif
+        : colors.surface, // ðŸŒ… Utilise surface du thÃ¨me actif
       borderRadius: 16,
       borderWidth: 1,
       borderColor: isLightTheme 
         ? colors.border 
         : isSunset 
-        ? colors.border // 🌅 Utilise border du thème Maghrib
+        ? colors.border // ðŸŒ… Utilise border du thÃ¨me Maghrib
         : "rgba(148, 163, 184, 0.3)",
-      shadowColor: isLightTheme ? colors.shadow : isDark ? "#000" : colors.shadow, // 🌅 Utilise shadow du thème actif
-      shadowOffset: { width: 0, height: 4 },
-      shadowOpacity: 0.3,
-      shadowRadius: 8,
-      elevation: 4,
+      boxShadow: makeBoxShadow(isDark ? "#000" : colors.shadow, 0, 4, 8, 0.3),
     },
     themeSectionHeader: {
       flexDirection: "row",
@@ -1266,17 +1178,17 @@ export const getStyles = (
       color: isLightTheme 
         ? colors.text 
         : isSunset 
-        ? "#FFF8DC" // 🌆 Cornsilk pour texte Maghrib
+        ? "#FFF8DC" // ðŸŒ† Cornsilk pour texte Maghrib
         : "#F8FAFC",
     },
     themeSwitchContainer: {
       flexDirection: "row",
       gap: 12,
-      flexWrap: "wrap", // 🆕 Pour permettre 4 thèmes sur 2 lignes si nécessaire
+      flexWrap: "wrap", // ðŸ†• Pour permettre 4 thÃ¨mes sur 2 lignes si nÃ©cessaire
     },
     themeOption: {
       flex: 1,
-      minWidth: "45%", // 🆕 Pour que 2 thèmes par ligne
+      minWidth: "45%", // ðŸ†• Pour que 2 thÃ¨mes par ligne
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "center",
@@ -1285,19 +1197,19 @@ export const getStyles = (
       borderRadius: 12,
       backgroundColor: isLightTheme 
         ? colors.cardBG 
-        : colors.surface, // 🌅 Utilise surface du thème actif
+        : colors.surface, // ðŸŒ… Utilise surface du thÃ¨me actif
       borderWidth: 1,
       borderColor: isLightTheme 
         ? colors.border 
         : isSunset 
-        ? "rgba(255, 127, 80, 0.5)" // 🌆 Coral pour bordure Maghrib
+        ? "rgba(255, 127, 80, 0.5)" // ðŸŒ† Coral pour bordure Maghrib
         : "rgba(148, 163, 184, 0.3)",
     },
     themeOptionActive: {
       backgroundColor: colors.primary,
       borderColor: colors.primary,
     },
-    // 🆕 Style pour les thèmes verrouillés (non-premium)
+    // ðŸ†• Style pour les thÃ¨mes verrouillÃ©s (non-premium)
     themeOptionLocked: {
       opacity: 0.7,
       borderStyle: "dashed",
@@ -1309,12 +1221,11 @@ export const getStyles = (
       color: isLightTheme 
         ? colors.text 
         : isSunset 
-        ? "#FFF8DC" // 🌆 Cornsilk pour texte boutons Maghrib
+        ? "#FFF8DC" // ðŸŒ† Cornsilk pour texte boutons Maghrib
         : "#F8FAFC",
     },
-    // 🆕 Badge premium (couronne dorée)
-    premiumBadge: {
-      position: "absolute",
+    // ðŸ†• Badge premium (couronne dorÃ©e)
+    premiumBadgeCorner: {
       top: -4,
       right: -4,
       backgroundColor: "rgba(0, 0, 0, 0.6)",
@@ -1326,8 +1237,7 @@ export const getStyles = (
       bottom: 90,
       left: 16,
       right: 16,
-      zIndex: 1000,
-      elevation: 1000,
+      zIndex: Z_INDEX.modal,
     },
     applyChangesButton: {
       flexDirection: "row",
@@ -1337,11 +1247,7 @@ export const getStyles = (
       paddingVertical: 18,
       paddingHorizontal: 20,
       borderRadius: 20,
-      shadowColor: "#FF6B35",
-      shadowOffset: { width: 0, height: 8 },
-      shadowOpacity: 0.6,
-      shadowRadius: 20,
-      elevation: 12,
+      boxShadow: "0px 8px 20px rgba(255,107,53,0.6)",
       borderWidth: 2,
       borderColor: "#FF8A65",
     },
@@ -1394,11 +1300,7 @@ export const getStyles = (
       borderRadius: 16,
       borderWidth: 1,
       borderColor: isLightTheme ? colors.border : "rgba(148, 163, 184, 0.3)",
-      shadowColor: isLightTheme ? colors.shadow : "#000",
-      shadowOffset: { width: 0, height: 4 },
-      shadowOpacity: 0.3,
-      shadowRadius: 8,
-      elevation: 4,
+      boxShadow: makeBoxShadow(isLightTheme ? colors.shadow : "#000", 0, 4, 8, 0.3),
       overflow: "hidden",
     },
     accountSectionHeader: {
@@ -1510,8 +1412,7 @@ export const getStyles = (
       fontSize: 14,
       color: isLightTheme ? colors.textSecondary : "#CBD5E1",
     },
-    premiumBadge: {
-      flexDirection: "row",
+    premiumBadgeRow: {
       alignItems: "center",
       backgroundColor: "rgba(255, 215, 0, 0.1)",
       paddingHorizontal: 8,

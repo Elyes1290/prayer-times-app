@@ -1,6 +1,6 @@
 import React, {
   createContext,
-  useContext,
+  use,
   useState,
   useEffect,
   useCallback,
@@ -53,64 +53,60 @@ export const AdhanAudioProvider: React.FC<AdhanAudioProviderProps> = ({
   }, []);
 
   // Écouter les événements du module natif
+  // react-doctor-disable-next-line react-doctor/effect-needs-cleanup
   useEffect(() => {
-    if (Platform.OS !== "ios" || !eventEmitter) return;
+    const subscriptions: Array<{ remove: () => void }> = [];
 
-    console.log("🎵 [AdhanAudioContext] Écoute des événements activée");
+    if (Platform.OS === "ios" && eventEmitter) {
+      console.log("🎵 [AdhanAudioContext] Écoute des événements activée");
 
-    const subscriptions = [
-      // Lecture démarrée
-      eventEmitter.addListener(
-        "AdhanPlaybackStarted",
-        (data: { soundName: string; prayer: string }) => {
-          console.log("🎵 [AdhanAudioContext] AdhanPlaybackStarted:", data);
-          setState({
-            isPlaying: true,
-            soundName: data.soundName,
-            prayer: data.prayer,
-          });
-        }
-      ),
-
-      // Lecture arrêtée
-      eventEmitter.addListener(
-        "AdhanPlaybackStopped",
-        (data: { soundName: string; prayer: string }) => {
-          console.log("⏹️ [AdhanAudioContext] AdhanPlaybackStopped:", data);
-          setState({
-            isPlaying: false,
-            soundName: null,
-            prayer: null,
-          });
-        }
-      ),
-
-      // Lecture terminée
-      eventEmitter.addListener(
-        "AdhanPlaybackFinished",
-        (data: { soundName: string; prayer: string; success: boolean }) => {
-          console.log("✅ [AdhanAudioContext] AdhanPlaybackFinished:", data);
-          setState({
-            isPlaying: false,
-            soundName: null,
-            prayer: null,
-          });
-        }
-      ),
-
-      // Erreur
-      eventEmitter.addListener(
-        "AdhanPlaybackError",
-        (data: { soundName: string; prayer: string; error: string }) => {
-          console.error("❌ [AdhanAudioContext] AdhanPlaybackError:", data);
-          setState({
-            isPlaying: false,
-            soundName: null,
-            prayer: null,
-          });
-        }
-      ),
-    ];
+      subscriptions.push(
+        eventEmitter.addListener(
+          "AdhanPlaybackStarted",
+          (data: { soundName: string; prayer: string }) => {
+            console.log("🎵 [AdhanAudioContext] AdhanPlaybackStarted:", data);
+            setState({
+              isPlaying: true,
+              soundName: data.soundName,
+              prayer: data.prayer,
+            });
+          },
+        ),
+        eventEmitter.addListener(
+          "AdhanPlaybackStopped",
+          (data: { soundName: string; prayer: string }) => {
+            console.log("⏹️ [AdhanAudioContext] AdhanPlaybackStopped:", data);
+            setState({
+              isPlaying: false,
+              soundName: null,
+              prayer: null,
+            });
+          },
+        ),
+        eventEmitter.addListener(
+          "AdhanPlaybackFinished",
+          (data: { soundName: string; prayer: string; success: boolean }) => {
+            console.log("✅ [AdhanAudioContext] AdhanPlaybackFinished:", data);
+            setState({
+              isPlaying: false,
+              soundName: null,
+              prayer: null,
+            });
+          },
+        ),
+        eventEmitter.addListener(
+          "AdhanPlaybackError",
+          (data: { soundName: string; prayer: string; error: string }) => {
+            console.error("❌ [AdhanAudioContext] AdhanPlaybackError:", data);
+            setState({
+              isPlaying: false,
+              soundName: null,
+              prayer: null,
+            });
+          },
+        ),
+      );
+    }
 
     return () => {
       console.log("🔴 [AdhanAudioContext] Nettoyage des listeners");
@@ -319,7 +315,7 @@ export const AdhanAudioProvider: React.FC<AdhanAudioProviderProps> = ({
 };
 
 export const useAdhanAudio = () => {
-  const context = useContext(AdhanAudioContext);
+  const context = use(AdhanAudioContext);
   if (!context) {
     throw new Error("useAdhanAudio must be used within AdhanAudioProvider");
   }

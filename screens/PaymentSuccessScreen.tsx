@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Alert } from "react-native";
+import { View, Text, StyleSheet, Pressable, Alert } from "react-native";
 import { useRouter } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useTranslation } from "react-i18next";
@@ -12,7 +12,7 @@ import {
 } from "../utils/paymentSync";
 
 const PaymentSuccessScreen: React.FC = () => {
-  const router = useRouter();
+  const { push } = useRouter();
   const { t } = useTranslation();
   const [isProcessing, setIsProcessing] = useState(false);
   const [syncResult, setSyncResult] = useState<PaymentSyncResult | null>(null);
@@ -21,6 +21,7 @@ const PaymentSuccessScreen: React.FC = () => {
   // 🚀 CORRECTION : Traitement du succès de paiement sans boucle infinie
   useEffect(() => {
     let isMounted = true;
+    let syncDelayTimeoutId: ReturnType<typeof setTimeout> | undefined;
 
     const processPaymentSuccess = async () => {
       try {
@@ -62,7 +63,10 @@ const PaymentSuccessScreen: React.FC = () => {
 
             if (!isMounted) return;
             // Délai pour la synchronisation des contextes
-            await new Promise((resolve) => setTimeout(resolve, 1000));
+            await new Promise<void>((resolve) => {
+              syncDelayTimeoutId = setTimeout(resolve, 1000);
+            });
+            if (!isMounted) return;
             console.log("✅ Premium activé avec succès !");
 
             if (!isMounted) return;
@@ -124,22 +128,24 @@ const PaymentSuccessScreen: React.FC = () => {
 
     processPaymentSuccess();
 
-    // 🚀 NOUVEAU : Cleanup pour éviter les fuites mémoire et les boucles
     return () => {
       isMounted = false;
+      if (syncDelayTimeoutId !== undefined) {
+        clearTimeout(syncDelayTimeoutId);
+      }
     };
   }, []); // 🚀 CORRECTION : Dépendances vides pour éviter la boucle infinie
 
   const handleContinue = () => {
     // Rediriger vers Settings de manière stable
     setTimeout(() => {
-      router.push("/settings");
+      push("/settings");
     }, 100);
   };
 
   const handleManualLogin = () => {
     // Rediriger vers la section de connexion
-    router.push("/settings");
+    push("/settings");
   };
 
   const getMessage = () => {
@@ -197,23 +203,23 @@ const PaymentSuccessScreen: React.FC = () => {
           <Text style={styles.errorMessage}>{syncResult.message}</Text>
         )}
 
-        <TouchableOpacity
+        <Pressable
           style={[styles.button, isProcessing && styles.buttonDisabled]}
           onPress={handleButtonPress}
           disabled={isProcessing}
         >
           <Text style={styles.buttonText}>{getButtonText()}</Text>
-        </TouchableOpacity>
+        </Pressable>
 
         {syncResult?.requiresManualLogin && (
-          <TouchableOpacity
+          <Pressable
             style={styles.secondaryButton}
             onPress={handleContinue}
           >
             <Text style={styles.secondaryButtonText}>
               Continuer sans connexion
             </Text>
-          </TouchableOpacity>
+          </Pressable>
         )}
       </View>
     </View>

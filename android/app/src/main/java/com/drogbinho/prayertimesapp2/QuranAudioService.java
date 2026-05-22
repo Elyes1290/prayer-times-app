@@ -12,6 +12,7 @@ import android.content.IntentFilter;
 import android.media.AudioAttributes;
 import android.media.AudioFocusRequest;
 import android.media.AudioManager;
+import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Binder;
@@ -19,6 +20,11 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Looper;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.widget.RemoteViews;
 
@@ -32,6 +38,7 @@ import androidx.media.app.NotificationCompat.MediaStyle;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import android.content.SharedPreferences;
 import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
@@ -91,6 +98,10 @@ public class QuranAudioService extends Service {
     private boolean isPlaying = false;
     private int currentPosition = 0;
     private int totalDuration = 0;
+    /** Durée catalogue (API) — stabilise la jauge et le clamp du seek */
+    private int expectedDurationMs = 0;
+    private boolean isMediaReady = false;
+    private int pendingSeekMs = -1;
     private boolean isPremiumUser = false;
     // 🎯 NOUVEAU : Variable d'instance pour synchronisation widget
     private boolean wasPlayingBeforeNavigation = false;
@@ -99,6 +110,12 @@ public class QuranAudioService extends Service {
 
     // 🎯 MediaSessionCompat OBLIGATOIRE pour contrôles écran de verrouillage
     private MediaSessionCompat mediaSessionCompat;
+
+    /** Pochette ID3 (notification + écran de verrouillage), max ~512px */
+    private Bitmap currentAlbumArt = null;
+    /** Logo app si aucune pochette dans le MP3 */
+    private Bitmap defaultAppAlbumArt = null;
+    private static final int ALBUM_ART_MAX_PX = 512;
 
     // NOUVEAU : Variable pour mémoriser l'état de lecture avant perte de focus
     private boolean wasPlayingBeforeFocusLoss = false;
@@ -130,6 +147,10 @@ public class QuranAudioService extends Service {
     private AudioFocusRequest audioFocusRequest;
     private android.os.Handler progressHandler;
     private Runnable progressRunnable;
+    private Runnable seekResumeTimeoutRunnable;
+    private Runnable durationPollRunnable;
+    private int durationPollAttempts = 0;
+    private int seekGeneration = 0;
 
     // BroadcastReceiver pour les actions du widget
     private final BroadcastReceiver widgetActionReceiver = new BroadcastReceiver() {
@@ -472,6 +493,12 @@ public class QuranAudioService extends Service {
                 }
             }
 
+            clearAlbumArt();
+            if (defaultAppAlbumArt != null) {
+                defaultAppAlbumArt.recycle();
+                defaultAppAlbumArt = null;
+            }
+
         } catch (Exception e) {
             Log.e(TAG, "❌ Erreur destruction service: " + e.getMessage());
         }
@@ -491,24 +518,31 @@ public class QuranAudioService extends Service {
 
         try {
             // 🎯 Créer métadonnées pour MediaSessionCompat
-            MediaMetadataCompat metadata = new MediaMetadataCompat.Builder()
+            MediaMetadataCompat.Builder metadataBuilder = new MediaMetadataCompat.Builder()
                     .putString(MediaMetadataCompat.METADATA_KEY_TITLE,
                             currentSurah.isEmpty() ? "Lecture Coran" : currentSurah)
                     .putString(MediaMetadataCompat.METADATA_KEY_ARTIST,
                             currentReciter.isEmpty() ? "MyAdhan" : currentReciter)
                     .putString(MediaMetadataCompat.METADATA_KEY_ALBUM, "Coran - MyAdhan")
-                    .putLong(MediaMetadataCompat.METADATA_KEY_DURATION, totalDuration)
-                    .build();
+                    .putLong(MediaMetadataCompat.METADATA_KEY_DURATION, totalDuration);
 
-            mediaSessionCompat.setMetadata(metadata);
+            Bitmap displayArt = getDisplayAlbumArtBitmap();
+            if (displayArt != null) {
+                metadataBuilder.putBitmap(MediaMetadataCompat.METADATA_KEY_ALBUM_ART, displayArt);
+                metadataBuilder.putBitmap(MediaMetadataCompat.METADATA_KEY_ART, displayArt);
+            }
+
+            mediaSessionCompat.setMetadata(metadataBuilder.build());
 
             // 🎯 Mettre à jour état de lecture
             int state = isPlaying ? PlaybackStateCompat.STATE_PLAYING : PlaybackStateCompat.STATE_PAUSED;
+            float playbackSpeed = isPlaying ? 1.0f : 0.0f;
             PlaybackStateCompat playbackState = new PlaybackStateCompat.Builder()
-                    .setState(state, currentPosition, 1.0f)
+                    .setState(state, currentPosition, playbackSpeed)
                     .setActions(PlaybackStateCompat.ACTION_PLAY_PAUSE |
                             PlaybackStateCompat.ACTION_SKIP_TO_NEXT |
-                            PlaybackStateCompat.ACTION_SKIP_TO_PREVIOUS)
+                            PlaybackStateCompat.ACTION_SKIP_TO_PREVIOUS |
+                            PlaybackStateCompat.ACTION_SEEK_TO)
                     .build();
 
             mediaSessionCompat.setPlaybackState(playbackState);
@@ -606,6 +640,12 @@ public class QuranAudioService extends Service {
                         updateMediaSessionCompatMetadata();
                         Log.d(TAG, "🎯 Écran verrouillage - État mis à jour après PREVIOUS");
                     }, 500); // Délai pour laisser le temps au chargement
+                }
+
+                @Override
+                public void onSeekTo(long pos) {
+                    Log.d(TAG, "🎯 Écran verrouillage / notification - SEEK vers " + pos + "ms");
+                    handleSeek((int) pos);
                 }
 
             });
@@ -761,12 +801,13 @@ public class QuranAudioService extends Service {
         // 🎵 Créer une notification avec MediaStyle pour contrôles d'écran de
         // verrouillage (style Spotify)
 
+        Bitmap largeIcon = getDisplayAlbumArtBitmap();
+
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setContentTitle(currentSurah.isEmpty() ? "Lecture Coran" : currentSurah)
                 .setContentText(currentReciter.isEmpty() ? "MyAdhan" : currentReciter)
                 .setSmallIcon(R.drawable.ic_quran_notification)
-                .setLargeIcon(
-                        android.graphics.BitmapFactory.decodeResource(getResources(), R.drawable.ic_quran_notification))
+                .setLargeIcon(largeIcon)
                 .setContentIntent(appPendingIntent)
                 .addAction(R.drawable.ic_previous, "Précédent", previousPendingIntent)
                 .addAction(R.drawable.ic_play_pause, isPlaying ? "Pause" : "Play", playPausePendingIntent)
@@ -1041,6 +1082,313 @@ public class QuranAudioService extends Service {
         }
     }
 
+    /** Remet position/durée à zéro avant un nouveau chargement (évite durée de la piste précédente). */
+    private void clearPlaybackTimingBeforeLoad() {
+        totalDuration = expectedDurationMs > 0 ? expectedDurationMs : 0;
+        currentPosition = 0;
+        isMediaReady = false;
+        pendingSeekMs = -1;
+        broadcastAudioProgress();
+    }
+
+    /** Lecture HTTP : action=stream (Range). MP3 encodés avec Xing requis pour le seek. */
+    private String preferStreamPlaybackUrl(String audioPath) {
+        if (audioPath == null || !audioPath.startsWith("http")) {
+            return audioPath;
+        }
+        String url = audioPath.trim();
+        if (url.contains("action=download")) {
+            return url.replace("action=download", "action=stream");
+        }
+        if (!url.contains("action=")) {
+            return url + (url.contains("?") ? "&action=stream" : "?action=stream");
+        }
+        return url;
+    }
+
+    private HashMap<String, String> httpHeadersForAudioUrl(String audioPath) {
+        HashMap<String, String> headers = new HashMap<>();
+        headers.put("User-Agent", "MyAdhan/1.0 (Android MediaPlayer)");
+        return headers;
+    }
+
+    /** Lit la durée réelle du fichier (local ou URL) si MediaPlayer renvoie 0. */
+    private int probeDurationMs(String audioPath) {
+        if (audioPath == null || audioPath.isEmpty()) {
+            return 0;
+        }
+        MediaMetadataRetriever retriever = new MediaMetadataRetriever();
+        try {
+            if (audioPath.startsWith("http")) {
+                retriever.setDataSource(audioPath, httpHeadersForAudioUrl(audioPath));
+            } else {
+                String path = audioPath.startsWith("file://")
+                        ? audioPath.replace("file://", "")
+                        : audioPath;
+                retriever.setDataSource(path);
+            }
+            String dur = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION);
+            if (dur != null) {
+                return Integer.parseInt(dur);
+            }
+        } catch (Exception e) {
+            Log.w(TAG, "⚠️ probeDurationMs: " + e.getMessage());
+        } finally {
+            try {
+                retriever.release();
+            } catch (Exception ignored) {
+            }
+        }
+        return 0;
+    }
+
+    private void clearAlbumArt() {
+        if (currentAlbumArt != null) {
+            currentAlbumArt.recycle();
+            currentAlbumArt = null;
+        }
+    }
+
+    /** Pochette MP3 ou logo MyAdhan (écran de verrouillage / notification). */
+    private Bitmap getDisplayAlbumArtBitmap() {
+        if (currentAlbumArt != null) {
+            return currentAlbumArt;
+        }
+        return getDefaultAppAlbumArtBitmap();
+    }
+
+    private Bitmap getDefaultAppAlbumArtBitmap() {
+        if (defaultAppAlbumArt != null) {
+            return defaultAppAlbumArt;
+        }
+        try {
+            Drawable icon = getPackageManager().getApplicationIcon(getPackageName());
+            Bitmap raw;
+            if (icon instanceof BitmapDrawable) {
+                Bitmap bmp = ((BitmapDrawable) icon).getBitmap();
+                raw = bmp != null ? bmp.copy(bmp.getConfig() != null ? bmp.getConfig() : Bitmap.Config.ARGB_8888, true)
+                        : null;
+            } else {
+                int size = ALBUM_ART_MAX_PX;
+                raw = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888);
+                Canvas canvas = new Canvas(raw);
+                icon.setBounds(0, 0, size, size);
+                icon.draw(canvas);
+            }
+            if (raw != null) {
+                defaultAppAlbumArt = scaleAlbumArtBitmap(raw);
+                if (defaultAppAlbumArt != raw) {
+                    raw.recycle();
+                }
+                Log.d(TAG, "🖼️ Logo app charge pour pochette par defaut");
+            }
+        } catch (Exception e) {
+            Log.w(TAG, "⚠️ Logo app indisponible: " + e.getMessage());
+        }
+        return defaultAppAlbumArt;
+    }
+
+    private Bitmap scaleAlbumArtBitmap(Bitmap raw) {
+        if (raw == null) {
+            return null;
+        }
+        int maxSide = Math.max(raw.getWidth(), raw.getHeight());
+        if (maxSide <= ALBUM_ART_MAX_PX) {
+            return raw;
+        }
+        float scale = (float) ALBUM_ART_MAX_PX / maxSide;
+        int w = Math.max(1, Math.round(raw.getWidth() * scale));
+        int h = Math.max(1, Math.round(raw.getHeight() * scale));
+        Bitmap scaled = Bitmap.createScaledBitmap(raw, w, h, true);
+        if (scaled != raw) {
+            raw.recycle();
+        }
+        return scaled;
+    }
+
+    private Bitmap decodeEmbeddedAlbumArt(byte[] pictureData) {
+        if (pictureData == null || pictureData.length == 0) {
+            return null;
+        }
+        try {
+            Bitmap raw = BitmapFactory.decodeByteArray(pictureData, 0, pictureData.length);
+            return scaleAlbumArtBitmap(raw);
+        } catch (Exception e) {
+            Log.w(TAG, "⚠️ decodeEmbeddedAlbumArt: " + e.getMessage());
+            return null;
+        }
+    }
+
+    private byte[] readEmbeddedPicture(String audioPath) {
+        if (audioPath == null || audioPath.isEmpty()) {
+            return null;
+        }
+        MediaMetadataRetriever retriever = new MediaMetadataRetriever();
+        try {
+            if (audioPath.startsWith("http")) {
+                retriever.setDataSource(audioPath, httpHeadersForAudioUrl(audioPath));
+            } else {
+                String path = audioPath.startsWith("file://")
+                        ? audioPath.replace("file://", "")
+                        : audioPath;
+                retriever.setDataSource(path);
+            }
+            return retriever.getEmbeddedPicture();
+        } catch (Exception e) {
+            Log.w(TAG, "⚠️ readEmbeddedPicture(" + shortenPath(audioPath) + "): " + e.getMessage());
+            return null;
+        } finally {
+            try {
+                retriever.release();
+            } catch (Exception ignored) {
+            }
+        }
+    }
+
+    /** Pochette ID3 du MP3 (local ou URL), comme YouTube / Spotify. */
+    private Bitmap extractEmbeddedAlbumArt(String audioPath) {
+        byte[] picture = readEmbeddedPicture(audioPath);
+        if (picture != null) {
+            return decodeEmbeddedAlbumArt(picture);
+        }
+        if (audioPath != null && audioPath.contains("action=stream")) {
+            String downloadUrl = audioPath.replace("action=stream", "action=download");
+            picture = readEmbeddedPicture(downloadUrl);
+            if (picture != null) {
+                return decodeEmbeddedAlbumArt(picture);
+            }
+        }
+        return null;
+    }
+
+    private void loadAlbumArtAsync(final String audioPath) {
+        if (audioPath == null || audioPath.isEmpty()) {
+            return;
+        }
+        new Thread(() -> {
+            final Bitmap art = extractEmbeddedAlbumArt(audioPath);
+            new Handler(Looper.getMainLooper()).post(() -> {
+                if (audioPath == null || !audioPath.equals(currentAudioPath)) {
+                    if (art != null) {
+                        art.recycle();
+                    }
+                    return;
+                }
+                clearAlbumArt();
+                currentAlbumArt = art;
+                if (currentAlbumArt != null) {
+                    Log.d(TAG, "🖼️ Pochette ID3 chargée pour écran verrouillage / notification");
+                } else {
+                    Log.d(TAG, "🖼️ Aucune pochette ID3 dans ce fichier audio");
+                }
+                updateMediaSessionCompatMetadata();
+                updateNotification();
+            });
+        }).start();
+    }
+
+    private void applyResolvedDuration(MediaPlayer mp) {
+        int fromPlayer = 0;
+        try {
+            if (mp != null) {
+                fromPlayer = mp.getDuration();
+            }
+        } catch (Exception e) {
+            Log.w(TAG, "⚠️ getDuration: " + e.getMessage());
+        }
+
+        int fromProbe = 0;
+        if (currentAudioPath != null && !currentAudioPath.isEmpty()) {
+            fromProbe = probeDurationMs(currentAudioPath);
+        }
+
+        int resolved = fromPlayer;
+        if (fromProbe > 0) {
+            if (resolved <= 0 || fromProbe > resolved * 2) {
+                resolved = fromProbe;
+            }
+        }
+        if (expectedDurationMs > 0) {
+            if (resolved <= 0) {
+                resolved = expectedDurationMs;
+            } else if (resolved < expectedDurationMs * 0.25) {
+                // MediaPlayer renvoie parfois ~27s sur un long MP3 VBR en stream
+                Log.w(TAG, "⏱️ Durée lecteur trop courte (" + resolved + "ms), catalogue: "
+                        + expectedDurationMs + "ms");
+                resolved = expectedDurationMs;
+            }
+        }
+        if (resolved > 0) {
+            totalDuration = resolved;
+            Log.d(TAG, "⏱️ Durée audio résolue: " + totalDuration + "ms (player="
+                    + fromPlayer + ", probe=" + fromProbe + ", expected=" + expectedDurationMs + ")");
+            QuranSeekDebug.log(getApplicationContext(), "DURATION_RESOLVED",
+                    "total=" + totalDuration + " player=" + fromPlayer + " probe=" + fromProbe
+                            + " expected=" + expectedDurationMs + " surah=" + currentSurah);
+        }
+        if (safePlayerDuration() <= 0 && expectedDurationMs > 0) {
+            startDurationPoll();
+        }
+    }
+
+    private void cancelDurationPoll() {
+        if (durationPollRunnable != null) {
+            progressHandler.removeCallbacks(durationPollRunnable);
+            durationPollRunnable = null;
+        }
+        durationPollAttempts = 0;
+    }
+
+    /** Attend que MediaPlayer connaisse la durée (indispensable pour le seek). */
+    private void startDurationPoll() {
+        cancelDurationPoll();
+        durationPollRunnable = new Runnable() {
+            @Override
+            public void run() {
+                if (mediaPlayer == null) {
+                    return;
+                }
+                int playerDur = safePlayerDuration();
+                if (playerDur > 0) {
+                    updateDurationFromPlayer(playerDur);
+                    QuranSeekDebug.log(getApplicationContext(), "DURATION_POLL_OK",
+                            "playerDur=" + playerDur + " total=" + totalDuration);
+                    broadcastAudioProgress();
+                    cancelDurationPoll();
+                    return;
+                }
+                durationPollAttempts++;
+                if (durationPollAttempts < 24) {
+                    progressHandler.postDelayed(this, 500);
+                } else {
+                    QuranSeekDebug.log(getApplicationContext(), "DURATION_POLL_GIVE_UP",
+                            "expected=" + expectedDurationMs + " probe="
+                                    + probeDurationMs(currentAudioPath));
+                    cancelDurationPoll();
+                }
+            }
+        };
+        progressHandler.postDelayed(durationPollRunnable, 300);
+    }
+
+    private void updateDurationFromPlayer(int reportedDuration) {
+        if (reportedDuration <= 0) {
+            return;
+        }
+        if (expectedDurationMs > 0) {
+            if (reportedDuration < expectedDurationMs * 0.25) {
+                return;
+            }
+            if (totalDuration > 0
+                    && Math.abs(reportedDuration - totalDuration) < totalDuration * 0.05) {
+                return;
+            }
+        }
+        if (totalDuration <= 0 || reportedDuration > totalDuration * 1.2) {
+            totalDuration = reportedDuration;
+        }
+    }
+
     /**
      * Diffuser la progression audio
      */
@@ -1133,9 +1481,19 @@ public class QuranAudioService extends Service {
                 if (mediaPlayer != null && isPlaying) {
                     try {
                         currentPosition = mediaPlayer.getCurrentPosition();
+                        int reportedDuration = mediaPlayer.getDuration();
+                        if (reportedDuration > 0) {
+                            updateDurationFromPlayer(reportedDuration);
+                        } else if (totalDuration <= 0 && currentAudioPath != null) {
+                            int probed = probeDurationMs(currentAudioPath);
+                            if (probed > 0) {
+                                totalDuration = probed;
+                            }
+                        }
                         Log.d(TAG,
                                 "⏱️ Timer progression - position: " + currentPosition + ", duration: " + totalDuration);
                         broadcastAudioProgress();
+                        updateMediaSessionCompatMetadata();
 
                         // NOUVEAU : Mettre à jour directement l'état du widget plus fréquemment
                         if (currentPosition % 5000 < 1000) { // Toutes les 5 secondes environ
@@ -1693,10 +2051,8 @@ public class QuranAudioService extends Service {
             Log.d(TAG, "🔗 - surahParam: " + surahParam);
             Log.d(TAG, "🔗 - encodedReciter: " + encodedReciter);
 
-            // CORRECTION MAJEURE: Utiliser action=download + token comme dans l'app qui
-            // fonctionne
             StringBuilder urlBuilder = new StringBuilder(baseUrl);
-            urlBuilder.append("?action=download");
+            urlBuilder.append("?action=stream");
             urlBuilder.append("&reciter=").append(encodedReciter);
             urlBuilder.append("&surah=").append(surahParam);
 
@@ -1728,20 +2084,221 @@ public class QuranAudioService extends Service {
      * Gérer le seek
      */
     public void handleSeek(int position) {
-        if (!isPremiumUser || mediaPlayer == null)
+        if (!isPremiumUser || mediaPlayer == null) {
+            QuranSeekDebug.log(getApplicationContext(), "SEEK_REJECTED",
+                    "premium=" + isPremiumUser + " player=" + (mediaPlayer != null));
             return;
+        }
+        if (!isMediaReady) {
+            Log.d(TAG, "🎯 Seek en attente (MediaPlayer pas prêt): " + position);
+            pendingSeekMs = position;
+            QuranSeekDebug.log(getApplicationContext(), "SEEK_PENDING",
+                    "targetMs=" + position + " surah=" + currentSurah);
+            return;
+        }
+        QuranSeekDebug.log(getApplicationContext(), "SEEK_REQUEST",
+                "targetMs=" + position + " pos=" + currentPosition + " dur=" + totalDuration
+                        + " playing=" + isPlaying + " path=" + shortenPath(currentAudioPath));
+        performSeek(position, 0);
+    }
 
-        Log.d(TAG, "🎯 Seek vers: " + position);
-        mediaPlayer.seekTo(position);
-        currentPosition = position;
+    private static String shortenPath(String path) {
+        if (path == null) {
+            return "null";
+        }
+        if (path.length() <= 120) {
+            return path;
+        }
+        return path.substring(0, 60) + "…" + path.substring(path.length() - 40);
+    }
+
+    private void cancelSeekResumeTimeout() {
+        if (seekResumeTimeoutRunnable != null) {
+            progressHandler.removeCallbacks(seekResumeTimeoutRunnable);
+            seekResumeTimeoutRunnable = null;
+        }
+    }
+
+    /** Si OnSeekComplete ne vient pas (sourates courtes / stream), évite de rester bloqué en pause. */
+    private void scheduleSeekResumeFallback(final boolean wasPlaying) {
+        cancelSeekResumeTimeout();
+        if (!wasPlaying) {
+            return;
+        }
+        seekResumeTimeoutRunnable = () -> {
+            seekResumeTimeoutRunnable = null;
+            if (mediaPlayer == null) {
+                return;
+            }
+            try {
+                if (!mediaPlayer.isPlaying()) {
+                    mediaPlayer.start();
+                    isPlaying = true;
+                    currentPosition = mediaPlayer.getCurrentPosition();
+                    Log.w(TAG, "⏩ Reprise forcée après seek (timeout)");
+                    QuranSeekDebug.log(getApplicationContext(), "SEEK_TIMEOUT_RESUME",
+                            "pos=" + currentPosition + " dur=" + totalDuration);
+                    broadcastAudioProgress();
+                    QuranWidget.updatePlaybackState(
+                            getApplicationContext(), isPlaying, currentPosition, totalDuration);
+                    updateMediaSessionCompatMetadata();
+                }
+            } catch (Exception e) {
+                Log.e(TAG, "❌ Reprise forcée seek: " + e.getMessage());
+            }
+        };
+        progressHandler.postDelayed(seekResumeTimeoutRunnable, 1200);
+    }
+
+    private void performSeek(final int targetMs, final int attempt) {
+        if (mediaPlayer == null) {
+            return;
+        }
+
+        int clamped = targetMs;
+        if (totalDuration > 0 && clamped > totalDuration) {
+            clamped = totalDuration;
+        }
+        if (clamped < 0) {
+            clamped = 0;
+        }
+
+        final int seekTarget = clamped;
+        final boolean wasPlaying = isPlaying;
+
+        Log.d(TAG, "🎯 Seek vers: " + seekTarget + "ms (tentative " + (attempt + 1) + ")");
+        QuranSeekDebug.log(getApplicationContext(), "SEEK_START",
+                "target=" + seekTarget + " attempt=" + (attempt + 1) + " wasPlaying=" + wasPlaying
+                        + " playerDur=" + safePlayerDuration());
+
+        cancelSeekResumeTimeout();
+        final int gen = ++seekGeneration;
+
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                mediaPlayer.seekTo((long) seekTarget, MediaPlayer.SEEK_CLOSEST);
+            } else {
+                mediaPlayer.seekTo(seekTarget);
+            }
+
+            scheduleSeekResumeFallback(wasPlaying);
+            scheduleSeekVerification(gen, seekTarget, wasPlaying, attempt);
+
+            final int finalAttempt = attempt;
+            mediaPlayer.setOnSeekCompleteListener(mp -> {
+                cancelSeekResumeTimeout();
+                finishSeekFromListener(mp, seekTarget, wasPlaying, finalAttempt, gen);
+            });
+        } catch (Exception e) {
+            Log.e(TAG, "❌ Erreur seek: " + e.getMessage());
+            QuranSeekDebug.log(getApplicationContext(), "SEEK_ERROR", e.getMessage());
+            cancelSeekResumeTimeout();
+            if (wasPlaying) {
+                try {
+                    mediaPlayer.start();
+                    isPlaying = true;
+                } catch (Exception ignored) {
+                }
+            }
+        }
+    }
+
+    private void finishSeekFromListener(MediaPlayer mp, int seekTarget, boolean wasPlaying, int attempt,
+            int gen) {
+        if (gen != seekGeneration) {
+            return;
+        }
+        int actual = mp.getCurrentPosition();
+        boolean seekLanded = Math.abs(actual - seekTarget) <= 5000;
+        boolean nowPlaying = false;
+        try {
+            nowPlaying = mp.isPlaying();
+        } catch (Exception ignored) {
+        }
+
+        QuranSeekDebug.log(getApplicationContext(), "SEEK_COMPLETE",
+                "target=" + seekTarget + " actual=" + actual + " landed=" + seekLanded
+                        + " playing=" + nowPlaying + " playerDur=" + safePlayerDuration()
+                        + " attempt=" + (attempt + 1));
+
+        if (!seekLanded && attempt < 1 && safePlayerDuration() <= 0) {
+            mp.setOnSeekCompleteListener(null);
+            progressHandler.postDelayed(() -> performSeek(seekTarget, attempt + 1), 200);
+            return;
+        }
+
+        if (!seekLanded && attempt < 1) {
+            mp.setOnSeekCompleteListener(null);
+            progressHandler.postDelayed(() -> performSeek(seekTarget, attempt + 1), 200);
+            return;
+        }
+
+        currentPosition = actual;
+        if (wasPlaying && !mp.isPlaying()) {
+            try {
+                mp.start();
+                isPlaying = true;
+            } catch (Exception e) {
+                QuranSeekDebug.log(getApplicationContext(), "SEEK_RESUME_FAIL", e.getMessage());
+            }
+        }
         broadcastAudioProgress();
-
-        // NOUVEAU : Mettre à jour directement l'état du widget
-        Log.d(TAG, "🚀 Mise à jour directe de l'état du widget après seek");
-        QuranWidget.updatePlaybackState(getApplicationContext(), isPlaying, currentPosition, totalDuration);
-
-        // 🎯 NOUVEAU : Mettre à jour MediaSession pour écran de verrouillage
+        QuranWidget.updatePlaybackState(
+                getApplicationContext(), isPlaying, currentPosition, totalDuration);
         updateMediaSessionCompatMetadata();
+        mp.setOnSeekCompleteListener(null);
+    }
+
+    /** Ne dépend pas uniquement de OnSeekComplete (souvent absent si playerDur=-1). */
+    private void scheduleSeekVerification(final int gen, final int seekTarget, final boolean wasPlaying,
+            final int attempt) {
+        progressHandler.postDelayed(() -> {
+            if (gen != seekGeneration || mediaPlayer == null) {
+                return;
+            }
+            try {
+                int actual = mediaPlayer.getCurrentPosition();
+                int playerDur = safePlayerDuration();
+                boolean landed = Math.abs(actual - seekTarget) <= 5000;
+                boolean playing = mediaPlayer.isPlaying();
+
+                QuranSeekDebug.log(getApplicationContext(), "SEEK_POLL",
+                        "target=" + seekTarget + " actual=" + actual + " landed=" + landed
+                                + " playing=" + playing + " playerDur=" + playerDur);
+
+                if (wasPlaying && !playing) {
+                    mediaPlayer.start();
+                    isPlaying = true;
+                    playing = true;
+                }
+
+                if (landed) {
+                    currentPosition = actual;
+                    broadcastAudioProgress();
+                    QuranWidget.updatePlaybackState(
+                            getApplicationContext(), isPlaying, currentPosition, totalDuration);
+                    updateMediaSessionCompatMetadata();
+                    return;
+                }
+
+                if (attempt < 2) {
+                    scheduleSeekVerification(gen, seekTarget, wasPlaying, attempt + 1);
+                } else {
+                    currentPosition = actual;
+                    broadcastAudioProgress();
+                }
+            } catch (Exception e) {
+                QuranSeekDebug.log(getApplicationContext(), "SEEK_POLL_ERR", e.getMessage());
+            }
+        }, 350L * (attempt + 1));
+    }
+
+    private int safePlayerDuration() {
+        try {
+            return mediaPlayer != null ? mediaPlayer.getDuration() : -1;
+        } catch (Exception e) {
+            return -1;
+        }
     }
 
     /**
@@ -1874,7 +2431,17 @@ public class QuranAudioService extends Service {
                 // 🎯 CORRECTION: Obtenir la position actuelle du MediaPlayer (au lieu de forcer
                 // à 0)
                 currentPosition = mediaPlayer.getCurrentPosition();
-                Log.d(TAG, "🎯 Position actuelle récupérée: " + currentPosition + "ms");
+                int reportedDuration = mediaPlayer.getDuration();
+                if (reportedDuration > 0) {
+                    updateDurationFromPlayer(reportedDuration);
+                } else if (totalDuration <= 0 && expectedDurationMs > 0) {
+                    totalDuration = expectedDurationMs;
+                }
+                if (safePlayerDuration() <= 0) {
+                    startDurationPoll();
+                }
+                Log.d(TAG, "🎯 Position actuelle récupérée: " + currentPosition + "ms, durée: "
+                        + totalDuration + "ms");
 
                 // NOUVEAU : Réinitialiser la variable de focus car l'utilisateur a cliqué
                 // manuellement
@@ -2006,7 +2573,15 @@ public class QuranAudioService extends Service {
      * Charger un fichier audio
      */
     public void loadAudio(String audioPath, String surah, String reciter) {
-        Log.d(TAG, "🎵 Chargement audio: " + surah + " - " + reciter + " - " + audioPath);
+        loadAudio(audioPath, surah, reciter, 0);
+    }
+
+    public void loadAudio(String audioPath, String surah, String reciter, int expectedDuration) {
+        expectedDurationMs = expectedDuration > 0 ? expectedDuration : 0;
+        Log.d(TAG, "🎵 Chargement audio: " + surah + " - " + reciter + " - " + audioPath
+                + " (durée attendue=" + expectedDurationMs + "ms)");
+
+        clearAlbumArt();
 
         if (!isPremiumUser) {
             Log.w(TAG, "⚠️ Utilisateur non premium, chargement ignoré");
@@ -2046,47 +2621,44 @@ public class QuranAudioService extends Service {
                 initializeMediaPlayer();
             }
 
+            clearPlaybackTimingBeforeLoad();
+
             // Charger le nouveau fichier
             if (audioPath.startsWith("http")) {
-                // Vérifier la connectivité réseau pour le streaming
                 if (!isNetworkAvailable()) {
                     Log.e(TAG, "❌ Pas de connexion réseau pour le streaming");
                     return;
                 }
 
-                // Streaming - améliorer la gestion des URLs
-                Log.d(TAG, "🎵 Chargement streaming: " + audioPath);
-                try {
-                    // NOUVEAU : Essayer d'abord l'URL originale
-                    Uri audioUri = Uri.parse(audioPath.trim());
-                    Log.d(TAG, "🎵 Tentative avec URL originale: " + audioPath);
+                String playbackUrl = preferStreamPlaybackUrl(audioPath);
+                Log.d(TAG, "🎵 Chargement HTTP (stream/Range): " + playbackUrl);
+                QuranSeekDebug.log(getApplicationContext(), "LOAD_HTTP",
+                        shortenPath(playbackUrl) + " expected=" + expectedDurationMs);
 
-                    // Utiliser setDataSource avec le contexte pour une meilleure compatibilité
-                    mediaPlayer.setDataSource(getApplicationContext(), audioUri);
+                try {
+                    Uri audioUri = Uri.parse(playbackUrl);
+                    mediaPlayer.setDataSource(getApplicationContext(), audioUri,
+                            httpHeadersForAudioUrl(playbackUrl));
 
                 } catch (Exception e) {
-                    Log.e(TAG, "❌ Erreur chargement streaming original: " + e.getMessage());
+                    Log.e(TAG, "❌ Erreur chargement stream: " + e.getMessage());
 
-                    // Fallback : essayer avec action=stream si c'était action=download
                     try {
-                        String cleanUrl = audioPath.trim();
-                        if (cleanUrl.contains("action=download")) {
-                            cleanUrl = cleanUrl.replace("action=download", "action=stream");
-                            Log.d(TAG, "🔄 Tentative fallback avec action=stream: " + cleanUrl);
-
-                            Uri audioUri = Uri.parse(cleanUrl);
-                            mediaPlayer.setDataSource(getApplicationContext(), audioUri);
-                        } else {
-                            // Fallback vers setDataSource direct
-                            Log.d(TAG, "🔄 Tentative fallback streaming direct");
-                            mediaPlayer.setDataSource(audioPath);
-                        }
+                        String downloadUrl = playbackUrl.contains("action=stream")
+                                ? playbackUrl.replace("action=stream", "action=download")
+                                : playbackUrl;
+                        Log.d(TAG, "🔄 Fallback download: " + downloadUrl);
+                        Uri audioUri = Uri.parse(downloadUrl);
+                        mediaPlayer.setDataSource(getApplicationContext(), audioUri,
+                                httpHeadersForAudioUrl(downloadUrl));
+                        playbackUrl = downloadUrl;
                     } catch (Exception fallbackError) {
-                        Log.e(TAG, "❌ Erreur fallback streaming: " + fallbackError.getMessage());
+                        Log.e(TAG, "❌ Erreur fallback download: " + fallbackError.getMessage());
                         handleStreamingError(audioPath, surah, reciter);
                         return;
                     }
                 }
+                audioPath = playbackUrl;
             } else {
                 // Fichier local
                 File audioFile = new File(audioPath);
@@ -2105,8 +2677,14 @@ public class QuranAudioService extends Service {
             // NOUVEAU : Définir le OnPreparedListener par défaut
             mediaPlayer.setOnPreparedListener(mp -> {
                 Log.d(TAG, "🎵 MediaPlayer prêt");
-                totalDuration = mp.getDuration();
+                isMediaReady = true;
+                applyResolvedDuration(mp);
                 currentPosition = 0;
+                if (pendingSeekMs >= 0) {
+                    int seek = pendingSeekMs;
+                    pendingSeekMs = -1;
+                    performSeek(seek, 0);
+                }
                 Log.d(TAG, "🎵 Durée totale: " + totalDuration + "ms");
 
                 // NOUVEAU : Logs de debug pour vérifier l'envoi des événements
@@ -2116,9 +2694,15 @@ public class QuranAudioService extends Service {
                 broadcastAudioProgress();
                 Log.d(TAG, "✅ Événement progression audio envoyé");
 
-                // NOUVEAU : Vérifier que les événements ont bien été envoyés
+                if (safePlayerDuration() <= 0) {
+                    startDurationPoll();
+                }
+
                 Log.d(TAG,
                         "🔍 Vérification - totalDuration: " + totalDuration + ", currentPosition: " + currentPosition);
+                if (currentAlbumArt == null && currentAudioPath != null) {
+                    loadAlbumArtAsync(currentAudioPath);
+                }
             });
 
             // Mettre à jour les variables d'état
@@ -2127,6 +2711,8 @@ public class QuranAudioService extends Service {
             currentReciter = reciter;
             isPlaying = false;
             currentPosition = 0;
+
+            loadAlbumArtAsync(audioPath);
 
             // Sauvegarder l'état
             saveAudioState();
@@ -2171,6 +2757,8 @@ public class QuranAudioService extends Service {
             return;
         }
 
+        clearAlbumArt();
+
         // Le service est déjà en mode foreground depuis onCreate()
         // Juste mettre à jour la notification
         updateNotification();
@@ -2204,47 +2792,44 @@ public class QuranAudioService extends Service {
                 initializeMediaPlayer();
             }
 
+            clearPlaybackTimingBeforeLoad();
+
             // Charger le nouveau fichier
             if (audioPath.startsWith("http")) {
-                // Vérifier la connectivité réseau pour le streaming
                 if (!isNetworkAvailable()) {
                     Log.e(TAG, "❌ Pas de connexion réseau pour le streaming");
                     return;
                 }
 
-                // Streaming - améliorer la gestion des URLs
-                Log.d(TAG, "🎵 Chargement streaming: " + audioPath);
-                try {
-                    // NOUVEAU : Essayer d'abord l'URL originale
-                    Uri audioUri = Uri.parse(audioPath.trim());
-                    Log.d(TAG, "🎵 Tentative avec URL originale: " + audioPath);
+                String playbackUrl = preferStreamPlaybackUrl(audioPath);
+                Log.d(TAG, "🎵 Chargement HTTP (stream/Range): " + playbackUrl);
+                QuranSeekDebug.log(getApplicationContext(), "LOAD_HTTP",
+                        shortenPath(playbackUrl) + " expected=" + expectedDurationMs);
 
-                    // Utiliser setDataSource avec le contexte pour une meilleure compatibilité
-                    mediaPlayer.setDataSource(getApplicationContext(), audioUri);
+                try {
+                    Uri audioUri = Uri.parse(playbackUrl);
+                    mediaPlayer.setDataSource(getApplicationContext(), audioUri,
+                            httpHeadersForAudioUrl(playbackUrl));
 
                 } catch (Exception e) {
-                    Log.e(TAG, "❌ Erreur chargement streaming original: " + e.getMessage());
+                    Log.e(TAG, "❌ Erreur chargement stream: " + e.getMessage());
 
-                    // Fallback : essayer avec action=stream si c'était action=download
                     try {
-                        String cleanUrl = audioPath.trim();
-                        if (cleanUrl.contains("action=download")) {
-                            cleanUrl = cleanUrl.replace("action=download", "action=stream");
-                            Log.d(TAG, "🔄 Tentative fallback avec action=stream: " + cleanUrl);
-
-                            Uri audioUri = Uri.parse(cleanUrl);
-                            mediaPlayer.setDataSource(getApplicationContext(), audioUri);
-                        } else {
-                            // Fallback vers setDataSource direct
-                            Log.d(TAG, "🔄 Tentative fallback streaming direct");
-                            mediaPlayer.setDataSource(audioPath);
-                        }
+                        String downloadUrl = playbackUrl.contains("action=stream")
+                                ? playbackUrl.replace("action=stream", "action=download")
+                                : playbackUrl;
+                        Log.d(TAG, "🔄 Fallback download: " + downloadUrl);
+                        Uri audioUri = Uri.parse(downloadUrl);
+                        mediaPlayer.setDataSource(getApplicationContext(), audioUri,
+                                httpHeadersForAudioUrl(downloadUrl));
+                        playbackUrl = downloadUrl;
                     } catch (Exception fallbackError) {
-                        Log.e(TAG, "❌ Erreur fallback streaming: " + fallbackError.getMessage());
+                        Log.e(TAG, "❌ Erreur fallback download: " + fallbackError.getMessage());
                         handleStreamingError(audioPath, surah, reciter);
                         return;
                     }
                 }
+                audioPath = playbackUrl;
             } else {
                 // Fichier local
                 File audioFile = new File(audioPath);
@@ -2267,6 +2852,8 @@ public class QuranAudioService extends Service {
             isPlaying = false; // Définir à false pour laisser le MediaPlayer gérer le démarrage
             currentPosition = 0;
 
+            loadAlbumArtAsync(audioPath);
+
             // 🎯 SUPPRIMÉ: updateMediaSessionMetadata() (causait double audio)
 
             // Sauvegarder l'état
@@ -2276,8 +2863,17 @@ public class QuranAudioService extends Service {
             // après chargement
             mediaPlayer.setOnPreparedListener(mp -> {
                 Log.d(TAG, "🎵 MediaPlayer prêt, démarrage automatique...");
-                totalDuration = mp.getDuration();
+                isMediaReady = true;
+                applyResolvedDuration(mp);
+                if (currentAlbumArt == null && currentAudioPath != null) {
+                    loadAlbumArtAsync(currentAudioPath);
+                }
                 currentPosition = 0;
+                if (pendingSeekMs >= 0) {
+                    int seek = pendingSeekMs;
+                    pendingSeekMs = -1;
+                    performSeek(seek, 0);
+                }
                 Log.d(TAG, "🎵 Durée totale: " + totalDuration + "ms");
                 Log.d(TAG, "🎵 wasPlayingBeforeNavigation: " + wasPlayingBeforeNavigation);
 
@@ -2640,6 +3236,8 @@ public class QuranAudioService extends Service {
                 initializeMediaPlayer();
             }
 
+            clearPlaybackTimingBeforeLoad();
+
             // Charger le fichier local
             java.io.File audioFile = new java.io.File(localPath);
             if (!audioFile.exists()) {
@@ -2667,8 +3265,14 @@ public class QuranAudioService extends Service {
             // chargement
             mediaPlayer.setOnPreparedListener(mp -> {
                 Log.d(TAG, "🎵 MediaPlayer prêt, démarrage automatique...");
-                totalDuration = mp.getDuration();
+                isMediaReady = true;
+                applyResolvedDuration(mp);
                 currentPosition = 0;
+                if (pendingSeekMs >= 0) {
+                    int seek = pendingSeekMs;
+                    pendingSeekMs = -1;
+                    performSeek(seek, 0);
+                }
                 Log.d(TAG, "🎵 Durée totale: " + totalDuration + "ms");
                 Log.d(TAG, "🎵 wasPlayingBeforeNavigation: " + wasPlayingBeforeNavigation);
 

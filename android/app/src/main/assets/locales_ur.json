@@ -209,5 +209,8 @@
   "widget_feature_navigation": "✨ سورتوں کے درمیان نیوی گیشن",
   "widget_feature_audio_controls": "✨ مکمل آڈیو کنٹرولز",
   "widget_feature_offline": "✨ آف لائن موڈ",
-  "subscribe_premium": "پریمیم سبسکرائب کریں"
+  "subscribe_premium": "پریمیم سبسکرائب کریں",
+  "adhan_completed_title": "✅ اذان مکمل",
+  "adhan_completed_body": "نماز کی صدارت مکمل ہو چکی ہے",
+  "dismiss": "بند کریں"
 }

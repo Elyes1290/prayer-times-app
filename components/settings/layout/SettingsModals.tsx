@@ -1,6 +1,6 @@
 import React from "react";
-import { View, Text, TouchableOpacity, Modal, ScrollView } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { View, Text, Pressable, Modal, ScrollView } from "react-native";
+import { MCIcon } from "@/components/icons/AppVectorIcons";
 import ThemedAlert from "../../ThemedAlert";
 import PremiumLoginSection from "../../../screens/PremiumLoginSection";
 
@@ -55,12 +55,12 @@ export default function SettingsModals({
                 "Vos nouveaux paramètres seront pris en compte pour les prochaines notifications."
               )}
             </Text>
-            <TouchableOpacity
+            <Pressable
               style={styles.modalButton}
               onPress={() => uiManager.setShowSuccessModal(false)}
             >
               <Text style={styles.modalButtonText}>✨ بارك الله فيك ✨</Text>
-            </TouchableOpacity>
+            </Pressable>
           </View>
         </View>
       </Modal>
@@ -78,18 +78,18 @@ export default function SettingsModals({
               <Text style={styles.premiumModalTitle}>
                 👑 {t("premium_access", "Accès Premium")}
               </Text>
-              <TouchableOpacity
+              <Pressable
                 style={styles.premiumModalCloseButton}
                 onPress={() => uiManager.setShowPremiumModal(false)}
               >
-                <MaterialCommunityIcons
+                <MCIcon
                   name="close"
                   size={24}
                   color={
                     isLightTheme ? colors.textSecondary : "#CBD5E1"
                   }
                 />
-              </TouchableOpacity>
+              </Pressable>
             </View>
 
             <ScrollView

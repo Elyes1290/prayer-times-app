@@ -214,5 +214,8 @@
   "widget_feature_navigation": "✨ التنقل بين السور",
   "widget_feature_audio_controls": "✨ أدوات تحكم صوتية كاملة",
   "widget_feature_offline": "✨ وضع بدون اتصال",
-  "subscribe_premium": "اشترك في المميز"
+  "subscribe_premium": "اشترك في المميز",
+  "adhan_completed_title": "✅ اكتمل الأذان",
+  "adhan_completed_body": "تم الانتهاء من نداء الصلاة",
+  "dismiss": "إغلاق"
 }

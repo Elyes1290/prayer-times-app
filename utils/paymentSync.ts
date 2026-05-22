@@ -228,7 +228,7 @@ export const checkUserSyncStatus = async (): Promise<{
  * 🧹 Nettoie les données d'inscription en attente
  * Utile en cas d'échec ou d'annulation
  */
-export const cleanupPendingRegistration = async (): Promise<void> => {
+const cleanupPendingRegistration = async (): Promise<void> => {
   try {
     await AsyncStorage.removeItem("pending_registration");
     console.log("🧹 Données d'inscription nettoyées");
@@ -244,7 +244,7 @@ export const cleanupPendingRegistration = async (): Promise<void> => {
 export const retryUserSync = async (
   maxRetries: number = 3
 ): Promise<PaymentSyncResult> => {
-  for (let attempt = 1; attempt <= maxRetries; attempt++) {
+  const attemptSync = async (attempt: number): Promise<PaymentSyncResult> => {
     console.log(`🔄 Tentative de synchronisation ${attempt}/${maxRetries}...`);
 
     const result = await syncUserAfterPayment();
@@ -257,12 +257,15 @@ export const retryUserSync = async (
         `⏱️ Attente avant nouvelle tentative (${attempt * 2} secondes)...`
       );
       await new Promise((resolve) => setTimeout(resolve, attempt * 2000));
+      return attemptSync(attempt + 1);
     }
-  }
 
-  return {
-    success: false,
-    message: `Échec après ${maxRetries} tentatives`,
-    requiresManualLogin: true,
+    return {
+      success: false,
+      message: `Échec après ${maxRetries} tentatives`,
+      requiresManualLogin: true,
+    };
   };
+
+  return attemptSync(1);
 };

@@ -23,6 +23,8 @@ export interface PremiumContent {
   description: string;
   fileUrl: string;
   fileSize: number; // en MB
+  /** Durée réelle lue sur le serveur (ms) — indispensable en streaming HTTP */
+  durationMs?: number;
   version: string;
   isDownloaded: boolean;
   downloadPath?: string;
@@ -140,7 +142,7 @@ class PremiumContentManager {
 
       if (savedVersion !== currentVersion) {
         debugLog(
-          `🔄 Mise à jour détectée: ${savedVersion} → ${currentVersion}`
+          `🔄 Mise à jour détectée: ${savedVersion} → ${currentVersion}`,
         );
         return true;
       }
@@ -204,7 +206,7 @@ class PremiumContentManager {
             const contentId = file.name.replace(/\.mp3$/, "");
             realFiles.set(contentId, file.path);
             debugLog(
-              `📁 Fichier trouvé (principal): ${contentId} -> ${file.path}`
+              `📁 Fichier trouvé (principal): ${contentId} -> ${file.path}`,
             );
           }
         }
@@ -215,28 +217,28 @@ class PremiumContentManager {
       // 🚀 NOUVEAU : Scanner le dossier Quran avec la nouvelle structure /quran/nom_du_récitateur/
       try {
         const quranFiles = await RNFS.readDir(this.quranDirectory);
-        for (const reciterFolder of quranFiles) {
-          if (reciterFolder.isDirectory()) {
+        const reciterDirs = quranFiles.filter((f) => f.isDirectory());
+        await Promise.all(
+          reciterDirs.map(async (reciterFolder) => {
             try {
               const reciterFiles = await RNFS.readDir(reciterFolder.path);
               for (const file of reciterFiles) {
                 if (file.isFile() && file.name.endsWith(".mp3")) {
-                  // Le nom du fichier est déjà l'ID complet (ex: reciter_abdelbasset_abdelsamad_1.mp3)
                   const contentId = file.name.replace(/\.mp3$/, "");
                   realFiles.set(contentId, file.path);
                   debugLog(
-                    `📖 Fichier Quran trouvé: ${contentId} -> ${file.path}`
+                    `📖 Fichier Quran trouvé: ${contentId} -> ${file.path}`,
                   );
                 }
               }
             } catch (reciterError) {
               debugLog(
                 `⚠️ Erreur scan dossier récitateur ${reciterFolder.name}:`,
-                reciterError
+                reciterError,
               );
             }
-          }
-        }
+          }),
+        );
       } catch (error) {
         debugLog("⚠️ Erreur scan dossier Quran:", error);
       }
@@ -246,34 +248,38 @@ class PremiumContentManager {
 
       // 2. Mettre à jour la base de données AsyncStorage avec les fichiers réels
       const updatedDownloads: any = {};
-
-      for (const [contentId, filePath] of realFiles) {
-        result.totalFiles++;
-
-        try {
+      const fileEntries = [...realFiles.entries()];
+      const statResults = await Promise.allSettled(
+        fileEntries.map(async ([contentId, filePath]) => {
           const fileStats = await RNFS.stat(filePath);
-          const fileSize = fileStats.size;
+          return { contentId, filePath, size: fileStats.size };
+        }),
+      );
 
-          if (fileSize > 10240) {
-            // > 10KB
-            updatedDownloads[contentId] = {
-              downloadPath: filePath,
-              downloadedAt: new Date().toISOString(),
-              fileSize: fileSize,
-            };
-            result.validFiles++;
-            debugLog(
-              `✅ Fichier valide synchronisé: ${contentId} (${fileSize} bytes)`
-            );
-          } else {
-            result.corruptedFiles++;
-            debugLog(
-              `❌ Fichier trop petit ignoré: ${contentId} (${fileSize} bytes)`
-            );
-          }
-        } catch (error) {
+      for (const settled of statResults) {
+        result.totalFiles++;
+        if (settled.status === "rejected") {
           result.corruptedFiles++;
-          debugLog(`❌ Erreur vérification ${contentId}: ${error}`);
+          debugLog(`❌ Erreur vérification fichier: ${settled.reason}`);
+          continue;
+        }
+        const { contentId, filePath, size } = settled.value;
+
+        if (size > 10240) {
+          updatedDownloads[contentId] = {
+            downloadPath: filePath,
+            downloadedAt: new Date().toISOString(),
+            fileSize: size,
+          };
+          result.validFiles++;
+          debugLog(
+            `✅ Fichier valide synchronisé: ${contentId} (${size} bytes)`,
+          );
+        } else {
+          result.corruptedFiles++;
+          debugLog(
+            `❌ Fichier trop petit ignoré: ${contentId} (${size} bytes)`,
+          );
         }
       }
 
@@ -282,7 +288,7 @@ class PremiumContentManager {
         "DOWNLOADED_CONTENT",
         updatedDownloads,
         true,
-        true
+        true,
       );
 
       // 4. Invalider les caches du catalogue pour forcer un rechargement
@@ -294,7 +300,7 @@ class PremiumContentManager {
 
       result.fixedFiles = result.validFiles;
       debugLog(
-        `✅ Synchronisation terminée: ${result.validFiles} fichiers valides, ${result.corruptedFiles} corrompus`
+        `✅ Synchronisation terminée: ${result.validFiles} fichiers valides, ${result.corruptedFiles} corrompus`,
       );
 
       return result;
@@ -326,9 +332,8 @@ class PremiumContentManager {
         fixedFiles: 0,
       };
 
-      const downloadedContent = await LocalStorageManager.getPremium(
-        "DOWNLOADED_CONTENT"
-      );
+      const downloadedContent =
+        await LocalStorageManager.getPremium("DOWNLOADED_CONTENT");
 
       if (!downloadedContent) {
         debugLog("✅ Aucun téléchargement à vérifier");
@@ -338,46 +343,59 @@ class PremiumContentManager {
       const downloaded = JSON.parse(downloadedContent);
       const correctedDownloads: any = {};
 
-      for (const [contentId, contentInfo] of Object.entries(downloaded)) {
-        const info = contentInfo as any;
-        result.totalFiles++;
+      const entries = Object.entries(downloaded) as [string, any][];
+      const verifyResults = await Promise.allSettled(
+        entries.map(async ([contentId, contentInfo]) => {
+          try {
+            const info = contentInfo;
+            if (!info.downloadPath) {
+              return { contentId, outcome: "no_path" as const };
+            }
+            const fileExists = await RNFS.exists(info.downloadPath);
+            if (!fileExists) {
+              debugLog(`❌ Fichier manquant: ${contentId}`);
+              return { contentId, outcome: "missing" as const };
+            }
+            const fileStats = await RNFS.stat(info.downloadPath);
+            const fileSizeInBytes = fileStats.size;
+            if (fileSizeInBytes === 0 || fileSizeInBytes < 10240) {
+              debugLog(
+                `❌ Fichier corrompu: ${contentId} (${fileSizeInBytes} bytes)`,
+              );
+              return { contentId, outcome: "corrupt" as const };
+            }
+            return {
+              contentId,
+              outcome: "valid" as const,
+              info,
+              size: fileSizeInBytes,
+            };
+          } catch (error) {
+            debugLog(`❌ Erreur vérification ${contentId}: ${error}`);
+            throw error;
+          }
+        }),
+      );
 
-        if (!info.downloadPath) {
+      for (const settled of verifyResults) {
+        result.totalFiles++;
+        if (settled.status === "rejected") {
+          result.corruptedFiles++;
+          debugLog(`❌ Erreur vérification entrée: ${settled.reason}`);
+          continue;
+        }
+        const r = settled.value;
+        if (r.outcome === "no_path" || r.outcome === "missing") {
           result.corruptedFiles++;
           continue;
         }
-
-        try {
-          const fileExists = await RNFS.exists(info.downloadPath);
-          if (!fileExists) {
-            debugLog(`❌ Fichier manquant: ${contentId}`);
-            result.corruptedFiles++;
-            continue;
-          }
-
-          const fileStats = await RNFS.stat(info.downloadPath);
-          const fileSizeInBytes = fileStats.size;
-
-          // Vérifier si le fichier est valide
-          if (fileSizeInBytes === 0 || fileSizeInBytes < 10240) {
-            // < 10KB
-            debugLog(
-              `❌ Fichier corrompu: ${contentId} (${fileSizeInBytes} bytes)`
-            );
-            result.corruptedFiles++;
-            continue;
-          }
-
-          // Fichier valide, le conserver
-          correctedDownloads[contentId] = info;
-          result.validFiles++;
-          debugLog(
-            `✅ Fichier valide: ${contentId} (${fileSizeInBytes} bytes)`
-          );
-        } catch (error) {
-          debugLog(`❌ Erreur vérification ${contentId}: ${error}`);
+        if (r.outcome === "corrupt") {
           result.corruptedFiles++;
+          continue;
         }
+        correctedDownloads[r.contentId] = r.info;
+        result.validFiles++;
+        debugLog(`✅ Fichier valide: ${r.contentId} (${r.size} bytes)`);
       }
 
       // Sauvegarder la version corrigée
@@ -385,12 +403,12 @@ class PremiumContentManager {
         "DOWNLOADED_CONTENT",
         correctedDownloads,
         true,
-        true
+        true,
       );
 
       result.fixedFiles = result.validFiles;
       debugLog(
-        `✅ Vérification terminée: ${result.validFiles} fichiers valides, ${result.corruptedFiles} corrompus`
+        `✅ Vérification terminée: ${result.validFiles} fichiers valides, ${result.corruptedFiles} corrompus`,
       );
 
       return result;
@@ -412,19 +430,22 @@ class PremiumContentManager {
 
       // Lister tous les fichiers dans le dossier
       const files = await RNFS.readDir(this.downloadDirectory);
-      let deletedCount = 0;
+      const fileEntries = files.filter((f) => f.isFile());
 
-      for (const file of files) {
-        if (file.isFile()) {
-          try {
-            await RNFS.unlink(file.path);
-            deletedCount++;
-            debugLog(`🗑️ Fichier supprimé: ${file.name}`);
-          } catch (error) {
-            debugLog(`⚠️ Impossible de supprimer ${file.name}: ${error}`);
-          }
+      const results = await Promise.allSettled(
+        fileEntries.map((file) => RNFS.unlink(file.path)),
+      );
+
+      const deletedCount = results.filter(
+        (r) => r.status === "fulfilled",
+      ).length;
+      results.forEach((r, i) => {
+        if (r.status === "rejected") {
+          debugLog(
+            `⚠️ Impossible de supprimer ${fileEntries[i].name}: ${r.reason}`,
+          );
         }
-      }
+      });
 
       debugLog(`✅ Nettoyage terminé: ${deletedCount} fichiers supprimés`);
 
@@ -464,7 +485,7 @@ class PremiumContentManager {
           debugLog(
             userChanged
               ? "🔄 Utilisateur changé → cache catalogue invalidé"
-              : "🔄 Cache ignoré: token présent et catalogue Quran vide → rechargement serveur"
+              : "🔄 Cache ignoré: token présent et catalogue Quran vide → rechargement serveur",
           );
         } catch {}
       }
@@ -502,7 +523,7 @@ class PremiumContentManager {
       catalog.premiumThemes = [];
 
       debugLog(
-        `✅ Catalogue généré: ${catalog.adhanVoices.length} adhans, ${catalog.quranRecitations.length} récitateurs, ${catalog.dhikrCollections.length} dhikrs, ${catalog.premiumThemes.length} thèmes`
+        `✅ Catalogue généré: ${catalog.adhanVoices.length} adhans, ${catalog.quranRecitations.length} récitateurs, ${catalog.dhikrCollections.length} dhikrs, ${catalog.premiumThemes.length} thèmes`,
       );
 
       // 💾 Sauvegarder en cache
@@ -520,7 +541,7 @@ class PremiumContentManager {
     try {
       const cached = await AsyncStorage.getItem("premium_catalog_cache");
       const cacheTimestamp = await AsyncStorage.getItem(
-        "premium_catalog_timestamp"
+        "premium_catalog_timestamp",
       );
 
       if (cached && cacheTimestamp) {
@@ -544,7 +565,7 @@ class PremiumContentManager {
     try {
       await AsyncStorage.setItem(
         "premium_catalog_cache",
-        JSON.stringify(catalog)
+        JSON.stringify(catalog),
       );
       try {
         const currentUserData = await AsyncStorage.getItem("user_data");
@@ -554,7 +575,7 @@ class PremiumContentManager {
       } catch {}
       await AsyncStorage.setItem(
         "premium_catalog_timestamp",
-        Date.now().toString()
+        Date.now().toString(),
       );
       debugLog("✅ Catalogue sauvegardé en cache");
     } catch (error) {
@@ -610,7 +631,7 @@ class PremiumContentManager {
 
   // 🚀 NOUVEAU : Mise à jour du statut de téléchargement en arrière-plan
   private async updateDownloadStatusInBackground(
-    adhans: PremiumContent[]
+    adhans: PremiumContent[],
   ): Promise<void> {
     // Éviter les appels multiples simultanés
     if (this.isUpdatingDownloadStatus) {
@@ -625,46 +646,37 @@ class PremiumContentManager {
       try {
         console.log("🔍 Vérification des téléchargements en arrière-plan...");
 
-        // Batch les vérifications par petits groupes pour éviter la surcharge
-        const batchSize = 5;
+        // Vérifications en parallèle (évite await dans une boucle for)
         const updatedAdhans = [...adhans];
         let hasChanges = false;
 
-        for (let i = 0; i < adhans.length; i += batchSize) {
-          const batch = adhans.slice(i, i + batchSize);
+        const flags = await Promise.all(
+          adhans.map(async (adhan, index) => {
+            const downloadPath = await this.isContentDownloaded(adhan.id);
+            if (downloadPath && !adhan.isDownloaded) {
+              updatedAdhans[index] = {
+                ...adhan,
+                isDownloaded: true,
+                downloadPath: downloadPath,
+              };
+              console.log(`✅ ${adhan.title} trouvé téléchargé`);
+              return true;
+            }
+            return false;
+          }),
+        );
 
-          const batchResults = await Promise.all(
-            batch.map(async (adhan, index) => {
-              const downloadPath = await this.isContentDownloaded(adhan.id);
-              const globalIndex = i + index;
-
-              if (downloadPath && !adhan.isDownloaded) {
-                updatedAdhans[globalIndex] = {
-                  ...adhan,
-                  isDownloaded: true,
-                  downloadPath: downloadPath,
-                };
-                console.log(`✅ ${adhan.title} trouvé téléchargé`);
-                hasChanges = true;
-                return true;
-              }
-              return false;
-            })
-          );
-
-          // Petite pause entre les batches pour ne pas surcharger
-          await new Promise((resolve) => setTimeout(resolve, 100));
-        }
+        hasChanges = flags.some(Boolean);
 
         // Sauvegarder SEULEMENT s'il y a des changements
         if (hasChanges) {
           await this.saveCachedAdhans(updatedAdhans);
           console.log(
-            "✅ Vérification arrière-plan terminée avec mises à jour"
+            "✅ Vérification arrière-plan terminée avec mises à jour",
           );
         } else {
           console.log(
-            "✅ Vérification arrière-plan terminée, aucun changement"
+            "✅ Vérification arrière-plan terminée, aucun changement",
           );
         }
       } catch (error) {
@@ -680,7 +692,7 @@ class PremiumContentManager {
     try {
       const cached = await AsyncStorage.getItem("premium_adhans_cache");
       const cacheTimestamp = await AsyncStorage.getItem(
-        "premium_adhans_timestamp"
+        "premium_adhans_timestamp",
       );
 
       if (cached && cacheTimestamp) {
@@ -704,11 +716,11 @@ class PremiumContentManager {
     try {
       await AsyncStorage.setItem(
         "premium_adhans_cache",
-        JSON.stringify(adhans)
+        JSON.stringify(adhans),
       );
       await AsyncStorage.setItem(
         "premium_adhans_timestamp",
-        Date.now().toString()
+        Date.now().toString(),
       );
       debugLog("✅ Adhans sauvegardés en cache");
     } catch (error) {
@@ -719,7 +731,7 @@ class PremiumContentManager {
   // 🎵 Scanner les fichiers d'adhan
   private async scanStorageFolder(
     folderPath: string,
-    type: "adhan" | "quran" | "dhikr" | "theme"
+    type: "adhan" | "quran" | "dhikr" | "theme",
   ): Promise<PremiumContent[]> {
     try {
       debugLog(`🔍 Scan du dossier: ${folderPath} (type: ${type})`);
@@ -739,23 +751,24 @@ class PremiumContentManager {
         return [];
       }
 
-      return data.data.files
-        .filter((file: any) => file.name.endsWith(".mp3"))
-        .map((file: any) => {
-          // Générer un titre lisible
-          let title = this.generateReadableTitle(file.name, type);
-          if (file.name === "audio.mp3") title = "Adhan Premium";
-          return {
-            id: file.name.replace(/\.[^/.]+$/, ""),
-            type,
-            title,
-            description: `Adhan premium disponible sur Infomaniak (${file.name})`,
-            fileUrl: file.url,
-            fileSize: file.sizeMB || 1,
-            version: file.version || "1.0",
-            isDownloaded: false,
-          };
+      const files = data.data.files as any[];
+      const out: PremiumContent[] = [];
+      for (const file of files) {
+        if (!file.name.endsWith(".mp3")) continue;
+        let title = this.generateReadableTitle(file.name, type);
+        if (file.name === "audio.mp3") title = "Adhan Premium";
+        out.push({
+          id: file.name.replace(/\.[^/.]+$/, ""),
+          type,
+          title,
+          description: `Adhan premium disponible sur Infomaniak (${file.name})`,
+          fileUrl: file.url,
+          fileSize: file.sizeMB || 1,
+          version: file.version || "1.0",
+          isDownloaded: false,
         });
+      }
+      return out;
     } catch (error) {
       errorLog(`❌ Erreur scan dossier ${folderPath}:`, error);
       return [];
@@ -765,7 +778,7 @@ class PremiumContentManager {
   // 📖 Parser un nom de fichier Quran pour extraire les informations
   private parseQuranFileName(
     fileName: string,
-    reciterName: string
+    reciterName: string,
   ): {
     surahNumber: number;
     surahName: string;
@@ -781,14 +794,14 @@ class PremiumContentManager {
         surahName,
         fullTitle: `${surahName} (${String(surahNumber).padStart(
           3,
-          "0"
+          "0",
         )}) - ${reciterName}`,
       };
     }
 
     // Ancien format: "Saoud Shuraim Surah(001) - Al Fatiha"
     const oldFormatMatch = fileName.match(
-      /Surah\((\d+)\)\s*-\s*(.+?)(?:\.[^.]+)?$/i
+      /Surah\((\d+)\)\s*-\s*(.+?)(?:\.[^.]+)?$/i,
     );
 
     if (oldFormatMatch) {
@@ -799,7 +812,7 @@ class PremiumContentManager {
         surahName,
         fullTitle: `${surahName} (${String(surahNumber).padStart(
           3,
-          "0"
+          "0",
         )}) - ${reciterName}`,
       };
     }
@@ -983,7 +996,7 @@ class PremiumContentManager {
   async downloadPremiumContent(
     content: PremiumContent,
     onProgress?: (progress: number) => void,
-    onCancel?: () => boolean
+    onCancel?: () => boolean,
   ): Promise<boolean> {
     // 🚀 FIX : Utiliser le système legacy qui utilise le stockage interne persistant
     // Le système natif utilise le stockage externe qui peut être nettoyé automatiquement
@@ -993,7 +1006,7 @@ class PremiumContentManager {
   private async downloadWithNativeManager(
     content: PremiumContent,
     onProgress?: (progress: number) => void,
-    onCancel?: () => boolean
+    onCancel?: () => boolean,
   ): Promise<boolean> {
     try {
       debugLog(`🚀 Démarrage téléchargement natif: ${content.title}`);
@@ -1009,28 +1022,29 @@ class PremiumContentManager {
       };
 
       // Démarrer le téléchargement
-      const downloadId = await nativeDownloadManager.startDownload(
-        downloadInfo
-      );
+      const downloadId =
+        await nativeDownloadManager.startDownload(downloadInfo);
       debugLog(`📥 Téléchargement démarré avec ID: ${downloadId}`);
 
-      // 🚀 SIMPLIFIÉ : Attendre et vérifier le statut périodiquement
+      // 🚀 SIMPLIFIÉ : Attendre et vérifier le statut périodiquement (récursion terminale, pas de while + await)
       const maxWaitTime = 300000; // 5 minutes
       const checkInterval = 2000; // 2 secondes
-      let elapsedTime = 0;
 
-      while (elapsedTime < maxWaitTime) {
-        // Vérifier si l'utilisateur a annulé
+      const poll = async (elapsedTime: number): Promise<boolean> => {
+        if (elapsedTime >= maxWaitTime) {
+          errorLog(`⏰ Timeout téléchargement: ${content.title}`);
+          return false;
+        }
+
         if (onCancel && onCancel()) {
           debugLog(`🛑 Annulation demandée: ${content.title}`);
           await nativeDownloadManager.cancelDownload(content.id);
           return false;
         }
 
-        // Vérifier le statut du téléchargement
         try {
           const status = await nativeDownloadManager.getDownloadStatus(
-            content.id
+            content.id,
           );
 
           if (status.progress !== undefined) {
@@ -1038,36 +1052,30 @@ class PremiumContentManager {
             debugLog(`📊 Progression: ${(status.progress * 100).toFixed(1)}%`);
           }
 
-          // Vérifier si terminé
           if (status.status === 8) {
-            // STATUS_SUCCESSFUL
             debugLog(`✅ Téléchargement terminé: ${content.title}`);
             onProgress?.(1.0);
 
-            // Vérifier si le fichier existe dans le dossier natif
             const nativePath = await this.checkNativeDownloadForContent(
-              content.id
+              content.id,
             );
             if (nativePath) {
               await this.markAsDownloaded(content.id, nativePath);
               return true;
             }
           } else if (status.status === 16) {
-            // STATUS_FAILED
             errorLog(`❌ Téléchargement échoué: ${content.title}`);
             return false;
           }
-        } catch (error) {
-          // Le téléchargement n'existe plus ou a échoué
+        } catch {
           debugLog(`⚠️ Statut non disponible: ${content.title}`);
         }
 
         await new Promise((resolve) => setTimeout(resolve, checkInterval));
-        elapsedTime += checkInterval;
-      }
+        return poll(elapsedTime + checkInterval);
+      };
 
-      errorLog(`⏰ Timeout téléchargement: ${content.title}`);
-      return false;
+      return await poll(0);
     } catch (error) {
       errorLog(`❌ Erreur téléchargement natif: ${content.title}`, error);
       return false;
@@ -1076,7 +1084,7 @@ class PremiumContentManager {
 
   // 🚀 NOUVEAU : Vérifier le chemin de téléchargement natif
   private async checkNativeDownloadForContent(
-    contentId: string
+    contentId: string,
   ): Promise<string | null> {
     try {
       // 1. Pour les récitations Quran (dossier spécifique)
@@ -1106,7 +1114,7 @@ class PremiumContentManager {
   private async downloadWithLegacySystem(
     content: PremiumContent,
     onProgress?: (progress: number) => void,
-    onCancel?: () => boolean
+    onCancel?: () => boolean,
   ): Promise<boolean> {
     try {
       debugLog(`📥 Début téléchargement PROPRE: ${content.title}`);
@@ -1170,7 +1178,7 @@ class PremiumContentManager {
         if (contentType && contentType.includes("application/json")) {
           const jsonResponse = await response.json();
           debugLog(
-            "🔄 URL initiale renvoie du JSON, extraction de l'URL de téléchargement..."
+            "🔄 URL initiale renvoie du JSON, extraction de l'URL de téléchargement...",
           );
 
           if (
@@ -1184,7 +1192,7 @@ class PremiumContentManager {
         }
       } catch (e) {
         debugLog(
-          "⚠️ Impossible de vérifier le type de contenu avant téléchargement, utilisation URL directe"
+          "⚠️ Impossible de vérifier le type de contenu avant téléchargement, utilisation URL directe",
         );
       }
 
@@ -1220,7 +1228,7 @@ class PremiumContentManager {
         if (await RNFS.exists(downloadPath)) {
           const fileStat = await RNFS.stat(downloadPath);
           debugLog(
-            `✅ Téléchargement réussi : ${downloadPath} (Taille: ${fileStat.size} octets)`
+            `✅ Téléchargement réussi : ${downloadPath} (Taille: ${fileStat.size} octets)`,
           );
 
           // 🔍 DIAGNOSTIC CRITIQUE : Vérifier l'en-tête et la TAILLE du fichier
@@ -1230,13 +1238,13 @@ class PremiumContentManager {
             debugLog(
               `🔍 HEADER FICHIER (330 premiers caractères): ${header.replace(
                 /\n/g,
-                "\\n"
-              )}`
+                "\\n",
+              )}`,
             );
 
             if (fileStat.size < 10000) {
               errorLog(
-                `❌ FICHIER TROP PETIT (${fileStat.size} octets) - Ce n'est pas un MP3 valide !`
+                `❌ FICHIER TROP PETIT (${fileStat.size} octets) - Ce n'est pas un MP3 valide !`,
               );
               // Afficher le contenu pour débogage
               errorLog(`📄 CONTENU DU FICHIER ERREUR: ${header}`);
@@ -1252,7 +1260,7 @@ class PremiumContentManager {
               header.startsWith("{") // JSON error
             ) {
               errorLog(
-                "❌ LE FICHIER SEMBLE ÊTRE DU TEXTE/HTML/JSON ET NON UN MP3 !"
+                "❌ LE FICHIER SEMBLE ÊTRE DU TEXTE/HTML/JSON ET NON UN MP3 !",
               );
               // 🚀 AUTO-FIX : Supprimer le fichier corrompu immédiatement
               await RNFS.unlink(downloadPath);
@@ -1283,13 +1291,12 @@ class PremiumContentManager {
   // ✅ Marquer comme téléchargé
   private async markAsDownloaded(
     contentId: string,
-    downloadPath: string
+    downloadPath: string,
   ): Promise<void> {
     try {
       // Utiliser le gestionnaire stratifié
-      const downloadedContentRaw = await LocalStorageManager.getPremium(
-        "DOWNLOADED_CONTENT"
-      );
+      const downloadedContentRaw =
+        await LocalStorageManager.getPremium("DOWNLOADED_CONTENT");
       const downloaded = downloadedContentRaw
         ? JSON.parse(downloadedContentRaw)
         : {};
@@ -1322,7 +1329,7 @@ class PremiumContentManager {
         "DOWNLOADED_CONTENT",
         downloaded,
         true,
-        true
+        true,
       );
 
       // 🔧 AUSSI sauvegarder dans SharedPreferences accessibles depuis Android
@@ -1333,12 +1340,12 @@ class PremiumContentManager {
         if (AdhanModule && AdhanModule.savePremiumContentData) {
           try {
             await AdhanModule.savePremiumContentData(
-              JSON.stringify(downloaded)
+              JSON.stringify(downloaded),
             );
             debugLog(
               `✅ Données premium sauvées pour Android (${
                 variants.length
-              } variantes: ${variants.join(", ")})`
+              } variantes: ${variants.join(", ")})`,
             );
           } catch (error) {
             debugLog("❌ Erreur sauvegarde Android, mais AsyncStorage OK");
@@ -1347,7 +1354,7 @@ class PremiumContentManager {
       }
 
       debugLog(
-        `✅ Son premium ${contentId} marqué comme téléchargé: ${downloadPath} (${variants.length} variantes enregistrées)`
+        `✅ Son premium ${contentId} marqué comme téléchargé: ${downloadPath} (${variants.length} variantes enregistrées)`,
       );
     } catch (error) {
       errorLog("❌ Erreur sauvegarde statut téléchargement:", error);
@@ -1369,7 +1376,7 @@ class PremiumContentManager {
   // 🚀 NOUVEAU : Méthode publique pour marquer comme téléchargé
   async markContentAsDownloaded(
     contentId: string,
-    localPath: string
+    localPath: string,
   ): Promise<boolean> {
     try {
       // 🔧 FIX: Nettoyer l'ID avant utilisation
@@ -1426,7 +1433,7 @@ class PremiumContentManager {
 
       if (!contentUpdated) {
         console.error(
-          `❌ Contenu non trouvé: ${contentId} (nettoyé: ${cleanId})`
+          `❌ Contenu non trouvé: ${contentId} (nettoyé: ${cleanId})`,
         );
         return false;
       }
@@ -1434,7 +1441,7 @@ class PremiumContentManager {
       // Sauvegarder le catalogue mis à jour
       await AsyncStorage.setItem(
         "premium_catalog_cache",
-        JSON.stringify(catalog)
+        JSON.stringify(catalog),
       );
 
       // 🚀 FIX : Sauvegarder aussi dans downloaded_premium_content
@@ -1467,9 +1474,8 @@ class PremiumContentManager {
       this.isCheckingDownloads.add(contentId);
 
       // Utiliser le gestionnaire stratifié
-      const downloadedContentRaw = await LocalStorageManager.getPremium(
-        "DOWNLOADED_CONTENT"
-      );
+      const downloadedContentRaw =
+        await LocalStorageManager.getPremium("DOWNLOADED_CONTENT");
       const downloaded = downloadedContentRaw
         ? JSON.parse(downloadedContentRaw)
         : {};
@@ -1512,9 +1518,8 @@ class PremiumContentManager {
       console.log(`🗑️ Tentative de suppression: ${contentId}`);
 
       // Récupérer les informations de téléchargement
-      const downloadedContent = await LocalStorageManager.getPremium(
-        "DOWNLOADED_CONTENT"
-      );
+      const downloadedContent =
+        await LocalStorageManager.getPremium("DOWNLOADED_CONTENT");
       const downloaded = downloadedContent ? JSON.parse(downloadedContent) : {};
 
       const contentInfo = downloaded[contentId];
@@ -1532,7 +1537,7 @@ class PremiumContentManager {
           "DOWNLOADED_CONTENT",
           downloaded,
           true,
-          true
+          true,
         );
         return true;
       }
@@ -1554,9 +1559,9 @@ class PremiumContentManager {
       // 🚀 FIX : Supprimer uniquement du stockage interne
       const possiblePaths = [`${this.downloadDirectory}/${contentId}.mp3`];
 
-      for (const path of possiblePaths) {
-        if (path !== downloadPath) {
-          // Éviter de supprimer deux fois le même fichier
+      await Promise.all(
+        possiblePaths.map(async (path) => {
+          if (path === downloadPath) return;
           try {
             const exists = await RNFS.exists(path);
             if (exists) {
@@ -1566,8 +1571,8 @@ class PremiumContentManager {
           } catch (error) {
             console.log(`⚠️ Erreur suppression fichier alternatif: ${error}`);
           }
-        }
-      }
+        }),
+      );
 
       // Retirer de la liste des téléchargés
       delete downloaded[contentId];
@@ -1575,7 +1580,7 @@ class PremiumContentManager {
         "DOWNLOADED_CONTENT",
         downloaded,
         true,
-        true
+        true,
       );
 
       // 🚀 NOUVEAU : Synchroniser avec la base de données
@@ -1631,10 +1636,10 @@ class PremiumContentManager {
           if (updated) {
             await AsyncStorage.setItem(
               "premium_catalog_cache",
-              JSON.stringify(catalog)
+              JSON.stringify(catalog),
             );
             debugLog(
-              `✅ Catalogue cache mis à jour après suppression: ${contentId}`
+              `✅ Catalogue cache mis à jour après suppression: ${contentId}`,
             );
           }
         }
@@ -1655,88 +1660,77 @@ class PremiumContentManager {
     try {
       debugLog("🔄 Début migration des téléchargements existants...");
 
-      const downloadedContent = await LocalStorageManager.getPremium(
-        "DOWNLOADED_CONTENT"
-      );
+      const downloadedContent =
+        await LocalStorageManager.getPremium("DOWNLOADED_CONTENT");
       if (!downloadedContent) {
         debugLog("✅ Aucun téléchargement existant à migrer");
         return;
       }
 
       const downloaded = JSON.parse(downloadedContent);
-      const migrations: {
-        oldPath: string;
-        newPath: string;
-        contentId: string;
-      }[] = [];
+      const migrationEntries = Object.entries(downloaded) as [string, any][];
 
-      // Analyser chaque téléchargement existant
-      for (const [contentId, info] of Object.entries(downloaded) as [
-        string,
-        any
-      ][]) {
-        const currentPath = info.downloadPath;
-
-        // Vérifier si le fichier existe et s'il suit l'ancien format
-        if (currentPath && (await RNFS.exists(currentPath))) {
-          const fileName = currentPath.split("/").pop() || "";
-
-          // Si le nom ne contient pas l'ID complet, c'est un ancien format
-          if (
-            !fileName.includes(contentId.replace(/\s+/g, "_").toLowerCase())
-          ) {
-            const fileExtension = fileName.split(".").pop() || "mp3";
-            const newFileName = `${contentId
-              .replace(/\s+/g, "_")
-              .toLowerCase()}.${fileExtension}`;
-
-            // 🚀 NOUVEAU : Migrer vers le bon dossier selon le type de contenu
-            let newPath: string;
-            if (
-              contentId.startsWith("quran_") ||
-              contentId.startsWith("reciter_")
-            ) {
-              // Pour les récitations Quran, utiliser le dossier Quran
-              newPath = `${this.quranDirectory}/${newFileName}`;
-              debugLog(`📖 Migration Quran: ${contentId} -> ${newPath}`);
-            } else {
-              // Pour les adhans et autres, utiliser le dossier principal
-              newPath = `${this.downloadDirectory}/${newFileName}`;
-              debugLog(`🎵 Migration Adhan: ${contentId} -> ${newPath}`);
-            }
-
-            migrations.push({
-              oldPath: currentPath,
-              newPath: newPath,
-              contentId: contentId,
-            });
+      const migrationPlans = await Promise.all(
+        migrationEntries.map(async ([contentId, info]) => {
+          const currentPath = info.downloadPath;
+          if (!currentPath || !(await RNFS.exists(currentPath))) {
+            return null;
           }
-        }
-      }
+          const fileName = currentPath.split("/").pop() || "";
+          if (fileName.includes(contentId.replace(/\s+/g, "_").toLowerCase())) {
+            return null;
+          }
+          const fileExtension = fileName.split(".").pop() || "mp3";
+          const newFileName = `${contentId
+            .replace(/\s+/g, "_")
+            .toLowerCase()}.${fileExtension}`;
 
-      // Effectuer les migrations
-      let migratedCount = 0;
-      for (const migration of migrations) {
-        try {
-          // Copier vers le nouveau chemin
+          let newPath: string;
+          if (
+            contentId.startsWith("quran_") ||
+            contentId.startsWith("reciter_")
+          ) {
+            newPath = `${this.quranDirectory}/${newFileName}`;
+            debugLog(`📖 Migration Quran: ${contentId} -> ${newPath}`);
+          } else {
+            newPath = `${this.downloadDirectory}/${newFileName}`;
+            debugLog(`🎵 Migration Adhan: ${contentId} -> ${newPath}`);
+          }
+
+          return {
+            oldPath: currentPath,
+            newPath: newPath,
+            contentId: contentId,
+          };
+        }),
+      );
+
+      const migrations = migrationPlans.filter(
+        (m): m is { oldPath: string; newPath: string; contentId: string } =>
+          m != null,
+      );
+
+      const execResults = await Promise.allSettled(
+        migrations.map(async (migration) => {
           await RNFS.copyFile(migration.oldPath, migration.newPath);
-
-          // Mettre à jour la base de données
           downloaded[migration.contentId] = {
             ...downloaded[migration.contentId],
             downloadPath: migration.newPath,
             migratedAt: new Date().toISOString(),
           };
-
-          // Supprimer l'ancien fichier
           await RNFS.unlink(migration.oldPath);
-
-          migratedCount++;
           debugLog(`✅ Migré: ${migration.contentId}`);
-        } catch (error) {
-          errorLog(`❌ Erreur migration ${migration.contentId}:`, error);
+        }),
+      );
+
+      let migratedCount = 0;
+      execResults.forEach((r, i) => {
+        if (r.status === "fulfilled") {
+          migratedCount++;
+        } else {
+          errorLog(`❌ Erreur migration ${migrations[i].contentId}:`, r.reason);
         }
-      }
+      });
 
       // Sauvegarder les changements
       if (migratedCount > 0) {
@@ -1744,7 +1738,7 @@ class PremiumContentManager {
           "DOWNLOADED_CONTENT",
           downloaded,
           true,
-          true
+          true,
         );
         debugLog(`🔄 Migration terminée: ${migratedCount} fichiers migrés`);
       } else {
@@ -1758,18 +1752,20 @@ class PremiumContentManager {
   // 📊 Obtenir l'espace utilisé par le contenu premium
   async getPremiumContentSize(): Promise<number> {
     try {
-      const downloadedContent = await LocalStorageManager.getPremium(
-        "DOWNLOADED_CONTENT"
-      );
+      const downloadedContent =
+        await LocalStorageManager.getPremium("DOWNLOADED_CONTENT");
       const downloaded = downloadedContent ? JSON.parse(downloadedContent) : {};
 
-      let totalSize = 0;
-      for (const contentInfo of Object.values(downloaded) as any[]) {
-        if (await RNFS.exists(contentInfo.downloadPath)) {
+      const values = Object.values(downloaded) as any[];
+      const sizes = await Promise.all(
+        values.map(async (contentInfo) => {
+          if (!contentInfo?.downloadPath) return 0;
+          if (!(await RNFS.exists(contentInfo.downloadPath))) return 0;
           const stat = await RNFS.stat(contentInfo.downloadPath);
-          totalSize += stat.size;
-        }
-      }
+          return stat.size;
+        }),
+      );
+      const totalSize = sizes.reduce((sum, n) => sum + n, 0);
 
       return totalSize / (1024 * 1024); // Retourner en MB
     } catch (error) {
@@ -1785,7 +1781,7 @@ class PremiumContentManager {
    * Économise ~70% de bande passante par rapport au téléchargement complet
    */
   async createStreamingSession(
-    content: PremiumContent
+    content: PremiumContent,
   ): Promise<string | null> {
     try {
       debugLog(`🎵 Création session streaming pour: ${content.title}`);
@@ -1804,7 +1800,7 @@ class PremiumContentManager {
       const sessionId = await this.streamingManager.createStreamingSession(
         content.id,
         optimalUrl,
-        estimatedDuration
+        estimatedDuration,
       );
 
       debugLog(`✅ Session streaming créée: ${sessionId}`);
@@ -1878,15 +1874,14 @@ class PremiumContentManager {
    * 🔗 Obtenir l'URL audio depuis Infomaniak
    */
   private async getOptimalAudioUrl(
-    content: PremiumContent
+    content: PremiumContent,
   ): Promise<string | null> {
     try {
       debugLog(`🔍 Recherche URL optimale pour: ${content.title}`);
 
       // 🥇 PRIORITÉ 1 : Serveur personnel (96% d'économie)
-      const customServerResponse = await this.customServerManager.getAudioUrl(
-        content
-      );
+      const customServerResponse =
+        await this.customServerManager.getAudioUrl(content);
       if (customServerResponse.success && customServerResponse.url) {
         await this.customServerManager.recordUsage(customServerResponse.source);
         debugLog(`✅ Serveur personnel: ${customServerResponse.url}`);
@@ -1927,9 +1922,8 @@ class PremiumContentManager {
       const result = { fixed: 0, errors: [] as string[] };
 
       // 1. Charger le JSON actuel
-      const downloadedContentRaw = await LocalStorageManager.getPremium(
-        "DOWNLOADED_CONTENT"
-      );
+      const downloadedContentRaw =
+        await LocalStorageManager.getPremium("DOWNLOADED_CONTENT");
       const downloaded = downloadedContentRaw
         ? JSON.parse(downloadedContentRaw)
         : {};
@@ -1967,7 +1961,7 @@ class PremiumContentManager {
             "DOWNLOADED_CONTENT",
             downloaded,
             true,
-            true
+            true,
           );
 
           // 🔧 AUSSI sauvegarder dans SharedPreferences accessibles depuis Android
@@ -1978,7 +1972,7 @@ class PremiumContentManager {
             if (AdhanModule && AdhanModule.savePremiumContentData) {
               try {
                 await AdhanModule.savePremiumContentData(
-                  JSON.stringify(downloaded)
+                  JSON.stringify(downloaded),
                 );
                 debugLog("✅ Données premium synchronisées pour Android");
               } catch (error) {
@@ -1988,7 +1982,7 @@ class PremiumContentManager {
           }
 
           debugLog(
-            `🎉 Synchronisation terminée: ${result.fixed} entrées ajoutées`
+            `🎉 Synchronisation terminée: ${result.fixed} entrées ajoutées`,
           );
         } else {
           debugLog("✅ Aucune désynchronisation détectée");
@@ -2009,9 +2003,8 @@ class PremiumContentManager {
     try {
       debugLog("🧹 Début nettoyage des téléchargements corrompus...");
 
-      const downloadedContent = await LocalStorageManager.getPremium(
-        "DOWNLOADED_CONTENT"
-      );
+      const downloadedContent =
+        await LocalStorageManager.getPremium("DOWNLOADED_CONTENT");
       if (!downloadedContent) {
         debugLog("✅ Aucun téléchargement à nettoyer");
         return;
@@ -2021,86 +2014,89 @@ class PremiumContentManager {
       let hasCorruptedFiles = false;
       let cleanedCount = 0;
 
-      for (const [contentId, contentInfo] of Object.entries(downloaded)) {
-        const info = contentInfo as any;
-        if (!info.downloadPath) continue;
+      const entries = Object.entries(downloaded) as [string, any][];
 
-        const fileName = info.downloadPath.split("/").pop() || "";
-        let shouldDelete = false;
+      const inspections = await Promise.all(
+        entries.map(async ([contentId, contentInfo]) => {
+          const info = contentInfo;
+          if (!info.downloadPath) {
+            return { contentId, info, shouldDelete: false, fileName: "" };
+          }
 
-        // 🚀 DÉTECTION AMÉLIORÉE : Vérifier les noms de fichiers corrompus
-        const isNameCorrupted =
-          fileName.includes("?") ||
-          fileName.includes("&") ||
-          fileName.includes("+") || // Les + encodés causent des problèmes
-          fileName.includes("%") || // Encodage URL
-          fileName.length > 100; // Noms trop longs
+          const fileName = info.downloadPath.split("/").pop() || "";
+          const isNameCorrupted =
+            fileName.includes("?") ||
+            fileName.includes("&") ||
+            fileName.includes("+") ||
+            fileName.includes("%") ||
+            fileName.length > 100;
 
-        if (isNameCorrupted) {
-          debugLog(`🧹 Nom de fichier corrompu détecté: ${fileName}`);
-          shouldDelete = true;
-        } else {
-          // 🚀 NOUVEAU : Vérifier l'intégrité du fichier
+          if (isNameCorrupted) {
+            debugLog(`🧹 Nom de fichier corrompu détecté: ${fileName}`);
+            return { contentId, info, shouldDelete: true, fileName };
+          }
+
           try {
             const fileExists = await RNFS.exists(info.downloadPath);
             if (!fileExists) {
               debugLog(`🧹 Fichier manquant détecté: ${fileName}`);
-              shouldDelete = true;
-            } else {
-              // Vérifier la taille du fichier
-              const fileStats = await RNFS.stat(info.downloadPath);
-              const fileSizeInBytes = fileStats.size;
-              const fileSizeInKB = fileSizeInBytes / 1024;
-
-              // 🚀 CRITÈRES DE CORRUPTION :
-              // - Fichiers trop petits (< 10KB pour un audio)
-              // - Fichiers vides (0 bytes)
-              // - Fichiers avec des noms suspects
-              if (fileSizeInBytes === 0) {
-                debugLog(`🧹 Fichier vide détecté: ${fileName} (0 bytes)`);
-                shouldDelete = true;
-              } else if (fileSizeInKB < 10) {
-                debugLog(
-                  `🧹 Fichier trop petit détecté: ${fileName} (${fileSizeInKB.toFixed(
-                    1
-                  )}KB)`
-                );
-                shouldDelete = true;
-              } else if (!fileName.toLowerCase().endsWith(".mp3")) {
-                debugLog(`🧹 Format de fichier non supporté: ${fileName}`);
-                shouldDelete = true;
-              }
+              return { contentId, info, shouldDelete: true, fileName };
             }
-          } catch (statError) {
+            const fileStats = await RNFS.stat(info.downloadPath);
+            const fileSizeInBytes = fileStats.size;
+            const fileSizeInKB = fileSizeInBytes / 1024;
+
+            if (fileSizeInBytes === 0) {
+              debugLog(`🧹 Fichier vide détecté: ${fileName} (0 bytes)`);
+              return { contentId, info, shouldDelete: true, fileName };
+            }
+            if (fileSizeInKB < 10) {
+              debugLog(
+                `🧹 Fichier trop petit détecté: ${fileName} (${fileSizeInKB.toFixed(
+                  1,
+                )}KB)`,
+              );
+              return { contentId, info, shouldDelete: true, fileName };
+            }
+            if (!fileName.toLowerCase().endsWith(".mp3")) {
+              debugLog(`🧹 Format de fichier non supporté: ${fileName}`);
+              return { contentId, info, shouldDelete: true, fileName };
+            }
+          } catch {
             debugLog(
-              `🧹 Erreur accès fichier, considéré comme corrompu: ${fileName}`
+              `🧹 Erreur accès fichier, considéré comme corrompu: ${fileName}`,
             );
-            shouldDelete = true;
+            return { contentId, info, shouldDelete: true, fileName };
           }
-        }
 
-        if (shouldDelete) {
-          hasCorruptedFiles = true;
-          cleanedCount++;
+          return { contentId, info, shouldDelete: false, fileName };
+        }),
+      );
 
-          // Supprimer l'entrée de la base de données
-          delete downloaded[contentId];
+      const toClean = inspections.filter((x) => x.shouldDelete);
+      hasCorruptedFiles = toClean.length > 0;
+      cleanedCount = toClean.length;
 
-          // Supprimer le fichier physique s'il existe
+      for (const row of toClean) {
+        delete downloaded[row.contentId];
+      }
+
+      await Promise.all(
+        toClean.map(async (row) => {
           try {
-            const fileExists = await RNFS.exists(info.downloadPath);
+            const fileExists = await RNFS.exists(row.info.downloadPath);
             if (fileExists) {
-              await RNFS.unlink(info.downloadPath);
-              debugLog(`🗑️ Fichier corrompu supprimé: ${info.downloadPath}`);
+              await RNFS.unlink(row.info.downloadPath);
+              debugLog(
+                `🗑️ Fichier corrompu supprimé: ${row.info.downloadPath}`,
+              );
             }
           } catch (unlinkError) {
             debugLog(`⚠️ Erreur suppression fichier corrompu: ${unlinkError}`);
           }
-
-          // 🚀 NOUVEAU : Nettoyer aussi les fichiers dans les autres dossiers
-          await this.cleanupFileFromAllLocations(fileName);
-        }
-      }
+          await this.cleanupFileFromAllLocations(row.fileName);
+        }),
+      );
 
       if (hasCorruptedFiles) {
         // Sauvegarder la base nettoyée
@@ -2108,10 +2104,10 @@ class PremiumContentManager {
           "DOWNLOADED_CONTENT",
           downloaded,
           true,
-          true
+          true,
         );
         debugLog(
-          `✅ Nettoyage terminé: ${cleanedCount} fichiers corrompus supprimés`
+          `✅ Nettoyage terminé: ${cleanedCount} fichiers corrompus supprimés`,
         );
       } else {
         debugLog("✅ Aucun fichier corrompu trouvé");
@@ -2131,18 +2127,20 @@ class PremiumContentManager {
         `${RNFS.DocumentDirectoryPath}/Downloads`,
       ];
 
-      for (const location of locations) {
-        try {
-          const filePath = `${location}/${fileName}`;
-          const exists = await RNFS.exists(filePath);
-          if (exists) {
-            await RNFS.unlink(filePath);
-            debugLog(`🗑️ Fichier supprimé de ${location}: ${fileName}`);
+      await Promise.all(
+        locations.map(async (location) => {
+          try {
+            const filePath = `${location}/${fileName}`;
+            const exists = await RNFS.exists(filePath);
+            if (exists) {
+              await RNFS.unlink(filePath);
+              debugLog(`🗑️ Fichier supprimé de ${location}: ${fileName}`);
+            }
+          } catch {
+            // Ignorer les erreurs pour les dossiers qui n'existent pas
           }
-        } catch (error) {
-          // Ignorer les erreurs pour les dossiers qui n'existent pas
-        }
-      }
+        }),
+      );
     } catch (error) {
       debugLog(`⚠️ Erreur nettoyage multi-emplacements: ${error}`);
     }
@@ -2187,7 +2185,7 @@ class PremiumContentManager {
         }
       } catch (error) {
         debugLog(
-          "⚠️ Erreur API Infomaniak, utilisation des récitateurs locaux uniquement"
+          "⚠️ Erreur API Infomaniak, utilisation des récitateurs locaux uniquement",
         );
       }
 
@@ -2224,7 +2222,7 @@ class PremiumContentManager {
       }
 
       debugLog(
-        `📖 Récitateurs Quran: ${reciters.length} récitateurs trouvés (Infomaniak + Locaux)`
+        `📖 Récitateurs Quran: ${reciters.length} récitateurs trouvés (Infomaniak + Locaux)`,
       );
       return reciters;
     } catch (error) {
@@ -2243,7 +2241,7 @@ class PremiumContentManager {
       // 🚀 OPTIMISATION : Récupérer la liste des téléchargements une seule fois
       const downloadedContent = await this.getAllDownloadedContent();
       debugLog(
-        `💾 Téléchargements trouvés: ${downloadedContent.size} fichiers`
+        `💾 Téléchargements trouvés: ${downloadedContent.size} fichiers`,
       );
 
       // Scanner depuis Infomaniak (centralisé)
@@ -2257,7 +2255,7 @@ class PremiumContentManager {
           debugLog(
             `🎵 ${
               adhanDetails.length || availableAdhans.length
-            } adhans trouvés sur Infomaniak`
+            } adhans trouvés sur Infomaniak`,
           );
 
           const token = await AsyncStorage.getItem("auth_token");
@@ -2283,7 +2281,7 @@ class PremiumContentManager {
               const isDownloaded = !!downloadPath;
 
               debugLog(
-                `📏 ${adhanName}: ${realFileSize} MB (taille réelle depuis API)`
+                `📏 ${adhanName}: ${realFileSize} MB (taille réelle depuis API)`,
               );
 
               // 🍎 Ajouter le paramètre platform pour iOS/Android
@@ -2298,7 +2296,7 @@ class PremiumContentManager {
                 fileUrl: `${
                   AppConfig.ADHANS_API
                 }?action=download&adhan=${encodeURIComponent(
-                  adhanName
+                  adhanName,
                 )}${tokenParam}${platformParam}`,
                 fileSize: realFileSize, // 🔧 VRAIE taille depuis l'API !
                 version: "1.0",
@@ -2311,65 +2309,83 @@ class PremiumContentManager {
           } else {
             // 🔧 FALLBACK : Utiliser l'ancienne méthode si pas de détails disponibles
             debugLog(
-              "⚠️ Pas de détails d'adhans dans l'API, utilisation de l'ancienne méthode"
+              "⚠️ Pas de détails d'adhans dans l'API, utilisation de l'ancienne méthode",
             );
-            adhanPromises = availableAdhans.map(async (adhanName: string) => {
-              // 🔧 FIX: Éviter la duplication du préfixe "adhan_"
+            const adhanMeta = availableAdhans.map((adhanName: string) => {
               const cleanName = adhanName.toLowerCase().replace(/\s+/g, "_");
               const adhanId = cleanName.startsWith("adhan_")
                 ? cleanName
                 : `adhan_${cleanName}`;
-
-              // 🚀 Vérification rapide du téléchargement (depuis le cache)
               const downloadPath = downloadedContent.get(adhanId);
-              const isDownloaded = !!downloadPath;
-
-              // 🔧 FIX : Récupérer la vraie taille du fichier téléchargé ou estimer
-              let realFileSize = 0.6; // Valeur par défaut
-
-              if (isDownloaded && downloadPath) {
-                try {
-                  // Obtenir la vraie taille du fichier téléchargé
-                  const fileStats = await RNFS.stat(downloadPath);
-                  realFileSize =
-                    Math.round((fileStats.size / 1024 / 1024) * 100) / 100;
-                  debugLog(
-                    `📏 Taille réelle de ${adhanName}: ${realFileSize} MB`
-                  );
-                } catch (error) {
-                  debugLog(
-                    `⚠️ Impossible de lire la taille de ${adhanName}, utilisation de l'estimation`
-                  );
-                  // Estimation basée sur le nom de l'adhan
-                  realFileSize = this.estimateAdhanFileSize(adhanName);
-                }
-              } else {
-                // Estimation intelligente basée sur le nom de l'adhan
-                realFileSize = this.estimateAdhanFileSize(adhanName);
-              }
-
-              // 🍎 Ajouter le paramètre platform pour iOS/Android
-              const platformParam =
-                Platform.OS === "ios" ? "&platform=ios" : "&platform=android";
-
-              const adhanEntry: PremiumContent = {
-                id: adhanId,
-                type: "adhan",
-                title: adhanName,
-                description: `Adhan premium: ${adhanName}`,
-                fileUrl: `${
-                  AppConfig.ADHANS_API
-                }?action=download&adhan=${encodeURIComponent(
-                  adhanName
-                )}${tokenParam}${platformParam}`,
-                fileSize: realFileSize,
-                version: "1.0",
-                isDownloaded: isDownloaded,
-                downloadPath: downloadPath || undefined,
+              return {
+                adhanName,
+                adhanId,
+                downloadPath,
+                isDownloaded: !!downloadPath,
               };
-
-              return adhanEntry;
             });
+
+            const realFileSizes = await Promise.all(
+              adhanMeta.map(
+                async ({
+                  adhanName,
+                  downloadPath,
+                  isDownloaded,
+                }: {
+                  adhanName: string;
+                  downloadPath: string;
+                  isDownloaded: boolean;
+                }) => {
+                  if (isDownloaded && downloadPath) {
+                    try {
+                      const fileStats = await RNFS.stat(downloadPath);
+                      const size =
+                        Math.round((fileStats.size / 1024 / 1024) * 100) / 100;
+                      debugLog(`📏 Taille réelle de ${adhanName}: ${size} MB`);
+                      return size;
+                    } catch {
+                      debugLog(
+                        `⚠️ Impossible de lire la taille de ${adhanName}, utilisation de l'estimation`,
+                      );
+                      return this.estimateAdhanFileSize(adhanName);
+                    }
+                  }
+                  return this.estimateAdhanFileSize(adhanName);
+                },
+              ),
+            );
+
+            adhanPromises = adhanMeta.map(
+              (
+                m: {
+                  adhanId: string;
+                  adhanName: string;
+                  downloadPath: string;
+                  isDownloaded: boolean;
+                },
+                i: number,
+              ) => {
+                const realFileSize = realFileSizes[i];
+                const platformParam =
+                  Platform.OS === "ios" ? "&platform=ios" : "&platform=android";
+                const adhanEntry: PremiumContent = {
+                  id: m.adhanId,
+                  type: "adhan",
+                  title: m.adhanName,
+                  description: `Adhan premium: ${m.adhanName}`,
+                  fileUrl: `${
+                    AppConfig.ADHANS_API
+                  }?action=download&adhan=${encodeURIComponent(
+                    m.adhanName,
+                  )}${tokenParam}${platformParam}`,
+                  fileSize: realFileSize,
+                  version: "1.0",
+                  isDownloaded: m.isDownloaded,
+                  downloadPath: m.downloadPath || undefined,
+                };
+                return Promise.resolve(adhanEntry);
+              },
+            );
           }
 
           // 🚀 Attendre tous les adhans en parallèle
@@ -2445,7 +2461,7 @@ class PremiumContentManager {
             `🎯 Téléchargements natifs trouvés: ${
               nativeFiles.filter((f) => f.isFile() && f.name.endsWith(".mp3"))
                 .length
-            } fichiers`
+            } fichiers`,
           );
         } else {
           debugLog("📁 Dossier téléchargements natifs n'existe pas encore");
@@ -2455,7 +2471,7 @@ class PremiumContentManager {
       }
 
       debugLog(
-        `💾 Téléchargements trouvés dans getAllDownloadedContent: ${downloadedContent.size} fichiers`
+        `💾 Téléchargements trouvés dans getAllDownloadedContent: ${downloadedContent.size} fichiers`,
       );
       return downloadedContent;
     } catch (error) {
@@ -2495,28 +2511,49 @@ class PremiumContentManager {
     }
   }
 
+  /** Taille réelle d'un MP3 local (Mo), arrondie à 2 décimales. */
+  private async getLocalFileSizeMb(filePath: string): Promise<number> {
+    try {
+      const exists = await RNFS.exists(filePath);
+      if (!exists) return 0;
+      const stat = await RNFS.stat(filePath);
+      const bytes = Number(stat.size) || 0;
+      if (bytes <= 0) return 0;
+      return Math.round((bytes / (1024 * 1024)) * 100) / 100;
+    } catch {
+      return 0;
+    }
+  }
+
   // 🎯 NOUVEAU : Scanner une sourate spécifique pour un récitateur (à la demande)
   async getSpecificRecitation(
     reciterName: string,
-    surahNumber: number
+    surahNumber: number,
+    options?: { forceRefresh?: boolean },
   ): Promise<PremiumContent | null> {
     try {
       debugLog(
-        `🔍 Recherche sourate ${surahNumber} pour ${reciterName} depuis Infomaniak`
+        `🔍 Recherche sourate ${surahNumber} pour ${reciterName} depuis Infomaniak`,
       );
+
+      const surahCode = surahNumber.toString().padStart(3, "0");
+      const cacheBust =
+        options?.forceRefresh !== false ? `&_=${Date.now()}` : "";
 
       // 🚀 NOUVEAU : Utiliser l'API Infomaniak pour récupérer les infos de la sourate
       const token = await AsyncStorage.getItem("auth_token");
       const response = await fetch(
         `${AppConfig.RECITATIONS_API}?action=surah&reciter=${encodeURIComponent(
-          reciterName
-        )}&surah=${surahNumber.toString().padStart(3, "0")}`,
+          reciterName,
+        )}&surah=${surahCode}${cacheBust}`,
         {
           headers: {
             Accept: "application/json",
+            "Cache-Control": "no-cache",
+            Pragma: "no-cache",
             ...(token ? { Authorization: `Bearer ${token}` } : {}),
           },
-        }
+        },
       );
       const result = await response.json();
 
@@ -2534,19 +2571,48 @@ class PremiumContentManager {
       const downloadPath = await this.isContentDownloaded(recitationId);
       const isDownloaded = !!downloadPath;
 
+      let fileSizeMb =
+        typeof surahData.fileSizeMB === "number"
+          ? surahData.fileSizeMB
+          : parseFloat(surahData.fileSizeMB) || 0;
+
+      // Fichier local : priorité à la taille réelle (ex. remplacement 40 Mo → 171 Mo sur le serveur)
+      if (downloadPath) {
+        const localMb = await this.getLocalFileSizeMb(downloadPath);
+        if (localMb > 0) {
+          fileSizeMb = localMb;
+          debugLog(`📏 Taille locale ${recitationId}: ${localMb} Mo`);
+        }
+      }
+
       // Parser les infos de la sourate
       const parsedInfo = this.parseQuranFileName(
-        `${surahNumber.toString().padStart(3, "0")}.mp3`,
-        reciterName
+        `${surahCode}.mp3`,
+        reciterName,
       );
+
+      let durationMs = 0;
+      if (typeof surahData.durationMs === "number" && surahData.durationMs > 0) {
+        durationMs = Math.round(surahData.durationMs);
+      } else if (
+        typeof surahData.durationSeconds === "number" &&
+        surahData.durationSeconds > 0
+      ) {
+        durationMs = Math.round(surahData.durationSeconds * 1000);
+      }
 
       const recitation: PremiumContent = {
         id: recitationId,
         type: "quran",
         title: parsedInfo.fullTitle,
         description: `Sourate ${parsedInfo.surahNumber}: ${parsedInfo.surahName} récitée par ${reciterName}`,
-        fileUrl: surahData.downloadUrl, // 🚀 FIX: Utiliser l'URL de téléchargement directe
-        fileSize: surahData.fileSizeMB,
+        fileUrl:
+          surahData.streamUrl ||
+          (typeof surahData.downloadUrl === "string"
+            ? surahData.downloadUrl.replace(/action=download/g, "action=stream")
+            : surahData.downloadUrl),
+        fileSize: fileSizeMb,
+        durationMs: durationMs > 0 ? durationMs : undefined,
         version: "1.0",
         isDownloaded: isDownloaded,
         downloadPath: downloadPath || undefined,
@@ -2558,13 +2624,13 @@ class PremiumContentManager {
       debugLog(
         `✅ Récitation trouvée: ${parsedInfo.fullTitle} (${
           isDownloaded ? "Téléchargée" : "Streaming"
-        })`
+        })`,
       );
       return recitation;
     } catch (error) {
       errorLog(
         `❌ Erreur recherche récitation ${reciterName}/${surahNumber}:`,
-        error
+        error,
       );
       // 🚀 FALLBACK : Essayer une autre source si Infomaniak échoue
       return null;
@@ -2576,7 +2642,7 @@ class PremiumContentManager {
     // Basé sur les données réelles de vos fichiers turki/
     const sizeEstimates: { [key: number]: number } = {
       1: 0.4, // Al-Fatiha
-      2: 60, // Al-Baqara (la plus longue)
+      2: 171, // Al-Baqara (qualité haute / non compressée)
       3: 35, // Al-Imran
       4: 40, // An-Nisa
       5: 30, // Al-Maidah
@@ -2623,9 +2689,8 @@ class PremiumContentManager {
     legacyFilesFound: number;
   }> {
     try {
-      const downloadedContent = await LocalStorageManager.getPremium(
-        "DOWNLOADED_CONTENT"
-      );
+      const downloadedContent =
+        await LocalStorageManager.getPremium("DOWNLOADED_CONTENT");
       if (!downloadedContent) {
         return {
           hasConflicts: false,
@@ -2642,7 +2707,7 @@ class PremiumContentManager {
       // Analyser tous les téléchargements
       for (const [contentId, info] of Object.entries(downloaded) as [
         string,
-        any
+        any,
       ][]) {
         const filePath = info.downloadPath as string;
         const fileName = filePath.split("/").pop() || "";
@@ -2659,13 +2724,18 @@ class PremiumContentManager {
       }
 
       // Identifier les conflits
-      const conflicts = Object.entries(fileNameMap)
-        .filter(([fileName, contentIds]) => contentIds.length > 1)
-        .map(([fileName, contentIds]) => ({ fileName, contentIds }));
+      const conflicts = Object.entries(fileNameMap).reduce<
+        { fileName: string; contentIds: string[] }[]
+      >((acc, [fileName, contentIds]) => {
+        if (contentIds.length > 1) {
+          acc.push({ fileName, contentIds });
+        }
+        return acc;
+      }, []);
 
       debugLog(`🔍 Diagnostic noms de fichiers:`);
       debugLog(
-        `   📊 Total téléchargements: ${Object.keys(downloaded).length}`
+        `   📊 Total téléchargements: ${Object.keys(downloaded).length}`,
       );
       debugLog(`   ⚠️ Fichiers legacy: ${legacyFilesFound}`);
       debugLog(`   🔴 Conflits détectés: ${conflicts.length}`);
@@ -2673,8 +2743,8 @@ class PremiumContentManager {
       conflicts.forEach((conflict) => {
         debugLog(
           `   💥 Conflit: ${conflict.fileName} → ${conflict.contentIds.join(
-            ", "
-          )}`
+            ", ",
+          )}`,
         );
       });
 
@@ -2703,7 +2773,7 @@ class PremiumContentManager {
   calculateBandwidthCosts(
     fileSizeMB: number,
     downloadCount: number,
-    strategy: "download" | "streaming" | "progressive"
+    strategy: "download" | "streaming" | "progressive",
   ): {
     costCHF: number;
     costUSD: number;
@@ -2749,7 +2819,7 @@ class PremiumContentManager {
       quality: "low" | "medium" | "high";
       allowCaching: boolean;
       connectionType: "wifi" | "mobile";
-    }
+    },
   ): Promise<string | null> {
     try {
       debugLog(`🎵 Streaming progressif pour: ${content.title}`);
@@ -2766,7 +2836,7 @@ class PremiumContentManager {
       const sessionId = await this.streamingManager.createStreamingSession(
         content.id,
         optimalUrl,
-        this.estimateContentDuration(content)
+        this.estimateContentDuration(content),
       );
 
       debugLog(`✅ Session streaming progressif créée: ${sessionId}`);
@@ -2800,13 +2870,13 @@ class PremiumContentManager {
    */
   async getCompressedAudioUrl(
     originalUrl: string,
-    compressionLevel: "light" | "medium" | "aggressive"
+    compressionLevel: "light" | "medium" | "aggressive",
   ): Promise<string> {
     try {
       // Utiliser le CDN Optimizer pour la compression à la volée
       const optimizedPath = await this.cdnOptimizer.getOptimizedFile(
         `compressed_${compressionLevel}`,
-        originalUrl
+        originalUrl,
       );
       return optimizedPath || originalUrl;
     } catch (error) {
@@ -2828,9 +2898,8 @@ class PremiumContentManager {
       }
 
       // Récupérer les fichiers téléchargés depuis AsyncStorage
-      const downloadedContent = await LocalStorageManager.getPremium(
-        "DOWNLOADED_CONTENT"
-      );
+      const downloadedContent =
+        await LocalStorageManager.getPremium("DOWNLOADED_CONTENT");
       const downloaded = downloadedContent ? JSON.parse(downloadedContent) : {};
 
       let syncedCount = 0;
@@ -2843,82 +2912,136 @@ class PremiumContentManager {
         ...catalog.quranRecitations.map((item) => ({ ...item, type: "quran" })),
       ];
 
-      for (const content of allContent) {
-        // Vérifier si le fichier existe localement (stockage interne)
-        let localPath = await this.checkNativeDownloadForContent(content.id);
+      type SyncOutcome = {
+        id: string;
+        migratedDelta: number;
+        syncedHit: boolean;
+        updated: boolean;
+        setEntry?: {
+          downloadPath: string;
+          downloadDate: string;
+          fileSize: number;
+          version: string;
+        };
+        del?: boolean;
+      };
 
-        // 🚀 NOUVEAU : Si pas trouvé en interne, vérifier le stockage externe et migrer
-        if (!localPath) {
-          const externalPath = await this.checkExternalDownloadPath(content.id);
-          if (externalPath) {
-            debugLog(
-              `🔄 Fichier trouvé en externe, migration vers interne: ${content.id}`
+      const outcomes: SyncOutcome[] = await Promise.all(
+        allContent.map(async (content): Promise<SyncOutcome> => {
+          let migratedDelta = 0;
+          let localPath = await this.checkNativeDownloadForContent(content.id);
+
+          if (!localPath) {
+            const externalPath = await this.checkExternalDownloadPath(
+              content.id,
             );
-            localPath = await this.migrateFileToInternal(
-              externalPath,
-              content.id
-            );
-            if (localPath) {
-              migratedCount++;
-              debugLog(`✅ Fichier migré: ${content.id} -> ${localPath}`);
+            if (externalPath) {
+              debugLog(
+                `🔄 Fichier trouvé en externe, migration vers interne: ${content.id}`,
+              );
+              localPath = await this.migrateFileToInternal(
+                externalPath,
+                content.id,
+              );
+              if (localPath) {
+                migratedDelta += 1;
+                debugLog(`✅ Fichier migré: ${content.id} -> ${localPath}`);
+              }
             }
           }
-        }
 
-        if (localPath) {
-          // Le fichier existe localement
-          if (
-            !downloaded[content.id] ||
-            downloaded[content.id].downloadPath !== localPath
-          ) {
-            // Mettre à jour AsyncStorage avec le chemin local
-            downloaded[content.id] = {
-              downloadPath: localPath,
-              downloadDate: new Date().toISOString(),
-              fileSize: content.fileSize,
-              version: content.version,
+          if (localPath) {
+            const needsUpdate =
+              !downloaded[content.id] ||
+              downloaded[content.id].downloadPath !== localPath;
+            if (needsUpdate) {
+              debugLog(`✅ Synchronisé: ${content.id} -> ${localPath}`);
+              return {
+                id: content.id,
+                migratedDelta,
+                syncedHit: true,
+                updated: true,
+                setEntry: {
+                  downloadPath: localPath,
+                  downloadDate: new Date().toISOString(),
+                  fileSize: content.fileSize,
+                  version: content.version,
+                },
+              };
+            }
+            return {
+              id: content.id,
+              migratedDelta,
+              syncedHit: true,
+              updated: false,
             };
-            updatedCount++;
-            debugLog(`✅ Synchronisé: ${content.id} -> ${localPath}`);
           }
-          syncedCount++;
-        } else {
-          // 🚀 NOUVEAU : Vérifier le stockage externe avant de nettoyer
-          const externalPath = await this.checkExternalDownloadPath(content.id);
-          if (externalPath) {
+
+          const externalPath2 = await this.checkExternalDownloadPath(
+            content.id,
+          );
+          if (externalPath2) {
             debugLog(
-              `🔄 Fichier trouvé en externe, migration vers interne: ${content.id}`
+              `🔄 Fichier trouvé en externe, migration vers interne: ${content.id}`,
             );
             const migratedPath = await this.migrateFileToInternal(
-              externalPath,
-              content.id
+              externalPath2,
+              content.id,
             );
             if (migratedPath) {
-              // Mettre à jour AsyncStorage avec le nouveau chemin
-              downloaded[content.id] = {
-                downloadPath: migratedPath,
-                downloadDate: new Date().toISOString(),
-                fileSize: content.fileSize,
-                version: content.version,
-              };
-              updatedCount++;
-              syncedCount++;
-              migratedCount++;
               debugLog(`✅ Fichier migré: ${content.id} -> ${migratedPath}`);
-            } else {
-              // Migration échouée, nettoyer AsyncStorage
-              delete downloaded[content.id];
-              updatedCount++;
-              debugLog(`🧹 Nettoyé: ${content.id} (migration échouée)`);
+              return {
+                id: content.id,
+                migratedDelta: migratedDelta + 1,
+                syncedHit: true,
+                updated: true,
+                setEntry: {
+                  downloadPath: migratedPath,
+                  downloadDate: new Date().toISOString(),
+                  fileSize: content.fileSize,
+                  version: content.version,
+                },
+              };
             }
-          } else {
-            // Le fichier n'existe pas localement ni en externe, nettoyer AsyncStorage
-            if (downloaded[content.id]) {
-              delete downloaded[content.id];
-              updatedCount++;
-              debugLog(`🧹 Nettoyé: ${content.id} (fichier manquant)`);
-            }
+            debugLog(`🧹 Nettoyé: ${content.id} (migration échouée)`);
+            return {
+              id: content.id,
+              migratedDelta,
+              syncedHit: false,
+              updated: true,
+              del: true,
+            };
           }
+
+          if (downloaded[content.id]) {
+            debugLog(`🧹 Nettoyé: ${content.id} (fichier manquant)`);
+            return {
+              id: content.id,
+              migratedDelta,
+              syncedHit: false,
+              updated: true,
+              del: true,
+            };
+          }
+
+          return {
+            id: content.id,
+            migratedDelta,
+            syncedHit: false,
+            updated: false,
+          };
+        }),
+      );
+
+      for (const o of outcomes) {
+        migratedCount += o.migratedDelta;
+        if (o.syncedHit) syncedCount++;
+        if (o.updated) updatedCount++;
+        if (o.setEntry) {
+          downloaded[o.id] = o.setEntry;
+        }
+        if (o.del) {
+          delete downloaded[o.id];
         }
       }
 
@@ -2928,14 +3051,14 @@ class PremiumContentManager {
           "DOWNLOADED_CONTENT",
           downloaded,
           true,
-          true
+          true,
         );
         debugLog(
-          `✅ Synchronisation terminée: ${syncedCount} fichiers trouvés, ${updatedCount} mises à jour, ${migratedCount} migrés`
+          `✅ Synchronisation terminée: ${syncedCount} fichiers trouvés, ${updatedCount} mises à jour, ${migratedCount} migrés`,
         );
       } else {
         debugLog(
-          `✅ Synchronisation terminée: ${syncedCount} fichiers trouvés, aucune mise à jour nécessaire`
+          `✅ Synchronisation terminée: ${syncedCount} fichiers trouvés, aucune mise à jour nécessaire`,
         );
       }
     } catch (error) {
@@ -2970,61 +3093,46 @@ class PremiumContentManager {
 
   // 🚀 NOUVEAU : Vérifier le stockage externe pour un fichier
   private async checkExternalDownloadPath(
-    contentId: string
+    contentId: string,
   ): Promise<string | null> {
     try {
       // 🚀 NOUVEAU : Vérifier le dossier Quran externe pour les récitations
       if (contentId.startsWith("quran_") || contentId.startsWith("reciter_")) {
-        // 🚀 NOUVEAU : Normaliser les IDs pour gérer les différences d'ID
         const possibleIds = this.normalizeQuranId(contentId);
+        const externalPremiumDir = `${RNFS.ExternalDirectoryPath}/Downloads/premium_content`;
+        const externalPremiumDirAlt = `${RNFS.ExternalDirectoryPath}/Download/premium_content`;
+        const externalQuranDir = `${RNFS.ExternalDirectoryPath}/Downloads/quran`;
+        const externalQuranDirAlt = `${RNFS.ExternalDirectoryPath}/Download/quran`;
 
+        const checks: { path: string; label: string }[] = [];
         for (const id of possibleIds) {
-          // Vérifier d'abord dans le dossier premium_content (ancien emplacement)
-          const externalPremiumDir = `${RNFS.ExternalDirectoryPath}/Downloads/premium_content`;
-          const premiumFilePath = `${externalPremiumDir}/${id}.mp3`;
-          const premiumExists = await RNFS.exists(premiumFilePath);
+          checks.push({
+            path: `${externalPremiumDir}/${id}.mp3`,
+            label: "premium",
+          });
+          checks.push({
+            path: `${externalPremiumDirAlt}/${id}.mp3`,
+            label: "premium alt",
+          });
+          checks.push({
+            path: `${externalQuranDir}/${id}.mp3`,
+            label: "quran",
+          });
+          checks.push({
+            path: `${externalQuranDirAlt}/${id}.mp3`,
+            label: "quran alt",
+          });
+        }
 
-          if (premiumExists) {
+        const existsFlags = await Promise.all(
+          checks.map((c) => RNFS.exists(c.path)),
+        );
+        for (let i = 0; i < checks.length; i++) {
+          if (existsFlags[i]) {
             debugLog(
-              `✅ Fichier Quran externe trouvé (premium): ${premiumFilePath}`
+              `✅ Fichier Quran externe trouvé (${checks[i].label}): ${checks[i].path}`,
             );
-            return premiumFilePath;
-          }
-
-          // Vérifier aussi le dossier Download/premium_content (sans s)
-          const externalPremiumDirAlt = `${RNFS.ExternalDirectoryPath}/Download/premium_content`;
-          const premiumFilePathAlt = `${externalPremiumDirAlt}/${id}.mp3`;
-          const premiumExistsAlt = await RNFS.exists(premiumFilePathAlt);
-
-          if (premiumExistsAlt) {
-            debugLog(
-              `✅ Fichier Quran externe trouvé (premium alt): ${premiumFilePathAlt}`
-            );
-            return premiumFilePathAlt;
-          }
-
-          // Vérifier dans le dossier Quran dédié
-          const externalQuranDir = `${RNFS.ExternalDirectoryPath}/Downloads/quran`;
-          const quranFilePath = `${externalQuranDir}/${id}.mp3`;
-          const quranExists = await RNFS.exists(quranFilePath);
-
-          if (quranExists) {
-            debugLog(
-              `✅ Fichier Quran externe trouvé (quran): ${quranFilePath}`
-            );
-            return quranFilePath;
-          }
-
-          // Vérifier aussi le dossier Download/quran (sans s)
-          const externalQuranDirAlt = `${RNFS.ExternalDirectoryPath}/Download/quran`;
-          const quranFilePathAlt = `${externalQuranDirAlt}/${id}.mp3`;
-          const quranExistsAlt = await RNFS.exists(quranFilePathAlt);
-
-          if (quranExistsAlt) {
-            debugLog(
-              `✅ Fichier Quran externe trouvé (quran alt): ${quranFilePathAlt}`
-            );
-            return quranFilePathAlt;
+            return checks[i].path;
           }
         }
       }
@@ -3032,17 +3140,18 @@ class PremiumContentManager {
       // Vérifier le dossier Downloads du stockage externe (pour les adhans)
       const externalDownloadDir = `${RNFS.ExternalDirectoryPath}/Downloads/premium_content`;
       const filePath = `${externalDownloadDir}/${contentId}.mp3`;
-      const exists = await RNFS.exists(filePath);
+      const externalDownloadDirAlt = `${RNFS.ExternalDirectoryPath}/Download/premium_content`;
+      const filePathAlt = `${externalDownloadDirAlt}/${contentId}.mp3`;
+
+      const [exists, existsAlt] = await Promise.all([
+        RNFS.exists(filePath),
+        RNFS.exists(filePathAlt),
+      ]);
 
       if (exists) {
         debugLog(`✅ Fichier externe trouvé: ${filePath}`);
         return filePath;
       }
-
-      // Vérifier aussi le dossier Download (sans s)
-      const externalDownloadDirAlt = `${RNFS.ExternalDirectoryPath}/Download/premium_content`;
-      const filePathAlt = `${externalDownloadDirAlt}/${contentId}.mp3`;
-      const existsAlt = await RNFS.exists(filePathAlt);
 
       if (existsAlt) {
         debugLog(`✅ Fichier externe trouvé (alt): ${filePathAlt}`);
@@ -3053,7 +3162,7 @@ class PremiumContentManager {
     } catch (error) {
       debugLog(
         `❌ Erreur vérification stockage externe pour ${contentId}:`,
-        error
+        error,
       );
       return null;
     }
@@ -3062,7 +3171,7 @@ class PremiumContentManager {
   // 🚀 NOUVEAU : Migrer un fichier du stockage externe vers le stockage interne
   public async migrateFileToInternal(
     externalPath: string,
-    contentId: string
+    contentId: string,
   ): Promise<string | null> {
     try {
       debugLog(`🔄 Migration de ${externalPath} vers le stockage interne...`);
@@ -3165,7 +3274,7 @@ class PremiumContentManager {
               isDownloaded: !!downloadPath,
               downloadPath: downloadPath || undefined,
             };
-          })
+          }),
         );
 
         console.log("📖 Récitations mises à jour:", updatedQuran);
@@ -3219,11 +3328,11 @@ class PremiumContentManager {
     try {
       await AsyncStorage.setItem(
         "premium_quran_cache",
-        JSON.stringify(recitations)
+        JSON.stringify(recitations),
       );
       await AsyncStorage.setItem(
         "premium_quran_timestamp",
-        Date.now().toString()
+        Date.now().toString(),
       );
       debugLog("✅ Cache récitations Quran sauvegardé");
     } catch (error) {
@@ -3302,9 +3411,8 @@ class PremiumContentManager {
       };
 
       // 1. Vérifier AsyncStorage
-      const storedData = await LocalStorageManager.getPremium(
-        "DOWNLOADED_CONTENT"
-      );
+      const storedData =
+        await LocalStorageManager.getPremium("DOWNLOADED_CONTENT");
       if (storedData) {
         result.asyncStorageData = JSON.parse(storedData);
         debugLog("📦 AsyncStorage data:", result.asyncStorageData);
@@ -3331,11 +3439,15 @@ class PremiumContentManager {
         const mainDirExists = await RNFS.exists(this.downloadDirectory);
         if (mainDirExists) {
           const mainFiles = await RNFS.readDir(this.downloadDirectory);
-          result.filesInMainDir = mainFiles
-            .filter((f) => f.isFile() && f.name.endsWith(".mp3"))
-            .map((f) => f.name);
+          const mainNames: string[] = [];
+          for (const f of mainFiles) {
+            if (f.isFile() && f.name.endsWith(".mp3")) {
+              mainNames.push(f.name);
+            }
+          }
+          result.filesInMainDir = mainNames;
           debugLog(
-            `📁 Dossier principal: ${result.filesInMainDir.length} fichiers`
+            `📁 Dossier principal: ${result.filesInMainDir.length} fichiers`,
           );
         } else {
           debugLog("❌ Dossier principal n'existe pas");
@@ -3350,11 +3462,15 @@ class PremiumContentManager {
         const nativeDirExists = await RNFS.exists(nativeDir);
         if (nativeDirExists) {
           const nativeFiles = await RNFS.readDir(nativeDir);
-          result.filesInNativeDir = nativeFiles
-            .filter((f) => f.isFile() && f.name.endsWith(".mp3"))
-            .map((f) => f.name);
+          const nativeNames: string[] = [];
+          for (const f of nativeFiles) {
+            if (f.isFile() && f.name.endsWith(".mp3")) {
+              nativeNames.push(f.name);
+            }
+          }
+          result.filesInNativeDir = nativeNames;
           debugLog(
-            `📁 Dossier natif: ${result.filesInNativeDir.length} fichiers`
+            `📁 Dossier natif: ${result.filesInNativeDir.length} fichiers`,
           );
         } else {
           debugLog("❌ Dossier natif n'existe pas");
@@ -3369,29 +3485,29 @@ class PremiumContentManager {
         ...result.filesInNativeDir,
       ];
       const asyncStorageFiles = Object.keys(result.asyncStorageData).map(
-        (id) => `${id}.mp3`
+        (id) => `${id}.mp3`,
       );
 
       // Fichiers manquants (dans AsyncStorage mais pas sur disque)
       result.missingFiles = asyncStorageFiles.filter(
-        (file) => !allPhysicalFiles.includes(file)
+        (file) => !allPhysicalFiles.includes(file),
       );
 
       // Fichiers orphelins (sur disque mais pas dans AsyncStorage)
       result.orphanedFiles = allPhysicalFiles.filter(
-        (file) => !asyncStorageFiles.includes(file)
+        (file) => !asyncStorageFiles.includes(file),
       );
 
       // 6. Générer des recommandations
       if (result.missingFiles.length > 0) {
         result.recommendations.push(
-          `${result.missingFiles.length} fichiers manquants détectés - nettoyage AsyncStorage recommandé`
+          `${result.missingFiles.length} fichiers manquants détectés - nettoyage AsyncStorage recommandé`,
         );
       }
 
       if (result.orphanedFiles.length > 0) {
         result.recommendations.push(
-          `${result.orphanedFiles.length} fichiers orphelins détectés - synchronisation recommandée`
+          `${result.orphanedFiles.length} fichiers orphelins détectés - synchronisation recommandée`,
         );
       }
 
@@ -3400,13 +3516,13 @@ class PremiumContentManager {
         result.filesInNativeDir.length === 0
       ) {
         result.recommendations.push(
-          "Aucun fichier téléchargé trouvé - les téléchargements ne persistent pas"
+          "Aucun fichier téléchargé trouvé - les téléchargements ne persistent pas",
         );
       }
 
       if (Object.keys(result.asyncStorageData).length === 0) {
         result.recommendations.push(
-          "AsyncStorage vide - les métadonnées ne persistent pas"
+          "AsyncStorage vide - les métadonnées ne persistent pas",
         );
       }
 
@@ -3475,31 +3591,53 @@ class PremiumContentManager {
       // 2. Mettre à jour AsyncStorage avec les fichiers réels
       const newAsyncStorageData: any = {};
 
-      for (const [contentId, filePath] of allFiles) {
-        try {
-          // Vérifier que le fichier existe et n'est pas corrompu
-          const fileExists = await RNFS.exists(filePath);
-          if (!fileExists) continue;
+      const fileEntries = [...allFiles.entries()];
+      const processResults = await Promise.allSettled(
+        fileEntries.map(async ([contentId, filePath]) => {
+          try {
+            const fileExists = await RNFS.exists(filePath);
+            if (!fileExists) {
+              return { contentId, action: "skip" as const };
+            }
 
-          const stats = await RNFS.stat(filePath);
-          if (stats.size < 1000) {
-            // Fichier trop petit, probablement corrompu
-            await RNFS.unlink(filePath);
-            result.cleanedFiles++;
-            continue;
+            const stats = await RNFS.stat(filePath);
+            if (stats.size < 1000) {
+              await RNFS.unlink(filePath);
+              return { contentId, action: "cleaned" as const };
+            }
+
+            return {
+              contentId,
+              action: "sync" as const,
+              entry: {
+                downloadPath: filePath,
+                downloadedAt: new Date().toISOString(),
+                fileSize: stats.size,
+              },
+            };
+          } catch (error) {
+            return { contentId, action: "error" as const, error };
           }
+        }),
+      );
 
-          // Ajouter aux données AsyncStorage
-          newAsyncStorageData[contentId] = {
-            downloadPath: filePath,
-            downloadedAt: new Date().toISOString(),
-            fileSize: stats.size,
-          };
-
-          result.syncedFiles++;
-        } catch (error) {
-          result.errors.push(`Erreur traitement ${contentId}: ${error}`);
+      for (const settled of processResults) {
+        if (settled.status === "rejected") {
+          result.errors.push(`Erreur traitement: ${settled.reason}`);
+          continue;
         }
+        const r = settled.value;
+        if (r.action === "error") {
+          result.errors.push(`Erreur traitement ${r.contentId}: ${r.error}`);
+          continue;
+        }
+        if (r.action === "cleaned") {
+          result.cleanedFiles++;
+          continue;
+        }
+        if (r.action === "skip") continue;
+        newAsyncStorageData[r.contentId] = r.entry;
+        result.syncedFiles++;
       }
 
       // 3. Sauvegarder les nouvelles données
@@ -3507,7 +3645,7 @@ class PremiumContentManager {
         "DOWNLOADED_CONTENT",
         newAsyncStorageData,
         true,
-        true
+        true,
       );
 
       // 4. Invalider les caches du catalogue pour forcer un rechargement
@@ -3563,7 +3701,7 @@ class PremiumContentManager {
       result.details.push(
         `📊 Avant téléchargement: ${
           beforeDownload ? "déjà téléchargé" : "non téléchargé"
-        }`
+        }`,
       );
 
       // 3. Effectuer le téléchargement
@@ -3572,14 +3710,14 @@ class PremiumContentManager {
         content,
         (progress) => {
           result.details.push(`📊 Progression: ${progress}%`);
-        }
+        },
       );
 
       result.downloadSuccess = downloadSuccess;
       result.details.push(
         downloadSuccess
           ? "✅ Téléchargement réussi"
-          : "❌ Téléchargement échoué"
+          : "❌ Téléchargement échoué",
       );
 
       // 4. Vérifier si le fichier existe
@@ -3592,13 +3730,12 @@ class PremiumContentManager {
       result.details.push(
         fileExists
           ? `✅ Fichier trouvé: ${expectedPath}`
-          : `❌ Fichier manquant: ${expectedPath}`
+          : `❌ Fichier manquant: ${expectedPath}`,
       );
 
       // 5. Vérifier AsyncStorage
-      const asyncStorageData = await LocalStorageManager.getPremium(
-        "DOWNLOADED_CONTENT"
-      );
+      const asyncStorageData =
+        await LocalStorageManager.getPremium("DOWNLOADED_CONTENT");
       const downloaded = asyncStorageData ? JSON.parse(asyncStorageData) : {};
       const isInAsyncStorage =
         downloaded[contentId] && downloaded[contentId].downloadPath;
@@ -3607,19 +3744,19 @@ class PremiumContentManager {
       result.details.push(
         isInAsyncStorage
           ? "✅ AsyncStorage mis à jour"
-          : "❌ AsyncStorage non mis à jour"
+          : "❌ AsyncStorage non mis à jour",
       );
 
       // 6. Vérifier le cache du catalogue
       const updatedCatalog = await this.getPremiumCatalog();
       const catalogItem = updatedCatalog?.adhanVoices?.find(
-        (a) => a.id === contentId
+        (a) => a.id === contentId,
       );
       const isInCatalog = catalogItem?.isDownloaded;
 
       result.catalogUpdated = !!isInCatalog;
       result.details.push(
-        isInCatalog ? "✅ Catalogue mis à jour" : "❌ Catalogue non mis à jour"
+        isInCatalog ? "✅ Catalogue mis à jour" : "❌ Catalogue non mis à jour",
       );
 
       // 7. Vérifier avec isContentDownloaded
@@ -3627,7 +3764,7 @@ class PremiumContentManager {
       result.details.push(
         `📊 Après téléchargement: ${
           afterDownload ? "détecté comme téléchargé" : "non détecté"
-        }`
+        }`,
       );
 
       debugLog("🧪 Test terminé:", result);
@@ -3648,7 +3785,7 @@ class PremiumContentManager {
   // 🚀 NOUVEAU : Téléchargement forcé avec garantie de persistance
   public async forceDownloadWithPersistence(
     contentId: string,
-    onProgress?: (progress: number) => void
+    onProgress?: (progress: number) => void,
   ): Promise<{
     success: boolean;
     filePath: string | null;
@@ -3785,94 +3922,123 @@ class PremiumContentManager {
         `${RNFS.ExternalDirectoryPath}/Downloads/premium_content`,
       ];
 
-      let migratedCount = 0;
-
-      for (const externalPath of externalPaths) {
-        try {
-          const files = await RNFS.readDir(externalPath);
-          for (const file of files) {
-            if (file.isFile() && file.name.endsWith(".mp3")) {
-              // Détecter les fichiers Quran par leur nom
-              if (file.name.startsWith("quran_")) {
-                const match = file.name.match(/^quran_(.+?)_\d+\.mp3$/);
-                if (match) {
-                  const reciterName = match[1];
-                  const contentId = `reciter_${reciterName}`;
-                  const reciterNameFormatted =
-                    this.extractReciterNameFromId(contentId);
-                  const reciterFolder = `${this.quranDirectory}/${reciterNameFormatted}`;
-                  const fileName = contentId + ".mp3";
-                  const newPath = `${reciterFolder}/${fileName}`;
-
-                  debugLog(
-                    `📖 Migration forcée Quran: ${file.name} -> ${newPath}`
-                  );
-
-                  try {
-                    // Créer le dossier du récitateur s'il n'existe pas
-                    try {
-                      await RNFS.mkdir(reciterFolder);
-                      debugLog(`📁 Dossier récitateur créé: ${reciterFolder}`);
-                    } catch (mkdirError) {
-                      // Le dossier existe déjà, c'est normal
-                      debugLog(
-                        `📁 Dossier récitateur existe déjà: ${reciterFolder}`
-                      );
-                    }
-
-                    // Copier vers le nouveau chemin
-                    await RNFS.copyFile(file.path, newPath);
-
-                    // Vérifier que la copie a réussi
-                    const exists = await RNFS.exists(newPath);
-                    if (exists) {
-                      // Mettre à jour AsyncStorage
-                      const downloadedContent =
-                        await LocalStorageManager.getPremium(
-                          "DOWNLOADED_CONTENT"
-                        );
-                      const downloaded = downloadedContent
-                        ? JSON.parse(downloadedContent)
-                        : {};
-
-                      downloaded[contentId] = {
-                        downloadPath: newPath,
-                        downloadedAt: new Date().toISOString(),
-                        fileSize: 0, // Sera mis à jour lors de la synchronisation
-                        migratedAt: new Date().toISOString(),
-                      };
-
-                      await LocalStorageManager.savePremium(
-                        "DOWNLOADED_CONTENT",
-                        downloaded,
-                        true,
-                        true
-                      );
-
-                      // Supprimer l'ancien fichier
-                      await RNFS.unlink(file.path);
-
-                      migratedCount++;
-                      debugLog(`✅ Fichier Quran migré: ${contentId}`);
-                    }
-                  } catch (error) {
-                    debugLog(
-                      `❌ Erreur migration fichier ${file.name}:`,
-                      error
-                    );
-                  }
-                }
-              }
-            }
+      const dirLists = await Promise.all(
+        externalPaths.map(async (externalPath) => {
+          try {
+            return await RNFS.readDir(externalPath);
+          } catch (error) {
+            debugLog(`⚠️ Erreur scan dossier externe ${externalPath}:`, error);
+            return [] as Awaited<ReturnType<typeof RNFS.readDir>>;
           }
-        } catch (error) {
-          debugLog(`⚠️ Erreur scan dossier externe ${externalPath}:`, error);
+        }),
+      );
+
+      type QuranMigrateJob = {
+        fileName: string;
+        filePath: string;
+        contentId: string;
+        newPath: string;
+        reciterFolder: string;
+      };
+
+      const jobs: QuranMigrateJob[] = [];
+      for (let i = 0; i < externalPaths.length; i++) {
+        for (const file of dirLists[i]) {
+          if (
+            file.isFile() &&
+            file.name.endsWith(".mp3") &&
+            file.name.startsWith("quran_")
+          ) {
+            const match = file.name.match(/^quran_(.+?)_\d+\.mp3$/);
+            if (!match) continue;
+            const reciterName = match[1];
+            const contentId = `reciter_${reciterName}`;
+            const reciterNameFormatted =
+              this.extractReciterNameFromId(contentId);
+            const reciterFolder = `${this.quranDirectory}/${reciterNameFormatted}`;
+            const fileName = contentId + ".mp3";
+            const newPath = `${reciterFolder}/${fileName}`;
+            jobs.push({
+              fileName: file.name,
+              filePath: file.path,
+              contentId,
+              newPath,
+              reciterFolder,
+            });
+          }
         }
       }
 
+      const downloadedContentRaw =
+        await LocalStorageManager.getPremium("DOWNLOADED_CONTENT");
+      const downloaded: Record<string, unknown> = downloadedContentRaw
+        ? JSON.parse(downloadedContentRaw)
+        : {};
+
+      const diskResults = await Promise.allSettled(
+        jobs.map(async (job) => {
+          debugLog(
+            `📖 Migration forcée Quran: ${job.fileName} -> ${job.newPath}`,
+          );
+          try {
+            try {
+              await RNFS.mkdir(job.reciterFolder);
+              debugLog(`📁 Dossier récitateur créé: ${job.reciterFolder}`);
+            } catch {
+              debugLog(
+                `📁 Dossier récitateur existe déjà: ${job.reciterFolder}`,
+              );
+            }
+            await RNFS.copyFile(job.filePath, job.newPath);
+            const exists = await RNFS.exists(job.newPath);
+            if (!exists) return null;
+            return {
+              contentId: job.contentId,
+              newPath: job.newPath,
+              oldPath: job.filePath,
+            };
+          } catch (error) {
+            debugLog(`❌ Erreur migration fichier ${job.fileName}:`, error);
+            return null;
+          }
+        }),
+      );
+
+      const toUnlink: string[] = [];
+      let migratedCount = 0;
+      for (const r of diskResults) {
+        if (r.status !== "fulfilled" || !r.value) continue;
+        const { contentId, newPath, oldPath } = r.value;
+        downloaded[contentId] = {
+          downloadPath: newPath,
+          downloadedAt: new Date().toISOString(),
+          fileSize: 0,
+          migratedAt: new Date().toISOString(),
+        };
+        toUnlink.push(oldPath);
+        migratedCount++;
+        debugLog(`✅ Fichier Quran migré: ${contentId}`);
+      }
+
       if (migratedCount > 0) {
+        await LocalStorageManager.savePremium(
+          "DOWNLOADED_CONTENT",
+          downloaded,
+          true,
+          true,
+        );
+        await Promise.allSettled(
+          toUnlink.map((oldPath) =>
+            RNFS.unlink(oldPath).catch((unlinkErr) =>
+              debugLog(
+                `⚠️ Impossible de supprimer l'ancien fichier:`,
+                unlinkErr,
+              ),
+            ),
+          ),
+        );
         debugLog(
-          `🔄 Migration forcée terminée: ${migratedCount} fichiers Quran migrés`
+          `🔄 Migration forcée terminée: ${migratedCount} fichiers Quran migrés`,
         );
       } else {
         debugLog("✅ Aucun fichier Quran externe à migrer");
@@ -3907,30 +4073,36 @@ class PremiumContentManager {
 
       // Scanner le dossier Quran
       const quranFiles = await RNFS.readDir(this.quranDirectory);
-      for (const reciterFolder of quranFiles) {
-        if (reciterFolder.isDirectory()) {
+      const reciterDirs = quranFiles.filter((f) => f.isDirectory());
+      const perDir = await Promise.all(
+        reciterDirs.map(async (reciterFolder) => {
           try {
             const reciterFiles = await RNFS.readDir(reciterFolder.path);
-            for (const file of reciterFiles) {
-              if (file.isFile() && file.name.endsWith(".mp3")) {
+            const mp3s = reciterFiles.filter(
+              (f) => f.isFile() && f.name.endsWith(".mp3"),
+            );
+            return await Promise.all(
+              mp3s.map(async (file) => {
                 const fileStats = await RNFS.stat(file.path);
-                result.files.push({
+                return {
                   reciterName: reciterFolder.name,
                   fileName: file.name,
                   filePath: file.path,
                   fileSize: fileStats.size,
-                });
-                result.totalFiles++;
-              }
-            }
+                };
+              }),
+            );
           } catch (reciterError) {
             debugLog(
               `⚠️ Erreur scan dossier récitateur ${reciterFolder.name}:`,
-              reciterError
+              reciterError,
             );
+            return [];
           }
-        }
-      }
+        }),
+      );
+      result.files = perDir.flat();
+      result.totalFiles = result.files.length;
 
       debugLog(`✅ ${result.totalFiles} fichiers Quran trouvés`);
       return result;
@@ -3958,48 +4130,42 @@ class PremiumContentManager {
       // Scanner le dossier Quran
       const quranFiles = await RNFS.readDir(this.quranDirectory);
 
-      for (const reciterFolder of quranFiles) {
-        if (reciterFolder.isDirectory()) {
+      const reciterDirs = quranFiles.filter((folder) => folder.isDirectory());
+      await Promise.allSettled(
+        reciterDirs.map(async (reciterFolder) => {
           try {
-            // Supprimer tous les fichiers dans le dossier du récitateur
             const reciterFiles = await RNFS.readDir(reciterFolder.path);
-            for (const file of reciterFiles) {
-              if (file.isFile()) {
-                try {
-                  await RNFS.unlink(file.path);
-                  result.deletedFiles++;
-                  debugLog(`🗑️ Fichier supprimé: ${file.name}`);
-                } catch (fileError) {
-                  result.errors.push(
-                    `Erreur suppression fichier ${file.name}: ${fileError}`
-                  );
-                }
+            const filesToDelete: typeof reciterFiles = [];
+            for (const f of reciterFiles) {
+              if (f.isFile()) filesToDelete.push(f);
+            }
+            const fileResults = await Promise.allSettled(
+              filesToDelete.map((file) => RNFS.unlink(file.path)),
+            );
+            fileResults.forEach((r, i) => {
+              if (r.status === "fulfilled") {
+                result.deletedFiles++;
+              } else {
+                result.errors.push(
+                  `Erreur suppression fichier ${filesToDelete[i].name}: ${r.reason}`,
+                );
               }
-            }
-
-            // Supprimer le dossier du récitateur
-            try {
-              await RNFS.unlink(reciterFolder.path);
-              result.deletedFolders++;
-              debugLog(`🗑️ Dossier supprimé: ${reciterFolder.name}`);
-            } catch (folderError) {
-              result.errors.push(
-                `Erreur suppression dossier ${reciterFolder.name}: ${folderError}`
-              );
-            }
+            });
+            await RNFS.unlink(reciterFolder.path);
+            result.deletedFolders++;
+            debugLog(`🗑️ Dossier supprimé: ${reciterFolder.name}`);
           } catch (reciterError) {
             result.errors.push(
-              `Erreur scan dossier ${reciterFolder.name}: ${reciterError}`
+              `Erreur scan/suppression dossier ${reciterFolder.name}: ${reciterError}`,
             );
           }
-        }
-      }
+        }),
+      );
 
       // Nettoyer aussi AsyncStorage des entrées Quran
       try {
-        const downloadedContent = await LocalStorageManager.getPremium(
-          "DOWNLOADED_CONTENT"
-        );
+        const downloadedContent =
+          await LocalStorageManager.getPremium("DOWNLOADED_CONTENT");
         if (downloadedContent) {
           const downloaded = JSON.parse(downloadedContent);
           const cleanedDownloads: any = {};
@@ -4019,7 +4185,7 @@ class PremiumContentManager {
             "DOWNLOADED_CONTENT",
             cleanedDownloads,
             true,
-            true
+            true,
           );
           debugLog("🧹 AsyncStorage nettoyé des entrées Quran");
         }
@@ -4028,7 +4194,7 @@ class PremiumContentManager {
       }
 
       debugLog(
-        `✅ Nettoyage terminé: ${result.deletedFiles} fichiers, ${result.deletedFolders} dossiers supprimés`
+        `✅ Nettoyage terminé: ${result.deletedFiles} fichiers, ${result.deletedFolders} dossiers supprimés`,
       );
       return result;
     } catch (error) {
@@ -4065,15 +4231,9 @@ class PremiumContentManager {
         "cached_adhans_timestamp",
       ];
 
-      for (const key of cacheKeys) {
-        try {
-          await AsyncStorage.removeItem(key);
-          cacheClearedItems.push(key);
-          debugLog(`✅ Cache ${key} supprimé`);
-        } catch (error) {
-          debugLog(`⚠️ Erreur suppression cache ${key}:`, error);
-        }
-      }
+      await AsyncStorage.multiRemove(cacheKeys);
+      cacheClearedItems.push(...cacheKeys);
+      debugLog(`✅ ${cacheKeys.length} clés cache supprimées en batch`);
 
       // 2. Forcer le rechargement du catalogue depuis le serveur
       debugLog("🔄 Rechargement du catalogue depuis le serveur...");
@@ -4090,7 +4250,7 @@ class PremiumContentManager {
       }));
 
       debugLog(
-        `✅ Catalogue rechargé: ${newCatalog.adhanVoices.length} adhans`
+        `✅ Catalogue rechargé: ${newCatalog.adhanVoices.length} adhans`,
       );
       adhanWithSizes.forEach((adhan) => {
         debugLog(`📏 ${adhan.name}: ${adhan.size} MB`);

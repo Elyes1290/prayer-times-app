@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import {
   View,
   Text,
-  TouchableOpacity,
+  Pressable,
   StyleSheet,
   ScrollView,
   Alert,
 } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { MCIcon } from "@/components/icons/AppVectorIcons";
 import { useNativeDownload } from "../hooks/useNativeDownload";
 
 export default function NativeDownloadTest() {
@@ -111,15 +111,15 @@ export default function NativeDownloadTest() {
       </View>
 
       <View style={styles.controls}>
-        <TouchableOpacity
+        <Pressable
           style={styles.restoreButton}
           onPress={handleRestoreDownloads}
         >
-          <MaterialCommunityIcons name="refresh" size={20} color="#fff" />
+          <MCIcon name="refresh" size={20} color="#fff" />
           <Text style={styles.restoreButtonText}>
             Restaurer téléchargements
           </Text>
-        </TouchableOpacity>
+        </Pressable>
       </View>
 
       <View style={styles.downloadsContainer}>
@@ -163,30 +163,30 @@ export default function NativeDownloadTest() {
 
               <View style={styles.downloadActions}>
                 {state.isDownloading ? (
-                  <TouchableOpacity
+                  <Pressable
                     style={styles.cancelButton}
                     onPress={() => handleCancelDownload(download.id)}
                   >
-                    <MaterialCommunityIcons
+                    <MCIcon
                       name="close"
                       size={16}
                       color="#fff"
                     />
                     <Text style={styles.cancelButtonText}>Annuler</Text>
-                  </TouchableOpacity>
+                  </Pressable>
                 ) : (
-                  <TouchableOpacity
+                  <Pressable
                     style={styles.startButton}
                     onPress={() => handleStartDownload(download)}
                     disabled={state.error !== null}
                   >
-                    <MaterialCommunityIcons
+                    <MCIcon
                       name="download"
                       size={16}
                       color="#fff"
                     />
                     <Text style={styles.startButtonText}>Démarrer</Text>
-                  </TouchableOpacity>
+                  </Pressable>
                 )}
               </View>
             </View>
@@ -226,11 +226,7 @@ const styles = StyleSheet.create({
     padding: 16,
     borderRadius: 12,
     marginBottom: 16,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
+    boxShadow: "0px 2px 4px rgba(0,0,0,0.1)",
   },
   title: {
     fontSize: 20,
@@ -264,11 +260,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     padding: 16,
     marginBottom: 16,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
+    boxShadow: "0px 2px 4px rgba(0,0,0,0.1)",
   },
   sectionTitle: {
     fontSize: 16,
@@ -370,11 +362,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     padding: 16,
     marginBottom: 16,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
+    boxShadow: "0px 2px 4px rgba(0,0,0,0.1)",
   },
   debugItem: {
     flexDirection: "row",

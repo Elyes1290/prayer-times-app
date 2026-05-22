@@ -3,7 +3,7 @@ import {
   View,
   Text,
   StyleSheet,
-  TouchableOpacity,
+  Pressable,
   ScrollView,
   Alert,
 } from "react-native";
@@ -122,7 +122,7 @@ const RateLimitDiagnostic: React.FC = () => {
   if (!status) {
     return (
       <View style={styles.container}>
-        <Text style={styles.loading}>Chargement...</Text>
+        <Text style={styles.loading}>Chargement…</Text>
       </View>
     );
   }
@@ -203,7 +203,7 @@ const RateLimitDiagnostic: React.FC = () => {
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>🛠️ Actions</Text>
 
-        <TouchableOpacity
+        <Pressable
           style={styles.button}
           onPress={refreshStatus}
           disabled={isRefreshing}
@@ -211,9 +211,9 @@ const RateLimitDiagnostic: React.FC = () => {
           <Text style={styles.buttonText}>
             {isRefreshing ? "Actualisation..." : "🔄 Actualiser le statut"}
           </Text>
-        </TouchableOpacity>
+        </Pressable>
 
-        <TouchableOpacity
+        <Pressable
           style={styles.button}
           onPress={testApiConnection}
           disabled={isTesting}
@@ -221,20 +221,20 @@ const RateLimitDiagnostic: React.FC = () => {
           <Text style={styles.buttonText}>
             {isTesting ? "Test en cours..." : "🧪 Tester la connexion API"}
           </Text>
-        </TouchableOpacity>
+        </Pressable>
 
-        <TouchableOpacity style={styles.button} onPress={clearApiErrors}>
+        <Pressable style={styles.button} onPress={clearApiErrors}>
           <Text style={styles.buttonText}>
             🧹 Réinitialiser les compteurs d&apos;erreur
           </Text>
-        </TouchableOpacity>
+        </Pressable>
 
-        <TouchableOpacity
+        <Pressable
           style={[styles.button, styles.dangerButton]}
           onPress={forceReconnect}
         >
           <Text style={styles.buttonText}>🚨 Forcer la déconnexion</Text>
-        </TouchableOpacity>
+        </Pressable>
       </View>
 
       <View style={styles.section}>
@@ -288,11 +288,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     padding: 16,
     marginBottom: 16,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
+    boxShadow: "0px 2px 4px rgba(0,0,0,0.1)",
   },
   sectionTitle: {
     fontSize: 18,

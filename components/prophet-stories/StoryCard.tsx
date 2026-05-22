@@ -2,15 +2,15 @@ import React from "react";
 import {
   View,
   Text,
-  TouchableOpacity,
+  Pressable,
   StyleSheet,
   ActivityIndicator,
   Alert,
 } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import { IonIcon } from "@/components/icons/AppVectorIcons";
 import { ThemedText } from "../ThemedText";
 
-export interface StoryCardData {
+interface StoryCardData {
   id: string;
   title: string;
   title_arabic?: string | null;
@@ -118,7 +118,7 @@ export function StoryCard({
   };
 
   return (
-    <TouchableOpacity
+    <Pressable
       style={[
         styles.storyCard,
         story.user_progress > 0 && styles.storyCardWithAccent,
@@ -129,7 +129,6 @@ export function StoryCard({
         },
       ]}
       onPress={onPress}
-      activeOpacity={0.85}
     >
       {/* Barre d'accent gauche quand l'histoire a été commencée */}
       {story.user_progress > 0 && (
@@ -152,16 +151,16 @@ export function StoryCard({
           )}
         </View>
 
-        <TouchableOpacity
+        <Pressable
           onPress={onToggleFavorite}
           style={styles.favoriteButton}
         >
-          <Ionicons
+          <IonIcon
             name={story.is_favorited ? "heart" : "heart-outline"}
             size={22}
             color={story.is_favorited ? "#FF6B6B" : colors.textSecondary}
           />
-        </TouchableOpacity>
+        </Pressable>
       </View>
 
       <View style={styles.storyMeta}>
@@ -172,7 +171,7 @@ export function StoryCard({
               { backgroundColor: colors.primary },
             ]}
           >
-            <Ionicons
+            <IonIcon
               name={(CATEGORY_ICONS[story.category] ?? "book-outline") as any}
               size={12}
               color="white"
@@ -196,7 +195,7 @@ export function StoryCard({
 
         <View style={styles.metaRow}>
           <View style={styles.metaItem}>
-            <Ionicons
+            <IonIcon
               name="time-outline"
               size={15}
               color={colors.textSecondary}
@@ -207,7 +206,7 @@ export function StoryCard({
           </View>
 
           <View style={styles.metaItem}>
-            <Ionicons
+            <IonIcon
               name="eye-outline"
               size={15}
               color={colors.textSecondary}
@@ -219,7 +218,7 @@ export function StoryCard({
 
           {story.rating > 0 && (
             <View style={styles.metaItem}>
-              <Ionicons name="star" size={15} color="#FFD700" />
+              <IonIcon name="star" size={15} color="#FFD700" />
               <Text
                 style={[styles.metaText, { color: colors.textSecondary }]}
               >
@@ -255,14 +254,14 @@ export function StoryCard({
 
       {story.is_premium && (
         <View style={[styles.premiumBadge, { backgroundColor: "#FFD700" }]}>
-          <Ionicons name="star" size={11} color="#000" />
+          <IonIcon name="star" size={11} color="#000" />
           <Text style={styles.premiumText}>Premium</Text>
         </View>
       )}
 
       {story.historical_location && (
         <View style={styles.locationContainer}>
-          <Ionicons
+          <IonIcon
             name="location-outline"
             size={13}
             color={colors.textSecondary}
@@ -276,7 +275,7 @@ export function StoryCard({
       )}
 
       {isConnected && (
-        <TouchableOpacity
+        <Pressable
           style={[
             styles.downloadButton,
             rawStory.isDownloaded && styles.downloadedButton,
@@ -291,7 +290,7 @@ export function StoryCard({
             <ActivityIndicator size="small" color="#fff" />
           ) : (
             <>
-              <Ionicons
+              <IonIcon
                 name={
                   rawStory.isDownloaded ? "checkmark-circle" : "download-outline"
                 }
@@ -303,9 +302,9 @@ export function StoryCard({
               </Text>
             </>
           )}
-        </TouchableOpacity>
+        </Pressable>
       )}
-    </TouchableOpacity>
+    </Pressable>
   );
 }
 
@@ -315,7 +314,6 @@ const styles = StyleSheet.create({
     borderRadius: 18,
     padding: 18,
     borderWidth: 1,
-    elevation: 2,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 8,

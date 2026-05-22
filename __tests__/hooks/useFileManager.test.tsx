@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { render, act } from "@testing-library/react-native";
 
 // Import the actual hook
@@ -80,9 +80,7 @@ describe("useFileManager", () => {
     useFileManagerImpl: any;
   }) {
     const api = useFileManagerImpl();
-    useEffect(() => {
-      onValue(api);
-    }, [api, onValue]);
+    onValue(api);
     return null;
   }
 

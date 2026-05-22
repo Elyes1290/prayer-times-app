@@ -298,9 +298,10 @@ public class QuranAudioServiceModule extends ReactContextBaseJavaModule implemen
      * Charger un audio dans le service
      */
     @ReactMethod
-    public void loadAudioInService(String audioPath, String surah, String reciter, Promise promise) {
+    public void loadAudioInService(String audioPath, String surah, String reciter, int durationMs, Promise promise) {
         try {
-            Log.d(TAG, "🎵 Chargement audio dans le service: " + surah + " - " + reciter);
+            Log.d(TAG, "🎵 Chargement audio dans le service: " + surah + " - " + reciter
+                    + " (durationMs=" + durationMs + ")");
             
             if (!isServiceBound || audioService == null) {
                 Log.w(TAG, "⚠️ Service non lié, démarrage automatique...");
@@ -308,7 +309,7 @@ public class QuranAudioServiceModule extends ReactContextBaseJavaModule implemen
             }
             
             if (audioService != null) {
-                audioService.loadAudio(audioPath, surah, reciter);
+                audioService.loadAudio(audioPath, surah, reciter, durationMs);
                 Log.d(TAG, "✅ Audio chargé dans le service");
                 promise.resolve(true);
             } else {
@@ -415,6 +416,7 @@ public class QuranAudioServiceModule extends ReactContextBaseJavaModule implemen
     public void seekToPosition(int position, Promise promise) {
         try {
             Log.d(TAG, "🎵 Navigation vers position: " + position);
+            android.util.Log.i(QuranSeekDebug.TAG, "RN seekToPosition | ms=" + position);
             
             if (!isServiceBound || audioService == null) {
                 throw new Exception("Service audio non lié");
@@ -799,9 +801,8 @@ public class QuranAudioServiceModule extends ReactContextBaseJavaModule implemen
             String surahName = getSurahNameFromNumber(surahNumber);
             String encodedSurahName = java.net.URLEncoder.encode(surahName, "UTF-8");
             
-            // CORRECTION MAJEURE: Utiliser action=download + token comme dans l'app qui fonctionne
             StringBuilder urlBuilder = new StringBuilder("https://myadhanapp.com/api/recitations.php");
-            urlBuilder.append("?action=download");
+            urlBuilder.append("?action=stream");
             urlBuilder.append("&reciter=").append(encodedReciter);
             // CORRECTION CRITIQUE: Utiliser seulement le numéro formaté comme dans l'app qui fonctionne
             urlBuilder.append("&surah=").append(surahKey);

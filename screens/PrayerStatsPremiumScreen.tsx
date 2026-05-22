@@ -1,11 +1,11 @@
+import { Z_INDEX } from "../constants/zIndex";
 import React, { useEffect, useRef, useState } from "react";
 import {
   View,
   Text,
   ScrollView,
   StyleSheet,
-  Dimensions,
-  TouchableOpacity,
+  Pressable,
   ActivityIndicator,
   RefreshControl,
   ToastAndroid,
@@ -15,11 +15,11 @@ import {
   Modal,
   Alert,
   TextInput,
-  SafeAreaView,
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 // NB: gesture-handler non utilisé en tests (module natif manquant). On fallback sur ScrollView RN.
 import { LinearGradient } from "expo-linear-gradient";
-import { Ionicons } from "@expo/vector-icons";
+import { IonIcon, type IonIconComponentProps } from "@/components/icons/AppVectorIcons";
 import { useRouter } from "expo-router";
 import { useUserStats } from "../hooks/useUserStats";
 import { useUpdateUserStats } from "../hooks/useUpdateUserStats";
@@ -30,20 +30,66 @@ import { useCurrentTheme } from "../hooks/useThemeColor"; // 🔧 Import unifié
 import { useTranslation } from "react-i18next";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const { width } = Dimensions.get("window");
 
 type TabType = "overview" | "progress" | "achievements" | "actions";
 
 interface TabButtonProps {
   tab: TabType;
   title: string;
-  icon: keyof typeof Ionicons.glyphMap;
+  icon: IonIconComponentProps["name"];
   isActive: boolean;
   onPress: () => void;
+  isDark: boolean;
+  primaryColor: string;
+  textSecondaryColor: string;
 }
 
+const TabButton: React.FC<TabButtonProps> = ({
+  tab: _tab,
+  title,
+  icon,
+  isActive,
+  onPress,
+  isDark,
+  primaryColor,
+  textSecondaryColor,
+}) => (
+  <Pressable
+    style={[
+      styles.tabButton,
+      {
+        backgroundColor: isActive
+          ? isDark
+            ? "rgba(102, 187, 106, 0.2)"
+            : "rgba(46, 139, 87, 0.1)"
+          : "transparent",
+        borderBottomWidth: isActive ? 2 : 0,
+        borderBottomColor: primaryColor,
+      },
+    ]}
+    onPress={onPress}
+  >
+    <IonIcon
+      name={icon}
+      size={20}
+      color={isActive ? primaryColor : textSecondaryColor}
+    />
+    <Text
+      style={[
+        styles.tabButtonText,
+        {
+          color: isActive ? primaryColor : textSecondaryColor,
+          fontWeight: isActive ? "600" : "400",
+        },
+      ]}
+    >
+      {title}
+    </Text>
+  </Pressable>
+);
+
 const PrayerStatsPremiumScreen: React.FC = () => {
-  const router = useRouter();
+  const { push } = useRouter();
   const { t } = useTranslation();
   const colors = useThemeColors();
   const currentTheme = useCurrentTheme();
@@ -480,47 +526,6 @@ const PrayerStatsPremiumScreen: React.FC = () => {
     return levelColors[Math.min(level - 1, levelColors.length - 1)];
   };
 
-  // Composants de navigation
-  const TabButton: React.FC<TabButtonProps> = ({
-    tab,
-    title,
-    icon,
-    isActive,
-    onPress,
-  }) => (
-    <TouchableOpacity
-      style={[
-        styles.tabButton,
-        {
-          backgroundColor: isActive
-            ? isDark
-              ? "rgba(102, 187, 106, 0.2)"
-              : "rgba(46, 139, 87, 0.1)"
-            : "transparent",
-          borderBottomWidth: isActive ? 2 : 0,
-          borderBottomColor: colors.primary,
-        },
-      ]}
-      onPress={onPress}
-    >
-      <Ionicons
-        name={icon}
-        size={20}
-        color={isActive ? colors.primary : colors.textSecondary}
-      />
-      <Text
-        style={[
-          styles.tabButtonText,
-          {
-            color: isActive ? colors.primary : colors.textSecondary,
-            fontWeight: isActive ? "600" : "400",
-          },
-        ]}
-      >
-        {title}
-      </Text>
-    </TouchableOpacity>
-  );
 
   // États de chargement et d'erreur
   if (loading && !stats) {
@@ -551,7 +556,7 @@ const PrayerStatsPremiumScreen: React.FC = () => {
         <View style={[styles.overlay, { backgroundColor: colors.background }]}>
           <View style={styles.centerContainer}>
             <View style={styles.premiumIconContainer}>
-              <Ionicons name="star" size={64} color={colors.accent} />
+              <IonIcon name="star" size={64} color={colors.accent} />
             </View>
             <Text style={[styles.premiumTitle, { color: colors.text }]}>
               {t("premium_stats") || "🌟 Statistiques Premium"}
@@ -573,9 +578,9 @@ const PrayerStatsPremiumScreen: React.FC = () => {
                 t("personalized_tips") || "💡 Conseils personnalisés",
                 t("badges_and_achievements") || "🏆 Badges et achievements",
                 t("complete_history") || "📋 Historique complet",
-              ].map((feature, index) => (
-                <View key={index} style={styles.featureItem}>
-                  <Ionicons
+              ].map((feature) => (
+                <View key={feature} style={styles.featureItem}>
+                  <IonIcon
                     name="checkmark-circle"
                     size={18}
                     color={colors.success}
@@ -587,16 +592,16 @@ const PrayerStatsPremiumScreen: React.FC = () => {
               ))}
             </View>
 
-            <TouchableOpacity
+            <Pressable
               style={[styles.premiumButton, { backgroundColor: colors.accent }]}
               onPress={() =>
-                router.push("/settings?openPremium=true&premiumTab=signup")
+                push("/settings?openPremium=true&premiumTab=signup")
               }
             >
               <Text style={styles.premiumButtonText}>
                 {t("become_premium") || "✨ Devenir Premium"}
               </Text>
-            </TouchableOpacity>
+            </Pressable>
           </View>
         </View>
       </ThemedImageBackground>
@@ -608,7 +613,7 @@ const PrayerStatsPremiumScreen: React.FC = () => {
       <ThemedImageBackground style={styles.container}>
         <View style={[styles.overlay, { backgroundColor: colors.background }]}>
           <View style={styles.centerContainer}>
-            <Ionicons name="alert-circle" size={48} color={colors.error} />
+            <IonIcon name="alert-circle" size={48} color={colors.error} />
             <Text style={[styles.errorTitle, { color: colors.text }]}>
               {t("connection_interrupted") || "Connexion interrompue"}
             </Text>
@@ -617,15 +622,15 @@ const PrayerStatsPremiumScreen: React.FC = () => {
             >
               {error}
             </Text>
-            <TouchableOpacity
+            <Pressable
               style={[styles.retryButton, { backgroundColor: colors.primary }]}
               onPress={refresh}
             >
-              <Ionicons name="refresh" size={20} color="white" />
+              <IonIcon name="refresh" size={20} color="white" />
               <Text style={styles.retryButtonText}>
                 {t("retry") || "Réessayer"}
               </Text>
-            </TouchableOpacity>
+            </Pressable>
           </View>
         </View>
       </ThemedImageBackground>
@@ -776,7 +781,7 @@ const PrayerStatsPremiumScreen: React.FC = () => {
               </Text>
               <View style={styles.statsGrid}>
                 <View style={styles.statItem}>
-                  <Ionicons name="calendar" size={24} color={colors.primary} />
+                  <IonIcon name="calendar" size={24} color={colors.primary} />
                   <Text style={[styles.statValue, { color: colors.text }]}>
                     {statsToUse.stats.total_days}
                   </Text>
@@ -787,7 +792,7 @@ const PrayerStatsPremiumScreen: React.FC = () => {
                   </Text>
                 </View>
                 <View style={styles.statItem}>
-                  <Ionicons
+                  <IonIcon
                     name="checkmark-circle"
                     size={24}
                     color={colors.success}
@@ -802,7 +807,7 @@ const PrayerStatsPremiumScreen: React.FC = () => {
                   </Text>
                 </View>
                 <View style={styles.statItem}>
-                  <Ionicons name="flame" size={24} color={colors.error} />
+                  <IonIcon name="flame" size={24} color={colors.error} />
                   <Text style={[styles.statValue, { color: colors.text }]}>
                     {statsToUse.streaks.current_streak}
                   </Text>
@@ -813,7 +818,7 @@ const PrayerStatsPremiumScreen: React.FC = () => {
                   </Text>
                 </View>
                 <View style={styles.statItem}>
-                  <Ionicons name="trophy" size={24} color={colors.accent} />
+                  <IonIcon name="trophy" size={24} color={colors.accent} />
                   <Text style={[styles.statValue, { color: colors.text }]}>
                     {statsToUse.streaks.max_streak}
                   </Text>
@@ -841,8 +846,8 @@ const PrayerStatsPremiumScreen: React.FC = () => {
                 {statsToUse.history
                   .slice(0, 7)
                   .reverse()
-                  .map((day, index) => (
-                    <View key={index} style={styles.consistencyDay}>
+                  .map((day) => (
+                    <View key={(day as any).date} style={styles.consistencyDay}>
                       <Text
                         style={[
                           styles.consistencyDayLabel,
@@ -866,13 +871,13 @@ const PrayerStatsPremiumScreen: React.FC = () => {
                         ]}
                       >
                         {day.complete ? (
-                          <Ionicons name="checkmark" size={16} color="white" />
+                          <IonIcon name="checkmark" size={16} color="white" />
                         ) : day.prayers > 0 ? (
                           <Text style={styles.consistencyDayCount}>
                             {day.prayers}
                           </Text>
                         ) : (
-                          <Ionicons
+                          <IonIcon
                             name="close"
                             size={16}
                             color={colors.textSecondary}
@@ -958,28 +963,28 @@ const PrayerStatsPremiumScreen: React.FC = () => {
                 {t("quick_actions") || "⚡ Actions rapides"}
               </Text>
               <View style={styles.quickActionsGrid}>
-                <TouchableOpacity
+                <Pressable
                   style={[
                     styles.quickActionButton,
                     { backgroundColor: "rgba(102, 187, 106, 0.1)" },
                   ]}
                   onPress={openInsightsModal}
                 >
-                  <Ionicons name="analytics" size={24} color={colors.primary} />
+                  <IonIcon name="analytics" size={24} color={colors.primary} />
                   <Text
                     style={[styles.quickActionText, { color: colors.text }]}
                   >
                     {t("insights") || "Insights"}
                   </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
+                </Pressable>
+                <Pressable
                   style={[
                     styles.quickActionButton,
                     { backgroundColor: "rgba(255, 215, 0, 0.1)" },
                   ]}
                   onPress={shareAchievement}
                 >
-                  <Ionicons
+                  <IonIcon
                     name="share-social"
                     size={24}
                     color={colors.accent}
@@ -989,8 +994,8 @@ const PrayerStatsPremiumScreen: React.FC = () => {
                   >
                     {t("share") || "Partager"}
                   </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
+                </Pressable>
+                <Pressable
                   style={[
                     styles.quickActionButton,
                     { backgroundColor: "rgba(78, 205, 196, 0.1)" },
@@ -1004,7 +1009,7 @@ const PrayerStatsPremiumScreen: React.FC = () => {
                     );
                   }}
                 >
-                  <Ionicons
+                  <IonIcon
                     name="notifications"
                     size={24}
                     color={colors.success}
@@ -1014,21 +1019,21 @@ const PrayerStatsPremiumScreen: React.FC = () => {
                   >
                     {t("reminders") || "Rappels"}
                   </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
+                </Pressable>
+                <Pressable
                   style={[
                     styles.quickActionButton,
                     { backgroundColor: "rgba(255, 107, 107, 0.1)" },
                   ]}
                   onPress={() => setActiveTab("actions")}
                 >
-                  <Ionicons name="add-circle" size={24} color={colors.error} />
+                  <IonIcon name="add-circle" size={24} color={colors.error} />
                   <Text
                     style={[styles.quickActionText, { color: colors.text }]}
                   >
                     {t("add") || "Ajouter"}
                   </Text>
-                </TouchableOpacity>
+                </Pressable>
               </View>
             </View>
           </View>
@@ -1080,17 +1085,17 @@ const PrayerStatsPremiumScreen: React.FC = () => {
                 );
               })}
               <View style={{ flexDirection: "row", gap: 8, marginTop: 8 }}>
-                <TouchableOpacity
+                <Pressable
                   onPress={() => setShowGoalModal(true)}
                   style={[styles.smallButton, { borderColor: colors.primary }]}
                 >
-                  <Ionicons name="create" size={16} color={colors.primary} />
+                  <IonIcon name="create" size={16} color={colors.primary} />
                   <Text
                     style={[styles.smallButtonText, { color: colors.primary }]}
                   >
                     {t("edit_goal") || "Modifier l'objectif"}
                   </Text>
-                </TouchableOpacity>
+                </Pressable>
               </View>
             </View>
             {/* Conseils personnalisés */}
@@ -1099,9 +1104,9 @@ const PrayerStatsPremiumScreen: React.FC = () => {
                 <Text style={[styles.cardTitle, { color: colors.text }]}>
                   {t("personalized_advice") || "💡 Conseils personnalisés"}
                 </Text>
-                {statsToUse.advice.advice.map((advice, index) => (
-                  <View key={index} style={styles.adviceItem}>
-                    <Ionicons name="bulb" size={18} color={colors.accent} />
+                {statsToUse.advice.advice.map((advice) => (
+                  <View key={advice.key} style={styles.adviceItem}>
+                    <IonIcon name="bulb" size={18} color={colors.accent} />
                     <Text style={[styles.adviceText, { color: colors.text }]}>
                       {t(advice.key, advice.params) as string}
                     </Text>
@@ -1117,8 +1122,8 @@ const PrayerStatsPremiumScreen: React.FC = () => {
                   {t("recommended_action_plan") ||
                     "🎯 Plan d'action recommandé"}
                 </Text>
-                {statsToUse.advice.action_plan.map((action, index) => (
-                  <View key={index} style={styles.actionPlanItem}>
+                {statsToUse.advice.action_plan.map((action) => (
+                  <View key={action.step_key} style={styles.actionPlanItem}>
                     <View style={styles.actionHeader}>
                       <Text style={[styles.actionStep, { color: colors.text }]}>
                         {t(action.step_key)}
@@ -1148,10 +1153,10 @@ const PrayerStatsPremiumScreen: React.FC = () => {
                 {t("ongoing_challenges") || "🏆 Défis en cours"}
               </Text>
               {statsToUse.challenges.length > 0 ? (
-                statsToUse.challenges.map((challenge, index) => (
-                  <View key={index} style={styles.challengeItem}>
+                statsToUse.challenges.map((challenge) => (
+                  <View key={challenge.title} style={styles.challengeItem}>
                     <View style={styles.challengeHeader}>
-                      <Ionicons
+                      <IonIcon
                         name={challenge.icon as any}
                         size={20}
                         color={challenge.color}
@@ -1205,7 +1210,7 @@ const PrayerStatsPremiumScreen: React.FC = () => {
                 ))
               ) : (
                 <View style={styles.emptyState}>
-                  <Ionicons
+                  <IonIcon
                     name="trophy-outline"
                     size={48}
                     color={colors.textTertiary}
@@ -1357,9 +1362,9 @@ const PrayerStatsPremiumScreen: React.FC = () => {
                       </Text>
                     </View>
                   ) : (
-                    relevantBadges.map((badge, index) => (
+                    relevantBadges.map((badge) => (
                       <View
-                        key={index}
+                        key={badge.name}
                         style={[
                           styles.badgeCard,
                           {
@@ -1382,7 +1387,7 @@ const PrayerStatsPremiumScreen: React.FC = () => {
                             },
                           ]}
                         >
-                          <Ionicons
+                          <IonIcon
                             name={badge.icon as any}
                             size={20}
                             color="white"
@@ -1440,7 +1445,7 @@ const PrayerStatsPremiumScreen: React.FC = () => {
               </Text>
 
               <View style={styles.actionGrid}>
-                <TouchableOpacity
+                <Pressable
                   style={[
                     styles.actionCard,
                     {
@@ -1468,7 +1473,7 @@ const PrayerStatsPremiumScreen: React.FC = () => {
                   }}
                   disabled={isRecording}
                 >
-                  <Ionicons name="moon" size={32} color={colors.success} />
+                  <IonIcon name="moon" size={32} color={colors.success} />
                   <Text style={[styles.actionTitle, { color: colors.text }]}>
                     {t("prayer_completed") || "Prière accomplie"}
                   </Text>
@@ -1480,9 +1485,9 @@ const PrayerStatsPremiumScreen: React.FC = () => {
                   >
                     {t("i_completed_prayer") || "J'ai accompli une prière"}
                   </Text>
-                </TouchableOpacity>
+                </Pressable>
 
-                <TouchableOpacity
+                <Pressable
                   style={[
                     styles.actionCard,
                     {
@@ -1508,7 +1513,7 @@ const PrayerStatsPremiumScreen: React.FC = () => {
                   }}
                   disabled={isRecording}
                 >
-                  <Ionicons name="heart" size={32} color={colors.accent} />
+                  <IonIcon name="heart" size={32} color={colors.accent} />
                   <Text style={[styles.actionTitle, { color: colors.text }]}>
                     {t("dhikr_completed") || "Dhikr récité"}
                   </Text>
@@ -1520,9 +1525,9 @@ const PrayerStatsPremiumScreen: React.FC = () => {
                   >
                     {t("i_completed_dhikr") || "J'ai fait du dhikr"}
                   </Text>
-                </TouchableOpacity>
+                </Pressable>
 
-                <TouchableOpacity
+                <Pressable
                   style={[
                     styles.actionCard,
                     {
@@ -1549,7 +1554,7 @@ const PrayerStatsPremiumScreen: React.FC = () => {
                   }}
                   disabled={isRecording}
                 >
-                  <Ionicons name="book" size={32} color={colors.primary} />
+                  <IonIcon name="book" size={32} color={colors.primary} />
                   <Text style={[styles.actionTitle, { color: colors.text }]}>
                     {t("quran_read_completed") || "Coran lu"}
                   </Text>
@@ -1561,9 +1566,9 @@ const PrayerStatsPremiumScreen: React.FC = () => {
                   >
                     {t("i_completed_quran_read") || "J'ai lu du Coran"}
                   </Text>
-                </TouchableOpacity>
+                </Pressable>
 
-                <TouchableOpacity
+                <Pressable
                   style={[
                     styles.actionCard,
                     {
@@ -1589,7 +1594,7 @@ const PrayerStatsPremiumScreen: React.FC = () => {
                   }}
                   disabled={isRecording}
                 >
-                  <Ionicons
+                  <IonIcon
                     name="document-text"
                     size={32}
                     color={colors.error}
@@ -1605,7 +1610,7 @@ const PrayerStatsPremiumScreen: React.FC = () => {
                   >
                     {t("i_studied_hadith") || "J'ai lu un hadith"}
                   </Text>
-                </TouchableOpacity>
+                </Pressable>
               </View>
             </View>
 
@@ -1744,7 +1749,7 @@ const PrayerStatsPremiumScreen: React.FC = () => {
                   </Text>
                 </View>
 
-                <TouchableOpacity
+                <Pressable
                   style={[
                     styles.resetButton,
                     { backgroundColor: colors.error },
@@ -1823,14 +1828,14 @@ const PrayerStatsPremiumScreen: React.FC = () => {
                     <ActivityIndicator size="small" color="white" />
                   ) : (
                     <>
-                      <Ionicons name="refresh" size={20} color="white" />
+                      <IonIcon name="refresh" size={20} color="white" />
                       <Text style={styles.resetButtonText}>
                         {t("reset_all_stats") ||
                           "Réinitialiser toutes les statistiques"}
                       </Text>
                     </>
                   )}
-                </TouchableOpacity>
+                </Pressable>
               </View>
             </View>
           </View>
@@ -1862,24 +1867,24 @@ const PrayerStatsPremiumScreen: React.FC = () => {
                 📊 Statistiques Premium
               </Text>
               <View style={styles.headerActions}>
-                <TouchableOpacity
+                <Pressable
                   style={[
                     styles.headerButton,
                     { backgroundColor: "rgba(102, 187, 106, 0.1)" },
                   ]}
                   onPress={openInsightsModal}
                 >
-                  <Ionicons name="analytics" size={20} color={colors.primary} />
-                </TouchableOpacity>
-                <TouchableOpacity
+                  <IonIcon name="analytics" size={20} color={colors.primary} />
+                </Pressable>
+                <Pressable
                   style={[
                     styles.headerButton,
                     { backgroundColor: "rgba(255, 215, 0, 0.1)" },
                   ]}
                   onPress={exportData}
                 >
-                  <Ionicons name="share" size={20} color={colors.accent} />
-                </TouchableOpacity>
+                  <IonIcon name="share" size={20} color={colors.accent} />
+                </Pressable>
               </View>
             </View>
             <Text
@@ -1902,7 +1907,7 @@ const PrayerStatsPremiumScreen: React.FC = () => {
               ]}
             >
               <View style={styles.offlineContent}>
-                <Ionicons
+                <IonIcon
                   name="cloud-offline"
                   size={20}
                   color={colors.warning}
@@ -1929,18 +1934,18 @@ const PrayerStatsPremiumScreen: React.FC = () => {
                   </Text>
                 </View>
                 {pendingActionsCount > 0 && (
-                  <TouchableOpacity
+                  <Pressable
                     style={[
                       styles.syncButton,
                       { backgroundColor: colors.warning },
                     ]}
                     onPress={handleSyncActions}
                   >
-                    <Ionicons name="sync" size={16} color="white" />
+                    <IonIcon name="sync" size={16} color="white" />
                     <Text style={styles.syncButtonText}>
                       {t("sync") || "Sync"}
                     </Text>
-                  </TouchableOpacity>
+                  </Pressable>
                 )}
               </View>
             </View>
@@ -1954,6 +1959,9 @@ const PrayerStatsPremiumScreen: React.FC = () => {
               icon="analytics"
               isActive={activeTab === "overview"}
               onPress={() => setActiveTab("overview")}
+              isDark={isDark}
+              primaryColor={colors.primary}
+              textSecondaryColor={colors.textSecondary}
             />
             <TabButton
               tab="progress"
@@ -1961,6 +1969,9 @@ const PrayerStatsPremiumScreen: React.FC = () => {
               icon="trending-up"
               isActive={activeTab === "progress"}
               onPress={() => setActiveTab("progress")}
+              isDark={isDark}
+              primaryColor={colors.primary}
+              textSecondaryColor={colors.textSecondary}
             />
             <TabButton
               tab="achievements"
@@ -1968,6 +1979,9 @@ const PrayerStatsPremiumScreen: React.FC = () => {
               icon="trophy"
               isActive={activeTab === "achievements"}
               onPress={() => setActiveTab("achievements")}
+              isDark={isDark}
+              primaryColor={colors.primary}
+              textSecondaryColor={colors.textSecondary}
             />
             <TabButton
               tab="actions"
@@ -1975,6 +1989,9 @@ const PrayerStatsPremiumScreen: React.FC = () => {
               icon="add-circle"
               isActive={activeTab === "actions"}
               onPress={() => setActiveTab("actions")}
+              isDark={isDark}
+              primaryColor={colors.primary}
+              textSecondaryColor={colors.textSecondary}
             />
           </View>
 
@@ -2002,14 +2019,14 @@ const PrayerStatsPremiumScreen: React.FC = () => {
                   {t("last_updated")}: {lastUpdated.toLocaleTimeString()}
                 </Text>
                 <View style={{ flexDirection: "row", gap: 8, marginTop: 8 }}>
-                  <TouchableOpacity
+                  <Pressable
                     onPress={() => setShowGoalModal(true)}
                     style={[
                       styles.smallButton,
                       { borderColor: colors.primary },
                     ]}
                   >
-                    <Ionicons name="create" size={16} color={colors.primary} />
+                    <IonIcon name="create" size={16} color={colors.primary} />
                     <Text
                       style={[
                         styles.smallButtonText,
@@ -2018,8 +2035,8 @@ const PrayerStatsPremiumScreen: React.FC = () => {
                     >
                       {t("edit_goal") || "Modifier l'objectif"}
                     </Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity
+                  </Pressable>
+                  <Pressable
                     onPress={() =>
                       setTimeframe(
                         timeframe === 7 ? 30 : timeframe === 30 ? 90 : 7
@@ -2027,13 +2044,13 @@ const PrayerStatsPremiumScreen: React.FC = () => {
                     }
                     style={[styles.smallButton, { borderColor: colors.accent }]}
                   >
-                    <Ionicons name="time" size={16} color={colors.accent} />
+                    <IonIcon name="time" size={16} color={colors.accent} />
                     <Text
                       style={[styles.smallButtonText, { color: colors.accent }]}
                     >
                       {t("time_window") || "Fenêtre"}: {timeframe}j
                     </Text>
-                  </TouchableOpacity>
+                  </Pressable>
                 </View>
               </View>
             )}
@@ -2059,12 +2076,12 @@ const PrayerStatsPremiumScreen: React.FC = () => {
               <Text style={[styles.modalTitle, { color: colors.text }]}>
                 🧠 Insights Spirituels
               </Text>
-              <TouchableOpacity
+              <Pressable
                 style={styles.modalCloseButton}
                 onPress={() => setShowInsightsModal(false)}
               >
-                <Ionicons name="close" size={24} color={colors.text} />
-              </TouchableOpacity>
+                <IonIcon name="close" size={24} color={colors.text} />
+              </Pressable>
             </View>
 
             {/* Zone scrollable simplifiée */}
@@ -2080,15 +2097,15 @@ const PrayerStatsPremiumScreen: React.FC = () => {
                 <Text style={[styles.cardTitle, { color: colors.text }]}>
                   📊 Analyse de vos habitudes
                 </Text>
-                {generateInsights().map((insight, index) => (
-                  <View key={index} style={styles.insightItem}>
+                {generateInsights().map((insight) => (
+                  <View key={insight.icon} style={styles.insightItem}>
                     <View
                       style={[
                         styles.insightIcon,
                         { backgroundColor: insight.color + "20" },
                       ]}
                     >
-                      <Ionicons
+                      <IonIcon
                         name={insight.icon as any}
                         size={20}
                         color={insight.color}
@@ -2161,7 +2178,7 @@ const PrayerStatsPremiumScreen: React.FC = () => {
                           >
                             vs {comparison.successRate.average}%
                           </Text>
-                          <Ionicons
+                          <IonIcon
                             name={
                               comparison.successRate.position === "above"
                                 ? "trending-up"
@@ -2203,7 +2220,7 @@ const PrayerStatsPremiumScreen: React.FC = () => {
                           >
                             vs {comparison.streak.average} jours
                           </Text>
-                          <Ionicons
+                          <IonIcon
                             name={
                               comparison.streak.position === "above"
                                 ? "trending-up"
@@ -2277,7 +2294,7 @@ const PrayerStatsPremiumScreen: React.FC = () => {
                       {Math.round(getWeekProgress())}% complété
                     </Text>
                   </View>
-                  <TouchableOpacity
+                  <Pressable
                     style={[
                       styles.goalButton,
                       { backgroundColor: colors.primary },
@@ -2291,7 +2308,7 @@ const PrayerStatsPremiumScreen: React.FC = () => {
                     }}
                   >
                     <Text style={styles.goalButtonText}>Modifier</Text>
-                  </TouchableOpacity>
+                  </Pressable>
                 </View>
               </View>
             </ScrollView>
@@ -2323,28 +2340,28 @@ const PrayerStatsPremiumScreen: React.FC = () => {
               placeholderTextColor={colors.textSecondary}
             />
             <View style={{ flexDirection: "row", gap: 12, marginTop: 12 }}>
-              <TouchableOpacity
+              <Pressable
                 onPress={() => setShowGoalModal(false)}
                 style={[styles.smallButton, { borderColor: colors.warning }]}
               >
-                <Ionicons name="close" size={16} color={colors.warning} />
+                <IonIcon name="close" size={16} color={colors.warning} />
                 <Text
                   style={[styles.smallButtonText, { color: colors.warning }]}
                 >
                   {t("cancel") || "Annuler"}
                 </Text>
-              </TouchableOpacity>
-              <TouchableOpacity
+              </Pressable>
+              <Pressable
                 onPress={saveWeeklyGoal}
                 style={[styles.smallButton, { borderColor: colors.success }]}
               >
-                <Ionicons name="checkmark" size={16} color={colors.success} />
+                <IonIcon name="checkmark" size={16} color={colors.success} />
                 <Text
                   style={[styles.smallButtonText, { color: colors.success }]}
                 >
                   {t("save") || "Enregistrer"}
                 </Text>
-              </TouchableOpacity>
+              </Pressable>
             </View>
           </View>
         </View>
@@ -2438,11 +2455,7 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     padding: 20,
     marginBottom: 16,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 4,
+    boxShadow: "0px 2px 8px rgba(0,0,0,0.1)",
   },
   cardTitle: {
     fontSize: 18,
@@ -2543,7 +2556,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   statItem: {
-    width: (width - 72) / 2,
+    width: "48%",
     alignItems: "center",
     padding: 16,
     marginBottom: 16,
@@ -2637,7 +2650,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   badgeCard: {
-    width: (width - 72) / 2,
+    width: "48%",
     alignItems: "center",
     padding: 16,
     marginBottom: 16,
@@ -2693,7 +2706,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   actionCard: {
-    width: (width - 72) / 2,
+    width: "48%",
     alignItems: "center",
     padding: 16,
     marginBottom: 16,
@@ -2870,7 +2883,7 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    zIndex: 1000,
+    zIndex: Z_INDEX.modal,
     flex: 1,
     paddingTop: Platform.select({
       android: StatusBar.currentHeight ? StatusBar.currentHeight + 8 : 60,
@@ -3102,7 +3115,7 @@ const styles = StyleSheet.create({
     marginTop: 16,
   },
   quickActionButton: {
-    width: (width - 72) / 2,
+    width: "48%",
     alignItems: "center",
     padding: 16,
     borderRadius: 12,

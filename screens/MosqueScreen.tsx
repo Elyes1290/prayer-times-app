@@ -1,17 +1,17 @@
-import React, { useState, useEffect, useContext, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
+import { use } from "react";
 import {
   View,
   Text,
   StyleSheet,
   ActivityIndicator,
   FlatList,
-  TouchableOpacity,
+  Pressable,
   Linking,
   Platform,
   Alert,
-  Dimensions,
 } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { MCIcon } from "@/components/icons/AppVectorIcons";
 import { useTranslation } from "react-i18next";
 import ThemedImageBackground from "../components/ThemedImageBackground";
 import {
@@ -20,11 +20,11 @@ import {
   useOverlayIconColor,
   useCurrentTheme,
 } from "../hooks/useThemeColor";
+import { makeBoxShadow } from "../utils/shadowUtils";
 import { SettingsContext } from "../contexts/SettingsContext";
 import { useLocation } from "../hooks/useLocation";
 import { debugLog, errorLog } from "../utils/logger";
 
-const { width: screenWidth } = Dimensions.get("window");
 
 interface Mosque {
   id: string;
@@ -44,7 +44,7 @@ export default function MosqueScreen() {
   const [error, setError] = useState<string | null>(null);
 
   // Contextes et hooks
-  const settings = useContext(SettingsContext);
+  const settings = use(SettingsContext);
   const { location } = useLocation();
   const colors = useThemeColors();
   const overlayTextColor = useOverlayTextColor();
@@ -121,17 +121,14 @@ export default function MosqueScreen() {
             );
 
             if (data.elements && data.elements.length > 0) {
-              const foundMosques = data.elements
-                .filter((element: any) => {
-                  const lat = element.lat || element.center?.lat;
-                  const lon = element.lon || element.center?.lon;
-                  return lat && lon;
-                })
-                .map((element: any, index: number) => {
-                  const lat = element.lat || element.center.lat;
-                  const lon = element.lon || element.center.lon;
+              const foundMosques: any[] = [];
+              let idx = 0;
+              for (const element of data.elements as any[]) {
+                const lat = element.lat || element.center?.lat;
+                const lon = element.lon || element.center?.lon;
+                if (!lat || !lon) continue;
 
-                  // Construction très intelligente de l'adresse avec multiples fallbacks
+                // Construction très intelligente de l'adresse avec multiples fallbacks
                   let address = t(
                     "mosque_screen.address_not_available",
                     "Adresse non disponible"
@@ -255,24 +252,27 @@ export default function MosqueScreen() {
                     }
                   }
 
-                  return {
-                    id: `osm_${element.id || index}`,
-                    name: element.tags?.name || `Mosquée ${index + 1}`,
-                    address,
-                    latitude: lat,
-                    longitude: lon,
-                    distance: calculateDistance(latitude, longitude, lat, lon),
-                    phone: element.tags?.phone,
-                    website: element.tags?.website,
-                  };
-                })
+                foundMosques.push({
+                  id: `osm_${element.id || idx}`,
+                  name: element.tags?.name || `Mosquée ${idx + 1}`,
+                  address,
+                  latitude: lat,
+                  longitude: lon,
+                  distance: calculateDistance(latitude, longitude, lat, lon),
+                  phone: element.tags?.phone,
+                  website: element.tags?.website,
+                });
+                idx++;
+              }
+
+              const topMosques = foundMosques
                 .sort((a: any, b: any) => (a.distance || 0) - (b.distance || 0))
                 .slice(0, 15);
 
               debugLog(
-                `✅ Overpass réussi: ${foundMosques.length} mosquées trouvées`
+                `✅ Overpass réussi: ${topMosques.length} mosquées trouvées`
               );
-              setMosques(foundMosques);
+              setMosques(topMosques);
               setLoading(false);
               return;
             }
@@ -383,21 +383,26 @@ export default function MosqueScreen() {
         ];
 
         const nearbyMosques = localMosques
-          .map((mosque) => ({
-            id: `local_${mosque.name.replace(/\s+/g, "_")}`,
-            name: mosque.name,
-            address: `${mosque.city}`,
-            latitude: mosque.lat,
-            longitude: mosque.lng,
-            distance: calculateDistance(
-              latitude,
-              longitude,
-              mosque.lat,
-              mosque.lng
-            ),
-            phone: (mosque as any).phone,
-          }))
-          .filter((mosque) => mosque.distance <= 100000) // 100km max
+          .reduce((acc: any[], mosque) => {
+            const row = {
+              id: `local_${mosque.name.replace(/\s+/g, "_")}`,
+              name: mosque.name,
+              address: `${mosque.city}`,
+              latitude: mosque.lat,
+              longitude: mosque.lng,
+              distance: calculateDistance(
+                latitude,
+                longitude,
+                mosque.lat,
+                mosque.lng
+              ),
+              phone: (mosque as any).phone,
+            };
+            if (row.distance <= 100000) {
+              acc.push(row);
+            }
+            return acc;
+          }, [])
           .sort((a: any, b: any) => a.distance - b.distance)
           .slice(0, 12);
 
@@ -508,7 +513,7 @@ export default function MosqueScreen() {
   const renderMosqueItem = ({ item }: { item: Mosque }) => (
     <View style={styles.mosqueCard}>
       <View style={styles.mosqueHeader}>
-        <MaterialCommunityIcons
+        <MCIcon
           name="mosque"
           size={24}
           color={colors.primary} // 🌅 Utilise la couleur du thème actif
@@ -527,26 +532,26 @@ export default function MosqueScreen() {
       </View>
 
       <View style={styles.mosqueActions}>
-        <TouchableOpacity
+        <Pressable
           style={styles.actionButton}
           onPress={() => openDirections(item)}
         >
-          <MaterialCommunityIcons name="directions" size={20} color={colors.primary} /> {/* 🌅 Utilise la couleur du thème actif */}
+          <MCIcon name="directions" size={20} color={colors.primary} /> {/* 🌅 Utilise la couleur du thème actif */}
           <Text style={styles.actionText}>
             {t("mosque_screen.directions", "Itinéraire")}
           </Text>
-        </TouchableOpacity>
+        </Pressable>
 
         {item.phone && (
-          <TouchableOpacity
+          <Pressable
             style={styles.actionButton}
             onPress={() => callMosque(item.phone)}
           >
-            <MaterialCommunityIcons name="phone" size={20} color={colors.primary} /> {/* 🌅 Utilise la couleur du thème actif */}
+            <MCIcon name="phone" size={20} color={colors.primary} /> {/* 🌅 Utilise la couleur du thème actif */}
             <Text style={styles.actionText}>
               {t("mosque_screen.call", "Appeler")}
             </Text>
-          </TouchableOpacity>
+          </Pressable>
         )}
       </View>
     </View>
@@ -570,13 +575,13 @@ export default function MosqueScreen() {
     return (
       <ThemedImageBackground style={styles.container}>
         <View style={styles.errorContainer}>
-          <MaterialCommunityIcons
+          <MCIcon
             name="alert-circle"
             size={48}
             color="#FF6B6B"
           />
           <Text style={styles.errorText}>{error}</Text>
-          <TouchableOpacity
+          <Pressable
             style={styles.retryButton}
             onPress={() => {
               const currentLocation = getCurrentLocation();
@@ -591,7 +596,7 @@ export default function MosqueScreen() {
             <Text style={styles.retryButtonText}>
               {t("mosque_screen.retry", "Réessayer")}
             </Text>
-          </TouchableOpacity>
+          </Pressable>
         </View>
       </ThemedImageBackground>
     );
@@ -601,7 +606,7 @@ export default function MosqueScreen() {
   return (
     <ThemedImageBackground style={styles.container}>
       <View style={styles.header}>
-        <MaterialCommunityIcons
+        <MCIcon
           name="mosque"
           size={32}
           color={overlayTextColor}
@@ -623,7 +628,7 @@ export default function MosqueScreen() {
         showsVerticalScrollIndicator={false}
         ListEmptyComponent={
           <View style={styles.emptyContainer}>
-            <MaterialCommunityIcons name="mosque" size={64} color="#94A3B8" />
+            <MCIcon name="mosque" size={64} color="#94A3B8" />
             <Text style={styles.emptyText}>
               {t(
                 "mosque_screen.no_mosques_found",
@@ -681,11 +686,7 @@ const getStyles = (
       paddingVertical: 12,
       borderRadius: 8,
       marginTop: 16,
-      shadowColor: "#000",
-      shadowOffset: { width: 0, height: 2 },
-      shadowOpacity: 0.2,
-      shadowRadius: 4,
-      elevation: 4,
+      boxShadow: "0px 2px 4px rgba(0,0,0,0.2)",
     },
     retryButtonText: {
       color: "#FFFFFF",
@@ -729,11 +730,7 @@ const getStyles = (
       borderRadius: 16,
       padding: 20,
       marginBottom: 16,
-      shadowColor: colors.shadow, // 🌅 Utilise la couleur du thème actif
-      shadowOffset: { width: 0, height: 4 },
-      shadowOpacity: 0.15,
-      shadowRadius: 12,
-      elevation: 6,
+      boxShadow: makeBoxShadow(colors.shadow, 0, 4, 12, 0.15),
       borderWidth: 1,
       borderColor: colors.border, // 🌅 Utilise la couleur du thème actif
     },
@@ -780,11 +777,7 @@ const getStyles = (
       borderRadius: 10,
       borderWidth: 1,
       borderColor: colors.border, // 🌅 Utilise la couleur du thème actif
-      shadowColor: colors.shadow, // 🌅 Utilise la couleur du thème actif
-      shadowOffset: { width: 0, height: 2 },
-      shadowOpacity: 0.1,
-      shadowRadius: 4,
-      elevation: 2,
+      boxShadow: makeBoxShadow(colors.shadow, 0, 2, 4, 0.1),
     },
     actionText: {
       color: colors.primary, // 🌅 Utilise la couleur du thème actif

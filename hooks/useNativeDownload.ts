@@ -6,7 +6,7 @@ import nativeDownloadManager, {
 } from "../utils/nativeDownloadManager";
 import PremiumContentManager from "../utils/premiumContent";
 
-export interface DownloadState {
+interface DownloadState {
   isDownloading: boolean;
   progress: number;
   error: string | null;

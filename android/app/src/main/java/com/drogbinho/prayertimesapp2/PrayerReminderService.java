@@ -104,7 +104,9 @@ public class PrayerReminderService extends Service {
                 notificationDebugLog("PrayerReminderService",
                         "⚠️ Déjà notifié récemment pour " + prayerLabel + " (il y a " +
                                 ((now - lastDone) / 60000) + " minutes), on ignore !");
-                stopSelf();
+                // startForeground() a déjà affiché la notif temporaire : il faut la retirer
+                // sinon elle reste figée (« Traitement en cours... ») sur certains appareils.
+                dismissStagingForegroundAndStop();
                 return START_NOT_STICKY;
             }
 
@@ -239,6 +241,27 @@ public class PrayerReminderService extends Service {
     @Override
     public IBinder onBind(Intent intent) {
         return null;
+    }
+
+    /** Retire la notif foreground temporaire puis arrête le service (chemins early-exit). */
+    private void dismissStagingForegroundAndStop() {
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                stopForeground(Service.STOP_FOREGROUND_REMOVE);
+            } else {
+                stopForeground(true);
+            }
+        } catch (Exception e) {
+            Log.e("PrayerReminderService", "dismissStagingForeground: " + e.getMessage());
+        }
+        try {
+            NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+            if (nm != null) {
+                nm.cancel(NOTIFICATION_ID);
+            }
+        } catch (Exception ignored) {
+        }
+        stopSelf();
     }
 
     private boolean isSameDay(long time1, long time2) {

@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { use } from "react";
 import * as Location from "expo-location";
 import { SettingsContext, Coords } from "../contexts/SettingsContext";
 
@@ -25,7 +25,7 @@ export function useLocation() {
     errorMsg,
     isLoading,
     isRefreshingLocation,
-  } = useContext(SettingsContext);
+  } = use(SettingsContext);
 
   let location: Location.LocationObject | null = null;
 

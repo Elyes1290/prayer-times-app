@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity, ActivityIndicator } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { View, Text, Pressable, ActivityIndicator } from "react-native";
+import { MCIcon } from "@/components/icons/AppVectorIcons";
 import { useBackup } from "../../contexts/BackupContext";
 import { useTranslation } from "react-i18next";
 import { usePremium } from "../../contexts/PremiumContext";
@@ -207,7 +207,7 @@ export default function BackupSection({ styles }: BackupSectionProps) {
                       : t("not_available", "Non disponible")}
                   </Text>
                 </View>
-                <TouchableOpacity
+                <Pressable
                   style={styles.refreshButton}
                   onPress={async () => {
                     // Forcer la vérification des données cloud en rechargeant l'app
@@ -231,12 +231,12 @@ export default function BackupSection({ styles }: BackupSectionProps) {
                     });
                   }}
                 >
-                  <MaterialCommunityIcons
+                  <MCIcon
                     name="refresh"
                     size={16}
                     color={styles.iconColor?.color || "#000"}
                   />
-                </TouchableOpacity>
+                </Pressable>
               </View>
             </View>
           ),
@@ -246,7 +246,7 @@ export default function BackupSection({ styles }: BackupSectionProps) {
           component: (
             <View style={styles.section}>
               <View style={styles.backupSectionHeader}>
-                <MaterialCommunityIcons
+                <MCIcon
                   name="cog"
                   size={24}
                   color={styles.iconColor?.color || "#000"}
@@ -269,7 +269,7 @@ export default function BackupSection({ styles }: BackupSectionProps) {
                     )}
                   </Text>
                 </View>
-                <TouchableOpacity
+                <Pressable
                   style={[
                     styles.toggle,
                     isAutoBackupEnabled && styles.toggleActive,
@@ -283,12 +283,12 @@ export default function BackupSection({ styles }: BackupSectionProps) {
                       isAutoBackupEnabled && styles.toggleThumbActive,
                     ]}
                   />
-                </TouchableOpacity>
+                </Pressable>
               </View>
 
               {/* Boutons d'action */}
               <View style={styles.actionButtons}>
-                <TouchableOpacity
+                <Pressable
                   style={[styles.actionButton, styles.primaryButton]}
                   onPress={handleBackup}
                   disabled={isSyncing}
@@ -296,7 +296,7 @@ export default function BackupSection({ styles }: BackupSectionProps) {
                   {isSyncing && backupStatus === "syncing" ? (
                     <ActivityIndicator size="small" color="#fff" />
                   ) : (
-                    <MaterialCommunityIcons
+                    <MCIcon
                       name="cloud-upload"
                       size={20}
                       color="#fff"
@@ -305,14 +305,14 @@ export default function BackupSection({ styles }: BackupSectionProps) {
                   <Text style={styles.actionButtonText}>
                     {t("backup_now", "Sauvegarder maintenant")}
                   </Text>
-                </TouchableOpacity>
+                </Pressable>
 
-                <TouchableOpacity
+                <Pressable
                   style={[styles.actionButton, styles.secondaryButton]}
                   onPress={handleRestore}
                   disabled={isSyncing || !hasCloudData}
                 >
-                  <MaterialCommunityIcons
+                  <MCIcon
                     name="cloud-download"
                     size={20}
                     color={styles.iconColor?.color || "#000"}
@@ -325,7 +325,7 @@ export default function BackupSection({ styles }: BackupSectionProps) {
                   >
                     {t("restore", "Restaurer")}
                   </Text>
-                </TouchableOpacity>
+                </Pressable>
               </View>
 
               {/* Statut de synchronisation */}

@@ -21,6 +21,8 @@ class QuranAudioServiceModule: RCTEventEmitter {
   private var loopEnabled = false
   
   private var timeObserverToken: Any?
+  private var currentArtwork: MPMediaItemArtwork?
+  private static var defaultAppArtwork: MPMediaItemArtwork?
   
   // MARK: - React Native Event Emitter
   
@@ -81,41 +83,45 @@ class QuranAudioServiceModule: RCTEventEmitter {
   
   // MARK: - Audio Loading
   
+  private func urlFromAudioPath(_ audioPath: String) -> URL? {
+    let trimmed = audioPath.trimmingCharacters(in: .whitespacesAndNewlines)
+    if trimmed.isEmpty {
+      return nil
+    }
+    if trimmed.hasPrefix("http://") || trimmed.hasPrefix("https://") {
+      // Ne pas encoder toute l'URL (sinon & et ? deviennent %26/%3F → stream invalide)
+      if let direct = URL(string: trimmed) {
+        return direct
+      }
+      if let encoded = trimmed.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed),
+         let fallback = URL(string: encoded) {
+        return fallback
+      }
+      return nil
+    }
+    let cleanPath = trimmed.replacingOccurrences(of: "file://", with: "")
+    if FileManager.default.fileExists(atPath: cleanPath) {
+      return URL(fileURLWithPath: cleanPath)
+    }
+    let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+    let fileName = (cleanPath as NSString).lastPathComponent
+    let folderName = (cleanPath as NSString).deletingLastPathComponent.components(separatedBy: "/").last ?? ""
+    let alternativePath = "\(documentsPath)/\(folderName)/\(fileName)"
+    if FileManager.default.fileExists(atPath: alternativePath) {
+      return URL(fileURLWithPath: alternativePath)
+    }
+    return URL(fileURLWithPath: cleanPath)
+  }
+
   @objc
-  func loadAudioInService(_ audioPath: String, surah: String, reciter: String, resolver resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) {
-    sendDebugLog("📂 Chargement: \(surah) - \(reciter)")
+  func loadAudioInService(_ audioPath: String, surah: String, reciter: String, durationMs: NSInteger, resolver resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) {
+    sendDebugLog("📂 Chargement: \(surah) - \(reciter) (durationMs=\(durationMs))")
     
-    let url: URL?
-    if audioPath.hasPrefix("http") {
-        // C'est une URL web
-        if let encodedPath = audioPath.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
-            url = URL(string: encodedPath)
-        } else {
-            url = URL(string: audioPath)
-        }
-    } else {
-        // C'est un chemin de fichier local
-        let cleanPath = audioPath.replacingOccurrences(of: "file://", with: "")
-        
-        // 🎯 Vérifier plusieurs variantes de chemin pour iOS
-        if FileManager.default.fileExists(atPath: cleanPath) {
-            sendDebugLog("📁 Fichier local trouvé: \(cleanPath)")
-            url = URL(fileURLWithPath: cleanPath)
-        } else {
-            // Tenter de reconstruire le chemin si c'est un chemin relatif au dossier Documents
-            let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
-            let fileName = (cleanPath as NSString).lastPathComponent
-            let folderName = (cleanPath as NSString).deletingLastPathComponent.components(separatedBy: "/").last ?? ""
-            let alternativePath = "\(documentsPath)/\(folderName)/\(fileName)"
-            
-            if FileManager.default.fileExists(atPath: alternativePath) {
-                sendDebugLog("📁 Fichier trouvé via chemin alternatif: \(alternativePath)")
-                url = URL(fileURLWithPath: alternativePath)
-            } else {
-                sendDebugLog("❌ Fichier local introuvable: \(cleanPath)")
-                url = URL(fileURLWithPath: cleanPath)
-            }
-        }
+    let url = urlFromAudioPath(audioPath)
+    if let fileUrl = url, fileUrl.isFileURL {
+      sendDebugLog("📁 Fichier local: \(fileUrl.path)")
+    } else if let streamUrl = url {
+      sendDebugLog("🌐 Stream: \(streamUrl.absoluteString.prefix(120))...")
     }
     
     guard let finalUrl = url else {
@@ -185,7 +191,13 @@ class QuranAudioServiceModule: RCTEventEmitter {
     currentReciter = reciter
     currentPosition = 0
     totalDuration = 0 // Réinitialiser la durée
+    if durationMs > 0 {
+      totalDuration = Double(durationMs) / 1000.0
+      sendDebugLog("📏 Durée catalogue (ms): \(durationMs) → \(totalDuration)s")
+    }
     isPlaying = false // 🎯 Nouveau: réinitialiser l'état de lecture au chargement
+    
+    loadEmbeddedArtwork(from: audioPath)
     
     // 🎯 Tenter de récupérer la durée immédiatement pour les fichiers locaux
     if finalUrl.isFileURL {
@@ -298,12 +310,12 @@ class QuranAudioServiceModule: RCTEventEmitter {
         player.volume = 1.0
     }
     
-    // 🎯 Utiliser playImmediately si on est déjà prêt, sinon play() s'en occupera quand prêt
-    if player.status == .readyToPlay {
-        sendDebugLog("▶️ Player prêt, lecture immédiate")
+    let itemStatus = player.currentItem?.status
+    if itemStatus == .readyToPlay {
+        sendDebugLog("▶️ Item prêt, lecture immédiate")
         player.playImmediately(atRate: 1.0)
     } else {
-        sendDebugLog("▶️ Player non prêt, mise en file d'attente lecture")
+        sendDebugLog("▶️ Item status=\(itemStatus?.rawValue ?? -1), play() en attente")
         player.play()
     }
     
@@ -421,6 +433,7 @@ class QuranAudioServiceModule: RCTEventEmitter {
     commandCenter.pauseCommand.removeTarget(nil)
     commandCenter.nextTrackCommand.removeTarget(nil)
     commandCenter.previousTrackCommand.removeTarget(nil)
+    commandCenter.changePlaybackPositionCommand.removeTarget(nil)
     
     commandCenter.playCommand.isEnabled = true
     commandCenter.playCommand.addTarget { [weak self] event in
@@ -453,6 +466,93 @@ class QuranAudioServiceModule: RCTEventEmitter {
       self.sendEvent(withName: "AudioCompleted", body: ["reason": "previous"])
       return .success
     }
+    
+    commandCenter.changePlaybackPositionCommand.isEnabled = true
+    commandCenter.changePlaybackPositionCommand.addTarget { [weak self] event in
+      guard let self = self,
+            let seekEvent = event as? MPChangePlaybackPositionCommandEvent else {
+        return .commandFailed
+      }
+      self.sendDebugLog("Remote: Seek to \(seekEvent.positionTime)s")
+      self.seekPlaybackTo(seconds: seekEvent.positionTime)
+      return .success
+    }
+  }
+  
+  private func seekPlaybackTo(seconds: Double) {
+    guard let player = player else { return }
+    let time = CMTime(seconds: seconds, preferredTimescale: 1000)
+    player.seek(to: time) { [weak self] finished in
+      guard finished, let self = self else { return }
+      self.currentPosition = seconds
+      self.updateNowPlayingInfo()
+      self.sendAudioStateChangedEvent()
+    }
+  }
+
+  private func loadEmbeddedArtwork(from audioPath: String) {
+    currentArtwork = nil
+    guard !audioPath.isEmpty else {
+      updateNowPlayingInfo()
+      return
+    }
+    
+    let url: URL?
+    if audioPath.hasPrefix("http") {
+      url = URL(string: audioPath)
+    } else {
+      let cleanPath = audioPath.replacingOccurrences(of: "file://", with: "")
+      url = URL(fileURLWithPath: cleanPath)
+    }
+    guard let assetUrl = url else {
+      updateNowPlayingInfo()
+      return
+    }
+    
+    let asset = AVURLAsset(url: assetUrl)
+    asset.loadValuesAsynchronously(forKeys: ["commonMetadata"]) { [weak self] in
+      var image: UIImage?
+      for item in asset.commonMetadata {
+        if item.commonKey == .commonKeyArtwork,
+           let data = item.dataValue,
+           let decoded = UIImage(data: data) {
+          image = decoded
+          break
+        }
+      }
+      DispatchQueue.main.async {
+        guard let self = self, self.currentAudioPath == audioPath else { return }
+        if let image = image {
+          self.currentArtwork = MPMediaItemArtwork(boundsSize: image.size) { _ in image }
+        } else {
+          self.currentArtwork = nil
+        }
+        self.updateNowPlayingInfo()
+      }
+    }
+  }
+
+  private static func appIconImage() -> UIImage? {
+    if let icons = Bundle.main.infoDictionary?["CFBundleIcons"] as? [String: Any],
+       let primary = icons["CFBundlePrimaryIcon"] as? [String: Any],
+       let files = primary["CFBundleIconFiles"] as? [String] {
+      for name in files.reversed() {
+        if let image = UIImage(named: name) {
+          return image
+        }
+      }
+    }
+    return UIImage(named: "AppIcon") ?? UIImage(named: "icon")
+  }
+
+  private func defaultArtworkForNowPlaying() -> MPMediaItemArtwork? {
+    if let cached = QuranAudioServiceModule.defaultAppArtwork {
+      return cached
+    }
+    guard let image = Self.appIconImage() else { return nil }
+    let artwork = MPMediaItemArtwork(boundsSize: image.size) { _ in image }
+    QuranAudioServiceModule.defaultAppArtwork = artwork
+    return artwork
   }
 
   private func updateNowPlayingInfo() {
@@ -463,6 +563,10 @@ class QuranAudioServiceModule: RCTEventEmitter {
     nowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = currentPosition
     nowPlayingInfo[MPMediaItemPropertyPlaybackDuration] = totalDuration
     nowPlayingInfo[MPNowPlayingInfoPropertyPlaybackRate] = isPlaying ? 1.0 : 0.0
+    
+    if let artwork = currentArtwork ?? defaultArtworkForNowPlaying() {
+      nowPlayingInfo[MPMediaItemPropertyArtwork] = artwork
+    }
     
     // 🎯 Informer le système que nous supportons la navigation
     let commandCenter = MPRemoteCommandCenter.shared()

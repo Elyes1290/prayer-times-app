@@ -3,9 +3,10 @@ import { safeJsonParse, safeStorageJsonParse } from "../utils/safeJson";
 import { safeStorage } from "../utils/safeStorage";
 import React, {
   createContext,
+  use,
   useCallback,
-  useContext,
   useEffect,
+  useRef,
   useState,
 } from "react";
 import { Platform, NativeModules } from "react-native";
@@ -266,7 +267,7 @@ export const SettingsProvider = ({
 
   // Nouveau : États pour la synchronisation API
   const [isSyncing, setIsSyncing] = useState(false);
-  const [lastSyncTime, setLastSyncTime] = useState<Date | null>(null);
+  const lastSyncTimeRef = useRef<Date | null>(null);
   const [apiSyncEnabled, setApiSyncEnabled] = useState(false); // 🚀 DÉSACTIVÉ par défaut (premium uniquement)
 
   // Calculer le thème actuel basé sur le mode choisi
@@ -354,7 +355,7 @@ export const SettingsProvider = ({
       const response = await ApiClient.syncSettings(settings);
 
       if (response.success) {
-        setLastSyncTime(new Date());
+        lastSyncTimeRef.current = new Date();
         debugLog("✅ Synchronisation API réussie");
       } else {
         errorLog("❌ Échec synchronisation API:", response.message);
@@ -422,7 +423,7 @@ export const SettingsProvider = ({
 
         // Plus de paramètres selon la réponse API...
 
-        setLastSyncTime(new Date());
+        lastSyncTimeRef.current = new Date();
         return true;
       }
     } catch (error) {
@@ -1504,7 +1505,7 @@ export const SettingsProvider = ({
 
 // Hook pour utiliser le contexte des paramètres
 export const useSettings = () => {
-  const context = useContext(SettingsContext);
+  const context = use(SettingsContext);
   if (context === undefined) {
     throw new Error("useSettings must be used within a SettingsProvider");
   }

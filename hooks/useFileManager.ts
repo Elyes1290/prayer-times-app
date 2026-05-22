@@ -88,17 +88,20 @@ export function useFileManager() {
           // console.log(`🗑️ Nettoyage: ${files.length} fichiers trouvés`);
 
           // Supprimer tous les fichiers
-          for (const fileName of files) {
-            const filePath = `${premiumContentDir}/${fileName}`;
-            try {
+          const settled = await Promise.allSettled(
+            files.map(async (fileName) => {
+              const filePath = `${premiumContentDir}/${fileName}`;
               const fileStats = await RNFS.default.stat(filePath);
-              totalSize += fileStats.size;
-
               await RNFS.default.unlink(filePath);
+              return fileStats.size;
+            })
+          );
+          for (const r of settled) {
+            if (r.status === "fulfilled") {
               cleanedCount++;
-              // console.log(`🗑️ Supprimé: ${fileName} (${fileStats.size} bytes)`);
-            } catch (fileError) {
-              console.error(`❌ Erreur suppression ${fileName}:`, fileError);
+              totalSize += r.value;
+            } else {
+              console.error(`❌ Erreur suppression fichier:`, r.reason);
             }
           }
 

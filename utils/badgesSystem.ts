@@ -33,13 +33,13 @@ export interface Badge {
   unlocked_at?: string;
 }
 
-export interface BadgeCategory {
+interface BadgeCategory {
   name: string;
   icon: string;
   color: string;
 }
 
-export interface BadgesSystemConfig {
+interface BadgesSystemConfig {
   categories: Record<string, BadgeCategory>;
   badges: Badge[];
   metadata: {
@@ -57,7 +57,7 @@ const badgesSystemData =
 /**
  * Classe pour gérer le système de badges
  */
-export class BadgesSystem {
+class BadgesSystem {
   private static instance: BadgesSystem;
   private config: BadgesSystemConfig;
 
@@ -224,7 +224,7 @@ export class BadgesSystem {
 }
 
 // Export de l'instance singleton
-export const badgesSystem = BadgesSystem.getInstance();
+const badgesSystem = BadgesSystem.getInstance();
 
 // Hook personnalisé pour utiliser le système de badges
 export const useBadgesSystem = () => {

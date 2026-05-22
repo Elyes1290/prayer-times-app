@@ -5,16 +5,16 @@ import {
   View,
   StyleSheet,
   ImageBackground,
-  SafeAreaView,
   Platform,
   TextInput,
-  TouchableOpacity,
+  Pressable,
   Alert,
   Modal,
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { Picker } from "@react-native-picker/picker";
 import { useTranslation } from "react-i18next";
-import { Ionicons } from "@expo/vector-icons";
+import { IonIcon } from "@/components/icons/AppVectorIcons";
 import ThemedImageBackground from "../components/ThemedImageBackground";
 import { useLocalSearchParams } from "expo-router";
 import FavoriteButton from "../components/FavoriteButton";
@@ -217,17 +217,17 @@ export default function DhikrScreen() {
                 iconColorActive="#FFD700"
                 style={styles.favoriteButton}
               />
-              <TouchableOpacity
+              <Pressable
                 style={styles.dhikrButton}
                 onPress={handleDhikrCompleted}
                 testID="dhikr-completed-button"
               >
-                <Ionicons
+                <IonIcon
                   name="checkmark-circle"
                   size={22}
                   color={user.isPremium ? "#4ECDC4" : "#95A5A6"}
                 />
-              </TouchableOpacity>
+              </Pressable>
             </View>
           </View>
           {!i18n.language.startsWith("ar") && item.latin && (
@@ -264,15 +264,15 @@ export default function DhikrScreen() {
 
           {/* 🍎 iOS: Sélecteur personnalisé avec Modal */}
           {Platform.OS === "ios" ? (
-            <TouchableOpacity
+            <Pressable
               style={styles.iosPickerButton}
               onPress={() => setCategoryModalVisible(true)}
             >
               <Text style={styles.iosPickerText}>
                 {CATEGORY_LABELS[selectedKey]}
               </Text>
-              <Ionicons name="chevron-down" size={20} color="#e4c678" />
-            </TouchableOpacity>
+              <IonIcon name="chevron-down" size={20} color="#e4c678" />
+            </Pressable>
           ) : (
             /* 🤖 Android: Picker natif */
             <View style={styles.pickerWrap}>
@@ -322,18 +322,18 @@ export default function DhikrScreen() {
                 <Text style={styles.modalTitle}>
                   {t("dhikr.select_category") || "Sélectionner une catégorie"}
                 </Text>
-                <TouchableOpacity
+                <Pressable
                   style={styles.closeButton}
                   onPress={() => setCategoryModalVisible(false)}
                 >
                   <Text style={styles.closeButtonText}>✕</Text>
-                </TouchableOpacity>
+                </Pressable>
               </View>
               <FlatList
                 data={CATEGORIES}
                 keyExtractor={(item) => item.key}
                 renderItem={({ item }) => (
-                  <TouchableOpacity
+                  <Pressable
                     style={[
                       styles.categoryOption,
                       selectedKey === item.key && styles.selectedCategoryOption,
@@ -355,9 +355,9 @@ export default function DhikrScreen() {
                       {CATEGORY_LABELS[item.key]}
                     </Text>
                     {selectedKey === item.key && (
-                      <Ionicons name="checkmark" size={24} color="#4ECDC4" />
+                      <IonIcon name="checkmark" size={24} color="#4ECDC4" />
                     )}
-                  </TouchableOpacity>
+                  </Pressable>
                 )}
               />
             </View>
@@ -441,10 +441,7 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     padding: 18,
     marginHorizontal: 15,
-    shadowColor: "#000",
-    shadowOpacity: 0.11,
-    shadowOffset: { width: 0, height: 1 },
-    elevation: 2,
+    boxShadow: "0px 1px 0px rgba(0,0,0,0.11)",
   },
   cardHeader: {
     flexDirection: "row",

@@ -4,13 +4,13 @@
  */
 
 import { useColorScheme } from "react-native";
-import { useContext } from "react";
+import { use } from "react";
 import { Colors, ColorName } from "@/constants/Colors";
 import { SettingsContext } from "@/contexts/SettingsContext";
 
 // Hook internal pour obtenir le thème actuel depuis le contexte des paramètres
 function useCurrentThemeInternal(): "light" | "dark" | "morning" | "sunset" {
-  const settings = useContext(SettingsContext);
+  const settings = use(SettingsContext);
   const systemTheme = useColorScheme() ?? "light";
 
   // Si on peut accéder au contexte, utiliser le thème des paramètres
@@ -81,7 +81,7 @@ export function useOverlayIconColor(): string {
 }
 
 // Hook utilitaire pour les couleurs de texte secondaire sur overlay
-export function useOverlaySecondaryTextColor(): string {
+function useOverlaySecondaryTextColor(): string {
   const colors = useThemeColors();
   return colors.textOverlaySecondary;
 }

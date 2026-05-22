@@ -67,24 +67,3 @@ export const STRIPE_CONFIG = {
   },
 } as const;
 
-// Types pour les abonnements
-export type SubscriptionType = "monthly" | "yearly" | "family";
-export type StripeProductId = keyof typeof STRIPE_CONFIG.products;
-
-// Interface pour les détails d'abonnement
-export interface SubscriptionDetails {
-  id: string;
-  type: SubscriptionType;
-  status: "active" | "canceled" | "past_due" | "unpaid";
-  currentPeriodStart: Date;
-  currentPeriodEnd: Date;
-  cancelAtPeriodEnd: boolean;
-  features: string[];
-}
-
-// Interface pour les erreurs de paiement
-export interface PaymentError {
-  code: string;
-  message: string;
-  type: "card_error" | "validation_error" | "api_error";
-}

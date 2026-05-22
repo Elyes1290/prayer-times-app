@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import {
   View,
   Text,
-  TouchableOpacity,
+  Pressable,
   ActivityIndicator,
   StyleSheet,
   FlatList,
   ListRenderItem,
 } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { MCIcon } from "@/components/icons/AppVectorIcons";
 import Slider from "@react-native-community/slider";
 import { useTranslation } from "react-i18next";
 import { PremiumContent } from "../../utils/premiumContent";
@@ -195,20 +195,20 @@ export default function AdhanSoundSection({
             {t("calculation_method", "Méthode de calcul")}
           </Text>
           <View style={[styles.row, { justifyContent: "center" }]}>
-            <TouchableOpacity
+            <Pressable
               style={buttonStyles.container}
               onPress={() => setMethodPickerVisible(true)}
             >
               <Text style={buttonStyles.text}>
                 {t(`method_${calcMethod}`, calcMethod)}
               </Text>
-              <MaterialCommunityIcons
+              <MCIcon
                 name="chevron-down"
                 size={20}
                 color="#4ECDC4"
                 style={buttonStyles.icon}
               />
-            </TouchableOpacity>
+            </Pressable>
           </View>
 
           <ThemedPicker
@@ -237,20 +237,20 @@ export default function AdhanSoundSection({
             {t("adhan_sound", "Son de l'Adhan")}
           </Text>
           <View style={[styles.row, { justifyContent: "center" }]}>
-            <TouchableOpacity
+            <Pressable
               style={buttonStyles.container}
               onPress={() => setSoundPickerVisible(true)}
             >
               <Text style={buttonStyles.text}>
                 {getSoundDisplayName(adhanSound)}
               </Text>
-              <MaterialCommunityIcons
+              <MCIcon
                 name="chevron-down"
                 size={20}
                 color="#4ECDC4"
                 style={buttonStyles.icon}
               />
-            </TouchableOpacity>
+            </Pressable>
 
             <ThemedPicker
               visible={soundPickerVisible}
@@ -273,7 +273,7 @@ export default function AdhanSoundSection({
               {t("adhans.preview_limited", "Preview limitée à 20 secondes")}
             </Text>
             <View style={styles.previewControls}>
-              <TouchableOpacity
+              <Pressable
                 onPress={() => {
                   // 🚀 FIX: Éviter le blocage de l'UI avec async/await dans onPress
                   if (
@@ -295,13 +295,13 @@ export default function AdhanSoundSection({
                 disabled={isLoadingPreview && !isPreviewing}
               >
                 {isLoadingPreview ? (
-                  <MaterialCommunityIcons
+                  <MCIcon
                     name="loading"
                     size={24}
                     color="#fff"
                   />
                 ) : (
-                  <MaterialCommunityIcons
+                  <MCIcon
                     name={
                       isAudioPlaying && currentPlayingAdhan === "main_preview"
                         ? "pause"
@@ -311,16 +311,16 @@ export default function AdhanSoundSection({
                     color="#fff"
                   />
                 )}
-              </TouchableOpacity>
-              <TouchableOpacity
+              </Pressable>
+              <Pressable
                 onPress={stopPreview}
                 style={styles.stopButtonMain}
                 disabled={
                   !currentPlayingAdhan || (isLoadingPreview && !isPreviewing)
                 }
               >
-                <MaterialCommunityIcons name="stop" size={24} color="#fff" />
-              </TouchableOpacity>
+                <MCIcon name="stop" size={24} color="#fff" />
+              </Pressable>
             </View>
           </View>
         </View>
@@ -411,23 +411,22 @@ export default function AdhanSoundSection({
                                 <Text style={styles.progressTextPremium}>
                                   {progress}%
                                 </Text>
-                                <TouchableOpacity
+                                <Pressable
                                   style={styles.cancelDownloadButton}
                                   onPress={() => handleCancelDownload(item.id)}
-                                  activeOpacity={0.7}
                                 >
-                                  <MaterialCommunityIcons
+                                  <MCIcon
                                     name="close-circle"
                                     size={20}
                                     color="#FF6B6B"
                                   />
-                                </TouchableOpacity>
+                                </Pressable>
                               </View>
                             </View>
                           ) : item.isDownloaded ? (
                             <View style={styles.downloadedContainer}>
                               <View style={styles.downloadedIndicator}>
-                                <MaterialCommunityIcons
+                                <MCIcon
                                   name="check-circle"
                                   size={20}
                                   color="#4ECDC4"
@@ -436,23 +435,23 @@ export default function AdhanSoundSection({
                                   {t("settings_screen.downloaded")}
                                 </Text>
                               </View>
-                              <TouchableOpacity
+                              <Pressable
                                 style={styles.deleteButtonPremium}
                                 onPress={() => handleDeleteAdhan(item)}
                               >
-                                <MaterialCommunityIcons
+                                <MCIcon
                                   name="delete"
                                   size={20}
                                   color="#FF6B6B"
                                 />
-                              </TouchableOpacity>
+                              </Pressable>
                             </View>
                           ) : (
-                            <TouchableOpacity
+                            <Pressable
                               style={styles.downloadButtonPremium}
                               onPress={() => handleDownloadAdhan(item)}
                             >
-                              <MaterialCommunityIcons
+                              <MCIcon
                                 name="download"
                                 size={20}
                                 color="#4ECDC4"
@@ -460,7 +459,7 @@ export default function AdhanSoundSection({
                               <Text style={styles.downloadButtonTextPremium}>
                                 {t("download")}
                               </Text>
-                            </TouchableOpacity>
+                            </Pressable>
                           )}
                         </View>
                       </View>
@@ -483,7 +482,7 @@ export default function AdhanSoundSection({
                   );
                 })()}
                 <View style={{ flexDirection: "row", gap: 8, marginTop: 8 }}>
-                  <TouchableOpacity
+                  <Pressable
                     style={{
                       backgroundColor: isRefreshingAdhans
                         ? "#80CBC4"
@@ -502,7 +501,7 @@ export default function AdhanSoundSection({
                     {isRefreshingAdhans ? (
                       <ActivityIndicator size="small" color="#fff" />
                     ) : (
-                      <MaterialCommunityIcons
+                      <MCIcon
                         name="refresh"
                         size={16}
                         color="#fff"
@@ -513,9 +512,9 @@ export default function AdhanSoundSection({
                         ? t("loading", "Chargement...")
                         : t("refresh")}
                     </Text>
-                  </TouchableOpacity>
+                  </Pressable>
 
-                  <TouchableOpacity
+                  <Pressable
                     style={{
                       backgroundColor: isCleaningFiles ? "#FF8A80" : "#ff6b6b",
                       padding: 8,
@@ -532,7 +531,7 @@ export default function AdhanSoundSection({
                     {isCleaningFiles ? (
                       <ActivityIndicator size="small" color="#fff" />
                     ) : (
-                      <MaterialCommunityIcons
+                      <MCIcon
                         name="broom"
                         size={16}
                         color="#fff"
@@ -543,7 +542,7 @@ export default function AdhanSoundSection({
                         ? t("cleaning", "Nettoyage...")
                         : t("clean")}
                     </Text>
-                  </TouchableOpacity>
+                  </Pressable>
                 </View>
               </View>
             );

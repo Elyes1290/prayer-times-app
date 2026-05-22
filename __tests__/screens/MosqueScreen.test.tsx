@@ -52,17 +52,20 @@ jest.mock("react", () => ({
 }));
 
 jest.mock("../../hooks/useThemeColor", () => ({
-  useThemeColors: () => ({ primary: "#000", background: "#fff" }),
+  useThemeColors: () => ({
+    primary: "#000",
+    background: "#fff",
+    surface: "#ffffff",
+    surfaceVariant: "#f0f0f0",
+    cardBG: "#ffffff",
+    border: "#e0e0e0",
+    text: "#000000",
+    textSecondary: "#666666",
+    shadow: "#000000",
+  }),
   useOverlayTextColor: () => "#000",
   useOverlayIconColor: () => "#000",
   useCurrentTheme: () => "light",
-}));
-
-jest.mock("@expo/vector-icons", () => ({
-  MaterialCommunityIcons: (props: any) => {
-    const { View } = require("react-native");
-    return <View testID="icon" {...props} />;
-  },
 }));
 
 // Mock fetch pour éviter les appels réseau
@@ -168,7 +171,7 @@ describe("MosqueScreen", () => {
   it("affiche les icônes pour les actions", async () => {
     render(<MosqueScreen />);
     await waitFor(() => {
-      expect(screen.getAllByTestId("icon").length).toBeGreaterThan(0);
+      expect(screen.getAllByTestId(/^icon-/).length).toBeGreaterThan(0);
     });
   });
 });

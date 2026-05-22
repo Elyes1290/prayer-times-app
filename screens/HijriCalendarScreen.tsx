@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ScrollView, StyleSheet, Text, View, Dimensions } from "react-native";
+import { ScrollView, StyleSheet, Text, View, useWindowDimensions } from "react-native";
 import { Calendar } from "react-native-calendars";
 import ThemedImageBackground from "../components/ThemedImageBackground";
 import { DateNavigator } from "../components/DateNavigator";
@@ -107,7 +107,7 @@ export default function HijriCalendarScreen() {
 
   const styles = getStyles(colors, overlayTextColor, currentTheme);
 
-  const { width, height } = Dimensions.get("window");
+  const { width, height } = useWindowDimensions();
   // Ajustement responsif des tailles de police selon l'écran
   const isSmallScreen = height < 700;
   const calendarTextSizes = {
@@ -275,8 +275,8 @@ export default function HijriCalendarScreen() {
             <Text style={styles.eventsTitle}>
               {t("religious_events_today")}
             </Text>
-            {eventsToday.map((event, idx) => (
-              <Text key={idx} style={styles.eventItem}>
+            {eventsToday.map((event) => (
+              <Text key={event.name} style={styles.eventItem}>
                 • {t(event.name)}
               </Text>
             ))}

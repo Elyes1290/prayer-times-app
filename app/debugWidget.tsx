@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Alert } from 'react-native';
+import { View, Text, StyleSheet, Pressable, ScrollView, Alert } from 'react-native';
 import { usePrayerTimesWidget } from '../hooks/usePrayerTimesWidget';
 import { useRouter } from 'expo-router';
 import { NativeModules, Platform } from 'react-native';
 
 const { PrayerTimesWidgetModule } = NativeModules;
 
+type LogEntry = { id: string; text: string };
+
 export default function DebugWidgetScreen() {
-  const router = useRouter();
-  const [logs, setLogs] = useState<string[]>([]);
+  const { back } = useRouter();
+  const [logs, setLogs] = useState<LogEntry[]>([]);
   const { isWidgetAvailable, updatePrayerTimes, getPrayerTimes, forceWidgetRefresh } = usePrayerTimesWidget();
 
   // 🔒 Désactiver en production
@@ -17,23 +19,29 @@ export default function DebugWidgetScreen() {
       Alert.alert(
         "Accès refusé",
         "Cette page n'est disponible qu'en mode développement.",
-        [{ text: "OK", onPress: () => router.back() }]
+        [{ text: "OK", onPress: () => back() }]
       );
     }
-  }, []);
+  }, [back]);
 
   const addLog = (message: string) => {
     const timestamp = new Date().toLocaleTimeString();
-    setLogs(prev => [`[${timestamp}] ${message}`, ...prev]);
+    const text = `[${timestamp}] ${message}`;
+    setLogs((prev) => [
+      { id: `${Date.now()}-${prev.length}`, text },
+      ...prev,
+    ]);
     console.log(`[DebugWidget] ${message}`);
   };
 
   // Exécuter les tests automatiquement au chargement
   React.useEffect(() => {
-    setTimeout(() => {
-      testModuleExists();
-      setTimeout(() => testWidgetAvailability(), 500);
-    }, 500);
+    const timer1 = setTimeout(() => testModuleExists(), 500);
+    const timer2 = setTimeout(() => testWidgetAvailability(), 1000);
+    return () => {
+      clearTimeout(timer1);
+      clearTimeout(timer2);
+    };
   }, []);
 
   const testModuleExists = () => {
@@ -104,9 +112,9 @@ export default function DebugWidgetScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
+        <Pressable onPress={() => back()} style={styles.backButton}>
           <Text style={styles.backText}>← Retour</Text>
-        </TouchableOpacity>
+        </Pressable>
         <Text style={styles.title}>Debug Widget iOS</Text>
       </View>
 
@@ -122,36 +130,36 @@ export default function DebugWidgetScreen() {
       </View>
 
       <View style={styles.buttonsContainer}>
-        <TouchableOpacity style={styles.button} onPress={testModuleExists}>
+        <Pressable style={styles.button} onPress={testModuleExists}>
           <Text style={styles.buttonText}>1. Test Module</Text>
-        </TouchableOpacity>
+        </Pressable>
 
-        <TouchableOpacity style={styles.button} onPress={testWidgetAvailability}>
+        <Pressable style={styles.button} onPress={testWidgetAvailability}>
           <Text style={styles.buttonText}>2. Test Disponibilité</Text>
-        </TouchableOpacity>
+        </Pressable>
 
-        <TouchableOpacity style={styles.button} onPress={testWritePrayerTimes}>
+        <Pressable style={styles.button} onPress={testWritePrayerTimes}>
           <Text style={styles.buttonText}>3. Test Écriture</Text>
-        </TouchableOpacity>
+        </Pressable>
 
-        <TouchableOpacity style={styles.button} onPress={testForceRefresh}>
+        <Pressable style={styles.button} onPress={testForceRefresh}>
           <Text style={styles.buttonText}>4. Rafraîchir Widget</Text>
-        </TouchableOpacity>
+        </Pressable>
 
-        <TouchableOpacity 
+        <Pressable 
           style={[styles.button, styles.clearButton]} 
           onPress={() => setLogs([])}
         >
           <Text style={styles.buttonText}>Effacer Logs</Text>
-        </TouchableOpacity>
+        </Pressable>
       </View>
 
       <View style={styles.logsContainer}>
         <Text style={styles.logsTitle}>Logs:</Text>
         <ScrollView style={styles.logsScroll}>
-          {logs.map((log, index) => (
-            <Text key={index} style={styles.logText}>
-              {log}
+          {logs.map((entry) => (
+            <Text key={entry.id} style={styles.logText}>
+              {entry.text}
             </Text>
           ))}
         </ScrollView>

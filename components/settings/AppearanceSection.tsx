@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity, StyleSheet, Alert } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { View, Text, Pressable, StyleSheet, Alert } from "react-native";
+import { MCIcon } from "@/components/icons/AppVectorIcons";
 import ThemedPicker from "../ThemedPicker";
 import { TFunction } from "i18next";
 import { BackgroundImageType } from "../../contexts/SettingsContext";
@@ -137,18 +137,18 @@ export default function AppearanceSection({
           <View
             style={[styles.row, { justifyContent: "center", marginTop: 8 }]}
           >
-            <TouchableOpacity
+            <Pressable
               style={buttonStyles.container}
               onPress={() => setLanguagePickerVisible(true)}
             >
               <Text style={buttonStyles.text}>{selectedLanguageLabel}</Text>
-              <MaterialCommunityIcons
+              <MCIcon
                 name="chevron-down"
                 size={20}
                 color="#4ECDC4"
                 style={buttonStyles.icon}
               />
-            </TouchableOpacity>
+            </Pressable>
 
             <ThemedPicker
               visible={languagePickerVisible}
@@ -172,18 +172,18 @@ export default function AppearanceSection({
           <View
             style={[styles.row, { justifyContent: "center", marginTop: 8 }]}
           >
-            <TouchableOpacity
+            <Pressable
               style={buttonStyles.container}
               onPress={() => setThemePickerVisible(true)}
             >
               <Text style={buttonStyles.text}>{themeLabels[currentTheme]}</Text>
-              <MaterialCommunityIcons
+              <MCIcon
                 name="chevron-down"
                 size={20}
                 color="#4ECDC4"
                 style={buttonStyles.icon}
               />
-            </TouchableOpacity>
+            </Pressable>
 
             <ThemedPicker
               visible={themePickerVisible}
@@ -222,20 +222,20 @@ export default function AppearanceSection({
             <View
               style={[styles.row, { justifyContent: "center", marginTop: 8 }]}
             >
-              <TouchableOpacity
+              <Pressable
                 style={buttonStyles.container}
                 onPress={() => setBackgroundPickerVisible(true)}
               >
                 <Text style={buttonStyles.text}>
                   {backgroundImageLabels[backgroundImageType]}
                 </Text>
-                <MaterialCommunityIcons
+                <MCIcon
                   name="chevron-down"
                   size={20}
                   color="#4ECDC4"
                   style={buttonStyles.icon}
                 />
-              </TouchableOpacity>
+              </Pressable>
 
               <ThemedPicker
                 visible={backgroundPickerVisible}

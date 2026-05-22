@@ -1,6 +1,6 @@
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { MCIcon } from "@/components/icons/AppVectorIcons";
 import React, {
-  useContext,
+  use,
   useState,
   useEffect,
   useMemo,
@@ -17,12 +17,11 @@ import {
   StyleSheet,
   Text,
   View,
-  TouchableOpacity,
+  Pressable,
   NativeModules,
   Animated,
   StatusBar,
   Dimensions,
-  Pressable,
   Share,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
@@ -38,6 +37,7 @@ import {
   useOverlayIconColor,
   useCurrentTheme,
 } from "../hooks/useThemeColor";
+import { makeBoxShadow } from "../utils/shadowUtils";
 import { SettingsContext } from "../contexts/SettingsContext";
 import { useTranslation } from "react-i18next";
 import { reverseGeocodeAsync } from "expo-location";
@@ -108,18 +108,10 @@ const THEME = {
   },
   shadows: {
     glow: {
-      shadowColor: "#4ECDC4",
-      shadowOffset: { width: 0, height: 0 },
-      shadowOpacity: 0.5,
-      shadowRadius: 10,
-      elevation: 15,
+      boxShadow: "0px 0px 10px rgba(78,205,196,0.5)",
     },
     card: {
-      shadowColor: "#000",
-      shadowOffset: { width: 0, height: 8 },
-      shadowOpacity: 0.3,
-      shadowRadius: 20,
-      elevation: 12,
+      boxShadow: "0px 8px 20px rgba(0,0,0,0.3)",
     },
   },
 };
@@ -170,7 +162,7 @@ interface PrayerInfo {
 
 export default function HomeScreen() {
   const { t, i18n } = useTranslation();
-  const router = useRouter();
+  const { push } = useRouter();
   const [today, setToday] = useState(new Date());
   const [city, setCity] = useState<string | null>(null);
   const [showPersonalizationModal, setShowPersonalizationModal] =
@@ -243,7 +235,7 @@ export default function HomeScreen() {
   const [scaleAnim] = useState(new Animated.Value(0.95));
   const [rotateAnim] = useState(new Animated.Value(0));
 
-  const settings = useContext(SettingsContext);
+  const settings = use(SettingsContext);
   const { location } = useLocation();
   const { user } = usePremium();
 
@@ -281,7 +273,7 @@ export default function HomeScreen() {
   }, [i18n.language]);
 
   // 🆕 Charger un verset aléatoire depuis QuranOfflineService
-  const loadRandomVerseFromLocal = async () => {
+  const loadRandomVerseFromLocal = useCallback(async () => {
     try {
       // Choisir une sourate aléatoire (1-114)
       const randomSurahNumber = Math.floor(Math.random() * 114) + 1;
@@ -309,10 +301,9 @@ export default function HomeScreen() {
     } catch (error) {
       errorLog("Erreur lors du chargement du verset local:", error);
     }
-  };
+  }, [lang]);
 
-  // 🆕 Charger un hadith aléatoire depuis HadithOfflineService
-  const loadRandomHadithFromLocal = async () => {
+  const loadRandomHadithFromLocal = useCallback(async () => {
     try {
       // Liste des livres de hadiths disponibles
       const hadithBooks = [
@@ -354,9 +345,9 @@ export default function HomeScreen() {
     } catch (error) {
       errorLog("Erreur lors du chargement du hadith local:", error);
     }
-  };
+  }, []);
 
-  const loadRandomContent = async () => {
+  const loadRandomContent = useCallback(async () => {
     try {
       // Utiliser le système i18n pour récupérer les dhikr selon la langue courante
       const dhikrData = i18n.getResourceBundle(i18n.language, "dhikr");
@@ -409,7 +400,7 @@ export default function HomeScreen() {
         meaning: "Le nom suprême d'Allah, englobant tous Ses attributs.",
       });
     }
-  };
+  }, [loadRandomVerseFromLocal, loadRandomHadithFromLocal, i18n.language]);
 
   // Permission notifications (Android 13+ et iOS)
   useEffect(() => {
@@ -651,6 +642,60 @@ export default function HomeScreen() {
     }
     return null;
   }, [settings.locationMode, manualLocationObj, location]);
+
+  const quickActions = useMemo(
+    () =>
+      [
+        {
+          icon: "compass",
+          title: t("qibla"),
+          route: "/qibla",
+          color: "#4ECDC4",
+          gradient: ["rgba(78,205,196,0.13)", "rgba(44,122,122,0.10)"] as const,
+        },
+        {
+          icon: "heart-multiple",
+          title: t("favorites") || "Favoris",
+          route: "/favorites",
+          color: "#FF6B6B",
+          gradient: ["rgba(255,107,107,0.13)", "rgba(139,0,0,0.10)"] as const,
+        },
+        {
+          icon: "account-heart",
+          title: t("prophets_stories") || "Histoires des Prophètes",
+          route: "/prophet-stories",
+          color: "#2E7D32",
+          gradient: ["rgba(46,125,50,0.13)", "rgba(27,94,32,0.10)"] as const,
+        },
+        {
+          icon: "calendar-heart",
+          title: t("hijri_calendar"),
+          route: "/hijri",
+          color: "#FFD700",
+          gradient: ["rgba(255,215,0,0.12)", "rgba(255,179,102,0.10)"] as const,
+        },
+        {
+          icon: "book-multiple",
+          title: t("hadiths"),
+          route: "/hadith",
+          color: "#F093FB",
+          gradient: ["rgba(240,147,251,0.13)", "rgba(155,75,155,0.10)"] as const,
+        },
+        {
+          icon: "mosque",
+          title: t("mosques"),
+          route: "/mosques",
+          color: "#B8860B",
+          gradient: ["rgba(184,134,11,0.13)", "rgba(255,215,0,0.10)"] as const,
+        },
+      ].filter((action) => {
+        if (action.route === "/prophet-stories") {
+          return offlineAccess.canAccessOffline || networkStatus.isConnected;
+        }
+        return true;
+      }),
+    [t, offlineAccess.canAccessOffline, networkStatus.isConnected]
+  );
 
   // 🔧 CORRECTION BUG : Fonction normale (non automatique) pour reprogrammation manuelle uniquement
   const updateNotifications = async () => {
@@ -992,7 +1037,7 @@ export default function HomeScreen() {
         />
         <View style={styles.centeredContainer}>
           <View style={styles.setupCard}>
-            <MaterialCommunityIcons
+            <MCIcon
               name="map-marker-radius"
               size={70}
               color={"#2E7D32"}
@@ -1004,19 +1049,19 @@ export default function HomeScreen() {
                 "Bienvenue ! Choisissez votre mode de localisation :"}
             </Text>
 
-            <TouchableOpacity
+            <Pressable
               style={styles.primaryButton}
               onPress={() =>
-                router.push("/settings?openLocation=true&mode=manual")
+                push("/settings?openLocation=true&mode=manual")
               }
             >
-              <MaterialCommunityIcons name="city" size={24} color="#fff" />
+              <MCIcon name="city" size={24} color="#fff" />
               <Text style={styles.primaryButtonText}>
                 {t("enter_city") || "Entrer ville manuellement"}
               </Text>
-            </TouchableOpacity>
+            </Pressable>
 
-            <TouchableOpacity
+            <Pressable
               style={styles.secondaryButton}
               onPress={async () => {
                 settings.setLocationMode("auto");
@@ -1027,7 +1072,7 @@ export default function HomeScreen() {
                 }
               }}
             >
-              <MaterialCommunityIcons
+              <MCIcon
                 name="crosshairs-gps"
                 size={24}
                 color={"#2E7D32"}
@@ -1035,7 +1080,7 @@ export default function HomeScreen() {
               <Text style={styles.secondaryButtonText}>
                 {t("automatic") || "Utiliser GPS automatique"}
               </Text>
-            </TouchableOpacity>
+            </Pressable>
           </View>
         </View>
       </ThemedImageBackground>
@@ -1053,7 +1098,7 @@ export default function HomeScreen() {
         />
         <View style={styles.centeredContainer}>
           <Animated.View style={[styles.setupCard, { opacity: fadeAnim }]}>
-            <MaterialCommunityIcons
+            <MCIcon
               name="map-marker-radius"
               size={70}
               color={colors.primary}
@@ -1065,13 +1110,13 @@ export default function HomeScreen() {
                 "Bienvenue ! Choisissez votre mode de localisation :"}
             </Text>
 
-            <TouchableOpacity
+            <Pressable
               style={styles.primaryButton}
               onPress={() =>
-                router.push("/settings?openLocation=true&mode=manual")
+                push("/settings?openLocation=true&mode=manual")
               }
             >
-              <MaterialCommunityIcons
+              <MCIcon
                 name="city"
                 size={24}
                 color={overlayIconColor}
@@ -1079,9 +1124,9 @@ export default function HomeScreen() {
               <Text style={styles.primaryButtonText}>
                 {t("enter_city") || "Entrer ville manuellement"}
               </Text>
-            </TouchableOpacity>
+            </Pressable>
 
-            <TouchableOpacity
+            <Pressable
               style={styles.secondaryButton}
               onPress={async () => {
                 settings.setLocationMode("auto");
@@ -1092,7 +1137,7 @@ export default function HomeScreen() {
                 }
               }}
             >
-              <MaterialCommunityIcons
+              <MCIcon
                 name="crosshairs-gps"
                 size={24}
                 color={colors.primary}
@@ -1100,7 +1145,7 @@ export default function HomeScreen() {
               <Text style={styles.secondaryButtonText}>
                 {t("automatic") || "Utiliser GPS automatique"}
               </Text>
-            </TouchableOpacity>
+            </Pressable>
           </Animated.View>
         </View>
       </ThemedImageBackground>
@@ -1118,7 +1163,7 @@ export default function HomeScreen() {
         />
         <View style={styles.centeredContainer}>
           <View style={styles.errorCard}>
-            <MaterialCommunityIcons
+            <MCIcon
               name="alert-circle"
               size={60}
               color="#ff6b6b"
@@ -1126,13 +1171,13 @@ export default function HomeScreen() {
             />
             <Text style={styles.errorTitle}>{t("prayer_times")}</Text>
             <Text style={styles.errorText}>{settings.errorMsg}</Text>
-            <TouchableOpacity
+            <Pressable
               style={styles.primaryButton}
               onPress={() =>
-                router.push("/settings?openLocation=true&mode=manual")
+                push("/settings?openLocation=true&mode=manual")
               }
             >
-              <MaterialCommunityIcons
+              <MCIcon
                 name="cog"
                 size={20}
                 color={overlayIconColor}
@@ -1140,7 +1185,7 @@ export default function HomeScreen() {
               <Text style={styles.primaryButtonText}>
                 {t("settings") || "Aller aux paramètres"}
               </Text>
-            </TouchableOpacity>
+            </Pressable>
           </View>
         </View>
       </ThemedImageBackground>
@@ -1234,64 +1279,6 @@ export default function HomeScreen() {
     return 0;
   };
 
-  // Mise à jour des actions rapides avec les types corrects pour les gradients
-  const allQuickActions = [
-    {
-      icon: "compass",
-      title: t("qibla"),
-      route: "/qibla",
-      color: "#4ECDC4",
-      gradient: ["rgba(78,205,196,0.13)", "rgba(44,122,122,0.10)"] as const,
-    },
-    {
-      icon: "heart-multiple",
-      title: t("favorites") || "Favoris",
-      route: "/favorites",
-      color: "#FF6B6B",
-      gradient: ["rgba(255,107,107,0.13)", "rgba(139,0,0,0.10)"] as const,
-    },
-    // 📚 NOUVELLE FONCTIONNALITÉ : Histoires du Prophète (PBUH)
-    {
-      icon: "account-heart",
-      title: t("prophets_stories") || "Histoires des Prophètes",
-      route: "/prophet-stories",
-      color: "#2E7D32",
-      gradient: ["rgba(46,125,50,0.13)", "rgba(27,94,32,0.10)"] as const,
-    },
-    // Note: Récitations premium intégrées dans la page Quran
-    {
-      icon: "calendar-heart",
-      title: t("hijri_calendar"),
-      route: "/hijri",
-      color: "#FFD700",
-      gradient: ["rgba(255,215,0,0.12)", "rgba(255,179,102,0.10)"] as const,
-    },
-    {
-      icon: "book-multiple",
-      title: t("hadiths"),
-      route: "/hadith",
-      color: "#F093FB",
-      gradient: ["rgba(240,147,251,0.13)", "rgba(155,75,155,0.10)"] as const,
-    },
-    {
-      icon: "mosque",
-      title: t("mosques"),
-      route: "/mosques",
-      color: "#B8860B",
-      gradient: ["rgba(184,134,11,0.13)", "rgba(255,215,0,0.10)"] as const,
-    },
-  ];
-
-  // 🌐 NOUVEAU : Filtrer les raccourcis selon le statut réseau et premium
-  const quickActions = allQuickActions.filter((action) => {
-    // Masquer "Histoires du Prophète" si l'utilisateur est hors ligne et non-premium
-    if (action.route === "/prophet-stories") {
-      return offlineAccess.canAccessOffline || networkStatus.isConnected;
-    }
-    // Tous les autres raccourcis restent visibles
-    return true;
-  });
-
   return (
     <>
       <StatusBar barStyle="light-content" />
@@ -1323,17 +1310,17 @@ export default function HomeScreen() {
                     : t("dashboard_welcome")}
                 </Text>
                 {settings.userFirstName && (
-                  <TouchableOpacity
+                  <Pressable
                     style={styles.editNameButton}
                     onPress={() => setShowPersonalizationModal(true)}
                     hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
                   >
-                    <MaterialCommunityIcons
+                    <MCIcon
                       name="pencil-outline"
                       size={16}
                       color={colors.textSecondary} // 🌅 Utilise la couleur du thème actif
                     />
-                  </TouchableOpacity>
+                  </Pressable>
                 )}
               </View>
               <Text
@@ -1341,7 +1328,7 @@ export default function HomeScreen() {
                 numberOfLines={1}
                 ellipsizeMode="tail"
               >
-                {new Date().toLocaleDateString(
+                {today.toLocaleDateString(
                   i18n.language.startsWith("ar")
                     ? "ar"
                     : i18n.language.startsWith("fr")
@@ -1386,7 +1373,7 @@ export default function HomeScreen() {
                     },
                   ]}
                 >
-                  <MaterialCommunityIcons
+                  <MCIcon
                     name="map-marker-outline"
                     size={16}
                     color="#4ECDC4"
@@ -1415,18 +1402,18 @@ export default function HomeScreen() {
                 ],
               }}
             >
-              <TouchableOpacity
+              <Pressable
                 style={styles.settingsButton}
                 onPress={() =>
-                  router.push("/settings?openLocation=true&mode=manual")
+                  push("/settings?openLocation=true&mode=manual")
                 }
               >
-                <MaterialCommunityIcons
+                <MCIcon
                   name="cog-outline"
                   size={24}
                   color={colors.textSecondary} // 🌅 Utilise la couleur du thème actif
                 />
-              </TouchableOpacity>
+              </Pressable>
             </Animated.View>
           </Animated.View>
 
@@ -1544,14 +1531,14 @@ export default function HomeScreen() {
               >
                 <View style={styles.cardHeader}>
                   <View style={styles.cardIconContainer}>
-                    <MaterialCommunityIcons
+                    <MCIcon
                       name="hand-heart"
                       size={28}
                       color="#fffbe8"
                     />
                   </View>
                   <Text style={styles.cardTitle}>{t("dua_du_jour")}</Text>
-                  <TouchableOpacity
+                  <Pressable
                     style={styles.shareButton}
                     onPress={() => {
                       if (randomDua) {
@@ -1568,12 +1555,12 @@ export default function HomeScreen() {
                       }
                     }}
                   >
-                    <MaterialCommunityIcons
+                    <MCIcon
                       name="share-variant"
                       size={24}
                       color="#fffbe8"
                     />
-                  </TouchableOpacity>
+                  </Pressable>
                 </View>
 
                 <View style={styles.cardBody}>
@@ -1599,17 +1586,17 @@ export default function HomeScreen() {
                   )}
                 </View>
 
-                <TouchableOpacity
+                <Pressable
                   style={styles.cardAction}
-                  onPress={() => router.push("/dhikr")}
+                  onPress={() => push("/dhikr")}
                 >
                   <Text style={styles.cardActionText}>{t("voir_plus")}</Text>
-                  <MaterialCommunityIcons
+                  <MCIcon
                     name="arrow-right"
                     size={20}
                     color="#fffbe8"
                   />
-                </TouchableOpacity>
+                </Pressable>
               </LinearGradient>
             </Animated.View>
 
@@ -1636,14 +1623,14 @@ export default function HomeScreen() {
               >
                 <View style={styles.cardHeader}>
                   <View style={styles.cardIconContainer}>
-                    <MaterialCommunityIcons
+                    <MCIcon
                       name="book-open-variant"
                       size={28}
                       color="#fffbe8"
                     />
                   </View>
                   <Text style={styles.cardTitle}>{t("verset_du_jour")}</Text>
-                  <TouchableOpacity
+                  <Pressable
                     style={styles.shareButton}
                     onPress={() => {
                       if (randomVerse) {
@@ -1656,12 +1643,12 @@ export default function HomeScreen() {
                       }
                     }}
                   >
-                    <MaterialCommunityIcons
+                    <MCIcon
                       name="share-variant"
                       size={24}
                       color="#fffbe8"
                     />
-                  </TouchableOpacity>
+                  </Pressable>
                 </View>
 
                 <View style={styles.cardBody}>
@@ -1686,17 +1673,17 @@ export default function HomeScreen() {
                   )}
                 </View>
 
-                <TouchableOpacity
+                <Pressable
                   style={styles.cardAction}
-                  onPress={() => router.push("/quran")}
+                  onPress={() => push("/quran")}
                 >
                   <Text style={styles.cardActionText}>{t("voir_plus")}</Text>
-                  <MaterialCommunityIcons
+                  <MCIcon
                     name="arrow-right"
                     size={20}
                     color="#fffbe8"
                   />
-                </TouchableOpacity>
+                </Pressable>
               </LinearGradient>
             </Animated.View>
 
@@ -1723,14 +1710,14 @@ export default function HomeScreen() {
               >
                 <View style={styles.cardHeader}>
                   <View style={styles.cardIconContainer}>
-                    <MaterialCommunityIcons
+                    <MCIcon
                       name="star-circle"
                       size={28}
                       color="#fffbe8"
                     />
                   </View>
                   <Text style={styles.cardTitle}>{t("nom_allah_du_jour")}</Text>
-                  <TouchableOpacity
+                  <Pressable
                     style={styles.shareButton}
                     onPress={() => {
                       if (randomName) {
@@ -1743,12 +1730,12 @@ export default function HomeScreen() {
                       }
                     }}
                   >
-                    <MaterialCommunityIcons
+                    <MCIcon
                       name="share-variant"
                       size={24}
                       color="#fffbe8"
                     />
-                  </TouchableOpacity>
+                  </Pressable>
                 </View>
 
                 <View style={styles.cardBody}>
@@ -1773,17 +1760,17 @@ export default function HomeScreen() {
                   )}
                 </View>
 
-                <TouchableOpacity
+                <Pressable
                   style={styles.cardAction}
-                  onPress={() => router.push("/asmaulhusna")}
+                  onPress={() => push("/asmaulhusna")}
                 >
                   <Text style={styles.cardActionText}>{t("voir_plus")}</Text>
-                  <MaterialCommunityIcons
+                  <MCIcon
                     name="arrow-right"
                     size={20}
                     color="#fffbe8"
                   />
-                </TouchableOpacity>
+                </Pressable>
               </LinearGradient>
             </Animated.View>
 
@@ -1814,14 +1801,14 @@ export default function HomeScreen() {
               >
                 <View style={styles.cardHeader}>
                   <View style={styles.cardIconContainer}>
-                    <MaterialCommunityIcons
+                    <MCIcon
                       name="book"
                       size={28}
                       color="#FFD700"
                     />
                   </View>
                   <Text style={styles.cardTitle}>{t("hadith_du_jour")}</Text>
-                  <TouchableOpacity
+                  <Pressable
                     style={styles.shareButton}
                     onPress={() => {
                       if (randomHadith) {
@@ -1845,12 +1832,12 @@ export default function HomeScreen() {
                       }
                     }}
                   >
-                    <MaterialCommunityIcons
+                    <MCIcon
                       name="share-variant"
                       size={24}
                       color="#fffbe8"
                     />
-                  </TouchableOpacity>
+                  </Pressable>
                 </View>
                 <View style={styles.cardBody}>
                   {randomHadith ? (
@@ -1882,17 +1869,17 @@ export default function HomeScreen() {
                     </Text>
                   )}
                 </View>
-                <TouchableOpacity
+                <Pressable
                   style={styles.cardAction}
-                  onPress={() => router.push("/hadith")}
+                  onPress={() => push("/hadith")}
                 >
                   <Text style={styles.cardActionText}>{t("voir_plus")}</Text>
-                  <MaterialCommunityIcons
+                  <MCIcon
                     name="arrow-right"
                     size={20}
                     color="#fffbe8"
                   />
-                </TouchableOpacity>
+                </Pressable>
               </LinearGradient>
             </Animated.View>
           </View>
@@ -1917,10 +1904,9 @@ export default function HomeScreen() {
                     ],
                   }}
                 >
-                  <TouchableOpacity
+                  <Pressable
                     style={styles.actionButton}
-                    onPress={() => router.push(action.route as any)}
-                    activeOpacity={0.7}
+                    onPress={() => push(action.route as any)}
                   >
                     <LinearGradient
                       colors={action.gradient}
@@ -1933,11 +1919,11 @@ export default function HomeScreen() {
                           styles.actionIconCircle,
                           {
                             borderColor: action.color,
-                            shadowColor: action.color,
+                            boxShadow: makeBoxShadow(action.color, 0, 0, 8, 0.5),
                           },
                         ]}
                       >
-                        <MaterialCommunityIcons
+                        <MCIcon
                           name={action.icon as any}
                           size={24}
                           color={colors.text} // 🌅 Utilise la couleur du thème actif
@@ -1954,13 +1940,13 @@ export default function HomeScreen() {
                           {action.title}
                         </Text>
                       </View>
-                      <MaterialCommunityIcons
+                      <MCIcon
                         name="chevron-right"
                         size={20}
                         color={colors.textSecondary} // 🌅 Utilise la couleur du thème actif
                       />
                     </LinearGradient>
-                  </TouchableOpacity>
+                  </Pressable>
                 </Animated.View>
               ))}
             </View>
@@ -2079,11 +2065,7 @@ const getStyles = (
       marginBottom: 16,
       borderWidth: 1,
       borderColor: colors.border, // 🌅 Utilise la couleur du thème actif
-      shadowColor: colors.shadow, // 🌅 Utilise la couleur du thème actif
-      shadowOffset: { width: 0, height: 4 },
-      shadowOpacity: 0.3,
-      shadowRadius: 12,
-      elevation: 8,
+      boxShadow: makeBoxShadow(colors.shadow, 0, 4, 12, 0.3),
     },
     nextPrayerHeader: {
       flexDirection: "row",
@@ -2159,11 +2141,7 @@ const getStyles = (
       backgroundColor: "rgba(78, 205, 196, 0.15)",
       borderColor: "#4ECDC4",
       borderWidth: 2,
-      shadowColor: "#4ECDC4",
-      shadowOffset: { width: 0, height: 0 },
-      shadowOpacity: 0.3,
-      shadowRadius: 8,
-      elevation: 6,
+      boxShadow: "0px 0px 8px rgba(78,205,196,0.3)",
     },
     prayerCardPassed: {
       backgroundColor: "rgba(255, 255, 255, 0.04)",
@@ -2278,11 +2256,7 @@ const getStyles = (
       marginBottom: 12,
       width: "100%",
       justifyContent: "center",
-      shadowColor: "#2E7D32", // Vert islamique fixe
-      shadowOffset: { width: 0, height: 4 },
-      shadowOpacity: 0.3,
-      shadowRadius: 8,
-      elevation: 5,
+      boxShadow: "0px 4px 8px rgba(46,125,50,0.3)",
     },
     primaryButtonText: {
       color: overlayTextColor,
@@ -2536,11 +2510,7 @@ const getStyles = (
     actionsWrapper: {
       borderRadius: 20,
       padding: 20,
-      shadowColor: "#000",
-      shadowOffset: { width: 0, height: 6 },
-      shadowOpacity: 0.3,
-      shadowRadius: 15,
-      elevation: 8,
+      boxShadow: "0px 6px 15px rgba(0,0,0,0.3)",
     },
     actionsGrid: {
       flexDirection: "row",
@@ -2557,11 +2527,7 @@ const getStyles = (
       borderWidth: 2,
       minHeight: 100,
       justifyContent: "center",
-      shadowColor: "#000",
-      shadowOffset: { width: 0, height: 4 },
-      shadowOpacity: 0.2,
-      shadowRadius: 8,
-      elevation: 4,
+      boxShadow: "0px 4px 8px rgba(0,0,0,0.2)",
     },
     actionTitle: {
       color: "#fffbe8",
@@ -2576,11 +2542,7 @@ const getStyles = (
       marginBottom: 20,
       borderRadius: 24,
       overflow: "hidden",
-      shadowColor: "#000",
-      shadowOffset: { width: 0, height: 8 },
-      shadowOpacity: 0.4,
-      shadowRadius: 24,
-      elevation: 16,
+      boxShadow: "0px 8px 24px rgba(0,0,0,0.4)",
       borderWidth: 1,
       borderColor: "rgba(255, 255, 255, 0.1)",
     },
@@ -2670,11 +2632,7 @@ const getStyles = (
     progressFillMain: {
       height: "100%",
       borderRadius: 6,
-      shadowColor: "#000",
-      shadowOffset: { width: 0, height: 2 },
-      shadowOpacity: 0.3,
-      shadowRadius: 4,
-      elevation: 3,
+      boxShadow: "0px 2px 4px rgba(0,0,0,0.3)",
     },
 
     progressTextMain: {
@@ -2705,11 +2663,7 @@ const getStyles = (
       marginBottom: universalLayout.spacing.md,
       borderRadius: universalLayout.borderRadius.lg,
       overflow: "hidden",
-      shadowColor: "#000",
-      shadowOffset: { width: 0, height: 8 },
-      shadowOpacity: 0.3,
-      shadowRadius: 20,
-      elevation: 12,
+      boxShadow: "0px 8px 20px rgba(0,0,0,0.3)",
     },
 
     gridCardContent: {
@@ -2809,10 +2763,7 @@ const getStyles = (
       alignItems: "center",
       marginRight: 12,
       borderWidth: 1.5,
-      // La couleur de bordure sera dynamique selon l'action
-      shadowOffset: { width: 0, height: 0 },
-      shadowOpacity: 0.5,
-      shadowRadius: 8,
+      // La couleur de bordure et l'ombre seront dynamiques selon l'action (injectées en ligne)
     },
 
     actionButtonText: {
@@ -2836,11 +2787,7 @@ const getStyles = (
       marginBottom: 20,
       borderWidth: 1,
       borderColor: colors.border, // 🌅 Utilise la couleur du thème actif
-      shadowColor: colors.shadow, // 🌅 Utilise la couleur du thème actif
-      shadowOffset: { width: 0, height: 4 },
-      shadowOpacity: 0.3,
-      shadowRadius: 12,
-      elevation: 8,
+      boxShadow: makeBoxShadow(colors.shadow, 0, 4, 12, 0.3),
       minHeight: 80,
     },
 
@@ -2902,11 +2849,7 @@ const getStyles = (
       marginBottom: 16,
       borderRadius: 20,
       overflow: "hidden",
-      shadowColor: "#4ECDC4",
-      shadowOffset: { width: 0, height: 0 },
-      shadowOpacity: 0.5,
-      shadowRadius: 18,
-      elevation: 12,
+      boxShadow: "0px 0px 18px rgba(78,205,196,0.5)",
       borderWidth: 1.5,
       borderColor: "#4ECDC4",
     },
@@ -2933,10 +2876,7 @@ const getStyles = (
       marginRight: 12,
       borderWidth: 1.5,
       borderColor: "#F093FB",
-      shadowColor: "#F093FB",
-      shadowOffset: { width: 0, height: 0 },
-      shadowOpacity: 0.7,
-      shadowRadius: 8,
+      boxShadow: "0px 0px 8px rgba(240,147,251,0.7)",
     },
 
     cardTitle: {
@@ -2968,10 +2908,7 @@ const getStyles = (
       backgroundColor: "rgba(44,205,196,0.18)",
       borderWidth: 1.5,
       borderColor: "#4ECDC4",
-      shadowColor: "#4ECDC4",
-      shadowOffset: { width: 0, height: 0 },
-      shadowOpacity: 0.5,
-      shadowRadius: 8,
+      boxShadow: "0px 0px 8px rgba(78,205,196,0.5)",
     },
 
     cardActionText: {

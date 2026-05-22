@@ -1,5 +1,7 @@
-import React, { createContext, useContext, useState, ReactNode } from "react";
+import React, { createContext, use, useState, ReactNode } from "react";
 import { View, StyleSheet } from "react-native";
+
+import { Z_INDEX } from "../constants/zIndex";
 import Toast from "../components/Toast";
 import type { ToastData } from "../components/Toast";
 
@@ -66,13 +68,12 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     zIndex: 999999, // 🚀 CORRECTION : Encore plus élevé pour être sûr
-    elevation: 999999, // 🚀 CORRECTION : Pour Android
     pointerEvents: "box-none", // Permet aux clics de passer à travers quand vide
   },
 });
 
 export const useToast = () => {
-  const context = useContext(ToastContext);
+  const context = use(ToastContext);
   if (!context) {
     throw new Error("useToast must be used within a ToastProvider");
   }

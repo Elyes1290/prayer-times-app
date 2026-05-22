@@ -10,4 +10,3 @@ const useColorScheme = (): ColorSchemeName => {
 };
 
 export { useColorScheme };
-export default useColorScheme;

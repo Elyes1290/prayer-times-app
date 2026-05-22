@@ -107,7 +107,7 @@ export const getCurrentUserData = async (): Promise<UserData | null> => {
 /**
  * Vérifie si un utilisateur est connecté
  */
-export const isUserLoggedIn = async (): Promise<boolean> => {
+const isUserLoggedIn = async (): Promise<boolean> => {
   const userId = await getCurrentUserId();
   return userId !== null;
 };
@@ -115,7 +115,7 @@ export const isUserLoggedIn = async (): Promise<boolean> => {
 /**
  * Déconnecte l'utilisateur en supprimant les données du stockage
  */
-export const logoutUser = async (): Promise<void> => {
+const logoutUser = async (): Promise<void> => {
   try {
     await AsyncStorage.removeItem("user_data");
     console.log("✅ Utilisateur déconnecté");
@@ -215,7 +215,7 @@ export const cleanupObsoleteUserData = async (): Promise<void> => {
 /**
  * 🧪 DEBUG : Fonction pour vérifier le statut de connexion explicite
  */
-export const debugConnectionStatus = async (): Promise<void> => {
+const debugConnectionStatus = async (): Promise<void> => {
   try {
     const explicitConnection = await AsyncStorage.getItem(
       "explicit_connection"

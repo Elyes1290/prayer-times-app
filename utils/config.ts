@@ -61,30 +61,3 @@ export const AppConfig = {
   ALADHAN_API_URL: "https://api.aladhan.com/v1",
 };
 
-/**
- * 🔧 Vérifier la configuration
- */
-export const validateConfig = () => {
-  const required = ["API_BASE_URL", "HADITH_API_KEY"];
-  const missing = required.filter(
-    (key) => !AppConfig[key as keyof typeof AppConfig]
-  );
-
-  if (missing.length > 0) {
-    console.warn("⚠️ Configuration manquante:", missing);
-  }
-
-  return missing.length === 0;
-};
-
-/**
- * 🔧 Configuration pour le développement
- */
-export const isDevelopment = __DEV__;
-export const isProduction = !__DEV__;
-
-console.log("🔧 Configuration chargée:", {
-  apiBase: AppConfig.API_BASE_URL,
-  premium: AppConfig.PREMIUM_CONTENT_BASE_URL,
-  isDev: isDevelopment,
-});

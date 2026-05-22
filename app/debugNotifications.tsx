@@ -4,7 +4,7 @@ import {
   Text,
   StyleSheet,
   ScrollView,
-  TouchableOpacity,
+  Pressable,
   NativeModules,
   Platform,
   RefreshControl,
@@ -18,13 +18,15 @@ import { useLocation } from "../hooks/useLocation";
 import { usePrayerTimes } from "../hooks/usePrayerTimes";
 import { usePremium } from "../contexts/PremiumContext";
 
+type DebugLogLine = { id: string; text: string };
+
 export default function DebugNotificationsScreen() {
-  const router = useRouter();
+  const { replace } = useRouter();
   // 🚧 Page complètement désactivée
   const isDebugAllowed = false;
   const [debugInfo, setDebugInfo] = useState<any>(null);
   const [loading, setLoading] = useState(false);
-  const [logs, setLogs] = useState<string[]>([]);
+  const [logs, setLogs] = useState<DebugLogLine[]>([]);
   const [bgRuns, setBgRuns] = useState<any[]>([]);
   const [lastAutoReprog, setLastAutoReprog] = useState<string>("Jamais");
   const [bgRunLoading, setBgRunLoading] = useState(false);
@@ -65,7 +67,11 @@ export default function DebugNotificationsScreen() {
     usePrayerTimes(locationToUse as any, today, user?.isPremium || false);
 
   const addLog = (msg: string) => {
-    setLogs((prev) => [`[${new Date().toLocaleTimeString()}] ${msg}`, ...prev]);
+    const text = `[${new Date().toLocaleTimeString()}] ${msg}`;
+    setLogs((prev) => [
+      { id: `${Date.now()}-${Math.random().toString(36).slice(2, 11)}`, text },
+      ...prev,
+    ]);
   };
 
   const loadBackgroundLogs = useCallback(async () => {
@@ -98,7 +104,14 @@ export default function DebugNotificationsScreen() {
         "../utils/playbackDebugLogs"
       );
       const logs = await getPlaybackDebugLogs();
-      setPlaybackLogs(logs || []);
+      setPlaybackLogs(
+        (logs || []).map((log: any, i: number) => ({
+          ...log,
+          id:
+            log.id ??
+            `${log.timestamp ?? "ts"}-${i}-${Math.random().toString(36).slice(2, 9)}`,
+        }))
+      );
       addLog(`📜 ${logs.length} logs lecture chargés`);
     } catch (error: any) {
       addLog(`❌ Erreur lecture logs playback: ${error.message}`);
@@ -148,9 +161,9 @@ export default function DebugNotificationsScreen() {
   // 🚫 Désactiver l'accès en production
   useEffect(() => {
     if (!isDebugAllowed) {
-      router.replace("/");
+      replace("/");
     }
-  }, [router, isDebugAllowed]);
+  }, [replace, isDebugAllowed]);
 
   // 🔥 INTERCEPTER console.log pour capturer TOUS les logs
   useEffect(() => {
@@ -164,10 +177,13 @@ export default function DebugNotificationsScreen() {
           typeof arg === "object" ? JSON.stringify(arg, null, 2) : String(arg)
         )
         .join(" ");
-      setLogs((prev) => [
-        `[${new Date().toLocaleTimeString()}] 📝 ${message}`,
-        ...prev,
-      ]);
+      setLogs((prev) => {
+        const text = `[${new Date().toLocaleTimeString()}] 📝 ${message}`;
+        return [
+          { id: `${Date.now()}-${Math.random().toString(36).slice(2, 11)}`, text },
+          ...prev,
+        ];
+      });
     };
 
     console.error = (...args: any[]) => {
@@ -177,10 +193,13 @@ export default function DebugNotificationsScreen() {
           typeof arg === "object" ? JSON.stringify(arg, null, 2) : String(arg)
         )
         .join(" ");
-      setLogs((prev) => [
-        `[${new Date().toLocaleTimeString()}] ❌ ${message}`,
-        ...prev,
-      ]);
+      setLogs((prev) => {
+        const text = `[${new Date().toLocaleTimeString()}] ❌ ${message}`;
+        return [
+          { id: `${Date.now()}-${Math.random().toString(36).slice(2, 11)}`, text },
+          ...prev,
+        ];
+      });
     };
 
     return () => {
@@ -198,6 +217,7 @@ export default function DebugNotificationsScreen() {
         console.log(`📡 [DebugPage] Event reçu: ${message}`);
 
         const newLog = {
+          id: `${Date.now()}-${Math.random().toString(36).slice(2, 11)}`,
           timestamp: new Date().toISOString(),
           action: event.type === "error" ? `❌ ${message}` : `🎵 ${message}`,
           details: event.details || {},
@@ -682,23 +702,23 @@ export default function DebugNotificationsScreen() {
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Outils de Diagnostic</Text>
           <View style={styles.buttonColumn}>
-            <TouchableOpacity
+            <Pressable
               style={[styles.button, { backgroundColor: "#9C27B0" }]}
               onPress={analyzeScheduleLogic}
             >
               <Text style={styles.buttonText}>📊 Analyser la Logique JS</Text>
-            </TouchableOpacity>
+            </Pressable>
 
-            <TouchableOpacity
+            <Pressable
               style={[styles.button, { backgroundColor: "#E91E63" }]}
               onPress={testFullSave}
             >
               <Text style={styles.buttonText}>💾 Test Sauvegarde Complète</Text>
-            </TouchableOpacity>
+            </Pressable>
 
             {Platform.OS === "ios" && (
               <>
-                <TouchableOpacity
+                <Pressable
                   style={[styles.button, { backgroundColor: "#9C27B0" }]}
                   onPress={async () => {
                     try {
@@ -735,9 +755,9 @@ export default function DebugNotificationsScreen() {
                   <Text style={styles.buttonText}>
                     🔄 Info Background Fetch (iOS)
                   </Text>
-                </TouchableOpacity>
+                </Pressable>
 
-                <TouchableOpacity
+                <Pressable
                   style={[
                     styles.button,
                     {
@@ -751,16 +771,16 @@ export default function DebugNotificationsScreen() {
                   <Text style={styles.buttonText}>
                     🛰️ Forcer reprog 3j (iOS)
                   </Text>
-                </TouchableOpacity>
+                </Pressable>
 
-                <TouchableOpacity
+                <Pressable
                   style={[styles.button, { backgroundColor: "#607D8B" }]}
                   onPress={loadBackgroundLogs}
                 >
                   <Text style={styles.buttonText}>📝 Rafraîchir logs BG</Text>
-                </TouchableOpacity>
+                </Pressable>
 
-                <TouchableOpacity
+                <Pressable
                   style={[styles.button, { backgroundColor: "#FF9800" }]}
                   onPress={async () => {
                     try {
@@ -838,9 +858,9 @@ export default function DebugNotificationsScreen() {
                   }}
                 >
                   <Text style={styles.buttonText}>🎵 Vérifier Sons Bundle</Text>
-                </TouchableOpacity>
+                </Pressable>
 
-                <TouchableOpacity
+                <Pressable
                   style={[styles.button, { backgroundColor: "#E91E63" }]}
                   onPress={async () => {
                     try {
@@ -910,9 +930,9 @@ export default function DebugNotificationsScreen() {
                   <Text style={styles.buttonText}>
                     📋 Voir Logs Notifications
                   </Text>
-                </TouchableOpacity>
+                </Pressable>
 
-                <TouchableOpacity
+                <Pressable
                   style={[styles.button, { backgroundColor: "#4CAF50" }]}
                   onPress={async () => {
                     try {
@@ -977,12 +997,12 @@ export default function DebugNotificationsScreen() {
                   <Text style={styles.buttonText}>
                     📥 Copier Sons Maintenant
                   </Text>
-                </TouchableOpacity>
+                </Pressable>
               </>
             )}
 
             <View style={styles.row}>
-              <TouchableOpacity
+              <Pressable
                 style={[
                   styles.button,
                   { flex: 1, backgroundColor: "#2196F3", marginRight: 5 },
@@ -990,8 +1010,8 @@ export default function DebugNotificationsScreen() {
                 onPress={testNotification}
               >
                 <Text style={styles.buttonText}>🔔 Test Rappel</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
+              </Pressable>
+              <Pressable
                 style={[
                   styles.button,
                   { flex: 1, backgroundColor: "#FF9800", marginLeft: 5 },
@@ -999,17 +1019,17 @@ export default function DebugNotificationsScreen() {
                 onPress={testAdhan}
               >
                 <Text style={styles.buttonText}>🕌 Test Adhan</Text>
-              </TouchableOpacity>
+              </Pressable>
             </View>
 
-            <TouchableOpacity
+            <Pressable
               style={[styles.button, { backgroundColor: "#607D8B" }]}
               onPress={fetchDebugInfo}
             >
               <Text style={styles.buttonText}>🔄 Rafraîchir État Natif</Text>
-            </TouchableOpacity>
+            </Pressable>
 
-            <TouchableOpacity
+            <Pressable
               style={[styles.button, { backgroundColor: "#F44336" }]}
               onPress={async () => {
                 try {
@@ -1040,7 +1060,7 @@ export default function DebugNotificationsScreen() {
               }}
             >
               <Text style={styles.buttonText}>🗑️ Vider Cache Horaires</Text>
-            </TouchableOpacity>
+            </Pressable>
           </View>
         </View>
 
@@ -1068,12 +1088,12 @@ export default function DebugNotificationsScreen() {
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>🎵 Debug Lecture Audio</Text>
           {playbackLogsLoading && (
-            <Text style={styles.emptyText}>Chargement...</Text>
+            <Text style={styles.emptyText}>Chargement…</Text>
           )}
           {!playbackLogsLoading && playbackLogs.length > 0
-            ? playbackLogs.slice(0, 20).map((log, i) => (
+            ? playbackLogs.slice(0, 20).map((log) => (
                 <View
-                  key={i}
+                  key={log.id}
                   style={[styles.card, { backgroundColor: "#f9f9f9" }]}
                 >
                   <Text style={styles.cardTitle}>
@@ -1093,18 +1113,18 @@ export default function DebugNotificationsScreen() {
                 </Text>
               )}
           <View style={{ flexDirection: "row", gap: 10, marginTop: 10 }}>
-            <TouchableOpacity
+            <Pressable
               style={[styles.button, { backgroundColor: "#2196F3", flex: 1 }]}
               onPress={loadPlaybackLogs}
             >
               <Text style={styles.buttonText}>🔄 Actualiser</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
+            </Pressable>
+            <Pressable
               style={[styles.button, { backgroundColor: "#F44336", flex: 1 }]}
               onPress={clearPlaybackLogs}
             >
               <Text style={styles.buttonText}>🗑️ Effacer</Text>
-            </TouchableOpacity>
+            </Pressable>
           </View>
         </View>
 
@@ -1149,12 +1169,12 @@ export default function DebugNotificationsScreen() {
           <Text style={styles.sectionTitle}>Journal d&apos;analyse</Text>
           {logs.length === 0 && (
             <Text style={styles.emptyText}>
-              Appuyez sur &quot;Analyser&quot; pour voir les détails...
+              Appuyez sur &quot;Analyser&quot; pour voir les détails…
             </Text>
           )}
-          {logs.map((log, i) => (
-            <Text key={i} style={styles.logText}>
-              {log}
+          {logs.map((entry) => (
+            <Text key={entry.id} style={styles.logText}>
+              {entry.text}
             </Text>
           ))}
         </View>
@@ -1171,11 +1191,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     padding: 16,
     borderRadius: 10,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
-    elevation: 2,
+    boxShadow: "0px 1px 2px rgba(0,0,0,0.1)",
   },
   sectionTitle: {
     fontSize: 18,

@@ -5,7 +5,7 @@ import NetInfo from "@react-native-community/netinfo";
  * Utilisable dans les composants React et les fonctions utilitaires
  */
 
-export interface NetworkStatus {
+interface NetworkStatus {
   isConnected: boolean;
   isInternetReachable: boolean;
   type: string | null;
@@ -15,7 +15,7 @@ export interface NetworkStatus {
  * Vérifier la connectivité réseau de manière synchrone
  * @returns Promise<NetworkStatus>
  */
-export const checkNetworkStatus = async (): Promise<NetworkStatus> => {
+const checkNetworkStatus = async (): Promise<NetworkStatus> => {
   try {
     const state = await NetInfo.fetch();
     return {

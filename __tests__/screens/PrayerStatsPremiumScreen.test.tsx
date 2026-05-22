@@ -36,7 +36,6 @@ jest.mock("../../locales/i18n", () => ({
 jest.mock("expo-linear-gradient", () => ({
   LinearGradient: ({ children }: any) => children,
 }));
-jest.mock("@expo/vector-icons", () => ({ Ionicons: () => null }));
 jest.mock("../../components/ThemedImageBackground", () => ({
   __esModule: true,
   default: ({ children }: any) => children,

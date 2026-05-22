@@ -1,6 +1,6 @@
 import React from "react";
-import { View, Text, TouchableOpacity, Alert } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { View, Text, Pressable, Alert } from "react-native";
+import { MCIcon } from "@/components/icons/AppVectorIcons";
 
 interface SettingsHeaderProps {
   t: any;
@@ -51,19 +51,19 @@ export default function SettingsHeader({
       {/* Header principal */}
       <View style={styles.headerContainer}>
         <Text style={styles.title}>{t("settings_title", "Paramètres")}</Text>
-        <TouchableOpacity style={styles.premiumButton} onPress={onPremiumPress}>
-          <MaterialCommunityIcons
+        <Pressable style={styles.premiumButton} onPress={onPremiumPress}>
+          <MCIcon
             name="account-circle"
             size={28}
             color={overlayTextColor}
           />
-        </TouchableOpacity>
+        </Pressable>
       </View>
 
       {/* Switch de thème */}
       <View style={styles.themeSection}>
         <View style={styles.themeSectionHeader}>
-          <MaterialCommunityIcons
+          <MCIcon
             name="theme-light-dark"
             size={24}
             color="#4ECDC4"
@@ -72,14 +72,14 @@ export default function SettingsHeader({
         </View>
         <View style={styles.themeSwitchContainer}>
           {/* Thème Clair */}
-          <TouchableOpacity
+          <Pressable
             style={[
               styles.themeOption,
               currentTheme === "light" && styles.themeOptionActive,
             ]}
             onPress={() => handleThemePress("light")}
           >
-            <MaterialCommunityIcons
+            <MCIcon
               name="weather-sunny"
               size={20}
               color={currentTheme === "light" ? "#FFFFFF" : "#333333"}
@@ -92,17 +92,17 @@ export default function SettingsHeader({
             >
               {t("light_mode", "Clair")}
             </Text>
-          </TouchableOpacity>
+          </Pressable>
 
           {/* Thème Sombre */}
-          <TouchableOpacity
+          <Pressable
             style={[
               styles.themeOption,
               currentTheme === "dark" && styles.themeOptionActive,
             ]}
             onPress={() => handleThemePress("dark")}
           >
-            <MaterialCommunityIcons
+            <MCIcon
               name="weather-night"
               size={20}
               color={currentTheme === "dark" ? "#FFFFFF" : "#333333"}
@@ -115,10 +115,10 @@ export default function SettingsHeader({
             >
               {t("dark_mode", "Sombre")}
             </Text>
-          </TouchableOpacity>
+          </Pressable>
 
           {/* 🌅 Thème Matin (Premium) - Palette Aurore */}
-          <TouchableOpacity
+          <Pressable
             style={[
               styles.themeOption,
               currentTheme === "morning" && styles.themeOptionActive,
@@ -127,14 +127,14 @@ export default function SettingsHeader({
             onPress={() => handleThemePress("morning")}
           >
             <View style={{ position: "relative" }}>
-              <MaterialCommunityIcons
+              <MCIcon
                 name="weather-sunset-up"
                 size={20}
                 color={currentTheme === "morning" ? "#FFFFFF" : "#E8A87C"}
               />
               {!isPremium && (
-                <View style={styles.premiumBadge}>
-                  <MaterialCommunityIcons
+                <View style={styles.premiumBadgeCorner}>
+                  <MCIcon
                     name="crown"
                     size={10}
                     color="#FFD700"
@@ -150,10 +150,10 @@ export default function SettingsHeader({
             >
               {t("morning_mode", "Matin")}
             </Text>
-          </TouchableOpacity>
+          </Pressable>
 
           {/* 🌆 Thème Maghrib (Premium) - Palette Crépuscule */}
-          <TouchableOpacity
+          <Pressable
             style={[
               styles.themeOption,
               currentTheme === "sunset" && styles.themeOptionActive,
@@ -162,14 +162,14 @@ export default function SettingsHeader({
             onPress={() => handleThemePress("sunset")}
           >
             <View style={{ position: "relative" }}>
-              <MaterialCommunityIcons
+              <MCIcon
                 name="weather-sunset-down"
                 size={20}
                 color={currentTheme === "sunset" ? "#FFFFFF" : "#FF7F50"}
               />
               {!isPremium && (
-                <View style={styles.premiumBadge}>
-                  <MaterialCommunityIcons
+                <View style={styles.premiumBadgeCorner}>
+                  <MCIcon
                     name="crown"
                     size={10}
                     color="#FFD700"
@@ -185,7 +185,7 @@ export default function SettingsHeader({
             >
               {t("sunset_mode", "Maghrib")}
             </Text>
-          </TouchableOpacity>
+          </Pressable>
         </View>
       </View>
     </>

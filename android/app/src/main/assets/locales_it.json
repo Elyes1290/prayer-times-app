@@ -209,5 +209,8 @@
   "widget_feature_navigation": "✨ Naviga tra le sure",
   "widget_feature_audio_controls": "✨ Controlli audio completi",
   "widget_feature_offline": "✨ Modalità offline",
-  "subscribe_premium": "Abbonati Premium"
+  "subscribe_premium": "Abbonati Premium",
+  "adhan_completed_title": "✅ Adhan completato",
+  "adhan_completed_body": "La chiamata alla preghiera è stata completata",
+  "dismiss": "Chiudi"
 }

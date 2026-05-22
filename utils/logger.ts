@@ -8,8 +8,10 @@ type LogLevel = "debug" | "info" | "warn" | "error";
 
 // Configuration du logger
 const LOG_CONFIG = {
-  // 🔥 ACTIVÉ pour debug ! (Désactivé en test pour les tests unitaires)
-  enableDebugLogs: process.env.NODE_ENV !== "test",
+  // Actif uniquement en développement (false en production et en test Jest)
+  enableDebugLogs:
+    process.env.NODE_ENV !== "test" &&
+    (typeof __DEV__ !== "undefined" ? __DEV__ : process.env.NODE_ENV === "development"),
   // Préfixe pour identifier nos logs
   prefix: "[MyAdhan]",
 };
@@ -36,19 +38,12 @@ class ConditionalLogger {
     console.error(`${LOG_CONFIG.prefix} ${message}`, ...args);
   }
 
-  /**
-   * Log spécialement pour le debug des notifications
-   * Peut être complètement désactivé en production
-   */
   notificationDebug(message: string, ...args: any[]): void {
     if (LOG_CONFIG.enableDebugLogs) {
       console.log(`${LOG_CONFIG.prefix} [NOTIFICATIONS] ${message}`, ...args);
     }
   }
 
-  /**
-   * Log spécialement pour le debug du widget
-   */
   widgetDebug(message: string, ...args: any[]): void {
     if (LOG_CONFIG.enableDebugLogs) {
       console.log(`${LOG_CONFIG.prefix} [WIDGET] ${message}`, ...args);
@@ -59,7 +54,6 @@ class ConditionalLogger {
 // Export d'une instance unique
 export const logger = new ConditionalLogger();
 
-// Export également les méthodes pour compatibilité
 export const debugLog = logger.debug.bind(logger);
 export const infoLog = logger.info.bind(logger);
 export const warnLog = logger.warn.bind(logger);

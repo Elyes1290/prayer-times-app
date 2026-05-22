@@ -1,6 +1,6 @@
 import React from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { View, Text, Pressable, StyleSheet } from "react-native";
+import { MCIcon } from "@/components/icons/AppVectorIcons";
 import { useTranslation } from "react-i18next";
 import { useThemeColors, useOverlayTextColor } from "../hooks/useThemeColor";
 
@@ -44,7 +44,7 @@ export const OfflineNavigationTabs: React.FC<OfflineNavigationTabsProps> = ({
     <View style={[styles.container, { backgroundColor: colors.surface }]}>
       <View style={styles.tabsContainer}>
         {tabs.map((tab) => (
-          <TouchableOpacity
+          <Pressable
             key={tab.id}
             style={[
               styles.tab,
@@ -55,7 +55,7 @@ export const OfflineNavigationTabs: React.FC<OfflineNavigationTabsProps> = ({
             onPress={() => tab.available && onTabChange(tab.id)}
             disabled={!tab.available}
           >
-            <MaterialCommunityIcons
+            <MCIcon
               name={tab.icon as any}
               size={20}
               color={
@@ -81,14 +81,14 @@ export const OfflineNavigationTabs: React.FC<OfflineNavigationTabsProps> = ({
               {tab.label}
             </Text>
             {!tab.available && (
-              <MaterialCommunityIcons
+              <MCIcon
                 name="lock"
                 size={14}
                 color={colors.textTertiary}
                 style={styles.lockIcon}
               />
             )}
-          </TouchableOpacity>
+          </Pressable>
         ))}
       </View>
 
@@ -99,7 +99,7 @@ export const OfflineNavigationTabs: React.FC<OfflineNavigationTabsProps> = ({
           { backgroundColor: colors.background },
         ]}
       >
-        <MaterialCommunityIcons
+        <MCIcon
           name="wifi-off"
           size={16}
           color={colors.primary}
@@ -137,11 +137,7 @@ const styles = StyleSheet.create({
     gap: 4, // ✅ RÉDUIT de 6 à 4
   },
   activeTab: {
-    elevation: 2,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
+    boxShadow: "0px 2px 4px rgba(0,0,0,0.1)",
   },
   disabledTab: {
     opacity: 0.6,

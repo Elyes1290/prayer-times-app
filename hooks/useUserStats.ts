@@ -4,7 +4,7 @@ import { getCurrentUserId } from "../utils/userAuth";
 import OfflineStatsManager from "../utils/OfflineStatsManager";
 import { usePremium } from "../contexts/PremiumContext";
 
-export interface UserStats {
+interface UserStats {
   user_id: number;
   is_premium: boolean;
   stats: {
@@ -254,7 +254,7 @@ export const useUserStats = (): UseUserStatsReturn => {
 };
 
 // Hook pour mettre à jour les stats après une action (prière, dhikr, etc.)
-export const useUpdateUserStats = () => {
+const useUpdateUserStats = () => {
   const { refresh } = useUserStats();
 
   const updateStats = useCallback(

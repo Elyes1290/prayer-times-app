@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import {
   View,
   Text,
-  TouchableOpacity,
+  Pressable,
   Animated,
   StyleSheet,
 } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { MCIcon } from "@/components/icons/AppVectorIcons";
 import { useThemeAssets } from "../hooks/useThemeAssets";
 
 interface CollapsibleSectionProps {
@@ -98,9 +98,9 @@ const CollapsibleSection: React.FC<CollapsibleSectionProps> = ({
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.header} onPress={toggleSection}>
+      <Pressable style={styles.header} onPress={toggleSection}>
         <View style={styles.iconContainer}>
-          <MaterialCommunityIcons
+          <MCIcon
             name={icon as any}
             size={20}
             color={iconColor || themeAssets.colors.primary}
@@ -119,13 +119,13 @@ const CollapsibleSection: React.FC<CollapsibleSectionProps> = ({
             ],
           }}
         >
-          <MaterialCommunityIcons
+          <MCIcon
             name="chevron-down"
             size={24}
             style={styles.chevron}
           />
         </Animated.View>
-      </TouchableOpacity>
+      </Pressable>
 
       <Animated.View
         style={{

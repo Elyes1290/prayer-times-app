@@ -1,3 +1,4 @@
+import { Z_INDEX } from "../constants/zIndex";
 import * as Font from "expo-font";
 import { Audio } from "expo-av";
 import React, {
@@ -15,10 +16,9 @@ import {
   StyleSheet,
   Text,
   View,
-  TouchableOpacity,
+  Pressable,
   Modal,
-  SafeAreaView,
-  Dimensions,
+  useWindowDimensions,
   TextInput,
   Alert,
   ScrollView,
@@ -27,8 +27,8 @@ import {
   Platform,
 } from "react-native";
 import { useTranslation } from "react-i18next";
-import { MaterialCommunityIcons, Ionicons } from "@expo/vector-icons";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { MCIcon, IonIcon } from "@/components/icons/AppVectorIcons";
+import { useSafeAreaInsets, SafeAreaView } from "react-native-safe-area-context";
 import {
   PanGestureHandler,
   State,
@@ -40,6 +40,12 @@ import FavoriteButton from "../components/FavoriteButton";
 import { QuranVerseFavorite } from "../contexts/FavoritesContext";
 import { usePremium } from "../contexts/PremiumContext";
 import { addPlaybackDebugLog } from "../utils/playbackDebugLogs";
+import {
+  parseSurahNumberFromServiceTitle,
+  resolvePlaybackDurationMs,
+} from "../utils/audioDurationUtils";
+import { toPremiumStreamPlaybackUrl } from "../utils/premiumPlaybackUrl";
+import { logQuranSeek } from "../utils/quranSeekDebug";
 import { useToast } from "../contexts/ToastContext";
 import PremiumContentManager, { PremiumContent } from "../utils/premiumContent";
 import { useNativeDownload } from "../hooks/useNativeDownload";
@@ -139,13 +145,13 @@ const ProgressBar = ({
         <Text style={styles.downloadProgressTitle}>
           {t("download_progress")} {Math.round(progress * 100)}%
         </Text>
-        <TouchableOpacity
+        <Pressable
           testID="download-cancel-button"
           style={styles.downloadProgressCancelButton}
           onPress={onCancel}
         >
-          <MaterialCommunityIcons name="close" size={16} color="#FF6B6B" />
-        </TouchableOpacity>
+          <MCIcon name="close" size={16} color="#FF6B6B" />
+        </Pressable>
       </View>
       <View style={styles.downloadProgressBackground}>
         <View
@@ -172,7 +178,10 @@ const AudioSeekBar = ({
 
   const displayPosition = isDragging ? dragPosition : currentPosition;
   const displayProgress =
-    totalDuration > 0 ? displayPosition / totalDuration : 0;
+    totalDuration > 0
+      ? Math.max(0, Math.min(1, displayPosition / totalDuration))
+      : 0;
+  const trackReady = totalDuration > 0;
 
   const formatTime = (milliseconds: number): string => {
     if (isNaN(milliseconds) || milliseconds <= 0) {
@@ -184,28 +193,41 @@ const AudioSeekBar = ({
     return `${minutes}:${seconds.toString().padStart(2, "0")}`;
   };
 
+  const positionFromTouchX = (x: number): number | null => {
+    if (seekBarWidth <= 0 || totalDuration <= 0) {
+      return null;
+    }
+    const clampedX = Math.max(0, Math.min(x, seekBarWidth));
+    return (clampedX / seekBarWidth) * totalDuration;
+  };
+
   const onGestureEvent = (event: any) => {
     const { x } = event.nativeEvent;
-    if (isDragging && seekBarWidth > 0) {
-      const clampedX = Math.max(0, Math.min(x, seekBarWidth));
-      const newProgress = clampedX / seekBarWidth;
-      const newPosition = newProgress * totalDuration;
-      setDragPosition(newPosition);
+    if (isDragging) {
+      const newPosition = positionFromTouchX(x);
+      if (newPosition != null) {
+        setDragPosition(newPosition);
+      }
     }
   };
 
-  const onHandlerStateChange = (event: any) => {
+  const onPanHandlerStateChange = (event: any) => {
     const { state, x } = event.nativeEvent;
 
     if (state === State.BEGAN) {
       setIsDragging(true);
-      setDragPosition(currentPosition);
+      const newPosition = positionFromTouchX(x);
+      if (newPosition != null) {
+        setDragPosition(newPosition);
+      } else {
+        setDragPosition(currentPosition);
+      }
     } else if (state === State.END || state === State.CANCELLED) {
-      if (isDragging && seekBarWidth > 0) {
-        const clampedX = Math.max(0, Math.min(x, seekBarWidth));
-        const newProgress = clampedX / seekBarWidth;
-        const newPosition = newProgress * totalDuration;
-        onSeek(newPosition);
+      if (isDragging) {
+        const newPosition = positionFromTouchX(x);
+        if (newPosition != null) {
+          onSeek(newPosition);
+        }
       }
       setIsDragging(false);
     }
@@ -222,30 +244,40 @@ const AudioSeekBar = ({
       <View style={styles.seekBarWrapper}>
         <PanGestureHandler
           onGestureEvent={onGestureEvent}
-          onHandlerStateChange={onHandlerStateChange}
+          onHandlerStateChange={onPanHandlerStateChange}
           minDist={0}
+          enabled={trackReady}
         >
           <View
-            style={[
-              styles.audioProgressBar,
-              isDragging && styles.audioProgressBarActive,
-            ]}
+            style={styles.audioProgressBarTouchTarget}
             onLayout={(event) =>
               setSeekBarWidth(event.nativeEvent.layout.width)
             }
           >
             <View
+              pointerEvents="none"
               style={[
-                styles.audioProgressFill,
-                {
-                  width: `${Math.max(
-                    0,
-                    Math.min(100, displayProgress * 100),
-                  )}%`,
-                  backgroundColor: isDragging ? "#FF6B6B" : "#4ECDC4",
-                },
+                styles.audioProgressBar,
+                isDragging && styles.audioProgressBarActive,
               ]}
-            />
+            >
+              {trackReady && (
+                <>
+                  <View
+                    style={[
+                      styles.audioProgressFill,
+                      {
+                        flex: displayProgress > 0 ? displayProgress : 0.001,
+                        backgroundColor: isDragging ? "#FF6B6B" : "#4ECDC4",
+                      },
+                    ]}
+                  />
+                  <View
+                    style={{ flex: Math.max(0.001, 1 - displayProgress) }}
+                  />
+                </>
+              )}
+            </View>
           </View>
         </PanGestureHandler>
 
@@ -281,7 +313,7 @@ export default function QuranScreen() {
   const [menuView, setMenuView] = useState<"main" | "sourateList">("main");
   const [showDownloadsView, setShowDownloadsView] = useState(false); // 🆕 Vue cachée de gestion des téléchargements
   const flatListRef = useRef<FlatList>(null);
-  const windowHeight = Dimensions.get("window").height;
+  const { height: windowHeight, width: windowWidth } = useWindowDimensions();
 
   // 📱 Hook pour obtenir les insets de la barre de statut
   const insets = useSafeAreaInsets();
@@ -366,6 +398,8 @@ export default function QuranScreen() {
   // 🎵 NOUVEAU : Refs pour fonctions circulaires
   const playNextInPlaylistRef = useRef<() => void>(() => {});
   const playPreviousInPlaylistRef = useRef<() => void>(() => {});
+  /** Sourate à laquelle appartient playbackDuration (évite Fatiha + durée Baqara). */
+  const lastDurationSurahRef = useRef<number | null>(null);
 
   // 🔧 Fonction pour réinitialiser l'animation si nécessaire
   const resetSlideAnimation = useCallback(() => {
@@ -384,6 +418,8 @@ export default function QuranScreen() {
   const [sound, setSound] = useState<any | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [playbackPosition, setPlaybackPosition] = useState(0);
+  const pendingSeekTargetRef = useRef(0);
+  const pendingSeekUntilRef = useRef(0);
   const [playbackDuration, setPlaybackDuration] = useState(0);
   const [currentRecitation, setCurrentRecitation] =
     useState<PremiumContent | null>(null);
@@ -394,8 +430,8 @@ export default function QuranScreen() {
   );
   const [downloadsPlaying, setDownloadsPlaying] = useState<string | null>(null);
   const [downloadsIsPlaying, setDownloadsIsPlaying] = useState(false);
-  const [downloadsPosition, setDownloadsPosition] = useState(0);
-  const [downloadsDuration, setDownloadsDuration] = useState(0);
+  const downloadsPositionRef = useRef(0);
+  const downloadsDurationRef = useRef(0);
   const [downloadsPlaylist, setDownloadsPlaylist] = useState<PremiumContent[]>(
     [],
   );
@@ -417,61 +453,57 @@ export default function QuranScreen() {
 
       // Lire tous les sous-dossiers (récitateurs)
       const reciterFolders = await RNFS.readDir(quranDirectory);
-      const quranRecitations: PremiumContent[] = [];
 
-      for (const folder of reciterFolders) {
-        // Ignorer les fichiers, on ne veut que les dossiers
-        if (!folder.isDirectory()) continue;
+      const dirs = reciterFolders.filter((folder) => folder.isDirectory());
+      const perReciter = await Promise.all(
+        dirs.map(async (folder) => {
+            const reciterName = folder.name;
+            const reciterFiles = await RNFS.readDir(folder.path);
+            const items: PremiumContent[] = [];
 
-        const reciterName = folder.name;
+            for (const file of reciterFiles) {
+              if (!file.isFile() || !file.name.endsWith(".mp3")) continue;
 
-        // Lire tous les fichiers MP3 dans le dossier du récitateur
-        const reciterFiles = await RNFS.readDir(folder.path);
+              const nameWithoutExt = file.name.replace(".mp3", "");
+              const parts = nameWithoutExt.split("_");
+              const surahNumberStr = parts[parts.length - 1];
+              if (!surahNumberStr) continue;
 
-        for (const file of reciterFiles) {
-          // Ne garder que les fichiers .mp3
-          if (!file.isFile() || !file.name.endsWith(".mp3")) continue;
+              const surahNumber = parseInt(surahNumberStr, 10);
+              if (isNaN(surahNumber)) continue;
 
-          // Format: quran_reciterName_surahNumber.mp3
-          // Exemple: quran_abdulbaset_mujawwad_1.mp3
-          const nameWithoutExt = file.name.replace(".mp3", "");
-          const parts = nameWithoutExt.split("_");
+              const fileSizeMB = (file.size / (1024 * 1024)).toFixed(2);
+              const surahData = sourates.find((s) => s.id === surahNumber);
+              const surahName = surahData
+                ? `${surahData.name_simple} (${surahData.name_arabic})`
+                : `Sourate ${surahNumber}`;
 
-          // Le dernier élément est le numéro de sourate
-          const surahNumberStr = parts[parts.length - 1];
-          if (!surahNumberStr) continue;
+              items.push({
+                id: nameWithoutExt,
+                type: "quran",
+                title: surahName,
+                description: `Récitation par ${reciterName}`,
+                fileUrl: "",
+                fileSize: parseFloat(fileSizeMB),
+                version: "1.0",
+                isDownloaded: true,
+                downloadPath: file.path,
+                reciter: reciterName,
+                surahNumber: surahNumber,
+                surahName: surahName,
+              });
+            }
 
-          const surahNumber = parseInt(surahNumberStr, 10);
-          if (isNaN(surahNumber)) continue;
+            return items;
+          })
+      );
 
-          // Obtenir la taille du fichier en MB
-          const fileSizeMB = (file.size / (1024 * 1024)).toFixed(2);
-
-          // 🎯 Obtenir le nom réel de la sourate depuis les données chargées
-          const surahData = sourates.find((s) => s.id === surahNumber);
-          const surahName = surahData
-            ? `${surahData.name_simple} (${surahData.name_arabic})`
-            : `Sourate ${surahNumber}`;
-
-          quranRecitations.push({
-            id: nameWithoutExt,
-            type: "quran",
-            title: surahName,
-            description: `Récitation par ${reciterName}`,
-            fileUrl: "",
-            fileSize: parseFloat(fileSizeMB),
-            version: "1.0",
-            isDownloaded: true,
-            downloadPath: file.path,
-            reciter: reciterName,
-            surahNumber: surahNumber,
-            surahName: surahName,
-          });
-        }
-      }
+      const quranRecitations = perReciter.flat();
 
       console.log(
-        `✅ ${quranRecitations.length} récitations Quran trouvées dans ${reciterFolders.length} récitateurs`,
+        `✅ ${quranRecitations.length} récitations Quran trouvées dans ${
+          dirs.length
+        } récitateurs`,
       );
       return quranRecitations;
     } catch (error) {
@@ -789,44 +821,87 @@ export default function QuranScreen() {
 
       // Mettre à jour l'état local avec l'état du service
       const newPosition = serviceAudioState.position || 0;
-      const newDuration = serviceAudioState.duration || 0;
+      const rawDuration =
+        serviceAudioState.duration ||
+        serviceAudioState.totalDuration ||
+        0;
       const newIsPlaying = serviceAudioState.isPlaying || false;
 
       console.log(
         "📊 Mise à jour état - position:",
         newPosition,
         "duration:",
-        newDuration,
+        rawDuration,
         "isPlaying:",
         newIsPlaying,
         "currentSurah:",
         serviceAudioState.currentSurah,
       );
 
-      // 🎯 Mise à jour simplifiée du timer (iOS/Android)
-      if (newDuration > 0) {
-        setPlaybackDuration(newDuration);
-      } else if (
+      const serviceSurahNum = parseSurahNumberFromServiceTitle(
+        serviceAudioState.currentSurah,
+      );
+      const iosRaw =
+        Platform.OS === "ios" &&
         serviceAudioState.totalDuration &&
-        serviceAudioState.totalDuration > 0
-      ) {
-        // Fallback pour iOS qui utilise totalDuration
-        const iosDuration =
-          Platform.OS === "ios" &&
-          serviceAudioState.totalDuration > 0 &&
-          serviceAudioState.totalDuration < 40000
-            ? serviceAudioState.totalDuration * 1000
-            : serviceAudioState.totalDuration;
-        setPlaybackDuration(iosDuration);
-      }
+        serviceAudioState.totalDuration > 0 &&
+        serviceAudioState.totalDuration < 40000
+          ? serviceAudioState.totalDuration * 1000
+          : rawDuration;
 
-      // Toujours mettre à jour la position et l'état de lecture
-      setPlaybackPosition(newPosition);
-      setIsPlaying(newIsPlaying);
+      const fileSizeMb = currentRecitation?.fileSize;
+      const catalogDurationMs = currentRecitation?.durationMs;
+
+      setPlaybackDuration((prev) => {
+        const resolved = resolvePlaybackDurationMs({
+          rawDuration: rawDuration,
+          positionMs: newPosition,
+          previousMs: prev,
+          fileSizeMb,
+          catalogDurationMs,
+          selectedSurah: selectedSourate,
+          serviceSurah: serviceSurahNum,
+          iosScaledRaw: iosRaw,
+        });
+        if (resolved > 0) {
+          lastDurationSurahRef.current = selectedSourate;
+        }
+        return resolved;
+      });
+
+      const now = Date.now();
+      if (now < pendingSeekUntilRef.current) {
+        const target = pendingSeekTargetRef.current;
+        const gap = Math.abs(newPosition - target);
+        if (gap <= 3000) {
+          pendingSeekUntilRef.current = 0;
+          logQuranSeek("JS_SYNC_SEEK_OK", {
+            target,
+            newPosition,
+            gap,
+          });
+          setPlaybackPosition(newPosition);
+        } else {
+          logQuranSeek("JS_SYNC_SEEK_WAIT", {
+            target,
+            newPosition,
+            gap,
+            remainingMs: pendingSeekUntilRef.current - now,
+          });
+        }
+      } else {
+        setPlaybackPosition(newPosition);
+      }
+      // État natif play/pause : toujours synchroniser (évite bouton bloqué sur « play » pendant isLoading)
+      if (isServiceAvailable() && user?.isPremium) {
+        setIsPlaying(newIsPlaying);
+      } else if (!isLoading) {
+        setIsPlaying(newIsPlaying);
+      }
 
       // 🚀 DEBUG : Log vers la page de debug toutes les 2 secondes
       const currentSec = Math.floor(newPosition / 1000);
-      const totalSec = Math.floor((newDuration || playbackDuration) / 1000);
+      const totalSec = Math.floor(playbackDuration / 1000);
 
       if (newPosition >= 0) {
         // Log plus souvent au début
@@ -845,7 +920,7 @@ export default function QuranScreen() {
             type: "info",
             details: {
               newPosition,
-              newDuration,
+              rawDuration,
               rawServiceDur: serviceAudioState.duration,
               rawServiceTotalDur: serviceAudioState.totalDuration,
               playbackDuration,
@@ -930,11 +1005,13 @@ export default function QuranScreen() {
     isServiceAvailable,
     user?.isPremium,
     isAppNavigation,
+    isLoading,
     lastServiceSurah,
     currentRecitation,
     currentlyPlaying,
     selectedSourate,
-    playbackDuration,
+    currentRecitation?.fileSize,
+    currentRecitation?.durationMs,
   ]);
 
   const loadAvailableRecitations = async (forceRefresh = false) => {
@@ -944,6 +1021,7 @@ export default function QuranScreen() {
       if (forceRefresh) {
         // Vider le cache pour forcer le rechargement
         await AsyncStorage.removeItem("premium_catalog_cache");
+        await premiumManager.invalidateQuranCache();
         // console.log("🔄 Rechargement forcé du catalogue premium");
       } else {
         // console.log("📋 Chargement du catalogue premium depuis le cache");
@@ -1104,6 +1182,11 @@ export default function QuranScreen() {
       );
       setCurrentRecitation(recitation);
 
+      if (recitation?.durationMs && recitation.durationMs > 0) {
+        setPlaybackDuration(recitation.durationMs);
+        lastDurationSurahRef.current = surahNumber;
+      }
+
       // 🚀 NOUVEAU : Lecture automatique si demandé (pour boutons suivant/précédent)
       if (autoPlay && recitation) {
         console.log(
@@ -1121,6 +1204,13 @@ export default function QuranScreen() {
       // setLoadingRecitation(false);
     }
   };
+
+  // Réinitialiser le minuteur quand on change de sourate (évite de garder 264:09 de Baqara)
+  useEffect(() => {
+    lastDurationSurahRef.current = null;
+    setPlaybackDuration(0);
+    setPlaybackPosition(0);
+  }, [selectedSourate]);
 
   // Charger la récitation quand le récitateur ou la sourate change
   useEffect(() => {
@@ -1447,12 +1537,30 @@ export default function QuranScreen() {
       try {
         setIsLoading(true);
 
+        let activeRecitation = recitation;
+
+        // 📏 Rafraîchir taille / URLs depuis le serveur (évite 40 Mo affiché après upload 171 Mo)
+        if (
+          activeRecitation.reciter &&
+          activeRecitation.surahNumber &&
+          activeRecitation.surahNumber >= 1
+        ) {
+          const fresh = await premiumManager.getSpecificRecitation(
+            activeRecitation.reciter,
+            activeRecitation.surahNumber,
+            { forceRefresh: true },
+          );
+          if (fresh) {
+            activeRecitation = { ...activeRecitation, ...fresh };
+          }
+        }
+
         // 📱 NOUVEAU : Vérifier le mode offline
         const shouldUseOffline =
           offlineAccess.isOfflineMode || !networkStatus.isConnected;
 
         // En mode offline, vérifier que le fichier est téléchargé
-        if (shouldUseOffline && !recitation.isDownloaded) {
+        if (shouldUseOffline && !activeRecitation.isDownloaded) {
           showToast({
             type: "error",
             title: t("audio_offline_only"),
@@ -1468,28 +1576,30 @@ export default function QuranScreen() {
           setSound(null);
         }
 
-        setCurrentlyPlaying(recitation.id);
-        setCurrentRecitation(recitation);
+        setCurrentlyPlaying(activeRecitation.id);
+        setCurrentRecitation(activeRecitation);
 
-        // 🎯 NOUVEAU : Réinitialiser le timer pour la nouvelle sourate
         setPlaybackPosition(0);
-        setPlaybackDuration(0);
+        if (activeRecitation.durationMs && activeRecitation.durationMs > 0) {
+          setPlaybackDuration(activeRecitation.durationMs);
+        } else {
+          setPlaybackDuration(0);
+        }
+        if (activeRecitation.surahNumber) {
+          lastDurationSurahRef.current = activeRecitation.surahNumber;
+        }
 
         // 🎵 NOUVEAU : Mettre à jour la sourate sélectionnée pour la synchronisation UI
-        if (recitation.surahNumber) {
-          setSelectedSourate(recitation.surahNumber);
+        if (activeRecitation.surahNumber) {
+          setSelectedSourate(activeRecitation.surahNumber);
         }
 
         let audioSource: any;
 
         // 🎯 Priorité 1: Fichier local téléchargé (hors ligne)
-        // console.log(
-        //   `🔍 Debug lecture: isDownloaded=${recitation.isDownloaded}, downloadPath=${recitation.downloadPath}`
-        // );
-
         // Vérifier si le fichier est réellement téléchargé
         const actualDownloadPath = await premiumManager.isContentDownloaded(
-          recitation.id,
+          activeRecitation.id,
         );
 
         if (actualDownloadPath) {
@@ -1497,53 +1607,36 @@ export default function QuranScreen() {
           // console.log(`🎵 Lecture locale: ${recitation.title}`);
 
           // 🎵 NOUVEAU : Mettre à jour le récitateur sélectionné pour la synchronisation UI (mode hors ligne)
-          if (recitation.reciter) {
-            setSelectedReciter(recitation.reciter);
+          if (activeRecitation.reciter) {
+            setSelectedReciter(activeRecitation.reciter);
           }
         }
         // 🌐 Priorité 2: Streaming depuis Infomaniak
         else {
-          let streamingUrl = recitation.fileUrl;
+          let streamingUrl = toPremiumStreamPlaybackUrl(activeRecitation.fileUrl);
 
-          // 🍎 FIX iOS Streaming : Forcer action=stream pour une meilleure compatibilité AVPlayer
-          if (Platform.OS === "ios") {
-            // Remplacer systématiquement download par stream dans toute la chaîne
-            if (streamingUrl.includes("action=download")) {
-              streamingUrl = streamingUrl.replace(
-                /action=download/g,
-                "action=stream",
-              );
-            } else if (!streamingUrl.includes("action=")) {
-              streamingUrl += streamingUrl.includes("?")
-                ? "&action=stream"
-                : "?action=stream";
-            }
+          if (
+            activeRecitation.surahNumber &&
+            !streamingUrl.includes("surah=") &&
+            !streamingUrl.includes("id=")
+          ) {
+            const surahStr = activeRecitation.surahNumber
+              .toString()
+              .padStart(3, "0");
+            streamingUrl += `&surah=${surahStr}`;
+          }
 
-            // S'assurer que le numéro de sourate est présent
-            if (
-              recitation.surahNumber &&
-              !streamingUrl.includes("surah=") &&
-              !streamingUrl.includes("id=")
-            ) {
-              const surahStr = recitation.surahNumber
-                .toString()
-                .padStart(3, "0");
-              streamingUrl += `&surah=${surahStr}`;
-            }
-
-            // Ajouter le token d'authentification s'il n'est pas déjà présent
-            const token = await AsyncStorage.getItem("auth_token");
-            if (token && !streamingUrl.includes("token=")) {
-              streamingUrl += `&token=${token}`;
-            }
+          const token = await AsyncStorage.getItem("auth_token");
+          if (token && !streamingUrl.includes("token=")) {
+            streamingUrl += `&token=${token}`;
           }
 
           audioSource = { uri: streamingUrl };
-          console.log(`🌐 Streaming URL finale (iOS): ${streamingUrl}`);
+          console.log(`🌐 Streaming URL (Range/seek): ${streamingUrl}`);
 
           // 🎵 NOUVEAU : Mettre à jour le récitateur sélectionné pour la synchronisation UI (mode streaming)
-          if (recitation.reciter) {
-            setSelectedReciter(recitation.reciter);
+          if (activeRecitation.reciter) {
+            setSelectedReciter(activeRecitation.reciter);
           }
         }
 
@@ -1593,7 +1686,8 @@ export default function QuranScreen() {
       }
       */
 
-        // 🎵 NOUVEAU : Utiliser le service audio natif si disponible
+        // 🎵 Service audio natif (Android / iOS) — repli Expo-AV si échec
+        let nativePlaybackOk = false;
         if (isServiceAvailable() && user?.isPremium) {
           try {
             console.log("🎵 Utilisation du service audio natif");
@@ -1602,32 +1696,43 @@ export default function QuranScreen() {
             await updatePremiumStatus(true);
 
             // Charger l'audio dans le service
-            const audioPath = actualDownloadPath || audioSource.uri;
-            console.log(`🎵 [iOS] loadAudioInService: ${audioPath}`);
+            const audioPath = actualDownloadPath
+              ? actualDownloadPath
+              : toPremiumStreamPlaybackUrl(audioSource.uri);
+            console.log(`🎵 loadAudioInService: ${audioPath}`);
 
             // 🚀 DEBUG : Log vers la page de debug
-            console.log(`🚀 [JS Play] Lancement: ${recitation.title}`);
+            console.log(`🚀 [JS Play] Lancement: ${activeRecitation.title}`);
             addPlaybackDebugLog("JS Play", {
-              title: recitation.title,
+              title: activeRecitation.title,
               path: audioPath,
             });
             DeviceEventEmitter.emit("AddPlaybackDebugLog", {
-              message: `[JS Play] Lancement: ${recitation.title}`,
+              message: `[JS Play] Lancement: ${activeRecitation.title}`,
               type: "info",
               details: { path: audioPath, isPremium: user?.isPremium },
             });
 
+            const catalogDurationMs =
+              activeRecitation.durationMs && activeRecitation.durationMs > 0
+                ? activeRecitation.durationMs
+                : 0;
+            if (catalogDurationMs > 0) {
+              setPlaybackDuration(catalogDurationMs);
+            }
+
             await loadAudioInService(
               audioPath,
-              recitation.title,
-              recitation.reciter || "",
+              activeRecitation.title,
+              activeRecitation.reciter || "",
+              catalogDurationMs,
             );
 
             // Lancer la lecture
             await playAudioInService();
 
             setIsPlaying(true);
-            setCurrentlyPlaying(recitation.id);
+            setCurrentlyPlaying(activeRecitation.id);
 
             // 🎵 NOUVEAU : Créer un mock sound pour maintenir la compatibilité
             const mockSound = {
@@ -1672,16 +1777,17 @@ export default function QuranScreen() {
             setSound(mockSound);
             setIsLoading(false);
 
+            nativePlaybackOk = true;
             console.log("✅ Lecture lancée via service natif");
           } catch (serviceError) {
             console.error("❌ Erreur service audio natif:", serviceError);
-            // Fallback vers l'ancien système
+            setIsPlaying(false);
+            setCurrentlyPlaying(null);
             console.log("🔄 Fallback vers système audio Expo");
           }
         }
 
-        // Fallback vers l'ancien système si service non disponible ou non premium
-        if (!isServiceAvailable() || !user?.isPremium) {
+        if (!nativePlaybackOk) {
           console.log("🎵 Utilisation du système audio Expo");
 
           // 📱 NOUVEAU : En mode offline, pas de fallback streaming
@@ -1694,7 +1800,7 @@ export default function QuranScreen() {
               );
               setSound(createdSound);
               setIsPlaying(true);
-              setCurrentlyPlaying(recitation.id);
+              setCurrentlyPlaying(activeRecitation.id);
               setIsLoading(false);
               return;
             } catch (playError: any) {
@@ -1723,11 +1829,11 @@ export default function QuranScreen() {
             );
             // Fallback: tenter le streaming HTTP sécurisé
             try {
-              const remoteUrl = (
+              const remoteUrl = toPremiumStreamPlaybackUrl(
                 currentRecitation?.fileUrl ||
-                recitation.fileUrl ||
-                ""
-              ).replace("action=download", "action=stream");
+                  activeRecitation.fileUrl ||
+                  "",
+              );
               if (!remoteUrl) throw new Error("URL streaming indisponible");
               createdSound = await audioManager.playSource(
                 { uri: remoteUrl },
@@ -1744,27 +1850,38 @@ export default function QuranScreen() {
 
           setSound(createdSound);
           setIsPlaying(true);
-          setCurrentlyPlaying(recitation.id);
+          setCurrentlyPlaying(activeRecitation.id);
         }
 
         // 🎯 NOUVEAU : Mettre à jour le widget Coran
         if (isWidgetAvailable && user?.isPremium) {
-          const audioPath = actualDownloadPath || recitation.fileUrl;
+          const audioPath = actualDownloadPath || activeRecitation.fileUrl;
           updateWidgetAudio(
-            recitation.title,
-            recitation.reciter || "",
+            activeRecitation.title,
+            activeRecitation.reciter || "",
             audioPath,
           );
           updateWidgetPlaybackState(true, 0, 0);
         }
 
-        // Configuration des callbacks de progression avec analyse audio
-        // TODO: À implémenter plus tard
-        if (sound) {
-          sound.setOnPlaybackStatusUpdate((status: any) => {
+        // Configuration des callbacks de progression (Expo-AV uniquement)
+        // Utilise audioManager.setStatusCallback pour cibler le son actif, pas l'ancien state
+        if (!nativePlaybackOk) {
+          audioManager.setStatusCallback((status: any) => {
             if (status.isLoaded) {
-              setPlaybackPosition(status.positionMillis || 0);
-              setPlaybackDuration(status.durationMillis || 0);
+              const posMs = status.positionMillis || 0;
+              setPlaybackPosition(posMs);
+              setPlaybackDuration((prev) =>
+                resolvePlaybackDurationMs({
+                  rawDuration: status.durationMillis || 0,
+                  positionMs: posMs,
+                  previousMs: prev,
+                  fileSizeMb: currentRecitation?.fileSize,
+                  catalogDurationMs: currentRecitation?.durationMs,
+                  selectedSurah: selectedSourate,
+                  serviceSurah: selectedSourate,
+                }),
+              );
 
               // 🎯 NOUVEAU : Mettre à jour le widget Coran avec la progression
               if (isWidgetAvailable && user?.isPremium) {
@@ -1841,23 +1958,12 @@ export default function QuranScreen() {
             }
           });
 
-          // 🎵 NOUVEAU : Configurer un timer pour simuler la fin de l'audio
-          // car le service natif ne déclenche pas automatiquement didJustFinish
-          if (
-            playlistModeRef.current &&
-            isServiceAvailable() &&
-            user?.isPremium
-          ) {
-            console.log(
-              "🎵 Mode playlist détecté - pas de timer nécessaire, utilisation de l'événement natif",
-            );
-          }
         }
 
         showToast({
           type: "success",
           title: actualDownloadPath ? t("local_playback") : t("streaming"),
-          message: `${recitation.title} - ${
+          message: `${activeRecitation.title} - ${
             actualDownloadPath ? t("local_file") : t("streaming_status")
           }`,
         });
@@ -1964,8 +2070,8 @@ export default function QuranScreen() {
           },
           (status) => {
             if (status.isLoaded) {
-              setDownloadsDuration(status.durationMillis || 0);
-              setDownloadsPosition(status.positionMillis || 0);
+              downloadsDurationRef.current = status.durationMillis || 0;
+              downloadsPositionRef.current = status.positionMillis || 0;
               setDownloadsIsPlaying(status.isPlaying || false);
 
               // 🎵 Détecter la fin du fichier
@@ -2141,22 +2247,49 @@ export default function QuranScreen() {
   const seekToPosition = useCallback(
     async (positionMillis: number) => {
       try {
-        // 🎯 Mise à jour optimiste immédiate pour éviter le saut en arrière de la jauge
+        pendingSeekTargetRef.current = positionMillis;
+        pendingSeekUntilRef.current = Date.now() + 2000;
         setPlaybackPosition(positionMillis);
 
-        // 🎵 Utiliser le service natif si disponible
+        logQuranSeek("JS_SEEK_REQUEST", {
+          positionMillis,
+          playbackDuration,
+          playbackPosition,
+          surah: selectedSourate,
+          reciter: selectedReciter,
+          recitationId: currentRecitation?.id,
+          url: currentRecitation?.fileUrl
+            ? toPremiumStreamPlaybackUrl(currentRecitation.fileUrl).slice(0, 100)
+            : "",
+          native: isServiceAvailable() && user?.isPremium,
+        });
+
         if (isServiceAvailable() && user?.isPremium) {
           await seekToPositionInService(positionMillis);
-          console.log(`✅ Seek via service natif: ${positionMillis}ms`);
+          logQuranSeek("JS_SEEK_NATIVE_OK", { positionMillis });
         } else if (sound) {
           await sound.setPositionAsync(positionMillis);
-          console.log(`✅ Seek via Expo-AV: ${positionMillis}ms`);
+          logQuranSeek("JS_SEEK_EXPO_OK", { positionMillis });
         }
       } catch (error) {
+        logQuranSeek("JS_SEEK_ERROR", {
+          message: error instanceof Error ? error.message : String(error),
+        });
         console.error("Erreur navigation audio:", error);
       }
     },
-    [sound, isServiceAvailable, user?.isPremium, seekToPositionInService],
+    [
+      sound,
+      isServiceAvailable,
+      user?.isPremium,
+      seekToPositionInService,
+      playbackDuration,
+      playbackPosition,
+      selectedSourate,
+      selectedReciter,
+      currentRecitation?.id,
+      currentRecitation?.fileUrl,
+    ],
   );
 
   const stopRecitation = useCallback(async () => {
@@ -2202,6 +2335,51 @@ export default function QuranScreen() {
   // 🎯 NAVIGATION SUPPRIMÉE - Utiliser uniquement le widget pour naviguer
   // Cela évite les conflits de double navigation qui causaient les sauts de sourates
 
+  /** Choix manuel dans la liste (menu / modal) : texte + audio premium si lecture en cours */
+  const selectSourateFromPicker = useCallback(
+    async (surahNumber: number) => {
+      if (surahNumber < 1 || surahNumber > 114) return;
+      setIsAppNavigation(true);
+      setSelectedSourate(surahNumber);
+
+      // Gratuit : uniquement le texte du Coran (pas d'appel audio)
+      if (!user?.isPremium || !selectedReciter) return;
+
+      const audioActive =
+        isPlaying ||
+        !!currentlyPlaying ||
+        (isServiceAvailable() && serviceAudioState.isPlaying);
+
+      if (!audioActive) return;
+
+      if (offlineAccess.isOfflineMode) {
+        const offlineRec = scannedQuranFiles.find(
+          (r) =>
+            r.surahNumber === surahNumber &&
+            r.reciter?.toLowerCase() === selectedReciter.toLowerCase(),
+        );
+        if (offlineRec) {
+          await playRecitation(offlineRec);
+        }
+        return;
+      }
+
+      await loadSpecificRecitation(selectedReciter, surahNumber, true);
+    },
+    [
+      user?.isPremium,
+      selectedReciter,
+      isPlaying,
+      currentlyPlaying,
+      isServiceAvailable,
+      serviceAudioState.isPlaying,
+      offlineAccess.isOfflineMode,
+      scannedQuranFiles,
+      playRecitation,
+      loadSpecificRecitation,
+    ],
+  );
+
   // 👆 NOUVEAU : Navigation par gestes de swipe (simple - juste changer la sourate affichée)
   const handleSwipeNavigation = useCallback(
     (direction: "next" | "previous", autoPlay: boolean = false) => {
@@ -2238,8 +2416,8 @@ export default function QuranScreen() {
       // Animation slide
       const exitValue =
         direction === "next"
-          ? -Dimensions.get("window").width
-          : Dimensions.get("window").width;
+          ? -windowWidth
+          : windowWidth;
 
       Animated.sequence([
         Animated.timing(slideAnim, {
@@ -2361,45 +2539,41 @@ export default function QuranScreen() {
   }, [stopRecitation]);
 
   // NOUVEAU : Écouter l'événement de fin de sourate pour la playlist
+  // react-doctor-disable-next-line react-doctor/effect-needs-cleanup
   useEffect(() => {
-    const handleSurahCompleted = (event: any) => {
-      console.log("🏁 Événement fin de sourate reçu dans QuranScreen:", event);
-
-      // Log vers la page de debug
-      DeviceEventEmitter.emit("AddPlaybackDebugLog", {
-        message: `[JS Event] SurahCompleted (reason: ${event.reason || "end"})`,
-        type: "info",
-      });
-
-      // 🎯 Autoriser la navigation si mode playlist OU si l'action vient des boutons (reason: next/prev)
-      const isRemoteCommand =
-        event.reason === "next" || event.reason === "previous";
-
-      if (playlistModeRef.current || isRemoteCommand) {
-        if (event.reason === "previous") {
-          console.log(
-            "🎵 Navigation vers la sourate précédente demandée (via Ref)",
-          );
-          playPreviousInPlaylistRef.current();
-        } else {
-          // Par défaut (fin naturelle ou bouton suivant), on passe à la suivante
-          console.log("🎵 Passage à la sourate suivante (via Ref)");
-          playNextInPlaylistRef.current();
-        }
-      } else {
-        console.log("🎵 Mode playlist inactif - pas de passage automatique");
-      }
-    };
-
     const subscription = DeviceEventEmitter.addListener(
       "QuranSurahCompletedForPlaylist",
-      handleSurahCompleted,
+      (event: any) => {
+        console.log("🏁 Événement fin de sourate reçu dans QuranScreen:", event);
+
+        DeviceEventEmitter.emit("AddPlaybackDebugLog", {
+          message: `[JS Event] SurahCompleted (reason: ${event.reason || "end"})`,
+          type: "info",
+        });
+
+        const isRemoteCommand =
+          event.reason === "next" || event.reason === "previous";
+
+        if (playlistModeRef.current || isRemoteCommand) {
+          if (event.reason === "previous") {
+            console.log(
+              "🎵 Navigation vers la sourate précédente demandée (via Ref)",
+            );
+            playPreviousInPlaylistRef.current();
+          } else {
+            console.log("🎵 Passage à la sourate suivante (via Ref)");
+            playNextInPlaylistRef.current();
+          }
+        } else {
+          console.log("🎵 Mode playlist inactif - pas de passage automatique");
+        }
+      },
     );
 
     return () => {
       subscription.remove();
     };
-  }, []); // On utilise les refs donc pas de dépendances changeantes
+  }, []);
 
   // 👆 Handler pour les gestes Pan
   const onGestureEvent = useCallback((event: any) => {
@@ -2648,13 +2822,13 @@ export default function QuranScreen() {
   }: {
     item: { key: number; label: string };
   }) => (
-    <TouchableOpacity
+    <Pressable
       style={[
         styles.optionStyle,
         selectedSourate === item.key && styles.selectedOptionStyle,
       ]}
       onPress={() => {
-        setSelectedSourate(item.key);
+        selectSourateFromPicker(item.key);
         setModalVisible(false);
         // Le menu reste ouvert, pas besoin de le rouvrir
       }}
@@ -2667,7 +2841,7 @@ export default function QuranScreen() {
       >
         {item.label}
       </Text>
-    </TouchableOpacity>
+    </Pressable>
   );
 
   // 📱 NOUVEAU : Vue cachée de gestion des téléchargements (accessible en ligne)
@@ -2681,7 +2855,7 @@ export default function QuranScreen() {
           <View style={[styles.container, { paddingTop: insets.top + 10 }]}>
             {/* En-tête avec bouton retour */}
             <View style={{ marginBottom: 16, paddingHorizontal: 16 }}>
-              <TouchableOpacity
+              <Pressable
                 onPress={() => setShowDownloadsView(false)}
                 style={{
                   flexDirection: "row",
@@ -2689,7 +2863,7 @@ export default function QuranScreen() {
                   padding: 8,
                 }}
               >
-                <MaterialCommunityIcons
+                <MCIcon
                   name="arrow-left"
                   size={24}
                   color="#ba9c34"
@@ -2702,7 +2876,7 @@ export default function QuranScreen() {
                 >
                   {t("manage_downloads") || "Gérer les téléchargements"}
                 </Text>
-              </TouchableOpacity>
+              </Pressable>
             </View>
 
             {/* Affichage de la liste des audio téléchargés */}
@@ -2726,7 +2900,7 @@ export default function QuranScreen() {
                         alignItems: "center",
                       }}
                     >
-                      <MaterialCommunityIcons
+                      <MCIcon
                         name="download-outline"
                         size={64}
                         color="#ba9c34"
@@ -2794,7 +2968,7 @@ export default function QuranScreen() {
                                 },
                               ]}
                             >
-                              <TouchableOpacity
+                              <Pressable
                                 style={{
                                   flex: 1,
                                   flexDirection: "row",
@@ -2830,22 +3004,22 @@ export default function QuranScreen() {
                                 </View>
                                 {downloadsPlaying === recitation.id &&
                                 downloadsIsPlaying ? (
-                                  <MaterialCommunityIcons
+                                  <MCIcon
                                     name="pause-circle"
                                     size={32}
                                     color="#FFD700"
                                   />
                                 ) : (
-                                  <MaterialCommunityIcons
+                                  <MCIcon
                                     name="play-circle"
                                     size={32}
                                     color="#4ECDC4"
                                   />
                                 )}
-                              </TouchableOpacity>
+                              </Pressable>
 
                               {/* 🗑️ Bouton de suppression */}
-                              <TouchableOpacity
+                              <Pressable
                                 style={{
                                   padding: 8,
                                   marginLeft: 8,
@@ -2854,12 +3028,12 @@ export default function QuranScreen() {
                                   handleDeleteRecitation(recitation)
                                 }
                               >
-                                <MaterialCommunityIcons
+                                <MCIcon
                                   name="delete-outline"
                                   size={24}
                                   color="#ff6b6b"
                                 />
-                              </TouchableOpacity>
+                              </Pressable>
                             </View>
                           ))}
                       </View>
@@ -2901,19 +3075,19 @@ export default function QuranScreen() {
                 {/* Header avec sélecteur de sourate uniquement - version compacte pour offline */}
                 <View style={styles.compactHeaderOffline}>
                   {/* Sélecteur de sourate */}
-                  <TouchableOpacity
+                  <Pressable
                     style={[styles.compactSourateSelector, { flex: 1 }]} // ✅ Prend tout l'espace disponible
                     onPress={() => setModalVisible(true)}
                   >
                     <Text style={styles.compactSourateText}>
                       {getSelectedSourateLabel()}
                     </Text>
-                    <MaterialCommunityIcons
+                    <MCIcon
                       name="chevron-down"
                       size={20}
                       color="#4ECDC4"
                     />
-                  </TouchableOpacity>
+                  </Pressable>
                 </View>
 
                 {/* Contenu du Coran */}
@@ -3003,7 +3177,7 @@ export default function QuranScreen() {
                           alignItems: "center",
                         }}
                       >
-                        <MaterialCommunityIcons
+                        <MCIcon
                           name="download-outline"
                           size={64}
                           color="#ba9c34"
@@ -3062,7 +3236,7 @@ export default function QuranScreen() {
                                 (a.surahNumber || 0) - (b.surahNumber || 0),
                             )
                             .map((recitation) => (
-                              <TouchableOpacity
+                              <Pressable
                                 key={recitation.id}
                                 style={[
                                   styles.offlineRecitationItem,
@@ -3102,19 +3276,19 @@ export default function QuranScreen() {
                                 </View>
                                 {downloadsPlaying === recitation.id &&
                                 downloadsIsPlaying ? (
-                                  <MaterialCommunityIcons
+                                  <MCIcon
                                     name="pause-circle"
                                     size={32}
                                     color="#FFD700"
                                   />
                                 ) : (
-                                  <MaterialCommunityIcons
+                                  <MCIcon
                                     name="play-circle"
                                     size={32}
                                     color="#4ECDC4"
                                   />
                                 )}
-                              </TouchableOpacity>
+                              </Pressable>
                             ))}
                         </View>
                       )}
@@ -3140,12 +3314,12 @@ export default function QuranScreen() {
             >
               <View style={styles.modalHeader}>
                 <Text style={styles.modalTitle}>{t("choose_sourate")}</Text>
-                <TouchableOpacity
+                <Pressable
                   style={styles.closeButton}
                   onPress={() => setModalVisible(false)}
                 >
                   <Text style={styles.closeButtonText}>✕</Text>
-                </TouchableOpacity>
+                </Pressable>
               </View>
               <FlatList
                 data={modalData}
@@ -3178,24 +3352,24 @@ export default function QuranScreen() {
               <Text style={styles.headerSubtitle}>{selectedReciter}</Text>
             )}
           </View>
-          <TouchableOpacity
+          <Pressable
             style={styles.menuButton}
             onPress={() => setMenuVisible(true)}
           >
             <Text style={styles.menuButtonText}>☰</Text>
-          </TouchableOpacity>
+          </Pressable>
         </View>
 
         {/* 🔍 NOUVEAU : Bouton de diagnostic widget (mode dev) */}
         {__DEV__ && (
           <View style={styles.offlineControlsSection}>
-            <TouchableOpacity
+            <Pressable
               style={styles.diagnosticButton}
               onPress={runWidgetDiagnostic}
             >
-              <MaterialCommunityIcons name="bug" size={16} color="#ffffff" />
+              <MCIcon name="bug" size={16} color="#ffffff" />
               <Text style={styles.diagnosticButtonText}>Diagnostic Widget</Text>
-            </TouchableOpacity>
+            </Pressable>
           </View>
         )}
 
@@ -3229,21 +3403,21 @@ export default function QuranScreen() {
               <View style={styles.menuHeader}>
                 {/* 🍎 iOS: Bouton retour si on est dans une sous-vue */}
                 {Platform.OS === "ios" && menuView !== "main" && (
-                  <TouchableOpacity
+                  <Pressable
                     style={styles.backButton}
                     onPress={() => setMenuView("main")}
                   >
                     <Text style={styles.backButtonText}>
                       ‹ {t("back", "Retour")}
                     </Text>
-                  </TouchableOpacity>
+                  </Pressable>
                 )}
                 <Text style={styles.menuTitle}>
                   {Platform.OS === "ios" && menuView === "sourateList"
                     ? t("choose_sourate")
                     : t("navigation")}
                 </Text>
-                <TouchableOpacity
+                <Pressable
                   style={styles.closeButton}
                   onPress={() => {
                     setMenuVisible(false);
@@ -3251,7 +3425,7 @@ export default function QuranScreen() {
                   }}
                 >
                   <Text style={styles.closeButtonText}>✕</Text>
-                </TouchableOpacity>
+                </Pressable>
               </View>
 
               {/* 🍎 iOS: Affichage conditionnel selon la vue */}
@@ -3263,14 +3437,14 @@ export default function QuranScreen() {
                       data={sourates}
                       keyExtractor={(item) => item.id.toString()}
                       renderItem={({ item }) => (
-                        <TouchableOpacity
+                        <Pressable
                           style={[
                             styles.menuOption,
                             selectedSourate === item.id &&
                               styles.selectedOptionStyle,
                           ]}
                           onPress={() => {
-                            setSelectedSourate(item.id);
+                            selectSourateFromPicker(item.id);
                             setMenuView("main"); // Retour à la vue principale
                             setMenuVisible(false); // Fermer le menu après sélection
                           }}
@@ -3286,7 +3460,7 @@ export default function QuranScreen() {
                           {selectedSourate === item.id && (
                             <Text style={styles.checkMark}>✓</Text>
                           )}
-                        </TouchableOpacity>
+                        </Pressable>
                       )}
                     />
                   )}
@@ -3299,7 +3473,7 @@ export default function QuranScreen() {
                         <Text style={styles.menuSectionTitle}>
                           {t("sourate")}
                         </Text>
-                        <TouchableOpacity
+                        <Pressable
                           style={styles.menuOption}
                           onPress={() => setMenuView("sourateList")}
                         >
@@ -3307,7 +3481,7 @@ export default function QuranScreen() {
                             {getSelectedSourateLabel()}
                           </Text>
                           <Text style={styles.menuArrow}>›</Text>
-                        </TouchableOpacity>
+                        </Pressable>
                       </View>
 
                       {/* Section Récitateur (premium uniquement) */}
@@ -3316,7 +3490,7 @@ export default function QuranScreen() {
                           <Text style={styles.menuSectionTitle}>
                             {t("reciter")}
                           </Text>
-                          <TouchableOpacity
+                          <Pressable
                             style={styles.menuOption}
                             onPress={() => {
                               setModalType("reciter");
@@ -3329,7 +3503,7 @@ export default function QuranScreen() {
                                 t("quran.reciter", "Récitateur")}
                             </Text>
                             <Text style={styles.menuArrow}>›</Text>
-                          </TouchableOpacity>
+                          </Pressable>
                         </View>
                       )}
 
@@ -3339,7 +3513,7 @@ export default function QuranScreen() {
                           <Text style={styles.menuSectionTitle}>
                             {t("downloads_manager") || "Téléchargements"}
                           </Text>
-                          <TouchableOpacity
+                          <Pressable
                             style={styles.menuOption}
                             onPress={() => {
                               setMenuVisible(false);
@@ -3353,7 +3527,7 @@ export default function QuranScreen() {
                                 flex: 1,
                               }}
                             >
-                              <MaterialCommunityIcons
+                              <MCIcon
                                 name="download-multiple"
                                 size={20}
                                 color="#4ECDC4"
@@ -3365,7 +3539,7 @@ export default function QuranScreen() {
                               </Text>
                             </View>
                             <Text style={styles.menuArrow}>›</Text>
-                          </TouchableOpacity>
+                          </Pressable>
                         </View>
                       )}
                     </>
@@ -3377,7 +3551,7 @@ export default function QuranScreen() {
                   {/* Section Sourate */}
                   <View style={styles.menuSection}>
                     <Text style={styles.menuSectionTitle}>{t("sourate")}</Text>
-                    <TouchableOpacity
+                    <Pressable
                       style={styles.menuOption}
                       onPress={() => {
                         setModalType("sourate");
@@ -3389,7 +3563,7 @@ export default function QuranScreen() {
                         {getSelectedSourateLabel()}
                       </Text>
                       <Text style={styles.menuArrow}>›</Text>
-                    </TouchableOpacity>
+                    </Pressable>
                   </View>
 
                   {/* Section Récitateur (premium uniquement) */}
@@ -3398,7 +3572,7 @@ export default function QuranScreen() {
                       <Text style={styles.menuSectionTitle}>
                         {t("reciter")}
                       </Text>
-                      <TouchableOpacity
+                      <Pressable
                         style={styles.menuOption}
                         onPress={() => {
                           setModalType("reciter");
@@ -3410,7 +3584,7 @@ export default function QuranScreen() {
                           {selectedReciter || t("quran.reciter", "Récitateur")}
                         </Text>
                         <Text style={styles.menuArrow}>›</Text>
-                      </TouchableOpacity>
+                      </Pressable>
                     </View>
                   )}
 
@@ -3420,7 +3594,7 @@ export default function QuranScreen() {
                       <Text style={styles.menuSectionTitle}>
                         {t("downloads_manager") || "Téléchargements"}
                       </Text>
-                      <TouchableOpacity
+                      <Pressable
                         style={styles.menuOption}
                         onPress={() => {
                           setMenuVisible(false);
@@ -3434,7 +3608,7 @@ export default function QuranScreen() {
                             flex: 1,
                           }}
                         >
-                          <MaterialCommunityIcons
+                          <MCIcon
                             name="download-multiple"
                             size={20}
                             color="#4ECDC4"
@@ -3446,7 +3620,7 @@ export default function QuranScreen() {
                           </Text>
                         </View>
                         <Text style={styles.menuArrow}>›</Text>
-                      </TouchableOpacity>
+                      </Pressable>
                     </View>
                   )}
                 </>
@@ -3468,12 +3642,12 @@ export default function QuranScreen() {
             >
               <View style={styles.modalHeader}>
                 <Text style={styles.modalTitle}>{t("choose_sourate")}</Text>
-                <TouchableOpacity
+                <Pressable
                   style={styles.closeButton}
                   onPress={() => setModalVisible(false)}
                 >
                   <Text style={styles.closeButtonText}>✕</Text>
-                </TouchableOpacity>
+                </Pressable>
               </View>
               <FlatList
                 ref={flatListRef}
@@ -3498,7 +3672,7 @@ export default function QuranScreen() {
 
         {/* 🎨 NOUVEAU : Bouton play flottant pour les récitations premium */}
         {user.isPremium && (
-          <TouchableOpacity
+          <Pressable
             testID="floating-play-button"
             style={[
               styles.floatingPlayButton,
@@ -3513,7 +3687,7 @@ export default function QuranScreen() {
             }}
             disabled={isLoading}
           >
-            <MaterialCommunityIcons
+            <MCIcon
               name={
                 isLoading
                   ? "loading"
@@ -3526,7 +3700,7 @@ export default function QuranScreen() {
               size={24}
               color="#fff"
             />
-          </TouchableOpacity>
+          </Pressable>
         )}
 
         {/* 🎨 NOUVEAU : Modal des contrôles audio complets */}
@@ -3580,18 +3754,18 @@ export default function QuranScreen() {
                       <View style={styles.audioModalHeader}>
                         {/* 🍎 iOS: Bouton retour si on est dans la vue gifSelector */}
                         {Platform.OS === "ios" && audioModalView === "gifSelector" ? (
-                          <TouchableOpacity
+                          <Pressable
                             style={styles.closeButton}
                             onPress={() => setAudioModalView("player")}
                           >
-                            <MaterialCommunityIcons
+                            <MCIcon
                               name="arrow-left"
                               size={24}
                               color={modalButtonColor}
                             />
-                          </TouchableOpacity>
+                          </Pressable>
                         ) : (
-                          <TouchableOpacity
+                          <Pressable
                             style={styles.closeButton}
                             onPress={() => {
                               setAudioControlsModalVisible(false);
@@ -3601,17 +3775,17 @@ export default function QuranScreen() {
                               }
                             }}
                           >
-                            <MaterialCommunityIcons
+                            <MCIcon
                               name="close"
                               size={24}
                               color={modalButtonColor}
                             />
-                          </TouchableOpacity>
+                          </Pressable>
                         )}
                         
                         {/* 🎵 NOUVEAU : Bouton de sélection de GIF (premium only, visible uniquement sur vue player) */}
                         {user?.isPremium && audioModalView === "player" && (
-                          <TouchableOpacity
+                          <Pressable
                             style={styles.gifSelectorButton}
                             onPress={() => {
                               // 🍎 iOS: Navigation interne (pas de 2ème modal)
@@ -3622,12 +3796,12 @@ export default function QuranScreen() {
                               }
                             }}
                           >
-                            <Ionicons
+                            <IonIcon
                               name="images-outline"
                               size={20}
                               color={modalButtonColor}
                             />
-                          </TouchableOpacity>
+                          </Pressable>
                         )}
                       </View>
                       
@@ -3639,7 +3813,7 @@ export default function QuranScreen() {
                             const isSelected = selectedGif === gif.id;
 
                             return (
-                              <TouchableOpacity
+                              <Pressable
                                 key={gif.id}
                                 style={[
                                   styles.gifOption,
@@ -3665,15 +3839,15 @@ export default function QuranScreen() {
                                   </Text>
                                   {gif.premium && (
                                     <View style={styles.premiumBadge}>
-                                      <MaterialCommunityIcons name="crown" size={14} color="#FFD700" />
+                                      <MCIcon name="crown" size={14} color="#FFD700" />
                                       <Text style={styles.premiumText}>Premium</Text>
                                     </View>
                                   )}
                                 </View>
                                 {isSelected && (
-                                  <MaterialCommunityIcons name="check-circle" size={24} color="#4CAF50" />
+                                  <MCIcon name="check-circle" size={24} color="#4CAF50" />
                                 )}
-                              </TouchableOpacity>
+                              </Pressable>
                             );
                           })}
                         </ScrollView>
@@ -3700,7 +3874,7 @@ export default function QuranScreen() {
                             </Text>
                             {currentRecitation.isDownloaded && (
                               <View style={styles.audioLocalBadge}>
-                                <MaterialCommunityIcons
+                                <MCIcon
                                   name="download"
                                   size={14}
                                   color="#4CAF50"
@@ -3714,19 +3888,19 @@ export default function QuranScreen() {
 
                           {/* Contrôles de lecture principaux */}
                           <View style={styles.audioMainControls}>
-                            <TouchableOpacity
+                            <Pressable
                               onPress={playPreviousInPlaylist}
                               disabled={isLoading}
                               style={styles.audioSecondaryControlButton}
                             >
-                              <MaterialCommunityIcons
+                              <MCIcon
                                 name="skip-previous"
                                 size={40}
                                 color="#FFF"
                               />
-                            </TouchableOpacity>
+                            </Pressable>
 
-                            <TouchableOpacity
+                            <Pressable
                               style={[
                                 styles.audioPlayButton,
                                 currentlyPlaying === currentRecitation.id &&
@@ -3749,7 +3923,7 @@ export default function QuranScreen() {
                               }}
                               disabled={isLoading}
                             >
-                              <MaterialCommunityIcons
+                              <MCIcon
                                 name={
                                   isLoading
                                     ? "loading"
@@ -3761,19 +3935,19 @@ export default function QuranScreen() {
                                 size={40}
                                 color="#fff"
                               />
-                            </TouchableOpacity>
+                            </Pressable>
 
-                            <TouchableOpacity
+                            <Pressable
                               onPress={playNextInPlaylist}
                               disabled={isLoading}
                               style={styles.audioSecondaryControlButton}
                             >
-                              <MaterialCommunityIcons
+                              <MCIcon
                                 name="skip-next"
                                 size={40}
                                 color="#FFF"
                               />
-                            </TouchableOpacity>
+                            </Pressable>
                           </View>
 
                           {/* 🎯 NOUVEAU : Navigation entre sourates */}
@@ -3790,12 +3964,11 @@ export default function QuranScreen() {
 
                             {/* Info navigation discrète - EN DESSOUS */}
                             <View style={styles.navigationInfoContainer}>
-                              <TouchableOpacity
+                              <Pressable
                                 style={styles.navigationInfoButton}
                                 onPress={() => setShowNavigationTooltip(true)}
-                                activeOpacity={0.7}
                               >
-                                <MaterialCommunityIcons
+                                <MCIcon
                                   name="information-outline"
                                   size={18}
                                   color="#FFD700"
@@ -3803,12 +3976,13 @@ export default function QuranScreen() {
                                 <Text style={styles.navigationInfoText}>
                                   Navigation
                                 </Text>
-                              </TouchableOpacity>
+                              </Pressable>
                             </View>
                           </View>
 
                           <View style={styles.audioProgressContainer}>
                             <AudioSeekBar
+                              key={`seek-${currentRecitation.id}-${playbackDuration}`}
                               currentPosition={playbackPosition || 0}
                               totalDuration={playbackDuration || 0}
                               onSeek={seekToPosition}
@@ -3842,7 +4016,7 @@ export default function QuranScreen() {
                               } else if (!currentRecitation.isDownloaded) {
                                 // Pas téléchargé - Afficher le bouton de téléchargement
                                 return (
-                                  <TouchableOpacity
+                                  <Pressable
                                     style={styles.audioDownloadButton}
                                     onPress={() =>
                                       handleNativeDownloadRecitation(
@@ -3850,7 +4024,7 @@ export default function QuranScreen() {
                                       )
                                     }
                                   >
-                                    <MaterialCommunityIcons
+                                    <MCIcon
                                       name="download"
                                       size={20}
                                       color={modalButtonColor}
@@ -3862,16 +4036,18 @@ export default function QuranScreen() {
                                       ]}
                                     >
                                       {t("download")} (
-                                      {currentRecitation.fileSize}
+                                      {Number(
+                                        currentRecitation.fileSize,
+                                      ).toFixed(2)}
                                       MB)
                                     </Text>
-                                  </TouchableOpacity>
+                                  </Pressable>
                                 );
                               } else {
                                 // Téléchargé - Afficher l'info et le bouton de suppression
                                 return (
                                   <View style={styles.downloadedInfoContainer}>
-                                    <MaterialCommunityIcons
+                                    <MCIcon
                                       name="check-circle"
                                       size={20}
                                       color="#4CAF50"
@@ -3879,7 +4055,7 @@ export default function QuranScreen() {
                                     <Text style={styles.downloadedInfoText}>
                                       {t("downloaded_locally")}
                                     </Text>
-                                    <TouchableOpacity
+                                    <Pressable
                                       style={styles.audioDeleteButton}
                                       onPress={() =>
                                         handleDeleteRecitation(
@@ -3887,12 +4063,12 @@ export default function QuranScreen() {
                                         )
                                       }
                                     >
-                                      <MaterialCommunityIcons
+                                      <MCIcon
                                         name="delete"
                                         size={16}
                                         color="#FF6B6B"
                                       />
-                                    </TouchableOpacity>
+                                    </Pressable>
                                   </View>
                                 );
                               }
@@ -3900,11 +4076,11 @@ export default function QuranScreen() {
                           </View>
 
                           {/* Bouton stop */}
-                          <TouchableOpacity
+                          <Pressable
                             style={styles.audioStopButton}
                             onPress={stopRecitation}
                           >
-                            <MaterialCommunityIcons
+                            <MCIcon
                               name="stop"
                               size={24}
                               color={modalButtonColor}
@@ -3917,7 +4093,7 @@ export default function QuranScreen() {
                             >
                               {t("stop")}
                             </Text>
-                          </TouchableOpacity>
+                          </Pressable>
                         </View>
                         )
                       )}
@@ -3943,16 +4119,16 @@ export default function QuranScreen() {
                 <Text style={styles.modalTitle}>
                   {t("choose_gif", "Choisir un effet visuel")}
                 </Text>
-                <TouchableOpacity
+                <Pressable
                   style={styles.closeButton}
                   onPress={() => setGifModalVisible(false)}
                 >
-                  <MaterialCommunityIcons
+                  <MCIcon
                     name="close"
                     size={24}
                     color="#483C1C"
                   />
-                </TouchableOpacity>
+                </Pressable>
               </View>
 
               <ScrollView style={styles.gifList}>
@@ -3961,7 +4137,7 @@ export default function QuranScreen() {
                   const isSelected = selectedGif === gif.id;
 
                   return (
-                    <TouchableOpacity
+                    <Pressable
                       key={gif.id}
                       style={[
                         styles.gifOption,
@@ -3987,7 +4163,7 @@ export default function QuranScreen() {
                         </Text>
                         {gif.premium && (
                           <View style={styles.premiumBadge}>
-                            <MaterialCommunityIcons
+                            <MCIcon
                               name="crown"
                               size={14}
                               color="#FFD700"
@@ -3997,13 +4173,13 @@ export default function QuranScreen() {
                         )}
                       </View>
                       {isSelected && (
-                        <MaterialCommunityIcons
+                        <MCIcon
                           name="check-circle"
                           size={24}
                           color="#4CAF50"
                         />
                       )}
-                    </TouchableOpacity>
+                    </Pressable>
                   );
                 })}
               </ScrollView>
@@ -4025,12 +4201,12 @@ export default function QuranScreen() {
             >
               <View style={styles.modalHeader}>
                 <Text style={styles.modalTitle}>{t("choose_reciter")}</Text>
-                <TouchableOpacity
+                <Pressable
                   style={styles.closeButton}
                   onPress={() => setReciterModalVisible(false)}
                 >
                   <Text style={styles.closeButtonText}>✕</Text>
-                </TouchableOpacity>
+                </Pressable>
               </View>
               <FlatList
                 data={getAvailableReciters().map((reciter) => ({
@@ -4038,7 +4214,7 @@ export default function QuranScreen() {
                   label: reciter,
                 }))}
                 renderItem={({ item }) => (
-                  <TouchableOpacity
+                  <Pressable
                     style={[
                       styles.optionStyle,
                       selectedReciter === item.key &&
@@ -4058,7 +4234,7 @@ export default function QuranScreen() {
                     >
                       {item.label}
                     </Text>
-                  </TouchableOpacity>
+                  </Pressable>
                 )}
                 keyExtractor={(item) => item.key}
                 contentContainerStyle={styles.listContent}
@@ -4190,7 +4366,7 @@ export default function QuranScreen() {
             </Text>
 
             <View style={styles.modalNavigationTooltipRow}>
-              <MaterialCommunityIcons
+              <MCIcon
                 name="gesture-swipe-horizontal"
                 size={20}
                 color="#4ECDC4"
@@ -4201,7 +4377,7 @@ export default function QuranScreen() {
             </View>
 
             <View style={styles.modalNavigationTooltipRow}>
-              <MaterialCommunityIcons
+              <MCIcon
                 name="widgets"
                 size={20}
                 color="#FFD700"
@@ -4212,20 +4388,20 @@ export default function QuranScreen() {
             </View>
 
             <View style={styles.modalNavigationTooltipRow}>
-              <MaterialCommunityIcons name="play" size={20} color="#4CAF50" />
+              <MCIcon name="play" size={20} color="#4CAF50" />
               <Text style={styles.modalNavigationTooltipText}>
                 {t("quran_navigation_modal.play_instruction")}
               </Text>
             </View>
 
-            <TouchableOpacity
+            <Pressable
               style={styles.modalCloseButton}
               onPress={() => setShowNavigationTooltip(false)}
             >
               <Text style={styles.modalCloseButtonText}>
                 {t("quran_navigation_modal.close_button")}
               </Text>
-            </TouchableOpacity>
+            </Pressable>
           </View>
         </View>
       </Modal>
@@ -4272,11 +4448,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     borderColor: "#ba9c34",
     borderWidth: 2,
-    shadowColor: "#b59d42",
-    shadowOpacity: 0.3,
-    shadowRadius: 8,
-    shadowOffset: { width: 0, height: 2 },
-    elevation: 3,
+    boxShadow: "0px 2px 8px rgba(181,157,66,0.3)",
   },
   menuButtonText: {
     fontSize: 24,
@@ -4687,11 +4859,7 @@ const styles = StyleSheet.create({
     marginBottom: 12,
     borderWidth: 1,
     borderColor: "#e7c86a",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 2,
+    boxShadow: "0px 2px 4px rgba(0,0,0,0.1)",
   },
   offlineRecitationInfo: {
     flex: 1,
@@ -4769,12 +4937,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#4ECDC4",
     alignItems: "center",
     justifyContent: "center",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
-    zIndex: 1000,
+    boxShadow: "0px 2px 4px rgba(0,0,0,0.25)",
+    zIndex: Z_INDEX.modal,
   },
   floatingPlayButtonInactive: {
     backgroundColor: "#ba9c34",
@@ -4870,14 +5034,16 @@ const styles = StyleSheet.create({
 
   seekBarWrapper: {
     flex: 1,
+    minHeight: Platform.OS === "ios" ? 44 : 32,
+    justifyContent: "center",
     position: "relative",
   },
 
   audioProgressBarActive: {
-    height: 12, // Légèrement plus épais pendant le glissement
-    borderWidth: 2,
+    height: 10,
+    borderWidth: 1,
     borderColor: "#FF6B6B",
-    borderRadius: 6, // Maintient les coins arrondis
+    borderRadius: 5,
   },
 
   audioTimeTextActive: {
@@ -4893,11 +5059,7 @@ const styles = StyleSheet.create({
     paddingVertical: 4,
     borderRadius: 6,
     transform: [{ translateX: -20 }], // Centrage pour curseur 16px
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.3,
-    shadowRadius: 4,
-    elevation: 4,
+    boxShadow: "0px 2px 4px rgba(0,0,0,0.3)",
   },
 
   seekPreviewText: {
@@ -5023,11 +5185,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     borderWidth: 1,
     borderColor: "rgba(255, 255, 255, 0.5)",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 3,
-    elevation: 3,
+    boxShadow: "0px 2px 3px rgba(0,0,0,0.2)",
   },
   audioPlayButton: {
     width: 80,
@@ -5036,11 +5194,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#4ECDC4",
     alignItems: "center",
     justifyContent: "center",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
+    boxShadow: "0px 2px 4px rgba(0,0,0,0.25)",
   },
   audioPlayButtonActive: {
     backgroundColor: "#FF6B6B",
@@ -5060,16 +5214,21 @@ const styles = StyleSheet.create({
     minWidth: 40,
     textAlign: "center",
   },
-  audioProgressBar: {
+  audioProgressBarTouchTarget: {
+    width: "100%",
     flex: 1,
+    justifyContent: "center",
+  },
+  audioProgressBar: {
+    flexDirection: "row",
+    width: "100%",
     height: 8,
     backgroundColor: "rgba(186, 156, 52, 0.3)",
     borderRadius: 4,
     overflow: "hidden",
   },
   audioProgressFill: {
-    height: "100%",
-    backgroundColor: "#4ECDC4",
+    height: 8,
     borderRadius: 4,
   },
   audioDownloadButton: {
@@ -5082,11 +5241,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "rgba(255,255,255,0.3)",
     marginBottom: 12,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
+    boxShadow: "0px 2px 4px rgba(0,0,0,0.1)",
   },
   audioDownloadText: {
     fontSize: 16,
@@ -5106,11 +5261,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     borderWidth: 1,
     borderColor: "rgba(255,255,255,0.3)",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
+    boxShadow: "0px 2px 4px rgba(0,0,0,0.1)",
   },
   audioStopText: {
     fontSize: 16,
@@ -5161,11 +5312,7 @@ const styles = StyleSheet.create({
     borderColor: "rgba(255,255,255,0.25)",
     marginTop: 4,
     marginBottom: 8,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.08,
-    shadowRadius: 3,
-    elevation: 2,
+    boxShadow: "0px 1px 3px rgba(0,0,0,0.08)",
   },
   audioNavButton: {
     flexDirection: "row",
@@ -5178,11 +5325,7 @@ const styles = StyleSheet.create({
     borderColor: "rgba(255,255,255,0.3)",
     minWidth: 60,
     justifyContent: "center",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.06,
-    shadowRadius: 2,
-    elevation: 1,
+    boxShadow: "0px 1px 2px rgba(0,0,0,0.06)",
   },
   audioNavButtonDisabled: {
     backgroundColor: "rgba(200,200,200,0.5)",
@@ -5243,11 +5386,7 @@ const styles = StyleSheet.create({
     maxWidth: 350,
     borderWidth: 2,
     borderColor: "rgba(255, 255, 255, 0.2)",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 10 },
-    shadowOpacity: 0.5,
-    shadowRadius: 15,
-    elevation: 20,
+    boxShadow: "0px 10px 15px rgba(0,0,0,0.5)",
   },
   modalNavigationTooltipTitle: {
     color: "#FFD700",
@@ -5355,11 +5494,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     borderColor: "#ba9c34",
     borderWidth: 2,
-    shadowColor: "#b59d42",
-    shadowOpacity: 0.3,
-    shadowRadius: 8,
-    shadowOffset: { width: 0, height: 2 },
-    elevation: 3,
+    boxShadow: "0px 2px 8px rgba(181,157,66,0.3)",
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
@@ -5381,14 +5516,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fffbe6",
     borderRadius: 20,
     width: "90%",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
+    boxShadow: "0px 2px 4px rgba(0,0,0,0.25)",
   },
   modalHeader: {
     flexDirection: "row",
@@ -5424,11 +5552,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
     borderWidth: 2,
     borderColor: "transparent",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.2,
-    shadowRadius: 2,
-    elevation: 2,
+    boxShadow: "0px 1px 2px rgba(0,0,0,0.2)",
   },
   selectedGifOption: {
     borderColor: "#4CAF50",
@@ -5498,10 +5622,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     borderWidth: 2,
     borderColor: "#4ECDC4",
-    shadowColor: "#4ECDC4",
-    shadowOpacity: 0.3,
-    shadowRadius: 4,
-    elevation: 3,
+    boxShadow: "0px 1px 4px rgba(78,205,196,0.3)",
   },
   arabicPlaying: {
     color: "#2E8B57",
@@ -5510,9 +5631,7 @@ const styles = StyleSheet.create({
   verseCirclePlaying: {
     backgroundColor: "#4ECDC4",
     borderColor: "#2E8B57",
-    shadowColor: "#4ECDC4",
-    shadowOpacity: 0.5,
-    shadowRadius: 3,
+    boxShadow: "0px 0px 3px rgba(78,205,196,0.5)",
   },
   verseNumberPlaying: {
     color: "#fff",
@@ -5572,9 +5691,7 @@ const styles = StyleSheet.create({
     marginLeft: 8,
     borderWidth: 1,
     borderColor: "#ba9c34",
-    shadowColor: "#a0802a",
-    shadowOpacity: 0.12,
-    shadowRadius: 2,
+    boxShadow: "0px 1px 2px rgba(160,128,42,0.12)",
   },
   verseNumber: {
     color: "#6b510e",

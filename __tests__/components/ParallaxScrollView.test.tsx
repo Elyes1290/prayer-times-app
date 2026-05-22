@@ -1,5 +1,6 @@
 import React from "react";
 import { render, screen } from "@testing-library/react-native";
+import { View, Text } from "react-native";
 import ParallaxScrollView from "../../components/ParallaxScrollView";
 
 // Mock de react-native-reanimated
@@ -29,7 +30,7 @@ jest.mock("../../hooks/useColorScheme", () => ({
 }));
 
 describe("ParallaxScrollView", () => {
-  const mockHeaderImage = <div>Header Image</div>;
+  const mockHeaderImage = <View><Text>Header Image</Text></View>;
   const mockHeaderBackgroundColor = {
     dark: "#000000",
     light: "#FFFFFF",
@@ -46,7 +47,7 @@ describe("ParallaxScrollView", () => {
           headerImage={mockHeaderImage}
           headerBackgroundColor={mockHeaderBackgroundColor}
         >
-          <div>Test Content</div>
+          <View><Text>Test Content</Text></View>
         </ParallaxScrollView>
       )
     ).not.toThrow();
@@ -58,7 +59,7 @@ describe("ParallaxScrollView", () => {
         headerImage={mockHeaderImage}
         headerBackgroundColor={mockHeaderBackgroundColor}
       >
-        <div>Test Content</div>
+        <View><Text>Test Content</Text></View>
       </ParallaxScrollView>
     );
 
@@ -71,7 +72,7 @@ describe("ParallaxScrollView", () => {
         headerImage={mockHeaderImage}
         headerBackgroundColor={mockHeaderBackgroundColor}
       >
-        <div>Test Content</div>
+        <View><Text>Test Content</Text></View>
       </ParallaxScrollView>
     );
 
@@ -84,7 +85,7 @@ describe("ParallaxScrollView", () => {
         headerImage={mockHeaderImage}
         headerBackgroundColor={mockHeaderBackgroundColor}
       >
-        <div>Test Content</div>
+        <View><Text>Test Content</Text></View>
       </ParallaxScrollView>
     );
 

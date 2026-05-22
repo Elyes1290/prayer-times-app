@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, TouchableOpacity, ScrollView, StyleSheet } from "react-native";
+import { View, Text, Pressable, ScrollView, StyleSheet } from "react-native";
 import { PROPHETS, type ProphetId } from "../../constants/prophetStories";
 
 interface ProphetSelectorProps {
@@ -30,7 +30,7 @@ export function ProphetSelector({
       {PROPHETS.map((prophet) => {
         const isSelected = selectedProphet === prophet.id;
         return (
-          <TouchableOpacity
+          <Pressable
             key={prophet.id}
             style={[
               styles.prophetButton,
@@ -43,7 +43,6 @@ export function ProphetSelector({
               isSelected && styles.prophetButtonActive,
             ]}
             onPress={() => onProphetChange(prophet.id)}
-            activeOpacity={0.7}
           >
             <Text
               style={[
@@ -55,7 +54,7 @@ export function ProphetSelector({
             >
               {prophet.labelShort}
             </Text>
-          </TouchableOpacity>
+          </Pressable>
         );
       })}
     </ScrollView>
@@ -82,11 +81,7 @@ const styles = StyleSheet.create({
     minHeight: 44,
   },
   prophetButtonActive: {
-    elevation: 2,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.15,
-    shadowRadius: 4,
+    boxShadow: "0px 1px 4px rgba(0,0,0,0.15)",
   },
   prophetButtonText: {
     fontSize: 13,

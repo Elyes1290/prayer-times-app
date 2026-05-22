@@ -1,6 +1,6 @@
 import React from "react";
-import { View, Text, TouchableOpacity } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { View, Text, Pressable } from "react-native";
+import { MCIcon } from "@/components/icons/AppVectorIcons";
 
 interface SettingsGridProps {
   t: any;
@@ -73,7 +73,7 @@ export default function SettingsGrid({
     <View style={{ padding: 16 }}>
       <View style={styles.gridContainer}>
         {settingsButtons.map((button) => (
-          <TouchableOpacity
+          <Pressable
             key={button.id}
             style={[
               styles.gridButton,
@@ -83,7 +83,7 @@ export default function SettingsGrid({
             onPress={() => !button.disabled && handleSectionToggle(button.id)}
             disabled={button.disabled}
           >
-            <MaterialCommunityIcons
+            <MCIcon
               name={button.icon}
               size={32}
               color={button.iconColor}
@@ -96,7 +96,7 @@ export default function SettingsGrid({
             >
               {button.title}
             </Text>
-          </TouchableOpacity>
+          </Pressable>
         ))}
       </View>
     </View>

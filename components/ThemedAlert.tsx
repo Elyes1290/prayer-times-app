@@ -1,7 +1,9 @@
+import { Z_INDEX } from "../constants/zIndex";
 import React from "react";
-import { View, Text, TouchableOpacity, Modal, StyleSheet } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { View, Text, Pressable, Modal, StyleSheet } from "react-native";
+import { MCIcon } from "@/components/icons/AppVectorIcons";
 import { useThemeAssets } from "../hooks/useThemeAssets";
+import { makeBoxShadow } from "../utils/shadowUtils";
 
 interface ThemedAlertProps {
   visible: boolean;
@@ -45,8 +47,7 @@ const ThemedAlert: React.FC<ThemedAlertProps> = ({
         justifyContent: "center",
         alignItems: "center",
         padding: 20,
-        zIndex: 999999,
-        elevation: 999999,
+        zIndex: Z_INDEX.modal,
       },
       modal: {
         backgroundColor: isDark
@@ -56,16 +57,18 @@ const ThemedAlert: React.FC<ThemedAlertProps> = ({
         padding: 24,
         width: "90%",
         maxWidth: 400,
-        shadowColor: isDark ? "#000" : themeAssets.colors.shadow,
-        shadowOffset: { width: 0, height: 8 },
-        shadowOpacity: isDark ? 0.5 : 0.3,
-        shadowRadius: 16,
-        elevation: 999999,
+        boxShadow: makeBoxShadow(
+          isDark ? "#000" : themeAssets.colors.shadow,
+          0,
+          8,
+          16,
+          isDark ? 0.5 : 0.3
+        ),
         borderWidth: 1,
         borderColor: isDark
           ? themeAssets.colors.border
           : themeAssets.colors.border,
-        zIndex: 999999,
+        zIndex: Z_INDEX.modal,
       },
       title: {
         fontSize: 20,
@@ -222,7 +225,7 @@ const ThemedAlert: React.FC<ThemedAlertProps> = ({
             testID="themed-alert-icon-container"
           >
             <View style={styles.icon} testID="themed-alert-icon">
-              <MaterialCommunityIcons
+              <MCIcon
                 name={getIcon()}
                 size={24}
                 color={getIconColor()}
@@ -243,8 +246,8 @@ const ThemedAlert: React.FC<ThemedAlertProps> = ({
             testID="themed-alert-button-container"
           >
             {buttons.map((button, index) => (
-              <TouchableOpacity
-                key={index}
+              <Pressable
+                key={button.text}
                 style={getButtonStyle(button.style)}
                 onPress={() => {
                   button.onPress();
@@ -254,11 +257,11 @@ const ThemedAlert: React.FC<ThemedAlertProps> = ({
               >
                 <Text
                   style={getButtonTextStyle(button.style)}
-                  testID={`themed-alert-button-text-${index}`}
+                  testID={`themed-alert-button-text-${button.text}`}
                 >
                   {button.text}
                 </Text>
-              </TouchableOpacity>
+              </Pressable>
             ))}
           </View>
         </View>

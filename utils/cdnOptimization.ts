@@ -2,7 +2,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as FileSystem from "expo-file-system";
 import { Platform } from "react-native";
 
-export interface CDNConfig {
+interface CDNConfig {
   primaryCDN: string;
   fallbackCDN: string;
   firebaseStorage: string;
@@ -10,7 +10,7 @@ export interface CDNConfig {
   maxCacheSize: number; // en MB
 }
 
-export interface CacheEntry {
+interface CacheEntry {
   url: string;
   localPath: string;
   downloadedAt: number;
@@ -19,7 +19,7 @@ export interface CacheEntry {
   accessCount: number;
 }
 
-export class CDNOptimizer {
+class CDNOptimizer {
   private static instance: CDNOptimizer;
   private cacheIndex: Map<string, CacheEntry> = new Map();
   private readonly CACHE_INDEX_KEY = "@cdn_cache_index";
@@ -108,8 +108,9 @@ export class CDNOptimizer {
       // 2. Construire les URLs avec priorité CDN
       const urls = this.buildCDNUrls(fileId, originalUrl);
 
-      // 3. Essayer de télécharger depuis le CDN le plus rapide
-      for (const { url, source } of urls) {
+      const trySourceAt = async (index: number): Promise<string | null> => {
+        if (index >= urls.length) return null;
+        const { url, source } = urls[index];
         try {
           console.log(`🌐 Tentative téléchargement depuis ${source}: ${url}`);
           const localPath = await this.downloadWithCache(
@@ -119,20 +120,16 @@ export class CDNOptimizer {
           );
 
           if (localPath) {
-            // console.log(`✅ Téléchargement réussi depuis ${source}`);
-
-            // Optimisation : prefetch des fichiers suivants depuis ce CDN
             this.schedulePrefetch(source);
-
             return localPath;
           }
         } catch (error) {
-          // console.log(`❌ Échec ${source}:`, (error as Error).message);
-          continue;
+          // try next
         }
-      }
+        return trySourceAt(index + 1);
+      };
 
-      return null;
+      return trySourceAt(0);
     } catch (error) {
       console.error("Erreur récupération fichier optimisé:", error);
       return null;
@@ -300,18 +297,24 @@ export class CDNOptimizer {
     });
 
     let freedSpace = 0;
+    const toRemove: { fileId: string; entry: CacheEntry }[] = [];
     for (const [fileId, entry] of entries) {
       if (freedSpace >= targetMB) break;
-
-      try {
-        await FileSystem.deleteAsync(entry.localPath, { idempotent: true });
-        this.cacheIndex.delete(fileId);
-        freedSpace += entry.fileSize;
-        console.log(`🗑️ Supprimé du cache: ${fileId} (${entry.fileSize}MB)`);
-      } catch (error) {
-        console.error(`Erreur suppression cache ${fileId}:`, error);
-      }
+      toRemove.push({ fileId, entry });
+      freedSpace += entry.fileSize;
     }
+
+    await Promise.all(
+      toRemove.map(async ({ fileId, entry }) => {
+        try {
+          await FileSystem.deleteAsync(entry.localPath, { idempotent: true });
+          this.cacheIndex.delete(fileId);
+          console.log(`🗑️ Supprimé du cache: ${fileId} (${entry.fileSize}MB)`);
+        } catch (error) {
+          console.error(`Erreur suppression cache ${fileId}:`, error);
+        }
+      })
+    );
 
     await this.saveCacheIndex();
     // console.log(`✅ Cache nettoyé: ${freedSpace}MB libérés`);

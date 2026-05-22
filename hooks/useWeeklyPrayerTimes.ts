@@ -1,4 +1,4 @@
-import { useMemo , useContext } from "react";
+import { useMemo, use } from "react";
 import { PrayerTimes, CalculationMethod, Coordinates } from "adhan";
 import type { LocationObject } from "expo-location";
 
@@ -14,7 +14,7 @@ export function useWeeklyPrayerTimes(
   location: LocationObject | null,
   startDate: Date
 ): WeeklyPrayerTimes {
-  const { calcMethod } = useContext(SettingsContext);
+  const { calcMethod } = use(SettingsContext);
 
   return useMemo(() => {
     if (!location?.coords?.latitude || !location?.coords?.longitude) {
@@ -79,4 +79,3 @@ export function useWeeklyPrayerTimes(
   ]);
 }
 
-export default useWeeklyPrayerTimes;

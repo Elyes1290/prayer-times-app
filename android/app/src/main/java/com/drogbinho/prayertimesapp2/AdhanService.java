@@ -985,11 +985,11 @@ public class AdhanService extends Service {
         SharedPreferences settings = getSharedPreferences("prayer_times_settings", MODE_PRIVATE);
         String currentLanguage = settings.getString("current_language", "en");
 
-        // Titre et corps de la notification selon la langue
-        String notifTitle = getLocalizedText(this, "adhan_completed_title", currentLanguage, "Adhan terminé");
-        String notifBody = getLocalizedText(this, "adhan_completed_body", currentLanguage,
-                "L'appel à la prière pour " + getPrayerDisplayNameForLocale(prayerLabel, currentLanguage)
-                        + " s'est déroulé");
+        // Titre et corps de la notification selon la langue (lecture depuis les JSON assets)
+        String notifTitle = getLocalizedTextFromJson(this, "adhan_completed_title", currentLanguage, "Adhan ended");
+        String notifBody = getLocalizedTextFromJson(this, "adhan_completed_body", currentLanguage,
+                "The call to prayer for {{prayer}} has been completed.")
+                .replace("{{prayer}}", getPrayerDisplayNameForLocale(prayerLabel, currentLanguage));
 
         // Intent pour fermer cette notification spécifique
         Intent dismissIntent = new Intent(this, AdhanDismissReceiver.class);
@@ -1013,7 +1013,7 @@ public class AdhanService extends Service {
                 .setOngoing(false) // Peut être fermée par l'utilisateur
                 .setAutoCancel(true) // Se ferme quand l'utilisateur tape dessus
                 .addAction(android.R.drawable.ic_menu_close_clear_cancel,
-                        getLocalizedText(this, "dismiss", currentLanguage, "Fermer"), dismissPendingIntent);
+                        getLocalizedTextFromJson(this, "dismiss", currentLanguage, "Dismiss"), dismissPendingIntent);
 
         NotificationManager notificationManager = getSystemService(NotificationManager.class);
         if (notificationManager != null) {
@@ -1728,9 +1728,10 @@ public class AdhanService extends Service {
         intent.putExtra("ADHAN_SOUND", adhanSound);
         intent.putExtra("PRAYER_LABEL", prayerName);
         // Utilise les mêmes clés que le JavaScript pour la cohérence
-        intent.putExtra("NOTIF_TITLE", getLocalizedText(context, "adhan_notification_title", language, "🕌 Adhan"));
+        intent.putExtra("NOTIF_TITLE",
+                getLocalizedTextFromJson(context, "adhan_notification_title", language, "🕌 Adhan"));
         intent.putExtra("NOTIF_BODY",
-                getLocalizedText(context, "adhan_notification_body", language,
+                getLocalizedTextFromJson(context, "adhan_notification_body", language,
                         "It is time to pray {{prayer}}! May Allah accept your prayer.")
                         .replace("{{prayer}}", getPrayerDisplayNameForLocale(prayerName, language)));
 
@@ -1771,21 +1772,22 @@ public class AdhanService extends Service {
 
         Intent intent = new Intent(context, PrayerReminderReceiver.class);
         // Utilise les mêmes clés que le JavaScript pour la cohérence
-        intent.putExtra("TITLE", getLocalizedText(context, "prayer_reminder_title", language, "⏰ Prayer Reminder"));
+        intent.putExtra("TITLE",
+                getLocalizedTextFromJson(context, "prayer_reminder_title", language, "⏰ Prayer Reminder"));
         intent.putExtra("BODY",
-                getLocalizedText(context, "prayer_reminder_body", language,
+                getLocalizedTextFromJson(context, "prayer_reminder_body", language,
                         "The {{prayer}} prayer is in {{minutes}} minutes.")
                         .replace("{{prayer}}", getPrayerDisplayNameForLocale(prayerName, language))
                         .replace("{{minutes}}", String.valueOf(offsetMinutes)));
         intent.putExtra("PRAYER_LABEL", prayerName);
 
-        // Ajouter préfixe "AUTO_" pour éviter les conflits avec la programmation
-        // manuelle
-        int requestCode = ("AUTO_reminder_" + prayerName + "_" + triggerAtMillis).hashCode();
+        // Même schéma que AdhanModule.schedulePrayerReminders (JS) : écrase les doublons et permet à cancelAllPrayerReminders de tout annuler
+        int requestCode = ("reminder_" + prayerName + "_" + triggerAtMillis).hashCode();
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, requestCode, intent,
                 PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
         try {
             alarmManager.setAlarmClock(new AlarmManager.AlarmClockInfo(triggerAtMillis, null), pendingIntent);
+            NotificationAlarmRegistry.appendReminder(context, prayerName, triggerAtMillis);
             debugLog(TAG, "Réprogram: Rappel programmé pour " + prayerName + " à " + new Date(triggerAtMillis));
         } catch (Exception e) {
             errorLog(TAG, "Réprogram: Erreur Rappel " + prayerName + ": " + e.getMessage());
@@ -1806,9 +1808,10 @@ public class AdhanService extends Service {
         } else {
             warningLog(TAG, "Aucun contenu Dhikr trouvé pour Type=" + dhikrType + ", Langue=" + language
                     + ". Utilisation de placeholders.");
-            title = getLocalizedText(context, "dhikr_dua", language, "Dhikr & Dua");
+            title = getLocalizedTextFromJson(context, "dhikr_dua", language, "Dhikr & Dua");
             String categoryName = getDhikrCategoryDisplayTitle(dhikrType, language, false, "Dhikr");
-            body = getLocalizedText(context, "dhikr_generic_placeholder_body", language, "N'oubliez pas votre Dhikr")
+            body = getLocalizedTextFromJson(context, "dhikr_generic_placeholder_body", language,
+                    "N'oubliez pas votre Dhikr")
                     + " (" + categoryName + ")";
         }
 
@@ -1825,18 +1828,56 @@ public class AdhanService extends Service {
             return;
         }
 
-        // Ajouter préfixe "AUTO_" pour éviter les conflits avec la programmation
-        // manuelle
-        int requestCode = ("AUTO_" + dhikrType + "_" + prayerName + "_" + triggerMillis).hashCode();
+        // Même schéma que AdhanModule.scheduleDhikrNotifications (JS)
+        int requestCode = (dhikrType + "_" + prayerName + "_" + triggerMillis).hashCode();
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, requestCode, intent,
                 PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
         try {
             alarmManager.setAlarmClock(new AlarmManager.AlarmClockInfo(triggerMillis, null), pendingIntent);
+            NotificationAlarmRegistry.appendDhikr(context, dhikrType, prayerName, triggerMillis);
             debugLog(TAG,
                     "✅ Dhikr reprogrammé: " + dhikrType + " pour " + prayerName + " à " + new Date(triggerMillis));
         } catch (Exception e) {
             errorLog(TAG, "❌ Erreur reprogrammation dhikr: " + e.getMessage());
         }
+    }
+
+    /**
+     * Code langue de base (ex. fr depuis fr-FR) pour correspondre aux assets locales_xx.json.
+     */
+    private String normalizeLanguageForLocaleAssets(String language) {
+        if (language == null || language.isEmpty()) {
+            return "en";
+        }
+        String base = language.trim().toLowerCase(Locale.ROOT);
+        int sep = base.indexOf('-');
+        if (sep > 0) {
+            base = base.substring(0, sep);
+        }
+        sep = base.indexOf('_');
+        if (sep > 0) {
+            base = base.substring(0, sep);
+        }
+        return base.isEmpty() ? "en" : base;
+    }
+
+    private String getLocalizedTextFromJson(Context context, String key, String language, String fallback) {
+        // Try requested language first, then fallback to English, then hardcoded fallback
+        String lang = normalizeLanguageForLocaleAssets(language);
+        String[] candidates = { "locales_" + lang + ".json", "locales_en.json" };
+        for (String fileName : candidates) {
+            String jsonStr = loadJSONFromAsset(context, fileName);
+            if (jsonStr != null) {
+                try {
+                    JSONObject json = new JSONObject(jsonStr);
+                    String value = json.optString(key, null);
+                    if (value != null && !value.isEmpty()) return value;
+                } catch (org.json.JSONException e) {
+                    warningLog(TAG, "Erreur parsing JSON locale '" + fileName + "': " + e.getMessage());
+                }
+            }
+        }
+        return fallback;
     }
 
     private String loadJSONFromAsset(Context context, String fileName) {
@@ -1889,7 +1930,7 @@ public class AdhanService extends Service {
 
         switch (dhikrType) {
             case "afterSalah":
-                categoryKey = "dhikr_category_after_salah";
+                categoryKey = "dhikr_category_afterSalah";
                 defaultTitleText = "Dhikr après la Prière";
                 break;
             case "dhikrMorning":
@@ -1901,14 +1942,14 @@ public class AdhanService extends Service {
                 defaultTitleText = "Dhikr du Soir";
                 break;
             case "selectedDua":
-                categoryKey = "dhikr_category_selected_dua";
+                categoryKey = "dhikr_category_selectedDua";
                 defaultTitleText = "Doua Sélectionnée";
                 break;
             default:
                 categoryKey = "dhikr_category_general";
                 defaultTitleText = "Dhikr";
         }
-        String localizedTitle = getLocalizedText(this, categoryKey, language, defaultTitleText);
+        String localizedTitle = getLocalizedTextFromJson(this, categoryKey, language, defaultTitleText);
         return includeBrackets ? "[" + localizedTitle + "]" : localizedTitle;
     }
 
@@ -1966,7 +2007,7 @@ public class AdhanService extends Service {
             String latin = randomDhikrJson.optString("latin", "");
 
             // Titre de la notification: "Dhikr & Dua" (ou localisé)
-            String notificationTitle = getLocalizedText(context, "dhikr_dua", language, "Dhikr & Dua");
+            String notificationTitle = getLocalizedTextFromJson(context, "dhikr_dua", language, "Dhikr & Dua");
 
             // Corps de la notification
             String categoryDisplayLabel = getDhikrCategoryDisplayTitle(dhikrType, language, true, "Dhikr"); // ex:
@@ -2002,7 +2043,8 @@ public class AdhanService extends Service {
             // Si le corps est vide (juste la catégorie), ajouter un message par défaut
             if (bodyBuilder.toString().trim().equals(categoryDisplayLabel.trim())) {
                 bodyBuilder.append("\n").append(
-                        getLocalizedText(context, "dhikr_default_body_if_empty", language, "N'oubliez pas Allah."));
+                        getLocalizedTextFromJson(context, "dhikr_default_body_if_empty", language,
+                                "N'oubliez pas Allah."));
             }
 
             return new DhikrContent(notificationTitle, bodyBuilder.toString());
@@ -2044,7 +2086,7 @@ public class AdhanService extends Service {
         String resourceKey = prayerName.toLowerCase(); // Ex: "fajr", "dhuhr"
         // Utilise la version de getLocalizedText qui prend un fallback, ici le nom de
         // la prière original si la clé n'est pas trouvée.
-        String localizedName = getLocalizedText(this, resourceKey, languageCode, prayerName);
+        String localizedName = getLocalizedTextFromJson(this, resourceKey, languageCode, prayerName);
 
         // Si la clé elle-même est retournée et que ce n'est pas le nom de la prière
         // original (cas où la clé n'existe pas ET le fallback était la clé)
@@ -2063,9 +2105,10 @@ public class AdhanService extends Service {
         intent.putExtra("ADHAN_SOUND", adhanSound);
         intent.putExtra("PRAYER_LABEL", prayerName); // Sans suffixe pour les logs
         // Utilise les mêmes clés que le JavaScript pour la cohérence
-        intent.putExtra("NOTIF_TITLE", getLocalizedText(context, "adhan_notification_title", language, "🕌 Adhan"));
+        intent.putExtra("NOTIF_TITLE",
+                getLocalizedTextFromJson(context, "adhan_notification_title", language, "🕌 Adhan"));
         intent.putExtra("NOTIF_BODY",
-                getLocalizedText(context, "adhan_notification_body", language,
+                getLocalizedTextFromJson(context, "adhan_notification_body", language,
                         "It is time to pray {{prayer}}! May Allah accept your prayer.")
                         .replace("{{prayer}}", getPrayerDisplayNameForLocale(prayerName, language)));
 

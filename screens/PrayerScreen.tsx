@@ -1,6 +1,6 @@
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { MCIcon } from "@/components/icons/AppVectorIcons";
 import React, {
-  useContext,
+  use,
   useState,
   useEffect,
   useMemo,
@@ -17,7 +17,7 @@ import {
   StyleSheet,
   Text,
   View,
-  TouchableOpacity,
+  Pressable,
   NativeModules,
   Animated,
   StatusBar,
@@ -39,6 +39,7 @@ import {
   useOverlayIconColor,
   useCurrentTheme,
 } from "../hooks/useThemeColor";
+import { makeBoxShadow } from "../utils/shadowUtils";
 import { useTranslation } from "react-i18next";
 import { reverseGeocodeAsync } from "expo-location";
 import { useLocation } from "../hooks/useLocation";
@@ -87,6 +88,53 @@ const iconByPrayer: Record<
   },
 };
 
+const CollapsibleCard = ({
+  id,
+  title,
+  icon,
+  color,
+  children,
+  expandedSection,
+  onToggle,
+  styles,
+  themeColors,
+}: {
+  id: string;
+  title: string;
+  icon: string;
+  color: string;
+  children: React.ReactNode;
+  expandedSection: string | null;
+  onToggle: (id: string) => void;
+  styles: any;
+  themeColors: any;
+}) => {
+  const isExpanded = expandedSection === id;
+  return (
+    <View style={styles.card}>
+      <Pressable
+        style={styles.cardHeader}
+        onPress={() => onToggle(id)}
+      >
+        <View style={styles.cardHeaderLeft}>
+          <View style={[styles.iconContainer, { backgroundColor: color }]}>
+            <MCIcon name={icon as any} size={24} color="#fff" />
+          </View>
+          <Text style={styles.cardTitle}>{title}</Text>
+        </View>
+        <MCIcon
+          name={isExpanded ? "chevron-up" : "chevron-down"}
+          size={24}
+          color={themeColors.primary}
+        />
+      </Pressable>
+      {isExpanded && (
+        <Animated.View style={styles.cardContent}>{children}</Animated.View>
+      )}
+    </View>
+  );
+};
+
 // Composant pour les sections d'apprentissage collapsibles
 const LearningSection = ({
   colors,
@@ -110,60 +158,10 @@ const LearningSection = ({
     setExpandedSection(expandedSection === section ? null : section);
   };
 
-  const CollapsibleCard = ({
-    id,
-    title,
-    icon,
-    color,
-    children,
-  }: {
-    id: string;
-    title: string;
-    icon: string;
-    color: string;
-    children: React.ReactNode;
-  }) => {
-    const isExpanded = expandedSection === id;
-
-    return (
-      <View style={learningStyles.card}>
-        <TouchableOpacity
-          style={learningStyles.cardHeader}
-          onPress={() => toggleSection(id)}
-          activeOpacity={0.7}
-        >
-          <View style={learningStyles.cardHeaderLeft}>
-            <View
-              style={[learningStyles.iconContainer, { backgroundColor: color }]}
-            >
-              <MaterialCommunityIcons
-                name={icon as any}
-                size={24}
-                color="#fff"
-              />
-            </View>
-            <Text style={learningStyles.cardTitle}>{title}</Text>
-          </View>
-          <MaterialCommunityIcons
-            name={isExpanded ? "chevron-up" : "chevron-down"}
-            size={24}
-            color={colors.primary} // 🌅 Utilise la couleur du thème actif
-          />
-        </TouchableOpacity>
-
-        {isExpanded && (
-          <Animated.View style={learningStyles.cardContent}>
-            {children}
-          </Animated.View>
-        )}
-      </View>
-    );
-  };
-
   return (
     <View style={learningStyles.container}>
       <View style={learningStyles.sectionHeader}>
-        <MaterialCommunityIcons
+        <MCIcon
           name="school"
           size={28}
           color={colors.primary} // 🌅 Utilise la couleur du thème actif
@@ -177,6 +175,10 @@ const LearningSection = ({
         title={t("ablutions_wudu")}
         icon="water"
         color="rgba(78, 205, 196, 0.8)"
+        expandedSection={expandedSection}
+        onToggle={toggleSection}
+        styles={learningStyles}
+        themeColors={colors}
       >
         <View style={learningStyles.stepContainer}>
           <Text style={learningStyles.stepTitle}>{t("wudu_steps")}:</Text>
@@ -309,6 +311,10 @@ const LearningSection = ({
         title={t("prayer_positions")}
         icon="human-handsup"
         color="rgba(255, 215, 0, 0.8)"
+        expandedSection={expandedSection}
+        onToggle={toggleSection}
+        styles={learningStyles}
+        themeColors={colors}
       >
         <View style={learningStyles.stepContainer}>
           <Text style={learningStyles.stepTitle}>{t("prayer_steps")}:</Text>
@@ -574,7 +580,7 @@ const LearningSection = ({
 
 export default function PrayerScreen() {
   const { t, i18n } = useTranslation();
-  const router = useRouter();
+  const { push } = useRouter();
   const [today, setToday] = useState(new Date());
   const [city, setCity] = useState<string | null>(null);
 
@@ -598,7 +604,7 @@ export default function PrayerScreen() {
   const [slideAnim] = useState(new Animated.Value(30));
   const [pulseAnim] = useState(new Animated.Value(1));
 
-  const settings = useContext(SettingsContext);
+  const settings = use(SettingsContext);
   const { location } = useLocation();
   const { user } = usePremium();
 
@@ -836,7 +842,7 @@ export default function PrayerScreen() {
         />
         <View style={styles.centeredContainer}>
           <Animated.View style={[styles.setupCard, { opacity: fadeAnim }]}>
-            <MaterialCommunityIcons
+            <MCIcon
               name="map-marker-radius"
               size={70}
               color={"#2E7D32"}
@@ -848,19 +854,19 @@ export default function PrayerScreen() {
                 "Bienvenue ! Choisissez votre mode de localisation :"}
             </Text>
 
-            <TouchableOpacity
+            <Pressable
               style={styles.primaryButton}
               onPress={() =>
-                router.push("/settings?openLocation=true&mode=manual")
+                push("/settings?openLocation=true&mode=manual")
               }
             >
-              <MaterialCommunityIcons name="city" size={24} color="#fff" />
+              <MCIcon name="city" size={24} color="#fff" />
               <Text style={styles.primaryButtonText}>
                 {t("enter_city") || "Entrer ville manuellement"}
               </Text>
-            </TouchableOpacity>
+            </Pressable>
 
-            <TouchableOpacity
+            <Pressable
               style={styles.secondaryButton}
               onPress={async () => {
                 settings.setLocationMode("auto");
@@ -871,7 +877,7 @@ export default function PrayerScreen() {
                 }
               }}
             >
-              <MaterialCommunityIcons
+              <MCIcon
                 name="crosshairs-gps"
                 size={24}
                 color={"#2E7D32"}
@@ -879,7 +885,7 @@ export default function PrayerScreen() {
               <Text style={styles.secondaryButtonText}>
                 {t("automatic") || "Utiliser GPS automatique"}
               </Text>
-            </TouchableOpacity>
+            </Pressable>
           </Animated.View>
         </View>
       </ThemedImageBackground>
@@ -897,7 +903,7 @@ export default function PrayerScreen() {
         />
         <View style={styles.centeredContainer}>
           <View style={styles.errorCard}>
-            <MaterialCommunityIcons
+            <MCIcon
               name="alert-circle"
               size={60}
               color="#ff6b6b"
@@ -905,17 +911,17 @@ export default function PrayerScreen() {
             />
             <Text style={styles.errorTitle}>{t("prayer_times")}</Text>
             <Text style={styles.errorText}>{settings.errorMsg}</Text>
-            <TouchableOpacity
+            <Pressable
               style={styles.primaryButton}
               onPress={() =>
-                router.push("/settings?openLocation=true&mode=manual")
+                push("/settings?openLocation=true&mode=manual")
               }
             >
-              <MaterialCommunityIcons name="cog" size={20} color="#fff" />
+              <MCIcon name="cog" size={20} color="#fff" />
               <Text style={styles.primaryButtonText}>
                 {t("settings") || "Aller aux paramètres"}
               </Text>
-            </TouchableOpacity>
+            </Pressable>
           </View>
         </View>
       </ThemedImageBackground>
@@ -988,7 +994,7 @@ export default function PrayerScreen() {
             ]}
           >
             <View style={styles.nextPrayerHeader}>
-              <MaterialCommunityIcons
+              <MCIcon
                 name="bell-ring-outline"
                 size={24}
                 color={colors.primary} // 🌅 Utilise la couleur du thème actif
@@ -1014,7 +1020,7 @@ export default function PrayerScreen() {
         {currentPrayerTimes && (
           <View style={styles.todayPrayersCard}>
             <View style={styles.todayPrayersHeader}>
-              <MaterialCommunityIcons
+              <MCIcon
                 name="clock-outline"
                 size={24}
                 color={colors.primary} // 🌅 Utilise la couleur du thème actif
@@ -1028,7 +1034,7 @@ export default function PrayerScreen() {
                     currentPrayerTimes[
                       prayer as keyof typeof currentPrayerTimes
                     ];
-                  const isPassed = time instanceof Date && new Date() > time;
+                  const isPassed = time instanceof Date && currentTime > time;
                   const isNext = nextPrayer?.toLowerCase() === prayer;
 
                   // Exclure "sunrise" car ce n'est pas une prière avec adhan
@@ -1077,20 +1083,20 @@ export default function PrayerScreen() {
 
                       <View style={styles.prayerItemActions}>
                         {hasAdhan && (
-                          <TouchableOpacity
+                          <Pressable
                             onPress={() => togglePrayerMute(prayerKey)}
                             style={styles.soundToggle}
                           >
-                            <MaterialCommunityIcons
+                            <MCIcon
                               name={isMuted ? "volume-off" : "volume-high"}
                               size={20}
                               color={isMuted ? colors.error : colors.primary} // 🌅 Utilise les couleurs du thème actif
                             />
-                          </TouchableOpacity>
+                          </Pressable>
                         )}
 
                         {isPassed && !isNext && (
-                          <MaterialCommunityIcons
+                          <MCIcon
                             name="check-circle"
                             size={16}
                             color={colors.primary} // 🌅 Utilise la couleur du thème actif
@@ -1110,7 +1116,7 @@ export default function PrayerScreen() {
         <SunInfo
           sunrise={currentPrayerTimes?.sunrise || null}
           sunset={currentPrayerTimes?.maghrib || null}
-          currentTime={new Date()}
+          currentTime={currentTime}
         />
 
         {/* Vue hebdomadaire */}
@@ -1210,11 +1216,7 @@ const getStyles = (
       marginBottom: 16,
       borderWidth: 1,
       borderColor: colors.border, // 🌅 Utilise la couleur du thème actif
-      shadowColor: colors.shadow, // 🌅 Utilise la couleur du thème actif
-      shadowOffset: { width: 0, height: 4 },
-      shadowOpacity: 0.3,
-      shadowRadius: 10,
-      elevation: 6,
+      boxShadow: makeBoxShadow(colors.shadow, 0, 4, 10, 0.3),
     },
     nextPrayerHeader: {
       flexDirection: "row",
@@ -1248,11 +1250,7 @@ const getStyles = (
       marginBottom: 16,
       borderWidth: 1,
       borderColor: colors.border, // 🌅 Utilise la couleur du thème actif
-      shadowColor: colors.shadow, // 🌅 Utilise la couleur du thème actif
-      shadowOffset: { width: 0, height: 4 },
-      shadowOpacity: 0.3,
-      shadowRadius: 10,
-      elevation: 6,
+      boxShadow: makeBoxShadow(colors.shadow, 0, 4, 10, 0.3),
     },
     todayPrayersHeader: {
       flexDirection: "row",
@@ -1397,11 +1395,7 @@ const getStyles = (
       marginBottom: 12,
       width: "100%",
       justifyContent: "center",
-      shadowColor: "#2E7D32",
-      shadowOffset: { width: 0, height: 4 },
-      shadowOpacity: 0.3,
-      shadowRadius: 8,
-      elevation: 5,
+      boxShadow: "0px 4px 8px rgba(46,125,50,0.3)",
     },
     primaryButtonText: {
       color: "#fff",
@@ -1487,11 +1481,7 @@ const getLearningStyles = (
       marginBottom: 16,
       borderWidth: 1,
       borderColor: colors.border, // 🌅 Utilise la couleur du thème actif
-      shadowColor: colors.shadow, // 🌅 Utilise la couleur du thème actif
-      shadowOffset: { width: 0, height: 4 },
-      shadowOpacity: 0.3,
-      shadowRadius: 10,
-      elevation: 6,
+      boxShadow: makeBoxShadow(colors.shadow, 0, 4, 10, 0.3),
       overflow: "hidden",
     },
     cardHeader: {

@@ -1,6 +1,6 @@
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { View, Text, StyleSheet, Pressable } from "react-native";
+import { MCIcon } from "@/components/icons/AppVectorIcons";
 import { useTranslation } from "react-i18next";
 import { LinearGradient } from "expo-linear-gradient";
 import { useThemeColors, useOverlayTextColor } from "../hooks/useThemeColor";
@@ -31,7 +31,7 @@ export const OfflineMessage: React.FC<OfflineMessageProps> = ({
         style={styles.gradient}
       >
         <View style={styles.content}>
-          <MaterialCommunityIcons
+          <MCIcon
             name="wifi-off"
             size={64}
             color={colors.primary}
@@ -51,11 +51,11 @@ export const OfflineMessage: React.FC<OfflineMessageProps> = ({
           </Text>
 
           {showRetryButton && onRetry && (
-            <TouchableOpacity
+            <Pressable
               style={[styles.retryButton, { backgroundColor: colors.primary }]}
               onPress={onRetry}
             >
-              <MaterialCommunityIcons
+              <MCIcon
                 name="refresh"
                 size={20}
                 color="#FFFFFF"
@@ -64,7 +64,7 @@ export const OfflineMessage: React.FC<OfflineMessageProps> = ({
               <Text style={styles.retryButtonText}>
                 {t("retry", "Réessayer")}
               </Text>
-            </TouchableOpacity>
+            </Pressable>
           )}
         </View>
       </LinearGradient>
@@ -115,11 +115,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     paddingVertical: 12,
     borderRadius: 25,
-    elevation: 2,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
+    boxShadow: "0px 2px 4px rgba(0,0,0,0.1)",
   },
   retryIcon: {
     marginRight: 8,

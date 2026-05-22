@@ -1,6 +1,6 @@
 import React from "react";
 import { render, fireEvent } from "@testing-library/react-native";
-import { Platform } from "react-native";
+import { Platform, Text } from "react-native";
 import { ExternalLink } from "../../components/ExternalLink";
 
 // Mock des dépendances
@@ -42,7 +42,7 @@ describe("ExternalLink", () => {
 
   it("renders correctly with href", () => {
     const { getByText } = render(
-      <ExternalLink href="https://example.com">Example Link</ExternalLink>
+      <ExternalLink href="https://example.com"><Text>Example Link</Text></ExternalLink>
     );
 
     expect(getByText("Example Link")).toBeTruthy();
@@ -52,7 +52,7 @@ describe("ExternalLink", () => {
     Platform.OS = "ios";
 
     const { getByText } = render(
-      <ExternalLink href="https://example.com">Example Link</ExternalLink>
+      <ExternalLink href="https://example.com"><Text>Example Link</Text></ExternalLink>
     );
 
     const link = getByText("Example Link");
@@ -65,7 +65,7 @@ describe("ExternalLink", () => {
     Platform.OS = "web";
 
     const { getByText } = render(
-      <ExternalLink href="https://example.com">Example Link</ExternalLink>
+      <ExternalLink href="https://example.com"><Text>Example Link</Text></ExternalLink>
     );
 
     const link = getByText("Example Link");
@@ -78,7 +78,7 @@ describe("ExternalLink", () => {
     Platform.OS = "android";
 
     const { getByText } = render(
-      <ExternalLink href="https://example.com">Example Link</ExternalLink>
+      <ExternalLink href="https://example.com"><Text>Example Link</Text></ExternalLink>
     );
 
     const link = getByText("Example Link");
@@ -94,7 +94,7 @@ describe("ExternalLink", () => {
         testID="external-link"
         accessibilityLabel="Test Link"
       >
-        Example Link
+        <Text>Example Link</Text>
       </ExternalLink>
     );
 
@@ -105,7 +105,7 @@ describe("ExternalLink", () => {
   it("renders with different href formats", () => {
     const { getByText } = render(
       // @ts-ignore
-      <ExternalLink href="/local-path">Local Link</ExternalLink>
+      <ExternalLink href="/local-path"><Text>Local Link</Text></ExternalLink>
     );
 
     expect(getByText("Local Link")).toBeTruthy();
@@ -114,7 +114,7 @@ describe("ExternalLink", () => {
   it("handles press event correctly", async () => {
     const { getByTestId } = render(
       <ExternalLink href="https://example.com" testID="link">
-        Test Link
+        <Text>Test Link</Text>
       </ExternalLink>
     );
 

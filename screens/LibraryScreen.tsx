@@ -1,12 +1,12 @@
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { MCIcon } from "@/components/icons/AppVectorIcons";
 import React from "react";
 import {
   View,
   Text,
-  TouchableOpacity,
+  Pressable,
   StyleSheet,
   ScrollView,
-  Dimensions,
+  useWindowDimensions,
   StatusBar,
 } from "react-native";
 import { useRouter } from "expo-router";
@@ -20,9 +20,6 @@ import {
 import { useTranslation } from "react-i18next";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-const { width } = Dimensions.get("window");
-const cardWidth = (width - 60) / 2; // 2 colonnes avec marges
-
 interface LibraryItemProps {
   icon: string;
   title: string;
@@ -33,12 +30,13 @@ interface LibraryItemProps {
 
 const LibraryItem = ({ icon, title, subtitle, colors, onPress }: LibraryItemProps) => {
   const overlayTextColor = useOverlayTextColor();
+  const { width } = useWindowDimensions();
+  const cardWidth = (width - 60) / 2;
 
   return (
-    <TouchableOpacity
+    <Pressable
       onPress={onPress}
-      activeOpacity={0.7}
-      style={styles.cardContainer}
+      style={[styles.cardContainer, { width: cardWidth }]}
     >
       <LinearGradient
         colors={colors}
@@ -47,7 +45,7 @@ const LibraryItem = ({ icon, title, subtitle, colors, onPress }: LibraryItemProp
         style={styles.card}
       >
         <View style={styles.cardContent}>
-          <MaterialCommunityIcons
+          <MCIcon
             name={icon as any}
             size={48}
             color="#FFFFFF"
@@ -59,12 +57,12 @@ const LibraryItem = ({ icon, title, subtitle, colors, onPress }: LibraryItemProp
           </Text>
         </View>
       </LinearGradient>
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 
 export default function LibraryScreen() {
-  const router = useRouter();
+  const { push } = useRouter();
   const { t } = useTranslation();
   const insets = useSafeAreaInsets();
   const colors = useThemeColors();
@@ -143,21 +141,21 @@ export default function LibraryScreen() {
           showsVerticalScrollIndicator={false}
         >
           <View style={styles.grid}>
-            {libraryItems.map((item, index) => (
+            {libraryItems.map((item) => (
               <LibraryItem
-                key={index}
+                key={item.icon}
                 icon={item.icon}
                 title={item.title}
                 subtitle={item.subtitle}
                 colors={item.colors}
-                onPress={() => router.push(item.route as any)}
+                onPress={() => push(item.route as any)}
               />
             ))}
           </View>
 
           {/* Info supplémentaire */}
           <View style={[styles.infoCard, { backgroundColor: colors.surface }]}>
-            <MaterialCommunityIcons
+            <MCIcon
               name="information-outline"
               size={24}
               color={colors.primary}
@@ -206,17 +204,12 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   cardContainer: {
-    width: cardWidth,
     marginBottom: 20,
   },
   card: {
     borderRadius: 20,
     overflow: "hidden",
-    elevation: 5,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 8,
+    boxShadow: "0px 4px 8px rgba(0,0,0,0.3)",
   },
   cardContent: {
     padding: 20,

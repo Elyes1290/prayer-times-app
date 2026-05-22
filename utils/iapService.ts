@@ -2,12 +2,6 @@ import { Platform } from "react-native";
 import Purchases, { LOG_LEVEL, PurchasesPackage } from "react-native-purchases";
 import { IAP_CONFIG } from "./iapConfig";
 
-export interface AppleEntitlementSnapshot {
-  expirationAtMs: number;
-  productId: string;
-  originalTransactionId: string | null;
-}
-
 export class IapService {
   private static instance: IapService;
   private isConfigured = false;

@@ -1,6 +1,6 @@
 // import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export interface QuranVerse {
+interface $2 {
   verse_number: number;
   verse_key: string;
   arabic_text: string;
@@ -10,13 +10,13 @@ export interface QuranVerse {
   };
 }
 
-export interface QuranSurah {
+interface $2 {
   surah_number: number;
   verse_count: number;
   available_translations: string[];
 }
 
-export interface QuranIndex {
+interface $2 {
   metadata: {
     total_surahs: number;
     languages: string[];
@@ -32,7 +32,7 @@ export interface QuranIndex {
   surahs: QuranSurah[];
 }
 
-export interface QuranSurahData {
+interface $2 {
   surah_number: number;
   extracted_at: string;
   verses: QuranVerse[];
@@ -309,9 +309,12 @@ class QuranOfflineService {
     const normalizedQuery = this.normalizeText(query.toLowerCase());
 
     try {
-      // Parcourir toutes les sourates
+      const surahsData = await Promise.all(
+        Array.from({ length: 114 }, (_, idx) => this.getSurah(idx + 1))
+      );
+
       for (let surahNumber = 1; surahNumber <= 114; surahNumber++) {
-        const surahData = await this.getSurah(surahNumber);
+        const surahData = surahsData[surahNumber - 1];
         if (!surahData) continue;
 
         for (const verse of surahData.verses) {
@@ -464,11 +467,16 @@ class QuranOfflineService {
     const surahData = await this.getSurah(surahNumber);
     if (!surahData) return [];
 
-    return surahData.verses
-      .filter((v) => v.verse_number >= startVerse && v.verse_number <= endVerse)
-      .map((verse) => ({
+    const out: QuranVerse[] = [];
+    for (const verse of surahData.verses) {
+      if (
+        verse.verse_number < startVerse ||
+        verse.verse_number > endVerse
+      ) {
+        continue;
+      }
+      out.push({
         ...verse,
-        // Filtrer les traductions pour ne garder que la langue demandée
         translations: {
           [language]:
             verse.translations[language] ||
@@ -476,7 +484,9 @@ class QuranOfflineService {
             verse.translations["ar"] ||
             "",
         },
-      }));
+      });
+    }
+    return out;
   }
 }
 

@@ -5,6 +5,23 @@ if (typeof window === "undefined") {
   global.window = {};
 }
 
+// expo-symbols : en tests, préférer le fallback vectoriel (AppVectorIcons) ou une vue vide (IconSymbol iOS)
+jest.mock("expo-symbols", () => {
+  const React = require("react");
+  const { View } = require("react-native");
+  return {
+    SymbolView: (props) => {
+      if (props.fallback != null) {
+        return props.fallback;
+      }
+      return React.createElement(View, {
+        testID: "symbol-view",
+        style: props.style,
+      });
+    },
+  };
+});
+
 // Mock de fetch
 global.fetch = require("jest-fetch-mock");
 

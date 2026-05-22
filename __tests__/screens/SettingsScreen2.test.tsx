@@ -13,10 +13,6 @@ jest.mock("expo-router", () => ({
   }),
 }));
 
-jest.mock("@expo/vector-icons", () => ({
-  MaterialCommunityIcons: () => null,
-}));
-
 // Mock de i18n pour éviter les erreurs
 jest.mock("react-i18next", () => ({
   useTranslation: () => ({

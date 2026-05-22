@@ -214,5 +214,8 @@
   "widget_feature_navigation": "✨ Navigation entre sourates",
   "widget_feature_audio_controls": "✨ Contrôles audio complets",
   "widget_feature_offline": "✨ Mode hors-ligne",
-  "subscribe_premium": "S'abonner Premium"
+  "subscribe_premium": "S'abonner Premium",
+  "adhan_completed_title": "✅ Adhan terminé",
+  "adhan_completed_body": "L'appel à la prière s'est déroulé",
+  "dismiss": "Fermer"
 }

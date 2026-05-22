@@ -12,7 +12,7 @@
  */
 
 import { useCallback, useMemo } from "react";
-import { Dimensions, PixelRatio, Platform } from "react-native";
+import { useWindowDimensions, PixelRatio, Platform } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 // 📱 Détection des types d'appareils Samsung
@@ -94,7 +94,7 @@ interface LayoutMetrics {
   verticalScale: (size: number) => number;
 }
 
-export function useUniversalLayout(
+function useUniversalLayout(
   options: UniversalLayoutProps = {}
 ): LayoutMetrics {
   const {
@@ -106,7 +106,7 @@ export function useUniversalLayout(
 
   // 🛠️ Safe area insets - mockés dans les tests via setupTests.js
   const insets = useSafeAreaInsets();
-  const { width: screenWidth, height: screenHeight } = Dimensions.get("window");
+  const { width: screenWidth, height: screenHeight } = useWindowDimensions();
   const pixelRatio = PixelRatio.get();
 
   // 📱 Détection du type d'appareil
@@ -300,7 +300,7 @@ export function useUniversalStyles(options: UniversalLayoutProps = {}) {
 /**
  * 🔧 Helper pour debug des métriques de layout
  */
-export function useLayoutDebug() {
+function useLayoutDebug() {
   const layout = useUniversalLayout();
 
   const logLayoutInfo = useCallback(() => {

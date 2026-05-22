@@ -212,5 +212,8 @@
   "widget_feature_navigation": "✨ Navigate between surahs",
   "widget_feature_audio_controls": "✨ Complete audio controls",
   "widget_feature_offline": "✨ Offline mode",
-  "subscribe_premium": "Subscribe Premium"
+  "subscribe_premium": "Subscribe Premium",
+  "adhan_completed_title": "✅ Adhan completed",
+  "adhan_completed_body": "The call to prayer has been completed",
+  "dismiss": "Dismiss"
 }

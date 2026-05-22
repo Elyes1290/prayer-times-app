@@ -11,6 +11,7 @@ RCT_EXTERN_METHOD(stopAudioService:(RCTPromiseResolveBlock)resolve rejecter:(RCT
 RCT_EXTERN_METHOD(loadAudioInService:(NSString *)audioPath
                   surah:(NSString *)surah
                   reciter:(NSString *)reciter
+                  durationMs:(NSInteger)durationMs
                   resolver:(RCTPromiseResolveBlock)resolve
                   rejecter:(RCTPromiseRejectBlock)reject)
 

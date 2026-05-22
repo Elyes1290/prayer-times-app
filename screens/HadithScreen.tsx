@@ -1,7 +1,7 @@
 import * as Font from "expo-font";
 import React, {
   useEffect,
-  useState,
+  useReducer,
   useRef,
   useMemo,
   useCallback,
@@ -14,14 +14,14 @@ import {
   StyleSheet,
   Text,
   View,
-  TouchableOpacity,
+  Pressable,
   Modal,
-  SafeAreaView,
-  Dimensions,
+  useWindowDimensions,
   TextInput,
   KeyboardAvoidingView,
   Platform,
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { useTranslation } from "react-i18next";
 import { usePremium } from "../contexts/PremiumContext";
 import FavoriteButton from "../components/FavoriteButton";
@@ -57,6 +57,125 @@ type Hadith = {
 
 const PAGE_SIZE = 10;
 
+// ─── Reducer ───────────────────────────────────────────────────────────────
+
+type HadithState = {
+  menuVisible: boolean;
+  modalVisible: boolean;
+  modalType: "book" | "chapter";
+  menuView: "main" | "bookList" | "chapterList";
+  books: Book[];
+  selectedBook: string;
+  chapters: Chapter[];
+  selectedChapter: number | null;
+  hadiths: Hadith[];
+  currentPage: number;
+  totalPages: number;
+  loadingBooks: boolean;
+  loadingChapters: boolean;
+  loadingHadiths: boolean;
+  searchQuery: string;
+};
+
+type HadithAction =
+  | { type: "MENU_OPEN" }
+  | { type: "MENU_CLOSE" }
+  | { type: "MENU_SET_VIEW"; payload: "main" | "bookList" | "chapterList" }
+  | { type: "MODAL_OPEN"; payload: "book" | "chapter" }
+  | { type: "MODAL_CLOSE" }
+  | { type: "BOOKS_LOADING" }
+  | { type: "BOOKS_LOADED"; payload: Book[] }
+  | { type: "BOOKS_ERROR" }
+  | { type: "BOOK_SELECT"; payload: string }
+  | { type: "CHAPTERS_LOADING" }
+  | { type: "CHAPTERS_LOADED"; payload: Chapter[] }
+  | { type: "CHAPTERS_ERROR" }
+  | { type: "CHAPTER_SELECT"; payload: number }
+  | { type: "HADITHS_RESET_LOADING" }
+  | { type: "HADITHS_LOADING" }
+  | { type: "HADITHS_LOADED"; payload: { hadiths: Hadith[]; totalPages: number } }
+  | { type: "HADITHS_ERROR" }
+  | { type: "PAGE_SET"; payload: number }
+  | { type: "SEARCH_SET"; payload: string };
+
+const initialHadithState: HadithState = {
+  menuVisible: false,
+  modalVisible: false,
+  modalType: "book",
+  menuView: "main",
+  books: [],
+  selectedBook: "",
+  chapters: [],
+  selectedChapter: null,
+  hadiths: [],
+  currentPage: 1,
+  totalPages: 1,
+  loadingBooks: false,
+  loadingChapters: false,
+  loadingHadiths: false,
+  searchQuery: "",
+};
+
+function hadithReducer(state: HadithState, action: HadithAction): HadithState {
+  switch (action.type) {
+    case "MENU_OPEN":
+      return { ...state, menuVisible: true };
+    case "MENU_CLOSE":
+      return { ...state, menuVisible: false, menuView: "main" };
+    case "MENU_SET_VIEW":
+      return { ...state, menuView: action.payload };
+    case "MODAL_OPEN":
+      return { ...state, modalVisible: true, modalType: action.payload };
+    case "MODAL_CLOSE":
+      return { ...state, modalVisible: false };
+    case "BOOKS_LOADING":
+      return { ...state, loadingBooks: true };
+    case "BOOKS_LOADED":
+      return { ...state, books: action.payload, loadingBooks: false };
+    case "BOOKS_ERROR":
+      return { ...state, loadingBooks: false };
+    case "BOOK_SELECT":
+      return {
+        ...state,
+        selectedBook: action.payload,
+        modalVisible: false,
+        menuView: "main",
+        chapters: [],
+        hadiths: [],
+        selectedChapter: null,
+        currentPage: 1,
+        searchQuery: "",
+      };
+    case "CHAPTERS_LOADING":
+      return { ...state, loadingChapters: true };
+    case "CHAPTERS_LOADED":
+      return { ...state, chapters: action.payload, loadingChapters: false };
+    case "CHAPTERS_ERROR":
+      return { ...state, chapters: [], loadingChapters: false };
+    case "CHAPTER_SELECT":
+      return { ...state, selectedChapter: action.payload, modalVisible: false };
+    case "HADITHS_RESET_LOADING":
+      return { ...state, hadiths: [], currentPage: 1, loadingHadiths: true };
+    case "HADITHS_LOADING":
+      return { ...state, loadingHadiths: true };
+    case "HADITHS_LOADED":
+      return {
+        ...state,
+        hadiths: action.payload.hadiths,
+        totalPages: action.payload.totalPages,
+        loadingHadiths: false,
+      };
+    case "HADITHS_ERROR":
+      return { ...state, hadiths: [], loadingHadiths: false };
+    case "PAGE_SET":
+      return { ...state, currentPage: action.payload };
+    case "SEARCH_SET":
+      return { ...state, searchQuery: action.payload };
+    default:
+      return state;
+  }
+}
+
 export default function HadithScreen() {
   const { t } = useTranslation();
   const { user } = usePremium();
@@ -79,25 +198,27 @@ export default function HadithScreen() {
       narrator: item.english?.narrator || "",
     };
   };
-  const [menuVisible, setMenuVisible] = useState(false);
-  const [modalVisible, setModalVisible] = useState(false);
-  const [modalType, setModalType] = useState<"book" | "chapter">("book");
-  // 🍎 iOS: Navigation interne dans le menu (pas de 2ème modal)
-  const [menuView, setMenuView] = useState<"main" | "bookList" | "chapterList">("main");
-  const windowHeight = Dimensions.get("window").height;
-  const flatListRef = useRef<FlatList>(null);
+  const [state, dispatch] = useReducer(hadithReducer, initialHadithState);
+  const {
+    menuVisible,
+    modalVisible,
+    modalType,
+    menuView,
+    books,
+    selectedBook,
+    chapters,
+    selectedChapter,
+    hadiths,
+    currentPage,
+    totalPages,
+    loadingBooks,
+    loadingChapters,
+    loadingHadiths,
+    searchQuery,
+  } = state;
 
-  const [books, setBooks] = useState<Book[]>([]);
-  const [selectedBook, setSelectedBook] = useState<string>("");
-  const [chapters, setChapters] = useState<Chapter[]>([]);
-  const [selectedChapter, setSelectedChapter] = useState<number | null>(null);
-  const [hadiths, setHadiths] = useState<Hadith[]>([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
-  const [loadingBooks, setLoadingBooks] = useState(false);
-  const [loadingChapters, setLoadingChapters] = useState(false);
-  const [loadingHadiths, setLoadingHadiths] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
+  const { height: windowHeight } = useWindowDimensions();
+  const flatListRef = useRef<FlatList>(null);
   const [fontsLoaded] = Font.useFonts({
     ScheherazadeNew: require("../assets/fonts/ScheherazadeNew-Regular.ttf"),
   });
@@ -113,19 +234,16 @@ export default function HadithScreen() {
 
   // 🍎 iOS: Fonctions pour gérer les sélections depuis le menu
   const handleBookChange = (bookSlug: string) => {
-    setSelectedBook(bookSlug);
+    dispatch({ type: "BOOK_SELECT", payload: bookSlug });
   };
 
   const handleChapterChange = (chapterId: number) => {
-    setSelectedChapter(chapterId);
+    dispatch({ type: "CHAPTER_SELECT", payload: chapterId });
   };
 
   // Charger la liste des livres
   useEffect(() => {
-    // Note: On charge TOUJOURS la liste des livres, même pour les non-premium
-    // L'accès aux hadiths sera vérifié plus tard
-    setLoadingBooks(true);
-
+    dispatch({ type: "BOOKS_LOADING" });
     try {
       const allBooksConfig = HadithOfflineService.getAllBooks();
       const allBooks: Book[] = [
@@ -148,49 +266,24 @@ export default function HadithScreen() {
           category: "specialized" as const,
         })),
       ];
-
-      setBooks(allBooks);
-      setLoadingBooks(false);
-      console.log(
-        `✅ ${allBooks.length} livres chargés (${allBooksConfig.main.length} principaux, ${allBooksConfig.additional.length} complémentaires, ${allBooksConfig.specialized.length} spécialisés)`
-      );
+      dispatch({ type: "BOOKS_LOADED", payload: allBooks });
     } catch (error) {
-      console.error("❌ Erreur chargement livres:", error);
-      setLoadingBooks(false);
+      dispatch({ type: "BOOKS_ERROR" });
     }
   }, [t]);
 
-  // Charger les chapitres du livre sélectionné
+  // Charger les chapitres du livre sélectionné (reset géré par BOOK_SELECT dans le reducer)
   useEffect(() => {
-    setChapters([]);
-    setHadiths([]);
-    setSelectedChapter(null);
-    setCurrentPage(1);
-    setSearchQuery(""); // Réinitialiser la recherche
-
     if (!selectedBook) return;
-    // Note: On charge les chapitres même pour les non-premium (liste seulement)
-
-    setLoadingChapters(true);
-
+    dispatch({ type: "CHAPTERS_LOADING" });
     HadithOfflineService.getChapters(selectedBook)
-      .then((chapters) => {
-        if (chapters) {
-          setChapters(chapters);
-          console.log(
-            `✅ ${chapters.length} chapitres chargés pour ${selectedBook}`
-          );
-        } else {
-          setChapters([]);
-        }
-        setLoadingChapters(false);
+      .then((chaps) => {
+        dispatch({ type: chaps ? "CHAPTERS_LOADED" : "CHAPTERS_ERROR", payload: chaps ?? [] } as HadithAction);
       })
-      .catch((error) => {
-        console.error("❌ Erreur chargement chapitres:", error);
-        setChapters([]);
-        setLoadingChapters(false);
+      .catch(() => {
+        dispatch({ type: "CHAPTERS_ERROR" });
       });
-  }, [selectedBook, t]);
+  }, [selectedBook]);
 
   // Fonction pour charger les hadiths
   const loadHadiths = useCallback(
@@ -203,8 +296,7 @@ export default function HadithScreen() {
         return;
       }
 
-      setLoadingHadiths(true);
-
+      dispatch({ type: "HADITHS_LOADING" });
       try {
         const result = await HadithOfflineService.getHadiths(
           selectedBook,
@@ -212,31 +304,21 @@ export default function HadithScreen() {
           page,
           PAGE_SIZE
         );
-
         if (result) {
-          setHadiths(result.hadiths);
-          setTotalPages(result.totalPages);
-          console.log(
-            `✅ ${result.hadiths.length} hadiths chargés (page ${result.currentPage}/${result.totalPages})`
-          );
+          dispatch({ type: "HADITHS_LOADED", payload: { hadiths: result.hadiths, totalPages: result.totalPages } });
         } else {
-          setHadiths([]);
-          setTotalPages(1);
+          dispatch({ type: "HADITHS_ERROR" });
         }
       } catch (error) {
-        console.error("❌ Erreur chargement hadiths:", error);
-        setHadiths([]);
-      } finally {
-        setLoadingHadiths(false);
+        dispatch({ type: "HADITHS_ERROR" });
       }
     },
     [selectedBook, selectedChapter, offlineAccess.shouldShowOfflineMessage]
   );
 
-  // Charger les hadiths quand on change de livre ou chapitre
+  // Charger les hadiths quand on change de chapitre
   useEffect(() => {
-    setHadiths([]);
-    setCurrentPage(1);
+    dispatch({ type: "HADITHS_RESET_LOADING" });
     loadHadiths(1);
   }, [
     selectedChapter,
@@ -296,15 +378,12 @@ export default function HadithScreen() {
   }
 
   const renderBookItem = ({ item }: { item: Book }) => (
-    <TouchableOpacity
+    <Pressable
       style={[
         styles.optionStyle,
         selectedBook === item.bookSlug && styles.selectedOptionStyle,
       ]}
-      onPress={() => {
-        setSelectedBook(item.bookSlug);
-        setModalVisible(false);
-      }}
+      onPress={() => dispatch({ type: "BOOK_SELECT", payload: item.bookSlug })}
     >
       <Text
         style={[
@@ -321,19 +400,16 @@ export default function HadithScreen() {
           ? `➕ ${t("book_category_additional")}`
           : `⭐ ${t("book_category_specialized")}`}
       </Text>
-    </TouchableOpacity>
+    </Pressable>
   );
 
   const renderChapterItem = ({ item }: { item: Chapter }) => (
-    <TouchableOpacity
+    <Pressable
       style={[
         styles.optionStyle,
         selectedChapter === item.id && styles.selectedOptionStyle,
       ]}
-      onPress={() => {
-        setSelectedChapter(item.id);
-        setModalVisible(false);
-      }}
+      onPress={() => dispatch({ type: "CHAPTER_SELECT", payload: item.id })}
     >
       <Text
         style={[
@@ -343,7 +419,7 @@ export default function HadithScreen() {
       >
         {`${item.id || ""}. ${item.english || ""} ${item.arabic || ""}`.trim()}
       </Text>
-    </TouchableOpacity>
+    </Pressable>
   );
 
   // Filtrer les hadiths du chapitre sélectionné selon la recherche
@@ -417,12 +493,12 @@ export default function HadithScreen() {
                 </Text>
               )}
             </View>
-            <TouchableOpacity
+            <Pressable
               style={styles.menuButton}
-              onPress={() => setMenuVisible(true)}
+              onPress={() => dispatch({ type: "MENU_OPEN" })}
             >
               <Text style={styles.menuButtonText}>☰</Text>
-            </TouchableOpacity>
+            </Pressable>
           </View>
 
           {/* Barre de recherche */}
@@ -439,7 +515,7 @@ export default function HadithScreen() {
                 }
                 placeholderTextColor="#ba9c34"
                 value={searchQuery}
-                onChangeText={setSearchQuery}
+                onChangeText={(text) => dispatch({ type: "SEARCH_SET", payload: text })}
                 clearButtonMode="while-editing"
                 selectionColor="#ba9c34"
                 underlineColorAndroid="transparent"
@@ -465,12 +541,12 @@ export default function HadithScreen() {
             !searchQuery.trim() &&
             totalPages > 1 && (
               <View style={styles.paginationContainer}>
-                <TouchableOpacity
+                <Pressable
                   style={[
                     styles.paginationButton,
                     currentPage === 1 && styles.paginationButtonDisabled,
                   ]}
-                  onPress={() => setCurrentPage(Math.max(1, currentPage - 1))}
+                  onPress={() => dispatch({ type: "PAGE_SET", payload: Math.max(1, currentPage - 1) })}
                   disabled={currentPage === 1}
                 >
                   <Text
@@ -481,7 +557,7 @@ export default function HadithScreen() {
                   >
                     ‹
                   </Text>
-                </TouchableOpacity>
+                </Pressable>
 
                 <View style={styles.paginationInfo}>
                   <Text style={styles.paginationText}>
@@ -489,14 +565,14 @@ export default function HadithScreen() {
                   </Text>
                 </View>
 
-                <TouchableOpacity
+                <Pressable
                   style={[
                     styles.paginationButton,
                     currentPage === totalPages &&
                       styles.paginationButtonDisabled,
                   ]}
                   onPress={() =>
-                    setCurrentPage(Math.min(totalPages, currentPage + 1))
+                    dispatch({ type: "PAGE_SET", payload: Math.min(totalPages, currentPage + 1) })
                   }
                   disabled={currentPage === totalPages}
                 >
@@ -509,7 +585,7 @@ export default function HadithScreen() {
                   >
                     ›
                   </Text>
-                </TouchableOpacity>
+                </Pressable>
               </View>
             )}
 
@@ -518,19 +594,19 @@ export default function HadithScreen() {
             animationType="slide"
             transparent={true}
             visible={menuVisible}
-            onRequestClose={() => setMenuVisible(false)}
+            onRequestClose={() => dispatch({ type: "MENU_CLOSE" })}
           >
             <SafeAreaView style={styles.menuOverlay}>
               <View style={styles.menuContent}>
                 <View style={styles.menuHeader}>
                   {/* 🍎 iOS: Bouton retour si on est dans une sous-vue */}
                   {Platform.OS === 'ios' && menuView !== 'main' && (
-                    <TouchableOpacity
+                    <Pressable
                       style={styles.backButton}
-                      onPress={() => setMenuView("main")}
+                      onPress={() => dispatch({ type: "MENU_SET_VIEW", payload: "main" })}
                     >
                       <Text style={styles.backButtonText}>‹ {t("back", "Retour")}</Text>
-                    </TouchableOpacity>
+                    </Pressable>
                   )}
                   <Text style={styles.menuTitle}>
                     {Platform.OS === 'ios' && menuView === 'bookList' 
@@ -539,15 +615,12 @@ export default function HadithScreen() {
                       ? t("select_chapter")
                       : t("hadith_navigation")}
                   </Text>
-                  <TouchableOpacity
+                  <Pressable
                     style={styles.closeButton}
-                    onPress={() => {
-                      setMenuVisible(false);
-                      setMenuView("main"); // Reset à la fermeture
-                    }}
+                    onPress={() => dispatch({ type: "MENU_CLOSE" })}
                   >
                     <Text style={styles.closeButtonText}>✕</Text>
-                  </TouchableOpacity>
+                  </Pressable>
                 </View>
 
                 {/* 🍎 iOS: Affichage conditionnel selon la vue */}
@@ -560,15 +633,15 @@ export default function HadithScreen() {
                           <Text style={styles.menuSectionTitle}>
                             {t("select_book")}
                           </Text>
-                          <TouchableOpacity
+                          <Pressable
                             style={styles.menuOption}
-                            onPress={() => setMenuView("bookList")}
+                            onPress={() => dispatch({ type: "MENU_SET_VIEW", payload: "bookList" })}
                           >
                             <Text style={styles.menuOptionText}>
                               {getSelectedBookLabel()}
                             </Text>
                             <Text style={styles.menuArrow}>›</Text>
-                          </TouchableOpacity>
+                          </Pressable>
                         </View>
 
                         {/* Sélection chapitre */}
@@ -580,15 +653,15 @@ export default function HadithScreen() {
                             {loadingChapters ? (
                               <ActivityIndicator style={styles.menuLoader} />
                             ) : (
-                              <TouchableOpacity
+                              <Pressable
                                 style={styles.menuOption}
-                                onPress={() => setMenuView("chapterList")}
+                                onPress={() => dispatch({ type: "MENU_SET_VIEW", payload: "chapterList" })}
                               >
                                 <Text style={styles.menuOptionText}>
                                   {getSelectedChapterLabel()}
                                 </Text>
                                 <Text style={styles.menuArrow}>›</Text>
-                              </TouchableOpacity>
+                              </Pressable>
                             )}
                           </View>
                         )}
@@ -600,14 +673,13 @@ export default function HadithScreen() {
                         data={books}
                         keyExtractor={(item) => item.bookSlug}
                         renderItem={({ item }) => (
-                          <TouchableOpacity
+                          <Pressable
                             style={[
                               styles.menuOption,
                               selectedBook === item.bookSlug && styles.selectedOptionStyle
                             ]}
                             onPress={() => {
                               handleBookChange(item.bookSlug);
-                              setMenuView("main"); // Retour à la vue principale
                             }}
                           >
                             <View style={{ flex: 1 }}>
@@ -623,7 +695,7 @@ export default function HadithScreen() {
                             {selectedBook === item.bookSlug && (
                               <Text style={styles.checkMark}>✓</Text>
                             )}
-                          </TouchableOpacity>
+                          </Pressable>
                         )}
                       />
                     )}
@@ -633,15 +705,14 @@ export default function HadithScreen() {
                         data={chapters}
                         keyExtractor={(item) => item.id.toString()}
                         renderItem={({ item }) => (
-                          <TouchableOpacity
+                          <Pressable
                             style={[
                               styles.menuOption,
                               selectedChapter === item.id && styles.selectedOptionStyle
                             ]}
                             onPress={() => {
                               handleChapterChange(item.id);
-                              setMenuView("main"); // Retour à la vue principale
-                              setMenuVisible(false); // Ferme le menu après sélection
+                              dispatch({ type: "MENU_CLOSE" });
                             }}
                           >
                             <View style={{ flex: 1 }}>
@@ -652,7 +723,7 @@ export default function HadithScreen() {
                             {selectedChapter === item.id && (
                               <Text style={styles.checkMark}>✓</Text>
                             )}
-                          </TouchableOpacity>
+                          </Pressable>
                         )}
                       />
                     )}
@@ -665,18 +736,15 @@ export default function HadithScreen() {
                       <Text style={styles.menuSectionTitle}>
                         {t("select_book")}
                       </Text>
-                      <TouchableOpacity
+                      <Pressable
                         style={styles.menuOption}
-                        onPress={() => {
-                          setModalType("book");
-                          setModalVisible(true);
-                        }}
+                        onPress={() => dispatch({ type: "MODAL_OPEN", payload: "book" })}
                       >
                         <Text style={styles.menuOptionText}>
                           {getSelectedBookLabel()}
                         </Text>
                         <Text style={styles.menuArrow}>›</Text>
-                      </TouchableOpacity>
+                      </Pressable>
                     </View>
 
                     {/* Sélection chapitre */}
@@ -688,18 +756,15 @@ export default function HadithScreen() {
                         {loadingChapters ? (
                           <ActivityIndicator style={styles.menuLoader} />
                         ) : (
-                          <TouchableOpacity
+                          <Pressable
                             style={styles.menuOption}
-                            onPress={() => {
-                              setModalType("chapter");
-                              setModalVisible(true);
-                            }}
+                            onPress={() => dispatch({ type: "MODAL_OPEN", payload: "chapter" })}
                           >
                             <Text style={styles.menuOptionText}>
                               {getSelectedChapterLabel()}
                             </Text>
                             <Text style={styles.menuArrow}>›</Text>
-                          </TouchableOpacity>
+                          </Pressable>
                         )}
                       </View>
                     )}
@@ -714,7 +779,7 @@ export default function HadithScreen() {
             animationType="slide"
             transparent={true}
             visible={modalVisible}
-            onRequestClose={() => setModalVisible(false)}
+            onRequestClose={() => dispatch({ type: "MODAL_CLOSE" })}
           >
             <SafeAreaView style={styles.modalContainer}>
               <View
@@ -726,12 +791,12 @@ export default function HadithScreen() {
                       ? t("select_book")
                       : t("select_chapter")}
                   </Text>
-                  <TouchableOpacity
+                  <Pressable
                     style={styles.closeButton}
-                    onPress={() => setModalVisible(false)}
+                    onPress={() => dispatch({ type: "MODAL_CLOSE" })}
                   >
                     <Text style={styles.closeButtonText}>✕</Text>
-                  </TouchableOpacity>
+                  </Pressable>
                 </View>
                 {modalType === "book" ? (
                   <FlatList
@@ -753,8 +818,8 @@ export default function HadithScreen() {
                     ref={flatListRef}
                     data={chapters}
                     renderItem={renderChapterItem}
-                    keyExtractor={(item) =>
-                      item.id?.toString() || `chapter-${Math.random()}`
+                    keyExtractor={(item, index) =>
+                      item.id?.toString() || `chapter-${index}`
                     }
                     initialNumToRender={20}
                     maxToRenderPerBatch={20}
@@ -784,8 +849,8 @@ export default function HadithScreen() {
             ) : (
               <FlatList
                 data={filteredHadiths}
-                keyExtractor={(item) =>
-                  item.id?.toString() || `hadith-${Math.random()}`
+                keyExtractor={(item, index) =>
+                  item.id?.toString() || `hadith-${index}`
                 }
                 initialNumToRender={5}
                 maxToRenderPerBatch={5}
@@ -909,11 +974,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     borderColor: "#ba9c34",
     borderWidth: 2,
-    shadowColor: "#b59d42",
-    shadowOpacity: 0.3,
-    shadowRadius: 8,
-    shadowOffset: { width: 0, height: 2 },
-    elevation: 3,
+    boxShadow: "0px 2px 8px rgba(181,157,66,0.3)",
   },
   menuButtonText: {
     fontSize: 24,
@@ -1014,14 +1075,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fffbe6",
     borderRadius: 20,
     width: "90%",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
+    boxShadow: "0px 2px 4px rgba(0,0,0,0.25)",
   },
   modalHeader: {
     flexDirection: "row",
@@ -1050,11 +1104,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     borderColor: "#ba9c34",
     borderWidth: 2,
-    shadowColor: "#b59d42",
-    shadowOpacity: 0.3,
-    shadowRadius: 8,
-    shadowOffset: { width: 0, height: 2 },
-    elevation: 3,
+    boxShadow: "0px 2px 8px rgba(181,157,66,0.3)",
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
@@ -1133,9 +1183,7 @@ const styles = StyleSheet.create({
     marginLeft: 8,
     borderWidth: 1,
     borderColor: "#ba9c34",
-    shadowColor: "#a0802a",
-    shadowOpacity: 0.12,
-    shadowRadius: 2,
+    boxShadow: "0px 1px 2px rgba(160,128,42,0.12)",
   },
   verseNumber: {
     color: "#6b510e",
@@ -1168,22 +1216,14 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: "#523f13",
     textAlign: "left",
-    shadowColor: "#b59d42",
-    shadowOpacity: 0.2,
-    shadowRadius: 4,
-    shadowOffset: { width: 0, height: 1 },
-    elevation: 2,
+    boxShadow: "0px 1px 4px rgba(181,157,66,0.2)",
   },
   searchButton: {
     backgroundColor: "#ba9c34",
     borderRadius: 18,
     paddingVertical: 8,
     paddingHorizontal: 12,
-    shadowColor: "#b59d42",
-    shadowOpacity: 0.2,
-    shadowRadius: 4,
-    shadowOffset: { width: 0, height: 1 },
-    elevation: 2,
+    boxShadow: "0px 1px 4px rgba(181,157,66,0.2)",
     minWidth: 40,
     alignItems: "center",
     justifyContent: "center",
@@ -1261,17 +1301,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     borderColor: "#ba9c34",
     borderWidth: 1,
-    shadowColor: "#b59d42",
-    shadowOpacity: 0.2,
-    shadowRadius: 3,
-    shadowOffset: { width: 0, height: 1 },
-    elevation: 1,
+    boxShadow: "0px 1px 3px rgba(181,157,66,0.2)",
   },
   paginationButtonDisabled: {
     backgroundColor: "#f0f0f0",
     borderColor: "#d0d0d0",
-    shadowOpacity: 0,
-    elevation: 0,
   },
   paginationButtonText: {
     fontSize: 14,

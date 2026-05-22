@@ -209,5 +209,8 @@
   "widget_feature_navigation": "✨ Переход между сурами",
   "widget_feature_audio_controls": "✨ Полные аудио элементы управления",
   "widget_feature_offline": "✨ Офлайн режим",
-  "subscribe_premium": "Подписаться Премиум"
+  "subscribe_premium": "Подписаться Премиум",
+  "adhan_completed_title": "✅ Азан завершен",
+  "adhan_completed_body": "Призыв к молитве завершен",
+  "dismiss": "Закрыть"
 }

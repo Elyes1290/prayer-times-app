@@ -5,6 +5,7 @@ header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type, Authorization');
 
 require_once 'config.php';
+require_once __DIR__ . '/mp3_duration_helper.php';
 
 // 🔐 Exiger auth pour toutes les actions premium (catalog/surah/stream/download)
 // Note: on autorise temporairement catalog/surah sans premium strict si besoin, mais on lit l’utilisateur
@@ -35,8 +36,10 @@ try {
             
         case 'surah':
             header('Content-Type: application/json');
+            header('Cache-Control: no-store, no-cache, must-revalidate');
+            header('Pragma: no-cache');
             $reciter = $_GET['reciter'] ?? '';
-            $surah = $_GET['surah'] ?? '';
+            $surah = normalizeSurahCode($_GET['surah'] ?? '');
             echo json_encode(getSurahInfo($reciter, $surah));
             break;
             
@@ -48,7 +51,7 @@ try {
                 exit;
             }
             $reciter = $_GET['reciter'] ?? '';
-            $surah = $_GET['surah'] ?? '';
+            $surah = normalizeSurahCode($_GET['surah'] ?? '');
             streamAudio($reciter, $surah);
             break;
             
@@ -60,7 +63,7 @@ try {
                 exit;
             }
             $reciter = $_GET['reciter'] ?? '';
-            $surah = $_GET['surah'] ?? '';
+            $surah = normalizeSurahCode($_GET['surah'] ?? '');
             downloadAudio($reciter, $surah);
             break;
 
@@ -124,6 +127,20 @@ try {
     ]);
 }
 
+/** Normalise "2" → "002" pour correspondre aux noms de fichiers sur le serveur. */
+function normalizeSurahCode($surah) {
+    if ($surah === '' || $surah === null) {
+        return '';
+    }
+    if (preg_match('/^\d{1,3}$/', (string)$surah)) {
+        $n = (int)$surah;
+        if ($n >= 1 && $n <= 114) {
+            return str_pad((string)$n, 3, '0', STR_PAD_LEFT);
+        }
+    }
+    return (string)$surah;
+}
+
 function getCatalog() {
     global $basePath;
     
@@ -154,6 +171,8 @@ function getCatalog() {
 
 function getSurahInfo($reciter, $surah) {
     global $basePath;
+
+    $surah = normalizeSurahCode($surah);
     
     if (empty($reciter) || empty($surah)) {
         return [
@@ -181,6 +200,8 @@ function getSurahInfo($reciter, $surah) {
     
     $fileSize = filesize($surahFile);
     $fileSizeMB = round($fileSize / (1024 * 1024), 2);
+    $durationSeconds = round(getMp3DurationSeconds($surahFile), 2);
+    $fileMtime = @filemtime($surahFile);
     
     // 🔐 Ajouter le token courant dans les URLs pour permettre aux clients audio
     // d'accéder sans headers (expo-av ne permet pas toujours d'ajouter Authorization)
@@ -194,6 +215,10 @@ function getSurahInfo($reciter, $surah) {
             'surah' => $surah,
             'fileSize' => $fileSize,
             'fileSizeMB' => $fileSizeMB,
+            'fileSizeBytes' => $fileSize,
+            'fileModified' => $fileMtime ? date('c', $fileMtime) : null,
+            'durationSeconds' => $durationSeconds,
+            'durationMs' => (int) round($durationSeconds * 1000),
             'streamUrl' => "https://myadhanapp.com/api/recitations.php?action=stream&reciter=" . urlencode($reciter) . "&surah=" . urlencode($surah) . $tokenParam,
             'downloadUrl' => "https://myadhanapp.com/api/recitations.php?action=download&reciter=" . urlencode($reciter) . "&surah=" . urlencode($surah) . $tokenParam
         ]
@@ -289,14 +314,46 @@ function downloadAudio($reciter, $surah) {
         exit;
     }
     
-    // Nettoyer buffer et envoyer le fichier en téléchargement
+    // Même logique Range que stream (seek MediaPlayer si lecture via download)
     while (ob_get_level()) { ob_end_clean(); }
     header_remove('Content-Type');
-    header('Content-Type: application/octet-stream');
+    $size = filesize($filePath);
+    header('Content-Type: audio/mpeg');
     header('Content-Disposition: attachment; filename="' . $reciter . '_' . $surah . '.mp3"');
-    header('Content-Length: ' . filesize($filePath));
-    header('Cache-Control: no-cache');
-    readfile($filePath);
+    header('Accept-Ranges: bytes');
+    header('Cache-Control: public, max-age=3600');
+
+    $start = 0;
+    $length = $size;
+    $end = $size - 1;
+
+    if (isset($_SERVER['HTTP_RANGE'])) {
+        if (preg_match('/bytes=([0-9]+)-([0-9]*)/i', $_SERVER['HTTP_RANGE'], $matches)) {
+            $start = intval($matches[1]);
+            if (!empty($matches[2])) {
+                $end = intval($matches[2]);
+            }
+            if ($end >= $size) { $end = $size - 1; }
+            $length = $end - $start + 1;
+            header('HTTP/1.1 206 Partial Content');
+            header("Content-Range: bytes $start-$end/$size");
+        }
+    }
+
+    header("Content-Length: $length");
+
+    $fp = fopen($filePath, 'rb');
+    if ($start > 0) { fseek($fp, $start); }
+    $bufferSize = 8192;
+    $bytesSent = 0;
+    while (!feof($fp) && $bytesSent < $length) {
+        $read = ($length - $bytesSent) > $bufferSize ? $bufferSize : ($length - $bytesSent);
+        $buffer = fread($fp, $read);
+        echo $buffer;
+        flush();
+        $bytesSent += strlen($buffer);
+    }
+    fclose($fp);
     exit;
 }
 ?> 

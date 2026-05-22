@@ -168,10 +168,9 @@ describe("Notifications", () => {
       ).not.toHaveBeenCalled();
     });
 
-    test("should handle different reminder offsets", async () => {
-      const testOffsets = [5, 10, 15, 30, 60];
-
-      for (const offset of testOffsets) {
+    test.each([5, 10, 15, 30, 60])(
+      "should handle reminder offset %i minutes",
+      async (offset) => {
         jest.clearAllMocks();
 
         await schedulePrayerNotifications(
@@ -181,21 +180,19 @@ describe("Notifications", () => {
           offset
         );
 
-        // Vérifier que l'offset correct est sauvegardé
         expect(
           NativeModules.AdhanModule.saveNotificationSettings
         ).toHaveBeenCalledWith({
           reminderOffset: offset,
         });
 
-        // Vérifier que le texte du rappel contient le bon nombre de minutes
         const scheduledReminders = (
           NativeModules.AdhanModule.schedulePrayerReminders as jest.Mock
         ).mock.calls[0][0];
 
         expect(scheduledReminders[0].body).toContain(`${offset} minutes`);
       }
-    });
+    );
 
     test("should calculate reminder time correctly", async () => {
       const prayerTime = new Date(Date.now() + 3600000); // +1 heure

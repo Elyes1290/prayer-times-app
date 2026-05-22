@@ -46,26 +46,28 @@ export function useCitySearch() {
         const queries = [q1, q2];
         if (q3) queries.push(q3);
 
-        let allResults: NominatimResult[] = [];
-        for (const q of queries) {
-          const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(
-            q
-          )}&format=json&addressdetails=1&limit=5&accept-language=${language}`;
+        const batches = await Promise.all(
+          queries.map(async (q) => {
+            const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(
+              q
+            )}&format=json&addressdetails=1&limit=5&accept-language=${language}`;
 
-          const res = await fetch(url, {
-            headers: {
-              "User-Agent": "ZayrPrayerApp/1.0 (contact@example.com)",
-            },
-            signal: abortControllerRef.current?.signal,
-          });
+            const res = await fetch(url, {
+              headers: {
+                "User-Agent": "ZayrPrayerApp/1.0 (contact@example.com)",
+              },
+              signal: abortControllerRef.current?.signal,
+            });
 
-          if (!res.ok) {
-            throw new Error(`HTTP error! status: ${res.status}`);
-          }
+            if (!res.ok) {
+              throw new Error(`HTTP error! status: ${res.status}`);
+            }
 
-          const data: NominatimResult[] = await res.json();
-          allResults = [...allResults, ...data];
-        }
+            return (await res.json()) as NominatimResult[];
+          })
+        );
+
+        let allResults: NominatimResult[] = batches.flat();
         // déduplication
         const unique = allResults.filter(
           (v, i, arr) =>

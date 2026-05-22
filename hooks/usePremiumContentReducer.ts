@@ -3,14 +3,14 @@ import { AdhanSoundKey } from "../contexts/SettingsContext";
 import { PremiumContent } from "../utils/premiumContent";
 
 // Types pour l'état du contenu premium
-export interface PremiumContentState {
+interface PremiumContentState {
   availableSounds: AdhanSoundKey[];
   premiumSoundTitles: { [key: string]: string };
   availableAdhanVoices: PremiumContent[];
 }
 
 // Actions du reducer
-export type PremiumContentAction =
+type PremiumContentAction =
   | { type: "SET_AVAILABLE_SOUNDS"; payload: AdhanSoundKey[] }
   | { type: "ADD_SOUND"; payload: AdhanSoundKey }
   | { type: "REMOVE_SOUND"; payload: AdhanSoundKey }

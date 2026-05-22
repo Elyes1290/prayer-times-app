@@ -3,7 +3,7 @@ import {
   View,
   Text,
   StyleSheet,
-  TouchableOpacity,
+  Pressable,
   ScrollView,
 } from "react-native";
 import { checkUserSyncStatus, retryUserSync } from "../utils/paymentSync";
@@ -63,7 +63,7 @@ const PaymentSyncDiagnostic: React.FC = () => {
     return (
       <View style={styles.container}>
         <Text style={styles.title}>🔍 Diagnostic de synchronisation</Text>
-        <Text style={styles.message}>Chargement...</Text>
+        <Text style={styles.message}>Chargement…</Text>
       </View>
     );
   }
@@ -142,7 +142,7 @@ const PaymentSyncDiagnostic: React.FC = () => {
       </View>
 
       <View style={styles.actionsContainer}>
-        <TouchableOpacity
+        <Pressable
           style={[styles.button, isChecking && styles.buttonDisabled]}
           onPress={checkStatus}
           disabled={isChecking}
@@ -150,9 +150,9 @@ const PaymentSyncDiagnostic: React.FC = () => {
           <Text style={styles.buttonText}>
             {isChecking ? `Vérification...` : `Actualiser le statut`}
           </Text>
-        </TouchableOpacity>
+        </Pressable>
 
-        <TouchableOpacity
+        <Pressable
           style={[styles.retryButton, isChecking && styles.buttonDisabled]}
           onPress={handleRetry}
           disabled={isChecking}
@@ -160,7 +160,7 @@ const PaymentSyncDiagnostic: React.FC = () => {
           <Text style={styles.buttonText}>
             {isChecking ? `Tentative...` : `Tenter la synchronisation`}
           </Text>
-        </TouchableOpacity>
+        </Pressable>
       </View>
 
       {retryResult && (

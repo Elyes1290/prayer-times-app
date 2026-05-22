@@ -3,16 +3,14 @@ import {
   View,
   Text,
   ScrollView,
-  TouchableOpacity,
+  Pressable,
   Modal,
   StyleSheet,
-  Dimensions,
+  useWindowDimensions,
 } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import { IonIcon } from "@/components/icons/AppVectorIcons";
 import { useBadgesSystem, Badge } from "@/utils/badgesSystem";
 import { useThemeColors } from "@/hooks/useThemeColor";
-
-const { width } = Dimensions.get("window");
 
 interface BadgesManagerProps {
   userStats: any;
@@ -33,11 +31,13 @@ const BadgeCard: React.FC<BadgeCardProps> = ({
   colors,
 }) => {
   const { system } = useBadgesSystem();
+  const { width } = useWindowDimensions();
 
   return (
-    <TouchableOpacity
+    <Pressable
       style={[
         styles.badgeCard,
+        { width: (width - 48) / 2 },
         {
           backgroundColor: isUnlocked
             ? `${system.getBadgeColor(badge)}20`
@@ -49,7 +49,6 @@ const BadgeCard: React.FC<BadgeCardProps> = ({
         },
       ]}
       onPress={onPress}
-      activeOpacity={0.7}
     >
       <View
         style={[
@@ -61,7 +60,7 @@ const BadgeCard: React.FC<BadgeCardProps> = ({
           },
         ]}
       >
-        <Ionicons name={badge.icon as any} size={20} color="white" />
+        <IonIcon name={badge.icon as any} size={20} color="white" />
       </View>
 
       <Text
@@ -99,10 +98,10 @@ const BadgeCard: React.FC<BadgeCardProps> = ({
 
       {isUnlocked && (
         <View style={styles.unlockedIndicator}>
-          <Ionicons name="checkmark-circle" size={16} color={colors.success} />
+          <IonIcon name="checkmark-circle" size={16} color={colors.success} />
         </View>
       )}
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 
@@ -196,7 +195,7 @@ export const BadgesManager: React.FC<BadgesManagerProps> = ({
       style={styles.categoryFilter}
       contentContainerStyle={styles.categoryFilterContent}
     >
-      <TouchableOpacity
+      <Pressable
         style={[
           styles.categoryButton,
           {
@@ -214,10 +213,10 @@ export const BadgesManager: React.FC<BadgesManagerProps> = ({
         >
           Tous
         </Text>
-      </TouchableOpacity>
+      </Pressable>
 
       {Object.entries(categories).map(([key, category]) => (
-        <TouchableOpacity
+        <Pressable
           key={key}
           style={[
             styles.categoryButton,
@@ -236,7 +235,7 @@ export const BadgesManager: React.FC<BadgesManagerProps> = ({
           >
             {category.name}
           </Text>
-        </TouchableOpacity>
+        </Pressable>
       ))}
     </ScrollView>
   );
@@ -258,12 +257,12 @@ export const BadgesManager: React.FC<BadgesManagerProps> = ({
           <View
             style={[styles.modalContent, { backgroundColor: colors.cardBG }]}
           >
-            <TouchableOpacity
+            <Pressable
               style={styles.modalCloseButton}
               onPress={() => setModalVisible(false)}
             >
-              <Ionicons name="close" size={24} color={colors.text} />
-            </TouchableOpacity>
+              <IonIcon name="close" size={24} color={colors.text} />
+            </Pressable>
 
             <View style={styles.modalHeader}>
               <View
@@ -276,7 +275,7 @@ export const BadgesManager: React.FC<BadgesManagerProps> = ({
                   },
                 ]}
               >
-                <Ionicons
+                <IonIcon
                   name={selectedBadge.icon as any}
                   size={32}
                   color="white"
@@ -437,7 +436,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
   badgeCard: {
-    width: (width - 48) / 2,
     padding: 16,
     marginBottom: 16,
     borderRadius: 12,
@@ -570,5 +568,3 @@ const styles = StyleSheet.create({
     fontWeight: "600",
   },
 });
-
-export default BadgesManager;

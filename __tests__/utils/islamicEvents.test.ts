@@ -5,6 +5,12 @@ import {
   IslamicEvent,
 } from "../../utils/islamicEvents";
 
+const islamicDateFormatter = new Intl.DateTimeFormat("fr-u-ca-islamic", {
+  day: "numeric",
+  month: "numeric",
+  year: "numeric",
+});
+
 describe("Islamic Events", () => {
   describe("islamicEvents Array", () => {
     test("should contain all major Islamic events", () => {
@@ -289,14 +295,8 @@ describe("Islamic Events", () => {
     });
 
     test("should handle Intl.DateTimeFormat correctly", () => {
-      // Test que la fonction utilise bien le formatage français
       expect(() => {
-        const formatter = new Intl.DateTimeFormat("fr-u-ca-islamic", {
-          day: "numeric",
-          month: "numeric",
-          year: "numeric",
-        });
-        formatter.format(new Date());
+        islamicDateFormatter.format(new Date());
       }).not.toThrow();
     });
   });

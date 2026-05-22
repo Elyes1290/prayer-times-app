@@ -1,9 +1,9 @@
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { MCIcon } from "@/components/icons/AppVectorIcons";
 import React from "react";
 import {
   View,
   Text,
-  TouchableOpacity,
+  Pressable,
   StyleSheet,
   ScrollView,
   StatusBar,
@@ -32,13 +32,12 @@ const MenuItem = ({ icon, title, subtitle, onPress, badge, isPremium }: MenuItem
   const { user } = usePremium();
 
   return (
-    <TouchableOpacity
+    <Pressable
       onPress={onPress}
-      activeOpacity={0.7}
       style={[styles.menuItem, { backgroundColor: colors.surface }]}
     >
       <View style={[styles.iconContainer, { backgroundColor: colors.primary + "20" }]}>
-        <MaterialCommunityIcons name={icon as any} size={24} color={colors.primary} />
+        <MCIcon name={icon as any} size={24} color={colors.primary} />
       </View>
       
       <View style={styles.menuContent}>
@@ -54,7 +53,7 @@ const MenuItem = ({ icon, title, subtitle, onPress, badge, isPremium }: MenuItem
         <View style={styles.menuRight}>
           {isPremium && !user?.isPremium && (
             <View style={styles.premiumBadge}>
-              <MaterialCommunityIcons name="crown" size={14} color="#FFD700" />
+              <MCIcon name="crown" size={14} color="#FFD700" />
             </View>
           )}
           {badge && (
@@ -62,19 +61,19 @@ const MenuItem = ({ icon, title, subtitle, onPress, badge, isPremium }: MenuItem
               <Text style={styles.badgeText}>{badge}</Text>
             </View>
           )}
-          <MaterialCommunityIcons
+          <MCIcon
             name="chevron-right"
             size={24}
             color={colors.textSecondary}
           />
         </View>
       </View>
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 
 export default function MoreScreen() {
-  const router = useRouter();
+  const { push } = useRouter();
   const { t } = useTranslation();
   const insets = useSafeAreaInsets();
   const colors = useThemeColors();
@@ -175,7 +174,7 @@ export default function MoreScreen() {
                       icon={item.icon}
                       title={item.title}
                       subtitle={item.subtitle}
-                      onPress={() => router.push(item.route as any)}
+                      onPress={() => push(item.route as any)}
                       isPremium={item.isPremium}
                     />
                     {itemIndex < section.items.length - 1 && (
@@ -194,7 +193,7 @@ export default function MoreScreen() {
             </Text>
             {user?.isPremium && (
               <View style={styles.premiumBadgeBottom}>
-                <MaterialCommunityIcons name="crown" size={12} color="#FFD700" />
+                <MCIcon name="crown" size={12} color="#FFD700" />
                 <Text style={[styles.premiumText, { color: "#FFD700" }]}>
                   Premium
                 </Text>
@@ -249,11 +248,7 @@ const styles = StyleSheet.create({
   sectionContent: {
     borderRadius: 16,
     overflow: "hidden",
-    elevation: 2,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
+    boxShadow: "0px 2px 4px rgba(0,0,0,0.1)",
   },
   menuItem: {
     flexDirection: "row",

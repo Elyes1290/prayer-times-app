@@ -1,7 +1,7 @@
 // hooks/usePrayerTimes.ts
 import { CalculationMethod, Coordinates, PrayerTimes } from "adhan";
 import type { LocationObject } from "expo-location";
-import { useContext, useEffect, useState, useMemo } from "react";
+import { use, useEffect, useState, useMemo } from "react";
 import { SettingsContext } from "../contexts/SettingsContext";
 import { usePrayerTimesCache } from "./usePrayerTimesCache";
 
@@ -10,7 +10,7 @@ export function usePrayerTimes(
   date: Date,
   isPremium: boolean = false
 ): { prayerTimes: PrayerTimes | null; isLoading: boolean } {
-  const { calcMethod } = useContext(SettingsContext);
+  const { calcMethod } = use(SettingsContext);
 
   // 🚀 NOUVEAU : Utiliser le système de cache intelligent
   const {

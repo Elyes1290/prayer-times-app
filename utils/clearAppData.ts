@@ -15,7 +15,7 @@ export const clearUserStatsCache = async () => {
 /**
  * Vide tout le cache de l'application (pour debug)
  */
-export const clearAllCache = async () => {
+const clearAllCache = async () => {
   try {
     const keys = await AsyncStorage.getAllKeys();
     const cacheKeys = keys.filter(
@@ -40,13 +40,13 @@ export const clearAllCache = async () => {
 /**
  * Affiche le contenu du cache pour debug
  */
-export const debugCache = async () => {
+const debugCache = async () => {
   try {
     const keys = await AsyncStorage.getAllKeys();
     console.log("🔍 Toutes les clés AsyncStorage:", keys);
 
-    for (const key of keys) {
-      const value = await AsyncStorage.getItem(key);
+    const pairs = await AsyncStorage.multiGet(keys);
+    for (const [key, value] of pairs) {
       console.log(`📦 ${key}:`, value?.substring(0, 100) + "...");
     }
   } catch (error) {

@@ -1,7 +1,6 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react-native";
 import { useTranslation } from "react-i18next";
-import { MaterialIcons } from "@expo/vector-icons";
 import { DateNavigator } from "../../components/DateNavigator";
 import {
   useThemeColors,
@@ -15,10 +14,6 @@ jest.mock("react-i18next", () => ({
     t: (key: string, defaultValue?: string) => defaultValue || key,
     i18n: { language: "fr" },
   }),
-}));
-
-jest.mock("@expo/vector-icons", () => ({
-  MaterialIcons: "MaterialIcons",
 }));
 
 jest.mock("../../hooks/useThemeColor", () => ({

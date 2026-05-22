@@ -4,14 +4,14 @@ import {
   Text,
   StyleSheet,
   ScrollView,
-  TouchableOpacity,
+  Pressable,
   ActivityIndicator,
   Alert,
   Platform,
   Linking,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { MCIcon } from "@/components/icons/AppVectorIcons";
 import { useRouter, useFocusEffect } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { PurchasesPackage } from "react-native-purchases";
@@ -86,7 +86,7 @@ const subscriptionPlans: SubscriptionPlan[] = [
 const PremiumPaymentScreen: React.FC = () => {
   const colors = useThemeColors();
   const currentTheme = useCurrentTheme();
-  const router = useRouter();
+  const { push, back } = useRouter();
 
   const [selectedPlan, setSelectedPlan] = useState<SubscriptionPlan>(
     subscriptionPlans[0]
@@ -239,7 +239,7 @@ const PremiumPaymentScreen: React.FC = () => {
             })
           );
           // Rediriger vers le succès
-          router.push("/payment-success");
+          push("/payment-success");
         } else {
           setIsLoading(false);
         }
@@ -449,12 +449,12 @@ const PremiumPaymentScreen: React.FC = () => {
               Aucune donnée d&apos;inscription trouvée. Veuillez retourner à la
               page d&apos;inscription.
             </Text>
-            <TouchableOpacity
+            <Pressable
               style={styles.backButton}
-              onPress={() => router.back()}
+              onPress={() => back()}
             >
               <Text style={styles.backButtonText}>Retour</Text>
-            </TouchableOpacity>
+            </Pressable>
           </View>
         </View>
       </ThemedImageBackground>
@@ -478,7 +478,7 @@ const PremiumPaymentScreen: React.FC = () => {
 
         <View style={styles.plansContainer}>
           {subscriptionPlans.map((plan) => (
-            <TouchableOpacity
+            <Pressable
               key={plan.id}
               style={[
                 styles.planCard,
@@ -536,9 +536,9 @@ const PremiumPaymentScreen: React.FC = () => {
                 </View>
 
                 <View style={styles.cardFeatures}>
-                  {plan.features.map((feature, index) => (
-                    <View key={index} style={styles.featureItem}>
-                      <MaterialCommunityIcons
+                  {plan.features.map((feature) => (
+                    <View key={feature} style={styles.featureItem}>
+                      <MCIcon
                         name="check-circle"
                         size={16}
                         color={
@@ -559,7 +559,7 @@ const PremiumPaymentScreen: React.FC = () => {
 
                 {selectedPlan.id === plan.id && !plan.comingSoon && (
                   <View style={styles.selectedIndicator}>
-                    <MaterialCommunityIcons
+                    <MCIcon
                       name="check-circle"
                       size={24}
                       color={colors.secondary}
@@ -567,7 +567,7 @@ const PremiumPaymentScreen: React.FC = () => {
                   </View>
                 )}
               </LinearGradient>
-            </TouchableOpacity>
+            </Pressable>
           ))}
         </View>
 
@@ -581,7 +581,7 @@ const PremiumPaymentScreen: React.FC = () => {
           </Text>
         </View>
 
-        <TouchableOpacity
+        <Pressable
           style={[styles.payButton, isLoading && styles.payButtonDisabled]}
           onPress={handlePayment}
           disabled={isLoading}
@@ -590,7 +590,7 @@ const PremiumPaymentScreen: React.FC = () => {
             <ActivityIndicator color={colors.text} />
           ) : (
             <>
-              <MaterialCommunityIcons
+              <MCIcon
                 name="credit-card"
                 size={20}
                 color={colors.text}
@@ -604,7 +604,7 @@ const PremiumPaymentScreen: React.FC = () => {
               </Text>
             </>
           )}
-        </TouchableOpacity>
+        </Pressable>
 
         <Text style={styles.securityText}>
           {Platform.OS === "ios"
@@ -683,15 +683,9 @@ const getStyles = (colors: any, currentTheme: "light" | "dark" | "morning" | "su
     planCard: {
       borderRadius: 16,
       overflow: "hidden",
-      elevation: 4,
-      shadowColor: "#000",
-      shadowOffset: { width: 0, height: 2 },
-      shadowOpacity: 0.1,
-      shadowRadius: 4,
+      boxShadow: "0px 2px 4px rgba(0,0,0,0.1)",
     },
     selectedPlanCard: {
-      elevation: 8,
-      shadowOpacity: 0.2,
     },
     popularPlanCard: {
       borderWidth: 2,

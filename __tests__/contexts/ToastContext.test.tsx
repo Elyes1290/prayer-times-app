@@ -3,9 +3,6 @@ import { render, act, waitFor } from "@testing-library/react-native";
 import { ToastProvider, useToast } from "../../contexts/ToastContext";
 import type { ToastData } from "../../components/Toast"; // Mocks globaux
 jest.mock("expo-font", () => ({}));
-jest.mock("@expo/vector-icons", () => ({
-  MaterialCommunityIcons: () => null,
-}));
 jest.mock("expo-linear-gradient", () => ({
   LinearGradient: () => null,
 }));
@@ -70,13 +67,16 @@ jest.mock("../../components/Toast", () => {
   return MockToast;
 });
 
-// Composant de test pour accéder au contexte
-const ToastTestComponent = React.forwardRef((props, ref) => {
+// Composant de test pour accéder au contexte (ref en prop — React 19)
+function ToastTestComponent({
+  ref,
+}: {
+  ref?: React.Ref<ReturnType<typeof useToast>>;
+}) {
   const context = useToast();
   React.useImperativeHandle(ref, () => context, [context]);
   return null;
-});
-ToastTestComponent.displayName = "ToastTestComponent";
+}
 
 describe("ToastContext - Tests Exhaustifs", () => {
   let testRef: any;

@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, ActivityIndicator } from "react-native";
+import { View, Text, StyleSheet, Pressable, ActivityIndicator } from "react-native";
 import { useRouter } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { AppConfig } from "../utils/config";
 
 const PaymentCancelScreen: React.FC = () => {
-  const router = useRouter();
+  const { replace } = useRouter();
   const [isDeleting, setIsDeleting] = React.useState(false);
 
   // 🚀 NOUVEAU : Nettoyer les données et supprimer le compte préemptif si nécessaire
@@ -49,11 +49,11 @@ const PaymentCancelScreen: React.FC = () => {
 
   const handleRetry = () => {
     // Retourner aux paramètres où se trouve l'inscription
-    router.replace("/settings");
+    replace("/settings");
   };
 
   const handleGoHome = () => {
-    router.replace("/");
+    replace("/");
   };
 
   return (
@@ -70,12 +70,12 @@ const PaymentCancelScreen: React.FC = () => {
           <ActivityIndicator size="large" color="#FF6B6B" style={{ marginBottom: 20 }} />
         ) : (
           <View style={styles.buttonsContainer}>
-            <TouchableOpacity style={styles.retryButton} onPress={handleRetry}>
+            <Pressable style={styles.retryButton} onPress={handleRetry}>
               <Text style={styles.retryButtonText}>Réessayer</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.homeButton} onPress={handleGoHome}>
+            </Pressable>
+            <Pressable style={styles.homeButton} onPress={handleGoHome}>
               <Text style={styles.homeButtonText}>Accueil</Text>
-            </TouchableOpacity>
+            </Pressable>
           </View>
         )}
       </View>

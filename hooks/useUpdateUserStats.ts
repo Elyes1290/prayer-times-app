@@ -3,7 +3,7 @@ import { getCurrentUserId } from "../utils/userAuth";
 import { AppConfig } from "../utils/config";
 import OfflineStatsManager from "../utils/OfflineStatsManager";
 
-export interface UpdateStatsAction {
+interface UpdateStatsAction {
   action:
     | "prayer_completed"
     | "dhikr_completed"

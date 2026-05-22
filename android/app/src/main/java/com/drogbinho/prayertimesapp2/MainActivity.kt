@@ -142,6 +142,20 @@ class MainActivity : ReactActivity() {
                   
                   Log.d(TAG, "✅ Événement état audio envoyé à React Native")
                 }
+                "SeekDebug" -> {
+                  val message = intent.getStringExtra("message") ?: "SeekDebug"
+                  val details = intent.getStringExtra("details") ?: ""
+                  Log.i(QuranSeekDebug.TAG, "→ RN: $message")
+                  val params = com.facebook.react.bridge.Arguments.createMap()
+                  params.putString("message", message)
+                  params.putString("type", "info")
+                  val detailsMap = com.facebook.react.bridge.Arguments.createMap()
+                  detailsMap.putString("raw", details)
+                  params.putMap("details", detailsMap)
+                  reactContext
+                    .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)
+                    .emit("AddPlaybackDebugLog", params)
+                }
                 else -> {
                   Log.w(TAG, "⚠️ Événement inconnu: $eventName")
                 }

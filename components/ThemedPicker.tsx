@@ -1,14 +1,16 @@
+import { Z_INDEX } from "../constants/zIndex";
 import React from "react";
 import {
   View,
   Text,
-  TouchableOpacity,
+  Pressable,
   Modal,
   FlatList,
   StyleSheet,
 } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { MCIcon } from "@/components/icons/AppVectorIcons";
 import { useThemeAssets } from "../hooks/useThemeAssets";
+import { makeBoxShadow } from "../utils/shadowUtils";
 
 interface ThemedPickerProps {
   visible: boolean;
@@ -43,8 +45,7 @@ const ThemedPicker: React.FC<ThemedPickerProps> = ({
         justifyContent: "center",
         alignItems: "center",
         padding: 20,
-        zIndex: 999999,
-        elevation: 999999,
+        zIndex: Z_INDEX.modal,
       },
       modal: {
         backgroundColor: isDark
@@ -55,16 +56,18 @@ const ThemedPicker: React.FC<ThemedPickerProps> = ({
         width: "90%",
         maxWidth: 400,
         maxHeight: "80%",
-        shadowColor: isDark ? "#000" : themeAssets.colors.shadow,
-        shadowOffset: { width: 0, height: 8 },
-        shadowOpacity: isDark ? 0.5 : 0.3,
-        shadowRadius: 16,
-        elevation: 999999,
+        boxShadow: makeBoxShadow(
+          isDark ? "#000" : themeAssets.colors.shadow,
+          0,
+          8,
+          16,
+          isDark ? 0.5 : 0.3
+        ),
         borderWidth: 1,
         borderColor: isDark
           ? themeAssets.colors.border
           : themeAssets.colors.border,
-        zIndex: 999999,
+        zIndex: Z_INDEX.modal,
       },
       title: {
         fontSize: 20,
@@ -137,7 +140,7 @@ const ThemedPicker: React.FC<ThemedPickerProps> = ({
     const isSelected = item.value === selectedValue;
 
     return (
-      <TouchableOpacity
+      <Pressable
         style={[styles.item, isSelected && styles.selectedItem]}
         onPress={() => {
           const result = onValueChange(item.value);
@@ -151,13 +154,13 @@ const ThemedPicker: React.FC<ThemedPickerProps> = ({
           {item.label}
         </Text>
         {isSelected && (
-          <MaterialCommunityIcons
+          <MCIcon
             name="check"
             size={20}
             style={styles.checkIcon}
           />
         )}
-      </TouchableOpacity>
+      </Pressable>
     );
   };
 
@@ -181,9 +184,9 @@ const ThemedPicker: React.FC<ThemedPickerProps> = ({
             />
           </View>
 
-          <TouchableOpacity style={styles.cancelButton} onPress={onClose}>
+          <Pressable style={styles.cancelButton} onPress={onClose}>
             <Text style={styles.cancelButtonText}>Annuler</Text>
-          </TouchableOpacity>
+          </Pressable>
         </View>
       </View>
     </Modal>

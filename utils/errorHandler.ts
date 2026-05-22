@@ -5,7 +5,7 @@
 
 import { useTranslation } from "react-i18next";
 
-export interface ErrorInfo {
+interface ErrorInfo {
   title: string;
   message: string;
   type:

@@ -29,7 +29,7 @@ export interface StreamingSession {
   bufferHealth: number; // Pourcentage de buffer disponible
 }
 
-export class AudioStreamingManager {
+class AudioStreamingManager {
   private static instance: AudioStreamingManager;
   private sessions: Map<string, StreamingSession> = new Map();
   private cdnOptimizer: CDNOptimizer;
@@ -120,7 +120,6 @@ export class AudioStreamingManager {
     originalUrl: string,
     duration?: number
   ): Promise<AudioSegment[]> {
-    const segments: AudioSegment[] = [];
     const segmentDuration = 15; // 15 secondes par segment
     const estimatedDuration = duration || 300; // 5 minutes par défaut
 
@@ -130,24 +129,26 @@ export class AudioStreamingManager {
 
     const totalSegments = Math.ceil(estimatedDuration / segmentDuration);
 
-    for (let i = 0; i < totalSegments; i++) {
-      const startTime = i * segmentDuration;
-      const segmentUrl = this.buildSegmentUrl(
-        originalUrl,
-        startTime,
-        segmentDuration
-      );
+    const segmentMeta = await Promise.all(
+      Array.from({ length: totalSegments }, async (_, i) => {
+        const startTime = i * segmentDuration;
+        const segmentUrl = this.buildSegmentUrl(
+          originalUrl,
+          startTime,
+          segmentDuration
+        );
+        const cached = await this.isSegmentCached(`${audioId}_${i}`);
+        return {
+          url: segmentUrl,
+          startTime,
+          duration: Math.min(segmentDuration, estimatedDuration - startTime),
+          size: segmentSize,
+          cached,
+        };
+      })
+    );
 
-      segments.push({
-        url: segmentUrl,
-        startTime,
-        duration: Math.min(segmentDuration, estimatedDuration - startTime),
-        size: segmentSize,
-        cached: await this.isSegmentCached(`${audioId}_${i}`),
-      });
-    }
-
-    return segments;
+    return segmentMeta;
   }
 
   /**

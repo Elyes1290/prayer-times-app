@@ -2,11 +2,12 @@ import React from "react";
 import {
   Platform,
   StyleSheet,
-  TouchableOpacity,
+  Pressable,
   View,
   Animated,
 } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { MCIcon } from "@/components/icons/AppVectorIcons";
+import { Z_INDEX } from "../constants/zIndex";
 import { useAdhanAudio } from "../contexts/AdhanAudioContext";
 
 /**
@@ -60,18 +61,17 @@ export const AdhanStopButton: React.FC = () => {
       ]}
       pointerEvents={state.isPlaying ? "auto" : "none"}
     >
-      <TouchableOpacity
+      <Pressable
         style={styles.button}
         onPress={handleStop}
-        activeOpacity={0.8}
         testID="adhan-stop-button"
       >
-        <MaterialCommunityIcons name="stop" size={24} color="#fff" />
-      </TouchableOpacity>
+        <MCIcon name="stop" size={24} color="#fff" />
+      </Pressable>
       {state.prayer && (
         <View style={styles.labelContainer}>
           <View style={styles.label}>
-            <MaterialCommunityIcons name="mosque" size={12} color="#fff" />
+            <MCIcon name="mosque" size={12} color="#fff" />
             <Animated.Text style={styles.labelText} numberOfLines={1}>
               {state.prayer}
             </Animated.Text>
@@ -87,8 +87,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 100,
     right: 20,
-    zIndex: 9999,
-    elevation: 9999,
+    zIndex: Z_INDEX.floatingButton,
     alignItems: "center",
   },
   button: {
@@ -98,14 +97,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#FF6B6B",
     alignItems: "center",
     justifyContent: "center",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 8,
-    elevation: 8,
+    boxShadow: "0px 4px 8px rgba(0,0,0,0.3)",
     borderWidth: 2,
     borderColor: "#fff",
   },

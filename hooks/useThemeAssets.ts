@@ -3,7 +3,7 @@
  * Images, couleurs et styles adaptatifs
  */
 
-import { useContext } from "react";
+import { use } from "react";
 import { useColorScheme } from "react-native";
 import { Colors } from "../constants/Colors";
 import { SettingsContext, BackgroundImageType } from "../contexts/SettingsContext";
@@ -37,7 +37,7 @@ const backgroundImages: Record<
 
 export function useThemeAssets() {
   const systemTheme = useColorScheme() ?? "light";
-  const settingsContext = useContext(SettingsContext);
+  const settingsContext = use(SettingsContext);
 
   // Détermine le thème actuel (4 thèmes possibles)
   let currentTheme: "light" | "dark" | "morning" | "sunset";
@@ -70,7 +70,7 @@ export function useThemeAssets() {
 }
 
 // Hook pour obtenir uniquement l'image de fond
-export function useBackgroundImage() {
+function useBackgroundImage() {
   const { backgroundImage } = useThemeAssets();
   return backgroundImage;
 }
@@ -83,7 +83,7 @@ export function useThemeColors() {
 
 // 🔧 DÉPRÉCIÉ : Utiliser useCurrentTheme depuis @/hooks/useThemeColor à la place
 // Ce hook est conservé pour la compatibilité mais redirige vers le hook principal
-export function useCurrentTheme(): "light" | "dark" | "morning" | "sunset" {
+function useCurrentTheme(): "light" | "dark" | "morning" | "sunset" {
   const { theme } = useThemeAssets();
   return theme;
 }

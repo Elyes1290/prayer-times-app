@@ -1,12 +1,13 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { MCIcon } from "@/components/icons/AppVectorIcons";
 import { useTranslation } from "react-i18next";
 import {
   useThemeColors,
   useOverlayTextColor,
   useCurrentTheme,
 } from "../hooks/useThemeColor";
+import { makeBoxShadow } from "../utils/shadowUtils";
 
 interface SunInfoProps {
   sunrise: Date | null;
@@ -28,11 +29,7 @@ const getStyles = (
       marginBottom: 16,
       borderWidth: 1,
       borderColor: colors.border, // 🌅 Utilise la couleur du thème actif
-      shadowColor: colors.shadow, // 🌅 Utilise la couleur du thème actif
-      shadowOffset: { width: 0, height: 4 },
-      shadowOpacity: 0.3,
-      shadowRadius: 10,
-      elevation: 6,
+      boxShadow: makeBoxShadow(colors.shadow, 0, 4, 10, 0.3),
     },
     header: {
       flexDirection: "row",
@@ -63,11 +60,7 @@ const getStyles = (
       borderRadius: 6,
       top: -4.5,
       marginLeft: -6,
-      shadowColor: colors.shadow, // 🌅 Utilise la couleur du thème actif
-      shadowOffset: { width: 0, height: 0 },
-      shadowOpacity: 0.8,
-      shadowRadius: 4,
-      elevation: 4,
+      boxShadow: makeBoxShadow(colors.shadow, 0, 0, 4, 0.8),
     },
     timeMarkers: {
       flexDirection: "row",
@@ -180,7 +173,7 @@ export function SunInfo({ sunrise, sunset, currentTime }: SunInfoProps) {
     <View style={styles.container}>
       {/* En-tête avec durée du jour */}
       <View style={styles.header}>
-        <MaterialCommunityIcons
+        <MCIcon
           name="weather-sunny"
           size={24}
           color={colors.primary} // 🌅 Utilise la couleur du thème actif
@@ -213,7 +206,7 @@ export function SunInfo({ sunrise, sunset, currentTime }: SunInfoProps) {
 
       {/* Prochain événement solaire */}
       <View style={styles.nextEvent}>
-        <MaterialCommunityIcons
+        <MCIcon
           name={
             nextSunEvent.event === "sunrise"
               ? "weather-sunset-up"

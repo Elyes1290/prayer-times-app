@@ -2,14 +2,14 @@ import { useReducer, useCallback } from "react";
 import { NominatimResult } from "./useCitySearch";
 
 // Types pour l'état de recherche de ville
-export interface CitySearchState {
+interface CitySearchState {
   cityInput: string;
   citySearchResults: NominatimResult[];
   citySearchLoading: boolean;
 }
 
 // Actions du reducer
-export type CitySearchAction =
+type CitySearchAction =
   | { type: "SET_CITY_INPUT"; payload: string }
   | { type: "SET_SEARCH_RESULTS"; payload: NominatimResult[] }
   | { type: "SET_SEARCH_LOADING"; payload: boolean }

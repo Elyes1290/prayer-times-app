@@ -1,12 +1,13 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { MCIcon } from "@/components/icons/AppVectorIcons";
 import { useTranslation } from "react-i18next";
 import {
   useThemeColors,
   useOverlayTextColor,
   useCurrentTheme,
 } from "../hooks/useThemeColor";
+import { makeBoxShadow } from "../utils/shadowUtils";
 
 interface PrayerStatsProps {
   dayLength: number; // en minutes
@@ -35,11 +36,7 @@ const getStyles = (
       marginBottom: 16,
       borderWidth: 1,
       borderColor: colors.border, // 🌅 Utilise la couleur du thème actif
-      shadowColor: colors.shadow, // 🌅 Utilise la couleur du thème actif
-      shadowOffset: { width: 0, height: 4 },
-      shadowOpacity: 0.3,
-      shadowRadius: 10,
-      elevation: 6,
+      boxShadow: makeBoxShadow(colors.shadow, 0, 4, 10, 0.3),
     },
     header: {
       flexDirection: "row",
@@ -130,7 +127,7 @@ export default function PrayerStats({
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <MaterialCommunityIcons
+        <MCIcon
           name="chart-timeline-variant"
           size={24}
           color={colors.primary} // 🌅 Utilise la couleur du thème actif
@@ -141,7 +138,7 @@ export default function PrayerStats({
       <View style={styles.statsGrid}>
         {/* Durée du jour */}
         <View style={styles.statItem}>
-          <MaterialCommunityIcons
+          <MCIcon
             name="weather-sunny"
             size={20}
             color={colors.primary} // 🌅 Utilise la couleur du thème actif
@@ -152,7 +149,7 @@ export default function PrayerStats({
 
         {/* Temps entre Fajr et lever du soleil */}
         <View style={styles.statItem}>
-          <MaterialCommunityIcons
+          <MCIcon
             name="weather-sunset-up"
             size={20}
             color={colors.primary} // 🌅 Utilise la couleur du thème actif
@@ -163,7 +160,7 @@ export default function PrayerStats({
 
         {/* Temps entre coucher du soleil et Isha */}
         <View style={styles.statItem}>
-          <MaterialCommunityIcons
+          <MCIcon
             name="weather-sunset-down"
             size={20}
             color={colors.primary} // 🌅 Utilise la couleur du thème actif

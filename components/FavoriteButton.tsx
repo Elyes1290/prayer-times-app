@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {
-  TouchableOpacity,
+  Pressable,
   Animated,
   StyleSheet,
   View,
@@ -8,7 +8,7 @@ import {
   Vibration,
   Platform,
 } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { MCIcon } from "@/components/icons/AppVectorIcons";
 import { useFavorites, Favorite } from "../contexts/FavoritesContext";
 import { usePremium } from "../contexts/PremiumContext";
 import { useTranslation } from "react-i18next";
@@ -204,7 +204,7 @@ const FavoriteButton: React.FC<FavoriteButtonProps> = ({
   };
 
   return (
-    <TouchableOpacity
+    <Pressable
       testID="favorite-button"
       accessibilityLabel={
         isCurrentlyFavorite ? "Retirer des favoris" : "Ajouter aux favoris"
@@ -213,7 +213,6 @@ const FavoriteButton: React.FC<FavoriteButtonProps> = ({
       style={[styles.container, style]}
       onPress={handleToggleFavorite}
       disabled={isProcessing}
-      activeOpacity={0.7}
     >
       <Animated.View
         style={[
@@ -223,7 +222,7 @@ const FavoriteButton: React.FC<FavoriteButtonProps> = ({
           },
         ]}
       >
-        <MaterialCommunityIcons
+        <MCIcon
           testID="heart-icon"
           name={isCurrentlyFavorite ? "heart" : "heart-outline"}
           size={size}
@@ -233,7 +232,7 @@ const FavoriteButton: React.FC<FavoriteButtonProps> = ({
         {/* Indicateur Premium pour les utilisateurs gratuits */}
         {!user.isPremium && !isCurrentlyFavorite && (
           <View style={styles.premiumBadge}>
-            <MaterialCommunityIcons
+            <MCIcon
               name="crown"
               size={size * 0.4}
               color="#FFD700"
@@ -241,7 +240,7 @@ const FavoriteButton: React.FC<FavoriteButtonProps> = ({
           </View>
         )}
       </Animated.View>
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 

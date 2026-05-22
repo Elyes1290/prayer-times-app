@@ -77,21 +77,22 @@ class PrayerTimesPreloader {
     // Précharger les 7 prochains jours par défaut, ou selon la config
     const daysToCheck = Math.min(config.preloadDays, 30); // Max 30 jours
 
-    for (let i = 0; i < daysToCheck; i++) {
-      const date = new Date(today);
-      date.setDate(today.getDate() + i);
-
-      // Vérifier si déjà en cache
-      const cached = await this.cacheService.getCachedPrayerTimes(
-        date,
-        config.latitude,
-        config.longitude,
-        config.calcMethod
-      );
-
-      if (!cached) {
-        datesToPreload.push(date);
-      }
+    const dayIndices = Array.from({ length: daysToCheck }, (_, i) => i);
+    const cacheHits = await Promise.all(
+      dayIndices.map(async (i) => {
+        const date = new Date(today);
+        date.setDate(today.getDate() + i);
+        const cached = await this.cacheService.getCachedPrayerTimes(
+          date,
+          config.latitude,
+          config.longitude,
+          config.calcMethod
+        );
+        return { date, cached: !!cached };
+      })
+    );
+    for (const { date, cached } of cacheHits) {
+      if (!cached) datesToPreload.push(date);
     }
 
     return datesToPreload;
@@ -106,8 +107,9 @@ class PrayerTimesPreloader {
   ): Promise<void> {
     const batchSize = Math.min(config.maxConcurrent, 5); // Max 5 calculs simultanés
 
-    for (let i = 0; i < dates.length; i += batchSize) {
-      const batch = dates.slice(i, i + batchSize);
+    const runBatch = async (startIndex: number): Promise<void> => {
+      if (startIndex >= dates.length) return;
+      const batch = dates.slice(startIndex, startIndex + batchSize);
 
       await Promise.all(
         batch.map(async (date) => {
@@ -122,11 +124,13 @@ class PrayerTimesPreloader {
         })
       );
 
-      // Délai entre les batches pour éviter la surcharge
-      if (i + batchSize < dates.length) {
+      if (startIndex + batchSize < dates.length) {
         await new Promise((resolve) => setTimeout(resolve, 200));
       }
-    }
+      await runBatch(startIndex + batchSize);
+    };
+
+    await runBatch(0);
   }
 
   /**

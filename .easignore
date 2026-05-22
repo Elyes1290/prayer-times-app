@@ -10,3 +10,7 @@ ios/Pods/
 # Exclure le dossier de la landing page (non nécessaire pour l'app mobile)
 prayer-times-landing/
 
+# MP3 locaux (ré-encodage / upload serveur — pas dans l'app)
+mp3-fix/
+mp3-fix-backup/
+

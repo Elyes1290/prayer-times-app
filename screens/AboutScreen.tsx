@@ -5,10 +5,10 @@ import {
   StyleSheet,
   Linking,
   Image,
-  TouchableOpacity,
+  Pressable,
   ScrollView,
 } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { MCIcon } from "@/components/icons/AppVectorIcons";
 import { useTranslation } from "react-i18next";
 import Constants from "expo-constants";
 import ThemedImageBackground from "../components/ThemedImageBackground";
@@ -16,7 +16,7 @@ import { useRouter } from "expo-router";
 
 export default function AboutScreen() {
   const { t } = useTranslation();
-  const router = useRouter();
+  const { push } = useRouter();
   const [expandedFAQ, setExpandedFAQ] = useState<number | null>(null);
   const [debugTapCount, setDebugTapCount] = useState(0);
   // Les couleurs sont maintenant gérées via le système de thème dans Colors.ts
@@ -30,7 +30,7 @@ export default function AboutScreen() {
   // Cette date correspond à votre dernière publication sur Google Play
   const getLastUpdateDate = () => {
     // 🎯 Vous pouvez mettre à jour cette date à chaque release Google Play
-    const lastReleaseDate = "2025-01-31"; // Format YYYY-MM-DD
+    const lastReleaseDate = "2026-05-12"; // Format YYYY-MM-DD
     return new Date(lastReleaseDate).toLocaleDateString("fr-FR", {
       day: "numeric",
       month: "long",
@@ -91,9 +91,9 @@ export default function AboutScreen() {
     Linking.openURL("https://www.myadhanapp.com/public/privacy-policy.html");
   };
 
-  const renderFeatureItem = (feature: any, index: number) => (
-    <View key={index} style={styles.featureItem}>
-      <MaterialCommunityIcons
+  const renderFeatureItem = (feature: any) => (
+    <View key={feature.key} style={styles.featureItem}>
+      <MCIcon
         name={feature.icon as any}
         size={24}
         color="#b59d42"
@@ -105,14 +105,14 @@ export default function AboutScreen() {
   );
 
   const renderFAQItem = (item: any, index: number) => (
-    <TouchableOpacity
-      key={index}
+    <Pressable
+      key={item.question}
       style={styles.faqItem}
       onPress={() => setExpandedFAQ(expandedFAQ === index ? null : index)}
     >
       <View style={styles.faqHeader}>
         <Text style={styles.faqQuestion}>{t(`abouts.${item.question}`)}</Text>
-        <MaterialCommunityIcons
+        <MCIcon
           name={expandedFAQ === index ? "chevron-up" : "chevron-down"}
           size={24}
           color="#b59d42"
@@ -121,7 +121,7 @@ export default function AboutScreen() {
       {expandedFAQ === index && (
         <Text style={styles.faqAnswer}>{t(`abouts.${item.answer}`)}</Text>
       )}
-    </TouchableOpacity>
+    </Pressable>
   );
 
   return (
@@ -165,7 +165,7 @@ export default function AboutScreen() {
           </Text>
           <View style={styles.premiumFeaturesGrid}>
             <View style={styles.premiumFeatureItem}>
-              <MaterialCommunityIcons
+              <MCIcon
                 name="chart-line"
                 size={24}
                 color="#b59d42"
@@ -175,19 +175,19 @@ export default function AboutScreen() {
               </Text>
             </View>
             <View style={styles.premiumFeatureItem}>
-              <MaterialCommunityIcons name="trophy" size={24} color="#b59d42" />
+              <MCIcon name="trophy" size={24} color="#b59d42" />
               <Text style={styles.premiumFeatureText}>
                 {t("abouts.premium_badges")}
               </Text>
             </View>
             <View style={styles.premiumFeatureItem}>
-              <MaterialCommunityIcons name="music" size={24} color="#b59d42" />
+              <MCIcon name="music" size={24} color="#b59d42" />
               <Text style={styles.premiumFeatureText}>
                 {t("abouts.premium_audio")}
               </Text>
             </View>
             <View style={styles.premiumFeatureItem}>
-              <MaterialCommunityIcons
+              <MCIcon
                 name="palette"
                 size={24}
                 color="#b59d42"
@@ -208,31 +208,31 @@ export default function AboutScreen() {
         {/* Support Section */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>{t("abouts.support_title")}</Text>
-          <TouchableOpacity
+          <Pressable
             style={styles.button}
             onPress={() => handleEmailContact(t("abouts.contact_suggestion"))}
           >
-            <MaterialCommunityIcons
+            <MCIcon
               name="email-outline"
               size={20}
               color="#483C1C"
             />
             <Text style={styles.buttonText}>{t("abouts.send_suggestion")}</Text>
-          </TouchableOpacity>
+          </Pressable>
 
-          <TouchableOpacity
+          <Pressable
             style={[styles.button, styles.secondaryButton]}
             onPress={() => handleEmailContact(t("abouts.contact_bug"))}
           >
-            <MaterialCommunityIcons
+            <MCIcon
               name="bug-outline"
               size={20}
               color="#483C1C"
             />
             <Text style={styles.buttonText}>{t("abouts.report_bug")}</Text>
-          </TouchableOpacity>
+          </Pressable>
 
-          <TouchableOpacity
+          <Pressable
             style={[styles.button, styles.secondaryButton]}
             onPress={() =>
               Linking.openURL(
@@ -240,13 +240,13 @@ export default function AboutScreen() {
               )
             }
           >
-            <MaterialCommunityIcons
+            <MCIcon
               name="star-outline"
               size={20}
               color="#483C1C"
             />
             <Text style={styles.buttonText}>{t("abouts.rate_app")}</Text>
-          </TouchableOpacity>
+          </Pressable>
         </View>
 
         {/* Developer Section */}
@@ -277,13 +277,13 @@ export default function AboutScreen() {
           </Text>
           <View style={styles.advancedFeaturesList}>
             <View style={styles.advancedFeatureItem}>
-              <MaterialCommunityIcons name="heart" size={20} color="#b59d42" />
+              <MCIcon name="heart" size={20} color="#b59d42" />
               <Text style={styles.advancedFeatureText}>
                 {t("abouts.advanced_favorites")}
               </Text>
             </View>
             <View style={styles.advancedFeatureItem}>
-              <MaterialCommunityIcons
+              <MCIcon
                 name="calendar-week"
                 size={20}
                 color="#b59d42"
@@ -293,7 +293,7 @@ export default function AboutScreen() {
               </Text>
             </View>
             <View style={styles.advancedFeatureItem}>
-              <MaterialCommunityIcons
+              <MCIcon
                 name="weather-sunny"
                 size={20}
                 color="#b59d42"
@@ -303,7 +303,7 @@ export default function AboutScreen() {
               </Text>
             </View>
             <View style={styles.advancedFeatureItem}>
-              <MaterialCommunityIcons
+              <MCIcon
                 name="account-cog"
                 size={20}
                 color="#b59d42"
@@ -325,7 +325,7 @@ export default function AboutScreen() {
           </Text>
           <View style={styles.newFeaturesGrid}>
             <View style={styles.newFeatureItem}>
-              <MaterialCommunityIcons
+              <MCIcon
                 name="widgets"
                 size={24}
                 color="#b59d42"
@@ -335,13 +335,13 @@ export default function AboutScreen() {
               </Text>
             </View>
             <View style={styles.newFeatureItem}>
-              <MaterialCommunityIcons name="lock" size={24} color="#b59d42" />
+              <MCIcon name="lock" size={24} color="#b59d42" />
               <Text style={styles.newFeatureText}>
                 {t("abouts.new_lock_screen")}
               </Text>
             </View>
             <View style={styles.newFeatureItem}>
-              <MaterialCommunityIcons
+              <MCIcon
                 name="gesture"
                 size={24}
                 color="#b59d42"
@@ -351,7 +351,7 @@ export default function AboutScreen() {
               </Text>
             </View>
             <View style={styles.newFeatureItem}>
-              <MaterialCommunityIcons
+              <MCIcon
                 name="download"
                 size={24}
                 color="#b59d42"
@@ -361,13 +361,13 @@ export default function AboutScreen() {
               </Text>
             </View>
             <View style={styles.newFeatureItem}>
-              <MaterialCommunityIcons name="mosque" size={24} color="#b59d42" />
+              <MCIcon name="mosque" size={24} color="#b59d42" />
               <Text style={styles.newFeatureText}>
                 {t("abouts.new_mosques")}
               </Text>
             </View>
             <View style={styles.newFeatureItem}>
-              <MaterialCommunityIcons
+              <MCIcon
                 name="backup-restore"
                 size={24}
                 color="#b59d42"
@@ -396,21 +396,21 @@ export default function AboutScreen() {
         {/* Legal Section */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>{t("abouts.legal_title")}</Text>
-          <TouchableOpacity
+          <Pressable
             style={styles.legalButton}
             onPress={handlePrivacyPolicy}
           >
             <Text style={styles.legalButtonText}>
               {t("abouts.privacy_policy")}
             </Text>
-            <MaterialCommunityIcons
+            <MCIcon
               name="chevron-right"
               size={20}
               color="#b59d42"
             />
-          </TouchableOpacity>
+          </Pressable>
 
-          <TouchableOpacity
+          <Pressable
             style={styles.legalButton}
             onPress={() =>
               Linking.openURL("https://www.myadhanapp.com/public/terms-of-service.html")
@@ -419,26 +419,25 @@ export default function AboutScreen() {
             <Text style={styles.legalButtonText}>
               {t("abouts.terms_of_use")}
             </Text>
-            <MaterialCommunityIcons
+            <MCIcon
               name="chevron-right"
               size={20}
               color="#b59d42"
             />
-          </TouchableOpacity>
+          </Pressable>
         </View>
 
         {/* Version Info */}
-        <TouchableOpacity 
+        <Pressable 
           style={styles.versionContainer}
           onPress={() => {
             const newCount = debugTapCount + 1;
             setDebugTapCount(newCount);
             if (newCount >= 7) {
               setDebugTapCount(0);
-              router.push('/debugWidget' as any);
+              push('/debugWidget' as any);
             }
           }}
-          activeOpacity={0.7}
         >
           <Text style={styles.version}>
             {t("abouts.version")} {appVersion} ({t("abouts.build")}{" "}
@@ -450,7 +449,7 @@ export default function AboutScreen() {
           </Text>
           <Text style={styles.footer}>{t("abouts.footer_thanks")}</Text>
           <Text style={styles.dua}>{t("abouts.closing_dua")}</Text>
-        </TouchableOpacity>
+        </Pressable>
 
         <View style={{ height: 50 }} />
       </ScrollView>
@@ -515,10 +514,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#f8ecc2",
     borderRadius: 12,
     padding: 18,
-    shadowColor: "#b59d42",
-    shadowOpacity: 0.15,
-    shadowRadius: 4,
-    elevation: 2,
+    boxShadow: "0px 2px 4px rgba(181,157,66,0.15)",
   },
   sectionTitle: {
     fontSize: 20,

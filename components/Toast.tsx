@@ -4,10 +4,12 @@ import {
   Text,
   Animated,
   StyleSheet,
-  TouchableOpacity,
+  Pressable,
 } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { MCIcon } from "@/components/icons/AppVectorIcons";
 import { LinearGradient } from "expo-linear-gradient";
+
+import { Z_INDEX } from "../constants/zIndex";
 
 export interface ToastData {
   id: string;
@@ -117,7 +119,7 @@ const Toast: React.FC<ToastProps> = ({ toast, onHide }) => {
       ]}
       testID="toast-container"
     >
-      <TouchableOpacity activeOpacity={0.9} onPress={hideToast}>
+      <Pressable onPress={hideToast}>
         <LinearGradient
           colors={config.colors}
           style={styles.toast}
@@ -126,7 +128,7 @@ const Toast: React.FC<ToastProps> = ({ toast, onHide }) => {
           testID="toast-gradient"
         >
           <View style={styles.content} testID="toast-content">
-            <MaterialCommunityIcons
+            <MCIcon
               name={config.icon}
               size={24}
               color={config.iconColor}
@@ -141,7 +143,7 @@ const Toast: React.FC<ToastProps> = ({ toast, onHide }) => {
             </View>
           </View>
         </LinearGradient>
-      </TouchableOpacity>
+      </Pressable>
     </Animated.View>
   );
 };
@@ -153,7 +155,6 @@ const styles = StyleSheet.create({
     left: 16,
     right: 16,
     zIndex: 999999, // 🚀 CORRECTION : Encore plus élevé pour être sûr
-    elevation: 999999, // 🚀 CORRECTION : Pour Android
   },
   toast: {
     borderRadius: 12,
@@ -162,11 +163,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     minHeight: 56,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 8,
-    elevation: 12,
+    boxShadow: "0px 4px 8px rgba(0,0,0,0.3)",
   },
   content: {
     flexDirection: "row",

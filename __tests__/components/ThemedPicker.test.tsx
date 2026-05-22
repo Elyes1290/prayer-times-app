@@ -18,10 +18,6 @@ jest.mock("../../hooks/useThemeAssets", () => ({
   }),
 }));
 
-jest.mock("@expo/vector-icons", () => ({
-  MaterialCommunityIcons: "MaterialCommunityIcons",
-}));
-
 describe("ThemedPicker", () => {
   const mockItems = [
     { label: "Option 1", value: "option1" },

@@ -23,7 +23,7 @@ export interface CachedPrayerTimes {
   };
 }
 
-export interface CacheStats {
+interface CacheStats {
   totalEntries: number;
   memoryUsage: number;
   oldestEntry: string | null;
@@ -413,8 +413,9 @@ class PrayerTimesCacheService {
 
       // Calculer en parallèle (max 5 à la fois pour éviter la surcharge)
       const batchSize = 5;
-      for (let i = 0; i < dates.length; i += batchSize) {
-        const batch = dates.slice(i, i + batchSize);
+      const runBatch = async (startIndex: number): Promise<void> => {
+        if (startIndex >= dates.length) return;
+        const batch = dates.slice(startIndex, startIndex + batchSize);
 
         await Promise.all(
           batch.map(async (date) => {
@@ -446,11 +447,13 @@ class PrayerTimesCacheService {
           })
         );
 
-        // Petit délai entre les batches pour éviter la surcharge
-        if (i + batchSize < dates.length) {
+        if (startIndex + batchSize < dates.length) {
           await new Promise((resolve) => setTimeout(resolve, 100));
         }
-      }
+        await runBatch(startIndex + batchSize);
+      };
+
+      await runBatch(0);
 
       debugLog(`✅ Préchargement terminé - ${dates.length} jours`);
     } catch (error) {

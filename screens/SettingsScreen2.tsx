@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {
-  useContext,
+  use,
   useRef,
   useEffect,
   useCallback,
@@ -12,7 +12,7 @@ import {
   SectionList,
   View,
   Text,
-  TouchableOpacity,
+  Pressable,
   Alert,
   ScrollView,
   KeyboardAvoidingView,
@@ -37,7 +37,7 @@ import { useTranslation } from "react-i18next";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { usePremium } from "../contexts/PremiumContext";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { MCIcon } from "@/components/icons/AppVectorIcons";
 import Constants from "expo-constants";
 import { useToast } from "../contexts/ToastContext";
 
@@ -499,7 +499,7 @@ function SettingsSections(props: OptimizedSettingsSectionsProps) {
             <View style={styles.row}>
               <Text style={styles.label}>{t("status", "Statut")}</Text>
               <View style={styles.premiumStatusContainer}>
-                <MaterialCommunityIcons
+                <MCIcon
                   name={user?.isPremium ? "crown" : "account"}
                   size={16}
                   color={user?.isPremium ? "#FFD700" : "#666"}
@@ -532,25 +532,25 @@ function SettingsSections(props: OptimizedSettingsSectionsProps) {
                       t("user", "Utilisateur")}
                   </Text>
                 </View>
-                <TouchableOpacity
+                <Pressable
                   style={[styles.row, { marginTop: 8 }]}
                   onPress={() => setActiveSection("account_management")}
                 >
                   <Text style={styles.label}>
                     {t("manage_account", "Gérer le compte")}
                   </Text>
-                  <MaterialCommunityIcons
+                  <MCIcon
                     name="account-cog"
                     size={20}
                     color={isLightTheme ? "#333333" : "#F8FAFC"}
                   />
-                </TouchableOpacity>
+                </Pressable>
               </>
             )}
 
             {/* DEBUG: Bouton caché pour la prod
             {Platform.OS === "ios" && (
-              <TouchableOpacity
+              <Pressable
                 style={[
                   styles.row,
                   {
@@ -564,16 +564,16 @@ function SettingsSections(props: OptimizedSettingsSectionsProps) {
                 <Text style={[styles.label, { color: "orange" }]}>
                   🐛 Debug Notifications (iOS)
                 </Text>
-                <MaterialCommunityIcons
+                <MCIcon
                   name="bug-outline"
                   size={20}
                   color="orange"
                 />
-              </TouchableOpacity>
+              </Pressable>
             )}
             */}
 
-            <TouchableOpacity
+            <Pressable
               style={[styles.row, { marginTop: 20 }]}
               onPress={() => {
                 Alert.alert(
@@ -586,12 +586,12 @@ function SettingsSections(props: OptimizedSettingsSectionsProps) {
               }}
             >
               <Text style={styles.label}>{t("license", "Licence")}</Text>
-              <MaterialCommunityIcons
+              <MCIcon
                 name="chevron-right"
                 size={20}
                 color={isLightTheme ? "#333333" : "#F8FAFC"}
               />
-            </TouchableOpacity>
+            </Pressable>
           </View>
         </View>
       ),
@@ -599,7 +599,7 @@ function SettingsSections(props: OptimizedSettingsSectionsProps) {
         <View style={{ padding: 16 }}>
           <Text style={styles.sectionTitle}>{t("help", "Aide")}</Text>
           <View style={{ marginTop: 16, gap: 12 }}>
-            <TouchableOpacity
+            <Pressable
               style={styles.row}
               onPress={() => {
                 Alert.alert(
@@ -611,13 +611,13 @@ function SettingsSections(props: OptimizedSettingsSectionsProps) {
               <Text style={styles.label}>
                 {t("contact_support", "Contact Support")}
               </Text>
-              <MaterialCommunityIcons
+              <MCIcon
                 name="email"
                 size={20}
                 color={isLightTheme ? "#333333" : "#F8FAFC"}
               />
-            </TouchableOpacity>
-            <TouchableOpacity
+            </Pressable>
+            <Pressable
               style={styles.row}
               onPress={() => {
                 Alert.alert(
@@ -627,12 +627,12 @@ function SettingsSections(props: OptimizedSettingsSectionsProps) {
               }}
             >
               <Text style={styles.label}>{t("faq", "FAQ")}</Text>
-              <MaterialCommunityIcons
+              <MCIcon
                 name="help-circle"
                 size={20}
                 color={isLightTheme ? "#333333" : "#F8FAFC"}
               />
-            </TouchableOpacity>
+            </Pressable>
           </View>
         </View>
       ),
@@ -662,12 +662,12 @@ function SettingsSections(props: OptimizedSettingsSectionsProps) {
                 ?.title
             }
           </Text>
-          <TouchableOpacity
+          <Pressable
             style={styles.closeButton}
             onPress={closeActiveSection}
           >
-            <MaterialCommunityIcons name="close" size={24} color="#666" />
-          </TouchableOpacity>
+            <MCIcon name="close" size={24} color="#666" />
+          </Pressable>
         </View>
         <View style={styles.activeSectionContent}>
           {sectionContent[activeSection as keyof typeof sectionContent]}
@@ -706,13 +706,12 @@ function SettingsSections(props: OptimizedSettingsSectionsProps) {
 
       {props.hasPendingChanges && (
         <View style={styles.applyChangesContainer}>
-          <TouchableOpacity
+          <Pressable
             style={styles.applyChangesButton}
             onPress={props.applyAllChanges}
-            activeOpacity={0.8}
           >
             <View style={styles.applyChangesIconContainer}>
-              <MaterialCommunityIcons
+              <MCIcon
                 name="bell-ring"
                 size={26}
                 color="#FFFFFF"
@@ -729,12 +728,12 @@ function SettingsSections(props: OptimizedSettingsSectionsProps) {
                 {t("reprogram_notifications", "Notifications • Adhan • Dhikr")}
               </Text>
             </View>
-            <MaterialCommunityIcons
+            <MCIcon
               name="chevron-right"
               size={24}
               color="#FFFFFF"
             />
-          </TouchableOpacity>
+          </Pressable>
         </View>
       )}
     </ScrollView>
@@ -742,7 +741,7 @@ function SettingsSections(props: OptimizedSettingsSectionsProps) {
 }
 
 export default function SettingsScreenOptimized() {
-  const settings = useContext(SettingsContext);
+  const settings = use(SettingsContext);
   const { t, i18n } = useTranslation();
   const { user, activatePremium, forceLogout } = usePremium();
   const { showToast } = useToast();
@@ -1007,34 +1006,33 @@ export default function SettingsScreenOptimized() {
           if (downloadedContent) {
             const downloaded = JSON.parse(downloadedContent);
             const contentIds = Object.keys(downloaded);
-            for (const contentId of contentIds) {
-              const adhanData = downloaded[contentId];
-              const isAdhan =
-                contentId.startsWith("adhan_") ||
-                adhanData.type === "adhan" ||
-                (!contentId.includes("quran_") &&
-                  !contentId.startsWith("reciter_") &&
-                  !contentId.match(/^\d{3}_/));
-              if (!isAdhan) continue;
-
-              if (adhanData.downloadPath) {
+            const checks = await Promise.all(
+              contentIds.map(async (contentId) => {
+                const adhanData = downloaded[contentId];
+                const isAdhan =
+                  contentId.startsWith("adhan_") ||
+                  adhanData.type === "adhan" ||
+                  (!contentId.includes("quran_") &&
+                    !contentId.startsWith("reciter_") &&
+                    !contentId.match(/^\d{3}_/));
+                if (!isAdhan) return null;
+                if (!adhanData.downloadPath) return null;
                 const filePath = adhanData.downloadPath.replace("file://", "");
                 const fileExists = await RNFS.default.exists(filePath);
-                if (fileExists) {
-                  downloadedPremiumSounds.push(contentId as AdhanSoundKey);
-
-                  // FIX: S'assurer qu'on a toujours un titre propre
-                  if (adhanData.title) {
-                    premiumTitles[contentId] = adhanData.title;
-                  } else {
-                    // Génération fallback d'un titre propre si manquant
-                    premiumTitles[contentId] = contentId
-                      .replace(/^adhan_/, "")
-                      .replace(/[_-]/g, " ")
-                      .replace(/\b\w/g, (l) => l.toUpperCase());
-                  }
-                }
-              }
+                if (!fileExists) return null;
+                const title =
+                  adhanData.title ||
+                  contentId
+                    .replace(/^adhan_/, "")
+                    .replace(/[_-]/g, " ")
+                    .replace(/\b\w/g, (l) => l.toUpperCase());
+                return { contentId: contentId as AdhanSoundKey, title };
+              })
+            );
+            for (const row of checks) {
+              if (!row) continue;
+              downloadedPremiumSounds.push(row.contentId);
+              premiumTitles[row.contentId] = row.title;
             }
           }
         } catch (e) {

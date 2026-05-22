@@ -3,19 +3,6 @@ import { render, fireEvent } from "@testing-library/react-native";
 import { Text, View } from "react-native";
 import CollapsibleSection from "@/components/CollapsibleSection";
 
-// Mock MaterialCommunityIcons
-jest.mock("@expo/vector-icons/MaterialCommunityIcons", () => {
-  const { Text } = require("react-native");
-  return {
-    __esModule: true,
-    default: ({ name, size, color, style, ...props }: any) => (
-      <Text testID={`icon-${name}`} style={style} {...props}>
-        {name}
-      </Text>
-    ),
-  };
-});
-
 // Mock useThemeAssets
 jest.mock("@/hooks/useThemeAssets", () => ({
   useThemeAssets: jest.fn(() => ({

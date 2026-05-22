@@ -16,7 +16,7 @@ export interface DownloadInfo {
   title: string;
 }
 
-export interface DownloadStatus {
+interface DownloadStatus {
   contentId: string;
   status: number;
   progress: number;
@@ -25,7 +25,7 @@ export interface DownloadStatus {
 }
 
 // 🚀 NOUVEAU : Types pour les téléchargements actifs
-export interface ActiveDownloadInfo {
+interface ActiveDownloadInfo {
   contentId: string;
   fileName: string;
   title: string;
@@ -209,6 +209,6 @@ class NativeDownloadManager {
 }
 
 // Instance singleton
-export const nativeDownloadManager = new NativeDownloadManager();
+const nativeDownloadManager = new NativeDownloadManager();
 
 export default nativeDownloadManager;

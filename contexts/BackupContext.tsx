@@ -1,6 +1,6 @@
 import React, {
   createContext,
-  useContext,
+  use,
   useState,
   useEffect,
   ReactNode,
@@ -75,7 +75,7 @@ export const BackupProvider: React.FC<BackupProviderProps> = ({ children }) => {
   const { user } = usePremium();
   const { showToast } = useToast();
   const { t } = useTranslation();
-  const settingsContext = useContext(SettingsContext);
+  const settingsContext = use(SettingsContext);
 
   // États du backup
   const [isSignedIn, setIsSignedIn] = useState(false);
@@ -918,7 +918,7 @@ export const BackupProvider: React.FC<BackupProviderProps> = ({ children }) => {
 };
 
 export const useBackup = (): BackupContextType => {
-  const context = useContext(BackupContext);
+  const context = use(BackupContext);
   if (!context) {
     throw new Error("useBackup must be used within a BackupProvider");
   }

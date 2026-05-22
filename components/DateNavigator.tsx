@@ -1,13 +1,14 @@
 // components/DateNavigator.tsx
 import React from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import { MaterialIcons } from "@expo/vector-icons";
+import { StyleSheet, Text, View, Pressable } from "react-native";
+import { MIcon } from "@/components/icons/AppVectorIcons";
 import { useTranslation } from "react-i18next";
 import {
   useThemeColors,
   useOverlayTextColor,
   useCurrentTheme,
 } from "../hooks/useThemeColor";
+import { makeBoxShadow } from "../utils/shadowUtils";
 
 type Props = {
   date: Date;
@@ -82,11 +83,7 @@ export function DateNavigator({ date, onPrev, onNext, onReset }: Props) {
       paddingHorizontal: 14,
       paddingVertical: 7,
       marginLeft: 8,
-      shadowColor: isLightTheme ? colors.shadow : "#3faea6",
-      shadowOffset: { width: 0, height: 2 },
-      shadowOpacity: 0.3,
-      shadowRadius: 4,
-      elevation: 3,
+      boxShadow: makeBoxShadow(isLightTheme ? colors.shadow : "#3faea6", 0, 2, 4, 0.3),
     },
     todayText: {
       color: "#fff",
@@ -103,30 +100,30 @@ export function DateNavigator({ date, onPrev, onNext, onReset }: Props) {
 
   return (
     <View style={styles.nav} testID="date-navigator">
-      <TouchableOpacity
+      <Pressable
         onPress={onPrev}
         style={styles.arrowBtn}
         testID="prev-button"
       >
-        <MaterialIcons name="chevron-left" size={28} color={arrowColor} />
-      </TouchableOpacity>
+        <MIcon name="chevron-left" size={28} color={arrowColor} />
+      </Pressable>
       <Text style={styles.text} testID="date-text">
         {date.toLocaleDateString(getLocale())}
       </Text>
-      <TouchableOpacity
+      <Pressable
         onPress={onNext}
         style={styles.arrowBtn}
         testID="next-button"
       >
-        <MaterialIcons name="chevron-right" size={28} color={arrowColor} />
-      </TouchableOpacity>
-      <TouchableOpacity
+        <MIcon name="chevron-right" size={28} color={arrowColor} />
+      </Pressable>
+      <Pressable
         onPress={onReset}
         style={styles.todayBtn}
         testID="reset-button"
       >
         <Text style={styles.todayText}>{t("today")}</Text>
-      </TouchableOpacity>
+      </Pressable>
     </View>
   );
 }

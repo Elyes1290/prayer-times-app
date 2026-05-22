@@ -3,15 +3,15 @@ import {
   View,
   Text,
   StyleSheet,
-  TouchableOpacity,
+  Pressable,
   Animated,
-  Dimensions,
+  useWindowDimensions,
   Vibration,
   ImageBackground,
 } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { MCIcon } from "@/components/icons/AppVectorIcons";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import ThemedImageBackground from "../components/ThemedImageBackground";
 import { useTranslation } from "react-i18next";
@@ -20,10 +20,7 @@ import {
   useOverlayTextColor,
   useCurrentTheme,
 } from "../hooks/useThemeColor";
-
-const { width, height } = Dimensions.get("window");
-// Ajustement responsif du cercle selon la taille d'écran
-const CIRCLE_SIZE = Math.min(width * 0.65, height * 0.3, 250);
+import { makeBoxShadow } from "../utils/shadowUtils";
 
 const dhikrList = [
   "سُبْحَانَ اللَّهِ",
@@ -35,7 +32,9 @@ const dhikrList = [
 const getStyles = (
   colors: any,
   overlayTextColor: string,
-  currentTheme: "light" | "dark" | "morning" | "sunset"
+  currentTheme: "light" | "dark" | "morning" | "sunset",
+  circleSize: number,
+  screenWidth: number
 ) => {
   const isLightTheme = currentTheme === "light" || currentTheme === "morning";
   return StyleSheet.create({
@@ -55,7 +54,7 @@ const getStyles = (
       paddingTop: 40,
     },
     title: {
-      fontSize: Math.min(width * 0.08, 32),
+      fontSize: Math.min(screenWidth * 0.08, 32),
       fontWeight: "bold",
       marginBottom: 15,
       textAlign: "center",
@@ -75,7 +74,7 @@ const getStyles = (
       borderColor: isLightTheme ? colors.border : "rgba(255,215,0,0.3)",
     },
     arabicText: {
-      fontSize: Math.min(width * 0.07, 28),
+      fontSize: Math.min(screenWidth * 0.07, 28),
       color: colors.primary, // 🌅 Utilise la couleur du thème actif
       fontWeight: "bold",
       marginBottom: 8,
@@ -90,23 +89,19 @@ const getStyles = (
       textAlign: "center",
     },
     circleContainer: {
-      width: CIRCLE_SIZE,
-      height: CIRCLE_SIZE,
+      width: circleSize,
+      height: circleSize,
       justifyContent: "center",
       alignItems: "center",
     },
     circle: {
-      width: CIRCLE_SIZE,
-      height: CIRCLE_SIZE,
-      borderRadius: CIRCLE_SIZE / 2,
+      width: circleSize,
+      height: circleSize,
+      borderRadius: circleSize / 2,
       backgroundColor: isLightTheme ? colors.primary : colors.primary,
       justifyContent: "center",
       alignItems: "center",
-      elevation: 8,
-      shadowColor: isLightTheme ? colors.shadow : "#000",
-      shadowOffset: { width: 0, height: 4 },
-      shadowOpacity: 0.3,
-      shadowRadius: 8,
+      boxShadow: makeBoxShadow(isLightTheme ? colors.shadow : "#000", 0, 4, 8, 0.3),
       borderWidth: 3,
       borderColor: colors.primary, // 🌅 Utilise la couleur du thème actif
     },
@@ -124,11 +119,7 @@ const getStyles = (
       paddingVertical: 15,
       borderRadius: 25,
       backgroundColor: isLightTheme ? colors.accent : colors.notification,
-      elevation: 4,
-      shadowColor: isLightTheme ? colors.shadow : "#000",
-      shadowOffset: { width: 0, height: 2 },
-      shadowOpacity: 0.2,
-      shadowRadius: 4,
+      boxShadow: makeBoxShadow(isLightTheme ? colors.shadow : "#000", 0, 2, 4, 0.2),
     },
     resetText: {
       marginLeft: 8,
@@ -148,8 +139,10 @@ const TasbihScreen = () => {
   const themeColors = useThemeColors();
   const overlayTextColor = useOverlayTextColor();
   const currentTheme = useCurrentTheme();
+  const { width, height } = useWindowDimensions();
+  const circleSize = Math.min(width * 0.65, height * 0.3, 250);
 
-  const styles = getStyles(themeColors, overlayTextColor, currentTheme);
+  const styles = getStyles(themeColors, overlayTextColor, currentTheme, circleSize, width);
   const [count, setCount] = useState(0);
   const [scale] = useState(new Animated.Value(1));
   const rotation = useRef(new Animated.Value(0)).current;
@@ -237,26 +230,25 @@ const TasbihScreen = () => {
               },
             ]}
           >
-            <TouchableOpacity
+            <Pressable
               style={styles.circle}
               onPress={handleCount}
-              activeOpacity={0.8}
             >
               <Text
                 style={[
                   styles.countText,
-                  { fontSize: Math.min(CIRCLE_SIZE * 0.25, 72) },
+                  { fontSize: Math.min(circleSize * 0.25, 72) },
                 ]}
               >
                 {count}
               </Text>
-            </TouchableOpacity>
+            </Pressable>
           </Animated.View>
 
-          <TouchableOpacity style={styles.resetButton} onPress={resetCount}>
-            <MaterialCommunityIcons name="refresh" size={24} color="#FFFFFF" />
+          <Pressable style={styles.resetButton} onPress={resetCount}>
+            <MCIcon name="refresh" size={24} color="#FFFFFF" />
             <Text style={styles.resetText}>{t("tasbih.reset")}</Text>
-          </TouchableOpacity>
+          </Pressable>
         </View>
       </View>
     </ThemedImageBackground>

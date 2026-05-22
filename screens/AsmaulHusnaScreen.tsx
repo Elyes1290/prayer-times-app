@@ -5,16 +5,15 @@ import {
   StyleSheet,
   FlatList,
   TextInput,
-  TouchableOpacity,
+  Pressable,
   Animated,
-  Dimensions,
   ImageBackground,
   LayoutChangeEvent,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useTranslation } from "react-i18next";
 import { LinearGradient } from "expo-linear-gradient";
-import { Ionicons } from "@expo/vector-icons";
+import { IonIcon } from "@/components/icons/AppVectorIcons";
 import ThemedImageBackground from "../components/ThemedImageBackground";
 import FavoriteButton from "../components/FavoriteButton";
 import { AsmaulHusnaFavorite } from "../contexts/FavoritesContext";
@@ -36,7 +35,6 @@ interface Nom {
   citation?: string;
 }
 
-const { width } = Dimensions.get("window");
 
 function normalizeText(str: string) {
   return str
@@ -147,10 +145,9 @@ const AsmaulHusnaScreen = () => {
           colors={["rgba(255,255,255,0.1)", "rgba(255,255,255,0.05)"]}
           style={styles.cardGradient}
         >
-          <TouchableOpacity
+          <Pressable
             style={styles.cardHeader}
             onPress={() => toggleExpand(item.key)}
-            activeOpacity={0.7}
           >
             <View style={styles.cardTopRow}>
               <View style={styles.numberContainer}>
@@ -165,7 +162,7 @@ const AsmaulHusnaScreen = () => {
                   iconColorActive="#FFD700"
                   style={styles.favoriteButton}
                 />
-                <Ionicons
+                <IonIcon
                   name={isExpanded ? "chevron-up" : "chevron-down"}
                   size={24}
                   color="#fff"
@@ -182,7 +179,7 @@ const AsmaulHusnaScreen = () => {
                 <Text style={styles.french}>{item.french}</Text>
               </View>
             )}
-          </TouchableOpacity>
+          </Pressable>
 
           <Animated.View style={[styles.cardDetails, { maxHeight }]}>
             <View style={styles.contentContainer}>
@@ -276,7 +273,7 @@ const AsmaulHusnaScreen = () => {
       </View>
 
       <View style={styles.searchContainer}>
-        <Ionicons
+        <IonIcon
           name="search"
           size={20}
           color="#666"

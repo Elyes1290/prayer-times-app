@@ -2,23 +2,6 @@ import React from "react";
 import { render } from "@testing-library/react-native";
 import { IconSymbol } from "../../../components/ui/IconSymbol";
 
-// Mock expo-symbols
-jest.mock("expo-symbols", () => ({
-  SymbolView: "SymbolView",
-  SymbolWeight: {
-    Regular: "regular",
-    Medium: "medium",
-    Bold: "bold",
-  },
-}));
-
-// Mock @expo/vector-icons
-jest.mock("@expo/vector-icons", () => ({
-  Ionicons: "Ionicons",
-  MaterialIcons: "MaterialIcons",
-  FontAwesome: "FontAwesome",
-}));
-
 describe("IconSymbol", () => {
   describe("Rendu des icônes", () => {
     it("devrait rendre une icône house.fill par défaut", () => {

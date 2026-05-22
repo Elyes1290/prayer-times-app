@@ -1,14 +1,14 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, use } from "react";
 import {
   View,
   Text,
-  TouchableOpacity,
+  Pressable,
   TextInput,
   ActivityIndicator,
   Linking,
   Platform,
 } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { MCIcon } from "@/components/icons/AppVectorIcons";
 import { useRouter } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { SettingsContext } from "../../contexts/SettingsContext";
@@ -43,8 +43,8 @@ export default function AccountManagementSection({
   setActiveSection,
   navigation,
 }: AccountManagementSectionProps) {
-  const router = useRouter();
-  const settings = useContext(SettingsContext);
+  const { push } = useRouter();
+  const settings = use(SettingsContext);
   const { getErrorTitle, getErrorMessage } = useErrorHandler();
   const isLightTheme = currentTheme === "light" || currentTheme === "morning";
 
@@ -351,7 +351,7 @@ export default function AccountManagementSection({
       {/* Section Profil */}
       <View style={[styles.accountSection, { marginTop: 20 }]}>
         <View style={styles.accountSectionHeader}>
-          <MaterialCommunityIcons
+          <MCIcon
             name="account-edit"
             size={24}
             color="#4ECDC4"
@@ -359,17 +359,17 @@ export default function AccountManagementSection({
           <Text style={styles.accountSectionTitle}>
             {t("personal_information", "Informations personnelles")}
           </Text>
-          <TouchableOpacity
+          <Pressable
             style={styles.editButton}
             onPress={() => setIsEditing(!isEditing)}
             disabled={isLoading || isLoadingUserData}
           >
-            <MaterialCommunityIcons
+            <MCIcon
               name={isEditing ? "close" : "pencil"}
               size={20}
               color={isEditing ? "#FF6B6B" : "#4ECDC4"}
             />
-          </TouchableOpacity>
+          </Pressable>
         </View>
 
         <View style={styles.accountFormContainer}>
@@ -428,7 +428,7 @@ export default function AccountManagementSection({
 
               {isEditing && (
                 <View style={styles.actionButtons}>
-                  <TouchableOpacity
+                  <Pressable
                     style={styles.cancelButton}
                     onPress={() => {
                       setIsEditing(false);
@@ -440,9 +440,9 @@ export default function AccountManagementSection({
                     <Text style={styles.cancelButtonText}>
                       {t("cancel", "Annuler")}
                     </Text>
-                  </TouchableOpacity>
+                  </Pressable>
 
-                  <TouchableOpacity
+                  <Pressable
                     style={[
                       styles.saveButton,
                       isLoading && styles.saveButtonDisabled,
@@ -454,7 +454,7 @@ export default function AccountManagementSection({
                       <ActivityIndicator size="small" color="#FFFFFF" />
                     ) : (
                       <>
-                        <MaterialCommunityIcons
+                        <MCIcon
                           name="check"
                           size={20}
                           color="#FFFFFF"
@@ -464,7 +464,7 @@ export default function AccountManagementSection({
                         </Text>
                       </>
                     )}
-                  </TouchableOpacity>
+                  </Pressable>
                 </View>
               )}
             </>
@@ -475,7 +475,7 @@ export default function AccountManagementSection({
       {/* Section Abonnement */}
       <View style={[styles.accountSection, { marginTop: 16 }]}>
         <View style={styles.accountSectionHeader}>
-          <MaterialCommunityIcons name="crown" size={24} color="#FFD700" />
+          <MCIcon name="crown" size={24} color="#FFD700" />
           <Text style={styles.accountSectionTitle}>
             {t("premium_subscription", "Abonnement Premium")}
           </Text>
@@ -488,7 +488,7 @@ export default function AccountManagementSection({
             </Text>
             <View
               style={[
-                styles.premiumBadge,
+                styles.premiumBadgeRow,
                 {
                   backgroundColor: user?.isPremium
                     ? "rgba(255, 215, 0, 0.1)"
@@ -496,7 +496,7 @@ export default function AccountManagementSection({
                 },
               ]}
             >
-              <MaterialCommunityIcons
+              <MCIcon
                 name={user?.isPremium ? "crown" : "account"}
                 size={16}
                 color={user?.isPremium ? "#FFD700" : "#6B7280"}
@@ -584,7 +584,7 @@ export default function AccountManagementSection({
       {/* Section Sécurité */}
       <View style={[styles.accountSection, { marginTop: 16 }]}>
         <View style={styles.accountSectionHeader}>
-          <MaterialCommunityIcons
+          <MCIcon
             name="shield-account"
             size={24}
             color="#6C5CE7"
@@ -594,22 +594,22 @@ export default function AccountManagementSection({
           </Text>
         </View>
 
-        <TouchableOpacity
+        <Pressable
           style={styles.securityOption}
           onPress={() => setShowChangePasswordModal(true)}
         >
-          <MaterialCommunityIcons name="key" size={20} color="#6C5CE7" />
+          <MCIcon name="key" size={20} color="#6C5CE7" />
           <Text style={styles.securityOptionText}>
             {t("change_password", "Changer le mot de passe")}
           </Text>
-          <MaterialCommunityIcons
+          <MCIcon
             name="chevron-right"
             size={20}
             color={isLightTheme ? "#94A3B8" : "#64748B"}
           />
-        </TouchableOpacity>
+        </Pressable>
 
-        <TouchableOpacity
+        <Pressable
           style={styles.securityOption}
           onPress={() => {
             showToast({
@@ -619,7 +619,7 @@ export default function AccountManagementSection({
             });
           }}
         >
-          <MaterialCommunityIcons
+          <MCIcon
             name="two-factor-authentication"
             size={20}
             color="#6C5CE7"
@@ -627,12 +627,12 @@ export default function AccountManagementSection({
           <Text style={styles.securityOptionText}>
             {t("two_factor_auth", "Authentification à deux facteurs")}
           </Text>
-          <MaterialCommunityIcons
+          <MCIcon
             name="chevron-right"
             size={20}
             color={isLightTheme ? "#94A3B8" : "#64748B"}
           />
-        </TouchableOpacity>
+        </Pressable>
       </View>
 
       {/* Section Actions */}
@@ -642,7 +642,7 @@ export default function AccountManagementSection({
         {userData?.premium_status === 1 && 
          userData?.subscription_platform !== 'vip' && 
          (userData?.subscription_platform === 'stripe' || userData?.subscription_platform === 'apple' || userData?.stripe_customer_id) && (
-          <TouchableOpacity
+          <Pressable
             style={[
               styles.logoutButton,
               { backgroundColor: "#3B82F6", marginBottom: 12 },
@@ -653,34 +653,34 @@ export default function AccountManagementSection({
             {isLoading ? (
               <ActivityIndicator size="small" color="#FFFFFF" />
             ) : (
-              <MaterialCommunityIcons name="crown" size={20} color="#FFFFFF" />
+              <MCIcon name="crown" size={20} color="#FFFFFF" />
             )}
             <Text style={[styles.logoutButtonText, { marginLeft: 8 }]}>
               {t("manage_subscription", "Gérer mon abonnement")}
             </Text>
-          </TouchableOpacity>
+          </Pressable>
         )}
 
         {/* 🔒 SÉCURITÉ : Bouton déconnexion uniquement pour utilisateurs connectés avec email */}
         {userEmail && (
-          <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
-            <MaterialCommunityIcons name="logout" size={20} color="#FF6B6B" />
+          <Pressable style={styles.logoutButton} onPress={handleLogout}>
+            <MCIcon name="logout" size={20} color="#FF6B6B" />
             <Text style={styles.logoutButtonText}>
               {t("logout", "Se déconnecter")}
             </Text>
-          </TouchableOpacity>
+          </Pressable>
         )}
 
         {/* 🔒 SÉCURITÉ : Bouton suppression uniquement pour utilisateurs connectés avec email */}
         {userEmail && (
-          <TouchableOpacity
+          <Pressable
             style={styles.deleteAccountButton}
             onPress={() => {
               // Navigation vers la page de suppression de données via le router Expo
-              router.push("/data-deletion");
+              push("/data-deletion");
             }}
           >
-            <MaterialCommunityIcons
+            <MCIcon
               name="delete-forever"
               size={20}
               color="#EF4444"
@@ -688,7 +688,7 @@ export default function AccountManagementSection({
             <Text style={styles.deleteAccountButtonText}>
               {t("delete_account", "Supprimer le compte")}
             </Text>
-          </TouchableOpacity>
+          </Pressable>
         )}
       </View>
 

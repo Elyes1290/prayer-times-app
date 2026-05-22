@@ -3,7 +3,7 @@ import {
   View,
   Text,
   StyleSheet,
-  TouchableOpacity,
+  Pressable,
   RefreshControl,
   FlatList,
   Alert,
@@ -11,7 +11,7 @@ import {
   ActivityIndicator,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { Ionicons } from "@expo/vector-icons";
+import { IonIcon } from "@/components/icons/AppVectorIcons";
 import { useFocusEffect, useRouter } from "expo-router";
 
 import ThemedImageBackground from "../components/ThemedImageBackground";
@@ -171,7 +171,7 @@ export default function ProphetStoriesScreen() {
   const currentTheme = useCurrentTheme();
   const { user: premiumUser } = usePremium();
   const { t } = useTranslation();
-  const router = useRouter();
+  const { push, replace } = useRouter();
 
   // 🚀 NOUVEAU : Hook pour les favoris avec limitations
   const { favorites, addFavorite, removeFavorite, canAddFavorite } =
@@ -356,7 +356,7 @@ export default function ProphetStoriesScreen() {
           { text: t("cancel"), style: "cancel" },
           {
             text: t("upgrade"),
-            onPress: () => router.push("/premium-payment"),
+            onPress: () => push("/premium-payment"),
           },
         ],
       );
@@ -365,7 +365,7 @@ export default function ProphetStoriesScreen() {
 
     // Stocker l'ID de l'histoire temporairement pour la navigation
     await AsyncStorage.setItem("current_story_id", story.id);
-    router.replace("/story-reader" as any);
+    replace("/story-reader" as any);
   };
 
   const toggleFavorite = async (storyId: string) => {
@@ -407,7 +407,7 @@ export default function ProphetStoriesScreen() {
               { text: "Compris", style: "cancel" },
               {
                 text: "Passer au Premium",
-                onPress: () => router.push("/premium-payment"),
+                onPress: () => push("/premium-payment"),
               },
             ],
           );
@@ -599,7 +599,7 @@ export default function ProphetStoriesScreen() {
         {/* Titre principal avec icône */}
         <View style={styles.headerHero}>
           <View style={[styles.headerIconWrap, { backgroundColor: colors.primary }]}>
-            <Ionicons name="book" size={28} color={colors.textOnPrimary} />
+            <IonIcon name="book" size={28} color={colors.textOnPrimary} />
           </View>
           <View style={styles.headerTextContainer}>
             <Text style={[styles.headerTitle, { color: colors.text }]}>
@@ -635,7 +635,7 @@ export default function ProphetStoriesScreen() {
                 { backgroundColor: colors.cardBG, borderColor: colors.border },
               ]}
             >
-              <Ionicons name="library" size={18} color={colors.primary} />
+              <IonIcon name="library" size={18} color={colors.primary} />
               <Text style={[styles.statPillNumber, { color: colors.text }]}>
                 {parseInt(stats.total_stories?.toString() || "0")}
               </Text>
@@ -649,7 +649,7 @@ export default function ProphetStoriesScreen() {
                 { backgroundColor: colors.cardBG, borderColor: colors.border },
               ]}
             >
-              <Ionicons name="gift" size={18} color="#4CAF50" />
+              <IonIcon name="gift" size={18} color="#4CAF50" />
               <Text style={[styles.statPillNumber, { color: colors.text }]}>
                 {parseInt(stats.free_stories?.toString() || "0")}
               </Text>
@@ -663,7 +663,7 @@ export default function ProphetStoriesScreen() {
                 { backgroundColor: colors.cardBG, borderColor: colors.border },
               ]}
             >
-              <Ionicons name="star" size={18} color="#FFD700" />
+              <IonIcon name="star" size={18} color="#FFD700" />
               <Text style={[styles.statPillNumber, { color: colors.text }]}>
                 {parseInt(stats.premium_stories?.toString() || "0")}
               </Text>
@@ -677,7 +677,7 @@ export default function ProphetStoriesScreen() {
                 { backgroundColor: colors.cardBG, borderColor: colors.border },
               ]}
             >
-              <Ionicons name="time" size={18} color={colors.primary} />
+              <IonIcon name="time" size={18} color={colors.primary} />
               <Text style={[styles.statPillNumber, { color: colors.text }]}>
                 {Math.round(
                   parseFloat(stats.avg_reading_time?.toString() || "0"),
@@ -707,11 +707,11 @@ export default function ProphetStoriesScreen() {
         />
         <View style={styles.loadingContainer}>
           <View style={[styles.loadingIconWrap, { backgroundColor: colors.primary }]}>
-            <Ionicons name="book" size={40} color={colors.textOnPrimary} />
+            <IonIcon name="book" size={40} color={colors.textOnPrimary} />
           </View>
           <ActivityIndicator size="large" color={colors.primary} style={{ marginTop: 16 }} />
           <Text style={[styles.loadingText, { color: colors.text }]}>
-            Chargement des histoires...
+            Chargement des histoires…
           </Text>
         </View>
       </ThemedImageBackground>
@@ -733,7 +733,7 @@ export default function ProphetStoriesScreen() {
         {renderHeader()}
         <View style={styles.emptyContainer}>
           <View style={[styles.emptyIconWrap, { backgroundColor: colors.surfaceVariant }]}>
-            <Ionicons
+            <IonIcon
               name="cloud-offline-outline"
               size={56}
               color={colors.textSecondary}
@@ -776,7 +776,7 @@ export default function ProphetStoriesScreen() {
       >
         <View style={styles.filterRow}>
           <View style={styles.filterLeft}>
-            <Ionicons
+            <IonIcon
               name={networkStatus.isConnected ? "library-outline" : "cloud-download-outline"}
               size={20}
               color={colors.primary}
@@ -788,12 +788,11 @@ export default function ProphetStoriesScreen() {
             </Text>
           </View>
           {networkStatus.isConnected && (
-            <TouchableOpacity
+            <Pressable
               onPress={onRefresh}
               style={[styles.refreshButton, { backgroundColor: colors.primary }]}
-              activeOpacity={0.7}
             >
-              <Ionicons name="refresh" size={18} color={colors.textOnPrimary} />
+              <IonIcon name="refresh" size={18} color={colors.textOnPrimary} />
               <Text
                 style={[
                   styles.refreshButtonText,
@@ -802,7 +801,7 @@ export default function ProphetStoriesScreen() {
               >
                 {t("refresh")}
               </Text>
-            </TouchableOpacity>
+            </Pressable>
           )}
         </View>
       </View>
@@ -811,7 +810,7 @@ export default function ProphetStoriesScreen() {
       <FlatList
         data={stories || []}
         renderItem={renderStoryCard}
-        keyExtractor={(item) => item?.id || Math.random().toString()}
+        keyExtractor={(item, index) => item?.id || String(index)}
         refreshControl={
           <RefreshControl
             refreshing={refreshing}
@@ -833,7 +832,7 @@ export default function ProphetStoriesScreen() {
           !loading ? (
             <View style={styles.emptyListContainer}>
               <View style={[styles.emptyListIconWrap, { backgroundColor: colors.surfaceVariant }]}>
-                <Ionicons
+                <IonIcon
                   name="book-outline"
                   size={40}
                   color={colors.textTertiary}

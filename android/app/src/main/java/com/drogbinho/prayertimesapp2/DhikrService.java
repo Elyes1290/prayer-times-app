@@ -119,7 +119,7 @@ public class DhikrService extends Service {
                 notificationDebugLog("DhikrService",
                         "⚠️ Déjà notifié récemment pour " + type + " - " + prayerLabel + " (il y a " +
                                 ((now - lastDone) / 60000) + " minutes), on ignore !");
-                stopSelf();
+                dismissStagingForegroundAndStop();
                 return START_NOT_STICKY;
             }
 
@@ -200,6 +200,27 @@ public class DhikrService extends Service {
         }, 2000);
 
         return START_NOT_STICKY;
+    }
+
+    /** Retire la notif foreground temporaire puis arrête le service (chemins early-exit). */
+    private void dismissStagingForegroundAndStop() {
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                stopForeground(Service.STOP_FOREGROUND_REMOVE);
+            } else {
+                stopForeground(true);
+            }
+        } catch (Exception e) {
+            Log.e("DhikrService", "dismissStagingForeground: " + e.getMessage());
+        }
+        try {
+            NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+            if (nm != null) {
+                nm.cancel(NOTIFICATION_ID);
+            }
+        } catch (Exception ignored) {
+        }
+        stopSelf();
     }
 
     @Override

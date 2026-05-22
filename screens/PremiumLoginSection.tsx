@@ -1,9 +1,10 @@
+import { Z_INDEX } from "../constants/zIndex";
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import {
   View,
   Text,
   TextInput,
-  TouchableOpacity,
+  Pressable,
   ActivityIndicator,
   Alert,
   StyleSheet,
@@ -12,7 +13,7 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { MCIcon } from "@/components/icons/AppVectorIcons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import apiClient from "../utils/apiClient";
 import { IapService } from "../utils/iapService";
@@ -212,6 +213,9 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
   useEffect(() => {
     if (hasCheckedUser) return;
 
+    let isMounted = true;
+    let notifyTimer: ReturnType<typeof setTimeout> | null = null;
+
     const checkExistingUser = async () => {
       try {
         // 🚀 NOUVEAU : Mode professionnel - vérifier si connexion explicite existe
@@ -229,19 +233,21 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
             userData = null;
           }
           if (!userData) {
-            setHasCheckedUser(true);
+            if (isMounted) setHasCheckedUser(true);
             return;
           }
           console.log(
             "🔍 [DEBUG] Mode professionnel - connexion explicite détectée, chargement des données"
           );
-          setIsConnected(true);
-          setUserData(userData);
+          if (isMounted) {
+            setIsConnected(true);
+            setUserData(userData);
+          }
 
           // Notifier le parent de manière asynchrone
-          if (onLoginSuccess) {
-            setTimeout(() => {
-              onLoginSuccess(userData);
+          if (onLoginSuccess && isMounted) {
+            notifyTimer = setTimeout(() => {
+              if (isMounted) onLoginSuccess(userData);
             }, 100);
           }
         } else {
@@ -250,14 +256,18 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
           );
         }
 
-        setHasCheckedUser(true);
+        if (isMounted) setHasCheckedUser(true);
       } catch (error) {
         console.error("Erreur vérification utilisateur existant:", error);
-        setHasCheckedUser(true);
+        if (isMounted) setHasCheckedUser(true);
       }
     };
 
     checkExistingUser();
+    return () => {
+      isMounted = false;
+      if (notifyTimer !== null) clearTimeout(notifyTimer);
+    };
   }, [hasCheckedUser, onLoginSuccess]);
 
   // 🔄 NOUVEAU : Listener pour détecter les changements de connexion en temps réel
@@ -742,7 +752,7 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
     return (
       <View style={[localStyles.container, { minHeight: 300 }]}>
         <View style={localStyles.connectedHeader}>
-          <MaterialCommunityIcons
+          <MCIcon
             name="account-check"
             size={24}
             color="#4CAF50"
@@ -766,15 +776,15 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
           </Text>
         </View>
 
-        <TouchableOpacity
+        <Pressable
           style={[localStyles.logoutButton, styles?.logoutButton]}
           onPress={handleLogout}
         >
-          <MaterialCommunityIcons name="logout" size={20} color="#FF6B6B" />
+          <MCIcon name="logout" size={20} color="#FF6B6B" />
           <Text style={localStyles.logoutButtonText}>Se déconnecter</Text>
-        </TouchableOpacity>
+        </Pressable>
 
-        <TouchableOpacity
+        <Pressable
           style={[localStyles.manageAccountButton, styles?.manageAccountButton]}
           onPress={() => {
             // 🚀 TEST : D'abord essayer un simple Alert
@@ -807,7 +817,7 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
             );
           }}
         >
-          <MaterialCommunityIcons
+          <MCIcon
             name="account-cog"
             size={20}
             color="#4CAF50"
@@ -815,7 +825,7 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
           <Text style={localStyles.manageAccountButtonText}>
             Gérer le compte
           </Text>
-        </TouchableOpacity>
+        </Pressable>
       </View>
     );
   }
@@ -826,7 +836,7 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
     return (
       <View style={localStyles.container}>
         <View style={localStyles.ctaWrapper}>
-          <TouchableOpacity
+          <Pressable
             style={localStyles.sectionCtaButton}
             onPress={() => onOpenPremiumModal && onOpenPremiumModal()}
             disabled={isLoading}
@@ -835,13 +845,13 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
               <ActivityIndicator size="small" color="#FFF" />
             ) : (
               <>
-                <MaterialCommunityIcons name="account" size={20} color="#FFF" />
+                <MCIcon name="account" size={20} color="#FFF" />
                 <Text style={localStyles.sectionCtaButtonText}>
                   Ouvrir la connexion / inscription
                 </Text>
               </>
             )}
-          </TouchableOpacity>
+          </Pressable>
         </View>
       </View>
     );
@@ -853,7 +863,7 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
     <>
       {/* Toggle connexion/inscription */}
         <View style={localStyles.toggleContainer}>
-          <TouchableOpacity
+          <Pressable
             style={[
               localStyles.toggleButton,
               isLogin && localStyles.toggleButtonActive,
@@ -874,8 +884,8 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
                 {t("premium_ui.login_tab", "Connexion")}
               </Text>
             </View>
-          </TouchableOpacity>
-          <TouchableOpacity
+          </Pressable>
+          <Pressable
             style={[
               localStyles.toggleButton,
               !isLogin && localStyles.toggleButtonActive,
@@ -921,13 +931,13 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
                 {t("premium_ui.signup_tab", "Créer un compte Premium")}
               </Text>
             </View>
-          </TouchableOpacity>
+          </Pressable>
         </View>
 
         {/* Encart d'information (visible uniquement en mode inscription) */}
         {!isLogin && (
           <View style={localStyles.signupInfoCard}>
-            <MaterialCommunityIcons name="information" size={18} color="#0B5" />
+            <MCIcon name="information" size={18} color="#0B5" />
             <View style={{ flex: 1 }}>
               <Text style={localStyles.signupInfoText}>
                 {t(
@@ -953,7 +963,7 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
               getInputStyle(firstName, firstNameValid),
             ]}
           >
-            <MaterialCommunityIcons
+            <MCIcon
               name="account"
               size={20}
               color={getIconColor(firstName, firstNameValid)}
@@ -973,7 +983,7 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
               }}
               editable={!isLoading}
             />
-            <TouchableOpacity
+            <Pressable
               style={localStyles.infoIcon}
               onPress={() =>
                 Alert.alert(
@@ -990,19 +1000,19 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
                 )
               }
             >
-              <MaterialCommunityIcons
+              <MCIcon
                 name={firstName ? "account-check" : "information-outline"}
                 size={16}
                 color={firstName ? "#4CAF50" : "#666"}
               />
-            </TouchableOpacity>
+            </Pressable>
           </View>
         )}
 
         <View
           style={[localStyles.inputContainer, getInputStyle(email, emailValid)]}
         >
-          <MaterialCommunityIcons
+          <MCIcon
             name="email"
             size={20}
             color={getIconColor(email, emailValid)}
@@ -1020,7 +1030,7 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
             autoCapitalize="none"
             editable={!isLoading}
           />
-          <TouchableOpacity
+          <Pressable
             style={localStyles.infoIcon}
             onPress={() =>
               Alert.alert(
@@ -1035,12 +1045,12 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
               )
             }
           >
-            <MaterialCommunityIcons
+            <MCIcon
               name="information-outline"
               size={16}
               color="#666"
             />
-          </TouchableOpacity>
+          </Pressable>
         </View>
 
         {/* 🚀 NOUVEAU : Champ mot de passe (après l'email) */}
@@ -1050,7 +1060,7 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
             getInputStyle(password, isPasswordVisuallyValid(password)),
           ]}
         >
-          <MaterialCommunityIcons
+          <MCIcon
             name="lock"
             size={20}
             color={getIconColor(password, isPasswordVisuallyValid(password))}
@@ -1078,17 +1088,17 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
             editable={!isLoading}
             returnKeyType="done"
           />
-          <TouchableOpacity
+          <Pressable
             style={localStyles.eyeIcon}
             onPress={() => setShowPassword(!showPassword)}
           >
-            <MaterialCommunityIcons
+            <MCIcon
               name={showPassword ? "eye" : "eye-off"}
               size={20}
               color={getIconColor(password, isPasswordVisuallyValid(password))}
             />
-          </TouchableOpacity>
-          <TouchableOpacity
+          </Pressable>
+          <Pressable
             style={localStyles.infoIcon}
             onPress={() =>
               Alert.alert(
@@ -1103,12 +1113,12 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
               )
             }
           >
-            <MaterialCommunityIcons
+            <MCIcon
               name="information-outline"
               size={16}
               color="#666"
             />
-          </TouchableOpacity>
+          </Pressable>
         </View>
 
         {/* 🚀 NOUVEAU : Indicateurs de validation du mot de passe (seulement en mode inscription) */}
@@ -1122,7 +1132,7 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
               return (
                 <>
                   <View style={localStyles.validationItem}>
-                    <MaterialCommunityIcons
+                    <MCIcon
                       name={
                         validation.minLength ? "check-circle" : "circle-outline"
                       }
@@ -1139,7 +1149,7 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
                     </Text>
                   </View>
                   <View style={localStyles.validationItem}>
-                    <MaterialCommunityIcons
+                    <MCIcon
                       name={
                         validation.maxLength ? "check-circle" : "circle-outline"
                       }
@@ -1156,7 +1166,7 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
                     </Text>
                   </View>
                   <View style={localStyles.validationItem}>
-                    <MaterialCommunityIcons
+                    <MCIcon
                       name={
                         validation.hasLowercase
                           ? "check-circle"
@@ -1176,7 +1186,7 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
                     </Text>
                   </View>
                   <View style={localStyles.validationItem}>
-                    <MaterialCommunityIcons
+                    <MCIcon
                       name={
                         validation.hasUppercase
                           ? "check-circle"
@@ -1196,7 +1206,7 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
                     </Text>
                   </View>
                   <View style={localStyles.validationItem}>
-                    <MaterialCommunityIcons
+                    <MCIcon
                       name={
                         validation.hasNumbers
                           ? "check-circle"
@@ -1216,7 +1226,7 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
                     </Text>
                   </View>
                   <View style={localStyles.validationItem}>
-                    <MaterialCommunityIcons
+                    <MCIcon
                       name={
                         validation.hasSpecialChars
                           ? "check-circle"
@@ -1242,7 +1252,7 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
         )}
 
         {/* Bouton principal */}
-        <TouchableOpacity
+        <Pressable
           style={[
             localStyles.authButton,
             isLoading && localStyles.authButtonDisabled,
@@ -1270,7 +1280,7 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
             <ActivityIndicator size="small" color="#FFF" />
           ) : (
             <>
-              <MaterialCommunityIcons
+              <MCIcon
                 name={isLogin ? "login" : "account-plus"}
                 size={20}
                 color="#FFF"
@@ -1282,13 +1292,13 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
               </Text>
             </>
           )}
-        </TouchableOpacity>
+        </Pressable>
 
         {/* 🚀 SUPPRIMÉ : Bouton Mode Test Premium supprimé car il embrouille la logique */}
 
         {/* Informations */}
         <View style={localStyles.infoContainer}>
-          <MaterialCommunityIcons name="information" size={16} color="#666" />
+          <MCIcon name="information" size={16} color="#666" />
           <Text style={localStyles.infoText}>
             {isLogin
               ? t("auth_modal.info_text_login")
@@ -1307,7 +1317,7 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
               },
             ]}
           >
-            <TouchableOpacity activeOpacity={0.9} onPress={hideLocalToast}>
+            <Pressable onPress={hideLocalToast}>
               <LinearGradient
                 colors={
                   localToast.type === "success"
@@ -1321,7 +1331,7 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
                 end={{ x: 1, y: 1 }}
               >
                 <View style={localStyles.toastContent}>
-                  <MaterialCommunityIcons
+                  <MCIcon
                     name={
                       localToast.type === "success"
                         ? "check-circle"
@@ -1345,7 +1355,7 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
                   </View>
                 </View>
               </LinearGradient>
-            </TouchableOpacity>
+            </Pressable>
           </Animated.View>
         )}
 
@@ -1519,11 +1529,7 @@ const localStyles = StyleSheet.create({
     paddingHorizontal: 28,
     borderRadius: 24,
     gap: 8,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 6 },
-    shadowOpacity: 0.25,
-    shadowRadius: 12,
-    elevation: 8,
+    boxShadow: "0px 6px 12px rgba(0,0,0,0.25)",
     minWidth: 260,
   },
   sectionCtaButtonText: {
@@ -1656,8 +1662,7 @@ const localStyles = StyleSheet.create({
     top: 0,
     left: 0,
     right: 0,
-    zIndex: 999999,
-    elevation: 999999,
+    zIndex: Z_INDEX.toast,
     pointerEvents: "box-none",
   },
   toast: {
@@ -1667,11 +1672,7 @@ const localStyles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     minHeight: 56,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 8,
-    elevation: 12,
+    boxShadow: "0px 4px 8px rgba(0,0,0,0.3)",
     margin: 16,
   },
   toastContent: {
@@ -1711,12 +1712,8 @@ const localStyles = StyleSheet.create({
     width: "100%",
     maxWidth: 450,
     maxHeight: "92%",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 0.5,
-    shadowRadius: 16,
-    elevation: 25, // 🚀 AUGMENTÉ pour être au-dessus de tout
-    zIndex: 9999, // 🚀 AJOUTÉ pour forcer l'affichage au-dessus
+    boxShadow: "0px 8px 16px rgba(0,0,0,0.5)",
+    zIndex: Z_INDEX.floatingButton,
   },
   accountModalHeader: {
     flexDirection: "row",

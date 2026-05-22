@@ -1,7 +1,7 @@
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, Pressable } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { MCIcon } from "@/components/icons/AppVectorIcons";
 import { useRouter } from "expo-router";
 import { useTranslation } from "react-i18next";
 
@@ -27,7 +27,7 @@ const PremiumPromotion: React.FC<PremiumPromotionProps> = ({
   const { t } = useTranslation();
   const colors = useThemeColors();
   const currentTheme = useCurrentTheme();
-  const router = useRouter();
+  const { push } = useRouter();
   const { user } = usePremium();
 
   // Ne pas afficher si l'utilisateur est déjà premium
@@ -38,7 +38,7 @@ const PremiumPromotion: React.FC<PremiumPromotionProps> = ({
   const styles = getStyles(colors, currentTheme, variant);
 
   const handleUpgrade = () => {
-    router.push("/premium-payment");
+    push("/premium-payment");
   };
 
   const getDefaultContent = () => {
@@ -64,12 +64,12 @@ const PremiumPromotion: React.FC<PremiumPromotionProps> = ({
 
   if (variant === "banner") {
     return (
-      <TouchableOpacity style={styles.bannerContainer} onPress={handleUpgrade}>
+      <Pressable style={styles.bannerContainer} onPress={handleUpgrade}>
         <LinearGradient
           colors={[colors.primary, colors.accent]}
           style={styles.bannerGradient}
         >
-          <MaterialCommunityIcons
+          <MCIcon
             name="crown"
             size={24}
             color={colors.secondary}
@@ -78,13 +78,13 @@ const PremiumPromotion: React.FC<PremiumPromotionProps> = ({
             <Text style={styles.bannerTitle}>{content.title}</Text>
             <Text style={styles.bannerMessage}>{content.message}</Text>
           </View>
-          <MaterialCommunityIcons
+          <MCIcon
             name="chevron-right"
             size={24}
             color={colors.secondary}
           />
         </LinearGradient>
-      </TouchableOpacity>
+      </Pressable>
     );
   }
 
@@ -96,7 +96,7 @@ const PremiumPromotion: React.FC<PremiumPromotionProps> = ({
           style={styles.fullGradient}
         >
           <View style={styles.fullHeader}>
-            <MaterialCommunityIcons
+            <MCIcon
               name="crown"
               size={32}
               color={colors.secondary}
@@ -132,9 +132,9 @@ const PremiumPromotion: React.FC<PremiumPromotionProps> = ({
             />
           </View>
 
-          <TouchableOpacity style={styles.fullButton} onPress={handleUpgrade}>
+          <Pressable style={styles.fullButton} onPress={handleUpgrade}>
             <Text style={styles.fullButtonText}>{content.cta}</Text>
-          </TouchableOpacity>
+          </Pressable>
         </LinearGradient>
       </View>
     );
@@ -142,24 +142,24 @@ const PremiumPromotion: React.FC<PremiumPromotionProps> = ({
 
   // Variant compact (par défaut)
   return (
-    <TouchableOpacity style={styles.compactContainer} onPress={handleUpgrade}>
+    <Pressable style={styles.compactContainer} onPress={handleUpgrade}>
       <LinearGradient
         colors={[colors.primary, colors.accent]}
         style={styles.compactGradient}
       >
-        <MaterialCommunityIcons
+        <MCIcon
           name="crown"
           size={20}
           color={colors.secondary}
         />
         <Text style={styles.compactText}>{content.title}</Text>
-        <MaterialCommunityIcons
+        <MCIcon
           name="chevron-right"
           size={16}
           color={colors.secondary}
         />
       </LinearGradient>
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 
@@ -170,7 +170,7 @@ const FeatureItem: React.FC<{
   colors: any;
 }> = ({ icon, text, styles, colors }) => (
   <View style={styles.featureItem}>
-    <MaterialCommunityIcons
+    <MCIcon
       name={icon as any}
       size={16}
       color={colors.success}
@@ -217,11 +217,7 @@ const getStyles = (
       margin: 16,
       borderRadius: 16,
       overflow: "hidden",
-      elevation: 4,
-      shadowColor: "#000",
-      shadowOffset: { width: 0, height: 2 },
-      shadowOpacity: 0.1,
-      shadowRadius: 4,
+      boxShadow: "0px 2px 4px rgba(0,0,0,0.1)",
     },
     fullGradient: {
       padding: 24,

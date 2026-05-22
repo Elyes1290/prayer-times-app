@@ -3,14 +3,14 @@ import {
   View,
   Text,
   TextInput,
-  TouchableOpacity,
+  Pressable,
   Modal,
   ActivityIndicator,
   Alert,
   KeyboardAvoidingView,
   Platform,
 } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { MCIcon } from "@/components/icons/AppVectorIcons";
 import { useSettings } from "../../contexts/SettingsContext";
 // import { usePremium } from "../../contexts/PremiumContext";
 import { useToast } from "../../contexts/ToastContext";
@@ -254,11 +254,7 @@ export default function ChangePasswordModal({
       margin: 20,
       width: "90%" as any,
       maxWidth: 400,
-      shadowColor: "#000",
-      shadowOffset: { width: 0, height: 2 },
-      shadowOpacity: 0.25,
-      shadowRadius: 3.84,
-      elevation: 5,
+      boxShadow: "0px 2px 4px rgba(0,0,0,0.25)",
     },
     modalHeader: {
       flexDirection: "row" as const,
@@ -386,17 +382,17 @@ export default function ChangePasswordModal({
             <Text style={styles.modalTitle}>
               {t("password.change_password", "Changer le mot de passe")}
             </Text>
-            <TouchableOpacity
+            <Pressable
               style={styles.closeButton}
               onPress={handleClose}
               disabled={isLoading}
             >
-                <MaterialCommunityIcons
+                <MCIcon
                   name="close"
                   size={24}
                   color={isLightTheme ? "#6B7280" : "#9CA3AF"}
                 />
-            </TouchableOpacity>
+            </Pressable>
           </View>
 
           {/* Mot de passe actuel */}
@@ -405,7 +401,7 @@ export default function ChangePasswordModal({
               {t("password.current_password", "Mot de passe actuel")}
             </Text>
             <View style={styles.inputWrapper}>
-              <MaterialCommunityIcons
+              <MCIcon
                 name="lock"
                 size={20}
                 color={isLightTheme ? "#6B7280" : "#9CA3AF"}
@@ -425,16 +421,16 @@ export default function ChangePasswordModal({
                 returnKeyType="next"
                 onSubmitEditing={() => newPasswordRef.current?.focus()}
               />
-              <TouchableOpacity
+              <Pressable
                 style={styles.eyeIcon}
                 onPress={() => setShowCurrentPassword(!showCurrentPassword)}
               >
-                <MaterialCommunityIcons
+                <MCIcon
                   name={showCurrentPassword ? "eye" : "eye-off"}
                   size={20}
                   color={isLightTheme ? "#6B7280" : "#9CA3AF"}
                 />
-              </TouchableOpacity>
+              </Pressable>
             </View>
           </View>
 
@@ -444,7 +440,7 @@ export default function ChangePasswordModal({
               {t("password.new_password", "Nouveau mot de passe")}
             </Text>
             <View style={styles.inputWrapper}>
-              <MaterialCommunityIcons
+              <MCIcon
                 name="lock-plus"
                 size={20}
                 color={isLightTheme ? "#6B7280" : "#9CA3AF"}
@@ -464,16 +460,16 @@ export default function ChangePasswordModal({
                 returnKeyType="next"
                 onSubmitEditing={() => confirmPasswordRef.current?.focus()}
               />
-              <TouchableOpacity
+              <Pressable
                 style={styles.eyeIcon}
                 onPress={() => setShowNewPassword(!showNewPassword)}
               >
-                <MaterialCommunityIcons
+                <MCIcon
                   name={showNewPassword ? "eye" : "eye-off"}
                   size={20}
                   color={isLightTheme ? "#6B7280" : "#9CA3AF"}
                 />
-              </TouchableOpacity>
+              </Pressable>
             </View>
             {/* Indicateur de force du mot de passe */}
             {newPassword.length > 0 && (
@@ -510,7 +506,7 @@ export default function ChangePasswordModal({
             {newPassword.length > 0 && (
               <View style={styles.requirements}>
                 <View style={styles.requirement}>
-                  <MaterialCommunityIcons
+                  <MCIcon
                     name={
                       newPasswordValidation.minLength
                         ? "check-circle"
@@ -540,7 +536,7 @@ export default function ChangePasswordModal({
                   </Text>
                 </View>
                 <View style={styles.requirement}>
-                  <MaterialCommunityIcons
+                  <MCIcon
                     name={
                       newPasswordValidation.hasUpperCase
                         ? "check-circle"
@@ -567,7 +563,7 @@ export default function ChangePasswordModal({
                   </Text>
                 </View>
                 <View style={styles.requirement}>
-                  <MaterialCommunityIcons
+                  <MCIcon
                     name={
                       newPasswordValidation.hasNumbers
                         ? "check-circle"
@@ -594,7 +590,7 @@ export default function ChangePasswordModal({
                   </Text>
                 </View>
                 <View style={styles.requirement}>
-                  <MaterialCommunityIcons
+                  <MCIcon
                     name={
                       newPasswordValidation.hasSpecialChar
                         ? "check-circle"
@@ -635,7 +631,7 @@ export default function ChangePasswordModal({
               {t("password.confirm_password", "Confirmer le mot de passe")}
             </Text>
             <View style={styles.inputWrapper}>
-              <MaterialCommunityIcons
+              <MCIcon
                 name="lock-check"
                 size={20}
                 color={
@@ -663,16 +659,16 @@ export default function ChangePasswordModal({
                 returnKeyType="done"
                 onSubmitEditing={handleChangePassword}
               />
-              <TouchableOpacity
+              <Pressable
                 style={styles.eyeIcon}
                 onPress={() => setShowConfirmPassword(!showConfirmPassword)}
               >
-                <MaterialCommunityIcons
+                <MCIcon
                   name={showConfirmPassword ? "eye" : "eye-off"}
                   size={20}
                   color={isLightTheme ? "#6B7280" : "#9CA3AF"}
                 />
-              </TouchableOpacity>
+              </Pressable>
             </View>
             {confirmPassword.length > 0 && !confirmPasswordValidation && (
               <Text style={{ color: "#EF4444", fontSize: 12, marginTop: 4 }}>
@@ -686,7 +682,7 @@ export default function ChangePasswordModal({
 
           {/* Boutons */}
           <View style={styles.buttonContainer}>
-            <TouchableOpacity
+            <Pressable
               style={styles.cancelButton}
               onPress={handleClose}
               disabled={isLoading}
@@ -694,8 +690,8 @@ export default function ChangePasswordModal({
               <Text style={styles.cancelButtonText}>
                 {t("password.cancel", "Annuler")}
               </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
+            </Pressable>
+            <Pressable
               style={styles.saveButton}
               onPress={handleChangePassword}
               disabled={isLoading}
@@ -707,7 +703,7 @@ export default function ChangePasswordModal({
                   {t("password.change", "Changer")}
                 </Text>
               )}
-            </TouchableOpacity>
+            </Pressable>
           </View>
         </View>
       </KeyboardAvoidingView>

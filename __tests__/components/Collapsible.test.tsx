@@ -3,19 +3,6 @@ import { render, fireEvent } from "@testing-library/react-native";
 import { Text, View } from "react-native";
 import { Collapsible } from "@/components/Collapsible";
 
-// Mock Ionicons
-jest.mock("@expo/vector-icons/Ionicons", () => {
-  const { Text } = require("react-native");
-  return {
-    __esModule: true,
-    default: ({ name, size, color, testID, ...props }: any) => (
-      <Text testID={testID} {...props}>
-        {name}
-      </Text>
-    ),
-  };
-});
-
 // Mock useThemeColor
 jest.mock("@/hooks/useThemeColor", () => ({
   useThemeColor: jest.fn(() => "#000000"),

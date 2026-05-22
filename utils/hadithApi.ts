@@ -26,43 +26,39 @@ export async function getRandomHadith(): Promise<Hadith | null> {
   books = books.filter((b: any) => !unavailableBooks.includes(b.bookSlug));
   if (!books.length) return null;
 
-  // Essayer jusqu'à 10 fois de trouver un hadith valide
-  for (let attempt = 0; attempt < 10; attempt++) {
-    const randomBook = books[Math.floor(Math.random() * books.length)];
-    if (!randomBook.bookSlug) continue;
+  const tryFetch = async (attempt: number): Promise<Hadith | null> => {
+    if (attempt >= 10) return null;
 
-    // 3. Récupérer les chapitres de ce livre
+    const randomBook = books[Math.floor(Math.random() * books.length)];
+    if (!randomBook.bookSlug) return tryFetch(attempt + 1);
+
     const chaptersRes = await fetch(
       `https://hadithapi.com/api/${randomBook.bookSlug}/chapters?apiKey=${API_KEY}`
     );
     const chaptersJson = await chaptersRes.json();
     const chapters = chaptersJson.chapters || [];
-    if (!chapters.length) continue;
+    if (!chapters.length) return tryFetch(attempt + 1);
 
-    // 4. Sélectionner un chapitre aléatoire
     const randomChapter = chapters[Math.floor(Math.random() * chapters.length)];
-    if (!randomChapter.chapterNumber) continue;
+    if (!randomChapter.chapterNumber) return tryFetch(attempt + 1);
 
-    // 5. Récupérer les hadiths de ce chapitre
     const hadithsRes = await fetch(
       `https://hadithapi.com/api/hadiths?apiKey=${API_KEY}&book=${randomBook.bookSlug}&chapter=${randomChapter.chapterNumber}&page=1&limit=20`
     );
     const hadithsJson = await hadithsRes.json();
     const hadiths = (hadithsJson.hadiths && hadithsJson.hadiths.data) || [];
-    if (!hadiths.length) continue;
+    if (!hadiths.length) return tryFetch(attempt + 1);
 
-    // 6. Sélectionner un hadith aléatoire qui a un texte non vide et assez long
     const validHadiths = hadiths.filter((h: any) => {
       const ar = h.hadithArabic && h.hadithArabic.trim().length > 20;
       const en = h.hadithEnglish && h.hadithEnglish.trim().length > 20;
       return ar || en;
     });
-    if (!validHadiths.length) continue;
+    if (!validHadiths.length) return tryFetch(attempt + 1);
     const randomHadith =
       validHadiths[Math.floor(Math.random() * validHadiths.length)];
-    if (!randomHadith) continue;
+    if (!randomHadith) return tryFetch(attempt + 1);
 
-    // 7. Retourner le hadith avec infos utiles
     return {
       id: randomHadith.id,
       hadithNumber: randomHadith.hadithNumber,
@@ -71,7 +67,7 @@ export async function getRandomHadith(): Promise<Hadith | null> {
       bookSlug: randomBook.bookSlug,
       chapterNumber: randomChapter.chapterNumber,
     };
-  }
-  // Si aucun hadith trouvé après plusieurs essais
-  return null;
+  };
+
+  return tryFetch(0);
 }

@@ -6,7 +6,6 @@ import {
   waitFor,
 } from "@testing-library/react-native";
 import { useTranslation } from "react-i18next";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 import WeeklyPrayerView from "../../components/WeeklyPrayerView";
 import {
   useThemeColors,
@@ -20,10 +19,6 @@ jest.mock("react-i18next", () => ({
     t: (key: string, defaultValue?: string) => defaultValue || key,
     i18n: { language: "fr" },
   }),
-}));
-
-jest.mock("@expo/vector-icons", () => ({
-  MaterialCommunityIcons: "MaterialCommunityIcons",
 }));
 
 jest.mock("../../hooks/useThemeColor", () => ({

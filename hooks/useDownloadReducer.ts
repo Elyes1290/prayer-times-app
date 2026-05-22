@@ -1,14 +1,14 @@
 import { useReducer, useCallback } from "react";
 
 // Types pour l'état de téléchargement
-export interface DownloadState {
+interface DownloadState {
   downloadingAdhans: Set<string>;
   downloadProgress: { [key: string]: number };
   downloadControllers: { [key: string]: () => void };
 }
 
 // Actions du reducer
-export type DownloadAction =
+type DownloadAction =
   | { type: "ADD_DOWNLOADING_ADHAN"; payload: string }
   | { type: "REMOVE_DOWNLOADING_ADHAN"; payload: string }
   | { type: "SET_DOWNLOADING_ADHANS"; payload: Set<string> }

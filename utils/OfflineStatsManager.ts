@@ -8,7 +8,7 @@ import { isOfflineMode } from "./networkUtils";
  * Gère le cache local, la queue de synchronisation et la synchronisation automatique
  */
 
-export interface OfflineStatsAction {
+interface OfflineStatsAction {
   id: string;
   action:
     | "prayer_completed"
@@ -25,7 +25,7 @@ export interface OfflineStatsAction {
   user_id: number;
 }
 
-export interface OfflineStatsData {
+interface OfflineStatsData {
   stats: any; // UserStats format
   challenges: any[]; // Challenges/achievements
   badges: any[]; // User badges
@@ -34,7 +34,7 @@ export interface OfflineStatsData {
   pending_actions: OfflineStatsAction[];
 }
 
-export interface SyncResult {
+interface SyncResult {
   success: boolean;
   synced_actions: number;
   failed_actions: OfflineStatsAction[];
@@ -408,12 +408,15 @@ class OfflineStatsManager {
       const failedActions: OfflineStatsAction[] = [];
       let syncedCount = 0;
 
-      for (const action of offlineData.pending_actions) {
-        const syncResult = await this.syncSingleAction(
-          action.action,
-          action.action_data
-        );
+      const results = await Promise.all(
+        offlineData.pending_actions.map((action) =>
+          this.syncSingleAction(action.action, action.action_data).then(
+            (syncResult) => ({ action, syncResult })
+          )
+        )
+      );
 
+      for (const { action, syncResult } of results) {
         if (syncResult.success) {
           syncedCount++;
         } else {

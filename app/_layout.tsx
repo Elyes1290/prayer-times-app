@@ -1,7 +1,6 @@
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { MCIcon } from "@/components/icons/AppVectorIcons";
 import * as NavigationBar from "expo-navigation-bar";
 import * as Notifications from "expo-notifications";
-import { Tabs } from "expo-router";
 import React, { useEffect } from "react";
 import {
   Platform,
@@ -11,7 +10,9 @@ import {
   NativeEventEmitter,
   AppState,
   StatusBar,
+  BackHandler,
 } from "react-native";
+import { Tabs, useRouter } from "expo-router";
 import { SettingsProvider } from "../contexts/SettingsContext";
 import { FavoritesProvider, useFavorites } from "../contexts/FavoritesContext";
 import { PremiumProvider, usePremium } from "../contexts/PremiumContext";
@@ -34,7 +35,13 @@ import {
 import { AdhanStopButton } from "../components/AdhanStopButton";
 import { useThemeColors } from "../hooks/useThemeColor"; // 🎨 Pour la TabBar adaptative
 
-// 🚨 NOUVEAU : Protection contre les reloads Expo en mode développement
+// Supprime les logs de debug en production pour ne pas exposer d'infos internes
+if (!__DEV__) {
+  console.log = () => {};
+  console.debug = () => {};
+  console.info = () => {};
+}
+
 let isAbonnementProcessActive = false;
 let reloadProtectionTimeout: ReturnType<typeof setTimeout> | null = null;
 
@@ -63,7 +70,7 @@ const deactivateReloadProtection = () => {
   console.log("🛡️ Protection contre les reloads Expo désactivée");
 };
 
-// Vérifier périodiquement si la protection doit être activée
+// Vérifier périodiquement si la protection doit être activée (5s suffit — AsyncStorage non temps-réel)
 setInterval(async () => {
   try {
     const pendingRegistration = await AsyncStorage.getItem(
@@ -77,7 +84,7 @@ setInterval(async () => {
   } catch (error) {
     console.error("❌ Erreur vérification protection reload:", error);
   }
-}, 1000);
+}, 5000);
 
 // 🚨 NOUVEAU : Intercepter les reloads Expo en mode développement
 if (__DEV__) {
@@ -144,7 +151,7 @@ const TabBarIcon = ({ icon, color, size, focused }: TabBarIconProps) => {
         transform: [{ scale }],
       }}
     >
-      <MaterialCommunityIcons
+      <MCIcon
         name={icon}
         size={size}
         color={color}  // 🎨 Utilise directement la couleur passée en prop (déjà thématique)
@@ -168,12 +175,32 @@ const TabBarIcon = ({ icon, color, size, focused }: TabBarIconProps) => {
 // 🎵 Composant interne qui utilise le contexte AdhanAudio
 function TabLayoutContent() {
   const insets = useSafeAreaInsets();
+  const router = useRouter();
   const { forceLogout } = usePremium();
   const { forceReset } = useFavorites();
   const [forceRefresh, setForceRefresh] = React.useState(0);
   
   // 🎨 NOUVEAU : Utiliser les couleurs thématiques pour la TabBar
   const themeColors = useThemeColors();
+
+  // Bouton retour Samsung/Android : page précédente, pas toujours l'accueil
+  // react-doctor-disable-next-line react-doctor/effect-needs-cleanup
+  useEffect(() => {
+    const subscription =
+      Platform.OS === "android"
+        ? BackHandler.addEventListener("hardwareBackPress", () => {
+            if (router.canGoBack()) {
+              router.back();
+              return true;
+            }
+            return false;
+          })
+        : null;
+
+    return () => {
+      subscription?.remove();
+    };
+  }, [router]);
 
   useEffect(() => {
     if (Platform.OS === "android") {
@@ -202,16 +229,19 @@ function TabLayoutContent() {
   }, [adhanState?.isPlaying]);
 
   // 🎯 Gestion du cas où l'app est ouverte par clic sur notification (y compris cold start)
+  // react-doctor-disable-next-line react-doctor/effect-needs-cleanup
   useEffect(() => {
-    if (Platform.OS !== "ios") return; // Seulement pour iOS
+    let notificationSubscription: { remove: () => void } | null = null;
+    let nativeEventSubscription: { remove: () => void } | null = null;
+    let appStateListener: { remove: () => void } | null = null;
 
+    if (Platform.OS === "ios") {
     console.log("═══════════════════════════════════════════");
     console.log("🎵 [_layout] Listener de notifications ACTIVÉ");
     console.log("═══════════════════════════════════════════");
 
     // 🎵 NOUVEAU : Écouter l'événement natif quand une notification d'Adhan arrive en foreground
     // Cela permet de lancer le MP3 complet automatiquement car iOS arrête le .caf quand la notification disparaît
-    let nativeEventSubscription: any = null;
     try {
       const { AdhanAudioPlayer } = NativeModules;
       if (AdhanAudioPlayer) {
@@ -350,9 +380,10 @@ function TabLayoutContent() {
     };
 
     // Listener clic temps réel
-    const subscription = Notifications.addNotificationResponseReceivedListener(
-      handleNotificationResponse
-    );
+    notificationSubscription =
+      Notifications.addNotificationResponseReceivedListener(
+        handleNotificationResponse,
+      );
 
     // 🔁 Rattraper le cas cold start / app en arrière-plan : traiter la dernière réponse si elle existe
     Notifications.getLastNotificationResponseAsync()
@@ -373,9 +404,7 @@ function TabLayoutContent() {
       });
 
     // 🔁 Re-check quand l'app revient en foreground (cas app en arrière-plan)
-    const appStateListener = AppState.addEventListener(
-      "change",
-      (nextState) => {
+    appStateListener = AppState.addEventListener("change", (nextState) => {
         const wasBackground = appState.current.match(/background/);
         appState.current = nextState;
         if (wasBackground && nextState === "active") {
@@ -397,14 +426,13 @@ function TabLayoutContent() {
         }
       }
     );
+    }
 
     return () => {
       console.log("🔴 [_layout] Listener de notifications DÉSACTIVÉ");
-      subscription.remove();
-      if (nativeEventSubscription) {
-        nativeEventSubscription.remove();
-      }
-      appStateListener.remove();
+      notificationSubscription?.remove();
+      nativeEventSubscription?.remove();
+      appStateListener?.remove();
     };
   }, [playAdhan]);
 
@@ -704,6 +732,7 @@ function TabLayoutContent() {
         backgroundColor="transparent"
       />
       <Tabs
+        backBehavior="history"
         screenOptions={{
           headerShown: false,
           tabBarStyle: {
@@ -715,14 +744,7 @@ function TabLayoutContent() {
             borderRadius: 35,
             backgroundColor: themeColors.tabBar || "rgba(25, 29, 43, 0.95)",  // 🎨 Thématique
             borderTopWidth: 0,
-            elevation: 8,
-            shadowColor: "#000",
-            shadowOffset: {
-              width: 0,
-              height: 4,
-            },
-            shadowOpacity: 0.5,
-            shadowRadius: 12,
+            boxShadow: "0px 4px 12px rgba(0,0,0,0.5)",
             paddingBottom: 0,
             borderWidth: 1,
             borderColor: themeColors.border || "rgba(255, 215, 0, 0.2)",  // 🎨 Thématique

@@ -290,7 +290,7 @@ describe("QiblaScreen", () => {
       render(<QiblaScreen />);
 
       // Pendant l'initialisation, on devrait voir le message d'initialisation
-      expect(screen.getByText("Initialisation de la boussole...")).toBeTruthy();
+      expect(screen.getByText("Initialisation de la boussole…")).toBeTruthy();
     });
   });
 

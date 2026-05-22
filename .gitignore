@@ -26,6 +26,11 @@ npm-debug.*
 yarn-debug.*
 yarn-error.*
 
+# Diagnostics CLI (générés localement)
+.react-doctor-verbose.log
+.react-doctor*.json
+.expo-doctor-verbose.log
+
 # macOS
 .DS_Store
 *.pem

@@ -36,10 +36,6 @@ jest.mock("react-i18next", () => ({
   }),
 }));
 
-jest.mock("@expo/vector-icons", () => ({
-  MaterialCommunityIcons: "MaterialCommunityIcons",
-}));
-
 jest.mock("../../../utils/apiClient", () => ({
   __esModule: true,
   default: {

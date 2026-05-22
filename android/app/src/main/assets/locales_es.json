@@ -209,5 +209,8 @@
   "widget_feature_navigation": "✨ Navegar entre suras",
   "widget_feature_audio_controls": "✨ Controles de audio completos",
   "widget_feature_offline": "✨ Modo sin conexión",
-  "subscribe_premium": "Suscribirse Premium"
+  "subscribe_premium": "Suscribirse Premium",
+  "adhan_completed_title": "✅ Adhan completado",
+  "adhan_completed_body": "La llamada a la oración ha sido completada",
+  "dismiss": "Cerrar"
 }

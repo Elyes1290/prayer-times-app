@@ -4,12 +4,11 @@ import {
   Text,
   StyleSheet,
   FlatList,
-  TouchableOpacity,
+  Pressable,
   Alert,
-  Dimensions,
   Share,
 } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { MCIcon } from "@/components/icons/AppVectorIcons";
 import { LinearGradient } from "expo-linear-gradient";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useTranslation } from "react-i18next";
@@ -26,14 +25,13 @@ import {
 import { useThemeColors } from "../hooks/useThemeAssets";
 import { useOverlayTextColor, useCurrentTheme } from "../hooks/useThemeColor";
 
-const { width } = Dimensions.get("window");
 
 // Types de filtres
 type FilterType = "all" | FavoriteType;
 
 const FavoritesScreen: React.FC = () => {
   const { t } = useTranslation();
-  const router = useRouter();
+  const { push, back } = useRouter();
   const insets = useSafeAreaInsets();
   const colors = useThemeColors();
   const overlayTextColor = useOverlayTextColor();
@@ -56,17 +54,17 @@ const FavoritesScreen: React.FC = () => {
         // 📦 STOCKER L'ID dans AsyncStorage comme le fait ProphetStoriesScreen
         await AsyncStorage.setItem("current_story_id", storyId);
         // 📖 Naviguer vers la page de lecture
-        router.push("/story-reader" as any);
+        push("/story-reader" as any);
       } catch (error) {
         console.error("Erreur lors de la navigation vers l'histoire:", error);
         // Fallback: navigation directe avec paramètres si AsyncStorage échoue
-        router.push({
+        push({
           pathname: "/story-reader",
           params: { storyId },
         });
       }
     },
-    [router]
+    [push]
   );
 
   // Configuration des filtres
@@ -214,7 +212,7 @@ const FavoritesScreen: React.FC = () => {
         {/* Header de la carte */}
         <View style={styles.cardHeader}>
           <View style={styles.cardHeaderLeft}>
-            <MaterialCommunityIcons
+            <MCIcon
               name={getIconForType(item.type) as any}
               size={20}
               color={colors.islamicGold} // 🌅 Utilise la couleur du thème actif
@@ -223,27 +221,27 @@ const FavoritesScreen: React.FC = () => {
           </View>
 
           <View style={styles.cardActions}>
-            <TouchableOpacity
+            <Pressable
               style={styles.actionButton}
               onPress={() => handleShare(item)}
             >
-              <MaterialCommunityIcons
+              <MCIcon
                 name="share-variant"
                 size={20}
                 color={isLightTheme ? colors.text : "#fff"}
               />
-            </TouchableOpacity>
+            </Pressable>
 
-            <TouchableOpacity
+            <Pressable
               style={styles.actionButton}
               onPress={() => handleRemoveFavorite(item)}
             >
-              <MaterialCommunityIcons
+              <MCIcon
                 name="delete-outline"
                 size={20}
                 color="#ff6b6b"
               />
-            </TouchableOpacity>
+            </Pressable>
           </View>
         </View>
 
@@ -259,7 +257,7 @@ const FavoritesScreen: React.FC = () => {
         {/* Note personnelle si elle existe */}
         {item.note && (
           <View style={styles.noteContainer}>
-            <MaterialCommunityIcons
+            <MCIcon
               name="note-text"
               size={16}
               color={colors.islamicGold} // 🌅 Utilise la couleur du thème actif
@@ -332,10 +330,9 @@ const FavoritesScreen: React.FC = () => {
         const prophetStory = item as ProphetStoryFavorite;
         return (
           <>
-            <TouchableOpacity
+            <Pressable
               onPress={() => handleProphetStoryPress(prophetStory.storyId)}
               style={styles.prophetStoryContainer}
-              activeOpacity={0.7}
             >
               <Text style={styles.prophetStoryTitle}>{prophetStory.title}</Text>
               {prophetStory.titleArabic && (
@@ -365,7 +362,7 @@ const FavoritesScreen: React.FC = () => {
               <Text style={styles.prophetStoryAction}>
                 📖 Appuyer pour lire l'histoire complète
               </Text>
-            </TouchableOpacity>
+            </Pressable>
           </>
         );
 
@@ -377,7 +374,7 @@ const FavoritesScreen: React.FC = () => {
   // État vide
   const renderEmptyState = () => (
     <View style={styles.emptyContainer}>
-      <MaterialCommunityIcons
+      <MCIcon
         name="heart-outline"
         size={80}
         color="rgba(255, 255, 255, 0.3)"
@@ -410,29 +407,29 @@ const FavoritesScreen: React.FC = () => {
       {/* Header */}
       <View style={styles.header}>
         <View style={styles.headerLeft}>
-          <TouchableOpacity
+          <Pressable
             style={styles.backButton}
-            onPress={() => router.back()}
+            onPress={() => back()}
           >
-            <MaterialCommunityIcons
+            <MCIcon
               name="arrow-left"
               size={24}
               color={overlayTextColor}
             />
-          </TouchableOpacity>
+          </Pressable>
           <Text style={styles.title}>
             {t("favorites_screen.title") || "Mes Favoris"}
           </Text>
         </View>
 
         {favorites.length > 0 && (
-          <TouchableOpacity style={styles.clearButton} onPress={handleClearAll}>
-            <MaterialCommunityIcons
+          <Pressable style={styles.clearButton} onPress={handleClearAll}>
+            <MCIcon
               name="delete-sweep"
               size={24}
               color="#ff6b6b"
             />
-          </TouchableOpacity>
+          </Pressable>
         )}
       </View>
 
@@ -449,14 +446,14 @@ const FavoritesScreen: React.FC = () => {
           windowSize={5}
           removeClippedSubviews={false}
           renderItem={({ item }) => (
-            <TouchableOpacity
+            <Pressable
               style={[
                 styles.filterButton,
                 selectedFilter === item.key && styles.filterButtonActive,
               ]}
               onPress={() => setSelectedFilter(item.key)}
             >
-              <MaterialCommunityIcons
+              <MCIcon
                 name={item.icon as any}
                 size={18}
                 color={
@@ -492,7 +489,7 @@ const FavoritesScreen: React.FC = () => {
                   </Text>
                 </View>
               )}
-            </TouchableOpacity>
+            </Pressable>
           )}
         />
       </View>

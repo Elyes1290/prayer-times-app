@@ -116,11 +116,10 @@ class ApiClient {
 
       // console.log(`🌐 API Request: ${method} ${url}`);
 
-      // Simple mécanisme de retry avec backoff
-      let attempt = 0;
+      // Simple mécanisme de retry avec backoff (récursif — pas de while + await)
       const maxRetries = 2;
 
-      while (attempt <= maxRetries) {
+      const executeAttempt = async (attempt: number): Promise<any> => {
         try {
           const response = await fetch(url, config);
 
@@ -167,7 +166,7 @@ class ApiClient {
                   };
                 }
                 if (!retryResponse.ok) {
-                  // Afficher un toast global pour avertir l’utilisateur
+                  // Afficher un toast global pour avertir l'utilisateur
                   showGlobalToast({
                     type: "error",
                     title:
@@ -213,18 +212,20 @@ class ApiClient {
             (fetchError.name === "AbortError" ||
               fetchError.message?.includes("network"))
           ) {
-            attempt++;
-            const backoffTime = Math.min(1000 * Math.pow(2, attempt), 5000); // Max 5s
+            const backoffTime = Math.min(
+              1000 * Math.pow(2, attempt + 1),
+              5000
+            ); // Max 5s
             await new Promise((resolve) => setTimeout(resolve, backoffTime));
-            continue; // Retry
+            return executeAttempt(attempt + 1);
           }
 
           // Pas de retry, on throw l'erreur
           throw fetchError;
         }
-      }
-      // Si on arrive ici, tous les retries ont échoué
-      throw new Error("Tous les retries ont échoué");
+      };
+
+      return await executeAttempt(0);
     } catch (error: any) {
       console.error(`❌ API Error: ${method} ${endpoint}`, error);
       throw error;

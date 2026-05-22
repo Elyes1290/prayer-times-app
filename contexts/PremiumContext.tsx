@@ -1,6 +1,6 @@
 import React, {
   createContext,
-  useContext,
+  use,
   useState,
   useEffect,
   ReactNode,
@@ -20,7 +20,7 @@ import PremiumContentManager from "../utils/premiumContent";
 import { IapService } from "../utils/iapService";
 
 // Types de base
-export interface PremiumUser {
+interface PremiumUser {
   isPremium: boolean;
   subscriptionType: "monthly" | "yearly" | "family" | null;
   subscriptionId: string | null;
@@ -1208,7 +1208,7 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
 
 // Hook pour utiliser le contexte
 export const usePremium = (): PremiumContextType => {
-  const context = useContext(PremiumContext);
+  const context = use(PremiumContext);
   if (!context) {
     throw new Error("usePremium doit être utilisé dans un PremiumProvider");
   }

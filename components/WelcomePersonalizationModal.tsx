@@ -4,19 +4,17 @@ import {
   View,
   Text,
   TextInput,
-  TouchableOpacity,
+  Pressable,
   StyleSheet,
-  Dimensions,
+  useWindowDimensions,
   StatusBar,
   Keyboard,
   Animated,
   Platform,
 } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { MCIcon } from "@/components/icons/AppVectorIcons";
 import { LinearGradient } from "expo-linear-gradient";
 import { useTranslation } from "react-i18next";
-
-const { width: screenWidth } = Dimensions.get("window");
 
 interface WelcomePersonalizationModalProps {
   visible: boolean;
@@ -30,11 +28,13 @@ export default function WelcomePersonalizationModal({
   onSkip,
 }: WelcomePersonalizationModalProps) {
   const { t } = useTranslation();
+  const { width: screenWidth } = useWindowDimensions();
   const [firstName, setFirstName] = useState("");
   const [keyboardOffset] = useState(new Animated.Value(0));
 
+  // react-doctor-disable-next-line react-doctor/effect-needs-cleanup
   useEffect(() => {
-    const showSubscription = Keyboard.addListener("keyboardDidShow", (e) => {
+    const showSubscription = Keyboard.addListener("keyboardDidShow", (e: { endCoordinates: { height: number } }) => {
       // Calculer le décalage nécessaire pour remonter le modal
       const keyboardHeight = e.endCoordinates.height;
       const offset =
@@ -56,8 +56,8 @@ export default function WelcomePersonalizationModal({
     });
 
     return () => {
-      showSubscription?.remove();
-      hideSubscription?.remove();
+      showSubscription.remove();
+      hideSubscription.remove();
     };
   }, [keyboardOffset]);
 
@@ -84,6 +84,7 @@ export default function WelcomePersonalizationModal({
           style={[
             styles.modalContainer,
             {
+              width: Math.min(screenWidth - 40, 380),
               transform: [{ translateY: keyboardOffset }],
             },
           ]}
@@ -102,7 +103,7 @@ export default function WelcomePersonalizationModal({
                 start={{ x: 0, y: 0 }}
                 end={{ x: 1, y: 1 }}
               >
-                <MaterialCommunityIcons
+                <MCIcon
                   name="account-heart"
                   size={32}
                   color="white"
@@ -126,7 +127,7 @@ export default function WelcomePersonalizationModal({
                 start={{ x: 0, y: 0 }}
                 end={{ x: 1, y: 1 }}
               >
-                <MaterialCommunityIcons
+                <MCIcon
                   name="account"
                   size={20}
                   color="rgba(255,255,255,0.6)"
@@ -151,21 +152,19 @@ export default function WelcomePersonalizationModal({
             {/* 🔘 Boutons d'action */}
             <View style={styles.buttonsContainer}>
               {/* Bouton Passer */}
-              <TouchableOpacity
+              <Pressable
                 style={styles.skipButton}
                 onPress={handleSkip}
-                activeOpacity={0.7}
               >
                 <Text style={styles.skipButtonText}>
                   {t("welcome_personalization_skip")}
                 </Text>
-              </TouchableOpacity>
+              </Pressable>
 
               {/* Bouton Confirmer */}
-              <TouchableOpacity
+              <Pressable
                 style={styles.confirmButton}
                 onPress={handleConfirm}
-                activeOpacity={0.8}
               >
                 <LinearGradient
                   colors={["#4ECDC4", "#2C7A7A"]}
@@ -173,7 +172,7 @@ export default function WelcomePersonalizationModal({
                   start={{ x: 0, y: 0 }}
                   end={{ x: 1, y: 1 }}
                 >
-                  <MaterialCommunityIcons
+                  <MCIcon
                     name="check"
                     size={20}
                     color="white"
@@ -183,7 +182,7 @@ export default function WelcomePersonalizationModal({
                     {t("welcome_personalization_confirm")}
                   </Text>
                 </LinearGradient>
-              </TouchableOpacity>
+              </Pressable>
             </View>
           </LinearGradient>
         </Animated.View>
@@ -201,14 +200,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   modalContainer: {
-    width: Math.min(screenWidth - 40, 380),
     borderRadius: 24,
     overflow: "hidden",
-    shadowColor: "#4ECDC4",
-    shadowOffset: { width: 0, height: 10 },
-    shadowOpacity: 0.3,
-    shadowRadius: 20,
-    elevation: 15,
+    boxShadow: "0px 10px 20px rgba(78,205,196,0.3)",
   },
   modalGradient: {
     padding: 32,
@@ -226,11 +220,7 @@ const styles = StyleSheet.create({
     borderRadius: 35,
     justifyContent: "center",
     alignItems: "center",
-    shadowColor: "#4ECDC4",
-    shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 0.5,
-    shadowRadius: 10,
-    elevation: 10,
+    boxShadow: "0px 0px 10px rgba(78,205,196,0.5)",
   },
   title: {
     fontSize: 22,
@@ -295,11 +285,7 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius: 16,
     overflow: "hidden",
-    shadowColor: "#4ECDC4",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 8,
-    elevation: 8,
+    boxShadow: "0px 4px 8px rgba(78,205,196,0.3)",
   },
   confirmGradient: {
     flex: 1,

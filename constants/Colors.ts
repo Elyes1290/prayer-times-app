@@ -9,7 +9,7 @@
  */
 
 // 🎨 NOUVEAU : Constantes partagées pour les couleurs communes
-export const SHARED_COLORS = {
+const SHARED_COLORS = {
   // Couleurs islamiques principales
   islamicGreen: "#2E8B57",           // Sea Green - vert des dômes
   islamicGreenMedium: "#3CB371",     // Medium Sea Green
@@ -294,6 +294,6 @@ export const Colors = {
 };
 
 // Types pour TypeScript
-export type ColorScheme = keyof typeof Colors;
+type ColorScheme = keyof typeof Colors;
 export type ColorName = keyof typeof Colors.light;
-export type SharedColorName = keyof typeof SHARED_COLORS;
+type SharedColorName = keyof typeof SHARED_COLORS;

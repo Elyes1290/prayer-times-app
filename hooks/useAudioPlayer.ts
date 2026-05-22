@@ -2,7 +2,7 @@ import { useReducer, useRef, useCallback } from "react";
 import { Audio } from "expo-av";
 
 // Types pour l'état audio
-export interface AudioState {
+interface AudioState {
   // Audio principal (preview)
   isPreviewing: boolean;
   isAudioPlaying: boolean;
@@ -23,7 +23,7 @@ export interface AudioState {
 }
 
 // Actions du reducer
-export type AudioAction =
+type AudioAction =
   | { type: "SET_PREVIEWING"; payload: boolean }
   | { type: "SET_AUDIO_PLAYING"; payload: boolean }
   | { type: "SET_CURRENT_PLAYING_ADHAN"; payload: string | null }

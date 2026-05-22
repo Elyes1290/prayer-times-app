@@ -1,6 +1,6 @@
 import React, {
   createContext,
-  useContext,
+  use,
   useState,
   useEffect,
   ReactNode,
@@ -610,7 +610,7 @@ export const FavoritesProvider: React.FC<FavoritesProviderProps> = ({
 };
 
 export const useFavorites = (): FavoritesContextType => {
-  const context = useContext(FavoritesContext);
+  const context = use(FavoritesContext);
   if (!context) {
     throw new Error("useFavorites must be used within a FavoritesProvider");
   }

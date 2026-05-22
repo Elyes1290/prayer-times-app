@@ -955,15 +955,17 @@ describe("SettingsContext - Tests Exhaustifs", () => {
         "Turkey",
       ];
 
-      for (const method of methods) {
+      const applyNext = async (index: number) => {
+        if (index >= methods.length) return;
+        const method = methods[index];
         await act(async () => {
           result.current.setCalcMethod(method);
         });
-
-        // Le code met à jour la valeur correctement
         expect(result.current.calcMethod).toBe(method);
-        // Le code n'appelle pas setCalculationMethod automatiquement, donc on ne vérifie pas l'appel
-      }
+        await applyNext(index + 1);
+      };
+
+      await applyNext(0);
     });
   });
 

@@ -14,13 +14,10 @@ jest.mock("../../hooks/useNativeDownload", () => ({
   }),
 }));
 
-jest.mock("@expo/vector-icons", () => ({
-  MaterialCommunityIcons: "MaterialCommunityIcons",
-}));
-
 jest.mock("react-native", () => ({
   View: "View",
   Text: "Text",
+  Pressable: "Pressable",
   TouchableOpacity: "TouchableOpacity",
   StyleSheet: {
     create: (styles: any) => styles,

@@ -1,14 +1,14 @@
 import { useReducer, useCallback } from "react";
 
 // Types pour l'état UI
-export interface UIState {
+interface UIState {
   showPremiumModal: boolean;
   isApplyingChanges: boolean;
   showSuccessModal: boolean;
 }
 
 // Actions du reducer
-export type UIAction =
+type UIAction =
   | { type: "SET_SHOW_PREMIUM_MODAL"; payload: boolean }
   | { type: "SET_IS_APPLYING_CHANGES"; payload: boolean }
   | { type: "SET_SHOW_SUCCESS_MODAL"; payload: boolean }

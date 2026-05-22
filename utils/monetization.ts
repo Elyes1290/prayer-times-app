@@ -108,13 +108,6 @@ export const PREMIUM_FEATURES = {
   },
 } as const;
 
-// Type pour les clés de fonctionnalités
-export type PremiumFeatureKey =
-  | keyof typeof PREMIUM_FEATURES.customization
-  | keyof typeof PREMIUM_FEATURES.analytics
-  | keyof typeof PREMIUM_FEATURES.content
-  | keyof typeof PREMIUM_FEATURES.experience;
-
 // Configuration des limites pour la version gratuite
 export const FREE_LIMITS = {
   favorites: {

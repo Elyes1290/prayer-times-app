@@ -58,5 +58,5 @@ export const VALID_PROPHET_IDS = PROPHETS.map((p) => p.id);
 export const getProphetLabel = (id: ProphetId): string =>
   PROPHETS.find((p) => p.id === id)?.label ?? "Mohammad (ﷺ) - Paix et Bénédictions sur Lui";
 
-export const getProphetShortLabel = (id: ProphetId): string =>
+const getProphetShortLabel = (id: ProphetId): string =>
   PROPHETS.find((p) => p.id === id)?.labelShort ?? "Muhammad (ﷺ)";

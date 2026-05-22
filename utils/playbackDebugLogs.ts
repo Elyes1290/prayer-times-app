@@ -1,7 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const PLAYBACK_DEBUG_LOGS_KEY = "PLAYBACK_DEBUG_LOGS";
-const MAX_LOG_ENTRIES = 50;
+const MAX_LOG_ENTRIES = 120;
 
 export interface PlaybackDebugLog {
   timestamp: string;

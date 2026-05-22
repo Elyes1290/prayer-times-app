@@ -261,17 +261,17 @@ describe("Audio Streaming Manager", () => {
     });
 
     test("should enforce concurrent stream limits", async () => {
-      // Créer le maximum de sessions
-      const sessions = [];
-      for (let i = 0; i < 3; i++) {
+      const openNext = async (i: number, acc: string[]): Promise<string[]> => {
+        if (i >= 3) return acc;
         const id = await streamingManager.createStreamingSession(
           `test_limit_${i}`,
           "https://example.com/audio.mp3",
           300
         );
-        sessions.push(id);
         await streamingManager.startStreaming(id);
-      }
+        return openNext(i + 1, [...acc, id]);
+      };
+      const sessions = await openNext(0, []);
 
       // Le 4ème devrait échouer
       const extraSession = await streamingManager.createStreamingSession(
@@ -286,9 +286,9 @@ describe("Audio Streaming Manager", () => {
       expect(result !== undefined).toBe(true);
 
       // Nettoyer
-      for (const session of sessions) {
-        await streamingManager.stopStreaming(session);
-      }
+      await Promise.all(
+        sessions.map((session) => streamingManager.stopStreaming(session))
+      );
     });
   });
 
@@ -517,16 +517,13 @@ describe("Audio Streaming Manager", () => {
     test("should create sessions efficiently", async () => {
       const startTime = Date.now();
 
-      const promises = [];
-      for (let i = 0; i < 5; i++) {
-        promises.push(
-          streamingManager.createStreamingSession(
-            `test_performance_${i}`,
-            "https://example.com/audio.mp3",
-            300
-          )
-        );
-      }
+      const promises = Array.from({ length: 5 }, (_, i) =>
+        streamingManager.createStreamingSession(
+          `test_performance_${i}`,
+          "https://example.com/audio.mp3",
+          300
+        )
+      );
 
       await Promise.all(promises);
 
@@ -535,18 +532,13 @@ describe("Audio Streaming Manager", () => {
     });
 
     test("should handle concurrent operations", async () => {
-      const operations = [];
-
-      // Créer plusieurs sessions en parallèle
-      for (let i = 0; i < 3; i++) {
-        operations.push(
-          streamingManager.createStreamingSession(
-            `concurrent_${i}`,
-            "https://example.com/audio.mp3",
-            300
-          )
-        );
-      }
+      const operations = [0, 1, 2].map((i) =>
+        streamingManager.createStreamingSession(
+          `concurrent_${i}`,
+          "https://example.com/audio.mp3",
+          300
+        )
+      );
 
       const sessionIds = await Promise.all(operations);
       expect(sessionIds).toHaveLength(3);

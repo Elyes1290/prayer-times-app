@@ -211,5 +211,8 @@
   "widget_feature_navigation": "✨ حرکت بین سوره‌ها",
   "widget_feature_audio_controls": "✨ کنترل‌های صوتی کامل",
   "widget_feature_offline": "✨ حالت آفلاین",
-  "subscribe_premium": "عضویت پریمیوم"
+  "subscribe_premium": "عضویت پریمیوم",
+  "adhan_completed_title": "✅ اذان کامل شد",
+  "adhan_completed_body": "اذان کامل شده است",
+  "dismiss": "بستن"
 }

@@ -209,5 +209,8 @@
   "widget_feature_navigation": "✨ Navigation zwischen Suren",
   "widget_feature_audio_controls": "✨ Vollständige Audio-Steuerung",
   "widget_feature_offline": "✨ Offline-Modus",
-  "subscribe_premium": "Premium abonnieren"
+  "subscribe_premium": "Premium abonnieren",
+  "adhan_completed_title": "✅ Adhan abgeschlossen",
+  "adhan_completed_body": "Gebetsruf abgeschlossen",
+  "dismiss": "Schließen"
 }

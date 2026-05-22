@@ -3,7 +3,7 @@ import {
   View,
   Text,
   StyleSheet,
-  TouchableOpacity,
+  Pressable,
   ScrollView,
 } from "react-native";
 import { checkUserSyncStatus } from "../utils/paymentSync";
@@ -70,7 +70,7 @@ const PaymentDebugInfo: React.FC = () => {
     return (
       <View style={styles.container}>
         <Text style={styles.title}>🔍 Debug Synchronisation</Text>
-        <Text style={styles.message}>Chargement...</Text>
+        <Text style={styles.message}>Chargement…</Text>
       </View>
     );
   }
@@ -192,7 +192,7 @@ const PaymentDebugInfo: React.FC = () => {
         </View>
       </View>
 
-      <TouchableOpacity
+      <Pressable
         style={[styles.button, isRefreshing && styles.buttonDisabled]}
         onPress={refreshData}
         disabled={isRefreshing}
@@ -200,7 +200,7 @@ const PaymentDebugInfo: React.FC = () => {
         <Text style={styles.buttonText}>
           {isRefreshing ? "Actualisation..." : "Actualiser maintenant"}
         </Text>
-      </TouchableOpacity>
+      </Pressable>
 
       <View style={styles.helpContainer}>
         <Text style={styles.helpTitle}>💡 Aide Debug :</Text>

@@ -53,7 +53,7 @@ export interface OfflineBook {
 }
 
 // Configuration des livres
-export const HADITH_BOOKS_CONFIG = {
+const HADITH_BOOKS_CONFIG = {
   // Livres principaux (6 Sahih/Sunan)
   main: [
     { id: 1, slug: "bukhari", name: "Sahih al-Bukhari", file: "bukhari.json" },
@@ -296,8 +296,14 @@ export class HadithOfflineService {
         ? allBooks.filter((book) => book.slug === bookSlug)
         : allBooks;
 
-      for (const bookConfig of booksToSearch) {
-        const book = await this.loadBook(bookConfig.slug);
+      const loaded = await Promise.all(
+        booksToSearch.map(async (bookConfig) => ({
+          bookConfig,
+          book: await this.loadBook(bookConfig.slug),
+        }))
+      );
+
+      for (const { bookConfig, book } of loaded) {
         if (!book) continue;
 
         // Rechercher dans les hadiths

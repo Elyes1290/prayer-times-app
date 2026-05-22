@@ -1,14 +1,9 @@
 import React from "react";
 import { render, screen, fireEvent, act } from "@testing-library/react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import Toast, { ToastData } from "../../components/Toast";
 
 // Mocks
-jest.mock("@expo/vector-icons", () => ({
-  MaterialCommunityIcons: "MaterialCommunityIcons",
-}));
-
 jest.mock("expo-linear-gradient", () => ({
   LinearGradient: "LinearGradient",
 }));

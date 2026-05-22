@@ -201,5 +201,8 @@
   "asr": "আসর",
   "maghrib": "মাগরিব",
   "isha": "এশা",
-  "next_prayer": "পরবর্তী নামাজ:"
+  "next_prayer": "পরবর্তী নামাজ:",
+  "adhan_completed_title": "✅ আজান সম্পন্ন",
+  "adhan_completed_body": "নামাজের আহ্বান সম্পন্ন হয়েছে",
+  "dismiss": "বন্ধ করুন"
 }

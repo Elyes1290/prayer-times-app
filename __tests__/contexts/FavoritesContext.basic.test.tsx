@@ -54,11 +54,7 @@ const TestComponent = ({
   onContextReady: (context: any) => void;
 }) => {
   const context = useFavorites();
-
-  React.useEffect(() => {
-    onContextReady(context);
-  }, [context, onContextReady]);
-
+  onContextReady(context);
   return null;
 };
 
@@ -701,7 +697,8 @@ describe("FavoritesContext Complete Tests", () => {
       // Ajouter plusieurs favoris rapidement
       const startTime = Date.now();
 
-      for (let i = 0; i < 10; i++) {
+      const addNext = async (i: number) => {
+        if (i >= 10) return;
         const favorite = {
           type: "quran_verse" as const,
           chapterNumber: i + 1,
@@ -715,11 +712,14 @@ describe("FavoritesContext Complete Tests", () => {
           await contextValue.addFavorite(favorite);
         });
 
-        // Vérifier que le favori a été ajouté (mais peut être asynchrone)
         await act(async () => {
           await Promise.resolve();
         });
-      }
+
+        await addNext(i + 1);
+      };
+
+      await addNext(0);
 
       const endTime = Date.now();
       const duration = endTime - startTime;
@@ -783,12 +783,16 @@ describe("FavoritesContext Complete Tests", () => {
         },
       ];
 
-      for (let i = 0; i < favorites.length; i++) {
+      const addNextFavorite = async (i: number) => {
+        if (i >= favorites.length) return;
         await act(async () => {
           await contextValue.addFavorite(favorites[i]);
         });
         await waitFor(() => expect(contextValue.favorites.length).toBe(i + 1));
-      }
+        await addNextFavorite(i + 1);
+      };
+
+      await addNextFavorite(0);
 
       expect(contextValue.favorites).toHaveLength(4);
       expect(contextValue.getFavoritesCount()).toBe(4);

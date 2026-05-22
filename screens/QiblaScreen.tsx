@@ -8,17 +8,16 @@ import {
   StyleSheet,
   Text,
   View,
-  Dimensions,
+  useWindowDimensions,
   Modal,
-  TouchableOpacity,
+  Pressable,
   ScrollView,
-  SafeAreaView,
   StatusBar,
 } from "react-native";
 import { useTranslation } from "react-i18next";
 import { useFocusEffect } from "@react-navigation/native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { Ionicons } from "@expo/vector-icons";
+import { useSafeAreaInsets, SafeAreaView } from "react-native-safe-area-context";
+import { IonIcon } from "@/components/icons/AppVectorIcons";
 import compassImg from "../assets/images/compass.png";
 import kaabaImg from "../assets/images/kaaba.png";
 import ThemedImageBackground from "../components/ThemedImageBackground";
@@ -28,6 +27,7 @@ import {
   useOverlayTextColor,
   useCurrentTheme,
 } from "../hooks/useThemeColor";
+import { makeBoxShadow } from "../utils/shadowUtils";
 import { usePremium } from "../contexts/PremiumContext";
 
 // 🧭 Import des boussoles disponibles
@@ -105,10 +105,6 @@ const AVAILABLE_COMPASSES = {
 const KAABA_LAT = 21.4225;
 const KAABA_LNG = 39.8262;
 
-const { width, height } = Dimensions.get("window");
-// Ajustement responsif selon la taille d'écran
-const COMPASS_SIZE = Math.min(width * 0.75, height * 0.35, 300);
-const NEEDLE_HEIGHT = COMPASS_SIZE * 0.33;
 
 function toRadians(degrees: number): number {
   return (degrees * Math.PI) / 180;
@@ -145,7 +141,9 @@ function getPointOnCircle(
 const getStyles = (
   colors: any,
   overlayTextColor: string,
-  currentTheme: "light" | "dark" | "morning" | "sunset"
+  currentTheme: "light" | "dark" | "morning" | "sunset",
+  compassSize: number,
+  needleHeight: number
 ) => {
   // 🆕 Les couleurs sont maintenant gérées directement via colors du thème actif
   return StyleSheet.create({
@@ -166,42 +164,38 @@ const getStyles = (
       textAlign: "center",
     },
     compassWrap: {
-      width: COMPASS_SIZE,
-      height: COMPASS_SIZE,
+      width: compassSize,
+      height: compassSize,
       alignItems: "center",
       justifyContent: "center",
       position: "relative",
       backgroundColor: "rgba(34,40,58,0.30)", // Toujours sombre pour la boussole blanche
-      borderRadius: COMPASS_SIZE / 2,
+      borderRadius: compassSize / 2,
       borderWidth: 2,
       borderColor: colors.primary, // 🌅 Utilise la couleur du thème actif
       overflow: "hidden",
-      shadowColor: colors.shadow, // 🌅 Utilise la couleur du thème actif
-      shadowOffset: { width: 0, height: 4 },
-      shadowOpacity: 0.3,
-      shadowRadius: 10,
-      elevation: 8,
+      boxShadow: makeBoxShadow(colors.shadow, 0, 4, 10, 0.3),
     },
     compassContainer: {
       position: "absolute",
       left: 0,
       top: 0,
-      width: COMPASS_SIZE,
-      height: COMPASS_SIZE,
+      width: compassSize,
+      height: compassSize,
       alignItems: "center",
       justifyContent: "center",
       zIndex: 1,
     },
     compass: {
-      width: COMPASS_SIZE,
-      height: COMPASS_SIZE,
-      borderRadius: COMPASS_SIZE / 2,
+      width: compassSize,
+      height: compassSize,
+      borderRadius: compassSize / 2,
       opacity: 1,
     },
     needle: {
       position: "absolute",
       width: 4,
-      height: NEEDLE_HEIGHT,
+      height: needleHeight,
       borderRadius: 2,
     },
     qiblaNeedle: {
@@ -228,11 +222,7 @@ const getStyles = (
       borderRadius: 16,
       paddingHorizontal: 20,
       paddingVertical: 14,
-      elevation: 3,
-      shadowColor: colors.shadow, // 🌅 Utilise la couleur du thème actif
-      shadowOffset: { width: 0, height: 4 },
-      shadowOpacity: 0.3,
-      shadowRadius: 8,
+      boxShadow: makeBoxShadow(colors.shadow, 0, 4, 8, 0.3),
       borderWidth: 1.5,
       borderColor: colors.border, // 🌅 Utilise la couleur du thème actif
       width: "100%",
@@ -288,11 +278,7 @@ const getStyles = (
       marginBottom: 15,
       borderWidth: 1.5,
       borderColor: colors.primary, // 🌅 Utilise la couleur du thème actif
-      shadowColor: "#000",
-      shadowOffset: { width: 0, height: 2 },
-      shadowOpacity: 0.1,
-      shadowRadius: 4,
-      elevation: 3,
+      boxShadow: "0px 2px 4px rgba(0,0,0,0.1)",
     },
     compassSelectorText: {
       fontSize: 14,
@@ -346,11 +332,7 @@ const getStyles = (
       marginBottom: 12,
       borderWidth: 2,
       borderColor: "transparent",
-      shadowColor: "#000",
-      shadowOffset: { width: 0, height: 1 },
-      shadowOpacity: 0.1,
-      shadowRadius: 2,
-      elevation: 2,
+      boxShadow: "0px 1px 2px rgba(0,0,0,0.1)",
     },
     selectedCompassOption: {
       borderColor: colors.primary, // 🌅 Utilise la couleur du thème actif
@@ -417,8 +399,11 @@ export default function QiblaScreen() {
   const colors = useThemeColors();
   const overlayTextColor = useOverlayTextColor();
   const currentTheme = useCurrentTheme();
+  const { width, height } = useWindowDimensions();
+  const compassSize = Math.min(width * 0.75, height * 0.35, 300);
+  const needleHeight = compassSize * 0.33;
 
-  const styles = getStyles(colors, overlayTextColor, currentTheme);
+  const styles = getStyles(colors, overlayTextColor, currentTheme, compassSize, needleHeight);
 
   const [direction, setDirection] = useState<number | null>(null);
   const [heading, setHeading] = useState<number | null>(null);
@@ -513,13 +498,13 @@ export default function QiblaScreen() {
   );
 
   // Pour l'icône Kaaba
-  const KAABA_RADIUS = COMPASS_SIZE / 2 - 30;
-  let kaabaPos = { x: COMPASS_SIZE / 2, y: 30 };
+  const KAABA_RADIUS = compassSize / 2 - 30;
+  let kaabaPos = { x: compassSize / 2, y: 30 };
   if (direction !== null) {
     const angleQibla = direction;
     kaabaPos = getPointOnCircle(
-      COMPASS_SIZE / 2,
-      COMPASS_SIZE / 2,
+      compassSize / 2,
+      compassSize / 2,
       KAABA_RADIUS,
       angleQibla
     );
@@ -708,27 +693,20 @@ export default function QiblaScreen() {
   );
 
   // Écouter les changements d'état de l'app (retour depuis les paramètres)
+  // react-doctor-disable-next-line react-doctor/effect-needs-cleanup
   useEffect(() => {
-    const handleAppStateChange = (nextAppState: string) => {
-      // 🚀 CORRECTION : Ne pas redemander si l'utilisateur a déjà refusé
+    const subscription = AppState.addEventListener("change", (nextAppState) => {
       if (
         nextAppState === "active" &&
         locationPermissionGranted === false &&
         !userDeniedPermission
       ) {
-        // L'app devient active et on n'avait pas les permissions avant
-        // Réessayer d'initialiser la Qibla seulement si l'utilisateur n'a pas explicitement refusé
         initializeQibla();
       }
-    };
-
-    const subscription = AppState.addEventListener(
-      "change",
-      handleAppStateChange
-    );
+    });
 
     return () => {
-      subscription?.remove();
+      subscription.remove();
     };
   }, [locationPermissionGranted, initializeQibla, userDeniedPermission]);
 
@@ -814,7 +792,7 @@ export default function QiblaScreen() {
         {isInitializing && (
           <View style={styles.statusContainer}>
             <Text style={styles.statusText}>
-              Initialisation de la boussole...
+              Initialisation de la boussole…
             </Text>
           </View>
         )}
@@ -836,11 +814,11 @@ export default function QiblaScreen() {
 
         {/* 🧭 Bouton de sélection de boussole (premium only) */}
         {user?.isPremium && !userDeniedPermission && (
-          <TouchableOpacity
+          <Pressable
             style={styles.compassSelectorButton}
             onPress={() => setCompassModalVisible(true)}
           >
-            <Ionicons
+            <IonIcon
               name="color-palette-outline"
               size={20}
               color={overlayTextColor}
@@ -850,7 +828,7 @@ export default function QiblaScreen() {
             >
               {t("change_compass") || "Changer de boussole"}
             </Text>
-          </TouchableOpacity>
+          </Pressable>
         )}
 
         {/* 🚀 NOUVEAU : Masquer la boussole si localisation désactivée */}
@@ -874,10 +852,10 @@ export default function QiblaScreen() {
                   styles.kaabaIcon,
                   {
                     position: "absolute",
-                    width: COMPASS_SIZE / 8,
-                    height: COMPASS_SIZE / 8,
-                    left: kaabaPos.x - COMPASS_SIZE / 16,
-                    top: kaabaPos.y - COMPASS_SIZE / 16,
+                    width: compassSize / 8,
+                    height: compassSize / 8,
+                    left: kaabaPos.x - compassSize / 16,
+                    top: kaabaPos.y - compassSize / 16,
                     zIndex: 5,
                   },
                 ]}
@@ -889,8 +867,8 @@ export default function QiblaScreen() {
                 styles.needle,
                 styles.qiblaNeedle,
                 {
-                  left: COMPASS_SIZE / 2 - 2,
-                  top: COMPASS_SIZE / 2 - NEEDLE_HEIGHT,
+                  left: compassSize / 2 - 2,
+                  top: compassSize / 2 - needleHeight,
                   alignItems: "center",
                   justifyContent: "flex-start",
                 },
@@ -899,7 +877,7 @@ export default function QiblaScreen() {
               <Animated.View
                 style={{
                   width: 4,
-                  height: NEEDLE_HEIGHT,
+                  height: needleHeight,
                   backgroundColor: needleColor,
                   borderRadius: 2,
                 }}
@@ -937,12 +915,12 @@ export default function QiblaScreen() {
                 <Text style={styles.modalTitle}>
                   {t("select_compass") || "Sélectionner une boussole"}
                 </Text>
-                <TouchableOpacity
+                <Pressable
                   style={styles.closeButton}
                   onPress={() => setCompassModalVisible(false)}
                 >
                   <Text style={styles.closeButtonText}>✕</Text>
-                </TouchableOpacity>
+                </Pressable>
               </View>
 
               <ScrollView style={styles.compassList}>
@@ -951,7 +929,7 @@ export default function QiblaScreen() {
                   const isSelected = selectedCompass === compass.id;
 
                   return (
-                    <TouchableOpacity
+                    <Pressable
                       key={compass.id}
                       style={[
                         styles.compassOption,
@@ -968,7 +946,7 @@ export default function QiblaScreen() {
                         />
                         {isLocked && (
                           <View style={styles.lockOverlay}>
-                            <Ionicons
+                            <IonIcon
                               name="lock-closed"
                               size={24}
                               color="#FFD700"
@@ -987,19 +965,19 @@ export default function QiblaScreen() {
                         </Text>
                         {compass.premium && (
                           <View style={styles.premiumBadge}>
-                            <Ionicons name="star" size={12} color="#FFD700" />
+                            <IonIcon name="star" size={12} color="#FFD700" />
                             <Text style={styles.premiumText}>Premium</Text>
                           </View>
                         )}
                       </View>
                       {isSelected && (
-                        <Ionicons
+                        <IonIcon
                           name="checkmark-circle"
                           size={24}
                           color={colors.primary} // 🌅 Utilise la couleur du thème actif
                         />
                       )}
-                    </TouchableOpacity>
+                    </Pressable>
                   );
                 })}
               </ScrollView>

@@ -101,6 +101,8 @@ export async function scheduleNotificationsFor2Days({
       enabledEveningDhikr: dhikrSettings.enabledEveningDhikr,
       enabledSelectedDua: dhikrSettings.enabledSelectedDua,
       reminderOffset: reminderOffset,
+      // Critique Android : boot / maintenance 00:05 relisent calc_method pour rappels & dhikr natifs
+      calcMethod,
     });
 
     // IMPORTANT: Sauvegarder aussi le son d'adhan choisi
@@ -159,7 +161,8 @@ export async function scheduleNotificationsFor2Days({
     let allPrayerReminders: any[] = []; // 🔔 NOUVEAU : Accumuler aussi les reminders
     let allDhikrNotifications: any[] = []; // 🔔 NOUVEAU : Accumuler aussi les dhikrs
 
-    for (let i = 0; i < dates.length; i++) {
+    const processDayAtIndex = async (i: number): Promise<void> => {
+      if (i >= dates.length) return;
       const date = dates[i];
       const label = labels[i];
 
@@ -362,7 +365,10 @@ export async function scheduleNotificationsFor2Days({
       } else {
         notificationDebugLog("📿 Aucun dhikr à programmer");
       }
-    }
+      await processDayAtIndex(i + 1);
+    };
+
+    await processDayAtIndex(0);
 
     // 🍎 NOUVEAU : Notification de sécurité iOS
     // Pour rester sous la limite de 64, on programme 3 jours de prières (~54 notifs)

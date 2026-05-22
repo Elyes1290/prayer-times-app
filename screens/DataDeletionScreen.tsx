@@ -3,14 +3,14 @@ import {
   View,
   Text,
   TextInput,
-  TouchableOpacity,
+  Pressable,
   ScrollView,
   Alert,
   ActivityIndicator,
   StyleSheet,
   Platform,
 } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { MCIcon } from "@/components/icons/AppVectorIcons";
 import { useTranslation } from "react-i18next";
 import { useRouter } from "expo-router";
 import { usePremium } from "../contexts/PremiumContext";
@@ -19,7 +19,7 @@ import apiClient from "../utils/apiClient";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function DataDeletionScreen() {
-  const router = useRouter();
+  const { push, replace } = useRouter();
   const { t } = useTranslation();
   const currentTheme = useCurrentTheme();
   const isLightTheme = currentTheme === "light" || currentTheme === "morning";
@@ -124,7 +124,7 @@ export default function DataDeletionScreen() {
                 onPress: async () => {
                   // Déconnexion forcée et retour à l'accueil
                   await forceLogout();
-                  router.replace("/");
+                  replace("/");
                 },
               },
             ]
@@ -140,7 +140,7 @@ export default function DataDeletionScreen() {
             [
               {
                 text: t("ok", "OK"),
-                onPress: () => router.push("/settings"),
+                onPress: () => push("/settings"),
               },
             ]
           );
@@ -166,16 +166,16 @@ export default function DataDeletionScreen() {
     <ScrollView style={styles.container} contentContainerStyle={styles.content}>
       {/* Header */}
       <View style={styles.header}>
-        <TouchableOpacity
+        <Pressable
           style={styles.backButton}
-          onPress={() => router.push("/settings")}
+          onPress={() => push("/settings")}
         >
-          <MaterialCommunityIcons
+          <MCIcon
             name="arrow-left"
             size={24}
             color={isLightTheme ? "#333333" : "#F8FAFC"}
           />
-        </TouchableOpacity>
+        </Pressable>
         <Text style={styles.headerTitle}>
           {t("data_deletion.title", "Suppression de compte")}
         </Text>
@@ -184,7 +184,7 @@ export default function DataDeletionScreen() {
 
       {/* Warning Section */}
       <View style={styles.warningSection}>
-        <MaterialCommunityIcons name="alert" size={48} color="#EF4444" />
+        <MCIcon name="alert" size={48} color="#EF4444" />
         <Text style={styles.warningTitle}>
           ⚠️ {t("data_deletion.warning", "Attention")}
         </Text>
@@ -289,28 +289,28 @@ export default function DataDeletionScreen() {
         </Text>
 
         <View style={styles.infoItem}>
-          <MaterialCommunityIcons name="account" size={20} color="#6B7280" />
+          <MCIcon name="account" size={20} color="#6B7280" />
           <Text style={styles.infoText}>
             {t("data_deletion.user_account", "Votre compte utilisateur")}
           </Text>
         </View>
 
         <View style={styles.infoItem}>
-          <MaterialCommunityIcons name="chart-line" size={20} color="#6B7280" />
+          <MCIcon name="chart-line" size={20} color="#6B7280" />
           <Text style={styles.infoText}>
             {t("data_deletion.prayer_stats", "Vos statistiques de prière")}
           </Text>
         </View>
 
         <View style={styles.infoItem}>
-          <MaterialCommunityIcons name="heart" size={20} color="#6B7280" />
+          <MCIcon name="heart" size={20} color="#6B7280" />
           <Text style={styles.infoText}>
             {t("data_deletion.favorites_settings", "Vos favoris et paramètres")}
           </Text>
         </View>
 
         <View style={styles.infoItem}>
-          <MaterialCommunityIcons name="crown" size={20} color="#6B7280" />
+          <MCIcon name="crown" size={20} color="#6B7280" />
           <Text style={styles.infoText}>
             {t(
               "data_deletion.premium_subscriptions",
@@ -320,7 +320,7 @@ export default function DataDeletionScreen() {
         </View>
 
         <View style={styles.infoItem}>
-          <MaterialCommunityIcons name="database" size={20} color="#6B7280" />
+          <MCIcon name="database" size={20} color="#6B7280" />
           <Text style={styles.infoText}>
             {t(
               "data_deletion.personal_data",
@@ -376,7 +376,7 @@ export default function DataDeletionScreen() {
       {/* Subscription Warning - iOS uniquement car Apple ne permet pas l'annulation automatique */}
       {Platform.OS === "ios" && (
         <View style={styles.subscriptionWarningSection}>
-          <MaterialCommunityIcons
+          <MCIcon
             name="alert-circle"
             size={24}
             color="#F59E0B"
@@ -392,7 +392,7 @@ export default function DataDeletionScreen() {
 
       {/* Submit Button */}
       <View style={styles.submitButtonContainer}>
-        <TouchableOpacity
+        <Pressable
           style={[
             styles.submitButton,
             isSubmitting && styles.submitButtonDisabled,
@@ -404,7 +404,7 @@ export default function DataDeletionScreen() {
             <ActivityIndicator color="#FFFFFF" size="small" />
           ) : (
             <>
-              <MaterialCommunityIcons
+              <MCIcon
                 name="delete-forever"
                 size={20}
                 color="#FFFFFF"
@@ -417,7 +417,7 @@ export default function DataDeletionScreen() {
               </Text>
             </>
           )}
-        </TouchableOpacity>
+        </Pressable>
       </View>
 
       {/* Contact Information */}

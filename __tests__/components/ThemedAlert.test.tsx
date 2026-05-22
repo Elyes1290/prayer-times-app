@@ -5,16 +5,11 @@ import {
   fireEvent,
   waitFor,
 } from "@testing-library/react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 import ThemedAlert from "../../components/ThemedAlert";
 import { useColorScheme } from "../../hooks/useColorScheme";
 import { useThemeAssets } from "../../hooks/useThemeAssets";
 
 // Mocks
-jest.mock("@expo/vector-icons", () => ({
-  MaterialCommunityIcons: "MaterialCommunityIcons",
-}));
-
 jest.mock("../../hooks/useColorScheme", () => ({
   useColorScheme: jest.fn(),
 }));
@@ -283,7 +278,7 @@ describe("ThemedAlert", () => {
       expect(screen.getByTestId("themed-alert-message")).toBeTruthy();
       expect(screen.getByTestId("themed-alert-button-container")).toBeTruthy();
       expect(screen.getByTestId("themed-alert-button-0")).toBeTruthy();
-      expect(screen.getByTestId("themed-alert-button-text-0")).toBeTruthy();
+      expect(screen.getByTestId("themed-alert-button-text-OK")).toBeTruthy();
     });
 
     it("devrait être accessible aux lecteurs d'écran", () => {

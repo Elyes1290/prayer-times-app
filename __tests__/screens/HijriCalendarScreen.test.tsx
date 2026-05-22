@@ -109,13 +109,13 @@ const HijriCalendarScreen = () => {
       <Text>Date grégorienne</Text>
       <Text>Date hijri</Text>
       <View testID="calendar">
-        <View testID="calendar-day-15">15</View>
-        <View testID="calendar-day-10">10</View>
+        <View testID="calendar-day-15"><Text>15</Text></View>
+        <View testID="calendar-day-10"><Text>10</Text></View>
       </View>
       <View>
-        <View testID="date-prev">Précédent</View>
-        <View testID="date-next">Suivant</View>
-        <View testID="date-reset">Aujourd&apos;hui</View>
+        <View testID="date-prev"><Text>Précédent</Text></View>
+        <View testID="date-next"><Text>Suivant</Text></View>
+        <View testID="date-reset"><Text>Aujourd'hui</Text></View>
       </View>
     </View>
   );

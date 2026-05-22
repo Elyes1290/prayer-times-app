@@ -1,18 +1,19 @@
-import React from "react";
+import React, { useMemo } from "react";
 import {
   View,
   Text,
   StyleSheet,
   ScrollView,
-  TouchableOpacity,
+  Pressable,
 } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { MCIcon } from "@/components/icons/AppVectorIcons";
 import { useTranslation } from "react-i18next";
 import {
   useThemeColors,
   useOverlayTextColor,
   useCurrentTheme,
 } from "../hooks/useThemeColor";
+import { makeBoxShadow } from "../utils/shadowUtils";
 
 interface WeeklyPrayerViewProps {
   currentDate: Date;
@@ -44,11 +45,7 @@ const getStyles = (
       marginBottom: 16,
       borderWidth: 1,
       borderColor: colors.border, // 🌅 Utilise la couleur du thème actif
-      shadowColor: colors.shadow, // 🌅 Utilise la couleur du thème actif
-      shadowOffset: { width: 0, height: 4 },
-      shadowOpacity: 0.3,
-      shadowRadius: 10,
-      elevation: 6,
+      boxShadow: makeBoxShadow(colors.shadow, 0, 4, 10, 0.3),
     },
     header: {
       flexDirection: "row",
@@ -150,6 +147,7 @@ export default function WeeklyPrayerView({
   const currentTheme = useCurrentTheme();
 
   const styles = getStyles(colors, overlayTextColor, currentTheme);
+  const todayRef = useMemo(() => new Date(), []);
 
   const formatDay = (date: Date) => {
     const days = {
@@ -173,18 +171,17 @@ export default function WeeklyPrayerView({
   };
 
   const isToday = (date: Date) => {
-    const today = new Date();
     return (
-      date.getDate() === today.getDate() &&
-      date.getMonth() === today.getMonth() &&
-      date.getFullYear() === today.getFullYear()
+      date.getDate() === todayRef.getDate() &&
+      date.getMonth() === todayRef.getMonth() &&
+      date.getFullYear() === todayRef.getFullYear()
     );
   };
 
   return (
     <View style={styles.container} testID="weekly-prayer-container">
       <View style={styles.header} testID="weekly-prayer-header">
-        <MaterialCommunityIcons
+        <MCIcon
           name="calendar-week"
           size={24}
           color={colors.primary} // 🌅 Utilise la couleur du thème actif
@@ -205,7 +202,7 @@ export default function WeeklyPrayerView({
             </View>
             {weekPrayerTimes.map((day) =>
               day.date instanceof Date && !isNaN(day.date.getTime()) ? (
-                <TouchableOpacity
+                <Pressable
                   key={day.date.toISOString()}
                   style={[
                     styles.dateCell,
@@ -230,7 +227,7 @@ export default function WeeklyPrayerView({
                   >
                     {formatDate(day.date)}
                   </Text>
-                </TouchableOpacity>
+                </Pressable>
               ) : null
             )}
           </View>

@@ -126,15 +126,14 @@ describe("Quran API", () => {
       );
     });
 
-    test("should handle different languages correctly", async () => {
-      const testCases = [
-        { lang: "fr", expectedId: 136 },
-        { lang: "de", expectedId: 27 },
-        { lang: "ru", expectedId: 45 },
-        { lang: "es", expectedId: 83 },
-      ];
-
-      for (const { lang, expectedId } of testCases) {
+    test.each([
+      { lang: "fr", expectedId: 136 },
+      { lang: "de", expectedId: 27 },
+      { lang: "ru", expectedId: 45 },
+      { lang: "es", expectedId: 83 },
+    ])(
+      "should request translation id $expectedId for language $lang",
+      async ({ lang, expectedId }) => {
         jest.clearAllMocks();
 
         mockFetch
@@ -147,24 +146,22 @@ describe("Quran API", () => {
 
         await getQuranVersesWithTranslations(1, lang);
 
-        // Vérifier que la bonne traduction est demandée
         expect(mockFetch).toHaveBeenNthCalledWith(
           2,
           `https://api.quran.com/api/v4/quran/translations/${expectedId}?chapter_number=1`
         );
       }
-    });
+    );
 
-    test("should handle language variants correctly", async () => {
-      const languageVariants = [
-        { input: "fr-FR", expected: 136 },
-        { input: "en-US", expected: 85 },
-        { input: "en-GB", expected: 85 },
-        { input: "de-DE", expected: 27 },
-        { input: "pt-BR", expected: 43 },
-      ];
-
-      for (const { input, expected } of languageVariants) {
+    test.each([
+      { input: "fr-FR", expected: 136 },
+      { input: "en-US", expected: 85 },
+      { input: "en-GB", expected: 85 },
+      { input: "de-DE", expected: 27 },
+      { input: "pt-BR", expected: 43 },
+    ])(
+      "should map locale $input to translation id $expected",
+      async ({ input, expected }) => {
         jest.clearAllMocks();
 
         mockFetch
@@ -182,7 +179,7 @@ describe("Quran API", () => {
           `https://api.quran.com/api/v4/quran/translations/${expected}?chapter_number=1`
         );
       }
-    });
+    );
 
     test("should fallback to English for unknown languages", async () => {
       mockFetch
@@ -220,10 +217,9 @@ describe("Quran API", () => {
       );
     });
 
-    test("should handle different chapter numbers", async () => {
-      const chapters = [1, 2, 114]; // Al-Fatiha, Al-Baqarah, An-Nas
-
-      for (const chapterNumber of chapters) {
+    test.each([1, 2, 114])(
+      "should fetch chapter %i with correct URLs",
+      async (chapterNumber) => {
         jest.clearAllMocks();
 
         mockFetch
@@ -245,7 +241,7 @@ describe("Quran API", () => {
           `https://api.quran.com/api/v4/quran/translations/85?chapter_number=${chapterNumber}`
         );
       }
-    });
+    );
 
     test("should handle mismatched verse and translation counts", async () => {
       const mismatchedArabic = {
@@ -294,13 +290,12 @@ describe("Quran API", () => {
       expect(result).toEqual([]);
     });
 
-    test("should handle malformed API responses", async () => {
-      const malformedResponses = [
-        { verses: null },
-        {}, // Pas de propriété verses
-      ];
-
-      for (const malformedResponse of malformedResponses) {
+    test.each([
+      { name: "verses null", malformedResponse: { verses: null } },
+      { name: "missing verses", malformedResponse: {} },
+    ])(
+      "should return [] for malformed API response ($name)",
+      async ({ malformedResponse }) => {
         jest.clearAllMocks();
 
         mockFetch
@@ -314,7 +309,7 @@ describe("Quran API", () => {
         const result = await getQuranVersesWithTranslations(1, "en");
         expect(result).toEqual([]);
       }
-    });
+    );
 
     test("should handle undefined API response", async () => {
       jest.clearAllMocks();

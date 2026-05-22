@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
-  TouchableOpacity,
+  Pressable,
   ActivityIndicator,
   TextInput,
 } from "react-native";
@@ -58,7 +58,7 @@ function LocationSectionComponent({
   setUIMode,
 }: LocationSectionProps) {
   const { t } = useTranslation();
-  const router = useRouter();
+  const { push } = useRouter();
 
   // 🚀 STATE LOCAL pour l'input - séparé de la recherche !
   const [localCityInput, setLocalCityInput] = useState(cityInput || "");
@@ -101,14 +101,14 @@ function LocationSectionComponent({
 
     // 🚀 REDIRECTION vers HomeScreen pour voir les horaires
     setTimeout(() => {
-      router.push("/");
+      push("/");
     }, 500); // Petit délai pour laisser le temps à la sauvegarde
   };
 
   return (
     <View>
       <View style={styles.locationToggle}>
-        <TouchableOpacity
+        <Pressable
           style={[
             styles.toggleButton,
             currentUIMode === "auto" && styles.toggleButtonActive,
@@ -127,8 +127,8 @@ function LocationSectionComponent({
           >
             {t("automatic")}
           </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
+        </Pressable>
+        <Pressable
           style={[
             styles.toggleButton,
             currentUIMode === "manual" && styles.toggleButtonActive,
@@ -147,12 +147,12 @@ function LocationSectionComponent({
           >
             {t("manual")}
           </Text>
-        </TouchableOpacity>
+        </Pressable>
       </View>
 
       {currentUIMode === "auto" && (
         <View style={styles.autoLocationSection}>
-          <TouchableOpacity
+          <Pressable
             onPress={refreshAutoLocation}
             style={styles.refreshButton}
             disabled={isRefreshingLocation}
@@ -162,7 +162,7 @@ function LocationSectionComponent({
                 ? t("location.updating", "Mise à jour...")
                 : t("refresh_location", "Actualiser la position")}
             </Text>
-          </TouchableOpacity>
+          </Pressable>
           {autoLocation && (
             <Text style={styles.locationText}>
               {t("location.detected", "Position détectée")}:{" "}
@@ -196,7 +196,7 @@ function LocationSectionComponent({
               onSubmitEditing={handleSearch}
             />
             {/* 🔥 BOUTON RECHERCHER */}
-            <TouchableOpacity
+            <Pressable
               style={styles.searchButton}
               onPress={handleSearch}
               disabled={localCityInput.trim().length < 2}
@@ -204,7 +204,7 @@ function LocationSectionComponent({
               <Text style={styles.searchButtonText}>
                 {t("search", "Rechercher")}
               </Text>
-            </TouchableOpacity>
+            </Pressable>
           </View>
           {citySearchLoading && (
             <ActivityIndicator
@@ -216,16 +216,15 @@ function LocationSectionComponent({
           {citySearchResults.length > 0 && (
             <View style={[styles.resultsList, styles.resultsListFixed]}>
               {citySearchResults.map((item, index) => (
-                <TouchableOpacity
+                <Pressable
                   key={item.place_id || `result-${index}`}
                   style={styles.resultItem}
                   onPress={() => handleSelectCity(item)}
-                  activeOpacity={0.7}
                 >
                   <Text style={styles.resultText} numberOfLines={2}>
                     {item.display_name}
                   </Text>
-                </TouchableOpacity>
+                </Pressable>
               ))}
             </View>
           )}

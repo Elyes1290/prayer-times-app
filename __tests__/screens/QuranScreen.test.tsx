@@ -7,8 +7,6 @@ import {
   act,
 } from "@testing-library/react-native";
 import { useTranslation } from "react-i18next";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { Audio } from "expo-av";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import QuranScreen from "../../screens/QuranScreen";
 import { usePremium } from "../../contexts/PremiumContext";
@@ -31,10 +29,6 @@ jest.mock("i18next", () => ({
   use: () => ({
     init: () => {},
   }),
-}));
-
-jest.mock("@expo/vector-icons", () => ({
-  MaterialCommunityIcons: "MaterialCommunityIcons",
 }));
 
 jest.mock("react-native-gesture-handler", () => ({
@@ -94,13 +88,6 @@ jest.mock("../../utils/premiumContent", () => ({
     deleteContent: jest.fn(),
     clearQuranDirectory: jest.fn(),
   },
-}));
-
-jest.mock("../../utils/audioAnalysis", () => ({
-  quranAudioAnalyzer: {
-    analyzeAudioFile: jest.fn(),
-  },
-  VerseTiming: jest.fn(),
 }));
 
 jest.mock("react-native-fs", () => ({

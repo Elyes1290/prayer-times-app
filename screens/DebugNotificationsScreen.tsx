@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import {
   View,
   Text,
-  TouchableOpacity,
+  Pressable,
   ScrollView,
   StyleSheet,
   Platform,
@@ -108,7 +108,7 @@ export default function DebugNotificationsScreen() {
           🔧 Debug Notifications iOS
         </Text>
 
-        <TouchableOpacity
+        <Pressable
           style={[styles.button, { backgroundColor: colors.primary }]}
           onPress={testNotification}
           disabled={loading}
@@ -116,9 +116,9 @@ export default function DebugNotificationsScreen() {
           <Text style={styles.buttonText}>
             🧪 Test notification (10 sec)
           </Text>
-        </TouchableOpacity>
+        </Pressable>
 
-        <TouchableOpacity
+        <Pressable
           style={[styles.button, { backgroundColor: colors.primary }]}
           onPress={checkNotifications}
           disabled={loading}
@@ -126,15 +126,15 @@ export default function DebugNotificationsScreen() {
           <Text style={styles.buttonText}>
             🔍 Vérifier notifications programmées
           </Text>
-        </TouchableOpacity>
+        </Pressable>
 
-        <TouchableOpacity
+        <Pressable
           style={[styles.button, { backgroundColor: "#dc3545" }]}
           onPress={cancelAll}
           disabled={loading}
         >
           <Text style={styles.buttonText}>🗑️ Annuler toutes</Text>
-        </TouchableOpacity>
+        </Pressable>
 
         {debugInfo && (
           <View

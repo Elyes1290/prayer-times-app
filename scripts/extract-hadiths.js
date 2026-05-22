@@ -59,7 +59,7 @@ function delay(ms) {
  * Faire une requête HTTP avec gestion d'erreur
  */
 async function fetchWithRetry(url, retries = 3) {
-  for (let i = 0; i < retries; i++) {
+  const attempt = async (i) => {
     try {
       const response = await fetch(url);
       if (!response.ok) {
@@ -74,8 +74,10 @@ async function fetchWithRetry(url, retries = 3) {
       );
       if (i === retries - 1) throw error;
       await delay(2000 * (i + 1)); // Délai progressif
+      return attempt(i + 1);
     }
-  }
+  };
+  return attempt(0);
 }
 
 /**
@@ -111,11 +113,8 @@ async function fetchChapters(bookSlug) {
  */
 async function fetchAllHadithsFromChapter(bookSlug, chapterNumber) {
   console.log(`  📄 Récupération des hadiths du chapitre ${chapterNumber}...`);
-  let allHadiths = [];
-  let page = 1;
-  let hasMore = true;
 
-  while (hasMore) {
+  const fetchPage = async (page, allHadiths) => {
     try {
       const data = await fetchWithRetry(
         `${BASE_URL}/hadiths?apiKey=${API_KEY}&book=${bookSlug}&chapter=${chapterNumber}&page=${page}&limit=50`
@@ -123,17 +122,18 @@ async function fetchAllHadithsFromChapter(bookSlug, chapterNumber) {
 
       const hadiths = data.hadiths?.data || [];
       if (hadiths.length === 0) {
-        hasMore = false;
-      } else {
-        allHadiths = allHadiths.concat(hadiths);
-        page++;
-        await delay(DELAY_BETWEEN_REQUESTS);
+        return allHadiths;
       }
+      const next = allHadiths.concat(hadiths);
+      await delay(DELAY_BETWEEN_REQUESTS);
+      return fetchPage(page + 1, next);
     } catch (error) {
       console.log(`    ⚠️  Erreur page ${page}: ${error.message}`);
-      hasMore = false;
+      return allHadiths;
     }
-  }
+  };
+
+  const allHadiths = await fetchPage(1, []);
 
   console.log(
     `    ✅ ${allHadiths.length} hadiths récupérés du chapitre ${chapterNumber}`
@@ -246,8 +246,9 @@ async function extractBookHadiths(book) {
       },
     };
 
-    // Extraire chaque chapitre
-    for (const chapter of chapters) {
+    const processChapterAt = async (chapterIndex) => {
+      if (chapterIndex >= chapters.length) return;
+      const chapter = chapters[chapterIndex];
       try {
         const hadiths = await fetchAllHadithsFromChapter(
           book.bookSlug,
@@ -285,7 +286,10 @@ async function extractBookHadiths(book) {
           error: error.message,
         });
       }
-    }
+      await processChapterAt(chapterIndex + 1);
+    };
+
+    await processChapterAt(0);
 
     // Sauvegarder le livre
     const filename = `book_${book.bookSlug}.json`;
@@ -373,7 +377,9 @@ async function main() {
 
     // 2. Extraire chaque livre
     const extractedBooks = [];
-    for (let i = 0; i < books.length; i++) {
+
+    const processBookAt = async (i) => {
+      if (i >= books.length) return;
       const book = books[i];
       console.log(
         `\n📚 [${i + 1}/${books.length}] Extraction: ${book.bookName}`
@@ -384,11 +390,13 @@ async function main() {
         extractedBooks.push(bookData);
       }
 
-      // Délai entre les livres
       if (i < books.length - 1) {
         await delay(DELAY_BETWEEN_REQUESTS * 2);
       }
-    }
+      await processBookAt(i + 1);
+    };
+
+    await processBookAt(0);
 
     // 3. Créer l'index
     createHadithIndex(extractedBooks);

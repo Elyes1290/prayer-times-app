@@ -21,4 +21,4 @@ export const IAP_CONFIG = {
   },
 } as const;
 
-export type IapSubscriptionType = keyof typeof IAP_CONFIG.products;
+type IapSubscriptionType = keyof typeof IAP_CONFIG.products;
