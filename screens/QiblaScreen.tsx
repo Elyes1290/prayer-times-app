@@ -12,6 +12,7 @@ import {
   Modal,
   Pressable,
   ScrollView,
+  FlatList,
   StatusBar,
 } from "react-native";
 import { useTranslation } from "react-i18next";
@@ -666,8 +667,9 @@ export default function QiblaScreen() {
 
     // Cleanup au démontage
     return () => {
-      if (headingSubscription.current) {
-        headingSubscription.current.remove();
+      const subscription = headingSubscription.current;
+      if (subscription) {
+        subscription.remove();
       }
     };
   }, [initializeQibla, userDeniedPermission]);
@@ -923,14 +925,16 @@ export default function QiblaScreen() {
                 </Pressable>
               </View>
 
-              <ScrollView style={styles.compassList}>
-                {Object.values(AVAILABLE_COMPASSES).map((compass) => {
+              <FlatList
+                style={styles.compassList}
+                data={Object.values(AVAILABLE_COMPASSES)}
+                keyExtractor={(compass) => compass.id}
+                renderItem={({ item: compass }) => {
                   const isLocked = compass.premium && !user?.isPremium;
                   const isSelected = selectedCompass === compass.id;
 
                   return (
                     <Pressable
-                      key={compass.id}
                       style={[
                         styles.compassOption,
                         isSelected && styles.selectedCompassOption,
@@ -979,8 +983,8 @@ export default function QiblaScreen() {
                       )}
                     </Pressable>
                   );
-                })}
-              </ScrollView>
+                }}
+              />
             </View>
           </SafeAreaView>
         </Modal>

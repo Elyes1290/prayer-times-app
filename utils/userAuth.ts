@@ -134,15 +134,10 @@ export const cleanupObsoleteUserData = async (): Promise<void> => {
     console.log("🧪 [DEBUG] === AVANT NETTOYAGE ===");
     await debugConnectionStatus();
 
-    // 🚀 NOUVEAU : Vérifier d'abord s'il y a une connexion explicite
-    const explicitConnection = await AsyncStorage.getItem(
-      "explicit_connection"
-    );
-
-    // 🚀 NOUVEAU : Vérifier s'il y a un processus de paiement en cours
-    const pendingRegistration = await AsyncStorage.getItem(
-      "pending_registration"
-    );
+    const [explicitConnection, pendingRegistration] = await Promise.all([
+      AsyncStorage.getItem("explicit_connection"),
+      AsyncStorage.getItem("pending_registration"),
+    ]);
 
     if (pendingRegistration) {
       console.log("🔍 Processus de paiement en cours - pas de nettoyage");

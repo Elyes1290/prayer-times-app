@@ -130,6 +130,8 @@ const AVAILABLE_GIFS = {
   },
 };
 
+const AVAILABLE_GIFS_LIST = Object.values(AVAILABLE_GIFS);
+
 // 🚀 NOUVEAU : Composant de jauge de progression
 const ProgressBar = ({
   progress,
@@ -3807,14 +3809,16 @@ export default function QuranScreen() {
                       
                       {/* 🍎 iOS: Navigation interne entre player et sélecteur GIF */}
                       {Platform.OS === "ios" && audioModalView === "gifSelector" ? (
-                        <ScrollView style={styles.gifList}>
-                          {Object.values(AVAILABLE_GIFS).map((gif) => {
+                        <FlatList
+                          style={styles.gifList}
+                          data={AVAILABLE_GIFS_LIST}
+                          keyExtractor={(gif) => gif.id}
+                          renderItem={({ item: gif }) => {
                             const isLocked = gif.premium && !user?.isPremium;
                             const isSelected = selectedGif === gif.id;
 
                             return (
                               <Pressable
-                                key={gif.id}
                                 style={[
                                   styles.gifOption,
                                   isSelected && styles.selectedGifOption,
@@ -3849,8 +3853,8 @@ export default function QuranScreen() {
                                 )}
                               </Pressable>
                             );
-                          })}
-                        </ScrollView>
+                          }}
+                        />
                       ) : (
                         currentRecitation && (
                           <View style={styles.audioModalBody}>
@@ -4131,14 +4135,16 @@ export default function QuranScreen() {
                 </Pressable>
               </View>
 
-              <ScrollView style={styles.gifList}>
-                {Object.values(AVAILABLE_GIFS).map((gif) => {
+              <FlatList
+                style={styles.gifList}
+                data={AVAILABLE_GIFS_LIST}
+                keyExtractor={(gif) => gif.id}
+                renderItem={({ item: gif }) => {
                   const isLocked = gif.premium && !user?.isPremium;
                   const isSelected = selectedGif === gif.id;
 
                   return (
                     <Pressable
-                      key={gif.id}
                       style={[
                         styles.gifOption,
                         isSelected && styles.selectedGifOption,
@@ -4181,8 +4187,8 @@ export default function QuranScreen() {
                       )}
                     </Pressable>
                   );
-                })}
-              </ScrollView>
+                }}
+              />
             </View>
           </SafeAreaView>
         </Modal>

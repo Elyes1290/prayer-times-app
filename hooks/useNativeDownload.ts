@@ -1,10 +1,15 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import nativeDownloadManager, {
   DownloadInfo,
   DownloadEvent,
   ActiveDownloadsResult,
 } from "../utils/nativeDownloadManager";
 import PremiumContentManager from "../utils/premiumContent";
+import {
+  BUILTIN_ADHAN_SOUND_KEYS,
+  mergeAvailableAdhanSounds,
+  type DownloadedAdhanRow,
+} from "../utils/adhanSoundList";
 
 interface DownloadState {
   isDownloading: boolean;
@@ -90,8 +95,13 @@ export const useNativeDownload = (
       // Le toast est maintenant géré dans handleNativeDownloadCompleted de SettingsScreen
       // avec un message plus précis incluant le nom de l'adhan
     },
-    [updateAvailableSounds, showToast, premiumContent]
+    [updateAvailableSounds, premiumContent]
   );
+
+  const handleDownloadCompletedRef = useRef(handleDownloadCompleted);
+  useEffect(() => {
+    handleDownloadCompletedRef.current = handleDownloadCompleted;
+  });
 
   const forceRefreshAdhans = useCallback(async () => {
     try {
@@ -109,34 +119,27 @@ export const useNativeDownload = (
     if (!premiumContent) return;
 
     try {
-      const baseSounds = [
-        "ahmadnafees",
-        "ahmedelkourdi",
-        "dubai",
-        "karljenkins",
-        "mansourzahrani",
-        "misharyrachid",
-        "mustafaozcan",
-        "adhamalsharqawe",
-        "adhanaljazaer",
-        "masjidquba",
-        "islamsobhi",
-      ];
-
-      const downloadedPremiumSounds: string[] = [];
+      const downloadedRows: DownloadedAdhanRow[] = [];
 
       if (premiumContent.premiumContentState.availableAdhanVoices) {
         premiumContent.premiumContentState.availableAdhanVoices.forEach(
           (adhan: any) => {
             if (adhan.isDownloaded && adhan.downloadPath) {
-              downloadedPremiumSounds.push(adhan.id);
+              downloadedRows.push({
+                contentId: adhan.id,
+                title: adhan.title || adhan.id,
+                downloadPath: adhan.downloadPath,
+              });
             }
           }
         );
       }
 
-      const allAvailableSounds = [...baseSounds, ...downloadedPremiumSounds];
-      premiumContent.setAvailableSounds(allAvailableSounds);
+      const { sounds } = mergeAvailableAdhanSounds(
+        BUILTIN_ADHAN_SOUND_KEYS,
+        downloadedRows
+      );
+      premiumContent.setAvailableSounds(sounds);
       // console.log(
       //   `🚀 INIT: ${downloadedPremiumSounds.length} adhans premium trouvés au démarrage`
       // );
@@ -247,9 +250,13 @@ export const useNativeDownload = (
       "downloadProgress",
       handleDownloadProgress
     );
+    const onDownloadCompleted = (event: DownloadEvent) => {
+      void handleDownloadCompletedRef.current(event);
+    };
+
     nativeDownloadManager.addEventListener(
       "downloadCompleted",
-      handleDownloadCompleted
+      onDownloadCompleted
     );
     nativeDownloadManager.addEventListener(
       "downloadFailed",
@@ -267,7 +274,7 @@ export const useNativeDownload = (
       nativeDownloadManager.removeEventListener("downloadFailed");
       nativeDownloadManager.removeEventListener("downloadCancelled");
     };
-  }, [restoreActiveDownloads, handleDownloadCompleted]);
+  }, [restoreActiveDownloads]);
 
   // 🚀 SUPPRIMÉ : Initialisation automatique pour éviter les boucles infinies
   // La liste se mettra à jour automatiquement après les téléchargements

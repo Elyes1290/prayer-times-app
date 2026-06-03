@@ -29,17 +29,21 @@ const PaymentDebugInfo: React.FC = () => {
       const status = await checkUserSyncStatus();
       setSyncStatus(status);
 
-      // Récupérer les données brutes
-      const userData = await AsyncStorage.getItem("user_data");
-      const authToken = await AsyncStorage.getItem("auth_token");
-      const refreshToken = await AsyncStorage.getItem("refresh_token");
-      const isLoggedIn = await AsyncStorage.getItem("is_logged_in");
-      const explicitConnection = await AsyncStorage.getItem(
-        "explicit_connection"
-      );
-      const pendingRegistration = await AsyncStorage.getItem(
-        "pending_registration"
-      );
+      const [
+        userData,
+        authToken,
+        refreshToken,
+        isLoggedIn,
+        explicitConnection,
+        pendingRegistration,
+      ] = await Promise.all([
+        AsyncStorage.getItem("user_data"),
+        AsyncStorage.getItem("auth_token"),
+        AsyncStorage.getItem("refresh_token"),
+        AsyncStorage.getItem("is_logged_in"),
+        AsyncStorage.getItem("explicit_connection"),
+        AsyncStorage.getItem("pending_registration"),
+      ]);
 
       setRawData({
         userData: userData ? JSON.parse(userData) : null,

@@ -57,8 +57,7 @@ const Toast: React.FC<ToastProps> = ({ toast, onHide }) => {
         }),
       ]),
     }),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    []
+    [translateY, opacity]
   );
 
   const hideToast = React.useCallback(() => {

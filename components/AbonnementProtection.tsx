@@ -65,8 +65,10 @@ const AbonnementProtection: React.FC<AbonnementProtectionProps> = ({
 
     return () => {
       clearInterval(interval);
-      if (backHandlerRef.current) {
-        backHandlerRef.current.remove();
+      const backHandler = backHandlerRef.current;
+      if (backHandler) {
+        backHandler.remove();
+        backHandlerRef.current = null;
       }
     };
   }, []);

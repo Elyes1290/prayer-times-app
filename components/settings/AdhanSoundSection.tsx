@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import {
   View,
   Text,
@@ -86,6 +86,9 @@ interface AdhanSoundSectionProps {
   // 🔧 FIX: Fonction de mise à jour des sons disponibles
   updateAvailableSounds: () => void;
 
+  /** Synchronise disque → liste déroulante (ex. avant d'ouvrir le picker). */
+  hydrateAvailableSounds?: (force?: boolean) => Promise<void>;
+
   // 🔧 FIX: Fonction de rafraîchissement des adhans du hook
   forceRefreshAdhans: () => Promise<void>;
 
@@ -139,6 +142,7 @@ export default function AdhanSoundSection({
   handleRefreshAdhans,
   handleCleanFiles,
   updateAvailableSounds,
+  hydrateAvailableSounds,
   forceRefreshAdhans,
   markPendingChanges,
   styles,
@@ -149,6 +153,13 @@ export default function AdhanSoundSection({
   // 🚀 NOUVEAU : États pour les modals ThemedPicker
   const [methodPickerVisible, setMethodPickerVisible] = useState(false);
   const [soundPickerVisible, setSoundPickerVisible] = useState(false);
+
+  const openSoundPicker = useCallback(async () => {
+    if (user?.isPremium && hydrateAvailableSounds) {
+      await hydrateAvailableSounds(true);
+    }
+    setSoundPickerVisible(true);
+  }, [user?.isPremium, hydrateAvailableSounds]);
 
   // 🚀 NOUVEAU : Styles adaptatifs pour les boutons avec couleurs directes
   const buttonStyles = StyleSheet.create({
@@ -239,7 +250,9 @@ export default function AdhanSoundSection({
           <View style={[styles.row, { justifyContent: "center" }]}>
             <Pressable
               style={buttonStyles.container}
-              onPress={() => setSoundPickerVisible(true)}
+              onPress={() => {
+                void openSoundPicker();
+              }}
             >
               <Text style={buttonStyles.text}>
                 {getSoundDisplayName(adhanSound)}

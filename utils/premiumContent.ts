@@ -50,6 +50,8 @@ class PremiumContentManager {
   private customServerManager: CustomServerManager;
   // 🚀 NOUVEAU : Protection contre les appels multiples
   private isCheckingDownloads: Set<string> = new Set();
+  /** Résolu quand migrate + forceSyncCacheWithFiles ont fini (liste adhan prête). */
+  private readonly ready: Promise<void>;
 
   private constructor() {
     // 🚀 FIX : Utiliser uniquement le stockage interne pour éviter les suppressions automatiques
@@ -57,7 +59,7 @@ class PremiumContentManager {
     this.streamingManager = AudioStreamingManager.getInstance();
     this.cdnOptimizer = CDNOptimizer.getInstance();
     this.customServerManager = CustomServerManager.getInstance();
-    this.initializeDirectory();
+    this.ready = this.initializeDirectory();
     // 🚀 SUPPRIMÉ : Ne pas nettoyer automatiquement au démarrage pour éviter les suppressions intempestives
     // this.cleanupCorruptedDownloads();
   }
@@ -72,6 +74,11 @@ class PremiumContentManager {
       PremiumContentManager.instance = new PremiumContentManager();
     }
     return PremiumContentManager.instance;
+  }
+
+  /** Attendre la synchro disque → AsyncStorage avant de lire DOWNLOADED_CONTENT. */
+  public waitUntilInitialized(): Promise<void> {
+    return this.ready;
   }
 
   // 🚀 NOUVEAU : Helper central pour garantir un chemin unique et cohérent pour les Adhans
@@ -117,14 +124,11 @@ class PremiumContentManager {
       // 🚀 FIX : Ne plus créer le dossier externe pour éviter les suppressions automatiques
       // Le stockage interne est suffisant et persistant
 
-      // 🔄 Migrer les anciens téléchargements pour éviter les conflits entre récitateurs
-      await this.migrateLegacyDownloads();
-
-      // 🚀 NOUVEAU : Forcer la migration des fichiers Quran externes
-      await this.forceMigrateExternalQuranFiles();
-
-      // 🚀 NOUVEAU : Synchroniser automatiquement le cache avec les fichiers réels au démarrage
-      await this.forceSyncCacheWithFiles();
+      await Promise.all([
+        this.migrateLegacyDownloads(),
+        this.forceMigrateExternalQuranFiles(),
+        this.forceSyncCacheWithFiles(),
+      ]);
 
       // 🚀 SUPPRIMÉ : Ne pas nettoyer automatiquement au démarrage pour éviter les suppressions intempestives
       // await this.cleanupCorruptedDownloads();
@@ -291,9 +295,10 @@ class PremiumContentManager {
         true,
       );
 
-      // 4. Invalider les caches du catalogue pour forcer un rechargement
-      await this.invalidateAdhanCache();
-      await this.invalidateQuranCache();
+      await Promise.all([
+        this.invalidateAdhanCache(),
+        this.invalidateQuranCache(),
+      ]);
 
       // 🚀 SUPPRIMÉ : Ne pas recharger depuis le serveur car cela écrase les infos locales
       // await this.refreshCatalogFromServer();
@@ -467,9 +472,11 @@ class PremiumContentManager {
       const cachedCatalog = await this.getCachedCatalog();
       if (cachedCatalog) {
         try {
-          const token = await AsyncStorage.getItem("auth_token");
-          const currentUserData = await AsyncStorage.getItem("user_data");
-          const cachedUser = await AsyncStorage.getItem("premium_catalog_user");
+          const [token, currentUserData, cachedUser] = await Promise.all([
+            AsyncStorage.getItem("auth_token"),
+            AsyncStorage.getItem("user_data"),
+            AsyncStorage.getItem("premium_catalog_user"),
+          ]);
           const hasEmptyQuran =
             !cachedCatalog.quranRecitations ||
             cachedCatalog.quranRecitations.length === 0;
@@ -3344,11 +3351,13 @@ class PremiumContentManager {
   async invalidateAdhanCache(): Promise<void> {
     try {
       debugLog("🧹 Invalidation du cache adhans...");
-      await AsyncStorage.removeItem("premium_adhans_cache");
-      await AsyncStorage.removeItem("premium_catalog_cache");
-      await AsyncStorage.removeItem("premium_catalog_timestamp");
-      await AsyncStorage.removeItem("cached_adhans");
-      await AsyncStorage.removeItem("cached_adhans_timestamp");
+      await Promise.all([
+        AsyncStorage.removeItem("premium_adhans_cache"),
+        AsyncStorage.removeItem("premium_catalog_cache"),
+        AsyncStorage.removeItem("premium_catalog_timestamp"),
+        AsyncStorage.removeItem("cached_adhans"),
+        AsyncStorage.removeItem("cached_adhans_timestamp"),
+      ]);
       debugLog("✅ Cache adhans invalidé");
     } catch (error) {
       errorLog("❌ Erreur invalidation cache adhans:", error);
@@ -3359,8 +3368,10 @@ class PremiumContentManager {
   async invalidateQuranCache(): Promise<void> {
     try {
       debugLog("🧹 Invalidation du cache Quran...");
-      await AsyncStorage.removeItem("premium_quran_cache");
-      await AsyncStorage.removeItem("premium_quran_timestamp");
+      await Promise.all([
+        AsyncStorage.removeItem("premium_quran_cache"),
+        AsyncStorage.removeItem("premium_quran_timestamp"),
+      ]);
       debugLog("✅ Cache Quran invalidé");
     } catch (error) {
       errorLog("❌ Erreur invalidation cache Quran:", error);
@@ -3648,9 +3659,10 @@ class PremiumContentManager {
         true,
       );
 
-      // 4. Invalider les caches du catalogue pour forcer un rechargement
-      await this.invalidateAdhanCache();
-      await this.invalidateQuranCache();
+      await Promise.all([
+        this.invalidateAdhanCache(),
+        this.invalidateQuranCache(),
+      ]);
 
       debugLog("✅ Synchronisation forcée terminée:", result);
       return result;

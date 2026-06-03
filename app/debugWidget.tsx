@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Pressable, ScrollView, Alert } from 'react-native';
+import { View, Text, StyleSheet, Pressable, ScrollView, FlatList, Alert } from 'react-native';
 import { usePrayerTimesWidget } from '../hooks/usePrayerTimesWidget';
 import { useRouter } from 'expo-router';
 import { NativeModules, Platform } from 'react-native';
@@ -156,13 +156,14 @@ export default function DebugWidgetScreen() {
 
       <View style={styles.logsContainer}>
         <Text style={styles.logsTitle}>Logs:</Text>
-        <ScrollView style={styles.logsScroll}>
-          {logs.map((entry) => (
-            <Text key={entry.id} style={styles.logText}>
-              {entry.text}
-            </Text>
-          ))}
-        </ScrollView>
+        <FlatList
+          style={styles.logsScroll}
+          data={logs}
+          keyExtractor={(entry) => entry.id}
+          renderItem={({ item: entry }) => (
+            <Text style={styles.logText}>{entry.text}</Text>
+          )}
+        />
       </View>
     </View>
   );

@@ -731,18 +731,21 @@ export default function HomeScreen() {
           debugLog(
             "🚫 Notifications désactivées globalement - annulation de tout"
           );
-          await AdhanModule.cancelAllAdhanAlarms();
-          await AdhanModule.cancelAllPrayerReminders();
-          await AdhanModule.cancelAllDhikrNotifications();
+          await Promise.all([
+            AdhanModule.cancelAllAdhanAlarms(),
+            AdhanModule.cancelAllPrayerReminders(),
+            AdhanModule.cancelAllDhikrNotifications(),
+          ]);
           return; // ON S'ARRÊTE ICI - Ne pas continuer
         }
 
         // On arrive ici UNIQUEMENT si les notifications sont activées
 
-        // On annule d'abord toutes les notifications existantes
-        await AdhanModule.cancelAllAdhanAlarms();
-        await AdhanModule.cancelAllPrayerReminders();
-        await AdhanModule.cancelAllDhikrNotifications();
+        await Promise.all([
+          AdhanModule.cancelAllAdhanAlarms(),
+          AdhanModule.cancelAllPrayerReminders(),
+          AdhanModule.cancelAllDhikrNotifications(),
+        ]);
 
         // Calculer les settings dhikr finaux
         const dhikrSettingsToSend = {

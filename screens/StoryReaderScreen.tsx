@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import {
   View,
   ScrollView,
+  FlatList,
   Text,
   StyleSheet,
   Pressable,
@@ -691,10 +692,13 @@ export default function StoryReaderScreen() {
         {/* Navigation des chapitres */}
         {storyData.chapters.length > 1 && (
           <View style={styles.chapterNavigation}>
-            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-              {storyData.chapters.map((chapter, index) => (
+            <FlatList
+              horizontal
+              data={storyData.chapters}
+              keyExtractor={(chapter) => chapter.id}
+              showsHorizontalScrollIndicator={false}
+              renderItem={({ item: chapter, index }) => (
                 <Pressable
-                  key={chapter.id}
                   style={[
                     styles.chapterTab,
                     currentChapter === index && {
@@ -714,8 +718,8 @@ export default function StoryReaderScreen() {
                     {index + 1}. {chapter.title}
                   </Text>
                 </Pressable>
-              ))}
-            </ScrollView>
+              )}
+            />
           </View>
         )}
 

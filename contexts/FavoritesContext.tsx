@@ -3,6 +3,7 @@ import React, {
   use,
   useState,
   useEffect,
+  useCallback,
   ReactNode,
 } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -208,43 +209,7 @@ export const FavoritesProvider: React.FC<FavoritesProviderProps> = ({
   const { t } = useTranslation();
   const { isApiSyncEnabled } = useSettings();
 
-  // Charger les favoris au démarrage
-  useEffect(() => {
-    loadFavorites();
-  }, []);
-
-  // 🚀 NOUVEAU : Recharger quand l'état premium change
-  useEffect(() => {
-    // console.log(
-    //   `🔍 [DEBUG] FavoritesContext - user.isPremium changé: ${user.isPremium}`
-    // );
-    // Forcer un re-render quand l'état premium change
-    if (user.isPremium) {
-      // console.log(
-      //   `✅ [DEBUG] FavoritesContext - Utilisateur premium détecté, rechargement des favoris`
-      // );
-      loadFavorites();
-    }
-  }, [user.isPremium]);
-
-  // Vérifier si la sync cloud est activée pour les premium
-  useEffect(() => {
-    checkCloudSyncSettings();
-  }, [user.isPremium]);
-
-  // 🚀 DÉSACTIVÉ TEMPORAIREMENT : Auto-sync Firebase
-  // L'auto-sync sera remplacée par l'API Infomaniak
-  useEffect(() => {
-    // DÉSACTIVÉ pour stopper les connexions Firebase automatiques
-    // if (user.isPremium && isApiSyncEnabled) {
-    //   const interval = setInterval(() => {
-    //     syncWithCloud();
-    //   }, 2 * 60 * 1000);
-    //   return () => clearInterval(interval);
-    // }
-  }, [user.isPremium, isApiSyncEnabled]);
-
-  const checkCloudSyncSettings = async () => {
+  const checkCloudSyncSettings = useCallback(async () => {
     try {
       if (user.isPremium) {
         const syncEnabled = await AsyncStorage.getItem(
@@ -258,13 +223,12 @@ export const FavoritesProvider: React.FC<FavoritesProviderProps> = ({
       console.error("Erreur vérification sync cloud:", error);
       setIsCloudSyncEnabled(false);
     }
-  };
+  }, [user.isPremium]);
 
-  const loadFavorites = async () => {
+  const loadFavorites = useCallback(async () => {
     try {
       setLoading(true);
 
-      // 🚀 NOUVEAU : Charger depuis le gestionnaire de stockage stratifié
       const localFavorites = await LocalStorageManager.getEssential(
         "LOCAL_FAVORITES"
       );
@@ -279,13 +243,12 @@ export const FavoritesProvider: React.FC<FavoritesProviderProps> = ({
 
       setFavorites(parsedFavorites);
 
-      // Si premium et sync API activée, essayer de synchroniser avec l'API
       if (user.isPremium && isApiSyncEnabled) {
         try {
           const syncManager = SyncManager.getInstance();
           await syncManager.syncFavorites();
-        } catch (error) {
-          // console.log("Sync API échouée, utilisation des favoris locaux");
+        } catch {
+          // Sync API échouée, utilisation des favoris locaux
         }
       }
     } catch (error) {
@@ -294,7 +257,29 @@ export const FavoritesProvider: React.FC<FavoritesProviderProps> = ({
     } finally {
       setLoading(false);
     }
-  };
+  }, [user.isPremium, isApiSyncEnabled]);
+
+  // Charger les favoris au démarrage
+  useEffect(() => {
+    loadFavorites();
+  }, [loadFavorites]);
+
+  // Recharger quand l'état premium change
+  useEffect(() => {
+    if (user.isPremium) {
+      loadFavorites();
+    }
+  }, [user.isPremium, loadFavorites]);
+
+  // Vérifier si la sync cloud est activée pour les premium
+  useEffect(() => {
+    checkCloudSyncSettings();
+  }, [user.isPremium, checkCloudSyncSettings]);
+
+  // 🚀 DÉSACTIVÉ TEMPORAIREMENT : Auto-sync Firebase
+  useEffect(() => {
+    // DÉSACTIVÉ pour stopper les connexions Firebase automatiques
+  }, [user.isPremium, isApiSyncEnabled]);
 
   const saveFavoritesLocally = async (newFavorites: Favorite[]) => {
     try {

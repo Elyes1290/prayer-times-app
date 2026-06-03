@@ -1,6 +1,6 @@
-import React from "react";
-import { View, Text, Pressable, ScrollView, StyleSheet } from "react-native";
-import { PROPHETS, type ProphetId } from "../../constants/prophetStories";
+import React, { useCallback } from "react";
+import { View, Text, Pressable, FlatList, StyleSheet } from "react-native";
+import { PROPHETS, type ProphetConfig, type ProphetId } from "../../constants/prophetStories";
 
 interface ProphetSelectorProps {
   selectedProphet: ProphetId;
@@ -20,44 +20,49 @@ export function ProphetSelector({
   onProphetChange,
   colors,
 }: ProphetSelectorProps) {
+  const renderProphet = useCallback(
+    ({ item: prophet }: { item: ProphetConfig }) => {
+      const isSelected = selectedProphet === prophet.id;
+      return (
+        <Pressable
+          style={[
+            styles.prophetButton,
+            {
+              backgroundColor: isSelected
+                ? colors.primary
+                : colors.surfaceVariant ?? colors.cardBG ?? colors.text,
+              borderColor: isSelected ? colors.primary : colors.border,
+            },
+            isSelected && styles.prophetButtonActive,
+          ]}
+          onPress={() => onProphetChange(prophet.id)}
+        >
+          <Text
+            style={[
+              styles.prophetButtonText,
+              {
+                color: isSelected ? colors.textOnPrimary : colors.text,
+              },
+            ]}
+          >
+            {prophet.labelShort}
+          </Text>
+        </Pressable>
+      );
+    },
+    [selectedProphet, onProphetChange, colors]
+  );
+
   return (
-    <ScrollView
+    <FlatList
       horizontal
+      data={PROPHETS}
+      keyExtractor={(item) => item.id}
+      renderItem={renderProphet}
       showsHorizontalScrollIndicator={false}
       contentContainerStyle={styles.prophetSelectorScroll}
       style={styles.prophetSelectorWrapper}
-    >
-      {PROPHETS.map((prophet) => {
-        const isSelected = selectedProphet === prophet.id;
-        return (
-          <Pressable
-            key={prophet.id}
-            style={[
-              styles.prophetButton,
-              {
-                backgroundColor: isSelected
-                  ? colors.primary
-                  : colors.surfaceVariant ?? colors.cardBG ?? colors.text,
-                borderColor: isSelected ? colors.primary : colors.border,
-              },
-              isSelected && styles.prophetButtonActive,
-            ]}
-            onPress={() => onProphetChange(prophet.id)}
-          >
-            <Text
-              style={[
-                styles.prophetButtonText,
-                {
-                  color: isSelected ? colors.textOnPrimary : colors.text,
-                },
-              ]}
-            >
-              {prophet.labelShort}
-            </Text>
-          </Pressable>
-        );
-      })}
-    </ScrollView>
+    />
   );
 }
 
@@ -78,13 +83,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderWidth: 1,
-    minHeight: 44,
   },
   prophetButtonActive: {
-    boxShadow: "0px 1px 4px rgba(0,0,0,0.15)",
+    transform: [{ scale: 1.02 }],
   },
   prophetButtonText: {
-    fontSize: 13,
+    fontSize: 14,
     fontWeight: "600",
   },
 });

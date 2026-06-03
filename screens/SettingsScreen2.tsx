@@ -18,7 +18,7 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from "react-native";
-import { useFocusEffect, useNavigation } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import { useLocalSearchParams } from "expo-router";
 import ThemedImageBackground from "../components/ThemedImageBackground";
 import {
@@ -59,6 +59,14 @@ import SettingsGrid from "../components/settings/layout/SettingsGrid";
 import SettingsHeader from "../components/settings/layout/SettingsHeader";
 import SettingsModals from "../components/settings/layout/SettingsModals";
 import { getStyles } from "../styles/SettingsScreen.styles";
+import {
+  BUILTIN_ADHAN_SOUND_KEYS,
+  areAdhanSoundListsEqual,
+  arePremiumSoundTitlesEqual,
+  canonicalAdhanContentId,
+  mergeAvailableAdhanSounds,
+  type DownloadedAdhanRow,
+} from "../utils/adhanSoundList";
 
 const soundObjects: Record<AdhanSoundKey, any> = {
   adhamalsharqawe: require("../assets/sounds/adhamalsharqawe.mp3"),
@@ -142,6 +150,7 @@ interface OptimizedSettingsSectionsProps {
   cleanupCorruptedFiles: () => Promise<void>;
   diagnoseAndCleanFiles: () => Promise<void>;
   updateAvailableSounds: () => void;
+  hydrateAvailableSounds: (force?: boolean) => Promise<void>;
   forceRefreshAdhans: () => Promise<void>;
   premiumContent: any;
   sectionListRef: React.RefObject<SectionList<any, any> | null>;
@@ -218,8 +227,7 @@ function SettingsSections(props: OptimizedSettingsSectionsProps) {
       setActiveSection(sectionId);
       if (sectionId === "adhan_sound" && user?.isPremium) {
         try {
-          await updateAvailableSounds();
-          // 🚀 NOUVEAU : Charger aussi le catalogue pour la liste premium
+          await props.hydrateAvailableSounds(true);
           await props.loadAvailableAdhans();
         } catch (error) {
           console.error("❌ Erreur scan adhans:", error);
@@ -234,7 +242,7 @@ function SettingsSections(props: OptimizedSettingsSectionsProps) {
   const LocationSectionWrapper = React.memo(function LocationSectionWrapper() {
     const stableSetLocationMode = useCallback(
       (mode: "auto" | "manual") => settings.setLocationMode(mode),
-      [settings.setLocationMode]
+      [settings]
     );
 
     const locationSections = LocationSection({
@@ -403,11 +411,13 @@ function SettingsSections(props: OptimizedSettingsSectionsProps) {
         isRefreshingAdhans: false,
         isCleaningFiles: false,
         handleRefreshAdhans: async () => {
+          await props.forceRefreshAdhans();
           await props.loadAvailableAdhans(true);
-          await props.updateAvailableSounds();
+          await props.hydrateAvailableSounds(true);
         },
         handleCleanFiles: props.cleanupCorruptedFiles,
         updateAvailableSounds: props.updateAvailableSounds,
+        hydrateAvailableSounds: props.hydrateAvailableSounds,
         forceRefreshAdhans: props.forceRefreshAdhans,
         markPendingChanges: props.markPendingChanges,
         styles: styles,
@@ -758,6 +768,15 @@ export default function SettingsScreenOptimized() {
     premiumContent,
   } = useSettingsOptimized();
 
+  const premiumContentStateRef = useRef(premiumContent.premiumContentState);
+  premiumContentStateRef.current = premiumContent.premiumContentState;
+  const setAvailableSoundsRef = useRef(premiumContent.setAvailableSounds);
+  setAvailableSoundsRef.current = premiumContent.setAvailableSounds;
+  const setPremiumSoundTitlesRef = useRef(premiumContent.setPremiumSoundTitles);
+  setPremiumSoundTitlesRef.current = premiumContent.setPremiumSoundTitles;
+  const settingsRef = useRef(settings);
+  settingsRef.current = settings;
+
   const citySearchAPI = useCitySearch();
   const sectionListRef = useRef<SectionList>(null);
 
@@ -771,9 +790,6 @@ export default function SettingsScreenOptimized() {
     () => getStyles(colors, overlayTextColor, overlayIconColor, currentTheme),
     [colors, overlayTextColor, overlayIconColor, currentTheme]
   );
-
-  const { downloadState, isNativeAvailable, forceRefreshAdhans } =
-    useNativeDownload();
 
   const processedThisCycleRef = useRef<Set<string>>(new Set());
   const permanentlyProcessedRef = useRef<Set<string>>(new Set());
@@ -979,89 +995,145 @@ export default function SettingsScreenOptimized() {
     }
   };
 
-  const updateAvailableSounds = useCallback(async () => {
+  const collectDownloadedAdhanRows = async (): Promise<DownloadedAdhanRow[]> => {
+    const rows: DownloadedAdhanRow[] = [];
+    const RNFS = await import("react-native-fs");
+    const downloadedContent = await LocalStorageManager.getPremium(
+      "DOWNLOADED_CONTENT"
+    );
+    if (!downloadedContent) return rows;
+
+    const downloaded = JSON.parse(downloadedContent);
+    const contentIds = Object.keys(downloaded);
+    const checks = await Promise.all(
+      contentIds.map(async (contentId) => {
+        const adhanData = downloaded[contentId];
+        const isAdhan =
+          contentId.startsWith("adhan_") ||
+          adhanData.type === "adhan" ||
+          (!contentId.includes("quran_") &&
+            !contentId.startsWith("reciter_") &&
+            !contentId.match(/^\d{3}_/));
+        if (!isAdhan) return null;
+        if (!adhanData.downloadPath) return null;
+        const filePath = adhanData.downloadPath.replace("file://", "");
+        const fileExists = await RNFS.default.exists(filePath);
+        if (!fileExists) return null;
+        const title =
+          adhanData.title ||
+          contentId
+            .replace(/^adhan_/, "")
+            .replace(/[_-]/g, " ")
+            .replace(/\b\w/g, (l) => l.toUpperCase());
+        return {
+          contentId,
+          title,
+          downloadPath: adhanData.downloadPath,
+        };
+      })
+    );
+    for (const row of checks) {
+      if (row) rows.push(row);
+    }
+    return rows;
+  };
+
+  const updateAvailableSounds = useCallback(
+    async (options?: { syncFromDisk?: boolean }) => {
     try {
-      const baseSounds: AdhanSoundKey[] = [
-        "ahmadnafees",
-        "ahmedelkourdi",
-        "dubai",
-        "karljenkins",
-        "mansourzahrani",
-        "misharyrachid",
-        "mustafaozcan",
-        "adhamalsharqawe",
-        "adhanaljazaer",
-        "masjidquba",
-        "islamsobhi",
-      ];
-      const downloadedPremiumSounds: AdhanSoundKey[] = [];
-      const premiumTitles: { [key: string]: string } = {};
+      const baseSounds = BUILTIN_ADHAN_SOUND_KEYS;
+      let downloadedRows: DownloadedAdhanRow[] = [];
 
       if (user.isPremium) {
+        const manager = PremiumContentManager.getInstance();
+        await manager.waitUntilInitialized();
         try {
-          const RNFS = await import("react-native-fs");
-          const downloadedContent = await LocalStorageManager.getPremium(
-            "DOWNLOADED_CONTENT"
-          );
-          if (downloadedContent) {
-            const downloaded = JSON.parse(downloadedContent);
-            const contentIds = Object.keys(downloaded);
-            const checks = await Promise.all(
-              contentIds.map(async (contentId) => {
-                const adhanData = downloaded[contentId];
-                const isAdhan =
-                  contentId.startsWith("adhan_") ||
-                  adhanData.type === "adhan" ||
-                  (!contentId.includes("quran_") &&
-                    !contentId.startsWith("reciter_") &&
-                    !contentId.match(/^\d{3}_/));
-                if (!isAdhan) return null;
-                if (!adhanData.downloadPath) return null;
-                const filePath = adhanData.downloadPath.replace("file://", "");
-                const fileExists = await RNFS.default.exists(filePath);
-                if (!fileExists) return null;
-                const title =
-                  adhanData.title ||
-                  contentId
-                    .replace(/^adhan_/, "")
-                    .replace(/[_-]/g, " ")
-                    .replace(/\b\w/g, (l) => l.toUpperCase());
-                return { contentId: contentId as AdhanSoundKey, title };
-              })
-            );
-            for (const row of checks) {
-              if (!row) continue;
-              downloadedPremiumSounds.push(row.contentId);
-              premiumTitles[row.contentId] = row.title;
-            }
+          if (options?.syncFromDisk) {
+            await manager.forceSyncCacheWithFiles();
+          }
+          downloadedRows = await collectDownloadedAdhanRows();
+          if (
+            downloadedRows.length === 0 &&
+            !options?.syncFromDisk
+          ) {
+            await manager.forceSyncCacheWithFiles();
+            downloadedRows = await collectDownloadedAdhanRows();
           }
         } catch (e) {
           console.error(e);
         }
       }
-      const allAvailableSounds = [...baseSounds, ...downloadedPremiumSounds];
-      premiumContent.setAvailableSounds(allAvailableSounds);
-      premiumContent.setPremiumSoundTitles(premiumTitles);
+
+      const { sounds, titles } = mergeAvailableAdhanSounds(
+        baseSounds,
+        downloadedRows
+      );
+
+      const prev = premiumContentStateRef.current;
+      if (!areAdhanSoundListsEqual(prev.availableSounds, sounds)) {
+        setAvailableSoundsRef.current(sounds);
+      }
+      if (!arePremiumSoundTitlesEqual(prev.premiumSoundTitles, titles)) {
+        setPremiumSoundTitlesRef.current(titles);
+      }
+
+      const currentSound = settingsRef.current?.adhanSound;
+      if (currentSound) {
+        const canonical = canonicalAdhanContentId(currentSound);
+        if (canonical !== currentSound && sounds.includes(canonical)) {
+          settingsRef.current.setAdhanSound(canonical as AdhanSoundKey);
+        }
+      }
+
+      return sounds.length - baseSounds.length;
     } catch (error) {
       console.error(error);
+      return 0;
     }
-  }, [premiumContent, user.isPremium]);
+  },
+    [user.isPremium]
+  );
 
-  // 🚀 FIX : Mettre à jour la liste des sons au démarrage pour inclure les téléchargements
-  // Utilisation d'un ref pour éviter la boucle infinie (update -> render -> update)
-  const hasInitialSoundUpdate = React.useRef(false);
+  const updateAvailableSoundsRef = useRef(updateAvailableSounds);
+  updateAvailableSoundsRef.current = updateAvailableSounds;
 
-  React.useEffect(() => {
-    if (user?.isPremium && !hasInitialSoundUpdate.current) {
-      // Délai pour laisser le temps au système de fichiers et à Async Storage de s'initialiser
-      const timer = setTimeout(() => {
-        updateAvailableSounds();
-        hasInitialSoundUpdate.current = true;
-      }, 1000);
+  const soundsHydrateRef = useRef({ inFlight: false, done: false });
 
-      return () => clearTimeout(timer);
+  const hydrateAvailableSounds = useCallback(
+    async (force = false) => {
+      if (!user.isPremium) return;
+      if (soundsHydrateRef.current.inFlight) return;
+      if (!force && soundsHydrateRef.current.done) return;
+
+      soundsHydrateRef.current.inFlight = true;
+      try {
+        const premiumCount =
+          (await updateAvailableSoundsRef.current({ syncFromDisk: force })) ??
+          0;
+        soundsHydrateRef.current.done = force || premiumCount > 0;
+      } finally {
+        soundsHydrateRef.current.inFlight = false;
+      }
+    },
+    [user.isPremium]
+  );
+
+  const onDownloadSoundsUpdated = useCallback(() => {
+    soundsHydrateRef.current.done = false;
+    void hydrateAvailableSounds(true);
+  }, [hydrateAvailableSounds]);
+
+  const { downloadState, isNativeAvailable, forceRefreshAdhans } =
+    useNativeDownload(undefined, onDownloadSoundsUpdated, premiumContent);
+
+  // Une seule hydratation auto à l'ouverture des paramètres (premium)
+  useEffect(() => {
+    if (!user?.isPremium) {
+      soundsHydrateRef.current = { inFlight: false, done: false };
+      return;
     }
-  }, [user?.isPremium, updateAvailableSounds]);
+    void hydrateAvailableSounds(true);
+  }, [user?.isPremium, hydrateAvailableSounds]);
 
   const previewAdhanIdRef = React.useRef<string | null>(null);
   React.useEffect(() => {
@@ -1340,7 +1412,7 @@ export default function SettingsScreenOptimized() {
                 );
               premiumContent.setAvailableAdhanVoices(updatedAdhans);
               // 🚀 NOUVEAU : Mettre à jour la liste déroulante immédiatement
-              await updateAvailableSounds();
+              await hydrateAvailableSounds(true);
               showToast({
                 type: "success",
                 title: t("success"),
@@ -1374,7 +1446,7 @@ export default function SettingsScreenOptimized() {
           ad.id === adhan.id ? { ...ad, isDownloaded: false } : ad
         );
       premiumContent.setAvailableAdhanVoices(updatedAdhans);
-      await updateAvailableSounds();
+      await hydrateAvailableSounds(true);
       showToast({
         type: "info",
         title: t("toast_adhan_deleted_title"), // "Adhan supprimé"
@@ -1509,6 +1581,7 @@ export default function SettingsScreenOptimized() {
             cleanupCorruptedFiles={cleanupCorruptedFiles}
             diagnoseAndCleanFiles={diagnoseAndCleanFiles}
             updateAvailableSounds={updateAvailableSounds}
+            hydrateAvailableSounds={hydrateAvailableSounds}
             forceRefreshAdhans={forceRefreshAdhans}
             premiumContent={premiumContent}
             sectionListRef={sectionListRef}

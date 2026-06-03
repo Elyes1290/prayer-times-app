@@ -38,6 +38,26 @@ type Params = {
   dhikrSettings: DhikrSettings;
 };
 
+async function cancelAllExistingNotifications(): Promise<void> {
+  const { AdhanModule } = NativeModules;
+  await Promise.all([
+    AdhanModule.cancelAllAdhanAlarms?.() ?? Promise.resolve(),
+    AdhanModule.cancelAllPrayerReminders(),
+    AdhanModule.cancelAllDhikrNotifications?.() ?? Promise.resolve(),
+  ]);
+}
+
+async function cancelAllAndStopAndroidSchedulers(): Promise<void> {
+  const { AdhanModule } = NativeModules;
+  await Promise.all([
+    AdhanModule.cancelAllAdhanAlarms?.() ?? Promise.resolve(),
+    AdhanModule.cancelAllPrayerReminders(),
+    AdhanModule.cancelAllDhikrNotifications?.() ?? Promise.resolve(),
+    AdhanModule.stopDailyMaintenance?.() ?? Promise.resolve(),
+    AdhanModule.stopWidgetUpdateScheduler?.() ?? Promise.resolve(),
+  ]);
+}
+
 export async function scheduleNotificationsFor2Days({
   userLocation,
   calcMethod,
@@ -73,46 +93,33 @@ export async function scheduleNotificationsFor2Days({
     // Si les notifications sont désactivées globalement, on annule tout et on s'arrête là
     if (!settings.notificationsEnabled) {
       notificationDebugLog("🚫 Notifications désactivées, annulation de tout");
-      await NativeModules.AdhanModule.cancelAllAdhanAlarms?.();
-      await NativeModules.AdhanModule.cancelAllPrayerReminders();
-      await NativeModules.AdhanModule.cancelAllDhikrNotifications?.();
-      // 🛑 Arrêter aussi la maintenance quotidienne automatique
-      await NativeModules.AdhanModule.stopDailyMaintenance?.();
-      // 🛑 Arrêter aussi le planificateur de widget
-      await NativeModules.AdhanModule.stopWidgetUpdateScheduler?.();
+      await cancelAllAndStopAndroidSchedulers();
       return;
     }
 
-    // 1. Annule tout d'abord toutes les alarmes et notifications existantes
     notificationDebugLog("🗑️ Annulation des alarmes existantes");
-    notificationDebugLog("🚫 Appel cancelAllAdhanAlarms...");
-    await NativeModules.AdhanModule.cancelAllAdhanAlarms?.();
-    notificationDebugLog("🚫 Appel cancelAllPrayerReminders...");
-    await NativeModules.AdhanModule.cancelAllPrayerReminders();
-    notificationDebugLog("🚫 Appel cancelAllDhikrNotifications...");
-    await NativeModules.AdhanModule.cancelAllDhikrNotifications?.();
+    const { AdhanModule } = NativeModules;
+    await cancelAllExistingNotifications();
 
-    // IMPORTANT: Sauvegarder tous les paramètres AVANT de programmer les notifications
-    await NativeModules.AdhanModule.saveNotificationSettings({
-      notificationsEnabled: settings.notificationsEnabled,
-      remindersEnabled: remindersEnabled,
-      enabledAfterSalah: dhikrSettings.enabledAfterSalah,
-      enabledMorningDhikr: dhikrSettings.enabledMorningDhikr,
-      enabledEveningDhikr: dhikrSettings.enabledEveningDhikr,
-      enabledSelectedDua: dhikrSettings.enabledSelectedDua,
-      reminderOffset: reminderOffset,
-      // Critique Android : boot / maintenance 00:05 relisent calc_method pour rappels & dhikr natifs
-      calcMethod,
-    });
+    await Promise.all([
+      AdhanModule.saveNotificationSettings({
+        notificationsEnabled: settings.notificationsEnabled,
+        remindersEnabled: remindersEnabled,
+        enabledAfterSalah: dhikrSettings.enabledAfterSalah,
+        enabledMorningDhikr: dhikrSettings.enabledMorningDhikr,
+        enabledEveningDhikr: dhikrSettings.enabledEveningDhikr,
+        enabledSelectedDua: dhikrSettings.enabledSelectedDua,
+        reminderOffset: reminderOffset,
+        calcMethod,
+      }),
+      AdhanModule.setAdhanSound(adhanSound),
+    ]);
 
-    // IMPORTANT: Sauvegarder aussi le son d'adhan choisi
-    await NativeModules.AdhanModule.setAdhanSound(adhanSound);
-
-    // 🔄 DÉMARRE LA MAINTENANCE QUOTIDIENNE AUTOMATIQUE (Android uniquement)
     if (Platform.OS === "android") {
-      await NativeModules.AdhanModule.startDailyMaintenance();
-      // 📱 DÉMARRE LE PLANIFICATEUR DE WIDGET (pour Samsung/Android récents)
-      await NativeModules.AdhanModule.startWidgetUpdateScheduler();
+      await Promise.all([
+        NativeModules.AdhanModule.startDailyMaintenance(),
+        NativeModules.AdhanModule.startWidgetUpdateScheduler(),
+      ]);
     }
 
     // 2. Programme les notifications

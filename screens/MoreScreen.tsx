@@ -5,7 +5,7 @@ import {
   Text,
   Pressable,
   StyleSheet,
-  ScrollView,
+  FlatList,
   StatusBar,
 } from "react-native";
 import { useRouter } from "expo-router";
@@ -156,17 +156,18 @@ export default function MoreScreen() {
         </View>
 
         {/* Content */}
-        <ScrollView
+        <FlatList
           style={styles.scrollView}
+          data={menuSections}
+          keyExtractor={(_, sectionIndex) => `section-${sectionIndex}`}
           contentContainerStyle={[styles.scrollContent, { paddingBottom: Math.max(100, insets.bottom + 80) }]}
           showsVerticalScrollIndicator={false}
-        >
-          {menuSections.map((section, sectionIndex) => (
-            <View key={sectionIndex} style={styles.section}>
+          renderItem={({ item: section }) => (
+            <View style={styles.section}>
               <Text style={[styles.sectionTitle, { color: colors.textSecondary }]}>
                 {section.title}
               </Text>
-              
+
               <View style={[styles.sectionContent, { backgroundColor: colors.cardBG }]}>
                 {section.items.map((item, itemIndex) => (
                   <React.Fragment key={itemIndex}>
@@ -184,9 +185,10 @@ export default function MoreScreen() {
                 ))}
               </View>
             </View>
-          ))}
-
-          {/* Version info */}
+          )}
+          ListFooterComponent={
+            <>
+              {/* Version info */}
           <View style={styles.versionContainer}>
             <Text style={[styles.versionText, { color: colors.textSecondary }]}>
               Prayer Times v1.0.0
@@ -200,7 +202,9 @@ export default function MoreScreen() {
               </View>
             )}
           </View>
-        </ScrollView>
+            </>
+          }
+        />
       </View>
     </ThemedImageBackground>
   );

@@ -197,13 +197,14 @@ export const checkUserSyncStatus = async (): Promise<{
   explicitConnection: boolean;
 }> => {
   try {
-    const userData = await AsyncStorage.getItem("user_data");
-    const authToken = await AsyncStorage.getItem("auth_token");
-    const refreshToken = await AsyncStorage.getItem("refresh_token");
-    const isLoggedIn = await AsyncStorage.getItem("is_logged_in");
-    const explicitConnection = await AsyncStorage.getItem(
-      "explicit_connection"
-    );
+    const [userData, authToken, refreshToken, isLoggedIn, explicitConnection] =
+      await Promise.all([
+        AsyncStorage.getItem("user_data"),
+        AsyncStorage.getItem("auth_token"),
+        AsyncStorage.getItem("refresh_token"),
+        AsyncStorage.getItem("is_logged_in"),
+        AsyncStorage.getItem("explicit_connection"),
+      ]);
 
     return {
       hasUserData: !!userData,

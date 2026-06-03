@@ -27,14 +27,21 @@ const RateLimitDiagnostic: React.FC = () => {
   const refreshStatus = async () => {
     setIsRefreshing(true);
     try {
-      const authToken = await AsyncStorage.getItem("auth_token");
-      const refreshToken = await AsyncStorage.getItem("refresh_token");
-      const userData = await AsyncStorage.getItem("user_data");
-      const pendingRegistration = await AsyncStorage.getItem(
-        "pending_registration"
-      );
-      const lastApiCall = await AsyncStorage.getItem("last_api_call");
-      const apiErrorCount = await AsyncStorage.getItem("api_error_count");
+      const [
+        authToken,
+        refreshToken,
+        userData,
+        pendingRegistration,
+        lastApiCall,
+        apiErrorCount,
+      ] = await Promise.all([
+        AsyncStorage.getItem("auth_token"),
+        AsyncStorage.getItem("refresh_token"),
+        AsyncStorage.getItem("user_data"),
+        AsyncStorage.getItem("pending_registration"),
+        AsyncStorage.getItem("last_api_call"),
+        AsyncStorage.getItem("api_error_count"),
+      ]);
 
       setStatus({
         hasAuthToken: !!authToken,

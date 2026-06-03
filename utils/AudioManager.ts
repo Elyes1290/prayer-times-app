@@ -56,9 +56,10 @@ class AudioManager {
       // 🔧 Initialiser le mode audio si pas encore fait
       await this.initializeAudioMode();
 
-      // Arrêter et décharger tout son existant
-      await this.stop().catch(() => {});
-      await this.unload().catch(() => {});
+      await Promise.all([
+        this.stop().catch(() => {}),
+        this.unload().catch(() => {}),
+      ]);
 
       console.log(
         "🎵 Création du sound object avec source:",

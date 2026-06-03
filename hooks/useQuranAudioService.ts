@@ -387,13 +387,7 @@ export const useQuranAudioService = (): QuranAudioServiceInterface => {
         throw error;
       }
     },
-    [
-      audioState.isServiceRunning,
-      audioState.position,
-      audioState.duration,
-      audioState.currentSurah,
-      startService,
-    ]
+    [audioState.isServiceRunning, startService]
   );
 
   // Lancer la lecture

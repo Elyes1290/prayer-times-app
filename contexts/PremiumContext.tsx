@@ -985,13 +985,12 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
       //   `🔓 [SECURITY] Force logout - Suppression de toutes les données`
       // );
 
-      // Supprimer toutes les données utilisateur et premium
-      await AsyncStorage.removeItem("user_data");
-      await AsyncStorage.removeItem("premium_user_data");
-      await AsyncStorage.removeItem("premium_catalog_cache");
-
-      // 🚀 NOUVEAU : Nettoyer le cache des statistiques immédiatement
-      await AsyncStorage.removeItem("user_stats_cache");
+      await Promise.all([
+        AsyncStorage.removeItem("user_data"),
+        AsyncStorage.removeItem("premium_user_data"),
+        AsyncStorage.removeItem("premium_catalog_cache"),
+        AsyncStorage.removeItem("user_stats_cache"),
+      ]);
 
       // Désactiver le premium
       await deactivatePremium();

@@ -180,22 +180,17 @@ export function useFileManager() {
           ).default;
           const manager = PremiumContentManager.getInstance();
 
-          // 🚀 NOUVEAU : Téléchargement forcé pour Ibrahim Al Arkani
-          const forceResult = await manager.forceDownloadWithPersistence(
-            "adhan_ibrahim_al_arkani"
-          );
+          const [forceResult, persistenceResult, syncResult] =
+            await Promise.all([
+              manager.forceDownloadWithPersistence("adhan_ibrahim_al_arkani"),
+              manager.diagnosePersistenceIssue(),
+              manager.forceFullSync(),
+            ]);
 
-          // 🚀 NOUVEAU : Diagnostic complet de persistance
-          const persistenceResult = await manager.diagnosePersistenceIssue();
-
-          // 🚀 NOUVEAU : Synchronisation complète forcée
-          const syncResult = await manager.forceFullSync();
-
-          // 🚀 NOUVEAU : Forcer la sauvegarde de la version
-          await manager.forceMarkCurrentVersion();
-
-          // Nettoyer les fichiers corrompus
-          await manager.cleanupCorruptedDownloads();
+          await Promise.all([
+            manager.forceMarkCurrentVersion(),
+            manager.cleanupCorruptedDownloads(),
+          ]);
 
           // Afficher le rapport de diagnostic détaillé
           const recommendations = persistenceResult.recommendations.join(", ");

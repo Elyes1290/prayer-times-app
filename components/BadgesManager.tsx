@@ -3,6 +3,7 @@ import {
   View,
   Text,
   ScrollView,
+  FlatList,
   Pressable,
   Modal,
   StyleSheet,
@@ -188,56 +189,49 @@ export const BadgesManager: React.FC<BadgesManagerProps> = ({
     setModalVisible(true);
   };
 
+  const categoryFilterData = React.useMemo(
+    () => [
+      { key: "all", name: "Tous" },
+      ...Object.entries(categories).map(([key, category]) => ({
+        key,
+        name: category.name,
+      })),
+    ],
+    [categories]
+  );
+
   const renderCategoryFilter = () => (
-    <ScrollView
+    <FlatList
       horizontal
+      data={categoryFilterData}
+      keyExtractor={(item) => item.key}
       showsHorizontalScrollIndicator={false}
       style={styles.categoryFilter}
       contentContainerStyle={styles.categoryFilterContent}
-    >
-      <Pressable
-        style={[
-          styles.categoryButton,
-          {
-            backgroundColor:
-              selectedCategory === "all" ? colors.primary : colors.cardBG,
-          },
-        ]}
-        onPress={() => setSelectedCategory("all")}
-      >
-        <Text
-          style={[
-            styles.categoryButtonText,
-            { color: selectedCategory === "all" ? "white" : colors.text },
-          ]}
-        >
-          Tous
-        </Text>
-      </Pressable>
-
-      {Object.entries(categories).map(([key, category]) => (
+      renderItem={({ item }) => (
         <Pressable
-          key={key}
           style={[
             styles.categoryButton,
             {
               backgroundColor:
-                selectedCategory === key ? colors.primary : colors.cardBG,
+                selectedCategory === item.key ? colors.primary : colors.cardBG,
             },
           ]}
-          onPress={() => setSelectedCategory(key)}
+          onPress={() => setSelectedCategory(item.key)}
         >
           <Text
             style={[
               styles.categoryButtonText,
-              { color: selectedCategory === key ? "white" : colors.text },
+              {
+                color: selectedCategory === item.key ? "white" : colors.text,
+              },
             ]}
           >
-            {category.name}
+            {item.name}
           </Text>
         </Pressable>
-      ))}
-    </ScrollView>
+      )}
+    />
   );
 
   const renderBadgeDetails = () => {

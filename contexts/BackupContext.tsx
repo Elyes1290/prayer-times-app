@@ -3,6 +3,8 @@ import React, {
   use,
   useState,
   useEffect,
+  useCallback,
+  useRef,
   ReactNode,
 } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -89,79 +91,8 @@ export const BackupProvider: React.FC<BackupProviderProps> = ({ children }) => {
   const [hasCloudData, setHasCloudData] = useState(false);
   const [showRestoreDialog, setShowRestoreDialog] = useState(false);
 
-  // 🔐 Vérifier l'état d'authentification SEULEMENT pour les premium
-  useEffect(() => {
-    const checkAuthState = async () => {
-      if (user.isPremium) {
-        // 🚀 NOUVEAU : Mode professionnel - vérifier SEULEMENT les connexions explicites
-        // Distinguer connexion automatique (interdite) vs connexion explicite (autorisée)
-        const userData = await AsyncStorage.getItem("user_data");
-        const isExplicitConnection = await AsyncStorage.getItem(
-          "explicit_connection"
-        );
-
-        if (userData && isExplicitConnection === "true") {
-          // Connexion explicite autorisée
-          try {
-            const parsedData = JSON.parse(userData);
-            setIsSignedIn(true);
-            setUserEmail(
-              parsedData.email ||
-                `Premium-${parsedData.device_id?.substring(0, 8) || "User"}`
-            );
-            console.log(
-              "✅ [DEBUG] Connexion explicite détectée - backup autorisé"
-            );
-
-            // Vérifier les données cloud
-            await checkCloudData();
-            await loadBackupSettings();
-          } catch (error) {
-            console.error(
-              "❌ Erreur parsing données utilisateur explicite:",
-              error
-            );
-            setIsSignedIn(false);
-            setUserEmail(null);
-            setHasCloudData(false);
-          }
-        } else {
-          // Pas de connexion explicite - mode professionnel
-          console.log(
-            "🔍 [DEBUG] Mode professionnel - pas de connexion explicite détectée"
-          );
-          setIsSignedIn(false);
-          setUserEmail(null);
-          setHasCloudData(false);
-          setIsAutoBackupEnabled(false);
-          setShowRestoreDialog(false);
-        }
-      } else {
-        // Utilisateurs gratuits : Reset tout état
-        setIsSignedIn(false);
-        setUserEmail(null);
-        setHasCloudData(false);
-        setIsAutoBackupEnabled(false);
-        setShowRestoreDialog(false);
-      }
-    };
-
-    checkAuthState();
-  }, [user.isPremium]);
-
-  // Auto-backup uniquement pour les premium
-  useEffect(() => {
-    if (user.isPremium && isSignedIn && isAutoBackupEnabled) {
-      const interval = setInterval(() => {
-        backupData();
-      }, 5 * 60 * 1000); // Backup toutes les 5 minutes
-
-      return () => clearInterval(interval);
-    }
-  }, [user.isPremium, isSignedIn, isAutoBackupEnabled]);
-
   // Vérifier les données cloud (Premium uniquement)
-  const checkCloudData = async (): Promise<void> => {
+  const checkCloudData = useCallback(async (): Promise<void> => {
     if (!user.isPremium) return;
 
     try {
@@ -189,10 +120,10 @@ export const BackupProvider: React.FC<BackupProviderProps> = ({ children }) => {
       errorLog("❌ Erreur vérification données cloud:", error);
       setHasCloudData(false);
     }
-  };
+  }, [user.isPremium]);
 
   // Charger les paramètres de backup (Premium uniquement)
-  const loadBackupSettings = async (): Promise<void> => {
+  const loadBackupSettings = useCallback(async (): Promise<void> => {
     if (!user.isPremium) return;
 
     try {
@@ -206,7 +137,61 @@ export const BackupProvider: React.FC<BackupProviderProps> = ({ children }) => {
     } catch (error) {
       errorLog("❌ Erreur chargement paramètres backup:", error);
     }
-  };
+  }, [user.isPremium]);
+
+  // 🔐 Vérifier l'état d'authentification SEULEMENT pour les premium
+  useEffect(() => {
+    const checkAuthState = async () => {
+      if (user.isPremium) {
+        const userData = await AsyncStorage.getItem("user_data");
+        const isExplicitConnection = await AsyncStorage.getItem(
+          "explicit_connection"
+        );
+
+        if (userData && isExplicitConnection === "true") {
+          try {
+            const parsedData = JSON.parse(userData);
+            setIsSignedIn(true);
+            setUserEmail(
+              parsedData.email ||
+                `Premium-${parsedData.device_id?.substring(0, 8) || "User"}`
+            );
+            console.log(
+              "✅ [DEBUG] Connexion explicite détectée - backup autorisé"
+            );
+
+            await checkCloudData();
+            await loadBackupSettings();
+          } catch (error) {
+            console.error(
+              "❌ Erreur parsing données utilisateur explicite:",
+              error
+            );
+            setIsSignedIn(false);
+            setUserEmail(null);
+            setHasCloudData(false);
+          }
+        } else {
+          console.log(
+            "🔍 [DEBUG] Mode professionnel - pas de connexion explicite détectée"
+          );
+          setIsSignedIn(false);
+          setUserEmail(null);
+          setHasCloudData(false);
+          setIsAutoBackupEnabled(false);
+          setShowRestoreDialog(false);
+        }
+      } else {
+        setIsSignedIn(false);
+        setUserEmail(null);
+        setHasCloudData(false);
+        setIsAutoBackupEnabled(false);
+        setShowRestoreDialog(false);
+      }
+    };
+
+    checkAuthState();
+  }, [user.isPremium, checkCloudData, loadBackupSettings]);
 
   // Migration des favoris depuis l'ancien système
   const migrateFavoritesFromOldSystem = async (): Promise<boolean> => {
@@ -408,6 +393,20 @@ export const BackupProvider: React.FC<BackupProviderProps> = ({ children }) => {
     }
   };
 
+  const backupDataRef = useRef(backupData);
+  backupDataRef.current = backupData;
+
+  // Auto-backup uniquement pour les premium
+  useEffect(() => {
+    if (user.isPremium && isSignedIn && isAutoBackupEnabled) {
+      const interval = setInterval(() => {
+        void backupDataRef.current();
+      }, 5 * 60 * 1000);
+
+      return () => clearInterval(interval);
+    }
+  }, [user.isPremium, isSignedIn, isAutoBackupEnabled]);
+
   // Authentification anonyme (Premium uniquement)
   const signInAnonymously = async (): Promise<boolean> => {
     if (!user.isPremium) {
@@ -483,12 +482,11 @@ export const BackupProvider: React.FC<BackupProviderProps> = ({ children }) => {
       setIsAutoBackupEnabled(false);
       setShowRestoreDialog(false);
 
-      // Supprimer les données de backup locales si désiré
-      await AsyncStorage.removeItem("lastBackupTime");
-      await AsyncStorage.removeItem("autoBackupEnabled");
-
-      // 🚀 NOUVEAU : Nettoyer le cache des statistiques
-      await AsyncStorage.removeItem("user_stats_cache");
+      await Promise.all([
+        AsyncStorage.removeItem("lastBackupTime"),
+        AsyncStorage.removeItem("autoBackupEnabled"),
+        AsyncStorage.removeItem("user_stats_cache"),
+      ]);
 
       showToast({
         type: "info",
