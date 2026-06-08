@@ -25,14 +25,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>12/12</span>
+                <span class='fraction'>11/11</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>13/26</span>
+                <span class='fraction'>0/0</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>12/12</span>
+                <span class='fraction'>11/11</span>
             </div>
         
             
@@ -282,12 +282,7 @@
 <a name='L217'></a><a href='#L217'>217</a>
 <a name='L218'></a><a href='#L218'>218</a>
 <a name='L219'></a><a href='#L219'>219</a>
-<a name='L220'></a><a href='#L220'>220</a>
-<a name='L221'></a><a href='#L221'>221</a>
-<a name='L222'></a><a href='#L222'>222</a>
-<a name='L223'></a><a href='#L223'>223</a>
-<a name='L224'></a><a href='#L224'>224</a>
-<a name='L225'></a><a href='#L225'>225</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L220'></a><a href='#L220'>220</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -308,6 +303,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">176x</span>
+<span class="cline-any cline-yes">176x</span>
+<span class="cline-any cline-yes">176x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
@@ -315,14 +317,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">22x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -411,12 +407,6 @@
 <span class="cline-any cline-yes">22x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">22x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">22x</span>
-<span class="cline-any cline-yes">176x</span>
-<span class="cline-any cline-yes">176x</span>
-<span class="cline-any cline-yes">176x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">22x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -513,13 +503,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from "react";
 import { View, Text, StyleSheet } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { MCIcon } from "@/components/icons/AppVectorIcons";
 import { useTranslation } from "react-i18next";
 import {
   useThemeColors,
   useOverlayTextColor,
   useCurrentTheme,
 } from "../hooks/useThemeColor";
+import { makeBoxShadow } from "../utils/shadowUtils";
 &nbsp;
 interface PrayerStatsProps {
   dayLength: number; // en minutes
@@ -534,26 +525,27 @@ interface PrayerStatsProps {
   };
 }
 &nbsp;
+function formatDuration(minutes: number) {
+  const hours = Math.floor(minutes / 60);
+  const mins = Math.round(minutes % 60);
+  return `${hours}h ${mins}m`;
+}
+&nbsp;
 const getStyles = (
   colors: any,
   overlayTextColor: string,
-  currentTheme: "light" | "dark"
-) =&gt;
-  StyleSheet.create({
+  currentTheme: "light" | "dark" | "morning" | "sunset"
+) =&gt; {
+  // 🆕 Les couleurs sont maintenant gérées directement via colors du thème actif
+  return StyleSheet.create({
     container: {
-      backgroundColor:
-        currentTheme === "light" ? colors.cardBG : <span class="branch-1 cbranch-no" title="branch not covered" >"rgba(0, 0, 0, 0.5)",</span>
+      backgroundColor: colors.cardBG, // 🌅 Utilise la couleur du thème actif
       borderRadius: 16,
       padding: 16,
       marginBottom: 16,
       borderWidth: 1,
-      borderColor:
-        currentTheme === "light" ? colors.border : <span class="branch-1 cbranch-no" title="branch not covered" >"rgba(78, 205, 196, 0.3)",</span>
-      shadowColor: currentTheme === "light" ? colors.shadow : <span class="branch-1 cbranch-no" title="branch not covered" >"#4ECDC4",</span>
-      shadowOffset: { width: 0, height: 4 },
-      shadowOpacity: 0.3,
-      shadowRadius: 10,
-      elevation: 6,
+      borderColor: colors.border, // 🌅 Utilise la couleur du thème actif
+      boxShadow: makeBoxShadow(colors.shadow, 0, 4, 10, 0.3),
     },
     header: {
       flexDirection: "row",
@@ -562,7 +554,7 @@ const getStyles = (
     },
     headerText: {
       fontSize: 18,
-      color: currentTheme === "light" ? colors.primary : <span class="branch-1 cbranch-no" title="branch not covered" >"#4ECDC4",</span>
+      color: colors.primary, // 🌅 Utilise la couleur du thème actif
       marginLeft: 8,
       fontWeight: "600",
     },
@@ -570,8 +562,7 @@ const getStyles = (
       gap: 16,
     },
     statItem: {
-      backgroundColor:
-        currentTheme === "light" ? colors.surface : <span class="branch-1 cbranch-no" title="branch not covered" >"rgba(78, 205, 196, 0.1)",</span>
+      backgroundColor: colors.surface, // 🌅 Utilise la couleur du thème actif
       borderRadius: 12,
       padding: 12,
       flexDirection: "row",
@@ -585,18 +576,17 @@ const getStyles = (
       flex: 1,
     },
     statValue: {
-      color: currentTheme === "light" ? colors.primary : <span class="branch-1 cbranch-no" title="branch not covered" >"#4ECDC4",</span>
+      color: colors.primary, // 🌅 Utilise la couleur du thème actif
       fontSize: 14,
       fontWeight: "600",
     },
     spacingContainer: {
-      backgroundColor:
-        currentTheme === "light" ? colors.surface : <span class="branch-1 cbranch-no" title="branch not covered" >"rgba(78, 205, 196, 0.1)",</span>
+      backgroundColor: colors.surface, // 🌅 Utilise la couleur du thème actif
       borderRadius: 12,
       padding: 12,
     },
     spacingTitle: {
-      color: currentTheme === "light" ? colors.primary : <span class="branch-1 cbranch-no" title="branch not covered" >"#4ECDC4",</span>
+      color: colors.primary, // 🌅 Utilise la couleur du thème actif
       fontSize: 16,
       fontWeight: "600",
       marginBottom: 12,
@@ -615,11 +605,12 @@ const getStyles = (
       fontWeight: "500",
     },
     spacingValue: {
-      color: currentTheme === "light" ? colors.primary : <span class="branch-1 cbranch-no" title="branch not covered" >"#4ECDC4",</span>
+      color: colors.primary, // 🌅 Utilise la couleur du thème actif
       fontSize: 12,
       fontWeight: "600",
     },
   });
+};
 &nbsp;
 export default function PrayerStats({
   dayLength,
@@ -636,19 +627,13 @@ export default function PrayerStats({
 &nbsp;
   const styles = getStyles(colors, overlayTextColor, currentTheme);
 &nbsp;
-  const formatDuration = (minutes: number) =&gt; {
-    const hours = Math.floor(minutes / 60);
-    const mins = Math.round(minutes % 60);
-    return `${hours}h ${mins}m`;
-  };
-&nbsp;
   return (
     &lt;View style={styles.container}&gt;
       &lt;View style={styles.header}&gt;
-        &lt;MaterialCommunityIcons
+        &lt;MCIcon
           name="chart-timeline-variant"
           size={24}
-          color={currentTheme === "light" ? colors.primary : <span class="branch-1 cbranch-no" title="branch not covered" >"#4ECDC4"}</span>
+          color={colors.primary} // 🌅 Utilise la couleur du thème actif
         /&gt;
         &lt;Text style={styles.headerText}&gt;{t("prayer_stats")}&lt;/Text&gt;
       &lt;/View&gt;
@@ -656,10 +641,10 @@ export default function PrayerStats({
       &lt;View style={styles.statsGrid}&gt;
         {/* Durée du jour */}
         &lt;View style={styles.statItem}&gt;
-          &lt;MaterialCommunityIcons
+          &lt;MCIcon
             name="weather-sunny"
             size={20}
-            color={currentTheme === "light" ? colors.primary : <span class="branch-1 cbranch-no" title="branch not covered" >"#4ECDC4"}</span>
+            color={colors.primary} // 🌅 Utilise la couleur du thème actif
           /&gt;
           &lt;Text style={styles.statLabel}&gt;{t("day_length")}&lt;/Text&gt;
           &lt;Text style={styles.statValue}&gt;{formatDuration(dayLength)}&lt;/Text&gt;
@@ -667,10 +652,10 @@ export default function PrayerStats({
 &nbsp;
         {/* Temps entre Fajr et lever du soleil */}
         &lt;View style={styles.statItem}&gt;
-          &lt;MaterialCommunityIcons
+          &lt;MCIcon
             name="weather-sunset-up"
             size={20}
-            color={currentTheme === "light" ? colors.primary : <span class="branch-1 cbranch-no" title="branch not covered" >"#4ECDC4"}</span>
+            color={colors.primary} // 🌅 Utilise la couleur du thème actif
           /&gt;
           &lt;Text style={styles.statLabel}&gt;{t("fajr_to_sunrise")}&lt;/Text&gt;
           &lt;Text style={styles.statValue}&gt;{formatDuration(fajrToSunrise)}&lt;/Text&gt;
@@ -678,10 +663,10 @@ export default function PrayerStats({
 &nbsp;
         {/* Temps entre coucher du soleil et Isha */}
         &lt;View style={styles.statItem}&gt;
-          &lt;MaterialCommunityIcons
+          &lt;MCIcon
             name="weather-sunset-down"
             size={20}
-            color={currentTheme === "light" ? colors.primary : <span class="branch-1 cbranch-no" title="branch not covered" >"#4ECDC4"}</span>
+            color={colors.primary} // 🌅 Utilise la couleur du thème actif
           /&gt;
           &lt;Text style={styles.statLabel}&gt;{t("sunset_to_isha")}&lt;/Text&gt;
           &lt;Text style={styles.statValue}&gt;{formatDuration(sunsetToIsha)}&lt;/Text&gt;
@@ -742,7 +727,7 @@ export default function PrayerStats({
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-08-20T16:28:56.280Z
+                at 2026-06-08T13:23:03.162Z
             </div>
         <script src="../prettify.js"></script>
         <script>

@@ -212,6 +212,44 @@ jest.mock("react-native/Libraries/Utilities/useColorScheme", () => ({
   default: jest.fn(() => "light"),
 }));
 
+jest.mock("react-native-reanimated", () => {
+  const Reanimated = require("react-native-reanimated/mock");
+  Reanimated.default.call = () => {};
+  return Reanimated;
+});
+
+jest.mock("react-native-svg", () => {
+  const React = require("react");
+  const { View } = require("react-native");
+  return {
+    __esModule: true,
+    default: View,
+    Svg: View,
+    Circle: View,
+    G: View,
+    Path: View,
+    Rect: View,
+  };
+});
+
+jest.mock("@react-native-community/netinfo", () => ({
+  addEventListener: jest.fn((callback) => {
+    callback({
+      isConnected: true,
+      isInternetReachable: true,
+      type: "wifi",
+    });
+    return jest.fn();
+  }),
+  fetch: jest.fn(() =>
+    Promise.resolve({
+      isConnected: true,
+      isInternetReachable: true,
+      type: "wifi",
+    })
+  ),
+}));
+
 // 🚀 NOUVEAU : Mock react-native-safe-area-context pour useUniversalLayout
 jest.mock("react-native-safe-area-context", () => ({
   useSafeAreaInsets: jest.fn(() => ({

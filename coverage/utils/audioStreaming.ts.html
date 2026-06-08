@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">62.84% </span>
+                <span class="strong">62.63% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>115/183</span>
+                <span class='fraction'>114/182</span>
             </div>
         
             
@@ -37,9 +37,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">68.96% </span>
+                <span class="strong">70% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>20/29</span>
+                <span class='fraction'>21/30</span>
             </div>
         
             
@@ -630,7 +630,8 @@
 <a name='L565'></a><a href='#L565'>565</a>
 <a name='L566'></a><a href='#L566'>566</a>
 <a name='L567'></a><a href='#L567'>567</a>
-<a name='L568'></a><a href='#L568'>568</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L568'></a><a href='#L568'>568</a>
+<a name='L569'></a><a href='#L569'>569</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -754,7 +755,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">45x</span>
 <span class="cline-any cline-yes">45x</span>
-<span class="cline-any cline-yes">45x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">45x</span>
@@ -763,14 +763,16 @@
 <span class="cline-any cline-yes">45x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">45x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1014x</span>
 <span class="cline-any cline-yes">1014x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1014x</span>
+<span class="cline-any cline-yes">1014x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -812,7 +814,7 @@
 <span class="cline-any cline-yes">11x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">11x</span>
-<span class="cline-any cline-yes">207x</span>
+<span class="cline-any cline-yes">219x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">11x</span>
@@ -1149,21 +1151,21 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">192x</span>
+<span class="cline-any cline-yes">206x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">192x</span>
-<span class="cline-any cline-yes">3427x</span>
+<span class="cline-any cline-yes">206x</span>
+<span class="cline-any cline-yes">3707x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">192x</span>
+<span class="cline-any cline-yes">206x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">190x</span>
+<span class="cline-any cline-yes">204x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">192x</span>
+<span class="cline-any cline-yes">206x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">8x</span>
@@ -1228,7 +1230,7 @@ export interface StreamingSession {
   bufferHealth: number; // Pourcentage de buffer disponible
 }
 &nbsp;
-export class AudioStreamingManager {
+class AudioStreamingManager {
   private static instance: AudioStreamingManager;
   private sessions: Map&lt;string, StreamingSession&gt; = new Map();
   private cdnOptimizer: CDNOptimizer;
@@ -1319,7 +1321,6 @@ export class AudioStreamingManager {
     originalUrl: string,
     duration?: number
   ): Promise&lt;AudioSegment[]&gt; {
-    const segments: AudioSegment[] = [];
     const segmentDuration = 15; // 15 secondes par segment
     const estimatedDuration = duration || 300; // 5 minutes par défaut
 &nbsp;
@@ -1329,24 +1330,26 @@ export class AudioStreamingManager {
 &nbsp;
     const totalSegments = Math.ceil(estimatedDuration / segmentDuration);
 &nbsp;
-    for (let i = 0; i &lt; totalSegments; i++) {
-      const startTime = i * segmentDuration;
-      const segmentUrl = this.buildSegmentUrl(
-        originalUrl,
-        startTime,
-        segmentDuration
-      );
+    const segmentMeta = await Promise.all(
+      Array.from({ length: totalSegments }, async (_, i) =&gt; {
+        const startTime = i * segmentDuration;
+        const segmentUrl = this.buildSegmentUrl(
+          originalUrl,
+          startTime,
+          segmentDuration
+        );
+        const cached = await this.isSegmentCached(`${audioId}_${i}`);
+        return {
+          url: segmentUrl,
+          startTime,
+          duration: Math.min(segmentDuration, estimatedDuration - startTime),
+          size: segmentSize,
+          cached,
+        };
+      })
+    );
 &nbsp;
-      segments.push({
-        url: segmentUrl,
-        startTime,
-        duration: Math.min(segmentDuration, estimatedDuration - startTime),
-        size: segmentSize,
-        cached: await this.isSegmentCached(`${audioId}_${i}`),
-      });
-    }
-&nbsp;
-    return segments;
+    return segmentMeta;
   }
 &nbsp;
   /**
@@ -1771,7 +1774,7 @@ export default AudioStreamingManager;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-08-20T16:28:56.280Z
+                at 2026-06-08T13:23:03.162Z
             </div>
         <script src="../prettify.js"></script>
         <script>

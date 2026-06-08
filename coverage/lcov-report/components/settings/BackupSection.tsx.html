@@ -774,8 +774,8 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { useState } from "react";
-import { View, Text, TouchableOpacity, ActivityIndicator } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { View, Text, Pressable, ActivityIndicator } from "react-native";
+import { MCIcon } from "@/components/icons/AppVectorIcons";
 import { useBackup } from "../../contexts/BackupContext";
 import { useTranslation } from "react-i18next";
 import { usePremium } from "../../contexts/PremiumContext";
@@ -982,7 +982,7 @@ export default function <span class="fstat-no" title="function not covered" >Bac
                       : t("not_available", "Non disponible")}
                   &lt;/Text&gt;
                 &lt;/View&gt;
-                &lt;TouchableOpacity
+                &lt;Pressable
                   style={styles.refreshButton}
                   onPress={<span class="fstat-no" title="function not covered" >as</span>ync () =&gt; {
                     // Forcer la vérification des données cloud en rechargeant l'app
@@ -1006,12 +1006,12 @@ export default function <span class="fstat-no" title="function not covered" >Bac
                     });
                   }}
                 &gt;
-                  &lt;MaterialCommunityIcons
+                  &lt;MCIcon
                     name="refresh"
                     size={16}
                     color={styles.iconColor?.color || "#000"}
                   /&gt;
-                &lt;/TouchableOpacity&gt;
+                &lt;/Pressable&gt;
               &lt;/View&gt;
             &lt;/View&gt;
           ),
@@ -1021,7 +1021,7 @@ export default function <span class="fstat-no" title="function not covered" >Bac
           component: (
             &lt;View style={styles.section}&gt;
               &lt;View style={styles.backupSectionHeader}&gt;
-                &lt;MaterialCommunityIcons
+                &lt;MCIcon
                   name="cog"
                   size={24}
                   color={styles.iconColor?.color || "#000"}
@@ -1044,7 +1044,7 @@ export default function <span class="fstat-no" title="function not covered" >Bac
                     )}
                   &lt;/Text&gt;
                 &lt;/View&gt;
-                &lt;TouchableOpacity
+                &lt;Pressable
                   style={[
                     styles.toggle,
                     isAutoBackupEnabled &amp;&amp; styles.toggleActive,
@@ -1058,12 +1058,12 @@ export default function <span class="fstat-no" title="function not covered" >Bac
                       isAutoBackupEnabled &amp;&amp; styles.toggleThumbActive,
                     ]}
                   /&gt;
-                &lt;/TouchableOpacity&gt;
+                &lt;/Pressable&gt;
               &lt;/View&gt;
 &nbsp;
               {/* Boutons d'action */}
               &lt;View style={styles.actionButtons}&gt;
-                &lt;TouchableOpacity
+                &lt;Pressable
                   style={[styles.actionButton, styles.primaryButton]}
                   onPress={handleBackup}
                   disabled={isSyncing}
@@ -1071,7 +1071,7 @@ export default function <span class="fstat-no" title="function not covered" >Bac
                   {isSyncing &amp;&amp; backupStatus === "syncing" ? (
                     &lt;ActivityIndicator size="small" color="#fff" /&gt;
                   ) : (
-                    &lt;MaterialCommunityIcons
+                    &lt;MCIcon
                       name="cloud-upload"
                       size={20}
                       color="#fff"
@@ -1080,14 +1080,14 @@ export default function <span class="fstat-no" title="function not covered" >Bac
                   &lt;Text style={styles.actionButtonText}&gt;
                     {t("backup_now", "Sauvegarder maintenant")}
                   &lt;/Text&gt;
-                &lt;/TouchableOpacity&gt;
+                &lt;/Pressable&gt;
 &nbsp;
-                &lt;TouchableOpacity
+                &lt;Pressable
                   style={[styles.actionButton, styles.secondaryButton]}
                   onPress={handleRestore}
                   disabled={isSyncing || !hasCloudData}
                 &gt;
-                  &lt;MaterialCommunityIcons
+                  &lt;MCIcon
                     name="cloud-download"
                     size={20}
                     color={styles.iconColor?.color || "#000"}
@@ -1100,7 +1100,7 @@ export default function <span class="fstat-no" title="function not covered" >Bac
                   &gt;
                     {t("restore", "Restaurer")}
                   &lt;/Text&gt;
-                &lt;/TouchableOpacity&gt;
+                &lt;/Pressable&gt;
               &lt;/View&gt;
 &nbsp;
               {/* Statut de synchronisation */}
@@ -1135,7 +1135,7 @@ export default function <span class="fstat-no" title="function not covered" >Bac
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-08-20T16:28:56.100Z
+                at 2026-06-08T13:23:02.899Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

@@ -30,9 +30,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">76.92% </span>
+                <span class="strong">93.75% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>40/52</span>
+                <span class='fraction'>30/32</span>
             </div>
         
             
@@ -290,19 +290,8 @@
 <a name='L225'></a><a href='#L225'>225</a>
 <a name='L226'></a><a href='#L226'>226</a>
 <a name='L227'></a><a href='#L227'>227</a>
-<a name='L228'></a><a href='#L228'>228</a>
-<a name='L229'></a><a href='#L229'>229</a>
-<a name='L230'></a><a href='#L230'>230</a>
-<a name='L231'></a><a href='#L231'>231</a>
-<a name='L232'></a><a href='#L232'>232</a>
-<a name='L233'></a><a href='#L233'>233</a>
-<a name='L234'></a><a href='#L234'>234</a>
-<a name='L235'></a><a href='#L235'>235</a>
-<a name='L236'></a><a href='#L236'>236</a>
-<a name='L237'></a><a href='#L237'>237</a>
-<a name='L238'></a><a href='#L238'>238</a>
-<a name='L239'></a><a href='#L239'>239</a>
-<a name='L240'></a><a href='#L240'>240</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L228'></a><a href='#L228'>228</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -323,21 +312,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">28x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -543,13 +519,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from "react";
 import { View, Text, StyleSheet } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { MCIcon } from "@/components/icons/AppVectorIcons";
 import { useTranslation } from "react-i18next";
 import {
   useThemeColors,
   useOverlayTextColor,
   useCurrentTheme,
 } from "../hooks/useThemeColor";
+import { makeBoxShadow } from "../utils/shadowUtils";
 &nbsp;
 interface SunInfoProps {
   sunrise: Date | null;
@@ -560,23 +537,18 @@ interface SunInfoProps {
 const getStyles = (
   colors: any,
   overlayTextColor: string,
-  currentTheme: "light" | "dark"
-) =&gt;
-  StyleSheet.create({
+  currentTheme: "light" | "dark" | "morning" | "sunset"
+) =&gt; {
+  // 🆕 Les couleurs sont maintenant gérées directement via colors du thème actif
+  return StyleSheet.create({
     container: {
-      backgroundColor:
-        currentTheme === "light" ? colors.cardBG : <span class="branch-1 cbranch-no" title="branch not covered" >"rgba(0, 0, 0, 0.5)",</span>
+      backgroundColor: colors.cardBG, // 🌅 Utilise la couleur du thème actif
       borderRadius: 16,
       padding: 16,
       marginBottom: 16,
       borderWidth: 1,
-      borderColor:
-        currentTheme === "light" ? colors.border : <span class="branch-1 cbranch-no" title="branch not covered" >"rgba(255, 217, 61, 0.3)",</span>
-      shadowColor: currentTheme === "light" ? colors.shadow : <span class="branch-1 cbranch-no" title="branch not covered" >"#FFD93D",</span>
-      shadowOffset: { width: 0, height: 4 },
-      shadowOpacity: 0.3,
-      shadowRadius: 10,
-      elevation: 6,
+      borderColor: colors.border, // 🌅 Utilise la couleur du thème actif
+      boxShadow: makeBoxShadow(colors.shadow, 0, 4, 10, 0.3),
     },
     header: {
       flexDirection: "row",
@@ -594,8 +566,7 @@ const getStyles = (
     },
     sunPath: {
       height: 3,
-      backgroundColor:
-        currentTheme === "light" ? colors.border : <span class="branch-1 cbranch-no" title="branch not covered" >"rgba(255, 217, 61, 0.2)",</span>
+      backgroundColor: colors.border, // 🌅 Utilise la couleur du thème actif
       borderRadius: 1.5,
       marginBottom: 8,
       position: "relative",
@@ -604,15 +575,11 @@ const getStyles = (
       position: "absolute",
       width: 12,
       height: 12,
-      backgroundColor: currentTheme === "light" ? colors.primary : <span class="branch-1 cbranch-no" title="branch not covered" >"#FFD93D",</span>
+      backgroundColor: colors.primary, // 🌅 Utilise la couleur du thème actif
       borderRadius: 6,
       top: -4.5,
       marginLeft: -6,
-      shadowColor: currentTheme === "light" ? colors.shadow : <span class="branch-1 cbranch-no" title="branch not covered" >"#FFD93D",</span>
-      shadowOffset: { width: 0, height: 0 },
-      shadowOpacity: 0.8,
-      shadowRadius: 4,
-      elevation: 4,
+      boxShadow: makeBoxShadow(colors.shadow, 0, 0, 4, 0.8),
     },
     timeMarkers: {
       flexDirection: "row",
@@ -621,16 +588,12 @@ const getStyles = (
     },
     timeText: {
       fontSize: 14,
-      color:
-        currentTheme === "light"
-          ? colors.textSecondary
-          : <span class="branch-1 cbranch-no" title="branch not covered" >"rgba(255, 255, 255, 0.8)",</span>
+      color: colors.textSecondary, // 🌅 Utilise la couleur du thème actif
     },
     nextEvent: {
       flexDirection: "row",
       alignItems: "center",
-      backgroundColor:
-        currentTheme === "light" ? colors.surface : <span class="branch-1 cbranch-no" title="branch not covered" >"rgba(255, 217, 61, 0.1)",</span>
+      backgroundColor: colors.surface, // 🌅 Utilise la couleur du thème actif
       padding: 12,
       borderRadius: 12,
     },
@@ -641,6 +604,7 @@ const getStyles = (
       fontWeight: "500",
     },
   });
+};
 &nbsp;
 export function SunInfo({ sunrise, sunset, currentTime }: SunInfoProps) {
   const { t } = useTranslation();
@@ -728,10 +692,10 @@ export function SunInfo({ sunrise, sunset, currentTime }: SunInfoProps) {
     &lt;View style={styles.container}&gt;
       {/* En-tête avec durée du jour */}
       &lt;View style={styles.header}&gt;
-        &lt;MaterialCommunityIcons
+        &lt;MCIcon
           name="weather-sunny"
           size={24}
-          color={currentTheme === "light" ? colors.primary : <span class="branch-1 cbranch-no" title="branch not covered" >"#FFD93D"}</span>
+          color={colors.primary} // 🌅 Utilise la couleur du thème actif
         /&gt;
         &lt;Text style={styles.headerText}&gt;
           {t("sun_info.day_duration", "Durée du jour")}: {getDayDuration()}
@@ -761,14 +725,14 @@ export function SunInfo({ sunrise, sunset, currentTime }: SunInfoProps) {
 &nbsp;
       {/* Prochain événement solaire */}
       &lt;View style={styles.nextEvent}&gt;
-        &lt;MaterialCommunityIcons
+        &lt;MCIcon
           name={
             nextSunEvent.event === "sunrise"
               ? "weather-sunset-up"
               : "weather-sunset-down"
           }
           size={20}
-          color={currentTheme === "light" ? colors.primary : <span class="branch-1 cbranch-no" title="branch not covered" >"#FFD93D"}</span>
+          color={colors.primary} // 🌅 Utilise la couleur du thème actif
         /&gt;
         &lt;Text style={styles.nextEventText}&gt;
           {nextSunEvent.event === "sunrise"
@@ -787,7 +751,7 @@ export function SunInfo({ sunrise, sunset, currentTime }: SunInfoProps) {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-08-20T16:28:56.100Z
+                at 2026-06-08T13:23:02.899Z
             </div>
         <script src="../prettify.js"></script>
         <script>

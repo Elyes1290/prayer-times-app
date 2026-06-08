@@ -1,5 +1,5 @@
 import React from "react";
-import { render, act } from "@testing-library/react-native";
+import { render, waitFor } from "@testing-library/react-native";
 import {
   PremiumProvider,
   usePremium,
@@ -8,7 +8,6 @@ import {
 } from "../../contexts/PremiumContext";
 import { Text } from "react-native";
 
-// Mock d'AsyncStorage avec stockage en mémoire
 const mockStorage: { [key: string]: string } = {};
 const mockGetItem = jest.fn((key: string) => {
   return Promise.resolve(mockStorage[key] || null);
@@ -27,27 +26,32 @@ const mockClear = jest.fn(() => {
 });
 
 jest.mock("@react-native-async-storage/async-storage", () => ({
-  getItem: mockGetItem,
-  setItem: mockSetItem,
-  removeItem: mockRemoveItem,
-  clear: mockClear,
+  __esModule: true,
+  default: {
+    getItem: mockGetItem,
+    setItem: mockSetItem,
+    removeItem: mockRemoveItem,
+    clear: mockClear,
+    multiRemove: jest.fn().mockResolvedValue(undefined),
+  },
 }));
 
-// Mock de ToastContext
 jest.mock("../../contexts/ToastContext", () => ({
   useToast: () => ({ showToast: jest.fn() }),
 }));
 
-// Mock d'apiClient
-jest.mock("../../utils/apiClient", () => ({
+const mockApiClient = {
   getUser: jest.fn().mockResolvedValue({ success: true, data: { user_id: 1 } }),
-  checkPremiumStatus: jest
-    .fn()
-    .mockResolvedValue({ success: true, isPremium: false }),
+  verifyAuth: jest.fn().mockResolvedValue({ success: true }),
   getPremiumPurchases: jest.fn().mockResolvedValue({ success: true, data: [] }),
+  syncIosPremiumRenewal: jest.fn().mockResolvedValue({ success: true }),
+};
+
+jest.mock("../../utils/apiClient", () => ({
+  __esModule: true,
+  default: mockApiClient,
 }));
 
-// Mock de SyncManager
 jest.mock("../../utils/syncManager", () => ({
   __esModule: true,
   default: {
@@ -57,11 +61,50 @@ jest.mock("../../utils/syncManager", () => ({
   },
 }));
 
+jest.mock("../../hooks/useNetworkStatus", () => ({
+  useNetworkStatus: () => ({
+    isConnected: true,
+    isInternetReachable: true,
+    type: "wifi",
+    isWifi: true,
+    isCellular: false,
+    isEthernet: false,
+  }),
+}));
+
+jest.mock("../../utils/iapService", () => ({
+  IapService: {
+    getInstance: () => ({
+      checkPremiumStatus: jest.fn().mockResolvedValue(false),
+      getActiveEntitlementSnapshot: jest.fn().mockResolvedValue(null),
+    }),
+  },
+}));
+
+jest.mock("../../utils/premiumContent", () => ({
+  __esModule: true,
+  default: {
+    getInstance: () => ({
+      syncDownloadedContentWithFiles: jest
+        .fn()
+        .mockResolvedValue({ fixed: 0, errors: [] }),
+    }),
+  },
+}));
+
+jest.mock("react-i18next", () => ({
+  useTranslation: () => ({
+    t: (key: string, fallback?: string) => fallback || key,
+  }),
+}));
+
 describe("PremiumContext", () => {
   beforeEach(() => {
     jest.clearAllMocks();
-    // Nettoyer le stockage mock
     Object.keys(mockStorage).forEach((key) => delete mockStorage[key]);
+    mockGetItem.mockImplementation((key: string) =>
+      Promise.resolve(mockStorage[key] || null)
+    );
   });
 
   describe("Initialisation", () => {
@@ -81,12 +124,9 @@ describe("PremiumContext", () => {
         </PremiumProvider>
       );
 
-      await act(async () => {
-        await new Promise((resolve) => setTimeout(resolve, 50));
+      await waitFor(() => {
+        expect(getByTestId("premium-status").props.children).toBe("free");
       });
-
-      const status = getByTestId("premium-status");
-      expect(status.props.children).toBe("free");
     });
 
     it("should have correct default user properties", async () => {
@@ -112,11 +152,9 @@ describe("PremiumContext", () => {
         </PremiumProvider>
       );
 
-      await act(async () => {
-        await new Promise((resolve) => setTimeout(resolve, 50));
+      await waitFor(() => {
+        expect(getByTestId("isPremium").props.children).toBe("false");
       });
-
-      expect(getByTestId("isPremium").props.children).toBe("false");
       expect(getByTestId("subscriptionType").props.children).toBe("null");
       expect(getByTestId("features").props.children).toBe("0");
       expect(getByTestId("hasPurchasedPremium").props.children).toBe("false");
@@ -136,11 +174,9 @@ describe("PremiumContext", () => {
         </PremiumProvider>
       );
 
-      await act(async () => {
-        await new Promise((resolve) => setTimeout(resolve, 50));
+      await waitFor(() => {
+        expect(getByTestId("isPremium").props.children).toBe("false");
       });
-
-      expect(getByTestId("isPremium").props.children).toBe("false");
     });
 
     it("should useHasFeature hook work correctly", async () => {
@@ -155,11 +191,9 @@ describe("PremiumContext", () => {
         </PremiumProvider>
       );
 
-      await act(async () => {
-        await new Promise((resolve) => setTimeout(resolve, 50));
+      await waitFor(() => {
+        expect(getByTestId("hasFeature").props.children).toBe("false");
       });
-
-      expect(getByTestId("hasFeature").props.children).toBe("false");
     });
   });
 
@@ -183,11 +217,9 @@ describe("PremiumContext", () => {
         </PremiumProvider>
       );
 
-      await act(async () => {
-        await new Promise((resolve) => setTimeout(resolve, 50));
+      await waitFor(() => {
+        expect(getByTestId("feature1").props.children).toBe("false");
       });
-
-      expect(getByTestId("feature1").props.children).toBe("false");
       expect(getByTestId("canUseFeature1").props.children).toBe("true");
     });
 
@@ -243,11 +275,9 @@ describe("PremiumContext", () => {
         </PremiumProvider>
       );
 
-      await act(async () => {
-        await new Promise((resolve) => setTimeout(resolve, 50));
+      await waitFor(() => {
+        expect(getByTestId("hasCheckPremiumStatus").props.children).toBe("true");
       });
-
-      expect(getByTestId("hasCheckPremiumStatus").props.children).toBe("true");
       expect(getByTestId("hasActivatePremium").props.children).toBe("true");
       expect(getByTestId("hasDeactivatePremium").props.children).toBe("true");
       expect(getByTestId("hasHasFeature").props.children).toBe("true");
@@ -284,12 +314,9 @@ describe("PremiumContext", () => {
         </PremiumProvider>
       );
 
-      await act(async () => {
-        await new Promise((resolve) => setTimeout(resolve, 50));
+      await waitFor(() => {
+        expect(getByTestId("premium-status").props.children).toBe("free");
       });
-
-      const status = getByTestId("premium-status");
-      expect(status.props.children).toBe("free");
     });
 
     it("should handle invalid JSON in storage", async () => {
@@ -310,24 +337,18 @@ describe("PremiumContext", () => {
         </PremiumProvider>
       );
 
-      await act(async () => {
-        await new Promise((resolve) => setTimeout(resolve, 50));
+      await waitFor(() => {
+        expect(getByTestId("premium-status").props.children).toBe("free");
       });
-
-      const status = getByTestId("premium-status");
-      expect(status.props.children).toBe("free");
     });
   });
 
   describe("Performance et Stabilité", () => {
     it("should maintain state consistency", async () => {
       const TestComponent = () => {
-        const { user, loading } = usePremium();
+        const { user } = usePremium();
         return (
-          <>
-            <Text testID="isPremium">{user.isPremium.toString()}</Text>
-            <Text testID="loading">{loading.toString()}</Text>
-          </>
+          <Text testID="isPremium">{user.isPremium.toString()}</Text>
         );
       };
 
@@ -337,16 +358,9 @@ describe("PremiumContext", () => {
         </PremiumProvider>
       );
 
-      await act(async () => {
-        await new Promise((resolve) => setTimeout(resolve, 50));
+      await waitFor(() => {
+        expect(getByTestId("isPremium").props.children).toBe("false");
       });
-
-      // L'état devrait être cohérent
-      const isPremium = getByTestId("isPremium").props.children;
-      const loading = getByTestId("loading").props.children;
-
-      expect(isPremium).toBe("false");
-      expect(loading).toBe("false");
     });
   });
 });

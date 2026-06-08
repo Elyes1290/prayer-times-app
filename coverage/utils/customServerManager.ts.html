@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">9.43% </span>
+                <span class="strong">9.09% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>10/106</span>
+                <span class='fraction'>10/110</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">7.14% </span>
+                <span class="strong">6.81% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>3/42</span>
+                <span class='fraction'>3/44</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">17.64% </span>
+                <span class="strong">16.66% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>3/17</span>
+                <span class='fraction'>3/18</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">9.9% </span>
+                <span class="strong">9.52% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>10/101</span>
+                <span class='fraction'>10/105</span>
             </div>
         
             
@@ -425,7 +425,11 @@
 <a name='L360'></a><a href='#L360'>360</a>
 <a name='L361'></a><a href='#L361'>361</a>
 <a name='L362'></a><a href='#L362'>362</a>
-<a name='L363'></a><a href='#L363'>363</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L363'></a><a href='#L363'>363</a>
+<a name='L364'></a><a href='#L364'>364</a>
+<a name='L365'></a><a href='#L365'>365</a>
+<a name='L366'></a><a href='#L366'>366</a>
+<a name='L367'></a><a href='#L367'>367</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -513,6 +517,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -524,13 +535,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -798,7 +806,7 @@ import { PremiumContent } from "./premiumContent";
  * Économie : 173 CHF → 7 CHF/mois (-96%)
  */
 &nbsp;
-export interface CustomServerConfig {
+interface CustomServerConfig {
   enabled: boolean;
   baseUrl: string;
   fallbackUrls: string[];
@@ -807,14 +815,14 @@ export interface CustomServerConfig {
   cacheEnabled: boolean;
 }
 &nbsp;
-export interface ServerResponse {
+interface ServerResponse {
   success: boolean;
   url?: string;
   error?: string;
   source: "custom" | "cdn" | "firebase";
 }
 &nbsp;
-export class CustomServerManager {
+class CustomServerManager {
   private static instance: CustomServerManager;
   private config: CustomServerConfig;
 &nbsp;
@@ -875,8 +883,15 @@ export class CustomServerManager {
 &nbsp;
     const urls = <span class="cstat-no" title="statement not covered" >this.buildAudioUrls(content);</span>
 &nbsp;
-    // Tester chaque URL dans l'ordre
-<span class="cstat-no" title="statement not covered" >    for (const { url, source } of urls) {</span>
+    const tryUrlAt = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >as</span>ync (index: number): Promise&lt;ServerResponse&gt; =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >      if (index &gt;= urls.length) {</span>
+<span class="cstat-no" title="statement not covered" >        return {</span>
+          success: false,
+          error: "Aucune source audio accessible",
+          source: "custom",
+        };
+      }
+      const { url, source } = <span class="cstat-no" title="statement not covered" >urls[index];</span>
 <span class="cstat-no" title="statement not covered" >      try {</span>
         const isAccessible = <span class="cstat-no" title="statement not covered" >await this.testUrlAccessibility(url);</span>
 <span class="cstat-no" title="statement not covered" >        if (isAccessible) {</span>
@@ -886,13 +901,10 @@ export class CustomServerManager {
       } catch (error) {
 <span class="cstat-no" title="statement not covered" >        debugLog(`❌ Échec ${source}: ${url}`);</span>
       }
-    }
-&nbsp;
-<span class="cstat-no" title="statement not covered" >    return {</span>
-      success: false,
-      error: "Aucune source audio accessible",
-      source: "custom",
+<span class="cstat-no" title="statement not covered" >      return tryUrlAt(index + 1);</span>
     };
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return tryUrlAt(0);</span>
   }
 &nbsp;
   /**
@@ -1156,7 +1168,7 @@ export default CustomServerManager;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-08-20T16:28:56.280Z
+                at 2026-06-08T13:23:03.162Z
             </div>
         <script src="../prettify.js"></script>
         <script>

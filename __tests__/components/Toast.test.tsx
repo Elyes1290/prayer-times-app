@@ -103,14 +103,13 @@ describe("Toast", () => {
 
     it("devrait auto-hide après la durée spécifiée", () => {
       render(<Toast toast={mockToastData} onHide={mockOnHide} />);
+      expect(screen.getByTestId("toast-container")).toBeTruthy();
 
-      // Avancer le temps de 3 secondes
       act(() => {
-        jest.advanceTimersByTime(3000);
+        jest.advanceTimersByTime(3300);
       });
 
-      // Le toast devrait être rendu
-      expect(screen.getByTestId("toast-container")).toBeTruthy();
+      expect(mockOnHide).toHaveBeenCalledWith(mockToastData.id);
     });
 
     it("devrait utiliser la durée par défaut de 3000ms", () => {
@@ -120,13 +119,13 @@ describe("Toast", () => {
       };
 
       render(<Toast toast={toastWithoutDuration} onHide={mockOnHide} />);
+      expect(screen.getByTestId("toast-container")).toBeTruthy();
 
       act(() => {
-        jest.advanceTimersByTime(3000);
+        jest.advanceTimersByTime(3300);
       });
 
-      // Le toast devrait être rendu
-      expect(screen.getByTestId("toast-container")).toBeTruthy();
+      expect(mockOnHide).toHaveBeenCalledWith(mockToastData.id);
     });
   });
 
@@ -179,13 +178,13 @@ describe("Toast", () => {
       };
 
       render(<Toast toast={shortDurationToast} onHide={mockOnHide} />);
+      expect(screen.getByTestId("toast-container")).toBeTruthy();
 
       act(() => {
-        jest.advanceTimersByTime(100);
+        jest.advanceTimersByTime(400);
       });
 
-      // Le toast devrait être rendu
-      expect(screen.getByTestId("toast-container")).toBeTruthy();
+      expect(mockOnHide).toHaveBeenCalledWith(mockToastData.id);
     });
   });
 

@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">93.75% </span>
+                <span class="strong">94.44% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>15/16</span>
+                <span class='fraction'>17/18</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">87.5% </span>
+                <span class="strong">75% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>7/8</span>
+                <span class='fraction'>9/12</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">93.33% </span>
+                <span class="strong">94.11% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>14/15</span>
+                <span class='fraction'>16/17</span>
             </div>
         
             
@@ -125,7 +125,19 @@
 <a name='L60'></a><a href='#L60'>60</a>
 <a name='L61'></a><a href='#L61'>61</a>
 <a name='L62'></a><a href='#L62'>62</a>
-<a name='L63'></a><a href='#L63'>63</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L63'></a><a href='#L63'>63</a>
+<a name='L64'></a><a href='#L64'>64</a>
+<a name='L65'></a><a href='#L65'>65</a>
+<a name='L66'></a><a href='#L66'>66</a>
+<a name='L67'></a><a href='#L67'>67</a>
+<a name='L68'></a><a href='#L68'>68</a>
+<a name='L69'></a><a href='#L69'>69</a>
+<a name='L70'></a><a href='#L70'>70</a>
+<a name='L71'></a><a href='#L71'>71</a>
+<a name='L72'></a><a href='#L72'>72</a>
+<a name='L73'></a><a href='#L73'>73</a>
+<a name='L74'></a><a href='#L74'>74</a>
+<a name='L75'></a><a href='#L75'>75</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -133,6 +145,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -160,7 +173,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">26x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">26x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -183,7 +203,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">14x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -201,7 +225,8 @@ export async function schedulePrayerNotifications(
   prayerTimes: Record&lt;string, Date&gt;,
   adhanSound: string,
   remindersEnabled: boolean,
-  reminderOffset: number
+  reminderOffset: number,
+  dateKey?: string // 🔑 Nouvelle param optionnelle pour identifier la date
 ) {
   const now = new Date();
   const minTimeGap = 30 * 1000; // 30 secondes en millisecondes
@@ -222,9 +247,16 @@ export async function schedulePrayerNotifications(
           ? <span class="branch-0 cbranch-no" title="branch not covered" >now.getTime() + minTimeGap</span>
           : reminderTime;
 &nbsp;
+      // 🔑 Génère une clé unique incluant la date et un préfixe pour éviter les collisions avec les adhans
+      const uniqueKey = dateKey
+        ? <span class="branch-0 cbranch-no" title="branch not covered" >`reminder_${prayer}_${dateKey}`</span>
+        : `reminder_${prayer}_${Date.now()}`;
+&nbsp;
       return {
+        key: uniqueKey, // 🔑 Ajout de la clé unique
         prayer,
-        triggerMillis: adjustedReminderTime,
+        triggerMillis: adjustedReminderTime, // Pour Android
+        triggerAtMillis: adjustedReminderTime, // 🔧 Pour iOS (même nom que Adhans)
         title: i18n.t("prayer_reminder_title"),
         body: i18n.t("prayer_reminder_body", {
           prayer,
@@ -245,9 +277,13 @@ export async function schedulePrayerNotifications(
       reminderOffset: reminderOffset,
     });
 &nbsp;
-    NativeModules.AdhanModule.schedulePrayerReminders(reminders);
+    // 🍎 Sur iOS, on ne programme pas ici car on aggrège tout à la fin
+    // (pour éviter d'écraser les notifs précédentes)
+    <span class="missing-if-branch" title="else path not taken" >E</span>if (Platform.OS !== "ios") {
+      NativeModules.AdhanModule.schedulePrayerReminders(reminders);
+    }
   }
-  return;
+  return reminders; // 🔔 Retourner les reminders créés
 }
 &nbsp;</pre></td></tr></table></pre>
 
@@ -256,7 +292,7 @@ export async function schedulePrayerNotifications(
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-08-20T16:28:56.280Z
+                at 2026-06-08T13:23:03.162Z
             </div>
         <script src="../prettify.js"></script>
         <script>

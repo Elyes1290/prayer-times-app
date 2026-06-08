@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">24.39% </span>
+                <span class="strong">24.69% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>20/82</span>
+                <span class='fraction'>20/81</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">24.69% </span>
+                <span class="strong">25% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>20/81</span>
+                <span class='fraction'>20/80</span>
             </div>
         
             
@@ -302,12 +302,7 @@
 <a name='L237'></a><a href='#L237'>237</a>
 <a name='L238'></a><a href='#L238'>238</a>
 <a name='L239'></a><a href='#L239'>239</a>
-<a name='L240'></a><a href='#L240'>240</a>
-<a name='L241'></a><a href='#L241'>241</a>
-<a name='L242'></a><a href='#L242'>242</a>
-<a name='L243'></a><a href='#L243'>243</a>
-<a name='L244'></a><a href='#L244'>244</a>
-<a name='L245'></a><a href='#L245'>245</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L240'></a><a href='#L240'>240</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -443,13 +438,8 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -660,7 +650,7 @@ export const getCurrentUserData = <span class="fstat-no" title="function not cov
 /**
  * Vérifie si un utilisateur est connecté
  */
-export const isUserLoggedIn = <span class="fstat-no" title="function not covered" >as</span>ync (): Promise&lt;boolean&gt; =&gt; {
+const isUserLoggedIn = <span class="fstat-no" title="function not covered" >as</span>ync (): Promise&lt;boolean&gt; =&gt; {
   const userId = <span class="cstat-no" title="statement not covered" >await getCurrentUserId();</span>
 <span class="cstat-no" title="statement not covered" >  return userId !== null;</span>
 };
@@ -668,7 +658,7 @@ export const isUserLoggedIn = <span class="fstat-no" title="function not covered
 /**
  * Déconnecte l'utilisateur en supprimant les données du stockage
  */
-export const logoutUser = <span class="fstat-no" title="function not covered" >as</span>ync (): Promise&lt;void&gt; =&gt; {
+const logoutUser = <span class="fstat-no" title="function not covered" >as</span>ync (): Promise&lt;void&gt; =&gt; {
 <span class="cstat-no" title="statement not covered" >  try {</span>
 <span class="cstat-no" title="statement not covered" >    await AsyncStorage.removeItem("user_data");</span>
 <span class="cstat-no" title="statement not covered" >    console.log("✅ Utilisateur déconnecté");</span>
@@ -687,15 +677,10 @@ export const cleanupObsoleteUserData = <span class="fstat-no" title="function no
 <span class="cstat-no" title="statement not covered" >    console.log("🧪 [DEBUG] === AVANT NETTOYAGE ===");</span>
 <span class="cstat-no" title="statement not covered" >    await debugConnectionStatus();</span>
 &nbsp;
-    // 🚀 NOUVEAU : Vérifier d'abord s'il y a une connexion explicite
-    const explicitConnection = <span class="cstat-no" title="statement not covered" >await AsyncStorage.getItem(</span>
-      "explicit_connection"
-    );
-&nbsp;
-    // 🚀 NOUVEAU : Vérifier s'il y a un processus de paiement en cours
-    const pendingRegistration = <span class="cstat-no" title="statement not covered" >await AsyncStorage.getItem(</span>
-      "pending_registration"
-    );
+    const [explicitConnection, pendingRegistration] = <span class="cstat-no" title="statement not covered" >await Promise.all([</span>
+      AsyncStorage.getItem("explicit_connection"),
+      AsyncStorage.getItem("pending_registration"),
+    ]);
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    if (pendingRegistration) {</span>
 <span class="cstat-no" title="statement not covered" >      console.log("🔍 Processus de paiement en cours - pas de nettoyage");</span>
@@ -768,7 +753,7 @@ export const cleanupObsoleteUserData = <span class="fstat-no" title="function no
 /**
  * 🧪 DEBUG : Fonction pour vérifier le statut de connexion explicite
  */
-export const debugConnectionStatus = async (): Promise&lt;void&gt; =&gt; {
+const debugConnectionStatus = async (): Promise&lt;void&gt; =&gt; {
   try {
     const explicitConnection = await AsyncStorage.getItem(
       "explicit_connection"
@@ -802,7 +787,7 @@ export const debugConnectionStatus = async (): Promise&lt;void&gt; =&gt; {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-08-20T16:28:56.100Z
+                at 2026-06-08T13:23:02.899Z
             </div>
         <script src="../prettify.js"></script>
         <script>

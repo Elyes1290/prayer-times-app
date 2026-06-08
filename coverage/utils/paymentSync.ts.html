@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/76</span>
+                <span class='fraction'>0/73</span>
             </div>
         
             
@@ -39,14 +39,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/7</span>
+                <span class='fraction'>0/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/73</span>
+                <span class='fraction'>0/71</span>
             </div>
         
             
@@ -330,7 +330,12 @@
 <a name='L265'></a><a href='#L265'>265</a>
 <a name='L266'></a><a href='#L266'>266</a>
 <a name='L267'></a><a href='#L267'>267</a>
-<a name='L268'></a><a href='#L268'>268</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L268'></a><a href='#L268'>268</a>
+<a name='L269'></a><a href='#L269'>269</a>
+<a name='L270'></a><a href='#L270'>270</a>
+<a name='L271'></a><a href='#L271'>271</a>
+<a name='L272'></a><a href='#L272'>272</a>
+<a name='L273'></a><a href='#L273'>273</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -477,6 +482,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -527,15 +533,16 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -588,14 +595,17 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * 🚀 Utilitaires de synchronisation après paiement
@@ -736,6 +746,7 @@ const syncUserDataToLocal = <span class="cstat-no" title="statement not covered"
       premium_status: userData.premium_status,
       subscription_type: userData.subscription_type,
       subscription_id: userData.subscription_id,
+      stripe_customer_id: userData.stripe_customer_id, // 🔑 AJOUT pour gérer l'abonnement Stripe
       premium_expiry: userData.premium_expiry,
       premium_activated_at: userData.premium_activated_at,
       language: userData.language,
@@ -795,13 +806,14 @@ export const checkUserSyncStatus = <span class="cstat-no" title="statement not c
   explicitConnection: boolean;
 }&gt; =&gt; {
 <span class="cstat-no" title="statement not covered" >  try {</span>
-    const userData = <span class="cstat-no" title="statement not covered" >await AsyncStorage.getItem("user_data");</span>
-    const authToken = <span class="cstat-no" title="statement not covered" >await AsyncStorage.getItem("auth_token");</span>
-    const refreshToken = <span class="cstat-no" title="statement not covered" >await AsyncStorage.getItem("refresh_token");</span>
-    const isLoggedIn = <span class="cstat-no" title="statement not covered" >await AsyncStorage.getItem("is_logged_in");</span>
-    const explicitConnection = <span class="cstat-no" title="statement not covered" >await AsyncStorage.getItem(</span>
-      "explicit_connection"
-    );
+    const [userData, authToken, refreshToken, isLoggedIn, explicitConnection] =
+<span class="cstat-no" title="statement not covered" >      await Promise.all([</span>
+        AsyncStorage.getItem("user_data"),
+        AsyncStorage.getItem("auth_token"),
+        AsyncStorage.getItem("refresh_token"),
+        AsyncStorage.getItem("is_logged_in"),
+        AsyncStorage.getItem("explicit_connection"),
+      ]);
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    return {</span>
       hasUserData: !!userData,
@@ -826,7 +838,7 @@ export const checkUserSyncStatus = <span class="cstat-no" title="statement not c
  * 🧹 Nettoie les données d'inscription en attente
  * Utile en cas d'échec ou d'annulation
  */
-export const cleanupPendingRegistration = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >as</span>ync (): Promise&lt;void&gt; =&gt; {</span>
+const cleanupPendingRegistration = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >as</span>ync (): Promise&lt;void&gt; =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >  try {</span>
 <span class="cstat-no" title="statement not covered" >    await AsyncStorage.removeItem("pending_registration");</span>
 <span class="cstat-no" title="statement not covered" >    console.log("🧹 Données d'inscription nettoyées");</span>
@@ -842,7 +854,7 @@ export const cleanupPendingRegistration = <span class="cstat-no" title="statemen
 export const retryUserSync = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >as</span>ync (</span>
   maxRetries: number = <span class="branch-0 cbranch-no" title="branch not covered" >3</span>
 ): Promise&lt;PaymentSyncResult&gt; =&gt; {
-<span class="cstat-no" title="statement not covered" >  for (let attempt = <span class="cstat-no" title="statement not covered" >1;</span> attempt &lt;= maxRetries; attempt++) {</span>
+  const attemptSync = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >as</span>ync (attempt: number): Promise&lt;PaymentSyncResult&gt; =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >    console.log(`🔄 Tentative de synchronisation ${attempt}/${maxRetries}...`);</span>
 &nbsp;
     const result = <span class="cstat-no" title="statement not covered" >await syncUserAfterPayment();</span>
@@ -855,14 +867,17 @@ export const retryUserSync = <span class="cstat-no" title="statement not covered
         `⏱️ Attente avant nouvelle tentative (${attempt * 2} secondes)...`
       );
 <span class="cstat-no" title="statement not covered" >      await new Promise(<span class="fstat-no" title="function not covered" >(r</span>esolve) =&gt; <span class="cstat-no" title="statement not covered" >setTimeout(resolve, attempt * 2000))</span>;</span>
+<span class="cstat-no" title="statement not covered" >      return attemptSync(attempt + 1);</span>
     }
-  }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return {</span>
-    success: false,
-    message: `Échec après ${maxRetries} tentatives`,
-    requiresManualLogin: true,
+<span class="cstat-no" title="statement not covered" >    return {</span>
+      success: false,
+      message: `Échec après ${maxRetries} tentatives`,
+      requiresManualLogin: true,
+    };
   };
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  return attemptSync(1);</span>
 };
 &nbsp;</pre></td></tr></table></pre>
 
@@ -871,7 +886,7 @@ export const retryUserSync = <span class="cstat-no" title="statement not covered
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-08-20T16:28:56.280Z
+                at 2026-06-08T13:23:03.162Z
             </div>
         <script src="../prettify.js"></script>
         <script>

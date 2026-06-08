@@ -128,8 +128,7 @@
 <a name='L63'></a><a href='#L63'>63</a>
 <a name='L64'></a><a href='#L64'>64</a>
 <a name='L65'></a><a href='#L65'>65</a>
-<a name='L66'></a><a href='#L66'>66</a>
-<a name='L67'></a><a href='#L67'>67</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L66'></a><a href='#L66'>66</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -146,32 +145,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -188,6 +165,27 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -195,7 +193,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { useContext } from "react";
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { use } from "react";
 import * as Location from "expo-location";
 import { SettingsContext, Coords } from "../contexts/SettingsContext";
 &nbsp;
@@ -214,6 +212,24 @@ function <span class="fstat-no" title="function not covered" >coordsToLocationOb
   };
 }
 &nbsp;
+async function reverseGeocode(coords: Location.LocationObjectCoords) {
+  try {
+    const { status } = await Location.getForegroundPermissionsAsync();
+    if (status !== "granted") {
+      console.log(
+        "🔍 Permissions de localisation non accordées - géocodage impossible"
+      );
+      return null;
+    }
+&nbsp;
+    const results = await Location.reverseGeocodeAsync(coords);
+    return results.length &gt; 0 ? results[0] : null;
+  } catch (error) {
+    console.log("❌ Erreur géocodage:", error);
+    return null;
+  }
+}
+&nbsp;
 export function useLocation() {
   const {
     locationMode,
@@ -222,7 +238,7 @@ export function useLocation() {
     errorMsg,
     isLoading,
     isRefreshingLocation,
-  } = useContext(SettingsContext);
+  } = use(SettingsContext);
 &nbsp;
   let location: Location.LocationObject | null = null;
 &nbsp;
@@ -233,25 +249,6 @@ export function useLocation() {
     });
   } else <span class="missing-if-branch" title="if path not taken" >I</span>if (locationMode === "auto" &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >autoLocation)</span> {
 <span class="cstat-no" title="statement not covered" >    location = coordsToLocationObject(autoLocation);</span>
-  }
-&nbsp;
-  async function reverseGeocode(coords: Location.LocationObjectCoords) {
-    try {
-      // 🚀 NOUVEAU : Vérifier les permissions avant le géocodage
-      const { status } = await Location.getForegroundPermissionsAsync();
-      if (status !== "granted") {
-        console.log(
-          "🔍 Permissions de localisation non accordées - géocodage impossible"
-        );
-        return null;
-      }
-&nbsp;
-      const results = await Location.reverseGeocodeAsync(coords);
-      return results.length &gt; 0 ? results[0] : null;
-    } catch (error) {
-      console.log("❌ Erreur géocodage:", error);
-      return null;
-    }
   }
 &nbsp;
   return {
@@ -268,7 +265,7 @@ export function useLocation() {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-08-20T16:28:56.100Z
+                at 2026-06-08T13:23:02.899Z
             </div>
         <script src="../prettify.js"></script>
         <script>

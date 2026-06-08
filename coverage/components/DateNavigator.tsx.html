@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">31.42% </span>
+                <span class="strong">33.33% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>11/35</span>
+                <span class='fraction'>12/36</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">40% </span>
+                <span class="strong">42.85% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>16/40</span>
+                <span class='fraction'>18/42</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">45.45% </span>
+                <span class="strong">47.82% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>10/22</span>
+                <span class='fraction'>11/23</span>
             </div>
         
             
@@ -192,9 +192,7 @@
 <a name='L127'></a><a href='#L127'>127</a>
 <a name='L128'></a><a href='#L128'>128</a>
 <a name='L129'></a><a href='#L129'>129</a>
-<a name='L130'></a><a href='#L130'>130</a>
-<a name='L131'></a><a href='#L131'>131</a>
-<a name='L132'></a><a href='#L132'>132</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L130'></a><a href='#L130'>130</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -211,38 +209,36 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">26x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">26x</span>
-<span class="cline-any cline-yes">26x</span>
-<span class="cline-any cline-yes">26x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">26x</span>
-<span class="cline-any cline-yes">26x</span>
-<span class="cline-any cline-yes">26x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">26x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">26x</span>
+<span class="cline-any cline-yes">26x</span>
+<span class="cline-any cline-yes">26x</span>
+<span class="cline-any cline-yes">26x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">26x</span>
+<span class="cline-any cline-yes">26x</span>
+<span class="cline-any cline-yes">26x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">26x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -327,14 +323,15 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">// components/DateNavigator.tsx
 import React from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import { MaterialIcons } from "@expo/vector-icons";
+import { StyleSheet, Text, View, Pressable } from "react-native";
+import { MIcon } from "@/components/icons/AppVectorIcons";
 import { useTranslation } from "react-i18next";
 import {
   useThemeColors,
   useOverlayTextColor,
   useCurrentTheme,
 } from "../hooks/useThemeColor";
+import { makeBoxShadow } from "../utils/shadowUtils";
 &nbsp;
 type Props = {
   date: Date;
@@ -350,6 +347,7 @@ export function DateNavigator({ date, onPrev, onNext, onReset }: Props) {
   const colors = useThemeColors();
   const overlayTextColor = useOverlayTextColor();
   const currentTheme = useCurrentTheme();
+  const isLightTheme = currentTheme === "light" || currentTheme === "morning";
 &nbsp;
   const getLocale = () =&gt; {
     <span class="missing-if-branch" title="if path not taken" >I</span>if (i18n.language.startsWith("ar")) <span class="cstat-no" title="statement not covered" >return "ar";</span>
@@ -381,12 +379,12 @@ export function DateNavigator({ date, onPrev, onNext, onReset }: Props) {
       padding: 6,
       borderRadius: 18,
       backgroundColor:
-        currentTheme === "light"
+        isLightTheme
           ? "rgba(34, 139, 34, 0.15)"
           : "rgba(30,30,30,0.3)",
       marginHorizontal: 2,
-      borderWidth: currentTheme === "light" ? 1 : 0,
-      borderColor: currentTheme === "light" ? colors.border : "transparent",
+      borderWidth: isLightTheme ? 1 : 0,
+      borderColor: isLightTheme ? colors.border : "transparent",
     },
     text: {
       fontSize: 17,
@@ -396,23 +394,19 @@ export function DateNavigator({ date, onPrev, onNext, onReset }: Props) {
       minWidth: 120,
       textAlign: "center",
       textShadowColor:
-        currentTheme === "light"
+        isLightTheme
           ? "rgba(255, 255, 255, 0.5)"
           : "rgba(0,0,0,0.8)",
       textShadowOffset: { width: 0, height: 1 },
       textShadowRadius: 2,
     },
     todayBtn: {
-      backgroundColor: currentTheme === "light" ? colors.primary : "#3faea6",
+      backgroundColor: isLightTheme ? colors.primary : "#3faea6",
       borderRadius: 14,
       paddingHorizontal: 14,
       paddingVertical: 7,
       marginLeft: 8,
-      shadowColor: currentTheme === "light" ? colors.shadow : "#3faea6",
-      shadowOffset: { width: 0, height: 2 },
-      shadowOpacity: 0.3,
-      shadowRadius: 4,
-      elevation: 3,
+      boxShadow: makeBoxShadow(isLightTheme ? colors.shadow : "#3faea6", 0, 2, 4, 0.3),
     },
     todayText: {
       color: "#fff",
@@ -425,34 +419,34 @@ export function DateNavigator({ date, onPrev, onNext, onReset }: Props) {
     },
   });
 &nbsp;
-  const arrowColor = currentTheme === "light" ? colors.primary : "#FFF";
+  const arrowColor = isLightTheme ? colors.primary : "#FFF";
 &nbsp;
   return (
     &lt;View style={styles.nav} testID="date-navigator"&gt;
-      &lt;TouchableOpacity
+      &lt;Pressable
         onPress={onPrev}
         style={styles.arrowBtn}
         testID="prev-button"
       &gt;
-        &lt;MaterialIcons name="chevron-left" size={28} color={arrowColor} /&gt;
-      &lt;/TouchableOpacity&gt;
+        &lt;MIcon name="chevron-left" size={28} color={arrowColor} /&gt;
+      &lt;/Pressable&gt;
       &lt;Text style={styles.text} testID="date-text"&gt;
         {date.toLocaleDateString(getLocale())}
       &lt;/Text&gt;
-      &lt;TouchableOpacity
+      &lt;Pressable
         onPress={onNext}
         style={styles.arrowBtn}
         testID="next-button"
       &gt;
-        &lt;MaterialIcons name="chevron-right" size={28} color={arrowColor} /&gt;
-      &lt;/TouchableOpacity&gt;
-      &lt;TouchableOpacity
+        &lt;MIcon name="chevron-right" size={28} color={arrowColor} /&gt;
+      &lt;/Pressable&gt;
+      &lt;Pressable
         onPress={onReset}
         style={styles.todayBtn}
         testID="reset-button"
       &gt;
         &lt;Text style={styles.todayText}&gt;{t("today")}&lt;/Text&gt;
-      &lt;/TouchableOpacity&gt;
+      &lt;/Pressable&gt;
     &lt;/View&gt;
   );
 }
@@ -463,7 +457,7 @@ export function DateNavigator({ date, onPrev, onNext, onReset }: Props) {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-08-20T16:28:56.280Z
+                at 2026-06-08T13:23:03.162Z
             </div>
         <script src="../prettify.js"></script>
         <script>

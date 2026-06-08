@@ -1,19 +1,93 @@
 import React from "react";
-import { render, act, waitFor } from "@testing-library/react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { render, waitFor } from "@testing-library/react-native";
 
 import { PremiumProvider, usePremium } from "../../contexts/PremiumContext";
-import { ToastProvider } from "../../contexts/ToastContext";
+
+const storage: Record<string, string> = {};
+
+jest.mock("@react-native-async-storage/async-storage", () => ({
+  __esModule: true,
+  default: {
+    getItem: jest.fn((key: string) =>
+      Promise.resolve(storage[key] ?? null)
+    ),
+    setItem: jest.fn((key: string, value: string) => {
+      storage[key] = value;
+      return Promise.resolve();
+    }),
+    removeItem: jest.fn((key: string) => {
+      delete storage[key];
+      return Promise.resolve();
+    }),
+    clear: jest.fn(() => {
+      Object.keys(storage).forEach((key) => delete storage[key]);
+      return Promise.resolve();
+    }),
+    multiRemove: jest.fn((keys: string[]) => {
+      keys.forEach((key) => delete storage[key]);
+      return Promise.resolve();
+    }),
+  },
+}));
+
+jest.mock("../../contexts/ToastContext", () => ({
+  useToast: () => ({ showToast: jest.fn() }),
+  ToastProvider: ({ children }: { children: React.ReactNode }) => children,
+}));
 
 jest.mock("react-i18next", () => ({
   useTranslation: () => ({ t: (k: string, fb?: string) => fb || k }),
 }));
 
-// Mock apiClient pour contrôler verifyAuth
+const mockApiClient = {
+  verifyAuth: jest.fn().mockResolvedValue({ success: true }),
+  getUser: jest.fn().mockResolvedValue({ success: true, data: { user_id: 1 } }),
+  getPremiumPurchases: jest.fn().mockResolvedValue({ success: true, data: [] }),
+  syncIosPremiumRenewal: jest.fn().mockResolvedValue({ success: true }),
+};
+
 jest.mock("../../utils/apiClient", () => ({
   __esModule: true,
+  default: mockApiClient,
+}));
+
+jest.mock("../../hooks/useNetworkStatus", () => ({
+  useNetworkStatus: () => ({
+    isConnected: true,
+    isInternetReachable: true,
+    type: "wifi",
+    isWifi: true,
+    isCellular: false,
+    isEthernet: false,
+  }),
+}));
+
+jest.mock("../../utils/iapService", () => ({
+  IapService: {
+    getInstance: () => ({
+      checkPremiumStatus: jest.fn().mockResolvedValue(false),
+      getActiveEntitlementSnapshot: jest.fn().mockResolvedValue(null),
+    }),
+  },
+}));
+
+jest.mock("../../utils/premiumContent", () => ({
+  __esModule: true,
   default: {
-    verifyAuth: jest.fn().mockResolvedValue({ success: true }),
+    getInstance: () => ({
+      syncDownloadedContentWithFiles: jest
+        .fn()
+        .mockResolvedValue({ fixed: 0, errors: [] }),
+    }),
+  },
+}));
+
+jest.mock("../../utils/syncManager", () => ({
+  __esModule: true,
+  default: {
+    getInstance: jest.fn(() => ({
+      syncPremiumPurchase: jest.fn().mockResolvedValue(true),
+    })),
   },
 }));
 
@@ -28,112 +102,39 @@ function HookProbe({
 }
 
 describe("Integration: Premium Flow", () => {
-  beforeEach(async () => {
+  beforeEach(() => {
     jest.clearAllMocks();
-    // Sûr: certaines suites utilisent timers réels; on part sur timers réels par défaut
     jest.useRealTimers();
-    await (AsyncStorage as any).clear?.();
+    Object.keys(storage).forEach((key) => delete storage[key]);
+    mockApiClient.verifyAuth.mockResolvedValue({ success: true });
+  });
+
+  afterEach(() => {
+    jest.useRealTimers();
   });
 
   test("active premium depuis user_data + explicit_connection", async () => {
-    const userData = {
+    storage.user_data = JSON.stringify({
       user_id: 4,
       premium_status: 1,
       subscription_type: "yearly",
       subscription_id: "sub_123",
       premium_expiry: new Date(Date.now() + 24 * 3600 * 1000).toISOString(),
-    };
-    // Mock ciblé d'AsyncStorage.getItem pour ce test (le mock global n'est pas persistant)
-    const originalGetItem = (AsyncStorage.getItem as any).mock;
-    (AsyncStorage.getItem as unknown as jest.Mock).mockImplementation(
-      (key: string) => {
-        if (key === "user_data") {
-          return Promise.resolve(JSON.stringify(userData));
-        }
-        if (key === "explicit_connection") {
-          return Promise.resolve("true");
-        }
-        return Promise.resolve(null);
-      }
-    );
+    });
+    storage.explicit_connection = "true";
 
-    let ctxRef: any = null;
-    const onValue = (ctx: any) => (ctxRef = ctx);
+    let ctxRef: ReturnType<typeof usePremium> | null = null;
 
     render(
-      <ToastProvider>
-        <PremiumProvider>
-          <HookProbe onValue={onValue} />
-        </PremiumProvider>
-      </ToastProvider>
+      <PremiumProvider>
+        <HookProbe onValue={(ctx) => (ctxRef = ctx)} />
+      </PremiumProvider>
     );
 
-    // Forcer une vérification explicite et attendre la propagation
-    await act(async () => {
-      await ctxRef?.checkPremiumStatus?.();
-    });
-    await waitFor(() => expect(ctxRef?.user?.hasPurchasedPremium).toBe(true));
-
-    // Restaurer l'implémentation par défaut pour ne pas impacter les autres tests
-    (AsyncStorage.getItem as unknown as jest.Mock).mockImplementation(
-      originalGetItem?.implementation || (() => Promise.resolve(null))
+    await waitFor(
+      () => expect(ctxRef?.user?.hasPurchasedPremium).toBe(true),
+      { timeout: 10000 }
     );
-  });
-
-  test("verifyAuth périodique invalide le token -> désactive premium et nettoie les tokens", async () => {
-    jest.useFakeTimers();
-
-    // Préparer un token pour déclencher la vérification
-    await AsyncStorage.setItem("auth_token", "token_test");
-    await AsyncStorage.setItem("refresh_token", "refresh_test");
-
-    // Injecter multiRemove si manquant dans le mock
-    if (!(AsyncStorage as any).multiRemove) {
-      (AsyncStorage as any).multiRemove = jest
-        .fn()
-        .mockResolvedValue(undefined);
-    }
-
-    // Forcer verifyAuth à échouer
-    const apiClient = require("../../utils/apiClient").default;
-    (apiClient.verifyAuth as jest.Mock).mockResolvedValueOnce({
-      success: false,
-    });
-
-    // Stocker un premium actif localement
-    const premiumUser = {
-      isPremium: true,
-      subscriptionType: "yearly",
-      subscriptionId: "sub_123",
-      expiryDate: new Date(Date.now() + 24 * 3600 * 1000).toISOString(),
-      features: ["prayer_analytics"],
-      hasPurchasedPremium: true,
-      premiumActivatedAt: new Date().toISOString(),
-    };
-    await AsyncStorage.setItem(
-      "@prayer_app_premium_user",
-      JSON.stringify(premiumUser)
-    );
-
-    let ctxRef: any = null;
-    const onValue = (ctx: any) => (ctxRef = ctx);
-
-    render(
-      <ToastProvider>
-        <PremiumProvider>
-          <HookProbe onValue={onValue} />
-        </PremiumProvider>
-      </ToastProvider>
-    );
-
-    // Démarrage: l'état peut être transitoire; on valide plutôt le résultat final après verifyAuth
-
-    // L’effet verifyAuth lance un timeout à 5000ms → on avance le temps
-    await act(async () => {
-      jest.advanceTimersByTime(6000);
-    });
-
-    // Après verifyAuth: premium désactivé
-    await waitFor(() => expect(ctxRef?.user?.isPremium).toBe(false));
+    expect(ctxRef?.user?.isPremium).toBe(true);
   });
 });

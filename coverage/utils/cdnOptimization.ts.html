@@ -25,28 +25,28 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">50% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>71/142</span>
+                <span class='fraction'>74/148</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">47.61% </span>
+                <span class="strong">47.72% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>20/42</span>
+                <span class='fraction'>21/44</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">60.86% </span>
+                <span class="strong">60% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>14/23</span>
+                <span class='fraction'>15/25</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50.35% </span>
+                <span class="strong">50.69% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>70/139</span>
+                <span class='fraction'>73/144</span>
             </div>
         
             
@@ -474,7 +474,10 @@
 <a name='L409'></a><a href='#L409'>409</a>
 <a name='L410'></a><a href='#L410'>410</a>
 <a name='L411'></a><a href='#L411'>411</a>
-<a name='L412'></a><a href='#L412'>412</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L412'></a><a href='#L412'>412</a>
+<a name='L413'></a><a href='#L413'>413</a>
+<a name='L414'></a><a href='#L414'>414</a>
+<a name='L415'></a><a href='#L415'>415</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -584,31 +587,28 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -778,14 +778,20 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -889,7 +895,7 @@
 import * as FileSystem from "expo-file-system";
 import { Platform } from "react-native";
 &nbsp;
-export interface CDNConfig {
+interface CDNConfig {
   primaryCDN: string;
   fallbackCDN: string;
   firebaseStorage: string;
@@ -897,7 +903,7 @@ export interface CDNConfig {
   maxCacheSize: number; // en MB
 }
 &nbsp;
-export interface CacheEntry {
+interface CacheEntry {
   url: string;
   localPath: string;
   downloadedAt: number;
@@ -906,7 +912,7 @@ export interface CacheEntry {
   accessCount: number;
 }
 &nbsp;
-export class CDNOptimizer {
+class CDNOptimizer {
   private static instance: CDNOptimizer;
   private cacheIndex: Map&lt;string, CacheEntry&gt; = new Map();
   private readonly CACHE_INDEX_KEY = "@cdn_cache_index";
@@ -995,8 +1001,9 @@ export class CDNOptimizer {
       // 2. Construire les URLs avec priorité CDN
       const urls = this.buildCDNUrls(fileId, originalUrl);
 &nbsp;
-      // 3. Essayer de télécharger depuis le CDN le plus rapide
-      for (const { url, source } of urls) {
+      const trySourceAt = async (index: number): Promise&lt;string | null&gt; =&gt; {
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (index &gt;= urls.length) <span class="cstat-no" title="statement not covered" >return null;</span>
+        const { url, source } = urls[index];
         try {
           console.log(`🌐 Tentative téléchargement depuis ${source}: ${url}`);
           const localPath = await this.downloadWithCache(
@@ -1006,20 +1013,16 @@ export class CDNOptimizer {
           );
 &nbsp;
           <span class="missing-if-branch" title="else path not taken" >E</span>if (localPath) {
-            // console.log(`✅ Téléchargement réussi depuis ${source}`);
-&nbsp;
-            // Optimisation : prefetch des fichiers suivants depuis ce CDN
             this.schedulePrefetch(source);
-&nbsp;
             return localPath;
           }
         } catch (error) {
-          // console.log(`❌ Échec ${source}:`, (error as Error).message);
-<span class="cstat-no" title="statement not covered" >          continue;</span>
+          // try next
         }
-      }
+<span class="cstat-no" title="statement not covered" >        return trySourceAt(index + 1);</span>
+      };
 &nbsp;
-<span class="cstat-no" title="statement not covered" >      return null;</span>
+      return trySourceAt(0);
     } catch (error) {
 <span class="cstat-no" title="statement not covered" >      console.error("Erreur récupération fichier optimisé:", error);</span>
 <span class="cstat-no" title="statement not covered" >      return null;</span>
@@ -1187,18 +1190,24 @@ export class CDNOptimizer {
     });
 &nbsp;
     let freedSpace = <span class="cstat-no" title="statement not covered" >0;</span>
+    const toRemove: { fileId: string; entry: CacheEntry }[] = <span class="cstat-no" title="statement not covered" >[];</span>
 <span class="cstat-no" title="statement not covered" >    for (const [fileId, entry] of entries) {</span>
 <span class="cstat-no" title="statement not covered" >      if (freedSpace &gt;= targetMB) <span class="cstat-no" title="statement not covered" >break;</span></span>
-&nbsp;
-<span class="cstat-no" title="statement not covered" >      try {</span>
-<span class="cstat-no" title="statement not covered" >        await FileSystem.deleteAsync(entry.localPath, { idempotent: true });</span>
-<span class="cstat-no" title="statement not covered" >        this.cacheIndex.delete(fileId);</span>
-<span class="cstat-no" title="statement not covered" >        freedSpace += entry.fileSize;</span>
-<span class="cstat-no" title="statement not covered" >        console.log(`🗑️ Supprimé du cache: ${fileId} (${entry.fileSize}MB)`);</span>
-      } catch (error) {
-<span class="cstat-no" title="statement not covered" >        console.error(`Erreur suppression cache ${fileId}:`, error);</span>
-      }
+<span class="cstat-no" title="statement not covered" >      toRemove.push({ fileId, entry });</span>
+<span class="cstat-no" title="statement not covered" >      freedSpace += entry.fileSize;</span>
     }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    await Promise.all(</span>
+      toRemove.map(<span class="fstat-no" title="function not covered" >as</span>ync ({ fileId, entry }) =&gt; {
+<span class="cstat-no" title="statement not covered" >        try {</span>
+<span class="cstat-no" title="statement not covered" >          await FileSystem.deleteAsync(entry.localPath, { idempotent: true });</span>
+<span class="cstat-no" title="statement not covered" >          this.cacheIndex.delete(fileId);</span>
+<span class="cstat-no" title="statement not covered" >          console.log(`🗑️ Supprimé du cache: ${fileId} (${entry.fileSize}MB)`);</span>
+        } catch (error) {
+<span class="cstat-no" title="statement not covered" >          console.error(`Erreur suppression cache ${fileId}:`, error);</span>
+        }
+      })
+    );
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    await this.saveCacheIndex();</span>
     // console.log(`✅ Cache nettoyé: ${freedSpace}MB libérés`);
@@ -1303,7 +1312,7 @@ export default CDNOptimizer;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-08-20T16:28:56.280Z
+                at 2026-06-08T13:23:03.162Z
             </div>
         <script src="../prettify.js"></script>
         <script>

@@ -352,10 +352,8 @@
 <a name='L287'></a><a href='#L287'>287</a>
 <a name='L288'></a><a href='#L288'>288</a>
 <a name='L289'></a><a href='#L289'>289</a>
-<a name='L290'></a><a href='#L290'>290</a>
-<a name='L291'></a><a href='#L291'>291</a>
-<a name='L292'></a><a href='#L292'>292</a>
-<a name='L293'></a><a href='#L293'>293</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L290'></a><a href='#L290'>290</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -541,10 +539,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -648,13 +642,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { View, Text, StyleSheet, Pressable } from "react-native";
+import { LinearGradient } from "@/components/ui/LinearGradientView";
+import { MCIcon } from "@/components/icons/AppVectorIcons";
 import { useRouter } from "expo-router";
 import { useTranslation } from "react-i18next";
 &nbsp;
-import { useThemeColors, useCurrentTheme } from "../hooks/useThemeAssets";
+import { useThemeColors } from "../hooks/useThemeAssets";
+import { useCurrentTheme } from "../hooks/useThemeColor"; // 🔧 Import unifié
 import { usePremium } from "../contexts/PremiumContext";
 &nbsp;
 interface PremiumPromotionProps {
@@ -675,7 +670,7 @@ const PremiumPromotion: React.FC&lt;PremiumPromotionProps&gt; = <span class="cst
   const { t } = <span class="cstat-no" title="statement not covered" >useTranslation();</span>
   const colors = <span class="cstat-no" title="statement not covered" >useThemeColors();</span>
   const currentTheme = <span class="cstat-no" title="statement not covered" >useCurrentTheme();</span>
-  const router = <span class="cstat-no" title="statement not covered" >useRouter();</span>
+  const { push } = <span class="cstat-no" title="statement not covered" >useRouter();</span>
   const { user } = <span class="cstat-no" title="statement not covered" >usePremium();</span>
 &nbsp;
   // Ne pas afficher si l'utilisateur est déjà premium
@@ -686,7 +681,7 @@ const PremiumPromotion: React.FC&lt;PremiumPromotionProps&gt; = <span class="cst
   const styles = <span class="cstat-no" title="statement not covered" >getStyles(colors, currentTheme, variant);</span>
 &nbsp;
   const handleUpgrade = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    router.push("/premium-payment");</span>
+<span class="cstat-no" title="statement not covered" >    push("/premium-payment");</span>
   };
 &nbsp;
   const getDefaultContent = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
@@ -712,12 +707,12 @@ const PremiumPromotion: React.FC&lt;PremiumPromotionProps&gt; = <span class="cst
 &nbsp;
 <span class="cstat-no" title="statement not covered" >  if (variant === "banner") {</span>
 <span class="cstat-no" title="statement not covered" >    return (</span>
-      &lt;TouchableOpacity style={styles.bannerContainer} onPress={handleUpgrade}&gt;
+      &lt;Pressable style={styles.bannerContainer} onPress={handleUpgrade}&gt;
         &lt;LinearGradient
           colors={[colors.primary, colors.accent]}
           style={styles.bannerGradient}
         &gt;
-          &lt;MaterialCommunityIcons
+          &lt;MCIcon
             name="crown"
             size={24}
             color={colors.secondary}
@@ -726,13 +721,13 @@ const PremiumPromotion: React.FC&lt;PremiumPromotionProps&gt; = <span class="cst
             &lt;Text style={styles.bannerTitle}&gt;{content.title}&lt;/Text&gt;
             &lt;Text style={styles.bannerMessage}&gt;{content.message}&lt;/Text&gt;
           &lt;/View&gt;
-          &lt;MaterialCommunityIcons
+          &lt;MCIcon
             name="chevron-right"
             size={24}
             color={colors.secondary}
           /&gt;
         &lt;/LinearGradient&gt;
-      &lt;/TouchableOpacity&gt;
+      &lt;/Pressable&gt;
     );
   }
 &nbsp;
@@ -744,7 +739,7 @@ const PremiumPromotion: React.FC&lt;PremiumPromotionProps&gt; = <span class="cst
           style={styles.fullGradient}
         &gt;
           &lt;View style={styles.fullHeader}&gt;
-            &lt;MaterialCommunityIcons
+            &lt;MCIcon
               name="crown"
               size={32}
               color={colors.secondary}
@@ -780,9 +775,9 @@ const PremiumPromotion: React.FC&lt;PremiumPromotionProps&gt; = <span class="cst
             /&gt;
           &lt;/View&gt;
 &nbsp;
-          &lt;TouchableOpacity style={styles.fullButton} onPress={handleUpgrade}&gt;
+          &lt;Pressable style={styles.fullButton} onPress={handleUpgrade}&gt;
             &lt;Text style={styles.fullButtonText}&gt;{content.cta}&lt;/Text&gt;
-          &lt;/TouchableOpacity&gt;
+          &lt;/Pressable&gt;
         &lt;/LinearGradient&gt;
       &lt;/View&gt;
     );
@@ -790,24 +785,24 @@ const PremiumPromotion: React.FC&lt;PremiumPromotionProps&gt; = <span class="cst
 &nbsp;
   // Variant compact (par défaut)
 <span class="cstat-no" title="statement not covered" >  return (</span>
-    &lt;TouchableOpacity style={styles.compactContainer} onPress={handleUpgrade}&gt;
+    &lt;Pressable style={styles.compactContainer} onPress={handleUpgrade}&gt;
       &lt;LinearGradient
         colors={[colors.primary, colors.accent]}
         style={styles.compactGradient}
       &gt;
-        &lt;MaterialCommunityIcons
+        &lt;MCIcon
           name="crown"
           size={20}
           color={colors.secondary}
         /&gt;
         &lt;Text style={styles.compactText}&gt;{content.title}&lt;/Text&gt;
-        &lt;MaterialCommunityIcons
+        &lt;MCIcon
           name="chevron-right"
           size={16}
           color={colors.secondary}
         /&gt;
       &lt;/LinearGradient&gt;
-    &lt;/TouchableOpacity&gt;
+    &lt;/Pressable&gt;
   );
 };
 &nbsp;
@@ -818,7 +813,7 @@ const FeatureItem: React.FC&lt;{
   colors: any;
 }&gt; = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >({</span> icon, text, styles, colors }) =&gt; (</span>
 <span class="cstat-no" title="statement not covered" >  &lt;View style={styles.featureItem}&gt;</span>
-    &lt;MaterialCommunityIcons
+    &lt;MCIcon
       name={icon as any}
       size={16}
       color={colors.success}
@@ -829,7 +824,7 @@ const FeatureItem: React.FC&lt;{
 &nbsp;
 const getStyles = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(</span></span>
   colors: any,
-  currentTheme: "light" | "dark",
+  currentTheme: "light" | "dark" | "morning" | "sunset",
   variant: string
 ) =&gt;
 <span class="cstat-no" title="statement not covered" >  StyleSheet.create({</span>
@@ -865,11 +860,7 @@ const getStyles = <span class="cstat-no" title="statement not covered" ><span cl
       margin: 16,
       borderRadius: 16,
       overflow: "hidden",
-      elevation: 4,
-      shadowColor: "#000",
-      shadowOffset: { width: 0, height: 2 },
-      shadowOpacity: 0.1,
-      shadowRadius: 4,
+      boxShadow: "0px 2px 4px rgba(0,0,0,0.1)",
     },
     fullGradient: {
       padding: 24,
@@ -946,7 +937,7 @@ export default PremiumPromotion;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-08-20T16:28:56.280Z
+                at 2026-06-08T13:23:03.162Z
             </div>
         <script src="../prettify.js"></script>
         <script>
