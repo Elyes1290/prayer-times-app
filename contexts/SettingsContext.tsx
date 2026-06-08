@@ -580,6 +580,8 @@ export const SettingsProvider = ({
         enableDataSavingValue,
         maxCacheSizeValue,
         savedFirstName,
+        savedThemeMode,
+        savedBackgroundImageType,
       ] = await Promise.all([
         LocalStorageManager.getEssential("NOTIFICATIONS_ENABLED"),
         LocalStorageManager.getEssential("CALC_METHOD"),
@@ -603,6 +605,8 @@ export const SettingsProvider = ({
         LocalStorageManager.getEssential("ENABLE_DATA_SAVING"),
         LocalStorageManager.getEssential("MAX_CACHE_SIZE"),
         LocalStorageManager.getEssential("USER_FIRST_NAME"),
+        LocalStorageManager.getEssential("THEME_MODE"),
+        AsyncStorage.getItem("backgroundImageType"),
       ]);
 
       // 🚀 NOUVEAU : Charger les données non-essentielles séparément
@@ -801,6 +805,23 @@ export const SettingsProvider = ({
         setApiSyncEnabled(apiSyncEnabledValue === "true");
       }
 
+      if (
+        savedThemeMode &&
+        ["auto", "light", "dark", "morning", "sunset"].includes(savedThemeMode)
+      ) {
+        setThemeModeState(
+          savedThemeMode as "auto" | "light" | "dark" | "morning" | "sunset"
+        );
+      }
+      if (
+        savedBackgroundImageType &&
+        ["prophet", "makka", "alquds"].includes(savedBackgroundImageType)
+      ) {
+        setBackgroundImageTypeState(
+          savedBackgroundImageType as BackgroundImageType
+        );
+      }
+
       // Validation et fallback pour adhanVolume
       if (adhanVolumeValue !== null) {
         const volume = Number(adhanVolumeValue);
@@ -911,40 +932,6 @@ export const SettingsProvider = ({
 
     loadSettings();
   }, []); // ✅ Suppression de refreshAutoLocation des dépendances
-
-  // Nouveau : Charger le thème sauvegardé
-  useEffect(() => {
-    const loadTheme = async () => {
-      try {
-        // 🚀 NOUVEAU : Utiliser le gestionnaire de stockage stratifié
-        const savedTheme = await LocalStorageManager.getEssential("THEME_MODE");
-        if (
-          savedTheme &&
-          ["auto", "light", "dark", "morning", "sunset"].includes(savedTheme)
-        ) {
-          setThemeModeState(
-            savedTheme as "auto" | "light" | "dark" | "morning" | "sunset"
-          );
-        }
-      } catch (error) {
-        console.error("Erreur lors du chargement du thème:", error);
-      }
-    };
-    loadTheme();
-
-    // 🖼️ NOUVEAU : Charger le type d'image de fond
-    const loadBackgroundImageType = async () => {
-      try {
-        const savedType = await AsyncStorage.getItem("backgroundImageType");
-        if (savedType && ["prophet", "makka", "alquds"].includes(savedType)) {
-          setBackgroundImageTypeState(savedType as BackgroundImageType);
-        }
-      } catch (error) {
-        console.error("Erreur lors du chargement du type d'image de fond:", error);
-      }
-    };
-    loadBackgroundImageType();
-  }, []);
 
   // 🚀 NOUVEAU : Synchronisation automatique des paramètres (premium uniquement)
   useEffect(() => {

@@ -19,12 +19,11 @@ import {
   View,
   Pressable,
   NativeModules,
-  Animated,
   StatusBar,
   Dimensions,
   Share,
 } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
+import { LinearGradient } from "@/components/ui/LinearGradientView";
 import { useRouter } from "expo-router";
 import * as Notifications from "expo-notifications";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -52,6 +51,14 @@ import { useUniversalStyles } from "../hooks/useUniversalLayout";
 import { useNetworkStatus, useOfflineAccess } from "../hooks/useNetworkStatus";
 import QuranOfflineService from "../utils/QuranOfflineService";
 import { HadithOfflineService } from "../utils/hadithOfflineService";
+import Animated, {
+  interpolate,
+  useAnimatedStyle,
+  useSharedValue,
+  withSpring,
+  withTiming,
+  type SharedValue,
+} from "react-native-reanimated";
 
 const { AdhanModule } = NativeModules;
 
@@ -160,6 +167,74 @@ interface PrayerInfo {
   diff: number;
 }
 
+function getNextPrayerInfo(
+  prayerTimes: PrayerTimes | null
+): PrayerInfo | null {
+  if (!prayerTimes) return null;
+
+  const customPrayerTimes: CustomPrayerTimes = {
+    fajr: prayerTimes.fajr,
+    sunrise: prayerTimes.sunrise,
+    dhuhr: prayerTimes.dhuhr,
+    asr: prayerTimes.asr,
+    maghrib: prayerTimes.maghrib,
+    isha: prayerTimes.isha,
+  };
+
+  const currentTime = new Date();
+  const prayers = ["Fajr", "Dhuhr", "Asr", "Maghrib", "Isha"];
+
+  for (const prayer of prayers) {
+    const prayerTime = customPrayerTimes[prayer.toLowerCase()];
+    if (prayerTime && currentTime < prayerTime) {
+      const diff = prayerTime.getTime() - currentTime.getTime();
+      const hours = Math.floor(diff / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+
+      const countdownText =
+        hours > 0
+          ? `${hours}h ${minutes}min`
+          : minutes > 0
+          ? `${minutes}min`
+          : `<1min`;
+
+      return {
+        name: prayer,
+        time: prayerTime.toLocaleTimeString("fr-FR", {
+          hour: "2-digit",
+          minute: "2-digit",
+        }),
+        countdown: countdownText,
+        diff: diff,
+      };
+    }
+  }
+  return null;
+}
+
+const QuickActionAnimatedItem = ({
+  index,
+  fadeAnim,
+  slideAnim,
+  children,
+}: {
+  index: number;
+  fadeAnim: SharedValue<number>;
+  slideAnim: SharedValue<number>;
+  children: React.ReactNode;
+}) => {
+  const animatedStyle = useAnimatedStyle(() => ({
+    opacity: fadeAnim.value,
+    transform: [
+      {
+        translateY: interpolate(slideAnim.value, [0, 30], [20 + index * 5, 0]),
+      },
+    ],
+  }));
+
+  return <Animated.View style={animatedStyle}>{children}</Animated.View>;
+};
+
 export default function HomeScreen() {
   const { t, i18n } = useTranslation();
   const { push } = useRouter();
@@ -229,48 +304,75 @@ export default function HomeScreen() {
   const [randomName, setRandomName] = useState<any>(null);
   const [randomHadith, setRandomHadith] = useState<any>(null);
 
-  // Animations
-  const [fadeAnim] = useState(new Animated.Value(0));
-  const [slideAnim] = useState(new Animated.Value(30));
-  const [scaleAnim] = useState(new Animated.Value(0.95));
-  const [rotateAnim] = useState(new Animated.Value(0));
+  const fadeAnim = useSharedValue(0);
+  const slideAnim = useSharedValue(30);
+  const scaleAnim = useSharedValue(0.95);
+  const rotateAnim = useSharedValue(0);
+
+  const setupFadeStyle = useAnimatedStyle(() => ({
+    opacity: fadeAnim.value,
+  }));
+
+  const dashboardHeaderStyle = useAnimatedStyle(() => ({
+    opacity: fadeAnim.value,
+    transform: [{ translateY: slideAnim.value }, { scale: scaleAnim.value }],
+  }));
+
+  const locationRowStyle = useAnimatedStyle(() => ({
+    opacity: fadeAnim.value,
+    transform: [{ translateY: slideAnim.value }],
+  }));
+
+  const settingsRotateStyle = useAnimatedStyle(() => ({
+    transform: [{ rotate: `${rotateAnim.value * 360}deg` }],
+  }));
+
+  const heroPrayerStyle = useAnimatedStyle(() => ({
+    opacity: fadeAnim.value,
+    transform: [{ translateY: slideAnim.value }, { scale: scaleAnim.value }],
+  }));
+
+  const duaCardStyle = useAnimatedStyle(() => ({
+    opacity: fadeAnim.value,
+    transform: [
+      { translateY: interpolate(slideAnim.value, [0, 30], [20, 0]) },
+    ],
+  }));
+
+  const versetCardStyle = useAnimatedStyle(() => ({
+    opacity: fadeAnim.value,
+    transform: [
+      { translateY: interpolate(slideAnim.value, [0, 30], [40, 0]) },
+    ],
+  }));
+
+  const nameCardStyle = useAnimatedStyle(() => ({
+    opacity: fadeAnim.value,
+    transform: [
+      { translateY: interpolate(slideAnim.value, [0, 30], [60, 0]) },
+    ],
+  }));
+
+  const hadithCardStyle = useAnimatedStyle(() => ({
+    opacity: fadeAnim.value,
+    transform: [
+      { translateY: interpolate(slideAnim.value, [0, 30], [30, 0]) },
+    ],
+  }));
 
   const settings = use(SettingsContext);
   const { location } = useLocation();
   const { user } = usePremium();
 
-  // Animation d'entrée et chargement du contenu aléatoire
   useEffect(() => {
-    Animated.parallel([
-      Animated.timing(fadeAnim, {
-        toValue: 1,
-        duration: ANIMATIONS.fadeIn.duration,
-        useNativeDriver: true,
-      }),
-      Animated.timing(slideAnim, {
-        toValue: 0,
-        duration: ANIMATIONS.slideUp.duration,
-        useNativeDriver: true,
-      }),
-      Animated.spring(scaleAnim, {
-        toValue: 1,
-        ...ANIMATIONS.spring,
-      }),
-      Animated.timing(rotateAnim, {
-        toValue: 1,
-        duration: 1000,
-        useNativeDriver: true,
-      }),
-    ]).start();
-
-    // Charger du contenu aléatoire
-    loadRandomContent();
-  }, []);
-
-  // Recharger le contenu quand la langue change
-  useEffect(() => {
-    loadRandomContent();
-  }, [i18n.language]);
+    fadeAnim.value = withTiming(1, { duration: ANIMATIONS.fadeIn.duration });
+    slideAnim.value = withTiming(0, { duration: ANIMATIONS.slideUp.duration });
+    scaleAnim.value = withSpring(1, {
+      damping: ANIMATIONS.spring.friction,
+      stiffness: ANIMATIONS.spring.tension,
+    });
+    rotateAnim.value = withTiming(1, { duration: 1000 });
+  }, [fadeAnim, slideAnim, scaleAnim, rotateAnim]);
 
   // 🆕 Charger un verset aléatoire depuis QuranOfflineService
   const loadRandomVerseFromLocal = useCallback(async () => {
@@ -401,6 +503,10 @@ export default function HomeScreen() {
       });
     }
   }, [loadRandomVerseFromLocal, loadRandomHadithFromLocal, i18n.language]);
+
+  useEffect(() => {
+    void loadRandomContent();
+  }, [loadRandomContent]);
 
   // Permission notifications (Android 13+ et iOS)
   useEffect(() => {
@@ -1100,7 +1206,7 @@ export default function HomeScreen() {
           backgroundColor="transparent"
         />
         <View style={styles.centeredContainer}>
-          <Animated.View style={[styles.setupCard, { opacity: fadeAnim }]}>
+          <Animated.View style={[styles.setupCard, setupFadeStyle]}>
             <MCIcon
               name="map-marker-radius"
               size={70}
@@ -1195,54 +1301,6 @@ export default function HomeScreen() {
     );
   }
 
-  // Fonctions helper pour le dashboard
-  const getNextPrayerInfo = (
-    prayerTimes: PrayerTimes | null
-  ): PrayerInfo | null => {
-    if (!prayerTimes) return null;
-
-    // Conversion de PrayerTimes en CustomPrayerTimes
-    const customPrayerTimes: CustomPrayerTimes = {
-      fajr: prayerTimes.fajr,
-      sunrise: prayerTimes.sunrise,
-      dhuhr: prayerTimes.dhuhr,
-      asr: prayerTimes.asr,
-      maghrib: prayerTimes.maghrib,
-      isha: prayerTimes.isha,
-    };
-
-    const currentTime = new Date();
-    const prayers = ["Fajr", "Dhuhr", "Asr", "Maghrib", "Isha"];
-
-    for (const prayer of prayers) {
-      const prayerTime = customPrayerTimes[prayer.toLowerCase()];
-      if (prayerTime && currentTime < prayerTime) {
-        const diff = prayerTime.getTime() - currentTime.getTime();
-        const hours = Math.floor(diff / (1000 * 60 * 60));
-        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-        const countdownText =
-          hours > 0
-            ? `${hours}h ${minutes}min`
-            : minutes > 0
-            ? `${minutes}min`
-            : `<1min`;
-
-        return {
-          name: prayer,
-          time: prayerTime.toLocaleTimeString("fr-FR", {
-            hour: "2-digit",
-            minute: "2-digit",
-          }),
-          countdown: countdownText,
-          diff: diff,
-        };
-      }
-    }
-    return null;
-  };
-
   const getProgressPercentage = () => {
     if (!currentPrayerTimes) return 0;
 
@@ -1292,15 +1350,7 @@ export default function HomeScreen() {
           contentContainerStyle={{ paddingBottom: 180 }}
         >
           {/* 🏛️ Header Dashboard Moderne */}
-          <Animated.View
-            style={[
-              styles.dashboardHeader,
-              {
-                opacity: fadeAnim,
-                transform: [{ translateY: slideAnim }, { scale: scaleAnim }],
-              },
-            ]}
-          >
+          <Animated.View style={[styles.dashboardHeader, dashboardHeaderStyle]}>
             <View style={styles.welcomeSection}>
               <View style={styles.welcomeTextContainer}>
                 <Text
@@ -1367,15 +1417,7 @@ export default function HomeScreen() {
                 )}
               </Text>
               {city && (
-                <Animated.View
-                  style={[
-                    styles.locationRow,
-                    {
-                      opacity: fadeAnim,
-                      transform: [{ translateY: slideAnim }],
-                    },
-                  ]}
-                >
+                <Animated.View style={[styles.locationRow, locationRowStyle]}>
                   <MCIcon
                     name="map-marker-outline"
                     size={16}
@@ -1393,18 +1435,7 @@ export default function HomeScreen() {
               )}
             </View>
 
-            <Animated.View
-              style={{
-                transform: [
-                  {
-                    rotate: rotateAnim.interpolate({
-                      inputRange: [0, 1],
-                      outputRange: ["0deg", "360deg"],
-                    }),
-                  },
-                ],
-              }}
-            >
+            <Animated.View style={settingsRotateStyle}>
               <Pressable
                 style={styles.settingsButton}
                 onPress={() =>
@@ -1426,18 +1457,7 @@ export default function HomeScreen() {
             if (!nextPrayer) return null;
 
             return (
-              <Animated.View
-                style={[
-                  styles.heroPrayerCard,
-                  {
-                    opacity: fadeAnim,
-                    transform: [
-                      { translateY: slideAnim },
-                      { scale: scaleAnim },
-                    ],
-                  },
-                ]}
-              >
+              <Animated.View style={[styles.heroPrayerCard, heroPrayerStyle]}>
                 <LinearGradient
                   colors={[
                     nextPrayer.name === "Fajr"
@@ -1512,22 +1532,7 @@ export default function HomeScreen() {
           {/* 📱 Dashboard Cards - Layout Vertical Moderne */}
           <View style={styles.dashboardCards}>
             {/* Carte Dua */}
-            <Animated.View
-              style={[
-                styles.dashboardCard,
-                {
-                  opacity: fadeAnim,
-                  transform: [
-                    {
-                      translateY: slideAnim.interpolate({
-                        inputRange: [0, 30],
-                        outputRange: [20, 0],
-                      }),
-                    },
-                  ],
-                },
-              ]}
-            >
+            <Animated.View style={[styles.dashboardCard, duaCardStyle]}>
               <LinearGradient
                 colors={["rgba(255,215,0,0.12)", "rgba(255,179,102,0.10)"]}
                 style={styles.cardContent}
@@ -1604,22 +1609,7 @@ export default function HomeScreen() {
             </Animated.View>
 
             {/* Carte Verset */}
-            <Animated.View
-              style={[
-                styles.dashboardCard,
-                {
-                  opacity: fadeAnim,
-                  transform: [
-                    {
-                      translateY: slideAnim.interpolate({
-                        inputRange: [0, 30],
-                        outputRange: [40, 0],
-                      }),
-                    },
-                  ],
-                },
-              ]}
-            >
+            <Animated.View style={[styles.dashboardCard, versetCardStyle]}>
               <LinearGradient
                 colors={["rgba(78,205,196,0.13)", "rgba(44,122,122,0.10)"]}
                 style={styles.cardContent}
@@ -1691,22 +1681,7 @@ export default function HomeScreen() {
             </Animated.View>
 
             {/* Carte Nom d'Allah */}
-            <Animated.View
-              style={[
-                styles.dashboardCard,
-                {
-                  opacity: fadeAnim,
-                  transform: [
-                    {
-                      translateY: slideAnim.interpolate({
-                        inputRange: [0, 30],
-                        outputRange: [60, 0],
-                      }),
-                    },
-                  ],
-                },
-              ]}
-            >
+            <Animated.View style={[styles.dashboardCard, nameCardStyle]}>
               <LinearGradient
                 colors={["rgba(240,147,251,0.13)", "rgba(155,75,155,0.10)"]}
                 style={styles.cardContent}
@@ -1779,21 +1754,7 @@ export default function HomeScreen() {
 
             {/* Carte Hadith */}
             <Animated.View
-              style={[
-                styles.dashboardCard,
-                styles.hadithCard,
-                {
-                  opacity: fadeAnim,
-                  transform: [
-                    {
-                      translateY: slideAnim.interpolate({
-                        inputRange: [0, 30],
-                        outputRange: [30, 0],
-                      }),
-                    },
-                  ],
-                },
-              ]}
+              style={[styles.dashboardCard, styles.hadithCard, hadithCardStyle]}
             >
               <LinearGradient
                 colors={[
@@ -1893,19 +1854,11 @@ export default function HomeScreen() {
 
             <View style={styles.actionsContainer}>
               {quickActions.map((action, index) => (
-                <Animated.View
+                <QuickActionAnimatedItem
                   key={action.route}
-                  style={{
-                    opacity: fadeAnim,
-                    transform: [
-                      {
-                        translateY: slideAnim.interpolate({
-                          inputRange: [0, 30],
-                          outputRange: [20 + index * 5, 0],
-                        }),
-                      },
-                    ],
-                  }}
+                  index={index}
+                  fadeAnim={fadeAnim}
+                  slideAnim={slideAnim}
                 >
                   <Pressable
                     style={styles.actionButton}
@@ -1950,7 +1903,7 @@ export default function HomeScreen() {
                       />
                     </LinearGradient>
                   </Pressable>
-                </Animated.View>
+                </QuickActionAnimatedItem>
               ))}
             </View>
           </View>

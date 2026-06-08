@@ -176,28 +176,45 @@ function hadithReducer(state: HadithState, action: HadithAction): HadithState {
   }
 }
 
+function convertToFavorite(
+  item: Hadith,
+  bookName: string,
+  bookSlug: string,
+  chapterId: number
+): Omit<HadithFavorite, "id" | "dateAdded"> {
+  return {
+    type: "hadith",
+    bookSlug: bookSlug,
+    bookName: bookName,
+    chapterNumber: chapterId,
+    hadithNumber: item.idInBook,
+    arabicText: item.arabic || "",
+    translation: item.english?.text || "",
+    narrator: item.english?.narrator || "",
+  };
+}
+
+function normalizeHadithText(text: string): string {
+  if (!text) return "";
+  return text
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[ًٌٍَُِّْ]/g, "")
+    .replace(/[^\w\s]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+const handleRetry = () => {
+  // En React Native, on peut juste déclencher un re-render
+  // Les hooks de réseau se mettront à jour automatiquement
+};
+
 export default function HadithScreen() {
   const { t } = useTranslation();
   const { user } = usePremium();
 
-  // Fonction pour convertir un hadith en format favori
-  const convertToFavorite = (
-    item: Hadith,
-    bookName: string,
-    bookSlug: string,
-    chapterId: number
-  ): Omit<HadithFavorite, "id" | "dateAdded"> => {
-    return {
-      type: "hadith",
-      bookSlug: bookSlug,
-      bookName: bookName,
-      chapterNumber: chapterId,
-      hadithNumber: item.idInBook,
-      arabicText: item.arabic || "",
-      translation: item.english?.text || "",
-      narrator: item.english?.narrator || "",
-    };
-  };
   const [state, dispatch] = useReducer(hadithReducer, initialHadithState);
   const {
     menuVisible,
@@ -225,12 +242,6 @@ export default function HadithScreen() {
 
   // Utiliser les hooks de réseau pour une logique plus simple
   const offlineAccess = useOfflineAccess(!!user?.isPremium);
-
-  // Fonction pour réessayer la connexion
-  const handleRetry = () => {
-    // En React Native, on peut juste déclencher un re-render
-    // Les hooks de réseau se mettront à jour automatiquement
-  };
 
   // 🍎 iOS: Fonctions pour gérer les sélections depuis le menu
   const handleBookChange = (bookSlug: string) => {
@@ -346,20 +357,6 @@ export default function HadithScreen() {
     loadHadiths,
   ]);
 
-  // Fonction pour rechercher directement dans l'API
-  // Fonction pour normaliser le texte (supprimer accents et caractères spéciaux)
-  const normalizeText = (text: string): string => {
-    if (!text) return "";
-    return text
-      .toLowerCase()
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "") // Supprimer les diacritiques latins
-      .replace(/[ًٌٍَُِّْ]/g, "") // Supprimer les diacritiques arabes
-      .replace(/[^\w\s]/g, " ") // Remplacer caractères spéciaux par espaces
-      .replace(/\s+/g, " ") // Normaliser les espaces multiples
-      .trim();
-  };
-
   // Labels traduits
   function getSelectedBookLabel() {
     if (!selectedBook) return t("select_book");
@@ -440,10 +437,10 @@ export default function HadithScreen() {
         return hadithNumber === query;
       } else {
         // Recherche textuelle dans le contenu arabe et anglais
-        const normalizedQuery = normalizeText(query);
-        const arabicText = normalizeText(hadith.arabic || "");
-        const englishText = normalizeText(hadith.english.text || "");
-        const narratorText = normalizeText(hadith.english.narrator || "");
+        const normalizedQuery = normalizeHadithText(query);
+        const arabicText = normalizeHadithText(hadith.arabic || "");
+        const englishText = normalizeHadithText(hadith.english.text || "");
+        const narratorText = normalizeHadithText(hadith.english.narrator || "");
 
         return (
           arabicText.includes(normalizedQuery) ||

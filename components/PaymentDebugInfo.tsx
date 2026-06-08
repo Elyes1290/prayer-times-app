@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
   View,
   Text,
@@ -17,13 +17,18 @@ interface SyncStatus {
   explicitConnection: boolean;
 }
 
+const getStatusColor = (value: boolean) => (value ? "#4CAF50" : "#FF6B6B");
+const getStatusText = (value: boolean) => (value ? "✅ OUI" : "❌ NON");
+
 const PaymentDebugInfo: React.FC = () => {
   const [syncStatus, setSyncStatus] = useState<SyncStatus | null>(null);
   const [rawData, setRawData] = useState<any>(null);
   const [isRefreshing, setIsRefreshing] = useState(false);
 
-  const refreshData = async () => {
-    setIsRefreshing(true);
+  const refreshData = useCallback(async (showRefreshing = false) => {
+    if (showRefreshing) {
+      setIsRefreshing(true);
+    }
     try {
       // Vérifier le statut de synchronisation
       const status = await checkUserSyncStatus();
@@ -60,15 +65,19 @@ const PaymentDebugInfo: React.FC = () => {
     } catch (error) {
       console.error("❌ Erreur lors du refresh:", error);
     } finally {
-      setIsRefreshing(false);
+      if (showRefreshing) {
+        setIsRefreshing(false);
+      }
     }
-  };
+  }, []);
 
   useEffect(() => {
-    refreshData();
-    const interval = setInterval(refreshData, 2000); // Refresh toutes les 2 secondes
+    void refreshData();
+    const interval = setInterval(() => {
+      void refreshData();
+    }, 2000); // Refresh toutes les 2 secondes
     return () => clearInterval(interval);
-  }, []);
+  }, [refreshData]);
 
   if (!syncStatus || !rawData) {
     return (
@@ -78,9 +87,6 @@ const PaymentDebugInfo: React.FC = () => {
       </View>
     );
   }
-
-  const getStatusColor = (value: boolean) => (value ? "#4CAF50" : "#FF6B6B");
-  const getStatusText = (value: boolean) => (value ? "✅ OUI" : "❌ NON");
 
   return (
     <ScrollView style={styles.container}>
@@ -198,7 +204,7 @@ const PaymentDebugInfo: React.FC = () => {
 
       <Pressable
         style={[styles.button, isRefreshing && styles.buttonDisabled]}
-        onPress={refreshData}
+        onPress={() => refreshData(true)}
         disabled={isRefreshing}
       >
         <Text style={styles.buttonText}>

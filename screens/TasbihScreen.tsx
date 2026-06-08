@@ -4,13 +4,12 @@ import {
   Text,
   StyleSheet,
   Pressable,
-  Animated,
   useWindowDimensions,
   Vibration,
   ImageBackground,
 } from "react-native";
 import { useTheme } from "@react-navigation/native";
-import { LinearGradient } from "expo-linear-gradient";
+import { LinearGradient } from "@/components/ui/LinearGradientView";
 import { MCIcon } from "@/components/icons/AppVectorIcons";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import ThemedImageBackground from "../components/ThemedImageBackground";
@@ -21,6 +20,12 @@ import {
   useCurrentTheme,
 } from "../hooks/useThemeColor";
 import { makeBoxShadow } from "../utils/shadowUtils";
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withSequence,
+  withTiming,
+} from "react-native-reanimated";
 
 const dhikrList = [
   "سُبْحَانَ اللَّهِ",
@@ -144,9 +149,16 @@ const TasbihScreen = () => {
 
   const styles = getStyles(themeColors, overlayTextColor, currentTheme, circleSize, width);
   const [count, setCount] = useState(0);
-  const [scale] = useState(new Animated.Value(1));
-  const rotation = useRef(new Animated.Value(0)).current;
+  const scale = useSharedValue(1);
+  const rotation = useSharedValue(0);
   const rotationCount = useRef(0);
+
+  const circleAnimatedStyle = useAnimatedStyle(() => ({
+    transform: [
+      { scale: scale.value },
+      { rotate: `${rotation.value * 360}deg` },
+    ],
+  }));
   const [currentDhikr, setCurrentDhikr] = useState(0);
 
   const dhikrTranslations = [
@@ -160,27 +172,13 @@ const TasbihScreen = () => {
     // Vibration feedback
     Vibration.vibrate(50);
 
-    // Animation de scale
-    Animated.sequence([
-      Animated.timing(scale, {
-        toValue: 0.9,
-        duration: 100,
-        useNativeDriver: true,
-      }),
-      Animated.timing(scale, {
-        toValue: 1,
-        duration: 100,
-        useNativeDriver: true,
-      }),
-    ]).start();
+    scale.value = withSequence(
+      withTiming(0.9, { duration: 100 }),
+      withTiming(1, { duration: 100 })
+    );
 
-    // Animation de rotation
     rotationCount.current += 1;
-    Animated.timing(rotation, {
-      toValue: rotationCount.current,
-      duration: 200,
-      useNativeDriver: true,
-    }).start();
+    rotation.value = withTiming(rotationCount.current, { duration: 200 });
 
     setCount((prev) => {
       const newCount = prev + 1;
@@ -199,13 +197,8 @@ const TasbihScreen = () => {
     setCount(0);
     setCurrentDhikr(0);
     rotationCount.current = 0;
-    rotation.setValue(0);
+    rotation.value = 0;
   };
-
-  const spin = rotation.interpolate({
-    inputRange: [0, 1],
-    outputRange: ["0deg", "360deg"],
-  });
 
   return (
     <ThemedImageBackground style={styles.background}>
@@ -222,14 +215,7 @@ const TasbihScreen = () => {
             )}
           </View>
 
-          <Animated.View
-            style={[
-              styles.circleContainer,
-              {
-                transform: [{ scale }, { rotate: spin }],
-              },
-            ]}
-          >
+          <Animated.View style={[styles.circleContainer, circleAnimatedStyle]}>
             <Pressable
               style={styles.circle}
               onPress={handleCount}

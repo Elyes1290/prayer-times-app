@@ -198,6 +198,7 @@ function handleGetUserStats() {
             'challenges' => getActiveChallenges($user_id),
             'badges' => getUserBadges($user_id),
             'history' => getPrayerHistory($user_id, 30), // 30 derniers jours
+            'today_prayers' => getTodayPrayers($user_id),
             'smart_notification' => getSmartNotification($stats, $profile)
         ],
         'message' => 'Statistiques récupérées avec succès'
@@ -819,6 +820,129 @@ function getUserBadges($user_id) {
 }
 
 /**
+ * Vérifie si la table prayer_logs existe
+ */
+function prayerLogsTableExists($pdo) {
+    $stmt = $pdo->prepare("SHOW TABLES LIKE 'prayer_logs'");
+    $stmt->execute();
+    return (bool) $stmt->fetch();
+}
+
+/**
+ * État des 5 prières du jour
+ */
+function getTodayPrayers($user_id) {
+    $default = [
+        'fajr' => false,
+        'dhuhr' => false,
+        'asr' => false,
+        'maghrib' => false,
+        'isha' => false,
+    ];
+
+    try {
+        $pdo = getDBConnection();
+        if ($pdo === null || !prayerLogsTableExists($pdo)) {
+            return $default;
+        }
+
+        $today = date('Y-m-d');
+        $stmt = $pdo->prepare("
+            SELECT prayer_type
+            FROM prayer_logs
+            WHERE user_id = ? AND date = ?
+        ");
+        $stmt->execute([$user_id, $today]);
+        $rows = $stmt->fetchAll();
+
+        foreach ($rows as $row) {
+            $type = strtolower($row['prayer_type']);
+            if (array_key_exists($type, $default)) {
+                $default[$type] = true;
+            }
+        }
+
+        return $default;
+    } catch (Exception $e) {
+        error_log("Erreur getTodayPrayers: " . $e->getMessage());
+        return $default;
+    }
+}
+
+/**
+ * Assure une ligne user_stats pour la date donnée
+ */
+function ensureTodayStatsRow($pdo, $user_id, $today) {
+    $stmt = $pdo->prepare("SELECT id FROM user_stats WHERE user_id = ? AND date = ?");
+    $stmt->execute([$user_id, $today]);
+    if ($stmt->fetch()) {
+        return;
+    }
+
+    $stmt = $pdo->prepare("
+        INSERT INTO user_stats (
+            user_id, date, prayers_completed, dhikr_count, quran_verses_read,
+            hadiths_read, favorites_added, content_downloaded, app_usage_minutes, streak_days
+        ) VALUES (?, ?, 0, 0, 0, 0, 0, 0, 0, 0)
+    ");
+    $stmt->execute([$user_id, $today]);
+}
+
+/**
+ * Incrémente / décrémente prayers_completed du jour
+ */
+function adjustTodayPrayerCount($pdo, $user_id, $today, $delta) {
+    ensureTodayStatsRow($pdo, $user_id, $today);
+    $stmt = $pdo->prepare("
+        UPDATE user_stats
+        SET prayers_completed = GREATEST(0, prayers_completed + ?)
+        WHERE user_id = ? AND date = ?
+    ");
+    $stmt->execute([$delta, $user_id, $today]);
+}
+
+/**
+ * Gère le toggle d'une prière précise (fajr…isha)
+ */
+function handlePrayerTypeToggle($pdo, $user_id, $action, $action_data, $today) {
+    $valid_types = ['fajr', 'dhuhr', 'asr', 'maghrib', 'isha'];
+    $prayer_type = strtolower($action_data['prayer_type'] ?? 'general');
+    $completing = ($action === 'prayer_completed');
+
+    if (!in_array($prayer_type, $valid_types, true)) {
+        if ($completing) {
+            adjustTodayPrayerCount($pdo, $user_id, $today, 1);
+        }
+        return;
+    }
+
+    if (prayerLogsTableExists($pdo)) {
+        if ($completing) {
+            $stmt = $pdo->prepare("
+                INSERT IGNORE INTO prayer_logs (user_id, date, prayer_type, completed_at)
+                VALUES (?, ?, ?, NOW())
+            ");
+            $stmt->execute([$user_id, $today, $prayer_type]);
+            if ($stmt->rowCount() > 0) {
+                adjustTodayPrayerCount($pdo, $user_id, $today, 1);
+            }
+        } else {
+            $stmt = $pdo->prepare("
+                DELETE FROM prayer_logs
+                WHERE user_id = ? AND date = ? AND prayer_type = ?
+            ");
+            $stmt->execute([$user_id, $today, $prayer_type]);
+            if ($stmt->rowCount() > 0) {
+                adjustTodayPrayerCount($pdo, $user_id, $today, -1);
+            }
+        }
+        return;
+    }
+
+    adjustTodayPrayerCount($pdo, $user_id, $today, $completing ? 1 : -1);
+}
+
+/**
  * Récupère l'historique des prières
  */
 function getPrayerHistory($user_id, $days = 30) {
@@ -956,6 +1080,17 @@ function handleUpdateUserStats() {
         
         $user_id = $user['id'];
         $today = date('Y-m-d');
+        $action_data = $input['action_data'] ?? [];
+
+        if (in_array($action, ['prayer_completed', 'prayer_uncompleted'], true)) {
+            handlePrayerTypeToggle($pdo, $user_id, $action, $action_data, $today);
+            updateStreakDays($user_id);
+            jsonResponse(true, [
+                'message' => 'Prière mise à jour avec succès',
+                'today_prayers' => getTodayPrayers($user_id),
+            ]);
+            return;
+        }
         
         // Vérifier si les stats du jour existent
         $stmt = $pdo->prepare("SELECT * FROM user_stats WHERE user_id = ? AND date = ?");
@@ -968,9 +1103,6 @@ function handleUpdateUserStats() {
             $params = [];
             
             switch ($action) {
-                case 'prayer_completed':
-                    $update_fields[] = "prayers_completed = prayers_completed + 1";
-                    break;
                 case 'dhikr_completed':
                     $update_fields[] = "dhikr_count = dhikr_count + 1";
                     break;

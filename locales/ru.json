@@ -6,7 +6,6 @@
   "enter_city_name": "Введите название вашего города",
   "enable_auto_location": "Включить автоматическое определение местоположения (GPS)",
   "unknown_city": "Неизвестный город",
-
   "appearance": "Внешний вид",
   "theme_mode": "Режим отображения",
   "theme_auto": "Авто",
@@ -15,7 +14,6 @@
   "notifications_disabled_title": "Уведомления отключены",
   "notifications_disabled_message": "Для получения уведомлений включите их в настройках.",
   "open_settings": "Открыть настройки",
-
   "settings": "Настройки",
   "location": "Местоположение",
   "automatic_gps": "Автоматически (GPS)",
@@ -32,7 +30,6 @@
   "minutes_before": "За сколько минут до:",
   "minutes": "мин",
   "language": "Язык",
-
   "calc_method": {
     "MuslimWorldLeague": "Мусульманская мировая лига",
     "Egyptian": "Египетское генеральное управление",
@@ -45,7 +42,6 @@
     "Tehran": "Тегеран",
     "Turkey": "Турция"
   },
-
   "method_MuslimWorldLeague": "Мусульманская мировая лига",
   "method_Egyptian": "Египетское генеральное управление",
   "method_Karachi": "Университет исламских наук, Карачи",
@@ -56,7 +52,6 @@
   "method_Singapore": "Сингапур",
   "method_Tehran": "Тегеран",
   "method_Turkey": "Турция",
-
   "adhan_sound": "Выбор азана",
   "adhan_sounds": {
     "adhamalsharqawe": "Азан Шаркави",
@@ -71,7 +66,6 @@
     "masjidquba": "Масджид аль-Куба",
     "islamsobhi": "Ислам Собхи"
   },
-
   "sound_adhamalsharqawe": "Sharqawi Adhan",
   "sound_adhanaljazaer": "Adhan Al Jazaer",
   "sound_ahmadnafees": "Ahmad Nafees",
@@ -83,8 +77,7 @@
   "sound_mustafaozcan": "Mustafa Ozcan",
   "sound_masjidquba": "Masjid Al-Quba",
   "sound_islamsobhi": "Islam Sobhi",
-
-  "hijri_calendar": "Хиджрийский календарь",
+  "hijri_calendar": "Календарь Хиджры",
   "gregorian_date": "Григорианская дата",
   "hijri_date": "Хиджрийская дата",
   "religious_events_today": "Религиозные события сегодня:",
@@ -111,7 +104,7 @@
   "no_text": "Нет текста для этого хадиса.",
   "about": "О приложении",
   "status": "Статус",
-  "premium_status": "Премиум",
+  "premium_status": "Статус Премиум",
   "free": "Бесплатно",
   "account_label": "Аккаунт",
   "user": "Пользователь",
@@ -150,7 +143,6 @@
     "welcome": "Добро пожаловать в ваш духовный спутник!",
     "description": "Это бесплатное приложение (в настоящее время без рекламы) сопровождает вас ежедневно в религиозной практике: точное время молитв, направление Киблы, чтение Корана, автоматический зикр, достоверные хадисы, хиджрийский календарь, статистика молитв, система значков, система избранного, продвинутое аудио и многое другое. Премиум-версия без рекламы с эксклюзивными функциями будет доступна в ближайшее время.",
     "blessing": "بارك الله فيكم - Да благословит вас Аллах",
-
     "features_title": "🌟 Полные функции",
     "features_subtitle": "Все, что вам нужно для исламской практики:",
     "features": {
@@ -183,21 +175,18 @@
       "offline_mode": "Офлайн режим",
       "local_storage": "Безопасное локальное хранилище"
     },
-
     "premium_title": "👑 Премиум функции",
     "premium_subtitle": "Улучшите свой духовный путь:",
     "premium_stats": "Детальная статистика молитв",
     "premium_badges": "Специальные значки и награды",
     "premium_audio": "Высококачественные аудиофайлы",
     "premium_themes": "Специальные темы и персонализация",
-
     "advanced_title": "🚀 Продвинутые функции",
     "advanced_subtitle": "Для улучшения вашего опыта:",
     "advanced_favorites": "Система избранного и синхронизация",
     "advanced_weekly": "Недельный вид молитв",
     "advanced_sun": "Информация о солнце и времени",
     "advanced_personalization": "Персонализация и настройки",
-
     "new_features_title": "🆕 Новые функции",
     "new_features_subtitle": "Откройте для себя последние улучшения:",
     "new_widgets": "Настраиваемые Android виджеты",
@@ -206,7 +195,6 @@
     "new_downloads": "Оптимизированные нативные загрузки",
     "new_mosques": "Умный поиск мечетей",
     "new_backup": "Полная система резервного копирования",
-
     "faq_title": "❓ Часто задаваемые вопросы",
     "faq_location_question": "Зачем приложению нужна моя геолокация?",
     "faq_location_answer": "Геолокация необходима для точного расчета времени молитв на основе вашего географического положения. Вы также можете ввести название города вручную.",
@@ -216,7 +204,6 @@
     "faq_qibla_answer": "Держите телефон горизонтально, вдали от металлических предметов. Делайте движения в форме восьмерки для калибровки компаса, если он нестабилен.",
     "faq_offline_question": "Работает ли приложение офлайн?",
     "faq_offline_answer": "Да, после настройки приложение работает офлайн для времени молитв, Киблы, зикра и чтения Корана.",
-
     "support_title": "🤝 Поддержка и сообщество",
     "send_suggestion": "Отправить предложение",
     "report_bug": "Сообщить о проблеме",
@@ -224,12 +211,10 @@
     "contact_suggestion": "Предложение для мусульманского приложения",
     "contact_bug": "Сообщение об ошибке в мусульманском приложении",
     "email_template": "Здравствуйте, Дрогбинью,\n\nПо поводу {{subject}}:\n\n[Ваше сообщение здесь]\n\nСпасибо за это отличное приложение!\n\nС наилучшими пожеланиями",
-
     "developer_title": "👨‍💻 Разработчик",
     "developer_name": "Разработано с ❤️ Дрогбинью",
     "developer_bio": "Увлеченный разработчик, практикующий мусульманин, создатель полезных приложений для сообщества.",
     "linkedin_profile": "Посмотреть профиль LinkedIn",
-
     "technical_title": "⚙️ Техническая информация",
     "tech_react_native": "• Разработано с React Native & Expo",
     "tech_adhan_lib": "• Расчеты основаны на библиотеке Adhan",
@@ -239,14 +224,12 @@
     "tech_audio_optimization": "• Продвинутая оптимизация аудио и кэширование",
     "tech_performance": "• Улучшенная производительность с современными React hooks",
     "tech_security": "• Улучшенная безопасность и защита данных",
-
     "sources_title": "📚 Источники и благодарности",
     "source_quran": "• Коран: API Quran.com",
     "source_hadith": "• Хадисы: HadithAPI.com",
     "source_prayer_calculation": "• Расчеты молитв: библиотека Adhan",
     "source_icons": "• Иконки: Material Design & Flaticon",
     "islamic_authenticity": "✅ Все религиозные источники проверены и достоверны",
-
     "legal_title": "⚖️ Юридические уведомления",
     "privacy_policy": "Политика конфиденциальности",
     "privacy_policy_content": "Это приложение уважает вашу конфиденциальность:\n\n• Ваши данные остаются на вашем устройстве\n• Не собирается личная информация\n• Геолокация используется только для расчетов\n• В настоящее время нет рекламы\n• Бесплатное приложение с премиум-версией в ближайшее время",
@@ -254,7 +237,6 @@
     "terms_title": "Условия использования",
     "terms_content": "Используя это приложение:\n\n• Вы соглашаетесь использовать его в соответствии с исламскими ценностями\n• Приложение предлагает бесплатную версию и премиум-версию\n• Разработчик делает все возможное для обеспечения точности\n• Всегда проверяйте с вашей местной мечетью\n• Использование на ваш собственный риск",
     "understand": "Я понимаю",
-
     "version": "Версия",
     "build": "Сборка",
     "last_update": "Последнее обновление:",
@@ -267,19 +249,50 @@
     "closing_dua": "رَبَّنَا تَقَبَّلْ مِنَّا إِنَّكَ أَنتَ السَّمِيعُ الْعَلِيمُ"
   },
   "translation_not_available": "Английский перевод недоступен для этой книги.",
-  "home": "Главная",
+  "home": {
+    "go_to_settings": "Перейти в настройки",
+    "notifications_disabled_message": "Вы должны разрешить уведомления для получения напоминаний о молитве и зикре."
+  },
   "qibla": "Кибла",
   "mosques": "Мечети",
   "today": "Сегодня",
-  "quran": "Коран",
+  "quran": {
+    "offline_recitation": "Скачанное чтение (офлайн)",
+    "unknown_reciter": "Неизвестный чтец",
+    "reciter": "Чтец",
+    "checking_connection": "Проверка..."
+  },
   "hadiths": "Хадисы",
-  "prophet_stories": "Истории Пророков (Мир им)",
+  "prophet_stories": "Истории о Пророках ﷺ",
   "prophets_stories": "Истории Пророков",
+  "prophet_story_categories": {
+    "childhood": "Детство",
+    "revelation": "Откровение",
+    "meccan_period": "Мекканский период",
+    "hijra": "Хиджра",
+    "medinian_period": "Мединский период",
+    "battles": "Сражения",
+    "companions": "Сподвижники",
+    "family_life": "Семейная жизнь",
+    "final_years": "Последние годы",
+    "character_traits": "Характер",
+    "miracles": "Чудеса",
+    "daily_life": "Повседневная жизнь",
+    "creation": "Сотворение",
+    "paradise": "Рай",
+    "earth_life": "Жизнь на земле",
+    "prophets_lineage": "Родословная пророков",
+    "prophethood": "Пророчество"
+  },
+  "prophet_story_difficulty": {
+    "beginner": "Начинающий",
+    "intermediate": "Средний",
+    "advanced": "Продвинутый"
+  },
   "waiting_for_location": "Ожидание геолокации...",
   "using_free_api": "Включен бесплатный API (OpenStreetMap)",
   "mosque_search_error": "Ошибка поиска мечетей",
   "mosque_search_timeout": "Поиск слишком долгий, попробуйте снова",
-
   "prayer_names": {
     "Fajr": "Фаджр",
     "Dhuhr": "Зухр",
@@ -299,25 +312,12 @@
     "no_favorites_in_category": "Нет избранного в этой категории",
     "press_heart_to_add": "Нажмите ❤️ чтобы добавить избранный контент"
   },
-  "favorites": {
-    "sync_success": "Синхронизация успешна",
-    "sync_message": "Ваши избранные были синхронизированы",
-    "deleted": "Избранное удалено",
-    "all_deleted": "Все избранное удалено"
-  },
   "sun_info": {
     "day_duration": "Продолжительность дня"
-  },
-  "quran": {
-    "offline_recitation": "Скачанное чтение (офлайн)",
-    "unknown_reciter": "Неизвестный чтец",
-    "reciter": "Чтец",
-    "checking_connection": "Проверка..."
   },
   "hadith": {
     "search_placeholder": "Поиск по тексту или номеру хадиса..."
   },
-
   "data_deletion": {
     "title": "Удаление учетной записи",
     "warning": "Внимание",
@@ -398,12 +398,12 @@
   "toast_cleanup_completed_message": "файлы очищены успешно",
   "toast_cleanup_error_title": "Ошибка очистки",
   "toast_cleanup_error_message": "Ошибка во время очистки",
-  "toast_diagnostic_started_title": "Диагностика началась",
-  "toast_diagnostic_started_message": "Диагностика файлов...",
+  "toast_diagnostic_started_title": "Диагностика в процессе...",
+  "toast_diagnostic_started_message": "Анализ загруженных файлов...",
   "toast_diagnostic_completed_title": "Диагностика завершена",
   "toast_diagnostic_completed_message": "Диагностика завершена успешно",
   "toast_diagnostic_error_title": "Ошибка диагностики",
-  "toast_diagnostic_error_message": "Ошибка во время диагностики",
+  "toast_diagnostic_error_message": "Не удается диагностировать файлы",
   "toast_download_success": "Успех",
   "toast_operation_cancelled": "Операция отменена",
   "premium_sync_title": "Премиум синхронизация",
@@ -416,88 +416,71 @@
   "renewal_detected": "Обнаружено продление",
   "account_exists": "Аккаунт существует",
   "warning": "Предупреждение",
-
   "download_error": "Ошибка загрузки",
   "download_failed": "Загрузка не удалась",
   "download_success": "Загрузка успешна",
   "download_completed": "Загрузка завершена",
   "download_cancelled": "Загрузка отменена",
   "download_already_exists": "Файл уже загружен",
-
   "delete_success": "Удаление успешно",
   "delete_error": "Ошибка удаления",
   "delete_completed": "Файл удален",
   "delete_failed": "Не удается удалить файл",
-
   "play_error": "Ошибка воспроизведения",
   "play_failed": "Не удается воспроизвести файл",
   "play_success": "Воспроизведение началось",
   "play_local": "Локальное воспроизведение",
   "play_streaming": "Стриминговое воспроизведение",
-
   "cache_cleared": "Кэш очищен",
   "cache_error": "Ошибка очистки кэша",
   "data_cleared": "Данные очищены",
   "data_error": "Ошибка очистки данных",
-
   "migration_success": "Миграция успешна",
   "migration_error": "Ошибка миграции",
   "migration_completed": "Файлы мигрированы успешно",
-
   "cleanup_success": "Очистка завершена",
-  "cleanup_error": "Ошибка очистки",
+  "cleanup_error": "Не удается очистить папку",
   "cleanup_completed": "Очистка завершена успешно",
-
   "sync_success": "Синхронизация успешна",
   "sync_error": "Ошибка синхронизации",
   "sync_completed": "Данные синхронизированы",
-
   "backup_success": "Резервная копия успешна",
   "backup_error": "Ошибка резервной копии",
   "backup_completed": "Резервная копия завершена",
   "backup_restored": "Резервная копия восстановлена",
-
   "favorite_added": "Добавлено в избранное",
   "favorite_removed": "Удалено из избранного",
   "favorite_error": "Ошибка избранного",
   "favorite_limit_reached": "Достигнут лимит избранного",
   "favorite_premium_required": "Премиум требуется для большего количества избранного",
-
   "login_success": "Вход успешен",
   "login_error": "Ошибка входа",
   "logout_success": "Выход успешен",
   "registration_success": "Регистрация успешна",
   "registration_error": "Ошибка регистрации",
-
   "premium_activated": "Премиум активирован",
   "premium_error": "Ошибка премиума",
   "premium_expired": "Премиум истек",
-  "premium_required": "Требуется премиум",
-
+  "premium_required": "Требуется Premium",
   "file_not_found": "Файл не найден",
   "file_corrupted": "Файл поврежден",
   "file_invalid": "Недействительный файл",
   "file_too_large": "Файл слишком большой",
-
   "network_error": "Ошибка сети",
   "server_error": "Ошибка сервера",
   "connection_failed": "Соединение не удалось",
   "timeout_error": "Превышено время ожидания",
   "single_device_only": "Не авторизовано. Пожалуйста, войдите только на одном устройстве.",
-
   "permission_denied": "Разрешение отказано",
   "storage_full": "Хранилище заполнено",
   "invalid_format": "Недействительный формат",
   "operation_cancelled": "Операция отменена",
-
   "recitation_not_found": "Чтение не найдено",
   "recitation_error": "Ошибка чтения",
   "recitation_loading": "Загрузка чтения",
-
   "adhan_not_found": "Азан не найден",
   "adhan_error": "Ошибка азана",
   "adhan_loading": "Загрузка азана",
-
   "validation_email_required": "Пожалуйста, введите ваш email",
   "validation_password_required": "Пожалуйста, введите ваш пароль",
   "validation_email_password_required": "Пожалуйста, введите ваш email и пароль",
@@ -510,7 +493,6 @@
   "validation_firstname_required": "Пожалуйста, введите ваше имя или никнейм",
   "validation_firstname_too_short": "Имя или никнейм должны содержать минимум 2 символа",
   "validation_firstname_too_long": "Имя или никнейм не может превышать 30 символов",
-
   "help_firstname_title": "Имя или никнейм",
   "help_firstname_prefilled": "Это имя было предварительно заполнено из ваших настроек. Вы можете изменить его, если хотите.",
   "help_firstname_empty": "От 2 до 30 символов. Вы можете использовать ваше настоящее имя или никнейм.",
@@ -518,7 +500,6 @@
   "help_password_content": "Обязательно: от 6 до 50 символов.\nРекомендуется: буквы, цифры и специальные символы для большей безопасности.",
   "help_email_title": "Электронная почта",
   "help_email_content": "Обязательный формат: name@email.com\nПример: user@gmail.com",
-
   "settings_screen": {
     "premium_adhans_title": "Премиум Азаны",
     "no_premium_adhans": "Премиум азан не обнаружен",
@@ -535,7 +516,6 @@
     "download_adhan_cancel": "Отмена",
     "download_adhan_warning": "Загрузка может занять несколько минут в зависимости от вашего соединения."
   },
-
   "favorites_screen": {
     "title": "Мои избранные",
     "all": "Все",
@@ -553,8 +533,6 @@
     "share_error": "Ошибка обмена",
     "shared_from_app": "Поделено из приложения Prayer Times App"
   },
-  "favorite_added": "Добавлено в избранное",
-  "favorite_removed": "Удалено из избранного",
   "asmaulhusna_search_placeholder": "Поиск по имени, значению или транслитерации...",
   "dhikr": {
     "title": "Азкары и Дуа",
@@ -640,9 +618,10 @@
   "maghrib": "Магриб",
   "isha": "Иша",
   "next_prayer": "Следующая молитва",
+  "daily_dhikr_title": "Зикр дня",
   "today_prayers": "Сегодняшние молитвы",
   "calculating_prayer_times": "Расчет времени молитв...",
-  "prayer_stats": "Статистика молитв",
+  "prayer_stats": "Статистика",
   "day_length": "Продолжительность дня",
   "fajr_to_sunrise": "От Фаджра до восхода",
   "sunset_to_isha": "От заката до Иша",
@@ -667,7 +646,6 @@
   "sunset_to_fajr": "Время между закатом и Фаджром",
   "night_length": "Продолжительность ночи",
   "time_until_sunset": "Время до заката",
-
   "dashboard_welcome": "Ассаляму алейкум",
   "welcome_personalization_title": "Персонализация приветствия",
   "welcome_personalization_description": "Чтобы предложить вам более личный опыт, можете ли вы сказать нам ваше имя или никнейм?",
@@ -688,7 +666,6 @@
   "dashboard_dua_fallback": "Открыть ежедневные мольбы",
   "dashboard_verset_fallback": "Изучить Священный Коран",
   "dashboard_names_fallback": "Асмауль Хусна",
-
   "learn_to_pray": "Учиться молиться",
   "ablutions_wudu": "Омовение (Вуду)",
   "prayer_positions": "Позиции молитвы",
@@ -698,7 +675,6 @@
   "important_duas": "Важные мольбы",
   "images_coming_soon": "Изображения скоро появятся",
   "learning_footer": "Этот раздел помогает вам изучить основы исламской молитвы",
-
   "wudu_step_1": "Сформулировать намерение (Ния) совершить омовение",
   "wudu_invocation_arabic": "بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ",
   "wudu_invocation_phonetic": "Бисмилляхир-рахманир-рахим",
@@ -711,29 +687,24 @@
   "wudu_step_7": "Протереть голову мокрыми руками спереди назад",
   "wudu_step_8": "Протереть внутреннюю и внешнюю части ушей мокрыми пальцами",
   "wudu_step_9": "Вымыть ноги до лодыжек три раза (правую затем левую)",
-
   "prayer_step_1": "Киям: Стоять лицом к Кибле, руки вдоль тела",
   "prayer_step_2": "Такбир: Поднять руки и сказать 'Аллаху Акбар'",
   "prayer_step_3": "Руку: Наклониться, положив руки на колени",
   "prayer_step_4": "Суджуд: Поклониться, касаясь лбом земли",
   "prayer_step_5": "Суджуд: Поклониться и прославлять Аллаха",
-
   "opening_dua": "Открывающая мольба",
   "opening_dua_translation": "Слава Тебе, о Аллах, и хвала Тебе. Благословенно Твое имя и возвышено Твое величие. Нет божества, кроме Тебя.",
   "ruku_dua": "Мольба Руку",
   "ruku_dua_translation": "Слава моему Господу, Величайшему",
   "sujud_dua": "Мольба Суджуд",
   "sujud_dua_translation": "Слава моему Господу, Высочайшему",
-
   "voir_plus": "Посмотреть больше",
   "hadith_du_jour": "Хадис дня",
-
   "asmaulhusna": {
     "title": "99 имен Аллаха",
     "subtitle": "Откройте самые прекрасные имена Аллаха и их значения",
     "search_placeholder": "Поиск по имени..."
   },
-
   "location_permission_denied": "Разрешение на геолокацию отклонено",
   "location_permission_needed_for_mosques": "Геолокация необходима для поиска ближайших мечетей",
   "location_required_for_mosques": "Геолокация требуется для отображения ближайших мечетей",
@@ -748,7 +719,6 @@
   "directions": "Маршрут",
   "call": "Позвонить",
   "more_info": "Больше информации",
-
   "tasbih": {
     "title": "Тасбих",
     "reset": "Сброс",
@@ -790,15 +760,10 @@
   "become_premium": "Стать Премиум",
   "buy_premium": "Стать Премиум",
   "premium_benefits": "Разблокируйте все премиум функции: неограниченные избранные, облачное резервное копирование, эксклюзивные звуки...",
-  "premium_required": "Требуется премиум",
   "download": "Скачать",
-  "download_completed": "Загрузка завершена",
-  "download_failed": "Загрузка не удалась",
-  "download_cancelled": "Загрузка отменена",
   "offline": "Офлайн",
   "downloaded_locally": "Скачано локально",
   "download_started": "Загрузка началась",
-  "download_error": "Ошибка загрузки",
   "download_unavailable": "Загрузка недоступна",
   "recitation_premium_only": "Чтения зарезервированы для премиум пользователей",
   "adhan_premium_only": "Премиум азаны зарезервированы для премиум пользователей",
@@ -806,8 +771,6 @@
   "clean": "Очистить",
   "adhan_volume": "Громкость азана",
   "no_files_to_clean": "Нет файлов для очистки",
-  "cleanup_error": "Не удается очистить папку",
-  "cleanup_success": "Очистка завершена",
   "choose_reciter": "Выбрать чтеца",
   "previous": "Предыдущий",
   "next": "Следующий",
@@ -818,13 +781,13 @@
   "surah": "Сура",
   "download_progress": "Загрузка...",
   "delete_download_title": "Удалить загрузку",
-  "delete_download_message": "Вы хотите удалить \"{title}\" с этого устройства? Вы все еще можете слушать это через стриминг.",
+  "delete_download_message": "Вы хотите удалить \"{{title}}\" с этого устройства? Вы все еще можете слушать это через стриминг.",
   "delete": "Удалить",
   "download_deleted": "Загрузка удалена",
-  "download_deleted_message": "{title} удалено с этого устройства",
+  "download_deleted_message": "{{title}} удалено с этого устройства",
   "error_deleting_download": "Не удается удалить загрузку",
   "error_deleting": "Ошибка удаления",
-  "download_started_message": "{title} загружается",
+  "download_started_message": "{{title}} загружается",
   "download_completed_title": "🎉 Загрузка завершена",
   "finalization_error": "Проблема во время завершения загрузки",
   "playback_error": "Ошибка воспроизведения",
@@ -833,14 +796,12 @@
   "streaming_status": "Стриминг",
   "remove": "Удалить",
   "clear_all": "Очистить все",
-  "premium_active": "Премиум Активен",
   "premium_status_description": "Ваша премиум подписка активна. Наслаждайтесь всеми эксклюзивными функциями!",
   "refresh_location": "Обновить местоположение",
   "position_detected": "Позиция обнаружена:",
   "location_detected": "Местоположение обнаружено",
   "sound_and_adhan": "Звук и Азан",
   "adhan_settings": "Звук и Азан",
-  "premium_status": "Статус Премиум",
   "mosque_screen": {
     "location_not_available": "Местоположение недоступно",
     "no_phone_available": "Номер телефона недоступен",
@@ -910,14 +871,13 @@
   "auto_backup_disabled_message": "Автоматическое резервное копирование отключено",
   "auto_backup_premium_required": "Требуется премиум",
   "auto_backup_premium_message": "Автоматическое резервное копирование зарезервировано для премиум пользователей",
-  "backup_restore": "Резервное копирование",
-  "backup": "Резервное копирование",
+  "backup_restore": "Резервное Копирование и Восстановление",
+  "backup": "Резервная копия",
   "dark_mode": "Темная",
   "light_mode": "Светлая",
   "morning_mode": "Утро",
   "sunset_mode": "Закат",
   "theme": "Тема",
-  "premium_required": "Требуется Premium",
   "premium_themes_message": "Темы Утро и Закат зарезервированы для участников Premium.",
   "go_premium": "Перейти на Premium",
   "excellent_consistency": "Отличная последовательность!",
@@ -939,7 +899,6 @@
   "share_error": "Ошибка обмена",
   "export_data": "Экспорт данных",
   "share_complete_stats_question": "Вы хотите поделиться вашей полной статистикой?",
-  "cancel": "Отмена",
   "share": "Поделиться",
   "profile_regular": "Регулярная молитва",
   "profile_regular_desc": "Образцовая последовательность",
@@ -1068,7 +1027,7 @@
   "badges_and_achievements": "🏆 Значки и достижения",
   "complete_history": "📋 Полная история",
   "start_spiritual_journey": "🚀 Начните свой духовный путь",
-  "connection_required": "Требуется подключение",
+  "connection_required": "Требуется соединение",
   "hadith_offline_premium_only": "Доступ к хадисам в автономном режиме доступен только для премиум-пользователей. Пожалуйста, подключитесь к интернету или обновитесь до премиум для доступа к этой функции.",
   "error_loading_books": "Ошибка загрузки книг",
   "error_loading_chapters": "Ошибка загрузки глав",
@@ -1078,6 +1037,21 @@
   "hadith_navigation": "Навигация по хадисам",
   "page": "Страница",
   "stats_appear_after_first_prayers": "Ваша статистика появится после первых молитв",
+  "stats_screen_title": "Мои молитвы",
+  "stats_tab_today": "Сегодня",
+  "stats_tab_journey": "Путь",
+  "stats_today_title": "Сегодня",
+  "stats_prayers_today": "{{count}} из 5",
+  "stats_mark_prayed": "Я помолился",
+  "stats_unmark_prayed": "Отменить",
+  "stats_day_complete_title": "День завершён!",
+  "stats_day_complete_message": "Машаллах, все 5 молитв выполнены. Да примет Аллах.",
+  "stats_next_prayer_hint": "Следующий шаг: {{prayer}}",
+  "stats_progress_footer": "{{percent}}% дня выполнено",
+  "stats_heatmap_title": "Регулярность",
+  "stats_heatmap_subtitle": "Последние {{days}} дней",
+  "stats_other_actions_title": "Другие действия",
+  "stats_other_actions_subtitle": "Зикр, Коран и хадисы в одно касание",
   "connection_interrupted": "Соединение прервано",
   "offline_mode_stats": "Офлайн-режим - Подключитесь для синхронизации статистики",
   "pending_sync_actions": "{{count}} действий ожидают синхронизации",
@@ -1090,8 +1064,7 @@
   "goals_overview": "Обзор целей",
   "offline_message_quran": "Требуется подключение к интернету для доступа к Корану. Пожалуйста, подключитесь или обновитесь до Premium для полного офлайн доступа.",
   "offline_title": "Офлайн режим",
-  "retry": "Повторить",
-  "offline_mode": "Офлайн режим",
+  "offline_mode": "Офлайн Режим",
   "online_mode": "Онлайн режим",
   "downloaded_audio": "Загруженные аудио",
   "manage_downloads": "Управление загрузками",
@@ -1101,7 +1074,6 @@
   "switch_to_offline": "Переключиться в офлайн режим",
   "switch_to_online": "Переключиться в онлайн режим",
   "offline_access_premium": "Офлайн доступ доступен с Premium",
-  "connection_required": "Требуется соединение",
   "audio_offline_only": "Только офлайн воспроизведение аудио",
   "background_audio_enabled": "Фоновое аудио включено",
   "audio_list_placeholder": "Список загруженных аудиофайлов будет отображаться здесь",
@@ -1141,7 +1113,6 @@
   "notification_stopped_3": "🌟 Вы уже добивались успеха раньше, вы можете сделать это снова!",
   "badges_collection": "🏅 Коллекция значков",
   "last_updated": "Последнее обновление",
-  "offline_mode": "Автономный режим",
   "checking_connection": "Проверяю...",
   "offline_manager": "Автономно",
   "back_online": "Онлайн",
@@ -1152,22 +1123,10 @@
   "back": "Назад",
   "play_all": "Играть все",
   "stop_playlist": "Стоп",
-
   "success": "Успешно",
-  "error": "Ошибка",
-  "download": {
-    "completed": "Загрузка завершена",
-    "failed": "Загрузка не удалась",
-    "cancelled": "Загрузка отменена",
-    "added_to_list": "✅ Добавлено в список: {{title}}",
-    "item_downloaded": "✅ {{item}} загружено",
-    "failed_message": "Загрузка не удалась",
-    "cancelled_message": "Загрузка была прервана"
-  },
   "errors": {
     "unknown_error": "Произошла неизвестная ошибка",
     "unexpected_error": "Произошла неожиданная ошибка",
-
     "authentication": {
       "title": "Ошибка аутентификации",
       "invalid_credentials": "Неверный пароль или email",
@@ -1175,7 +1134,6 @@
       "session_expired": "Ваша сессия истекла, пожалуйста, войдите снова",
       "access_denied": "Доступ запрещен"
     },
-
     "validation": {
       "title": "Ошибка валидации",
       "email_required": "Требуется адрес email",
@@ -1187,24 +1145,20 @@
       "invalid_data": "Отправленные данные недействительны",
       "same_password": "Новый пароль не может быть идентичен старому"
     },
-
     "registration": {
       "title": "Ошибка регистрации",
       "account_already_exists": "Аккаунт с таким email уже существует"
     },
-
     "network": {
       "title": "Ошибка сети",
       "connection_error": "Ошибка сетевого подключения, проверьте интернет-соединение",
       "timeout": "Превышено время ожидания, попробуйте снова"
     },
-
     "server": {
       "title": "Ошибка сервера",
       "server_error": "Ошибка сервера, попробуйте позже",
       "service_unavailable": "Сервис временно недоступен"
     },
-
     "technical": {
       "title": "Техническая ошибка",
       "communication_error": "Ошибка связи с сервером",
@@ -1213,7 +1167,6 @@
       "subscription_error": "Ошибка управления подпиской",
       "payment_error": "Ошибка обработки платежа"
     },
-
     "http": {
       "400": "Отправленные данные недействительны",
       "401": "Неверный пароль или email",
@@ -1223,76 +1176,8 @@
       "503": "Сервис временно недоступен"
     }
   },
-
-  "qibla": {
-    "initializing_compass": "Инициализация компаса...",
-    "location_disabled": "Местоположение отключено",
-    "location_permission_required": "Требуется разрешение на местоположение",
-    "location_enable_instructions": "Для использования компаса Киблы включите местоположение в настройках телефона.",
-    "location_allow_instructions": "Нажмите \"Разрешить\" и вернитесь в приложение"
-  },
-
-  "premium": {
-    "ui": {
-      "signup_tab": "Создать Премиум аккаунт",
-      "login_tab": "Войти"
-    },
-    "account_creation_required": "Создание аккаунта требует Премиум подписки. Ваш аккаунт будет создан автоматически после оплаты.",
-    "already_subscribed": "Уже подписаны? Войдите с тем же email.",
-    "manage_account": "Управление аккаунтом",
-    "account_management_redirect": "Перейдите в О приложении > Управление аккаунтом",
-    "first_name_or_username": "Имя или имя пользователя",
-    "modify_prefilled_name": "Изменить предзаполненное имя",
-    "field_details_instructions": "Нажмите на иконки ℹ️ для просмотра деталей каждого поля.",
-    "session_expired": "Сессия истекла",
-    "logout_success": "Вы успешно вышли из системы",
-    "logout_error": "Ошибка при выходе",
-    "profile_updated": "Профиль обновлен",
-    "profile_update_success": "Ваша информация успешно сохранена",
-    "no_subscription_found": "Подписка для вашего аккаунта не найдена",
-    "session_creation_error": "Ошибка создания сессии",
-    "not_defined": "Не определено",
-    "subscription_type_undefined": "Тип не определен",
-    "feature_development": "Функция в разработке",
-    "no_account_associated": "С этим устройством не связан ни один премиум аккаунт. Создайте аккаунт или купите премиум.",
-    "feature_locked": "🔒 Премиум функция",
-    "feature_premium_only": "Эта функция доступна только для премиум пользователей.",
-    "promotion": {
-      "feature_title": "Премиум функция",
-      "unlock_feature": "Разблокируйте эту функцию с Премиум",
-      "upgrade": "Обновить",
-      "title": "Перейдите на Премиум",
-      "message": "Разблокируйте все продвинутые функции",
-      "detailed_stats": "Подробная статистика",
-      "exclusive_themes": "Эксклюзивные темы",
-      "unlimited_favorites": "Неограниченные избранные"
-    },
-    "expired_title": "Подписка истекла",
-    "expired_message": "Срок действия вашей премиум-подписки истек. Продлите, чтобы продолжить пользоваться премиум-функциями.",
-    "expiring_soon_title": "Подписка скоро истечет",
-    "expiring_soon_message": "Срок действия вашей подписки истекает через {{days}} день/дней. Не забудьте продлить!",
-    "renewed_title": "Подписка продлена",
-    "renewed_message": "Ваша премиум-подписка была автоматически продлена до {{date}}"
-  },
-
-  "account": {
-    "first_name_placeholder": "Ваше имя",
-    "not_defined": "Не определено",
-    "subscription_type_undefined": "Тип не определен"
-  },
-
-  "backup": {
-    "backup_confirm": "Хотите создать резервную копию ваших данных в облаке?",
-    "restore_confirm": "Хотите восстановить ваши данные из облака? Это заменит ваши текущие данные.",
-    "restart_required": "Требуется перезапуск",
-    "restore_success_message": "Ваши данные успешно восстановлены. Чтобы увидеть все изменения, полностью закройте приложение, затем откройте его снова.",
-    "not_connected": "Не подключено",
-    "last_backup": "Последняя резервная копия",
-    "cloud_data": "Облачные данные",
-    "refresh_cloud_confirm": "Хотите обновить облачные данные?",
-    "sync_success": "Синхронизация успешна"
-  },
-
+  "premium": "Премиум",
+  "account": "Аккаунт",
   "password": {
     "change_modal": {
       "password_criteria": "Новый пароль должен содержать минимум 8 символов, одну заглавную букву, одну строчную букву, одну цифру и один специальный символ",
@@ -1329,37 +1214,6 @@
     "continue": "Продолжить",
     "change": "Изменить"
   },
-
-  "settings": {
-    "screen": {
-      "download_adhan_title": "Скачать азан",
-      "download_adhan_message": "Хотите скачать",
-      "download_adhan_confirm": "Скачать"
-    },
-    "title": "Настройки",
-    "theme": "Тема",
-    "about": "О приложении",
-    "developer": "Разработчик",
-    "last_update": "Последнее обновление",
-    "app_description": "Это приложение разработано с любовью к мусульманскому сообществу.",
-    "faq_text": "Часто задаваемые вопросы",
-    "notifications_reprogrammed": "Уведомления перепрограммированы",
-    "notifications_new_settings": "Ваши новые настройки будут учтены для следующих уведомлений.",
-    "premium_access": "Премиум доступ",
-    "success": "Успешно",
-    "adhan_list_updated": "Список азанов обновлен",
-    "download_completed": "Загрузка завершена",
-    "download_failed": "Загрузка не удалась",
-    "download_failed_message": "Загрузка не удалась",
-    "download_cancelled": "Загрузка отменена",
-    "download_cancelled_message": "Загрузка была прервана",
-    "delete_all_adhans": "Удаление всех скачанных азанов...",
-    "no_downloaded_files": "Скачанные файлы не найдены",
-    "cleanup_completed": "Очистка завершена",
-    "analyzing_files": "Анализ скачанных файлов...",
-    "diagnostic_completed": "Диагностика завершена"
-  },
-
   "adhans": {
     "preview_limited": "Предварительный просмотр ограничен 20 секундами",
     "download_time_warning": "Загрузка может занять несколько минут в зависимости от вашего соединения.",
@@ -1369,24 +1223,11 @@
     "download_title": "Скачать азан",
     "download_message": "Хотите скачать"
   },
-
   "general": {
     "settings": "Общие настройки",
     "prayer_reminders_before": "Напоминания о молитве за",
     "reminder_offset_minutes": "Задержка (минуты)"
   },
-
-  "location": {
-    "method": "Способ определения местоположения",
-    "updating": "Обновление...",
-    "detected": "Местоположение определено"
-  },
-
-  "home": {
-    "go_to_settings": "Перейти в настройки",
-    "notifications_disabled_message": "Вы должны разрешить уведомления для получения напоминаний о молитве и зикре."
-  },
-
   "stats": {
     "improvement_opportunity": "Возможность улучшения",
     "start_habit_advice": "Начните с 1 молитвы в день, чтобы выработать привычку.",
@@ -1446,15 +1287,28 @@
     "time_window": "Окно",
     "goal_soon_customizable": "Ваша цель скоро будет настраиваемой!",
     "weekly_goal_desc": "Количество молитв, нацеленных на неделю",
-
     "quran_widget_available": "Виджет доступен на главном экране",
     "quran_widget_add": "Добавить виджет на главный экран",
     "quran_widget_active": "Активен",
     "quran_widget_inactive": "Неактивен",
     "quran_widget_title": "Премиум виджет Корана",
-    "quran_widget_description": "Управляйте воспроизведением Корана с главного экрана"
+    "quran_widget_description": "Управляйте воспроизведением Корана с главного экрана",
+    "screen_title": "Мои молитвы",
+    "tab_today": "Сегодня",
+    "tab_journey": "Путь",
+    "today_title": "Сегодня",
+    "prayers_today": "{{count}} из 5",
+    "mark_prayed": "Я помолился",
+    "unmark_prayed": "Отменить",
+    "day_complete_title": "День завершён!",
+    "day_complete_message": "Машаллах, все 5 молитв выполнены. Да примет Аллах.",
+    "next_prayer_hint": "Следующий шаг: {{prayer}}",
+    "progress_footer": "{{percent}}% дня выполнено",
+    "heatmap_title": "Регулярность",
+    "heatmap_subtitle": "Последние {{days}} дней",
+    "other_actions_title": "Другие действия",
+    "other_actions_subtitle": "Зикр, Коран и хадисы в одно касание"
   },
-
   "premium_ui": {
     "badge": "Премиум",
     "signup_tab": "Создать премиум-аккаунт",
@@ -1462,7 +1316,6 @@
     "signup_info_line1": "Создание аккаунта требует премиум-подписки. Ваш аккаунт будет создан автоматически после оплаты.",
     "signup_info_line2": "Уже подписаны? Войдите с тем же email."
   },
-
   "auth_modal": {
     "title": "Премиум-аккаунт",
     "signup_tab": "Создать аккаунт",
@@ -1486,13 +1339,6 @@
     "password_criteria_title": "Критерии безопасности",
     "password_min_length": "Не менее 6 символов"
   },
-
-  "location": "Местоположение",
-  "backup": "Резервная копия",
-  "download": "Скачать",
-  "qibla": "Кибла",
-  "favorites": "Избранное",
-  "settings": "Настройки",
   "languages": {
     "fr": "Français",
     "en": "English",
@@ -1508,7 +1354,6 @@
     "fa": "فارسی",
     "nl": "Nederlands"
   },
-
   "quran_navigation_modal": {
     "title": "🎯 Навигация",
     "swipe_instruction": "Проведите пальцем, чтобы изменить отображение",
@@ -1516,18 +1361,15 @@
     "play_instruction": "Play запускает отображаемое аудио",
     "close_button": "Понял!"
   },
-
   "mosques_finder": "Умный Поисковик Мечетей",
   "native_downloads": "Нативные Загрузки",
   "android_widgets": "Android Виджеты",
   "lock_screen_player": "Плеер Блокировки Экрана",
   "tactile_controls": "Тактильное Управление",
-  "backup_restore": "Резервное Копирование и Восстановление",
   "data_deletion_label": "Удаление Данных",
   "stripe_payments": "Платежи Stripe",
   "user_accounts": "Пользовательские Аккаунты",
   "13_languages": "13 Поддерживаемых Языков",
-  "offline_mode": "Офлайн Режим",
   "local_storage": "Локальное Хранилище",
   "new_features_title": "Новые Функции",
   "new_features_subtitle": "Откройте для себя последние улучшения",
@@ -1567,7 +1409,6 @@
   "toast_premium_required": "Требуется премиум",
   "toast_download_error": "Ошибка загрузки",
   "toast_download_failed": "Загрузка не удалась",
-  "toast_download_success": "Успех",
   "toast_recitation_loading": "Загрузка рецитации",
   "toast_validation_email_required": "Пожалуйста, введите ваш email",
   "toast_validation_password_required": "Пожалуйста, введите ваш пароль",
@@ -1596,11 +1437,6 @@
   "toast_cleanup_updating_title": "Обновление...",
   "toast_cleanup_updating_message": "Обновление списка в процессе",
   "toast_cleanup_completed_detailed_message": "{{count}} файлов удалено ({{size}} МБ освобождено)",
-  "toast_diagnostic_started_title": "Диагностика в процессе...",
-  "toast_diagnostic_started_message": "Анализ загруженных файлов...",
-  "toast_diagnostic_completed_title": "Диагностика завершена",
-  "toast_diagnostic_error_title": "Ошибка диагностики",
-  "toast_diagnostic_error_message": "Не удается диагностировать файлы",
   "toast_configuration_unavailable": "Конфигурация недоступна",
   "toast_apply_changes_error": "Не удается применить изменения",
   "toast_local_playback": "Локальное воспроизведение",
@@ -1616,33 +1452,25 @@
   "toast_auto_fix_error_message": "Не удается применить автоматические исправления",
   "toast_payment_success_title": "Платеж Успешен!",
   "toast_payment_success_message": "Ваша подписка {{subscriptionName}} теперь активна.",
-
   "library": "Библиотека",
   "islamic_knowledge": "Духовные ресурсы",
   "read_listen": "Читать и слушать",
   "saved_content": "Сохраненный контент",
   "prophetic_biography": "Биография Пророка",
-  "prophet_stories": "Истории о Пророках ﷺ",
   "prophetic_traditions": "Пророческие традиции",
   "invocations": "Молитвы",
   "99_names": "99 имен Аллаха",
   "library_info": "Доступ ко всем духовным ресурсам в одном месте",
-  
   "more": "Еще",
   "additional_features": "Дополнительные функции",
   "tools": "Инструменты",
   "find_nearby": "Найти рядом",
   "digital_counter": "Цифровой счетчик",
   "islamic_dates": "Исламские даты",
-  "premium": "Премиум",
-  "prayer_stats": "Статистика",
   "track_prayers": "Отслеживайте свои молитвы",
-  "account": "Аккаунт",
   "app_preferences": "Настройки приложения",
   "app_info": "Информация о приложении",
   "asmaul_husna": "Асмауль Хусна",
-  "hijri_calendar": "Календарь Хиджры",
-  
   "background_image_type": "Тип фонового изображения",
   "background_prophet": "🕌 Мечеть Пророка",
   "background_makka": "🕋 Мекка",

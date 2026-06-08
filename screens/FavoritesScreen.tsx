@@ -9,7 +9,7 @@ import {
   Share,
 } from "react-native";
 import { MCIcon } from "@/components/icons/AppVectorIcons";
-import { LinearGradient } from "expo-linear-gradient";
+import { LinearGradient } from "@/components/ui/LinearGradientView";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useTranslation } from "react-i18next";
 import { useRouter } from "expo-router";

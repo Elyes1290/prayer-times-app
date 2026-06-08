@@ -1,8 +1,7 @@
 import * as Location from "expo-location";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
-  Animated,
   AppState,
   Image,
   StyleSheet,
@@ -19,8 +18,6 @@ import { useTranslation } from "react-i18next";
 import { useFocusEffect } from "@react-navigation/native";
 import { useSafeAreaInsets, SafeAreaView } from "react-native-safe-area-context";
 import { IonIcon } from "@/components/icons/AppVectorIcons";
-import compassImg from "../assets/images/compass.png";
-import kaabaImg from "../assets/images/kaaba.png";
 import ThemedImageBackground from "../components/ThemedImageBackground";
 import { errorLog } from "../utils/logger";
 import {
@@ -30,6 +27,7 @@ import {
 } from "../hooks/useThemeColor";
 import { makeBoxShadow } from "../utils/shadowUtils";
 import { usePremium } from "../contexts/PremiumContext";
+import { QiblaCompassView } from "../components/qibla/QiblaCompassView";
 
 // 🧭 Import des boussoles disponibles
 import compass1 from "../assets/boussole/compass1.png";
@@ -126,19 +124,6 @@ function calculateQiblaDirection(lat: number, lng: number): number {
   return (angle + 360) % 360;
 }
 
-function getPointOnCircle(
-  centerX: number,
-  centerY: number,
-  radius: number,
-  angleDeg: number
-): { x: number; y: number } {
-  const angleRad = (angleDeg - 90) * (Math.PI / 180); // 0° = haut
-  return {
-    x: centerX + radius * Math.cos(angleRad),
-    y: centerY + radius * Math.sin(angleRad),
-  };
-}
-
 const getStyles = (
   colors: any,
   overlayTextColor: string,
@@ -164,11 +149,17 @@ const getStyles = (
       textShadowRadius: 2,
       textAlign: "center",
     },
+    compassSection: {
+      width: "100%",
+      alignItems: "center",
+      paddingHorizontal: 16,
+    },
     compassWrap: {
       width: compassSize,
       height: compassSize,
       alignItems: "center",
       justifyContent: "center",
+      alignSelf: "center",
       position: "relative",
       backgroundColor: "rgba(34,40,58,0.30)", // Toujours sombre pour la boussole blanche
       borderRadius: compassSize / 2,
@@ -407,22 +398,22 @@ export default function QiblaScreen() {
   const styles = getStyles(colors, overlayTextColor, currentTheme, compassSize, needleHeight);
 
   const [direction, setDirection] = useState<number | null>(null);
-  const [heading, setHeading] = useState<number | null>(null);
+  const [geoCoords, setGeoCoords] = useState<{
+    latitude: number;
+    longitude: number;
+  } | null>(null);
 
   // 🧭 États pour la sélection de boussole (premium)
   const [selectedCompass, setSelectedCompass] =
     useState<CompassType>("compass1");
   const [compassModalVisible, setCompassModalVisible] = useState(false);
-  const [isPointingToQibla, setIsPointingToQibla] = useState(false);
   const [locationPermissionGranted, setLocationPermissionGranted] = useState<
     boolean | null
   >(null);
   const [isInitializing, setIsInitializing] = useState(true);
   const [userDeniedPermission, setUserDeniedPermission] = useState(false); // 🚀 NOUVEAU : Mémoriser le refus
 
-  // 🚀 NOUVEAU : Charger le statut de refus au démarrage
-  useEffect(() => {
-    const loadDeniedStatus = async () => {
+  const loadQiblaPreferences = useCallback(async () => {
       try {
         const denied = await AsyncStorage.getItem("@qibla_permission_denied");
         console.log("🚧 [QIBLA DEBUG] Permission refusée sauvée:", denied);
@@ -432,23 +423,13 @@ export default function QiblaScreen() {
           );
           setUserDeniedPermission(true);
           setLocationPermissionGranted(false);
-          setIsInitializing(false); // 🚀 Arrêter l'initialisation immédiatement
+          setIsInitializing(false);
         } else {
           console.log(
             "🚧 [QIBLA DEBUG] Pas de refus sauvé - initialisation possible"
           );
         }
-      } catch (error) {
-        console.error("Erreur chargement statut permission:", error);
-      }
-    };
-    loadDeniedStatus();
-  }, []);
 
-  // 🧭 Charger le choix de boussole sauvegardé
-  useEffect(() => {
-    const loadCompassChoice = async () => {
-      try {
         const saved = await AsyncStorage.getItem("@selected_compass");
         const validCompasses = [
           "compass1",
@@ -463,12 +444,14 @@ export default function QiblaScreen() {
         if (saved && validCompasses.includes(saved)) {
           setSelectedCompass(saved as CompassType);
         }
-      } catch (err) {
-        console.error("Erreur chargement boussole:", err);
+      } catch (error) {
+        console.error("Erreur chargement préférences Qibla:", error);
       }
-    };
-    loadCompassChoice();
   }, []);
+
+  useEffect(() => {
+    void loadQiblaPreferences();
+  }, [loadQiblaPreferences]);
 
   // 🧭 Sauvegarder le choix de boussole
   const selectCompass = async (compassId: CompassType) => {
@@ -481,52 +464,12 @@ export default function QiblaScreen() {
     }
   };
 
-  // Animation: valeur de rotation de la boussole
-  const animatedHeading = useRef(new Animated.Value(0)).current;
-  const lastHeading = useRef(0);
-  
-  // 🎯 Filtrage pour fluidité (low-pass filter)
-  const smoothedHeading = useRef(0);
-  const SMOOTHING_FACTOR = 0.15; // Plus c'est petit, plus c'est lisse (0.1-0.3)
-  const MIN_MOVEMENT_THRESHOLD = 0.5; // Seuil minimum de mouvement en degrés
+  const compassSensorEnabled =
+    locationPermissionGranted === true &&
+    !userDeniedPermission &&
+    !isInitializing;
 
-  // Animation pour la couleur de l'aiguille
-  const needleColorAnimation = useRef(new Animated.Value(0)).current;
-
-  // Référence pour le subscription du heading
-  const headingSubscription = useRef<Location.LocationSubscription | null>(
-    null
-  );
-
-  // Pour l'icône Kaaba
-  const KAABA_RADIUS = compassSize / 2 - 30;
-  let kaabaPos = { x: compassSize / 2, y: 30 };
-  if (direction !== null) {
-    const angleQibla = direction;
-    kaabaPos = getPointOnCircle(
-      compassSize / 2,
-      compassSize / 2,
-      KAABA_RADIUS,
-      angleQibla
-    );
-  }
-
-  // Fonction pour calculer si l'utilisateur pointe vers la Qibla
-  const calculateQiblaAlignment = (
-    userHeading: number,
-    qiblaDirection: number
-  ) => {
-    // Calculer la différence angulaire
-    let diff = Math.abs(userHeading - qiblaDirection);
-    if (diff > 180) {
-      diff = 360 - diff;
-    }
-
-    // Tolérance de ±15 degrés
-    return diff <= 15;
-  };
-
-  // Fonction pour initialiser la localisation et la boussole
+  // Fonction pour initialiser la localisation et la Qibla
   const initializeQibla = useCallback(async () => {
     try {
       console.log(
@@ -594,37 +537,10 @@ export default function QiblaScreen() {
         loc.coords.longitude
       );
       setDirection(angle);
-
-      // Nettoyer l'ancien subscription s'il existe
-      if (headingSubscription.current) {
-        headingSubscription.current.remove();
-      }
-
-      // Démarrer l'écoute du heading avec filtrage
-      headingSubscription.current = await Location.watchHeadingAsync((data) => {
-        // 🎯 Filtre passe-bas (low-pass filter) pour lisser les valeurs
-        const rawHeading = data.trueHeading;
-        
-        // Initialisation du filtre
-        if (smoothedHeading.current === 0) {
-          smoothedHeading.current = rawHeading;
-        }
-        
-        // Gérer le passage 0-360 degrés correctement
-        let delta = rawHeading - smoothedHeading.current;
-        if (delta > 180) delta -= 360;
-        if (delta < -180) delta += 360;
-        
-        // Appliquer le lissage (low-pass filter)
-        smoothedHeading.current += delta * SMOOTHING_FACTOR;
-        
-        // Normaliser à 0-360
-        if (smoothedHeading.current < 0) smoothedHeading.current += 360;
-        if (smoothedHeading.current >= 360) smoothedHeading.current -= 360;
-        
-        setHeading(smoothedHeading.current);
+      setGeoCoords({
+        latitude: loc.coords.latitude,
+        longitude: loc.coords.longitude,
       });
-
       setIsInitializing(false);
     } catch (error: any) {
       console.log("🚧 [QIBLA DEBUG] ERREUR CATCHÉE:", error?.message);
@@ -649,40 +565,17 @@ export default function QiblaScreen() {
     }
   }, [userDeniedPermission]);
 
-  // useEffect pour l'initialisation au montage
   useEffect(() => {
-    // 🚀 CORRECTION : Ne pas essayer si l'utilisateur a déjà refusé
-    console.log(
-      "🚧 [QIBLA DEBUG] useEffect principal - userDeniedPermission:",
-      userDeniedPermission
-    );
     if (!userDeniedPermission) {
-      console.log("🚧 [QIBLA DEBUG] Démarrage initializeQibla()");
       initializeQibla();
-    } else {
-      console.log(
-        "🚧 [QIBLA DEBUG] Utilisateur a refusé - PAS d'initialisation"
-      );
     }
-
-    // Cleanup au démontage
-    return () => {
-      const subscription = headingSubscription.current;
-      if (subscription) {
-        subscription.remove();
-      }
-    };
   }, [initializeQibla, userDeniedPermission]);
 
-  // useFocusEffect pour réessayer quand l'écran devient actif
   useFocusEffect(
     useCallback(() => {
-      // 🚀 CORRECTION : Ne pas redemander si l'utilisateur a déjà refusé
       if (userDeniedPermission) {
-        return; // Respecter le choix de l'utilisateur
+        return;
       }
-
-      // Si on n'a pas les permissions ou qu'on initialise encore, réessayer
       if (locationPermissionGranted === false || isInitializing) {
         initializeQibla();
       }
@@ -691,7 +584,7 @@ export default function QiblaScreen() {
       isInitializing,
       initializeQibla,
       userDeniedPermission,
-    ])
+    ]),
   );
 
   // Écouter les changements d'état de l'app (retour depuis les paramètres)
@@ -711,67 +604,6 @@ export default function QiblaScreen() {
       subscription.remove();
     };
   }, [locationPermissionGranted, initializeQibla, userDeniedPermission]);
-
-  useEffect(() => {
-    if (heading !== null) {
-      let from = lastHeading.current % 360;
-      let to = heading % 360;
-
-      // Delta dans [-180, +180]
-      let delta = ((to - from + 540) % 360) - 180;
-      
-      // 🎯 Seuil minimum : ignorer les micro-mouvements
-      if (Math.abs(delta) < MIN_MOVEMENT_THRESHOLD) {
-        return;
-      }
-      
-      let target = from + delta; // la vraie cible pour éviter le tour
-
-      // Si saut > 90° (rotation rapide du téléphone), MAJ immédiate
-      if (Math.abs(delta) > 90) {
-        animatedHeading.setValue(-target);
-        lastHeading.current = target;
-      } else {
-        // 🎯 Animation fluide avec spring pour un mouvement naturel
-        Animated.spring(animatedHeading, {
-          toValue: -target,
-          friction: 8, // Plus c'est élevé, plus c'est amorti (5-10)
-          tension: 20, // Plus c'est élevé, plus c'est rapide (10-40)
-          useNativeDriver: true,
-        }).start();
-        lastHeading.current = target;
-      }
-    }
-  }, [heading, animatedHeading]);
-
-  // Nouveau useEffect pour vérifier l'alignement avec la Qibla
-  useEffect(() => {
-    if (heading !== null && direction !== null) {
-      const pointingToQibla = calculateQiblaAlignment(heading, direction);
-
-      if (pointingToQibla !== isPointingToQibla) {
-        setIsPointingToQibla(pointingToQibla);
-
-        // Animation de couleur
-        Animated.timing(needleColorAnimation, {
-          toValue: pointingToQibla ? 1 : 0,
-          duration: 300,
-          useNativeDriver: false,
-        }).start();
-      }
-    }
-  }, [heading, direction, isPointingToQibla, needleColorAnimation]);
-
-  const compassRotation = animatedHeading.interpolate({
-    inputRange: [-360, 0],
-    outputRange: ["-360deg", "0deg"],
-  });
-
-  // Interpolation de couleur pour l'aiguille
-  const needleColor = needleColorAnimation.interpolate({
-    inputRange: [0, 1],
-    outputRange: [colors.primary, colors.success], // 🌅 Utilise les couleurs du thème actif
-  });
 
   return (
     <ThemedImageBackground style={styles.background}>
@@ -817,7 +649,7 @@ export default function QiblaScreen() {
         {/* 🧭 Bouton de sélection de boussole (premium only) */}
         {user?.isPremium && !userDeniedPermission && (
           <Pressable
-            style={styles.compassSelectorButton}
+            style={[styles.compassSelectorButton, { marginBottom: 12 }]}
             onPress={() => setCompassModalVisible(true)}
           >
             <IonIcon
@@ -835,56 +667,18 @@ export default function QiblaScreen() {
 
         {/* 🚀 NOUVEAU : Masquer la boussole si localisation désactivée */}
         {!userDeniedPermission && (
-          <View style={styles.compassWrap}>
-            {/* Boussole qui tourne */}
-            <Animated.View
-              style={[
-                styles.compassContainer,
-                { transform: [{ rotate: compassRotation }] },
-              ]}
-            >
-              <Image
-                source={AVAILABLE_COMPASSES[selectedCompass].image}
-                style={styles.compass}
-              />
-              {/* Kaaba sur le pourtour du cercle */}
-              <Image
-                source={kaabaImg}
-                style={[
-                  styles.kaabaIcon,
-                  {
-                    position: "absolute",
-                    width: compassSize / 8,
-                    height: compassSize / 8,
-                    left: kaabaPos.x - compassSize / 16,
-                    top: kaabaPos.y - compassSize / 16,
-                    zIndex: 5,
-                  },
-                ]}
-              />
-            </Animated.View>
-            {/* Aiguille bleue (toujours verticale) */}
-            <Animated.View
-              style={[
-                styles.needle,
-                styles.qiblaNeedle,
-                {
-                  left: compassSize / 2 - 2,
-                  top: compassSize / 2 - needleHeight,
-                  alignItems: "center",
-                  justifyContent: "flex-start",
-                },
-              ]}
-            >
-              <Animated.View
-                style={{
-                  width: 4,
-                  height: needleHeight,
-                  backgroundColor: needleColor,
-                  borderRadius: 2,
-                }}
-              />
-            </Animated.View>
+          <View style={styles.compassSection}>
+            <QiblaCompassView
+              compassSize={compassSize}
+              needleHeight={needleHeight}
+              compassImage={AVAILABLE_COMPASSES[selectedCompass].image}
+              qiblaBearingDeg={direction}
+              geoCoords={geoCoords}
+              sensorEnabled={compassSensorEnabled}
+              primaryColor={colors.primary}
+              successColor={colors.success}
+              overlayTextColor={overlayTextColor}
+            />
           </View>
         )}
 

@@ -22,6 +22,12 @@ interface PrayerStatsProps {
   };
 }
 
+function formatDuration(minutes: number) {
+  const hours = Math.floor(minutes / 60);
+  const mins = Math.round(minutes % 60);
+  return `${hours}h ${mins}m`;
+}
+
 const getStyles = (
   colors: any,
   overlayTextColor: string,
@@ -117,12 +123,6 @@ export default function PrayerStats({
   const currentTheme = useCurrentTheme();
 
   const styles = getStyles(colors, overlayTextColor, currentTheme);
-
-  const formatDuration = (minutes: number) => {
-    const hours = Math.floor(minutes / 60);
-    const mins = Math.round(minutes % 60);
-    return `${hours}h ${mins}m`;
-  };
 
   return (
     <View style={styles.container}>

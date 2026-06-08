@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { View, Text, StyleSheet, Pressable, Alert } from "react-native";
 import { useRouter } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -14,127 +14,87 @@ import {
 const PaymentSuccessScreen: React.FC = () => {
   const { push } = useRouter();
   const { t } = useTranslation();
-  const [isProcessing, setIsProcessing] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(true);
   const [syncResult, setSyncResult] = useState<PaymentSyncResult | null>(null);
   const { activatePremium, checkPremiumStatus } = usePremium();
 
-  // 🚀 CORRECTION : Traitement du succès de paiement sans boucle infinie
-  useEffect(() => {
-    let isMounted = true;
-    let syncDelayTimeoutId: ReturnType<typeof setTimeout> | undefined;
+  const processPaymentSuccess = useCallback(async () => {
+    try {
+      console.log("🔄 Début traitement succès paiement...");
 
-    const processPaymentSuccess = async () => {
-      try {
-        if (!isMounted) return;
-        setIsProcessing(true);
-        console.log("🔄 Début traitement succès paiement...");
+      const result = await syncUserAfterPayment();
+      setSyncResult(result);
 
-        // Tentative de synchronisation automatique
-        const result = await syncUserAfterPayment();
-        if (!isMounted) return;
-        setSyncResult(result);
+      if (result.success && result.userData) {
+        console.log("✅ Synchronisation réussie !");
 
-        if (result.success && result.userData) {
-          console.log("✅ Synchronisation réussie !");
+        const currentStatus = await checkUserSyncStatus();
+        console.log("🔍 Statut de synchronisation APRÈS sync:", currentStatus);
 
-          // 🔍 VÉRIFICATION APRÈS SYNCHRONISATION : Vérifier le statut actuel
-          const currentStatus = await checkUserSyncStatus();
-          if (!isMounted) return;
-          console.log(
-            "🔍 Statut de synchronisation APRÈS sync:",
-            currentStatus
+        try {
+          const subscriptionType =
+            result.userData.subscription_type || "yearly";
+          console.log("🚀 Activation du premium:", subscriptionType);
+
+          await activatePremium(
+            subscriptionType as "monthly" | "yearly" | "family",
+            result.userData.subscription_id || `stripe-${result.userData.id}`
           );
 
-          // Activer le premium dans le contexte
-          try {
-            const subscriptionType =
-              result.userData.subscription_type || "yearly";
-            console.log("🚀 Activation du premium:", subscriptionType);
+          console.log("🔄 Vérification du statut premium...");
+          await checkPremiumStatus();
 
-            await activatePremium(
-              subscriptionType as "monthly" | "yearly" | "family",
-              result.userData.subscription_id || `stripe-${result.userData.id}`
-            );
-
-            if (!isMounted) return;
-            // Vérifier le statut premium
-            console.log("🔄 Vérification du statut premium...");
-            await checkPremiumStatus();
-
-            if (!isMounted) return;
-            // Délai pour la synchronisation des contextes
-            await new Promise<void>((resolve) => {
-              syncDelayTimeoutId = setTimeout(resolve, 1000);
-            });
-            if (!isMounted) return;
-            console.log("✅ Premium activé avec succès !");
-
-            if (!isMounted) return;
-            // 🚀 CORRECTION : Nettoyer les données d'inscription seulement après tout le processus
-            await AsyncStorage.removeItem("pending_registration");
-            console.log(
-              "🧹 Données d'inscription nettoyées après synchronisation complète"
-            );
-
-            if (!isMounted) return;
-            // 🔍 VÉRIFICATION FINALE : Vérifier le statut après activation premium
-            const finalStatus = await checkUserSyncStatus();
-            console.log(
-              "🔍 Statut final après activation premium:",
-              finalStatus
-            );
-          } catch (premiumError) {
-            console.error(
-              "⚠️ Erreur lors de l'activation du premium:",
-              premiumError
-            );
-          }
-        } else {
-          console.log("⚠️ Synchronisation échouée:", result.message);
-
-          // Tentative de retry si nécessaire
-          if (result.requiresManualLogin) {
-            console.log("🔄 Tentative de retry...");
-            const retryResult = await retryUserSync(2);
-            if (!isMounted) return;
-            if (retryResult.success) {
-              setSyncResult(retryResult);
-              console.log("✅ Retry réussi !");
-
-              // 🔍 Vérifier le statut après retry réussi
-              const retryStatus = await checkUserSyncStatus();
-              console.log("🔍 Statut après retry réussi:", retryStatus);
-            }
-          }
-        }
-      } catch (error) {
-        console.error(
-          "❌ Erreur lors du traitement du succès de paiement:",
-          error
-        );
-        if (isMounted) {
-          setSyncResult({
-            success: false,
-            message: "Erreur de traitement",
-            requiresManualLogin: true,
+          await new Promise<void>((resolve) => {
+            setTimeout(resolve, 1000);
           });
+          console.log("✅ Premium activé avec succès !");
+
+          await AsyncStorage.removeItem("pending_registration");
+          console.log(
+            "🧹 Données d'inscription nettoyées après synchronisation complète"
+          );
+
+          const finalStatus = await checkUserSyncStatus();
+          console.log("🔍 Statut final après activation premium:", finalStatus);
+        } catch (premiumError) {
+          console.error(
+            "⚠️ Erreur lors de l'activation du premium:",
+            premiumError
+          );
         }
-      } finally {
-        if (isMounted) {
-          setIsProcessing(false);
+      } else {
+        console.log("⚠️ Synchronisation échouée:", result.message);
+
+        if (result.requiresManualLogin) {
+          console.log("🔄 Tentative de retry...");
+          const retryResult = await retryUserSync(2);
+          if (retryResult.success) {
+            setSyncResult(retryResult);
+            console.log("✅ Retry réussi !");
+
+            const retryStatus = await checkUserSyncStatus();
+            console.log("🔍 Statut après retry réussi:", retryStatus);
+          }
         }
       }
-    };
+    } catch (error) {
+      console.error(
+        "❌ Erreur lors du traitement du succès de paiement:",
+        error
+      );
+      setSyncResult({
+        success: false,
+        message: "Erreur de traitement",
+        requiresManualLogin: true,
+      });
+    } finally {
+      setIsProcessing(false);
+    }
+  }, [activatePremium, checkPremiumStatus]);
 
-    processPaymentSuccess();
-
-    return () => {
-      isMounted = false;
-      if (syncDelayTimeoutId !== undefined) {
-        clearTimeout(syncDelayTimeoutId);
-      }
-    };
-  }, []); // 🚀 CORRECTION : Dépendances vides pour éviter la boucle infinie
+  useEffect(() => {
+    void processPaymentSuccess();
+  }, [processPaymentSuccess]);
 
   const handleContinue = () => {
     // Rediriger vers Settings de manière stable

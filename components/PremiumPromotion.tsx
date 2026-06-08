@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet, Pressable } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
+import { LinearGradient } from "@/components/ui/LinearGradientView";
 import { MCIcon } from "@/components/icons/AppVectorIcons";
 import { useRouter } from "expo-router";
 import { useTranslation } from "react-i18next";

@@ -10,7 +10,7 @@ import {
   StatusBar,
   ActivityIndicator,
 } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
+import { LinearGradient } from "@/components/ui/LinearGradientView";
 import { IonIcon } from "@/components/icons/AppVectorIcons";
 import { useFocusEffect, useRouter } from "expo-router";
 

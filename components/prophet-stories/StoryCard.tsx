@@ -7,6 +7,7 @@ import {
   ActivityIndicator,
   Alert,
 } from "react-native";
+import { useTranslation } from "react-i18next";
 import { IonIcon } from "@/components/icons/AppVectorIcons";
 import { ThemedText } from "../ThemedText";
 
@@ -51,27 +52,6 @@ const DIFFICULTY_COLORS = {
   advanced: "#F44336",
 };
 
-const CATEGORY_LABELS: Record<string, string> = {
-  childhood: "Enfance",
-  revelation: "Révélation",
-  meccan_period: "Période Mecquoise",
-  hijra: "Hijra",
-  medinian_period: "Période Médinoise",
-  battles: "Batailles",
-  companions: "Compagnons",
-  family_life: "Vie Familiale",
-  final_years: "Dernières Années",
-  character_traits: "Traits de Caractère",
-  miracles: "Miracles",
-  daily_life: "Vie Quotidienne",
-};
-
-const DIFFICULTY_LABELS: Record<string, string> = {
-  beginner: "Débutant",
-  intermediate: "Intermédiaire",
-  advanced: "Avancé",
-};
-
 interface StoryCardProps {
   story: StoryCardData;
   rawStory: { id: string; isDownloaded?: boolean };
@@ -102,6 +82,15 @@ export function StoryCard({
   onDownload,
   onDelete,
 }: StoryCardProps) {
+  const { t } = useTranslation();
+
+  const categoryLabel = t(`prophet_story_categories.${story.category}`, {
+    defaultValue: story.category,
+  });
+  const difficultyLabel = t(`prophet_story_difficulty.${story.difficulty}`, {
+    defaultValue: story.difficulty,
+  });
+
   const handleDownloadPress = () => {
     if (rawStory.isDownloaded) {
       Alert.alert(
@@ -176,9 +165,7 @@ export function StoryCard({
               size={12}
               color="white"
             />
-            <Text style={styles.categoryBadgeText}>
-              {CATEGORY_LABELS[story.category] ?? story.category}
-            </Text>
+            <Text style={styles.categoryBadgeText}>{categoryLabel}</Text>
           </View>
 
           <View
@@ -187,9 +174,7 @@ export function StoryCard({
               { backgroundColor: DIFFICULTY_COLORS[story.difficulty] },
             ]}
           >
-            <Text style={styles.difficultyBadgeText}>
-              {DIFFICULTY_LABELS[story.difficulty]}
-            </Text>
+            <Text style={styles.difficultyBadgeText}>{difficultyLabel}</Text>
           </View>
         </View>
 

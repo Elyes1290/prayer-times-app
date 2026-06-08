@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -63,16 +63,10 @@ function LocationSectionComponent({
   // 🚀 STATE LOCAL pour l'input - séparé de la recherche !
   const [localCityInput, setLocalCityInput] = useState(cityInput || "");
 
-  // 🚀 UI MODE : utiliser l'état externe ou local de fallback
-  const currentUIMode = uiMode || locationMode;
+  // Mode affiché : si le GPS est passé en manuel (ville choisie), forcer l'UI manuel
+  const currentUIMode =
+    locationMode === "manual" ? "manual" : (uiMode ?? locationMode);
   const setCurrentUIMode = setUIMode || (() => {});
-
-  // 🚀 SYNCHRONISATION : Mettre à jour l'UI externe quand le mode réel change
-  useEffect(() => {
-    if (locationMode === "manual" && setUIMode) {
-      setUIMode("manual");
-    }
-  }, [locationMode, setUIMode]);
 
   // 🚀 Fonction pour rechercher manuellement
   const handleSearch = () => {

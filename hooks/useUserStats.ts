@@ -79,6 +79,13 @@ interface UserStats {
     key: string;
     params: Record<string, any>;
   };
+  today_prayers?: {
+    fajr: boolean;
+    dhuhr: boolean;
+    asr: boolean;
+    maghrib: boolean;
+    isha: boolean;
+  };
 }
 
 interface UseUserStatsReturn {
@@ -216,10 +223,9 @@ export const useUserStats = (): UseUserStatsReturn => {
     await fetchStats(true);
   }, [fetchStats]);
 
-  // Charger les stats au montage
   useEffect(() => {
-    fetchStats();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    void fetchStats();
+  }, [fetchStats]);
 
   // Rafraîchir automatiquement toutes les 10 minutes
   useEffect(() => {

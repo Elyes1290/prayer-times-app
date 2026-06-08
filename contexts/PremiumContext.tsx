@@ -350,13 +350,10 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
     }
   }, []);
 
-  // Charger les données premium au démarrage
-  useEffect(() => {
-    loadPremiumData();
-  }, []);
-
   // 🕐 NOUVEAU : Vérifier l'expiration toutes les heures quand l'app est active
   useEffect(() => {
+    void loadPremiumData();
+
     // Vérification initiale après 10 secondes
     const initialCheck = setTimeout(() => {
       checkLocalPremiumExpiration();

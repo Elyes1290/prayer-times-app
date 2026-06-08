@@ -134,6 +134,28 @@ const getStyles = (
   });
 };
 
+const DAY_NAMES = {
+  fr: ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"],
+  ar: ["أحد", "إثن", "ثلا", "أرب", "خمس", "جمع", "سبت"],
+  en: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+} as const;
+
+function formatDay(date: Date, language: string) {
+  const lang = language in DAY_NAMES ? language : "en";
+  return DAY_NAMES[lang as keyof typeof DAY_NAMES][date.getDay()];
+}
+
+function formatDate(date: Date) {
+  return date.getDate().toString().padStart(2, "0");
+}
+
+function formatTime(date: Date) {
+  return date.toLocaleTimeString([], {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+}
+
 export default function WeeklyPrayerView({
   currentDate,
   weekPrayerTimes,
@@ -148,27 +170,6 @@ export default function WeeklyPrayerView({
 
   const styles = getStyles(colors, overlayTextColor, currentTheme);
   const todayRef = useMemo(() => new Date(), []);
-
-  const formatDay = (date: Date) => {
-    const days = {
-      fr: ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"],
-      ar: ["أحد", "إثن", "ثلا", "أرب", "خمس", "جمع", "سبت"],
-      en: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
-    };
-    const lang = i18n.language in days ? i18n.language : "en";
-    return days[lang as keyof typeof days][date.getDay()];
-  };
-
-  const formatDate = (date: Date) => {
-    return date.getDate().toString().padStart(2, "0");
-  };
-
-  const formatTime = (date: Date) => {
-    return date.toLocaleTimeString([], {
-      hour: "2-digit",
-      minute: "2-digit",
-    });
-  };
 
   const isToday = (date: Date) => {
     return (
@@ -217,7 +218,7 @@ export default function WeeklyPrayerView({
                       isToday(day.date) && styles.todayText,
                     ]}
                   >
-                    {formatDay(day.date)}
+                    {formatDay(day.date, i18n.language)}
                   </Text>
                   <Text
                     style={[

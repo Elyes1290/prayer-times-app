@@ -6,7 +6,6 @@
   "enter_city_name": "Şehir adınızı girin",
   "enable_auto_location": "Otomatik konumu etkinleştir (GPS)",
   "unknown_city": "Bilinmeyen şehir",
-
   "appearance": "Görünüm",
   "theme_mode": "Görünüm modu",
   "theme_auto": "Otomatik",
@@ -15,7 +14,6 @@
   "notifications_disabled_title": "Bildirimler devre dışı",
   "notifications_disabled_message": "Bildirim almak için lütfen ayarlardan etkinleştirin.",
   "open_settings": "Ayarları aç",
-
   "settings": "Ayarlar",
   "location": "Konum",
   "automatic_gps": "Otomatik (GPS)",
@@ -32,7 +30,6 @@
   "minutes_before": "Kaç dakika önce:",
   "minutes": "dk",
   "language": "Dil",
-
   "calc_method": {
     "MuslimWorldLeague": "Müslüman Dünya Ligi",
     "Egyptian": "Mısır Genel Araştırma Kurumu",
@@ -45,7 +42,6 @@
     "Tehran": "Tahran",
     "Turkey": "Türkiye"
   },
-
   "method_MuslimWorldLeague": "Müslüman Dünya Ligi",
   "method_Egyptian": "Mısır Genel Araştırma Kurumu",
   "method_Karachi": "İslami Bilimler Üniversitesi, Karaçi",
@@ -56,7 +52,6 @@
   "method_Singapore": "Singapur",
   "method_Tehran": "Tahran",
   "method_Turkey": "Türkiye",
-
   "adhan_sound": "Ezan seçimi",
   "adhan_sounds": {
     "adhamalsharqawe": "Şarkavi Ezanı",
@@ -71,7 +66,6 @@
     "masjidquba": "Kuba Mescidi",
     "islamsobhi": "İslam Sobhi"
   },
-
   "sound_adhamalsharqawe": "Sharqawi Adhan",
   "sound_adhanaljazaer": "Adhan Al Jazaer",
   "sound_ahmadnafees": "Ahmad Nafees",
@@ -83,7 +77,6 @@
   "sound_mustafaozcan": "Mustafa Ozcan",
   "sound_masjidquba": "Masjid Al-Quba",
   "sound_islamsobhi": "Islam Sobhi",
-
   "hijri_calendar": "Hicri Takvim",
   "gregorian_date": "Miladi Tarih",
   "hijri_date": "Hicri Tarih",
@@ -111,7 +104,7 @@
   "no_text": "Bu hadisin metni mevcut değil.",
   "about": "Hakkında",
   "status": "Durum",
-  "premium_status": "Premium",
+  "premium_status": "Premium Durumu",
   "free": "Ücretsiz",
   "account_label": "Hesap",
   "user": "Kullanıcı",
@@ -150,7 +143,6 @@
     "welcome": "Ruhani arkadaşınıza hoş geldiniz!",
     "description": "Bu ücretsiz uygulama (şu anda reklamsız) günlük dini pratiğinizde size eşlik eder: hassas namaz vakitleri, Kıble yönü, Kuran okuma, otomatik zikir, sahih hadisler, Hicri takvim, namaz istatistikleri, rozet sistemi, favori sistemi, gelişmiş ses ve daha fazlası. Yakında özel özelliklerle birlikte premium reklamsız sürüm mevcut olacaktır.",
     "blessing": "بارك الله فيكم - Allah size bereket versin",
-
     "features_title": "🌟 Tam özellikler",
     "features_subtitle": "İslami pratiğiniz için ihtiyacınız olan her şey:",
     "features": {
@@ -183,21 +175,18 @@
       "offline_mode": "Çevrimdışı mod",
       "local_storage": "Güvenli yerel depolama"
     },
-
     "premium_title": "👑 Premium özellikler",
     "premium_subtitle": "Ruhani yolculuğunuzu geliştirin:",
     "premium_stats": "Detaylı namaz istatistikleri",
     "premium_badges": "Özel rozetler ve ödüller",
     "premium_audio": "Yüksek kaliteli ses dosyaları",
     "premium_themes": "Özel temalar ve kişiselleştirme",
-
     "advanced_title": "🚀 Gelişmiş özellikler",
     "advanced_subtitle": "Deneyiminizi geliştirmek için:",
     "advanced_favorites": "Favori sistemi ve senkronizasyon",
     "advanced_weekly": "Haftalık namaz görünümü",
     "advanced_sun": "Güneş bilgileri ve zaman",
     "advanced_personalization": "Kişiselleştirme ve ayarlar",
-
     "new_features_title": "🆕 Yeni özellikler",
     "new_features_subtitle": "Uygulamaya eklenen son iyileştirmeler:",
     "new_widgets": "Özelleştirilebilir Android widget'ları",
@@ -206,7 +195,6 @@
     "new_downloads": "Optimize edilmiş yerel indirmeler",
     "new_mosques": "Akıllı cami bulucu",
     "new_backup": "Tam yedekleme sistemi",
-
     "faq_title": "❓ Sık sorulan sorular",
     "faq_location_question": "Uygulama neden konumuma ihtiyaç duyuyor?",
     "faq_location_answer": "Coğrafi konumunuza göre namaz vakitlerini hassas şekilde hesaplamak için konum gereklidir. Şehrinizi manuel olarak da girebilirsiniz.",
@@ -216,7 +204,6 @@
     "faq_qibla_answer": "Telefonunuzu düz tutun, metal nesnelerden uzak. Pusula kararsızsa kalibre etmek için 8 şeklinde hareketler yapın.",
     "faq_offline_question": "Uygulama çevrimdışı çalışır mı?",
     "faq_offline_answer": "Evet, yapılandırdıktan sonra namaz vakitleri, Kıble, zikir ve Kuran okuma için çevrimdışı çalışır.",
-
     "support_title": "🤝 Destek ve topluluk",
     "send_suggestion": "Öneri gönder",
     "report_bug": "Sorun bildir",
@@ -224,12 +211,10 @@
     "contact_suggestion": "İslami Uygulama Önerisi",
     "contact_bug": "İslami Uygulama Hata Raporu",
     "email_template": "Merhaba Drogbinho,\n\n{{subject}} hakkında:\n\n[Mesajınız burada]\n\nBu mükemmel uygulama için teşekkürler!\n\nSaygılarımla",
-
     "developer_title": "👨‍💻 Geliştirici",
     "developer_name": "❤️ ile Drogbinho tarafından geliştirildi",
     "developer_bio": "Tutkulu geliştirici, pratisyen Müslüman, toplum için faydalı uygulamalar üreticisi.",
     "linkedin_profile": "LinkedIn profilini görüntüle",
-
     "technical_title": "⚙️ Teknik bilgiler",
     "tech_react_native": "• React Native ve Expo ile geliştirildi",
     "tech_adhan_lib": "• Adhan kütüphanesine dayalı hesaplamalar",
@@ -239,14 +224,12 @@
     "tech_audio_optimization": "• Gelişmiş ses optimizasyonu ve önbellek",
     "tech_performance": "• Modern React hooks ile gelişmiş performans",
     "tech_security": "• Gelişmiş güvenlik ve veri koruması",
-
     "sources_title": "📚 Kaynaklar ve teşekkürler",
     "source_quran": "• Kuran: Quran.com API",
     "source_hadith": "• Hadisler: HadithAPI.com",
     "source_prayer_calculation": "• Namaz hesaplamaları: Adhan Kütüphanesi",
     "source_icons": "• İkonlar: Material Design ve Flaticon",
     "islamic_authenticity": "✅ Tüm dini kaynaklar doğrulanmış ve sahihtir",
-
     "legal_title": "⚖️ Yasal bilgiler",
     "privacy_policy": "Gizlilik politikası",
     "privacy_policy_content": "Bu uygulama gizliliğinize saygı duyar:\n\n• Verileriniz cihazınızda kalır\n• Kişisel bilgi toplama yok\n• Konum sadece hesaplamalar için kullanılır\n• Şu anda reklam yok\n• Ücretsiz uygulama, premium sürüm geliyor",
@@ -254,7 +237,6 @@
     "terms_title": "Kullanım şartları",
     "terms_content": "Bu uygulamayı kullanarak:\n\n• İslami değerlere uygun kullanmayı kabul ediyorsunuz\n• Uygulama ücretsiz sürüm ve premium sürüm sunar\n• Geliştirici doğruluk sağlamak için elinden geleni yapar\n• Her zaman yerel camiinizle kontrol edin\n• Kullanım kendi riskinize",
     "understand": "Anladım",
-
     "version": "Sürüm",
     "build": "Build",
     "last_update": "Son güncelleme:",
@@ -267,19 +249,50 @@
     "closing_dua": "رَبَّنَا تَقَبَّلْ مِنَّا إِنَّكَ أَنتَ السَّمِيعُ الْعَلِيمُ"
   },
   "translation_not_available": "Bu kitap için İngilizce çeviri mevcut değil.",
-  "home": "Ana Sayfa",
+  "home": {
+    "go_to_settings": "Ayarlara git",
+    "notifications_disabled_message": "Namaz ve zikir hatırlatıcıları almak için bildirimlere izin vermelisiniz."
+  },
   "qibla": "Kıble",
   "mosques": "Camiler",
   "today": "Bugün",
-  "quran": "Kur'an",
+  "quran": {
+    "offline_recitation": "İndirilmiş kıraat (çevrimdışı)",
+    "unknown_reciter": "Bilinmeyen kâri",
+    "reciter": "Kâri",
+    "checking_connection": "Kontrol ediliyor..."
+  },
   "hadiths": "Hadisler",
-  "prophet_stories": "Peygamberler Hikayeleri (Aleyhimüsselam)",
+  "prophet_stories": "Peygamberler Hikayeleri ﷺ",
   "prophets_stories": "Peygamberler Hikayeleri",
+  "prophet_story_categories": {
+    "childhood": "Çocukluk",
+    "revelation": "Vahiy",
+    "meccan_period": "Mekke dönemi",
+    "hijra": "Hicret",
+    "medinian_period": "Medine dönemi",
+    "battles": "Savaşlar",
+    "companions": "Sahabeler",
+    "family_life": "Aile hayatı",
+    "final_years": "Son yıllar",
+    "character_traits": "Karakter",
+    "miracles": "Mucizeler",
+    "daily_life": "Günlük hayat",
+    "creation": "Yaratılış",
+    "paradise": "Cennet",
+    "earth_life": "Dünya hayatı",
+    "prophets_lineage": "Peygamber silsilesi",
+    "prophethood": "Peygamberlik"
+  },
+  "prophet_story_difficulty": {
+    "beginner": "Başlangıç",
+    "intermediate": "Orta",
+    "advanced": "İleri"
+  },
   "waiting_for_location": "Konum bekleniyor...",
   "using_free_api": "Ücretsiz API etkin (OpenStreetMap)",
   "mosque_search_error": "Cami arama hatası",
   "mosque_search_timeout": "Arama çok uzun, lütfen tekrar deneyin",
-
   "prayer_names": {
     "Fajr": "İmsak",
     "Dhuhr": "Öğle",
@@ -299,25 +312,12 @@
     "no_favorites_in_category": "Bu kategoride favori yok",
     "press_heart_to_add": "Favori içeriğinizi eklemek için ❤️'ye basın"
   },
-  "favorites": {
-    "sync_success": "Senkronizasyon başarılı",
-    "sync_message": "Favorileriniz senkronize edildi",
-    "deleted": "Favoriler silindi",
-    "all_deleted": "Tüm favoriler silindi"
-  },
   "sun_info": {
     "day_duration": "Gündüz süresi"
-  },
-  "quran": {
-    "offline_recitation": "İndirilmiş kıraat (çevrimdışı)",
-    "unknown_reciter": "Bilinmeyen kâri",
-    "reciter": "Kâri",
-    "checking_connection": "Kontrol ediliyor..."
   },
   "hadith": {
     "search_placeholder": "Metin veya hadis numarasına göre ara..."
   },
-
   "data_deletion": {
     "title": "Hesap Silme",
     "warning": "Uyarı",
@@ -398,13 +398,13 @@
   "toast_cleanup_completed_message": "dosya başarıyla temizlendi",
   "toast_cleanup_error_title": "Temizlik hatası",
   "toast_cleanup_error_message": "Temizlik sırasında hata",
-  "toast_diagnostic_started_title": "Teşhis başladı",
-  "toast_diagnostic_started_message": "Dosyalar teşhis ediliyor...",
-  "toast_diagnostic_completed_title": "Teşhis tamamlandı",
+  "toast_diagnostic_started_title": "Tanılama devam ediyor...",
+  "toast_diagnostic_started_message": "İndirilen dosyalar analiz ediliyor...",
+  "toast_diagnostic_completed_title": "Tanılama tamamlandı",
   "toast_diagnostic_completed_message": "Teşhis başarıyla tamamlandı",
-  "toast_diagnostic_error_title": "Teşhis hatası",
-  "toast_diagnostic_error_message": "Teşhis sırasında hata",
-  "toast_download_success": "Başarı",
+  "toast_diagnostic_error_title": "Tanılama hatası",
+  "toast_diagnostic_error_message": "Dosyalar tanılanamıyor",
+  "toast_download_success": "Başarılı",
   "toast_operation_cancelled": "İşlem iptal edildi",
   "premium_sync_title": "Premium senkronizasyon",
   "premium_sync_message": "Premium sunucu ile senkronize ediliyor...",
@@ -416,88 +416,71 @@
   "renewal_detected": "Yenileme tespit edildi",
   "account_exists": "Hesap mevcut",
   "warning": "Uyarı",
-
   "download_error": "İndirme hatası",
   "download_failed": "İndirme başarısız",
   "download_success": "İndirme başarılı",
   "download_completed": "İndirme tamamlandı",
   "download_cancelled": "İndirme iptal edildi",
   "download_already_exists": "Dosya zaten indirildi",
-
   "delete_success": "Silme başarılı",
   "delete_error": "Silme hatası",
   "delete_completed": "Dosya silindi",
   "delete_failed": "Dosya silinemedi",
-
   "play_error": "Oynatma hatası",
   "play_failed": "Dosya oynatılamadı",
   "play_success": "Oynatma başladı",
   "play_local": "Yerel oynatma",
   "play_streaming": "Akışlı oynatma",
-
   "cache_cleared": "Önbellek temizlendi",
   "cache_error": "Önbellek temizlenirken hata",
   "data_cleared": "Veri temizlendi",
   "data_error": "Veri temizlenirken hata",
-
   "migration_success": "Geçiş başarılı",
   "migration_error": "Geçiş hatası",
   "migration_completed": "Dosyalar başarıyla geçirildi",
-
   "cleanup_success": "Temizlik tamamlandı",
-  "cleanup_error": "Temizlik hatası",
+  "cleanup_error": "Klasör temizlenemiyor",
   "cleanup_completed": "Temizlik tamamlandı",
-
   "sync_success": "Senkronizasyon başarılı",
   "sync_error": "Senkronizasyon hatası",
   "sync_completed": "Veri senkronize edildi",
-
   "backup_success": "Yedek başarılı",
   "backup_error": "Yedek hatası",
   "backup_completed": "Yedek tamamlandı",
   "backup_restored": "Yedek geri yüklendi",
-
   "favorite_added": "Favorilere eklendi",
   "favorite_removed": "Favorilerden kaldırıldı",
   "favorite_error": "Favori hatası",
   "favorite_limit_reached": "Favori limitine ulaşıldı",
   "favorite_premium_required": "Premium için daha fazla favori gerekli",
-
   "login_success": "Giriş başarılı",
   "login_error": "Giriş hatası",
   "logout_success": "Çıkış başarılı",
   "registration_success": "Kayıt başarılı",
   "registration_error": "Kayıt hatası",
-
   "premium_activated": "Premium aktif",
   "premium_error": "Premium hatası",
   "premium_expired": "Premium süresi doldu",
-  "premium_required": "Premium gerekli",
-
+  "premium_required": "Premium Gerekli",
   "file_not_found": "Dosya bulunamadı",
   "file_corrupted": "Dosya bozuldu",
   "file_invalid": "Geçersiz dosya",
   "file_too_large": "Dosya çok büyük",
-
   "network_error": "Ağ hatası",
   "server_error": "Sunucu hatası",
   "connection_failed": "Bağlantı başarısız",
   "timeout_error": "Zaman aşımına uğradı",
   "single_device_only": "Yetkisiz. Lütfen tek cihazda oturum açın.",
-
   "permission_denied": "Yetki reddedildi",
   "storage_full": "Depolama dolu",
   "invalid_format": "Geçersiz format",
   "operation_cancelled": "İşlem iptal edildi",
-
   "recitation_not_found": "Kıraat bulunamadı",
   "recitation_error": "Kıraat hatası",
   "recitation_loading": "Kıraat yükleniyor",
-
   "adhan_not_found": "Ezan bulunamadı",
   "adhan_error": "Ezan hatası",
   "adhan_loading": "Ezan yükleniyor",
-
   "validation_email_required": "Lütfen e-posta adresinizi girin",
   "validation_password_required": "Lütfen şifrenizi girin",
   "validation_email_password_required": "Lütfen e-posta adresinizi ve şifrenizi girin",
@@ -510,7 +493,6 @@
   "validation_firstname_required": "Lütfen adınızı veya takma adınızı girin",
   "validation_firstname_too_short": "Adınız veya takma adınız en az 2 karakter olmalı",
   "validation_firstname_too_long": "Adınız veya takma adınız en fazla 30 karakter olmamalı",
-
   "help_firstname_title": "Adınız veya takma adınız",
   "help_firstname_prefilled": "Bu ad zaten ayarlardan doldurulmuştur. Eğer isterseniz değiştirebilirsiniz.",
   "help_firstname_empty": "2 ile 30 karakter arası. Gerçek adınızı veya takma adınızı kullanabilirsiniz.",
@@ -518,7 +500,6 @@
   "help_password_content": "Gerekli: en az 6 ve en fazla 50 karakter.\nGüvenlik için harf, sayı ve özel karakterler kullanın.",
   "help_email_title": "E-posta",
   "help_email_content": "Gerekli format: name@email.com\nÖrnek: user@gmail.com",
-
   "settings_screen": {
     "premium_adhans_title": "Premium Ezanlar",
     "no_premium_adhans": "Premium ezan algılanmadı",
@@ -535,7 +516,6 @@
     "download_adhan_cancel": "İptal",
     "download_adhan_warning": "İndirme, bağlantınıza bağlı olarak birkaç dakika sürebilir."
   },
-
   "favorites_screen": {
     "title": "Favorilerim",
     "all": "Tümü",
@@ -553,8 +533,6 @@
     "share_error": "Paylaşım hatası",
     "shared_from_app": "Prayer Times App'den paylaşıldı"
   },
-  "favorite_added": "Favorilere eklendi",
-  "favorite_removed": "Favorilerden kaldırıldı",
   "asmaulhusna_search_placeholder": "İsim, anlam veya okunuşa göre ara...",
   "dhikr": {
     "title": "Zikir ve Dualar",
@@ -640,9 +618,10 @@
   "maghrib": "Akşam",
   "isha": "Yatsı",
   "next_prayer": "Sonraki namaz",
+  "daily_dhikr_title": "Günün zikri",
   "today_prayers": "Bugünkü namazlar",
   "calculating_prayer_times": "Namaz vakitleri hesaplanıyor...",
-  "prayer_stats": "Namaz istatistikleri",
+  "prayer_stats": "İstatistikler",
   "day_length": "Gündüz uzunluğu",
   "fajr_to_sunrise": "İmsak ile güneş doğuşu arası",
   "sunset_to_isha": "Güneş batışı ile yatsı arası",
@@ -667,7 +646,6 @@
   "sunset_to_fajr": "Güneş batışı ile imsak arasındaki süre",
   "night_length": "Gece süresi",
   "time_until_sunset": "Gün batımına kalan süre",
-
   "dashboard_welcome": "Esselamu Aleykum",
   "welcome_personalization_title": "Hoş geldin kişiselleştirmesi",
   "welcome_personalization_description": "Size daha kişisel bir deneyim sunmak için adınızı veya takma adınızı söyleyebilir misiniz?",
@@ -688,7 +666,6 @@
   "dashboard_dua_fallback": "Günlük duaları keşfedin",
   "dashboard_verset_fallback": "Kutsal Kuran'ı inceleyin",
   "dashboard_names_fallback": "Esmaül Hüsna",
-
   "learn_to_pray": "Namaz Öğren",
   "ablutions_wudu": "Abdest (Vudu)",
   "prayer_positions": "Namaz Pozisyonları",
@@ -698,7 +675,6 @@
   "important_duas": "Önemli Dualar",
   "images_coming_soon": "Resimler yakında",
   "learning_footer": "Bu bölüm İslami namazın temellerini öğrenmenize yardımcı olur",
-
   "wudu_step_1": "Abdest almak için niyet (Niyet) etmek",
   "wudu_invocation_arabic": "بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ",
   "wudu_invocation_phonetic": "Bismillah alrahman alrahim",
@@ -711,29 +687,24 @@
   "wudu_step_7": "Islak ellerle başı bir kez mesh etmek",
   "wudu_step_8": "Kulakları içten ve dıştan temizlemek",
   "wudu_step_9": "Ayakları bileklere kadar üç kez yıkamak",
-
   "prayer_step_1": "Kıyam: Kıbleye dönük ayakta durmak, eller vücut boyunca",
   "prayer_step_2": "Tekbir: Elleri kaldırıp 'Allahu Ekber' demek",
   "prayer_step_3": "Rükû: Elleri dizlere koyarak eğilmek",
   "prayer_step_4": "Secde: Alnı yere değdirerek secde etmek",
   "prayer_step_5": "Secde: Secde edip Allah'ı tesbih etmek",
-
   "opening_dua": "Açılış Duası",
   "opening_dua_translation": "Sübhaneke Allah'ım ve bihamdike ve tebareke ismüke ve teala ceddüke ve la ilahe gayrük",
   "ruku_dua": "Rükû Duası",
   "ruku_dua_translation": "Yüce Rabbimi tesbih ederim",
   "sujud_dua": "Secde Duası",
   "sujud_dua_translation": "En Yüce Rabbimi tesbih ederim",
-
   "voir_plus": "Daha fazla gör",
   "hadith_du_jour": "Günün hadisi",
-
   "asmaulhusna": {
     "title": "Allah'ın 99 İsmi",
     "subtitle": "Allah'ın en güzel isimlerini ve anlamlarını keşfedin",
     "search_placeholder": "Bir isim ara..."
   },
-
   "location_permission_denied": "Konum izni reddedildi",
   "location_permission_needed_for_mosques": "Yakındaki camileri bulmak için konum gerekli",
   "location_required_for_mosques": "Yakındaki camileri göstermek için konum gerekli",
@@ -748,7 +719,6 @@
   "directions": "Yol tarifi",
   "call": "Ara",
   "more_info": "Daha fazla bilgi",
-
   "tasbih": {
     "title": "Tesbih",
     "reset": "Sıfırla",
@@ -790,15 +760,10 @@
   "become_premium": "Premium Ol",
   "buy_premium": "Premium Ol",
   "premium_benefits": "Tüm premium özellikleri açın: sınırsız favoriler, bulut yedekleme, özel sesler...",
-  "premium_required": "Premium gerekli",
   "download": "İndir",
-  "download_completed": "İndirme tamamlandı",
-  "download_failed": "İndirme başarısız",
-  "download_cancelled": "İndirme iptal edildi",
   "offline": "Çevrimdışı",
   "downloaded_locally": "Yerel olarak indirildi",
   "download_started": "İndirme başladı",
-  "download_error": "İndirme hatası",
   "download_unavailable": "İndirme mevcut değil",
   "recitation_premium_only": "Kıraatler premium kullanıcılar için ayrılmıştır",
   "adhan_premium_only": "Premium ezanlar premium kullanıcılar için ayrılmıştır",
@@ -806,8 +771,6 @@
   "clean": "Temizle",
   "adhan_volume": "Ezan sesi",
   "no_files_to_clean": "Temizlenecek dosya yok",
-  "cleanup_error": "Klasör temizlenemiyor",
-  "cleanup_success": "Temizlik tamamlandı",
   "choose_reciter": "Kâri seç",
   "previous": "Önceki",
   "next": "Sonraki",
@@ -818,13 +781,13 @@
   "surah": "Sure",
   "download_progress": "İndiriliyor...",
   "delete_download_title": "İndirmeyi sil",
-  "delete_download_message": "\"{title}\" dosyasını bu cihazdan silmek istiyor musunuz? Hala yayın yoluyla dinleyebilirsiniz.",
+  "delete_download_message": "\"{{title}}\" dosyasını bu cihazdan silmek istiyor musunuz? Hala yayın yoluyla dinleyebilirsiniz.",
   "delete": "Sil",
   "download_deleted": "İndirme silindi",
-  "download_deleted_message": "{title} bu cihazdan silindi",
+  "download_deleted_message": "{{title}} bu cihazdan silindi",
   "error_deleting_download": "İndirme silinemiyor",
   "error_deleting": "Silme hatası",
-  "download_started_message": "{title} indiriliyor",
+  "download_started_message": "{{title}} indiriliyor",
   "download_completed_title": "🎉 İndirme tamamlandı",
   "finalization_error": "İndirme tamamlanırken sorun oluştu",
   "playback_error": "Oynatma hatası",
@@ -833,14 +796,12 @@
   "streaming_status": "Yayın",
   "remove": "Remove",
   "clear_all": "Clear all",
-  "premium_active": "Premium Aktif",
   "premium_status_description": "Premium aboneliğiniz aktif. Tüm özel özelliklerin keyfini çıkarın!",
   "refresh_location": "Konumu yenile",
   "position_detected": "Konum tespit edildi:",
   "location_detected": "Konum tespit edildi",
   "sound_and_adhan": "Ses ve Ezan",
   "adhan_settings": "Ses ve Ezan",
-  "premium_status": "Premium Durumu",
   "mosque_screen": {
     "location_not_available": "Konum mevcut değil",
     "no_phone_available": "Telefon numarası mevcut değil",
@@ -910,14 +871,13 @@
   "auto_backup_disabled_message": "Otomatik yedekleme devre dışı",
   "auto_backup_premium_required": "Premium gerekli",
   "auto_backup_premium_message": "Otomatik yedekleme premium kullanıcılar için ayrılmıştır",
-  "backup_restore": "Yedekleme",
-  "backup": "Yedekle",
+  "backup_restore": "Yedekleme ve Geri Yükleme",
+  "backup": "Yedekleme",
   "dark_mode": "Koyu",
   "light_mode": "Açık",
   "morning_mode": "Sabah",
   "sunset_mode": "Gün batımı",
   "theme": "Tema",
-  "premium_required": "Premium Gerekli",
   "premium_themes_message": "Sabah ve Gün batımı temaları Premium üyeler için ayrılmıştır.",
   "go_premium": "Premium'a Geç",
   "excellent_consistency": "Mükemmel tutarlılık!",
@@ -939,7 +899,6 @@
   "share_error": "Paylaşım hatası",
   "export_data": "Veri dışa aktar",
   "share_complete_stats_question": "Tam istatistiklerinizi paylaşmak istiyor musunuz?",
-  "cancel": "İptal",
   "share": "Paylaş",
   "profile_regular": "Düzenli Namaz",
   "profile_regular_desc": "Örnek tutarlılık",
@@ -1078,6 +1037,21 @@
   "hadith_navigation": "Hadis Navigasyonu",
   "page": "Sayfa",
   "stats_appear_after_first_prayers": "İstatistikleriniz ilk namazlarınızdan sonra görünecektir",
+  "stats_screen_title": "Namazlarım",
+  "stats_tab_today": "Bugün",
+  "stats_tab_journey": "Yolculuk",
+  "stats_today_title": "Bugün",
+  "stats_prayers_today": "{{count}}/5",
+  "stats_mark_prayed": "Namaz kıldım",
+  "stats_unmark_prayed": "Geri al",
+  "stats_day_complete_title": "Gün tamamlandı!",
+  "stats_day_complete_message": "Maşallah, 5 namaz tamamlandı. Allah kabul etsin.",
+  "stats_next_prayer_hint": "Sıradaki adım: {{prayer}}",
+  "stats_progress_footer": "Günün %{{percent}}'i tamamlandı",
+  "stats_heatmap_title": "Düzenlilik",
+  "stats_heatmap_subtitle": "Son {{days}} gün",
+  "stats_other_actions_title": "Diğer eylemler",
+  "stats_other_actions_subtitle": "Zikir, Kur'an ve hadisler tek dokunuşla",
   "connection_interrupted": "Bağlantı kesildi",
   "offline_mode_stats": "Çevrimdışı mod - İstatistiklerinizi senkronize etmek için bağlanın",
   "pending_sync_actions": "{{count}} eylem senkronizasyon bekliyor",
@@ -1090,7 +1064,6 @@
   "goals_overview": "Hedefler Genel Bakış",
   "offline_message_quran": "Kur'an'a erişim için internet bağlantısı gereklidir. Lütfen bağlanın veya tam çevrimdışı erişim için Premium'a yükseltin.",
   "offline_title": "Çevrimdışı Mod",
-  "retry": "Tekrar dene",
   "offline_mode": "Çevrimdışı Mod",
   "online_mode": "Çevrimiçi Mod",
   "downloaded_audio": "İndirilen Sesler",
@@ -1101,7 +1074,6 @@
   "switch_to_offline": "Çevrimdışı moda geç",
   "switch_to_online": "Çevrimiçi moda geç",
   "offline_access_premium": "Premium ile çevrimdışı erişim mevcut",
-  "connection_required": "Bağlantı gerekli",
   "audio_offline_only": "Sadece çevrimdışı ses oynatma",
   "background_audio_enabled": "Arka plan sesi etkin",
   "audio_list_placeholder": "İndirilen ses dosyalarının listesi burada görüntülenecek",
@@ -1141,7 +1113,6 @@
   "notification_stopped_3": "🌟 Daha önce başardınız, tekrar yapabilirsiniz!",
   "badges_collection": "🏅 Rozet koleksiyonu",
   "last_updated": "Son güncelleme",
-  "offline_mode": "Çevrimdışı mod",
   "checking_connection": "Kontrol ediliyor...",
   "offline_manager": "Çevrimdışı",
   "back_online": "Çevrimiçi",
@@ -1152,22 +1123,10 @@
   "back": "Geri",
   "play_all": "Tümünü oynat",
   "stop_playlist": "Durdur",
-
   "success": "Başarı",
-  "error": "Hata",
-  "download": {
-    "completed": "İndirme tamamlandı",
-    "failed": "İndirme başarısız",
-    "cancelled": "İndirme iptal edildi",
-    "added_to_list": "✅ Listeye eklendi: {{title}}",
-    "item_downloaded": "✅ {{item}} indirildi",
-    "failed_message": "İndirme başarısız",
-    "cancelled_message": "İndirme kesintiye uğradı"
-  },
   "errors": {
     "unknown_error": "Bilinmeyen bir hata oluştu",
     "unexpected_error": "Beklenmeyen bir hata oluştu",
-
     "authentication": {
       "title": "Kimlik doğrulama hatası",
       "invalid_credentials": "Yanlış şifre veya e-posta",
@@ -1175,7 +1134,6 @@
       "session_expired": "Oturumunuz sona erdi, lütfen tekrar giriş yapın",
       "access_denied": "Erişim reddedildi"
     },
-
     "validation": {
       "title": "Doğrulama hatası",
       "email_required": "E-posta adresi gerekli",
@@ -1187,24 +1145,20 @@
       "invalid_data": "Gönderilen veriler geçersiz",
       "same_password": "Yeni şifre eskisiyle aynı olamaz"
     },
-
     "registration": {
       "title": "Kayıt hatası",
       "account_already_exists": "Bu e-posta ile zaten bir hesap var"
     },
-
     "network": {
       "title": "Ağ hatası",
       "connection_error": "Ağ bağlantı hatası, internet bağlantınızı kontrol edin",
       "timeout": "İstek zaman aşımı, lütfen tekrar deneyin"
     },
-
     "server": {
       "title": "Sunucu hatası",
       "server_error": "Sunucu hatası, lütfen daha sonra tekrar deneyin",
       "service_unavailable": "Hizmet geçici olarak kullanılamıyor"
     },
-
     "technical": {
       "title": "Teknik hata",
       "communication_error": "Sunucu ile iletişim hatası",
@@ -1213,7 +1167,6 @@
       "subscription_error": "Aboneliğinizi yönetirken hata",
       "payment_error": "Ödeme işlenirken hata"
     },
-
     "http": {
       "400": "Gönderilen veriler geçersiz",
       "401": "Yanlış şifre veya e-posta",
@@ -1223,76 +1176,8 @@
       "503": "Hizmet geçici olarak kullanılamıyor"
     }
   },
-
-  "qibla": {
-    "initializing_compass": "Pusula başlatılıyor...",
-    "location_disabled": "Konum devre dışı",
-    "location_permission_required": "Konum izni gerekli",
-    "location_enable_instructions": "Kıble pusulasını kullanmak için telefon ayarlarınızda konumu etkinleştirin.",
-    "location_allow_instructions": "\"İzin Ver\" tuşuna basın ve uygulamaya dönün"
-  },
-
-  "premium": {
-    "ui": {
-      "signup_tab": "Premium hesap oluştur",
-      "login_tab": "Giriş yap"
-    },
-    "account_creation_required": "Hesap oluşturma Premium abonelik gerektirir. Hesabınız ödemeden sonra otomatik olarak oluşturulacaktır.",
-    "already_subscribed": "Zaten abone misiniz? Aynı e-posta ile giriş yapın.",
-    "manage_account": "Hesabı yönet",
-    "account_management_redirect": "Şimdilik Hakkında > Hesabı yönet'e gidin",
-    "first_name_or_username": "Ad veya kullanıcı adı",
-    "modify_prefilled_name": "Önceden doldurulan adı değiştir",
-    "field_details_instructions": "Her alan için detayları görmek üzere ℹ️ simgelerine tıklayın.",
-    "session_expired": "Oturum sona erdi",
-    "logout_success": "Başarıyla çıkış yapıldı",
-    "logout_error": "Çıkış sırasında hata",
-    "profile_updated": "Profil güncellendi",
-    "profile_update_success": "Bilgileriniz başarıyla kaydedildi",
-    "no_subscription_found": "Hesabınız için abonelik bulunamadı",
-    "session_creation_error": "Oturum oluşturma hatası",
-    "not_defined": "Tanımlanmamış",
-    "subscription_type_undefined": "Tür tanımlanmamış",
-    "feature_development": "Geliştirilmekte olan özellik",
-    "no_account_associated": "Bu cihaza bağlı premium hesap yok. Hesap oluşturun veya premium satın alın.",
-    "feature_locked": "🔒 Premium Özellik",
-    "feature_premium_only": "Bu özellik sadece premium kullanıcılar için mevcuttur.",
-    "promotion": {
-      "feature_title": "Premium Özellik",
-      "unlock_feature": "Bu özelliği Premium ile açın",
-      "upgrade": "Yükselt",
-      "title": "Premium'a Geçin",
-      "message": "Tüm gelişmiş özellikleri açın",
-      "detailed_stats": "Detaylı istatistikler",
-      "exclusive_themes": "Özel temalar",
-      "unlimited_favorites": "Sınırsız favoriler"
-    },
-    "expired_title": "Abonelik Süresi Doldu",
-    "expired_message": "Premium aboneliğinizin süresi doldu. Premium özelliklerden yararlanmaya devam etmek için yenileyin.",
-    "expiring_soon_title": "Abonelik Yakında Sona Erecek",
-    "expiring_soon_message": "Aboneliğiniz {{days}} gün içinde sona erecek. Yenilemeyi unutmayın!",
-    "renewed_title": "Abonelik Yenilendi",
-    "renewed_message": "Premium aboneliğiniz otomatik olarak {{date}} tarihine kadar yenilendi"
-  },
-
-  "account": {
-    "first_name_placeholder": "Adınız",
-    "not_defined": "Tanımlanmamış",
-    "subscription_type_undefined": "Type undefined"
-  },
-
-  "backup": {
-    "backup_confirm": "Verilerinizi buluta yedeklemek istiyor musunuz?",
-    "restore_confirm": "Verilerinizi buluttan geri yüklemek istiyor musunuz? Bu mevcut verilerinizi değiştirecektir.",
-    "restart_required": "Yeniden başlatma gerekli",
-    "restore_success_message": "Verileriniz başarıyla geri yüklendi. Tüm değişiklikleri görmek için uygulamayı tamamen kapatın ve tekrar açın.",
-    "not_connected": "Bağlı değil",
-    "last_backup": "Son yedekleme",
-    "cloud_data": "Bulut verileri",
-    "refresh_cloud_confirm": "Bulut verilerini yenilemek istiyor musunuz?",
-    "sync_success": "Senkronizasyon başarılı"
-  },
-
+  "premium": "Premium",
+  "account": "Hesap",
   "password": {
     "change_modal": {
       "password_criteria": "Yeni şifre en az 8 karakter, bir büyük harf, bir küçük harf, bir rakam ve bir özel karakter içermelidir",
@@ -1329,37 +1214,6 @@
     "continue": "Devam et",
     "change": "Değiştir"
   },
-
-  "settings": {
-    "screen": {
-      "download_adhan_title": "Ezan indir",
-      "download_adhan_message": "İndirmek istiyor musunuz",
-      "download_adhan_confirm": "İndir"
-    },
-    "title": "Ayarlar",
-    "theme": "Tema",
-    "about": "Hakkında",
-    "developer": "Geliştirici",
-    "last_update": "Son güncelleme",
-    "app_description": "Bu uygulama Müslüman toplumu için sevgiyle geliştirilmiştir.",
-    "faq_text": "Sık sorulan sorular",
-    "notifications_reprogrammed": "Bildirimler yeniden programlandı",
-    "notifications_new_settings": "Yeni ayarlarınız gelecekteki bildirimler için dikkate alınacaktır.",
-    "premium_access": "Premium erişim",
-    "success": "Başarı",
-    "adhan_list_updated": "Ezan listesi güncellendi",
-    "download_completed": "İndirme tamamlandı",
-    "download_failed": "İndirme başarısız",
-    "download_failed_message": "İndirme başarısız",
-    "download_cancelled": "İndirme iptal edildi",
-    "download_cancelled_message": "İndirme kesintiye uğradı",
-    "delete_all_adhans": "Tüm indirilmiş ezanlar siliniyor...",
-    "no_downloaded_files": "İndirilmiş dosya bulunamadı",
-    "cleanup_completed": "Temizlik tamamlandı",
-    "analyzing_files": "İndirilmiş dosyalar analiz ediliyor...",
-    "diagnostic_completed": "Teşhis tamamlandı"
-  },
-
   "adhans": {
     "preview_limited": "Önizleme 20 saniye ile sınırlı",
     "download_time_warning": "İndirme, bağlantınıza bağlı olarak birkaç dakika sürebilir.",
@@ -1369,24 +1223,11 @@
     "download_title": "Ezan indir",
     "download_message": "İndirmek istiyor musunuz"
   },
-
   "general": {
     "settings": "Genel ayarlar",
     "prayer_reminders_before": "Namaz öncesi hatırlatıcılar",
     "reminder_offset_minutes": "Gecikme (dakika)"
   },
-
-  "location": {
-    "method": "Konum yöntemi",
-    "updating": "Güncelleniyor...",
-    "detected": "Konum tespit edildi"
-  },
-
-  "home": {
-    "go_to_settings": "Ayarlara git",
-    "notifications_disabled_message": "Namaz ve zikir hatırlatıcıları almak için bildirimlere izin vermelisiniz."
-  },
-
   "stats": {
     "improvement_opportunity": "İyileştirme fırsatı",
     "start_habit_advice": "Alışkanlık kurmak için günde 1 namaz ile başlayın.",
@@ -1446,15 +1287,28 @@
     "time_window": "Pencere",
     "goal_soon_customizable": "Hedefiniz yakında özelleştirilebilir olacak!",
     "weekly_goal_desc": "Haftalık hedeflenen namaz sayısı",
-
     "quran_widget_available": "Ana ekranınızda widget mevcut",
     "quran_widget_add": "Ana ekranınıza widget ekleyin",
     "quran_widget_active": "Aktif",
     "quran_widget_inactive": "Pasif",
     "quran_widget_title": "Premium Kuran Widget'ı",
-    "quran_widget_description": "Ana ekranınızdan Kuran oynatmayı kontrol edin"
+    "quran_widget_description": "Ana ekranınızdan Kuran oynatmayı kontrol edin",
+    "screen_title": "Namazlarım",
+    "tab_today": "Bugün",
+    "tab_journey": "Yolculuk",
+    "today_title": "Bugün",
+    "prayers_today": "{{count}}/5",
+    "mark_prayed": "Namaz kıldım",
+    "unmark_prayed": "Geri al",
+    "day_complete_title": "Gün tamamlandı!",
+    "day_complete_message": "Maşallah, 5 namaz tamamlandı. Allah kabul etsin.",
+    "next_prayer_hint": "Sıradaki adım: {{prayer}}",
+    "progress_footer": "Günün %{{percent}}'i tamamlandı",
+    "heatmap_title": "Düzenlilik",
+    "heatmap_subtitle": "Son {{days}} gün",
+    "other_actions_title": "Diğer eylemler",
+    "other_actions_subtitle": "Zikir, Kur'an ve hadisler tek dokunuşla"
   },
-
   "premium_ui": {
     "badge": "Premium",
     "signup_tab": "Premium Hesap Oluştur",
@@ -1462,7 +1316,6 @@
     "signup_info_line1": "Hesap oluşturma Premium abonelik gerektirir. Hesabınız ödeme sonrasında otomatik olarak oluşturulacaktır.",
     "signup_info_line2": "Zaten abone misiniz? Aynı e-posta ile giriş yapın."
   },
-
   "auth_modal": {
     "title": "Premium Hesap",
     "signup_tab": "Hesap Oluştur",
@@ -1486,13 +1339,6 @@
     "password_criteria_title": "Güvenlik kriterleri",
     "password_min_length": "En az 6 karakter"
   },
-
-  "location": "Konum",
-  "backup": "Yedekleme",
-  "download": "İndir",
-  "qibla": "Kıble",
-  "favorites": "Favoriler",
-  "settings": "Ayarlar",
   "languages": {
     "fr": "Français",
     "en": "English",
@@ -1508,7 +1354,6 @@
     "fa": "فارسی",
     "nl": "Nederlands"
   },
-
   "quran_navigation_modal": {
     "title": "🎯 Navigasyon",
     "swipe_instruction": "Görüntüyü değiştirmek için kaydırın",
@@ -1516,18 +1361,15 @@
     "play_instruction": "Play gösterilen sesi başlatır",
     "close_button": "Anlaşıldı!"
   },
-
   "mosques_finder": "Akıllı Cami Bulucu",
   "native_downloads": "Yerel İndirmeler",
   "android_widgets": "Android Widget'ları",
   "lock_screen_player": "Kilit Ekranı Oynatıcı",
   "tactile_controls": "Dokunsal Kontroller",
-  "backup_restore": "Yedekleme ve Geri Yükleme",
   "data_deletion_label": "Veri Silme",
   "stripe_payments": "Stripe Ödemeleri",
   "user_accounts": "Kullanıcı Hesapları",
   "13_languages": "13 Desteklenen Dil",
-  "offline_mode": "Çevrimdışı Mod",
   "local_storage": "Yerel Depolama",
   "new_features_title": "Yeni Özellikler",
   "new_features_subtitle": "En son iyileştirmeleri keşfedin",
@@ -1567,7 +1409,6 @@
   "toast_premium_required": "Premium gerekli",
   "toast_download_error": "İndirme hatası",
   "toast_download_failed": "İndirme başarısız",
-  "toast_download_success": "Başarılı",
   "toast_recitation_loading": "Tilavet yükleniyor",
   "toast_validation_email_required": "Lütfen e-postanızı girin",
   "toast_validation_password_required": "Lütfen şifrenizi girin",
@@ -1596,11 +1437,6 @@
   "toast_cleanup_updating_title": "Güncelleniyor...",
   "toast_cleanup_updating_message": "Liste güncelleniyor",
   "toast_cleanup_completed_detailed_message": "{{count}} dosya silindi ({{size}} MB boşaltıldı)",
-  "toast_diagnostic_started_title": "Tanılama devam ediyor...",
-  "toast_diagnostic_started_message": "İndirilen dosyalar analiz ediliyor...",
-  "toast_diagnostic_completed_title": "Tanılama tamamlandı",
-  "toast_diagnostic_error_title": "Tanılama hatası",
-  "toast_diagnostic_error_message": "Dosyalar tanılanamıyor",
   "toast_configuration_unavailable": "Yapılandırma mevcut değil",
   "toast_apply_changes_error": "Değişiklikler uygulanamıyor",
   "toast_local_playback": "Yerel oynatma",
@@ -1616,33 +1452,25 @@
   "toast_auto_fix_error_message": "Otomatik düzeltmeler uygulanamıyor",
   "toast_payment_success_title": "Ödeme Başarılı!",
   "toast_payment_success_message": "{{subscriptionName}} aboneliğiniz artık aktif.",
-
   "library": "Kütüphane",
   "islamic_knowledge": "Manevi kaynaklar",
   "read_listen": "Okuyun ve dinleyin",
   "saved_content": "Kaydedilmiş içerik",
   "prophetic_biography": "Peygamber biyografisi",
-  "prophet_stories": "Peygamberler Hikayeleri ﷺ",
   "prophetic_traditions": "Peygamber gelenekleri",
   "invocations": "Dualar",
   "99_names": "Allah'ın 99 ismi",
   "library_info": "Tüm manevi kaynaklara tek bir yerden erişin",
-  
   "more": "Daha fazla",
   "additional_features": "Ek özellikler",
   "tools": "Araçlar",
   "find_nearby": "Yakınlarda bul",
   "digital_counter": "Dijital sayaç",
   "islamic_dates": "İslami tarihler",
-  "premium": "Premium",
-  "prayer_stats": "İstatistikler",
   "track_prayers": "Namazlarınızı takip edin",
-  "account": "Hesap",
   "app_preferences": "Uygulama tercihleri",
   "app_info": "Uygulama bilgisi",
   "asmaul_husna": "Esmaül Hüsna",
-  "hijri_calendar": "Hicri Takvim",
-  
   "background_image_type": "Arka plan resmi türü",
   "background_prophet": "🕌 Peygamber Camii",
   "background_makka": "🕋 Mekke",

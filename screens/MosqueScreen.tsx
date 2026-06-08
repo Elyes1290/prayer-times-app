@@ -37,6 +37,37 @@ interface Mosque {
   website?: string;
 }
 
+function calculateDistance(
+  lat1: number,
+  lon1: number,
+  lat2: number,
+  lon2: number
+): number {
+  const R = 6371000;
+  const dLat = ((lat2 - lat1) * Math.PI) / 180;
+  const dLon = ((lon2 - lon1) * Math.PI) / 180;
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos((lat1 * Math.PI) / 180) *
+      Math.cos((lat2 * Math.PI) / 180) *
+      Math.sin(dLon / 2) *
+      Math.sin(dLon / 2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  return R * c;
+}
+
+function openDirections(mosque: Mosque) {
+  const scheme = Platform.select({ ios: "maps:", android: "geo:" });
+  const url = Platform.select({
+    ios: `${scheme}?q=${mosque.name}&ll=${mosque.latitude},${mosque.longitude}`,
+    android: `${scheme}${mosque.latitude},${mosque.longitude}?q=${mosque.name}`,
+  });
+
+  if (url) {
+    Linking.openURL(url);
+  }
+}
+
 export default function MosqueScreen() {
   const { t } = useTranslation();
   const [mosques, setMosques] = useState<Mosque[]>([]);
@@ -50,26 +81,6 @@ export default function MosqueScreen() {
   const overlayTextColor = useOverlayTextColor();
   const overlayIconColor = useOverlayIconColor();
   const currentTheme = useCurrentTheme();
-
-  // Calcul de distance simple et efficace
-  const calculateDistance = (
-    lat1: number,
-    lon1: number,
-    lat2: number,
-    lon2: number
-  ): number => {
-    const R = 6371000; // Rayon de la Terre en mètres
-    const dLat = ((lat2 - lat1) * Math.PI) / 180;
-    const dLon = ((lon2 - lon1) * Math.PI) / 180;
-    const a =
-      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-      Math.cos((lat1 * Math.PI) / 180) *
-        Math.cos((lat2 * Math.PI) / 180) *
-        Math.sin(dLon / 2) *
-        Math.sin(dLon / 2);
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    return R * c;
-  };
 
   // 🕌 RECHERCHE SIMPLE ET EFFICACE
   const searchMosques = useCallback(
@@ -476,19 +487,6 @@ export default function MosqueScreen() {
     location?.coords?.longitude,
     // Ne PAS inclure searchMosques pour éviter la boucle infinie
   ]);
-
-  // Actions
-  const openDirections = (mosque: Mosque) => {
-    const scheme = Platform.select({ ios: "maps:", android: "geo:" });
-    const url = Platform.select({
-      ios: `${scheme}?q=${mosque.name}&ll=${mosque.latitude},${mosque.longitude}`,
-      android: `${scheme}${mosque.latitude},${mosque.longitude}?q=${mosque.name}`,
-    });
-
-    if (url) {
-      Linking.openURL(url);
-    }
-  };
 
   const callMosque = (phone?: string) => {
     if (phone) {

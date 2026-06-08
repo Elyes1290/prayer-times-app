@@ -192,6 +192,14 @@ const generateContentId = (
   }
 };
 
+async function saveFavoritesLocally(newFavorites: Favorite[]) {
+  try {
+    await LocalStorageManager.saveEssential("LOCAL_FAVORITES", newFavorites);
+  } catch (error) {
+    console.error("Erreur lors de la sauvegarde locale des favoris:", error);
+  }
+}
+
 // Provider
 interface FavoritesProviderProps {
   children: ReactNode;
@@ -256,40 +264,19 @@ export const FavoritesProvider: React.FC<FavoritesProviderProps> = ({
       setFavorites([]);
     } finally {
       setLoading(false);
+      await checkCloudSyncSettings();
     }
-  }, [user.isPremium, isApiSyncEnabled]);
+  }, [user.isPremium, isApiSyncEnabled, checkCloudSyncSettings]);
 
-  // Charger les favoris au démarrage
+  // Charger les favoris au démarrage (et quand premium / sync change via loadFavorites deps)
   useEffect(() => {
     loadFavorites();
   }, [loadFavorites]);
-
-  // Recharger quand l'état premium change
-  useEffect(() => {
-    if (user.isPremium) {
-      loadFavorites();
-    }
-  }, [user.isPremium, loadFavorites]);
-
-  // Vérifier si la sync cloud est activée pour les premium
-  useEffect(() => {
-    checkCloudSyncSettings();
-  }, [user.isPremium, checkCloudSyncSettings]);
 
   // 🚀 DÉSACTIVÉ TEMPORAIREMENT : Auto-sync Firebase
   useEffect(() => {
     // DÉSACTIVÉ pour stopper les connexions Firebase automatiques
   }, [user.isPremium, isApiSyncEnabled]);
-
-  const saveFavoritesLocally = async (newFavorites: Favorite[]) => {
-    try {
-      // 🚀 NOUVEAU : Utiliser le gestionnaire de stockage stratifié
-      // Les favoris sont essentiels pour l'expérience utilisateur
-      await LocalStorageManager.saveEssential("LOCAL_FAVORITES", newFavorites);
-    } catch (error) {
-      console.error("Erreur lors de la sauvegarde locale des favoris:", error);
-    }
-  };
 
   const syncWithCloud = async (): Promise<boolean> => {
     if (!user.isPremium) {

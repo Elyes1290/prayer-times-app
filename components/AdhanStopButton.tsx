@@ -1,11 +1,11 @@
-import React from "react";
-import {
-  Platform,
-  StyleSheet,
-  Pressable,
-  View,
-  Animated,
-} from "react-native";
+import React, { useEffect } from "react";
+import { Platform, StyleSheet, Pressable, View, Text } from "react-native";
+import Animated, {
+  interpolate,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from "react-native-reanimated";
 import { MCIcon } from "@/components/icons/AppVectorIcons";
 import { Z_INDEX } from "../constants/zIndex";
 import { useAdhanAudio } from "../contexts/AdhanAudioContext";
@@ -16,21 +16,21 @@ import { useAdhanAudio } from "../contexts/AdhanAudioContext";
  */
 export const AdhanStopButton: React.FC = () => {
   const { state, stopAdhan } = useAdhanAudio();
-  const fadeAnim = React.useRef(new Animated.Value(0)).current;
+  const fadeAnim = useSharedValue(0);
 
-  // Animation d'apparition/disparition
-  React.useEffect(() => {
+  const shouldShow = Platform.OS === "ios" && state.isPlaying;
+
+  useEffect(() => {
     if (Platform.OS !== "ios") return;
-
-    Animated.timing(fadeAnim, {
-      toValue: state.isPlaying ? 1 : 0,
-      duration: 300,
-      useNativeDriver: true,
-    }).start();
+    fadeAnim.value = withTiming(state.isPlaying ? 1 : 0, { duration: 300 });
   }, [state.isPlaying, fadeAnim]);
 
-  // Ne rien afficher si pas iOS ou pas en lecture
-  if (Platform.OS !== "ios" || !state.isPlaying) {
+  const animatedStyle = useAnimatedStyle(() => ({
+    opacity: fadeAnim.value,
+    transform: [{ scale: interpolate(fadeAnim.value, [0, 1], [0.8, 1]) }],
+  }));
+
+  if (!shouldShow) {
     return null;
   }
 
@@ -45,21 +45,8 @@ export const AdhanStopButton: React.FC = () => {
 
   return (
     <Animated.View
-      style={[
-        styles.container,
-        {
-          opacity: fadeAnim,
-          transform: [
-            {
-              scale: fadeAnim.interpolate({
-                inputRange: [0, 1],
-                outputRange: [0.8, 1],
-              }),
-            },
-          ],
-        },
-      ]}
-      pointerEvents={state.isPlaying ? "auto" : "none"}
+      style={[styles.container, animatedStyle]}
+      pointerEvents="auto"
     >
       <Pressable
         style={styles.button}
@@ -72,9 +59,9 @@ export const AdhanStopButton: React.FC = () => {
         <View style={styles.labelContainer}>
           <View style={styles.label}>
             <MCIcon name="mosque" size={12} color="#fff" />
-            <Animated.Text style={styles.labelText} numberOfLines={1}>
+            <Text style={styles.labelText} numberOfLines={1}>
               {state.prayer}
-            </Animated.Text>
+            </Text>
           </View>
         </View>
       )}

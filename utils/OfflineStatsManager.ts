@@ -12,6 +12,7 @@ interface OfflineStatsAction {
   id: string;
   action:
     | "prayer_completed"
+    | "prayer_uncompleted"
     | "dhikr_completed"
     | "quran_read"
     | "hadith_read"
@@ -306,6 +307,17 @@ class OfflineStatsManager {
       offlineData.pending_actions.push(newAction);
       offlineData.last_update = Date.now();
 
+      if (
+        action === "prayer_completed" ||
+        action === "prayer_uncompleted"
+      ) {
+        this.applyOptimisticPrayerToggle(
+          offlineData,
+          actionData,
+          action === "prayer_completed",
+        );
+      }
+
       await this.saveOfflineData(offlineData);
 
       console.log(
@@ -515,6 +527,78 @@ class OfflineStatsManager {
   /**
    * 🧹 Nettoyer les données offline (pour tests ou reset)
    */
+  private applyOptimisticPrayerToggle(
+    offlineData: OfflineStatsData,
+    actionData: Record<string, any>,
+    completed: boolean,
+  ): void {
+    const prayerType = String(actionData.prayer_type || "").toLowerCase();
+    const valid = ["fajr", "dhuhr", "asr", "maghrib", "isha"];
+    if (!valid.includes(prayerType)) {
+      return;
+    }
+
+    if (!offlineData.stats) {
+      offlineData.stats = {
+        stats: {
+          total_prayers: 0,
+          current_streak: 0,
+          best_streak: 0,
+        },
+        streaks: { current_streak: 0, max_streak: 0 },
+        history: [],
+        today_prayers: {
+          fajr: false,
+          dhuhr: false,
+          asr: false,
+          maghrib: false,
+          isha: false,
+        },
+      };
+    }
+
+    if (!offlineData.stats.today_prayers) {
+      offlineData.stats.today_prayers = {
+        fajr: false,
+        dhuhr: false,
+        asr: false,
+        maghrib: false,
+        isha: false,
+      };
+    }
+
+    const wasCompleted = !!offlineData.stats.today_prayers[prayerType];
+    offlineData.stats.today_prayers[prayerType] = completed;
+
+    const today = new Date().toISOString().slice(0, 10);
+    if (!offlineData.stats.history) {
+      offlineData.stats.history = [];
+    }
+
+    let todayEntry = offlineData.stats.history.find(
+      (day: any) => day.date === today,
+    );
+    if (!todayEntry) {
+      todayEntry = {
+        date: today,
+        complete: false,
+        prayers: 0,
+        dhikr: 0,
+        quran: 0,
+        hadiths: 0,
+      };
+      offlineData.stats.history.unshift(todayEntry);
+    }
+
+    if (completed && !wasCompleted) {
+      todayEntry.prayers = Number(todayEntry.prayers || 0) + 1;
+    } else if (!completed && wasCompleted) {
+      todayEntry.prayers = Math.max(0, Number(todayEntry.prayers || 0) - 1);
+    }
+
+    todayEntry.complete = todayEntry.prayers >= 5;
+  }
+
   public async clearOfflineData(): Promise<void> {
     try {
       await AsyncStorage.removeItem(this.STORAGE_KEY);

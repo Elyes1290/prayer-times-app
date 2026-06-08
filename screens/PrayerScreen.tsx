@@ -19,7 +19,6 @@ import {
   View,
   Pressable,
   NativeModules,
-  Animated,
   StatusBar,
   Dimensions,
 } from "react-native";
@@ -49,6 +48,13 @@ import { scheduleNotificationsFor2Days } from "../utils/sheduleAllNotificationsF
 import { useFocusEffect } from "@react-navigation/native";
 import { errorLog } from "../utils/logger";
 import { useUniversalStyles } from "../hooks/useUniversalLayout";
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withRepeat,
+  withSequence,
+  withTiming,
+} from "react-native-reanimated";
 
 const { AdhanModule } = NativeModules;
 
@@ -128,9 +134,7 @@ const CollapsibleCard = ({
           color={themeColors.primary}
         />
       </Pressable>
-      {isExpanded && (
-        <Animated.View style={styles.cardContent}>{children}</Animated.View>
-      )}
+      {isExpanded && <View style={styles.cardContent}>{children}</View>}
     </View>
   );
 };
@@ -599,10 +603,22 @@ export default function PrayerScreen() {
   // État pour gérer les prières muettes/non-muettes
   const [mutedPrayers, setMutedPrayers] = useState<Set<string>>(new Set());
 
-  // Animations
-  const [fadeAnim] = useState(new Animated.Value(0));
-  const [slideAnim] = useState(new Animated.Value(30));
-  const [pulseAnim] = useState(new Animated.Value(1));
+  const fadeAnim = useSharedValue(0);
+  const slideAnim = useSharedValue(30);
+  const pulseAnim = useSharedValue(1);
+
+  const scrollAnimatedStyle = useAnimatedStyle(() => ({
+    opacity: fadeAnim.value,
+    transform: [{ translateY: slideAnim.value }],
+  }));
+
+  const setupFadeStyle = useAnimatedStyle(() => ({
+    opacity: fadeAnim.value,
+  }));
+
+  const pulseStyle = useAnimatedStyle(() => ({
+    transform: [{ scale: pulseAnim.value }],
+  }));
 
   const settings = use(SettingsContext);
   const { location } = useLocation();
@@ -687,40 +703,18 @@ export default function PrayerScreen() {
     usePrayerTimes(locationToUse, today, user?.isPremium || false);
   const weekPrayerTimes = useWeeklyPrayerTimes(locationToUse, today);
 
-  // Animation d'entrée
   useEffect(() => {
-    Animated.parallel([
-      Animated.timing(fadeAnim, {
-        toValue: 1,
-        duration: 800,
-        useNativeDriver: true,
-      }),
-      Animated.timing(slideAnim, {
-        toValue: 0,
-        duration: 600,
-        useNativeDriver: true,
-      }),
-    ]).start();
-
-    // Animation de pulsation pour la prochaine prière
-    const pulseAnimation = Animated.loop(
-      Animated.sequence([
-        Animated.timing(pulseAnim, {
-          toValue: 1.05,
-          duration: 1500,
-          useNativeDriver: true,
-        }),
-        Animated.timing(pulseAnim, {
-          toValue: 1,
-          duration: 1500,
-          useNativeDriver: true,
-        }),
-      ])
+    fadeAnim.value = withTiming(1, { duration: 800 });
+    slideAnim.value = withTiming(0, { duration: 600 });
+    pulseAnim.value = withRepeat(
+      withSequence(
+        withTiming(1.05, { duration: 1500 }),
+        withTiming(1, { duration: 1500 })
+      ),
+      -1,
+      false
     );
-    pulseAnimation.start();
-
-    return () => pulseAnimation.stop();
-  }, []);
+  }, [fadeAnim, slideAnim, pulseAnim]);
 
   // Charger les préférences de son au démarrage
   useEffect(() => {
@@ -841,7 +835,7 @@ export default function PrayerScreen() {
           backgroundColor="transparent"
         />
         <View style={styles.centeredContainer}>
-          <Animated.View style={[styles.setupCard, { opacity: fadeAnim }]}>
+          <Animated.View style={[styles.setupCard, setupFadeStyle]}>
             <MCIcon
               name="map-marker-radius"
               size={70}
@@ -967,7 +961,7 @@ export default function PrayerScreen() {
 
       <Animated.ScrollView
         contentContainerStyle={[styles.container, { paddingBottom: 180 }]}
-        style={{ opacity: fadeAnim, transform: [{ translateY: slideAnim }] }}
+        style={scrollAnimatedStyle}
         showsVerticalScrollIndicator={false}
       >
         {/* En-tête avec navigation de date */}
@@ -987,12 +981,7 @@ export default function PrayerScreen() {
 
         {/* Carte de la prochaine prière */}
         {nextPrayer && (
-          <Animated.View
-            style={[
-              styles.nextPrayerCard,
-              { transform: [{ scale: pulseAnim }] },
-            ]}
-          >
+          <Animated.View style={[styles.nextPrayerCard, pulseStyle]}>
             <View style={styles.nextPrayerHeader}>
               <MCIcon
                 name="bell-ring-outline"

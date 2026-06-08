@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useRef, useCallback } from "react";
 import {
   FlatList,
   Text,
@@ -32,6 +32,21 @@ const CATEGORIES = [
 
 type CategoryKey = (typeof CATEGORIES)[number]["key"];
 
+function convertToFavorite(
+  item: any,
+  category: CategoryKey
+): Omit<DhikrFavorite, "id" | "dateAdded"> {
+  return {
+    type: "dhikr",
+    category: category,
+    arabicText: item.arabic || "",
+    translation: item.translation || "",
+    transliteration: item.latin || "",
+    source: item.source || "",
+    benefits: item.benefits || item.fawaid || "",
+  };
+}
+
 function useDhikrData(namespace: string) {
   const { i18n } = useTranslation(namespace);
   const raw = (i18n.getResource(i18n.language, namespace, "") as any[]) || [];
@@ -44,37 +59,31 @@ function useDhikrData(namespace: string) {
 export default function DhikrScreen() {
   const params = useLocalSearchParams();
 
-  // Fonction pour convertir un dhikr en format favori
-  const convertToFavorite = (
-    item: any,
-    category: CategoryKey
-  ): Omit<DhikrFavorite, "id" | "dateAdded"> => {
-    return {
-      type: "dhikr",
-      category: category,
-      arabicText: item.arabic || "",
-      translation: item.translation || "",
-      transliteration: item.latin || "",
-      source: item.source || "",
-      benefits: item.benefits || item.fawaid || "",
-    };
-  };
-
   const dhikrIndexParam = params.dhikrIndex
     ? parseInt(params.dhikrIndex as string, 10)
     : null;
   const categoryParam = params.category as CategoryKey | undefined;
 
-  const [selectedKey, setSelectedKey] = useState<CategoryKey>(
-    categoryParam && CATEGORIES.some((c) => c.key === categoryParam)
-      ? categoryParam
-      : CATEGORIES[0].key
-  );
+  const [selectedKey, setSelectedKey] = useState<CategoryKey>(CATEGORIES[0].key);
+  const [prevCategoryParam, setPrevCategoryParam] = useState(categoryParam);
+
+  if (categoryParam !== prevCategoryParam) {
+    setPrevCategoryParam(categoryParam);
+    if (
+      categoryParam &&
+      CATEGORIES.some((c) => c.key === categoryParam) &&
+      categoryParam !== selectedKey
+    ) {
+      setSelectedKey(categoryParam);
+      setSearch("");
+      scrollTargetKeyRef.current = null;
+    }
+  }
   const [search, setSearch] = useState("");
   const [categoryModalVisible, setCategoryModalVisible] = useState(false); // 🆕 Modal pour iOS
 
   const flatListRef = useRef<FlatList>(null);
-  const [hasScrolled, setHasScrolled] = useState(false);
+  const scrollTargetKeyRef = useRef<string | null>(null);
 
   const selectedCat = CATEGORIES.find((c) => c.key === selectedKey)!;
   const namespace = selectedCat.namespace;
@@ -103,43 +112,30 @@ export default function DhikrScreen() {
     );
   });
 
-  // Scroll quand la FlatList est prête ET si on n'a pas déjà scrollé
-  useEffect(() => {
-    if (
-      dhikrIndexParam !== null &&
-      flatListRef.current &&
-      filteredDuas.length > 0 &&
-      !hasScrolled
-    ) {
-      const indexToScroll =
-        dhikrIndexParam < filteredDuas.length
-          ? dhikrIndexParam
-          : filteredDuas.length - 1;
-
-      try {
-        flatListRef.current.scrollToIndex({
-          index: indexToScroll,
-          animated: true,
-        });
-        setHasScrolled(true); // empêche de re-scroller sans cesse
-      } catch (error) {
-        // En cas d'erreur, scroll vers index 0
-        flatListRef.current.scrollToOffset({ offset: 0, animated: true });
-      }
+  const scrollToDhikrTarget = useCallback(() => {
+    if (dhikrIndexParam === null || filteredDuas.length === 0) {
+      return;
     }
-  }, [dhikrIndexParam, selectedKey, filteredDuas, hasScrolled]);
-
-  useEffect(() => {
-    if (
-      categoryParam &&
-      categoryParam !== selectedKey &&
-      CATEGORIES.some((c) => c.key === categoryParam)
-    ) {
-      setSelectedKey(categoryParam);
-      setSearch("");
-      setHasScrolled(false); // reset scroll à chaque changement de catégorie
+    const scrollKey = `${selectedKey}-${dhikrIndexParam}`;
+    if (scrollTargetKeyRef.current === scrollKey) {
+      return;
     }
-  }, [categoryParam]);
+    scrollTargetKeyRef.current = scrollKey;
+
+    const indexToScroll =
+      dhikrIndexParam < filteredDuas.length
+        ? dhikrIndexParam
+        : filteredDuas.length - 1;
+
+    try {
+      flatListRef.current?.scrollToIndex({
+        index: indexToScroll,
+        animated: true,
+      });
+    } catch {
+      flatListRef.current?.scrollToOffset({ offset: 0, animated: true });
+    }
+  }, [dhikrIndexParam, filteredDuas.length, selectedKey]);
 
   // Gestion du scrollToIndex fallback si l'index est hors écran
   const onScrollToIndexFailed = (info: {
@@ -282,7 +278,7 @@ export default function DhikrScreen() {
                 onValueChange={(val) => {
                   setSelectedKey(val as CategoryKey);
                   setSearch("");
-                  setHasScrolled(false);
+                  scrollTargetKeyRef.current = null;
                 }}
                 mode="dropdown"
                 dropdownIconColor="#e4c678"
@@ -341,7 +337,7 @@ export default function DhikrScreen() {
                     onPress={() => {
                       setSelectedKey(item.key);
                       setSearch("");
-                      setHasScrolled(false);
+                      scrollTargetKeyRef.current = null;
                       setCategoryModalVisible(false);
                     }}
                   >
@@ -383,6 +379,7 @@ export default function DhikrScreen() {
             index,
           })}
           onScrollToIndexFailed={onScrollToIndexFailed}
+          onContentSizeChange={scrollToDhikrTarget}
         />
       </SafeAreaView>
     </ThemedImageBackground>

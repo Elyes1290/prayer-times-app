@@ -991,15 +991,23 @@ public class AdhanService extends Service {
                 "The call to prayer for {{prayer}} has been completed.")
                 .replace("{{prayer}}", getPrayerDisplayNameForLocale(prayerLabel, currentLanguage));
 
-        // Intent pour fermer cette notification spécifique
+        int completedNotificationId = prayerLabel.hashCode() + 1000;
+
+        // Fermer uniquement cette notification (pas d'arrêt du service / de l'app)
         Intent dismissIntent = new Intent(this, AdhanDismissReceiver.class);
-        dismissIntent.setAction("DISMISS_COMPLETED_ADHAN");
+        dismissIntent.setAction(AdhanDismissReceiver.ACTION_DISMISS_COMPLETED_ADHAN);
         dismissIntent.putExtra("PRAYER_LABEL", prayerLabel);
-        dismissIntent.putExtra("NOTIFICATION_ID", prayerLabel.hashCode() + 1000); // ID unique pour cette notification
+        dismissIntent.putExtra("NOTIFICATION_ID", completedNotificationId);
 
         PendingIntent dismissPendingIntent = PendingIntent.getBroadcast(
                 this,
-                prayerLabel.hashCode() + 1000, // requestCode unique
+                completedNotificationId,
+                dismissIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+
+        PendingIntent swipeDismissPendingIntent = PendingIntent.getBroadcast(
+                this,
+                completedNotificationId + 1,
                 dismissIntent,
                 PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
@@ -1012,17 +1020,17 @@ public class AdhanService extends Service {
                 .setSound(null) // Pas de son pour cette notification
                 .setOngoing(false) // Peut être fermée par l'utilisateur
                 .setAutoCancel(true) // Se ferme quand l'utilisateur tape dessus
+                .setDeleteIntent(swipeDismissPendingIntent)
                 .addAction(android.R.drawable.ic_menu_close_clear_cancel,
                         getLocalizedTextFromJson(this, "dismiss", currentLanguage, "Dismiss"), dismissPendingIntent);
 
         NotificationManager notificationManager = getSystemService(NotificationManager.class);
         if (notificationManager != null) {
             // Utilise un ID unique pour chaque prière pour éviter les conflits
-            int notificationId = prayerLabel.hashCode() + 1000;
-            notificationManager.notify(notificationId, notificationBuilder.build());
+            notificationManager.notify(completedNotificationId, notificationBuilder.build());
             debugLog(TAG,
-                    "Notification persistante créée pour Adhan terminé: " + prayerLabel + " (ID: " + notificationId
-                            + ")");
+                    "Notification persistante créée pour Adhan terminé: " + prayerLabel + " (ID: "
+                            + completedNotificationId + ")");
         } else {
             errorLog(TAG, "NotificationManager est null, impossible de créer la notification persistante.");
         }

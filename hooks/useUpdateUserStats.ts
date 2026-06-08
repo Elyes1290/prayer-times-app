@@ -3,9 +3,12 @@ import { getCurrentUserId } from "../utils/userAuth";
 import { AppConfig } from "../utils/config";
 import OfflineStatsManager from "../utils/OfflineStatsManager";
 
+import type { TrackedPrayer } from "../constants/prayerTracking";
+
 interface UpdateStatsAction {
   action:
     | "prayer_completed"
+    | "prayer_uncompleted"
     | "dhikr_completed"
     | "quran_read"
     | "hadith_read"
@@ -63,7 +66,20 @@ export const useUpdateUserStats = () => {
         },
       });
     },
-    [updateStats]
+    [updateStats],
+  );
+
+  const togglePrayer = useCallback(
+    async (prayerType: TrackedPrayer, completed: boolean) => {
+      return updateStats({
+        action: completed ? "prayer_completed" : "prayer_uncompleted",
+        action_data: {
+          prayer_type: prayerType,
+          date: new Date().toISOString().slice(0, 10),
+        },
+      });
+    },
+    [updateStats],
   );
 
   const recordDhikr = useCallback(
@@ -177,6 +193,7 @@ export const useUpdateUserStats = () => {
   return {
     updateStats,
     recordPrayer,
+    togglePrayer,
     recordDhikr,
     recordQuranRead,
     recordHadithRead,

@@ -255,38 +255,35 @@ export class LocalStorageManager {
   }
 }
 
+async function saveEssential(
+  key: keyof typeof ESSENTIAL_STORAGE_KEYS,
+  value: any
+) {
+  await LocalStorageManager.saveEssential(key, value);
+}
+
+async function getEssential(key: keyof typeof ESSENTIAL_STORAGE_KEYS) {
+  return await LocalStorageManager.getEssential(key);
+}
+
+async function saveUserData(key: keyof typeof USER_STORAGE_KEYS, value: any) {
+  const isExplicit = await LocalStorageManager.checkExplicitConnection();
+  await LocalStorageManager.saveUser(key, value, isExplicit);
+}
+
+async function savePremiumData(
+  key: keyof typeof PREMIUM_STORAGE_KEYS,
+  value: any,
+  isPremium: boolean
+) {
+  const isExplicit = await LocalStorageManager.checkExplicitConnection();
+  await LocalStorageManager.savePremium(key, value, isPremium, isExplicit);
+}
+
 /**
  * 📋 Hooks utilitaires pour faciliter l'usage
  */
 export const useLocalStorage = () => {
-  const saveEssential = async (
-    key: keyof typeof ESSENTIAL_STORAGE_KEYS,
-    value: any
-  ) => {
-    await LocalStorageManager.saveEssential(key, value);
-  };
-
-  const getEssential = async (key: keyof typeof ESSENTIAL_STORAGE_KEYS) => {
-    return await LocalStorageManager.getEssential(key);
-  };
-
-  const saveUserData = async (
-    key: keyof typeof USER_STORAGE_KEYS,
-    value: any
-  ) => {
-    const isExplicit = await LocalStorageManager.checkExplicitConnection();
-    await LocalStorageManager.saveUser(key, value, isExplicit);
-  };
-
-  const savePremiumData = async (
-    key: keyof typeof PREMIUM_STORAGE_KEYS,
-    value: any,
-    isPremium: boolean
-  ) => {
-    const isExplicit = await LocalStorageManager.checkExplicitConnection();
-    await LocalStorageManager.savePremium(key, value, isPremium, isExplicit);
-  };
-
   return {
     saveEssential,
     getEssential,

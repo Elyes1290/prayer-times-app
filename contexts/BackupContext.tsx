@@ -73,6 +73,27 @@ interface BackupProviderProps {
   children: ReactNode;
 }
 
+async function migrateFavoritesFromOldSystem(): Promise<boolean> {
+  try {
+    const oldFavorites = await AsyncStorage.getItem("@prayer_app_favorites");
+    const newFavorites = await AsyncStorage.getItem(
+      "@prayer_app_favorites_local"
+    );
+
+    if (oldFavorites && !newFavorites) {
+      await AsyncStorage.setItem("@prayer_app_favorites_local", oldFavorites);
+      await AsyncStorage.removeItem("@prayer_app_favorites");
+      debugLog("✅ Migration des favoris réussie");
+      return true;
+    }
+
+    return false;
+  } catch (error) {
+    errorLog("❌ Erreur migration favoris:", error);
+    return false;
+  }
+}
+
 export const BackupProvider: React.FC<BackupProviderProps> = ({ children }) => {
   const { user } = usePremium();
   const { showToast } = useToast();
@@ -192,33 +213,6 @@ export const BackupProvider: React.FC<BackupProviderProps> = ({ children }) => {
 
     checkAuthState();
   }, [user.isPremium, checkCloudData, loadBackupSettings]);
-
-  // Migration des favoris depuis l'ancien système
-  const migrateFavoritesFromOldSystem = async (): Promise<boolean> => {
-    try {
-      // Vérifier s'il y a des favoris dans l'ancien système
-      const oldFavorites = await AsyncStorage.getItem("@prayer_app_favorites");
-      const newFavorites = await AsyncStorage.getItem(
-        "@prayer_app_favorites_local"
-      );
-
-      if (oldFavorites && !newFavorites) {
-        // Migrer vers le nouveau système
-        await AsyncStorage.setItem("@prayer_app_favorites_local", oldFavorites);
-
-        // Supprimer l'ancienne clé après migration
-        await AsyncStorage.removeItem("@prayer_app_favorites");
-
-        debugLog("✅ Migration des favoris réussie");
-        return true;
-      }
-
-      return false;
-    } catch (error) {
-      errorLog("❌ Erreur migration favoris:", error);
-      return false;
-    }
-  };
 
   // Fonction de sauvegarde (Premium uniquement)
   const backupData = async (): Promise<boolean> => {

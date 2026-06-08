@@ -5,13 +5,17 @@ import React, { useEffect } from "react";
 import {
   Platform,
   View,
-  Animated,
   NativeModules,
   NativeEventEmitter,
   AppState,
   StatusBar,
   BackHandler,
 } from "react-native";
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withSpring,
+} from "react-native-reanimated";
 import { Tabs, useRouter } from "expo-router";
 import { SettingsProvider } from "../contexts/SettingsContext";
 import { FavoritesProvider, useFavorites } from "../contexts/FavoritesContext";
@@ -130,26 +134,30 @@ interface TabBarIconProps {
 }
 
 const TabBarIcon = ({ icon, color, size, focused }: TabBarIconProps) => {
-  const scale = React.useRef(new Animated.Value(1)).current;
+  const scale = useSharedValue(1);
 
   React.useEffect(() => {
-    Animated.spring(scale, {
-      toValue: focused ? 1.2 : 1,
-      useNativeDriver: true,
-      tension: 50,
-      friction: 7,
-    }).start();
+    scale.value = withSpring(focused ? 1.2 : 1, {
+      damping: 7,
+      stiffness: 50,
+    });
   }, [focused, scale]);
+
+  const animatedStyle = useAnimatedStyle(() => ({
+    transform: [{ scale: scale.value }],
+  }));
 
   return (
     <Animated.View
-      style={{
-        width: 40,
-        height: 40,
-        justifyContent: "center",
-        alignItems: "center",
-        transform: [{ scale }],
-      }}
+      style={[
+        {
+          width: 40,
+          height: 40,
+          justifyContent: "center",
+          alignItems: "center",
+        },
+        animatedStyle,
+      ]}
     >
       <MCIcon
         name={icon}
@@ -715,14 +723,6 @@ function TabLayoutContent() {
 
     initializeApp();
   }, [forceLogout, forceReset]); // Inclure les dépendances manquantes
-
-  // 🔄 Forcer la mise à jour des contextes quand forceRefresh change
-  useEffect(() => {
-    if (forceRefresh > 0) {
-      console.log("🔄 Force refresh déclenché:", forceRefresh);
-      // Les contextes se mettront à jour automatiquement via leurs propres useEffect
-    }
-  }, [forceRefresh]);
 
   return (
     <>

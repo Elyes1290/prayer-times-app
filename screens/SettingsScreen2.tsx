@@ -83,6 +83,62 @@ const soundObjects: Record<AdhanSoundKey, any> = {
   adhan_muhammad_hessen: require("../assets/sounds/ahmadnafees.mp3"), // Fallback temporaire
 };
 
+const handleLoginSuccess = (_userData: unknown) => {};
+
+async function collectDownloadedAdhanRows(): Promise<DownloadedAdhanRow[]> {
+  const rows: DownloadedAdhanRow[] = [];
+  const RNFS = await import("react-native-fs");
+  const downloadedContent = await LocalStorageManager.getPremium(
+    "DOWNLOADED_CONTENT"
+  );
+  if (!downloadedContent) return rows;
+
+  const downloaded = JSON.parse(downloadedContent);
+  const contentIds = Object.keys(downloaded);
+  const checks = await Promise.all(
+    contentIds.map(async (contentId) => {
+      const adhanData = downloaded[contentId];
+      const isAdhan =
+        contentId.startsWith("adhan_") ||
+        adhanData.type === "adhan" ||
+        (!contentId.includes("quran_") &&
+          !contentId.startsWith("reciter_") &&
+          !contentId.match(/^\d{3}_/));
+      if (!isAdhan) return null;
+      if (!adhanData.downloadPath) return null;
+      const filePath = adhanData.downloadPath.replace("file://", "");
+      const fileExists = await RNFS.default.exists(filePath);
+      if (!fileExists) return null;
+      const title =
+        adhanData.title ||
+        contentId
+          .replace(/^adhan_/, "")
+          .replace(/[_-]/g, " ")
+          .replace(/\b\w/g, (l) => l.toUpperCase());
+      return {
+        contentId,
+        title,
+        downloadPath: adhanData.downloadPath,
+      };
+    })
+  );
+  for (const row of checks) {
+    if (row) rows.push(row);
+  }
+  return rows;
+}
+
+const cleanupCorruptedFiles = async () => {};
+const diagnoseAndCleanFiles = async () => {};
+
+function formatTime(milliseconds: number) {
+  if (!milliseconds) return "00:00";
+  const totalSeconds = Math.floor(milliseconds / 1000);
+  const minutes = Math.floor(totalSeconds / 60);
+  const seconds = totalSeconds % 60;
+  return `${minutes}:${seconds.toString().padStart(2, "0")}`;
+}
+
 interface OptimizedSettingsSectionsProps {
   settings: any;
   dhikrSettings: any;
@@ -809,15 +865,11 @@ export default function SettingsScreenOptimized() {
 
   const [activeSection, setActiveSection] = useState<string | null>(null);
 
-  const [locationUIMode, setLocationUIMode] = useState<"auto" | "manual">(
-    settings.locationMode || "auto"
+  const [locationUIToggle, setLocationUIToggle] = useState<"auto" | "manual">(
+    settings.locationMode || "auto",
   );
-
-  useEffect(() => {
-    if (settings.locationMode === "manual") {
-      setLocationUIMode("manual");
-    }
-  }, [settings.locationMode]);
+  const locationUIMode =
+    settings.locationMode === "manual" ? "manual" : locationUIToggle;
 
   useEffect(() => {
     if (openPremium === "true") {
@@ -877,10 +929,6 @@ export default function SettingsScreenOptimized() {
     { code: "fa", label: "فارسی" },
     { code: "nl", label: "Nederlands" },
   ];
-
-  const handleLoginSuccess = (userData: any) => {
-    // Logique post-login si nécessaire
-  };
 
   useEffect(() => {
     if (settings?.locationMode === "manual" && settings.manualLocation?.city) {
@@ -993,49 +1041,6 @@ export default function SettingsScreenOptimized() {
         }
       }, 100);
     }
-  };
-
-  const collectDownloadedAdhanRows = async (): Promise<DownloadedAdhanRow[]> => {
-    const rows: DownloadedAdhanRow[] = [];
-    const RNFS = await import("react-native-fs");
-    const downloadedContent = await LocalStorageManager.getPremium(
-      "DOWNLOADED_CONTENT"
-    );
-    if (!downloadedContent) return rows;
-
-    const downloaded = JSON.parse(downloadedContent);
-    const contentIds = Object.keys(downloaded);
-    const checks = await Promise.all(
-      contentIds.map(async (contentId) => {
-        const adhanData = downloaded[contentId];
-        const isAdhan =
-          contentId.startsWith("adhan_") ||
-          adhanData.type === "adhan" ||
-          (!contentId.includes("quran_") &&
-            !contentId.startsWith("reciter_") &&
-            !contentId.match(/^\d{3}_/));
-        if (!isAdhan) return null;
-        if (!adhanData.downloadPath) return null;
-        const filePath = adhanData.downloadPath.replace("file://", "");
-        const fileExists = await RNFS.default.exists(filePath);
-        if (!fileExists) return null;
-        const title =
-          adhanData.title ||
-          contentId
-            .replace(/^adhan_/, "")
-            .replace(/[_-]/g, " ")
-            .replace(/\b\w/g, (l) => l.toUpperCase());
-        return {
-          contentId,
-          title,
-          downloadPath: adhanData.downloadPath,
-        };
-      })
-    );
-    for (const row of checks) {
-      if (row) rows.push(row);
-    }
-    return rows;
   };
 
   const updateAvailableSounds = useCallback(
@@ -1474,21 +1479,6 @@ export default function SettingsScreenOptimized() {
     }
   };
 
-  const cleanupCorruptedFiles = async () => {
-    // Appel manager
-  };
-  const diagnoseAndCleanFiles = async () => {
-    // Appel manager
-  };
-
-  const formatTime = (milliseconds: number) => {
-    if (!milliseconds) return "00:00";
-    const totalSeconds = Math.floor(milliseconds / 1000);
-    const minutes = Math.floor(totalSeconds / 60);
-    const seconds = totalSeconds % 60;
-    return `${minutes}:${seconds.toString().padStart(2, "0")}`;
-  };
-
   useEffect(() => {
     if (!isNativeAvailable) return;
     // Logic native download monitoring
@@ -1514,7 +1504,7 @@ export default function SettingsScreenOptimized() {
             navigation={navigation}
             openPremiumModal={() => uiManager.setShowPremiumModal(true)}
             locationUIMode={locationUIMode}
-            setLocationUIMode={setLocationUIMode}
+            setLocationUIMode={setLocationUIToggle}
             cityInput={citySearch.citySearchState.cityInput}
             citySearchResults={citySearchAPI.results}
             citySearchLoading={citySearchAPI.loading}

@@ -9,11 +9,15 @@ import {
   useWindowDimensions,
   StatusBar,
   Keyboard,
-  Animated,
   Platform,
 } from "react-native";
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from "react-native-reanimated";
 import { MCIcon } from "@/components/icons/AppVectorIcons";
-import { LinearGradient } from "expo-linear-gradient";
+import { LinearGradient } from "@/components/ui/LinearGradientView";
 import { useTranslation } from "react-i18next";
 
 interface WelcomePersonalizationModalProps {
@@ -30,29 +34,21 @@ export default function WelcomePersonalizationModal({
   const { t } = useTranslation();
   const { width: screenWidth } = useWindowDimensions();
   const [firstName, setFirstName] = useState("");
-  const [keyboardOffset] = useState(new Animated.Value(0));
+  const keyboardOffset = useSharedValue(0);
 
-  // react-doctor-disable-next-line react-doctor/effect-needs-cleanup
   useEffect(() => {
-    const showSubscription = Keyboard.addListener("keyboardDidShow", (e: { endCoordinates: { height: number } }) => {
-      // Calculer le décalage nécessaire pour remonter le modal
-      const keyboardHeight = e.endCoordinates.height;
-      const offset =
-        Platform.OS === "ios" ? -keyboardHeight / 2 : -keyboardHeight / 3;
-
-      Animated.timing(keyboardOffset, {
-        toValue: offset,
-        duration: 250,
-        useNativeDriver: true,
-      }).start();
-    });
+    const showSubscription = Keyboard.addListener(
+      "keyboardDidShow",
+      (e: { endCoordinates: { height: number } }) => {
+        const keyboardHeight = e.endCoordinates.height;
+        const offset =
+          Platform.OS === "ios" ? -keyboardHeight / 2 : -keyboardHeight / 3;
+        keyboardOffset.value = withTiming(offset, { duration: 250 });
+      }
+    );
 
     const hideSubscription = Keyboard.addListener("keyboardDidHide", () => {
-      Animated.timing(keyboardOffset, {
-        toValue: 0,
-        duration: 250,
-        useNativeDriver: true,
-      }).start();
+      keyboardOffset.value = withTiming(0, { duration: 250 });
     });
 
     return () => {
@@ -60,6 +56,10 @@ export default function WelcomePersonalizationModal({
       hideSubscription.remove();
     };
   }, [keyboardOffset]);
+
+  const modalAnimatedStyle = useAnimatedStyle(() => ({
+    transform: [{ translateY: keyboardOffset.value }],
+  }));
 
   const handleConfirm = () => {
     Keyboard.dismiss();
@@ -83,10 +83,8 @@ export default function WelcomePersonalizationModal({
         <Animated.View
           style={[
             styles.modalContainer,
-            {
-              width: Math.min(screenWidth - 40, 380),
-              transform: [{ translateY: keyboardOffset }],
-            },
+            modalAnimatedStyle,
+            { width: Math.min(screenWidth - 40, 380) },
           ]}
         >
           <LinearGradient

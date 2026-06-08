@@ -17,6 +17,24 @@ function coordsToLocationObject(coords: Coords): Location.LocationObject {
   };
 }
 
+async function reverseGeocode(coords: Location.LocationObjectCoords) {
+  try {
+    const { status } = await Location.getForegroundPermissionsAsync();
+    if (status !== "granted") {
+      console.log(
+        "🔍 Permissions de localisation non accordées - géocodage impossible"
+      );
+      return null;
+    }
+
+    const results = await Location.reverseGeocodeAsync(coords);
+    return results.length > 0 ? results[0] : null;
+  } catch (error) {
+    console.log("❌ Erreur géocodage:", error);
+    return null;
+  }
+}
+
 export function useLocation() {
   const {
     locationMode,
@@ -36,25 +54,6 @@ export function useLocation() {
     });
   } else if (locationMode === "auto" && autoLocation) {
     location = coordsToLocationObject(autoLocation);
-  }
-
-  async function reverseGeocode(coords: Location.LocationObjectCoords) {
-    try {
-      // 🚀 NOUVEAU : Vérifier les permissions avant le géocodage
-      const { status } = await Location.getForegroundPermissionsAsync();
-      if (status !== "granted") {
-        console.log(
-          "🔍 Permissions de localisation non accordées - géocodage impossible"
-        );
-        return null;
-      }
-
-      const results = await Location.reverseGeocodeAsync(coords);
-      return results.length > 0 ? results[0] : null;
-    } catch (error) {
-      console.log("❌ Erreur géocodage:", error);
-      return null;
-    }
   }
 
   return {

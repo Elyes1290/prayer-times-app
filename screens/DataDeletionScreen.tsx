@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
   View,
   Text,
@@ -33,27 +33,26 @@ export default function DataDeletionScreen() {
 
   const styles = getStyles(currentTheme);
 
-  // 🔒 SÉCURITÉ : Charger l'email de l'utilisateur connecté au montage
-  useEffect(() => {
-    const loadUserEmail = async () => {
-      try {
-        const userData = await AsyncStorage.getItem("user_data");
-        if (userData) {
-          const parsedData = JSON.parse(userData);
-          if (parsedData.email) {
-            setEmail(parsedData.email);
-            console.log("🔒 Email auto-rempli:", parsedData.email);
-          }
+  const loadUserEmail = useCallback(async () => {
+    try {
+      const userData = await AsyncStorage.getItem("user_data");
+      if (userData) {
+        const parsedData = JSON.parse(userData);
+        if (parsedData.email) {
+          setEmail(parsedData.email);
+          console.log("🔒 Email auto-rempli:", parsedData.email);
         }
-      } catch (error) {
-        console.error("❌ Erreur chargement email utilisateur:", error);
-      } finally {
-        setIsLoadingUserData(false);
       }
-    };
-
-    loadUserEmail();
+    } catch (error) {
+      console.error("❌ Erreur chargement email utilisateur:", error);
+    } finally {
+      setIsLoadingUserData(false);
+    }
   }, []);
+
+  useEffect(() => {
+    void loadUserEmail();
+  }, [loadUserEmail]);
 
   const handleSubmit = async () => {
     if (!email.trim()) {

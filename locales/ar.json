@@ -6,7 +6,6 @@
   "enter_city_name": "أدخل اسم مدينتك",
   "enable_auto_location": "تفعيل الموقع التلقائي (GPS)",
   "unknown_city": "مدينة غير معروفة",
-
   "appearance": "المظهر",
   "theme_mode": "وضع العرض",
   "theme_auto": "تلقائي",
@@ -15,7 +14,6 @@
   "notifications_disabled_title": "الإشعارات معطلة",
   "notifications_disabled_message": "لتلقي الإشعارات، قم بتفعيلها في الإعدادات.",
   "open_settings": "فتح الإعدادات",
-
   "settings": "الإعدادات",
   "location": "الموقع",
   "automatic_gps": "تلقائي (GPS)",
@@ -32,7 +30,6 @@
   "minutes_before": "كم دقيقة قبل:",
   "minutes": "دقيقة",
   "language": "اللغة",
-
   "calc_method": {
     "MuslimWorldLeague": "رابطة العالم الإسلامي",
     "Egyptian": "الهيئة المصرية العامة",
@@ -45,7 +42,6 @@
     "Tehran": "طهران",
     "Turkey": "تركيا"
   },
-
   "method_MuslimWorldLeague": "رابطة العالم الإسلامي",
   "method_Egyptian": "الهيئة المصرية العامة",
   "method_Karachi": "جامعة العلوم الإسلامية، كراتشي",
@@ -56,7 +52,6 @@
   "method_Singapore": "سنغافورة",
   "method_Tehran": "طهران",
   "method_Turkey": "تركيا",
-
   "adhan_sound": "اختيار الأذان",
   "adhan_sounds": {
     "adhamalsharqawe": "Sharqawi Adhan",
@@ -71,7 +66,6 @@
     "masjidquba": "Masjid Al-Quba",
     "islamsobhi": "Islam Sobhi"
   },
-
   "sound_adhamalsharqawe": "Sharqawi Adhan",
   "sound_adhanaljazaer": "Adhan Al Jazaer",
   "sound_ahmadnafees": "Ahmad Nafees",
@@ -83,7 +77,6 @@
   "sound_mustafaozcan": "Mustafa Ozcan",
   "sound_masjidquba": "Masjid Al-Quba",
   "sound_islamsobhi": "Islam Sobhi",
-
   "hijri_calendar": "التقويم الهجري",
   "gregorian_date": "التاريخ الميلادي",
   "hijri_date": "التاريخ الهجري",
@@ -111,7 +104,7 @@
   "no_text": "لا يوجد نص لهذا الحديث.",
   "about": "حول",
   "status": "الحالة",
-  "premium_status": "مميز",
+  "premium_status": "حالة الحساب المميز",
   "free": "مجاني",
   "account_label": "الحساب",
   "user": "مستخدم",
@@ -132,7 +125,7 @@
   "delete_account": "حذف الحساب",
   "save": "حفظ",
   "cancel": "إلغاء",
-  "premium_active": "مميز نشط",
+  "premium_active": "الحساب المميز نشط",
   "monthly_subscription": "اشتراك شهري",
   "yearly_subscription": "اشتراك سنوي",
   "family_subscription": "اشتراك عائلي",
@@ -150,7 +143,6 @@
     "welcome": "مرحباً بك في رفيقك الروحي!",
     "description": "هذا التطبيق المجاني (حالياً بدون إعلانات) يرافقك يومياً في ممارستك الدينية: أوقات صلاة دقيقة، اتجاه القبلة، قراءة القرآن، ذكر تلقائي، أحاديث صحيحة، تقويم هجري، إحصائيات الصلاة، نظام الشارات، نظام المفضلة، صوت متقدم والمزيد. ستتوفر قريباً نسخة مميزة بدون إعلانات مع ميزات حصرية.",
     "blessing": "بارك الله فيكم - May Allah bless you",
-
     "features_title": "🌟 ميزات شاملة",
     "features_subtitle": "كل ما تحتاجه لممارستك الإسلامية:",
     "features": {
@@ -183,21 +175,18 @@
       "offline_mode": "الوضع غير المتصل",
       "local_storage": "تخزين محلي آمن"
     },
-
     "premium_title": "👑 ميزات مميزة",
     "premium_subtitle": "حسّن رحلتك الروحية:",
     "premium_stats": "إحصائيات صلاة مفصلة",
     "premium_badges": "شارات خاصة ومكافآت",
     "premium_audio": "ملفات صوت عالية الجودة",
     "premium_themes": "سمات خاصة وتخصيص",
-
     "advanced_title": "🚀 ميزات متقدمة",
     "advanced_subtitle": "لتحسين تجربتك:",
     "advanced_favorites": "نظام المفضلة والمزامنة",
     "advanced_weekly": "عرض الصلاة الأسبوعي",
     "advanced_sun": "معلومات الشمس والوقت",
     "advanced_personalization": "التخصيص والإعدادات",
-
     "new_features_title": "🆕 ميزات جديدة",
     "new_features_subtitle": "أحدث التحسينات المضافة للتطبيق:",
     "new_widgets": "أدوات أندرويد قابلة للتخصيص",
@@ -206,7 +195,6 @@
     "new_downloads": "تحميلات محلية محسنة",
     "new_mosques": "باحث مساجد ذكي",
     "new_backup": "نظام نسخ احتياطي كامل",
-
     "faq_title": "❓ الأسئلة الشائعة",
     "faq_location_question": "لماذا يحتاج التطبيق موقعي؟",
     "faq_location_answer": "الموقع ضروري لحساب أوقات الصلاة بدقة بناءً على موقعك الجغرافي. يمكنك أيضاً إدخال مدينتك يدوياً.",
@@ -216,7 +204,6 @@
     "faq_qibla_answer": "امسك هاتفك بشكل مسطح، بعيداً عن الأجسام المعدنية. قم بحركات على شكل 8 لمعايرة البوصلة إذا كانت غير مستقرة.",
     "faq_offline_question": "هل يعمل التطبيق بدون إنترنت؟",
     "faq_offline_answer": "نعم، بمجرد التكوين، يعمل التطبيق بدون إنترنت لأوقات الصلاة، القبلة، الذكر وقراءة القرآن.",
-
     "support_title": "🤝 الدعم والمجتمع",
     "send_suggestion": "إرسال اقتراح",
     "report_bug": "الإبلاغ عن مشكلة",
@@ -224,12 +211,10 @@
     "contact_suggestion": "اقتراح تطبيق مسلم",
     "contact_bug": "الإبلاغ عن خطأ في التطبيق المسلم",
     "email_template": "مرحباً Drogbinho،\n\nبخصوص {{subject}}:\n\n[رسالتك هنا]\n\nشكراً لك على هذا التطبيق الممتاز!\n\nمع أطيب التحيات",
-
     "developer_title": "👨‍💻 المطور",
     "developer_name": "مطور بحب ❤️ بواسطة Drogbinho",
     "developer_bio": "مطور شغوف، مسلم ممارس، منشئ تطبيقات مفيدة للمجتمع.",
     "linkedin_profile": "عرض ملف LinkedIn",
-
     "technical_title": "⚙️ معلومات تقنية",
     "tech_react_native": "• مطور بـ React Native & Expo",
     "tech_adhan_lib": "• الحسابات مبنية على مكتبة Adhan",
@@ -239,14 +224,12 @@
     "tech_audio_optimization": "• تحسين صوت متقدم وتخزين مؤقت",
     "tech_performance": "• أداء محسن مع React hooks حديثة",
     "tech_security": "• أمان محسن وحماية البيانات",
-
     "sources_title": "📚 المصادر والاعتمادات",
     "source_quran": "• القرآن: Quran.com API",
     "source_hadith": "• الأحاديث: HadithAPI.com",
     "source_prayer_calculation": "• حسابات الصلاة: مكتبة Adhan",
     "source_icons": "• الأيقونات: Material Design & Flaticon",
     "islamic_authenticity": "✅ جميع المصادر الدينية موثقة وصحيحة",
-
     "legal_title": "⚖️ الإشعارات القانونية",
     "privacy_policy": "سياسة الخصوصية",
     "privacy_policy_content": "هذا التطبيق يحترم خصوصيتك:\n\n• بياناتك تبقى على جهازك\n• لا يتم جمع معلومات شخصية\n• الموقع يستخدم للحسابات فقط\n• لا توجد إعلانات حالياً\n• تطبيق مجاني مع نسخة مميزة قريباً",
@@ -254,7 +237,6 @@
     "terms_title": "شروط الاستخدام",
     "terms_content": "باستخدام هذا التطبيق:\n\n• توافق على استخدامه وفقاً للقيم الإسلامية\n• التطبيق يوفر نسخة مجانية ونسخة مميزة\n• المطور يبذل قصارى جهده لضمان الدقة\n• تحقق دائماً مع مسجدك المحلي\n• الاستخدام على مسؤوليتك الخاصة",
     "understand": "أفهم",
-
     "version": "الإصدار",
     "build": "البناء",
     "last_update": "آخر تحديث:",
@@ -267,19 +249,50 @@
     "closing_dua": "رَبَّنَا تَقَبَّلْ مِنَّا إِنَّكَ أَنتَ السَّمِيعُ الْعَلِيمُ"
   },
   "translation_not_available": "الترجمة العربية غير متاحة لهذا الكتاب.",
-  "home": "الرئيسية",
+  "home": {
+    "go_to_settings": "اذهب إلى الإعدادات",
+    "notifications_disabled_message": "يجب السماح بالإشعارات لتلقي تذكيرات الصلاة والذكر."
+  },
   "qibla": "القبلة",
   "mosques": "المساجد",
   "today": "اليوم",
-  "quran": "القرآن",
+  "quran": {
+    "offline_recitation": "تلاوة محملة (بدون إنترنت)",
+    "unknown_reciter": "قارئ غير معروف",
+    "reciter": "القارئ",
+    "checking_connection": "جاري التحقق..."
+  },
   "hadiths": "الأحاديث",
-  "prophet_stories": "قصص الأنبياء عليهم السلام",
+  "prophet_stories": "قصص الأنبياء ﷺ",
   "prophets_stories": "قصص الأنبياء",
+  "prophet_story_categories": {
+    "childhood": "الطفولة",
+    "revelation": "الوحي",
+    "meccan_period": "الفترة المكية",
+    "hijra": "الهجرة",
+    "medinian_period": "الفترة المدنية",
+    "battles": "الغزوات",
+    "companions": "الصحابة",
+    "family_life": "الحياة الأسرية",
+    "final_years": "السنوات الأخيرة",
+    "character_traits": "الصفات",
+    "miracles": "المعجزات",
+    "daily_life": "الحياة اليومية",
+    "creation": "الخلق",
+    "paradise": "الجنة",
+    "earth_life": "الحياة على الأرض",
+    "prophets_lineage": "سلسلة الأنبياء",
+    "prophethood": "النبوة"
+  },
+  "prophet_story_difficulty": {
+    "beginner": "مبتدئ",
+    "intermediate": "متوسط",
+    "advanced": "متقدم"
+  },
   "waiting_for_location": "في انتظار الموقع...",
   "using_free_api": "API مجاني مفعل (OpenStreetMap)",
   "mosque_search_error": "خطأ في البحث عن المساجد",
   "mosque_search_timeout": "البحث طويل جداً، يرجى المحاولة مرة أخرى",
-
   "prayer_names": {
     "Fajr": "الفجر",
     "Dhuhr": "الظهر",
@@ -299,25 +312,12 @@
     "no_favorites_in_category": "لا توجد مفضلات في هذه الفئة",
     "press_heart_to_add": "اضغط ❤️ لإضافة المحتوى المفضل"
   },
-  "favorites": {
-    "sync_success": "تمت المزامنة بنجاح",
-    "sync_message": "تمت مزامنة مفضلاتك",
-    "deleted": "تم حذف المفضلات",
-    "all_deleted": "تم حذف جميع المفضلات"
-  },
   "sun_info": {
     "day_duration": "مدة النهار"
-  },
-  "quran": {
-    "offline_recitation": "تلاوة محملة (بدون إنترنت)",
-    "unknown_reciter": "قارئ غير معروف",
-    "reciter": "القارئ",
-    "checking_connection": "جاري التحقق..."
   },
   "hadith": {
     "search_placeholder": "البحث بالنص أو رقم الحديث..."
   },
-
   "data_deletion": {
     "title": "حذف الحساب",
     "warning": "تحذير",
@@ -398,12 +398,12 @@
   "toast_cleanup_completed_message": "تم تنظيف الملفات بنجاح",
   "toast_cleanup_error_title": "خطأ في التنظيف",
   "toast_cleanup_error_message": "خطأ أثناء التنظيف",
-  "toast_diagnostic_started_title": "بدأ التشخيص",
-  "toast_diagnostic_started_message": "تشخيص الملفات...",
+  "toast_diagnostic_started_title": "التشخيص جاري...",
+  "toast_diagnostic_started_message": "تحليل الملفات المحملة...",
   "toast_diagnostic_completed_title": "اكتمل التشخيص",
   "toast_diagnostic_completed_message": "تم التشخيص بنجاح",
   "toast_diagnostic_error_title": "خطأ في التشخيص",
-  "toast_diagnostic_error_message": "خطأ أثناء التشخيص",
+  "toast_diagnostic_error_message": "تعذر تشخيص الملفات",
   "toast_download_success": "نجح",
   "toast_operation_cancelled": "تم إلغاء العملية",
   "premium_sync_title": "مزامنة مميزة",
@@ -416,88 +416,71 @@
   "renewal_detected": "تم اكتشاف تجديد",
   "account_exists": "الحساب موجود",
   "warning": "تحذير",
-
   "download_error": "خطأ في التحميل",
   "download_failed": "فشل التحميل",
   "download_success": "نجح التحميل",
   "download_completed": "اكتمل التحميل",
   "download_cancelled": "تم إلغاء التحميل",
   "download_already_exists": "الملف محمل مسبقاً",
-
   "delete_success": "نجح الحذف",
   "delete_error": "خطأ في الحذف",
   "delete_completed": "تم حذف الملف",
   "delete_failed": "غير قادر على حذف الملف",
-
   "play_error": "خطأ في التشغيل",
   "play_failed": "غير قادر على تشغيل الملف",
   "play_success": "بدأ التشغيل",
   "play_local": "تشغيل محلي",
   "play_streaming": "تشغيل البث",
-
   "cache_cleared": "تم مسح الذاكرة المؤقتة",
   "cache_error": "خطأ في مسح الذاكرة المؤقتة",
   "data_cleared": "تم مسح البيانات",
   "data_error": "خطأ في مسح البيانات",
-
   "migration_success": "نجحت الهجرة",
   "migration_error": "خطأ في الهجرة",
   "migration_completed": "تمت هجرة الملفات بنجاح",
-
   "cleanup_success": "اكتمل التنظيف",
-  "cleanup_error": "خطأ في التنظيف",
+  "cleanup_error": "غير قادر على تنظيف المجلد",
   "cleanup_completed": "تم التنظيف بنجاح",
-
   "sync_success": "تمت المزامنة بنجاح",
   "sync_error": "خطأ في المزامنة",
   "sync_completed": "تمت مزامنة البيانات",
-
   "backup_success": "نجح النسخ الاحتياطي",
   "backup_error": "خطأ في النسخ الاحتياطي",
   "backup_completed": "اكتمل النسخ الاحتياطي",
   "backup_restored": "تم استعادة النسخة الاحتياطية",
-
   "favorite_added": "تمت الإضافة إلى المفضلة",
   "favorite_removed": "تمت الإزالة من المفضلة",
   "favorite_error": "خطأ في المفضلة",
   "favorite_limit_reached": "تم الوصول إلى حد المفضلة",
   "favorite_premium_required": "مطلوب اشتراك مميز للمزيد من المفضلات",
-
   "login_success": "نجح تسجيل الدخول",
   "login_error": "خطأ في تسجيل الدخول",
   "logout_success": "نجح تسجيل الخروج",
   "registration_success": "نجح التسجيل",
   "registration_error": "خطأ في التسجيل",
-
   "premium_activated": "تم تفعيل الاشتراك المميز",
   "premium_error": "خطأ في الاشتراك المميز",
   "premium_expired": "انتهت صلاحية الاشتراك المميز",
   "premium_required": "مطلوب اشتراك مميز",
-
   "file_not_found": "الملف غير موجود",
   "file_corrupted": "الملف تالف",
   "file_invalid": "ملف غير صالح",
   "file_too_large": "الملف كبير جداً",
-
   "network_error": "خطأ في الشبكة",
   "server_error": "خطأ في الخادم",
   "connection_failed": "فشل الاتصال",
   "timeout_error": "انتهت مهلة الانتظار",
   "single_device_only": "غير مصرح. يرجى تسجيل الدخول على جهاز واحد فقط.",
-
   "permission_denied": "تم رفض الإذن",
   "storage_full": "التخزين ممتلئ",
   "invalid_format": "تنسيق غير صالح",
   "operation_cancelled": "تم إلغاء العملية",
-
   "recitation_not_found": "التلاوة غير موجودة",
   "recitation_error": "خطأ في التلاوة",
   "recitation_loading": "تحميل التلاوة",
-
   "adhan_not_found": "الأذان غير موجود",
   "adhan_error": "خطأ في الأذان",
   "adhan_loading": "تحميل الأذان",
-
   "validation_email_required": "يرجى إدخال بريدك الإلكتروني",
   "validation_password_required": "يرجى إدخال كلمة المرور",
   "validation_email_password_required": "يرجى إدخال بريدك الإلكتروني وكلمة المرور",
@@ -510,7 +493,6 @@
   "validation_firstname_required": "يرجى إدخال اسمك الأول أو اللقب",
   "validation_firstname_too_short": "الاسم الأول أو اللقب يجب أن يكون حرفين على الأقل",
   "validation_firstname_too_long": "الاسم الأول أو اللقب لا يمكن أن يتجاوز 30 حرف",
-
   "help_firstname_title": "الاسم الأول أو اللقب",
   "help_firstname_prefilled": "تم ملء هذا الاسم الأول مسبقاً من إعداداتك. يمكنك تعديله إذا أردت.",
   "help_firstname_empty": "بين 2 و 30 حرف. يمكنك استخدام اسمك الأول الحقيقي أو لقب.",
@@ -518,7 +500,6 @@
   "help_password_content": "مطلوب: بين 6 و 50 حرف.\nموصى به: أحرف وأرقام ورموز خاصة لمزيد من الأمان.",
   "help_email_title": "البريد الإلكتروني",
   "help_email_content": "التنسيق المطلوب: name@email.com\nمثال: user@gmail.com",
-
   "settings_screen": {
     "premium_adhans_title": "الأذان المميز",
     "no_premium_adhans": "لم يتم اكتشاف أذان مميز",
@@ -535,7 +516,6 @@
     "download_adhan_cancel": "إلغاء",
     "download_adhan_warning": "قد يستغرق التحميل بضع دقائق حسب اتصالك."
   },
-
   "favorites_screen": {
     "title": "مفضلاتي",
     "all": "الكل",
@@ -553,8 +533,6 @@
     "share_error": "خطأ في المشاركة",
     "shared_from_app": "مشاركة من تطبيق أوقات الصلاة"
   },
-  "favorite_added": "تمت الإضافة إلى المفضلة",
-  "favorite_removed": "تمت الإزالة من المفضلة",
   "asmaulhusna_search_placeholder": "البحث بالاسم أو المعنى أو النطق...",
   "dhikr": {
     "title": "الأذكار والدعاء",
@@ -640,9 +618,10 @@
   "maghrib": "المغرب",
   "isha": "العشاء",
   "next_prayer": "الصلاة التالية",
+  "daily_dhikr_title": "ذكر اليوم",
   "today_prayers": "صلوات اليوم",
   "calculating_prayer_times": "حساب أوقات الصلاة...",
-  "prayer_stats": "إحصائيات الصلاة",
+  "prayer_stats": "الإحصائيات",
   "day_length": "طول النهار",
   "fajr_to_sunrise": "من الفجر إلى الشروق",
   "sunset_to_isha": "من الغروب إلى العشاء",
@@ -667,7 +646,6 @@
   "sunset_to_fajr": "الوقت بين الغروب والفجر",
   "night_length": "طول الليل",
   "time_until_sunset": "الوقت حتى الغروب",
-
   "dashboard_welcome": "السلام عليكم",
   "welcome_personalization_title": "تخصيص الترحيب",
   "welcome_personalization_description": "لتقديم تجربة أكثر شخصية، هل يمكنك إخبارنا باسمك الأول أو لقبك؟",
@@ -688,7 +666,6 @@
   "dashboard_dua_fallback": "اكتشف الأدعية اليومية",
   "dashboard_verset_fallback": "استكشف القرآن الكريم",
   "dashboard_names_fallback": "أسماء الله الحسنى",
-
   "learn_to_pray": "تعلم الصلاة",
   "ablutions_wudu": "الوضوء",
   "prayer_positions": "أوضاع الصلاة",
@@ -698,7 +675,6 @@
   "important_duas": "أدعية مهمة",
   "images_coming_soon": "الصور قريباً",
   "learning_footer": "هذا القسم يساعدك على تعلم أساسيات الصلاة الإسلامية",
-
   "wudu_step_1": "نية الوضوء (النية)",
   "wudu_invocation_arabic": "بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ",
   "wudu_invocation_phonetic": "بسم الله الرحمن الرحيم",
@@ -711,29 +687,24 @@
   "wudu_step_7": "مسح الرأس باليدين المبللتين من الأمام إلى الخلف",
   "wudu_step_8": "مسح داخل وخارج الأذنين بالأصابع المبللة",
   "wudu_step_9": "غسل القدمين إلى الكعبين ثلاث مرات (يمين ثم يسار)",
-
   "prayer_step_1": "القيام: الوقوف تجاه القبلة، اليدان على الجانبين",
   "prayer_step_2": "التكبير: رفع اليدين وقول 'الله أكبر'",
   "prayer_step_3": "الركوع: الانحناء بوضع اليدين على الركبتين",
   "prayer_step_4": "السجود: السجود بلمس الأرض بالجبهة",
   "prayer_step_5": "السجود: السجود وتسبيح الله",
-
   "opening_dua": "دعاء الافتتاح",
   "opening_dua_translation": "سبحانك اللهم وبحمدك، تبارك اسمك وتعالى جدك، لا إله إلا أنت.",
   "ruku_dua": "دعاء الركوع",
   "ruku_dua_translation": "سبحان ربي العظيم",
   "sujud_dua": "دعاء السجود",
   "sujud_dua_translation": "سبحان ربي الأعلى",
-
   "voir_plus": "شاهد المزيد",
   "hadith_du_jour": "حديث اليوم",
-
   "asmaulhusna": {
     "title": "أسماء الله الحسنى التسعة والتسعون",
     "subtitle": "اكتشف أجمل أسماء الله ومعانيها",
     "search_placeholder": "البحث عن اسم..."
   },
-
   "location_permission_denied": "تم رفض إذن الموقع",
   "location_permission_needed_for_mosques": "الموقع مطلوب للعثور على المساجد القريبة",
   "location_required_for_mosques": "الموقع مطلوب لعرض المساجد القريبة",
@@ -748,7 +719,6 @@
   "directions": "الاتجاهات",
   "call": "اتصال",
   "more_info": "مزيد من المعلومات",
-
   "tasbih": {
     "title": "المسبحة",
     "reset": "إعادة تعيين",
@@ -790,15 +760,10 @@
   "become_premium": "احصل على المميز",
   "buy_premium": "احصل على المميز",
   "premium_benefits": "افتح جميع الميزات المميزة: المفضلة غير المحدودة، النسخ الاحتياطي السحابي، الأصوات الحصرية...",
-  "premium_required": "مطلوب حساب مميز",
-  "download": "تحميل",
-  "download_completed": "اكتمل التحميل",
-  "download_failed": "فشل التحميل",
-  "download_cancelled": "تم إلغاء التحميل",
+  "download": "التحميل",
   "offline": "غير متصل",
   "downloaded_locally": "محمل محلياً",
   "download_started": "بدأ التحميل",
-  "download_error": "خطأ في التحميل",
   "download_unavailable": "التحميل غير متاح",
   "recitation_premium_only": "التلاوات محجوزة للمستخدمين المميزين",
   "adhan_premium_only": "الأذان المميز محجوز للمستخدمين المميزين",
@@ -806,8 +771,6 @@
   "clean": "تنظيف",
   "adhan_volume": "مستوى صوت الأذان",
   "no_files_to_clean": "لا توجد ملفات للتنظيف",
-  "cleanup_error": "غير قادر على تنظيف المجلد",
-  "cleanup_success": "اكتمل التنظيف",
   "choose_reciter": "اختر قارئاً",
   "previous": "السابق",
   "next": "التالي",
@@ -818,13 +781,13 @@
   "surah": "سورة",
   "download_progress": "جاري التحميل...",
   "delete_download_title": "حذف التحميل",
-  "delete_download_message": "هل تريد حذف \"{title}\" من هذا الجهاز؟ يمكنك الاستماع إليه عبر البث المباشر.",
+  "delete_download_message": "هل تريد حذف \"{{title}}\" من هذا الجهاز؟ يمكنك الاستماع إليه عبر البث المباشر.",
   "delete": "حذف",
   "download_deleted": "تم حذف التحميل",
-  "download_deleted_message": "تم حذف {title} من هذا الجهاز",
+  "download_deleted_message": "تم حذف {{title}} من هذا الجهاز",
   "error_deleting_download": "غير قادر على حذف التحميل",
   "error_deleting": "خطأ في الحذف",
-  "download_started_message": "جاري تحميل {title}",
+  "download_started_message": "جاري تحميل {{title}}",
   "download_completed_title": "🎉 اكتمل التحميل",
   "finalization_error": "مشكلة أثناء إنهاء التحميل",
   "playback_error": "خطأ في التشغيل",
@@ -833,14 +796,12 @@
   "streaming_status": "بث مباشر",
   "remove": "إزالة",
   "clear_all": "مسح الكل",
-  "premium_active": "الحساب المميز نشط",
   "premium_status_description": "اشتراكك المميز نشط. استمتع بجميع الميزات الحصرية!",
   "refresh_location": "تحديث الموقع",
   "position_detected": "تم اكتشاف الموقع:",
   "location_detected": "تم اكتشاف الموقع",
   "sound_and_adhan": "الصوت والأذان",
   "adhan_settings": "الصوت والأذان",
-  "premium_status": "حالة الحساب المميز",
   "mosque_screen": {
     "location_not_available": "الموقع غير متاح",
     "no_phone_available": "رقم الهاتف غير متاح",
@@ -910,14 +871,13 @@
   "auto_backup_disabled_message": "تم تعطيل النسخ الاحتياطي التلقائي",
   "auto_backup_premium_required": "مطلوب اشتراك مميز",
   "auto_backup_premium_message": "النسخ الاحتياطي التلقائي محجوز للمستخدمين المميزين",
-  "backup_restore": "النسخ الاحتياطي",
+  "backup_restore": "النسخ الاحتياطي والاستعادة",
   "backup": "النسخ الاحتياطي",
   "dark_mode": "داكن",
   "light_mode": "فاتح",
   "morning_mode": "صباح",
   "sunset_mode": "المغرب",
   "theme": "المظهر",
-  "premium_required": "مطلوب اشتراك مميز",
   "premium_themes_message": "مواضيع الصباح والمغرب محجوزة لأعضاء Premium.",
   "go_premium": "انتقل إلى Premium",
   "excellent_consistency": "اتساق ممتاز!",
@@ -939,7 +899,6 @@
   "share_error": "خطأ في المشاركة",
   "export_data": "تصدير البيانات",
   "share_complete_stats_question": "هل تريد مشاركة إحصائياتك الكاملة؟",
-  "cancel": "إلغاء",
   "share": "مشاركة",
   "profile_regular": "صلاة منتظمة",
   "profile_regular_desc": "اتساق مثالي",
@@ -1068,7 +1027,7 @@
   "badges_and_achievements": "🏆 الشارات والإنجازات",
   "complete_history": "📋 التاريخ الكامل",
   "start_spiritual_journey": "🚀 ابدأ رحلتك الروحية",
-  "connection_required": "اتصال مطلوب",
+  "connection_required": "مطلوب اتصال",
   "hadith_offline_premium_only": "الوصول إلى الأحاديث في وضع عدم الاتصال متاح فقط للمستخدمين المميزين. يرجى الاتصال بالإنترنت أو الترقية إلى المميز للوصول إلى هذه الميزة.",
   "error_loading_books": "خطأ في تحميل الكتب",
   "error_loading_chapters": "خطأ في تحميل الفصول",
@@ -1079,7 +1038,6 @@
   "page": "صفحة",
   "offline_message_quran": "يتطلب اتصال بالإنترنت للوصول إلى القرآن الكريم. يرجى الاتصال أو الترقية إلى النسخة المميزة للوصول الكامل دون اتصال.",
   "offline_title": "الوضع غير المتصل",
-  "retry": "إعادة المحاولة",
   "offline_mode": "الوضع غير المتصل",
   "online_mode": "الوضع المتصل",
   "downloaded_audio": "الصوتيات المحملة",
@@ -1090,10 +1048,24 @@
   "switch_to_offline": "التبديل إلى الوضع غير المتصل",
   "switch_to_online": "التبديل إلى الوضع المتصل",
   "offline_access_premium": "الوصول غير المتصل متاح مع النسخة المميزة",
-  "connection_required": "مطلوب اتصال",
   "audio_offline_only": "تشغيل الصوتيات غير المتصل فقط",
   "background_audio_enabled": "تشغيل الصوتيات في الخلفية مفعل",
   "stats_appear_after_first_prayers": "ستظهر إحصائياتك بعد صلواتك الأولى",
+  "stats_screen_title": "صلواتي",
+  "stats_tab_today": "اليوم",
+  "stats_tab_journey": "المسيرة",
+  "stats_today_title": "اليوم",
+  "stats_prayers_today": "{{count}} من 5",
+  "stats_mark_prayed": "صليت",
+  "stats_unmark_prayed": "إلغاء",
+  "stats_day_complete_title": "يوم مكتمل!",
+  "stats_day_complete_message": "ما شاء الله، أكملت الصلوات الخمس. تقبل الله منك.",
+  "stats_next_prayer_hint": "الخطوة التالية: {{prayer}}",
+  "stats_progress_footer": "{{percent}}% من اليوم مكتمل",
+  "stats_heatmap_title": "الانتظام",
+  "stats_heatmap_subtitle": "آخر {{days}} أيام",
+  "stats_other_actions_title": "أعمال أخرى",
+  "stats_other_actions_subtitle": "أذكار، قرآن وحاديث بنقرة واحدة",
   "connection_interrupted": "انقطع الاتصال",
   "offline_mode_stats": "وضع عدم الاتصال - اتصل لمزامنة إحصائياتك",
   "pending_sync_actions": "{{count}} إجراءات في انتظار المزامنة",
@@ -1141,7 +1113,6 @@
   "notification_stopped_3": "🌟 لقد نجحت من قبل، يمكنك فعل ذلك مرة أخرى!",
   "badges_collection": "🏅 مجموعة الشارات",
   "last_updated": "آخر تحديث",
-  "offline_mode": "الوضع غير المتصل",
   "checking_connection": "جاري التحقق...",
   "offline_manager": "غير متصل",
   "back_online": "متصل",
@@ -1152,22 +1123,10 @@
   "back": "رجوع",
   "play_all": "تشغيل الكل",
   "stop_playlist": "إيقاف",
-
   "success": "نجح",
-  "error": "خطأ",
-  "download": {
-    "completed": "اكتمل التحميل",
-    "failed": "فشل التحميل",
-    "cancelled": "تم إلغاء التحميل",
-    "added_to_list": "✅ تمت الإضافة إلى القائمة: {{title}}",
-    "item_downloaded": "✅ تم تحميل {{item}}",
-    "failed_message": "فشل التحميل",
-    "cancelled_message": "تم مقاطعة التحميل"
-  },
   "errors": {
     "unknown_error": "حدث خطأ غير معروف",
     "unexpected_error": "حدث خطأ غير متوقع",
-
     "authentication": {
       "title": "خطأ في المصادقة",
       "invalid_credentials": "كلمة مرور أو بريد إلكتروني غير صحيح",
@@ -1175,7 +1134,6 @@
       "session_expired": "انتهت صلاحية جلستك، يرجى تسجيل الدخول مرة أخرى",
       "access_denied": "تم رفض الوصول"
     },
-
     "validation": {
       "title": "خطأ في التحقق",
       "email_required": "عنوان البريد الإلكتروني مطلوب",
@@ -1187,24 +1145,20 @@
       "invalid_data": "البيانات المرسلة غير صالحة",
       "same_password": "كلمة المرور الجديدة لا يمكن أن تكون مطابقة للقديمة"
     },
-
     "registration": {
       "title": "خطأ في التسجيل",
       "account_already_exists": "يوجد حساب بالفعل بهذا البريد الإلكتروني"
     },
-
     "network": {
       "title": "خطأ في الشبكة",
       "connection_error": "خطأ في اتصال الشبكة، تحقق من اتصال الإنترنت",
       "timeout": "انتهت مهلة الانتظار، يرجى المحاولة مرة أخرى"
     },
-
     "server": {
       "title": "خطأ في الخادم",
       "server_error": "خطأ في الخادم، يرجى المحاولة لاحقاً",
       "service_unavailable": "الخدمة غير متاحة مؤقتاً"
     },
-
     "technical": {
       "title": "خطأ تقني",
       "communication_error": "خطأ في الاتصال بالخادم",
@@ -1213,7 +1167,6 @@
       "subscription_error": "خطأ في إدارة اشتراكك",
       "payment_error": "خطأ في معالجة الدفع"
     },
-
     "http": {
       "400": "البيانات المرسلة غير صالحة",
       "401": "كلمة مرور أو بريد إلكتروني غير صحيح",
@@ -1223,76 +1176,8 @@
       "503": "الخدمة غير متاحة مؤقتاً"
     }
   },
-
-  "qibla": {
-    "initializing_compass": "تهيئة البوصلة...",
-    "location_disabled": "الموقع معطل",
-    "location_permission_required": "مطلوب إذن الموقع",
-    "location_enable_instructions": "لاستخدام بوصلة القبلة، فعّل الموقع في إعدادات هاتفك.",
-    "location_allow_instructions": "اضغط \"السماح\" وعد إلى التطبيق"
-  },
-
-  "premium": {
-    "ui": {
-      "signup_tab": "إنشاء حساب مميز",
-      "login_tab": "تسجيل الدخول"
-    },
-    "account_creation_required": "إنشاء الحساب يتطلب اشتراك مميز. سيتم إنشاء حسابك تلقائياً بعد الدفع.",
-    "already_subscribed": "مشترك بالفعل؟ سجل الدخول بنفس البريد الإلكتروني.",
-    "manage_account": "إدارة الحساب",
-    "account_management_redirect": "اذهب إلى حول > إدارة الحساب الآن",
-    "first_name_or_username": "الاسم الأول أو اسم المستخدم",
-    "modify_prefilled_name": "تعديل الاسم الأول المملوء مسبقاً",
-    "field_details_instructions": "انقر على أيقونات ℹ️ لرؤية تفاصيل كل حقل.",
-    "session_expired": "انتهت صلاحية الجلسة",
-    "logout_success": "تم تسجيل خروجك بنجاح",
-    "logout_error": "خطأ أثناء تسجيل الخروج",
-    "profile_updated": "تم تحديث الملف الشخصي",
-    "profile_update_success": "تم حفظ معلوماتك بنجاح",
-    "no_subscription_found": "لم يتم العثور على اشتراك لحسابك",
-    "session_creation_error": "خطأ في إنشاء الجلسة",
-    "not_defined": "غير محدد",
-    "subscription_type_undefined": "النوع غير محدد",
-    "feature_development": "الميزة قيد التطوير",
-    "no_account_associated": "لا يوجد حساب مميز مرتبط بهذا الجهاز. أنشئ حساباً أو اشترِ المميز.",
-    "feature_locked": "🔒 ميزة مميزة",
-    "feature_premium_only": "هذه الميزة متاحة فقط للمستخدمين المميزين.",
-    "promotion": {
-      "feature_title": "ميزة مميزة",
-      "unlock_feature": "افتح هذه الميزة مع المميز",
-      "upgrade": "ترقية",
-      "title": "انتقل إلى المميز",
-      "message": "افتح جميع الميزات المتقدمة",
-      "detailed_stats": "إحصائيات مفصلة",
-      "exclusive_themes": "مظاهر حصرية",
-      "unlimited_favorites": "مفضلة غير محدودة"
-    },
-    "expired_title": "انتهى الاشتراك",
-    "expired_message": "انتهى اشتراكك المميز. جدد للاستمرار في الاستمتاع بالمزايا المميزة.",
-    "expiring_soon_title": "الاشتراك ينتهي قريباً",
-    "expiring_soon_message": "ينتهي اشتراكك خلال {{days}} يوم (أيام). تذكر تجديده!",
-    "renewed_title": "تم تجديد الاشتراك",
-    "renewed_message": "تم تجديد اشتراكك المميز تلقائياً حتى {{date}}"
-  },
-
-  "account": {
-    "first_name_placeholder": "اسمك الأول",
-    "not_defined": "غير محدد",
-    "subscription_type_undefined": "النوع غير محدد"
-  },
-
-  "backup": {
-    "backup_confirm": "هل تريد النسخ الاحتياطي لبياناتك في السحابة؟",
-    "restore_confirm": "هل تريد استعادة بياناتك من السحابة؟ هذا سيستبدل بياناتك الحالية.",
-    "restart_required": "مطلوب إعادة تشغيل",
-    "restore_success_message": "تم استعادة بياناتك بنجاح. لرؤية جميع التغييرات، يرجى إغلاق التطبيق تماماً ثم إعادة فتحه.",
-    "not_connected": "غير متصل",
-    "last_backup": "آخر نسخة احتياطية",
-    "cloud_data": "البيانات السحابية",
-    "refresh_cloud_confirm": "هل تريد تحديث البيانات السحابية؟",
-    "sync_success": "تمت المزامنة بنجاح"
-  },
-
+  "premium": "بريميوم",
+  "account": "الحساب",
   "password": {
     "change_modal": {
       "password_criteria": "كلمة المرور الجديدة يجب أن تحتوي على 8 أحرف على الأقل، حرف كبير واحد، حرف صغير واحد، رقم واحد ورمز خاص واحد",
@@ -1329,38 +1214,6 @@
     "continue": "استمرار",
     "change": "تغيير"
   },
-
-  "settings": {
-    "screen": {
-      "download_adhan_title": "تحميل الأذان",
-      "download_adhan_message": "هل تريد تحميل",
-      "download_adhan_confirm": "تحميل"
-    },
-    "title": "الإعدادات",
-    "theme": "المظهر",
-    "about": "حول",
-    "developer": "المطور",
-    "last_update": "آخر تحديث",
-    "app_description": "هذا التطبيق مطور بحب للمجتمع المسلم.",
-    "version": "الإصدار",
-    "faq_text": "الأسئلة الشائعة",
-    "notifications_reprogrammed": "تم إعادة برمجة الإشعارات",
-    "notifications_new_settings": "سيتم أخذ إعداداتك الجديدة في الاعتبار للإشعارات القادمة.",
-    "premium_access": "الوصول المميز",
-    "success": "نجح",
-    "adhan_list_updated": "تم تحديث قائمة الأذان",
-    "download_completed": "اكتمل التحميل",
-    "download_failed": "فشل التحميل",
-    "download_failed_message": "فشل التحميل",
-    "download_cancelled": "تم إلغاء التحميل",
-    "download_cancelled_message": "تم مقاطعة التحميل",
-    "delete_all_adhans": "حذف جميع الأذان المحملة...",
-    "no_downloaded_files": "لم يتم العثور على ملفات محملة",
-    "cleanup_completed": "اكتمل التنظيف",
-    "analyzing_files": "تحليل الملفات المحملة...",
-    "diagnostic_completed": "اكتمل التشخيص"
-  },
-
   "adhans": {
     "preview_limited": "المعاينة محدودة بـ 20 ثانية",
     "download_time_warning": "قد يستغرق التحميل بضع دقائق حسب اتصالك.",
@@ -1370,24 +1223,11 @@
     "download_title": "تحميل الأذان",
     "download_message": "هل تريد تحميل"
   },
-
   "general": {
     "settings": "الإعدادات العامة",
     "prayer_reminders_before": "تذكيرات الصلاة قبل",
     "reminder_offset_minutes": "التأخير (دقائق)"
   },
-
-  "location": {
-    "method": "طريقة الموقع",
-    "updating": "جاري التحديث...",
-    "detected": "تم اكتشاف الموقع"
-  },
-
-  "home": {
-    "go_to_settings": "اذهب إلى الإعدادات",
-    "notifications_disabled_message": "يجب السماح بالإشعارات لتلقي تذكيرات الصلاة والذكر."
-  },
-
   "stats": {
     "improvement_opportunity": "فرصة للتحسين",
     "start_habit_advice": "ابدأ بصلاة واحدة يومياً لبناء العادة.",
@@ -1447,15 +1287,28 @@
     "time_window": "النافذة الزمنية",
     "goal_soon_customizable": "هدفك سيكون قابل للتخصيص قريباً!",
     "weekly_goal_desc": "عدد الصلوات المستهدفة أسبوعياً",
-
     "quran_widget_available": "الودجت متاح على الشاشة الرئيسية",
     "quran_widget_add": "أضف الودجت إلى الشاشة الرئيسية",
     "quran_widget_active": "نشط",
     "quran_widget_inactive": "غير نشط",
     "quran_widget_title": "ودجت القرآن الكريم المميز",
-    "quran_widget_description": "تحكم في تشغيل القرآن من الشاشة الرئيسية"
+    "quran_widget_description": "تحكم في تشغيل القرآن من الشاشة الرئيسية",
+    "screen_title": "صلواتي",
+    "tab_today": "اليوم",
+    "tab_journey": "المسيرة",
+    "today_title": "اليوم",
+    "prayers_today": "{{count}} من 5",
+    "mark_prayed": "صليت",
+    "unmark_prayed": "إلغاء",
+    "day_complete_title": "يوم مكتمل!",
+    "day_complete_message": "ما شاء الله، أكملت الصلوات الخمس. تقبل الله منك.",
+    "next_prayer_hint": "الخطوة التالية: {{prayer}}",
+    "progress_footer": "{{percent}}% من اليوم مكتمل",
+    "heatmap_title": "الانتظام",
+    "heatmap_subtitle": "آخر {{days}} أيام",
+    "other_actions_title": "أعمال أخرى",
+    "other_actions_subtitle": "أذكار، قرآن وحاديث بنقرة واحدة"
   },
-
   "premium_ui": {
     "badge": "بريميوم",
     "signup_tab": "إنشاء حساب بريميوم",
@@ -1463,7 +1316,6 @@
     "signup_info_line1": "إنشاء الحساب يتطلب اشتراك بريميوم. سيتم إنشاء حسابك تلقائياً بعد الدفع.",
     "signup_info_line2": "مشترك بالفعل؟ سجل الدخول بنفس البريد الإلكتروني."
   },
-
   "auth_modal": {
     "title": "حساب بريميوم",
     "signup_tab": "إنشاء حساب",
@@ -1487,13 +1339,6 @@
     "password_criteria_title": "معايير الأمان",
     "password_min_length": "على الأقل 6 أحرف"
   },
-
-  "location": "الموقع",
-  "backup": "النسخ الاحتياطي",
-  "download": "التحميل",
-  "qibla": "القبلة",
-  "favorites": "المفضلة",
-  "settings": "الإعدادات",
   "languages": {
     "fr": "Français",
     "en": "English",
@@ -1509,7 +1354,6 @@
     "fa": "فارسی",
     "nl": "Nederlands"
   },
-
   "quran_navigation_modal": {
     "title": "🎯 التنقل",
     "swipe_instruction": "اسحب لتغيير العرض",
@@ -1517,18 +1361,15 @@
     "play_instruction": "تشغيل يبدأ الصوت المعروض",
     "close_button": "فهمت!"
   },
-
   "mosques_finder": "الباحث الذكي عن المساجد",
   "native_downloads": "التحميلات الأصلية",
   "android_widgets": "ويدجتات أندرويد",
   "lock_screen_player": "مشغل شاشة القفل",
   "tactile_controls": "أدوات التحكم اللمسية",
-  "backup_restore": "النسخ الاحتياطي والاستعادة",
   "data_deletion_label": "حذف البيانات",
   "stripe_payments": "مدفوعات سترايب",
   "user_accounts": "حسابات المستخدمين",
   "13_languages": "١٣ لغة مدعومة",
-  "offline_mode": "الوضع غير المتصل",
   "local_storage": "التخزين المحلي",
   "new_features_title": "الميزات الجديدة",
   "new_features_subtitle": "اكتشف أحدث التحسينات",
@@ -1568,7 +1409,6 @@
   "toast_premium_required": "مطلوب اشتراك مميز",
   "toast_download_error": "خطأ في التحميل",
   "toast_download_failed": "فشل التحميل",
-  "toast_download_success": "نجح",
   "toast_recitation_loading": "جاري تحميل التلاوة",
   "toast_validation_email_required": "يرجى إدخال بريدك الإلكتروني",
   "toast_validation_password_required": "يرجى إدخال كلمة المرور",
@@ -1597,11 +1437,6 @@
   "toast_cleanup_updating_title": "جاري التحديث...",
   "toast_cleanup_updating_message": "تحديث القائمة جاري",
   "toast_cleanup_completed_detailed_message": "تم حذف {{count}} ملفات (تم تحرير {{size}} ميجابايت)",
-  "toast_diagnostic_started_title": "التشخيص جاري...",
-  "toast_diagnostic_started_message": "تحليل الملفات المحملة...",
-  "toast_diagnostic_completed_title": "اكتمل التشخيص",
-  "toast_diagnostic_error_title": "خطأ في التشخيص",
-  "toast_diagnostic_error_message": "تعذر تشخيص الملفات",
   "toast_configuration_unavailable": "التكوين غير متاح",
   "toast_apply_changes_error": "تعذر تطبيق التغييرات",
   "toast_local_playback": "تشغيل محلي",
@@ -1617,33 +1452,25 @@
   "toast_auto_fix_error_message": "تعذر تطبيق الإصلاحات التلقائية",
   "toast_payment_success_title": "تم الدفع بنجاح!",
   "toast_payment_success_message": "اشتراكك {{subscriptionName}} نشط الآن.",
-
   "library": "المكتبة",
   "islamic_knowledge": "موارد روحية",
   "read_listen": "القراءة والاستماع",
   "saved_content": "المحتوى المحفوظ",
   "prophetic_biography": "السيرة النبوية",
-  "prophet_stories": "قصص الأنبياء ﷺ",
   "prophetic_traditions": "الأحاديث النبوية",
   "invocations": "الأذكار",
   "99_names": "أسماء الله الحسنى",
   "library_info": "الوصول إلى جميع الموارد الروحية في مكان واحد",
-  
   "more": "المزيد",
   "additional_features": "ميزات إضافية",
   "tools": "الأدوات",
   "find_nearby": "البحث في الجوار",
   "digital_counter": "عداد رقمي",
   "islamic_dates": "التواريخ الإسلامية",
-  "premium": "بريميوم",
-  "prayer_stats": "الإحصائيات",
   "track_prayers": "تتبع صلواتك",
-  "account": "الحساب",
   "app_preferences": "تفضيلات التطبيق",
   "app_info": "معلومات التطبيق",
   "asmaul_husna": "أسماء الله الحسنى",
-  "hijri_calendar": "التقويم الهجري",
-  
   "background_image_type": "نوع صورة الخلفية",
   "background_prophet": "🕌 المسجد النبوي",
   "background_makka": "🕋 مكة المكرمة",

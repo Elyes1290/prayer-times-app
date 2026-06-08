@@ -155,6 +155,13 @@ jest.mock("react-native-fs", () => ({
   LegacySharedDirectoryPath: "/test/legacy-shared",
 }));
 
+jest.mock("./native/RotationCompass", () => ({
+  isRotationCompassAvailable: jest.fn(() => false),
+  startRotationCompass: jest.fn(),
+  stopRotationCompass: jest.fn(),
+  addRotationCompassListener: jest.fn(() => null),
+}));
+
 // Mock des modules Expo
 jest.mock("expo-localization", () => ({
   getLocales: () => [{ languageCode: "en", countryCode: "US" }],

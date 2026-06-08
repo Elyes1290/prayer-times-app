@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  Pressable,
-  Animated,
-  StyleSheet,
-} from "react-native";
+import { View, Text, Pressable, StyleSheet } from "react-native";
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from "react-native-reanimated";
 import { MCIcon } from "@/components/icons/AppVectorIcons";
 import { useThemeAssets } from "../hooks/useThemeAssets";
 
@@ -25,19 +24,23 @@ const CollapsibleSection: React.FC<CollapsibleSectionProps> = ({
   initiallyExpanded = false,
 }) => {
   const [isExpanded, setIsExpanded] = useState(initiallyExpanded);
-  const [animation] = useState(new Animated.Value(initiallyExpanded ? 1 : 0));
+  const progress = useSharedValue(initiallyExpanded ? 1 : 0);
   const themeAssets = useThemeAssets();
 
   const toggleSection = () => {
-    const toValue = isExpanded ? 0 : 1;
-    setIsExpanded(!isExpanded);
-
-    Animated.timing(animation, {
-      toValue,
-      duration: 300,
-      useNativeDriver: false,
-    }).start();
+    const nextExpanded = !isExpanded;
+    setIsExpanded(nextExpanded);
+    progress.value = withTiming(nextExpanded ? 1 : 0, { duration: 300 });
   };
+
+  const chevronStyle = useAnimatedStyle(() => ({
+    transform: [{ rotate: `${progress.value * 180}deg` }],
+  }));
+
+  const contentStyle = useAnimatedStyle(() => ({
+    maxHeight: progress.value * 8000,
+    opacity: progress.value,
+  }));
 
   const styles = StyleSheet.create({
     container: {
@@ -107,35 +110,12 @@ const CollapsibleSection: React.FC<CollapsibleSectionProps> = ({
           />
         </View>
         <Text style={styles.title}>{title}</Text>
-        <Animated.View
-          style={{
-            transform: [
-              {
-                rotate: animation.interpolate({
-                  inputRange: [0, 1],
-                  outputRange: ["0deg", "180deg"],
-                }),
-              },
-            ],
-          }}
-        >
-          <MCIcon
-            name="chevron-down"
-            size={24}
-            style={styles.chevron}
-          />
+        <Animated.View style={chevronStyle}>
+          <MCIcon name="chevron-down" size={24} style={styles.chevron} />
         </Animated.View>
       </Pressable>
 
-      <Animated.View
-        style={{
-          maxHeight: animation.interpolate({
-            inputRange: [0, 1],
-            outputRange: [0, 8000],
-          }),
-          opacity: animation,
-        }}
-      >
+      <Animated.View style={contentStyle}>
         <View style={styles.content}>{children}</View>
       </Animated.View>
     </View>

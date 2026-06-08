@@ -49,10 +49,27 @@ jest.mock("react-native-safe-area-context", () => ({
 
 jest.mock("@react-navigation/native", () => ({
   useFocusEffect: jest.fn((callback) => {
-    // Ne pas appeler le callback immédiatement pour éviter les boucles infinies
     return callback;
   }),
 }));
+
+jest.mock("../../hooks/useCompassHeading", () => {
+  const { useSharedValue } = require("react-native-reanimated");
+  return {
+    useCompassHeading: jest.fn((enabled: boolean) => {
+      const dialRotation = useSharedValue(0);
+      const deviceHeading = useSharedValue<number | null>(enabled ? 90 : null);
+      return {
+        dialRotation,
+        deviceHeading,
+        accuracy: enabled ? 3 : null,
+        isActive: enabled,
+        needsCalibration: false,
+        magneticInterference: false,
+      };
+    }),
+  };
+});
 
 jest.mock("../../utils/logger", () => ({
   errorLog: jest.fn(),
@@ -338,23 +355,12 @@ describe("QiblaScreen", () => {
   });
 
   describe("Performance et optimisation", () => {
-    test("devrait nettoyer les subscriptions au démontage", async () => {
-      const mockRemove = jest.fn();
-      (Location.watchHeadingAsync as jest.Mock).mockResolvedValue({
-        remove: mockRemove,
-      });
-
-      const { unmount } = render(<QiblaScreen />);
+    test("devrait afficher la boussole quand les capteurs sont actifs", async () => {
+      render(<QiblaScreen />);
 
       await waitFor(() => {
-        expect(Location.hasServicesEnabledAsync).toHaveBeenCalled();
-        expect(Location.watchHeadingAsync).toHaveBeenCalled();
+        expect(screen.getByTestId("qibla-compass")).toBeTruthy();
       });
-
-      unmount();
-
-      // Vérifier que la fonction remove a été appelée
-      expect(mockRemove).toHaveBeenCalled();
     });
 
     test("devrait gérer les changements d'état de l'application", async () => {

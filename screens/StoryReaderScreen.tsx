@@ -10,9 +10,13 @@ import {
   StatusBar,
   Modal,
   Share,
-  Animated,
 } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from "react-native-reanimated";
+import { LinearGradient } from "@/components/ui/LinearGradientView";
 import { IonIcon } from "@/components/icons/AppVectorIcons";
 import { useRouter, useFocusEffect } from "expo-router";
 
@@ -161,7 +165,15 @@ export default function StoryReaderScreen() {
   const scrollViewRef = useRef<ScrollView>(null);
   const contentHeight = useRef(0);
   const scrollPosition = useRef(0);
-  const fadeAnim = useRef(new Animated.Value(0)).current;
+  const fadeAnim = useSharedValue(0);
+
+  const fadeAnimatedStyle = useAnimatedStyle(() => ({
+    opacity: fadeAnim.value,
+  }));
+
+  const runFadeIn = useCallback(() => {
+    fadeAnim.value = withTiming(1, { duration: 800 });
+  }, [fadeAnim]);
 
   // 📖 Remonter en haut quand on change de chapitre (Suivant/Précédent/onglet)
   useEffect(() => {
@@ -210,12 +222,7 @@ export default function StoryReaderScreen() {
 
             setStoryData(offlineStoryData);
 
-            // Animation d'apparition
-            Animated.timing(fadeAnim, {
-              toValue: 1,
-              duration: 800,
-              useNativeDriver: true,
-            }).start();
+            runFadeIn();
           } else {
             Alert.alert(
               "Histoire non disponible",
@@ -262,11 +269,7 @@ export default function StoryReaderScreen() {
           setStoryData(responseData.data);
 
           // Animation d'apparition
-          Animated.timing(fadeAnim, {
-            toValue: 1,
-            duration: 800,
-            useNativeDriver: true,
-          }).start();
+          runFadeIn();
         } else {
           Alert.alert("Erreur", responseData.message || "Histoire introuvable");
           await AsyncStorage.removeItem("current_story_id");
@@ -281,11 +284,7 @@ export default function StoryReaderScreen() {
           const offlineStoryData: StoryData = downloadedStory.fullData;
           setStoryData(offlineStoryData);
 
-          Animated.timing(fadeAnim, {
-            toValue: 1,
-            duration: 800,
-            useNativeDriver: true,
-          }).start();
+          runFadeIn();
         } else {
           Alert.alert(
             "Erreur",
@@ -300,7 +299,7 @@ export default function StoryReaderScreen() {
     };
 
     loadStory();
-  }, [storyId, networkStatus.isConnected]);
+  }, [storyId, networkStatus.isConnected, runFadeIn]);
 
   // 🧹 Nettoyer l'AsyncStorage quand le composant se démonte
   useEffect(() => {
@@ -937,7 +936,7 @@ export default function StoryReaderScreen() {
       </LinearGradient>
 
       {/* Contenu principal */}
-      <Animated.View style={[styles.contentWrapper, { opacity: fadeAnim }]}>
+      <Animated.View style={[styles.contentWrapper, fadeAnimatedStyle]}>
         <ScrollView
           ref={scrollViewRef}
           style={styles.scrollView}

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import { View, Text, StyleSheet, Pressable, ActivityIndicator } from "react-native";
 import { useRouter } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -6,46 +6,45 @@ import { AppConfig } from "../utils/config";
 
 const PaymentCancelScreen: React.FC = () => {
   const { replace } = useRouter();
-  const [isDeleting, setIsDeleting] = React.useState(false);
+  const [isDeleting, setIsDeleting] = React.useState(true);
 
-  // 🚀 NOUVEAU : Nettoyer les données et supprimer le compte préemptif si nécessaire
-  useEffect(() => {
-    const handleCancellation = async () => {
-      try {
-        const registrationData = await AsyncStorage.getItem("pending_registration");
-        
-        if (registrationData) {
-          const parsedData = JSON.parse(registrationData);
-          const email = parsedData.email;
+  const handleCancellation = useCallback(async () => {
+    try {
+      const registrationData = await AsyncStorage.getItem("pending_registration");
 
-          if (email) {
-            console.log("🗑️ Demande de suppression du compte annulé pour:", email);
-            setIsDeleting(true);
-            
-            // Appeler l'API pour supprimer l'utilisateur préemptif
-            const response = await fetch(`${AppConfig.API_BASE_URL}/stripe.php/handle-payment-cancellation`, {
+      if (registrationData) {
+        const parsedData = JSON.parse(registrationData);
+        const email = parsedData.email;
+
+        if (email) {
+          console.log("🗑️ Demande de suppression du compte annulé pour:", email);
+
+          const response = await fetch(
+            `${AppConfig.API_BASE_URL}/stripe.php/handle-payment-cancellation`,
+            {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({ email }),
-            });
+            }
+          );
 
-            const result = await response.json();
-            console.log("✅ Résultat suppression:", result);
-          }
+          const result = await response.json();
+          console.log("✅ Résultat suppression:", result);
         }
-
-        // Nettoyer le stockage local quoi qu'il arrive
-        await AsyncStorage.removeItem("pending_registration");
-        console.log("🧹 Données d'inscription nettoyées - PaymentCancelScreen");
-      } catch (error) {
-        console.error("❌ Erreur lors de l'annulation:", error);
-      } finally {
-        setIsDeleting(false);
       }
-    };
 
-    handleCancellation();
+      await AsyncStorage.removeItem("pending_registration");
+      console.log("🧹 Données d'inscription nettoyées - PaymentCancelScreen");
+    } catch (error) {
+      console.error("❌ Erreur lors de l'annulation:", error);
+    } finally {
+      setIsDeleting(false);
+    }
   }, []);
+
+  useEffect(() => {
+    void handleCancellation();
+  }, [handleCancellation]);
 
   const handleRetry = () => {
     // Retourner aux paramètres où se trouve l'inscription

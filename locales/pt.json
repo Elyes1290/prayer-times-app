@@ -6,7 +6,6 @@
   "enter_city_name": "Digite o nome da sua cidade",
   "enable_auto_location": "Ativar localização automática (GPS)",
   "unknown_city": "Cidade desconhecida",
-
   "appearance": "Aparência",
   "theme_mode": "Modo de exibição",
   "theme_auto": "Automático",
@@ -15,7 +14,6 @@
   "notifications_disabled_title": "Notificações desativadas",
   "notifications_disabled_message": "Para receber notificações, ative-as nas configurações.",
   "open_settings": "Abrir configurações",
-
   "settings": "Configurações",
   "location": "Localização",
   "automatic_gps": "Automático (GPS)",
@@ -32,7 +30,6 @@
   "minutes_before": "Quantos minutos antes:",
   "minutes": "min",
   "language": "Idioma",
-
   "calc_method": {
     "MuslimWorldLeague": "Liga Mundial Muçulmana",
     "Egyptian": "Autoridade Geral Egípcia",
@@ -45,7 +42,6 @@
     "Tehran": "Teerã",
     "Turkey": "Turquia"
   },
-
   "method_MuslimWorldLeague": "Liga Mundial Muçulmana",
   "method_Egyptian": "Autoridade Geral Egípcia",
   "method_Karachi": "Universidade de Ciências Islâmicas, Karachi",
@@ -56,7 +52,6 @@
   "method_Singapore": "Singapura",
   "method_Tehran": "Teerã",
   "method_Turkey": "Turquia",
-
   "adhan_sound": "Seleção do Adhan",
   "adhan_sounds": {
     "adhamalsharqawe": "Adhan Sharqawi",
@@ -71,7 +66,6 @@
     "masjidquba": "Masjid Al-Quba",
     "islamsobhi": "Islam Sobhi"
   },
-
   "sound_adhamalsharqawe": "Sharqawi Adhan",
   "sound_adhanaljazaer": "Adhan Al Jazaer",
   "sound_ahmadnafees": "Ahmad Nafees",
@@ -83,7 +77,6 @@
   "sound_mustafaozcan": "Mustafa Ozcan",
   "sound_masjidquba": "Masjid Al-Quba",
   "sound_islamsobhi": "Islam Sobhi",
-
   "hijri_calendar": "Calendário Hijri",
   "gregorian_date": "Data Gregoriana",
   "hijri_date": "Data Hijri",
@@ -111,7 +104,7 @@
   "no_text": "Nenhum texto para este hadith.",
   "about": "Sobre",
   "status": "Status",
-  "premium_status": "Premium",
+  "premium_status": "Premium Status",
   "free": "Gratuito",
   "account_label": "Conta",
   "user": "Usuário",
@@ -132,7 +125,7 @@
   "delete_account": "Excluir conta",
   "save": "Salvar",
   "cancel": "Cancelar",
-  "premium_active": "Premium Ativo",
+  "premium_active": "Premium Active",
   "monthly_subscription": "Assinatura Mensal",
   "yearly_subscription": "Assinatura Anual",
   "family_subscription": "Assinatura Familiar",
@@ -150,7 +143,6 @@
     "welcome": "Bem-vindo ao seu companheiro espiritual!",
     "description": "Este aplicativo gratuito (atualmente sem anúncios) acompanha você diariamente em sua prática religiosa: horários precisos das orações, direção da Qibla, leitura do Alcorão, dhikr automático, hadiths autênticos, calendário Hijri, estatísticas das orações, sistema de badges, sistema de favoritos, áudio avançado e muito mais. Uma versão premium sem anúncios com recursos exclusivos estará disponível em breve.",
     "blessing": "بارك الله فيكم - Que Allah o abençoe",
-
     "features_title": "🌟 Recursos completos",
     "features_subtitle": "Tudo que você precisa para sua prática islâmica:",
     "features": {
@@ -183,21 +175,18 @@
       "offline_mode": "Modo offline",
       "local_storage": "Armazenamento local seguro"
     },
-
     "premium_title": "👑 Recursos premium",
     "premium_subtitle": "Melhore sua jornada espiritual:",
     "premium_stats": "Estatísticas detalhadas das orações",
     "premium_badges": "Badges especiais e recompensas",
     "premium_audio": "Arquivos de áudio de alta qualidade",
     "premium_themes": "Temas especiais e personalização",
-
     "advanced_title": "🚀 Recursos avançados",
     "advanced_subtitle": "Para melhorar sua experiência:",
     "advanced_favorites": "Sistema de favoritos e sincronização",
     "advanced_weekly": "Visualização semanal das orações",
     "advanced_sun": "Informações do sol e tempo",
     "advanced_personalization": "Personalização e configurações",
-
     "new_features_title": "🆕 Novas funcionalidades",
     "new_features_subtitle": "Últimas melhorias adicionadas ao aplicativo:",
     "new_widgets": "Widgets Android personalizáveis",
@@ -206,7 +195,6 @@
     "new_downloads": "Downloads nativos otimizados",
     "new_mosques": "Localizador inteligente de mesquitas",
     "new_backup": "Sistema completo de backup",
-
     "faq_title": "❓ Perguntas frequentes",
     "faq_location_question": "Por que o aplicativo precisa da minha localização?",
     "faq_location_answer": "A localização é necessária para calcular com precisão os horários das orações com base na sua posição geográfica. Você também pode inserir sua cidade manualmente.",
@@ -216,7 +204,6 @@
     "faq_qibla_answer": "Segure seu telefone na horizontal, longe de objetos metálicos. Faça movimentos em forma de 8 para calibrar a bússola se estiver instável.",
     "faq_offline_question": "O aplicativo funciona offline?",
     "faq_offline_answer": "Sim, uma vez configurado, o aplicativo funciona offline para horários das orações, Qibla, dhikr e leitura do Alcorão.",
-
     "support_title": "🤝 Suporte e comunidade",
     "send_suggestion": "Enviar uma sugestão",
     "report_bug": "Reportar um problema",
@@ -224,12 +211,10 @@
     "contact_suggestion": "Sugestão de Aplicativo Muçulmano",
     "contact_bug": "Relatório de Bug de Aplicativo Muçulmano",
     "email_template": "Olá Drogbinho,\n\nSobre {{subject}}:\n\n[Sua mensagem aqui]\n\nObrigado por este excelente aplicativo!\n\nAtenciosamente",
-
     "developer_title": "👨‍💻 Desenvolvedor",
     "developer_name": "Desenvolvido com ❤️ por Drogbinho",
     "developer_bio": "Desenvolvedor apaixonado, muçulmano praticante, criador de aplicativos úteis para a comunidade.",
     "linkedin_profile": "Ver perfil do LinkedIn",
-
     "technical_title": "⚙️ Informações técnicas",
     "tech_react_native": "• Desenvolvido com React Native & Expo",
     "tech_adhan_lib": "• Cálculos baseados na biblioteca Adhan",
@@ -239,14 +224,12 @@
     "tech_audio_optimization": "• Otimização de áudio avançada e cache",
     "tech_performance": "• Performance melhorada com React hooks modernos",
     "tech_security": "• Segurança melhorada e proteção de dados",
-
     "sources_title": "📚 Fontes e créditos",
     "source_quran": "• Alcorão: API Quran.com",
     "source_hadith": "• Hadiths: HadithAPI.com",
     "source_prayer_calculation": "• Cálculos de oração: Biblioteca Adhan",
     "source_icons": "• Ícones: Material Design & Flaticon",
     "islamic_authenticity": "✅ Todas as fontes religiosas são verificadas e autênticas",
-
     "legal_title": "⚖️ Avisos legais",
     "privacy_policy": "Política de privacidade",
     "privacy_policy_content": "Este aplicativo respeita sua privacidade:\n\n• Seus dados ficam em seu dispositivo\n• Nenhuma coleta de informações pessoais\n• Localização usada apenas para cálculos\n• Nenhum anúncio atualmente\n• Aplicativo gratuito com versão premium em breve",
@@ -254,7 +237,6 @@
     "terms_title": "Termos de uso",
     "terms_content": "Ao usar este aplicativo:\n\n• Você concorda em usá-lo de acordo com os valores islâmicos\n• O aplicativo oferece uma versão gratuita e uma premium\n• O desenvolvedor faz o melhor para garantir precisão\n• Sempre verifique com sua mesquita local\n• O uso é por sua conta e risco",
     "understand": "Entendo",
-
     "version": "Versão",
     "build": "Build",
     "last_update": "Última atualização:",
@@ -267,19 +249,50 @@
     "closing_dua": "رَبَّنَا تَقَبَّلْ مِنَّا إِنَّكَ أَنتَ السَّمِيعُ الْعَلِيمُ"
   },
   "translation_not_available": "Tradução em português não disponível para este livro.",
-  "home": "Início",
+  "home": {
+    "go_to_settings": "Ir para configurações",
+    "notifications_disabled_message": "Você deve permitir notificações para receber lembretes de oração e dhikr."
+  },
   "qibla": "Qibla",
   "mosques": "Mesquitas",
   "today": "Hoje",
-  "quran": "Alcorão",
+  "quran": {
+    "offline_recitation": "Recitação baixada (offline)",
+    "unknown_reciter": "Recitador desconhecido",
+    "reciter": "Recitador",
+    "checking_connection": "Verificando..."
+  },
   "hadiths": "Hadiths",
-  "prophet_stories": "Histórias dos Profetas (Paz seja com eles)",
+  "prophet_stories": "Histórias dos Profetas ﷺ",
   "prophets_stories": "Histórias dos Profetas",
+  "prophet_story_categories": {
+    "childhood": "Infância",
+    "revelation": "Revelação",
+    "meccan_period": "Período mequense",
+    "hijra": "Hégira",
+    "medinian_period": "Período medinense",
+    "battles": "Batalhas",
+    "companions": "Companheiros",
+    "family_life": "Vida familiar",
+    "final_years": "Últimos anos",
+    "character_traits": "Caráter",
+    "miracles": "Milagres",
+    "daily_life": "Vida diária",
+    "creation": "Criação",
+    "paradise": "Paraíso",
+    "earth_life": "Vida na terra",
+    "prophets_lineage": "Linhagem dos profetas",
+    "prophethood": "Profecia"
+  },
+  "prophet_story_difficulty": {
+    "beginner": "Iniciante",
+    "intermediate": "Intermediário",
+    "advanced": "Avançado"
+  },
   "waiting_for_location": "Aguardando localização...",
   "using_free_api": "API gratuita ativada (OpenStreetMap)",
   "mosque_search_error": "Erro ao pesquisar mesquitas",
   "mosque_search_timeout": "Pesquisa muito longa, tente novamente",
-
   "prayer_names": {
     "Fajr": "Fajr",
     "Dhuhr": "Dhuhr",
@@ -299,25 +312,12 @@
     "no_favorites_in_category": "Nenhum favorito nesta categoria",
     "press_heart_to_add": "Pressione ❤️ para adicionar seu conteúdo favorito"
   },
-  "favorites": {
-    "sync_success": "Sincronização bem-sucedida",
-    "sync_message": "Seus favoritos foram sincronizados",
-    "deleted": "Favoritos excluídos",
-    "all_deleted": "Todos os favoritos foram excluídos"
-  },
   "sun_info": {
     "day_duration": "Duração do dia"
-  },
-  "quran": {
-    "offline_recitation": "Recitação baixada (offline)",
-    "unknown_reciter": "Recitador desconhecido",
-    "reciter": "Recitador",
-    "checking_connection": "Verificando..."
   },
   "hadith": {
     "search_placeholder": "Pesquisar por texto ou número do hadith..."
   },
-
   "data_deletion": {
     "title": "Exclusão de conta",
     "warning": "Aviso",
@@ -398,12 +398,12 @@
   "toast_cleanup_completed_message": "arquivos limpos com sucesso",
   "toast_cleanup_error_title": "Erro de limpeza",
   "toast_cleanup_error_message": "Erro durante a limpeza",
-  "toast_diagnostic_started_title": "Diagnóstico iniciado",
-  "toast_diagnostic_started_message": "Diagnosticando arquivos...",
+  "toast_diagnostic_started_title": "Diagnóstico em andamento...",
+  "toast_diagnostic_started_message": "Analisando arquivos baixados...",
   "toast_diagnostic_completed_title": "Diagnóstico concluído",
   "toast_diagnostic_completed_message": "Diagnóstico concluído com sucesso",
   "toast_diagnostic_error_title": "Erro de diagnóstico",
-  "toast_diagnostic_error_message": "Erro durante o diagnóstico",
+  "toast_diagnostic_error_message": "Não é possível diagnosticar os arquivos",
   "toast_download_success": "Sucesso",
   "toast_operation_cancelled": "Operação cancelada",
   "premium_sync_title": "Sincronização premium",
@@ -416,88 +416,71 @@
   "renewal_detected": "Renovação detectada",
   "account_exists": "A conta existe",
   "warning": "Aviso",
-
-  "download_error": "Erro de download",
-  "download_failed": "Download falhou",
+  "download_error": "Download error",
+  "download_failed": "Download failed",
   "download_success": "Download bem-sucedido",
-  "download_completed": "Download concluído",
-  "download_cancelled": "Download cancelado",
+  "download_completed": "Download completed",
+  "download_cancelled": "Download cancelled",
   "download_already_exists": "Arquivo já baixado",
-
   "delete_success": "Exclusão bem-sucedida",
   "delete_error": "Erro de exclusão",
   "delete_completed": "Arquivo excluído",
   "delete_failed": "Não foi possível excluir o arquivo",
-
   "play_error": "Erro de reprodução",
   "play_failed": "Não foi possível reproduzir o arquivo",
   "play_success": "Reprodução iniciada",
   "play_local": "Reprodução local",
   "play_streaming": "Reprodução em streaming",
-
   "cache_cleared": "Cache limpo",
   "cache_error": "Erro ao limpar cache",
   "data_cleared": "Dados limpos",
   "data_error": "Erro ao limpar dados",
-
   "migration_success": "Migração bem-sucedida",
   "migration_error": "Erro de migração",
   "migration_completed": "Arquivos migrados com sucesso",
-
-  "cleanup_success": "Limpeza concluída",
-  "cleanup_error": "Erro de limpeza",
+  "cleanup_success": "Cleanup completed",
+  "cleanup_error": "Unable to clean folder",
   "cleanup_completed": "Limpeza concluída com sucesso",
-
   "sync_success": "Sincronização bem-sucedida",
   "sync_error": "Erro de sincronização",
   "sync_completed": "Dados sincronizados",
-
   "backup_success": "Backup bem-sucedido",
   "backup_error": "Erro de backup",
   "backup_completed": "Backup concluído",
   "backup_restored": "Backup restaurado",
-
   "favorite_added": "Adicionado aos favoritos",
   "favorite_removed": "Removido dos favoritos",
   "favorite_error": "Erro de favorito",
   "favorite_limit_reached": "Limite de favoritos atingido",
   "favorite_premium_required": "Premium necessário para mais favoritos",
-
   "login_success": "Login bem-sucedido",
   "login_error": "Erro de login",
   "logout_success": "Logout bem-sucedido",
   "registration_success": "Registro bem-sucedido",
   "registration_error": "Erro de registro",
-
   "premium_activated": "Premium ativado",
   "premium_error": "Erro premium",
   "premium_expired": "Premium expirado",
-  "premium_required": "Premium necessário",
-
+  "premium_required": "Premium Necessário",
   "file_not_found": "Arquivo não encontrado",
   "file_corrupted": "Arquivo corrompido",
   "file_invalid": "Arquivo inválido",
   "file_too_large": "Arquivo muito grande",
-
   "network_error": "Erro de rede",
   "server_error": "Erro do servidor",
   "connection_failed": "Falha na conexão",
   "timeout_error": "Tempo limite excedido",
   "single_device_only": "Não autorizado. Faça login em apenas um dispositivo.",
-
   "permission_denied": "Permissão negada",
   "storage_full": "Armazenamento cheio",
   "invalid_format": "Formato inválido",
   "operation_cancelled": "Operação cancelada",
-
   "recitation_not_found": "Recitação não encontrada",
   "recitation_error": "Erro de recitação",
   "recitation_loading": "Carregando recitação",
-
   "adhan_not_found": "Adhan não encontrado",
   "adhan_error": "Erro de adhan",
   "adhan_loading": "Carregando adhan",
-
   "validation_email_required": "Por favor, digite seu email",
   "validation_password_required": "Por favor, digite sua senha",
   "validation_email_password_required": "Por favor, digite seu email e senha",
@@ -510,7 +493,6 @@
   "validation_firstname_required": "Por favor, digite seu primeiro nome ou apelido",
   "validation_firstname_too_short": "O primeiro nome ou apelido deve ter pelo menos 2 caracteres",
   "validation_firstname_too_long": "O primeiro nome ou apelido não pode exceder 30 caracteres",
-
   "help_firstname_title": "Primeiro nome ou apelido",
   "help_firstname_prefilled": "Este primeiro nome foi preenchido automaticamente das suas configurações. Você pode modificá-lo se desejar.",
   "help_firstname_empty": "Entre 2 e 30 caracteres. Você pode usar seu primeiro nome real ou um apelido.",
@@ -518,7 +500,6 @@
   "help_password_content": "Obrigatório: entre 6 e 50 caracteres.\nRecomendado: letras, números e caracteres especiais para mais segurança.",
   "help_email_title": "Email",
   "help_email_content": "Formato obrigatório: nome@email.com\nExemplo: usuario@gmail.com",
-
   "settings_screen": {
     "premium_adhans_title": "Adhans Premium",
     "no_premium_adhans": "Nenhum adhan premium detectado",
@@ -535,7 +516,6 @@
     "download_adhan_cancel": "Cancelar",
     "download_adhan_warning": "O download pode levar alguns minutos dependendo da sua conexão."
   },
-
   "favorites_screen": {
     "title": "Meus Favoritos",
     "all": "Todos",
@@ -553,8 +533,6 @@
     "share_error": "Erro ao compartilhar",
     "shared_from_app": "Compartilhado do Aplicativo de Horários de Orações"
   },
-  "favorite_added": "Adicionado aos favoritos",
-  "favorite_removed": "Removido dos favoritos",
   "asmaulhusna_search_placeholder": "Pesquisar por nome, significado ou transliteração...",
   "dhikr": {
     "title": "Adhkar & Duas",
@@ -640,9 +618,10 @@
   "maghrib": "Maghrib",
   "isha": "Isha",
   "next_prayer": "Próxima oração",
+  "daily_dhikr_title": "Dhikr do dia",
   "today_prayers": "Orações de hoje",
   "calculating_prayer_times": "Calculando horários das orações...",
-  "prayer_stats": "Estatísticas de oração",
+  "prayer_stats": "Estatísticas",
   "day_length": "Duração do dia",
   "fajr_to_sunrise": "Fajr ao nascer do sol",
   "sunset_to_isha": "Pôr do sol a Isha",
@@ -667,7 +646,6 @@
   "sunset_to_fajr": "Tempo entre pôr do sol e Fajr",
   "night_length": "Duração da noite",
   "time_until_sunset": "Tempo até o pôr do sol",
-
   "dashboard_welcome": "Assalamu Alaykum",
   "welcome_personalization_title": "Personalização de boas-vindas",
   "welcome_personalization_description": "Para oferecer uma experiência mais pessoal, você pode nos contar seu primeiro nome ou apelido?",
@@ -688,7 +666,6 @@
   "dashboard_dua_fallback": "Descobrir invocações diárias",
   "dashboard_verset_fallback": "Explorar o Santo Alcorão",
   "dashboard_names_fallback": "Asmaul Husna",
-
   "learn_to_pray": "Aprender a Rezar",
   "ablutions_wudu": "Abluções (Wudu)",
   "prayer_positions": "Posições de Oração",
@@ -698,7 +675,6 @@
   "important_duas": "Invocações Importantes",
   "images_coming_soon": "Imagens em breve",
   "learning_footer": "Esta seção ajuda você a aprender o básico da oração islâmica",
-
   "wudu_step_1": "Formular a intenção (Niyyah) de realizar as abluções",
   "wudu_invocation_arabic": "بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ",
   "wudu_invocation_phonetic": "Bismillah alrahman alrahim",
@@ -711,29 +687,24 @@
   "wudu_step_7": "Passar as mãos molhadas na cabeça da frente para trás",
   "wudu_step_8": "Passar os dedos molhados dentro e fora das orelhas",
   "wudu_step_9": "Lavar os pés até os tornozelos três vezes (direito depois esquerdo)",
-
   "prayer_step_1": "Qiyam: Ficar de pé voltado para a Qibla, mãos ao longo do corpo",
   "prayer_step_2": "Takbir: Levantar as mãos e dizer 'Allahu Akbar'",
   "prayer_step_3": "Ruku: Inclinar-se colocando as mãos nos joelhos",
   "prayer_step_4": "Sujud: Prostrar-se tocando o chão com a testa",
   "prayer_step_5": "Sujud: Prostrar-se e glorificar Allah",
-
   "opening_dua": "Invocação de Abertura",
   "opening_dua_translation": "Glória a Ti, ó Allah, e louvor a Ti. Bendito seja Teu nome e exaltada seja Tua majestade. Não há divindade exceto Tu.",
   "ruku_dua": "Invocação do Ruku",
   "ruku_dua_translation": "Glória ao meu Senhor, o Maior",
   "sujud_dua": "Invocação do Sujud",
   "sujud_dua_translation": "Glória ao meu Senhor, o Altíssimo",
-
   "voir_plus": "Ver mais",
   "hadith_du_jour": "Hadith do dia",
-
   "asmaulhusna": {
     "title": "Os 99 Nomes de Allah",
     "subtitle": "Descubra os nomes mais belos de Allah e seus significados",
     "search_placeholder": "Pesquisar por um nome..."
   },
-
   "location_permission_denied": "Permissão de localização negada",
   "location_permission_needed_for_mosques": "A localização é necessária para encontrar mesquitas próximas",
   "location_required_for_mosques": "A localização é necessária para exibir mesquitas próximas",
@@ -748,7 +719,6 @@
   "directions": "Direções",
   "call": "Ligar",
   "more_info": "Mais informações",
-
   "tasbih": {
     "title": "Tasbih",
     "reset": "Reiniciar",
@@ -790,15 +760,10 @@
   "become_premium": "Become Premium",
   "buy_premium": "Become Premium",
   "premium_benefits": "Unlock all premium features: unlimited favorites, cloud backup, exclusive sounds...",
-  "premium_required": "Premium required",
   "download": "Download",
-  "download_completed": "Download completed",
-  "download_failed": "Download failed",
-  "download_cancelled": "Download cancelled",
   "offline": "Offline",
   "downloaded_locally": "Downloaded locally",
   "download_started": "Download started",
-  "download_error": "Download error",
   "download_unavailable": "Download unavailable",
   "recitation_premium_only": "Recitations are reserved for premium users",
   "adhan_premium_only": "Premium adhans are reserved for premium users",
@@ -806,8 +771,6 @@
   "clean": "Clean",
   "adhan_volume": "Adhan volume",
   "no_files_to_clean": "No files to clean",
-  "cleanup_error": "Unable to clean folder",
-  "cleanup_success": "Cleanup completed",
   "choose_reciter": "Choose a reciter",
   "previous": "Previous",
   "next": "Next",
@@ -818,13 +781,13 @@
   "surah": "Surah",
   "download_progress": "Downloading...",
   "delete_download_title": "Delete download",
-  "delete_download_message": "Do you want to delete \"{title}\" from this device? You can still listen to it via streaming.",
+  "delete_download_message": "Do you want to delete \"{{title}}\" from this device? You can still listen to it via streaming.",
   "delete": "Delete",
   "download_deleted": "Download deleted",
-  "download_deleted_message": "{title} deleted from this device",
+  "download_deleted_message": "{{title}} deleted from this device",
   "error_deleting_download": "Unable to delete download",
   "error_deleting": "Error deleting",
-  "download_started_message": "{title} is downloading",
+  "download_started_message": "{{title}} is downloading",
   "download_completed_title": "🎉 Download completed",
   "finalization_error": "Problem during download finalization",
   "playback_error": "Playback error",
@@ -833,14 +796,12 @@
   "streaming_status": "Streaming",
   "remove": "Remove",
   "clear_all": "Clear all",
-  "premium_active": "Premium Active",
   "premium_status_description": "Your premium subscription is active. Enjoy all exclusive features!",
   "refresh_location": "Refresh location",
   "position_detected": "Position detected:",
   "location_detected": "Location detected",
   "sound_and_adhan": "Sound and Adhan",
   "adhan_settings": "Sound and Adhan",
-  "premium_status": "Premium Status",
   "mosque_screen": {
     "location_not_available": "Localização não disponível",
     "no_phone_available": "Número de telefone não disponível",
@@ -910,14 +871,13 @@
   "auto_backup_disabled_message": "Backup automático desativado",
   "auto_backup_premium_required": "Premium necessário",
   "auto_backup_premium_message": "Backup automático é reservado para usuários premium",
-  "backup_restore": "Backup",
+  "backup_restore": "Backup e Restauração",
   "backup": "Backup",
   "dark_mode": "Escuro",
   "light_mode": "Claro",
   "morning_mode": "Manhã",
   "sunset_mode": "Pôr do sol",
   "theme": "Tema",
-  "premium_required": "Premium Necessário",
   "premium_themes_message": "Os temas Manhã e Pôr do sol são reservados para membros Premium.",
   "go_premium": "Ir para Premium",
   "excellent_consistency": "Excelente consistência!",
@@ -939,7 +899,6 @@
   "share_error": "Erro ao compartilhar",
   "export_data": "Exportar dados",
   "share_complete_stats_question": "Você quer compartilhar suas estatísticas completas?",
-  "cancel": "Cancelar",
   "share": "Compartilhar",
   "profile_regular": "Oração Regular",
   "profile_regular_desc": "Consistência exemplar",
@@ -1078,6 +1037,21 @@
   "hadith_navigation": "Navegação de Hadith",
   "page": "Página",
   "stats_appear_after_first_prayers": "Suas estatísticas aparecerão após suas primeiras orações",
+  "stats_screen_title": "Minhas orações",
+  "stats_tab_today": "Hoje",
+  "stats_tab_journey": "Jornada",
+  "stats_today_title": "Hoje",
+  "stats_prayers_today": "{{count}} de 5",
+  "stats_mark_prayed": "Rezei",
+  "stats_unmark_prayed": "Desfazer",
+  "stats_day_complete_title": "Dia completo!",
+  "stats_day_complete_message": "Masha'Allah, as 5 orações foram realizadas. Que Allah as aceite.",
+  "stats_next_prayer_hint": "Próximo passo: {{prayer}}",
+  "stats_progress_footer": "{{percent}}% do dia concluído",
+  "stats_heatmap_title": "Regularidade",
+  "stats_heatmap_subtitle": "Seus últimos {{days}} dias",
+  "stats_other_actions_title": "Outras ações",
+  "stats_other_actions_subtitle": "Dhikr, Corão e hadiths com um toque",
   "connection_interrupted": "Conexão interrompida",
   "offline_mode_stats": "Modo offline - Conecte-se para sincronizar suas estatísticas",
   "pending_sync_actions": "{{count}} ações aguardando sincronização",
@@ -1090,7 +1064,6 @@
   "goals_overview": "Visão Geral dos Objetivos",
   "offline_message_quran": "É necessária uma conexão com a internet para acessar o Alcorão. Por favor, conecte-se ou atualize para Premium para acesso offline completo.",
   "offline_title": "Modo Offline",
-  "retry": "Tentar novamente",
   "offline_mode": "Modo Offline",
   "online_mode": "Modo Online",
   "downloaded_audio": "Áudio Baixado",
@@ -1101,7 +1074,6 @@
   "switch_to_offline": "Alternar para modo offline",
   "switch_to_online": "Alternar para modo online",
   "offline_access_premium": "Acesso offline disponível com Premium",
-  "connection_required": "Conexão necessária",
   "audio_offline_only": "Apenas reprodução de áudio offline",
   "background_audio_enabled": "Áudio em segundo plano ativado",
   "audio_list_placeholder": "A lista de arquivos de áudio baixados será exibida aqui",
@@ -1141,7 +1113,6 @@
   "notification_stopped_3": "🌟 Você já teve sucesso antes, pode fazer novamente!",
   "badges_collection": "🏅 Coleção de medalhas",
   "last_updated": "Última atualização",
-  "offline_mode": "Modo offline",
   "checking_connection": "Verificando...",
   "offline_manager": "Offline",
   "back_online": "Online",
@@ -1152,22 +1123,10 @@
   "back": "Voltar",
   "play_all": "Reproduzir tudo",
   "stop_playlist": "Parar",
-
   "success": "Sucesso",
-  "error": "Erro",
-  "download": {
-    "completed": "Download concluído",
-    "failed": "Download falhou",
-    "cancelled": "Download cancelado",
-    "added_to_list": "✅ Adicionado à lista: {{title}}",
-    "item_downloaded": "✅ {{item}} baixado",
-    "failed_message": "Download falhou",
-    "cancelled_message": "Download foi interrompido"
-  },
   "errors": {
     "unknown_error": "Ocorreu um erro desconhecido",
     "unexpected_error": "Ocorreu um erro inesperado",
-
     "authentication": {
       "title": "Erro de autenticação",
       "invalid_credentials": "Senha ou email incorretos",
@@ -1175,7 +1134,6 @@
       "session_expired": "Sua sessão expirou, faça login novamente",
       "access_denied": "Acesso negado"
     },
-
     "validation": {
       "title": "Erro de validação",
       "email_required": "Endereço de email é obrigatório",
@@ -1187,24 +1145,20 @@
       "invalid_data": "Os dados enviados são inválidos",
       "same_password": "A nova senha não pode ser idêntica à antiga"
     },
-
     "registration": {
       "title": "Erro de registro",
       "account_already_exists": "Uma conta já existe com este email"
     },
-
     "network": {
       "title": "Erro de rede",
       "connection_error": "Erro de conexão de rede, verifique sua conexão com a internet",
       "timeout": "Tempo limite excedido, tente novamente"
     },
-
     "server": {
       "title": "Erro do servidor",
       "server_error": "Erro do servidor, tente novamente mais tarde",
       "service_unavailable": "Serviço temporariamente indisponível"
     },
-
     "technical": {
       "title": "Erro técnico",
       "communication_error": "Erro de comunicação com o servidor",
@@ -1213,7 +1167,6 @@
       "subscription_error": "Erro ao gerenciar sua assinatura",
       "payment_error": "Erro ao processar pagamento"
     },
-
     "http": {
       "400": "Os dados enviados são inválidos",
       "401": "Senha ou email incorretos",
@@ -1223,76 +1176,8 @@
       "503": "Serviço temporariamente indisponível"
     }
   },
-
-  "qibla": {
-    "initializing_compass": "Inicializando bússola...",
-    "location_disabled": "Localização desativada",
-    "location_permission_required": "Permissão de localização necessária",
-    "location_enable_instructions": "Para usar a bússola da Qibla, ative a localização nas configurações do seu telefone.",
-    "location_allow_instructions": "Pressione \"Permitir\" e retorne ao aplicativo"
-  },
-
-  "premium": {
-    "ui": {
-      "signup_tab": "Criar conta Premium",
-      "login_tab": "Login"
-    },
-    "account_creation_required": "A criação de conta requer uma assinatura Premium. Sua conta será criada automaticamente após o pagamento.",
-    "already_subscribed": "Já assinado? Faça login com o mesmo email.",
-    "manage_account": "Gerenciar conta",
-    "account_management_redirect": "Vá para Sobre > Gerenciar conta por enquanto",
-    "first_name_or_username": "Primeiro nome ou nome de usuário",
-    "modify_prefilled_name": "Modificar primeiro nome pré-preenchido",
-    "field_details_instructions": "Clique nos ícones ℹ️ para ver detalhes de cada campo.",
-    "session_expired": "Sessão expirada",
-    "logout_success": "Você foi desconectado com sucesso",
-    "logout_error": "Erro durante o logout",
-    "profile_updated": "Perfil atualizado",
-    "profile_update_success": "Suas informações foram salvas com sucesso",
-    "no_subscription_found": "Nenhuma assinatura encontrada para sua conta",
-    "session_creation_error": "Erro ao criar sessão",
-    "not_defined": "Não definido",
-    "subscription_type_undefined": "Tipo indefinido",
-    "feature_development": "Recurso em desenvolvimento",
-    "no_account_associated": "Nenhuma conta premium está associada a este dispositivo. Crie uma conta ou compre o premium.",
-    "feature_locked": "🔒 Recurso Premium",
-    "feature_premium_only": "Este recurso está disponível apenas para usuários premium.",
-    "promotion": {
-      "feature_title": "Recurso Premium",
-      "unlock_feature": "Desbloqueie este recurso com Premium",
-      "upgrade": "Atualizar",
-      "title": "Passe para Premium",
-      "message": "Desbloqueie todas as funcionalidades avançadas",
-      "detailed_stats": "Estatísticas detalhadas",
-      "exclusive_themes": "Temas exclusivos",
-      "unlimited_favorites": "Favoritos ilimitados"
-    },
-    "expired_title": "Assinatura expirada",
-    "expired_message": "Sua assinatura premium expirou. Renove para continuar aproveitando os recursos premium.",
-    "expiring_soon_title": "Assinatura expirando em breve",
-    "expiring_soon_message": "Sua assinatura expira em {{days}} dia(s). Lembre-se de renová-la!",
-    "renewed_title": "Assinatura renovada",
-    "renewed_message": "Sua assinatura premium foi renovada automaticamente até {{date}}"
-  },
-
-  "account": {
-    "first_name_placeholder": "Seu primeiro nome",
-    "not_defined": "Não definido",
-    "subscription_type_undefined": "Tipo indefinido"
-  },
-
-  "backup": {
-    "backup_confirm": "Você quer fazer backup dos seus dados na nuvem?",
-    "restore_confirm": "Você quer restaurar seus dados da nuvem? Isso substituirá seus dados atuais.",
-    "restart_required": "Reinicialização necessária",
-    "restore_success_message": "Seus dados foram restaurados com sucesso. Para ver todas as alterações, feche completamente o aplicativo e reabra-o.",
-    "not_connected": "Não conectado",
-    "last_backup": "Último backup",
-    "cloud_data": "Dados na nuvem",
-    "refresh_cloud_confirm": "Você quer atualizar os dados da nuvem?",
-    "sync_success": "Sincronização bem-sucedida"
-  },
-
+  "premium": "Premium",
+  "account": "Conta",
   "password": {
     "change_modal": {
       "password_criteria": "A nova senha deve conter pelo menos 8 caracteres, uma maiúscula, uma minúscula, um número e um caractere especial",
@@ -1329,37 +1214,6 @@
     "continue": "Continuar",
     "change": "Alterar"
   },
-
-  "settings": {
-    "screen": {
-      "download_adhan_title": "Baixar adhan",
-      "download_adhan_message": "Você quer baixar",
-      "download_adhan_confirm": "Baixar"
-    },
-    "title": "Configurações",
-    "theme": "Tema",
-    "about": "Sobre",
-    "developer": "Desenvolvedor",
-    "last_update": "Última atualização",
-    "app_description": "Esta aplicação é desenvolvida com amor para a comunidade muçulmana.",
-    "faq_text": "Perguntas frequentes",
-    "notifications_reprogrammed": "Notificações reprogramadas",
-    "notifications_new_settings": "Suas novas configurações serão levadas em conta para as próximas notificações.",
-    "premium_access": "Acesso premium",
-    "success": "Sucesso",
-    "adhan_list_updated": "Lista de adhan atualizada",
-    "download_completed": "Download concluído",
-    "download_failed": "Download falhou",
-    "download_failed_message": "Download falhou",
-    "download_cancelled": "Download cancelado",
-    "download_cancelled_message": "Download foi interrompido",
-    "delete_all_adhans": "Excluindo todos os adhans baixados...",
-    "no_downloaded_files": "Nenhum arquivo baixado encontrado",
-    "cleanup_completed": "Limpeza concluída",
-    "analyzing_files": "Analisando arquivos baixados...",
-    "diagnostic_completed": "Diagnóstico concluído"
-  },
-
   "adhans": {
     "preview_limited": "Visualização limitada a 20 segundos",
     "download_time_warning": "O download pode levar alguns minutos dependendo da sua conexão.",
@@ -1369,24 +1223,11 @@
     "download_title": "Baixar adhan",
     "download_message": "Você quer baixar"
   },
-
   "general": {
     "settings": "Configurações gerais",
     "prayer_reminders_before": "Lembretes de oração antes",
     "reminder_offset_minutes": "Atraso (minutos)"
   },
-
-  "location": {
-    "method": "Método de localização",
-    "updating": "Atualizando...",
-    "detected": "Localização detectada"
-  },
-
-  "home": {
-    "go_to_settings": "Ir para configurações",
-    "notifications_disabled_message": "Você deve permitir notificações para receber lembretes de oração e dhikr."
-  },
-
   "stats": {
     "improvement_opportunity": "Oportunidade de melhoria",
     "start_habit_advice": "Comece com 1 oração por dia para construir o hábito.",
@@ -1446,15 +1287,28 @@
     "time_window": "Janela",
     "goal_soon_customizable": "Sua meta será personalizável em breve!",
     "weekly_goal_desc": "Número de orações visadas por semana",
-
     "quran_widget_available": "Widget disponível na sua tela inicial",
     "quran_widget_add": "Adicionar widget à sua tela inicial",
     "quran_widget_active": "Ativo",
     "quran_widget_inactive": "Inativo",
     "quran_widget_title": "Widget Alcorão Premium",
-    "quran_widget_description": "Controle a reprodução do Alcorão da sua tela inicial"
+    "quran_widget_description": "Controle a reprodução do Alcorão da sua tela inicial",
+    "screen_title": "Minhas orações",
+    "tab_today": "Hoje",
+    "tab_journey": "Jornada",
+    "today_title": "Hoje",
+    "prayers_today": "{{count}} de 5",
+    "mark_prayed": "Rezei",
+    "unmark_prayed": "Desfazer",
+    "day_complete_title": "Dia completo!",
+    "day_complete_message": "Masha'Allah, as 5 orações foram realizadas. Que Allah as aceite.",
+    "next_prayer_hint": "Próximo passo: {{prayer}}",
+    "progress_footer": "{{percent}}% do dia concluído",
+    "heatmap_title": "Regularidade",
+    "heatmap_subtitle": "Seus últimos {{days}} dias",
+    "other_actions_title": "Outras ações",
+    "other_actions_subtitle": "Dhikr, Corão e hadiths com um toque"
   },
-
   "premium_ui": {
     "badge": "Premium",
     "signup_tab": "Criar conta Premium",
@@ -1462,7 +1316,6 @@
     "signup_info_line1": "A criação da conta requer uma assinatura Premium. Sua conta será criada automaticamente após o pagamento.",
     "signup_info_line2": "Já assinado? Entre com o mesmo email."
   },
-
   "auth_modal": {
     "title": "Conta Premium",
     "signup_tab": "Criar conta",
@@ -1486,13 +1339,6 @@
     "password_criteria_title": "Critérios de segurança",
     "password_min_length": "Pelo menos 6 caracteres"
   },
-
-  "location": "Localização",
-  "backup": "Backup",
-  "download": "Download",
-  "qibla": "Qibla",
-  "favorites": "Favoritos",
-  "settings": "Configurações",
   "languages": {
     "fr": "Français",
     "en": "English",
@@ -1508,7 +1354,6 @@
     "fa": "فارسی",
     "nl": "Nederlands"
   },
-
   "quran_navigation_modal": {
     "title": "🎯 Navegação",
     "swipe_instruction": "Deslize para alterar a exibição",
@@ -1516,18 +1361,15 @@
     "play_instruction": "Play inicia o áudio exibido",
     "close_button": "Entendi!"
   },
-
   "mosques_finder": "Localizador Inteligente de Mesquitas",
   "native_downloads": "Downloads Nativos",
   "android_widgets": "Widgets Android",
   "lock_screen_player": "Reprodutor de Tela de Bloqueio",
   "tactile_controls": "Controles Táteis",
-  "backup_restore": "Backup e Restauração",
   "data_deletion_label": "Exclusão de Dados",
   "stripe_payments": "Pagamentos Stripe",
   "user_accounts": "Contas de Usuário",
   "13_languages": "13 Idiomas Suportados",
-  "offline_mode": "Modo Offline",
   "local_storage": "Armazenamento Local",
   "new_features_title": "Novas Funcionalidades",
   "new_features_subtitle": "Descubra as últimas melhorias",
@@ -1567,7 +1409,6 @@
   "toast_premium_required": "Premium necessário",
   "toast_download_error": "Erro de download",
   "toast_download_failed": "Download falhou",
-  "toast_download_success": "Sucesso",
   "toast_recitation_loading": "Carregando recitação",
   "toast_validation_email_required": "Por favor, insira seu email",
   "toast_validation_password_required": "Por favor, insira sua senha",
@@ -1596,11 +1437,6 @@
   "toast_cleanup_updating_title": "Atualizando...",
   "toast_cleanup_updating_message": "Atualização da lista em progresso",
   "toast_cleanup_completed_detailed_message": "{{count}} arquivos deletados ({{size}} MB liberados)",
-  "toast_diagnostic_started_title": "Diagnóstico em andamento...",
-  "toast_diagnostic_started_message": "Analisando arquivos baixados...",
-  "toast_diagnostic_completed_title": "Diagnóstico concluído",
-  "toast_diagnostic_error_title": "Erro de diagnóstico",
-  "toast_diagnostic_error_message": "Não é possível diagnosticar os arquivos",
   "toast_configuration_unavailable": "Configuração não disponível",
   "toast_apply_changes_error": "Não é possível aplicar as alterações",
   "toast_local_playback": "Reprodução local",
@@ -1616,33 +1452,25 @@
   "toast_auto_fix_error_message": "Não é possível aplicar as correções automáticas",
   "toast_payment_success_title": "Pagamento Bem-sucedido!",
   "toast_payment_success_message": "Sua assinatura {{subscriptionName}} está agora ativa.",
-
   "library": "Biblioteca",
   "islamic_knowledge": "Recursos espirituais",
   "read_listen": "Ler e ouvir",
   "saved_content": "Conteúdo salvo",
   "prophetic_biography": "Biografia profética",
-  "prophet_stories": "Histórias dos Profetas ﷺ",
   "prophetic_traditions": "Tradições proféticas",
   "invocations": "Invocações",
   "99_names": "99 nomes de Allah",
   "library_info": "Acesse todos os recursos espirituais em um só lugar",
-  
   "more": "Mais",
   "additional_features": "Recursos adicionais",
   "tools": "Ferramentas",
   "find_nearby": "Encontrar por perto",
   "digital_counter": "Contador digital",
   "islamic_dates": "Datas islâmicas",
-  "premium": "Premium",
-  "prayer_stats": "Estatísticas",
   "track_prayers": "Acompanhe suas orações",
-  "account": "Conta",
   "app_preferences": "Preferências do aplicativo",
   "app_info": "Informações do aplicativo",
   "asmaul_husna": "Asmaul Husna",
-  "hijri_calendar": "Calendário Hijri",
-  
   "background_image_type": "Tipo de imagem de fundo",
   "background_prophet": "🕌 Mesquita do Profeta",
   "background_makka": "🕋 Meca",

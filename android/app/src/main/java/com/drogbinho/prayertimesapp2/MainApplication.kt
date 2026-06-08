@@ -20,6 +20,7 @@ import com.drogbinho.prayertimesapp2.DownloadPackage // Ajoute cette importation
 import com.drogbinho.prayertimesapp2.QuranWidgetPackage // Ajoute cette importation
 import com.drogbinho.prayertimesapp2.QuranAudioServicePackage // Ajoute cette importation
 import com.drogbinho.prayertimesapp2.QuranSyncPackage // Ajoute cette importation
+import com.drogbinho.prayertimesapp2.RotationCompassPackage
 
 
 class MainApplication : Application(), ReactApplication {
@@ -36,6 +37,7 @@ class MainApplication : Application(), ReactApplication {
                 packages.add(QuranWidgetPackage()) //
                 packages.add(QuranAudioServicePackage()) //
                 packages.add(QuranSyncPackage()) //
+                packages.add(RotationCompassPackage())
             return packages
           }
 

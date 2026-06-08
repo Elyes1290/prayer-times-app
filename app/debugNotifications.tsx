@@ -20,6 +20,23 @@ import { usePremium } from "../contexts/PremiumContext";
 
 type DebugLogLine = { id: string; text: string };
 
+const getStatusLabel = (status: number) => {
+  switch (status) {
+    case 0:
+      return "Not Determined (0)";
+    case 1:
+      return "Denied (1) ❌";
+    case 2:
+      return "Authorized (2) ✅";
+    default:
+      return `Inconnu (${status})`;
+  }
+};
+
+const testNotification = async () => {
+  /* ... */
+};
+
 export default function DebugNotificationsScreen() {
   const { replace } = useRouter();
   // 🚧 Page complètement désactivée
@@ -441,9 +458,6 @@ export default function DebugNotificationsScreen() {
     }
   };
 
-  const testNotification = async () => {
-    /* ... */
-  };
   const testAdhan = async () => {
     try {
       addLog("═══════════════════════════════════════");
@@ -521,19 +535,6 @@ export default function DebugNotificationsScreen() {
   }, [fetchDebugInfo, loadBackgroundLogs, loadPlaybackLogs]);
 
   if (!isDebugAllowed) return null;
-
-  const getStatusLabel = (status: number) => {
-    switch (status) {
-      case 0:
-        return "Not Determined (0)";
-      case 1:
-        return "Denied (1) ❌";
-      case 2:
-        return "Authorized (2) ✅";
-      default:
-        return `Inconnu (${status})`;
-    }
-  };
 
   return (
     <View style={styles.container}>

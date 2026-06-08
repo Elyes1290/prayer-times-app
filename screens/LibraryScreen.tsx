@@ -10,7 +10,7 @@ import {
   StatusBar,
 } from "react-native";
 import { useRouter } from "expo-router";
-import { LinearGradient } from "expo-linear-gradient";
+import { LinearGradient } from "@/components/ui/LinearGradientView";
 import ThemedImageBackground from "../components/ThemedImageBackground";
 import {
   useThemeColors,

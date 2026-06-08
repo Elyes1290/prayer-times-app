@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import {
   View,
   Text,
@@ -116,21 +116,21 @@ export const BadgesManager: React.FC<BadgesManagerProps> = ({
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [selectedBadge, setSelectedBadge] = useState<Badge | null>(null);
   const [modalVisible, setModalVisible] = useState(false);
-  const [unlockedBadges, setUnlockedBadges] = useState<Badge[]>([]);
+  const unlockedBadges = useMemo(
+    () => system.getUnlockedBadges(userStats),
+    [userStats, system],
+  );
 
+  const notifiedBadgeCodesRef = useRef<Set<string>>(new Set());
   useEffect(() => {
-    // Calculer les badges débloqués
-    const unlocked = system.getUnlockedBadges(userStats);
-    setUnlockedBadges(unlocked);
-
-    // Notifier les nouveaux badges débloqués
-    if (onBadgeUnlocked) {
-      unlocked.forEach((badge) => {
-        // Vérifier si c'est un nouveau badge (logique à adapter)
+    if (!onBadgeUnlocked) return;
+    for (const badge of unlockedBadges) {
+      if (!notifiedBadgeCodesRef.current.has(badge.code)) {
+        notifiedBadgeCodesRef.current.add(badge.code);
         onBadgeUnlocked(badge);
-      });
+      }
     }
-  }, [userStats, system, onBadgeUnlocked]);
+  }, [unlockedBadges, onBadgeUnlocked]);
 
   const categories = getCategories();
   const allBadges = getAllBadges();

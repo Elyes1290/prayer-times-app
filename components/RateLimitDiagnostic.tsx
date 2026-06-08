@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
   View,
   Text,
@@ -24,7 +24,7 @@ const RateLimitDiagnostic: React.FC = () => {
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [isTesting, setIsTesting] = useState(false);
 
-  const refreshStatus = async () => {
+  const refreshStatus = useCallback(async () => {
     setIsRefreshing(true);
     try {
       const [
@@ -58,7 +58,7 @@ const RateLimitDiagnostic: React.FC = () => {
     } finally {
       setIsRefreshing(false);
     }
-  };
+  }, []);
 
   const testApiConnection = async () => {
     setIsTesting(true);
@@ -123,8 +123,8 @@ const RateLimitDiagnostic: React.FC = () => {
   };
 
   useEffect(() => {
-    refreshStatus();
-  }, []);
+    void refreshStatus();
+  }, [refreshStatus]);
 
   if (!status) {
     return (

@@ -3,16 +3,13 @@ import apiClient from "./apiClient";
 import SyncManager from "./syncManager";
 
 import RNFS from "react-native-fs";
-import { Platform } from "react-native";
+import { NativeModules, Platform } from "react-native";
 import { debugLog, errorLog } from "./logger";
 import AudioStreamingManager from "./audioStreaming";
 import CDNOptimizer from "./cdnOptimization";
 import CustomServerManager from "./customServerManager";
 import nativeDownloadManager, { DownloadInfo } from "./nativeDownloadManager";
-import {
-  LocalStorageManager,
-  PREMIUM_STORAGE_KEYS,
-} from "./localStorageManager";
+import { LocalStorageManager } from "./localStorageManager";
 import { AppConfig } from "./config";
 
 // Types de contenu premium
@@ -1197,7 +1194,7 @@ class PremiumContentManager {
             debugLog(`🔗 Nouvelle URL cible: ${finalUrl}`);
           }
         }
-      } catch (e) {
+      } catch {
         debugLog(
           "⚠️ Impossible de vérifier le type de contenu avant téléchargement, utilisation URL directe",
         );
@@ -1273,7 +1270,7 @@ class PremiumContentManager {
               await RNFS.unlink(downloadPath);
               return false;
             }
-          } catch (hErr) {
+          } catch {
             debugLog("⚠️ Impossible de lire le header ou la taille");
           }
 
@@ -1341,7 +1338,6 @@ class PremiumContentManager {
 
       // 🔧 AUSSI sauvegarder dans SharedPreferences accessibles depuis Android
       if (Platform.OS === "android") {
-        const { NativeModules } = require("react-native");
         const { AdhanModule } = NativeModules;
 
         if (AdhanModule && AdhanModule.savePremiumContentData) {
@@ -1354,7 +1350,7 @@ class PremiumContentManager {
                 variants.length
               } variantes: ${variants.join(", ")})`,
             );
-          } catch (error) {
+          } catch {
             debugLog("❌ Erreur sauvegarde Android, mais AsyncStorage OK");
           }
         }
@@ -1973,7 +1969,6 @@ class PremiumContentManager {
 
           // 🔧 AUSSI sauvegarder dans SharedPreferences accessibles depuis Android
           if (Platform.OS === "android") {
-            const { NativeModules } = require("react-native");
             const { AdhanModule } = NativeModules;
 
             if (AdhanModule && AdhanModule.savePremiumContentData) {
@@ -1982,8 +1977,8 @@ class PremiumContentManager {
                   JSON.stringify(downloaded),
                 );
                 debugLog("✅ Données premium synchronisées pour Android");
-              } catch (error) {
-                debugLog("❌ Erreur sauvegarde Android:", error);
+              } catch (syncAndroidError) {
+                debugLog("❌ Erreur sauvegarde Android:", syncAndroidError);
               }
             }
           }
@@ -2190,7 +2185,7 @@ class PremiumContentManager {
             debugLog(`🌐 Récitateur Infomaniak: ${reciterName}`);
           }
         }
-      } catch (error) {
+      } catch {
         debugLog(
           "⚠️ Erreur API Infomaniak, utilisation des récitateurs locaux uniquement",
         );
@@ -2203,7 +2198,7 @@ class PremiumContentManager {
           reciterNames.add(reciterName);
           debugLog(`📁 Récitateur local: ${reciterName}`);
         }
-      } catch (error) {
+      } catch {
         debugLog("⚠️ Erreur scan récitateurs locaux");
       }
 
@@ -2401,7 +2396,7 @@ class PremiumContentManager {
 
           debugLog(`🎵 ${adhans.length} adhans traités en parallèle`);
         }
-      } catch (error) {
+      } catch {
         debugLog("⚠️ Erreur API Infomaniak pour les adhans");
       }
 
@@ -2831,9 +2826,6 @@ class PremiumContentManager {
     try {
       debugLog(`🎵 Streaming progressif pour: ${content.title}`);
 
-      // Ajuster la qualité selon la connexion et les préférences
-      const optimalQuality = this.determineOptimalQuality(userPreferences);
-
       // 🚀 NOUVEAU : Utiliser l'URL optimale (Serveur Personnel → Infomaniak)
       const optimalUrl = await this.getOptimalAudioUrl(content);
       if (!optimalUrl) {
@@ -3195,7 +3187,7 @@ class PremiumContentManager {
         try {
           await RNFS.mkdir(reciterFolder);
           debugLog(`📁 Dossier récitateur créé: ${reciterFolder}`);
-        } catch (mkdirError) {
+        } catch {
           // Le dossier existe déjà, c'est normal
           debugLog(`📁 Dossier récitateur existe déjà: ${reciterFolder}`);
         }
@@ -4226,7 +4218,7 @@ class PremiumContentManager {
     details: {
       cacheClearedItems: string[];
       newAdhanCount: number;
-      adhanWithSizes: Array<{ name: string; size: number }>;
+      adhanWithSizes: { name: string; size: number }[];
     };
   }> {
     try {

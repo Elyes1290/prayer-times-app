@@ -8,7 +8,6 @@ import {
   ActivityIndicator,
   Alert,
   StyleSheet,
-  Animated,
   ScrollView,
   KeyboardAvoidingView,
   Platform,
@@ -18,8 +17,14 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import apiClient from "../utils/apiClient";
 import { IapService } from "../utils/iapService";
 import { usePremium } from "../contexts/PremiumContext";
-import { LinearGradient } from "expo-linear-gradient";
+import { LinearGradient } from "@/components/ui/LinearGradientView";
 import { useErrorHandler } from "../utils/errorHandler";
+import Animated, {
+  runOnJS,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from "react-native-reanimated";
 
 interface PremiumLoginSectionProps {
   activatePremium: (
@@ -42,6 +47,67 @@ interface PremiumLoginSectionProps {
   initialTab?: "login" | "signup";
   // 🆕 NOUVEAU : Fermer la modal après inscription réussie
   onCloseModal?: () => void;
+}
+
+function validateEmail(email: string) {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email.trim());
+}
+
+function validatePassword(password: string) {
+  const trimmedPassword = password.trim();
+  return (
+    trimmedPassword.length >= 8 &&
+    /[a-z]/.test(trimmedPassword) &&
+    /[A-Z]/.test(trimmedPassword) &&
+    /\d/.test(trimmedPassword) &&
+    /[!@#$%^&*(),.?":{}|<>]/.test(trimmedPassword) &&
+    trimmedPassword.length <= 50
+  );
+}
+
+function isPasswordVisuallyValid(password: string) {
+  const trimmedPassword = password.trim();
+  return (
+    trimmedPassword.length >= 8 &&
+    /[a-z]/.test(trimmedPassword) &&
+    /[A-Z]/.test(trimmedPassword) &&
+    /\d/.test(trimmedPassword) &&
+    /[!@#$%^&*(),.?":{}|<>]/.test(trimmedPassword) &&
+    trimmedPassword.length <= 50
+  );
+}
+
+function getPasswordValidationDetails(password: string) {
+  const trimmedPassword = password.trim();
+  return {
+    length: trimmedPassword.length >= 8 && trimmedPassword.length <= 50,
+    hasLowercase: /[a-z]/.test(trimmedPassword),
+    hasUppercase: /[A-Z]/.test(trimmedPassword),
+    hasNumbers: /\d/.test(trimmedPassword),
+    hasSpecialChars: /[!@#$%^&*(),.?":{}|<>]/.test(trimmedPassword),
+    minLength: trimmedPassword.length >= 8,
+    maxLength: trimmedPassword.length <= 50,
+  };
+}
+
+function validateFirstName(firstName: string) {
+  return firstName.trim().length >= 2 && firstName.trim().length <= 30;
+}
+
+function getInputStyle(
+  value: string,
+  isValid: boolean,
+  validStyle: object,
+  invalidStyle: object
+) {
+  if (!value.trim()) return null;
+  return isValid ? validStyle : invalidStyle;
+}
+
+function getIconColor(value: string, isValid: boolean) {
+  if (!value.trim()) return "#666";
+  return isValid ? "#4CAF50" : "#F44336";
 }
 
 const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
@@ -71,8 +137,8 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
   const [userData, setUserData] = useState<any>(null);
   const [hasCheckedUser, setHasCheckedUser] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const [emailValid, setEmailValid] = useState(false);
-  const [firstNameValid, setFirstNameValid] = useState(false);
+  const emailValid = validateEmail(email);
+  const firstNameValid = validateFirstName(firstName);
   // Variables d'état pour la validation (supprimées car non utilisées actuellement)
 
   // 🚀 NOUVEAU : Toast local pour la modal
@@ -82,76 +148,17 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
     title: string;
     message: string;
   } | null>(null);
-  const toastTranslateY = useRef(new Animated.Value(-100)).current;
-  const toastOpacity = useRef(new Animated.Value(0)).current;
+  const toastTranslateY = useSharedValue(-100);
+  const toastOpacity = useSharedValue(0);
+
+  const toastAnimatedStyle = useAnimatedStyle(() => ({
+    transform: [{ translateY: toastTranslateY.value }],
+    opacity: toastOpacity.value,
+  }));
 
   // 🚀 SUPPRIMÉ : État ThemedAlert local - maintenant géré par le parent
 
   // 🚀 SUPPRIMÉ : État pour la modal de gestion de compte - maintenant Alert.alert
-
-  // 🚀 NOUVEAU : Validation en temps réel
-  const validateEmail = (email: string) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email.trim());
-  };
-
-  // 🚀 AMÉLIORÉ : Validation détaillée du mot de passe (alignée avec le serveur)
-  const validatePassword = (password: string) => {
-    const trimmedPassword = password.trim();
-    // Exigences : 8-50 caractères, minuscule, majuscule, chiffre, caractère spécial
-    return (
-      trimmedPassword.length >= 8 &&
-      /[a-z]/.test(trimmedPassword) &&
-      /[A-Z]/.test(trimmedPassword) &&
-      /\d/.test(trimmedPassword) &&
-      /[!@#$%^&*(),.?":{}|<>]/.test(trimmedPassword) &&
-      trimmedPassword.length <= 50
-    );
-  };
-
-  // 🚀 NOUVEAU : Validation visuelle pour l'affichage des indicateurs
-  const isPasswordVisuallyValid = (password: string) => {
-    const trimmedPassword = password.trim();
-    // Le mot de passe est visuellement valide seulement si TOUS les critères sont respectés
-    return (
-      trimmedPassword.length >= 8 &&
-      /[a-z]/.test(trimmedPassword) &&
-      /[A-Z]/.test(trimmedPassword) &&
-      /\d/.test(trimmedPassword) &&
-      /[!@#$%^&*(),.?":{}|<>]/.test(trimmedPassword) &&
-      trimmedPassword.length <= 50
-    );
-  };
-
-  // 🚀 NOUVEAU : Validation détaillée pour afficher les critères (alignée avec le serveur)
-  const getPasswordValidationDetails = (password: string) => {
-    const trimmedPassword = password.trim();
-    return {
-      length: trimmedPassword.length >= 8 && trimmedPassword.length <= 50,
-      hasLowercase: /[a-z]/.test(trimmedPassword),
-      hasUppercase: /[A-Z]/.test(trimmedPassword),
-      hasNumbers: /\d/.test(trimmedPassword),
-      hasSpecialChars: /[!@#$%^&*(),.?":{}|<>]/.test(trimmedPassword),
-      minLength: trimmedPassword.length >= 8,
-      maxLength: trimmedPassword.length <= 50,
-    };
-  };
-
-  const validateFirstName = (firstName: string) => {
-    return firstName.trim().length >= 2 && firstName.trim().length <= 30;
-  };
-
-  const getInputStyle = (value: string, isValid: boolean) => {
-    if (!value.trim()) return null; // Pas de style si vide
-    return isValid
-      ? localStyles.inputContainerValid
-      : localStyles.inputContainerInvalid;
-  };
-
-  const getIconColor = (value: string, isValid: boolean) => {
-    if (!value.trim()) return "#666"; // Gris par défaut
-    return isValid ? "#4CAF50" : "#F44336"; // Vert si valide, rouge si invalide
-  };
 
   // 🚀 NOUVEAU : Refs pour gérer le focus des champs
   const emailRef = useRef<TextInput>(null);
@@ -159,19 +166,11 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
   const firstNameRef = useRef<TextInput>(null);
 
   const hideLocalToast = useCallback(() => {
-    Animated.parallel([
-      Animated.timing(toastTranslateY, {
-        toValue: -100,
-        duration: 250,
-        useNativeDriver: true,
-      }),
-      Animated.timing(toastOpacity, {
-        toValue: 0,
-        duration: 250,
-        useNativeDriver: true,
-      }),
-    ]).start(() => {
-      setLocalToast(null);
+    toastTranslateY.value = withTiming(-100, { duration: 250 });
+    toastOpacity.value = withTiming(0, { duration: 250 }, (finished) => {
+      if (finished) {
+        runOnJS(setLocalToast)(null);
+      }
     });
   }, [toastTranslateY, toastOpacity]);
 
@@ -187,19 +186,8 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
         ...toast,
       });
 
-      // Animation d'entrée
-      Animated.parallel([
-        Animated.timing(toastTranslateY, {
-          toValue: 0,
-          duration: 300,
-          useNativeDriver: true,
-        }),
-        Animated.timing(toastOpacity, {
-          toValue: 1,
-          duration: 300,
-          useNativeDriver: true,
-        }),
-      ]).start();
+      toastTranslateY.value = withTiming(0, { duration: 300 });
+      toastOpacity.value = withTiming(1, { duration: 300 });
 
       // Auto-hide après 3 secondes
       setTimeout(() => {
@@ -327,26 +315,6 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
       }
     };
   }, [isConnected, onLoginSuccess]);
-
-  // 🚀 NOUVEAU : Mode professionnel - pas de chargement automatique du prénom
-  // L'utilisateur doit saisir son prénom manuellement à chaque fois
-  useEffect(() => {
-    console.log(
-      "🔍 [DEBUG] Mode professionnel - pas de chargement automatique du prénom"
-    );
-    // Pas de chargement automatique en mode professionnel
-  }, [isLogin]);
-
-  // 🚀 NOUVEAU : Validation en temps réel pour s'assurer que les états sont toujours à jour
-  useEffect(() => {
-    setEmailValid(validateEmail(email));
-  }, [email]);
-
-  // Pas de state dédié pour le mot de passe: validation calculée à l'affichage
-
-  useEffect(() => {
-    setFirstNameValid(validateFirstName(firstName));
-  }, [firstName]);
 
   // Synchroniser l'UI avec l'état global Premium (pour que la section se mette à jour automatiquement)
   useEffect(() => {
@@ -960,7 +928,12 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
           <View
             style={[
               localStyles.inputContainer,
-              getInputStyle(firstName, firstNameValid),
+              getInputStyle(
+                firstName,
+                firstNameValid,
+                localStyles.inputContainerValid,
+                localStyles.inputContainerInvalid
+              ),
             ]}
           >
             <MCIcon
@@ -1010,7 +983,15 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
         )}
 
         <View
-          style={[localStyles.inputContainer, getInputStyle(email, emailValid)]}
+          style={[
+            localStyles.inputContainer,
+            getInputStyle(
+              email,
+              emailValid,
+              localStyles.inputContainerValid,
+              localStyles.inputContainerInvalid
+            ),
+          ]}
         >
           <MCIcon
             name="email"
@@ -1057,7 +1038,12 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
         <View
           style={[
             localStyles.inputContainer,
-            getInputStyle(password, isPasswordVisuallyValid(password)),
+            getInputStyle(
+              password,
+              isPasswordVisuallyValid(password),
+              localStyles.inputContainerValid,
+              localStyles.inputContainerInvalid
+            ),
           ]}
         >
           <MCIcon
@@ -1308,15 +1294,7 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
 
         {/* 🚀 NOUVEAU : Toast local pour la modal */}
         {localToast && (
-          <Animated.View
-            style={[
-              localStyles.toastContainer,
-              {
-                transform: [{ translateY: toastTranslateY }],
-                opacity: toastOpacity,
-              },
-            ]}
-          >
+          <Animated.View style={[localStyles.toastContainer, toastAnimatedStyle]}>
             <Pressable onPress={hideLocalToast}>
               <LinearGradient
                 colors={

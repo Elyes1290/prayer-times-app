@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useMemo } from "react";
+import React, { useState, useRef, useCallback } from "react";
 import {
   View,
   Text,
@@ -6,13 +6,19 @@ import {
   FlatList,
   TextInput,
   Pressable,
-  Animated,
   ImageBackground,
-  LayoutChangeEvent,
 } from "react-native";
+import Animated, {
+  interpolate,
+  makeMutable,
+  runOnJS,
+  useAnimatedStyle,
+  type SharedValue,
+  withTiming,
+} from "react-native-reanimated";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useTranslation } from "react-i18next";
-import { LinearGradient } from "expo-linear-gradient";
+import { LinearGradient } from "@/components/ui/LinearGradientView";
 import { IonIcon } from "@/components/icons/AppVectorIcons";
 import ThemedImageBackground from "../components/ThemedImageBackground";
 import FavoriteButton from "../components/FavoriteButton";
@@ -49,12 +55,177 @@ function normalizeText(str: string) {
     .trim();
 }
 
+const expandAnimationsRef = { current: new Map<string, SharedValue<number>>() };
+
+const getExpandAnimation = (id: string): SharedValue<number> => {
+  let animation = expandAnimationsRef.current.get(id);
+  if (!animation) {
+    animation = makeMutable(0);
+    expandAnimationsRef.current.set(id, animation);
+  }
+  return animation;
+};
+
+function convertToFavorite(
+  cardItem: Nom
+): Omit<AsmaulHusnaFavorite, "id" | "dateAdded"> {
+  return {
+    type: "asmaul_husna",
+    number: cardItem.number,
+    arabicName: cardItem.arabic,
+    transliteration: cardItem.translit,
+    meaning: cardItem.meaning,
+    benefits: cardItem.benefits,
+    usage: cardItem.usage,
+  };
+}
+
+const NameCard = ({
+  item,
+  isExpanded,
+  onToggle,
+  tAsma,
+  i18n,
+}: {
+  item: Nom;
+  isExpanded: boolean;
+  onToggle: (id: string) => void;
+  tAsma: (key: string) => string;
+  i18n: { language: string };
+}) => {
+  const expandProgress = getExpandAnimation(item.key);
+  const animatedDetailsStyle = useAnimatedStyle(() => ({
+    maxHeight: interpolate(expandProgress.value, [0, 1], [0, 1200]),
+    overflow: "hidden" as const,
+  }));
+
+  return (
+    <View style={styles.card}>
+      <LinearGradient
+        colors={["rgba(255,255,255,0.1)", "rgba(255,255,255,0.05)"]}
+        style={styles.cardGradient}
+      >
+        <Pressable
+          style={styles.cardHeader}
+          onPress={() => onToggle(item.key)}
+        >
+          <View style={styles.cardTopRow}>
+            <View style={styles.numberContainer}>
+              <Text style={styles.number}>{item.number}</Text>
+            </View>
+
+            <View style={styles.cardActions}>
+              <FavoriteButton
+                favoriteData={convertToFavorite(item)}
+                size={22}
+                iconColor="rgba(255, 255, 255, 0.7)"
+                iconColorActive="#FFD700"
+                style={styles.favoriteButton}
+              />
+              <IonIcon
+                name={isExpanded ? "chevron-up" : "chevron-down"}
+                size={24}
+                color="#fff"
+                style={styles.expandIcon}
+              />
+            </View>
+          </View>
+          <View style={styles.arabicNameContainer}>
+            <Text style={styles.arabic}>{item.arabic}</Text>
+          </View>
+          {!i18n.language.startsWith("ar") && (
+            <View style={styles.nameDetailsContainer}>
+              <Text style={styles.translit}>{item.translit}</Text>
+              <Text style={styles.french}>{item.french}</Text>
+            </View>
+          )}
+        </Pressable>
+
+        <Animated.View style={[styles.cardDetails, animatedDetailsStyle]}>
+          <View style={styles.contentContainer}>
+            <View style={styles.section}>
+              <Text style={styles.sectionTitle}>
+                {tAsma("sections.meaning")}
+              </Text>
+              <Text style={styles.sectionText}>{item.meaning}</Text>
+            </View>
+            {item.occurrences && (
+              <View style={styles.section}>
+                <Text style={styles.sectionTitle}>
+                  {tAsma("sections.occurrences")}
+                </Text>
+                <Text style={styles.sectionText}>{item.occurrences}</Text>
+              </View>
+            )}
+            {item.benefits && (
+              <View style={styles.section}>
+                <Text style={styles.sectionTitle}>
+                  {tAsma("sections.benefits")}
+                </Text>
+                <Text style={styles.sectionText}>{item.benefits}</Text>
+              </View>
+            )}
+            {item.usage && (
+              <View style={styles.section}>
+                <Text style={styles.sectionTitle}>
+                  {tAsma("sections.usage")}
+                </Text>
+                <Text style={styles.sectionText}>{item.usage}</Text>
+              </View>
+            )}
+            {item.hadith && (
+              <View style={styles.section}>
+                <Text style={styles.sectionTitle}>
+                  {tAsma("sections.hadith")}
+                </Text>
+                <Text style={styles.sectionText}>{item.hadith}</Text>
+              </View>
+            )}
+            {item.details && (
+              <View style={styles.section}>
+                <Text style={styles.sectionTitle}>
+                  {tAsma("sections.details")}
+                </Text>
+                <Text style={styles.sectionText}>{item.details}</Text>
+              </View>
+            )}
+            {item.reference && (
+              <View style={styles.section}>
+                <Text style={styles.sectionTitle}>
+                  {tAsma("sections.reference")}
+                </Text>
+                <Text style={styles.sectionText}>{item.reference}</Text>
+              </View>
+            )}
+            {item.spiritual_effect && (
+              <View style={styles.section}>
+                <Text style={styles.sectionTitle}>
+                  {tAsma("sections.spiritual_effect")}
+                </Text>
+                <Text style={styles.sectionText}>{item.spiritual_effect}</Text>
+              </View>
+            )}
+            {item.citation && (
+              <View style={styles.section}>
+                <Text style={styles.sectionTitle}>
+                  {tAsma("sections.citation")}
+                </Text>
+                <Text style={styles.sectionText}>{item.citation}</Text>
+              </View>
+            )}
+          </View>
+        </Animated.View>
+      </LinearGradient>
+    </View>
+  );
+};
+
 const AsmaulHusnaScreen = () => {
   const { t: tAsma, i18n } = useTranslation("asmaulhusna");
   const insets = useSafeAreaInsets();
   const [searchQuery, setSearchQuery] = useState("");
   const [expandedId, setExpandedId] = useState<string | null>(null);
-  const [animations] = useState(new Map());
+  const expandedIdRef = useRef<string | null>(null);
 
   const filteredNames = Array.from({ length: 99 }, (_, i) => {
     const num = i + 1;
@@ -84,183 +255,47 @@ const AsmaulHusnaScreen = () => {
     );
   });
 
-  // Fonction pour convertir un Nom en AsmaulHusnaFavorite
-  const convertToFavorite = (
-    item: Nom
-  ): Omit<AsmaulHusnaFavorite, "id" | "dateAdded"> => ({
-    type: "asmaul_husna",
-    number: item.number,
-    arabicName: item.arabic,
-    transliteration: item.translit,
-    meaning: item.meaning,
-    benefits: item.benefits,
-    usage: item.usage,
-  });
+  const clearExpandedId = useCallback(() => {
+    expandedIdRef.current = null;
+    setExpandedId(null);
+  }, []);
 
-  const toggleExpand = (id: string) => {
-    if (!animations.has(id)) {
-      animations.set(id, new Animated.Value(0));
-    }
-    const animation = animations.get(id);
+  const toggleExpand = useCallback(
+    (id: string) => {
+      const animation = getExpandAnimation(id);
 
-    if (expandedId === id) {
-      // Animation de fermeture
-      Animated.timing(animation, {
-        toValue: 0,
-        duration: 200,
-        useNativeDriver: false,
-      }).start(() => setExpandedId(null));
-    } else {
-      if (expandedId) {
-        const prevAnimation = animations.get(expandedId);
-        Animated.timing(prevAnimation, {
-          toValue: 0,
-          duration: 200,
-          useNativeDriver: false,
-        }).start();
+      if (expandedIdRef.current === id) {
+        animation.value = withTiming(0, { duration: 200 }, (finished) => {
+          if (finished) {
+            runOnJS(clearExpandedId)();
+          }
+        });
+      } else {
+        if (expandedIdRef.current) {
+          getExpandAnimation(expandedIdRef.current).value = withTiming(0, {
+            duration: 200,
+          });
+        }
+        expandedIdRef.current = id;
+        setExpandedId(id);
+        animation.value = withTiming(1, { duration: 300 });
       }
-      setExpandedId(id);
-      Animated.timing(animation, {
-        toValue: 1,
-        duration: 300,
-        useNativeDriver: false,
-      }).start();
-    }
-  };
+    },
+    [clearExpandedId]
+  );
 
-  // Fonction renderItem simple et efficace
-  const renderNameCard = ({ item }: { item: Nom }) => {
-    const isExpanded = expandedId === item.key;
-    const animation = animations.get(item.key) || new Animated.Value(0);
-
-    // Utiliser une hauteur fixe suffisamment grande pour contenir tout le contenu
-    const maxHeight = animation.interpolate({
-      inputRange: [0, 1],
-      outputRange: [0, 1200], // Hauteur fixe suffisante pour tout le contenu
-    });
-
-    return (
-      <View style={styles.card}>
-        <LinearGradient
-          colors={["rgba(255,255,255,0.1)", "rgba(255,255,255,0.05)"]}
-          style={styles.cardGradient}
-        >
-          <Pressable
-            style={styles.cardHeader}
-            onPress={() => toggleExpand(item.key)}
-          >
-            <View style={styles.cardTopRow}>
-              <View style={styles.numberContainer}>
-                <Text style={styles.number}>{item.number}</Text>
-              </View>
-
-              <View style={styles.cardActions}>
-                <FavoriteButton
-                  favoriteData={convertToFavorite(item)}
-                  size={22}
-                  iconColor="rgba(255, 255, 255, 0.7)"
-                  iconColorActive="#FFD700"
-                  style={styles.favoriteButton}
-                />
-                <IonIcon
-                  name={isExpanded ? "chevron-up" : "chevron-down"}
-                  size={24}
-                  color="#fff"
-                  style={styles.expandIcon}
-                />
-              </View>
-            </View>
-            <View style={styles.arabicNameContainer}>
-              <Text style={styles.arabic}>{item.arabic}</Text>
-            </View>
-            {!i18n.language.startsWith("ar") && (
-              <View style={styles.nameDetailsContainer}>
-                <Text style={styles.translit}>{item.translit}</Text>
-                <Text style={styles.french}>{item.french}</Text>
-              </View>
-            )}
-          </Pressable>
-
-          <Animated.View style={[styles.cardDetails, { maxHeight }]}>
-            <View style={styles.contentContainer}>
-              <View style={styles.section}>
-                <Text style={styles.sectionTitle}>
-                  {tAsma("sections.meaning")}
-                </Text>
-                <Text style={styles.sectionText}>{item.meaning}</Text>
-              </View>
-              {item.occurrences && (
-                <View style={styles.section}>
-                  <Text style={styles.sectionTitle}>
-                    {tAsma("sections.occurrences")}
-                  </Text>
-                  <Text style={styles.sectionText}>{item.occurrences}</Text>
-                </View>
-              )}
-              {item.benefits && (
-                <View style={styles.section}>
-                  <Text style={styles.sectionTitle}>
-                    {tAsma("sections.benefits")}
-                  </Text>
-                  <Text style={styles.sectionText}>{item.benefits}</Text>
-                </View>
-              )}
-              {item.usage && (
-                <View style={styles.section}>
-                  <Text style={styles.sectionTitle}>
-                    {tAsma("sections.usage")}
-                  </Text>
-                  <Text style={styles.sectionText}>{item.usage}</Text>
-                </View>
-              )}
-              {item.hadith && (
-                <View style={styles.section}>
-                  <Text style={styles.sectionTitle}>
-                    {tAsma("sections.hadith")}
-                  </Text>
-                  <Text style={styles.sectionText}>{item.hadith}</Text>
-                </View>
-              )}
-              {item.details && (
-                <View style={styles.section}>
-                  <Text style={styles.sectionTitle}>
-                    {tAsma("sections.details")}
-                  </Text>
-                  <Text style={styles.sectionText}>{item.details}</Text>
-                </View>
-              )}
-              {item.reference && (
-                <View style={styles.section}>
-                  <Text style={styles.sectionTitle}>
-                    {tAsma("sections.reference")}
-                  </Text>
-                  <Text style={styles.sectionText}>{item.reference}</Text>
-                </View>
-              )}
-              {item.spiritual_effect && (
-                <View style={styles.section}>
-                  <Text style={styles.sectionTitle}>
-                    {tAsma("sections.spiritual_effect")}
-                  </Text>
-                  <Text style={styles.sectionText}>
-                    {item.spiritual_effect}
-                  </Text>
-                </View>
-              )}
-              {item.citation && (
-                <View style={styles.section}>
-                  <Text style={styles.sectionTitle}>
-                    {tAsma("sections.citation")}
-                  </Text>
-                  <Text style={styles.sectionText}>{item.citation}</Text>
-                </View>
-              )}
-            </View>
-          </Animated.View>
-        </LinearGradient>
-      </View>
-    );
-  };
+  const renderNameCard = useCallback(
+    ({ item }: { item: Nom }) => (
+      <NameCard
+        item={item}
+        isExpanded={expandedId === item.key}
+        onToggle={toggleExpand}
+        tAsma={tAsma}
+        i18n={i18n}
+      />
+    ),
+    [expandedId, toggleExpand, tAsma, i18n]
+  );
 
   return (
     <ThemedImageBackground

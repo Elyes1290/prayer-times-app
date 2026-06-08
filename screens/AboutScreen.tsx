@@ -14,6 +14,19 @@ import Constants from "expo-constants";
 import ThemedImageBackground from "../components/ThemedImageBackground";
 import { useRouter } from "expo-router";
 
+function getLastUpdateDate() {
+  const lastReleaseDate = "2026-05-12";
+  return new Date(lastReleaseDate).toLocaleDateString("fr-FR", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+}
+
+function handlePrivacyPolicy() {
+  Linking.openURL("https://www.myadhanapp.com/public/privacy-policy.html");
+}
+
 export default function AboutScreen() {
   const { t } = useTranslation();
   const { push } = useRouter();
@@ -25,18 +38,6 @@ export default function AboutScreen() {
   const appVersion = Constants.expoConfig?.version || "1.0.0";
   const buildNumber =
     Constants.expoConfig?.android?.versionCode?.toString() || "1";
-
-  // 🗓️ DYNAMIQUE : Date de dernière mise à jour
-  // Cette date correspond à votre dernière publication sur Google Play
-  const getLastUpdateDate = () => {
-    // 🎯 Vous pouvez mettre à jour cette date à chaque release Google Play
-    const lastReleaseDate = "2026-05-12"; // Format YYYY-MM-DD
-    return new Date(lastReleaseDate).toLocaleDateString("fr-FR", {
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-    });
-  };
 
   const features = [
     { icon: "clock-outline", key: "prayer_times" },
@@ -85,10 +86,6 @@ export default function AboutScreen() {
     Linking.openURL(
       `mailto:${email}?subject=${subject}&body=${encodeURIComponent(body)}`
     );
-  };
-
-  const handlePrivacyPolicy = () => {
-    Linking.openURL("https://www.myadhanapp.com/public/privacy-policy.html");
   };
 
   const renderFeatureItem = (feature: any) => (

@@ -26,16 +26,5 @@ export function usePrayerTimes(
     isPremium: isPremium,
   });
 
-  // Log des performances du cache
-  useEffect(() => {
-    if (prayerTimes) {
-      console.log(
-        `🕌 Horaires chargés - Cache: ${isFromCache ? "✅" : "❌"} - Stats: ${
-          cacheStats.cacheHits
-        } hits, ${cacheStats.cacheMisses} misses`
-      );
-    }
-  }, [prayerTimes, isFromCache, cacheStats]);
-
   return { prayerTimes, isLoading };
 }

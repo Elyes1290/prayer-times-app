@@ -1,13 +1,13 @@
-import React, { useState, useEffect, useRef, useMemo } from "react";
-import {
-  View,
-  Text,
-  Animated,
-  StyleSheet,
-  Pressable,
-} from "react-native";
+import React, { useState, useEffect, useCallback } from "react";
+import { View, Text, StyleSheet, Pressable } from "react-native";
+import Animated, {
+  runOnJS,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from "react-native-reanimated";
 import { MCIcon } from "@/components/icons/AppVectorIcons";
-import { LinearGradient } from "expo-linear-gradient";
+import { LinearGradient } from "@/components/ui/LinearGradientView";
 
 import { Z_INDEX } from "../constants/zIndex";
 
@@ -26,58 +26,38 @@ interface ToastProps {
 
 const Toast: React.FC<ToastProps> = ({ toast, onHide }) => {
   const [visible, setVisible] = useState(true);
-  const translateY = useRef(new Animated.Value(-100)).current;
-  const opacity = useRef(new Animated.Value(0)).current;
+  const translateY = useSharedValue(-100);
+  const opacity = useSharedValue(0);
 
-  // Créer les animations avec useMemo pour éviter les recréations
-  const animations = useMemo(
-    () => ({
-      enter: Animated.parallel([
-        Animated.timing(translateY, {
-          toValue: 0,
-          duration: 300,
-          useNativeDriver: true,
-        }),
-        Animated.timing(opacity, {
-          toValue: 1,
-          duration: 300,
-          useNativeDriver: true,
-        }),
-      ]),
-      exit: Animated.parallel([
-        Animated.timing(translateY, {
-          toValue: -100,
-          duration: 250,
-          useNativeDriver: true,
-        }),
-        Animated.timing(opacity, {
-          toValue: 0,
-          duration: 250,
-          useNativeDriver: true,
-        }),
-      ]),
-    }),
-    [translateY, opacity]
-  );
+  const finishHide = useCallback(() => {
+    setVisible(false);
+    onHide(toast.id);
+  }, [onHide, toast.id]);
 
-  const hideToast = React.useCallback(() => {
-    animations.exit.start(() => {
-      setVisible(false);
-      onHide(toast.id);
+  const hideToast = useCallback(() => {
+    translateY.value = withTiming(-100, { duration: 250 });
+    opacity.value = withTiming(0, { duration: 250 }, (finished) => {
+      if (finished) {
+        runOnJS(finishHide)();
+      }
     });
-  }, [animations.exit, onHide, toast.id]);
+  }, [finishHide, opacity, translateY]);
 
   useEffect(() => {
-    // Animation d'entrée
-    animations.enter.start();
+    translateY.value = withTiming(0, { duration: 300 });
+    opacity.value = withTiming(1, { duration: 300 });
 
-    // Auto-hide après la durée spécifiée
     const timer = setTimeout(() => {
       hideToast();
     }, toast.duration || 3000);
 
     return () => clearTimeout(timer);
-  }, [toast.duration, hideToast, animations.enter]);
+  }, [toast.duration, hideToast, opacity, translateY]);
+
+  const animatedStyle = useAnimatedStyle(() => ({
+    transform: [{ translateY: translateY.value }],
+    opacity: opacity.value,
+  }));
 
   const getToastConfig = () => {
     switch (toast.type) {
@@ -109,13 +89,7 @@ const Toast: React.FC<ToastProps> = ({ toast, onHide }) => {
 
   return (
     <Animated.View
-      style={[
-        styles.container,
-        {
-          transform: [{ translateY }],
-          opacity,
-        },
-      ]}
+      style={[styles.container, animatedStyle]}
       testID="toast-container"
     >
       <Pressable onPress={hideToast}>
@@ -153,7 +127,7 @@ const styles = StyleSheet.create({
     top: 50,
     left: 16,
     right: 16,
-    zIndex: 999999, // 🚀 CORRECTION : Encore plus élevé pour être sûr
+    zIndex: 999999,
   },
   toast: {
     borderRadius: 12,

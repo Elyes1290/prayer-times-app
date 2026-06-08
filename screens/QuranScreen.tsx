@@ -23,9 +23,14 @@ import {
   Alert,
   ScrollView,
   DeviceEventEmitter,
-  Animated,
   Platform,
 } from "react-native";
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withSequence,
+  withTiming,
+} from "react-native-reanimated";
 import { useTranslation } from "react-i18next";
 import { MCIcon, IonIcon } from "@/components/icons/AppVectorIcons";
 import { useSafeAreaInsets, SafeAreaView } from "react-native-safe-area-context";
@@ -132,6 +137,69 @@ const AVAILABLE_GIFS = {
 
 const AVAILABLE_GIFS_LIST = Object.values(AVAILABLE_GIFS);
 
+function formatAudioTime(milliseconds: number): string {
+  if (isNaN(milliseconds) || milliseconds <= 0) {
+    return "0:00";
+  }
+  const totalSeconds = Math.floor(milliseconds / 1000);
+  const minutes = Math.floor(totalSeconds / 60);
+  const seconds = totalSeconds % 60;
+  return `${minutes}:${seconds.toString().padStart(2, "0")}`;
+}
+
+function stripHtml(text: string | undefined) {
+  if (!text) return "";
+  return (
+    text
+      .replace(/<sup[^>]*foot_note[^>]*>.*?<\/sup>/gi, "")
+      .replace(/<a[^>]*>.*?<\/a>/gi, "")
+      .replace(/<[^>]*>/g, "")
+      .replace(/\s+/g, " ")
+      .trim()
+  );
+}
+
+function normalizeQuranText(text: string) {
+  return text
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[\u064B-\u0652]/g, "")
+    .replace(/[\u0653-\u065F]/g, "")
+    .replace(/[\u0670]/g, "")
+    .replace(/[\u06D6-\u06ED]/g, "")
+    .replace(/[^\w\s\u0600-\u06FF\u0750-\u077F]/gi, "")
+    .toLowerCase()
+    .trim();
+}
+
+function convertToFavorite(
+  item: { verse_key?: string; text_uthmani?: string },
+  translationText: string,
+  chapterName: string,
+): Omit<QuranVerseFavorite, "id" | "dateAdded"> {
+  if (!item.verse_key) {
+    console.warn("⚠️ verse_key manquant pour l'item:", item);
+    return {
+      type: "quran_verse" as const,
+      chapterNumber: 1,
+      verseNumber: 1,
+      arabicText: item.text_uthmani || "",
+      translation: stripHtml(translationText),
+      chapterName: chapterName,
+    };
+  }
+
+  const verseParts = item.verse_key.split(":");
+  return {
+    type: "quran_verse" as const,
+    chapterNumber: parseInt(verseParts[0]) || 1,
+    verseNumber: parseInt(verseParts[1]) || 1,
+    arabicText: item.text_uthmani,
+    translation: stripHtml(translationText),
+    chapterName: chapterName,
+  };
+}
+
 // 🚀 NOUVEAU : Composant de jauge de progression
 const ProgressBar = ({
   progress,
@@ -185,16 +253,6 @@ const AudioSeekBar = ({
       : 0;
   const trackReady = totalDuration > 0;
 
-  const formatTime = (milliseconds: number): string => {
-    if (isNaN(milliseconds) || milliseconds <= 0) {
-      return "0:00";
-    }
-    const totalSeconds = Math.floor(milliseconds / 1000);
-    const minutes = Math.floor(totalSeconds / 60);
-    const seconds = totalSeconds % 60;
-    return `${minutes}:${seconds.toString().padStart(2, "0")}`;
-  };
-
   const positionFromTouchX = (x: number): number | null => {
     if (seekBarWidth <= 0 || totalDuration <= 0) {
       return null;
@@ -240,7 +298,7 @@ const AudioSeekBar = ({
       <Text
         style={[styles.audioTimeText, isDragging && styles.audioTimeTextActive]}
       >
-        {formatTime(displayPosition)}
+        {formatAudioTime(displayPosition)}
       </Text>
 
       <View style={styles.seekBarWrapper}>
@@ -292,13 +350,13 @@ const AudioSeekBar = ({
             ]}
           >
             <Text style={styles.seekPreviewText}>
-              {formatTime(displayPosition)}
+              {formatAudioTime(displayPosition)}
             </Text>
           </View>
         )}
       </View>
 
-      <Text style={styles.audioTimeText}>{formatTime(totalDuration)}</Text>
+      <Text style={styles.audioTimeText}>{formatAudioTime(totalDuration)}</Text>
     </View>
   );
 };
@@ -395,7 +453,11 @@ export default function QuranScreen() {
   // 📝 NOUVEAU : État pour afficher le tooltip navigation
   const [showNavigationTooltip, setShowNavigationTooltip] = useState(false);
 
-  const slideAnim = useRef(new Animated.Value(0)).current;
+  const slideAnim = useSharedValue(0);
+
+  const slideAnimatedStyle = useAnimatedStyle(() => ({
+    transform: [{ translateX: slideAnim.value }],
+  }));
 
   // 🎵 NOUVEAU : Refs pour fonctions circulaires
   const playNextInPlaylistRef = useRef<() => void>(() => {});
@@ -405,7 +467,7 @@ export default function QuranScreen() {
 
   // 🔧 Fonction pour réinitialiser l'animation si nécessaire
   const resetSlideAnimation = useCallback(() => {
-    slideAnim.setValue(0);
+    slideAnim.value = 0;
     console.log("🔧 Animation slide réinitialisée à 0");
   }, [slideAnim]);
 
@@ -596,29 +658,6 @@ export default function QuranScreen() {
       setGifKey((prev) => prev + 1);
     }
   }, [audioControlsModalVisible]);
-
-  // 🎵 NOUVEAU : Charger le GIF sélectionné au démarrage
-  useEffect(() => {
-    const loadSelectedGif = async () => {
-      try {
-        const saved = await AsyncStorage.getItem("@selected_audio_gif");
-        const validGifs: AudioGifType[] = [
-          "audio_wave3",
-          "chute",
-          "riviere",
-          "alquds",
-          "madina",
-          "makka",
-        ];
-        if (saved && validGifs.includes(saved as AudioGifType)) {
-          setSelectedGif(saved as AudioGifType);
-        }
-      } catch (err) {
-        console.error("Erreur chargement GIF:", err);
-      }
-    };
-    loadSelectedGif();
-  }, []);
 
   // 🎵 NOUVEAU : Sauvegarder le choix de GIF
   const selectGif = async (gifId: AudioGifType) => {
@@ -1016,8 +1055,21 @@ export default function QuranScreen() {
     currentRecitation?.durationMs,
   ]);
 
-  const loadAvailableRecitations = async (forceRefresh = false) => {
+  const loadAvailableRecitations = useCallback(async (forceRefresh = false) => {
     try {
+      const savedGif = await AsyncStorage.getItem("@selected_audio_gif");
+      const validGifs: AudioGifType[] = [
+        "audio_wave3",
+        "chute",
+        "riviere",
+        "alquds",
+        "madina",
+        "makka",
+      ];
+      if (savedGif && validGifs.includes(savedGif as AudioGifType)) {
+        setSelectedGif(savedGif as AudioGifType);
+      }
+
       // 🌐 Mode en ligne : fonctionnement normal
       // 🎯 OPTIMISATION : Utiliser le cache par défaut, forcer le rechargement seulement si demandé
       if (forceRefresh) {
@@ -1063,7 +1115,11 @@ export default function QuranScreen() {
       // En cas d'erreur réseau, le catalogue reste vide
       // L'utilisateur verra le mode hors ligne avec les 2 onglets si isPremium et hors connexion
     }
-  };
+  }, [premiumManager, selectedReciter]);
+
+  useEffect(() => {
+    void loadAvailableRecitations();
+  }, [loadAvailableRecitations]);
 
   // 📱 NOUVEAU : Charger les données offline du Coran
   const loadOfflineQuranData = async () => {
@@ -1226,11 +1282,18 @@ export default function QuranScreen() {
   // 🚀 SUPPRIMÉ : Anciens événements de téléchargement non natifs
 
   const handleDeleteRecitation = async (recitation: PremiumContent) => {
+    const recitationLabel =
+      recitation.surahName ||
+      recitation.title ||
+      (recitation.surahNumber != null
+        ? `${t("surah")} ${recitation.surahNumber}`
+        : recitation.id);
+
     Alert.alert(
       t("delete_download_title"),
-      t("delete_download_message", { title: recitation.title }),
+      t("delete_download_message", { title: recitationLabel }),
       [
-        { text: "Annuler", style: "cancel" },
+        { text: t("cancel"), style: "cancel" },
         {
           text: t("delete"),
           style: "destructive",
@@ -2421,18 +2484,10 @@ export default function QuranScreen() {
           ? -windowWidth
           : windowWidth;
 
-      Animated.sequence([
-        Animated.timing(slideAnim, {
-          toValue: exitValue,
-          duration: 150,
-          useNativeDriver: true,
-        }),
-        Animated.timing(slideAnim, {
-          toValue: 0,
-          duration: 150,
-          useNativeDriver: true,
-        }),
-      ]).start();
+      slideAnim.value = withSequence(
+        withTiming(exitValue, { duration: 150 }),
+        withTiming(0, { duration: 150 })
+      );
     },
     [selectedSourate, selectedReciter, loadSpecificRecitation, slideAnim],
   );
@@ -2701,66 +2756,6 @@ export default function QuranScreen() {
     }
   }, [user?.isPremium]);
 
-  function stripHtml(text: string | undefined) {
-    if (!text) return "";
-    return (
-      text
-        // Supprimer les balises sup avec foot_note (avec ou sans guillemets)
-        .replace(/<sup[^>]*foot_note[^>]*>.*?<\/sup>/gi, "")
-        // Supprimer les balises a avec des balises sup imbriquées
-        .replace(/<a[^>]*>.*?<\/a>/gi, "")
-        // Supprimer toutes les autres balises HTML
-        .replace(/<[^>]*>/g, "")
-        // Supprimer les espaces multiples
-        .replace(/\s+/g, " ")
-        .trim()
-    );
-  }
-
-  // Fonction pour normaliser le texte (supprimer accents et caractères spéciaux)
-  function normalizeText(text: string) {
-    return text
-      .normalize("NFD") // Décompose les caractères accentués
-      .replace(/[\u0300-\u036f]/g, "") // Supprime les diacritiques latins
-      .replace(/[\u064B-\u0652]/g, "") // Supprime les diacritiques arabes (tashkeel)
-      .replace(/[\u0653-\u065F]/g, "") // Supprime autres diacritiques arabes
-      .replace(/[\u0670]/g, "") // Supprime alif khanjariyah
-      .replace(/[\u06D6-\u06ED]/g, "") // Supprime les marques de récitation
-      .replace(/[^\w\s\u0600-\u06FF\u0750-\u077F]/gi, "") // Garde seulement lettres, espaces et caractères arabes de base
-      .toLowerCase()
-      .trim();
-  }
-
-  // Fonction pour convertir un verset en format favori
-  const convertToFavorite = (
-    item: any,
-    translationText: string,
-    chapterName: string,
-  ): Omit<QuranVerseFavorite, "id" | "dateAdded"> => {
-    // Vérifier que verse_key existe avant de le splitter
-    if (!item.verse_key) {
-      console.warn("⚠️ verse_key manquant pour l'item:", item);
-      return {
-        type: "quran_verse" as const,
-        chapterNumber: 1,
-        verseNumber: 1,
-        arabicText: item.text_uthmani || "",
-        translation: stripHtml(translationText),
-        chapterName: chapterName,
-      };
-    }
-
-    const verseParts = item.verse_key.split(":");
-    return {
-      type: "quran_verse" as const,
-      chapterNumber: parseInt(verseParts[0]) || 1,
-      verseNumber: parseInt(verseParts[1]) || 1,
-      arabicText: item.text_uthmani,
-      translation: stripHtml(translationText),
-      chapterName: chapterName,
-    };
-  };
-
   // Filtrer les versets selon la recherche dans la sourate sélectionnée
   const filteredVerses = useMemo(() => {
     if (!searchQuery.trim()) {
@@ -2768,16 +2763,16 @@ export default function QuranScreen() {
     }
 
     // Rechercher uniquement dans la sourate sélectionnée avec normalisation
-    const normalizedSearch = normalizeText(searchQuery);
+    const normalizedSearch = normalizeQuranText(searchQuery);
     return arabicVerses.filter((verse, index) => {
       const phonetic = phoneticArr[index]?.text || "";
       const translation = translationArr[index]?.text || "";
 
       // Normaliser tous les textes pour la comparaison
-      const normalizedArabic = normalizeText(verse.text_uthmani || "");
-      const normalizedPhonetic = normalizeText(phonetic);
-      const normalizedTranslation = normalizeText(stripHtml(translation));
-      const normalizedVerseKey = normalizeText(verse.verse_key);
+      const normalizedArabic = normalizeQuranText(verse.text_uthmani || "");
+      const normalizedPhonetic = normalizeQuranText(phonetic);
+      const normalizedTranslation = normalizeQuranText(stripHtml(translation));
+      const normalizedVerseKey = normalizeQuranText(verse.verse_key);
 
       return (
         normalizedArabic.includes(normalizedSearch) ||
@@ -3726,10 +3721,7 @@ export default function QuranScreen() {
                   showsVerticalScrollIndicator={false}
                 >
                   <Animated.View
-                    style={[
-                      styles.audioModalContent,
-                      { transform: [{ translateX: slideAnim }] },
-                    ]}
+                    style={[styles.audioModalContent, slideAnimatedStyle]}
                   >
                     {/* 🎵 GIF animé ou image statique selon l'état de lecture */}
                     <ExpoImage

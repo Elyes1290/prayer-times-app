@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useCallback } from "react";
 import {
   View,
   Text,
@@ -10,7 +10,7 @@ import {
   Platform,
   Linking,
 } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
+import { LinearGradient } from "@/components/ui/LinearGradientView";
 import { MCIcon } from "@/components/icons/AppVectorIcons";
 import { useRouter, useFocusEffect } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -97,33 +97,10 @@ const PremiumPaymentScreen: React.FC = () => {
 
   const styles = getStyles(colors, currentTheme);
 
-  // Charger les offres RevenueCat sur iOS
-  useEffect(() => {
-    const loadIapOfferings = async () => {
-      if (Platform.OS === "ios") {
-        try {
-          const iapService = IapService.getInstance();
-          const offerings = await iapService.getOfferings();
-          if (offerings && offerings.availablePackages) {
-            setIapPackages(offerings.availablePackages);
-            console.log(
-              "🍎 [IAP] Offres chargées:",
-              offerings.availablePackages.length
-            );
-          }
-        } catch (error) {
-          console.error("❌ [IAP] Erreur chargement offres:", error);
-        }
-      }
-    };
-    loadIapOfferings();
-  }, []);
-
-  // Récupérer les données d'inscription en attente
-  // 🚀 NOUVEAU : Utiliser useFocusEffect pour recharger les données à chaque fois que l'écran est affiché
+  // Récupérer les données d'inscription en attente + offres IAP (iOS)
   useFocusEffect(
     useCallback(() => {
-      const loadPendingRegistration = async () => {
+      const loadScreenData = async () => {
         try {
           const registrationData = await AsyncStorage.getItem(
             "pending_registration"
@@ -144,12 +121,28 @@ const PremiumPaymentScreen: React.FC = () => {
           } else {
             console.log("❌ Aucune donnée d'inscription trouvée (focus)");
           }
+
+          if (Platform.OS === "ios") {
+            try {
+              const iapService = IapService.getInstance();
+              const offerings = await iapService.getOfferings();
+              if (offerings?.availablePackages) {
+                setIapPackages(offerings.availablePackages);
+                console.log(
+                  "🍎 [IAP] Offres chargées:",
+                  offerings.availablePackages.length
+                );
+              }
+            } catch (error) {
+              console.error("❌ [IAP] Erreur chargement offres:", error);
+            }
+          }
         } catch {
           console.error("❌ Erreur chargement données inscription (focus)");
         }
       };
 
-      loadPendingRegistration();
+      void loadScreenData();
     }, [])
   );
 

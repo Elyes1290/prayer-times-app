@@ -1,13 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useMemo, useState } from "react";
 import {
   Pressable,
-  Animated,
   StyleSheet,
   View,
   Alert,
   Vibration,
   Platform,
 } from "react-native";
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withSequence,
+  withTiming,
+} from "react-native-reanimated";
 import { MCIcon } from "@/components/icons/AppVectorIcons";
 import { useFavorites, Favorite } from "../contexts/FavoritesContext";
 import { usePremium } from "../contexts/PremiumContext";
@@ -24,25 +29,28 @@ interface FavoriteButtonProps {
   onToggle?: (isFavorite: boolean) => void;
 }
 
-// Fonction helper pour générer l'ID de contenu (cohérente avec le contexte)
 const generateContentId = (
   favorite: Omit<Favorite, "id" | "dateAdded">
 ): string => {
   switch (favorite.type) {
-    case "quran_verse":
+    case "quran_verse": {
       const quranFav = favorite as any;
       return `quran_${quranFav.chapterNumber}_${quranFav.verseNumber}`;
-    case "hadith":
+    }
+    case "hadith": {
       const hadithFav = favorite as any;
       return `hadith_${hadithFav.bookSlug}_${hadithFav.hadithNumber}`;
-    case "dhikr":
+    }
+    case "dhikr": {
       const dhikrFav = favorite as any;
       return `dhikr_${dhikrFav.category}_${dhikrFav.arabicText
         .slice(0, 20)
         .replace(/\s/g, "")}`;
-    case "asmaul_husna":
+    }
+    case "asmaul_husna": {
       const asmaFav = favorite as any;
       return `asmaul_husna_${asmaFav.number}`;
+    }
     default:
       return `unknown_${Date.now()}`;
   }
@@ -63,106 +71,84 @@ const FavoriteButton: React.FC<FavoriteButtonProps> = ({
   const { t } = useTranslation();
   const { recordFavoriteAdded } = useUpdateUserStats();
 
-  const [isCurrentlyFavorite, setIsCurrentlyFavorite] = useState(false);
-  const [scaleAnimation] = useState(new Animated.Value(1));
-  const [pulseAnimation] = useState(new Animated.Value(1));
+  const isCurrentlyFavorite = useMemo(
+    () => isFavorite(favoriteData),
+    [favoriteData, isFavorite]
+  );
+
+  const scaleAnimation = useSharedValue(1);
+  const pulseAnimation = useSharedValue(1);
   const [isProcessing, setIsProcessing] = useState(false);
 
-  // Mettre à jour l'état local quand les favoris changent
-  useEffect(() => {
-    const currentlyIsFavorite = isFavorite(favoriteData);
-    setIsCurrentlyFavorite(currentlyIsFavorite);
-  }, [favoriteData, isFavorite]);
+  const animatedStyle = useAnimatedStyle(() => ({
+    transform: [
+      { scale: scaleAnimation.value * pulseAnimation.value },
+    ],
+  }));
+
+  const playPressAnimation = () => {
+    scaleAnimation.value = withSequence(
+      withTiming(0.9, { duration: 100 }),
+      withTiming(1, { duration: 100 })
+    );
+  };
+
+  const playPulseAnimation = (peak: number) => {
+    pulseAnimation.value = withSequence(
+      withTiming(peak, { duration: 150 }),
+      withTiming(1, { duration: 150 })
+    );
+  };
 
   const handleToggleFavorite = async () => {
-    if (isProcessing) return; // Éviter les clics multiples rapides
+    if (isProcessing) return;
 
     try {
       setIsProcessing(true);
 
-      // Animation de press
       if (showAnimation) {
-        Animated.sequence([
-          Animated.timing(scaleAnimation, {
-            toValue: 0.9,
-            duration: 100,
-            useNativeDriver: true,
-          }),
-          Animated.timing(scaleAnimation, {
-            toValue: 1,
-            duration: 100,
-            useNativeDriver: true,
-          }),
-        ]).start();
-
-        // Haptic feedback
+        playPressAnimation();
         if (Platform.OS === "ios") {
           Vibration.vibrate(10);
         }
       }
 
       if (isCurrentlyFavorite) {
-        // Retirer des favoris (toujours autorisé)
-        // Générer l'ID du contenu pour pouvoir le supprimer
         const contentId = generateContentId(favoriteData);
         const success = await removeFavorite(contentId);
         if (success) {
-          setIsCurrentlyFavorite(false);
           onToggle?.(false);
-
-          // Animation de suppression
           if (showAnimation) {
-            Animated.timing(pulseAnimation, {
-              toValue: 0.8,
-              duration: 200,
-              useNativeDriver: true,
-            }).start(() => {
-              Animated.timing(pulseAnimation, {
-                toValue: 1,
-                duration: 200,
-                useNativeDriver: true,
-              }).start();
-            });
+            pulseAnimation.value = withSequence(
+              withTiming(0.8, { duration: 200 }),
+              withTiming(1, { duration: 200 })
+            );
           }
         }
       } else {
-        // Vérifier si l'utilisateur peut ajouter ce type de favori
         const { canAdd, reason } = canAddFavorite(favoriteData.type);
 
         if (!canAdd) {
-          // Afficher le message de limitation avec proposition d'upgrade
           Alert.alert(
             "🔒 " + (t("favorites.limit_reached") || "Limite atteinte"),
             reason || "Limite de favoris atteinte",
             [
-              {
-                text: t("cancel") || "Annuler",
-                style: "cancel",
-              },
+              { text: t("cancel") || "Annuler", style: "cancel" },
               {
                 text: user.isPremium
                   ? t("ok") || "OK"
                   : "✨ " + (t("upgrade_premium") || "Passer au Premium"),
                 style: "default",
-                onPress: () => {
-                  if (!user.isPremium) {
-                    // TODO: Ouvrir l'écran premium ou la modal d'upgrade
-                    // console.log("🚀 Rediriger vers l'écran premium");
-                  }
-                },
               },
             ]
           );
           return;
         }
 
-        // Ajouter aux favoris
         const success = await addFavorite(favoriteData);
         if (success) {
-          setIsCurrentlyFavorite(true);
           onToggle?.(true);
 
-          // Enregistrer dans les statistiques (si premium)
           if (user.isPremium) {
             try {
               const title =
@@ -175,20 +161,8 @@ const FavoriteButton: React.FC<FavoriteButtonProps> = ({
             }
           }
 
-          // Animation d'ajout (étoile qui brille)
           if (showAnimation) {
-            Animated.sequence([
-              Animated.timing(pulseAnimation, {
-                toValue: 1.3,
-                duration: 150,
-                useNativeDriver: true,
-              }),
-              Animated.timing(pulseAnimation, {
-                toValue: 1,
-                duration: 150,
-                useNativeDriver: true,
-              }),
-            ]).start();
+            playPulseAnimation(1.3);
           }
         }
       }
@@ -214,14 +188,7 @@ const FavoriteButton: React.FC<FavoriteButtonProps> = ({
       onPress={handleToggleFavorite}
       disabled={isProcessing}
     >
-      <Animated.View
-        style={[
-          styles.iconContainer,
-          {
-            transform: [{ scale: scaleAnimation }, { scale: pulseAnimation }],
-          },
-        ]}
-      >
+      <Animated.View style={[styles.iconContainer, animatedStyle]}>
         <MCIcon
           testID="heart-icon"
           name={isCurrentlyFavorite ? "heart" : "heart-outline"}
@@ -229,14 +196,9 @@ const FavoriteButton: React.FC<FavoriteButtonProps> = ({
           color={isCurrentlyFavorite ? iconColorActive : iconColor}
         />
 
-        {/* Indicateur Premium pour les utilisateurs gratuits */}
         {!user.isPremium && !isCurrentlyFavorite && (
           <View style={styles.premiumBadge}>
-            <MCIcon
-              name="crown"
-              size={size * 0.4}
-              color="#FFD700"
-            />
+            <MCIcon name="crown" size={size * 0.4} color="#FFD700" />
           </View>
         )}
       </Animated.View>

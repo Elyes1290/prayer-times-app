@@ -6,7 +6,9 @@
     "start": "expo start",
     "start:no-reload": "EXPO_NO_HOT_RELOAD=1 expo start --no-dev --minify",
     "start:safe": "EXPO_NO_HOT_RELOAD=1 expo start --no-dev",
-    "android": "expo run:android",
+    "sync:android-locales": "node scripts/sync-android-locales.js",
+    "android:clean": "powershell -ExecutionPolicy Bypass -File scripts/android-clean.ps1",
+    "android": "npm run sync:android-locales && expo run:android",
     "ios": "expo run:ios",
     "web": "expo start --web",
     "lint": "expo lint",
@@ -75,6 +77,7 @@
     "react-native-reanimated": "~3.17.4",
     "react-native-safe-area-context": "5.4.0",
     "react-native-screens": "~4.11.1",
+    "react-native-svg": "15.11.2",
     "react-native-web": "~0.20.0",
     "react-native-webview": "13.13.5",
     "remove-accents": "^0.5.0"

@@ -24,6 +24,44 @@ interface ChangePasswordModalProps {
   onClose: () => void;
 }
 
+function validatePassword(password: string) {
+  const minLength = 8;
+  const hasUpperCase = /[A-Z]/.test(password);
+  const hasLowerCase = /[a-z]/.test(password);
+  const hasNumbers = /\d/.test(password);
+  const hasSpecialChar = /[^a-zA-Z\d]/.test(password);
+
+  const isValid =
+    password.length >= minLength &&
+    hasUpperCase &&
+    hasLowerCase &&
+    hasNumbers &&
+    hasSpecialChar;
+
+  return {
+    isValid,
+    minLength: password.length >= minLength,
+    hasUpperCase,
+    hasLowerCase,
+    hasNumbers,
+    hasSpecialChar,
+    strength: [
+      password.length >= minLength,
+      hasUpperCase,
+      hasLowerCase,
+      hasNumbers,
+      hasSpecialChar,
+    ].filter(Boolean).length,
+  };
+}
+
+function getPasswordStrengthColor(strength: number) {
+  if (strength <= 2) return "#EF4444";
+  if (strength <= 3) return "#F59E0B";
+  if (strength <= 4) return "#10B981";
+  return "#059669";
+}
+
 export default function ChangePasswordModal({
   visible,
   onClose,
@@ -46,47 +84,8 @@ export default function ChangePasswordModal({
   const newPasswordRef = useRef<TextInput>(null);
   const confirmPasswordRef = useRef<TextInput>(null);
 
-  // Validation du mot de passe
-  const validatePassword = (password: string) => {
-    const minLength = 8;
-    const hasUpperCase = /[A-Z]/.test(password);
-    const hasLowerCase = /[a-z]/.test(password);
-    const hasNumbers = /\d/.test(password);
-    const hasSpecialChar = /[^a-zA-Z\d]/.test(password);
-
-    const isValid =
-      password.length >= minLength &&
-      hasUpperCase &&
-      hasLowerCase &&
-      hasNumbers &&
-      hasSpecialChar;
-
-    return {
-      isValid,
-      minLength: password.length >= minLength,
-      hasUpperCase,
-      hasLowerCase,
-      hasNumbers,
-      hasSpecialChar,
-      strength: [
-        password.length >= minLength,
-        hasUpperCase,
-        hasLowerCase,
-        hasNumbers,
-        hasSpecialChar,
-      ].filter(Boolean).length,
-    };
-  };
-
   const newPasswordValidation = validatePassword(newPassword);
   const confirmPasswordValidation = newPassword === confirmPassword;
-
-  const getPasswordStrengthColor = (strength: number) => {
-    if (strength <= 2) return "#EF4444"; // Rouge
-    if (strength <= 3) return "#F59E0B"; // Orange
-    if (strength <= 4) return "#10B981"; // Vert
-    return "#059669"; // Vert foncé
-  };
 
   const getPasswordStrengthText = (strength: number) => {
     if (strength <= 2) return t("password.password_strength_weak", "Faible");

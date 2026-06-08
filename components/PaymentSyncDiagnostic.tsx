@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
   View,
   Text,
@@ -16,12 +16,15 @@ interface SyncStatus {
   explicitConnection: boolean;
 }
 
+const getStatusColor = (value: boolean) => (value ? "#4CAF50" : "#FF6B6B");
+const getStatusText = (value: boolean) => (value ? "✅ OUI" : "❌ NON");
+
 const PaymentSyncDiagnostic: React.FC = () => {
   const [syncStatus, setSyncStatus] = useState<SyncStatus | null>(null);
   const [isChecking, setIsChecking] = useState(false);
   const [retryResult, setRetryResult] = useState<string>("");
 
-  const checkStatus = async () => {
+  const checkStatus = useCallback(async () => {
     setIsChecking(true);
     try {
       const status = await checkUserSyncStatus();
@@ -32,7 +35,7 @@ const PaymentSyncDiagnostic: React.FC = () => {
     } finally {
       setIsChecking(false);
     }
-  };
+  }, []);
 
   const handleRetry = async () => {
     setIsChecking(true);
@@ -56,8 +59,8 @@ const PaymentSyncDiagnostic: React.FC = () => {
   };
 
   useEffect(() => {
-    checkStatus();
-  }, []);
+    void checkStatus();
+  }, [checkStatus]);
 
   if (!syncStatus) {
     return (
@@ -67,9 +70,6 @@ const PaymentSyncDiagnostic: React.FC = () => {
       </View>
     );
   }
-
-  const getStatusColor = (value: boolean) => (value ? "#4CAF50" : "#FF6B6B");
-  const getStatusText = (value: boolean) => (value ? "✅ OUI" : "❌ NON");
 
   return (
     <ScrollView style={styles.container}>
