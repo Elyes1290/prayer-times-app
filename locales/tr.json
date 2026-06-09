@@ -1307,7 +1307,12 @@
     "heatmap_title": "Düzenlilik",
     "heatmap_subtitle": "Son {{days}} gün",
     "other_actions_title": "Diğer eylemler",
-    "other_actions_subtitle": "Zikir, Kur'an ve hadisler tek dokunuşla"
+    "other_actions_subtitle": "Zikir, Kur'an ve hadisler tek dokunuşla",
+    "heatmap_almost": "İyi ilerleme",
+    "go_yesterday": "Önceki gün",
+    "back_today": "Bugüne dön",
+    "catch_up_hint": "İşaretlemeyi unuttuysanız dünkü namazları kaydedebilirsiniz.",
+    "yesterday_title": "Dün"
   },
   "premium_ui": {
     "badge": "Premium",

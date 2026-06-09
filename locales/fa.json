@@ -1307,7 +1307,12 @@
     "heatmap_title": "استمرار",
     "heatmap_subtitle": "{{days}} روز گذشته",
     "other_actions_title": "اعمال دیگر",
-    "other_actions_subtitle": "ذکر، قرآن و حدیث با یک لمس"
+    "other_actions_subtitle": "ذکر، قرآن و حدیث با یک لمس",
+    "heatmap_almost": "پیشرفت خوب",
+    "go_yesterday": "روز قبل",
+    "back_today": "بازگشت به امروز",
+    "catch_up_hint": "اگر فراموش کرده‌اید، می‌توانید نمازهای دیروز را ثبت کنید.",
+    "yesterday_title": "دیروز"
   },
   "premium_ui": {
     "badge": "پریمیوم",

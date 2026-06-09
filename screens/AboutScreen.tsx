@@ -13,10 +13,12 @@ import { useTranslation } from "react-i18next";
 import Constants from "expo-constants";
 import ThemedImageBackground from "../components/ThemedImageBackground";
 import { useRouter } from "expo-router";
+import { useOverlayTextColor } from "../hooks/useThemeColor";
 
-function getLastUpdateDate() {
-  const lastReleaseDate = "2026-05-12";
-  return new Date(lastReleaseDate).toLocaleDateString("fr-FR", {
+const LAST_RELEASE_DATE = "2026-06-09";
+
+function formatLastUpdateDate(language: string) {
+  return new Date(LAST_RELEASE_DATE).toLocaleDateString(language, {
     day: "numeric",
     month: "long",
     year: "numeric",
@@ -28,8 +30,9 @@ function handlePrivacyPolicy() {
 }
 
 export default function AboutScreen() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { push } = useRouter();
+  const overlayTextColor = useOverlayTextColor();
   const [expandedFAQ, setExpandedFAQ] = useState<number | null>(null);
   const [debugTapCount, setDebugTapCount] = useState(0);
   // Les couleurs sont maintenant gérées via le système de thème dans Colors.ts
@@ -436,13 +439,13 @@ export default function AboutScreen() {
             }
           }}
         >
-          <Text style={styles.version}>
+          <Text style={[styles.version, { color: overlayTextColor }]}>
             {t("abouts.version")} {appVersion} ({t("abouts.build")}{" "}
             {buildNumber})
             {debugTapCount > 0 && debugTapCount < 7 && ` 🐛 ${debugTapCount}/7`}
           </Text>
-          <Text style={styles.lastUpdate}>
-            {t("abouts.last_update")} {getLastUpdateDate()}
+          <Text style={[styles.lastUpdate, { color: overlayTextColor }]}>
+            {t("abouts.last_update")} {formatLastUpdateDate(i18n.language)}
           </Text>
           <Text style={styles.footer}>{t("abouts.footer_thanks")}</Text>
           <Text style={styles.dua}>{t("abouts.closing_dua")}</Text>
@@ -705,18 +708,17 @@ const styles = StyleSheet.create({
     borderRadius: 12,
   },
   version: {
-    color: "#b59d42",
     fontSize: 14,
     textAlign: "center",
     fontFamily: "ScheherazadeNew",
+    fontWeight: "600",
   },
   lastUpdate: {
-    color: "#b59d42",
     fontSize: 12,
     textAlign: "center",
     fontFamily: "ScheherazadeNew",
     marginTop: 4,
-    opacity: 0.8,
+    opacity: 0.92,
   },
   footer: {
     marginTop: 8,

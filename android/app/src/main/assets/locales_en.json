@@ -6,7 +6,6 @@
   "enter_city_name": "Enter your city name",
   "enable_auto_location": "Enable automatic location (GPS)",
   "unknown_city": "Unknown city",
-
   "appearance": "Appearance",
   "theme_mode": "Display mode",
   "theme_auto": "Auto",
@@ -15,7 +14,6 @@
   "notifications_disabled_title": "Notifications disabled",
   "notifications_disabled_message": "To receive notifications, enable them in settings.",
   "open_settings": "Open settings",
-
   "settings": "Settings",
   "location": "Location",
   "automatic_gps": "Automatic (GPS)",
@@ -32,7 +30,6 @@
   "minutes_before": "How many minutes before:",
   "minutes": "min",
   "language": "Language",
-
   "calc_method": {
     "MuslimWorldLeague": "Muslim World League",
     "Egyptian": "Egyptian General Authority",
@@ -45,7 +42,6 @@
     "Tehran": "Tehran",
     "Turkey": "Turkey"
   },
-
   "method_MuslimWorldLeague": "Muslim World League",
   "method_Egyptian": "Egyptian General Authority",
   "method_Karachi": "University of Islamic Sciences, Karachi",
@@ -56,7 +52,6 @@
   "method_Singapore": "Singapore",
   "method_Tehran": "Tehran",
   "method_Turkey": "Turkey",
-
   "adhan_sound": "Adhan selection",
   "adhan_sounds": {
     "adhamalsharqawe": "Sharqawi Adhan",
@@ -71,7 +66,6 @@
     "masjidquba": "Masjid Al-Quba",
     "islamsobhi": "Islam Sobhi"
   },
-
   "sound_adhamalsharqawe": "Sharqawi Adhan",
   "sound_adhanaljazaer": "Adhan Al Jazaer",
   "sound_ahmadnafees": "Ahmad Nafees",
@@ -83,7 +77,6 @@
   "sound_mustafaozcan": "Mustafa Ozcan",
   "sound_masjidquba": "Masjid Al-Quba",
   "sound_islamsobhi": "Islam Sobhi",
-
   "hijri_calendar": "Hijri Calendar",
   "gregorian_date": "Gregorian Date",
   "hijri_date": "Hijri Date",
@@ -113,7 +106,7 @@
   "no_text": "No text for this hadith.",
   "about": "About",
   "status": "Status",
-  "premium_status": "Premium",
+  "premium_status": "Premium Status",
   "free": "Free",
   "account_label": "Account",
   "user": "User",
@@ -152,7 +145,6 @@
     "welcome": "Welcome to your spiritual companion!",
     "description": "This free app (currently ad-free) accompanies you daily in your religious practice: accurate prayer times, Qibla direction, Quran reading, automatic dhikr, authentic hadiths, Hijri calendar and much more. New features include prayer statistics, badges system, favorites, advanced audio, themes, sun information, and weekly view. A premium version with exclusive features is now available.",
     "blessing": "بارك الله فيكم - May Allah bless you",
-
     "features_title": "🌟 Complete features",
     "features_subtitle": "Everything you need for your Islamic practice:",
     "features": {
@@ -185,21 +177,18 @@
       "offline_mode": "Offline mode",
       "local_storage": "Secure local storage"
     },
-
     "premium_title": "👑 Premium Features",
     "premium_subtitle": "Discover the exclusive features of the premium version:",
     "premium_stats": "Detailed prayer statistics",
     "premium_badges": "Badges and rewards system",
     "premium_audio": "Advanced audio player and cache",
     "premium_themes": "Advanced customizable themes",
-
     "advanced_title": "🚀 Advanced Features",
     "advanced_subtitle": "New features recently added:",
     "advanced_favorites": "Smart favorites system",
     "advanced_weekly": "Weekly prayer view",
     "advanced_sun": "Detailed sun information",
     "advanced_personalization": "Advanced interface customization",
-
     "new_features_title": "🆕 New features",
     "new_features_subtitle": "Latest improvements added to the app:",
     "new_widgets": "Customizable Android widgets",
@@ -208,7 +197,6 @@
     "new_downloads": "Optimized native downloads",
     "new_mosques": "Smart mosque finder",
     "new_backup": "Complete backup system",
-
     "faq_title": "❓ Frequently asked questions",
     "faq_location_question": "Why does the app need my location?",
     "faq_location_answer": "Location is necessary to accurately calculate prayer times based on your geographical position. You can also enter your city manually.",
@@ -218,7 +206,6 @@
     "faq_qibla_answer": "Hold your phone flat, away from metal objects. Make figure-8 movements to calibrate the compass if it's unstable.",
     "faq_offline_question": "Does the app work offline?",
     "faq_offline_answer": "Yes, once configured, the app works offline for prayer times, Qibla, dhikr and Quran reading.",
-
     "support_title": "🤝 Support and community",
     "send_suggestion": "Send a suggestion",
     "report_bug": "Report a problem",
@@ -226,12 +213,10 @@
     "contact_suggestion": "Muslim App Suggestion",
     "contact_bug": "Muslim App Bug Report",
     "email_template": "Hello Drogbinho,\n\nRegarding {{subject}}:\n\n[Your message here]\n\nThank you for this excellent app!\n\nBest regards",
-
     "developer_title": "👨‍💻 Developer",
     "developer_name": "Developed with ❤️ by Drogbinho",
     "developer_bio": "Passionate developer, practicing Muslim, creator of useful apps for the community.",
     "linkedin_profile": "View LinkedIn profile",
-
     "technical_title": "⚙️ Technical information",
     "tech_react_native": "• Developed with React Native & Expo",
     "tech_adhan_lib": "• Calculations based on Adhan library",
@@ -241,14 +226,12 @@
     "tech_audio_optimization": "• Advanced audio optimization with smart cache",
     "tech_performance": "• Optimized performance with advanced React hooks",
     "tech_security": "• Enhanced security with robust error handling",
-
     "sources_title": "📚 Sources & credits",
     "source_quran": "• Quran: Quran.com API",
     "source_hadith": "• Hadiths: HadithAPI.com",
     "source_prayer_calculation": "• Prayer calculations: Adhan library",
     "source_icons": "• Icons: Material Design & Flaticon",
     "islamic_authenticity": "✅ All religious sources are verified and authentic",
-
     "legal_title": "⚖️ Legal notices",
     "privacy_policy": "Privacy policy",
     "privacy_policy_content": "This app respects your privacy:\n\n• Your data stays on your device\n• No collection of personal information\n• Location used only for calculations\n• No ads currently\n• Free app with premium version coming soon",
@@ -256,7 +239,6 @@
     "terms_title": "Terms of use",
     "terms_content": "By using this app:\n\n• You agree to use it in accordance with Islamic values\n• The app offers a free version and a premium version\n• The developer does his best to ensure accuracy\n• Always verify with your local mosque\n• Use is at your own risk",
     "understand": "I understand",
-
     "version": "Version",
     "build": "Build",
     "last_update": "Last update:",
@@ -269,13 +251,21 @@
     "closing_dua": "رَبَّنَا تَقَبَّلْ مِنَّا إِنَّكَ أَنتَ السَّمِيعُ الْعَلِيمُ"
   },
   "translation_not_available": "English translation not available for this book.",
-  "home": "Home",
+  "home": {
+    "go_to_settings": "Go to settings",
+    "notifications_disabled_message": "You must allow notifications to receive prayer and dhikr reminders."
+  },
   "qibla": "Qibla",
   "mosques": "Mosques",
   "today": "Today",
-  "quran": "Quran",
+  "quran": {
+    "offline_recitation": "Downloaded recitation (offline)",
+    "unknown_reciter": "Unknown reciter",
+    "reciter": "Reciter",
+    "checking_connection": "Checking..."
+  },
   "hadiths": "Hadiths",
-  "prophet_stories": "Prophets Stories (Peace be upon them)",
+  "prophet_stories": "Prophets Stories ﷺ",
   "prophets_stories": "Prophets Stories",
   "prophet_story_categories": {
     "childhood": "Childhood",
@@ -305,7 +295,6 @@
   "using_free_api": "Free API enabled (OpenStreetMap)",
   "mosque_search_error": "Error searching for mosques",
   "mosque_search_timeout": "Search too long, please try again",
-
   "prayer_names": {
     "Fajr": "Fajr",
     "Dhuhr": "Dhuhr",
@@ -325,25 +314,12 @@
     "no_favorites_in_category": "No favorites in this category",
     "press_heart_to_add": "Press ❤️ to add your favorite content"
   },
-  "favorites": {
-    "sync_success": "Synchronization successful",
-    "sync_message": "Your favorites have been synchronized",
-    "deleted": "Favorites deleted",
-    "all_deleted": "All favorites have been deleted"
-  },
   "sun_info": {
     "day_duration": "Day duration"
-  },
-  "quran": {
-    "offline_recitation": "Downloaded recitation (offline)",
-    "unknown_reciter": "Unknown reciter",
-    "reciter": "Reciter",
-    "checking_connection": "Checking..."
   },
   "hadith": {
     "search_placeholder": "Search by text or hadith number..."
   },
-
   "data_deletion": {
     "title": "Account Deletion",
     "warning": "Warning",
@@ -424,12 +400,12 @@
   "toast_cleanup_completed_message": "files cleaned successfully",
   "toast_cleanup_error_title": "Cleanup error",
   "toast_cleanup_error_message": "Error during cleanup",
-  "toast_diagnostic_started_title": "Diagnostic started",
-  "toast_diagnostic_started_message": "Diagnosing files...",
+  "toast_diagnostic_started_title": "Diagnostic in progress...",
+  "toast_diagnostic_started_message": "Analyzing downloaded files...",
   "toast_diagnostic_completed_title": "Diagnostic completed",
   "toast_diagnostic_completed_message": "Diagnostic completed successfully",
   "toast_diagnostic_error_title": "Diagnostic error",
-  "toast_diagnostic_error_message": "Error during diagnostic",
+  "toast_diagnostic_error_message": "Unable to diagnose files",
   "toast_download_success": "Success",
   "toast_operation_cancelled": "Operation cancelled",
   "premium_sync_title": "Premium synchronization",
@@ -442,88 +418,71 @@
   "renewal_detected": "Renewal Detected",
   "account_exists": "Account Exists",
   "warning": "Warning",
-
   "download_error": "Download error",
   "download_failed": "Download failed",
   "download_success": "Download successful",
   "download_completed": "Download completed",
   "download_cancelled": "Download cancelled",
   "download_already_exists": "File already downloaded",
-
   "delete_success": "Delete successful",
   "delete_error": "Delete error",
   "delete_completed": "File deleted",
   "delete_failed": "Unable to delete file",
-
   "play_error": "Play error",
   "play_failed": "Unable to play file",
   "play_success": "Play started",
   "play_local": "Local playback",
   "play_streaming": "Streaming playback",
-
   "cache_cleared": "Cache cleared",
   "cache_error": "Error clearing cache",
   "data_cleared": "Data cleared",
   "data_error": "Error clearing data",
-
   "migration_success": "Migration successful",
   "migration_error": "Migration error",
   "migration_completed": "Files migrated successfully",
-
   "cleanup_success": "Cleanup completed",
-  "cleanup_error": "Cleanup error",
+  "cleanup_error": "Unable to clean folder",
   "cleanup_completed": "Cleanup completed successfully",
-
   "sync_success": "Synchronization successful",
   "sync_error": "Synchronization error",
   "sync_completed": "Data synchronized",
-
   "backup_success": "Backup successful",
   "backup_error": "Backup error",
   "backup_completed": "Backup completed",
   "backup_restored": "Backup restored",
-
   "favorite_added": "Added to favorites",
   "favorite_removed": "Removed from favorites",
   "favorite_error": "Favorite error",
   "favorite_limit_reached": "Favorite limit reached",
   "favorite_premium_required": "Premium required for more favorites",
-
   "login_success": "Login successful",
   "login_error": "Login error",
   "logout_success": "Logout successful",
   "registration_success": "Registration successful",
   "registration_error": "Registration error",
-
   "premium_activated": "Premium activated",
   "premium_error": "Premium error",
   "premium_expired": "Premium expired",
-  "premium_required": "Premium required",
-
+  "premium_required": "Premium Required",
   "file_not_found": "File not found",
   "file_corrupted": "File corrupted",
   "file_invalid": "Invalid file",
   "file_too_large": "File too large",
-
   "network_error": "Network error",
   "server_error": "Server error",
   "connection_failed": "Connection failed",
   "timeout_error": "Timeout exceeded",
   "single_device_only": "Not authorized. Please log in on a single device only.",
-
   "permission_denied": "Permission denied",
   "storage_full": "Storage full",
   "invalid_format": "Invalid format",
   "operation_cancelled": "Operation cancelled",
-
   "recitation_not_found": "Recitation not found",
   "recitation_error": "Recitation error",
   "recitation_loading": "Loading recitation",
-
   "adhan_not_found": "Adhan not found",
   "adhan_error": "Adhan error",
   "adhan_loading": "Loading adhan",
-
   "validation_email_required": "Please enter your email",
   "validation_password_required": "Please enter your password",
   "validation_email_password_required": "Please enter your email and password",
@@ -536,7 +495,6 @@
   "validation_firstname_required": "Please enter your first name or nickname",
   "validation_firstname_too_short": "First name or nickname must be at least 2 characters",
   "validation_firstname_too_long": "First name or nickname cannot exceed 30 characters",
-
   "help_firstname_title": "First name or nickname",
   "help_firstname_prefilled": "This first name has been pre-filled from your settings. You can modify it if you wish.",
   "help_firstname_empty": "Between 2 and 30 characters. You can use your real first name or a nickname.",
@@ -544,7 +502,6 @@
   "help_password_content": "Required: between 6 and 50 characters.\nRecommended: letters, numbers and special characters for more security.",
   "help_email_title": "Email",
   "help_email_content": "Required format: name@email.com\nExample: user@gmail.com",
-
   "settings_screen": {
     "premium_adhans_title": "Premium Adhans",
     "no_premium_adhans": "No premium adhan detected",
@@ -561,7 +518,6 @@
     "download_adhan_cancel": "Cancel",
     "download_adhan_warning": "Download may take a few minutes depending on your connection."
   },
-
   "favorites_screen": {
     "title": "My Favorites",
     "all": "All",
@@ -579,8 +535,6 @@
     "share_error": "Error sharing",
     "shared_from_app": "Shared from Prayer Times App"
   },
-  "favorite_added": "Added to favorites",
-  "favorite_removed": "Removed from favorites",
   "asmaulhusna_search_placeholder": "Search by name, meaning or transliteration...",
   "dhikr": {
     "title": "Adhkar & Duas",
@@ -669,7 +623,7 @@
   "daily_dhikr_title": "Daily dhikr",
   "today_prayers": "Today's prayers",
   "calculating_prayer_times": "Calculating prayer times...",
-  "prayer_stats": "Prayer statistics",
+  "prayer_stats": "Statistics",
   "day_length": "Day length",
   "fajr_to_sunrise": "Fajr to sunrise",
   "sunset_to_isha": "Sunset to Isha",
@@ -694,7 +648,6 @@
   "sunset_to_fajr": "Time between sunset and Fajr",
   "night_length": "Night length",
   "time_until_sunset": "Time until sunset",
-
   "dashboard_welcome": "Assalamu Alaykum",
   "welcome_personalization_title": "Welcome personalization",
   "welcome_personalization_description": "To offer you a more personal experience, can you tell us your first name or nickname?",
@@ -715,7 +668,6 @@
   "dashboard_dua_fallback": "Discover daily invocations",
   "dashboard_verset_fallback": "Explore the Holy Quran",
   "dashboard_names_fallback": "Asmaul Husna",
-
   "learn_to_pray": "Learn to Pray",
   "ablutions_wudu": "Ablutions (Wudu)",
   "prayer_positions": "Prayer Positions",
@@ -725,7 +677,6 @@
   "important_duas": "Important Invocations",
   "images_coming_soon": "Images coming soon",
   "learning_footer": "This section helps you learn the basics of Islamic prayer",
-
   "wudu_step_1": "Formulate the intention (Niyyah) to perform ablutions",
   "wudu_invocation_arabic": "بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ",
   "wudu_invocation_phonetic": "Bismillah alrahman alrahim",
@@ -738,29 +689,24 @@
   "wudu_step_7": "Wipe head with wet hands from front to back",
   "wudu_step_8": "Wipe inside and outside of ears with wet fingers",
   "wudu_step_9": "Wash feet up to ankles three times (right then left)",
-
   "prayer_step_1": "Qiyam: Stand facing the Qibla, hands along the body",
   "prayer_step_2": "Takbir: Raise hands and say 'Allahu Akbar'",
   "prayer_step_3": "Ruku: Bow by placing hands on knees",
   "prayer_step_4": "Sujud: Prostrate by touching the ground with forehead",
   "prayer_step_5": "Sujud: Prostrate and glorify Allah",
-
   "opening_dua": "Opening Invocation",
   "opening_dua_translation": "Glory to You, O Allah, and praise to You. Blessed be Your name and exalted be Your majesty. There is no deity except You.",
   "ruku_dua": "Ruku Invocation",
   "ruku_dua_translation": "Glory to my Lord, the Most Great",
   "sujud_dua": "Sujud Invocation",
   "sujud_dua_translation": "Glory to my Lord, the Most High",
-
   "voir_plus": "See more",
   "hadith_du_jour": "Hadith of the day",
-
   "asmaulhusna": {
     "title": "The 99 Names of Allah",
     "subtitle": "Discover the most beautiful names of Allah and their meanings",
     "search_placeholder": "Search for a name..."
   },
-
   "location_permission_denied": "Location permission denied",
   "location_permission_needed_for_mosques": "Location is needed to find nearby mosques",
   "location_required_for_mosques": "Location is required to display nearby mosques",
@@ -775,7 +721,6 @@
   "directions": "Directions",
   "call": "Call",
   "more_info": "More info",
-
   "tasbih": {
     "title": "Tasbih",
     "reset": "Reset",
@@ -817,15 +762,10 @@
   "become_premium": "Become Premium",
   "buy_premium": "Become Premium",
   "premium_benefits": "Unlock all premium features: unlimited favorites, cloud backup, exclusive sounds...",
-  "premium_required": "Premium required",
   "download": "Download",
-  "download_completed": "Download completed",
-  "download_failed": "Download failed",
-  "download_cancelled": "Download cancelled",
   "offline": "Offline",
   "downloaded_locally": "Downloaded locally",
   "download_started": "Download started",
-  "download_error": "Download error",
   "download_unavailable": "Download unavailable",
   "recitation_premium_only": "Recitations are reserved for premium users",
   "adhan_premium_only": "Premium adhans are reserved for premium users",
@@ -833,8 +773,6 @@
   "clean": "Clean",
   "adhan_volume": "Adhan volume",
   "no_files_to_clean": "No files to clean",
-  "cleanup_error": "Unable to clean folder",
-  "cleanup_success": "Cleanup completed",
   "choose_reciter": "Choose a reciter",
   "previous": "Previous",
   "next": "Next",
@@ -860,14 +798,12 @@
   "streaming_status": "Streaming",
   "remove": "Remove",
   "clear_all": "Clear all",
-  "premium_active": "Premium Active",
   "premium_status_description": "Your premium subscription is active. Enjoy all exclusive features!",
   "refresh_location": "Refresh location",
   "position_detected": "Position detected:",
   "location_detected": "Location detected",
   "sound_and_adhan": "Sound and Adhan",
   "adhan_settings": "Sound and Adhan",
-  "premium_status": "Premium Status",
   "mosque_screen": {
     "location_not_available": "Location not available",
     "no_phone_available": "Phone number not available",
@@ -937,14 +873,13 @@
   "auto_backup_disabled_message": "Auto backup disabled",
   "auto_backup_premium_required": "Premium required",
   "auto_backup_premium_message": "Auto backup is reserved for premium users",
-  "backup_restore": "Backup",
+  "backup_restore": "Backup & Restore",
   "backup": "Backup",
   "dark_mode": "Dark",
   "light_mode": "Light",
   "morning_mode": "Morning",
   "sunset_mode": "Sunset",
   "theme": "Theme",
-  "premium_required": "Premium Required",
   "premium_themes_message": "The Morning and Sunset themes are reserved for Premium members.",
   "go_premium": "Go Premium",
   "excellent_consistency": "Excellent consistency!",
@@ -966,7 +901,6 @@
   "share_error": "Error sharing",
   "export_data": "Export data",
   "share_complete_stats_question": "Do you want to share your complete statistics?",
-  "cancel": "Cancel",
   "share": "Share",
   "profile_regular": "Regular Prayer",
   "profile_regular_desc": "Exemplary consistency",
@@ -1095,7 +1029,7 @@
   "badges_and_achievements": "🏆 Badges and achievements",
   "complete_history": "📋 Complete history",
   "start_spiritual_journey": "🌟 Start your spiritual journey",
-  "connection_required": "Connection Required",
+  "connection_required": "Connection required",
   "hadith_offline_premium_only": "Access to hadiths offline is only available for premium users. Please connect to the internet or upgrade to premium to access this feature.",
   "error_loading_books": "Error loading books",
   "error_loading_chapters": "Error loading chapters",
@@ -1132,7 +1066,6 @@
   "goals_overview": "Goals Overview",
   "offline_message_quran": "An internet connection is required to access the Quran. Please connect or upgrade to Premium for complete offline access.",
   "offline_title": "Offline Mode",
-  "retry": "Retry",
   "offline_mode": "Offline Mode",
   "online_mode": "Online Mode",
   "downloaded_audio": "Downloaded Audio",
@@ -1143,7 +1076,6 @@
   "switch_to_offline": "Switch to offline mode",
   "switch_to_online": "Switch to online mode",
   "offline_access_premium": "Offline access available with Premium",
-  "connection_required": "Connection required",
   "audio_offline_only": "Offline audio playback only",
   "background_audio_enabled": "Background audio enabled",
   "audio_list_placeholder": "List of downloaded audio files will be displayed here",
@@ -1183,7 +1115,6 @@
   "notification_stopped_3": "🌟 You've succeeded before, you can do it again!",
   "badges_collection": "🏅 Badge collection",
   "last_updated": "Last updated",
-  "offline_mode": "Offline mode",
   "checking_connection": "Checking...",
   "offline_manager": "Offline",
   "back_online": "Online",
@@ -1194,22 +1125,10 @@
   "back": "Back",
   "play_all": "Play all",
   "stop_playlist": "Stop",
-
   "success": "Success",
-  "error": "Error",
-  "download": {
-    "completed": "Download completed",
-    "failed": "Download failed",
-    "cancelled": "Download cancelled",
-    "added_to_list": "? Added to list: {{title}}",
-    "item_downloaded": "? {{item}} downloaded",
-    "failed_message": "Download failed",
-    "cancelled_message": "Download was interrupted"
-  },
   "errors": {
     "unknown_error": "An unknown error occurred",
     "unexpected_error": "An unexpected error occurred",
-
     "authentication": {
       "title": "Authentication error",
       "invalid_credentials": "Incorrect password or email",
@@ -1217,7 +1136,6 @@
       "session_expired": "Your session has expired, please log in again",
       "access_denied": "Access denied"
     },
-
     "validation": {
       "title": "Validation error",
       "email_required": "Email address is required",
@@ -1229,24 +1147,20 @@
       "invalid_data": "The data sent is invalid",
       "same_password": "New password cannot be identical to the old one"
     },
-
     "registration": {
       "title": "Registration error",
       "account_already_exists": "An account already exists with this email"
     },
-
     "network": {
       "title": "Network error",
       "connection_error": "Network connection error, check your internet connection",
       "timeout": "Timeout exceeded, please try again"
     },
-
     "server": {
       "title": "Server error",
       "server_error": "Server error, please try again later",
       "service_unavailable": "Service is temporarily unavailable"
     },
-
     "technical": {
       "title": "Technical error",
       "communication_error": "Communication error with server",
@@ -1255,7 +1169,6 @@
       "subscription_error": "Error managing your subscription",
       "payment_error": "Error processing payment"
     },
-
     "http": {
       "400": "The data sent is invalid",
       "401": "Incorrect password or email",
@@ -1265,76 +1178,8 @@
       "503": "Service is temporarily unavailable"
     }
   },
-
-  "qibla": {
-    "initializing_compass": "Initializing compass...",
-    "location_disabled": "Location disabled",
-    "location_permission_required": "Location permission required",
-    "location_enable_instructions": "To use the Qibla compass, enable location in your phone settings.",
-    "location_allow_instructions": "Press \"Allow\" and return to the app"
-  },
-
-  "premium": {
-    "ui": {
-      "signup_tab": "Create Premium account",
-      "login_tab": "Login"
-    },
-    "account_creation_required": "Account creation requires a Premium subscription. Your account will be created automatically after payment.",
-    "already_subscribed": "Already subscribed? Log in with the same email.",
-    "manage_account": "Manage account",
-    "account_management_redirect": "Go to About > Manage account for now",
-    "first_name_or_username": "First name or username",
-    "modify_prefilled_name": "Modify pre-filled first name",
-    "field_details_instructions": "Click on the ℹ️ icons to see details for each field.",
-    "session_expired": "Session expired",
-    "logout_success": "You have been successfully logged out",
-    "logout_error": "Error during logout",
-    "profile_updated": "Profile updated",
-    "profile_update_success": "Your information has been saved successfully",
-    "no_subscription_found": "No subscription found for your account",
-    "session_creation_error": "Error creating session",
-    "not_defined": "Not defined",
-    "subscription_type_undefined": "Type undefined",
-    "feature_development": "Feature under development",
-    "no_account_associated": "No premium account is associated with this device. Create an account or purchase premium.",
-    "feature_locked": "🔒 Premium Feature",
-    "feature_premium_only": "This feature is available only for premium users.",
-    "promotion": {
-      "feature_title": "Premium Feature",
-      "unlock_feature": "Unlock this feature with Premium",
-      "upgrade": "Upgrade",
-      "title": "Upgrade to Premium",
-      "message": "Unlock all advanced features",
-      "detailed_stats": "Detailed statistics",
-      "exclusive_themes": "Exclusive themes",
-      "unlimited_favorites": "Unlimited favorites"
-    },
-    "expired_title": "Subscription Expired",
-    "expired_message": "Your premium subscription has expired. Renew to continue enjoying premium features.",
-    "expiring_soon_title": "Subscription Expiring Soon",
-    "expiring_soon_message": "Your subscription expires in {{days}} day(s). Remember to renew it!",
-    "renewed_title": "Subscription Renewed",
-    "renewed_message": "Your premium subscription has been automatically renewed until {{date}}"
-  },
-
-  "account": {
-    "first_name_placeholder": "Your first name",
-    "not_defined": "Not defined",
-    "subscription_type_undefined": "Type undefined"
-  },
-
-  "backup": {
-    "backup_confirm": "Do you want to backup your data to the cloud?",
-    "restore_confirm": "Do you want to restore your data from the cloud? This will replace your current data.",
-    "restart_required": "Restart required",
-    "restore_success_message": "Your data has been successfully restored. To see all changes, please completely close the app then reopen it.",
-    "not_connected": "Not connected",
-    "last_backup": "Last backup",
-    "cloud_data": "Cloud data",
-    "refresh_cloud_confirm": "Do you want to refresh cloud data?",
-    "sync_success": "Synchronization successful"
-  },
-
+  "premium": "Premium",
+  "account": "Account",
   "password": {
     "change_modal": {
       "password_criteria": "The new password must contain at least 8 characters, one uppercase, one lowercase, one number and one special character",
@@ -1371,38 +1216,6 @@
     "continue": "Continue",
     "change": "Change"
   },
-
-  "settings": {
-    "screen": {
-      "download_adhan_title": "Download adhan",
-      "download_adhan_message": "Do you want to download",
-      "download_adhan_confirm": "Download"
-    },
-    "title": "Settings",
-    "theme": "Theme",
-    "about": "About",
-    "developer": "Developer",
-    "last_update": "Last update",
-    "app_description": "This application is developed with love for the Muslim community.",
-    "version": "Version",
-    "faq_text": "Frequently asked questions",
-    "notifications_reprogrammed": "Notifications reprogrammed",
-    "notifications_new_settings": "Your new settings will be taken into account for the next notifications.",
-    "premium_access": "Premium access",
-    "success": "Success",
-    "adhan_list_updated": "Adhan list updated",
-    "download_completed": "Download completed",
-    "download_failed": "Download failed",
-    "download_failed_message": "Download failed",
-    "download_cancelled": "Download cancelled",
-    "download_cancelled_message": "Download was interrupted",
-    "delete_all_adhans": "Deleting all downloaded adhans...",
-    "no_downloaded_files": "No downloaded files found",
-    "cleanup_completed": "Cleanup completed",
-    "analyzing_files": "Analyzing downloaded files...",
-    "diagnostic_completed": "Diagnostic completed"
-  },
-
   "adhans": {
     "preview_limited": "Preview limited to 20 seconds",
     "download_time_warning": "Download may take a few minutes depending on your connection.",
@@ -1412,24 +1225,11 @@
     "download_title": "Download adhan",
     "download_message": "Do you want to download"
   },
-
   "general": {
     "settings": "General settings",
     "prayer_reminders_before": "Prayer reminders before",
     "reminder_offset_minutes": "Delay (minutes)"
   },
-
-  "location": {
-    "method": "Location method",
-    "updating": "Updating...",
-    "detected": "Location detected"
-  },
-
-  "home": {
-    "go_to_settings": "Go to settings",
-    "notifications_disabled_message": "You must allow notifications to receive prayer and dhikr reminders."
-  },
-
   "stats": {
     "improvement_opportunity": "Improvement opportunity",
     "start_habit_advice": "Start with 1 prayer per day to build the habit.",
@@ -1489,15 +1289,33 @@
     "time_window": "Window",
     "goal_soon_customizable": "Your goal will be customizable soon!",
     "weekly_goal_desc": "Number of prayers targeted per week",
-
     "quran_widget_available": "Widget available on your home screen",
     "quran_widget_add": "Add widget to your home screen",
     "quran_widget_active": "Active",
     "quran_widget_inactive": "Inactive",
     "quran_widget_title": "Premium Quran Widget",
-    "quran_widget_description": "Control Quran playback from your home screen"
+    "quran_widget_description": "Control Quran playback from your home screen",
+    "screen_title": "My Prayers",
+    "tab_today": "Today",
+    "tab_journey": "Journey",
+    "today_title": "Today",
+    "prayers_today": "{{count}} of 5",
+    "mark_prayed": "I prayed",
+    "unmark_prayed": "Undo",
+    "day_complete_title": "Day complete!",
+    "day_complete_message": "Masha'Allah, all 5 prayers are done. May Allah accept your efforts.",
+    "next_prayer_hint": "Next up: {{prayer}}",
+    "progress_footer": "{{percent}}% of the day complete",
+    "heatmap_title": "Consistency",
+    "heatmap_subtitle": "Your last {{days}} days",
+    "other_actions_title": "Other actions",
+    "other_actions_subtitle": "Dhikr, Quran and hadiths in one tap",
+    "heatmap_almost": "Almost complete",
+    "go_yesterday": "Previous day",
+    "back_today": "Back to today",
+    "catch_up_hint": "Catch up on yesterday's prayers if you forgot to mark them.",
+    "yesterday_title": "Yesterday"
   },
-
   "premium_ui": {
     "badge": "Premium",
     "signup_tab": "Create Premium Account",
@@ -1505,7 +1323,6 @@
     "signup_info_line1": "Account creation requires a Premium subscription. Your account will be created automatically after payment.",
     "signup_info_line2": "Already subscribed? Log in with the same email."
   },
-
   "auth_modal": {
     "title": "Premium Account",
     "signup_tab": "Create Account",
@@ -1529,13 +1346,6 @@
     "password_criteria_title": "Security criteria",
     "password_min_length": "At least 6 characters"
   },
-
-  "location": "Location",
-  "backup": "Backup",
-  "download": "Download",
-  "qibla": "Qibla",
-  "favorites": "Favorites",
-  "settings": "Settings",
   "languages": {
     "fr": "Français",
     "en": "English",
@@ -1551,7 +1361,6 @@
     "fa": "فارسی",
     "nl": "Nederlands"
   },
-
   "quran_navigation_modal": {
     "title": "🧭 Navigation",
     "swipe_instruction": "Swipe to change the display",
@@ -1559,18 +1368,15 @@
     "play_instruction": "Play starts the displayed audio",
     "close_button": "Got it!"
   },
-
   "mosques_finder": "Smart Mosque Finder",
   "native_downloads": "Native Downloads",
   "android_widgets": "Android Widgets",
   "lock_screen_player": "Lock Screen Player",
   "tactile_controls": "Tactile Controls",
-  "backup_restore": "Backup & Restore",
   "data_deletion_label": "Data Deletion",
   "stripe_payments": "Stripe Payments",
   "user_accounts": "User Accounts",
   "13_languages": "13 Languages Supported",
-  "offline_mode": "Offline Mode",
   "local_storage": "Local Storage",
   "new_features_title": "New Features",
   "new_features_subtitle": "Discover the latest improvements",
@@ -1610,7 +1416,6 @@
   "toast_premium_required": "Premium required",
   "toast_download_error": "Download error",
   "toast_download_failed": "Download failed",
-  "toast_download_success": "Success",
   "toast_recitation_loading": "Loading recitation",
   "toast_validation_email_required": "Please enter your email",
   "toast_validation_password_required": "Please enter your password",
@@ -1640,11 +1445,6 @@
   "toast_cleanup_updating_title": "Updating...",
   "toast_cleanup_updating_message": "Refreshing list in progress",
   "toast_cleanup_completed_detailed_message": "{{count}} files deleted ({{size}} MB freed)",
-  "toast_diagnostic_started_title": "Diagnostic in progress...",
-  "toast_diagnostic_started_message": "Analyzing downloaded files...",
-  "toast_diagnostic_completed_title": "Diagnostic completed",
-  "toast_diagnostic_error_title": "Diagnostic error",
-  "toast_diagnostic_error_message": "Unable to diagnose files",
   "toast_configuration_unavailable": "Configuration not available",
   "toast_apply_changes_error": "Unable to apply changes",
   "toast_local_playback": "Local playback",
@@ -1660,33 +1460,25 @@
   "toast_auto_fix_error_message": "Unable to apply automatic corrections",
   "toast_payment_success_title": "Payment Successful!",
   "toast_payment_success_message": "Your {{subscriptionName}} subscription is now active.",
-
   "library": "Library",
   "islamic_knowledge": "Spiritual resources",
   "read_listen": "Read and listen",
   "saved_content": "Saved content",
   "prophetic_biography": "Prophetic biography",
-  "prophet_stories": "Prophets Stories ﷺ",
   "prophetic_traditions": "Prophetic traditions",
   "invocations": "Invocations",
   "99_names": "99 names of Allah",
   "library_info": "Access all spiritual resources in one place",
-  
   "more": "More",
   "additional_features": "Additional features",
   "tools": "Tools",
   "find_nearby": "Find nearby",
   "digital_counter": "Digital counter",
   "islamic_dates": "Islamic dates",
-  "premium": "Premium",
-  "prayer_stats": "Statistics",
   "track_prayers": "Track your prayers",
-  "account": "Account",
   "app_preferences": "App preferences",
   "app_info": "App information",
   "asmaul_husna": "Asmaul Husna",
-  "hijri_calendar": "Hijri Calendar",
-  
   "background_image_type": "Background image type",
   "background_prophet": "🕌 Prophet's Mosque",
   "background_makka": "🕋 Makkah",

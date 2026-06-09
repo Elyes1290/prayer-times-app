@@ -133,16 +133,19 @@ const getStyles = (
 ) => {
   // 🆕 Les couleurs sont maintenant gérées directement via colors du thème actif
   return StyleSheet.create({
-    container: {
+    scroll: {
       flex: 1,
+    },
+    scrollContent: {
+      flexGrow: 1,
       alignItems: "center",
-      justifyContent: "space-between",
+      width: "100%",
     },
     title: {
       fontSize: 28,
       fontWeight: "bold",
-      marginTop: 20,
-      marginBottom: 20,
+      marginTop: 8,
+      marginBottom: 10,
       color: overlayTextColor,
       textShadowColor: colors.shadow, // 🌅 Utilise la couleur du thème actif
       textShadowOffset: { width: 1, height: 1 },
@@ -153,6 +156,7 @@ const getStyles = (
       width: "100%",
       alignItems: "center",
       paddingHorizontal: 16,
+      marginTop: 4,
     },
     compassWrap: {
       width: compassSize,
@@ -205,15 +209,17 @@ const getStyles = (
     instructionsWrapper: {
       width: "100%",
       paddingHorizontal: 20,
-      paddingVertical: 20,
+      paddingTop: 10,
+      paddingBottom: 8,
+      marginTop: "auto" as const,
       alignItems: "center",
       justifyContent: "center",
     },
     instructionsBox: {
       backgroundColor: colors.surface, // 🌅 Utilise la couleur du thème actif
-      borderRadius: 16,
-      paddingHorizontal: 20,
-      paddingVertical: 14,
+      borderRadius: 14,
+      paddingHorizontal: 16,
+      paddingVertical: 10,
       boxShadow: makeBoxShadow(colors.shadow, 0, 4, 8, 0.3),
       borderWidth: 1.5,
       borderColor: colors.border, // 🌅 Utilise la couleur du thème actif
@@ -221,10 +227,10 @@ const getStyles = (
     },
     instructions: {
       color: colors.primary, // 🌅 Utilise la couleur du thème actif
-      fontSize: 15,
-      fontWeight: "600",
-      textAlign: "justify",
-      lineHeight: 22,
+      fontSize: 12.5,
+      fontWeight: "500",
+      textAlign: "center",
+      lineHeight: 17,
       textShadowColor: colors.shadow, // 🌅 Utilise la couleur du thème actif
       textShadowOffset: { width: 0, height: 1 },
       textShadowRadius: 2,
@@ -392,8 +398,9 @@ export default function QiblaScreen() {
   const overlayTextColor = useOverlayTextColor();
   const currentTheme = useCurrentTheme();
   const { width, height } = useWindowDimensions();
-  const compassSize = Math.min(width * 0.75, height * 0.35, 300);
+  const compassSize = Math.min(width * 0.7, height * 0.28, 270);
   const needleHeight = compassSize * 0.33;
+  const tabBarClearance = Math.max(insets.bottom, 20) + 70 + 40;
 
   const styles = getStyles(colors, overlayTextColor, currentTheme, compassSize, needleHeight);
 
@@ -567,9 +574,9 @@ export default function QiblaScreen() {
 
   useEffect(() => {
     if (!userDeniedPermission) {
-      initializeQibla();
+      void initializeQibla();
     }
-  }, [initializeQibla, userDeniedPermission]);
+  }, [userDeniedPermission, initializeQibla]);
 
   useFocusEffect(
     useCallback(() => {
@@ -612,11 +619,15 @@ export default function QiblaScreen() {
         translucent
         backgroundColor="transparent"
       />
-      <View
-        style={[
-          styles.container,
-          { paddingTop: insets.top + 20, paddingBottom: insets.bottom + 100 },
+      <ScrollView
+        style={styles.scroll}
+        contentContainerStyle={[
+          styles.scrollContent,
+          { paddingTop: insets.top + 12, paddingBottom: tabBarClearance },
         ]}
+        showsVerticalScrollIndicator={false}
+        bounces={false}
+        keyboardShouldPersistTaps="handled"
       >
         <Text style={[styles.title, { fontSize: Math.min(width * 0.07, 28) }]}>
           {t("qibla_direction")}
@@ -689,7 +700,7 @@ export default function QiblaScreen() {
               <Text
                 style={[
                   styles.instructions,
-                  { fontSize: Math.min(width * 0.035, 15) },
+                  { fontSize: Math.min(width * 0.03, 12.5) },
                 ]}
               >
                 {t("qibla_instructions")}
@@ -697,6 +708,7 @@ export default function QiblaScreen() {
             </View>
           </View>
         )}
+      </ScrollView>
 
         {/* 🧭 Modal de sélection de boussole (premium) */}
         <Modal
@@ -782,7 +794,6 @@ export default function QiblaScreen() {
             </View>
           </SafeAreaView>
         </Modal>
-      </View>
     </ThemedImageBackground>
   );
 }

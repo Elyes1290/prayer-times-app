@@ -1307,7 +1307,12 @@
     "heatmap_title": "الانتظام",
     "heatmap_subtitle": "آخر {{days}} أيام",
     "other_actions_title": "أعمال أخرى",
-    "other_actions_subtitle": "أذكار، قرآن وحاديث بنقرة واحدة"
+    "other_actions_subtitle": "أذكار، قرآن وحاديث بنقرة واحدة",
+    "heatmap_almost": "تقدم جيد",
+    "go_yesterday": "اليوم السابق",
+    "back_today": "العودة إلى اليوم",
+    "catch_up_hint": "يمكنك تسجيل صلوات أمس إذا نسيت تحديدها.",
+    "yesterday_title": "أمس"
   },
   "premium_ui": {
     "badge": "بريميوم",

@@ -1307,7 +1307,12 @@
     "heatmap_title": "Регулярность",
     "heatmap_subtitle": "Последние {{days}} дней",
     "other_actions_title": "Другие действия",
-    "other_actions_subtitle": "Зикр, Коран и хадисы в одно касание"
+    "other_actions_subtitle": "Зикр, Коран и хадисы в одно касание",
+    "heatmap_almost": "Хороший прогресс",
+    "go_yesterday": "Предыдущий день",
+    "back_today": "Вернуться к сегодня",
+    "catch_up_hint": "Вы можете отметить вчерашние молитвы, если забыли это сделать.",
+    "yesterday_title": "Вчера"
   },
   "premium_ui": {
     "badge": "Премиум",

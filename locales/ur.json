@@ -1307,7 +1307,12 @@
     "heatmap_title": "استقامت",
     "heatmap_subtitle": "آخری {{days}} دن",
     "other_actions_title": "دیگر اعمال",
-    "other_actions_subtitle": "ذکر، قرآن اور احادیث ایک ٹیپ میں"
+    "other_actions_subtitle": "ذکر، قرآن اور احادیث ایک ٹیپ میں",
+    "heatmap_almost": "اچھی پیش رفت",
+    "go_yesterday": "پچھلا دن",
+    "back_today": "آج پر واپس",
+    "catch_up_hint": "اگر آپ نشان لگانا بھول گئے ہیں تو کل کی نمازیں درج کر سکتے ہیں۔",
+    "yesterday_title": "کل"
   },
   "premium_ui": {
     "badge": "پریمیم",

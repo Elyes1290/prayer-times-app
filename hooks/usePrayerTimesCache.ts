@@ -285,11 +285,93 @@ export function usePrayerTimesCache(
   ]);
 
   /**
-   * Charge les horaires et démarre le préchargement
+   * Charge les horaires quand la localisation, la date ou la méthode change
    */
   useEffect(() => {
-    loadPrayerTimes();
-  }, [loadPrayerTimes]);
+    let cancelled = false;
+
+    const runLoad = async () => {
+      if (!latitude || !longitude || !cacheKey) {
+        setPrayerTimes(null);
+        setIsFromCache(false);
+        return;
+      }
+
+      setIsLoading(true);
+
+      try {
+        const cached = await cacheService.getCachedPrayerTimes(
+          date,
+          latitude,
+          longitude,
+          calcMethod
+        );
+
+        if (cancelled) return;
+
+        if (cached) {
+          const times = convertCachedToPrayerTimes(cached);
+          setPrayerTimes(times);
+          setIsFromCache(true);
+          setCacheStats((prev) => ({
+            ...prev,
+            cacheHits: prev.cacheHits + 1,
+            isLoaded: true,
+          }));
+          debugLog(`⚡ Cache hit pour ${cacheKey}`);
+        } else {
+          const times = await computePrayerTimes();
+          if (cancelled) return;
+
+          if (times) {
+            setPrayerTimes(times);
+            setIsFromCache(false);
+            await cacheService.setCachedPrayerTimes(
+              date,
+              latitude,
+              longitude,
+              calcMethod,
+              times
+            );
+            setCacheStats((prev) => ({
+              ...prev,
+              cacheMisses: prev.cacheMisses + 1,
+              isLoaded: true,
+            }));
+            debugLog(`💾 Cache miss - calculé et sauvegardé pour ${cacheKey}`);
+          } else {
+            setPrayerTimes(null);
+            setIsFromCache(false);
+          }
+        }
+      } catch (error) {
+        if (!cancelled) {
+          errorLog("❌ Erreur chargement horaires:", error);
+          setPrayerTimes(null);
+          setIsFromCache(false);
+        }
+      } finally {
+        if (!cancelled) {
+          setIsLoading(false);
+        }
+      }
+    };
+
+    void runLoad();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [
+    latitude,
+    longitude,
+    cacheKey,
+    date,
+    calcMethod,
+    cacheService,
+    convertCachedToPrayerTimes,
+    computePrayerTimes,
+  ]);
 
   /**
    * Démarre le préchargement en arrière-plan

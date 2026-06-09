@@ -6,7 +6,6 @@
   "enter_city_name": "نام شهر خود را وارد کنید",
   "enable_auto_location": "موقعیت خودکار را فعال کنید (GPS)",
   "unknown_city": "شهر ناشناخته",
-
   "appearance": "ظاهر",
   "theme_mode": "حالت نمایش",
   "theme_auto": "خودکار",
@@ -15,7 +14,6 @@
   "notifications_disabled_title": "اعلان‌ها غیرفعال شده‌اند",
   "notifications_disabled_message": "برای دریافت اعلان‌ها، آن‌ها را در تنظیمات فعال کنید.",
   "open_settings": "باز کردن تنظیمات",
-
   "settings": "تنظیمات",
   "location": "موقعیت",
   "automatic_gps": "خودکار (GPS)",
@@ -32,7 +30,6 @@
   "minutes_before": "چند دقیقه قبل:",
   "minutes": "دقیقه",
   "language": "زبان",
-
   "calc_method": {
     "MuslimWorldLeague": "اتحادیه جهانی مسلمانان",
     "Egyptian": "مرجع عمومی مصر",
@@ -45,7 +42,6 @@
     "Tehran": "تهران",
     "Turkey": "ترکیه"
   },
-
   "method_MuslimWorldLeague": "اتحادیه جهانی مسلمانان",
   "method_Egyptian": "مرجع عمومی مصر",
   "method_Karachi": "دانشگاه علوم اسلامی، کراچی",
@@ -56,7 +52,6 @@
   "method_Singapore": "سنگاپور",
   "method_Tehran": "تهران",
   "method_Turkey": "ترکیه",
-
   "adhan_sound": "انتخاب اذان",
   "adhan_sounds": {
     "adhamalsharqawe": "اذان شرقاوی",
@@ -71,7 +66,6 @@
     "masjidquba": "مسجد قبا",
     "islamsobhi": "اسلام صبحی"
   },
-
   "sound_adhamalsharqawe": "Sharqawi Adhan",
   "sound_adhanaljazaer": "Adhan Al Jazaer",
   "sound_ahmadnafees": "Ahmad Nafees",
@@ -83,7 +77,6 @@
   "sound_mustafaozcan": "Mustafa Ozcan",
   "sound_masjidquba": "Masjid Al-Quba",
   "sound_islamsobhi": "Islam Sobhi",
-
   "hijri_calendar": "تقویم هجری",
   "gregorian_date": "تاریخ میلادی",
   "hijri_date": "تاریخ هجری",
@@ -111,7 +104,7 @@
   "no_text": "متنی برای این حدیث وجود ندارد.",
   "about": "درباره",
   "status": "وضعیت",
-  "premium_status": "پریمیوم",
+  "premium_status": "وضعیت پریمیوم",
   "free": "رایگان",
   "account_label": "حساب",
   "user": "کاربر",
@@ -150,7 +143,6 @@
     "welcome": "به همراه معنوی شما خوش آمدید!",
     "description": "این برنامه رایگان (در حال حاضر بدون تبلیغات) روزانه شما را در تمرین مذهبی همراهی می‌کند: اوقات دقیق نماز، جهت قبله، خواندن قرآن، ذکر خودکار، احادیث معتبر، تقویم هجری، آمار نماز، سیستم نشان‌ها، سیستم علاقه‌مندی‌ها، صوت پیشرفته و موارد دیگر. نسخه پریمیوم بدون تبلیغات با ویژگی‌های انحصاری به زودی در دسترس خواهد بود.",
     "blessing": "بارک الله فیکم - خداوند شما را برکت دهد",
-
     "features_title": "🌟 ویژگی‌های کامل",
     "features_subtitle": "همه آنچه برای تمرین اسلامی نیاز دارید:",
     "features": {
@@ -183,21 +175,18 @@
       "offline_mode": "حالت آفلاین",
       "local_storage": "ذخیره‌سازی محلی امن"
     },
-
     "premium_title": "👑 ویژگی‌های پریمیوم",
     "premium_subtitle": "سفر معنوی خود را بهبود دهید:",
     "premium_stats": "آمار دقیق نماز",
     "premium_badges": "نشان‌های ویژه و پاداش‌ها",
     "premium_audio": "فایل‌های صوتی با کیفیت بالا",
     "premium_themes": "تم‌های ویژه و شخصی‌سازی",
-
     "advanced_title": "🚀 ویژگی‌های پیشرفته",
     "advanced_subtitle": "برای بهبود تجربه شما:",
     "advanced_favorites": "سیستم علاقه‌مندی‌ها و همگام‌سازی",
     "advanced_weekly": "نمایش هفتگی نماز",
     "advanced_sun": "اطلاعات خورشید و زمان",
     "advanced_personalization": "شخصی‌سازی و تنظیمات",
-
     "new_features_title": "🆕 ویژگی‌های جدید",
     "new_features_subtitle": "آخرین بهبودهای اضافه شده به برنامه:",
     "new_widgets": "ویجت‌های اندروید قابل تنظیم",
@@ -206,7 +195,6 @@
     "new_downloads": "دانلودهای بومی بهینه شده",
     "new_mosques": "جستجوگر هوشمند مساجد",
     "new_backup": "سیستم کامل پشتیبان‌گیری",
-
     "faq_title": "❓ سوالات متداول",
     "faq_location_question": "چرا برنامه به موقعیت من نیاز دارد؟",
     "faq_location_answer": "موقعیت برای محاسبه دقیق اوقات نماز بر اساس موقعیت جغرافیایی شما ضروری است. همچنین می‌توانید شهر خود را به صورت دستی وارد کنید.",
@@ -216,7 +204,6 @@
     "faq_qibla_answer": "تلفن خود را صاف نگه دارید، دور از اشیاء فلزی. اگر قطب‌نما ناپایدار است، حرکات شکل ۸ انجام دهید تا کالیبره شود.",
     "faq_offline_question": "آیا برنامه بدون اتصال کار می‌کند؟",
     "faq_offline_answer": "بله، پس از تنظیم، برنامه بدون اتصال برای اوقات نماز، قبله، ذکر و خواندن قرآن کار می‌کند.",
-
     "support_title": "🤝 پشتیبانی و جامعه",
     "send_suggestion": "ارسال پیشنهاد",
     "report_bug": "گزارش مشکل",
@@ -224,12 +211,10 @@
     "contact_suggestion": "پیشنهاد برنامه مسلمان",
     "contact_bug": "گزارش خطای برنامه مسلمان",
     "email_template": "سلام درگبینو،\n\nدر مورد {{subject}}:\n\n[پیام شما اینجا]\n\nممنون از این برنامه عالی!\n\nبا احترام",
-
     "developer_title": "👨‍💻 توسعه‌دهنده",
     "developer_name": "توسعه یافته با ❤️ توسط درگبینو",
     "developer_bio": "توسعه‌دهنده مشتاق، مسلمان متدین، خالق برنامه‌های مفید برای جامعه.",
     "linkedin_profile": "مشاهده پروفایل لینکدین",
-
     "technical_title": "⚙️ اطلاعات فنی",
     "tech_react_native": "• توسعه یافته با React Native & Expo",
     "tech_adhan_lib": "• محاسبات بر اساس کتابخانه Adhan",
@@ -239,14 +224,12 @@
     "tech_audio_optimization": "• بهینه‌سازی صوت پیشرفته و کش",
     "tech_performance": "• عملکرد بهبود یافته با React hooks مدرن",
     "tech_security": "• امنیت بهبود یافته و محافظت از داده‌ها",
-
     "sources_title": "📚 منابع و اعتبارات",
     "source_quran": "• قرآن: API قرآن.com",
     "source_hadith": "• احادیث: HadithAPI.com",
     "source_prayer_calculation": "• محاسبات نماز: کتابخانه Adhan",
     "source_icons": "• آیکون‌ها: Material Design & Flaticon",
     "islamic_authenticity": "✅ تمام منابع مذهبی تأیید و معتبر هستند",
-
     "legal_title": "⚖️ اخطارهای قانونی",
     "privacy_policy": "سیاست حفظ حریم خصوصی",
     "privacy_policy_content": "این برنامه حریم خصوصی شما را محترم می‌شمارد:\n\n• داده‌های شما در دستگاه شما باقی می‌مانند\n• هیچ اطلاعات شخصی جمع‌آوری نمی‌شود\n• موقعیت فقط برای محاسبات استفاده می‌شود\n• در حال حاضر بدون تبلیغات\n• برنامه رایگان با نسخه پریمیوم به زودی",
@@ -254,7 +237,6 @@
     "terms_title": "شرایط استفاده",
     "terms_content": "با استفاده از این برنامه:\n\n• شما موافقت می‌کنید آن را مطابق با ارزش‌های اسلامی استفاده کنید\n• برنامه نسخه رایگان و پریمیوم ارائه می‌دهد\n• توسعه‌دهنده تلاش می‌کند دقت را تضمین کند\n• همیشه با مسجد محلی خود بررسی کنید\n• استفاده تحت مسئولیت خود شماست",
     "understand": "متوجه شدم",
-
     "version": "نسخه",
     "build": "ساخت",
     "last_update": "آخرین به‌روزرسانی:",
@@ -267,13 +249,21 @@
     "closing_dua": "رَبَّنَا تَقَبَّلْ مِنَّا إِنَّكَ أَنتَ السَّمِيعُ الْعَلِيمُ"
   },
   "translation_not_available": "ترجمه فارسی برای این کتاب در دسترس نیست.",
-  "home": "خانه",
+  "home": {
+    "go_to_settings": "برای اکنون به تنظیمات بروید",
+    "notifications_disabled_message": "شما باید اعلان‌ها را در تنظیمات تلفن خود فعال کنید تا بتوانید صلوات و ذکر را دریافت کنید."
+  },
   "qibla": "قبله",
   "mosques": "مساجد",
   "today": "امروز",
-  "quran": "قرآن",
+  "quran": {
+    "offline_recitation": "تلاوت دانلود شده (بدون اتصال)",
+    "unknown_reciter": "قاری ناشناخته",
+    "reciter": "قاری",
+    "checking_connection": "بررسی..."
+  },
   "hadiths": "احادیث",
-  "prophet_stories": "داستان‌های پیامبران (ع)",
+  "prophet_stories": "داستان های پیامبران ﷺ",
   "prophets_stories": "داستان‌های پیامبران",
   "prophet_story_categories": {
     "childhood": "کودکی",
@@ -303,7 +293,6 @@
   "using_free_api": "API رایگان فعال شده (OpenStreetMap)",
   "mosque_search_error": "خطا در جستجوی مساجد",
   "mosque_search_timeout": "جستجو خیلی طولانی است، لطفاً دوباره تلاش کنید",
-
   "prayer_names": {
     "Fajr": "فجر",
     "Dhuhr": "ظهر",
@@ -311,7 +300,7 @@
     "Maghrib": "مغرب",
     "Isha": "عشاء"
   },
-  "favorites": "علاقه‌مندی‌ها",
+  "favorites": "مورد علاقه",
   "favorites_section": {
     "title": "علاقه‌مندی‌ها",
     "empty_title": "بدون علاقه‌مندی",
@@ -323,25 +312,12 @@
     "no_favorites_in_category": "هیچ علاقه‌مندی در این دسته وجود ندارد",
     "press_heart_to_add": "برای اضافه کردن محتوای مورد علاقه خود ❤️ را فشار دهید"
   },
-  "favorites": {
-    "sync_success": "همگام‌سازی موفق",
-    "sync_message": "علاقه‌مندی‌های شما همگام‌سازی شده‌اند",
-    "deleted": "علاقه‌مندی‌ها حذف شدند",
-    "all_deleted": "تمام علاقه‌مندی‌ها حذف شدند"
-  },
   "sun_info": {
     "day_duration": "مدت روز"
-  },
-  "quran": {
-    "offline_recitation": "تلاوت دانلود شده (بدون اتصال)",
-    "unknown_reciter": "قاری ناشناخته",
-    "reciter": "قاری",
-    "checking_connection": "بررسی..."
   },
   "hadith": {
     "search_placeholder": "جستجو بر اساس متن یا شماره حدیث..."
   },
-
   "data_deletion": {
     "title": "حذف حساب کاربری",
     "warning": "هشدار",
@@ -422,13 +398,13 @@
   "toast_cleanup_completed_message": "فایل‌ها با موفقیت پاک شدند",
   "toast_cleanup_error_title": "خطای پاکسازی",
   "toast_cleanup_error_message": "خطا در طول پاکسازی",
-  "toast_diagnostic_started_title": "تشخیص شروع شد",
-  "toast_diagnostic_started_message": "در حال تشخیص فایل‌ها...",
-  "toast_diagnostic_completed_title": "تشخیص کامل شد",
+  "toast_diagnostic_started_title": "تشخیص در حال انجام...",
+  "toast_diagnostic_started_message": "تجزیه و تحلیل فایل‌های دانلود شده...",
+  "toast_diagnostic_completed_title": "تشخیص تکمیل شد",
   "toast_diagnostic_completed_message": "تشخیص با موفقیت کامل شد",
   "toast_diagnostic_error_title": "خطای تشخیص",
-  "toast_diagnostic_error_message": "خطا در طول تشخیص",
-  "toast_download_success": "موفقیت",
+  "toast_diagnostic_error_message": "نمی‌توان فایل‌ها را تشخیص داد",
+  "toast_download_success": "موفق",
   "toast_operation_cancelled": "عملیات لغو شد",
   "premium_sync_title": "همگام‌سازی پریمیوم",
   "premium_sync_message": "همگام‌سازی با سرور پریمیوم...",
@@ -440,88 +416,71 @@
   "renewal_detected": "تمدید تشخیص داده شد",
   "account_exists": "حساب موجود است",
   "warning": "هشدار",
-
   "download_error": "خطای دانلود",
-  "download_failed": "دانلود ناموفق",
+  "download_failed": "دانلود ناموفق بود",
   "download_success": "دانلود موفق",
   "download_completed": "دانلود کامل شد",
   "download_cancelled": "دانلود لغو شد",
   "download_already_exists": "فایل قبلاً دانلود شده است",
-
   "delete_success": "حذف موفق",
   "delete_error": "خطای حذف",
   "delete_completed": "فایل حذف شد",
   "delete_failed": "نمی‌توان فایل را حذف کرد",
-
   "play_error": "خطای پخش",
   "play_failed": "نمی‌توان فایل را پخش کرد",
   "play_success": "پخش شروع شد",
   "play_local": "پخش محلی",
   "play_streaming": "پخش استریم",
-
   "cache_cleared": "کش پاک شد",
   "cache_error": "خطا در پاک کردن کش",
   "data_cleared": "داده‌ها پاک شدند",
   "data_error": "خطا در پاک کردن داده‌ها",
-
   "migration_success": "مهاجرت موفق",
   "migration_error": "خطای مهاجرت",
   "migration_completed": "فایل‌ها با موفقیت مهاجرت شدند",
-
-  "cleanup_success": "پاکسازی کامل شد",
-  "cleanup_error": "خطای پاکسازی",
+  "cleanup_success": "پاک‌سازی کامل شد",
+  "cleanup_error": "قادر به پاک‌سازی پوشه نیست",
   "cleanup_completed": "پاکسازی با موفقیت کامل شد",
-
   "sync_success": "همگام‌سازی موفق",
   "sync_error": "خطای همگام‌سازی",
   "sync_completed": "داده‌ها همگام‌سازی شدند",
-
   "backup_success": "پشتیبان موفق",
   "backup_error": "خطای پشتیبان",
   "backup_completed": "پشتیبان کامل شد",
   "backup_restored": "پشتیبان بازیابی شد",
-
   "favorite_added": "به علاقه‌مندی‌ها اضافه شد",
   "favorite_removed": "از علاقه‌مندی‌ها حذف شد",
   "favorite_error": "خطای علاقه‌مندی",
   "favorite_limit_reached": "محدودیت علاقه‌مندی‌ها رسیده است",
   "favorite_premium_required": "پریمیوم برای علاقه‌مندی‌های بیشتر لازم است",
-
   "login_success": "ورود موفق",
   "login_error": "خطای ورود",
   "logout_success": "خروج موفق",
   "registration_success": "ثبت‌نام موفق",
   "registration_error": "خطای ثبت‌نام",
-
   "premium_activated": "پریمیوم فعال شد",
   "premium_error": "خطای پریمیوم",
   "premium_expired": "پریمیوم منقضی شد",
-  "premium_required": "پریمیوم لازم است",
-
+  "premium_required": "پریمیوم مورد نیاز",
   "file_not_found": "فایل یافت نشد",
   "file_corrupted": "فایل خراب است",
   "file_invalid": "فایل نامعتبر است",
   "file_too_large": "فایل خیلی بزرگ است",
-
   "network_error": "خطای شبکه",
   "server_error": "خطای سرور",
   "connection_failed": "اتصال ناموفق",
   "timeout_error": "زمان انتظار تمام شد",
   "single_device_only": "غیرمجاز. لطفاً فقط در یک دستگاه وارد شوید.",
-
   "permission_denied": "مجوز رد شد",
   "storage_full": "فضای ذخیره پر است",
   "invalid_format": "فرمت نامعتبر",
   "operation_cancelled": "عملیات لغو شد",
-
   "recitation_not_found": "تلاوت یافت نشد",
   "recitation_error": "خطای تلاوت",
   "recitation_loading": "در حال بارگذاری تلاوت",
-
   "adhan_not_found": "اذان یافت نشد",
   "adhan_error": "خطای اذان",
   "adhan_loading": "در حال بارگذاری اذان",
-
   "validation_email_required": "لطفاً ایمیل خود را وارد کنید",
   "validation_password_required": "لطفاً رمز عبور خود را وارد کنید",
   "validation_email_password_required": "لطفاً ایمیل و رمز عبور خود را وارد کنید",
@@ -534,7 +493,6 @@
   "validation_firstname_required": "لطفاً نام یا نام مستعار خود را وارد کنید",
   "validation_firstname_too_short": "نام یا نام مستعار باید حداقل ۲ کاراکتر باشد",
   "validation_firstname_too_long": "نام یا نام مستعار نمی‌تواند بیش از ۳۰ کاراکتر باشد",
-
   "help_firstname_title": "نام یا نام مستعار",
   "help_firstname_prefilled": "این نام از تنظیمات شما پیش‌پر شده است. در صورت تمایل می‌توانید آن را تغییر دهید.",
   "help_firstname_empty": "بین ۲ تا ۳۰ کاراکتر. می‌توانید از نام واقعی یا نام مستعار استفاده کنید.",
@@ -542,7 +500,6 @@
   "help_password_content": "مورد نیاز: بین ۶ تا ۵۰ کاراکتر.\nتوصیه شده: حروف، اعداد و کاراکترهای ویژه برای امنیت بیشتر.",
   "help_email_title": "ایمیل",
   "help_email_content": "فرمت مورد نیاز: name@email.com\nمثال: user@gmail.com",
-
   "settings_screen": {
     "premium_adhans_title": "اذان‌های پریمیوم",
     "no_premium_adhans": "هیچ اذان پریمیومی تشخیص داده نشد",
@@ -559,7 +516,6 @@
     "download_adhan_cancel": "لغو",
     "download_adhan_warning": "دانلود ممکن است بسته به اتصال شما چند دقیقه طول بکشد."
   },
-
   "favorites_screen": {
     "title": "علاقه‌مندی‌های من",
     "all": "همه",
@@ -577,8 +533,6 @@
     "share_error": "خطا در اشتراک‌گذاری",
     "shared_from_app": "اشتراک‌گذاری شده از برنامه اوقات نماز"
   },
-  "favorite_added": "به علاقه‌مندی‌ها اضافه شد",
-  "favorite_removed": "از علاقه‌مندی‌ها حذف شد",
   "asmaulhusna_search_placeholder": "جستجو بر اساس نام، معنی یا ترجمه...",
   "dhikr": {
     "title": "اذکار و دعاها",
@@ -667,7 +621,7 @@
   "daily_dhikr_title": "ذکر روزانه",
   "today_prayers": "نمازهای امروز",
   "calculating_prayer_times": "در حال محاسبه اوقات نماز...",
-  "prayer_stats": "آمار نماز",
+  "prayer_stats": "آمار",
   "day_length": "مدت روز",
   "fajr_to_sunrise": "از فجر تا طلوع آفتاب",
   "sunset_to_isha": "از غروب آفتاب تا عشاء",
@@ -692,7 +646,6 @@
   "sunset_to_fajr": "زمان بین غروب آفتاب و فجر",
   "night_length": "مدت شب",
   "time_until_sunset": "زمان تا غروب آفتاب",
-
   "dashboard_welcome": "السلام علیکم",
   "welcome_personalization_title": "شخصی‌سازی خوش‌آمدگویی",
   "welcome_personalization_description": "برای ارائه تجربه شخصی‌تر، آیا می‌توانید نام یا نام مستعار خود را به ما بگویید؟",
@@ -713,7 +666,6 @@
   "dashboard_dua_fallback": "دعاهای روزانه را کشف کنید",
   "dashboard_verset_fallback": "قرآن مقدس را کاوش کنید",
   "dashboard_names_fallback": "اسماء الحسنی",
-
   "learn_to_pray": "یادگیری نماز",
   "ablutions_wudu": "وضو",
   "prayer_positions": "وضعیت‌های نماز",
@@ -723,7 +675,6 @@
   "important_duas": "دعاهای مهم",
   "images_coming_soon": "تصاویر به زودی",
   "learning_footer": "این بخش به شما کمک می‌کند تا اصول نماز اسلامی را یاد بگیرید",
-
   "wudu_step_1": "فرمول‌بندی نیت (نیه) برای انجام وضو",
   "wudu_invocation_arabic": "بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِیمِ",
   "wudu_invocation_phonetic": "بسم الله الرحمن الرحیم",
@@ -736,29 +687,24 @@
   "wudu_step_7": "گذراندن دست‌های مرطوب روی سر از جلو به عقب",
   "wudu_step_8": "گذراندن انگشتان مرطوب داخل و خارج گوش‌ها",
   "wudu_step_9": "شستن پاها تا مچ سه بار (راست سپس چپ)",
-
   "prayer_step_1": "قیام: ایستادن رو به قبله، دست‌ها در کنار بدن",
   "prayer_step_2": "تکبیر: بلند کردن دست‌ها و گفتن 'الله اکبر'",
   "prayer_step_3": "رکوع: خم شدن و قرار دادن دست‌ها روی زانوها",
   "prayer_step_4": "سجده: سجده کردن و لمس زمین با پیشانی",
   "prayer_step_5": "سجده: سجده کردن و تسبیح خداوند",
-
   "opening_dua": "دعای افتتاح",
   "opening_dua_translation": "ستایش از توست، ای خداوند، و حمد از توست. مبارک است نام تو و متعال است عظمت تو. هیچ معبودی جز تو نیست.",
   "ruku_dua": "دعای رکوع",
   "ruku_dua_translation": "ستایش از پروردگار من، بزرگترین",
   "sujud_dua": "دعای سجده",
   "sujud_dua_translation": "ستایش از پروردگار من، والاترین",
-
   "voir_plus": "مشاهده بیشتر",
   "hadith_du_jour": "حدیث روز",
-
   "asmaulhusna": {
     "title": "۹۹ نام خداوند",
     "subtitle": "زیباترین نام‌های خداوند و معانی آن‌ها را کشف کنید",
     "search_placeholder": "جستجوی نام..."
   },
-
   "location_permission_denied": "مجوز موقعیت رد شد",
   "location_permission_needed_for_mosques": "برای یافتن مساجد نزدیک به موقعیت نیاز است",
   "location_required_for_mosques": "برای نمایش مساجد نزدیک به موقعیت نیاز است",
@@ -773,7 +719,6 @@
   "directions": "مسیرها",
   "call": "تماس",
   "more_info": "اطلاعات بیشتر",
-
   "tasbih": {
     "title": "تسبیح",
     "reset": "بازنشانی",
@@ -815,15 +760,10 @@
   "become_premium": "پریمیوم شوید",
   "buy_premium": "پریمیوم بخرید",
   "premium_benefits": "تمام ویژگی‌های پریمیوم را باز کنید: علاقه‌مندی‌های نامحدود، پشتیبان ابری، صداهای انحصاری...",
-  "premium_required": "پریمیوم مورد نیاز",
   "download": "دانلود",
-  "download_completed": "دانلود کامل شد",
-  "download_failed": "دانلود ناموفق بود",
-  "download_cancelled": "دانلود لغو شد",
   "offline": "آفلاین",
   "downloaded_locally": "محلی دانلود شد",
   "download_started": "دانلود شروع شد",
-  "download_error": "خطای دانلود",
   "download_unavailable": "دانلود در دسترس نیست",
   "recitation_premium_only": "تلاوت‌ها مخصوص کاربران پریمیوم است",
   "adhan_premium_only": "اذان‌های پریمیوم مخصوص کاربران پریمیوم است",
@@ -831,8 +771,6 @@
   "clean": "پاک‌سازی",
   "adhan_volume": "حجم اذان",
   "no_files_to_clean": "فایل‌ای برای پاک‌سازی وجود ندارد",
-  "cleanup_error": "قادر به پاک‌سازی پوشه نیست",
-  "cleanup_success": "پاک‌سازی کامل شد",
   "choose_reciter": "قاری انتخاب کنید",
   "previous": "قبلی",
   "next": "بعدی",
@@ -858,14 +796,12 @@
   "streaming_status": "استریم",
   "remove": "حذف",
   "clear_all": "پاک کردن همه",
-  "premium_active": "پریمیوم فعال",
   "premium_status_description": "اشتراک پریمیوم شما فعال است. از ویژگی‌های خاص خوش آمدید!",
   "refresh_location": "به‌روزرسانی موقعیت من",
   "position_detected": "موقعیت شناخته شده:",
   "location_detected": "موقعیت شناخته شده",
   "sound_and_adhan": "صدا و اذان",
   "adhan_settings": "صدا و اذان",
-  "premium_status": "وضعیت پریمیوم",
   "mosque_screen": {
     "location_not_available": "موقعیت در دسترس نیست",
     "no_phone_available": "شماره تلفن در دسترس نیست",
@@ -935,14 +871,13 @@
   "auto_backup_disabled_message": "پشتیبان خودکار غیرفعال شد",
   "auto_backup_premium_required": "پریمیوم مورد نیاز",
   "auto_backup_premium_message": "پشتیبان خودکار برای کاربران پریمیوم در دسترس است",
-  "backup_restore": "پشتیبان",
-  "backup": "پشتیبان",
+  "backup_restore": "پشتیبان‌گیری و بازیابی",
+  "backup": "پشتیبان‌گیری",
   "dark_mode": "حالت تاریک",
   "light_mode": "حالت روز",
   "morning_mode": "صبح",
   "sunset_mode": "مغرب",
   "theme": "حالت",
-  "premium_required": "پریمیوم مورد نیاز",
   "premium_themes_message": "تم‌های صبح و مغرب برای اعضای پریمیوم رزرو شده است.",
   "go_premium": "به پریمیوم بروید",
   "excellent_consistency": "تنوع یکنواختی عالی!",
@@ -964,7 +899,6 @@
   "share_error": "خطای اشتراک",
   "export_data": "داده را صادر کنید",
   "share_complete_stats_question": "آیا می‌خواهید آمار کامل خود را به اشتراک بگذارید؟",
-  "cancel": "لغو",
   "share": "اشتراک",
   "profile_regular": "صلوات معمولی",
   "profile_regular_desc": "تنوع یکنواختی",
@@ -1130,7 +1064,6 @@
   "goals_overview": "نمای کلی اهداف",
   "offline_message_quran": "برای دسترسی به قرآن، اتصال اینترنت مورد نیاز است. لطفاً متصل شوید یا برای دسترسی کامل آفلاین به پریمیوم ارتقا دهید.",
   "offline_title": "حالت آفلاین",
-  "retry": "تلاش مجدد",
   "offline_mode": "حالت آفلاین",
   "online_mode": "حالت آنلاین",
   "downloaded_audio": "صوت‌های دانلود شده",
@@ -1141,7 +1074,6 @@
   "switch_to_offline": "تبدیل به حالت آفلاین",
   "switch_to_online": "تبدیل به حالت آنلاین",
   "offline_access_premium": "دسترسی آفلاین با پریمیوم در دسترس است",
-  "connection_required": "اتصال مورد نیاز",
   "audio_offline_only": "فقط پخش صوت آفلاین",
   "background_audio_enabled": "صوت پس‌زمینه فعال شد",
   "audio_list_placeholder": "فهرست فایل‌های صوتی دانلود شده در اینجا نمایش داده خواهد شد",
@@ -1181,7 +1113,6 @@
   "notification_stopped_3": "🌟 شما قبلاً به نتیجه رسیده‌اید، می‌توانید دوباره انجام دهید!",
   "badges_collection": "🏅 جمع علامت‌ها",
   "last_updated": "آخرین به‌روزرسانی",
-  "offline_mode": "حالت آفلاین",
   "checking_connection": "در حال بررسی...",
   "offline_manager": "آفلاین",
   "back_online": "آنلاین",
@@ -1192,22 +1123,10 @@
   "back": "بازگشت",
   "play_all": "همه را بازیابی کنید",
   "stop_playlist": "توقف",
-
   "success": "موفقیت",
-  "error": "خطا",
-  "download": {
-    "completed": "دانلود کامل شد",
-    "failed": "دانلود ناموفق بود",
-    "cancelled": "دانلود لغو شد",
-    "added_to_list": "✅ به لیست اضافه شد: {{title}}",
-    "item_downloaded": "✅ {{item}} دانلود شد",
-    "failed_message": "دانلود ناموفق",
-    "cancelled_message": "دانلود لغو شد"
-  },
   "errors": {
     "unknown_error": "خطای ناشناخته ایجاد شد",
     "unexpected_error": "خطای ناگهانی ایجاد شد",
-
     "authentication": {
       "title": "خطای احراز هویت",
       "invalid_credentials": "رمز عبور یا ایمیل اشتباه است",
@@ -1215,7 +1134,6 @@
       "session_expired": "جلسه شما منقضی شده است، لطفاً دوباره وارد شوید",
       "access_denied": "دسترسی ممنوع"
     },
-
     "validation": {
       "title": "خطای تایید",
       "email_required": "آدرس ایمیل اجباری است",
@@ -1227,24 +1145,20 @@
       "invalid_data": "داده ارسال شده اشتباه است",
       "same_password": "رمز عبور جدید نمی‌تواند با رمز عبور قبلی یکسان باشد"
     },
-
     "registration": {
       "title": "خطای ثبت نام",
       "account_already_exists": "حساب کاربری با این ایمیل قبلاً ثبت شده است"
     },
-
     "network": {
       "title": "خطای شبکه",
       "connection_error": "خطای اتصال شبکه، لطفاً اتصال به اینترنت خود را بررسی کنید",
       "timeout": "زمان بیش از حد صرفه‌جویی شده است، لطفاً دوباره تلاش کنید"
     },
-
     "server": {
       "title": "خطای سرور",
       "server_error": "خطای سرور، لطفاً دوباره تلاش کنید",
       "service_unavailable": "سرویس به طور موقت منقضی شده است"
     },
-
     "technical": {
       "title": "خطای فنی",
       "communication_error": "خطای ارتباط با سرور",
@@ -1253,7 +1167,6 @@
       "subscription_error": "خطای مدیریت اشتراک",
       "payment_error": "خطای پرداخت"
     },
-
     "http": {
       "400": "داده ارسال شده اشتباه است",
       "401": "رمز عبور یا ایمیل اشتباه است",
@@ -1263,76 +1176,8 @@
       "503": "سرویس به طور موقت منقضی شده است"
     }
   },
-
-  "qibla": {
-    "initializing_compass": "در حال ابتداء کالیبر",
-    "location_disabled": "موقعیت غیرفعال شده",
-    "location_permission_required": "مجوز موقعیت لازم است",
-    "location_enable_instructions": "برای استفاده از کالیبر Qibla، موقعیت را در تنظیمات تلفن خود فعال کنید. برای ادامه، \"اجازه\" را بزنید و برگشت به برنامه",
-    "location_allow_instructions": "برای ادامه، \"اجازه\" را بزنید و برگشت به برنامه"
-  },
-
-  "premium": {
-    "ui": {
-      "signup_tab": "ثبت نام اشتراک",
-      "login_tab": "ورود"
-    },
-    "account_creation_required": "ثبت نام اشتراک به اشتراک پریمیوم نیاز دارد. حساب کاربری شما به طور خودکار بعد از پرداخت ایجاد خواهد شد.",
-    "already_subscribed": "قبلاً عضو شده‌اید؟ ایمیل یکسان را وارد کنید.",
-    "manage_account": "مدیریت حساب کاربری",
-    "account_management_redirect": "برای اکنون به About > Manage account بروید",
-    "first_name_or_username": "نام یا نام کاربری",
-    "modify_prefilled_name": "نام پیش‌پر شده اولین نام را ویرایش کنید",
-    "field_details_instructions": "برای دیدن جزئیات هر فیلد، بر روی آیکون ℹ️ کلیک کنید.",
-    "session_expired": "جلسه منقضی شده است",
-    "logout_success": "شما با موفقیت خارج شده‌اید",
-    "logout_error": "خطای خروج",
-    "profile_updated": "پروفایل به‌روزرسانی شد",
-    "profile_update_success": "اطلاعات شما با موفقیت ذخیره شد",
-    "no_subscription_found": "هیچ اشتراک پیدا نشد",
-    "session_creation_error": "خطای ایجاد جلسه",
-    "not_defined": "تعریف نشده",
-    "subscription_type_undefined": "نوع تعریف نشده",
-    "feature_development": "ویژگی در حال توسعه است",
-    "no_account_associated": "هیچ حساب اشتراکی با این دستگاه همراه نیست. ثبت نام کنید یا اشتراک خریداری کنید.",
-    "feature_locked": "🔒 ویژگی اشتراک",
-    "feature_premium_only": "این ویژگی به صورت منحصر به فرد برای کاربران اشتراک در دسترس است.",
-    "promotion": {
-      "feature_title": "ویژگی اشتراک",
-      "unlock_feature": "این ویژگی را با اشتراک باز کنید",
-      "upgrade": "ارتقاء",
-      "title": "به اشتراک بروید",
-      "message": "تمام ویژگی‌های پیشرفته را باز کنید",
-      "detailed_stats": "آمار دقیق",
-      "exclusive_themes": "طرح‌های خاص",
-      "unlimited_favorites": "علاقه‌مندی‌های نامحدود"
-    },
-    "expired_title": "اشتراک منقضی شد",
-    "expired_message": "اشتراک پریمیوم شما منقضی شده است. برای ادامه استفاده از ویژگی‌های پریمیوم، تمدید کنید.",
-    "expiring_soon_title": "اشتراک به زودی منقضی می‌شود",
-    "expiring_soon_message": "اشتراک شما در {{days}} روز منقضی می‌شود. فراموش نکنید که تمدید کنید!",
-    "renewed_title": "اشتراک تمدید شد",
-    "renewed_message": "اشتراک پریمیوم شما به صورت خودکار تا {{date}} تمدید شد"
-  },
-
-  "account": {
-    "first_name_placeholder": "نام خود",
-    "not_defined": "تعریف نشده",
-    "subscription_type_undefined": "نوع تعریف نشده"
-  },
-
-  "backup": {
-    "backup_confirm": "آیا می‌خواهید داده خود را به ابر ذخیره کنید؟",
-    "restore_confirm": "آیا می‌خواهید داده خود را از ابر بازیابی کنید؟ این داده فعلی شما را جایگزین خواهد کرد.",
-    "restart_required": "لازم است از ابتدا استفاده کنید",
-    "restore_success_message": "داده خود شما با موفقیت بازیابی شد. برای بررسی تمام تغییرات، لطفا برنامه را بسته و دوباره باز کنید.",
-    "not_connected": "اتصال ناموفق",
-    "last_backup": "پشتیبان آخرین",
-    "cloud_data": "داده ابری",
-    "refresh_cloud_confirm": "آیا می‌خواهید داده ابری را به‌روز کنید؟",
-    "sync_success": "همگام‌سازی موفق"
-  },
-
+  "premium": "پرمیوم",
+  "account": "حساب",
   "password": {
     "change_modal": {
       "password_criteria": "رمز عبور جدید باید حداقل ۸ کاراکتر، یک حرف بزرگ، یک حرف کوچک، یک عدد و یک علامت ویژه داشته باشد",
@@ -1369,37 +1214,6 @@
     "continue": "ادامه",
     "change": "تغییر"
   },
-
-  "settings": {
-    "screen": {
-      "download_adhan_title": "دانلود اذان",
-      "download_adhan_message": "آیا می‌خواهید دانلود کنید",
-      "download_adhan_confirm": "دانلود"
-    },
-    "title": "تنظیمات",
-    "theme": "حالت",
-    "about": "درباره",
-    "developer": "توسعه دهنده",
-    "last_update": "آخرین به‌روزرسانی",
-    "app_description": "این برنامه با علاقه و عشق برای جامعه مسلمانی توسعه داده است.",
-    "faq_text": "سوالات متداول",
-    "notifications_reprogrammed": "اعلان‌ها برنامه‌ریزی مجدد شدند",
-    "notifications_new_settings": "تنظیمات جدید شما برای اعلان‌های آینده در نظر گرفته خواهد شد.",
-    "premium_access": "دسترسی اشتراک",
-    "success": "موفقیت",
-    "adhan_list_updated": "لیست اذان به‌روزرسانی شد",
-    "download_completed": "دانلود کامل شد",
-    "download_failed": "دانلود ناموفق بود",
-    "download_failed_message": "دانلود ناموفق",
-    "download_cancelled": "دانلود لغو شد",
-    "download_cancelled_message": "دانلود لغو شد",
-    "delete_all_adhans": "دانلود همه اذان‌ها...",
-    "no_downloaded_files": "هیچ فایلی دانلود نشده",
-    "cleanup_completed": "پاکسازی کامل شد",
-    "analyzing_files": "داده‌های دانلود شده را تجزیه کنید...",
-    "diagnostic_completed": "تشخیص کامل شد"
-  },
-
   "adhans": {
     "preview_limited": "پیش‌نمایش محدود به ۲۰ ثانیه",
     "download_time_warning": "دانلود ممکن است بسته به اتصال شما چند دقیقه طول بکشد.",
@@ -1409,24 +1223,11 @@
     "download_title": "دانلود اذان",
     "download_message": "آیا می‌خواهید دانلود کنید"
   },
-
   "general": {
     "settings": "تنظیمات عمومی",
     "prayer_reminders_before": "یادآوری‌های صلوات قبل از",
     "reminder_offset_minutes": "تأخیر (دقیقه)"
   },
-
-  "location": {
-    "method": "روش موقعیت",
-    "updating": "در حال به‌روزرسانی...",
-    "detected": "موقعیت شناخته شده"
-  },
-
-  "home": {
-    "go_to_settings": "برای اکنون به تنظیمات بروید",
-    "notifications_disabled_message": "شما باید اعلان‌ها را در تنظیمات تلفن خود فعال کنید تا بتوانید صلوات و ذکر را دریافت کنید."
-  },
-
   "stats": {
     "improvement_opportunity": "فرصت بهبود",
     "start_habit_advice": "از ابتدا یک صلوات در روز برای ساختن سبک خود شروع کنید.",
@@ -1486,15 +1287,33 @@
     "time_window": "پنجره زمان",
     "goal_soon_customizable": "هدف شما به زودی قابل تنظیم خواهد بود!",
     "weekly_goal_desc": "تعداد صلوات هدف شده در هفته",
-
     "quran_widget_available": "ویجت در صفحه اصلی شما موجود است",
     "quran_widget_add": "ویجت را به صفحه اصلی خود اضافه کنید",
     "quran_widget_active": "فعال",
     "quran_widget_inactive": "غیرفعال",
     "quran_widget_title": "ویجت قرآن پریمیوم",
-    "quran_widget_description": "پخش قرآن را از صفحه اصلی خود کنترل کنید"
+    "quran_widget_description": "پخش قرآن را از صفحه اصلی خود کنترل کنید",
+    "screen_title": "نمازهای من",
+    "tab_today": "امروز",
+    "tab_journey": "مسیر",
+    "today_title": "امروز",
+    "prayers_today": "{{count}} از ۵",
+    "mark_prayed": "نماز خواندم",
+    "unmark_prayed": "لغو",
+    "day_complete_title": "روز کامل!",
+    "day_complete_message": "ماشاءالله، هر ۵ نماز انجام شد. خداوند قبول فرماید.",
+    "next_prayer_hint": "گام بعدی: {{prayer}}",
+    "progress_footer": "{{percent}}% از روز انجام شد",
+    "heatmap_title": "استمرار",
+    "heatmap_subtitle": "{{days}} روز گذشته",
+    "other_actions_title": "اعمال دیگر",
+    "other_actions_subtitle": "ذکر، قرآن و حدیث با یک لمس",
+    "heatmap_almost": "پیشرفت خوب",
+    "go_yesterday": "روز قبل",
+    "back_today": "بازگشت به امروز",
+    "catch_up_hint": "اگر فراموش کرده‌اید، می‌توانید نمازهای دیروز را ثبت کنید.",
+    "yesterday_title": "دیروز"
   },
-
   "premium_ui": {
     "badge": "پریمیوم",
     "signup_tab": "ایجاد حساب کاربری پریمیوم",
@@ -1502,7 +1321,6 @@
     "signup_info_line1": "ایجاد حساب کاربری نیاز به اشتراک پریمیوم دارد. حساب کاربری شما پس از پرداخت به طور خودکار ایجاد خواهد شد.",
     "signup_info_line2": "قبلاً مشترک شده‌اید؟ با همان ایمیل وارد شوید."
   },
-
   "auth_modal": {
     "title": "حساب کاربری پریمیوم",
     "signup_tab": "ایجاد حساب کاربری",
@@ -1526,13 +1344,6 @@
     "password_criteria_title": "معیارهای امنیت",
     "password_min_length": "حداقل ۶ کاراکتر"
   },
-
-  "location": "موقعیت",
-  "backup": "پشتیبان‌گیری",
-  "download": "دانلود",
-  "qibla": "قبله",
-  "favorites": "مورد علاقه",
-  "settings": "تنظیمات",
   "languages": {
     "fr": "فرانسه",
     "en": "انگلیسی",
@@ -1548,7 +1359,6 @@
     "fa": "فارسی",
     "nl": "هلندی"
   },
-
   "quran_navigation_modal": {
     "title": "🎯 ناوبری",
     "swipe_instruction": "برای تغییر نمایش بکشید",
@@ -1556,18 +1366,15 @@
     "play_instruction": "Play صدای نمایش داده شده را شروع می‌کند",
     "close_button": "فهمیدم!"
   },
-
   "mosques_finder": "جستجوگر هوشمند مساجد",
   "native_downloads": "دانلودهای بومی",
   "android_widgets": "ویجت‌های اندروید",
   "lock_screen_player": "پخش‌کننده قفل صفحه",
   "tactile_controls": "کنترل‌های لمسی",
-  "backup_restore": "پشتیبان‌گیری و بازیابی",
   "data_deletion_label": "حذف داده",
   "stripe_payments": "پرداخت‌های استرایپ",
   "user_accounts": "حساب‌های کاربری",
   "13_languages": "۱۳ زبان پشتیبانی شده",
-  "offline_mode": "حالت آفلاین",
   "local_storage": "ذخیره‌سازی محلی",
   "new_features_title": "ویژگی‌های جدید",
   "new_features_subtitle": "آخرین بهبودها را کشف کنید",
@@ -1607,7 +1414,6 @@
   "toast_premium_required": "پریمیوم مورد نیاز",
   "toast_download_error": "خطای دانلود",
   "toast_download_failed": "دانلود ناموفق",
-  "toast_download_success": "موفق",
   "toast_recitation_loading": "در حال بارگذاری تلاوت",
   "toast_validation_email_required": "لطفاً ایمیل خود را وارد کنید",
   "toast_validation_password_required": "لطفاً رمز عبور خود را وارد کنید",
@@ -1636,11 +1442,6 @@
   "toast_cleanup_updating_title": "در حال به‌روزرسانی...",
   "toast_cleanup_updating_message": "لیست در حال به‌روزرسانی",
   "toast_cleanup_completed_detailed_message": "{{count}} فایل حذف شد ({{size}} مگابایت آزاد شد)",
-  "toast_diagnostic_started_title": "تشخیص در حال انجام...",
-  "toast_diagnostic_started_message": "تجزیه و تحلیل فایل‌های دانلود شده...",
-  "toast_diagnostic_completed_title": "تشخیص تکمیل شد",
-  "toast_diagnostic_error_title": "خطای تشخیص",
-  "toast_diagnostic_error_message": "نمی‌توان فایل‌ها را تشخیص داد",
   "toast_configuration_unavailable": "پیکربندی در دسترس نیست",
   "toast_apply_changes_error": "نمی‌توان تغییرات را اعمال کرد",
   "toast_local_playback": "پخش محلی",
@@ -1656,33 +1457,25 @@
   "toast_auto_fix_error_message": "نمی‌توان اصلاحات خودکار را اعمال کرد",
   "toast_payment_success_title": "پرداخت موفق!",
   "toast_payment_success_message": "اشتراک {{subscriptionName}} شما اکنون فعال است.",
-
   "library": "کتابخانه",
   "islamic_knowledge": "منابع معنوی",
   "read_listen": "خواندن و گوش دادن",
   "saved_content": "محتوای ذخیره شده",
   "prophetic_biography": "زندگینامه پیامبر",
-  "prophet_stories": "داستان های پیامبران ﷺ",
   "prophetic_traditions": "سنت‌های پیامبر",
   "invocations": "دعاها",
   "99_names": "۹۹ نام الله",
   "library_info": "دسترسی به تمام منابع معنوی در یک مکان",
-  
   "more": "بیشتر",
   "additional_features": "ویژگی‌های اضافی",
   "tools": "ابزارها",
   "find_nearby": "یافتن در نزدیکی",
   "digital_counter": "شمارنده دیجیتال",
   "islamic_dates": "تاریخ‌های اسلامی",
-  "premium": "پرمیوم",
-  "prayer_stats": "آمار",
   "track_prayers": "نمازهای خود را پیگیری کنید",
-  "account": "حساب",
   "app_preferences": "تنظیمات برنامه",
   "app_info": "اطلاعات برنامه",
   "asmaul_husna": "اسماء الحسنی",
-  "hijri_calendar": "تقویم هجری",
-  
   "background_image_type": "نوع تصویر پس‌زمینه",
   "background_prophet": "🕌 مسجد النبی",
   "background_makka": "🕋 مکه",

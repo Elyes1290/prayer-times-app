@@ -1309,7 +1309,12 @@
     "heatmap_title": "Régularité",
     "heatmap_subtitle": "Vos {{days}} derniers jours",
     "other_actions_title": "Autres actions",
-    "other_actions_subtitle": "Dhikr, Coran et hadiths en un tap"
+    "other_actions_subtitle": "Dhikr, Coran et hadiths en un tap",
+    "heatmap_almost": "Bien avancé",
+    "go_yesterday": "Jour précédent",
+    "back_today": "Revenir à aujourd'hui",
+    "catch_up_hint": "Vous pouvez rattraper les prières d'hier si vous les aviez oubliées de cocher.",
+    "yesterday_title": "Hier"
   },
   "premium_ui": {
     "badge": "Premium",

@@ -1300,7 +1300,12 @@
     "heatmap_title": "Regularidad",
     "heatmap_subtitle": "Tus últimos {{days}} días",
     "other_actions_title": "Otras acciones",
-    "other_actions_subtitle": "Dhikr, Corán y hadices en un toque"
+    "other_actions_subtitle": "Dhikr, Corán y hadices en un toque",
+    "heatmap_almost": "Casi completo",
+    "go_yesterday": "Día anterior",
+    "back_today": "Volver a hoy",
+    "catch_up_hint": "Puedes registrar las oraciones de ayer si olvidaste marcarlas.",
+    "yesterday_title": "Ayer"
   },
   "premium_ui": {
     "badge": "Premium",

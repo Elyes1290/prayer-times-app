@@ -86,6 +86,13 @@ interface UserStats {
     maghrib: boolean;
     isha: boolean;
   };
+  yesterday_prayers?: {
+    fajr: boolean;
+    dhuhr: boolean;
+    asr: boolean;
+    maghrib: boolean;
+    isha: boolean;
+  };
 }
 
 interface UseUserStatsReturn {

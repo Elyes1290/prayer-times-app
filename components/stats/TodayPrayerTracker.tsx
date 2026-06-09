@@ -6,7 +6,7 @@ import {
   Pressable,
   ActivityIndicator,
 } from "react-native";
-import { MCIcon } from "@/components/icons/AppVectorIcons";
+import { MCIcon, IonIcon } from "@/components/icons/AppVectorIcons";
 import { useTranslation } from "react-i18next";
 import { PRAYER_TRACKING_ICONS } from "../../constants/prayerTracking";
 import type { TrackedPrayer } from "../../constants/prayerTracking";
@@ -27,6 +27,11 @@ type TodayPrayerTrackerProps = {
   progressPercent: number;
   nextPrayer: TrackedPrayer | null;
   onToggle: (prayer: TrackedPrayer) => void;
+  isTrackingToday?: boolean;
+  canGoToPreviousDay?: boolean;
+  canGoToNextDay?: boolean;
+  onPreviousDay?: () => void;
+  onNextDay?: () => void;
   colors: {
     cardBG: string;
     text: string;
@@ -45,6 +50,11 @@ export function TodayPrayerTracker({
   progressPercent,
   nextPrayer,
   onToggle,
+  isTrackingToday = true,
+  canGoToPreviousDay = false,
+  canGoToNextDay = false,
+  onPreviousDay,
+  onNextDay,
   colors,
 }: TodayPrayerTrackerProps) {
   const { t } = useTranslation();
@@ -54,11 +64,52 @@ export function TodayPrayerTracker({
       <View style={styles.headerRow}>
         <View style={styles.headerText}>
           <Text style={[styles.title, { color: colors.text }]}>
-            {t("stats.today_title")}
+            {isTrackingToday ? t("stats.today_title") : t("stats.yesterday_title")}
           </Text>
-          <Text style={[styles.date, { color: colors.textSecondary }]}>
-            {dateLabel}
-          </Text>
+          <View style={styles.dateRow}>
+            <Pressable
+              onPress={onPreviousDay}
+              disabled={!canGoToPreviousDay}
+              style={[
+                styles.dayNavBtn,
+                {
+                  opacity: canGoToPreviousDay ? 1 : 0.25,
+                  borderColor: colors.border,
+                },
+              ]}
+              accessibilityLabel={t("stats.go_yesterday")}
+            >
+              <IonIcon
+                name="chevron-back"
+                size={18}
+                color={colors.primary}
+              />
+            </Pressable>
+            <Text
+              style={[styles.date, { color: colors.textSecondary }]}
+              numberOfLines={1}
+            >
+              {dateLabel}
+            </Text>
+            <Pressable
+              onPress={onNextDay}
+              disabled={!canGoToNextDay}
+              style={[
+                styles.dayNavBtn,
+                {
+                  opacity: canGoToNextDay ? 1 : 0.25,
+                  borderColor: colors.border,
+                },
+              ]}
+              accessibilityLabel={t("stats.back_today")}
+            >
+              <IonIcon
+                name="chevron-forward"
+                size={18}
+                color={colors.primary}
+              />
+            </Pressable>
+          </View>
         </View>
         <ProgressRing
           completed={completedCount}
@@ -69,7 +120,21 @@ export function TodayPrayerTracker({
         />
       </View>
 
-      {nextPrayer && completedCount < 5 && (
+      {!isTrackingToday && (
+        <View
+          style={[
+            styles.hint,
+            { backgroundColor: colors.primary + "12", borderColor: colors.primary },
+          ]}
+        >
+          <MCIcon name="history" size={18} color={colors.primary} />
+          <Text style={[styles.hintText, { color: colors.text }]}>
+            {t("stats.catch_up_hint")}
+          </Text>
+        </View>
+      )}
+
+      {isTrackingToday && nextPrayer && completedCount < 5 && (
         <View
           style={[
             styles.hint,
@@ -186,9 +251,25 @@ const styles = StyleSheet.create({
     fontSize: 22,
     fontWeight: "700",
   },
+  dateRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 6,
+    marginTop: 2,
+  },
   date: {
+    flex: 1,
     fontSize: 14,
     textTransform: "capitalize",
+    textAlign: "center",
+  },
+  dayNavBtn: {
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    borderWidth: 1,
+    alignItems: "center",
+    justifyContent: "center",
   },
   hint: {
     flexDirection: "row",

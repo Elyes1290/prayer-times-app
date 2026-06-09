@@ -1307,7 +1307,12 @@
     "heatmap_title": "Regelmaat",
     "heatmap_subtitle": "Uw laatste {{days}} dagen",
     "other_actions_title": "Overige acties",
-    "other_actions_subtitle": "Dhikr, Koran en hadiths met één tik"
+    "other_actions_subtitle": "Dhikr, Koran en hadiths met één tik",
+    "heatmap_almost": "Goed op weg",
+    "go_yesterday": "Vorige dag",
+    "back_today": "Terug naar vandaag",
+    "catch_up_hint": "U kunt de gebeden van gisteren inhalen als u ze bent vergeten aan te vinken.",
+    "yesterday_title": "Gisteren"
   },
   "premium_ui": {
     "badge": "Premium",

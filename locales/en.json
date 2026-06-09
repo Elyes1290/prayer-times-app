@@ -1309,7 +1309,12 @@
     "heatmap_title": "Consistency",
     "heatmap_subtitle": "Your last {{days}} days",
     "other_actions_title": "Other actions",
-    "other_actions_subtitle": "Dhikr, Quran and hadiths in one tap"
+    "other_actions_subtitle": "Dhikr, Quran and hadiths in one tap",
+    "heatmap_almost": "Almost complete",
+    "go_yesterday": "Previous day",
+    "back_today": "Back to today",
+    "catch_up_hint": "Catch up on yesterday's prayers if you forgot to mark them.",
+    "yesterday_title": "Yesterday"
   },
   "premium_ui": {
     "badge": "Premium",

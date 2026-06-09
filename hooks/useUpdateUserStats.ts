@@ -70,12 +70,16 @@ export const useUpdateUserStats = () => {
   );
 
   const togglePrayer = useCallback(
-    async (prayerType: TrackedPrayer, completed: boolean) => {
+    async (
+      prayerType: TrackedPrayer,
+      completed: boolean,
+      dateISO?: string,
+    ) => {
       return updateStats({
         action: completed ? "prayer_completed" : "prayer_uncompleted",
         action_data: {
           prayer_type: prayerType,
-          date: new Date().toISOString().slice(0, 10),
+          date: dateISO ?? new Date().toISOString().slice(0, 10),
         },
       });
     },

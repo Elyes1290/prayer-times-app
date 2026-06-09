@@ -1307,7 +1307,12 @@
     "heatmap_title": "নিয়মিততা",
     "heatmap_subtitle": "গত {{days}} দিন",
     "other_actions_title": "অন্যান্য কাজ",
-    "other_actions_subtitle": "যিকির, কুরআন ও হাদিস এক ট্যাপে"
+    "other_actions_subtitle": "যিকির, কুরআন ও হাদিস এক ট্যাপে",
+    "heatmap_almost": "প্রায় সম্পূর্ণ",
+    "go_yesterday": "আগের দিন",
+    "back_today": "আজকে ফিরে যান",
+    "catch_up_hint": "আপনি যদি চিহ্নিত করতে ভুলে গিয়ে থাকেন তবে গতকালের নামাজ রেকর্ড করতে পারেন।",
+    "yesterday_title": "গতকাল"
   },
   "premium_ui": {
     "badge": "প্রিমিয়াম",

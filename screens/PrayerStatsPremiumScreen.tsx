@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import {
   View,
   Text,
@@ -21,6 +21,10 @@ import {
 } from "../hooks/useThemeColor";
 import { useUserStats } from "../hooks/useUserStats";
 import { useTodayPrayers } from "../hooks/useTodayPrayers";
+import {
+  enrichHistoryWithPrayerStates,
+  computeStreakMetricsFromHistory,
+} from "../utils/prayerTrackingStorage";
 import { TodayPrayerTracker } from "../components/stats/TodayPrayerTracker";
 import { StreakHeroCard } from "../components/stats/StreakHeroCard";
 import { DayCompleteModal } from "../components/stats/DayCompleteModal";
@@ -63,6 +67,13 @@ const DEFAULT_STATS = {
   challenges: [],
   badges: [],
   today_prayers: {
+    fajr: false,
+    dhuhr: false,
+    asr: false,
+    maghrib: false,
+    isha: false,
+  },
+  yesterday_prayers: {
     fajr: false,
     dhuhr: false,
     asr: false,
@@ -153,12 +164,53 @@ const PrayerStatsPremiumScreen: React.FC = () => {
     showDayComplete,
     dismissDayComplete,
     handleToggle,
+    trackingDate,
+    isTrackingToday,
+    canGoToPreviousDay,
+    canGoToNextDay,
+    goToPreviousDay,
+    goToNextDay,
+    liveTodayPrayers,
+    liveYesterdayPrayers,
   } = useTodayPrayers({
     remoteTodayPrayers: statsToUse.today_prayers,
+    remoteYesterdayPrayers: statsToUse.yesterday_prayers,
     onUpdated: refresh,
   });
 
-  const dateLabel = new Date().toLocaleDateString(i18n.language, {
+  const journeyStats = useMemo(() => {
+    const base = stats || DEFAULT_STATS;
+    const history = enrichHistoryWithPrayerStates(
+      base.history || [],
+      base.today_prayers,
+      base.yesterday_prayers,
+      liveTodayPrayers,
+      liveYesterdayPrayers,
+    );
+    const streakMetrics = computeStreakMetricsFromHistory(history);
+    const apiMaxStreak = Math.max(
+      base.streaks?.max_streak ?? 0,
+      base.stats?.best_streak ?? 0,
+    );
+
+    return {
+      ...base,
+      history,
+      streaks: {
+        ...base.streaks,
+        current_streak: streakMetrics.currentStreak,
+        max_streak: Math.max(streakMetrics.maxStreak, apiMaxStreak),
+      },
+      stats: {
+        ...base.stats,
+        success_rate: streakMetrics.successRate,
+        current_streak: streakMetrics.currentStreak,
+        best_streak: Math.max(streakMetrics.maxStreak, apiMaxStreak),
+      },
+    };
+  }, [stats, liveTodayPrayers, liveYesterdayPrayers]);
+
+  const dateLabel = trackingDate.toLocaleDateString(i18n.language, {
     weekday: "long",
     day: "numeric",
     month: "long",
@@ -347,9 +399,9 @@ const PrayerStatsPremiumScreen: React.FC = () => {
             {activeTab === "today" ? (
               <View style={styles.section}>
                 <StreakHeroCard
-                  currentStreak={statsToUse.streaks?.current_streak ?? 0}
-                  maxStreak={statsToUse.streaks?.max_streak ?? 0}
-                  successRate={statsToUse.stats?.success_rate ?? 0}
+                  currentStreak={journeyStats.streaks?.current_streak ?? 0}
+                  maxStreak={journeyStats.streaks?.max_streak ?? 0}
+                  successRate={journeyStats.stats?.success_rate ?? 0}
                   colors={colors}
                 />
                 <TodayPrayerTracker
@@ -359,6 +411,11 @@ const PrayerStatsPremiumScreen: React.FC = () => {
                   progressPercent={progressPercent}
                   nextPrayer={nextPrayer}
                   onToggle={handleToggle}
+                  isTrackingToday={isTrackingToday}
+                  canGoToPreviousDay={canGoToPreviousDay}
+                  canGoToNextDay={canGoToNextDay}
+                  onPreviousDay={goToPreviousDay}
+                  onNextDay={goToNextDay}
                   colors={colors}
                 />
                 {statsToUse.smart_notification?.key && (
@@ -381,7 +438,7 @@ const PrayerStatsPremiumScreen: React.FC = () => {
               </View>
             ) : (
               <JourneyTabContent
-                stats={statsToUse}
+                stats={journeyStats}
                 colors={colors}
                 onRefresh={onRefresh}
               />

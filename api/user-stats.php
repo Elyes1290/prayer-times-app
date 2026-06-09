@@ -199,6 +199,7 @@ function handleGetUserStats() {
             'badges' => getUserBadges($user_id),
             'history' => getPrayerHistory($user_id, 30), // 30 derniers jours
             'today_prayers' => getTodayPrayers($user_id),
+            'yesterday_prayers' => getPrayersForDate($user_id, date('Y-m-d', strtotime('-1 day'))),
             'smart_notification' => getSmartNotification($stats, $profile)
         ],
         'message' => 'Statistiques récupérées avec succès'
@@ -305,6 +306,21 @@ function getUserStats($user_id) {
         ");
         $stmt->execute([$user_id]);
         $stats = $stmt->fetch();
+
+        $recent_days = buildRecentDayPrayerCounts($pdo, $user_id, 30);
+        $tracked_days = 0;
+        $complete_days_recent = 0;
+        $total_prayers_recent = 0;
+        foreach ($recent_days as $day) {
+            $count = (int) $day['prayers_completed'];
+            if ($count > 0) {
+                $tracked_days++;
+                $total_prayers_recent += $count;
+                if (isCompletePrayerDay($count)) {
+                    $complete_days_recent++;
+                }
+            }
+        }
         
         // Statistiques globales
         $stmt = $pdo->prepare("
@@ -318,26 +334,27 @@ function getUserStats($user_id) {
         $stmt->execute([$user_id]);
         $global_stats = $stmt->fetch();
         
-        // Calculer les taux
-        $success_rate = $stats['total_days'] > 0 ? round(($stats['complete_days'] / $stats['total_days']) * 100) : 0;
+        $streaks = calculateStreaks($user_id);
+        $success_rate = $tracked_days > 0 ? round(($complete_days_recent / $tracked_days) * 100) : 0;
         $success_rate_all_time = $global_stats['total_days_all_time'] > 0 ? round(($global_stats['complete_days_all_time'] / $global_stats['total_days_all_time']) * 100) : 0;
+        $avg_prayers = $tracked_days > 0 ? round($total_prayers_recent / $tracked_days, 1) : 0;
         
         return [
-            'total_days' => (int)$stats['total_days'],
-            'complete_days' => (int)$stats['complete_days'],
+            'total_days' => $tracked_days,
+            'complete_days' => $complete_days_recent,
             'success_rate' => $success_rate,
             'success_rate_all_time' => $success_rate_all_time,
-            'total_prayers' => (int)$stats['total_prayers'],
+            'total_prayers' => $total_prayers_recent > 0 ? $total_prayers_recent : (int) $stats['total_prayers'],
             'total_prayers_all_time' => (int)$global_stats['total_prayers_all_time'],
-            'avg_prayers_per_day' => round($stats['avg_prayers_per_day'] ?? 0, 1),
+            'avg_prayers_per_day' => $avg_prayers > 0 ? $avg_prayers : round($stats['avg_prayers_per_day'] ?? 0, 1),
             'total_dhikr' => (int)$stats['total_dhikr'],
             'total_quran_verses' => (int)$stats['total_quran_verses'],
             'total_hadiths' => (int)$stats['total_hadiths'],
             'total_favorites' => (int)$stats['total_favorites'],
             'total_downloads' => (int)$stats['total_downloads'],
             'total_usage_minutes' => (int)$stats['total_usage_minutes'],
-            'best_streak' => (int)$stats['best_streak'],
-            'current_streak' => getCurrentStreak($user_id)
+            'best_streak' => max((int) ($stats['best_streak'] ?? 0), (int) $streaks['max_streak']),
+            'current_streak' => (int) $streaks['current_streak']
         ];
     } catch (Exception $e) {
         error_log("Erreur getUserStats: " . $e->getMessage());
@@ -363,16 +380,94 @@ function getUserStats($user_id) {
 }
 
 /**
+ * Compte de prières par jour calendaire (prayer_logs + user_stats), aujourd'hui en premier
+ */
+function buildRecentDayPrayerCounts($pdo, $user_id, $days = 90) {
+    $counts = [];
+
+    if ($pdo !== null && prayerLogsTableExists($pdo)) {
+        $stmt = $pdo->prepare("
+            SELECT date, COUNT(DISTINCT prayer_type) as cnt
+            FROM prayer_logs
+            WHERE user_id = ? AND date >= DATE_SUB(CURDATE(), INTERVAL ? DAY)
+            GROUP BY date
+        ");
+        $stmt->execute([$user_id, max(0, $days - 1)]);
+        foreach ($stmt->fetchAll() as $row) {
+            $counts[$row['date']] = (int) $row['cnt'];
+        }
+    }
+
+    if ($pdo !== null) {
+        $stmt = $pdo->prepare("
+            SELECT date, prayers_completed
+            FROM user_stats
+            WHERE user_id = ? AND date >= DATE_SUB(CURDATE(), INTERVAL ? DAY)
+        ");
+        $stmt->execute([$user_id, max(0, $days - 1)]);
+        foreach ($stmt->fetchAll() as $row) {
+            $date = $row['date'];
+            $counts[$date] = max($counts[$date] ?? 0, (int) $row['prayers_completed']);
+        }
+    }
+
+    $result = [];
+    for ($i = 0; $i < $days; $i++) {
+        $date = date('Y-m-d', strtotime("-{$i} days"));
+        $result[] = [
+            'date' => $date,
+            'prayers_completed' => $counts[$date] ?? 0,
+        ];
+    }
+
+    return $result;
+}
+
+function isCompletePrayerDay($count) {
+    return (int) $count >= 5;
+}
+
+function computeCurrentStreakFromDays($days) {
+    $streak = 0;
+    foreach ($days as $index => $day) {
+        if (isCompletePrayerDay($day['prayers_completed'])) {
+            $streak++;
+        } elseif ($index === 0) {
+            // Aujourd'hui pas encore complet : la série peut continuer depuis hier
+            continue;
+        } else {
+            break;
+        }
+    }
+    return $streak;
+}
+
+function computeMaxStreakFromDays($days) {
+    $max_streak = 0;
+    $run = 0;
+    $ascending = array_reverse($days);
+
+    foreach ($ascending as $day) {
+        if (isCompletePrayerDay($day['prayers_completed'])) {
+            $run++;
+            $max_streak = max($max_streak, $run);
+        } else {
+            $run = 0;
+        }
+    }
+
+    return $max_streak;
+}
+
+/**
  * Calcule les séries de prières
  */
 function calculateStreaks($user_id) {
     try {
         $pdo = getDBConnection();
         
-        // 🚀 VÉRIFICATION CRITIQUE : S'assurer que PDO n'est pas null
         if ($pdo === null) {
             error_log("ERROR: getDBConnection() a retourné null dans calculateStreaks()");
-            // Retourner des séries par défaut en cas d'erreur
             return [
                 'current_streak' => 0,
                 'max_streak' => 0,
@@ -383,67 +478,38 @@ function calculateStreaks($user_id) {
             ];
         }
         
-        // Vérifier si la table user_stats existe
-        $stmt = $pdo->prepare("SHOW TABLES LIKE 'user_stats'");
-        $stmt->execute();
-        $tableExists = $stmt->fetch();
-        
-        if (!$tableExists) {
-            // Table n'existe pas - retourner des séries par défaut
-            return [
-                'current_streak' => 0,
-                'max_streak' => 0,
-                'total_streaks' => 0,
-                'short_streaks' => 0,
-                'long_gaps' => 0,
-                'avg_streak_length' => 0
-            ];
-        }
-        
-        // Récupérer l'historique des 90 derniers jours
-        $stmt = $pdo->prepare("
-            SELECT date, prayers_completed
-            FROM user_stats 
-            WHERE user_id = ? 
-            AND date >= DATE_SUB(CURDATE(), INTERVAL 90 DAY)
-            ORDER BY date DESC
-        ");
-        $stmt->execute([$user_id]);
-        $history = $stmt->fetchAll();
-        
+        $days = buildRecentDayPrayerCounts($pdo, $user_id, 90);
+        $current_streak = computeCurrentStreakFromDays($days);
+        $max_streak = computeMaxStreakFromDays($days);
+
         $streaks = [];
-        $current_streak = 0;
-        $max_streak = 0;
         $gaps = [];
-        $current_gap = 0;
-        
-        foreach ($history as $day) {
-            if ($day['prayers_completed'] >= 5) {
-                $current_streak++;
-                if ($current_gap > 0) {
-                    $gaps[] = $current_gap;
-                    $current_gap = 0;
+        $run = 0;
+        $gap = 0;
+        $ascending = array_reverse($days);
+
+        foreach ($ascending as $day) {
+            if (isCompletePrayerDay($day['prayers_completed'])) {
+                $run++;
+                if ($gap > 0) {
+                    $gaps[] = $gap;
+                    $gap = 0;
                 }
             } else {
-                if ($current_streak > 0) {
-                    $streaks[] = $current_streak;
-                    $max_streak = max($max_streak, $current_streak);
-                    $current_streak = 0;
+                if ($run > 0) {
+                    $streaks[] = $run;
+                    $run = 0;
                 }
-                $current_gap++;
+                $gap++;
             }
         }
-        
-        // Ajouter la série actuelle si elle existe
-        if ($current_streak > 0) {
-            $streaks[] = $current_streak;
-            $max_streak = max($max_streak, $current_streak);
+        if ($run > 0) {
+            $streaks[] = $run;
         }
-        
-        // Calculer les statistiques
+
         $total_streaks = count($streaks);
-        $short_streaks = count(array_filter($streaks, function($s) { return $s <= 3; }));
-        $long_gaps = count(array_filter($gaps, function($g) { return $g >= 7; }));
+        $short_streaks = count(array_filter($streaks, function ($s) { return $s <= 3; }));
+        $long_gaps = count(array_filter($gaps, function ($g) { return $g >= 7; }));
         $avg_streak_length = $total_streaks > 0 ? array_sum($streaks) / $total_streaks : 0;
         
         return [
@@ -456,7 +522,6 @@ function calculateStreaks($user_id) {
         ];
     } catch (Exception $e) {
         error_log("Erreur calculateStreaks: " . $e->getMessage());
-        // En cas d'erreur, retourner des séries par défaut
         return [
             'current_streak' => 0,
             'max_streak' => 0,
@@ -469,39 +534,18 @@ function calculateStreaks($user_id) {
 }
 
 /**
- * Récupère la série actuelle
+ * Récupère la série actuelle (jours consécutifs complets)
  */
 function getCurrentStreak($user_id) {
     try {
         $pdo = getDBConnection();
-        
-        // 🚀 VÉRIFICATION CRITIQUE : S'assurer que PDO n'est pas null
         if ($pdo === null) {
             error_log("ERROR: getDBConnection() a retourné null dans getCurrentStreak()");
             return 0;
         }
-        
-        // Vérifier si la table user_stats existe
-        $stmt = $pdo->prepare("SHOW TABLES LIKE 'user_stats'");
-        $stmt->execute();
-        $tableExists = $stmt->fetch();
-        
-        if (!$tableExists) {
-            return 0;
-        }
-        
-        // Récupérer la série actuelle
-        $stmt = $pdo->prepare("
-            SELECT streak_days 
-            FROM user_stats 
-            WHERE user_id = ? 
-            ORDER BY date DESC 
-            LIMIT 1
-        ");
-        $stmt->execute([$user_id]);
-        $result = $stmt->fetch();
-        
-        return $result ? (int)$result['streak_days'] : 0;
+
+        $days = buildRecentDayPrayerCounts($pdo, $user_id, 90);
+        return computeCurrentStreakFromDays($days);
     } catch (Exception $e) {
         error_log("Erreur getCurrentStreak: " . $e->getMessage());
         return 0;
@@ -831,7 +875,7 @@ function prayerLogsTableExists($pdo) {
 /**
  * État des 5 prières du jour
  */
-function getTodayPrayers($user_id) {
+function getPrayersForDate($user_id, $date) {
     $default = [
         'fajr' => false,
         'dhuhr' => false,
@@ -846,13 +890,12 @@ function getTodayPrayers($user_id) {
             return $default;
         }
 
-        $today = date('Y-m-d');
         $stmt = $pdo->prepare("
             SELECT prayer_type
             FROM prayer_logs
             WHERE user_id = ? AND date = ?
         ");
-        $stmt->execute([$user_id, $today]);
+        $stmt->execute([$user_id, $date]);
         $rows = $stmt->fetchAll();
 
         foreach ($rows as $row) {
@@ -864,9 +907,25 @@ function getTodayPrayers($user_id) {
 
         return $default;
     } catch (Exception $e) {
-        error_log("Erreur getTodayPrayers: " . $e->getMessage());
+        error_log("Erreur getPrayersForDate: " . $e->getMessage());
         return $default;
     }
+}
+
+function getTodayPrayers($user_id) {
+    return getPrayersForDate($user_id, date('Y-m-d'));
+}
+
+/**
+ * Limite le rattrapage à aujourd'hui et hier
+ */
+function normalizePrayerActionDate($action_data, $today) {
+    $requested = $action_data['date'] ?? $today;
+    $yesterday = date('Y-m-d', strtotime('-1 day'));
+    if ($requested === $today || $requested === $yesterday) {
+        return $requested;
+    }
+    return $today;
 }
 
 /**
@@ -886,6 +945,31 @@ function ensureTodayStatsRow($pdo, $user_id, $today) {
         ) VALUES (?, ?, 0, 0, 0, 0, 0, 0, 0, 0)
     ");
     $stmt->execute([$user_id, $today]);
+}
+
+/**
+ * Synchronise prayers_completed depuis prayer_logs (source de vérité)
+ */
+function syncPrayerCountFromLogs($pdo, $user_id, $date) {
+    if (!prayerLogsTableExists($pdo)) {
+        return;
+    }
+
+    $stmt = $pdo->prepare("
+        SELECT COUNT(DISTINCT prayer_type) as cnt
+        FROM prayer_logs
+        WHERE user_id = ? AND date = ?
+    ");
+    $stmt->execute([$user_id, $date]);
+    $count = (int) ($stmt->fetchColumn() ?: 0);
+
+    ensureTodayStatsRow($pdo, $user_id, $date);
+    $stmt = $pdo->prepare("
+        UPDATE user_stats
+        SET prayers_completed = ?
+        WHERE user_id = ? AND date = ?
+    ");
+    $stmt->execute([$count, $user_id, $date]);
 }
 
 /**
@@ -923,19 +1007,14 @@ function handlePrayerTypeToggle($pdo, $user_id, $action, $action_data, $today) {
                 VALUES (?, ?, ?, NOW())
             ");
             $stmt->execute([$user_id, $today, $prayer_type]);
-            if ($stmt->rowCount() > 0) {
-                adjustTodayPrayerCount($pdo, $user_id, $today, 1);
-            }
         } else {
             $stmt = $pdo->prepare("
                 DELETE FROM prayer_logs
                 WHERE user_id = ? AND date = ? AND prayer_type = ?
             ");
             $stmt->execute([$user_id, $today, $prayer_type]);
-            if ($stmt->rowCount() > 0) {
-                adjustTodayPrayerCount($pdo, $user_id, $today, -1);
-            }
         }
+        syncPrayerCountFromLogs($pdo, $user_id, $today);
         return;
     }
 
@@ -964,21 +1043,46 @@ function getPrayerHistory($user_id, $days = 30) {
             return [];
         }
         
-        // Récupérer l'historique
-        $stmt = $pdo->prepare("
-            SELECT 
-                date,
-                CASE WHEN prayers_completed >= 5 THEN 1 ELSE 0 END as complete,
-                prayers_completed as prayers,
-                dhikr_count as dhikr,
-                quran_verses_read as quran,
-                hadiths_read as hadiths
-            FROM user_stats 
-            WHERE user_id = ? 
-            AND date >= DATE_SUB(CURDATE(), INTERVAL ? DAY)
-            ORDER BY date DESC
-        ");
-        $stmt->execute([$user_id, $days]);
+        $usePrayerLogs = prayerLogsTableExists($pdo);
+
+        if ($usePrayerLogs) {
+            $stmt = $pdo->prepare("
+                SELECT 
+                    us.date,
+                    CASE WHEN GREATEST(COALESCE(us.prayers_completed, 0), COALESCE(pl.cnt, 0)) >= 5 THEN 1 ELSE 0 END as complete,
+                    GREATEST(COALESCE(us.prayers_completed, 0), COALESCE(pl.cnt, 0)) as prayers,
+                    COALESCE(us.dhikr_count, 0) as dhikr,
+                    COALESCE(us.quran_verses_read, 0) as quran,
+                    COALESCE(us.hadiths_read, 0) as hadiths
+                FROM user_stats us
+                LEFT JOIN (
+                    SELECT date, COUNT(DISTINCT prayer_type) as cnt
+                    FROM prayer_logs
+                    WHERE user_id = ?
+                    GROUP BY date
+                ) pl ON pl.date = us.date
+                WHERE us.user_id = ? 
+                AND us.date >= DATE_SUB(CURDATE(), INTERVAL ? DAY)
+                ORDER BY us.date DESC
+            ");
+            $stmt->execute([$user_id, $user_id, $days]);
+        } else {
+            $stmt = $pdo->prepare("
+                SELECT 
+                    date,
+                    CASE WHEN prayers_completed >= 5 THEN 1 ELSE 0 END as complete,
+                    prayers_completed as prayers,
+                    dhikr_count as dhikr,
+                    quran_verses_read as quran,
+                    hadiths_read as hadiths
+                FROM user_stats 
+                WHERE user_id = ? 
+                AND date >= DATE_SUB(CURDATE(), INTERVAL ? DAY)
+                ORDER BY date DESC
+            ");
+            $stmt->execute([$user_id, $days]);
+        }
+
         $history = $stmt->fetchAll();
         
         return $history;
@@ -1083,11 +1187,15 @@ function handleUpdateUserStats() {
         $action_data = $input['action_data'] ?? [];
 
         if (in_array($action, ['prayer_completed', 'prayer_uncompleted'], true)) {
-            handlePrayerTypeToggle($pdo, $user_id, $action, $action_data, $today);
+            $prayer_date = normalizePrayerActionDate($action_data, $today);
+            handlePrayerTypeToggle($pdo, $user_id, $action, $action_data, $prayer_date);
             updateStreakDays($user_id);
             jsonResponse(true, [
                 'message' => 'Prière mise à jour avec succès',
                 'today_prayers' => getTodayPrayers($user_id),
+                'yesterday_prayers' => getPrayersForDate($user_id, date('Y-m-d', strtotime('-1 day'))),
+                'updated_prayers' => getPrayersForDate($user_id, $prayer_date),
+                'updated_date' => $prayer_date,
             ]);
             return;
         }

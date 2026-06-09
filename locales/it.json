@@ -1300,7 +1300,12 @@
     "heatmap_title": "Costanza",
     "heatmap_subtitle": "I tuoi ultimi {{days}} giorni",
     "other_actions_title": "Altre azioni",
-    "other_actions_subtitle": "Dhikr, Corano e hadith con un tocco"
+    "other_actions_subtitle": "Dhikr, Corano e hadith con un tocco",
+    "heatmap_almost": "Quasi completo",
+    "go_yesterday": "Giorno precedente",
+    "back_today": "Torna a oggi",
+    "catch_up_hint": "Puoi recuperare le preghiere di ieri se hai dimenticato di segnarle.",
+    "yesterday_title": "Ieri"
   },
   "premium_ui": {
     "badge": "Premium",

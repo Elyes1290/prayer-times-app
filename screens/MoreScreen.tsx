@@ -17,6 +17,9 @@ import {
 import { useTranslation } from "react-i18next";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { usePremium } from "../contexts/PremiumContext";
+import Constants from "expo-constants";
+
+const APP_DISPLAY_NAME = "MyAdhan";
 
 interface MenuItemProps {
   icon: string;
@@ -26,6 +29,8 @@ interface MenuItemProps {
   badge?: string;
   isPremium?: boolean;
 }
+
+const appVersion = Constants.expoConfig?.version ?? "1.0.0";
 
 const MenuItem = ({ icon, title, subtitle, onPress, badge, isPremium }: MenuItemProps) => {
   const colors = useThemeColors();
@@ -191,7 +196,7 @@ export default function MoreScreen() {
               {/* Version info */}
           <View style={styles.versionContainer}>
             <Text style={[styles.versionText, { color: colors.textSecondary }]}>
-              Prayer Times v1.0.0
+              {APP_DISPLAY_NAME} v{appVersion}
             </Text>
             {user?.isPremium && (
               <View style={styles.premiumBadgeBottom}>

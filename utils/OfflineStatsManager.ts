@@ -1,4 +1,12 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import {
+  addDaysToDate,
+  toDateISO,
+} from "../constants/prayerTracking";
+import {
+  computeStreakMetricsFromHistory,
+  enrichHistoryWithPrayerStates,
+} from "./prayerTrackingStorage";
 import { AppConfig } from "./config";
 import { getCurrentUserId } from "./userAuth";
 import { isOfflineMode } from "./networkUtils";
@@ -567,36 +575,84 @@ class OfflineStatsManager {
       };
     }
 
-    const wasCompleted = !!offlineData.stats.today_prayers[prayerType];
-    offlineData.stats.today_prayers[prayerType] = completed;
+    if (!offlineData.stats.yesterday_prayers) {
+      offlineData.stats.yesterday_prayers = {
+        fajr: false,
+        dhuhr: false,
+        asr: false,
+        maghrib: false,
+        isha: false,
+      };
+    }
 
-    const today = new Date().toISOString().slice(0, 10);
+    const todayISO = toDateISO(new Date());
+    const yesterdayISO = toDateISO(addDaysToDate(new Date(), -1));
+    const requestedDate =
+      typeof actionData.date === "string" &&
+      /^\d{4}-\d{2}-\d{2}$/.test(actionData.date)
+        ? actionData.date
+        : todayISO;
+
+    const prayersKey =
+      requestedDate === yesterdayISO
+        ? "yesterday_prayers"
+        : "today_prayers";
+    const prayersState = offlineData.stats[prayersKey];
+    const wasCompleted = !!prayersState[prayerType];
+    prayersState[prayerType] = completed;
+
     if (!offlineData.stats.history) {
       offlineData.stats.history = [];
     }
 
-    let todayEntry = offlineData.stats.history.find(
-      (day: any) => day.date === today,
+    let dayEntry = offlineData.stats.history.find(
+      (day: any) => day.date === requestedDate,
     );
-    if (!todayEntry) {
-      todayEntry = {
-        date: today,
+    if (!dayEntry) {
+      dayEntry = {
+        date: requestedDate,
         complete: false,
         prayers: 0,
         dhikr: 0,
         quran: 0,
         hadiths: 0,
       };
-      offlineData.stats.history.unshift(todayEntry);
+      offlineData.stats.history.unshift(dayEntry);
     }
 
     if (completed && !wasCompleted) {
-      todayEntry.prayers = Number(todayEntry.prayers || 0) + 1;
+      dayEntry.prayers = Number(dayEntry.prayers || 0) + 1;
     } else if (!completed && wasCompleted) {
-      todayEntry.prayers = Math.max(0, Number(todayEntry.prayers || 0) - 1);
+      dayEntry.prayers = Math.max(0, Number(dayEntry.prayers || 0) - 1);
     }
 
-    todayEntry.complete = todayEntry.prayers >= 5;
+    dayEntry.complete = dayEntry.prayers >= 5;
+
+    const enrichedHistory = enrichHistoryWithPrayerStates(
+      offlineData.stats.history,
+      offlineData.stats.today_prayers,
+      offlineData.stats.yesterday_prayers,
+    );
+    const streakMetrics = computeStreakMetricsFromHistory(enrichedHistory);
+
+    offlineData.stats.history = enrichedHistory;
+    offlineData.stats.streaks = {
+      ...(offlineData.stats.streaks || {}),
+      current_streak: streakMetrics.currentStreak,
+      max_streak: Math.max(
+        offlineData.stats.streaks?.max_streak ?? 0,
+        streakMetrics.maxStreak,
+      ),
+    };
+    offlineData.stats.stats = {
+      ...(offlineData.stats.stats || {}),
+      success_rate: streakMetrics.successRate,
+      current_streak: streakMetrics.currentStreak,
+      best_streak: Math.max(
+        offlineData.stats.stats?.best_streak ?? 0,
+        streakMetrics.maxStreak,
+      ),
+    };
   }
 
   public async clearOfflineData(): Promise<void> {

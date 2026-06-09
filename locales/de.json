@@ -1307,7 +1307,12 @@
     "heatmap_title": "Regelmäßigkeit",
     "heatmap_subtitle": "Ihre letzten {{days}} Tage",
     "other_actions_title": "Weitere Aktionen",
-    "other_actions_subtitle": "Dhikr, Koran und Hadithe mit einem Tipp"
+    "other_actions_subtitle": "Dhikr, Koran und Hadithe mit einem Tipp",
+    "heatmap_almost": "Gut vorangekommen",
+    "go_yesterday": "Vorheriger Tag",
+    "back_today": "Zurück zu heute",
+    "catch_up_hint": "Sie können vergessene Gebete von gestern nachholen.",
+    "yesterday_title": "Gestern"
   },
   "premium_ui": {
     "badge": "Premium",
