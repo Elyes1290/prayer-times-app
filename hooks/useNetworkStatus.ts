@@ -63,7 +63,9 @@ export const useNetworkStatus = () => {
       setIsLoading(false);
     });
 
-    return unsubscribe;
+    return () => {
+      unsubscribe();
+    };
   }, []);
 
   return {

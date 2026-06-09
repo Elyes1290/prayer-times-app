@@ -718,8 +718,25 @@ export default function PrayerScreen() {
 
   // Charger les préférences de son au démarrage
   useEffect(() => {
-    loadMutedPrayers();
-  }, [loadMutedPrayers]);
+    let cancelled = false;
+
+    const runLoad = async () => {
+      try {
+        const mutedPrayersJson = await AsyncStorage.getItem("muted_prayers");
+        if (cancelled || !mutedPrayersJson) return;
+        const mutedArray = JSON.parse(mutedPrayersJson);
+        setMutedPrayers(new Set(mutedArray));
+      } catch (error) {
+        errorLog("Erreur lors du chargement des prières muettes:", error);
+      }
+    };
+
+    void runLoad();
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   // Calculer le temps jusqu'à la prochaine prière en minutes
   const getTimeUntilNextInMinutes = () => {

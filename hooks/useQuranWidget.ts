@@ -139,8 +139,28 @@ export const useQuranWidget = () => {
 
   // Vérifier la disponibilité au démarrage
   useEffect(() => {
-    checkWidgetAvailability();
-  }, [checkWidgetAvailability]);
+    let cancelled = false;
+
+    const runCheck = async () => {
+      if (Platform.OS !== "android") {
+        if (!cancelled) setIsWidgetAvailable(false);
+        return;
+      }
+
+      try {
+        const available = await QuranWidgetModule.isWidgetAvailable();
+        if (!cancelled) setIsWidgetAvailable(available);
+      } catch {
+        if (!cancelled) setIsWidgetAvailable(false);
+      }
+    };
+
+    void runCheck();
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   // Forcer la synchronisation du statut premium immédiatement
   useEffect(() => {

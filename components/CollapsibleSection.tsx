@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { View, Text, Pressable, StyleSheet } from "react-native";
 import Animated, {
   useAnimatedStyle,
@@ -23,13 +23,18 @@ const CollapsibleSection: React.FC<CollapsibleSectionProps> = ({
   children,
   initiallyExpanded = false,
 }) => {
-  const [isExpanded, setIsExpanded] = useState(initiallyExpanded);
+  const isExpandedRef = useRef(initiallyExpanded);
   const progress = useSharedValue(initiallyExpanded ? 1 : 0);
   const themeAssets = useThemeAssets();
 
+  useEffect(() => {
+    isExpandedRef.current = initiallyExpanded;
+    progress.value = initiallyExpanded ? 1 : 0;
+  }, [initiallyExpanded, progress]);
+
   const toggleSection = () => {
-    const nextExpanded = !isExpanded;
-    setIsExpanded(nextExpanded);
+    const nextExpanded = !isExpandedRef.current;
+    isExpandedRef.current = nextExpanded;
     progress.value = withTiming(nextExpanded ? 1 : 0, { duration: 300 });
   };
 

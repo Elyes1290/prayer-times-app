@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import {
   NativeModules,
   Platform,
@@ -37,7 +37,8 @@ interface QuranAudioServiceInterface {
     audioPath: string,
     surah: string,
     reciter: string,
-    durationMs?: number
+    durationMs?: number,
+    autoPlay?: boolean
   ) => Promise<void>;
   playAudio: () => Promise<void>;
   pauseAudio: () => Promise<void>;
@@ -117,6 +118,8 @@ const QuranAudioServiceModule = (() => {
 })();
 
 export const useQuranAudioService = (): QuranAudioServiceInterface => {
+  const isServiceRunningRef = useRef(false);
+
   const [audioState, setAudioState] = useState<QuranAudioState>({
     isPlaying: false,
     currentSurah: "",
@@ -126,6 +129,26 @@ export const useQuranAudioService = (): QuranAudioServiceInterface => {
     isPremium: false,
     isServiceRunning: false,
   });
+
+  useEffect(() => {
+    isServiceRunningRef.current = audioState.isServiceRunning;
+  }, [audioState.isServiceRunning]);
+
+  const waitForPlaybackStart = useCallback(async (): Promise<void> => {
+    const maxAttempts = 40;
+    for (let attempt = 0; attempt < maxAttempts; attempt++) {
+      try {
+        await QuranAudioServiceModule.playAudio();
+        setAudioState((prevState) => ({
+          ...prevState,
+          isPlaying: true,
+        }));
+        return;
+      } catch {
+        await new Promise((resolve) => setTimeout(resolve, 150));
+      }
+    }
+  }, []);
 
   // Initialiser l'écouteur d'événements
   // react-doctor-disable-next-line react-doctor/effect-needs-cleanup
@@ -331,6 +354,7 @@ export const useQuranAudioService = (): QuranAudioServiceInterface => {
   const startService = useCallback(async (): Promise<void> => {
     try {
       await QuranAudioServiceModule.startAudioService();
+      isServiceRunningRef.current = true;
       setAudioState((prevState) => ({
         ...prevState,
         isServiceRunning: true,
@@ -362,32 +386,49 @@ export const useQuranAudioService = (): QuranAudioServiceInterface => {
       audioPath: string,
       surah: string,
       reciter: string,
-      durationMs: number = 0
+      durationMs: number = 0,
+      autoPlay: boolean = false
     ): Promise<void> => {
       try {
-        // Démarrer le service s'il n'est pas déjà démarré
-        if (!audioState.isServiceRunning) {
+        if (!isServiceRunningRef.current) {
           await startService();
+          isServiceRunningRef.current = true;
         }
 
-        await QuranAudioServiceModule.loadAudioInService(
-          audioPath,
-          surah,
-          reciter,
-          Math.round(durationMs) || 0
-        );
+        const roundedDuration = Math.round(durationMs) || 0;
+
+        if (Platform.OS === "android") {
+          await QuranAudioServiceModule.loadAudioInService(
+            audioPath,
+            surah,
+            reciter,
+            roundedDuration,
+            autoPlay
+          );
+        } else {
+          await QuranAudioServiceModule.loadAudioInService(
+            audioPath,
+            surah,
+            reciter,
+            roundedDuration
+          );
+          if (autoPlay) {
+            await waitForPlaybackStart();
+          }
+        }
 
         setAudioState((prevState) => ({
           ...prevState,
           currentSurah: surah,
           currentReciter: reciter,
+          isPlaying: autoPlay ? true : prevState.isPlaying,
         }));
       } catch (error) {
         console.error("❌ Erreur chargement audio:", error);
         throw error;
       }
     },
-    [audioState.isServiceRunning, startService]
+    [startService, waitForPlaybackStart]
   );
 
   // Lancer la lecture

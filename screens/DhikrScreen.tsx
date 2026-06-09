@@ -56,6 +56,103 @@ function useDhikrData(namespace: string) {
   return { meta, duas };
 }
 
+type DhikrListItemProps = {
+  item: any;
+  selectedKey: CategoryKey;
+  isPremium: boolean;
+  language: string;
+  onRecordDhikr: (count: number, category: CategoryKey) => Promise<void>;
+  t: (key: string, fallback?: string) => string;
+};
+
+const DhikrListItem = React.memo(function DhikrListItem({
+  item,
+  selectedKey,
+  isPremium,
+  language,
+  onRecordDhikr,
+  t,
+}: DhikrListItemProps) {
+  const handleDhikrCompleted = async () => {
+    if (!isPremium) {
+      Alert.alert(
+        t("premium_ui.feature_locked", "🔒 Fonctionnalité Premium"),
+        t(
+          "premium_ui.feature_premium_only",
+          "Cette fonctionnalité est disponible uniquement pour les utilisateurs premium."
+        ),
+        [
+          { text: "Annuler", style: "cancel" },
+          {
+            text: "Passer au Premium",
+            style: "default",
+            onPress: () => {
+              // TODO: Ouvrir l'écran premium
+            },
+          },
+        ]
+      );
+      return;
+    }
+
+    try {
+      await onRecordDhikr(1, selectedKey);
+      Alert.alert(
+        t("dhikr.recorded", "✅ Dhikr enregistré"),
+        t(
+          "dhikr.added_to_stats",
+          "Ce dhikr a été ajouté à vos statistiques personnelles."
+        ),
+        [{ text: "OK" }]
+      );
+    } catch (error) {
+      console.error("Erreur enregistrement dhikr:", error);
+      Alert.alert(
+        "❌ Erreur",
+        "Impossible d'enregistrer le dhikr dans les statistiques."
+      );
+    }
+  };
+
+  return (
+    <View style={styles.card}>
+      <View style={styles.cardHeader}>
+        <Text style={styles.arabic}>{item.arabic}</Text>
+        <View style={styles.cardActions}>
+          <FavoriteButton
+            favoriteData={convertToFavorite(item, selectedKey)}
+            size={22}
+            iconColor="#e4c678"
+            iconColorActive="#FFD700"
+            style={styles.favoriteButton}
+          />
+          <Pressable
+            style={styles.dhikrButton}
+            onPress={handleDhikrCompleted}
+            testID="dhikr-completed-button"
+          >
+            <IonIcon
+              name="checkmark-circle"
+              size={22}
+              color={isPremium ? "#4ECDC4" : "#95A5A6"}
+            />
+          </Pressable>
+        </View>
+      </View>
+      {!language.startsWith("ar") && item.latin && (
+        <Text style={styles.translit}>{item.latin}</Text>
+      )}
+      {!language.startsWith("ar") && (
+        <Text style={styles.translation}>{item.translation}</Text>
+      )}
+      {item.source && <Text style={styles.reference}>{item.source}</Text>}
+      {!language.startsWith("ar") && (item.benefits || item.fawaid) && (
+        <Text style={styles.benefit}>{item.benefits ?? item.fawaid}</Text>
+      )}
+    </View>
+  );
+});
+
 export default function DhikrScreen() {
   const params = useLocalSearchParams();
 
@@ -157,99 +254,18 @@ export default function DhikrScreen() {
   const { recordDhikr } = useUpdateUserStats();
   const { user } = usePremium();
 
-  // Composant mémorisé pour les éléments dhikr
-  const DhikrItem = React.memo(
-    ({ item, selectedKey }: { item: any; selectedKey: CategoryKey }) => {
-      const handleDhikrCompleted = async () => {
-        if (!user.isPremium) {
-          Alert.alert(
-            t("premium_ui.feature_locked", "🔒 Fonctionnalité Premium"),
-            t(
-              "premium_ui.feature_premium_only",
-              "Cette fonctionnalité est disponible uniquement pour les utilisateurs premium."
-            ),
-            [
-              { text: "Annuler", style: "cancel" },
-              {
-                text: "Passer au Premium",
-                style: "default",
-                onPress: () => {
-                  // TODO: Ouvrir l'écran premium
-                },
-              },
-            ]
-          );
-          return;
-        }
-
-        try {
-          await recordDhikr(1, selectedKey);
-          Alert.alert(
-            t("dhikr.recorded", "✅ Dhikr enregistré"),
-            t(
-              "dhikr.added_to_stats",
-              "Ce dhikr a été ajouté à vos statistiques personnelles."
-            ),
-            [{ text: "OK" }]
-          );
-        } catch (error) {
-          console.error("Erreur enregistrement dhikr:", error);
-          Alert.alert(
-            "❌ Erreur",
-            "Impossible d'enregistrer le dhikr dans les statistiques."
-          );
-        }
-      };
-
-      return (
-        <View style={styles.card}>
-          <View style={styles.cardHeader}>
-            <Text style={styles.arabic}>{item.arabic}</Text>
-            <View style={styles.cardActions}>
-              <FavoriteButton
-                favoriteData={convertToFavorite(item, selectedKey)}
-                size={22}
-                iconColor="#e4c678"
-                iconColorActive="#FFD700"
-                style={styles.favoriteButton}
-              />
-              <Pressable
-                style={styles.dhikrButton}
-                onPress={handleDhikrCompleted}
-                testID="dhikr-completed-button"
-              >
-                <IonIcon
-                  name="checkmark-circle"
-                  size={22}
-                  color={user.isPremium ? "#4ECDC4" : "#95A5A6"}
-                />
-              </Pressable>
-            </View>
-          </View>
-          {!i18n.language.startsWith("ar") && item.latin && (
-            <Text style={styles.translit}>{item.latin}</Text>
-          )}
-          {!i18n.language.startsWith("ar") && (
-            <Text style={styles.translation}>{item.translation}</Text>
-          )}
-          {item.source && <Text style={styles.reference}>{item.source}</Text>}
-          {!i18n.language.startsWith("ar") &&
-            (item.benefits || item.fawaid) && (
-              <Text style={styles.benefit}>{item.benefits ?? item.fawaid}</Text>
-            )}
-        </View>
-      );
-    }
-  );
-
-  DhikrItem.displayName = "DhikrItem";
-
-  // Fonction renderItem optimisée
   const renderDhikrItem = useCallback(
     ({ item }: { item: any }) => (
-      <DhikrItem item={item} selectedKey={selectedKey} />
+      <DhikrListItem
+        item={item}
+        selectedKey={selectedKey}
+        isPremium={user.isPremium}
+        language={i18n.language}
+        onRecordDhikr={recordDhikr}
+        t={t}
+      />
     ),
-    [selectedKey]
+    [selectedKey, user.isPremium, i18n.language, recordDhikr, t]
   );
 
   return (

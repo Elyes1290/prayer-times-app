@@ -298,10 +298,11 @@ public class QuranAudioServiceModule extends ReactContextBaseJavaModule implemen
      * Charger un audio dans le service
      */
     @ReactMethod
-    public void loadAudioInService(String audioPath, String surah, String reciter, int durationMs, Promise promise) {
+    public void loadAudioInService(String audioPath, String surah, String reciter, int durationMs, boolean autoPlay,
+            Promise promise) {
         try {
             Log.d(TAG, "🎵 Chargement audio dans le service: " + surah + " - " + reciter
-                    + " (durationMs=" + durationMs + ")");
+                    + " (durationMs=" + durationMs + ", autoPlay=" + autoPlay + ")");
             
             if (!isServiceBound || audioService == null) {
                 Log.w(TAG, "⚠️ Service non lié, démarrage automatique...");
@@ -309,7 +310,7 @@ public class QuranAudioServiceModule extends ReactContextBaseJavaModule implemen
             }
             
             if (audioService != null) {
-                audioService.loadAudio(audioPath, surah, reciter, durationMs);
+                audioService.loadAudio(audioPath, surah, reciter, durationMs, autoPlay);
                 Log.d(TAG, "✅ Audio chargé dans le service");
                 promise.resolve(true);
             } else {

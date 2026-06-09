@@ -227,6 +227,258 @@ interface OptimizedSettingsSectionsProps {
   t: any;
 }
 
+type SettingsSectionShellProps = {
+  sectionProps: OptimizedSettingsSectionsProps;
+  settings: any;
+  styles: any;
+  setActiveSection: (sectionId: string | null) => void;
+};
+
+const LocationSectionWrapper = React.memo(function LocationSectionWrapper({
+  sectionProps,
+  settings,
+  styles,
+  setActiveSection,
+}: SettingsSectionShellProps) {
+  const stableSetLocationMode = useCallback(
+    (mode: "auto" | "manual") => settings.setLocationMode(mode),
+    [settings]
+  );
+
+  const locationSections = LocationSection({
+    locationMode: settings.locationMode,
+    autoLocation: settings.autoLocation,
+    isRefreshingLocation: settings.isRefreshingLocation,
+    cityInput: sectionProps.cityInput,
+    citySearchResults: sectionProps.citySearchResults,
+    citySearchLoading: sectionProps.citySearchLoading,
+    setLocationMode: stableSetLocationMode,
+    refreshAutoLocation: settings.refreshAutoLocation,
+    handleCityInputChange: sectionProps.handleCityInputChange,
+    selectCity: sectionProps.selectCity,
+    styles,
+    setActiveSection,
+    uiMode: sectionProps.locationUIMode,
+    setUIMode: sectionProps.setLocationUIMode,
+  });
+
+  const locationComponent = locationSections[0]?.data[0]?.component;
+  return (
+    locationComponent || (
+      <View style={{ padding: 16 }}>
+        <Text style={styles.sectionTitle}>Section Localisation</Text>
+      </View>
+    )
+  );
+});
+
+type GeneralSectionWrapperProps = SettingsSectionShellProps & {
+  handleNotificationsToggle: (value: boolean) => Promise<void>;
+};
+
+const GeneralSectionWrapper = React.memo(function GeneralSectionWrapper({
+  sectionProps,
+  settings,
+  styles,
+  handleNotificationsToggle,
+}: GeneralSectionWrapperProps) {
+  const generalSections = GeneralSection({
+    notificationsEnabled: settings.notificationsEnabled,
+    remindersEnabled: settings.remindersEnabled,
+    reminderOffset: settings.reminderOffset,
+    duaAfterAdhanEnabled: settings.duaAfterAdhanEnabled,
+    handleNotificationsToggle,
+    setDuaAfterAdhanEnabled: (enabled) => {
+      settings.setDuaAfterAdhanEnabled(enabled);
+      sectionProps.markPendingChanges();
+    },
+    markPendingChanges: sectionProps.markPendingChanges,
+    setRemindersEnabled: (enabled) => {
+      settings.setRemindersEnabled(enabled);
+      sectionProps.markPendingChanges();
+    },
+    setReminderOffset: (offset) => {
+      settings.setReminderOffset(offset);
+      sectionProps.markPendingChanges();
+    },
+    styles,
+  });
+
+  return (
+    <View style={{ gap: 20 }}>
+      {generalSections.map((section, sectionIndex) => (
+        <View key={section.key || sectionIndex}>
+          {section.data?.map((item, itemIndex) => (
+            <View key={item.key || itemIndex}>{item.component}</View>
+          ))}
+        </View>
+      ))}
+    </View>
+  );
+});
+
+type DhikrSectionWrapperProps = SettingsSectionShellProps & {
+  allDhikrEnabled: boolean;
+  toggleAllDhikr: (value: boolean) => Promise<void>;
+};
+
+const DhikrSectionWrapper = React.memo(function DhikrSectionWrapper({
+  sectionProps,
+  settings,
+  styles,
+  allDhikrEnabled,
+  toggleAllDhikr,
+}: DhikrSectionWrapperProps) {
+  const dhikrSections = DhikrSection({
+    dhikrSettings: settings.dhikrSettings,
+    allDhikrEnabled,
+    notificationsEnabled: settings.notificationsEnabled,
+    toggleAllDhikr,
+    markPendingChanges: sectionProps.markPendingChanges,
+    setEnabledAfterSalah: (enabled) => {
+      settings.setEnabledAfterSalah(enabled);
+      sectionProps.markPendingChanges();
+    },
+    setEnabledMorningDhikr: (enabled) => {
+      settings.setEnabledMorningDhikr(enabled);
+      sectionProps.markPendingChanges();
+    },
+    setEnabledEveningDhikr: (enabled) => {
+      settings.setEnabledEveningDhikr(enabled);
+      sectionProps.markPendingChanges();
+    },
+    setEnabledSelectedDua: (enabled) => {
+      settings.setEnabledSelectedDua(enabled);
+      sectionProps.markPendingChanges();
+    },
+    setDelayMorningDhikr: (delay) => {
+      settings.setDelayMorningDhikr(delay);
+      sectionProps.markPendingChanges();
+    },
+    setDelayEveningDhikr: (delay) => {
+      settings.setDelayEveningDhikr(delay);
+      sectionProps.markPendingChanges();
+    },
+    setDelaySelectedDua: (delay) => {
+      settings.setDelaySelectedDua(delay);
+      sectionProps.markPendingChanges();
+    },
+    styles,
+  });
+
+  return (
+    <View style={{ gap: 20 }}>
+      {dhikrSections.map((section, sectionIndex) => (
+        <View key={section.key || sectionIndex}>
+          {section.data?.map((item, itemIndex) => (
+            <View key={item.key || itemIndex}>{item.component}</View>
+          ))}
+        </View>
+      ))}
+    </View>
+  );
+});
+
+type AdhanSoundSectionWrapperProps = SettingsSectionShellProps & {
+  user: any;
+};
+
+const AdhanSoundSectionWrapper = React.memo(function AdhanSoundSectionWrapper({
+  sectionProps,
+  settings,
+  styles,
+  user,
+}: AdhanSoundSectionWrapperProps) {
+  const adhanSections = AdhanSoundSection({
+    isPreviewing: sectionProps.isPreviewing,
+    isAudioPlaying: sectionProps.isAudioPlaying,
+    currentPlayingAdhan: sectionProps.currentPlayingAdhan,
+    isLoadingPreview: sectionProps.isLoadingPreview,
+    isPlayingPremiumAdhan: sectionProps.isPlayingPremiumAdhan,
+    currentPlayingPremiumAdhan: sectionProps.currentPlayingPremiumAdhan,
+    premiumAdhanPlaybackPosition: sectionProps.premiumAdhanPlaybackPosition,
+    premiumAdhanPlaybackDuration: sectionProps.premiumAdhanPlaybackDuration,
+    isLoadingPremiumAdhan: sectionProps.isLoadingPremiumAdhan,
+    availableAdhanVoices: sectionProps.availableAdhanVoices,
+    downloadingAdhans: sectionProps.downloadingAdhans,
+    downloadProgress: sectionProps.downloadProgress,
+    downloadState: sectionProps.downloadState,
+    settings,
+    calcMethod: settings.calcMethod,
+    setCalcMethod: (value) => {
+      settings.setCalcMethod(value);
+      sectionProps.markPendingChanges();
+    },
+    adhanSound: settings.adhanSound,
+    setAdhanSound: (value) => {
+      settings.setAdhanSound(value);
+      sectionProps.markPendingChanges();
+    },
+    adhanVolume: settings.adhanVolume,
+    setAdhanVolume: (value) => {
+      settings.setAdhanVolume(value);
+      sectionProps.markPendingChanges();
+    },
+    methods: sectionProps.methods,
+    sounds: sectionProps.sounds,
+    user,
+    playPreview: sectionProps.playPreview,
+    stopPreview: sectionProps.stopPreview,
+    pausePreview: sectionProps.pausePreview,
+    resumePreview: sectionProps.resumePreview,
+    playPremiumAdhan: sectionProps.playPremiumAdhan,
+    pausePremiumAdhan: sectionProps.pausePremiumAdhan,
+    resumePremiumAdhan: sectionProps.resumePremiumAdhan,
+    seekPremiumAdhanPosition: sectionProps.seekPremiumAdhanPosition,
+    stopPremiumAdhan: sectionProps.stopPremiumAdhan,
+    handleDownloadAdhan: sectionProps.handleDownloadAdhan,
+    handleDeleteAdhan: sectionProps.handleDeleteAdhan,
+    handleCancelDownload: sectionProps.handleCancelDownload,
+    getSoundDisplayName: sectionProps.getSoundDisplayName,
+    formatTime: sectionProps.formatTime,
+    isRefreshingAdhans: false,
+    isCleaningFiles: false,
+    handleRefreshAdhans: async () => {
+      await sectionProps.forceRefreshAdhans();
+      await sectionProps.loadAvailableAdhans(true);
+      await sectionProps.hydrateAvailableSounds(true);
+    },
+    handleCleanFiles: sectionProps.cleanupCorruptedFiles,
+    updateAvailableSounds: sectionProps.updateAvailableSounds,
+    hydrateAvailableSounds: sectionProps.hydrateAvailableSounds,
+    forceRefreshAdhans: sectionProps.forceRefreshAdhans,
+    markPendingChanges: sectionProps.markPendingChanges,
+    styles,
+  });
+
+  return (
+    <View style={{ gap: 20 }}>
+      {adhanSections.map((section, index) => (
+        <View key={section.key || index}>{section.component}</View>
+      ))}
+    </View>
+  );
+});
+
+const BackupSectionWrapper = React.memo(function BackupSectionWrapper({
+  styles,
+}: {
+  styles: any;
+}) {
+  const backupSections = BackupSection({ styles });
+  return (
+    <View style={{ gap: 20 }}>
+      {backupSections.map((section, sectionIndex) => (
+        <View key={section.key || sectionIndex}>
+          {section.data?.map((item, itemIndex) => (
+            <View key={item.key || itemIndex}>{item.component}</View>
+          ))}
+        </View>
+      ))}
+    </View>
+  );
+});
+
 function SettingsSections(props: OptimizedSettingsSectionsProps) {
   const {
     settings,
@@ -294,224 +546,34 @@ function SettingsSections(props: OptimizedSettingsSectionsProps) {
 
   const closeActiveSection = () => setActiveSection(null);
 
-  // Wrappers pour memoization
-  const LocationSectionWrapper = React.memo(function LocationSectionWrapper() {
-    const stableSetLocationMode = useCallback(
-      (mode: "auto" | "manual") => settings.setLocationMode(mode),
-      [settings]
-    );
-
-    const locationSections = LocationSection({
-      locationMode: settings.locationMode,
-      autoLocation: settings.autoLocation,
-      isRefreshingLocation: settings.isRefreshingLocation,
-      cityInput: props.cityInput,
-      citySearchResults: props.citySearchResults,
-      citySearchLoading: props.citySearchLoading,
-      setLocationMode: stableSetLocationMode,
-      refreshAutoLocation: settings.refreshAutoLocation,
-      handleCityInputChange: props.handleCityInputChange,
-      selectCity: props.selectCity,
-      styles: styles,
-      setActiveSection: setActiveSection,
-      uiMode: props.locationUIMode,
-      setUIMode: props.setLocationUIMode,
-    });
-
-    const locationComponent = locationSections[0]?.data[0]?.component;
-    return (
-      locationComponent || (
-        <View style={{ padding: 16 }}>
-          <Text style={styles.sectionTitle}>Section Localisation</Text>
-        </View>
-      )
-    );
-  });
-
-  const GeneralSectionWrapper = React.memo(function GeneralSectionWrapper() {
-    const generalSections = GeneralSection({
-      notificationsEnabled: settings.notificationsEnabled,
-      remindersEnabled: settings.remindersEnabled,
-      reminderOffset: settings.reminderOffset,
-      duaAfterAdhanEnabled: settings.duaAfterAdhanEnabled,
-      handleNotificationsToggle: handleNotificationsToggle,
-      setDuaAfterAdhanEnabled: (enabled) => {
-        settings.setDuaAfterAdhanEnabled(enabled);
-        props.markPendingChanges();
-      },
-      markPendingChanges: props.markPendingChanges,
-      setRemindersEnabled: (enabled) => {
-        settings.setRemindersEnabled(enabled);
-        props.markPendingChanges();
-      },
-      setReminderOffset: (offset) => {
-        settings.setReminderOffset(offset);
-        props.markPendingChanges();
-      },
-      styles: styles,
-    });
-
-    return (
-      <View style={{ gap: 20 }}>
-        {generalSections.map((section, sectionIndex) => (
-          <View key={section.key || sectionIndex}>
-            {section.data?.map((item, itemIndex) => (
-              <View key={item.key || itemIndex}>{item.component}</View>
-            ))}
-          </View>
-        ))}
-      </View>
-    );
-  });
-
-  const DhikrSectionWrapper = React.memo(function DhikrSectionWrapper() {
-    const dhikrSections = DhikrSection({
-      dhikrSettings: settings.dhikrSettings,
-      allDhikrEnabled: allDhikrEnabled,
-      notificationsEnabled: settings.notificationsEnabled,
-      toggleAllDhikr: toggleAllDhikr,
-      markPendingChanges: props.markPendingChanges,
-      setEnabledAfterSalah: (enabled) => {
-        settings.setEnabledAfterSalah(enabled);
-        props.markPendingChanges();
-      },
-      setEnabledMorningDhikr: (enabled) => {
-        settings.setEnabledMorningDhikr(enabled);
-        props.markPendingChanges();
-      },
-      setEnabledEveningDhikr: (enabled) => {
-        settings.setEnabledEveningDhikr(enabled);
-        props.markPendingChanges();
-      },
-      setEnabledSelectedDua: (enabled) => {
-        settings.setEnabledSelectedDua(enabled);
-        props.markPendingChanges();
-      },
-      setDelayMorningDhikr: (delay) => {
-        settings.setDelayMorningDhikr(delay);
-        props.markPendingChanges();
-      },
-      setDelayEveningDhikr: (delay) => {
-        settings.setDelayEveningDhikr(delay);
-        props.markPendingChanges();
-      },
-      setDelaySelectedDua: (delay) => {
-        settings.setDelaySelectedDua(delay);
-        props.markPendingChanges();
-      },
-      styles: styles,
-    });
-
-    return (
-      <View style={{ gap: 20 }}>
-        {dhikrSections.map((section, sectionIndex) => (
-          <View key={section.key || sectionIndex}>
-            {section.data?.map((item, itemIndex) => (
-              <View key={item.key || itemIndex}>{item.component}</View>
-            ))}
-          </View>
-        ))}
-      </View>
-    );
-  });
-
-  const AdhanSoundSectionWrapper = React.memo(
-    function AdhanSoundSectionWrapper() {
-      const adhanSections = AdhanSoundSection({
-        isPreviewing: props.isPreviewing,
-        isAudioPlaying: props.isAudioPlaying,
-        currentPlayingAdhan: props.currentPlayingAdhan,
-        isLoadingPreview: props.isLoadingPreview,
-        isPlayingPremiumAdhan: props.isPlayingPremiumAdhan,
-        currentPlayingPremiumAdhan: props.currentPlayingPremiumAdhan,
-        premiumAdhanPlaybackPosition: props.premiumAdhanPlaybackPosition,
-        premiumAdhanPlaybackDuration: props.premiumAdhanPlaybackDuration,
-        isLoadingPremiumAdhan: props.isLoadingPremiumAdhan,
-        availableAdhanVoices: props.availableAdhanVoices,
-        downloadingAdhans: props.downloadingAdhans,
-        downloadProgress: props.downloadProgress,
-        downloadState: props.downloadState,
-        settings: settings,
-        calcMethod: settings.calcMethod,
-        setCalcMethod: (value) => {
-          settings.setCalcMethod(value);
-          props.markPendingChanges();
-        },
-        adhanSound: settings.adhanSound,
-        setAdhanSound: (value) => {
-          settings.setAdhanSound(value);
-          props.markPendingChanges();
-        },
-        adhanVolume: settings.adhanVolume,
-        setAdhanVolume: (value) => {
-          settings.setAdhanVolume(value);
-          props.markPendingChanges();
-        },
-        methods: props.methods,
-        sounds: props.sounds,
-        user: user,
-        playPreview: props.playPreview,
-        stopPreview: props.stopPreview,
-        pausePreview: props.pausePreview,
-        resumePreview: props.resumePreview,
-        playPremiumAdhan: props.playPremiumAdhan,
-        pausePremiumAdhan: props.pausePremiumAdhan,
-        resumePremiumAdhan: props.resumePremiumAdhan,
-        seekPremiumAdhanPosition: props.seekPremiumAdhanPosition,
-        stopPremiumAdhan: props.stopPremiumAdhan,
-        handleDownloadAdhan: props.handleDownloadAdhan,
-        handleDeleteAdhan: props.handleDeleteAdhan,
-        handleCancelDownload: props.handleCancelDownload,
-        getSoundDisplayName: props.getSoundDisplayName,
-        formatTime: props.formatTime,
-        isRefreshingAdhans: false,
-        isCleaningFiles: false,
-        handleRefreshAdhans: async () => {
-          await props.forceRefreshAdhans();
-          await props.loadAvailableAdhans(true);
-          await props.hydrateAvailableSounds(true);
-        },
-        handleCleanFiles: props.cleanupCorruptedFiles,
-        updateAvailableSounds: props.updateAvailableSounds,
-        hydrateAvailableSounds: props.hydrateAvailableSounds,
-        forceRefreshAdhans: props.forceRefreshAdhans,
-        markPendingChanges: props.markPendingChanges,
-        styles: styles,
-      });
-
-      return (
-        <View style={{ gap: 20 }}>
-          {adhanSections.map((section, index) => (
-            <View key={section.key || index}>{section.component}</View>
-          ))}
-        </View>
-      );
-    }
-  );
-
-  const BackupSectionWrapper = React.memo(function BackupSectionWrapper() {
-    const backupSections = BackupSection({ styles: styles });
-    return (
-      <View style={{ gap: 20 }}>
-        {backupSections.map((section, sectionIndex) => (
-          <View key={section.key || sectionIndex}>
-            {section.data?.map((item, itemIndex) => (
-              <View key={item.key || itemIndex}>{item.component}</View>
-            ))}
-          </View>
-        ))}
-      </View>
-    );
-  });
+  const sectionShellProps: SettingsSectionShellProps = {
+    sectionProps: props,
+    settings,
+    styles,
+    setActiveSection,
+  };
 
   const renderActiveSectionContent = () => {
     if (!activeSection) return null;
 
     const sectionContent = {
-      location: <LocationSectionWrapper />,
-      adhan_sound: <AdhanSoundSectionWrapper />,
-      notifications: <GeneralSectionWrapper />,
-      dhikr_dua: <DhikrSectionWrapper />,
+      location: <LocationSectionWrapper {...sectionShellProps} />,
+      adhan_sound: (
+        <AdhanSoundSectionWrapper {...sectionShellProps} user={user} />
+      ),
+      notifications: (
+        <GeneralSectionWrapper
+          {...sectionShellProps}
+          handleNotificationsToggle={handleNotificationsToggle}
+        />
+      ),
+      dhikr_dua: (
+        <DhikrSectionWrapper
+          {...sectionShellProps}
+          allDhikrEnabled={allDhikrEnabled}
+          toggleAllDhikr={toggleAllDhikr}
+        />
+      ),
       appearance: (
         <AppearanceSection
           selectedLang={props.selectedLang}
@@ -527,7 +589,7 @@ function SettingsSections(props: OptimizedSettingsSectionsProps) {
           onShowPremiumModal={props.handleBuyPremium}
         />
       ),
-      backup: <BackupSectionWrapper />,
+      backup: <BackupSectionWrapper styles={styles} />,
       account_management: (
         <AccountManagementSection
           user={user}

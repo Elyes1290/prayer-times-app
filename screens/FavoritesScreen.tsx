@@ -120,63 +120,69 @@ const FavoritesScreen: React.FC = () => {
     return favorites.filter((fav) => fav.type === selectedFilter);
   }, [favorites, selectedFilter]);
 
-  // Fonction pour partager un favori
-  const handleShare = async (favorite: Favorite) => {
-    try {
-      let message = "";
+  const handleShare = useCallback(
+    async (favorite: Favorite) => {
+      try {
+        let message = "";
 
-      switch (favorite.type) {
-        case "quran_verse":
-          message = `${favorite.arabicText}\n\n${favorite.translation}\n\n${
-            favorite.chapterName
-          } - ${favorite.verseNumber}\n\n${t(
-            "favorites_screen.shared_from_app"
-          )}`;
-          break;
-        case "hadith":
-          message = `${favorite.arabicText || ""}\n\n${
-            favorite.translation
-          }\n\n${favorite.bookName} - ${favorite.hadithNumber}\n\n${t(
-            "favorites_screen.shared_from_app"
-          )}`;
-          break;
-        case "dhikr":
-          message = `${favorite.arabicText}\n\n${favorite.translation}\n\n${
-            favorite.source || ""
-          }\n\n${t("favorites_screen.shared_from_app")}`;
-          break;
-        case "asmaul_husna":
-          message = `${favorite.arabicName}\n\n${favorite.transliteration}\n\n${
-            favorite.meaning
-          }\n\n${t("favorites_screen.shared_from_app")}`;
-          break;
+        switch (favorite.type) {
+          case "quran_verse":
+            message = `${favorite.arabicText}\n\n${favorite.translation}\n\n${
+              favorite.chapterName
+            } - ${favorite.verseNumber}\n\n${t(
+              "favorites_screen.shared_from_app"
+            )}`;
+            break;
+          case "hadith":
+            message = `${favorite.arabicText || ""}\n\n${
+              favorite.translation
+            }\n\n${favorite.bookName} - ${favorite.hadithNumber}\n\n${t(
+              "favorites_screen.shared_from_app"
+            )}`;
+            break;
+          case "dhikr":
+            message = `${favorite.arabicText}\n\n${favorite.translation}\n\n${
+              favorite.source || ""
+            }\n\n${t("favorites_screen.shared_from_app")}`;
+            break;
+          case "asmaul_husna":
+            message = `${favorite.arabicName}\n\n${
+              favorite.transliteration
+            }\n\n${favorite.meaning}\n\n${t(
+              "favorites_screen.shared_from_app"
+            )}`;
+            break;
+        }
+
+        await Share.share({ message });
+      } catch (error) {
+        console.error(t("favorites_screen.share_error"), error);
       }
+    },
+    [t]
+  );
 
-      await Share.share({ message });
-    } catch (error) {
-      console.error(t("favorites_screen.share_error"), error);
-    }
-  };
-
-  // Fonction pour supprimer un favori avec confirmation
-  const handleRemoveFavorite = (favorite: Favorite) => {
-    Alert.alert(
-      t("favorites_screen.remove_title") || "Retirer des favoris",
-      t("favorites_screen.remove_confirm") ||
-        "Êtes-vous sûr de vouloir retirer cet élément de vos favoris ?",
-      [
-        {
-          text: t("cancel") || "Annuler",
-          style: "cancel",
-        },
-        {
-          text: t("remove") || "Retirer",
-          style: "destructive",
-          onPress: () => removeFavorite(favorite.id),
-        },
-      ]
-    );
-  };
+  const handleRemoveFavorite = useCallback(
+    (favorite: Favorite) => {
+      Alert.alert(
+        t("favorites_screen.remove_title") || "Retirer des favoris",
+        t("favorites_screen.remove_confirm") ||
+          "Êtes-vous sûr de vouloir retirer cet élément de vos favoris ?",
+        [
+          {
+            text: t("cancel") || "Annuler",
+            style: "cancel",
+          },
+          {
+            text: t("remove") || "Retirer",
+            style: "destructive",
+            onPress: () => removeFavorite(favorite.id),
+          },
+        ]
+      );
+    },
+    [t, removeFavorite]
+  );
 
   // Fonction pour supprimer tous les favoris
   const handleClearAll = () => {
@@ -200,176 +206,31 @@ const FavoritesScreen: React.FC = () => {
     );
   };
 
-  // Composant mémorisé pour les éléments favoris
-  const FavoriteItem = React.memo(({ item }: { item: Favorite }) => (
-    <View style={styles.favoriteCard}>
-      <LinearGradient
-        colors={getGradientForType(item.type, currentTheme)}
-        style={styles.cardGradient}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 1 }}
-      >
-        {/* Header de la carte */}
-        <View style={styles.cardHeader}>
-          <View style={styles.cardHeaderLeft}>
-            <MCIcon
-              name={getIconForType(item.type) as any}
-              size={20}
-              color={colors.islamicGold} // 🌅 Utilise la couleur du thème actif
-            />
-            <Text style={styles.cardType}>{getTypeLabel(item.type, t)}</Text>
-          </View>
-
-          <View style={styles.cardActions}>
-            <Pressable
-              style={styles.actionButton}
-              onPress={() => handleShare(item)}
-            >
-              <MCIcon
-                name="share-variant"
-                size={20}
-                color={isLightTheme ? colors.text : "#fff"}
-              />
-            </Pressable>
-
-            <Pressable
-              style={styles.actionButton}
-              onPress={() => handleRemoveFavorite(item)}
-            >
-              <MCIcon
-                name="delete-outline"
-                size={20}
-                color="#ff6b6b"
-              />
-            </Pressable>
-          </View>
-        </View>
-
-        {/* Contenu de la carte */}
-        <View style={styles.cardContent}>{renderCardContent(item)}</View>
-
-        {/* Date d'ajout */}
-        <Text style={styles.dateAdded}>
-          {t("favorites.added_on") || "Ajouté le"}{" "}
-          {item.dateAdded.toLocaleDateString()}
-        </Text>
-
-        {/* Note personnelle si elle existe */}
-        {item.note && (
-          <View style={styles.noteContainer}>
-            <MCIcon
-              name="note-text"
-              size={16}
-              color={colors.islamicGold} // 🌅 Utilise la couleur du thème actif
-            />
-            <Text style={styles.noteText}>{item.note}</Text>
-          </View>
-        )}
-      </LinearGradient>
-    </View>
-  ));
-
-  FavoriteItem.displayName = "FavoriteItem";
-
-  // Fonction renderItem optimisée
   const renderFavoriteItem = useCallback(
-    ({ item }: { item: Favorite }) => <FavoriteItem item={item} />,
-    []
+    ({ item }: { item: Favorite }) => (
+      <FavoriteListItem
+        item={item}
+        styles={styles}
+        colors={colors}
+        isLightTheme={isLightTheme}
+        currentTheme={currentTheme}
+        t={t}
+        onShare={handleShare}
+        onRemove={handleRemoveFavorite}
+        onProphetStoryPress={handleProphetStoryPress}
+      />
+    ),
+    [
+      styles,
+      colors,
+      isLightTheme,
+      currentTheme,
+      t,
+      handleShare,
+      handleRemoveFavorite,
+      handleProphetStoryPress,
+    ]
   );
-
-  // Rendu du contenu spécifique selon le type
-  const renderCardContent = (item: Favorite) => {
-    switch (item.type) {
-      case "quran_verse":
-        return (
-          <>
-            <Text style={styles.arabicText}>{item.arabicText}</Text>
-            <Text style={styles.translationText}>{item.translation}</Text>
-            <Text style={styles.referenceText}>
-              {item.chapterName} - {t("verse")} {item.verseNumber}
-            </Text>
-          </>
-        );
-
-      case "hadith":
-        return (
-          <>
-            {item.arabicText && (
-              <Text style={styles.arabicText}>{item.arabicText}</Text>
-            )}
-            <Text style={styles.translationText}>{item.translation}</Text>
-            <Text style={styles.referenceText}>
-              {item.bookName} - {item.hadithNumber}
-            </Text>
-          </>
-        );
-
-      case "dhikr":
-        return (
-          <>
-            <Text style={styles.arabicText}>{item.arabicText}</Text>
-            <Text style={styles.translationText}>{item.translation}</Text>
-            {item.source && (
-              <Text style={styles.referenceText}>{item.source}</Text>
-            )}
-          </>
-        );
-
-      case "asmaul_husna":
-        return (
-          <>
-            <Text style={styles.arabicText}>{item.arabicName}</Text>
-            <Text style={styles.transliterationText}>
-              {item.transliteration}
-            </Text>
-            <Text style={styles.translationText}>{item.meaning}</Text>
-          </>
-        );
-
-      case "prophet_story":
-        const prophetStory = item as ProphetStoryFavorite;
-        return (
-          <>
-            <Pressable
-              onPress={() => handleProphetStoryPress(prophetStory.storyId)}
-              style={styles.prophetStoryContainer}
-            >
-              <Text style={styles.prophetStoryTitle}>{prophetStory.title}</Text>
-              {prophetStory.titleArabic && (
-                <Text style={styles.prophetStoryTitleArabic}>
-                  {prophetStory.titleArabic}
-                </Text>
-              )}
-              <View style={styles.prophetStoryMeta}>
-                <Text style={styles.prophetStoryCategory}>
-                  📂 {prophetStory.category}
-                </Text>
-                <Text style={styles.prophetStoryDifficulty}>
-                  📊{" "}
-                  {prophetStory.difficulty === "beginner"
-                    ? "Débutant"
-                    : prophetStory.difficulty === "intermediate"
-                    ? "Intermédiaire"
-                    : "Avancé"}
-                </Text>
-                <Text style={styles.prophetStoryTime}>
-                  ⏱️ {prophetStory.readingTime} min
-                </Text>
-                {prophetStory.isPremium && (
-                  <Text style={styles.prophetStoryPremium}>👑 Premium</Text>
-                )}
-              </View>
-              <Text style={styles.prophetStoryAction}>
-                📖 Appuyer pour lire l'histoire complète
-              </Text>
-            </Pressable>
-          </>
-        );
-
-      default:
-        return null;
-    }
-  };
 
   // État vide
   const renderEmptyState = () => (
@@ -592,6 +453,205 @@ const getTypeLabel = (type: FavoriteType, t: any): string => {
       return "Favori";
   }
 };
+
+type FavoriteCardStyles = ReturnType<typeof getStyles>;
+
+type FavoriteCardContentProps = {
+  item: Favorite;
+  styles: FavoriteCardStyles;
+  t: (key: string, fallback?: string) => string;
+  onProphetStoryPress: (storyId: string) => void;
+};
+
+const FavoriteCardContent = React.memo(function FavoriteCardContent({
+  item,
+  styles,
+  t,
+  onProphetStoryPress,
+}: FavoriteCardContentProps) {
+  switch (item.type) {
+    case "quran_verse":
+      return (
+        <>
+          <Text style={styles.arabicText}>{item.arabicText}</Text>
+          <Text style={styles.translationText}>{item.translation}</Text>
+          <Text style={styles.referenceText}>
+            {item.chapterName} - {t("verse")} {item.verseNumber}
+          </Text>
+        </>
+      );
+
+    case "hadith":
+      return (
+        <>
+          {item.arabicText && (
+            <Text style={styles.arabicText}>{item.arabicText}</Text>
+          )}
+          <Text style={styles.translationText}>{item.translation}</Text>
+          <Text style={styles.referenceText}>
+            {item.bookName} - {item.hadithNumber}
+          </Text>
+        </>
+      );
+
+    case "dhikr":
+      return (
+        <>
+          <Text style={styles.arabicText}>{item.arabicText}</Text>
+          <Text style={styles.translationText}>{item.translation}</Text>
+          {item.source && (
+            <Text style={styles.referenceText}>{item.source}</Text>
+          )}
+        </>
+      );
+
+    case "asmaul_husna":
+      return (
+        <>
+          <Text style={styles.arabicText}>{item.arabicName}</Text>
+          <Text style={styles.transliterationText}>
+            {item.transliteration}
+          </Text>
+          <Text style={styles.translationText}>{item.meaning}</Text>
+        </>
+      );
+
+    case "prophet_story": {
+      const prophetStory = item as ProphetStoryFavorite;
+      return (
+        <>
+          <Pressable
+            onPress={() => onProphetStoryPress(prophetStory.storyId)}
+            style={styles.prophetStoryContainer}
+          >
+            <Text style={styles.prophetStoryTitle}>{prophetStory.title}</Text>
+            {prophetStory.titleArabic && (
+              <Text style={styles.prophetStoryTitleArabic}>
+                {prophetStory.titleArabic}
+              </Text>
+            )}
+            <View style={styles.prophetStoryMeta}>
+              <Text style={styles.prophetStoryCategory}>
+                📂 {prophetStory.category}
+              </Text>
+              <Text style={styles.prophetStoryDifficulty}>
+                📊{" "}
+                {prophetStory.difficulty === "beginner"
+                  ? "Débutant"
+                  : prophetStory.difficulty === "intermediate"
+                    ? "Intermédiaire"
+                    : "Avancé"}
+              </Text>
+              <Text style={styles.prophetStoryTime}>
+                ⏱️ {prophetStory.readingTime} min
+              </Text>
+              {prophetStory.isPremium && (
+                <Text style={styles.prophetStoryPremium}>👑 Premium</Text>
+              )}
+            </View>
+            <Text style={styles.prophetStoryAction}>
+              📖 Appuyer pour lire l'histoire complète
+            </Text>
+          </Pressable>
+        </>
+      );
+    }
+
+    default:
+      return null;
+  }
+});
+
+type FavoriteListItemProps = {
+  item: Favorite;
+  styles: FavoriteCardStyles;
+  colors: ReturnType<typeof useThemeColors>;
+  isLightTheme: boolean;
+  currentTheme: "light" | "dark" | "morning" | "sunset";
+  t: (key: string, fallback?: string) => string;
+  onShare: (favorite: Favorite) => void;
+  onRemove: (favorite: Favorite) => void;
+  onProphetStoryPress: (storyId: string) => void;
+};
+
+const FavoriteListItem = React.memo(function FavoriteListItem({
+  item,
+  styles,
+  colors,
+  isLightTheme,
+  currentTheme,
+  t,
+  onShare,
+  onRemove,
+  onProphetStoryPress,
+}: FavoriteListItemProps) {
+  return (
+    <View style={styles.favoriteCard}>
+      <LinearGradient
+        colors={getGradientForType(item.type, currentTheme)}
+        style={styles.cardGradient}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
+      >
+        <View style={styles.cardHeader}>
+          <View style={styles.cardHeaderLeft}>
+            <MCIcon
+              name={getIconForType(item.type) as any}
+              size={20}
+              color={colors.islamicGold}
+            />
+            <Text style={styles.cardType}>{getTypeLabel(item.type, t)}</Text>
+          </View>
+
+          <View style={styles.cardActions}>
+            <Pressable
+              style={styles.actionButton}
+              onPress={() => onShare(item)}
+            >
+              <MCIcon
+                name="share-variant"
+                size={20}
+                color={isLightTheme ? colors.text : "#fff"}
+              />
+            </Pressable>
+
+            <Pressable
+              style={styles.actionButton}
+              onPress={() => onRemove(item)}
+            >
+              <MCIcon name="delete-outline" size={20} color="#ff6b6b" />
+            </Pressable>
+          </View>
+        </View>
+
+        <View style={styles.cardContent}>
+          <FavoriteCardContent
+            item={item}
+            styles={styles}
+            t={t}
+            onProphetStoryPress={onProphetStoryPress}
+          />
+        </View>
+
+        <Text style={styles.dateAdded}>
+          {t("favorites.added_on") || "Ajouté le"}{" "}
+          {item.dateAdded.toLocaleDateString()}
+        </Text>
+
+        {item.note && (
+          <View style={styles.noteContainer}>
+            <MCIcon
+              name="note-text"
+              size={16}
+              color={colors.islamicGold}
+            />
+            <Text style={styles.noteText}>{item.note}</Text>
+          </View>
+        )}
+      </LinearGradient>
+    </View>
+  );
+});
 
 // Styles
 const getStyles = (

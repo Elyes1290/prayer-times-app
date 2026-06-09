@@ -372,7 +372,9 @@ export default function QuranScreen() {
   // 🍎 iOS: Navigation interne dans le menu (pas de 2ème modal)
   const [menuView, setMenuView] = useState<"main" | "sourateList">("main");
   const [showDownloadsView, setShowDownloadsView] = useState(false); // 🆕 Vue cachée de gestion des téléchargements
-  const flatListRef = useRef<FlatList>(null);
+  const versesFlatListRef = useRef<FlatList>(null);
+  const surahAutoPlayOnChangeRef = useRef(false);
+  const surahDataRequestIdRef = useRef(0);
   const { height: windowHeight, width: windowWidth } = useWindowDimensions();
 
   // 📱 Hook pour obtenir les insets de la barre de statut
@@ -449,7 +451,7 @@ export default function QuranScreen() {
   // 👆 NOUVEAU : État pour désactiver la synchronisation automatique (mode navigation app)
   const [isAppNavigation, setIsAppNavigation] = useState(false);
   // 🎯 NOUVEAU : Garder la trace de la dernière sourate du service pour détecter les changements widget
-  const [lastServiceSurah, setLastServiceSurah] = useState<string | null>(null);
+  const lastServiceSurahRef = useRef<string | null>(null);
   // 📝 NOUVEAU : État pour afficher le tooltip navigation
   const [showNavigationTooltip, setShowNavigationTooltip] = useState(false);
 
@@ -484,7 +486,7 @@ export default function QuranScreen() {
   const [playbackPosition, setPlaybackPosition] = useState(0);
   const pendingSeekTargetRef = useRef(0);
   const pendingSeekUntilRef = useRef(0);
-  const [playbackDuration, setPlaybackDuration] = useState(0);
+  const [manualPlaybackDuration, setManualPlaybackDuration] = useState(0);
   const [currentRecitation, setCurrentRecitation] =
     useState<PremiumContent | null>(null);
 
@@ -615,6 +617,63 @@ export default function QuranScreen() {
   console.log(
     "🎵 Hook useQuranAudioService - Service disponible:",
     isServiceAvailable(),
+  );
+
+  const playbackDurationAccumRef = useRef(0);
+
+  const serviceSyncedPlaybackDuration = useMemo(() => {
+    if (!isServiceAvailable() || !user?.isPremium) {
+      return 0;
+    }
+
+    const newPosition = serviceAudioState.position || 0;
+    const rawDuration =
+      serviceAudioState.duration || serviceAudioState.totalDuration || 0;
+    const serviceSurahNum = parseSurahNumberFromServiceTitle(
+      serviceAudioState.currentSurah,
+    );
+    const iosRaw =
+      Platform.OS === "ios" &&
+      serviceAudioState.totalDuration &&
+      serviceAudioState.totalDuration > 0 &&
+      serviceAudioState.totalDuration < 40000
+        ? serviceAudioState.totalDuration * 1000
+        : rawDuration;
+
+    const resolved = resolvePlaybackDurationMs({
+      rawDuration,
+      positionMs: newPosition,
+      previousMs: playbackDurationAccumRef.current,
+      fileSizeMb: currentRecitation?.fileSize,
+      catalogDurationMs: currentRecitation?.durationMs,
+      selectedSurah: selectedSourate,
+      serviceSurah: serviceSurahNum,
+      iosScaledRaw: iosRaw,
+    });
+
+    if (resolved > 0) {
+      playbackDurationAccumRef.current = resolved;
+      lastDurationSurahRef.current = selectedSourate;
+    }
+
+    return resolved;
+  }, [
+    serviceAudioState.position,
+    serviceAudioState.duration,
+    serviceAudioState.totalDuration,
+    serviceAudioState.currentSurah,
+    user?.isPremium,
+    currentRecitation?.fileSize,
+    currentRecitation?.durationMs,
+    selectedSourate,
+  ]);
+
+  const playbackDuration = useMemo(
+    () =>
+      serviceSyncedPlaybackDuration > 0
+        ? serviceSyncedPlaybackDuration
+        : manualPlaybackDuration,
+    [serviceSyncedPlaybackDuration, manualPlaybackDuration],
   );
 
   // 🎵 NOUVEAU : Démarrer la lecture en continu d'un récitateur
@@ -771,12 +830,6 @@ export default function QuranScreen() {
       .catch(() => setSourates([]));
   }, [lang]);
 
-  // Charger les récitations premium disponibles
-  useEffect(() => {
-    loadAvailableRecitations();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   // 🆕 Scanner le dossier physique quand on active le mode hors ligne ou la vue des téléchargements
   useEffect(() => {
     console.log(
@@ -879,37 +932,6 @@ export default function QuranScreen() {
         serviceAudioState.currentSurah,
       );
 
-      const serviceSurahNum = parseSurahNumberFromServiceTitle(
-        serviceAudioState.currentSurah,
-      );
-      const iosRaw =
-        Platform.OS === "ios" &&
-        serviceAudioState.totalDuration &&
-        serviceAudioState.totalDuration > 0 &&
-        serviceAudioState.totalDuration < 40000
-          ? serviceAudioState.totalDuration * 1000
-          : rawDuration;
-
-      const fileSizeMb = currentRecitation?.fileSize;
-      const catalogDurationMs = currentRecitation?.durationMs;
-
-      setPlaybackDuration((prev) => {
-        const resolved = resolvePlaybackDurationMs({
-          rawDuration: rawDuration,
-          positionMs: newPosition,
-          previousMs: prev,
-          fileSizeMb,
-          catalogDurationMs,
-          selectedSurah: selectedSourate,
-          serviceSurah: serviceSurahNum,
-          iosScaledRaw: iosRaw,
-        });
-        if (resolved > 0) {
-          lastDurationSurahRef.current = selectedSourate;
-        }
-        return resolved;
-      });
-
       const now = Date.now();
       if (now < pendingSeekUntilRef.current) {
         const target = pendingSeekTargetRef.current;
@@ -970,37 +992,30 @@ export default function QuranScreen() {
         }
       }
 
-      // 🎯 NOUVEAU : Synchroniser currentlyPlaying avec l'état du service
-      if (newIsPlaying && serviceAudioState.currentSurah) {
-        // Si le service joue quelque chose, s'assurer que currentlyPlaying correspond
-        if (currentRecitation && currentRecitation.id) {
-          setCurrentlyPlaying(currentRecitation.id);
-          console.log(
-            `🎯 Synchronisation currentlyPlaying: ${currentRecitation.id}`,
-          );
-        }
-      } else if (!newIsPlaying) {
-        // Si le service ne joue rien, réinitialiser si nécessaire
-        console.log(
-          `🎯 Service en pause, currentlyPlaying conservé: ${currentlyPlaying}`,
-        );
-      }
-
       // 🎯 NOUVEAU : Détecter changements de sourate depuis le widget
       if (
         serviceAudioState.currentSurah &&
-        serviceAudioState.currentSurah !== lastServiceSurah
+        serviceAudioState.currentSurah !== lastServiceSurahRef.current
       ) {
         console.log(
-          `🎯 Changement sourate détecté: "${lastServiceSurah}" → "${serviceAudioState.currentSurah}"`,
+          `🎯 Changement sourate détecté: "${lastServiceSurahRef.current}" → "${serviceAudioState.currentSurah}"`,
         );
-        setLastServiceSurah(serviceAudioState.currentSurah);
+        const surahMatch = serviceAudioState.currentSurah.match(/\((\d{3})\)/);
+        const serviceSurahNum = surahMatch
+          ? parseInt(surahMatch[1], 10)
+          : null;
 
-        // Si on était en mode navigation app, le réactiver
-        if (isAppNavigation) {
+        lastServiceSurahRef.current = serviceAudioState.currentSurah;
+
+        // Réactiver la sync seulement quand le service a rattrapé la sourate affichée
+        if (
+          isAppNavigation &&
+          serviceSurahNum !== null &&
+          serviceSurahNum === selectedSourate
+        ) {
           setIsAppNavigation(false);
           console.log(
-            "🔄 Navigation widget détectée - Mode navigation app désactivé - Sync réactivée",
+            "✅ Navigation app terminée - service aligné, sync réactivée",
           );
         }
       }
@@ -1047,7 +1062,6 @@ export default function QuranScreen() {
     user?.isPremium,
     isAppNavigation,
     isLoading,
-    lastServiceSurah,
     currentRecitation,
     currentlyPlaying,
     selectedSourate,
@@ -1142,7 +1156,10 @@ export default function QuranScreen() {
 
   // 🆕 Scanner physiquement le dossier /quran/ pour trouver les récitations téléchargées
   // 📱 NOUVEAU : Charger les versets offline pour une sourate
-  const loadOfflineSurah = async (surahNumber: number) => {
+  const loadOfflineSurah = async (
+    surahNumber: number,
+    requestId: number,
+  ): Promise<boolean> => {
     try {
       console.log(
         `🔍 [QuranOffline] Tentative de chargement sourate ${surahNumber}...`,
@@ -1184,6 +1201,10 @@ export default function QuranScreen() {
             "",
         }));
 
+        if (requestId !== surahDataRequestIdRef.current) {
+          return false;
+        }
+
         setArabicVerses(arabicVerses);
         setPhoneticArr(phoneticArr);
         setTranslationArr(translationArr);
@@ -1222,62 +1243,18 @@ export default function QuranScreen() {
   //   );
   // };
 
-  // 🚀 NOUVEAU : Charger une récitation spécifique à la demande
-  // const [loadingRecitation, setLoadingRecitation] = useState(false);
-
-  const loadSpecificRecitation = async (
-    reciterName: string,
-    surahNumber: number,
-    autoPlay: boolean = false,
-  ) => {
-    if (!reciterName) return;
-
-    // setLoadingRecitation(true);
-    try {
-      const recitation = await premiumManager.getSpecificRecitation(
-        reciterName,
-        surahNumber,
-      );
-      setCurrentRecitation(recitation);
-
-      if (recitation?.durationMs && recitation.durationMs > 0) {
-        setPlaybackDuration(recitation.durationMs);
-        lastDurationSurahRef.current = surahNumber;
-      }
-
-      // 🚀 NOUVEAU : Lecture automatique si demandé (pour boutons suivant/précédent)
-      if (autoPlay && recitation) {
-        console.log(
-          `🎵 Lecture automatique après chargement: ${recitation.title}`,
-        );
-        playRecitation(recitation);
-      }
-
-      // 🚀 SUPPRIMÉ : Plus besoin de rafraîchir le statut ici
-      // Le statut sera mis à jour automatiquement via les événements natifs
-    } catch (error) {
-      console.error("Erreur chargement récitation spécifique:", error);
-      setCurrentRecitation(null);
-    } finally {
-      // setLoadingRecitation(false);
-    }
-  };
-
   // Réinitialiser le minuteur quand on change de sourate (évite de garder 264:09 de Baqara)
   useEffect(() => {
     lastDurationSurahRef.current = null;
-    setPlaybackDuration(0);
+    playbackDurationAccumRef.current = 0;
+    setManualPlaybackDuration(0);
     setPlaybackPosition(0);
-  }, [selectedSourate]);
+    setSearchQuery("");
 
-  // Charger la récitation quand le récitateur ou la sourate change
-  useEffect(() => {
-    // ✅ Ne pas charger les récitations en mode offline
-    if (selectedReciter && selectedSourate && !offlineAccess.isOfflineMode) {
-      loadSpecificRecitation(selectedReciter, selectedSourate);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedReciter, selectedSourate, offlineAccess.isOfflineMode]);
+    requestAnimationFrame(() => {
+      versesFlatListRef.current?.scrollToOffset({ offset: 0, animated: false });
+    });
+  }, [selectedSourate]);
 
   // 🚀 SUPPRIMÉ : Anciens événements de téléchargement non natifs
 
@@ -1646,9 +1623,9 @@ export default function QuranScreen() {
 
         setPlaybackPosition(0);
         if (activeRecitation.durationMs && activeRecitation.durationMs > 0) {
-          setPlaybackDuration(activeRecitation.durationMs);
+          setManualPlaybackDuration(activeRecitation.durationMs);
         } else {
-          setPlaybackDuration(0);
+          setManualPlaybackDuration(0);
         }
         if (activeRecitation.surahNumber) {
           lastDurationSurahRef.current = activeRecitation.surahNumber;
@@ -1783,7 +1760,7 @@ export default function QuranScreen() {
                 ? activeRecitation.durationMs
                 : 0;
             if (catalogDurationMs > 0) {
-              setPlaybackDuration(catalogDurationMs);
+              setManualPlaybackDuration(catalogDurationMs);
             }
 
             await loadAudioInService(
@@ -1791,10 +1768,8 @@ export default function QuranScreen() {
               activeRecitation.title,
               activeRecitation.reciter || "",
               catalogDurationMs,
+              true,
             );
-
-            // Lancer la lecture
-            await playAudioInService();
 
             setIsPlaying(true);
             setCurrentlyPlaying(activeRecitation.id);
@@ -1936,7 +1911,7 @@ export default function QuranScreen() {
             if (status.isLoaded) {
               const posMs = status.positionMillis || 0;
               setPlaybackPosition(posMs);
-              setPlaybackDuration((prev) =>
+              setManualPlaybackDuration((prev) =>
                 resolvePlaybackDurationMs({
                   rawDuration: status.durationMillis || 0,
                   positionMs: posMs,
@@ -1976,9 +1951,9 @@ export default function QuranScreen() {
                 //  console.log(`🎵 Nouveau verset détecté: ${currentVerse}`);
 
                 // 🎯 NOUVEAU : Scroll automatique vers le verset en cours
-                if (autoScrollEnabled && flatListRef.current) {
+                if (autoScrollEnabled && versesFlatListRef.current) {
                   setTimeout(() => {
-                    flatListRef.current?.scrollToIndex({
+                    versesFlatListRef.current?.scrollToIndex({
                       index: currentVerse,
                       animated: true,
                       viewPosition: 0.3, // Positionne le verset à 30% du haut
@@ -2002,7 +1977,7 @@ export default function QuranScreen() {
                 setIsPlaying(false);
                 setCurrentlyPlaying(null);
                 setPlaybackPosition(0);
-                setPlaybackDuration(0);
+                setManualPlaybackDuration(0);
                 // TODO: setCurrentVerseIndex(null);
 
                 // 🎵 Mode playlist - passer automatiquement à la suivante (Expo-AV uniquement)
@@ -2066,6 +2041,55 @@ export default function QuranScreen() {
       networkStatus.isConnected,
     ],
   );
+
+  const loadSpecificRecitation = useCallback(
+    async (
+      reciterName: string,
+      surahNumber: number,
+      autoPlay: boolean = false,
+    ) => {
+      if (!reciterName) return;
+
+      try {
+        const recitation = await premiumManager.getSpecificRecitation(
+          reciterName,
+          surahNumber,
+        );
+        setCurrentRecitation(recitation);
+
+        if (recitation?.durationMs && recitation.durationMs > 0) {
+          setManualPlaybackDuration(recitation.durationMs);
+          lastDurationSurahRef.current = surahNumber;
+        }
+
+        if (autoPlay && recitation) {
+          console.log(
+            `🎵 Lecture automatique après chargement: ${recitation.title}`,
+          );
+          playRecitation(recitation);
+        }
+      } catch (error) {
+        console.error("Erreur chargement récitation spécifique:", error);
+        setCurrentRecitation(null);
+      }
+    },
+    [premiumManager, playRecitation],
+  );
+
+  useEffect(() => {
+    if (!selectedReciter || !selectedSourate || offlineAccess.isOfflineMode) {
+      return;
+    }
+
+    // Navigation suivant/précédent ou picker : chargement audio déjà déclenché
+    if (surahAutoPlayOnChangeRef.current) {
+      surahAutoPlayOnChangeRef.current = false;
+      return;
+    }
+
+    void loadSpecificRecitation(selectedReciter, selectedSourate, false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- pas de rechargement quand loadSpecificRecitation est recréé
+  }, [selectedReciter, selectedSourate, offlineAccess.isOfflineMode]);
 
   // 🎵 LECTEUR COMPLÈTEMENT INDÉPENDANT POUR LES TÉLÉCHARGEMENTS
   // Utilise Audio.Sound avec configuration pour lecture en arrière-plan
@@ -2377,7 +2401,7 @@ export default function QuranScreen() {
       // 🔧 FIX : Ne pas vider currentRecitation pour éviter de fermer la modal
       // setCurrentRecitation(null); ← Commenté pour garder la modal ouverte
       setPlaybackPosition(0);
-      setPlaybackDuration(0);
+      setManualPlaybackDuration(0);
 
       // 🎯 NOUVEAU : Mettre à jour le widget Coran
       if (isWidgetAvailable && user?.isPremium) {
@@ -2405,16 +2429,19 @@ export default function QuranScreen() {
     async (surahNumber: number) => {
       if (surahNumber < 1 || surahNumber > 114) return;
       setIsAppNavigation(true);
+
+      const audioActive =
+        user?.isPremium &&
+        !!selectedReciter &&
+        (isPlaying ||
+          !!currentlyPlaying ||
+          (isServiceAvailable() && serviceAudioState.isPlaying));
+
+      surahAutoPlayOnChangeRef.current = audioActive;
       setSelectedSourate(surahNumber);
 
       // Gratuit : uniquement le texte du Coran (pas d'appel audio)
       if (!user?.isPremium || !selectedReciter) return;
-
-      const audioActive =
-        isPlaying ||
-        !!currentlyPlaying ||
-        (isServiceAvailable() && serviceAudioState.isPlaying);
-
       if (!audioActive) return;
 
       if (offlineAccess.isOfflineMode) {
@@ -2473,9 +2500,22 @@ export default function QuranScreen() {
       );
 
       // Changer la sourate AVANT l'animation
+      surahAutoPlayOnChangeRef.current = true;
       setSelectedSourate(targetSurah);
-      if (selectedReciter) {
-        loadSpecificRecitation(selectedReciter, targetSurah, autoPlay);
+
+      if (autoPlay && selectedReciter) {
+        if (offlineAccess.isOfflineMode) {
+          const offlineRec = scannedQuranFiles.find(
+            (r) =>
+              r.surahNumber === targetSurah &&
+              r.reciter?.toLowerCase() === selectedReciter.toLowerCase(),
+          );
+          if (offlineRec) {
+            void playRecitation(offlineRec);
+          }
+        } else {
+          void loadSpecificRecitation(selectedReciter, targetSurah, true);
+        }
       }
 
       // Animation slide
@@ -2489,7 +2529,16 @@ export default function QuranScreen() {
         withTiming(0, { duration: 150 })
       );
     },
-    [selectedSourate, selectedReciter, loadSpecificRecitation, slideAnim],
+    [
+      selectedSourate,
+      selectedReciter,
+      slideAnim,
+      windowWidth,
+      offlineAccess.isOfflineMode,
+      scannedQuranFiles,
+      playRecitation,
+      loadSpecificRecitation,
+    ],
   );
 
   // 🎵 NOUVEAU : Passer à la récitation suivante dans la playlist
@@ -2670,35 +2719,43 @@ export default function QuranScreen() {
 
   // Charger les versets, la translittération et la traduction selon la sourate et la langue
   useEffect(() => {
+    const requestId = ++surahDataRequestIdRef.current;
+    const surahToLoad = selectedSourate;
+
+    const isStale = () =>
+      requestId !== surahDataRequestIdRef.current ||
+      surahToLoad !== selectedSourate;
+
     async function fetchQuranData() {
       setLoading(true);
 
       // 📱 NOUVEAU : Logique Premium optimisée
       if (user?.isPremium) {
-        // Premium : TOUJOURS utiliser les données locales (plus rapide)
         console.log(
-          `📱 [QuranOffline] Chargement sourate ${selectedSourate} avec données locales Premium`,
+          `📱 [QuranOffline] Chargement sourate ${surahToLoad} avec données locales Premium`,
         );
-        const success = await loadOfflineSurah(selectedSourate);
+        const success = await loadOfflineSurah(surahToLoad, requestId);
+        if (isStale()) return;
         if (success) {
           setLoading(false);
           return;
-        } else {
-          // ✅ Si le chargement offline échoue, ne pas essayer le serveur
-          console.error(
-            `❌ [QuranOffline] Impossible de charger la sourate ${selectedSourate} offline`,
-          );
-          setArabicVerses([]);
-          setPhoneticArr([]);
-          setTranslationArr([]);
-          setLoading(false);
-          return;
         }
-      } else if (!networkStatus.isConnected) {
-        // Non-Premium hors ligne : accès refusé
+
+        console.error(
+          `❌ [QuranOffline] Impossible de charger la sourate ${surahToLoad} offline`,
+        );
+        setArabicVerses([]);
+        setPhoneticArr([]);
+        setTranslationArr([]);
+        setLoading(false);
+        return;
+      }
+
+      if (!networkStatus.isConnected) {
         console.log(
           `🚫 [QuranOffline] Accès refusé - connexion requise pour utilisateur gratuit`,
         );
+        if (isStale()) return;
         setArabicVerses([]);
         setPhoneticArr([]);
         setTranslationArr([]);
@@ -2708,22 +2765,24 @@ export default function QuranScreen() {
 
       // 🌐 Mode en ligne : fonctionnement normal
       try {
-        // Fetch arabe (toujours même endpoint)
-        const arabicRes = await fetch(
-          `https://api.quran.com/api/v4/quran/verses/uthmani?chapter_number=${selectedSourate}`,
-        );
-        const arabicJson = await arabicRes.json();
+        const [arabicRes, phoneticRes] = await Promise.all([
+          fetch(
+            `https://api.quran.com/api/v4/quran/verses/uthmani?chapter_number=${surahToLoad}`,
+          ),
+          fetch(
+            `https://api.quran.com/api/v4/quran/translations/57?chapter_number=${surahToLoad}`,
+          ),
+        ]);
 
-        // Fetch translittération (toujours id=57)
-        const phoneticRes = await fetch(
-          `https://api.quran.com/api/v4/quran/translations/57?chapter_number=${selectedSourate}`,
-        );
+        if (isStale()) return;
+
+        const arabicJson = await arabicRes.json();
         const phoneticJson = await phoneticRes.json();
 
-        // Fetch traduction avec fallback
-        let translationJson = { translations: [] };
+        let translationJson = { translations: [] as any[] };
         if (lang !== "ar") {
-          const translations = await fetchTranslation(selectedSourate, lang);
+          const translations = await fetchTranslation(surahToLoad, lang);
+          if (isStale()) return;
           translationJson.translations = translations;
         }
 
@@ -2731,21 +2790,25 @@ export default function QuranScreen() {
         setPhoneticArr(phoneticJson.translations || []);
         setTranslationArr(translationJson.translations || []);
       } catch {
-        // En cas d'erreur réseau, essayer le mode offline si Premium
+        if (isStale()) return;
         if (user?.isPremium) {
           console.log(
             `🔄 [QuranOffline] Erreur réseau, basculement vers mode offline`,
           );
-          await loadOfflineSurah(selectedSourate);
+          await loadOfflineSurah(surahToLoad, requestId);
         } else {
           setArabicVerses([]);
           setPhoneticArr([]);
           setTranslationArr([]);
         }
       }
-      setLoading(false);
+
+      if (!isStale()) {
+        setLoading(false);
+      }
     }
-    fetchQuranData();
+
+    void fetchQuranData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedSourate, lang, user?.isPremium, networkStatus.isConnected]);
 
@@ -3089,10 +3152,11 @@ export default function QuranScreen() {
 
                 {/* Contenu du Coran */}
                 <FlatList
-                  ref={flatListRef}
+                  ref={versesFlatListRef}
+                  key={`quran-verses-${selectedSourate}`}
                   data={filteredVerses}
-                  keyExtractor={(item, index) =>
-                    `${item.verse_key || item.id || index}`
+                  keyExtractor={(item) =>
+                    `${selectedSourate}-${item.verse_key || item.id}`
                   }
                   renderItem={({ item, index }) => {
                     // Affichage simplifié pour le mode offline
@@ -3647,7 +3711,6 @@ export default function QuranScreen() {
                 </Pressable>
               </View>
               <FlatList
-                ref={flatListRef}
                 data={modalData}
                 renderItem={renderSourateItem}
                 keyExtractor={(item) => item.key.toString()}
@@ -4250,8 +4313,12 @@ export default function QuranScreen() {
           )}
 
           <FlatList
+            ref={versesFlatListRef}
+            key={`quran-verses-${selectedSourate}`}
             data={filteredVerses}
-            keyExtractor={(item) => item.id.toString()}
+            keyExtractor={(item) =>
+              `${selectedSourate}-${item.verse_key || item.id}`
+            }
             renderItem={({ item, index }) => {
               // Affichage normal d'une sourate
               const originalIndex = arabicVerses.findIndex(

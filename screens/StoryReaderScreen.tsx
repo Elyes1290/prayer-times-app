@@ -146,6 +146,8 @@ export default function StoryReaderScreen() {
   const [loading, setLoading] = useState(true);
   const [currentChapter, setCurrentChapter] = useState(0);
   const [readingProgress, setReadingProgress] = useState(0);
+  const readingProgressRef = useRef(0);
+  const lastProgressUiUpdateRef = useRef(0);
   const [showSettings, setShowSettings] = useState(false);
   const showReferencesRef = useRef(false);
   const showGlossaryRef = useRef(false);
@@ -333,7 +335,7 @@ export default function StoryReaderScreen() {
             story_id: storyId,
             chapter_index: currentChapter,
             position: scrollPosition.current,
-            completion_percentage: readingProgress,
+            completion_percentage: readingProgressRef.current,
             time_spent: 60, // Estimation basique
           }),
         }
@@ -341,13 +343,22 @@ export default function StoryReaderScreen() {
     } catch (error) {
       console.error("Erreur sauvegarde progrès:", error);
     }
-  }, [
-    storyId,
-    currentChapter,
-    readingProgress,
-    storyData,
-    premiumUser.isPremium,
-  ]);
+  }, [storyId, currentChapter, storyData, premiumUser.isPremium]);
+
+  const updateReadingProgress = useCallback((progress: number) => {
+    const clamped = Math.min(100, Math.max(0, progress));
+    readingProgressRef.current = clamped;
+
+    const now = Date.now();
+    if (now - lastProgressUiUpdateRef.current >= 150) {
+      lastProgressUiUpdateRef.current = now;
+      setReadingProgress(clamped);
+    }
+  }, []);
+
+  const flushReadingProgress = useCallback(() => {
+    setReadingProgress(readingProgressRef.current);
+  }, []);
 
   // Calculer la progression de lecture basée sur les chapitres
   const handleScroll = (event: any) => {
@@ -378,7 +389,7 @@ export default function StoryReaderScreen() {
       const totalProgress =
         (currentChapter * chapterWeight + chapterCompletion) * 100;
 
-      setReadingProgress(Math.min(100, Math.max(0, totalProgress)));
+      updateReadingProgress(totalProgress);
     } else {
       // Fallback : progression basée sur le scroll simple
       const progress = Math.min(
@@ -389,7 +400,7 @@ export default function StoryReaderScreen() {
             100
         )
       );
-      setReadingProgress(progress);
+      updateReadingProgress(progress);
     }
   };
 
@@ -759,7 +770,7 @@ export default function StoryReaderScreen() {
           {currentChapter > 0 && (
             <Pressable
               style={[styles.navButton, { backgroundColor: colors.cardBG }]}
-              onPress={() => setCurrentChapter(currentChapter - 1)}
+              onPress={() => setCurrentChapter((chapter) => chapter - 1)}
             >
               <IonIcon name="chevron-back" size={20} color={colors.text} />
               <ThemedText style={styles.navButtonText}>Précédent</ThemedText>
@@ -769,7 +780,7 @@ export default function StoryReaderScreen() {
           {currentChapter < storyData.chapters.length - 1 && (
             <Pressable
               style={[styles.navButton, { backgroundColor: colors.primary }]}
-              onPress={() => setCurrentChapter(currentChapter + 1)}
+              onPress={() => setCurrentChapter((chapter) => chapter + 1)}
             >
               <Text style={[styles.navButtonText, { color: "white" }]}>
                 Suivant
@@ -942,7 +953,11 @@ export default function StoryReaderScreen() {
           style={styles.scrollView}
           contentContainerStyle={styles.scrollContent}
           onScroll={handleScroll}
-          onMomentumScrollEnd={saveProgress}
+          onScrollEndDrag={flushReadingProgress}
+          onMomentumScrollEnd={() => {
+            flushReadingProgress();
+            void saveProgress();
+          }}
           scrollEventThrottle={16}
           showsVerticalScrollIndicator={false}
         >

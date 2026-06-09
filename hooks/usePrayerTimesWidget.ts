@@ -118,8 +118,33 @@ export const usePrayerTimesWidget = () => {
 
   // Vérifier la disponibilité au démarrage
   useEffect(() => {
-    checkWidgetAvailability();
-  }, [checkWidgetAvailability]);
+    let cancelled = false;
+
+    const runCheck = async () => {
+      if (Platform.OS !== "ios") {
+        if (!cancelled) setIsWidgetAvailable(false);
+        return;
+      }
+
+      if (!PrayerTimesWidgetModule) {
+        if (!cancelled) setIsWidgetAvailable(false);
+        return;
+      }
+
+      try {
+        const available = await PrayerTimesWidgetModule.isWidgetAvailable();
+        if (!cancelled) setIsWidgetAvailable(available);
+      } catch {
+        if (!cancelled) setIsWidgetAvailable(false);
+      }
+    };
+
+    void runCheck();
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   return {
     isWidgetAvailable,

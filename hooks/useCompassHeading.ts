@@ -139,7 +139,6 @@ export function useCompassHeading(
 
   useEffect(() => {
     if (!enabled) {
-      stopCompass();
       return;
     }
 
@@ -170,8 +169,6 @@ export function useCompassHeading(
         errorLog("Impossible de démarrer watchHeadingAsync:", error);
       }
     };
-
-    stopCompass();
 
     if (Platform.OS === "android") {
       const ok = startAndroidCompass();

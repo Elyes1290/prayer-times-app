@@ -101,6 +101,8 @@ public class QuranAudioService extends Service {
     /** Durée catalogue (API) — stabilise la jauge et le clamp du seek */
     private int expectedDurationMs = 0;
     private boolean isMediaReady = false;
+    /** Lecture demandée avant la fin de prepareAsync() */
+    private boolean pendingAutoPlayAfterPrepare = false;
     private int pendingSeekMs = -1;
     private boolean isPremiumUser = false;
     // 🎯 NOUVEAU : Variable d'instance pour synchronisation widget
@@ -2362,7 +2364,7 @@ public class QuranAudioService extends Service {
      */
     public void playAudio() {
         Log.d(TAG, "🎵 playAudio() appelé - isPremiumUser: " + isPremiumUser + ", mediaPlayer null: "
-                + (mediaPlayer == null));
+                + (mediaPlayer == null) + ", isMediaReady: " + isMediaReady);
 
         if (!isPremiumUser) {
             Log.w(TAG, "⚠️ Utilisateur non premium, lecture ignorée");
@@ -2372,6 +2374,12 @@ public class QuranAudioService extends Service {
         if (mediaPlayer == null) {
             Log.w(TAG, "⚠️ MediaPlayer null, réinitialisation...");
             initializeMediaPlayer();
+        }
+
+        if (!isMediaReady) {
+            Log.d(TAG, "⏳ MediaPlayer pas encore prêt — lecture mise en file d'attente");
+            pendingAutoPlayAfterPrepare = true;
+            return;
         }
 
         if (mediaPlayer != null && !isPlaying) {
@@ -2577,9 +2585,15 @@ public class QuranAudioService extends Service {
     }
 
     public void loadAudio(String audioPath, String surah, String reciter, int expectedDuration) {
+        loadAudio(audioPath, surah, reciter, expectedDuration, false);
+    }
+
+    public void loadAudio(String audioPath, String surah, String reciter, int expectedDuration,
+            boolean autoPlay) {
+        pendingAutoPlayAfterPrepare = autoPlay;
         expectedDurationMs = expectedDuration > 0 ? expectedDuration : 0;
         Log.d(TAG, "🎵 Chargement audio: " + surah + " - " + reciter + " - " + audioPath
-                + " (durée attendue=" + expectedDurationMs + "ms)");
+                + " (durée attendue=" + expectedDurationMs + "ms, autoPlay=" + autoPlay + ")");
 
         clearAlbumArt();
 
@@ -2686,6 +2700,12 @@ public class QuranAudioService extends Service {
                     performSeek(seek, 0);
                 }
                 Log.d(TAG, "🎵 Durée totale: " + totalDuration + "ms");
+
+                if (pendingAutoPlayAfterPrepare) {
+                    pendingAutoPlayAfterPrepare = false;
+                    Log.d(TAG, "🎵 Démarrage automatique après prepareAsync");
+                    startPlayback();
+                }
 
                 // NOUVEAU : Logs de debug pour vérifier l'envoi des événements
                 Log.d(TAG, "🔍 Envoi événements après préparation - durée: " + totalDuration + "ms");
