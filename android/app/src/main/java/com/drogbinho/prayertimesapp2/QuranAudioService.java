@@ -702,10 +702,11 @@ public class QuranAudioService extends Service {
             // streaming)
             if (autoAdvanceEnabled) {
                 Log.d(TAG, "🔄 Auto-avancement activé, recherche de la prochaine sourate");
+                wasPlayingBeforeNavigation = true;
                 advanceToNextSurah();
+            } else {
+                broadcastAudioStateChanged();
             }
-
-            broadcastAudioStateChanged();
             updateNotification();
         });
 
@@ -1929,7 +1930,12 @@ public class QuranAudioService extends Service {
      * Charger une sourate par son numéro
      */
     private void loadSurahByNumber(int surahNumber) {
-        Log.d(TAG, "🎵 loadSurahByNumber - DÉBUT - surahNumber: " + surahNumber);
+        loadSurahByNumber(surahNumber, false);
+    }
+
+    private void loadSurahByNumber(int surahNumber, boolean forceAutoPlay) {
+        Log.d(TAG, "🎵 loadSurahByNumber - DÉBUT - surahNumber: " + surahNumber
+                + " forceAutoPlay=" + forceAutoPlay);
 
         if (surahNumber < 1 || surahNumber > 114) {
             Log.e(TAG, "❌ Numéro de sourate invalide: " + surahNumber);
@@ -1946,9 +1952,8 @@ public class QuranAudioService extends Service {
         Log.d(TAG, "🎵 Chargement sourate " + surahNumber + ": " + surahName);
         Log.d(TAG, "🎵 Récitateur actuel: " + currentReciter);
 
-        // NOUVEAU : Sauvegarder l'état de lecture AVANT de faire quoi que ce soit
-        // d'autre
-        this.wasPlayingBeforeNavigation = isPlaying;
+        // Conserver l'intention d'auto-play (fin de sourate) : isPlaying est déjà false
+        this.wasPlayingBeforeNavigation = forceAutoPlay || isPlaying;
         Log.d(TAG, "🎵 État de lecture avant navigation: " + this.wasPlayingBeforeNavigation);
 
         // Construire l'URL audio
@@ -2770,6 +2775,8 @@ public class QuranAudioService extends Service {
         Log.d(TAG, "🎵 loadAudioWithAutoPlay - wasPlayingBeforeNavigation: " + wasPlayingBeforeNavigation);
         Log.d(TAG, "🎵 loadAudioWithAutoPlay - isPremiumUser: " + isPremiumUser);
 
+        this.wasPlayingBeforeNavigation = wasPlayingBeforeNavigation;
+
         Log.d(TAG, "🎵 Chargement audio avec auto-play: " + surah + " - " + reciter + " - " + audioPath);
 
         if (!isPremiumUser) {
@@ -3110,20 +3117,11 @@ public class QuranAudioService extends Service {
             Log.d(TAG, "🌐 Sourate " + nextSurahNumber + " non téléchargée, streaming");
         }
 
-        // 🎯 CORRECTION : Forcer wasPlayingBeforeNavigation = true pour
-        // l'auto-avancement
-        // Car l'auto-avancement se déclenche quand l'audio se termine (isPlaying =
-        // false)
-        // mais on veut continuer la lecture automatiquement
-        boolean originalIsPlaying = isPlaying;
-        isPlaying = true; // Temporairement pour que loadSurahByNumber détecte qu'on était en lecture
-        Log.d(TAG, "🎯 Auto-avancement - Force isPlaying=true temporairement pour l'auto-play");
+        wasPlayingBeforeNavigation = true;
+        Log.d(TAG, "🎯 Auto-avancement - wasPlayingBeforeNavigation=true pour l'auto-play");
 
         // Charger la prochaine sourate (téléchargée ou streaming)
-        loadSurahByNumber(nextSurahNumber);
-
-        // Restaurer l'état original (pas nécessaire mais plus propre)
-        isPlaying = originalIsPlaying;
+        loadSurahByNumber(nextSurahNumber, true);
 
         // 🎯 CORRECTION : Mettre à jour l'écran de verrouillage après auto-avancement
         // Délai pour laisser le temps à l'audio de se charger et de démarrer

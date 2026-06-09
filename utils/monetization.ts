@@ -253,16 +253,26 @@ export const AD_CONFIG = {
   },
 };
 
+const priceFormatters = new Map<string, Intl.NumberFormat>();
+
+function getPriceFormatter(currency: string): Intl.NumberFormat {
+  const cached = priceFormatters.get(currency);
+  if (cached) return cached;
+  const formatter = new Intl.NumberFormat("fr-FR", {
+    style: "currency",
+    currency,
+    minimumFractionDigits: 2,
+  });
+  priceFormatters.set(currency, formatter);
+  return formatter;
+}
+
 // Fonctions utilitaires
 export const formatPrice = (
   price: number,
   currency: string = "EUR"
 ): string => {
-  return new Intl.NumberFormat("fr-FR", {
-    style: "currency",
-    currency: currency,
-    minimumFractionDigits: 2,
-  }).format(price);
+  return getPriceFormatter(currency).format(price);
 };
 
 export const calculateSavings = (

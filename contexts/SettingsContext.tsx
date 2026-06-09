@@ -582,6 +582,8 @@ export const SettingsProvider = ({
         savedFirstName,
         savedThemeMode,
         savedBackgroundImageType,
+        manualLocationValue,
+        apiSyncEnabledValue,
       ] = await Promise.all([
         LocalStorageManager.getEssential("NOTIFICATIONS_ENABLED"),
         LocalStorageManager.getEssential("CALC_METHOD"),
@@ -607,12 +609,8 @@ export const SettingsProvider = ({
         LocalStorageManager.getEssential("USER_FIRST_NAME"),
         LocalStorageManager.getEssential("THEME_MODE"),
         AsyncStorage.getItem("backgroundImageType"),
-      ]);
-
-      // 🚀 NOUVEAU : Charger les données non-essentielles séparément
-      const [manualLocationValue, apiSyncEnabledValue] = await Promise.all([
         LocalStorageManager.getEssential("MANUAL_LOCATION"),
-        AsyncStorage.getItem("apiSyncEnabled"), // Pas encore migré
+        AsyncStorage.getItem("apiSyncEnabled"),
       ]);
 
       // Si AsyncStorage est vide, essayer de charger depuis Android

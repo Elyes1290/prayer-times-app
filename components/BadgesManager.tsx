@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   View,
   Text,
@@ -24,6 +24,223 @@ interface BadgeCardProps {
   onPress: () => void;
   colors: any;
 }
+
+type CategoryFilterEntry = { key: string; name: string };
+
+type CategoryFilterButtonProps = {
+  item: CategoryFilterEntry;
+  isSelected: boolean;
+  onSelect: (key: string) => void;
+  colors: ReturnType<typeof useThemeColors>;
+};
+
+const CategoryFilterButton = React.memo(function CategoryFilterButton({
+  item,
+  isSelected,
+  onSelect,
+  colors,
+}: CategoryFilterButtonProps) {
+  return (
+    <Pressable
+      style={[
+        styles.categoryButton,
+        {
+          backgroundColor: isSelected ? colors.primary : colors.cardBG,
+        },
+      ]}
+      onPress={() => onSelect(item.key)}
+    >
+      <Text
+        style={[
+          styles.categoryButtonText,
+          {
+            color: isSelected ? "white" : colors.text,
+          },
+        ]}
+      >
+        {item.name}
+      </Text>
+    </Pressable>
+  );
+});
+
+type BadgeCategoryFilterProps = {
+  data: CategoryFilterEntry[];
+  selectedCategory: string;
+  onSelectCategory: (key: string) => void;
+  colors: ReturnType<typeof useThemeColors>;
+};
+
+const BadgeCategoryFilter = React.memo(function BadgeCategoryFilter({
+  data,
+  selectedCategory,
+  onSelectCategory,
+  colors,
+}: BadgeCategoryFilterProps) {
+  const renderCategoryItem = useCallback(
+    ({ item }: { item: CategoryFilterEntry }) => (
+      <CategoryFilterButton
+        item={item}
+        isSelected={selectedCategory === item.key}
+        onSelect={onSelectCategory}
+        colors={colors}
+      />
+    ),
+    [selectedCategory, onSelectCategory, colors]
+  );
+
+  return (
+    <FlatList
+      horizontal
+      data={data}
+      keyExtractor={(item) => item.key}
+      showsHorizontalScrollIndicator={false}
+      style={styles.categoryFilter}
+      contentContainerStyle={styles.categoryFilterContent}
+      renderItem={renderCategoryItem}
+    />
+  );
+});
+
+type BadgeDetailsModalProps = {
+  badge: Badge;
+  visible: boolean;
+  unlocked: boolean;
+  progress: number;
+  colors: ReturnType<typeof useThemeColors>;
+  system: ReturnType<typeof useBadgesSystem>["system"];
+  onClose: () => void;
+};
+
+const BadgeDetailsModal = React.memo(function BadgeDetailsModal({
+  badge,
+  visible,
+  unlocked,
+  progress,
+  colors,
+  system,
+  onClose,
+}: BadgeDetailsModalProps) {
+  return (
+    <Modal
+      visible={visible}
+      transparent
+      animationType="slide"
+      onRequestClose={onClose}
+    >
+      <View style={styles.modalOverlay}>
+        <View style={[styles.modalContent, { backgroundColor: colors.cardBG }]}>
+          <Pressable style={styles.modalCloseButton} onPress={onClose}>
+            <IonIcon name="close" size={24} color={colors.text} />
+          </Pressable>
+
+          <View style={styles.modalHeader}>
+            <View
+              style={[
+                styles.modalBadgeIcon,
+                {
+                  backgroundColor: unlocked
+                    ? system.getBadgeColor(badge)
+                    : colors.textSecondary,
+                },
+              ]}
+            >
+              <IonIcon name={badge.icon as any} size={32} color="white" />
+            </View>
+
+            <Text style={[styles.modalBadgeTitle, { color: colors.text }]}>
+              {system.getLocalizedBadgeText(badge, "name")}
+            </Text>
+
+            <Text
+              style={[
+                styles.modalBadgeDescription,
+                { color: colors.textSecondary },
+              ]}
+            >
+              {system.getLocalizedBadgeText(badge, "description")}
+            </Text>
+          </View>
+
+          <View style={styles.modalStats}>
+            <View style={styles.modalStatItem}>
+              <Text
+                style={[styles.modalStatLabel, { color: colors.textSecondary }]}
+              >
+                Points
+              </Text>
+              <Text style={[styles.modalStatValue, { color: colors.text }]}>
+                {badge.points}
+              </Text>
+            </View>
+
+            <View style={styles.modalStatItem}>
+              <Text
+                style={[styles.modalStatLabel, { color: colors.textSecondary }]}
+              >
+                Catégorie
+              </Text>
+              <Text
+                style={[
+                  styles.modalStatValue,
+                  { color: system.getBadgeColor(badge) },
+                ]}
+              >
+                {badge.category}
+              </Text>
+            </View>
+
+            <View style={styles.modalStatItem}>
+              <Text
+                style={[styles.modalStatLabel, { color: colors.textSecondary }]}
+              >
+                Type
+              </Text>
+              <Text
+                style={[
+                  styles.modalStatValue,
+                  { color: system.getBadgeColor(badge) },
+                ]}
+              >
+                {badge.requirement.type}
+              </Text>
+            </View>
+          </View>
+
+          {!unlocked && (
+            <View style={styles.progressSection}>
+              <Text style={[styles.progressLabel, { color: colors.text }]}>
+                Progression: {progress.toFixed(0)}%
+              </Text>
+              <View
+                style={[styles.progressBar, { backgroundColor: colors.cardBG }]}
+              >
+                <View
+                  style={[
+                    styles.progressFill,
+                    {
+                      width: `${progress}%`,
+                      backgroundColor: system.getBadgeColor(badge),
+                    },
+                  ]}
+                />
+              </View>
+            </View>
+          )}
+
+          {unlocked && badge.unlocked_at && (
+            <View style={styles.unlockedSection}>
+              <Text style={[styles.unlockedText, { color: colors.success }]}>
+                ✅ Débloqué le{" "}
+                {new Date(badge.unlocked_at).toLocaleDateString()}
+              </Text>
+            </View>
+          )}
+        </View>
+      </View>
+    </Modal>
+  );
+});
 
 const BadgeCard: React.FC<BadgeCardProps> = ({
   badge,
@@ -121,16 +338,23 @@ export const BadgesManager: React.FC<BadgesManagerProps> = ({
     [userStats, system],
   );
 
-  const notifiedBadgeCodesRef = useRef<Set<string>>(new Set());
+  const notifiedBadgeCodesRef = useRef<Set<string> | null>(null);
+  if (!notifiedBadgeCodesRef.current) {
+    notifiedBadgeCodesRef.current = new Set();
+  }
+  const onBadgeUnlockedRef = useRef(onBadgeUnlocked);
+  onBadgeUnlockedRef.current = onBadgeUnlocked;
+
   useEffect(() => {
-    if (!onBadgeUnlocked) return;
+    const notify = onBadgeUnlockedRef.current;
+    if (!notify) return;
     for (const badge of unlockedBadges) {
-      if (!notifiedBadgeCodesRef.current.has(badge.code)) {
-        notifiedBadgeCodesRef.current.add(badge.code);
-        onBadgeUnlocked(badge);
+      if (!notifiedBadgeCodesRef.current!.has(badge.code)) {
+        notifiedBadgeCodesRef.current!.add(badge.code);
+        notify(badge);
       }
     }
-  }, [unlockedBadges, onBadgeUnlocked]);
+  }, [unlockedBadges]);
 
   const categories = getCategories();
   const allBadges = getAllBadges();
@@ -184,10 +408,14 @@ export const BadgesManager: React.FC<BadgesManagerProps> = ({
     return Math.min((current / requirement.value) * 100, 100);
   };
 
-  const openBadgeDetails = (badge: Badge) => {
+  const openBadgeDetails = useCallback((badge: Badge) => {
     setSelectedBadge(badge);
     setModalVisible(true);
-  };
+  }, []);
+
+  const closeBadgeDetails = useCallback(() => {
+    setModalVisible(false);
+  }, []);
 
   const categoryFilterData = React.useMemo(
     () => [
@@ -200,194 +428,24 @@ export const BadgesManager: React.FC<BadgesManagerProps> = ({
     [categories]
   );
 
-  const renderCategoryFilter = () => (
-    <FlatList
-      horizontal
-      data={categoryFilterData}
-      keyExtractor={(item) => item.key}
-      showsHorizontalScrollIndicator={false}
-      style={styles.categoryFilter}
-      contentContainerStyle={styles.categoryFilterContent}
-      renderItem={({ item }) => (
-        <Pressable
-          style={[
-            styles.categoryButton,
-            {
-              backgroundColor:
-                selectedCategory === item.key ? colors.primary : colors.cardBG,
-            },
-          ]}
-          onPress={() => setSelectedCategory(item.key)}
-        >
-          <Text
-            style={[
-              styles.categoryButtonText,
-              {
-                color: selectedCategory === item.key ? "white" : colors.text,
-              },
-            ]}
-          >
-            {item.name}
-          </Text>
-        </Pressable>
-      )}
-    />
-  );
-
-  const renderBadgeDetails = () => {
-    if (!selectedBadge) return null;
-
-    const unlocked = isUnlocked(selectedBadge);
-    const progress = getProgressTowards(selectedBadge);
-
-    return (
-      <Modal
-        visible={modalVisible}
-        transparent
-        animationType="slide"
-        onRequestClose={() => setModalVisible(false)}
-      >
-        <View style={styles.modalOverlay}>
-          <View
-            style={[styles.modalContent, { backgroundColor: colors.cardBG }]}
-          >
-            <Pressable
-              style={styles.modalCloseButton}
-              onPress={() => setModalVisible(false)}
-            >
-              <IonIcon name="close" size={24} color={colors.text} />
-            </Pressable>
-
-            <View style={styles.modalHeader}>
-              <View
-                style={[
-                  styles.modalBadgeIcon,
-                  {
-                    backgroundColor: unlocked
-                      ? system.getBadgeColor(selectedBadge)
-                      : colors.textSecondary,
-                  },
-                ]}
-              >
-                <IonIcon
-                  name={selectedBadge.icon as any}
-                  size={32}
-                  color="white"
-                />
-              </View>
-
-              <Text style={[styles.modalBadgeTitle, { color: colors.text }]}>
-                {system.getLocalizedBadgeText(selectedBadge, "name")}
-              </Text>
-
-              <Text
-                style={[
-                  styles.modalBadgeDescription,
-                  { color: colors.textSecondary },
-                ]}
-              >
-                {system.getLocalizedBadgeText(selectedBadge, "description")}
-              </Text>
-            </View>
-
-            <View style={styles.modalStats}>
-              <View style={styles.modalStatItem}>
-                <Text
-                  style={[
-                    styles.modalStatLabel,
-                    { color: colors.textSecondary },
-                  ]}
-                >
-                  Points
-                </Text>
-                <Text style={[styles.modalStatValue, { color: colors.text }]}>
-                  {selectedBadge.points}
-                </Text>
-              </View>
-
-              <View style={styles.modalStatItem}>
-                <Text
-                  style={[
-                    styles.modalStatLabel,
-                    { color: colors.textSecondary },
-                  ]}
-                >
-                  Catégorie
-                </Text>
-                <Text
-                  style={[
-                    styles.modalStatValue,
-                    { color: system.getBadgeColor(selectedBadge) },
-                  ]}
-                >
-                  {selectedBadge.category}
-                </Text>
-              </View>
-
-              <View style={styles.modalStatItem}>
-                <Text
-                  style={[
-                    styles.modalStatLabel,
-                    { color: colors.textSecondary },
-                  ]}
-                >
-                  Type
-                </Text>
-                <Text
-                  style={[
-                    styles.modalStatValue,
-                    { color: system.getBadgeColor(selectedBadge) },
-                  ]}
-                >
-                  {selectedBadge.requirement.type}
-                </Text>
-              </View>
-            </View>
-
-            {!unlocked && (
-              <View style={styles.progressSection}>
-                <Text style={[styles.progressLabel, { color: colors.text }]}>
-                  Progression: {progress.toFixed(0)}%
-                </Text>
-                <View
-                  style={[
-                    styles.progressBar,
-                    { backgroundColor: colors.cardBG },
-                  ]}
-                >
-                  <View
-                    style={[
-                      styles.progressFill,
-                      {
-                        width: `${progress}%`,
-                        backgroundColor: system.getBadgeColor(selectedBadge),
-                      },
-                    ]}
-                  />
-                </View>
-              </View>
-            )}
-
-            {unlocked && selectedBadge.unlocked_at && (
-              <View style={styles.unlockedSection}>
-                <Text style={[styles.unlockedText, { color: colors.success }]}>
-                  ✅ Débloqué le{" "}
-                  {new Date(selectedBadge.unlocked_at).toLocaleDateString()}
-                </Text>
-              </View>
-            )}
-          </View>
-        </View>
-      </Modal>
-    );
-  };
+  const selectedBadgeUnlocked = selectedBadge
+    ? isUnlocked(selectedBadge)
+    : false;
+  const selectedBadgeProgress = selectedBadge
+    ? getProgressTowards(selectedBadge)
+    : 0;
 
   return (
     <View style={styles.container}>
-      {renderCategoryFilter()}
+      <BadgeCategoryFilter
+        data={categoryFilterData}
+        selectedCategory={selectedCategory}
+        onSelectCategory={setSelectedCategory}
+        colors={colors}
+      />
 
       <View style={styles.badgesGrid}>
-        {filteredBadges.map((badge, index) => (
+        {filteredBadges.map((badge) => (
           <BadgeCard
             key={badge.code}
             badge={badge}
@@ -398,7 +456,17 @@ export const BadgesManager: React.FC<BadgesManagerProps> = ({
         ))}
       </View>
 
-      {renderBadgeDetails()}
+      {selectedBadge && (
+        <BadgeDetailsModal
+          badge={selectedBadge}
+          visible={modalVisible}
+          unlocked={selectedBadgeUnlocked}
+          progress={selectedBadgeProgress}
+          colors={colors}
+          system={system}
+          onClose={closeBadgeDetails}
+        />
+      )}
     </View>
   );
 };

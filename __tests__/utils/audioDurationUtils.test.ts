@@ -34,6 +34,19 @@ describe("audioDurationUtils", () => {
     expect(parseSurahNumberFromServiceTitle(null)).toBeNull();
   });
 
+  test("parseSurahNumberFromServiceTitle resolves native title via catalog", () => {
+    const catalog = [
+      { id: 1, name_simple: "Al-Fatihah" },
+      { id: 2, name_simple: "Al-Baqara" },
+    ];
+    expect(
+      parseSurahNumberFromServiceTitle(
+        "Al-Baqara - AbdelBasset Abdelsamad",
+        catalog,
+      ),
+    ).toBe(2);
+  });
+
   test("isStaleOrImplausibleDuration rejects Baqara duration on Fatiha", () => {
     const baqaraMs = (264 * 60 + 9) * 1000;
     expect(isStaleOrImplausibleDuration(1, 1, baqaraMs)).toBe(true);
@@ -108,11 +121,24 @@ describe("audioDurationUtils", () => {
     const resolved = resolvePlaybackDurationMs({
       rawDuration: baqaraMs,
       positionMs: 2000,
-      previousMs: 0,
+      previousMs: baqaraMs,
       fileSizeMb: 0.42,
       selectedSurah: 1,
       serviceSurah: 2,
     });
-    expect(resolved).toBeLessThan(baqaraMs);
+    expect(resolved).toBe(0);
+  });
+
+  test("resolvePlaybackDurationMs uses catalog when native duration is stale", () => {
+    const baqaraMs = (264 * 60 + 9) * 1000;
+    const resolved = resolvePlaybackDurationMs({
+      rawDuration: baqaraMs,
+      positionMs: 2000,
+      previousMs: baqaraMs,
+      catalogDurationMs: 99000,
+      selectedSurah: 1,
+      serviceSurah: 2,
+    });
+    expect(resolved).toBe(99000);
   });
 });

@@ -188,6 +188,9 @@ public class QuranAudioServiceModule extends ReactContextBaseJavaModule implemen
         com.facebook.react.bridge.WritableMap params = com.facebook.react.bridge.Arguments.createMap();
         params.putInt("position", position);
         params.putInt("duration", duration);
+        params.putBoolean("isPlaying", isPlaying);
+        params.putString("surah", surah);
+        params.putString("reciter", reciter);
         
         Log.d(TAG, "📤 Envoi événement QuranAudioProgress à React Native - duration: " + duration + "ms");
         sendEvent("QuranAudioProgress", params);

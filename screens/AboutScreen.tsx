@@ -17,6 +17,47 @@ import { useOverlayTextColor } from "../hooks/useThemeColor";
 
 const LAST_RELEASE_DATE = "2026-06-09";
 
+const ABOUT_FEATURES = [
+  { icon: "clock-outline", key: "prayer_times" },
+  { icon: "compass-outline", key: "qibla_direction" },
+  { icon: "book-open-variant", key: "quran_reading" },
+  { icon: "star-crescent", key: "dhikr_automatic" },
+  { icon: "format-list-numbered", key: "asmaul_husna" },
+  { icon: "book-outline", key: "authentic_hadith" },
+  { icon: "calendar-heart", key: "hijri_calendar" },
+  { icon: "bell-outline", key: "smart_notifications" },
+  { icon: "chart-line", key: "prayer_statistics" },
+  { icon: "trophy", key: "badges_system" },
+  { icon: "heart", key: "favorites_system" },
+  { icon: "music", key: "advanced_audio" },
+  { icon: "crown", key: "premium_features" },
+  { icon: "palette", key: "themes_system" },
+  { icon: "sun", key: "sun_info" },
+  { icon: "calendar-week", key: "weekly_view" },
+  { icon: "mosque", key: "mosques_finder" },
+  { icon: "download", key: "native_downloads" },
+  { icon: "widget", key: "android_widgets" },
+  { icon: "lock", key: "lock_screen_player" },
+  { icon: "gesture", key: "tactile_controls" },
+  { icon: "backup-restore", key: "backup_restore" },
+  { icon: "shield-check", key: "data_deletion" },
+  { icon: "credit-card", key: "stripe_payments" },
+  { icon: "account-multiple", key: "user_accounts" },
+  { icon: "translate", key: "13_languages" },
+  { icon: "wifi", key: "offline_mode" },
+  { icon: "database", key: "local_storage" },
+] as const;
+
+const ABOUT_FAQ = [
+  { question: "faq_location_question", answer: "faq_location_answer" },
+  {
+    question: "faq_notifications_question",
+    answer: "faq_notifications_answer",
+  },
+  { question: "faq_qibla_question", answer: "faq_qibla_answer" },
+  { question: "faq_offline_question", answer: "faq_offline_answer" },
+] as const;
+
 function formatLastUpdateDate(language: string) {
   return new Date(LAST_RELEASE_DATE).toLocaleDateString(language, {
     day: "numeric",
@@ -41,47 +82,6 @@ export default function AboutScreen() {
   const appVersion = Constants.expoConfig?.version || "1.0.0";
   const buildNumber =
     Constants.expoConfig?.android?.versionCode?.toString() || "1";
-
-  const features = [
-    { icon: "clock-outline", key: "prayer_times" },
-    { icon: "compass-outline", key: "qibla_direction" },
-    { icon: "book-open-variant", key: "quran_reading" },
-    { icon: "star-crescent", key: "dhikr_automatic" },
-    { icon: "format-list-numbered", key: "asmaul_husna" },
-    { icon: "book-outline", key: "authentic_hadith" },
-    { icon: "calendar-heart", key: "hijri_calendar" },
-    { icon: "bell-outline", key: "smart_notifications" },
-    { icon: "chart-line", key: "prayer_statistics" },
-    { icon: "trophy", key: "badges_system" },
-    { icon: "heart", key: "favorites_system" },
-    { icon: "music", key: "advanced_audio" },
-    { icon: "crown", key: "premium_features" },
-    { icon: "palette", key: "themes_system" },
-    { icon: "sun", key: "sun_info" },
-    { icon: "calendar-week", key: "weekly_view" },
-    { icon: "mosque", key: "mosques_finder" },
-    { icon: "download", key: "native_downloads" },
-    { icon: "widget", key: "android_widgets" },
-    { icon: "lock", key: "lock_screen_player" },
-    { icon: "gesture", key: "tactile_controls" },
-    { icon: "backup-restore", key: "backup_restore" },
-    { icon: "shield-check", key: "data_deletion" },
-    { icon: "credit-card", key: "stripe_payments" },
-    { icon: "account-multiple", key: "user_accounts" },
-    { icon: "translate", key: "13_languages" },
-    { icon: "wifi", key: "offline_mode" },
-    { icon: "database", key: "local_storage" },
-  ];
-
-  const faqData = [
-    { question: "faq_location_question", answer: "faq_location_answer" },
-    {
-      question: "faq_notifications_question",
-      answer: "faq_notifications_answer",
-    },
-    { question: "faq_qibla_question", answer: "faq_qibla_answer" },
-    { question: "faq_offline_question", answer: "faq_offline_answer" },
-  ];
 
   const handleEmailContact = (subject: string) => {
     const email = "myadhanpp@gmail.com";
@@ -153,7 +153,7 @@ export default function AboutScreen() {
             {t("abouts.features_subtitle")}
           </Text>
           <View style={styles.featuresGrid}>
-            {features.map(renderFeatureItem)}
+            {ABOUT_FEATURES.map(renderFeatureItem)}
           </View>
         </View>
 
@@ -202,7 +202,7 @@ export default function AboutScreen() {
         {/* FAQ Section */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>{t("abouts.faq_title")}</Text>
-          {faqData.map(renderFAQItem)}
+          {ABOUT_FAQ.map(renderFAQItem)}
         </View>
 
         {/* Support Section */}

@@ -22,6 +22,7 @@ import { useCurrentTheme } from "../hooks/useThemeColor"; // 🔧 Import unifié
 import { STRIPE_CONFIG } from "../utils/stripeConfig";
 import { IapService } from "../utils/iapService";
 import { IAP_CONFIG } from "../utils/iapConfig";
+import { formatPrice } from "../utils/monetization";
 
 interface SubscriptionPlan {
   id: string;
@@ -520,10 +521,7 @@ const PremiumPaymentScreen: React.FC = () => {
                       plan.comingSoon && styles.comingSoonText,
                     ]}
                   >
-                    {new Intl.NumberFormat("fr-FR", {
-                      style: "currency",
-                      currency: "EUR",
-                    }).format(plan.price)}
+                    {formatPrice(plan.price, "EUR")}
                     <Text style={styles.cardInterval}>/{plan.interval}</Text>
                   </Text>
                 </View>
@@ -590,10 +588,7 @@ const PremiumPaymentScreen: React.FC = () => {
               />
               <Text style={styles.payButtonText}>
                 Payer{" "}
-                {new Intl.NumberFormat("fr-FR", {
-                  style: "currency",
-                  currency: "EUR",
-                }).format(selectedPlan.price)}
+                {formatPrice(selectedPlan.price, "EUR")}
               </Text>
             </>
           )}

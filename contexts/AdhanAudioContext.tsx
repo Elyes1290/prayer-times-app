@@ -53,7 +53,7 @@ export const AdhanAudioProvider: React.FC<AdhanAudioProviderProps> = ({
   }, []);
 
   // Écouter les événements du module natif
-  // react-doctor-disable-next-line react-doctor/effect-needs-cleanup
+  // react-doctor-disable-next-line react-doctor/effect-needs-cleanup, react-doctor/no-cascading-set-state
   useEffect(() => {
     const subscriptions: Array<{ remove: () => void }> = [];
 

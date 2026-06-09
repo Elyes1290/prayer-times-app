@@ -21,15 +21,27 @@ export function normalizeDurationMillis(
   return rounded * 1000;
 }
 
-/** Ex. "Al-Baqara (002) - Récitateur" → 2 */
+export type SurahCatalogEntry = { id: number; name_simple: string };
+
+/** Ex. "Al-Baqara (002) - Récitateur" → 2 ; "Al-Baqara - Récitateur" avec catalogue */
 export function parseSurahNumberFromServiceTitle(
   title: string | null | undefined,
+  catalog?: SurahCatalogEntry[],
 ): number | null {
   if (!title) return null;
   const match = title.match(/\((\d{1,3})\)/);
-  if (!match) return null;
-  const n = parseInt(match[1], 10);
-  return n >= 1 && n <= 114 ? n : null;
+  if (match) {
+    const n = parseInt(match[1], 10);
+    return n >= 1 && n <= 114 ? n : null;
+  }
+  if (!catalog?.length) return null;
+  const namePart = title.split(" - ")[0]?.trim().toLowerCase();
+  const found = catalog.find(
+    (s) =>
+      title.toLowerCase().includes(s.name_simple.toLowerCase()) ||
+      namePart === s.name_simple.toLowerCase(),
+  );
+  return found?.id ?? null;
 }
 
 /** Ne remplace pas une durée connue par 0 (événements de progression Android). */
@@ -70,6 +82,24 @@ export function estimateDurationMsFromFileSizeMb(
 }
 
 /**
+ * Indique si une durée normalisée est incohérente avec la sourate affichée
+ * (ex. titre Fatiha mais durée encore celle de Baqara).
+ */
+export function isStaleOrImplausibleDuration(
+  selectedSurah: number,
+  serviceSurah: number | null,
+  normalizedMs: number,
+): boolean {
+  if (normalizedMs <= 0) {
+    return false;
+  }
+  if (serviceSurah != null && serviceSurah !== selectedSurah) {
+    return true;
+  }
+  return normalizedMs > maxPlausibleDurationMs(selectedSurah);
+}
+
+/**
  * Durée affichée : priorité à la durée réelle du lecteur audio.
  * L'estimation par taille fichier n'est qu'un filet si duration === 0 (stream).
  */
@@ -97,19 +127,14 @@ export function resolvePlaybackDurationMs(options: {
 
   const rawForNormalize = iosScaledRaw ?? rawDuration;
   const normalized = normalizeDurationMillis(positionMs, rawForNormalize);
-  const maxPlausible = maxPlausibleDurationMs(selectedSurah);
   const catalogMs =
     catalogDurationMs && catalogDurationMs > 0 ? catalogDurationMs : 0;
   const fallbackMs = catalogMs > 0 ? catalogMs : 0;
 
   if (normalized > 0) {
-    // Titre service = autre sourate → héritage piste précédente
-    if (serviceSurah != null && serviceSurah !== selectedSurah) {
-      return previousMs > 0 ? previousMs : fallbackMs;
-    }
-    // Durée impossible pour cette sourate (ex. Baqara sur Fatiha)
-    if (normalized > maxPlausible) {
-      return previousMs > 0 ? previousMs : fallbackMs;
+    // Titre service ou durée incohérente avec la sourate affichée
+    if (isStaleOrImplausibleDuration(selectedSurah, serviceSurah, normalized)) {
+      return fallbackMs > 0 ? fallbackMs : 0;
     }
     // Stream : MediaPlayer peut sous-estimer (ex. 27s) → priorité catalogue.
     // Si le catalogue est faux (ex. 5s) et le natif correct (59s) → priorité lecteur.
@@ -132,30 +157,3 @@ export function resolvePlaybackDurationMs(options: {
   return mergeDurationMillis(previousMs, positionMs, rawForNormalize);
 }
 
-function isDurationCloseTo(
-  aMs: number,
-  bMs: number,
-  toleranceRatio: number,
-): boolean {
-  if (aMs <= 0 || bMs <= 0) return false;
-  const ratio = aMs / bMs;
-  return ratio >= 1 - toleranceRatio && ratio <= 1 + toleranceRatio;
-}
-
-/**
- * Indique si une durée normalisée est incohérente avec la sourate affichée
- * (ex. titre Fatiha mais durée encore celle de Baqara).
- */
-export function isStaleOrImplausibleDuration(
-  selectedSurah: number,
-  serviceSurah: number | null,
-  normalizedMs: number,
-): boolean {
-  if (normalizedMs <= 0) {
-    return false;
-  }
-  if (serviceSurah != null && serviceSurah !== selectedSurah) {
-    return true;
-  }
-  return normalizedMs > maxPlausibleDurationMs(selectedSurah);
-}

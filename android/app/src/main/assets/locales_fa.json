@@ -1069,6 +1069,7 @@
   "downloaded_audio": "صوت‌های دانلود شده",
   "manage_downloads": "مدیریت دانلودها",
   "no_downloaded_audio": "صوت دانلود شده‌ای وجود ندارد",
+  "download_audio_hint": "در حالت آنلاین تلاوت‌ها را دانلود کنید",
   "downloads_manager": "دانلودها",
   "quran_text": "متن قرآن",
   "switch_to_offline": "تبدیل به حالت آفلاین",

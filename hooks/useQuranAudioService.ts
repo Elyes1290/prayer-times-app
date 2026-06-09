@@ -136,7 +136,8 @@ export const useQuranAudioService = (): QuranAudioServiceInterface => {
 
   const waitForPlaybackStart = useCallback(async (): Promise<void> => {
     const maxAttempts = 40;
-    for (let attempt = 0; attempt < maxAttempts; attempt++) {
+    let attempt = 0;
+    while (attempt < maxAttempts) {
       try {
         await QuranAudioServiceModule.playAudio();
         setAudioState((prevState) => ({
@@ -146,6 +147,7 @@ export const useQuranAudioService = (): QuranAudioServiceInterface => {
         return;
       } catch {
         await new Promise((resolve) => setTimeout(resolve, 150));
+        attempt += 1;
       }
     }
   }, []);
@@ -264,6 +266,12 @@ export const useQuranAudioService = (): QuranAudioServiceInterface => {
               );
               return {
                 ...prevState,
+                isPlaying:
+                  typeof event.isPlaying === "boolean"
+                    ? event.isPlaying
+                    : prevState.isPlaying,
+                currentSurah: event.surah ?? prevState.currentSurah,
+                currentReciter: event.reciter ?? prevState.currentReciter,
                 position: positionMs,
                 duration: durationMs,
                 totalDuration: durationMs,

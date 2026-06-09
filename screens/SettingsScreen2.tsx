@@ -6,6 +6,7 @@ import React, {
   useEffect,
   useCallback,
   useState,
+  useMemo,
 } from "react";
 import audioManager from "../utils/AudioManager";
 import {
@@ -87,10 +88,10 @@ const handleLoginSuccess = (_userData: unknown) => {};
 
 async function collectDownloadedAdhanRows(): Promise<DownloadedAdhanRow[]> {
   const rows: DownloadedAdhanRow[] = [];
-  const RNFS = await import("react-native-fs");
-  const downloadedContent = await LocalStorageManager.getPremium(
-    "DOWNLOADED_CONTENT"
-  );
+  const [RNFS, downloadedContent] = await Promise.all([
+    import("react-native-fs"),
+    LocalStorageManager.getPremium("DOWNLOADED_CONTENT"),
+  ]);
   if (!downloadedContent) return rows;
 
   const downloaded = JSON.parse(downloadedContent);
@@ -439,9 +440,11 @@ const AdhanSoundSectionWrapper = React.memo(function AdhanSoundSectionWrapper({
     isRefreshingAdhans: false,
     isCleaningFiles: false,
     handleRefreshAdhans: async () => {
-      await sectionProps.forceRefreshAdhans();
-      await sectionProps.loadAvailableAdhans(true);
-      await sectionProps.hydrateAvailableSounds(true);
+      await Promise.all([
+        sectionProps.forceRefreshAdhans(),
+        sectionProps.loadAvailableAdhans(true),
+        sectionProps.hydrateAvailableSounds(true),
+      ]);
     },
     handleCleanFiles: sectionProps.cleanupCorruptedFiles,
     updateAvailableSounds: sectionProps.updateAvailableSounds,
@@ -498,35 +501,40 @@ function SettingsSections(props: OptimizedSettingsSectionsProps) {
   // États locaux pour le dhikr
   const [allDhikrEnabled, setAllDhikrEnabled] = useState(true);
 
-  // Gestionnaires de Toggle
-  const toggleAllDhikr = async (value: boolean) => {
-    setAllDhikrEnabled(value);
-    if (!value) {
-      settings.setEnabledAfterSalah(false);
-      settings.setEnabledMorningDhikr(false);
-      settings.setEnabledEveningDhikr(false);
-      settings.setEnabledSelectedDua(false);
-    } else {
-      settings.setEnabledAfterSalah(true);
-      settings.setEnabledMorningDhikr(true);
-      settings.setEnabledEveningDhikr(true);
-      settings.setEnabledSelectedDua(true);
-    }
-    props.markPendingChanges();
-  };
+  const toggleAllDhikr = useCallback(
+    async (value: boolean) => {
+      setAllDhikrEnabled(value);
+      if (!value) {
+        settings.setEnabledAfterSalah(false);
+        settings.setEnabledMorningDhikr(false);
+        settings.setEnabledEveningDhikr(false);
+        settings.setEnabledSelectedDua(false);
+      } else {
+        settings.setEnabledAfterSalah(true);
+        settings.setEnabledMorningDhikr(true);
+        settings.setEnabledEveningDhikr(true);
+        settings.setEnabledSelectedDua(true);
+      }
+      props.markPendingChanges();
+    },
+    [settings, props]
+  );
 
-  const handleNotificationsToggle = async (value: boolean) => {
-    settings.setNotificationsEnabled(value);
-    if (!value) {
-      settings.setRemindersEnabled(false);
-      setAllDhikrEnabled(false);
-      settings.setEnabledAfterSalah(false);
-      settings.setEnabledMorningDhikr(false);
-      settings.setEnabledEveningDhikr(false);
-      settings.setEnabledSelectedDua(false);
-    }
-    props.markPendingChanges();
-  };
+  const handleNotificationsToggle = useCallback(
+    async (value: boolean) => {
+      settings.setNotificationsEnabled(value);
+      if (!value) {
+        settings.setRemindersEnabled(false);
+        setAllDhikrEnabled(false);
+        settings.setEnabledAfterSalah(false);
+        settings.setEnabledMorningDhikr(false);
+        settings.setEnabledEveningDhikr(false);
+        settings.setEnabledSelectedDua(false);
+      }
+      props.markPendingChanges();
+    },
+    [settings, props]
+  );
 
   const handleSectionToggle = async (sectionId: string) => {
     if (activeSection === sectionId) {
@@ -544,16 +552,21 @@ function SettingsSections(props: OptimizedSettingsSectionsProps) {
     }
   };
 
-  const closeActiveSection = () => setActiveSection(null);
+  const closeActiveSection = useCallback(() => {
+    setActiveSection(null);
+  }, [setActiveSection]);
 
-  const sectionShellProps: SettingsSectionShellProps = {
-    sectionProps: props,
-    settings,
-    styles,
-    setActiveSection,
-  };
+  const sectionShellProps: SettingsSectionShellProps = useMemo(
+    () => ({
+      sectionProps: props,
+      settings,
+      styles,
+      setActiveSection,
+    }),
+    [props, settings, styles, setActiveSection]
+  );
 
-  const renderActiveSectionContent = () => {
+  const activeSectionPanel = useMemo(() => {
     if (!activeSection) return null;
 
     const sectionContent = {
@@ -802,7 +815,22 @@ function SettingsSections(props: OptimizedSettingsSectionsProps) {
         </View>
       </View>
     );
-  };
+  }, [
+    activeSection,
+    closeActiveSection,
+    sectionShellProps,
+    user,
+    handleNotificationsToggle,
+    allDhikrEnabled,
+    toggleAllDhikr,
+    settings,
+    props,
+    styles,
+    t,
+    isLightTheme,
+    setActiveSection,
+    currentTheme,
+  ]);
 
   return (
     <ScrollView
@@ -830,7 +858,7 @@ function SettingsSections(props: OptimizedSettingsSectionsProps) {
         styles={styles}
       />
 
-      {renderActiveSectionContent()}
+      {activeSectionPanel}
 
       {props.hasPendingChanges && (
         <View style={styles.applyChangesContainer}>
@@ -909,8 +937,14 @@ export default function SettingsScreenOptimized() {
     [colors, overlayTextColor, overlayIconColor, currentTheme]
   );
 
-  const processedThisCycleRef = useRef<Set<string>>(new Set());
-  const permanentlyProcessedRef = useRef<Set<string>>(new Set());
+  const processedThisCycleRef = useRef<Set<string> | null>(null);
+  const permanentlyProcessedRef = useRef<Set<string> | null>(null);
+  if (!processedThisCycleRef.current) {
+    processedThisCycleRef.current = new Set();
+  }
+  if (!permanentlyProcessedRef.current) {
+    permanentlyProcessedRef.current = new Set();
+  }
 
   type AlertButton = {
     text: string;

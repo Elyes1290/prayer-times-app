@@ -1071,6 +1071,7 @@
   "downloaded_audio": "Downloaded Audio",
   "manage_downloads": "Manage Downloads",
   "no_downloaded_audio": "No downloaded audio",
+  "download_audio_hint": "Download recitations while in online mode",
   "downloads_manager": "Downloads",
   "quran_text": "Quran Text",
   "switch_to_offline": "Switch to offline mode",

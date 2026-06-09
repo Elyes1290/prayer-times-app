@@ -1,4 +1,11 @@
-import React, { createContext, use, useState, ReactNode } from "react";
+import React, {
+  createContext,
+  use,
+  useState,
+  useCallback,
+  useMemo,
+  ReactNode,
+} from "react";
 import { View, StyleSheet } from "react-native";
 
 import { Z_INDEX } from "../constants/zIndex";
@@ -27,7 +34,7 @@ interface ToastProviderProps {
 export const ToastProvider: React.FC<ToastProviderProps> = ({ children }) => {
   const [toasts, setToasts] = useState<ToastData[]>([]);
 
-  const showToast = (toastData: Omit<ToastData, "id">) => {
+  const showToast = useCallback((toastData: Omit<ToastData, "id">) => {
     const id = `toast_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
     const newToast: ToastData = {
       ...toastData,
@@ -35,22 +42,26 @@ export const ToastProvider: React.FC<ToastProviderProps> = ({ children }) => {
     };
 
     setToasts((prev) => [newToast, ...prev]);
-  };
+  }, []);
 
-  const hideToast = (id: string) => {
+  const hideToast = useCallback((id: string) => {
     setToasts((prev) => prev.filter((toast) => toast.id !== id));
-  };
+  }, []);
 
-  // Rendre le showToast disponible globalement
+  const contextValue = useMemo(
+    () => ({ showToast, hideToast }),
+    [showToast, hideToast]
+  );
+
   React.useEffect(() => {
     globalShowToast = showToast;
     return () => {
       globalShowToast = null;
     };
-  }, []);
+  }, [showToast]);
 
   return (
-    <ToastContext.Provider value={{ showToast, hideToast }}>
+    <ToastContext.Provider value={contextValue}>
       {children}
       <View style={styles.toastContainer}>
         {toasts.map((toast, index) => (

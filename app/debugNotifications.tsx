@@ -1070,8 +1070,11 @@ export default function DebugNotificationsScreen() {
             Notifications Programmées ({debugInfo?.pendingCount || 0})
           </Text>
           {debugInfo?.notifications?.length > 0 ? (
-            debugInfo.notifications.map((n: any, i: number) => (
-              <View key={i} style={styles.card}>
+            debugInfo.notifications.map((n: any) => (
+              <View
+                key={String(n.id || n.identifier || `${n.title}-${n.trigger}`)}
+                style={styles.card}
+              >
                 <Text style={styles.cardTitle}>{n.title}</Text>
                 <Text style={styles.cardBody}>{n.body}</Text>
                 <Text style={styles.cardFooter}>Trigger: {n.trigger}</Text>
@@ -1134,8 +1137,8 @@ export default function DebugNotificationsScreen() {
           {Platform.OS !== "ios" ? (
             <Text style={styles.emptyText}>Disponible uniquement sur iOS.</Text>
           ) : bgRuns.length > 0 ? (
-            bgRuns.map((run, i) => (
-              <View key={i} style={styles.card}>
+            bgRuns.map((run) => (
+              <View key={String(run.ranAt)} style={styles.card}>
                 <Text style={styles.cardTitle}>
                   {new Date(run.ranAt).toLocaleString()}
                 </Text>

@@ -166,6 +166,140 @@ const getHeaderGradient = (
   }
 };
 
+type ProphetStoriesScreenHeaderProps = {
+  colors: ReturnType<typeof useThemeColors>;
+  currentTheme: "light" | "dark" | "morning" | "sunset";
+  contentPaddingHorizontal: number;
+  safeAreaTop: number;
+  title: string;
+  prophetLabel: string;
+  selectedProphet: ProphetId;
+  onProphetChange: (prophet: ProphetId) => void;
+  stats: StoryStats | null;
+};
+
+const ProphetStoriesScreenHeader = React.memo(function ProphetStoriesScreenHeader({
+  colors,
+  currentTheme,
+  contentPaddingHorizontal,
+  safeAreaTop,
+  title,
+  prophetLabel,
+  selectedProphet,
+  onProphetChange,
+  stats,
+}: ProphetStoriesScreenHeaderProps) {
+  return (
+    <View style={styles.headerContainer}>
+      <LinearGradient
+        colors={getHeaderGradient(currentTheme)}
+        style={[
+          styles.headerGradient,
+          {
+            paddingHorizontal: contentPaddingHorizontal,
+            paddingTop: Math.max(safeAreaTop + 16, 56),
+          },
+        ]}
+      >
+        <View style={styles.headerHero}>
+          <View
+            style={[styles.headerIconWrap, { backgroundColor: colors.primary }]}
+          >
+            <IonIcon name="book" size={28} color={colors.textOnPrimary} />
+          </View>
+          <View style={styles.headerTextContainer}>
+            <Text style={[styles.headerTitle, { color: colors.text }]}>
+              {title}
+            </Text>
+            <Text
+              style={[styles.headerSubtitle, { color: colors.textSecondary }]}
+              numberOfLines={1}
+            >
+              {prophetLabel}
+            </Text>
+          </View>
+        </View>
+
+        <ProphetSelector
+          selectedProphet={selectedProphet}
+          onProphetChange={onProphetChange}
+          colors={{
+            primary: colors.primary,
+            text: colors.text,
+            textOnPrimary: colors.textOnPrimary,
+            surfaceVariant: colors.surfaceVariant,
+            cardBG: colors.cardBG,
+            border: colors.border,
+          }}
+        />
+
+        {stats && (
+          <View style={styles.statsRow}>
+            <View
+              style={[
+                styles.statPill,
+                { backgroundColor: colors.cardBG, borderColor: colors.border },
+              ]}
+            >
+              <IonIcon name="library" size={18} color={colors.primary} />
+              <Text style={[styles.statPillNumber, { color: colors.text }]}>
+                {parseInt(stats.total_stories?.toString() || "0")}
+              </Text>
+              <Text style={[styles.statPillLabel, { color: colors.textSecondary }]}>
+                Histoires
+              </Text>
+            </View>
+            <View
+              style={[
+                styles.statPill,
+                { backgroundColor: colors.cardBG, borderColor: colors.border },
+              ]}
+            >
+              <IonIcon name="gift" size={18} color="#4CAF50" />
+              <Text style={[styles.statPillNumber, { color: colors.text }]}>
+                {parseInt(stats.free_stories?.toString() || "0")}
+              </Text>
+              <Text style={[styles.statPillLabel, { color: colors.textSecondary }]}>
+                Gratuites
+              </Text>
+            </View>
+            <View
+              style={[
+                styles.statPill,
+                { backgroundColor: colors.cardBG, borderColor: colors.border },
+              ]}
+            >
+              <IonIcon name="star" size={18} color="#FFD700" />
+              <Text style={[styles.statPillNumber, { color: colors.text }]}>
+                {parseInt(stats.premium_stories?.toString() || "0")}
+              </Text>
+              <Text style={[styles.statPillLabel, { color: colors.textSecondary }]}>
+                Premium
+              </Text>
+            </View>
+            <View
+              style={[
+                styles.statPill,
+                { backgroundColor: colors.cardBG, borderColor: colors.border },
+              ]}
+            >
+              <IonIcon name="time" size={18} color={colors.primary} />
+              <Text style={[styles.statPillNumber, { color: colors.text }]}>
+                {Math.round(
+                  parseFloat(stats.avg_reading_time?.toString() || "0"),
+                )}
+              </Text>
+              <Text style={[styles.statPillLabel, { color: colors.textSecondary }]}>
+                min
+              </Text>
+            </View>
+          </View>
+        )}
+      </LinearGradient>
+    </View>
+  );
+});
+
 export default function ProphetStoriesScreen() {
   const colors = useThemeColors();
   const currentTheme = useCurrentTheme();
@@ -584,113 +718,18 @@ export default function ProphetStoriesScreen() {
     );
   };
 
-  const renderHeader = () => (
-    <View style={styles.headerContainer}>
-      <LinearGradient
-        colors={getHeaderGradient(currentTheme)}
-        style={[
-          styles.headerGradient,
-          {
-            paddingHorizontal: universalLayout.contentPaddingHorizontal,
-            paddingTop: Math.max(universalLayout.safeAreaTop + 16, 56),
-          },
-        ]}
-      >
-        {/* Titre principal avec icône */}
-        <View style={styles.headerHero}>
-          <View style={[styles.headerIconWrap, { backgroundColor: colors.primary }]}>
-            <IonIcon name="book" size={28} color={colors.textOnPrimary} />
-          </View>
-          <View style={styles.headerTextContainer}>
-            <Text style={[styles.headerTitle, { color: colors.text }]}>
-              {t("prophets_stories") || "Histoires des Prophètes"}
-            </Text>
-            <Text
-              style={[styles.headerSubtitle, { color: colors.textSecondary }]}
-              numberOfLines={1}
-            >
-              {getProphetLabel(selectedProphet)}
-            </Text>
-          </View>
-        </View>
-
-        <ProphetSelector
-          selectedProphet={selectedProphet}
-          onProphetChange={handleProphetChange}
-          colors={{
-            primary: colors.primary,
-            text: colors.text,
-            textOnPrimary: colors.textOnPrimary,
-            surfaceVariant: colors.surfaceVariant,
-            cardBG: colors.cardBG,
-            border: colors.border,
-          }}
-        />
-
-        {stats && (
-          <View style={styles.statsRow}>
-            <View
-              style={[
-                styles.statPill,
-                { backgroundColor: colors.cardBG, borderColor: colors.border },
-              ]}
-            >
-              <IonIcon name="library" size={18} color={colors.primary} />
-              <Text style={[styles.statPillNumber, { color: colors.text }]}>
-                {parseInt(stats.total_stories?.toString() || "0")}
-              </Text>
-              <Text style={[styles.statPillLabel, { color: colors.textSecondary }]}>
-                Histoires
-              </Text>
-            </View>
-            <View
-              style={[
-                styles.statPill,
-                { backgroundColor: colors.cardBG, borderColor: colors.border },
-              ]}
-            >
-              <IonIcon name="gift" size={18} color="#4CAF50" />
-              <Text style={[styles.statPillNumber, { color: colors.text }]}>
-                {parseInt(stats.free_stories?.toString() || "0")}
-              </Text>
-              <Text style={[styles.statPillLabel, { color: colors.textSecondary }]}>
-                Gratuites
-              </Text>
-            </View>
-            <View
-              style={[
-                styles.statPill,
-                { backgroundColor: colors.cardBG, borderColor: colors.border },
-              ]}
-            >
-              <IonIcon name="star" size={18} color="#FFD700" />
-              <Text style={[styles.statPillNumber, { color: colors.text }]}>
-                {parseInt(stats.premium_stories?.toString() || "0")}
-              </Text>
-              <Text style={[styles.statPillLabel, { color: colors.textSecondary }]}>
-                Premium
-              </Text>
-            </View>
-            <View
-              style={[
-                styles.statPill,
-                { backgroundColor: colors.cardBG, borderColor: colors.border },
-              ]}
-            >
-              <IonIcon name="time" size={18} color={colors.primary} />
-              <Text style={[styles.statPillNumber, { color: colors.text }]}>
-                {Math.round(
-                  parseFloat(stats.avg_reading_time?.toString() || "0"),
-                )}
-              </Text>
-              <Text style={[styles.statPillLabel, { color: colors.textSecondary }]}>
-                min
-              </Text>
-            </View>
-          </View>
-        )}
-      </LinearGradient>
-    </View>
+  const storiesHeader = (
+    <ProphetStoriesScreenHeader
+      colors={colors}
+      currentTheme={currentTheme}
+      contentPaddingHorizontal={universalLayout.contentPaddingHorizontal}
+      safeAreaTop={universalLayout.safeAreaTop}
+      title={t("prophets_stories") || "Histoires des Prophètes"}
+      prophetLabel={getProphetLabel(selectedProphet)}
+      selectedProphet={selectedProphet}
+      onProphetChange={handleProphetChange}
+      stats={stats}
+    />
   );
 
   if (loading) {
@@ -730,7 +769,7 @@ export default function ProphetStoriesScreen() {
           backgroundColor="transparent"
           translucent
         />
-        {renderHeader()}
+        {storiesHeader}
         <View style={styles.emptyContainer}>
           <View style={[styles.emptyIconWrap, { backgroundColor: colors.surfaceVariant }]}>
             <IonIcon
@@ -762,7 +801,7 @@ export default function ProphetStoriesScreen() {
       />
 
       {/* 🚀 HEADER FIXE : Ne défile pas avec la liste */}
-      {renderHeader()}
+      {storiesHeader}
 
       {/* Section titre + refresh */}
       <View

@@ -313,9 +313,13 @@ export class HadithOfflineService {
           return searchText.includes(query.toLowerCase());
         });
 
+        const chapterById = new Map(
+          book.chapters.map((chapter) => [chapter.id, chapter]),
+        );
+
         // Ajouter les résultats avec les informations du chapitre
         for (const hadith of matchingHadiths) {
-          const chapter = book.chapters.find((c) => c.id === hadith.chapterId);
+          const chapter = chapterById.get(hadith.chapterId);
           results.push({
             hadith,
             bookName: book.metadata.english.title,

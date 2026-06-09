@@ -1,5 +1,5 @@
 import { MCIcon } from "@/components/icons/AppVectorIcons";
-import React from "react";
+import React, { useCallback } from "react";
 import {
   View,
   Text,
@@ -140,6 +140,36 @@ export default function MoreScreen() {
     },
   ];
 
+  const renderMenuSection = useCallback(
+    ({ item: section }: { item: (typeof menuSections)[number] }) => (
+      <View style={styles.section}>
+        <Text style={[styles.sectionTitle, { color: colors.textSecondary }]}>
+          {section.title}
+        </Text>
+
+        <View style={[styles.sectionContent, { backgroundColor: colors.cardBG }]}>
+          {section.items.map((item, itemIndex) => (
+            <React.Fragment key={item.route}>
+              <MenuItem
+                icon={item.icon}
+                title={item.title}
+                subtitle={item.subtitle}
+                onPress={() => push(item.route as any)}
+                isPremium={item.isPremium}
+              />
+              {itemIndex < section.items.length - 1 && (
+                <View
+                  style={[styles.separator, { backgroundColor: colors.border }]}
+                />
+              )}
+            </React.Fragment>
+          ))}
+        </View>
+      </View>
+    ),
+    [colors.cardBG, colors.border, colors.textSecondary, push],
+  );
+
   return (
     <ThemedImageBackground style={styles.background}>
       <StatusBar
@@ -167,30 +197,7 @@ export default function MoreScreen() {
           keyExtractor={(_, sectionIndex) => `section-${sectionIndex}`}
           contentContainerStyle={[styles.scrollContent, { paddingBottom: Math.max(100, insets.bottom + 80) }]}
           showsVerticalScrollIndicator={false}
-          renderItem={({ item: section }) => (
-            <View style={styles.section}>
-              <Text style={[styles.sectionTitle, { color: colors.textSecondary }]}>
-                {section.title}
-              </Text>
-
-              <View style={[styles.sectionContent, { backgroundColor: colors.cardBG }]}>
-                {section.items.map((item, itemIndex) => (
-                  <React.Fragment key={itemIndex}>
-                    <MenuItem
-                      icon={item.icon}
-                      title={item.title}
-                      subtitle={item.subtitle}
-                      onPress={() => push(item.route as any)}
-                      isPremium={item.isPremium}
-                    />
-                    {itemIndex < section.items.length - 1 && (
-                      <View style={[styles.separator, { backgroundColor: colors.border }]} />
-                    )}
-                  </React.Fragment>
-                ))}
-              </View>
-            </View>
-          )}
+          renderItem={renderMenuSection}
           ListFooterComponent={
             <>
               {/* Version info */}

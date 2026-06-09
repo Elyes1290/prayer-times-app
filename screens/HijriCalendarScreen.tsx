@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { ScrollView, StyleSheet, Text, View, useWindowDimensions } from "react-native";
 import { Calendar } from "react-native-calendars";
 import ThemedImageBackground from "../components/ThemedImageBackground";
@@ -11,6 +11,12 @@ import {
   useOverlayTextColor,
   useCurrentTheme,
 } from "../hooks/useThemeColor";
+
+const hijriDisplayFormatter = new Intl.DateTimeFormat("fr-u-ca-islamic", {
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+});
 
 function formatLocalDateString(date: Date) {
   const year = date.getFullYear();
@@ -116,12 +122,37 @@ export default function HijriCalendarScreen() {
     textDayHeaderFontSize: isSmallScreen ? 12 : 16,
   };
 
-  const hijriFormatter = new Intl.DateTimeFormat("fr-u-ca-islamic", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  });
-  const hijriDate = hijriFormatter.format(selectedDate);
+  const hijriDate = hijriDisplayFormatter.format(selectedDate);
+
+  const handlePrevDay = useCallback(() => {
+    setSelectedDate((current) => {
+      const newDate = new Date(
+        current.getFullYear(),
+        current.getMonth(),
+        current.getDate() - 1,
+      );
+      setDisplayDate(newDate);
+      return newDate;
+    });
+  }, []);
+
+  const handleNextDay = useCallback(() => {
+    setSelectedDate((current) => {
+      const newDate = new Date(
+        current.getFullYear(),
+        current.getMonth(),
+        current.getDate() + 1,
+      );
+      setDisplayDate(newDate);
+      return newDate;
+    });
+  }, []);
+
+  const handleResetToday = useCallback(() => {
+    const now = new Date();
+    setSelectedDate(now);
+    setDisplayDate(now);
+  }, []);
 
   const selectedDateString = formatLocalDateString(selectedDate);
   const displayDateString = formatLocalDateString(displayDate);
@@ -160,29 +191,9 @@ export default function HijriCalendarScreen() {
 
         <DateNavigator
           date={selectedDate}
-          onPrev={() => {
-            const newDate = new Date(
-              selectedDate.getFullYear(),
-              selectedDate.getMonth(),
-              selectedDate.getDate() - 1
-            );
-            setSelectedDate(newDate);
-            setDisplayDate(newDate);
-          }}
-          onNext={() => {
-            const newDate = new Date(
-              selectedDate.getFullYear(),
-              selectedDate.getMonth(),
-              selectedDate.getDate() + 1
-            );
-            setSelectedDate(newDate);
-            setDisplayDate(newDate);
-          }}
-          onReset={() => {
-            const today = new Date();
-            setSelectedDate(today);
-            setDisplayDate(today);
-          }}
+          onPrev={handlePrevDay}
+          onNext={handleNextDay}
+          onReset={handleResetToday}
         />
 
         <View style={styles.row}>

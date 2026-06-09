@@ -97,7 +97,7 @@ export function JourneyTabContent({
           </Text>
           {(stats.advice.advice as any[]).slice(0, 3).map((item, index) => (
             <Text
-              key={index}
+              key={item.key ? `advice-${item.key}` : `advice-fallback-${index}`}
               style={[styles.advice, { color: colors.textSecondary }]}
             >
               • {t(item.key, item.params)}

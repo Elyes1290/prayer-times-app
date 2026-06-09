@@ -586,6 +586,15 @@ export default function PrayerScreen() {
   const { t, i18n } = useTranslation();
   const { push } = useRouter();
   const [today, setToday] = useState(new Date());
+  const handlePrevDay = useCallback(() => {
+    setToday((current) => new Date(current.getTime() - 24 * 60 * 60 * 1000));
+  }, []);
+  const handleNextDay = useCallback(() => {
+    setToday((current) => new Date(current.getTime() + 24 * 60 * 60 * 1000));
+  }, []);
+  const handleResetToday = useCallback(() => {
+    setToday(new Date());
+  }, []);
   const [city, setCity] = useState<string | null>(null);
 
   // Utiliser les couleurs thématiques
@@ -986,13 +995,9 @@ export default function PrayerScreen() {
           <Text style={styles.mainTitle}>{t("prayer_times")}</Text>
           <DateNavigator
             date={today}
-            onPrev={() =>
-              setToday(new Date(today.getTime() - 24 * 60 * 60 * 1000))
-            }
-            onNext={() =>
-              setToday(new Date(today.getTime() + 24 * 60 * 60 * 1000))
-            }
-            onReset={() => setToday(new Date())}
+            onPrev={handlePrevDay}
+            onNext={handleNextDay}
+            onReset={handleResetToday}
           />
         </View>
 

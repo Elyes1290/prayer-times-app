@@ -18,6 +18,12 @@ export const islamicEvents: IslamicEvent[] = [
   { name: "islamic_event.hajj_end", month: 12, day: 13 },
 ];
 
+const hijriDateFormatter = new Intl.DateTimeFormat("fr-u-ca-islamic", {
+  day: "numeric",
+  month: "numeric",
+  year: "numeric",
+});
+
 // Fonction pour trouver la date grégorienne correspondant à une date Hijri donnée dans une année grégorienne
 export function findGregorianDateFromHijri(
   year: number,
@@ -27,14 +33,8 @@ export function findGregorianDateFromHijri(
   const start = new Date(year, 0, 1);
   const end = new Date(year + 1, 0, 1);
 
-  const formatter = new Intl.DateTimeFormat("fr-u-ca-islamic", {
-    day: "numeric",
-    month: "numeric",
-    year: "numeric",
-  });
-
   for (let d = new Date(start); d < end; d.setDate(d.getDate() + 1)) {
-    const [dayStr, monthStr] = formatter.format(d).split("/"); // Format "jour/mois/année" en FR
+    const [dayStr, monthStr] = hijriDateFormatter.format(d).split("/"); // Format "jour/mois/année" en FR
     const hijriDayNum = Number(dayStr);
     const hijriMonthNum = Number(monthStr);
 

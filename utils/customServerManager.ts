@@ -284,17 +284,14 @@ class CustomServerManager {
   }> {
     const startTime = Date.now();
 
-    // Test serveur principal
-    const customServerOk = await this.testUrlAccessibility(
-      `${this.config.baseUrl}/status`
-    );
-
-    // Test CDNs de secours
-    const cdnResults = await Promise.all(
-      this.config.fallbackUrls.map((url) =>
-        this.testUrlAccessibility(`${url}/status`)
-      )
-    );
+    const [customServerOk, cdnResults] = await Promise.all([
+      this.testUrlAccessibility(`${this.config.baseUrl}/status`),
+      Promise.all(
+        this.config.fallbackUrls.map((url) =>
+          this.testUrlAccessibility(`${url}/status`)
+        )
+      ),
+    ]);
 
     const latency = Date.now() - startTime;
 
@@ -317,8 +314,10 @@ class CustomServerManager {
     recommendations: string[];
     estimatedSavings: string;
   }> {
-    const connectivity = await this.testServerConnectivity();
-    const stats = await this.getUsageStats();
+    const [connectivity, stats] = await Promise.all([
+      this.testServerConnectivity(),
+      this.getUsageStats(),
+    ]);
 
     let serverStatus = "inconnu";
     const recommendations: string[] = [];

@@ -1071,6 +1071,7 @@
   "downloaded_audio": "Audio Téléchargés",
   "manage_downloads": "Gérer les téléchargements",
   "no_downloaded_audio": "Aucun audio téléchargé",
+  "download_audio_hint": "Téléchargez des récitations en mode en ligne",
   "downloads_manager": "Téléchargements",
   "quran_text": "Texte du Coran",
   "switch_to_offline": "Passer en mode offline",

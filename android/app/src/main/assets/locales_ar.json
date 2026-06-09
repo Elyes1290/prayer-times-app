@@ -1043,6 +1043,7 @@
   "downloaded_audio": "الصوتيات المحملة",
   "manage_downloads": "إدارة التنزيلات",
   "no_downloaded_audio": "لا توجد صوتيات محملة",
+  "download_audio_hint": "قم بتحميل التلاوات في الوضع المتصل",
   "downloads_manager": "التنزيلات",
   "quran_text": "نص القرآن الكريم",
   "switch_to_offline": "التبديل إلى الوضع غير المتصل",

@@ -2485,10 +2485,9 @@ class PremiumContentManager {
   // 🎯 NOUVEAU : Scanner les récitateurs locaux
   private async scanLocalReciters(): Promise<string[]> {
     try {
-      const localReciters: string[] = [];
-
       // Scanner le dossier premium_content pour les récitations téléchargées
       const files = await RNFS.readDir(this.downloadDirectory);
+      const localReciterSet = new Set<string>();
 
       for (const file of files) {
         if (file.isFile() && file.name.endsWith(".mp3")) {
@@ -2499,14 +2498,12 @@ class PremiumContentManager {
             const reciterName = match[1]
               .replace(/_/g, " ")
               .replace(/\b\w/g, (l) => l.toUpperCase());
-            if (!localReciters.includes(reciterName)) {
-              localReciters.push(reciterName);
-            }
+            localReciterSet.add(reciterName);
           }
         }
       }
 
-      return localReciters;
+      return Array.from(localReciterSet);
     } catch (error) {
       errorLog("❌ Erreur scan récitateurs locaux:", error);
       return [];
