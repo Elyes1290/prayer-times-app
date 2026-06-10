@@ -110,6 +110,236 @@ function rc_find_user_by_rc_ids(PDO $pdo, array $ids): ?array
     return null;
 }
 
+/** Email envoyé par RevenueCat dans subscriber_attributes ($email) */
+function rc_email_from_event(array $event): ?string
+{
+    $attrs = $event['subscriber_attributes'] ?? null;
+    if (!is_array($attrs)) {
+        return null;
+    }
+    $emailAttr = $attrs['$email'] ?? $attrs['email'] ?? null;
+    if (is_array($emailAttr) && !empty($emailAttr['value'])) {
+        $email = trim((string)$emailAttr['value']);
+        return $email !== '' ? $email : null;
+    }
+    return null;
+}
+
+function rc_find_user_by_email(PDO $pdo, string $email): ?array
+{
+    if ($email === '') {
+        return null;
+    }
+    $stmt = $pdo->prepare('SELECT id, email, subscription_platform FROM users WHERE email = ? LIMIT 1');
+    $stmt->execute([$email]);
+    $u = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $u ?: null;
+}
+
+/**
+ * Clé stable Apple : identique à chaque renouvellement mensuel.
+ * C'est l'identifiant principal pour un flux 100 % webhook (comme stripe_subscription_id).
+ */
+function rc_find_user_by_apple_transaction(PDO $pdo, string $txn): ?array
+{
+    if ($txn === '') {
+        return null;
+    }
+
+    $stmt = $pdo->prepare("
+        SELECT id, email, subscription_platform FROM users
+        WHERE subscription_id = ? AND subscription_platform = 'apple'
+        LIMIT 1
+    ");
+    $stmt->execute([$txn]);
+    $u = $stmt->fetch(PDO::FETCH_ASSOC);
+    if ($u) {
+        return $u;
+    }
+
+    $stmt = $pdo->prepare("
+        SELECT u.id, u.email, u.subscription_platform
+        FROM premium_purchases pp
+        JOIN users u ON u.id = pp.user_id
+        WHERE pp.payment_method = 'apple_iap'
+          AND (pp.transaction_id = ? OR pp.subscription_id = ?)
+        ORDER BY pp.created_at DESC
+        LIMIT 1
+    ");
+    $stmt->execute([$txn, $txn]);
+    $u = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $u ?: null;
+}
+
+/**
+ * Premier achat : register-iap a créé le compte avec le product_id comme subscription_id
+ * quelques secondes avant le webhook INITIAL_PURCHASE (profil RC encore anonyme).
+ */
+function rc_find_user_by_recent_apple_signup(PDO $pdo, array $event): ?array
+{
+    $productId = (string)($event['product_id'] ?? '');
+    if ($productId === '' || !isset(rc_apple_subscription_products()[$productId])) {
+        return null;
+    }
+
+    $stmt = $pdo->prepare("
+        SELECT id, email, subscription_platform FROM users
+        WHERE subscription_platform = 'apple'
+          AND subscription_id = ?
+          AND (created_from = 'apple_iap' OR created_from IS NULL)
+          AND created_at >= DATE_SUB(NOW(), INTERVAL 30 MINUTE)
+        ORDER BY created_at DESC
+        LIMIT 1
+    ");
+    $stmt->execute([$productId]);
+    $u = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $u ?: null;
+}
+
+/**
+ * Comptes historiques (ex. abo créé avant liaison RC) : product_id + date d'expiration proche.
+ */
+function rc_find_user_by_apple_product_expiry(PDO $pdo, array $event): ?array
+{
+    $productId = (string)($event['product_id'] ?? '');
+    $expMs = $event['expiration_at_ms'] ?? null;
+    if ($productId === '' || !isset(rc_apple_subscription_products()[$productId]) || !is_numeric($expMs)) {
+        return null;
+    }
+
+    $expiryDate = date('Y-m-d H:i:s', (int) floor((int)$expMs / 1000));
+    $stmt = $pdo->prepare("
+        SELECT id, email, subscription_platform FROM users
+        WHERE subscription_platform = 'apple'
+          AND subscription_id = ?
+          AND premium_expiry IS NOT NULL
+          AND ABS(TIMESTAMPDIFF(DAY, premium_expiry, ?)) <= 35
+        ORDER BY ABS(TIMESTAMPDIFF(SECOND, premium_expiry, ?)) ASC
+        LIMIT 1
+    ");
+    $stmt->execute([$productId, $expiryDate, $expiryDate]);
+    $u = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $u ?: null;
+}
+
+/**
+ * Réabonnement après expiration : ancien original_transaction_id en base, nouveau dans le webhook.
+ * On ne matche que s'il n'y a qu'un seul candidat (évite les collisions).
+ */
+function rc_find_user_by_recent_apple_lapse(PDO $pdo, array $event): ?array
+{
+    $productId = (string)($event['product_id'] ?? '');
+    if ($productId === '' || !isset(rc_apple_subscription_products()[$productId])) {
+        return null;
+    }
+
+    $subType = rc_map_product_to_subscription_type($productId);
+    $stmt = $pdo->prepare("
+        SELECT id, email, subscription_platform FROM users
+        WHERE subscription_platform = 'apple'
+          AND premium_status = 0
+          AND subscription_type = ?
+          AND premium_expiry IS NOT NULL
+          AND premium_expiry <= NOW()
+          AND premium_expiry >= DATE_SUB(NOW(), INTERVAL 180 DAY)
+        ORDER BY premium_expiry DESC
+        LIMIT 2
+    ");
+    $stmt->execute([$subType]);
+    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    if (count($rows) !== 1) {
+        if (count($rows) > 1) {
+            error_log('[RC webhook] Réabonnement ambigu — plusieurs comptes Apple expirés pour type ' . $subType);
+        }
+        return null;
+    }
+
+    error_log('[RC webhook] Match réabonnement (lapse) user ' . $rows[0]['id']);
+    return $rows[0];
+}
+
+/**
+ * Secours : même type d'abo + date d'expiration proche, un seul compte Apple candidat.
+ * Couvre réabonnement avec ancien subscription_id numérique encore en base.
+ */
+function rc_find_user_by_apple_type_expiry_singleton(PDO $pdo, array $event): ?array
+{
+    $productId = (string)($event['product_id'] ?? '');
+    $expMs = $event['expiration_at_ms'] ?? null;
+    if ($productId === '' || !isset(rc_apple_subscription_products()[$productId]) || !is_numeric($expMs)) {
+        return null;
+    }
+
+    $subType = rc_map_product_to_subscription_type($productId);
+    $expiryDate = date('Y-m-d H:i:s', (int) floor((int)$expMs / 1000));
+    $stmt = $pdo->prepare("
+        SELECT id, email, subscription_platform FROM users
+        WHERE subscription_platform = 'apple'
+          AND subscription_type = ?
+          AND premium_expiry IS NOT NULL
+          AND ABS(TIMESTAMPDIFF(DAY, premium_expiry, ?)) <= 35
+        ORDER BY ABS(TIMESTAMPDIFF(SECOND, premium_expiry, ?)) ASC
+        LIMIT 2
+    ");
+    $stmt->execute([$subType, $expiryDate, $expiryDate]);
+    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    if (count($rows) !== 1) {
+        if (count($rows) > 1) {
+            error_log('[RC webhook] Match expiry ambigu — plusieurs comptes Apple pour type ' . $subType);
+        }
+        return null;
+    }
+
+    error_log('[RC webhook] Match singleton type+expiry user ' . $rows[0]['id']);
+    return $rows[0];
+}
+
+/**
+ * Résolution utilisateur pour webhook seul — même logique que Stripe (ID abonnement stable).
+ */
+function rc_resolve_user(PDO $pdo, array $event, string $eventType): ?array
+{
+    $user = rc_find_user_by_rc_ids($pdo, rc_collect_lookup_ids($event));
+    if ($user) {
+        return $user;
+    }
+
+    $email = rc_email_from_event($event);
+    if ($email) {
+        $user = rc_find_user_by_email($pdo, $email);
+        if ($user) {
+            return $user;
+        }
+    }
+
+    $txn = (string)($event['original_transaction_id'] ?? $event['transaction_id'] ?? '');
+    if ($txn !== '') {
+        $user = rc_find_user_by_apple_transaction($pdo, $txn);
+        if ($user) {
+            return $user;
+        }
+    }
+
+    if ($eventType === 'INITIAL_PURCHASE') {
+        $user = rc_find_user_by_recent_apple_signup($pdo, $event);
+        if ($user) {
+            return $user;
+        }
+
+        $user = rc_find_user_by_recent_apple_lapse($pdo, $event);
+        if ($user) {
+            return $user;
+        }
+    }
+
+    $user = rc_find_user_by_apple_product_expiry($pdo, $event);
+    if ($user) {
+        return $user;
+    }
+
+    return rc_find_user_by_apple_type_expiry_singleton($pdo, $event);
+}
+
 function rc_apply_active_subscription(PDO $pdo, array $user, array $event): void
 {
     $expMs = $event['expiration_at_ms'] ?? null;
@@ -189,10 +419,11 @@ try {
     }
 
     $ids = rc_collect_lookup_ids($event);
-    $user = rc_find_user_by_rc_ids($pdo, $ids);
+    $user = rc_resolve_user($pdo, $event, $type);
 
     if (!$user) {
-        error_log('[RC webhook] Utilisateur introuvable pour événement ' . $type . ' ids=' . json_encode($ids));
+        $txn = (string)($event['original_transaction_id'] ?? '');
+        error_log('[RC webhook] Utilisateur introuvable pour ' . $type . ' ids=' . json_encode($ids) . ' txn=' . $txn);
         echo json_encode(['success' => true, 'warning' => 'user_not_found']);
         exit();
     }

@@ -33,25 +33,33 @@ const Purchases = {
   configure: jest.fn(),
   setLogLevel: jest.fn(),
   getOfferings: jest.fn(() => Promise.resolve({ current: null })),
-  purchasePackage: jest.fn(() => Promise.resolve({
-    customerInfo: {
+  purchasePackage: jest.fn(() =>
+    Promise.resolve({
+      customerInfo: {
+        activeSubscriptions: [],
+        allPurchasedProductIdentifiers: [],
+        entitlements: { active: {}, all: {} },
+      },
+    }),
+  ),
+  getCustomerInfo: jest.fn(() =>
+    Promise.resolve({
       activeSubscriptions: [],
       allPurchasedProductIdentifiers: [],
       entitlements: { active: {}, all: {} },
-    },
-  })),
-  getCustomerInfo: jest.fn(() => Promise.resolve({
-    activeSubscriptions: [],
-    allPurchasedProductIdentifiers: [],
-    entitlements: { active: {}, all: {} },
-  })),
-  restorePurchases: jest.fn(() => Promise.resolve({
-    activeSubscriptions: [],
-    allPurchasedProductIdentifiers: [],
-    entitlements: { active: {}, all: {} },
-  })),
+    }),
+  ),
+  restorePurchases: jest.fn(() =>
+    Promise.resolve({
+      activeSubscriptions: [],
+      allPurchasedProductIdentifiers: [],
+      entitlements: { active: {}, all: {} },
+    }),
+  ),
   logIn: jest.fn(),
   logOut: jest.fn(),
+  setEmail: jest.fn(),
+  setAttributes: jest.fn(),
   isAnonymous: false,
 };
 

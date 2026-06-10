@@ -17,6 +17,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import apiClient from "../utils/apiClient";
 import { IapService } from "../utils/iapService";
 import { usePremium } from "../contexts/PremiumContext";
+import { useRouter } from "expo-router";
 import { LinearGradient } from "@/components/ui/LinearGradientView";
 import { useErrorHandler } from "../utils/errorHandler";
 import Animated, {
@@ -29,7 +30,7 @@ import Animated, {
 interface PremiumLoginSectionProps {
   activatePremium: (
     type: "monthly" | "yearly" | "family",
-    subscriptionId: string
+    subscriptionId: string,
   ) => Promise<void>;
   styles: any;
   showToast: (toast: {
@@ -99,7 +100,7 @@ function getInputStyle(
   value: string,
   isValid: boolean,
   validStyle: object,
-  invalidStyle: object
+  invalidStyle: object,
 ) {
   if (!value.trim()) return null;
   return isValid ? validStyle : invalidStyle;
@@ -128,6 +129,7 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
   const textSecondaryColor = isDarkTheme ? "#CBD5E1" : "#666666"; // Slate-300 vs gris
   const { user: premiumUser, forceLogout, checkPremiumStatus } = usePremium();
   const { getErrorTitle, getErrorMessage } = useErrorHandler();
+  const router = useRouter();
   const [isLogin, setIsLogin] = useState(initialTab === "login");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState(""); // 🚀 NOUVEAU : Champ mot de passe
@@ -194,7 +196,7 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
         hideLocalToast();
       }, 3000);
     },
-    [toastTranslateY, toastOpacity, hideLocalToast]
+    [toastTranslateY, toastOpacity, hideLocalToast],
   );
 
   // 🚀 NOUVEAU : Vérifier si l'utilisateur est déjà connecté au démarrage
@@ -208,7 +210,7 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
       try {
         // 🚀 NOUVEAU : Mode professionnel - vérifier si connexion explicite existe
         const explicitConnection = await AsyncStorage.getItem(
-          "explicit_connection"
+          "explicit_connection",
         );
         const userDataString = await AsyncStorage.getItem("user_data");
 
@@ -225,7 +227,7 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
             return;
           }
           console.log(
-            "🔍 [DEBUG] Mode professionnel - connexion explicite détectée, chargement des données"
+            "🔍 [DEBUG] Mode professionnel - connexion explicite détectée, chargement des données",
           );
           if (isMounted) {
             setIsConnected(true);
@@ -240,7 +242,7 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
           }
         } else {
           console.log(
-            "🔍 [DEBUG] Mode professionnel - pas de connexion automatique"
+            "🔍 [DEBUG] Mode professionnel - pas de connexion automatique",
           );
         }
 
@@ -265,7 +267,7 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
     const pollConnectionStatus = async () => {
       try {
         const explicitConnection = await AsyncStorage.getItem(
-          "explicit_connection"
+          "explicit_connection",
         );
         const userDataString = await AsyncStorage.getItem("user_data");
 
@@ -275,7 +277,7 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
         // 🎯 Si le statut a changé, mettre à jour l'interface
         if (shouldBeConnected && !isConnected) {
           console.log(
-            "🔄 [LISTENER] Auto-connexion détectée - mise à jour de l'interface"
+            "🔄 [LISTENER] Auto-connexion détectée - mise à jour de l'interface",
           );
           let userData: any = null;
           try {
@@ -292,7 +294,7 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
           }
         } else if (!shouldBeConnected && isConnected) {
           console.log(
-            "🔄 [LISTENER] Déconnexion détectée - mise à jour de l'interface"
+            "🔄 [LISTENER] Déconnexion détectée - mise à jour de l'interface",
           );
           setIsConnected(false);
           setUserData(null);
@@ -351,7 +353,7 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
       // 🚀 NOUVEAU : Mode professionnel - synchronisation explicite autorisée
       // Marquer cette connexion comme explicite pour autoriser les backups
       console.log(
-        "🔍 [DEBUG] Mode professionnel - synchronisation explicite autorisée"
+        "🔍 [DEBUG] Mode professionnel - synchronisation explicite autorisée",
       );
 
       // Sauvegarder les données utilisateur dans AsyncStorage
@@ -379,7 +381,7 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
       await AsyncStorage.setItem("explicit_connection", "true");
 
       console.log(
-        "✅ [DEBUG] Données utilisateur synchronisées avec connexion explicite"
+        "✅ [DEBUG] Données utilisateur synchronisées avec connexion explicite",
       );
     } catch (error) {
       console.error("❌ Erreur synchronisation données:", error);
@@ -390,7 +392,7 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
     async (
       currentEmail: string,
       currentPassword: string,
-      currentFirstName: string
+      currentFirstName: string,
     ) => {
       if (isLogin) {
         if (!currentEmail) {
@@ -414,7 +416,7 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
         if (!currentEmail || !currentPassword || !currentFirstName) {
           Alert.alert(
             t("toast_error"),
-            t("toast_validation_email_password_required")
+            t("toast_validation_email_password_required"),
           );
           return;
         }
@@ -432,7 +434,7 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
         if (!isFirstNameValid) {
           Alert.alert(
             t("toast_error"),
-            t("toast_validation_firstname_required")
+            t("toast_validation_firstname_required"),
           );
           return;
         }
@@ -484,7 +486,7 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
               } catch (rcLoginErr) {
                 console.warn(
                   "🍎 [IAP] RevenueCat logIn après connexion:",
-                  rcLoginErr
+                  rcLoginErr,
                 );
               }
             }
@@ -518,7 +520,7 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
 
             if (checkResult.data && checkResult.data.exists === true) {
               console.log(
-                "🔍 Email existe déjà - Vérifier le statut premium..."
+                "🔍 Email existe déjà - Vérifier le statut premium...",
               );
 
               // 🎯 Vérifier si l'utilisateur a un premium actif ou s'il peut renouveler
@@ -535,7 +537,7 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
                       title: t("toast_already_premium"),
                       message: t(
                         "toast_already_premium_message",
-                        "Vous avez déjà un abonnement premium actif. Connectez-vous pour accéder à vos fonctionnalités."
+                        "Vous avez déjà un abonnement premium actif. Connectez-vous pour accéder à vos fonctionnalités.",
                       ),
                     });
                     setIsLoading(false);
@@ -548,14 +550,14 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
                     userData.premium_status === 0
                   ) {
                     console.log(
-                      "✅ Utilisateur existant avec premium expiré - Permettre le renouvellement"
+                      "✅ Utilisateur existant avec premium expiré - Permettre le renouvellement",
                     );
                     showLocalToast({
                       type: "info",
                       title: t("toast_renewal_detected"),
                       message: t(
                         "toast_renewal_detected_message",
-                        "Compte existant détecté. Votre abonnement sera renouvelé."
+                        "Compte existant détecté. Votre abonnement sera renouvelé.",
                       ),
                     });
                     // Continuer vers le paiement pour renouvellement
@@ -566,7 +568,7 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
                       title: t("toast_account_exists"),
                       message: t(
                         "toast_account_exists_message",
-                        "Un compte existe avec cet email. Connectez-vous pour gérer votre abonnement."
+                        "Un compte existe avec cet email. Connectez-vous pour gérer votre abonnement.",
                       ),
                     });
                     setIsLoading(false);
@@ -575,14 +577,14 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
                 } else {
                   // API ne trouve pas l'utilisateur, continuer normalement
                   console.log(
-                    "🔍 Utilisateur non trouvé via API - Continuer l'inscription"
+                    "🔍 Utilisateur non trouvé via API - Continuer l'inscription",
                   );
                 }
               } catch (userCheckError) {
                 // Erreur lors de la vérification utilisateur - demander confirmation
                 console.log(
                   "⚠️ Erreur vérification utilisateur:",
-                  userCheckError
+                  userCheckError,
                 );
 
                 // Demander confirmation à l'utilisateur
@@ -602,7 +604,7 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
                         console.log("✅ Utilisateur confirme la continuation");
                       },
                     },
-                  ]
+                  ],
                 );
                 setIsLoading(false);
                 return;
@@ -621,24 +623,24 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
             };
             console.log(
               "💾 Stockage des données d'inscription:",
-              registrationData
+              registrationData,
             );
             await AsyncStorage.setItem(
               "pending_registration",
-              JSON.stringify(registrationData)
+              JSON.stringify(registrationData),
             );
 
-            // Rediriger vers la page de paiement
-            const { router } = await import("expo-router");
+            // Navigation d'abord, fermeture modal après (évite crash à l'unmount)
             router.push("/premium-payment");
-            
-            // 🆕 CORRECTION APPLE : Fermer la modal après redirection pour révéler la page de paiement
-            if (onCloseModal) {
-              console.log("✅ Fermeture de la modal après inscription");
-              onCloseModal();
-            }
-            
             setIsLoading(false);
+
+            if (onCloseModal) {
+              setTimeout(() => {
+                console.log("✅ Fermeture de la modal après inscription");
+                onCloseModal();
+              }, 300);
+            }
+
             return;
           } catch (emailCheckError: any) {
             console.error("❌ Erreur vérification email:", emailCheckError);
@@ -669,7 +671,9 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
       onLoginSuccess,
       syncUserDataToLocal,
       checkPremiumStatus,
-    ]
+      router,
+      onCloseModal,
+    ],
   );
 
   // 🚀 NOUVEAU : Fonction de déconnexion optimisée
@@ -714,17 +718,13 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
     "🎯 [DEBUG] État actuel - isConnected:",
     isConnected,
     "userData:",
-    userData ? "présent" : "null"
+    userData ? "présent" : "null",
   );
   if (isConnected && userData) {
     return (
       <View style={[localStyles.container, { minHeight: 300 }]}>
         <View style={localStyles.connectedHeader}>
-          <MCIcon
-            name="account-check"
-            size={24}
-            color="#4CAF50"
-          />
+          <MCIcon name="account-check" size={24} color="#4CAF50" />
           <Text
             style={[localStyles.connectedTitle, { color: textPrimaryColor }]}
           >
@@ -781,15 +781,11 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
                     });
                   },
                 },
-              ]
+              ],
             );
           }}
         >
-          <MCIcon
-            name="account-cog"
-            size={20}
-            color="#4CAF50"
-          />
+          <MCIcon name="account-cog" size={20} color="#4CAF50" />
           <Text style={localStyles.manageAccountButtonText}>
             Gérer le compte
           </Text>
@@ -830,514 +826,494 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
   const formContent = (
     <>
       {/* Toggle connexion/inscription */}
-        <View style={localStyles.toggleContainer}>
-          <Pressable
-            style={[
-              localStyles.toggleButton,
-              isLogin && localStyles.toggleButtonActive,
-            ]}
-            onPress={async () => {
-              setIsLogin(true);
-              // Vider le champ prénom en mode connexion
-              setFirstName("");
-            }}
-          >
-            <View style={localStyles.signupTabContent}>
-              <Text
-                style={[
-                  localStyles.toggleText,
-                  isLogin && localStyles.toggleTextActive,
-                ]}
-              >
-                {t("premium_ui.login_tab", "Connexion")}
-              </Text>
-            </View>
-          </Pressable>
-          <Pressable
-            style={[
-              localStyles.toggleButton,
-              !isLogin && localStyles.toggleButtonActive,
-            ]}
-            onPress={async () => {
-              setIsLogin(false);
-              // Charger le prénom existant en mode inscription
-              try {
-                const existingFirstName = await AsyncStorage.getItem(
-                  "userFirstName"
-                );
-                if (existingFirstName) {
-                  setFirstName(existingFirstName);
-                  setFirstNameValid(validateFirstName(existingFirstName));
-                  // console.log(
-                  //  "✅ Prénom existant chargé lors du basculement:",
-                  //  existingFirstName
-                  //);
-                } else {
-                  setFirstName("");
-                }
-              } catch (error) {
-                console.error(
-                  "Erreur chargement prénom existant lors du basculement:",
-                  error
-                );
-                setFirstName("");
-              }
-            }}
-          >
-            <View style={localStyles.signupTabContent}>
-              <View style={localStyles.premiumBadge}>
-                <Text style={localStyles.premiumBadgeText}>
-                  👑 {t("premium_ui.badge", "Premium")}
-                </Text>
-              </View>
-              <Text
-                style={[
-                  localStyles.toggleText,
-                  !isLogin && localStyles.toggleTextActive,
-                ]}
-              >
-                {t("premium_ui.signup_tab", "Créer un compte Premium")}
-              </Text>
-            </View>
-          </Pressable>
-        </View>
-
-        {/* Encart d'information (visible uniquement en mode inscription) */}
-        {!isLogin && (
-          <View style={localStyles.signupInfoCard}>
-            <MCIcon name="information" size={18} color="#0B5" />
-            <View style={{ flex: 1 }}>
-              <Text style={localStyles.signupInfoText}>
-                {t(
-                  "premium_ui.signup_info_line1",
-                  "La création de compte nécessite un abonnement Premium. Votre compte sera créé automatiquement après le paiement."
-                )}
-              </Text>
-              <Text style={localStyles.signupInfoTextSecondary}>
-                {t(
-                  "premium_ui.signup_info_line2",
-                  "Déjà abonné(e) ? Connectez‑vous avec le même email."
-                )}
-              </Text>
-            </View>
-          </View>
-        )}
-
-        {/* Champs de saisie */}
-        {!isLogin && (
-          <View
-            style={[
-              localStyles.inputContainer,
-              getInputStyle(
-                firstName,
-                firstNameValid,
-                localStyles.inputContainerValid,
-                localStyles.inputContainerInvalid
-              ),
-            ]}
-          >
-            <MCIcon
-              name="account"
-              size={20}
-              color={getIconColor(firstName, firstNameValid)}
-              style={localStyles.inputIcon}
-            />
-            <TextInput
-              ref={firstNameRef}
-              style={localStyles.input}
-              placeholder={
-                firstName
-                  ? t("auth_modal.firstname_placeholder_prefilled")
-                  : t("auth_modal.firstname_placeholder_empty")
-              }
-              value={firstName}
-              onChangeText={(text) => {
-                setFirstName(text);
-              }}
-              editable={!isLoading}
-            />
-            <Pressable
-              style={localStyles.infoIcon}
-              onPress={() =>
-                Alert.alert(
-                  t("toast_help_firstname_title"),
-                  firstName
-                    ? t("toast_help_firstname_prefilled")
-                    : t("toast_help_firstname_empty"),
-                  [
-                    {
-                      text: "OK",
-                      onPress: () => {},
-                    },
-                  ]
-                )
-              }
-            >
-              <MCIcon
-                name={firstName ? "account-check" : "information-outline"}
-                size={16}
-                color={firstName ? "#4CAF50" : "#666"}
-              />
-            </Pressable>
-          </View>
-        )}
-
-        <View
-          style={[
-            localStyles.inputContainer,
-            getInputStyle(
-              email,
-              emailValid,
-              localStyles.inputContainerValid,
-              localStyles.inputContainerInvalid
-            ),
-          ]}
-        >
-          <MCIcon
-            name="email"
-            size={20}
-            color={getIconColor(email, emailValid)}
-            style={localStyles.inputIcon}
-          />
-          <TextInput
-            ref={emailRef}
-            style={localStyles.input}
-            placeholder={t("auth_modal.email_placeholder_text")}
-            value={email}
-            onChangeText={(text) => {
-              setEmail(text);
-            }}
-            keyboardType="email-address"
-            autoCapitalize="none"
-            editable={!isLoading}
-          />
-          <Pressable
-            style={localStyles.infoIcon}
-            onPress={() =>
-              Alert.alert(
-                t("toast_help_email_title"),
-                t("toast_help_email_content"),
-                [
-                  {
-                    text: "OK",
-                    onPress: () => {},
-                  },
-                ]
-              )
-            }
-          >
-            <MCIcon
-              name="information-outline"
-              size={16}
-              color="#666"
-            />
-          </Pressable>
-        </View>
-
-        {/* 🚀 NOUVEAU : Champ mot de passe (après l'email) */}
-        <View
-          style={[
-            localStyles.inputContainer,
-            getInputStyle(
-              password,
-              isPasswordVisuallyValid(password),
-              localStyles.inputContainerValid,
-              localStyles.inputContainerInvalid
-            ),
-          ]}
-        >
-          <MCIcon
-            name="lock"
-            size={20}
-            color={getIconColor(password, isPasswordVisuallyValid(password))}
-            style={localStyles.inputIcon}
-          />
-          <TextInput
-            ref={passwordRef}
-            style={localStyles.input}
-            placeholder={t("auth_modal.password_placeholder_text")}
-            value={password}
-            onChangeText={(text) => {
-              setPassword(text);
-            }}
-            onBlur={() => {}}
-            onSubmitEditing={() => {
-              // Optionnel : passer au champ suivant ou soumettre
-              handleAuthenticationWithValues(
-                email.trim(),
-                password.trim(),
-                firstName.trim()
-              );
-            }}
-            secureTextEntry={!showPassword}
-            autoCapitalize="none"
-            editable={!isLoading}
-            returnKeyType="done"
-          />
-          <Pressable
-            style={localStyles.eyeIcon}
-            onPress={() => setShowPassword(!showPassword)}
-          >
-            <MCIcon
-              name={showPassword ? "eye" : "eye-off"}
-              size={20}
-              color={getIconColor(password, isPasswordVisuallyValid(password))}
-            />
-          </Pressable>
-          <Pressable
-            style={localStyles.infoIcon}
-            onPress={() =>
-              Alert.alert(
-                t("toast_help_password_title"),
-                t("toast_help_password_content"),
-                [
-                  {
-                    text: "OK",
-                    onPress: () => {},
-                  },
-                ]
-              )
-            }
-          >
-            <MCIcon
-              name="information-outline"
-              size={16}
-              color="#666"
-            />
-          </Pressable>
-        </View>
-
-        {/* 🚀 NOUVEAU : Indicateurs de validation du mot de passe (seulement en mode inscription) */}
-        {!isLogin && password.length > 0 && (
-          <View style={localStyles.passwordValidationContainer}>
-            <Text style={localStyles.passwordValidationTitle}>
-              {t("auth_modal.password_criteria_title")} :
-            </Text>
-            {(() => {
-              const validation = getPasswordValidationDetails(password);
-              return (
-                <>
-                  <View style={localStyles.validationItem}>
-                    <MCIcon
-                      name={
-                        validation.minLength ? "check-circle" : "circle-outline"
-                      }
-                      size={16}
-                      color={validation.minLength ? "#4CAF50" : "#666"}
-                    />
-                    <Text
-                      style={[
-                        localStyles.validationText,
-                        validation.minLength && localStyles.validationTextValid,
-                      ]}
-                    >
-                      {t("auth_modal.password_min_length")}
-                    </Text>
-                  </View>
-                  <View style={localStyles.validationItem}>
-                    <MCIcon
-                      name={
-                        validation.maxLength ? "check-circle" : "circle-outline"
-                      }
-                      size={16}
-                      color={validation.maxLength ? "#4CAF50" : "#666"}
-                    />
-                    <Text
-                      style={[
-                        localStyles.validationText,
-                        validation.maxLength && localStyles.validationTextValid,
-                      ]}
-                    >
-                      Maximum 50 caractères
-                    </Text>
-                  </View>
-                  <View style={localStyles.validationItem}>
-                    <MCIcon
-                      name={
-                        validation.hasLowercase
-                          ? "check-circle"
-                          : "circle-outline"
-                      }
-                      size={16}
-                      color={validation.hasLowercase ? "#4CAF50" : "#666"}
-                    />
-                    <Text
-                      style={[
-                        localStyles.validationText,
-                        validation.hasLowercase &&
-                          localStyles.validationTextValid,
-                      ]}
-                    >
-                      Contient une minuscule
-                    </Text>
-                  </View>
-                  <View style={localStyles.validationItem}>
-                    <MCIcon
-                      name={
-                        validation.hasUppercase
-                          ? "check-circle"
-                          : "circle-outline"
-                      }
-                      size={16}
-                      color={validation.hasUppercase ? "#4CAF50" : "#666"}
-                    />
-                    <Text
-                      style={[
-                        localStyles.validationText,
-                        validation.hasUppercase &&
-                          localStyles.validationTextValid,
-                      ]}
-                    >
-                      Contient une majuscule
-                    </Text>
-                  </View>
-                  <View style={localStyles.validationItem}>
-                    <MCIcon
-                      name={
-                        validation.hasNumbers
-                          ? "check-circle"
-                          : "circle-outline"
-                      }
-                      size={16}
-                      color={validation.hasNumbers ? "#4CAF50" : "#666"}
-                    />
-                    <Text
-                      style={[
-                        localStyles.validationText,
-                        validation.hasNumbers &&
-                          localStyles.validationTextValid,
-                      ]}
-                    >
-                      Contient des chiffres
-                    </Text>
-                  </View>
-                  <View style={localStyles.validationItem}>
-                    <MCIcon
-                      name={
-                        validation.hasSpecialChars
-                          ? "check-circle"
-                          : "circle-outline"
-                      }
-                      size={16}
-                      color={validation.hasSpecialChars ? "#4CAF50" : "#666"}
-                    />
-                    <Text
-                      style={[
-                        localStyles.validationText,
-                        validation.hasSpecialChars &&
-                          localStyles.validationTextValid,
-                      ]}
-                    >
-                      Contient des caractères spéciaux
-                    </Text>
-                  </View>
-                </>
-              );
-            })()}
-          </View>
-        )}
-
-        {/* Bouton principal */}
+      <View style={localStyles.toggleContainer}>
         <Pressable
           style={[
-            localStyles.authButton,
-            isLoading && localStyles.authButtonDisabled,
+            localStyles.toggleButton,
+            isLogin && localStyles.toggleButtonActive,
           ]}
-          onPress={() => {
-            // Validation directe des valeurs actuelles, pas des états
-            const currentEmail = email.trim();
-            const currentPassword = password.trim();
-            const currentFirstName = firstName.trim();
+          onPress={async () => {
+            setIsLogin(true);
+            // Vider le champ prénom en mode connexion
+            setFirstName("");
+          }}
+        >
+          <View style={localStyles.signupTabContent}>
+            <Text
+              style={[
+                localStyles.toggleText,
+                isLogin && localStyles.toggleTextActive,
+              ]}
+            >
+              {t("premium_ui.login_tab", "Connexion")}
+            </Text>
+          </View>
+        </Pressable>
+        <Pressable
+          style={[
+            localStyles.toggleButton,
+            !isLogin && localStyles.toggleButtonActive,
+          ]}
+          onPress={async () => {
+            setIsLogin(false);
+            // Charger le prénom existant en mode inscription
+            try {
+              const existingFirstName =
+                await AsyncStorage.getItem("userFirstName");
+              if (existingFirstName) {
+                setFirstName(existingFirstName);
+                // console.log(
+                //  "✅ Prénom existant chargé lors du basculement:",
+                //  existingFirstName
+                //);
+              } else {
+                setFirstName("");
+              }
+            } catch (error) {
+              console.error(
+                "Erreur chargement prénom existant lors du basculement:",
+                error,
+              );
+              setFirstName("");
+            }
+          }}
+        >
+          <View style={localStyles.signupTabContent}>
+            <View style={localStyles.premiumBadge}>
+              <Text style={localStyles.premiumBadgeText}>
+                👑 {t("premium_ui.badge", "Premium")}
+              </Text>
+            </View>
+            <Text
+              style={[
+                localStyles.toggleText,
+                !isLogin && localStyles.toggleTextActive,
+              ]}
+            >
+              {t("premium_ui.signup_tab", "Créer un compte Premium")}
+            </Text>
+          </View>
+        </Pressable>
+      </View>
 
-            // Mettre à jour les états de validation pour l'affichage
-            setEmailValid(validateEmail(currentEmail));
-            setFirstNameValid(validateFirstName(currentFirstName));
+      {/* Encart d'information (visible uniquement en mode inscription) */}
+      {!isLogin && (
+        <View style={localStyles.signupInfoCard}>
+          <MCIcon name="information" size={18} color="#0B5" />
+          <View style={{ flex: 1 }}>
+            <Text style={localStyles.signupInfoText}>
+              {t(
+                "premium_ui.signup_info_line1",
+                "La création de compte nécessite un abonnement Premium. Votre compte sera créé automatiquement après le paiement.",
+              )}
+            </Text>
+            <Text style={localStyles.signupInfoTextSecondary}>
+              {t(
+                "premium_ui.signup_info_line2",
+                "Déjà abonné(e) ? Connectez‑vous avec le même email.",
+              )}
+            </Text>
+          </View>
+        </View>
+      )}
 
-            // Appeler handleAuthentication avec les valeurs actuelles
+      {/* Champs de saisie */}
+      {!isLogin && (
+        <View
+          style={[
+            localStyles.inputContainer,
+            getInputStyle(
+              firstName,
+              firstNameValid,
+              localStyles.inputContainerValid,
+              localStyles.inputContainerInvalid,
+            ),
+          ]}
+        >
+          <MCIcon
+            name="account"
+            size={20}
+            color={getIconColor(firstName, firstNameValid)}
+            style={localStyles.inputIcon}
+          />
+          <TextInput
+            ref={firstNameRef}
+            style={localStyles.input}
+            placeholder={
+              firstName
+                ? t("auth_modal.firstname_placeholder_prefilled")
+                : t("auth_modal.firstname_placeholder_empty")
+            }
+            value={firstName}
+            onChangeText={(text) => {
+              setFirstName(text);
+            }}
+            editable={!isLoading}
+          />
+          <Pressable
+            style={localStyles.infoIcon}
+            onPress={() =>
+              Alert.alert(
+                t("toast_help_firstname_title"),
+                firstName
+                  ? t("toast_help_firstname_prefilled")
+                  : t("toast_help_firstname_empty"),
+                [
+                  {
+                    text: "OK",
+                    onPress: () => {},
+                  },
+                ],
+              )
+            }
+          >
+            <MCIcon
+              name={firstName ? "account-check" : "information-outline"}
+              size={16}
+              color={firstName ? "#4CAF50" : "#666"}
+            />
+          </Pressable>
+        </View>
+      )}
+
+      <View
+        style={[
+          localStyles.inputContainer,
+          getInputStyle(
+            email,
+            emailValid,
+            localStyles.inputContainerValid,
+            localStyles.inputContainerInvalid,
+          ),
+        ]}
+      >
+        <MCIcon
+          name="email"
+          size={20}
+          color={getIconColor(email, emailValid)}
+          style={localStyles.inputIcon}
+        />
+        <TextInput
+          ref={emailRef}
+          style={localStyles.input}
+          placeholder={t("auth_modal.email_placeholder_text")}
+          value={email}
+          onChangeText={(text) => {
+            setEmail(text);
+          }}
+          keyboardType="email-address"
+          autoCapitalize="none"
+          editable={!isLoading}
+        />
+        <Pressable
+          style={localStyles.infoIcon}
+          onPress={() =>
+            Alert.alert(
+              t("toast_help_email_title"),
+              t("toast_help_email_content"),
+              [
+                {
+                  text: "OK",
+                  onPress: () => {},
+                },
+              ],
+            )
+          }
+        >
+          <MCIcon name="information-outline" size={16} color="#666" />
+        </Pressable>
+      </View>
+
+      {/* 🚀 NOUVEAU : Champ mot de passe (après l'email) */}
+      <View
+        style={[
+          localStyles.inputContainer,
+          getInputStyle(
+            password,
+            isPasswordVisuallyValid(password),
+            localStyles.inputContainerValid,
+            localStyles.inputContainerInvalid,
+          ),
+        ]}
+      >
+        <MCIcon
+          name="lock"
+          size={20}
+          color={getIconColor(password, isPasswordVisuallyValid(password))}
+          style={localStyles.inputIcon}
+        />
+        <TextInput
+          ref={passwordRef}
+          style={localStyles.input}
+          placeholder={t("auth_modal.password_placeholder_text")}
+          value={password}
+          onChangeText={(text) => {
+            setPassword(text);
+          }}
+          onBlur={() => {}}
+          onSubmitEditing={() => {
+            // Optionnel : passer au champ suivant ou soumettre
             handleAuthenticationWithValues(
-              currentEmail,
-              currentPassword,
-              currentFirstName
+              email.trim(),
+              password.trim(),
+              firstName.trim(),
             );
           }}
-          disabled={isLoading}
+          secureTextEntry={!showPassword}
+          autoCapitalize="none"
+          editable={!isLoading}
+          returnKeyType="done"
+        />
+        <Pressable
+          style={localStyles.eyeIcon}
+          onPress={() => setShowPassword(!showPassword)}
         >
-          {isLoading ? (
-            <ActivityIndicator size="small" color="#FFF" />
-          ) : (
-            <>
-              <MCIcon
-                name={isLogin ? "login" : "account-plus"}
-                size={20}
-                color="#FFF"
-              />
-              <Text style={localStyles.authButtonText}>
-                {isLogin
-                  ? t("auth_modal.login_button")
-                  : t("auth_modal.register_button")}
-              </Text>
-            </>
-          )}
+          <MCIcon
+            name={showPassword ? "eye" : "eye-off"}
+            size={20}
+            color={getIconColor(password, isPasswordVisuallyValid(password))}
+          />
         </Pressable>
+        <Pressable
+          style={localStyles.infoIcon}
+          onPress={() =>
+            Alert.alert(
+              t("toast_help_password_title"),
+              t("toast_help_password_content"),
+              [
+                {
+                  text: "OK",
+                  onPress: () => {},
+                },
+              ],
+            )
+          }
+        >
+          <MCIcon name="information-outline" size={16} color="#666" />
+        </Pressable>
+      </View>
 
-        {/* 🚀 SUPPRIMÉ : Bouton Mode Test Premium supprimé car il embrouille la logique */}
-
-        {/* Informations */}
-        <View style={localStyles.infoContainer}>
-          <MCIcon name="information" size={16} color="#666" />
-          <Text style={localStyles.infoText}>
-            {isLogin
-              ? t("auth_modal.info_text_login")
-              : t("auth_modal.info_text_register")}
+      {/* 🚀 NOUVEAU : Indicateurs de validation du mot de passe (seulement en mode inscription) */}
+      {!isLogin && password.length > 0 && (
+        <View style={localStyles.passwordValidationContainer}>
+          <Text style={localStyles.passwordValidationTitle}>
+            {t("auth_modal.password_criteria_title")} :
           </Text>
-        </View>
-
-        {/* 🚀 NOUVEAU : Toast local pour la modal */}
-        {localToast && (
-          <Animated.View style={[localStyles.toastContainer, toastAnimatedStyle]}>
-            <Pressable onPress={hideLocalToast}>
-              <LinearGradient
-                colors={
-                  localToast.type === "success"
-                    ? ["#4CAF50", "#2E7D32"]
-                    : localToast.type === "error"
-                    ? ["#f44336", "#c62828"]
-                    : ["#2196F3", "#1565C0"]
-                }
-                style={localStyles.toast}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 1 }}
-              >
-                <View style={localStyles.toastContent}>
+          {(() => {
+            const validation = getPasswordValidationDetails(password);
+            return (
+              <>
+                <View style={localStyles.validationItem}>
                   <MCIcon
                     name={
-                      localToast.type === "success"
+                      validation.minLength ? "check-circle" : "circle-outline"
+                    }
+                    size={16}
+                    color={validation.minLength ? "#4CAF50" : "#666"}
+                  />
+                  <Text
+                    style={[
+                      localStyles.validationText,
+                      validation.minLength && localStyles.validationTextValid,
+                    ]}
+                  >
+                    {t("auth_modal.password_min_length")}
+                  </Text>
+                </View>
+                <View style={localStyles.validationItem}>
+                  <MCIcon
+                    name={
+                      validation.maxLength ? "check-circle" : "circle-outline"
+                    }
+                    size={16}
+                    color={validation.maxLength ? "#4CAF50" : "#666"}
+                  />
+                  <Text
+                    style={[
+                      localStyles.validationText,
+                      validation.maxLength && localStyles.validationTextValid,
+                    ]}
+                  >
+                    Maximum 50 caractères
+                  </Text>
+                </View>
+                <View style={localStyles.validationItem}>
+                  <MCIcon
+                    name={
+                      validation.hasLowercase
                         ? "check-circle"
-                        : localToast.type === "error"
+                        : "circle-outline"
+                    }
+                    size={16}
+                    color={validation.hasLowercase ? "#4CAF50" : "#666"}
+                  />
+                  <Text
+                    style={[
+                      localStyles.validationText,
+                      validation.hasLowercase &&
+                        localStyles.validationTextValid,
+                    ]}
+                  >
+                    Contient une minuscule
+                  </Text>
+                </View>
+                <View style={localStyles.validationItem}>
+                  <MCIcon
+                    name={
+                      validation.hasUppercase
+                        ? "check-circle"
+                        : "circle-outline"
+                    }
+                    size={16}
+                    color={validation.hasUppercase ? "#4CAF50" : "#666"}
+                  />
+                  <Text
+                    style={[
+                      localStyles.validationText,
+                      validation.hasUppercase &&
+                        localStyles.validationTextValid,
+                    ]}
+                  >
+                    Contient une majuscule
+                  </Text>
+                </View>
+                <View style={localStyles.validationItem}>
+                  <MCIcon
+                    name={
+                      validation.hasNumbers ? "check-circle" : "circle-outline"
+                    }
+                    size={16}
+                    color={validation.hasNumbers ? "#4CAF50" : "#666"}
+                  />
+                  <Text
+                    style={[
+                      localStyles.validationText,
+                      validation.hasNumbers && localStyles.validationTextValid,
+                    ]}
+                  >
+                    Contient des chiffres
+                  </Text>
+                </View>
+                <View style={localStyles.validationItem}>
+                  <MCIcon
+                    name={
+                      validation.hasSpecialChars
+                        ? "check-circle"
+                        : "circle-outline"
+                    }
+                    size={16}
+                    color={validation.hasSpecialChars ? "#4CAF50" : "#666"}
+                  />
+                  <Text
+                    style={[
+                      localStyles.validationText,
+                      validation.hasSpecialChars &&
+                        localStyles.validationTextValid,
+                    ]}
+                  >
+                    Contient des caractères spéciaux
+                  </Text>
+                </View>
+              </>
+            );
+          })()}
+        </View>
+      )}
+
+      {/* Bouton principal */}
+      <Pressable
+        style={[
+          localStyles.authButton,
+          isLoading && localStyles.authButtonDisabled,
+        ]}
+        onPress={() => {
+          // Validation directe des valeurs actuelles, pas des états
+          const currentEmail = email.trim();
+          const currentPassword = password.trim();
+          const currentFirstName = firstName.trim();
+
+          handleAuthenticationWithValues(
+            currentEmail,
+            currentPassword,
+            currentFirstName,
+          );
+        }}
+        disabled={isLoading}
+      >
+        {isLoading ? (
+          <ActivityIndicator size="small" color="#FFF" />
+        ) : (
+          <>
+            <MCIcon
+              name={isLogin ? "login" : "account-plus"}
+              size={20}
+              color="#FFF"
+            />
+            <Text style={localStyles.authButtonText}>
+              {isLogin
+                ? t("auth_modal.login_button")
+                : t("auth_modal.register_button")}
+            </Text>
+          </>
+        )}
+      </Pressable>
+
+      {/* 🚀 SUPPRIMÉ : Bouton Mode Test Premium supprimé car il embrouille la logique */}
+
+      {/* Informations */}
+      <View style={localStyles.infoContainer}>
+        <MCIcon name="information" size={16} color="#666" />
+        <Text style={localStyles.infoText}>
+          {isLogin
+            ? t("auth_modal.info_text_login")
+            : t("auth_modal.info_text_register")}
+        </Text>
+      </View>
+
+      {/* 🚀 NOUVEAU : Toast local pour la modal */}
+      {localToast && (
+        <Animated.View style={[localStyles.toastContainer, toastAnimatedStyle]}>
+          <Pressable onPress={hideLocalToast}>
+            <LinearGradient
+              colors={
+                localToast.type === "success"
+                  ? ["#4CAF50", "#2E7D32"]
+                  : localToast.type === "error"
+                    ? ["#f44336", "#c62828"]
+                    : ["#2196F3", "#1565C0"]
+              }
+              style={localStyles.toast}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 1 }}
+            >
+              <View style={localStyles.toastContent}>
+                <MCIcon
+                  name={
+                    localToast.type === "success"
+                      ? "check-circle"
+                      : localToast.type === "error"
                         ? "alert-circle"
                         : "information"
-                    }
-                    size={24}
-                    color="#fff"
-                    style={localStyles.toastIcon}
-                  />
-                  <View style={localStyles.toastTextContainer}>
-                    <Text style={localStyles.toastTitle}>
-                      {localToast.title}
+                  }
+                  size={24}
+                  color="#fff"
+                  style={localStyles.toastIcon}
+                />
+                <View style={localStyles.toastTextContainer}>
+                  <Text style={localStyles.toastTitle}>{localToast.title}</Text>
+                  {localToast.message && (
+                    <Text style={localStyles.toastMessage}>
+                      {localToast.message}
                     </Text>
-                    {localToast.message && (
-                      <Text style={localStyles.toastMessage}>
-                        {localToast.message}
-                      </Text>
-                    )}
-                  </View>
+                  )}
                 </View>
-              </LinearGradient>
-            </Pressable>
-          </Animated.View>
-        )}
+              </View>
+            </LinearGradient>
+          </Pressable>
+        </Animated.View>
+      )}
 
-        {/* 🚀 SUPPRIMÉ : Modal React Native ne fonctionne pas dans cet environnement */}
+      {/* 🚀 SUPPRIMÉ : Modal React Native ne fonctionne pas dans cet environnement */}
     </>
   );
 

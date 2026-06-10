@@ -28,6 +28,15 @@ $subscriptionType = $input['subscriptionType'];
 $name = $input['name'] ?? 'Utilisateur Apple';
 $language = $input['language'] ?? 'fr';
 $transactionId = $input['transactionId'] ?? 'apple_' . bin2hex(random_bytes(8));
+$originalTransactionId = isset($input['original_transaction_id'])
+    ? trim((string)$input['original_transaction_id'])
+    : '';
+$expirationAtMs = $input['expiration_at_ms'] ?? null;
+
+// original_transaction_id Apple = clé stable pour les webhooks RENEWAL (comme sub_xxx Stripe)
+if ($originalTransactionId !== '') {
+    $transactionId = $originalTransactionId;
+}
 
 // Fonctionnalités premium par défaut en JSON
 $premiumFeatures = json_encode([
@@ -46,14 +55,18 @@ try {
     $stmt->execute([$email]);
     $existingUser = $stmt->fetch();
     
-    // Calculer l'expiration
-    $expiryInterval = match($subscriptionType) {
-        'monthly' => '+1 month',
-        'yearly' => '+1 year',
-        'family' => '+1 year',
-        default => '+1 year'
-    };
-    $expiryDate = date('Y-m-d H:i:s', strtotime($expiryInterval));
+    // Expiration : RevenueCat/store si fournie, sinon estimation
+    if ($expirationAtMs !== null && is_numeric($expirationAtMs)) {
+        $expiryDate = date('Y-m-d H:i:s', (int) floor((int)$expirationAtMs / 1000));
+    } else {
+        $expiryInterval = match($subscriptionType) {
+            'monthly' => '+1 month',
+            'yearly' => '+1 year',
+            'family' => '+1 year',
+            default => '+1 year'
+        };
+        $expiryDate = date('Y-m-d H:i:s', strtotime($expiryInterval));
+    }
 
     if ($existingUser) {
         // Mettre à jour l'utilisateur existant

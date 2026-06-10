@@ -9,6 +9,7 @@ import {
   Alert,
   Platform,
   Linking,
+  InteractionManager,
 } from "react-native";
 import { LinearGradient } from "@/components/ui/LinearGradientView";
 import { MCIcon } from "@/components/icons/AppVectorIcons";
@@ -90,7 +91,7 @@ const PremiumPaymentScreen: React.FC = () => {
   const { push, back } = useRouter();
 
   const [selectedPlan, setSelectedPlan] = useState<SubscriptionPlan>(
-    subscriptionPlans[0]
+    subscriptionPlans[0],
   );
   const [isLoading, setIsLoading] = useState(false);
   const [pendingRegistration, setPendingRegistration] = useState<any>(null);
@@ -101,50 +102,65 @@ const PremiumPaymentScreen: React.FC = () => {
   // Récupérer les données d'inscription en attente + offres IAP (iOS)
   useFocusEffect(
     useCallback(() => {
-      const loadScreenData = async () => {
-        try {
-          const registrationData = await AsyncStorage.getItem(
-            "pending_registration"
-          );
-          console.log("🔍 Données d'inscription trouvées (focus):", registrationData);
-          if (registrationData) {
-            const parsedData = JSON.parse(registrationData);
-            console.log("✅ Données parsées (focus):", parsedData);
-            setPendingRegistration(parsedData);
-            if (Platform.OS === "ios" && parsedData.email) {
-              try {
-                const iap = IapService.getInstance();
-                await iap.login(String(parsedData.email).trim());
-              } catch (e) {
-                console.warn("🍎 [IAP] RevenueCat logIn (écran paiement):", e);
-              }
-            }
-          } else {
-            console.log("❌ Aucune donnée d'inscription trouvée (focus)");
-          }
+      let cancelled = false;
 
-          if (Platform.OS === "ios") {
+      const handle = InteractionManager.runAfterInteractions(() => {
+        const loadScreenData = async () => {
+          try {
+            const registrationData = await AsyncStorage.getItem(
+              "pending_registration",
+            );
+            if (cancelled) return;
+
+            console.log(
+              "🔍 Données d'inscription trouvées (focus):",
+              registrationData,
+            );
+            if (registrationData) {
+              const parsedData = JSON.parse(registrationData);
+              console.log("✅ Données parsées (focus):", parsedData);
+              setPendingRegistration(parsedData);
+              if (Platform.OS === "ios" && parsedData.email) {
+                try {
+                  const iap = IapService.getInstance();
+                  await iap.linkAccount(String(parsedData.email).trim());
+                } catch (e) {
+                  console.warn("🍎 [IAP] RevenueCat linkAccount (paiement):", e);
+                }
+              }
+            } else {
+              console.log("❌ Aucune donnée d'inscription trouvée (focus)");
+            }
+
+            if (cancelled || Platform.OS !== "ios") return;
+
             try {
               const iapService = IapService.getInstance();
               const offerings = await iapService.getOfferings();
+              if (cancelled) return;
               if (offerings?.availablePackages) {
                 setIapPackages(offerings.availablePackages);
                 console.log(
                   "🍎 [IAP] Offres chargées:",
-                  offerings.availablePackages.length
+                  offerings.availablePackages.length,
                 );
               }
             } catch (error) {
               console.error("❌ [IAP] Erreur chargement offres:", error);
             }
+          } catch {
+            console.error("❌ Erreur chargement données inscription (focus)");
           }
-        } catch {
-          console.error("❌ Erreur chargement données inscription (focus)");
-        }
-      };
+        };
 
-      void loadScreenData();
-    }, [])
+        void loadScreenData();
+      });
+
+      return () => {
+        cancelled = true;
+        handle.cancel();
+      };
+    }, []),
   );
 
   const handlePlanSelect = (plan: SubscriptionPlan) => {
@@ -175,23 +191,33 @@ const PremiumPaymentScreen: React.FC = () => {
             selectedPlan.id as keyof typeof IAP_CONFIG.products
           ]?.id;
         const pack = iapPackages.find(
-          (p) => p.product.identifier === productId
+          (p) => p.product.identifier === productId,
         );
 
         if (!pack) {
           throw new Error("Produit non trouvé sur l'App Store.");
         }
 
-        const success = await iapService.purchasePackage(pack);
+        const buyerEmail = String(pendingRegistration.email).trim();
+        try {
+          await iapService.linkAccount(buyerEmail);
+        } catch (loginErr) {
+          console.warn("🍎 [IAP] RevenueCat linkAccount avant achat:", loginErr);
+        }
 
-        if (success) {
+        const purchaseSnap = await iapService.purchasePackage(pack);
+
+        if (purchaseSnap) {
           console.log("🍎 [IAP] Achat réussi via Apple");
 
           try {
-            await iapService.login(String(pendingRegistration.email).trim());
+            await iapService.linkAccount(buyerEmail);
           } catch (loginErr) {
-            console.warn("🍎 [IAP] RevenueCat logIn après achat:", loginErr);
+            console.warn("🍎 [IAP] RevenueCat linkAccount après achat:", loginErr);
           }
+
+          const stableTxnId =
+            purchaseSnap.originalTransactionId ?? pack.product.identifier;
 
           // 🚀 SYNCHRONISATION BACKEND (Modèle Stripe)
           // On informe notre backend de l'achat pour créer/mettre à jour le compte
@@ -207,9 +233,12 @@ const PremiumPaymentScreen: React.FC = () => {
                   subscriptionType: selectedPlan.id,
                   name: pendingRegistration.user_first_name,
                   language: pendingRegistration.language || "fr",
-                  transactionId: pack.product.identifier, // Ou un ID de transaction réel de RevenueCat
+                  transactionId: stableTxnId,
+                  original_transaction_id: purchaseSnap.originalTransactionId,
+                  expiration_at_ms: purchaseSnap.expirationAtMs,
+                  product_id: purchaseSnap.productId,
                 }),
-              }
+              },
             );
 
             if (!registerResponse.ok) {
@@ -218,7 +247,7 @@ const PremiumPaymentScreen: React.FC = () => {
           } catch (syncError) {
             console.error(
               "❌ Erreur réseau sync backend Apple IAP:",
-              syncError
+              syncError,
             );
           }
 
@@ -230,7 +259,7 @@ const PremiumPaymentScreen: React.FC = () => {
               subscription_type: selectedPlan.id,
               plan_price: selectedPlan.price,
               payment_method: "apple_iap",
-            })
+            }),
           );
           // Rediriger vers le succès
           push("/payment-success");
@@ -263,7 +292,7 @@ const PremiumPaymentScreen: React.FC = () => {
             successUrl: "prayertimesapp://payment-success",
             cancelUrl: "prayertimesapp://payment-cancel",
           }),
-        }
+        },
       );
 
       console.log("🔍 Données envoyées à l'API:", {
@@ -311,7 +340,7 @@ const PremiumPaymentScreen: React.FC = () => {
           } catch (secondError) {
             console.log("❌ Erreur parsing dernier JSON:", secondError);
             throw new Error(
-              "Réponse invalide du serveur - impossible de parser JSON"
+              "Réponse invalide du serveur - impossible de parser JSON",
             );
           }
         } else {
@@ -324,7 +353,7 @@ const PremiumPaymentScreen: React.FC = () => {
                 if (testJson.sessionUrl) {
                   console.log(
                     "🔍 JSON avec sessionUrl trouvé:",
-                    allJsonMatches[i]
+                    allJsonMatches[i],
                   );
                   responseData = testJson;
                   break;
@@ -337,7 +366,7 @@ const PremiumPaymentScreen: React.FC = () => {
 
           if (!responseData) {
             throw new Error(
-              "Réponse invalide du serveur - aucun JSON valide trouvé"
+              "Réponse invalide du serveur - aucun JSON valide trouvé",
             );
           }
         }
@@ -352,7 +381,7 @@ const PremiumPaymentScreen: React.FC = () => {
           ...pendingRegistration,
           subscription_type: selectedPlan.id,
           plan_price: selectedPlan.price,
-        })
+        }),
       );
 
       // Ouvrir Stripe Checkout dans le navigateur
@@ -399,20 +428,20 @@ const PremiumPaymentScreen: React.FC = () => {
                   } catch (clipboardError) {
                     console.error(
                       "❌ Erreur copie presse-papiers:",
-                      clipboardError
+                      clipboardError,
                     );
                     Alert.alert("Erreur", "Impossible de copier l'URL");
                   }
                 },
               },
-            ]
+            ],
           );
         } else {
           Alert.alert(
             "Erreur",
             `Impossible d'ouvrir la page de paiement: ${
               error instanceof Error ? error.message : "Erreur inconnue"
-            }`
+            }`,
           );
         }
       }
@@ -422,7 +451,7 @@ const PremiumPaymentScreen: React.FC = () => {
         error instanceof Error ? error.message : "Erreur inconnue";
       Alert.alert(
         "Erreur",
-        `Impossible d'initialiser le paiement: ${errorMessage}. Veuillez réessayer.`
+        `Impossible d'initialiser le paiement: ${errorMessage}. Veuillez réessayer.`,
       );
     } finally {
       setIsLoading(false);
@@ -443,10 +472,7 @@ const PremiumPaymentScreen: React.FC = () => {
               Aucune donnée d&apos;inscription trouvée. Veuillez retourner à la
               page d&apos;inscription.
             </Text>
-            <Pressable
-              style={styles.backButton}
-              onPress={() => back()}
-            >
+            <Pressable style={styles.backButton} onPress={() => back()}>
               <Text style={styles.backButtonText}>Retour</Text>
             </Pressable>
           </View>
@@ -457,7 +483,7 @@ const PremiumPaymentScreen: React.FC = () => {
 
   console.log(
     "✅ Affichage de la page de paiement avec données:",
-    pendingRegistration
+    pendingRegistration,
   );
 
   return (
@@ -488,8 +514,8 @@ const PremiumPaymentScreen: React.FC = () => {
                   selectedPlan.id === plan.id
                     ? [colors.primary, colors.accent]
                     : plan.comingSoon
-                    ? [colors.surfaceVariant, colors.surfaceVariant]
-                    : [colors.surface, colors.surface]
+                      ? [colors.surfaceVariant, colors.surfaceVariant]
+                      : [colors.surface, colors.surface]
                 }
                 style={styles.cardGradient}
               >
@@ -581,14 +607,9 @@ const PremiumPaymentScreen: React.FC = () => {
             <ActivityIndicator color={colors.text} />
           ) : (
             <>
-              <MCIcon
-                name="credit-card"
-                size={20}
-                color={colors.text}
-              />
+              <MCIcon name="credit-card" size={20} color={colors.text} />
               <Text style={styles.payButtonText}>
-                Payer{" "}
-                {formatPrice(selectedPlan.price, "EUR")}
+                Payer {formatPrice(selectedPlan.price, "EUR")}
               </Text>
             </>
           )}
@@ -607,7 +628,9 @@ const PremiumPaymentScreen: React.FC = () => {
             <Text
               style={styles.legalLink}
               onPress={() =>
-                Linking.openURL("https://www.myadhanapp.com/public/terms-of-service.html")
+                Linking.openURL(
+                  "https://www.myadhanapp.com/public/terms-of-service.html",
+                )
               }
             >
               Conditions d&apos;Utilisation
@@ -617,7 +640,7 @@ const PremiumPaymentScreen: React.FC = () => {
               style={styles.legalLink}
               onPress={() =>
                 Linking.openURL(
-                  "https://www.myadhanapp.com/public/privacy-policy.html"
+                  "https://www.myadhanapp.com/public/privacy-policy.html",
                 )
               }
             >
@@ -640,7 +663,10 @@ const PremiumPaymentScreen: React.FC = () => {
   );
 };
 
-const getStyles = (colors: any, currentTheme: "light" | "dark" | "morning" | "sunset") => {
+const getStyles = (
+  colors: any,
+  currentTheme: "light" | "dark" | "morning" | "sunset",
+) => {
   const isLightTheme = currentTheme === "light" || currentTheme === "morning";
   return StyleSheet.create({
     container: {
@@ -673,8 +699,7 @@ const getStyles = (colors: any, currentTheme: "light" | "dark" | "morning" | "su
       overflow: "hidden",
       boxShadow: "0px 2px 4px rgba(0,0,0,0.1)",
     },
-    selectedPlanCard: {
-    },
+    selectedPlanCard: {},
     popularPlanCard: {
       borderWidth: 2,
       borderColor: colors.primary,
