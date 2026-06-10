@@ -10,7 +10,6 @@ import React, {
 import {
   ActivityIndicator,
   Alert,
-  ImageBackground,
   PermissionsAndroid,
   Platform,
   ScrollView,

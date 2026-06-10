@@ -1,6 +1,12 @@
 import React from "react";
 import { render, fireEvent, waitFor } from "@testing-library/react-native";
 import { Alert, Linking } from "react-native";
+
+jest.mock("../../locales/i18n", () => ({
+  t: (key: string) => key,
+  language: "fr",
+}));
+
 import AboutScreen from "../../screens/AboutScreen";
 
 // Mock des dépendances
@@ -15,6 +21,7 @@ jest.mock("expo-constants", () => ({
 
 jest.mock("react-i18next", () => ({
   useTranslation: () => ({
+    i18n: { language: "fr" },
     t: (key: string) => {
       const translations: { [key: string]: string } = {
         "abouts.email_template":

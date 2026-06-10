@@ -68,7 +68,9 @@ export class IapService {
     if (this.lastLinkedEmail === normalized && this.isConfigured) return;
 
     const run = async () => {
-      await this.init();
+      if (!this.isConfigured) {
+        await this.init();
+      }
       if (!this.isConfigured) return;
 
       try {

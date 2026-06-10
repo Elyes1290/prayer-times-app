@@ -1,9 +1,9 @@
 import * as Location from "expo-location";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Image } from "expo-image";
 import {
   AppState,
-  Image,
   StyleSheet,
   Text,
   View,
@@ -103,6 +103,63 @@ const AVAILABLE_COMPASSES = {
 
 const KAABA_LAT = 21.4225;
 const KAABA_LNG = 39.8262;
+
+type CompassConfig = (typeof AVAILABLE_COMPASSES)[CompassType];
+
+type CompassOptionRowProps = {
+  compass: CompassConfig;
+  isLocked: boolean;
+  isSelected: boolean;
+  primaryColor: string;
+  onSelect: (compassId: CompassType) => void;
+  styles: ReturnType<typeof getStyles>;
+};
+
+const CompassOptionRow = React.memo(function CompassOptionRow({
+  compass,
+  isLocked,
+  isSelected,
+  primaryColor,
+  onSelect,
+  styles,
+}: CompassOptionRowProps) {
+  return (
+    <Pressable
+      style={[
+        styles.compassOption,
+        isSelected && styles.selectedCompassOption,
+        isLocked && styles.lockedCompassOption,
+      ]}
+      onPress={() => !isLocked && onSelect(compass.id)}
+      disabled={isLocked}
+    >
+      <View style={styles.compassPreview}>
+        <Image source={compass.image} style={styles.compassThumbnail} />
+        {isLocked && (
+          <View style={styles.lockOverlay}>
+            <IonIcon name="lock-closed" size={24} color="#FFD700" />
+          </View>
+        )}
+      </View>
+      <View style={styles.compassInfo}>
+        <Text
+          style={[styles.compassName, isSelected && styles.selectedCompassName]}
+        >
+          {compass.name}
+        </Text>
+        {compass.premium && (
+          <View style={styles.premiumBadge}>
+            <IonIcon name="star" size={12} color="#FFD700" />
+            <Text style={styles.premiumText}>Premium</Text>
+          </View>
+        )}
+      </View>
+      {isSelected && (
+        <IonIcon name="checkmark-circle" size={24} color={primaryColor} />
+      )}
+    </Pressable>
+  );
+});
 
 
 function toRadians(degrees: number): number {
@@ -460,8 +517,7 @@ export default function QiblaScreen() {
     void loadQiblaPreferences();
   }, [loadQiblaPreferences]);
 
-  // 🧭 Sauvegarder le choix de boussole
-  const selectCompass = async (compassId: CompassType) => {
+  const selectCompass = useCallback(async (compassId: CompassType) => {
     try {
       setSelectedCompass(compassId);
       await AsyncStorage.setItem("@selected_compass", compassId);
@@ -469,7 +525,21 @@ export default function QiblaScreen() {
     } catch (err) {
       console.error("Erreur sauvegarde boussole:", err);
     }
-  };
+  }, []);
+
+  const renderCompassOption = useCallback(
+    ({ item: compass }: { item: CompassConfig }) => (
+      <CompassOptionRow
+        compass={compass}
+        isLocked={compass.premium && !user?.isPremium}
+        isSelected={selectedCompass === compass.id}
+        primaryColor={colors.primary}
+        onSelect={selectCompass}
+        styles={styles}
+      />
+    ),
+    [user?.isPremium, selectedCompass, colors.primary, selectCompass, styles]
+  );
 
   const compassSensorEnabled =
     locationPermissionGranted === true &&
@@ -572,6 +642,11 @@ export default function QiblaScreen() {
     }
   }, [userDeniedPermission]);
 
+  const initializeQiblaRef = useRef(initializeQibla);
+  useEffect(() => {
+    initializeQiblaRef.current = initializeQibla;
+  }, [initializeQibla]);
+
   useEffect(() => {
     if (!userDeniedPermission) {
       void initializeQibla();
@@ -603,14 +678,14 @@ export default function QiblaScreen() {
         locationPermissionGranted === false &&
         !userDeniedPermission
       ) {
-        initializeQibla();
+        void initializeQiblaRef.current();
       }
     });
 
     return () => {
       subscription.remove();
     };
-  }, [locationPermissionGranted, initializeQibla, userDeniedPermission]);
+  }, [locationPermissionGranted, userDeniedPermission]);
 
   return (
     <ThemedImageBackground style={styles.background}>
@@ -735,61 +810,7 @@ export default function QiblaScreen() {
                 style={styles.compassList}
                 data={Object.values(AVAILABLE_COMPASSES)}
                 keyExtractor={(compass) => compass.id}
-                renderItem={({ item: compass }) => {
-                  const isLocked = compass.premium && !user?.isPremium;
-                  const isSelected = selectedCompass === compass.id;
-
-                  return (
-                    <Pressable
-                      style={[
-                        styles.compassOption,
-                        isSelected && styles.selectedCompassOption,
-                        isLocked && styles.lockedCompassOption,
-                      ]}
-                      onPress={() => !isLocked && selectCompass(compass.id)}
-                      disabled={isLocked}
-                    >
-                      <View style={styles.compassPreview}>
-                        <Image
-                          source={compass.image}
-                          style={styles.compassThumbnail}
-                        />
-                        {isLocked && (
-                          <View style={styles.lockOverlay}>
-                            <IonIcon
-                              name="lock-closed"
-                              size={24}
-                              color="#FFD700"
-                            />
-                          </View>
-                        )}
-                      </View>
-                      <View style={styles.compassInfo}>
-                        <Text
-                          style={[
-                            styles.compassName,
-                            isSelected && styles.selectedCompassName,
-                          ]}
-                        >
-                          {compass.name}
-                        </Text>
-                        {compass.premium && (
-                          <View style={styles.premiumBadge}>
-                            <IonIcon name="star" size={12} color="#FFD700" />
-                            <Text style={styles.premiumText}>Premium</Text>
-                          </View>
-                        )}
-                      </View>
-                      {isSelected && (
-                        <IonIcon
-                          name="checkmark-circle"
-                          size={24}
-                          color={colors.primary} // 🌅 Utilise la couleur du thème actif
-                        />
-                      )}
-                    </Pressable>
-                  );
-                }}
+                renderItem={renderCompassOption}
               />
             </View>
           </SafeAreaView>

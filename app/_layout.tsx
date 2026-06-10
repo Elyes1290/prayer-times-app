@@ -732,6 +732,7 @@ function TabLayoutContent() {
         backgroundColor="transparent"
       />
       <Tabs
+        key={forceRefresh}
         backBehavior="history"
         screenOptions={{
           headerShown: false,

@@ -145,49 +145,45 @@ export default function MosqueScreen() {
                     "Adresse non disponible"
                   );
                   if (element.tags) {
+                    const tags = element.tags;
+                    const mosqueName = tags.name;
                     const addressParts = [];
 
                     // ÉTAPE 1: Numéro + rue (priorité max)
-                    if (
-                      element.tags["addr:housenumber"] &&
-                      element.tags["addr:street"]
-                    ) {
+                    if (tags["addr:housenumber"] && tags["addr:street"]) {
                       addressParts.push(
-                        `${element.tags["addr:housenumber"]} ${element.tags["addr:street"]}`
+                        `${tags["addr:housenumber"]} ${tags["addr:street"]}`
                       );
-                    } else if (element.tags["addr:street"]) {
-                      addressParts.push(element.tags["addr:street"]);
+                    } else if (tags["addr:street"]) {
+                      addressParts.push(tags["addr:street"]);
                     }
 
                     // ÉTAPE 2: Localité (ordre de préférence intelligent)
                     const locality =
-                      element.tags["addr:city"] ||
-                      element.tags["addr:town"] ||
-                      element.tags["addr:village"] ||
-                      element.tags["addr:suburb"] ||
-                      element.tags["addr:district"] ||
-                      element.tags["addr:quarter"];
+                      tags["addr:city"] ||
+                      tags["addr:town"] ||
+                      tags["addr:village"] ||
+                      tags["addr:suburb"] ||
+                      tags["addr:district"] ||
+                      tags["addr:quarter"];
 
                     if (locality) {
                       addressParts.push(locality);
                     }
 
                     // ÉTAPE 3: Code postal
-                    if (element.tags["addr:postcode"]) {
-                      addressParts.push(element.tags["addr:postcode"]);
+                    if (tags["addr:postcode"]) {
+                      addressParts.push(tags["addr:postcode"]);
                     }
 
                     // ÉTAPE 4: Canton/État
-                    if (element.tags["addr:state"]) {
-                      addressParts.push(element.tags["addr:state"]);
+                    if (tags["addr:state"]) {
+                      addressParts.push(tags["addr:state"]);
                     }
 
                     // ÉTAPE 5: Pays (sauf Suisse)
-                    if (
-                      element.tags["addr:country"] &&
-                      element.tags["addr:country"] !== "CH"
-                    ) {
-                      addressParts.push(element.tags["addr:country"]);
+                    if (tags["addr:country"] && tags["addr:country"] !== "CH") {
+                      addressParts.push(tags["addr:country"]);
                     }
 
                     // ASSEMBLAGE: Si on a des parties d'adresse
@@ -198,8 +194,7 @@ export default function MosqueScreen() {
                       const fallbackOptions = [];
 
                       // Fallback 1: Nom de la mosquée + localité approximative
-                      if (element.tags.name) {
-                        // Essayer d'extraire une localité des coordonnées (très basique)
+                      if (mosqueName) {
                         if (
                           lat >= 46.0 &&
                           lat <= 47.5 &&
@@ -207,7 +202,7 @@ export default function MosqueScreen() {
                           lon <= 8.5
                         ) {
                           fallbackOptions.push(
-                            `${element.tags.name}, Région Genève-Lausanne`
+                            `${mosqueName}, Région Genève-Lausanne`
                           );
                         } else if (
                           lat >= 47.0 &&
@@ -216,18 +211,18 @@ export default function MosqueScreen() {
                           lon <= 9.0
                         ) {
                           fallbackOptions.push(
-                            `${element.tags.name}, Région Zurich-Bâle`
+                            `${mosqueName}, Région Zurich-Bâle`
                           );
                         } else {
-                          fallbackOptions.push(`${element.tags.name}, Suisse`);
+                          fallbackOptions.push(`${mosqueName}, Suisse`);
                         }
                       }
 
                       // Fallback 2: Quartier ou district seuls
                       const nearbyArea =
-                        element.tags["addr:quarter"] ||
-                        element.tags["addr:district"] ||
-                        element.tags["addr:suburb"];
+                        tags["addr:quarter"] ||
+                        tags["addr:district"] ||
+                        tags["addr:suburb"];
                       if (nearbyArea) {
                         fallbackOptions.push(nearbyArea);
                       }

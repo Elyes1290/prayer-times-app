@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, useMemo } from "react";
 import {
   View,
   Text,
@@ -534,6 +534,13 @@ export default function DebugNotificationsScreen() {
     loadPlaybackLogs();
   }, [fetchDebugInfo, loadBackgroundLogs, loadPlaybackLogs]);
 
+  const refreshControl = useMemo(
+    () => (
+      <RefreshControl refreshing={loading} onRefresh={fetchDebugInfo} />
+    ),
+    [loading, fetchDebugInfo],
+  );
+
   if (!isDebugAllowed) return null;
 
   return (
@@ -542,9 +549,7 @@ export default function DebugNotificationsScreen() {
 
       <ScrollView
         style={styles.scrollView}
-        refreshControl={
-          <RefreshControl refreshing={loading} onRefresh={fetchDebugInfo} />
-        }
+        refreshControl={refreshControl}
       >
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Module Natif</Text>
@@ -561,9 +566,9 @@ export default function DebugNotificationsScreen() {
         </View>
 
         {/* 🕌 DEBUG: Horaires de prière et calcul de la prochaine */}
-        <View style={styles.section}>
+        <View style={styles.section} suppressHydrationWarning>
           <Text style={styles.sectionTitle}>🕌 Debug Horaires de Prière</Text>
-          <Text style={styles.logText}>
+          <Text style={styles.logText} suppressHydrationWarning>
             ⏰ Heure système: {new Date().toLocaleString("fr-FR")}
           </Text>
           <Text style={styles.logText}>
@@ -590,6 +595,7 @@ export default function DebugNotificationsScreen() {
               >
                 📖 Horaires du jour:
               </Text>
+              <View suppressHydrationWarning>
               {["fajr", "sunrise", "dhuhr", "asr", "maghrib", "isha"].map(
                 (prayer) => {
                   const prayerTime = (currentPrayerTimes as any)[prayer];
@@ -612,6 +618,7 @@ export default function DebugNotificationsScreen() {
                   );
                 }
               )}
+              </View>
 
               <Text
                 style={[
@@ -621,6 +628,7 @@ export default function DebugNotificationsScreen() {
               >
                 ⏭️ Calcul Prochaine Prière:
               </Text>
+              <View suppressHydrationWarning>
               {(() => {
                 const now = new Date();
                 const prayers = ["Fajr", "Dhuhr", "Asr", "Maghrib", "Isha"];
@@ -674,6 +682,7 @@ export default function DebugNotificationsScreen() {
                   );
                 }
               })()}
+              </View>
             </>
           ) : (
             <Text style={[styles.logText, { color: "red" }]}>

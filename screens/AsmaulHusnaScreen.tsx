@@ -6,7 +6,6 @@ import {
   FlatList,
   TextInput,
   Pressable,
-  ImageBackground,
 } from "react-native";
 import Animated, {
   interpolate,

@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { debugLog, errorLog } from "./logger";
-import { PremiumContent } from "./premiumContent";
+import type { PremiumContent } from "./premiumContentTypes";
 
 /**
  * 🏠 Gestionnaire de Serveur Audio Personnel

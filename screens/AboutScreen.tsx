@@ -1,10 +1,10 @@
 import React, { useState } from "react";
+import { Image } from "expo-image";
 import {
   View,
   Text,
   StyleSheet,
   Linking,
-  Image,
   Pressable,
   ScrollView,
 } from "react-native";

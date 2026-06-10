@@ -41,7 +41,9 @@ export const useNativeDownload = (
   const [downloadState, setDownloadState] = useState<
     Map<string, DownloadState>
   >(new Map());
-  const [isNativeAvailable, setIsNativeAvailable] = useState(false);
+  const [isNativeAvailable] = useState(() =>
+    nativeDownloadManager.isAvailable(),
+  );
   const [activeDownloadsCount, setActiveDownloadsCount] = useState(0);
 
   const handleDownloadCompleted = useCallback(
@@ -177,94 +179,113 @@ export const useNativeDownload = (
     }
   }, []);
 
-  useEffect(() => {
-    setIsNativeAvailable(nativeDownloadManager.isAvailable());
+  const handleDownloadStarted = useCallback((event: DownloadEvent) => {
+    setDownloadState((prev) => {
+      const newState = new Map(prev);
+      newState.set(event.contentId, {
+        isDownloading: true,
+        progress: 0,
+        error: null,
+      });
+      return newState;
+    });
+    setActiveDownloadsCount((prev) => prev + 1);
+  }, []);
 
+  const handleDownloadProgress = useCallback((event: DownloadEvent) => {
+    setDownloadState((prev) => {
+      const newState = new Map(prev);
+      const currentState = newState.get(event.contentId);
+      if (currentState) {
+        newState.set(event.contentId, {
+          ...currentState,
+          progress: event.progress,
+        });
+      }
+      return newState;
+    });
+  }, []);
+
+  const handleDownloadFailed = useCallback((event: DownloadEvent) => {
+    setDownloadState((prev) => {
+      const newState = new Map(prev);
+      newState.set(event.contentId, {
+        isDownloading: false,
+        progress: 0,
+        error: "Download failed",
+      });
+      return newState;
+    });
+    setActiveDownloadsCount((prev) => Math.max(0, prev - 1));
+  }, []);
+
+  const handleDownloadCancelled = useCallback((event: DownloadEvent) => {
+    setDownloadState((prev) => {
+      const newState = new Map(prev);
+      newState.set(event.contentId, {
+        isDownloading: false,
+        progress: 0,
+        error: null,
+      });
+      return newState;
+    });
+    setActiveDownloadsCount((prev) => Math.max(0, prev - 1));
+  }, []);
+
+  const handleDownloadStartedRef = useRef(handleDownloadStarted);
+  const handleDownloadProgressRef = useRef(handleDownloadProgress);
+  const handleDownloadFailedRef = useRef(handleDownloadFailed);
+  const handleDownloadCancelledRef = useRef(handleDownloadCancelled);
+  const restoreActiveDownloadsRef = useRef(restoreActiveDownloads);
+
+  handleDownloadStartedRef.current = handleDownloadStarted;
+  handleDownloadProgressRef.current = handleDownloadProgress;
+  handleDownloadFailedRef.current = handleDownloadFailed;
+  handleDownloadCancelledRef.current = handleDownloadCancelled;
+  restoreActiveDownloadsRef.current = restoreActiveDownloads;
+
+  useEffect(() => {
     if (!nativeDownloadManager.isAvailable()) {
-      // console.log("⚠️ Module de téléchargement natif non disponible");
       return;
     }
 
-    restoreActiveDownloads();
+    void restoreActiveDownloadsRef.current();
 
-    const handleDownloadStarted = (event: DownloadEvent) => {
-      setDownloadState((prev) => {
-        const newState = new Map(prev);
-        newState.set(event.contentId, {
-          isDownloading: true,
-          progress: 0,
-          error: null,
-        });
-        return newState;
-      });
-      setActiveDownloadsCount((prev) => prev + 1);
+    const onDownloadStarted = (event: DownloadEvent) => {
+      handleDownloadStartedRef.current(event);
     };
-
-    const handleDownloadProgress = (event: DownloadEvent) => {
-      setDownloadState((prev) => {
-        const newState = new Map(prev);
-        const currentState = newState.get(event.contentId);
-        if (currentState) {
-          newState.set(event.contentId, {
-            ...currentState,
-            progress: event.progress,
-          });
-        }
-        return newState;
-      });
+    const onDownloadProgress = (event: DownloadEvent) => {
+      handleDownloadProgressRef.current(event);
     };
-
-    const handleDownloadFailed = (event: DownloadEvent) => {
-      // console.log("❌ Événement downloadFailed reçu:", event.contentId);
-      setDownloadState((prev) => {
-        const newState = new Map(prev);
-        newState.set(event.contentId, {
-          isDownloading: false,
-          progress: 0,
-          error: "Download failed",
-        });
-        return newState;
-      });
-      setActiveDownloadsCount((prev) => Math.max(0, prev - 1));
+    const onDownloadCompleted = (event: DownloadEvent) => {
+      void handleDownloadCompletedRef.current(event);
     };
-
-    const handleDownloadCancelled = (event: DownloadEvent) => {
-      // console.log("🚫 Événement downloadCancelled reçu:", event.contentId);
-      setDownloadState((prev) => {
-        const newState = new Map(prev);
-        newState.set(event.contentId, {
-          isDownloading: false,
-          progress: 0,
-          error: null,
-        });
-        return newState;
-      });
-      setActiveDownloadsCount((prev) => Math.max(0, prev - 1));
+    const onDownloadFailed = (event: DownloadEvent) => {
+      handleDownloadFailedRef.current(event);
+    };
+    const onDownloadCancelled = (event: DownloadEvent) => {
+      handleDownloadCancelledRef.current(event);
     };
 
     nativeDownloadManager.addEventListener(
       "downloadStarted",
-      handleDownloadStarted
+      onDownloadStarted,
     );
     nativeDownloadManager.addEventListener(
       "downloadProgress",
-      handleDownloadProgress
+      onDownloadProgress,
     );
-    const onDownloadCompleted = (event: DownloadEvent) => {
-      void handleDownloadCompletedRef.current(event);
-    };
-
     nativeDownloadManager.addEventListener(
       "downloadCompleted",
-      onDownloadCompleted
+      onDownloadCompleted,
     );
     nativeDownloadManager.addEventListener(
       "downloadFailed",
-      handleDownloadFailed
+      onDownloadFailed,
     );
     nativeDownloadManager.addEventListener(
       "downloadCancelled",
-      handleDownloadCancelled
+      onDownloadCancelled,
     );
 
     return () => {
@@ -274,7 +295,7 @@ export const useNativeDownload = (
       nativeDownloadManager.removeEventListener("downloadFailed");
       nativeDownloadManager.removeEventListener("downloadCancelled");
     };
-  }, [restoreActiveDownloads]);
+  }, []);
 
   // 🚀 SUPPRIMÉ : Initialisation automatique pour éviter les boucles infinies
   // La liste se mettra à jour automatiquement après les téléchargements

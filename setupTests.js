@@ -163,6 +163,18 @@ jest.mock("./native/RotationCompass", () => ({
 }));
 
 // Mock des modules Expo
+jest.mock("expo-image", () => {
+  const React = require("react");
+  const { View } = require("react-native");
+  return {
+    Image: (props) =>
+      React.createElement(View, {
+        testID: "expo-image",
+        style: props.style,
+      }),
+  };
+});
+
 jest.mock("expo-localization", () => ({
   getLocales: () => [{ languageCode: "en", countryCode: "US" }],
 }));

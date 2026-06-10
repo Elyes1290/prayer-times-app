@@ -14,9 +14,10 @@ const AbonnementProtection: React.FC<AbonnementProtectionProps> = ({
   children,
 }) => {
   const protectionRef = useRef(false);
-  const backHandlerRef = useRef<any>(null);
 
   useEffect(() => {
+    let activeBackHandler: { remove: () => void } | null = null;
+
     const checkAbonnementProcess = async () => {
       try {
         const pendingRegistration = await AsyncStorage.getItem(
@@ -28,7 +29,7 @@ const AbonnementProtection: React.FC<AbonnementProtectionProps> = ({
             console.log("🛡️ Protection d'abonnement activée");
 
             // 🚨 NOUVEAU : Bloquer le bouton retour pendant l'abonnement
-            backHandlerRef.current = BackHandler.addEventListener(
+            activeBackHandler = BackHandler.addEventListener(
               "hardwareBackPress",
               () => {
                 Alert.alert(
@@ -46,9 +47,9 @@ const AbonnementProtection: React.FC<AbonnementProtectionProps> = ({
             console.log("🛡️ Protection d'abonnement désactivée");
 
             // Désactiver le blocage du bouton retour
-            if (backHandlerRef.current) {
-              backHandlerRef.current.remove();
-              backHandlerRef.current = null;
+            if (activeBackHandler) {
+              activeBackHandler.remove();
+              activeBackHandler = null;
             }
           }
         }
@@ -65,10 +66,9 @@ const AbonnementProtection: React.FC<AbonnementProtectionProps> = ({
 
     return () => {
       clearInterval(interval);
-      const backHandler = backHandlerRef.current;
-      if (backHandler) {
-        backHandler.remove();
-        backHandlerRef.current = null;
+      if (activeBackHandler) {
+        activeBackHandler.remove();
+        activeBackHandler = null;
       }
     };
   }, []);

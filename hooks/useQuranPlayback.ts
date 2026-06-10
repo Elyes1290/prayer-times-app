@@ -36,7 +36,7 @@ import { useQuranAudioService } from "./useQuranAudioService";
 type UseQuranPlaybackParams = {
   sourates: any[];
   selectedSourate: number;
-  setSelectedSourate: Dispatch<SetStateAction<number>>;
+  selectSourate: (surahNumber: number) => void;
   selectedReciter: string | null;
   setSelectedReciter: Dispatch<SetStateAction<string | null>>;
   scannedQuranFiles: PremiumContent[];
@@ -59,7 +59,7 @@ export type QuranPlaybackBridge = {
 export function useQuranPlayback({
   sourates,
   selectedSourate,
-  setSelectedSourate,
+  selectSourate,
   selectedReciter,
   setSelectedReciter,
   scannedQuranFiles,
@@ -284,13 +284,10 @@ export function useQuranPlayback({
     isServiceAvailable,
   ]);
 
-  const playbackDuration = useMemo(
-    () =>
-      serviceSyncedPlaybackDuration > 0
-        ? serviceSyncedPlaybackDuration
-        : manualPlaybackDuration,
-    [serviceSyncedPlaybackDuration, manualPlaybackDuration],
-  );
+  const playbackDuration =
+    serviceSyncedPlaybackDuration > 0
+      ? serviceSyncedPlaybackDuration
+      : manualPlaybackDuration;
 
   const resetSlideAnimation = useCallback(() => {
     slideAnim.value = 0;
@@ -491,7 +488,7 @@ export function useQuranPlayback({
             console.log(
               `🎯 Synchronisation interface: passage sourate ${selectedSourate} → ${surahNumber}`,
             );
-            setSelectedSourate(surahNumber);
+            selectSourate(surahNumber);
           }
         }
       } else if (isAppNavigation) {
@@ -512,7 +509,7 @@ export function useQuranPlayback({
     sourates,
     playbackDuration,
     syncRecitationFromServiceSurah,
-    setSelectedSourate,
+    selectSourate,
   ]);
 
   const isRecitationPlaying = usesNativeAudioService
@@ -602,7 +599,7 @@ export function useQuranPlayback({
           lastDurationSurahRef.current = activeRecitation.surahNumber;
         }
         if (activeRecitation.surahNumber) {
-          setSelectedSourate(activeRecitation.surahNumber);
+          selectSourate(activeRecitation.surahNumber);
         }
 
         let audioSource: any;
@@ -891,7 +888,7 @@ export function useQuranPlayback({
       scannedQuranFiles,
       selectedSourate,
       setSelectedReciter,
-      setSelectedSourate,
+      selectSourate,
     ],
   );
 
@@ -960,8 +957,8 @@ export function useQuranPlayback({
     }
 
     void loadSpecificRecitation(selectedReciter, selectedSourate, false);
-    // react-doctor-disable-next-line react-doctor/exhaustive-deps
     // eslint-disable-next-line react-hooks/exhaustive-deps -- pas de rechargement quand loadSpecificRecitation est recréé
+    // react-doctor-disable-next-line react-doctor/exhaustive-deps
   }, [selectedReciter, selectedSourate, offlineAccess.isOfflineMode]);
 
   const pauseRecitation = useCallback(async () => {
@@ -1119,7 +1116,7 @@ export function useQuranPlayback({
           (isServiceAvailable() && serviceAudioState.isPlaying));
 
       surahAutoPlayOnChangeRef.current = audioActive;
-      setSelectedSourate(surahNumber);
+      selectSourate(surahNumber);
 
       if (!isPremium || !selectedReciter) return;
       if (!audioActive) return;
@@ -1149,7 +1146,7 @@ export function useQuranPlayback({
       scannedQuranFiles,
       playRecitation,
       loadSpecificRecitation,
-      setSelectedSourate,
+      selectSourate,
       surahAutoPlayOnChangeRef,
     ],
   );
@@ -1176,7 +1173,7 @@ export function useQuranPlayback({
       console.log("🎯 Mode navigation app activé - Sync automatique désactivée");
 
       surahAutoPlayOnChangeRef.current = true;
-      setSelectedSourate(targetSurah);
+      selectSourate(targetSurah);
 
       if (autoPlay && selectedReciter) {
         if (offlineAccess.isOfflineMode) {
@@ -1208,7 +1205,7 @@ export function useQuranPlayback({
       scannedQuranFiles,
       playRecitation,
       loadSpecificRecitation,
-      setSelectedSourate,
+      selectSourate,
       surahAutoPlayOnChangeRef,
     ],
   );

@@ -54,14 +54,7 @@ export async function loadLocalPrayersForDate(
   }
 }
 
-/** @deprecated Utiliser loadLocalPrayersForDate */
-export async function loadLocalTodayPrayers(
-  userId: number,
-): Promise<TodayPrayersState | null> {
-  return loadLocalPrayersForDate(userId);
-}
-
-export async function saveLocalPrayersForDate(
+async function saveLocalPrayersForDate(
   userId: number,
   dateISO: string,
   state: TodayPrayersState,
@@ -79,22 +72,6 @@ export async function toggleLocalPrayerForDate(
   const next = { ...base, [prayer]: completed };
   await saveLocalPrayersForDate(userId, dateISO, next);
   return next;
-}
-
-/** @deprecated Utiliser toggleLocalPrayerForDate */
-export async function toggleLocalTodayPrayer(
-  userId: number,
-  prayer: TrackedPrayer,
-  completed: boolean,
-  base: TodayPrayersState,
-): Promise<TodayPrayersState> {
-  return toggleLocalPrayerForDate(
-    userId,
-    toDateISO(new Date()),
-    prayer,
-    completed,
-    base,
-  );
 }
 
 function upsertHistoryDay(

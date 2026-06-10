@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import {
   View,
   ScrollView,
@@ -10,6 +10,8 @@ import {
   StatusBar,
   Modal,
   Share,
+  type TextStyle,
+  type ListRenderItemInfo,
 } from "react-native";
 import Animated, {
   useAnimatedStyle,
@@ -23,6 +25,7 @@ import { useRouter, useFocusEffect } from "expo-router";
 import { ThemedView } from "../components/ThemedView";
 import { ThemedText } from "../components/ThemedText";
 import { useThemeColors } from "../hooks/useThemeAssets";
+import { makeBoxShadow } from "../utils/shadowUtils";
 import { useCurrentTheme } from "../hooks/useThemeColor";
 import { usePremium } from "../contexts/PremiumContext";
 import { useTranslation } from "react-i18next";
@@ -131,9 +134,420 @@ interface ReaderSettings {
   lineSpacing: number;
 }
 
+type StoryChapterTabItemProps = {
+  title: string;
+  isActive: boolean;
+  primaryColor: string;
+  borderColor: string;
+  textColor: string;
+  onPress: () => void;
+};
+
+const StoryChapterTabItem = React.memo(function StoryChapterTabItem({
+  title,
+  isActive,
+  primaryColor,
+  borderColor,
+  textColor,
+  onPress,
+}: StoryChapterTabItemProps) {
+  return (
+    <Pressable
+      style={[
+        styles.chapterTab,
+        { borderColor },
+        isActive && { backgroundColor: primaryColor },
+      ]}
+      onPress={onPress}
+    >
+      <Text
+        style={[
+          styles.chapterTabText,
+          isActive ? styles.chapterTabTextActive : { color: textColor },
+        ]}
+      >
+        {title}
+      </Text>
+    </Pressable>
+  );
+});
+
+const StoryChapterTabRow = React.memo(function StoryChapterTabRow({
+  chapter,
+  index,
+  isActive,
+  primaryColor,
+  borderColor,
+  textColor,
+  onChapterSelect,
+}: {
+  chapter: StoryChapter;
+  index: number;
+  isActive: boolean;
+  primaryColor: string;
+  borderColor: string;
+  textColor: string;
+  onChapterSelect: (index: number) => void;
+}) {
+  const handlePress = useCallback(() => {
+    onChapterSelect(index);
+  }, [index, onChapterSelect]);
+
+  return (
+    <StoryChapterTabItem
+      title={`${index + 1}. ${chapter.title}`}
+      isActive={isActive}
+      primaryColor={primaryColor}
+      borderColor={borderColor}
+      textColor={textColor}
+      onPress={handlePress}
+    />
+  );
+});
+
+type StoryReaderMainContentProps = {
+  storyData: StoryData;
+  currentChapter: number;
+  textStyles: TextStyle;
+  readerSettings: ReaderSettings;
+  primaryColor: string;
+  textSecondaryColor: string;
+  borderColor: string;
+  textColor: string;
+  cardBG: string;
+  onChapterSelect: (index: number) => void;
+  onPrevChapter: () => void;
+  onNextChapter: () => void;
+};
+
+const StoryReaderMainContent = React.memo(function StoryReaderMainContent({
+  storyData,
+  currentChapter,
+  textStyles,
+  readerSettings,
+  primaryColor,
+  textSecondaryColor,
+  borderColor,
+  textColor,
+  cardBG,
+  onChapterSelect,
+  onPrevChapter,
+  onNextChapter,
+}: StoryReaderMainContentProps) {
+  const safeChapterIndex = Math.min(
+    Math.max(currentChapter, 0),
+    Math.max(storyData.chapters.length - 1, 0),
+  );
+  const currentChapterData = storyData.chapters[safeChapterIndex];
+
+  const renderChapterTab = useCallback(
+    ({ item: chapter, index }: ListRenderItemInfo<StoryChapter>) => (
+      <StoryChapterTabRow
+        chapter={chapter}
+        index={index}
+        isActive={safeChapterIndex === index}
+        primaryColor={primaryColor}
+        borderColor={borderColor}
+        textColor={textColor}
+        onChapterSelect={onChapterSelect}
+      />
+    ),
+    [
+      safeChapterIndex,
+      primaryColor,
+      borderColor,
+      textColor,
+      onChapterSelect,
+    ],
+  );
+
+  if (!currentChapterData) {
+    return null;
+  }
+
+  return (
+    <View style={styles.contentContainer}>
+      <View style={styles.storyHeader}>
+        <ThemedText style={[styles.storyTitle, textStyles]}>
+          {storyData.story.title}
+        </ThemedText>
+
+        {readerSettings.showArabic && storyData.story.title_arabic && (
+          <Text style={[styles.storyTitleArabic, textStyles]}>
+            {storyData.story.title_arabic}
+          </Text>
+        )}
+
+        {storyData.story.historical_location && (
+          <View style={styles.historicalInfo}>
+            <IonIcon
+              name="location-outline"
+              size={16}
+              color={textSecondaryColor}
+            />
+            <Text
+              style={[styles.historicalText, { color: textSecondaryColor }]}
+            >
+              {storyData.story.historical_location}
+            </Text>
+          </View>
+        )}
+      </View>
+
+      {storyData.chapters.length > 1 && (
+        <View style={styles.chapterNavigation}>
+          <FlatList
+            horizontal
+            data={storyData.chapters}
+            keyExtractor={(chapter) => chapter.id}
+            showsHorizontalScrollIndicator={false}
+            renderItem={renderChapterTab}
+          />
+        </View>
+      )}
+
+      {safeChapterIndex === 0 && (
+        <View style={styles.introductionContainer}>
+          <Text style={[styles.introductionText, textStyles]}>
+            {storyData.story.introduction}
+          </Text>
+        </View>
+      )}
+
+      <View style={styles.chapterContainer}>
+        <ThemedText style={[styles.chapterTitle, textStyles]}>
+          {currentChapterData.title}
+        </ThemedText>
+
+        <Text style={[styles.chapterContent, textStyles]}>
+          {currentChapterData.content}
+        </Text>
+      </View>
+
+      {safeChapterIndex === storyData.chapters.length - 1 && (
+        <View style={styles.conclusionContainer}>
+          <ThemedText style={[styles.sectionTitle, textStyles]}>
+            🌟 Enseignement
+          </ThemedText>
+          <Text style={[styles.conclusionText, textStyles]}>
+            {storyData.story.moral_lesson || storyData.story.conclusion}
+          </Text>
+        </View>
+      )}
+
+      <View style={styles.navigationButtons}>
+        {safeChapterIndex > 0 && (
+          <Pressable
+            style={[styles.navButton, { backgroundColor: cardBG }]}
+            onPress={onPrevChapter}
+          >
+            <IonIcon name="chevron-back" size={20} color={textColor} />
+            <ThemedText style={styles.navButtonText}>Précédent</ThemedText>
+          </Pressable>
+        )}
+
+        {safeChapterIndex < storyData.chapters.length - 1 && (
+          <Pressable
+            style={[styles.navButton, { backgroundColor: primaryColor }]}
+            onPress={onNextChapter}
+          >
+            <Text style={[styles.navButtonText, { color: "white" }]}>
+              Suivant
+            </Text>
+            <IonIcon name="chevron-forward" size={20} color="white" />
+          </Pressable>
+        )}
+      </View>
+    </View>
+  );
+});
+
+const FONT_SIZE_OPTIONS = ["small", "medium", "large", "extra-large"] as const;
+const READER_THEME_OPTIONS = [
+  { key: "light", label: "☀️ Clair", color: "#FFFFFF" },
+  { key: "dark", label: "🌙 Sombre", color: "#1a1a1a" },
+  { key: "sepia", label: "📖 Sépia", color: "#FDF6E3" },
+] as const;
+
+type StoryReaderSettingsModalProps = {
+  visible: boolean;
+  onClose: () => void;
+  readerSettings: ReaderSettings;
+  onReaderSettingsChange: React.Dispatch<React.SetStateAction<ReaderSettings>>;
+  cardBG: string;
+  primaryColor: string;
+  textColor: string;
+  borderColor: string;
+};
+
+function StoryReaderSettingsModal({
+  visible,
+  onClose,
+  readerSettings,
+  onReaderSettingsChange,
+  cardBG,
+  primaryColor,
+  textColor,
+  borderColor,
+}: StoryReaderSettingsModalProps) {
+  return (
+    <Modal
+      visible={visible}
+      animationType="slide"
+      transparent
+      onRequestClose={onClose}
+    >
+      <View style={styles.modalOverlay}>
+        <View style={[styles.settingsModal, { backgroundColor: cardBG }]}>
+          <View style={styles.modalHeader}>
+            <ThemedText style={styles.modalTitle}>
+              Paramètres de lecture
+            </ThemedText>
+            <Pressable onPress={onClose}>
+              <IonIcon name="close" size={24} color={textColor} />
+            </Pressable>
+          </View>
+
+          <View style={styles.settingGroup}>
+            <ThemedText style={styles.settingLabel}>
+              Taille de police
+            </ThemedText>
+            <View style={styles.settingOptions}>
+              {FONT_SIZE_OPTIONS.map((size) => (
+                <Pressable
+                  key={size}
+                  style={[
+                    styles.settingOption,
+                    readerSettings.fontSize === size && {
+                      backgroundColor: primaryColor,
+                    },
+                  ]}
+                  onPress={() =>
+                    onReaderSettingsChange((prev) => ({
+                      ...prev,
+                      fontSize: size,
+                    }))
+                  }
+                >
+                  <Text
+                    style={[
+                      styles.settingOptionText,
+                      readerSettings.fontSize === size && { color: "white" },
+                      { color: textColor },
+                    ]}
+                  >
+                    A
+                  </Text>
+                </Pressable>
+              ))}
+            </View>
+          </View>
+
+          <View style={styles.settingGroup}>
+            <ThemedText style={styles.settingLabel}>Thème</ThemedText>
+            <View style={styles.settingOptions}>
+              {READER_THEME_OPTIONS.map((theme) => (
+                <Pressable
+                  key={theme.key}
+                  style={[
+                    styles.themeOption,
+                    {
+                      backgroundColor: theme.color,
+                      borderColor,
+                    },
+                    readerSettings.theme === theme.key && {
+                      borderColor: primaryColor,
+                      borderWidth: 3,
+                    },
+                  ]}
+                  onPress={() =>
+                    onReaderSettingsChange((prev) => ({
+                      ...prev,
+                      theme: theme.key,
+                    }))
+                  }
+                >
+                  <Text
+                    style={[
+                      styles.themeOptionText,
+                      { color: theme.key === "dark" ? "#FFFFFF" : "#000000" },
+                    ]}
+                  >
+                    {theme.label}
+                  </Text>
+                </Pressable>
+              ))}
+            </View>
+          </View>
+
+          <View style={styles.settingGroup}>
+            <ThemedText style={styles.settingLabel}>
+              Options d&apos;affichage
+            </ThemedText>
+
+            <Pressable
+              style={styles.toggleOption}
+              onPress={() =>
+                onReaderSettingsChange((prev) => ({
+                  ...prev,
+                  showArabic: !prev.showArabic,
+                }))
+              }
+            >
+              <ThemedText>Afficher les termes arabes</ThemedText>
+              <View
+                style={[
+                  styles.toggle,
+                  readerSettings.showArabic && {
+                    backgroundColor: primaryColor,
+                  },
+                ]}
+              >
+                <View
+                  style={[
+                    styles.toggleKnob,
+                    readerSettings.showArabic && styles.toggleKnobActive,
+                  ]}
+                />
+              </View>
+            </Pressable>
+
+            <Pressable
+              style={styles.toggleOption}
+              onPress={() =>
+                onReaderSettingsChange((prev) => ({
+                  ...prev,
+                  showGlossary: !prev.showGlossary,
+                }))
+              }
+            >
+              <ThemedText>Surligner les termes du glossaire</ThemedText>
+              <View
+                style={[
+                  styles.toggle,
+                  readerSettings.showGlossary && {
+                    backgroundColor: primaryColor,
+                  },
+                ]}
+              >
+                <View
+                  style={[
+                    styles.toggleKnob,
+                    readerSettings.showGlossary && styles.toggleKnobActive,
+                  ]}
+                />
+              </View>
+            </Pressable>
+          </View>
+        </View>
+      </View>
+    </Modal>
+  );
+}
 
 export default function StoryReaderScreen() {
-  const [storyId, setStoryId] = useState<string | null>(null);
+  const storyIdRef = useRef<string | null>(null);
+  const loadedStoryIdRef = useRef<string | null>(null);
   const colors = useThemeColors();
   const currentTheme = useCurrentTheme();
   const { user: premiumUser } = usePremium();
@@ -177,6 +591,98 @@ export default function StoryReaderScreen() {
     fadeAnim.value = withTiming(1, { duration: 800 });
   }, [fadeAnim]);
 
+  const loadStory = useCallback(async () => {
+    const storyId = storyIdRef.current;
+    if (!storyId) return;
+
+    try {
+      setLoading(true);
+
+      if (!networkStatus.isConnected) {
+        console.log(
+          "📱 Mode hors ligne - chargement depuis le stockage local",
+        );
+        const downloadedStory = await getDownloadedStory(storyId);
+
+        if (downloadedStory && downloadedStory.fullData) {
+          const offlineStoryData: StoryData = downloadedStory.fullData;
+
+          setStoryData(offlineStoryData);
+          setCurrentChapter(0);
+
+          runFadeIn();
+        } else {
+          Alert.alert(
+            "Histoire non disponible",
+            "Cette histoire n'est pas téléchargée pour l'accès hors ligne.",
+            [
+              {
+                text: "OK",
+                onPress: () => {
+                  AsyncStorage.removeItem("current_story_id");
+                  replace("/prophet-stories" as any);
+                },
+              },
+            ],
+          );
+        }
+        setLoading(false);
+        return;
+      }
+
+      const token = await getAuthToken();
+      const headers: Record<string, string> = {
+        "Content-Type": "application/json",
+      };
+
+      if (token) {
+        headers.Authorization = `Bearer ${token}`;
+      }
+
+      const currentLang = i18n.language || "fr";
+
+      const response = await fetch(
+        `https://myadhanapp.com/api/prophet-stories.php?action=story&id=${storyId}&lang=${currentLang}`,
+        {
+          method: "GET",
+          headers,
+        },
+      );
+      const responseData = await response.json();
+
+      if (responseData.success) {
+        setStoryData(responseData.data);
+        setCurrentChapter(0);
+
+        runFadeIn();
+      } else {
+        Alert.alert("Erreur", responseData.message || "Histoire introuvable");
+        await AsyncStorage.removeItem("current_story_id");
+        replace("/prophet-stories" as any);
+      }
+    } catch (error) {
+      console.error("Erreur chargement histoire:", error);
+
+      const downloadedStory = await getDownloadedStory(storyId);
+      if (downloadedStory && downloadedStory.fullData) {
+        const offlineStoryData: StoryData = downloadedStory.fullData;
+        setStoryData(offlineStoryData);
+        setCurrentChapter(0);
+
+        runFadeIn();
+      } else {
+        Alert.alert(
+          "Erreur",
+          "Erreur de connexion et histoire non téléchargée",
+        );
+        await AsyncStorage.removeItem("current_story_id");
+        replace("/prophet-stories" as any);
+      }
+    } finally {
+      setLoading(false);
+    }
+  }, [networkStatus.isConnected, runFadeIn, replace]);
+
   // 📖 Remonter en haut quand on change de chapitre (Suivant/Précédent/onglet)
   useEffect(() => {
     scrollViewRef.current?.scrollTo({ y: 0, animated: true });
@@ -189,119 +695,25 @@ export default function StoryReaderScreen() {
         const storedId = await AsyncStorage.getItem("current_story_id");
         console.log("📖 [StoryReader] ID récupéré (focus):", storedId);
 
-        // 🚀 FORCER le rechargement si l'ID change
-        if (storedId && storedId !== storyId) {
+        if (!storedId) return;
+
+        if (storedId !== loadedStoryIdRef.current) {
           console.log("📖 [StoryReader] Nouvel ID détecté, rechargement...");
-          setStoryId(storedId);
-          setStoryData(null); // Reset des données pour forcer le reload
+          storyIdRef.current = storedId;
+          loadedStoryIdRef.current = storedId;
+          setStoryData(null);
+          setCurrentChapter(0);
           setLoading(true);
-        } else if (storedId && !storyId) {
-          setStoryId(storedId);
+          void loadStory();
+        } else if (!storyIdRef.current) {
+          storyIdRef.current = storedId;
+          loadedStoryIdRef.current = storedId;
+          void loadStory();
         }
       };
-      getStoredStoryId();
-    }, [storyId])
+      void getStoredStoryId();
+    }, [loadStory]),
   );
-
-  // 🆕 Charger l'histoire (en ligne ou hors ligne)
-  useEffect(() => {
-    if (!storyId) return;
-
-    const loadStory = async () => {
-      try {
-        setLoading(true);
-
-        // 🆕 Si hors ligne, essayer de charger depuis le stockage local
-        if (!networkStatus.isConnected) {
-          console.log(
-            "📱 Mode hors ligne - chargement depuis le stockage local"
-          );
-          const downloadedStory = await getDownloadedStory(storyId);
-
-          if (downloadedStory && downloadedStory.fullData) {
-            // 🆕 Charger directement la structure complète sauvegardée
-            const offlineStoryData: StoryData = downloadedStory.fullData;
-
-            setStoryData(offlineStoryData);
-
-            runFadeIn();
-          } else {
-            Alert.alert(
-              "Histoire non disponible",
-              "Cette histoire n'est pas téléchargée pour l'accès hors ligne.",
-              [
-                {
-                  text: "OK",
-                  onPress: () => {
-                    AsyncStorage.removeItem("current_story_id");
-                    replace("/prophet-stories" as any);
-                  },
-                },
-              ]
-            );
-          }
-          setLoading(false);
-          return;
-        }
-
-        // Mode en ligne : charger depuis l'API
-        const token = await getAuthToken();
-        const headers: any = {
-          "Content-Type": "application/json",
-        };
-
-        // Ajouter le token seulement s'il existe
-        if (token) {
-          headers.Authorization = `Bearer ${token}`;
-        }
-
-        // Récupérer la langue actuelle de l'app
-        const currentLang = i18n.language || 'fr';
-        
-        const response = await fetch(
-          `https://myadhanapp.com/api/prophet-stories.php?action=story&id=${storyId}&lang=${currentLang}`,
-          {
-            method: "GET",
-            headers: headers,
-          }
-        );
-        const responseData = await response.json();
-
-        if (responseData.success) {
-          setStoryData(responseData.data);
-
-          // Animation d'apparition
-          runFadeIn();
-        } else {
-          Alert.alert("Erreur", responseData.message || "Histoire introuvable");
-          await AsyncStorage.removeItem("current_story_id");
-          replace("/prophet-stories" as any);
-        }
-      } catch (error) {
-        console.error("Erreur chargement histoire:", error);
-
-        // 🆕 En cas d'erreur, essayer le mode hors ligne
-        const downloadedStory = await getDownloadedStory(storyId);
-        if (downloadedStory && downloadedStory.fullData) {
-          const offlineStoryData: StoryData = downloadedStory.fullData;
-          setStoryData(offlineStoryData);
-
-          runFadeIn();
-        } else {
-          Alert.alert(
-            "Erreur",
-            "Erreur de connexion et histoire non téléchargée"
-          );
-          await AsyncStorage.removeItem("current_story_id");
-          replace("/prophet-stories" as any);
-        }
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadStory();
-  }, [storyId, networkStatus.isConnected, runFadeIn]);
 
   // 🧹 Nettoyer l'AsyncStorage quand le composant se démonte
   useEffect(() => {
@@ -332,7 +744,7 @@ export default function StoryReaderScreen() {
             Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({
-            story_id: storyId,
+            story_id: storyIdRef.current,
             chapter_index: currentChapter,
             position: scrollPosition.current,
             completion_percentage: readingProgressRef.current,
@@ -343,7 +755,7 @@ export default function StoryReaderScreen() {
     } catch (error) {
       console.error("Erreur sauvegarde progrès:", error);
     }
-  }, [storyId, currentChapter, storyData, premiumUser.isPremium]);
+  }, [currentChapter, storyData, premiumUser.isPremium]);
 
   const updateReadingProgress = useCallback((progress: number) => {
     const clamped = Math.min(100, Math.max(0, progress));
@@ -446,7 +858,7 @@ export default function StoryReaderScreen() {
             Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({
-            story_id: storyId,
+            story_id: storyIdRef.current,
             action: isFavorited ? "remove" : "add",
           }),
         }
@@ -457,8 +869,7 @@ export default function StoryReaderScreen() {
     }
   };
 
-  // Styles dynamiques basés sur les paramètres
-  const getTextStyles = () => {
+  const textStyles = useMemo<TextStyle>(() => {
     const fontSizes = {
       small: 16,
       medium: 18,
@@ -469,7 +880,7 @@ export default function StoryReaderScreen() {
     const fontFamilies = {
       system: "System",
       serif: "Georgia",
-      arabic: "Arial", // À remplacer par une police arabe
+      arabic: "Arial",
     };
 
     return {
@@ -479,7 +890,19 @@ export default function StoryReaderScreen() {
         fontSizes[readerSettings.fontSize] * readerSettings.lineSpacing,
       color: readerSettings.theme === "sepia" ? "#5D4037" : colors.text,
     };
-  };
+  }, [readerSettings.fontSize, readerSettings.fontFamily, readerSettings.lineSpacing, readerSettings.theme, colors.text]);
+
+  const handleChapterSelect = useCallback((index: number) => {
+    setCurrentChapter(index);
+  }, []);
+
+  const handlePrevChapter = useCallback(() => {
+    setCurrentChapter((chapter) => chapter - 1);
+  }, []);
+
+  const handleNextChapter = useCallback(() => {
+    setCurrentChapter((chapter) => chapter + 1);
+  }, []);
 
   const getBackgroundColor = () => {
     switch (readerSettings.theme) {
@@ -490,307 +913,6 @@ export default function StoryReaderScreen() {
       default:
         return colors.background;
     }
-  };
-
-  // Composant pour les paramètres de lecture
-  const renderSettingsModal = () => (
-    <Modal
-      visible={showSettings}
-      animationType="slide"
-      transparent={true}
-      onRequestClose={() => setShowSettings(false)}
-    >
-      <View style={styles.modalOverlay}>
-        <View
-          style={[styles.settingsModal, { backgroundColor: colors.cardBG }]}
-        >
-          <View style={styles.modalHeader}>
-            <ThemedText style={styles.modalTitle}>
-              Paramètres de lecture
-            </ThemedText>
-            <Pressable onPress={() => setShowSettings(false)}>
-              <IonIcon name="close" size={24} color={colors.text} />
-            </Pressable>
-          </View>
-
-          {/* Taille de police */}
-          <View style={styles.settingGroup}>
-            <ThemedText style={styles.settingLabel}>
-              Taille de police
-            </ThemedText>
-            <View style={styles.settingOptions}>
-              {["small", "medium", "large", "extra-large"].map((size) => (
-                <Pressable
-                  key={size}
-                  style={[
-                    styles.settingOption,
-                    readerSettings.fontSize === size && {
-                      backgroundColor: colors.primary,
-                    },
-                  ]}
-                  onPress={() =>
-                    setReaderSettings((prev) => ({
-                      ...prev,
-                      fontSize: size as any,
-                    }))
-                  }
-                >
-                  <Text
-                    style={[
-                      styles.settingOptionText,
-                      readerSettings.fontSize === size && { color: "white" },
-                      { color: colors.text },
-                    ]}
-                  >
-                    {size === "small"
-                      ? "A"
-                      : size === "medium"
-                      ? "A"
-                      : size === "large"
-                      ? "A"
-                      : "A"}
-                  </Text>
-                </Pressable>
-              ))}
-            </View>
-          </View>
-
-          {/* Thème */}
-          <View style={styles.settingGroup}>
-            <ThemedText style={styles.settingLabel}>Thème</ThemedText>
-            <View style={styles.settingOptions}>
-              {[
-                { key: "light", label: "☀️ Clair", color: "#FFFFFF" },
-                { key: "dark", label: "🌙 Sombre", color: "#1a1a1a" },
-                { key: "sepia", label: "📖 Sépia", color: "#FDF6E3" },
-              ].map((theme) => (
-                <Pressable
-                  key={theme.key}
-                  style={[
-                    styles.themeOption,
-                    {
-                      backgroundColor: theme.color,
-                      borderColor: colors.border,
-                    },
-                    readerSettings.theme === theme.key && {
-                      borderColor: colors.primary,
-                      borderWidth: 3,
-                    },
-                  ]}
-                  onPress={() =>
-                    setReaderSettings((prev) => ({
-                      ...prev,
-                      theme: theme.key as any,
-                    }))
-                  }
-                >
-                  <Text
-                    style={[
-                      styles.themeOptionText,
-                      { color: theme.key === "dark" ? "#FFFFFF" : "#000000" },
-                    ]}
-                  >
-                    {theme.label}
-                  </Text>
-                </Pressable>
-              ))}
-            </View>
-          </View>
-
-          {/* Options d'affichage */}
-          <View style={styles.settingGroup}>
-            <ThemedText style={styles.settingLabel}>
-              Options d&apos;affichage
-            </ThemedText>
-
-            <Pressable
-              style={styles.toggleOption}
-              onPress={() =>
-                setReaderSettings((prev) => ({
-                  ...prev,
-                  showArabic: !prev.showArabic,
-                }))
-              }
-            >
-              <ThemedText>Afficher les termes arabes</ThemedText>
-              <View
-                style={[
-                  styles.toggle,
-                  readerSettings.showArabic && {
-                    backgroundColor: colors.primary,
-                  },
-                ]}
-              >
-                <View
-                  style={[
-                    styles.toggleKnob,
-                    readerSettings.showArabic && styles.toggleKnobActive,
-                  ]}
-                />
-              </View>
-            </Pressable>
-
-            <Pressable
-              style={styles.toggleOption}
-              onPress={() =>
-                setReaderSettings((prev) => ({
-                  ...prev,
-                  showGlossary: !prev.showGlossary,
-                }))
-              }
-            >
-              <ThemedText>Surligner les termes du glossaire</ThemedText>
-              <View
-                style={[
-                  styles.toggle,
-                  readerSettings.showGlossary && {
-                    backgroundColor: colors.primary,
-                  },
-                ]}
-              >
-                <View
-                  style={[
-                    styles.toggleKnob,
-                    readerSettings.showGlossary && styles.toggleKnobActive,
-                  ]}
-                />
-              </View>
-            </Pressable>
-          </View>
-        </View>
-      </View>
-    </Modal>
-  );
-
-  // Composant pour le contenu principal
-  const renderStoryContent = () => {
-    if (!storyData) return null;
-
-    const textStyles = getTextStyles();
-    const currentChapterData = storyData.chapters[currentChapter];
-
-    return (
-      <View style={styles.contentContainer}>
-        {/* En-tête de l'histoire */}
-        <View style={styles.storyHeader}>
-          <ThemedText style={[styles.storyTitle, textStyles]}>
-            {storyData.story.title}
-          </ThemedText>
-
-          {readerSettings.showArabic && storyData.story.title_arabic && (
-            <Text style={[styles.storyTitleArabic, textStyles]}>
-              {storyData.story.title_arabic}
-            </Text>
-          )}
-
-          {storyData.story.historical_location && (
-            <View style={styles.historicalInfo}>
-              <IonIcon
-                name="location-outline"
-                size={16}
-                color={colors.textSecondary}
-              />
-              <Text
-                style={[styles.historicalText, { color: colors.textSecondary }]}
-              >
-                {storyData.story.historical_location}
-              </Text>
-            </View>
-          )}
-        </View>
-
-        {/* Navigation des chapitres */}
-        {storyData.chapters.length > 1 && (
-          <View style={styles.chapterNavigation}>
-            <FlatList
-              horizontal
-              data={storyData.chapters}
-              keyExtractor={(chapter) => chapter.id}
-              showsHorizontalScrollIndicator={false}
-              renderItem={({ item: chapter, index }) => (
-                <Pressable
-                  style={[
-                    styles.chapterTab,
-                    currentChapter === index && {
-                      backgroundColor: colors.primary,
-                    },
-                    { borderColor: colors.border },
-                  ]}
-                  onPress={() => setCurrentChapter(index)}
-                >
-                  <Text
-                    style={[
-                      styles.chapterTabText,
-                      currentChapter === index && { color: "white" },
-                      { color: colors.text },
-                    ]}
-                  >
-                    {index + 1}. {chapter.title}
-                  </Text>
-                </Pressable>
-              )}
-            />
-          </View>
-        )}
-
-        {/* Introduction (seulement pour le premier chapitre) */}
-        {currentChapter === 0 && (
-          <View style={styles.introductionContainer}>
-            <Text style={[styles.introductionText, textStyles]}>
-              {storyData.story.introduction}
-            </Text>
-          </View>
-        )}
-
-        {/* Contenu du chapitre */}
-        <View style={styles.chapterContainer}>
-          <ThemedText style={[styles.chapterTitle, textStyles]}>
-            {currentChapterData.title}
-          </ThemedText>
-
-          <Text style={[styles.chapterContent, textStyles]}>
-            {currentChapterData.content}
-          </Text>
-        </View>
-
-        {/* Conclusion (seulement pour le dernier chapitre) */}
-        {currentChapter === storyData.chapters.length - 1 && (
-          <View style={styles.conclusionContainer}>
-            <ThemedText style={[styles.sectionTitle, textStyles]}>
-              🌟 Enseignement
-            </ThemedText>
-            <Text style={[styles.conclusionText, textStyles]}>
-              {storyData.story.moral_lesson || storyData.story.conclusion}
-            </Text>
-          </View>
-        )}
-
-        {/* Navigation précédent/suivant */}
-        <View style={styles.navigationButtons}>
-          {currentChapter > 0 && (
-            <Pressable
-              style={[styles.navButton, { backgroundColor: colors.cardBG }]}
-              onPress={() => setCurrentChapter((chapter) => chapter - 1)}
-            >
-              <IonIcon name="chevron-back" size={20} color={colors.text} />
-              <ThemedText style={styles.navButtonText}>Précédent</ThemedText>
-            </Pressable>
-          )}
-
-          {currentChapter < storyData.chapters.length - 1 && (
-            <Pressable
-              style={[styles.navButton, { backgroundColor: colors.primary }]}
-              onPress={() => setCurrentChapter((chapter) => chapter + 1)}
-            >
-              <Text style={[styles.navButtonText, { color: "white" }]}>
-                Suivant
-              </Text>
-              <IonIcon name="chevron-forward" size={20} color="white" />
-            </Pressable>
-          )}
-        </View>
-      </View>
-    );
   };
 
   if (loading) {
@@ -810,7 +932,7 @@ export default function StoryReaderScreen() {
     );
   }
 
-  if (!storyData) {
+  if (!storyData || !storyData.chapters?.length) {
     return (
       <ThemedView style={styles.container}>
         <View style={styles.errorContainer}>
@@ -961,7 +1083,20 @@ export default function StoryReaderScreen() {
           scrollEventThrottle={16}
           showsVerticalScrollIndicator={false}
         >
-          {renderStoryContent()}
+          <StoryReaderMainContent
+            storyData={storyData}
+            currentChapter={currentChapter}
+            textStyles={textStyles}
+            readerSettings={readerSettings}
+            primaryColor={colors.primary}
+            textSecondaryColor={colors.textSecondary}
+            borderColor={colors.border}
+            textColor={colors.text}
+            cardBG={colors.cardBG}
+            onChapterSelect={handleChapterSelect}
+            onPrevChapter={handlePrevChapter}
+            onNextChapter={handleNextChapter}
+          />
         </ScrollView>
       </Animated.View>
 
@@ -999,7 +1134,16 @@ export default function StoryReaderScreen() {
       </View>
 
       {/* Modals */}
-      {renderSettingsModal()}
+      <StoryReaderSettingsModal
+        visible={showSettings}
+        onClose={() => setShowSettings(false)}
+        readerSettings={readerSettings}
+        onReaderSettingsChange={setReaderSettings}
+        cardBG={colors.cardBG}
+        primaryColor={colors.primary}
+        textColor={colors.text}
+        borderColor={colors.border}
+      />
 
       {/* Modal Références - À implémenter */}
       {/* Modal Glossaire - À implémenter */}
@@ -1033,9 +1177,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     paddingTop: 50,
     paddingBottom: 15,
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
+    boxShadow: makeBoxShadow("#000000", 0, 2, 4, 0.1),
   },
   toolbarButton: {
     padding: 8,
@@ -1123,6 +1265,9 @@ const styles = StyleSheet.create({
   chapterTabText: {
     fontSize: 13,
     fontWeight: "500",
+  },
+  chapterTabTextActive: {
+    color: "white",
   },
   introductionContainer: {
     marginBottom: 25,

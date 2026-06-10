@@ -576,8 +576,10 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
           const iapService = IapService.getInstance();
           await iapService.init();
 
-          const token = await AsyncStorage.getItem("auth_token");
-          const storedEmail = await getStoredAccountEmail();
+          const [token, storedEmail] = await Promise.all([
+            AsyncStorage.getItem("auth_token"),
+            getStoredAccountEmail(),
+          ]);
           // Liaison RC seulement si session connectée (évite course à l'inscription)
           if (storedEmail && token) {
             await iapService.linkAccount(storedEmail);

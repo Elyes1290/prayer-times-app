@@ -10,6 +10,7 @@ import {
 import { useTranslation } from "react-i18next";
 import { IonIcon } from "@/components/icons/AppVectorIcons";
 import { ThemedText } from "../ThemedText";
+import { makeBoxShadow } from "../../utils/shadowUtils";
 
 interface StoryCardData {
   id: string;
@@ -299,9 +300,7 @@ const styles = StyleSheet.create({
     borderRadius: 18,
     padding: 18,
     borderWidth: 1,
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
+    boxShadow: makeBoxShadow("#000000", 0, 2, 8, 0.1),
     position: "relative",
     overflow: "hidden",
   },

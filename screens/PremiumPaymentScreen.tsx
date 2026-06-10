@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useRef } from "react";
 import {
   View,
   Text,
@@ -95,7 +95,7 @@ const PremiumPaymentScreen: React.FC = () => {
   );
   const [isLoading, setIsLoading] = useState(false);
   const [pendingRegistration, setPendingRegistration] = useState<any>(null);
-  const [iapPackages, setIapPackages] = useState<PurchasesPackage[]>([]);
+  const iapPackagesRef = useRef<PurchasesPackage[]>([]);
 
   const styles = getStyles(colors, currentTheme);
 
@@ -139,7 +139,7 @@ const PremiumPaymentScreen: React.FC = () => {
               const offerings = await iapService.getOfferings();
               if (cancelled) return;
               if (offerings?.availablePackages) {
-                setIapPackages(offerings.availablePackages);
+                iapPackagesRef.current = offerings.availablePackages;
                 console.log(
                   "🍎 [IAP] Offres chargées:",
                   offerings.availablePackages.length,
@@ -190,7 +190,7 @@ const PremiumPaymentScreen: React.FC = () => {
           IAP_CONFIG.products[
             selectedPlan.id as keyof typeof IAP_CONFIG.products
           ]?.id;
-        const pack = iapPackages.find(
+        const pack = iapPackagesRef.current.find(
           (p) => p.product.identifier === productId,
         );
 

@@ -211,8 +211,6 @@ export const AdhanAudioProvider: React.FC<AdhanAudioProviderProps> = ({
       console.log(
         "🔄 [AdhanAudioContext] Fallback: Chargement depuis les assets..."
       );
-      const { Asset } = await import("expo-asset");
-
       // 🛡️ IMPORTATION SÉLECTIVE : getAdhanIosSound vient de .ios.ts sur iOS et .android.ts sur Android
       // Cela garantit que Metro n'inclut PAS les mp3 sur Android.
       const { getAdhanIosSound } = require("../utils/adhanIosAssets");
@@ -221,9 +219,8 @@ export const AdhanAudioProvider: React.FC<AdhanAudioProviderProps> = ({
       if (!soundModule) {
         throw new Error(`Son introuvable dans les assets: ${soundName}`);
       }
-      if (!soundModule) {
-        throw new Error(`Son introuvable dans les assets: ${soundName}`);
-      }
+
+      const { Asset } = await import("expo-asset");
 
       // Charger l'asset et obtenir son URI locale
       const asset = Asset.fromModule(soundModule);

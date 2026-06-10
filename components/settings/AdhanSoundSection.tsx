@@ -195,6 +195,23 @@ export default function AdhanSoundSection({
     icon: {
       marginLeft: 4,
     },
+    actionRow: {
+      flexDirection: "row" as const,
+      gap: 8,
+      marginTop: 8,
+    },
+    actionButton: {
+      padding: 8,
+      borderRadius: 8,
+      flex: 1,
+      flexDirection: "row" as const,
+      alignItems: "center" as const,
+      justifyContent: "center" as const,
+    },
+    actionButtonLabel: {
+      color: "#fff",
+      marginLeft: 4,
+    },
   });
 
   return [
@@ -494,20 +511,17 @@ export default function AdhanSoundSection({
                     />
                   );
                 })()}
-                <View style={{ flexDirection: "row", gap: 8, marginTop: 8 }}>
+                <View style={buttonStyles.actionRow}>
                   <Pressable
-                    style={{
-                      backgroundColor: isRefreshingAdhans
-                        ? "#80CBC4"
-                        : "#4ECDC4",
-                      padding: 8,
-                      borderRadius: 8,
-                      flex: 1,
-                      flexDirection: "row",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      opacity: isRefreshingAdhans ? 0.7 : 1,
-                    }}
+                    style={[
+                      buttonStyles.actionButton,
+                      {
+                        backgroundColor: isRefreshingAdhans
+                          ? "#80CBC4"
+                          : "#4ECDC4",
+                        opacity: isRefreshingAdhans ? 0.7 : 1,
+                      },
+                    ]}
                     onPress={handleRefreshAdhans}
                     disabled={isRefreshingAdhans}
                   >
@@ -520,7 +534,7 @@ export default function AdhanSoundSection({
                         color="#fff"
                       />
                     )}
-                    <Text style={{ color: "#fff", marginLeft: 4 }}>
+                    <Text style={buttonStyles.actionButtonLabel}>
                       {isRefreshingAdhans
                         ? t("loading", "Chargement...")
                         : t("refresh")}
@@ -528,16 +542,13 @@ export default function AdhanSoundSection({
                   </Pressable>
 
                   <Pressable
-                    style={{
-                      backgroundColor: isCleaningFiles ? "#FF8A80" : "#ff6b6b",
-                      padding: 8,
-                      borderRadius: 8,
-                      flex: 1,
-                      flexDirection: "row",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      opacity: isCleaningFiles ? 0.7 : 1,
-                    }}
+                    style={[
+                      buttonStyles.actionButton,
+                      {
+                        backgroundColor: isCleaningFiles ? "#FF8A80" : "#ff6b6b",
+                        opacity: isCleaningFiles ? 0.7 : 1,
+                      },
+                    ]}
                     onPress={handleCleanFiles}
                     disabled={isCleaningFiles}
                   >
@@ -550,7 +561,7 @@ export default function AdhanSoundSection({
                         color="#fff"
                       />
                     )}
-                    <Text style={{ color: "#fff", marginLeft: 4 }}>
+                    <Text style={buttonStyles.actionButtonLabel}>
                       {isCleaningFiles
                         ? t("cleaning", "Nettoyage...")
                         : t("clean")}

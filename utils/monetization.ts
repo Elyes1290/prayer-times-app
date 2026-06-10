@@ -253,18 +253,18 @@ export const AD_CONFIG = {
   },
 };
 
-const priceFormatters = new Map<string, Intl.NumberFormat>();
+const EUR_PRICE_FORMATTER = new Intl.NumberFormat("fr-FR", {
+  style: "currency",
+  currency: "EUR",
+  minimumFractionDigits: 2,
+});
+
+const priceFormatters = new Map<string, Intl.NumberFormat>([
+  ["EUR", EUR_PRICE_FORMATTER],
+]);
 
 function getPriceFormatter(currency: string): Intl.NumberFormat {
-  const cached = priceFormatters.get(currency);
-  if (cached) return cached;
-  const formatter = new Intl.NumberFormat("fr-FR", {
-    style: "currency",
-    currency,
-    minimumFractionDigits: 2,
-  });
-  priceFormatters.set(currency, formatter);
-  return formatter;
+  return priceFormatters.get(currency) ?? EUR_PRICE_FORMATTER;
 }
 
 // Fonctions utilitaires

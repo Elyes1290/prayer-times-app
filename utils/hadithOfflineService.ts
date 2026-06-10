@@ -135,15 +135,12 @@ export class HadithOfflineService {
    * Vérifie si l'utilisateur peut accéder aux hadiths offline
    */
   static async canAccessOffline(isPremium: boolean = false): Promise<boolean> {
+    if (isPremium) {
+      return true;
+    }
+
     try {
       const netInfo = await NetInfo.fetch();
-
-      // Si l'utilisateur est premium, il peut accéder offline
-      if (isPremium) {
-        return true;
-      }
-
-      // Si l'utilisateur n'est pas premium, il doit être connecté
       return netInfo.isConnected ?? false;
     } catch (error) {
       console.error("❌ Erreur vérification accès offline:", error);

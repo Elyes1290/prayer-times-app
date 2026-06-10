@@ -1,4 +1,5 @@
 import { MCIcon } from "@/components/icons/AppVectorIcons";
+import { Image } from "expo-image";
 import React, {
   use,
   useState,
@@ -9,8 +10,6 @@ import React, {
 import {
   ActivityIndicator,
   Alert,
-  Image,
-  ImageBackground,
   PermissionsAndroid,
   Platform,
   ScrollView,
@@ -219,7 +218,7 @@ const LearningSection = ({
             <Image
               source={require("../assets/images/mains.jpg")}
               style={learningStyles.stepImage}
-              resizeMode="cover"
+              contentFit="cover"
             />
           </View>
 
@@ -231,7 +230,7 @@ const LearningSection = ({
             <Image
               source={require("../assets/images/bouche.jpg")}
               style={learningStyles.stepImage}
-              resizeMode="cover"
+              contentFit="cover"
             />
           </View>
 
@@ -243,7 +242,7 @@ const LearningSection = ({
             <Image
               source={require("../assets/images/nez.jpg")}
               style={learningStyles.stepImage}
-              resizeMode="cover"
+              contentFit="cover"
             />
           </View>
 
@@ -255,7 +254,7 @@ const LearningSection = ({
             <Image
               source={require("../assets/images/visage.jpg")}
               style={learningStyles.stepImage}
-              resizeMode="cover"
+              contentFit="cover"
             />
           </View>
 
@@ -267,7 +266,7 @@ const LearningSection = ({
             <Image
               source={require("../assets/images/bras.jpg")}
               style={learningStyles.stepImage}
-              resizeMode="cover"
+              contentFit="cover"
             />
           </View>
 
@@ -279,7 +278,7 @@ const LearningSection = ({
             <Image
               source={require("../assets/images/tete.jpg")}
               style={learningStyles.stepImage}
-              resizeMode="cover"
+              contentFit="cover"
             />
           </View>
 
@@ -291,7 +290,7 @@ const LearningSection = ({
             <Image
               source={require("../assets/images/oreilles.jpg")}
               style={learningStyles.stepImage}
-              resizeMode="cover"
+              contentFit="cover"
             />
           </View>
 
@@ -303,7 +302,7 @@ const LearningSection = ({
             <Image
               source={require("../assets/images/pied.jpg")}
               style={learningStyles.stepImage}
-              resizeMode="cover"
+              contentFit="cover"
             />
           </View>
         </View>
@@ -338,7 +337,7 @@ const LearningSection = ({
             <Image
               source={require("../assets/images/quyiam2.png")}
               style={learningStyles.stepImage}
-              resizeMode="contain"
+              contentFit="contain"
             />
           </View>
 
@@ -358,7 +357,7 @@ const LearningSection = ({
               <Image
                 source={require("../assets/images/takbeer.png")}
                 style={learningStyles.stepImage}
-                resizeMode="contain"
+                contentFit="contain"
               />
             </View>
             <View style={learningStyles.invocationContainerFull}>
@@ -394,7 +393,7 @@ const LearningSection = ({
             <Image
               source={require("../assets/images/quiyam.png")}
               style={learningStyles.stepImage}
-              resizeMode="contain"
+              contentFit="contain"
             />
           </View>
 
@@ -415,7 +414,7 @@ const LearningSection = ({
               <Image
                 source={require("../assets/images/ruku.png")}
                 style={learningStyles.stepImage}
-                resizeMode="contain"
+                contentFit="contain"
               />
             </View>
             <View style={learningStyles.invocationContainerFull}>
@@ -451,7 +450,7 @@ const LearningSection = ({
               <Image
                 source={require("../assets/images/soujoud.png")}
                 style={learningStyles.stepImage}
-                resizeMode="contain"
+                contentFit="contain"
               />
             </View>
             <View style={learningStyles.invocationContainerFull}>
@@ -484,7 +483,7 @@ const LearningSection = ({
               <Image
                 source={require("../assets/images/tashahhud.png")}
                 style={learningStyles.stepImage}
-                resizeMode="contain"
+                contentFit="contain"
               />
             </View>
             <View style={learningStyles.invocationContainerFull}>
@@ -520,7 +519,7 @@ const LearningSection = ({
               <Image
                 source={require("../assets/images/tashahhud.png")}
                 style={learningStyles.stepImage}
-                resizeMode="contain"
+                contentFit="contain"
               />
             </View>
             <View style={learningStyles.invocationContainerFull}>
@@ -553,7 +552,7 @@ const LearningSection = ({
               <Image
                 source={require("../assets/images/salam.png")}
                 style={learningStyles.stepImage}
-                resizeMode="contain"
+                contentFit="contain"
               />
             </View>
             <View style={learningStyles.invocationContainerFull}>

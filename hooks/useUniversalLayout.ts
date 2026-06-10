@@ -253,22 +253,21 @@ function useUniversalLayout(
   };
 }
 
+const UNIVERSAL_DESIGN_TOKENS = {
+  spacing: { xs: 4, sm: 8, md: 12, lg: 16, xl: 20 },
+  fontSize: { xs: 12, sm: 14, md: 16, lg: 18, xl: 20 },
+  borderRadius: { sm: 4, md: 8, lg: 12, xl: 16 },
+} as const;
+
 /**
  * 🎨 Hook pour styles universels avec layout intelligent
  */
 export function useUniversalStyles(options: UniversalLayoutProps = {}) {
   const layout = useUniversalLayout(options);
 
-  // 🎨 Constantes de design responsive
-  const designTokens = {
-    spacing: { xs: 4, sm: 8, md: 12, lg: 16, xl: 20 },
-    fontSize: { xs: 12, sm: 14, md: 16, lg: 18, xl: 20 },
-    borderRadius: { sm: 4, md: 8, lg: 12, xl: 16 },
-  };
-
   return {
     ...layout,
-    ...designTokens,
+    ...UNIVERSAL_DESIGN_TOKENS,
 
     // Styles prêts à l'emploi
     containerStyle: {

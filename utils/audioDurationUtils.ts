@@ -58,7 +58,7 @@ export function mergeDurationMillis(
 }
 
 /** Durée max crédible par sourate (rejette une durée héritée de la piste précédente). */
-export function maxPlausibleDurationMs(surahNumber: number): number {
+function maxPlausibleDurationMs(surahNumber: number): number {
   if (surahNumber === 1) return 6 * 60 * 1000;
   if (surahNumber <= 10) return 45 * 60 * 1000;
   if (surahNumber <= 50) return 90 * 60 * 1000;

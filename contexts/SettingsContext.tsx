@@ -266,7 +266,7 @@ export const SettingsProvider = ({
   const [maxCacheSize, setMaxCacheSizeState] = useState<number>(100);
 
   // Nouveau : États pour la synchronisation API
-  const [isSyncing, setIsSyncing] = useState(false);
+  const isSyncingRef = useRef(false);
   const lastSyncTimeRef = useRef<Date | null>(null);
   const [apiSyncEnabled, setApiSyncEnabled] = useState(false); // 🚀 DÉSACTIVÉ par défaut (premium uniquement)
 
@@ -345,10 +345,10 @@ export const SettingsProvider = ({
   ]);
 
   const syncSettingsToAPI = useCallback(async () => {
-    if (!apiSyncEnabled || isSyncing) return;
+    if (!apiSyncEnabled || isSyncingRef.current) return;
 
     try {
-      setIsSyncing(true);
+      isSyncingRef.current = true;
       debugLog("🔄 Synchronisation des paramètres vers l'API...");
 
       const settings = buildSettingsObject();
@@ -363,9 +363,14 @@ export const SettingsProvider = ({
     } catch (error) {
       errorLog("❌ Erreur synchronisation API:", error);
     } finally {
-      setIsSyncing(false);
+      isSyncingRef.current = false;
     }
-  }, [apiSyncEnabled, isSyncing, buildSettingsObject]);
+  }, [apiSyncEnabled, buildSettingsObject]);
+
+  const syncSettingsToAPIRef = useRef(syncSettingsToAPI);
+  useEffect(() => {
+    syncSettingsToAPIRef.current = syncSettingsToAPI;
+  }, [syncSettingsToAPI]);
 
   const loadSettingsFromAPI = useCallback(async () => {
     try {
@@ -934,11 +939,11 @@ export const SettingsProvider = ({
   // 🚀 NOUVEAU : Synchronisation automatique des paramètres (premium uniquement)
   useEffect(() => {
     // Éviter la sync lors du chargement initial
-    if (!isLoaded || isSyncing || !apiSyncEnabled) return;
+    if (!isLoaded || isSyncingRef.current || !apiSyncEnabled) return;
 
     // Délai pour éviter trop de syncs rapides
     const timer = setTimeout(() => {
-      syncSettingsToAPI();
+      void syncSettingsToAPIRef.current();
     }, 2000);
 
     return () => clearTimeout(timer);
@@ -968,8 +973,6 @@ export const SettingsProvider = ({
     enableDataSaving,
     maxCacheSize,
     isLoaded,
-    syncSettingsToAPI,
-    isSyncing,
     apiSyncEnabled,
   ]);
 

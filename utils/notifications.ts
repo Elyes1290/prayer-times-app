@@ -18,41 +18,38 @@ export async function schedulePrayerNotifications(
   const now = new Date();
   const minTimeGap = 30 * 1000; // 30 secondes en millisecondes
 
-  const reminders = Object.entries(prayerTimes)
-    .map(([prayer, time]) => {
-      const timestamp = time.getTime();
-      const reminderTime = timestamp - reminderOffset * 60 * 1000;
+  const reminders = Object.entries(prayerTimes).flatMap(([prayer, time]) => {
+    const timestamp = time.getTime();
+    const reminderTime = timestamp - reminderOffset * 60 * 1000;
 
-      // Ne programme que les rappels futurs
-      if (reminderTime <= now.getTime()) {
-        return null;
-      }
+    if (reminderTime <= now.getTime()) {
+      return [];
+    }
 
-      // Si le rappel est trop proche, ajoute un délai minimum
-      const adjustedReminderTime =
-        reminderTime - now.getTime() < minTimeGap
-          ? now.getTime() + minTimeGap
-          : reminderTime;
+    const adjustedReminderTime =
+      reminderTime - now.getTime() < minTimeGap
+        ? now.getTime() + minTimeGap
+        : reminderTime;
 
-      // 🔑 Génère une clé unique incluant la date et un préfixe pour éviter les collisions avec les adhans
-      const uniqueKey = dateKey
-        ? `reminder_${prayer}_${dateKey}`
-        : `reminder_${prayer}_${Date.now()}`;
+    const uniqueKey = dateKey
+      ? `reminder_${prayer}_${dateKey}`
+      : `reminder_${prayer}_${Date.now()}`;
 
-      return {
-        key: uniqueKey, // 🔑 Ajout de la clé unique
+    return [
+      {
+        key: uniqueKey,
         prayer,
-        triggerMillis: adjustedReminderTime, // Pour Android
-        triggerAtMillis: adjustedReminderTime, // 🔧 Pour iOS (même nom que Adhans)
+        triggerMillis: adjustedReminderTime,
+        triggerAtMillis: adjustedReminderTime,
         title: i18n.t("prayer_reminder_title"),
         body: i18n.t("prayer_reminder_body", {
           prayer,
           minutes: reminderOffset,
         }),
         isToday: true,
-      };
-    })
-    .filter(Boolean);
+      },
+    ];
+  });
 
   // 2. Si remindersEnabled, on programme
   if (!remindersEnabled) return;

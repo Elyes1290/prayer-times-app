@@ -84,6 +84,35 @@ const soundObjects: Record<AdhanSoundKey, any> = {
   adhan_muhammad_hessen: require("../assets/sounds/ahmadnafees.mp3"), // Fallback temporaire
 };
 
+const SETTINGS_CALC_METHODS = [
+  "MuslimWorldLeague",
+  "Egyptian",
+  "Karachi",
+  "UmmAlQura",
+  "Qatar",
+  "Kuwait",
+  "Singapore",
+  "Turkey",
+  "Tehran",
+  "NorthAmerica",
+] as CalcMethodKey[];
+
+const SETTINGS_LANGUAGES = [
+  { code: "fr", label: "Français" },
+  { code: "en", label: "English" },
+  { code: "ar", label: "العربية" },
+  { code: "es", label: "Español" },
+  { code: "de", label: "Deutsch" },
+  { code: "it", label: "Italiano" },
+  { code: "pt", label: "Português" },
+  { code: "tr", label: "Türkçe" },
+  { code: "ru", label: "Русский" },
+  { code: "ur", label: "اردو" },
+  { code: "bn", label: "বাংলা" },
+  { code: "fa", label: "فارسی" },
+  { code: "nl", label: "Nederlands" },
+];
+
 const handleLoginSuccess = (_userData: unknown) => {};
 
 async function collectDownloadedAdhanRows(): Promise<DownloadedAdhanRow[]> {
@@ -832,12 +861,12 @@ function SettingsSections(props: OptimizedSettingsSectionsProps) {
     currentTheme,
   ]);
 
+  const scrollBottomInset = props.hasPendingChanges ? 160 : 100;
+
   return (
     <ScrollView
       style={{ flex: 1 }}
-      contentContainerStyle={{
-        paddingBottom: props.hasPendingChanges ? 160 : 100,
-      }}
+      contentInset={{ bottom: scrollBottomInset }}
       showsVerticalScrollIndicator={false}
     >
       <SettingsHeader
@@ -996,35 +1025,6 @@ export default function SettingsScreenOptimized() {
     },
     []
   );
-
-  const methods = [
-    "MuslimWorldLeague",
-    "Egyptian",
-    "Karachi",
-    "UmmAlQura",
-    "Qatar",
-    "Kuwait",
-    "Singapore",
-    "Turkey",
-    "Tehran",
-    "NorthAmerica",
-  ] as CalcMethodKey[];
-
-  const languages = [
-    { code: "fr", label: "Français" },
-    { code: "en", label: "English" },
-    { code: "ar", label: "العربية" },
-    { code: "es", label: "Español" },
-    { code: "de", label: "Deutsch" },
-    { code: "it", label: "Italiano" },
-    { code: "pt", label: "Português" },
-    { code: "tr", label: "Türkçe" },
-    { code: "ru", label: "Русский" },
-    { code: "ur", label: "اردو" },
-    { code: "bn", label: "বাংলা" },
-    { code: "fa", label: "فارسی" },
-    { code: "nl", label: "Nederlands" },
-  ];
 
   useEffect(() => {
     if (settings?.locationMode === "manual" && settings.manualLocation?.city) {
@@ -1591,9 +1591,9 @@ export default function SettingsScreenOptimized() {
           <SettingsSections
             settings={settings}
             dhikrSettings={settings.dhikrSettings}
-            methods={methods}
+            methods={SETTINGS_CALC_METHODS}
             sounds={premiumContent.premiumContentState.availableSounds}
-            languages={languages}
+            languages={SETTINGS_LANGUAGES}
             selectedLang={i18n.language}
             onChangeLanguage={onChangeLanguage}
             reprogrammateNotifications={reprogrammateNotifications}

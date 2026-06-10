@@ -11,33 +11,9 @@ import CustomServerManager from "./customServerManager";
 import nativeDownloadManager, { DownloadInfo } from "./nativeDownloadManager";
 import { LocalStorageManager } from "./localStorageManager";
 import { AppConfig } from "./config";
+import type { PremiumCatalog, PremiumContent } from "./premiumContentTypes";
 
-// Types de contenu premium
-export interface PremiumContent {
-  id: string;
-  type: "adhan" | "quran" | "dhikr" | "theme";
-  title: string;
-  description: string;
-  fileUrl: string;
-  fileSize: number; // en MB
-  /** Durée réelle lue sur le serveur (ms) — indispensable en streaming HTTP */
-  durationMs?: number;
-  version: string;
-  isDownloaded: boolean;
-  downloadPath?: string;
-  // Propriétés spécifiques au Quran
-  reciter?: string;
-  surahNumber?: number;
-  surahName?: string;
-}
-
-// Catalogue de contenu premium (stocké dans Firestore)
-export interface PremiumCatalog {
-  adhanVoices: PremiumContent[];
-  quranRecitations: PremiumContent[];
-  dhikrCollections: PremiumContent[];
-  premiumThemes: PremiumContent[];
-}
+export type { PremiumCatalog, PremiumContent } from "./premiumContentTypes";
 
 class PremiumContentManager {
   private static instance: PremiumContentManager;
@@ -1225,66 +1201,71 @@ class PremiumContentManager {
       // Attendre la promesse
       const finalRes = await result.promise;
 
-      if (finalRes.statusCode === 200) {
-        // Renommage final atomique
-        await RNFS.moveFile(tempPathInCorrectDir, downloadPath);
-
-        if (await RNFS.exists(downloadPath)) {
-          const fileStat = await RNFS.stat(downloadPath);
-          debugLog(
-            `✅ Téléchargement réussi : ${downloadPath} (Taille: ${fileStat.size} octets)`,
-          );
-
-          // 🔍 DIAGNOSTIC CRITIQUE : Vérifier l'en-tête et la TAILLE du fichier
-          try {
-            // 2. Lire les 50 premiers caractères pour voir si c'est du HTML/PHP
-            const header = await RNFS.read(downloadPath, 330, 0, "utf8");
-            debugLog(
-              `🔍 HEADER FICHIER (330 premiers caractères): ${header.replace(
-                /\n/g,
-                "\\n",
-              )}`,
-            );
-
-            if (fileStat.size < 10000) {
-              errorLog(
-                `❌ FICHIER TROP PETIT (${fileStat.size} octets) - Ce n'est pas un MP3 valide !`,
-              );
-              // Afficher le contenu pour débogage
-              errorLog(`📄 CONTENU DU FICHIER ERREUR: ${header}`);
-
-              await RNFS.unlink(downloadPath);
-              return false;
-            }
-
-            if (
-              header.trim().startsWith("<") ||
-              header.includes("<?php") ||
-              header.includes("Error") ||
-              header.startsWith("{") // JSON error
-            ) {
-              errorLog(
-                "❌ LE FICHIER SEMBLE ÊTRE DU TEXTE/HTML/JSON ET NON UN MP3 !",
-              );
-              // 🚀 AUTO-FIX : Supprimer le fichier corrompu immédiatement
-              await RNFS.unlink(downloadPath);
-              return false;
-            }
-          } catch {
-            debugLog("⚠️ Impossible de lire le header ou la taille");
-          }
-
-          await this.markAsDownloaded(content.id, downloadPath);
-          return true;
+      if (finalRes.statusCode !== 200) {
+        if (await RNFS.exists(tempPathInCorrectDir)) {
+          await RNFS.unlink(tempPathInCorrectDir);
         }
+        errorLog(`❌ Erreur téléchargement (Status: ${finalRes.statusCode})`);
+        return false;
       }
 
-      // Nettoyage en cas d'échec (si le fichier temporaire existe encore)
+      if (!(await RNFS.exists(tempPathInCorrectDir))) {
+        errorLog("❌ Fichier temporaire introuvable après téléchargement");
+        return false;
+      }
+
+      await RNFS.moveFile(tempPathInCorrectDir, downloadPath);
+
+      try {
+        const fileStat = await RNFS.stat(downloadPath);
+        debugLog(
+          `✅ Téléchargement réussi : ${downloadPath} (Taille: ${fileStat.size} octets)`,
+        );
+
+        try {
+          const header = await RNFS.read(downloadPath, 330, 0, "utf8");
+          debugLog(
+            `🔍 HEADER FICHIER (330 premiers caractères): ${header.replace(
+              /\n/g,
+              "\\n",
+            )}`,
+          );
+
+          if (fileStat.size < 10000) {
+            errorLog(
+              `❌ FICHIER TROP PETIT (${fileStat.size} octets) - Ce n'est pas un MP3 valide !`,
+            );
+            errorLog(`📄 CONTENU DU FICHIER ERREUR: ${header}`);
+
+            await RNFS.unlink(downloadPath);
+            return false;
+          }
+
+          if (
+            header.trim().startsWith("<") ||
+            header.includes("<?php") ||
+            header.includes("Error") ||
+            header.startsWith("{")
+          ) {
+            errorLog(
+              "❌ LE FICHIER SEMBLE ÊTRE DU TEXTE/HTML/JSON ET NON UN MP3 !",
+            );
+            await RNFS.unlink(downloadPath);
+            return false;
+          }
+        } catch {
+          debugLog("⚠️ Impossible de lire le header ou la taille");
+        }
+
+        await this.markAsDownloaded(content.id, downloadPath);
+        return true;
+      } catch {
+        errorLog("❌ Fichier introuvable après déplacement");
+      }
+
       if (await RNFS.exists(tempPathInCorrectDir)) {
         await RNFS.unlink(tempPathInCorrectDir);
       }
-
-      errorLog(`❌ Erreur téléchargement (Status: ${finalRes.statusCode})`);
       return false;
     } catch (error) {
       errorLog("❌ Exception téléchargement:", error);

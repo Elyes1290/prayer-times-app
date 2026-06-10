@@ -6,11 +6,10 @@ import React, {
   useMemo,
   useCallback,
 } from "react";
+import { Image } from "expo-image";
 import {
   ActivityIndicator,
   FlatList,
-  Image,
-  ImageBackground,
   StyleSheet,
   Text,
   View,
@@ -26,6 +25,7 @@ import { useTranslation } from "react-i18next";
 import { usePremium } from "../contexts/PremiumContext";
 import FavoriteButton from "../components/FavoriteButton";
 import { HadithFavorite } from "../contexts/FavoritesContext";
+import CachedImageBackground from "../components/CachedImageBackground";
 import { HadithOfflineService } from "../utils/hadithOfflineService";
 import { OfflineMessage } from "../components/OfflineMessage";
 import { useNetworkStatus, useOfflineAccess } from "../hooks/useNetworkStatus";
@@ -211,6 +211,67 @@ const handleRetry = () => {
   // Les hooks de réseau se mettront à jour automatiquement
 };
 
+type HadithListItemProps = {
+  item: Hadith;
+  bookName: string;
+  bookSlug: string;
+  chapterNumber: number;
+  t: (key: string, fallback?: string) => string;
+};
+
+const HadithListItem = React.memo(function HadithListItem({
+  item,
+  bookName,
+  bookSlug,
+  chapterNumber,
+  t,
+}: HadithListItemProps) {
+  const isBigNumber = Number(item.idInBook) > 999;
+
+  return (
+    <View style={styles.ayahContainer}>
+      <View style={styles.arabicRow}>
+        <Text style={styles.arabic}>{item.arabic || "—"}</Text>
+        <View style={styles.hadithActions}>
+          <View
+            style={[
+              styles.verseCircle,
+              isBigNumber && styles.verseCircleLarge,
+            ]}
+          >
+            <Text style={styles.verseNumber}>{item.idInBook || "—"}</Text>
+          </View>
+          <FavoriteButton
+            favoriteData={convertToFavorite(
+              item,
+              bookName,
+              bookSlug,
+              chapterNumber
+            )}
+            size={20}
+            iconColor="#ba9c34"
+            iconColorActive="#FFD700"
+            style={styles.favoriteButton}
+          />
+        </View>
+      </View>
+      {item.english?.narrator && (
+        <Text style={styles.narrator}>{item.english.narrator}</Text>
+      )}
+      <Text style={styles.traduction}>
+        {item.english?.text && item.english.text.trim() !== ""
+          ? item.english.text
+          : t("translation_not_available")}
+      </Text>
+      <Image
+        source={require("../assets/images/ayah_separator.png")}
+        style={styles.ayahSeparator}
+        contentFit="contain"
+      />
+    </View>
+  );
+});
+
 export default function HadithScreen() {
   const { t } = useTranslation();
   const { user } = usePremium();
@@ -244,13 +305,13 @@ export default function HadithScreen() {
   const offlineAccess = useOfflineAccess(!!user?.isPremium);
 
   // 🍎 iOS: Fonctions pour gérer les sélections depuis le menu
-  const handleBookChange = (bookSlug: string) => {
+  const handleBookChange = useCallback((bookSlug: string) => {
     dispatch({ type: "BOOK_SELECT", payload: bookSlug });
-  };
+  }, []);
 
-  const handleChapterChange = (chapterId: number) => {
+  const handleChapterChange = useCallback((chapterId: number) => {
     dispatch({ type: "CHAPTER_SELECT", payload: chapterId });
-  };
+  }, []);
 
   // Charger la liste des livres
   useEffect(() => {
@@ -374,49 +435,129 @@ export default function HadithScreen() {
     return `${id}. ${english} ${arabic}`.trim();
   }
 
-  const renderBookItem = ({ item }: { item: Book }) => (
-    <Pressable
-      style={[
-        styles.optionStyle,
-        selectedBook === item.bookSlug && styles.selectedOptionStyle,
-      ]}
-      onPress={() => dispatch({ type: "BOOK_SELECT", payload: item.bookSlug })}
-    >
-      <Text
+  const renderBookItem = useCallback(
+    ({ item }: { item: Book }) => (
+      <Pressable
         style={[
-          styles.optionTextStyle,
-          selectedBook === item.bookSlug && styles.selectedOptionTextStyle,
+          styles.optionStyle,
+          selectedBook === item.bookSlug && styles.selectedOptionStyle,
         ]}
+        onPress={() => dispatch({ type: "BOOK_SELECT", payload: item.bookSlug })}
       >
-        {item.bookName}
-      </Text>
-      <Text style={styles.categoryText}>
-        {item.category === "main"
-          ? `📚 ${t("book_category_main")}`
-          : item.category === "additional"
-          ? `➕ ${t("book_category_additional")}`
-          : `⭐ ${t("book_category_specialized")}`}
-      </Text>
-    </Pressable>
+        <Text
+          style={[
+            styles.optionTextStyle,
+            selectedBook === item.bookSlug && styles.selectedOptionTextStyle,
+          ]}
+        >
+          {item.bookName}
+        </Text>
+        <Text style={styles.categoryText}>
+          {item.category === "main"
+            ? `📚 ${t("book_category_main")}`
+            : item.category === "additional"
+              ? `➕ ${t("book_category_additional")}`
+              : `⭐ ${t("book_category_specialized")}`}
+        </Text>
+      </Pressable>
+    ),
+    [selectedBook, t]
   );
 
-  const renderChapterItem = ({ item }: { item: Chapter }) => (
-    <Pressable
-      style={[
-        styles.optionStyle,
-        selectedChapter === item.id && styles.selectedOptionStyle,
-      ]}
-      onPress={() => dispatch({ type: "CHAPTER_SELECT", payload: item.id })}
-    >
-      <Text
+  const renderChapterItem = useCallback(
+    ({ item }: { item: Chapter }) => (
+      <Pressable
         style={[
-          styles.optionTextStyle,
-          selectedChapter === item.id && styles.selectedOptionTextStyle,
+          styles.optionStyle,
+          selectedChapter === item.id && styles.selectedOptionStyle,
         ]}
+        onPress={() => dispatch({ type: "CHAPTER_SELECT", payload: item.id })}
       >
-        {`${item.id || ""}. ${item.english || ""} ${item.arabic || ""}`.trim()}
-      </Text>
-    </Pressable>
+        <Text
+          style={[
+            styles.optionTextStyle,
+            selectedChapter === item.id && styles.selectedOptionTextStyle,
+          ]}
+        >
+          {`${item.id || ""}. ${item.english || ""} ${item.arabic || ""}`.trim()}
+        </Text>
+      </Pressable>
+    ),
+    [selectedChapter]
+  );
+
+  const renderIosBookMenuItem = useCallback(
+    ({ item }: { item: Book }) => (
+      <Pressable
+        style={[
+          styles.menuOption,
+          selectedBook === item.bookSlug && styles.selectedOptionStyle,
+        ]}
+        onPress={() => handleBookChange(item.bookSlug)}
+      >
+        <View style={{ flex: 1 }}>
+          <Text style={styles.menuOptionText}>{item.bookName}</Text>
+          <Text style={styles.menuOptionSubtitle}>
+            {item.category === "main"
+              ? t("book_category_main", "Principal")
+              : item.category === "additional"
+                ? t("book_category_additional", "Complémentaire")
+                : t("book_category_specialized", "Spécialisé")}
+          </Text>
+        </View>
+        {selectedBook === item.bookSlug && (
+          <Text style={styles.checkMark}>✓</Text>
+        )}
+      </Pressable>
+    ),
+    [selectedBook, handleBookChange, t]
+  );
+
+  const renderIosChapterMenuItem = useCallback(
+    ({ item }: { item: Chapter }) => (
+      <Pressable
+        style={[
+          styles.menuOption,
+          selectedChapter === item.id && styles.selectedOptionStyle,
+        ]}
+        onPress={() => {
+          handleChapterChange(item.id);
+          dispatch({ type: "MENU_CLOSE" });
+        }}
+      >
+        <View style={{ flex: 1 }}>
+          <Text style={styles.menuOptionText}>
+            {`${item.id || ""}. ${item.english || ""} ${item.arabic || ""}`.trim()}
+          </Text>
+        </View>
+        {selectedChapter === item.id && (
+          <Text style={styles.checkMark}>✓</Text>
+        )}
+      </Pressable>
+    ),
+    [selectedChapter, handleChapterChange]
+  );
+
+  const hadithBookMeta = useMemo(() => {
+    const currentBook = books.find((b) => b.bookSlug === selectedBook);
+    return {
+      bookName: currentBook?.bookName ?? "Livre inconnu",
+      bookSlug: currentBook?.bookSlug ?? "unknown",
+      chapterNumber: selectedChapter ?? 1,
+    };
+  }, [books, selectedBook, selectedChapter]);
+
+  const renderHadithItem = useCallback(
+    ({ item }: { item: Hadith }) => (
+      <HadithListItem
+        item={item}
+        bookName={hadithBookMeta.bookName}
+        bookSlug={hadithBookMeta.bookSlug}
+        chapterNumber={hadithBookMeta.chapterNumber}
+        t={t}
+      />
+    ),
+    [hadithBookMeta, t]
   );
 
   // Filtrer les hadiths du chapitre sélectionné selon la recherche
@@ -467,10 +608,9 @@ export default function HadithScreen() {
 
   return (
     <View style={{ flex: 1 }}>
-      <ImageBackground
+      <CachedImageBackground
         source={require("../assets/images/parchment_bg.jpg")}
         style={StyleSheet.absoluteFillObject}
-        resizeMode="cover"
       />
       <KeyboardAvoidingView
         style={{ flex: 1 }}
@@ -669,31 +809,7 @@ export default function HadithScreen() {
                       <FlatList
                         data={books}
                         keyExtractor={(item) => item.bookSlug}
-                        renderItem={({ item }) => (
-                          <Pressable
-                            style={[
-                              styles.menuOption,
-                              selectedBook === item.bookSlug && styles.selectedOptionStyle
-                            ]}
-                            onPress={() => {
-                              handleBookChange(item.bookSlug);
-                            }}
-                          >
-                            <View style={{ flex: 1 }}>
-                              <Text style={styles.menuOptionText}>{item.bookName}</Text>
-                              <Text style={styles.menuOptionSubtitle}>
-                                {item.category === "main" 
-                                  ? t("book_category_main", "Principal") 
-                                  : item.category === "additional"
-                                  ? t("book_category_additional", "Complémentaire")
-                                  : t("book_category_specialized", "Spécialisé")}
-                              </Text>
-                            </View>
-                            {selectedBook === item.bookSlug && (
-                              <Text style={styles.checkMark}>✓</Text>
-                            )}
-                          </Pressable>
-                        )}
+                        renderItem={renderIosBookMenuItem}
                       />
                     )}
 
@@ -701,27 +817,7 @@ export default function HadithScreen() {
                       <FlatList
                         data={chapters}
                         keyExtractor={(item) => item.id.toString()}
-                        renderItem={({ item }) => (
-                          <Pressable
-                            style={[
-                              styles.menuOption,
-                              selectedChapter === item.id && styles.selectedOptionStyle
-                            ]}
-                            onPress={() => {
-                              handleChapterChange(item.id);
-                              dispatch({ type: "MENU_CLOSE" });
-                            }}
-                          >
-                            <View style={{ flex: 1 }}>
-                              <Text style={styles.menuOptionText}>
-                                {`${item.id || ""}. ${item.english || ""} ${item.arabic || ""}`.trim()}
-                              </Text>
-                            </View>
-                            {selectedChapter === item.id && (
-                              <Text style={styles.checkMark}>✓</Text>
-                            )}
-                          </Pressable>
-                        )}
+                        renderItem={renderIosChapterMenuItem}
                       />
                     )}
                   </>
@@ -859,72 +955,7 @@ export default function HadithScreen() {
                   offset: 200 * index,
                   index,
                 })}
-                renderItem={({ item }) => {
-                  const isBigNumber = Number(item.idInBook) > 999;
-
-                  // Obtenir les informations nécessaires pour les favoris
-                  const currentBook = books.find(
-                    (b) => b.bookSlug === selectedBook
-                  );
-                  const bookName = currentBook
-                    ? currentBook.bookName
-                    : "Livre inconnu";
-                  const bookSlug = currentBook
-                    ? currentBook.bookSlug
-                    : "unknown";
-                  const chapterNumber = selectedChapter || 1;
-
-                  return (
-                    <View style={styles.ayahContainer}>
-                      <View style={styles.arabicRow}>
-                        <Text style={styles.arabic}>{item.arabic || "—"}</Text>
-                        <View style={styles.hadithActions}>
-                          <View
-                            style={[
-                              styles.verseCircle,
-                              isBigNumber && {
-                                width: 40,
-                                height: 40,
-                                borderRadius: 20,
-                              },
-                            ]}
-                          >
-                            <Text style={styles.verseNumber}>
-                              {item.idInBook || "—"}
-                            </Text>
-                          </View>
-                          <FavoriteButton
-                            favoriteData={convertToFavorite(
-                              item,
-                              bookName,
-                              bookSlug,
-                              chapterNumber
-                            )}
-                            size={20}
-                            iconColor="#ba9c34"
-                            iconColorActive="#FFD700"
-                            style={styles.favoriteButton}
-                          />
-                        </View>
-                      </View>
-                      {item.english?.narrator && (
-                        <Text style={styles.narrator}>
-                          {item.english.narrator}
-                        </Text>
-                      )}
-                      <Text style={styles.traduction}>
-                        {item.english?.text && item.english.text.trim() !== ""
-                          ? item.english.text
-                          : t("translation_not_available")}
-                      </Text>
-                      <Image
-                        source={require("../assets/images/ayah_separator.png")}
-                        style={styles.ayahSeparator}
-                        resizeMode="contain"
-                      />
-                    </View>
-                  );
-                }}
+                renderItem={renderHadithItem}
               />
             ))}
         </View>
@@ -1181,6 +1212,11 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#ba9c34",
     boxShadow: "0px 1px 2px rgba(160,128,42,0.12)",
+  },
+  verseCircleLarge: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
   },
   verseNumber: {
     color: "#6b510e",

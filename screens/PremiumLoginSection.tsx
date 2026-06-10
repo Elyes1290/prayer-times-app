@@ -137,7 +137,12 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
   const [isLoading, setIsLoading] = useState(false);
   const [isConnected, setIsConnected] = useState(false);
   const [userData, setUserData] = useState<any>(null);
-  const [hasCheckedUser, setHasCheckedUser] = useState(false);
+  const hasCheckedUserRef = useRef(false);
+  const onLoginSuccessRef = useRef(onLoginSuccess);
+
+  useEffect(() => {
+    onLoginSuccessRef.current = onLoginSuccess;
+  }, [onLoginSuccess]);
   const [showPassword, setShowPassword] = useState(false);
   const emailValid = validateEmail(email);
   const firstNameValid = validateFirstName(firstName);
@@ -201,7 +206,7 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
 
   // 🚀 NOUVEAU : Vérifier si l'utilisateur est déjà connecté au démarrage
   useEffect(() => {
-    if (hasCheckedUser) return;
+    if (hasCheckedUserRef.current) return;
 
     let isMounted = true;
     let notifyTimer: ReturnType<typeof setTimeout> | null = null;
@@ -223,7 +228,7 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
             userData = null;
           }
           if (!userData) {
-            if (isMounted) setHasCheckedUser(true);
+            if (isMounted) hasCheckedUserRef.current = true;
             return;
           }
           console.log(
@@ -246,10 +251,10 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
           );
         }
 
-        if (isMounted) setHasCheckedUser(true);
+        if (isMounted) hasCheckedUserRef.current = true;
       } catch (error) {
         console.error("Erreur vérification utilisateur existant:", error);
-        if (isMounted) setHasCheckedUser(true);
+        if (isMounted) hasCheckedUserRef.current = true;
       }
     };
 
@@ -258,7 +263,7 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
       isMounted = false;
       if (notifyTimer !== null) clearTimeout(notifyTimer);
     };
-  }, [hasCheckedUser, onLoginSuccess]);
+  }, [onLoginSuccess]);
 
   // 🔄 NOUVEAU : Listener pour détecter les changements de connexion en temps réel
   useEffect(() => {
@@ -289,9 +294,7 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
           setIsConnected(true);
           setUserData(userData);
 
-          if (onLoginSuccess) {
-            onLoginSuccess(userData);
-          }
+          onLoginSuccessRef.current?.(userData);
         } else if (!shouldBeConnected && isConnected) {
           console.log(
             "🔄 [LISTENER] Déconnexion détectée - mise à jour de l'interface",
@@ -299,9 +302,7 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
           setIsConnected(false);
           setUserData(null);
 
-          if (onLoginSuccess) {
-            onLoginSuccess(null);
-          }
+          onLoginSuccessRef.current?.(null);
         }
       } catch (error) {
         console.error("Erreur polling connexion:", error);
@@ -316,7 +317,7 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
         clearInterval(interval);
       }
     };
-  }, [isConnected, onLoginSuccess]);
+  }, [isConnected]);
 
   // Synchroniser l'UI avec l'état global Premium (pour que la section se mette à jour automatiquement)
   useEffect(() => {
@@ -340,7 +341,7 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
       } catch {
         // noop
       } finally {
-        setHasCheckedUser(true);
+        hasCheckedUserRef.current = true;
       }
     };
     syncFromContext();
@@ -688,7 +689,7 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
       setEmail("");
       setPassword("");
       setFirstName("");
-      setHasCheckedUser(false);
+      hasCheckedUserRef.current = false;
 
       // 🚀 CORRECTION : Utiliser le toast global pour la déconnexion
       showToast({

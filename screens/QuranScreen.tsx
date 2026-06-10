@@ -1,11 +1,7 @@
 import * as Font from "expo-font";
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import {
-  ActivityIndicator,
-  ImageBackground,
-  View,
-  useWindowDimensions,
-} from "react-native";
+import { ActivityIndicator, View, useWindowDimensions } from "react-native";
+import CachedImageBackground from "../components/CachedImageBackground";
 import { useTranslation } from "react-i18next";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import {
@@ -64,7 +60,7 @@ export default function QuranScreen() {
     setSearchQuery,
     sourates,
     selectedSourate,
-    setSelectedSourate,
+    selectSourate,
     arabicVerses,
     phoneticArr,
     translationArr,
@@ -154,7 +150,7 @@ export default function QuranScreen() {
   } = useQuranPlayback({
     sourates,
     selectedSourate,
-    setSelectedSourate,
+    selectSourate,
     selectedReciter,
     setSelectedReciter,
     scannedQuranFiles,
@@ -370,7 +366,7 @@ export default function QuranScreen() {
   }
 
   return (
-    <ImageBackground
+    <CachedImageBackground
       source={require("../assets/images/parchment_bg.jpg")}
       style={{ flex: 1 }}
     >
@@ -475,6 +471,6 @@ export default function QuranScreen() {
         visible={showNavigationTooltip}
         onClose={() => setShowNavigationTooltip(false)}
       />
-    </ImageBackground>
+    </CachedImageBackground>
   );
 }

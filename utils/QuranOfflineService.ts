@@ -377,9 +377,10 @@ class QuranOfflineService {
     const index = await this.getQuranIndex();
     if (!index) return [];
 
-    return index.surahs.filter((surah) =>
-      surah.available_translations.includes(language)
-    );
+    return index.surahs.filter((surah) => {
+      const translations = new Set(surah.available_translations);
+      return translations.has(language);
+    });
   }
 
   /**

@@ -1,5 +1,6 @@
 import React, { useCallback, useRef, useState } from "react";
-import { Image, ImageSourcePropType, StyleSheet, Text, View } from "react-native";
+import { Image } from "expo-image";
+import { ImageSourcePropType, StyleSheet, Text, View } from "react-native";
 import { useTranslation } from "react-i18next";
 import Animated, {
   interpolateColor,
@@ -166,7 +167,7 @@ export function QiblaCompassView({
             height: compassSize,
             borderRadius: radius,
           }}
-          resizeMode="contain"
+          contentFit="contain"
         />
         {qiblaBearingDeg !== null && (
           <Image

@@ -6,7 +6,6 @@ import {
   Pressable,
   useWindowDimensions,
   Vibration,
-  ImageBackground,
 } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { LinearGradient } from "@/components/ui/LinearGradientView";

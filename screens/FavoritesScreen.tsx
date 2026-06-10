@@ -120,6 +120,8 @@ const FavoritesScreen: React.FC = () => {
     return favorites.filter((fav) => fav.type === selectedFilter);
   }, [favorites, selectedFilter]);
 
+  const styles = getStyles(colors, overlayTextColor, currentTheme);
+
   const handleShare = useCallback(
     async (favorite: Favorite) => {
       try {
@@ -232,6 +234,56 @@ const FavoritesScreen: React.FC = () => {
     ]
   );
 
+  const renderFilterItem = useCallback(
+    ({ item }: { item: (typeof filterOptions)[number] }) => (
+      <Pressable
+        style={[
+          styles.filterButton,
+          selectedFilter === item.key && styles.filterButtonActive,
+        ]}
+        onPress={() => setSelectedFilter(item.key)}
+      >
+        <MCIcon
+          name={item.icon as any}
+          size={18}
+          color={
+            selectedFilter === item.key
+              ? "#000"
+              : isLightTheme
+                ? colors.text
+                : "#fff"
+          }
+        />
+        <Text
+          style={[
+            styles.filterText,
+            selectedFilter === item.key && styles.filterTextActive,
+          ]}
+        >
+          {item.label}
+        </Text>
+        {item.count > 0 && (
+          <View
+            style={[
+              styles.countBadge,
+              selectedFilter === item.key && styles.countBadgeActive,
+            ]}
+          >
+            <Text
+              style={[
+                styles.countText,
+                selectedFilter === item.key && styles.countTextActive,
+              ]}
+            >
+              {item.count}
+            </Text>
+          </View>
+        )}
+      </Pressable>
+    ),
+    [selectedFilter, isLightTheme, colors.text, styles]
+  );
+
   // État vide
   const renderEmptyState = () => (
     <View style={styles.emptyContainer}>
@@ -258,8 +310,6 @@ const FavoritesScreen: React.FC = () => {
       </Text>
     </View>
   );
-
-  const styles = getStyles(colors, overlayTextColor, currentTheme);
 
   return (
     <ThemedImageBackground
@@ -306,52 +356,7 @@ const FavoritesScreen: React.FC = () => {
           maxToRenderPerBatch={5}
           windowSize={5}
           removeClippedSubviews={false}
-          renderItem={({ item }) => (
-            <Pressable
-              style={[
-                styles.filterButton,
-                selectedFilter === item.key && styles.filterButtonActive,
-              ]}
-              onPress={() => setSelectedFilter(item.key)}
-            >
-              <MCIcon
-                name={item.icon as any}
-                size={18}
-                color={
-                  selectedFilter === item.key
-                    ? "#000"
-                    : isLightTheme
-                    ? colors.text
-                    : "#fff"
-                }
-              />
-              <Text
-                style={[
-                  styles.filterText,
-                  selectedFilter === item.key && styles.filterTextActive,
-                ]}
-              >
-                {item.label}
-              </Text>
-              {item.count > 0 && (
-                <View
-                  style={[
-                    styles.countBadge,
-                    selectedFilter === item.key && styles.countBadgeActive,
-                  ]}
-                >
-                  <Text
-                    style={[
-                      styles.countText,
-                      selectedFilter === item.key && styles.countTextActive,
-                    ]}
-                  >
-                    {item.count}
-                  </Text>
-                </View>
-              )}
-            </Pressable>
-          )}
+          renderItem={renderFilterItem}
         />
       </View>
 

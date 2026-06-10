@@ -65,9 +65,7 @@ export function usePrayerTimesCache(
   // Stabiliser les valeurs primitives
   const latitude = location?.coords?.latitude;
   const longitude = location?.coords?.longitude;
-  const dateKey = useMemo(() => {
-    return `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
-  }, [date]);
+  const dateKey = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
 
   // Clé de cache unique
   const cacheKey = useMemo(() => {

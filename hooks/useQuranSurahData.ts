@@ -34,8 +34,34 @@ export function useQuranSurahData({
 
   const versesFlatListRef = useRef<FlatList>(null);
   const surahDataRequestIdRef = useRef(0);
+  const offlineIndexLoadedRef = useRef(false);
 
   const lang = resolveQuranApiLang(i18n.language);
+
+  const selectSourate = useCallback((surahNumber: number) => {
+    setSearchQuery("");
+    setSelectedSourate(surahNumber);
+    requestAnimationFrame(() => {
+      versesFlatListRef.current?.scrollToOffset({ offset: 0, animated: false });
+    });
+  }, []);
+
+  const loadSourates = useCallback(async (language: string, signal?: AbortSignal) => {
+    try {
+      const res = await fetch(
+        `https://api.quran.com/api/v4/chapters?language=${language}`,
+        { signal },
+      );
+      const json = await res.json();
+      if (!signal?.aborted) {
+        setSourates(json.chapters ?? []);
+      }
+    } catch {
+      if (!signal?.aborted) {
+        setSourates([]);
+      }
+    }
+  }, []);
 
   const loadOfflineQuranData = useCallback(async () => {
     setLoadingOfflineData(true);
@@ -110,22 +136,23 @@ export function useQuranSurahData({
   );
 
   useEffect(() => {
-    fetch(`https://api.quran.com/api/v4/chapters?language=${lang}`)
-      .then((res) => res.json())
-      .then((json) => setSourates(json.chapters))
-      .catch(() => setSourates([]));
-  }, [lang]);
+    const controller = new AbortController();
+    void loadSourates(lang, controller.signal);
+    return () => controller.abort();
+  }, [lang, loadSourates]);
 
-  useEffect(() => {
-    const requestId = ++surahDataRequestIdRef.current;
-    const surahToLoad = selectedSourate;
+  const loadSurahVerses = useCallback(
+    async (surahToLoad: number, requestId: number) => {
+      const isStale = () =>
+        requestId !== surahDataRequestIdRef.current ||
+        surahToLoad !== selectedSourate;
 
-    const isStale = () =>
-      requestId !== surahDataRequestIdRef.current ||
-      surahToLoad !== selectedSourate;
-
-    async function fetchQuranData() {
       setLoading(true);
+
+      if (isPremium && !offlineIndexLoadedRef.current) {
+        offlineIndexLoadedRef.current = true;
+        void loadOfflineQuranData();
+      }
 
       if (isPremium) {
         const success = await loadOfflineSurah(surahToLoad, requestId);
@@ -189,23 +216,21 @@ export function useQuranSurahData({
       if (!isStale()) {
         setLoading(false);
       }
-    }
-
-    void fetchQuranData();
-  }, [selectedSourate, lang, isPremium, isConnected, loadOfflineSurah]);
+    },
+    [
+      selectedSourate,
+      lang,
+      isPremium,
+      isConnected,
+      loadOfflineSurah,
+      loadOfflineQuranData,
+    ],
+  );
 
   useEffect(() => {
-    if (isPremium) {
-      void loadOfflineQuranData();
-    }
-  }, [isPremium, loadOfflineQuranData]);
-
-  useEffect(() => {
-    setSearchQuery("");
-    requestAnimationFrame(() => {
-      versesFlatListRef.current?.scrollToOffset({ offset: 0, animated: false });
-    });
-  }, [selectedSourate]);
+    const requestId = ++surahDataRequestIdRef.current;
+    void loadSurahVerses(selectedSourate, requestId);
+  }, [selectedSourate, loadSurahVerses]);
 
   const filteredVerses = useMemo(() => {
     if (!searchQuery.trim()) {
@@ -257,6 +282,7 @@ export function useQuranSurahData({
     setSearchQuery,
     sourates,
     selectedSourate,
+    selectSourate,
     setSelectedSourate,
     arabicVerses,
     phoneticArr,

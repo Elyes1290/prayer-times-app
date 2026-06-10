@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Pressable, Image } from "react-native";
+import { View, Text, Pressable } from "react-native";
 import { Image as ExpoImage } from "expo-image";
 import { MCIcon } from "@/components/icons/AppVectorIcons";
 import FavoriteButton from "@/components/FavoriteButton";
@@ -323,10 +323,10 @@ export const QuranVerseListItem = React.memo(function QuranVerseListItem({
       ) : null}
 
       {showSeparator && (
-        <Image
+        <ExpoImage
           source={require("../../assets/images/ayah_separator.png")}
           style={styles.ayahSeparator}
-          resizeMode="contain"
+          contentFit="contain"
         />
       )}
     </View>

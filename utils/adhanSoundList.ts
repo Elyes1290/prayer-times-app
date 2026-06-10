@@ -76,8 +76,9 @@ export function areAdhanSoundListsEqual(
   a: readonly AdhanSoundKey[],
   b: readonly AdhanSoundKey[]
 ): boolean {
-  if (a.length !== b.length) return false;
-  return a.every((sound, index) => sound === b[index]);
+  return (
+    a.length === b.length && a.every((sound, index) => sound === b[index])
+  );
 }
 
 export function arePremiumSoundTitlesEqual(

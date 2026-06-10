@@ -1,11 +1,6 @@
 import React from "react";
-import {
-  FlatList,
-  ImageBackground,
-  Pressable,
-  Text,
-  View,
-} from "react-native";
+import { FlatList, Pressable, Text, View } from "react-native";
+import CachedImageBackground from "../CachedImageBackground";
 import { useTranslation } from "react-i18next";
 import { EdgeInsets, SafeAreaView } from "react-native-safe-area-context";
 import { MCIcon } from "@/components/icons/AppVectorIcons";
@@ -67,7 +62,7 @@ export function QuranOfflinePremiumView({
   const { t } = useTranslation();
 
   return (
-    <ImageBackground
+    <CachedImageBackground
       source={require("../../assets/images/parchment_bg.jpg")}
       style={{ flex: 1 }}
     >
@@ -131,6 +126,6 @@ export function QuranOfflinePremiumView({
         renderItem={renderSourateModalItem}
         maxHeight={windowHeight * 0.8}
       />
-    </ImageBackground>
+    </CachedImageBackground>
   );
 }

@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Pressable, ScrollView, FlatList, Alert } from 'react-native';
+import React, { useState, useEffect, useCallback } from 'react';
+import { View, Text, StyleSheet, Pressable, ScrollView, FlatList, Alert, type ListRenderItemInfo } from 'react-native';
 import { usePrayerTimesWidget } from '../hooks/usePrayerTimesWidget';
 import { useRouter } from 'expo-router';
 import { NativeModules, Platform } from 'react-native';
@@ -7,6 +7,10 @@ import { NativeModules, Platform } from 'react-native';
 const { PrayerTimesWidgetModule } = NativeModules;
 
 type LogEntry = { id: string; text: string };
+
+const LogListItem = React.memo(function LogListItem({ text }: { text: string }) {
+  return <Text style={styles.logText}>{text}</Text>;
+});
 
 export default function DebugWidgetScreen() {
   const { back } = useRouter();
@@ -24,6 +28,13 @@ export default function DebugWidgetScreen() {
     }
   }, [back]);
 
+  const renderLogItem = useCallback(
+    ({ item: entry }: ListRenderItemInfo<LogEntry>) => (
+      <LogListItem text={entry.text} />
+    ),
+    [],
+  );
+
   const addLog = (message: string) => {
     const timestamp = new Date().toLocaleTimeString();
     const text = `[${timestamp}] ${message}`;
@@ -34,33 +45,23 @@ export default function DebugWidgetScreen() {
     console.log(`[DebugWidget] ${message}`);
   };
 
-  // Exécuter les tests automatiquement au chargement
-  React.useEffect(() => {
-    const timer1 = setTimeout(() => testModuleExists(), 500);
-    const timer2 = setTimeout(() => testWidgetAvailability(), 1000);
-    return () => {
-      clearTimeout(timer1);
-      clearTimeout(timer2);
-    };
-  }, []);
-
-  const testModuleExists = () => {
+  const testModuleExists = useCallback(() => {
     addLog('=== TEST MODULE EXISTS ===');
     addLog(`Platform.OS: ${Platform.OS}`);
     addLog(`PrayerTimesWidgetModule existe: ${!!PrayerTimesWidgetModule}`);
-    
+
     if (PrayerTimesWidgetModule) {
       addLog('✅ Module trouvé !');
       addLog(`Méthodes disponibles: ${Object.keys(PrayerTimesWidgetModule).join(', ')}`);
     } else {
       addLog('❌ Module non trouvé !');
     }
-  };
+  }, []);
 
-  const testWidgetAvailability = async () => {
+  const testWidgetAvailability = useCallback(async () => {
     addLog('=== TEST DISPONIBILITÉ ===');
     addLog(`isWidgetAvailable: ${isWidgetAvailable}`);
-    
+
     if (PrayerTimesWidgetModule) {
       try {
         const available = await PrayerTimesWidgetModule.isWidgetAvailable();
@@ -69,7 +70,16 @@ export default function DebugWidgetScreen() {
         addLog(`❌ Erreur: ${error.message}`);
       }
     }
-  };
+  }, [isWidgetAvailable]);
+
+  useEffect(() => {
+    const timer1 = setTimeout(() => testModuleExists(), 500);
+    const timer2 = setTimeout(() => testWidgetAvailability(), 1000);
+    return () => {
+      clearTimeout(timer1);
+      clearTimeout(timer2);
+    };
+  }, [testModuleExists, testWidgetAvailability]);
 
   const testWritePrayerTimes = async () => {
     addLog('=== TEST ÉCRITURE ===');
@@ -160,9 +170,7 @@ export default function DebugWidgetScreen() {
           style={styles.logsScroll}
           data={logs}
           keyExtractor={(entry) => entry.id}
-          renderItem={({ item: entry }) => (
-            <Text style={styles.logText}>{entry.text}</Text>
-          )}
+          renderItem={renderLogItem}
         />
       </View>
     </View>

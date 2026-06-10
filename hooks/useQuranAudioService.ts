@@ -136,20 +136,22 @@ export const useQuranAudioService = (): QuranAudioServiceInterface => {
 
   const waitForPlaybackStart = useCallback(async (): Promise<void> => {
     const maxAttempts = 40;
-    let attempt = 0;
-    while (attempt < maxAttempts) {
+
+    const tryStartPlayback = async (attempt: number): Promise<void> => {
+      if (attempt >= maxAttempts) return;
       try {
         await QuranAudioServiceModule.playAudio();
         setAudioState((prevState) => ({
           ...prevState,
           isPlaying: true,
         }));
-        return;
       } catch {
         await new Promise((resolve) => setTimeout(resolve, 150));
-        attempt += 1;
+        await tryStartPlayback(attempt + 1);
       }
-    }
+    };
+
+    await tryStartPlayback(0);
   }, []);
 
   // Initialiser l'écouteur d'événements

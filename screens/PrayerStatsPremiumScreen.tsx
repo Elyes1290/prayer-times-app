@@ -156,6 +156,17 @@ const PrayerStatsPremiumScreen: React.FC = () => {
     setRefreshing(false);
   }, [refresh]);
 
+  const refreshControl = useMemo(
+    () => (
+      <RefreshControl
+        refreshing={refreshing}
+        onRefresh={onRefresh}
+        tintColor={colors.primary}
+      />
+    ),
+    [refreshing, onRefresh, colors.primary],
+  );
+
   const {
     prayerRows,
     completedCount,
@@ -387,13 +398,7 @@ const PrayerStatsPremiumScreen: React.FC = () => {
               styles.content,
               { paddingBottom: bottomContentPadding },
             ]}
-            refreshControl={
-              <RefreshControl
-                refreshing={refreshing}
-                onRefresh={onRefresh}
-                tintColor={colors.primary}
-              />
-            }
+            refreshControl={refreshControl}
             showsVerticalScrollIndicator={false}
           >
             {activeTab === "today" ? (

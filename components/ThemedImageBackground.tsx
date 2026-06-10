@@ -4,30 +4,36 @@
  */
 
 import React from "react";
-import { ImageBackground, ImageBackgroundProps } from "react-native";
+import { type StyleProp, type ViewStyle } from "react-native";
+import { type ImageContentFit, type ImageSource } from "expo-image";
 import { useThemeAssets } from "../hooks/useThemeAssets";
+import CachedImageBackground from "./CachedImageBackground";
 
-interface ThemedImageBackgroundProps
-  extends Omit<ImageBackgroundProps, "source"> {
-  // On peut ajouter des props personnalisées si nécessaire
-  fallbackSource?: any;
-}
+type ThemedImageBackgroundProps = {
+  children?: React.ReactNode;
+  style?: StyleProp<ViewStyle>;
+  imageStyle?: StyleProp<ViewStyle>;
+  contentFit?: ImageContentFit;
+  fallbackSource?: ImageSource;
+};
 
 export default function ThemedImageBackground({
   children,
   style,
+  imageStyle,
+  contentFit,
   fallbackSource,
-  ...props
 }: ThemedImageBackgroundProps) {
   const { backgroundImage } = useThemeAssets();
 
   return (
-    <ImageBackground
+    <CachedImageBackground
       source={backgroundImage || fallbackSource}
       style={style}
-      {...props}
+      imageStyle={imageStyle}
+      contentFit={contentFit}
     >
       {children}
-    </ImageBackground>
+    </CachedImageBackground>
   );
 }

@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useMemo } from "react";
 import {
   View,
   Text,
@@ -471,10 +471,22 @@ export default function ProphetStoriesScreen() {
     setStories((prevStories) => [...prevStories]);
   }, [favorites]);
 
-  const onRefresh = () => {
+  const onRefresh = useCallback(() => {
     setRefreshing(true);
     loadStories(false);
-  };
+  }, [loadStories]);
+
+  const listRefreshControl = useMemo(
+    () => (
+      <RefreshControl
+        refreshing={refreshing}
+        onRefresh={onRefresh}
+        colors={[colors.primary]}
+        tintColor={colors.primary}
+      />
+    ),
+    [refreshing, onRefresh, colors.primary],
+  );
 
   const handleStoryPress = async (story: ProphetStory) => {
     const isPremiumStory =
@@ -850,14 +862,7 @@ export default function ProphetStoriesScreen() {
         data={stories || []}
         renderItem={renderStoryCard}
         keyExtractor={(item, index) => item?.id || String(index)}
-        refreshControl={
-          <RefreshControl
-            refreshing={refreshing}
-            onRefresh={onRefresh}
-            colors={[colors.primary]}
-            tintColor={colors.primary}
-          />
-        }
+        refreshControl={listRefreshControl}
         contentContainerStyle={[
           styles.listContent,
           {
