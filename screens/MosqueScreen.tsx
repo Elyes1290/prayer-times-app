@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { use } from "react";
 import {
   View,
@@ -11,14 +11,14 @@ import {
   Platform,
   Alert,
 } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { MCIcon } from "@/components/icons/AppVectorIcons";
+import { LinearGradient } from "@/components/ui/LinearGradientView";
 import { useTranslation } from "react-i18next";
 import ThemedImageBackground from "../components/ThemedImageBackground";
 import {
   useThemeColors,
   useOverlayTextColor,
-  useOverlayIconColor,
-  useCurrentTheme,
 } from "../hooks/useThemeColor";
 import { makeBoxShadow } from "../utils/shadowUtils";
 import { SettingsContext } from "../contexts/SettingsContext";
@@ -68,6 +68,105 @@ function openDirections(mosque: Mosque) {
   }
 }
 
+function formatDistance(
+  distanceMeters: number | undefined,
+  unknownLabel: string,
+): string {
+  if (distanceMeters == null) {
+    return unknownLabel;
+  }
+  if (distanceMeters < 1000) {
+    return `${Math.round(distanceMeters)} m`;
+  }
+  return `${(distanceMeters / 1000).toFixed(1)} km`;
+}
+
+type MosqueListItemProps = {
+  item: Mosque;
+  primaryColor: string;
+  onDirections: (mosque: Mosque) => void;
+  onCall: (phone?: string) => void;
+  directionsLabel: string;
+  callLabel: string;
+  distanceUnknownLabel: string;
+};
+
+const MosqueListItem = React.memo(function MosqueListItem({
+  item,
+  primaryColor,
+  onDirections,
+  onCall,
+  directionsLabel,
+  callLabel,
+  distanceUnknownLabel,
+}: MosqueListItemProps) {
+  const hasPhone = !!item.phone;
+
+  return (
+    <View style={mosqueStyles.card}>
+      <LinearGradient
+        colors={["rgba(21, 34, 56, 0.96)", "rgba(11, 21, 32, 0.94)"]}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
+        style={mosqueStyles.cardGradient}
+      >
+        <View style={mosqueStyles.cardTopRow}>
+          <View style={mosqueStyles.iconBadge}>
+            <MCIcon name="mosque" size={22} color={primaryColor} />
+          </View>
+          <View style={mosqueStyles.cardTitleBlock}>
+            <Text style={mosqueStyles.mosqueName} numberOfLines={2}>
+              {item.name}
+            </Text>
+            <Text style={mosqueStyles.mosqueAddress} numberOfLines={2}>
+              {item.address}
+            </Text>
+          </View>
+          <View style={mosqueStyles.distanceBadge}>
+            <MCIcon name="map-marker" size={14} color="#E8C872" />
+            <Text style={mosqueStyles.distanceText}>
+              {formatDistance(item.distance, distanceUnknownLabel)}
+            </Text>
+          </View>
+        </View>
+
+        <View style={mosqueStyles.actionsRow}>
+          <Pressable
+            style={[mosqueStyles.actionButton, mosqueStyles.actionPrimary]}
+            onPress={() => onDirections(item)}
+          >
+            <MCIcon name="directions" size={18} color="#FFFFFF" />
+            <Text style={mosqueStyles.actionPrimaryText}>{directionsLabel}</Text>
+          </Pressable>
+          <Pressable
+            style={[
+              mosqueStyles.actionButton,
+              mosqueStyles.actionSecondary,
+              !hasPhone && mosqueStyles.actionDisabled,
+            ]}
+            onPress={() => onCall(item.phone)}
+            disabled={!hasPhone}
+          >
+            <MCIcon
+              name="phone"
+              size={18}
+              color={hasPhone ? primaryColor : "rgba(255,255,255,0.35)"}
+            />
+            <Text
+              style={[
+                mosqueStyles.actionSecondaryText,
+                !hasPhone && mosqueStyles.actionDisabledText,
+              ]}
+            >
+              {callLabel}
+            </Text>
+          </Pressable>
+        </View>
+      </LinearGradient>
+    </View>
+  );
+});
+
 export default function MosqueScreen() {
   const { t } = useTranslation();
   const [mosques, setMosques] = useState<Mosque[]>([]);
@@ -77,10 +176,16 @@ export default function MosqueScreen() {
   // Contextes et hooks
   const settings = use(SettingsContext);
   const { location } = useLocation();
+  const insets = useSafeAreaInsets();
   const colors = useThemeColors();
   const overlayTextColor = useOverlayTextColor();
-  const overlayIconColor = useOverlayIconColor();
-  const currentTheme = useCurrentTheme();
+
+  const directionsLabel = t("mosque_screen.directions", "Itinéraire");
+  const callLabel = t("mosque_screen.call", "Appeler");
+  const distanceUnknownLabel = t(
+    "mosque_screen.distance_unknown",
+    "Distance inconnue",
+  );
 
   // 🕌 RECHERCHE SIMPLE ET EFFICACE
   const searchMosques = useCallback(
@@ -483,79 +588,76 @@ export default function MosqueScreen() {
     // Ne PAS inclure searchMosques pour éviter la boucle infinie
   ]);
 
-  const callMosque = (phone?: string) => {
-    if (phone) {
-      Linking.openURL(`tel:${phone}`);
-    } else {
-      Alert.alert(
-        "Info",
-        t("mosque_screen.no_phone_available", "Numéro non disponible")
-      );
+  const callMosque = useCallback(
+    (phone?: string) => {
+      if (phone) {
+        Linking.openURL(`tel:${phone}`);
+      } else {
+        Alert.alert(
+          "Info",
+          t("mosque_screen.no_phone_available", "Numéro non disponible"),
+        );
+      }
+    },
+    [t],
+  );
+
+  const styles = getStyles(colors, overlayTextColor);
+
+  const renderMosqueItem = useCallback(
+    ({ item }: { item: Mosque }) => (
+      <MosqueListItem
+        item={item}
+        primaryColor={colors.primary}
+        onDirections={openDirections}
+        onCall={callMosque}
+        directionsLabel={directionsLabel}
+        callLabel={callLabel}
+        distanceUnknownLabel={distanceUnknownLabel}
+      />
+    ),
+    [
+      colors.primary,
+      callMosque,
+      directionsLabel,
+      callLabel,
+      distanceUnknownLabel,
+    ],
+  );
+
+  const listEmpty = useMemo(
+    () => (
+      <View style={styles.emptyContainer}>
+        <MCIcon name="mosque" size={48} color="rgba(255,255,255,0.35)" />
+        <Text style={styles.emptyText}>
+          {t(
+            "mosque_screen.no_mosques_found",
+            "Aucune mosquée trouvée à proximité",
+          )}
+        </Text>
+      </View>
+    ),
+    [styles.emptyContainer, styles.emptyText, t],
+  );
+
+  const handleRetry = useCallback(() => {
+    const currentLocation = getCurrentLocation();
+    if (currentLocation) {
+      searchMosques(currentLocation.latitude, currentLocation.longitude);
     }
+  }, [searchMosques]);
+
+  const screenPadding = {
+    paddingTop: insets.top + 8,
+    paddingBottom: Math.max(insets.bottom, 16) + 120,
   };
 
-  // Définir styles AVANT renderMosqueItem pour éviter les problèmes
-  const styles = getStyles(
-    colors,
-    overlayTextColor,
-    overlayIconColor,
-    currentTheme
-  );
-
-  // Rendu d'une mosquée
-  const renderMosqueItem = ({ item }: { item: Mosque }) => (
-    <View style={styles.mosqueCard}>
-      <View style={styles.mosqueHeader}>
-        <MCIcon
-          name="mosque"
-          size={24}
-          color={colors.primary} // 🌅 Utilise la couleur du thème actif
-          style={styles.mosqueIcon}
-        />
-        <View style={styles.mosqueInfo}>
-          <Text style={styles.mosqueName}>{item.name}</Text>
-          <Text style={styles.mosqueAddress}>{item.address}</Text>
-          <Text style={styles.mosqueDistance}>
-            📍{" "}
-            {item.distance
-              ? `${(item.distance / 1000).toFixed(1)} km`
-              : t("mosque_screen.distance_unknown", "Distance inconnue")}
-          </Text>
-        </View>
-      </View>
-
-      <View style={styles.mosqueActions}>
-        <Pressable
-          style={styles.actionButton}
-          onPress={() => openDirections(item)}
-        >
-          <MCIcon name="directions" size={20} color={colors.primary} /> {/* 🌅 Utilise la couleur du thème actif */}
-          <Text style={styles.actionText}>
-            {t("mosque_screen.directions", "Itinéraire")}
-          </Text>
-        </Pressable>
-
-        {item.phone && (
-          <Pressable
-            style={styles.actionButton}
-            onPress={() => callMosque(item.phone)}
-          >
-            <MCIcon name="phone" size={20} color={colors.primary} /> {/* 🌅 Utilise la couleur du thème actif */}
-            <Text style={styles.actionText}>
-              {t("mosque_screen.call", "Appeler")}
-            </Text>
-          </Pressable>
-        )}
-      </View>
-    </View>
-  );
-
-  // États de chargement et d'erreur
   if (loading) {
     return (
       <ThemedImageBackground style={styles.container}>
-        <View style={styles.loadingContainer}>
-          <ActivityIndicator size="large" color={colors.primary} /> {/* 🌅 Utilise la couleur du thème actif */}
+        <View style={styles.overlay} pointerEvents="none" />
+        <View style={[styles.centeredState, screenPadding]}>
+          <ActivityIndicator size="large" color={colors.primary} />
           <Text style={styles.loadingText}>
             {t("mosque_screen.searching_mosques", "Recherche de mosquées...")}
           </Text>
@@ -567,25 +669,13 @@ export default function MosqueScreen() {
   if (error) {
     return (
       <ThemedImageBackground style={styles.container}>
-        <View style={styles.errorContainer}>
-          <MCIcon
-            name="alert-circle"
-            size={48}
-            color="#FF6B6B"
-          />
+        <View style={styles.overlay} pointerEvents="none" />
+        <View style={[styles.centeredState, screenPadding]}>
+          <View style={styles.errorIconWrap}>
+            <MCIcon name="alert-circle" size={40} color="#FF8A8A" />
+          </View>
           <Text style={styles.errorText}>{error}</Text>
-          <Pressable
-            style={styles.retryButton}
-            onPress={() => {
-              const currentLocation = getCurrentLocation();
-              if (currentLocation) {
-                searchMosques(
-                  currentLocation.latitude,
-                  currentLocation.longitude
-                );
-              }
-            }}
-          >
+          <Pressable style={styles.retryButton} onPress={handleRetry}>
             <Text style={styles.retryButtonText}>
               {t("mosque_screen.retry", "Réessayer")}
             </Text>
@@ -595,63 +685,144 @@ export default function MosqueScreen() {
     );
   }
 
-  // Interface principale
   return (
     <ThemedImageBackground style={styles.container}>
-      <View style={styles.header}>
-        <MCIcon
-          name="mosque"
-          size={32}
-          color={overlayTextColor}
-        />
-        <Text style={styles.title}>
-          {t("mosque_screen.mosques_nearby", "Mosquées à proximité")}
-        </Text>
-        <Text style={styles.subtitle}>
-          {mosques.length}{" "}
-          {t("mosque_screen.mosque_found", "mosquée(s) trouvée(s)")}
-        </Text>
-      </View>
-
+      <View style={styles.overlay} pointerEvents="none" />
       <FlatList
         data={mosques}
         renderItem={renderMosqueItem}
         keyExtractor={(item) => item.id}
-        contentContainerStyle={styles.listContent}
+        contentContainerStyle={[styles.listContent, screenPadding]}
         showsVerticalScrollIndicator={false}
-        ListEmptyComponent={
-          <View style={styles.emptyContainer}>
-            <MCIcon name="mosque" size={64} color="#94A3B8" />
-            <Text style={styles.emptyText}>
-              {t(
-                "mosque_screen.no_mosques_found",
-                "Aucune mosquée trouvée à proximité"
-              )}
+        ListHeaderComponent={
+          <View style={styles.header}>
+            <View style={styles.headerIconBadge}>
+              <MCIcon name="mosque" size={28} color={colors.primary} />
+            </View>
+            <Text style={styles.title}>
+              {t("mosque_screen.mosques_nearby", "Mosquées à proximité")}
+            </Text>
+            <Text style={styles.subtitle}>
+              {mosques.length}{" "}
+              {t("mosque_screen.mosque_found", "mosquée(s) trouvée(s)")}
             </Text>
           </View>
         }
+        ListEmptyComponent={listEmpty}
       />
     </ThemedImageBackground>
   );
 }
 
-// Styles dynamiques simples et clairs
-const getStyles = (
-  colors: any,
-  overlayTextColor: string,
-  overlayIconColor: string,
-  currentTheme: "light" | "dark" | "morning" | "sunset"
-) => {
-  // 🆕 Les couleurs sont maintenant gérées directement via colors du thème actif
-  return StyleSheet.create({
+const mosqueStyles = StyleSheet.create({
+  card: {
+    marginBottom: 14,
+    borderRadius: 18,
+    overflow: "hidden",
+    borderWidth: 1,
+    borderColor: "rgba(255,255,255,0.08)",
+  },
+  cardGradient: {
+    padding: 16,
+  },
+  cardTopRow: {
+    flexDirection: "row",
+    alignItems: "flex-start",
+    gap: 12,
+    marginBottom: 14,
+  },
+  iconBadge: {
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    backgroundColor: "rgba(255,255,255,0.08)",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  cardTitleBlock: {
+    flex: 1,
+    minWidth: 0,
+  },
+  mosqueName: {
+    fontSize: 17,
+    fontWeight: "700",
+    color: "#FFFFFF",
+    lineHeight: 22,
+    marginBottom: 4,
+  },
+  mosqueAddress: {
+    fontSize: 13,
+    color: "rgba(255,255,255,0.72)",
+    lineHeight: 18,
+  },
+  distanceBadge: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 4,
+    backgroundColor: "rgba(232, 200, 114, 0.14)",
+    paddingHorizontal: 8,
+    paddingVertical: 5,
+    borderRadius: 12,
+    maxWidth: 96,
+  },
+  distanceText: {
+    fontSize: 12,
+    fontWeight: "600",
+    color: "#E8C872",
+  },
+  actionsRow: {
+    flexDirection: "row",
+    gap: 10,
+  },
+  actionButton: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 6,
+    paddingVertical: 11,
+    borderRadius: 12,
+  },
+  actionPrimary: {
+    backgroundColor: "rgba(255,255,255,0.14)",
+  },
+  actionPrimaryText: {
+    color: "#FFFFFF",
+    fontSize: 14,
+    fontWeight: "600",
+  },
+  actionSecondary: {
+    backgroundColor: "rgba(255,255,255,0.06)",
+    borderWidth: 1,
+    borderColor: "rgba(255,255,255,0.12)",
+  },
+  actionSecondaryText: {
+    fontSize: 14,
+    fontWeight: "600",
+    color: "#FFFFFF",
+  },
+  actionDisabled: {
+    opacity: 0.45,
+  },
+  actionDisabledText: {
+    color: "rgba(255,255,255,0.45)",
+  },
+});
+
+const getStyles = (colors: any, overlayTextColor: string) =>
+  StyleSheet.create({
     container: {
       flex: 1,
     },
-    loadingContainer: {
+    overlay: {
+      ...StyleSheet.absoluteFillObject,
+      backgroundColor: "rgba(0, 0, 0, 0.58)",
+    },
+    centeredState: {
       flex: 1,
       justifyContent: "center",
       alignItems: "center",
-      padding: 20,
+      paddingHorizontal: 24,
     },
     loadingText: {
       marginTop: 16,
@@ -660,11 +831,14 @@ const getStyles = (
       textAlign: "center",
       fontWeight: "500",
     },
-    errorContainer: {
-      flex: 1,
-      justifyContent: "center",
+    errorIconWrap: {
+      width: 72,
+      height: 72,
+      borderRadius: 36,
+      backgroundColor: "rgba(255, 107, 107, 0.15)",
       alignItems: "center",
-      padding: 20,
+      justifyContent: "center",
+      marginBottom: 8,
     },
     errorText: {
       fontSize: 16,
@@ -674,12 +848,12 @@ const getStyles = (
       lineHeight: 24,
     },
     retryButton: {
-      backgroundColor: colors.primary, // 🌅 Utilise la couleur du thème actif
+      backgroundColor: colors.primary,
       paddingHorizontal: 24,
       paddingVertical: 12,
-      borderRadius: 8,
-      marginTop: 16,
-      boxShadow: "0px 2px 4px rgba(0,0,0,0.2)",
+      borderRadius: 12,
+      marginTop: 8,
+      boxShadow: makeBoxShadow(colors.shadow, 0, 2, 4, 0.2),
     },
     retryButtonText: {
       color: "#FFFFFF",
@@ -688,114 +862,51 @@ const getStyles = (
     },
     header: {
       alignItems: "center",
-      padding: 20,
-      paddingTop: 60,
-      backgroundColor: colors.surface, // 🌅 Utilise la couleur du thème actif
-      borderRadius: 16,
-      marginHorizontal: 16,
-      marginBottom: 8,
+      paddingHorizontal: 8,
+      paddingBottom: 20,
+    },
+    headerIconBadge: {
+      width: 56,
+      height: 56,
+      borderRadius: 28,
+      backgroundColor: "rgba(255,255,255,0.1)",
+      alignItems: "center",
+      justifyContent: "center",
+      marginBottom: 10,
+      borderWidth: 1,
+      borderColor: "rgba(255,255,255,0.12)",
     },
     title: {
-      fontSize: 28,
-      fontWeight: "bold",
+      fontSize: 26,
+      fontWeight: "700",
       color: overlayTextColor,
-      marginTop: 8,
       textAlign: "center",
-      textShadowColor: colors.shadow, // 🌅 Utilise la couleur du thème actif
-      textShadowOffset: { width: 0, height: 1 },
-      textShadowRadius: 2,
+      letterSpacing: 0.2,
     },
     subtitle: {
       fontSize: 14,
-      color: overlayTextColor,
-      opacity: 0.9,
-      marginTop: 4,
-      textShadowColor: colors.shadow, // 🌅 Utilise la couleur du thème actif
-      textShadowOffset: { width: 0, height: 1 },
-      textShadowRadius: 1,
+      color: "rgba(255,255,255,0.75)",
+      marginTop: 6,
+      textAlign: "center",
     },
     listContent: {
-      padding: 16,
-      paddingBottom: 120, // ✅ Plus d'espace pour éviter le menu de navigation
-    },
-    mosqueCard: {
-      backgroundColor: colors.cardBG, // 🌅 Utilise la couleur du thème actif
-      borderRadius: 16,
-      padding: 20,
-      marginBottom: 16,
-      boxShadow: makeBoxShadow(colors.shadow, 0, 4, 12, 0.15),
-      borderWidth: 1,
-      borderColor: colors.border, // 🌅 Utilise la couleur du thème actif
-    },
-    mosqueHeader: {
-      flexDirection: "row",
-      alignItems: "flex-start",
-      marginBottom: 16,
-    },
-    mosqueIcon: {
-      marginRight: 12,
-      marginTop: 2,
-    },
-    mosqueInfo: {
-      flex: 1,
-    },
-    mosqueName: {
-      fontSize: 18,
-      fontWeight: "bold",
-      color: colors.text, // 🌅 Utilise la couleur du thème actif
-      marginBottom: 6,
-      lineHeight: 24,
-    },
-    mosqueAddress: {
-      fontSize: 14,
-      color: colors.textSecondary, // 🌅 Utilise la couleur du thème actif
-      marginBottom: 6,
-      lineHeight: 20,
-    },
-    mosqueDistance: {
-      fontSize: 13,
-      color: colors.primary, // 🌅 Utilise la couleur du thème actif
-      fontWeight: "600",
-    },
-    mosqueActions: {
-      flexDirection: "row",
-      gap: 12,
-    },
-    actionButton: {
-      flexDirection: "row",
-      alignItems: "center",
-      backgroundColor: colors.surfaceVariant, // 🌅 Utilise la couleur du thème actif
       paddingHorizontal: 16,
-      paddingVertical: 10,
-      borderRadius: 10,
-      borderWidth: 1,
-      borderColor: colors.border, // 🌅 Utilise la couleur du thème actif
-      boxShadow: makeBoxShadow(colors.shadow, 0, 2, 4, 0.1),
-    },
-    actionText: {
-      color: colors.primary, // 🌅 Utilise la couleur du thème actif
-      fontSize: 14,
-      fontWeight: "600",
-      marginLeft: 6,
     },
     emptyContainer: {
       alignItems: "center",
-      padding: 40,
-      marginTop: 60,
-      backgroundColor: colors.surface, // 🌅 Utilise la couleur du thème actif
+      padding: 32,
+      marginTop: 24,
+      backgroundColor: "rgba(255,255,255,0.06)",
       borderRadius: 16,
-      marginHorizontal: 16,
+      borderWidth: 1,
+      borderColor: "rgba(255,255,255,0.08)",
     },
     emptyText: {
-      fontSize: 16,
+      fontSize: 15,
       color: overlayTextColor,
       textAlign: "center",
-      marginTop: 16,
-      opacity: 0.8,
-      lineHeight: 24,
-      textShadowColor: colors.shadow, // 🌅 Utilise la couleur du thème actif
-      textShadowOffset: { width: 0, height: 1 },
-      textShadowRadius: 1,
+      marginTop: 12,
+      lineHeight: 22,
+      opacity: 0.85,
     },
   });
-};

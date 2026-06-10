@@ -7,7 +7,6 @@ import {
   TextInput,
   Pressable,
   Alert,
-  ScrollView,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useTranslation } from "react-i18next";
@@ -29,6 +28,26 @@ const CATEGORIES = [
 ] as const;
 
 type CategoryKey = (typeof CATEGORIES)[number]["key"];
+
+type DhikrScreenState = {
+  selectedKey: CategoryKey;
+  search: string;
+};
+
+function isValidCategoryKey(key: string | undefined): key is CategoryKey {
+  return !!key && CATEGORIES.some((category) => category.key === key);
+}
+
+function createInitialScreenState(
+  categoryParam: CategoryKey | undefined,
+): DhikrScreenState {
+  return {
+    selectedKey: isValidCategoryKey(categoryParam)
+      ? categoryParam
+      : CATEGORIES[0].key,
+    search: "",
+  };
+}
 
 function convertToFavorite(
   item: any,
@@ -196,23 +215,26 @@ export default function DhikrScreen() {
     : null;
   const categoryParam = params.category as CategoryKey | undefined;
 
-  const [selectedKey, setSelectedKey] = useState<CategoryKey>(CATEGORIES[0].key);
-  const [search, setSearch] = useState("");
-
   const flatListRef = useRef<FlatList>(null);
   const scrollTargetKeyRef = useRef<string | null>(null);
 
-  useEffect(() => {
-    if (
-      categoryParam &&
-      CATEGORIES.some((c) => c.key === categoryParam) &&
-      categoryParam !== selectedKey
-    ) {
-      setSelectedKey(categoryParam);
-      setSearch("");
+  const [screenState, setScreenState] = useState<DhikrScreenState>(() =>
+    createInitialScreenState(categoryParam),
+  );
+  const [prevCategoryParam, setPrevCategoryParam] = useState(categoryParam);
+
+  if (categoryParam !== prevCategoryParam) {
+    setPrevCategoryParam(categoryParam);
+    if (isValidCategoryKey(categoryParam)) {
+      setScreenState({
+        selectedKey: categoryParam,
+        search: "",
+      });
       scrollTargetKeyRef.current = null;
     }
-  }, [categoryParam, selectedKey]);
+  }
+
+  const { selectedKey, search } = screenState;
 
   const selectedCat = CATEGORIES.find((c) => c.key === selectedKey)!;
   const namespace = selectedCat.namespace;
@@ -311,11 +333,44 @@ export default function DhikrScreen() {
   );
 
   const handleCategorySelect = useCallback((key: CategoryKey) => {
-    setSelectedKey(key);
-    setSearch("");
+    setScreenState({ selectedKey: key, search: "" });
     scrollTargetKeyRef.current = null;
     flatListRef.current?.scrollToOffset({ offset: 0, animated: false });
   }, []);
+
+  const renderCategoryChip = useCallback(
+    ({ item: cat }: { item: (typeof CATEGORIES)[number] }) => {
+      const isActive = selectedKey === cat.key;
+      return (
+        <Pressable
+          testID={`category-${cat.key}`}
+          onPress={() => handleCategorySelect(cat.key)}
+          style={[
+            styles.categoryChip,
+            styles.categoryChipSpacing,
+            isActive && styles.categoryChipActive,
+          ]}
+        >
+          <View style={styles.categoryChipIcon}>
+            <IonIcon
+              name={cat.icon}
+              size={15}
+              color={isActive ? "#1A2332" : "rgba(255,255,255,0.8)"}
+            />
+          </View>
+          <Text
+            style={[
+              styles.categoryChipText,
+              isActive && styles.categoryChipTextActive,
+            ]}
+          >
+            {categoryLabels[cat.key]}
+          </Text>
+        </Pressable>
+      );
+    },
+    [selectedKey, categoryLabels, handleCategorySelect],
+  );
 
   const listHeader = useMemo(
     () => (
@@ -357,40 +412,15 @@ export default function DhikrScreen() {
         </Text>
       </View>
 
-      <ScrollView
+      <FlatList
         horizontal
+        data={CATEGORIES}
+        keyExtractor={(item) => item.key}
+        renderItem={renderCategoryChip}
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={styles.categoryRow}
         style={styles.categoryScroll}
-      >
-        {CATEGORIES.map((cat) => {
-          const isActive = selectedKey === cat.key;
-          return (
-            <Pressable
-              key={cat.key}
-              testID={`category-${cat.key}`}
-              onPress={() => handleCategorySelect(cat.key)}
-              style={[styles.categoryChip, isActive && styles.categoryChipActive]}
-            >
-              <View style={styles.categoryChipIcon}>
-                <IonIcon
-                  name={cat.icon}
-                  size={15}
-                  color={isActive ? "#1A2332" : "rgba(255,255,255,0.8)"}
-                />
-              </View>
-              <Text
-                style={[
-                  styles.categoryChipText,
-                  isActive && styles.categoryChipTextActive,
-                ]}
-              >
-                {categoryLabels[cat.key]}
-              </Text>
-            </Pressable>
-          );
-        })}
-      </ScrollView>
+      />
 
       <View style={styles.searchContainer}>
         <IonIcon
@@ -404,11 +434,18 @@ export default function DhikrScreen() {
           placeholder={t("dhikr.search_placeholder") || "Rechercher..."}
           placeholderTextColor="rgba(255,255,255,0.4)"
           value={search}
-          onChangeText={setSearch}
+          onChangeText={(text) =>
+            setScreenState((current) => ({ ...current, search: text }))
+          }
           clearButtonMode="while-editing"
         />
         {search.length > 0 ? (
-          <Pressable onPress={() => setSearch("")} hitSlop={8}>
+          <Pressable
+            onPress={() =>
+              setScreenState((current) => ({ ...current, search: "" }))
+            }
+            hitSlop={8}
+          >
             <IonIcon name="close-circle" size={18} color="rgba(255,255,255,0.45)" />
           </Pressable>
         ) : null}
@@ -490,6 +527,9 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(255, 255, 255, 0.1)",
     borderWidth: 1,
     borderColor: "rgba(255, 255, 255, 0.12)",
+  },
+  categoryChipSpacing: {
+    marginRight: 8,
   },
   categoryChipActive: {
     backgroundColor: "#E8C872",

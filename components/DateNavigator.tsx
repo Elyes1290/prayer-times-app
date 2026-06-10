@@ -1,6 +1,12 @@
 // components/DateNavigator.tsx
 import React from "react";
-import { StyleSheet, Text, View, Pressable } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Pressable,
+  useWindowDimensions,
+} from "react-native";
 import { MIcon } from "@/components/icons/AppVectorIcons";
 import { useTranslation } from "react-i18next";
 import {
@@ -19,8 +25,9 @@ type Props = {
 
 export function DateNavigator({ date, onPrev, onNext, onReset }: Props) {
   const { t, i18n } = useTranslation();
+  const { width: screenWidth } = useWindowDimensions();
+  const isCompact = screenWidth < 400;
 
-  // Utiliser les couleurs thématiques
   const colors = useThemeColors();
   const overlayTextColor = useOverlayTextColor();
   const currentTheme = useCurrentTheme();
@@ -43,86 +50,124 @@ export function DateNavigator({ date, onPrev, onNext, onReset }: Props) {
     return "en-US";
   };
 
-  // Styles dynamiques basés sur le thème
+  const arrowColor = isLightTheme ? colors.primary : "#FFF";
+  const iconSize = isCompact ? 24 : 28;
+
   const styles = StyleSheet.create({
     nav: {
       flexDirection: "row",
       alignItems: "center",
-      justifyContent: "center",
+      alignSelf: "stretch",
+      width: "100%",
+      maxWidth: "100%",
       marginVertical: 12,
-      gap: 6,
+      gap: isCompact ? 6 : 8,
+    },
+    dateControls: {
+      flex: 1,
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "center",
+      minWidth: 0,
+      gap: isCompact ? 2 : 4,
     },
     arrowBtn: {
-      padding: 6,
+      padding: isCompact ? 4 : 6,
       borderRadius: 18,
-      backgroundColor:
-        isLightTheme
-          ? "rgba(34, 139, 34, 0.15)"
-          : "rgba(30,30,30,0.3)",
-      marginHorizontal: 2,
+      backgroundColor: isLightTheme
+        ? "rgba(34, 139, 34, 0.15)"
+        : "rgba(30,30,30,0.3)",
       borderWidth: isLightTheme ? 1 : 0,
       borderColor: isLightTheme ? colors.border : "transparent",
+      flexShrink: 0,
     },
     text: {
-      fontSize: 17,
+      flexShrink: 1,
+      fontSize: isCompact ? 15 : 17,
       fontWeight: "600",
-      marginHorizontal: 10,
+      marginHorizontal: isCompact ? 4 : 8,
       color: overlayTextColor,
-      minWidth: 120,
       textAlign: "center",
-      textShadowColor:
-        isLightTheme
-          ? "rgba(255, 255, 255, 0.5)"
-          : "rgba(0,0,0,0.8)",
+      minWidth: 0,
+      textShadowColor: isLightTheme
+        ? "rgba(255, 255, 255, 0.5)"
+        : "rgba(0,0,0,0.8)",
       textShadowOffset: { width: 0, height: 1 },
       textShadowRadius: 2,
     },
     todayBtn: {
+      flexShrink: 0,
       backgroundColor: isLightTheme ? colors.primary : "#3faea6",
       borderRadius: 14,
-      paddingHorizontal: 14,
-      paddingVertical: 7,
-      marginLeft: 8,
-      boxShadow: makeBoxShadow(isLightTheme ? colors.shadow : "#3faea6", 0, 2, 4, 0.3),
+      paddingHorizontal: isCompact ? 10 : 12,
+      paddingVertical: isCompact ? 6 : 7,
+      maxWidth: isCompact ? 108 : 130,
+      boxShadow: makeBoxShadow(
+        isLightTheme ? colors.shadow : "#3faea6",
+        0,
+        2,
+        4,
+        0.3,
+      ),
     },
     todayText: {
       color: "#fff",
       fontWeight: "bold",
-      fontSize: 15,
-      letterSpacing: 0.5,
+      fontSize: isCompact ? 13 : 15,
+      letterSpacing: 0.3,
+      textAlign: "center",
       textShadowColor: "rgba(0,0,0,0.3)",
       textShadowOffset: { width: 0, height: 1 },
       textShadowRadius: 2,
     },
   });
 
-  const arrowColor = isLightTheme ? colors.primary : "#FFF";
-
   return (
     <View style={styles.nav} testID="date-navigator">
-      <Pressable
-        onPress={onPrev}
-        style={styles.arrowBtn}
-        testID="prev-button"
-      >
-        <MIcon name="chevron-left" size={28} color={arrowColor} />
-      </Pressable>
-      <Text style={styles.text} testID="date-text">
-        {date.toLocaleDateString(getLocale())}
-      </Text>
-      <Pressable
-        onPress={onNext}
-        style={styles.arrowBtn}
-        testID="next-button"
-      >
-        <MIcon name="chevron-right" size={28} color={arrowColor} />
-      </Pressable>
+      <View style={styles.dateControls}>
+        <Pressable
+          onPress={onPrev}
+          style={styles.arrowBtn}
+          testID="prev-button"
+          accessibilityRole="button"
+          accessibilityLabel={t("previous_day", "Jour précédent")}
+        >
+          <MIcon name="chevron-left" size={iconSize} color={arrowColor} />
+        </Pressable>
+        <Text
+          style={styles.text}
+          testID="date-text"
+          numberOfLines={1}
+          adjustsFontSizeToFit
+          minimumFontScale={0.85}
+        >
+          {date.toLocaleDateString(getLocale())}
+        </Text>
+        <Pressable
+          onPress={onNext}
+          style={styles.arrowBtn}
+          testID="next-button"
+          accessibilityRole="button"
+          accessibilityLabel={t("next_day", "Jour suivant")}
+        >
+          <MIcon name="chevron-right" size={iconSize} color={arrowColor} />
+        </Pressable>
+      </View>
       <Pressable
         onPress={onReset}
         style={styles.todayBtn}
         testID="reset-button"
+        accessibilityRole="button"
+        accessibilityLabel={t("today")}
       >
-        <Text style={styles.todayText}>{t("today")}</Text>
+        <Text
+          style={styles.todayText}
+          numberOfLines={1}
+          adjustsFontSizeToFit
+          minimumFontScale={0.8}
+        >
+          {t("today")}
+        </Text>
       </Pressable>
     </View>
   );

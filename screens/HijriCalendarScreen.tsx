@@ -35,7 +35,7 @@ const getStyles = (
   return StyleSheet.create({
     background: { flex: 1 },
     scroll: { flex: 1, backgroundColor: "transparent" },
-    container: { flexGrow: 1, padding: 20 },
+    container: { flexGrow: 1, paddingHorizontal: 16, paddingVertical: 20 },
     header: {
       fontSize: 28,
       fontWeight: "bold",
