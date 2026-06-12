@@ -9,9 +9,17 @@ export interface UserData {
   premium_status: number;
   subscription_type?: string;
   subscription_id?: string;
+  subscription_platform?: string;
+  stripe_customer_id?: string;
   premium_expiry?: string;
+  premium_activated_at?: string;
   language: string;
   last_sync: string;
+  device_id?: string;
+  is_vip?: boolean;
+  vip_reason?: string | null;
+  vip_granted_by?: string | null;
+  vip_granted_at?: string | null;
 }
 
 /**

@@ -2,7 +2,7 @@
   "expo": {
     "name": "MyAdhan: Muslim Prayer App",
     "slug": "prayer-times-app",
-    "version": "1.0.26",
+    "version": "1.0.24",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "prayertimesapp",
@@ -40,9 +40,7 @@
         "ITSAppUsesNonExemptEncryption": false
       },
       "entitlements": {
-        "com.apple.security.application-groups": [
-          "group.com.drogbinho.myadhan"
-        ]
+        "com.apple.security.application-groups": ["group.com.drogbinho.myadhan"]
       }
     },
     "android": {

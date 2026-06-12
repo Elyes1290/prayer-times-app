@@ -531,7 +531,8 @@
     "clear_all_title": "Favoriten löschen",
     "clear_all_confirm": "Sind Sie sicher, dass Sie alle Ihre Favoriten löschen möchten? Diese Aktion ist unumkehrbar.",
     "share_error": "Fehler beim Teilen",
-    "shared_from_app": "Geteilt von der Gebetszeiten-App"
+    "shared_from_app": "Geteilt von der Gebetszeiten-App",
+    "added_on": "Hinzugefügt am"
   },
   "asmaulhusna_search_placeholder": "Suchen Sie nach Namen, Bedeutung oder Aussprache...",
   "dhikr": {

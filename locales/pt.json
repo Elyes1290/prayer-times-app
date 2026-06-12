@@ -531,7 +531,8 @@
     "clear_all_title": "Limpar favoritos",
     "clear_all_confirm": "Tem certeza de que deseja excluir todos os seus favoritos? Esta ação é irreversível.",
     "share_error": "Erro ao compartilhar",
-    "shared_from_app": "Compartilhado do Aplicativo de Horários de Orações"
+    "shared_from_app": "Compartilhado do Aplicativo de Horários de Orações",
+    "added_on": "Adicionado em"
   },
   "asmaulhusna_search_placeholder": "Pesquisar por nome, significado ou transliteração...",
   "dhikr": {

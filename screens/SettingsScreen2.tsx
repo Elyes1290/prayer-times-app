@@ -35,7 +35,10 @@ import {
 } from "../hooks/useThemeColor";
 import { NominatimResult, useCitySearch } from "../hooks/useCitySearch";
 import { useTranslation } from "react-i18next";
-import { SafeAreaView } from "react-native-safe-area-context";
+import {
+  SafeAreaView,
+  useSafeAreaInsets,
+} from "react-native-safe-area-context";
 
 import { usePremium } from "../contexts/PremiumContext";
 import { MCIcon } from "@/components/icons/AppVectorIcons";
@@ -861,13 +864,21 @@ function SettingsSections(props: OptimizedSettingsSectionsProps) {
     currentTheme,
   ]);
 
-  const scrollBottomInset = props.hasPendingChanges ? 160 : 100;
+  const insets = useSafeAreaInsets();
+  // Aligné sur app/_layout.tsx : tabBar height 70 + bottom offset
+  const TAB_BAR_HEIGHT = 70;
+  const tabBarBottomOffset = Math.max(insets.bottom, 20);
+  const tabBarSpacerHeight = TAB_BAR_HEIGHT + tabBarBottomOffset + 12;
+  const applyBannerSpacerHeight = props.hasPendingChanges ? 80 : 0;
+  const scrollBottomInset = tabBarSpacerHeight + applyBannerSpacerHeight;
 
   return (
     <ScrollView
       style={{ flex: 1 }}
       contentInset={{ bottom: scrollBottomInset }}
+      scrollIndicatorInsets={{ bottom: tabBarSpacerHeight }}
       showsVerticalScrollIndicator={false}
+      keyboardShouldPersistTaps="handled"
     >
       <SettingsHeader
         t={t}
@@ -920,6 +931,10 @@ function SettingsSections(props: OptimizedSettingsSectionsProps) {
             />
           </Pressable>
         </View>
+      )}
+
+      {Platform.OS === "android" && (
+        <View style={{ height: scrollBottomInset }} />
       )}
     </ScrollView>
   );

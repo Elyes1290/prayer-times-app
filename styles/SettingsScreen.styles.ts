@@ -1143,6 +1143,7 @@ export const getStyles = (
     },
     activeSectionContent: {
       padding: 16,
+      paddingBottom: 12,
     },
     sectionDescription: {
       fontSize: 14,

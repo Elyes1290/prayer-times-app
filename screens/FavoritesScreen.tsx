@@ -24,6 +24,10 @@ import {
 } from "../contexts/FavoritesContext";
 import { useThemeColors } from "../hooks/useThemeAssets";
 import { useOverlayTextColor, useCurrentTheme } from "../hooks/useThemeColor";
+import {
+  useMakkaReadability,
+  type MakkaReadabilityStyle,
+} from "../utils/backgroundReadability";
 
 
 // Types de filtres
@@ -36,6 +40,7 @@ const FavoritesScreen: React.FC = () => {
   const colors = useThemeColors();
   const overlayTextColor = useOverlayTextColor();
   const currentTheme = useCurrentTheme();
+  const makkaReadability = useMakkaReadability();
   const isLightTheme = currentTheme === "light" || currentTheme === "morning";
 
   const {
@@ -120,7 +125,12 @@ const FavoritesScreen: React.FC = () => {
     return favorites.filter((fav) => fav.type === selectedFilter);
   }, [favorites, selectedFilter]);
 
-  const styles = getStyles(colors, overlayTextColor, currentTheme);
+  const styles = getStyles(
+    colors,
+    overlayTextColor,
+    currentTheme,
+    makkaReadability,
+  );
 
   const handleShare = useCallback(
     async (favorite: Favorite) => {
@@ -216,6 +226,7 @@ const FavoritesScreen: React.FC = () => {
         colors={colors}
         isLightTheme={isLightTheme}
         currentTheme={currentTheme}
+        makkaReadability={makkaReadability}
         t={t}
         onShare={handleShare}
         onRemove={handleRemoveFavorite}
@@ -227,6 +238,7 @@ const FavoritesScreen: React.FC = () => {
       colors,
       isLightTheme,
       currentTheme,
+      makkaReadability,
       t,
       handleShare,
       handleRemoveFavorite,
@@ -389,8 +401,13 @@ const FavoritesScreen: React.FC = () => {
 // Fonctions utilitaires
 const getGradientForType = (
   type: FavoriteType,
-  currentTheme: "light" | "dark" | "morning" | "sunset"
+  currentTheme: "light" | "dark" | "morning" | "sunset",
+  makkaReadability?: MakkaReadabilityStyle,
 ): [string, string] => {
+  if (makkaReadability?.cardGradient) {
+    return makkaReadability.cardGradient;
+  }
+
   const isLightTheme = currentTheme === "light" || currentTheme === "morning";
   if (isLightTheme) {
     switch (type) {
@@ -573,6 +590,7 @@ type FavoriteListItemProps = {
   colors: ReturnType<typeof useThemeColors>;
   isLightTheme: boolean;
   currentTheme: "light" | "dark" | "morning" | "sunset";
+  makkaReadability: MakkaReadabilityStyle;
   t: (key: string, fallback?: string) => string;
   onShare: (favorite: Favorite) => void;
   onRemove: (favorite: Favorite) => void;
@@ -585,6 +603,7 @@ const FavoriteListItem = React.memo(function FavoriteListItem({
   colors,
   isLightTheme,
   currentTheme,
+  makkaReadability,
   t,
   onShare,
   onRemove,
@@ -593,7 +612,7 @@ const FavoriteListItem = React.memo(function FavoriteListItem({
   return (
     <View style={styles.favoriteCard}>
       <LinearGradient
-        colors={getGradientForType(item.type, currentTheme)}
+        colors={getGradientForType(item.type, currentTheme, makkaReadability)}
         style={styles.cardGradient}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
@@ -639,7 +658,7 @@ const FavoriteListItem = React.memo(function FavoriteListItem({
         </View>
 
         <Text style={styles.dateAdded}>
-          {t("favorites.added_on") || "Ajouté le"}{" "}
+          {t("favorites_screen.added_on")}{" "}
           {item.dateAdded.toLocaleDateString()}
         </Text>
 
@@ -662,9 +681,36 @@ const FavoriteListItem = React.memo(function FavoriteListItem({
 const getStyles = (
   colors: any,
   overlayTextColor: string,
-  currentTheme: "light" | "dark" | "morning" | "sunset"
+  currentTheme: "light" | "dark" | "morning" | "sunset",
+  makkaReadability: MakkaReadabilityStyle,
 ) => {
   const isLightTheme = currentTheme === "light" || currentTheme === "morning";
+  const isMakkaBoost = makkaReadability.active;
+  const isMakkaMorning = makkaReadability.lightCards;
+  const textOnCard = isMakkaMorning
+    ? colors.text
+    : isMakkaBoost
+      ? overlayTextColor
+      : undefined;
+  const mutedOnCard = isMakkaMorning
+    ? colors.textSecondary
+    : isMakkaBoost
+      ? overlayTextColor
+      : undefined;
+  const cardTextShadow = isMakkaBoost
+    ? isMakkaMorning
+      ? {
+          textShadowColor: "rgba(255, 255, 255, 0.8)",
+          textShadowOffset: { width: 0, height: 1 },
+          textShadowRadius: 3,
+        }
+      : {
+          textShadowColor: "rgba(0, 0, 0, 0.55)",
+          textShadowOffset: { width: 0, height: 1 },
+          textShadowRadius: 4,
+        }
+    : {};
+
   return StyleSheet.create({
     container: {
       flex: 1,
@@ -678,6 +724,7 @@ const getStyles = (
       borderBottomWidth: 1,
       borderBottomColor:
         isLightTheme ? colors.border : "rgba(255, 255, 255, 0.1)",
+      backgroundColor: "transparent",
     },
     headerLeft: {
       flexDirection: "row",
@@ -692,6 +739,7 @@ const getStyles = (
       fontSize: 22,
       fontWeight: "700",
       color: overlayTextColor,
+      ...cardTextShadow,
     },
     clearButton: {
       padding: 8,
@@ -770,8 +818,13 @@ const getStyles = (
       padding: 16,
       borderRadius: 16,
       borderWidth: 1,
-      borderColor:
-        isLightTheme ? colors.border : "rgba(255, 255, 255, 0.1)",
+      borderColor: isMakkaBoost
+        ? isMakkaMorning
+          ? "rgba(232, 168, 124, 0.5)"
+          : "rgba(255, 140, 66, 0.4)"
+        : isLightTheme
+          ? colors.border
+          : "rgba(255, 255, 255, 0.1)",
     },
     cardHeader: {
       flexDirection: "row",
@@ -784,10 +837,11 @@ const getStyles = (
       alignItems: "center",
     },
     cardType: {
-      color: colors.islamicGold, // 🌅 Utilise la couleur du thème actif
+      color: isMakkaBoost ? colors.primary : colors.islamicGold,
       fontSize: 14,
       fontWeight: "600",
       marginLeft: 8,
+      ...cardTextShadow,
     },
     cardActions: {
       flexDirection: "row",
@@ -796,19 +850,25 @@ const getStyles = (
       padding: 8,
       marginLeft: 8,
       borderRadius: 8,
-      backgroundColor:
-        isLightTheme ? colors.surface : "rgba(255, 255, 255, 0.1)",
+      backgroundColor: isMakkaMorning
+        ? "rgba(232, 168, 124, 0.18)"
+        : isMakkaBoost
+          ? "rgba(0, 0, 0, 0.25)"
+          : isLightTheme
+            ? colors.surface
+            : "rgba(255, 255, 255, 0.1)",
     },
     cardContent: {
       marginBottom: 12,
     },
     arabicText: {
       fontSize: 20,
-      color: overlayTextColor,
+      color: textOnCard ?? overlayTextColor,
       fontFamily: "ScheherazadeNew",
       textAlign: "center",
       marginBottom: 8,
       lineHeight: 30,
+      ...cardTextShadow,
     },
     transliterationText: {
       fontSize: 16,
@@ -820,29 +880,32 @@ const getStyles = (
     translationText: {
       fontSize: 16,
       color:
-        isLightTheme
-          ? colors.textSecondary
-          : "rgba(255, 255, 255, 0.9)",
+        mutedOnCard ??
+        (isLightTheme ? colors.textSecondary : "rgba(255, 255, 255, 0.9)"),
       textAlign: "center",
       marginBottom: 8,
       lineHeight: 22,
+      opacity: isMakkaBoost ? 0.95 : 1,
+      ...cardTextShadow,
     },
     referenceText: {
       fontSize: 14,
       color:
-        isLightTheme
-          ? colors.textTertiary
-          : "rgba(255, 255, 255, 0.7)",
+        mutedOnCard ??
+        (isLightTheme ? colors.textTertiary : "rgba(255, 255, 255, 0.7)"),
       textAlign: "center",
       fontStyle: "italic",
+      opacity: isMakkaBoost ? 0.9 : 1,
+      ...cardTextShadow,
     },
     dateAdded: {
       fontSize: 12,
       color:
-        isLightTheme
-          ? colors.textTertiary
-          : "rgba(255, 255, 255, 0.6)",
+        mutedOnCard ??
+        (isLightTheme ? colors.textTertiary : "rgba(255, 255, 255, 0.6)"),
       textAlign: "right",
+      opacity: isMakkaBoost ? 0.85 : 1,
+      ...cardTextShadow,
     },
     noteContainer: {
       flexDirection: "row",

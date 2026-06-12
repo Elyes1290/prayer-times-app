@@ -23,9 +23,10 @@ export default function SettingsHeader({
   styles,
   isPremium,
 }: SettingsHeaderProps) {
-  // 🔧 CORRECTION : Ne plus utiliser isLightTheme car ça confond "light" et "morning"
-  // Chaque thème doit être comparé individuellement avec currentTheme
-  
+  const isDarkThemeCard =
+    currentTheme === "dark" || currentTheme === "sunset";
+  const inactiveThemeColor = isDarkThemeCard ? overlayTextColor : "#333333";
+
   // 🆕 Fonction pour gérer la sélection d'un thème premium
   const handleThemePress = (theme: "light" | "dark" | "morning" | "sunset") => {
     // Les thèmes morning et sunset sont premium uniquement
@@ -82,12 +83,17 @@ export default function SettingsHeader({
             <MCIcon
               name="weather-sunny"
               size={20}
-              color={currentTheme === "light" ? "#FFFFFF" : "#333333"}
+              color={
+                currentTheme === "light" ? "#FFFFFF" : inactiveThemeColor
+              }
             />
             <Text
               style={[
                 styles.themeOptionText,
-                { color: currentTheme === "light" ? "#FFFFFF" : "#333333" },
+                {
+                  color:
+                    currentTheme === "light" ? "#FFFFFF" : inactiveThemeColor,
+                },
               ]}
             >
               {t("light_mode", "Clair")}
@@ -105,12 +111,17 @@ export default function SettingsHeader({
             <MCIcon
               name="weather-night"
               size={20}
-              color={currentTheme === "dark" ? "#FFFFFF" : "#333333"}
+              color={
+                currentTheme === "dark" ? "#FFFFFF" : inactiveThemeColor
+              }
             />
             <Text
               style={[
                 styles.themeOptionText,
-                { color: currentTheme === "dark" ? "#FFFFFF" : "#333333" },
+                {
+                  color:
+                    currentTheme === "dark" ? "#FFFFFF" : inactiveThemeColor,
+                },
               ]}
             >
               {t("dark_mode", "Sombre")}

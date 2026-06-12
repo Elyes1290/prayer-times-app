@@ -531,7 +531,8 @@
     "clear_all_title": "Favorileri temizle",
     "clear_all_confirm": "Tüm favorilerinizi silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.",
     "share_error": "Paylaşım hatası",
-    "shared_from_app": "Prayer Times App'den paylaşıldı"
+    "shared_from_app": "Prayer Times App'den paylaşıldı",
+    "added_on": "Eklenme tarihi"
   },
   "asmaulhusna_search_placeholder": "İsim, anlam veya okunuşa göre ara...",
   "dhikr": {

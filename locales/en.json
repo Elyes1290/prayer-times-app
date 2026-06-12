@@ -533,7 +533,8 @@
     "clear_all_title": "Clear favorites",
     "clear_all_confirm": "Are you sure you want to delete all your favorites? This action is irreversible.",
     "share_error": "Error sharing",
-    "shared_from_app": "Shared from Prayer Times App"
+    "shared_from_app": "Shared from Prayer Times App",
+    "added_on": "Added on"
   },
   "asmaulhusna_search_placeholder": "Search by name, meaning or transliteration...",
   "dhikr": {

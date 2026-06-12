@@ -10,11 +10,13 @@ type StreakHeroCardProps = {
   successRate: number;
   colors: {
     cardBG: string;
+    surface: string;
     text: string;
     textSecondary: string;
     primary: string;
     error: string;
     accent: string;
+    border: string;
   };
 };
 
@@ -28,8 +30,8 @@ export function StreakHeroCard({
 
   return (
     <LinearGradient
-      colors={[colors.primary + "30", colors.accent + "18"]}
-      style={styles.card}
+      colors={[colors.cardBG, colors.surface]}
+      style={[styles.card, { borderColor: colors.border }]}
     >
       <View style={styles.main}>
         <IonIcon name="flame" size={36} color={colors.error} />
@@ -69,6 +71,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 18,
     gap: 16,
+    borderWidth: 1,
   },
   main: {
     flexDirection: "row",

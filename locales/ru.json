@@ -531,7 +531,8 @@
     "clear_all_title": "Очистить избранное",
     "clear_all_confirm": "Вы уверены, что хотите удалить все ваши избранные? Это действие необратимо.",
     "share_error": "Ошибка обмена",
-    "shared_from_app": "Поделено из приложения Prayer Times App"
+    "shared_from_app": "Поделено из приложения Prayer Times App",
+    "added_on": "Добавлено"
   },
   "asmaulhusna_search_placeholder": "Поиск по имени, значению или транслитерации...",
   "dhikr": {

@@ -36,6 +36,11 @@ import {
   useCurrentTheme,
 } from "../hooks/useThemeColor";
 import { makeBoxShadow } from "../utils/shadowUtils";
+import {
+  useMakkaReadability,
+  getHomeDashboardCardGradient,
+  type MakkaReadabilityStyle,
+} from "../utils/backgroundReadability";
 import { SettingsContext } from "../contexts/SettingsContext";
 import { useTranslation } from "react-i18next";
 import { reverseGeocodeAsync } from "expo-location";
@@ -211,6 +216,25 @@ function getNextPrayerInfo(
   return null;
 }
 
+function getPrayerHeroColors(prayerName: string): {
+  primary: string;
+  /** Fond de secours iOS si experimental_backgroundImage ne se peint pas */
+  iosFallback: string;
+} {
+  switch (prayerName) {
+    case "Fajr":
+      return { primary: "#FF6B6B", iosFallback: "rgba(140, 45, 45, 0.42)" };
+    case "Dhuhr":
+      return { primary: "#FFD700", iosFallback: "rgba(140, 110, 0, 0.38)" };
+    case "Asr":
+      return { primary: "#FF8C42", iosFallback: "rgba(150, 75, 25, 0.42)" };
+    case "Maghrib":
+      return { primary: "#9B59B6", iosFallback: "rgba(85, 45, 110, 0.42)" };
+    default:
+      return { primary: "#2C3E50", iosFallback: "rgba(25, 38, 52, 0.45)" };
+  }
+}
+
 const QuickActionAnimatedItem = ({
   index,
   fadeAnim,
@@ -247,6 +271,15 @@ export default function HomeScreen() {
   const overlayTextColor = useOverlayTextColor();
   const overlayIconColor = useOverlayIconColor();
   const currentTheme = useCurrentTheme();
+  const makkaReadability = useMakkaReadability();
+  const isLightDashboardCards =
+    makkaReadability.lightCards || currentTheme === "morning";
+  const dashboardIconColor = isLightDashboardCards
+    ? colors.primary
+    : "#fffbe8";
+  const dashboardActionIconColor = isLightDashboardCards
+    ? colors.text
+    : "#fffbe8";
 
   // 🚀 SOLUTION UNIVERSELLE : Compatible avec tous les appareils Samsung (S22, S24, S25 Ultra, etc.)
   const universalLayout = useUniversalStyles({
@@ -260,7 +293,8 @@ export default function HomeScreen() {
     overlayTextColor,
     overlayIconColor,
     currentTheme,
-    universalLayout // 🚀 NOUVEAU : Layout universel pour la responsive
+    universalLayout,
+    makkaReadability,
   );
 
   // 🌐 NOUVEAU : Détection réseau pour masquer les raccourcis offline
@@ -327,7 +361,6 @@ export default function HomeScreen() {
   }));
 
   const heroPrayerStyle = useAnimatedStyle(() => ({
-    opacity: fadeAnim.value,
     transform: [{ translateY: slideAnim.value }, { scale: scaleAnim.value }],
   }));
 
@@ -364,7 +397,15 @@ export default function HomeScreen() {
   const { user } = usePremium();
 
   useEffect(() => {
-    fadeAnim.value = withTiming(1, { duration: ANIMATIONS.fadeIn.duration });
+    fadeAnim.value = withTiming(
+      1,
+      { duration: ANIMATIONS.fadeIn.duration },
+      (finished) => {
+        if (finished) {
+          fadeAnim.value = 1;
+        }
+      },
+    );
     slideAnim.value = withTiming(0, { duration: ANIMATIONS.slideUp.duration });
     scaleAnim.value = withSpring(1, {
       damping: ANIMATIONS.spring.friction,
@@ -372,6 +413,18 @@ export default function HomeScreen() {
     });
     rotateAnim.value = withTiming(1, { duration: 1000 });
   }, [fadeAnim, slideAnim, scaleAnim, rotateAnim]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (fadeAnim.value < 0.98) {
+        fadeAnim.value = 1;
+        slideAnim.value = 0;
+        scaleAnim.value = 1;
+      }
+    }, ANIMATIONS.fadeIn.duration + 150);
+
+    return () => clearTimeout(timer);
+  }, [fadeAnim, slideAnim, scaleAnim]);
 
   // 🆕 Charger un verset aléatoire depuis QuranOfflineService
   const loadRandomVerseFromLocal = useCallback(async () => {
@@ -1455,22 +1508,30 @@ export default function HomeScreen() {
             const nextPrayer = getNextPrayerInfo(currentPrayerTimes);
             if (!nextPrayer) return null;
 
+            const heroColors = getPrayerHeroColors(nextPrayer.name);
+
             return (
               <Animated.View style={[styles.heroPrayerCard, heroPrayerStyle]}>
                 <LinearGradient
                   colors={[
-                    nextPrayer.name === "Fajr"
-                      ? "#FF6B6B"
-                      : nextPrayer.name === "Dhuhr"
-                      ? "#FFD700"
-                      : nextPrayer.name === "Asr"
-                      ? "#FF8C42"
-                      : nextPrayer.name === "Maghrib"
-                      ? "#9B59B6"
-                      : "#2C3E50",
-                    "rgba(0,0,0,0.3)",
+                    heroColors.primary,
+                    makkaReadability.mode === "maghrib"
+                      ? "rgba(0,0,0,0.72)"
+                      : makkaReadability.mode === "morning"
+                        ? "rgba(60, 45, 35, 0.55)"
+                        : "rgba(0,0,0,0.3)",
                   ]}
-                  style={styles.heroGradient}
+                  style={[
+                    styles.heroGradient,
+                    Platform.OS === "ios" && {
+                      backgroundColor:
+                        makkaReadability.mode === "maghrib"
+                          ? "rgba(26, 20, 16, 0.82)"
+                          : makkaReadability.mode === "morning"
+                            ? "rgba(255, 250, 240, 0.78)"
+                            : heroColors.iosFallback,
+                    },
+                  ]}
                   start={{ x: 0, y: 0 }}
                   end={{ x: 1, y: 1 }}
                 >
@@ -1503,16 +1564,7 @@ export default function HomeScreen() {
                               styles.progressFillMain,
                               {
                                 width: `${getProgressPercentage()}%`,
-                                backgroundColor:
-                                  nextPrayer.name === "Fajr"
-                                    ? "#FF6B6B"
-                                    : nextPrayer.name === "Dhuhr"
-                                    ? "#FFD700"
-                                    : nextPrayer.name === "Asr"
-                                    ? "#FF8C42"
-                                    : nextPrayer.name === "Maghrib"
-                                    ? "#9B59B6"
-                                    : "#2C3E50",
+                                backgroundColor: heroColors.primary,
                               },
                             ]}
                           />
@@ -1533,7 +1585,10 @@ export default function HomeScreen() {
             {/* Carte Dua */}
             <Animated.View style={[styles.dashboardCard, duaCardStyle]}>
               <LinearGradient
-                colors={["rgba(255,215,0,0.12)", "rgba(255,179,102,0.10)"]}
+                colors={getHomeDashboardCardGradient(
+                  makkaReadability,
+                  currentTheme,
+                )}
                 style={styles.cardContent}
               >
                 <View style={styles.cardHeader}>
@@ -1541,7 +1596,7 @@ export default function HomeScreen() {
                     <MCIcon
                       name="hand-heart"
                       size={28}
-                      color="#fffbe8"
+                      color={dashboardIconColor}
                     />
                   </View>
                   <Text style={styles.cardTitle}>{t("dua_du_jour")}</Text>
@@ -1565,7 +1620,7 @@ export default function HomeScreen() {
                     <MCIcon
                       name="share-variant"
                       size={24}
-                      color="#fffbe8"
+                      color={dashboardActionIconColor}
                     />
                   </Pressable>
                 </View>
@@ -1601,7 +1656,7 @@ export default function HomeScreen() {
                   <MCIcon
                     name="arrow-right"
                     size={20}
-                    color="#fffbe8"
+                    color={dashboardActionIconColor}
                   />
                 </Pressable>
               </LinearGradient>
@@ -1610,7 +1665,10 @@ export default function HomeScreen() {
             {/* Carte Verset */}
             <Animated.View style={[styles.dashboardCard, versetCardStyle]}>
               <LinearGradient
-                colors={["rgba(78,205,196,0.13)", "rgba(44,122,122,0.10)"]}
+                colors={getHomeDashboardCardGradient(
+                  makkaReadability,
+                  currentTheme,
+                )}
                 style={styles.cardContent}
               >
                 <View style={styles.cardHeader}>
@@ -1618,7 +1676,7 @@ export default function HomeScreen() {
                     <MCIcon
                       name="book-open-variant"
                       size={28}
-                      color="#fffbe8"
+                      color={dashboardIconColor}
                     />
                   </View>
                   <Text style={styles.cardTitle}>{t("verset_du_jour")}</Text>
@@ -1638,7 +1696,7 @@ export default function HomeScreen() {
                     <MCIcon
                       name="share-variant"
                       size={24}
-                      color="#fffbe8"
+                      color={dashboardActionIconColor}
                     />
                   </Pressable>
                 </View>
@@ -1673,7 +1731,7 @@ export default function HomeScreen() {
                   <MCIcon
                     name="arrow-right"
                     size={20}
-                    color="#fffbe8"
+                    color={dashboardActionIconColor}
                   />
                 </Pressable>
               </LinearGradient>
@@ -1682,7 +1740,10 @@ export default function HomeScreen() {
             {/* Carte Nom d'Allah */}
             <Animated.View style={[styles.dashboardCard, nameCardStyle]}>
               <LinearGradient
-                colors={["rgba(240,147,251,0.13)", "rgba(155,75,155,0.10)"]}
+                colors={getHomeDashboardCardGradient(
+                  makkaReadability,
+                  currentTheme,
+                )}
                 style={styles.cardContent}
               >
                 <View style={styles.cardHeader}>
@@ -1690,7 +1751,7 @@ export default function HomeScreen() {
                     <MCIcon
                       name="star-circle"
                       size={28}
-                      color="#fffbe8"
+                      color={dashboardIconColor}
                     />
                   </View>
                   <Text style={styles.cardTitle}>{t("nom_allah_du_jour")}</Text>
@@ -1710,7 +1771,7 @@ export default function HomeScreen() {
                     <MCIcon
                       name="share-variant"
                       size={24}
-                      color="#fffbe8"
+                      color={dashboardActionIconColor}
                     />
                   </Pressable>
                 </View>
@@ -1745,7 +1806,7 @@ export default function HomeScreen() {
                   <MCIcon
                     name="arrow-right"
                     size={20}
-                    color="#fffbe8"
+                    color={dashboardActionIconColor}
                   />
                 </Pressable>
               </LinearGradient>
@@ -1756,10 +1817,10 @@ export default function HomeScreen() {
               style={[styles.dashboardCard, styles.hadithCard, hadithCardStyle]}
             >
               <LinearGradient
-                colors={[
-                  "rgba(255, 215, 0, 0.12)",
-                  "rgba(255, 179, 102, 0.10)",
-                ]}
+                colors={getHomeDashboardCardGradient(
+                  makkaReadability,
+                  currentTheme,
+                )}
                 style={styles.cardContent}
               >
                 <View style={styles.cardHeader}>
@@ -1767,7 +1828,7 @@ export default function HomeScreen() {
                     <MCIcon
                       name="book"
                       size={28}
-                      color="#FFD700"
+                      color={dashboardIconColor}
                     />
                   </View>
                   <Text style={styles.cardTitle}>{t("hadith_du_jour")}</Text>
@@ -1798,7 +1859,7 @@ export default function HomeScreen() {
                     <MCIcon
                       name="share-variant"
                       size={24}
-                      color="#fffbe8"
+                      color={dashboardActionIconColor}
                     />
                   </Pressable>
                 </View>
@@ -1840,7 +1901,7 @@ export default function HomeScreen() {
                   <MCIcon
                     name="arrow-right"
                     size={20}
-                    color="#fffbe8"
+                    color={dashboardActionIconColor}
                   />
                 </Pressable>
               </LinearGradient>
@@ -1932,9 +1993,43 @@ const getStyles = (
   overlayTextColor: string,
   overlayIconColor: string,
   currentTheme: "light" | "dark" | "morning" | "sunset",
-  universalLayout: any // 🚀 NOUVEAU : Layout universel pour tous les appareils Samsung
+  universalLayout: any,
+  makkaReadability: MakkaReadabilityStyle,
 ) => {
-  // 🆕 Les couleurs sont maintenant gérées directement via colors du thème actif
+  const isMakkaBoost = makkaReadability.active;
+  const isPhotoTheme =
+    currentTheme === "morning" ||
+    currentTheme === "sunset" ||
+    currentTheme === "dark";
+  const useOpaqueCards = isMakkaBoost || isPhotoTheme;
+  const isLightCardSurface =
+    makkaReadability.lightCards || currentTheme === "morning";
+  const cardAccent = useOpaqueCards ? colors.primary : "#4ECDC4";
+  const cardTextShadow = useOpaqueCards
+    ? isLightCardSurface
+      ? {
+          textShadowColor: "rgba(255, 255, 255, 0.85)",
+          textShadowOffset: { width: 0, height: 1 },
+          textShadowRadius: 3,
+        }
+      : {
+          textShadowColor: "rgba(0, 0, 0, 0.55)",
+          textShadowOffset: { width: 0, height: 1 },
+          textShadowRadius: 4,
+        }
+    : {};
+  const boostedBodyText = (fallback: string) =>
+    isLightCardSurface
+      ? colors.text
+      : useOpaqueCards
+        ? overlayTextColor
+        : fallback;
+  const boostedMutedText = (fallback: string) =>
+    isLightCardSurface
+      ? colors.textSecondary
+      : useOpaqueCards
+        ? overlayTextColor
+        : fallback;
 
   return StyleSheet.create({
     background: {
@@ -2296,27 +2391,32 @@ const getStyles = (
     },
     duaArabic: {
       fontSize: 24,
-      color: overlayTextColor,
+      color: isLightCardSurface ? colors.text : overlayTextColor,
       textAlign: "center",
       marginBottom: 12,
       fontFamily: "ScheherazadeNew",
       lineHeight: 36,
-      flexShrink: 1, // Permet au texte de se rétrécir si nécessaire
+      flexShrink: 1,
+      ...cardTextShadow,
     },
     duaTranslation: {
       fontSize: 16,
-      color: colors.textSecondary, // 🌅 Utilise la couleur du thème actif
+      color: boostedBodyText(colors.textSecondary),
       textAlign: "center",
       marginBottom: 8,
       lineHeight: 22,
-      flexShrink: 1, // Permet au texte de se rétrécir si nécessaire
+      flexShrink: 1,
+      opacity: useOpaqueCards ? 0.98 : 1,
+      ...cardTextShadow,
     },
     duaBenefits: {
       fontSize: 14,
-      color: colors.textTertiary, // 🌅 Utilise la couleur du thème actif
+      color: boostedMutedText(colors.textTertiary),
       textAlign: "center",
       fontStyle: "italic",
       lineHeight: 20,
+      opacity: useOpaqueCards ? 0.92 : 1,
+      ...cardTextShadow,
     },
     duaButton: {
       flexDirection: "row",
@@ -2357,24 +2457,29 @@ const getStyles = (
     },
     versetArabic: {
       fontSize: 24,
-      color: overlayTextColor,
+      color: isLightCardSurface ? colors.text : overlayTextColor,
       textAlign: "center",
       marginBottom: 12,
       fontFamily: "ScheherazadeNew",
       lineHeight: 36,
+      ...cardTextShadow,
     },
     versetTranslation: {
       fontSize: 16,
-      color: colors.textSecondary, // 🌅 Utilise la couleur du thème actif
+      color: boostedBodyText(colors.textSecondary),
       textAlign: "center",
       marginBottom: 8,
       lineHeight: 22,
+      opacity: useOpaqueCards ? 0.98 : 1,
+      ...cardTextShadow,
     },
     versetReference: {
       fontSize: 14,
-      color: colors.textTertiary, // 🌅 Utilise la couleur du thème actif
+      color: boostedMutedText(colors.textTertiary),
       textAlign: "center",
       fontStyle: "italic",
+      opacity: useOpaqueCards ? 0.92 : 1,
+      ...cardTextShadow,
     },
     versetButton: {
       flexDirection: "row",
@@ -2562,9 +2667,17 @@ const getStyles = (
 
     countdownTime: {
       fontSize: 24,
-      color: "#4ECDC4",
+      color: isLightCardSurface
+        ? colors.primary
+        : useOpaqueCards
+          ? "#FFF8E7"
+          : "#4ECDC4",
       fontWeight: "700",
-      textShadowColor: "rgba(78, 205, 196, 0.3)",
+      textShadowColor: useOpaqueCards
+        ? isLightCardSurface
+          ? "rgba(255, 255, 255, 0.75)"
+          : "rgba(0, 0, 0, 0.5)"
+        : "rgba(78, 205, 196, 0.3)",
       textShadowOffset: { width: 0, height: 2 },
       textShadowRadius: 4,
     },
@@ -2737,11 +2850,11 @@ const getStyles = (
       alignItems: "flex-start",
       justifyContent: "space-between",
       padding: 16,
-      backgroundColor: colors.cardBG, // 🌅 Utilise la couleur du thème actif
+      backgroundColor: colors.cardBG,
       borderRadius: 20,
       marginBottom: 20,
       borderWidth: 1,
-      borderColor: colors.border, // 🌅 Utilise la couleur du thème actif
+      borderColor: colors.border,
       boxShadow: makeBoxShadow(colors.shadow, 0, 4, 12, 0.3),
       minHeight: 80,
     },
@@ -2804,15 +2917,21 @@ const getStyles = (
       marginBottom: 16,
       borderRadius: 20,
       overflow: "hidden",
-      boxShadow: "0px 0px 18px rgba(78,205,196,0.5)",
+      boxShadow: useOpaqueCards
+        ? isLightCardSurface
+          ? "0px 8px 22px rgba(60,45,35,0.3)"
+          : "0px 8px 22px rgba(0,0,0,0.5)"
+        : "0px 0px 18px rgba(78,205,196,0.5)",
       borderWidth: 1.5,
-      borderColor: "#4ECDC4",
+      borderColor: cardAccent,
     },
 
     cardContent: {
       padding: 20,
       borderRadius: 20,
-      backgroundColor: "rgba(44,205,196,0.10)",
+      backgroundColor: useOpaqueCards
+        ? "transparent"
+        : "rgba(44,205,196,0.10)",
     },
 
     cardHeader: {
@@ -2837,10 +2956,14 @@ const getStyles = (
     cardTitle: {
       fontSize: 20,
       fontWeight: "700",
-      color: "#4ECDC4",
-      textShadowColor: "#4ECDC4",
-      textShadowOffset: { width: 0, height: 0 },
-      textShadowRadius: 10,
+      color: cardAccent,
+      textShadowColor: useOpaqueCards
+        ? isLightCardSurface
+          ? "rgba(255, 255, 255, 0.8)"
+          : "rgba(0, 0, 0, 0.55)"
+        : cardAccent,
+      textShadowOffset: { width: 0, height: useOpaqueCards ? 1 : 0 },
+      textShadowRadius: useOpaqueCards ? 4 : 10,
     },
 
     cardBody: {
@@ -2849,7 +2972,9 @@ const getStyles = (
 
     cardSubtitle: {
       fontSize: 16,
-      color: "rgba(255, 255, 255, 0.8)",
+      color: isLightCardSurface
+        ? colors.textSecondary
+        : "rgba(255, 255, 255, 0.8)",
       textAlign: "center",
       lineHeight: 22,
     },
@@ -2860,26 +2985,38 @@ const getStyles = (
       justifyContent: "center",
       padding: 12,
       borderRadius: 12,
-      backgroundColor: "rgba(44,205,196,0.18)",
+      backgroundColor: useOpaqueCards
+        ? isLightCardSurface
+          ? "rgba(232, 168, 124, 0.28)"
+          : "rgba(255, 140, 66, 0.24)"
+        : "rgba(44,205,196,0.18)",
       borderWidth: 1.5,
-      borderColor: "#4ECDC4",
-      boxShadow: "0px 0px 8px rgba(78,205,196,0.5)",
+      borderColor: cardAccent,
+      boxShadow: useOpaqueCards
+        ? isLightCardSurface
+          ? "0px 4px 12px rgba(60,45,35,0.25)"
+          : "0px 4px 12px rgba(0,0,0,0.4)"
+        : "0px 0px 8px rgba(78,205,196,0.5)",
     },
 
     cardActionText: {
       fontSize: 16,
       fontWeight: "600",
-      color: overlayTextColor,
+      color: isLightCardSurface ? colors.text : overlayTextColor,
       marginRight: 8,
-      textShadowColor: "#4ECDC4",
-      textShadowOffset: { width: 0, height: 0 },
-      textShadowRadius: 8,
+      textShadowColor: useOpaqueCards
+        ? isLightCardSurface
+          ? "rgba(255, 255, 255, 0.7)"
+          : "rgba(0, 0, 0, 0.45)"
+        : cardAccent,
+      textShadowOffset: { width: 0, height: useOpaqueCards ? 1 : 0 },
+      textShadowRadius: useOpaqueCards ? 3 : 8,
     },
 
     // Styles spécifiques pour le contenu
     nameArabic: {
       fontSize: 32,
-      color: overlayTextColor,
+      color: isLightCardSurface ? colors.text : overlayTextColor,
       textAlign: "center",
       marginBottom: 8,
       fontWeight: "700",
@@ -2887,17 +3024,21 @@ const getStyles = (
 
     nameTranslit: {
       fontSize: 20,
-      color: colors.textSecondary, // 🌅 Utilise la couleur du thème actif
+      color: boostedBodyText(colors.textSecondary),
       textAlign: "center",
       marginBottom: 8,
       fontStyle: "italic",
+      opacity: useOpaqueCards ? 0.98 : 1,
+      ...cardTextShadow,
     },
 
     nameMeaning: {
       fontSize: 16,
-      color: colors.textTertiary, // 🌅 Utilise la couleur du thème actif
+      color: boostedMutedText(colors.textTertiary),
       textAlign: "center",
       lineHeight: 22,
+      opacity: useOpaqueCards ? 0.92 : 1,
+      ...cardTextShadow,
     },
 
     // Ajout de styles spécifiques pour la carte hadith
@@ -2908,19 +3049,22 @@ const getStyles = (
 
     hadithArabic: {
       fontSize: 24,
-      color: overlayTextColor,
+      color: isLightCardSurface ? colors.text : overlayTextColor,
       textAlign: "center",
       marginBottom: 12,
       fontFamily: "ScheherazadeNew",
       lineHeight: 36,
+      ...cardTextShadow,
     },
 
     hadithTranslation: {
       fontSize: 16,
-      color: colors.textSecondary, // 🌅 Utilise la couleur du thème actif
+      color: boostedBodyText(colors.textSecondary),
       textAlign: "center",
       marginBottom: 8,
       lineHeight: 22,
+      opacity: useOpaqueCards ? 0.98 : 1,
+      ...cardTextShadow,
     },
 
     shareButton: {

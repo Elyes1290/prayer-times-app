@@ -14,6 +14,7 @@ import { AccountProfileSection } from "./account/AccountProfileSection";
 import { AccountSubscriptionSection } from "./account/AccountSubscriptionSection";
 import { AccountSecuritySection } from "./account/AccountSecuritySection";
 import { AccountActionsSection } from "./account/AccountActionsSection";
+import { refreshUserDataFromServer } from "../../utils/userDataSync";
 
 interface AccountManagementSectionProps {
   user: { isPremium?: boolean } | null;
@@ -53,6 +54,12 @@ export default function AccountManagementSection({
   useEffect(() => {
     const loadRealUserData = async () => {
       try {
+        const fromServer = await refreshUserDataFromServer();
+        if (fromServer) {
+          dispatch({ type: "SET_REAL_USER_DATA", payload: fromServer });
+          return;
+        }
+
         const stored = await AsyncStorage.getItem("user_data");
         if (stored) {
           dispatch({

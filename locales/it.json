@@ -524,7 +524,8 @@
     "clear_all_title": "Cancella preferiti",
     "clear_all_confirm": "Sei sicuro di voler cancellare tutti i tuoi preferiti? Questa azione è irreversibile.",
     "share_error": "Errore nella condivisione",
-    "shared_from_app": "Condiviso dall'App Orari delle Preghiere"
+    "shared_from_app": "Condiviso dall'App Orari delle Preghiere",
+    "added_on": "Aggiunto il"
   },
   "asmaulhusna_search_placeholder": "Cerca per nome, significato o traslitterazione...",
   "dhikr": {

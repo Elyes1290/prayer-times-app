@@ -102,7 +102,9 @@ function TabButton({
       style={[
         styles.tabButton,
         {
-          backgroundColor: active ? colors.primary + "18" : "transparent",
+          backgroundColor: active
+            ? colors.primary + "22"
+            : "rgba(0, 0, 0, 0.22)",
           borderColor: active ? colors.primary : colors.border,
         },
       ]}
@@ -131,6 +133,8 @@ const PrayerStatsPremiumScreen: React.FC = () => {
   const overlayTextColor = useOverlayTextColor();
   const currentTheme = useCurrentTheme();
   const isDark = currentTheme === "dark";
+  const isPhotoDarkTheme =
+    currentTheme === "dark" || currentTheme === "sunset";
   const insets = useSafeAreaInsets();
   const bottomContentPadding = Math.max(100, insets.bottom + 88);
 
@@ -327,7 +331,7 @@ const PrayerStatsPremiumScreen: React.FC = () => {
   return (
     <>
       <StatusBar
-        barStyle={isDark ? "light-content" : "dark-content"}
+        barStyle={isPhotoDarkTheme ? "light-content" : "dark-content"}
         translucent
         backgroundColor="transparent"
       />
@@ -336,21 +340,49 @@ const PrayerStatsPremiumScreen: React.FC = () => {
           style={[
             styles.overlay,
             {
-              backgroundColor: isDark
-                ? "rgba(18, 18, 18, 0.55)"
+              backgroundColor: isPhotoDarkTheme
+                ? currentTheme === "sunset"
+                  ? "rgba(26, 20, 16, 0.62)"
+                  : "rgba(18, 18, 18, 0.58)"
                 : "rgba(248, 249, 250, 0.55)",
               paddingTop: insets.top,
             },
           ]}
         >
-          <View style={styles.header}>
-            <Text style={[styles.headerTitle, { color: overlayTextColor }]}>
+          <View
+            style={[
+              styles.headerPanel,
+              {
+                backgroundColor: isPhotoDarkTheme
+                  ? "rgba(0, 0, 0, 0.28)"
+                  : "rgba(255, 255, 255, 0.18)",
+                borderColor: colors.border,
+              },
+            ]}
+          >
+            <Text
+              style={[
+                styles.headerTitle,
+                {
+                  color: overlayTextColor,
+                  textShadowColor: "rgba(0, 0, 0, 0.45)",
+                  textShadowOffset: { width: 0, height: 1 },
+                  textShadowRadius: 4,
+                },
+              ]}
+            >
               {t("stats.screen_title")}
             </Text>
             <Text
               style={[
                 styles.headerSubtitle,
-                { color: overlayTextColor, opacity: 0.75 },
+                {
+                  color: overlayTextColor,
+                  opacity: 0.88,
+                  textShadowColor: "rgba(0, 0, 0, 0.35)",
+                  textShadowOffset: { width: 0, height: 1 },
+                  textShadowRadius: 3,
+                },
               ]}
             >
               {t("stats.spiritual_progress_detail")}
@@ -495,12 +527,15 @@ const styles = StyleSheet.create({
     borderRadius: 12,
   },
   retryText: { color: "#fff", fontWeight: "600" },
-  header: {
-    paddingHorizontal: 20,
-    paddingTop: 12,
-    paddingBottom: 18,
-    gap: 6,
+  headerPanel: {
+    marginHorizontal: 16,
+    marginTop: 8,
     marginBottom: 4,
+    paddingHorizontal: 16,
+    paddingVertical: 14,
+    borderRadius: 16,
+    borderWidth: 1,
+    gap: 6,
   },
   headerTitle: { fontSize: 24, fontWeight: "800" },
   headerSubtitle: { fontSize: 14 },

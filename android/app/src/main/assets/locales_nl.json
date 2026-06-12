@@ -531,7 +531,8 @@
     "clear_all_title": "Favorieten wissen",
     "clear_all_confirm": "Weet u zeker dat u al uw favorieten wilt verwijderen? Deze actie is onomkeerbaar.",
     "share_error": "Fout bij delen",
-    "shared_from_app": "Gedeeld vanuit Prayer Times App"
+    "shared_from_app": "Gedeeld vanuit Prayer Times App",
+    "added_on": "Toegevoegd op"
   },
   "asmaulhusna_search_placeholder": "Zoeken op naam, betekenis of transcriptie...",
   "dhikr": {

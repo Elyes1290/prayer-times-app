@@ -26,6 +26,76 @@ function formatLocalDateString(date: Date) {
   return `${year}-${pad(month)}-${pad(day)}`;
 }
 
+type AppTheme = "light" | "dark" | "morning" | "sunset";
+
+function getCalendarTheme(
+  currentTheme: AppTheme,
+  colors: ReturnType<typeof useThemeColors>,
+  overlayTextColor: string,
+  calendarTextSizes: {
+    textDayFontSize: number;
+    textMonthFontSize: number;
+    textDayHeaderFontSize: number;
+  },
+) {
+  const isBrightTheme =
+    currentTheme === "light" || currentTheme === "morning";
+
+  if (isBrightTheme) {
+    return {
+      backgroundColor: "transparent",
+      calendarBackground: colors.cardBG,
+      textSectionTitleColor: colors.textSecondary,
+      dayTextColor: colors.text,
+      monthTextColor: colors.primary,
+      todayTextColor: colors.primary,
+      selectedDayTextColor: "#FFFFFF",
+      selectedDayBackgroundColor: colors.primary,
+      textDisabledColor: colors.textSecondary,
+      dotColor: colors.primary,
+      selectedDotColor: colors.primary,
+      arrowColor: colors.primary,
+      indicatorColor: colors.primary,
+      textDayFontWeight: "700" as const,
+      textMonthFontWeight: "bold" as const,
+      textDayHeaderFontWeight: "700" as const,
+      ...calendarTextSizes,
+    };
+  }
+
+  const dayHeaderColor = overlayTextColor;
+
+  return {
+    backgroundColor: "transparent",
+    calendarBackground: "rgba(255, 255, 255, 0.96)",
+    textSectionTitleColor: dayHeaderColor,
+    textSectionTitleDisabledColor: colors.textTertiary,
+    dayTextColor: "#1A1A1A",
+    monthTextColor: colors.primary,
+    todayTextColor: colors.primary,
+    selectedDayTextColor: "#FFFFFF",
+    selectedDayBackgroundColor: "#2E7D32",
+    textDisabledColor: "#9E9E9E",
+    dotColor: colors.primary,
+    selectedDotColor: colors.primary,
+    arrowColor: colors.primary,
+    indicatorColor: colors.primary,
+    textDayFontWeight: "700" as const,
+    textMonthFontWeight: "bold" as const,
+    textDayHeaderFontWeight: "700" as const,
+    stylesheet: {
+      calendar: {
+        header: {
+          dayHeader: {
+            color: dayHeaderColor,
+          },
+        },
+      },
+    },
+    ...calendarTextSizes,
+  };
+}
+
 const getStyles = (
   colors: any,
   overlayTextColor: string,
@@ -206,6 +276,7 @@ export default function HijriCalendarScreen() {
         </View>
 
         <Calendar
+          key={currentTheme}
           initialDate={displayDateString}
           onDayPress={(day) => {
             const [year, month, dayNum] = day.dateString.split("-").map(Number);
@@ -223,61 +294,12 @@ export default function HijriCalendarScreen() {
                   : "#2E7D32",
             },
           }}
-          theme={{
-            backgroundColor: "transparent",
-            calendarBackground:
-              currentTheme === "light" || currentTheme === "morning"
-                ? colors.cardBG
-                : "rgba(34,40,58,0.32)",
-            textSectionTitleColor:
-              currentTheme === "light" || currentTheme === "morning"
-                ? colors.textSecondary
-                : "#fffbe8",
-            dayTextColor:
-              currentTheme === "light" || currentTheme === "morning"
-                ? colors.text
-                : "#fff",
-            monthTextColor:
-              currentTheme === "light" || currentTheme === "morning"
-                ? colors.primary
-                : "#FFD700",
-            todayTextColor:
-              currentTheme === "light" || currentTheme === "morning"
-                ? colors.primary
-                : "#00CFFF",
-            selectedDayTextColor:
-              currentTheme === "light" || currentTheme === "morning"
-                ? "#FFFFFF"
-                : "#fffbe8",
-            selectedDayBackgroundColor:
-              currentTheme === "light" || currentTheme === "morning"
-                ? colors.primary
-                : "#2E7D32",
-            textDisabledColor:
-              currentTheme === "light" || currentTheme === "morning"
-                ? colors.textSecondary
-                : "#bbb",
-            dotColor:
-              currentTheme === "light" || currentTheme === "morning"
-                ? colors.primary
-                : "#FFD700",
-            selectedDotColor:
-              currentTheme === "light" || currentTheme === "morning"
-                ? colors.primary
-                : "#FFD700",
-            arrowColor:
-              currentTheme === "light" || currentTheme === "morning"
-                ? colors.primary
-                : "#FFD700",
-            indicatorColor:
-              currentTheme === "light" || currentTheme === "morning"
-                ? colors.primary
-                : "#FFD700",
-            textDayFontWeight: "700",
-            textMonthFontWeight: "bold",
-            textDayHeaderFontWeight: "700",
-            ...calendarTextSizes,
-          }}
+          theme={getCalendarTheme(
+            currentTheme,
+            colors,
+            overlayTextColor,
+            calendarTextSizes,
+          )}
           style={styles.calendar}
         />
 

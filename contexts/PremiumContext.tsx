@@ -18,6 +18,12 @@ import { useTranslation } from "react-i18next";
 // 🔧 NOUVEAU : Import pour synchronisation fichiers premium
 import PremiumContentManager from "../utils/premiumContent";
 import { IapService } from "../utils/iapService";
+import {
+  buildUserDataFromServer,
+  isNetworkReadyForApi,
+  isPremiumActiveOnServer,
+  refreshUserDataFromServer,
+} from "../utils/userDataSync";
 
 // Types de base
 interface PremiumUser {
@@ -128,6 +134,54 @@ async function getStoredAccountEmail(): Promise<string | null> {
   return null;
 }
 
+const PREMIUM_FEATURES = [
+  "prayer_analytics",
+  "custom_adhan_sounds",
+  "premium_themes",
+  "unlimited_bookmarks",
+  "ad_free",
+] as const;
+
+function createPremiumUserFromServer(
+  serverUser: Record<string, unknown>,
+): PremiumUser {
+  const isVip = serverUser.is_vip === true || Number(serverUser.is_vip) === 1;
+  const isApple =
+    serverUser.subscription_platform === "apple" && Platform.OS === "ios";
+
+  return {
+    isPremium: true,
+    subscriptionType:
+      (serverUser.subscription_type as PremiumUser["subscriptionType"]) ||
+      "yearly",
+    subscriptionId: (serverUser.subscription_id as string) || null,
+    expiryDate: isVip
+      ? new Date(2099, 11, 31)
+      : serverUser.premium_expiry
+        ? new Date(serverUser.premium_expiry as string)
+        : new Date(Date.now() + 365 * 24 * 60 * 60 * 1000),
+    features: [
+      ...PREMIUM_FEATURES,
+      ...(isVip ? ["vip_exclusive", "lifetime_access"] : []),
+    ],
+    hasPurchasedPremium: true,
+    premiumActivatedAt: serverUser.premium_activated_at
+      ? new Date(serverUser.premium_activated_at as string)
+      : new Date(),
+    isVip,
+    vipReason: (serverUser.vip_reason as string) || null,
+    vipGrantedBy: (serverUser.vip_granted_by as string) || null,
+    vipGrantedAt: serverUser.vip_granted_at
+      ? new Date(serverUser.vip_granted_at as string)
+      : null,
+    premiumType: isVip
+      ? "VIP Gratuit à Vie"
+      : isApple
+        ? "Apple In-App Purchase"
+        : "Premium Payant",
+  };
+}
+
 // Provider
 interface PremiumProviderProps {
   children: ReactNode;
@@ -174,51 +228,36 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
           try {
             // Vérifier si l'utilisateur est connecté
             const token = await AsyncStorage.getItem("auth_token");
-            if (
-              token &&
-              networkStatus.isConnected &&
-              networkStatus.isInternetReachable
-            ) {
+            if (token && isNetworkReadyForApi(networkStatus)) {
               console.log(
                 "🔄 Synchronisation avec le serveur pour vérifier le renouvellement...",
               );
 
               const result = await apiClient.getUser();
               if (result.success && result.data) {
-                const serverUser = result.data;
+                const serverUser = result.data as Record<string, unknown>;
 
-                // Vérifier si le premium est toujours actif sur le serveur
-                if (
-                  serverUser.premium_status === 1 &&
-                  serverUser.premium_expiry
-                ) {
-                  const serverExpiryDate = new Date(serverUser.premium_expiry);
+                if (isPremiumActiveOnServer(serverUser)) {
+                  const serverExpiryDate = serverUser.premium_expiry
+                    ? new Date(serverUser.premium_expiry as string)
+                    : new Date(Date.now() + 365 * 24 * 60 * 60 * 1000);
 
                   if (serverExpiryDate > now) {
                     console.log(
-                      "✅ Abonnement renouvelé sur Stripe ! Synchronisation des données locales...",
+                      "✅ Abonnement toujours actif côté serveur — sync locale",
                     );
                     console.log(
                       `📅 Nouvelle date d'expiration: ${serverExpiryDate.toLocaleDateString()}`,
                     );
 
-                    // Synchroniser les données locales avec le serveur
-                    const updatedUser = {
-                      ...parsedUser,
-                      isPremium: true,
-                      subscriptionType:
-                        serverUser.subscription_type ||
-                        parsedUser.subscriptionType,
-                      subscriptionId:
-                        serverUser.subscription_id || parsedUser.subscriptionId,
-                      expiryDate: serverExpiryDate,
-                      premiumActivatedAt: serverUser.premium_activated_at
-                        ? new Date(serverUser.premium_activated_at)
-                        : parsedUser.premiumActivatedAt,
-                      hasPurchasedPremium: true,
-                    };
+                    const userDataToUpdate = buildUserDataFromServer(serverUser);
+                    await AsyncStorage.setItem(
+                      "user_data",
+                      JSON.stringify(userDataToUpdate),
+                    );
 
-                    // Sauvegarder les données mises à jour
+                    const updatedUser = createPremiumUserFromServer(serverUser);
+
                     await AsyncStorage.setItem(
                       STORAGE_KEYS.PREMIUM_USER,
                       JSON.stringify(updatedUser),
@@ -434,7 +473,7 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
         }
 
         // 🌐 NOUVEAU : Vérifier la connectivité avant d'appeler l'API
-        if (!networkStatus.isConnected || !networkStatus.isInternetReachable) {
+        if (!isNetworkReadyForApi(networkStatus)) {
           console.log(
             "🌐 [OFFLINE] Pas de connexion réseau - token considéré comme valide en mode offline",
           );
@@ -570,6 +609,41 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
     try {
       setLoading(true);
 
+      // 🚀 PRIORITÉ : synchroniser le serveur AVANT toute vérification d'expiration locale
+      try {
+        const token = await AsyncStorage.getItem("auth_token");
+        if (token && isNetworkReadyForApi(networkStatus)) {
+          console.log(
+            "🔄 [SYNC] Chargement premium — source serveur en premier",
+          );
+
+          const result = await apiClient.getUser();
+          if (result.success && result.data) {
+            const serverUser = result.data as Record<string, unknown>;
+            const userDataToUpdate = buildUserDataFromServer(serverUser);
+
+            await AsyncStorage.setItem(
+              "user_data",
+              JSON.stringify(userDataToUpdate),
+            );
+
+            if (isPremiumActiveOnServer(serverUser)) {
+              const premiumUser = createPremiumUserFromServer(serverUser);
+              await AsyncStorage.setItem(
+                STORAGE_KEYS.PREMIUM_USER,
+                JSON.stringify(premiumUser),
+              );
+              setUser(premiumUser);
+              console.log(
+                "✅ [SYNC] Premium restauré depuis le serveur avant vérif locale",
+              );
+            }
+          }
+        }
+      } catch (syncError) {
+        console.log("⚠️ [SYNC] Erreur sync serveur prioritaire:", syncError);
+      }
+
       // 🍎 iOS : lier RevenueCat à l'email de session + sync expiration vers le backend
       if (Platform.OS === "ios") {
         try {
@@ -587,12 +661,7 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
 
           const isIapPremium = await iapService.checkPremiumStatus();
 
-          if (
-            isIapPremium &&
-            token &&
-            networkStatus.isConnected &&
-            networkStatus.isInternetReachable
-          ) {
+          if (isIapPremium && token && isNetworkReadyForApi(networkStatus)) {
             const snap = await iapService.getActiveEntitlementSnapshot();
             if (snap) {
               try {
@@ -609,20 +678,37 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
 
           if (isIapPremium) {
             console.log("🍎 [PremiumContext] Premium détecté via RevenueCat");
-            const iapUser: PremiumUser = {
-              ...user,
-              isPremium: true,
-              premiumType: "Apple In-App Purchase",
-              hasPurchasedPremium: true,
-              features: [
-                "prayer_analytics",
-                "custom_adhan_sounds",
-                "premium_themes",
-                "unlimited_bookmarks",
-                "ad_free",
-              ],
-            };
-            setUser(iapUser);
+
+            const serverUserData = await refreshUserDataFromServer();
+            if (
+              serverUserData &&
+              isPremiumActiveOnServer(
+                serverUserData as unknown as Record<string, unknown>,
+              )
+            ) {
+              const iapUser = createPremiumUserFromServer(
+                serverUserData as unknown as Record<string, unknown>,
+              );
+              await AsyncStorage.setItem(
+                STORAGE_KEYS.PREMIUM_USER,
+                JSON.stringify(iapUser),
+              );
+              setUser(iapUser);
+            } else {
+              const iapUser: PremiumUser = {
+                ...user,
+                isPremium: true,
+                premiumType: "Apple In-App Purchase",
+                hasPurchasedPremium: true,
+                features: [...PREMIUM_FEATURES],
+              };
+              await AsyncStorage.setItem(
+                STORAGE_KEYS.PREMIUM_USER,
+                JSON.stringify(iapUser),
+              );
+              setUser(iapUser);
+            }
+
             setLoading(false);
             return;
           }
@@ -687,71 +773,7 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
         );
       }
 
-      // 🚀 CORRECTION CRITIQUE : Synchroniser avec le serveur AVANT de lire user_data local
-      // Pour s'assurer d'avoir toujours la date d'expiration la plus récente
-      try {
-        const token = await AsyncStorage.getItem("auth_token");
-        if (
-          token &&
-          networkStatus.isConnected &&
-          networkStatus.isInternetReachable
-        ) {
-          console.log(
-            "🔄 [SYNC] Synchronisation avec le serveur pour récupérer les données à jour...",
-          );
-
-          const result = await apiClient.getUser();
-          if (result.success && result.data) {
-            const serverUser = result.data;
-            console.log(
-              "✅ [SYNC] Données serveur récupérées - premium_status:",
-              serverUser.premium_status,
-            );
-            console.log(
-              "📅 [SYNC] Date d'expiration serveur:",
-              serverUser.premium_expiry,
-            );
-
-            // Mettre à jour user_data avec les données du serveur
-            const userDataToUpdate = {
-              id: serverUser.id,
-              user_id: serverUser.id,
-              email: serverUser.email,
-              user_first_name: serverUser.user_first_name,
-              premium_status: serverUser.premium_status,
-              subscription_type: serverUser.subscription_type,
-              subscription_id: serverUser.subscription_id,
-              stripe_customer_id: serverUser.stripe_customer_id,
-              premium_expiry: serverUser.premium_expiry, // 🎯 Date à jour depuis le serveur
-              premium_activated_at: serverUser.premium_activated_at,
-              language: serverUser.language,
-              last_sync: new Date().toISOString(),
-              device_id: serverUser.device_id,
-              is_vip: serverUser.is_vip,
-              vip_reason: serverUser.vip_reason,
-              vip_granted_by: serverUser.vip_granted_by,
-              vip_granted_at: serverUser.vip_granted_at,
-            };
-
-            await AsyncStorage.setItem(
-              "user_data",
-              JSON.stringify(userDataToUpdate),
-            );
-            console.log(
-              "✅ [SYNC] user_data mis à jour avec les données du serveur",
-            );
-          }
-        } else {
-          console.log(
-            "⚠️ [SYNC] Pas de synchronisation serveur (hors ligne ou pas de token)",
-          );
-        }
-      } catch (syncError) {
-        console.log("⚠️ [SYNC] Erreur synchronisation serveur:", syncError);
-        // Continuer avec les données locales en cas d'erreur réseau
-      }
-
-      // 🔧 NOUVEAU : Synchroniser avec user_data en priorité
+      // 🔧 Synchroniser avec user_data (déjà rafraîchi depuis le serveur en début de flux)
       const userData = await AsyncStorage.getItem("user_data");
       if (userData) {
         let parsedUserData: any = null;
@@ -762,61 +784,14 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
         }
         if (!parsedUserData) return;
 
-        // 🎯 VIP SYSTEM : Si l'utilisateur est premium OU VIP dans user_data
-        if (
-          parsedUserData.premium_status === 1 ||
-          parsedUserData.is_vip === true
-        ) {
-          console.log(
-            "🔄 [SYNC] Synchronisation Premium Context depuis user_data",
-          );
-
-          // 🎯 VIP SYSTEM : Déterminer le type de premium
-          const isVip = parsedUserData.is_vip === true;
-          const premiumType = isVip
-            ? "VIP Gratuit à Vie"
-            : parsedUserData.premium_status === 1
-              ? "Premium Payant"
-              : "Gratuit";
-
-          const premiumUser = {
-            isPremium: true,
-            subscriptionType: parsedUserData.subscription_type || "yearly",
-            subscriptionId: parsedUserData.subscription_id,
-            expiryDate: isVip
-              ? new Date(2099, 11, 31) // VIP = date très lointaine (2099)
-              : parsedUserData.premium_expiry
-                ? new Date(parsedUserData.premium_expiry)
-                : new Date(Date.now() + 365 * 24 * 60 * 60 * 1000),
-            features: [
-              "prayer_analytics",
-              "custom_adhan_sounds",
-              "premium_themes",
-              "unlimited_bookmarks",
-              "ad_free",
-              ...(isVip ? ["vip_exclusive", "lifetime_access"] : []),
-            ],
-            hasPurchasedPremium: true,
-            premiumActivatedAt: parsedUserData.premium_activated_at
-              ? new Date(parsedUserData.premium_activated_at)
-              : new Date(),
-            // 🎯 VIP SYSTEM : Propriétés VIP
-            isVip: isVip,
-            vipReason: parsedUserData.vip_reason || null,
-            vipGrantedBy: parsedUserData.vip_granted_by || null,
-            vipGrantedAt: parsedUserData.vip_granted_at
-              ? new Date(parsedUserData.vip_granted_at)
-              : null,
-            premiumType: premiumType,
-          };
-
-          // Sauvegarder et utiliser ces données
+        if (isPremiumActiveOnServer(parsedUserData)) {
+          const premiumUser = createPremiumUserFromServer(parsedUserData);
           await AsyncStorage.setItem(
             STORAGE_KEYS.PREMIUM_USER,
             JSON.stringify(premiumUser),
           );
           setUser(premiumUser);
-          console.log(`✅ [SYNC] ${premiumType} Context synchronisé !`);
+          console.log(`✅ [SYNC] ${premiumUser.premiumType} Context synchronisé !`);
           setLoading(false);
           return;
         }

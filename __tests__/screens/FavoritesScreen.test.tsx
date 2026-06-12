@@ -86,6 +86,7 @@ jest.mock("react-i18next", () => ({
         remove: "Retirer",
         clear_all: "Tout supprimer",
         "favorites_screen.share_error": "Erreur lors du partage",
+        "favorites_screen.added_on": "Ajouté le",
       };
       return translations[key] || key;
     },
@@ -307,13 +308,13 @@ describe("FavoritesScreen", () => {
     await waitFor(() => {
       // Vérifier que les dates sont affichées selon le format de l'environnement
       expect(
-        getByText(`favorites.added_on ${formatDate(new Date("2024-01-01"))}`)
+        getByText(`Ajouté le ${formatDate(new Date("2024-01-01"))}`)
       ).toBeTruthy();
       expect(
-        getByText(`favorites.added_on ${formatDate(new Date("2024-01-02"))}`)
+        getByText(`Ajouté le ${formatDate(new Date("2024-01-02"))}`)
       ).toBeTruthy();
       expect(
-        getByText(`favorites.added_on ${formatDate(new Date("2024-01-03"))}`)
+        getByText(`Ajouté le ${formatDate(new Date("2024-01-03"))}`)
       ).toBeTruthy();
     });
   });
