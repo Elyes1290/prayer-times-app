@@ -493,16 +493,55 @@ function generateUniqueId($prefix = '') {
 
 // 🚀 SUPPRIMÉ : formatUserData() est définie dans users.php
 
+/** Durée des sessions — utilisateurs standard */
+define('AUTH_ACCESS_TOKEN_TTL_DAYS', 30);
+define('AUTH_REFRESH_TOKEN_TTL_DAYS', 30);
+
+/** Durée des sessions — comptes VIP (usage peu fréquent) */
+define('VIP_ACCESS_TOKEN_TTL_DAYS', 90);
+define('VIP_REFRESH_TOKEN_TTL_DAYS', 365);
+
+function isVipUserRecord($user) {
+    if (!is_array($user)) {
+        return false;
+    }
+    return isset($user['is_vip']) && (int)$user['is_vip'] === 1;
+}
+
+function isVipUserId($userId) {
+    try {
+        $pdo = getDBConnection();
+        $stmt = $pdo->prepare("SELECT is_vip FROM users WHERE id = ? AND status = 'active' LIMIT 1");
+        $stmt->execute([$userId]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row && (int)$row['is_vip'] === 1;
+    } catch (Exception $e) {
+        error_log('Erreur isVipUserId: ' . $e->getMessage());
+        return false;
+    }
+}
+
+function getAccessTokenTtlDaysForUserId($userId) {
+    return isVipUserId($userId) ? VIP_ACCESS_TOKEN_TTL_DAYS : AUTH_ACCESS_TOKEN_TTL_DAYS;
+}
+
+function getRefreshTokenTtlDaysForUserRecord($user) {
+    return isVipUserRecord($user) ? VIP_REFRESH_TOKEN_TTL_DAYS : AUTH_REFRESH_TOKEN_TTL_DAYS;
+}
+
 /**
  * 🚀 NOUVEAU : Générer un token d'authentification
  */
-function generateAuthToken($user_id) {
+function generateAuthToken($user_id, $ttlDays = null) {
     try {
         $pdo = getDBConnection();
         
         // Générer un token unique
         $token = bin2hex(random_bytes(32));
-        $expires_at = date('Y-m-d H:i:s', strtotime('+30 days'));
+        if ($ttlDays === null) {
+            $ttlDays = getAccessTokenTtlDaysForUserId($user_id);
+        }
+        $expires_at = date('Y-m-d H:i:s', strtotime("+{$ttlDays} days"));
         
         // Sauvegarder la session
         $stmt = $pdo->prepare("

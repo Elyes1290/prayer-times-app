@@ -21,6 +21,8 @@ interface UserStats {
     total_favorites: number;
     total_downloads: number;
     total_usage_minutes: number;
+    total_fajr_prayers: number;
+    total_shares: number;
     best_streak: number;
     current_streak: number;
   };

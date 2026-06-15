@@ -1,6 +1,37 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import apiClient from "./apiClient";
+import { hasExplicitAuthSession } from "./userAuth";
 import type { UserData } from "./userAuth";
+
+/** Délai avant déconnexion si le renouvellement n'est pas confirmé (Stripe / RevenueCat). */
+export const PREMIUM_GRACE_PERIOD_DAYS = 3;
+
+export function getDaysPastExpiry(
+  expiry: string | Date | null | undefined,
+): number {
+  if (!expiry) {
+    return 0;
+  }
+
+  const expiryDate = expiry instanceof Date ? expiry : new Date(expiry);
+  if (Number.isNaN(expiryDate.getTime())) {
+    return 0;
+  }
+
+  const diffMs = Date.now() - expiryDate.getTime();
+  if (diffMs <= 0) {
+    return 0;
+  }
+
+  return Math.floor(diffMs / (24 * 60 * 60 * 1000));
+}
+
+export function isWithinPremiumGracePeriod(
+  expiry: string | Date | null | undefined,
+): boolean {
+  const daysPast = getDaysPastExpiry(expiry);
+  return daysPast > 0 && daysPast <= PREMIUM_GRACE_PERIOD_DAYS;
+}
 
 export function isNetworkReadyForApi(status: {
   isConnected: boolean;
@@ -30,7 +61,41 @@ export function isPremiumActiveOnServer(
   }
 
   const expiryDate = new Date(expiry);
-  return !Number.isNaN(expiryDate.getTime()) && expiryDate > new Date();
+  if (!Number.isNaN(expiryDate.getTime()) && expiryDate > new Date()) {
+    return true;
+  }
+
+  // Période de grâce : le backend peut être en retard (webhook Stripe / RevenueCat)
+  return isWithinPremiumGracePeriod(expiryDate);
+}
+
+/** Tente de resynchroniser le premium depuis le serveur après expiration locale. */
+export async function trySyncPremiumFromServer(
+  networkStatus: {
+    isConnected: boolean;
+    isInternetReachable: boolean;
+  },
+): Promise<Record<string, unknown> | null> {
+  if (
+    !isNetworkReadyForApi(networkStatus) ||
+    !(await hasExplicitAuthSession())
+  ) {
+    return null;
+  }
+
+  const result = await apiClient.getUser();
+  if (!result.success || !result.data) {
+    return null;
+  }
+
+  const serverUser = result.data as Record<string, unknown>;
+  if (!isPremiumActiveOnServer(serverUser)) {
+    return null;
+  }
+
+  const userDataToUpdate = buildUserDataFromServer(serverUser);
+  await AsyncStorage.setItem("user_data", JSON.stringify(userDataToUpdate));
+  return serverUser;
 }
 
 export function buildUserDataFromServer(
@@ -63,8 +128,7 @@ export function buildUserDataFromServer(
 /** Récupère user_data depuis l'API et met à jour AsyncStorage. */
 export async function refreshUserDataFromServer(): Promise<UserData | null> {
   try {
-    const token = await AsyncStorage.getItem("auth_token");
-    if (!token) {
+    if (!(await hasExplicitAuthSession())) {
       return null;
     }
 

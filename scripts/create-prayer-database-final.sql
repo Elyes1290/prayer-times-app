@@ -376,6 +376,7 @@ CREATE TABLE IF NOT EXISTS `user_stats` (
   `hadiths_read` int(11) DEFAULT 0,
   `favorites_added` int(11) DEFAULT 0,
   `content_downloaded` int(11) DEFAULT 0,
+  `content_shared` int(11) DEFAULT 0,
   `app_usage_minutes` int(11) DEFAULT 0,
   `streak_days` int(11) DEFAULT 0,
   `created_at` timestamp DEFAULT CURRENT_TIMESTAMP,

@@ -26,6 +26,7 @@ interface OfflineStatsAction {
     | "hadith_read"
     | "favorite_added"
     | "content_downloaded"
+    | "content_shared"
     | "app_usage"
     | "reset_all";
   action_data: Record<string, any>;
@@ -324,6 +325,8 @@ class OfflineStatsManager {
           actionData,
           action === "prayer_completed",
         );
+      } else if (action !== "reset_all") {
+        this.applyOptimisticSpiritualAction(offlineData, action);
       }
 
       await this.saveOfflineData(offlineData);
@@ -622,8 +625,24 @@ class OfflineStatsManager {
 
     if (completed && !wasCompleted) {
       dayEntry.prayers = Number(dayEntry.prayers || 0) + 1;
+      if (prayerType === "fajr") {
+        offlineData.stats.stats = {
+          ...(offlineData.stats.stats || {}),
+          total_fajr_prayers:
+            Number(offlineData.stats.stats?.total_fajr_prayers || 0) + 1,
+        };
+      }
     } else if (!completed && wasCompleted) {
       dayEntry.prayers = Math.max(0, Number(dayEntry.prayers || 0) - 1);
+      if (prayerType === "fajr") {
+        offlineData.stats.stats = {
+          ...(offlineData.stats.stats || {}),
+          total_fajr_prayers: Math.max(
+            0,
+            Number(offlineData.stats.stats?.total_fajr_prayers || 0) - 1,
+          ),
+        };
+      }
     }
 
     dayEntry.complete = dayEntry.prayers >= 5;
@@ -653,6 +672,58 @@ class OfflineStatsManager {
         streakMetrics.maxStreak,
       ),
     };
+  }
+
+  private applyOptimisticSpiritualAction(
+    offlineData: OfflineStatsData,
+    action: OfflineStatsAction["action"],
+  ): void {
+    if (!offlineData.stats) {
+      offlineData.stats = { stats: {}, streaks: {}, history: [] };
+    }
+    if (!offlineData.stats.stats) {
+      offlineData.stats.stats = {};
+    }
+    if (!offlineData.stats.history) {
+      offlineData.stats.history = [];
+    }
+
+    const todayISO = toDateISO(new Date());
+    let dayEntry = offlineData.stats.history.find(
+      (day: { date?: string }) => day.date === todayISO,
+    );
+    if (!dayEntry) {
+      dayEntry = {
+        date: todayISO,
+        complete: false,
+        prayers: 0,
+        dhikr: 0,
+        quran: 0,
+        hadiths: 0,
+      };
+      offlineData.stats.history.unshift(dayEntry);
+    }
+
+    const stats = offlineData.stats.stats;
+    switch (action) {
+      case "dhikr_completed":
+        stats.total_dhikr = Number(stats.total_dhikr || 0) + 1;
+        dayEntry.dhikr = Number(dayEntry.dhikr || 0) + 1;
+        break;
+      case "quran_read":
+        stats.total_quran_verses = Number(stats.total_quran_verses || 0) + 1;
+        dayEntry.quran = Number(dayEntry.quran || 0) + 1;
+        break;
+      case "hadith_read":
+        stats.total_hadiths = Number(stats.total_hadiths || 0) + 1;
+        dayEntry.hadiths = Number(dayEntry.hadiths || 0) + 1;
+        break;
+      case "content_shared":
+        stats.total_shares = Number(stats.total_shares || 0) + 1;
+        break;
+      default:
+        break;
+    }
   }
 
   public async clearOfflineData(): Promise<void> {

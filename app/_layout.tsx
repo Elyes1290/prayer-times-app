@@ -20,6 +20,7 @@ import { Tabs, useRouter } from "expo-router";
 import { SettingsProvider } from "../contexts/SettingsContext";
 import { FavoritesProvider, useFavorites } from "../contexts/FavoritesContext";
 import { PremiumProvider, usePremium } from "../contexts/PremiumContext";
+import { PremiumAppearanceGuard } from "../components/PremiumAppearanceGuard";
 import { BackupProvider } from "../contexts/BackupContext";
 import "../locales/i18n-optimized";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -28,8 +29,12 @@ import { clearUserStatsCache } from "../utils/clearAppData";
 import { showGlobalToast, ToastProvider } from "../contexts/ToastContext";
 import i18n from "../locales/i18n";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { verifyAuth } from "../utils/apiClient";
+import apiClient, { verifyAuth } from "../utils/apiClient";
 import { isOfflineMode } from "../utils/networkUtils";
+import {
+  ensureVipSessionPersistence,
+  isStoredUserVip,
+} from "../utils/vipSession";
 import { registerBackgroundFetchAsync } from "../utils/backgroundTask";
 import { setupIosSoundsForNotifications } from "../utils/iosSoundsSetup";
 import {
@@ -453,6 +458,7 @@ function TabLayoutContent() {
     const initializeApp = async () => {
       try {
         console.log("🧹 Nettoyage des données obsolètes au démarrage...");
+        await ensureVipSessionPersistence();
         await cleanupObsoleteUserData();
 
         // 🎵 NOUVEAU : Configuration des sons pour les notifications iOS
@@ -486,19 +492,10 @@ function TabLayoutContent() {
         const userData = await AsyncStorage.getItem("user_data");
 
         if (explicitConnection === "true" && !userData) {
-          // 🎯 VIP PROTECTION : Vérifier si c'est un VIP avant de nettoyer
-          const premiumUser = await AsyncStorage.getItem("@prayer_app_premium_user");
-          let isVip = false;
-          
-          if (premiumUser) {
-            try {
-              const parsed = JSON.parse(premiumUser);
-              isVip = parsed?.isVip === true;
-            } catch {}
-          }
-          
-          if (isVip) {
-            console.log("👑 [VIP PROTECTION] Utilisateur VIP détecté - pas de nettoyage");
+          if (await isStoredUserVip()) {
+            console.log(
+              "👑 [VIP PROTECTION] Utilisateur VIP détecté - pas de nettoyage"
+            );
           } else {
             console.log(
               "🧹 Nettoyage des données incohérentes - explicit_connection=true mais pas de user_data"
@@ -541,22 +538,13 @@ function TabLayoutContent() {
             // Vérifier aussi que user_data existe et est valide
             const userData = await AsyncStorage.getItem("user_data");
             if (!userData) {
-              // 🎯 VIP PROTECTION : Vérifier si c'est un VIP avant de nettoyer
-              const premiumUser = await AsyncStorage.getItem("@prayer_app_premium_user");
-              let isVip = false;
-              
-              if (premiumUser) {
-                try {
-                  const parsed = JSON.parse(premiumUser);
-                  isVip = parsed?.isVip === true;
-                } catch {}
-              }
-              
-              if (isVip) {
-                console.log("👑 [VIP PROTECTION] Utilisateur VIP détecté - pas de nettoyage");
+              if (await isStoredUserVip()) {
+                console.log(
+                  "👑 [VIP PROTECTION] Utilisateur VIP détecté - pas de nettoyage"
+                );
                 return;
               }
-              
+
               console.log(
                 "🧹 Nettoyage - explicit_connection=true mais pas de user_data"
               );
@@ -582,34 +570,27 @@ function TabLayoutContent() {
               console.log(
                 "🔐 Vérification token au démarrage - utilisateur connecté"
               );
-              const verify = await verifyAuth();
+              let verify = await verifyAuth();
               console.log(
                 "🔐 Vérification token au démarrage (verifyAuth):",
                 verify
               );
               if (!verify) {
-                // 🎯 VIP PROTECTION : Vérifier si c'est un VIP avant de déconnecter
-                const premiumUserStr = await AsyncStorage.getItem("@prayer_app_premium_user");
-                const userDataStr = await AsyncStorage.getItem("user_data");
-                let isVip = false;
-                
-                if (premiumUserStr) {
-                  try {
-                    const parsed = JSON.parse(premiumUserStr);
-                    isVip = parsed?.isVip === true;
-                  } catch {}
-                }
-                
-                if (!isVip && userDataStr) {
-                  try {
-                    const parsed = JSON.parse(userDataStr);
-                    isVip = parsed?.is_vip === true || parsed?.subscription_platform === 'vip';
-                  } catch {}
-                }
-                
+                const isVip = await isStoredUserVip();
+
                 if (isVip) {
-                  console.log("👑 [VIP PROTECTION] Token invalide mais utilisateur VIP - pas de déconnexion automatique");
-                  console.log("⚠️ L'utilisateur VIP devra se reconnecter manuellement si nécessaire");
+                  const refreshed = await apiClient.refreshSession();
+                  if (refreshed) {
+                    verify = await verifyAuth();
+                  }
+
+                  if (verify) {
+                    console.log("✅ [VIP] Session rafraîchie avec succès");
+                  } else {
+                    console.log(
+                      "👑 [VIP PROTECTION] Token invalide mais utilisateur VIP - session locale préservée"
+                    );
+                  }
                 } else {
                   console.log("❌ Token invalide détecté, déconnexion...");
                   await AsyncStorage.multiRemove([
@@ -644,28 +625,10 @@ function TabLayoutContent() {
               }
             }
           } else if (token && explicitConnection !== "true") {
-            // 🎯 VIP PROTECTION : Vérifier si c'est un VIP avant de nettoyer les tokens orphelins
-            const premiumUserStr = await AsyncStorage.getItem("@prayer_app_premium_user");
-            const userDataStr = await AsyncStorage.getItem("user_data");
-            let isVip = false;
-            
-            if (premiumUserStr) {
-              try {
-                const parsed = JSON.parse(premiumUserStr);
-                isVip = parsed?.isVip === true;
-              } catch {}
-            }
-            
-            if (!isVip && userDataStr) {
-              try {
-                const parsed = JSON.parse(userDataStr);
-                isVip = parsed?.is_vip === true || parsed?.subscription_platform === 'vip';
-              } catch {}
-            }
-            
-            if (isVip) {
-              console.log("👑 [VIP PROTECTION] Token orphelin mais utilisateur VIP - restauration de explicit_connection");
-              // Restaurer explicit_connection pour les VIP
+            if (await isStoredUserVip()) {
+              console.log(
+                "👑 [VIP PROTECTION] Token orphelin mais utilisateur VIP - restauration de explicit_connection"
+              );
               await AsyncStorage.setItem("explicit_connection", "true");
             } else {
               // 🚀 CORRECTION : Nettoyer les tokens orphelins (sans connexion explicite)
@@ -987,6 +950,7 @@ export default function TabLayout() {
     <SettingsProvider>
       <ToastProvider>
         <PremiumProvider>
+          <PremiumAppearanceGuard />
           <FavoritesProvider>
             <BackupProvider>
               <AdhanAudioProvider>

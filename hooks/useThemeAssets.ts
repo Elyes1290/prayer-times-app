@@ -61,6 +61,9 @@ export function useThemeAssets() {
     // Thème actuel
     theme: currentTheme,
 
+    // Type d'image de fond (pour forcer le rafraîchissement visuel)
+    backgroundImageType,
+
     // Helper pour vérifier le thème
     isLight: currentTheme === "light" || currentTheme === "morning", // 🆕 morning est aussi un thème clair
     isDark: currentTheme === "dark" || currentTheme === "sunset", // 🆕 sunset est aussi un thème sombre

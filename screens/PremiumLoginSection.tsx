@@ -15,6 +15,11 @@ import {
 import { MCIcon } from "@/components/icons/AppVectorIcons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import apiClient from "../utils/apiClient";
+import { buildUserDataFromServer } from "../utils/userDataSync";
+import {
+  ensureVipSessionPersistence,
+  isStoredUserVip,
+} from "../utils/vipSession";
 import { IapService } from "../utils/iapService";
 import { usePremium } from "../contexts/PremiumContext";
 import { useRouter } from "expo-router";
@@ -213,13 +218,19 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
 
     const checkExistingUser = async () => {
       try {
-        // 🚀 NOUVEAU : Mode professionnel - vérifier si connexion explicite existe
-        const explicitConnection = await AsyncStorage.getItem(
-          "explicit_connection",
-        );
-        const userDataString = await AsyncStorage.getItem("user_data");
+        await ensureVipSessionPersistence();
 
-        if (explicitConnection === "true" && userDataString) {
+        const [explicitConnection, userDataString, hasVipSession] =
+          await Promise.all([
+            AsyncStorage.getItem("explicit_connection"),
+            AsyncStorage.getItem("user_data"),
+            isStoredUserVip(),
+          ]);
+
+        if (
+          userDataString &&
+          (explicitConnection === "true" || hasVipSession)
+        ) {
           // Utilisateur connecté explicitement - charger les données
           let userData: any = null;
           try {
@@ -271,13 +282,16 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
 
     const pollConnectionStatus = async () => {
       try {
-        const explicitConnection = await AsyncStorage.getItem(
-          "explicit_connection",
-        );
-        const userDataString = await AsyncStorage.getItem("user_data");
+        const [explicitConnection, userDataString, hasVipSession] =
+          await Promise.all([
+            AsyncStorage.getItem("explicit_connection"),
+            AsyncStorage.getItem("user_data"),
+            isStoredUserVip(),
+          ]);
 
         const shouldBeConnected =
-          explicitConnection === "true" && userDataString;
+          userDataString &&
+          (explicitConnection === "true" || hasVipSession);
 
         // 🎯 Si le statut a changé, mettre à jour l'interface
         if (shouldBeConnected && !isConnected) {
@@ -358,22 +372,9 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
       );
 
       // Sauvegarder les données utilisateur dans AsyncStorage
-      const userDataToStore = {
-        id: userData.id,
-        user_id: userData.id,
-        email: userData.email,
-        user_first_name: userData.user_first_name,
-        premium_status: userData.premium_status,
-        subscription_type: userData.subscription_type,
-        subscription_id: userData.subscription_id,
-        subscription_platform: userData.subscription_platform, // 🔑 AJOUT pour la gestion cross-platform
-        stripe_customer_id: userData.stripe_customer_id, // 🔑 AJOUT pour gérer l'abonnement Stripe
-        premium_expiry: userData.premium_expiry,
-        premium_activated_at: userData.premium_activated_at, // 🔑 AJOUT MANQUANT !
-        language: userData.language,
-        last_sync: new Date().toISOString(),
-        device_id: userData.device_id,
-      };
+      const userDataToStore = buildUserDataFromServer(
+        userData as Record<string, unknown>,
+      );
 
       // Sauvegarder dans AsyncStorage
       await AsyncStorage.setItem("user_data", JSON.stringify(userDataToStore));
@@ -689,7 +690,7 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
       setEmail("");
       setPassword("");
       setFirstName("");
-      hasCheckedUserRef.current = false;
+      hasCheckedUserRef.current = true;
 
       // 🚀 CORRECTION : Utiliser le toast global pour la déconnexion
       showToast({

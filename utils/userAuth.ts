@@ -1,5 +1,9 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { safeJsonParse } from "./safeJson";
+import {
+  ensureVipSessionPersistence,
+  isStoredUserVip,
+} from "./vipSession";
 
 export interface UserData {
   id: number;
@@ -120,12 +124,40 @@ const isUserLoggedIn = async (): Promise<boolean> => {
   return userId !== null;
 };
 
+/** Clés de session à effacer lors d'une déconnexion volontaire. */
+export const AUTH_SESSION_STORAGE_KEYS = [
+  "user_data",
+  "auth_token",
+  "refresh_token",
+  "explicit_connection",
+  "premium_user_data",
+  "premium_catalog_cache",
+  "user_stats_cache",
+] as const;
+
+/** Supprime la session locale pour empêcher une reconnexion automatique. */
+export async function clearLocalAuthSession(): Promise<void> {
+  await Promise.all(
+    AUTH_SESSION_STORAGE_KEYS.map((key) => AsyncStorage.removeItem(key)),
+  );
+}
+
+/** Session connectée explicitement (token + flag de connexion volontaire). */
+export async function hasExplicitAuthSession(): Promise<boolean> {
+  const [token, explicitConnection] = await Promise.all([
+    AsyncStorage.getItem("auth_token"),
+    AsyncStorage.getItem("explicit_connection"),
+  ]);
+
+  return !!token && explicitConnection === "true";
+}
+
 /**
  * Déconnecte l'utilisateur en supprimant les données du stockage
  */
 const logoutUser = async (): Promise<void> => {
   try {
-    await AsyncStorage.removeItem("user_data");
+    await clearLocalAuthSession();
     console.log("✅ Utilisateur déconnecté");
   } catch (error) {
     console.error("Erreur déconnexion:", error);
@@ -175,6 +207,25 @@ export const cleanupObsoleteUserData = async (): Promise<void> => {
       console.log(
         "✅ Nettoyage sélectif terminé (utilisateur connecté explicitement)"
       );
+    } else if (await isStoredUserVip()) {
+      await ensureVipSessionPersistence();
+      console.log(
+        "👑 [VIP] Nettoyage sans suppression des données de session VIP"
+      );
+
+      const keysToRemove = [
+        "premium_user_data",
+        "premium_catalog_cache",
+        "downloaded_premium_content",
+        "user_settings",
+        "customSettings",
+        "audio_settings",
+        "lastBackupTime",
+        "autoBackupEnabled",
+        "apiSyncEnabled",
+      ];
+
+      await AsyncStorage.multiRemove(keysToRemove);
     } else {
       console.log(
         "🔍 Aucune connexion explicite - nettoyage sélectif sans toucher à l'onboarding"

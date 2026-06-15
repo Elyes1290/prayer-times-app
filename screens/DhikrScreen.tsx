@@ -221,10 +221,15 @@ export default function DhikrScreen() {
   const [screenState, setScreenState] = useState<DhikrScreenState>(() =>
     createInitialScreenState(categoryParam),
   );
-  const [prevCategoryParam, setPrevCategoryParam] = useState(categoryParam);
+  const prevCategoryParamRef = useRef(categoryParam);
 
-  if (categoryParam !== prevCategoryParam) {
-    setPrevCategoryParam(categoryParam);
+  useEffect(() => {
+    if (categoryParam === prevCategoryParamRef.current) {
+      return;
+    }
+
+    prevCategoryParamRef.current = categoryParam;
+
     if (isValidCategoryKey(categoryParam)) {
       setScreenState({
         selectedKey: categoryParam,
@@ -232,7 +237,7 @@ export default function DhikrScreen() {
       });
       scrollTargetKeyRef.current = null;
     }
-  }
+  }, [categoryParam]);
 
   const { selectedKey, search } = screenState;
 

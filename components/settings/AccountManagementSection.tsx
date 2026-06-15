@@ -157,6 +157,11 @@ export default function AccountManagementSection({
   const handleLogout = async () => {
     try {
       await forceLogout();
+      dispatch({ type: "SET_REAL_USER_DATA", payload: null });
+      dispatch({
+        type: "SET_PROFILE",
+        payload: { firstName: "", email: "" },
+      });
       setActiveSection(null);
       showToast({
         type: "success",

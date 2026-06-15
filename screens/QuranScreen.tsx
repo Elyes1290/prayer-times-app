@@ -26,6 +26,7 @@ import { usePremium } from "../contexts/PremiumContext";
 import { useToast } from "../contexts/ToastContext";
 import { PremiumContent } from "../utils/premiumContent";
 import { useQuranSurahData } from "../hooks/useQuranSurahData";
+import { useUpdateUserStats } from "../hooks/useUpdateUserStats";
 import { useNetworkStatus, useOfflineAccess } from "../hooks/useNetworkStatus";
 import { OfflineMessage } from "../components/OfflineMessage";
 import { OfflineTabType } from "../components/OfflineNavigationTabs";
@@ -40,6 +41,8 @@ export default function QuranScreen() {
   const { user } = usePremium();
   const { showToast } = useToast();
   const isPremium = !!user?.isPremium;
+  const { recordQuranRead } = useUpdateUserStats();
+  const lastRecordedSurahRef = useRef<number | null>(null);
 
   const [modalVisible, setModalVisible] = useState(false);
   const [reciterModalVisible, setReciterModalVisible] = useState(false);
@@ -182,6 +185,13 @@ export default function QuranScreen() {
       setCurrentRecitation,
     };
   }, [currentlyPlaying, currentRecitation, stopRecitation, setCurrentRecitation]);
+
+  useEffect(() => {
+    if (selectedSourate <= 0) return;
+    if (lastRecordedSurahRef.current === selectedSourate) return;
+    lastRecordedSurahRef.current = selectedSourate;
+    void recordQuranRead(1, selectedSourate);
+  }, [selectedSourate, recordQuranRead]);
 
   const [fontsLoaded] = Font.useFonts({
     ScheherazadeNew: require("../assets/fonts/ScheherazadeNew-Regular.ttf"),

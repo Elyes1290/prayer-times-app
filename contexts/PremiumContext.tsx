@@ -20,10 +20,29 @@ import PremiumContentManager from "../utils/premiumContent";
 import { IapService } from "../utils/iapService";
 import {
   buildUserDataFromServer,
+  getDaysPastExpiry,
   isNetworkReadyForApi,
   isPremiumActiveOnServer,
+  PREMIUM_GRACE_PERIOD_DAYS,
   refreshUserDataFromServer,
+  trySyncPremiumFromServer,
 } from "../utils/userDataSync";
+import {
+  ensureVipSessionPersistence,
+  isStoredUserVip,
+} from "../utils/vipSession";
+import { clearLocalAuthSession, hasExplicitAuthSession } from "../utils/userAuth";
+import {
+  DEFAULT_ADHAN_SOUND,
+  persistFreeAppearanceSettings,
+  resolveFreeAdhanSound,
+  resolveFreeBackgroundImageType,
+  resolveFreeThemeMode,
+  type ThemeMode,
+} from "../utils/resetPremiumAppearance";
+import { runPremiumAppearanceReset } from "../utils/premiumAppearanceSync";
+import { LocalStorageManager } from "../utils/localStorageManager";
+import type { BackgroundImageType } from "./SettingsContext";
 
 // Types de base
 interface PremiumUser {
@@ -113,6 +132,34 @@ const STORAGE_KEYS = {
   PREMIUM_FEATURES: "@prayer_app_premium_features",
   LAST_EXPIRY_NOTIFICATION: "@prayer_app_last_expiry_notification", // 🆕 Dernière notification d'expiration
 } as const;
+
+async function resolveStoredPremiumActive(
+  parsedUser: Record<string, unknown>,
+): Promise<boolean> {
+  if (parsedUser.isVip === true) {
+    return isStoredUserVip();
+  }
+
+  if (!parsedUser.isPremium) {
+    return false;
+  }
+
+  if (await hasExplicitAuthSession()) {
+    return true;
+  }
+
+  if (Platform.OS === "ios") {
+    try {
+      const iapService = IapService.getInstance();
+      await iapService.init();
+      return await iapService.checkPremiumStatus();
+    } catch {
+      return false;
+    }
+  }
+
+  return false;
+}
 
 async function getStoredAccountEmail(): Promise<string | null> {
   const userData = await AsyncStorage.getItem("user_data");
@@ -219,73 +266,119 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
         const now = new Date();
 
         if (expiryDate <= now) {
+          const daysPastExpiry = getDaysPastExpiry(expiryDate);
           console.log(
-            "⏰ Date d'expiration locale atteinte - vérification avec le serveur...",
+            `⏰ Date d'expiration locale atteinte (${daysPastExpiry} jour(s)) — vérification renouvellement...`,
           );
 
-          // 🚀 CORRECTION CRITIQUE : Vérifier avec le serveur AVANT de désactiver
-          // Car Stripe peut avoir renouvelé automatiquement l'abonnement
-          try {
-            // Vérifier si l'utilisateur est connecté
-            const token = await AsyncStorage.getItem("auth_token");
-            if (token && isNetworkReadyForApi(networkStatus)) {
+          const applyRenewedPremium = async (
+            serverUser: Record<string, unknown>,
+            source: string,
+          ) => {
+            const serverExpiryDate = serverUser.premium_expiry
+              ? new Date(serverUser.premium_expiry as string)
+              : new Date(Date.now() + 365 * 24 * 60 * 60 * 1000);
+
+            const userDataToUpdate = buildUserDataFromServer(serverUser);
+            await AsyncStorage.setItem(
+              "user_data",
+              JSON.stringify(userDataToUpdate),
+            );
+
+            const updatedUser = createPremiumUserFromServer(serverUser);
+            await AsyncStorage.setItem(
+              STORAGE_KEYS.PREMIUM_USER,
+              JSON.stringify(updatedUser),
+            );
+            setUser(updatedUser);
+
+            if (serverExpiryDate > now) {
+              showToast?.({
+                type: "success",
+                title: t("premium.renewed_title", "Abonnement renouvelé"),
+                message: t(
+                  "premium.renewed_message",
+                  `Votre abonnement premium a été renouvelé automatiquement jusqu'au ${serverExpiryDate.toLocaleDateString()}`,
+                ),
+              });
+            } else {
               console.log(
-                "🔄 Synchronisation avec le serveur pour vérifier le renouvellement...",
+                `✅ Premium maintenu via ${source} (période de grâce / sync en cours)`,
               );
+            }
+          };
 
-              const result = await apiClient.getUser();
-              if (result.success && result.data) {
-                const serverUser = result.data as Record<string, unknown>;
+          try {
+            const serverUser = await trySyncPremiumFromServer(networkStatus);
+            if (serverUser) {
+              console.log("✅ Renouvellement confirmé côté serveur");
+              await applyRenewedPremium(serverUser, "serveur");
+              return false;
+            }
 
-                if (isPremiumActiveOnServer(serverUser)) {
-                  const serverExpiryDate = serverUser.premium_expiry
-                    ? new Date(serverUser.premium_expiry as string)
-                    : new Date(Date.now() + 365 * 24 * 60 * 60 * 1000);
+            if (Platform.OS === "ios") {
+              const token = await AsyncStorage.getItem("auth_token");
+              const iapService = IapService.getInstance();
+              await iapService.init();
 
-                  if (serverExpiryDate > now) {
-                    console.log(
-                      "✅ Abonnement toujours actif côté serveur — sync locale",
-                    );
-                    console.log(
-                      `📅 Nouvelle date d'expiration: ${serverExpiryDate.toLocaleDateString()}`,
-                    );
+              const storedEmail = await getStoredAccountEmail();
+              if (storedEmail && token) {
+                await iapService.linkAccount(storedEmail);
+              }
 
-                    const userDataToUpdate = buildUserDataFromServer(serverUser);
-                    await AsyncStorage.setItem(
-                      "user_data",
-                      JSON.stringify(userDataToUpdate),
-                    );
-
-                    const updatedUser = createPremiumUserFromServer(serverUser);
-
-                    await AsyncStorage.setItem(
-                      STORAGE_KEYS.PREMIUM_USER,
-                      JSON.stringify(updatedUser),
-                    );
-                    setUser(updatedUser);
-
-                    // Afficher un toast de confirmation
-                    showToast?.({
-                      type: "success",
-                      title: t("premium.renewed_title", "Abonnement renouvelé"),
-                      message: t(
-                        "premium.renewed_message",
-                        `Votre abonnement premium a été renouvelé automatiquement jusqu'au ${serverExpiryDate.toLocaleDateString()}`,
-                      ),
+              const isIapPremium = await iapService.checkPremiumStatus();
+              if (isIapPremium && token && isNetworkReadyForApi(networkStatus)) {
+                const snap = await iapService.getActiveEntitlementSnapshot();
+                if (snap) {
+                  try {
+                    await apiClient.syncIosPremiumRenewal({
+                      expiration_at_ms: snap.expirationAtMs,
+                      product_id: snap.productId,
+                      original_transaction_id: snap.originalTransactionId,
                     });
-
-                    return false; // Pas d'expiration, renouvellement effectué
+                  } catch (syncErr) {
+                    console.warn(
+                      "⚠️ [PremiumContext] sync-ios-premium (expiration):",
+                      syncErr,
+                    );
                   }
                 }
+
+                const refreshedUser = await refreshUserDataFromServer();
+                if (
+                  refreshedUser &&
+                  isPremiumActiveOnServer(
+                    refreshedUser as unknown as Record<string, unknown>,
+                  )
+                ) {
+                  console.log("✅ Renouvellement confirmé via RevenueCat");
+                  await applyRenewedPremium(
+                    refreshedUser as unknown as Record<string, unknown>,
+                    "RevenueCat",
+                  );
+                  return false;
+                }
+              } else if (isIapPremium) {
+                console.log(
+                  "🍎 Premium actif sur RevenueCat — maintien local (sync serveur différée)",
+                );
+                return false;
               }
             }
           } catch (syncError) {
-            console.log("⚠️ Erreur synchronisation serveur:", syncError);
-            // En cas d'erreur réseau, on continue avec la vérification locale
+            console.log("⚠️ Erreur synchronisation renouvellement:", syncError);
           }
 
-          // Si on arrive ici, le serveur confirme l'expiration OU on ne peut pas se connecter
-          console.log("❌ Abonnement premium expiré confirmé - désactivation");
+          if (daysPastExpiry <= PREMIUM_GRACE_PERIOD_DAYS) {
+            console.log(
+              `⏳ Période de grâce (${daysPastExpiry}/${PREMIUM_GRACE_PERIOD_DAYS} jours) — premium maintenu`,
+            );
+            return false;
+          }
+
+          console.log(
+            "❌ Abonnement expiré au-delà de la période de grâce — désactivation",
+          );
 
           // Désactiver le premium localement
           await AsyncStorage.setItem(
@@ -383,7 +476,7 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
       console.error("❌ Erreur vérification expiration locale:", error);
       return false;
     }
-  }, [showToast, t]); // Retirer deactivatePremium des deps pour éviter la circularité
+  }, [showToast, t, networkStatus]);
 
   // --- Actions disponibles pour les effets ---
   const deactivatePremium = React.useCallback(async () => {
@@ -399,11 +492,27 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
           hasPurchasedPremium = false;
         }
       }
+
+      const [themeRaw, backgroundRaw, adhanRaw] = await Promise.all([
+        LocalStorageManager.getEssential("THEME_MODE"),
+        LocalStorageManager.getEssential("BACKGROUND_IMAGE_TYPE"),
+        LocalStorageManager.getEssential("ADHAN_SOUND"),
+      ]);
+      const nextTheme = resolveFreeThemeMode(
+        (themeRaw as ThemeMode) || "auto",
+      );
+      const nextBackground = resolveFreeBackgroundImageType(
+        (backgroundRaw as BackgroundImageType) || "prophet",
+      );
+      const nextAdhan = resolveFreeAdhanSound(adhanRaw || DEFAULT_ADHAN_SOUND);
+      await persistFreeAppearanceSettings(nextTheme, nextBackground, nextAdhan);
+
       await AsyncStorage.setItem(
         STORAGE_KEYS.PREMIUM_USER,
         JSON.stringify({ ...defaultUser, hasPurchasedPremium }),
       );
       setUser({ ...defaultUser, hasPurchasedPremium });
+      await runPremiumAppearanceReset({ force: true });
     } catch (error) {
       // noop
     }
@@ -483,24 +592,23 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
         console.log(
           "🔐 Vérification périodique du token - utilisateur connecté",
         );
-        // 👑 VIP PROTECTION : ne jamais déconnecter un VIP, même si le token expire
-        const vipCheckPremiumRaw = await AsyncStorage.getItem(
-          STORAGE_KEYS.PREMIUM_USER,
-        );
-        const vipCheckPremium = safeJsonParse<any>(vipCheckPremiumRaw, null);
-        if (vipCheckPremium?.isVip) {
-          console.log("👑 [VIP] Token expiré ignoré — utilisateur VIP");
-          return;
-        }
-        const vipCheckUserRaw = await AsyncStorage.getItem("user_data");
-        const vipCheckUser = safeJsonParse<any>(vipCheckUserRaw, null);
-        if (vipCheckUser?.is_vip === true) {
-          console.log("👑 [VIP] Token expiré ignoré — is_vip dans user_data");
+        if (await isStoredUserVip()) {
+          await ensureVipSessionPersistence();
+          console.log("👑 [VIP] Vérification token ignorée — session locale VIP");
           return;
         }
 
         const result = await apiClient.verifyAuth();
         if (!result?.success) {
+          const refreshed = await apiClient.refreshSession();
+          if (refreshed) {
+            const retry = await apiClient.verifyAuth();
+            if (retry?.success) {
+              console.log("✅ Session rafraîchie après expiration token");
+              return;
+            }
+          }
+
           // Token invalide: désactiver premium et nettoyer les tokens
           await AsyncStorage.multiRemove(["auth_token", "refresh_token"]);
           await deactivatePremium();
@@ -534,6 +642,14 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
     const checkExplicitConnection = async () => {
       try {
         // 🎯 VIP PROTECTION : Vérifier d'abord si l'utilisateur est VIP
+        if (await isStoredUserVip()) {
+          await ensureVipSessionPersistence();
+          console.log(
+            "👑 [VIP PROTECTION] Utilisateur VIP détecté - pas de déconnexion automatique",
+          );
+          return;
+        }
+
         const storedUser = await AsyncStorage.getItem(
           STORAGE_KEYS.PREMIUM_USER,
         );
@@ -612,7 +728,11 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
       // 🚀 PRIORITÉ : synchroniser le serveur AVANT toute vérification d'expiration locale
       try {
         const token = await AsyncStorage.getItem("auth_token");
-        if (token && isNetworkReadyForApi(networkStatus)) {
+        if (
+          token &&
+          (await hasExplicitAuthSession()) &&
+          isNetworkReadyForApi(networkStatus)
+        ) {
           console.log(
             "🔄 [SYNC] Chargement premium — source serveur en premier",
           );
@@ -775,7 +895,7 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
 
       // 🔧 Synchroniser avec user_data (déjà rafraîchi depuis le serveur en début de flux)
       const userData = await AsyncStorage.getItem("user_data");
-      if (userData) {
+      if (userData && (await hasExplicitAuthSession())) {
         let parsedUserData: any = null;
         try {
           parsedUserData = JSON.parse(userData);
@@ -807,9 +927,7 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
           return;
         }
 
-        // 🚀 SIMPLIFICATION : Si on a des données premium, on est premium
-        const isPremium =
-          parsedUser.isPremium || parsedUser.hasPurchasedPremium || false;
+        const isPremium = await resolveStoredPremiumActive(parsedUser);
 
         const newUser = {
           ...parsedUser,
@@ -817,7 +935,7 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
             ? new Date(parsedUser.expiryDate)
             : null,
           isPremium,
-          hasPurchasedPremium: parsedUser.hasPurchasedPremium || isPremium,
+          hasPurchasedPremium: !!parsedUser.hasPurchasedPremium,
         };
 
         // 🚀 DEBUG : Log pour vérifier l'état premium
@@ -996,21 +1114,13 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
   // 🚀 NOUVEAU : Fonction pour forcer la déconnexion complète
   const forceLogout = async (): Promise<void> => {
     try {
-      // console.log(
-      //   `🔓 [SECURITY] Force logout - Suppression de toutes les données`
-      // );
-
+      const hasPurchasedPremium = user.hasPurchasedPremium === true;
+      setUser({ ...defaultUser, hasPurchasedPremium });
       await Promise.all([
-        AsyncStorage.removeItem("user_data"),
-        AsyncStorage.removeItem("premium_user_data"),
-        AsyncStorage.removeItem("premium_catalog_cache"),
-        AsyncStorage.removeItem("user_stats_cache"),
+        runPremiumAppearanceReset({ force: true }),
+        clearLocalAuthSession(),
       ]);
-
-      // Désactiver le premium
       await deactivatePremium();
-
-      // console.log(`✅ [SECURITY] Force logout - Déconnexion complète réussie`);
     } catch (error) {
       console.error(`❌ [SECURITY] Erreur force logout:`, error);
     }

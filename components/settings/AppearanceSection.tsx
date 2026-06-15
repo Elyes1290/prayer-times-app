@@ -256,6 +256,14 @@ export default function AppearanceSection({
                 ]}
                 selectedValue={backgroundImageType}
                 onValueChange={(value) => {
+                  if (
+                    !isPremium &&
+                    (value === "makka" || value === "alquds")
+                  ) {
+                    setBackgroundPickerVisible(false);
+                    onShowPremiumModal?.();
+                    return;
+                  }
                   setBackgroundImageType(value as BackgroundImageType);
                 }}
                 onClose={() => setBackgroundPickerVisible(false)}

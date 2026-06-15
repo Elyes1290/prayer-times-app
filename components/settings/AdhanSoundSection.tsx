@@ -7,11 +7,13 @@ import {
   StyleSheet,
   FlatList,
   ListRenderItem,
+  Alert,
 } from "react-native";
 import { MCIcon } from "@/components/icons/AppVectorIcons";
 import Slider from "@react-native-community/slider";
 import { useTranslation } from "react-i18next";
 import { PremiumContent } from "../../utils/premiumContent";
+import { isPremiumAdhanSound } from "../../utils/resetPremiumAppearance";
 import ThemedPicker from "../ThemedPicker";
 import { useThemeAssets } from "../../hooks/useThemeAssets";
 
@@ -291,6 +293,18 @@ export default function AdhanSoundSection({
               }))}
               selectedValue={adhanSound}
               onValueChange={(value) => {
+                const hasPremiumAccess = user?.isPremium || user?.isVip === true;
+                if (isPremiumAdhanSound(value) && !hasPremiumAccess) {
+                  setSoundPickerVisible(false);
+                  Alert.alert(
+                    t("premium_required", "Premium requis"),
+                    t(
+                      "premium_adhans_message",
+                      "Les adhans premium sont réservés aux membres Premium.",
+                    ),
+                  );
+                  return;
+                }
                 setAdhanSound(value);
                 settings.setAdhanSound(value);
                 markPendingChanges(); // 🚀 NOUVEAU : Marquer les changements en attente

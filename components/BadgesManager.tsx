@@ -380,7 +380,11 @@ export const BadgesManager: React.FC<BadgesManagerProps> = ({
       case "count":
         switch (badge.category) {
           case "prayer":
-            current = userStats.total_prayers || 0;
+            if (requirement.metric === "fajr_prayers") {
+              current = userStats.total_fajr_prayers || 0;
+            } else {
+              current = userStats.total_prayers || 0;
+            }
             break;
           case "dhikr":
             current = userStats.total_dhikr_sessions || 0;

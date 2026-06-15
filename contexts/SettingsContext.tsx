@@ -21,6 +21,7 @@ import {
   LocalStorageManager,
   useLocalStorage,
 } from "../utils/localStorageManager";
+import { useRegisterPremiumAppearanceReset } from "../hooks/useRegisterPremiumAppearanceReset";
 
 const FIRST_LAUNCH_FLAG = "app_first_launch_done";
 
@@ -999,6 +1000,15 @@ export const SettingsProvider = ({
       console.error("Erreur lors de la sauvegarde du type d'image de fond:", error);
     }
   };
+
+  useRegisterPremiumAppearanceReset(
+    { themeMode, backgroundImageType, adhanSound },
+    {
+      setThemeModeState,
+      setBackgroundImageTypeState,
+      setAdhanSound,
+    },
+  );
 
   const handleSetLocationMode = async (mode: LocationMode) => {
     setLocationMode(mode);

@@ -14,6 +14,7 @@ interface UpdateStatsAction {
     | "hadith_read"
     | "favorite_added"
     | "content_downloaded"
+    | "content_shared"
     | "app_usage"
     | "reset_all";
   action_data?: Record<string, any>;
@@ -153,6 +154,19 @@ export const useUpdateUserStats = () => {
     [updateStats]
   );
 
+  const recordContentShared = useCallback(
+    async (contentType: string = "general", title?: string) => {
+      return updateStats({
+        action: "content_shared",
+        action_data: {
+          type: contentType,
+          title,
+        },
+      });
+    },
+    [updateStats],
+  );
+
   const recordAppUsage = useCallback(
     async (minutes: number = 1, sessionType: string = "general") => {
       return updateStats({
@@ -203,6 +217,7 @@ export const useUpdateUserStats = () => {
     recordHadithRead,
     recordFavoriteAdded,
     recordContentDownloaded,
+    recordContentShared,
     recordAppUsage,
     resetAllStats,
     syncPendingActions,

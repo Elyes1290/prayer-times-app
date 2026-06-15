@@ -157,7 +157,8 @@ function handleLogin() {
     revokeAllRefreshTokensForUser($user['id']);
     revokeAllSessionsForUser($user['id']);
     $accessToken = generateAuthToken($user['id']);
-    $refreshToken = createRefreshToken($user['id'], $deviceId, 30);
+    $refreshTtlDays = getRefreshTokenTtlDaysForUserRecord($user);
+    $refreshToken = createRefreshToken($user['id'], $deviceId, $refreshTtlDays);
     $formattedUser = formatUserData($user);
 
     // 📧 Envoyer le mail de bienvenue UNIQUEMENT lors de la toute première connexion (login_count == 1 après update)
@@ -431,7 +432,8 @@ function handleRegister() {
     revokeAllRefreshTokensForUser($user_id);
     revokeAllSessionsForUser($user_id);
     $accessToken = generateAuthToken($user_id);
-    $refreshToken = createRefreshToken($user_id, $deviceId, 30);
+    $refreshTtlDays = getRefreshTokenTtlDaysForUserRecord($user);
+    $refreshToken = createRefreshToken($user_id, $deviceId, $refreshTtlDays);
 
     // 📧 Envoyer le mail de bienvenue lors de l'inscription (considérée comme première connexion)
     try {
@@ -588,8 +590,9 @@ function handleRefresh() {
         handleError('Utilisateur inactif ou inexistant', 403);
     }
 
-    // Rotation du refresh token
-    $newRefresh = rotateRefreshToken($providedRefresh, $record['device_id'] ?? null, 30);
+    // Rotation du refresh token (durée prolongée pour les VIP)
+    $refreshTtlDays = getRefreshTokenTtlDaysForUserRecord($user);
+    $newRefresh = rotateRefreshToken($providedRefresh, $record['device_id'] ?? null, $refreshTtlDays);
     if (!$newRefresh) {
         handleError('Impossible de renouveler le refresh token', 500);
     }

@@ -1,5 +1,3 @@
-import { useSettingsOptimized } from "@/hooks/useSettingsOptimized";
-
 // Types pour le système de badges
 export interface Badge {
   id: string;
@@ -27,6 +25,7 @@ export interface Badge {
   requirement: {
     type: "count" | "streak" | "date" | "custom";
     value: number;
+    metric?: string;
   };
   is_hidden: boolean;
   unlocked?: boolean;
@@ -129,6 +128,9 @@ class BadgesSystem {
         // Logique selon la catégorie du badge
         switch (badge.category) {
           case "prayer":
+            if (requirement.metric === "fajr_prayers") {
+              return userStats.total_fajr_prayers >= requirement.value;
+            }
             return userStats.total_prayers >= requirement.value;
           case "dhikr":
             return userStats.total_dhikr_sessions >= requirement.value;
@@ -156,6 +158,79 @@ class BadgesSystem {
       default:
         return false;
     }
+  }
+
+  /**
+   * Valeur actuelle de progression vers un badge
+   */
+  getBadgeCurrentValue(badge: Badge, userStats: BadgeUserStats): number {
+    const { requirement } = badge;
+
+    switch (requirement.type) {
+      case "count":
+        switch (badge.category) {
+          case "prayer":
+            if (requirement.metric === "fajr_prayers") {
+              return userStats.total_fajr_prayers;
+            }
+            return userStats.total_prayers;
+          case "dhikr":
+            return userStats.total_dhikr_sessions;
+          case "quran":
+            return userStats.total_quran_sessions;
+          case "hadith":
+            return userStats.total_hadith_read;
+          case "social":
+            return userStats.content_shared;
+          default:
+            return 0;
+        }
+      case "streak":
+        return userStats.current_streak;
+      default:
+        return 0;
+    }
+  }
+
+  /**
+   * Progression vers un badge (0–100 %)
+   */
+  getBadgeProgress(
+    badge: Badge,
+    userStats: BadgeUserStats,
+  ): { current: number; target: number; percent: number } {
+    const target = badge.requirement.value;
+    const current = Math.min(this.getBadgeCurrentValue(badge, userStats), target);
+    const percent =
+      target > 0 ? Math.min(Math.round((current / target) * 100), 100) : 0;
+
+    return { current, target, percent };
+  }
+
+  /**
+   * Badges verrouillés les plus proches du déblocage
+   */
+  getNextBadgeTargets(
+    userStats: BadgeUserStats,
+    unlockedCodes: Set<string>,
+    limit = 4,
+  ): { badge: Badge; current: number; target: number; percent: number }[] {
+    const entries: {
+      badge: Badge;
+      current: number;
+      target: number;
+      percent: number;
+    }[] = [];
+
+    for (const badge of this.config.badges) {
+      if (badge.is_hidden || unlockedCodes.has(badge.code)) continue;
+      const progress = this.getBadgeProgress(badge, userStats);
+      if (progress.percent >= 100) continue;
+      entries.push({ badge, ...progress });
+    }
+
+    entries.sort((a, b) => b.percent - a.percent || a.target - b.target);
+    return entries.slice(0, limit);
   }
 
   /**
@@ -223,6 +298,66 @@ class BadgesSystem {
   }
 }
 
+export type BadgeUserStats = {
+  total_prayers: number;
+  total_fajr_prayers: number;
+  current_streak: number;
+  total_dhikr_sessions: number;
+  total_quran_sessions: number;
+  total_hadith_read: number;
+  content_shared: number;
+};
+
+function sumHistoryField(
+  history: { prayers?: number; dhikr?: number; quran?: number; hadiths?: number }[],
+  field: "prayers" | "dhikr" | "quran" | "hadiths",
+): number {
+  return history.reduce((sum, day) => sum + (day[field] ?? 0), 0);
+}
+
+/** Convertit les stats API (structure imbriquée) au format attendu par checkBadgeCondition. */
+export function mapStatsToBadgeUserStats(
+  stats: any,
+  extraFajrCount = 0,
+): BadgeUserStats {
+  const s = stats?.stats ?? {};
+  const streaks = stats?.streaks ?? {};
+  const history = Array.isArray(stats?.history) ? stats.history : [];
+
+  const totalPrayers = Math.max(
+    s.total_prayers_all_time ?? 0,
+    s.total_prayers ?? 0,
+    sumHistoryField(history, "prayers"),
+  );
+
+  const remoteFajr =
+    (stats?.today_prayers?.fajr ? 1 : 0) +
+    (stats?.yesterday_prayers?.fajr ? 1 : 0);
+
+  return {
+    total_prayers: totalPrayers,
+    total_fajr_prayers: Math.max(
+      s.total_fajr_prayers ?? 0,
+      remoteFajr,
+      extraFajrCount,
+    ),
+    current_streak: streaks.current_streak ?? s.current_streak ?? 0,
+    total_dhikr_sessions: Math.max(
+      s.total_dhikr ?? 0,
+      sumHistoryField(history, "dhikr"),
+    ),
+    total_quran_sessions: Math.max(
+      s.total_quran_verses ?? 0,
+      sumHistoryField(history, "quran"),
+    ),
+    total_hadith_read: Math.max(
+      s.total_hadiths ?? 0,
+      sumHistoryField(history, "hadiths"),
+    ),
+    content_shared: s.total_shares ?? 0,
+  };
+}
+
 // Export de l'instance singleton
 const badgesSystem = BadgesSystem.getInstance();
 
@@ -230,6 +365,9 @@ const badgesSystem = BadgesSystem.getInstance();
 export const useBadgesSystem = () => {
   return {
     system: badgesSystem,
+    mapStatsToBadgeUserStats,
+    getUnlockedBadges: (userStats: BadgeUserStats) =>
+      badgesSystem.getUnlockedBadges(userStats),
     getAllBadges: () => badgesSystem.getAllBadges(),
     getBadgesByCategory: (category: string) =>
       badgesSystem.getBadgesByCategory(category),
@@ -246,5 +384,12 @@ export const useBadgesSystem = () => {
     getBadgeColor: (badge: Badge) => badgesSystem.getBadgeColor(badge),
     getCategoryColor: (category: string) =>
       badgesSystem.getCategoryColor(category),
+    getBadgeProgress: (badge: Badge, userStats: BadgeUserStats) =>
+      badgesSystem.getBadgeProgress(badge, userStats),
+    getNextBadgeTargets: (
+      userStats: BadgeUserStats,
+      unlockedCodes: Set<string>,
+      limit?: number,
+    ) => badgesSystem.getNextBadgeTargets(userStats, unlockedCodes, limit),
   };
 };

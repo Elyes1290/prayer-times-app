@@ -62,6 +62,45 @@ async function saveLocalPrayersForDate(
   await AsyncStorage.setItem(prayersKey(userId, dateISO), JSON.stringify(state));
 }
 
+export async function countLocalFajrPrayers(userId: number): Promise<number> {
+  try {
+    const keys = await AsyncStorage.getAllKeys();
+    const prefix = `@today_prayers_v1_${userId}_`;
+    const prayerKeys: string[] = [];
+
+    for (const key of keys) {
+      if (!key.startsWith(prefix)) continue;
+      prayerKeys.push(key);
+    }
+
+    if (prayerKeys.length === 0) return 0;
+
+    const entries = await AsyncStorage.multiGet(prayerKeys);
+    let count = 0;
+    for (const [, raw] of entries) {
+      if (!raw) continue;
+      try {
+        const parsed = JSON.parse(raw) as Partial<TodayPrayersState>;
+        if (parsed.fajr) count++;
+      } catch {
+        // ignorer les entrées corrompues
+      }
+    }
+
+    return count;
+  } catch {
+    return 0;
+  }
+}
+
+/** Compte les Fajr visibles dans la réponse stats (aujourd'hui + hier). */
+function countFajrFromRemotePrayerStates(stats: any): number {
+  let count = 0;
+  if (stats?.today_prayers?.fajr) count++;
+  if (stats?.yesterday_prayers?.fajr) count++;
+  return count;
+}
+
 export async function toggleLocalPrayerForDate(
   userId: number,
   dateISO: string,

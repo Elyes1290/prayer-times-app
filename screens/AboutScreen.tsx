@@ -14,8 +14,7 @@ import Constants from "expo-constants";
 import ThemedImageBackground from "../components/ThemedImageBackground";
 import { useRouter } from "expo-router";
 import { useOverlayTextColor } from "../hooks/useThemeColor";
-
-const LAST_RELEASE_DATE = "2026-06-09";
+import { formatLastUpdateDate } from "../constants/lastRelease";
 
 const ABOUT_FEATURES = [
   { icon: "clock-outline", key: "prayer_times" },
@@ -57,14 +56,6 @@ const ABOUT_FAQ = [
   { question: "faq_qibla_question", answer: "faq_qibla_answer" },
   { question: "faq_offline_question", answer: "faq_offline_answer" },
 ] as const;
-
-function formatLastUpdateDate(language: string) {
-  return new Date(LAST_RELEASE_DATE).toLocaleDateString(language, {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  });
-}
 
 function handlePrivacyPolicy() {
   Linking.openURL("https://www.myadhanapp.com/public/privacy-policy.html");

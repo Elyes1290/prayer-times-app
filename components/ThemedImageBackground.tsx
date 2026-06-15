@@ -24,10 +24,11 @@ export default function ThemedImageBackground({
   contentFit,
   fallbackSource,
 }: ThemedImageBackgroundProps) {
-  const { backgroundImage } = useThemeAssets();
+  const { backgroundImage, theme, backgroundImageType } = useThemeAssets();
 
   return (
     <CachedImageBackground
+      key={`${backgroundImageType}-${theme}`}
       source={backgroundImage || fallbackSource}
       style={style}
       imageStyle={imageStyle}

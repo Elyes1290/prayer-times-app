@@ -51,6 +51,7 @@ import { scheduleNotificationsFor2Days } from "../utils/sheduleAllNotificationsF
 import { debugLog, errorLog } from "../utils/logger";
 import WelcomePersonalizationModal from "../components/WelcomePersonalizationModal";
 import { usePremium } from "../contexts/PremiumContext";
+import { useUpdateUserStats } from "../hooks/useUpdateUserStats";
 import { useUniversalStyles } from "../hooks/useUniversalLayout";
 import { useNetworkStatus, useOfflineAccess } from "../hooks/useNetworkStatus";
 import QuranOfflineService from "../utils/QuranOfflineService";
@@ -300,7 +301,16 @@ export default function HomeScreen() {
   // 🌐 NOUVEAU : Détection réseau pour masquer les raccourcis offline
   const networkStatus = useNetworkStatus();
   const { user: premiumUser } = usePremium();
+  const { recordContentShared } = useUpdateUserStats();
   const offlineAccess = useOfflineAccess(!!premiumUser?.isPremium);
+
+  const shareSpiritualContent = useCallback(
+    (message: string, contentType: string) => {
+      void recordContentShared(contentType);
+      void Share.share({ message });
+    },
+    [recordContentShared],
+  );
 
   // Détecter la langue de l'utilisateur pour les traductions locales
   const lang = i18n.language.startsWith("fr")
@@ -1611,9 +1621,7 @@ export default function HomeScreen() {
                             }\n\n${
                               randomDua.benefits || ""
                             }\n\nPartagé depuis Prayer Times App`;
-                        Share.share({
-                          message: message,
-                        });
+                        shareSpiritualContent(message, "dua");
                       }
                     }}
                   >
@@ -1687,9 +1695,7 @@ export default function HomeScreen() {
                         const message = i18n.language.startsWith("ar")
                           ? `${randomVerse.arabic}\n\n${randomVerse.reference}\n\nPartagé depuis Prayer Times App`
                           : `${randomVerse.arabic}\n\n${randomVerse.translation}\n\n${randomVerse.reference}\n\nPartagé depuis Prayer Times App`;
-                        Share.share({
-                          message: message,
-                        });
+                        shareSpiritualContent(message, "verse");
                       }
                     }}
                   >
@@ -1762,9 +1768,7 @@ export default function HomeScreen() {
                         const message = i18n.language.startsWith("ar")
                           ? `${randomName.arabic}\n\nPartagé depuis Prayer Times App`
                           : `${randomName.arabic}\n\n${randomName.translit}\n\n${randomName.meaning}\n\nPartagé depuis Prayer Times App`;
-                        Share.share({
-                          message: message,
-                        });
+                        shareSpiritualContent(message, "asma");
                       }
                     }}
                   >
@@ -1850,9 +1854,7 @@ export default function HomeScreen() {
                             } – ${
                               randomHadith.hadithNumber
                             }\n\nPartagé depuis Prayer Times App`;
-                        Share.share({
-                          message: message,
-                        });
+                        shareSpiritualContent(message, "hadith");
                       }
                     }}
                   >

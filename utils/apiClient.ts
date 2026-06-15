@@ -233,6 +233,10 @@ class ApiClient {
   }
 
   // Tenter de rafraîchir le token d'accès avec le refresh_token stocké
+  async refreshSession(): Promise<boolean> {
+    return this.tryRefreshToken();
+  }
+
   private async tryRefreshToken(): Promise<boolean> {
     try {
       const refreshToken = await safeGetItem("refresh_token");

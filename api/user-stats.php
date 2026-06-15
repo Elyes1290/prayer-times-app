@@ -209,6 +209,52 @@ function handleGetUserStats() {
 }
 
 /**
+ * Nombre total de prières Fajr accomplies (depuis prayer_logs)
+ */
+function getTotalFajrPrayers($user_id) {
+    try {
+        $pdo = getDBConnection();
+        if ($pdo === null || !prayerLogsTableExists($pdo)) {
+            return 0;
+        }
+        $stmt = $pdo->prepare("
+            SELECT COUNT(*) as total
+            FROM prayer_logs
+            WHERE user_id = ? AND prayer_type = 'fajr'
+        ");
+        $stmt->execute([$user_id]);
+        $row = $stmt->fetch();
+        return (int) ($row['total'] ?? 0);
+    } catch (Exception $e) {
+        error_log("Erreur getTotalFajrPrayers: " . $e->getMessage());
+        return 0;
+    }
+}
+
+/**
+ * Nombre total de contenus partagés
+ */
+function getTotalContentShared($user_id) {
+    try {
+        $pdo = getDBConnection();
+        if ($pdo === null) {
+            return 0;
+        }
+        $stmt = $pdo->prepare("
+            SELECT COALESCE(SUM(content_shared), 0) as total
+            FROM user_stats
+            WHERE user_id = ?
+        ");
+        $stmt->execute([$user_id]);
+        $row = $stmt->fetch();
+        return (int) ($row['total'] ?? 0);
+    } catch (Exception $e) {
+        error_log("Avertissement getTotalContentShared (colonne peut-être absente): " . $e->getMessage());
+        return 0;
+    }
+}
+
+/**
  * Récupère les statistiques de base de l'utilisateur
  */
 function getUserStats($user_id) {
@@ -234,7 +280,9 @@ function getUserStats($user_id) {
                 'total_downloads' => 0,
                 'total_usage_minutes' => 0,
                 'best_streak' => 0,
-                'current_streak' => 0
+                'current_streak' => 0,
+                'total_fajr_prayers' => 0,
+                'total_shares' => 0
             ];
         }
     } catch (Exception $e) {
@@ -255,7 +303,9 @@ function getUserStats($user_id) {
             'total_downloads' => 0,
             'total_usage_minutes' => 0,
             'best_streak' => 0,
-            'current_streak' => 0
+            'current_streak' => 0,
+            'total_fajr_prayers' => 0,
+            'total_shares' => 0
         ];
     }
     
@@ -282,7 +332,9 @@ function getUserStats($user_id) {
                 'total_downloads' => 0,
                 'total_usage_minutes' => 0,
                 'best_streak' => 0,
-                'current_streak' => 0
+                'current_streak' => 0,
+                'total_fajr_prayers' => 0,
+                'total_shares' => 0
             ];
         }
         
@@ -354,7 +406,9 @@ function getUserStats($user_id) {
             'total_downloads' => (int)$stats['total_downloads'],
             'total_usage_minutes' => (int)$stats['total_usage_minutes'],
             'best_streak' => max((int) ($stats['best_streak'] ?? 0), (int) $streaks['max_streak']),
-            'current_streak' => (int) $streaks['current_streak']
+            'current_streak' => (int) $streaks['current_streak'],
+            'total_fajr_prayers' => getTotalFajrPrayers($user_id),
+            'total_shares' => getTotalContentShared($user_id),
         ];
     } catch (Exception $e) {
         error_log("Erreur getUserStats: " . $e->getMessage());
@@ -1226,6 +1280,9 @@ function handleUpdateUserStats() {
                 case 'content_downloaded':
                     $update_fields[] = "content_downloaded = content_downloaded + 1";
                     break;
+                case 'content_shared':
+                    $update_fields[] = "content_shared = content_shared + 1";
+                    break;
                 case 'reset_all':
                     // 🔥 RÉINITIALISATION COMPLÈTE DES STATISTIQUES ET BADGES
                     
@@ -1311,6 +1368,7 @@ function handleUpdateUserStats() {
                 'hadiths_read' => $action === 'hadith_read' ? 1 : 0,
                 'favorites_added' => $action === 'favorite_added' ? 1 : 0,
                 'content_downloaded' => $action === 'content_downloaded' ? 1 : 0,
+                'content_shared' => $action === 'content_shared' ? 1 : 0,
                 'app_usage_minutes' => 0,
                 'streak_days' => 0
             ];
@@ -1318,8 +1376,8 @@ function handleUpdateUserStats() {
             $stmt = $pdo->prepare("
                 INSERT INTO user_stats (
                     user_id, date, prayers_completed, dhikr_count, quran_verses_read,
-                    hadiths_read, favorites_added, content_downloaded, app_usage_minutes, streak_days
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    hadiths_read, favorites_added, content_downloaded, content_shared, app_usage_minutes, streak_days
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             ");
             $stmt->execute([
                 $user_id, $today,
@@ -1329,6 +1387,7 @@ function handleUpdateUserStats() {
                 $initial_values['hadiths_read'],
                 $initial_values['favorites_added'],
                 $initial_values['content_downloaded'],
+                $initial_values['content_shared'],
                 $initial_values['app_usage_minutes'],
                 $initial_values['streak_days']
             ]);

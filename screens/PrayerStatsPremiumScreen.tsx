@@ -52,6 +52,8 @@ const DEFAULT_STATS = {
     total_favorites: 0,
     total_downloads: 0,
     total_usage_minutes: 0,
+    total_fajr_prayers: 0,
+    total_shares: 0,
     current_streak: 0,
     best_streak: 0,
   },

@@ -35,6 +35,7 @@ import {
 } from "../hooks/useThemeColor";
 import { NominatimResult, useCitySearch } from "../hooks/useCitySearch";
 import { useTranslation } from "react-i18next";
+import { formatLastUpdateDate } from "../constants/lastRelease";
 import {
   SafeAreaView,
   useSafeAreaInsets,
@@ -71,6 +72,13 @@ import {
   mergeAvailableAdhanSounds,
   type DownloadedAdhanRow,
 } from "../utils/adhanSoundList";
+import {
+  DEFAULT_ADHAN_SOUND,
+  isPremiumAdhanSound,
+  resolveFreeBackgroundImageType,
+  resolveFreeThemeMode,
+} from "../utils/resetPremiumAppearance";
+import { runPremiumAppearanceReset } from "../utils/premiumAppearanceSync";
 
 const soundObjects: Record<AdhanSoundKey, any> = {
   adhamalsharqawe: require("../assets/sounds/adhamalsharqawe.mp3"),
@@ -240,6 +248,7 @@ interface OptimizedSettingsSectionsProps {
   diagnoseAndCleanFiles: () => Promise<void>;
   updateAvailableSounds: () => void;
   hydrateAvailableSounds: (force?: boolean) => Promise<void>;
+  resetAdhanSoundsForFreeUser: () => void;
   forceRefreshAdhans: () => Promise<void>;
   premiumContent: any;
   sectionListRef: React.RefObject<SectionList<any, any> | null>;
@@ -527,7 +536,7 @@ function SettingsSections(props: OptimizedSettingsSectionsProps) {
     t: propT,
   } = props;
 
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const isLightTheme = currentTheme === "light" || currentTheme === "morning";
 
   // États locaux pour le dhikr
@@ -573,12 +582,17 @@ function SettingsSections(props: OptimizedSettingsSectionsProps) {
       setActiveSection(null);
     } else {
       setActiveSection(sectionId);
-      if (sectionId === "adhan_sound" && user?.isPremium) {
-        try {
-          await props.hydrateAvailableSounds(true);
-          await props.loadAvailableAdhans();
-        } catch (error) {
-          console.error("❌ Erreur scan adhans:", error);
+      if (sectionId === "adhan_sound") {
+        const hasPremiumAccess = !!(user?.isPremium || user?.isVip);
+        if (hasPremiumAccess) {
+          try {
+            await props.hydrateAvailableSounds(true);
+            await props.loadAvailableAdhans();
+          } catch (error) {
+            console.error("❌ Erreur scan adhans:", error);
+          }
+        } else {
+          props.resetAdhanSoundsForFreeUser();
         }
       }
     }
@@ -666,7 +680,9 @@ function SettingsSections(props: OptimizedSettingsSectionsProps) {
               <Text style={styles.label}>
                 {t("last_update", "Dernière mise à jour")}
               </Text>
-              <Text style={styles.settingValue}>14 septembre 2025</Text>
+              <Text style={styles.settingValue}>
+                {formatLastUpdateDate(i18n.language)}
+              </Text>
             </View>
 
             <View style={styles.row}>
@@ -693,7 +709,7 @@ function SettingsSections(props: OptimizedSettingsSectionsProps) {
               </View>
             </View>
 
-            {user && (
+            {user?.isPremium && (
               <>
                 <View style={styles.row}>
                   <Text style={styles.label}>
@@ -944,6 +960,7 @@ export default function SettingsScreenOptimized() {
   const settings = use(SettingsContext);
   const { t, i18n } = useTranslation();
   const { user, activatePremium, forceLogout } = usePremium();
+  const hasPremiumAccess = !!(user?.isPremium || user?.isVip);
   const { showToast } = useToast();
   const navigation = useNavigation();
 
@@ -1115,8 +1132,9 @@ export default function SettingsScreenOptimized() {
       if (translatedName && translatedName !== translationKey)
         return translatedName;
 
-      const premiumSoundTitles =
-        premiumContent.premiumContentState.premiumSoundTitles;
+      const premiumSoundTitles = hasPremiumAccess
+        ? premiumContent.premiumContentState.premiumSoundTitles
+        : {};
 
       let displayName = soundId;
 
@@ -1137,7 +1155,7 @@ export default function SettingsScreenOptimized() {
         .replace(/\b\w/g, (l) => l.toUpperCase())
         .trim();
     },
-    [t, premiumContent.premiumContentState.premiumSoundTitles]
+    [t, hasPremiumAccess, premiumContent.premiumContentState.premiumSoundTitles]
   );
 
   const onChangeLanguage = (langCode: string) => {
@@ -1160,7 +1178,7 @@ export default function SettingsScreenOptimized() {
       const baseSounds = BUILTIN_ADHAN_SOUND_KEYS;
       let downloadedRows: DownloadedAdhanRow[] = [];
 
-      if (user.isPremium) {
+      if (hasPremiumAccess) {
         const manager = PremiumContentManager.getInstance();
         await manager.waitUntilInitialized();
         try {
@@ -1198,6 +1216,8 @@ export default function SettingsScreenOptimized() {
         const canonical = canonicalAdhanContentId(currentSound);
         if (canonical !== currentSound && sounds.includes(canonical)) {
           settingsRef.current.setAdhanSound(canonical as AdhanSoundKey);
+        } else if (!hasPremiumAccess && isPremiumAdhanSound(currentSound)) {
+          settingsRef.current.setAdhanSound(DEFAULT_ADHAN_SOUND);
         }
       }
 
@@ -1207,17 +1227,30 @@ export default function SettingsScreenOptimized() {
       return 0;
     }
   },
-    [user.isPremium]
+    [hasPremiumAccess]
   );
 
   const updateAvailableSoundsRef = useRef(updateAvailableSounds);
   updateAvailableSoundsRef.current = updateAvailableSounds;
 
+  const resetPremiumContentRef = useRef(premiumContent.resetPremiumContent);
+  resetPremiumContentRef.current = premiumContent.resetPremiumContent;
+
+  const resetAdhanSoundsForFreeUser = useCallback(() => {
+    premiumContent.setAvailableSounds(BUILTIN_ADHAN_SOUND_KEYS);
+    premiumContent.setPremiumSoundTitles({});
+    premiumContent.setAvailableAdhanVoices([]);
+  }, [premiumContent]);
+
+  const adhanPickerSounds = hasPremiumAccess
+    ? premiumContent.premiumContentState.availableSounds
+    : BUILTIN_ADHAN_SOUND_KEYS;
+
   const soundsHydrateRef = useRef({ inFlight: false, done: false });
 
   const hydrateAvailableSounds = useCallback(
     async (force = false) => {
-      if (!user.isPremium) return;
+      if (!hasPremiumAccess) return;
       if (soundsHydrateRef.current.inFlight) return;
       if (!force && soundsHydrateRef.current.done) return;
 
@@ -1231,7 +1264,7 @@ export default function SettingsScreenOptimized() {
         soundsHydrateRef.current.inFlight = false;
       }
     },
-    [user.isPremium]
+    [hasPremiumAccess]
   );
 
   const onDownloadSoundsUpdated = useCallback(() => {
@@ -1242,14 +1275,50 @@ export default function SettingsScreenOptimized() {
   const { downloadState, isNativeAvailable, forceRefreshAdhans } =
     useNativeDownload(undefined, onDownloadSoundsUpdated, premiumContent);
 
-  // Une seule hydratation auto à l'ouverture des paramètres (premium)
+  // Réinitialiser apparence + liste adhans quand le premium n'est plus actif
   useEffect(() => {
-    if (!user?.isPremium) {
-      soundsHydrateRef.current = { inFlight: false, done: false };
+    const hasPremiumAccess = !!(user?.isPremium || user?.isVip);
+
+    if (hasPremiumAccess) {
+      void hydrateAvailableSounds(true);
       return;
     }
-    void hydrateAvailableSounds(true);
-  }, [user?.isPremium, hydrateAvailableSounds]);
+
+    soundsHydrateRef.current = { inFlight: false, done: false };
+    resetPremiumContentRef.current();
+    resetAdhanSoundsForFreeUser();
+    void updateAvailableSoundsRef.current();
+    void runPremiumAppearanceReset({ force: true });
+
+    const currentSettings = settingsRef.current;
+    if (!currentSettings) {
+      return;
+    }
+
+    const nextTheme = resolveFreeThemeMode(currentSettings.themeMode);
+    const nextBackground = resolveFreeBackgroundImageType(
+      currentSettings.backgroundImageType,
+    );
+
+    if (nextTheme !== currentSettings.themeMode) {
+      void currentSettings.setThemeMode(nextTheme);
+    }
+    if (nextBackground !== currentSettings.backgroundImageType) {
+      void currentSettings.setBackgroundImageType(nextBackground);
+    }
+
+    if (!isPremiumAdhanSound(currentSettings.adhanSound)) {
+      return;
+    }
+
+    currentSettings.setAdhanSound(DEFAULT_ADHAN_SOUND);
+  }, [
+    hasPremiumAccess,
+    hydrateAvailableSounds,
+    resetAdhanSoundsForFreeUser,
+    user?.isPremium,
+    user?.isVip,
+  ]);
 
   const previewAdhanIdRef = React.useRef<string | null>(null);
   React.useEffect(() => {
@@ -1607,7 +1676,7 @@ export default function SettingsScreenOptimized() {
             settings={settings}
             dhikrSettings={settings.dhikrSettings}
             methods={SETTINGS_CALC_METHODS}
-            sounds={premiumContent.premiumContentState.availableSounds}
+            sounds={adhanPickerSounds}
             languages={SETTINGS_LANGUAGES}
             selectedLang={i18n.language}
             onChangeLanguage={onChangeLanguage}
@@ -1683,6 +1752,7 @@ export default function SettingsScreenOptimized() {
             diagnoseAndCleanFiles={diagnoseAndCleanFiles}
             updateAvailableSounds={updateAvailableSounds}
             hydrateAvailableSounds={hydrateAvailableSounds}
+            resetAdhanSoundsForFreeUser={resetAdhanSoundsForFreeUser}
             forceRefreshAdhans={forceRefreshAdhans}
             premiumContent={premiumContent}
             sectionListRef={sectionListRef}

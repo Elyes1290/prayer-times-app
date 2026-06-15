@@ -29,6 +29,7 @@ import CachedImageBackground from "../components/CachedImageBackground";
 import { HadithOfflineService } from "../utils/hadithOfflineService";
 import { OfflineMessage } from "../components/OfflineMessage";
 import { useNetworkStatus, useOfflineAccess } from "../hooks/useNetworkStatus";
+import { useUpdateUserStats } from "../hooks/useUpdateUserStats";
 
 type Book = {
   id: number;
@@ -227,6 +228,17 @@ const HadithListItem = React.memo(function HadithListItem({
   t,
 }: HadithListItemProps) {
   const isBigNumber = Number(item.idInBook) > 999;
+  const { recordHadithRead } = useUpdateUserStats();
+  const hasRecordedRef = useRef(false);
+
+  useEffect(() => {
+    if (hasRecordedRef.current) return;
+    hasRecordedRef.current = true;
+    void recordHadithRead(
+      `${bookSlug}-${chapterNumber}-${item.idInBook}`,
+      bookName,
+    );
+  }, [bookSlug, chapterNumber, item.idInBook, bookName, recordHadithRead]);
 
   return (
     <View style={styles.ayahContainer}>

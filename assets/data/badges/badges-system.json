@@ -77,7 +77,8 @@
       "points": 30,
       "requirement": {
         "type": "count",
-        "value": 5
+        "value": 5,
+        "metric": "fajr_prayers"
       },
       "is_hidden": false
     },
@@ -135,9 +136,9 @@
         "en": "Beginner Faithful"
       },
       "description": {
-        "fr": "7 jours consécutifs de prières",
-        "ar": "٧ أيام متتالية من الصلاة",
-        "en": "7 consecutive days of prayers"
+        "fr": "7 jours consécutifs avec les 5 prières",
+        "ar": "٧ أيام متتالية مع إتمام الصلوات الخمس",
+        "en": "7 consecutive days with all 5 prayers"
       },
       "icon": "flame",
       "points": 50,
@@ -157,9 +158,9 @@
         "en": "Month Guardian"
       },
       "description": {
-        "fr": "30 jours consécutifs de prières",
-        "ar": "٣٠ يوماً متتالياً من الصلاة",
-        "en": "30 consecutive days of prayers"
+        "fr": "30 jours consécutifs avec les 5 prières",
+        "ar": "٣٠ يوماً متتالياً مع إتمام الصلوات الخمس",
+        "en": "30 consecutive days with all 5 prayers"
       },
       "icon": "shield-checkmark",
       "points": 200,
@@ -179,9 +180,9 @@
         "en": "Master of Consistency"
       },
       "description": {
-        "fr": "100 jours consécutifs de prières",
-        "ar": "١٠٠ يوم متتالي من الصلاة",
-        "en": "100 consecutive days of prayers"
+        "fr": "100 jours consécutifs avec les 5 prières",
+        "ar": "١٠٠ يوم متتالي مع إتمام الصلوات الخمس",
+        "en": "100 consecutive days with all 5 prayers"
       },
       "icon": "trophy",
       "points": 1000,
@@ -245,9 +246,9 @@
         "en": "Quran Reader"
       },
       "description": {
-        "fr": "10 sessions de lecture du Coran",
-        "ar": "١٠ جلسات قراءة القرآن",
-        "en": "10 Quran reading sessions"
+        "fr": "10 versets lus",
+        "ar": "قراءة ١٠ آيات من القرآن",
+        "en": "10 verses read"
       },
       "icon": "book",
       "points": 80,
@@ -267,9 +268,9 @@
         "en": "Quran Scholar"
       },
       "description": {
-        "fr": "100 sessions de lecture du Coran",
-        "ar": "١٠٠ جلسة قراءة القرآن",
-        "en": "100 Quran reading sessions"
+        "fr": "100 versets lus",
+        "ar": "قراءة ١٠٠ آية من القرآن",
+        "en": "100 verses read"
       },
       "icon": "library",
       "points": 400,
