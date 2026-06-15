@@ -114,14 +114,27 @@ describe("Integration: Premium Flow", () => {
   });
 
   test("active premium depuis user_data + explicit_connection", async () => {
-    storage.user_data = JSON.stringify({
+    const premiumExpiry = new Date(Date.now() + 24 * 3600 * 1000).toISOString();
+    const premiumUserData = {
       user_id: 4,
+      id: 4,
+      email: "premium@test.com",
+      user_first_name: "Premium",
+      language: "fr",
       premium_status: 1,
       subscription_type: "yearly",
       subscription_id: "sub_123",
-      premium_expiry: new Date(Date.now() + 24 * 3600 * 1000).toISOString(),
-    });
+      premium_expiry: premiumExpiry,
+    };
+
+    storage.user_data = JSON.stringify(premiumUserData);
     storage.explicit_connection = "true";
+    storage.auth_token = "test-auth-token";
+
+    mockApiClient.getUser.mockResolvedValue({
+      success: true,
+      data: premiumUserData,
+    });
 
     let ctxRef: ReturnType<typeof usePremium> | null = null;
 
