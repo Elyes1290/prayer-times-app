@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { View, Text, StyleSheet, Pressable, ScrollView, FlatList, Alert, type ListRenderItemInfo } from 'react-native';
 import { usePrayerTimesWidget } from '../hooks/usePrayerTimesWidget';
 import { useRouter } from 'expo-router';
@@ -72,14 +72,19 @@ export default function DebugWidgetScreen() {
     }
   }, [isWidgetAvailable]);
 
+  const testModuleExistsRef = useRef(testModuleExists);
+  const testWidgetAvailabilityRef = useRef(testWidgetAvailability);
+  testModuleExistsRef.current = testModuleExists;
+  testWidgetAvailabilityRef.current = testWidgetAvailability;
+
   useEffect(() => {
-    const timer1 = setTimeout(() => testModuleExists(), 500);
-    const timer2 = setTimeout(() => testWidgetAvailability(), 1000);
+    const timer1 = setTimeout(() => testModuleExistsRef.current(), 500);
+    const timer2 = setTimeout(() => testWidgetAvailabilityRef.current(), 1000);
     return () => {
       clearTimeout(timer1);
       clearTimeout(timer2);
     };
-  }, [testModuleExists, testWidgetAvailability]);
+  }, []);
 
   const testWritePrayerTimes = async () => {
     addLog('=== TEST ÉCRITURE ===');

@@ -355,6 +355,32 @@ export function useFavoritesManager(): FavoritesContextType {
     }
   };
 
+  const reloadFromStorage = useCallback(async (): Promise<void> => {
+    try {
+      setLoading(true);
+      const localFavorites = await LocalStorageManager.getEssential(
+        "LOCAL_FAVORITES",
+      );
+      if (!localFavorites) {
+        setFavorites([]);
+        return;
+      }
+
+      const parsedFavorites: Favorite[] = JSON.parse(localFavorites).map(
+        (fav: Favorite) => ({
+          ...fav,
+          dateAdded: new Date(fav.dateAdded),
+        }),
+      );
+      setFavorites(parsedFavorites);
+    } catch (error) {
+      console.error("Erreur lors du rechargement des favoris:", error);
+      setFavorites([]);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
   return {
     favorites,
     loading,
@@ -370,5 +396,6 @@ export function useFavoritesManager(): FavoritesContextType {
     syncWithCloud,
     isCloudSyncEnabled,
     forceReset,
+    reloadFromStorage,
   };
 }

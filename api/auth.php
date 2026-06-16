@@ -876,6 +876,8 @@ function formatUserData($user) {
         'app_build' => $user['app_build'],
         'status' => $user['status'],
         'has_password' => !empty($user['password_hash']),
+        'is_vip' => (bool)($user['is_vip'] ?? 0),
+        'subscription_platform' => $user['subscription_platform'] ?? null,
         'is_premium' => (int)$user['premium_status'] === 1,
         'premium_active' => (int)$user['premium_status'] === 1 && 
                            ($user['premium_expiry'] === null || strtotime($user['premium_expiry']) > time())

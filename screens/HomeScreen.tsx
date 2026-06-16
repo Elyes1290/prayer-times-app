@@ -45,6 +45,10 @@ import { SettingsContext } from "../contexts/SettingsContext";
 import { useTranslation } from "react-i18next";
 import { reverseGeocodeAsync } from "expo-location";
 import { useLocation } from "../hooks/useLocation";
+import {
+  formatGeocodeLabel,
+  getCachedAutoLocationCity,
+} from "../utils/locationDisplay";
 import { usePrayerTimes } from "../hooks/usePrayerTimes";
 import { usePrayerTimesWidget } from "../hooks/usePrayerTimesWidget";
 import { scheduleNotificationsFor2Days } from "../utils/sheduleAllNotificationsFor30Days";
@@ -405,6 +409,25 @@ export default function HomeScreen() {
   const settings = use(SettingsContext);
   const { location } = useLocation();
   const { user } = usePremium();
+
+  const handleRefreshAutoLocation = useCallback(async () => {
+    if (
+      settings.locationMode !== "auto" ||
+      settings.isRefreshingLocation
+    ) {
+      return;
+    }
+
+    try {
+      await settings.refreshAutoLocation();
+    } catch (error) {
+      errorLog("Erreur actualisation localisation:", error);
+    }
+  }, [
+    settings.locationMode,
+    settings.isRefreshingLocation,
+    settings.refreshAutoLocation,
+  ]);
 
   useEffect(() => {
     fadeAnim.value = withTiming(
@@ -1100,56 +1123,64 @@ export default function HomeScreen() {
   // Gestion simple de l'affichage de la ville
   useEffect(() => {
     async function updateCity() {
-      // 🚀 NOUVEAU : Seulement si l'utilisateur a explicitement configuré sa localisation
       if (settings.locationMode === "manual" && settings.manualLocation?.city) {
         setCity(settings.manualLocation.city);
-      } else if (settings.locationMode === "auto" && location?.coords) {
+        return;
+      }
+
+      if (settings.locationMode === "auto") {
+        const cachedCity = getCachedAutoLocationCity(settings.autoLocation);
+        if (cachedCity) {
+          setCity(cachedCity);
+          return;
+        }
+
+        if (!location?.coords) {
+          setCity(null);
+          return;
+        }
+
         try {
-          // 🚀 NOUVEAU : Vérifier les permissions avant le géocodage
           const { getForegroundPermissionsAsync } = await import(
             "expo-location"
           );
           const { status } = await getForegroundPermissionsAsync();
 
           if (status !== "granted") {
-            console.log(
-              "🔍 Permissions de localisation non accordées - pas de géocodage"
-            );
-            setCity("Localisation requise");
+            // Coords sauvegardées mais pas de permission (ex. iOS « Autoriser une fois »)
+            setCity(null);
             return;
           }
 
           const geocodeResult = await reverseGeocodeAsync(location.coords);
-          if (geocodeResult && geocodeResult.length > 0) {
-            const firstResult = geocodeResult[0];
-            const cityName =
-              firstResult.city || firstResult.district || firstResult.region;
-            const country = firstResult.country;
-            if (cityName && country) {
-              setCity(`${cityName}, ${country}`);
-            } else if (cityName) {
-              setCity(cityName);
-            } else {
-              setCity("Localisation inconnue");
-            }
+          const cityLabel = formatGeocodeLabel(geocodeResult[0]);
+          if (cityLabel) {
+            setCity(cityLabel);
+            void settings.cacheAutoLocationLabel(cityLabel);
+            return;
           }
+
+          setCity("Localisation inconnue");
         } catch (error) {
           errorLog("Erreur reverse geocoding:", error);
-          setCity("Erreur de localisation");
+          setCity(null);
         }
-      } else {
-        // 🚀 NOUVEAU : Pas d'affichage de ville si localisation pas configurée
-        setCity(null);
+        return;
       }
+
+      setCity(null);
     }
 
-    // 🚀 NOUVEAU : Seulement si l'utilisateur a configuré un mode de localisation
     if (settings.locationMode !== null) {
       updateCity();
     }
   }, [
     settings.locationMode,
     settings.manualLocation?.city,
+    settings.autoLocation?.city,
+    settings.autoLocation?.lat,
+    settings.autoLocation?.lon,
+    settings.cacheAutoLocationLabel,
     location?.coords?.latitude,
     location?.coords?.longitude,
   ]);
@@ -1478,7 +1509,8 @@ export default function HomeScreen() {
                   }
                 )}
               </Text>
-              {city && (
+              {(city ||
+                (settings.locationMode === "auto" && settings.autoLocation)) && (
                 <Animated.View style={[styles.locationRow, locationRowStyle]}>
                   <MCIcon
                     name="map-marker-outline"
@@ -1490,9 +1522,31 @@ export default function HomeScreen() {
                     numberOfLines={1}
                     ellipsizeMode="tail"
                   >
-                    {city}
+                    {city ||
+                      (settings.isRefreshingLocation
+                        ? t("location.updating", "Mise à jour...")
+                        : t("refresh_location", "Actualiser la position"))}
                     {settings.locationMode === "manual" && " (Manuel)"}
                   </Text>
+                  {settings.locationMode === "auto" && (
+                    <Pressable
+                      style={styles.locationRefreshButton}
+                      onPress={handleRefreshAutoLocation}
+                      disabled={settings.isRefreshingLocation}
+                      accessibilityRole="button"
+                      accessibilityLabel={t(
+                        "refresh_location",
+                        "Actualiser la position",
+                      )}
+                      hitSlop={8}
+                    >
+                      {settings.isRefreshingLocation ? (
+                        <ActivityIndicator size="small" color="#4ECDC4" />
+                      ) : (
+                        <MCIcon name="sync" size={16} color="#4ECDC4" />
+                      )}
+                    </Pressable>
+                  )}
                 </Animated.View>
               )}
             </View>
@@ -2078,10 +2132,20 @@ const getStyles = (
       borderColor: "rgba(255, 255, 255, 0.2)",
     },
     locationText: {
+      flex: 1,
+      flexShrink: 1,
       fontSize: 14,
       color: colors.textSecondary, // 🌅 Utilise la couleur du thème actif
       marginLeft: 6,
       fontWeight: "500",
+    },
+    locationRefreshButton: {
+      marginLeft: 6,
+      padding: 4,
+      justifyContent: "center",
+      alignItems: "center",
+      minWidth: 28,
+      minHeight: 28,
     },
     locationRow: {
       flexDirection: "row",

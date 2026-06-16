@@ -1477,5 +1477,32 @@ export const getStyles = (
       fontWeight: "600",
       color: "#EF4444",
     },
+    faqModalOverlay: {
+      flex: 1,
+      backgroundColor: isLightTheme
+        ? "rgba(0, 0, 0, 0.6)"
+        : "rgba(0, 0, 0, 0.8)",
+      justifyContent: "flex-end",
+    },
+    faqModalContent: {
+      maxHeight: "85%",
+      borderTopLeftRadius: 20,
+      borderTopRightRadius: 20,
+      paddingHorizontal: 16,
+      paddingTop: 16,
+      paddingBottom: 24,
+      borderWidth: 1,
+      borderColor: isLightTheme ? colors.border : "rgba(148, 163, 184, 0.2)",
+    },
+    faqModalHeader: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+      marginBottom: 12,
+      gap: 12,
+    },
+    faqModalScrollContent: {
+      paddingBottom: 24,
+    },
   });
 };

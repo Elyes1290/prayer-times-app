@@ -15,6 +15,7 @@ import ThemedImageBackground from "../components/ThemedImageBackground";
 import { useRouter } from "expo-router";
 import { useOverlayTextColor } from "../hooks/useThemeColor";
 import { formatLastUpdateDate } from "../constants/lastRelease";
+import { FaqAccordionList } from "../components/FaqAccordionList";
 
 const ABOUT_FEATURES = [
   { icon: "clock-outline", key: "prayer_times" },
@@ -47,16 +48,6 @@ const ABOUT_FEATURES = [
   { icon: "database", key: "local_storage" },
 ] as const;
 
-const ABOUT_FAQ = [
-  { question: "faq_location_question", answer: "faq_location_answer" },
-  {
-    question: "faq_notifications_question",
-    answer: "faq_notifications_answer",
-  },
-  { question: "faq_qibla_question", answer: "faq_qibla_answer" },
-  { question: "faq_offline_question", answer: "faq_offline_answer" },
-] as const;
-
 function handlePrivacyPolicy() {
   Linking.openURL("https://www.myadhanapp.com/public/privacy-policy.html");
 }
@@ -65,7 +56,6 @@ export default function AboutScreen() {
   const { t, i18n } = useTranslation();
   const { push } = useRouter();
   const overlayTextColor = useOverlayTextColor();
-  const [expandedFAQ, setExpandedFAQ] = useState<number | null>(null);
   const [debugTapCount, setDebugTapCount] = useState(0);
   // Les couleurs sont maintenant gérées via le système de thème dans Colors.ts
 
@@ -93,26 +83,6 @@ export default function AboutScreen() {
         {t(`abouts.features.${feature.key}`)}
       </Text>
     </View>
-  );
-
-  const renderFAQItem = (item: any, index: number) => (
-    <Pressable
-      key={item.question}
-      style={styles.faqItem}
-      onPress={() => setExpandedFAQ(expandedFAQ === index ? null : index)}
-    >
-      <View style={styles.faqHeader}>
-        <Text style={styles.faqQuestion}>{t(`abouts.${item.question}`)}</Text>
-        <MCIcon
-          name={expandedFAQ === index ? "chevron-up" : "chevron-down"}
-          size={24}
-          color="#b59d42"
-        />
-      </View>
-      {expandedFAQ === index && (
-        <Text style={styles.faqAnswer}>{t(`abouts.${item.answer}`)}</Text>
-      )}
-    </Pressable>
   );
 
   return (
@@ -193,7 +163,7 @@ export default function AboutScreen() {
         {/* FAQ Section */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>{t("abouts.faq_title")}</Text>
-          {ABOUT_FAQ.map(renderFAQItem)}
+          <FaqAccordionList variant="about" />
         </View>
 
         {/* Support Section */}
@@ -604,31 +574,6 @@ const styles = StyleSheet.create({
     fontFamily: "ScheherazadeNew",
     flex: 1,
     fontWeight: "600",
-  },
-  faqItem: {
-    marginBottom: 12,
-    backgroundColor: "#fff",
-    borderRadius: 8,
-    padding: 12,
-  },
-  faqHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-  faqQuestion: {
-    fontSize: 16,
-    color: "#483C1C",
-    fontFamily: "ScheherazadeNew",
-    fontWeight: "bold",
-    flex: 1,
-  },
-  faqAnswer: {
-    fontSize: 14,
-    color: "#6c5d3b",
-    marginTop: 8,
-    fontFamily: "ScheherazadeNew",
-    lineHeight: 20,
   },
   button: {
     flexDirection: "row",

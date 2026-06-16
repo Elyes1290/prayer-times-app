@@ -177,7 +177,7 @@ export const useUserStats = (): UseUserStatsReturn => {
 
         // 🌐 NOUVEAU : Utiliser le gestionnaire offline
         const offlineManager = OfflineStatsManager.getInstance();
-        const result = await offlineManager.getStats();
+        const result = await offlineManager.getStats({ forceRefresh });
         console.log("📊 [DEBUG] Résultat getStats:", result);
 
         // Ajouter challenges et badges aux stats

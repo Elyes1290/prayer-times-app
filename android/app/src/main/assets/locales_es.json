@@ -204,6 +204,8 @@
     "faq_qibla_answer": "Mantén tu teléfono plano, lejos de objetos metálicos. Haz movimientos en forma de 8 para calibrar la brújula si es inestable.",
     "faq_offline_question": "¿La aplicación funciona sin conexión?",
     "faq_offline_answer": "Sí, una vez configurada, la aplicación funciona sin conexión para horarios de oración, Qibla, dhikr y lectura del Corán.",
+    "faq_account_switch_question": "Cambio de teléfono o paso de iPhone a Android. ¿Qué debo hacer?",
+    "faq_account_switch_answer": "Su cuenta MyAdhan (correo y contraseña) funciona en todos los dispositivos: instale la app e inicie sesión con el mismo correo. Sus ajustes, favoritos y copias de seguridad se resincronizarán. Premium está vinculado a su método de pago: Apple en iOS, Stripe en Android. Mientras su suscripción esté activa, premium sigue disponible en ambas plataformas a través de su cuenta. Una suscripción de Apple no puede transferirse a otra tienda: si cambia de plataforma de forma permanente, deje expirar o cancele la suscripción anterior y suscríbase en la nueva plataforma. No es necesario eliminar ni recrear su cuenta.",
     "support_title": "🤝 Soporte y comunidad",
     "send_suggestion": "Enviar una sugerencia",
     "report_bug": "Reportar un problema",

@@ -341,6 +341,55 @@ describe("PremiumContext", () => {
         expect(getByTestId("premium-status").props.children).toBe("free");
       });
     });
+
+    it("ne restaure pas le premium iOS via RevenueCat sans session explicite", async () => {
+      const { Platform } = require("react-native");
+      const originalOs = Platform.OS;
+      Platform.OS = "ios";
+
+      const iapModule = require("../../utils/iapService");
+      const checkPremiumStatus = jest.fn().mockResolvedValue(true);
+      const getInstanceSpy = jest
+        .spyOn(iapModule.IapService, "getInstance")
+        .mockReturnValue({
+          init: jest.fn().mockResolvedValue(undefined),
+          checkPremiumStatus,
+          getActiveEntitlementSnapshot: jest.fn().mockResolvedValue(null),
+          linkAccount: jest.fn().mockResolvedValue(undefined),
+        });
+
+      mockStorage["@prayer_app_premium_user"] = JSON.stringify({
+        isPremium: true,
+        hasPurchasedPremium: true,
+        subscriptionType: "yearly",
+        subscriptionId: "sub_123",
+        expiryDate: new Date(Date.now() + 86400000).toISOString(),
+        features: ["custom_adhan_sounds"],
+        premiumActivatedAt: new Date().toISOString(),
+      });
+
+      const TestComponent = () => {
+        const { user } = usePremium();
+        return (
+          <Text testID="premium-status">
+            {user.isPremium ? "premium" : "free"}
+          </Text>
+        );
+      };
+
+      const { getByTestId } = render(
+        <PremiumProvider>
+          <TestComponent />
+        </PremiumProvider>
+      );
+
+      await waitFor(() => {
+        expect(getByTestId("premium-status").props.children).toBe("free");
+      });
+
+      Platform.OS = originalOs;
+      getInstanceSpy.mockRestore();
+    });
   });
 
   describe("Performance et Stabilité", () => {

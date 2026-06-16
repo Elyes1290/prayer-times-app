@@ -1,7 +1,24 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Platform } from "react-native";
 import apiClient from "./apiClient";
+import { IapService } from "./iapService";
+import { isVipUserRecord } from "./isVipUser";
 import { hasExplicitAuthSession } from "./userAuth";
 import type { UserData } from "./userAuth";
+import { safeJsonParse } from "./safeJson";
+const VIP_PLACEHOLDER_EXPIRY_YEAR = 2099;
+
+export function isPlaceholderVipExpiry(expiry: string | undefined): boolean {
+  if (!expiry) {
+    return false;
+  }
+
+  const expiryDate = new Date(expiry);
+  return (
+    !Number.isNaN(expiryDate.getTime()) &&
+    expiryDate.getFullYear() >= VIP_PLACEHOLDER_EXPIRY_YEAR
+  );
+}
 
 /** Délai avant déconnexion si le renouvellement n'est pas confirmé (Stripe / RevenueCat). */
 export const PREMIUM_GRACE_PERIOD_DAYS = 3;
@@ -47,7 +64,7 @@ export function isPremiumActiveOnServer(
     return false;
   }
 
-  if (serverUser.is_vip === true || Number(serverUser.is_vip) === 1) {
+  if (isVipUserRecord(serverUser)) {
     return true;
   }
 
@@ -101,6 +118,15 @@ export async function trySyncPremiumFromServer(
 export function buildUserDataFromServer(
   serverUser: Record<string, unknown>,
 ): UserData {
+  const isVip = isVipUserRecord(serverUser);
+  let subscription_platform = serverUser.subscription_platform as
+    | string
+    | undefined;
+  // Ancien marqueur VIP révoqué (is_vip=0 mais platform encore "vip")
+  if (!isVip && subscription_platform === "vip") {
+    subscription_platform = undefined;
+  }
+
   return {
     id: serverUser.id as number,
     user_id: serverUser.id as number,
@@ -109,20 +135,171 @@ export function buildUserDataFromServer(
     premium_status: Number(serverUser.premium_status ?? 0),
     subscription_type: serverUser.subscription_type as string | undefined,
     subscription_id: serverUser.subscription_id as string | undefined,
-    subscription_platform: serverUser.subscription_platform as
-      | string
-      | undefined,
+    subscription_platform,
     stripe_customer_id: serverUser.stripe_customer_id as string | undefined,
     premium_expiry: serverUser.premium_expiry as string | undefined,
     premium_activated_at: serverUser.premium_activated_at as string | undefined,
     language: serverUser.language as string,
     last_sync: new Date().toISOString(),
     device_id: serverUser.device_id as string | undefined,
-    is_vip: serverUser.is_vip as boolean | undefined,
+    is_vip: isVip,
     vip_reason: (serverUser.vip_reason as string | null) ?? null,
     vip_granted_by: (serverUser.vip_granted_by as string | null) ?? null,
     vip_granted_at: serverUser.vip_granted_at as string | undefined,
   };
+}
+
+/** Nettoie les marqueurs VIP obsolètes restés en cache local. */
+export function normalizeStoredUserData(userData: UserData): UserData {
+  const hasPaidSubscriptionMarkers =
+    userData.subscription_platform === "apple" ||
+    userData.subscription_platform === "stripe" ||
+    userData.subscription_type === "monthly" ||
+    userData.subscription_type === "yearly" ||
+    Boolean(userData.stripe_customer_id) ||
+    Boolean(userData.subscription_id);
+
+  const looksLikeStaleVip =
+    isVipUserRecord(userData) &&
+    hasPaidSubscriptionMarkers &&
+    userData.subscription_platform !== "vip";
+
+  if (looksLikeStaleVip) {
+    let premium_expiry = userData.premium_expiry;
+    if (premium_expiry && isPlaceholderVipExpiry(premium_expiry)) {
+      premium_expiry = undefined;
+    }
+
+    return {
+      ...userData,
+      is_vip: false,
+      premium_expiry,
+      subscription_platform:
+        userData.subscription_platform === "vip"
+          ? "apple"
+          : userData.subscription_platform,
+    };
+  }
+
+  if (isVipUserRecord(userData)) {
+    return userData;
+  }
+  let premium_expiry = userData.premium_expiry;
+  if (premium_expiry && isPlaceholderVipExpiry(premium_expiry)) {
+    premium_expiry = undefined;
+  }
+
+  return {
+    ...userData,
+    is_vip: false,
+    premium_expiry,
+    subscription_platform:
+      userData.subscription_platform === "vip"
+        ? undefined
+        : userData.subscription_platform,
+  };
+}
+
+const PREMIUM_USER_STORAGE_KEY = "@prayer_app_premium_user";
+
+/** Aligne le blob premium local quand le serveur n'est plus VIP (ex. ancien 2099). */
+export async function reconcilePremiumUserStorage(
+  serverUser: Record<string, unknown>,
+): Promise<void> {
+  if (isVipUserRecord(serverUser)) {
+    return;
+  }
+
+  const raw = await AsyncStorage.getItem(PREMIUM_USER_STORAGE_KEY);
+  if (!raw) {
+    return;
+  }
+
+  const parsed = safeJsonParse<Record<string, unknown>>(raw, null);
+  if (!parsed) {
+    return;
+  }
+
+  const hasStaleVipMarkers =
+    parsed.isVip === true ||
+    isVipUserRecord(parsed) ||
+    parsed.premiumType === "VIP Gratuit à Vie" ||
+    (typeof parsed.expiryDate === "string" &&
+      isPlaceholderVipExpiry(parsed.expiryDate));
+
+  if (!hasStaleVipMarkers) {
+    return;
+  }
+
+  if (!isPremiumActiveOnServer(serverUser)) {
+    await AsyncStorage.removeItem(PREMIUM_USER_STORAGE_KEY);
+    return;
+  }
+
+  const serverExpiry = serverUser.premium_expiry as string | undefined;
+  const platform = serverUser.subscription_platform as string | undefined;
+
+  await AsyncStorage.setItem(
+    PREMIUM_USER_STORAGE_KEY,
+    JSON.stringify({
+      ...parsed,
+      isPremium: true,
+      isVip: false,
+      expiryDate: serverExpiry ? new Date(serverExpiry) : parsed.expiryDate,
+      premiumType:
+        platform === "apple" ? "Apple In-App Purchase" : "Premium Payant",
+      subscriptionType:
+        serverUser.subscription_type ?? parsed.subscriptionType ?? "monthly",
+    }),
+  );
+}
+
+/** iOS : corrige l'affichage si le serveur a encore une expiry VIP (2099) ou platform "vip" obsolète. */
+export async function enrichUserDataWithIosSubscription(
+  userData: UserData,
+): Promise<UserData> {
+  if (Platform.OS !== "ios") {
+    return userData;
+  }
+
+  if (
+    isVipUserRecord(userData) &&
+    !(userData.premium_expiry && isPlaceholderVipExpiry(userData.premium_expiry))
+  ) {
+    return userData;
+  }
+
+  if (
+    isPlaceholderVipExpiry(userData.premium_expiry) &&
+    !isVipUserRecord(userData)
+  ) {
+    userData = normalizeStoredUserData(userData);
+  }
+
+  try {
+    const iapService = IapService.getInstance();
+    await iapService.init();
+    const snap = await iapService.getActiveEntitlementSnapshot();
+    if (!snap) {
+      return userData;
+    }
+
+    const rcExpiry = new Date(snap.expirationAtMs).toISOString();
+    const subType = snap.productId.includes("yearly") ? "yearly" : "monthly";
+    const shouldOverrideExpiry =
+      !userData.premium_expiry ||
+      isPlaceholderVipExpiry(userData.premium_expiry) ||
+      userData.subscription_platform === "vip";
+
+    return {
+      ...userData,
+      subscription_platform: "apple",
+      subscription_type: subType,
+      ...(shouldOverrideExpiry ? { premium_expiry: rcExpiry } : {}),
+    };
+  } catch {
+    return userData;
+  }
 }
 
 /** Récupère user_data depuis l'API et met à jour AsyncStorage. */
@@ -137,10 +314,13 @@ export async function refreshUserDataFromServer(): Promise<UserData | null> {
       return null;
     }
 
-    const userDataToStore = buildUserDataFromServer(
+    let userDataToStore = buildUserDataFromServer(
       result.data as Record<string, unknown>,
     );
+    userDataToStore = normalizeStoredUserData(userDataToStore);
+    userDataToStore = await enrichUserDataWithIosSubscription(userDataToStore);
     await AsyncStorage.setItem("user_data", JSON.stringify(userDataToStore));
+    await reconcilePremiumUserStorage(result.data as Record<string, unknown>);
     return userDataToStore;
   } catch (error) {
     console.error("❌ Erreur refreshUserDataFromServer:", error);

@@ -13,7 +13,7 @@ import { NominatimResult } from "../../hooks/useCitySearch";
 interface LocationSectionProps {
   // États location
   locationMode: "auto" | "manual";
-  autoLocation: { lat: number; lon: number } | null;
+  autoLocation: { lat: number; lon: number; city?: string } | null;
   isRefreshingLocation: boolean;
 
   // États recherche ville
@@ -159,8 +159,9 @@ function LocationSectionComponent({
           </Pressable>
           {autoLocation && (
             <Text style={styles.locationText}>
-              {t("location.detected", "Position détectée")}:{" "}
-              {autoLocation.lat.toFixed(3)}, {autoLocation.lon.toFixed(3)}
+              {autoLocation.city
+                ? autoLocation.city
+                : `${t("location.detected", "Position détectée")}: ${autoLocation.lat.toFixed(3)}, ${autoLocation.lon.toFixed(3)}`}
             </Text>
           )}
         </View>

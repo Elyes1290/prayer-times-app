@@ -20,7 +20,11 @@ import {
   ensureVipSessionPersistence,
   isStoredUserVip,
 } from "../utils/vipSession";
-import { IapService } from "../utils/iapService";
+import {
+  clearAccountLogoutLock,
+  hasExplicitAuthSession,
+} from "../utils/userAuth";
+import { syncAndroidAuthTokenIfNeeded } from "../utils/syncAndroidAuthToken";
 import { usePremium } from "../contexts/PremiumContext";
 import { useRouter } from "expo-router";
 import { LinearGradient } from "@/components/ui/LinearGradientView";
@@ -337,9 +341,9 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
   useEffect(() => {
     const syncFromContext = async () => {
       try {
-        if (premiumUser?.isPremium) {
+        const sessionActive = await hasExplicitAuthSession();
+        if (sessionActive) {
           setIsConnected(true);
-          // Charger les infos utilisateur affichables
           const userDataString = await AsyncStorage.getItem("user_data");
           if (userDataString) {
             try {
@@ -381,6 +385,7 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
 
       // 🚀 NOUVEAU : Marquer comme connexion explicite pour autoriser les backups
       await AsyncStorage.setItem("explicit_connection", "true");
+      await clearAccountLogoutLock();
 
       console.log(
         "✅ [DEBUG] Données utilisateur synchronisées avec connexion explicite",
@@ -468,6 +473,7 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
                 (userData as any)?.token;
               if (token) {
                 await AsyncStorage.setItem("auth_token", token);
+                syncAndroidAuthTokenIfNeeded(token);
               }
               const refreshToken =
                 (result as any)?.data?.refresh_token ||

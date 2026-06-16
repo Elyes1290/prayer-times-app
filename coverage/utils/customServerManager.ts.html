@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">9.09% </span>
+                <span class="strong">9.25% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>10/110</span>
+                <span class='fraction'>10/108</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">9.52% </span>
+                <span class="strong">9.7% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>10/105</span>
+                <span class='fraction'>10/103</span>
             </div>
         
             
@@ -428,8 +428,7 @@
 <a name='L363'></a><a href='#L363'>363</a>
 <a name='L364'></a><a href='#L364'>364</a>
 <a name='L365'></a><a href='#L365'>365</a>
-<a name='L366'></a><a href='#L366'>366</a>
-<a name='L367'></a><a href='#L367'>367</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L366'></a><a href='#L366'>366</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -715,15 +714,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -749,7 +745,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -797,7 +795,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import AsyncStorage from "@react-native-async-storage/async-storage";
 import { debugLog, errorLog } from "./logger";
-import { PremiumContent } from "./premiumContent";
+import type { PremiumContent } from "./premiumContentTypes";
 &nbsp;
 /**
  * 🏠 Gestionnaire de Serveur Audio Personnel
@@ -1081,17 +1079,14 @@ class CustomServerManager {
   }&gt; {
     const startTime = <span class="cstat-no" title="statement not covered" >Date.now();</span>
 &nbsp;
-    // Test serveur principal
-    const customServerOk = <span class="cstat-no" title="statement not covered" >await this.testUrlAccessibility(</span>
-      `${this.config.baseUrl}/status`
-    );
-&nbsp;
-    // Test CDNs de secours
-    const cdnResults = <span class="cstat-no" title="statement not covered" >await Promise.all(</span>
-      this.config.fallbackUrls.map(<span class="fstat-no" title="function not covered" >(u</span>rl) =&gt;
-<span class="cstat-no" title="statement not covered" >        this.testUrlAccessibility(`${url}/status`)</span>
-      )
-    );
+    const [customServerOk, cdnResults] = <span class="cstat-no" title="statement not covered" >await Promise.all([</span>
+      this.testUrlAccessibility(`${this.config.baseUrl}/status`),
+      Promise.all(
+        this.config.fallbackUrls.map(<span class="fstat-no" title="function not covered" >(u</span>rl) =&gt;
+<span class="cstat-no" title="statement not covered" >          this.testUrlAccessibility(`${url}/status`)</span>
+        )
+      ),
+    ]);
 &nbsp;
     const latency = <span class="cstat-no" title="statement not covered" >Date.now() - startTime;</span>
 &nbsp;
@@ -1114,8 +1109,10 @@ class CustomServerManager {
     recommendations: string[];
     estimatedSavings: string;
   }&gt; {
-    const connectivity = <span class="cstat-no" title="statement not covered" >await this.testServerConnectivity();</span>
-    const stats = <span class="cstat-no" title="statement not covered" >await this.getUsageStats();</span>
+    const [connectivity, stats] = <span class="cstat-no" title="statement not covered" >await Promise.all([</span>
+      this.testServerConnectivity(),
+      this.getUsageStats(),
+    ]);
 &nbsp;
     let serverStatus = <span class="cstat-no" title="statement not covered" >"inconnu";</span>
     const recommendations: string[] = <span class="cstat-no" title="statement not covered" >[];</span>
@@ -1168,7 +1165,7 @@ export default CustomServerManager;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-06-08T13:23:03.162Z
+                at 2026-06-15T11:34:51.342Z
             </div>
         <script src="../prettify.js"></script>
         <script>

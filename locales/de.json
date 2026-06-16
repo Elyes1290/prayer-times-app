@@ -204,6 +204,8 @@
     "faq_qibla_answer": "Halten Sie das Telefon flach, fern von Metallobjekten. Wenn der Kompass unruhig ist, bewegen Sie das Telefon in einer 8-Form zur Kalibrierung.",
     "faq_offline_question": "Funktioniert die App offline?",
     "faq_offline_answer": "Ja, einmal konfiguriert funktioniert die App offline für Gebetszeiten, Qibla, Dhikr und Quran-Lesung.",
+    "faq_account_switch_question": "Ich wechsle das Handy oder wechsle von iPhone zu Android. Was soll ich tun?",
+    "faq_account_switch_answer": "Ihr MyAdhan-Konto (E-Mail und Passwort) funktioniert auf allen Geräten: App installieren und mit derselben E-Mail anmelden. Einstellungen, Favoriten und Backups werden erneut synchronisiert. Premium ist an Ihre Zahlungsmethode gebunden: Apple auf iOS, Stripe auf Android. Solange Ihr Abo aktiv ist, bleibt Premium über Ihr Konto auf beiden Plattformen verfügbar. Ein Apple-Abo kann nicht in einen anderen Store übertragen werden: Wechseln Sie dauerhaft die Plattform, lassen Sie das alte Abo auslaufen oder kündigen Sie es, und abonnieren Sie auf der neuen Plattform. Sie müssen Ihr Konto nicht löschen oder neu erstellen.",
     "support_title": "🤝 Unterstützung und Community",
     "send_suggestion": "Vorschlag senden",
     "report_bug": "Problem melden",

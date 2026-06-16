@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Pressable, Text, ActivityIndicator } from "react-native";
 import { MCIcon } from "@/components/icons/AppVectorIcons";
+import { isVipUserRecord } from "../../../utils/isVipUser";
 
 type Props = {
   userData: Record<string, unknown> | null | undefined;
@@ -25,7 +26,7 @@ export function AccountActionsSection({
 }: Props) {
   const showManageSubscription =
     userData?.premium_status === 1 &&
-    userData?.subscription_platform !== "vip" &&
+    !isVipUserRecord(userData) &&
     (userData?.subscription_platform === "stripe" ||
       userData?.subscription_platform === "apple" ||
       userData?.stripe_customer_id);

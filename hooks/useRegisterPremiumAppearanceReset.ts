@@ -12,6 +12,7 @@ import {
 } from "../utils/resetPremiumAppearance";
 import {
   registerPremiumAppearanceReset,
+  runNotificationReprogram,
   type PremiumAppearanceResetOptions,
 } from "../utils/premiumAppearanceSync";
 
@@ -96,6 +97,10 @@ export function useRegisterPremiumAppearanceReset(
         console.log(
           `🎨 [Settings] Apparence gratuite → thème ${nextTheme}, fond ${nextBackground}, adhan ${nextAdhan}`,
         );
+
+        if (adhanChanged || options?.force === true) {
+          await runNotificationReprogram();
+        }
       } finally {
         isApplyingRef.current = false;
       }

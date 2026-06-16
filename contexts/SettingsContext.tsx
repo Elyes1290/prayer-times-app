@@ -22,6 +22,8 @@ import {
   useLocalStorage,
 } from "../utils/localStorageManager";
 import { useRegisterPremiumAppearanceReset } from "../hooks/useRegisterPremiumAppearanceReset";
+import { registerNotificationReprogram } from "../utils/premiumAppearanceSync";
+import { formatGeocodeLabel } from "../utils/locationDisplay";
 
 const FIRST_LAUNCH_FLAG = "app_first_launch_done";
 
@@ -63,6 +65,10 @@ export type Coords = {
   lon: number;
 };
 
+export type AutoLocation = Coords & {
+  city?: string;
+};
+
 export type ManualLocation = {
   city: string;
   country?: string;
@@ -73,7 +79,7 @@ export interface SettingsContextType {
   errorMsg: string | null;
   locationMode: "auto" | "manual" | null;
   manualLocation: { lat: number; lon: number; city: string } | null;
-  autoLocation: { lat: number; lon: number } | null;
+  autoLocation: AutoLocation | null;
   isRefreshingLocation: boolean;
   notificationsEnabled: boolean;
   remindersEnabled: boolean;
@@ -107,6 +113,7 @@ export interface SettingsContextType {
     location: { lat: number; lon: number; city: string } | null
   ) => void;
   refreshAutoLocation: () => Promise<void>;
+  cacheAutoLocationLabel: (city: string) => Promise<void>;
   setNotificationsEnabled: (enabled: boolean) => void;
   setRemindersEnabled: (enabled: boolean) => void;
   setReminderOffset: (offset: number) => void;
@@ -178,6 +185,7 @@ const defaultSettings: SettingsContextType = {
   setLocationMode: () => {},
   setManualLocation: () => {},
   refreshAutoLocation: async () => {},
+  cacheAutoLocationLabel: async () => {},
   setNotificationsEnabled: () => {},
   setRemindersEnabled: () => {},
   setReminderOffset: () => {},
@@ -243,7 +251,7 @@ export const SettingsProvider = ({
   const [isFirstTime, setIsFirstTime] = useState<boolean>(true);
 
   // New state for auto location
-  const [autoLocation, setAutoLocation] = useState<Coords | null>(null);
+  const [autoLocation, setAutoLocation] = useState<AutoLocation | null>(null);
   const [locationError, setLocationError] = useState<string | null>(null);
   const [isRefreshingLocation, setIsRefreshingLocation] = useState(false);
 
@@ -458,10 +466,23 @@ export const SettingsProvider = ({
         accuracy: Location.Accuracy.Balanced,
       });
 
-      const coords = {
+      const coords: AutoLocation = {
         lat: location.coords.latitude,
         lon: location.coords.longitude,
       };
+
+      try {
+        const geocodeResults = await Location.reverseGeocodeAsync({
+          latitude: coords.lat,
+          longitude: coords.lon,
+        });
+        const cityLabel = formatGeocodeLabel(geocodeResults[0]);
+        if (cityLabel) {
+          coords.city = cityLabel;
+        }
+      } catch (geocodeError) {
+        debugLog("⚠️ Géocodage auto ignoré:", geocodeError);
+      }
 
       setAutoLocation(coords);
       setLocationError(null); // Clear any previous errors
@@ -495,6 +516,68 @@ export const SettingsProvider = ({
       setIsRefreshingLocation(false);
     }
   }, []);
+
+  const cacheAutoLocationLabel = useCallback(async (city: string) => {
+    const trimmed = city.trim();
+    if (!trimmed) {
+      return;
+    }
+
+    setAutoLocation((prev) => {
+      if (!prev) {
+        return prev;
+      }
+
+      if (prev.city === trimmed) {
+        return prev;
+      }
+
+      const updated: AutoLocation = { ...prev, city: trimmed };
+      void LocalStorageManager.saveEssential(
+        "AUTO_LOCATION",
+        JSON.stringify(updated),
+      ).catch((error) => {
+        errorLog("Erreur sauvegarde libellé autoLocation:", error);
+      });
+      return updated;
+    });
+  }, []);
+
+  const enrichAutoLocationCityIfPossible = useCallback(
+    async (savedAuto: AutoLocation) => {
+      if (savedAuto.city) {
+        return savedAuto;
+      }
+
+      try {
+        const { status } = await Location.getForegroundPermissionsAsync();
+        if (status !== "granted") {
+          return savedAuto;
+        }
+
+        const geocodeResults = await Location.reverseGeocodeAsync({
+          latitude: savedAuto.lat,
+          longitude: savedAuto.lon,
+        });
+        const cityLabel = formatGeocodeLabel(geocodeResults[0]);
+        if (!cityLabel) {
+          return savedAuto;
+        }
+
+        const enriched: AutoLocation = { ...savedAuto, city: cityLabel };
+        setAutoLocation(enriched);
+        await LocalStorageManager.saveEssential(
+          "AUTO_LOCATION",
+          JSON.stringify(enriched),
+        );
+        return enriched;
+      } catch (error) {
+        debugLog("⚠️ Enrichissement libellé autoLocation ignoré:", error);
+        return savedAuto;
+      }
+    },
+    [],
+  );
 
   useEffect(() => {
     const loadSettings = async () => {
@@ -880,6 +963,9 @@ export const SettingsProvider = ({
               debugLog(
                 `✅ [Android] Localisation auto chargée: ${savedAuto.lat}, ${savedAuto.lon}`
               );
+              if (!savedAuto.city) {
+                void enrichAutoLocationCityIfPossible(savedAuto);
+              }
             } else {
               setLocationError("Aucune localisation automatique sauvée");
             }
@@ -890,7 +976,7 @@ export const SettingsProvider = ({
             );
 
             if (autoLocationValue) {
-              const savedAuto = safeJsonParse<Coords | null>(
+              const savedAuto = safeJsonParse<AutoLocation | null>(
                 autoLocationValue,
                 null
               );
@@ -899,6 +985,9 @@ export const SettingsProvider = ({
                 debugLog(
                   `✅ [iOS] Localisation auto chargée: ${savedAuto.lat}, ${savedAuto.lon}`
                 );
+                if (!savedAuto.city) {
+                  void enrichAutoLocationCityIfPossible(savedAuto);
+                }
               } else {
                 setLocationError("Aucune localisation automatique sauvée");
               }
@@ -1157,6 +1246,16 @@ export const SettingsProvider = ({
     }
   };
 
+  const saveAndReprogramAllRef = useRef(saveAndReprogramAll);
+  saveAndReprogramAllRef.current = saveAndReprogramAll;
+
+  useEffect(() => {
+    registerNotificationReprogram(async () => {
+      await saveAndReprogramAllRef.current();
+    });
+    return () => registerNotificationReprogram(null);
+  }, []);
+
   const value: SettingsContextType = {
     isLoading: !isLoaded,
     errorMsg: locationError,
@@ -1194,6 +1293,7 @@ export const SettingsProvider = ({
     setLocationMode: handleSetLocationMode,
     setManualLocation: handleSetManualLocation,
     refreshAutoLocation,
+    cacheAutoLocationLabel,
     setNotificationsEnabled: (v) => {
       setNotificationsEnabled(v);
       // 🚀 NOUVEAU : Utiliser le gestionnaire de stockage stratifié

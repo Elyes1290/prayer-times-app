@@ -204,6 +204,8 @@
     "faq_qibla_answer": "Telefonunuzu düz tutun, metal nesnelerden uzak. Pusula kararsızsa kalibre etmek için 8 şeklinde hareketler yapın.",
     "faq_offline_question": "Uygulama çevrimdışı çalışır mı?",
     "faq_offline_answer": "Evet, yapılandırdıktan sonra namaz vakitleri, Kıble, zikir ve Kuran okuma için çevrimdışı çalışır.",
+    "faq_account_switch_question": "Telefon değiştiriyorum veya iPhone'dan Android'e geçiyorum. Ne yapmalıyım?",
+    "faq_account_switch_answer": "MyAdhan hesabınız (e-posta ve şifre) tüm cihazlarda çalışır: uygulamayı yükleyin ve aynı e-posta ile giriş yapın. Ayarlar, favoriler ve yedekler yeniden senkronize edilir. Premium ödeme yönteminize bağlıdır: iOS'ta Apple, Android'de Stripe. Aboneliğiniz aktif olduğu sürece premium hesabınız üzerinden her iki platformda da kullanılabilir. Apple aboneliği başka bir mağazaya aktarılamaz: kalıcı platform değişiminde eski aboneliğin süresinin dolmasını bekleyin veya iptal edin, ardından yeni platformda abone olun. Hesabınızı silmenize veya yeniden oluşturmanıza gerek yoktur.",
     "support_title": "🤝 Destek ve topluluk",
     "send_suggestion": "Öneri gönder",
     "report_bug": "Sorun bildir",

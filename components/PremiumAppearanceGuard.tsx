@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { usePremium } from "../contexts/PremiumContext";
-import { useSettings } from "../contexts/SettingsContext";
 import { runPremiumAppearanceReset } from "../utils/premiumAppearanceSync";
 
 /**
@@ -8,28 +7,19 @@ import { runPremiumAppearanceReset } from "../utils/premiumAppearanceSync";
  */
 export function PremiumAppearanceGuard() {
   const { user, loading } = usePremium();
-  const { themeMode, backgroundImageType, adhanSound } = useSettings();
 
   useEffect(() => {
-    const hasPremiumAccess = user.isPremium || user.isVip === true;
-
-    if (loading && hasPremiumAccess) {
+    if (loading) {
       return;
     }
 
+    const hasPremiumAccess = user.isPremium || user.isVip === true;
     if (hasPremiumAccess) {
       return;
     }
 
     void runPremiumAppearanceReset();
-  }, [
-    loading,
-    user.isPremium,
-    user.isVip,
-    themeMode,
-    backgroundImageType,
-    adhanSound,
-  ]);
+  }, [loading, user.isPremium, user.isVip]);
 
   return null;
 }

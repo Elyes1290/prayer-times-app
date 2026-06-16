@@ -34,40 +34,40 @@ import { OtherSpiritualActions } from "../components/stats/OtherSpiritualActions
 type TabType = "today" | "journey";
 
 const DEFAULT_STATS = {
-  user_id: 0,
-  is_premium: true,
+    user_id: 0,
+    is_premium: true,
   profile: { level: 1, experience: 0, title: "beginner" },
   level: { level: 1, progress: 0, title: "beginner" },
-  stats: {
-    total_days: 0,
-    complete_days: 0,
-    success_rate: 0,
-    success_rate_all_time: 0,
-    total_prayers: 0,
-    total_prayers_all_time: 0,
-    avg_prayers_per_day: 0,
-    total_dhikr: 0,
-    total_quran_verses: 0,
-    total_hadiths: 0,
-    total_favorites: 0,
-    total_downloads: 0,
-    total_usage_minutes: 0,
+    stats: {
+      total_days: 0,
+      complete_days: 0,
+      success_rate: 0,
+      success_rate_all_time: 0,
+      total_prayers: 0,
+      total_prayers_all_time: 0,
+      avg_prayers_per_day: 0,
+      total_dhikr: 0,
+      total_quran_verses: 0,
+      total_hadiths: 0,
+      total_favorites: 0,
+      total_downloads: 0,
+      total_usage_minutes: 0,
     total_fajr_prayers: 0,
     total_shares: 0,
-    current_streak: 0,
-    best_streak: 0,
-  },
-  streaks: {
-    current_streak: 0,
-    max_streak: 0,
-    total_streaks: 0,
-    short_streaks: 0,
-  },
-  points: 0,
-  history: [],
-  advice: { advice: [], action_plan: [] },
-  challenges: [],
-  badges: [],
+      current_streak: 0,
+      best_streak: 0,
+    },
+    streaks: {
+      current_streak: 0,
+      max_streak: 0,
+      total_streaks: 0,
+      short_streaks: 0,
+    },
+    points: 0,
+    history: [],
+    advice: { advice: [], action_plan: [] },
+    challenges: [],
+    badges: [],
   today_prayers: {
     fajr: false,
     dhuhr: false,
@@ -98,32 +98,32 @@ function TabButton({
   onPress: () => void;
   colors: ReturnType<typeof useThemeColors>;
 }) {
-  return (
+        return (
     <Pressable
       onPress={onPress}
-      style={[
+                  style={[
         styles.tabButton,
         {
           backgroundColor: active
             ? colors.primary + "22"
             : "rgba(0, 0, 0, 0.22)",
           borderColor: active ? colors.primary : colors.border,
-        },
-      ]}
-    >
+                          },
+                        ]}
+                      >
       <IonIcon
         name={icon}
         size={18}
         color={active ? colors.primary : colors.textSecondary}
       />
-      <Text
-        style={[
+                      <Text
+                        style={[
           styles.tabLabel,
           { color: active ? colors.primary : colors.textSecondary },
-        ]}
-      >
+                        ]}
+                      >
         {title}
-      </Text>
+                      </Text>
     </Pressable>
   );
 }
@@ -241,27 +241,27 @@ const PrayerStatsPremiumScreen: React.FC = () => {
           translucent
           backgroundColor="transparent"
         />
-        <View
-          style={[
+                      <View
+                        style={[
             styles.centered,
             {
               backgroundColor: colors.background,
               paddingTop: insets.top,
               paddingBottom: insets.bottom,
-            },
-          ]}
-        >
+                          },
+                        ]}
+                      >
           <ActivityIndicator size="large" color={colors.primary} />
           <Text style={[styles.loadingText, { color: colors.text }]}>
             {t("analyzing_spiritual_performance")}
-          </Text>
-        </View>
+                        </Text>
+                      </View>
       </ThemedImageBackground>
     );
   }
 
   if (premiumRequired) {
-    return (
+        return (
       <ThemedImageBackground style={styles.container}>
         <StatusBar
           barStyle={isDark ? "light-content" : "dark-content"}
@@ -269,7 +269,7 @@ const PrayerStatsPremiumScreen: React.FC = () => {
           backgroundColor="transparent"
         />
         <View
-          style={[
+                  style={[
             styles.centered,
             {
               backgroundColor: colors.background,
@@ -281,10 +281,10 @@ const PrayerStatsPremiumScreen: React.FC = () => {
           <IonIcon name="star" size={64} color={colors.accent} />
           <Text style={[styles.premiumTitle, { color: colors.text }]}>
             {t("premium_stats")}
-          </Text>
+                  </Text>
           <Text style={[styles.premiumSubtitle, { color: colors.textSecondary }]}>
             {isOffline ? t("offline_mode_stats") : t("unlock_full_progress_analysis")}
-          </Text>
+                  </Text>
           <Pressable
             style={[styles.premiumButton, { backgroundColor: colors.accent }]}
             onPress={() => push("/settings?openPremium=true&premiumTab=signup")}
@@ -304,20 +304,20 @@ const PrayerStatsPremiumScreen: React.FC = () => {
           translucent
           backgroundColor="transparent"
         />
-        <View
-          style={[
+            <View
+              style={[
             styles.centered,
             {
               backgroundColor: colors.background,
               paddingTop: insets.top,
               paddingBottom: insets.bottom,
-            },
-          ]}
-        >
+                },
+              ]}
+            >
           <IonIcon name="alert-circle" size={48} color={colors.error} />
           <Text style={[styles.errorTitle, { color: colors.text }]}>
             {t("connection_interrupted")}
-          </Text>
+              </Text>
           <Text style={{ color: colors.textSecondary }}>{error}</Text>
           <Pressable
             style={[styles.retryButton, { backgroundColor: colors.primary }]}
@@ -325,7 +325,7 @@ const PrayerStatsPremiumScreen: React.FC = () => {
           >
             <Text style={styles.retryText}>{t("retry")}</Text>
           </Pressable>
-        </View>
+                </View>
       </ThemedImageBackground>
     );
   }
@@ -352,7 +352,7 @@ const PrayerStatsPremiumScreen: React.FC = () => {
           ]}
         >
           <View
-            style={[
+                  style={[
               styles.headerPanel,
               {
                 backgroundColor: isPhotoDarkTheme
@@ -363,7 +363,7 @@ const PrayerStatsPremiumScreen: React.FC = () => {
             ]}
           >
             <Text
-              style={[
+                  style={[
                 styles.headerTitle,
                 {
                   color: overlayTextColor,
@@ -403,10 +403,10 @@ const PrayerStatsPremiumScreen: React.FC = () => {
             >
               <IonIcon name="cloud-offline" size={18} color={colors.warning} />
               <Text style={[styles.offlineText, { color: colors.warning }]}>
-                {pendingActionsCount > 0
+                    {pendingActionsCount > 0
                   ? t("pending_sync_actions", { count: pendingActionsCount })
                   : t("offline_stats_cached")}
-              </Text>
+                  </Text>
             </View>
           )}
 
@@ -459,7 +459,7 @@ const PrayerStatsPremiumScreen: React.FC = () => {
                 />
                 {statsToUse.smart_notification?.key && (
                   <View
-                    style={[
+                      style={[
                       styles.tipCard,
                       { backgroundColor: colors.cardBG },
                     ]}
@@ -471,10 +471,10 @@ const PrayerStatsPremiumScreen: React.FC = () => {
                         statsToUse.smart_notification.params,
                       )}
                     </Text>
-                  </View>
+                        </View>
                 )}
                 <OtherSpiritualActions onUpdated={onRefresh} colors={colors} />
-              </View>
+                      </View>
             ) : (
               <JourneyTabContent
                 stats={journeyStats}
@@ -486,9 +486,9 @@ const PrayerStatsPremiumScreen: React.FC = () => {
             {lastUpdated && (
               <Text style={[styles.footer, { color: colors.textSecondary }]}>
                 {t("last_updated")}: {lastUpdated.toLocaleTimeString()}
-              </Text>
+                </Text>
             )}
-          </ScrollView>
+            </ScrollView>
         </View>
       </ThemedImageBackground>
 

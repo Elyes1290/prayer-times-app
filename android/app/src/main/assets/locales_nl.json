@@ -204,6 +204,8 @@
     "faq_qibla_answer": "Houd uw telefoon plat, weg van metalen voorwerpen. Maak 8-vormige bewegingen om het kompas te kalibreren als het instabiel is.",
     "faq_offline_question": "Werkt de app offline?",
     "faq_offline_answer": "Ja, eenmaal geconfigureerd werkt de app offline voor gebedstijden, Qibla, dhikr en Koran-lezen.",
+    "faq_account_switch_question": "Ik wissel van telefoon of ga van iPhone naar Android. Wat moet ik doen?",
+    "faq_account_switch_answer": "Uw MyAdhan-account (e-mail en wachtwoord) werkt op alle apparaten: installeer de app en log in met hetzelfde e-mailadres. Instellingen, favorieten en back-ups worden opnieuw gesynchroniseerd. Premium is gekoppeld aan uw betaalmethode: Apple op iOS, Stripe op Android. Zolang uw abonnement actief is, blijft premium via uw account op beide platformen beschikbaar. Een Apple-abonnement kan niet naar een andere store worden overgezet: wisselt u permanent van platform, laat het oude abonnement verlopen of zeg het op en neem een abonnement op het nieuwe platform. U hoeft uw account niet te verwijderen of opnieuw aan te maken.",
     "support_title": "🤝 Ondersteuning en gemeenschap",
     "send_suggestion": "Stuur een suggestie",
     "report_bug": "Rapporteer een probleem",

@@ -15,6 +15,8 @@ import apiClient from "../utils/apiClient";
 import { useTranslation } from "react-i18next";
 import { LocalStorageManager } from "../utils/localStorageManager";
 import { SettingsContext } from "./SettingsContext";
+import { registerBackupSignOut } from "../utils/premiumAppearanceSync";
+import { useFavorites } from "./FavoritesContext";
 
 // Types pour le système de backup
 interface UserBackupData {
@@ -24,6 +26,8 @@ interface UserBackupData {
     hadiths: any[];
     asmaulhusna: any[];
     duas: any[];
+    prophet_stories?: any[];
+    all?: any[];
   };
   settings: {
     theme?: string;
@@ -73,6 +77,35 @@ interface BackupProviderProps {
   children: ReactNode;
 }
 
+function dedupeFavorites(favorites: any[]): any[] {
+  const seen = new Set<string>();
+  return favorites.filter((favorite) => {
+    const key = favorite?.id ?? JSON.stringify(favorite);
+    if (seen.has(key)) {
+      return false;
+    }
+    seen.add(key);
+    return true;
+  });
+}
+
+function mergeBackupFavorites(
+  cloudFavorites: UserBackupData["favorites"],
+): any[] {
+  if (Array.isArray(cloudFavorites.all) && cloudFavorites.all.length > 0) {
+    return dedupeFavorites(cloudFavorites.all);
+  }
+
+  return dedupeFavorites([
+    ...(cloudFavorites.dhikr || []),
+    ...(cloudFavorites.verses || []),
+    ...(cloudFavorites.hadiths || []),
+    ...(cloudFavorites.asmaulhusna || []),
+    ...(cloudFavorites.prophet_stories || []),
+    ...(cloudFavorites.duas || []),
+  ]);
+}
+
 async function migrateFavoritesFromOldSystem(): Promise<boolean> {
   try {
     const oldFavorites = await AsyncStorage.getItem("@prayer_app_favorites");
@@ -99,6 +132,7 @@ export const BackupProvider: React.FC<BackupProviderProps> = ({ children }) => {
   const { showToast } = useToast();
   const { t } = useTranslation();
   const settingsContext = use(SettingsContext);
+  const { reloadFromStorage } = useFavorites();
 
   // États du backup
   const [isSignedIn, setIsSignedIn] = useState(false);
@@ -258,7 +292,7 @@ export const BackupProvider: React.FC<BackupProviderProps> = ({ children }) => {
         audioSettings,
         userSettings,
       ] = await Promise.all([
-        AsyncStorage.getItem("@prayer_app_favorites_local"),
+        LocalStorageManager.getEssential("LOCAL_FAVORITES"),
         AsyncStorage.getItem("userFirstName"),
         AsyncStorage.getItem("customSettings"),
         AsyncStorage.getItem("@prayer_app_premium_user"),
@@ -275,9 +309,13 @@ export const BackupProvider: React.FC<BackupProviderProps> = ({ children }) => {
         verses: favorites.filter((f: any) => f.type === "quran_verse"),
         hadiths: favorites.filter((f: any) => f.type === "hadith"),
         asmaulhusna: favorites.filter((f: any) => f.type === "asmaul_husna"),
-        duas: favorites.filter(
-          (f: any) => f.type === "dhikr" && f.category?.includes("dua")
+        prophet_stories: favorites.filter(
+          (f: any) => f.type === "prophet_story",
         ),
+        duas: favorites.filter(
+          (f: any) => f.type === "dhikr" && f.category?.includes("dua"),
+        ),
+        all: favorites,
       };
 
       // 🚀 CORRECTION : Inclure TOUS les paramètres du SettingsContext
@@ -343,7 +381,7 @@ export const BackupProvider: React.FC<BackupProviderProps> = ({ children }) => {
               : null,
         },
         metadata: {
-          version: "2.0",
+          version: "2.1",
           timestamp: new Date().toISOString(),
           device: await AsyncStorage.getItem("device_id"),
         },
@@ -464,33 +502,45 @@ export const BackupProvider: React.FC<BackupProviderProps> = ({ children }) => {
   };
 
   // Déconnexion (Premium uniquement)
+  const clearBackupLocalState = useCallback(
+    async (options?: { silent?: boolean }): Promise<void> => {
+      try {
+        setIsSignedIn(false);
+        setUserEmail(null);
+        setHasCloudData(false);
+        setLastBackupTime(null);
+        setIsAutoBackupEnabled(false);
+        setShowRestoreDialog(false);
+
+        await Promise.all([
+          AsyncStorage.removeItem("lastBackupTime"),
+          AsyncStorage.removeItem("autoBackupEnabled"),
+          AsyncStorage.removeItem("user_stats_cache"),
+        ]);
+
+        if (!options?.silent) {
+          showToast({
+            type: "info",
+            title: t("backup_logout_success_title"),
+            message: t("backup_logout_success_message"),
+          });
+        }
+      } catch (error) {
+        errorLog("❌ Erreur déconnexion:", error);
+      }
+    },
+    [showToast, t],
+  );
+
   const signOut = async (): Promise<void> => {
     if (!user.isPremium) return;
-
-    try {
-      // Réinitialiser l'état local
-      setIsSignedIn(false);
-      setUserEmail(null);
-      setHasCloudData(false);
-      setLastBackupTime(null);
-      setIsAutoBackupEnabled(false);
-      setShowRestoreDialog(false);
-
-      await Promise.all([
-        AsyncStorage.removeItem("lastBackupTime"),
-        AsyncStorage.removeItem("autoBackupEnabled"),
-        AsyncStorage.removeItem("user_stats_cache"),
-      ]);
-
-      showToast({
-        type: "info",
-        title: t("backup_logout_success_title"),
-        message: t("backup_logout_success_message"),
-      });
-    } catch (error) {
-      errorLog("❌ Erreur déconnexion:", error);
-    }
+    await clearBackupLocalState();
   };
+
+  useEffect(() => {
+    registerBackupSignOut(() => clearBackupLocalState({ silent: true }));
+    return () => registerBackupSignOut(null);
+  }, [clearBackupLocalState]);
 
   // Restaurer les données (Premium uniquement)
   const restoreData = async (): Promise<boolean> => {
@@ -554,17 +604,12 @@ export const BackupProvider: React.FC<BackupProviderProps> = ({ children }) => {
 
       // Restaurer les favoris
       if (cloudData.favorites) {
-        const allFavorites = [
-          ...(cloudData.favorites.dhikr || []),
-          ...(cloudData.favorites.verses || []),
-          ...(cloudData.favorites.hadiths || []),
-          ...(cloudData.favorites.asmaulhusna || []),
-          ...(cloudData.favorites.duas || []),
-        ];
-        await AsyncStorage.setItem(
-          "@prayer_app_favorites_local",
-          JSON.stringify(allFavorites)
+        const allFavorites = mergeBackupFavorites(cloudData.favorites);
+        await LocalStorageManager.saveEssential(
+          "LOCAL_FAVORITES",
+          allFavorites,
         );
+        await reloadFromStorage();
       }
 
       // 🚀 CORRECTION : Restaurer TOUS les paramètres

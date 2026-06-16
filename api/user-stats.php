@@ -378,6 +378,9 @@ function getUserStats($user_id) {
         $stmt = $pdo->prepare("
             SELECT 
                 SUM(prayers_completed) as total_prayers_all_time,
+                SUM(dhikr_count) as total_dhikr_all_time,
+                SUM(quran_verses_read) as total_quran_verses_all_time,
+                SUM(hadiths_read) as total_hadiths_all_time,
                 COUNT(*) as total_days_all_time,
                 COUNT(CASE WHEN prayers_completed >= 5 THEN 1 END) as complete_days_all_time
             FROM user_stats 
@@ -400,8 +403,11 @@ function getUserStats($user_id) {
             'total_prayers_all_time' => (int)$global_stats['total_prayers_all_time'],
             'avg_prayers_per_day' => $avg_prayers > 0 ? $avg_prayers : round($stats['avg_prayers_per_day'] ?? 0, 1),
             'total_dhikr' => (int)$stats['total_dhikr'],
+            'total_dhikr_all_time' => (int)($global_stats['total_dhikr_all_time'] ?? 0),
             'total_quran_verses' => (int)$stats['total_quran_verses'],
+            'total_quran_verses_all_time' => (int)($global_stats['total_quran_verses_all_time'] ?? 0),
             'total_hadiths' => (int)$stats['total_hadiths'],
+            'total_hadiths_all_time' => (int)($global_stats['total_hadiths_all_time'] ?? 0),
             'total_favorites' => (int)$stats['total_favorites'],
             'total_downloads' => (int)$stats['total_downloads'],
             'total_usage_minutes' => (int)$stats['total_usage_minutes'],

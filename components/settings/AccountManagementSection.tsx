@@ -14,7 +14,12 @@ import { AccountProfileSection } from "./account/AccountProfileSection";
 import { AccountSubscriptionSection } from "./account/AccountSubscriptionSection";
 import { AccountSecuritySection } from "./account/AccountSecuritySection";
 import { AccountActionsSection } from "./account/AccountActionsSection";
-import { refreshUserDataFromServer } from "../../utils/userDataSync";
+import {
+  refreshUserDataFromServer,
+  enrichUserDataWithIosSubscription,
+  normalizeStoredUserData,
+} from "../../utils/userDataSync";
+import { hasExplicitAuthSession } from "../../utils/userAuth";
 
 interface AccountManagementSectionProps {
   user: { isPremium?: boolean } | null;
@@ -49,11 +54,16 @@ export default function AccountManagementSection({
     initialAccountManagementState,
   );
 
-  const userData = state.realUserData || user;
+  const userData = state.realUserData;
 
   useEffect(() => {
     const loadRealUserData = async () => {
       try {
+        if (!(await hasExplicitAuthSession())) {
+          dispatch({ type: "SET_REAL_USER_DATA", payload: null });
+          return;
+        }
+
         const fromServer = await refreshUserDataFromServer();
         if (fromServer) {
           dispatch({ type: "SET_REAL_USER_DATA", payload: fromServer });
@@ -62,9 +72,12 @@ export default function AccountManagementSection({
 
         const stored = await AsyncStorage.getItem("user_data");
         if (stored) {
+          const parsed = JSON.parse(stored);
+          const normalized = normalizeStoredUserData(parsed);
+          const enriched = await enrichUserDataWithIosSubscription(normalized);
           dispatch({
             type: "SET_REAL_USER_DATA",
-            payload: JSON.parse(stored),
+            payload: enriched,
           });
         } else {
           dispatch({ type: "SET_REAL_USER_DATA", payload: null });

@@ -94,6 +94,26 @@ export class IapService {
     await this.linkAccount(userId);
   }
 
+  /** Délie le compte MyAdhan de RevenueCat (déconnexion volontaire). */
+  async logout(): Promise<void> {
+    if (Platform.OS !== "ios") {
+      return;
+    }
+
+    await this.init();
+    if (!this.isConfigured) {
+      return;
+    }
+
+    try {
+      await Purchases.logOut();
+      this.lastLinkedEmail = null;
+      console.log("✅ RevenueCat déconnecté");
+    } catch (error) {
+      console.warn("⚠️ RevenueCat logOut:", error);
+    }
+  }
+
   // Récupérer les offres (offering)
   async getOfferings(): Promise<any> {
     if (!this.isConfigured) await this.init();

@@ -1,6 +1,10 @@
 import React from "react";
 import { View, Text } from "react-native";
 import { MCIcon } from "@/components/icons/AppVectorIcons";
+import { isVipUserRecord } from "../../../utils/isVipUser";
+import {
+  isPlaceholderVipExpiry,
+} from "../../../utils/userDataSync";
 
 type Props = {
   user: { isPremium?: boolean } | null | undefined;
@@ -13,13 +17,13 @@ function formatNextBilling(
   userData: Record<string, unknown> | null | undefined,
   t: Props["t"],
 ): string {
-  if (!userData?.premium_expiry) {
-    console.warn("⚠️ [WARNING] premium_expiry manquant dans userData");
+  const expiry = userData?.premium_expiry as string | undefined;
+  if (!expiry || (!isVipUserRecord(userData) && isPlaceholderVipExpiry(expiry))) {
     return t("not_available", "Non disponible");
   }
 
   try {
-    const expiryDate = new Date(userData.premium_expiry as string);
+    const expiryDate = new Date(expiry);
     return expiryDate.toLocaleDateString("fr-FR", {
       day: "numeric",
       month: "long",
@@ -81,9 +85,11 @@ export function AccountSubscriptionSection({
           <Text style={styles.subscriptionLabel}>{t("type", "Type")}</Text>
           <Text style={styles.subscriptionValue}>
             {user?.isPremium
-              ? userData?.subscription_platform === "vip"
+              ? isVipUserRecord(userData)
                 ? "👑 VIP"
-                : userData?.subscription_type === "monthly"
+                : userData?.subscription_platform === "apple"
+                  ? t("apple_subscription", "Abonnement Apple")
+                  : userData?.subscription_type === "monthly"
                   ? t("monthly_subscription", "Abonnement Mensuel")
                   : userData?.subscription_type === "yearly"
                     ? t("yearly_subscription", "Abonnement Annuel")

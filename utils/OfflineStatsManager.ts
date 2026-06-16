@@ -98,7 +98,9 @@ class OfflineStatsManager {
   /**
    * 📊 Obtenir les stats depuis le cache local ou l'API
    */
-  public async getStats(): Promise<{
+  public async getStats(options?: {
+    forceRefresh?: boolean;
+  }): Promise<{
     stats: any;
     challenges: any[];
     badges: any[];
@@ -121,7 +123,6 @@ class OfflineStatsManager {
             lastSync: new Date(offlineData.last_sync),
           };
         } else {
-          // Pas de données offline disponibles
           return {
             stats: null,
             challenges: [],
@@ -130,11 +131,11 @@ class OfflineStatsManager {
             lastSync: null,
           };
         }
-      } else {
-        console.log("🌐 Mode online - chargement depuis API");
-        // En mode online, charger depuis l'API et mettre en cache
-        return await this.fetchAndCacheStats();
       }
+
+      console.log("🌐 Mode online - chargement depuis API");
+      await this.syncPendingActions();
+      return await this.fetchAndCacheStats(options?.forceRefresh === true);
     } catch (error) {
       console.error("❌ Erreur getStats:", error);
       // Vérifier si on est vraiment offline avant de retourner isOffline: true
@@ -154,7 +155,9 @@ class OfflineStatsManager {
   /**
    * 🌐 Charger les stats depuis l'API et les mettre en cache
    */
-  private async fetchAndCacheStats(): Promise<{
+  private async fetchAndCacheStats(
+    bustCache = false,
+  ): Promise<{
     stats: any;
     challenges: any[];
     badges: any[];
@@ -168,8 +171,9 @@ class OfflineStatsManager {
         throw new Error("Aucun utilisateur connecté");
       }
 
+      const cacheSuffix = bustCache ? `&_=${Date.now()}` : "";
       console.log(
-        `🌐 [DEBUG] Récupération stats depuis API: ${AppConfig.USER_STATS_API}?user_id=${userId}`
+        `🌐 [DEBUG] Récupération stats depuis API: ${AppConfig.USER_STATS_API}?user_id=${userId}${cacheSuffix}`,
       );
 
       // ✅ NOUVEAU : Récupérer le token d'authentification
@@ -189,11 +193,11 @@ class OfflineStatsManager {
       }
 
       const response = await fetch(
-        `${AppConfig.USER_STATS_API}?user_id=${userId}`,
+        `${AppConfig.USER_STATS_API}?user_id=${userId}${cacheSuffix}`,
         {
           method: "GET",
           headers,
-        }
+        },
       );
 
       console.log(
@@ -206,21 +210,15 @@ class OfflineStatsManager {
 
       if (result.success && result.data) {
         console.log(`📈 [DEBUG] Stats reçues:`, result.data);
-        // Mettre en cache avec challenges et badges
+        const existingData = await this.loadOfflineData();
         const offlineData: OfflineStatsData = {
           stats: result.data,
           challenges: result.data.challenges || [],
           badges: result.data.badges || [],
           last_sync: Date.now(),
           last_update: Date.now(),
-          pending_actions: [],
+          pending_actions: existingData?.pending_actions ?? [],
         };
-
-        // Charger les actions en attente existantes
-        const existingData = await this.loadOfflineData();
-        if (existingData) {
-          offlineData.pending_actions = existingData.pending_actions;
-        }
 
         await this.saveOfflineData(offlineData);
 
@@ -259,6 +257,56 @@ class OfflineStatsManager {
     }
   }
 
+  private createEmptyOfflineData(): OfflineStatsData {
+    return {
+      stats: null,
+      challenges: [],
+      badges: [],
+      last_sync: 0,
+      last_update: Date.now(),
+      pending_actions: [],
+    };
+  }
+
+  private createOfflineAction(
+    userId: number,
+    action: OfflineStatsAction["action"],
+    actionData: Record<string, any>,
+  ): OfflineStatsAction {
+    return {
+      id: `action_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+      action,
+      action_data: actionData,
+      timestamp: Date.now(),
+      retry_count: 0,
+      user_id: userId,
+    };
+  }
+
+  private applyActionOptimistic(
+    offlineData: OfflineStatsData,
+    action: OfflineStatsAction["action"],
+    actionData: Record<string, any>,
+  ): void {
+    if (action === "reset_all") {
+      return;
+    }
+
+    if (
+      action === "prayer_completed" ||
+      action === "prayer_uncompleted"
+    ) {
+      this.applyOptimisticPrayerToggle(
+        offlineData,
+        actionData,
+        action === "prayer_completed",
+      );
+      return;
+    }
+
+    this.applyOptimisticSpiritualAction(offlineData, action);
+  }
+
   /**
    * ➕ Ajouter une action à la queue offline
    */
@@ -273,66 +321,47 @@ class OfflineStatsManager {
       }
 
       const isOffline = await isOfflineMode();
+      const offlineData =
+        (await this.loadOfflineData()) || this.createEmptyOfflineData();
 
-      if (!isOffline) {
-        // En mode online, essayer de synchroniser directement
-        const syncResult = await this.syncSingleAction(action, actionData);
-        if (syncResult.success) {
-          // ✅ NOUVEAU : Mettre à jour le cache local après sync réussie
-          console.log(
-            "🔄 [DEBUG] Mise à jour du cache local après action synchronisée"
-          );
-          const cacheResult = await this.fetchAndCacheStats();
-          console.log("📊 [DEBUG] Cache mis à jour:", cacheResult);
-          return { success: true, isOffline: false, pendingCount: 0 };
-        }
-        // ✅ CORRIGÉ : Si sync échoue en ligne, on retourne quand même success: true, isOffline: false
-        // car l'action a été tentée et l'utilisateur est en ligne
-        console.log(
-          "⚠️ Sync directe échouée en ligne, mais action considérée comme réussie"
-        );
-        return { success: true, isOffline: false, pendingCount: 0 };
+      if (action !== "reset_all") {
+        this.applyActionOptimistic(offlineData, action, actionData);
       }
-
-      // En mode offline uniquement, ajouter à la queue
-      const offlineData = (await this.loadOfflineData()) || {
-        stats: null,
-        challenges: [],
-        badges: [],
-        last_sync: 0,
-        last_update: Date.now(),
-        pending_actions: [],
-      };
-
-      const newAction: OfflineStatsAction = {
-        id: `action_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
-        action,
-        action_data: actionData,
-        timestamp: Date.now(),
-        retry_count: 0,
-        user_id: userId,
-      };
-
-      offlineData.pending_actions.push(newAction);
       offlineData.last_update = Date.now();
 
-      if (
-        action === "prayer_completed" ||
-        action === "prayer_uncompleted"
-      ) {
-        this.applyOptimisticPrayerToggle(
-          offlineData,
-          actionData,
-          action === "prayer_completed",
+      if (!isOffline) {
+        const syncResult = await this.syncSingleAction(action, actionData);
+        await this.saveOfflineData(offlineData);
+
+        if (syncResult.success) {
+          console.log(
+            "🔄 [DEBUG] Mise à jour du cache local après action synchronisée",
+          );
+          await this.fetchAndCacheStats();
+          return { success: true, isOffline: false, pendingCount: 0 };
+        }
+
+        console.log(
+          "⚠️ Sync directe échouée — cache optimiste conservé et action mise en file",
         );
-      } else if (action !== "reset_all") {
-        this.applyOptimisticSpiritualAction(offlineData, action);
+        offlineData.pending_actions.push(
+          this.createOfflineAction(userId, action, actionData),
+        );
+        await this.saveOfflineData(offlineData);
+        return {
+          success: true,
+          isOffline: false,
+          pendingCount: offlineData.pending_actions.length,
+        };
       }
 
+      offlineData.pending_actions.push(
+        this.createOfflineAction(userId, action, actionData),
+      );
       await this.saveOfflineData(offlineData);
 
       console.log(
-        `✅ Action ajoutée à la queue offline: ${action} (${offlineData.pending_actions.length} en attente)`
+        `✅ Action ajoutée à la queue offline: ${action} (${offlineData.pending_actions.length} en attente)`,
       );
 
       return {
@@ -708,14 +737,23 @@ class OfflineStatsManager {
     switch (action) {
       case "dhikr_completed":
         stats.total_dhikr = Number(stats.total_dhikr || 0) + 1;
+        stats.total_dhikr_all_time = Number(
+          stats.total_dhikr_all_time ?? stats.total_dhikr ?? 0,
+        ) + 1;
         dayEntry.dhikr = Number(dayEntry.dhikr || 0) + 1;
         break;
       case "quran_read":
         stats.total_quran_verses = Number(stats.total_quran_verses || 0) + 1;
+        stats.total_quran_verses_all_time = Number(
+          stats.total_quran_verses_all_time ?? stats.total_quran_verses ?? 0,
+        ) + 1;
         dayEntry.quran = Number(dayEntry.quran || 0) + 1;
         break;
       case "hadith_read":
         stats.total_hadiths = Number(stats.total_hadiths || 0) + 1;
+        stats.total_hadiths_all_time = Number(
+          stats.total_hadiths_all_time ?? stats.total_hadiths ?? 0,
+        ) + 1;
         dayEntry.hadiths = Number(dayEntry.hadiths || 0) + 1;
         break;
       case "content_shared":

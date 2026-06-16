@@ -71,7 +71,7 @@ try {
 
     $userId = (int)$auth['user_id'];
     $pdo = getDBConnection();
-    $stmt = $pdo->prepare('SELECT id, subscription_platform FROM users WHERE id = ?');
+    $stmt = $pdo->prepare('SELECT id, subscription_platform, is_vip FROM users WHERE id = ?');
     $stmt->execute([$userId]);
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
     if (!$row) {
@@ -80,8 +80,14 @@ try {
         exit();
     }
 
+    if ((int)($row['is_vip'] ?? 0) === 1) {
+        http_response_code(403);
+        echo json_encode(['success' => false, 'message' => 'Compte VIP — synchronisation Apple non applicable']);
+        exit();
+    }
+
     $plat = $row['subscription_platform'] ?? null;
-    if ($plat !== null && $plat !== '' && $plat !== 'apple') {
+    if ($plat !== null && $plat !== '' && $plat !== 'apple' && $plat !== 'vip') {
         http_response_code(403);
         echo json_encode(['success' => false, 'message' => 'Plateforme abonnement non Apple']);
         exit();
@@ -99,7 +105,6 @@ try {
             premium_expiry = ?,
             updated_at = NOW()
         WHERE id = ?
-          AND (subscription_platform = 'apple' OR subscription_platform IS NULL OR subscription_platform = '')
     ");
     $upd->execute([$subType, $origTxn, $origTxn, $expiryDate, $userId]);
 

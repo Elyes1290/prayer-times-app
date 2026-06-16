@@ -26,7 +26,9 @@ class SyncManager {
       // console.log("🔄 Début synchronisation favoris...");
 
       // Récupérer les favoris locaux
-      const favoritesData = await AsyncStorage.getItem("favorites");
+      const favoritesData = await AsyncStorage.getItem(
+        "@prayer_app_favorites_local",
+      );
       if (!favoritesData) {
         console.log("📭 Aucun favori local à synchroniser");
         return true;

@@ -125,6 +125,7 @@ describe("AboutScreen", () => {
     expect(getByText("abouts.faq_notifications_question")).toBeTruthy();
     expect(getByText("abouts.faq_qibla_question")).toBeTruthy();
     expect(getByText("abouts.faq_offline_question")).toBeTruthy();
+    expect(getByText("abouts.faq_account_switch_question")).toBeTruthy();
   });
 
   it("handles FAQ expansion correctly", () => {

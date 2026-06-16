@@ -134,10 +134,7 @@
 <a name='L69'></a><a href='#L69'>69</a>
 <a name='L70'></a><a href='#L70'>70</a>
 <a name='L71'></a><a href='#L71'>71</a>
-<a name='L72'></a><a href='#L72'>72</a>
-<a name='L73'></a><a href='#L73'>73</a>
-<a name='L74'></a><a href='#L74'>74</a>
-<a name='L75'></a><a href='#L75'>75</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L72'></a><a href='#L72'>72</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -158,27 +155,24 @@
 <span class="cline-any cline-yes">16x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">16x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">30x</span>
 <span class="cline-any cline-yes">29x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">29x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">26x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">26x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">26x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">26x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -231,41 +225,38 @@ export async function schedulePrayerNotifications(
   const now = new Date();
   const minTimeGap = 30 * 1000; // 30 secondes en millisecondes
 &nbsp;
-  const reminders = Object.entries(prayerTimes)
-    .map(([prayer, time]) =&gt; {
-      const timestamp = time.getTime();
-      const reminderTime = timestamp - reminderOffset * 60 * 1000;
+  const reminders = Object.entries(prayerTimes).flatMap(([prayer, time]) =&gt; {
+    const timestamp = time.getTime();
+    const reminderTime = timestamp - reminderOffset * 60 * 1000;
 &nbsp;
-      // Ne programme que les rappels futurs
-      if (reminderTime &lt;= now.getTime()) {
-        return null;
-      }
+    if (reminderTime &lt;= now.getTime()) {
+      return [];
+    }
 &nbsp;
-      // Si le rappel est trop proche, ajoute un délai minimum
-      const adjustedReminderTime =
-        reminderTime - now.getTime() &lt; minTimeGap
-          ? <span class="branch-0 cbranch-no" title="branch not covered" >now.getTime() + minTimeGap</span>
-          : reminderTime;
+    const adjustedReminderTime =
+      reminderTime - now.getTime() &lt; minTimeGap
+        ? <span class="branch-0 cbranch-no" title="branch not covered" >now.getTime() + minTimeGap</span>
+        : reminderTime;
 &nbsp;
-      // 🔑 Génère une clé unique incluant la date et un préfixe pour éviter les collisions avec les adhans
-      const uniqueKey = dateKey
-        ? <span class="branch-0 cbranch-no" title="branch not covered" >`reminder_${prayer}_${dateKey}`</span>
-        : `reminder_${prayer}_${Date.now()}`;
+    const uniqueKey = dateKey
+      ? <span class="branch-0 cbranch-no" title="branch not covered" >`reminder_${prayer}_${dateKey}`</span>
+      : `reminder_${prayer}_${Date.now()}`;
 &nbsp;
-      return {
-        key: uniqueKey, // 🔑 Ajout de la clé unique
+    return [
+      {
+        key: uniqueKey,
         prayer,
-        triggerMillis: adjustedReminderTime, // Pour Android
-        triggerAtMillis: adjustedReminderTime, // 🔧 Pour iOS (même nom que Adhans)
+        triggerMillis: adjustedReminderTime,
+        triggerAtMillis: adjustedReminderTime,
         title: i18n.t("prayer_reminder_title"),
         body: i18n.t("prayer_reminder_body", {
           prayer,
           minutes: reminderOffset,
         }),
         isToday: true,
-      };
-    })
-    .filter(Boolean);
+      },
+    ];
+  });
 &nbsp;
   // 2. Si remindersEnabled, on programme
   if (!remindersEnabled) return;
@@ -292,7 +283,7 @@ export async function schedulePrayerNotifications(
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-06-08T13:23:03.162Z
+                at 2026-06-15T11:34:51.342Z
             </div>
         <script src="../prettify.js"></script>
         <script>

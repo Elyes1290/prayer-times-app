@@ -1,5 +1,6 @@
 import { Linking, Platform } from "react-native";
 import apiClient from "../../../utils/apiClient";
+import { isVipUserRecord } from "../../../utils/isVipUser";
 
 type ToastFn = (toast: {
   type: "success" | "error" | "info";
@@ -93,7 +94,7 @@ export async function handleManageSubscription({
       return;
     }
 
-    if (subscriptionPlatform === "vip") {
+    if (isVipUserRecord(userData)) {
       showToast({
         type: "info",
         title: "Accès VIP",

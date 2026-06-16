@@ -343,14 +343,17 @@ export function mapStatsToBadgeUserStats(
     ),
     current_streak: streaks.current_streak ?? s.current_streak ?? 0,
     total_dhikr_sessions: Math.max(
+      s.total_dhikr_all_time ?? 0,
       s.total_dhikr ?? 0,
       sumHistoryField(history, "dhikr"),
     ),
     total_quran_sessions: Math.max(
+      s.total_quran_verses_all_time ?? 0,
       s.total_quran_verses ?? 0,
       sumHistoryField(history, "quran"),
     ),
     total_hadith_read: Math.max(
+      s.total_hadiths_all_time ?? 0,
       s.total_hadiths ?? 0,
       sumHistoryField(history, "hadiths"),
     ),

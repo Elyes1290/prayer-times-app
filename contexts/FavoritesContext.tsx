@@ -111,6 +111,7 @@ export interface FavoritesContextType {
   isCloudSyncEnabled: boolean;
 
   forceReset: () => Promise<void>;
+  reloadFromStorage: () => Promise<void>;
 }
 
 const defaultContext: FavoritesContextType = {
@@ -128,6 +129,7 @@ const defaultContext: FavoritesContextType = {
   syncWithCloud: async () => false,
   isCloudSyncEnabled: false,
   forceReset: async () => {},
+  reloadFromStorage: async () => {},
 };
 
 const FavoritesContext = createContext<FavoritesContextType>(defaultContext);

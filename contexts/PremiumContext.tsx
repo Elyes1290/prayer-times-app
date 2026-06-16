@@ -6,7 +6,7 @@ import React, {
   ReactNode,
 } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { NativeModules, Platform } from "react-native";
+import { Platform } from "react-native";
 import { safeJsonParse } from "../utils/safeJson";
 import { useNetworkStatus } from "../hooks/useNetworkStatus";
 // 🚀 NOUVEAU : Import apiClient pour vérifier la connexion Infomaniak
@@ -23,15 +23,26 @@ import {
   getDaysPastExpiry,
   isNetworkReadyForApi,
   isPremiumActiveOnServer,
+  normalizeStoredUserData,
   PREMIUM_GRACE_PERIOD_DAYS,
   refreshUserDataFromServer,
   trySyncPremiumFromServer,
 } from "../utils/userDataSync";
+import { isVipUserRecord } from "../utils/isVipUser";
 import {
   ensureVipSessionPersistence,
   isStoredUserVip,
 } from "../utils/vipSession";
-import { clearLocalAuthSession, hasExplicitAuthSession } from "../utils/userAuth";
+import {
+  clearAndroidAuthTokenSyncCache,
+  syncAndroidAuthTokenIfNeeded,
+} from "../utils/syncAndroidAuthToken";
+import {
+  clearLocalAuthSession,
+  hasExplicitAuthSession,
+  isAccountLogoutLocked,
+  setAccountLogoutLock,
+} from "../utils/userAuth";
 import {
   DEFAULT_ADHAN_SOUND,
   persistFreeAppearanceSettings,
@@ -40,7 +51,10 @@ import {
   resolveFreeThemeMode,
   type ThemeMode,
 } from "../utils/resetPremiumAppearance";
-import { runPremiumAppearanceReset } from "../utils/premiumAppearanceSync";
+import {
+  runBackupSignOut,
+  runPremiumAppearanceReset,
+} from "../utils/premiumAppearanceSync";
 import { LocalStorageManager } from "../utils/localStorageManager";
 import type { BackgroundImageType } from "./SettingsContext";
 
@@ -133,32 +147,24 @@ const STORAGE_KEYS = {
   LAST_EXPIRY_NOTIFICATION: "@prayer_app_last_expiry_notification", // 🆕 Dernière notification d'expiration
 } as const;
 
+let loadPremiumDataInFlight: Promise<void> | null = null;
+
 async function resolveStoredPremiumActive(
   parsedUser: Record<string, unknown>,
 ): Promise<boolean> {
-  if (parsedUser.isVip === true) {
-    return isStoredUserVip();
+  if (await isAccountLogoutLocked()) {
+    return false;
+  }
+
+  if (isVipUserRecord(parsedUser)) {
+    return true;
   }
 
   if (!parsedUser.isPremium) {
     return false;
   }
 
-  if (await hasExplicitAuthSession()) {
-    return true;
-  }
-
-  if (Platform.OS === "ios") {
-    try {
-      const iapService = IapService.getInstance();
-      await iapService.init();
-      return await iapService.checkPremiumStatus();
-    } catch {
-      return false;
-    }
-  }
-
-  return false;
+  return hasExplicitAuthSession();
 }
 
 async function getStoredAccountEmail(): Promise<string | null> {
@@ -192,34 +198,35 @@ const PREMIUM_FEATURES = [
 function createPremiumUserFromServer(
   serverUser: Record<string, unknown>,
 ): PremiumUser {
-  const isVip = serverUser.is_vip === true || Number(serverUser.is_vip) === 1;
+  const normalized = normalizeStoredUserData(buildUserDataFromServer(serverUser));
+  const isVip = isVipUserRecord(normalized);
   const isApple =
-    serverUser.subscription_platform === "apple" && Platform.OS === "ios";
+    normalized.subscription_platform === "apple" && Platform.OS === "ios";
 
   return {
     isPremium: true,
     subscriptionType:
-      (serverUser.subscription_type as PremiumUser["subscriptionType"]) ||
+      (normalized.subscription_type as PremiumUser["subscriptionType"]) ||
       "yearly",
-    subscriptionId: (serverUser.subscription_id as string) || null,
+    subscriptionId: normalized.subscription_id || null,
     expiryDate: isVip
       ? new Date(2099, 11, 31)
-      : serverUser.premium_expiry
-        ? new Date(serverUser.premium_expiry as string)
+      : normalized.premium_expiry
+        ? new Date(normalized.premium_expiry)
         : new Date(Date.now() + 365 * 24 * 60 * 60 * 1000),
     features: [
       ...PREMIUM_FEATURES,
       ...(isVip ? ["vip_exclusive", "lifetime_access"] : []),
     ],
     hasPurchasedPremium: true,
-    premiumActivatedAt: serverUser.premium_activated_at
-      ? new Date(serverUser.premium_activated_at as string)
+    premiumActivatedAt: normalized.premium_activated_at
+      ? new Date(normalized.premium_activated_at)
       : new Date(),
     isVip,
-    vipReason: (serverUser.vip_reason as string) || null,
-    vipGrantedBy: (serverUser.vip_granted_by as string) || null,
-    vipGrantedAt: serverUser.vip_granted_at
-      ? new Date(serverUser.vip_granted_at as string)
+    vipReason: normalized.vip_reason || null,
+    vipGrantedBy: normalized.vip_granted_by || null,
+    vipGrantedAt: normalized.vip_granted_at
+      ? new Date(normalized.vip_granted_at)
       : null,
     premiumType: isVip
       ? "VIP Gratuit à Vie"
@@ -244,6 +251,13 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
 
   // 🌐 NOUVEAU : Hook pour vérifier la connectivité réseau
   const networkStatus = useNetworkStatus();
+  const networkStatusRef = React.useRef(networkStatus);
+  networkStatusRef.current = networkStatus;
+  const lastLoadPremiumAtRef = React.useRef(0);
+  const checkLocalPremiumExpirationRef = React.useRef<
+    () => Promise<boolean>
+  >(() => Promise.resolve(false));
+  const LOAD_PREMIUM_MIN_INTERVAL_MS = 1500;
 
   // 🕐 NOUVEAU : Vérifier l'expiration des abonnements localement
   const checkLocalPremiumExpiration = React.useCallback(async () => {
@@ -255,7 +269,7 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
       if (!parsedUser) return false;
 
       // Les VIP n'expirent jamais
-      if (parsedUser.isVip) {
+      if (isVipUserRecord(parsedUser)) {
         console.log("👑 Utilisateur VIP - pas de vérification d'expiration");
         return false;
       }
@@ -309,7 +323,9 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
           };
 
           try {
-            const serverUser = await trySyncPremiumFromServer(networkStatus);
+            const serverUser = await trySyncPremiumFromServer(
+              networkStatusRef.current,
+            );
             if (serverUser) {
               console.log("✅ Renouvellement confirmé côté serveur");
               await applyRenewedPremium(serverUser, "serveur");
@@ -327,7 +343,11 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
               }
 
               const isIapPremium = await iapService.checkPremiumStatus();
-              if (isIapPremium && token && isNetworkReadyForApi(networkStatus)) {
+              if (
+                isIapPremium &&
+                token &&
+                isNetworkReadyForApi(networkStatusRef.current)
+              ) {
                 const snap = await iapService.getActiveEntitlementSnapshot();
                 if (snap) {
                   try {
@@ -476,7 +496,9 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
       console.error("❌ Erreur vérification expiration locale:", error);
       return false;
     }
-  }, [showToast, t, networkStatus]);
+  }, [showToast, t]);
+
+  checkLocalPremiumExpirationRef.current = checkLocalPremiumExpiration;
 
   // --- Actions disponibles pour les effets ---
   const deactivatePremium = React.useCallback(async () => {
@@ -518,28 +540,26 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
     }
   }, []);
 
-  // 🕐 NOUVEAU : Vérifier l'expiration toutes les heures quand l'app est active
+  // Chargement initial une seule fois (évite boucle si checkLocalPremiumExpiration change)
   useEffect(() => {
     void loadPremiumData();
+  }, []);
 
-    // Vérification initiale après 10 secondes
+  // 🕐 Vérifier l'expiration toutes les heures quand l'app est active
+  useEffect(() => {
     const initialCheck = setTimeout(() => {
-      checkLocalPremiumExpiration();
+      void checkLocalPremiumExpirationRef.current();
     }, 10000);
 
-    // Vérification périodique toutes les heures
-    const hourlyCheck = setInterval(
-      () => {
-        checkLocalPremiumExpiration();
-      },
-      60 * 60 * 1000,
-    ); // 1 heure
+    const hourlyCheck = setInterval(() => {
+      void checkLocalPremiumExpirationRef.current();
+    }, 60 * 60 * 1000);
 
     return () => {
       clearTimeout(initialCheck);
       clearInterval(hourlyCheck);
     };
-  }, [checkLocalPremiumExpiration]);
+  }, []);
 
   // 🔐 Vérification périodique du token côté serveur (toutes les 6h)
   useEffect(() => {
@@ -582,7 +602,7 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
         }
 
         // 🌐 NOUVEAU : Vérifier la connectivité avant d'appeler l'API
-        if (!isNetworkReadyForApi(networkStatus)) {
+        if (!isNetworkReadyForApi(networkStatusRef.current)) {
           console.log(
             "🌐 [OFFLINE] Pas de connexion réseau - token considéré comme valide en mode offline",
           );
@@ -641,6 +661,11 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
   useEffect(() => {
     const checkExplicitConnection = async () => {
       try {
+        if (await isAccountLogoutLocked()) {
+          await deactivatePremium();
+          return;
+        }
+
         // 🎯 VIP PROTECTION : Vérifier d'abord si l'utilisateur est VIP
         if (await isStoredUserVip()) {
           await ensureVipSessionPersistence();
@@ -655,7 +680,7 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
         );
         if (storedUser) {
           const parsedUser = safeJsonParse<any>(storedUser, null);
-          if (parsedUser?.isVip) {
+          if (isVipUserRecord(parsedUser)) {
             console.log(
               "👑 [VIP PROTECTION] Utilisateur VIP détecté - pas de déconnexion automatique",
             );
@@ -667,10 +692,7 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
         const userData = await AsyncStorage.getItem("user_data");
         if (userData) {
           const parsedUserData = safeJsonParse<any>(userData, null);
-          if (
-            parsedUserData?.is_vip === true ||
-            parsedUserData?.subscription_platform === "vip"
-          ) {
+          if (isVipUserRecord(parsedUserData)) {
             console.log(
               "👑 [VIP PROTECTION] Utilisateur VIP détecté dans user_data - pas de déconnexion automatique",
             );
@@ -721,9 +743,33 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
     };
   }, [deactivatePremium]);
 
-  const loadPremiumData = async () => {
+  const loadPremiumData = async (options?: { force?: boolean }) => {
+    if (loadPremiumDataInFlight) {
+      return loadPremiumDataInFlight;
+    }
+
+    const now = Date.now();
+    if (
+      !options?.force &&
+      now - lastLoadPremiumAtRef.current < LOAD_PREMIUM_MIN_INTERVAL_MS
+    ) {
+      return;
+    }
+
+    lastLoadPremiumAtRef.current = now;
+
+    loadPremiumDataInFlight = (async () => {
     try {
       setLoading(true);
+
+      if (await isAccountLogoutLocked()) {
+        if (!(await hasExplicitAuthSession())) {
+          const hasPurchasedPremium = user.hasPurchasedPremium === true;
+          setUser({ ...defaultUser, hasPurchasedPremium });
+          setLoading(false);
+          return;
+        }
+      }
 
       // 🚀 PRIORITÉ : synchroniser le serveur AVANT toute vérification d'expiration locale
       try {
@@ -731,33 +777,32 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
         if (
           token &&
           (await hasExplicitAuthSession()) &&
-          isNetworkReadyForApi(networkStatus)
+          isNetworkReadyForApi(networkStatusRef.current)
         ) {
           console.log(
             "🔄 [SYNC] Chargement premium — source serveur en premier",
           );
 
-          const result = await apiClient.getUser();
-          if (result.success && result.data) {
-            const serverUser = result.data as Record<string, unknown>;
-            const userDataToUpdate = buildUserDataFromServer(serverUser);
-
-            await AsyncStorage.setItem(
-              "user_data",
-              JSON.stringify(userDataToUpdate),
+          const refreshed = await refreshUserDataFromServer();
+          if (
+            refreshed &&
+            isPremiumActiveOnServer(
+              refreshed as unknown as Record<string, unknown>,
+            )
+          ) {
+            const premiumUser = createPremiumUserFromServer(
+              refreshed as unknown as Record<string, unknown>,
             );
-
-            if (isPremiumActiveOnServer(serverUser)) {
-              const premiumUser = createPremiumUserFromServer(serverUser);
-              await AsyncStorage.setItem(
-                STORAGE_KEYS.PREMIUM_USER,
-                JSON.stringify(premiumUser),
-              );
-              setUser(premiumUser);
-              console.log(
-                "✅ [SYNC] Premium restauré depuis le serveur avant vérif locale",
-              );
-            }
+            await AsyncStorage.setItem(
+              STORAGE_KEYS.PREMIUM_USER,
+              JSON.stringify(premiumUser),
+            );
+            setUser(premiumUser);
+            console.log(
+              "✅ [SYNC] Premium restauré depuis le serveur avant vérif locale",
+            );
+            syncAndroidAuthTokenIfNeeded(token);
+            return;
           }
         }
       } catch (syncError) {
@@ -781,7 +826,11 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
 
           const isIapPremium = await iapService.checkPremiumStatus();
 
-          if (isIapPremium && token && isNetworkReadyForApi(networkStatus)) {
+          if (
+            isIapPremium &&
+            token &&
+            isNetworkReadyForApi(networkStatusRef.current)
+          ) {
             const snap = await iapService.getActiveEntitlementSnapshot();
             if (snap) {
               try {
@@ -796,7 +845,7 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
             }
           }
 
-          if (isIapPremium) {
+          if (isIapPremium && (await hasExplicitAuthSession()) && !(await isAccountLogoutLocked())) {
             console.log("🍎 [PremiumContext] Premium détecté via RevenueCat");
 
             const serverUserData = await refreshUserDataFromServer();
@@ -815,12 +864,24 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
               );
               setUser(iapUser);
             } else {
+              const snap = await iapService.getActiveEntitlementSnapshot();
               const iapUser: PremiumUser = {
-                ...user,
                 isPremium: true,
-                premiumType: "Apple In-App Purchase",
-                hasPurchasedPremium: true,
+                isVip: false,
+                subscriptionType: snap?.productId?.includes("yearly")
+                  ? "yearly"
+                  : snap?.productId?.includes("monthly")
+                    ? "monthly"
+                    : null,
+                subscriptionId: snap?.originalTransactionId ?? null,
+                expiryDate: snap ? new Date(snap.expirationAtMs) : null,
                 features: [...PREMIUM_FEATURES],
+                hasPurchasedPremium: true,
+                premiumActivatedAt: new Date(),
+                premiumType: "Apple In-App Purchase",
+                vipReason: null,
+                vipGrantedBy: null,
+                vipGrantedAt: null,
               };
               await AsyncStorage.setItem(
                 STORAGE_KEYS.PREMIUM_USER,
@@ -866,26 +927,10 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
         );
       }
 
-      // 🔗 NOUVEAU : Synchroniser le token d'authentification vers les services natifs (Android uniquement)
+      // 🔗 Android : sync token natif (debounced — évite boucle après connexion)
       try {
         const token = await AsyncStorage.getItem("auth_token");
-        if (token && Platform.OS === "android") {
-          console.log(
-            "🔗 [PremiumContext] Synchronisation token vers services natifs:",
-            token.substring(0, 10) + "...",
-          );
-          // ✅ Vérifier que le module existe avant de l'utiliser
-          if (NativeModules?.QuranAudioServiceModule?.syncAuthToken) {
-            NativeModules.QuranAudioServiceModule.syncAuthToken(token);
-            console.log("✅ [PremiumContext] Token synchronisé avec succès");
-          } else {
-            console.log(
-              "⚠️ [PremiumContext] Module QuranAudioServiceModule non disponible",
-            );
-          }
-        } else if (!token) {
-          console.log("⚠️ [PremiumContext] Aucun token auth_token trouvé");
-        }
+        syncAndroidAuthTokenIfNeeded(token);
       } catch (tokenError) {
         console.error(
           "❌ [PremiumContext] Erreur synchronisation token:",
@@ -904,8 +949,10 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
         }
         if (!parsedUserData) return;
 
-        if (isPremiumActiveOnServer(parsedUserData)) {
-          const premiumUser = createPremiumUserFromServer(parsedUserData);
+        const normalizedUserData = normalizeStoredUserData(parsedUserData);
+
+        if (isPremiumActiveOnServer(normalizedUserData)) {
+          const premiumUser = createPremiumUserFromServer(normalizedUserData);
           await AsyncStorage.setItem(
             STORAGE_KEYS.PREMIUM_USER,
             JSON.stringify(premiumUser),
@@ -961,10 +1008,15 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
     } finally {
       setLoading(false);
     }
+    })().finally(() => {
+      loadPremiumDataInFlight = null;
+    });
+
+    return loadPremiumDataInFlight;
   };
 
   const checkPremiumStatus = async () => {
-    await loadPremiumData();
+    await loadPremiumData({ force: true });
   };
 
   const activatePremium = async (
@@ -1114,6 +1166,16 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
   // 🚀 NOUVEAU : Fonction pour forcer la déconnexion complète
   const forceLogout = async (): Promise<void> => {
     try {
+      await setAccountLogoutLock();
+      clearAndroidAuthTokenSyncCache();
+      if (Platform.OS === "ios") {
+        try {
+          await IapService.getInstance().logout();
+        } catch (iapLogoutErr) {
+          console.warn("⚠️ [PremiumContext] RevenueCat logOut:", iapLogoutErr);
+        }
+      }
+      await runBackupSignOut();
       const hasPurchasedPremium = user.hasPurchasedPremium === true;
       setUser({ ...defaultUser, hasPurchasedPremium });
       await Promise.all([

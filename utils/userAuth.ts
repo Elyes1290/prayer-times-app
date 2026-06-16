@@ -124,6 +124,9 @@ const isUserLoggedIn = async (): Promise<boolean> => {
   return userId !== null;
 };
 
+/** Bloque la réactivation premium iOS (RevenueCat) tant que l'utilisateur ne s'est pas reconnecté. */
+export const ACCOUNT_LOGOUT_LOCK_KEY = "@account_logout_lock";
+
 /** Clés de session à effacer lors d'une déconnexion volontaire. */
 export const AUTH_SESSION_STORAGE_KEYS = [
   "user_data",
@@ -134,6 +137,18 @@ export const AUTH_SESSION_STORAGE_KEYS = [
   "premium_catalog_cache",
   "user_stats_cache",
 ] as const;
+
+export async function setAccountLogoutLock(): Promise<void> {
+  await AsyncStorage.setItem(ACCOUNT_LOGOUT_LOCK_KEY, Date.now().toString());
+}
+
+export async function clearAccountLogoutLock(): Promise<void> {
+  await AsyncStorage.removeItem(ACCOUNT_LOGOUT_LOCK_KEY);
+}
+
+export async function isAccountLogoutLocked(): Promise<boolean> {
+  return (await AsyncStorage.getItem(ACCOUNT_LOGOUT_LOCK_KEY)) !== null;
+}
 
 /** Supprime la session locale pour empêcher une reconnexion automatique. */
 export async function clearLocalAuthSession(): Promise<void> {

@@ -18,6 +18,7 @@ import {
   ScrollView,
   KeyboardAvoidingView,
   Platform,
+  Modal,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useLocalSearchParams } from "expo-router";
@@ -45,6 +46,7 @@ import { usePremium } from "../contexts/PremiumContext";
 import { MCIcon } from "@/components/icons/AppVectorIcons";
 import Constants from "expo-constants";
 import { useToast } from "../contexts/ToastContext";
+import { FaqAccordionList } from "../components/FaqAccordionList";
 
 import PremiumContentManager, { PremiumContent } from "../utils/premiumContent";
 import { useNativeDownload } from "../hooks/useNativeDownload";
@@ -78,7 +80,7 @@ import {
   resolveFreeBackgroundImageType,
   resolveFreeThemeMode,
 } from "../utils/resetPremiumAppearance";
-import { runPremiumAppearanceReset } from "../utils/premiumAppearanceSync";
+import { runPremiumAppearanceReset, runNotificationReprogram } from "../utils/premiumAppearanceSync";
 
 const soundObjects: Record<AdhanSoundKey, any> = {
   adhamalsharqawe: require("../assets/sounds/adhamalsharqawe.mp3"),
@@ -504,7 +506,7 @@ const AdhanSoundSectionWrapper = React.memo(function AdhanSoundSectionWrapper({
   );
 });
 
-const BackupSectionWrapper = React.memo(function BackupSectionWrapper({
+const BackupSectionWrapper = function BackupSectionWrapper({
   styles,
 }: {
   styles: any;
@@ -521,7 +523,7 @@ const BackupSectionWrapper = React.memo(function BackupSectionWrapper({
       ))}
     </View>
   );
-});
+};
 
 function SettingsSections(props: OptimizedSettingsSectionsProps) {
   const {
@@ -541,6 +543,8 @@ function SettingsSections(props: OptimizedSettingsSectionsProps) {
 
   // États locaux pour le dhikr
   const [allDhikrEnabled, setAllDhikrEnabled] = useState(true);
+  const [showFaqModal, setShowFaqModal] = useState(false);
+  const colors = useThemeColors();
 
   const toggleAllDhikr = useCallback(
     async (value: boolean) => {
@@ -808,12 +812,7 @@ function SettingsSections(props: OptimizedSettingsSectionsProps) {
             </Pressable>
             <Pressable
               style={styles.row}
-              onPress={() => {
-                Alert.alert(
-                  t("faq", "FAQ"),
-                  t("faq_text", "Questions fréquemment posées")
-                );
-              }}
+              onPress={() => setShowFaqModal(true)}
             >
               <Text style={styles.label}>{t("faq", "FAQ")}</Text>
               <MCIcon
@@ -915,6 +914,52 @@ function SettingsSections(props: OptimizedSettingsSectionsProps) {
       />
 
       {activeSectionPanel}
+
+      <Modal
+        visible={showFaqModal}
+        animationType="slide"
+        transparent
+        onRequestClose={() => setShowFaqModal(false)}
+      >
+        <View style={styles.faqModalOverlay}>
+          <View
+            style={[
+              styles.faqModalContent,
+              {
+                backgroundColor: isLightTheme ? "#FFFFFF" : colors.cardBG,
+              },
+            ]}
+          >
+            <View style={styles.faqModalHeader}>
+              <Text
+                style={[
+                  styles.sectionTitle,
+                  { flex: 1, color: isLightTheme ? colors.text : colors.text },
+                ]}
+              >
+                {t("abouts.faq_title")}
+              </Text>
+              <Pressable
+                onPress={() => setShowFaqModal(false)}
+                accessibilityRole="button"
+                accessibilityLabel={t("close", "Fermer")}
+              >
+                <MCIcon
+                  name="close"
+                  size={24}
+                  color={isLightTheme ? "#333333" : "#F8FAFC"}
+                />
+              </Pressable>
+            </View>
+            <ScrollView
+              showsVerticalScrollIndicator={false}
+              contentContainerStyle={styles.faqModalScrollContent}
+            >
+              <FaqAccordionList />
+            </ScrollView>
+          </View>
+        </View>
+      </Modal>
 
       {props.hasPendingChanges && (
         <View style={styles.applyChangesContainer}>
@@ -1275,50 +1320,61 @@ export default function SettingsScreenOptimized() {
   const { downloadState, isNativeAvailable, forceRefreshAdhans } =
     useNativeDownload(undefined, onDownloadSoundsUpdated, premiumContent);
 
-  // Réinitialiser apparence + liste adhans quand le premium n'est plus actif
+  // Réinitialiser apparence + liste adhans uniquement au passage premium → gratuit
+  const hadPremiumAccessRef = React.useRef<boolean | null>(null);
+  const premiumHydratedRef = React.useRef(false);
+  const resetAdhanSoundsRef = useRef(resetAdhanSoundsForFreeUser);
+  resetAdhanSoundsRef.current = resetAdhanSoundsForFreeUser;
+  const hydrateAvailableSoundsRef = useRef(hydrateAvailableSounds);
+  hydrateAvailableSoundsRef.current = hydrateAvailableSounds;
+
   useEffect(() => {
     const hasPremiumAccess = !!(user?.isPremium || user?.isVip);
+    const hadPremiumAccess = hadPremiumAccessRef.current;
+    hadPremiumAccessRef.current = hasPremiumAccess;
 
     if (hasPremiumAccess) {
-      void hydrateAvailableSounds(true);
+      if (!premiumHydratedRef.current) {
+        premiumHydratedRef.current = true;
+        void hydrateAvailableSoundsRef.current(true);
+      }
+      return;
+    }
+
+    premiumHydratedRef.current = false;
+
+    // Déjà gratuit : ne pas relancer reset/reprog à chaque ouverture de Settings
+    if (hadPremiumAccess !== true) {
       return;
     }
 
     soundsHydrateRef.current = { inFlight: false, done: false };
     resetPremiumContentRef.current();
-    resetAdhanSoundsForFreeUser();
+    resetAdhanSoundsRef.current();
     void updateAvailableSoundsRef.current();
     void runPremiumAppearanceReset({ force: true });
 
     const currentSettings = settingsRef.current;
-    if (!currentSettings) {
-      return;
+    if (currentSettings) {
+      const nextTheme = resolveFreeThemeMode(currentSettings.themeMode);
+      const nextBackground = resolveFreeBackgroundImageType(
+        currentSettings.backgroundImageType,
+      );
+
+      if (nextTheme !== currentSettings.themeMode) {
+        void currentSettings.setThemeMode(nextTheme);
+      }
+      if (nextBackground !== currentSettings.backgroundImageType) {
+        void currentSettings.setBackgroundImageType(nextBackground);
+      }
+
+      if (isPremiumAdhanSound(currentSettings.adhanSound)) {
+        currentSettings.setAdhanSound(DEFAULT_ADHAN_SOUND);
+      }
     }
 
-    const nextTheme = resolveFreeThemeMode(currentSettings.themeMode);
-    const nextBackground = resolveFreeBackgroundImageType(
-      currentSettings.backgroundImageType,
-    );
-
-    if (nextTheme !== currentSettings.themeMode) {
-      void currentSettings.setThemeMode(nextTheme);
-    }
-    if (nextBackground !== currentSettings.backgroundImageType) {
-      void currentSettings.setBackgroundImageType(nextBackground);
-    }
-
-    if (!isPremiumAdhanSound(currentSettings.adhanSound)) {
-      return;
-    }
-
-    currentSettings.setAdhanSound(DEFAULT_ADHAN_SOUND);
-  }, [
-    hasPremiumAccess,
-    hydrateAvailableSounds,
-    resetAdhanSoundsForFreeUser,
-    user?.isPremium,
-    user?.isVip,
-  ]);
+    void runNotificationReprogram();
+  }, [user?.isPremium, user?.isVip]);
 
   const previewAdhanIdRef = React.useRef<string | null>(null);
   React.useEffect(() => {
