@@ -51,9 +51,7 @@ export type CalcMethodKey =
   | "NorthAmerica"
   | "Kuwait"
   | "Qatar"
-  | "Singapore"
-  | "Tehran"
-  | "Turkey";
+  | "Singapore";
 
 export type LocationMode = "auto" | "manual" | null;
 

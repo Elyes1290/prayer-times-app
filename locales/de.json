@@ -725,6 +725,8 @@
   "tasbih": {
     "title": "Tasbih",
     "reset": "Zurücksetzen",
+    "vibration_on": "Vibration: an",
+    "vibration_off": "Vibration: aus",
     "dhikr": {
       "subhanallah": "Gepriesen sei Allah",
       "alhamdulillah": "Gelobt sei Allah",

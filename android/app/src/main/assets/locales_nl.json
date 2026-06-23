@@ -725,6 +725,8 @@
   "tasbih": {
     "title": "Tasbih",
     "reset": "Resetten",
+    "vibration_on": "Trillen: aan",
+    "vibration_off": "Trillen: uit",
     "dhikr": {
       "subhanallah": "Glorie aan Allah",
       "alhamdulillah": "Alle lof zij aan Allah",

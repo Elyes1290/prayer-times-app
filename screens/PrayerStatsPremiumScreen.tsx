@@ -21,6 +21,7 @@ import {
 } from "../hooks/useThemeColor";
 import { useUserStats } from "../hooks/useUserStats";
 import { useTodayPrayers } from "../hooks/useTodayPrayers";
+import { usePremium } from "../contexts/PremiumContext";
 import {
   enrichHistoryWithPrayerStates,
   computeStreakMetricsFromHistory,
@@ -130,6 +131,7 @@ function TabButton({
 
 const PrayerStatsPremiumScreen: React.FC = () => {
   const { push } = useRouter();
+  const { user } = usePremium();
   const { t, i18n } = useTranslation();
   const colors = useThemeColors();
   const overlayTextColor = useOverlayTextColor();
@@ -260,7 +262,9 @@ const PrayerStatsPremiumScreen: React.FC = () => {
     );
   }
 
-  if (premiumRequired) {
+  // 🔒 SÉCURITÉ : écran 100 % premium. Un compte gratuit (non premium / non VIP)
+  // voit l'écran d'incitation à l'abonnement, jamais les statistiques.
+  if (premiumRequired || !user?.isPremium) {
         return (
       <ThemedImageBackground style={styles.container}>
         <StatusBar

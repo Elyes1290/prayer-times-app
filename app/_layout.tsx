@@ -621,7 +621,54 @@ function TabLayoutContent() {
                   });
                 }
               } else {
-                console.log("✅ Token valide au démarrage");
+                // 🔒 SÉCURITÉ : le token est valide, mais vérifier que le compte
+                // existe toujours en base. S'il a été supprimé (users.php → 404),
+                // déconnecter immédiatement dès l'ouverture de l'app.
+                try {
+                  const accountResult = await apiClient.getUser();
+                  if (!accountResult?.success || !accountResult?.data) {
+                    throw new Error("ACCOUNT_DELETED");
+                  }
+                  console.log("✅ Token valide et compte existant au démarrage");
+                } catch (accountErr: any) {
+                  const accMsg = String(accountErr?.message || "");
+                  const accountGone =
+                    accMsg.includes("HTTP 404") ||
+                    accMsg.includes("HTTP 401") ||
+                    accMsg.includes("HTTP 403") ||
+                    accMsg.includes("ACCOUNT_DELETED");
+
+                  if (accountGone && !(await isStoredUserVip())) {
+                    console.log(
+                      "❌ Compte supprimé/invalide détecté — déconnexion au démarrage"
+                    );
+                    await AsyncStorage.multiRemove([
+                      "auth_token",
+                      "refresh_token",
+                      "user_data",
+                      "explicit_connection",
+                      "@prayer_app_premium_user",
+                      "user_stats_cache",
+                    ]);
+                    await forceLogout();
+                    await forceReset();
+                    setForceRefresh((prev) => prev + 1);
+                    showGlobalToast({
+                      type: "error",
+                      title:
+                        i18n.t("toast_connection_interrupted") ||
+                        "Connexion interrompue",
+                      message:
+                        i18n.t("toast_session_expired") ||
+                        "Votre compte n'existe plus. Vous avez été déconnecté.",
+                    });
+                  } else if (!accountGone) {
+                    // Erreur transitoire (réseau / 5xx) → conserver la session
+                    console.log(
+                      "⚠️ Vérification compte au démarrage: erreur transitoire, session conservée"
+                    );
+                  }
+                }
               }
             }
           } else if (token && explicitConnection !== "true") {

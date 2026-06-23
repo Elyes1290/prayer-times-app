@@ -725,6 +725,8 @@
   "tasbih": {
     "title": "تسبیح",
     "reset": "ری سیٹ",
+    "vibration_on": "وائبریشن: آن",
+    "vibration_off": "وائبریشن: آف",
     "dhikr": {
       "subhanallah": "اللہ کی پاکی ہے",
       "alhamdulillah": "اللہ کی تعریف ہے",

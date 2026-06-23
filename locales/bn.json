@@ -725,6 +725,8 @@
   "tasbih": {
     "title": "তাসবীহ",
     "reset": "রিসেট করুন",
+    "vibration_on": "কম্পন: চালু",
+    "vibration_off": "কম্পন: বন্ধ",
     "dhikr": {
       "subhanallah": "সুবহানাল্লাহ",
       "alhamdulillah": "আলহামদুলিল্লাহ",

@@ -205,7 +205,9 @@
       "allahouakbar": "Allah Maha Besar",
       "la_ilaha_illallah": "Tiada Tuhan selain Allah"
     },
-    "reset": "Reset"
+    "reset": "Reset",
+    "vibration_on": "Getaran: aktif",
+    "vibration_off": "Getaran: nonaktif"
   },
   "adhan_notification_title": "🕌 Adzan",
   "adhan_notification_body": "Waktunya sholat {{prayer}}! Semoga Allah menerima sholat Anda.",

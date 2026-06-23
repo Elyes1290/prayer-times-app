@@ -105,8 +105,6 @@ const SETTINGS_CALC_METHODS = [
   "Qatar",
   "Kuwait",
   "Singapore",
-  "Turkey",
-  "Tehran",
   "NorthAmerica",
 ] as CalcMethodKey[];
 

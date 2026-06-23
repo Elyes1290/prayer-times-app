@@ -16,14 +16,18 @@ $input = json_decode(file_get_contents('php://input'), true);
 // Log pour debug sur le serveur
 error_log("🍎 [IAP Sync] Données reçues: " . json_encode($input));
 
-if (!$input || empty($input['email']) || empty($input['password']) || empty($input['subscriptionType'])) {
+// ℹ️ Le mot de passe n'est requis que pour CRÉER un nouveau compte. Pour un
+// renouvellement/souscription d'un compte déjà existant (utilisateur connecté),
+// on ne dispose pas du mot de passe en clair : il est donc optionnel ici et
+// vérifié plus bas uniquement dans la branche de création.
+if (!$input || empty($input['email']) || empty($input['subscriptionType'])) {
     http_response_code(400);
     echo json_encode(['success' => false, 'error' => 'Données manquantes']);
     exit;
 }
 
 $email = $input['email'];
-$password = $input['password'];
+$password = $input['password'] ?? '';
 $subscriptionType = $input['subscriptionType'];
 $name = $input['name'] ?? 'Utilisateur Apple';
 $language = $input['language'] ?? 'fr';
@@ -88,7 +92,12 @@ try {
         $stmt->execute([$subscriptionType, $transactionId, $expiryDate, $premiumFeatures, $userId]);
         error_log("🍎 [IAP Sync] Utilisateur mis à jour: ID $userId");
     } else {
-        // Créer un nouvel utilisateur
+        // Créer un nouvel utilisateur — le mot de passe est obligatoire ici
+        if ($password === '') {
+            http_response_code(400);
+            echo json_encode(['success' => false, 'error' => 'Mot de passe requis pour créer un compte']);
+            exit;
+        }
         $password_hash = password_hash($password, PASSWORD_DEFAULT);
         
         $stmt = $pdo->prepare("

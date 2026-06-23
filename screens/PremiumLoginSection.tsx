@@ -719,6 +719,51 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
     }
   }, [onLoginSuccess, showToast, forceLogout]);
 
+  // 🆕 Souscription / renouvellement pour un compte déjà connecté mais gratuit
+  // (jamais abonné ou abonnement expiré non renouvelé). On réutilise l'écran de
+  // paiement existant : on prépare les données du compte courant (sans mot de
+  // passe car le compte existe déjà) puis on ouvre /premium-payment.
+  const handleSubscribeOrRenew = useCallback(async () => {
+    try {
+      if (!userData?.email) {
+        showToast({
+          type: "error",
+          title: "Erreur",
+          message: "Email du compte introuvable. Reconnectez-vous.",
+        });
+        return;
+      }
+
+      await AsyncStorage.setItem(
+        "pending_registration",
+        JSON.stringify({
+          email: userData.email,
+          user_first_name: userData.user_first_name || "Utilisateur",
+          language: userData.language || "fr",
+          // 🔑 Marqueur : compte déjà existant/connecté → pas de création de
+          // compte ni de login par identifiants après paiement, juste un
+          // rafraîchissement du statut premium depuis le serveur.
+          isExistingAccount: true,
+        }),
+      );
+
+      router.push("/premium-payment");
+
+      if (onCloseModal) {
+        setTimeout(() => {
+          onCloseModal();
+        }, 300);
+      }
+    } catch (error) {
+      console.error("❌ Erreur ouverture page d'abonnement:", error);
+      showToast({
+        type: "error",
+        title: "Erreur",
+        message: "Impossible d'ouvrir la page d'abonnement",
+      });
+    }
+  }, [userData, router, onCloseModal, showToast]);
+
   // 🚀 SUPPRIMÉ : Fonction handleTestMode supprimée car elle embrouille la logique
 
   // 🚀 NOUVEAU : Interface connecté
@@ -729,6 +774,20 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
     userData ? "présent" : "null",
   );
   if (isConnected && userData) {
+    // 🔒 Statut réel : ne pas afficher "Premium" pour un compte gratuit.
+    // On se base sur l'état premium global (autoritaire) avec repli sur les
+    // données locales du compte.
+    const isPremiumAccount =
+      premiumUser?.isPremium === true ||
+      Number(userData?.premium_status) === 1 ||
+      userData?.premium_status === true;
+    // A déjà eu un abonnement par le passé → libellé "Renouveler", sinon "Devenir Premium".
+    const hasHadSubscription = !!(
+      userData?.premium_expiry ||
+      userData?.subscription_type ||
+      userData?.subscription_id ||
+      premiumUser?.hasPurchasedPremium
+    );
     return (
       <View style={[localStyles.container, { minHeight: 300 }]}>
         <View style={localStyles.connectedHeader}>
@@ -744,13 +803,39 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
           <Text style={[localStyles.userName, { color: textPrimaryColor }]}>
             {userData.user_first_name || "Utilisateur"}
           </Text>
-          <Text style={[localStyles.userEmail, { color: textSecondaryColor }]}>
+          <Text style={[localStyles.userEmail, { color: textPrimaryColor }]}>
             {userData.email || "Aucun email"}
           </Text>
           <Text style={[localStyles.userStatus, { color: textSecondaryColor }]}>
-            Statut: Premium
+            Statut :{" "}
+            <Text
+              style={{
+                fontWeight: "700",
+                color: isPremiumAccount
+                  ? "#D4A017"
+                  : isDarkTheme
+                    ? "#94A3B8"
+                    : "#475569",
+              }}
+            >
+              {isPremiumAccount ? "Premium" : "Gratuit"}
+            </Text>
           </Text>
         </View>
+
+        {!isPremiumAccount && (
+          <Pressable
+            style={localStyles.subscribeButton}
+            onPress={handleSubscribeOrRenew}
+          >
+            <MCIcon name="crown" size={20} color="#1A1A1A" />
+            <Text style={localStyles.subscribeButtonText}>
+              {hasHadSubscription
+                ? "Renouveler mon abonnement"
+                : "Devenir Premium"}
+            </Text>
+          </Pressable>
+        )}
 
         <Pressable
           style={[localStyles.logoutButton, styles?.logoutButton]}
@@ -1565,6 +1650,24 @@ const localStyles = StyleSheet.create({
   userStatus: {
     fontSize: 14,
     color: "#666666", // Gris foncé pour une meilleure visibilité sur fond clair
+  },
+  subscribeButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#D4A017",
+    paddingVertical: 14,
+    paddingHorizontal: 24,
+    borderRadius: 8,
+    marginBottom: 8,
+    alignSelf: "stretch",
+    width: "100%",
+  },
+  subscribeButtonText: {
+    color: "#1A1A1A",
+    fontSize: 16,
+    fontWeight: "bold",
+    marginLeft: 8,
   },
   logoutButton: {
     flexDirection: "row",

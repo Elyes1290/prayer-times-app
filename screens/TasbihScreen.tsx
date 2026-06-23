@@ -8,6 +8,7 @@ import {
   Vibration,
 } from "react-native";
 import { useTheme } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { LinearGradient } from "@/components/ui/LinearGradientView";
 import { MCIcon } from "@/components/icons/AppVectorIcons";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -131,6 +132,21 @@ const getStyles = (
       fontWeight: "600",
       color: "#FFFFFF",
     },
+    vibrationToggle: {
+      flexDirection: "row",
+      alignItems: "center",
+      paddingHorizontal: 20,
+      paddingVertical: 10,
+      borderRadius: 20,
+      backgroundColor: isLightTheme ? "rgba(0,0,0,0.18)" : "rgba(0,0,0,0.35)",
+      marginBottom: 12,
+    },
+    vibrationToggleText: {
+      marginLeft: 8,
+      fontSize: 14,
+      fontWeight: "600",
+      color: "#FFFFFF",
+    },
   });
 };
 
@@ -159,6 +175,28 @@ const TasbihScreen = () => {
     ],
   }));
   const [currentDhikr, setCurrentDhikr] = useState(0);
+  const [vibrationEnabled, setVibrationEnabled] = useState(true);
+
+  // Charger la préférence de vibration (persistée)
+  useEffect(() => {
+    AsyncStorage.getItem("tasbih_vibration_enabled")
+      .then((val) => {
+        if (val !== null) setVibrationEnabled(val === "true");
+      })
+      .catch(() => {});
+  }, []);
+
+  const toggleVibration = () => {
+    setVibrationEnabled((prev) => {
+      const next = !prev;
+      AsyncStorage.setItem("tasbih_vibration_enabled", String(next)).catch(
+        () => {}
+      );
+      // Petit retour haptique uniquement à la réactivation, pour confirmer
+      if (next) Vibration.vibrate(50);
+      return next;
+    });
+  };
 
   const dhikrTranslations = [
     t("tasbih.dhikr.subhanallah"),
@@ -168,8 +206,10 @@ const TasbihScreen = () => {
   ];
 
   const handleCount = () => {
-    // Vibration feedback
-    Vibration.vibrate(50);
+    // Vibration feedback (désactivable par l'utilisateur)
+    if (vibrationEnabled) {
+      Vibration.vibrate(50);
+    }
 
     scale.value = withSequence(
       withTiming(0.9, { duration: 100 }),
@@ -229,6 +269,19 @@ const TasbihScreen = () => {
               </Text>
             </Pressable>
           </Animated.View>
+
+          <Pressable style={styles.vibrationToggle} onPress={toggleVibration}>
+            <MCIcon
+              name={vibrationEnabled ? "vibrate" : "vibrate-off"}
+              size={20}
+              color="#FFFFFF"
+            />
+            <Text style={styles.vibrationToggleText}>
+              {vibrationEnabled
+                ? t("tasbih.vibration_on", "Vibration: on")
+                : t("tasbih.vibration_off", "Vibration: off")}
+            </Text>
+          </Pressable>
 
           <Pressable style={styles.resetButton} onPress={resetCount}>
             <MCIcon name="refresh" size={24} color="#FFFFFF" />

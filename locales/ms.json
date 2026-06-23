@@ -18,7 +18,9 @@
       "allahouakbar": "Allah Maha Besar",
       "la_ilaha_illallah": "Tiada Tuhan melainkan Allah"
     },
-    "reset": "Tetapkan semula"
+    "reset": "Tetapkan semula",
+    "vibration_on": "Getaran: aktif",
+    "vibration_off": "Getaran: dimatikan"
   },
   "adhan_notification_title": "🕌 Azan",
   "adhan_notification_body": "Masa untuk solat {{prayer}}! Semoga Allah terima solat anda.",

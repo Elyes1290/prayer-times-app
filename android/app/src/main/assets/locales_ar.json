@@ -725,6 +725,8 @@
   "tasbih": {
     "title": "المسبحة",
     "reset": "إعادة تعيين",
+    "vibration_on": "الاهتزاز: مفعّل",
+    "vibration_off": "الاهتزاز: متوقف",
     "dhikr": {
       "subhanallah": "سبحان الله",
       "alhamdulillah": "الحمد لله",

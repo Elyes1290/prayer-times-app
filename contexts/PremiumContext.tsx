@@ -6,7 +6,7 @@ import React, {
   ReactNode,
 } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Platform } from "react-native";
+import { AppState, Platform, type AppStateStatus } from "react-native";
 import { safeJsonParse } from "../utils/safeJson";
 import { useNetworkStatus } from "../hooks/useNetworkStatus";
 // 🚀 NOUVEAU : Import apiClient pour vérifier la connexion Infomaniak
@@ -20,11 +20,13 @@ import PremiumContentManager from "../utils/premiumContent";
 import { IapService } from "../utils/iapService";
 import {
   buildUserDataFromServer,
+  enrichUserDataWithIosSubscription,
   getDaysPastExpiry,
   isNetworkReadyForApi,
   isPremiumActiveOnServer,
   normalizeStoredUserData,
   PREMIUM_GRACE_PERIOD_DAYS,
+  reconcilePremiumUserStorage,
   refreshUserDataFromServer,
   trySyncPremiumFromServer,
 } from "../utils/userDataSync";
@@ -236,6 +238,20 @@ function createPremiumUserFromServer(
   };
 }
 
+/**
+ * Persiste les données utilisateur fraîches du serveur (user_data + réconciliation
+ * du blob premium local). Mutualise la logique de refreshUserDataFromServer à partir
+ * d'un payload serveur déjà récupéré (évite un second appel réseau).
+ */
+async function persistServerUserData(
+  serverUser: Record<string, unknown>,
+): Promise<void> {
+  let userData = normalizeStoredUserData(buildUserDataFromServer(serverUser));
+  userData = await enrichUserDataWithIosSubscription(userData);
+  await AsyncStorage.setItem("user_data", JSON.stringify(userData));
+  await reconcilePremiumUserStorage(serverUser);
+}
+
 // Provider
 interface PremiumProviderProps {
   children: ReactNode;
@@ -257,6 +273,10 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
   const checkLocalPremiumExpirationRef = React.useRef<
     () => Promise<boolean>
   >(() => Promise.resolve(false));
+  const loadPremiumDataRef = React.useRef<
+    (options?: { force?: boolean }) => Promise<void>
+  >(() => Promise.resolve());
+  const appStateRef = React.useRef<AppStateStatus>(AppState.currentState);
   const LOAD_PREMIUM_MIN_INTERVAL_MS = 1500;
 
   // 🕐 NOUVEAU : Vérifier l'expiration des abonnements localement
@@ -540,9 +560,68 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
     }
   }, []);
 
+  // 🔒 SÉCURITÉ : déconnexion COMPLÈTE quand le compte n'existe plus côté serveur
+  // (supprimé de la BDD) ou que la session est définitivement invalide. On efface
+  // toute la session locale (user_data, tokens, explicit_connection…) pour que l'UI
+  // — qui se base sur ces clés — bascule en « déconnecté » sans action manuelle.
+  const handleAccountInvalidated = React.useCallback(async () => {
+    try {
+      console.log(
+        "🔒 [SECURITY] Compte invalide/supprimé — déconnexion automatique complète",
+      );
+      await setAccountLogoutLock();
+      clearAndroidAuthTokenSyncCache();
+      if (Platform.OS === "ios") {
+        try {
+          await IapService.getInstance().logout();
+        } catch (iapErr) {
+          console.warn("⚠️ [PremiumContext] RevenueCat logout:", iapErr);
+        }
+      }
+      await clearLocalAuthSession();
+      setUser({ ...defaultUser });
+      await deactivatePremium();
+      showToast?.({
+        type: "error",
+        title: t("premium.session_expired", "Session expirée"),
+        message: t(
+          "premium.account_invalid",
+          "Votre compte n'existe plus. Vous avez été déconnecté.",
+        ),
+      });
+    } catch (error) {
+      console.log("⚠️ [SECURITY] handleAccountInvalidated:", error);
+    }
+  }, [deactivatePremium, showToast, t]);
+
   // Chargement initial une seule fois (évite boucle si checkLocalPremiumExpiration change)
   useEffect(() => {
     void loadPremiumData();
+  }, []);
+
+  // 🔒 SÉCURITÉ : revérifier le premium auprès du serveur à chaque retour au premier
+  // plan (Android + iOS). Permet une révocation quasi instantanée quand l'abonnement
+  // a expiré / été annulé ou que le compte a été supprimé pendant que l'app était en
+  // arrière-plan, sans attendre un redémarrage complet de l'app.
+  useEffect(() => {
+    const subscription = AppState.addEventListener(
+      "change",
+      (nextState: AppStateStatus) => {
+        const previousState = appStateRef.current;
+        appStateRef.current = nextState;
+
+        const cameToForeground =
+          previousState.match(/inactive|background/) && nextState === "active";
+
+        if (cameToForeground) {
+          void loadPremiumDataRef.current({ force: true });
+        }
+      },
+    );
+
+    return () => {
+      subscription.remove();
+    };
   }, []);
 
   // 🕐 Vérifier l'expiration toutes les heures quand l'app est active
@@ -629,16 +708,43 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
             }
           }
 
-          // Token invalide: désactiver premium et nettoyer les tokens
-          await AsyncStorage.multiRemove(["auth_token", "refresh_token"]);
-          await deactivatePremium();
-          showToast?.({
-            type: "error",
-            title: t("premium.session_expired", "Session expirée"),
-            message: "Veuillez vous reconnecter pour continuer",
-          });
+          // Session définitivement invalide → déconnexion complète
+          await handleAccountInvalidated();
+          return;
         }
-      } catch (error) {
+
+        // 🔒 SÉCURITÉ : le token est valide, mais vérifier que le compte existe
+        // toujours en base. S'il a été supprimé, users.php renvoie 404 → on
+        // déconnecte automatiquement l'utilisateur de l'app.
+        try {
+          const userResult = await apiClient.getUser();
+          if (!userResult?.success || !userResult?.data) {
+            await handleAccountInvalidated();
+            return;
+          }
+        } catch (userErr: any) {
+          const userMsg = String(userErr?.message || "");
+          if (
+            userMsg.includes("HTTP 404") ||
+            userMsg.includes("HTTP 401") ||
+            userMsg.includes("HTTP 403")
+          ) {
+            await handleAccountInvalidated();
+            return;
+          }
+          // Autre erreur (réseau / 5xx) → tolérance hors-ligne, ne rien faire
+        }
+      } catch (error: any) {
+        const errMsg = String(error?.message || "");
+        if (
+          errMsg.includes("HTTP 404") ||
+          errMsg.includes("HTTP 401") ||
+          errMsg.includes("HTTP 403")
+        ) {
+          // verifyAuth a levé une 401/403/404 (token rejeté / compte supprimé)
+          await handleAccountInvalidated();
+          return;
+        }
         // 🚀 CORRECTION : Logger l'erreur pour debug mais ne pas spammer
         console.log("⚠️ [DEBUG] Erreur vérification token périodique:", error);
       }
@@ -653,6 +759,7 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
   }, [
     showToast,
     deactivatePremium,
+    handleAccountInvalidated,
     networkStatus.isConnected,
     networkStatus.isInternetReachable,
   ]);
@@ -771,7 +878,16 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
         }
       }
 
-      // 🚀 PRIORITÉ : synchroniser le serveur AVANT toute vérification d'expiration locale
+      // 🔒 SÉCURITÉ : le serveur a confirmé (plus bas, après RevenueCat sur iOS) que
+      // l'abonnement n'est plus actif. Permet de révoquer le premium au lieu de faire
+      // confiance au cache local.
+      let serverSaysInactive = false;
+
+      // 🔐 SÉCURITÉ : le serveur fait autorité quand l'app est en ligne et connectée.
+      // On n'ACTIVE plus seulement le premium depuis le serveur, on le RÉVOQUE aussi
+      // quand le serveur indique que l'abonnement n'est plus actif (expiré/annulé) ou
+      // que le compte n'existe plus (supprimé). Sinon le cache local laissait l'accès
+      // premium ouvert indéfiniment (« fail-open »).
       try {
         const token = await AsyncStorage.getItem("auth_token");
         if (
@@ -779,34 +895,116 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
           (await hasExplicitAuthSession()) &&
           isNetworkReadyForApi(networkStatusRef.current)
         ) {
-          console.log(
-            "🔄 [SYNC] Chargement premium — source serveur en premier",
-          );
+          console.log("🔄 [SYNC] Chargement premium — le serveur fait autorité");
 
-          const refreshed = await refreshUserDataFromServer();
-          if (
-            refreshed &&
-            isPremiumActiveOnServer(
-              refreshed as unknown as Record<string, unknown>,
-            )
-          ) {
-            const premiumUser = createPremiumUserFromServer(
-              refreshed as unknown as Record<string, unknown>,
-            );
-            await AsyncStorage.setItem(
-              STORAGE_KEYS.PREMIUM_USER,
-              JSON.stringify(premiumUser),
-            );
-            setUser(premiumUser);
-            console.log(
-              "✅ [SYNC] Premium restauré depuis le serveur avant vérif locale",
-            );
-            syncAndroidAuthTokenIfNeeded(token);
-            return;
+          let storedEmail: string | null = null;
+          try {
+            const rawStored = await AsyncStorage.getItem("user_data");
+            const parsedStored = rawStored ? JSON.parse(rawStored) : null;
+            storedEmail =
+              typeof parsedStored?.email === "string"
+                ? parsedStored.email
+                : null;
+          } catch {
+            storedEmail = null;
+          }
+
+          let serverUser: Record<string, unknown> | null = null;
+          let reachable = false;
+          let accountInvalid = false;
+
+          try {
+            const result = await apiClient.getUser();
+            reachable = true;
+            if (result?.success && result?.data) {
+              serverUser = result.data as Record<string, unknown>;
+            } else {
+              // Réponse du serveur sans données = compte introuvable/supprimé
+              accountInvalid = true;
+            }
+
+            // 🔒 SÉCURITÉ : le serveur a répondu avec succès, mais il faut vérifier
+            // que c'est bien LE compte de la session locale. Si l'email renvoyé ne
+            // correspond pas à l'email stocké, l'user_id local est périmé / pointe
+            // vers un autre compte (le compte d'origine a été supprimé) → session
+            // invalide.
+            const returnedEmail =
+              typeof (serverUser as any)?.email === "string"
+                ? ((serverUser as any).email as string)
+                : null;
+            if (
+              serverUser &&
+              storedEmail &&
+              returnedEmail &&
+              storedEmail.trim().toLowerCase() !==
+                returnedEmail.trim().toLowerCase()
+            ) {
+              console.log(
+                "🔒 [SECURITY] Email serveur ≠ email local — session invalide",
+              );
+              serverUser = null;
+              accountInvalid = true;
+            }
+          } catch (apiError: any) {
+            const message = String(apiError?.message || "");
+            if (
+              message.includes("HTTP 401") ||
+              message.includes("HTTP 403") ||
+              message.includes("HTTP 404")
+            ) {
+              // Token rejeté / compte supprimé → session définitivement invalide
+              reachable = true;
+              accountInvalid = true;
+            } else {
+              // Réseau / timeout / 5xx → on reste tolérant (mode hors-ligne)
+              reachable = false;
+            }
+          }
+
+          if (reachable) {
+            if (accountInvalid) {
+              await handleAccountInvalidated();
+              return;
+            }
+
+            if (serverUser) {
+              if (isPremiumActiveOnServer(serverUser)) {
+                await persistServerUserData(serverUser);
+                const premiumUser = createPremiumUserFromServer(serverUser);
+                await AsyncStorage.setItem(
+                  STORAGE_KEYS.PREMIUM_USER,
+                  JSON.stringify(premiumUser),
+                );
+                setUser(premiumUser);
+                console.log("✅ [SYNC] Premium confirmé par le serveur");
+                syncAndroidAuthTokenIfNeeded(token);
+                return;
+              }
+
+              // Serveur joignable mais premium NON actif (et non VIP) → révocation.
+              if (!isVipUserRecord(serverUser)) {
+                await persistServerUserData(serverUser);
+                if (Platform.OS === "ios") {
+                  // iOS : laisser une dernière chance à RevenueCat (le webhook backend
+                  // peut être en retard sur un renouvellement). La révocation a lieu
+                  // plus bas si RevenueCat confirme aussi l'expiration.
+                  serverSaysInactive = true;
+                } else {
+                  console.log(
+                    "🔒 [SECURITY] Abonnement inactif côté serveur — révocation (Android)",
+                  );
+                  await deactivatePremium();
+                  return;
+                }
+              }
+            }
           }
         }
       } catch (syncError) {
-        console.log("⚠️ [SYNC] Erreur sync serveur prioritaire:", syncError);
+        console.log(
+          "⚠️ [SYNC] Erreur validation serveur prioritaire:",
+          syncError,
+        );
       }
 
       // 🍎 iOS : lier RevenueCat à l'email de session + sync expiration vers le backend
@@ -964,6 +1162,17 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
         }
       }
 
+      // 🔒 SÉCURITÉ : le serveur a indiqué que l'abonnement n'est plus actif et
+      // RevenueCat (iOS) ne l'a pas confirmé non plus. On révoque le premium plutôt
+      // que de retomber sur le cache local (qui resterait « premium »).
+      if (serverSaysInactive) {
+        console.log(
+          "🔒 [SECURITY] Abonnement inactif (serveur + RevenueCat) — révocation (iOS)",
+        );
+        await deactivatePremium();
+        return;
+      }
+
       const storedUser = await AsyncStorage.getItem(STORAGE_KEYS.PREMIUM_USER);
       if (storedUser) {
         // 🔧 CORRECTION : Utiliser safeJsonParse
@@ -1014,6 +1223,8 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
 
     return loadPremiumDataInFlight;
   };
+
+  loadPremiumDataRef.current = loadPremiumData;
 
   const checkPremiumStatus = async () => {
     await loadPremiumData({ force: true });

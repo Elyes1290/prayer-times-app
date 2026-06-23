@@ -51,6 +51,56 @@ export const syncUserAfterPayment = async (): Promise<PaymentSyncResult> => {
       registrationData.email
     );
 
+    // 🆕 Compte déjà existant/connecté (souscription ou renouvellement depuis le
+    // menu compte) : aucun login par identifiants (on n'a pas le mot de passe).
+    // On laisse le temps au webhook de mettre à jour le premium puis on
+    // rafraîchit les données utilisateur depuis le serveur.
+    if (registrationData.isExistingAccount) {
+      console.log(
+        "🔄 Souscription/renouvellement d'un compte existant — refresh serveur"
+      );
+
+      const explicitConnection = await AsyncStorage.getItem(
+        "explicit_connection"
+      );
+      if (explicitConnection !== "true") {
+        return {
+          success: false,
+          message: "Reconnexion requise",
+          requiresManualLogin: true,
+        };
+      }
+
+      // ⏱️ Laisser le webhook (Stripe / RevenueCat) mettre à jour le premium
+      await new Promise((resolve) => setTimeout(resolve, 3000));
+
+      try {
+        const userResult = await apiClient.getUser();
+        if (userResult?.success && userResult.data) {
+          const freshUser = (userResult.data as any).user || userResult.data;
+          await syncUserDataToLocal(freshUser, userResult.data);
+          return {
+            success: true,
+            message: "Abonnement mis à jour",
+            userData: freshUser,
+          };
+        }
+      } catch (refreshError) {
+        console.warn(
+          "⚠️ Refresh utilisateur après paiement (compte existant):",
+          refreshError
+        );
+      }
+
+      // Le paiement a réussi mais le serveur n'a pas encore propagé : on reste
+      // connecté, la vérification premium au premier plan confirmera le statut.
+      return {
+        success: true,
+        message: "Abonnement en cours de validation",
+        requiresManualLogin: false,
+      };
+    }
+
     // ⏱️ Attendre que le webhook Stripe soit traité
     console.log("⏱️ Attente webhook Stripe (3 secondes)...");
     await new Promise((resolve) => setTimeout(resolve, 3000));

@@ -725,6 +725,8 @@
   "tasbih": {
     "title": "Tesbih",
     "reset": "Sıfırla",
+    "vibration_on": "Titreşim: açık",
+    "vibration_off": "Titreşim: kapalı",
     "dhikr": {
       "subhanallah": "Allah'ı tesbih ederim",
       "alhamdulillah": "Allah'a hamd olsun",

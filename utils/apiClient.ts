@@ -92,6 +92,15 @@ class ApiClient {
         url += `?${params.toString()}`;
       }
 
+      // 🔒 ANTI-CACHE : sur Android, le client HTTP (OkHttp) peut renvoyer une
+      // réponse GET mise en cache (ex: /users.php?user_id=X répondait encore 200
+      // avec d'anciennes données alors que le compte était supprimé côté serveur).
+      // Un paramètre unique rend l'URL différente à chaque appel → aucune
+      // correspondance dans le cache → réponse toujours fraîche.
+      if (method === "GET") {
+        url += `${url.includes("?") ? "&" : "?"}_=${Date.now()}`;
+      }
+
       // Créer un AbortController pour gérer le timeout manuellement
       const controller = new AbortController();
       const timeoutId = setTimeout(() => {

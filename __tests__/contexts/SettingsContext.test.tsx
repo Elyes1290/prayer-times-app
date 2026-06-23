@@ -951,8 +951,6 @@ describe("SettingsContext - Tests Exhaustifs", () => {
         "Kuwait",
         "Qatar",
         "Singapore",
-        "Tehran",
-        "Turkey",
       ];
 
       const applyNext = async (index: number) => {

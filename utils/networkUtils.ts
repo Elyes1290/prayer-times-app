@@ -40,5 +40,10 @@ const checkNetworkStatus = async (): Promise<NetworkStatus> => {
  */
 export const isOfflineMode = async (): Promise<boolean> => {
   const status = await checkNetworkStatus();
-  return !status.isConnected || !status.isInternetReachable;
+  // ⚠️ Ne se baser que sur isConnected : NetInfo renvoie souvent
+  // isInternetReachable=false à tort sur Android, ce qui faisait croire à un
+  // mode hors-ligne permanent et bloquait les vérifications serveur au démarrage
+  // (premium / compte supprimé). Un vrai échec réseau est de toute façon géré
+  // côté appelant.
+  return !status.isConnected;
 };

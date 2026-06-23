@@ -54,7 +54,14 @@ export function isNetworkReadyForApi(status: {
   isConnected: boolean;
   isInternetReachable: boolean;
 }): boolean {
-  return status.isConnected && status.isInternetReachable !== false;
+  // ⚠️ NetInfo renvoie fréquemment isInternetReachable=false À TORT sur Android
+  // (la sonde de joignabilité échoue alors que la connexion fonctionne). Exiger
+  // isInternetReachable !== false bloquait alors toutes les vérifications serveur
+  // (premium / compte supprimé). On se base donc uniquement sur isConnected : si
+  // l'appareil est réellement hors-ligne, l'appel API échouera avec une erreur
+  // réseau que les appelants traitent déjà de façon tolérante (pas de révocation
+  // ni de déconnexion injustifiée).
+  return status.isConnected !== false;
 }
 
 export function isPremiumActiveOnServer(

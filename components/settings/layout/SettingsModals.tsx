@@ -102,6 +102,7 @@ export default function SettingsModals({
                 styles={styles}
                 showToast={showToast}
                 t={t}
+                currentTheme={currentTheme}
                 onLoginSuccess={handleLoginSuccess}
                 isInModal={true}
                 initialTab={initialTab}
