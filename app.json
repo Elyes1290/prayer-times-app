@@ -81,11 +81,9 @@
     },
     "developmentClient": true,
     "assetBundlePatterns": [
-      "assets/images/**/*",
+      "assets/images/background/**/*",
       "assets/sounds/*.mp3",
       "assets/fonts/**/*",
-      "assets/quran-offline-data/**/*",
-      "assets/hadith-offline-data/**/*",
       "assets/data/**/*",
       "assets/boussole/**/*"
     ],

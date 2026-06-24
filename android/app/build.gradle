@@ -96,7 +96,7 @@ android {
         applicationId 'com.drogbinho.prayertimesapp2'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 96
+        versionCode 97
         versionName "1.0.25"
     }
     signingConfigs {
@@ -178,13 +178,14 @@ android {
             '**/assets/sounds-ios/**',
             '**/assets/soundsComplete-ios/**',
             '**/assets/ios/**',
-            '**/assets/ios-native/**'
+            '**/assets/ios-native/**',
+            '**/assets/images/gif/**'
         ]
     }
 
     // 🍎 Exclure les dossiers iOS des ressources Android pour réduire la taille de l'APK
     aaptOptions {
-        ignoreAssetsPattern '!.svn:!.git:!.ds_store:!*.scc:!CVS:!thumbs.db:!picasa.ini:!*~:sounds-ios:soundsComplete-ios:ios:ios-native'
+        ignoreAssetsPattern '!.svn:!.git:!.ds_store:!*.scc:!CVS:!thumbs.db:!picasa.ini:!*~:sounds-ios:soundsComplete-ios:ios:ios-native:gif'
     }
 }
 

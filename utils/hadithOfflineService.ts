@@ -1,21 +1,5 @@
 import NetInfo from "@react-native-community/netinfo";
 
-// Import statique de tous les fichiers JSON
-import bukhariData from "../assets/hadith-offline-data/bukhari.json";
-import muslimData from "../assets/hadith-offline-data/muslim.json";
-import nasaiData from "../assets/hadith-offline-data/nasai.json";
-import abudawudData from "../assets/hadith-offline-data/abudawud.json";
-import tirmidhiData from "../assets/hadith-offline-data/tirmidhi.json";
-import ibnmajahData from "../assets/hadith-offline-data/ibnmajah.json";
-import malikData from "../assets/hadith-offline-data/malik.json";
-import ahmedData from "../assets/hadith-offline-data/ahmed.json";
-import darimiData from "../assets/hadith-offline-data/darimi.json";
-import riyadAssalihinData from "../assets/hadith-offline-data/other-books/riyad_assalihin.json";
-import mishkatAlmasabihData from "../assets/hadith-offline-data/other-books/mishkat_almasabih.json";
-import aladabAlmufradData from "../assets/hadith-offline-data/other-books/aladab_almufrad.json";
-import shamailMuhammadiyahData from "../assets/hadith-offline-data/other-books/shamail_muhammadiyah.json";
-import bulughAlmaramData from "../assets/hadith-offline-data/other-books/bulugh_almaram.json";
-
 // Types pour les données offline
 export interface OfflineBook {
   id: number;
@@ -51,6 +35,68 @@ export interface OfflineBook {
     };
   }[];
 }
+
+// Chargement paresseux par livre : évite d'inliner ~74 Mo de JSON dans le bundle
+// JS principal (réduction majeure de la taille Android). Chaque livre n'est
+// chargé qu'à l'ouverture ou lors d'une recherche qui le cible.
+const BOOK_LOADERS: Record<string, () => Promise<{ default: OfflineBook }>> = {
+  bukhari: () =>
+    import("../assets/hadith-offline-data/bukhari.json") as Promise<{
+      default: OfflineBook;
+    }>,
+  muslim: () =>
+    import("../assets/hadith-offline-data/muslim.json") as Promise<{
+      default: OfflineBook;
+    }>,
+  nasai: () =>
+    import("../assets/hadith-offline-data/nasai.json") as Promise<{
+      default: OfflineBook;
+    }>,
+  abudawud: () =>
+    import("../assets/hadith-offline-data/abudawud.json") as Promise<{
+      default: OfflineBook;
+    }>,
+  tirmidhi: () =>
+    import("../assets/hadith-offline-data/tirmidhi.json") as Promise<{
+      default: OfflineBook;
+    }>,
+  ibnmajah: () =>
+    import("../assets/hadith-offline-data/ibnmajah.json") as Promise<{
+      default: OfflineBook;
+    }>,
+  malik: () =>
+    import("../assets/hadith-offline-data/malik.json") as Promise<{
+      default: OfflineBook;
+    }>,
+  ahmed: () =>
+    import("../assets/hadith-offline-data/ahmed.json") as Promise<{
+      default: OfflineBook;
+    }>,
+  darimi: () =>
+    import("../assets/hadith-offline-data/darimi.json") as Promise<{
+      default: OfflineBook;
+    }>,
+  riyad_assalihin: () =>
+    import(
+      "../assets/hadith-offline-data/other-books/riyad_assalihin.json"
+    ) as Promise<{ default: OfflineBook }>,
+  mishkat_almasabih: () =>
+    import(
+      "../assets/hadith-offline-data/other-books/mishkat_almasabih.json"
+    ) as Promise<{ default: OfflineBook }>,
+  aladab_almufrad: () =>
+    import(
+      "../assets/hadith-offline-data/other-books/aladab_almufrad.json"
+    ) as Promise<{ default: OfflineBook }>,
+  shamail_muhammadiyah: () =>
+    import(
+      "../assets/hadith-offline-data/other-books/shamail_muhammadiyah.json"
+    ) as Promise<{ default: OfflineBook }>,
+  bulugh_almaram: () =>
+    import(
+      "../assets/hadith-offline-data/other-books/bulugh_almaram.json"
+    ) as Promise<{ default: OfflineBook }>,
+};
 
 // Configuration des livres
 const HADITH_BOOKS_CONFIG = {
@@ -109,24 +155,6 @@ const HADITH_BOOKS_CONFIG = {
   ],
 };
 
-// Mapping statique des données JSON
-const BOOK_DATA_MAP: Record<string, OfflineBook> = {
-  bukhari: bukhariData as OfflineBook,
-  muslim: muslimData as OfflineBook,
-  nasai: nasaiData as OfflineBook,
-  abudawud: abudawudData as OfflineBook,
-  tirmidhi: tirmidhiData as OfflineBook,
-  ibnmajah: ibnmajahData as OfflineBook,
-  malik: malikData as OfflineBook,
-  ahmed: ahmedData as OfflineBook,
-  darimi: darimiData as OfflineBook,
-  riyad_assalihin: riyadAssalihinData as OfflineBook,
-  mishkat_almasabih: mishkatAlmasabihData as OfflineBook,
-  aladab_almufrad: aladabAlmufradData as OfflineBook,
-  shamail_muhammadiyah: shamailMuhammadiyahData as OfflineBook,
-  bulugh_almaram: bulughAlmaramData as OfflineBook,
-};
-
 // Cache pour les livres chargés
 const bookCache = new Map<string, OfflineBook>();
 
@@ -149,28 +177,27 @@ export class HadithOfflineService {
   }
 
   /**
-   * Charge un livre depuis les données statiques
+   * Charge un livre à la demande (import dynamique + cache mémoire)
    */
   static async loadBook(bookSlug: string): Promise<OfflineBook | null> {
     try {
-      // Vérifier le cache
       if (bookCache.has(bookSlug)) {
         return bookCache.get(bookSlug)!;
       }
 
-      // Récupérer les données depuis le mapping statique
-      const bookData = BOOK_DATA_MAP[bookSlug];
-
-      if (!bookData) {
+      const loader = BOOK_LOADERS[bookSlug];
+      if (!loader) {
         console.error(`❌ Livre non trouvé: ${bookSlug}`);
         return null;
       }
 
-      // Mettre en cache
+      const module = await loader();
+      const bookData = module.default as OfflineBook;
+
       bookCache.set(bookSlug, bookData);
 
       console.log(
-        `✅ Livre chargé: ${bookData.metadata.english.title} (${bookData.hadiths.length} hadiths)`
+        `✅ Livre chargé: ${bookData.metadata.english.title} (${bookData.hadiths.length} hadiths)`,
       );
       return bookData;
     } catch (error) {
@@ -218,7 +245,7 @@ export class HadithOfflineService {
     bookSlug: string,
     chapterId: number,
     page: number = 1,
-    limit: number = 10
+    limit: number = 10,
   ): Promise<{
     hadiths: {
       id: number;
@@ -235,12 +262,10 @@ export class HadithOfflineService {
       const book = await this.loadBook(bookSlug);
       if (!book) return null;
 
-      // Filtrer les hadiths du chapitre
       const chapterHadiths = book.hadiths.filter(
-        (h) => h.chapterId === chapterId
+        (h) => h.chapterId === chapterId,
       );
 
-      // Pagination
       const startIndex = (page - 1) * limit;
       const endIndex = startIndex + limit;
       const paginatedHadiths = chapterHadiths.slice(startIndex, endIndex);
@@ -255,7 +280,7 @@ export class HadithOfflineService {
     } catch (error) {
       console.error(
         `❌ Erreur récupération hadiths ${bookSlug}/${chapterId}:`,
-        error
+        error,
       );
       return null;
     }
@@ -266,7 +291,7 @@ export class HadithOfflineService {
    */
   static async searchHadiths(
     query: string,
-    bookSlug?: string
+    bookSlug?: string,
   ): Promise<
     {
       hadith: any;
@@ -297,13 +322,12 @@ export class HadithOfflineService {
         booksToSearch.map(async (bookConfig) => ({
           bookConfig,
           book: await this.loadBook(bookConfig.slug),
-        }))
+        })),
       );
 
       for (const { bookConfig, book } of loaded) {
         if (!book) continue;
 
-        // Rechercher dans les hadiths
         const matchingHadiths = book.hadiths.filter((hadith) => {
           const searchText =
             `${hadith.arabic} ${hadith.english.text} ${hadith.english.narrator}`.toLowerCase();
@@ -314,7 +338,6 @@ export class HadithOfflineService {
           book.chapters.map((chapter) => [chapter.id, chapter]),
         );
 
-        // Ajouter les résultats avec les informations du chapitre
         for (const hadith of matchingHadiths) {
           const chapter = chapterById.get(hadith.chapterId);
           results.push({
