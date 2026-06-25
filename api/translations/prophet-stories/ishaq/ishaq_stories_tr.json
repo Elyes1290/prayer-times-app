@@ -1,0 +1,295 @@
+{
+  "ishaq_in_the_book": {
+    "title": "Ibrahim'e İshak bahşedildi",
+    "title_arabic": "وهب إسحاق لإبراهيم",
+    "introduction": "İshak (إسحاق عليه السلام), Allah'ın Kur'an'da onurlandırdığı bir peygamberdir. Peygamber İbrahim'in oğlu ve İsmail'in kardeşi olan İshak, Allah'ın Meryem Suresi'nde zikrettiği mübarek soyun bir parçasıdır. İbrahim kavmini ve Allah'tan başka ibadet ettiklerini terk ettiğinde, Allah ona İshak ve Yakub'u bahşetti: «Ve her birini peygamber kıldık.» (19:49) Kur'an böylece uydurma kıssalar eklemeden İshak'ın peygamberliğini doğrular.",
+    "conclusion": "İshak, vahyedilen Kitap'ta peygamber (nebi) olarak tanınır. İlahi seçimi, müminlerin babası İbrahim'in misyonuna, kardeşi İsmail'in yanında aittir.",
+    "moral_lesson": "Yanlış ibadeti terk etmek ve Allah'a sarılmak ilahi bereketlere giden yolu açar. İshak bize, salih neslin tawhid'de sebat edenlere bahşedilen bir lütuf olduğunu öğretir.",
+    "historical_location": null,
+    "historical_context": "Kur'an bu lütfu İbrahim'in putperestlikten ayrılmasından sonra anlatır; İshak'ın hayatına dair coğrafi ayrıntılar vermez.",
+    "chapters": [
+      {
+        "id": "ishaq_in_the_book_chapter_1",
+        "title": "İbrahim'in ayrılmasından sonra İshak'ın lutfu",
+        "content": "Allah buyurur: «Onlardan ve Allah'tan başka ibadet ettiklerinden ayrıldığında, ona İshak ve Yakub'u bahşettik.» (19:49) İbrahim kavmini Allah'ın birliği uğruna terk etmişti. Bu sadakatin mükafatı olarak Allah ona İshak'ı — kardeşi İsmail'in yanında mübarek bir oğul — ve torunu Yakub'u bahşetti. Kur'an bu lutfu ilahi bir ihsan olarak sunar; ek uydurmalar olmadan."
+      },
+      {
+        "id": "ishaq_in_the_book_chapter_2",
+        "title": "İbrahim'in oğulları arasında bir peygamber",
+        "content": "Allah devam eder: «Ve her birini peygamber (nebi) kıldık.» (19:49) İshak nebuvvet aldı: babası İbrahim ve kardeşi İsmail gibi Allah'ın mesajını iletti. Kur'an'da nebi olarak anılmak en yüce onurdur. Mümin, İshak'ı Allah'ın vahyettikleriyle tanır: İbrahim'in oğlu, sahih bir peygamber; dayanaksız rivayetlere başvurmadan."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Kur'an 19:49",
+        "reference_text": "Meryem Suresi, ayet 49",
+        "content": "فَلَمَّا ٱعْتَزَلَهُمْ وَمَا يَعْبُدُونَ مِن دُونِ ٱللَّهِ وَهَبْنَا لَهُۥٓ إِسْحَـٰقَ وَيَعْقُوبَ ۖ وَكُلًّا جَعَلْنَا نَبِيًّا",
+        "translation": "Onlardan ve Allah'tan başka ibadet ettiklerinden ayrıldığında, ona İshak ve Yakub'u bahşettik ve her birini peygamber kıldık.",
+        "relevance": "İshak'ın peygamberliğini İbrahim soyunda tesis eden ana ayet."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "İshak",
+        "arabic_term": "إسحاق",
+        "definition": "İbrahim'in oğlu, İsmail'in kardeşi, Kur'an'da zikredilen peygamber.",
+        "pronunciation": "ish-aq"
+      },
+      {
+        "id": 2,
+        "term": "Nebi",
+        "arabic_term": "نبي",
+        "definition": "Vahiy alan ve yalnızca Allah'a ibadete çağıran peygamber.",
+        "pronunciation": "na-bi"
+      },
+      {
+        "id": 3,
+        "term": "İbrahim",
+        "arabic_term": "إبراهيم",
+        "definition": "İshak ve İsmail'in babası, peygamber ve Allah'ın dostu (halil).",
+        "pronunciation": "ib-ra-him"
+      }
+    ]
+  },
+  "ishaq_glad_tidings": {
+    "title": "İshak'ın müjdesi",
+    "title_arabic": "بشارة إسحاق",
+    "introduction": "Allah Saffat Suresi'nde İbrahim'e sevinçli bir duyuru anlatır: «Ona salihlerden bir peygamber olarak İshak'ı müjdeledik.» (37:112) Bu bushra (müjde), İshak'ın nebi min as-salihin — salihlerden bir peygamber — olacağını doğrular. İbrahim'in oğlu ve İsmail'in kardeşi İshak, Kur'ani vahiyde onurlu bir yere sahiptir.",
+    "conclusion": "İshak'ın müjdesi, Allah'ın peygamberlerini salihler arasından seçtiğini gösterir. İbrahim bu duyuruyu İshak doğmadan önce aldı; bu, soyunun ilahi planına işarettir.",
+    "moral_lesson": "Allah'ın müjdeleri O'na sadık olanlara eşlik eder. İshak, takva ile peygamberliğin İbrahim evinde birlikte yürüdüğünü hatırlatır.",
+    "historical_location": null,
+    "historical_context": "Kur'an bu duyuruyu İbrahim'in imtihanları anlatısında zikreder; vahyedilen metnin ötesinde ayrıntı vermez.",
+    "chapters": [
+      {
+        "id": "ishaq_glad_tidings_chapter_1",
+        "title": "İbrahim için bir bushra",
+        "content": "Allah buyurur: «Ona salihlerden bir peygamber olarak İshak'ı müjdeledik (bushra).» (37:112) Bushra sevinç ve rahmet duyurusudur. Allah tarafından derecesi yükseltilen İbrahim, peygamber bir oğul vaadi aldı: İshak. Kur'an onun «min as-salihin» — salihlerden — olacağını belirtir; bu da doğruluğunu ve peygamberlik görevini garanti eder."
+      },
+      {
+        "id": "ishaq_glad_tidings_chapter_2",
+        "title": "İbrahim ve İshak üzerine bereket",
+        "content": "Allah devam eder: «Onu ve İshak'ı mübarek kıldık. Soylarından iyilik edenler de vardır, kendine apaçık zulmedenler de.» (37:113) Allah İbrahim ve İshak'a baraka (bereket) verdi. Kur'an ayrıca soylerinden muhsin (iyilik edenler) ile kendine zulmedenlerin bulunduğunu hatırlatır. İshak, önceki ayette geçen salihlerin örneği olarak kalır."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Kur'an 37:112",
+        "reference_text": "Saffat Suresi, ayet 112",
+        "content": "وَبَشَّرْنَـٰهُ بِإِسْحَـٰقَ نَبِيًّا مِّنَ ٱلصَّـٰلِحِينَ",
+        "translation": "Ona salihlerden bir peygamber olarak İshak'ı müjdeledik.",
+        "relevance": "İshak'ın peygamberliğini salihler arasında ilan eder."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Kur'an 37:113",
+        "reference_text": "Saffat Suresi, ayet 113",
+        "content": "وَبَـٰرَكْنَا عَلَيْهِ وَعَلَىٰٓ إِسْحَـٰقَ ۚ وَمِن ذُرِّيَّتِهِمَا مُحْسِنٌ وَظَالِمٌ لِّنَفْسِهِۦ مُبِينٌ",
+        "translation": "Onu ve İshak'ı mübarek kıldık. Soylarından iyilik edenler de vardır, kendine apaçık zulmedenler de.",
+        "relevance": "İbrahim ve İshak üzerindeki ilahi bereketi doğrular."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Bushra",
+        "arabic_term": "بشارة",
+        "definition": "Müjde, sevinçli haber. Allah İshak'ı İbrahim'e müjdeledi.",
+        "pronunciation": "bush-ra"
+      },
+      {
+        "id": 2,
+        "term": "Salihin",
+        "arabic_term": "صالحون",
+        "definition": "Salihler, takva sahipleri. İshak nebi min as-salihin olarak müjdelenir.",
+        "pronunciation": "sa-li-hin"
+      },
+      {
+        "id": 3,
+        "term": "Baraka",
+        "arabic_term": "بركة",
+        "definition": "İlahi bereket. Kur'an'a göre İbrahim ve İshak'a bahşedilmiştir.",
+        "pronunciation": "ba-ra-ka"
+      }
+    ]
+  },
+  "ishaq_blessing": {
+    "title": "Merhamet ve doğru övgü",
+    "title_arabic": "رحمة ولسان صدق لإسحاق",
+    "introduction": "İshak ve Yakub'un lutfu zikredildikten sonra Allah Meryem'de buyurur: «Onlara rahmetimizden verdik ve onlar için yüce bir doğruluk dili (lisana sidqin aliyyan) kıldık.» (19:50) Bu ayet İbrahim, İshak ve Yakub'u onurlandırır. İbrahim'in oğlu ve İsmail'in kardeşi İshak, Allah'ın rahmetle doldurduğu ve adı nesiller boyunca hakikatle süren kimselerdendir.",
+    "conclusion": "İshak, İbrahim ve Yakub ile ilahi rahmeti ve yükseltilmiş sidq (doğruluk) itibarını paylaşır. Kur'an, efsaneler eklemeden anısını onurlandırmaya yeter.",
+    "moral_lesson": "Allah'ın rahmeti ve doğruluk itibarı kalıcı nimetlerdir. İshak bizi söz ve fiillerimizde sidq'ı hedeflemeye davet eder.",
+    "historical_location": null,
+    "historical_context": "19:50 ayeti, İshak ve Yakub'un lutfundan (19:49) sonra gelir ve İbrahim ile peygamber soyuna topluca hitap eder.",
+    "chapters": [
+      {
+        "id": "ishaq_blessing_chapter_1",
+        "title": "Allah'ın onlar üzerindeki rahmeti",
+        "content": "Allah buyurur: «Ve onlara rahmetimizden (rahma) verdik.» (19:50) Rahma; İbrahim, İshak ve Yakub'a bahşedilen hidayet, koruma ve lütufları kapsar. İbrahim'in peygamber oğlu İshak bu toplu lütfa ortaktır. Kur'an bu rahmetin her yönünü ayrıntılandırmaz; ilahi ihsanı doğrular ve mümini düşünmeye ve Allah'a şükretmeye davet eder."
+      },
+      {
+        "id": "ishaq_blessing_chapter_2",
+        "title": "Yüce bir lisan sidq",
+        "content": "Allah ekler: «Ve onlar için yüce bir doğruluk dili (lisana sidqin aliyyan) kıldık.» (19:50) Lisan sidq, doğru ve onurlu zikir demektir: adları insanlar arasında ve vahiyde hak ve yücelikle anılır. İshak, İbrahim ve Yakub'un yanında Kitap'ta böyle bir sidq makamına sahiptir. Bu bir ders: Allah dilediğini uydurmayla değil, hakikatle yükseltir."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Kur'an 19:50",
+        "reference_text": "Meryem Suresi, ayet 50",
+        "content": "وَوَهَبْنَا لَهُم مِّن رَّحْمَتِنَا وَجَعَلْنَا لَهُمْ لِسَانَ صِدْقٍ عَلِيًّا",
+        "translation": "Ve onlara rahmetimizden verdik ve onlar için yüce bir doğruluk dili kıldık.",
+        "relevance": "İshak'ı İbrahim ve Yakub ile rahma ve lisan sidq ile onurlandırır."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Rahma",
+        "arabic_term": "رحمة",
+        "definition": "İlahi rahmet. İbrahim, İshak ve Yakub'a bahşedilmiştir.",
+        "pronunciation": "rah-ma"
+      },
+      {
+        "id": 2,
+        "term": "Lisan Sidq",
+        "arabic_term": "لسان صدق",
+        "definition": "Doğru ve onurlu övgü. Yüce ve samimi zikir.",
+        "pronunciation": "li-san sidq"
+      },
+      {
+        "id": 3,
+        "term": "Sidq",
+        "arabic_term": "صدق",
+        "definition": "Doğruluk, samimiyet. Peygamberlerin anısıyla ilişkili nitelik.",
+        "pronunciation": "sidq"
+      }
+    ]
+  },
+  "ishaq_lineage": {
+    "title": "İbrahim soyunda İshak",
+    "title_arabic": "إسحاق في نسل إبراهيم",
+    "introduction": "Enbiya Suresi, Allah'ın İbrahim'e lütuflarını hatırlatır: «Ona İshak'ı bahşettik ve Yakub'u ilave ettik; her birini salih kıldık.» (21:72) İshak burada soyda ilahi bir lütuf (wahb) olarak sunulur: İbrahim'in oğlu, İsmail'in kardeşi, peygamber Yakub'un babası. Allah her birini salih — doğru ve dosdoğru — kıldı.",
+    "conclusion": "İshak, İbrahim'in peygamber soyunda merkezi bir yere sahiptir. Yakub ile birlikte Kur'an'ın övdüğü salihler zincirini oluşturur.",
+    "moral_lesson": "Erdem, yalnızca kandan değil, Allah'a itaatle aktarılır. İshak bize asaletin salihiyya'dan — Rabb'e karşı doğruluktan — geldiğini öğretir.",
+    "historical_location": null,
+    "historical_context": "21:72 ayeti, İshak'ı Enbiya'da zikredilen peygamberler anlatısına, İbrahim'in imtihanlarından sonra yerleştirir.",
+    "chapters": [
+      {
+        "id": "ishaq_lineage_chapter_1",
+        "title": "Bir lütuf ve ilave (nafila)",
+        "content": "Allah buyurur: «Ona İshak'ı bahşettik ve Yakub'u ilave ettik (nafila).» (21:72) Nafila ek bir lütuf, beklenenin ötesinde bir ihsandır. İbrahim önce İshak'ı, sonra ek bir lütuf olarak Yakub'u aldı. Mübarek oğul İshak, Allah'ın İbrahim ve İsmail'den sonra peygamberliği sürdürdüğü soyun merkezindedir."
+      },
+      {
+        "id": "ishaq_lineage_chapter_2",
+        "title": "Salih kimseler (salihin)",
+        "content": "Allah devam eder: «Ve her birini salih (salihin) kıldık.» (21:72) İshak ve Yakub salihin diye anılır: takvalı, dosdoğru, Allah'a itaatkâr. Bu nitelik, Kur'an'ın bu ayette İshak hakkında iletmek istediğini özetler. Allah'ın seçtiği İbrahim ailesine, kardeşi İsmail'in yanında, insanlık için rehberler silsilesinde aittir."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Kur'an 21:72",
+        "reference_text": "Enbiya Suresi, ayet 72",
+        "content": "وَوَهَبْنَا لَهُۥٓ إِسْحَـٰقَ وَيَعْقُوبَ نَافِلَةً ۖ وَكُلًّا جَعَلْنَا صَـٰلِحِينَ",
+        "translation": "Ona İshak'ı bahşettik ve Yakub'u ilave ettik; her birini salih kıldık.",
+        "relevance": "İshak ve Yakub'u İbrahim soyunda salihin olarak tesis eder."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Nafila",
+        "arabic_term": "نافلة",
+        "definition": "Ek lütuf, ilave ihsan. Yakub, İshak'tan sonra bir nafila idi.",
+        "pronunciation": "na-fi-la"
+      },
+      {
+        "id": 2,
+        "term": "Salih",
+        "arabic_term": "صالح",
+        "definition": "Salih, takvalı. Kur'an'a göre İshak ve Yakub'un niteliği.",
+        "pronunciation": "sa-lih"
+      },
+      {
+        "id": 3,
+        "term": "Yakub",
+        "arabic_term": "يعقوب",
+        "definition": "İshak'ın oğlu, İbrahim'in torunu, Kur'an'da zikredilen peygamber.",
+        "pronunciation": "ya'-qub"
+      }
+    ]
+  },
+  "lessons_from_ishaq": {
+    "title": "Peygamber İshak'tan dersler",
+    "title_arabic": "دروس من نبي الله إسحاق",
+    "introduction": "Kur'an İshak'ı birkaç sahih ayette zikreder: İbrahim'in peygamber oğlu, İsmail'in kardeşi, bir bushra'nın konusu, rahma ve lisan sidq'ın alıcısı, Yakub'un yanında salih. Meryem (19:49-50), Saffat (37:112-113) ve Enbiya (21:72) üzerinde düşünen mümin, vahyedilmemiş kıssalara dayanmadan kalıcı dersler çıkarır.",
+    "conclusion": "İshak peygamberlik, erdem ve ilahi lütfun örneği olarak kalır. Kur'an'daki hikayesi, peygamberleri vahiy yoluyla tanımaya ve izlerinden gitmeye davet eder.",
+    "moral_lesson": "Kur'ani kaynaklara bağlı kalmak imanı korur. İshak'a bahşedilen onurlar — nubuwwa, bushra, rahma, sidq, salihiyya — her takvalı nefis için hedeflerdir.",
+    "historical_location": null,
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lessons_from_ishaq_chapter_1",
+        "title": "İshak'ı Kur'an yoluyla tanımak",
+        "content": "Allah İshak'ı kesin ayetlerde zikreder: shirk'ten ayrılmasından sonra İbrahim'e bahşedildi (19:49), nebi min as-salihin olarak müjdelendi (37:112), rahma ve lisan sidq ile onurlandırıldı (19:50), Yakub ile salih olarak anıldı (21:72). Müslüman, İshak'ı Allah'ın söyledikleriyle onurlandırır; oğlu İbrahim ve kardeşi İsmail olduğunu hatırlar. Bu sağlam bir yöntemdir: efsane yok, yalnızca vahiy."
+      },
+      {
+        "id": "lessons_from_ishaq_chapter_2",
+        "title": "Peygamberlik niteliklerini hedeflemek",
+        "content": "İshak'ın peygamberliği tawhid'i iletmenin önemini hatırlatır. Bushra, Allah'ın vaadine umut öğretir. Rahma ve lisan sidq şükür ve doğruluğa davet eder. Salihiyya sürekli doğruluğa çağırır. Bu dersleri izleyen mümin, Allah'ın İbrahim'in oğlu ve İsmail'in kardeşi İshak'ı saydığı salihlere yaklaşır."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Kur'an 19:49-50",
+        "reference_text": "Meryem Suresi, ayetler 49-50",
+        "content": "فَلَمَّا ٱعْتَزَلَهُمْ وَمَا يَعْبُدُونَ مِن دُونِ ٱللَّهِ وَهَبْنَا لَهُۥٓ إِسْحَـٰقَ وَيَعْقُوبَ ۖ وَكُلًّا جَعَلْنَا نَبِيًّا ۝ وَوَهَبْنَا لَهُم مِّن رَّحْمَتِنَا وَجَعَلْنَا لَهُمْ لِسَانَ صِدْقٍ عَلِيًّا",
+        "translation": "Onlardan ve Allah'tan başka ibadet ettiklerinden ayrıldığında, ona İshak ve Yakub'u bahşettik ve her birini peygamber kıldık. Ve onlara rahmetimizden verdik ve onlar için yüce bir doğruluk dili kıldık.",
+        "relevance": "Meryem'de İshak'a bahşedilen Kur'ani onurların özeti."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Kur'an 37:112-113",
+        "reference_text": "Saffat Suresi, ayetler 112-113",
+        "content": "وَبَشَّرْنَـٰهُ بِإِسْحَـٰقَ نَبِيًّا مِّنَ ٱلصَّـٰلِحِينَ ۝ وَبَـٰرَكْنَا عَلَيْهِ وَعَلَىٰٓ إِسْحَـٰقَ ۚ وَمِن ذُرِّيَّتِهِمَا مُحْسِنٌ وَظَالِمٌ لِّنَفْسِهِۦ مُبِينٌ",
+        "translation": "Ona salihlerden bir peygamber olarak İshak'ı müjdeledik. Onu ve İshak'ı mübarek kıldık. Soylarından iyilik edenler de vardır, kendine apaçık zulmedenler de.",
+        "relevance": "İshak üzerindeki bushra ve bereketi hatırlatır."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Tawhid",
+        "arabic_term": "توحيد",
+        "definition": "Allah'ın birliği. İshak dahil peygamberlerin ilettiği mesaj.",
+        "pronunciation": "taw-hid"
+      },
+      {
+        "id": 2,
+        "term": "Salihin",
+        "arabic_term": "صالحون",
+        "definition": "Salihler. Kur'an'a göre İshak onların arasındadır.",
+        "pronunciation": "sa-li-hin"
+      },
+      {
+        "id": 3,
+        "term": "İsmail",
+        "arabic_term": "إسماعيل",
+        "definition": "İshak'ın kardeşi, İbrahim'in oğlu, Kur'an'da zikredilen peygamber.",
+        "pronunciation": "is-ma-il"
+      }
+    ]
+  }
+}

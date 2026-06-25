@@ -106,6 +106,13 @@ export default function LibraryScreen() {
       route: "/prophet-stories",
     },
     {
+      icon: "chart-timeline-variant",
+      title: t("prophets_timeline.title") || "Chronologie des Prophètes",
+      subtitle: t("prophets_timeline.library_subtitle") || "Ordre chronologique",
+      colors: ["#2a4a3d", "#3d6a5e"],
+      route: "/prophets-timeline",
+    },
+    {
       icon: "heart-multiple",
       title: t("favorites") || "Favoris",
       subtitle: t("saved_content") || "Contenu sauvegardé",
@@ -143,7 +150,7 @@ export default function LibraryScreen() {
           <View style={styles.grid}>
             {libraryItems.map((item) => (
               <LibraryItem
-                key={item.icon}
+                key={item.route}
                 icon={item.icon}
                 title={item.title}
                 subtitle={item.subtitle}

@@ -50,7 +50,7 @@
       },
       "edgeToEdgeEnabled": true,
       "package": "com.drogbinho.prayertimesapp2",
-      "versionCode": 96
+      "versionCode": 98
     },
     "web": {
       "bundler": "metro",

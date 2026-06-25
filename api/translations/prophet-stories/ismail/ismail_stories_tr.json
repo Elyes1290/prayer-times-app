@@ -1,0 +1,285 @@
+{
+  "ismail_in_the_book": {
+    "title": "Kitapta İsmail'in anılması",
+    "title_arabic": "ذكر إسماعيل في الكتاب",
+    "introduction": "İsmail (إسماعيل عليه السلام), Allah'ın Kur'an'da onurlandırdığı bir peygamberdir. Allah, Peygamber Muhammed'e (ﷺ) onu anmasını emreder: «Kitapta İsmail'i an. O, sözünde doğru olan ve bir elçi ve peygamber idi.» (19:54) Peygamber İbrahim'in oğlu olan İsmail, Allah'a samimiyeti ve peygamberlik göreviyle tanınır.",
+    "conclusion": "İsmail böylece Allah'ın elçileri arasında tanınır. Adı sözünde doğruluk (sadiq al-wa'd), risalet (mesaj) ve nübüvvet (peygamberlik) ile ilişkilidir.",
+    "moral_lesson": "Allah'a verilen sözleri tutmak peygamberlik vasfıdır. İsmail bize imanda sadakat ve itaati öğretir.",
+    "historical_location": null,
+    "historical_context": "Kur'an, İsmail'i İbrahim'in soyundan peygamberler arasında anar; burada tüm biyografisini ayrıntılandırmaz.",
+    "chapters": [
+      {
+        "id": "ismail_in_the_book_chapter_1",
+        "title": "İsmail'i anma emri",
+        "content": "Allah der ki: «Kitapta İsmail'i an.» (19:54) Bu «Kitap» peygamberlerin anısını koruyan Kur'an'ı ifade eder. İsmail'i anmak, Allah'ın İbrahim'in soyuna rehberler gönderdiğini hatırlatır. İsmail, Kur'an'ın müminlere sunduğu ve diğer onurlu elçilerle birlikte yer alan bu mübarek zincirin bir parçasıdır."
+      },
+      {
+        "id": "ismail_in_the_book_chapter_2",
+        "title": "Sözünde doğru, elçi ve peygamber",
+        "content": "Allah devam eder: «O, sözünde doğru olan (sadiq al-wa'd) ve bir elçi (rasul) ve peygamber (nabi) idi.» (19:54) Sadiq al-wa'd, Allah'a ve insanlara verilen sözleri tutanı ifade eder. Rasul, ilahi mesajı ilettiğini; nabi ise vahiy aldığını doğrular. Bu nitelemeler, Allah'ın bu ayette onun hakkında bize öğretmek istediğini özetler."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Kur'an 19:54",
+        "reference_text": "Meryem Suresi, ayet 54",
+        "content": "وَٱذْكُرْ فِى ٱلْكِتَـٰبِ إِسْمَـٰعِيلَ ۚ إِنَّهُۥ كَانَ صَادِقَ ٱلْوَعْدِ وَكَانَ رَسُولًا نَّبِيًّۭا",
+        "translation": "Kitapta İsmail'i an. O, sözünde doğru olan ve bir elçi ve peygamber idi.",
+        "relevance": "İsmail'in peygamberliğini ve sadakatini belirleyen ana ayet."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "İsmail",
+        "arabic_term": "إسماعيل",
+        "definition": "İbrahim'in oğlu, Kur'an'da anılan peygamber.",
+        "pronunciation": "is-ma-il"
+      },
+      {
+        "id": 2,
+        "term": "Sadiq al-Wa'd",
+        "arabic_term": "صادق الوعد",
+        "definition": "Sözünde doğru. Kur'an'da İsmail'e atfedilen bir vasf.",
+        "pronunciation": "sa-diq al-wa'd"
+      },
+      {
+        "id": 3,
+        "term": "Rasul",
+        "arabic_term": "رسول",
+        "definition": "Allah'ın açık bir mesajla gönderdiği elçi.",
+        "pronunciation": "ra-sul"
+      }
+    ]
+  },
+  "ismail_sacrifice": {
+    "title": "İsmail ve kurban imtihanı",
+    "title_arabic": "إسماعيل وابتلاء الذبح",
+    "introduction": "Allah Kur'an'da İbrahim ve oğlu İsmail'in yaşadığı en büyük imtihanı anlatır. İbrahim rüyasında onu kurban etmesi gerektiğini gördü. Oğluyla konuştu; oğlu olağanüstü bir teslimiyetle cevap verdi: «Ey babacığım! Emrolunanı yap. Allah dilerse beni sabredenlerden bulacaksın.» (37:102) Her ikisi de Allah'a teslim oldu; Allah onları ödüllendirdi ve oğlunu büyük bir kurbanla değiştirdi.",
+    "conclusion": "İsmail imtihanı sabırla ve Allah'a güvenle kabul etti. Bu olay tam teslimiyetlerinin bir işaretidir. Allah, İbrahim ve İsmail'i sadakatleri için onurlandırdı.",
+    "moral_lesson": "İmtihanda bile Allah'a teslimiyet, her inanan kalbe bir ders. İsmail bize dayanma ve güven örneğini gösterir.",
+    "historical_location": "Kurban yeri (Kur'an'a göre, ayrıntılı coğrafi belirtme olmadan)",
+    "historical_context": "Kur'an bu imtihanı müminlere bir işaret olarak sunar; vahyedilmemiş ayrıntılar eklemez.",
+    "chapters": [
+      {
+        "id": "ismail_sacrifice_chapter_1",
+        "title": "İsmail'in cevabı",
+        "content": "Allah der ki: «Onunla koşabilecek yaşa geldiğinde dedi ki: «Oğulcuğum! Ben rüyamda seni kurban ediyorum. Ne dersin?» Dedi ki: «Ey babacığım! Emrolunanı yap. Allah dilerse beni sabredenlerden bulacaksın.»» (37:102) İsmail Allah'ın emrini örnek bir sabırla kabul etti. İtiraz etmedi; Rabbine ve peygamber babasına güvendi."
+      },
+      {
+        "id": "ismail_sacrifice_chapter_2",
+        "title": "Allah'ın ödülü",
+        "content": "Allah devam eder: «Her ikisi de teslim olup onu alına yatırdığında, ona seslendik: «Ey İbrahim! Rüyayı gerçekleştirdin.»» (37:103-105) Sonra Allah müjdeyi verdi ve oğlunu «büyük bir kurbanla» (zibhin azim) değiştirdi. (37:107) İsmail Allah'ın merhametiyle kurtuldu ve bu imtihan nesiller boyu müminlere bir hatırlatma oldu."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Kur'an 37:103",
+        "reference_text": "Saffat Suresi, ayet 103",
+        "content": "فَلَمَّآ أَسْلَمَا وَتَلَّهُۥ لِلْجَبِينِ",
+        "translation": "Her ikisi de teslim olup onu alına yatırdığında...",
+        "relevance": "İbrahim ve İsmail'in teslimiyetinin bağlamı."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Kur'an 37:107",
+        "reference_text": "Saffat Suresi, ayet 107",
+        "content": "وَفَدَيْنَـٰهُ بِذِبْحٍ عَظِيمٍ",
+        "translation": "Ve onu büyük bir kurbanla ödüllendirdik.",
+        "relevance": "Allah İsmail'i bir kurbanla değiştirdi; bu, rahmetinin bir işaretidir."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Zibh",
+        "arabic_term": "ذبح",
+        "definition": "Kesim, kurban. İbrahim ve İsmail'in yaşadığı imtihan.",
+        "pronunciation": "zibh"
+      },
+      {
+        "id": 2,
+        "term": "Sabir",
+        "arabic_term": "صابر",
+        "definition": "Dayanıklı. İsmail imtihana karşı sabredenlerden olduğunu bildirdi.",
+        "pronunciation": "sa-bir"
+      }
+    ]
+  },
+  "ismail_kaaba": {
+    "title": "İsmail ve Kabe'nin yükseltilmesi",
+    "title_arabic": "إسماعيل ورفع قواعد البيت",
+    "introduction": "Kur'an, İbrahim ve İsmail'in Mekke'de Kutsal Ev'in (el-Beyt) temellerini birlikte yükselttiklerini anlatır. Bu mekânın insanlık için bir barış, ibadet ve hidayet yeri olması için Allah'a yalvardılar. İsmail, babasının yanında bu mübarek işe aktif olarak katıldı.",
+    "conclusion": "İbrahim ve İsmail'in yükselttiği Kabe, tevhid ibadetinin merkezi oldu. Duaları kabul edildi: Ev, müminler için hac ve ibadet yeri oldu.",
+    "moral_lesson": "Kutsal mekânların hizmeti ve Allah'a itaatte iş birliği yüce fiillerdir. İsmail bize Allah'ın evinin hizmetinde tevazuyu öğretir.",
+    "historical_location": "Mekke (Bekke / Bakka)",
+    "historical_context": "Kur'an, Kabe'nin İbrahim ve İsmail tarafından inşasını gelecek nesiller için kurucu bir olay olarak anlatır.",
+    "chapters": [
+      {
+        "id": "ismail_kaaba_chapter_1",
+        "title": "Evin temellerini yükseltmek",
+        "content": "Allah der ki: «İbrahim ve İsmail Ev'in temellerini yükseltirken: «Rabbimiz! Bizden kabul et. Sen işitendir, bilendir. Rabbimiz! Bizi sana boyun eğenler kıl ve soyumuzdan sana boyun eğen bir topluluk çıkar. Bize ibadetlerimizi göster ve bizden kabul et. Sen tevbeyi kabul edendir, merhametli olandır.»» (2:127-128) İsmail, Kabe'yi yükseltmek için İbrahim'in yanında çalıştı. İkili duaları teslimiyetlerini ve gelecek nesillere olan özenlerini gösterir."
+      },
+      {
+        "id": "ismail_kaaba_chapter_2",
+        "title": "İnsanlık için bir mekân",
+        "content": "Allah şöyle de der: «İbrahim'e Ev'in yerini gösterdiğimizde: «Bana hiçbir şeyi ortak koşma; ve Ev'imi tavaf edenler, orada duranlar, eğilenler ve secde edenler için temizle.»» (22:26) İbrahim ve İsmail'in yükselttiği Ev, tevhid (Allah'ın birliği), ibadet ve hac yeri oldu. İsmail böylece İslam'ın en kutsal merkezlerinden biriyle bağlantılıdır."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Kur'an 2:127",
+        "reference_text": "Bakara Suresi, ayet 127",
+        "content": "وَإِذْ يَرْفَعُ إِبْرَٰهِـۧمُ ٱلْقَوَاعِدَ مِنَ ٱلْبَيْتِ وَإِسْمَـٰعِيلُ",
+        "translation": "İbrahim ve İsmail Ev'in temellerini yükseltirken...",
+        "relevance": "İsmail'in Kabe'yi yükseltmedeki rolünü doğrular."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Kur'an 22:26",
+        "reference_text": "Hac Suresi, ayet 26",
+        "content": "وَإِذْ بَوَّأْنَا لِإِبْرَٰهِيمَ مَكَانَ ٱلْبَيْتِ",
+        "translation": "İbrahim'e Ev'in yerini gösterdiğimizde...",
+        "relevance": "Kabe'yi yalnızca Allah'a ibadet için ayrılmış mekân olarak belirler."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "El-Beyt",
+        "arabic_term": "البيت",
+        "definition": "Ev. Mekke'deki Kabe'yi ifade eder.",
+        "pronunciation": "el-beyt"
+      },
+      {
+        "id": 2,
+        "term": "El-Kabe",
+        "arabic_term": "الكعبة",
+        "definition": "Kabe. İbrahim ve İsmail'in yükselttiği mabet.",
+        "pronunciation": "el-ka-be"
+      }
+    ]
+  },
+  "ismail_steadfast": {
+    "title": "İsmail sabredenlerden",
+    "title_arabic": "إسماعيل من الصابرين",
+    "introduction": "Kur'an İsmail'i diğer örnek peygamberlerle ilişkilendirir: «İsmail, İdris ve Zülkifl. Hepsi sabredenlerdi.» (21:85) Sonra Allah ekler: «Ve onları rahmetimize aldık. Onlar gerçekten iyilerden idi.» (21:86) Bu ayetler İsmail'in sabrını (sabr) ve iyiliğini (salih) över.",
+    "conclusion": "İsmail sabırlı ve iyi peygamberlerdendir. Allah ona rahmetini bahşetti. İtaatte sebatın bir örneğidir.",
+    "moral_lesson": "İbadette ve imtihanlarda sabır, büyük peygamberlerin vasfıdır. Mümin bunu günlük hayatta örnek alır.",
+    "historical_location": null,
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "ismail_steadfast_chapter_1",
+        "title": "Sabreden peygamberler",
+        "content": "Allah der ki: «İsmail, İdris ve Zülkifl. Hepsi sabredenlerdi (sabirin).» (21:85) Burada sabr, itaatta süreklilik, imtihanlara karşı direnç ve peygamberlik görevinde sebat anlamına gelir. İsmail, diğer onurlu elçilerle birlikte anılır; bu, onların yüce vasfılarını paylaştığını gösterir."
+      },
+      {
+        "id": "ismail_steadfast_chapter_2",
+        "title": "Rahmet ve iyilik",
+        "content": "Allah devam eder: «Ve onları rahmetimize aldık. Onlar gerçekten iyilerden idi (salihin).» (21:86) Allah'ın rahmetine girmek, O'nun onlara lütuf ve koruma bahşettiği anlamına gelir. İsmail, Kur'an'a göre sabırlı, iyi ve ilahi rahmete kabul edilmiş bir peygamberdir."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Kur'an 21:85",
+        "reference_text": "Enbiya Suresi, ayet 85",
+        "content": "وَإِسْمَـٰعِيلَ وَإِدْرِيسَ وَذَا ٱلْكِفْلِ ۖ كُلٌّۭ مِّنَ ٱلصَّـٰبِرِينَ",
+        "translation": "İsmail, İdris ve Zülkifl. Hepsi sabredenlerdi.",
+        "relevance": "İsmail'in sabrını diğer peygamberlerle birlikte över."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Kur'an 21:86",
+        "reference_text": "Enbiya Suresi, ayet 86",
+        "content": "وَأَدْخَلْنَـٰهُمْ فِى رَحْمَتِنَآ ۖ إِنَّهُم مِّنَ ٱلصَّـٰلِحِينَ",
+        "translation": "Ve onları rahmetimize aldık. Onlar gerçekten iyilerden idi.",
+        "relevance": "İsmail'in iyiliğini ve Allah'ın ona bahşettiği rahmeti doğrular."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Sabir",
+        "arabic_term": "صابر",
+        "definition": "Dayanıklı, sabırlı. Kur'an'da İsmail'e atfedilen bir vasf.",
+        "pronunciation": "sa-bir"
+      },
+      {
+        "id": 2,
+        "term": "Salih",
+        "arabic_term": "صالح",
+        "definition": "İyi, salih. İsmail salihin arasındadır.",
+        "pronunciation": "sa-lih"
+      }
+    ]
+  },
+  "lessons_from_ismail": {
+    "title": "Peygamber İsmail'den dersler",
+    "title_arabic": "دروس من نبي الله إسماعيل",
+    "introduction": "Kur'an İsmail'i birkaç temel ayette anlatır: sözünde doğruluk, imtihanda teslimiyet, Kabe'nin hizmeti ve sabır. Meryem (19:54), Saffat (37:102-107), Bakara (2:127-128) ve Enbiya (21:85-86) surelerini düşünen mümin kalıcı dersler çıkarır.",
+    "conclusion": "İsmail sadakat, teslimiyet ve hizmetin örneği olarak kalır. Kur'an'daki hikâyesi Allah'a güvenmeye ve itaatta sebata davet eder.",
+    "moral_lesson": "Otantik metinlere bağlı kalmak mümini korur. İsmail'in vasfıları — sadakat, sabır, teslimiyet — her salih kalbin hedefidir.",
+    "historical_location": null,
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lessons_from_ismail_chapter_1",
+        "title": "Kur'an'a dayanmak",
+        "content": "Allah İsmail'i kesin ve otantik ayetlerde anlatır. Müslüman İsmail'i Allah'ın söylediğiyle onurlandırır: sadiq al-wa'd, rasul, nabi, imtihanda sabırlı, İbrahim ile Kabe'nin inşaatçısı. Bu sağlıklı bir yöntemdir: peygamberleri vahiy yoluyla tanımak, hikâye uydurmamak."
+      },
+      {
+        "id": "lessons_from_ismail_chapter_2",
+        "title": "Peygamberlik vasfılarına yönelmek",
+        "content": "Sözünde doğruluk, Allah'a verilen sözleri tutmaya çağırır. İmtihanda teslimiyet, zorlukta bile Rabbine güvenmeye davet eder. Kabe'nin hizmeti tevazu ve iyilikte iş birliğini hatırlatır. Bu öğretilere uyarak mümin, İsmail'in de aralarında olduğu salihin izlerinde yürür."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Kur'an 19:54",
+        "reference_text": "Meryem Suresi, ayet 54",
+        "content": "وَٱذْكُرْ فِى ٱلْكِتَـٰبِ إِسْمَـٰعِيلَ ۚ إِنَّهُۥ كَانَ صَادِقَ ٱلْوَعْدِ وَكَانَ رَسُولًا نَّبِيًّۭا",
+        "translation": "Kitapta İsmail'i an. O, sözünde doğru olan ve bir elçi ve peygamber idi.",
+        "relevance": "İsmail'e verilen Kur'anî onurların özeti."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Kur'an 21:85-86",
+        "reference_text": "Enbiya Suresi, ayetler 85-86",
+        "content": "وَإِسْمَـٰعِيلَ وَإِدْرِيسَ وَذَا ٱلْكِفْلِ ۖ كُلٌّۭ مِّنَ ٱلصَّـٰبِرِينَ ۝ وَأَدْخَلْنَـٰهُمْ فِى رَحْمَتِنَآ ۖ إِنَّهُم مِّنَ ٱلصَّـٰلِحِينَ",
+        "translation": "İsmail, İdris ve Zülkifl. Hepsi sabredenlerdi. Ve onları rahmetimize aldık. Onlar gerçekten iyilerden idi.",
+        "relevance": "İsmail'in sabrını ve iyiliğini hatırlatır."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Tevhid",
+        "arabic_term": "توحيد",
+        "definition": "Allah'ın birliği. İsmail dahil peygamberlerin ilettiği mesaj.",
+        "pronunciation": "tev-hid"
+      },
+      {
+        "id": 2,
+        "term": "Salihin",
+        "arabic_term": "صالحون",
+        "definition": "İyiler, salihler. Kur'an'a göre İsmail onların arasındadır.",
+        "pronunciation": "sa-li-hin"
+      }
+    ]
+  }
+}

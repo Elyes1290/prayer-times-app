@@ -1,0 +1,297 @@
+{
+  "yaqub_chosen": {
+    "title": "Yaqub elegido e instruido por Allah",
+    "title_arabic": "اجتباء الله ليعقوب وتعليمه",
+    "introduction": "Yaqub (يعقوب عليه السلام), hijo del profeta Ishaq y nieto de Ibrahim, es un profeta honrado en el Corán. Allah le habla a través de su hijo Yusuf: «Así tu Señor te elige y te enseña la interpretación de los relatos, y completa Su favor sobre ti y sobre la familia de Yaqub, como lo completó antes sobre tus dos padres, Ibrahim e Ishaq. En verdad, tu Señor es Omnisciente y Sabio.» (12:6) Este versículo revela la elección divina, la enseñanza profética y la continuidad de la bendición en la linaje de Ibrahim.",
+    "conclusion": "Yaqub es reconocido como profeta elegido por Allah, instruido en la comprensión de los acontecimientos y colmado de la gracia divina junto a Ibrahim e Ishaq.",
+    "moral_lesson": "Allah elige a quien quiere y les enseña lo que considera conveniente. La linaje profética de Ibrahim es una cadena de guía y misericordia.",
+    "historical_location": null,
+    "historical_context": "El Corán menciona a Yaqub en la sura Yusuf, sin detallar aquí toda su biografía, pero subrayando su elección y su instrucción profética.",
+    "chapters": [
+      {
+        "id": "yaqub_chosen_chapter_1",
+        "title": "La elección divina de Yaqub",
+        "content": "Allah dice a Yusuf: «Así tu Señor te elige (yajtabika) y te enseña la interpretación de los relatos (ta'wil al-ahadith).» (12:6) Este mismo versículo se aplica a la linaje de Yaqub: Allah lo eligió entre Sus siervos y le concedió un conocimiento profético. Yaqub pertenece a la familia bendita de Ibrahim, a quien Allah hizo guía para la humanidad."
+      },
+      {
+        "id": "yaqub_chosen_chapter_2",
+        "title": "La gracia sobre Yaqub y su descendencia",
+        "content": "Allah continúa: «Y completa Su favor sobre ti y sobre la familia de Yaqub (al Ya'qub), como lo completó antes sobre tus dos padres, Ibrahim e Ishaq. En verdad, tu Señor es Omnisciente y Sabio.» (12:6) La ni'ma (bendición) de Allah se manifestó en tres generaciones de profetas. Yaqub está en el centro de esta descendencia bendita, padre del profeta Yusuf y heredero de la misión monoteísta de Ibrahim."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Corán 12:6",
+        "reference_text": "Sura Yusuf, versículo 6",
+        "content": "وَكَذَٰلِكَ يَجْتَبِيكَ رَبُّكَ وَيُعَلِّمُكَ مِن تَأْوِيلِ ٱلْأَحَادِيثِ وَيُتِمُّ نِعْمَتَهُۥ عَلَيْكَ وَعَلَىٰٓ ءَالِ يَعْقُوبَ كَمَآ أَتَمَّهَا عَلَىٰٓ أَبَوَيْكَ مِن قَبْلُ إِبْرَٰهِيمَ وَإِسْحَٰقَ ۚ إِنَّ رَبَّكَ عَلِيمٌ حَكِيمٌ",
+        "translation": "Así tu Señor te elige y te enseña la interpretación de los relatos, y completa Su favor sobre ti y sobre la familia de Yaqub, como lo completó antes sobre tus dos padres, Ibrahim e Ishaq. En verdad, tu Señor es Omnisciente y Sabio.",
+        "relevance": "Establece la elección de Yaqub, su instrucción profética y su lugar en la linaje de Ibrahim."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Yaqub",
+        "arabic_term": "يعقوب",
+        "definition": "Profeta, hijo de Ishaq, nieto de Ibrahim, padre de Yusuf.",
+        "pronunciation": "ya'-qub"
+      },
+      {
+        "id": 2,
+        "term": "Ijtiba",
+        "arabic_term": "اجتباء",
+        "definition": "Elección divina. Allah eligió a Yaqub entre Sus siervos.",
+        "pronunciation": "ij-ti-ba"
+      },
+      {
+        "id": 3,
+        "term": "Ta'wil",
+        "arabic_term": "تأويل",
+        "definition": "Interpretación de relatos y acontecimientos, enseñada por Allah.",
+        "pronunciation": "ta'-wil"
+      }
+    ]
+  },
+  "yaqub_lineage": {
+    "title": "Yaqub en la linaje de Ibrahim",
+    "title_arabic": "يعقوب في سلالة إبراهيم",
+    "introduction": "El Corán sitúa a Yaqub en el corazón de la descendencia bendita de Ibrahim. Allah dice: «Y le dimos a Isaac y a Jacob. Y a todos los hicimos justos.» (21:72) Yaqub queda así unido al profeta Ibrahim por su padre Ishaq, y cuenta entre los salihin (justos) que el Corán honra.",
+    "conclusion": "Yaqub forma parte de la linaje profética de Ibrahim. Allah le concedió a Ishaq como padre y lo contó entre los justos, señal de Su gracia sobre esta familia.",
+    "moral_lesson": "La fe se transmite de profeta en profeta. Yaqub continúa la misión de Ibrahim e Ishaq en la adoración exclusiva de Allah.",
+    "historical_location": null,
+    "historical_context": "El Corán presenta a Yaqub como hijo de Ishaq y nieto de Ibrahim, sin precisar aquí los detalles geográficos de su vida.",
+    "chapters": [
+      {
+        "id": "yaqub_lineage_chapter_1",
+        "title": "Hijo de Ishaq, nieto de Ibrahim",
+        "content": "Allah dice acerca de Ibrahim: «Y le dimos a Isaac y a Jacob.» (21:72) Ishaq es el padre de Yaqub, e Ibrahim es su ancestro común. Esta triple mención — Ibrahim, Ishaq, Yaqub — muestra la continuidad de la bendición divina sobre la linaje de Ibrahim, a quien Allah hizo guía para la humanidad."
+      },
+      {
+        "id": "yaqub_lineage_chapter_2",
+        "title": "Entre los justos",
+        "content": "Allah continúa: «Y a todos los hicimos justos (salihin).» (21:72) El término salih designa a quien es piadoso, recto y obediente a Allah. Yaqub se cuenta entre los salihin junto a su padre Ishaq. Esta virtud profética prepara la descendencia bendita de la cual Allah hará al profeta Yusuf."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Corán 21:72",
+        "reference_text": "Sura Al-Anbiya, versículo 72",
+        "content": "وَوَهَبْنَا لَهُۥٓ إِسْحَٰقَ وَيَعْقُوبَ ۖ نَافِلَةً ۖ وَكُلًّا جَعَلْنَا صَـٰلِحِينَ",
+        "translation": "Y le dimos a Isaac y a Jacob. Y a todos los hicimos justos.",
+        "relevance": "Sitúa a Yaqub en la linaje de Ibrahim y lo cuenta entre los salihin."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Ishaq",
+        "arabic_term": "إسحاق",
+        "definition": "Profeta, hijo de Ibrahim, padre de Yaqub.",
+        "pronunciation": "ishaq"
+      },
+      {
+        "id": 2,
+        "term": "Salih",
+        "arabic_term": "صالح",
+        "definition": "Justo, piadoso. Cualidad atribuida a Yaqub en el Corán.",
+        "pronunciation": "sa-lih"
+      },
+      {
+        "id": 3,
+        "term": "Al Ibrahim",
+        "arabic_term": "آل إبراهيم",
+        "definition": "La familia de Ibrahim. Yaqub forma parte de ella.",
+        "pronunciation": "al ib-ra-him"
+      }
+    ]
+  },
+  "yaqub_patience": {
+    "title": "La paciencia de Yaqub ante la prueba",
+    "title_arabic": "صبر يعقوب في البلاء",
+    "introduction": "El Corán relata la profunda prueba de Yaqub cuando se separó de su hijo Yusuf. Su dolor fue inmenso, pero su reacción revela la grandeza profética: solo se quejó ante Allah. «Dijo: Solo me quejo a Allah de mi aflicción y mi tristeza.» (12:86) Yaqub encarna el sabr (paciencia) y la confianza en Allah, sin perder la esperanza en Su misericordia.",
+    "conclusion": "Yaqub nos enseña que el profeta puede sufrir profundamente, pero confía su dolor únicamente a Allah. Su paciencia y su confianza en la misericordia divina siguen siendo un modelo para los creyentes.",
+    "moral_lesson": "La queja sincera ante Allah y la paciencia en la prueba son cualidades proféticas. Nunca desesperar de la misericordia de Allah.",
+    "historical_location": null,
+    "historical_context": "El Corán menciona el dolor de Yaqub en la sura Yusuf, poniendo el acento en su paciencia y su confianza en Allah más que en relatar toda la historia de Yusuf.",
+    "chapters": [
+      {
+        "id": "yaqub_patience_chapter_1",
+        "title": "Un dolor profundo, una queja solo ante Allah",
+        "content": "Allah dice: «Y se apartó de ellos y dijo: ¡Qué aflicción por Yusuf! Y sus ojos se pusieron blancos de dolor, y estaba abatido.» (12:84) Ante este sufrimiento, Yaqub declaró: «Solo me quejo a Allah de mi aflicción y mi tristeza. Y sé, por Allah, lo que vosotros no sabéis.» (12:86) El profeta sentía un dolor inmenso, pero sabía que Allah poseía una sabiduría que los hombres ignoraban."
+      },
+      {
+        "id": "yaqub_patience_chapter_2",
+        "title": "Nunca desesperar de la misericordia de Allah",
+        "content": "Yaqub dijo a sus hijos: «¡Oh, hijos míos! Id e informaos de Yusuf y de su hermano. Y no desesperéis de la misericordia de Allah. Pues solo los incrédulos desesperan de la misericordia de Allah.» (12:87) A pesar de años de separación y dolor, Yaqub conservó la esperanza en Allah. Su sabr (paciencia) y su tawakkul (confianza) ilustran la fortaleza profética ante la prueba."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Corán 12:86",
+        "reference_text": "Sura Yusuf, versículo 86",
+        "content": "قَالَ إِنَّمَآ أَشْكُوا۟ بَثِّى وَحُزْنِىٓ إِلَى ٱللَّهِ وَأَعْلَمُ مِنَ ٱللَّهِ مَا لَا تَعْلَمُونَ",
+        "translation": "Dijo: Solo me quejo a Allah de mi aflicción y mi tristeza. Y sé, por Allah, lo que vosotros no sabéis.",
+        "relevance": "Muestra que Yaqub confió su dolor únicamente a Allah."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Corán 12:87",
+        "reference_text": "Sura Yusuf, versículo 87",
+        "content": "يَـٰبَنِىَّ ٱذْهَبُوا۟ فَتَحَسَّسُوا۟ مِن يُوسُفَ وَأَخِيهِ وَلَا تَا۟يْ‍َٔسُوا۟ مِن رَّوْحِ ٱللَّهِ ۖ إِنَّهُۥ لَا يَا۟يْ‍َٔسُ مِن رَّوْحِ ٱللَّهِ إِلَّا ٱلْقَوْمُ ٱلْكَـٰفِرُونَ",
+        "translation": "¡Oh, hijos míos! Id e informaos de Yusuf y de su hermano. Y no desesperéis de la misericordia de Allah. Pues solo los incrédulos desesperan de la misericordia de Allah.",
+        "relevance": "Afirma la esperanza y la confianza de Yaqub en la misericordia divina."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Sabr",
+        "arabic_term": "صبر",
+        "definition": "Paciencia, perseverancia. Cualidad central de Yaqub ante la prueba.",
+        "pronunciation": "sabr"
+      },
+      {
+        "id": 2,
+        "term": "Shakwa",
+        "arabic_term": "شكوى",
+        "definition": "Queja. Yaqub solo se quejó ante Allah.",
+        "pronunciation": "shak-wa"
+      },
+      {
+        "id": 3,
+        "term": "Rawh Allah",
+        "arabic_term": "روح الله",
+        "definition": "Misericordia de Allah. Yaqub exhorta a no desesperar nunca de ella.",
+        "pronunciation": "rawh ul-lah"
+      }
+    ]
+  },
+  "yaqub_testament": {
+    "title": "El testamento de Yaqub sobre el tawhid",
+    "title_arabic": "وصية يعقوب بالتوحيد",
+    "introduction": "El Corán relata que Yaqub, como Ibrahim antes que él, exhortó a sus hijos a permanecer musulmanes — sometidos a Allah. «Y Abraham recomendó lo mismo a sus hijos, así como Jacob: ¡Oh, hijos míos! Allah ha elegido para vosotros esta religión. No muráis, pues, sino siendo musulmanes.» (2:132) Al acercarse la muerte, Yaqub interrogó a sus hijos sobre su adoración futura, confirmando el tawhid.",
+    "conclusion": "Yaqub transmite la misma misión que Ibrahim: la adoración exclusiva de Allah. Su testamento es un recordatorio eterno del monoteísmo para su descendencia y para todos los creyentes.",
+    "moral_lesson": "Transmitir el tawhid a la descendencia es un deber profético. Yaqub nos enseña a morir en sumisión a Allah.",
+    "historical_location": null,
+    "historical_context": "El Corán presenta el testamento de Yaqub como continuidad del de Ibrahim, sin añadir detalles no revelados.",
+    "chapters": [
+      {
+        "id": "yaqub_testament_chapter_1",
+        "title": "Morir solo como musulmanes",
+        "content": "Allah dice: «Y Abraham recomendó lo mismo a sus hijos, así como Jacob: ¡Oh, hijos míos! Allah ha elegido para vosotros esta religión (hadha ad-din). No muráis, pues, sino siendo musulmanes.» (2:132) Yaqub perpetuó el llamamiento de Ibrahim al tawhid. Recordó a sus hijos que la religión elegida por Allah es el islam — la sumisión exclusiva a Él."
+      },
+      {
+        "id": "yaqub_testament_chapter_2",
+        "title": "¿A quién adoraréis después de mí?",
+        "content": "Allah pregunta: «¿O fuisteis testigos cuando la muerte se presentó a Jacob? Él dijo a sus hijos: ¿A quién adoraréis después de mí? Dijeron: Adoraremos a tu Dios y al Dios de tus padres, Ibrahim, Ismael e Isaac, un Dios único. Y a Él nos sometemos.» (2:133) Los hijos de Yaqub confirmaron el monoteísmo puro. Yaqub, heredero de la misión de Ibrahim, se aseguró de que el tawhid fuera transmitido a su descendencia."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Corán 2:132",
+        "reference_text": "Sura Al-Baqarah, versículo 132",
+        "content": "وَوَصَّىٰ بِهَآ إِبْرَٰهِيمُ بَنِيهِ وَيَعْقُوبُ يَـٰبَنِىَّ إِنَّ ٱللَّهَ ٱصْطَفَىٰ لَكُمْ هَـٰذَا ٱلدِّينَ فَلَا تَمُوتُنَّ إِلَّا وَأَنتُم مُّسْلِمُونَ",
+        "translation": "Y Abraham recomendó lo mismo a sus hijos, así como Jacob: ¡Oh, hijos míos! Allah ha elegido para vosotros esta religión. No muráis, pues, sino siendo musulmanes.",
+        "relevance": "Testamento de Yaqub sobre el mantenimiento del islam y el tawhid."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Corán 2:133",
+        "reference_text": "Sura Al-Baqarah, versículo 133",
+        "content": "أَمْ كُنتُمْ شُهَدَآءَ إِذْ حَضَرَ يَعْقُوبَ ٱلْمَوْتُ قَالَ مَا تَعْبُدُونَ مِنۢ بَعْدِى قَالُوا۟ نَعْبُدُ إِلَـٰهَكَ وَإِلَـٰهَ أَبَآئِكَ إِبْرَٰهِيمَ وَإِسْمَـٰعِيلَ وَإِسْحَٰقَ إِلَـٰهًا وَٰحِدًا وَنَحْنُ لَهُۥ مُسْلِمُونَ",
+        "translation": "¿O fuisteis testigos cuando la muerte se presentó a Jacob? Él dijo a sus hijos: ¿A quién adoraréis después de mí? Dijeron: Adoraremos a tu Dios y al Dios de tus padres, Ibrahim, Ismael e Isaac, un Dios único. Y a Él nos sometemos.",
+        "relevance": "Confirma el tawhid transmitido por Yaqub a su descendencia."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Wasiyyah",
+        "arabic_term": "وصية",
+        "definition": "Testamento, recomendación. Yaqub exhortó a sus hijos al tawhid.",
+        "pronunciation": "wa-siy-yah"
+      },
+      {
+        "id": 2,
+        "term": "Tawhid",
+        "arabic_term": "توحيد",
+        "definition": "Unicidad de Allah. Mensaje central del testamento de Yaqub.",
+        "pronunciation": "taw-hid"
+      },
+      {
+        "id": 3,
+        "term": "Muslim",
+        "arabic_term": "مسلم",
+        "definition": "Sometido a Allah. Yaqub exhortó a sus hijos a morir como musulmanes.",
+        "pronunciation": "mus-lim"
+      }
+    ]
+  },
+  "lessons_from_yaqub": {
+    "title": "Lecciones del profeta Yaqub",
+    "title_arabic": "دروس من نبي الله يعقوب",
+    "introduction": "El Corán menciona a Yaqub en varios versículos clave: elección divina, linaje de Ibrahim, paciencia en la prueba y testamento sobre el tawhid. Meditando sobre las suras Yusuf (12:6, 12:86-87), Al-Anbiya (21:72) y Al-Baqarah (2:132-133), el creyente extrae enseñanzas duraderas sobre la misión profética.",
+    "conclusion": "Yaqub sigue siendo un modelo de elección divina, virtud, paciencia y transmisión del tawhid. Su historia en el Corán invita a la confianza en Allah y a la perseverancia en la fe.",
+    "moral_lesson": "Aferrarse a los textos auténticos protege al creyente. Las cualidades de Yaqub — elección, virtud, paciencia, tawhid — son metas para toda alma piadosa.",
+    "historical_location": null,
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lessons_from_yaqub_chapter_1",
+        "title": "Apoyarse en el Corán",
+        "content": "Allah menciona a Yaqub en versículos precisos y auténticos. El musulmán honra a Yaqub por lo que Allah dijo: elegido e instruido (12:6), justo en la linaje de Ibrahim (21:72), paciente ante la prueba (12:86-87), transmisor del tawhid (2:132-133). Es un método sano: conocer a los profetas por la revelación, sin inventar relatos."
+      },
+      {
+        "id": "lessons_from_yaqub_chapter_2",
+        "title": "Aspirar a las cualidades proféticas",
+        "content": "La elección divina recuerda que Allah guía a quien quiere. La virtud en la linaje de Ibrahim invita a perpetuar la fe monoteísta. La paciencia de Yaqub enseña a confiar el dolor únicamente a Allah. El testamento sobre el tawhid recuerda transmitir el islam a la descendencia. Siguiendo estas enseñanzas, el creyente camina sobre las huellas de los salihin, entre los cuales Allah cuenta a Yaqub."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Corán 12:6",
+        "reference_text": "Sura Yusuf, versículo 6",
+        "content": "وَكَذَٰلِكَ يَجْتَبِيكَ رَبُّكَ وَيُعَلِّمُكَ مِن تَأْوِيلِ ٱلْأَحَادِيثِ وَيُتِمُّ نِعْمَتَهُۥ عَلَيْكَ وَعَلَىٰٓ ءَالِ يَعْقُوبَ كَمَآ أَتَمَّهَا عَلَىٰٓ أَبَوَيْكَ مِن قَبْلُ إِبْرَٰهِيمَ وَإِسْحَٰقَ ۚ إِنَّ رَبَّكَ عَلِيمٌ حَكِيمٌ",
+        "translation": "Así tu Señor te elige y te enseña la interpretación de los relatos, y completa Su favor sobre ti y sobre la familia de Yaqub, como lo completó antes sobre tus dos padres, Ibrahim e Ishaq. En verdad, tu Señor es Omnisciente y Sabio.",
+        "relevance": "Síntesis de los honores coránicos concedidos a Yaqub."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Corán 2:132-133",
+        "reference_text": "Sura Al-Baqarah, versículos 132-133",
+        "content": "وَوَصَّىٰ بِهَآ إِبْرَٰهِيمُ بَنِيهِ وَيَعْقُوبُ يَـٰبَنِىَّ إِنَّ ٱللَّهَ ٱصْطَفَىٰ لَكُمْ هَـٰذَا ٱلدِّينَ فَلَا تَمُوتُنَّ إِلَّا وَأَنتُم مُّسْلِمُونَ ۝ أَمْ كُنتُمْ شُهَدَآءَ إِذْ حَضَرَ يَعْقُوبَ ٱلْمَوْتُ قَالَ مَا تَعْبُدُونَ مِنۢ بَعْدِى قَالُوا۟ نَعْبُدُ إِلَـٰهَكَ وَإِلَـٰهَ أَبَآئِكَ إِبْرَٰهِيمَ وَإِسْمَـٰعِيلَ وَإِسْحَٰقَ إِلَـٰهًا وَٰحِدًا وَنَحْنُ لَهُۥ مُسْلِمُونَ",
+        "translation": "Y Abraham recomendó lo mismo a sus hijos, así como Jacob: ¡Oh, hijos míos! Allah ha elegido para vosotros esta religión. No muráis, pues, sino siendo musulmanes. ¿O fuisteis testigos cuando la muerte se presentó a Jacob? Él dijo a sus hijos: ¿A quién adoraréis después de mí? Dijeron: Adoraremos a tu Dios y al Dios de tus padres, Ibrahim, Ismael e Isaac, un Dios único. Y a Él nos sometemos.",
+        "relevance": "Recuerda el testamento de Yaqub sobre el tawhid y la transmisión de la fe."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Tawhid",
+        "arabic_term": "توحيد",
+        "definition": "Unicidad de Allah. Mensaje transmitido por Yaqub a su descendencia.",
+        "pronunciation": "taw-hid"
+      },
+      {
+        "id": 2,
+        "term": "Salihin",
+        "arabic_term": "صالحون",
+        "definition": "Los justos. Yaqub forma parte de ellos según el Corán.",
+        "pronunciation": "sa-li-hin"
+      }
+    ]
+  }
+}

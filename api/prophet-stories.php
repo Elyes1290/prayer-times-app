@@ -117,6 +117,11 @@ function loadTranslations($lang, $prophetName = 'muhammad') {
         if (!file_exists($jsonFile)) {
             $jsonFile = __DIR__ . "/../private/premium/prophete_stories/adam/adam_stories_{$lang}.json";
         }
+    } elseif ($prophetName === 'idris') {
+        $jsonFile = __DIR__ . "/translations/prophet-stories/idris/idris_stories_{$lang}.json";
+        if (!file_exists($jsonFile)) {
+            $jsonFile = __DIR__ . "/../private/premium/prophete_stories/idris/idris_stories_{$lang}.json";
+        }
     } elseif ($prophetName === 'nuh') {
         // Noé : translations/prophet-stories/nuh/
         $jsonFile = __DIR__ . "/translations/prophet-stories/nuh/nuh_stories_{$lang}.json";
@@ -147,17 +152,42 @@ function loadTranslations($lang, $prophetName = 'muhammad') {
         if (!file_exists($jsonFile)) {
             $jsonFile = __DIR__ . "/../private/premium/prophete_stories/lut/lut_stories_{$lang}.json";
         }
+    } elseif ($prophetName === 'ismail') {
+        $jsonFile = __DIR__ . "/translations/prophet-stories/ismail/ismail_stories_{$lang}.json";
+        if (!file_exists($jsonFile)) {
+            $jsonFile = __DIR__ . "/../private/premium/prophete_stories/ismail/ismail_stories_{$lang}.json";
+        }
+    } elseif ($prophetName === 'ishaq') {
+        $jsonFile = __DIR__ . "/translations/prophet-stories/ishaq/ishaq_stories_{$lang}.json";
+        if (!file_exists($jsonFile)) {
+            $jsonFile = __DIR__ . "/../private/premium/prophete_stories/ishaq/ishaq_stories_{$lang}.json";
+        }
+    } elseif ($prophetName === 'yaqub') {
+        $jsonFile = __DIR__ . "/translations/prophet-stories/yaqub/yaqub_stories_{$lang}.json";
+        if (!file_exists($jsonFile)) {
+            $jsonFile = __DIR__ . "/../private/premium/prophete_stories/yaqub/yaqub_stories_{$lang}.json";
+        }
     } elseif ($prophetName === 'yusuf') {
         // Yusuf : translations/prophet-stories/yusuf/
         $jsonFile = __DIR__ . "/translations/prophet-stories/yusuf/yusuf_stories_{$lang}.json";
         if (!file_exists($jsonFile)) {
             $jsonFile = __DIR__ . "/../private/premium/prophete_stories/yusuf/yusuf_stories_{$lang}.json";
         }
+    } elseif ($prophetName === 'dhulkifl') {
+        $jsonFile = __DIR__ . "/translations/prophet-stories/dhulkifl/dhulkifl_stories_{$lang}.json";
+        if (!file_exists($jsonFile)) {
+            $jsonFile = __DIR__ . "/../private/premium/prophete_stories/dhulkifl/dhulkifl_stories_{$lang}.json";
+        }
     } elseif ($prophetName === 'musa') {
         // Musa : translations/prophet-stories/musa/
         $jsonFile = __DIR__ . "/translations/prophet-stories/musa/musa_stories_{$lang}.json";
         if (!file_exists($jsonFile)) {
             $jsonFile = __DIR__ . "/../private/premium/prophete_stories/musa/musa_stories_{$lang}.json";
+        }
+    } elseif ($prophetName === 'harun') {
+        $jsonFile = __DIR__ . "/translations/prophet-stories/harun/harun_stories_{$lang}.json";
+        if (!file_exists($jsonFile)) {
+            $jsonFile = __DIR__ . "/../private/premium/prophete_stories/harun/harun_stories_{$lang}.json";
         }
     } elseif ($prophetName === 'dawud') {
         // Dawud : translations/prophet-stories/dawud/
@@ -216,6 +246,9 @@ function loadTranslations($lang, $prophetName = 'muhammad') {
             if ($prophetName === 'adam') {
                 $jsonFile = __DIR__ . "/translations/prophet-stories/adam/adam_stories_en.json";
                 if (!file_exists($jsonFile)) $jsonFile = __DIR__ . "/../private/premium/prophete_stories/adam/adam_stories_en.json";
+            } elseif ($prophetName === 'idris') {
+                $jsonFile = __DIR__ . "/translations/prophet-stories/idris/idris_stories_en.json";
+                if (!file_exists($jsonFile)) $jsonFile = __DIR__ . "/../private/premium/prophete_stories/idris/idris_stories_en.json";
             } elseif ($prophetName === 'nuh') {
                 $jsonFile = __DIR__ . "/translations/prophet-stories/nuh/nuh_stories_en.json";
                 if (!file_exists($jsonFile)) $jsonFile = __DIR__ . "/../private/premium/prophete_stories/nuh/nuh_stories_en.json";
@@ -231,12 +264,27 @@ function loadTranslations($lang, $prophetName = 'muhammad') {
             } elseif ($prophetName === 'lut') {
                 $jsonFile = __DIR__ . "/translations/prophet-stories/lut/lut_stories_en.json";
                 if (!file_exists($jsonFile)) $jsonFile = __DIR__ . "/../private/premium/prophete_stories/lut/lut_stories_en.json";
+            } elseif ($prophetName === 'ismail') {
+                $jsonFile = __DIR__ . "/translations/prophet-stories/ismail/ismail_stories_en.json";
+                if (!file_exists($jsonFile)) $jsonFile = __DIR__ . "/../private/premium/prophete_stories/ismail/ismail_stories_en.json";
+            } elseif ($prophetName === 'ishaq') {
+                $jsonFile = __DIR__ . "/translations/prophet-stories/ishaq/ishaq_stories_en.json";
+                if (!file_exists($jsonFile)) $jsonFile = __DIR__ . "/../private/premium/prophete_stories/ishaq/ishaq_stories_en.json";
+            } elseif ($prophetName === 'yaqub') {
+                $jsonFile = __DIR__ . "/translations/prophet-stories/yaqub/yaqub_stories_en.json";
+                if (!file_exists($jsonFile)) $jsonFile = __DIR__ . "/../private/premium/prophete_stories/yaqub/yaqub_stories_en.json";
             } elseif ($prophetName === 'yusuf') {
                 $jsonFile = __DIR__ . "/translations/prophet-stories/yusuf/yusuf_stories_en.json";
                 if (!file_exists($jsonFile)) $jsonFile = __DIR__ . "/../private/premium/prophete_stories/yusuf/yusuf_stories_en.json";
+            } elseif ($prophetName === 'dhulkifl') {
+                $jsonFile = __DIR__ . "/translations/prophet-stories/dhulkifl/dhulkifl_stories_en.json";
+                if (!file_exists($jsonFile)) $jsonFile = __DIR__ . "/../private/premium/prophete_stories/dhulkifl/dhulkifl_stories_en.json";
             } elseif ($prophetName === 'musa') {
                 $jsonFile = __DIR__ . "/translations/prophet-stories/musa/musa_stories_en.json";
                 if (!file_exists($jsonFile)) $jsonFile = __DIR__ . "/../private/premium/prophete_stories/musa/musa_stories_en.json";
+            } elseif ($prophetName === 'harun') {
+                $jsonFile = __DIR__ . "/translations/prophet-stories/harun/harun_stories_en.json";
+                if (!file_exists($jsonFile)) $jsonFile = __DIR__ . "/../private/premium/prophete_stories/harun/harun_stories_en.json";
             } elseif ($prophetName === 'dawud') {
                 $jsonFile = __DIR__ . "/translations/prophet-stories/dawud/dawud_stories_en.json";
                 if (!file_exists($jsonFile)) $jsonFile = __DIR__ . "/../private/premium/prophete_stories/dawud/dawud_stories_en.json";
@@ -741,24 +789,30 @@ function handleProphets($pdo, $isPremium, $lang) {
         ORDER BY 
             CASE prophet_name
                 WHEN 'adam' THEN 1
-                WHEN 'nuh' THEN 2
-                WHEN 'hud' THEN 3
-                WHEN 'salih' THEN 4
-                WHEN 'ibrahim' THEN 5
-                WHEN 'lut' THEN 6
-                WHEN 'yusuf' THEN 7
-                WHEN 'musa' THEN 8
-                WHEN 'dawud' THEN 9
-                WHEN 'sulayman' THEN 10
-                WHEN 'yunus' THEN 11
-                WHEN 'ayyub' THEN 12
-                WHEN 'zakariya' THEN 13
-                WHEN 'yahya' THEN 14
-                WHEN 'ilyas' THEN 15
-                WHEN 'alyasa' THEN 16
-                WHEN 'shuayb' THEN 17
-                WHEN 'isa' THEN 18
-                WHEN 'muhammad' THEN 19
+                WHEN 'idris' THEN 2
+                WHEN 'nuh' THEN 3
+                WHEN 'hud' THEN 4
+                WHEN 'salih' THEN 5
+                WHEN 'ibrahim' THEN 6
+                WHEN 'lut' THEN 7
+                WHEN 'ismail' THEN 8
+                WHEN 'ishaq' THEN 9
+                WHEN 'yaqub' THEN 10
+                WHEN 'yusuf' THEN 11
+                WHEN 'shuayb' THEN 12
+                WHEN 'ayyub' THEN 13
+                WHEN 'dhulkifl' THEN 14
+                WHEN 'musa' THEN 15
+                WHEN 'harun' THEN 16
+                WHEN 'dawud' THEN 17
+                WHEN 'sulayman' THEN 18
+                WHEN 'ilyas' THEN 19
+                WHEN 'alyasa' THEN 20
+                WHEN 'yunus' THEN 21
+                WHEN 'zakariya' THEN 22
+                WHEN 'yahya' THEN 23
+                WHEN 'isa' THEN 24
+                WHEN 'muhammad' THEN 25
                 ELSE 99
             END
     ";
@@ -773,6 +827,12 @@ function handleProphets($pdo, $isPremium, $lang) {
             'es' => 'Adán', 'de' => 'Adam', 'it' => 'Adamo',
             'tr' => 'Adem', 'pt' => 'Adão', 'nl' => 'Adam',
             'ru' => 'Адам', 'bn' => 'আদম', 'fa' => 'آدم', 'ur' => 'آدم'
+        ],
+        'idris' => [
+            'fr' => 'Idris', 'en' => 'Idris', 'ar' => 'إدريس',
+            'es' => 'Idris', 'de' => 'Idris', 'it' => 'Idris',
+            'tr' => 'İdris', 'pt' => 'Idris', 'nl' => 'Idris',
+            'ru' => 'Идрис', 'bn' => 'ইদ্রিস', 'fa' => 'ادریس', 'ur' => 'ادریس'
         ],
         'nuh' => [
             'fr' => 'Noé', 'en' => 'Noah', 'ar' => 'نوح',
@@ -804,17 +864,47 @@ function handleProphets($pdo, $isPremium, $lang) {
             'tr' => 'Lut', 'pt' => 'Ló', 'nl' => 'Lot',
             'ru' => 'Лут', 'bn' => 'লূত', 'fa' => 'لوط', 'ur' => 'لوط'
         ],
+        'ismail' => [
+            'fr' => 'Ismaël', 'en' => 'Ishmael', 'ar' => 'إسماعيل',
+            'es' => 'Ismael', 'de' => 'Ismael', 'it' => 'Ismaele',
+            'tr' => 'İsmail', 'pt' => 'Ismael', 'nl' => 'Ismaël',
+            'ru' => 'Исмаил', 'bn' => 'ইসমাইল', 'fa' => 'اسماعیل', 'ur' => 'اسماعیل'
+        ],
+        'ishaq' => [
+            'fr' => 'Ishaq', 'en' => 'Isaac', 'ar' => 'إسحاق',
+            'es' => 'Isaac', 'de' => 'Isaac', 'it' => 'Isacco',
+            'tr' => 'İshak', 'pt' => 'Isaque', 'nl' => 'Ishaq',
+            'ru' => 'Исхак', 'bn' => 'ইসহাক', 'fa' => 'اسحاق', 'ur' => 'اسحاق'
+        ],
+        'yaqub' => [
+            'fr' => 'Ya\'qoub', 'en' => 'Jacob', 'ar' => 'يعقوب',
+            'es' => 'Jacob', 'de' => 'Jakob', 'it' => 'Giacobbe',
+            'tr' => 'Yakub', 'pt' => 'Jacó', 'nl' => 'Ya\'qoeb',
+            'ru' => 'Якуб', 'bn' => 'ইয়াকুব', 'fa' => 'یعقوب', 'ur' => 'یعقوب'
+        ],
         'yusuf' => [
             'fr' => 'Yusuf', 'en' => 'Joseph', 'ar' => 'يوسف',
             'es' => 'José', 'de' => 'Josef', 'it' => 'Giuseppe',
             'tr' => 'Yusuf', 'pt' => 'José', 'nl' => 'Jozef',
             'ru' => 'Юсуф', 'bn' => 'ইউসুফ', 'fa' => 'یوسف', 'ur' => 'یوسف'
         ],
+        'dhulkifl' => [
+            'fr' => 'Dhoul-Kifl', 'en' => 'Dhul-Kifl', 'ar' => 'ذو الكفل',
+            'es' => 'Dhul-Kifl', 'de' => 'Dhul-Kifl', 'it' => 'Dhul-Kifl',
+            'tr' => 'Zülkifl', 'pt' => 'Dhul-Kifl', 'nl' => 'Dhul-Kifl',
+            'ru' => 'Зуль-Кифль', 'bn' => 'যুলকিফল', 'fa' => 'ذوالکفل', 'ur' => 'ذوالکفل'
+        ],
         'musa' => [
             'fr' => 'Musa', 'en' => 'Moses', 'ar' => 'موسى',
             'es' => 'Musa', 'de' => 'Musa', 'it' => 'Musa',
             'tr' => 'Musa', 'pt' => 'Musa', 'nl' => 'Musa',
             'ru' => 'Муса', 'bn' => 'মূসা', 'fa' => 'موسی', 'ur' => 'موسی'
+        ],
+        'harun' => [
+            'fr' => 'Haroun', 'en' => 'Aaron', 'ar' => 'هارون',
+            'es' => 'Aarón', 'de' => 'Aaron', 'it' => 'Aronne',
+            'tr' => 'Harun', 'pt' => 'Aarão', 'nl' => 'Harun',
+            'ru' => 'Харун', 'bn' => 'হারুন', 'fa' => 'هارون', 'ur' => 'ہارون'
         ],
         'dawud' => [
             'fr' => 'Dawud', 'en' => 'David', 'ar' => 'داوود',

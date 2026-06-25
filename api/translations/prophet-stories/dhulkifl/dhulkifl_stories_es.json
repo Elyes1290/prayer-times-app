@@ -1,0 +1,299 @@
+{
+  "dhulkifl_in_the_book": {
+    "title": "Dhu'l-Kifl mencionado en el Corán",
+    "title_arabic": "ذكر ذي الكفل في القرآن",
+    "introduction": "Dhu'l-Kifl (ذو الكفل عليه السلام) es un profeta honrado por Allah en el Corán. Se le menciona junto a otros mensajeros en la sura Al-Anbiya (21:85-86) y la sura Sad (38:48). El Corán no detalla su vida terrenal, pero afirma claramente su lugar entre los siervos elegidos de Allah.",
+    "conclusion": "Dhu'l-Kifl es reconocido entre los profetas citados en el Libro revelado. El creyente medita en estos versículos sin añadir lo que Allah no reveló.",
+    "moral_lesson": "Esta historia enseña que el Corán basta para honrar a los profetas poco detallados. Nos ceñimos a las cualidades que Allah les atribuye sin recurrir a leyendas infundadas.",
+    "historical_location": null,
+    "historical_context": "El Corán menciona a Dhu'l-Kifl sin precisar el lugar de su misión. Los eruditos aconsejan ceñirse al texto revelado.",
+    "chapters": [
+      {
+        "id": "dhulkifl_in_the_book_chapter_1",
+        "title": "Una mención en Al-Anbiya",
+        "content": "Allah dice: «Isma'il, Idris y Dhu'l-Kifl. Todos fueron perseverantes.» (21:85) Luego: «Los hicimos entrar en Nuestra misericordia. Fueron de los justos.» (21:86) Dhu'l-Kifl se cita junto a otros profetas honorados. El Corán no detalla aquí las circunstancias de su vida, pero afirma su paciencia, virtud y la misericordia de la que fue objeto."
+      },
+      {
+        "id": "dhulkifl_in_the_book_chapter_2",
+        "title": "Una mención en Sad",
+        "content": "Allah dice también: «Y recuerda a Isma'il, Al-Yasa y Dhu'l-Kifl. Todos fueron de los mejores.» (38:48) Este versículo confirma el rango elevado de Dhu'l-Kifl entre los al-akhyar. El Corán lo presenta así dos veces, invitando al creyente a honrar su memoria con lo revelado, sin completarlo con relatos inventados."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Corán 21:85-86",
+        "reference_text": "Sura Al-Anbiya, versículos 85-86",
+        "content": "وَإِسْمَـٰعِيلَ وَإِدْرِيسَ وَذَا ٱلْكِفْلِ ۖ كُلٌّۭ مِّنَ ٱلصَّـٰبِرِينَ ۝ وَأَدْخَلْنَـٰهُمْ فِى رَحْمَتِنَآ ۖ إِنَّهُم مِّنَ ٱلصَّـٰلِحِينَ",
+        "translation": "Isma'il, Idris y Dhu'l-Kifl. Todos fueron perseverantes. Los hicimos entrar en Nuestra misericordia. Fueron de los justos.",
+        "relevance": "Primera mención coránica de Dhu'l-Kifl junto a otros profetas."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Corán 38:48",
+        "reference_text": "Sura Sad, versículo 48",
+        "content": "وَٱذْكُرْ إِسْمَـٰعِيلَ وَٱلْيَسَعَ وَذَا ٱلْكِفْلِ ۖ وَكُلٌّۭ مِّنَ ٱلْأَخْيَارِ",
+        "translation": "Recuerda a Isma'il, Al-Yasa y Dhu'l-Kifl. Todos fueron de los mejores.",
+        "relevance": "Segunda mención coránica que confirma el rango de Dhu'l-Kifl."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Dhu'l-Kifl",
+        "arabic_term": "ذو الكفل",
+        "definition": "Profeta mencionado en el Corán junto a otros mensajeros honorados.",
+        "pronunciation": "dhu-l-kifl"
+      },
+      {
+        "id": 2,
+        "term": "Al-Anbiya",
+        "arabic_term": "الأنبياء",
+        "definition": "Sura del Corán donde Dhu'l-Kifl se menciona con Isma'il e Idris.",
+        "pronunciation": "al-an-bi-ya"
+      }
+    ]
+  },
+  "dhulkifl_among_chosen": {
+    "title": "Dhu'l-Kifl entre los mejores",
+    "title_arabic": "ذو الكفل من الأخيار",
+    "introduction": "Allah honra a Dhu'l-Kifl colocándolo entre los mejores siervos: «Y recuerda a Isma'il, Al-Yasa y Dhu'l-Kifl. Todos fueron de los mejores.» (38:48) El término al-akhyar designa la excelencia en piedad y obediencia a Allah.",
+    "conclusion": "Dhu'l-Kifl pertenece a los al-akhyar, siervos elegidos por Allah. Esta mención basta para honrar su memoria sin especular más allá de la revelación.",
+    "moral_lesson": "Allah distingue a Sus siervos más piadosos. El creyente aspira a la excelencia (khayr) en la adoración y la buena conducta.",
+    "historical_location": null,
+    "historical_context": "El Corán no precisa las circunstancias de la misión de Dhu'l-Kifl. El calificativo al-akhyar basta para afirmar su rango elevado.",
+    "chapters": [
+      {
+        "id": "dhulkifl_among_chosen_chapter_1",
+        "title": "La orden de recordar a Dhu'l-Kifl",
+        "content": "Allah dice: «Y recuerda a Isma'il, Al-Yasa y Dhu'l-Kifl.» (38:48) Esta orden al Profeta Muhammad (ﷺ) muestra que la memoria de Dhu'l-Kifl debe perdurar en la comunidad musulmana. Se le cita junto a Isma'il y Al-Yasa, dos mensajeros honorados en el Corán."
+      },
+      {
+        "id": "dhulkifl_among_chosen_chapter_2",
+        "title": "De los al-akhyar",
+        "content": "Allah continúa: «Todos fueron de los mejores (al-akhyar).» (38:48) Al-akhyar es el plural de khayr (bien, excelencia). Designa a quienes se distinguen por piedad, sinceridad y obediencia. Dhu'l-Kifl está entre los siervos más excelentes de Allah, según lo revelado en Su Palabra."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Corán 38:48",
+        "reference_text": "Sura Sad, versículo 48",
+        "content": "وَٱذْكُرْ إِسْمَـٰعِيلَ وَٱلْيَسَعَ وَذَا ٱلْكِفْلِ ۖ وَكُلٌّۭ مِّنَ ٱلْأَخْيَارِ",
+        "translation": "Recuerda a Isma'il, Al-Yasa y Dhu'l-Kifl. Todos fueron de los mejores.",
+        "relevance": "Versículo principal que sitúa a Dhu'l-Kifl entre los al-akhyar."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Al-Akhyar",
+        "arabic_term": "الأخيار",
+        "definition": "Los mejores, los más excelentes en piedad. Dhu'l-Kifl está entre ellos según el Corán.",
+        "pronunciation": "al-akh-yar"
+      },
+      {
+        "id": 2,
+        "term": "Khayr",
+        "arabic_term": "خير",
+        "definition": "El bien, la excelencia. Raíz de la palabra al-akhyar.",
+        "pronunciation": "khayr"
+      },
+      {
+        "id": 3,
+        "term": "Al-Yasa",
+        "arabic_term": "اليسع",
+        "definition": "Profeta citado junto a Dhu'l-Kifl en la sura Sad.",
+        "pronunciation": "al-ya-sa"
+      }
+    ]
+  },
+  "dhulkifl_steadfast": {
+    "title": "Dhu'l-Kifl entre los perseverantes",
+    "title_arabic": "ذو الكفل من الصابرين",
+    "introduction": "El Corán asocia a Dhu'l-Kifl con otros profetas ejemplares: «Isma'il, Idris y Dhu'l-Kifl. Todos fueron perseverantes.» (21:85) Allah añade: «Los hicimos entrar en Nuestra misericordia. Fueron de los justos.» (21:86) Estos versículos elogian la paciencia (sabr) y la rectitud (salih) de Dhu'l-Kifl.",
+    "conclusion": "Dhu'l-Kifl pertenece a los profetas pacientes y justos. Allah le concedió Su misericordia. Es modelo de perseverancia en la obediencia.",
+    "moral_lesson": "La paciencia en la adoración y en la llamada a Allah es cualidad de los grandes profetas.",
+    "historical_location": null,
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "dhulkifl_steadfast_chapter_1",
+        "title": "Profetas perseverantes",
+        "content": "Allah dice: «Isma'il, Idris y Dhu'l-Kifl. Todos fueron perseverantes (sabirin).» (21:85) El sabr designa la constancia en la obediencia, la firmeza ante las pruebas y la perseverancia en la misión profética. Dhu'l-Kifl se cita junto a otros mensajeros honorados, mostrando que comparte sus nobles cualidades."
+      },
+      {
+        "id": "dhulkifl_steadfast_chapter_2",
+        "title": "Misericordia y virtud",
+        "content": "Allah continúa: «Los hicimos entrar en Nuestra misericordia. Fueron de los justos (salihin).» (21:86) Entrar en la misericordia de Allah significa que les concedió Su gracia y protección. Dhu'l-Kifl es, según el Corán, profeta paciente, justo y acogido en la misericordia divina."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Corán 21:85",
+        "reference_text": "Sura Al-Anbiya, versículo 85",
+        "content": "وَإِسْمَـٰعِيلَ وَإِدْرِيسَ وَذَا ٱلْكِفْلِ ۖ كُلٌّۭ مِّنَ ٱلصَّـٰبِرِينَ",
+        "translation": "Isma'il, Idris y Dhu'l-Kifl. Todos fueron perseverantes.",
+        "relevance": "Elogia la paciencia de Dhu'l-Kifl junto a otros profetas."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Corán 21:86",
+        "reference_text": "Sura Al-Anbiya, versículo 86",
+        "content": "وَأَدْخَلْنَـٰهُمْ فِى رَحْمَتِنَآ ۖ إِنَّهُم مِّنَ ٱلصَّـٰلِحِينَ",
+        "translation": "Los hicimos entrar en Nuestra misericordia. Fueron de los justos.",
+        "relevance": "Afirma la virtud de Dhu'l-Kifl y la misericordia que Allah le concedió."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Sabir",
+        "arabic_term": "صابر",
+        "definition": "Perseverante, paciente. Cualidad atribuida a Dhu'l-Kifl en el Corán.",
+        "pronunciation": "sa-bir"
+      },
+      {
+        "id": 2,
+        "term": "Salih",
+        "arabic_term": "صالح",
+        "definition": "Justo, piadoso. Dhu'l-Kifl está entre los salihin.",
+        "pronunciation": "sa-lih"
+      },
+      {
+        "id": 3,
+        "term": "Rahma",
+        "arabic_term": "رحمة",
+        "definition": "Misericordia divina con la que Dhu'l-Kifl y los profetas asociados fueron colmados.",
+        "pronunciation": "rah-ma"
+      }
+    ]
+  },
+  "dhulkifl_mercy": {
+    "title": "La misericordia concedida a Dhu'l-Kifl",
+    "title_arabic": "رحمة الله على ذي الكفل",
+    "introduction": "Allah concede una misericordia especial a Dhu'l-Kifl y a los profetas citados con él: «Los hicimos entrar en Nuestra misericordia. Fueron de los justos.» (21:86) Este versículo sigue a la alabanza de su paciencia (21:85) y confirma la gracia divina de la que fueron colmados.",
+    "conclusion": "Dhu'l-Kifl entró en la misericordia de Allah por su paciencia y virtud. El creyente ve en ello el honor reservado a los siervos fieles.",
+    "moral_lesson": "La misericordia de Allah abarca a los siervos piadosos que perseveran en la obediencia.",
+    "historical_location": null,
+    "historical_context": "El Corán vincula la misericordia divina con la paciencia y virtud de los profetas mencionados, incluido Dhu'l-Kifl.",
+    "chapters": [
+      {
+        "id": "dhulkifl_mercy_chapter_1",
+        "title": "Entrar en la misericordia de Allah",
+        "content": "Allah dice: «Los hicimos entrar en Nuestra misericordia (rahmatina).» (21:86) Adkhala indica que Allah los acogió en Su gracia y protección. Dhu'l-Kifl, citado en el versículo anterior con Isma'il e Idris como sabirin, está incluido en esta misericordia."
+      },
+      {
+        "id": "dhulkifl_mercy_chapter_2",
+        "title": "De los justos",
+        "content": "Allah añade: «Fueron de los justos (salihin).» (21:86) La misericordia divina se concede a quienes son salih — rectos, piadosos y sinceros en la obediencia. Dhu'l-Kifl comparte esta cualidad con los profetas mencionados en estos versículos."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Corán 21:86",
+        "reference_text": "Sura Al-Anbiya, versículo 86",
+        "content": "وَأَدْخَلْنَـٰهُمْ فِى رَحْمَتِنَآ ۖ إِنَّهُم مِّنَ ٱلصَّـٰلِحِينَ",
+        "translation": "Los hicimos entrar en Nuestra misericordia. Fueron de los justos.",
+        "relevance": "Versículo central sobre la misericordia concedida a Dhu'l-Kifl."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Corán 21:85",
+        "reference_text": "Sura Al-Anbiya, versículo 85",
+        "content": "وَإِسْمَـٰعِيلَ وَإِدْرِيسَ وَذَا ٱلْكِفْلِ ۖ كُلٌّۭ مِّنَ ٱلصَّـٰبِرِينَ",
+        "translation": "Isma'il, Idris y Dhu'l-Kifl. Todos fueron perseverantes.",
+        "relevance": "Contexto de paciencia que precede a la misericordia del versículo 86."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Rahma",
+        "arabic_term": "رحمة",
+        "definition": "Misericordia divina. Dhu'l-Kifl entró en la rahma de Allah según el Corán.",
+        "pronunciation": "rah-ma"
+      },
+      {
+        "id": 2,
+        "term": "Salihin",
+        "arabic_term": "صالحون",
+        "definition": "Los justos. Dhu'l-Kifl está entre ellos según el versículo 21:86.",
+        "pronunciation": "sa-li-hin"
+      },
+      {
+        "id": 3,
+        "term": "Adkhala",
+        "arabic_term": "أدخل",
+        "definition": "Hacer entrar. Allah hizo entrar a Dhu'l-Kifl y los profetas asociados en Su misericordia.",
+        "pronunciation": "ad-kha-la"
+      }
+    ]
+  },
+  "lessons_from_dhulkifl": {
+    "title": "Lecciones del profeta Dhu'l-Kifl",
+    "title_arabic": "دروس من نبي الله ذي الكفل",
+    "introduction": "El Corán menciona a Dhu'l-Kifl en pocos versículos, pero cada palabra está llena de sentido: paciencia, virtud, excelencia y misericordia. Meditar en Al-Anbiya (21:85-86) y Sad (38:48) ofrece enseñanzas duraderas sin recurrir a relatos inventados.",
+    "conclusion": "Dhu'l-Kifl sigue siendo modelo de sabr, salih y excelencia entre los al-akhyar. Su historia en el Corán invita a la sinceridad y a confiar en la misericordia de Allah.",
+    "moral_lesson": "Ceñirse a los textos auténticos protege al creyente del error. Las cualidades de Dhu'l-Kifl — paciencia, virtud, excelencia, misericordia — son metas para toda alma piadosa.",
+    "historical_location": null,
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lessons_from_dhulkifl_chapter_1",
+        "title": "Apoyarse en el Corán",
+        "content": "Allah solo menciona a Dhu'l-Kifl en versículos concretos: 21:85-86 y 38:48. Esta brevedad enseña al musulmán a no completar la revelación con leyendas. Honramos a Dhu'l-Kifl por lo que Allah dijo: sabir, salih, al-akhyar y acogido en la rahma."
+      },
+      {
+        "id": "lessons_from_dhulkifl_chapter_2",
+        "title": "Apuntar a las cualidades proféticas",
+        "content": "El sabr invita a perseverar en la oración, la buena conducta y la llamada al bien. Salih recuerda la importancia de la rectitud. Al-akhyar llama a la excelencia en la adoración. La rahma de Allah recuerda que el verdadero honor viene del Señor."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Corán 21:85-86",
+        "reference_text": "Sura Al-Anbiya, versículos 85-86",
+        "content": "وَإِسْمَـٰعِيلَ وَإِدْرِيسَ وَذَا ٱلْكِفْلِ ۖ كُلٌّۭ مِّنَ ٱلصَّـٰبِرِينَ ۝ وَأَدْخَلْنَـٰهُمْ فِى رَحْمَتِنَآ ۖ إِنَّهُم مِّنَ ٱلصَّـٰلِحِينَ",
+        "translation": "Isma'il, Idris y Dhu'l-Kifl. Todos fueron perseverantes. Los hicimos entrar en Nuestra misericordia. Fueron de los justos.",
+        "relevance": "Síntesis de los honores coránicos concedidos a Dhu'l-Kifl."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Corán 38:48",
+        "reference_text": "Sura Sad, versículo 48",
+        "content": "وَٱذْكُرْ إِسْمَـٰعِيلَ وَٱلْيَسَعَ وَذَا ٱلْكِفْلِ ۖ وَكُلٌّۭ مِّنَ ٱلْأَخْيَارِ",
+        "translation": "Recuerda a Isma'il, Al-Yasa y Dhu'l-Kifl. Todos fueron de los mejores.",
+        "relevance": "Recuerda la excelencia de Dhu'l-Kifl entre los al-akhyar."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Tafsir",
+        "arabic_term": "تفسير",
+        "definition": "Exégesis del Corán. Los eruditos explican los versículos sobre Dhu'l-Kifl sin inventar relatos.",
+        "pronunciation": "taf-sir"
+      },
+      {
+        "id": 2,
+        "term": "Al-Akhyar",
+        "arabic_term": "الأخيار",
+        "definition": "Los mejores. Dhu'l-Kifl está entre ellos según el Corán 38:48.",
+        "pronunciation": "al-akh-yar"
+      }
+    ]
+  }
+}

@@ -1,0 +1,242 @@
+{
+  "idris_in_the_book": {
+    "title": "Idris mencionado en el Libro",
+    "title_arabic": "ذكر إدريس في الكتاب",
+    "introduction": "Idris (إدريس عليه السلام) es un profeta honrado por Allah en el Corán. Allah ordena al Profeta Muhammad (ﷺ) mencionarlo: «Y menciona en el Libro a Idris. Fue un hombre veraz y profeta.» (19:56) El Corán no detalla su vida terrenal, pero afirma claramente su veracidad y su profecía.",
+    "conclusion": "Idris es reconocido entre los mensajeros de Allah. Su nombre se asocia a la sidq (veracidad) y la nubuwwa (profecía).",
+    "moral_lesson": "La veracidad y la sinceridad hacia Allah son cualidades proféticas. El Corán basta para honrar a Idris sin relatos infundados.",
+    "historical_location": null,
+    "historical_context": "El Corán menciona a Idris sin precisar el lugar de su misión. Los sabios aconsejan ceñirse al texto revelado.",
+    "chapters": [
+      {
+        "id": "idris_in_the_book_chapter_1",
+        "title": "La orden de mencionar a Idris",
+        "content": "Allah dice: «Y menciona en el Libro a Idris.» (19:56) Este Libro es el Corán, que preserva la memoria de los profetas. Mencionar a Idris recuerda que Allah envió guías después de Adam. Idris forma parte de la cadena del tawhid."
+      },
+      {
+        "id": "idris_in_the_book_chapter_2",
+        "title": "Un hombre veraz y profeta",
+        "content": "Allah continúa: «Fue un hombre veraz (siddiq) y profeta (nabi).» (19:56) Siddiq indica sinceridad en la fe; nabi confirma que recibió revelación y transmitió el mensaje de Allah."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Corán 19:56",
+        "reference_text": "Sura Maryam, versículo 56",
+        "content": "۞ وَٱذْكُرْ فِى ٱلْكِتَـٰبِ إِدْرِيسَ ۚ إِنَّهُۥ كَانَ صِدِّيقًۭا نَّبِيًّۭا",
+        "translation": "Y menciona en el Libro a Idris. Fue un hombre veraz y profeta.",
+        "relevance": "Versículo principal sobre la profecía y veracidad de Idris."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Idris",
+        "arabic_term": "إدريس",
+        "definition": "Profeta mencionado en el Corán.",
+        "pronunciation": "id-ris"
+      },
+      {
+        "id": 2,
+        "term": "Siddiq",
+        "arabic_term": "صديق",
+        "definition": "Hombre de verdad, sincero hacia Allah.",
+        "pronunciation": "sid-diq"
+      },
+      {
+        "id": 3,
+        "term": "Nabi",
+        "arabic_term": "نبي",
+        "definition": "Profeta que recibe revelación.",
+        "pronunciation": "na-bi"
+      }
+    ]
+  },
+  "idris_high_station": {
+    "title": "Idris elevado a un lugar sublime",
+    "title_arabic": "رفع إدريس مكاناً عليا",
+    "introduction": "Allah dice: «Y lo elevamos a un lugar sublime.» (19:57) En un hadiz auténtico (Sahih Muslim), el Profeta (ﷺ) vio a Idris en el cuarto cielo durante el Viaje Nocturno.",
+    "conclusion": "La elevación de Idris es una gracia de Allah.",
+    "moral_lesson": "Allah eleva a quien Él quiere. La obediencia conduce a una estación honorable.",
+    "historical_location": null,
+    "historical_context": "«Lugar sublime» (makanan aliyyan): rango espiritual elevado; hadiz auténtico: cuarto cielo.",
+    "chapters": [
+      {
+        "id": "idris_high_station_chapter_1",
+        "title": "Elevación concedida por Allah",
+        "content": "Allah dice: «Y lo elevamos a un lugar sublime.» (19:57) Los exégetas advierten no inventar relatos: el Corán afirma el favor y la Sunna auténtica puede precisarlo."
+      },
+      {
+        "id": "idris_high_station_chapter_2",
+        "title": "Idris en el cuarto cielo",
+        "content": "En Sahih Muslim, el Profeta (ﷺ) relató haber encontrado a Idris en el cuarto cielo durante el Isra y Mi'raj. Testimonio auténtico sobre su rango elevado."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Corán 19:57",
+        "reference_text": "Sura Maryam, 57",
+        "content": "وَرَفَعْنَـٰهُ مَكَانًا عَلِيًّا",
+        "translation": "Y lo elevamos a un lugar sublime.",
+        "relevance": "Afirma la elevación de Idris."
+      },
+      {
+        "id": 2,
+        "type": "hadith",
+        "source": "Sahih Muslim",
+        "reference_text": "Relato del Viaje Nocturno",
+        "content": "Le Prophète (ﷺ) vit Idris au quatrième ciel.",
+        "translation": "Testimonio auténtico sobre su estación elevada.",
+        "relevance": "Confirma en la Sunna el rango mencionado en el Corán."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Makan Aliyy",
+        "arabic_term": "مكان علي",
+        "definition": "Lugar sublime otorgado por Allah.",
+        "pronunciation": "ma-kan a-liyy"
+      },
+      {
+        "id": 2,
+        "term": "Rafa'a",
+        "arabic_term": "رفع",
+        "definition": "Elevar; Allah elevó a Idris.",
+        "pronunciation": "ra-fa-a"
+      },
+      {
+        "id": 3,
+        "term": "Mi'raj",
+        "arabic_term": "معراج",
+        "definition": "Ascensión nocturna.",
+        "pronunciation": "mi-raj"
+      }
+    ]
+  },
+  "idris_steadfast": {
+    "title": "Idris entre los perseverantes",
+    "title_arabic": "إدريس من الصابرين",
+    "introduction": "«Isma'il, Idris y Dhu'l-Kifl. Todos fueron perseverantes.» (21:85) «Los hicimos entrar en Nuestra misericordia. Fueron de los justos.» (21:86)",
+    "conclusion": "Idris es profeta paciente y justo, acogido en la misericordia de Allah.",
+    "moral_lesson": "La paciencia en la adoración es virtud profética.",
+    "historical_location": null,
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "idris_steadfast_chapter_1",
+        "title": "Profetas perseverantes",
+        "content": "El sabr es constancia en la obediencia y en la misión profética. Idris se cita junto a otros mensajeros honorados."
+      },
+      {
+        "id": "idris_steadfast_chapter_2",
+        "title": "Misericordia y virtud",
+        "content": "Entrar en la misericordia de Allah es Su gracia. Salihin confirma la rectitud de Idris."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Corán 21:85",
+        "reference_text": "Sura Al-Anbiya, 85",
+        "content": "وَإِسْمَـٰعِيلَ وَإِدْرِيسَ وَذَا ٱلْكِفْلِ ۖ كُلٌّۭ مِّنَ ٱلصَّـٰبِرِينَ",
+        "translation": "Isma'il, Idris y Dhu'l-Kifl. Todos fueron perseverantes.",
+        "relevance": "Elogia la paciencia de Idris."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Corán 21:86",
+        "reference_text": "Sura Al-Anbiya, 86",
+        "content": "وَأَدْخَلْنَـٰهُمْ فِى رَحْمَتِنَآ ۖ إِنَّهُم مِّنَ ٱلصَّـٰلِحِينَ",
+        "translation": "Los hicimos entrar en Nuestra misericordia. Fueron de los justos.",
+        "relevance": "Confirma su virtud."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Sabir",
+        "arabic_term": "صابر",
+        "definition": "Perseverante.",
+        "pronunciation": "sa-bir"
+      },
+      {
+        "id": 2,
+        "term": "Salih",
+        "arabic_term": "صالح",
+        "definition": "Justo, piadoso.",
+        "pronunciation": "sa-lih"
+      },
+      {
+        "id": 3,
+        "term": "Rahma",
+        "arabic_term": "رحمة",
+        "definition": "Misericordia divina.",
+        "pronunciation": "rah-ma"
+      }
+    ]
+  },
+  "lessons_from_idris": {
+    "title": "Lecciones del profeta Idris",
+    "title_arabic": "دروس من نبي الله إدريس",
+    "introduction": "Pocos versículos, gran significado: verdad, profecía, elevación, paciencia y virtud (Maryam 19:56-57; Al-Anbiya 21:85-86).",
+    "conclusion": "Idris es modelo de sidq, sabr y rectitud.",
+    "moral_lesson": "Aferrarse a textos auténticos protege del error.",
+    "historical_location": null,
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lessons_from_idris_chapter_1",
+        "title": "Apoyarse en el Corán",
+        "content": "La brevedad enseña a no completar la revelación con leyendas. Honramos a Idris por lo que Allah dijo: siddiq, nabi, elevado, sabir, salih."
+      },
+      {
+        "id": "lessons_from_idris_chapter_2",
+        "title": "Buscar cualidades proféticas",
+        "content": "Sidq, sabr y honor verdadero vienen de Allah. Así camina el creyente tras los salihin, entre ellos Idris."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Corán 19:56-57",
+        "reference_text": "Sura Maryam, 56-57",
+        "content": "۞ وَٱذْكُرْ فِى ٱلْكِتَـٰبِ إِدْرِيسَ ۚ إِنَّهُۥ كَانَ صِدِّيقًۭا نَّبِيًّۭا ۝ وَرَفَعْنَـٰهُ مَكَانًا عَلِيًّا",
+        "translation": "Menciona a Idris… hombre veraz y profeta… lugar sublime.",
+        "relevance": "Honores coránicos."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Corán 21:85-86",
+        "reference_text": "Sura Al-Anbiya, 85-86",
+        "content": "وَإِسْمَـٰعِيلَ وَإِدْرِيسَ وَذَا ٱلْكِفْلِ ۖ كُلٌّۭ مِّنَ ٱلصَّـٰبِرِينَ ۝ وَأَدْخَلْنَـٰهُمْ فِى رَحْمَتِنَآ ۖ إِنَّهُم مِّنَ ٱلصَّـٰلِحِينَ",
+        "translation": "Perseverantes… misericordia… justos.",
+        "relevance": "Paciencia y virtud."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Tafsir",
+        "arabic_term": "تفسير",
+        "definition": "Exégesis sin invenciones.",
+        "pronunciation": "taf-sir"
+      },
+      {
+        "id": 2,
+        "term": "Salihin",
+        "arabic_term": "صالحون",
+        "definition": "Los justos; Idris entre ellos.",
+        "pronunciation": "sa-li-hin"
+      }
+    ]
+  }
+}

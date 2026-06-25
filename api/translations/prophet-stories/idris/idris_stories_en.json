@@ -1,0 +1,242 @@
+{
+  "idris_in_the_book": {
+    "title": "Idris mentioned in the Book",
+    "title_arabic": "ذكر إدريس في الكتاب",
+    "introduction": "Idris (إدريس عليه السلام) is a prophet honored by Allah in the Quran. Allah commands the Prophet Muhammad (ﷺ) to mention him: \"And mention in the Book Idris. He was a man of truth and a prophet.\" (19:56) The Quran does not detail his earthly life, but clearly affirms his truthfulness and prophethood.",
+    "conclusion": "Idris is thus recognized among Allah's messengers. His name is linked to sidq (truthfulness) and nubuwwa (prophethood). The believer reflects on these qualities without adding to the accounts what Allah did not reveal.",
+    "moral_lesson": "This story teaches that truthfulness and sincerity toward Allah are prophetic qualities. The Quran is sufficient to honor Idris without relying on unfounded narratives.",
+    "historical_location": null,
+    "historical_context": "The Quran mentions Idris without specifying the place of his mission. Scholars advise adhering to the revealed text.",
+    "chapters": [
+      {
+        "id": "idris_in_the_book_chapter_1",
+        "title": "The command to mention Idris",
+        "content": "Allah says: \"And mention in the Book Idris.\" (19:56) This \"Book\" refers to the Quran itself, which preserves the memory of the prophets. Mentioning Idris reminds us that Allah sent guides after Adam. Each prophet received a message of tawhid (monotheism). Idris is part of this blessed chain that the Quran presents to believers."
+      },
+      {
+        "id": "idris_in_the_book_chapter_2",
+        "title": "A man of truth and a prophet",
+        "content": "Allah continues: \"He was a man of truth (siddiq) and a prophet (nabi).\" (19:56) The term siddiq denotes one who is sincere in faith, constant in truth, and faithful to his Lord. The title nabi confirms that Idris received revelation and conveyed Allah's message. These two descriptions summarize what Allah wanted us to learn about him, without further narrative detail in this verse."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 19:56",
+        "reference_text": "Surah Maryam, verse 56",
+        "content": "۞ وَٱذْكُرْ فِى ٱلْكِتَـٰبِ إِدْرِيسَ ۚ إِنَّهُۥ كَانَ صِدِّيقًۭا نَّبِيًّۭا",
+        "translation": "And mention in the Book Idris. He was a man of truth and a prophet.",
+        "relevance": "Main verse establishing Idris's prophethood and truthfulness."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Idris",
+        "arabic_term": "إدريس",
+        "definition": "Prophet mentioned in the Quran. Described as siddiq and nabi.",
+        "pronunciation": "id-ris"
+      },
+      {
+        "id": 2,
+        "term": "Siddiq",
+        "arabic_term": "صديق",
+        "definition": "Man of truth, perfectly sincere toward Allah.",
+        "pronunciation": "sid-diq"
+      },
+      {
+        "id": 3,
+        "term": "Nabi",
+        "arabic_term": "نبي",
+        "definition": "Prophet who receives revelation and calls to worship Allah alone.",
+        "pronunciation": "na-bi"
+      }
+    ]
+  },
+  "idris_high_station": {
+    "title": "Idris raised to a high station",
+    "title_arabic": "رفع إدريس مكاناً عليا",
+    "introduction": "Allah honors Idris with a unique elevation: \"And We raised him to a high station.\" (19:57) This verse affirms a divine favor without detailing its exact nature. Tafsir scholars explain that Allah granted him a lofty rank and honorable station. The Prophet Muhammad (ﷺ) — in an authentic report — saw him in the fourth heaven during the Night Journey.",
+    "conclusion": "Idris's elevation is a grace from Allah. The believer sees in it the honor reserved for faithful servants, without speculating beyond what revelation and authentic hadith mention.",
+    "moral_lesson": "Allah elevates whom He wills. Obedience and sincerity lead to an honorable station with the Lord.",
+    "historical_location": null,
+    "historical_context": "The precise meaning of \"high station\" (makanan aliyyan) is interpreted by exegetes as a lofty spiritual rank and, according to an authentic hadith, a presence in the fourth heaven.",
+    "chapters": [
+      {
+        "id": "idris_high_station_chapter_1",
+        "title": "An elevation granted by Allah",
+        "content": "Allah says: \"And We raised him to a high station.\" (19:57) The verb \"rafa'a\" (to raise) indicates that Allah granted him a superior position. Ibn Kathir and other exegetes remind us not to invent detailed stories: the Quran affirms the favor, and authentic Sunnah may clarify it without adding legends. This elevation is a sign of divine love and honor toward Idris."
+      },
+      {
+        "id": "idris_high_station_chapter_2",
+        "title": "Idris in the fourth heaven",
+        "content": "In an authentic hadith reported by Muslim, the Prophet Muhammad (ﷺ) said he met Idris in the fourth heaven during the Night Journey (Isra and Mi'raj). This prophetic testimony confirms Idris's lofty rank without the believer needing other unfounded accounts. The Quran and authentic Sunnah are sufficient to honor this messenger."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 19:57",
+        "reference_text": "Surah Maryam, verse 57",
+        "content": "وَرَفَعْنَـٰهُ مَكَانًا عَلِيًّا",
+        "translation": "And We raised him to a high station.",
+        "relevance": "Affirms Idris's honorable elevation by Allah."
+      },
+      {
+        "id": 2,
+        "type": "hadith",
+        "source": "Sahih Muslim",
+        "reference_text": "Account of the Night Journey (Isra and Mi'raj)",
+        "content": "Le Prophète (ﷺ) vit Idris au quatrième ciel.",
+        "translation": "Authentic testimony about Idris's elevated station.",
+        "relevance": "Confirms in authentic Sunnah the lofty rank mentioned in the Quran."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Makan Aliyy",
+        "arabic_term": "مكان علي",
+        "definition": "High station, elevated rank granted by Allah to Idris.",
+        "pronunciation": "ma-kan a-liyy"
+      },
+      {
+        "id": 2,
+        "term": "Rafa'a",
+        "arabic_term": "رفع",
+        "definition": "To raise. Allah raised Idris in rank and honor.",
+        "pronunciation": "ra-fa-a"
+      },
+      {
+        "id": 3,
+        "term": "Mi'raj",
+        "arabic_term": "معراج",
+        "definition": "Night Ascension during which the Prophet Muhammad (ﷺ) met the prophets.",
+        "pronunciation": "mi-raj"
+      }
+    ]
+  },
+  "idris_steadfast": {
+    "title": "Idris among the steadfast",
+    "title_arabic": "إدريس من الصابرين",
+    "introduction": "The Quran associates Idris with other exemplary prophets: \"And Ismail, Idris and Dhu'l-Kifl. All were steadfast.\" (21:85) Allah then adds: \"And We admitted them to Our mercy. They were indeed among the righteous.\" (21:86) These verses praise Idris's patience (sabr) and righteousness (salih).",
+    "conclusion": "Idris belongs to the patient and righteous prophets. Allah granted him His mercy. He is a model of perseverance in obedience.",
+    "moral_lesson": "Patience in worship and in calling to Allah is a quality of the great prophets. The believer draws inspiration from this daily.",
+    "historical_location": null,
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "idris_steadfast_chapter_1",
+        "title": "Steadfast prophets",
+        "content": "Allah says: \"And Ismail, Idris and Dhu'l-Kifl. All were steadfast (sabirin).\" (21:85) Sabr here means constancy in obedience, firmness in trials, and perseverance in the prophetic mission. Idris is cited alongside other honored messengers, showing he shares their noble qualities without the Quran detailing the circumstances of his life here."
+      },
+      {
+        "id": "idris_steadfast_chapter_2",
+        "title": "Mercy and virtue",
+        "content": "Allah continues: \"And We admitted them to Our mercy. They were indeed among the righteous (salihin).\" (21:86) Entering Allah's mercy means He granted them His grace and protection. The term salihin (righteous) confirms their uprightness. Thus, according to the Quran, Idris is a patient, righteous prophet welcomed into divine mercy."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 21:85",
+        "reference_text": "Surah Al-Anbiya, verse 85",
+        "content": "وَإِسْمَـٰعِيلَ وَإِدْرِيسَ وَذَا ٱلْكِفْلِ ۖ كُلٌّۭ مِّنَ ٱلصَّـٰبِرِينَ",
+        "translation": "And Ismail, Idris and Dhu'l-Kifl. All were steadfast.",
+        "relevance": "Praises Idris's patience alongside other prophets."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 21:86",
+        "reference_text": "Surah Al-Anbiya, verse 86",
+        "content": "وَأَدْخَلْنَـٰهُمْ فِى رَحْمَتِنَآ ۖ إِنَّهُم مِّنَ ٱلصَّـٰلِحِينَ",
+        "translation": "And We admitted them to Our mercy. They were indeed among the righteous.",
+        "relevance": "Affirms Idris's virtue and the mercy Allah granted him."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Sabir",
+        "arabic_term": "صابر",
+        "definition": "Steadfast, patient. Quality attributed to Idris in the Quran.",
+        "pronunciation": "sa-bir"
+      },
+      {
+        "id": 2,
+        "term": "Salih",
+        "arabic_term": "صالح",
+        "definition": "Righteous, pious. Idris is among the salihin.",
+        "pronunciation": "sa-lih"
+      },
+      {
+        "id": 3,
+        "term": "Rahma",
+        "arabic_term": "رحمة",
+        "definition": "Divine mercy with which Idris and the associated prophets were blessed.",
+        "pronunciation": "rah-ma"
+      }
+    ]
+  },
+  "lessons_from_idris": {
+    "title": "Lessons from Prophet Idris",
+    "title_arabic": "دروس من نبي الله إدريس",
+    "introduction": "The Quran mentions Idris in few verses, yet each word is full of meaning: truth, prophethood, elevation, patience and virtue. Reflecting on Surah Maryam (19:56-57) and Al-Anbiya (21:85-86), the believer draws lasting lessons without resorting to invented tales.",
+    "conclusion": "Idris remains a model of sidq, sabr and righteousness. His story in the Quran invites sincerity and trust in Allah's mercy.",
+    "moral_lesson": "Adhering to authentic texts protects the believer from error. Idris's qualities — truth, patience, elevation by Allah — are goals for every pious soul.",
+    "historical_location": null,
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lessons_from_idris_chapter_1",
+        "title": "Relying on the Quran",
+        "content": "Allah mentions Idris only in specific verses. This brevity teaches the Muslim not to complete revelation with legends. As with other prophets little detailed in the Quran, we honor Idris by what Allah said: siddiq, nabi, raised to a high station, sabir and salih. This is a sound method of religious knowledge."
+      },
+      {
+        "id": "lessons_from_idris_chapter_2",
+        "title": "Aiming for prophetic qualities",
+        "content": "Sidq calls for total sincerity toward Allah. Sabr invites perseverance in prayer, good conduct and calling to good. Elevation to a high station reminds us that true honor comes from the Lord, not appearances. By following these teachings, the believer walks in the footsteps of the salihin, among whom Allah counts Idris."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 19:56-57",
+        "reference_text": "Surah Maryam, verses 56-57",
+        "content": "۞ وَٱذْكُرْ فِى ٱلْكِتَـٰبِ إِدْرِيسَ ۚ إِنَّهُۥ كَانَ صِدِّيقًۭا نَّبِيًّۭا ۝ وَرَفَعْنَـٰهُ مَكَانًا عَلِيًّا",
+        "translation": "And mention in the Book Idris. He was a man of truth and a prophet. And We raised him to a high station.",
+        "relevance": "Summary of Quranic honors granted to Idris."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 21:85-86",
+        "reference_text": "Surah Al-Anbiya, verses 85-86",
+        "content": "وَإِسْمَـٰعِيلَ وَإِدْرِيسَ وَذَا ٱلْكِفْلِ ۖ كُلٌّۭ مِّنَ ٱلصَّـٰبِرِينَ ۝ وَأَدْخَلْنَـٰهُمْ فِى رَحْمَتِنَآ ۖ إِنَّهُم مِّنَ ٱلصَّـٰلِحِينَ",
+        "translation": "And Ismail, Idris and Dhu'l-Kifl. All were steadfast. And We admitted them to Our mercy. They were indeed among the righteous.",
+        "relevance": "Recalls Idris's patience and virtue."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Tafsir",
+        "arabic_term": "تفسير",
+        "definition": "Quranic exegesis. Scholars explain verses about Idris without inventing stories.",
+        "pronunciation": "taf-sir"
+      },
+      {
+        "id": 2,
+        "term": "Salihin",
+        "arabic_term": "صالحون",
+        "definition": "The righteous. Idris is among them according to the Quran.",
+        "pronunciation": "sa-li-hin"
+      }
+    ]
+  }
+}

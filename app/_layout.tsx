@@ -979,6 +979,12 @@ function TabLayoutContent() {
           }}
         />
         <Tabs.Screen
+          name="prophets-timeline"
+          options={{
+            href: null,
+          }}
+        />
+        <Tabs.Screen
           name="story-reader"
           options={{
             href: null, // Cache l'onglet de la navigation

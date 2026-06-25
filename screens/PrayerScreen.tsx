@@ -43,6 +43,11 @@ import { reverseGeocodeAsync } from "expo-location";
 import { useLocation } from "../hooks/useLocation";
 import { usePrayerTimes } from "../hooks/usePrayerTimes";
 import { useWeeklyPrayerTimes } from "../hooks/useWeeklyPrayerTimes";
+import { useMinuteTick } from "../hooks/useMinuteTick";
+import {
+  computeTomorrowPrayerTimes,
+  getNextPrayerInfo,
+} from "../utils/nextPrayer";
 import { scheduleNotificationsFor2Days } from "../utils/sheduleAllNotificationsFor30Days";
 import { useFocusEffect } from "@react-navigation/native";
 import { errorLog } from "../utils/logger";
@@ -711,6 +716,30 @@ export default function PrayerScreen() {
     usePrayerTimes(locationToUse, today, user?.isPremium || false);
   const weekPrayerTimes = useWeeklyPrayerTimes(locationToUse, today);
 
+  const prayerCoords = useMemo(() => {
+    if (!locationToUse?.coords) return null;
+    return {
+      latitude: locationToUse.coords.latitude,
+      longitude: locationToUse.coords.longitude,
+    };
+  }, [locationToUse]);
+
+  const tomorrowPrayerTimes = useMemo(
+    () =>
+      computeTomorrowPrayerTimes(
+        today,
+        prayerCoords,
+        settings.calcMethod || "MuslimWorldLeague",
+      ),
+    [today, prayerCoords, settings.calcMethod],
+  );
+
+  const minuteTick = useMinuteTick();
+  const nowForPrayerCountdown = useMemo(
+    () => new Date(),
+    [minuteTick],
+  );
+
   useEffect(() => {
     fadeAnim.value = withTiming(1, { duration: 800 });
     slideAnim.value = withTiming(0, { duration: 600 });
@@ -748,22 +777,11 @@ export default function PrayerScreen() {
 
   // Calculer le temps jusqu'à la prochaine prière en minutes
   const getTimeUntilNextInMinutes = () => {
-    if (!currentPrayerTimes) return 0;
-
-    const currentTime = new Date();
-    const prayers = ["Fajr", "Dhuhr", "Asr", "Maghrib", "Isha"];
-
-    for (const prayer of prayers) {
-      const prayerTime =
-        (currentPrayerTimes as any)[prayer.toLowerCase()] ||
-        (currentPrayerTimes as any)[prayer];
-      if (prayerTime && currentTime < prayerTime) {
-        return Math.floor(
-          (prayerTime.getTime() - currentTime.getTime()) / (1000 * 60)
-        );
-      }
-    }
-    return 0;
+    const next = getNextPrayerInfo(currentPrayerTimes, nowForPrayerCountdown, {
+      tomorrowPrayerTimes,
+    });
+    if (!next) return 0;
+    return Math.floor(next.diff / (1000 * 60));
   };
 
   // Calculer les statistiques des prières
@@ -968,11 +986,16 @@ export default function PrayerScreen() {
     );
   }
 
-  const currentTime = new Date();
-  const { nextPrayer, timeUntilNext } = getNextPrayer(
-    currentPrayerTimes as unknown as Record<string, Date>,
-    currentTime
+  const nextPrayerInfo = getNextPrayerInfo(
+    currentPrayerTimes,
+    nowForPrayerCountdown,
+    {
+      tomorrowPrayerTimes,
+      locale: i18n.language,
+    },
   );
+  const nextPrayer = nextPrayerInfo?.name ?? null;
+  const timeUntilNext = nextPrayerInfo?.countdown ?? "";
 
   const minutesUntilNext = getTimeUntilNextInMinutes();
 
@@ -1044,7 +1067,8 @@ export default function PrayerScreen() {
                     currentPrayerTimes[
                       prayer as keyof typeof currentPrayerTimes
                     ];
-                  const isPassed = time instanceof Date && currentTime > time;
+                  const isPassed =
+                    time instanceof Date && nowForPrayerCountdown > time;
                   const isNext = nextPrayer?.toLowerCase() === prayer;
 
                   // Exclure "sunrise" car ce n'est pas une prière avec adhan
@@ -1126,7 +1150,7 @@ export default function PrayerScreen() {
         <SunInfo
           sunrise={currentPrayerTimes?.sunrise || null}
           sunset={currentPrayerTimes?.maghrib || null}
-          currentTime={currentTime}
+          currentTime={nowForPrayerCountdown}
         />
 
         {/* Vue hebdomadaire */}
@@ -1150,33 +1174,6 @@ export default function PrayerScreen() {
       </Animated.ScrollView>
     </ThemedImageBackground>
   );
-}
-
-// Fonction utilitaire pour trouver la prochaine prière
-function getNextPrayer(
-  prayerTimes: Record<string, Date>,
-  currentTime: Date
-): { nextPrayer: string | null; timeUntilNext: string } {
-  const prayers = ["Fajr", "Dhuhr", "Asr", "Maghrib", "Isha"];
-
-  for (const prayer of prayers) {
-    const prayerTime = prayerTimes[prayer];
-    if (prayerTime && currentTime < prayerTime) {
-      const diff = prayerTime.getTime() - currentTime.getTime();
-      const hours = Math.floor(diff / (1000 * 60 * 60));
-      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-
-      let timeText = "";
-      if (hours > 0) {
-        timeText += `${hours}h `;
-      }
-      timeText += `${minutes}min`;
-
-      return { nextPrayer: prayer, timeUntilNext: timeText };
-    }
-  }
-
-  return { nextPrayer: null, timeUntilNext: "" };
 }
 
 // Fonction pour créer les styles dynamiques

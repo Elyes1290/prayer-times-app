@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useMemo } from "react";
+import React, { useState, useCallback, useMemo, useEffect } from "react";
 import {
   View,
   Text,
@@ -12,7 +12,7 @@ import {
 } from "react-native";
 import { LinearGradient } from "@/components/ui/LinearGradientView";
 import { IonIcon } from "@/components/icons/AppVectorIcons";
-import { useFocusEffect, useRouter } from "expo-router";
+import { useFocusEffect, useRouter, useLocalSearchParams } from "expo-router";
 
 import ThemedImageBackground from "../components/ThemedImageBackground";
 import { useThemeColors } from "../hooks/useThemeAssets";
@@ -342,8 +342,26 @@ export default function ProphetStoriesScreen() {
   const [downloadingStories, setDownloadingStories] = useState<Set<string>>(
     new Set(),
   );
+  const params = useLocalSearchParams<{ prophet?: string }>();
+
+  const resolveProphetParam = (value?: string): ProphetId | null => {
+    if (value && VALID_PROPHET_IDS.includes(value as ProphetId)) {
+      return value as ProphetId;
+    }
+    return null;
+  };
+
   // 🆕 État pour le prophète sélectionné
-  const [selectedProphet, setSelectedProphet] = useState<ProphetId>("muhammad");
+  const [selectedProphet, setSelectedProphet] = useState<ProphetId>(
+    () => resolveProphetParam(params.prophet) ?? "muhammad",
+  );
+
+  useEffect(() => {
+    const prophetFromParams = resolveProphetParam(params.prophet);
+    if (prophetFromParams) {
+      setSelectedProphet(prophetFromParams);
+    }
+  }, [params.prophet]);
 
   // 🆕 Charger les données (en ligne ou hors ligne)
   const loadStories = useCallback(
@@ -426,28 +444,7 @@ export default function ProphetStoriesScreen() {
   );
 
   // 🆕 Fonction pour changer de prophète
-  const handleProphetChange = (
-    prophet:
-      | "muhammad"
-      | "adam"
-      | "nuh"
-      | "hud"
-      | "salih"
-      | "ibrahim"
-      | "lut"
-      | "yusuf"
-      | "musa"
-      | "dawud"
-      | "sulayman"
-      | "yunus"
-      | "ayyub"
-      | "zakariya"
-      | "yahya"
-      | "ilyas"
-      | "alyasa"
-      | "shuayb"
-      | "isa",
-  ) => {
+  const handleProphetChange = (prophet: ProphetId) => {
     if (prophet !== selectedProphet) {
       setSelectedProphet(prophet);
       setLoading(true);

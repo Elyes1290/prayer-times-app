@@ -351,9 +351,26 @@ INSERT INTO `prophet_story_glossary` (`story_id`, `term_key`, `arabic_term`, `pr
 -- ========================================
 -- 📚 NOÉ, HUD, SALIH, IBRAHIM, LUT, YUSUF (عليهم السلام)
 -- ========================================
--- Contenu fusionné depuis add-nuh, add-hud, add-salih, add-ibrahim, add-lut, add-yusuf
--- Ordre chronologique : Adam → Noé → Hud → Salih → Ibrahim → Lut → Yusuf
+-- Contenu fusionné : Adam → Idris → Noé → Hud → Salih → Ibrahim → Lut
+--   → Ismaël → Ishaq → Ya'qoub → Yusuf → … → Dhoul-Kifl → Musa → Haroun → …
 -- ========================================
+
+-- Idris (إدريس) - 4 histoires — Coran 19:56-57, 21:85-86 ; Sahih Muslim (Mi'raj)
+INSERT IGNORE INTO `prophet_stories` (`id`, `prophet_name`, `category`, `difficulty`, `age_recommendation`, `reading_time`, `word_count`, `chronological_order`, `historical_period_start`, `historical_period_end`, `is_premium`, `has_interactive_elements`) VALUES
+('idris_in_the_book', 'idris', 'prophethood', 'beginner', 8, 6, 650, 1, NULL, NULL, 0, 1),
+('idris_high_station', 'idris', 'prophethood', 'intermediate', 10, 7, 750, 2, NULL, NULL, 0, 1),
+('idris_steadfast', 'idris', 'character_traits', 'beginner', 8, 6, 650, 3, NULL, NULL, 0, 1),
+('lessons_from_idris', 'idris', 'prophets_lineage', 'beginner', 8, 6, 650, 4, NULL, NULL, 0, 1);
+
+INSERT IGNORE INTO `prophet_story_chapters` (`id`, `story_id`, `chapter_order`, `reading_time`) VALUES
+('idris_in_the_book_chapter_1', 'idris_in_the_book', 1, 3),
+('idris_in_the_book_chapter_2', 'idris_in_the_book', 2, 3),
+('idris_high_station_chapter_1', 'idris_high_station', 1, 4),
+('idris_high_station_chapter_2', 'idris_high_station', 2, 3),
+('idris_steadfast_chapter_1', 'idris_steadfast', 1, 3),
+('idris_steadfast_chapter_2', 'idris_steadfast', 2, 3),
+('lessons_from_idris_chapter_1', 'lessons_from_idris', 1, 3),
+('lessons_from_idris_chapter_2', 'lessons_from_idris', 2, 3);
 
 -- Noé (نوح) - 8 histoires
 INSERT IGNORE INTO `prophet_stories` (`id`, `prophet_name`, `category`, `difficulty`, `age_recommendation`, `reading_time`, `word_count`, `chronological_order`, `historical_period_start`, `historical_period_end`, `is_premium`, `has_interactive_elements`) VALUES
@@ -473,6 +490,66 @@ INSERT IGNORE INTO `prophet_story_chapters` (`id`, `story_id`, `chapter_order`, 
 ('lessons_from_lut_chapter_1', 'lessons_from_lut', 1, 3),
 ('lessons_from_lut_chapter_2', 'lessons_from_lut', 2, 2);
 
+-- Ismaël (إسماعيل) - 5 histoires — Coran 19:54, 37:101-111, 2:127-128, 21:85
+INSERT IGNORE INTO `prophet_stories` (`id`, `prophet_name`, `category`, `difficulty`, `age_recommendation`, `reading_time`, `word_count`, `chronological_order`, `historical_period_start`, `historical_period_end`, `is_premium`, `has_interactive_elements`) VALUES
+('ismail_in_the_book', 'ismail', 'prophethood', 'beginner', 8, 6, 650, 1, NULL, NULL, 0, 1),
+('ismail_sacrifice', 'ismail', 'prophets_lineage', 'intermediate', 10, 7, 750, 2, NULL, NULL, 0, 1),
+('ismail_kaaba', 'ismail', 'prophets_lineage', 'beginner', 8, 6, 650, 3, NULL, NULL, 0, 1),
+('ismail_steadfast', 'ismail', 'character_traits', 'beginner', 8, 6, 650, 4, NULL, NULL, 0, 1),
+('lessons_from_ismail', 'ismail', 'prophets_lineage', 'beginner', 8, 6, 650, 5, NULL, NULL, 0, 1);
+
+INSERT IGNORE INTO `prophet_story_chapters` (`id`, `story_id`, `chapter_order`, `reading_time`) VALUES
+('ismail_in_the_book_chapter_1', 'ismail_in_the_book', 1, 3),
+('ismail_in_the_book_chapter_2', 'ismail_in_the_book', 2, 3),
+('ismail_sacrifice_chapter_1', 'ismail_sacrifice', 1, 4),
+('ismail_sacrifice_chapter_2', 'ismail_sacrifice', 2, 3),
+('ismail_kaaba_chapter_1', 'ismail_kaaba', 1, 3),
+('ismail_kaaba_chapter_2', 'ismail_kaaba', 2, 3),
+('ismail_steadfast_chapter_1', 'ismail_steadfast', 1, 3),
+('ismail_steadfast_chapter_2', 'ismail_steadfast', 2, 3),
+('lessons_from_ismail_chapter_1', 'lessons_from_ismail', 1, 3),
+('lessons_from_ismail_chapter_2', 'lessons_from_ismail', 2, 3);
+
+-- Ishaq (إسحاق) - 5 histoires — Coran 19:49-50, 37:112-113, 21:72
+INSERT IGNORE INTO `prophet_stories` (`id`, `prophet_name`, `category`, `difficulty`, `age_recommendation`, `reading_time`, `word_count`, `chronological_order`, `historical_period_start`, `historical_period_end`, `is_premium`, `has_interactive_elements`) VALUES
+('ishaq_in_the_book', 'ishaq', 'prophethood', 'beginner', 8, 6, 650, 1, NULL, NULL, 0, 1),
+('ishaq_glad_tidings', 'ishaq', 'prophets_lineage', 'beginner', 8, 6, 650, 2, NULL, NULL, 0, 1),
+('ishaq_blessing', 'ishaq', 'character_traits', 'beginner', 8, 6, 650, 3, NULL, NULL, 0, 1),
+('ishaq_lineage', 'ishaq', 'prophets_lineage', 'beginner', 8, 6, 650, 4, NULL, NULL, 0, 1),
+('lessons_from_ishaq', 'ishaq', 'prophets_lineage', 'beginner', 8, 6, 650, 5, NULL, NULL, 0, 1);
+
+INSERT IGNORE INTO `prophet_story_chapters` (`id`, `story_id`, `chapter_order`, `reading_time`) VALUES
+('ishaq_in_the_book_chapter_1', 'ishaq_in_the_book', 1, 3),
+('ishaq_in_the_book_chapter_2', 'ishaq_in_the_book', 2, 3),
+('ishaq_glad_tidings_chapter_1', 'ishaq_glad_tidings', 1, 3),
+('ishaq_glad_tidings_chapter_2', 'ishaq_glad_tidings', 2, 3),
+('ishaq_blessing_chapter_1', 'ishaq_blessing', 1, 3),
+('ishaq_blessing_chapter_2', 'ishaq_blessing', 2, 3),
+('ishaq_lineage_chapter_1', 'ishaq_lineage', 1, 3),
+('ishaq_lineage_chapter_2', 'ishaq_lineage', 2, 3),
+('lessons_from_ishaq_chapter_1', 'lessons_from_ishaq', 1, 3),
+('lessons_from_ishaq_chapter_2', 'lessons_from_ishaq', 2, 3);
+
+-- Ya'qoub (يعقوب) - 5 histoires — Coran 12:6, 12:83-86, 21:72, 2:132-133
+INSERT IGNORE INTO `prophet_stories` (`id`, `prophet_name`, `category`, `difficulty`, `age_recommendation`, `reading_time`, `word_count`, `chronological_order`, `historical_period_start`, `historical_period_end`, `is_premium`, `has_interactive_elements`) VALUES
+('yaqub_chosen', 'yaqub', 'prophethood', 'beginner', 8, 6, 650, 1, NULL, NULL, 0, 1),
+('yaqub_lineage', 'yaqub', 'prophets_lineage', 'beginner', 8, 6, 650, 2, NULL, NULL, 0, 1),
+('yaqub_patience', 'yaqub', 'character_traits', 'intermediate', 10, 7, 750, 3, NULL, NULL, 0, 1),
+('yaqub_testament', 'yaqub', 'prophets_lineage', 'intermediate', 10, 7, 750, 4, NULL, NULL, 0, 1),
+('lessons_from_yaqub', 'yaqub', 'prophets_lineage', 'beginner', 8, 6, 650, 5, NULL, NULL, 0, 1);
+
+INSERT IGNORE INTO `prophet_story_chapters` (`id`, `story_id`, `chapter_order`, `reading_time`) VALUES
+('yaqub_chosen_chapter_1', 'yaqub_chosen', 1, 3),
+('yaqub_chosen_chapter_2', 'yaqub_chosen', 2, 3),
+('yaqub_lineage_chapter_1', 'yaqub_lineage', 1, 3),
+('yaqub_lineage_chapter_2', 'yaqub_lineage', 2, 3),
+('yaqub_patience_chapter_1', 'yaqub_patience', 1, 4),
+('yaqub_patience_chapter_2', 'yaqub_patience', 2, 3),
+('yaqub_testament_chapter_1', 'yaqub_testament', 1, 4),
+('yaqub_testament_chapter_2', 'yaqub_testament', 2, 3),
+('lessons_from_yaqub_chapter_1', 'lessons_from_yaqub', 1, 3),
+('lessons_from_yaqub_chapter_2', 'lessons_from_yaqub', 2, 3);
+
 -- Yusuf (يوسف) - 6 histoires
 INSERT IGNORE INTO `prophet_stories` (`id`, `prophet_name`, `category`, `difficulty`, `age_recommendation`, `reading_time`, `word_count`, `chronological_order`, `historical_period_start`, `historical_period_end`, `is_premium`, `has_interactive_elements`) VALUES
 ('yusuf_dream', 'yusuf', 'prophets_lineage', 'beginner', 8, 5, 500, 1, NULL, NULL, 0, 1),
@@ -495,6 +572,26 @@ INSERT IGNORE INTO `prophet_story_chapters` (`id`, `story_id`, `chapter_order`, 
 ('yusuf_reunion_chapter_2', 'yusuf_reunion', 2, 3),
 ('lessons_from_yusuf_chapter_1', 'lessons_from_yusuf', 1, 3),
 ('lessons_from_yusuf_chapter_2', 'lessons_from_yusuf', 2, 2);
+
+-- Dhoul-Kifl (ذو الكفل) - 5 histoires — Coran 21:85-86, 38:48
+INSERT IGNORE INTO `prophet_stories` (`id`, `prophet_name`, `category`, `difficulty`, `age_recommendation`, `reading_time`, `word_count`, `chronological_order`, `historical_period_start`, `historical_period_end`, `is_premium`, `has_interactive_elements`) VALUES
+('dhulkifl_in_the_book', 'dhulkifl', 'prophethood', 'beginner', 8, 6, 650, 1, NULL, NULL, 0, 1),
+('dhulkifl_among_chosen', 'dhulkifl', 'prophethood', 'beginner', 8, 6, 650, 2, NULL, NULL, 0, 1),
+('dhulkifl_steadfast', 'dhulkifl', 'character_traits', 'beginner', 8, 6, 650, 3, NULL, NULL, 0, 1),
+('dhulkifl_mercy', 'dhulkifl', 'character_traits', 'beginner', 8, 6, 650, 4, NULL, NULL, 0, 1),
+('lessons_from_dhulkifl', 'dhulkifl', 'prophets_lineage', 'beginner', 8, 6, 650, 5, NULL, NULL, 0, 1);
+
+INSERT IGNORE INTO `prophet_story_chapters` (`id`, `story_id`, `chapter_order`, `reading_time`) VALUES
+('dhulkifl_in_the_book_chapter_1', 'dhulkifl_in_the_book', 1, 3),
+('dhulkifl_in_the_book_chapter_2', 'dhulkifl_in_the_book', 2, 3),
+('dhulkifl_among_chosen_chapter_1', 'dhulkifl_among_chosen', 1, 3),
+('dhulkifl_among_chosen_chapter_2', 'dhulkifl_among_chosen', 2, 3),
+('dhulkifl_steadfast_chapter_1', 'dhulkifl_steadfast', 1, 3),
+('dhulkifl_steadfast_chapter_2', 'dhulkifl_steadfast', 2, 3),
+('dhulkifl_mercy_chapter_1', 'dhulkifl_mercy', 1, 3),
+('dhulkifl_mercy_chapter_2', 'dhulkifl_mercy', 2, 3),
+('lessons_from_dhulkifl_chapter_1', 'lessons_from_dhulkifl', 1, 3),
+('lessons_from_dhulkifl_chapter_2', 'lessons_from_dhulkifl', 2, 3);
 
 -- Musa (موسى) - 13 histoires (histoire complète)
 INSERT IGNORE INTO `prophet_stories` (`id`, `prophet_name`, `category`, `difficulty`, `age_recommendation`, `reading_time`, `word_count`, `chronological_order`, `historical_period_start`, `historical_period_end`, `is_premium`, `has_interactive_elements`) VALUES
@@ -540,6 +637,26 @@ INSERT IGNORE INTO `prophet_story_chapters` (`id`, `story_id`, `chapter_order`, 
 ('musa_khidr_chapter_2', 'musa_khidr', 2, 3),
 ('lessons_from_musa_chapter_1', 'lessons_from_musa', 1, 3),
 ('lessons_from_musa_chapter_2', 'lessons_from_musa', 2, 2);
+
+-- Haroun (هارون) - 5 histoires — Coran 19:53, 20:29-36, 37:114-122, 21:48
+INSERT IGNORE INTO `prophet_stories` (`id`, `prophet_name`, `category`, `difficulty`, `age_recommendation`, `reading_time`, `word_count`, `chronological_order`, `historical_period_start`, `historical_period_end`, `is_premium`, `has_interactive_elements`) VALUES
+('harun_in_the_book', 'harun', 'prophethood', 'beginner', 8, 6, 650, 1, NULL, NULL, 0, 1),
+('harun_helper', 'harun', 'character_traits', 'beginner', 8, 6, 650, 2, NULL, NULL, 0, 1),
+('harun_with_musa', 'harun', 'prophets_lineage', 'intermediate', 10, 7, 750, 3, NULL, NULL, 0, 1),
+('harun_furqan', 'harun', 'prophethood', 'beginner', 8, 6, 650, 4, NULL, NULL, 0, 1),
+('lessons_from_harun', 'harun', 'prophets_lineage', 'beginner', 8, 6, 650, 5, NULL, NULL, 0, 1);
+
+INSERT IGNORE INTO `prophet_story_chapters` (`id`, `story_id`, `chapter_order`, `reading_time`) VALUES
+('harun_in_the_book_chapter_1', 'harun_in_the_book', 1, 3),
+('harun_in_the_book_chapter_2', 'harun_in_the_book', 2, 3),
+('harun_helper_chapter_1', 'harun_helper', 1, 3),
+('harun_helper_chapter_2', 'harun_helper', 2, 3),
+('harun_with_musa_chapter_1', 'harun_with_musa', 1, 4),
+('harun_with_musa_chapter_2', 'harun_with_musa', 2, 3),
+('harun_furqan_chapter_1', 'harun_furqan', 1, 3),
+('harun_furqan_chapter_2', 'harun_furqan', 2, 3),
+('lessons_from_harun_chapter_1', 'lessons_from_harun', 1, 3),
+('lessons_from_harun_chapter_2', 'lessons_from_harun', 2, 3);
 
 -- Dawud (داوود) - 7 histoires (David, roi et prophète)
 INSERT IGNORE INTO `prophet_stories` (`id`, `prophet_name`, `category`, `difficulty`, `age_recommendation`, `reading_time`, `word_count`, `chronological_order`, `historical_period_start`, `historical_period_end`, `is_premium`, `has_interactive_elements`) VALUES

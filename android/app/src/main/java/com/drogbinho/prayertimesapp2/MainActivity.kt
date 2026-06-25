@@ -36,8 +36,9 @@ class MainActivity : ReactActivity() {
     // 🔧 NOUVEAU : Configuration Edge-to-Edge pour Android 15+
     configureEdgeToEdge()
     
-    // ✅ CORRECTION : Passer savedInstanceState pour éviter les crashs sur vieux appareils
-    super.onCreate(savedInstanceState)
+    // react-native-screens : ne pas restaurer les fragments Android (crash au relancement)
+    // https://github.com/software-mansion/react-native-screens/issues/17#issuecomment-424704067
+    super.onCreate(null)
     
     // NOUVEAU : Enregistrer le BroadcastReceiver global pour les événements audio
     registerAudioEventReceiver()

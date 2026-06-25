@@ -49,6 +49,12 @@ import {
   formatGeocodeLabel,
   getCachedAutoLocationCity,
 } from "../utils/locationDisplay";
+import { useMinuteTick } from "../hooks/useMinuteTick";
+import {
+  computeTomorrowPrayerTimes,
+  getNextPrayerInfo,
+  getPrayerProgressPercentage,
+} from "../utils/nextPrayer";
 import { usePrayerTimes } from "../hooks/usePrayerTimes";
 import { usePrayerTimesWidget } from "../hooks/usePrayerTimesWidget";
 import { scheduleNotificationsFor2Days } from "../utils/sheduleAllNotificationsFor30Days";
@@ -157,69 +163,6 @@ const ANIMATIONS = {
     useNativeDriver: true,
   },
 };
-
-// Mise à jour de l'interface PrayerTimes pour correspondre à celle d'adhan
-interface CustomPrayerTimes {
-  fajr: Date;
-  sunrise: Date;
-  dhuhr: Date;
-  asr: Date;
-  maghrib: Date;
-  isha: Date;
-  [key: string]: Date;
-}
-
-interface PrayerInfo {
-  name: string;
-  time: string;
-  countdown: string;
-  diff: number;
-}
-
-function getNextPrayerInfo(
-  prayerTimes: PrayerTimes | null
-): PrayerInfo | null {
-  if (!prayerTimes) return null;
-
-  const customPrayerTimes: CustomPrayerTimes = {
-    fajr: prayerTimes.fajr,
-    sunrise: prayerTimes.sunrise,
-    dhuhr: prayerTimes.dhuhr,
-    asr: prayerTimes.asr,
-    maghrib: prayerTimes.maghrib,
-    isha: prayerTimes.isha,
-  };
-
-  const currentTime = new Date();
-  const prayers = ["Fajr", "Dhuhr", "Asr", "Maghrib", "Isha"];
-
-  for (const prayer of prayers) {
-    const prayerTime = customPrayerTimes[prayer.toLowerCase()];
-    if (prayerTime && currentTime < prayerTime) {
-      const diff = prayerTime.getTime() - currentTime.getTime();
-      const hours = Math.floor(diff / (1000 * 60 * 60));
-      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-
-      const countdownText =
-        hours > 0
-          ? `${hours}h ${minutes}min`
-          : minutes > 0
-          ? `${minutes}min`
-          : `<1min`;
-
-      return {
-        name: prayer,
-        time: prayerTime.toLocaleTimeString("fr-FR", {
-          hour: "2-digit",
-          minute: "2-digit",
-        }),
-        countdown: countdownText,
-        diff: diff,
-      };
-    }
-  }
-  return null;
-}
 
 function getPrayerHeroColors(prayerName: string): {
   primary: string;
@@ -834,6 +777,47 @@ export default function HomeScreen() {
     return null;
   }, [settings.locationMode, manualLocationObj, location]);
 
+  const tomorrowPrayerTimes = useMemo(
+    () =>
+      computeTomorrowPrayerTimes(
+        today,
+        stableCoords,
+        settings.calcMethod || "MuslimWorldLeague",
+      ),
+    [today, stableCoords, settings.calcMethod],
+  );
+
+  const minuteTick = useMinuteTick();
+
+  const nowForPrayerCountdown = useMemo(
+    () => new Date(),
+    [minuteTick],
+  );
+
+  const nextPrayerDisplay = useMemo(
+    () =>
+      getNextPrayerInfo(currentPrayerTimes, nowForPrayerCountdown, {
+        tomorrowPrayerTimes,
+        locale: i18n.language,
+      }),
+    [
+      currentPrayerTimes,
+      nowForPrayerCountdown,
+      tomorrowPrayerTimes,
+      i18n.language,
+    ],
+  );
+
+  const prayerProgressPercent = useMemo(
+    () =>
+      getPrayerProgressPercentage(
+        currentPrayerTimes,
+        nowForPrayerCountdown,
+        tomorrowPrayerTimes,
+      ),
+    [currentPrayerTimes, nowForPrayerCountdown, tomorrowPrayerTimes],
+  );
+
   const quickActions = useMemo(
     () =>
       [
@@ -1087,25 +1071,13 @@ export default function HomeScreen() {
         currentPrayerTimes.isha || (currentPrayerTimes as any).Isha;
 
       if (ishaTime && now > ishaTime) {
-        debugLog("🌙 Isha passé, vérification si reprogrammation nécessaire");
-        // Mettre à jour automatiquement la date pour demain
-        const tomorrow = new Date(now);
-        tomorrow.setDate(tomorrow.getDate() + 1);
-        tomorrow.setHours(0, 0, 0, 0);
-
-        // Si on n'est pas déjà sur demain, passer à demain
-        if (today.toDateString() !== tomorrow.toDateString()) {
-          debugLog("📅 Passage automatique au lendemain");
-          setToday(tomorrow);
-
-          // 📱 Forcer la mise à jour du widget pour le nouveau jour
-          if (Platform.OS === "android" && AdhanModule) {
-            try {
-              debugLog("📱 Mise à jour du widget pour le nouveau jour");
-              await AdhanModule.updateWidget?.();
-            } catch (error) {
-              errorLog("❌ Erreur mise à jour widget:", error);
-            }
+        debugLog("🌙 Isha passé, mise à jour du widget si nécessaire");
+        if (Platform.OS === "android" && AdhanModule) {
+          try {
+            debugLog("📱 Mise à jour du widget après Isha");
+            await AdhanModule.updateWidget?.();
+          } catch (error) {
+            errorLog("❌ Erreur mise à jour widget:", error);
           }
         }
       }
@@ -1394,45 +1366,6 @@ export default function HomeScreen() {
     );
   }
 
-  const getProgressPercentage = () => {
-    if (!currentPrayerTimes) return 0;
-
-    const currentTime = new Date();
-    const prayers = ["Fajr", "Dhuhr", "Asr", "Maghrib", "Isha"];
-    let nextPrayer = null;
-    let previousPrayer = null;
-
-    // Conversion de PrayerTimes en CustomPrayerTimes
-    const customPrayerTimes: CustomPrayerTimes = {
-      fajr: currentPrayerTimes.fajr,
-      sunrise: currentPrayerTimes.sunrise,
-      dhuhr: currentPrayerTimes.dhuhr,
-      asr: currentPrayerTimes.asr,
-      maghrib: currentPrayerTimes.maghrib,
-      isha: currentPrayerTimes.isha,
-    };
-
-    for (let i = 0; i < prayers.length; i++) {
-      const prayer = prayers[i];
-      const prayerTime = customPrayerTimes[prayer.toLowerCase()];
-
-      if (prayerTime && currentTime < prayerTime) {
-        nextPrayer = prayerTime;
-        previousPrayer =
-          i > 0 ? customPrayerTimes[prayers[i - 1].toLowerCase()] : null;
-        break;
-      }
-    }
-
-    if (nextPrayer && previousPrayer) {
-      const totalInterval = nextPrayer.getTime() - previousPrayer.getTime();
-      const elapsed = currentTime.getTime() - previousPrayer.getTime();
-      return Math.max(0, Math.min(100, (elapsed / totalInterval) * 100));
-    }
-
-    return 0;
-  };
-
   return (
     <>
       <StatusBar barStyle="light-content" />
@@ -1569,7 +1502,7 @@ export default function HomeScreen() {
 
           {/* 🕌 Prochaine Prière - Hero Section */}
           {(() => {
-            const nextPrayer = getNextPrayerInfo(currentPrayerTimes);
+            const nextPrayer = nextPrayerDisplay;
             if (!nextPrayer) return null;
 
             const heroColors = getPrayerHeroColors(nextPrayer.name);
@@ -1627,14 +1560,14 @@ export default function HomeScreen() {
                             style={[
                               styles.progressFillMain,
                               {
-                                width: `${getProgressPercentage()}%`,
+                                width: `${prayerProgressPercent}%`,
                                 backgroundColor: heroColors.primary,
                               },
                             ]}
                           />
                         </View>
                         <Text style={styles.progressTextMain}>
-                          {Math.round(getProgressPercentage())}%
+                          {Math.round(prayerProgressPercent)}%
                         </Text>
                       </View>
                     </View>

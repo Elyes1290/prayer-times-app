@@ -1,0 +1,285 @@
+{
+  "ismail_in_the_book": {
+    "title": "Ismail mentioned in the Book",
+    "title_arabic": "ذكر إسماعيل في الكتاب",
+    "introduction": "Ismail (إسماعيل عليه السلام) is a prophet honored by Allah in the Quran. Allah commands the Prophet Muhammad (ﷺ) to mention him: \"And mention in the Book Ismail. He was true to his promise and was a messenger and a prophet.\" (19:54) As the son of the prophet Ibrahim, Ismail is recognized for his sincerity toward Allah and his prophetic mission.",
+    "conclusion": "Ismail is thus recognized among the messengers of Allah. His name is associated with faithfulness to the promise (sadiq al-wa'd), risala (message), and nubuwwa (prophethood).",
+    "moral_lesson": "Keeping one's commitments to Allah is a prophetic quality. Ismail teaches us loyalty in faith and obedience.",
+    "historical_location": null,
+    "historical_context": "The Quran mentions Ismail among the prophets of Ibrahim's lineage, without detailing his entire biography here.",
+    "chapters": [
+      {
+        "id": "ismail_in_the_book_chapter_1",
+        "title": "The command to mention Ismail",
+        "content": "Allah says: \"And mention in the Book Ismail.\" (19:54) This \"Book\" refers to the Quran, which preserves the memory of the prophets. Mentioning Ismail reminds us that Allah sent guides in the lineage of Ibrahim. Ismail is part of this blessed chain that the Quran presents to believers, alongside other honored messengers."
+      },
+      {
+        "id": "ismail_in_the_book_chapter_2",
+        "title": "True to his promise, messenger and prophet",
+        "content": "Allah continues: \"He was true to his promise (sadiq al-wa'd) and was a messenger (rasul) and a prophet (nabi).\" (19:54) Sadiq al-wa'd denotes one who keeps his commitments to Allah and to people. Rasul confirms that he conveyed the divine message; nabi that he received revelation. These descriptions summarize what Allah wanted us to learn about him in this verse."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 19:54",
+        "reference_text": "Surah Maryam, verse 54",
+        "content": "وَٱذْكُرْ فِى ٱلْكِتَـٰبِ إِسْمَـٰعِيلَ ۚ إِنَّهُۥ كَانَ صَادِقَ ٱلْوَعْدِ وَكَانَ رَسُولًا نَّبِيًّۭا",
+        "translation": "And mention in the Book Ismail. He was true to his promise and was a messenger and a prophet.",
+        "relevance": "Main verse establishing Ismail's prophethood and faithfulness."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Ismail",
+        "arabic_term": "إسماعيل",
+        "definition": "Son of Ibrahim, a prophet mentioned in the Quran.",
+        "pronunciation": "is-ma-il"
+      },
+      {
+        "id": 2,
+        "term": "Sadiq al-Wa'd",
+        "arabic_term": "صادق الوعد",
+        "definition": "True to his promise. A quality attributed to Ismail in the Quran.",
+        "pronunciation": "sa-diq al-wa'd"
+      },
+      {
+        "id": 3,
+        "term": "Rasul",
+        "arabic_term": "رسول",
+        "definition": "Messenger sent by Allah with a clear message.",
+        "pronunciation": "ra-sul"
+      }
+    ]
+  },
+  "ismail_sacrifice": {
+    "title": "Ismail and the trial of sacrifice",
+    "title_arabic": "إسماعيل وابتلاء الذبح",
+    "introduction": "Allah relates in the Quran a supreme trial experienced by Ibrahim and his son Ismail. Ibrahim saw in a dream that he must sacrifice him. He spoke to his son, who responded with remarkable submission: \"O my father! Do as you are commanded. You will find me, if Allah wills, among the steadfast.\" (37:102) Both submitted to Allah, who rewarded them and replaced the son with a great sacrifice.",
+    "conclusion": "Ismail accepted the trial with patience and trust in Allah. This event is a sign of their total submission. Allah honored Ibrahim and Ismail for their faithfulness.",
+    "moral_lesson": "Submission to Allah, even in trial, is a lesson for every believing soul. Ismail shows us the example of endurance and trust.",
+    "historical_location": "Place of sacrifice (according to the Quran, without detailed geographical specification)",
+    "historical_context": "The Quran presents this trial as a sign for believers, without adding unrevealed details.",
+    "chapters": [
+      {
+        "id": "ismail_sacrifice_chapter_1",
+        "title": "Ismail's response",
+        "content": "Allah says: \"And when he reached the age of running with him, he said: 'O my son! I see in a dream that I am sacrificing you. What do you think?' He said: 'O my father! Do as you are commanded. You will find me, if Allah wills, among the steadfast.'\" (37:102) Ismail accepted Allah's command with exemplary patience. He did not object; he trusted his Lord and his prophet father."
+      },
+      {
+        "id": "ismail_sacrifice_chapter_2",
+        "title": "Allah's reward",
+        "content": "Allah continues: \"And when both had submitted, and he had laid him upon his forehead, We called to him: 'O Ibrahim! You have fulfilled the vision.'\" (37:103-105) Then Allah announced the good news and replaced his son with \"a great sacrifice\" (dhibhin azim). (37:107) Ismail was spared by Allah's mercy, and this trial became a reminder for generations of believers."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 37:103",
+        "reference_text": "Surah As-Saffat, verse 103",
+        "content": "فَلَمَّآ أَسْلَمَا وَتَلَّهُۥ لِلْجَبِينِ",
+        "translation": "And when both had submitted, and he had laid him upon his forehead...",
+        "relevance": "Context of the submission of Ibrahim and Ismail."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 37:107",
+        "reference_text": "Surah As-Saffat, verse 107",
+        "content": "وَفَدَيْنَـٰهُ بِذِبْحٍ عَظِيمٍ",
+        "translation": "And We ransomed him with a great sacrifice.",
+        "relevance": "Allah replaced Ismail with a sacrifice, a sign of His mercy."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Dhibh",
+        "arabic_term": "ذبح",
+        "definition": "Slaughter, sacrifice. The trial experienced by Ibrahim and Ismail.",
+        "pronunciation": "dhibh"
+      },
+      {
+        "id": 2,
+        "term": "Sabir",
+        "arabic_term": "صابر",
+        "definition": "Steadfast. Ismail declared himself among the steadfast in the face of trial.",
+        "pronunciation": "sa-bir"
+      }
+    ]
+  },
+  "ismail_kaaba": {
+    "title": "Ismail and the raising of the Kaaba",
+    "title_arabic": "إسماعيل ورفع قواعد البيت",
+    "introduction": "The Quran relates that Ibrahim and Ismail raised together the foundations of the Sacred House (al-Bayt) in Mecca. They called upon Allah for this dwelling to be a place of peace, prayer, and guidance for humanity. Ismail actively participated in this blessed work alongside his father.",
+    "conclusion": "The Kaaba, raised by Ibrahim and Ismail, became the center of monotheistic worship. Their supplication was answered: the House is a place of pilgrimage and prayer for believers.",
+    "moral_lesson": "Serving sacred places and cooperating in obedience to Allah are noble acts. Ismail teaches us humility in serving the house of Allah.",
+    "historical_location": "Mecca (Bakka / Bakkah)",
+    "historical_context": "The Quran mentions the construction of the Kaaba by Ibrahim and Ismail as a founding event for future generations.",
+    "chapters": [
+      {
+        "id": "ismail_kaaba_chapter_1",
+        "title": "Raising the foundations of the House",
+        "content": "Allah says: \"And when Ibrahim and Ismail were raising the foundations of the House: 'Our Lord! Accept from us. You are the All-Hearing, the All-Knowing. Our Lord! Make us submissive to You, and from our descendants a community submissive to You. Show us our rites and accept our repentance. You are the Accepter of repentance, the Merciful.'\" (2:127-128) Ismail worked alongside Ibrahim to raise the Kaaba. Their dual supplication shows their submission and concern for coming generations."
+      },
+      {
+        "id": "ismail_kaaba_chapter_2",
+        "title": "A dwelling for humanity",
+        "content": "Allah also says: \"And when We assigned to Ibrahim the site of the House: 'Do not associate anything with Me; and purify My House for those who circumambulate, for those who stand, for those who bow and prostrate.'\" (22:26) The House raised by Ibrahim and Ismail became a place of tawhid (divine unity), prayer, and pilgrimage. Ismail is thus linked to one of the most sacred centers of Islam."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 2:127",
+        "reference_text": "Surah Al-Baqarah, verse 127",
+        "content": "وَإِذْ يَرْفَعُ إِبْرَٰهِـۧمُ ٱلْقَوَاعِدَ مِنَ ٱلْبَيْتِ وَإِسْمَـٰعِيلُ",
+        "translation": "And when Ibrahim and Ismail were raising the foundations of the House...",
+        "relevance": "Confirms Ismail's role in raising the Kaaba."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 22:26",
+        "reference_text": "Surah Al-Hajj, verse 26",
+        "content": "وَإِذْ بَوَّأْنَا لِإِبْرَٰهِيمَ مَكَانَ ٱلْبَيْتِ",
+        "translation": "And when We assigned to Ibrahim the site of the House...",
+        "relevance": "Establishes the Kaaba as a dwelling consecrated to the worship of Allah alone."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Al-Bayt",
+        "arabic_term": "البيت",
+        "definition": "The House. Refers to the Kaaba in Mecca.",
+        "pronunciation": "al-bayt"
+      },
+      {
+        "id": 2,
+        "term": "Al-Kaaba",
+        "arabic_term": "الكعبة",
+        "definition": "The Kaaba. Sanctuary raised by Ibrahim and Ismail.",
+        "pronunciation": "al-ka-a-ba"
+      }
+    ]
+  },
+  "ismail_steadfast": {
+    "title": "Ismail among the steadfast",
+    "title_arabic": "إسماعيل من الصابرين",
+    "introduction": "The Quran associates Ismail with other exemplary prophets: \"And Ismail, Idris, and Dhu'l-Kifl. All were steadfast.\" (21:85) Then Allah adds: \"And We admitted them into Our mercy. They were indeed among the righteous.\" (21:86) These verses praise the patience (sabr) and righteousness (salih) of Ismail.",
+    "conclusion": "Ismail belongs to the patient and righteous prophets. Allah granted him His mercy. He is a model of perseverance in obedience.",
+    "moral_lesson": "Patience in worship and in trials is a quality of the great prophets. The believer draws inspiration from this in daily life.",
+    "historical_location": null,
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "ismail_steadfast_chapter_1",
+        "title": "Steadfast prophets",
+        "content": "Allah says: \"And Ismail, Idris, and Dhu'l-Kifl. All were steadfast (sabirin).\" (21:85) Sabr here denotes constancy in obedience, firmness in the face of trials, and perseverance in the prophetic mission. Ismail is cited alongside other honored messengers, showing that he shares their noble qualities."
+      },
+      {
+        "id": "ismail_steadfast_chapter_2",
+        "title": "Mercy and virtue",
+        "content": "Allah continues: \"And We admitted them into Our mercy. They were indeed among the righteous (salihin).\" (21:86) Entering into Allah's mercy means that He granted them His grace and protection. Ismail is thus, according to the Quran, a patient, righteous prophet welcomed into divine mercy."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 21:85",
+        "reference_text": "Surah Al-Anbiya, verse 85",
+        "content": "وَإِسْمَـٰعِيلَ وَإِدْرِيسَ وَذَا ٱلْكِفْلِ ۖ كُلٌّۭ مِّنَ ٱلصَّـٰبِرِينَ",
+        "translation": "And Ismail, Idris, and Dhu'l-Kifl. All were steadfast.",
+        "relevance": "Praises Ismail's patience alongside other prophets."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 21:86",
+        "reference_text": "Surah Al-Anbiya, verse 86",
+        "content": "وَأَدْخَلْنَـٰهُمْ فِى رَحْمَتِنَآ ۖ إِنَّهُم مِّنَ ٱلصَّـٰلِحِينَ",
+        "translation": "And We admitted them into Our mercy. They were indeed among the righteous.",
+        "relevance": "Affirms Ismail's virtue and the mercy Allah granted him."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Sabir",
+        "arabic_term": "صابر",
+        "definition": "Steadfast, patient. A quality attributed to Ismail in the Quran.",
+        "pronunciation": "sa-bir"
+      },
+      {
+        "id": 2,
+        "term": "Salih",
+        "arabic_term": "صالح",
+        "definition": "Righteous, pious. Ismail is among the salihin.",
+        "pronunciation": "sa-lih"
+      }
+    ]
+  },
+  "lessons_from_ismail": {
+    "title": "Lessons from the prophet Ismail",
+    "title_arabic": "دروس من نبي الله إسماعيل",
+    "introduction": "The Quran mentions Ismail in several key verses: faithfulness to the promise, submission in trial, service of the Kaaba, and patience. By reflecting on Surah Maryam (19:54), As-Saffat (37:102-107), Al-Baqarah (2:127-128), and Al-Anbiya (21:85-86), the believer draws lasting teachings.",
+    "conclusion": "Ismail remains a model of loyalty, submission, and service. His story in the Quran invites trust in Allah and perseverance in obedience.",
+    "moral_lesson": "Adhering to authentic texts protects the believer. Ismail's qualities — faithfulness, patience, submission — are goals for every pious soul.",
+    "historical_location": null,
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lessons_from_ismail_chapter_1",
+        "title": "Relying on the Quran",
+        "content": "Allah mentions Ismail in precise and authentic verses. The Muslim honors Ismail through what Allah said: sadiq al-wa'd, rasul, nabi, steadfast in trial, builder of the Kaaba with Ibrahim. This is a sound method: knowing the prophets through revelation, without inventing stories."
+      },
+      {
+        "id": "lessons_from_ismail_chapter_2",
+        "title": "Aiming for prophetic qualities",
+        "content": "Faithfulness to the promise calls for keeping commitments to Allah. Submission in trial invites trust in the Lord even in adversity. Service of the Kaaba reminds us of humility and cooperation in good deeds. By following these teachings, the believer walks in the footsteps of the salihin, among whom Allah counts Ismail."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 19:54",
+        "reference_text": "Surah Maryam, verse 54",
+        "content": "وَٱذْكُرْ فِى ٱلْكِتَـٰبِ إِسْمَـٰعِيلَ ۚ إِنَّهُۥ كَانَ صَادِقَ ٱلْوَعْدِ وَكَانَ رَسُولًا نَّبِيًّۭا",
+        "translation": "And mention in the Book Ismail. He was true to his promise and was a messenger and a prophet.",
+        "relevance": "Summary of the Quranic honors granted to Ismail."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 21:85-86",
+        "reference_text": "Surah Al-Anbiya, verses 85-86",
+        "content": "وَإِسْمَـٰعِيلَ وَإِدْرِيسَ وَذَا ٱلْكِفْلِ ۖ كُلٌّۭ مِّنَ ٱلصَّـٰبِرِينَ ۝ وَأَدْخَلْنَـٰهُمْ فِى رَحْمَتِنَآ ۖ إِنَّهُم مِّنَ ٱلصَّـٰلِحِينَ",
+        "translation": "And Ismail, Idris, and Dhu'l-Kifl. All were steadfast. And We admitted them into Our mercy. They were indeed among the righteous.",
+        "relevance": "Recalls Ismail's patience and virtue."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Tawhid",
+        "arabic_term": "توحيد",
+        "definition": "Oneness of Allah. Message conveyed by the prophets, including Ismail.",
+        "pronunciation": "taw-hid"
+      },
+      {
+        "id": 2,
+        "term": "Salihin",
+        "arabic_term": "صالحون",
+        "definition": "The righteous. Ismail is among them according to the Quran.",
+        "pronunciation": "sa-li-hin"
+      }
+    ]
+  }
+}

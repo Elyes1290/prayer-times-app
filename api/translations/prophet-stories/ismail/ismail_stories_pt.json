@@ -1,0 +1,285 @@
+{
+  "ismail_in_the_book": {
+    "title": "Ismael mencionado no Livro",
+    "title_arabic": "ذكر إسماعيل في الكتاب",
+    "introduction": "Ismael (إسماعيل عليه السلام) é um profeta honrado por Allah no Alcorão. Allah ordena ao Profeta Muhammad (ﷺ) que o mencione: «E mencione no Livro Ismael. Ele foi verdadeiro na promessa e foi mensageiro e profeta.» (19:54) Filho do profeta Ibrahim, Ismael é reconhecido pela sua sinceridade para com Allah e pela sua missão profética.",
+    "conclusion": "Ismael é assim reconhecido entre os mensageiros de Allah. O seu nome está associado à fidelidade à promessa (sadiq al-wa'd), à risala (mensagem) e à nubuwwa (profecia).",
+    "moral_lesson": "Cumprir os compromissos com Allah é uma qualidade profética. Ismael ensina-nos a lealdade na fé e a obediência.",
+    "historical_location": null,
+    "historical_context": "O Alcorão menciona Ismael entre os profetas da linhagem de Ibrahim, sem detalhar aqui toda a sua biografia.",
+    "chapters": [
+      {
+        "id": "ismail_in_the_book_chapter_1",
+        "title": "A ordem de mencionar Ismael",
+        "content": "Allah diz: «E mencione no Livro Ismael.» (19:54) Este «Livro» designa o Alcorão, que perpetua a memória dos profetas. Mencionar Ismael recorda que Allah enviou guias na linhagem de Ibrahim. Ismael faz parte desta cadeia abençoada que o Alcorão apresenta aos crentes, ao lado de outros mensageiros honrados."
+      },
+      {
+        "id": "ismail_in_the_book_chapter_2",
+        "title": "Verdadeiro na promessa, mensageiro e profeta",
+        "content": "Allah prossegue: «Ele foi verdadeiro na promessa (sadiq al-wa'd) e foi mensageiro (rasul) e profeta (nabi).» (19:54) Sadiq al-wa'd designa quem cumpre os seus compromissos com Allah e com os homens. Rasul confirma que transmitia a mensagem divina; nabi que recebia a revelação. Estas descrições resumem o que Allah quis ensinar-nos sobre ele neste versículo."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Alcorão 19:54",
+        "reference_text": "Sura Maryam, versículo 54",
+        "content": "وَٱذْكُرْ فِى ٱلْكِتَـٰبِ إِسْمَـٰعِيلَ ۚ إِنَّهُۥ كَانَ صَادِقَ ٱلْوَعْدِ وَكَانَ رَسُولًا نَّبِيًّۭا",
+        "translation": "E mencione no Livro Ismael. Ele foi verdadeiro na promessa e foi mensageiro e profeta.",
+        "relevance": "Versículo principal que estabelece a profecia e a fidelidade de Ismael."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Ismael",
+        "arabic_term": "إسماعيل",
+        "definition": "Filho de Ibrahim, profeta mencionado no Alcorão.",
+        "pronunciation": "is-ma-el"
+      },
+      {
+        "id": 2,
+        "term": "Sadiq al-Wa'd",
+        "arabic_term": "صادق الوعد",
+        "definition": "Verdadeiro na promessa. Qualidade atribuída a Ismael no Alcorão.",
+        "pronunciation": "sa-diq al-wa'd"
+      },
+      {
+        "id": 3,
+        "term": "Rasul",
+        "arabic_term": "رسول",
+        "definition": "Mensageiro enviado por Allah com uma mensagem clara.",
+        "pronunciation": "ra-sul"
+      }
+    ]
+  },
+  "ismail_sacrifice": {
+    "title": "Ismael e a prova do sacrifício",
+    "title_arabic": "إسماعيل وابتلاء الذبح",
+    "introduction": "Allah relata no Alcorão uma prova suprema vivida por Ibrahim e seu filho Ismael. Ibrahim viu em sonho que devia sacrificá-lo. Falou com o filho, que respondeu com uma submissão notável: «Ó meu pai! Faça o que lhe é ordenado. Encontrará-me, se Allah quiser, entre os perseverantes.» (37:102) Ambos se submeteram a Allah, que os recompensou e substituiu o filho por um grande sacrifício.",
+    "conclusion": "Ismael aceitou a prova com paciência e confiança em Allah. Este evento é um signo da sua submissão total. Allah honrou Ibrahim e Ismael pela sua fidelidade.",
+    "moral_lesson": "A submissão a Allah, mesmo na prova, é uma lição para cada alma crente. Ismael mostra-nos o exemplo da perseverança e da confiança.",
+    "historical_location": "Lugar do sacrifício (segundo o Alcorão, sem precisão geográfica detalhada)",
+    "historical_context": "O Alcorão apresenta esta prova como um signo para os crentes, sem acrescentar detalhes não revelados.",
+    "chapters": [
+      {
+        "id": "ismail_sacrifice_chapter_1",
+        "title": "A resposta de Ismael",
+        "content": "Allah diz: «E quando atingiu a idade de correr com ele, disse: «Ó meu filho! Vejo em sonho que te sacrifico. O que pensas?» Disse: «Ó meu pai! Faça o que lhe é ordenado. Encontrará-me, se Allah quiser, entre os perseverantes.»» (37:102) Ismael aceitou a ordem de Allah com uma paciência exemplar. Não contestou; confiou no seu Senhor e no seu pai profeta."
+      },
+      {
+        "id": "ismail_sacrifice_chapter_2",
+        "title": "A recompensa de Allah",
+        "content": "Allah prossegue: «E quando ambos se submeteram, e o lançou sobre a fronte, chamámos: «Ó Ibrahim! Confirmaste a visão.»» (37:103-105) Depois Allah anunciou a boa nova e substituiu o filho por «um grande sacrifício» (dhibhin azim). (37:107) Ismael foi salvo pela misericórdia de Allah, e esta prova tornou-se um recordatório para gerações de crentes."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Alcorão 37:103",
+        "reference_text": "Sura As-Saffat, versículo 103",
+        "content": "فَلَمَّآ أَسْلَمَا وَتَلَّهُۥ لِلْجَبِينِ",
+        "translation": "E quando ambos se submeteram, e o lançou sobre a fronte...",
+        "relevance": "Contexto da submissão de Ibrahim e Ismael."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Alcorão 37:107",
+        "reference_text": "Sura As-Saffat, versículo 107",
+        "content": "وَفَدَيْنَـٰهُ بِذِبْحٍ عَظِيمٍ",
+        "translation": "E recompensámos-o com um grande sacrifício.",
+        "relevance": "Allah substituiu Ismael por um sacrifício, signo da Sua misericórdia."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Dhibh",
+        "arabic_term": "ذبح",
+        "definition": "Imolação, sacrifício. Prova vivida por Ibrahim e Ismael.",
+        "pronunciation": "dhibh"
+      },
+      {
+        "id": 2,
+        "term": "Sabir",
+        "arabic_term": "صابر",
+        "definition": "Perseverante. Ismael declarou-se entre os perseverantes face à prova.",
+        "pronunciation": "sa-bir"
+      }
+    ]
+  },
+  "ismail_kaaba": {
+    "title": "Ismael e a elevação da Kaaba",
+    "title_arabic": "إسماعيل ورفع قواعد البيت",
+    "introduction": "O Alcorão relata que Ibrahim e Ismael elevaram juntos os fundamentos da Casa Sagrada (al-Bayt) em Meca. Invocaram Allah para que esta morada fosse um lugar de paz, oração e orientação para a humanidade. Ismael participou activamente nesta obra abençoada ao lado do pai.",
+    "conclusion": "A Kaaba, elevada por Ibrahim e Ismael, tornou-se o centro do culto monoteísta. A sua invocação foi atendida: a Casa é um lugar de peregrinação e oração para os crentes.",
+    "moral_lesson": "Servir os lugares sagrados e cooperar na obediência a Allah são actos nobres. Ismael ensina-nos a humildade no serviço da casa de Allah.",
+    "historical_location": "Meca (Bakka / Bakkah)",
+    "historical_context": "O Alcorão menciona a construção da Kaaba por Ibrahim e Ismael como um evento fundador para as gerações futuras.",
+    "chapters": [
+      {
+        "id": "ismail_kaaba_chapter_1",
+        "title": "Elevar os fundamentos da Casa",
+        "content": "Allah diz: «E quando Ibrahim e Ismael elevavam os fundamentos da Casa: «Ó nosso Senhor! Aceite de nós. Tu és o Oniouvinte, o Onisciente. Ó nosso Senhor! Faça de nós os teus submissos, e da nossa descendência uma comunidade submissa a Ti. Mostra-nos os nossos ritos e aceite o nosso arrependimento. Tu és o Acolhedor do arrependimento, o Misericordioso.»» (2:127-128) Ismael trabalhou ao lado de Ibrahim para elevar a Kaaba. A sua dupla invocação mostra a submissão e o cuidado pelas gerações vindouras."
+      },
+      {
+        "id": "ismail_kaaba_chapter_2",
+        "title": "Uma morada para a humanidade",
+        "content": "Allah diz também: «E quando designámos a Ibrahim o local da Casa: «Não me associes nada; e purifica a Minha Casa para os que a circundam, para os que permanecem de pé, para os que se inclinam e se prostram.»» (22:26) A Casa elevada por Ibrahim e Ismael tornou-se um lugar de tawhid (unidade divina), oração e peregrinação. Ismael está assim ligado a um dos centros mais sagrados do Islã."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Alcorão 2:127",
+        "reference_text": "Sura Al-Baqarah, versículo 127",
+        "content": "وَإِذْ يَرْفَعُ إِبْرَٰهِـۧمُ ٱلْقَوَاعِدَ مِنَ ٱلْبَيْتِ وَإِسْمَـٰعِيلُ",
+        "translation": "E quando Ibrahim e Ismael elevavam os fundamentos da Casa...",
+        "relevance": "Confirma o papel de Ismael na elevação da Kaaba."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Alcorão 22:26",
+        "reference_text": "Sura Al-Hajj, versículo 26",
+        "content": "وَإِذْ بَوَّأْنَا لِإِبْرَٰهِيمَ مَكَانَ ٱلْبَيْتِ",
+        "translation": "E quando designámos a Ibrahim o local da Casa...",
+        "relevance": "Estabelece a Kaaba como morada consagrada ao culto de Allah somente."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Al-Bayt",
+        "arabic_term": "البيت",
+        "definition": "A Casa. Designa a Kaaba em Meca.",
+        "pronunciation": "al-bayt"
+      },
+      {
+        "id": 2,
+        "term": "Al-Kaaba",
+        "arabic_term": "الكعبة",
+        "definition": "A Kaaba. Santuário elevado por Ibrahim e Ismael.",
+        "pronunciation": "al-ka-a-ba"
+      }
+    ]
+  },
+  "ismail_steadfast": {
+    "title": "Ismael entre os perseverantes",
+    "title_arabic": "إسماعيل من الصابرين",
+    "introduction": "O Alcorão associa Ismael a outros profetas exemplares: «E Ismael, Idris e Dhu'l-Kifl. Todos eram perseverantes.» (21:85) Depois Allah acrescenta: «E fizemos-os entrar na Nossa misericórdia. Eram certamente dos virtuosos.» (21:86) Estes versículos louvam a paciência (sabr) e a rectidão (salih) de Ismael.",
+    "conclusion": "Ismael pertence aos profetas pacientes e virtuosos. Allah concedeu-lhe a Sua misericórdia. É um modelo de perseverança na obediência.",
+    "moral_lesson": "A paciência na adoração e nas provas é uma qualidade dos grandes profetas. O crente inspira-se nisto no dia a dia.",
+    "historical_location": null,
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "ismail_steadfast_chapter_1",
+        "title": "Profetas perseverantes",
+        "content": "Allah diz: «E Ismael, Idris e Dhu'l-Kifl. Todos eram perseverantes (sabirin).» (21:85) O sabr designa aqui a constância na obediência, a firmeza face às provas e a perseverança na missão profética. Ismael é citado ao lado de outros mensageiros honrados, o que mostra que partilha as suas nobres qualidades."
+      },
+      {
+        "id": "ismail_steadfast_chapter_2",
+        "title": "Misericórdia e virtude",
+        "content": "Allah prossegue: «E fizemos-os entrar na Nossa misericórdia. Eram certamente dos virtuosos (salihin).» (21:86) Entrar na misericórdia de Allah significa que Ele lhes concedeu a Sua graça e protecção. Ismael é, segundo o Alcorão, um profeta paciente, virtuoso e acolhido na misericórdia divina."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Alcorão 21:85",
+        "reference_text": "Sura Al-Anbiya, versículo 85",
+        "content": "وَإِسْمَـٰعِيلَ وَإِدْرِيسَ وَذَا ٱلْكِفْلِ ۖ كُلٌّۭ مِّنَ ٱلصَّـٰبِرِينَ",
+        "translation": "E Ismael, Idris e Dhu'l-Kifl. Todos eram perseverantes.",
+        "relevance": "Louva a paciência de Ismael ao lado de outros profetas."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Alcorão 21:86",
+        "reference_text": "Sura Al-Anbiya, versículo 86",
+        "content": "وَأَدْخَلْنَـٰهُمْ فِى رَحْمَتِنَآ ۖ إِنَّهُم مِّنَ ٱلصَّـٰلِحِينَ",
+        "translation": "E fizemos-os entrar na Nossa misericórdia. Eram certamente dos virtuosos.",
+        "relevance": "Afirma a virtude de Ismael e a misericórdia que Allah lhe concedeu."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Sabir",
+        "arabic_term": "صابر",
+        "definition": "Perseverante, paciente. Qualidade atribuída a Ismael no Alcorão.",
+        "pronunciation": "sa-bir"
+      },
+      {
+        "id": 2,
+        "term": "Salih",
+        "arabic_term": "صالح",
+        "definition": "Virtuoso, piedoso. Ismael é dos salihin.",
+        "pronunciation": "sa-lih"
+      }
+    ]
+  },
+  "lessons_from_ismail": {
+    "title": "Lições do profeta Ismael",
+    "title_arabic": "دروس من نبي الله إسماعيل",
+    "introduction": "O Alcorão menciona Ismael em vários versículos centrais: fidelidade à promessa, submissão na prova, serviço da Kaaba e paciência. Ao meditar sobre as suras Maryam (19:54), As-Saffat (37:102-107), Al-Baqarah (2:127-128) e Al-Anbiya (21:85-86), o crente extrai ensinamentos duradouros.",
+    "conclusion": "Ismael permanece um modelo de lealdade, submissão e serviço. A sua história no Alcorão convida à confiança em Allah e à perseverança na obediência.",
+    "moral_lesson": "Aderir aos textos autênticos protege o crente. As qualidades de Ismael — fidelidade, paciência, submissão — são objectivos para cada alma piedosa.",
+    "historical_location": null,
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lessons_from_ismail_chapter_1",
+        "title": "Apoiar-se no Alcorão",
+        "content": "Allah menciona Ismael em versículos precisos e autênticos. O muçulmano honra Ismael pelo que Allah disse: sadiq al-wa'd, rasul, nabi, perseverante na prova, construtor da Kaaba com Ibrahim. É um método sadio: conhecer os profetas pela revelação, sem inventar narrativas."
+      },
+      {
+        "id": "lessons_from_ismail_chapter_2",
+        "title": "Visar as qualidades proféticas",
+        "content": "A fidelidade à promessa chama a cumprir os compromissos com Allah. A submissão na prova convida a confiar no Senhor mesmo na adversidade. O serviço da Kaaba recorda a humildade e a cooperação no bem. Seguindo estes ensinamentos, o crente caminha nas pegadas dos salihin, entre os quais Allah conta Ismael."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Alcorão 19:54",
+        "reference_text": "Sura Maryam, versículo 54",
+        "content": "وَٱذْكُرْ فِى ٱلْكِتَـٰبِ إِسْمَـٰعِيلَ ۚ إِنَّهُۥ كَانَ صَادِقَ ٱلْوَعْدِ وَكَانَ رَسُولًا نَّبِيًّۭا",
+        "translation": "E mencione no Livro Ismael. Ele foi verdadeiro na promessa e foi mensageiro e profeta.",
+        "relevance": "Síntese dos honores corânicos concedidos a Ismael."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Alcorão 21:85-86",
+        "reference_text": "Sura Al-Anbiya, versículos 85-86",
+        "content": "وَإِسْمَـٰعِيلَ وَإِدْرِيسَ وَذَا ٱلْكِفْلِ ۖ كُلٌّۭ مِّنَ ٱلصَّـٰبِرِينَ ۝ وَأَدْخَلْنَـٰهُمْ فِى رَحْمَتِنَآ ۖ إِنَّهُم مِّنَ ٱلصَّـٰلِحِينَ",
+        "translation": "E Ismael, Idris e Dhu'l-Kifl. Todos eram perseverantes. E fizemos-os entrar na Nossa misericórdia. Eram certamente dos virtuosos.",
+        "relevance": "Recorda a paciência e a virtude de Ismael."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Tawhid",
+        "arabic_term": "توحيد",
+        "definition": "Unidade de Allah. Mensagem transmitida pelos profetas, incluindo Ismael.",
+        "pronunciation": "taw-hid"
+      },
+      {
+        "id": 2,
+        "term": "Salihin",
+        "arabic_term": "صالحون",
+        "definition": "Os virtuosos. Ismael faz parte deles segundo o Alcorão.",
+        "pronunciation": "sa-li-hin"
+      }
+    ]
+  }
+}

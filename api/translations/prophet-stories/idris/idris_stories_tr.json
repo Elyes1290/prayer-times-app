@@ -1,0 +1,242 @@
+{
+  "idris_in_the_book": {
+    "title": "Kitap'ta zikredilen İdris",
+    "title_arabic": "ذكر إدريس في الكتاب",
+    "introduction": "İdris (إدريس عليه السلام), Kur'an'da Allah tarafından onurlandırılan bir peygamberdir. Allah, Peygamber Muhammed'e (ﷺ) onu zikretmesini emreder: «Kitap'ta İdris'i zikret. Şüphesiz o, sıddık bir peygamberdi.» (19:56) Kur'an, dünyevi hayatını ayrıntılı olarak anlatmaz; ancak doğruluğunu ve peygamberliğini açıkça teyit eder.",
+    "conclusion": "Böylece İdris, Allah'ın elçileri arasında tanınır. Adı sidk (doğruluk) ve nubuwwa (peygamberlik) ile ilişkilidir. Mümin, Allah'ın vahyetmediği şeyleri kıssalara eklemeksizin bu vasıflar üzerinde düşünür.",
+    "moral_lesson": "Bu kıssa bize, Allah'a karşı doğruluk ve samimiyetin peygamberî vasıflar olduğunu öğretir. Kur'an, dayanaksız kıssalara başvurmadan İdris'i onurlandırmaya yeterlidir.",
+    "historical_location": null,
+    "historical_context": "Kur'an, İdris'i görev yerini belirtmeden zikreder. Alimler, vahyedilen metne bağlı kalınmasını tavsiye eder.",
+    "chapters": [
+      {
+        "id": "idris_in_the_book_chapter_1",
+        "title": "İdris'i zikretme emri",
+        "content": "Allah buyurur: «Kitap'ta İdris'i zikret.» (19:56) Bu «Kitap», peygamberlerin anısını koruyan Kur'an'ın kendisidir. İdris'i zikretmek, Allah'ın Adem'den sonra rehberler gönderdiğini hatırlatmaktır. Her peygamber tawhid (tevhid) mesajı almıştır. İdris, Kur'an'ın müminlere sunduğu bu mübarek silsilenin bir parçasıdır."
+      },
+      {
+        "id": "idris_in_the_book_chapter_2",
+        "title": "Sıddık bir peygamber",
+        "content": "Allah devam eder: «Şüphesiz o, sıddık (siddiq) bir peygamberdi (nabi).» (19:56) Siddiq, imanda samimi, hakikate bağlı ve Rabbine sadık olanı ifade eder. Nabi unvanı, İdris'in vahiy aldığını ve Allah'ın mesajını ilettiğini teyit eder. Bu iki nitelik, Allah'ın onun hakkında bize öğretmek istediğini özetler; bu ayette başka bir kıssa ayrıntısı yoktur."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Kur'an 19:56",
+        "reference_text": "Meryem Suresi, 56. ayet",
+        "content": "۞ وَٱذْكُرْ فِى ٱلْكِتَـٰبِ إِدْرِيسَ ۚ إِنَّهُۥ كَانَ صِدِّيقًۭا نَّبِيًّۭا",
+        "translation": "Kitap'ta İdris'i zikret. Şüphesiz o, sıddık bir peygamberdi.",
+        "relevance": "İdris'in peygamberliğini ve doğruluğunu belirleyen ana ayet."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Idris",
+        "arabic_term": "إدريس",
+        "definition": "Kur'an'da zikredilen peygamber. Siddiq ve nabi olarak nitelendirilir.",
+        "pronunciation": "id-ris"
+      },
+      {
+        "id": 2,
+        "term": "Siddiq",
+        "arabic_term": "صديق",
+        "definition": "Doğruluk sahibi, Allah'a karşı tam samimiyet gösteren.",
+        "pronunciation": "sid-diq"
+      },
+      {
+        "id": 3,
+        "term": "Nabi",
+        "arabic_term": "نبي",
+        "definition": "Vahiy alan ve yalnızca Allah'a ibadete çağıran peygamber.",
+        "pronunciation": "na-bi"
+      }
+    ]
+  },
+  "idris_high_station": {
+    "title": "İdris yüce bir makama yükseltildi",
+    "title_arabic": "رفع إدريس مكاناً عليا",
+    "introduction": "Allah, İdris'i benzersiz bir yükseltmeyle onurlandırır: «Biz onu yüce bir makama yükselttik.» (19:57) Bu ayet, tam mahiyetini açıklamadan ilahi bir lütfu teyit eder. Tefsir alimleri, Allah'ın ona yüksek bir derece ve şerefli bir makam verdiğini açıklar. Peygamber Muhammed (ﷺ) — sahih bir rivayette — gece yolculuğu sırasında onu dördüncü gökte görmüştür.",
+    "conclusion": "İdris'in yükseltilmesi Allah'tan bir lütuftur. Mümin, vahiy ve sahih hadislerin ötesine spekülasyon yapmadan, sadık kullara ayrılmış şerefi burada görür.",
+    "moral_lesson": "Allah dilediğini yükseltir. İtaat ve samimiyet, Rabb'in katında şerefli bir makama götürür.",
+    "historical_location": null,
+    "historical_context": "«Yüce makam» (makanan aliyyan) ifadesinin tam anlamı, müfessirler tarafından yüksek bir manevi derece ve sahih bir hadise göre dördüncü gökte bulunma olarak yorumlanır.",
+    "chapters": [
+      {
+        "id": "idris_high_station_chapter_1",
+        "title": "Allah tarafından verilen bir yükseltme",
+        "content": "Allah buyurur: «Biz onu yüce bir makama yükselttik.» (19:57) «Rafa'a» (yükseltmek) fiili, Allah'ın ona üstün bir konum verdiğini gösterir. İbn Kesir ve diğer müfessirler, ayrıntılı kıssa uydurulmaması gerektiğini hatırlatır: Kur'an lütfu teyit eder; sahih Sünnet bunu efsaneler eklemeden açıklayabilir. Bu yükseltme, İdris'e yönelik ilahi sevgi ve onurun bir işaretidir."
+      },
+      {
+        "id": "idris_high_station_chapter_2",
+        "title": "İdris dördüncü gökte",
+        "content": "Müslim'in rivayet ettiği sahih bir hadiste Peygamber Muhammed (ﷺ), gece yolculuğu (İsra ve Mi'rac) sırasında İdris'i dördüncü gökte gördüğünü anlattı. Bu peygamberî şahitlik, müminin başka dayanaksız kıssalara ihtiyaç duymadan İdris'in yüksek makamını teyit eder. Kur'an ve sahih Sünnet, bu elçiyi onurlandırmaya yeterlidir."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Kur'an 19:57",
+        "reference_text": "Meryem Suresi, 57. ayet",
+        "content": "وَرَفَعْنَـٰهُ مَكَانًا عَلِيًّا",
+        "translation": "Biz onu yüce bir makama yükselttik.",
+        "relevance": "Allah tarafından İdris'in şerefli yükseltilmesini teyit eder."
+      },
+      {
+        "id": 2,
+        "type": "hadith",
+        "source": "Sahih Muslim",
+        "reference_text": "Gece yolculuğu (İsra ve Mi'rac) rivayeti",
+        "content": "Peygamber (ﷺ), İdris'i dördüncü gökte gördü.",
+        "translation": "İdris'in yüce makamı hakkında sahih bir şahitlik.",
+        "relevance": "Kur'an'da zikredilen yüksek makamı sahih Sünnet'te teyit eder."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Makan Aliyy",
+        "arabic_term": "مكان علي",
+        "definition": "Yüce makam; Allah'ın İdris'e lütfettiği yüksek konum.",
+        "pronunciation": "ma-kan a-liyy"
+      },
+      {
+        "id": 2,
+        "term": "Rafa'a",
+        "arabic_term": "رفع",
+        "definition": "Yükseltmek. Allah, İdris'i derece ve onur bakımından yükseltti.",
+        "pronunciation": "ra-fa-a"
+      },
+      {
+        "id": 3,
+        "term": "Mi'raj",
+        "arabic_term": "معراج",
+        "definition": "Peygamber Muhammed'in (ﷺ) peygamberlerle buluştuğu gece yükselişi.",
+        "pronunciation": "mi-raj"
+      }
+    ]
+  },
+  "idris_steadfast": {
+    "title": "Sabredenlerden İdris",
+    "title_arabic": "إدريس من الصابرين",
+    "introduction": "Kur'an, İdris'i diğer örnek peygamberlerle birlikte anar: «İsmail, İdris ve Zülkifl. Hepsi sabredenlerdendi.» (21:85) Ardından Allah ekler: «Onları rahmetimize kattık. Şüphesiz onlar salihlerdendi.» (21:86) Bu ayetler, İdris'in sabrını (sabr) ve salihliğini (salih) över.",
+    "conclusion": "İdris, sabırlı ve salih peygamberlerdendir. Allah ona rahmetini lütfetti. O, itaatta sebatın bir örneğidir.",
+    "moral_lesson": "İbadette ve Allah'a davette sabır, büyük peygamberlerin vasfıdır. Mümin bunu her gün kendine ilham kaynağı edinir.",
+    "historical_location": null,
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "idris_steadfast_chapter_1",
+        "title": "Sabreden peygamberler",
+        "content": "Allah buyurur: «İsmail, İdris ve Zülkifl. Hepsi sabredenlerdendi (sabirin).» (21:85) Burada sabr, itaatta sebat, imtihanlarda metanet ve peygamberlik görevinde azim demektir. İdris, diğer onurlu elçilerle birlikte zikredilir; bu da Kur'an'ın burada hayatının koşullarını ayrıntılandırmadan onların soylu vasıflarını paylaştığını gösterir."
+      },
+      {
+        "id": "idris_steadfast_chapter_2",
+        "title": "Rahmet ve fazilet",
+        "content": "Allah devam eder: «Onları rahmetimize kattık. Şüphesiz onlar salihlerdendi (salihin).» (21:86) Allah'ın rahmetine girmek, O'nun onlara lütuf ve koruma bahşettiği anlamına gelir. Salihin (salihler) niteliği, doğruluklarını teyit eder. Kur'an'a göre İdris, sabırlı, salih bir peygamber olup ilahi rahmete kabul edilmiştir."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Kur'an 21:85",
+        "reference_text": "Enbiya Suresi, 85. ayet",
+        "content": "وَإِسْمَـٰعِيلَ وَإِدْرِيسَ وَذَا ٱلْكِفْلِ ۖ كُلٌّۭ مِّنَ ٱلصَّـٰبِرِينَ",
+        "translation": "İsmail, İdris ve Zülkifl. Hepsi sabredenlerdendi.",
+        "relevance": "İdris'in sabrını diğer peygamberlerle birlikte över."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Kur'an 21:86",
+        "reference_text": "Enbiya Suresi, 86. ayet",
+        "content": "وَأَدْخَلْنَـٰهُمْ فِى رَحْمَتِنَآ ۖ إِنَّهُم مِّنَ ٱلصَّـٰلِحِينَ",
+        "translation": "Onları rahmetimize kattık. Şüphesiz onlar salihlerdendi.",
+        "relevance": "İdris'in faziletini ve Allah'ın ona lütfettiği rahmeti teyit eder."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Sabir",
+        "arabic_term": "صابر",
+        "definition": "Sabreden, metanetli. Kur'an'da İdris'e atfedilen vasf.",
+        "pronunciation": "sa-bir"
+      },
+      {
+        "id": 2,
+        "term": "Salih",
+        "arabic_term": "صالح",
+        "definition": "Salih, takvalı. İdris salihlerdendir.",
+        "pronunciation": "sa-lih"
+      },
+      {
+        "id": 3,
+        "term": "Rahma",
+        "arabic_term": "رحمة",
+        "definition": "İdris ve birlikte zikredilen peygamberlerin nimetlendirildiği ilahi rahmet.",
+        "pronunciation": "rah-ma"
+      }
+    ]
+  },
+  "lessons_from_idris": {
+    "title": "Peygamber İdris'ten dersler",
+    "title_arabic": "دروس من نبي الله إدريس",
+    "introduction": "Kur'an, İdris'i az sayıda ayette zikreder; ancak her kelime anlam doludur: doğruluk, peygamberlik, yükseltme, sabır ve fazilet. Meryem (19:56-57) ve Enbiya (21:85-86) surelerini düşünerek mümin, uydurma kıssalara başvurmadan kalıcı dersler çıkarır.",
+    "conclusion": "İdris, sidk, sabr ve salihliğin örneği olmaya devam eder. Kur'an'daki kıssası, samimiyete ve Allah'ın rahmetine güvenmeye davet eder.",
+    "moral_lesson": "Sahih metinlere bağlı kalmak mümini sapkınlıktan korur. İdris'in vasıfları — doğruluk, sabır, Allah tarafından yükseltilme — her takvalı ruh için hedeftir.",
+    "historical_location": null,
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lessons_from_idris_chapter_1",
+        "title": "Kur'an'a dayanmak",
+        "content": "Allah, İdris'i yalnızca belirli ayetlerde zikreder. Bu özlülük, Müslümana vahyi efsanelerle tamamlamamayı öğretir. Kur'an'da az ayrıntılı anlatılan diğer peygamberler gibi İdris'i de Allah'ın söyledikleriyle onurlandırırız: siddiq, nabi, yüce makama yükseltilmiş, sabir ve salih. Bu, sağlıklı bir dini bilgi yöntemidir."
+      },
+      {
+        "id": "lessons_from_idris_chapter_2",
+        "title": "Peygamberî vasıfları hedeflemek",
+        "content": "Sidq, Allah'a karşı tam samimiyete çağırır. Sabr, namazda, güzel ahlakta ve iyiliğe davette sebat etmeye davet eder. Yüce makama yükseltilme, gerçek onurun görünüşten değil Rabb'ten geldiğini hatırlatır. Bu öğretilere uyarak mümin, Allah'ın İdris'i de saydığı salihlerin izinde yürür."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Kur'an 19:56-57",
+        "reference_text": "Meryem Suresi, 56-57. ayetler",
+        "content": "۞ وَٱذْكُرْ فِى ٱلْكِتَـٰبِ إِدْرِيسَ ۚ إِنَّهُۥ كَانَ صِدِّيقًۭا نَّبِيًّۭا ۝ وَرَفَعْنَـٰهُ مَكَانًا عَلِيًّا",
+        "translation": "Kitap'ta İdris'i zikret. Şüphesiz o, sıddık bir peygamberdi. Biz onu yüce bir makama yükselttik.",
+        "relevance": "İdris'e bahşedilen Kur'anî onurların özeti."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Kur'an 21:85-86",
+        "reference_text": "Enbiya Suresi, 85-86. ayetler",
+        "content": "وَإِسْمَـٰعِيلَ وَإِدْرِيسَ وَذَا ٱلْكِفْلِ ۖ كُلٌّۭ مِّنَ ٱلصَّـٰبِرِينَ ۝ وَأَدْخَلْنَـٰهُمْ فِى رَحْمَتِنَآ ۖ إِنَّهُم مِّنَ ٱلصَّـٰلِحِينَ",
+        "translation": "İsmail, İdris ve Zülkifl. Hepsi sabredenlerdendi. Onları rahmetimize kattık. Şüphesiz onlar salihlerdendi.",
+        "relevance": "İdris'in sabrını ve faziletini hatırlatır."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Tafsir",
+        "arabic_term": "تفسير",
+        "definition": "Kur'an tefsiri. Alimler, İdris hakkındaki ayetleri kıssa uydurmadan açıklar.",
+        "pronunciation": "taf-sir"
+      },
+      {
+        "id": 2,
+        "term": "Salihin",
+        "arabic_term": "صالحون",
+        "definition": "Salihler. Kur'an'a göre İdris de onlardandır.",
+        "pronunciation": "sa-li-hin"
+      }
+    ]
+  }
+}

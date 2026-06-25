@@ -1,0 +1,295 @@
+{
+  "ishaq_in_the_book": {
+    "title": "Isaac granted to Ibrahim",
+    "title_arabic": "وهب إسحاق لإبراهيم",
+    "introduction": "Ishaq (Isaac, peace be upon him) is a prophet honored by Allah in the Quran. Son of the prophet Ibrahim and brother of Ismail, he belongs to the blessed lineage that Allah mentions in Surah Maryam. When Ibrahim left his people and what they worshipped besides Allah, Allah granted him Ishaq and Ya'qub: \"And We made each of them a prophet.\" (19:49) The Quran thus affirms Ishaq's prophethood without adding invented tales.",
+    "conclusion": "Ishaq is recognized as a prophet (nabi) in the revealed Book. His divine election belongs to the mission of Ibrahim, father of the believers, alongside his brother Ismail.",
+    "moral_lesson": "Leaving false worship and holding to Allah opens the way to divine blessings. Ishaq teaches us that righteous offspring is a grace granted to those who persevere in tawhid.",
+    "historical_location": null,
+    "historical_context": "The Quran relates this gift after Ibrahim's separation from idolatry, without specifying geographical details of Ishaq's life.",
+    "chapters": [
+      {
+        "id": "ishaq_in_the_book_chapter_1",
+        "title": "The gift of Ishaq after Ibrahim's departure",
+        "content": "Allah says: \"And when he had parted from them and from what they worshipped besides Allah, We granted him Ishaq and Ya'qub.\" (19:49) Ibrahim had left his people for the oneness of Allah. In reward for this faithfulness, Allah granted him Ishaq — a blessed son alongside Ismail, his brother — and Ya'qub, his grandson. The Quran presents this gift as a divine favor, without added legends."
+      },
+      {
+        "id": "ishaq_in_the_book_chapter_2",
+        "title": "A prophet among Ibrahim's sons",
+        "content": "Allah continues: \"And We made each of them a prophet (nabi).\" (19:49) Ishaq received nubuwwa: he conveyed Allah's message like his father Ibrahim and his brother Ismail. Being called nabi in the Quran is the highest honor. The believer knows Ishaq through what Allah revealed: son of Ibrahim, an authentic prophet, without relying on unfounded narratives."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 19:49",
+        "reference_text": "Surah Maryam, verse 49",
+        "content": "فَلَمَّا ٱعْتَزَلَهُمْ وَمَا يَعْبُدُونَ مِن دُونِ ٱللَّهِ وَهَبْنَا لَهُۥٓ إِسْحَـٰقَ وَيَعْقُوبَ ۖ وَكُلًّا جَعَلْنَا نَبِيًّا",
+        "translation": "And when he had parted from them and from what they worshipped besides Allah, We granted him Ishaq and Ya'qub, and We made each of them a prophet.",
+        "relevance": "Main verse establishing Ishaq's prophethood in Ibrahim's lineage."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Ishaq",
+        "arabic_term": "إسحاق",
+        "definition": "Son of Ibrahim, brother of Ismail, prophet mentioned in the Quran.",
+        "pronunciation": "ish-aq"
+      },
+      {
+        "id": 2,
+        "term": "Nabi",
+        "arabic_term": "نبي",
+        "definition": "Prophet who receives revelation and calls to worship Allah alone.",
+        "pronunciation": "na-bi"
+      },
+      {
+        "id": 3,
+        "term": "Ibrahim",
+        "arabic_term": "إبراهيم",
+        "definition": "Father of Ishaq and Ismail, prophet and friend of Allah (khalil).",
+        "pronunciation": "ib-ra-him"
+      }
+    ]
+  },
+  "ishaq_glad_tidings": {
+    "title": "The glad tidings of Ishaq",
+    "title_arabic": "بشارة إسحاق",
+    "introduction": "Allah relates in Surah As-Saffat a joyful announcement to Ibrahim: \"We gave him the good news of Ishaq — a prophet, one of the righteous.\" (37:112) This bushra (glad tidings) confirms that Ishaq would be a nabi min as-salihin — a prophet among the pious. Son of Ibrahim and brother of Ismail, Ishaq holds an honored place in Quranic revelation.",
+    "conclusion": "The glad tidings of Ishaq show that Allah chooses His prophets from among the salihin. Ibrahim received this announcement before Ishaq's birth, a sign of divine planning for his descendants.",
+    "moral_lesson": "Allah's good news accompanies those who are faithful to Him. Ishaq reminds us that piety and prophethood go together in the house of Ibrahim.",
+    "historical_location": null,
+    "historical_context": "The Quran mentions this announcement within Ibrahim's trials, without detailing circumstances beyond the revealed text.",
+    "chapters": [
+      {
+        "id": "ishaq_glad_tidings_chapter_1",
+        "title": "A bushra for Ibrahim",
+        "content": "Allah says: \"And We gave him the good news (bushra) of Ishaq, a prophet among the righteous.\" (37:112) Bushra is an announcement of joy and mercy. Ibrahim, raised in rank by Allah, received the promise of a prophet son: Ishaq. The Quran specifies he would be \"min as-salihin\" — among the virtuous — guaranteeing his uprightness and prophetic mission."
+      },
+      {
+        "id": "ishaq_glad_tidings_chapter_2",
+        "title": "Blessing upon Ibrahim and Ishaq",
+        "content": "Allah continues: \"And We blessed him and Ishaq. And among their descendants are those who do good and those who clearly wrong themselves.\" (37:113) Allah granted baraka (blessing) to Ibrahim and Ishaq. The Quran also reminds us that among their descendants are muhsin (doers of good) and those unjust to themselves. Ishaq himself remains a model of the salihin mentioned in the previous verse."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 37:112",
+        "reference_text": "Surah As-Saffat, verse 112",
+        "content": "وَبَشَّرْنَـٰهُ بِإِسْحَـٰقَ نَبِيًّا مِّنَ ٱلصَّـٰلِحِينَ",
+        "translation": "And We gave him the good news of Ishaq, a prophet among the righteous.",
+        "relevance": "Announces Ishaq's prophethood among the salihin."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 37:113",
+        "reference_text": "Surah As-Saffat, verse 113",
+        "content": "وَبَـٰرَكْنَا عَلَيْهِ وَعَلَىٰٓ إِسْحَـٰقَ ۚ وَمِن ذُرِّيَّتِهِمَا مُحْسِنٌ وَظَالِمٌ لِّنَفْسِهِۦ مُبِينٌ",
+        "translation": "And We blessed him and Ishaq. And among their descendants are those who do good and those who clearly wrong themselves.",
+        "relevance": "Affirms divine blessing upon Ibrahim and Ishaq."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Bushra",
+        "arabic_term": "بشارة",
+        "definition": "Glad tidings, good news. Allah announced Ishaq to Ibrahim.",
+        "pronunciation": "bush-ra"
+      },
+      {
+        "id": 2,
+        "term": "Salihin",
+        "arabic_term": "صالحون",
+        "definition": "The righteous, the virtuous. Ishaq is announced as nabi min as-salihin.",
+        "pronunciation": "sa-li-hin"
+      },
+      {
+        "id": 3,
+        "term": "Baraka",
+        "arabic_term": "بركة",
+        "definition": "Divine blessing. Granted to Ibrahim and Ishaq according to the Quran.",
+        "pronunciation": "ba-ra-ka"
+      }
+    ]
+  },
+  "ishaq_blessing": {
+    "title": "Mercy and truthful praise",
+    "title_arabic": "رحمة ولسان صدق لإسحاق",
+    "introduction": "After mentioning the gift of Ishaq and Ya'qub, Allah declares in Maryam: \"We granted them of Our mercy and made for them a lofty tongue of truth (lisana sidqin aliyyan).\" (19:50) This verse honors Ibrahim, Ishaq, and Ya'qub. Ishaq, son of Ibrahim and brother of Ismail, is among those whom Allah fills with rahma and whose name endures in truth among generations.",
+    "conclusion": "Ishaq shares with Ibrahim and Ya'qub divine mercy and a reputation of sidq (truthfulness) raised high. The Quran is sufficient to honor his memory without adding legends.",
+    "moral_lesson": "Allah's mercy and a reputation of truth are lasting goods. Ishaq invites us to aim for sidq in our words and deeds.",
+    "historical_location": null,
+    "historical_context": "Verse 19:50 follows the gift of Ishaq and Ya'qub (19:49) and addresses Ibrahim and his prophetic descendants collectively.",
+    "chapters": [
+      {
+        "id": "ishaq_blessing_chapter_1",
+        "title": "Allah's mercy upon them",
+        "content": "Allah says: \"And We granted them of Our mercy (rahma).\" (19:50) Rahma encompasses guidance, protection, and favors granted to Ibrahim, Ishaq, and Ya'qub. Ishaq, prophet son of Ibrahim, shares in this collective grace. The Quran does not detail every aspect of this mercy: it affirms the divine benefit, inviting the believer to reflect and thank Allah."
+      },
+      {
+        "id": "ishaq_blessing_chapter_2",
+        "title": "A lofty lisân sidq",
+        "content": "Allah adds: \"And We made for them a lofty tongue of truth (lisana sidqin aliyyan).\" (19:50) Lisân sidq means a truthful and honorable mention: their name is recalled with truth and elevation among people and in revelation. Ishaq, alongside Ibrahim and Ya'qub, thus holds a place of sidq in the Book. It is a lesson: Allah raises whom He wills through truth, not invention."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 19:50",
+        "reference_text": "Surah Maryam, verse 50",
+        "content": "وَوَهَبْنَا لَهُم مِّن رَّحْمَتِنَا وَجَعَلْنَا لَهُمْ لِسَانَ صِدْقٍ عَلِيًّا",
+        "translation": "And We granted them of Our mercy and made for them a lofty tongue of truth.",
+        "relevance": "Honors Ishaq with Ibrahim and Ya'qub through rahma and lisân sidq."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Rahma",
+        "arabic_term": "رحمة",
+        "definition": "Divine mercy. Granted to Ibrahim, Ishaq, and Ya'qub.",
+        "pronunciation": "rah-ma"
+      },
+      {
+        "id": 2,
+        "term": "Lisân Sidq",
+        "arabic_term": "لسان صدق",
+        "definition": "Truthful and honorable praise. An elevated and sincere mention.",
+        "pronunciation": "li-san sidq"
+      },
+      {
+        "id": 3,
+        "term": "Sidq",
+        "arabic_term": "صدق",
+        "definition": "Truthfulness, sincerity. Quality linked to the memory of prophets.",
+        "pronunciation": "sidq"
+      }
+    ]
+  },
+  "ishaq_lineage": {
+    "title": "Ishaq in Ibrahim's lineage",
+    "title_arabic": "إسحاق في نسل إبراهيم",
+    "introduction": "Surah Al-Anbiya recalls Allah's favors to Ibrahim: \"And We granted him Ishaq, and Ya'qub in addition, and We made each of them righteous.\" (21:72) Ishaq is presented here as a divine gift (wahb) in the lineage: son of Ibrahim, brother of Ismail, father of the prophet Ya'qub. Allah made each of them a salih — virtuous and upright.",
+    "conclusion": "Ishaq holds a central place in Ibrahim's prophetic descendants. With Ya'qub, he forms a chain of salihin that the Quran celebrates.",
+    "moral_lesson": "Virtue is transmitted through obedience to Allah, not blood alone. Ishaq teaches us that nobility comes from salihiyya — uprightness before the Lord.",
+    "historical_location": null,
+    "historical_context": "Verse 21:72 places Ishaq within the account of prophets mentioned in Al-Anbiya, after Ibrahim's trials.",
+    "chapters": [
+      {
+        "id": "ishaq_lineage_chapter_1",
+        "title": "A gift and an addition (nafila)",
+        "content": "Allah says: \"And We granted him Ishaq, and Ya'qub in addition (nafila).\" (21:72) The term nafila indicates an extra gift, a grace beyond what one might expect. Ibrahim received Ishaq, then Ya'qub as an additional favor. Ishaq, the blessed son, is thus at the heart of the descendants through whom Allah continued prophethood after Ibrahim and Ismail."
+      },
+      {
+        "id": "ishaq_lineage_chapter_2",
+        "title": "Righteous men (salihin)",
+        "content": "Allah continues: \"And We made each of them righteous (salihin).\" (21:72) Ishaq and Ya'qub are called salihin: pious, upright, obedient to Allah. This quality summarizes what the Quran conveys about Ishaq in this verse. He belongs to Ibrahim's family chosen by Allah, alongside his brother Ismail, in a lineage of guides for humanity."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 21:72",
+        "reference_text": "Surah Al-Anbiya, verse 72",
+        "content": "وَوَهَبْنَا لَهُۥٓ إِسْحَـٰقَ وَيَعْقُوبَ نَافِلَةً ۖ وَكُلًّا جَعَلْنَا صَـٰلِحِينَ",
+        "translation": "And We granted him Ishaq, and Ya'qub in addition, and We made each of them righteous.",
+        "relevance": "Establishes Ishaq and Ya'qub as salihin in Ibrahim's lineage."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Nafila",
+        "arabic_term": "نافلة",
+        "definition": "Extra gift, additional grace. Ya'qub was a nafila after Ishaq.",
+        "pronunciation": "na-fi-la"
+      },
+      {
+        "id": 2,
+        "term": "Salih",
+        "arabic_term": "صالح",
+        "definition": "Righteous, virtuous. Quality of Ishaq and Ya'qub according to the Quran.",
+        "pronunciation": "sa-lih"
+      },
+      {
+        "id": 3,
+        "term": "Ya'qub",
+        "arabic_term": "يعقوب",
+        "definition": "Son of Ishaq, grandson of Ibrahim, prophet mentioned in the Quran.",
+        "pronunciation": "ya'-qub"
+      }
+    ]
+  },
+  "lessons_from_ishaq": {
+    "title": "Lessons from the prophet Ishaq",
+    "title_arabic": "دروس من نبي الله إسحاق",
+    "introduction": "The Quran mentions Ishaq in several authentic verses: prophet son of Ibrahim, brother of Ismail, subject of bushra, recipient of rahma and lisân sidq, virtuous (salih) alongside Ya'qub. Reflecting on Maryam (19:49-50), As-Saffat (37:112-113), and Al-Anbiya (21:72), the believer draws lasting lessons without relying on unrevealed tales.",
+    "conclusion": "Ishaq remains a model of prophethood, virtue, and divine grace. His story in the Quran invites knowing the prophets through revelation and following in their footsteps.",
+    "moral_lesson": "Sticking to Quranic sources protects faith. The honors granted to Ishaq — nubuwwa, bushra, rahma, sidq, salihiyya — are goals for every pious soul.",
+    "historical_location": null,
+    "historical_context": null,
+    "chapters": [
+      {
+        "id": "lessons_from_ishaq_chapter_1",
+        "title": "Knowing Ishaq through the Quran",
+        "content": "Allah mentions Ishaq in precise verses: granted to Ibrahim after his separation from shirk (19:49), announced as nabi min as-salihin (37:112), honored with rahma and lisân sidq (19:50), called salih with Ya'qub (21:72). The Muslim honors Ishaq through what Allah said, remembering he is son of Ibrahim and brother of Ismail. This is a sound method: no legends, only revelation."
+      },
+      {
+        "id": "lessons_from_ishaq_chapter_2",
+        "title": "Aiming for prophetic qualities",
+        "content": "Ishaq's prophethood reminds us of the importance of transmitting tawhid. The bushra teaches hope in Allah's promise. Rahma and lisân sidq invite gratitude and truthfulness. Salihiyya calls for constant uprightness. By following these teachings, the believer draws close to the salihin, among whom Allah counts Ishaq, son of Ibrahim and brother of Ismail."
+      }
+    ],
+    "references": [
+      {
+        "id": 1,
+        "type": "quran",
+        "source": "Quran 19:49-50",
+        "reference_text": "Surah Maryam, verses 49-50",
+        "content": "فَلَمَّا ٱعْتَزَلَهُمْ وَمَا يَعْبُدُونَ مِن دُونِ ٱللَّهِ وَهَبْنَا لَهُۥٓ إِسْحَـٰقَ وَيَعْقُوبَ ۖ وَكُلًّا جَعَلْنَا نَبِيًّا ۝ وَوَهَبْنَا لَهُم مِّن رَّحْمَتِنَا وَجَعَلْنَا لَهُمْ لِسَانَ صِدْقٍ عَلِيًّا",
+        "translation": "And when he had parted from them and from what they worshipped besides Allah, We granted him Ishaq and Ya'qub, and We made each of them a prophet. And We granted them of Our mercy and made for them a lofty tongue of truth.",
+        "relevance": "Summary of Quranic honors granted to Ishaq in Maryam."
+      },
+      {
+        "id": 2,
+        "type": "quran",
+        "source": "Quran 37:112-113",
+        "reference_text": "Surah As-Saffat, verses 112-113",
+        "content": "وَبَشَّرْنَـٰهُ بِإِسْحَـٰقَ نَبِيًّا مِّنَ ٱلصَّـٰلِحِينَ ۝ وَبَـٰرَكْنَا عَلَيْهِ وَعَلَىٰٓ إِسْحَـٰقَ ۚ وَمِن ذُرِّيَّتِهِمَا مُحْسِنٌ وَظَالِمٌ لِّنَفْسِهِۦ مُبِينٌ",
+        "translation": "And We gave him the good news of Ishaq, a prophet among the righteous. And We blessed him and Ishaq. And among their descendants are those who do good and those who clearly wrong themselves.",
+        "relevance": "Recalls the bushra and blessing upon Ishaq."
+      }
+    ],
+    "glossary": [
+      {
+        "id": 1,
+        "term": "Tawhid",
+        "arabic_term": "توحيد",
+        "definition": "Oneness of Allah. Message conveyed by the prophets, including Ishaq.",
+        "pronunciation": "taw-hid"
+      },
+      {
+        "id": 2,
+        "term": "Salihin",
+        "arabic_term": "صالحون",
+        "definition": "The righteous. Ishaq is among them according to the Quran.",
+        "pronunciation": "sa-li-hin"
+      },
+      {
+        "id": 3,
+        "term": "Ismail",
+        "arabic_term": "إسماعيل",
+        "definition": "Brother of Ishaq, son of Ibrahim, prophet mentioned in the Quran.",
+        "pronunciation": "is-ma-il"
+      }
+    ]
+  }
+}

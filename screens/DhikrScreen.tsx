@@ -95,15 +95,12 @@ const DhikrListItem = React.memo(function DhikrListItem({
   const handleDhikrCompleted = async () => {
     if (!isPremium) {
       Alert.alert(
-        t("premium_ui.feature_locked", "Fonctionnalité Premium"),
-        t(
-          "premium_ui.feature_premium_only",
-          "Cette fonctionnalité est disponible uniquement pour les utilisateurs premium.",
-        ),
+        t("premium_ui.feature_locked"),
+        t("premium_ui.feature_premium_only"),
         [
-          { text: "Annuler", style: "cancel" },
+          { text: t("cancel"), style: "cancel" },
           {
-            text: "Passer au Premium",
+            text: t("upgrade_premium"),
             style: "default",
             onPress: () => {
               // TODO: Ouvrir l'écran premium
@@ -116,20 +113,12 @@ const DhikrListItem = React.memo(function DhikrListItem({
 
     try {
       await onRecordDhikr(1, selectedKey);
-      Alert.alert(
-        t("dhikr.recorded", "Dhikr enregistré"),
-        t(
-          "dhikr.added_to_stats",
-          "Ce dhikr a été ajouté à vos statistiques personnelles.",
-        ),
-        [{ text: "OK" }],
-      );
+      Alert.alert(t("dhikr.recorded"), t("dhikr.added_to_stats"), [
+        { text: t("ok") },
+      ]);
     } catch (error) {
       console.error("Erreur enregistrement dhikr:", error);
-      Alert.alert(
-        "Erreur",
-        "Impossible d'enregistrer le dhikr dans les statistiques.",
-      );
+      Alert.alert(t("error"), t("dhikr.record_error"));
     }
   };
 
@@ -171,7 +160,7 @@ const DhikrListItem = React.memo(function DhikrListItem({
                 color={isPremium ? "#4ECDC4" : "rgba(255,255,255,0.35)"}
               />
               <Text style={styles.recordButtonText}>
-                {t("dhikr.record", "Enregistrer")}
+                {t("dhikr.record")}
               </Text>
             </Pressable>
           </View>
@@ -196,7 +185,7 @@ const DhikrListItem = React.memo(function DhikrListItem({
         {!language.startsWith("ar") && benefitText ? (
           <View style={styles.benefitBox}>
             <Text style={styles.benefitLabel}>
-              {t("dhikr.benefit", "Vertu")}
+              {t("dhikr.benefit")}
             </Text>
             <Text style={styles.benefit}>{benefitText}</Text>
           </View>
@@ -382,9 +371,7 @@ export default function DhikrScreen() {
       <View style={styles.listHeader}>
         <Text style={styles.resultsCount}>
           {filteredDuas.length}{" "}
-          {filteredDuas.length > 1
-            ? t("dhikr.items", "invocations")
-            : t("dhikr.item", "invocation")}
+          {filteredDuas.length > 1 ? t("dhikr.items") : t("dhikr.item")}
         </Text>
       </View>
     ),
@@ -410,10 +397,7 @@ export default function DhikrScreen() {
       <View style={styles.header}>
         <Text style={styles.title}>{title}</Text>
         <Text style={styles.subtitle}>
-          {t(
-            "dhikr.subtitle",
-            "Invocations et rappels pour nourrir votre journée",
-          )}
+          {t("dhikr.subtitle")}
         </Text>
       </View>
 
@@ -436,7 +420,7 @@ export default function DhikrScreen() {
         />
         <TextInput
           style={styles.searchInput}
-          placeholder={t("dhikr.search_placeholder") || "Rechercher..."}
+          placeholder={t("dhikr.search_placeholder")}
           placeholderTextColor="rgba(255,255,255,0.4)"
           value={search}
           onChangeText={(text) =>
