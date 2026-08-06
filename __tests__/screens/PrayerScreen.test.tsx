@@ -161,7 +161,10 @@ describe("PrayerScreen", () => {
       render(<PrayerScreen />);
 
       await waitFor(() => {
-        expect(screen.getByText("fajr")).toBeTruthy();
+        // "fajr" peut apparaître deux fois : dans la grille du jour et dans la
+        // carte "prochaine prière" (les horaires simulés étant fixés dans le
+        // passé, la prochaine prière calculée est toujours le Fajr du lendemain).
+        expect(screen.getAllByText("fajr").length).toBeGreaterThan(0);
         expect(screen.getByText("dhuhr")).toBeTruthy();
         expect(screen.getByText("asr")).toBeTruthy();
         expect(screen.getByText("maghrib")).toBeTruthy();
