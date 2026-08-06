@@ -123,12 +123,14 @@ export const useUserStats = (): UseUserStatsReturn => {
 
   // 🚀 NOUVEAU : Listener pour détecter les changements d'état de connexion
   useEffect(() => {
+    let isActive = true;
     const checkConnectionState = async () => {
       try {
         const isExplicitConnection = await AsyncStorage.getItem(
           "explicit_connection"
         );
         const userData = await AsyncStorage.getItem("user_data");
+        if (!isActive) return;
         const newState = `${isExplicitConnection}-${
           userData ? "hasData" : "noData"
         }`;
@@ -155,7 +157,10 @@ export const useUserStats = (): UseUserStatsReturn => {
     // Vérifier immédiatement
     checkConnectionState();
 
-    return () => clearInterval(interval);
+    return () => {
+      isActive = false;
+      clearInterval(interval);
+    };
   }, [connectionState]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const fetchStats = useCallback(

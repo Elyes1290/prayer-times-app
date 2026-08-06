@@ -21,6 +21,7 @@ jest.mock("@react-native-async-storage/async-storage", () => ({
 
 global.fetch = jest.fn(() =>
   Promise.resolve({
+    ok: true,
     json: () => Promise.resolve({ success: true }),
   })
 ) as jest.Mock;
@@ -43,6 +44,7 @@ describe("PaymentCancelScreen", () => {
     (AsyncStorage.getItem as jest.Mock).mockResolvedValue(null);
     (AsyncStorage.removeItem as jest.Mock).mockResolvedValue(undefined);
     (global.fetch as jest.Mock).mockResolvedValue({
+      ok: true,
       json: () => Promise.resolve({ success: true }),
     });
   });

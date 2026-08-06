@@ -343,7 +343,9 @@ export const BadgesManager: React.FC<BadgesManagerProps> = ({
     notifiedBadgeCodesRef.current = new Set();
   }
   const onBadgeUnlockedRef = useRef(onBadgeUnlocked);
-  onBadgeUnlockedRef.current = onBadgeUnlocked;
+  useEffect(() => {
+    onBadgeUnlockedRef.current = onBadgeUnlocked;
+  });
 
   useEffect(() => {
     const notify = onBadgeUnlockedRef.current;
@@ -351,6 +353,7 @@ export const BadgesManager: React.FC<BadgesManagerProps> = ({
     for (const badge of unlockedBadges) {
       if (!notifiedBadgeCodesRef.current!.has(badge.code)) {
         notifiedBadgeCodesRef.current!.add(badge.code);
+        // react-doctor-disable-next-line react-doctor/no-pass-data-to-parent -- notification d'un événement ponctuel (badge nouvellement débloqué), pas une synchronisation d'état continue ; dédupliqué via notifiedBadgeCodesRef pour ne notifier qu'une seule fois par badge.
         notify(badge);
       }
     }

@@ -318,7 +318,8 @@ class QuranOfflineService {
         if (!surahData) continue;
 
         for (const verse of surahData.verses) {
-          // Rechercher dans le texte arabe
+          // Rechercher dans le texte arabe (sous-chaîne, pas un lookup de tableau)
+          // react-doctor-disable-next-line react-doctor/js-set-map-lookups -- String.includes() pour une recherche de sous-chaîne, pas une recherche d'appartenance à un tableau
           const arabicMatch = this.normalizeText(verse.arabic_text).includes(
             normalizedQuery
           );
@@ -326,11 +327,13 @@ class QuranOfflineService {
           // Rechercher dans la traduction
           const translation =
             verse.translations[language] || verse.translations["en"] || "";
+          // react-doctor-disable-next-line react-doctor/js-set-map-lookups -- String.includes() pour une recherche de sous-chaîne, pas une recherche d'appartenance à un tableau
           const translationMatch = this.normalizeText(
             translation.toLowerCase()
           ).includes(normalizedQuery);
 
           // Rechercher dans la translittération
+          // react-doctor-disable-next-line react-doctor/js-set-map-lookups -- String.includes() pour une recherche de sous-chaîne, pas une recherche d'appartenance à un tableau
           const phoneticMatch = this.normalizeText(
             verse.phonetic_text.toLowerCase()
           ).includes(normalizedQuery);

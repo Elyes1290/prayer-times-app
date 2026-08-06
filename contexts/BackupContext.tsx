@@ -196,12 +196,14 @@ export const BackupProvider: React.FC<BackupProviderProps> = ({ children }) => {
 
   // 🔐 Vérifier l'état d'authentification SEULEMENT pour les premium
   useEffect(() => {
+    let isActive = true;
     const checkAuthState = async () => {
       if (user.isPremium) {
         const userData = await AsyncStorage.getItem("user_data");
         const isExplicitConnection = await AsyncStorage.getItem(
           "explicit_connection"
         );
+        if (!isActive) return;
 
         if (userData && isExplicitConnection === "true") {
           try {
@@ -222,9 +224,11 @@ export const BackupProvider: React.FC<BackupProviderProps> = ({ children }) => {
               "❌ Erreur parsing données utilisateur explicite:",
               error
             );
-            setIsSignedIn(false);
-            setUserEmail(null);
-            setHasCloudData(false);
+            if (isActive) {
+              setIsSignedIn(false);
+              setUserEmail(null);
+              setHasCloudData(false);
+            }
           }
         } else {
           console.log(
@@ -246,6 +250,9 @@ export const BackupProvider: React.FC<BackupProviderProps> = ({ children }) => {
     };
 
     checkAuthState();
+    return () => {
+      isActive = false;
+    };
   }, [user.isPremium, checkCloudData, loadBackupSettings]);
 
   // Fonction de sauvegarde (Premium uniquement)
@@ -426,7 +433,9 @@ export const BackupProvider: React.FC<BackupProviderProps> = ({ children }) => {
   };
 
   const backupDataRef = useRef(backupData);
-  backupDataRef.current = backupData;
+  useEffect(() => {
+    backupDataRef.current = backupData;
+  });
 
   // Auto-backup uniquement pour les premium
   useEffect(() => {
@@ -950,6 +959,7 @@ export const BackupProvider: React.FC<BackupProviderProps> = ({ children }) => {
   };
 
   return (
+    // react-doctor-disable-next-line react-doctor/context-provider-value-from-unmemoized-local-literal -- la plupart des actions ne sont pas encore useCallback ; un useMemo introduirait des deps "fraîches" à chaque rendu (voir no-effect-with-fresh-deps). À traiter avec la stabilisation complète des callbacks dans un refactor dédié.
     <BackupContext.Provider value={value}>{children}</BackupContext.Provider>
   );
 };

@@ -11,6 +11,7 @@ import android.util.Log
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsControllerCompat
 
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate
@@ -45,39 +46,33 @@ class MainActivity : ReactActivity() {
   }
 
   /**
-   * 🔧 Configuration hybride pour Samsung - Barre visible + image étendue
+   * 🔧 Configuration Edge-to-Edge.
+   *
+   * Android 16 (API 36) rend l'edge-to-edge obligatoire : impossible d'opter pour
+   * `setDecorFitsSystemWindows(window, true)` ni de fixer statusBarColor/navigationBarColor
+   * (ces appels sont silencieusement ignorés dès que targetSdkVersion = 36).
+   * On embrasse donc l'edge-to-edge partout (au lieu de forcer des barres opaques comme avant),
+   * les écrans RN gèrent déjà les safe-area insets via react-native-safe-area-context.
    */
   private fun configureEdgeToEdge() {
     try {
-      Log.d(TAG, "🔧 Configuration hybride pour Samsung - Android ${Build.VERSION.SDK_INT}")
-      
-      // Désactiver Edge-to-Edge pour garder la barre Samsung visible
-      WindowCompat.setDecorFitsSystemWindows(window, true)
-      
-      // Configuration des couleurs pour Samsung
-      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-        window.statusBarColor = android.graphics.Color.parseColor("#FFFFFF")
-        window.navigationBarColor = android.graphics.Color.parseColor("#000000")
-        
-        // Forcer la couleur de fond de l'app
-        window.decorView.setBackgroundColor(android.graphics.Color.parseColor("#000000"))
-        
-        // Configuration des icônes de la barre de statut (sombres sur fond clair)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-          val flags = window.decorView.systemUiVisibility
-          window.decorView.systemUiVisibility = flags or 
-            android.view.View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-        }
-        
-        // Configuration pour Samsung
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-          window.isNavigationBarContrastEnforced = false
-        }
+      Log.d(TAG, "🔧 Configuration edge-to-edge - Android ${Build.VERSION.SDK_INT}")
+
+      WindowCompat.setDecorFitsSystemWindows(window, false)
+      window.statusBarColor = android.graphics.Color.TRANSPARENT
+      window.navigationBarColor = android.graphics.Color.TRANSPARENT
+
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+        window.isNavigationBarContrastEnforced = false
       }
-      
-      Log.d(TAG, "✅ Configuration hybride - Barre Samsung visible")
+
+      // Icônes sombres sur fond clair pour la barre de statut (API moderne, remplace systemUiVisibility)
+      val insetsController = WindowInsetsControllerCompat(window, window.decorView)
+      insetsController.isAppearanceLightStatusBars = true
+
+      Log.d(TAG, "✅ Configuration edge-to-edge appliquée")
     } catch (e: Exception) {
-      Log.e(TAG, "❌ Erreur configuration hybride: ${e.message}")
+      Log.e(TAG, "❌ Erreur configuration edge-to-edge: ${e.message}")
       e.printStackTrace()
     }
   }
@@ -192,16 +187,12 @@ class MainActivity : ReactActivity() {
 
   override fun onResume() {
     super.onResume()
-    
-    // Maintenir la barre Samsung visible
+
+    // Réappliquer l'edge-to-edge (certains OEM/versions Android le réinitialisent au resume)
     try {
-      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-        window.statusBarColor = android.graphics.Color.parseColor("#FFFFFF")
-        window.navigationBarColor = android.graphics.Color.parseColor("#000000")
-        Log.d(TAG, "🔧 Barre Samsung maintenue onResume")
-      }
+      configureEdgeToEdge()
     } catch (e: Exception) {
-      Log.e(TAG, "❌ Erreur barre Samsung onResume: ${e.message}")
+      Log.e(TAG, "❌ Erreur edge-to-edge onResume: ${e.message}")
     }
   }
 

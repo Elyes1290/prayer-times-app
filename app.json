@@ -2,7 +2,7 @@
   "expo": {
     "name": "MyAdhan: Muslim Prayer App",
     "slug": "prayer-times-app",
-    "version": "1.0.25",
+    "version": "1.0.26",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "prayertimesapp",
@@ -11,26 +11,14 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.drogbinho.myadhan",
-      "buildNumber": "98",
-      "deploymentTarget": "15.1",
+      "buildNumber": "99",
       "icon": "./assets/images/icon.png",
-      "locales": {
-        "en": "./locales/ios/en.json",
-        "fr": "./locales/ios/fr.json",
-        "ar": "./locales/ios/ar.json",
-        "es": "./locales/ios/es.json",
-        "it": "./locales/ios/it.json",
-        "de": "./locales/ios/de.json",
-        "pt": "./locales/ios/pt.json",
-        "tr": "./locales/ios/tr.json",
-        "bn": "./locales/ios/bn.json",
-        "fa": "./locales/ios/fa.json",
-        "nl": "./locales/ios/nl.json",
-        "ru": "./locales/ios/ru.json",
-        "ur": "./locales/ios/ur.json"
-      },
       "infoPlist": {
-        "UIBackgroundModes": ["audio", "fetch", "remote-notification"],
+        "UIBackgroundModes": [
+          "audio",
+          "fetch",
+          "remote-notification"
+        ],
         "NSLocationWhenInUseUsageDescription": "We need your location to calculate accurate prayer times based on your current city.",
         "NSLocationAlwaysAndWhenInUseUsageDescription": "We need your location to calculate accurate prayer times and send notifications even when the app is in the background.",
         "NSLocationAlwaysUsageDescription": "We need your location to provide accurate prayer times notifications based on your position.",
@@ -40,7 +28,9 @@
         "ITSAppUsesNonExemptEncryption": false
       },
       "entitlements": {
-        "com.apple.security.application-groups": ["group.com.drogbinho.myadhan"]
+        "com.apple.security.application-groups": [
+          "group.com.drogbinho.myadhan"
+        ]
       }
     },
     "android": {
@@ -50,7 +40,7 @@
       },
       "edgeToEdgeEnabled": true,
       "package": "com.drogbinho.prayertimesapp2",
-      "versionCode": 98
+      "versionCode": 99
     },
     "web": {
       "bundler": "metro",
@@ -74,12 +64,35 @@
       "./plugins/withFmtXcodeFix.js",
       "./plugins/withIosSounds.js",
       "./plugins/withPrayerTimesWidget.js",
-      "expo-asset"
+      "expo-asset",
+      [
+        "expo-build-properties",
+        {
+          "ios": {
+            "deploymentTarget": "15.1"
+          }
+        }
+      ],
+      "react-native-edge-to-edge"
     ],
     "experiments": {
       "typedRoutes": true
     },
-    "developmentClient": true,
+    "locales": {
+      "en": "./locales/ios/en.json",
+      "fr": "./locales/ios/fr.json",
+      "ar": "./locales/ios/ar.json",
+      "es": "./locales/ios/es.json",
+      "it": "./locales/ios/it.json",
+      "de": "./locales/ios/de.json",
+      "pt": "./locales/ios/pt.json",
+      "tr": "./locales/ios/tr.json",
+      "bn": "./locales/ios/bn.json",
+      "fa": "./locales/ios/fa.json",
+      "nl": "./locales/ios/nl.json",
+      "ru": "./locales/ios/ru.json",
+      "ur": "./locales/ios/ur.json"
+    },
     "assetBundlePatterns": [
       "assets/images/background/**/*",
       "assets/sounds/*.mp3",
@@ -113,11 +126,6 @@
       "premiumContentBaseUrl": "https://myadhanapp.com/private/premium",
       "recitationsBaseUrl": "https://myadhanapp.com/api/recitations",
       "adhansBaseUrl": "https://myadhanapp.com/api/adhans"
-    },
-    "development": {
-      "hotReload": false,
-      "fastRefresh": false,
-      "liveReload": false
     }
   }
 }

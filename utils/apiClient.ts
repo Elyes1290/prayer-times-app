@@ -2,7 +2,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getCurrentUserId } from "./userAuth";
 import { AppConfig } from "./config";
 import i18n from "../locales/i18n";
-import { showGlobalToast } from "../contexts/ToastContext";
+import { showGlobalToast } from "./globalToastBridge";
 
 // Helpers sûrs pour l'environnement de test (où le mock peut être partiel)
 const safeGetItem = async (key: string): Promise<string | null> => {
@@ -46,6 +46,12 @@ export interface ApiError {
 class ApiClient {
   private static instance: ApiClient;
   private cachedDeviceId: string | null = null;
+  // 🔒 Dé-duplique les refresh de token concurrents : évite que plusieurs 401
+  // simultanés (ex: écran Coran qui déclenche plusieurs requêtes premium en
+  // parallèle) consomment/écrasent le même refresh_token en même temps, ce qui
+  // faisait échouer certains appels avec "session expirée" alors que
+  // l'abonnement premium local était toujours valide.
+  private refreshPromise: Promise<boolean> | null = null;
 
   static getInstance(): ApiClient {
     if (!ApiClient.instance) {
@@ -247,6 +253,21 @@ class ApiClient {
   }
 
   private async tryRefreshToken(): Promise<boolean> {
+    // Si un refresh est déjà en cours, on attend son résultat au lieu d'en
+    // démarrer un second en parallèle (évite la course avec rotation du
+    // refresh_token côté serveur).
+    if (this.refreshPromise) {
+      return this.refreshPromise;
+    }
+
+    this.refreshPromise = this.performTokenRefresh().finally(() => {
+      this.refreshPromise = null;
+    });
+
+    return this.refreshPromise;
+  }
+
+  private async performTokenRefresh(): Promise<boolean> {
     try {
       const refreshToken = await safeGetItem("refresh_token");
       if (!refreshToken) return false;
@@ -281,6 +302,40 @@ class ApiClient {
     } catch {
       return false;
     }
+  }
+
+  /**
+   * Effectue un fetch authentifié avec retry automatique après refresh du
+   * token en cas de 401. À utiliser pour tout appel réseau premium (Coran,
+   * adhans, thèmes...) qui n'a pas besoin du format JSON de makeRequest, par
+   * exemple les téléchargements de fichiers ou les requêtes vers des APIs
+   * externes (Infomaniak).
+   */
+  async authenticatedFetch(
+    url: string,
+    options: RequestInit = {}
+  ): Promise<Response> {
+    const token = await safeGetItem("auth_token");
+    const withAuthHeaders = (bearer: string | null): RequestInit => ({
+      ...options,
+      headers: {
+        ...(options.headers as Record<string, string> | undefined),
+        ...(bearer ? { Authorization: `Bearer ${bearer}` } : {}),
+      },
+    });
+
+    const response = await fetch(url, withAuthHeaders(token));
+    if (response.status !== 401) {
+      return response;
+    }
+
+    const refreshed = await this.tryRefreshToken();
+    if (!refreshed) {
+      return response;
+    }
+
+    const newToken = await safeGetItem("auth_token");
+    return fetch(url, withAuthHeaders(newToken));
   }
 
   // === API UTILISATEURS ===

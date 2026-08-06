@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { View, Text, StyleSheet, Pressable } from "react-native";
 import Animated, {
-  runOnJS,
   useAnimatedStyle,
   useSharedValue,
   withTiming,
 } from "react-native-reanimated";
+import { scheduleOnRN } from "react-native-worklets";
 import { MCIcon } from "@/components/icons/AppVectorIcons";
 import { LinearGradient } from "@/components/ui/LinearGradientView";
 
@@ -38,7 +38,7 @@ const Toast: React.FC<ToastProps> = ({ toast, onHide }) => {
     translateY.value = withTiming(-100, { duration: 250 });
     opacity.value = withTiming(0, { duration: 250 }, (finished) => {
       if (finished) {
-        runOnJS(finishHide)();
+        scheduleOnRN(finishHide);
       }
     });
   }, [finishHide, opacity, translateY]);

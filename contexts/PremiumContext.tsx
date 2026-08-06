@@ -268,7 +268,9 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
   // 🌐 NOUVEAU : Hook pour vérifier la connectivité réseau
   const networkStatus = useNetworkStatus();
   const networkStatusRef = React.useRef(networkStatus);
-  networkStatusRef.current = networkStatus;
+  useEffect(() => {
+    networkStatusRef.current = networkStatus;
+  });
   const lastLoadPremiumAtRef = React.useRef(0);
   const checkLocalPremiumExpirationRef = React.useRef<
     () => Promise<boolean>
@@ -518,7 +520,9 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
     }
   }, [showToast, t]);
 
-  checkLocalPremiumExpirationRef.current = checkLocalPremiumExpiration;
+  useEffect(() => {
+    checkLocalPremiumExpirationRef.current = checkLocalPremiumExpiration;
+  });
 
   // --- Actions disponibles pour les effets ---
   const deactivatePremium = React.useCallback(async () => {
@@ -1224,7 +1228,9 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
     return loadPremiumDataInFlight;
   };
 
-  loadPremiumDataRef.current = loadPremiumData;
+  useEffect(() => {
+    loadPremiumDataRef.current = loadPremiumData;
+  });
 
   const checkPremiumStatus = async () => {
     await loadPremiumData({ force: true });
@@ -1597,6 +1603,7 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
   };
 
   return (
+    // react-doctor-disable-next-line react-doctor/context-provider-value-from-unmemoized-local-literal -- la plupart des actions ne sont pas encore useCallback ; un useMemo introduirait des deps "fraîches" à chaque rendu (voir no-effect-with-fresh-deps). À traiter avec la stabilisation complète des callbacks dans un refactor dédié.
     <PremiumContext.Provider value={contextValue}>
       {children}
     </PremiumContext.Provider>

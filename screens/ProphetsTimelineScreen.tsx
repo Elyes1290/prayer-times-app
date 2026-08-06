@@ -179,6 +179,7 @@ export default function ProphetsTimelineScreen() {
           ]}
           showsVerticalScrollIndicator={false}
         >
+          {/* react-doctor-disable-next-line react-doctor/rn-no-scrollview-mapped-list -- liste fixe et petite (~25 prophètes), pas de fenêtrage nécessaire ; suivie d'un footer non-liste (carte d'info) */}
           {PROPHETS_TIMELINE.map((entry, index) => (
             <TimelineItem
               key={entry.id}

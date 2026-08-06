@@ -37,6 +37,13 @@ import {
   type ProphetId,
 } from "../constants/prophetStories";
 
+function resolveProphetParam(value?: string): ProphetId | null {
+  if (value && VALID_PROPHET_IDS.includes(value as ProphetId)) {
+    return value as ProphetId;
+  }
+  return null;
+}
+
 // Helper pour obtenir le token d'authentification
 const getAuthToken = async (): Promise<string> => {
   const token = await AsyncStorage.getItem("auth_token");
@@ -344,13 +351,6 @@ export default function ProphetStoriesScreen() {
   );
   const params = useLocalSearchParams<{ prophet?: string }>();
 
-  const resolveProphetParam = (value?: string): ProphetId | null => {
-    if (value && VALID_PROPHET_IDS.includes(value as ProphetId)) {
-      return value as ProphetId;
-    }
-    return null;
-  };
-
   // 🆕 État pour le prophète sélectionné
   const [selectedProphet, setSelectedProphet] = useState<ProphetId>(
     () => resolveProphetParam(params.prophet) ?? "muhammad",
@@ -401,6 +401,9 @@ export default function ProphetStoriesScreen() {
             headers: headers,
           },
         );
+        if (!response.ok) {
+          throw new Error(`Erreur API prophet-stories: ${response.status}`);
+        }
         const responseData = await response.json();
 
         if (responseData.success) {
@@ -616,6 +619,9 @@ export default function ProphetStoriesScreen() {
           headers: headers,
         },
       );
+      if (!response.ok) {
+        throw new Error(`Erreur API prophet-stories (story): ${response.status}`);
+      }
       const responseData = await response.json();
 
       if (responseData.success && responseData.data) {

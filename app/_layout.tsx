@@ -26,7 +26,8 @@ import "../locales/i18n-optimized";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { cleanupObsoleteUserData } from "../utils/userAuth";
 import { clearUserStatsCache } from "../utils/clearAppData";
-import { showGlobalToast, ToastProvider } from "../contexts/ToastContext";
+import { ToastProvider } from "../contexts/ToastContext";
+import { showGlobalToast } from "../utils/globalToastBridge";
 import i18n from "../locales/i18n";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import apiClient, { verifyAuth } from "../utils/apiClient";
@@ -43,6 +44,7 @@ import {
 } from "../contexts/AdhanAudioContext";
 import { AdhanStopButton } from "../components/AdhanStopButton";
 import { useThemeColors } from "../hooks/useThemeColor"; // 🎨 Pour la TabBar adaptative
+import { maybeRequestAppReview } from "../utils/reviewPrompt";
 
 // Supprime les logs de debug en production pour ne pas exposer d'infos internes
 if (!__DEV__) {
@@ -449,11 +451,23 @@ function TabLayoutContent() {
     };
   }, [playAdhan]);
 
+  // ⭐ Proposer une demande d'avis (App Store / Google Play) après 7 jours d'utilisation.
+  // Délai volontaire pour ne pas interrompre l'ouverture de l'app, et pour laisser
+  // l'utilisateur voir l'écran d'accueil avant une éventuelle popup système.
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      void maybeRequestAppReview();
+    }, 4000);
+
+    return () => clearTimeout(timeout);
+  }, []);
+
   // 🚀 NOUVEAU : Nettoyer les données obsolètes une seule fois au démarrage
   const initializationRef = React.useRef(false);
 
   useEffect(() => {
     if (initializationRef.current) return; // Éviter les initialisations multiples
+    let isActive = true;
 
     const initializeApp = async () => {
       try {
@@ -608,7 +622,7 @@ function TabLayoutContent() {
                   await forceReset();
 
                   // Forcer un re-render de tous les composants
-                  setForceRefresh((prev) => prev + 1);
+                  if (isActive) setForceRefresh((prev) => prev + 1);
 
                   showGlobalToast({
                     type: "error",
@@ -652,7 +666,7 @@ function TabLayoutContent() {
                     ]);
                     await forceLogout();
                     await forceReset();
-                    setForceRefresh((prev) => prev + 1);
+                    if (isActive) setForceRefresh((prev) => prev + 1);
                     showGlobalToast({
                       type: "error",
                       title:
@@ -725,13 +739,17 @@ function TabLayoutContent() {
         }
 
         console.log("✅ Application initialisée");
-        initializationRef.current = true;
+        if (isActive) initializationRef.current = true;
       } catch (error) {
         console.error("❌ Erreur lors de l'initialisation:", error);
       }
     };
 
     initializeApp();
+
+    return () => {
+      isActive = false;
+    };
   }, [forceLogout, forceReset]); // Inclure les dépendances manquantes
 
   return (

@@ -168,9 +168,9 @@ export function JourneyTabContent({
           <Text style={[styles.title, { color: colors.text }]}>
             {t("personalized_tips")}
           </Text>
-          {(stats.advice.advice as any[]).slice(0, 3).map((item, index) => (
+          {(stats.advice.advice as any[]).slice(0, 3).map((item) => (
             <Text
-              key={item.key ? `advice-${item.key}` : `advice-fallback-${index}`}
+              key={`advice-${item.key}`}
               style={[styles.advice, { color: colors.textSecondary }]}
             >
               • {t(item.key, item.params)}

@@ -117,13 +117,13 @@ export function useFavoritesManager(): FavoritesContextType {
               const syncEnabled = await AsyncStorage.getItem(
                 STORAGE_KEYS.CLOUD_SYNC_ENABLED
               );
-              setIsCloudSyncEnabled(syncEnabled === "true");
+              if (!cancelled) setIsCloudSyncEnabled(syncEnabled === "true");
             } else {
               setIsCloudSyncEnabled(false);
             }
           } catch (error) {
             console.error("Erreur vérification sync cloud:", error);
-            setIsCloudSyncEnabled(false);
+            if (!cancelled) setIsCloudSyncEnabled(false);
           }
         }
       }

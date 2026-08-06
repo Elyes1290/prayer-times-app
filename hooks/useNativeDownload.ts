@@ -238,15 +238,17 @@ export const useNativeDownload = (
   const handleDownloadCancelledRef = useRef(handleDownloadCancelled);
   const restoreActiveDownloadsRef = useRef(restoreActiveDownloads);
 
-  handleDownloadStartedRef.current = handleDownloadStarted;
-  handleDownloadProgressRef.current = handleDownloadProgress;
-  handleDownloadFailedRef.current = handleDownloadFailed;
-  handleDownloadCancelledRef.current = handleDownloadCancelled;
-  restoreActiveDownloadsRef.current = restoreActiveDownloads;
+  useEffect(() => {
+    handleDownloadStartedRef.current = handleDownloadStarted;
+    handleDownloadProgressRef.current = handleDownloadProgress;
+    handleDownloadFailedRef.current = handleDownloadFailed;
+    handleDownloadCancelledRef.current = handleDownloadCancelled;
+    restoreActiveDownloadsRef.current = restoreActiveDownloads;
+  });
 
   useEffect(() => {
     if (!nativeDownloadManager.isAvailable()) {
-      return;
+      return () => {};
     }
 
     void restoreActiveDownloadsRef.current();

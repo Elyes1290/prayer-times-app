@@ -39,6 +39,9 @@ export async function getQuranVersesWithTranslations(
   const arabicRes = await fetch(
     `https://api.quran.com/api/v4/quran/verses/uthmani?chapter_number=${chapterNumber}`
   );
+  if (!arabicRes.ok) {
+    throw new Error(`Quran API error (verses): ${arabicRes.status}`);
+  }
   const arabicJson = await arabicRes.json();
   const verses = arabicJson.verses || [];
 
@@ -48,6 +51,9 @@ export async function getQuranVersesWithTranslations(
   const translationRes = await fetch(
     `https://api.quran.com/api/v4/quran/translations/${translationId}?chapter_number=${chapterNumber}`
   );
+  if (!translationRes.ok) {
+    throw new Error(`Quran API error (translations): ${translationRes.status}`);
+  }
   const translationJson = await translationRes.json();
   const translations = translationJson.translations || [];
 

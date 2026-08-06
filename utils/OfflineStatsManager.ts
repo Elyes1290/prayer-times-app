@@ -205,6 +205,9 @@ class OfflineStatsManager {
         response.status,
         response.statusText
       );
+      if (!response.ok) {
+        throw new Error(`Erreur API stats: ${response.status}`);
+      }
       const result = await response.json();
       console.log(`📊 [DEBUG] Données stats reçues:`, result);
 
@@ -427,6 +430,9 @@ class OfflineStatsManager {
         response.status,
         response.statusText
       );
+      if (!response.ok) {
+        throw new Error(`Erreur API sync action: ${response.status}`);
+      }
       const result = await response.json();
       console.log(`📊 [DEBUG] Résultat API:`, result);
 

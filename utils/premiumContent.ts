@@ -715,14 +715,12 @@ class PremiumContentManager {
   ): Promise<PremiumContent[]> {
     try {
       debugLog(`🔍 Scan du dossier: ${folderPath} (type: ${type})`);
-      const token = await AsyncStorage.getItem("auth_token");
       const apiUrl = `${
         AppConfig.API_BASE_URL
       }/list-files.php?folder=${encodeURIComponent(folderPath)}`;
-      const response = await fetch(apiUrl, {
+      const response = await apiClient.authenticatedFetch(apiUrl, {
         headers: {
           Accept: "application/json",
-          ...(token ? { Authorization: `Bearer ${token}` } : {}),
         },
       });
       const data = await response.json();
@@ -1135,19 +1133,17 @@ class PremiumContentManager {
         await RNFS.unlink(downloadPath);
       }
 
-      // Récupérer le token d'authentification pour les headers
-      const token = await AsyncStorage.getItem("auth_token");
-
       // 🚀 NOUVEAU : Gestion des URLs signées/redirections JSON
       // Certaines URLs renvoient un JSON avec la vraie URL de téléchargement (ex: adhans)
       let finalUrl = content.fileUrl;
 
       try {
         // Faire une requête HEAD/GET légère pour voir le type de contenu
-        const response = await fetch(content.fileUrl, {
+        // (authenticatedFetch rafraîchit le token si besoin, ce qui garantit
+        // que le RNFS.downloadFile ci-dessous utilisera un token à jour)
+        const response = await apiClient.authenticatedFetch(content.fileUrl, {
           method: "GET",
           headers: {
-            ...(token ? { Authorization: `Bearer ${token}` } : {}),
             "User-Agent": "PrayerTimesApp/1.0 Android",
             Accept: "application/json",
           },
@@ -1176,12 +1172,14 @@ class PremiumContentManager {
         );
       }
 
-      // Télécharger
-      const options: RNFS.DownloadFileOptions = {
+      // Télécharger (on relit le token : authenticatedFetch ci-dessus a pu le rafraîchir)
+      const buildDownloadOptions = (
+        bearerToken: string | null,
+      ): RNFS.DownloadFileOptions => ({
         fromUrl: finalUrl,
         toFile: tempPathInCorrectDir,
         headers: {
-          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+          ...(bearerToken ? { Authorization: `Bearer ${bearerToken}` } : {}),
           "User-Agent": "PrayerTimesApp/1.0 Android",
           Accept: "*/*",
         },
@@ -1194,12 +1192,22 @@ class PremiumContentManager {
           }
         },
         progressDivider: 5,
-      };
+      });
 
-      const result = RNFS.downloadFile(options);
+      const freshToken = await AsyncStorage.getItem("auth_token");
+      let result = RNFS.downloadFile(buildDownloadOptions(freshToken));
+      let finalRes = await result.promise;
 
-      // Attendre la promesse
-      const finalRes = await result.promise;
+      // 🔒 Si le token était encore invalide au moment du téléchargement (401),
+      // on rafraîchit une fois puis on retente avant d'abandonner.
+      if (finalRes.statusCode === 401) {
+        const refreshed = await apiClient.refreshSession();
+        if (refreshed) {
+          const retryToken = await AsyncStorage.getItem("auth_token");
+          result = RNFS.downloadFile(buildDownloadOptions(retryToken));
+          finalRes = await result.promise;
+        }
+      }
 
       if (finalRes.statusCode !== 200) {
         if (await RNFS.exists(tempPathInCorrectDir)) {
@@ -1402,6 +1410,7 @@ class PremiumContentManager {
             item.id === contentId ||
             (cleanId.startsWith("quran_") &&
               item.id.startsWith("reciter_") &&
+              // react-doctor-disable-next-line react-doctor/js-set-map-lookups -- String.includes() pour une recherche de sous-chaîne, pas une recherche d'appartenance à un tableau
               cleanId.includes(item.id.replace("reciter_", "")))
           ) {
             contentUpdated = true;
@@ -2521,8 +2530,7 @@ class PremiumContentManager {
         options?.forceRefresh !== false ? `&_=${Date.now()}` : "";
 
       // 🚀 NOUVEAU : Utiliser l'API Infomaniak pour récupérer les infos de la sourate
-      const token = await AsyncStorage.getItem("auth_token");
-      const response = await fetch(
+      const response = await apiClient.authenticatedFetch(
         `${AppConfig.RECITATIONS_API}?action=surah&reciter=${encodeURIComponent(
           reciterName,
         )}&surah=${surahCode}${cacheBust}`,
@@ -2531,7 +2539,6 @@ class PremiumContentManager {
             Accept: "application/json",
             "Cache-Control": "no-cache",
             Pragma: "no-cache",
-            ...(token ? { Authorization: `Bearer ${token}` } : {}),
           },
         },
       );
@@ -3470,13 +3477,15 @@ class PremiumContentManager {
       );
 
       // Fichiers manquants (dans AsyncStorage mais pas sur disque)
+      const allPhysicalFilesSet = new Set(allPhysicalFiles);
+      const asyncStorageFilesSet = new Set(asyncStorageFiles);
       result.missingFiles = asyncStorageFiles.filter(
-        (file) => !allPhysicalFiles.includes(file),
+        (file) => !allPhysicalFilesSet.has(file),
       );
 
       // Fichiers orphelins (sur disque mais pas dans AsyncStorage)
       result.orphanedFiles = allPhysicalFiles.filter(
-        (file) => !asyncStorageFiles.includes(file),
+        (file) => !asyncStorageFilesSet.has(file),
       );
 
       // 6. Générer des recommandations

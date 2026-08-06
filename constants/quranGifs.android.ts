@@ -59,4 +59,5 @@ export const AVAILABLE_GIFS = {
   },
 };
 
+// react-doctor-disable-next-line deslop/unused-export -- résolu via l'extension de plateforme (.android.ts), invisible pour l'analyse statique
 export const AVAILABLE_GIFS_LIST = Object.values(AVAILABLE_GIFS);

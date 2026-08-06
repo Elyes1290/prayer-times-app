@@ -28,6 +28,7 @@ const MAPPING = {
  * This ensures a consistent look across platforms, and optimal resource usage.
  * Icon `name`s are based on SF Symbols and require manual mapping to Material Icons.
  */
+// react-doctor-disable-next-line deslop/unused-export -- template Expo scaffold conservé pour usage futur, testé isolément
 export function IconSymbol({
   name,
   size = 24,

@@ -20,6 +20,9 @@ export async function getRandomHadith(): Promise<Hadith | null> {
   const booksRes = await fetch(
     `https://hadithapi.com/api/books?apiKey=${API_KEY}`
   );
+  if (!booksRes.ok) {
+    throw new Error(`Hadith API error (books): ${booksRes.status}`);
+  }
   const booksJson = await booksRes.json();
   let books = booksJson.books || [];
   // Filtrer les unavailableBooks
@@ -35,6 +38,9 @@ export async function getRandomHadith(): Promise<Hadith | null> {
     const chaptersRes = await fetch(
       `https://hadithapi.com/api/${randomBook.bookSlug}/chapters?apiKey=${API_KEY}`
     );
+    if (!chaptersRes.ok) {
+      throw new Error(`Hadith API error (chapters): ${chaptersRes.status}`);
+    }
     const chaptersJson = await chaptersRes.json();
     const chapters = chaptersJson.chapters || [];
     if (!chapters.length) return tryFetch(attempt + 1);
@@ -45,6 +51,9 @@ export async function getRandomHadith(): Promise<Hadith | null> {
     const hadithsRes = await fetch(
       `https://hadithapi.com/api/hadiths?apiKey=${API_KEY}&book=${randomBook.bookSlug}&chapter=${randomChapter.chapterNumber}&page=1&limit=20`
     );
+    if (!hadithsRes.ok) {
+      throw new Error(`Hadith API error (hadiths): ${hadithsRes.status}`);
+    }
     const hadithsJson = await hadithsRes.json();
     const hadiths = (hadithsJson.hadiths && hadithsJson.hadiths.data) || [];
     if (!hadiths.length) return tryFetch(attempt + 1);

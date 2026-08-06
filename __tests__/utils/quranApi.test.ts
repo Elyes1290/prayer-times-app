@@ -94,9 +94,11 @@ describe("Quran API", () => {
     test("should fetch verses with translations successfully", async () => {
       mockFetch
         .mockResolvedValueOnce({
+          ok: true,
           json: async () => mockArabicResponse,
         })
         .mockResolvedValueOnce({
+          ok: true,
           json: async () => mockTranslationResponse,
         });
 
@@ -138,9 +140,11 @@ describe("Quran API", () => {
 
         mockFetch
           .mockResolvedValueOnce({
+            ok: true,
             json: async () => mockArabicResponse,
           })
           .mockResolvedValueOnce({
+            ok: true,
             json: async () => mockTranslationResponse,
           });
 
@@ -166,9 +170,11 @@ describe("Quran API", () => {
 
         mockFetch
           .mockResolvedValueOnce({
+            ok: true,
             json: async () => mockArabicResponse,
           })
           .mockResolvedValueOnce({
+            ok: true,
             json: async () => mockTranslationResponse,
           });
 
@@ -184,9 +190,11 @@ describe("Quran API", () => {
     test("should fallback to English for unknown languages", async () => {
       mockFetch
         .mockResolvedValueOnce({
+          ok: true,
           json: async () => mockArabicResponse,
         })
         .mockResolvedValueOnce({
+          ok: true,
           json: async () => mockTranslationResponse,
         });
 
@@ -202,9 +210,11 @@ describe("Quran API", () => {
     test("should handle Arabic language (no translation)", async () => {
       mockFetch
         .mockResolvedValueOnce({
+          ok: true,
           json: async () => mockArabicResponse,
         })
         .mockResolvedValueOnce({
+          ok: true,
           json: async () => mockTranslationResponse,
         });
 
@@ -224,9 +234,11 @@ describe("Quran API", () => {
 
         mockFetch
           .mockResolvedValueOnce({
+            ok: true,
             json: async () => mockArabicResponse,
           })
           .mockResolvedValueOnce({
+            ok: true,
             json: async () => mockTranslationResponse,
           });
 
@@ -262,9 +274,11 @@ describe("Quran API", () => {
 
       mockFetch
         .mockResolvedValueOnce({
+          ok: true,
           json: async () => mismatchedArabic,
         })
         .mockResolvedValueOnce({
+          ok: true,
           json: async () => fewerTranslations,
         });
 
@@ -279,9 +293,11 @@ describe("Quran API", () => {
     test("should handle empty responses", async () => {
       mockFetch
         .mockResolvedValueOnce({
+          ok: true,
           json: async () => ({ verses: [] }),
         })
         .mockResolvedValueOnce({
+          ok: true,
           json: async () => ({ translations: [] }),
         });
 
@@ -300,9 +316,11 @@ describe("Quran API", () => {
 
         mockFetch
           .mockResolvedValueOnce({
+            ok: true,
             json: async () => malformedResponse,
           })
           .mockResolvedValueOnce({
+            ok: true,
             json: async () => mockTranslationResponse,
           });
 
@@ -314,6 +332,7 @@ describe("Quran API", () => {
     test("should handle undefined API response", async () => {
       jest.clearAllMocks();
       mockFetch.mockResolvedValueOnce({
+        ok: true,
         json: async () => undefined,
       });
 
@@ -331,9 +350,11 @@ describe("Quran API", () => {
     test("should handle API errors", async () => {
       mockFetch
         .mockResolvedValueOnce({
+          ok: true,
           json: async () => ({ error: "API Error" }),
         })
         .mockResolvedValueOnce({
+          ok: true,
           json: async () => mockTranslationResponse,
         });
 
@@ -359,9 +380,11 @@ describe("Quran API", () => {
 
       mockFetch
         .mockResolvedValueOnce({
+          ok: true,
           json: async () => detailedArabicResponse,
         })
         .mockResolvedValueOnce({
+          ok: true,
           json: async () => mockTranslationResponse,
         });
 
@@ -386,9 +409,11 @@ describe("Quran API", () => {
     test("should complete within reasonable time", async () => {
       mockFetch
         .mockResolvedValueOnce({
+          ok: true,
           json: async () => mockArabicResponse,
         })
         .mockResolvedValueOnce({
+          ok: true,
           json: async () => mockTranslationResponse,
         });
 

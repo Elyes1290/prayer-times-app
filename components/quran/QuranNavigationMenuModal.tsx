@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import {
   FlatList,
   Modal,
@@ -52,12 +52,15 @@ export function QuranNavigationMenuModal({
   const [menuView, setMenuView] = useState<"main" | "sourateList">("main");
   const prevVisibleRef = useRef(visible);
 
-  if (visible !== prevVisibleRef.current) {
+  // react-doctor-disable-next-line react-doctor/no-reset-all-state-on-prop-change -- filet de sécurité pour les fermetures qui ne repassent pas par handleClose (ex: handleOpenReciter/handleOpenDownloads) ; un remount via `key` casserait l'animation de fermeture du Modal.
+  useEffect(() => {
+    if (prevVisibleRef.current === visible) return;
     prevVisibleRef.current = visible;
     if (!visible) {
+      // react-doctor-disable-next-line react-doctor/no-adjust-state-on-prop-change -- l'alternative "ajustement pendant le rendu" muterait prevVisibleRef.current dans le corps du composant, ce qui déclenche no-ref-current-in-render (règle bloquante) ; le useEffect reste le compromis le plus sûr ici.
       setMenuView("main");
     }
-  }
+  }, [visible]);
 
   const handleClose = useCallback(() => {
     setMenuView("main");

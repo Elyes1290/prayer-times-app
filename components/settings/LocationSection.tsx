@@ -210,9 +210,9 @@ function LocationSectionComponent({
           )}
           {citySearchResults.length > 0 && (
             <View style={[styles.resultsList, styles.resultsListFixed]}>
-              {citySearchResults.map((item, index) => (
+              {citySearchResults.map((item) => (
                 <Pressable
-                  key={item.place_id || `result-${index}`}
+                  key={item.place_id}
                   style={styles.resultItem}
                   onPress={() => handleSelectCity(item)}
                 >

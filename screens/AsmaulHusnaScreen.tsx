@@ -10,11 +10,11 @@ import {
 import Animated, {
   interpolate,
   makeMutable,
-  runOnJS,
   useAnimatedStyle,
   type SharedValue,
   withTiming,
 } from "react-native-reanimated";
+import { scheduleOnRN } from "react-native-worklets";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useTranslation } from "react-i18next";
 import { LinearGradient } from "@/components/ui/LinearGradientView";
@@ -266,7 +266,7 @@ const AsmaulHusnaScreen = () => {
       if (expandedIdRef.current === id) {
         animation.value = withTiming(0, { duration: 200 }, (finished) => {
           if (finished) {
-            runOnJS(clearExpandedId)();
+            scheduleOnRN(clearExpandedId);
           }
         });
       } else {

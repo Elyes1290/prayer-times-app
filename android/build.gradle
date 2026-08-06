@@ -15,11 +15,11 @@ buildscript {
 }
 
 ext {
-    buildToolsVersion = "35.0.0"        // <--- Mets à jour ici si possible
+    buildToolsVersion = "36.0.0"
     minSdkVersion = 24
-    compileSdkVersion = 35              // <--- Mets 35 ici
-    targetSdkVersion = 35               // <--- Mets 35 ici
-    ndkVersion = "29.0.13113456"        // <--- Laisse ta version NDK ici
+    compileSdkVersion = 36              // Android 16 - conformité Google Play (deadline 31/08/2026)
+    targetSdkVersion = 36               // Android 16 - conformité Google Play (deadline 31/08/2026)
+    ndkVersion = "29.0.13113456"        // Déjà >= version recommandée par RN 0.81 (27.1.12297006), conservée pour l'alignement 16 KB
 }
 
 def reactNativeAndroidDir = new File(

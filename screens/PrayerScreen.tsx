@@ -6,6 +6,7 @@ import React, {
   useEffect,
   useMemo,
   useCallback,
+  useRef,
 } from "react";
 import {
   ActivityIndicator,
@@ -615,6 +616,10 @@ export default function PrayerScreen() {
 
   // État pour gérer les prières muettes/non-muettes
   const [mutedPrayers, setMutedPrayers] = useState<Set<string>>(new Set());
+  const mutedPrayersRef = useRef(mutedPrayers);
+  useEffect(() => {
+    mutedPrayersRef.current = mutedPrayers;
+  }, [mutedPrayers]);
 
   const fadeAnim = useSharedValue(0);
   const slideAnim = useSharedValue(30);
@@ -667,16 +672,15 @@ export default function PrayerScreen() {
   // Fonction pour basculer le statut muet d'une prière
   const togglePrayerMute = useCallback(
     (prayer: string) => {
-      setMutedPrayers((prevMuted) => {
-        const newMuted = new Set(prevMuted);
-        if (newMuted.has(prayer)) {
-          newMuted.delete(prayer);
-        } else {
-          newMuted.add(prayer);
-        }
-        saveMutedPrayers(newMuted);
-        return newMuted;
-      });
+      const newMuted = new Set(mutedPrayersRef.current);
+      if (newMuted.has(prayer)) {
+        newMuted.delete(prayer);
+      } else {
+        newMuted.add(prayer);
+      }
+      mutedPrayersRef.current = newMuted;
+      setMutedPrayers(newMuted);
+      saveMutedPrayers(newMuted);
     },
     [saveMutedPrayers]
   );
@@ -1202,7 +1206,7 @@ const getStyles = (
         universalLayout.safeAreaTop,
         StatusBar.currentHeight || 0
       ),
-      paddingBottom: universalLayout.contentPaddingVertical,
+      paddingBottom: universalLayout.contentPaddingBottom,
     },
     header: {
       marginBottom: 16,

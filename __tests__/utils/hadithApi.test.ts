@@ -64,12 +64,15 @@ describe("Hadith API", () => {
       // Setup des mocks pour un scénario de succès complet
       mockFetch
         .mockResolvedValueOnce({
+          ok: true,
           json: async () => mockBooksResponse,
         })
         .mockResolvedValueOnce({
+          ok: true,
           json: async () => mockChaptersResponse,
         })
         .mockResolvedValueOnce({
+          ok: true,
           json: async () => mockHadithsResponse,
         });
 
@@ -108,12 +111,15 @@ describe("Hadith API", () => {
     test("should filter out unavailable books", async () => {
       mockFetch
         .mockResolvedValueOnce({
+          ok: true,
           json: async () => mockBooksResponse,
         })
         .mockResolvedValueOnce({
+          ok: true,
           json: async () => mockChaptersResponse,
         })
         .mockResolvedValueOnce({
+          ok: true,
           json: async () => mockHadithsResponse,
         });
 
@@ -134,6 +140,7 @@ describe("Hadith API", () => {
 
     test("should return null when no books available", async () => {
       mockFetch.mockResolvedValueOnce({
+        ok: true,
         json: async () => ({ books: [] }),
       });
 
@@ -143,6 +150,7 @@ describe("Hadith API", () => {
 
     test("should return null when only unavailable books exist", async () => {
       mockFetch.mockResolvedValueOnce({
+        ok: true,
         json: async () => ({
           books: [
             { bookSlug: "musnad-ahmad" },
@@ -160,9 +168,11 @@ describe("Hadith API", () => {
       for (let i = 0; i < 10; i++) {
         mockFetch
           .mockResolvedValueOnce({
+            ok: true,
             json: async () => mockBooksResponse,
           })
           .mockResolvedValueOnce({
+            ok: true,
             json: async () => ({ chapters: [] }),
           });
       }
@@ -176,12 +186,15 @@ describe("Hadith API", () => {
       for (let i = 0; i < 10; i++) {
         mockFetch
           .mockResolvedValueOnce({
+            ok: true,
             json: async () => mockBooksResponse,
           })
           .mockResolvedValueOnce({
+            ok: true,
             json: async () => mockChaptersResponse,
           })
           .mockResolvedValueOnce({
+            ok: true,
             json: async () => ({ hadiths: { data: [] } }),
           });
       }
@@ -208,12 +221,15 @@ describe("Hadith API", () => {
       for (let i = 0; i < 10; i++) {
         mockFetch
           .mockResolvedValueOnce({
+            ok: true,
             json: async () => mockBooksResponse,
           })
           .mockResolvedValueOnce({
+            ok: true,
             json: async () => mockChaptersResponse,
           })
           .mockResolvedValueOnce({
+            ok: true,
             json: async () => shortHadithsResponse,
           });
       }
@@ -224,6 +240,7 @@ describe("Hadith API", () => {
 
     test("should handle malformed API responses", async () => {
       mockFetch.mockResolvedValueOnce({
+        ok: true,
         json: async () => ({ books: null }), // Réponse malformée
       });
 
@@ -236,9 +253,11 @@ describe("Hadith API", () => {
       for (let i = 0; i < 15; i++) {
         mockFetch
           .mockResolvedValueOnce({
+            ok: true,
             json: async () => mockBooksResponse,
           })
           .mockResolvedValueOnce({
+            ok: true,
             json: async () => ({ chapters: [] }), // Échec : pas de chapitres
           });
       }
@@ -255,12 +274,15 @@ describe("Hadith API", () => {
       // Test simple qui vérifie juste qu'on obtient un résultat ou null
       mockFetch
         .mockResolvedValueOnce({
+          ok: true,
           json: async () => mockBooksResponse,
         })
         .mockResolvedValueOnce({
+          ok: true,
           json: async () => mockChaptersResponse,
         })
         .mockResolvedValueOnce({
+          ok: true,
           json: async () => mockHadithsResponse,
         });
 
@@ -281,12 +303,15 @@ describe("Hadith API", () => {
     test("should complete within reasonable time", async () => {
       mockFetch
         .mockResolvedValueOnce({
+          ok: true,
           json: async () => mockBooksResponse,
         })
         .mockResolvedValueOnce({
+          ok: true,
           json: async () => mockChaptersResponse,
         })
         .mockResolvedValueOnce({
+          ok: true,
           json: async () => mockHadithsResponse,
         });
 

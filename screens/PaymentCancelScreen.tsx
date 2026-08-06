@@ -28,6 +28,9 @@ const PaymentCancelScreen: React.FC = () => {
             }
           );
 
+          if (!response.ok) {
+            throw new Error(`Erreur annulation paiement: ${response.status}`);
+          }
           const result = await response.json();
           console.log("✅ Résultat suppression:", result);
         }

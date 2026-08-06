@@ -2577,6 +2577,13 @@ public class QuranAudioService extends Service {
             Log.d(TAG, "🚀 Mise à jour directe de l'état du widget après arrêt");
             QuranWidget.updatePlaybackState(getApplicationContext(), isPlaying, currentPosition, totalDuration);
 
+            // 🎯 CORRECTIF : Mettre à jour MediaSessionCompat après STOP (comme pour PLAY/PAUSE).
+            // Sans cet appel, le PlaybackStateCompat restait bloqué sur STATE_PLAYING avec une
+            // vitesse de 1.0, ce qui fait que le système (écran de verrouillage/notification)
+            // extrapole indéfiniment la position même si le MediaPlayer est arrêté et silencieux.
+            Log.d(TAG, "🎯 Mise à jour métadonnées écran de verrouillage après STOP");
+            updateMediaSessionCompatMetadata();
+
         } catch (Exception e) {
             Log.e(TAG, "❌ Erreur arrêt audio: " + e.getMessage());
         }

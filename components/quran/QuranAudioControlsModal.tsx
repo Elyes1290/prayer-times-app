@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useRef, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   FlatList,
   Modal,
@@ -116,15 +116,17 @@ export function QuranAudioControlsModal({
     [selectedGif],
   );
 
-  if (visible !== prevVisibleRef.current) {
+  useEffect(() => {
+    if (prevVisibleRef.current === visible) return;
     prevVisibleRef.current = visible;
     if (!visible) {
       onResetSlideAnimation();
+      // react-doctor-disable-next-line react-doctor/no-adjust-state-on-prop-change -- doit rester un effect car il appelle aussi le callback externe onResetSlideAnimation (impossible pendant le rendu) ; la mise à jour de l'état est intentionnellement groupée avec cet appel.
       setAudioModalView("player");
     } else {
       setGifKey((prev) => prev + 1);
     }
-  }
+  }, [visible, onResetSlideAnimation]);
 
   const onGestureEvent = useCallback(() => {}, []);
 

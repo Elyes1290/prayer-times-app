@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { ScrollView, StyleSheet, Text, View, useWindowDimensions } from "react-native";
 import { Calendar } from "react-native-calendars";
 import ThemedImageBackground from "../components/ThemedImageBackground";
@@ -194,32 +194,38 @@ export default function HijriCalendarScreen() {
 
   const hijriDate = hijriDisplayFormatter.format(selectedDate);
 
+  // Reflète toujours la dernière date choisie de façon synchrone, pour que
+  // des appuis rapides et successifs sur précédent/suivant s'enchaînent
+  // correctement même si le re-rendu n'a pas encore eu lieu.
+  const selectedDateRef = useRef(selectedDate);
+
   const handlePrevDay = useCallback(() => {
-    setSelectedDate((current) => {
-      const newDate = new Date(
-        current.getFullYear(),
-        current.getMonth(),
-        current.getDate() - 1,
-      );
-      setDisplayDate(newDate);
-      return newDate;
-    });
+    const current = selectedDateRef.current;
+    const newDate = new Date(
+      current.getFullYear(),
+      current.getMonth(),
+      current.getDate() - 1,
+    );
+    selectedDateRef.current = newDate;
+    setSelectedDate(newDate);
+    setDisplayDate(newDate);
   }, []);
 
   const handleNextDay = useCallback(() => {
-    setSelectedDate((current) => {
-      const newDate = new Date(
-        current.getFullYear(),
-        current.getMonth(),
-        current.getDate() + 1,
-      );
-      setDisplayDate(newDate);
-      return newDate;
-    });
+    const current = selectedDateRef.current;
+    const newDate = new Date(
+      current.getFullYear(),
+      current.getMonth(),
+      current.getDate() + 1,
+    );
+    selectedDateRef.current = newDate;
+    setSelectedDate(newDate);
+    setDisplayDate(newDate);
   }, []);
 
   const handleResetToday = useCallback(() => {
     const now = new Date();
+    selectedDateRef.current = now;
     setSelectedDate(now);
     setDisplayDate(now);
   }, []);
@@ -281,6 +287,7 @@ export default function HijriCalendarScreen() {
           onDayPress={(day) => {
             const [year, month, dayNum] = day.dateString.split("-").map(Number);
             const newDate = new Date(year, month - 1, dayNum);
+            selectedDateRef.current = newDate;
             setSelectedDate(newDate);
             setDisplayDate(newDate);
           }}

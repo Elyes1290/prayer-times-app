@@ -74,8 +74,11 @@ export default function DebugWidgetScreen() {
 
   const testModuleExistsRef = useRef(testModuleExists);
   const testWidgetAvailabilityRef = useRef(testWidgetAvailability);
-  testModuleExistsRef.current = testModuleExists;
-  testWidgetAvailabilityRef.current = testWidgetAvailability;
+
+  useEffect(() => {
+    testModuleExistsRef.current = testModuleExists;
+    testWidgetAvailabilityRef.current = testWidgetAvailability;
+  });
 
   useEffect(() => {
     const timer1 = setTimeout(() => testModuleExistsRef.current(), 500);

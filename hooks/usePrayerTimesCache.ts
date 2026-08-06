@@ -331,11 +331,13 @@ export function usePrayerTimesCache(
               calcMethod,
               times
             );
-            setCacheStats((prev) => ({
-              ...prev,
-              cacheMisses: prev.cacheMisses + 1,
-              isLoaded: true,
-            }));
+            if (!cancelled) {
+              setCacheStats((prev) => ({
+                ...prev,
+                cacheMisses: prev.cacheMisses + 1,
+                isLoaded: true,
+              }));
+            }
             debugLog(`💾 Cache miss - calculé et sauvegardé pour ${cacheKey}`);
           } else {
             setPrayerTimes(null);

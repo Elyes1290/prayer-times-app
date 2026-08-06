@@ -497,8 +497,8 @@ const AdhanSoundSectionWrapper = React.memo(function AdhanSoundSectionWrapper({
 
   return (
     <View style={{ gap: 20 }}>
-      {adhanSections.map((section, index) => (
-        <View key={section.key || index}>{section.component}</View>
+      {adhanSections.map((section) => (
+        <View key={section.key}>{section.component}</View>
       ))}
     </View>
   );
@@ -869,6 +869,7 @@ function SettingsSections(props: OptimizedSettingsSectionsProps) {
     allDhikrEnabled,
     toggleAllDhikr,
     settings,
+    // react-doctor-disable-next-line react-doctor/no-whole-object-dep-with-member-reads -- `props` est lu via une dizaine de champs distincts dans ce bloc mémoïsé ; dépendre de l'objet entier évite d'en oublier un (préférable à un risque de staleness).
     props,
     styles,
     t,
@@ -1019,13 +1020,15 @@ export default function SettingsScreenOptimized() {
   } = useSettingsOptimized();
 
   const premiumContentStateRef = useRef(premiumContent.premiumContentState);
-  premiumContentStateRef.current = premiumContent.premiumContentState;
   const setAvailableSoundsRef = useRef(premiumContent.setAvailableSounds);
-  setAvailableSoundsRef.current = premiumContent.setAvailableSounds;
   const setPremiumSoundTitlesRef = useRef(premiumContent.setPremiumSoundTitles);
-  setPremiumSoundTitlesRef.current = premiumContent.setPremiumSoundTitles;
   const settingsRef = useRef(settings);
-  settingsRef.current = settings;
+  useEffect(() => {
+    premiumContentStateRef.current = premiumContent.premiumContentState;
+    setAvailableSoundsRef.current = premiumContent.setAvailableSounds;
+    setPremiumSoundTitlesRef.current = premiumContent.setPremiumSoundTitles;
+    settingsRef.current = settings;
+  });
 
   const citySearchAPI = useCitySearch();
   const sectionListRef = useRef<SectionList>(null);
@@ -1274,10 +1277,11 @@ export default function SettingsScreenOptimized() {
   );
 
   const updateAvailableSoundsRef = useRef(updateAvailableSounds);
-  updateAvailableSoundsRef.current = updateAvailableSounds;
-
   const resetPremiumContentRef = useRef(premiumContent.resetPremiumContent);
-  resetPremiumContentRef.current = premiumContent.resetPremiumContent;
+  useEffect(() => {
+    updateAvailableSoundsRef.current = updateAvailableSounds;
+    resetPremiumContentRef.current = premiumContent.resetPremiumContent;
+  });
 
   const resetAdhanSoundsForFreeUser = useCallback(() => {
     premiumContent.setAvailableSounds(BUILTIN_ADHAN_SOUND_KEYS);
@@ -1322,9 +1326,11 @@ export default function SettingsScreenOptimized() {
   const hadPremiumAccessRef = React.useRef<boolean | null>(null);
   const premiumHydratedRef = React.useRef(false);
   const resetAdhanSoundsRef = useRef(resetAdhanSoundsForFreeUser);
-  resetAdhanSoundsRef.current = resetAdhanSoundsForFreeUser;
   const hydrateAvailableSoundsRef = useRef(hydrateAvailableSounds);
-  hydrateAvailableSoundsRef.current = hydrateAvailableSounds;
+  useEffect(() => {
+    resetAdhanSoundsRef.current = resetAdhanSoundsForFreeUser;
+    hydrateAvailableSoundsRef.current = hydrateAvailableSounds;
+  });
 
   useEffect(() => {
     const hasPremiumAccess = !!(user?.isPremium || user?.isVip);

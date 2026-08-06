@@ -57,16 +57,18 @@ export default function AccountManagementSection({
   const userData = state.realUserData;
 
   useEffect(() => {
+    let isActive = true;
     const loadRealUserData = async () => {
       try {
         if (!(await hasExplicitAuthSession())) {
-          dispatch({ type: "SET_REAL_USER_DATA", payload: null });
+          if (isActive) dispatch({ type: "SET_REAL_USER_DATA", payload: null });
           return;
         }
 
         const fromServer = await refreshUserDataFromServer();
         if (fromServer) {
-          dispatch({ type: "SET_REAL_USER_DATA", payload: fromServer });
+          if (isActive)
+            dispatch({ type: "SET_REAL_USER_DATA", payload: fromServer });
           return;
         }
 
@@ -75,22 +77,27 @@ export default function AccountManagementSection({
           const parsed = JSON.parse(stored);
           const normalized = normalizeStoredUserData(parsed);
           const enriched = await enrichUserDataWithIosSubscription(normalized);
-          dispatch({
-            type: "SET_REAL_USER_DATA",
-            payload: enriched,
-          });
+          if (isActive)
+            dispatch({
+              type: "SET_REAL_USER_DATA",
+              payload: enriched,
+            });
         } else {
-          dispatch({ type: "SET_REAL_USER_DATA", payload: null });
+          if (isActive) dispatch({ type: "SET_REAL_USER_DATA", payload: null });
         }
       } catch (error) {
         console.error("❌ Erreur chargement données utilisateur:", error);
-        dispatch({ type: "SET_REAL_USER_DATA", payload: null });
+        if (isActive) dispatch({ type: "SET_REAL_USER_DATA", payload: null });
       }
     };
     loadRealUserData();
+    return () => {
+      isActive = false;
+    };
   }, [user]);
 
   useEffect(() => {
+    let isActive = true;
     const loadUserData = async () => {
       dispatch({ type: "SET_LOADING_USER_DATA", payload: true });
       try {
@@ -119,18 +126,22 @@ export default function AccountManagementSection({
           firstName = storedFirstName;
         }
 
-        dispatch({
-          type: "SET_PROFILE",
-          payload: { firstName, email },
-        });
+        if (isActive)
+          dispatch({
+            type: "SET_PROFILE",
+            payload: { firstName, email },
+          });
       } catch (error) {
         console.error("Erreur chargement données utilisateur:", error);
       } finally {
-        dispatch({ type: "SET_LOADING_USER_DATA", payload: false });
+        if (isActive) dispatch({ type: "SET_LOADING_USER_DATA", payload: false });
       }
     };
 
     loadUserData();
+    return () => {
+      isActive = false;
+    };
   }, [settings?.userFirstName]);
 
   const handleSaveProfile = async () => {

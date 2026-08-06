@@ -167,6 +167,7 @@ const TasbihScreen = () => {
   const scale = useSharedValue(1);
   const rotation = useSharedValue(0);
   const rotationCount = useRef(0);
+  const tapCountRef = useRef(0);
 
   const circleAnimatedStyle = useAnimatedStyle(() => ({
     transform: [
@@ -187,15 +188,13 @@ const TasbihScreen = () => {
   }, []);
 
   const toggleVibration = () => {
-    setVibrationEnabled((prev) => {
-      const next = !prev;
-      AsyncStorage.setItem("tasbih_vibration_enabled", String(next)).catch(
-        () => {}
-      );
-      // Petit retour haptique uniquement à la réactivation, pour confirmer
-      if (next) Vibration.vibrate(50);
-      return next;
-    });
+    const next = !vibrationEnabled;
+    setVibrationEnabled(next);
+    AsyncStorage.setItem("tasbih_vibration_enabled", String(next)).catch(
+      () => {}
+    );
+    // Petit retour haptique uniquement à la réactivation, pour confirmer
+    if (next) Vibration.vibrate(50);
   };
 
   const dhikrTranslations = [
@@ -219,20 +218,23 @@ const TasbihScreen = () => {
     rotationCount.current += 1;
     rotation.value = withTiming(rotationCount.current, { duration: 200 });
 
-    setCount((prev) => {
-      const newCount = prev + 1;
-      if (newCount > 100) {
-        setCurrentDhikr((currentDhikr + 1) % dhikrList.length);
-        return 0;
-      }
-      if (newCount % 33 === 0) {
-        setCurrentDhikr((currentDhikr + 1) % dhikrList.length);
-      }
-      return newCount;
-    });
+    // Compteur de référence tenu à jour de façon synchrone (immunisé contre
+    // les tapotements rapides / re-rendus différés), l'état React n'est
+    // utilisé que pour l'affichage.
+    tapCountRef.current += 1;
+    const newCount = tapCountRef.current > 100 ? 0 : tapCountRef.current;
+    if (tapCountRef.current > 100) {
+      tapCountRef.current = 0;
+    }
+
+    setCount(newCount);
+    if (newCount % 33 === 0) {
+      setCurrentDhikr((prev) => (prev + 1) % dhikrList.length);
+    }
   };
 
   const resetCount = () => {
+    tapCountRef.current = 0;
     setCount(0);
     setCurrentDhikr(0);
     rotationCount.current = 0;

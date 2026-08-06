@@ -110,8 +110,6 @@ export function useQuranPlayback({
   const [currentRecitation, setCurrentRecitation] =
     useState<PremiumContent | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [prevSelectedSourate, setPrevSelectedSourate] =
-    useState(selectedSourate);
   const [prevOfflineSyncKey, setPrevOfflineSyncKey] = useState("");
 
   const premiumManager = PremiumContentManager.getInstance();
@@ -143,13 +141,14 @@ export function useQuranPlayback({
 
   const usesNativeAudioService = isServiceAvailable() && isPremium;
 
-  if (selectedSourate !== prevSelectedSourate) {
-    setPrevSelectedSourate(selectedSourate);
+  useEffect(() => {
     lastDurationSurahRef.current = null;
     playbackDurationAccumRef.current = 0;
+    // react-doctor-disable-next-line react-doctor/no-adjust-state-on-prop-change -- l'alternative "ajustement pendant le rendu" muterait des refs dans le corps du composant, ce qui déclenche no-ref-current-in-render (règle bloquante) ; le useEffect reste le compromis le plus sûr ici.
     setManualPlaybackDuration(0);
+    // react-doctor-disable-next-line react-doctor/no-adjust-state-on-prop-change -- idem : voir justification ci-dessus.
     setPlaybackPosition(0);
-  }
+  }, [selectedSourate]);
 
   const displayPlaybackPosition = useMemo(() => {
     if (!usesNativeAudioService) {
@@ -265,11 +264,6 @@ export function useQuranPlayback({
       iosScaledRaw: iosRaw,
     });
 
-    if (resolved > 0) {
-      playbackDurationAccumRef.current = resolved;
-      lastDurationSurahRef.current = selectedSourate;
-    }
-
     return resolved;
   }, [
     serviceAudioState.position,
@@ -283,6 +277,15 @@ export function useQuranPlayback({
     sourates,
     isServiceAvailable,
   ]);
+
+  // Mémorise la durée résolue pour alimenter `previousMs` au prochain calcul.
+  // Fait en effet (et non dans le useMemo ci-dessus) pour garder ce dernier pur.
+  useEffect(() => {
+    if (serviceSyncedPlaybackDuration > 0) {
+      playbackDurationAccumRef.current = serviceSyncedPlaybackDuration;
+      lastDurationSurahRef.current = selectedSourate;
+    }
+  }, [serviceSyncedPlaybackDuration, selectedSourate]);
 
   const playbackDuration =
     serviceSyncedPlaybackDuration > 0
@@ -488,6 +491,7 @@ export function useQuranPlayback({
             console.log(
               `🎯 Synchronisation interface: passage sourate ${selectedSourate} → ${surahNumber}`,
             );
+            // react-doctor-disable-next-line react-doctor/no-pass-data-to-parent -- synchronisation avec une source externe (service audio natif / widget), pas un calcul que le parent pourrait faire lui-même ; l'effect est le point d'intégration légitime avec ce système externe.
             selectSourate(surahNumber);
           }
         }
@@ -956,6 +960,7 @@ export function useQuranPlayback({
       return;
     }
 
+    // react-doctor-disable-next-line react-doctor/no-pass-live-state-to-parent -- faux positif : loadSpecificRecitation est une fonction interne du hook (pas un callback de prop), le chargement audio doit rester déclenché depuis cet effect.
     void loadSpecificRecitation(selectedReciter, selectedSourate, false);
     // eslint-disable-next-line react-hooks/exhaustive-deps -- pas de rechargement quand loadSpecificRecitation est recréé
     // react-doctor-disable-next-line react-doctor/exhaustive-deps

@@ -30,11 +30,11 @@ import { useRouter } from "expo-router";
 import { LinearGradient } from "@/components/ui/LinearGradientView";
 import { useErrorHandler } from "../utils/errorHandler";
 import Animated, {
-  runOnJS,
   useAnimatedStyle,
   useSharedValue,
   withTiming,
 } from "react-native-reanimated";
+import { scheduleOnRN } from "react-native-worklets";
 
 interface PremiumLoginSectionProps {
   activatePremium: (
@@ -185,7 +185,7 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
     toastTranslateY.value = withTiming(-100, { duration: 250 });
     toastOpacity.value = withTiming(0, { duration: 250 }, (finished) => {
       if (finished) {
-        runOnJS(setLocalToast)(null);
+        scheduleOnRN(setLocalToast, null);
       }
     });
   }, [toastTranslateY, toastOpacity]);
@@ -339,12 +339,15 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
 
   // Synchroniser l'UI avec l'état global Premium (pour que la section se mette à jour automatiquement)
   useEffect(() => {
+    let isActive = true;
     const syncFromContext = async () => {
       try {
         const sessionActive = await hasExplicitAuthSession();
+        if (!isActive) return;
         if (sessionActive) {
           setIsConnected(true);
           const userDataString = await AsyncStorage.getItem("user_data");
+          if (!isActive) return;
           if (userDataString) {
             try {
               setUserData(JSON.parse(userDataString));
@@ -359,10 +362,13 @@ const PremiumLoginSection: React.FC<PremiumLoginSectionProps> = ({
       } catch {
         // noop
       } finally {
-        hasCheckedUserRef.current = true;
+        if (isActive) hasCheckedUserRef.current = true;
       }
     };
     syncFromContext();
+    return () => {
+      isActive = false;
+    };
   }, [premiumUser?.isPremium]);
 
   // 🚀 NOUVEAU : Mode professionnel - synchronisation EXPLICITE seulement

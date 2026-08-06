@@ -297,12 +297,15 @@ export const AdhanAudioProvider: React.FC<AdhanAudioProviderProps> = ({
     }
   }, []);
 
-  const value: AdhanAudioContextType = {
-    state,
-    playAdhan,
-    stopAdhan,
-    getStatus,
-  };
+  const value: AdhanAudioContextType = React.useMemo(
+    () => ({
+      state,
+      playAdhan,
+      stopAdhan,
+      getStatus,
+    }),
+    [state, playAdhan, stopAdhan, getStatus]
+  );
 
   return (
     <AdhanAudioContext.Provider value={value}>

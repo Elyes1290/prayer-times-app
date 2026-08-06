@@ -31,6 +31,21 @@ export function resolveQuranApiLang(language: string): string {
   return "en";
 }
 
+async function fetchDefaultTranslation(chapterNumber: number): Promise<any[]> {
+  try {
+    const fallbackRes = await fetch(
+      `https://api.quran.com/api/v4/quran/translations/85?chapter_number=${chapterNumber}`,
+    );
+    if (!fallbackRes.ok) {
+      return [];
+    }
+    const fallbackJson = await fallbackRes.json();
+    return fallbackJson.translations || [];
+  } catch {
+    return [];
+  }
+}
+
 export async function fetchQuranTranslation(
   chapterNumber: number,
   lang: string,
@@ -41,26 +56,21 @@ export async function fetchQuranTranslation(
     const res = await fetch(
       `https://api.quran.com/api/v4/quran/translations/${translationId}?chapter_number=${chapterNumber}`,
     );
+    if (!res.ok) {
+      throw new Error(`Quran translation API error: ${res.status}`);
+    }
     const json = await res.json();
 
     if (json.translations && json.translations.length > 0) {
       return json.translations;
     }
     if (translationId !== 85) {
-      const fallbackRes = await fetch(
-        `https://api.quran.com/api/v4/quran/translations/85?chapter_number=${chapterNumber}`,
-      );
-      const fallbackJson = await fallbackRes.json();
-      return fallbackJson.translations || [];
+      return await fetchDefaultTranslation(chapterNumber);
     }
     return [];
   } catch {
     if (translationId !== 85) {
-      const fallbackRes = await fetch(
-        `https://api.quran.com/api/v4/quran/translations/85?chapter_number=${chapterNumber}`,
-      );
-      const fallbackJson = await fallbackRes.json();
-      return fallbackJson.translations || [];
+      return await fetchDefaultTranslation(chapterNumber);
     }
     return [];
   }

@@ -35,13 +35,15 @@ export function useRegisterPremiumAppearanceReset(
   setters: AppearanceSetters,
 ): void {
   const snapshotRef = useRef(snapshot);
-  snapshotRef.current = snapshot;
   const settersRef = useRef(setters);
-  settersRef.current = setters;
+  useEffect(() => {
+    snapshotRef.current = snapshot;
+    settersRef.current = setters;
+  });
   const isApplyingRef = useRef(false);
 
   const applyFreePremiumAppearance = useCallback(
-    async (_options?: PremiumAppearanceResetOptions) => {
+    async (options?: PremiumAppearanceResetOptions) => {
       const current = snapshotRef.current;
       const { setThemeModeState, setBackgroundImageTypeState, setAdhanSound } =
         settersRef.current;

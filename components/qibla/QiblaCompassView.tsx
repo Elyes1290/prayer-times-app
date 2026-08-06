@@ -4,12 +4,12 @@ import { ImageSourcePropType, StyleSheet, Text, View } from "react-native";
 import { useTranslation } from "react-i18next";
 import Animated, {
   interpolateColor,
-  runOnJS,
   useAnimatedReaction,
   useAnimatedStyle,
   useSharedValue,
   withTiming,
 } from "react-native-reanimated";
+import { scheduleOnRN } from "react-native-worklets";
 import kaabaImg from "../../assets/images/kaaba.png";
 import { useCompassHeading } from "../../hooks/useCompassHeading";
 import { isAlignedWithQiblaWorklet } from "../../utils/compassHeading";
@@ -90,7 +90,7 @@ export function QiblaCompassView({
       if (aligned === null) {
         return;
       }
-      runOnJS(notifyAligned)(aligned);
+      scheduleOnRN(notifyAligned, aligned);
     },
   );
 
@@ -108,12 +108,12 @@ export function QiblaCompassView({
     },
     (info) => {
       if (info === null) {
-        runOnJS(setDisplayHeading)(null);
-        runOnJS(setDisplayOffset)(null);
+        scheduleOnRN(setDisplayHeading, null);
+        scheduleOnRN(setDisplayOffset, null);
         return;
       }
-      runOnJS(setDisplayHeading)(info.heading);
-      runOnJS(setDisplayOffset)(info.offset);
+      scheduleOnRN(setDisplayHeading, info.heading);
+      scheduleOnRN(setDisplayOffset, info.offset);
     },
   );
 

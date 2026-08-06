@@ -16,6 +16,7 @@ const AbonnementProtection: React.FC<AbonnementProtectionProps> = ({
   const protectionRef = useRef(false);
 
   useEffect(() => {
+    let isActive = true;
     let activeBackHandler: { remove: () => void } | null = null;
 
     const checkAbonnementProcess = async () => {
@@ -23,6 +24,10 @@ const AbonnementProtection: React.FC<AbonnementProtectionProps> = ({
         const pendingRegistration = await AsyncStorage.getItem(
           "pending_registration"
         );
+        if (!isActive) {
+          // Le composant a été démonté pendant l'attente : ne pas créer d'abonnement orphelin.
+          return;
+        }
         if (pendingRegistration) {
           if (!protectionRef.current) {
             protectionRef.current = true;
@@ -65,6 +70,7 @@ const AbonnementProtection: React.FC<AbonnementProtectionProps> = ({
     const interval = setInterval(checkAbonnementProcess, 2000);
 
     return () => {
+      isActive = false;
       clearInterval(interval);
       if (activeBackHandler) {
         activeBackHandler.remove();

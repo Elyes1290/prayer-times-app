@@ -648,6 +648,9 @@ export default function StoryReaderScreen() {
           headers,
         },
       );
+      if (!response.ok) {
+        throw new Error(`Erreur API prophet-stories (story): ${response.status}`);
+      }
       const responseData = await response.json();
 
       if (responseData.success) {
@@ -863,7 +866,7 @@ export default function StoryReaderScreen() {
           }),
         }
       );
-      setIsFavorited(!isFavorited);
+      setIsFavorited((previous) => !previous);
     } catch (error) {
       console.error("Erreur toggle favorite:", error);
     }

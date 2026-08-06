@@ -71,7 +71,9 @@ export function useCompassHeading(
   const locationSubRef = useRef<Location.LocationSubscription | null>(null);
   const compassSubRef = useRef<{ remove: () => void } | null>(null);
   const geoRef = useRef(geo);
-  geoRef.current = geo;
+  useEffect(() => {
+    geoRef.current = geo;
+  });
 
   const applyHeading = useCallback(
     (heading: number, sensorAccuracy: number | null) => {

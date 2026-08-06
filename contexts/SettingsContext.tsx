@@ -25,7 +25,7 @@ import { useRegisterPremiumAppearanceReset } from "../hooks/useRegisterPremiumAp
 import { registerNotificationReprogram } from "../utils/premiumAppearanceSync";
 import { formatGeocodeLabel } from "../utils/locationDisplay";
 
-const FIRST_LAUNCH_FLAG = "app_first_launch_done";
+export const FIRST_LAUNCH_FLAG = "app_first_launch_done";
 
 const { AdhanModule } = NativeModules;
 
@@ -214,6 +214,7 @@ const defaultSettings: SettingsContextType = {
   isApiSyncEnabled: false,
 };
 
+// react-doctor-disable-next-line react-doctor/only-export-components -- SettingsContext (l'objet Context, pas un composant) est importé directement par ~20 fichiers via useContext ; le déplacer dans un fichier séparé casserait Fast Refresh pour tous ces imports sans bénéfice fonctionnel. À traiter dans un refactor dédié.
 export const SettingsContext =
   createContext<SettingsContextType>(defaultSettings);
 
@@ -250,6 +251,10 @@ export const SettingsProvider = ({
 
   // New state for auto location
   const [autoLocation, setAutoLocation] = useState<AutoLocation | null>(null);
+  const autoLocationRef = useRef(autoLocation);
+  useEffect(() => {
+    autoLocationRef.current = autoLocation;
+  }, [autoLocation]);
   const [locationError, setLocationError] = useState<string | null>(null);
   const [isRefreshingLocation, setIsRefreshingLocation] = useState(false);
 
@@ -521,24 +526,22 @@ export const SettingsProvider = ({
       return;
     }
 
-    setAutoLocation((prev) => {
-      if (!prev) {
-        return prev;
-      }
+    const prev = autoLocationRef.current;
+    if (!prev || prev.city === trimmed) {
+      return;
+    }
 
-      if (prev.city === trimmed) {
-        return prev;
-      }
-
-      const updated: AutoLocation = { ...prev, city: trimmed };
-      void LocalStorageManager.saveEssential(
+    const updated: AutoLocation = { ...prev, city: trimmed };
+    autoLocationRef.current = updated;
+    setAutoLocation(updated);
+    try {
+      await LocalStorageManager.saveEssential(
         "AUTO_LOCATION",
         JSON.stringify(updated),
-      ).catch((error) => {
-        errorLog("Erreur sauvegarde libellé autoLocation:", error);
-      });
-      return updated;
-    });
+      );
+    } catch (error) {
+      errorLog("Erreur sauvegarde libellé autoLocation:", error);
+    }
   }, []);
 
   const enrichAutoLocationCityIfPossible = useCallback(
@@ -1245,7 +1248,9 @@ export const SettingsProvider = ({
   };
 
   const saveAndReprogramAllRef = useRef(saveAndReprogramAll);
-  saveAndReprogramAllRef.current = saveAndReprogramAll;
+  useEffect(() => {
+    saveAndReprogramAllRef.current = saveAndReprogramAll;
+  });
 
   useEffect(() => {
     registerNotificationReprogram(async () => {
@@ -1593,6 +1598,7 @@ export const SettingsProvider = ({
   };
 
   return (
+    // react-doctor-disable-next-line react-doctor/context-provider-value-from-unmemoized-local-literal -- objet très volumineux avec de nombreuses closures inline ; un useMemo mal outillé ici risquerait des dépendances obsolètes sur un contexte critique. À traiter dans un refactor dédié.
     <SettingsContext.Provider value={value}>
       {children}
     </SettingsContext.Provider>

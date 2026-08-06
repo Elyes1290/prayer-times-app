@@ -1094,6 +1094,7 @@ export default function HomeScreen() {
 
   // Gestion simple de l'affichage de la ville
   useEffect(() => {
+    let isActive = true;
     async function updateCity() {
       if (settings.locationMode === "manual" && settings.manualLocation?.city) {
         setCity(settings.manualLocation.city);
@@ -1117,6 +1118,7 @@ export default function HomeScreen() {
             "expo-location"
           );
           const { status } = await getForegroundPermissionsAsync();
+          if (!isActive) return;
 
           if (status !== "granted") {
             // Coords sauvegardées mais pas de permission (ex. iOS « Autoriser une fois »)
@@ -1125,6 +1127,7 @@ export default function HomeScreen() {
           }
 
           const geocodeResult = await reverseGeocodeAsync(location.coords);
+          if (!isActive) return;
           const cityLabel = formatGeocodeLabel(geocodeResult[0]);
           if (cityLabel) {
             setCity(cityLabel);
@@ -1135,7 +1138,7 @@ export default function HomeScreen() {
           setCity("Localisation inconnue");
         } catch (error) {
           errorLog("Erreur reverse geocoding:", error);
-          setCity(null);
+          if (isActive) setCity(null);
         }
         return;
       }
@@ -1146,6 +1149,10 @@ export default function HomeScreen() {
     if (settings.locationMode !== null) {
       updateCity();
     }
+
+    return () => {
+      isActive = false;
+    };
   }, [
     settings.locationMode,
     settings.manualLocation?.city,
@@ -2031,7 +2038,7 @@ const getStyles = (
       // 🚀 RESPONSIVE : Padding adaptatif selon la taille d'écran
       paddingHorizontal: universalLayout.contentPaddingHorizontal,
       paddingTop: Math.max(universalLayout.safeAreaTop + 16, 50),
-      paddingBottom: universalLayout.contentPaddingVertical,
+      paddingBottom: universalLayout.contentPaddingBottom,
     },
     centeredContainer: {
       flex: 1,

@@ -52,6 +52,9 @@ export function useQuranSurahData({
         `https://api.quran.com/api/v4/chapters?language=${language}`,
         { signal },
       );
+      if (!res.ok) {
+        throw new Error(`Quran chapters API error: ${res.status}`);
+      }
       const json = await res.json();
       if (!signal?.aborted) {
         setSourates(json.chapters ?? []);
@@ -190,6 +193,12 @@ export function useQuranSurahData({
 
         if (isStale()) return;
 
+        if (!arabicRes.ok || !phoneticRes.ok) {
+          throw new Error(
+            `Quran verses API error: ${arabicRes.status}/${phoneticRes.status}`,
+          );
+        }
+
         const arabicJson = await arabicRes.json();
         const phoneticJson = await phoneticRes.json();
 
@@ -205,16 +214,22 @@ export function useQuranSurahData({
       } catch {
         if (isStale()) return;
         if (isPremium) {
-          await loadOfflineSurah(surahToLoad, requestId);
+          try {
+            await loadOfflineSurah(surahToLoad, requestId);
+          } catch {
+            setArabicVerses([]);
+            setPhoneticArr([]);
+            setTranslationArr([]);
+          }
         } else {
           setArabicVerses([]);
           setPhoneticArr([]);
           setTranslationArr([]);
         }
-      }
-
-      if (!isStale()) {
-        setLoading(false);
+      } finally {
+        if (!isStale()) {
+          setLoading(false);
+        }
       }
     },
     [
@@ -229,6 +244,7 @@ export function useQuranSurahData({
 
   useEffect(() => {
     const requestId = ++surahDataRequestIdRef.current;
+    // react-doctor-disable-next-line react-doctor/no-pass-live-state-to-parent -- faux positif : loadSurahVerses est une fonction interne du hook (pas un callback de prop) qui charge les données de la sourate sélectionnée, elle ne pousse rien vers un parent.
     void loadSurahVerses(selectedSourate, requestId);
   }, [selectedSourate, loadSurahVerses]);
 
