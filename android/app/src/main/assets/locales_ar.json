@@ -1531,5 +1531,16 @@
   "background_image_type": "نوع صورة الخلفية",
   "background_prophet": "🕌 المسجد النبوي",
   "background_makka": "🕋 مكة المكرمة",
-  "background_alquds": "🌙 القدس"
+  "background_alquds": "🌙 القدس",
+  "quran_previous_surah": "السورة السابقة",
+  "quran_next_surah": "السورة التالية",
+  "quran_resume_bookmark": "متابعة قراءتي",
+  "quran_show_translation": "إظهار النطق والترجمة",
+  "quran_show_arabic_only": "إظهار النص العربي فقط",
+  "quran_fullscreen": "ملء الشاشة",
+  "quran_exit_fullscreen": "الخروج من ملء الشاشة",
+  "quran_bookmark_saved": "تم حفظ العلامة",
+  "quran_bookmark_removed": "تمت إزالة العلامة",
+  "quran_bookmark": "علامة مرجعية",
+  "choose_gif": "اختر تأثيرًا مرئيًا"
 }

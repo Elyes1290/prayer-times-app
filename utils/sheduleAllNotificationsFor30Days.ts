@@ -9,6 +9,9 @@ import { schedulePrayerNotifications } from "./notifications";
 import { scheduleAllDhikrNotifications } from "./dhikrNotifications";
 import i18n from "../locales/i18n";
 import { notificationDebugLog } from "./logger";
+import { getRamadanRemindersForScheduling } from "./ramadan/notifications";
+import { scheduleRamadanRemindersAndroid } from "./ramadan/androidSchedule";
+import { getFridayRemindersForScheduling } from "./friday/reminders";
 
 // Types pour la fonction
 type Location = { latitude: number; longitude: number };
@@ -376,6 +379,59 @@ export async function scheduleNotificationsFor2Days({
     };
 
     await processDayAtIndex(0);
+
+    // 🌙 Rappels Ramadan (premium) : suhoor, iftar, lecture du jour, nuits de Laylat al-Qadr.
+    // Tout a déjà été annulé plus haut (cancelAllPrayerReminders couvre aussi ces rappels).
+    // `getRamadanRemindersForScheduling` ne lève jamais et retourne [] hors saison / hors premium.
+    // 🕌 Rappel du vendredi (gratuit) : rejoint le même planning que les rappels Ramadan.
+    // `getFridayRemindersForScheduling` ne lève jamais et retourne [] si le rappel est désactivé.
+    let ramadanReminders: Awaited<ReturnType<typeof getRamadanRemindersForScheduling>> = [];
+    let fridayReminders: Awaited<ReturnType<typeof getFridayRemindersForScheduling>> = [];
+    try {
+      ramadanReminders = await getRamadanRemindersForScheduling({
+        userLocation,
+        calcMethod,
+        platform: Platform.OS,
+      });
+    } catch (ramadanError) {
+      // Ne jamais empêcher la programmation des adhans à cause du Ramadan
+      notificationDebugLog("⚠️ Rappels Ramadan ignorés:", ramadanError);
+    }
+    try {
+      fridayReminders = await getFridayRemindersForScheduling({
+        platform: Platform.OS,
+      });
+    } catch (fridayError) {
+      notificationDebugLog("⚠️ Rappel du vendredi ignoré:", fridayError);
+    }
+    try {
+      const extraReminders = [...ramadanReminders, ...fridayReminders];
+      if (ramadanReminders.length > 0) {
+        notificationDebugLog(
+          `🌙 ${ramadanReminders.length} rappel(s) Ramadan à programmer`
+        );
+      }
+      if (fridayReminders.length > 0) {
+        notificationDebugLog(
+          `🕌 ${fridayReminders.length} rappel(s) du vendredi à programmer`
+        );
+      }
+      if (Platform.OS === "ios") {
+        if (extraReminders.length > 0) {
+          // iOS : agrégé avec les autres rappels, envoyé en une seule fois plus bas
+          allPrayerReminders = [...allPrayerReminders, ...extraReminders];
+        }
+      } else {
+        // Android : 10 jours armés maintenant + planning complet pour la maintenance de 00:05.
+        // Appelé même avec une liste vide pour effacer un planning périmé.
+        scheduleRamadanRemindersAndroid(
+          extraReminders,
+          NativeModules.AdhanModule
+        );
+      }
+    } catch (extraError) {
+      notificationDebugLog("⚠️ Rappels Ramadan / vendredi ignorés:", extraError);
+    }
 
     // 🍎 NOUVEAU : Notification de sécurité iOS
     // Pour rester sous la limite de 64, on programme 3 jours de prières (~54 notifs)

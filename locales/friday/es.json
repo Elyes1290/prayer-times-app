@@ -1,0 +1,74 @@
+{
+  "title": "Viernes",
+  "back": "Atrás",
+  "notif": {
+    "title": "🕌 Jumu'a Mubarak",
+    "body": "Hoy es viernes: ghusl, perfume, sura Al-Kahf, salawat sobre el Profeta ﷺ y súplicas. Toca para ver el recordatorio completo."
+  },
+  "card": {
+    "title": "Jumu'a Mubarak",
+    "subtitle": "El recordatorio del viernes: Al-Kahf, sunnas y súplicas"
+  },
+  "hero": {
+    "greeting": "Jumu'a Mubarak",
+    "subtitle": "El mejor día de la semana",
+    "hadithArabic": "خَيْرُ يَوْمٍ طَلَعَتْ عَلَيْهِ الشَّمْسُ يَوْمُ الْجُمُعَةِ",
+    "hadithText": "«El mejor día en el que ha salido el sol es el viernes.»",
+    "hadithSource": "Relatado por Muslim"
+  },
+  "kahf": {
+    "title": "Sura Al-Kahf",
+    "intro": "Lee o escucha la sura Al-Kahf (la 18.ª) el viernes.",
+    "arabic": "مَنْ قَرَأَ سُورَةَ الْكَهْفِ يَوْمَ الْجُمُعَةِ أَضَاءَ لَهُ مِنَ النُّورِ مَا بَيْنَ الْجُمُعَتَيْنِ",
+    "translation": "«Quien lea la sura Al-Kahf el viernes, una luz lo iluminará entre los dos viernes.»",
+    "source": "Relatado por al-Hakim y al-Bayhaqi (considerado auténtico por al-Albani)",
+    "button": "Leer la sura Al-Kahf"
+  },
+  "tips": {
+    "title": "Las sunnas del viernes",
+    "ghusl": {
+      "title": "El ghusl",
+      "text": "El Profeta ﷺ dijo: «El ghusl del viernes es un deber para todo púber». La mayoría de los sabios lo consideran una sunna confirmada. Hazlo antes de acudir a la oración.",
+      "source": "Bujari, Muslim"
+    },
+    "perfume": {
+      "title": "Perfume, siwak y buena presencia",
+      "text": "El Profeta ﷺ dijo: quien hace el ghusl el viernes, se purifica lo mejor que puede, se perfuma, luego va a la mezquita sin separar a dos personas, reza lo que le ha sido prescrito y escucha al imán en silencio, se le perdonará lo que hay entre ese viernes y el siguiente.",
+      "source": "Bujari"
+    },
+    "early": {
+      "title": "Ir pronto a la mezquita",
+      "text": "El Profeta ﷺ dijo: quien hace el ghusl el viernes y luego va a la mezquita a la primera hora es como quien ha ofrecido un camello en sacrificio, luego una vaca, luego un carnero, luego una gallina, luego un huevo. Cuando el imán aparece, los ángeles vienen a escuchar el recordatorio.",
+      "source": "Bujari, Muslim"
+    },
+    "silence": {
+      "title": "Escuchar la jutba en silencio",
+      "text": "El Profeta ﷺ dijo: «Si le dices a tu vecino “¡Cállate!” mientras el imán predica, has dicho una frivolidad». Apaga tu teléfono antes de la jutba.",
+      "source": "Bujari, Muslim"
+    },
+    "salawat": {
+      "title": "Los salawat sobre el Profeta ﷺ",
+      "arabic": "فَأَكْثِرُوا عَلَيَّ مِنَ الصَّلَاةِ فِيهِ",
+      "text": "El Profeta ﷺ dijo: «Entre vuestros mejores días está el viernes […] multiplicad, pues, las bendiciones sobre mí ese día».",
+      "source": "Abu Dawud, Ibn Maya (considerado auténtico)"
+    },
+    "hour": {
+      "title": "La hora en que se aceptan las súplicas",
+      "text": "El Profeta ﷺ dijo: «Hay en el viernes una hora en la que ningún siervo musulmán, estando en oración, pide algo a Allah sin que Él se lo conceda». Los sabios difieren sobre el momento: entre la llegada del imán al minbar y el final de la oración, o en la última hora antes de la puesta del sol. Multiplica las súplicas en esos dos momentos.",
+      "source": "Bujari, Muslim"
+    },
+    "fasting": {
+      "title": "Conviene saber: el ayuno",
+      "text": "El Profeta ﷺ dijo: «Que ninguno de vosotros ayune el viernes, salvo que ayune también el día anterior o el siguiente».",
+      "source": "Bujari, Muslim"
+    }
+  },
+  "settings": {
+    "title": "Recordatorio del viernes",
+    "toggle": "Notificación del viernes",
+    "toggleDesc": "Cada viernes a las {{time}}",
+    "needNotifications": "Activa las notificaciones en los ajustes para recibir este recordatorio.",
+    "earlier": "Más pronto",
+    "later": "Más tarde"
+  }
+}

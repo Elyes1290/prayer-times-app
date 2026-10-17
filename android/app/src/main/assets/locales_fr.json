@@ -1534,5 +1534,16 @@
   "background_image_type": "Type d'image de fond",
   "background_prophet": "🕌 Mosquée du Prophète",
   "background_makka": "🕋 Makka",
-  "background_alquds": "🌙 Al-Quds"
+  "background_alquds": "🌙 Al-Quds",
+  "quran_previous_surah": "Sourate précédente",
+  "quran_next_surah": "Sourate suivante",
+  "quran_resume_bookmark": "Reprendre ma lecture",
+  "quran_show_translation": "Afficher phonétique et traduction",
+  "quran_show_arabic_only": "Afficher l'arabe seul",
+  "quran_fullscreen": "Plein écran",
+  "quran_exit_fullscreen": "Quitter le plein écran",
+  "quran_bookmark_saved": "Marque-page enregistré",
+  "quran_bookmark_removed": "Marque-page retiré",
+  "quran_bookmark": "Marque-page",
+  "choose_gif": "Choisir un effet visuel"
 }

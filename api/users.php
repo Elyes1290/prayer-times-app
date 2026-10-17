@@ -19,8 +19,8 @@ try {
     // 🚀 DEBUG GLOBAL : Log de début de requête
     error_log("=== DEBUG API USERS.PHP ===");
     error_log("Méthode: " . $method);
-    error_log("URI: " . ($_SERVER['REQUEST_URI'] ?? 'N/A'));
-    error_log("Données reçues: " . json_encode($data));
+    error_log("URI: " . (safeRequestUri() ?: 'N/A'));
+    error_log("Données reçues: " . safeLogJson($data)); // 🔒 secrets masqués
     error_log("Auth status: " . ($auth ? 'OK' : 'FAILED'));
     
     switch ($method) {
@@ -85,16 +85,17 @@ function handleGetUser() {
     
     // 🔍 DEBUG COMPLET
     error_log("DEBUG: REQUEST_METHOD: " . ($_SERVER['REQUEST_METHOD'] ?? 'N/A'));
-    error_log("DEBUG: REQUEST_URI: " . ($_SERVER['REQUEST_URI'] ?? 'N/A'));
-    error_log("DEBUG: QUERY_STRING: " . ($_SERVER['QUERY_STRING'] ?? 'N/A'));
-    error_log("DEBUG: GET params: " . json_encode($_GET));
-    error_log("DEBUG: POST params: " . json_encode($_POST));
-    error_log("DEBUG: Data params: " . json_encode($data));
+    error_log("DEBUG: REQUEST_URI: " . (safeRequestUri() ?: 'N/A'));
+    // 🔒 secrets (mot de passe, token…) masqués dans tous les logs de requête
+    error_log("DEBUG: GET params: " . safeLogJson($_GET));
+    error_log("DEBUG: POST params: " . safeLogJson($_POST));
+    error_log("DEBUG: Data params: " . safeLogJson($data));
     error_log("DEBUG: Paramètres reçus - user_id: $user_id, email: $email");
     
     if (!$user_id && !$email) {
         // Log détaillé avant l'erreur
-        error_log("ERROR: Aucun paramètre trouvé. GET=" . json_encode($_GET) . ", POST=" . json_encode($_POST) . ", URI=" . ($_SERVER['REQUEST_URI'] ?? 'N/A'));
+        // 🔒 l'URI peut contenir ?token=… : on ne journalise que le chemin
+        error_log("ERROR: Aucun paramètre trouvé. GET=" . safeLogJson($_GET) . ", POST=" . safeLogJson($_POST) . ", PATH=" . (parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH) ?: 'N/A'));
         handleError("Paramètre requis: user_id ou email", 400);
     }
     

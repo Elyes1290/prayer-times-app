@@ -1,0 +1,74 @@
+{
+  "title": "Freitag",
+  "back": "Zurück",
+  "notif": {
+    "title": "🕌 Dschumua Mubarak",
+    "body": "Heute ist Freitag: Ghusl, Duft, Sure al-Kahf, Salawat auf den Propheten ﷺ und Bittgebete. Tippen Sie für die vollständige Erinnerung."
+  },
+  "card": {
+    "title": "Dschumua Mubarak",
+    "subtitle": "Die Freitagserinnerung: al-Kahf, Sunnas und Bittgebete"
+  },
+  "hero": {
+    "greeting": "Dschumua Mubarak",
+    "subtitle": "Der beste Tag der Woche",
+    "hadithArabic": "خَيْرُ يَوْمٍ طَلَعَتْ عَلَيْهِ الشَّمْسُ يَوْمُ الْجُمُعَةِ",
+    "hadithText": "„Der beste Tag, an dem die Sonne aufgegangen ist, ist der Freitag.“",
+    "hadithSource": "Überliefert von Muslim"
+  },
+  "kahf": {
+    "title": "Sure al-Kahf",
+    "intro": "Lesen oder hören Sie freitags die Sure al-Kahf (die 18.).",
+    "arabic": "مَنْ قَرَأَ سُورَةَ الْكَهْفِ يَوْمَ الْجُمُعَةِ أَضَاءَ لَهُ مِنَ النُّورِ مَا بَيْنَ الْجُمُعَتَيْنِ",
+    "translation": "„Wer freitags die Sure al-Kahf liest, dem wird ein Licht leuchten zwischen den beiden Freitagen.“",
+    "source": "Überliefert von al-Hakim und al-Bayhaqi (von al-Albani als authentisch eingestuft)",
+    "button": "Sure al-Kahf lesen"
+  },
+  "tips": {
+    "title": "Die Sunnas des Freitags",
+    "ghusl": {
+      "title": "Das Ghusl",
+      "text": "Der Prophet ﷺ sagte: „Das Ghusl am Freitag ist für jeden Geschlechtsreifen eine Pflicht.“ Die Mehrheit der Gelehrten betrachtet es als bestätigte Sunna. Nehmen Sie es vor dem Gang zum Gebet vor.",
+      "source": "Bukhari, Muslim"
+    },
+    "perfume": {
+      "title": "Duft, Siwak und gepflegte Kleidung",
+      "text": "Der Prophet ﷺ sagte: Wer am Freitag das Ghusl vollzieht, sich so gut er kann reinigt, sich parfümiert, dann zur Moschee geht, ohne zwischen zwei Personen zu treten, das ihm Vorgeschriebene betet und dem Imam schweigend zuhört, dem wird vergeben, was zwischen diesem und dem nächsten Freitag liegt.",
+      "source": "Bukhari"
+    },
+    "early": {
+      "title": "Früh zur Moschee gehen",
+      "text": "Der Prophet ﷺ sagte: Wer am Freitag das Ghusl vollzieht und dann in der ersten Stunde zur Moschee geht, gleicht dem, der ein Kamel geopfert hat, dann eine Kuh, dann ein Schaf, dann ein Huhn, dann ein Ei. Wenn der Imam erscheint, kommen die Engel, um der Ermahnung zuzuhören.",
+      "source": "Bukhari, Muslim"
+    },
+    "silence": {
+      "title": "Der Chutba schweigend zuhören",
+      "text": "Der Prophet ﷺ sagte: „Wenn du zu deinem Nachbarn ‚Sei still!‘ sagst, während der Imam predigt, hast du etwas Nutzloses gesagt.“ Schalten Sie Ihr Telefon vor der Chutba aus.",
+      "source": "Bukhari, Muslim"
+    },
+    "salawat": {
+      "title": "Die Salawat auf den Propheten ﷺ",
+      "arabic": "فَأَكْثِرُوا عَلَيَّ مِنَ الصَّلَاةِ فِيهِ",
+      "text": "Der Prophet ﷺ sagte: „Zu euren besten Tagen gehört der Freitag […] Sprecht daher an diesem Tag viele Segenswünsche über mich.“",
+      "source": "Abu Dawud, Ibn Madscha (als authentisch eingestuft)"
+    },
+    "hour": {
+      "title": "Die Stunde der Erhörung",
+      "text": "Der Prophet ﷺ sagte: „Am Freitag gibt es eine Stunde, in der kein muslimischer Diener, der betet, Allah um etwas bittet, ohne dass Er es ihm gewährt.“ Die Gelehrten sind sich über den Zeitpunkt uneinig: zwischen dem Erscheinen des Imams auf dem Minbar und dem Ende des Gebets oder in der letzten Stunde vor Sonnenuntergang. Sprechen Sie in beiden Zeiträumen viele Bittgebete.",
+      "source": "Bukhari, Muslim"
+    },
+    "fasting": {
+      "title": "Zu beachten: das Fasten",
+      "text": "Der Prophet ﷺ sagte: „Keiner von euch soll am Freitag fasten, es sei denn, er fastet auch den Tag davor oder den Tag danach.“",
+      "source": "Bukhari, Muslim"
+    }
+  },
+  "settings": {
+    "title": "Freitagserinnerung",
+    "toggle": "Freitagsbenachrichtigung",
+    "toggleDesc": "Jeden Freitag um {{time}}",
+    "needNotifications": "Aktivieren Sie die Benachrichtigungen in den Einstellungen, um diese Erinnerung zu erhalten.",
+    "earlier": "Früher",
+    "later": "Später"
+  }
+}

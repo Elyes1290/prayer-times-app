@@ -12,6 +12,8 @@ type QuranOnlineHeaderProps = {
   onSearchChange: (query: string) => void;
   onOpenMenu: () => void;
   onRunWidgetDiagnostic?: () => void;
+  /** Boutons de lecture (mode d'affichage, plein écran, marque-page). */
+  readerActions?: React.ReactNode;
 };
 
 export function QuranOnlineHeader({
@@ -22,6 +24,7 @@ export function QuranOnlineHeader({
   onSearchChange,
   onOpenMenu,
   onRunWidgetDiagnostic,
+  readerActions,
 }: QuranOnlineHeaderProps) {
   const { t } = useTranslation();
 
@@ -50,6 +53,19 @@ export function QuranOnlineHeader({
           </Pressable>
         </View>
       )}
+
+      {readerActions ? (
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "flex-end",
+            paddingHorizontal: 16,
+            paddingBottom: 6,
+          }}
+        >
+          {readerActions}
+        </View>
+      ) : null}
 
       <View style={styles.searchContainer}>
         <TextInput

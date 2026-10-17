@@ -1,10 +1,23 @@
-import React from "react";
-import { View, Text, Pressable } from "react-native";
+import React, { useCallback, useRef, useState } from "react";
+import {
+  View,
+  Text,
+  Pressable,
+  StyleSheet,
+  type LayoutChangeEvent,
+  type NativeSyntheticEvent,
+  type TextLayoutEventData,
+} from "react-native";
 import { Image as ExpoImage } from "expo-image";
+import { useTranslation } from "react-i18next";
 import { MCIcon } from "@/components/icons/AppVectorIcons";
 import FavoriteButton from "@/components/FavoriteButton";
 import { PremiumContent } from "@/utils/premiumContent";
 import { QuranVerseFavorite } from "@/contexts/FavoritesContext";
+import {
+  computeRequiredTextHeight,
+  type MeasuredLine,
+} from "@/utils/quranTextLayout";
 
 export type QuranGifConfig = {
   id: string;
@@ -284,7 +297,84 @@ type QuranVerseListItemProps = {
   showTranslation: boolean;
   showSeparator: boolean;
   styles: QuranListStyles;
+  /** Clé "sourate:verset" ; nécessaire pour le marque-page. */
+  verseKey?: string;
+  isBookmarked?: boolean;
+  /** Callback stable (le composant est mémoïsé) : reçoit la clé du verset. */
+  onToggleBookmark?: (verseKey: string) => void;
 };
+
+/**
+ * Texte arabe d'un verset, protégé contre la coupure de la dernière ligne (Android).
+ *
+ * Symptôme : sur certains versets longs, le dernier mot disparaît (ex. 67:28 « أَلِيمٍ »).
+ * Les données sont complètes ; React Native calcule parfois une hauteur de texte pour N
+ * lignes, puis affiche le texte sur N+1 lignes (largeur réelle légèrement plus étroite
+ * que la largeur mesurée, polices Arabe à diacritiques) : la ligne en trop est rognée.
+ *
+ * Correctif : on compare la hauteur nécessaire (lignes rapportées par `onTextLayout`) à
+ * la hauteur affichée (`onLayout`) et on agrandit si besoin. Quand la dernière ligne est
+ * presque pleine (cas où l'écart d'un pixel fait basculer un mot sur une ligne de plus),
+ * on réserve d'avance une ligne supplémentaire (voir utils/quranTextLayout.ts).
+ * `textBreakStrategy="simple"` évite en plus l'algorithme de césure équilibrée.
+ */
+const QuranArabicText = React.memo(function QuranArabicText({
+  text,
+  style,
+}: {
+  text: string;
+  style: any;
+}) {
+  const [minHeight, setMinHeight] = useState<number | undefined>(undefined);
+  const renderedHeight = useRef(0);
+  const renderedWidth = useRef(0);
+  const measuredLines = useRef<MeasuredLine[]>([]);
+  const lineHeight = StyleSheet.flatten(style)?.lineHeight ?? 0;
+
+  const reconcile = useCallback(() => {
+    if (renderedHeight.current <= 0) return;
+    const needed = computeRequiredTextHeight(
+      measuredLines.current,
+      renderedWidth.current,
+      lineHeight,
+    );
+    if (needed > renderedHeight.current + 1) {
+      setMinHeight((previous) => (previous === undefined || needed > previous ? needed : previous));
+    }
+  }, [lineHeight]);
+
+  const handleLayout = useCallback(
+    (event: LayoutChangeEvent) => {
+      renderedHeight.current = event.nativeEvent.layout.height;
+      renderedWidth.current = event.nativeEvent.layout.width;
+      reconcile();
+    },
+    [reconcile],
+  );
+
+  const handleTextLayout = useCallback(
+    (event: NativeSyntheticEvent<TextLayoutEventData>) => {
+      measuredLines.current = event.nativeEvent.lines;
+      reconcile();
+    },
+    [reconcile],
+  );
+
+  return (
+    <Text
+      style={minHeight ? [style, { minHeight }] : style}
+      textBreakStrategy="simple"
+      android_hyphenationFrequency="none"
+      onLayout={handleLayout}
+      onTextLayout={handleTextLayout}
+    >
+      {text}
+    </Text>
+  );
+});
+
+/** Cercle du numéro (30) + sa marge gauche (8). */
+const VERSE_ACTIONS_WIDTH = 38;
 
 export const QuranVerseListItem = React.memo(function QuranVerseListItem({
   arabicText,
@@ -295,12 +385,21 @@ export const QuranVerseListItem = React.memo(function QuranVerseListItem({
   showTranslation,
   showSeparator,
   styles,
+  verseKey,
+  isBookmarked = false,
+  onToggleBookmark,
 }: QuranVerseListItemProps) {
+  const { t } = useTranslation();
+  const handleToggleBookmark = useCallback(() => {
+    if (verseKey && onToggleBookmark) onToggleBookmark(verseKey);
+  }, [verseKey, onToggleBookmark]);
+
   return (
     <View style={styles.ayahContainer}>
       <View style={styles.arabicRow}>
-        <Text style={styles.arabic}>{arabicText}</Text>
-        <View style={styles.verseActions}>
+        <QuranArabicText text={arabicText} style={styles.arabic} />
+        {/* Largeur fixe : la zone du texte arabe ne dépend plus du contenu des icônes. */}
+        <View style={[styles.verseActions, { width: VERSE_ACTIONS_WIDTH }]}>
           <View style={styles.verseCircle}>
             <Text style={styles.verseNumber}>{verseNumber}</Text>
           </View>
@@ -311,6 +410,22 @@ export const QuranVerseListItem = React.memo(function QuranVerseListItem({
             iconColorActive="#FFD700"
             style={styles.favoriteButtonCompact}
           />
+          {verseKey && onToggleBookmark ? (
+            <Pressable
+              onPress={handleToggleBookmark}
+              hitSlop={8}
+              accessibilityRole="button"
+              accessibilityLabel={t("quran_bookmark", "Marque-page")}
+              accessibilityState={{ selected: isBookmarked }}
+              style={{ marginTop: 6, alignItems: "center" }}
+            >
+              <MCIcon
+                name={isBookmarked ? "bookmark" : "bookmark-outline"}
+                size={22}
+                color={isBookmarked ? "#FFD700" : "#ba9c34"}
+              />
+            </Pressable>
+          ) : null}
         </View>
       </View>
 

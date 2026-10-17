@@ -1531,5 +1531,16 @@
   "background_image_type": "Type achtergrondafbeelding",
   "background_prophet": "🕌 Moskee van de Profeet",
   "background_makka": "🕋 Mekka",
-  "background_alquds": "🌙 Al-Quds"
+  "background_alquds": "🌙 Al-Quds",
+  "quran_previous_surah": "Vorige soera",
+  "quran_next_surah": "Volgende soera",
+  "quran_resume_bookmark": "Mijn lezing hervatten",
+  "quran_show_translation": "Fonetiek en vertaling tonen",
+  "quran_show_arabic_only": "Alleen Arabisch tonen",
+  "quran_fullscreen": "Volledig scherm",
+  "quran_exit_fullscreen": "Volledig scherm verlaten",
+  "quran_bookmark_saved": "Bladwijzer opgeslagen",
+  "quran_bookmark_removed": "Bladwijzer verwijderd",
+  "quran_bookmark": "Bladwijzer",
+  "choose_gif": "Kies een visueel effect"
 }

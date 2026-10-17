@@ -328,6 +328,16 @@ public class AdhanModule extends ReactContextBaseJavaModule {
         }
     }
 
+    /**
+     * « Mon Ramadan » : enregistre le planning complet de la saison ([{p, t, title, body}]).
+     * La maintenance quotidienne (00:05) et le boot le ré-arment sans ouvrir l'app.
+     * "[]" vide le planning (hors saison, non premium…).
+     */
+    @ReactMethod
+    public void saveRamadanSchedule(String json) {
+        RamadanScheduleStore.save(getReactApplicationContext(), json);
+    }
+
     @ReactMethod
     public void debugAdhanStatus(Promise promise) {
         try {

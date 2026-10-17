@@ -136,9 +136,23 @@ describe("API Client", () => {
     });
 
     test("should handle network errors", async () => {
-      (global.fetch as jest.Mock).mockRejectedValue(new Error("Network error"));
+      // Les GET sont rejoués (2 retries avec backoff) avant d'abandonner :
+      // timers factices pour ne pas attendre les 2s + 4s réelles.
+      jest.useFakeTimers();
+      try {
+        (global.fetch as jest.Mock).mockRejectedValue(
+          new Error("Network error")
+        );
 
-      await expect(ApiClient.getUser()).rejects.toThrow("Network error");
+        const assertion = expect(ApiClient.getUser()).rejects.toThrow(
+          "Network error"
+        );
+        await jest.advanceTimersByTimeAsync(10000);
+        await assertion;
+        expect(global.fetch).toHaveBeenCalledTimes(3);
+      } finally {
+        jest.useRealTimers();
+      }
     });
 
     test("should handle timeout", async () => {

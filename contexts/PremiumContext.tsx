@@ -568,10 +568,14 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
   // (supprimé de la BDD) ou que la session est définitivement invalide. On efface
   // toute la session locale (user_data, tokens, explicit_connection…) pour que l'UI
   // — qui se base sur ces clés — bascule en « déconnecté » sans action manuelle.
-  const handleAccountInvalidated = React.useCallback(async () => {
+  // `reason` distingue une simple session expirée (401/403 : l'utilisateur doit
+  // juste se reconnecter) d'un compte réellement supprimé (404 / données absentes),
+  // afin de ne pas afficher « Votre compte n'existe plus » à tort.
+  const handleAccountInvalidated = React.useCallback(
+    async (reason: "session_expired" | "account_deleted" = "account_deleted") => {
     try {
       console.log(
-        "🔒 [SECURITY] Compte invalide/supprimé — déconnexion automatique complète",
+        `🔒 [SECURITY] Session invalide (${reason}) — déconnexion automatique complète`,
       );
       await setAccountLogoutLock();
       clearAndroidAuthTokenSyncCache();
@@ -588,15 +592,23 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
       showToast?.({
         type: "error",
         title: t("premium.session_expired", "Session expirée"),
-        message: t(
-          "premium.account_invalid",
-          "Votre compte n'existe plus. Vous avez été déconnecté.",
-        ),
+        message:
+          reason === "session_expired"
+            ? t(
+                "toast_session_expired",
+                "Votre session a expiré ou est invalide. Veuillez vous reconnecter.",
+              )
+            : t(
+                "premium.account_invalid",
+                "Votre compte n'existe plus. Vous avez été déconnecté.",
+              ),
       });
     } catch (error) {
       console.log("⚠️ [SECURITY] handleAccountInvalidated:", error);
     }
-  }, [deactivatePremium, showToast, t]);
+  },
+    [deactivatePremium, showToast, t],
+  );
 
   // Chargement initial une seule fois (évite boucle si checkLocalPremiumExpiration change)
   useEffect(() => {
@@ -703,8 +715,16 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
 
         const result = await apiClient.verifyAuth();
         if (!result?.success) {
-          const refreshed = await apiClient.refreshSession();
-          if (refreshed) {
+          const outcome = await apiClient.refreshSessionOutcome();
+          if (outcome === "unavailable") {
+            // Réseau/serveur indisponible : impossible de conclure, on garde la
+            // session et on réessaiera à la prochaine vérification.
+            console.log(
+              "⚠️ Refresh de session indisponible - session conservée, nouvel essai plus tard",
+            );
+            return;
+          }
+          if (outcome === "ok") {
             const retry = await apiClient.verifyAuth();
             if (retry?.success) {
               console.log("✅ Session rafraîchie après expiration token");
@@ -713,7 +733,7 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
           }
 
           // Session définitivement invalide → déconnexion complète
-          await handleAccountInvalidated();
+          await handleAccountInvalidated("session_expired");
           return;
         }
 
@@ -723,7 +743,7 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
         try {
           const userResult = await apiClient.getUser();
           if (!userResult?.success || !userResult?.data) {
-            await handleAccountInvalidated();
+            await handleAccountInvalidated("account_deleted");
             return;
           }
         } catch (userErr: any) {
@@ -733,7 +753,9 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
             userMsg.includes("HTTP 401") ||
             userMsg.includes("HTTP 403")
           ) {
-            await handleAccountInvalidated();
+            await handleAccountInvalidated(
+              userMsg.includes("HTTP 404") ? "account_deleted" : "session_expired",
+            );
             return;
           }
           // Autre erreur (réseau / 5xx) → tolérance hors-ligne, ne rien faire
@@ -746,7 +768,9 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
           errMsg.includes("HTTP 403")
         ) {
           // verifyAuth a levé une 401/403/404 (token rejeté / compte supprimé)
-          await handleAccountInvalidated();
+          await handleAccountInvalidated(
+            errMsg.includes("HTTP 404") ? "account_deleted" : "session_expired",
+          );
           return;
         }
         // 🚀 CORRECTION : Logger l'erreur pour debug mais ne pas spammer
@@ -916,6 +940,8 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
           let serverUser: Record<string, unknown> | null = null;
           let reachable = false;
           let accountInvalid = false;
+          let invalidReason: "session_expired" | "account_deleted" =
+            "account_deleted";
 
           try {
             const result = await apiClient.getUser();
@@ -959,6 +985,10 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
               // Token rejeté / compte supprimé → session définitivement invalide
               reachable = true;
               accountInvalid = true;
+              // 401/403 = simple session expirée ; 404 = compte réellement supprimé
+              invalidReason = message.includes("HTTP 404")
+                ? "account_deleted"
+                : "session_expired";
             } else {
               // Réseau / timeout / 5xx → on reste tolérant (mode hors-ligne)
               reachable = false;
@@ -967,7 +997,7 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
 
           if (reachable) {
             if (accountInvalid) {
-              await handleAccountInvalidated();
+              await handleAccountInvalidated(invalidReason);
               return;
             }
 
@@ -981,7 +1011,12 @@ export const PremiumProvider: React.FC<PremiumProviderProps> = ({
                 );
                 setUser(premiumUser);
                 console.log("✅ [SYNC] Premium confirmé par le serveur");
-                syncAndroidAuthTokenIfNeeded(token);
+                // 🔗 Relire le token : `token` (lu avant l'appel serveur) est périmé si
+                // un refresh a eu lieu pendant getUser() — on enverrait au service
+                // audio natif un token expiré.
+                syncAndroidAuthTokenIfNeeded(
+                  await AsyncStorage.getItem("auth_token"),
+                );
                 return;
               }
 

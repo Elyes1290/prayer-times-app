@@ -1,0 +1,74 @@
+{
+  "title": "Venerdì",
+  "back": "Indietro",
+  "notif": {
+    "title": "🕌 Jumu'a Mubarak",
+    "body": "Oggi è venerdì: ghusl, profumo, sura Al-Kahf, salawat sul Profeta ﷺ e invocazioni. Toccate per il promemoria completo."
+  },
+  "card": {
+    "title": "Jumu'a Mubarak",
+    "subtitle": "Il promemoria del venerdì: Al-Kahf, sunnah e invocazioni"
+  },
+  "hero": {
+    "greeting": "Jumu'a Mubarak",
+    "subtitle": "Il giorno migliore della settimana",
+    "hadithArabic": "خَيْرُ يَوْمٍ طَلَعَتْ عَلَيْهِ الشَّمْسُ يَوْمُ الْجُمُعَةِ",
+    "hadithText": "«Il giorno migliore su cui sia sorto il sole è il venerdì.»",
+    "hadithSource": "Riportato da Muslim"
+  },
+  "kahf": {
+    "title": "Sura Al-Kahf",
+    "intro": "Leggete o ascoltate la sura Al-Kahf (la 18ª) il venerdì.",
+    "arabic": "مَنْ قَرَأَ سُورَةَ الْكَهْفِ يَوْمَ الْجُمُعَةِ أَضَاءَ لَهُ مِنَ النُّورِ مَا بَيْنَ الْجُمُعَتَيْنِ",
+    "translation": "«Chi recita la sura Al-Kahf il venerdì, sarà illuminato da una luce tra i due venerdì.»",
+    "source": "Riportato da al-Hakim e al-Bayhaqi (considerato autentico da al-Albani)",
+    "button": "Leggi la sura Al-Kahf"
+  },
+  "tips": {
+    "title": "Le sunnah del venerdì",
+    "ghusl": {
+      "title": "Il ghusl",
+      "text": "Il Profeta ﷺ disse: «Il ghusl del venerdì è un dovere per ogni individuo adulto.» La maggioranza dei sapienti lo considera una sunnah confermata. Compitelo prima di recarvi alla preghiera.",
+      "source": "Bukhari, Muslim"
+    },
+    "perfume": {
+      "title": "Profumo, siwak e abiti curati",
+      "text": "Il Profeta ﷺ disse: chi compie il ghusl il venerdì, si purifica al meglio delle proprie possibilità, si profuma, poi si reca alla moschea senza separare due persone, prega ciò che gli è prescritto e ascolta l'imam in silenzio, gli sarà perdonato ciò che separa quel venerdì dal successivo.",
+      "source": "Bukhari"
+    },
+    "early": {
+      "title": "Recarsi presto alla moschea",
+      "text": "Il Profeta ﷺ disse: chi compie il ghusl il venerdì e poi si reca alla moschea nella prima ora è come chi ha offerto in sacrificio un cammello, poi una mucca, poi un montone, poi una gallina, poi un uovo. Quando l'imam sale sul pulpito, gli angeli si radunano per ascoltare l'esortazione.",
+      "source": "Bukhari, Muslim"
+    },
+    "silence": {
+      "title": "Ascoltare la khutba in silenzio",
+      "text": "Il Profeta ﷺ disse: «Se dici al tuo vicino “Taci!” mentre l'imam sta predicando, hai pronunciato una parola futile.» Spegnete il telefono prima della khutba.",
+      "source": "Bukhari, Muslim"
+    },
+    "salawat": {
+      "title": "I salawat sul Profeta ﷺ",
+      "arabic": "فَأَكْثِرُوا عَلَيَّ مِنَ الصَّلَاةِ فِيهِ",
+      "text": "Il Profeta ﷺ disse: «Tra i vostri giorni migliori c'è il venerdì […] moltiplicate dunque le invocazioni di pace su di me in quel giorno.»",
+      "source": "Abu Dawud, Ibn Majah (considerato autentico)"
+    },
+    "hour": {
+      "title": "L'ora in cui le invocazioni sono esaudite",
+      "text": "Il Profeta ﷺ disse: «Nel venerdì c'è un'ora in cui nessun servo musulmano, mentre prega, chiede qualcosa ad Allah senza che Egli gliela conceda.» I sapienti differiscono sul momento: tra l'arrivo dell'imam sul minbar e la fine della preghiera, oppure nell'ultima ora prima del tramonto. Moltiplicate le invocazioni in questi due momenti.",
+      "source": "Bukhari, Muslim"
+    },
+    "fasting": {
+      "title": "Da sapere: il digiuno",
+      "text": "Il Profeta ﷺ disse: «Nessuno di voi digiuni il venerdì, a meno che non digiuni anche il giorno prima o quello dopo.»",
+      "source": "Bukhari, Muslim"
+    }
+  },
+  "settings": {
+    "title": "Promemoria del venerdì",
+    "toggle": "Notifica del venerdì",
+    "toggleDesc": "Ogni venerdì alle {{time}}",
+    "needNotifications": "Attivate le notifiche nelle impostazioni per ricevere questo promemoria.",
+    "earlier": "Prima",
+    "later": "Dopo"
+  }
+}

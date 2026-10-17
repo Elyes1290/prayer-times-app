@@ -18,6 +18,8 @@ import { useTranslation } from "react-i18next";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { usePremium } from "../contexts/PremiumContext";
 import Constants from "expo-constants";
+import { useRamadanSeason } from "../hooks/useRamadanSeason";
+import { useRamadanT } from "../utils/ramadan/i18n";
 
 const APP_DISPLAY_NAME = "MyAdhan";
 
@@ -84,8 +86,19 @@ export default function MoreScreen() {
   const colors = useThemeColors();
   const overlayTextColor = useOverlayTextColor();
   const { user } = usePremium();
+  const ramadanSeason = useRamadanSeason();
+  const ramadanT = useRamadanT();
 
-  const menuSections = [
+  const menuSections: {
+    title: string;
+    items: {
+      icon: string;
+      title: string;
+      subtitle: string;
+      route: string;
+      isPremium?: boolean;
+    }[];
+  }[] = [
     {
       title: t("tools") || "Outils",
       items: [
@@ -107,6 +120,17 @@ export default function MoreScreen() {
           subtitle: t("islamic_dates") || "Dates islamiques",
           route: "/hijri",
         },
+        // 🌙 Mon Ramadan : visible uniquement pendant la saison
+        ...(ramadanSeason.phase !== "off"
+          ? [
+              {
+                icon: "moon-waning-crescent",
+                title: ramadanT("title"),
+                subtitle: ramadanT("banner.ramadanSub"),
+                route: "/ramadan",
+              },
+            ]
+          : []),
       ],
     },
     {

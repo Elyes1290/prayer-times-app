@@ -60,6 +60,8 @@ import { usePrayerTimesWidget } from "../hooks/usePrayerTimesWidget";
 import { scheduleNotificationsFor2Days } from "../utils/sheduleAllNotificationsFor30Days";
 import { debugLog, errorLog } from "../utils/logger";
 import WelcomePersonalizationModal from "../components/WelcomePersonalizationModal";
+import RamadanHomeBanner from "../components/ramadan/RamadanHomeBanner";
+import FridayHomeCard from "../components/friday/FridayHomeCard";
 import { usePremium } from "../contexts/PremiumContext";
 import { useUpdateUserStats } from "../hooks/useUpdateUserStats";
 import { useUniversalStyles } from "../hooks/useUniversalLayout";
@@ -1903,6 +1905,12 @@ export default function HomeScreen() {
               </LinearGradient>
             </Animated.View>
           </View>
+
+          {/* 🌙 Bannière Ramadan (rend null hors saison) */}
+          <RamadanHomeBanner />
+
+          {/* 🕌 Rappel du vendredi (rend null les autres jours) */}
+          <FridayHomeCard />
 
           {/* 🎯 Section Actions Rapides - Style iOS moderne */}
           <View style={styles.quickActionsSection}>

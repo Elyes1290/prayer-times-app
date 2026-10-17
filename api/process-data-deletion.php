@@ -205,6 +205,15 @@ function deleteUserData($userId) {
         // Supprimer les backups
         $stmt = $pdo->prepare("DELETE FROM user_backups WHERE user_id = ?");
         $stmt->execute([$userId]);
+
+        // Supprimer la progression Ramadan (la table peut ne pas exister encore :
+        // ne jamais bloquer la suppression du compte pour autant)
+        try {
+            $stmt = $pdo->prepare("DELETE FROM ramadan_progress WHERE user_id = ?");
+            $stmt->execute([$userId]);
+        } catch (PDOException $e) {
+            error_log("ℹ️ Suppression ramadan_progress ignorée: " . $e->getMessage());
+        }
         
         // Supprimer les abonnements premium
         $stmt = $pdo->prepare("DELETE FROM premium_users WHERE user_id = ?");

@@ -1531,5 +1531,16 @@
   "background_image_type": "پس منظر کی تصویر کی قسم",
   "background_prophet": "🕌 مسجد نبوی",
   "background_makka": "🕋 مکہ",
-  "background_alquds": "🌙 القدس"
+  "background_alquds": "🌙 القدس",
+  "quran_previous_surah": "پچھلی سورہ",
+  "quran_next_surah": "اگلی سورہ",
+  "quran_resume_bookmark": "اپنی تلاوت جاری رکھیں",
+  "quran_show_translation": "تلفظ اور ترجمہ دکھائیں",
+  "quran_show_arabic_only": "صرف عربی دکھائیں",
+  "quran_fullscreen": "مکمل اسکرین",
+  "quran_exit_fullscreen": "مکمل اسکرین سے باہر نکلیں",
+  "quran_bookmark_saved": "بک مارک محفوظ ہو گیا",
+  "quran_bookmark_removed": "بک مارک ہٹا دیا گیا",
+  "quran_bookmark": "بک مارک",
+  "choose_gif": "بصری اثر منتخب کریں"
 }

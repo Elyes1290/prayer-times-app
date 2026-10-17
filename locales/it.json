@@ -1524,5 +1524,16 @@
   "background_image_type": "Tipo di immagine di sfondo",
   "background_prophet": "🕌 Moschea del Profeta",
   "background_makka": "🕋 Mecca",
-  "background_alquds": "🌙 Al-Quds"
+  "background_alquds": "🌙 Al-Quds",
+  "quran_previous_surah": "Sura precedente",
+  "quran_next_surah": "Sura successiva",
+  "quran_resume_bookmark": "Riprendi la mia lettura",
+  "quran_show_translation": "Mostra fonetica e traduzione",
+  "quran_show_arabic_only": "Mostra solo l'arabo",
+  "quran_fullscreen": "Schermo intero",
+  "quran_exit_fullscreen": "Esci da schermo intero",
+  "quran_bookmark_saved": "Segnalibro salvato",
+  "quran_bookmark_removed": "Segnalibro rimosso",
+  "quran_bookmark": "Segnalibro",
+  "choose_gif": "Scegli un effetto visivo"
 }

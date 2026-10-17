@@ -1531,5 +1531,16 @@
   "background_image_type": "পটভূমি চিত্রের ধরন",
   "background_prophet": "🕌 নবীর মসজিদ",
   "background_makka": "🕋 মক্কা",
-  "background_alquds": "🌙 আল-কুদস"
+  "background_alquds": "🌙 আল-কুদস",
+  "quran_previous_surah": "আগের সূরা",
+  "quran_next_surah": "পরের সূরা",
+  "quran_resume_bookmark": "আমার পড়া চালিয়ে যান",
+  "quran_show_translation": "উচ্চারণ ও অনুবাদ দেখান",
+  "quran_show_arabic_only": "শুধু আরবি দেখান",
+  "quran_fullscreen": "ফুল স্ক্রিন",
+  "quran_exit_fullscreen": "ফুল স্ক্রিন থেকে বের হন",
+  "quran_bookmark_saved": "বুকমার্ক সংরক্ষিত হয়েছে",
+  "quran_bookmark_removed": "বুকমার্ক সরানো হয়েছে",
+  "quran_bookmark": "বুকমার্ক",
+  "choose_gif": "একটি ভিজ্যুয়াল ইফেক্ট বেছে নিন"
 }

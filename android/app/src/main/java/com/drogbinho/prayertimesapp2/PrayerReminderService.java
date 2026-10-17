@@ -123,6 +123,14 @@ public class PrayerReminderService extends Service {
 
         // Intent pour ouvrir l'app
         Intent launchIntent = getPackageManager().getLaunchIntentForPackage(getPackageName());
+        // 🕌 Rappel du vendredi : le tap ouvre directement l'écran « Vendredi » (lien profond
+        // géré par expo-router). Tous les autres rappels gardent le comportement habituel.
+        if (prayerLabel != null && prayerLabel.startsWith("Friday")) {
+            Intent fridayIntent = new Intent(Intent.ACTION_VIEW, android.net.Uri.parse("prayertimesapp://friday"));
+            fridayIntent.setPackage(getPackageName());
+            fridayIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            launchIntent = fridayIntent;
+        }
         PendingIntent contentIntent = PendingIntent.getActivity(
                 this, 0, launchIntent,
                 PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);

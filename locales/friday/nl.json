@@ -1,0 +1,74 @@
+{
+  "title": "Vrijdag",
+  "back": "Terug",
+  "notif": {
+    "title": "🕌 Jumu'a Mubarak",
+    "body": "Vandaag is het vrijdag: ghusl, parfum, soera Al-Kahf, salawat over de Profeet ﷺ en smeekbeden. Tik voor de volledige herinnering."
+  },
+  "card": {
+    "title": "Jumu'a Mubarak",
+    "subtitle": "De vrijdagherinnering: Al-Kahf, soennah en smeekbeden"
+  },
+  "hero": {
+    "greeting": "Jumu'a Mubarak",
+    "subtitle": "De beste dag van de week",
+    "hadithArabic": "خَيْرُ يَوْمٍ طَلَعَتْ عَلَيْهِ الشَّمْسُ يَوْمُ الْجُمُعَةِ",
+    "hadithText": "„De beste dag waarop de zon is opgegaan, is de vrijdag.”",
+    "hadithSource": "Overgeleverd door Moslim"
+  },
+  "kahf": {
+    "title": "Soera Al-Kahf",
+    "intro": "Lees of luister op vrijdag naar soera Al-Kahf (de 18e).",
+    "arabic": "مَنْ قَرَأَ سُورَةَ الْكَهْفِ يَوْمَ الْجُمُعَةِ أَضَاءَ لَهُ مِنَ النُّورِ مَا بَيْنَ الْجُمُعَتَيْنِ",
+    "translation": "„Wie op vrijdag soera Al-Kahf reciteert, wordt door een licht verlicht tussen de twee vrijdagen.”",
+    "source": "Overgeleverd door al-Hakim en al-Bayhaqi (door al-Albani als authentiek beoordeeld)",
+    "button": "Soera Al-Kahf lezen"
+  },
+  "tips": {
+    "title": "De soennah's van de vrijdag",
+    "ghusl": {
+      "title": "De ghusl",
+      "text": "De Profeet ﷺ zei: „De ghusl op vrijdag is een plicht voor ieder volwassene.” De meerderheid van de geleerden beschouwt deze als een bevestigde soennah. Verricht hem voordat u naar het gebed gaat.",
+      "source": "Boechari, Moslim"
+    },
+    "perfume": {
+      "title": "Parfum, siwak en verzorgde kleding",
+      "text": "De Profeet ﷺ zei: wie op vrijdag de ghusl verricht, zich zo goed mogelijk reinigt, zich parfumeert, dan naar de moskee gaat zonder twee mensen van elkaar te scheiden, bidt wat hem is voorgeschreven en in stilte naar de imam luistert, hem wordt vergeven wat er ligt tussen die vrijdag en de volgende.",
+      "source": "Boechari"
+    },
+    "early": {
+      "title": "Vroeg naar de moskee gaan",
+      "text": "De Profeet ﷺ zei: wie op vrijdag de ghusl verricht en in het eerste uur naar de moskee gaat, is als iemand die een kameel als offer heeft gebracht, daarna een koe, daarna een schaap, daarna een kip, daarna een ei. Wanneer de imam verschijnt, komen de engelen luisteren naar de herinnering.",
+      "source": "Boechari, Moslim"
+    },
+    "silence": {
+      "title": "In stilte naar de khutba luisteren",
+      "text": "De Profeet ﷺ zei: „Als je tegen je buurman ‚Zwijg!’ zegt terwijl de imam preekt, heb je iets nutteloos gezegd.” Zet uw telefoon uit voor de khutba.",
+      "source": "Boechari, Moslim"
+    },
+    "salawat": {
+      "title": "De salawat over de Profeet ﷺ",
+      "arabic": "فَأَكْثِرُوا عَلَيَّ مِنَ الصَّلَاةِ فِيهِ",
+      "text": "De Profeet ﷺ zei: „Een van uw beste dagen is de vrijdag […] spreek dus op die dag veel zegenwensen over mij uit.”",
+      "source": "Aboe Dawoed, Ibn Madjah (als authentiek beoordeeld)"
+    },
+    "hour": {
+      "title": "Het uur waarin smeekbeden verhoord worden",
+      "text": "De Profeet ﷺ zei: „Er is op vrijdag een uur waarin geen enkele moslimdienaar, biddend, iets aan Allah vraagt of Hij schenkt het hem.” De geleerden verschillen over het moment: tussen het komen van de imam op de minbar en het einde van het gebed, of in het laatste uur vóór zonsondergang. Doe op beide momenten veel smeekbeden.",
+      "source": "Boechari, Moslim"
+    },
+    "fasting": {
+      "title": "Goed om te weten: het vasten",
+      "text": "De Profeet ﷺ zei: „Laat niemand van u op vrijdag vasten, tenzij hij ook de dag ervoor of de dag erna vast.”",
+      "source": "Boechari, Moslim"
+    }
+  },
+  "settings": {
+    "title": "Vrijdagherinnering",
+    "toggle": "Vrijdagmelding",
+    "toggleDesc": "Elke vrijdag om {{time}}",
+    "needNotifications": "Schakel meldingen in via de instellingen om deze herinnering te ontvangen.",
+    "earlier": "Eerder",
+    "later": "Later"
+  }
+}

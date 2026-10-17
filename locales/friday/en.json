@@ -1,0 +1,74 @@
+{
+  "title": "Friday",
+  "back": "Back",
+  "notif": {
+    "title": "🕌 Jumu'ah Mubarak",
+    "body": "It's Friday: ghusl, perfume, Surah Al-Kahf, salawat upon the Prophet ﷺ and du'a. Tap for the full reminder."
+  },
+  "card": {
+    "title": "Jumu'ah Mubarak",
+    "subtitle": "Your Friday reminder: Al-Kahf, sunnahs and supplications"
+  },
+  "hero": {
+    "greeting": "Jumu'ah Mubarak",
+    "subtitle": "The best day of the week",
+    "hadithArabic": "خَيْرُ يَوْمٍ طَلَعَتْ عَلَيْهِ الشَّمْسُ يَوْمُ الْجُمُعَةِ",
+    "hadithText": "“The best day on which the sun has risen is Friday.”",
+    "hadithSource": "Narrated by Muslim"
+  },
+  "kahf": {
+    "title": "Surah Al-Kahf",
+    "intro": "Read or listen to Surah Al-Kahf (the 18th) on Fridays.",
+    "arabic": "مَنْ قَرَأَ سُورَةَ الْكَهْفِ يَوْمَ الْجُمُعَةِ أَضَاءَ لَهُ مِنَ النُّورِ مَا بَيْنَ الْجُمُعَتَيْنِ",
+    "translation": "“Whoever reads Surah Al-Kahf on Friday, a light will shine for him between the two Fridays.”",
+    "source": "Narrated by al-Hakim and al-Bayhaqi (graded authentic by al-Albani)",
+    "button": "Read Surah Al-Kahf"
+  },
+  "tips": {
+    "title": "Sunnahs of Friday",
+    "ghusl": {
+      "title": "Ghusl",
+      "text": "The Prophet ﷺ said: “The Friday ghusl is a duty upon every adult.” Most scholars consider it a confirmed sunnah. Do it before going to the prayer.",
+      "source": "Bukhari, Muslim"
+    },
+    "perfume": {
+      "title": "Perfume, siwak and good clothes",
+      "text": "The Prophet ﷺ said: whoever takes a bath on Friday, purifies himself as much as he can, uses perfume, then goes to the mosque without separating two people, prays what is prescribed for him and listens silently to the imam, will be forgiven what lies between that Friday and the next.",
+      "source": "Bukhari"
+    },
+    "early": {
+      "title": "Go early to the mosque",
+      "text": "The Prophet ﷺ said: whoever takes a ghusl on Friday and goes to the mosque in the first hour is like one who offered a camel, then a cow, then a ram, then a chicken, then an egg. When the imam appears, the angels come to listen to the reminder.",
+      "source": "Bukhari, Muslim"
+    },
+    "silence": {
+      "title": "Listen to the khutbah in silence",
+      "text": "The Prophet ﷺ said: “If you say to your neighbour ‘Be quiet!’ while the imam is delivering the sermon, you have spoken idly.” Switch off your phone before the khutbah.",
+      "source": "Bukhari, Muslim"
+    },
+    "salawat": {
+      "title": "Salawat upon the Prophet ﷺ",
+      "arabic": "فَأَكْثِرُوا عَلَيَّ مِنَ الصَّلَاةِ فِيهِ",
+      "text": "The Prophet ﷺ said: “Among your best days is Friday […] so send blessings upon me abundantly on that day.”",
+      "source": "Abu Dawud, Ibn Majah (graded authentic)"
+    },
+    "hour": {
+      "title": "The hour when du'a is answered",
+      "text": "The Prophet ﷺ said: “There is an hour on Friday in which no Muslim servant, while praying, asks Allah for something except that He grants it.” Scholars differ on its timing: between the imam's arrival on the minbar and the end of the prayer, or in the last hour before sunset. Make plenty of du'a at both times.",
+      "source": "Bukhari, Muslim"
+    },
+    "fasting": {
+      "title": "Good to know: fasting",
+      "text": "The Prophet ﷺ said: “None of you should fast on Friday, unless he also fasts the day before or the day after.”",
+      "source": "Bukhari, Muslim"
+    }
+  },
+  "settings": {
+    "title": "Friday reminder",
+    "toggle": "Friday notification",
+    "toggleDesc": "Every Friday at {{time}}",
+    "needNotifications": "Turn on notifications in settings to receive this reminder.",
+    "earlier": "Earlier",
+    "later": "Later"
+  }
+}

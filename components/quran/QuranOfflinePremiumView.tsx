@@ -1,5 +1,11 @@
 import React from "react";
-import { FlatList, Pressable, Text, View } from "react-native";
+import {
+  FlatList,
+  type FlatListProps,
+  Pressable,
+  Text,
+  View,
+} from "react-native";
 import CachedImageBackground from "../CachedImageBackground";
 import { useTranslation } from "react-i18next";
 import { EdgeInsets, SafeAreaView } from "react-native-safe-area-context";
@@ -10,6 +16,7 @@ import {
 } from "../OfflineNavigationTabs";
 import { PremiumContent } from "../../utils/premiumContent";
 import { quranScreenStyles as styles } from "../../styles/QuranScreen.styles";
+import { MAINTAIN_VISIBLE_POSITION } from "../../utils/quranListScroll";
 import { QuranDownloadedAudioList } from "./QuranDownloadedAudioList";
 import {
   QuranSouratePickerModal,
@@ -39,6 +46,12 @@ type QuranOfflinePremiumViewProps = {
     item: SourateModalRow;
   }) => React.ReactElement | null;
   windowHeight: number;
+  /** Boutons de lecture (mode d'affichage, plein écran, marque-page). */
+  readerActions?: React.ReactNode;
+  scrollProps?: Pick<
+    FlatListProps<unknown>,
+    "onScrollToIndexFailed" | "onViewableItemsChanged" | "viewabilityConfig"
+  >;
 };
 
 export function QuranOfflinePremiumView({
@@ -58,6 +71,8 @@ export function QuranOfflinePremiumView({
   sourateModalData,
   renderSourateModalItem,
   windowHeight,
+  readerActions,
+  scrollProps,
 }: QuranOfflinePremiumViewProps) {
   const { t } = useTranslation();
 
@@ -86,6 +101,18 @@ export function QuranOfflinePremiumView({
                   <MCIcon name="chevron-down" size={20} color="#4ECDC4" />
                 </Pressable>
               </View>
+              {readerActions ? (
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "flex-end",
+                    paddingHorizontal: 16,
+                    paddingBottom: 6,
+                  }}
+                >
+                  {readerActions}
+                </View>
+              ) : null}
               <FlatList
                 ref={versesFlatListRef}
                 key={`quran-verses-${selectedSourate}`}
@@ -97,8 +124,10 @@ export function QuranOfflinePremiumView({
                 initialNumToRender={5}
                 maxToRenderPerBatch={5}
                 windowSize={10}
-                removeClippedSubviews={true}
+                removeClippedSubviews={false}
+                maintainVisibleContentPosition={MAINTAIN_VISIBLE_POSITION}
                 updateCellsBatchingPeriod={100}
+                {...scrollProps}
                 contentContainerStyle={[
                   styles.versesContainer,
                   { paddingBottom: 100 },

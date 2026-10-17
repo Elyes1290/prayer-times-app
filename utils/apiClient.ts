@@ -3,6 +3,7 @@ import { getCurrentUserId } from "./userAuth";
 import { AppConfig } from "./config";
 import i18n from "../locales/i18n";
 import { showGlobalToast } from "./globalToastBridge";
+import { syncAndroidAuthTokenIfNeeded } from "./syncAndroidAuthToken";
 
 // Helpers sûrs pour l'environnement de test (où le mock peut être partiel)
 const safeGetItem = async (key: string): Promise<string | null> => {
@@ -24,6 +25,23 @@ const safeSetItem = async (key: string, value: string): Promise<void> => {
 // Configuration API
 const API_BASE = AppConfig.API_BASE_URL;
 const API_TIMEOUT = 30000; // 30 secondes
+
+/**
+ * Résultat d'une tentative de refresh de session :
+ * - "ok"          : nouveaux tokens obtenus et stockés.
+ * - "rejected"    : le serveur a explicitement refusé (refresh token expiré, révoqué,
+ *                   compte inactif) ou il n'y a plus de refresh token local →
+ *                   la session est réellement perdue, reconnexion nécessaire.
+ * - "unavailable" : impossible de conclure (réseau coupé, timeout, 5xx, 429…) →
+ *                   la session est peut-être parfaitement valide, NE PAS déconnecter.
+ */
+export type RefreshOutcome = "ok" | "rejected" | "unavailable";
+
+/** Délai minimal entre deux toasts « session expirée » (requêtes parallèles). */
+const SESSION_TOAST_MIN_INTERVAL_MS = 15_000;
+
+/** Préfixe de l'erreur levée quand la session n'a pas pu être vérifiée (≠ 401). */
+export const SESSION_REFRESH_UNAVAILABLE = "SESSION_REFRESH_UNAVAILABLE";
 
 // Types pour les réponses API
 export interface ApiResponse<T = any> {
@@ -51,7 +69,8 @@ class ApiClient {
   // parallèle) consomment/écrasent le même refresh_token en même temps, ce qui
   // faisait échouer certains appels avec "session expirée" alors que
   // l'abonnement premium local était toujours valide.
-  private refreshPromise: Promise<boolean> | null = null;
+  private refreshPromise: Promise<RefreshOutcome> | null = null;
+  private lastSessionExpiredToastAt = 0;
 
   static getInstance(): ApiClient {
     if (!ApiClient.instance) {
@@ -107,12 +126,9 @@ class ApiClient {
         url += `${url.includes("?") ? "&" : "?"}_=${Date.now()}`;
       }
 
-      // Créer un AbortController pour gérer le timeout manuellement
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => {
-        controller.abort();
-      }, API_TIMEOUT);
-
+      // Le timeout (AbortController) est créé à CHAQUE tentative dans
+      // fetchJsonWithTimeout : un signal déjà abandonné ne peut pas être réutilisé
+      // par un retry (il échouerait immédiatement).
       const token = await safeGetItem("auth_token");
       const config: RequestInit = {
         method,
@@ -121,7 +137,6 @@ class ApiClient {
           Accept: "application/json",
           ...(token ? { Authorization: `Bearer ${token}` } : {}),
         },
-        signal: controller.signal,
       };
 
       // Ajouter le body pour POST/PUT
@@ -135,97 +150,24 @@ class ApiClient {
       const maxRetries = 2;
 
       const executeAttempt = async (attempt: number): Promise<any> => {
+        let response: Response;
+        let result: any;
+
         try {
-          const response = await fetch(url, config);
-
-          // Gestion robuste des réponses non-JSON
-          let result: any = {};
-          try {
-            result = await response.json();
-          } catch {
-            // Réponse non-JSON (ex: 204 No Content, plain text)
-            if (response.status === 204) {
-              result = { success: true, message: "No Content" };
-            } else {
-              result = { success: false, message: "Invalid JSON response" };
-            }
-          }
-
-          // Nettoyer le timeout
-          clearTimeout(timeoutId);
-
-          if (!response.ok) {
-            // Si 401, tenter un refresh token puis retry une fois
-            if (response.status === 401) {
-              const refreshed = await this.tryRefreshToken();
-              if (refreshed) {
-                // Rejouer la requête avec le nouveau token
-                const newToken = await safeGetItem("auth_token");
-                const retriedConfig = {
-                  ...config,
-                  headers: {
-                    ...(config.headers as any),
-                    ...(newToken
-                      ? { Authorization: `Bearer ${newToken}` }
-                      : {}),
-                  },
-                } as RequestInit;
-                const retryResponse = await fetch(url, retriedConfig);
-                let retryResult: any = {};
-                try {
-                  retryResult = await retryResponse.json();
-                } catch {
-                  retryResult = {
-                    success: false,
-                    message: "Invalid JSON response on retry",
-                  };
-                }
-                if (!retryResponse.ok) {
-                  // Afficher un toast global pour avertir l'utilisateur
-                  showGlobalToast({
-                    type: "error",
-                    title:
-                      i18n.t("toast_connection_interrupted") ||
-                      "Connexion interrompue",
-                    message:
-                      i18n.t("toast_session_expired") ||
-                      "Votre session a expiré ou est invalide. Veuillez vous reconnecter.",
-                  });
-                  throw new Error(
-                    `HTTP ${retryResponse.status}: ${
-                      retryResult.message || "Erreur API"
-                    }`
-                  );
-                }
-                return retryResult;
-              }
-              // Refresh impossible → notifier également
-              showGlobalToast({
-                type: "error",
-                title:
-                  i18n.t("toast_connection_interrupted") ||
-                  "Connexion interrompue",
-                message:
-                  i18n.t("toast_session_expired") ||
-                  "Votre session a expiré ou est invalide. Veuillez vous reconnecter.",
-              });
-            }
-            throw new Error(
-              `HTTP ${response.status}: ${result.message || "Erreur API"}`
-            );
-          }
-
-          // console.log(`✅ API Success: ${method} ${endpoint}`);
-          return result;
+          ({ response, result } = await this.fetchJsonWithTimeout(url, config));
         } catch (fetchError: any) {
-          // Nettoyer le timeout en cas d'erreur
-          clearTimeout(timeoutId);
-
-          // Retry uniquement pour les erreurs réseau temporaires
+          // Retry uniquement pour les erreurs réseau temporaires.
+          // - AbortError : timeout de la requête (comportement historique).
+          // - Échec réseau ("Network request failed" sur React Native) : uniquement
+          //   pour les GET, sans effet de bord, afin de ne jamais rejouer un POST/
+          //   PUT/DELETE dont le serveur aurait déjà pu traiter la demande.
+          const isAbort = fetchError?.name === "AbortError";
+          const isNetworkFailure = /network/i.test(
+            String(fetchError?.message ?? "")
+          );
           if (
             attempt < maxRetries &&
-            (fetchError.name === "AbortError" ||
-              fetchError.message?.includes("network"))
+            (isAbort || (isNetworkFailure && method === "GET"))
           ) {
             const backoffTime = Math.min(
               1000 * Math.pow(2, attempt + 1),
@@ -238,6 +180,66 @@ class ApiClient {
           // Pas de retry, on throw l'erreur
           throw fetchError;
         }
+
+        if (response.ok) {
+          // console.log(`✅ API Success: ${method} ${endpoint}`);
+          return result;
+        }
+
+        // Si 401, tenter un refresh token puis retry une fois
+        if (response.status === 401) {
+          const outcome = await this.tryRefreshToken();
+
+          if (outcome === "ok") {
+            // Rejouer la requête avec le nouveau token
+            const newToken = await safeGetItem("auth_token");
+            const retriedConfig = {
+              ...config,
+              headers: {
+                ...(config.headers as any),
+                ...(newToken ? { Authorization: `Bearer ${newToken}` } : {}),
+              },
+            } as RequestInit;
+            const retry = await this.fetchJsonWithTimeout(url, retriedConfig);
+            if (retry.response.ok) {
+              return retry.result;
+            }
+            // Le serveur refuse encore le token fraîchement renouvelé : seule une
+            // vraie 401 signifie « session expirée » (une 5xx n'est pas une
+            // expiration et ne doit pas afficher ce toast).
+            if (retry.response.status === 401) {
+              this.notifySessionExpired();
+            }
+            throw new Error(
+              `HTTP ${retry.response.status}: ${
+                retry.result.message || "Erreur API"
+              }`
+            );
+          }
+
+          if (outcome === "rejected") {
+            // Le serveur a explicitement refusé le refresh token (expiré/révoqué)
+            // ou il n'y en a plus en local → session réellement perdue.
+            this.notifySessionExpired();
+            throw new Error(
+              `HTTP 401: ${result.message || "Erreur API"}`
+            );
+          }
+
+          // outcome === "unavailable" : réseau coupé, timeout ou erreur serveur
+          // pendant le refresh. On ne sait PAS si la session est valide : on ne
+          // l'efface pas, on n'affiche aucun toast, et on lève une erreur qui ne
+          // ressemble pas à une 401 (les appelants ne déconnectent donc pas).
+          throw new Error(
+            `${SESSION_REFRESH_UNAVAILABLE}: ${
+              result.message || "Impossible de vérifier la session"
+            }`
+          );
+        }
+
+        throw new Error(
+          `HTTP ${response.status}: ${result.message || "Erreur API"}`
+        );
       };
 
       return await executeAttempt(0);
@@ -247,12 +249,77 @@ class ApiClient {
     }
   }
 
+  /**
+   * Fetch avec timeout PAR TENTATIVE (nouvel AbortController à chaque appel) qui
+   * lit aussi le corps JSON tant que le timer court. Un retry n'hérite donc jamais
+   * d'un signal déjà abandonné ni d'un timeout déjà consommé.
+   */
+  private async fetchJsonWithTimeout(
+    url: string,
+    init: RequestInit
+  ): Promise<{ response: Response; result: any }> {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => {
+      controller.abort();
+    }, API_TIMEOUT);
+
+    try {
+      const response = await fetch(url, { ...init, signal: controller.signal });
+
+      // Gestion robuste des réponses non-JSON
+      let result: any = {};
+      try {
+        result = await response.json();
+      } catch {
+        // Réponse non-JSON (ex: 204 No Content, plain text)
+        if (response.status === 204) {
+          result = { success: true, message: "No Content" };
+        } else {
+          result = { success: false, message: "Invalid JSON response" };
+        }
+      }
+
+      return { response, result };
+    } finally {
+      clearTimeout(timeoutId);
+    }
+  }
+
+  private notifySessionExpired(): void {
+    // Une seule notification à la fois : l'écran Coran lance plusieurs requêtes
+    // premium en parallèle, qui échoueraient toutes en même temps et empileraient
+    // autant de toasts identiques.
+    const now = Date.now();
+    if (now - this.lastSessionExpiredToastAt < SESSION_TOAST_MIN_INTERVAL_MS) {
+      return;
+    }
+    this.lastSessionExpiredToastAt = now;
+
+    showGlobalToast({
+      type: "error",
+      title:
+        i18n.t("toast_connection_interrupted") || "Connexion interrompue",
+      message:
+        i18n.t("toast_session_expired") ||
+        "Votre session a expiré ou est invalide. Veuillez vous reconnecter.",
+    });
+  }
+
   // Tenter de rafraîchir le token d'accès avec le refresh_token stocké
   async refreshSession(): Promise<boolean> {
+    return (await this.tryRefreshToken()) === "ok";
+  }
+
+  /**
+   * Variante détaillée de refreshSession() : permet de distinguer un refus
+   * définitif du serveur ("rejected") d'une indisponibilité passagère
+   * ("unavailable"), afin de ne déconnecter l'utilisateur que dans le 1er cas.
+   */
+  async refreshSessionOutcome(): Promise<RefreshOutcome> {
     return this.tryRefreshToken();
   }
 
-  private async tryRefreshToken(): Promise<boolean> {
+  private async tryRefreshToken(): Promise<RefreshOutcome> {
     // Si un refresh est déjà en cours, on attend son résultat au lieu d'en
     // démarrer un second en parallèle (évite la course avec rotation du
     // refresh_token côté serveur).
@@ -267,40 +334,60 @@ class ApiClient {
     return this.refreshPromise;
   }
 
-  private async performTokenRefresh(): Promise<boolean> {
+  private async performTokenRefresh(): Promise<RefreshOutcome> {
     try {
       const refreshToken = await safeGetItem("refresh_token");
-      if (!refreshToken) return false;
+      // Plus de refresh token local : la session ne peut plus être renouvelée.
+      if (!refreshToken) return "rejected";
 
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), API_TIMEOUT);
+      const { response, result } = await this.fetchJsonWithTimeout(
+        `${API_BASE}/auth.php`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({
+            action: "refresh",
+            refresh_token: refreshToken,
+          }),
+        }
+      );
 
-      const response = await fetch(`${API_BASE}/auth.php`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify({
-          action: "refresh",
-          refresh_token: refreshToken,
-        }),
-        signal: controller.signal,
-      });
-      clearTimeout(timeoutId);
-
-      if (!response.ok) return false;
-      const result = await response.json();
-      if (result?.success && result?.data) {
+      if (response.ok && result?.success && result?.data) {
         const newToken = result.data.token || result.data.auth_token;
         const newRefresh = result.data.refresh_token;
-        if (newToken) await safeSetItem("auth_token", newToken);
+        // Le serveur a déjà fait la rotation (ancien refresh token révoqué) : on
+        // persiste le NOUVEAU refresh token en premier. Si l'app est tuée entre les
+        // deux écritures, on garde au moins le refresh token valide, qui permettra
+        // d'obtenir un nouveau token d'accès au prochain 401.
         if (newRefresh) await safeSetItem("refresh_token", newRefresh);
-        return true;
+        if (newToken) {
+          await safeSetItem("auth_token", newToken);
+          // 🔗 Le service audio natif Android garde sa propre copie du token (pour les
+          // URL de streaming en arrière-plan) : sans cette synchronisation il
+          // continuerait d'utiliser l'ancien token expiré après un refresh.
+          syncAndroidAuthTokenIfNeeded(newToken);
+        }
+        return "ok";
       }
-      return false;
+
+      // Refus explicite du serveur : token invalide/expiré/révoqué (401),
+      // compte inactif (403) ou requête sans refresh token (400).
+      if (
+        response.status === 400 ||
+        response.status === 401 ||
+        response.status === 403
+      ) {
+        return "rejected";
+      }
+
+      // 5xx, 429, réponse inattendue… : on ne peut pas conclure.
+      return "unavailable";
     } catch {
-      return false;
+      // Réseau coupé, timeout (AbortError), etc.
+      return "unavailable";
     }
   }
 
@@ -329,8 +416,8 @@ class ApiClient {
       return response;
     }
 
-    const refreshed = await this.tryRefreshToken();
-    if (!refreshed) {
+    const outcome = await this.tryRefreshToken();
+    if (outcome !== "ok") {
       return response;
     }
 
@@ -688,6 +775,24 @@ class ApiClient {
     });
   }
 
+  // === API RAMADAN (premium) : progression synchronisée, fusion côté serveur ===
+
+  async getRamadanProgress(hijriYear: number): Promise<ApiResponse> {
+    return this.makeRequest("/ramadan.php", "GET", null, {
+      hijri_year: String(hijriYear),
+    });
+  }
+
+  async saveRamadanProgress(
+    hijriYear: number,
+    data: unknown
+  ): Promise<ApiResponse> {
+    return this.makeRequest("/ramadan.php", "POST", {
+      hijri_year: hijriYear,
+      data,
+    });
+  }
+
   // 🚀 NOUVEAU : Vérifier l'auth (token valide ?) côté serveur
   async verifyAuth(): Promise<ApiResponse> {
     return this.makeRequest("/auth.php", "GET", null, { action: "verify" });
@@ -837,15 +942,21 @@ export async function verifyAuth(): Promise<boolean> {
       return true; // Considérer le token comme valide en cas de rate limit
     }
 
-    // 🚫 DÉSACTIVATION TEMPORAIRE : Ignorer toutes les erreurs de réseau
+    // Toute erreur qui ne PROUVE PAS que la session est invalide doit laisser la
+    // session intacte : réseau coupé (React Native lève "Network request failed",
+    // pas "Network Error"), timeout (AbortError), erreur serveur 5xx, ou refresh
+    // impossible à vérifier. Seules les vraies réponses 401/403/404 invalident.
+    const errMessage = String(e?.message ?? "");
     if (
-      e?.message?.includes("Network Error") ||
-      e?.message?.includes("timeout")
+      e?.name === "AbortError" ||
+      /network|timeout|timed out/i.test(errMessage) ||
+      /^HTTP 5\d\d/.test(errMessage) ||
+      errMessage.startsWith(SESSION_REFRESH_UNAVAILABLE)
     ) {
       console.log(
-        "⚠️ Erreur réseau détectée - token considéré comme valide (mode dégradé)"
+        "⚠️ Vérification impossible (réseau/serveur) - token considéré comme valide (mode dégradé)"
       );
-      return true; // Considérer le token comme valide en cas d'erreur réseau
+      return true; // Ne pas déconnecter sur une indisponibilité passagère
     }
 
     console.log("🔐 Erreur vérification auth:", e?.message);

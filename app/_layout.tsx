@@ -238,6 +238,12 @@ function TabLayoutContent() {
   const isAdhanPlayingRef = React.useRef(false);
   const lastHandledNotificationIdRef = React.useRef<string | null>(null);
 
+  // Routeur courant pour le listener de notifications (évite de le ré-abonner à chaque rendu)
+  const routerRef = React.useRef(router);
+  useEffect(() => {
+    routerRef.current = router;
+  }, [router]);
+
   // Suivre l'état de lecture pour éviter les relances
   useEffect(() => {
     isAdhanPlayingRef.current = !!adhanState?.isPlaying;
@@ -373,6 +379,13 @@ function TabLayoutContent() {
           console.log("═══════════════════════════════════════════");
         } else if (data.type === "adhan") {
           console.error("❌ [_layout] soundName manquant dans les données !");
+        } else if (data.type === "reminder" && data.prayer === "FridayReminder") {
+          // 🕌 iOS : un tap sur le rappel du vendredi ouvre l'écran « Vendredi »
+          // (sur Android, le natif ouvre le lien profond prayertimesapp://friday).
+          if (notifId) {
+            lastHandledNotificationIdRef.current = notifId;
+          }
+          routerRef.current.push("/friday");
         } else {
           console.log(
             `ℹ️ [_layout] Type de notification: ${data.type} (pas un adhan)`
@@ -629,9 +642,11 @@ function TabLayoutContent() {
                     title:
                       i18n.t("toast_connection_interrupted") ||
                       "Connexion interrompue",
+                    // Une session expirée est la cause de loin la plus fréquente :
+                    // ne pas accuser l'utilisateur d'être connecté sur plusieurs appareils.
                     message:
-                      i18n.t("toast_single_device_only") ||
-                      "Non autorisé. Veuillez vous connecter sur un seul appareil.",
+                      i18n.t("toast_session_expired") ||
+                      "Votre session a expiré ou est invalide. Veuillez vous reconnecter.",
                   });
                 }
               } else {
@@ -911,6 +926,18 @@ function TabLayoutContent() {
         />
         <Tabs.Screen
           name="hijri"
+          options={{
+            href: null, // Caché de la TabBar
+          }}
+        />
+        <Tabs.Screen
+          name="ramadan"
+          options={{
+            href: null, // Caché de la TabBar
+          }}
+        />
+        <Tabs.Screen
+          name="friday"
           options={{
             href: null, // Caché de la TabBar
           }}

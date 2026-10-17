@@ -289,8 +289,9 @@ function jsonResponse($success, $data = null, $message = '', $code = 200) {
 /**
  * Gestion des erreurs
  */
-function handleError($message, $code = 500, $details = null) {
-    error_log("API Error: " . $message . ($details ? " - " . json_encode($details) : ""));
+function handleError($message, $code = 500, $details = null, $extra = []) {
+    // 🔒 $details peut contenir des données de requête : toujours masquer les secrets
+    error_log("API Error: " . $message . ($details ? " - " . safeLogJson($details) : ""));
     
     $response = [
         'success' => false,
@@ -298,6 +299,12 @@ function handleError($message, $code = 500, $details = null) {
         'timestamp' => date('Y-m-d H:i:s'),
         'error_code' => $code
     ];
+
+    // Champs publics additionnels et non sensibles (ex: 'reason' pour distinguer
+    // « refresh expiré » de « refresh révoqué »). Ne peut pas écraser les champs ci-dessus.
+    if (is_array($extra) && !empty($extra)) {
+        $response = $response + $extra;
+    }
     
     // 🔒 SÉCURITÉ : N'inclure debug_details qu'en développement
     $isDebugEnabled = isset($_ENV['ENABLE_DEBUG_LOGS']) && $_ENV['ENABLE_DEBUG_LOGS'] === 'true';
@@ -407,6 +414,75 @@ function authenticate() {
 }
 
 /**
+ * 🔒 Masque les valeurs sensibles (mots de passe, tokens, secrets…) d'une structure
+ * avant de la journaliser. À utiliser pour TOUT log qui contient des données de
+ * requête : un mot de passe ou un token ne doit jamais être écrit en clair dans un
+ * fichier de log (lisible par l'hébergeur, les sauvegardes, d'autres outils…).
+ *
+ * Le masquage se fait sur le NOM de la clé (insensible à la casse, par sous-chaîne) :
+ * password, new_password, password_hash, refresh_token, auth_token, authorization…
+ */
+function redactSensitiveData($value, $depth = 0) {
+    static $sensitiveKeyParts = [
+        'password', 'passwd', 'pwd', 'secret', 'token', 'authorization',
+        'api_key', 'apikey', 'receipt', 'cvc', 'card_number',
+    ];
+
+    if ($depth > 8) {
+        return '[…]';
+    }
+    if (is_object($value)) {
+        return '[objet]';
+    }
+    if (!is_array($value)) {
+        return $value;
+    }
+
+    $redacted = [];
+    foreach ($value as $key => $item) {
+        $keyLower = strtolower((string)$key);
+        $isSensitive = false;
+        foreach ($sensitiveKeyParts as $part) {
+            if (strpos($keyLower, $part) !== false) {
+                $isSensitive = true;
+                break;
+            }
+        }
+        $redacted[$key] = $isSensitive ? '***' : redactSensitiveData($item, $depth + 1);
+    }
+    return $redacted;
+}
+
+/**
+ * 🔒 json_encode() sûr pour les logs : valeurs sensibles masquées et taille bornée.
+ */
+function safeLogJson($value, $maxLength = 2000) {
+    $json = json_encode(
+        redactSensitiveData($value),
+        JSON_UNESCAPED_UNICODE | JSON_PARTIAL_OUTPUT_ON_ERROR
+    );
+    if ($json === false) {
+        return '[non sérialisable]';
+    }
+    return strlen($json) > $maxLength ? substr($json, 0, $maxLength) . '…[tronqué]' : $json;
+}
+
+/**
+ * 🔒 URI de la requête prête à être journalisée : les paramètres sensibles de la
+ * query string (ex: ?token=… des flux audio) sont masqués.
+ */
+function safeRequestUri($uri = null) {
+    $uri = $uri ?? ($_SERVER['REQUEST_URI'] ?? '');
+    $parts = parse_url($uri);
+    $path = $parts['path'] ?? '';
+    if (empty($parts['query'])) {
+        return $path;
+    }
+    parse_str($parts['query'], $query);
+    return $path . '?' . urldecode(http_build_query(redactSensitiveData($query)));
+}
+
+/**
  * Obtenir les données de la requête
  */
 function getRequestData() {
@@ -414,13 +490,13 @@ function getRequestData() {
     $data = json_decode($input, true);
     
     // Debug pour voir ce qui est reçu (uniquement en développement)
+    // 🔒 Le corps brut n'est JAMAIS journalisé (il contient mots de passe et tokens).
     $isDebugEnabled = isset($_ENV['ENABLE_DEBUG_LOGS']) && $_ENV['ENABLE_DEBUG_LOGS'] === 'true';
     $isProduction = isset($_ENV['NODE_ENV']) && $_ENV['NODE_ENV'] === 'production';
     
     if ($isDebugEnabled && !$isProduction) {
-        error_log("DEBUG getRequestData - Raw input: " . $input);
-        error_log("DEBUG getRequestData - JSON decode result: " . json_encode($data));
-        error_log("DEBUG getRequestData - POST data: " . json_encode($_POST));
+        error_log("DEBUG getRequestData - JSON decode result: " . safeLogJson($data));
+        error_log("DEBUG getRequestData - POST data: " . safeLogJson($_POST));
     }
     
     if (json_last_error() !== JSON_ERROR_NONE) {
@@ -493,9 +569,18 @@ function generateUniqueId($prefix = '') {
 
 // 🚀 SUPPRIMÉ : formatUserData() est définie dans users.php
 
-/** Durée des sessions — utilisateurs standard */
+/**
+ * Durée des sessions — utilisateurs standard
+ *
+ * IMPORTANT : le refresh token DOIT vivre bien plus longtemps que le token d'accès.
+ * L'app ne rafraîchit qu'après un 401 (token d'accès expiré) : si les deux expirent
+ * au même instant, le refresh est systématiquement refusé et l'utilisateur est
+ * déconnecté ~30 jours après chaque login, même s'il utilise l'app tous les jours.
+ * Chaque refresh réussi effectue une rotation et repousse l'expiration du refresh
+ * token de AUTH_REFRESH_TOKEN_TTL_DAYS (session glissante).
+ */
 define('AUTH_ACCESS_TOKEN_TTL_DAYS', 30);
-define('AUTH_REFRESH_TOKEN_TTL_DAYS', 30);
+define('AUTH_REFRESH_TOKEN_TTL_DAYS', 180);
 
 /** Durée des sessions — comptes VIP (usage peu fréquent) */
 define('VIP_ACCESS_TOKEN_TTL_DAYS', 90);
@@ -521,6 +606,28 @@ function isVipUserId($userId) {
     }
 }
 
+/**
+ * Condition SQL « cet utilisateur paie / est VIP » (alias de table `u` = users).
+ * Partagée par la validation des refresh tokens et le nettoyage cron pour que les
+ * deux restent strictement cohérents.
+ *
+ * premium_expiry est tenu à jour côté serveur par les webhooks (Stripe, RevenueCat) :
+ * il reste fiable même si l'utilisateur n'ouvre plus l'app.
+ */
+define('SQL_USER_IS_PAYING', "(u.status = 'active' AND (u.is_vip = 1 OR (u.premium_status = 1 AND (u.premium_expiry IS NULL OR u.premium_expiry > NOW()))))");
+
+/**
+ * Vrai si l'utilisateur est VIP ou a un abonnement premium en cours.
+ * Volontairement SANS try/catch : une panne de base de données doit remonter
+ * (→ 503 « réessayer plus tard ») et non être prise pour « n'est pas abonné ».
+ */
+function isUserPayingMember($userId) {
+    $pdo = getDBConnection();
+    $stmt = $pdo->prepare("SELECT 1 FROM users u WHERE u.id = ? AND " . SQL_USER_IS_PAYING . " LIMIT 1");
+    $stmt->execute([$userId]);
+    return (bool)$stmt->fetchColumn();
+}
+
 function getAccessTokenTtlDaysForUserId($userId) {
     return isVipUserId($userId) ? VIP_ACCESS_TOKEN_TTL_DAYS : AUTH_ACCESS_TOKEN_TTL_DAYS;
 }
@@ -530,7 +637,37 @@ function getRefreshTokenTtlDaysForUserRecord($user) {
 }
 
 /**
+ * Levée quand un service dont dépend l'authentification (base de données…) est
+ * momentanément indisponible. Doit se traduire par un HTTP 503, JAMAIS par un 401 :
+ * un 401 fait croire à l'app que la session est invalide et la déconnecte.
+ */
+class ServiceUnavailableException extends Exception {}
+
+/**
+ * Répond 503 (+ Retry-After) et termine la requête.
+ * Utilisé quand l'état de la session n'a pas pu être déterminé (panne passagère).
+ */
+function respondServiceUnavailable($message = 'Service temporairement indisponible') {
+    header('Retry-After: 5');
+    handleError($message, 503, null, ['reason' => 'service_unavailable']);
+}
+
+/**
+ * Si le résultat de validateAuthToken() indique une indisponibilité (et non un
+ * token réellement invalide), répond 503 et termine la requête.
+ */
+function failIfAuthUnavailable($authResult) {
+    if (is_array($authResult) && !empty($authResult['unavailable'])) {
+        respondServiceUnavailable();
+    }
+}
+
+/**
  * 🚀 NOUVEAU : Générer un token d'authentification
+ *
+ * Lève ServiceUnavailableException si la session ne peut pas être enregistrée.
+ * (Avant : un faux token « token_<id>_<time> » jamais stocké en base était renvoyé,
+ * puis refusé en 401 à la requête suivante.)
  */
 function generateAuthToken($user_id, $ttlDays = null) {
     try {
@@ -554,8 +691,7 @@ function generateAuthToken($user_id, $ttlDays = null) {
         return $token;
     } catch (Exception $e) {
         error_log("Erreur génération token: " . $e->getMessage());
-        // Fallback: token simple
-        return 'token_' . $user_id . '_' . time();
+        throw new ServiceUnavailableException("Impossible d'enregistrer la session", 0, $e);
     }
 }
 
@@ -667,7 +803,14 @@ function validateAuthToken($token) {
         
     } catch (Exception $e) {
         error_log("Erreur validation token: " . $e->getMessage());
-        return ['success' => false, 'message' => 'Erreur lors de la validation'];
+        // 'unavailable' => true : la validation n'a PAS pu être faite (panne passagère
+        // de la base). Ce n'est pas un token invalide → les endpoints doivent répondre
+        // 503 (cf. failIfAuthUnavailable), jamais 401.
+        return [
+            'success' => false,
+            'unavailable' => true,
+            'message' => 'Erreur lors de la validation'
+        ];
     }
 }
 
@@ -705,6 +848,7 @@ function requireAuthStrict() {
     }
 
     $result = validateAuthToken($token);
+    failIfAuthUnavailable($result);
     if (!$result || empty($result['success'])) {
         handleError('Non autorisé: token invalide ou expiré', 401);
     }
@@ -789,37 +933,122 @@ function createRefreshToken($userId, $deviceId = null, $ttlDays = 30) {
     return $token;
 }
 
-/** Valider un refresh token clair (retourne l'enregistrement si valide) */
-function validateRefreshToken($token) {
+/**
+ * Fenêtre (secondes) pendant laquelle un refresh token DÉJÀ remplacé par une rotation
+ * reste utilisable pour obtenir une nouvelle session.
+ *
+ * Pourquoi : la rotation révoque l'ancien token dès qu'elle émet le nouveau. Si la
+ * réponse se perd en route (réseau coupé, app passée en arrière-plan ou tuée), le
+ * client garde l'ancien token, déjà révoqué : tous ses refresh suivants échouent et
+ * l'utilisateur est déconnecté. Cette tolérance rend le refresh rejouable pendant
+ * quelques minutes. Elle ne s'applique JAMAIS à un token révoqué par une nouvelle
+ * connexion (politique mono-appareil) ou un logout : seuls les tokens remplacés
+ * par rotation (replaced_by renseigné) en bénéficient.
+ */
+define('REFRESH_ROTATION_GRACE_SECONDS', 120);
+
+/**
+ * Valider un refresh token clair (retourne l'enregistrement si valide).
+ *
+ * @param bool $allowRecentRotation accepter un token remplacé il y a moins de
+ *        REFRESH_ROTATION_GRACE_SECONDS (cf. ci-dessus).
+ * @param bool $forUpdate verrouiller la ligne (à utiliser dans une transaction)
+ *        pour qu'un refresh concurrent attende au lieu de lire un état périmé.
+ */
+function validateRefreshToken($token, $allowRecentRotation = false, $forUpdate = false) {
     if (!$token) return false;
     $pdo = getDBConnection();
     $hash = hashRefreshToken($token);
 
-    $stmt = $pdo->prepare("SELECT * FROM refresh_tokens WHERE token_hash = ? LIMIT 1");
+    // L'ancienneté du dernier usage est calculée par MySQL : même horloge que le NOW()
+    // qui a écrit last_used_at (évite tout décalage de fuseau avec PHP).
+    $sql = "SELECT *, TIMESTAMPDIFF(SECOND, last_used_at, NOW()) AS seconds_since_used
+            FROM refresh_tokens WHERE token_hash = ? LIMIT 1" . ($forUpdate ? " FOR UPDATE" : "");
+    $stmt = $pdo->prepare($sql);
     $stmt->execute([$hash]);
     $row = $stmt->fetch();
     if (!$row) return false;
 
-    // Vérifier expiration/révocation
-    if (!empty($row['revoked_at'])) return false;
-    if (!empty($row['expires_at']) && strtotime($row['expires_at']) <= time()) return false;
+    // Vérifier révocation (avec tolérance pour un token tout juste remplacé par rotation)
+    if (!empty($row['revoked_at'])) {
+        $age = isset($row['seconds_since_used']) ? (int)$row['seconds_since_used'] : null;
+        $recentlyRotated = $allowRecentRotation
+            && !empty($row['replaced_by'])
+            && $age !== null
+            && $age >= 0
+            && $age <= REFRESH_ROTATION_GRACE_SECONDS;
+
+        if (!$recentlyRotated) return false;
+
+        error_log("🔐 [AUTH] Refresh accepté via tolérance de rotation (user_id={$row['user_id']}, token remplacé il y a {$age}s) — réponse précédente probablement perdue");
+    }
+
+    // Vérifier expiration.
+    // Exception : tant que l'utilisateur PAIE (abonnement en cours ou VIP), un refresh
+    // token non révoqué reste valide même après expires_at. L'app se renouvelle alors
+    // silencieusement après n'importe quelle durée d'inactivité ; la rotation donne
+    // ensuite un token tout neuf. Un utilisateur qui ne paie plus retombe dans la règle
+    // normale (180 jours / 365 pour les VIP).
+    if (!empty($row['expires_at']) && strtotime($row['expires_at']) <= time()) {
+        if (!isUserPayingMember($row['user_id'])) return false;
+        error_log("🔐 [AUTH] Refresh accepté après expiration (abonné actif, user_id={$row['user_id']}, token expiré le {$row['expires_at']})");
+    }
 
     return $row;
 }
 
-/** Rotation sécurisée: révoque l'ancien et crée un nouveau token */
+/**
+ * Explique POURQUOI un refresh token est refusé (pour les logs et le champ `reason`
+ * de la réponse). N'est appelée que sur le chemin d'échec.
+ *
+ * @return array ['reason' => string, 'user_id' => int|null]
+ *   reason : missing | not_found | expired | revoked (nouvelle connexion / logout)
+ *            | already_rotated (déjà remplacé, hors fenêtre de tolérance) | unknown
+ */
+function getRefreshTokenFailureReason($token) {
+    if (!$token) return ['reason' => 'missing', 'user_id' => null];
+    try {
+        $pdo = getDBConnection();
+        $stmt = $pdo->prepare("SELECT user_id, revoked_at, replaced_by, expires_at FROM refresh_tokens WHERE token_hash = ? LIMIT 1");
+        $stmt->execute([hashRefreshToken($token)]);
+        $row = $stmt->fetch();
+
+        if (!$row) return ['reason' => 'not_found', 'user_id' => null];
+
+        $userId = (int)$row['user_id'];
+        if (!empty($row['revoked_at'])) {
+            return ['reason' => !empty($row['replaced_by']) ? 'already_rotated' : 'revoked', 'user_id' => $userId];
+        }
+        if (!empty($row['expires_at']) && strtotime($row['expires_at']) <= time()) {
+            return ['reason' => 'expired', 'user_id' => $userId];
+        }
+        return ['reason' => 'unknown', 'user_id' => $userId];
+    } catch (Exception $e) {
+        return ['reason' => 'unknown', 'user_id' => null];
+    }
+}
+
+/**
+ * Rotation sécurisée: révoque l'ancien et crée un nouveau token.
+ * Retourne false si l'ancien token n'est (plus) valide ; lève
+ * ServiceUnavailableException si la base de données est indisponible.
+ */
 function rotateRefreshToken($oldToken, $deviceId = null, $ttlDays = 30) {
     $pdo = getDBConnection();
     $pdo->beginTransaction();
     try {
-        $record = validateRefreshToken($oldToken);
+        // Ligne verrouillée : un refresh concurrent attend la fin de la transaction.
+        // La tolérance de rotation permet de rejouer un refresh dont la réponse s'est perdue.
+        $record = validateRefreshToken($oldToken, true, true);
         if (!$record) {
             $pdo->rollBack();
             return false;
         }
 
-        // Révoquer l'ancien
-        $revoke = $pdo->prepare("UPDATE refresh_tokens SET revoked_at = NOW(), last_used_at = NOW() WHERE id = ?");
+        // Révoquer l'ancien. `AND revoked_at IS NULL` : si le token est rejoué pendant
+        // la fenêtre de tolérance, sa date de révocation d'origine est conservée (sinon
+        // chaque rejeu prolongerait la fenêtre indéfiniment).
+        $revoke = $pdo->prepare("UPDATE refresh_tokens SET revoked_at = NOW(), last_used_at = NOW() WHERE id = ? AND revoked_at IS NULL");
         $revoke->execute([$record['id']]);
 
         // Créer le nouveau
@@ -845,9 +1074,12 @@ function rotateRefreshToken($oldToken, $deviceId = null, $ttlDays = 30) {
         $pdo->commit();
         return $newToken;
     } catch (Exception $e) {
-        $pdo->rollBack();
+        if ($pdo->inTransaction()) {
+            $pdo->rollBack();
+        }
         error_log('Erreur rotation refresh token: ' . $e->getMessage());
-        return false;
+        // Panne de base de données : ce n'est PAS un refresh token invalide.
+        throw new ServiceUnavailableException('Rotation du refresh token impossible', 0, $e);
     }
 }
 
@@ -879,5 +1111,6 @@ register_shutdown_function(function() {
 });
 
 // Log de la requête pour debug
-error_log("API Request: " . $_SERVER['REQUEST_METHOD'] . " " . $_SERVER['REQUEST_URI']);
+// 🔒 safeRequestUri() masque ?token=… (utilisé par le streaming audio) dans les logs
+error_log("API Request: " . $_SERVER['REQUEST_METHOD'] . " " . safeRequestUri());
 ?> 

@@ -14,7 +14,8 @@ require_once 'config.php';
 $input = json_decode(file_get_contents('php://input'), true);
 
 // Log pour debug sur le serveur
-error_log("🍎 [IAP Sync] Données reçues: " . json_encode($input));
+// 🔒 Le corps contient le mot de passe (création de compte) et des reçus d'achat : masqués
+error_log("🍎 [IAP Sync] Données reçues: " . safeLogJson($input));
 
 // ℹ️ Le mot de passe n'est requis que pour CRÉER un nouveau compte. Pour un
 // renouvellement/souscription d'un compte déjà existant (utilisateur connecté),

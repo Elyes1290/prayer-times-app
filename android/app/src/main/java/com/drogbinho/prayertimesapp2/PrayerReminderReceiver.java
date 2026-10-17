@@ -38,8 +38,17 @@ public class PrayerReminderReceiver extends BroadcastReceiver {
                         boolean notificationsEnabled = prefs.getBoolean("notifications_enabled", false);
                         boolean remindersEnabled = prefs.getBoolean("reminders_enabled", false);
 
+                        // 🌙 Les rappels Ramadan (suhoor, iftar, lecture du jour, Laylat al-Qadr)
+                        // ont leurs propres réglages côté JS : ils ne dépendent PAS du réglage
+                        // « rappel avant la prière ». Seul l'interrupteur global des notifications
+                        // s'applique. Leurs libellés commencent tous par "Ramadan".
+                        // Idem pour le rappel du vendredi (libellé "FridayReminder") : il a son
+                        // propre réglage côté JS.
+                        boolean isRamadanReminder = prayerLabel != null
+                                        && (prayerLabel.startsWith("Ramadan") || prayerLabel.startsWith("Friday"));
+
                         // Si les notifications ou les rappels sont désactivés, on ne fait rien
-                        if (!notificationsEnabled || !remindersEnabled) {
+                        if (!notificationsEnabled || (!remindersEnabled && !isRamadanReminder)) {
                                 debugLog("PrayerReminderReceiver",
                                                 "Notifications ou rappels désactivés, arrêt du traitement");
                                 return;

@@ -1614,6 +1614,10 @@ public class AdhanService extends Service {
             }
         }
 
+        // 🌙 « Mon Ramadan » : ré-arme les rappels de la saison (planning écrit par le JS).
+        // Sans effet (et sans risque) hors saison / hors premium : le planning est alors vide.
+        RamadanScheduleStore.rearm(context, alarmManager);
+
         // 📱 SAUVEGARDER LES HORAIRES POUR LE WIDGET
         // Déterminer si on doit afficher aujourd'hui ou demain
         if (now.getTime().after(prayerTimesToday.isha)) {

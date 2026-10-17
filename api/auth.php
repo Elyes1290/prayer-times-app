@@ -52,14 +52,23 @@ try {
         default:
             handleError("Méthode non supportée", 405);
     }
+} catch (ServiceUnavailableException $e) {
+    // Base de données / session momentanément indisponible : 503 (réessayer plus tard),
+    // surtout pas 401 ni 500 qui feraient croire à une session invalide.
+    error_log("AUTH API UNAVAILABLE: " . $e->getMessage());
+    respondServiceUnavailable();
+} catch (PDOException $e) {
+    error_log("AUTH API DB ERROR: " . $e->getMessage());
+    respondServiceUnavailable();
 } catch (Exception $e) {
     error_log("AUTH API ERROR: " . $e->getMessage() . " | File: " . $e->getFile() . " | Line: " . $e->getLine());
-    error_log("AUTH REQUEST DATA: " . json_encode($data));
+    // 🔒 Jamais de mot de passe / token en clair dans les logs ni dans les détails d'erreur
+    error_log("AUTH REQUEST DATA: " . safeLogJson($data));
     handleError("Erreur dans l'API auth: " . $e->getMessage(), 500, [
         'error' => $e->getMessage(),
         'file' => $e->getFile(),
         'line' => $e->getLine(),
-        'request_data' => $data
+        'request_data' => redactSensitiveData($data)
     ]);
 }
 
@@ -88,7 +97,8 @@ function handleLogin() {
         exit();
     }
     
-    error_log("handleLogin() called with data: " . json_encode($data));
+    // 🔒 Les données de connexion contiennent le mot de passe : masqué dans les logs
+    error_log("handleLogin() called with data: " . safeLogJson($data));
     
     $email = $data['email'] ?? null;
     $password = $data['password'] ?? null;
@@ -285,20 +295,14 @@ function handleRegister() {
     $location_lat = $data['location_lat'] ?? null;
     $location_lon = $data['location_lon'] ?? null;
 
-    // Logger les données reçues dans un fichier
-    $logMessage = date('Y-m-d H:i:s') . " - 📍 Données de localisation reçues: mode=$location_mode, city=$location_city, lat=$location_lat, lon=$location_lon\n";
-    $logMessage .= date('Y-m-d H:i:s') . " - 📊 Données premium reçues: status=$premium_status, type=$subscription_type, id=$subscription_id, expiry=$premium_expiry\n";
-    $logMessage .= date('Y-m-d H:i:s') . " - 🔐 Données d'inscription: has_email=" . (!empty($email)) . ", has_password=" . (!empty($password)) . ", has_name=" . (!empty($user_first_name)) . "\n";
-    $logMessage .= date('Y-m-d H:i:s') . " - 📋 Données complètes reçues: " . json_encode($data) . "\n";
-    $logMessage .= date('Y-m-d H:i:s') . " - 🔍 Premium status brut: " . ($data['premium_status'] ?? 'non défini') . "\n";
-    $logMessage .= date('Y-m-d H:i:s') . " - 🔍 Premium status traité: $premium_status\n";
-    file_put_contents(__DIR__ . '/debug_premium.log', $logMessage, FILE_APPEND);
-    
-    // Logger aussi dans les logs système
+    // 🔒 Journalisation via error_log uniquement. L'ancien fichier api/debug_premium.log
+    // (écrit dans un dossier servi par le web) contenait le corps COMPLET des
+    // inscriptions, mot de passe en clair compris : il n'est plus écrit.
     error_log("📍 Données de localisation reçues: mode=$location_mode, city=$location_city, lat=$location_lat, lon=$location_lon");
     error_log("📊 Données premium reçues: status=$premium_status, type=$subscription_type, id=$subscription_id, expiry=$premium_expiry");
     error_log("🔐 Données d'inscription: has_email=" . (!empty($email)) . ", has_password=" . (!empty($password)) . ", has_name=" . (!empty($user_first_name)));
-    error_log("📋 Données complètes reçues: " . json_encode($data));
+    error_log("📋 Données complètes reçues: " . safeLogJson($data));
+    error_log("🔍 Premium status brut: " . ($data['premium_status'] ?? 'non défini') . " / traité: $premium_status");
     
     // 🚀 ADAPTÉ : Créer le nouvel utilisateur avec mot de passe
     $insertStmt = $pdo->prepare("
@@ -415,16 +419,11 @@ function handleRegister() {
     $stmt->execute([$user_id]);
     $user = $stmt->fetch();
     
-    $logMessage = date('Y-m-d H:i:s') . " - 📊 Utilisateur créé - premium_status: " . $user['premium_status'] . ", subscription_type: " . $user['subscription_type'] . ", subscription_id: " . $user['subscription_id'] . "\n";
-    file_put_contents(__DIR__ . '/debug_premium.log', $logMessage, FILE_APPEND);
     error_log("📊 Utilisateur créé - premium_status: " . $user['premium_status'] . ", subscription_type: " . $user['subscription_type'] . ", subscription_id: " . $user['subscription_id']);
     
     $formattedUser = formatUserData($user);
     
     // 🚀 DEBUG : Logger la réponse finale
-    $logMessage = date('Y-m-d H:i:s') . " - 📤 Réponse finale - premium_status: " . $formattedUser['premium_status'] . ", subscription_type: " . $formattedUser['subscription_type'] . ", subscription_id: " . $formattedUser['subscription_id'] . "\n";
-    $logMessage .= date('Y-m-d H:i:s') . " - 📤 Données utilisateur complètes: " . json_encode($formattedUser) . "\n";
-    file_put_contents(__DIR__ . '/debug_premium.log', $logMessage, FILE_APPEND);
     error_log("📤 Réponse finale - premium_status: " . $formattedUser['premium_status'] . ", subscription_type: " . $formattedUser['subscription_type'] . ", subscription_id: " . $formattedUser['subscription_id']);
     
     // Générer tokens (ordre corrigé: révoquer puis émettre)
@@ -547,6 +546,7 @@ function handleVerifyAuth() {
     }
 
     $auth = validateAuthToken($token);
+    failIfAuthUnavailable($auth); // panne passagère → 503, pas 401
     if (!$auth || empty($auth['success'])) {
         jsonResponse(false, null, 'Token invalide ou expiré', 401);
     }
@@ -571,9 +571,24 @@ function handleRefresh() {
         handleError('refresh_token requis', 400);
     }
 
-    $record = validateRefreshToken($providedRefresh);
+    // Tolérance de rotation : un refresh token remplacé il y a quelques instants est
+    // encore accepté (la réponse précédente a pu se perdre côté client).
+    $record = validateRefreshToken($providedRefresh, true);
     if (!$record) {
-        handleError('Refresh token invalide ou expiré', 401);
+        // Diagnostic : on journalise la RAISON du refus (jamais le token lui-même) et
+        // on l'expose dans la réponse pour savoir pourquoi une session a été perdue.
+        $failure = getRefreshTokenFailureReason($providedRefresh);
+        $ua = substr((string)(getUserAgent() ?? ''), 0, 80);
+        error_log(sprintf(
+            "🔐 [AUTH] Refresh refusé: reason=%s user_id=%s ip=%s ua=%s",
+            $failure['reason'],
+            $failure['user_id'] ?? 'inconnu',
+            getClientIp() ?? 'inconnue',
+            $ua
+        ));
+        handleError('Refresh token invalide ou expiré', 401, null, [
+            'reason' => 'refresh_' . $failure['reason']
+        ]);
     }
 
     // Charger l'utilisateur pour s'assurer qu'il est actif + stripe_customer_id
@@ -590,15 +605,20 @@ function handleRefresh() {
         handleError('Utilisateur inactif ou inexistant', 403);
     }
 
+    // Nouveau access token EN PREMIER : si la base est indisponible, generateAuthToken
+    // lève ServiceUnavailableException (→ 503) AVANT que l'ancien refresh token ne soit
+    // révoqué. Le client garde alors un refresh token valide et réessaiera.
+    $newAccess = generateAuthToken($record['user_id']);
+
     // Rotation du refresh token (durée prolongée pour les VIP)
     $refreshTtlDays = getRefreshTokenTtlDaysForUserRecord($user);
     $newRefresh = rotateRefreshToken($providedRefresh, $record['device_id'] ?? null, $refreshTtlDays);
     if (!$newRefresh) {
-        handleError('Impossible de renouveler le refresh token', 500);
+        // Le token a été invalidé entre la validation et la rotation (cas très rare).
+        handleError('Refresh token invalide ou expiré', 401, null, [
+            'reason' => 'refresh_not_found'
+        ]);
     }
-
-    // Nouveau access token
-    $newAccess = generateAuthToken($record['user_id']);
 
     jsonResponse(true, [
         'token' => $newAccess,

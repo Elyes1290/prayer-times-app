@@ -1531,5 +1531,16 @@
   "background_image_type": "Arka plan resmi türü",
   "background_prophet": "🕌 Peygamber Camii",
   "background_makka": "🕋 Mekke",
-  "background_alquds": "🌙 Kudüs"
+  "background_alquds": "🌙 Kudüs",
+  "quran_previous_surah": "Önceki sure",
+  "quran_next_surah": "Sonraki sure",
+  "quran_resume_bookmark": "Okumama devam et",
+  "quran_show_translation": "Okunuşu ve meali göster",
+  "quran_show_arabic_only": "Yalnızca Arapçayı göster",
+  "quran_fullscreen": "Tam ekran",
+  "quran_exit_fullscreen": "Tam ekrandan çık",
+  "quran_bookmark_saved": "Yer imi kaydedildi",
+  "quran_bookmark_removed": "Yer imi kaldırıldı",
+  "quran_bookmark": "Yer imi",
+  "choose_gif": "Görsel efekt seç"
 }

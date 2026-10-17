@@ -41,6 +41,7 @@ try {
         exit();
     }
     $auth = validateAuthToken($token);
+    failIfAuthUnavailable($auth); // panne passagère → 503, pas 401
     if (!$auth || empty($auth['success'])) {
         http_response_code(401);
         echo json_encode(['success' => false, 'message' => 'Token invalide']);

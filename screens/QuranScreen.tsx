@@ -1,7 +1,13 @@
 import * as Font from "expo-font";
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import { ActivityIndicator, View, useWindowDimensions } from "react-native";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import {
+  ActivityIndicator,
+  View,
+  useWindowDimensions,
+  type ViewToken,
+} from "react-native";
 import CachedImageBackground from "../components/CachedImageBackground";
+import { useLocalSearchParams } from "expo-router";
 import { useTranslation } from "react-i18next";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import {
@@ -26,6 +32,14 @@ import { usePremium } from "../contexts/PremiumContext";
 import { useToast } from "../contexts/ToastContext";
 import { PremiumContent } from "../utils/premiumContent";
 import { useQuranSurahData } from "../hooks/useQuranSurahData";
+import { useQuranReader } from "../hooks/useQuranReader";
+import { useKeepVersePosition } from "../hooks/useKeepVersePosition";
+import { QuranReaderActions } from "../components/quran/QuranReaderActions";
+import { QuranFullscreenModal } from "../components/quran/QuranFullscreenModal";
+import {
+  createScrollToIndexFailedHandler,
+  findVerseIndex,
+} from "../utils/quranListScroll";
 import { useUpdateUserStats } from "../hooks/useUpdateUserStats";
 import { useNetworkStatus, useOfflineAccess } from "../hooks/useNetworkStatus";
 import { OfflineMessage } from "../components/OfflineMessage";
@@ -166,6 +180,20 @@ export default function QuranScreen() {
     isPremium,
   });
 
+  // Lien profond (ex. plan de khatm « Mon Ramadan ») : /quran?surah=2&ts=...
+  // `ts` change à chaque navigation, ce qui permet de rouvrir la même sourate.
+  const { surah: surahParam, ts: surahParamTs } = useLocalSearchParams<{
+    surah?: string;
+    ts?: string;
+  }>();
+  useEffect(() => {
+    if (!surahParam) return;
+    const surahNumber = Number.parseInt(surahParam, 10);
+    if (Number.isInteger(surahNumber) && surahNumber >= 1 && surahNumber <= 114) {
+      selectSourate(surahNumber);
+    }
+  }, [surahParam, surahParamTs, selectSourate]);
+
   useEffect(() => {
     isPlaybackReadyRef.current = true;
     selectGifBridgeRef.current = (gifId: AudioGifType) => {
@@ -198,6 +226,145 @@ export default function QuranScreen() {
   });
 
   const surahCountLabel = t("surah", "Sourate");
+
+  // --- Lecture : mode d'affichage, marque-page, plein écran ---------------------------
+  const {
+    displayMode,
+    toggleDisplayMode,
+    bookmark,
+    toggleBookmark,
+    fullscreen,
+    openFullscreen,
+    closeFullscreen,
+  } = useQuranReader();
+  const isOfflineView = isPremium && offlineAccess.isOfflineMode;
+  const [fullscreenStartIndex, setFullscreenStartIndex] = useState(0);
+  const firstVisibleIndexRef = useRef(0);
+  const pendingScrollVerseKeyRef = useRef<string | null>(null);
+  const [scrollRequestTick, setScrollRequestTick] = useState(0);
+
+  // Après un changement d'affichage (traduction masquée / affichée), on reste sur le même verset.
+  useKeepVersePosition(versesFlatListRef, firstVisibleIndexRef, displayMode);
+
+  const mainListScrollProps = useMemo(
+    () => ({
+      onScrollToIndexFailed: createScrollToIndexFailedHandler(versesFlatListRef),
+      onViewableItemsChanged: ({
+        viewableItems,
+      }: {
+        viewableItems: ViewToken[];
+      }) => {
+        const first = viewableItems.find(
+          (token) => token.isViewable && typeof token.index === "number",
+        );
+        if (first && typeof first.index === "number") {
+          firstVisibleIndexRef.current = first.index;
+        }
+      },
+      viewabilityConfig: { itemVisiblePercentThreshold: 30 },
+    }),
+    [versesFlatListRef],
+  );
+
+  const fullscreenVerseStyles = useMemo(
+    () => ({
+      ...styles,
+      arabic: { ...styles.arabic, fontSize: 38, lineHeight: 76 },
+      phonetic: { ...styles.phonetic, fontSize: 18 },
+      traduction: { ...styles.traduction, fontSize: 18 },
+    }),
+    [],
+  );
+
+  const handleToggleBookmark = useCallback(
+    (verseKey: string) => {
+      const next = toggleBookmark(verseKey, selectedSourateLabel);
+      const verseNumber = verseKey.split(":")[1];
+      showToast({
+        type: "success",
+        title: next
+          ? t("quran_bookmark_saved", "Marque-page enregistré")
+          : t("quran_bookmark_removed", "Marque-page retiré"),
+        message: `${selectedSourateLabel} • ${verseNumber}`,
+      });
+    },
+    [toggleBookmark, selectedSourateLabel, showToast, t],
+  );
+
+  const handleResumeBookmark = useCallback(() => {
+    if (!bookmark) return;
+    pendingScrollVerseKeyRef.current = bookmark.verseKey;
+    if (bookmark.surah === selectedSourate) {
+      setSearchQuery("");
+      setScrollRequestTick((tick) => tick + 1);
+    } else {
+      void selectSourateFromPicker(bookmark.surah);
+    }
+  }, [bookmark, selectedSourate, setSearchQuery, selectSourateFromPicker]);
+
+  // Défile vers le verset demandé dès que sa sourate est affichée et chargée.
+  useEffect(() => {
+    const verseKey = pendingScrollVerseKeyRef.current;
+    if (!verseKey || loading || !fontsLoaded) return;
+    if (!verseKey.startsWith(`${selectedSourate}:`)) return;
+    const index = findVerseIndex(filteredVerses, verseKey);
+    if (index < 0) return;
+    pendingScrollVerseKeyRef.current = null;
+    // Pas de nettoyage du timer : la demande est déjà consommée, la liste peut se
+    // re-rendre (nouvelle référence de `filteredVerses`) avant l'échéance.
+    setTimeout(() => {
+      versesFlatListRef.current?.scrollToIndex({ index, animated: false });
+    }, 300);
+  }, [
+    scrollRequestTick,
+    loading,
+    fontsLoaded,
+    selectedSourate,
+    filteredVerses,
+    versesFlatListRef,
+  ]);
+
+  const handleOpenFullscreen = useCallback(() => {
+    setFullscreenStartIndex(firstVisibleIndexRef.current);
+    openFullscreen();
+  }, [openFullscreen]);
+
+  const handleCloseFullscreen = useCallback(
+    (lastVisibleIndex: number) => {
+      closeFullscreen();
+      if (lastVisibleIndex > 0) {
+        setTimeout(() => {
+          versesFlatListRef.current?.scrollToIndex({
+            index: lastVisibleIndex,
+            animated: false,
+          });
+        }, 200);
+      }
+    },
+    [closeFullscreen, versesFlatListRef],
+  );
+
+  const handlePreviousSurah = useCallback(() => {
+    void selectSourateFromPicker(selectedSourate - 1);
+  }, [selectSourateFromPicker, selectedSourate]);
+
+  const handleNextSurah = useCallback(() => {
+    void selectSourateFromPicker(selectedSourate + 1);
+  }, [selectSourateFromPicker, selectedSourate]);
+
+  const readerActions = (
+    <QuranReaderActions
+      onPreviousSurah={handlePreviousSurah}
+      onNextSurah={handleNextSurah}
+      canGoPrevious={selectedSourate > 1}
+      canGoNext={selectedSourate < 114}
+      displayMode={displayMode}
+      hasBookmark={!!bookmark}
+      onToggleDisplayMode={toggleDisplayMode}
+      onOpenFullscreen={handleOpenFullscreen}
+      onResumeBookmark={handleResumeBookmark}
+    />
+  );
 
   const resolveVerseTexts = useCallback(
     (item: { id: number; verse_key?: string }) => {
@@ -257,52 +424,84 @@ export default function QuranScreen() {
     ],
   );
 
-  const renderOfflineVerseItem = useCallback(
-    ({ item }: { item: { id: number; verse_key?: string; text_uthmani?: string } }) => {
+  const arabicOnly = displayMode === "arabic";
+
+  const renderVerse = useCallback(
+    (
+      item: { id: number; verse_key?: string; text_uthmani?: string },
+      offline: boolean,
+      verseStyles: Record<string, any>,
+    ) => {
       const { phoneticText, translationText, verseNumber } =
         resolveVerseTexts(item);
       return (
         <QuranVerseListItem
           arabicText={item.text_uthmani || ""}
           verseNumber={verseNumber}
-          phoneticText={phoneticText}
+          phoneticText={arabicOnly ? "" : phoneticText}
           translationText={translationText}
           favoriteData={convertToFavorite(
             item,
             translationText,
-            selectedSourateLabel,
+            offline ? selectedSourateLabel : selectedChapterName,
           )}
-          showTranslation={!!translationText}
-          showSeparator={false}
-          styles={styles}
+          showTranslation={
+            !arabicOnly && (offline ? !!translationText : lang !== "ar")
+          }
+          showSeparator={!offline}
+          styles={verseStyles}
+          verseKey={item.verse_key}
+          isBookmarked={!!item.verse_key && bookmark?.verseKey === item.verse_key}
+          onToggleBookmark={handleToggleBookmark}
         />
       );
     },
-    [resolveVerseTexts, selectedSourateLabel],
+    [
+      resolveVerseTexts,
+      arabicOnly,
+      selectedSourateLabel,
+      selectedChapterName,
+      lang,
+      bookmark,
+      handleToggleBookmark,
+    ],
+  );
+
+  const renderOfflineVerseItem = useCallback(
+    ({ item }: { item: { id: number; verse_key?: string; text_uthmani?: string } }) =>
+      renderVerse(item, true, styles),
+    [renderVerse],
   );
 
   const renderOnlineVerseItem = useCallback(
-    ({ item }: { item: { id: number; verse_key?: string; text_uthmani?: string } }) => {
-      const { phoneticText, translationText, verseNumber } =
-        resolveVerseTexts(item);
-      return (
-        <QuranVerseListItem
-          arabicText={item.text_uthmani || ""}
-          verseNumber={verseNumber}
-          phoneticText={phoneticText}
-          translationText={translationText}
-          favoriteData={convertToFavorite(
-            item,
-            translationText,
-            selectedChapterName,
-          )}
-          showTranslation={lang !== "ar"}
-          showSeparator
-          styles={styles}
-        />
-      );
-    },
-    [resolveVerseTexts, selectedChapterName, lang],
+    ({ item }: { item: { id: number; verse_key?: string; text_uthmani?: string } }) =>
+      renderVerse(item, false, styles),
+    [renderVerse],
+  );
+
+  const renderFullscreenVerseItem = useCallback(
+    ({ item }: { item: { id: number; verse_key?: string; text_uthmani?: string } }) =>
+      renderVerse(item, isOfflineView, fullscreenVerseStyles),
+    [renderVerse, isOfflineView, fullscreenVerseStyles],
+  );
+
+  const fullscreenModal = (
+    <QuranFullscreenModal
+      visible={fullscreen}
+      onClose={handleCloseFullscreen}
+      data={filteredVerses}
+      renderItem={renderFullscreenVerseItem}
+      selectedSourate={selectedSourate}
+      headerText={!isOfflineView && selectedSourate !== 9 ? t("bismillah") : null}
+      headerTextStyle={{
+        ...styles.bismillah,
+        fontSize: 34,
+        lineHeight: 56,
+      }}
+      initialIndex={fullscreenStartIndex}
+      displayMode={displayMode}
+      onToggleDisplayMode={toggleDisplayMode}
+    />
   );
 
   const renderSourateModalItem = useCallback(
@@ -354,7 +553,10 @@ export default function QuranScreen() {
 
   if (isPremium && offlineAccess.isOfflineMode) {
     return (
+      <>
       <QuranOfflinePremiumView
+        readerActions={readerActions}
+        scrollProps={mainListScrollProps}
         insets={insets}
         activeOfflineTab={activeOfflineTab}
         onTabChange={setActiveOfflineTab}
@@ -372,6 +574,8 @@ export default function QuranScreen() {
         renderSourateModalItem={renderSourateModalItem}
         windowHeight={windowHeight}
       />
+      {fullscreenModal}
+      </>
     );
   }
 
@@ -389,6 +593,7 @@ export default function QuranScreen() {
           onSearchChange={setSearchQuery}
           onOpenMenu={() => setMenuVisible(true)}
           onRunWidgetDiagnostic={runWidgetDiagnostic}
+          readerActions={readerActions}
         />
 
         <QuranNavigationMenuModal
@@ -474,8 +679,11 @@ export default function QuranScreen() {
           filteredVerses={filteredVerses}
           versesFlatListRef={versesFlatListRef}
           renderVerseItem={renderOnlineVerseItem}
+          scrollProps={mainListScrollProps}
         />
       </View>
+
+      {fullscreenModal}
 
       <QuranNavigationTooltipModal
         visible={showNavigationTooltip}

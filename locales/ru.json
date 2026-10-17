@@ -1531,5 +1531,16 @@
   "background_image_type": "Тип фонового изображения",
   "background_prophet": "🕌 Мечеть Пророка",
   "background_makka": "🕋 Мекка",
-  "background_alquds": "🌙 Аль-Кудс"
+  "background_alquds": "🌙 Аль-Кудс",
+  "quran_previous_surah": "Предыдущая сура",
+  "quran_next_surah": "Следующая сура",
+  "quran_resume_bookmark": "Продолжить чтение",
+  "quran_show_translation": "Показать транскрипцию и перевод",
+  "quran_show_arabic_only": "Показать только арабский",
+  "quran_fullscreen": "Полный экран",
+  "quran_exit_fullscreen": "Выйти из полноэкранного режима",
+  "quran_bookmark_saved": "Закладка сохранена",
+  "quran_bookmark_removed": "Закладка удалена",
+  "quran_bookmark": "Закладка",
+  "choose_gif": "Выберите визуальный эффект"
 }
