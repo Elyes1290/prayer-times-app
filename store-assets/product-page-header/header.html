@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>MyAdhan – App Store product page header (3840 x 1646)</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 3840px; height: 1646px; overflow: hidden; background: #021812; }
+
+  .canvas {
+    position: relative;
+    width: 3840px;
+    height: 1646px;
+    overflow: hidden;
+    font-family: "Segoe UI", "Segoe UI Variable Display", "Helvetica Neue", Arial, sans-serif;
+    background:
+      radial-gradient(ellipse 1500px 760px at 1920px 823px, rgba(18, 150, 105, 0.55) 0%, rgba(8, 80, 58, 0.35) 45%, rgba(2, 24, 18, 0) 75%),
+      linear-gradient(120deg, #021a14 0%, #06382b 48%, #021812 100%);
+  }
+
+  /* Motif géométrique (étoile à 8 branches) très discret */
+  .pattern {
+    position: absolute; inset: 0;
+    opacity: 0.9;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240' viewBox='0 0 240 240'><g fill='none' stroke='%23FFD36B' stroke-opacity='0.085' stroke-width='2'><rect x='60' y='60' width='120' height='120'/><rect x='60' y='60' width='120' height='120' transform='rotate(45 120 120)'/><circle cx='120' cy='120' r='36'/><path d='M0 0 L60 60 M240 0 L180 60 M0 240 L60 180 M240 240 L180 180'/></g></svg>");
+    background-size: 240px 240px;
+    -webkit-mask-image: radial-gradient(ellipse 2100px 1000px at 1920px 823px, rgba(0,0,0,0.35) 0%, rgba(0,0,0,1) 75%);
+            mask-image: radial-gradient(ellipse 2100px 1000px at 1920px 823px, rgba(0,0,0,0.35) 0%, rgba(0,0,0,1) 75%);
+  }
+
+  /* Grands anneaux dorés autour du centre */
+  .ring {
+    position: absolute; left: 50%; top: 50%;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 211, 107, 0.16);
+    transform: translate(-50%, -50%);
+  }
+  .ring.r1 { width: 1900px; height: 1900px; }
+  .ring.r2 { width: 2500px; height: 2500px; border-color: rgba(255, 211, 107, 0.09); }
+
+  .vignette {
+    position: absolute; inset: 0;
+    background: linear-gradient(90deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0) 22%, rgba(0,0,0,0) 78%, rgba(0,0,0,0.55) 100%);
+  }
+
+  /* ---------- Téléphones ---------- */
+  .phone {
+    position: absolute;
+    width: 688px; height: 1286px;
+    padding: 18px;
+    border-radius: 100px;
+    background: linear-gradient(145deg, #2b3532, #0a0e0d 40%, #1b2320);
+    box-shadow:
+      0 70px 140px rgba(0, 0, 0, 0.6),
+      0 0 0 3px rgba(255, 255, 255, 0.10) inset,
+      0 0 90px rgba(255, 211, 107, 0.10);
+  }
+  .phone.back { filter: brightness(0.72) saturate(0.95); }
+  .screen {
+    position: relative;
+    width: 652px; height: 1250px;
+    border-radius: 82px;
+    overflow: hidden;
+    background: #000;
+  }
+  /* On retire la barre d'état et la barre de navigation Android (100 px en haut, 146 px en bas) */
+  .screen img {
+    position: absolute; left: 0; top: -60.4px;
+    width: 652px; height: auto;
+    display: block;
+  }
+  .island {
+    position: absolute; left: 50%; top: 26px;
+    width: 190px; height: 54px; margin-left: -95px;
+    border-radius: 30px; background: #000; z-index: 3;
+  }
+  .gloss {
+    position: absolute; inset: 0; z-index: 2; pointer-events: none;
+    background: linear-gradient(115deg, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0) 28%);
+  }
+
+  .left-front  { left: 400px;  top: 178px; transform: rotate(-3deg); z-index: 3; }
+  .left-back   { left: 38px;   top: 400px; transform: rotate(-9deg) scale(0.93); z-index: 2; }
+  .right-front { left: 2752px; top: 178px; transform: rotate(3deg);  z-index: 3; }
+  .right-back  { left: 3114px; top: 400px; transform: rotate(9deg) scale(0.93); z-index: 2; }
+
+  /* ---------- Zone centrale (zone de sécurité Apple : 1646 x 661 centrée) ---------- */
+  .safe {
+    position: absolute;
+    left: 1097px; top: 492px; width: 1646px; height: 661px;
+    display: flex; align-items: center; justify-content: center;
+    gap: 62px;
+    z-index: 5;
+  }
+  .icon {
+    flex: none;
+    width: 290px; height: 290px;
+    border-radius: 27%;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 30px 70px rgba(0,0,0,0.55), 0 0 0 3px rgba(255, 211, 107, 0.35), 0 0 110px rgba(255, 211, 107, 0.28);
+  }
+  /* L'icône source a une marge blanche : on recadre sur le carré vert */
+  .icon img {
+    position: absolute;
+    width: 421px; height: 421px;
+    left: -65px; top: -65px;
+  }
+  .text { display: flex; flex-direction: column; }
+  .title {
+    font-size: 214px; font-weight: 800; line-height: 1;
+    letter-spacing: -4px; color: #fff;
+    text-shadow: 0 8px 40px rgba(0,0,0,0.45);
+  }
+  .title span { color: #F6C453; }
+  .tagline {
+    margin-top: 14px;
+    font-size: 64px; font-weight: 500; letter-spacing: 0.5px;
+    color: rgba(255,255,255,0.92);
+    white-space: nowrap;
+  }
+  .sub {
+    margin-top: 22px;
+    font-size: 40px; font-weight: 600; letter-spacing: 6px; text-transform: uppercase;
+    color: #F6C453;
+    white-space: nowrap;
+  }
+  .rule { width: 180px; height: 5px; border-radius: 3px; margin-top: 26px;
+    background: linear-gradient(90deg, #F6C453, rgba(246,196,83,0)); }
+</style>
+</head>
+<body>
+<div class="canvas">
+  <div class="pattern"></div>
+  <div class="ring r1"></div>
+  <div class="ring r2"></div>
+  <div class="vignette"></div>
+
+  <!-- Gauche -->
+  <div class="phone back left-back"><div class="screen"><div class="island"></div><div class="gloss"></div><img src="s_dark.jpg" alt="" /></div></div>
+  <div class="phone left-front"><div class="screen"><div class="island"></div><div class="gloss"></div><img src="s_prayer.jpg" alt="" /></div></div>
+
+  <!-- Droite -->
+  <div class="phone back right-back"><div class="screen"><div class="island"></div><div class="gloss"></div><img src="s_quran.jpg" alt="" /></div></div>
+  <div class="phone right-front"><div class="screen"><div class="island"></div><div class="gloss"></div><img src="s_qibla.jpg" alt="" /></div></div>
+
+  <!-- Centre -->
+  <div class="safe">
+    <div class="icon"><img src="s_icon.png" alt="" /></div>
+    <div class="text">
+      <div class="title">My<span>Adhan</span></div>
+      <div class="tagline">Prayer times, Adhan, Qibla &amp; Quran</div>
+      <div class="rule"></div>
+      <div class="sub">Hadith · Dhikr · Ramadan · 13 languages</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

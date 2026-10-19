@@ -76,4 +76,27 @@ describe("friday/i18n — 13 langues", () => {
       expect(body.toLowerCase()).not.toContain("minutes");
     }
   });
+
+  it("chaque hadith cite une source précise (numéro de hadith), dans toutes les langues", () => {
+    const SOURCE_KEYS = [
+      "hero.hadithSource",
+      "kahf.source",
+      "tips.ghusl.source",
+      "tips.perfume.source",
+      "tips.early.source",
+      "tips.silence.source",
+      "tips.salawat.source",
+      "tips.hour.source",
+      "tips.fasting.source",
+    ];
+    for (const [language, bundle] of Object.entries({ fr, ...ALL })) {
+      for (const key of SOURCE_KEYS) {
+        expect({ language, key, hasNumber: /\d/.test(get(bundle, key)) }).toEqual({
+          language,
+          key,
+          hasNumber: true,
+        });
+      }
+    }
+  });
 });

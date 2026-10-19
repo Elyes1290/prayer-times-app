@@ -5,6 +5,7 @@ import React, {
   useEffect,
   useMemo,
   useCallback,
+  useRef,
   memo,
 } from "react";
 import {
@@ -58,6 +59,7 @@ import {
 import { usePrayerTimes } from "../hooks/usePrayerTimes";
 import { usePrayerTimesWidget } from "../hooks/usePrayerTimesWidget";
 import { scheduleNotificationsFor2Days } from "../utils/sheduleAllNotificationsFor30Days";
+import { isExtrasScheduleStale } from "../utils/extraRemindersSignature";
 import { debugLog, errorLog } from "../utils/logger";
 import WelcomePersonalizationModal from "../components/WelcomePersonalizationModal";
 import RamadanHomeBanner from "../components/ramadan/RamadanHomeBanner";
@@ -1043,6 +1045,37 @@ export default function HomeScreen() {
       reprogramIfNeeded();
     }
   }, [currentPrayerTimes, stableCoords]);
+
+  // 🤖 Android : à l'ouverture, vérifie que les rappels Ramadan / Vendredi programmés correspondent
+  // à ce qui est attendu (Jumu'ah uniquement le vendredi, Ramadan uniquement pendant la saison).
+  // Un ancien planning périmé (resté côté natif) serait sinon ré-armé chaque nuit : on lance
+  // alors une reprogrammation complète, comme un changement de réglage.
+  const extrasCheckedRef = useRef(false);
+  useEffect(() => {
+    if (Platform.OS !== "android" || !AdhanModule) return;
+    if (extrasCheckedRef.current) return;
+    if (!currentPrayerTimes || !stableCoords) return;
+    if (!settings.notificationsEnabled) return;
+    extrasCheckedRef.current = true;
+
+    void (async () => {
+      try {
+        const stale = await isExtrasScheduleStale({
+          userLocation: stableCoords,
+          calcMethod: settings.calcMethod,
+          platform: Platform.OS,
+        });
+        if (stale) {
+          debugLog("🔁 [Android] Rappels Ramadan/Vendredi périmés : reprogrammation");
+          await updateNotifications();
+        }
+      } catch (err) {
+        errorLog("❌ [Android] Vérification des rappels Ramadan/Vendredi:", err);
+      }
+    })();
+    // Une seule vérification par ouverture de l'app (garde `extrasCheckedRef`).
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentPrayerTimes, stableCoords, settings.notificationsEnabled]);
 
   // Timer pour vérifier périodiquement si on doit reprogrammer (après Isha) et mettre à jour le widget
   useEffect(() => {

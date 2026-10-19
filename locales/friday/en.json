@@ -14,14 +14,14 @@
     "subtitle": "The best day of the week",
     "hadithArabic": "خَيْرُ يَوْمٍ طَلَعَتْ عَلَيْهِ الشَّمْسُ يَوْمُ الْجُمُعَةِ",
     "hadithText": "“The best day on which the sun has risen is Friday.”",
-    "hadithSource": "Narrated by Muslim"
+    "hadithSource": "Narrated by Muslim 854"
   },
   "kahf": {
     "title": "Surah Al-Kahf",
     "intro": "Read or listen to Surah Al-Kahf (the 18th) on Fridays.",
     "arabic": "مَنْ قَرَأَ سُورَةَ الْكَهْفِ يَوْمَ الْجُمُعَةِ أَضَاءَ لَهُ مِنَ النُّورِ مَا بَيْنَ الْجُمُعَتَيْنِ",
     "translation": "“Whoever reads Surah Al-Kahf on Friday, a light will shine for him between the two Fridays.”",
-    "source": "Narrated by al-Hakim and al-Bayhaqi (graded authentic by al-Albani)",
+    "source": "Narrated by al-Hakim and al-Bayhaqi (graded authentic by al-Albani) · al-Mustadrak 2/368 · Sahih al-Jami’ 6471",
     "button": "Read Surah Al-Kahf"
   },
   "tips": {
@@ -29,38 +29,38 @@
     "ghusl": {
       "title": "Ghusl",
       "text": "The Prophet ﷺ said: “The Friday ghusl is a duty upon every adult.” Most scholars consider it a confirmed sunnah. Do it before going to the prayer.",
-      "source": "Bukhari, Muslim"
+      "source": "Bukhari 879, Muslim 846"
     },
     "perfume": {
       "title": "Perfume, siwak and good clothes",
       "text": "The Prophet ﷺ said: whoever takes a bath on Friday, purifies himself as much as he can, uses perfume, then goes to the mosque without separating two people, prays what is prescribed for him and listens silently to the imam, will be forgiven what lies between that Friday and the next.",
-      "source": "Bukhari"
+      "source": "Bukhari 883"
     },
     "early": {
       "title": "Go early to the mosque",
       "text": "The Prophet ﷺ said: whoever takes a ghusl on Friday and goes to the mosque in the first hour is like one who offered a camel, then a cow, then a ram, then a chicken, then an egg. When the imam appears, the angels come to listen to the reminder.",
-      "source": "Bukhari, Muslim"
+      "source": "Bukhari 881, Muslim 850"
     },
     "silence": {
       "title": "Listen to the khutbah in silence",
       "text": "The Prophet ﷺ said: “If you say to your neighbour ‘Be quiet!’ while the imam is delivering the sermon, you have spoken idly.” Switch off your phone before the khutbah.",
-      "source": "Bukhari, Muslim"
+      "source": "Bukhari 934, Muslim 851"
     },
     "salawat": {
       "title": "Salawat upon the Prophet ﷺ",
       "arabic": "فَأَكْثِرُوا عَلَيَّ مِنَ الصَّلَاةِ فِيهِ",
       "text": "The Prophet ﷺ said: “Among your best days is Friday […] so send blessings upon me abundantly on that day.”",
-      "source": "Abu Dawud, Ibn Majah (graded authentic)"
+      "source": "Abu Dawud 1047, Ibn Majah 1085 (graded authentic)"
     },
     "hour": {
       "title": "The hour when du'a is answered",
       "text": "The Prophet ﷺ said: “There is an hour on Friday in which no Muslim servant, while praying, asks Allah for something except that He grants it.” Scholars differ on its timing: between the imam's arrival on the minbar and the end of the prayer, or in the last hour before sunset. Make plenty of du'a at both times.",
-      "source": "Bukhari, Muslim"
+      "source": "Bukhari 935, Muslim 852"
     },
     "fasting": {
       "title": "Good to know: fasting",
       "text": "The Prophet ﷺ said: “None of you should fast on Friday, unless he also fasts the day before or the day after.”",
-      "source": "Bukhari, Muslim"
+      "source": "Bukhari 1985, Muslim 1144"
     }
   },
   "settings": {

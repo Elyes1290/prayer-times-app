@@ -239,6 +239,64 @@ const ANDROID_WINDOW_DAYS = 32;
 const ANDROID_MAX_COUNT = 130;
 
 /**
+ * Config envoyée au natif Android : il calcule LUI-MÊME la saison (Umm al-Qura) et les
+ * horaires de prière pour le suhoor, l'iftar et Laylat al-Qadr, exactement comme les
+ * adhans : les rappels arrivent donc sans ouvrir l'app. Seuls les textes (traduits) et
+ * les réglages de l'utilisateur viennent d'ici. Le rappel de lecture, lui, dépend du plan
+ * stocké côté app et reste calculé en JS.
+ */
+export interface RamadanNativeConfig {
+  premium: boolean;
+  startOffsetDays: number;
+  suhoorEnabled: boolean;
+  suhoorMin: number;
+  iftarEnabled: boolean;
+  iftarMin: number;
+  laylatEnabled: boolean;
+  suhoorTitle: string;
+  suhoorBody: string;
+  iftarTitle: string;
+  iftarBody: string;
+  laylatBody: string;
+  laylatTitles: Record<string, string>;
+}
+
+/** Ne lève jamais ; `null` si les réglages sont illisibles (le natif garde sa config). */
+export async function getRamadanNativeConfig(): Promise<RamadanNativeConfig | null> {
+  try {
+    const settings = await loadRamadanSettings();
+    const premium = await isPremiumFromStorage();
+    const language = i18n.language;
+    const t = (key: string, vars?: Record<string, string | number>) =>
+      ramadanTranslate(language, key, vars);
+
+    const laylatTitles: Record<string, string> = {};
+    for (const night of ODD_LAST_NIGHTS) {
+      laylatTitles[String(night)] = t("notif.laylatTitle", { n: night });
+    }
+
+    return {
+      premium,
+      startOffsetDays: settings.startOffsetDays,
+      suhoorEnabled: settings.suhoorEnabled,
+      suhoorMin: settings.suhoorReminderMin,
+      iftarEnabled: settings.iftarEnabled,
+      iftarMin: settings.iftarReminderMin,
+      laylatEnabled: settings.laylatEnabled,
+      suhoorTitle: t("notif.suhoorTitle"),
+      suhoorBody: t("notif.suhoorBody", { min: settings.suhoorReminderMin }),
+      iftarTitle: t("notif.iftarTitle"),
+      iftarBody: t("notif.iftarBody", { min: settings.iftarReminderMin }),
+      laylatBody: t("notif.laylatBody"),
+      laylatTitles,
+    };
+  } catch (error) {
+    console.warn("⚠️ [Ramadan] Config native non construite:", error);
+    return null;
+  }
+}
+
+/**
  * Rappels Ramadan à programmer maintenant (liste vide si : hors saison, non premium,
  * ou toute erreur). Ne lève JAMAIS : une panne ici ne doit jamais empêcher la
  * programmation des adhans.

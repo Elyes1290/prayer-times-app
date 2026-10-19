@@ -9,7 +9,11 @@
 // Un planning vide est TOUJOURS envoyé (hors saison, non premium, rappels désactivés) afin
 // d'effacer un planning périmé.
 
-import type { RamadanReminder } from "./notifications";
+import {
+  RAMADAN_REMINDER_LABELS,
+  type RamadanNativeConfig,
+  type RamadanReminder,
+} from "./notifications";
 
 /** Fenêtre armée immédiatement ; le reste est ré-armé chaque nuit par le natif. */
 export const ANDROID_IMMEDIATE_WINDOW_DAYS = 10;
@@ -17,6 +21,7 @@ export const ANDROID_IMMEDIATE_WINDOW_DAYS = 10;
 interface AdhanNativeModule {
   schedulePrayerReminders?: (reminders: RamadanReminder[]) => void;
   saveRamadanSchedule?: (json: string) => void;
+  saveRamadanConfig?: (json: string) => void;
 }
 
 /** Forme compacte stockée côté natif : [{ p, t, title, body }]. */
@@ -62,5 +67,34 @@ export function scheduleRamadanRemindersAndroid(
     console.warn("⚠️ [Ramadan] Planning natif non enregistré:", error);
   }
 
+  return scheduledNow;
+}
+
+/**
+ * Android : suhoor, iftar et Laylat al-Qadr sont calculés PAR LE NATIF (config envoyée ici),
+ * comme les adhans, donc sans ouvrir l'app. Le JS ne programme que le rappel de lecture, qui
+ * dépend du plan de l'utilisateur. Ne lève jamais.
+ *
+ * ⚠️ Ne PAS armer aussi suhoor/iftar/Laylat côté JS : ce serait des doublons.
+ */
+export function scheduleRamadanAndroid(
+  reminders: readonly RamadanReminder[],
+  config: RamadanNativeConfig | null,
+  module: AdhanNativeModule | null | undefined,
+  now: number = Date.now(),
+): number {
+  if (!module) return 0;
+
+  const khatmOnly = reminders.filter((r) => r.prayer === RAMADAN_REMINDER_LABELS.khatm);
+  const scheduledNow = scheduleRamadanRemindersAndroid(khatmOnly, module, now);
+
+  try {
+    // config null (réglages illisibles) : le natif garde la précédente.
+    if (config && typeof module.saveRamadanConfig === "function") {
+      module.saveRamadanConfig(JSON.stringify(config));
+    }
+  } catch (error) {
+    console.warn("⚠️ [Ramadan] Config native non enregistrée:", error);
+  }
   return scheduledNow;
 }

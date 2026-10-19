@@ -14,14 +14,14 @@
     "subtitle": "El mejor día de la semana",
     "hadithArabic": "خَيْرُ يَوْمٍ طَلَعَتْ عَلَيْهِ الشَّمْسُ يَوْمُ الْجُمُعَةِ",
     "hadithText": "«El mejor día en el que ha salido el sol es el viernes.»",
-    "hadithSource": "Relatado por Muslim"
+    "hadithSource": "Relatado por Muslim 854"
   },
   "kahf": {
     "title": "Sura Al-Kahf",
     "intro": "Lee o escucha la sura Al-Kahf (la 18.ª) el viernes.",
     "arabic": "مَنْ قَرَأَ سُورَةَ الْكَهْفِ يَوْمَ الْجُمُعَةِ أَضَاءَ لَهُ مِنَ النُّورِ مَا بَيْنَ الْجُمُعَتَيْنِ",
     "translation": "«Quien lea la sura Al-Kahf el viernes, una luz lo iluminará entre los dos viernes.»",
-    "source": "Relatado por al-Hakim y al-Bayhaqi (considerado auténtico por al-Albani)",
+    "source": "Relatado por al-Hakim y al-Bayhaqi (considerado auténtico por al-Albani) · al-Mustadrak 2/368 · Sahih al-Jami’ 6471",
     "button": "Leer la sura Al-Kahf"
   },
   "tips": {
@@ -29,38 +29,38 @@
     "ghusl": {
       "title": "El ghusl",
       "text": "El Profeta ﷺ dijo: «El ghusl del viernes es un deber para todo púber». La mayoría de los sabios lo consideran una sunna confirmada. Hazlo antes de acudir a la oración.",
-      "source": "Bujari, Muslim"
+      "source": "Bujari 879, Muslim 846"
     },
     "perfume": {
       "title": "Perfume, siwak y buena presencia",
       "text": "El Profeta ﷺ dijo: quien hace el ghusl el viernes, se purifica lo mejor que puede, se perfuma, luego va a la mezquita sin separar a dos personas, reza lo que le ha sido prescrito y escucha al imán en silencio, se le perdonará lo que hay entre ese viernes y el siguiente.",
-      "source": "Bujari"
+      "source": "Bujari 883"
     },
     "early": {
       "title": "Ir pronto a la mezquita",
       "text": "El Profeta ﷺ dijo: quien hace el ghusl el viernes y luego va a la mezquita a la primera hora es como quien ha ofrecido un camello en sacrificio, luego una vaca, luego un carnero, luego una gallina, luego un huevo. Cuando el imán aparece, los ángeles vienen a escuchar el recordatorio.",
-      "source": "Bujari, Muslim"
+      "source": "Bujari 881, Muslim 850"
     },
     "silence": {
       "title": "Escuchar la jutba en silencio",
       "text": "El Profeta ﷺ dijo: «Si le dices a tu vecino “¡Cállate!” mientras el imán predica, has dicho una frivolidad». Apaga tu teléfono antes de la jutba.",
-      "source": "Bujari, Muslim"
+      "source": "Bujari 934, Muslim 851"
     },
     "salawat": {
       "title": "Los salawat sobre el Profeta ﷺ",
       "arabic": "فَأَكْثِرُوا عَلَيَّ مِنَ الصَّلَاةِ فِيهِ",
       "text": "El Profeta ﷺ dijo: «Entre vuestros mejores días está el viernes […] multiplicad, pues, las bendiciones sobre mí ese día».",
-      "source": "Abu Dawud, Ibn Maya (considerado auténtico)"
+      "source": "Abu Dawud 1047, Ibn Maya 1085 (considerado auténtico)"
     },
     "hour": {
       "title": "La hora en que se aceptan las súplicas",
       "text": "El Profeta ﷺ dijo: «Hay en el viernes una hora en la que ningún siervo musulmán, estando en oración, pide algo a Allah sin que Él se lo conceda». Los sabios difieren sobre el momento: entre la llegada del imán al minbar y el final de la oración, o en la última hora antes de la puesta del sol. Multiplica las súplicas en esos dos momentos.",
-      "source": "Bujari, Muslim"
+      "source": "Bujari 935, Muslim 852"
     },
     "fasting": {
       "title": "Conviene saber: el ayuno",
       "text": "El Profeta ﷺ dijo: «Que ninguno de vosotros ayune el viernes, salvo que ayune también el día anterior o el siguiente».",
-      "source": "Bujari, Muslim"
+      "source": "Bujari 1985, Muslim 1144"
     }
   },
   "settings": {

@@ -38,7 +38,10 @@ const PremiumPromotion: React.FC<PremiumPromotionProps> = ({
   const styles = getStyles(colors, currentTheme, variant);
 
   const handleUpgrade = () => {
-    push("/premium-payment");
+    // Même destination que le bouton « Devenir Premium » des statistiques : ouvre la fenêtre
+    // Premium des réglages (inscription / connexion, puis paiement). L'écran de paiement
+    // (/premium-payment) n'est atteint qu'APRÈS cette étape de compte.
+    push("/settings?openPremium=true&premiumTab=signup");
   };
 
   const getDefaultContent = () => {

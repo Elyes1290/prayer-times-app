@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>MyAdhan – App Store search results asset (3840 x 2560)</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 3840px; height: 2560px; overflow: hidden; background: #021812; }
+
+  .canvas {
+    position: relative;
+    width: 3840px; height: 2560px; overflow: hidden;
+    font-family: "Segoe UI", "Segoe UI Variable Display", "Helvetica Neue", Arial, sans-serif;
+    background:
+      radial-gradient(ellipse 1700px 1100px at 1920px 1500px, rgba(18, 150, 105, 0.55) 0%, rgba(8, 80, 58, 0.32) 48%, rgba(2, 24, 18, 0) 78%),
+      linear-gradient(170deg, #03271e 0%, #06382b 45%, #021812 100%);
+  }
+  .pattern {
+    position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240' viewBox='0 0 240 240'><g fill='none' stroke='%23FFD36B' stroke-opacity='0.085' stroke-width='2'><rect x='60' y='60' width='120' height='120'/><rect x='60' y='60' width='120' height='120' transform='rotate(45 120 120)'/><circle cx='120' cy='120' r='36'/><path d='M0 0 L60 60 M240 0 L180 60 M0 240 L60 180 M240 240 L180 180'/></g></svg>");
+    background-size: 240px 240px;
+    -webkit-mask-image: radial-gradient(ellipse 2300px 1500px at 1920px 1500px, rgba(0,0,0,0.3) 0%, rgba(0,0,0,1) 80%);
+            mask-image: radial-gradient(ellipse 2300px 1500px at 1920px 1500px, rgba(0,0,0,0.3) 0%, rgba(0,0,0,1) 80%);
+  }
+  .ring {
+    position: absolute; left: 50%; border-radius: 50%;
+    border: 2px solid rgba(255, 211, 107, 0.16);
+    transform: translate(-50%, -50%);
+  }
+  .ring.r1 { top: 1350px; width: 2300px; height: 2300px; }
+  .ring.r2 { top: 1350px; width: 3100px; height: 3100px; border-color: rgba(255, 211, 107, 0.09); }
+
+  /* ---------- Téléphones ---------- */
+  .phone {
+    position: absolute;
+    width: 688px; height: 1286px; padding: 18px;
+    border-radius: 100px;
+    background: linear-gradient(145deg, #2b3532, #0a0e0d 40%, #1b2320);
+    box-shadow:
+      0 70px 140px rgba(0, 0, 0, 0.6),
+      0 0 0 3px rgba(255, 255, 255, 0.10) inset,
+      0 0 90px rgba(255, 211, 107, 0.10);
+  }
+  .phone.dim { filter: brightness(0.74) saturate(0.95); }
+  .screen { position: relative; width: 652px; height: 1250px; border-radius: 82px; overflow: hidden; background: #000; }
+  .screen img { position: absolute; left: 0; top: -60.4px; width: 652px; height: auto; display: block; }
+  .island { position: absolute; left: 50%; top: 26px; width: 190px; height: 54px; margin-left: -95px; border-radius: 30px; background: #000; z-index: 3; }
+  .gloss { position: absolute; inset: 0; z-index: 2; pointer-events: none; background: linear-gradient(115deg, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0) 28%); }
+
+  .p-center  { left: 1525px; top: 1190px; transform: scale(1.18); z-index: 5; }
+  .p-inl     { left: 830px;  top: 1400px; transform: rotate(-6deg)  scale(1.0);  z-index: 4; }
+  .p-inr     { left: 2322px; top: 1400px; transform: rotate(6deg)   scale(1.0);  z-index: 4; }
+  .p-outl    { left: 150px;  top: 1620px; transform: rotate(-11deg) scale(0.9);  z-index: 3; }
+  .p-outr    { left: 3002px; top: 1620px; transform: rotate(11deg)  scale(0.9);  z-index: 3; }
+
+  /* ---------- Bloc titre ---------- */
+  .hero {
+    position: absolute; left: 0; width: 3840px; top: 150px;
+    display: flex; flex-direction: column; align-items: center;
+    z-index: 6;
+  }
+  .icon {
+    width: 330px; height: 330px; border-radius: 27%; overflow: hidden; position: relative;
+    box-shadow: 0 30px 70px rgba(0,0,0,0.55), 0 0 0 3px rgba(255, 211, 107, 0.35), 0 0 120px rgba(255, 211, 107, 0.30);
+  }
+  .icon img { position: absolute; width: 479px; height: 479px; left: -74px; top: -74px; }
+  .title {
+    margin-top: 40px;
+    font-size: 300px; font-weight: 800; line-height: 1; letter-spacing: -6px; color: #fff;
+    text-shadow: 0 8px 40px rgba(0,0,0,0.45);
+  }
+  .title span { color: #F6C453; }
+  .tagline { margin-top: 18px; font-size: 92px; font-weight: 500; letter-spacing: 0.5px; color: rgba(255,255,255,0.92); }
+  .sub { margin-top: 30px; font-size: 54px; font-weight: 600; letter-spacing: 8px; text-transform: uppercase; color: #F6C453; }
+</style>
+</head>
+<body>
+<div class="canvas">
+  <div class="pattern"></div>
+  <div class="ring r1"></div>
+  <div class="ring r2"></div>
+
+  <div class="phone dim p-outl"><div class="screen"><div class="island"></div><div class="gloss"></div><img src="s_quran.jpg" alt="" /></div></div>
+  <div class="phone dim p-outr"><div class="screen"><div class="island"></div><div class="gloss"></div><img src="s_hadith.jpg" alt="" /></div></div>
+  <div class="phone p-inl"><div class="screen"><div class="island"></div><div class="gloss"></div><img src="s_dark.jpg" alt="" /></div></div>
+  <div class="phone p-inr"><div class="screen"><div class="island"></div><div class="gloss"></div><img src="s_qibla.jpg" alt="" /></div></div>
+  <div class="phone p-center"><div class="screen"><div class="island"></div><div class="gloss"></div><img src="s_prayer.jpg" alt="" /></div></div>
+
+  <div class="hero">
+    <div class="icon"><img src="s_icon.png" alt="" /></div>
+    <div class="title">My<span>Adhan</span></div>
+    <div class="tagline">Prayer times, Adhan, Qibla &amp; Quran</div>
+    <div class="sub">Hadith · Dhikr · Ramadan</div>
+  </div>
+</div>
+</body>
+</html>

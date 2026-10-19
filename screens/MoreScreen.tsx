@@ -20,6 +20,7 @@ import { usePremium } from "../contexts/PremiumContext";
 import Constants from "expo-constants";
 import { useRamadanSeason } from "../hooks/useRamadanSeason";
 import { useRamadanT } from "../utils/ramadan/i18n";
+import { useFridayT } from "../utils/friday/i18n";
 
 const APP_DISPLAY_NAME = "MyAdhan";
 
@@ -88,6 +89,7 @@ export default function MoreScreen() {
   const { user } = usePremium();
   const ramadanSeason = useRamadanSeason();
   const ramadanT = useRamadanT();
+  const fridayT = useFridayT();
 
   const menuSections: {
     title: string;
@@ -120,17 +122,23 @@ export default function MoreScreen() {
           subtitle: t("islamic_dates") || "Dates islamiques",
           route: "/hijri",
         },
-        // 🌙 Mon Ramadan : visible uniquement pendant la saison
-        ...(ramadanSeason.phase !== "off"
-          ? [
-              {
-                icon: "moon-waning-crescent",
-                title: ramadanT("title"),
-                subtitle: ramadanT("banner.ramadanSub"),
-                route: "/ramadan",
-              },
-            ]
-          : []),
+        // 🕌 Vendredi et 🌙 Mon Ramadan : toujours accessibles (découverte des fonctionnalités
+        // et accès permanent à leurs réglages de rappels, même hors vendredi / hors saison).
+        {
+          icon: "book-open-page-variant",
+          title: fridayT("title"),
+          subtitle: fridayT("card.subtitle"),
+          route: "/friday",
+        },
+        {
+          icon: "moon-waning-crescent",
+          title: ramadanT("title"),
+          subtitle:
+            ramadanSeason.phase === "off"
+              ? ramadanT("banner.countdownSub")
+              : ramadanT("banner.ramadanSub"),
+          route: "/ramadan",
+        },
       ],
     },
     {

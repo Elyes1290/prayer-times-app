@@ -42,7 +42,15 @@ export function useFridaySettings() {
 
   useEffect(
     () => () => {
-      if (timerRef.current) clearTimeout(timerRef.current);
+      if (timerRef.current) {
+        // Réglage modifié puis écran quitté en moins de 1,5 s : on reprogramme tout de suite
+        // au lieu d'abandonner la reprogrammation (le nouvel horaire serait sinon ignoré).
+        clearTimeout(timerRef.current);
+        timerRef.current = null;
+        void reprogramRef.current().catch((error: unknown) => {
+          console.warn("⚠️ [Vendredi] Reprogrammation du rappel impossible:", error);
+        });
+      }
     },
     [],
   );

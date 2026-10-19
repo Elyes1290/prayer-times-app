@@ -6,6 +6,7 @@ jest.mock("../../../locales/i18n", () => ({
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
   buildRamadanReminders,
+  getRamadanNativeConfig,
   getRamadanRemindersForScheduling,
   RAMADAN_REMINDER_LABELS,
 } from "../../../utils/ramadan/notifications";
@@ -209,5 +210,42 @@ describe("ramadan/notifications — getRamadanRemindersForScheduling", () => {
     const warn = jest.spyOn(console, "warn").mockImplementation(() => undefined);
     await expect(getRamadanRemindersForScheduling(ctx("android", dayOf(5)))).resolves.toEqual([]);
     warn.mockRestore();
+  });
+});
+
+describe("ramadan/notifications — getRamadanNativeConfig", () => {
+  const mocked = AsyncStorage as unknown as { getItem: jest.Mock };
+
+  afterEach(() => {
+    mocked.getItem.mockImplementation(() => Promise.resolve(null));
+  });
+
+  it("premium : réglages par défaut + textes traduits, avec un titre par nuit impaire", async () => {
+    mocked.getItem.mockImplementation((key: string) =>
+      Promise.resolve(key === "@prayer_app_premium_user" ? JSON.stringify({ isPremium: true }) : null),
+    );
+    const config = await getRamadanNativeConfig();
+    expect(config).toMatchObject({
+      premium: true,
+      startOffsetDays: DEFAULT_RAMADAN_SETTINGS.startOffsetDays,
+      suhoorEnabled: DEFAULT_RAMADAN_SETTINGS.suhoorEnabled,
+      suhoorMin: DEFAULT_RAMADAN_SETTINGS.suhoorReminderMin,
+      iftarEnabled: DEFAULT_RAMADAN_SETTINGS.iftarEnabled,
+      iftarMin: DEFAULT_RAMADAN_SETTINGS.iftarReminderMin,
+      laylatEnabled: DEFAULT_RAMADAN_SETTINGS.laylatEnabled,
+    });
+    expect(Object.keys(config!.laylatTitles).sort()).toEqual(["21", "23", "25", "27", "29"]);
+    expect(config!.laylatTitles["27"]).toContain("27");
+    expect(config!.suhoorTitle.length).toBeGreaterThan(0);
+    expect(config!.iftarBody.length).toBeGreaterThan(0);
+    // Le mot « minutes » est réécrit par le service Android : ne jamais l'utiliser.
+    expect(config!.suhoorBody).not.toMatch(/minutes/i);
+    expect(config!.iftarBody).not.toMatch(/minutes/i);
+  });
+
+  it("non premium : premium=false (le natif n'arme alors rien)", async () => {
+    mocked.getItem.mockImplementation(() => Promise.resolve(null));
+    const config = await getRamadanNativeConfig();
+    expect(config?.premium).toBe(false);
   });
 });

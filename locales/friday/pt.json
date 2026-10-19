@@ -14,14 +14,14 @@
     "subtitle": "O melhor dia da semana",
     "hadithArabic": "خَيْرُ يَوْمٍ طَلَعَتْ عَلَيْهِ الشَّمْسُ يَوْمُ الْجُمُعَةِ",
     "hadithText": "«O melhor dia em que o sol nasceu é a sexta-feira.»",
-    "hadithSource": "Relatado por Muslim"
+    "hadithSource": "Relatado por Muslim 854"
   },
   "kahf": {
     "title": "Surata Al-Kahf",
     "intro": "Leia ou ouça a surata Al-Kahf (a 18.ª) à sexta-feira.",
     "arabic": "مَنْ قَرَأَ سُورَةَ الْكَهْفِ يَوْمَ الْجُمُعَةِ أَضَاءَ لَهُ مِنَ النُّورِ مَا بَيْنَ الْجُمُعَتَيْنِ",
     "translation": "«Quem ler a surata Al-Kahf na sexta-feira, uma luz o iluminará entre as duas sextas-feiras.»",
-    "source": "Relatado por al-Hakim e al-Bayhaqi (considerado autêntico por al-Albani)",
+    "source": "Relatado por al-Hakim e al-Bayhaqi (considerado autêntico por al-Albani) · al-Mustadrak 2/368 · Sahih al-Jami’ 6471",
     "button": "Ler a surata Al-Kahf"
   },
   "tips": {
@@ -29,38 +29,38 @@
     "ghusl": {
       "title": "O ghusl",
       "text": "O Profeta ﷺ disse: «O ghusl de sexta-feira é um dever para todo o púbere.» A maioria dos sábios considera-o uma sunna confirmada. Faça-o antes de ir para a oração.",
-      "source": "Bukhari, Muslim"
+      "source": "Bukhari 879, Muslim 846"
     },
     "perfume": {
       "title": "Perfume, siwak e boa apresentação",
       "text": "O Profeta ﷺ disse: quem fizer o ghusl na sexta-feira, se purificar o melhor que puder, se perfumar, depois for à mesquita sem separar duas pessoas, rezar o que lhe foi prescrito e ouvir o imã em silêncio, ser-lhe-á perdoado o que há entre essa sexta-feira e a seguinte.",
-      "source": "Bukhari"
+      "source": "Bukhari 883"
     },
     "early": {
       "title": "Ir cedo à mesquita",
       "text": "O Profeta ﷺ disse: quem fizer o ghusl na sexta-feira e depois for à mesquita na primeira hora é como quem ofereceu um camelo em sacrifício, depois uma vaca, depois um carneiro, depois uma galinha, depois um ovo. Quando o imã aparece, os anjos vêm ouvir o lembrete.",
-      "source": "Bukhari, Muslim"
+      "source": "Bukhari 881, Muslim 850"
     },
     "silence": {
       "title": "Ouvir a khutba em silêncio",
       "text": "O Profeta ﷺ disse: «Se disseres ao teu vizinho “Cala-te!” enquanto o imã prega, disseste uma frivolidade.» Desligue o telemóvel antes da khutba.",
-      "source": "Bukhari, Muslim"
+      "source": "Bukhari 934, Muslim 851"
     },
     "salawat": {
       "title": "Os salawat sobre o Profeta ﷺ",
       "arabic": "فَأَكْثِرُوا عَلَيَّ مِنَ الصَّلَاةِ فِيهِ",
       "text": "O Profeta ﷺ disse: «Entre os vossos melhores dias está a sexta-feira […] multiplicai, pois, as bênçãos sobre mim nesse dia.»",
-      "source": "Abu Dawud, Ibn Majah (considerado autêntico)"
+      "source": "Abu Dawud 1047, Ibn Majah 1085 (considerado autêntico)"
     },
     "hour": {
       "title": "A hora em que as súplicas são atendidas",
       "text": "O Profeta ﷺ disse: «Há na sexta-feira uma hora em que nenhum servo muçulmano, estando em oração, pede algo a Allah sem que Ele lho conceda.» Os sábios divergem quanto ao momento: entre a chegada do imã ao minbar e o fim da oração, ou na última hora antes do pôr do sol. Multiplique as súplicas nesses dois momentos.",
-      "source": "Bukhari, Muslim"
+      "source": "Bukhari 935, Muslim 852"
     },
     "fasting": {
       "title": "Convém saber: o jejum",
       "text": "O Profeta ﷺ disse: «Que nenhum de vós jejue à sexta-feira, a menos que jejue também na véspera ou no dia seguinte.»",
-      "source": "Bukhari, Muslim"
+      "source": "Bukhari 1985, Muslim 1144"
     }
   },
   "settings": {

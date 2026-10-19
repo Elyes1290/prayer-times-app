@@ -150,7 +150,10 @@ describe("friday/storage + planification", () => {
 
   it("Android : plusieurs vendredis ; iOS : un seul rappel dans la fenêtre courte", async () => {
     const android = await getFridayRemindersForScheduling({ platform: "android", now: FRIDAY });
-    expect(android.length).toBeGreaterThanOrEqual(10);
+    // Seules les 2 prochaines semaines sont précalculées : les vendredis suivants sont
+    // détectés chaque nuit par le natif (config enregistrée), sans longue liste de rappels.
+    expect(android.length).toBeGreaterThanOrEqual(2);
+    expect(android.length).toBeLessThanOrEqual(3);
 
     const ios = await getFridayRemindersForScheduling({ platform: "ios", now: FRIDAY });
     expect(ios).toHaveLength(1);

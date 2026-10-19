@@ -14,14 +14,14 @@
     "subtitle": "Le meilleur jour de la semaine",
     "hadithArabic": "خَيْرُ يَوْمٍ طَلَعَتْ عَلَيْهِ الشَّمْسُ يَوْمُ الْجُمُعَةِ",
     "hadithText": "« Le meilleur jour sur lequel le soleil se soit levé est le vendredi. »",
-    "hadithSource": "Rapporté par Mouslim"
+    "hadithSource": "Rapporté par Mouslim 854"
   },
   "kahf": {
     "title": "Sourate Al-Kahf",
     "intro": "Lisez ou écoutez la sourate Al-Kahf (la 18e) le vendredi.",
     "arabic": "مَنْ قَرَأَ سُورَةَ الْكَهْفِ يَوْمَ الْجُمُعَةِ أَضَاءَ لَهُ مِنَ النُّورِ مَا بَيْنَ الْجُمُعَتَيْنِ",
     "translation": "« Celui qui lit la sourate Al-Kahf le vendredi, une lumière l'éclairera entre les deux vendredis. »",
-    "source": "Rapporté par al-Hakim et al-Bayhaqi (jugé authentique par al-Albani)",
+    "source": "Rapporté par al-Hakim et al-Bayhaqi (jugé authentique par al-Albani) · al-Mustadrak 2/368 · Sahih al-Jami’ 6471",
     "button": "Lire la sourate Al-Kahf"
   },
   "tips": {
@@ -29,38 +29,38 @@
     "ghusl": {
       "title": "Le ghusl",
       "text": "Le Prophète ﷺ a dit : « Le ghusl du vendredi est un devoir pour tout pubère. » La majorité des savants le considèrent comme une sunnah confirmée. Faites-le avant de vous rendre à la prière.",
-      "source": "Boukhari, Mouslim"
+      "source": "Boukhari 879, Mouslim 846"
     },
     "perfume": {
       "title": "Parfum, siwak et belle tenue",
       "text": "Le Prophète ﷺ a dit : celui qui fait le ghusl le vendredi, se purifie du mieux qu'il peut, se parfume, puis se rend à la mosquée sans séparer deux personnes, prie ce qui lui est prescrit et écoute l'imam en silence, il lui sera pardonné ce qui sépare ce vendredi du suivant.",
-      "source": "Boukhari"
+      "source": "Boukhari 883"
     },
     "early": {
       "title": "Se rendre tôt à la mosquée",
       "text": "Le Prophète ﷺ a dit : celui qui fait le ghusl le vendredi puis se rend à la mosquée à la première heure est comme celui qui a offert un chameau en sacrifice, puis une vache, puis un mouton, puis une poule, puis un œuf. Quand l'imam apparaît, les anges viennent écouter le rappel.",
-      "source": "Boukhari, Mouslim"
+      "source": "Boukhari 881, Mouslim 850"
     },
     "silence": {
       "title": "Écouter la khutba en silence",
       "text": "Le Prophète ﷺ a dit : « Si tu dis à ton voisin « Tais-toi ! » pendant que l'imam prêche, tu as dit une parole futile. » Éteignez votre téléphone avant la khutba.",
-      "source": "Boukhari, Mouslim"
+      "source": "Boukhari 934, Mouslim 851"
     },
     "salawat": {
       "title": "Les salawat sur le Prophète ﷺ",
       "arabic": "فَأَكْثِرُوا عَلَيَّ مِنَ الصَّلَاةِ فِيهِ",
       "text": "Le Prophète ﷺ a dit : « Parmi vos meilleurs jours est le vendredi […] multipliez donc les prières sur moi ce jour-là. »",
-      "source": "Abou Daoud, Ibn Majah (jugé authentique)"
+      "source": "Abou Daoud 1047, Ibn Majah 1085 (jugé authentique)"
     },
     "hour": {
       "title": "L'heure où les invocations sont exaucées",
       "text": "Le Prophète ﷺ a dit : « Il y a dans le vendredi une heure où aucun serviteur musulman, en prière, ne demande quelque chose à Allah sans qu'Il le lui accorde. » Les savants divergent sur le moment : entre l'arrivée de l'imam sur le minbar et la fin de la prière, ou dans la dernière heure avant le coucher du soleil. Multipliez les invocations à ces deux moments.",
-      "source": "Boukhari, Mouslim"
+      "source": "Boukhari 935, Mouslim 852"
     },
     "fasting": {
       "title": "À savoir : le jeûne",
       "text": "Le Prophète ﷺ a dit : « Que l'un de vous ne jeûne pas le vendredi, sauf s'il jeûne aussi la veille ou le lendemain. »",
-      "source": "Boukhari, Mouslim"
+      "source": "Boukhari 1985, Mouslim 1144"
     }
   },
   "settings": {

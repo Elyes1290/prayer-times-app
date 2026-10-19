@@ -181,13 +181,24 @@ public class PrayerReminderService extends Service {
         notificationDebugLog("PrayerReminderService",
                 "📝 Notification finale: title='" + title + "' | body='" + body + "'");
 
+        // Icône propre à chaque type de rappel : on reconnaît d'un coup d'œil de quoi il s'agit
+        // (cloche = rappel de prière, mosquée = vendredi, croissant = Ramadan).
+        int smallIcon = R.drawable.ic_reminder_notification;
+        if (prayerLabel != null) {
+            if (prayerLabel.startsWith("Friday")) {
+                smallIcon = R.drawable.ic_friday_notification;
+            } else if (prayerLabel.startsWith("Ramadan")) {
+                smallIcon = R.drawable.ic_ramadan_notification;
+            }
+        }
+
         // Crée la notification finale
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setContentTitle(title)
                 .setContentText(body)
                 .setStyle(new NotificationCompat.BigTextStyle()
                         .bigText(body))
-                .setSmallIcon(R.drawable.ic_reminder_notification)
+                .setSmallIcon(smallIcon)
                 .setAutoCancel(true)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setContentIntent(contentIntent)

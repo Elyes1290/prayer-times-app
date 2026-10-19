@@ -14,14 +14,14 @@
     "subtitle": "Haftanın en hayırlı günü",
     "hadithArabic": "خَيْرُ يَوْمٍ طَلَعَتْ عَلَيْهِ الشَّمْسُ يَوْمُ الْجُمُعَةِ",
     "hadithText": "“Güneşin üzerine doğduğu günlerin en hayırlısı Cuma günüdür.”",
-    "hadithSource": "Müslim rivayeti"
+    "hadithSource": "Müslim rivayeti 854"
   },
   "kahf": {
     "title": "Kehf suresi",
     "intro": "Cuma günü Kehf suresini (18.) okuyun veya dinleyin.",
     "arabic": "مَنْ قَرَأَ سُورَةَ الْكَهْفِ يَوْمَ الْجُمُعَةِ أَضَاءَ لَهُ مِنَ النُّورِ مَا بَيْنَ الْجُمُعَتَيْنِ",
     "translation": "“Kim Cuma günü Kehf suresini okursa, iki Cuma arasını kendisine bir nur aydınlatır.”",
-    "source": "Hâkim ve Beyhakî rivayeti (Elbânî sahih kabul etmiştir)",
+    "source": "Hâkim ve Beyhakî rivayeti (Elbânî sahih kabul etmiştir) · al-Mustadrak 2/368 · Sahih al-Jami’ 6471",
     "button": "Kehf suresini oku"
   },
   "tips": {
@@ -29,38 +29,38 @@
     "ghusl": {
       "title": "Gusül",
       "text": "Peygamber ﷺ şöyle buyurdu: “Cuma günü gusletmek, erginlik çağına gelen herkes için bir vazifedir.” Âlimlerin çoğunluğu bunu müekked bir sünnet kabul eder. Namaza gitmeden önce yapın.",
-      "source": "Buhârî, Müslim"
+      "source": "Buhârî 879, Müslim 846"
     },
     "perfume": {
       "title": "Güzel koku, misvak ve düzgün kıyafet",
       "text": "Peygamber ﷺ şöyle buyurdu: Kim Cuma günü gusleder, gücünün yettiğince temizlenir, koku sürünür, sonra iki kişinin arasını ayırmadan camiye gider, kendisine takdir edilen kadar namaz kılar ve imamı sessizce dinlerse, o Cuma ile bir sonraki Cuma arasındaki günahları bağışlanır.",
-      "source": "Buhârî"
+      "source": "Buhârî 883"
     },
     "early": {
       "title": "Camiye erken gitmek",
       "text": "Peygamber ﷺ şöyle buyurdu: Kim Cuma günü gusleder, sonra ilk saatte camiye giderse, bir deve kurban etmiş gibidir; sonra bir sığır, sonra bir koyun, sonra bir tavuk, sonra bir yumurta. İmam çıkınca melekler zikri dinlemeye gelirler.",
-      "source": "Buhârî, Müslim"
+      "source": "Buhârî 881, Müslim 850"
     },
     "silence": {
       "title": "Hutbeyi sessizce dinlemek",
       "text": "Peygamber ﷺ şöyle buyurdu: “İmam hutbe okurken yanındakine ‘Sus!’ dersen, boş bir söz söylemiş olursun.” Hutbeden önce telefonunuzu kapatın.",
-      "source": "Buhârî, Müslim"
+      "source": "Buhârî 934, Müslim 851"
     },
     "salawat": {
       "title": "Peygamber ﷺ'e salavat",
       "arabic": "فَأَكْثِرُوا عَلَيَّ مِنَ الصَّلَاةِ فِيهِ",
       "text": "Peygamber ﷺ şöyle buyurdu: “Günlerinizin en hayırlılarından biri Cuma günüdür […] o gün bana çokça salavat getirin.”",
-      "source": "Ebû Dâvûd, İbn Mâce (sahih kabul edilmiştir)"
+      "source": "Ebû Dâvûd 1047, İbn Mâce 1085 (sahih kabul edilmiştir)"
     },
     "hour": {
       "title": "Duaların kabul edildiği saat",
       "text": "Peygamber ﷺ şöyle buyurdu: “Cuma günü bir saat vardır ki, namaz kılan hiçbir Müslüman kul o saatte Allah'tan bir şey istemez ki Allah onu ona vermesin.” Âlimler bu vaktin ne zaman olduğu konusunda ihtilaf etmiştir: imamın minbere çıkmasından namazın bitimine kadar olan zaman veya güneş batmadan önceki son saat. Bu iki vakitte duayı çoğaltın.",
-      "source": "Buhârî, Müslim"
+      "source": "Buhârî 935, Müslim 852"
     },
     "fasting": {
       "title": "Bilmekte fayda var: oruç",
       "text": "Peygamber ﷺ şöyle buyurdu: “Sizden biri, öncesinde veya sonrasında bir gün daha oruç tutmadıkça yalnızca Cuma günü oruç tutmasın.”",
-      "source": "Buhârî, Müslim"
+      "source": "Buhârî 1985, Müslim 1144"
     }
   },
   "settings": {

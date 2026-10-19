@@ -198,13 +198,18 @@ export default function RamadanScreen() {
                   onDeletePlan={ramadan.deleteKhatmPlan}
                   onSetProgress={ramadan.setKhatmProgress}
                 />
-                <RemindersCard
-                  settings={settings}
-                  notificationsEnabled={notificationsEnabled}
-                  t={t}
-                  onChange={ramadan.updateSettings}
-                />
               </>
+            ) : null}
+
+            {/* Réglages des rappels : TOUJOURS accessibles aux premium (même hors saison),
+                pour pouvoir les désactiver à tout moment. */}
+            {isPremium ? (
+              <RemindersCard
+                settings={settings}
+                notificationsEnabled={notificationsEnabled}
+                t={t}
+                onChange={ramadan.updateSettings}
+              />
             ) : null}
 
             {isPremium && showFasting ? <BadgesCard badges={ramadan.badges} t={t} /> : null}
@@ -213,7 +218,7 @@ export default function RamadanScreen() {
               <RamadanRecapCard recap={ramadan.recap} t={t} />
             ) : null}
 
-            {(seasonActive || showFasting) && !isPremium ? (
+            {!isPremium ? (
               <PremiumPromotion
                 variant="full"
                 title={t("premium.title")}

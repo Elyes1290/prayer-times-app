@@ -1690,7 +1690,8 @@ public class AdhanService extends Service {
         debugLog(TAG, "Réprogram: " + cancelCount + " alarmes Adhan annulées.");
     }
 
-    private CalculationParameters getCalculationParameters(String methodName) {
+    /** Package-private + statique : réutilisé par RamadanScheduleStore (rappels Ramadan natifs). */
+    static CalculationParameters getCalculationParameters(String methodName) {
         CalculationParameters params;
         if (methodName == null)
             methodName = "MuslimWorldLeague"; // Default

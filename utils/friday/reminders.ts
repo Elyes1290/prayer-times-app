@@ -4,8 +4,10 @@
 //
 // Intégration (même mécanisme que « Mon Ramadan ») : `scheduleNotificationsFor2Days` appelle
 // `getFridayRemindersForScheduling` APRÈS avoir annulé toutes les notifications, puis :
-//   - Android : les rappels rejoignent le planning natif (RamadanScheduleStore) → les
-//     prochains vendredis sont ré-armés chaque nuit et au redémarrage, sans ouvrir l'app ;
+//   - Android : les 14 prochains jours sont armés tout de suite, et la config (activé, heure,
+//     textes) est enregistrée côté natif : la maintenance de 00:05 (et le boot) détecte elle-même
+//     le vendredi et arme le rappel, SANS liste précalculée et sans ouvrir l'app (voir
+//     androidSchedule.ts / RamadanScheduleStore.java) ;
 //   - iOS : agrégés avec les autres rappels (fenêtre courte, 1 seul rappel).
 // L'annulation est couverte par `cancelAllPrayerReminders`.
 //
@@ -86,11 +88,10 @@ export interface FridaySchedulingContext {
   now?: Date;
 }
 
-// Android : ~12 prochains vendredis ; seuls les 10 prochains jours sont armés tout de suite,
-// le reste est ré-armé chaque nuit par le natif.
-const ANDROID_WINDOW_DAYS = 84;
+// Android : 2 semaines suffisent (les vendredis suivants sont détectés par le natif chaque nuit).
+const ANDROID_WINDOW_DAYS = 14;
 const ANDROID_TEST_WINDOW_DAYS = 14;
-const ANDROID_MAX_COUNT = 14;
+const ANDROID_MAX_COUNT = 3;
 // iOS : mêmes 3 jours que les prières ; un seul rappel pour rester sous la limite.
 const IOS_WINDOW_DAYS = 3;
 const IOS_MAX_COUNT = 1;
@@ -120,5 +121,34 @@ export async function getFridayRemindersForScheduling(
   } catch (error) {
     console.warn("⚠️ [Vendredi] Rappels non programmés:", error);
     return [];
+  }
+}
+
+/** Config du rappel envoyée au natif (qui calcule lui-même le prochain vendredi). */
+export interface FridayNativeConfig {
+  enabled: boolean;
+  hour: number;
+  minute: number;
+  title: string;
+  body: string;
+}
+
+/**
+ * Config du rappel du vendredi pour le natif Android. Retourne null en cas d'erreur (on ne
+ * touche alors pas à la config déjà enregistrée). Ne lève JAMAIS.
+ */
+export async function getFridayNativeConfig(): Promise<FridayNativeConfig | null> {
+  try {
+    const settings = await loadFridaySettings();
+    return {
+      enabled: settings.enabled,
+      hour: settings.hour,
+      minute: settings.minute,
+      title: fridayTranslate(i18n.language, "notif.title"),
+      body: fridayTranslate(i18n.language, "notif.body"),
+    };
+  } catch (error) {
+    console.warn("⚠️ [Vendredi] Config native non préparée:", error);
+    return null;
   }
 }

@@ -202,7 +202,15 @@ export function useRamadan(): UseRamadanResult {
   useEffect(
     () => () => {
       if (syncTimerRef.current) clearTimeout(syncTimerRef.current);
-      if (reprogramTimerRef.current) clearTimeout(reprogramTimerRef.current);
+      if (reprogramTimerRef.current) {
+        // Reprogrammation en attente (l'utilisateur a quitté l'écran < 1,5 s après un
+        // réglage) : on l'exécute tout de suite au lieu de la perdre.
+        clearTimeout(reprogramTimerRef.current);
+        reprogramTimerRef.current = null;
+        void reprogramRef.current().catch((error: unknown) => {
+          console.warn("⚠️ [Ramadan] Reprogrammation des rappels impossible:", error);
+        });
+      }
     },
     [],
   );

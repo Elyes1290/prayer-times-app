@@ -338,6 +338,29 @@ public class AdhanModule extends ReactContextBaseJavaModule {
         RamadanScheduleStore.save(getReactApplicationContext(), json);
     }
 
+    /**
+     * Rappel du vendredi : enregistre {enabled, hour, minute, title, body}. Le natif calcule
+     * lui-même le prochain vendredi lors de la maintenance quotidienne (00:05) et au boot.
+     */
+    @ReactMethod
+    public void saveFridayConfig(String json) {
+        RamadanScheduleStore.saveFridayConfig(getReactApplicationContext(), json);
+    }
+
+    /**
+     * « Mon Ramadan » : enregistre la config des rappels suhoor / iftar / Laylat al-Qadr
+     * (premium, décalage, minutes, textes traduits). Le natif calcule lui-même la saison
+     * (calendrier Umm al-Qura) et les horaires de prière, puis arme tout de suite les prochains
+     * jours ; la maintenance de 00:05 et le boot continuent, sans ouvrir l'app.
+     */
+    @ReactMethod
+    public void saveRamadanConfig(String json) {
+        Context context = getReactApplicationContext();
+        RamadanScheduleStore.saveRamadanConfig(context, json);
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        RamadanScheduleStore.rearmRamadanSeasonNow(context, alarmManager);
+    }
+
     @ReactMethod
     public void debugAdhanStatus(Promise promise) {
         try {

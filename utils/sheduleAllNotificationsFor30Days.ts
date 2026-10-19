@@ -9,9 +9,17 @@ import { schedulePrayerNotifications } from "./notifications";
 import { scheduleAllDhikrNotifications } from "./dhikrNotifications";
 import i18n from "../locales/i18n";
 import { notificationDebugLog } from "./logger";
-import { getRamadanRemindersForScheduling } from "./ramadan/notifications";
-import { scheduleRamadanRemindersAndroid } from "./ramadan/androidSchedule";
-import { getFridayRemindersForScheduling } from "./friday/reminders";
+import {
+  getRamadanNativeConfig,
+  getRamadanRemindersForScheduling,
+} from "./ramadan/notifications";
+import { scheduleRamadanAndroid } from "./ramadan/androidSchedule";
+import {
+  getFridayNativeConfig,
+  getFridayRemindersForScheduling,
+} from "./friday/reminders";
+import { scheduleFridayRemindersAndroid } from "./friday/androidSchedule";
+import { saveExtrasSignature } from "./extraRemindersSignature";
 
 // Types pour la fonction
 type Location = { latitude: number; longitude: number };
@@ -383,16 +391,21 @@ export async function scheduleNotificationsFor2Days({
     // 🌙 Rappels Ramadan (premium) : suhoor, iftar, lecture du jour, nuits de Laylat al-Qadr.
     // Tout a déjà été annulé plus haut (cancelAllPrayerReminders couvre aussi ces rappels).
     // `getRamadanRemindersForScheduling` ne lève jamais et retourne [] hors saison / hors premium.
-    // 🕌 Rappel du vendredi (gratuit) : rejoint le même planning que les rappels Ramadan.
+    // 🕌 Rappel du vendredi (gratuit) : sur Android, le natif détecte lui-même le vendredi chaque nuit.
     // `getFridayRemindersForScheduling` ne lève jamais et retourne [] si le rappel est désactivé.
     let ramadanReminders: Awaited<ReturnType<typeof getRamadanRemindersForScheduling>> = [];
     let fridayReminders: Awaited<ReturnType<typeof getFridayRemindersForScheduling>> = [];
+    let fridayNativeConfig: Awaited<ReturnType<typeof getFridayNativeConfig>> = null;
+    let ramadanNativeConfig: Awaited<ReturnType<typeof getRamadanNativeConfig>> = null;
     try {
       ramadanReminders = await getRamadanRemindersForScheduling({
         userLocation,
         calcMethod,
         platform: Platform.OS,
       });
+      if (Platform.OS === "android") {
+        ramadanNativeConfig = await getRamadanNativeConfig();
+      }
     } catch (ramadanError) {
       // Ne jamais empêcher la programmation des adhans à cause du Ramadan
       notificationDebugLog("⚠️ Rappels Ramadan ignorés:", ramadanError);
@@ -401,6 +414,9 @@ export async function scheduleNotificationsFor2Days({
       fridayReminders = await getFridayRemindersForScheduling({
         platform: Platform.OS,
       });
+      if (Platform.OS === "android") {
+        fridayNativeConfig = await getFridayNativeConfig();
+      }
     } catch (fridayError) {
       notificationDebugLog("⚠️ Rappel du vendredi ignoré:", fridayError);
     }
@@ -422,12 +438,24 @@ export async function scheduleNotificationsFor2Days({
           allPrayerReminders = [...allPrayerReminders, ...extraReminders];
         }
       } else {
-        // Android : 10 jours armés maintenant + planning complet pour la maintenance de 00:05.
-        // Appelé même avec une liste vide pour effacer un planning périmé.
-        scheduleRamadanRemindersAndroid(
-          extraReminders,
+        // Android : 10 jours armés maintenant + planning Ramadan complet pour la maintenance de
+        // 00:05. Appelé même avec une liste vide pour effacer un planning périmé.
+        // Suhoor / iftar / Laylat : calculés par le natif (config), seul le rappel de lecture
+        // vient du JS.
+        scheduleRamadanAndroid(
+          ramadanReminders,
+          ramadanNativeConfig,
           NativeModules.AdhanModule
         );
+        // Vendredi : jours proches armés maintenant + config enregistrée ; le natif ajoute lui-même
+        // le rappel la nuit du jeudi au vendredi (pas de liste de vendredis à l'avance).
+        scheduleFridayRemindersAndroid(
+          fridayReminders,
+          fridayNativeConfig,
+          NativeModules.AdhanModule
+        );
+        // Mémorise ce qui a été programmé : à l'ouverture, l'app détecte un planning périmé.
+        await saveExtrasSignature(extraReminders);
       }
     } catch (extraError) {
       notificationDebugLog("⚠️ Rappels Ramadan / vendredi ignorés:", extraError);
